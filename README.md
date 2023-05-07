@@ -5,10 +5,19 @@ Azusa-player-mobile uses a modified version of react-native-track-player for shu
 ## Running The Example App
 
 ```
-clone https://github.com/lovegaoshi/react-native-track-player and put this repo in it.
-cd react-native-track-player
+###yarn ver:
+clone https://github.com/lovegaoshi/azusa-player.git
 yarn
 yarn build
+cd azusa-player-mobile
+yarn
+cd ios && pod install && cd ..
+```
+
+```
+###npm ver:
+clone https://github.com/lovegaoshi/azusa-player.git
+npm install
 cd azusa-player-mobile
 yarn
 cd ios && pod install && cd ..
