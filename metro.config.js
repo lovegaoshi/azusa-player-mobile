@@ -7,12 +7,9 @@
 const path = require('path');
 const escape = require('escape-string-regexp');
 const exclusionList = require('metro-config/src/defaults/exclusionList');
-const pak = require('../package.json');
 
 const root = path.resolve(__dirname, '..');
-const modules = Object.keys({
-  ...(pak.peerDependencies),
-});
+const modules = Object.keys({});
 
 /** build the blockList **/
 const blockList = modules.map(
