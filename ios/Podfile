@@ -22,7 +22,7 @@ if linkage != nil
   use_frameworks! :linkage => linkage.to_sym
 end
 
-target 'example' do
+target 'azusa-player-mobile' do
   config = use_native_modules!
 
   # Flags change depending on the env values.
