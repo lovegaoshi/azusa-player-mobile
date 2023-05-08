@@ -3,6 +3,7 @@ import { Menu } from 'react-native-paper';
 import { useNoxSetting } from '../../hooks/useSetting';
 import { CopiedPlaylistMenuItem } from '../buttons/CopiedPlaylistButton';
 import { RenameSongMenuItem } from '../buttons/RenameSongButton';
+import Playlist from '../../objects/Playlist';
 
 enum ICONS {
   SEND_TO = 'playlist-plus',
@@ -66,10 +67,16 @@ export default ({
   };
 
   const renameSong = (rename: string) => {
-    // i sure hope this doesnt break anything...
-    const song = currentPlaylist.songList[songMenuSongIndexes[0]];
-    song.name = song.parsedName = rename;
-    updatePlaylist(currentPlaylist, [], []);
+    const newPlaylist = {
+      ...currentPlaylist,
+      songList: Array.from(currentPlaylist.songList),
+    };
+    newPlaylist.songList[songMenuSongIndexes[0]] = {
+      ...newPlaylist.songList[songMenuSongIndexes[0]],
+      name: rename,
+      parsedName: rename,
+    };
+    updatePlaylist(newPlaylist, [], []);
   };
 
   return (
