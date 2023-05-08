@@ -6,10 +6,10 @@ import { IconButton, Text } from 'react-native-paper';
 import { Dimensions } from 'react-native';
 import SongInfo from './SongInfo';
 import { useNoxSetting } from '../../hooks/useSetting';
-import { seconds2HHMMSS } from '../../utils/Utils';
 import SongMenu from './SongMenu';
 import Song from '../../objects/SongInterface';
 import PlaylistInfo from './PlaylistInfo';
+import PlaylistMenuButton from '../buttons/PlaylistMenuButton';
 
 /*
 import Song, { dummySong } from '../../objects/SongInterface';
@@ -84,7 +84,7 @@ export default () => {
   };
 
   // TODO: useDebunce here
-  const handleSearch = (searchedVal: string) => {
+  const handleSearch = (searchedVal = '') => {
     if (searchedVal === '') {
       setCurrentRows(currentPlaylist.songList);
       return;
@@ -92,12 +92,17 @@ export default () => {
     setCurrentRows(reParseSearch(searchedVal, currentPlaylist.songList));
   };
 
+  /**
+   * playlistShouldReRender is a global state that indicates playlist should be
+   * refreshed. right now its only called when the playlist is updated in updatePlaylist.
+   * this should in turn clear all searching, checking and filtering.
+   */
   useEffect(() => {
     resetSelected();
     setChecking(false);
     setSearching(false);
     setCurrentRows(currentPlaylist.songList);
-  }, [currentPlaylist]);
+  }, [currentPlaylist, playlistShouldReRender]);
 
   useEffect(() => {
     setShouldReRender(val => !val);
@@ -133,11 +138,7 @@ export default () => {
             size={25}
             mode={searching ? 'contained' : undefined}
           />
-          <IconButton
-            icon="dots-horizontal"
-            onPress={() => console.log}
-            size={25}
-          />
+          <PlaylistMenuButton />
         </View>
       </View>
       <View
