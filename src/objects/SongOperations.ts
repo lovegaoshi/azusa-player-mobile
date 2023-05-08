@@ -51,13 +51,19 @@ export default ({
   };
 };
 
-export const setSongBiliShazamed = (song: SongInterface, val: string) => {
-  song.biliShazamedName = val;
-  if (!val) return;
-  song.biliShazamedName = extractParenthesis(val);
-  song.nameRaw = song.name;
-  song.name = song.biliShazamedName;
-  song.parsedName = song.biliShazamedName;
+export const setSongBiliShazamed = (
+  song: SongInterface,
+  val: string | null
+) => {
+  if (!val) return { ...song, biliShazamedName: val } as SongInterface;
+  const biliShazamedName = extractParenthesis(val);
+  return {
+    ...song,
+    biliShazamedName,
+    nameRaw: song.name,
+    name: biliShazamedName,
+    parsedName: biliShazamedName,
+  } as SongInterface;
 };
 
 export const removeSongBiliShazamed = (song: SongInterface) => {
