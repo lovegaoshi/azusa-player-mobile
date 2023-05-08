@@ -39,25 +39,31 @@ export const getBiliShazamedSongname = async info => {
  * @param {boolean} forced
  * @returns
  */
-export const BiliShazamOnSonglist = async (songlist, forced = false) => {
-  const promises = [];
-  for (const song of songlist) {
+export const biliShazamOnSonglist = async (
+  songlist,
+  forced = false,
+  progressEmitter = val => void 0
+) => {
+  const newSongList = songlist.map((song, index) => {
     if (song.biliShazamedName === undefined || forced) {
-      promises.push(
+      return new Promise(resolve =>
         fetchVideoTagPromise({ bvid: song.bvid, cid: song.id, name: null })
           // getBiliShazamedSongname({ bvid: song.bvid, cid: song.id, name: null })
-          .then(val => setSongBiliShazamed(song, val))
+          .then(val => {
+            progressEmitter(index / songlist.length);
+            resolve(setSongBiliShazamed(song, val));
+          })
       );
     }
-  }
-  await Promise.all(promises);
-  return songlist;
+    return song;
+  });
+  return await Promise.all(newSongList);
 };
 
 export const getSongList = async ({ bvid, useBiliTag = false }) => {
   const info = await fetchVideoInfo(bvid);
   const lrc = '';
-  const songs = [];
+  let songs = [];
 
   // Case of single part video
   if (info.pages.length === 1) {
@@ -95,7 +101,7 @@ export const getSongList = async ({ bvid, useBiliTag = false }) => {
       })
     );
   }
-  if (useBiliTag) await BiliShazamOnSonglist(songs);
+  if (useBiliTag) songs = await biliShazamOnSonglist(songs);
   return songs;
 };
 
@@ -145,7 +151,7 @@ export const getSongListFromAudio = async ({ bvid }) => {
 };
 
 export const getSongsFromBVids = async ({ infos, useBiliTag = false }) => {
-  const songs = [];
+  let songs = [];
   for (const info of infos) {
     if (!info) {
       return;
@@ -186,7 +192,7 @@ export const getSongsFromBVids = async ({ infos, useBiliTag = false }) => {
       }
     }
   }
-  if (useBiliTag) await BiliShazamOnSonglist(songs);
+  if (useBiliTag) songs = await biliShazamOnSonglist(songs);
   return songs;
 };
 
@@ -281,12 +287,14 @@ export const getBilSearchList = async ({
 
 export const getBVIDList = async ({
   bvids,
-  progressEmitter = () => void 0,
+  progressEmitter = val => void 0,
   favList = [],
   useBiliTag = false,
 }) => {
-  return getSongsFromBVids({
+  const songs = getSongsFromBVids({
     infos: await fetchiliBVIDs(bvids, progressEmitter, favList),
     useBiliTag,
   });
+  progressEmitter(0);
+  return songs;
 };
