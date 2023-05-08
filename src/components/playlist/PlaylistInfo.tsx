@@ -6,16 +6,13 @@ import { useNoxSetting } from '../../hooks/useSetting';
 import { seconds2HHMMSS } from '../../utils/Utils';
 
 interface props {
+  searchText: string;
+  setSearchText: (val: string) => void;
   search?: boolean;
-  onSearch?: (val: string) => void;
 }
 
-export default ({
-  search = false,
-  onSearch = val => console.log(val),
-}: props) => {
+export default ({ searchText, setSearchText, search = false }: props) => {
   const currentPlaylist = useNoxSetting(state => state.currentPlaylist);
-  const [searchText, setSearchText] = React.useState('');
 
   React.useEffect(() => {
     setSearchText('');
@@ -29,11 +26,10 @@ export default ({
           value={searchText}
           onChangeText={(val: string) => {
             setSearchText(val);
-            onSearch(val);
           }}
           style={{ height: 50 }}
-          onSubmitEditing={() => onSearch(searchText)}
           autoFocus
+          selectTextOnFocus
         />
       ) : (
         <View>

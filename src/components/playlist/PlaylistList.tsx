@@ -27,8 +27,7 @@ export default () => {
   const [searching, setSearching] = useState(false);
   const [shouldReRender, setShouldReRender] = useState(false);
   const [currentRows, setCurrentRows] = useState<Song[]>([]);
-  // HACK: fairly sure this is not supposed to be like this, but here we are...
-  const searchRef = React.useRef<any>(null);
+  const [searchText, setSearchText] = useState('');
   const playlistShouldReRender = useNoxSetting(
     state => state.playlistShouldReRender
   );
@@ -106,6 +105,11 @@ export default () => {
     return index;
   };
 
+  const searchAndEnableSearch = (val: string) => {
+    setSearchText(val);
+    setSearching(true);
+  };
+
   /**
    * playlistShouldReRender is a global state that indicates playlist should be
    * refreshed. right now its only called when the playlist is updated in updatePlaylist.
@@ -118,14 +122,27 @@ export default () => {
     setCurrentRows(currentPlaylist.songList);
   }, [currentPlaylist, playlistShouldReRender]);
 
+  // TODO: use debunceValue
+  useEffect(() => handleSearch(searchText), [searchText]);
+
   useEffect(() => {
     setShouldReRender(val => !val);
   }, [currentPlayingId, checking, playlistShouldReRender]);
 
+  useEffect(() => {
+    if (!searching) {
+      setSearchText('');
+    }
+  }, [searching]);
+
   return (
     <View>
       <View style={[styles.topBarContainer, { top: 10 }]}>
-        <PlaylistInfo search={searching} onSearch={handleSearch} />
+        <PlaylistInfo
+          search={searching}
+          searchText={searchText}
+          setSearchText={setSearchText}
+        />
         <View
           style={{
             flexDirection: 'row',
@@ -184,6 +201,7 @@ export default () => {
         checking={checking}
         checked={selected}
         resetChecked={resetSelected}
+        handleSearch={searchAndEnableSearch}
       />
     </View>
   );

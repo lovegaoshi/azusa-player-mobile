@@ -21,12 +21,14 @@ interface props {
   checking?: boolean;
   checked?: boolean[];
   resetChecked?: () => void;
+  handleSearch?: (val: string) => void;
 }
 
 export default ({
   checking = false,
   checked = [],
   resetChecked = () => void 0,
+  handleSearch = () => void 0,
 }: props) => {
   const songMenuVisible = useNoxSetting(state => state.songMenuVisible);
   const setSongMenuVisible = useNoxSetting(state => state.setSongMenuVisible);
@@ -102,7 +104,13 @@ export default ({
       />
       <Menu.Item
         leadingIcon={ICONS.SEARCH_IN_PLAYLIST}
-        onPress={closeMenu}
+        onPress={() => {
+          handleSearch(
+            currentPlaylist.songList[songMenuSongIndexes[0]].parsedName
+          );
+          closeMenu();
+        }}
+        disabled={checking}
         title="Search in Playlist"
       />
       <Menu.Item
