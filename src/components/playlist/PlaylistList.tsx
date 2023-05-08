@@ -93,6 +93,20 @@ export default () => {
   };
 
   /**
+   * get a given song item/index combo used in flashlist's accurate index,
+   * as currentRows may be at a filtered view and the index will not be reliable.
+   * @param item
+   * @param index
+   * @returns
+   */
+  const getSongIndex = (item: Song, index: number) => {
+    if (currentRows !== currentPlaylist.songList) {
+      return currentPlaylist.songList.findIndex(row => row.id === item.id);
+    }
+    return index;
+  };
+
+  /**
    * playlistShouldReRender is a global state that indicates playlist should be
    * refreshed. right now its only called when the playlist is updated in updatePlaylist.
    * this should in turn clear all searching, checking and filtering.
@@ -157,8 +171,8 @@ export default () => {
               index={index}
               currentPlaying={item.id === currentPlayingId}
               checking={checking}
-              checkedProp={selected[index]}
-              onChecked={() => toggleSelected(index)}
+              checkedProp={selected[getSongIndex(item, index)]}
+              onChecked={() => toggleSelected(getSongIndex(item, index))}
             />
           )}
           keyExtractor={item => item.id}
