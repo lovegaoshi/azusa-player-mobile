@@ -1,13 +1,14 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { strToU8, strFromU8, compressSync, decompressSync } from 'fflate';
-import Playlist, { dummyPlaylist, PLAYLIST_ENUMS } from '../objects/Playlist';
+import Playlist, { dummyPlaylist } from '../objects/Playlist';
 import { notNullDefault } from './Utils';
 import { NoxRepeatMode } from '../components/player/enums/repeatMode';
 import Song from '../objects/SongInterface';
+import { PLAYLIST_ENUMS } from '../enums/Playlist';
 /**
  * noxplayer's storage handler.
  * ChromeStorage has quite a few changes from azusa player the chrome extension;
- * mainly to abandon the storageCtxMgr context and use zustand instead. 
+ * mainly to abandon the storageCtxMgr context and use zustand instead.
  * if i'm getting rid of storageCtxMgr there is
  * no point migrating noxplayer storage.js.
  *
@@ -15,7 +16,7 @@ import Song from '../objects/SongInterface';
  * are missing.
  */
 
-// see known storage limits: 
+// see known storage limits:
 // https://react-native-async-storage.github.io/async-storage/docs/limits
 const MAX_SONGLIST_SIZE = 400;
 
@@ -223,7 +224,10 @@ export const initPlayerObject = async (): Promise<PlayerStorageObject> => {
       'NULL',
       'NULL',
     ]),
-    searchPlaylist: dummyPlaylist(),
+    searchPlaylist: dummyPlaylist(
+      'Search',
+      PLAYLIST_ENUMS.TYPE_SEARCH_PLAYLIST
+    ),
     favoriPlaylist: notNullDefault(
       await getItem(STORAGE_KEYS.FAVORITE_PLAYLIST_KEY),
       dummyPlaylist('Favorite', PLAYLIST_ENUMS.TYPE_FAVORI_PLAYLIST)
