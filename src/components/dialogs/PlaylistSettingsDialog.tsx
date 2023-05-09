@@ -71,7 +71,7 @@ export default ({
               onChangeText={(val: string) => setSubscribeUrl(val)}
             />
             <TextInput
-              label="Playlist Name"
+              label="Banned BVIDs"
               value={blacklistedUrl}
               onChangeText={(val: string) => setBlacklistedUrl(val)}
             />
