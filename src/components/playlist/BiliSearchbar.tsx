@@ -26,7 +26,11 @@ export default ({
       useBiliTag: false,
     })) as Array<Song>;
     onSearched(searchedResult);
-    const newSearchPlaylist = { ...searchPlaylist, songList: searchedResult };
+    const newSearchPlaylist = {
+      ...searchPlaylist,
+      songList: searchedResult,
+      subscribeUrl: val.includes('http') ? [val] : [],
+    };
     setSearchPlaylist(newSearchPlaylist);
     setCurrentPlaylist(newSearchPlaylist);
   };
