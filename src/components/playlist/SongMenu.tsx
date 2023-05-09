@@ -3,7 +3,6 @@ import { Menu } from 'react-native-paper';
 import { useNoxSetting } from '../../hooks/useSetting';
 import { CopiedPlaylistMenuItem } from '../buttons/CopiedPlaylistButton';
 import { RenameSongMenuItem } from '../buttons/RenameSongButton';
-import Playlist from '../../objects/Playlist';
 
 enum ICONS {
   SEND_TO = 'playlist-plus',
@@ -15,6 +14,7 @@ enum ICONS {
   RELOAD = 'refresh',
   REMOVE = 'delete',
   REMOVE_AND_BAN_BVID = 'delete-forever',
+  DETAIL = 'information-outline',
 }
 
 interface props {
@@ -81,21 +81,34 @@ export default ({
     updatePlaylist(newPlaylist, [], []);
   };
 
+  // do we even want this feature anymore?
+  const reloadSongs = async () => {
+    return;
+  }
+
+  const removeSongs = (banBVID = false) => {
+    const songs = selectedSongs();
+    const newPlaylist = banBVID ? 
+    {...currentPlaylist,
+      blacklistedUrl: currentPlaylist.blacklistedUrl.concat(songs.map(song => song.bvid)),
+    } : currentPlaylist;
+    updatePlaylist(newPlaylist, [], songs);
+    setSongMenuVisible(false);
+    resetChecked();
+  }
+
+  // do we even need this feature?
+  // if do id like this to be like AIMP3's
+  // track details page, in a seperate stack screen.
+  const songInfo =() => {
+    closeMenu();
+  }
+
   return (
     <Menu visible={songMenuVisible} onDismiss={closeMenu} anchor={menuCoord}>
       <CopiedPlaylistMenuItem
         getFromListOnClick={selectedPlaylist}
         onSubmit={closeMenu}
-      />
-      <Menu.Item
-        leadingIcon={ICONS.REMOVE}
-        onPress={() => {
-          // TODO: necessary to add an alert dialog?
-          updatePlaylist(currentPlaylist, [], selectedSongs());
-          setSongMenuVisible(false);
-          resetChecked();
-        }}
-        title="Remove"
       />
       <RenameSongMenuItem
         getSongOnClick={() => selectedSongs()[0]}
@@ -114,13 +127,13 @@ export default ({
         title="Search in Playlist"
       />
       <Menu.Item
-        leadingIcon={ICONS.RELOAD}
-        onPress={closeMenu}
-        title="Reload BVID"
+        leadingIcon={ICONS.REMOVE}
+        onPress={() => removeSongs()}
+        title="Remove"
       />
       <Menu.Item
         leadingIcon={ICONS.REMOVE_AND_BAN_BVID}
-        onPress={closeMenu}
+        onPress={() => removeSongs(true)}
         title="Remove and BAN"
       />
     </Menu>
