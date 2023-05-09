@@ -1,0 +1,65 @@
+import { useNoxSetting } from '../hooks/useSetting';
+import Playlist from '../objects/Playlist';
+import { searchBiliURLs } from './BiliSearch';
+import { parseSongName } from './re';
+import Song from '../objects/SongInterface';
+
+interface props {
+  listObj: Playlist;
+  subscribeUrls?: Array<string>;
+  updatePlaylist: (
+    playlist: Playlist,
+    addSongs: Song[],
+    removeSongs: Song[]
+  ) => void;
+  progressEmitter: (val: number) => void;
+}
+export const updateSubscribeFavList = async ({
+  listObj,
+  subscribeUrls,
+  updatePlaylist,
+  progressEmitter = () => void 0,
+}: props) => {
+  try {
+    const oldListLength = listObj.songList.length;
+    // eslint-disable-next-line prefer-const
+    let newPlaylist = { ...listObj };
+    if (subscribeUrls === undefined) {
+      subscribeUrls = newPlaylist.subscribeUrl;
+    }
+    if (subscribeUrls.length === 0 || subscribeUrls[0].length === 0)
+      return null;
+    // TODO: this is stupid. needs to change:
+    // 1. set the unique map first with newPlaylist, then
+    // in loop set new stuff into it, instead of concat lists
+    // 2. order this correctly. this for loop needs to be reversed
+    for (let i = 0, n = subscribeUrls.length; i < n; i++) {
+      newPlaylist.songList = (
+        await searchBiliURLs({
+          input: subscribeUrls[i],
+          favList: [
+            ...newPlaylist.songList.map(val => val.bvid),
+            ...newPlaylist.blacklistedUrl,
+          ],
+          useBiliTag: newPlaylist.useBiliShazam,
+          progressEmitter,
+        })
+      ).concat(newPlaylist.songList);
+    }
+    const uniqueSongList = new Map();
+    newPlaylist.songList.forEach(tag => uniqueSongList.set(tag.id, tag));
+    newPlaylist.songList = [...uniqueSongList.values()].map(val =>
+      parseSongName(val)
+    );
+    // sinse we do NOT delete songs from this operation, any update requiring a fav update really need
+    // to have a change in list size.
+    if (oldListLength !== newPlaylist.songList.length) {
+      updatePlaylist(newPlaylist, [], []);
+      return newPlaylist.songList;
+    }
+    return null;
+  } catch (err) {
+    console.warn(err);
+    return null;
+  }
+};

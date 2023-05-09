@@ -393,6 +393,10 @@ export const getName = (song: Song, parsed = false) => {
   return song.name;
 };
 
-export const parseSongName = (song: Song) => {
+export const parseSongName = (song: Song): Song => {
+  return {
+    ...song,
+    parsedName: reExtractSongName(song.name, song.singerId),
+  };
   song.parsedName = reExtractSongName(song.name, song.singerId);
 };
