@@ -8,7 +8,7 @@ import playlistAnalytics from '../../utils/Analytics';
 import PlaylistSettingsButton from '../buttons/PlaylistSettingsButton';
 import { PLAYLIST_ENUMS } from '../../enums/Playlist';
 import { CopiedPlaylistMenuItem } from '../buttons/CopiedPlaylistButton';
-import { twoWayAlert } from '../../utils/Utils';
+import { twoWayAlert, oneWayAlert } from '../../utils/Utils';
 import { getBVIDList, biliShazamOnSonglist } from '../../utils/DataProcess';
 import { getPlaylistUniqBVIDs } from '../../objects/Playlist';
 import { fetchVideoInfo } from '../../utils/Data';
@@ -49,7 +49,7 @@ export default ({
   // TODO: useCallback?
   const playlistAnalysis = (playlist = currentPlaylist) => {
     const analytics = playlistAnalytics(playlist);
-    Alert.alert(
+    oneWayAlert(
       `歌单 ${playlist.title} 的统计信息`,
       [
         `歌单内总共有${analytics.songsUnique.size}首独特的歌`,
@@ -71,8 +71,7 @@ export default ({
           analytics.totalCount
         ).toFixed(1)}%)`,
       ].join('\n'),
-      [{ text: 'OK', onPress: toggleVisible }],
-      { cancelable: true, onDismiss: toggleVisible }
+      toggleVisible
     );
   };
 

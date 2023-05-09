@@ -40,6 +40,7 @@ export default ({
           value={searchVal}
           onChangeText={val => setSearchVal(val)}
           onSubmitEditing={() => handleSearch(searchVal)}
+          selectTextOnFocus
         />
         <IconButton icon="search-web" onPress={() => handleSearch(searchVal)} />
       </View>

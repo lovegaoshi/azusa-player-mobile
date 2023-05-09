@@ -47,6 +47,7 @@ export default ({
               value={name}
               onChangeText={(val: string) => setName(val)}
               onSubmitEditing={handleSubmit}
+              selectTextOnFocus
             />
           </Dialog.Content>
         </KeyboardAvoidingView>
