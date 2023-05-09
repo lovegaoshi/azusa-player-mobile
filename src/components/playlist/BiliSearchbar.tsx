@@ -9,16 +9,19 @@ export default ({
   onSearched = (songs: Array<Song>) => console.log(songs),
 }) => {
   const [searchVal, setSearchVal] = useState('');
-  const [searchProgress, setSearchProgress] = useState(0);
+  const searchProgress = useNoxSetting(state => state.searchBarProgress);
+  const progressEmitter = useNoxSetting(
+    state => state.searchBarProgressEmitter
+  );
   const searchPlaylist = useNoxSetting(state => state.searchPlaylist);
   const setSearchPlaylist = useNoxSetting(state => state.setSearchPlaylist);
   const setCurrentPlaylist = useNoxSetting(state => state.setCurrentPlaylist);
 
   const handleSearch = async (val = searchVal) => {
-    setSearchProgress(1);
+    progressEmitter(100);
     const searchedResult = (await searchBiliURLs({
       input: val,
-      progressEmitter: (val: number) => setSearchProgress(val / 100),
+      progressEmitter,
       favList: [],
       useBiliTag: false,
     })) as Array<Song>;
@@ -37,6 +40,7 @@ export default ({
           value={searchVal}
           onChangeText={val => setSearchVal(val)}
           onSubmitEditing={() => handleSearch(searchVal)}
+          selectTextOnFocus
         />
         <IconButton icon="search-web" onPress={() => handleSearch(searchVal)} />
       </View>

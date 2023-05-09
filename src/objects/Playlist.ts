@@ -1,13 +1,8 @@
 import { Track } from 'react-native-track-player';
 import { v4 as uuidv4 } from 'uuid';
 import Song from './SongInterface';
-import { resolveUrl, NULL_TRACK } from './SongOperations';
-
-export enum PLAYLIST_ENUMS {
-  TYPE_TYPICA_PLAYLIST = 'typical',
-  TYPE_SEARCH_PLAYLIST = 'search',
-  TYPE_FAVORI_PLAYLIST = 'favorite',
-}
+import { NULL_TRACK } from './SongOperations';
+import { PLAYLIST_ENUMS } from '../enums/Playlist';
 
 export default interface Playlist {
   songList: Array<Song>;
@@ -37,6 +32,15 @@ export const dummyPlaylist = (
 };
 
 export const dummyPlaylistList = dummyPlaylist();
+
+export const getPlaylistUniqBVIDs = (playlist: Playlist) => {
+  return Array.from(
+    playlist.songList.reduce(
+      (accumulator, currentValue) => accumulator.add(currentValue.bvid),
+      new Set() as Set<string>
+    )
+  );
+};
 
 export const playlistToTracklist = (
   playlist: Playlist,

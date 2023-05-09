@@ -17,6 +17,9 @@ import Song from '../objects/SongInterface';
 import coordinates from '../objects/Coordinate';
 
 interface NoxSetting {
+  searchBarProgress: number;
+  searchBarProgressEmitter: (val: number) => undefined;
+
   songMenuCoords: coordinates;
   setSongMenuCoords: (val: coordinates) => void;
   songMenuVisible: boolean;
@@ -72,6 +75,11 @@ interface NoxSetting {
  * as well as saving and loading states to/from asyncStorage.
  */
 export const useNoxSetting = create<NoxSetting>((set, get) => ({
+  searchBarProgress: 0,
+  searchBarProgressEmitter: (val: number) => {
+    set({ searchBarProgress: val / 100 });
+    return void 0;
+  },
   songMenuCoords: { x: 0, y: 0 },
   setSongMenuCoords: (val: coordinates) => set({ songMenuCoords: val }),
   songMenuVisible: false,
@@ -162,9 +170,10 @@ export const useNoxSetting = create<NoxSetting>((set, get) => ({
     set({
       currentPlaylist: notNullDefault(
         val.playlists[val.lastPlaylistId[0]],
-        dummyPlaylist()
+        val.searchPlaylist
       ),
     });
+    set({ searchPlaylist: val.searchPlaylist });
     set({ favoritePlaylist: val.favoriPlaylist });
     set({ playerSetting: val.settings ? val.settings : DEFAULT_SETTING });
     set({ playerRepeat: val.playerRepeat });

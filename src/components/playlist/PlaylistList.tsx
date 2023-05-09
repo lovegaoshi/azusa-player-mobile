@@ -6,10 +6,10 @@ import { IconButton, Text } from 'react-native-paper';
 import { Dimensions } from 'react-native';
 import SongInfo from './SongInfo';
 import { useNoxSetting } from '../../hooks/useSetting';
-import { seconds2HHMMSS } from '../../utils/Utils';
 import SongMenu from './SongMenu';
 import Song from '../../objects/SongInterface';
 import PlaylistInfo from './PlaylistInfo';
+import PlaylistMenuButton from '../buttons/PlaylistMenuButton';
 
 /*
 import Song, { dummySong } from '../../objects/SongInterface';
@@ -27,8 +27,7 @@ export default () => {
   const [searching, setSearching] = useState(false);
   const [shouldReRender, setShouldReRender] = useState(false);
   const [currentRows, setCurrentRows] = useState<Song[]>([]);
-  // HACK: fairly sure this is not supposed to be like this, but here we are...
-  const searchRef = React.useRef<any>(null);
+  const [searchText, setSearchText] = useState('');
   const playlistShouldReRender = useNoxSetting(
     state => state.playlistShouldReRender
   );
@@ -84,7 +83,7 @@ export default () => {
   };
 
   // TODO: useDebunce here
-  const handleSearch = (searchedVal: string) => {
+  const handleSearch = (searchedVal = '') => {
     if (searchedVal === '') {
       setCurrentRows(currentPlaylist.songList);
       return;
@@ -92,21 +91,58 @@ export default () => {
     setCurrentRows(reParseSearch(searchedVal, currentPlaylist.songList));
   };
 
+  /**
+   * get a given song item/index combo used in flashlist's accurate index,
+   * as currentRows may be at a filtered view and the index will not be reliable.
+   * @param item
+   * @param index
+   * @returns
+   */
+  const getSongIndex = (item: Song, index: number) => {
+    if (currentRows !== currentPlaylist.songList) {
+      return currentPlaylist.songList.findIndex(row => row.id === item.id);
+    }
+    return index;
+  };
+
+  const searchAndEnableSearch = (val: string) => {
+    setSearchText(val);
+    setSearching(true);
+  };
+
+  /**
+   * playlistShouldReRender is a global state that indicates playlist should be
+   * refreshed. right now its only called when the playlist is updated in updatePlaylist.
+   * this should in turn clear all searching, checking and filtering.
+   */
   useEffect(() => {
     resetSelected();
     setChecking(false);
     setSearching(false);
     setCurrentRows(currentPlaylist.songList);
-  }, [currentPlaylist]);
+  }, [currentPlaylist, playlistShouldReRender]);
+
+  // TODO: use debunceValue
+  useEffect(() => handleSearch(searchText), [searchText]);
 
   useEffect(() => {
     setShouldReRender(val => !val);
   }, [currentPlayingId, checking, playlistShouldReRender]);
 
+  useEffect(() => {
+    if (!searching) {
+      setSearchText('');
+    }
+  }, [searching]);
+
   return (
     <View>
       <View style={[styles.topBarContainer, { top: 10 }]}>
-        <PlaylistInfo search={searching} onSearch={handleSearch} />
+        <PlaylistInfo
+          search={searching}
+          searchText={searchText}
+          setSearchText={setSearchText}
+        />
         <View
           style={{
             flexDirection: 'row',
@@ -133,11 +169,7 @@ export default () => {
             size={25}
             mode={searching ? 'contained' : undefined}
           />
-          <IconButton
-            icon="dots-horizontal"
-            onPress={() => console.log}
-            size={25}
-          />
+          <PlaylistMenuButton />
         </View>
       </View>
       <View
@@ -156,8 +188,8 @@ export default () => {
               index={index}
               currentPlaying={item.id === currentPlayingId}
               checking={checking}
-              checkedProp={selected[index]}
-              onChecked={() => toggleSelected(index)}
+              checkedProp={selected[getSongIndex(item, index)]}
+              onChecked={() => toggleSelected(getSongIndex(item, index))}
             />
           )}
           keyExtractor={item => item.id}
@@ -169,6 +201,7 @@ export default () => {
         checking={checking}
         checked={selected}
         resetChecked={resetSelected}
+        handleSearch={searchAndEnableSearch}
       />
     </View>
   );

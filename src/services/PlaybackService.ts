@@ -49,10 +49,6 @@ export async function PlaybackService() {
   TrackPlayer.addEventListener(Event.PlaybackActiveTrackChanged, event => {
     console.log('Event.PlaybackActiveTrackChanged', event);
     if (!event.track || !event.track.song) return;
-    initBiliHeartbeat({
-      bvid: event.track.song.bvid,
-      cid: event.track.song.id,
-    });
     // to resolve bilibili media stream URLs on the fly, TrackPlayer.load is used to
     // replace the current track's url. its not documented? >:/
     if (
@@ -60,6 +56,13 @@ export async function PlaybackService() {
       (event.track.url === NULL_TRACK.url ||
         new Date().getTime() - event.track.urlRefreshTimeStamp > 3600000)
     ) {
+      // HACK: I would like to put this out, but resolveUrl will trigger
+      // another activeTrackChanged event and would duplicate heartbeat reqs,
+      // likely resulting in bans...
+      initBiliHeartbeat({
+        bvid: event.track.song.bvid,
+        cid: event.track.song.id,
+      });
       resolveUrl(event.track.song).then(updatedMetadata => {
         TrackPlayer.getActiveTrack().then(currentTrack => {
           TrackPlayer.load({ ...currentTrack, ...updatedMetadata });
