@@ -40,3 +40,10 @@ export const twoWayAlert = (
     },
   ]);
 };
+
+export const oneWayAlert = (title: string, message: string, onPress: () => void) => {
+  Alert.alert(title, message,
+    [{ text: 'OK', onPress: onPress }],
+    { cancelable: true, onDismiss: onPress });
+
+}

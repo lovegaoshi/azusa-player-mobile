@@ -50,7 +50,7 @@ export const biliShazamOnSonglist = async (
         fetchVideoTagPromise({ bvid: song.bvid, cid: song.id, name: null })
           // getBiliShazamedSongname({ bvid: song.bvid, cid: song.id, name: null })
           .then(val => {
-            progressEmitter(index / songlist.length);
+            progressEmitter((index / songlist.length) * 100);
             resolve(setSongBiliShazamed(song, val));
           })
       );

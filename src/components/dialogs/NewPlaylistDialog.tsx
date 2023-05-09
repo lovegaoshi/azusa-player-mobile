@@ -41,6 +41,7 @@ export default ({
           ...fromList,
           id: dummyList.id,
           title: playlistName,
+          type: dummyList.type,
         }
       : { ...dummyList, title: playlistName };
     console.log(newList, fromList);
