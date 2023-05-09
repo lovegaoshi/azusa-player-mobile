@@ -1,3 +1,5 @@
+import { Alert } from 'react-native';
+
 export const seconds2HHMMSS = (sec_num: number) => {
   const padding = (num: number) => String(num).padStart(2, '0');
   const hours = Math.floor(sec_num / 3600);
@@ -20,3 +22,28 @@ export const notNullDefault = (val: any, defaultVal: any) => {
   if (val) return val;
   return defaultVal;
 };
+
+export const twoWayAlert = (
+  title: string,
+  message: string,
+  onSubmit: () => void
+) => {
+  Alert.alert(title, message, [
+    {
+      text: 'Cancel',
+      onPress: () => void 0,
+      style: 'cancel',
+    },
+    {
+      text: 'OK',
+      onPress: onSubmit,
+    },
+  ]);
+};
+
+export const oneWayAlert = (title: string, message: string, onPress: () => void) => {
+  Alert.alert(title, message,
+    [{ text: 'OK', onPress: onPress }],
+    { cancelable: true, onDismiss: onPress });
+
+}

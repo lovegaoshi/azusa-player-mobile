@@ -53,7 +53,7 @@ export default ({
       <Dialog
         visible={visible}
         onDismiss={handleClose}
-        style={{ height: '70%' }}
+        style={{ maxHeight: '70%' }}
       >
         <Dialog.Title>{`Send ${fromList.title} to...`}</Dialog.Title>
         <Dialog.Content style={{ ...styles.topBarContainer, height: '70%' }}>

@@ -103,6 +103,13 @@ function SongInfo({
     onChecked();
   };
 
+  const getSongIndex = () => {
+    // HACK: :index is no longer reliable because currentRow may filter view.
+    // either make filtered view a global state, or do this every time.
+    // which I dont think its terribly bad?
+    return currentPlaylist.songList.findIndex(song => song.id === id);
+  };
+
   React.useEffect(() => {
     if (checked !== checkedProp) {
       setChecked(checkedProp);
@@ -148,7 +155,7 @@ function SongInfo({
           icon="dots-vertical"
           onPress={(event: GestureResponderEvent) => {
             if (!checking) {
-              setSongMenuSongIndexes([index]);
+              setSongMenuSongIndexes([getSongIndex()]);
             }
             setSongMenuVisible(true);
             setSongMenuCoords({
