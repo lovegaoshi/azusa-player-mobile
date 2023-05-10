@@ -10,9 +10,10 @@ import {
   saveFavPlaylist,
   savePlaylist,
   savePlaylistIds,
+  PlayerSettingDict,
+  saveSettings,
 } from '../utils/ChromeStorage';
 import { notNullDefault } from '../utils/Utils';
-import { PlayerSettingDict } from '../utils/ChromeStorage';
 import Song from '../objects/SongInterface';
 import coordinates from '../objects/Coordinate';
 
@@ -117,7 +118,10 @@ export const useNoxSetting = create<NoxSetting>((set, get) => ({
   playerRepeat: NoxRepeatMode.SHUFFLE,
   setPlayerRepeat: (val: string) => set({ playerRepeat: val }),
   playerSetting: DEFAULT_SETTING,
-  setPlayerSetting: (val: PlayerSettingDict) => set({ playerSetting: val }),
+  setPlayerSetting: (val: PlayerSettingDict) => {
+    set({ playerSetting: val });
+    saveSettings(val);
+  },
 
   addPlaylist: (playlist: Playlist) => {
     let playlistIds = get().playlistIds;

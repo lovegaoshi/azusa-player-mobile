@@ -15,6 +15,7 @@ import PlaylistMenuButton from '../buttons/PlaylistMenuButton';
 import { updateSubscribeFavList } from '../../utils/BiliSubscribe';
 import { songlistToTracklist } from '../../objects/Playlist';
 import { NoxRepeatMode } from '../player/enums/repeatMode';
+import { PLAYLIST_ENUMS } from '../../enums/Playlist';
 
 /*
 import Song, { dummySong } from '../../objects/SongInterface';
@@ -183,9 +184,13 @@ export default () => {
   };
 
   useEffect(() => {
-    const lastUpdated = new Date().getTime() - currentPlaylist.lastSubscribed;
-    console.log(lastUpdated);
-    if (lastUpdated > 86400000) {
+    if (
+      playerSetting.autoRSSUpdate &&
+      currentPlaylist.type === PLAYLIST_ENUMS.TYPE_TYPICA_PLAYLIST &&
+      currentPlaylist.subscribeUrl.length > 0 &&
+      currentPlaylist.subscribeUrl[0].length > 0 &&
+      new Date().getTime() - currentPlaylist.lastSubscribed > 86400000
+    ) {
       refreshPlaylist();
     }
   }, [currentPlaylist]);
