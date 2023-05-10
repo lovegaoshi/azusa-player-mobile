@@ -24,9 +24,9 @@ function SongInfo({
   onChecked?: () => void;
 }) {
   const currentPlaylist = useNoxSetting(state => state.currentPlaylist);
+  const playerSetting = useNoxSetting(state => state.playerSetting);
   const setSongMenuCoords = useNoxSetting(state => state.setSongMenuCoords);
   const setSongMenuVisible = useNoxSetting(state => state.setSongMenuVisible);
-  const playerSetting = useNoxSetting(state => state.playerSetting);
   const setSongMenuSongIndexes = useNoxSetting(
     state => state.setSongMenuSongIndexes
   );

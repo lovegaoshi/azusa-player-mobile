@@ -31,6 +31,7 @@ export default () => {
     state => state.setCurrentPlayingList
   );
   const currentPlayingId = useNoxSetting(state => state.currentPlayingId);
+  const playerSetting = useNoxSetting(state => state.playerSetting);
   const setCurrentPlayingId = useNoxSetting(state => state.setCurrentPlayingId);
   const currentPlaylist = useNoxSetting(state => state.currentPlaylist);
   const playlistShouldReRender = useNoxSetting(
@@ -136,8 +137,11 @@ export default () => {
     };
 
     const reloadPlaylistAndPlay = () => {
-      // true? currentPlaylist.songList : currentRows
-      let tracks = songlistToTracklist(currentPlaylist.songList);
+      let tracks = songlistToTracklist(
+        playerSetting.keepSearchedSongListWhenPlaying
+          ? currentRows
+          : currentPlaylist.songList
+      );
       if (playmode === NoxRepeatMode.SHUFFLE) {
         tracks = [...tracks].sort(() => Math.random() - 0.5);
       }
