@@ -5,6 +5,9 @@ import { useNoxSetting } from '../../hooks/useSetting';
 export default () => {
   const playerSetting = useNoxSetting(state => state.playerSetting);
   const setPlayerSetting = useNoxSetting(state => state.setPlayerSetting);
+  const togglePlaylistShouldReRender = useNoxSetting(
+    state => state.togglePlaylistShouldReRender
+  );
 
   const saveSettings = (toggled: { [key: string]: any }) => {
     setPlayerSetting({
@@ -13,15 +16,23 @@ export default () => {
     });
   };
 
-  const booleanSetting = (name: string, desc: string, settingName: string) => {
+  const booleanSetting = (
+    name: string,
+    desc: string,
+    settingName: string,
+    reRender = false
+  ) => {
     return (
       <View style={{ flexDirection: 'row', paddingVertical: 10 }}>
         <View style={{ flex: 1, paddingTop: 10, paddingRight: 10 }}>
           <Switch
             value={playerSetting[settingName]}
-            onValueChange={() =>
-              saveSettings({ [settingName]: !playerSetting[settingName] })
-            }
+            onValueChange={() => {
+              saveSettings({ [settingName]: !playerSetting[settingName] });
+              if (reRender) {
+                togglePlaylistShouldReRender();
+              }
+            }}
           />
         </View>
         <View style={{ flex: 5 }}>
@@ -42,7 +53,8 @@ export default () => {
       {booleanSetting(
         'Parse song name',
         'Show automatically parsed song names in playlist.',
-        'parseSongName'
+        'parseSongName',
+        true
       )}
       {booleanSetting(
         'Play searched results',

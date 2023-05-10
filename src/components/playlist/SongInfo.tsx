@@ -23,13 +23,18 @@ function SongInfo({
   checkedProp?: boolean;
   onChecked?: () => void;
 }) {
-  const [title, id, artist] = [item.parsedName, item.id, item.singer];
   const currentPlaylist = useNoxSetting(state => state.currentPlaylist);
   const setSongMenuCoords = useNoxSetting(state => state.setSongMenuCoords);
   const setSongMenuVisible = useNoxSetting(state => state.setSongMenuVisible);
+  const playerSetting = useNoxSetting(state => state.playerSetting);
   const setSongMenuSongIndexes = useNoxSetting(
     state => state.setSongMenuSongIndexes
   );
+  const [title, id, artist] = [
+    playerSetting.parseSongName ? item.parsedName : item.name,
+    item.id,
+    item.singer,
+  ];
   const [checked, setChecked] = React.useState(false);
 
   const toggleCheck = () => {
