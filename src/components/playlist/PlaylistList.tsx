@@ -166,6 +166,30 @@ export default () => {
     }
   };
 
+  const refreshPlaylist = async () => {
+    Snackbar.show({
+      text: `正在更新歌单 ${currentPlaylist.title}……`,
+      duration: Snackbar.LENGTH_INDEFINITE,
+    });
+    setRefreshing(true);
+    await updateSubscribeFavList({
+      listObj: currentPlaylist,
+      progressEmitter,
+      updatePlaylist,
+    });
+    Snackbar.dismiss();
+    Snackbar.show({ text: `歌单 ${currentPlaylist.title} updated` });
+    setRefreshing(false);
+  };
+
+  useEffect(() => {
+    const lastUpdated = new Date().getTime() - currentPlaylist.lastSubscribed;
+    console.log(lastUpdated);
+    if (lastUpdated > 86400000) {
+      refreshPlaylist();
+    }
+  }, [currentPlaylist]);
+
   /**
    * playlistShouldReRender is a global state that indicates playlist should be
    * refreshed. right now its only called when the playlist is updated in updatePlaylist.
@@ -252,21 +276,7 @@ export default () => {
           keyExtractor={item => item.id}
           estimatedItemSize={20}
           extraData={shouldReRender}
-          onRefresh={async () => {
-            Snackbar.show({
-              text: `正在更新歌单 ${currentPlaylist.title}……`,
-              duration: Snackbar.LENGTH_INDEFINITE,
-            });
-            setRefreshing(true);
-            await updateSubscribeFavList({
-              listObj: currentPlaylist,
-              progressEmitter,
-              updatePlaylist,
-            });
-            Snackbar.dismiss();
-            Snackbar.show({ text: `歌单 ${currentPlaylist.title} updated` });
-            setRefreshing(false);
-          }}
+          onRefresh={refreshPlaylist}
           refreshing={refreshing}
         />
       </View>
