@@ -11,7 +11,7 @@ import { IconButton } from 'react-native-paper';
 import { PlaybackError } from './PlaybackError';
 import { PlayPauseButton } from './PlayPauseButton';
 import { useNoxSetting } from '../../hooks/useSetting';
-import { playlistToTracklist } from '../../objects/Playlist';
+import { songlistToTracklist } from '../../objects/Playlist';
 import { NoxRepeatMode } from './enums/repeatMode';
 import { savePlayMode } from '../../utils/ChromeStorage';
 
@@ -42,7 +42,7 @@ export const PlayerControls: React.FC = () => {
       case NoxRepeatMode.SHUFFLE:
         setPlayMode(NoxRepeatMode.REPEAT);
         TrackPlayer.setQueueUninterrupted(
-          playlistToTracklist(currentPlaylist),
+          songlistToTracklist(currentPlaylist.songList),
           true
         ).then(() => TrackPlayer.getQueue().then(console.log));
         break;

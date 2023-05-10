@@ -42,11 +42,11 @@ export const getPlaylistUniqBVIDs = (playlist: Playlist) => {
   );
 };
 
-export const playlistToTracklist = (
-  playlist: Playlist,
+export const songlistToTracklist = (
+  songList: Array<Song>,
   resolveIndex = -1
 ): Track[] => {
-  return playlist.songList.map(song => {
+  return songList.map(song => {
     return {
       ...NULL_TRACK,
       title: song.parsedName,
@@ -56,17 +56,4 @@ export const playlistToTracklist = (
       song: song,
     };
   });
-  const result = [];
-  for (let i = 0, n = playlist.songList.length; i < n; i++) {
-    // const url = i === resolveIndex ? await resolveUrl(playlist.songList[i]) :
-    result.push({
-      ...NULL_TRACK,
-      title: playlist.songList[i].parsedName,
-      artist: playlist.songList[i].singer,
-      artwork: playlist.songList[i].cover,
-      duration: playlist.songList[i].duration,
-      song: playlist.songList[i],
-    });
-  }
-  return result;
 };

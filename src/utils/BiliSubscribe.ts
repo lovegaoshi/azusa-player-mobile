@@ -23,7 +23,7 @@ export const updateSubscribeFavList = async ({
   try {
     const oldListLength = listObj.songList.length;
     // eslint-disable-next-line prefer-const
-    let newPlaylist = { ...listObj };
+    let newPlaylist = { ...listObj, lastSubscribed: new Date().getTime() };
     if (subscribeUrls === undefined) {
       subscribeUrls = newPlaylist.subscribeUrl;
     }
@@ -51,13 +51,14 @@ export const updateSubscribeFavList = async ({
     newPlaylist.songList = [...uniqueSongList.values()].map(val =>
       parseSongName(val)
     );
-    // sinse we do NOT delete songs from this operation, any update requiring a fav update really need
-    // to have a change in list size.
-    if (oldListLength !== newPlaylist.songList.length) {
-      updatePlaylist(newPlaylist, [], []);
-      return newPlaylist.songList;
-    }
-    return null;
+    // This sounds like a performance disaster
+    // as currentPlaylist will be changed,
+    // but flashlist seems too performant to care.
+    // GeT a BeTtEr PhOnE
+    // TODO: revert lastSubscribed to a dedicated playerSettings field
+    // like noxplayer did, instead of being a playlist field
+    updatePlaylist(newPlaylist, [], []);
+    return newPlaylist.songList;
   } catch (err) {
     console.warn(err);
     return null;

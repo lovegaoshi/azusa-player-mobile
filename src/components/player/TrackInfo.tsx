@@ -1,13 +1,20 @@
 import React from 'react';
 import { Image, StyleSheet, Text, View } from 'react-native';
 import type { Track } from 'react-native-track-player';
+import { useNoxSetting } from '../../hooks/useSetting';
 
 export const TrackInfo: React.FC<{
   track?: Track;
 }> = ({ track }) => {
+  const playerSetting = useNoxSetting(state => state.playerSetting);
+
   return (
     <View style={styles.container}>
-      <Image style={styles.artwork} source={{ uri: `${track?.artwork}` }} />
+      {playerSetting.hideCoverInMobile ? (
+        <></>
+      ) : (
+        <Image style={styles.artwork} source={{ uri: `${track?.artwork}` }} />
+      )}
       <Text style={styles.titleText}>{track?.title}</Text>
       <Text style={styles.artistText}>{track?.artist}</Text>
     </View>
