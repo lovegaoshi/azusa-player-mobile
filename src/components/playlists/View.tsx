@@ -7,7 +7,7 @@ import {
 import { v4 as uuidv4 } from 'uuid';
 import { IconButton, Divider } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
-import { Alert, Pressable } from 'react-native';
+import { Pressable } from 'react-native';
 import { styles } from '../style';
 import { useNoxSetting } from '../../hooks/useSetting';
 import { ViewEnum } from '../../enums/View';
