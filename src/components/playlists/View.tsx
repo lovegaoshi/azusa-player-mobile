@@ -18,6 +18,8 @@ import { twoWayAlert } from '../../utils/Utils';
 
 export default (props: any) => {
   const navigation = useNavigation();
+  const currentPlayingList = useNoxSetting(state => state.currentPlayingList);
+  const currentPlaylist = useNoxSetting(state => state.currentPlaylist);
   const playlists = useNoxSetting(state => state.playlists);
   const playlistIds = useNoxSetting(state => state.playlistIds);
   // TODO: and how to property type this?
@@ -83,6 +85,14 @@ export default (props: any) => {
       {playlistIds.map(val => (
         <DrawerItem
           label={playlists[val].title}
+          labelStyle={{
+            fontWeight: currentPlayingList === val ? 'bold' : undefined,
+          }}
+          activeBackgroundColor="lavender"
+          style={{
+            backgroundColor:
+              currentPlaylist.id === val ? 'lavender' : undefined,
+          }}
           onPress={() => goToPlaylist(val)}
           icon={() => (
             <Pressable
@@ -98,7 +108,6 @@ export default (props: any) => {
             </Pressable>
           )}
           key={uuidv4()}
-          style={{}}
         />
       ))}
     </DrawerContentScrollView>
