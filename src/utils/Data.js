@@ -612,8 +612,14 @@ export const fetchBiliSearchList = async (kword, progressEmitter) => {
 
 /**
  * resolves fetchbilichannel 509 problem.
+ * 509 problem is bilibili started to obfuscate responses of
+ * URL_BILICHANNEL_INFO by adding {code:-509,msg:"too many requests"} to the
+ * actual response JSON text string. I didnt figure out what is the safe
+ * timeout but i assume its a lot. Plus, Bilibili doesnt care and only actually
+ * aborts/bans IP until ~200 pages were queried. So the solution is to get the res text,
+ * check if it has the code:-509 garbage, remove it, then JSON.parse as usual.
  * assumes special char \n and \r are the only ones to be taken
- * care of. if breaks, here is to fix.
+ * care of. if breaks, use a regex...
  * @param {} res
  * @returns
  */
