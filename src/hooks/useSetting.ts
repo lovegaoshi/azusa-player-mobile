@@ -12,6 +12,7 @@ import {
   savePlaylistIds,
   PlayerSettingDict,
   saveSettings,
+  savelastPlaylistId,
 } from '../utils/ChromeStorage';
 import { notNullDefault } from '../utils/Utils';
 import Song from '../objects/SongInterface';
@@ -93,9 +94,16 @@ export const useNoxSetting = create<NoxSetting>((set, get) => ({
     set({ playlistShouldReRender: !get().playlistShouldReRender }),
 
   currentPlayingId: null,
-  setCurrentPlayingId: (val: string) => set({ currentPlayingId: val }),
+  // MOCK: is it slow? GeT a BeTtEr PhOnE
+  setCurrentPlayingId: (val: string) => {
+    set({ currentPlayingId: val });
+    savelastPlaylistId([String(get().currentPlayingList), val]);
+  },
   currentPlayingList: null,
-  setCurrentPlayingList: (val: string) => set({ currentPlayingList: val }),
+  setCurrentPlayingList: (val: string) => {
+    set({ currentPlayingList: val });
+    savelastPlaylistId([val, String(get().currentPlayingId)]);
+  },
   playlists: {},
   playlistIds: [],
 

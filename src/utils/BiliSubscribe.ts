@@ -54,7 +54,7 @@ export const updateSubscribeFavList = async ({
     // This sounds like a performance disaster
     // as currentPlaylist will be changed,
     // but flashlist seems too performant to care.
-    // GeT a BeTtEr PhOnE
+    // MOCK: GeT a BeTtEr PhOnE
     // TODO: revert lastSubscribed to a dedicated playerSettings field
     // like noxplayer did, instead of being a playlist field
     updatePlaylist(newPlaylist, [], []);
