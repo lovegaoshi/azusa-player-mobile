@@ -13,12 +13,18 @@ import {
   PlayerSettingDict,
   saveSettings,
   savelastPlaylistId,
+  savePlayerSkin,
 } from '../utils/ChromeStorage';
 import { notNullDefault } from '../utils/Utils';
 import Song from '../objects/SongInterface';
 import coordinates from '../objects/Coordinate';
+import { createStyle } from '../components/style';
+import style from '../components/styles/styleInterface';
 
 interface NoxSetting {
+  playerStyle: any;
+  setPlayerStyle: (style: any) => void;
+
   searchBarProgress: number;
   searchBarProgressEmitter: (val: number) => undefined;
 
@@ -77,6 +83,12 @@ interface NoxSetting {
  * as well as saving and loading states to/from asyncStorage.
  */
 export const useNoxSetting = create<NoxSetting>((set, get) => ({
+  playerStyle: createStyle(),
+  setPlayerStyle: (val: style) => {
+    savePlayerSkin(val);
+    set({ playerStyle: createStyle(val) });
+  },
+
   searchBarProgress: 0,
   searchBarProgressEmitter: (val: number) => {
     set({ searchBarProgress: val / 100 });
@@ -192,5 +204,6 @@ export const useNoxSetting = create<NoxSetting>((set, get) => ({
     set({ playerRepeat: val.playerRepeat });
     set({ playlists: val.playlists });
     set({ playlistIds: val.playlistIds });
+    set({ playerStyle: createStyle(val.skin) });
   },
 }));

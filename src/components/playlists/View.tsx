@@ -8,7 +8,6 @@ import { v4 as uuidv4 } from 'uuid';
 import { IconButton, Divider } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
 import { Pressable } from 'react-native';
-import { styles } from '../style';
 import { useNoxSetting } from '../../hooks/useSetting';
 import { ViewEnum } from '../../enums/View';
 import AddPlaylistButton from '../buttons/AddPlaylistButton';
@@ -26,6 +25,7 @@ export default (props: any) => {
   const addPlaylistButtonRef = useRef<any>(null);
   const setCurrentPlaylist = useNoxSetting(state => state.setCurrentPlaylist);
   const removePlaylist = useNoxSetting(state => state.removePlaylist);
+  const playerStyle = useNoxSetting(state => state.playerStyle);
   // HACK: tried to make searchList draweritem button as addPlaylistButton, but
   // dialog disposes on textinput focus. created a dialog directly in this component
   // instead and works fine.
@@ -43,7 +43,6 @@ export default (props: any) => {
       () => removePlaylist(playlistId)
     );
   };
-
   return (
     <DrawerContentScrollView {...props}>
       <DrawerItemList {...props} />
@@ -71,12 +70,12 @@ export default (props: any) => {
               ? 'bold'
               : undefined,
         }}
-        activeBackgroundColor="lavender"
+        activeBackgroundColor={playerStyle.playlistDrawer.backgroundColor}
         style={{
           backgroundColor:
             currentPlaylist.id ===
             playlists[STORAGE_KEYS.SEARCH_PLAYLIST_KEY]?.id
-              ? 'lavender'
+              ? playerStyle.playlistDrawer.backgroundColor
               : undefined,
         }}
         onPress={() => goToPlaylist(STORAGE_KEYS.SEARCH_PLAYLIST_KEY)}
@@ -103,10 +102,12 @@ export default (props: any) => {
           labelStyle={{
             fontWeight: currentPlayingList === val ? 'bold' : undefined,
           }}
-          activeBackgroundColor="lavender"
+          activeBackgroundColor={playerStyle.playlistDrawer.backgroundColor}
           style={{
             backgroundColor:
-              currentPlaylist.id === val ? 'lavender' : undefined,
+              currentPlaylist.id === val
+                ? playerStyle.playlistDrawer.backgroundColor
+                : undefined,
           }}
           onPress={() => goToPlaylist(val)}
           icon={() => (

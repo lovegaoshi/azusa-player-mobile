@@ -44,7 +44,7 @@ export const PlayerControls: React.FC = () => {
         TrackPlayer.setQueueUninterrupted(
           songlistToTracklist(currentPlaylist.songList),
           true
-        ).then(() => TrackPlayer.getQueue().then(console.log));
+        ).then(() => TrackPlayer.getQueue());
         break;
       case NoxRepeatMode.REPEAT:
         setPlayMode(NoxRepeatMode.REPEAT_TRACK);
