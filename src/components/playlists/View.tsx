@@ -64,6 +64,21 @@ export default (props: any) => {
             ? playlists[STORAGE_KEYS.SEARCH_PLAYLIST_KEY].title
             : 'NAN'
         }
+        labelStyle={{
+          fontWeight:
+            currentPlayingList ===
+            playlists[STORAGE_KEYS.SEARCH_PLAYLIST_KEY]?.id
+              ? 'bold'
+              : undefined,
+        }}
+        activeBackgroundColor="lavender"
+        style={{
+          backgroundColor:
+            currentPlaylist.id ===
+            playlists[STORAGE_KEYS.SEARCH_PLAYLIST_KEY]?.id
+              ? 'lavender'
+              : undefined,
+        }}
         onPress={() => goToPlaylist(STORAGE_KEYS.SEARCH_PLAYLIST_KEY)}
         key={uuidv4()}
         icon={() => (
