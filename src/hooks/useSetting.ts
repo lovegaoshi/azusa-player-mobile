@@ -163,9 +163,10 @@ export const useNoxSetting = create<NoxSetting>((set, get) => ({
     const currentPlaylist = get().currentPlaylist;
     const playlistSongsId = playlist.songList.map(v => v.id);
     const removeSongsId = removeSongs.map(v => v.id);
-
-    playlist.songList = playlist.songList
-      .concat(addSongs.filter(v => !playlistSongsId.includes(v.id)))
+    // FI"FO".
+    playlist.songList = addSongs
+      .filter(v => !playlistSongsId.includes(v.id))
+      .concat(playlist.songList)
       .filter(v => !removeSongsId.includes(v.id));
     playlists[playlist.id] = playlist;
     if (playlist.id === currentPlaylist.id) {
