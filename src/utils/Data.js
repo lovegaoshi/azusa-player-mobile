@@ -403,7 +403,7 @@ export const fetchBiliPaginatedAPI = async (
   params = undefined
 ) => {
   const res = await bfetch(url.replace('{pn}', 1), params);
-  const { data } = await res.clone().json();
+  const { data } = await extract509Json(res.clone());
   const mediaCount = getMediaCount(data);
   const BVids = [];
   const pagesPromises = [res];
@@ -419,8 +419,7 @@ export const fetchBiliPaginatedAPI = async (
   const resolvedPromises = await Promise.all(pagesPromises);
   await Promise.all(
     resolvedPromises.map(async pages => {
-      return pages
-        .json()
+      return extract509Json(pages)
         .then(parsedJson => {
           getItems(parsedJson).forEach(m => {
             if (!favList.includes(m.bvid)) BVids.push(m.bvid);
@@ -512,15 +511,9 @@ export const fetchBiliColleList = async (
 
   return fetchBiliPaginatedAPI(
     URL_BILICOLLE_INFO.replace('{mid}', mid).replace('{sid}', sid),
-    data => {
-      return data.meta.total;
-    },
-    data => {
-      return data.page.page_size;
-    },
-    js => {
-      return js.data.archives;
-    },
+    data => data.meta.total,
+    data => data.page.page_size,
+    js => js.data.archives,
     progressEmitter,
     favList
   );
@@ -544,22 +537,16 @@ export const fetchBiliChannelList = async (
   logger.info('calling fetchBiliChannelList');
   const mid = /.*space.bilibili\.com\/(\d+)\/video.*/.exec(url)[1];
   let searchAPI = URL_BILICHANNEL_INFO.replace('{mid}', mid);
-  const urlSearchParam = new URLSearchParams(new URL(url).search);
-  if (urlSearchParam.get('tid') !== null) {
+  const tidVal = /tid=(\d+)/.exec(url);
+  if (tidVal) {
     // TODO: do this properly with another URLSearchParams instance
-    searchAPI += `&tid=${String(urlSearchParam.get('tid'))}`;
+    searchAPI += `&tid=${String(tidVal[1])}`;
   }
   return fetchBiliPaginatedAPI(
     searchAPI,
-    data => {
-      return data.page.count;
-    },
-    data => {
-      return data.page.ps;
-    },
-    js => {
-      return js.data.list.vlist;
-    },
+    data => data.page.count,
+    data => data.page.ps,
+    js => js.data.list.vlist,
     progressEmitter,
     favList
   );
@@ -579,15 +566,9 @@ export const fetchFavList = async (mid, progressEmitter, favList = []) => {
 
   return fetchBiliPaginatedAPI(
     URL_FAV_LIST.replace('{mid}', mid),
-    data => {
-      return data.info.media_count;
-    },
-    () => {
-      return 20;
-    },
-    js => {
-      return js.data.medias;
-    },
+    data => data.info.media_count,
+    () => 20,
+    js => js.data.medias,
     progressEmitter,
     favList
   );
@@ -609,16 +590,9 @@ export const fetchBiliSearchList = async (kword, progressEmitter) => {
   try {
     val = await fetchBiliPaginatedAPI(
       URL_BILI_SEARCH.replace('{keyword}', kword),
-      data => {
-        // return data.pagesize;
-        return Math.min(data.numResults, data.pagesize * 2);
-      },
-      data => {
-        return data.pagesize;
-      },
-      js => {
-        return js.data.result;
-      },
+      data => Math.min(data.numResults, data.pagesize * 2),
+      data => data.pagesize,
+      js => js.data.result,
       progressEmitter,
       [],
       biliTagApiLimiter,
@@ -634,6 +608,30 @@ export const fetchBiliSearchList = async (kword, progressEmitter) => {
     console.error(e);
   }
   return val;
+};
+
+/**
+ * resolves fetchbilichannel 509 problem.
+ * 509 problem is bilibili started to obfuscate responses of
+ * URL_BILICHANNEL_INFO by adding {code:-509,msg:"too many requests"} to the
+ * actual response JSON text string. I didnt figure out what is the safe
+ * timeout but i assume its a lot. Plus, Bilibili doesnt care and only actually
+ * aborts/bans IP until ~200 pages were queried. So the solution is to get the res text,
+ * check if it has the code:-509 garbage, remove it, then JSON.parse as usual.
+ * assumes special char \n and \r are the only ones to be taken
+ * care of. if breaks, use a regex...
+ * @param {} res
+ * @returns
+ */
+const extract509Json = async res => {
+  let resText = await res.text();
+  if (resText.includes('"code":-509,')) {
+    resText = resText
+      .slice(resText.indexOf('}') + 1)
+      .replaceAll('\n', '')
+      .replaceAll('\r', '');
+  }
+  return JSON.parse(resText);
 };
 
 /**

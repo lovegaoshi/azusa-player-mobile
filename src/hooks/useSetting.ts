@@ -10,13 +10,21 @@ import {
   saveFavPlaylist,
   savePlaylist,
   savePlaylistIds,
+  PlayerSettingDict,
+  saveSettings,
+  savelastPlaylistId,
+  savePlayerSkin,
 } from '../utils/ChromeStorage';
 import { notNullDefault } from '../utils/Utils';
-import { PlayerSettingDict } from '../utils/ChromeStorage';
 import Song from '../objects/SongInterface';
 import coordinates from '../objects/Coordinate';
+import { createStyle } from '../components/style';
+import style from '../components/styles/styleInterface';
 
 interface NoxSetting {
+  playerStyle: any;
+  setPlayerStyle: (style: any) => void;
+
   searchBarProgress: number;
   searchBarProgressEmitter: (val: number) => undefined;
 
@@ -75,6 +83,12 @@ interface NoxSetting {
  * as well as saving and loading states to/from asyncStorage.
  */
 export const useNoxSetting = create<NoxSetting>((set, get) => ({
+  playerStyle: createStyle(),
+  setPlayerStyle: (val: style) => {
+    savePlayerSkin(val);
+    set({ playerStyle: createStyle(val) });
+  },
+
   searchBarProgress: 0,
   searchBarProgressEmitter: (val: number) => {
     set({ searchBarProgress: val / 100 });
@@ -92,9 +106,16 @@ export const useNoxSetting = create<NoxSetting>((set, get) => ({
     set({ playlistShouldReRender: !get().playlistShouldReRender }),
 
   currentPlayingId: null,
-  setCurrentPlayingId: (val: string) => set({ currentPlayingId: val }),
+  // MOCK: is it slow? GeT a BeTtEr PhOnE
+  setCurrentPlayingId: (val: string) => {
+    set({ currentPlayingId: val });
+    savelastPlaylistId([String(get().currentPlayingList), val]);
+  },
   currentPlayingList: null,
-  setCurrentPlayingList: (val: string) => set({ currentPlayingList: val }),
+  setCurrentPlayingList: (val: string) => {
+    set({ currentPlayingList: val });
+    savelastPlaylistId([val, String(get().currentPlayingId)]);
+  },
   playlists: {},
   playlistIds: [],
 
@@ -117,7 +138,10 @@ export const useNoxSetting = create<NoxSetting>((set, get) => ({
   playerRepeat: NoxRepeatMode.SHUFFLE,
   setPlayerRepeat: (val: string) => set({ playerRepeat: val }),
   playerSetting: DEFAULT_SETTING,
-  setPlayerSetting: (val: PlayerSettingDict) => set({ playerSetting: val }),
+  setPlayerSetting: (val: PlayerSettingDict) => {
+    set({ playerSetting: val });
+    saveSettings(val);
+  },
 
   addPlaylist: (playlist: Playlist) => {
     let playlistIds = get().playlistIds;
@@ -151,9 +175,10 @@ export const useNoxSetting = create<NoxSetting>((set, get) => ({
     const currentPlaylist = get().currentPlaylist;
     const playlistSongsId = playlist.songList.map(v => v.id);
     const removeSongsId = removeSongs.map(v => v.id);
-
-    playlist.songList = playlist.songList
-      .concat(addSongs.filter(v => !playlistSongsId.includes(v.id)))
+    // FI"FO".
+    playlist.songList = addSongs
+      .filter(v => !playlistSongsId.includes(v.id))
+      .concat(playlist.songList)
       .filter(v => !removeSongsId.includes(v.id));
     playlists[playlist.id] = playlist;
     if (playlist.id === currentPlaylist.id) {
@@ -179,5 +204,6 @@ export const useNoxSetting = create<NoxSetting>((set, get) => ({
     set({ playerRepeat: val.playerRepeat });
     set({ playlists: val.playlists });
     set({ playlistIds: val.playlistIds });
+    set({ playerStyle: createStyle(val.skin) });
   },
 }));

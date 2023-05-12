@@ -35,8 +35,6 @@ export default ({
   toggleVisible = () => void 0,
   menuCoords = { x: 0, y: 0 },
 }: props) => {
-  const [SnackbarVisible, setSnackbarVisible] = React.useState(false);
-
   const currentPlaylist = useNoxSetting(state => state.currentPlaylist);
   const updatePlaylist = useNoxSetting(state => state.updatePlaylist);
   const removePlaylist = useNoxSetting(state => state.removePlaylist);

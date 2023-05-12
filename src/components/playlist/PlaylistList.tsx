@@ -1,15 +1,21 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { View } from 'react-native';
 import { FlashList } from '@shopify/flash-list';
-import { styles } from '../style';
+import Snackbar from 'react-native-snackbar';
 import { IconButton, Text } from 'react-native-paper';
+import TrackPlayer from 'react-native-track-player';
 import { Dimensions } from 'react-native';
+import { styles } from '../style';
 import SongInfo from './SongInfo';
 import { useNoxSetting } from '../../hooks/useSetting';
 import SongMenu from './SongMenu';
 import Song from '../../objects/SongInterface';
 import PlaylistInfo from './PlaylistInfo';
 import PlaylistMenuButton from '../buttons/PlaylistMenuButton';
+import { updateSubscribeFavList } from '../../utils/BiliSubscribe';
+import { songlistToTracklist } from '../../objects/Playlist';
+import { NoxRepeatMode } from '../player/enums/repeatMode';
+import { PLAYLIST_ENUMS } from '../../enums/Playlist';
 
 /*
 import Song, { dummySong } from '../../objects/SongInterface';
@@ -20,17 +26,30 @@ const DUMMYDATA = [...Array(1222).keys()].reduce(
 */
 
 export default () => {
+  const currentPlayingList = useNoxSetting(state => state.currentPlayingList);
+  const playmode = useNoxSetting(state => state.playerRepeat); // performance drain?
+  const setCurrentPlayingList = useNoxSetting(
+    state => state.setCurrentPlayingList
+  );
   const currentPlayingId = useNoxSetting(state => state.currentPlayingId);
+  const playerSetting = useNoxSetting(state => state.playerSetting);
+  const setCurrentPlayingId = useNoxSetting(state => state.setCurrentPlayingId);
   const currentPlaylist = useNoxSetting(state => state.currentPlaylist);
+  const playlistShouldReRender = useNoxSetting(
+    state => state.playlistShouldReRender
+  );
+  const progressEmitter = useNoxSetting(
+    state => state.searchBarProgressEmitter
+  );
+  const updatePlaylist = useNoxSetting(state => state.updatePlaylist);
+
   const [selected, setSelected] = useState<boolean[]>([]);
   const [checking, setChecking] = useState(false);
   const [searching, setSearching] = useState(false);
   const [shouldReRender, setShouldReRender] = useState(false);
   const [currentRows, setCurrentRows] = useState<Song[]>([]);
   const [searchText, setSearchText] = useState('');
-  const playlistShouldReRender = useNoxSetting(
-    state => state.playlistShouldReRender
-  );
+  const [refreshing, setRefreshing] = useState(false);
 
   const resetSelected = (val = false) =>
     setSelected(Array(currentPlaylist.songList.length).fill(val));
@@ -110,6 +129,74 @@ export default () => {
     setSearching(true);
   };
 
+  // TODO: useCallback? [currentPlaylist, currentPlayingList, playMode, index]
+  // TODO: can i somehow shove most of these into an async promise, then
+  // use a boolean flag to make a loading screen?
+  const playSong = async (song: Song) => {
+    const skipNPlay = (index: number) => {
+      TrackPlayer.skip(index).then(() => TrackPlayer.play());
+    };
+
+    const reloadPlaylistAndPlay = () => {
+      let tracks = songlistToTracklist(
+        playerSetting.keepSearchedSongListWhenPlaying
+          ? currentRows
+          : currentPlaylist.songList
+      );
+      if (playmode === NoxRepeatMode.SHUFFLE) {
+        tracks = [...tracks].sort(() => Math.random() - 0.5);
+      }
+      TrackPlayer.setQueue(tracks).then(() =>
+        skipNPlay(tracks.findIndex(track => track.song.id === song.id))
+      );
+    };
+
+    setCurrentPlayingId(song.id);
+    if (currentPlaylist.id !== currentPlayingList) {
+      setCurrentPlayingList(currentPlaylist.id);
+      reloadPlaylistAndPlay();
+    } else {
+      TrackPlayer.getQueue().then(tracks => {
+        const trackIndex = tracks.findIndex(
+          track => track.song?.id === song.id
+        );
+        if (trackIndex === -1) {
+          reloadPlaylistAndPlay();
+        } else {
+          skipNPlay(trackIndex);
+        }
+      });
+    }
+  };
+
+  const refreshPlaylist = async () => {
+    Snackbar.show({
+      text: `正在更新歌单 ${currentPlaylist.title}……`,
+      duration: Snackbar.LENGTH_INDEFINITE,
+    });
+    setRefreshing(true);
+    await updateSubscribeFavList({
+      listObj: currentPlaylist,
+      progressEmitter,
+      updatePlaylist,
+    });
+    Snackbar.dismiss();
+    Snackbar.show({ text: `歌单 ${currentPlaylist.title} updated` });
+    setRefreshing(false);
+  };
+
+  useEffect(() => {
+    if (
+      playerSetting.autoRSSUpdate &&
+      currentPlaylist.type === PLAYLIST_ENUMS.TYPE_TYPICA_PLAYLIST &&
+      currentPlaylist.subscribeUrl.length > 0 &&
+      currentPlaylist.subscribeUrl[0].length > 0 &&
+      new Date().getTime() - currentPlaylist.lastSubscribed > 86400000
+    ) {
+      refreshPlaylist();
+    }
+  }, [currentPlaylist]);
+
   /**
    * playlistShouldReRender is a global state that indicates playlist should be
    * refreshed. right now its only called when the playlist is updated in updatePlaylist.
@@ -187,6 +274,7 @@ export default () => {
               item={item}
               index={index}
               currentPlaying={item.id === currentPlayingId}
+              playSong={playSong}
               checking={checking}
               checkedProp={selected[getSongIndex(item, index)]}
               onChecked={() => toggleSelected(getSongIndex(item, index))}
@@ -195,6 +283,8 @@ export default () => {
           keyExtractor={item => item.id}
           estimatedItemSize={20}
           extraData={shouldReRender}
+          onRefresh={refreshPlaylist}
+          refreshing={refreshing}
         />
       </View>
       <SongMenu

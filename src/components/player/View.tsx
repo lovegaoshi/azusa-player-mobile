@@ -9,14 +9,12 @@ import {
   View,
   Text,
 } from 'react-native';
-import { Button, PlayerControls, Progress, TrackInfo } from './';
+import { TrackInfo } from './';
 import { QueueInitialTracksService, SetupService } from '../../services';
-import { styles } from '../style';
-import { IconButton } from 'react-native-paper';
 import { useNavigation, ParamListBase } from '@react-navigation/native';
 import { DrawerNavigationProp } from '@react-navigation/drawer';
-import { ViewEnum } from '../../enums/View';
 import PlayerTopInfo from './PlayerTopInfo';
+import { useNoxSetting } from '../../hooks/useSetting';
 
 export function Player({
   navigation,
@@ -25,12 +23,13 @@ export function Player({
 }) {
   const track = useActiveTrack();
   const navigationGlobal = useNavigation();
+  const playerStyle = useNoxSetting(state => state.playerStyle);
   // TODO: component
 
   return (
-    <SafeAreaView style={styles.screenContainer}>
+    <SafeAreaView style={playerStyle.screenContainer}>
       <StatusBar barStyle={'light-content'} />
-      <View style={styles.contentContainer}>
+      <View style={playerStyle.contentContainer}>
         <PlayerTopInfo navigation={navigation}></PlayerTopInfo>
         <TrackInfo track={track} />
       </View>

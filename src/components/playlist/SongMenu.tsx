@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { Menu } from 'react-native-paper';
+import { Keyboard } from 'react-native';
 import { useNoxSetting } from '../../hooks/useSetting';
 import { CopiedPlaylistMenuItem } from '../buttons/CopiedPlaylistButton';
 import { RenameSongMenuItem } from '../buttons/RenameSongButton';
@@ -84,25 +85,29 @@ export default ({
   // do we even want this feature anymore?
   const reloadSongs = async () => {
     return;
-  }
+  };
 
   const removeSongs = (banBVID = false) => {
     const songs = selectedSongs();
-    const newPlaylist = banBVID ? 
-    {...currentPlaylist,
-      blacklistedUrl: currentPlaylist.blacklistedUrl.concat(songs.map(song => song.bvid)),
-    } : currentPlaylist;
+    const newPlaylist = banBVID
+      ? {
+          ...currentPlaylist,
+          blacklistedUrl: currentPlaylist.blacklistedUrl.concat(
+            songs.map(song => song.bvid)
+          ),
+        }
+      : currentPlaylist;
     updatePlaylist(newPlaylist, [], songs);
     setSongMenuVisible(false);
     resetChecked();
-  }
+  };
 
   // do we even need this feature?
   // if do id like this to be like AIMP3's
   // track details page, in a seperate stack screen.
-  const songInfo =() => {
+  const songInfo = () => {
     closeMenu();
-  }
+  };
 
   return (
     <Menu visible={songMenuVisible} onDismiss={closeMenu} anchor={menuCoord}>
@@ -122,6 +127,8 @@ export default ({
             currentPlaylist.songList[songMenuSongIndexes[0]].parsedName
           );
           closeMenu();
+          // TODO: doesnt work.
+          Keyboard.dismiss();
         }}
         disabled={checking}
         title="Search in Playlist"

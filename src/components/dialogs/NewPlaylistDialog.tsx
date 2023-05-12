@@ -28,7 +28,6 @@ export default ({
   const addPlaylist = useNoxSetting(state => state.addPlaylist);
 
   const handleClose = () => {
-    console.log('dfsfsf');
     setPlaylistName('');
     onClose();
   };

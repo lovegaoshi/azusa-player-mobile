@@ -3,23 +3,24 @@ import { ActivityIndicator, Linking, SafeAreaView } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { IconButton, Portal } from 'react-native-paper';
 import { useSetupPlayer, Player } from './components/player/View';
 import Playlist from './components/playlist/View';
 import { styles } from './components/style';
-import { IconButton, Portal } from 'react-native-paper';
 import PlayerBottomPanel from './components/player/PlayerProgressControls';
 import { useNoxSetting } from './hooks/useSetting';
 import { initPlayerObject } from './utils/ChromeStorage';
 import PlaylistDrawer from './components/playlists/View';
 import { ViewEnum } from './enums/View';
 import Settings from './components/setting/View';
-import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 const App: React.FC = () => {
   const isPlayerReady = useSetupPlayer();
   const Drawer = createDrawerNavigator();
   const Tab = createMaterialTopTabNavigator();
   const initPlayer = useNoxSetting(state => state.initPlayer);
+  const playerStyle = useNoxSetting(state => state.playerStyle);
 
   function NoxPlayer() {
     return (
@@ -65,7 +66,7 @@ const App: React.FC = () => {
 
   if (!isPlayerReady) {
     return (
-      <SafeAreaView style={styles.screenContainer}>
+      <SafeAreaView style={playerStyle.screenContainer}>
         <ActivityIndicator />
       </SafeAreaView>
     );
@@ -93,6 +94,7 @@ const App: React.FC = () => {
               options={{
                 drawerIcon: () => <IconButton icon="cog" />,
                 title: 'Settings',
+                header: () => null,
               }}
               component={Settings}
             />

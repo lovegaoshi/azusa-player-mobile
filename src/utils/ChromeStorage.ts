@@ -5,6 +5,7 @@ import { notNullDefault } from './Utils';
 import { NoxRepeatMode } from '../components/player/enums/repeatMode';
 import Song from '../objects/SongInterface';
 import { PLAYLIST_ENUMS } from '../enums/Playlist';
+import style from '../components/styles/styleInterface';
 /**
  * noxplayer's storage handler.
  * ChromeStorage has quite a few changes from azusa player the chrome extension;
@@ -28,6 +29,7 @@ export enum STORAGE_KEYS {
   FAVLIST_AUTO_UPDATE_TIMESTAMP = 'favListAutoUpdateTimestamp',
   MY_FAV_LIST_KEY = 'MyFavList',
   PLAYMODE_KEY = 'Playmode',
+  SKIN = 'PlayerSkin',
 }
 
 export enum EXPORT_OPTIONS {
@@ -59,6 +61,7 @@ export interface PlayerStorageObject {
   searchPlaylist: Playlist;
   favoriPlaylist: Playlist;
   playerRepeat: string;
+  skin: style;
 }
 
 export const DEFAULT_SETTING: PlayerSettingDict = {
@@ -174,6 +177,9 @@ export const saveSettings = async (setting: PlayerSettingDict) =>
 export const savePlaylistIds = async (val: string[]) =>
   saveItem(STORAGE_KEYS.MY_FAV_LIST_KEY, val);
 
+export const savePlayerSkin = async (val: style) =>
+saveItem(STORAGE_KEYS.SKIN, val);
+
 export const addPlaylist = async (
   playlist: Playlist,
   playlistIds: Array<string>
@@ -235,6 +241,10 @@ export const initPlayerObject = async (): Promise<PlayerStorageObject> => {
     playerRepeat: notNullDefault(
       await getItem(STORAGE_KEYS.PLAYMODE_KEY),
       NoxRepeatMode.SHUFFLE
+    ),
+    skin: notNullDefault(
+      await getItem(STORAGE_KEYS.SKIN),
+      {}
     ),
   } as PlayerStorageObject;
 
