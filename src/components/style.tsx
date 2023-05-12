@@ -24,7 +24,7 @@ export const createStyle = (customStyle = azusaTheme) => {
       flexDirection: 'row',
       // paddingHorizontal: 20,
       justifyContent: 'flex-end',
-      top: 4,
+      top: 7,
     },
     topBarContainer: {
       width: '100%',
