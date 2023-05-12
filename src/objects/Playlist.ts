@@ -42,10 +42,7 @@ export const getPlaylistUniqBVIDs = (playlist: Playlist) => {
   );
 };
 
-export const songlistToTracklist = (
-  songList: Array<Song>,
-  resolveIndex = -1
-): Track[] => {
+export const songlistToTracklist = (songList: Array<Song>): Track[] => {
   return songList.map(song => {
     return {
       ...NULL_TRACK,

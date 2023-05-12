@@ -157,7 +157,9 @@ export default () => {
       reloadPlaylistAndPlay();
     } else {
       TrackPlayer.getQueue().then(tracks => {
-        const trackIndex = tracks.findIndex(track => track.song.id === song.id);
+        const trackIndex = tracks.findIndex(
+          track => track.song?.id === song.id
+        );
         if (trackIndex === -1) {
           reloadPlaylistAndPlay();
         } else {

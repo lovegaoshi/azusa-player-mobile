@@ -31,14 +31,15 @@ export const TrackInfo: React.FC<{
         {currentPlayingList ? playlists[currentPlayingList]?.title : ''}
       </Text>
       <Text style={styles.artistText}>
-        {currentPlayingList && track
+        {currentPlayingList && playlists[currentPlayingList] && track?.song
           ? `#${
               playlists[currentPlayingList].songList.findIndex(
                 song => song.id === track.song.id
               ) + 1
             } - ${
-              currentTPQueue.findIndex(song => song.song.id === track.song.id) +
-              1
+              currentTPQueue.findIndex(
+                song => song?.song?.id === track.song.id
+              ) + 1
             }/${currentTPQueue.length}`
           : ''}
       </Text>
