@@ -29,6 +29,9 @@ export const initBiliHeartbeat = async ({
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded',
     },
-    body: { bvid, cid },
+    body: new URLSearchParams({
+      bvid,
+      cid,
+    }),
   });
 };

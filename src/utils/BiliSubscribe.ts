@@ -1,4 +1,3 @@
-import { useNoxSetting } from '../hooks/useSetting';
 import Playlist from '../objects/Playlist';
 import { searchBiliURLs } from './BiliSearch';
 import { parseSongName } from './re';
