@@ -20,6 +20,7 @@ const App: React.FC = () => {
   const Drawer = createDrawerNavigator();
   const Tab = createMaterialTopTabNavigator();
   const initPlayer = useNoxSetting(state => state.initPlayer);
+  const playerStyle = useNoxSetting(state => state.playerStyle);
 
   function NoxPlayer() {
     return (
@@ -65,7 +66,7 @@ const App: React.FC = () => {
 
   if (!isPlayerReady) {
     return (
-      <SafeAreaView style={styles.screenContainer}>
+      <SafeAreaView style={playerStyle.screenContainer}>
         <ActivityIndicator />
       </SafeAreaView>
     );

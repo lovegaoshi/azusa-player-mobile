@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text } from 'react-native';
-import { styles } from '../style';
 import { IconButton } from 'react-native-paper';
 import { useNavigation, ParamListBase } from '@react-navigation/native';
 import { DrawerNavigationProp } from '@react-navigation/drawer';
 import { ViewEnum } from '../../enums/View';
+import { styles } from '../style';
 
 export default ({
   navigation,

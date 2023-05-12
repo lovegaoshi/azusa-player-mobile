@@ -44,7 +44,7 @@ export const PlayerControls: React.FC = () => {
         TrackPlayer.setQueueUninterrupted(
           songlistToTracklist(currentPlaylist.songList),
           true
-        ).then(() => TrackPlayer.getQueue().then(console.log));
+        ).then(() => TrackPlayer.getQueue());
         break;
       case NoxRepeatMode.REPEAT:
         setPlayMode(NoxRepeatMode.REPEAT_TRACK);
@@ -72,20 +72,26 @@ export const PlayerControls: React.FC = () => {
         <></>
       )}
 
-      <View style={styles.row}>
+      <View
+        style={[
+          styles.row,
+          {
+            justifyContent: 'center',
+            alignItems: 'center',
+          },
+        ]}
+      >
         <IconButton
           icon={playmode}
           onPress={onClickPlaymode}
           mode="contained"
           size={30}
-          style={{ top: 10 }}
         />
         <IconButton
           icon="skip-previous"
           onPress={performSkipToPrevious}
           mode="contained"
           size={40}
-          style={{ top: 5 }}
         />
         <PlayPauseButton state={playback.state} />
         <IconButton
@@ -93,14 +99,12 @@ export const PlayerControls: React.FC = () => {
           onPress={performSkipToNext}
           mode="contained"
           size={40}
-          style={{ top: 5 }}
         />
         <IconButton
           icon="thumb-up-outline"
           onPress={onThumbsUp}
           mode="contained"
           size={30}
-          style={{ top: 10 }}
         />
       </View>
     </View>
@@ -110,11 +114,9 @@ export const PlayerControls: React.FC = () => {
 const styles = StyleSheet.create({
   container: {
     width: '100%',
-    alignItems: 'baseline',
     flexDirection: 'column',
   },
   row: {
     flexDirection: 'row',
-    justifyContent: 'space-evenly',
   },
 });
