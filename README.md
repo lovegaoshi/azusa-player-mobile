@@ -8,8 +8,7 @@ Node env: v14.20.0
 
 yarn:
 ```
-git clone https://github.com/lovegaoshi/azusa-player.git
-yarn
+git clone https://github.com/lovegaoshi/azusa-player-mobile.git
 yarn build
 yarn
 cd ios && pod install && cd ..
@@ -17,7 +16,7 @@ cd ios && pod install && cd ..
 
 npm:
 ```
-git clone https://github.com/lovegaoshi/azusa-player.git
+git clone https://github.com/lovegaoshi/azusa-player-mobile.git
 npm ci
 npm start
 cd ios && pod install && cd ..
