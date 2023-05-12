@@ -1,12 +1,22 @@
 import React from 'react';
-import { Image, StyleSheet, Text, View } from 'react-native';
+import { Image, StyleSheet, Text, View, Dimensions } from 'react-native';
 import type { Track } from 'react-native-track-player';
+import TrackPlayer from 'react-native-track-player';
 import { useNoxSetting } from '../../hooks/useSetting';
 
 export const TrackInfo: React.FC<{
   track?: Track;
 }> = ({ track }) => {
   const playerSetting = useNoxSetting(state => state.playerSetting);
+  const currentPlayingList = useNoxSetting(state => state.currentPlayingList);
+  const playlists = useNoxSetting(state => state.playlists);
+  const [currentTPQueue, setCurrentTPQueue] = React.useState<Track[]>([]);
+
+  React.useEffect(() => {
+    // TODO: when the sliding window queue is implemented, this would just be
+    // another zustand state.
+    TrackPlayer.getQueue().then(setCurrentTPQueue);
+  }, [currentPlayingList]);
 
   return (
     <View style={styles.container}>
@@ -17,17 +27,36 @@ export const TrackInfo: React.FC<{
       )}
       <Text style={styles.titleText}>{track?.title}</Text>
       <Text style={styles.artistText}>{track?.artist}</Text>
+      <Text style={styles.artistText}>
+        {currentPlayingList ? playlists[currentPlayingList]?.title : ''}
+      </Text>
+      <Text style={styles.artistText}>
+        {currentPlayingList && track
+          ? `#${
+              playlists[currentPlayingList].songList.findIndex(
+                song => song.id === track.song.id
+              ) + 1
+            } - ${
+              currentTPQueue.findIndex(song => song.song.id === track.song.id) +
+              1
+            }/${currentTPQueue.length}`
+          : ''}
+      </Text>
     </View>
   );
 };
 
+const albumArtSize = Math.min(
+  Dimensions.get('window').width,
+  Dimensions.get('window').height
+);
 const styles = StyleSheet.create({
   container: {
     alignItems: 'center',
   },
   artwork: {
-    width: 240,
-    height: 240,
+    width: albumArtSize,
+    height: albumArtSize,
     marginTop: 30,
     backgroundColor: 'grey',
   },
@@ -35,7 +64,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: '600',
     color: 'grey',
-    marginTop: 30,
+    marginTop: 25,
   },
   artistText: {
     fontSize: 16,
