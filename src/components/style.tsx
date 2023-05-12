@@ -19,6 +19,13 @@ export const createStyle = (customStyle = azusaTheme) => {
       flex: 6,
       alignItems: 'center',
     },
+    playerTopBarContainer: {
+      width: '100%',
+      flexDirection: 'row',
+      // paddingHorizontal: 20,
+      justifyContent: 'flex-end',
+      top: 4,
+    },
     topBarContainer: {
       width: '100%',
       flexDirection: 'row',
