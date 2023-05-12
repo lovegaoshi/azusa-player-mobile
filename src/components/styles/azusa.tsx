@@ -5,6 +5,8 @@ export default {
     themeName: 'Azusa Theme',
     themeDesc: 'Azusa Theme',
     themeAuthor: 'nek@bilibili',
+    themeIcon:
+      'https://i2.hdslb.com/bfs/face/ba9ce36ef60a53e24a97f54429e62bdb951530a0.jpg',
   },
   lightTheme: true,
   screenBackgroundColor: 'white',

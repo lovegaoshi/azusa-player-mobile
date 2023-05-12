@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { IconButton, Text, TextInput } from 'react-native-paper';
-import { View } from 'react-native';
+import { View, Pressable } from 'react-native';
 import { styles } from '../style';
 import { useNoxSetting } from '../../hooks/useSetting';
 import { seconds2HHMMSS } from '../../utils/Utils';
@@ -9,9 +9,15 @@ interface props {
   searchText: string;
   setSearchText: (val: string) => void;
   search?: boolean;
+  onPressed?: () => void;
 }
 
-export default ({ searchText, setSearchText, search = false }: props) => {
+export default ({
+  searchText,
+  setSearchText,
+  search = false,
+  onPressed = () => void 0,
+}: props) => {
   const currentPlaylist = useNoxSetting(state => state.currentPlaylist);
 
   React.useEffect(() => {
@@ -32,7 +38,7 @@ export default ({ searchText, setSearchText, search = false }: props) => {
           selectTextOnFocus
         />
       ) : (
-        <View>
+        <Pressable onPress={onPressed}>
           <Text variant="titleMedium" style={{}}>
             {currentPlaylist.title}
           </Text>
@@ -45,7 +51,7 @@ export default ({ searchText, setSearchText, search = false }: props) => {
               )
             )}`}
           </Text>
-        </View>
+        </Pressable>
       )}
     </View>
   );

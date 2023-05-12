@@ -43,6 +43,8 @@ export default (props: any) => {
       () => removePlaylist(playlistId)
     );
   };
+  // TODO: you dont have to use draweritem. you can use a typical list.
+  // then convert this to a dnd list!!!
   return (
     <DrawerContentScrollView {...props}>
       <DrawerItemList {...props} />

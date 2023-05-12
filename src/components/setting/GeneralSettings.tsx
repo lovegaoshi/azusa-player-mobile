@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { View, Text, Switch } from 'react-native';
+import { View, Text, Switch, Pressable } from 'react-native';
 import { useNoxSetting } from '../../hooks/useSetting';
 
 export default () => {
@@ -22,23 +22,22 @@ export default () => {
     settingName: string,
     reRender = false
   ) => {
+    const onToggle = () => {
+      saveSettings({ [settingName]: !playerSetting[settingName] });
+      if (reRender) {
+        togglePlaylistShouldReRender();
+      }
+    };
+
     return (
       <View style={{ flexDirection: 'row', paddingVertical: 10 }}>
         <View style={{ flex: 1, paddingTop: 10, paddingRight: 10 }}>
-          <Switch
-            value={playerSetting[settingName]}
-            onValueChange={() => {
-              saveSettings({ [settingName]: !playerSetting[settingName] });
-              if (reRender) {
-                togglePlaylistShouldReRender();
-              }
-            }}
-          />
+          <Switch value={playerSetting[settingName]} onValueChange={onToggle} />
         </View>
-        <View style={{ flex: 5 }}>
+        <Pressable style={{ flex: 5 }} onPress={onToggle}>
           <Text style={{ fontSize: 20, color: 'black' }}>{name}</Text>
           <Text style={{ fontSize: 15, color: 'grey' }}>{desc}</Text>
-        </View>
+        </Pressable>
       </View>
     );
   };
