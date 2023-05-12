@@ -1,7 +1,7 @@
 import { StyleSheet } from 'react-native';
 import noxTheme from './styles/nox';
 import azusaTheme from './styles/azusa';
-import { notNullDefault as nd } from '../utils/Utils';
+import { notNullDefault as nd, randomChoice } from '../utils/Utils';
 
 export const createStyle = (customStyle = azusaTheme) => {
   const refTheme = azusaTheme; // customStyle.lightTheme ? azusaTheme : noxTheme;
@@ -43,6 +43,10 @@ export const createStyle = (customStyle = azusaTheme) => {
         refTheme.playlistDrawerBackgroundColor
       ),
     },
+    gifs: nd(customStyle.gifs, refTheme.gifs),
+    bkgrdImg: randomChoice(
+      nd(customStyle.backgroundImages, refTheme.backgroundImages)
+    ),
   });
 };
 
