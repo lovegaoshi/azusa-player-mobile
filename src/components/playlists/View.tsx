@@ -5,9 +5,9 @@ import {
   DrawerItemList,
 } from '@react-navigation/drawer';
 import { v4 as uuidv4 } from 'uuid';
-import { IconButton, Divider } from 'react-native-paper';
+import { IconButton, Divider, Text } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
-import { Pressable } from 'react-native';
+import { Pressable, View } from 'react-native';
 import { useNoxSetting } from '../../hooks/useSetting';
 import { ViewEnum } from '../../enums/View';
 import AddPlaylistButton from '../buttons/AddPlaylistButton';
@@ -128,6 +128,11 @@ export default (props: any) => {
           key={uuidv4()}
         />
       ))}
+      <View>
+        <Text style={{ textAlign: 'center', paddingBottom: 20 }}>
+          {`${playerStyle.metaData.themeName} @ 0.0.1 alpha`}
+        </Text>
+      </View>
     </DrawerContentScrollView>
   );
 };

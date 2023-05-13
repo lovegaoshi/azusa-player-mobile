@@ -1,11 +1,12 @@
 import { StyleSheet } from 'react-native';
-import noxTheme from './styles/nox';
-import azusaTheme from './styles/azusa';
+import NoxTheme from './styles/NoxTheme';
+import AzusaTheme from './styles/AzusaTheme';
 import { notNullDefault as nd, randomChoice } from '../utils/Utils';
 
-export const createStyle = (customStyle = azusaTheme) => {
-  const refTheme = azusaTheme; // customStyle.lightTheme ? azusaTheme : noxTheme;
+export const createStyle = (customStyle = AzusaTheme) => {
+  const refTheme = AzusaTheme; // customStyle.lightTheme ? azusaTheme : noxTheme;
   return StyleSheet.create({
+    metaData: { ...refTheme.metaData, ...nd(customStyle.metaData, {}) },
     screenContainer: {
       flex: 1,
       backgroundColor: nd(

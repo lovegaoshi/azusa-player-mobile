@@ -2,7 +2,7 @@ import style from './styleInterface';
 
 export default {
   metaData: {
-    themeName: 'Azusa Theme',
+    themeName: '电梓播放器',
     themeDesc: 'Azusa Theme',
     themeAuthor: 'nek@bilibili',
     themeIcon:

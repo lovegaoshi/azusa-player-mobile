@@ -2,7 +2,7 @@ import style from './styleInterface';
 
 export default {
   metaData: {
-    themeName: 'Nox Theme',
+    themeName: '电闹播放器',
     themeDesc: 'Nox Theme',
     themeAuthor: 'lovegaoshi@github',
     themeIcon:
