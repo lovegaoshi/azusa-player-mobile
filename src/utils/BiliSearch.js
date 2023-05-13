@@ -77,7 +77,13 @@ const extractBiliFavList = ({
  * @param {boolean} useBiliTag
  * @returns
  */
-const reExtractSearch = async (url, progressEmitter, favList, useBiliTag) => {
+const reExtractSearch = async ({
+  url,
+  progressEmitter,
+  favList,
+  useBiliTag,
+  fastSearch,
+}) => {
   const reExtractions = [
     [
       /space.bilibili\.com\/(\d+)\/channel\/seriesdetail\?sid=(\d+)/,
@@ -108,7 +114,7 @@ const reExtractSearch = async (url, progressEmitter, favList, useBiliTag) => {
       });
     }
   }
-  return await getBilSearchList({ mid: url, progressEmitter });
+  return await getBilSearchList({ mid: url, progressEmitter, fastSearch });
 };
 
 /**
@@ -121,15 +127,17 @@ export const searchBiliURLs = async ({
   progressEmitter = () => void 0,
   favList = [],
   useBiliTag = false,
+  fastSearch = false,
 }) => {
   let results = [];
   try {
-    results = await reExtractSearch(
-      input,
+    results = await reExtractSearch({
+      url: input,
       progressEmitter,
       favList,
-      useBiliTag
-    );
+      useBiliTag,
+      fastSearch,
+    });
   } catch (err) {
     console.warn(err);
   }

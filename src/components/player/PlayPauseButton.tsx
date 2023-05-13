@@ -21,9 +21,7 @@ export const PlayPauseButton: React.FC<{
   const showPause = playWhenReady && !(isErrored || isEnded);
   const showBuffering = playWhenReady && isLoading;
   return showBuffering ? (
-    <View style={styles.statusContainer}>
-      <ActivityIndicator size={50} />
-    </View>
+    <ActivityIndicator size={50} />
   ) : (
     <IconButton
       icon={showPause ? 'pause' : 'play'}

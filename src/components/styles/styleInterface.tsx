@@ -2,6 +2,7 @@ interface metaData {
   themeName: string;
   themeDesc: string;
   themeAuthor: string;
+  themeIcon: string;
 }
 export default interface style {
   metaData: metaData;

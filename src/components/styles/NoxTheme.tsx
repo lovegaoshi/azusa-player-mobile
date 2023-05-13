@@ -2,9 +2,11 @@ import style from './styleInterface';
 
 export default {
   metaData: {
-    themeName: 'Nox Theme',
+    themeName: '电闹播放器',
     themeDesc: 'Nox Theme',
     themeAuthor: 'lovegaoshi@github',
+    themeIcon:
+      'https://i1.hdslb.com/bfs/face/aeeae5b4ca9105419f562a105e6513249f9e30db.jpg',
   },
   lightTheme: false,
   screenBackgroundColor: 'grey',

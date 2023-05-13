@@ -14,6 +14,7 @@ enum ICONS {
   // TODO: need to figure out bili SESSIONDATA first before implementing this.
   // though a good time to think about oauth2 now
   BACKUP = 'cloud-upload',
+  INFO = 'information',
 }
 
 enum VIEW {
@@ -61,6 +62,13 @@ export default () => {
             left={props => <IconButton icon={ICONS.BACKUP} size={40} />}
             title="Playlist Backup"
             description="Backup your playlists."
+            onPress={() => navigation.navigate(VIEW.DUMMY)}
+            style={{}}
+          />
+          <List.Item
+            left={props => <IconButton icon={ICONS.INFO} size={40} />}
+            title="Info"
+            description="Info about the app."
             onPress={() => navigation.navigate(VIEW.DUMMY)}
             style={{}}
           />

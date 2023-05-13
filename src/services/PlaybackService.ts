@@ -56,9 +56,10 @@ export async function PlaybackService() {
       (event.track.url === NULL_TRACK.url ||
         new Date().getTime() - event.track.urlRefreshTimeStamp > 3600000)
     ) {
-      // HACK: I would like to put this out, but resolveUrl will trigger
-      // another activeTrackChanged event and would duplicate heartbeat reqs,
-      // likely resulting in bans...
+      // HACK: what if cid needs to be resolved on the fly?
+      // TODO: its too much of a hassle and I would like to just
+      // ask users to refresh their lists instead, if they really care
+      // about sending heartbeats.
       initBiliHeartbeat({
         bvid: event.track.song.bvid,
         cid: event.track.song.id,

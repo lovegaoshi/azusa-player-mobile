@@ -58,14 +58,14 @@ const styles = StyleSheet.create({
   artwork: {
     width: albumArtSize,
     height: albumArtSize,
-    marginTop: 30,
+    marginTop: 15,
     backgroundColor: 'grey',
   },
   titleText: {
     fontSize: 18,
     fontWeight: '600',
     color: 'grey',
-    marginTop: 25,
+    marginTop: 15,
   },
   artistText: {
     fontSize: 16,

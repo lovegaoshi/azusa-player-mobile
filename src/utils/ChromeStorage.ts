@@ -50,6 +50,9 @@ export interface PlayerSettingDict {
   loadPlaylistAsArtist: boolean;
   sendBiliHeartbeat: boolean;
   noCookieBiliSearch: boolean;
+  // TODO: implement this feature
+  dataSaver: boolean;
+  fastBiliSearch: boolean;
   [key: string]: any;
 }
 
@@ -77,6 +80,8 @@ export const DEFAULT_SETTING: PlayerSettingDict = {
   sendBiliHeartbeat: false,
   noCookieBiliSearch: false,
   playerRepeat: NoxRepeatMode,
+  dataSaver: false,
+  fastBiliSearch: false,
 };
 
 export const saveItem = async (key: string, value: any) => {
@@ -178,7 +183,7 @@ export const savePlaylistIds = async (val: string[]) =>
   saveItem(STORAGE_KEYS.MY_FAV_LIST_KEY, val);
 
 export const savePlayerSkin = async (val: style) =>
-saveItem(STORAGE_KEYS.SKIN, val);
+  saveItem(STORAGE_KEYS.SKIN, val);
 
 export const addPlaylist = async (
   playlist: Playlist,
@@ -217,10 +222,10 @@ export const savePlayMode = async (val: string) =>
 export const initPlayerObject = async (): Promise<PlayerStorageObject> => {
   // eslint-disable-next-line prefer-const
   let playerObject = {
-    settings: notNullDefault(
-      await getItem(STORAGE_KEYS.PLAYER_SETTING_KEY),
-      DEFAULT_SETTING
-    ),
+    settings: {
+      ...DEFAULT_SETTING,
+      ...notNullDefault(await getItem(STORAGE_KEYS.PLAYER_SETTING_KEY), {}),
+    },
     playlistIds: notNullDefault(
       await getItem(STORAGE_KEYS.MY_FAV_LIST_KEY),
       []
@@ -242,10 +247,7 @@ export const initPlayerObject = async (): Promise<PlayerStorageObject> => {
       await getItem(STORAGE_KEYS.PLAYMODE_KEY),
       NoxRepeatMode.SHUFFLE
     ),
-    skin: notNullDefault(
-      await getItem(STORAGE_KEYS.SKIN),
-      {}
-    ),
+    skin: notNullDefault(await getItem(STORAGE_KEYS.SKIN), {}),
   } as PlayerStorageObject;
 
   playerObject.playlists[STORAGE_KEYS.SEARCH_PLAYLIST_KEY] =

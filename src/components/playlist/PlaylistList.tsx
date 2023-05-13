@@ -51,6 +51,8 @@ export default () => {
   const [searchText, setSearchText] = useState('');
   const [refreshing, setRefreshing] = useState(false);
 
+  const playlistRef = React.useRef<any>(null);
+
   const resetSelected = (val = false) =>
     setSelected(Array(currentPlaylist.songList.length).fill(val));
 
@@ -118,10 +120,9 @@ export default () => {
    * @returns
    */
   const getSongIndex = (item: Song, index: number) => {
-    if (currentRows !== currentPlaylist.songList) {
-      return currentPlaylist.songList.findIndex(row => row.id === item.id);
-    }
-    return index;
+    return currentRows === currentPlaylist.songList
+      ? index
+      : currentPlaylist.songList.findIndex(row => row.id === item.id);
   };
 
   const searchAndEnableSearch = (val: string) => {
@@ -133,6 +134,7 @@ export default () => {
   // TODO: can i somehow shove most of these into an async promise, then
   // use a boolean flag to make a loading screen?
   const playSong = async (song: Song) => {
+    await TrackPlayer.pause();
     const skipNPlay = (index: number) => {
       TrackPlayer.skip(index).then(() => TrackPlayer.play());
     };
@@ -185,6 +187,21 @@ export default () => {
     setRefreshing(false);
   };
 
+  const scrollTo = (toIndex = -1) => {
+    const currentIndex =
+      toIndex < 0
+        ? currentPlaylist.songList.findIndex(
+            song => song.id === currentPlayingId
+          )
+        : toIndex;
+    if (currentIndex > -1) {
+      playlistRef.current.scrollToIndex({
+        index: currentIndex,
+        viewPosition: 0.5,
+      });
+    }
+  };
+
   useEffect(() => {
     if (
       playerSetting.autoRSSUpdate &&
@@ -229,6 +246,7 @@ export default () => {
           search={searching}
           searchText={searchText}
           setSearchText={setSearchText}
+          onPressed={() => scrollTo()}
         />
         <View
           style={{
@@ -268,6 +286,7 @@ export default () => {
         }}
       >
         <FlashList
+          ref={ref => (playlistRef.current = ref)}
           data={currentRows}
           renderItem={({ item, index }) => (
             <SongInfo
@@ -276,12 +295,12 @@ export default () => {
               currentPlaying={item.id === currentPlayingId}
               playSong={playSong}
               checking={checking}
-              checkedProp={selected[getSongIndex(item, index)]}
+              checkedList={selected}
               onChecked={() => toggleSelected(getSongIndex(item, index))}
             />
           )}
-          keyExtractor={item => item.id}
-          estimatedItemSize={20}
+          keyExtractor={(item, index) => `${item.id}.${index}`}
+          estimatedItemSize={10}
           extraData={shouldReRender}
           onRefresh={refreshPlaylist}
           refreshing={refreshing}
