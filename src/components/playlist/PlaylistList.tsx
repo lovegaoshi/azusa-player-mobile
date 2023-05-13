@@ -120,10 +120,9 @@ export default () => {
    * @returns
    */
   const getSongIndex = (item: Song, index: number) => {
-    if (currentRows !== currentPlaylist.songList) {
-      return currentPlaylist.songList.findIndex(row => row.id === item.id);
-    }
-    return index;
+    return currentRows === currentPlaylist.songList
+      ? index
+      : currentPlaylist.songList.findIndex(row => row.id === item.id);
   };
 
   const searchAndEnableSearch = (val: string) => {
@@ -295,12 +294,12 @@ export default () => {
               currentPlaying={item.id === currentPlayingId}
               playSong={playSong}
               checking={checking}
-              checkedProp={selected[getSongIndex(item, index)]}
+              checkedList={selected}
               onChecked={() => toggleSelected(getSongIndex(item, index))}
             />
           )}
           keyExtractor={item => item.id}
-          estimatedItemSize={20}
+          estimatedItemSize={10}
           extraData={shouldReRender}
           onRefresh={refreshPlaylist}
           refreshing={refreshing}
