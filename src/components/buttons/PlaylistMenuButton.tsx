@@ -6,7 +6,7 @@ import { GestureResponderEvent } from 'react-native';
 
 const ICON = 'dots-horizontal';
 
-export default () => {
+export default ({ disabled = false }) => {
   const [dialogOpen, setDialogOpen] = useState(false);
   const [menuCoords, setMenuCoords] = useState<coordinates>({ x: 0, y: 0 });
 
@@ -24,7 +24,12 @@ export default () => {
 
   return (
     <React.Fragment>
-      <IconButton icon={ICON} onPress={handlePress} size={25} />
+      <IconButton
+        icon={ICON}
+        onPress={handlePress}
+        size={25}
+        disabled={disabled}
+      />
       <Dialog
         visible={dialogOpen}
         toggleVisible={toggleVisible}
