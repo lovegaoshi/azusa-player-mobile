@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { View, Text, Switch, Pressable } from 'react-native';
+import { TouchableRipple } from 'react-native-paper';
 import { useNoxSetting } from '../../hooks/useSetting';
 
 export default () => {
@@ -30,15 +31,26 @@ export default () => {
     };
 
     return (
-      <View style={{ flexDirection: 'row', paddingVertical: 10 }}>
-        <View style={{ flex: 1, paddingTop: 10, paddingRight: 10 }}>
-          <Switch value={playerSetting[settingName]} onValueChange={onToggle} />
+      <TouchableRipple onPress={onToggle} style={{ paddingHorizontal: 10 }}>
+        <View style={{ flexDirection: 'row', paddingVertical: 10 }}>
+          <View style={{ flex: 5 }}>
+            <Text style={{ fontSize: 20, color: 'black' }}>{name}</Text>
+            <Text style={{ fontSize: 15, color: 'grey' }}>{desc}</Text>
+          </View>
+          <View
+            style={{
+              flex: 1,
+              paddingTop: 10,
+              alignItems: 'flex-end',
+            }}
+          >
+            <Switch
+              value={playerSetting[settingName]}
+              onValueChange={onToggle}
+            />
+          </View>
         </View>
-        <Pressable style={{ flex: 5 }} onPress={onToggle}>
-          <Text style={{ fontSize: 20, color: 'black' }}>{name}</Text>
-          <Text style={{ fontSize: 15, color: 'grey' }}>{desc}</Text>
-        </Pressable>
-      </View>
+      </TouchableRipple>
     );
   };
 
@@ -64,6 +76,16 @@ export default () => {
         'Hide album cover',
         'Hide the album cover.',
         'hideCoverInMobile'
+      )}
+      {booleanSetting(
+        'Data Saver',
+        'Render low quality assets to save data.',
+        'dataSaver'
+      )}
+      {booleanSetting(
+        'Fast Bilibili Search',
+        'Do not search for bilibili video episodes.',
+        'fastBiliSearch'
       )}
     </View>
   );
