@@ -278,9 +278,10 @@ export const getBilSearchList = async ({
   mid,
   progressEmitter = () => void 0,
   useBiliTag = false,
+  fastSearch = false,
 }) => {
   return getSongsFromBVids({
-    infos: await fetchBiliSearchList(mid, progressEmitter),
+    infos: await fetchBiliSearchList(mid, progressEmitter, fastSearch),
     useBiliTag,
   });
 };

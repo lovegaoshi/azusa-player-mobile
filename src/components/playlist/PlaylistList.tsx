@@ -134,6 +134,7 @@ export default () => {
   // TODO: can i somehow shove most of these into an async promise, then
   // use a boolean flag to make a loading screen?
   const playSong = async (song: Song) => {
+    await TrackPlayer.pause();
     const skipNPlay = (index: number) => {
       TrackPlayer.skip(index).then(() => TrackPlayer.play());
     };
@@ -298,7 +299,7 @@ export default () => {
               onChecked={() => toggleSelected(getSongIndex(item, index))}
             />
           )}
-          keyExtractor={item => item.id}
+          keyExtractor={(item, index) => `${item.id}.${index}`}
           estimatedItemSize={10}
           extraData={shouldReRender}
           onRefresh={refreshPlaylist}

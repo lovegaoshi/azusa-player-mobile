@@ -16,6 +16,7 @@ export default ({
   const searchPlaylist = useNoxSetting(state => state.searchPlaylist);
   const setSearchPlaylist = useNoxSetting(state => state.setSearchPlaylist);
   const setCurrentPlaylist = useNoxSetting(state => state.setCurrentPlaylist);
+  const playerSetting = useNoxSetting(state => state.playerSetting);
 
   const handleSearch = async (val = searchVal) => {
     progressEmitter(100);
@@ -24,6 +25,7 @@ export default ({
       progressEmitter,
       favList: [],
       useBiliTag: false,
+      fastSearch: playerSetting.fastBiliSearch,
     })) as Array<Song>;
     onSearched(searchedResult);
     const newSearchPlaylist = {
