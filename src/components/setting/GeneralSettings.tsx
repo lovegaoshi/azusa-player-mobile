@@ -34,7 +34,7 @@ export default () => {
     return (
       <TouchableRipple onPress={onToggle} style={{ paddingHorizontal: 10 }}>
         <View style={{ flexDirection: 'row', paddingVertical: 10 }}>
-          <View style={{ flex: 5 }}>
+          <View style={{ flex: 5, paddingLeft: 5 }}>
             <Text style={{ fontSize: 20, color: playerStyle.colors.primary }}>
               {name}
             </Text>

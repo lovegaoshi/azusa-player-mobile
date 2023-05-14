@@ -2,11 +2,13 @@ import {
   createNativeStackNavigator,
   NativeStackNavigationProp,
 } from '@react-navigation/native-stack';
-import { View, Text } from 'react-native';
-import { ParamListBase } from '@react-navigation/native';
-import { List, MD3Colors, IconButton } from 'react-native-paper';
+import { View } from 'react-native';
+import { ParamListBase, useNavigation } from '@react-navigation/native';
+import { List, MD3Colors, IconButton, Text } from 'react-native-paper';
 import GeneralSettings from './GeneralSettings';
+import SkinSettings from './SkinSettings';
 import { useNoxSetting } from '../../hooks/useSetting';
+import { ViewEnum } from '../../enums/View';
 
 enum ICONS {
   HOME = 'cog',
@@ -22,28 +24,41 @@ enum VIEW {
   HOME = 'Settings',
   DUMMY = 'Features not implemented',
   GENERAL = 'General',
+  SKIN = 'Skins',
 }
 
 const Stack = createNativeStackNavigator();
 
 export default () => {
+  const navigation = useNavigation();
   const playerStyle = useNoxSetting(state => state.playerStyle);
 
-  function DummySettings() {
+  const DummySettings = () => {
     return (
-      <View style={{ justifyContent: 'center', alignItems: 'center' }}>
-        <Text style={{ fontSize: 60, color: 'black' }}>
+      <View
+        style={{
+          backgroundColor: playerStyle.customColors.maskedBackgroundColor,
+          flex: 1,
+        }}
+      >
+        <Text
+          style={{
+            fontSize: 60,
+            color: playerStyle.colors.primary,
+            paddingLeft: 20,
+          }}
+        >
           Feature not implemented
         </Text>
       </View>
     );
-  }
+  };
 
-  function HomeSettings({
+  const HomeSettings = ({
     navigation,
   }: {
     navigation: NativeStackNavigationProp<ParamListBase>;
-  }) {
+  }) => {
     return (
       <View
         style={{
@@ -65,7 +80,7 @@ export default () => {
             left={props => <IconButton icon={ICONS.SKIN} size={40} />}
             title="Skins"
             description="Choose your skin."
-            onPress={() => navigation.navigate(VIEW.DUMMY)}
+            onPress={() => navigation.navigate(VIEW.SKIN)}
             style={{}}
             titleStyle={{ color: playerStyle.colors.primary }}
             descriptionStyle={{ color: playerStyle.colors.secondary }}
@@ -91,13 +106,28 @@ export default () => {
         </List.Section>
       </View>
     );
-  }
+  };
 
   return (
     <Stack.Navigator screenOptions={{ headerBackVisible: true }}>
-      <Stack.Screen name={VIEW.HOME} component={HomeSettings} />
+      <Stack.Screen
+        name={VIEW.HOME}
+        component={HomeSettings}
+        options={{
+          // TODO: is there a non retarded way to do this?
+          headerLeft: () => (
+            <IconButton
+              icon="arrow-left"
+              size={25}
+              style={{ paddingRight: 20 }}
+              onPress={() => navigation.navigate(ViewEnum.PLAYER_HOME as never)}
+            />
+          ),
+        }}
+      />
       <Stack.Screen name={VIEW.DUMMY} component={DummySettings} />
       <Stack.Screen name={VIEW.GENERAL} component={GeneralSettings} />
+      <Stack.Screen name={VIEW.SKIN} component={SkinSettings} />
     </Stack.Navigator>
   );
 };

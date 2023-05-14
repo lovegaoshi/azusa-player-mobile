@@ -282,7 +282,7 @@ export default () => {
             />
           )}
           <IconButton
-            icon="playlist-edit"
+            icon="select"
             onPress={() => setChecking(val => !val)}
             size={25}
           />

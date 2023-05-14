@@ -3,7 +3,7 @@ import style from './styleInterface';
 export default {
   metaData: {
     themeName: '电闹播放器',
-    themeDesc: 'Nox Theme',
+    themeDesc: '关注生草精灵诺莺Nox直播间 282208!',
     themeAuthor: 'lovegaoshi@github',
     themeIcon:
       'https://i1.hdslb.com/bfs/face/aeeae5b4ca9105419f562a105e6513249f9e30db.jpg',
