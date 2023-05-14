@@ -1,5 +1,6 @@
 import * as React from 'react';
-import { View, Text, Switch } from 'react-native';
+import { View, Text, Switch, Pressable } from 'react-native';
+import { TouchableRipple } from 'react-native-paper';
 import { useNoxSetting } from '../../hooks/useSetting';
 
 export default () => {
@@ -22,24 +23,34 @@ export default () => {
     settingName: string,
     reRender = false
   ) => {
+    const onToggle = () => {
+      saveSettings({ [settingName]: !playerSetting[settingName] });
+      if (reRender) {
+        togglePlaylistShouldReRender();
+      }
+    };
+
     return (
-      <View style={{ flexDirection: 'row', paddingVertical: 10 }}>
-        <View style={{ flex: 1, paddingTop: 10, paddingRight: 10 }}>
-          <Switch
-            value={playerSetting[settingName]}
-            onValueChange={() => {
-              saveSettings({ [settingName]: !playerSetting[settingName] });
-              if (reRender) {
-                togglePlaylistShouldReRender();
-              }
+      <TouchableRipple onPress={onToggle} style={{ paddingHorizontal: 10 }}>
+        <View style={{ flexDirection: 'row', paddingVertical: 10 }}>
+          <View style={{ flex: 5 }}>
+            <Text style={{ fontSize: 20, color: 'black' }}>{name}</Text>
+            <Text style={{ fontSize: 15, color: 'grey' }}>{desc}</Text>
+          </View>
+          <View
+            style={{
+              flex: 1,
+              paddingTop: 10,
+              alignItems: 'flex-end',
             }}
-          />
+          >
+            <Switch
+              value={playerSetting[settingName]}
+              onValueChange={onToggle}
+            />
+          </View>
         </View>
-        <View style={{ flex: 5 }}>
-          <Text style={{ fontSize: 20, color: 'black' }}>{name}</Text>
-          <Text style={{ fontSize: 15, color: 'grey' }}>{desc}</Text>
-        </View>
-      </View>
+      </TouchableRipple>
     );
   };
 
@@ -65,6 +76,16 @@ export default () => {
         'Hide album cover',
         'Hide the album cover.',
         'hideCoverInMobile'
+      )}
+      {booleanSetting(
+        'Data Saver',
+        'Render low quality assets to save data.',
+        'dataSaver'
+      )}
+      {booleanSetting(
+        'Fast Bilibili Search',
+        'Do not search for bilibili video episodes.',
+        'fastBiliSearch'
       )}
     </View>
   );

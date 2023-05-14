@@ -3,6 +3,7 @@
 // TODO: migrate to ts; Im working with data.ts.template but doing a poor job.
 
 import Bottleneck from 'bottleneck';
+import { v4 as uuidv4 } from 'uuid';
 import VideoInfo from '../objects/VideoInfo';
 import { extractSongName } from './re';
 import bfetch from './BiliFetch';
@@ -176,7 +177,9 @@ export const fetchVideoPlayUrlPromise = async (
   cid,
   extractType = 'AudioUrl'
 ) => {
-  if (!cid) {
+  // HACK:  this should be a breaking change that stringified cid
+  // will never be not true.
+  if (!cid || cid.includes('null')) {
     cid = await fetchCID(bvid).catch(err => console.error(err));
   }
 
@@ -403,15 +406,13 @@ export const fetchBiliSeriesList = async (
   return (await Promise.all(BVidPromises)).filter(item => item !== undefined);
 };
 
-export const fetchiliBVIDs = async (BVids, progressEmitter = () => { }) => {
-  const BVidPromises = [];
-  for (let index = 0, n = BVids.length; index < n; index++) {
-    BVidPromises.push(
-      fetchVideoInfo(BVids[index], () => {
-        progressEmitter(parseInt((100 * (index + 1)) / n));
-      })
-    );
-  }
+export const fetchiliBVIDs = async (BVids, progressEmitter = () => {}) => {
+  const BVidLen = BVids.length;
+  const BVidPromises = BVids.map((bvid, index) =>
+    fetchVideoInfo(bvid, () =>
+      progressEmitter(parseInt((100 * (index + 1)) / BVidLen))
+    )
+  );
   return await Promise.all(BVidPromises);
 };
 
@@ -426,7 +427,7 @@ export const fetchiliBVIDs = async (BVids, progressEmitter = () => { }) => {
  * @param {array} favList
  * @returns
  */
-export const fetchBiliPaginatedAPI = async (
+export const fetchBiliPaginatedAPI = async ({
   url,
   getMediaCount,
   getPageSize,
@@ -434,8 +435,13 @@ export const fetchBiliPaginatedAPI = async (
   progressEmitter,
   favList = [],
   limiter = biliTagApiLimiter,
-  params = undefined
-) => {
+  params = undefined,
+  resolveBiliBVID = async (bvobjs, progressEmitter) =>
+    await fetchiliBVIDs(
+      bvobjs.map(obj => obj.bvid),
+      progressEmitter
+    ),
+}) => {
   const res = await bfetch(url.replace('{pn}', 1), params);
   const { data } = await extract509Json(res.clone());
   const mediaCount = getMediaCount(data);
@@ -456,7 +462,7 @@ export const fetchBiliPaginatedAPI = async (
       return extract509Json(pages)
         .then(parsedJson => {
           getItems(parsedJson).forEach(m => {
-            if (!favList.includes(m.bvid)) BVids.push(m.bvid);
+            if (!favList.includes(m.bvid)) BVids.push(m);
           });
         })
         .catch(err => {
@@ -466,7 +472,7 @@ export const fetchBiliPaginatedAPI = async (
     })
   );
   // i dont know the smart way to do this out of the async loop, though luckily that O(2n) isnt that big of a deal
-  return (await fetchiliBVIDs(BVids, progressEmitter)).filter(
+  return (await resolveBiliBVID(BVids, progressEmitter)).filter(
     item => item !== undefined
   );
 };
@@ -543,14 +549,14 @@ export const fetchBiliColleList = async (
 ) => {
   logger.info('calling fetchBiliColleList');
 
-  return fetchBiliPaginatedAPI(
-    URL_BILICOLLE_INFO.replace('{mid}', mid).replace('{sid}', sid),
-    data => data.meta.total,
-    data => data.page.page_size,
-    js => js.data.archives,
+  return fetchBiliPaginatedAPI({
+    url: URL_BILICOLLE_INFO.replace('{mid}', mid).replace('{sid}', sid),
+    getMediaCount: data => data.meta.total,
+    getPageSize: data => data.page.page_size,
+    getItems: js => js.data.archives,
     progressEmitter,
-    favList
-  );
+    favList,
+  });
 };
 
 /**
@@ -576,14 +582,14 @@ export const fetchBiliChannelList = async (
     // TODO: do this properly with another URLSearchParams instance
     searchAPI += `&tid=${String(tidVal[1])}`;
   }
-  return fetchBiliPaginatedAPI(
-    searchAPI,
-    data => data.page.count,
-    data => data.page.ps,
-    js => js.data.list.vlist,
+  return fetchBiliPaginatedAPI({
+    url: searchAPI,
+    getMediaCount: data => data.page.count,
+    getPageSize: data => data.page.ps,
+    getItems: js => js.data.list.vlist,
     progressEmitter,
-    favList
-  );
+    favList,
+  });
 };
 
 /**
@@ -598,14 +604,14 @@ export const fetchBiliChannelList = async (
 export const fetchFavList = async (mid, progressEmitter, favList = []) => {
   logger.info('calling fetchFavList');
 
-  return fetchBiliPaginatedAPI(
-    URL_FAV_LIST.replace('{mid}', mid),
-    data => data.info.media_count,
-    () => 20,
-    js => js.data.medias,
+  return fetchBiliPaginatedAPI({
+    url: URL_FAV_LIST.replace('{mid}', mid),
+    getMediaCount: data => data.info.media_count,
+    getPageSize: () => 20,
+    getItems: js => js.data.medias,
     progressEmitter,
-    favList
-  );
+    favList,
+  });
 };
 
 /**
@@ -616,28 +622,81 @@ export const fetchFavList = async (mid, progressEmitter, favList = []) => {
  * @param {function} progressEmitter
  * @returns
  */
-export const fetchBiliSearchList = async (kword, progressEmitter) => {
+export const fetchBiliSearchList = async (
+  kword,
+  progressEmitter,
+  fastSearch = false
+) => {
+  function timestampToSeconds(timestamp) {
+    const timeArray = timestamp.split(':').map(parseFloat);
+    let seconds = 0;
+    if (timeArray.length === 1) {
+      // check if both hours and minutes components are missing
+      seconds = timeArray[0]; // the timestamp only contains seconds
+    } else if (timeArray.length === 2) {
+      // check if hours component is missing
+      seconds = timeArray[0] * 60 + timeArray[1]; // calculate seconds from minutes and seconds
+    } else if (timeArray.length === 3) {
+      seconds = timeArray[0] * 3600 + timeArray[1] * 60 + timeArray[2]; // calculate total seconds
+    }
+    return seconds;
+  }
+
+  const fastSearchResolveBVID = async bvobjs => {
+    /**
+     * cids should be resolved at this stage,
+     * or on the fly using fetchCID. the latter saves
+     * search time but now song.id loses identification.
+    const resolvedCIDs = await Promise.all(
+      bvobjs.map(obj => fetchCID(obj.bvid))
+    );
+     */
+    return bvobjs.map(
+      (obj, index) =>
+        new VideoInfo(
+          obj.title.replaceAll(/<[^<>]*em[^<>]*>/g, ''),
+          obj.description,
+          1,
+          `https:${obj.pic}`,
+          { mid: obj.mid, name: obj.author, face: obj.upic },
+          [
+            {
+              bvid: obj.bvid,
+              part: 1,
+              cid: `null-${uuidv4()}`, // resolvedCids[index]
+              duration: timestampToSeconds(obj.duration),
+            },
+          ],
+          obj.bvid,
+          timestampToSeconds(obj.duration)
+        )
+    );
+  };
+
   // this API needs a random buvid3 value, or a valid SESSDATA;
   // otherwise will return error 412. for users didnt login to bilibili,
   // setting a random buvid3 would enable this API.
   let val = [];
   try {
-    val = await fetchBiliPaginatedAPI(
-      URL_BILI_SEARCH.replace('{keyword}', kword),
-      data => Math.min(data.numResults, data.pagesize * 2),
-      data => data.pagesize,
-      js => js.data.result,
+    val = await fetchBiliPaginatedAPI({
+      url: URL_BILI_SEARCH.replace('{keyword}', kword),
+      getMediaCount: data => Math.min(data.numResults, data.pagesize * 2),
+      getPageSize: data => data.pagesize,
+      getItems: js => js.data.result,
       progressEmitter,
-      [],
-      biliTagApiLimiter,
-      {
+      favList: [],
+      limiter: biliApiLimiter,
+      params: {
         method: 'GET',
         headers: {
           referer: 'https://www.bilibili.com',
           cookie: 'buvid3=coolbeans',
         },
-      }
-    );
+      },
+      resolveBiliBVID: fastSearch
+        ? async (bvobjs, progressEmitter) => await fastSearchResolveBVID(bvobjs)
+        : undefined,
+    });
   } catch (e) {
     console.error(e);
   }

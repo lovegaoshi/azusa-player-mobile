@@ -116,8 +116,9 @@ const styles = StyleSheet.create({
   artwork: {
     width: albumArtSize,
     height: albumArtSize,
-    marginTop: 30,
+    marginTop: 15,
     opacity: 1,
+    backgroundColor: 'grey',
   },
   lyric: {
     width: Dimensions.get('window').width,
@@ -127,7 +128,8 @@ const styles = StyleSheet.create({
   titleText: {
     fontSize: 18,
     fontWeight: '600',
-    marginTop: 25,
+    color: 'grey',
+    marginTop: 15,
   },
   artistText: {
     fontSize: 16,

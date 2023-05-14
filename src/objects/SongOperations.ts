@@ -73,6 +73,9 @@ export const removeSongBiliShazamed = (song: SongInterface) => {
 };
 
 export const resolveUrl = async (song: SongInterface) => {
+  // TODO: method is called MULTIPLE times. need to investigate and debounce.
+  // luckily bilibili doesnt seem to care for now
+  console.log('resolve url called');
   try {
     const url = await fetchPlayUrlPromise(song.bvid, song.id);
     return {

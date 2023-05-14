@@ -1,3 +1,4 @@
+import Bottleneck from 'bottleneck';
 import bfetch from './BiliFetch';
 
 const BILI_LIKE_API = 'https://api.bilibili.com/x/web-interface/archive/like';
@@ -9,6 +10,11 @@ const BILI_HEARTBEAT_API =
   'https://api.bilibili.com/x/click-interface/web/heartbeat';
 const BILI_VIDEOINFO_API =
   'https://api.bilibili.com/x/web-interface/view?bvid=';
+
+const bilih5ApiLimiter = new Bottleneck({
+  minTime: 120000,
+  maxConcurrent: 1,
+});
 
 /**
  * see this csdn post.
@@ -24,14 +30,16 @@ export const initBiliHeartbeat = async ({
   cid: string;
 }) => {
   if (Number.isNaN(parseInt(cid, 10))) return;
-  bfetch(BILI_VIDEOPLAY_API, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/x-www-form-urlencoded',
-    },
-    body: new URLSearchParams({
-      bvid,
-      cid,
-    }),
-  });
+  bilih5ApiLimiter.schedule(() =>
+    bfetch(BILI_VIDEOPLAY_API, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      body: new URLSearchParams({
+        bvid,
+        cid,
+      }),
+    })
+  );
 };
