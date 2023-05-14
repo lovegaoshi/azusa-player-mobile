@@ -1,8 +1,18 @@
-import React from 'react';
-import { Image, StyleSheet, Text, View, Dimensions } from 'react-native';
+import React, { useCallback, useState } from 'react';
+import {
+  Image,
+  StyleSheet,
+  Text,
+  View,
+  Dimensions,
+  Animated,
+  TouchableWithoutFeedback,
+} from 'react-native';
+
 import type { Track } from 'react-native-track-player';
 import TrackPlayer from 'react-native-track-player';
 import { useNoxSetting } from '../../hooks/useSetting';
+import { LyricView } from './Lyric';
 
 export const TrackInfo: React.FC<{
   track?: Track;
@@ -11,6 +21,12 @@ export const TrackInfo: React.FC<{
   const currentPlayingList = useNoxSetting(state => state.currentPlayingList);
   const playlists = useNoxSetting(state => state.playlists);
   const [currentTPQueue, setCurrentTPQueue] = React.useState<Track[]>([]);
+  const [isImageVisible, setIsImageVisible] = useState(true);
+  const opacity = new Animated.Value(1);
+
+  const songTitle = useCallback(() => {
+    return currentPlayingList ? playlists[currentPlayingList]?.title : '';
+  }, [currentPlayingList]);
 
   React.useEffect(() => {
     // TODO: when the sliding window queue is implemented, this would just be
@@ -18,32 +34,74 @@ export const TrackInfo: React.FC<{
     TrackPlayer.getQueue().then(setCurrentTPQueue);
   }, [currentPlayingList]);
 
+  const onImagePress = () => {
+    console.log('TrackInfo: Image Clicked');
+    Animated.parallel([
+      Animated.timing(opacity, {
+        toValue: 0,
+        duration: 80,
+        useNativeDriver: true,
+      }),
+    ]).start(() => {
+      console.log('TrackInfo: Setting imagevisible to', !isImageVisible);
+      setIsImageVisible(!isImageVisible);
+    });
+  };
+
   return (
-    <View style={styles.container}>
-      {playerSetting.hideCoverInMobile ? (
-        <></>
-      ) : (
-        <Image style={styles.artwork} source={{ uri: `${track?.artwork}` }} />
+    <>
+      {playerSetting.hideCoverInMobile ? null : (
+        <>
+          <TouchableWithoutFeedback onPress={onImagePress}>
+            <View
+              style={[
+                styles.container,
+                {
+                  opacity: isImageVisible ? 1 : 0,
+                  position: isImageVisible ? 'relative' : 'absolute',
+                },
+              ]}
+              pointerEvents={isImageVisible ? 'auto' : 'none'}
+            >
+              <Animated.Image
+                style={[styles.artwork, { opacity }]}
+                source={{ uri: `${track?.artwork}` }}
+              />
+              <Text style={styles.titleText}>{track?.title}</Text>
+              <Text style={styles.artistText}>{track?.artist}</Text>
+              <Text style={styles.artistText}>{songTitle()}</Text>
+              <Text style={styles.artistText}>
+                {currentPlayingList &&
+                playlists[currentPlayingList] &&
+                track?.song
+                  ? `#${
+                      playlists[currentPlayingList].songList.findIndex(
+                        song => song.id === track.song.id
+                      ) + 1
+                    } - ${
+                      currentTPQueue.findIndex(
+                        song => song?.song?.id === track.song.id
+                      ) + 1
+                    }/${currentTPQueue.length}`
+                  : ''}
+              </Text>
+            </View>
+          </TouchableWithoutFeedback>
+          <View
+            style={[
+              styles.lyric,
+              {
+                opacity: isImageVisible ? 0 : 1,
+                position: isImageVisible ? 'absolute' : 'relative',
+              },
+            ]}
+            pointerEvents={isImageVisible ? 'none' : 'auto'}
+          >
+            <LyricView onLyricPress={onImagePress} title={track?.title} />
+          </View>
+        </>
       )}
-      <Text style={styles.titleText}>{track?.title}</Text>
-      <Text style={styles.artistText}>{track?.artist}</Text>
-      <Text style={styles.artistText}>
-        {currentPlayingList ? playlists[currentPlayingList]?.title : ''}
-      </Text>
-      <Text style={styles.artistText}>
-        {currentPlayingList && playlists[currentPlayingList] && track?.song
-          ? `#${
-              playlists[currentPlayingList].songList.findIndex(
-                song => song.id === track.song.id
-              ) + 1
-            } - ${
-              currentTPQueue.findIndex(
-                song => song?.song?.id === track.song.id
-              ) + 1
-            }/${currentTPQueue.length}`
-          : ''}
-      </Text>
-    </View>
+    </>
   );
 };
 
@@ -59,7 +117,13 @@ const styles = StyleSheet.create({
     width: albumArtSize,
     height: albumArtSize,
     marginTop: 15,
+    opacity: 1,
     backgroundColor: 'grey',
+  },
+  lyric: {
+    width: Dimensions.get('window').width,
+    height: Dimensions.get('window').height,
+    opacity: 1,
   },
   titleText: {
     fontSize: 18,
@@ -70,6 +134,5 @@ const styles = StyleSheet.create({
   artistText: {
     fontSize: 16,
     fontWeight: '200',
-    color: 'grey',
   },
 });
