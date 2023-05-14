@@ -1,10 +1,11 @@
 import * as React from 'react';
-import { View, Text, Switch, Pressable } from 'react-native';
-import { TouchableRipple } from 'react-native-paper';
+import { View, Text, Pressable } from 'react-native';
+import { TouchableRipple, Switch } from 'react-native-paper';
 import { useNoxSetting } from '../../hooks/useSetting';
 
 export default () => {
   const playerSetting = useNoxSetting(state => state.playerSetting);
+  const playerStyle = useNoxSetting(state => state.playerStyle);
   const setPlayerSetting = useNoxSetting(state => state.setPlayerSetting);
   const togglePlaylistShouldReRender = useNoxSetting(
     state => state.togglePlaylistShouldReRender
@@ -34,8 +35,12 @@ export default () => {
       <TouchableRipple onPress={onToggle} style={{ paddingHorizontal: 10 }}>
         <View style={{ flexDirection: 'row', paddingVertical: 10 }}>
           <View style={{ flex: 5 }}>
-            <Text style={{ fontSize: 20, color: 'black' }}>{name}</Text>
-            <Text style={{ fontSize: 15, color: 'grey' }}>{desc}</Text>
+            <Text style={{ fontSize: 20, color: playerStyle.colors.primary }}>
+              {name}
+            </Text>
+            <Text style={{ fontSize: 15, color: playerStyle.colors.secondary }}>
+              {desc}
+            </Text>
           </View>
           <View
             style={{
@@ -55,7 +60,12 @@ export default () => {
   };
 
   return (
-    <View style={{}}>
+    <View
+      style={{
+        backgroundColor: playerStyle.customColors.maskedBackgroundColor,
+        flex: 1,
+      }}
+    >
       {booleanSetting(
         'Daily auto RSS update',
         "Automatically update playlist's subscriptions daily when opened.",

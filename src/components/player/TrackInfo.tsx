@@ -8,6 +8,7 @@ export const TrackInfo: React.FC<{
   track?: Track;
 }> = ({ track }) => {
   const playerSetting = useNoxSetting(state => state.playerSetting);
+  const playerStyle = useNoxSetting(state => state.playerStyle);
   const currentPlayingList = useNoxSetting(state => state.currentPlayingList);
   const playlists = useNoxSetting(state => state.playlists);
   const [currentTPQueue, setCurrentTPQueue] = React.useState<Track[]>([]);
@@ -25,12 +26,16 @@ export const TrackInfo: React.FC<{
       ) : (
         <Image style={styles.artwork} source={{ uri: `${track?.artwork}` }} />
       )}
-      <Text style={styles.titleText}>{track?.title}</Text>
-      <Text style={styles.artistText}>{track?.artist}</Text>
-      <Text style={styles.artistText}>
+      <Text style={[styles.titleText, { color: playerStyle.colors.text }]}>
+        {track?.title}
+      </Text>
+      <Text style={[styles.artistText, { color: playerStyle.colors.text }]}>
+        {track?.artist}
+      </Text>
+      <Text style={[styles.artistText, { color: playerStyle.colors.text }]}>
         {currentPlayingList ? playlists[currentPlayingList]?.title : ''}
       </Text>
-      <Text style={styles.artistText}>
+      <Text style={[styles.artistText, { color: playerStyle.colors.text }]}>
         {currentPlayingList && playlists[currentPlayingList] && track?.song
           ? `#${
               playlists[currentPlayingList].songList.findIndex(

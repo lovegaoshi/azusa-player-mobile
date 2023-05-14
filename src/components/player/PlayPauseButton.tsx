@@ -6,10 +6,12 @@ import TrackPlayer, {
   usePlayWhenReady,
 } from 'react-native-track-player';
 import { useDebouncedValue } from '../../hooks';
+import { useNoxSetting } from '../../hooks/useSetting';
 
 export const PlayPauseButton: React.FC<{
   state: State | undefined;
 }> = ({ state }) => {
+  const playerStyle = useNoxSetting(state => state.playerStyle);
   const playWhenReady = usePlayWhenReady();
   const isLoading = useDebouncedValue(
     state === State.Loading, // || state === State.Buffering
@@ -26,7 +28,7 @@ export const PlayPauseButton: React.FC<{
     <IconButton
       icon={showPause ? 'pause' : 'play'}
       onPress={showPause ? TrackPlayer.pause : TrackPlayer.play}
-      mode="contained"
+      mode={playerStyle.playerControlIconContained}
       size={50}
     />
   );

@@ -12,7 +12,12 @@ const Playlist = () => {
 
   return (
     <SafeAreaView style={playerStyle.screenContainer}>
-      <View style={styles.contentContainer}>
+      <View
+        style={[
+          styles.contentContainer,
+          { backgroundColor: playerStyle.customColors.maskedBackgroundColor },
+        ]}
+      >
         <BiliSearchbar
           onSearched={(songs: Array<Song>) => console.log(songs)}
         />
