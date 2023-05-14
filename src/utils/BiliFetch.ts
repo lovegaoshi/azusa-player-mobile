@@ -21,6 +21,8 @@ export default async function BiliFetch(
   if (!params.headers['User-Agent']) {
     params.headers['User-Agent'] = DEFAULT_UA;
   }
+  // console.log('url:',url)
+  // console.log('params:',params)
   return fetch(url, params);
 }
 
@@ -36,8 +38,14 @@ export const customReqHeader = (
 ) => {
   if (/bilibili/.exec(url) || /bilivideo/.exec(url)) {
     reqHeader.referer = 'https://www.bilibili.com/';
-    reqHeader['User-Agent'] = DEFAULT_UA;
+  } else if (/y.qq.com/.exec(url)) {
+    reqHeader.referer = 'https://y.qq.com/';
+  } else if (/u.qq.com/.exec(url)) {
+    reqHeader.referer = 'https://u.qq.com/';
+  } else if (/i.qq.com/.exec(url)) {
+    reqHeader.referer = 'https://i.qq.com/';
   }
+  reqHeader['User-Agent'] = DEFAULT_UA;
   return reqHeader;
 };
 

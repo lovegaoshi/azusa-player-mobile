@@ -103,6 +103,40 @@ const URL_LRC_BASE =
  */
 const URL_QQ_SEARCH =
   'https://c.y.qq.com/splcloud/fcgi-bin/smartbox_new.fcg?key={KeyWord}';
+
+/**
+ *  QQ SongSearch API POST
+ */
+const URL_QQ_SEARCH_POST = {
+  src: 'https://u.y.qq.com/cgi-bin/musicu.fcg',
+  params: {
+    method: 'POST',
+    headers: {
+      "Content-Type": "application/json",
+      "referer": 'https://u.qq.com/'
+    },
+    body: {
+      comm: {
+        ct: '19',
+        cv: '1859',
+        uin: '0',
+      },
+      req: {
+        method: 'DoSearchForQQMusicDesktop',
+        module: 'music.search.SearchCgiService',
+        param: {
+          grp: 1,
+          num_per_page: 10,
+          page_num: 1,
+          query: '',
+          search_type: 0,
+        },
+      }
+    }
+  },
+}
+
+
 /**
  *  QQ LyricSearchAPI
  */
@@ -184,8 +218,8 @@ const fetchVideoTagPromiseRaw = async ({ bvid, cid }) => {
 
 export const biliAPILimiterWrapper = async (
   params,
-  func = () => {},
-  progressEmit = () => {}
+  func = () => { },
+  progressEmit = () => { }
 ) => {
   return biliApiLimiter.schedule(() => {
     progressEmit();
@@ -292,7 +326,7 @@ export const fetchVideoInfoRaw = async ({ bvid }) => {
  * @param {function} progressEmit
  * @returns
  */
-export const fetchVideoInfo = async (bvid, progressEmit = () => {}) => {
+export const fetchVideoInfo = async (bvid, progressEmit = () => { }) => {
   return biliAPILimiterWrapper({ bvid }, fetchVideoInfoRaw, progressEmit);
 };
 
@@ -369,7 +403,7 @@ export const fetchBiliSeriesList = async (
   return (await Promise.all(BVidPromises)).filter(item => item !== undefined);
 };
 
-export const fetchiliBVIDs = async (BVids, progressEmitter = () => {}) => {
+export const fetchiliBVIDs = async (BVids, progressEmitter = () => { }) => {
   const BVidPromises = [];
   for (let index = 0, n = BVids.length; index < n; index++) {
     BVidPromises.push(
@@ -662,25 +696,30 @@ const extractResponseJson = (json, field) => {
   }
 };
 
-export const searchLyricOptions = async (searchKey, setOptions) => {
-  logger.info('calling searchLyricOptions');
-  if (searchKey === '') {
-    setOptions([]);
-    return;
+export const searchLyricOptions = async (searchKey) => {
+  if (!searchKey) {
+    throw new Error('Search key is required');
   }
-  const res = await bfetch(URL_QQ_SEARCH.replace('{KeyWord}', searchKey));
-  const json = await res.json();
-  const data = json.data.song.itemlist;
-  const slimData = data.map((s, v) => {
-    return {
-      key: s.mid,
-      songMid: s.mid,
-      label: `${v}. ${s.name} / ${s.singer}`,
-    };
-  });
+  logger.info('calling searchLyricOptions:', searchKey);
+  const API = getQQSearchAPI(searchKey)
 
-  setOptions(slimData);
+  const res = await bfetch(API.src, API.params);
+  const json = await res.json();
+
+  const data = json.req.data.body.song.list;
+  return data.map((s, v) => ({
+    key: s.mid,
+    songMid: s.mid,
+    label: `${v}. ${s.name} / ${s.singer[0].name}`,
+  }));
 };
+
+const getQQSearchAPI = (searchKey) => {
+  let API = JSON.parse(JSON.stringify(URL_QQ_SEARCH_POST));
+  API.params.body.req.param.query = searchKey;
+  API.params.body = JSON.stringify(API.params.body);
+  return(API)
+}
 
 export const searchLyric = async (searchMID, setLyric) => {
   logger.info('calling searchLyric');
@@ -697,7 +736,6 @@ export const searchLyric = async (searchMID, setLyric) => {
   if (json.trans) {
     finalLrc = `${json.trans}\n${finalLrc}`;
   }
-
   // console.log(finalLrc)
   setLyric(finalLrc);
 };
