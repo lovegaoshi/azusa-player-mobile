@@ -8008,6 +8008,11 @@ react-native-gradle-plugin@^0.71.16:
   resolved "https://registry.yarnpkg.com/react-native-gradle-plugin/-/react-native-gradle-plugin-0.71.16.tgz#822bb0c680e03b5df5aa65f2e5ffc2bc2930854a"
   integrity sha512-H2BjG2zk7B7Wii9sXvd9qhCVRQYDAHSWdMw9tscmZBqSP62DkIWEQSk4/B2GhQ4aK9ydVXgtqR6tBeg3yy8TSA==
 
+react-native-lyric@^1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/react-native-lyric/-/react-native-lyric-1.0.2.tgz#5ab3de43754610b6beebf1b32ead72f0ffac8da2"
+  integrity sha512-gdzwFkwCkTiQ61/ileW1CVIP3G9pTzE48MNmn/Ltw+dXqakdYRTB9EVUhb6UWO6sWSFaTuGZXjapdwMo3Ss4qw==
+
 react-native-pager-view@^6.2.0:
   version "6.2.0"
   resolved "https://registry.yarnpkg.com/react-native-pager-view/-/react-native-pager-view-6.2.0.tgz#51380d93fbe47f6380dc71d613a787bf27a4ca37"
@@ -8056,6 +8061,10 @@ react-native-tab-view@^3.5.1:
   integrity sha512-qdrS5t+AEhfuKQyuCXkwHu4IVppkuTvzWWlkSZKrPaSkjjIa32xrsGxt1UW9YDdro2w4AMw5hKn1hFmg/5mvzA==
   dependencies:
     use-latest-callback "^0.1.5"
+
+"react-native-track-player@git+https://lovegaoshi@github.com/lovegaoshi/react-native-track-player.git":
+  version "4.0.0-rc03"
+  resolved "git+https://lovegaoshi@github.com/lovegaoshi/react-native-track-player.git#4e1abd5fa05d56e28c73ff7538a2958ac527b41a"
 
 react-native-vector-icons@^9.2.0:
   version "9.2.0"
