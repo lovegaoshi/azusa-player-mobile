@@ -17,6 +17,7 @@ export default ({
   const setSearchPlaylist = useNoxSetting(state => state.setSearchPlaylist);
   const setCurrentPlaylist = useNoxSetting(state => state.setCurrentPlaylist);
   const playerSetting = useNoxSetting(state => state.playerSetting);
+  const playerStyle = useNoxSetting(state => state.playerStyle);
 
   const handleSearch = async (val = searchVal) => {
     progressEmitter(100);
@@ -52,6 +53,9 @@ export default ({
           icon="search-web"
           onPress={() => handleSearch(searchVal)}
           size={30}
+          // TODO: how to color the square?
+          // borderColor: playerStyle.colors.surfaceVariant
+          style={{}}
         />
       </View>
       <ProgressBar

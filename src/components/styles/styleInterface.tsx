@@ -13,6 +13,7 @@ interface customColors {
   progressThumbTintColor: string;
   progressMinimumTrackTintColor: string;
   progressMaximumTrackTintColor: string;
+  btnBackgroundColor: string;
 }
 
 export default interface style {

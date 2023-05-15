@@ -87,12 +87,18 @@ export const PlayerControls: React.FC = () => {
           onPress={onClickPlaymode}
           mode={playerStyle.playerControlIconContained}
           size={30}
+          style={{
+            backgroundColor: playerStyle.customColors.btnBackgroundColor,
+          }}
         />
         <IconButton
           icon="skip-previous"
           onPress={performSkipToPrevious}
           mode={playerStyle.playerControlIconContained}
           size={40}
+          style={{
+            backgroundColor: playerStyle.customColors.btnBackgroundColor,
+          }}
         />
         <PlayPauseButton state={playback.state} />
         <IconButton
@@ -100,12 +106,18 @@ export const PlayerControls: React.FC = () => {
           onPress={performSkipToNext}
           mode={playerStyle.playerControlIconContained}
           size={40}
+          style={{
+            backgroundColor: playerStyle.customColors.btnBackgroundColor,
+          }}
         />
         <IconButton
           icon="thumb-up-outline"
           onPress={onThumbsUp}
           mode={playerStyle.playerControlIconContained}
           size={30}
+          style={{
+            backgroundColor: playerStyle.customColors.btnBackgroundColor,
+          }}
         />
       </View>
     </View>

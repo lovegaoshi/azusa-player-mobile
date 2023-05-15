@@ -42,6 +42,7 @@ export default {
     progressMinimumTrackTintColor: 'rgb(235, 235, 0)',
     // progresss bar's whatever's right of the round icon
     progressMaximumTrackTintColor: '#FFFFFF',
+    btnBackgroundColor: 'rgb(72, 71, 58)',
   },
 
   colors: {
@@ -69,7 +70,8 @@ export default {
     onSurface: 'rgba(235, 235, 0, 1)', // 'rgb(230, 226, 217)',
     // navigation text color. should be primary.
     text: 'rgb(255, 255, 0)',
-    surfaceVariant: 'rgb(72, 71, 58)',
+    // blackground of inputs
+    surfaceVariant: 'rgb(10, 10, 10)',
     // icon color
     onSurfaceVariant: 'rgb(225, 225, 0)', // 'rgb(202, 199, 182)',
     outline: 'rgb(147, 145, 130)',
@@ -81,9 +83,11 @@ export default {
     inversePrimary: 'rgb(98, 98, 0)',
     elevation: {
       level0: 'transparent',
-      level1: 'rgb(37, 37, 22)',
-      level2: 'rgb(42, 42, 21)',
-      level3: 'rgb(48, 48, 21)',
+      level1: 'rgb(53, 56, 57)',
+      // menu
+      level2: 'rgb(10, 10, 10)',
+      // dialog
+      level3: 'rgb(10, 10, 10)',
       level4: 'rgb(49, 49, 20)',
       level5: 'rgb(53, 53, 20)',
     },

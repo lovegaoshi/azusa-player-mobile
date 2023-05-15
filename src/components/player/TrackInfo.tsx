@@ -84,16 +84,22 @@ export const TrackInfo: React.FC<{
           </View>
         </>
       )}
-      <Text style={[styles.titleText, { color: playerStyle.colors.text }]}>
+      <Text style={[styles.titleText, { color: playerStyle.colors.primary }]}>
         {track?.title}
       </Text>
-      <Text style={[styles.artistText, { color: playerStyle.colors.text }]}>
+      <Text
+        style={[styles.artistText, { color: playerStyle.colors.secondary }]}
+      >
         {track?.artist}
       </Text>
-      <Text style={[styles.artistText, { color: playerStyle.colors.text }]}>
+      <Text
+        style={[styles.artistText, { color: playerStyle.colors.secondary }]}
+      >
         {playlistTitle()}
       </Text>
-      <Text style={[styles.artistText, { color: playerStyle.colors.text }]}>
+      <Text
+        style={[styles.artistText, { color: playerStyle.colors.secondary }]}
+      >
         {currentPlayingList && playlists[currentPlayingList] && track?.song
           ? `#${
               playlists[currentPlayingList].songList.findIndex(
