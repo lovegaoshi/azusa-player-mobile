@@ -55,3 +55,8 @@ export const oneWayAlert = (
 export function randomChoice(list: Array<any>) {
   return list[Math.floor(Math.random() * list.length) >> 0];
 }
+
+export const rgb2rgba = (rgb: string, a = 1) => {
+  const extractedRGB = [...rgb.matchAll(/(\d+)/g)];
+  return `rgba(${extractedRGB[0][0]}, ${extractedRGB[1][0]}, ${extractedRGB[2][0]}, ${a})`;
+};

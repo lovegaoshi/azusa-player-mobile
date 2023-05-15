@@ -48,7 +48,11 @@ export default ({
           onSubmitEditing={() => handleSearch(searchVal)}
           selectTextOnFocus
         />
-        <IconButton icon="search-web" onPress={() => handleSearch(searchVal)} />
+        <IconButton
+          icon="search-web"
+          onPress={() => handleSearch(searchVal)}
+          size={30}
+        />
       </View>
       <ProgressBar
         progress={Math.max(searchProgress, 0)}

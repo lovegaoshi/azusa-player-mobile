@@ -29,6 +29,7 @@ function SongInfo({
 }) {
   const currentPlaylist = useNoxSetting(state => state.currentPlaylist);
   const playerSetting = useNoxSetting(state => state.playerSetting);
+  const playerStyle = useNoxSetting(state => state.playerStyle);
   const setSongMenuCoords = useNoxSetting(state => state.setSongMenuCoords);
   const setSongMenuVisible = useNoxSetting(state => state.setSongMenuVisible);
   const setSongMenuSongIndexes = useNoxSetting(
@@ -61,7 +62,11 @@ function SongInfo({
       style={{
         paddingTop: 5,
         paddingBottom: 5,
-        backgroundColor: currentPlaying ? 'lightgrey' : 'white',
+        backgroundColor: currentPlaying
+          ? playerStyle.customColors.playlistDrawerBackgroundColorTransparent
+          : 'transparent',
+        borderRadius: 5,
+        paddingLeft: 10,
       }}
     >
       <TouchableRipple onPress={checking ? toggleCheck : () => playSong(item)}>

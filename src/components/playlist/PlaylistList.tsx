@@ -64,9 +64,27 @@ export default () => {
   }, []);
 
   const toggleSelectedAll = () => {
+    const mapCheckedIndices = (selectedIndices: number[], checked = true) => {
+      setSelected(
+        Array(currentPlaylist.songList.length)
+          .fill(false)
+          .map((val, index) =>
+            selectedIndices.includes(index) ? checked : val
+          )
+      );
+    };
+
     if (selected.length === 0) return;
-    if (selected[0]) resetSelected();
-    else resetSelected(true);
+    if (currentRows === currentPlaylist.songList) {
+      selected[0] ? resetSelected() : resetSelected(true);
+    } else {
+      // TODO: there has to be a more elegant way
+      // but alas it works!
+      const selectedIndices = currentRows.map(val =>
+        currentPlaylist.songList.indexOf(val)
+      );
+      mapCheckedIndices(selectedIndices, !selected[selectedIndices[0]]);
+    }
     setShouldReRender(val => !val);
   };
 
@@ -264,7 +282,7 @@ export default () => {
             />
           )}
           <IconButton
-            icon="playlist-edit"
+            icon="select"
             onPress={() => setChecking(val => !val)}
             size={25}
           />
@@ -274,7 +292,7 @@ export default () => {
             size={25}
             mode={searching ? 'contained' : undefined}
           />
-          <PlaylistMenuButton />
+          <PlaylistMenuButton disabled={checking} />
         </View>
       </View>
       <View

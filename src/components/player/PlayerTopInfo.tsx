@@ -18,11 +18,11 @@ export default ({
   // <Text>{''}</Text>
   return (
     <View style={[playerStyle.playerTopBarContainer, { alignItems: 'center' }]}>
-      <View style={{ alignContent: 'flex-start', paddingTop: 10 }}>
+      <View style={{ alignContent: 'flex-start' }}>
         <IconButton
           icon="menu"
           onPress={() => navigation.openDrawer()}
-          size={30}
+          size={40}
         />
       </View>
 
@@ -32,13 +32,13 @@ export default ({
           favList={String(currentPlayingId)}
         />
       </View>
-      <View style={{ alignContent: 'flex-end', paddingTop: 10 }}>
+      <View style={{ alignContent: 'flex-end' }}>
         <IconButton
           icon="playlist-music"
           onPress={() =>
             navigationGlobal.navigate(ViewEnum.PLAYER_PLAYLIST as never)
           }
-          size={30}
+          size={40}
         />
       </View>
     </View>

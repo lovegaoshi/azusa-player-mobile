@@ -43,6 +43,7 @@ export default (props: any) => {
       () => removePlaylist(playlistId)
     );
   };
+
   // TODO: you dont have to use draweritem. you can use a typical list.
   // then convert this to a dnd list!!!
   return (
@@ -71,13 +72,20 @@ export default (props: any) => {
             playlists[STORAGE_KEYS.SEARCH_PLAYLIST_KEY]?.id
               ? 'bold'
               : undefined,
+          color:
+            currentPlayingList ===
+            playlists[STORAGE_KEYS.SEARCH_PLAYLIST_KEY]?.id
+              ? playerStyle.colors.text
+              : playerStyle.colors.onSurface,
         }}
-        activeBackgroundColor={playerStyle.playlistDrawer.backgroundColor}
+        activeBackgroundColor={
+          playerStyle.customColors.playlistDrawerBackgroundColor
+        }
         style={{
           backgroundColor:
             currentPlaylist.id ===
             playlists[STORAGE_KEYS.SEARCH_PLAYLIST_KEY]?.id
-              ? playerStyle.playlistDrawer.backgroundColor
+              ? playerStyle.customColors.playlistDrawerBackgroundColor
               : undefined,
         }}
         onPress={() => goToPlaylist(STORAGE_KEYS.SEARCH_PLAYLIST_KEY)}
@@ -103,12 +111,18 @@ export default (props: any) => {
           label={playlists[val].title}
           labelStyle={{
             fontWeight: currentPlayingList === val ? 'bold' : undefined,
+            color:
+              currentPlayingList === val
+                ? playerStyle.colors.text
+                : playerStyle.colors.onSurface,
           }}
-          activeBackgroundColor={playerStyle.playlistDrawer.backgroundColor}
+          activeBackgroundColor={
+            playerStyle.customColors.playlistDrawerBackgroundColor
+          }
           style={{
             backgroundColor:
               currentPlaylist.id === val
-                ? playerStyle.playlistDrawer.backgroundColor
+                ? playerStyle.customColors.playlistDrawerBackgroundColor
                 : undefined,
           }}
           onPress={() => goToPlaylist(val)}

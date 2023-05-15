@@ -25,7 +25,7 @@ export default ({
   }, [currentPlaylist]);
 
   return (
-    <View style={{ flex: 3 }}>
+    <View style={{ flex: 3, paddingLeft: 10 }}>
       {search ? (
         <TextInput
           label="Search"
