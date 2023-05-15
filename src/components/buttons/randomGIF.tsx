@@ -44,7 +44,7 @@ export default function RandomGIFButton({
         onClickCallback();
       }}
     >
-      <Image
+      <FastImage
         style={{ width: 72, height: 72 }}
         source={{ uri: gifs[randomGIFSrc] }}
         alt=""
