@@ -190,6 +190,9 @@ export default () => {
   };
 
   const refreshPlaylist = async () => {
+    if (currentPlaylist.type !== PLAYLIST_ENUMS.TYPE_TYPICA_PLAYLIST) {
+      return;
+    }
     Snackbar.show({
       text: `正在更新歌单 ${currentPlaylist.title}……`,
       duration: Snackbar.LENGTH_INDEFINITE,
