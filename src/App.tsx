@@ -117,7 +117,7 @@ const App: React.FC = () => {
             theme={{
               ...defaultTheme,
               colors: {
-                ...CombinedDarkTheme.colors,
+                ...defaultTheme.colors,
                 ...playerStyle.colors,
               },
             }}

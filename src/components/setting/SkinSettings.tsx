@@ -33,10 +33,21 @@ export default () => {
     return (
       <TouchableRipple onPress={selectTheme}>
         <View style={{ flexDirection: 'row' }}>
-          <View style={{ flexDirection: 'row', paddingVertical: 5, flex: 5 }}>
+          <View
+            style={{
+              flexDirection: 'row',
+              paddingVertical: 5,
+              flex: 5,
+              paddingLeft: 5,
+            }}
+          >
             <Image
               source={{ uri: skin.metaData.themeIcon }}
-              style={{ width: 72, height: 72, borderRadius: 40 }}
+              style={{
+                width: 72,
+                height: 72,
+                borderRadius: 40,
+              }}
               alt={skin.metaData.themeName}
             />
             <View style={{ paddingLeft: 5 }}>
