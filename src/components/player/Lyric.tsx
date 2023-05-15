@@ -1,11 +1,19 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import { Modal, View, Button, StyleSheet, Text } from 'react-native';
+import {
+  Modal,
+  View,
+  StyleSheet,
+  Text,
+  FlatList,
+  TouchableOpacity,
+} from 'react-native';
 import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
 import { Lyric } from 'react-native-lyric';
 import { useProgress } from 'react-native-track-player';
 import { searchLyricOptions, searchLyric } from '../../utils/Data';
 import { reExtractSongName } from '../../utils/re';
 import { IconButton } from 'react-native-paper';
+import {} from 'react-native';
 
 export const LyricView = ({
   currentTime,
@@ -61,17 +69,36 @@ export const LyricView = ({
       </TouchableWithoutFeedback>
       <View style={styles.optionsButton}>
         <IconButton
-          icon="playlist-edit"
+          icon="more"
           onPress={() => setModalVisible(!modalVisible)}
         />
       </View>
-      <Modal animationType="slide" transparent={true} visible={modalVisible}>
-        <View style={styles.centeredView}>
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={modalVisible}
+        onRequestClose={() => setModalVisible(false)}
+      >
+        <View style={styles.modalBackground}>
           <View style={styles.modalView}>
-            <Text>Placeholder for lyric options</Text>
-            <Button
-              title="Close"
-              onPress={() => setModalVisible(!modalVisible)}
+            <View style={styles.modalHeader}>
+              <Text style={styles.headerText}>Lyric Options</Text>
+              <TouchableOpacity onPress={() => setModalVisible(false)}>
+                <IconButton icon="chevron-down"/>
+              </TouchableOpacity>
+            </View>
+            <FlatList
+              data={[
+                { key: 'Option 1' },
+                { key: 'Option 2' },
+                { key: 'Option 3' },
+              ]}
+              renderItem={({ item }) => (
+                <TouchableOpacity onPress={() => console.log(item.key)}>
+                  <Text style={styles.listItem}>{item.key}</Text>
+                </TouchableOpacity>
+              )}
+              keyExtractor={item => item.key}
             />
           </View>
         </View>
@@ -96,19 +123,37 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginTop: 22,
   },
+  modalBackground: {
+    flex: 1,
+    justifyContent: 'flex-end',
+    backgroundColor: 'rgba(0, 0, 0, 0.1)', 
+  },
+
   modalView: {
-    margin: 20,
     backgroundColor: 'white',
-    borderRadius: 20,
-    padding: 35,
+    borderTopLeftRadius: 20,
+    borderTopRightRadius: 20,
+  },
+
+  modalHeader: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
     alignItems: 'center',
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
-    elevation: 5,
+    backgroundColor: 'grey',
+    padding: 10,
+    borderTopLeftRadius: 20,
+    borderTopRightRadius: 20,
+  },
+
+  headerText: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    color: 'white', 
+  },
+
+  listItem: {
+    padding: 10,
+    fontSize: 18,
+    borderTopColor: 'grey',
   },
 });
