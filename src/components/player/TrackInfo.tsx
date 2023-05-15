@@ -25,7 +25,7 @@ export const TrackInfo: React.FC<{
   const [isImageVisible, setIsImageVisible] = useState(true);
   const opacity = new Animated.Value(1);
 
-  const songTitle = useCallback(() => {
+  const playlistTitle = useCallback(() => {
     return currentPlayingList ? playlists[currentPlayingList]?.title : '';
   }, [currentPlayingList]);
 
@@ -68,24 +68,6 @@ export const TrackInfo: React.FC<{
                 style={[styles.artwork, { opacity }]}
                 source={{ uri: `${track?.artwork}` }}
               />
-              <Text style={styles.titleText}>{track?.title}</Text>
-              <Text style={styles.artistText}>{track?.artist}</Text>
-              <Text style={styles.artistText}>{songTitle()}</Text>
-              <Text style={styles.artistText}>
-                {currentPlayingList &&
-                playlists[currentPlayingList] &&
-                track?.song
-                  ? `#${
-                      playlists[currentPlayingList].songList.findIndex(
-                        song => song.id === track.song.id
-                      ) + 1
-                    } - ${
-                      currentTPQueue.findIndex(
-                        song => song?.song?.id === track.song.id
-                      ) + 1
-                    }/${currentTPQueue.length}`
-                  : ''}
-              </Text>
             </View>
           </TouchableWithoutFeedback>
           <View
@@ -109,7 +91,7 @@ export const TrackInfo: React.FC<{
         {track?.artist}
       </Text>
       <Text style={[styles.artistText, { color: playerStyle.colors.text }]}>
-        {currentPlayingList ? playlists[currentPlayingList]?.title : ''}
+        {playlistTitle()}
       </Text>
       <Text style={[styles.artistText, { color: playerStyle.colors.text }]}>
         {currentPlayingList && playlists[currentPlayingList] && track?.song
