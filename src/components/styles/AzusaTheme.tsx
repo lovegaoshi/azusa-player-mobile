@@ -1,10 +1,11 @@
+import { DefaultTheme } from 'react-native-paper';
 import style from './styleInterface';
 
 export default {
   metaData: {
     themeName: '电梓播放器',
     themeDesc: 'Azusa Theme',
-    themeAuthor: 'nek@bilibili',
+    themeAuthor: 'nek7mi@bilibili',
     themeIcon:
       'https://i2.hdslb.com/bfs/face/ba9ce36ef60a53e24a97f54429e62bdb951530a0.jpg',
     darkTheme: false,
@@ -24,7 +25,6 @@ export default {
     'https://i0.hdslb.com/bfs/article/878b50e28dda6050e78f75d620f05f8a6de6a4c1.gif',
     'https://i0.hdslb.com/bfs/article/28837af291d81ed90500e1cb876769ab9932b91a.gif',
     'https://i0.hdslb.com/bfs/article/c88cc015b4b3e036e1b5689f262f6720b3e0ab97.gif',
-
     // azusa garb #1`
     'https://i0.hdslb.com/bfs/emote/7af9710c32b5855362e4e51f453aafc69ad477c1.png',
     'https://i0.hdslb.com/bfs/emote/825a5cad43943e78bfbdabec9e05eb9c8304495c.png',
@@ -87,12 +87,18 @@ export default {
   ],
 
   customColors: {
-    maskedBackgroundColor: 'white',
-    playlistDrawerBackgroundColor: 'lavender',
-    playlistDrawerBackgroundColorTransparent: 'lavender',
-    progressThumbTintColor: '#FFD479',
-    progressMinimumTrackTintColor: '#FFD479',
-    progressMaximumTrackTintColor: '#FFFFFF',
+    maskedBackgroundColor: 'rgba(255, 255, 255, 0.4)',
+    playlistDrawerBackgroundColor: '#dcd0ff',
+    playlistDrawerBackgroundColorTransparent: '#dcd0ff',
+    progressThumbTintColor: '#a76bcf',
+    progressMinimumTrackTintColor: '#df73ff',
+    progressMaximumTrackTintColor: '#bf94e4',
   },
-  playerControlIconContained: 'contained',
+  colors: {
+    ...DefaultTheme.colors,
+    text: '#9457eb',
+    background: 'rgba(255, 255, 255, 0.4)',
+    onSurfaceVariant: '#9400d3', // 'rgb(202, 199, 182)',
+  },
+  playerControlIconContained: 'outline',
 } as style;

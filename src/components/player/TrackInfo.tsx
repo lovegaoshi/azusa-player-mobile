@@ -50,7 +50,7 @@ export const TrackInfo: React.FC<{
   };
 
   return (
-    <>
+    <View style={styles.container}>
       {playerSetting.hideCoverInMobile ? null : (
         <>
           <TouchableWithoutFeedback onPress={onImagePress}>

@@ -4,10 +4,10 @@ import AzusaTheme from './styles/AzusaTheme';
 import { notNullDefault as nd, randomChoice } from '../utils/Utils';
 
 export const createStyle = (customStyle = AzusaTheme) => {
-  const refTheme = NoxTheme; // customStyle.metaData.darkTheme ? AzusaTheme : NoxTheme;
+  const refTheme = customStyle.metaData.darkTheme ? NoxTheme : AzusaTheme;
   return StyleSheet.create({
     metaData: { ...refTheme.metaData, ...nd(customStyle.metaData, {}) },
-    colors: nd(customStyle.colors, refTheme.colors),
+    colors: { ...refTheme.colors, ...nd(customStyle.colors, refTheme.colors) },
 
     customColors: {
       ...refTheme.customColors,
