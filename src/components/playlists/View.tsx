@@ -5,15 +5,21 @@ import {
   DrawerItemList,
 } from '@react-navigation/drawer';
 import { v4 as uuidv4 } from 'uuid';
-import { IconButton, Divider, Text } from 'react-native-paper';
+import { IconButton, Divider, Text, Button } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
 import { Pressable, View } from 'react-native';
+import DraggableFlatList, {
+  ScaleDecorator,
+  RenderItemParams,
+} from 'react-native-draggable-flatlist';
+
 import { useNoxSetting } from '../../hooks/useSetting';
 import { ViewEnum } from '../../enums/View';
 import AddPlaylistButton from '../buttons/AddPlaylistButton';
 import { STORAGE_KEYS } from '../../utils/ChromeStorage';
 import NewPlaylistDialog from '../dialogs/NewPlaylistDialog';
 import { twoWayAlert } from '../../utils/Utils';
+import Playlist from '../../objects/Playlist';
 
 export default (props: any) => {
   const navigation = useNavigation();
@@ -41,6 +47,16 @@ export default (props: any) => {
       `Delete ${playlists[playlistId].title}?`,
       `Are you sure to delete playlist ${playlists[playlistId].title}?`,
       () => removePlaylist(playlistId)
+    );
+  };
+
+  const renderItem = ({ item, drag, isActive }: RenderItemParams<Playlist>) => {
+    return (
+      <ScaleDecorator>
+        <Pressable onLongPress={drag} disabled={isActive}>
+          <Text>{item.title}</Text>
+        </Pressable>
+      </ScaleDecorator>
     );
   };
 
@@ -142,6 +158,13 @@ export default (props: any) => {
           key={uuidv4()}
         />
       ))}
+
+      <DraggableFlatList
+        data={playlistIds.map(val => playlists[val])}
+        onDragEnd={({ data }) => console.log(data)}
+        keyExtractor={item => item.id}
+        renderItem={renderItem}
+      />
       <View>
         <Text style={{ textAlign: 'center', paddingBottom: 20 }}>
           {`${playerStyle.metaData.themeName} @ 0.0.1 alpha`}
