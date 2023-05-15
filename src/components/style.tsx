@@ -4,15 +4,23 @@ import AzusaTheme from './styles/AzusaTheme';
 import { notNullDefault as nd, randomChoice } from '../utils/Utils';
 
 export const createStyle = (customStyle = AzusaTheme) => {
-  const refTheme = AzusaTheme; // customStyle.lightTheme ? azusaTheme : noxTheme;
+  const refTheme = NoxTheme; // customStyle.metaData.darkTheme ? AzusaTheme : NoxTheme;
   return StyleSheet.create({
     metaData: { ...refTheme.metaData, ...nd(customStyle.metaData, {}) },
+    colors: nd(customStyle.colors, refTheme.colors),
+
+    customColors: {
+      ...refTheme.customColors,
+      ...nd(customStyle.customColors, {}),
+    },
+
+    playerControlIconContained: nd(
+      customStyle.playerControlIconContained,
+      refTheme.playerControlIconContained
+    ),
+
     screenContainer: {
       flex: 1,
-      backgroundColor: nd(
-        customStyle.screenBackgroundColor,
-        refTheme.screenBackgroundColor
-      ),
       alignItems: 'center',
       justifyContent: 'center',
     },
@@ -38,18 +46,9 @@ export const createStyle = (customStyle = AzusaTheme) => {
     },
     actionRowContainer: {
       flexDirection: 'column',
-      width: '96%',
-      paddingLeft: 5,
-      paddingright: 5,
-      left: '2%',
+      width: '100%',
       alignItems: 'center',
       height: 140,
-    },
-    playlistDrawer: {
-      backgroundColor: nd(
-        customStyle.playlistDrawerBackgroundColor,
-        refTheme.playlistDrawerBackgroundColor
-      ),
     },
     gifs: nd(customStyle.gifs, refTheme.gifs),
     bkgrdImg: randomChoice(
@@ -73,17 +72,12 @@ export const styles = StyleSheet.create({
     width: '100%',
     flexDirection: 'row',
     // paddingHorizontal: 20,
-    paddingLeft: 10,
-    paddingRight: 5,
     justifyContent: 'flex-end',
     top: 4,
   },
   actionRowContainer: {
     flexDirection: 'column',
-    width: '96%',
-    paddingLeft: 5,
-    paddingright: 5,
-    left: '2%',
+    width: '100%',
     alignItems: 'center',
     height: 140,
   },

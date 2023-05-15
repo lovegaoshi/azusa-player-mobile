@@ -7,10 +7,8 @@ export default {
     themeAuthor: 'nek@bilibili',
     themeIcon:
       'https://i2.hdslb.com/bfs/face/ba9ce36ef60a53e24a97f54429e62bdb951530a0.jpg',
+    darkTheme: false,
   },
-  lightTheme: true,
-  screenBackgroundColor: 'white',
-  playlistDrawerBackgroundColor: 'lavender',
 
   gifs: [
     'https://i0.hdslb.com/bfs/article/956a1680d1408517d60e901b63eded873fe1ed5f.gif',
@@ -87,4 +85,14 @@ export default {
     'https://i0.hdslb.com/bfs/garb/item/37fc8d2acf41b0fe7ec3b9732297d8e2832f21e4.png',
     'https://i0.hdslb.com/bfs/garb/item/589adb63eae72b89f2022b040c333a42125b7ae9.jpg',
   ],
+
+  customColors: {
+    maskedBackgroundColor: 'white',
+    playlistDrawerBackgroundColor: 'lavender',
+    playlistDrawerBackgroundColorTransparent: 'lavender',
+    progressThumbTintColor: '#FFD479',
+    progressMinimumTrackTintColor: '#FFD479',
+    progressMaximumTrackTintColor: '#FFFFFF',
+  },
+  playerControlIconContained: 'contained',
 } as style;

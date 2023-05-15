@@ -21,6 +21,7 @@ const performSkipToPrevious = () => TrackPlayer.skipToPrevious();
 export const PlayerControls: React.FC = () => {
   const currentPlaylist = useNoxSetting(state => state.currentPlaylist);
   const playmode = useNoxSetting(state => state.playerRepeat);
+  const playerStyle = useNoxSetting(state => state.playerStyle);
   const setPlayerRepeat = useNoxSetting(state => state.setPlayerRepeat);
   const setPlayMode = (val: string) => {
     setPlayerRepeat(val);
@@ -84,26 +85,26 @@ export const PlayerControls: React.FC = () => {
         <IconButton
           icon={playmode}
           onPress={onClickPlaymode}
-          mode="contained"
+          mode={playerStyle.playerControlIconContained}
           size={30}
         />
         <IconButton
           icon="skip-previous"
           onPress={performSkipToPrevious}
-          mode="contained"
+          mode={playerStyle.playerControlIconContained}
           size={40}
         />
         <PlayPauseButton state={playback.state} />
         <IconButton
           icon="skip-next"
           onPress={performSkipToNext}
-          mode="contained"
+          mode={playerStyle.playerControlIconContained}
           size={40}
         />
         <IconButton
           icon="thumb-up-outline"
           onPress={onThumbsUp}
-          mode="contained"
+          mode={playerStyle.playerControlIconContained}
           size={30}
         />
       </View>
