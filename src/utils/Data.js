@@ -755,6 +755,7 @@ const extractResponseJson = (json, field) => {
   }
 };
 
+
 export const searchLyricOptions = async (searchKey) => {
   if (!searchKey) {
     throw new Error('Search key is required');
