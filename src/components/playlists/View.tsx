@@ -27,11 +27,13 @@ export default (props: any) => {
   const currentPlaylist = useNoxSetting(state => state.currentPlaylist);
   const playlists = useNoxSetting(state => state.playlists);
   const playlistIds = useNoxSetting(state => state.playlistIds);
+  const playerStyle = useNoxSetting(state => state.playerStyle);
   // TODO: and how to property type this?
   const addPlaylistButtonRef = useRef<any>(null);
   const setCurrentPlaylist = useNoxSetting(state => state.setCurrentPlaylist);
   const removePlaylist = useNoxSetting(state => state.removePlaylist);
-  const playerStyle = useNoxSetting(state => state.playerStyle);
+  const setPlaylistIds = useNoxSetting(state => state.setPlaylistIds);
+
   // HACK: tried to make searchList draweritem button as addPlaylistButton, but
   // dialog disposes on textinput focus. created a dialog directly in this component
   // instead and works fine.
@@ -63,7 +65,7 @@ export default (props: any) => {
   // TODO: you dont have to use draweritem. you can use a typical list.
   // then convert this to a dnd list!!!
   return (
-    <DrawerContentScrollView {...props}>
+    <View {...props}>
       <DrawerItemList {...props} />
       <Divider></Divider>
       <DrawerItem
@@ -160,8 +162,12 @@ export default (props: any) => {
       ))}
 
       <DraggableFlatList
+        style={{ paddingLeft: 25 }}
         data={playlistIds.map(val => playlists[val])}
-        onDragEnd={({ data }) => console.log(data)}
+        // TODO: very retarded, but what?
+        onDragEnd={({ data }) =>
+          setPlaylistIds(data.map(playlist => playlist.id))
+        }
         keyExtractor={item => item.id}
         renderItem={renderItem}
       />
@@ -170,6 +176,6 @@ export default (props: any) => {
           {`${playerStyle.metaData.themeName} @ 0.0.1 alpha`}
         </Text>
       </View>
-    </DrawerContentScrollView>
+    </View>
   );
 };
