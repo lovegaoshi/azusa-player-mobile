@@ -126,7 +126,9 @@ export const savePlaylist = async (
   }
 };
 
-export const getPlaylist = async (key: string): Promise<null | NoxMedia.Playlist> => {
+export const getPlaylist = async (
+  key: string
+): Promise<null | NoxMedia.Playlist> => {
   try {
     // eslint-disable-next-line prefer-const
     let retrievedPlaylist = await getItem(key);
@@ -188,50 +190,51 @@ export const savelastPlaylistId = async (val: [string, string]) =>
 export const savePlayMode = async (val: string) =>
   saveItem(STORAGE_KEYS.PLAYMODE_KEY, val);
 
-export const initPlayerObject = async (): Promise<NoxStorage.PlayerStorageObject> => {
-  // eslint-disable-next-line prefer-const
-  let playerObject = {
-    settings: {
-      ...DEFAULT_SETTING,
-      ...notNullDefault(await getItem(STORAGE_KEYS.PLAYER_SETTING_KEY), {}),
-    },
-    playlistIds: notNullDefault(
-      await getItem(STORAGE_KEYS.MY_FAV_LIST_KEY),
-      []
-    ),
-    playlists: {},
-    lastPlaylistId: notNullDefault(await getItem(STORAGE_KEYS.LAST_PLAY_LIST), [
-      'NULL',
-      'NULL',
-    ]),
-    searchPlaylist: dummyPlaylist(
-      'Search',
-      PLAYLIST_ENUMS.TYPE_SEARCH_PLAYLIST
-    ),
-    favoriPlaylist: notNullDefault(
-      await getItem(STORAGE_KEYS.FAVORITE_PLAYLIST_KEY),
-      dummyPlaylist('Favorite', PLAYLIST_ENUMS.TYPE_FAVORI_PLAYLIST)
-    ),
-    playerRepeat: notNullDefault(
-      await getItem(STORAGE_KEYS.PLAYMODE_KEY),
-      NoxRepeatMode.SHUFFLE
-    ),
-    skin: notNullDefault(await getItem(STORAGE_KEYS.SKIN), {}),
-  } as NoxStorage.PlayerStorageObject;
+export const initPlayerObject =
+  async (): Promise<NoxStorage.PlayerStorageObject> => {
+    // eslint-disable-next-line prefer-const
+    let playerObject = {
+      settings: {
+        ...DEFAULT_SETTING,
+        ...notNullDefault(await getItem(STORAGE_KEYS.PLAYER_SETTING_KEY), {}),
+      },
+      playlistIds: notNullDefault(
+        await getItem(STORAGE_KEYS.MY_FAV_LIST_KEY),
+        []
+      ),
+      playlists: {},
+      lastPlaylistId: notNullDefault(
+        await getItem(STORAGE_KEYS.LAST_PLAY_LIST),
+        ['NULL', 'NULL']
+      ),
+      searchPlaylist: dummyPlaylist(
+        'Search',
+        PLAYLIST_ENUMS.TYPE_SEARCH_PLAYLIST
+      ),
+      favoriPlaylist: notNullDefault(
+        await getItem(STORAGE_KEYS.FAVORITE_PLAYLIST_KEY),
+        dummyPlaylist('Favorite', PLAYLIST_ENUMS.TYPE_FAVORI_PLAYLIST)
+      ),
+      playerRepeat: notNullDefault(
+        await getItem(STORAGE_KEYS.PLAYMODE_KEY),
+        NoxRepeatMode.SHUFFLE
+      ),
+      skin: notNullDefault(await getItem(STORAGE_KEYS.SKIN), {}),
+    } as NoxStorage.PlayerStorageObject;
 
-  playerObject.playlists[STORAGE_KEYS.SEARCH_PLAYLIST_KEY] =
-    playerObject.searchPlaylist;
-  playerObject.playlists[STORAGE_KEYS.FAVORITE_PLAYLIST_KEY] =
-    playerObject.favoriPlaylist;
+    playerObject.playlists[STORAGE_KEYS.SEARCH_PLAYLIST_KEY] =
+      playerObject.searchPlaylist;
+    playerObject.playlists[STORAGE_KEYS.FAVORITE_PLAYLIST_KEY] =
+      playerObject.favoriPlaylist;
 
-  await Promise.all(
-    playerObject.playlistIds.map(async id => {
-      const retrievedPlaylist = await getPlaylist(id);
-      if (retrievedPlaylist) playerObject.playlists[id] = retrievedPlaylist;
-    })
-  );
-  return playerObject;
-};
+    await Promise.all(
+      playerObject.playlistIds.map(async id => {
+        const retrievedPlaylist = await getPlaylist(id);
+        if (retrievedPlaylist) playerObject.playlists[id] = retrievedPlaylist;
+      })
+    );
+    return playerObject;
+  };
 
 export const clearStorage = async () => await AsyncStorage.clear();
 

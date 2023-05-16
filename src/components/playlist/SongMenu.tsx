@@ -68,7 +68,10 @@ export default ({
     return {
       ...currentPlaylist,
       songList: songs,
-      title: songs.length > 1 ? t('SongOperations.selectedSongs') : songs[0].parsedName,
+      title:
+        songs.length > 1
+          ? t('SongOperations.selectedSongs')
+          : songs[0].parsedName,
     };
   };
 

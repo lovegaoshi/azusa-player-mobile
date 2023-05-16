@@ -91,7 +91,8 @@ export const useNoxSetting = create<NoxSetting>((set, get) => ({
     return void 0;
   },
   songMenuCoords: { x: 0, y: 0 },
-  setSongMenuCoords: (val: NoxTheme.coordinates) => set({ songMenuCoords: val }),
+  setSongMenuCoords: (val: NoxTheme.coordinates) =>
+    set({ songMenuCoords: val }),
   songMenuVisible: false,
   setSongMenuVisible: (val: boolean) => set({ songMenuVisible: val }),
   songMenuSongIndexes: [],

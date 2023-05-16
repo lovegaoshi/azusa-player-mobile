@@ -81,7 +81,8 @@ export default (props: any) => {
           <Text
             variant="bodyLarge"
             style={{
-              fontWeight: currentPlayingList.id === item.id ? 'bold' : undefined,
+              fontWeight:
+                currentPlayingList.id === item.id ? 'bold' : undefined,
             }}
           >
             {item.title}
@@ -104,7 +105,11 @@ export default (props: any) => {
     </Pressable>
   );
 
-  const renderItem = ({ item, drag, isActive }: RenderItemParams<NoxMedia.Playlist>) => {
+  const renderItem = ({
+    item,
+    drag,
+    isActive,
+  }: RenderItemParams<NoxMedia.Playlist>) => {
     return (
       <ScaleDecorator>
         <TouchableRipple

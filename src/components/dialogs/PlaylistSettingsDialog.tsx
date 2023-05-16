@@ -78,7 +78,9 @@ export default ({
             />
             <View style={{ flexDirection: 'row' }}>
               <Switch value={useBiliShazam} onValueChange={toggleBiliShazam} />
-              <Text style={{ fontSize: 18 }}>{t('PlaylistSettingsDialog.useBiliShazamLabel')}</Text>
+              <Text style={{ fontSize: 18 }}>
+                {t('PlaylistSettingsDialog.useBiliShazamLabel')}
+              </Text>
             </View>
           </Dialog.Content>
         </KeyboardAvoidingView>

@@ -38,4 +38,3 @@ export default class VideoInfo {
     this.duration = duration;
   }
 }
-

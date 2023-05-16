@@ -56,7 +56,9 @@ export default ({
         onDismiss={handleClose}
         style={{ maxHeight: '70%' }}
       >
-        <Dialog.Title>{t('CopiedPlaylistDialog.title', {fromList})}</Dialog.Title>
+        <Dialog.Title>
+          {t('CopiedPlaylistDialog.title', { fromList })}
+        </Dialog.Title>
         <Dialog.Content style={{ ...styles.topBarContainer, height: '70%' }}>
           <FlashList
             data={playlistIds

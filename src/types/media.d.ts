@@ -1,5 +1,4 @@
 declare namespace NoxMedia {
-
   export interface Song {
     id: string;
     bvid: string;

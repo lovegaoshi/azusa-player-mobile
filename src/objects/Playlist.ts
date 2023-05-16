@@ -30,7 +30,9 @@ export const getPlaylistUniqBVIDs = (playlist: NoxMedia.Playlist) => {
   );
 };
 
-export const songlistToTracklist = (songList: Array<NoxMedia.Song>): Track[] => {
+export const songlistToTracklist = (
+  songList: Array<NoxMedia.Song>
+): Track[] => {
   return songList.map(song => {
     return {
       ...NULL_TRACK,

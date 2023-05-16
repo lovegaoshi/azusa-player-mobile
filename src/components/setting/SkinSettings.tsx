@@ -12,14 +12,16 @@ import { useNoxSetting } from '../../hooks/useSetting';
 import AzusaTheme from '../styles/AzusaTheme';
 import NoxTheme from '../styles/NoxTheme';
 
-const BuiltInThemes = [{
-  theme: AzusaTheme,
-  generic: false,
-},
-{
-  theme: NoxTheme,
-  generic: false,
-},]
+const BuiltInThemes = [
+  {
+    theme: AzusaTheme,
+    generic: false,
+  },
+  {
+    theme: NoxTheme,
+    generic: false,
+  },
+];
 
 export default () => {
   const playerStyle = useNoxSetting(state => state.playerStyle);
@@ -100,16 +102,20 @@ export default () => {
         flex: 1,
       }}
     >
-    <View
-      style={{flex: 0.5}}
-    ><SkinSearchbar /></View>      
-    <View
-      style={{flex: 5.5}}
-    ><FlatList
-    data={allThemes}
-    renderItem={({ item, index }) => renderSkinItem(item.theme, item.generic)}
-    keyExtractor={item => `${item.theme.metaData.themeName}.${item.theme.metaData.themeAuthor}`}
-  /></View>  
+      <View style={{ flex: 0.5 }}>
+        <SkinSearchbar />
+      </View>
+      <View style={{ flex: 5.5 }}>
+        <FlatList
+          data={allThemes}
+          renderItem={({ item, index }) =>
+            renderSkinItem(item.theme, item.generic)
+          }
+          keyExtractor={item =>
+            `${item.theme.metaData.themeName}.${item.theme.metaData.themeAuthor}`
+          }
+        />
+      </View>
     </View>
   );
 };

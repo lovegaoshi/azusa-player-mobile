@@ -1,5 +1,4 @@
 declare namespace NoxTheme {
-
   interface metaData {
     themeName: string;
     themeDesc: string;
@@ -7,7 +6,7 @@ declare namespace NoxTheme {
     themeIcon: string;
     darkTheme: boolean;
   }
-  
+
   interface customColors {
     maskedBackgroundColor: string;
     playlistDrawerBackgroundColor: string;
@@ -17,10 +16,10 @@ declare namespace NoxTheme {
     progressMaximumTrackTintColor: string;
     btnBackgroundColor: string;
   }
-  
+
   export interface style {
     metaData: metaData;
-  
+
     gifs: Array<string>;
     backgroundImages: Array<string>;
     colors: any;
@@ -28,7 +27,7 @@ declare namespace NoxTheme {
     // https://callstack.github.io/react-native-paper/docs/components/IconButton/
     // Type: 'outlined' | 'contained' | 'contained-tonal'
     playerControlIconContained: string;
-  } 
+  }
 
   export interface coordinates {
     x: number;

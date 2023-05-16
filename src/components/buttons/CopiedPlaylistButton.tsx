@@ -7,7 +7,11 @@ import { dummyPlaylistList } from '../../objects/Playlist';
 
 const ICON = 'playlist-plus';
 
-export const CopiedPlaylistButton = ({ fromList }: { fromList: NoxMedia.Playlist }) => {
+export const CopiedPlaylistButton = ({
+  fromList,
+}: {
+  fromList: NoxMedia.Playlist;
+}) => {
   const [dialogOpen, setDialogOpen] = useState(false);
 
   return (
@@ -41,7 +45,8 @@ export const CopiedPlaylistMenuItem = ({
 }: menuProps) => {
   const { t } = useTranslation();
   const [dialogOpen, setDialogOpen] = useState(false);
-  const [fromList, setFromList] = useState<NoxMedia.Playlist>(dummyPlaylistList);
+  const [fromList, setFromList] =
+    useState<NoxMedia.Playlist>(dummyPlaylistList);
 
   const handleClose = () => {
     setDialogOpen(false);
