@@ -22,6 +22,8 @@ import {
   Provider as PaperProvider,
 } from 'react-native-paper';
 import merge from 'deepmerge';
+import { useTranslation } from 'react-i18next';
+
 import { useSetupPlayer, Player } from './components/player/View';
 import Playlist from './components/playlist/View';
 import PlayerBottomPanel from './components/player/PlayerProgressControls';
@@ -30,6 +32,7 @@ import { initPlayerObject } from './utils/ChromeStorage';
 import PlaylistDrawer from './components/playlists/View';
 import { ViewEnum } from './enums/View';
 import Settings from './components/setting/View';
+import './localization/i18n';
 
 const { LightTheme, DarkTheme } = adaptNavigationTheme({
   reactNavigationLight: NavigationDefaultTheme,
@@ -40,6 +43,7 @@ const CombinedDefaultTheme = merge(MD3LightTheme, LightTheme);
 const CombinedDarkTheme = merge(MD3DarkTheme, DarkTheme);
 
 const App: React.FC = () => {
+  const { t } = useTranslation();
   const isPlayerReady = useSetupPlayer();
   const Drawer = createDrawerNavigator();
   const Tab = createMaterialTopTabNavigator();
@@ -124,7 +128,7 @@ const App: React.FC = () => {
           >
             <Portal.Host>
               <Drawer.Navigator
-                initialRouteName="Home"
+                initialRouteName={ViewEnum.PLAYER_HOME}
                 drawerContent={PlaylistDrawer}
               >
                 <Drawer.Screen
@@ -132,7 +136,7 @@ const App: React.FC = () => {
                   component={NoxPlayer}
                   options={{
                     header: () => null,
-                    title: 'Home',
+                    title: String(t('appDrawer.homeScreenName')),
                     drawerIcon: () => <IconButton icon="home-outline" />,
                   }}
                 />
@@ -140,7 +144,7 @@ const App: React.FC = () => {
                   name={ViewEnum.LEFT_DRAWER}
                   options={{
                     drawerIcon: () => <IconButton icon="cog" />,
-                    title: 'Settings',
+                    title: String(t('appDrawer.settingScreenName')),
                     header: () => null,
                   }}
                   component={Settings}

@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { IconButton, Text, TextInput } from 'react-native-paper';
 import { View, Pressable } from 'react-native';
+import { useTranslation } from 'react-i18next';
 import { styles } from '../style';
 import { useNoxSetting } from '../../hooks/useSetting';
 import { seconds2HHMMSS } from '../../utils/Utils';
@@ -18,6 +19,7 @@ export default ({
   search = false,
   onPressed = () => void 0,
 }: props) => {
+  const { t } = useTranslation();
   const currentPlaylist = useNoxSetting(state => state.currentPlaylist);
 
   React.useEffect(() => {
@@ -28,7 +30,7 @@ export default ({
     <View style={{ flex: 3, paddingLeft: 10 }}>
       {search ? (
         <TextInput
-          label="Search"
+          label={String(t('PlaylistSearchBar.label'))}
           value={searchText}
           onChangeText={(val: string) => {
             setSearchText(val);

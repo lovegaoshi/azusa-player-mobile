@@ -12,6 +12,7 @@ import DraggableFlatList, {
   ScaleDecorator,
   RenderItemParams,
 } from 'react-native-draggable-flatlist';
+import { useTranslation } from 'react-i18next';
 
 import { useNoxSetting } from '../../hooks/useSetting';
 import { ViewEnum } from '../../enums/View';
@@ -22,6 +23,7 @@ import { twoWayAlert } from '../../utils/Utils';
 import Playlist from '../../objects/Playlist';
 
 export default (props: any) => {
+  const { t } = useTranslation();
   const navigation = useNavigation();
   const currentPlayingList = useNoxSetting(state => state.currentPlayingList);
   const currentPlaylist = useNoxSetting(state => state.currentPlaylist);
@@ -81,8 +83,8 @@ export default (props: any) => {
       <DrawerItem
         label={
           playlists[STORAGE_KEYS.SEARCH_PLAYLIST_KEY]
-            ? playlists[STORAGE_KEYS.SEARCH_PLAYLIST_KEY].title
-            : 'NAN'
+            ? String(t('PlaylistsDrawer.SearchListTitle'))
+            : String(t('PlaylistsDrawer.SearchListTitleNA'))
         }
         labelStyle={{
           fontWeight:

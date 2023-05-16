@@ -8,6 +8,8 @@ import {
   Text,
   TextInput,
 } from 'react-native-paper';
+import { useTranslation } from 'react-i18next';
+
 import Song from '../../objects/SongInterface';
 
 interface props {
@@ -23,6 +25,7 @@ export default ({
   onClose = () => void 0,
   onSubmit = (rename: string) => void 0,
 }: props) => {
+  const { t } = useTranslation();
   const [name, setName] = useState(song.name);
 
   React.useEffect(() => {
@@ -39,11 +42,11 @@ export default ({
   return (
     <Portal>
       <Dialog visible={visible} onDismiss={handleClose}>
-        <Dialog.Title>{`Rename ${song.name} to...`}</Dialog.Title>
+        <Dialog.Title>{t('RenameSongDialog.title', { song })}</Dialog.Title>
         <KeyboardAvoidingView style={{ minHeight: '10%' }}>
           <Dialog.Content>
             <TextInput
-              label="Song name"
+              label={String(t('RenameSongDialog.label'))}
               value={name}
               onChangeText={(val: string) => setName(val)}
               onSubmitEditing={handleSubmit}
