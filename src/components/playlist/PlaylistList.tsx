@@ -192,6 +192,9 @@ export default () => {
   };
 
   const refreshPlaylist = async () => {
+    if (currentPlaylist.type !== PLAYLIST_ENUMS.TYPE_TYPICA_PLAYLIST) {
+      return;
+    }
     Snackbar.show({
       text: t('PlaylistOperations.updating', { playlist: currentPlaylist }),
       duration: Snackbar.LENGTH_INDEFINITE,
