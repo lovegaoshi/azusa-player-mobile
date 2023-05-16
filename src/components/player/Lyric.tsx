@@ -13,7 +13,7 @@ import { useProgress } from 'react-native-track-player';
 import { searchLyricOptions, searchLyric } from '../../utils/Data';
 import { reExtractSongName } from '../../utils/re';
 import { IconButton } from 'react-native-paper';
-import {} from 'react-native';
+import { useNoxSetting } from '../../hooks/useSetting';
 
 export const LyricView = ({
   currentTime,
@@ -25,6 +25,7 @@ export const LyricView = ({
   const [lrc, setLrc] = useState('无法找到歌词,请手动搜索。');
   const [lrcOptions, setLrcOptions] = useState<any[]>([]);
   const [modalVisible, setModalVisible] = useState(false);
+  const playerStyle = useNoxSetting(state => state.playerStyle);
 
   useEffect(() => {
     if (title !== undefined && title !== '') {
@@ -50,7 +51,14 @@ export const LyricView = ({
 
   const lineRenderer = useCallback(
     ({ lrcLine: { millisecond, content }, index, active }: any) => (
-      <Text style={{ textAlign: 'center', color: active ? 'black' : 'gray' }}>
+      <Text
+        style={{
+          textAlign: 'center',
+          color: active
+            ? playerStyle.colors.primary
+            : playerStyle.colors.secondary,
+        }}
+      >
         {content}
       </Text>
     ),

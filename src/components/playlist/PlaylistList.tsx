@@ -5,6 +5,7 @@ import Snackbar from 'react-native-snackbar';
 import { IconButton, Text } from 'react-native-paper';
 import TrackPlayer from 'react-native-track-player';
 import { Dimensions } from 'react-native';
+import { useTranslation } from 'react-i18next';
 import { styles } from '../style';
 import SongInfo from './SongInfo';
 import { useNoxSetting } from '../../hooks/useSetting';
@@ -26,6 +27,7 @@ const DUMMYDATA = [...Array(1222).keys()].reduce(
 */
 
 export default () => {
+  const { t } = useTranslation();
   const currentPlayingList = useNoxSetting(state => state.currentPlayingList);
   const playmode = useNoxSetting(state => state.playerRepeat); // performance drain?
   const setCurrentPlayingList = useNoxSetting(
@@ -190,8 +192,11 @@ export default () => {
   };
 
   const refreshPlaylist = async () => {
+    if (currentPlaylist.type !== PLAYLIST_ENUMS.TYPE_TYPICA_PLAYLIST) {
+      return;
+    }
     Snackbar.show({
-      text: `正在更新歌单 ${currentPlaylist.title}……`,
+      text: t('PlaylistOperations.updating', { playlist: currentPlaylist }),
       duration: Snackbar.LENGTH_INDEFINITE,
     });
     setRefreshing(true);
@@ -201,7 +206,7 @@ export default () => {
       updatePlaylist,
     });
     Snackbar.dismiss();
-    Snackbar.show({ text: `歌单 ${currentPlaylist.title} updated` });
+    Snackbar.show({ text: t('PlaylistOperations.updated', { playlist: currentPlaylist }) });
     setRefreshing(false);
   };
 

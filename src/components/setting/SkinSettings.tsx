@@ -1,4 +1,5 @@
 import * as React from 'react';
+import FastImage from 'react-native-fast-image';
 import { View, Switch, Pressable, Image } from 'react-native';
 import {
   List,
@@ -8,16 +9,27 @@ import {
   TouchableRipple,
   RadioButton,
 } from 'react-native-paper';
+import { FlashList } from '@shopify/flash-list';
 import SkinSearchbar from './SkinSearchbar';
 import { useNoxSetting } from '../../hooks/useSetting';
 import AzusaTheme from '../styles/AzusaTheme';
 import NoxTheme from '../styles/NoxTheme';
 import Style from '../styles/styleInterface';
 
+const BuiltInThemes = [{
+  theme: AzusaTheme,
+  generic: false,
+},
+{
+  theme: NoxTheme,
+  generic: false,
+},]
+
 export default () => {
   const playerStyle = useNoxSetting(state => state.playerStyle);
   const setPlayerStyle = useNoxSetting(state => state.setPlayerStyle);
   const [skinLists, setSkinLists] = React.useState<Style[]>([]);
+  const allThemes = BuiltInThemes;
 
   const getThemeID = (skin: Style) =>
     `${skin.metaData.themeName}.${skin.metaData.themeAuthor}`;
@@ -41,14 +53,13 @@ export default () => {
               paddingLeft: 5,
             }}
           >
-            <Image
+            <FastImage
               source={{ uri: skin.metaData.themeIcon }}
               style={{
                 width: 72,
                 height: 72,
                 borderRadius: 40,
               }}
-              alt={skin.metaData.themeName}
             />
             <View style={{ paddingLeft: 5 }}>
               <Text
@@ -93,9 +104,17 @@ export default () => {
         flex: 1,
       }}
     >
-      <SkinSearchbar />
-      {renderSkinItem(AzusaTheme, false)}
-      {renderSkinItem(NoxTheme, false)}
+    <View
+      style={{flex: 0.5}}
+    ><SkinSearchbar /></View>      
+    <View
+      style={{flex: 5.5}}
+    ><FlashList
+    data={allThemes}
+    renderItem={({ item, index }) => renderSkinItem(item.theme, item.generic)}
+    keyExtractor={item => `${item.theme.metaData.themeName}.${item.theme.metaData.themeAuthor}`}
+    estimatedItemSize={10}
+  /></View>  
     </View>
   );
 };

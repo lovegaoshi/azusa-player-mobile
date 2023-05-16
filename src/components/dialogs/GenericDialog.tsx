@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { View } from 'react-native';
 import { Button, Dialog, Portal, Provider, Text } from 'react-native-paper';
+import { useTranslation } from 'react-i18next';
 
 interface props {
   visible: boolean;
@@ -13,6 +14,7 @@ export default ({
   onClose = () => void 0,
   onSubmit = () => void 0,
 }: props) => {
+  const { t } = useTranslation();
   const handleClose = () => {
     onClose();
   };
@@ -28,8 +30,8 @@ export default ({
           <Text variant="bodyMedium">This is simple dialog</Text>
         </Dialog.Content>
         <Dialog.Actions>
-          <Button onPress={handleClose}>Cancel</Button>
-          <Button onPress={handleSubmit}>Done</Button>
+          <Button onPress={handleClose}>{t('Dialog.cancel')}</Button>
+          <Button onPress={handleSubmit}>{t('Dialog.ok')}</Button>
         </Dialog.Actions>
       </Dialog>
     </Portal>

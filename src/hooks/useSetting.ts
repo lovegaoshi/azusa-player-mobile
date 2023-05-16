@@ -44,6 +44,7 @@ interface NoxSetting {
   setCurrentPlayingList: (val: string) => void;
   playlists: { [key: string]: Playlist };
   playlistIds: Array<string>;
+  setPlaylistIds: (val: Array<string>) => void;
 
   // TODO: maybe this should be a string instead...
   currentPlaylist: Playlist;
@@ -118,6 +119,7 @@ export const useNoxSetting = create<NoxSetting>((set, get) => ({
   },
   playlists: {},
   playlistIds: [],
+  setPlaylistIds: (val: Array<string>) => set({ playlistIds: val }),
 
   currentPlaylist: dummyPlaylist(),
   setCurrentPlaylist: (val: Playlist) => set({ currentPlaylist: val }),

@@ -30,6 +30,7 @@ export const PlayPauseButton: React.FC<{
       onPress={showPause ? TrackPlayer.pause : TrackPlayer.play}
       mode={playerStyle.playerControlIconContained}
       size={50}
+      style={{ backgroundColor: playerStyle.customColors.btnBackgroundColor }}
     />
   );
 };
