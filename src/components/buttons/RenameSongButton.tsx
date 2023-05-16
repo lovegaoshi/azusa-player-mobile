@@ -3,12 +3,12 @@ import { IconButton, Menu } from 'react-native-paper';
 import { useTranslation } from 'react-i18next';
 
 import Dialog from '../dialogs/RenameSongDialog';
-import Song, { dummySongObj } from '../../objects/SongInterface';
+import { dummySongObj } from '../../objects/Song';
 
 const ICON = 'pencil';
 
 interface menuProps {
-  getSongOnClick: () => Song;
+  getSongOnClick: () => NoxMedia.Song;
   disabled?: boolean;
   onSubmit?: (rename: string) => void;
   onCancel?: () => void;

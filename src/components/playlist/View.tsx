@@ -3,7 +3,6 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { View } from 'react-native';
 import { styles } from '../style';
 import BiliSearchbar from './BiliSearchbar';
-import Song from '../../objects/SongInterface';
 import PlaylistList from './PlaylistList';
 import { useNoxSetting } from '../../hooks/useSetting';
 
@@ -19,7 +18,7 @@ const Playlist = () => {
         ]}
       >
         <BiliSearchbar
-          onSearched={(songs: Array<Song>) => console.log(songs)}
+          onSearched={(songs: Array<NoxMedia.Song>) => console.log(songs)}
         />
         <PlaylistList />
       </View>

@@ -1,7 +1,6 @@
 import React, { useImperativeHandle, useState } from 'react';
 import { IconButton } from 'react-native-paper';
 import Dialog from '../dialogs/NewPlaylistDialog';
-import Playlist from '../../objects/Playlist';
 
 const ICON = 'plus-circle-outline';
 
@@ -13,7 +12,7 @@ export default React.forwardRef(
       size = 30,
       style = { position: 'absolute', right: 100 },
     }: {
-      fromList?: Playlist;
+      fromList?: NoxMedia.Playlist;
       icon?: string;
       size?: number;
       // TODO: really object?

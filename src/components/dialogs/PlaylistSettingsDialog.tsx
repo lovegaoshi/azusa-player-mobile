@@ -10,13 +10,12 @@ import {
   Switch,
 } from 'react-native-paper';
 import { useTranslation } from 'react-i18next';
-import Playlist from '../../objects/Playlist';
 import { useNoxSetting } from '../../hooks/useSetting';
 
 interface props {
   visible: boolean;
   onClose?: () => void;
-  onSubmit?: (newPlaylist: Playlist) => void;
+  onSubmit?: (newPlaylist: NoxMedia.Playlist) => void;
 }
 
 export default ({
@@ -46,7 +45,7 @@ export default ({
   };
 
   const handleSubmit = () => {
-    const newPlaylist: Playlist = {
+    const newPlaylist: NoxMedia.Playlist = {
       ...currentPlaylist,
       title: playlistName,
       subscribeUrl: Array.from(new Set(subscribeUrl.split(';'))),

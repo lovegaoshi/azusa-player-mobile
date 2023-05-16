@@ -1,10 +1,8 @@
 import * as React from 'react';
 import FastImage from 'react-native-fast-image';
-import { View, Switch, Pressable, Image, FlatList } from 'react-native';
+import { View, FlatList } from 'react-native';
 import {
-  List,
   Text,
-  MD3Colors,
   IconButton,
   TouchableRipple,
   RadioButton,
@@ -13,7 +11,6 @@ import SkinSearchbar from './SkinSearchbar';
 import { useNoxSetting } from '../../hooks/useSetting';
 import AzusaTheme from '../styles/AzusaTheme';
 import NoxTheme from '../styles/NoxTheme';
-import Style from '../styles/styleInterface';
 
 const BuiltInThemes = [{
   theme: AzusaTheme,
@@ -27,14 +24,14 @@ const BuiltInThemes = [{
 export default () => {
   const playerStyle = useNoxSetting(state => state.playerStyle);
   const setPlayerStyle = useNoxSetting(state => state.setPlayerStyle);
-  const [skinLists, setSkinLists] = React.useState<Style[]>([]);
+  const [skinLists, setSkinLists] = React.useState<NoxTheme.style[]>([]);
   const allThemes = BuiltInThemes;
 
-  const getThemeID = (skin: Style) =>
+  const getThemeID = (skin: NoxTheme.style) =>
     `${skin.metaData.themeName}.${skin.metaData.themeAuthor}`;
   const [checked, setChecked] = React.useState(getThemeID(playerStyle));
 
-  const renderSkinItem = (skin: Style, generic = true) => {
+  const renderSkinItem = (skin: NoxTheme.style, generic = true) => {
     const themeID = getThemeID(skin);
     const selectTheme = () => {
       setChecked(themeID);

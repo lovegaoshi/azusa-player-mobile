@@ -1,15 +1,13 @@
-import Playlist from '../objects/Playlist';
 import { searchBiliURLs } from './BiliSearch';
 import { parseSongName } from './re';
-import Song from '../objects/SongInterface';
 
 interface props {
-  listObj: Playlist;
+  listObj: NoxMedia.Playlist;
   subscribeUrls?: Array<string>;
   updatePlaylist: (
-    playlist: Playlist,
-    addSongs: Song[],
-    removeSongs: Song[]
+    playlist: NoxMedia.Playlist,
+    addSongs: NoxMedia.Song[],
+    removeSongs: NoxMedia.Song[]
   ) => void;
   progressEmitter: (val: number) => void;
 }

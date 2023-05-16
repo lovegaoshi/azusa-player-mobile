@@ -1,5 +1,4 @@
 import { DefaultTheme } from 'react-native-paper';
-import style from './styleInterface';
 
 export default {
   metaData: {
@@ -101,4 +100,4 @@ export default {
     onSurfaceVariant: '#9400d3', // 'rgb(202, 199, 182)',
   },
   playerControlIconContained: 'outline',
-} as style;
+} as NoxTheme.style;

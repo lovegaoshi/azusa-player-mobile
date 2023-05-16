@@ -11,12 +11,11 @@ import {
 } from 'react-native-paper';
 import { FlashList } from '@shopify/flash-list';
 import { useTranslation } from 'react-i18next';
-import Playlist, { dummyPlaylist } from '../../objects/Playlist';
 import { useNoxSetting } from '../../hooks/useSetting';
 import { styles } from '../style';
 interface props {
   visible: boolean;
-  fromList: Playlist;
+  fromList: NoxMedia.Playlist;
   onClose?: () => void;
   onSubmit?: () => void;
 }

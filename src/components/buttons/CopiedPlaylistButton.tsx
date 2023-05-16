@@ -3,11 +3,11 @@ import { IconButton, Menu } from 'react-native-paper';
 import { useTranslation } from 'react-i18next';
 
 import Dialog from '../dialogs/CopiedPlaylistDialog';
-import Playlist, { dummyPlaylistList } from '../../objects/Playlist';
+import { dummyPlaylistList } from '../../objects/Playlist';
 
 const ICON = 'playlist-plus';
 
-export const CopiedPlaylistButton = ({ fromList }: { fromList: Playlist }) => {
+export const CopiedPlaylistButton = ({ fromList }: { fromList: NoxMedia.Playlist }) => {
   const [dialogOpen, setDialogOpen] = useState(false);
 
   return (
@@ -30,7 +30,7 @@ export const CopiedPlaylistButton = ({ fromList }: { fromList: Playlist }) => {
 };
 
 interface menuProps {
-  getFromListOnClick: () => Playlist;
+  getFromListOnClick: () => NoxMedia.Playlist;
   onSubmit?: () => void;
   onCancel?: () => void;
 }
@@ -41,7 +41,7 @@ export const CopiedPlaylistMenuItem = ({
 }: menuProps) => {
   const { t } = useTranslation();
   const [dialogOpen, setDialogOpen] = useState(false);
-  const [fromList, setFromList] = useState<Playlist>(dummyPlaylistList);
+  const [fromList, setFromList] = useState<NoxMedia.Playlist>(dummyPlaylistList);
 
   const handleClose = () => {
     setDialogOpen(false);

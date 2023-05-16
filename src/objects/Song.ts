@@ -1,6 +1,6 @@
+import { v4 as uuidv4 } from 'uuid';
 import { fetchPlayUrlPromise } from '../utils/Data';
 import { reExtractSongName, extractParenthesis } from '../utils/re';
-import SongInterface from './SongInterface';
 import { customReqHeader, DEFAULT_UA } from '../utils/BiliFetch';
 
 export const DEFAULT_NULL_URL = 'NULL';
@@ -14,10 +14,10 @@ interface SongProps {
   singer: string;
   singerId: string | number;
   cover: string;
-  lyric: string | undefined;
-  lyricOffset: number | undefined;
-  page: number | undefined;
-  biliShazamedName: string | undefined;
+  lyric?: string;
+  lyricOffset?: number;
+  page?: number;
+  biliShazamedName?: string;
   duration: number;
 }
 
@@ -33,7 +33,7 @@ export default ({
   page,
   biliShazamedName,
   duration,
-}: SongProps): SongInterface => {
+}: SongProps): NoxMedia.Song => {
   return {
     id: String(cid),
     bvid,
@@ -52,10 +52,10 @@ export default ({
 };
 
 export const setSongBiliShazamed = (
-  song: SongInterface,
+  song: NoxMedia.Song,
   val: string | null
 ) => {
-  if (!val) return { ...song, biliShazamedName: val } as SongInterface;
+  if (!val) return { ...song, biliShazamedName: val } as NoxMedia.Song;
   const biliShazamedName = extractParenthesis(val);
   return {
     ...song,
@@ -63,16 +63,16 @@ export const setSongBiliShazamed = (
     nameRaw: song.name,
     name: biliShazamedName,
     parsedName: biliShazamedName,
-  } as SongInterface;
+  } as NoxMedia.Song;
 };
 
-export const removeSongBiliShazamed = (song: SongInterface) => {
+export const removeSongBiliShazamed = (song: NoxMedia.Song) => {
   song.biliShazamedName = undefined;
   song.name = song.nameRaw;
   song.parsedName = reExtractSongName(song.name, song.singerId);
 };
 
-export const resolveUrl = async (song: SongInterface) => {
+export const resolveUrl = async (song: NoxMedia.Song) => {
   // TODO: method is called MULTIPLE times. need to investigate and debounce.
   // luckily bilibili doesnt seem to care for now
   console.log('resolve url called');
@@ -88,3 +88,23 @@ export const resolveUrl = async (song: SongInterface) => {
     return NULL_TRACK;
   }
 };
+
+export const dummySong = (): NoxMedia.Song => {
+  return {
+    id: uuidv4(),
+    bvid: '0',
+    name: 'dummySong',
+    nameRaw: 'dummySong',
+    singer: 'dummyArtist',
+    singerId: 0,
+    cover: '',
+    lyric: '',
+    lyricOffset: 0,
+    parsedName: 'dummySongParsed',
+    biliShazamedName: '',
+    page: 0,
+    duration: 0,
+  };
+};
+
+export const dummySongObj = dummySong();

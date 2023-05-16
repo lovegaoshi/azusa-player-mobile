@@ -4,7 +4,6 @@ import Snackbar from 'react-native-snackbar';
 import { useTranslation } from 'react-i18next';
 
 import { useNoxSetting } from '../../hooks/useSetting';
-import coordinates from '../../objects/Coordinate';
 import playlistAnalytics from '../../utils/Analytics';
 import PlaylistSettingsButton from '../buttons/PlaylistSettingsButton';
 import { PLAYLIST_ENUMS } from '../../enums/Playlist';
@@ -28,7 +27,7 @@ enum ICONS {
 interface props {
   visible?: boolean;
   toggleVisible?: () => void;
-  menuCoords?: coordinates;
+  menuCoords?: NoxTheme.coordinates;
 }
 
 export default ({

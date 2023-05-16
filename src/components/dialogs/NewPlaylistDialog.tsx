@@ -10,12 +10,12 @@ import {
 } from 'react-native-paper';
 import { useTranslation } from 'react-i18next';
 
-import Playlist, { dummyPlaylist } from '../../objects/Playlist';
+import { dummyPlaylist } from '../../objects/Playlist';
 import { useNoxSetting } from '../../hooks/useSetting';
 
 interface props {
   visible: boolean;
-  fromList?: Playlist;
+  fromList?: NoxMedia.Playlist;
   onClose?: () => void;
   onSubmit?: () => void;
 }
