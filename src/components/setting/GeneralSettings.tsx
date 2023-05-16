@@ -1,7 +1,7 @@
 import * as React from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, ScrollView } from 'react-native';
 import { TouchableRipple, Switch } from 'react-native-paper';
-import { FlashList } from '@shopify/flash-list';
+import { v4 as uuidv4 } from 'uuid';
 import { useNoxSetting } from '../../hooks/useSetting';
 
 interface SettingEntry {
@@ -11,7 +11,7 @@ interface SettingEntry {
   reRender?: boolean;
   settingType?: string;
 }
-const GEN_SETTING_ENTIRES: SettingEntry[] = [
+const GEN_SETTING_BOOLEAN: SettingEntry[] = [
   {name: 'Daily auto RSS update',
 desc: "Automatically update playlist's subscriptions daily when opened.",
 settingName: 'autoRSSUpdate',
@@ -75,7 +75,7 @@ export default () => {
     };
 
     return (
-      <TouchableRipple onPress={onToggle} style={{ paddingHorizontal: 10 }}>
+      <TouchableRipple onPress={onToggle} style={{ paddingHorizontal: 10 }} id={uuidv4()}>
         <View style={{ flexDirection: 'row', paddingVertical: 10 }}>
           <View style={{ flex: 5, paddingLeft: 5 }}>
             <Text style={{ fontSize: 20, color: playerStyle.colors.primary }}>
@@ -109,12 +109,9 @@ export default () => {
         flex: 1,
       }}
     >
-      <FlashList
-        data={GEN_SETTING_ENTIRES}
-        renderItem={({ item, index }) => renderSetting(item)}
-        keyExtractor={item => item.settingName}
-        estimatedItemSize={10}
-      />
+      <ScrollView>
+        {GEN_SETTING_BOOLEAN.map(item => renderSetting(item))};
+      </ScrollView>
     </View>
   );
 };

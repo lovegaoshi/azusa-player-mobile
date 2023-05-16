@@ -1,6 +1,6 @@
 import * as React from 'react';
 import FastImage from 'react-native-fast-image';
-import { View, Switch, Pressable, Image } from 'react-native';
+import { View, Switch, Pressable, Image, FlatList } from 'react-native';
 import {
   List,
   Text,
@@ -9,7 +9,6 @@ import {
   TouchableRipple,
   RadioButton,
 } from 'react-native-paper';
-import { FlashList } from '@shopify/flash-list';
 import SkinSearchbar from './SkinSearchbar';
 import { useNoxSetting } from '../../hooks/useSetting';
 import AzusaTheme from '../styles/AzusaTheme';
@@ -109,11 +108,10 @@ export default () => {
     ><SkinSearchbar /></View>      
     <View
       style={{flex: 5.5}}
-    ><FlashList
+    ><FlatList
     data={allThemes}
     renderItem={({ item, index }) => renderSkinItem(item.theme, item.generic)}
     keyExtractor={item => `${item.theme.metaData.themeName}.${item.theme.metaData.themeAuthor}`}
-    estimatedItemSize={10}
   /></View>  
     </View>
   );
