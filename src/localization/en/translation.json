@@ -1,49 +1,49 @@
 {
-    "_comment": "src/localization/en/translation.json",
-    "appDrawer": {
-      "homeScreenName": "Home",
-      "settingScreenName": "Settings"
-    },
-    "Dialog": {
-        "ok": "Done",
-        "cancel": "Cancel"
-    },
-    "CopiedPlaylistDialog": {
-        "title": "Send {{fromList.title}} to..."
-    },
-    "NewPlaylistDialog": {
-        "title": "Create {{fromList.title}} as New Playlist...",
-        "titleNew": "Create New Playlist...",
-        "label": "Playlist name"
-    },
-    "PlaylistSettingsDialog": {
-        "playlistNameLabel": "Playlist Name",
-        "subscribeUrlLabel": "Subscribe URL",
-        "blacklistedUrlLabel": "Banned BVIDs",
-        "useBiliShazamLabel": "Use BiliShazam"
-    },
-    "RenameSongDialog": {
-        "title": "Remame {{song.name}} to...",
-        "label": "Song name"
-    },
-    "PlaylistsDrawer": {
-        "SearchListTitle": "Search",
-        "SearchListTitleNA": "MISSINGNO."
-    },
-    "BiliSearchBar": {
-        "label": "Bilibili URL"
-    },
-    "PlaylistSearchBar": {
-        "label": "Search"
-    },
-    "PlaylistOperations": {
-        "updating": "Now updating {{playlist.title}}'s subscriptions...",
-        "updated": "Playlist {{playlist.title}} updated",
-        "updating": "Now updating {{playlist.title}}'s subscriptions...",
-        "updated": "Playlist {{playlist.title}} updated",
-        "updating": "Now updating {{playlist.title}}'s subscriptions...",
-        "updated": "Playlist {{playlist.title}} updated",
-        "updating": "Now updating {{playlist.title}}'s subscriptions...",
-        "updated": "Playlist {{playlist.title}} updated"
-    }
+  "_comment": "src/localization/en/translation.json",
+  "appDrawer": {
+    "homeScreenName": "Home",
+    "settingScreenName": "Settings"
+  },
+  "Dialog": {
+    "ok": "Done",
+    "cancel": "Cancel"
+  },
+  "CopiedPlaylistDialog": {
+    "title": "Send {{fromList.title}} to..."
+  },
+  "NewPlaylistDialog": {
+    "title": "Create {{fromList.title}} as New Playlist...",
+    "titleNew": "Create New Playlist...",
+    "label": "Playlist name"
+  },
+  "PlaylistSettingsDialog": {
+    "playlistNameLabel": "Playlist Name",
+    "subscribeUrlLabel": "Subscribe URL",
+    "blacklistedUrlLabel": "Banned BVIDs",
+    "useBiliShazamLabel": "Use BiliShazam"
+  },
+  "RenameSongDialog": {
+    "title": "Remame {{song.name}} to...",
+    "label": "Song name"
+  },
+  "PlaylistsDrawer": {
+    "SearchListTitle": "Search",
+    "SearchListTitleNA": "MISSINGNO."
+  },
+  "BiliSearchBar": {
+    "label": "Bilibili URL"
+  },
+  "PlaylistSearchBar": {
+    "label": "Search"
+  },
+  "PlaylistOperations": {
+    "updating": "Now updating {{playlist.title}}'s subscriptions...",
+    "updated": "Playlist {{playlist.title}} updated",
+    "reloading": "Now updating {{playlist.title}}'s subscriptions...",
+    "reloaded": "Playlist {{playlist.title}} updated",
+    "cleaning": "Now updating {{playlist.title}}'s subscriptions...",
+    "cleaned": "Playlist {{playlist.title}} updated",
+    "bilishazaming": "Now updating {{playlist.title}}'s subscriptions...",
+    "bilishazamed": "Playlist {{playlist.title}} updated"
   }
+}
