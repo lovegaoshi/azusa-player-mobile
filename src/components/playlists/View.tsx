@@ -25,7 +25,7 @@ import { ViewEnum } from '../../enums/View';
 import AddPlaylistButton from '../buttons/AddPlaylistButton';
 import { STORAGE_KEYS } from '../../utils/ChromeStorage';
 import NewPlaylistDialog from '../dialogs/NewPlaylistDialog';
-import { twoWayAlert } from '../../utils/Utils';
+import { TwoWayAlert } from '../../utils/Utils';
 import Playlist from '../../objects/Playlist';
 
 export default (props: any) => {
@@ -53,7 +53,7 @@ export default (props: any) => {
   };
 
   const confirmOnDelete = (playlistId: string) => {
-    twoWayAlert(
+    TwoWayAlert(
       `Delete ${playlists[playlistId].title}?`,
       `Are you sure to delete playlist ${playlists[playlistId].title}?`,
       () => removePlaylist(playlistId)

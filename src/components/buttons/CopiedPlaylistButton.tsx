@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { IconButton, Menu } from 'react-native-paper';
+import { useTranslation } from 'react-i18next';
+
 import Dialog from '../dialogs/CopiedPlaylistDialog';
 import Playlist, { dummyPlaylistList } from '../../objects/Playlist';
 
@@ -37,6 +39,7 @@ export const CopiedPlaylistMenuItem = ({
   onSubmit = () => void 0,
   onCancel = () => void 0,
 }: menuProps) => {
+  const { t } = useTranslation();
   const [dialogOpen, setDialogOpen] = useState(false);
   const [fromList, setFromList] = useState<Playlist>(dummyPlaylistList);
 
@@ -58,7 +61,7 @@ export const CopiedPlaylistMenuItem = ({
           setDialogOpen(true);
           setFromList(getFromListOnClick());
         }}
-        title="Send to..."
+        title={t('PlaylistOperations.playlistSendToTitle')}
       />
       <Dialog
         visible={dialogOpen}
