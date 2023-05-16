@@ -9,6 +9,7 @@ import {
   TextInput,
   Switch,
 } from 'react-native-paper';
+import { useTranslation } from 'react-i18next';
 import Playlist from '../../objects/Playlist';
 import { useNoxSetting } from '../../hooks/useSetting';
 
@@ -23,6 +24,7 @@ export default ({
   onClose = () => void 0,
   onSubmit = () => void 0,
 }: props) => {
+  const { t } = useTranslation();
   const currentPlaylist = useNoxSetting(state => state.currentPlaylist);
   const updatePlaylist = useNoxSetting(state => state.updatePlaylist);
   const [playlistName, setPlaylistName] = useState(currentPlaylist.title);
@@ -61,23 +63,23 @@ export default ({
         <KeyboardAvoidingView style={{ minHeight: '10%' }}>
           <Dialog.Content>
             <TextInput
-              label="Playlist Name"
+              label={String(t('PlaylistSettingsDialog.playlistNameLabel'))}
               value={playlistName}
               onChangeText={(val: string) => setPlaylistName(val)}
             />
             <TextInput
-              label="Subscribe URL"
+              label={String(t('PlaylistSettingsDialog.subscribeUrlLabel'))}
               value={subscribeUrl}
               onChangeText={(val: string) => setSubscribeUrl(val)}
             />
             <TextInput
-              label="Banned BVIDs"
+              label={String(t('PlaylistSettingsDialog.blacklistedUrlLabel'))}
               value={blacklistedUrl}
               onChangeText={(val: string) => setBlacklistedUrl(val)}
             />
             <View style={{ flexDirection: 'row' }}>
               <Switch value={useBiliShazam} onValueChange={toggleBiliShazam} />
-              <Text style={{ fontSize: 18 }}>{'Use BiliShazam'}</Text>
+              <Text style={{ fontSize: 18 }}>{t('PlaylistSettingsDialog.useBiliShazamLabel')}</Text>
             </View>
           </Dialog.Content>
         </KeyboardAvoidingView>

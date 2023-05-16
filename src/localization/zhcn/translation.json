@@ -1,0 +1,49 @@
+{
+  "_comment": "src/localization/en/translation.json",
+  "appDrawer": {
+    "homeScreenName": "音乐",
+    "settingScreenName": "设置"
+  },
+  "Dialog": {
+    "ok": "好的",
+    "cancel": "算了"
+  },
+  "CopiedPlaylistDialog": {
+    "title": "将歌单 {{fromList.title}} 送往..."
+  },
+  "NewPlaylistDialog": {
+    "title": "将歌单 {{fromList.title}} 新建为...",
+    "titleNew": "创建新歌单...",
+    "label": "歌单名称"
+  },
+  "PlaylistSettingsDialog": {
+    "playlistNameLabel": "歌单名称",
+    "subscribeUrlLabel": "b站订阅URL",
+    "blacklistedUrlLabel": "黑名单BV号",
+    "useBiliShazamLabel": "使用b站识歌（王胡桃专用）"
+  },
+  "RenameSongDialog": {
+    "title": "将 {{song.name}} 重命名为...",
+    "label": "歌名"
+  },
+  "PlaylistsDrawer": {
+    "SearchListTitle": "搜索歌单",
+    "SearchListTitleNA": "错误错误错误错误"
+  },
+  "BiliSearchBar": {
+    "label": "b站URL"
+  },
+  "PlaylistSearchBar": {
+    "label": "搜索"
+  },
+  "PlaylistOperations": {
+    "updating": "正在更新歌单 {{playlist.title}} 的订阅...",
+    "updated": "歌单 {{playlist.title}} 更新完成",
+    "reloading": "正在重载歌单 {{playlist.title}} ...",
+    "reloaded": "歌单 {{playlist.title}} 重载完成",
+    "cleaning": "正在清理歌单 {{playlist.title}} 无效bv号...",
+    "cleaned": "歌单 {{playlist.title}} 清理完成",
+    "bilishazaming": "正在对歌单 {{playlist.title}} 用b站识歌...",
+    "bilishazamed": "歌单 {{playlist.title}} b站识歌完成"
+  }
+}

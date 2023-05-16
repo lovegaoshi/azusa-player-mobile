@@ -8,6 +8,8 @@ import {
   TextInput,
   Text,
 } from 'react-native-paper';
+import { useTranslation } from 'react-i18next';
+
 import Playlist, { dummyPlaylist } from '../../objects/Playlist';
 import { useNoxSetting } from '../../hooks/useSetting';
 
@@ -24,6 +26,7 @@ export default ({
   onClose = () => void 0,
   onSubmit = () => void 0,
 }: props) => {
+  const { t } = useTranslation();
   const [playlistName, setPlaylistName] = useState('');
   const addPlaylist = useNoxSetting(state => state.addPlaylist);
 
@@ -62,21 +65,21 @@ export default ({
       >
         <Dialog.Title>
           {fromList
-            ? `Create ${fromList.title} as New Playlist...`
-            : 'Create New Playlist...'}
+            ? t('NewPlaylistDialog.title', { fromList })
+            : t('NewPlaylistDialog.titleNew')}
         </Dialog.Title>
         <Dialog.Content>
           <TextInput
             style={{ flex: 5 }}
-            label="Playlist name"
+            label={String(t('NewPlaylistDialog.label'))}
             value={playlistName}
             onChangeText={(val: string) => setPlaylistName(val)}
             onSubmitEditing={handleSubmit}
           />
         </Dialog.Content>
         <Dialog.Actions>
-          <Button onPress={handleClose}>Cancel</Button>
-          <Button onPress={handleSubmit}>Done</Button>
+          <Button onPress={handleClose}>{t('Dialog.cancel')}</Button>
+          <Button onPress={handleSubmit}>{t('Dialog.ok')}</Button>
         </Dialog.Actions>
       </Dialog>
     </Portal>

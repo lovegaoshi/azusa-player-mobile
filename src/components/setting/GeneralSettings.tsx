@@ -1,7 +1,43 @@
 import * as React from 'react';
-import { View, Text, Pressable } from 'react-native';
+import { View, Text } from 'react-native';
 import { TouchableRipple, Switch } from 'react-native-paper';
+import { FlashList } from '@shopify/flash-list';
 import { useNoxSetting } from '../../hooks/useSetting';
+
+interface SettingEntry {
+  name: string;
+  desc: string;
+  settingName: string;
+  reRender?: boolean;
+  settingType?: string;
+}
+const GEN_SETTING_ENTIRES: SettingEntry[] = [
+  {name: 'Daily auto RSS update',
+desc: "Automatically update playlist's subscriptions daily when opened.",
+settingName: 'autoRSSUpdate',
+  },
+  {name: 'Parse song name',
+desc: 'Show automatically parsed song names in playlist.',
+settingName: 'parseSongName',
+reRender: true
+  },
+  {name: 'Play searched results',
+desc: 'When searching in a playlist, play the seached results.',
+settingName: 'keepSearchedSongListWhenPlaying'
+  },
+  {name: 'Hide album cover',
+desc: 'Hide the album cover.',
+settingName: 'hideCoverInMobile'
+  },
+  {name: 'Data Saver',
+desc: 'Render low quality assets to save data.',
+settingName: 'dataSaver'
+  },
+  {name: 'Fast Bilibili Search',
+desc: 'Do not search for bilibili video episodes.',
+settingName: 'fastBiliSearch'
+  },
+]
 
 export default () => {
   const playerSetting = useNoxSetting(state => state.playerSetting);
@@ -18,12 +54,19 @@ export default () => {
     });
   };
 
-  const booleanSetting = (
-    name: string,
-    desc: string,
-    settingName: string,
+  const renderSetting = (item: SettingEntry) => {
+    switch (item.settingType) {
+      default:
+        return booleanSetting(item);
+    }
+  }
+
+  const booleanSetting = ({
+    name,
+    desc,
+    settingName,
     reRender = false
-  ) => {
+  }:SettingEntry) => {
     const onToggle = () => {
       saveSettings({ [settingName]: !playerSetting[settingName] });
       if (reRender) {
@@ -66,37 +109,12 @@ export default () => {
         flex: 1,
       }}
     >
-      {booleanSetting(
-        'Daily auto RSS update',
-        "Automatically update playlist's subscriptions daily when opened.",
-        'autoRSSUpdate'
-      )}
-      {booleanSetting(
-        'Parse song name',
-        'Show automatically parsed song names in playlist.',
-        'parseSongName',
-        true
-      )}
-      {booleanSetting(
-        'Play searched results',
-        'When searching in a playlist, play the seached results.',
-        'keepSearchedSongListWhenPlaying'
-      )}
-      {booleanSetting(
-        'Hide album cover',
-        'Hide the album cover.',
-        'hideCoverInMobile'
-      )}
-      {booleanSetting(
-        'Data Saver',
-        'Render low quality assets to save data.',
-        'dataSaver'
-      )}
-      {booleanSetting(
-        'Fast Bilibili Search',
-        'Do not search for bilibili video episodes.',
-        'fastBiliSearch'
-      )}
+      <FlashList
+        data={GEN_SETTING_ENTIRES}
+        renderItem={({ item, index }) => renderSetting(item)}
+        keyExtractor={item => item.settingName}
+        estimatedItemSize={10}
+      />
     </View>
   );
 };

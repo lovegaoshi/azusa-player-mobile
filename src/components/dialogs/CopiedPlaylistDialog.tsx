@@ -10,6 +10,7 @@ import {
   RadioButton,
 } from 'react-native-paper';
 import { FlashList } from '@shopify/flash-list';
+import { useTranslation } from 'react-i18next';
 import Playlist, { dummyPlaylist } from '../../objects/Playlist';
 import { useNoxSetting } from '../../hooks/useSetting';
 import { styles } from '../style';
@@ -26,6 +27,7 @@ export default ({
   onClose = () => void 0,
   onSubmit = () => void 0,
 }: props) => {
+  const { t } = useTranslation();
   const [playlistIndex, setPlaylistIndex] = useState('');
   const playlistIds = useNoxSetting(state => state.playlistIds);
   const playlists = useNoxSetting(state => state.playlists);
@@ -55,7 +57,7 @@ export default ({
         onDismiss={handleClose}
         style={{ maxHeight: '70%' }}
       >
-        <Dialog.Title>{`Send ${fromList.title} to...`}</Dialog.Title>
+        <Dialog.Title>{t('CopiedPlaylistDialog.title', {fromList})}</Dialog.Title>
         <Dialog.Content style={{ ...styles.topBarContainer, height: '70%' }}>
           <FlashList
             data={playlistIds
@@ -83,8 +85,8 @@ export default ({
           />
         </Dialog.Content>
         <Dialog.Actions>
-          <Button onPress={handleClose}>Cancel</Button>
-          <Button onPress={handleSubmit}>Done</Button>
+          <Button onPress={handleClose}>{t('Dialog.cancel')}</Button>
+          <Button onPress={handleSubmit}>{t('Dialog.ok')}</Button>
         </Dialog.Actions>
       </Dialog>
     </Portal>

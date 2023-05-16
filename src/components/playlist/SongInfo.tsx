@@ -85,7 +85,10 @@ function SongInfo({
                 <Text variant="titleMedium">{`${String(
                   index + 1
                 )}. ${title}`}</Text>
-                <Text variant="titleSmall" style={{ color: 'grey' }}>
+                <Text
+                  variant="titleSmall"
+                  style={{ color: playerStyle.colors.secondary }}
+                >
                   {artist}
                 </Text>
               </View>

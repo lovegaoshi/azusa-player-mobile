@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Pressable, Image, StyleSheet } from 'react-native';
+import FastImage from 'react-native-fast-image';
 
 const getRandomNumberExclude = (randRange: number, exclude = -1) => {
   if (exclude > 0) {
@@ -44,10 +45,9 @@ export default function RandomGIFButton({
         onClickCallback();
       }}
     >
-      <Image
+      <FastImage
         style={{ width: 72, height: 72 }}
         source={{ uri: gifs[randomGIFSrc] }}
-        alt=""
       />
     </Pressable>
   );
