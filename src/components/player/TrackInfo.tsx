@@ -25,10 +25,6 @@ export const TrackInfo: React.FC<{
   const [isImageVisible, setIsImageVisible] = useState(true);
   const opacity = new Animated.Value(1);
 
-  const playlistTitle = useCallback(() => {
-    return currentPlayingList ? playlists[currentPlayingList]?.title : '';
-  }, [currentPlayingList]);
-
   React.useEffect(() => {
     // TODO: when the sliding window queue is implemented, this would just be
     // another zustand state.
@@ -95,14 +91,14 @@ export const TrackInfo: React.FC<{
       <Text
         style={[styles.artistText, { color: playerStyle.colors.secondary }]}
       >
-        {playlistTitle()}
+        {currentPlayingList.title}
       </Text>
       <Text
         style={[styles.artistText, { color: playerStyle.colors.secondary }]}
       >
-        {currentPlayingList && playlists[currentPlayingList] && track?.song
+        {track?.song
           ? `#${
-              playlists[currentPlayingList].songList.findIndex(
+              currentPlayingList.songList.findIndex(
                 song => song.id === track.song.id
               ) + 1
             } - ${

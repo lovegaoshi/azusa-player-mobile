@@ -1,6 +1,6 @@
 /* eslint-disable prefer-const */
 import { create } from 'zustand';
-import Playlist, { dummyPlaylist } from '../objects/Playlist';
+import Playlist, { dummyPlaylist, dummyPlaylistList } from '../objects/Playlist';
 import { NoxRepeatMode } from '../components/player/enums/repeatMode';
 import {
   DEFAULT_SETTING,
@@ -40,8 +40,8 @@ interface NoxSetting {
 
   currentPlayingId: string | null;
   setCurrentPlayingId: (val: string) => void;
-  currentPlayingList: string | null;
-  setCurrentPlayingList: (val: string) => void;
+  currentPlayingList: Playlist;
+  setCurrentPlayingList: (val: Playlist) => void;
   playlists: { [key: string]: Playlist };
   playlistIds: Array<string>;
   setPlaylistIds: (val: Array<string>) => void;
@@ -106,16 +106,16 @@ export const useNoxSetting = create<NoxSetting>((set, get) => ({
   togglePlaylistShouldReRender: () =>
     set({ playlistShouldReRender: !get().playlistShouldReRender }),
 
-  currentPlayingId: null,
+  currentPlayingId: '',
   // MOCK: is it slow? GeT a BeTtEr PhOnE
   setCurrentPlayingId: (val: string) => {
     set({ currentPlayingId: val });
-    savelastPlaylistId([String(get().currentPlayingList), val]);
+    savelastPlaylistId([get().currentPlayingList.id, val]);
   },
-  currentPlayingList: null,
-  setCurrentPlayingList: (val: string) => {
+  currentPlayingList: dummyPlaylistList,
+  setCurrentPlayingList: (val: Playlist) => {
     set({ currentPlayingList: val });
-    savelastPlaylistId([val, String(get().currentPlayingId)]);
+    savelastPlaylistId([val.id, String(get().currentPlayingId)]);
   },
   playlists: {},
   playlistIds: [],
@@ -193,7 +193,7 @@ export const useNoxSetting = create<NoxSetting>((set, get) => ({
 
   initPlayer: async (val: PlayerStorageObject) => {
     set({ currentPlayingId: val.lastPlaylistId[1] });
-    set({ currentPlayingList: val.lastPlaylistId[0] });
+    set({ currentPlayingList: val.playlists[val.lastPlaylistId[0]] });
     set({
       currentPlaylist: notNullDefault(
         val.playlists[val.lastPlaylistId[0]],
