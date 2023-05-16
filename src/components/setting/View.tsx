@@ -13,10 +13,10 @@ import { ViewEnum } from '../../enums/View';
 enum ICONS {
   HOME = 'cog',
   // TODO: need to figure out the skin object story first before implementing this
-  SKIN = 'palette-outline',
+  SKIN = 'palette',
   // TODO: need to figure out bili SESSIONDATA first before implementing this.
   // though a good time to think about oauth2 now
-  BACKUP = 'cloud-upload',
+  BACKUP = 'backup-restore',
   INFO = 'information',
 }
 
