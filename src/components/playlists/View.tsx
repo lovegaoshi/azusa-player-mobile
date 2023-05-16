@@ -1,13 +1,19 @@
-import React, { useRef, useState } from 'react';
+import React, { ReactNode, useRef, useState } from 'react';
 import {
   DrawerContentScrollView,
   DrawerItem,
   DrawerItemList,
 } from '@react-navigation/drawer';
 import { v4 as uuidv4 } from 'uuid';
-import { IconButton, Divider, Text, Button } from 'react-native-paper';
+import {
+  IconButton,
+  Divider,
+  Text,
+  TouchableRipple,
+  Button,
+} from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
-import { Pressable, View } from 'react-native';
+import { Pressable, Dimensions, View } from 'react-native';
 import DraggableFlatList, {
   ScaleDecorator,
   RenderItemParams,
@@ -54,12 +60,69 @@ export default (props: any) => {
     );
   };
 
+  const renderPlaylistWrapper = ({
+    item,
+    icon,
+  }: {
+    item: Playlist;
+    icon?: ReactNode;
+  }) => {
+    const defaultIcon = (item: Playlist) => (
+      <IconButton
+        icon="close"
+        onPress={() => confirmOnDelete(item.id)}
+        size={25}
+      />
+    );
+
+    if (!item) return <></>;
+    return (
+      <View style={{ flexDirection: 'row' }}>
+        <View style={{ flex: 4, justifyContent: 'center' }}>
+          <Text
+            variant="bodyLarge"
+            style={{
+              fontWeight: currentPlayingList === item.id ? 'bold' : undefined,
+            }}
+          >
+            {item.title}
+          </Text>
+        </View>
+        <View style={{ flex: 1, alignItems: 'flex-end' }}>
+          {icon ? icon : defaultIcon(item)}
+        </View>
+      </View>
+    );
+  };
+
+  const searchPlaylistAsNewButton = () => (
+    <Pressable
+      onPress={() => setNewPlaylistDialogOpen(true)}
+      style={{ position: 'absolute', right: 10 }}
+      hitSlop={40}
+    >
+      <IconButton icon="new-box" size={30} />
+    </Pressable>
+  );
+
   const renderItem = ({ item, drag, isActive }: RenderItemParams<Playlist>) => {
     return (
       <ScaleDecorator>
-        <Pressable onLongPress={drag} disabled={isActive}>
-          <Text>{item.title}</Text>
-        </Pressable>
+        <TouchableRipple
+          onLongPress={drag}
+          disabled={isActive}
+          onPress={() => goToPlaylist(item.id)}
+          style={{
+            paddingLeft: 25,
+            backgroundColor:
+              currentPlaylist.id === item.id
+                ? playerStyle.customColors.playlistDrawerBackgroundColor
+                : undefined,
+            borderRadius: 40,
+          }}
+        >
+          {renderPlaylistWrapper({ item })}
+        </TouchableRipple>
       </ScaleDecorator>
     );
   };
@@ -80,91 +143,33 @@ export default (props: any) => {
             : () => void 0
         }
       />
-      <DrawerItem
-        label={
-          playlists[STORAGE_KEYS.SEARCH_PLAYLIST_KEY]
-            ? String(t('PlaylistsDrawer.SearchListTitle'))
-            : String(t('PlaylistsDrawer.SearchListTitleNA'))
-        }
-        labelStyle={{
-          fontWeight:
-            currentPlayingList ===
-            playlists[STORAGE_KEYS.SEARCH_PLAYLIST_KEY]?.id
-              ? 'bold'
-              : undefined,
-          color:
-            currentPlayingList ===
-            playlists[STORAGE_KEYS.SEARCH_PLAYLIST_KEY]?.id
-              ? playerStyle.colors.text
-              : playerStyle.colors.onSurface,
-        }}
-        activeBackgroundColor={
-          playerStyle.customColors.playlistDrawerBackgroundColor
-        }
+      <TouchableRipple
+        onPress={() => goToPlaylist(STORAGE_KEYS.SEARCH_PLAYLIST_KEY)}
         style={{
+          paddingLeft: 25,
           backgroundColor:
             currentPlaylist.id ===
             playlists[STORAGE_KEYS.SEARCH_PLAYLIST_KEY]?.id
               ? playerStyle.customColors.playlistDrawerBackgroundColor
               : undefined,
+          borderRadius: 40,
         }}
-        onPress={() => goToPlaylist(STORAGE_KEYS.SEARCH_PLAYLIST_KEY)}
-        key={uuidv4()}
-        icon={() => (
-          <Pressable
-            onPress={() => setNewPlaylistDialogOpen(true)}
-            style={{ position: 'absolute', right: 10 }}
-            hitSlop={40}
-          >
-            <IconButton icon="new-box" size={30} />
-          </Pressable>
-        )}
-      />
+      >
+        {renderPlaylistWrapper({
+          item: playlists[STORAGE_KEYS.SEARCH_PLAYLIST_KEY],
+        })}
+      </TouchableRipple>
       <NewPlaylistDialog
         visible={newPlaylistDialogOpen}
         fromList={playlists[STORAGE_KEYS.SEARCH_PLAYLIST_KEY]}
         onClose={() => setNewPlaylistDialogOpen(false)}
         onSubmit={() => setNewPlaylistDialogOpen(false)}
       />
-      {playlistIds.map(val => (
-        <DrawerItem
-          label={playlists[val].title}
-          labelStyle={{
-            fontWeight: currentPlayingList === val ? 'bold' : undefined,
-            color:
-              currentPlayingList === val
-                ? playerStyle.colors.text
-                : playerStyle.colors.onSurface,
-          }}
-          activeBackgroundColor={
-            playerStyle.customColors.playlistDrawerBackgroundColor
-          }
-          style={{
-            backgroundColor:
-              currentPlaylist.id === val
-                ? playerStyle.customColors.playlistDrawerBackgroundColor
-                : undefined,
-          }}
-          onPress={() => goToPlaylist(val)}
-          icon={() => (
-            <Pressable
-              onPress={() => confirmOnDelete(val)}
-              hitSlop={40}
-              style={{ position: 'absolute', right: 10 }}
-            >
-              <IconButton
-                icon="close"
-                onPress={() => confirmOnDelete(val)}
-                size={25}
-              />
-            </Pressable>
-          )}
-          key={uuidv4()}
-        />
-      ))}
-
       <DraggableFlatList
-        style={{ paddingLeft: 25 }}
+        style={{
+          // HACK: i dont know what to do at this point
+          maxHeight: Dimensions.get('window').height - 300,
+        }}
         data={playlistIds.map(val => playlists[val])}
         // TODO: very retarded, but what?
         onDragEnd={({ data }) =>
