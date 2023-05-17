@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
 import { IconButton, Menu } from 'react-native-paper';
+import { useTranslation } from 'react-i18next';
+
 import Dialog from '../dialogs/RenameSongDialog';
-import Song, { dummySongObj } from '../../objects/SongInterface';
+import { dummySongObj } from '../../objects/Song';
 
 const ICON = 'pencil';
 
 interface menuProps {
-  getSongOnClick: () => Song;
+  getSongOnClick: () => NoxMedia.Song;
   disabled?: boolean;
   onSubmit?: (rename: string) => void;
   onCancel?: () => void;
@@ -18,6 +20,7 @@ export const RenameSongMenuItem = ({
   onSubmit = (rename: string) => console.log(rename),
   onCancel = () => void 0,
 }: menuProps) => {
+  const { t } = useTranslation();
   const [dialogOpen, setDialogOpen] = useState(false);
   const [song, setSong] = useState(dummySongObj);
 
@@ -39,7 +42,7 @@ export const RenameSongMenuItem = ({
           setDialogOpen(true);
           setSong(getSongOnClick());
         }}
-        title="Rename..."
+        title={t('SongOperations.songRenameTitle')}
         disabled={disabled}
       />
       <Dialog

@@ -23,7 +23,7 @@ export const notNullDefault = (val: any, defaultVal: any) => {
   return defaultVal;
 };
 
-export const twoWayAlert = (
+export const TwoWayAlert = (
   title: string,
   message: string,
   onSubmit: () => void
@@ -41,7 +41,7 @@ export const twoWayAlert = (
   ]);
 };
 
-export const oneWayAlert = (
+export const OneWayAlert = (
   title: string,
   message: string,
   onPress: () => void

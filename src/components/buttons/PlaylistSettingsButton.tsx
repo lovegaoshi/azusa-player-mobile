@@ -1,19 +1,18 @@
 import React, { useState } from 'react';
 import { IconButton, Menu } from 'react-native-paper';
 import Dialog from '../dialogs/PlaylistSettingsDialog';
-import Playlist from '../../objects/Playlist';
 
 const ICON = 'pencil';
 
 interface menuProps {
   disabled?: boolean;
-  onSubmit?: (playlist: Playlist) => void;
+  onSubmit?: (playlist: NoxMedia.Playlist) => void;
   onCancel?: () => void;
 }
 
 export default ({
   disabled = false,
-  onSubmit = (playlist: Playlist) => void 0,
+  onSubmit = (playlist: NoxMedia.Playlist) => void 0,
   onCancel = () => void 0,
 }: menuProps) => {
   const [dialogOpen, setDialogOpen] = useState(false);
@@ -23,7 +22,7 @@ export default ({
     onCancel();
   };
 
-  const handleSubmit = (playlist: Playlist) => {
+  const handleSubmit = (playlist: NoxMedia.Playlist) => {
     setDialogOpen(false);
     onSubmit(playlist);
   };

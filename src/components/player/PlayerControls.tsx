@@ -12,7 +12,7 @@ import { PlaybackError } from './PlaybackError';
 import { PlayPauseButton } from './PlayPauseButton';
 import { useNoxSetting } from '../../hooks/useSetting';
 import { songlistToTracklist } from '../../objects/Playlist';
-import { NoxRepeatMode } from './enums/repeatMode';
+import { NoxRepeatMode } from './enums/RepeatMode';
 import { savePlayMode } from '../../utils/ChromeStorage';
 
 const performSkipToNext = () => TrackPlayer.skipToNext();

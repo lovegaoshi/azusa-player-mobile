@@ -4,11 +4,10 @@ import { View } from 'react-native';
 import { useTranslation } from 'react-i18next';
 
 import { searchBiliURLs } from '../../utils/BiliSearch';
-import Song from '../../objects/SongInterface';
 import { useNoxSetting } from '../../hooks/useSetting';
 
 export default ({
-  onSearched = (songs: Array<Song>) => console.log(songs),
+  onSearched = (songs: Array<NoxMedia.Song>) => console.log(songs),
 }) => {
   const { t } = useTranslation();
   const [searchVal, setSearchVal] = useState('');
@@ -30,7 +29,7 @@ export default ({
       favList: [],
       useBiliTag: false,
       fastSearch: playerSetting.fastBiliSearch,
-    })) as Array<Song>;
+    })) as Array<NoxMedia.Song>;
     onSearched(searchedResult);
     const newSearchPlaylist = {
       ...searchPlaylist,

@@ -25,8 +25,7 @@ import { ViewEnum } from '../../enums/View';
 import AddPlaylistButton from '../buttons/AddPlaylistButton';
 import { STORAGE_KEYS } from '../../utils/ChromeStorage';
 import NewPlaylistDialog from '../dialogs/NewPlaylistDialog';
-import { twoWayAlert } from '../../utils/Utils';
-import Playlist from '../../objects/Playlist';
+import { TwoWayAlert } from '../../utils/Utils';
 
 export default (props: any) => {
   const { t } = useTranslation();
@@ -53,7 +52,7 @@ export default (props: any) => {
   };
 
   const confirmOnDelete = (playlistId: string) => {
-    twoWayAlert(
+    TwoWayAlert(
       `Delete ${playlists[playlistId].title}?`,
       `Are you sure to delete playlist ${playlists[playlistId].title}?`,
       () => removePlaylist(playlistId)
@@ -64,10 +63,10 @@ export default (props: any) => {
     item,
     icon,
   }: {
-    item: Playlist;
+    item: NoxMedia.Playlist;
     icon?: ReactNode;
   }) => {
-    const defaultIcon = (item: Playlist) => (
+    const defaultIcon = (item: NoxMedia.Playlist) => (
       <IconButton
         icon="close"
         onPress={() => confirmOnDelete(item.id)}
@@ -82,7 +81,8 @@ export default (props: any) => {
           <Text
             variant="bodyLarge"
             style={{
-              fontWeight: currentPlayingList === item.id ? 'bold' : undefined,
+              fontWeight:
+                currentPlayingList.id === item.id ? 'bold' : undefined,
             }}
           >
             {item.title}
@@ -105,7 +105,11 @@ export default (props: any) => {
     </Pressable>
   );
 
-  const renderItem = ({ item, drag, isActive }: RenderItemParams<Playlist>) => {
+  const renderItem = ({
+    item,
+    drag,
+    isActive,
+  }: RenderItemParams<NoxMedia.Playlist>) => {
     return (
       <ScaleDecorator>
         <TouchableRipple

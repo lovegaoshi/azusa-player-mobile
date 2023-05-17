@@ -1,5 +1,5 @@
 import TrackPlayer, { Event } from 'react-native-track-player';
-import { resolveUrl, NULL_TRACK } from '../objects/SongOperations';
+import { resolveUrl, NULL_TRACK } from '../objects/Song';
 import { initBiliHeartbeat } from '../utils/BiliOperate';
 
 export async function PlaybackService() {

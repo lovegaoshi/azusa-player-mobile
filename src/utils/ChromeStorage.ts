@@ -1,11 +1,9 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { strToU8, strFromU8, compressSync, decompressSync } from 'fflate';
-import Playlist, { dummyPlaylist } from '../objects/Playlist';
+import { dummyPlaylist } from '../objects/Playlist';
 import { notNullDefault } from './Utils';
-import { NoxRepeatMode } from '../components/player/enums/repeatMode';
-import Song from '../objects/SongInterface';
+import { NoxRepeatMode } from '../components/player/enums/RepeatMode';
 import { PLAYLIST_ENUMS } from '../enums/Playlist';
-import style from '../components/styles/styleInterface';
 /**
  * noxplayer's storage handler.
  * ChromeStorage has quite a few changes from azusa player the chrome extension;
@@ -38,36 +36,7 @@ export enum EXPORT_OPTIONS {
   PERSONAL = '私有云',
 }
 
-export interface PlayerSettingDict {
-  autoRSSUpdate: boolean;
-  skin: string;
-  parseSongName: boolean;
-  keepSearchedSongListWhenPlaying: boolean;
-  settingExportLocation: string;
-  personalCloudIP: string;
-  noxVersion: string;
-  hideCoverInMobile: boolean;
-  loadPlaylistAsArtist: boolean;
-  sendBiliHeartbeat: boolean;
-  noCookieBiliSearch: boolean;
-  // TODO: implement this feature
-  dataSaver: boolean;
-  fastBiliSearch: boolean;
-  [key: string]: any;
-}
-
-export interface PlayerStorageObject {
-  settings: PlayerSettingDict;
-  playlistIds: Array<string>;
-  playlists: { [key: string]: Playlist };
-  lastPlaylistId: [string, string];
-  searchPlaylist: Playlist;
-  favoriPlaylist: Playlist;
-  playerRepeat: string;
-  skin: style;
-}
-
-export const DEFAULT_SETTING: PlayerSettingDict = {
+export const DEFAULT_SETTING: NoxStorage.PlayerSettingDict = {
   autoRSSUpdate: false,
   skin: '诺莺nox',
   parseSongName: false,
@@ -137,7 +106,7 @@ const chunkArray = (
  * @returns
  */
 export const savePlaylist = async (
-  playlist: Playlist,
+  playlist: NoxMedia.Playlist,
   overrideKey: string | null = null
 ) => {
   try {
@@ -157,14 +126,16 @@ export const savePlaylist = async (
   }
 };
 
-export const getPlaylist = async (key: string): Promise<null | Playlist> => {
+export const getPlaylist = async (
+  key: string
+): Promise<null | NoxMedia.Playlist> => {
   try {
     // eslint-disable-next-line prefer-const
     let retrievedPlaylist = await getItem(key);
     if (retrievedPlaylist === null) return null;
     retrievedPlaylist.songList = (await Promise.all(
       retrievedPlaylist.songList.map(async (val: string) => await getItem(val))
-    )) as Array<Song[]>;
+    )) as Array<NoxMedia.Song[]>;
     retrievedPlaylist.songList = retrievedPlaylist.songList.flat();
     return retrievedPlaylist;
   } catch (e) {
@@ -176,17 +147,17 @@ export const getPlaylist = async (key: string): Promise<null | Playlist> => {
 // no point to provide getters, as states are managed by zustand.
 // unlike azusaplayer which the storage context still reads localstorage, instaed
 // of keeping them as states.
-export const saveSettings = async (setting: PlayerSettingDict) =>
+export const saveSettings = async (setting: NoxStorage.PlayerSettingDict) =>
   saveItem(STORAGE_KEYS.PLAYER_SETTING_KEY, setting);
 
 export const savePlaylistIds = async (val: string[]) =>
   saveItem(STORAGE_KEYS.MY_FAV_LIST_KEY, val);
 
-export const savePlayerSkin = async (val: style) =>
+export const savePlayerSkin = async (val: NoxTheme.style) =>
   saveItem(STORAGE_KEYS.SKIN, val);
 
 export const addPlaylist = async (
-  playlist: Playlist,
+  playlist: NoxMedia.Playlist,
   playlistIds: Array<string>
 ) => {
   playlistIds.push(playlist.id);
@@ -196,7 +167,7 @@ export const addPlaylist = async (
 };
 
 export const delPlaylist = async (
-  playlist: Playlist,
+  playlist: NoxMedia.Playlist,
   playlistIds: Array<string>
 ) => {
   playlistIds.splice(playlistIds.indexOf(playlist.id), 1);
@@ -210,7 +181,7 @@ export const delPlaylist = async (
   return playlistIds;
 };
 
-export const saveFavPlaylist = async (playlist: Playlist) =>
+export const saveFavPlaylist = async (playlist: NoxMedia.Playlist) =>
   savePlaylist(playlist, STORAGE_KEYS.FAVORITE_PLAYLIST_KEY);
 
 export const savelastPlaylistId = async (val: [string, string]) =>
@@ -219,50 +190,51 @@ export const savelastPlaylistId = async (val: [string, string]) =>
 export const savePlayMode = async (val: string) =>
   saveItem(STORAGE_KEYS.PLAYMODE_KEY, val);
 
-export const initPlayerObject = async (): Promise<PlayerStorageObject> => {
-  // eslint-disable-next-line prefer-const
-  let playerObject = {
-    settings: {
-      ...DEFAULT_SETTING,
-      ...notNullDefault(await getItem(STORAGE_KEYS.PLAYER_SETTING_KEY), {}),
-    },
-    playlistIds: notNullDefault(
-      await getItem(STORAGE_KEYS.MY_FAV_LIST_KEY),
-      []
-    ),
-    playlists: {},
-    lastPlaylistId: notNullDefault(await getItem(STORAGE_KEYS.LAST_PLAY_LIST), [
-      'NULL',
-      'NULL',
-    ]),
-    searchPlaylist: dummyPlaylist(
-      'Search',
-      PLAYLIST_ENUMS.TYPE_SEARCH_PLAYLIST
-    ),
-    favoriPlaylist: notNullDefault(
-      await getItem(STORAGE_KEYS.FAVORITE_PLAYLIST_KEY),
-      dummyPlaylist('Favorite', PLAYLIST_ENUMS.TYPE_FAVORI_PLAYLIST)
-    ),
-    playerRepeat: notNullDefault(
-      await getItem(STORAGE_KEYS.PLAYMODE_KEY),
-      NoxRepeatMode.SHUFFLE
-    ),
-    skin: notNullDefault(await getItem(STORAGE_KEYS.SKIN), {}),
-  } as PlayerStorageObject;
+export const initPlayerObject =
+  async (): Promise<NoxStorage.PlayerStorageObject> => {
+    // eslint-disable-next-line prefer-const
+    let playerObject = {
+      settings: {
+        ...DEFAULT_SETTING,
+        ...notNullDefault(await getItem(STORAGE_KEYS.PLAYER_SETTING_KEY), {}),
+      },
+      playlistIds: notNullDefault(
+        await getItem(STORAGE_KEYS.MY_FAV_LIST_KEY),
+        []
+      ),
+      playlists: {},
+      lastPlaylistId: notNullDefault(
+        await getItem(STORAGE_KEYS.LAST_PLAY_LIST),
+        ['NULL', 'NULL']
+      ),
+      searchPlaylist: dummyPlaylist(
+        'Search',
+        PLAYLIST_ENUMS.TYPE_SEARCH_PLAYLIST
+      ),
+      favoriPlaylist: notNullDefault(
+        await getItem(STORAGE_KEYS.FAVORITE_PLAYLIST_KEY),
+        dummyPlaylist('Favorite', PLAYLIST_ENUMS.TYPE_FAVORI_PLAYLIST)
+      ),
+      playerRepeat: notNullDefault(
+        await getItem(STORAGE_KEYS.PLAYMODE_KEY),
+        NoxRepeatMode.SHUFFLE
+      ),
+      skin: notNullDefault(await getItem(STORAGE_KEYS.SKIN), {}),
+    } as NoxStorage.PlayerStorageObject;
 
-  playerObject.playlists[STORAGE_KEYS.SEARCH_PLAYLIST_KEY] =
-    playerObject.searchPlaylist;
-  playerObject.playlists[STORAGE_KEYS.FAVORITE_PLAYLIST_KEY] =
-    playerObject.favoriPlaylist;
+    playerObject.playlists[STORAGE_KEYS.SEARCH_PLAYLIST_KEY] =
+      playerObject.searchPlaylist;
+    playerObject.playlists[STORAGE_KEYS.FAVORITE_PLAYLIST_KEY] =
+      playerObject.favoriPlaylist;
 
-  await Promise.all(
-    playerObject.playlistIds.map(async id => {
-      const retrievedPlaylist = await getPlaylist(id);
-      if (retrievedPlaylist) playerObject.playlists[id] = retrievedPlaylist;
-    })
-  );
-  return playerObject;
-};
+    await Promise.all(
+      playerObject.playlistIds.map(async id => {
+        const retrievedPlaylist = await getPlaylist(id);
+        if (retrievedPlaylist) playerObject.playlists[id] = retrievedPlaylist;
+      })
+    );
+    return playerObject;
+  };
 
 export const clearStorage = async () => await AsyncStorage.clear();
 
@@ -283,7 +255,7 @@ export const importPlayerContent = async (content: Uint8Array) => {
 
 // gzip
 export const importPlayerObjectOld = async (
-  playerObject: PlayerStorageObject
+  playerObject: NoxStorage.PlayerStorageObject
 ) => {
   await clearStorage();
   saveSettings(playerObject.settings);

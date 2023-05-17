@@ -11,12 +11,11 @@ import {
 } from 'react-native-paper';
 import { FlashList } from '@shopify/flash-list';
 import { useTranslation } from 'react-i18next';
-import Playlist, { dummyPlaylist } from '../../objects/Playlist';
 import { useNoxSetting } from '../../hooks/useSetting';
 import { styles } from '../style';
 interface props {
   visible: boolean;
-  fromList: Playlist;
+  fromList: NoxMedia.Playlist;
   onClose?: () => void;
   onSubmit?: () => void;
 }
@@ -57,7 +56,9 @@ export default ({
         onDismiss={handleClose}
         style={{ maxHeight: '70%' }}
       >
-        <Dialog.Title>{t('CopiedPlaylistDialog.title', {fromList})}</Dialog.Title>
+        <Dialog.Title>
+          {t('CopiedPlaylistDialog.title', { fromList })}
+        </Dialog.Title>
         <Dialog.Content style={{ ...styles.topBarContainer, height: '70%' }}>
           <FlashList
             data={playlistIds

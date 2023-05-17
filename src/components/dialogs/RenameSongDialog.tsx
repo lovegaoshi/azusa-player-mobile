@@ -10,11 +10,9 @@ import {
 } from 'react-native-paper';
 import { useTranslation } from 'react-i18next';
 
-import Song from '../../objects/SongInterface';
-
 interface props {
   visible: boolean;
-  song: Song;
+  song: NoxMedia.Song;
   onClose?: () => void;
   onSubmit?: (rename: string) => void;
 }

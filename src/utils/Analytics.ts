@@ -1,5 +1,3 @@
-import Song from '../objects/SongInterface';
-
 interface SongOccurenceDict {
   [name: string]: number;
 }
@@ -22,7 +20,7 @@ interface AnalyticsResult {
  * use mui-confirm with a provided content
  * @param {*} favList
  */
-export default (favList: { songList: Array<Song> }) => {
+export default (favList: { songList: Array<NoxMedia.Song> }) => {
   const results: AnalyticsResult = {
     bvid: new Set(),
     totalCount: 0,

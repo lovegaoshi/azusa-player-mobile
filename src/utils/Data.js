@@ -113,8 +113,8 @@ const URL_QQ_SEARCH_POST = {
   params: {
     method: 'POST',
     headers: {
-      "Content-Type": "application/json",
-      "referer": 'https://u.qq.com/'
+      'Content-Type': 'application/json',
+      referer: 'https://u.qq.com/',
     },
     body: {
       comm: {
@@ -132,11 +132,10 @@ const URL_QQ_SEARCH_POST = {
           query: '',
           search_type: 0,
         },
-      }
-    }
+      },
+    },
   },
-}
-
+};
 
 /**
  *  QQ LyricSearchAPI
@@ -221,8 +220,8 @@ const fetchVideoTagPromiseRaw = async ({ bvid, cid }) => {
 
 export const biliAPILimiterWrapper = async (
   params,
-  func = () => { },
-  progressEmit = () => { }
+  func = () => {},
+  progressEmit = () => {}
 ) => {
   return biliApiLimiter.schedule(() => {
     progressEmit();
@@ -329,7 +328,7 @@ export const fetchVideoInfoRaw = async ({ bvid }) => {
  * @param {function} progressEmit
  * @returns
  */
-export const fetchVideoInfo = async (bvid, progressEmit = () => { }) => {
+export const fetchVideoInfo = async (bvid, progressEmit = () => {}) => {
   return biliAPILimiterWrapper({ bvid }, fetchVideoInfoRaw, progressEmit);
 };
 
@@ -755,12 +754,12 @@ const extractResponseJson = (json, field) => {
   }
 };
 
-export const searchLyricOptions = async (searchKey) => {
+export const searchLyricOptions = async searchKey => {
   if (!searchKey) {
     throw new Error('Search key is required');
   }
   logger.info('calling searchLyricOptions:', searchKey);
-  const API = getQQSearchAPI(searchKey)
+  const API = getQQSearchAPI(searchKey);
 
   const res = await bfetch(API.src, API.params);
   const json = await res.json();
@@ -773,12 +772,12 @@ export const searchLyricOptions = async (searchKey) => {
   }));
 };
 
-const getQQSearchAPI = (searchKey) => {
+const getQQSearchAPI = searchKey => {
   let API = JSON.parse(JSON.stringify(URL_QQ_SEARCH_POST));
   API.params.body.req.param.query = searchKey;
   API.params.body = JSON.stringify(API.params.body);
-  return(API)
-}
+  return API;
+};
 
 export const searchLyric = async (searchMID, setLyric) => {
   logger.info('calling searchLyric');

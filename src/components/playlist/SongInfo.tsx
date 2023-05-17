@@ -7,7 +7,6 @@ import {
 } from 'react-native-paper';
 import { View, GestureResponderEvent } from 'react-native';
 import { useNoxSetting } from '../../hooks/useSetting';
-import Song from '../../objects/SongInterface';
 import { seconds2MMSS } from '../../utils/Utils';
 
 function SongInfo({
@@ -19,10 +18,10 @@ function SongInfo({
   checking = false,
   onChecked = () => void 0,
 }: {
-  item: Song;
+  item: NoxMedia.Song;
   index: number;
   currentPlaying: boolean;
-  playSong: (song: Song) => void;
+  playSong: (song: NoxMedia.Song) => void;
   checking?: boolean;
   onChecked?: () => void;
   checkedList: boolean[];

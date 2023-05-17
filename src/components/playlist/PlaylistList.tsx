@@ -10,21 +10,12 @@ import { styles } from '../style';
 import SongInfo from './SongInfo';
 import { useNoxSetting } from '../../hooks/useSetting';
 import SongMenu from './SongMenu';
-import Song from '../../objects/SongInterface';
 import PlaylistInfo from './PlaylistInfo';
 import PlaylistMenuButton from '../buttons/PlaylistMenuButton';
 import { updateSubscribeFavList } from '../../utils/BiliSubscribe';
 import { songlistToTracklist } from '../../objects/Playlist';
-import { NoxRepeatMode } from '../player/enums/repeatMode';
+import { NoxRepeatMode } from '../player/enums/RepeatMode';
 import { PLAYLIST_ENUMS } from '../../enums/Playlist';
-
-/*
-import Song, { dummySong } from '../../objects/SongInterface';
-const DUMMYDATA = [...Array(1222).keys()].reduce(
-  (accumulator, currentValue) => accumulator.concat(dummySong()),
-  [] as Array<Song>
-);
-*/
 
 export default () => {
   const { t } = useTranslation();
@@ -49,7 +40,7 @@ export default () => {
   const [checking, setChecking] = useState(false);
   const [searching, setSearching] = useState(false);
   const [shouldReRender, setShouldReRender] = useState(false);
-  const [currentRows, setCurrentRows] = useState<Song[]>([]);
+  const [currentRows, setCurrentRows] = useState<NoxMedia.Song[]>([]);
   const [searchText, setSearchText] = useState('');
   const [refreshing, setRefreshing] = useState(false);
 
@@ -92,8 +83,8 @@ export default () => {
 
   const reParseSearch = (
     searchStr: string,
-    rows: Array<Song>,
-    defaultExtract = (someRows: Array<Song>, searchstr: string) =>
+    rows: Array<NoxMedia.Song>,
+    defaultExtract = (someRows: Array<NoxMedia.Song>, searchstr: string) =>
       someRows.filter(row =>
         row.name.toLowerCase().includes(searchstr.toLowerCase())
       )
@@ -101,7 +92,7 @@ export default () => {
     const reExtractions = [
       {
         regex: /parsed:(.+)/,
-        process: (val: RegExpExecArray, someRows: Array<Song>) =>
+        process: (val: RegExpExecArray, someRows: Array<NoxMedia.Song>) =>
           someRows.filter(row => row.parsedName === val[1]),
       },
     ];
@@ -139,7 +130,7 @@ export default () => {
    * @param index
    * @returns
    */
-  const getSongIndex = (item: Song, index: number) => {
+  const getSongIndex = (item: NoxMedia.Song, index: number) => {
     return currentRows === currentPlaylist.songList
       ? index
       : currentPlaylist.songList.findIndex(row => row.id === item.id);
@@ -153,18 +144,17 @@ export default () => {
   // TODO: useCallback? [currentPlaylist, currentPlayingList, playMode, index]
   // TODO: can i somehow shove most of these into an async promise, then
   // use a boolean flag to make a loading screen?
-  const playSong = async (song: Song) => {
-    await TrackPlayer.pause();
+  const playSong = async (song: NoxMedia.Song) => {
+    const queuedSongList = playerSetting.keepSearchedSongListWhenPlaying
+      ? currentRows
+      : currentPlaylist.songList;
+
     const skipNPlay = (index: number) => {
       TrackPlayer.skip(index).then(() => TrackPlayer.play());
     };
 
     const reloadPlaylistAndPlay = () => {
-      let tracks = songlistToTracklist(
-        playerSetting.keepSearchedSongListWhenPlaying
-          ? currentRows
-          : currentPlaylist.songList
-      );
+      let tracks = songlistToTracklist(queuedSongList);
       if (playmode === NoxRepeatMode.SHUFFLE) {
         tracks = [...tracks].sort(() => Math.random() - 0.5);
       }
@@ -174,8 +164,8 @@ export default () => {
     };
 
     setCurrentPlayingId(song.id);
-    if (currentPlaylist.id !== currentPlayingList) {
-      setCurrentPlayingList(currentPlaylist.id);
+    if (queuedSongList !== currentPlayingList.songList) {
+      setCurrentPlayingList({ ...currentPlaylist, songList: currentRows });
       reloadPlaylistAndPlay();
     } else {
       TrackPlayer.getQueue().then(tracks => {
@@ -206,7 +196,9 @@ export default () => {
       updatePlaylist,
     });
     Snackbar.dismiss();
-    Snackbar.show({ text: t('PlaylistOperations.updated', { playlist: currentPlaylist }) });
+    Snackbar.show({
+      text: t('PlaylistOperations.updated', { playlist: currentPlaylist }),
+    });
     setRefreshing(false);
   };
 

@@ -1,14 +1,14 @@
 import * as React from 'react';
 import { Menu } from 'react-native-paper';
-import { Alert } from 'react-native';
 import Snackbar from 'react-native-snackbar';
+import { useTranslation } from 'react-i18next';
+
 import { useNoxSetting } from '../../hooks/useSetting';
-import coordinates from '../../objects/Coordinate';
 import playlistAnalytics from '../../utils/Analytics';
 import PlaylistSettingsButton from '../buttons/PlaylistSettingsButton';
 import { PLAYLIST_ENUMS } from '../../enums/Playlist';
 import { CopiedPlaylistMenuItem } from '../buttons/CopiedPlaylistButton';
-import { twoWayAlert, oneWayAlert } from '../../utils/Utils';
+import { TwoWayAlert, OneWayAlert } from '../../utils/Utils';
 import { getBVIDList, biliShazamOnSonglist } from '../../utils/DataProcess';
 import { getPlaylistUniqBVIDs } from '../../objects/Playlist';
 import { fetchVideoInfo } from '../../utils/Data';
@@ -27,7 +27,7 @@ enum ICONS {
 interface props {
   visible?: boolean;
   toggleVisible?: () => void;
-  menuCoords?: coordinates;
+  menuCoords?: NoxTheme.coordinates;
 }
 
 export default ({
@@ -35,6 +35,7 @@ export default ({
   toggleVisible = () => void 0,
   menuCoords = { x: 0, y: 0 },
 }: props) => {
+  const { t } = useTranslation();
   const currentPlaylist = useNoxSetting(state => state.currentPlaylist);
   const updatePlaylist = useNoxSetting(state => state.updatePlaylist);
   const removePlaylist = useNoxSetting(state => state.removePlaylist);
@@ -47,7 +48,7 @@ export default ({
   // TODO: useCallback?
   const playlistAnalysis = (playlist = currentPlaylist) => {
     const analytics = playlistAnalytics(playlist);
-    oneWayAlert(
+    OneWayAlert(
       `歌单 ${playlist.title} 的统计信息`,
       [
         `歌单内总共有${analytics.songsUnique.size}首独特的歌`,
@@ -74,9 +75,9 @@ export default ({
   };
 
   const confirmOnPlaylistClear = (playlist = currentPlaylist) => {
-    twoWayAlert(
-      `Claer ${playlist.title}?`,
-      `Are you sure to clear playlist ${playlist.title}?`,
+    TwoWayAlert(
+      t('PlaylistOperations.clearListTitle', { playlist }),
+      t('PlaylistOperations.clearListMsg', { playlist }),
       () => {
         updatePlaylist(
           {
@@ -92,9 +93,9 @@ export default ({
   };
 
   const confirmOnPlaylistDelete = (playlist = currentPlaylist) => {
-    twoWayAlert(
-      `Delete ${playlist.title}?`,
-      `Are you sure to delete playlist ${playlist.title}?`,
+    TwoWayAlert(
+      t('PlaylistOperations.deleteListTitle', { playlist }),
+      t('PlaylistOperations.deleteListMsg', { playlist }),
       () => {
         removePlaylist(playlist.id);
         toggleVisible();
@@ -103,12 +104,12 @@ export default ({
   };
 
   const confirmOnPlaylistReload = (playlist = currentPlaylist) => {
-    twoWayAlert(
-      `Reload ${playlist.title}?`,
-      `Are you sure to reload all BVIDs in playlist ${playlist.title}?`,
+    TwoWayAlert(
+      t('PlaylistOperations.resetListTitle', { playlist }),
+      t('PlaylistOperations.resetListMsg', { playlist }),
       async () => {
         Snackbar.show({
-          text: '正在重载歌单……',
+          text: t('PlaylistOperations.reloading', { playlist }),
           duration: Snackbar.LENGTH_INDEFINITE,
         });
         const newSongList = await getBVIDList({
@@ -125,7 +126,7 @@ export default ({
           []
         );
         Snackbar.dismiss();
-        Snackbar.show({ text: '重载歌单完成' });
+        Snackbar.show({ text: t('PlaylistOperations.reloaded', { playlist }) });
         toggleVisible();
       }
     );
@@ -135,7 +136,7 @@ export default ({
     const promises: Promise<any>[] = [];
     const validBVIds: Array<string> = [];
     Snackbar.show({
-      text: '正在清理歌单无效的BV号……',
+      text: t('PlaylistOperations.cleaning', { playlist }),
       duration: Snackbar.LENGTH_INDEFINITE,
     });
     progressEmitter(100);
@@ -147,14 +148,14 @@ export default ({
     await Promise.all(promises);
     progressEmitter(0);
     Snackbar.dismiss();
-    Snackbar.show({ text: '歌单清理完成' });
+    Snackbar.show({ text: t('PlaylistOperations.cleaned', { playlist }) });
     console.log(validBVIds);
   };
 
   const playlistBiliShazam = async (playlist = currentPlaylist) => {
     progressEmitter(100);
     Snackbar.show({
-      text: `正在用b站识歌 on ${playlist.title}……`,
+      text: t('PlaylistOperations.bilishazaming', { playlist }),
       duration: Snackbar.LENGTH_INDEFINITE,
     });
     const newSongList = await biliShazamOnSonglist(playlist.songList, false);
@@ -167,7 +168,7 @@ export default ({
       []
     );
     Snackbar.dismiss();
-    Snackbar.show({ text: '歌单识歌完成' });
+    Snackbar.show({ text: t('PlaylistOperations.bilishazamed', { playlist }) });
     progressEmitter(0);
   };
 
@@ -181,35 +182,35 @@ export default ({
       <Menu.Item
         leadingIcon={ICONS.BILISHAZAM}
         onPress={() => playlistBiliShazam()}
-        title="BiliShazam"
+        title={t('PlaylistOperations.bilishazamTitle')}
       />
       <Menu.Item
         leadingIcon={ICONS.ANALYTICS}
         onPress={() => playlistAnalysis()}
-        title="Analytics"
+        title={t('PlaylistOperations.analyticsTitle')}
       />
       <Menu.Item
         leadingIcon={ICONS.REMOVE_BROKEN}
         onPress={() => playlistCleanup()}
-        title="Remove Broken"
+        title={t('PlaylistOperations.removeBrokenTitle')}
         disabled={limitedPlaylistFeatures}
       />
       <Menu.Item
         leadingIcon={ICONS.RELOAD_BVIDS}
         onPress={() => confirmOnPlaylistReload()}
-        title="Reload Bvids"
+        title={t('PlaylistOperations.reloadBVIDTitle')}
         disabled={limitedPlaylistFeatures}
       />
       <Menu.Item
         leadingIcon={ICONS.CLEAR}
         onPress={() => confirmOnPlaylistClear()}
-        title="Clear"
+        title={t('PlaylistOperations.clearPlaylistTitle')}
         disabled={limitedPlaylistFeatures}
       />
       <Menu.Item
         leadingIcon={ICONS.REMOVE}
         onPress={() => confirmOnPlaylistDelete()}
-        title="Remove"
+        title={t('PlaylistOperations.removePlaylistTitle')}
         disabled={limitedPlaylistFeatures}
       />
     </Menu>

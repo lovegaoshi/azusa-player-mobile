@@ -1,5 +1,3 @@
-import style from './styleInterface';
-
 export default {
   metaData: {
     themeName: '电闹播放器',
@@ -96,4 +94,4 @@ export default {
     backdrop: 'rgba(49, 49, 37, 0.4)',
   },
   playerControlIconContained: 'contained',
-} as style;
+} as NoxTheme.style;

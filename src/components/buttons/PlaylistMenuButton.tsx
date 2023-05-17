@@ -1,14 +1,16 @@
 import React, { useState } from 'react';
 import { IconButton } from 'react-native-paper';
 import Dialog from '../playlist/PlaylistMenu';
-import coordinates from '../../objects/Coordinate';
 import { GestureResponderEvent } from 'react-native';
 
 const ICON = 'dots-horizontal';
 
 export default ({ disabled = false }) => {
   const [dialogOpen, setDialogOpen] = useState(false);
-  const [menuCoords, setMenuCoords] = useState<coordinates>({ x: 0, y: 0 });
+  const [menuCoords, setMenuCoords] = useState<NoxTheme.coordinates>({
+    x: 0,
+    y: 0,
+  });
 
   const handlePress = (event: GestureResponderEvent) => {
     setDialogOpen(true);
