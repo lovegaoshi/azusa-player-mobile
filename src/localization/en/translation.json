@@ -69,5 +69,19 @@
     "songRemoveTitle": "Remove",
     "songRemoveNBanTitle": "Remove and BAN",
     "selectedSongs": "Selected songs"
+  },
+  "GeneralSettings": {
+    "autoRSSUpdateName": "Daily auto RSS update",
+    "autoRSSUpdateDesc": "Automatically update playlist's subscriptions daily when opened.",
+    "parseSongNameName": "Parse song name",
+    "parseSongNameDesc": "Show automatically parsed song names in playlist.",
+    "keepSearchedSongListWhenPlayingName": "Play searched results",
+    "keepSearchedSongListWhenPlayingDesc": "When searching in a playlist, play the seached results.",
+    "hideCoverInMobileName": "Hide album cover",
+    "hideCoverInMobileDesc": "Hide the album cover.",
+    "dataSaverName": "Data Saver",
+    "dataSaverDesc": "Render low quality assets to save data.",
+    "fastBiliSearchName": "Fast Bilibili Search",
+    "fastBiliSearchDesc": "Do not search for bilibili video episodes."
   }
 }

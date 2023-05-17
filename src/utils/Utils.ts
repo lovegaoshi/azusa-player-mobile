@@ -26,16 +26,18 @@ export const notNullDefault = (val: any, defaultVal: any) => {
 export const TwoWayAlert = (
   title: string,
   message: string,
-  onSubmit: () => void
+  onSubmit: () => void,
+  cancelText = 'Cancel',
+  okText = "OK"
 ) => {
   Alert.alert(title, message, [
     {
-      text: 'Cancel',
+      text: cancelText,
       onPress: () => void 0,
       style: 'cancel',
     },
     {
-      text: 'OK',
+      text: okText,
       onPress: onSubmit,
     },
   ]);
@@ -44,9 +46,10 @@ export const TwoWayAlert = (
 export const OneWayAlert = (
   title: string,
   message: string,
-  onPress: () => void
+  onPress: () => void,
+  okText = "OK"
 ) => {
-  Alert.alert(title, message, [{ text: 'OK', onPress: onPress }], {
+  Alert.alert(title, message, [{ text: okText, onPress: onPress }], {
     cancelable: true,
     onDismiss: onPress,
   });

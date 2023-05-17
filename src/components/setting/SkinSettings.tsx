@@ -39,19 +39,13 @@ export default () => {
     `${skin.metaData.themeName}.${skin.metaData.themeAuthor}`;
   const [checked, setChecked] = React.useState(getThemeID(playerStyle));
 
-  const onSearchCustomSkin = async (url: string) => {
-    const res = await fetch(url);
-    const skins = await res.json();
-    // this MUST BE an array of objects
-    try {
-      if (!Array.isArray(skins)) {
-        throw new Error('requested skin URL is not an array. aborting.');
-      }
-      const uniqueSkins = getUniqObjects(allThemes.concat(skins), getThemeID);
-      setPlayerStyles(uniqueSkins);
-    } catch (e) {
-      console.error(e);
+  const loadCustomSkin = async (skins: any) => {
+    // skins MUST BE an array of objects
+    if (!Array.isArray(skins)) {
+      throw new Error('requested skin URL is not an array. aborting.');
     }
+    const uniqueSkins = getUniqObjects(allThemes.concat(skins.filter(skin => skin.metadata)), getThemeID);
+    setPlayerStyles(uniqueSkins);
   };
 
   const renderSkinItem = (skin: DisplayTheme) => {

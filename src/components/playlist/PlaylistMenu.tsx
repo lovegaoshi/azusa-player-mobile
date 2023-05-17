@@ -70,7 +70,8 @@ export default ({
           analytics.totalCount
         ).toFixed(1)}%)`,
       ].join('\n'),
-      toggleVisible
+      toggleVisible,
+      String(t('Dialog.ok'))
     );
   };
 
@@ -88,7 +89,9 @@ export default ({
           []
         );
         toggleVisible();
-      }
+      },
+      String(t('Dialog.cancel')),
+      String(t('Dialog.ok'))
     );
   };
 
@@ -99,7 +102,9 @@ export default ({
       () => {
         removePlaylist(playlist.id);
         toggleVisible();
-      }
+      },
+      String(t('Dialog.cancel')),
+      String(t('Dialog.ok'))
     );
   };
 
@@ -128,7 +133,9 @@ export default ({
         Snackbar.dismiss();
         Snackbar.show({ text: t('PlaylistOperations.reloaded', { playlist }) });
         toggleVisible();
-      }
+      },
+      String(t('Dialog.cancel')),
+      String(t('Dialog.ok'))
     );
   };
 

@@ -55,7 +55,9 @@ export default (props: any) => {
     TwoWayAlert(
       `Delete ${playlists[playlistId].title}?`,
       `Are you sure to delete playlist ${playlists[playlistId].title}?`,
-      () => removePlaylist(playlistId)
+      () => removePlaylist(playlistId),
+      String(t('Dialog.cancel')),
+      String(t('Dialog.ok'))
     );
   };
 
