@@ -179,17 +179,22 @@ export const fetchVideoPlayUrlPromise = async (
   // HACK:  this should be a breaking change that stringified cid
   // will never be not true.
   if (!cid || cid.includes('null')) {
-    cid = await fetchCID(bvid).catch(err => console.error(err));
+    cid = await fetchCID(bvid).catch(err => console.error(err, 'cid', cid));
   }
-
-  // Returns a promise that resolves into the audio stream url
-  return new Promise((resolve, reject) => {
-    // console.log('Data.js Calling fetchPlayUrl:' + URL_PLAY_URL.replace("{bvid}", bvid).replace("{cid}", cid))
-    bfetch(URL_PLAY_URL.replace('{bvid}', bvid).replace('{cid}', cid))
-      .then(res => res.json())
-      .then(json => resolve(extractResponseJson(json, extractType)))
-      .catch(err => reject(console.error(err)));
-  });
+  try {
+    const res = await bfetch(
+      URL_PLAY_URL.replace('{bvid}', bvid).replace('{cid}', cid)
+    );
+    const json = await res.json();
+    return extractResponseJson(json, extractType);
+  } catch (e) {
+    console.error(
+      'error:',
+      e,
+      URL_PLAY_URL.replace('{bvid}', bvid).replace('{cid}', cid)
+    );
+    throw e;
+  }
 };
 
 /**
@@ -242,14 +247,14 @@ export const fetchVideoTagPromise = async ({ bvid, cid }) => {
  * @returns
  */
 export const fetchAudioPlayUrlPromise = async sid => {
-  // Returns a promise that resolves into the audio stream url
-  return new Promise((resolve, reject) => {
-    // console.log('Data.js Calling fetchPlayUrl:' + URL_PLAY_URL.replace("{bvid}", bvid).replace("{cid}", cid))
-    bfetch(URL_AUDIO_PLAY_URL.replace('{sid}', sid))
-      .then(res => res.json())
-      .then(json => resolve(json.data.cdns[0]))
-      .catch(err => reject(console.error(err)));
-  });
+  try {
+    const res = await bfetch(URL_AUDIO_PLAY_URL.replace('{sid}', sid));
+    const json = await res.json();
+    return json.data.cdns[0];
+  } catch (e) {
+    console.error(e, URL_AUDIO_PLAY_URL.replace('{sid}', sid));
+    throw e;
+  }
 };
 
 /**

@@ -67,18 +67,20 @@ export async function PlaybackService() {
         lastBiliHeartBeat[0] !== heartBeatReq[0] ||
         lastBiliHeartBeat[1] !== heartBeatReq[1]
       ) {
-        console.log(lastBiliHeartBeat, heartBeatReq);
         initBiliHeartbeat({
           bvid: event.track.song.bvid,
           cid: event.track.song.id,
         });
         lastBiliHeartBeat = heartBeatReq;
       }
-      resolveUrl(event.track.song).then(updatedMetadata => {
-        TrackPlayer.getActiveTrack().then(currentTrack => {
-          TrackPlayer.load({ ...currentTrack, ...updatedMetadata });
-        });
-      });
+      resolveUrl(event.track.song)
+        .then(updatedMetadata => {
+          TrackPlayer.getActiveTrack().then(currentTrack => {
+            TrackPlayer.load({ ...currentTrack, ...updatedMetadata });
+          });
+          console.log(updatedMetadata);
+        })
+        .catch(() => console.error('resolveURL failed', event.track));
     }
   });
 

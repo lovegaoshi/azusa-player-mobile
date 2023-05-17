@@ -76,17 +76,13 @@ export const resolveUrl = async (song: NoxMedia.Song) => {
   // TODO: method is called MULTIPLE times. need to investigate and debounce.
   // luckily bilibili doesnt seem to care for now
   console.log('resolve url called');
-  try {
-    const url = await fetchPlayUrlPromise(song.bvid, song.id);
-    return {
-      url,
-      headers: customReqHeader(url, {}),
-      userAgent: DEFAULT_UA,
-      urlRefreshTimeStamp: new Date().getTime(),
-    };
-  } catch {
-    return NULL_TRACK;
-  }
+  const url = await fetchPlayUrlPromise(song.bvid, song.id);
+  return {
+    url,
+    headers: customReqHeader(url, {}),
+    userAgent: DEFAULT_UA,
+    urlRefreshTimeStamp: new Date().getTime(),
+  };
 };
 
 export const dummySong = (): NoxMedia.Song => {
