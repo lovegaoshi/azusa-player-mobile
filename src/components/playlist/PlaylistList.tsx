@@ -3,10 +3,7 @@ import { View } from 'react-native';
 import { FlashList } from '@shopify/flash-list';
 import Snackbar from 'react-native-snackbar';
 import { IconButton, Text } from 'react-native-paper';
-import TrackPlayer, {
-  usePlaybackState,
-  State,
-} from 'react-native-track-player';
+import TrackPlayer from 'react-native-track-player';
 import { Dimensions } from 'react-native';
 import { useTranslation } from 'react-i18next';
 import { styles } from '../style';
@@ -46,8 +43,6 @@ export default () => {
   const [currentRows, setCurrentRows] = useState<NoxMedia.Song[]>([]);
   const [searchText, setSearchText] = useState('');
   const [refreshing, setRefreshing] = useState(false);
-  const playback = usePlaybackState();
-
   const playlistRef = React.useRef<any>(null);
 
   const resetSelected = (val = false) =>
@@ -149,12 +144,7 @@ export default () => {
   // TODO: can i somehow shove most of these into an async promise, then
   // use a boolean flag to make a loading screen?
   const playSong = async (song: NoxMedia.Song) => {
-    if (
-      song.id === currentPlayingId ||
-      // HACK: this may get stuck when theres a network problem.
-      [State.Loading, State.Buffering].includes(playback.state!)
-    )
-      return;
+    if (song.id === currentPlayingId) return;
     await TrackPlayer.pause();
     const queuedSongList = playerSetting.keepSearchedSongListWhenPlaying
       ? currentRows
