@@ -11,29 +11,50 @@ import SkinSearchbar from './SkinSearchbar';
 import { useNoxSetting } from '../../hooks/useSetting';
 import AzusaTheme from '../styles/AzusaTheme';
 import NoxTheme from '../styles/NoxTheme';
+import { getUniqObjects } from '../../utils/Utils';
 
-const BuiltInThemes = [
+interface DisplayTheme extends NoxTheme.style {
+  builtin: boolean;
+}
+
+const BuiltInThemes: DisplayTheme[] = [
   {
-    theme: AzusaTheme,
-    generic: false,
+    ...AzusaTheme,
+    builtin: true,
   },
   {
-    theme: NoxTheme,
-    generic: false,
+    ...NoxTheme,
+    builtin: true,
   },
 ];
 
 export default () => {
   const playerStyle = useNoxSetting(state => state.playerStyle);
   const setPlayerStyle = useNoxSetting(state => state.setPlayerStyle);
-  const [skinLists, setSkinLists] = React.useState<NoxTheme.style[]>([]);
-  const allThemes = BuiltInThemes;
+  const playerStyles = useNoxSetting(state => state.playerStyles);
+  const setPlayerStyles = useNoxSetting(state => state.setPlayerStyles);
+  const allThemes = BuiltInThemes.concat(playerStyles);
 
   const getThemeID = (skin: NoxTheme.style) =>
     `${skin.metaData.themeName}.${skin.metaData.themeAuthor}`;
   const [checked, setChecked] = React.useState(getThemeID(playerStyle));
 
-  const renderSkinItem = (skin: NoxTheme.style, generic = true) => {
+  const onSearchCustomSkin = async (url: string) => {
+    const res = await fetch(url);
+    const skins = await res.json();
+    // this MUST BE an array of objects
+    try {
+      if (!Array.isArray(skins)) {
+        throw new Error('requested skin URL is not an array. aborting.');
+      }
+      const uniqueSkins = getUniqObjects(allThemes.concat(skins), getThemeID);
+      setPlayerStyles(uniqueSkins);
+    } catch (e) {
+      console.error(e);
+    }
+  };
+
+  const renderSkinItem = (skin: DisplayTheme) => {
     const themeID = getThemeID(skin);
     const selectTheme = () => {
       setChecked(themeID);
@@ -87,7 +108,7 @@ export default () => {
               icon="trash-can"
               style={{ marginLeft: -3 }}
               onPress={() => console.log('pressedTrashcan')}
-              disabled={!generic}
+              disabled={!skin.builtin}
             />
           </View>
         </View>
@@ -108,12 +129,8 @@ export default () => {
       <View style={{ flex: 5.5 }}>
         <FlatList
           data={allThemes}
-          renderItem={({ item, index }) =>
-            renderSkinItem(item.theme, item.generic)
-          }
-          keyExtractor={item =>
-            `${item.theme.metaData.themeName}.${item.theme.metaData.themeAuthor}`
-          }
+          renderItem={({ item, index }) => renderSkinItem(item)}
+          keyExtractor={item => getThemeID(item)}
         />
       </View>
     </View>

@@ -169,6 +169,14 @@ export const getPlaylist = async (key: string): Promise<NoxMedia.Playlist> => {
   return dummyPlaylist();
 };
 
+export const savePlayerSkins = async (skins: Array<any>) =>
+  saveChucked(skins, STORAGE_KEYS.SKINSTORAGE);
+
+export const getPlayerSkins = async () =>
+  await loadChucked(
+    notNullDefault(await getItem(STORAGE_KEYS.SKINSTORAGE), [])
+  );
+
 // no point to provide getters, as states are managed by zustand.
 // unlike azusaplayer which the storage context still reads localstorage, instaed
 // of keeping them as states.
@@ -245,6 +253,7 @@ export const initPlayerObject =
         NoxRepeatMode.SHUFFLE
       ),
       skin: notNullDefault(await getItem(STORAGE_KEYS.SKIN), {}),
+      skins: notNullDefault(await getPlayerSkins(), []),
     } as NoxStorage.PlayerStorageObject;
 
     playerObject.playlists[STORAGE_KEYS.SEARCH_PLAYLIST_KEY] =

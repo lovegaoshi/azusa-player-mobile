@@ -60,3 +60,17 @@ export const rgb2rgba = (rgb: string, a = 1) => {
   const extractedRGB = [...rgb.matchAll(/(\d+)/g)];
   return `rgba(${extractedRGB[0][0]}, ${extractedRGB[1][0]}, ${extractedRGB[2][0]}, ${a})`;
 };
+
+export const getUniqObjects = (
+  objects: Array<any>,
+  property: (object: any) => any
+) => {
+  const uniqKey = new Set();
+  return objects.filter(object => {
+    if (uniqKey.has(property(object))) {
+      return false;
+    }
+    uniqKey.add(property(object));
+    return true;
+  });
+};

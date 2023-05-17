@@ -12,6 +12,7 @@ import {
   saveSettings,
   savelastPlaylistId,
   savePlayerSkin,
+  savePlayerSkins,
 } from '../utils/ChromeStorage';
 import { notNullDefault } from '../utils/Utils';
 import { createStyle } from '../components/style';
@@ -24,6 +25,8 @@ interface initializedResults {
 interface NoxSetting {
   playerStyle: any;
   setPlayerStyle: (style: any) => void;
+  playerStyles: any[];
+  setPlayerStyles: (val: any[]) => void;
 
   searchBarProgress: number;
   searchBarProgressEmitter: (val: number) => undefined;
@@ -62,12 +65,12 @@ interface NoxSetting {
   addPlaylist: (val: NoxMedia.Playlist) => void;
   removePlaylist: (val: string) => void;
   /**
-   * updates a playlist with songs added and removed, and saves it. addSongs are padded to the bottom.
+   * updates a playlist with songs added and removed, and saves it. addSongs are added at the front.
    * manipulate val before this function to add songs in whatever order desired.
    * note this function does mutate playlist.
-   * @param val
-   * @param addSongs
-   * @param removeSongs
+   * @param val playlist
+   * @param addSongs songs to be added at the front.
+   * @param removeSongs songs to be deleted
    * @returns
    */
   updatePlaylist: (
@@ -88,8 +91,13 @@ interface NoxSetting {
 export const useNoxSetting = create<NoxSetting>((set, get) => ({
   playerStyle: createStyle(),
   setPlayerStyle: (val: NoxTheme.style) => {
-    savePlayerSkin(val);
     set({ playerStyle: createStyle(val) });
+    savePlayerSkin(val);
+  },
+  playerStyles: [],
+  setPlayerStyles: (val: any[]) => {
+    set({ playerStyles: val });
+    savePlayerSkins(val);
   },
 
   searchBarProgress: 0,
@@ -232,6 +240,7 @@ export const useNoxSetting = create<NoxSetting>((set, get) => ({
     set({ playlists: val.playlists });
     set({ playlistIds: val.playlistIds });
     set({ playerStyle: createStyle(val.skin) });
+    set({ playerStyles: val.skins });
     return {
       playlists: val.playlists,
       currentPlayingList: playingList,
