@@ -145,16 +145,17 @@ export default () => {
   // TODO: can i somehow shove most of these into an async promise, then
   // use a boolean flag to make a loading screen?
   const playSong = async (song: NoxMedia.Song) => {
-    const queuedSongList = playerSetting.keepSearchedSongListWhenPlaying
-      ? currentRows
-      : currentPlaylist.songList;
-
+    await TrackPlayer.pause();
     const skipNPlay = (index: number) => {
       TrackPlayer.skip(index).then(() => TrackPlayer.play());
     };
 
     const reloadPlaylistAndPlay = () => {
-      let tracks = songlistToTracklist(queuedSongList);
+      let tracks = songlistToTracklist(
+        playerSetting.keepSearchedSongListWhenPlaying
+          ? currentRows
+          : currentPlaylist.songList
+      );
       if (playmode === NoxRepeatMode.SHUFFLE) {
         tracks = [...tracks].sort(() => Math.random() - 0.5);
       }
@@ -164,8 +165,8 @@ export default () => {
     };
 
     setCurrentPlayingId(song.id);
-    if (queuedSongList !== currentPlayingList.songList) {
-      setCurrentPlayingList({ ...currentPlaylist, songList: currentRows });
+    if (currentPlaylist.id !== currentPlayingList) {
+      setCurrentPlayingList(currentPlaylist.id);
       reloadPlaylistAndPlay();
     } else {
       TrackPlayer.getQueue().then(tracks => {

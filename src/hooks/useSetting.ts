@@ -35,8 +35,8 @@ interface NoxSetting {
 
   currentPlayingId: string | null;
   setCurrentPlayingId: (val: string) => void;
-  currentPlayingList: NoxMedia.Playlist;
-  setCurrentPlayingList: (val: NoxMedia.Playlist) => void;
+  currentPlayingList: string | null;
+  setCurrentPlayingList: (val: string) => void;
   playlists: { [key: string]: NoxMedia.Playlist };
   playlistIds: Array<string>;
   setPlaylistIds: (val: Array<string>) => void;
@@ -102,16 +102,16 @@ export const useNoxSetting = create<NoxSetting>((set, get) => ({
   togglePlaylistShouldReRender: () =>
     set({ playlistShouldReRender: !get().playlistShouldReRender }),
 
-  currentPlayingId: '',
+  currentPlayingId: null,
   // MOCK: is it slow? GeT a BeTtEr PhOnE
   setCurrentPlayingId: (val: string) => {
     set({ currentPlayingId: val });
-    savelastPlaylistId([get().currentPlayingList.id, val]);
+    savelastPlaylistId([String(get().currentPlayingList), val]);
   },
-  currentPlayingList: dummyPlaylistList,
-  setCurrentPlayingList: (val: NoxMedia.Playlist) => {
+  currentPlayingList: null,
+  setCurrentPlayingList: (val: string) => {
     set({ currentPlayingList: val });
-    savelastPlaylistId([val.id, String(get().currentPlayingId)]);
+    savelastPlaylistId([val, String(get().currentPlayingId)]);
   },
   playlists: {},
   playlistIds: [],
@@ -189,7 +189,7 @@ export const useNoxSetting = create<NoxSetting>((set, get) => ({
 
   initPlayer: async (val: NoxStorage.PlayerStorageObject) => {
     set({ currentPlayingId: val.lastPlaylistId[1] });
-    set({ currentPlayingList: val.playlists[val.lastPlaylistId[0]] });
+    set({ currentPlayingList: val.lastPlaylistId[0] });
     set({
       currentPlaylist: notNullDefault(
         val.playlists[val.lastPlaylistId[0]],
