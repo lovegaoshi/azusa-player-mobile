@@ -41,27 +41,19 @@ export function Player({
 
 export function useSetupPlayer() {
   const [playerReady, setPlayerReady] = useState<boolean>(false);
-  const currentPlayingList = useNoxSetting(state => state.currentPlayingList);
-  const playlists = useNoxSetting(state => state.playlists);
   const initPlayer = useNoxSetting(state => state.initPlayer);
 
   useEffect(() => {
     let unmounted = false;
     (async () => {
-      await initPlayer(await initPlayerObject());
+      const { currentPlayingList } = await initPlayer(await initPlayerObject());
       await SetupService();
       if (unmounted) return;
       setPlayerReady(true);
-      const queue = await TrackPlayer.getQueue();
       if (unmounted) return;
-      if (currentPlayingList) {
-        await TrackPlayer.setQueue(
-          songlistToTracklist(playlists[currentPlayingList].songList)
-        );
-      }
-      if (queue.length <= 0) {
-        await QueueInitialTracksService();
-      }
+      await TrackPlayer.setQueue(
+        songlistToTracklist(currentPlayingList.songList)
+      );
     })();
     return () => {
       unmounted = true;

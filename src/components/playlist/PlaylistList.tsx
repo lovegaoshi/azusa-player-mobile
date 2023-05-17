@@ -3,7 +3,10 @@ import { View } from 'react-native';
 import { FlashList } from '@shopify/flash-list';
 import Snackbar from 'react-native-snackbar';
 import { IconButton, Text } from 'react-native-paper';
-import TrackPlayer from 'react-native-track-player';
+import TrackPlayer, {
+  usePlaybackState,
+  State,
+} from 'react-native-track-player';
 import { Dimensions } from 'react-native';
 import { useTranslation } from 'react-i18next';
 import { styles } from '../style';
@@ -19,7 +22,6 @@ import { PLAYLIST_ENUMS } from '../../enums/Playlist';
 
 export default () => {
   const { t } = useTranslation();
-  const currentPlayingList = useNoxSetting(state => state.currentPlayingList);
   const playmode = useNoxSetting(state => state.playerRepeat); // performance drain?
   const setCurrentPlayingList = useNoxSetting(
     state => state.setCurrentPlayingList
@@ -43,6 +45,7 @@ export default () => {
   const [currentRows, setCurrentRows] = useState<NoxMedia.Song[]>([]);
   const [searchText, setSearchText] = useState('');
   const [refreshing, setRefreshing] = useState(false);
+  const playback = usePlaybackState();
 
   const playlistRef = React.useRef<any>(null);
 
@@ -145,40 +148,40 @@ export default () => {
   // TODO: can i somehow shove most of these into an async promise, then
   // use a boolean flag to make a loading screen?
   const playSong = async (song: NoxMedia.Song) => {
+    if (
+      song.id === currentPlayingId ||
+      [State.Loading, State.Buffering].includes(playback.state!)
+    )
+      return;
     await TrackPlayer.pause();
-    const skipNPlay = (index: number) => {
-      TrackPlayer.skip(index).then(() => TrackPlayer.play());
+    const queuedSongList = playerSetting.keepSearchedSongListWhenPlaying
+      ? currentRows
+      : currentPlaylist.songList;
+    const skipNPlay = async (index: number) => {
+      await TrackPlayer.skip(index);
+      await TrackPlayer.play();
     };
 
-    const reloadPlaylistAndPlay = () => {
-      let tracks = songlistToTracklist(
-        playerSetting.keepSearchedSongListWhenPlaying
-          ? currentRows
-          : currentPlaylist.songList
-      );
+    const reloadPlaylistAndPlay = async () => {
+      let tracks = songlistToTracklist(queuedSongList);
       if (playmode === NoxRepeatMode.SHUFFLE) {
         tracks = [...tracks].sort(() => Math.random() - 0.5);
       }
-      TrackPlayer.setQueue(tracks).then(() =>
-        skipNPlay(tracks.findIndex(track => track.song.id === song.id))
-      );
+      await TrackPlayer.setQueue(tracks);
+      await skipNPlay(tracks.findIndex(track => track.song.id === song.id));
     };
 
     setCurrentPlayingId(song.id);
-    if (currentPlaylist.id !== currentPlayingList) {
-      setCurrentPlayingList(currentPlaylist.id);
+    if (setCurrentPlayingList({ ...currentPlaylist, songList: currentRows })) {
       reloadPlaylistAndPlay();
     } else {
-      TrackPlayer.getQueue().then(tracks => {
-        const trackIndex = tracks.findIndex(
-          track => track.song?.id === song.id
-        );
-        if (trackIndex === -1) {
-          reloadPlaylistAndPlay();
-        } else {
-          skipNPlay(trackIndex);
-        }
-      });
+      const tracks = await TrackPlayer.getQueue();
+      const trackIndex = tracks.findIndex(track => track.song?.id === song.id);
+      if (trackIndex === -1) {
+        await reloadPlaylistAndPlay();
+      } else {
+        await skipNPlay(trackIndex);
+      }
     }
   };
 
@@ -316,7 +319,7 @@ export default () => {
             />
           )}
           keyExtractor={(item, index) => `${item.id}.${index}`}
-          estimatedItemSize={10}
+          estimatedItemSize={58}
           extraData={shouldReRender}
           onRefresh={refreshPlaylist}
           refreshing={refreshing}

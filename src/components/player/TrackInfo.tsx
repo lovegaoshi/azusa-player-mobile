@@ -8,9 +8,9 @@ import {
   Animated,
   TouchableWithoutFeedback,
 } from 'react-native';
-
 import type { Track } from 'react-native-track-player';
 import TrackPlayer from 'react-native-track-player';
+
 import { useNoxSetting } from '../../hooks/useSetting';
 import { LyricView } from './Lyric';
 
@@ -20,14 +20,9 @@ export const TrackInfo: React.FC<{
   const playerSetting = useNoxSetting(state => state.playerSetting);
   const playerStyle = useNoxSetting(state => state.playerStyle);
   const currentPlayingList = useNoxSetting(state => state.currentPlayingList);
-  const playlists = useNoxSetting(state => state.playlists);
   const [currentTPQueue, setCurrentTPQueue] = React.useState<Track[]>([]);
   const [isImageVisible, setIsImageVisible] = useState(true);
   const opacity = new Animated.Value(1);
-
-  const playlistTitle = useCallback(() => {
-    return currentPlayingList ? playlists[currentPlayingList]?.title : '';
-  }, [currentPlayingList]);
 
   React.useEffect(() => {
     // TODO: when the sliding window queue is implemented, this would just be
@@ -95,14 +90,18 @@ export const TrackInfo: React.FC<{
       <Text
         style={[styles.artistText, { color: playerStyle.colors.secondary }]}
       >
-        {playlistTitle()}
+        {
+          // HACK: this becomes a problem when a playlist is renamed while playing.
+          // but its okay i think. its safer to guard against eg. playlist deletion?
+          currentPlayingList.title
+        }
       </Text>
       <Text
         style={[styles.artistText, { color: playerStyle.colors.secondary }]}
       >
-        {currentPlayingList && playlists[currentPlayingList] && track?.song
+        {track?.song
           ? `#${
-              playlists[currentPlayingList].songList.findIndex(
+              currentPlayingList.songList.findIndex(
                 song => song.id === track.song.id
               ) + 1
             } - ${

@@ -81,7 +81,8 @@ export default (props: any) => {
           <Text
             variant="bodyLarge"
             style={{
-              fontWeight: currentPlayingList === item.id ? 'bold' : undefined,
+              fontWeight:
+                currentPlayingList.id === item.id ? 'bold' : undefined,
             }}
           >
             {item.title}

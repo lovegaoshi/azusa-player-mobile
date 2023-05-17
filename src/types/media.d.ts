@@ -25,4 +25,8 @@ declare namespace NoxMedia {
     lastSubscribed: number;
     type: string;
   }
+
+  export interface Playinglist extends Playlist {
+    songListShuffled: Array<NoxMedia.Song>;
+  }
 }
