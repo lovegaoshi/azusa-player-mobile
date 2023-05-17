@@ -84,7 +84,7 @@ export default () => {
       <TouchableRipple
         onPress={onToggle}
         style={{ paddingHorizontal: 10 }}
-        id={uuidv4()}
+        key={uuidv4()}
       >
         <View style={{ flexDirection: 'row', paddingVertical: 10 }}>
           <View style={{ flex: 5, paddingLeft: 5 }}>
@@ -120,7 +120,7 @@ export default () => {
       }}
     >
       <ScrollView>
-        {GEN_SETTING_BOOLEAN.map(item => renderSetting(item))};
+        {GEN_SETTING_BOOLEAN.map(item => renderSetting(item))}
       </ScrollView>
     </View>
   );

@@ -137,7 +137,7 @@ export default ({
           Keyboard.dismiss();
         }}
         disabled={checking}
-        title={t('SongOperations.SearchInPlaylistTitle')}
+        title={t('SongOperations.songSearchInPlaylistTitle')}
       />
       <Menu.Item
         leadingIcon={ICONS.REMOVE}
