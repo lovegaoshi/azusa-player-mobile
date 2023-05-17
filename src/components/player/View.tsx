@@ -18,11 +18,11 @@ import { useNoxSetting } from '../../hooks/useSetting';
 import { songlistToTracklist } from '../../objects/Playlist';
 import { initPlayerObject } from '../../utils/ChromeStorage';
 
-export function Player({
-  navigation,
-}: {
+interface props {
   navigation: DrawerNavigationProp<ParamListBase>;
-}) {
+}
+
+export function Player({ navigation }: props) {
   const track = useActiveTrack();
   const navigationGlobal = useNavigation();
   const playerStyle = useNoxSetting(state => state.playerStyle);
@@ -54,6 +54,7 @@ export function useSetupPlayer() {
       await TrackPlayer.setQueue(
         songlistToTracklist(currentPlayingList.songList)
       );
+      await TrackPlayer.pause();
     })();
     return () => {
       unmounted = true;

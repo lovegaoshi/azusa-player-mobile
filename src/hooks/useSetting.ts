@@ -131,7 +131,10 @@ export const useNoxSetting = create<NoxSetting>((set, get) => ({
   },
   playlists: {},
   playlistIds: [],
-  setPlaylistIds: (val: Array<string>) => set({ playlistIds: val }),
+  setPlaylistIds: (val: Array<string>) => {
+    set({ playlistIds: val });
+    savePlaylistIds(val);
+  },
 
   currentPlaylist: dummyPlaylist(),
   setCurrentPlaylist: (val: NoxMedia.Playlist) => set({ currentPlaylist: val }),
@@ -204,7 +207,10 @@ export const useNoxSetting = create<NoxSetting>((set, get) => ({
   },
 
   initPlayer: async (val: NoxStorage.PlayerStorageObject) => {
-    const playingListBase = val.playlists[val.lastPlaylistId[0]];
+    const playingListBase = notNullDefault(
+      val.playlists[val.lastPlaylistId[0]],
+      dummyPlaylistList
+    );
     const playingList = {
       ...playingListBase,
       songListShuffled: [...playingListBase.songList].sort(

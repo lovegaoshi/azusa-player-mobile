@@ -9,7 +9,7 @@
     "cancel": "算了"
   },
   "CopiedPlaylistDialog": {
-    "title": "将歌单 {{fromList.title}} 送往..."
+    "title": "将 {{fromList.title}} 送往..."
   },
   "NewPlaylistDialog": {
     "title": "将歌单 {{fromList.title}} 新建为...",
@@ -54,7 +54,7 @@
     "resetting": "重载 {{playlist.title}} 歌单的bv号...",
     "reset": "歌单 {{playlist.title}} 重载完成",
     "playlistSettingsTitle": "设置...",
-    "playlistSendToTitle": "将歌单送往...",
+    "playlistSendToTitle": "送往...",
     "bilishazamTitle": "b站识歌",
     "analyticsTitle": "歌单统计",
     "removeBrokenTitle": "清除失效bv号",
@@ -63,7 +63,7 @@
     "removePlaylistTitle": "删除歌单"
   },
   "SongOperations": {
-    "songSendToTitle": "将歌送往...",
+    "songSendToTitle": "送往...",
     "songRenameTitle": "改名...",
     "songSearchInPlaylistTitle": "在歌单内搜索",
     "songRemoveTitle": "删除歌曲",

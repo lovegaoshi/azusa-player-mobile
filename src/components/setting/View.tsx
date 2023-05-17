@@ -5,6 +5,8 @@ import {
 import { View } from 'react-native';
 import { ParamListBase, useNavigation } from '@react-navigation/native';
 import { List, MD3Colors, IconButton, Text } from 'react-native-paper';
+import { DrawerNavigationProp } from '@react-navigation/drawer';
+
 import GeneralSettings from './GeneralSettings';
 import SkinSettings from './SkinSettings';
 import { useNoxSetting } from '../../hooks/useSetting';
@@ -29,8 +31,12 @@ enum VIEW {
 
 const Stack = createNativeStackNavigator();
 
-export default () => {
-  const navigation = useNavigation();
+interface props {
+  navigation: DrawerNavigationProp<ParamListBase>;
+}
+
+export default ({ navigation }: props) => {
+  const navigationGlobal = useNavigation();
   const playerStyle = useNoxSetting(state => state.playerStyle);
 
   const DummySettings = () => {
@@ -54,11 +60,7 @@ export default () => {
     );
   };
 
-  const HomeSettings = ({
-    navigation,
-  }: {
-    navigation: NativeStackNavigationProp<ParamListBase>;
-  }) => {
+  const HomeSettings = ({ navigation }: props) => {
     return (
       <View
         style={{
@@ -114,13 +116,12 @@ export default () => {
         name={VIEW.HOME}
         component={HomeSettings}
         options={{
-          // TODO: is there a non retarded way to do this?
           headerLeft: () => (
             <IconButton
-              icon="arrow-left"
-              size={25}
-              style={{ paddingRight: 20 }}
-              onPress={() => navigation.navigate(ViewEnum.PLAYER_HOME as never)}
+              icon="menu"
+              size={40}
+              style={{ width: 55, marginLeft: -5 }}
+              onPress={() => navigation.openDrawer()}
             />
           ),
         }}
