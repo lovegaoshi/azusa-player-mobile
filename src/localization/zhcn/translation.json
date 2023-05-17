@@ -34,7 +34,7 @@
     "label": "b站URL"
   },
   "PlaylistSearchBar": {
-    "label": "搜索"
+    "label": "歌单内搜"
   },
   "PlaylistOperations": {
     "updating": "正在更新歌单 {{playlist.title}} 的订阅...",
@@ -44,6 +44,30 @@
     "cleaning": "正在清理歌单 {{playlist.title}} 无效bv号...",
     "cleaned": "歌单 {{playlist.title}} 清理完成",
     "bilishazaming": "正在对歌单 {{playlist.title}} 用b站识歌...",
-    "bilishazamed": "歌单 {{playlist.title}} b站识歌完成"
+    "bilishazamed": "歌单 {{playlist.title}} b站识歌完成",
+    "clearListTitle": "清空 {{playlist.title}}?",
+    "clearListMsg": "确定要清空歌单 {{playlist.title}} 吗?",
+    "deleteListTitle": "删除 {{playlist.title}}?",
+    "deleteListMsg": "确定要删除歌单 {{playlist.title}} 吗?",
+    "resetListTitle": "重载 {{playlist.title}}?",
+    "resetListMsg": "确定要重载歌单 {{playlist.title}} 的bv号吗?",
+    "resetting": "重载 {{playlist.title}} 歌单的bv号...",
+    "reset": "歌单 {{playlist.title}} 重载完成",
+    "playlistSettingsTitle": "设置...",
+    "playlistSendToTitle": "将歌单送往...",
+    "bilishazamTitle": "b站识歌",
+    "analyticsTitle": "歌单统计",
+    "removeBrokenTitle": "清除失效bv号",
+    "reloadBVIDTitle": "重载bv号",
+    "clearPlaylistTitle": "清空歌单",
+    "removePlaylistTitle": "删除歌单"
+  },
+  "SongOperations": {
+    "songSendToTitle": "将歌送往...",
+    "songRenameTitle": "改名...",
+    "songSearchInPlaylistTitle": "在歌单内搜索",
+    "songRemoveTitle": "删除歌曲",
+    "songRemoveNBanTitle": "删除并拉黑",
+    "selectedSongs": "选择的歌"
   }
 }

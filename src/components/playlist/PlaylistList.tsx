@@ -28,6 +28,7 @@ export default () => {
   );
   const currentPlayingId = useNoxSetting(state => state.currentPlayingId);
   const playerSetting = useNoxSetting(state => state.playerSetting);
+  const playerStyle = useNoxSetting(state => state.playerStyle);
   const setCurrentPlayingId = useNoxSetting(state => state.setCurrentPlayingId);
   const currentPlaylist = useNoxSetting(state => state.currentPlaylist);
   const playlistShouldReRender = useNoxSetting(
@@ -150,6 +151,7 @@ export default () => {
   const playSong = async (song: NoxMedia.Song) => {
     if (
       song.id === currentPlayingId ||
+      // HACK: this may get stuck when theres a network problem.
       [State.Loading, State.Buffering].includes(playback.state!)
     )
       return;
@@ -286,12 +288,22 @@ export default () => {
             icon="select"
             onPress={() => setChecking(val => !val)}
             size={25}
+            containerColor={
+              checking
+                ? playerStyle.customColors.playlistDrawerBackgroundColor
+                : undefined
+            }
           />
           <IconButton
             icon="magnify"
             onPress={() => setSearching(val => !val)}
             size={25}
             mode={searching ? 'contained' : undefined}
+            containerColor={
+              searching
+                ? playerStyle.customColors.playlistDrawerBackgroundColor
+                : undefined
+            }
           />
           <PlaylistMenuButton disabled={checking} />
         </View>
