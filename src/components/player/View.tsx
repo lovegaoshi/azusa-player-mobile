@@ -16,6 +16,7 @@ import { DrawerNavigationProp } from '@react-navigation/drawer';
 import PlayerTopInfo from './PlayerTopInfo';
 import { useNoxSetting } from '../../hooks/useSetting';
 import { songlistToTracklist } from '../../objects/Playlist';
+import { initPlayerObject } from '../../utils/ChromeStorage';
 
 export function Player({
   navigation,
@@ -41,10 +42,12 @@ export function Player({
 export function useSetupPlayer() {
   const [playerReady, setPlayerReady] = useState<boolean>(false);
   const currentPlayingList = useNoxSetting(state => state.currentPlayingList);
+  const initPlayer = useNoxSetting(state => state.initPlayer);
 
   useEffect(() => {
     let unmounted = false;
     (async () => {
+      await initPlayer(await initPlayerObject());
       await SetupService();
       if (unmounted) return;
       setPlayerReady(true);
