@@ -12,23 +12,35 @@ import type { Track } from 'react-native-track-player';
 import TrackPlayer from 'react-native-track-player';
 
 import { useNoxSetting } from '../../hooks/useSetting';
+import noxPlayingList from '../../store/playingList';
 import { LyricView } from './Lyric';
+import { NoxRepeatMode } from './enums/RepeatMode';
 
 export const TrackInfo: React.FC<{
   track?: Track;
 }> = ({ track }) => {
   const playerSetting = useNoxSetting(state => state.playerSetting);
   const playerStyle = useNoxSetting(state => state.playerStyle);
+  const playmode = useNoxSetting(state => state.playerRepeat);
   const currentPlayingList = useNoxSetting(state => state.currentPlayingList);
-  const [currentTPQueue, setCurrentTPQueue] = React.useState<Track[]>([]);
   const [isImageVisible, setIsImageVisible] = useState(true);
   const opacity = new Animated.Value(1);
 
-  React.useEffect(() => {
-    // TODO: when the sliding window queue is implemented, this would just be
-    // another zustand state.
-    TrackPlayer.getQueue().then(setCurrentTPQueue);
-  }, [currentPlayingList]);
+  const getTrackLocation = () => {
+    const currentTPQueue =
+      playmode === NoxRepeatMode.SHUFFLE
+        ? currentPlayingList.songListShuffled
+        : currentPlayingList.songList;
+    return track?.song
+      ? `#${
+          currentPlayingList.songList.findIndex(
+            song => song.id === track.song.id
+          ) + 1
+        } - ${
+          currentTPQueue.findIndex(song => song.id === track.song.id) + 1
+        }/${currentTPQueue.length}`
+      : '';
+  };
 
   const onImagePress = () => {
     console.log('TrackInfo: Image Clicked');
@@ -99,17 +111,7 @@ export const TrackInfo: React.FC<{
       <Text
         style={[styles.artistText, { color: playerStyle.colors.secondary }]}
       >
-        {track?.song
-          ? `#${
-              currentPlayingList.songList.findIndex(
-                song => song.id === track.song.id
-              ) + 1
-            } - ${
-              currentTPQueue.findIndex(
-                song => song?.song?.id === track.song.id
-              ) + 1
-            }/${currentTPQueue.length}`
-          : ''}
+        {getTrackLocation()}
       </Text>
     </View>
   );

@@ -69,5 +69,19 @@
     "songRemoveTitle": "删除歌曲",
     "songRemoveNBanTitle": "删除并拉黑",
     "selectedSongs": "选择的歌"
+  },
+  "GeneralSettings": {
+    "autoRSSUpdateName": "自动更新歌单订阅",
+    "autoRSSUpdateDesc": "每天打开歌单时自动更新歌单的订阅",
+    "parseSongNameName": "提取歌名",
+    "parseSongNameDesc": "用正则表达式提取歌名",
+    "keepSearchedSongListWhenPlayingName": "播放搜索结果歌单",
+    "keepSearchedSongListWhenPlayingDesc": "搜索歌单时，按搜索的结果播放歌单",
+    "hideCoverInMobileName": "不显示歌封面",
+    "hideCoverInMobileDesc": "移动端不显示歌封面",
+    "dataSaverName": "省流模式",
+    "dataSaverDesc": "解析低质量素材节省流量",
+    "fastBiliSearchName": "快速b站搜索",
+    "fastBiliSearchDesc": "使用b站搜索时，不解析分p内容"
   }
 }

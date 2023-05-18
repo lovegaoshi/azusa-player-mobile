@@ -1,5 +1,5 @@
 /* eslint-disable prefer-const */
-import { create, useStore } from 'zustand';
+import { create } from 'zustand';
 import { dummyPlaylist, dummyPlaylistList } from '../objects/Playlist';
 import { NoxRepeatMode } from '../components/player/enums/RepeatMode';
 import {
@@ -16,7 +16,9 @@ import {
 } from '../utils/ChromeStorage';
 import { notNullDefault } from '../utils/Utils';
 import { createStyle } from '../components/style';
-import noxPlayingList from '../store/vanillaStore';
+import noxPlayingList from '../store/playingList';
+
+const { setState } = noxPlayingList;
 
 interface initializedResults {
   currentPlayingList: NoxMedia.Playinglist;
@@ -129,13 +131,18 @@ export const useNoxSetting = create<NoxSetting>((set, get) => ({
     if (val.songList === get().currentPlayingList.songList) {
       return false;
     }
+    const songListShuffled = [...val.songList].sort(() => Math.random() - 0.5);
     set({
       currentPlayingList: {
         ...val,
-        songListShuffled: [...val.songList].sort(() => Math.random() - 0.5),
+        songListShuffled,
       },
     });
     savelastPlaylistId([val.id, String(get().currentPlayingId)]);
+    setState({
+      playingList: val.songList,
+      playingListShuffled: songListShuffled,
+    });
     return true;
   },
   playlists: {},

@@ -16,6 +16,7 @@ import { updateSubscribeFavList } from '../../utils/BiliSubscribe';
 import { songlistToTracklist } from '../../objects/Playlist';
 import { NoxRepeatMode } from '../player/enums/RepeatMode';
 import { PLAYLIST_ENUMS } from '../../enums/Playlist';
+import { chunkArray } from '../../utils/Utils';
 
 export default () => {
   const { t } = useTranslation();
@@ -145,7 +146,6 @@ export default () => {
   // use a boolean flag to make a loading screen?
   const playSong = async (song: NoxMedia.Song) => {
     if (song.id === currentPlayingId) return;
-    await TrackPlayer.pause();
     const queuedSongList = playerSetting.keepSearchedSongListWhenPlaying
       ? currentRows
       : currentPlaylist.songList;
@@ -159,7 +159,12 @@ export default () => {
       if (playmode === NoxRepeatMode.SHUFFLE) {
         tracks = [...tracks].sort(() => Math.random() - 0.5);
       }
-      await TrackPlayer.setQueue(tracks);
+      // await TrackPlayer.setQueue(tracks);
+      TrackPlayer.reset();
+      const splicedTracks = chunkArray(tracks, 500);
+      for (const splicedTrack of splicedTracks) {
+        await TrackPlayer.add(splicedTrack);
+      }
       await skipNPlay(tracks.findIndex(track => track.song.id === song.id));
     };
 

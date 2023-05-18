@@ -28,7 +28,7 @@ export const TwoWayAlert = (
   message: string,
   onSubmit: () => void,
   cancelText = 'Cancel',
-  okText = "OK"
+  okText = 'OK'
 ) => {
   Alert.alert(title, message, [
     {
@@ -47,7 +47,7 @@ export const OneWayAlert = (
   title: string,
   message: string,
   onPress: () => void,
-  okText = "OK"
+  okText = 'OK'
 ) => {
   Alert.alert(title, message, [{ text: okText, onPress: onPress }], {
     cancelable: true,
@@ -76,4 +76,21 @@ export const getUniqObjects = (
     uniqKey.add(property(object));
     return true;
   });
+};
+
+/**
+ * splits an array to chunks of given size.
+ * @param arr
+ * @param size
+ * @returns
+ */
+export const chunkArray = (arr: Array<any>, size: number): Array<any[]> => {
+  return arr.reduce((chunks, item, index) => {
+    const chunkIndex = Math.floor(index / size);
+    if (!chunks[chunkIndex]) {
+      chunks[chunkIndex] = [];
+    }
+    chunks[chunkIndex].push(item);
+    return chunks;
+  }, []);
 };
