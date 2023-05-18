@@ -1,5 +1,5 @@
 /* eslint-disable prefer-const */
-import { create } from 'zustand';
+import { create, useStore } from 'zustand';
 import { dummyPlaylist, dummyPlaylistList } from '../objects/Playlist';
 import { NoxRepeatMode } from '../components/player/enums/RepeatMode';
 import {
@@ -16,6 +16,7 @@ import {
 } from '../utils/ChromeStorage';
 import { notNullDefault } from '../utils/Utils';
 import { createStyle } from '../components/style';
+import noxPlayingList from '../store/vanillaStore';
 
 interface initializedResults {
   currentPlayingList: NoxMedia.Playinglist;
