@@ -25,6 +25,7 @@ declare namespace NoxStorage {
     searchPlaylist: NoxMedia.Playlist;
     favoriPlaylist: NoxMedia.Playlist;
     playerRepeat: string;
-    skin: style;
+    skin: NoxTheme.style;
+    skins: any[];
   }
 }

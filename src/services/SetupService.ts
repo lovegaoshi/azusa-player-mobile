@@ -45,8 +45,9 @@ export const SetupService = async () => {
       Capability.Play,
       Capability.Pause,
       Capability.SkipToNext,
+      Capability.SkipToPrevious,
     ],
     progressUpdateEventInterval: 2,
   });
-  await TrackPlayer.setRepeatMode(RepeatMode.Queue);
+  await TrackPlayer.setRepeatMode(RepeatMode.Off);
 };

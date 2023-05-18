@@ -28,6 +28,7 @@ export enum STORAGE_KEYS {
   MY_FAV_LIST_KEY = 'MyFavList',
   PLAYMODE_KEY = 'Playmode',
   SKIN = 'PlayerSkin',
+  SKINSTORAGE = 'PlayerSkinStorage',
 }
 
 export enum EXPORT_OPTIONS {
@@ -99,8 +100,36 @@ const chunkArray = (
 };
 
 /**
+ * a generic chunk splitter to store arrays that may exceed 2MB storage limits.
  * see known storage limits:
  * https://react-native-async-storage.github.io/async-storage/docs/limits
+ * @param object
+ * @param key
+ */
+const saveChucked = async (
+  objects: Array<any>,
+  key: string,
+  saveToStorage = true
+) => {
+  // splice into chunks
+  const chuckedObject = chunkArray(objects);
+  const chuckedIndices = chuckedObject.map((val, index) => `${key}.${index}`);
+  chuckedObject.forEach((list, index) => saveItem(chuckedIndices[index], list));
+  if (saveToStorage) {
+    saveItem(key, chuckedIndices);
+    return [];
+  } else {
+    return chuckedIndices;
+  }
+};
+
+const loadChucked = async (keys: string[]) => {
+  const loadedArrays = (await Promise.all(
+    keys.map(async (val: string) => await getItem(val))
+  )) as Array<any[]>;
+  return loadedArrays.flat();
+};
+/**
  * playlist can get quite large, my idea is to splice songlist into smaller lists then join them.
  * @param playlist
  * @returns
@@ -110,39 +139,43 @@ export const savePlaylist = async (
   overrideKey: string | null = null
 ) => {
   try {
-    // splice into chunks
-    const splicedSonglists = chunkArray(playlist.songList);
     const savingPlaylist = {
       ...playlist,
-      songList: splicedSonglists.map((val, index) => `${playlist.id}.${index}`),
+      songList: await saveChucked(playlist.songList, playlist.id, false),
     };
     // save chunks
     saveItem(notNullDefault(overrideKey, playlist.id), savingPlaylist);
-    splicedSonglists.forEach((list, index) =>
-      saveItem(savingPlaylist.songList[index], list)
-    );
   } catch (e) {
     console.error(e);
   }
 };
 
-export const getPlaylist = async (
-  key: string
-): Promise<null | NoxMedia.Playlist> => {
+/**
+ * note this method always return a playlist, if error occurs a dummy one is
+ * returned.
+ * @param key playlist ID.
+ * @returns
+ */
+export const getPlaylist = async (key: string): Promise<NoxMedia.Playlist> => {
   try {
     // eslint-disable-next-line prefer-const
     let retrievedPlaylist = await getItem(key);
-    if (retrievedPlaylist === null) return null;
-    retrievedPlaylist.songList = (await Promise.all(
-      retrievedPlaylist.songList.map(async (val: string) => await getItem(val))
-    )) as Array<NoxMedia.Song[]>;
-    retrievedPlaylist.songList = retrievedPlaylist.songList.flat();
+    if (retrievedPlaylist === null) return dummyPlaylist();
+    retrievedPlaylist.songList = await loadChucked(retrievedPlaylist.songList);
     return retrievedPlaylist;
   } catch (e) {
     console.error(e);
   }
-  return null;
+  return dummyPlaylist();
 };
+
+export const savePlayerSkins = async (skins: Array<any>) =>
+  saveChucked(skins, STORAGE_KEYS.SKINSTORAGE);
+
+export const getPlayerSkins = async () =>
+  await loadChucked(
+    notNullDefault(await getItem(STORAGE_KEYS.SKINSTORAGE), [])
+  );
 
 // no point to provide getters, as states are managed by zustand.
 // unlike azusaplayer which the storage context still reads localstorage, instaed
@@ -220,6 +253,7 @@ export const initPlayerObject =
         NoxRepeatMode.SHUFFLE
       ),
       skin: notNullDefault(await getItem(STORAGE_KEYS.SKIN), {}),
+      skins: notNullDefault(await getPlayerSkins(), []),
     } as NoxStorage.PlayerStorageObject;
 
     playerObject.playlists[STORAGE_KEYS.SEARCH_PLAYLIST_KEY] =

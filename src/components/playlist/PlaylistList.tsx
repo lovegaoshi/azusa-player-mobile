@@ -16,16 +16,16 @@ import { updateSubscribeFavList } from '../../utils/BiliSubscribe';
 import { songlistToTracklist } from '../../objects/Playlist';
 import { NoxRepeatMode } from '../player/enums/RepeatMode';
 import { PLAYLIST_ENUMS } from '../../enums/Playlist';
+import { chunkArray } from '../../utils/Utils';
 
 export default () => {
   const { t } = useTranslation();
-  const currentPlayingList = useNoxSetting(state => state.currentPlayingList);
-  const playmode = useNoxSetting(state => state.playerRepeat); // performance drain?
   const setCurrentPlayingList = useNoxSetting(
     state => state.setCurrentPlayingList
   );
   const currentPlayingId = useNoxSetting(state => state.currentPlayingId);
   const playerSetting = useNoxSetting(state => state.playerSetting);
+  const playerStyle = useNoxSetting(state => state.playerStyle);
   const setCurrentPlayingId = useNoxSetting(state => state.setCurrentPlayingId);
   const currentPlaylist = useNoxSetting(state => state.currentPlaylist);
   const playlistShouldReRender = useNoxSetting(
@@ -43,7 +43,6 @@ export default () => {
   const [currentRows, setCurrentRows] = useState<NoxMedia.Song[]>([]);
   const [searchText, setSearchText] = useState('');
   const [refreshing, setRefreshing] = useState(false);
-
   const playlistRef = React.useRef<any>(null);
 
   const resetSelected = (val = false) =>
@@ -141,44 +140,68 @@ export default () => {
     setSearching(true);
   };
 
-  // TODO: useCallback? [currentPlaylist, currentPlayingList, playMode, index]
-  // TODO: can i somehow shove most of these into an async promise, then
-  // use a boolean flag to make a loading screen?
   const playSong = async (song: NoxMedia.Song) => {
+    /**
+     * use zustand queue management implementation.
+     * motivation: setQueue transfers a lot of track[] from js bridge to native which is costly.
+     * solution:
+     * 1. playSong no longer usse RNTP.setQueue; it instead clears the queue and only add the current song.
+     * this is shown 2b very fast.
+     * 2. Without exoplayer/RNTP managing the queue, zustand vanilla holds the queue information.
+     * any queue manipulation happens in js which is fast to my needs.
+     * 3. exoplayer/RNTP never natually play a song backwards. it only goes forward. whenever user
+     * press back/previous song button, either button event or remotePRevious will be triggered.
+     * the entire queue is reset again with only 1 song.
+     * 4. RNTP no longer handles playmode other than repeat track. other than repeat track, it will
+     * be repeat mode off. along with queue size = 1, this guarantees PlaybackQueueEnded to be fired
+     * when the current song finished playback. this  will be the queue to zustand to insert the next
+     * song from zustand saved queue.
+     */
+
+    if (song.id === currentPlayingId) return;
+    await TrackPlayer.reset();
     const queuedSongList = playerSetting.keepSearchedSongListWhenPlaying
       ? currentRows
       : currentPlaylist.songList;
-
-    const skipNPlay = (index: number) => {
-      TrackPlayer.skip(index).then(() => TrackPlayer.play());
+    setCurrentPlayingList({ ...currentPlaylist, songList: queuedSongList });
+    setCurrentPlayingId(song.id);
+    await TrackPlayer.add(songlistToTracklist([song]));
+    TrackPlayer.play();
+    return;
+    /*
+    // setQueue implementation
+    const skipNPlay = async (index: number) => {
+      await TrackPlayer.skip(index);
+      await TrackPlayer.play();
     };
 
-    const reloadPlaylistAndPlay = () => {
+    const reloadPlaylistAndPlay = async () => {
       let tracks = songlistToTracklist(queuedSongList);
       if (playmode === NoxRepeatMode.SHUFFLE) {
         tracks = [...tracks].sort(() => Math.random() - 0.5);
       }
-      TrackPlayer.setQueue(tracks).then(() =>
-        skipNPlay(tracks.findIndex(track => track.song.id === song.id))
-      );
+      // await TrackPlayer.setQueue(tracks);
+      TrackPlayer.reset();
+      const splicedTracks = chunkArray(tracks, 500);
+      for (const splicedTrack of splicedTracks) {
+        await TrackPlayer.add(splicedTrack);
+      }
+      await skipNPlay(tracks.findIndex(track => track.song.id === song.id));
     };
 
     setCurrentPlayingId(song.id);
-    if (queuedSongList !== currentPlayingList.songList) {
-      setCurrentPlayingList({ ...currentPlaylist, songList: currentRows });
+    if (setCurrentPlayingList({ ...currentPlaylist, songList: currentRows })) {
       reloadPlaylistAndPlay();
     } else {
-      TrackPlayer.getQueue().then(tracks => {
-        const trackIndex = tracks.findIndex(
-          track => track.song?.id === song.id
-        );
-        if (trackIndex === -1) {
-          reloadPlaylistAndPlay();
-        } else {
-          skipNPlay(trackIndex);
-        }
-      });
+      const tracks = await TrackPlayer.getQueue();
+      const trackIndex = tracks.findIndex(track => track.song?.id === song.id);
+      if (trackIndex === -1) {
+        await reloadPlaylistAndPlay();
+      } else {
+        await skipNPlay(trackIndex);
+      }
     }
+     */
   };
 
   const refreshPlaylist = async () => {
@@ -282,12 +305,22 @@ export default () => {
             icon="select"
             onPress={() => setChecking(val => !val)}
             size={25}
+            containerColor={
+              checking
+                ? playerStyle.customColors.playlistDrawerBackgroundColor
+                : undefined
+            }
           />
           <IconButton
             icon="magnify"
             onPress={() => setSearching(val => !val)}
             size={25}
             mode={searching ? 'contained' : undefined}
+            containerColor={
+              searching
+                ? playerStyle.customColors.playlistDrawerBackgroundColor
+                : undefined
+            }
           />
           <PlaylistMenuButton disabled={checking} />
         </View>
@@ -315,7 +348,7 @@ export default () => {
             />
           )}
           keyExtractor={(item, index) => `${item.id}.${index}`}
-          estimatedItemSize={10}
+          estimatedItemSize={58}
           extraData={shouldReRender}
           onRefresh={refreshPlaylist}
           refreshing={refreshing}

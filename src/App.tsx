@@ -28,7 +28,6 @@ import { useSetupPlayer, Player } from './components/player/View';
 import Playlist from './components/playlist/View';
 import PlayerBottomPanel from './components/player/PlayerProgressControls';
 import { useNoxSetting } from './hooks/useSetting';
-import { initPlayerObject } from './utils/ChromeStorage';
 import PlaylistDrawer from './components/playlists/View';
 import { ViewEnum } from './enums/View';
 import Settings from './components/setting/View';
@@ -47,7 +46,6 @@ const App: React.FC = () => {
   const isPlayerReady = useSetupPlayer();
   const Drawer = createDrawerNavigator();
   const Tab = createMaterialTopTabNavigator();
-  const initPlayer = useNoxSetting(state => state.initPlayer);
   const playerStyle = useNoxSetting(state => state.playerStyle);
   const defaultTheme = playerStyle.metaData.darkTheme
     ? CombinedDarkTheme
@@ -74,15 +72,9 @@ const App: React.FC = () => {
   }
 
   useEffect(() => {
-    async function initializePlayer() {
-      await initPlayer(await initPlayerObject());
-    }
-
     function deepLinkHandler(data: { url: string }) {
       console.log('deepLinkHandler', data.url);
     }
-
-    initializePlayer();
 
     // This event will be fired when the app is already open and the notification is clicked
     const subscription = Linking.addEventListener('url', deepLinkHandler);
@@ -96,6 +88,7 @@ const App: React.FC = () => {
   }, []);
 
   if (!isPlayerReady) {
+    // TODO: this is the splash screen. get something cool from lottie.
     return (
       <SafeAreaView style={playerStyle.screenContainer}>
         <ActivityIndicator />

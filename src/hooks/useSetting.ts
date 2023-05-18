@@ -12,13 +12,28 @@ import {
   saveSettings,
   savelastPlaylistId,
   savePlayerSkin,
+  savePlayerSkins,
 } from '../utils/ChromeStorage';
 import { notNullDefault } from '../utils/Utils';
 import { createStyle } from '../components/style';
+import noxPlayingList, {
+  setPlayingList,
+  getCurrentTPQueue,
+} from '../store/playingList';
+
+const { getState, setState } = noxPlayingList;
+
+interface initializedResults {
+  currentPlayingList: NoxMedia.Playlist;
+  currentPlayingID: string;
+  playlists: { [key: string]: NoxMedia.Playlist };
+}
 
 interface NoxSetting {
   playerStyle: any;
   setPlayerStyle: (style: any) => void;
+  playerStyles: any[];
+  setPlayerStyles: (val: any[]) => void;
 
   searchBarProgress: number;
   searchBarProgressEmitter: (val: number) => undefined;
@@ -36,7 +51,7 @@ interface NoxSetting {
   currentPlayingId: string | null;
   setCurrentPlayingId: (val: string) => void;
   currentPlayingList: NoxMedia.Playlist;
-  setCurrentPlayingList: (val: NoxMedia.Playlist) => void;
+  setCurrentPlayingList: (val: NoxMedia.Playlist) => boolean;
   playlists: { [key: string]: NoxMedia.Playlist };
   playlistIds: Array<string>;
   setPlaylistIds: (val: Array<string>) => void;
@@ -49,20 +64,18 @@ interface NoxSetting {
   favoritePlaylist: NoxMedia.Playlist;
   setFavoritePlaylist: (val: NoxMedia.Playlist) => void;
 
-  playerRepeat: string;
-  setPlayerRepeat: (val: string) => void;
   playerSetting: NoxStorage.PlayerSettingDict;
   setPlayerSetting: (val: NoxStorage.PlayerSettingDict) => void;
 
   addPlaylist: (val: NoxMedia.Playlist) => void;
   removePlaylist: (val: string) => void;
   /**
-   * updates a playlist with songs added and removed, and saves it. addSongs are padded to the bottom.
+   * updates a playlist with songs added and removed, and saves it. addSongs are added at the front.
    * manipulate val before this function to add songs in whatever order desired.
    * note this function does mutate playlist.
-   * @param val
-   * @param addSongs
-   * @param removeSongs
+   * @param val playlist
+   * @param addSongs songs to be added at the front.
+   * @param removeSongs songs to be deleted
    * @returns
    */
   updatePlaylist: (
@@ -71,7 +84,9 @@ interface NoxSetting {
     removeSongs: Array<NoxMedia.Song>
   ) => void;
 
-  initPlayer: (val: NoxStorage.PlayerStorageObject) => Promise<void>;
+  initPlayer: (
+    val: NoxStorage.PlayerStorageObject
+  ) => Promise<initializedResults>;
 }
 
 /**
@@ -81,8 +96,13 @@ interface NoxSetting {
 export const useNoxSetting = create<NoxSetting>((set, get) => ({
   playerStyle: createStyle(),
   setPlayerStyle: (val: NoxTheme.style) => {
-    savePlayerSkin(val);
     set({ playerStyle: createStyle(val) });
+    savePlayerSkin(val);
+  },
+  playerStyles: [],
+  setPlayerStyles: (val: any[]) => {
+    set({ playerStyles: val });
+    savePlayerSkins(val);
   },
 
   searchBarProgress: 0,
@@ -110,12 +130,20 @@ export const useNoxSetting = create<NoxSetting>((set, get) => ({
   },
   currentPlayingList: dummyPlaylistList,
   setCurrentPlayingList: (val: NoxMedia.Playlist) => {
+    if (val.songList === get().currentPlayingList.songList) {
+      return false;
+    }
     set({ currentPlayingList: val });
     savelastPlaylistId([val.id, String(get().currentPlayingId)]);
+    setPlayingList(val.songList);
+    return true;
   },
   playlists: {},
   playlistIds: [],
-  setPlaylistIds: (val: Array<string>) => set({ playlistIds: val }),
+  setPlaylistIds: (val: Array<string>) => {
+    set({ playlistIds: val });
+    savePlaylistIds(val);
+  },
 
   currentPlaylist: dummyPlaylist(),
   setCurrentPlaylist: (val: NoxMedia.Playlist) => set({ currentPlaylist: val }),
@@ -133,8 +161,6 @@ export const useNoxSetting = create<NoxSetting>((set, get) => ({
     set({ favoritePlaylist: val, playlists });
   },
 
-  playerRepeat: NoxRepeatMode.SHUFFLE,
-  setPlayerRepeat: (val: string) => set({ playerRepeat: val }),
   playerSetting: DEFAULT_SETTING,
   setPlayerSetting: (val: NoxStorage.PlayerSettingDict) => {
     set({ playerSetting: val });
@@ -188,8 +214,12 @@ export const useNoxSetting = create<NoxSetting>((set, get) => ({
   },
 
   initPlayer: async (val: NoxStorage.PlayerStorageObject) => {
+    const playingList = notNullDefault(
+      val.playlists[val.lastPlaylistId[0]],
+      dummyPlaylistList
+    );
     set({ currentPlayingId: val.lastPlaylistId[1] });
-    set({ currentPlayingList: val.playlists[val.lastPlaylistId[0]] });
+    set({ currentPlayingList: playingList });
     set({
       currentPlaylist: notNullDefault(
         val.playlists[val.lastPlaylistId[0]],
@@ -199,9 +229,19 @@ export const useNoxSetting = create<NoxSetting>((set, get) => ({
     set({ searchPlaylist: val.searchPlaylist });
     set({ favoritePlaylist: val.favoriPlaylist });
     set({ playerSetting: val.settings ? val.settings : DEFAULT_SETTING });
-    set({ playerRepeat: val.playerRepeat });
     set({ playlists: val.playlists });
     set({ playlistIds: val.playlistIds });
     set({ playerStyle: createStyle(val.skin) });
+    set({ playerStyles: val.skins });
+    setPlayingList(
+      notNullDefault(val.playlists[val.lastPlaylistId[0]], val.searchPlaylist)
+        .songList
+    );
+    setState({ playmode: val.playerRepeat });
+    return {
+      playlists: val.playlists,
+      currentPlayingList: playingList,
+      currentPlayingID: val.lastPlaylistId[1],
+    };
   },
 }));

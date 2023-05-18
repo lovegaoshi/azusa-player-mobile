@@ -43,7 +43,6 @@ export default ({
       onClose();
       return;
     }
-    console.log(fromList.songList, playlistIndex);
     const toList = playlists[playlistIndex];
     updatePlaylist(toList, fromList.songList, []);
     onSubmit();
@@ -59,7 +58,7 @@ export default ({
         <Dialog.Title>
           {t('CopiedPlaylistDialog.title', { fromList })}
         </Dialog.Title>
-        <Dialog.Content style={{ ...styles.topBarContainer, height: '70%' }}>
+        <Dialog.Content style={{ ...styles.topBarContainer, height: '60%' }}>
           <FlashList
             data={playlistIds
               .filter(val => val !== fromList.id)
