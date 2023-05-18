@@ -738,24 +738,17 @@ const extract509Json = async res => {
  * @returns
  */
 const extractResponseJson = (json, field) => {
-  if (field === 'AudioUrl') {
-    try {
+  switch (field) {
+    case 'AudioUrl':
       return json.data.dash.audio[0].baseUrl;
-    } catch (e) {
-      console.error(json);
-      return '';
-    }
-  } else if (field === 'VideoUrl') {
-    try {
+    case 'VideoUrl':
       return json.data.dash.video[0].baseUrl;
-    } catch (e) {
-      console.error(json);
-      return '';
-    }
-  } else if (field === 'CID') {
-    return json.data[0].cid;
-  } else if (field === 'AudioInfo') {
-    return {};
+    case 'CID':
+      return json.data[0].cid;
+    case 'AudioInfo':
+      return {};
+    default:
+      throw new Error(`invalid field type: ${field} to parse JSON response`);
   }
 };
 
