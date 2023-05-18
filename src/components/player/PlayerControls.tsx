@@ -14,38 +14,36 @@ import { useNoxSetting } from '../../hooks/useSetting';
 import { songlistToTracklist } from '../../objects/Playlist';
 import { NoxRepeatMode } from './enums/RepeatMode';
 import { savePlayMode } from '../../utils/ChromeStorage';
+import noxPlayingList, { getCurrentTPQueue } from '../../store/playingList';
 
-const performSkipToNext = () => TrackPlayer.skipToNext();
-const performSkipToPrevious = () => TrackPlayer.skipToPrevious();
+const { getState, setState } = noxPlayingList;
+const setTP2Song = async (song: NoxMedia.Song) => {
+  await TrackPlayer.reset();
+  await TrackPlayer.setQueue(songlistToTracklist([song]));
+  TrackPlayer.play();
+};
 
 export const PlayerControls: React.FC = () => {
+  const [playModeState, setPlayModeState] = React.useState<string>(
+    getState().playmode
+  );
   const currentPlaylist = useNoxSetting(state => state.currentPlaylist);
-  const playmode = useNoxSetting(state => state.playerRepeat);
   const playerStyle = useNoxSetting(state => state.playerStyle);
-  const setPlayerRepeat = useNoxSetting(state => state.setPlayerRepeat);
+
   const setPlayMode = (val: string) => {
-    setPlayerRepeat(val);
+    setState({ playmode: val });
+    setPlayModeState(val);
     savePlayMode(val);
   };
+  const currentPlayingId = useNoxSetting(state => state.currentPlayingId);
   const setCurrentPlayingId = useNoxSetting(state => state.setCurrentPlayingId);
 
   const playback = usePlaybackState();
 
-  // HACK:  this shouldnt be here, but where?
-  useTrackPlayerEvents([Event.PlaybackActiveTrackChanged], event => {
-    if (event.track && event.track.song)
-      setCurrentPlayingId(event.track.song.id);
-    else setCurrentPlayingId('');
-  });
-
   const onClickPlaymode = () => {
-    switch (playmode) {
+    switch (getState().playmode) {
       case NoxRepeatMode.SHUFFLE:
         setPlayMode(NoxRepeatMode.REPEAT);
-        TrackPlayer.setQueueUninterrupted(
-          songlistToTracklist(currentPlaylist.songList),
-          true
-        ).then(() => TrackPlayer.getQueue());
         break;
       case NoxRepeatMode.REPEAT:
         setPlayMode(NoxRepeatMode.REPEAT_TRACK);
@@ -53,10 +51,7 @@ export const PlayerControls: React.FC = () => {
         break;
       case NoxRepeatMode.REPEAT_TRACK:
         setPlayMode(NoxRepeatMode.SHUFFLE);
-        TrackPlayer.setRepeatMode(RepeatMode.Queue);
-        TrackPlayer.shuffle().then(() =>
-          TrackPlayer.getQueue().then(console.log)
-        );
+        TrackPlayer.setRepeatMode(RepeatMode.Off);
         break;
       default:
         break;
@@ -64,6 +59,39 @@ export const PlayerControls: React.FC = () => {
   };
 
   const onThumbsUp = () => console.log('click');
+
+  const findCurrentPlayIndex = () => {
+    return getCurrentTPQueue().findIndex(val => val.id === currentPlayingId);
+  };
+
+  const performSkipToNext = () => {
+    const currentTPQueue = getCurrentTPQueue();
+    let nextIndex = findCurrentPlayIndex() + 1;
+    if (nextIndex > currentTPQueue.length - 1) {
+      nextIndex = 0;
+    }
+    setTP2Song(getCurrentTPQueue()[nextIndex]);
+  };
+
+  const performSkipToPrevious = () => {
+    const currentTPQueue = getCurrentTPQueue();
+    let nextIndex = findCurrentPlayIndex() - 1;
+    if (nextIndex < 0) {
+      nextIndex = currentTPQueue.length - 1;
+    }
+    setTP2Song(getCurrentTPQueue()[nextIndex]);
+  };
+
+  // HACK:  this shouldnt be here? but where?
+  useTrackPlayerEvents([Event.PlaybackActiveTrackChanged], event => {
+    if (event.track && event.track.song)
+      setCurrentPlayingId(event.track.song.id);
+    else setCurrentPlayingId('');
+  });
+
+  useTrackPlayerEvents([Event.PlaybackQueueEnded], () => {
+    performSkipToNext();
+  });
 
   return (
     <View style={styles.container}>
@@ -83,7 +111,7 @@ export const PlayerControls: React.FC = () => {
         ]}
       >
         <IconButton
-          icon={playmode}
+          icon={playModeState}
           onPress={onClickPlaymode}
           mode={playerStyle.playerControlIconContained}
           size={30}

@@ -9,28 +9,22 @@ import {
   TouchableWithoutFeedback,
 } from 'react-native';
 import type { Track } from 'react-native-track-player';
-import TrackPlayer from 'react-native-track-player';
 
 import { useNoxSetting } from '../../hooks/useSetting';
-import noxPlayingList from '../../store/playingList';
+import { getCurrentTPQueue } from '../../store/playingList';
 import { LyricView } from './Lyric';
-import { NoxRepeatMode } from './enums/RepeatMode';
 
 export const TrackInfo: React.FC<{
   track?: Track;
 }> = ({ track }) => {
   const playerSetting = useNoxSetting(state => state.playerSetting);
   const playerStyle = useNoxSetting(state => state.playerStyle);
-  const playmode = useNoxSetting(state => state.playerRepeat);
   const currentPlayingList = useNoxSetting(state => state.currentPlayingList);
   const [isImageVisible, setIsImageVisible] = useState(true);
   const opacity = new Animated.Value(1);
 
   const getTrackLocation = () => {
-    const currentTPQueue =
-      playmode === NoxRepeatMode.SHUFFLE
-        ? currentPlayingList.songListShuffled
-        : currentPlayingList.songList;
+    const currentTPQueue = getCurrentTPQueue();
     return track?.song
       ? `#${
           currentPlayingList.songList.findIndex(

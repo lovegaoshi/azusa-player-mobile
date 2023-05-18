@@ -20,7 +20,6 @@ import { chunkArray } from '../../utils/Utils';
 
 export default () => {
   const { t } = useTranslation();
-  const playmode = useNoxSetting(state => state.playerRepeat); // performance drain?
   const setCurrentPlayingList = useNoxSetting(
     state => state.setCurrentPlayingList
   );
@@ -141,14 +140,36 @@ export default () => {
     setSearching(true);
   };
 
-  // TODO: useCallback? [currentPlaylist, currentPlayingList, playMode, index]
-  // TODO: can i somehow shove most of these into an async promise, then
-  // use a boolean flag to make a loading screen?
   const playSong = async (song: NoxMedia.Song) => {
+    /**
+     * use zustand queue management implementation.
+     * motivation: setQueue transfers a lot of track[] from js bridge to native which is costly.
+     * solution:
+     * 1. playSong no longer usse RNTP.setQueue; it instead clears the queue and only add the current song.
+     * this is shown 2b very fast.
+     * 2. Without exoplayer/RNTP managing the queue, zustand vanilla holds the queue information.
+     * any queue manipulation happens in js which is fast to my needs.
+     * 3. exoplayer/RNTP never natually play a song backwards. it only goes forward. whenever user
+     * press back/previous song button, either button event or remotePRevious will be triggered.
+     * the entire queue is reset again with only 1 song.
+     * 4. RNTP no longer handles playmode other than repeat track. other than repeat track, it will
+     * be repeat mode off. along with queue size = 1, this guarantees PlaybackQueueEnded to be fired
+     * when the current song finished playback. this  will be the queue to zustand to insert the next
+     * song from zustand saved queue.
+     */
+
     if (song.id === currentPlayingId) return;
+    await TrackPlayer.reset();
     const queuedSongList = playerSetting.keepSearchedSongListWhenPlaying
       ? currentRows
       : currentPlaylist.songList;
+    setCurrentPlayingList({ ...currentPlaylist, songList: queuedSongList });
+    setCurrentPlayingId(song.id);
+    await TrackPlayer.add(songlistToTracklist([song]));
+    TrackPlayer.play();
+    return;
+    /*
+    // setQueue implementation
     const skipNPlay = async (index: number) => {
       await TrackPlayer.skip(index);
       await TrackPlayer.play();
@@ -180,6 +201,7 @@ export default () => {
         await skipNPlay(trackIndex);
       }
     }
+     */
   };
 
   const refreshPlaylist = async () => {

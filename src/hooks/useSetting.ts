@@ -16,12 +16,12 @@ import {
 } from '../utils/ChromeStorage';
 import { notNullDefault } from '../utils/Utils';
 import { createStyle } from '../components/style';
-import noxPlayingList from '../store/playingList';
+import noxPlayingList, { setPlayingList } from '../store/playingList';
 
-const { setState } = noxPlayingList;
+const { getState, setState } = noxPlayingList;
 
 interface initializedResults {
-  currentPlayingList: NoxMedia.Playinglist;
+  currentPlayingList: NoxMedia.Playlist;
   playlists: { [key: string]: NoxMedia.Playlist };
 }
 
@@ -46,7 +46,7 @@ interface NoxSetting {
 
   currentPlayingId: string | null;
   setCurrentPlayingId: (val: string) => void;
-  currentPlayingList: NoxMedia.Playinglist;
+  currentPlayingList: NoxMedia.Playlist;
   setCurrentPlayingList: (val: NoxMedia.Playlist) => boolean;
   playlists: { [key: string]: NoxMedia.Playlist };
   playlistIds: Array<string>;
@@ -60,8 +60,6 @@ interface NoxSetting {
   favoritePlaylist: NoxMedia.Playlist;
   setFavoritePlaylist: (val: NoxMedia.Playlist) => void;
 
-  playerRepeat: string;
-  setPlayerRepeat: (val: string) => void;
   playerSetting: NoxStorage.PlayerSettingDict;
   setPlayerSetting: (val: NoxStorage.PlayerSettingDict) => void;
 
@@ -126,23 +124,14 @@ export const useNoxSetting = create<NoxSetting>((set, get) => ({
     set({ currentPlayingId: val });
     savelastPlaylistId([get().currentPlayingList.id, val]);
   },
-  currentPlayingList: { ...dummyPlaylistList, songListShuffled: [] },
+  currentPlayingList: dummyPlaylistList,
   setCurrentPlayingList: (val: NoxMedia.Playlist) => {
     if (val.songList === get().currentPlayingList.songList) {
       return false;
     }
-    const songListShuffled = [...val.songList].sort(() => Math.random() - 0.5);
-    set({
-      currentPlayingList: {
-        ...val,
-        songListShuffled,
-      },
-    });
+    set({ currentPlayingList: val });
     savelastPlaylistId([val.id, String(get().currentPlayingId)]);
-    setState({
-      playingList: val.songList,
-      playingListShuffled: songListShuffled,
-    });
+    setPlayingList(val.songList);
     return true;
   },
   playlists: {},
@@ -168,8 +157,6 @@ export const useNoxSetting = create<NoxSetting>((set, get) => ({
     set({ favoritePlaylist: val, playlists });
   },
 
-  playerRepeat: NoxRepeatMode.SHUFFLE,
-  setPlayerRepeat: (val: string) => set({ playerRepeat: val }),
   playerSetting: DEFAULT_SETTING,
   setPlayerSetting: (val: NoxStorage.PlayerSettingDict) => {
     set({ playerSetting: val });
@@ -223,16 +210,10 @@ export const useNoxSetting = create<NoxSetting>((set, get) => ({
   },
 
   initPlayer: async (val: NoxStorage.PlayerStorageObject) => {
-    const playingListBase = notNullDefault(
+    const playingList = notNullDefault(
       val.playlists[val.lastPlaylistId[0]],
       dummyPlaylistList
     );
-    const playingList = {
-      ...playingListBase,
-      songListShuffled: [...playingListBase.songList].sort(
-        () => Math.random() - 0.5
-      ),
-    };
     set({ currentPlayingId: val.lastPlaylistId[1] });
     set({ currentPlayingList: playingList });
     set({
@@ -244,11 +225,15 @@ export const useNoxSetting = create<NoxSetting>((set, get) => ({
     set({ searchPlaylist: val.searchPlaylist });
     set({ favoritePlaylist: val.favoriPlaylist });
     set({ playerSetting: val.settings ? val.settings : DEFAULT_SETTING });
-    set({ playerRepeat: val.playerRepeat });
     set({ playlists: val.playlists });
     set({ playlistIds: val.playlistIds });
     set({ playerStyle: createStyle(val.skin) });
     set({ playerStyles: val.skins });
+    setPlayingList(
+      notNullDefault(val.playlists[val.lastPlaylistId[0]], val.searchPlaylist)
+        .songList
+    );
+    setState({ playmode: val.playerRepeat });
     return {
       playlists: val.playlists,
       currentPlayingList: playingList,
