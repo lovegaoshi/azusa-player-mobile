@@ -59,8 +59,15 @@ interface FetcherProps {
   limiter?: Bottleneck;
   params?: any;
   jsonify?: (val: any) => any;
+  getBVID?: (val: any) => any;
 }
 
+/**
+ * generic paginated API resolver.
+ * using biliChannel for dev example:
+ * API url can be found here:
+ * 
+ */
 export const fetchPaginatedAPI = async ({
   url,
   getMediaCount,
@@ -72,6 +79,7 @@ export const fetchPaginatedAPI = async ({
   limiter = biliTagApiLimiter,
   params = undefined,
   jsonify = extract509Json,
+  getBVID = (val: any) => val.bvid,
 }: FetcherProps) => {
   const res = await bfetch(url.replace('{pn}', String(1)), params);
   const { data } = await jsonify(res.clone());
@@ -95,7 +103,7 @@ export const fetchPaginatedAPI = async ({
       return jsonify(pages)
         .then((parsedJson: any) => {
           getItems(parsedJson).forEach(m => {
-            if (!favList.includes(m.bvid)) BVids.push(m);
+            if (!favList.includes(getBVID(m))) BVids.push(m);
           });
         })
         .catch((err: any) => {
@@ -104,6 +112,54 @@ export const fetchPaginatedAPI = async ({
         });
     })
   );
+  // i dont know the smart way to do this out of the async loop, though luckily that O(2n) isnt that big of a deal
+  return (await resolveBiliBVID(BVids, progressEmitter)).filter(
+    item => item !== undefined
+  );
+};
+
+/**
+ * instead of fetching all pages with promise.all, 
+ * this fetches pages with for of and achieves process
+ * control to stop fetching when the first bvid is encountered.
+ */
+export const fetchAwaitPaginatedAPI = async ({
+  url,
+  getMediaCount,
+  getPageSize,
+  getItems,
+  resolveBiliBVID,
+  progressEmitter = () => void 0,
+  favList = [],
+  limiter = biliTagApiLimiter,
+  params = undefined,
+  jsonify = extract509Json,
+}: FetcherProps) => {
+  const res = await bfetch(url.replace('{pn}', String(1)), params);
+  const { data } = await jsonify(res.clone());
+  const mediaCount = getMediaCount(data);
+  const BVids: string[] = [];
+  const resolvePage = async () => {
+    for (
+      let page = 1, n = Math.ceil(mediaCount / getPageSize(data));
+      page <= n;
+      page++
+    ) {
+      try {
+        const pageRes = await limiter.schedule(() => bfetch(url.replace('{pn}', String(page)), params)) as Response;
+        const parsedJson = await jsonify(pageRes);
+        for (const m of getItems(parsedJson)) {
+          if (favList.includes(m.bvid)) {
+            return;
+          }
+          BVids.push(m);
+        }  
+      } catch (e) {
+        console.error('resolving page in fetchAwaitedPaginatedAPI', e);
+      }
+    }
+  }
+  await resolvePage();
   // i dont know the smart way to do this out of the async loop, though luckily that O(2n) isnt that big of a deal
   return (await resolveBiliBVID(BVids, progressEmitter)).filter(
     item => item !== undefined

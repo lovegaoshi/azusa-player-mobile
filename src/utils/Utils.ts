@@ -18,11 +18,6 @@ export const seconds2MMSS = (sec_num: number) => {
     : `${String(minutes)}:${padding(seconds)}`;
 };
 
-export const notNullDefault = (val: any, defaultVal: any) => {
-  if (val) return val;
-  return defaultVal;
-};
-
 export const TwoWayAlert = (
   title: string,
   message: string,
