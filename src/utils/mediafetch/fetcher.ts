@@ -14,7 +14,7 @@ import bfetch from '../BiliFetch';
  * default throttler, 100ms/call using bottleneck,
  * max 5 concurrent
  */
-const biliTagApiLimiter = new Bottleneck({
+const pageAPILimiter = new Bottleneck({
   minTime: 100,
   maxConcurrent: 5,
 });
@@ -60,6 +60,7 @@ interface FetcherProps {
   params?: any;
   jsonify?: (val: any) => any;
   getBVID?: (val: any) => any;
+  getJSONData?: (json: any) => any;
 }
 
 /**
@@ -76,13 +77,14 @@ export const fetchPaginatedAPI = async ({
   resolveBiliBVID,
   progressEmitter = () => void 0,
   favList = [],
-  limiter = biliTagApiLimiter,
+  limiter = pageAPILimiter,
   params = undefined,
   jsonify = extract509Json,
   getBVID = (val: any) => val.bvid,
+  getJSONData = (json: any) => json.data,
 }: FetcherProps) => {
   const res = await bfetch(url.replace('{pn}', String(1)), params);
-  const { data } = await jsonify(res.clone());
+  const data = getJSONData(await jsonify(res.clone()));
   const mediaCount = getMediaCount(data);
   const BVids: string[] = [];
   const pagesPromises: Promise<Response>[] = [
@@ -131,12 +133,14 @@ export const fetchAwaitPaginatedAPI = async ({
   resolveBiliBVID,
   progressEmitter = () => void 0,
   favList = [],
-  limiter = biliTagApiLimiter,
+  limiter = pageAPILimiter,
   params = undefined,
   jsonify = extract509Json,
+  getBVID = (val: any) => val.bvid,
+  getJSONData = (json: any) => json.data,
 }: FetcherProps) => {
   const res = await bfetch(url.replace('{pn}', String(1)), params);
-  const { data } = await jsonify(res.clone());
+  const data = getJSONData(await jsonify(res));
   const mediaCount = getMediaCount(data);
   const BVids: string[] = [];
   const resolvePage = async () => {
@@ -149,7 +153,7 @@ export const fetchAwaitPaginatedAPI = async ({
         const pageRes = await limiter.schedule(() => bfetch(url.replace('{pn}', String(page)), params)) as Response;
         const parsedJson = await jsonify(pageRes);
         for (const m of getItems(parsedJson)) {
-          if (favList.includes(m.bvid)) {
+          if (favList.includes(getBVID(m))) {
             return;
           }
           BVids.push(m);
