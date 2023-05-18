@@ -78,7 +78,7 @@ const URL_BILICOLLE_INFO =
  *  channel API Extract Info
  */
 const URL_BILICHANNEL_INFO =
-  'https://api.bilibili.com/x/space/arc/search?mid={mid}&pn={pn}&jsonp=jsonp&ps=50';
+  'https://api.bilibili.com/x/space/wbi/arc/search?mid={mid}&pn={pn}&jsonp=jsonp&ps=50';
 /**
  *  Fav List
  */
