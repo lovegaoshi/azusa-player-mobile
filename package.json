@@ -52,7 +52,6 @@
     "react-native-tab-view": "^3.5.1",
     "react-native-track-player": "git+https://lovegaoshi@github.com/lovegaoshi/react-native-track-player.git",
     "react-native-vector-icons": "^9.2.0",
-    "react-native-video": "^6.0.0-alpha.6",
     "react-native-windows": "^0.65.0-0",
     "zustand": "^4.3.7"
   },

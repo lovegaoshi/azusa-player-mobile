@@ -11,10 +11,10 @@
 		13B07FBC1A68108700A75B9A /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.mm */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
-		409E343DC7C5A2542B16EA98 /* libPods-example-exampleTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 75D2E29B0CDAF52B1E5FA483 /* libPods-example-exampleTests.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 		9B521D0C26610C0700EF0C3A /* dummy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B521D0B26610C0700EF0C3A /* dummy.swift */; };
-		D4E419C990E32CBB3C7E1FD0 /* libPods-example.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 886110B3DD0A55153E82F632 /* libPods-example.a */; };
+		A7ED8C5E3242B7A11910AC34 /* libPods-azusa-player-mobile.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 13EEFF6BBEF989EDAD5FC4B7 /* libPods-azusa-player-mobile.a */; };
+		F161E43DC15C3C1CE6A17FC9 /* libPods-azusa-player-mobile-exampleTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 28468BD50B4AAEF16D728F55 /* libPods-azusa-player-mobile-exampleTests.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -37,13 +37,17 @@
 		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = example/Images.xcassets; sourceTree = "<group>"; };
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = example/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = example/main.m; sourceTree = "<group>"; };
+		13EEFF6BBEF989EDAD5FC4B7 /* libPods-azusa-player-mobile.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-azusa-player-mobile.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		28468BD50B4AAEF16D728F55 /* libPods-azusa-player-mobile-exampleTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-azusa-player-mobile-exampleTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2C2F9802D9A70707E1CB329F /* Pods-example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-example.release.xcconfig"; path = "Target Support Files/Pods-example/Pods-example.release.xcconfig"; sourceTree = "<group>"; };
-		75D2E29B0CDAF52B1E5FA483 /* libPods-example-exampleTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-example-exampleTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		3E446D4365C1A108616D8ADA /* Pods-azusa-player-mobile.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-azusa-player-mobile.release.xcconfig"; path = "Target Support Files/Pods-azusa-player-mobile/Pods-azusa-player-mobile.release.xcconfig"; sourceTree = "<group>"; };
+		7CA01EA30DD1126F19B1D56B /* Pods-azusa-player-mobile-exampleTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-azusa-player-mobile-exampleTests.debug.xcconfig"; path = "Target Support Files/Pods-azusa-player-mobile-exampleTests/Pods-azusa-player-mobile-exampleTests.debug.xcconfig"; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = example/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		886110B3DD0A55153E82F632 /* libPods-example.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-example.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		90F8A623B625BC290532B128 /* Pods-azusa-player-mobile-exampleTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-azusa-player-mobile-exampleTests.release.xcconfig"; path = "Target Support Files/Pods-azusa-player-mobile-exampleTests/Pods-azusa-player-mobile-exampleTests.release.xcconfig"; sourceTree = "<group>"; };
 		9B521D0626604D3800EF0C3A /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		9B521D0A26610C0600EF0C3A /* example-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "example-Bridging-Header.h"; sourceTree = "<group>"; };
 		9B521D0B26610C0700EF0C3A /* dummy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dummy.swift; sourceTree = "<group>"; };
+		9E1BC3386E26E34AEF891FF5 /* Pods-azusa-player-mobile.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-azusa-player-mobile.debug.xcconfig"; path = "Target Support Files/Pods-azusa-player-mobile/Pods-azusa-player-mobile.debug.xcconfig"; sourceTree = "<group>"; };
 		C6A6377EE893F59DCD177B16 /* Pods-example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-example.debug.xcconfig"; path = "Target Support Files/Pods-example/Pods-example.debug.xcconfig"; sourceTree = "<group>"; };
 		DDFCE76F143B5D90F2157D05 /* Pods-example-exampleTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-example-exampleTests.release.xcconfig"; path = "Target Support Files/Pods-example-exampleTests/Pods-example-exampleTests.release.xcconfig"; sourceTree = "<group>"; };
 		E050A9D69F20B323551604B0 /* Pods-example-exampleTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-example-exampleTests.debug.xcconfig"; path = "Target Support Files/Pods-example-exampleTests/Pods-example-exampleTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -55,7 +59,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				409E343DC7C5A2542B16EA98 /* libPods-example-exampleTests.a in Frameworks */,
+				F161E43DC15C3C1CE6A17FC9 /* libPods-azusa-player-mobile-exampleTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -63,7 +67,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D4E419C990E32CBB3C7E1FD0 /* libPods-example.a in Frameworks */,
+				A7ED8C5E3242B7A11910AC34 /* libPods-azusa-player-mobile.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -107,8 +111,8 @@
 			children = (
 				9B521D0626604D3800EF0C3A /* AVFoundation.framework */,
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
-				886110B3DD0A55153E82F632 /* libPods-example.a */,
-				75D2E29B0CDAF52B1E5FA483 /* libPods-example-exampleTests.a */,
+				13EEFF6BBEF989EDAD5FC4B7 /* libPods-azusa-player-mobile.a */,
+				28468BD50B4AAEF16D728F55 /* libPods-azusa-player-mobile-exampleTests.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -120,6 +124,10 @@
 				2C2F9802D9A70707E1CB329F /* Pods-example.release.xcconfig */,
 				E050A9D69F20B323551604B0 /* Pods-example-exampleTests.debug.xcconfig */,
 				DDFCE76F143B5D90F2157D05 /* Pods-example-exampleTests.release.xcconfig */,
+				9E1BC3386E26E34AEF891FF5 /* Pods-azusa-player-mobile.debug.xcconfig */,
+				3E446D4365C1A108616D8ADA /* Pods-azusa-player-mobile.release.xcconfig */,
+				7CA01EA30DD1126F19B1D56B /* Pods-azusa-player-mobile-exampleTests.debug.xcconfig */,
+				90F8A623B625BC290532B128 /* Pods-azusa-player-mobile-exampleTests.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -179,9 +187,9 @@
 			productReference = 00E356EE1AD99517003FC87E /* exampleTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		13B07F861A680F5B00A75B9A /* example */ = {
+		13B07F861A680F5B00A75B9A /* azusa-player-mobile */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "example" */;
+			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "azusa-player-mobile" */;
 			buildPhases = (
 				1D12CCA46F8200FDC26C87C5 /* [CP] Check Pods Manifest.lock */,
 				FD10A7F022414F080027D42C /* Start Packager */,
@@ -196,7 +204,7 @@
 			);
 			dependencies = (
 			);
-			name = example;
+			name = "azusa-player-mobile";
 			productName = example;
 			productReference = 13B07F961A680F5B00A75B9A /* example.app */;
 			productType = "com.apple.product-type.application";
@@ -231,7 +239,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				13B07F861A680F5B00A75B9A /* example */,
+				13B07F861A680F5B00A75B9A /* azusa-player-mobile */,
 				00E356ED1AD99517003FC87E /* exampleTests */,
 			);
 		};
@@ -288,7 +296,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-example-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-azusa-player-mobile-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -301,15 +309,15 @@
 			files = (
 			);
 			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-example/Pods-example-resources-${CONFIGURATION}-input-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-azusa-player-mobile/Pods-azusa-player-mobile-resources-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-example/Pods-example-resources-${CONFIGURATION}-output-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-azusa-player-mobile/Pods-azusa-player-mobile-resources-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-example/Pods-example-resources.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-azusa-player-mobile/Pods-azusa-player-mobile-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		4D1A105E8DA4143AA121A89C /* [CP] Embed Pods Frameworks */ = {
@@ -318,15 +326,15 @@
 			files = (
 			);
 			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-example/Pods-example-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-azusa-player-mobile/Pods-azusa-player-mobile-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-example/Pods-example-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-azusa-player-mobile/Pods-azusa-player-mobile-frameworks-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-example/Pods-example-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-azusa-player-mobile/Pods-azusa-player-mobile-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		514ACECEF4829034DF0719ED /* [CP] Check Pods Manifest.lock */ = {
@@ -344,7 +352,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-example-exampleTests-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-azusa-player-mobile-exampleTests-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -357,15 +365,15 @@
 			files = (
 			);
 			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-example-exampleTests/Pods-example-exampleTests-resources-${CONFIGURATION}-input-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-azusa-player-mobile-exampleTests/Pods-azusa-player-mobile-exampleTests-resources-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-example-exampleTests/Pods-example-exampleTests-resources-${CONFIGURATION}-output-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-azusa-player-mobile-exampleTests/Pods-azusa-player-mobile-exampleTests-resources-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-example-exampleTests/Pods-example-exampleTests-resources.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-azusa-player-mobile-exampleTests/Pods-azusa-player-mobile-exampleTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		9C366928E3B19FD38DADEE35 /* [CP] Embed Pods Frameworks */ = {
@@ -374,15 +382,15 @@
 			files = (
 			);
 			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-example-exampleTests/Pods-example-exampleTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-azusa-player-mobile-exampleTests/Pods-azusa-player-mobile-exampleTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-example-exampleTests/Pods-example-exampleTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-azusa-player-mobile-exampleTests/Pods-azusa-player-mobile-exampleTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-example-exampleTests/Pods-example-exampleTests-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-azusa-player-mobile-exampleTests/Pods-azusa-player-mobile-exampleTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		FD10A7F022414F080027D42C /* Start Packager */ = {
@@ -430,7 +438,7 @@
 /* Begin PBXTargetDependency section */
 		00E356F51AD99517003FC87E /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 13B07F861A680F5B00A75B9A /* example */;
+			target = 13B07F861A680F5B00A75B9A /* azusa-player-mobile */;
 			targetProxy = 00E356F41AD99517003FC87E /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -438,7 +446,7 @@
 /* Begin XCBuildConfiguration section */
 		00E356F61AD99517003FC87E /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = E050A9D69F20B323551604B0 /* Pods-example-exampleTests.debug.xcconfig */;
+			baseConfigurationReference = 7CA01EA30DD1126F19B1D56B /* Pods-azusa-player-mobile-exampleTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -447,7 +455,7 @@
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = exampleTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -467,13 +475,13 @@
 		};
 		00E356F71AD99517003FC87E /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = DDFCE76F143B5D90F2157D05 /* Pods-example-exampleTests.release.xcconfig */;
+			baseConfigurationReference = 90F8A623B625BC290532B128 /* Pods-azusa-player-mobile-exampleTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
 				INFOPLIST_FILE = exampleTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -493,7 +501,7 @@
 		};
 		13B07F941A680F5B00A75B9A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = C6A6377EE893F59DCD177B16 /* Pods-example.debug.xcconfig */;
+			baseConfigurationReference = 9E1BC3386E26E34AEF891FF5 /* Pods-azusa-player-mobile.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -523,7 +531,7 @@
 		};
 		13B07F951A680F5B00A75B9A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 2C2F9802D9A70707E1CB329F /* Pods-example.release.xcconfig */;
+			baseConfigurationReference = 3E446D4365C1A108616D8ADA /* Pods-azusa-player-mobile.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -598,7 +606,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					/usr/lib/swift,
 					"$(inherited)",
@@ -658,7 +666,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					/usr/lib/swift,
 					"$(inherited)",
@@ -688,7 +696,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "example" */ = {
+		13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "azusa-player-mobile" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				13B07F941A680F5B00A75B9A /* Debug */,

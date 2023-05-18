@@ -3,6 +3,7 @@ import { strToU8, strFromU8, compressSync, decompressSync } from 'fflate';
 import { dummyPlaylist } from '../objects/Playlist';
 import { NoxRepeatMode } from '../components/player/enums/RepeatMode';
 import { PLAYLIST_ENUMS } from '../enums/Playlist';
+import AzusaTheme from '../components/styles/AzusaTheme';
 /**
  * noxplayer's storage handler.
  * ChromeStorage has quite a few changes from azusa player the chrome extension;
@@ -239,7 +240,7 @@ export const initPlayerObject =
       ),
       favoriPlaylist: await getItem(STORAGE_KEYS.FAVORITE_PLAYLIST_KEY) || dummyPlaylist('Favorite', PLAYLIST_ENUMS.TYPE_FAVORI_PLAYLIST),
       playerRepeat: await getItem(STORAGE_KEYS.PLAYMODE_KEY) ||NoxRepeatMode.SHUFFLE,
-      skin: await getItem(STORAGE_KEYS.SKIN) || {},
+      skin: await getItem(STORAGE_KEYS.SKIN) || AzusaTheme,
       skins: await getPlayerSkins() || [],
     } as NoxStorage.PlayerStorageObject;
 
