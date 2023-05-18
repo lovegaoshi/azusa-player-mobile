@@ -156,7 +156,6 @@ export default ({
     progressEmitter(0);
     Snackbar.dismiss();
     Snackbar.show({ text: t('PlaylistOperations.cleaned', { playlist }) });
-    console.log(validBVIds);
   };
 
   const playlistBiliShazam = async (playlist = currentPlaylist) => {

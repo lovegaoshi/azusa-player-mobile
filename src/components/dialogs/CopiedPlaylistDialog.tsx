@@ -43,7 +43,6 @@ export default ({
       onClose();
       return;
     }
-    console.log(fromList.songList, playlistIndex);
     const toList = playlists[playlistIndex];
     updatePlaylist(toList, fromList.songList, []);
     onSubmit();
