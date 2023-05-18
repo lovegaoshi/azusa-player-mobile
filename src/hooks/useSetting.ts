@@ -16,12 +16,16 @@ import {
 } from '../utils/ChromeStorage';
 import { notNullDefault } from '../utils/Utils';
 import { createStyle } from '../components/style';
-import noxPlayingList, { setPlayingList } from '../store/playingList';
+import noxPlayingList, {
+  setPlayingList,
+  getCurrentTPQueue,
+} from '../store/playingList';
 
 const { getState, setState } = noxPlayingList;
 
 interface initializedResults {
   currentPlayingList: NoxMedia.Playlist;
+  currentPlayingID: string;
   playlists: { [key: string]: NoxMedia.Playlist };
 }
 
@@ -237,6 +241,7 @@ export const useNoxSetting = create<NoxSetting>((set, get) => ({
     return {
       playlists: val.playlists,
       currentPlayingList: playingList,
+      currentPlayingID: val.lastPlaylistId[1],
     };
   },
 }));

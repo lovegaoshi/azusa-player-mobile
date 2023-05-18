@@ -15,16 +15,6 @@ export async function PlaybackService() {
     TrackPlayer.play();
   });
 
-  TrackPlayer.addEventListener(Event.RemoteNext, () => {
-    console.log('Event.RemoteNext');
-    TrackPlayer.skipToNext();
-  });
-
-  TrackPlayer.addEventListener(Event.RemotePrevious, () => {
-    console.log('Event.RemotePrevious');
-    TrackPlayer.skipToPrevious();
-  });
-
   TrackPlayer.addEventListener(Event.RemoteJumpForward, async event => {
     console.log('Event.RemoteJumpForward', event);
     TrackPlayer.seekBy(event.interval);
