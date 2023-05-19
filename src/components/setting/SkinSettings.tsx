@@ -1,6 +1,6 @@
 import * as React from 'react';
 import FastImage from 'react-native-fast-image';
-import { View, FlatList } from 'react-native';
+import { View, FlatList, SafeAreaView } from 'react-native';
 import {
   Text,
   IconButton,
@@ -45,7 +45,7 @@ export default () => {
       throw new Error('requested skin URL is not an array. aborting.');
     }
     const uniqueSkins = getUniqObjects(
-      skins.filter(skin => skin.metadata).concat(playerStyles),
+      skins.filter(skin => skin.metaData).concat(playerStyles),
       getThemeID
     );
     setPlayerStyles(uniqueSkins);
@@ -117,22 +117,18 @@ export default () => {
   };
 
   return (
-    <View
+    <SafeAreaView
       style={{
         backgroundColor: playerStyle.customColors.maskedBackgroundColor,
         flex: 1,
       }}
     >
-      <View style={{ flex: 0.5 }}>
-        <SkinSearchbar onSearched={loadCustomSkin} />
-      </View>
-      <View style={{ flex: 5.5 }}>
-        <FlatList
-          data={allThemes}
-          renderItem={({ item, index }) => renderSkinItem(item)}
-          keyExtractor={item => getThemeID(item)}
-        />
-      </View>
-    </View>
+      <SkinSearchbar onSearched={loadCustomSkin} />
+      <FlatList
+        data={allThemes}
+        renderItem={({ item, index }) => renderSkinItem(item)}
+        keyExtractor={item => getThemeID(item)}
+      />
+    </SafeAreaView>
   );
 };
