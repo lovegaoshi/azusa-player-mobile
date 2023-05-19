@@ -5,7 +5,9 @@ import Snackbar from 'react-native-snackbar';
 import { useNoxSetting } from '../../hooks/useSetting';
 
 export default ({ onSearched = (vals: any) => console.log(vals) }) => {
-  const [searchVal, setSearchVal] = useState('https://noxplay.us.to');
+  const [searchVal, setSearchVal] = useState(
+    'https://raw.githubusercontent.com/lovegaoshi/azusa-player-mobile/abcccb9acb96ae32cf721e11ddb09674074a5dc0/src/components/styles/steria.json'
+  );
   const [searchProgress, progressEmitter] = useState(0);
   const playerSetting = useNoxSetting(state => state.playerSetting);
 
