@@ -83,5 +83,16 @@
     "dataSaverDesc": "解析低质量素材节省流量",
     "fastBiliSearchName": "快速b站搜索",
     "fastBiliSearchDesc": "使用b站搜索时，不解析分p内容"
+  },
+  "Settings": {
+    "GeneralSettingTitle": "播放器设置",
+    "GeneralSettingDesc": "杂七杂八的播放器设置",
+    "SkinSettingTitle": "播放器皮肤",
+    "SkinSettingDesc": "选择你喜欢的管人皮肤",
+    "BackupSettingTitle": "歌单备份",
+    "BackupSettingDesc": "歌单云端备份和恢复",
+    "InfoSettingTitle": "关于管人播放器",
+    "InfoSettingDesc": "版本说明",
+    "FeatureNotImplemented": "功能孩妹实现"
   }
 }

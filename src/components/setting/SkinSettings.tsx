@@ -44,7 +44,10 @@ export default () => {
     if (!Array.isArray(skins)) {
       throw new Error('requested skin URL is not an array. aborting.');
     }
-    const uniqueSkins = getUniqObjects(allThemes.concat(skins.filter(skin => skin.metadata)), getThemeID);
+    const uniqueSkins = getUniqObjects(
+      skins.filter(skin => skin.metadata).concat(playerStyles),
+      getThemeID
+    );
     setPlayerStyles(uniqueSkins);
   };
 
@@ -54,6 +57,9 @@ export default () => {
       setChecked(themeID);
       setPlayerStyle(skin);
     };
+
+    const deleteTheme = () =>
+      setPlayerStyles(playerStyles.filter(pSkin => pSkin !== skin));
 
     return (
       <TouchableRipple onPress={selectTheme}>
@@ -101,8 +107,8 @@ export default () => {
             <IconButton
               icon="trash-can"
               style={{ marginLeft: -3 }}
-              onPress={() => console.log('pressedTrashcan')}
-              disabled={!skin.builtin}
+              onPress={deleteTheme}
+              disabled={skin.builtin}
             />
           </View>
         </View>
@@ -118,7 +124,7 @@ export default () => {
       }}
     >
       <View style={{ flex: 0.5 }}>
-        <SkinSearchbar />
+        <SkinSearchbar onSearched={loadCustomSkin} />
       </View>
       <View style={{ flex: 5.5 }}>
         <FlatList

@@ -26,7 +26,7 @@ declare namespace NoxTheme {
     customColors: customColors;
     // https://callstack.github.io/react-native-paper/docs/components/IconButton/
     // Type: 'outlined' | 'contained' | 'contained-tonal'
-    playerControlIconContained: string;
+    playerControlIconContained: string | undefined;
   }
 
   export interface coordinates {

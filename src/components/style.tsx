@@ -19,10 +19,7 @@ export const createStyle = (customStyle = AzusaTheme) => {
       ...nd(customStyle.customColors, {}),
     },
 
-    playerControlIconContained: nd(
-      customStyle.playerControlIconContained,
-      refTheme.playerControlIconContained
-    ),
+    playerControlIconContained: customStyle.playerControlIconContained as any,
 
     screenContainer: {
       flex: 1,
