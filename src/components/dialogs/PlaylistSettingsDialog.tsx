@@ -24,6 +24,7 @@ export default ({
   onSubmit = () => void 0,
 }: props) => {
   const { t } = useTranslation();
+  const playerStyle = useNoxSetting(state => state.playerStyle);
   const currentPlaylist = useNoxSetting(state => state.currentPlaylist);
   const updatePlaylist = useNoxSetting(state => state.updatePlaylist);
   const [playlistName, setPlaylistName] = useState(currentPlaylist.title);
@@ -65,16 +66,19 @@ export default ({
               label={String(t('PlaylistSettingsDialog.playlistNameLabel'))}
               value={playlistName}
               onChangeText={(val: string) => setPlaylistName(val)}
+              selectionColor={playerStyle.customColors.textInputSelectionColor}
             />
             <TextInput
               label={String(t('PlaylistSettingsDialog.subscribeUrlLabel'))}
               value={subscribeUrl}
               onChangeText={(val: string) => setSubscribeUrl(val)}
+              selectionColor={playerStyle.customColors.textInputSelectionColor}
             />
             <TextInput
               label={String(t('PlaylistSettingsDialog.blacklistedUrlLabel'))}
               value={blacklistedUrl}
               onChangeText={(val: string) => setBlacklistedUrl(val)}
+              selectionColor={playerStyle.customColors.textInputSelectionColor}
             />
             <View style={{ flexDirection: 'row' }}>
               <Switch value={useBiliShazam} onValueChange={toggleBiliShazam} />

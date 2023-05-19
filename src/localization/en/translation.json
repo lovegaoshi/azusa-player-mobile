@@ -83,5 +83,16 @@
     "dataSaverDesc": "Render low quality assets to save data.",
     "fastBiliSearchName": "Fast Bilibili Search",
     "fastBiliSearchDesc": "Do not search for bilibili video episodes."
+  },
+  "Settings": {
+    "GeneralSettingTitle": "General Settings",
+    "GeneralSettingDesc": "General settings for the app.",
+    "SkinSettingTitle": "Skins",
+    "SkinSettingDesc": "Choose your skin.",
+    "BackupSettingTitle": "Playlist Backup",
+    "BackupSettingDesc": "Backup your playlists.",
+    "InfoSettingTitle": "Info",
+    "InfoSettingDesc": "Info about the app.",
+    "FeatureNotImplemented": "Feature not implemented"
   }
 }

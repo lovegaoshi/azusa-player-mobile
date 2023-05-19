@@ -92,6 +92,7 @@ export default {
     progressThumbTintColor: '#a76bcf',
     progressMinimumTrackTintColor: '#df73ff',
     progressMaximumTrackTintColor: '#bf94e4',
+    textInputSelectionColor: '#dcd0ff',
   },
   colors: {
     ...DefaultTheme.colors,
@@ -99,5 +100,5 @@ export default {
     background: 'rgba(255, 255, 255, 0.4)',
     onSurfaceVariant: '#9400d3', // 'rgb(202, 199, 182)',
   },
-  playerControlIconContained: 'outline',
+  playerControlIconContained: undefined,
 } as NoxTheme.style;

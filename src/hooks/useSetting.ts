@@ -14,7 +14,6 @@ import {
   savePlayerSkin,
   savePlayerSkins,
 } from '../utils/ChromeStorage';
-import { notNullDefault } from '../utils/Utils';
 import { createStyle } from '../components/style';
 import noxPlayingList, {
   setPlayingList,
@@ -214,17 +213,15 @@ export const useNoxSetting = create<NoxSetting>((set, get) => ({
   },
 
   initPlayer: async (val: NoxStorage.PlayerStorageObject) => {
-    const playingList = notNullDefault(
-      val.playlists[val.lastPlaylistId[0]],
-      dummyPlaylistList
-    );
+    const playingList = 
+      val.playlists[val.lastPlaylistId[0]] ||
+      dummyPlaylistList;
     set({ currentPlayingId: val.lastPlaylistId[1] });
     set({ currentPlayingList: playingList });
     set({
-      currentPlaylist: notNullDefault(
-        val.playlists[val.lastPlaylistId[0]],
-        val.searchPlaylist
-      ),
+      currentPlaylist:
+        val.playlists[val.lastPlaylistId[0]] ||
+        val.searchPlaylist,
     });
     set({ searchPlaylist: val.searchPlaylist });
     set({ favoritePlaylist: val.favoriPlaylist });
@@ -234,7 +231,7 @@ export const useNoxSetting = create<NoxSetting>((set, get) => ({
     set({ playerStyle: createStyle(val.skin) });
     set({ playerStyles: val.skins });
     setPlayingList(
-      notNullDefault(val.playlists[val.lastPlaylistId[0]], val.searchPlaylist)
+      (val.playlists[val.lastPlaylistId[0]] || val.searchPlaylist)
         .songList
     );
     setState({ playmode: val.playerRepeat });

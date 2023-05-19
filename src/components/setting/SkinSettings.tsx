@@ -1,6 +1,6 @@
 import * as React from 'react';
 import FastImage from 'react-native-fast-image';
-import { View, FlatList } from 'react-native';
+import { View, FlatList, SafeAreaView } from 'react-native';
 import {
   Text,
   IconButton,
@@ -44,7 +44,10 @@ export default () => {
     if (!Array.isArray(skins)) {
       throw new Error('requested skin URL is not an array. aborting.');
     }
-    const uniqueSkins = getUniqObjects(allThemes.concat(skins.filter(skin => skin.metadata)), getThemeID);
+    const uniqueSkins = getUniqObjects(
+      skins.filter(skin => skin.metaData).concat(playerStyles),
+      getThemeID
+    );
     setPlayerStyles(uniqueSkins);
   };
 
@@ -54,6 +57,9 @@ export default () => {
       setChecked(themeID);
       setPlayerStyle(skin);
     };
+
+    const deleteTheme = () =>
+      setPlayerStyles(playerStyles.filter(pSkin => pSkin !== skin));
 
     return (
       <TouchableRipple onPress={selectTheme}>
@@ -101,8 +107,8 @@ export default () => {
             <IconButton
               icon="trash-can"
               style={{ marginLeft: -3 }}
-              onPress={() => console.log('pressedTrashcan')}
-              disabled={!skin.builtin}
+              onPress={deleteTheme}
+              disabled={skin.builtin}
             />
           </View>
         </View>
@@ -111,22 +117,18 @@ export default () => {
   };
 
   return (
-    <View
+    <SafeAreaView
       style={{
         backgroundColor: playerStyle.customColors.maskedBackgroundColor,
         flex: 1,
       }}
     >
-      <View style={{ flex: 0.5 }}>
-        <SkinSearchbar />
-      </View>
-      <View style={{ flex: 5.5 }}>
-        <FlatList
-          data={allThemes}
-          renderItem={({ item, index }) => renderSkinItem(item)}
-          keyExtractor={item => getThemeID(item)}
-        />
-      </View>
-    </View>
+      <SkinSearchbar onSearched={loadCustomSkin} />
+      <FlatList
+        data={allThemes}
+        renderItem={({ item, index }) => renderSkinItem(item)}
+        keyExtractor={item => getThemeID(item)}
+      />
+    </SafeAreaView>
   );
 };

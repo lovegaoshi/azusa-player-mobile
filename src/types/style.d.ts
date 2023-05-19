@@ -15,6 +15,7 @@ declare namespace NoxTheme {
     progressMinimumTrackTintColor: string;
     progressMaximumTrackTintColor: string;
     btnBackgroundColor: string;
+    textInputSelectionColor: string;
   }
 
   export interface style {
@@ -26,7 +27,7 @@ declare namespace NoxTheme {
     customColors: customColors;
     // https://callstack.github.io/react-native-paper/docs/components/IconButton/
     // Type: 'outlined' | 'contained' | 'contained-tonal'
-    playerControlIconContained: string;
+    playerControlIconContained: string | undefined;
   }
 
   export interface coordinates {
