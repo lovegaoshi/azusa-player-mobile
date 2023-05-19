@@ -21,6 +21,7 @@ export default ({
 }: props) => {
   const { t } = useTranslation();
   const currentPlaylist = useNoxSetting(state => state.currentPlaylist);
+  const playerStyle = useNoxSetting(state => state.playerStyle);
 
   React.useEffect(() => {
     setSearchText('');
@@ -39,6 +40,7 @@ export default ({
           style={{ height: 40 }}
           autoFocus
           selectTextOnFocus
+          selectionColor={playerStyle.customColors.textInputSelectionColor}
         />
       ) : (
         <Pressable onPress={onPressed}>

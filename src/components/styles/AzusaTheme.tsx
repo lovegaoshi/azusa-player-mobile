@@ -92,6 +92,7 @@ export default {
     progressThumbTintColor: '#a76bcf',
     progressMinimumTrackTintColor: '#df73ff',
     progressMaximumTrackTintColor: '#bf94e4',
+    textInputSelectionColor: '#dcd0ff',
   },
   colors: {
     ...DefaultTheme.colors,

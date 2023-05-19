@@ -50,6 +50,7 @@ export default ({
           onChangeText={val => setSearchVal(val)}
           onSubmitEditing={() => handleSearch(searchVal)}
           selectTextOnFocus
+          selectionColor={playerStyle.customColors.textInputSelectionColor}
         />
         <IconButton
           icon="search-web"

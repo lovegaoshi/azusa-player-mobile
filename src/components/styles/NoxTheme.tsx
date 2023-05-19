@@ -41,6 +41,7 @@ export default {
     // progresss bar's whatever's right of the round icon
     progressMaximumTrackTintColor: '#FFFFFF',
     btnBackgroundColor: 'rgb(72, 71, 58)',
+    textInputSelectionColor: 'green',
   },
 
   colors: {

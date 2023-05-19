@@ -9,7 +9,7 @@ export default ({ onSearched = (vals: any) => console.log(vals) }) => {
     'https://raw.githubusercontent.com/lovegaoshi/azusa-player-mobile/abcccb9acb96ae32cf721e11ddb09674074a5dc0/src/components/styles/steria.json'
   );
   const [searchProgress, progressEmitter] = useState(0);
-  const playerSetting = useNoxSetting(state => state.playerSetting);
+  const playerStyle = useNoxSetting(state => state.playerStyle);
 
   const handleSearch = async (val = searchVal) => {
     progressEmitter(100);
@@ -33,6 +33,7 @@ export default ({ onSearched = (vals: any) => console.log(vals) }) => {
           onChangeText={val => setSearchVal(val)}
           onSubmitEditing={() => handleSearch(searchVal)}
           selectTextOnFocus
+          selectionColor={playerStyle.customColors.textInputSelectionColor}
         />
         <IconButton
           icon="search-web"

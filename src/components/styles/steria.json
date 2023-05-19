@@ -48,7 +48,8 @@
       "playlistDrawerBackgroundColorTransparent": "rgba(255, 166, 201, 0.35)",
       "progressThumbTintColor": "#ff1493",
       "progressMinimumTrackTintColor": "#ff1493",
-      "progressMaximumTrackTintColor": "#FFFFFF"
+      "progressMaximumTrackTintColor": "#FFFFFF",
+      "textInputSelectionColor": "#ffa6c9"
     },
     "colors": {
       "text": "#ff1493",
