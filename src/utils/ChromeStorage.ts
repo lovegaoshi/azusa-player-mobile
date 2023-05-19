@@ -4,6 +4,7 @@ import { dummyPlaylist } from '../objects/Playlist';
 import { NoxRepeatMode } from '../components/player/enums/RepeatMode';
 import { PLAYLIST_ENUMS } from '../enums/Playlist';
 import AzusaTheme from '../components/styles/AzusaTheme';
+import { chunkArray as chunkArrayRaw } from '../utils/Utils';
 /**
  * noxplayer's storage handler.
  * ChromeStorage has quite a few changes from azusa player the chrome extension;
@@ -85,18 +86,11 @@ export const removeItem = async (key: string) => {
  * @param size
  * @returns
  */
-const chunkArray = (
-  arr: Array<any>,
+const chunkArray = <T>(
+  arr: Array<T>,
   size = MAX_SONGLIST_SIZE
-): Array<any[]> => {
-  return arr.reduce((chunks, item, index) => {
-    const chunkIndex = Math.floor(index / size);
-    if (!chunks[chunkIndex]) {
-      chunks[chunkIndex] = [];
-    }
-    chunks[chunkIndex].push(item);
-    return chunks;
-  }, []);
+): Array<T[]> => {
+  return chunkArrayRaw(arr, size);
 };
 
 /**
