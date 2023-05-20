@@ -7,8 +7,7 @@ import { v4 as uuidv4 } from 'uuid';
 import VideoInfo from '../objects/VideoInfo';
 import { extractSongName } from './re';
 import bfetch from './BiliFetch';
-
-const logger = console;
+import { logger } from './Logger';
 
 /**
  * limits to bilibili API call to 200ms/call using bottleneck.
@@ -63,7 +62,7 @@ const URL_AUDIO_INFO =
  *  Video Basic Info
  */
 const URL_VIDEO_INFO =
-  'http://api.bilibili.com/x/web-interface/view?bvid={bvid}';
+  'https://api.bilibili.com/x/web-interface/view?bvid={bvid}';
 /**
  *  channel series API Extract Info
  */
@@ -176,10 +175,16 @@ export const fetchVideoPlayUrlPromise = async (
   cid,
   extractType = 'AudioUrl'
 ) => {
+  logger.debug(
+    `fethcVideoPlayURL: ${URL_PLAY_URL.replace('{bvid}', bvid).replace(
+      '{cid}',
+      cid
+    )}`
+  );
   // HACK:  this should be a breaking change that stringified cid
   // will never be not true.
   if (!cid || cid.includes('null')) {
-    cid = await fetchCID(bvid).catch(err => console.error(err, 'cid', cid));
+    cid = await fetchCID(bvid).catch(err => logger.error(err, 'cid', cid));
   }
   try {
     const res = await bfetch(
@@ -188,11 +193,7 @@ export const fetchVideoPlayUrlPromise = async (
     const json = await res.json();
     return extractResponseJson(json, extractType);
   } catch (e) {
-    console.error(
-      'error:',
-      e,
-      URL_PLAY_URL.replace('{bvid}', bvid).replace('{cid}', cid)
-    );
+    logger.error(e.message);
     throw e;
   }
 };
@@ -215,9 +216,9 @@ const fetchVideoTagPromiseRaw = async ({ bvid, cid }) => {
     }
     return null;
   } catch (e) {
-    console.warn(
-      `fetching videoTag for ${bvid}, ${cid} failed. if ${cid} is a special tag its expected.`,
-      e
+    logger.error(e.message);
+    logger.warn(
+      `fetching videoTag for ${bvid}, ${cid} failed. if ${cid} is a special tag its expected.`
     );
     return null;
   }
@@ -248,11 +249,14 @@ export const fetchVideoTagPromise = async ({ bvid, cid }) => {
  */
 export const fetchAudioPlayUrlPromise = async sid => {
   try {
+    logger.debug(
+      `fethcAudioPlayURL:${URL_AUDIO_PLAY_URL.replace('{sid}', sid)}`
+    );
     const res = await bfetch(URL_AUDIO_PLAY_URL.replace('{sid}', sid));
     const json = await res.json();
     return json.data.cdns[0];
   } catch (e) {
-    console.error(e, URL_AUDIO_PLAY_URL.replace('{sid}', sid));
+    logger.error(e.message);
     throw e;
   }
 };
@@ -263,7 +267,7 @@ export const fetchAudioPlayUrlPromise = async sid => {
  * @returns
  */
 export const fetchCID = async bvid => {
-  // console.log('Data.js Calling fetchCID:' + URL_BVID_TO_CID.replace("{bvid}", bvid))
+  // logger.log('Data.js Calling fetchCID:' + URL_BVID_TO_CID.replace("{bvid}", bvid))
   const res = await bfetch(URL_BVID_TO_CID.replace('{bvid}', bvid));
   const json = await res.json();
   const cid = extractResponseJson(json, 'CID');
@@ -272,7 +276,7 @@ export const fetchCID = async bvid => {
 
 // Refactor needed for this func
 export const fetchLRC = async (name, setLyric, setSongTitle) => {
-  // console.log('Data.js Calling: fetchLRC')
+  // logger.log('Data.js Calling: fetchLRC')
   // Get song mapping name and song name from title
   const res = await bfetch(URL_LRC_MAPPING);
   const mappings = await res.text();
@@ -303,10 +307,15 @@ export const fetchLRC = async (name, setLyric, setSongTitle) => {
  * @returns
  */
 export const fetchVideoInfoRaw = async ({ bvid }) => {
-  logger.info('calling fetchVideoInfo');
-  const res = await bfetch(URL_VIDEO_INFO.replace('{bvid}', bvid));
-  const json = await res.json();
+  logger.info(
+    `calling fetchVideoInfo of ${bvid} of ${URL_VIDEO_INFO.replace(
+      '{bvid}',
+      bvid
+    )}`
+  );
   try {
+    const res = await bfetch(URL_VIDEO_INFO.replace('{bvid}', bvid));
+    const json = await res.json();
     const { data } = json;
     const v = new VideoInfo(
       data.title,
@@ -322,8 +331,9 @@ export const fetchVideoInfoRaw = async ({ bvid }) => {
     );
     return v;
   } catch (error) {
-    console.error(error);
-    console.warn('Some issue happened when fetching', bvid);
+    logger.error(error.message);
+    logger.warn(`Some issue happened when fetching ${bvid}`);
+    throw error;
   }
 };
 
@@ -361,8 +371,8 @@ export const fetchAudioInfoRaw = async sid => {
     );
     return v;
   } catch (error) {
-    console.error(error);
-    console.warn('Some issue happened when fetching', sid);
+    logger.error(error.message);
+    logger.warn(`Some issue happened when fetching ${sid}`);
   }
 };
 
@@ -395,7 +405,7 @@ export const fetchBiliSeriesList = async (
   const BVidPromises = [];
   for (let i = 0, n = data.archives.length; i < n; i++) {
     if (favList.includes(data.archives[i].bvid)) {
-      console.debug(
+      logger.debug(
         'fetchBiliSeriesList: skipped duplicate bvid during rss feed update',
         data.archives[i].bvid
       );
@@ -470,8 +480,8 @@ export const fetchBiliPaginatedAPI = async ({
           });
         })
         .catch(err => {
-          console.error(err, pages);
-          pages.text().then(console.log);
+          logger.error(err.message);
+          pages.text().then(logger.debug);
         });
     })
   );
@@ -524,8 +534,8 @@ export const fetchAwaitBiliPaginatedAPI = async (
           });
         })
         .catch(err => {
-          console.error(err, pages);
-          pages.text().then(console.log);
+          logger.error(err.mesasge);
+          pages.text().then(logger.debug);
         });
     })
   );
@@ -703,7 +713,7 @@ export const fetchBiliSearchList = async (
         : undefined,
     });
   } catch (e) {
-    console.error(e);
+    logger.error(e.message);
   }
   return val;
 };
@@ -793,6 +803,6 @@ export const searchLyric = async (searchMID, setLyric) => {
   if (json.trans) {
     finalLrc = `${json.trans}\n${finalLrc}`;
   }
-  // console.log(finalLrc)
+  // logger.log(finalLrc)
   setLyric(finalLrc);
 };

@@ -68,7 +68,6 @@ export async function PlaybackService() {
           TrackPlayer.getActiveTrack().then(currentTrack => {
             TrackPlayer.load({ ...currentTrack, ...updatedMetadata });
           });
-          console.log(updatedMetadata);
         })
         .catch(() => console.error('resolveURL failed', event.track));
     }
