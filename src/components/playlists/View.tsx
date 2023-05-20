@@ -98,12 +98,8 @@ export default (props: any) => {
   };
 
   const searchPlaylistAsNewButton = () => (
-    <Pressable
-      onPress={() => setNewPlaylistDialogOpen(true)}
-      style={{ position: 'absolute', right: 10 }}
-      hitSlop={40}
-    >
-      <IconButton icon="new-box" size={30} />
+    <Pressable onPress={() => setNewPlaylistDialogOpen(true)} hitSlop={40}>
+      <IconButton icon="new-box" size={25} />
     </Pressable>
   );
 
@@ -163,6 +159,7 @@ export default (props: any) => {
       >
         {renderPlaylistWrapper({
           item: playlists[STORAGE_KEYS.SEARCH_PLAYLIST_KEY],
+          icon: searchPlaylistAsNewButton(),
         })}
       </TouchableRipple>
       <NewPlaylistDialog
