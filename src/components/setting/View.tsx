@@ -140,10 +140,26 @@ export default ({ navigation }: props) => {
           ),
         }}
       />
-      <Stack.Screen name={VIEW.DUMMY} component={DummySettings} />
-      <Stack.Screen name={VIEW.GENERAL} component={GeneralSettings} />
-      <Stack.Screen name={VIEW.SKIN} component={SkinSettings} />
-      <Stack.Screen name={VIEW.DEVELOPER} component={DeveloperSettings} />
+      <Stack.Screen
+        name={VIEW.DUMMY}
+        component={DummySettings}
+        options={{ title: String(t('Settings.FeatureNotImplemented')) }}
+      />
+      <Stack.Screen
+        name={VIEW.GENERAL}
+        component={GeneralSettings}
+        options={{ title: String(t('Settings.GeneralSettingTitle')) }}
+      />
+      <Stack.Screen
+        name={VIEW.SKIN}
+        component={SkinSettings}
+        options={{ title: String(t('Settings.SkinSettingTitle')) }}
+      />
+      <Stack.Screen
+        name={VIEW.DEVELOPER}
+        component={DeveloperSettings}
+        options={{ title: String(t('Settings.DeveloperOptionsTitle')) }}
+      />
     </Stack.Navigator>
   );
 };
