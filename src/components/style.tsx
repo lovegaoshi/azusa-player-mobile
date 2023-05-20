@@ -1,22 +1,24 @@
 import { StyleSheet } from 'react-native';
 import NoxTheme from './styles/NoxTheme';
 import AzusaTheme from './styles/AzusaTheme';
-// this seems stupid, but it resolves tsc by some weird ways that i keep...
 import { randomChoice } from '../utils/Utils';
-
-const nd = (val: any, defaultVal: any) => {
-  return val || defaultVal;
-};
 
 export const createStyle = (customStyle = AzusaTheme) => {
   const refTheme = customStyle.metaData.darkTheme ? NoxTheme : AzusaTheme;
   return StyleSheet.create({
-    metaData: { ...refTheme.metaData, ...nd(customStyle.metaData, {}) },
-    colors: { ...refTheme.colors, ...nd(customStyle.colors, refTheme.colors) },
+    metaData: {
+      ...refTheme.metaData,
+      // HACK: sure its bad but works.
+      ...((customStyle.metaData || {}) as any),
+    },
+    colors: {
+      ...refTheme.colors,
+      ...((customStyle.colors || refTheme.colors) as any),
+    },
 
     customColors: {
       ...refTheme.customColors,
-      ...nd(customStyle.customColors, {}),
+      ...((customStyle.customColors || {}) as any),
     },
 
     playerControlIconContained: customStyle.playerControlIconContained as any,
@@ -52,10 +54,8 @@ export const createStyle = (customStyle = AzusaTheme) => {
       alignItems: 'center',
       height: 140,
     },
-    gifs: nd(customStyle.gifs, refTheme.gifs),
-    bkgrdImg: randomChoice(
-      nd(customStyle.backgroundImages, refTheme.backgroundImages)
-    ),
+    gifs: (customStyle.gifs || []) as any,
+    bkgrdImg: randomChoice(customStyle.backgroundImages || []) as any,
   });
 };
 
