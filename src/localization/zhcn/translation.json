@@ -84,6 +84,16 @@
     "fastBiliSearchName": "快速b站搜索",
     "fastBiliSearchDesc": "使用b站搜索时，不解析分p内容"
   },
+  "DeveloperSettings": {
+    "LogLevelName": "日志等级",
+    "LogLevelDesc": "设置日志等级",
+    "LogLevel0": "调试",
+    "LogLevel1": "一般",
+    "LogLevel2": "警告",
+    "LogLevel3": "错误",
+    "LogLevel4": "致命错误",
+    "LogLevel5": "关闭"
+  },
   "Settings": {
     "GeneralSettingTitle": "播放器设置",
     "GeneralSettingDesc": "杂七杂八的播放器设置",

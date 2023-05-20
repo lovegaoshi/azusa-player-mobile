@@ -84,6 +84,16 @@
     "fastBiliSearchName": "Fast Bilibili Search",
     "fastBiliSearchDesc": "Do not search for bilibili video episodes."
   },
+  "DeveloperSettings": {
+    "LogLevelName": "Log Level",
+    "LogLevelDesc": "set Log Level",
+    "LogLevel0": "DEBUG",
+    "LogLevel1": "INFO",
+    "LogLevel2": "WARN",
+    "LogLevel3": "ERROR",
+    "LogLevel4": "CRITICAL",
+    "LogLevel5": "OFF"
+  },
   "Settings": {
     "GeneralSettingTitle": "General Settings",
     "GeneralSettingDesc": "General settings for the app.",

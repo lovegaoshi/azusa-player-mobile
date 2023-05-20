@@ -10,6 +10,7 @@ import { useTranslation } from 'react-i18next';
 
 import GeneralSettings from './GeneralSettings';
 import SkinSettings from './SkinSettings';
+import DeveloperSettings from './DeveloperSettings';
 import { useNoxSetting } from '../../hooks/useSetting';
 import { ViewEnum } from '../../enums/View';
 
@@ -21,6 +22,7 @@ enum ICONS {
   // though a good time to think about oauth2 now
   BACKUP = 'backup-restore',
   INFO = 'information',
+  DEVELOPER = 'application-brackets',
 }
 
 enum VIEW {
@@ -28,6 +30,7 @@ enum VIEW {
   DUMMY = 'Features not implemented',
   GENERAL = 'General',
   SKIN = 'Skins',
+  DEVELOPER = 'Developer Options',
 }
 
 const Stack = createNativeStackNavigator();
@@ -99,6 +102,15 @@ export default ({ navigation }: props) => {
             descriptionStyle={{ color: playerStyle.colors.secondary }}
           />
           <List.Item
+            left={props => <IconButton icon={ICONS.DEVELOPER} size={40} />}
+            title={String(t('Settings.DeveloperOptionsTitle'))}
+            description={String(t('Settings.DeveloperOptionsDesc'))}
+            onPress={() => navigation.navigate(VIEW.DEVELOPER)}
+            style={{}}
+            titleStyle={{ color: playerStyle.colors.primary }}
+            descriptionStyle={{ color: playerStyle.colors.secondary }}
+          />
+          <List.Item
             left={props => <IconButton icon={ICONS.INFO} size={40} />}
             title={String(t('Settings.InfoSettingTitle'))}
             description={String(t('Settings.InfoSettingDesc'))}
@@ -131,6 +143,7 @@ export default ({ navigation }: props) => {
       <Stack.Screen name={VIEW.DUMMY} component={DummySettings} />
       <Stack.Screen name={VIEW.GENERAL} component={GeneralSettings} />
       <Stack.Screen name={VIEW.SKIN} component={SkinSettings} />
+      <Stack.Screen name={VIEW.DEVELOPER} component={DeveloperSettings} />
     </Stack.Navigator>
   );
 };
