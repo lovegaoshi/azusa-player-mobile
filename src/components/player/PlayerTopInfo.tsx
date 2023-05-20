@@ -5,13 +5,13 @@ import { useNavigation, ParamListBase } from '@react-navigation/native';
 import { DrawerNavigationProp } from '@react-navigation/drawer';
 import { ViewEnum } from '../../enums/View';
 import { useNoxSetting } from '../../hooks/useSetting';
-import RandomGIFButton from '../buttons/randomGIF';
+import RandomGIFButton from '../buttons/RandomGIF';
 
-export default ({
-  navigation,
-}: {
+interface props {
   navigation: DrawerNavigationProp<ParamListBase>;
-}) => {
+}
+
+export default ({ navigation }: props) => {
   const navigationGlobal = useNavigation();
   const playerStyle = useNoxSetting(state => state.playerStyle);
   const currentPlayingId = useNoxSetting(state => state.currentPlayingId);

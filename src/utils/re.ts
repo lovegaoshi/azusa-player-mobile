@@ -1,4 +1,3 @@
-import Song from '../objects/SongInterface';
 /**
  * use regex to extract songnames from a string. default to whatever in 《》
  * @param {string} name
@@ -386,14 +385,14 @@ export const reExtractSongName = (
   return extractSongName(filename);
 };
 
-export const getName = (song: Song, parsed = false) => {
+export const getName = (song: NoxMedia.Song, parsed = false) => {
   if (parsed) {
     return song.parsedName ? song.parsedName : song.name;
   }
   return song.name;
 };
 
-export const parseSongName = (song: Song): Song => {
+export const parseSongName = (song: NoxMedia.Song): NoxMedia.Song => {
   return {
     ...song,
     parsedName: reExtractSongName(song.name, song.singerId),

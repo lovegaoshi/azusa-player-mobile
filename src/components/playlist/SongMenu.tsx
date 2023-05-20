@@ -1,6 +1,8 @@
 import * as React from 'react';
 import { Menu } from 'react-native-paper';
 import { Keyboard } from 'react-native';
+import { useTranslation } from 'react-i18next';
+
 import { useNoxSetting } from '../../hooks/useSetting';
 import { CopiedPlaylistMenuItem } from '../buttons/CopiedPlaylistButton';
 import { RenameSongMenuItem } from '../buttons/RenameSongButton';
@@ -31,6 +33,7 @@ export default ({
   resetChecked = () => void 0,
   handleSearch = () => void 0,
 }: props) => {
+  const { t } = useTranslation();
   const songMenuVisible = useNoxSetting(state => state.songMenuVisible);
   const setSongMenuVisible = useNoxSetting(state => state.setSongMenuVisible);
   const menuCoord = useNoxSetting(state => state.songMenuCoords);
@@ -65,7 +68,10 @@ export default ({
     return {
       ...currentPlaylist,
       songList: songs,
-      title: songs.length > 1 ? 'Selected songs' : songs[0].parsedName,
+      title:
+        songs.length > 1
+          ? t('SongOperations.selectedSongs')
+          : songs[0].parsedName,
     };
   };
 
@@ -131,17 +137,17 @@ export default ({
           Keyboard.dismiss();
         }}
         disabled={checking}
-        title="Search in Playlist"
+        title={t('SongOperations.songSearchInPlaylistTitle')}
       />
       <Menu.Item
         leadingIcon={ICONS.REMOVE}
         onPress={() => removeSongs()}
-        title="Remove"
+        title={t('SongOperations.songRemoveTitle')}
       />
       <Menu.Item
         leadingIcon={ICONS.REMOVE_AND_BAN_BVID}
         onPress={() => removeSongs(true)}
-        title="Remove and BAN"
+        title={t('SongOperations.songRemoveNBanTitle')}
       />
     </Menu>
   );

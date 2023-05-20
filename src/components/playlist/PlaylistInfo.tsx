@@ -21,6 +21,7 @@ export default ({
 }: props) => {
   const { t } = useTranslation();
   const currentPlaylist = useNoxSetting(state => state.currentPlaylist);
+  const playerStyle = useNoxSetting(state => state.playerStyle);
 
   React.useEffect(() => {
     setSearchText('');
@@ -30,14 +31,16 @@ export default ({
     <View style={{ flex: 3, paddingLeft: 10 }}>
       {search ? (
         <TextInput
-          label={String(t('PlaylistSearchBar.label'))}
+          placeholder={String(t('PlaylistSearchBar.label'))}
           value={searchText}
+          dense
           onChangeText={(val: string) => {
             setSearchText(val);
           }}
-          style={{ height: 50 }}
+          style={{ height: 40 }}
           autoFocus
           selectTextOnFocus
+          selectionColor={playerStyle.customColors.textInputSelectionColor}
         />
       ) : (
         <Pressable onPress={onPressed}>

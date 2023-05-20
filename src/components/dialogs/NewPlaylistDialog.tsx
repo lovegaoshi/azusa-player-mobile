@@ -10,12 +10,12 @@ import {
 } from 'react-native-paper';
 import { useTranslation } from 'react-i18next';
 
-import Playlist, { dummyPlaylist } from '../../objects/Playlist';
+import { dummyPlaylist } from '../../objects/Playlist';
 import { useNoxSetting } from '../../hooks/useSetting';
 
 interface props {
   visible: boolean;
-  fromList?: Playlist;
+  fromList?: NoxMedia.Playlist;
   onClose?: () => void;
   onSubmit?: () => void;
 }
@@ -28,6 +28,7 @@ export default ({
 }: props) => {
   const { t } = useTranslation();
   const [playlistName, setPlaylistName] = useState('');
+  const playerStyle = useNoxSetting(state => state.playerStyle);
   const addPlaylist = useNoxSetting(state => state.addPlaylist);
 
   const handleClose = () => {
@@ -75,6 +76,7 @@ export default ({
             value={playlistName}
             onChangeText={(val: string) => setPlaylistName(val)}
             onSubmitEditing={handleSubmit}
+            selectionColor={playerStyle.customColors.textInputSelectionColor}
           />
         </Dialog.Content>
         <Dialog.Actions>

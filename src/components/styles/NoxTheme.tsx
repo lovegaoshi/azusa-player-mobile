@@ -1,5 +1,3 @@
-import style from './styleInterface';
-
 export default {
   metaData: {
     themeName: '电闹播放器',
@@ -43,6 +41,7 @@ export default {
     // progresss bar's whatever's right of the round icon
     progressMaximumTrackTintColor: '#FFFFFF',
     btnBackgroundColor: 'rgb(72, 71, 58)',
+    textInputSelectionColor: 'green',
   },
 
   colors: {
@@ -96,4 +95,4 @@ export default {
     backdrop: 'rgba(49, 49, 37, 0.4)',
   },
   playerControlIconContained: 'contained',
-} as style;
+} as NoxTheme.style;

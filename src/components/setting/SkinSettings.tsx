@@ -1,46 +1,65 @@
 import * as React from 'react';
 import FastImage from 'react-native-fast-image';
-import { View, Switch, Pressable, Image } from 'react-native';
+import { View, FlatList, SafeAreaView } from 'react-native';
 import {
-  List,
   Text,
-  MD3Colors,
   IconButton,
   TouchableRipple,
   RadioButton,
 } from 'react-native-paper';
-import { FlashList } from '@shopify/flash-list';
 import SkinSearchbar from './SkinSearchbar';
 import { useNoxSetting } from '../../hooks/useSetting';
 import AzusaTheme from '../styles/AzusaTheme';
 import NoxTheme from '../styles/NoxTheme';
-import Style from '../styles/styleInterface';
+import { getUniqObjects } from '../../utils/Utils';
 
-const BuiltInThemes = [{
-  theme: AzusaTheme,
-  generic: false,
-},
-{
-  theme: NoxTheme,
-  generic: false,
-},]
+interface DisplayTheme extends NoxTheme.style {
+  builtin: boolean;
+}
+
+const BuiltInThemes: DisplayTheme[] = [
+  {
+    ...AzusaTheme,
+    builtin: true,
+  },
+  {
+    ...NoxTheme,
+    builtin: true,
+  },
+];
 
 export default () => {
   const playerStyle = useNoxSetting(state => state.playerStyle);
   const setPlayerStyle = useNoxSetting(state => state.setPlayerStyle);
-  const [skinLists, setSkinLists] = React.useState<Style[]>([]);
-  const allThemes = BuiltInThemes;
+  const playerStyles = useNoxSetting(state => state.playerStyles);
+  const setPlayerStyles = useNoxSetting(state => state.setPlayerStyles);
+  const allThemes = BuiltInThemes.concat(playerStyles);
 
-  const getThemeID = (skin: Style) =>
+  const getThemeID = (skin: NoxTheme.style) =>
     `${skin.metaData.themeName}.${skin.metaData.themeAuthor}`;
   const [checked, setChecked] = React.useState(getThemeID(playerStyle));
 
-  const renderSkinItem = (skin: Style, generic = true) => {
+  const loadCustomSkin = async (skins: any) => {
+    // skins MUST BE an array of objects
+    if (!Array.isArray(skins)) {
+      throw new Error('requested skin URL is not an array. aborting.');
+    }
+    const uniqueSkins = getUniqObjects(
+      skins.filter(skin => skin.metaData).concat(playerStyles),
+      getThemeID
+    );
+    setPlayerStyles(uniqueSkins);
+  };
+
+  const renderSkinItem = (skin: DisplayTheme) => {
     const themeID = getThemeID(skin);
     const selectTheme = () => {
       setChecked(themeID);
       setPlayerStyle(skin);
     };
+
+    const deleteTheme = () =>
+      setPlayerStyles(playerStyles.filter(pSkin => pSkin !== skin));
 
     return (
       <TouchableRipple onPress={selectTheme}>
@@ -88,8 +107,8 @@ export default () => {
             <IconButton
               icon="trash-can"
               style={{ marginLeft: -3 }}
-              onPress={() => console.log('pressedTrashcan')}
-              disabled={!generic}
+              onPress={deleteTheme}
+              disabled={skin.builtin}
             />
           </View>
         </View>
@@ -98,23 +117,18 @@ export default () => {
   };
 
   return (
-    <View
+    <SafeAreaView
       style={{
         backgroundColor: playerStyle.customColors.maskedBackgroundColor,
         flex: 1,
       }}
     >
-    <View
-      style={{flex: 0.5}}
-    ><SkinSearchbar /></View>      
-    <View
-      style={{flex: 5.5}}
-    ><FlashList
-    data={allThemes}
-    renderItem={({ item, index }) => renderSkinItem(item.theme, item.generic)}
-    keyExtractor={item => `${item.theme.metaData.themeName}.${item.theme.metaData.themeAuthor}`}
-    estimatedItemSize={10}
-  /></View>  
-    </View>
+      <SkinSearchbar onSearched={loadCustomSkin} />
+      <FlatList
+        data={allThemes}
+        renderItem={({ item, index }) => renderSkinItem(item)}
+        keyExtractor={item => getThemeID(item)}
+      />
+    </SafeAreaView>
   );
 };

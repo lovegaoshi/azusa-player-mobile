@@ -9,18 +9,21 @@ import {
   View,
   Text,
 } from 'react-native';
-import { TrackInfo } from './';
-import { QueueInitialTracksService, SetupService } from '../../services';
 import { useNavigation, ParamListBase } from '@react-navigation/native';
+import { TrackInfo } from './';
+import { SetupService } from '../../services';
 import { DrawerNavigationProp } from '@react-navigation/drawer';
 import PlayerTopInfo from './PlayerTopInfo';
 import { useNoxSetting } from '../../hooks/useSetting';
+import { songlistToTracklist } from '../../objects/Playlist';
+import { initPlayerObject } from '../../utils/ChromeStorage';
+import { getCurrentTPQueue } from '../../store/playingList';
 
-export function Player({
-  navigation,
-}: {
+interface props {
   navigation: DrawerNavigationProp<ParamListBase>;
-}) {
+}
+
+export function Player({ navigation }: props) {
   const track = useActiveTrack();
   const navigationGlobal = useNavigation();
   const playerStyle = useNoxSetting(state => state.playerStyle);
@@ -39,18 +42,26 @@ export function Player({
 
 export function useSetupPlayer() {
   const [playerReady, setPlayerReady] = useState<boolean>(false);
+  const initPlayer = useNoxSetting(state => state.initPlayer);
 
   useEffect(() => {
     let unmounted = false;
     (async () => {
+      const { currentPlayingID } = await initPlayer(await initPlayerObject());
       await SetupService();
       if (unmounted) return;
       setPlayerReady(true);
-      const queue = await TrackPlayer.getQueue();
       if (unmounted) return;
-      if (queue.length <= 0) {
-        await QueueInitialTracksService();
+      const currentQueue = getCurrentTPQueue();
+      const findCurrentSong = currentQueue.find(
+        val => val.id === currentPlayingID
+      );
+      if (findCurrentSong) {
+        await TrackPlayer.add(songlistToTracklist([findCurrentSong]));
+      } else {
+        await TrackPlayer.add(songlistToTracklist([currentQueue[0]]));
       }
+      await TrackPlayer.pause();
     })();
     return () => {
       unmounted = true;

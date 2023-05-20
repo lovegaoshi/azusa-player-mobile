@@ -9,12 +9,11 @@ import {
   TextInput,
 } from 'react-native-paper';
 import { useTranslation } from 'react-i18next';
-
-import Song from '../../objects/SongInterface';
+import { useNoxSetting } from '../../hooks/useSetting';
 
 interface props {
   visible: boolean;
-  song: Song;
+  song: NoxMedia.Song;
   onClose?: () => void;
   onSubmit?: (rename: string) => void;
 }
@@ -27,6 +26,7 @@ export default ({
 }: props) => {
   const { t } = useTranslation();
   const [name, setName] = useState(song.name);
+  const playerStyle = useNoxSetting(state => state.playerStyle);
 
   React.useEffect(() => {
     setName(song.name);
@@ -51,6 +51,7 @@ export default ({
               onChangeText={(val: string) => setName(val)}
               onSubmitEditing={handleSubmit}
               selectTextOnFocus
+              selectionColor={playerStyle.customColors.textInputSelectionColor}
             />
           </Dialog.Content>
         </KeyboardAvoidingView>

@@ -1,7 +1,12 @@
 import { StyleSheet } from 'react-native';
 import NoxTheme from './styles/NoxTheme';
 import AzusaTheme from './styles/AzusaTheme';
-import { notNullDefault as nd, randomChoice } from '../utils/Utils';
+// this seems stupid, but it resolves tsc by some weird ways that i keep...
+import { randomChoice } from '../utils/Utils';
+
+const nd = (val: any, defaultVal: any) => {
+  return val || defaultVal;
+};
 
 export const createStyle = (customStyle = AzusaTheme) => {
   const refTheme = customStyle.metaData.darkTheme ? NoxTheme : AzusaTheme;
@@ -14,10 +19,7 @@ export const createStyle = (customStyle = AzusaTheme) => {
       ...nd(customStyle.customColors, {}),
     },
 
-    playerControlIconContained: nd(
-      customStyle.playerControlIconContained,
-      refTheme.playerControlIconContained
-    ),
+    playerControlIconContained: customStyle.playerControlIconContained as any,
 
     screenContainer: {
       flex: 1,

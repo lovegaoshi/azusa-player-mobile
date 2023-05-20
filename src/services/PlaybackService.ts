@@ -1,6 +1,8 @@
 import TrackPlayer, { Event } from 'react-native-track-player';
-import { resolveUrl, NULL_TRACK } from '../objects/SongOperations';
+import { resolveUrl, NULL_TRACK } from '../objects/Song';
 import { initBiliHeartbeat } from '../utils/BiliOperate';
+
+let lastBiliHeartBeat: string[] = ['', ''];
 
 export async function PlaybackService() {
   TrackPlayer.addEventListener(Event.RemotePause, () => {
@@ -11,16 +13,6 @@ export async function PlaybackService() {
   TrackPlayer.addEventListener(Event.RemotePlay, () => {
     console.log('Event.RemotePlay');
     TrackPlayer.play();
-  });
-
-  TrackPlayer.addEventListener(Event.RemoteNext, () => {
-    console.log('Event.RemoteNext');
-    TrackPlayer.skipToNext();
-  });
-
-  TrackPlayer.addEventListener(Event.RemotePrevious, () => {
-    console.log('Event.RemotePrevious');
-    TrackPlayer.skipToPrevious();
   });
 
   TrackPlayer.addEventListener(Event.RemoteJumpForward, async event => {
@@ -56,19 +48,29 @@ export async function PlaybackService() {
       (event.track.url === NULL_TRACK.url ||
         new Date().getTime() - event.track.urlRefreshTimeStamp > 3600000)
     ) {
+      const heartBeatReq = [event.track.song.bvid, event.track.song.id];
       // HACK: what if cid needs to be resolved on the fly?
       // TODO: its too much of a hassle and I would like to just
       // ask users to refresh their lists instead, if they really care
       // about sending heartbeats.
-      initBiliHeartbeat({
-        bvid: event.track.song.bvid,
-        cid: event.track.song.id,
-      });
-      resolveUrl(event.track.song).then(updatedMetadata => {
-        TrackPlayer.getActiveTrack().then(currentTrack => {
-          TrackPlayer.load({ ...currentTrack, ...updatedMetadata });
+      if (
+        lastBiliHeartBeat[0] !== heartBeatReq[0] ||
+        lastBiliHeartBeat[1] !== heartBeatReq[1]
+      ) {
+        initBiliHeartbeat({
+          bvid: event.track.song.bvid,
+          cid: event.track.song.id,
         });
-      });
+        lastBiliHeartBeat = heartBeatReq;
+      }
+      resolveUrl(event.track.song)
+        .then(updatedMetadata => {
+          TrackPlayer.getActiveTrack().then(currentTrack => {
+            TrackPlayer.load({ ...currentTrack, ...updatedMetadata });
+          });
+          console.log(updatedMetadata);
+        })
+        .catch(() => console.error('resolveURL failed', event.track));
     }
   });
 

@@ -18,35 +18,33 @@ export const seconds2MMSS = (sec_num: number) => {
     : `${String(minutes)}:${padding(seconds)}`;
 };
 
-export const notNullDefault = (val: any, defaultVal: any) => {
-  if (val) return val;
-  return defaultVal;
-};
-
-export const twoWayAlert = (
+export const TwoWayAlert = (
   title: string,
   message: string,
-  onSubmit: () => void
+  onSubmit: () => void,
+  cancelText = 'Cancel',
+  okText = 'OK'
 ) => {
   Alert.alert(title, message, [
     {
-      text: 'Cancel',
+      text: cancelText,
       onPress: () => void 0,
       style: 'cancel',
     },
     {
-      text: 'OK',
+      text: okText,
       onPress: onSubmit,
     },
   ]);
 };
 
-export const oneWayAlert = (
+export const OneWayAlert = (
   title: string,
   message: string,
-  onPress: () => void
+  onPress: () => void,
+  okText = 'OK'
 ) => {
-  Alert.alert(title, message, [{ text: 'OK', onPress: onPress }], {
+  Alert.alert(title, message, [{ text: okText, onPress: onPress }], {
     cancelable: true,
     onDismiss: onPress,
   });
@@ -59,4 +57,35 @@ export function randomChoice(list: Array<any>) {
 export const rgb2rgba = (rgb: string, a = 1) => {
   const extractedRGB = [...rgb.matchAll(/(\d+)/g)];
   return `rgba(${extractedRGB[0][0]}, ${extractedRGB[1][0]}, ${extractedRGB[2][0]}, ${a})`;
+};
+
+export const getUniqObjects = (
+  objects: Array<any>,
+  property: (object: any) => any
+) => {
+  const uniqKey = new Set();
+  return objects.filter(object => {
+    if (uniqKey.has(property(object))) {
+      return false;
+    }
+    uniqKey.add(property(object));
+    return true;
+  });
+};
+
+/**
+ * splits an array to chunks of given size.
+ * @param arr
+ * @param size
+ * @returns
+ */
+export const chunkArray = (arr: Array<any>, size: number): Array<any[]> => {
+  return arr.reduce((chunks, item, index) => {
+    const chunkIndex = Math.floor(index / size);
+    if (!chunks[chunkIndex]) {
+      chunks[chunkIndex] = [];
+    }
+    chunks[chunkIndex].push(item);
+    return chunks;
+  }, []);
 };

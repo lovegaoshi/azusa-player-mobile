@@ -78,7 +78,7 @@ const URL_BILICOLLE_INFO =
  *  channel API Extract Info
  */
 const URL_BILICHANNEL_INFO =
-  'https://api.bilibili.com/x/space/arc/search?mid={mid}&pn={pn}&jsonp=jsonp&ps=50';
+  'https://api.bilibili.com/x/space/wbi/arc/search?mid={mid}&pn={pn}&jsonp=jsonp&ps=50';
 /**
  *  Fav List
  */
@@ -113,8 +113,8 @@ const URL_QQ_SEARCH_POST = {
   params: {
     method: 'POST',
     headers: {
-      "Content-Type": "application/json",
-      "referer": 'https://u.qq.com/'
+      'Content-Type': 'application/json',
+      referer: 'https://u.qq.com/',
     },
     body: {
       comm: {
@@ -132,11 +132,10 @@ const URL_QQ_SEARCH_POST = {
           query: '',
           search_type: 0,
         },
-      }
-    }
+      },
+    },
   },
-}
-
+};
 
 /**
  *  QQ LyricSearchAPI
@@ -180,17 +179,22 @@ export const fetchVideoPlayUrlPromise = async (
   // HACK:  this should be a breaking change that stringified cid
   // will never be not true.
   if (!cid || cid.includes('null')) {
-    cid = await fetchCID(bvid).catch(err => console.error(err));
+    cid = await fetchCID(bvid).catch(err => console.error(err, 'cid', cid));
   }
-
-  // Returns a promise that resolves into the audio stream url
-  return new Promise((resolve, reject) => {
-    // console.log('Data.js Calling fetchPlayUrl:' + URL_PLAY_URL.replace("{bvid}", bvid).replace("{cid}", cid))
-    bfetch(URL_PLAY_URL.replace('{bvid}', bvid).replace('{cid}', cid))
-      .then(res => res.json())
-      .then(json => resolve(extractResponseJson(json, extractType)))
-      .catch(err => reject(console.error(err)));
-  });
+  try {
+    const res = await bfetch(
+      URL_PLAY_URL.replace('{bvid}', bvid).replace('{cid}', cid)
+    );
+    const json = await res.json();
+    return extractResponseJson(json, extractType);
+  } catch (e) {
+    console.error(
+      'error:',
+      e,
+      URL_PLAY_URL.replace('{bvid}', bvid).replace('{cid}', cid)
+    );
+    throw e;
+  }
 };
 
 /**
@@ -221,8 +225,8 @@ const fetchVideoTagPromiseRaw = async ({ bvid, cid }) => {
 
 export const biliAPILimiterWrapper = async (
   params,
-  func = () => { },
-  progressEmit = () => { }
+  func = () => {},
+  progressEmit = () => {}
 ) => {
   return biliApiLimiter.schedule(() => {
     progressEmit();
@@ -243,14 +247,14 @@ export const fetchVideoTagPromise = async ({ bvid, cid }) => {
  * @returns
  */
 export const fetchAudioPlayUrlPromise = async sid => {
-  // Returns a promise that resolves into the audio stream url
-  return new Promise((resolve, reject) => {
-    // console.log('Data.js Calling fetchPlayUrl:' + URL_PLAY_URL.replace("{bvid}", bvid).replace("{cid}", cid))
-    bfetch(URL_AUDIO_PLAY_URL.replace('{sid}', sid))
-      .then(res => res.json())
-      .then(json => resolve(json.data.cdns[0]))
-      .catch(err => reject(console.error(err)));
-  });
+  try {
+    const res = await bfetch(URL_AUDIO_PLAY_URL.replace('{sid}', sid));
+    const json = await res.json();
+    return json.data.cdns[0];
+  } catch (e) {
+    console.error(e, URL_AUDIO_PLAY_URL.replace('{sid}', sid));
+    throw e;
+  }
 };
 
 /**
@@ -329,7 +333,7 @@ export const fetchVideoInfoRaw = async ({ bvid }) => {
  * @param {function} progressEmit
  * @returns
  */
-export const fetchVideoInfo = async (bvid, progressEmit = () => { }) => {
+export const fetchVideoInfo = async (bvid, progressEmit = () => {}) => {
   return biliAPILimiterWrapper({ bvid }, fetchVideoInfoRaw, progressEmit);
 };
 
@@ -556,6 +560,7 @@ export const fetchBiliColleList = async (
     getItems: js => js.data.archives,
     progressEmitter,
     favList,
+    limiter: biliApiLimiter,
   });
 };
 
@@ -734,34 +739,26 @@ const extract509Json = async res => {
  * @returns
  */
 const extractResponseJson = (json, field) => {
-  if (field === 'AudioUrl') {
-    try {
+  switch (field) {
+    case 'AudioUrl':
       return json.data.dash.audio[0].baseUrl;
-    } catch (e) {
-      console.error(json);
-      return '';
-    }
-  } else if (field === 'VideoUrl') {
-    try {
+    case 'VideoUrl':
       return json.data.dash.video[0].baseUrl;
-    } catch (e) {
-      console.error(json);
-      return '';
-    }
-  } else if (field === 'CID') {
-    return json.data[0].cid;
-  } else if (field === 'AudioInfo') {
-    return {};
+    case 'CID':
+      return json.data[0].cid;
+    case 'AudioInfo':
+      return {};
+    default:
+      throw new Error(`invalid field type: ${field} to parse JSON response`);
   }
 };
 
-
-export const searchLyricOptions = async (searchKey) => {
+export const searchLyricOptions = async searchKey => {
   if (!searchKey) {
     throw new Error('Search key is required');
   }
   logger.info('calling searchLyricOptions:', searchKey);
-  const API = getQQSearchAPI(searchKey)
+  const API = getQQSearchAPI(searchKey);
 
   const res = await bfetch(API.src, API.params);
   const json = await res.json();
@@ -774,12 +771,12 @@ export const searchLyricOptions = async (searchKey) => {
   }));
 };
 
-const getQQSearchAPI = (searchKey) => {
+const getQQSearchAPI = searchKey => {
   let API = JSON.parse(JSON.stringify(URL_QQ_SEARCH_POST));
   API.params.body.req.param.query = searchKey;
   API.params.body = JSON.stringify(API.params.body);
-  return(API)
-}
+  return API;
+};
 
 export const searchLyric = async (searchMID, setLyric) => {
   logger.info('calling searchLyric');

@@ -5,6 +5,9 @@ import {
 import { View } from 'react-native';
 import { ParamListBase, useNavigation } from '@react-navigation/native';
 import { List, MD3Colors, IconButton, Text } from 'react-native-paper';
+import { DrawerNavigationProp } from '@react-navigation/drawer';
+import { useTranslation } from 'react-i18next';
+
 import GeneralSettings from './GeneralSettings';
 import SkinSettings from './SkinSettings';
 import { useNoxSetting } from '../../hooks/useSetting';
@@ -29,8 +32,13 @@ enum VIEW {
 
 const Stack = createNativeStackNavigator();
 
-export default () => {
-  const navigation = useNavigation();
+interface props {
+  navigation: DrawerNavigationProp<ParamListBase>;
+}
+
+export default ({ navigation }: props) => {
+  const { t } = useTranslation();
+  const navigationGlobal = useNavigation();
   const playerStyle = useNoxSetting(state => state.playerStyle);
 
   const DummySettings = () => {
@@ -48,17 +56,13 @@ export default () => {
             paddingLeft: 20,
           }}
         >
-          Feature not implemented
+          {t('Settings.FeatureNotImplemented')}
         </Text>
       </View>
     );
   };
 
-  const HomeSettings = ({
-    navigation,
-  }: {
-    navigation: NativeStackNavigationProp<ParamListBase>;
-  }) => {
+  const HomeSettings = ({ navigation }: props) => {
     return (
       <View
         style={{
@@ -69,8 +73,8 @@ export default () => {
         <List.Section>
           <List.Item
             left={props => <IconButton icon={ICONS.HOME} size={40} />}
-            title="General Settings"
-            description="General settings for the app."
+            title={String(t('Settings.GeneralSettingTitle'))}
+            description={String(t('Settings.GeneralSettingDesc'))}
             onPress={() => navigation.navigate(VIEW.GENERAL)}
             style={{}}
             titleStyle={{ color: playerStyle.colors.primary }}
@@ -78,8 +82,8 @@ export default () => {
           />
           <List.Item
             left={props => <IconButton icon={ICONS.SKIN} size={40} />}
-            title="Skins"
-            description="Choose your skin."
+            title={String(t('Settings.SkinSettingTitle'))}
+            description={String(t('Settings.SkinSettingDesc'))}
             onPress={() => navigation.navigate(VIEW.SKIN)}
             style={{}}
             titleStyle={{ color: playerStyle.colors.primary }}
@@ -87,8 +91,8 @@ export default () => {
           />
           <List.Item
             left={props => <IconButton icon={ICONS.BACKUP} size={40} />}
-            title="Playlist Backup"
-            description="Backup your playlists."
+            title={String(t('Settings.BackupSettingTitle'))}
+            description={String(t('Settings.BackupSettingDesc'))}
             onPress={() => navigation.navigate(VIEW.DUMMY)}
             style={{}}
             titleStyle={{ color: playerStyle.colors.primary }}
@@ -96,8 +100,8 @@ export default () => {
           />
           <List.Item
             left={props => <IconButton icon={ICONS.INFO} size={40} />}
-            title="Info"
-            description="Info about the app."
+            title={String(t('Settings.InfoSettingTitle'))}
+            description={String(t('Settings.InfoSettingDesc'))}
             onPress={() => navigation.navigate(VIEW.DUMMY)}
             style={{}}
             titleStyle={{ color: playerStyle.colors.primary }}
@@ -114,13 +118,12 @@ export default () => {
         name={VIEW.HOME}
         component={HomeSettings}
         options={{
-          // TODO: is there a non retarded way to do this?
           headerLeft: () => (
             <IconButton
-              icon="arrow-left"
-              size={25}
-              style={{ paddingRight: 20 }}
-              onPress={() => navigation.navigate(ViewEnum.PLAYER_HOME as never)}
+              icon="menu"
+              size={40}
+              style={{ width: 55, marginLeft: -5 }}
+              onPress={() => navigation.openDrawer()}
             />
           ),
         }}

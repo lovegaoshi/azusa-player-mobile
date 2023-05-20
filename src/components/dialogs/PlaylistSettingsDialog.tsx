@@ -10,13 +10,12 @@ import {
   Switch,
 } from 'react-native-paper';
 import { useTranslation } from 'react-i18next';
-import Playlist from '../../objects/Playlist';
 import { useNoxSetting } from '../../hooks/useSetting';
 
 interface props {
   visible: boolean;
   onClose?: () => void;
-  onSubmit?: (newPlaylist: Playlist) => void;
+  onSubmit?: (newPlaylist: NoxMedia.Playlist) => void;
 }
 
 export default ({
@@ -25,6 +24,7 @@ export default ({
   onSubmit = () => void 0,
 }: props) => {
   const { t } = useTranslation();
+  const playerStyle = useNoxSetting(state => state.playerStyle);
   const currentPlaylist = useNoxSetting(state => state.currentPlaylist);
   const updatePlaylist = useNoxSetting(state => state.updatePlaylist);
   const [playlistName, setPlaylistName] = useState(currentPlaylist.title);
@@ -46,7 +46,7 @@ export default ({
   };
 
   const handleSubmit = () => {
-    const newPlaylist: Playlist = {
+    const newPlaylist: NoxMedia.Playlist = {
       ...currentPlaylist,
       title: playlistName,
       subscribeUrl: Array.from(new Set(subscribeUrl.split(';'))),
@@ -66,20 +66,25 @@ export default ({
               label={String(t('PlaylistSettingsDialog.playlistNameLabel'))}
               value={playlistName}
               onChangeText={(val: string) => setPlaylistName(val)}
+              selectionColor={playerStyle.customColors.textInputSelectionColor}
             />
             <TextInput
               label={String(t('PlaylistSettingsDialog.subscribeUrlLabel'))}
               value={subscribeUrl}
               onChangeText={(val: string) => setSubscribeUrl(val)}
+              selectionColor={playerStyle.customColors.textInputSelectionColor}
             />
             <TextInput
               label={String(t('PlaylistSettingsDialog.blacklistedUrlLabel'))}
               value={blacklistedUrl}
               onChangeText={(val: string) => setBlacklistedUrl(val)}
+              selectionColor={playerStyle.customColors.textInputSelectionColor}
             />
             <View style={{ flexDirection: 'row' }}>
               <Switch value={useBiliShazam} onValueChange={toggleBiliShazam} />
-              <Text style={{ fontSize: 18 }}>{t('PlaylistSettingsDialog.useBiliShazamLabel')}</Text>
+              <Text style={{ fontSize: 18 }}>
+                {t('PlaylistSettingsDialog.useBiliShazamLabel')}
+              </Text>
             </View>
           </Dialog.Content>
         </KeyboardAvoidingView>
