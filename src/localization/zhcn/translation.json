@@ -9,7 +9,7 @@
     "cancel": "算了"
   },
   "CopiedPlaylistDialog": {
-    "title": "将 {{fromList.title}} 送往..."
+    "title": "将 {{title}} 送往..."
   },
   "NewPlaylistDialog": {
     "title": "将歌单 {{fromList.title}} 新建为...",
@@ -93,6 +93,8 @@
     "BackupSettingDesc": "歌单云端备份和恢复",
     "InfoSettingTitle": "关于管人播放器",
     "InfoSettingDesc": "版本说明",
+    "DeveloperOptionsTitle": "开发者选项",
+    "DeveloperOptionsDesc": "正在测试的功能",
     "FeatureNotImplemented": "功能孩妹实现"
   }
 }

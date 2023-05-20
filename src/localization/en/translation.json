@@ -9,7 +9,7 @@
     "cancel": "Cancel"
   },
   "CopiedPlaylistDialog": {
-    "title": "Send {{fromList.title}} to..."
+    "title": "Send {{title}} to..."
   },
   "NewPlaylistDialog": {
     "title": "Create {{fromList.title}} as New Playlist...",
@@ -93,6 +93,8 @@
     "BackupSettingDesc": "Backup your playlists.",
     "InfoSettingTitle": "Info",
     "InfoSettingDesc": "Info about the app.",
+    "DeveloperOptionsTitle": "Developer Options",
+    "DeveloperOptionsDesc": "Experimental Options in pre-release.",
     "FeatureNotImplemented": "Feature not implemented"
   }
 }

@@ -89,3 +89,7 @@ export const chunkArray = <T>(arr: Array<T>, size: number): Array<T[]> => {
     return chunks;
   }, [] as Array<T[]>);
 };
+
+export const charLength = (str: string) => {
+  return str.replace(/[\u0300-\u036f]/g, '').length;
+};

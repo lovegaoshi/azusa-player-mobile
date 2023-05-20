@@ -96,22 +96,22 @@ const App: React.FC = () => {
   return (
     <SafeAreaProvider>
       <MainBackground>
-        <PaperProvider
-          theme={{
-            ...defaultTheme,
-            colors: playerStyle.colors,
-          }}
-        >
-          <NavigationContainer
+        <Portal.Host>
+          <PaperProvider
             theme={{
               ...defaultTheme,
-              colors: {
-                ...defaultTheme.colors,
-                ...playerStyle.colors,
-              },
+              colors: playerStyle.colors,
             }}
           >
-            <Portal.Host>
+            <NavigationContainer
+              theme={{
+                ...defaultTheme,
+                colors: {
+                  ...defaultTheme.colors,
+                  ...playerStyle.colors,
+                },
+              }}
+            >
               <Drawer.Navigator
                 initialRouteName={ViewEnum.PLAYER_HOME}
                 drawerContent={PlaylistDrawer}
@@ -135,9 +135,9 @@ const App: React.FC = () => {
                   component={Settings}
                 />
               </Drawer.Navigator>
-            </Portal.Host>
-          </NavigationContainer>
-        </PaperProvider>
+            </NavigationContainer>
+          </PaperProvider>
+        </Portal.Host>
       </MainBackground>
     </SafeAreaProvider>
   );
