@@ -18,38 +18,6 @@ export const seconds2MMSS = (sec_num: number) => {
     : `${String(minutes)}:${padding(seconds)}`;
 };
 
-export const TwoWayAlert = (
-  title: string,
-  message: string,
-  onSubmit: () => void,
-  cancelText = 'Cancel',
-  okText = 'OK'
-) => {
-  Alert.alert(title, message, [
-    {
-      text: cancelText,
-      onPress: () => void 0,
-      style: 'cancel',
-    },
-    {
-      text: okText,
-      onPress: onSubmit,
-    },
-  ]);
-};
-
-export const OneWayAlert = (
-  title: string,
-  message: string,
-  onPress: () => void,
-  okText = 'OK'
-) => {
-  Alert.alert(title, message, [{ text: okText, onPress: onPress }], {
-    cancelable: true,
-    onDismiss: onPress,
-  });
-};
-
 export function randomChoice<T>(list: Array<T>) {
   return list[Math.floor(Math.random() * list.length) >> 0];
 }

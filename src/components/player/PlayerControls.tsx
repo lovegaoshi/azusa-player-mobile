@@ -15,8 +15,8 @@ import { songlistToTracklist } from '../../objects/Playlist';
 import { NoxRepeatMode } from './enums/RepeatMode';
 import { savePlayMode } from '../../utils/ChromeStorage';
 import noxPlayingList, { getCurrentTPQueue } from '../../store/playingList';
-import { OneWayAlert } from '../../utils/Utils';
 import { getLog } from '../../utils/Logger';
+import useAlert from '../dialogs/useAlert';
 
 const { getState, setState } = noxPlayingList;
 const setTP2Song = async (song: NoxMedia.Song) => {
@@ -30,6 +30,7 @@ export const PlayerControls: React.FC = () => {
     getState().playmode
   );
   const playerStyle = useNoxSetting(state => state.playerStyle);
+  const { OneWayAlert } = useAlert();
 
   const setPlayMode = (val: string) => {
     setState({ playmode: val });
@@ -59,7 +60,7 @@ export const PlayerControls: React.FC = () => {
     }
   };
 
-  const onThumbsUp = () => OneWayAlert('log', getLog(), () => void 0);
+  const onThumbsUp = () => OneWayAlert('log', getLog());
 
   const findCurrentPlayIndex = () => {
     return getCurrentTPQueue().findIndex(val => val.id === currentPlayingId);

@@ -8,10 +8,10 @@ import playlistAnalytics from '../../utils/Analytics';
 import PlaylistSettingsButton from '../buttons/PlaylistSettingsButton';
 import { PLAYLIST_ENUMS } from '../../enums/Playlist';
 import { CopiedPlaylistMenuItem } from '../buttons/CopiedPlaylistButton';
-import { TwoWayAlert, OneWayAlert } from '../../utils/Utils';
 import { getBVIDList, biliShazamOnSonglist } from '../../utils/DataProcess';
 import { getPlaylistUniqBVIDs } from '../../objects/Playlist';
 import { fetchVideoInfo } from '../../utils/Data';
+import useAlert from '../dialogs/useAlert';
 
 enum ICONS {
   SETTINGS = 'cog',
@@ -44,6 +44,7 @@ export default ({
   );
   const limitedPlaylistFeatures =
     currentPlaylist.type !== PLAYLIST_ENUMS.TYPE_TYPICA_PLAYLIST;
+  const { OneWayAlert, TwoWayAlert } = useAlert();
 
   // TODO: useCallback?
   const playlistAnalysis = (playlist = currentPlaylist) => {
@@ -70,8 +71,7 @@ export default ({
           analytics.totalCount
         ).toFixed(1)}%)`,
       ].join('\n'),
-      toggleVisible,
-      String(t('Dialog.ok'))
+      toggleVisible
     );
   };
 
@@ -89,9 +89,7 @@ export default ({
           []
         );
         toggleVisible();
-      },
-      String(t('Dialog.cancel')),
-      String(t('Dialog.ok'))
+      }
     );
   };
 
@@ -102,9 +100,7 @@ export default ({
       () => {
         removePlaylist(playlist.id);
         toggleVisible();
-      },
-      String(t('Dialog.cancel')),
-      String(t('Dialog.ok'))
+      }
     );
   };
 
@@ -133,9 +129,7 @@ export default ({
         Snackbar.dismiss();
         Snackbar.show({ text: t('PlaylistOperations.reloaded', { playlist }) });
         toggleVisible();
-      },
-      String(t('Dialog.cancel')),
-      String(t('Dialog.ok'))
+      }
     );
   };
 

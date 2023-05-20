@@ -1,12 +1,13 @@
 import * as React from 'react';
 import { View, ScrollView } from 'react-native';
 import { IconButton, List } from 'react-native-paper';
-import { v4 as uuidv4 } from 'uuid';
 import { useTranslation } from 'react-i18next';
 import { useNoxSetting } from '../../hooks/useSetting';
 import { logStore, LOGLEVEL } from '../../utils/Logger';
 import GenericSelectDialog from '../dialogs/GenericSelectDialog';
 import useRenderSettingItem from './useRenderSetting';
+import { getVersion } from '../../utils/Version';
+import useAlert from '../dialogs/useAlert';
 
 enum ICONS {
   log = 'console',
@@ -39,6 +40,7 @@ export default () => {
   const [selectVisible, setSelectVisible] = React.useState(false);
   const playerStyle = useNoxSetting(state => state.playerStyle);
   const { renderListItem } = useRenderSettingItem();
+  const { OneWayAlert } = useAlert();
 
   const selectLogLevel = () => {
     setSelectVisible(true);
@@ -69,6 +71,11 @@ export default () => {
     } as SelectSettingEntry<number>);
   };
 
+  const checkVersion = async () => {
+    const version = await getVersion();
+    OneWayAlert('', version, () => void 0);
+  };
+
   return (
     <View
       style={{
@@ -87,7 +94,7 @@ export default () => {
           {renderListItem(
             ICONS.update,
             'VersionCheck',
-            selectLogLevel,
+            () => void 0,
             'DeveloperSettings'
           )}
         </List.Section>

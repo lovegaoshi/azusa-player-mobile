@@ -1,0 +1,46 @@
+import { Alert } from 'react-native';
+import { useTranslation } from 'react-i18next';
+
+export default () => {
+  const { t } = useTranslation();
+
+  const TwoWayAlert = (
+    title: string,
+    message: string,
+    onSubmit: () => void
+  ) => {
+    Alert.alert(title, message, [
+      {
+        text: String(t('Dialog.cancel')),
+        onPress: () => void 0,
+        style: 'cancel',
+      },
+      {
+        text: String(t('Dialog.ok')),
+        onPress: onSubmit,
+      },
+    ]);
+  };
+
+  const OneWayAlert = (
+    title: string,
+    message: string,
+    // eslint-disable-next-line @typescript-eslint/no-empty-function
+    onPress = () => {}
+  ) => {
+    Alert.alert(
+      title,
+      message,
+      [{ text: String(t('Dialog.ok')), onPress: onPress }],
+      {
+        cancelable: true,
+        onDismiss: onPress,
+      }
+    );
+  };
+
+  return {
+    OneWayAlert,
+    TwoWayAlert,
+  };
+};

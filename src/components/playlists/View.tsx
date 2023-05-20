@@ -1,9 +1,5 @@
 import React, { ReactNode, useRef, useState } from 'react';
-import {
-  DrawerContentScrollView,
-  DrawerItem,
-  DrawerItemList,
-} from '@react-navigation/drawer';
+import { DrawerItem, DrawerItemList } from '@react-navigation/drawer';
 import { v4 as uuidv4 } from 'uuid';
 import {
   IconButton,
@@ -18,17 +14,15 @@ import DraggableFlatList, {
   ScaleDecorator,
   RenderItemParams,
 } from 'react-native-draggable-flatlist';
-import { useTranslation } from 'react-i18next';
 
 import { useNoxSetting } from '../../hooks/useSetting';
 import { ViewEnum } from '../../enums/View';
 import AddPlaylistButton from '../buttons/AddPlaylistButton';
 import { STORAGE_KEYS } from '../../utils/ChromeStorage';
 import NewPlaylistDialog from '../dialogs/NewPlaylistDialog';
-import { TwoWayAlert } from '../../utils/Utils';
+import useAlert from '../dialogs/useAlert';
 
 export default (props: any) => {
-  const { t } = useTranslation();
   const navigation = useNavigation();
   const currentPlayingList = useNoxSetting(state => state.currentPlayingList);
   const currentPlaylist = useNoxSetting(state => state.currentPlaylist);
@@ -40,6 +34,7 @@ export default (props: any) => {
   const setCurrentPlaylist = useNoxSetting(state => state.setCurrentPlaylist);
   const removePlaylist = useNoxSetting(state => state.removePlaylist);
   const setPlaylistIds = useNoxSetting(state => state.setPlaylistIds);
+  const { TwoWayAlert } = useAlert();
 
   // HACK: tried to make searchList draweritem button as addPlaylistButton, but
   // dialog disposes on textinput focus. created a dialog directly in this component
@@ -55,9 +50,7 @@ export default (props: any) => {
     TwoWayAlert(
       `Delete ${playlists[playlistId].title}?`,
       `Are you sure to delete playlist ${playlists[playlistId].title}?`,
-      () => removePlaylist(playlistId),
-      String(t('Dialog.cancel')),
-      String(t('Dialog.ok'))
+      () => removePlaylist(playlistId)
     );
   };
 
