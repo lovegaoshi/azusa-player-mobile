@@ -86,7 +86,9 @@
   },
   "DeveloperSettings": {
     "LogLevelName": "Log Level",
-    "LogLevelDesc": "set Log Level",
+    "LogLevelDesc": "set Log Level.",
+    "VersionCheckName": "Check Version",
+    "VersionCheckDesc": "Check latest version released on github.",
     "LogLevel0": "DEBUG",
     "LogLevel1": "INFO",
     "LogLevel2": "WARN",
@@ -95,15 +97,15 @@
     "LogLevel5": "OFF"
   },
   "Settings": {
-    "GeneralSettingTitle": "General Settings",
+    "GeneralSettingName": "General Settings",
     "GeneralSettingDesc": "General settings for the app.",
-    "SkinSettingTitle": "Skins",
+    "SkinSettingName": "Skins",
     "SkinSettingDesc": "Choose your skin.",
-    "BackupSettingTitle": "Playlist Backup",
+    "BackupSettingName": "Playlist Backup",
     "BackupSettingDesc": "Backup your playlists.",
-    "InfoSettingTitle": "Info",
+    "InfoSettingName": "Info",
     "InfoSettingDesc": "Info about the app.",
-    "DeveloperOptionsTitle": "Developer Options",
+    "DeveloperOptionsName": "Developer Options",
     "DeveloperOptionsDesc": "Experimental Options in pre-release.",
     "FeatureNotImplemented": "Feature not implemented"
   }

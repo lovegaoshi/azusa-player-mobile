@@ -12,7 +12,7 @@ import GeneralSettings from './GeneralSettings';
 import SkinSettings from './SkinSettings';
 import DeveloperSettings from './DeveloperSettings';
 import { useNoxSetting } from '../../hooks/useSetting';
-import { ViewEnum } from '../../enums/View';
+import useRenderSettingItem from './useRenderSetting';
 
 enum ICONS {
   HOME = 'cog',
@@ -43,6 +43,7 @@ export default ({ navigation }: props) => {
   const { t } = useTranslation();
   const navigationGlobal = useNavigation();
   const playerStyle = useNoxSetting(state => state.playerStyle);
+  const { renderListItem } = useRenderSettingItem();
 
   const DummySettings = () => {
     return (
@@ -74,51 +75,36 @@ export default ({ navigation }: props) => {
         }}
       >
         <List.Section>
-          <List.Item
-            left={props => <IconButton icon={ICONS.HOME} size={40} />}
-            title={String(t('Settings.GeneralSettingTitle'))}
-            description={String(t('Settings.GeneralSettingDesc'))}
-            onPress={() => navigation.navigate(VIEW.GENERAL)}
-            style={{}}
-            titleStyle={{ color: playerStyle.colors.primary }}
-            descriptionStyle={{ color: playerStyle.colors.secondary }}
-          />
-          <List.Item
-            left={props => <IconButton icon={ICONS.SKIN} size={40} />}
-            title={String(t('Settings.SkinSettingTitle'))}
-            description={String(t('Settings.SkinSettingDesc'))}
-            onPress={() => navigation.navigate(VIEW.SKIN)}
-            style={{}}
-            titleStyle={{ color: playerStyle.colors.primary }}
-            descriptionStyle={{ color: playerStyle.colors.secondary }}
-          />
-          <List.Item
-            left={props => <IconButton icon={ICONS.BACKUP} size={40} />}
-            title={String(t('Settings.BackupSettingTitle'))}
-            description={String(t('Settings.BackupSettingDesc'))}
-            onPress={() => navigation.navigate(VIEW.DUMMY)}
-            style={{}}
-            titleStyle={{ color: playerStyle.colors.primary }}
-            descriptionStyle={{ color: playerStyle.colors.secondary }}
-          />
-          <List.Item
-            left={props => <IconButton icon={ICONS.DEVELOPER} size={40} />}
-            title={String(t('Settings.DeveloperOptionsTitle'))}
-            description={String(t('Settings.DeveloperOptionsDesc'))}
-            onPress={() => navigation.navigate(VIEW.DEVELOPER)}
-            style={{}}
-            titleStyle={{ color: playerStyle.colors.primary }}
-            descriptionStyle={{ color: playerStyle.colors.secondary }}
-          />
-          <List.Item
-            left={props => <IconButton icon={ICONS.INFO} size={40} />}
-            title={String(t('Settings.InfoSettingTitle'))}
-            description={String(t('Settings.InfoSettingDesc'))}
-            onPress={() => navigation.navigate(VIEW.DUMMY)}
-            style={{}}
-            titleStyle={{ color: playerStyle.colors.primary }}
-            descriptionStyle={{ color: playerStyle.colors.secondary }}
-          />
+          {renderListItem(
+            ICONS.HOME,
+            'GeneralSetting',
+            () => navigation.navigate(VIEW.GENERAL),
+            'Settings'
+          )}
+          {renderListItem(
+            ICONS.SKIN,
+            'SkinSetting',
+            () => navigation.navigate(VIEW.SKIN),
+            'Settings'
+          )}
+          {renderListItem(
+            ICONS.BACKUP,
+            'BackupSetting',
+            () => navigation.navigate(VIEW.DUMMY),
+            'Settings'
+          )}
+          {renderListItem(
+            ICONS.DEVELOPER,
+            'DeveloperOptions',
+            () => navigation.navigate(VIEW.DEVELOPER),
+            'Settings'
+          )}
+          {renderListItem(
+            ICONS.INFO,
+            'InfoSetting',
+            () => navigation.navigate(VIEW.DUMMY),
+            'Settings'
+          )}
         </List.Section>
       </View>
     );

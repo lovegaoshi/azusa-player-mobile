@@ -6,6 +6,12 @@ import { useTranslation } from 'react-i18next';
 import { useNoxSetting } from '../../hooks/useSetting';
 import { logStore, LOGLEVEL } from '../../utils/Logger';
 import GenericSelectDialog from '../dialogs/GenericSelectDialog';
+import useRenderSettingItem from './useRenderSetting';
+
+enum ICONS {
+  log = 'console',
+  update = 'update',
+}
 
 interface SelectSettingEntry<T> {
   options: Array<T>;
@@ -23,14 +29,6 @@ const dummySelectSettingEntry: SelectSettingEntry<string> = {
   onSubmit: () => void 0,
 };
 
-interface SettingEntry {
-  name: string;
-  desc: string;
-  settingName: string;
-  reRender?: boolean;
-  settingType?: string;
-}
-
 const { getState, setState } = logStore;
 
 export default () => {
@@ -39,9 +37,8 @@ export default () => {
     SelectSettingEntry<any>
   >(dummySelectSettingEntry);
   const [selectVisible, setSelectVisible] = React.useState(false);
-  const playerSetting = useNoxSetting(state => state.playerSetting);
   const playerStyle = useNoxSetting(state => state.playerStyle);
-  const setPlayerSetting = useNoxSetting(state => state.setPlayerSetting);
+  const { renderListItem } = useRenderSettingItem();
 
   const selectLogLevel = () => {
     setSelectVisible(true);
@@ -81,14 +78,18 @@ export default () => {
     >
       <ScrollView>
         <List.Section>
-          <List.Item
-            left={props => <IconButton icon={'console'} size={40} />}
-            title={String(t('DeveloperSettings.LogLevelName'))}
-            description={t('DeveloperSettings.LogLevelDesc')}
-            onPress={selectLogLevel}
-            titleStyle={{ color: playerStyle.colors.primary }}
-            descriptionStyle={{ color: playerStyle.colors.secondary }}
-          />
+          {renderListItem(
+            ICONS.log,
+            'LogLevel',
+            selectLogLevel,
+            'DeveloperSettings'
+          )}
+          {renderListItem(
+            ICONS.update,
+            'VersionCheck',
+            selectLogLevel,
+            'DeveloperSettings'
+          )}
         </List.Section>
       </ScrollView>
       <GenericSelectDialog

@@ -87,6 +87,8 @@
   "DeveloperSettings": {
     "LogLevelName": "日志等级",
     "LogLevelDesc": "设置日志等级",
+    "VersionCheckName": "检查版本",
+    "VersionCheckDesc": "检查github上发布的版本",
     "LogLevel0": "调试",
     "LogLevel1": "一般",
     "LogLevel2": "警告",
@@ -95,15 +97,15 @@
     "LogLevel5": "关闭"
   },
   "Settings": {
-    "GeneralSettingTitle": "播放器设置",
+    "GeneralSettingName": "播放器设置",
     "GeneralSettingDesc": "杂七杂八的播放器设置",
-    "SkinSettingTitle": "播放器皮肤",
+    "SkinSettingName": "播放器皮肤",
     "SkinSettingDesc": "选择你喜欢的管人皮肤",
-    "BackupSettingTitle": "歌单备份",
+    "BackupSettingName": "歌单备份",
     "BackupSettingDesc": "歌单云端备份和恢复",
-    "InfoSettingTitle": "关于管人播放器",
+    "InfoSettingName": "关于管人播放器",
     "InfoSettingDesc": "版本说明",
-    "DeveloperOptionsTitle": "开发者选项",
+    "DeveloperOptionsName": "开发者选项",
     "DeveloperOptionsDesc": "正在测试的功能",
     "FeatureNotImplemented": "功能孩妹实现"
   }
