@@ -31,6 +31,7 @@
     "@react-navigation/native-stack": "^6.9.12",
     "@shopify/flash-list": "^1.4.3",
     "@types/uuid": "^9.0.1",
+    "babel-plugin-transform-remove-console": "^6.9.4",
     "bottleneck": "^2.19.5",
     "deepmerge": "^4.3.1",
     "fflate": "^0.7.4",
@@ -52,6 +53,7 @@
     "react-native-tab-view": "^3.5.1",
     "react-native-track-player": "git+https://lovegaoshi@github.com/lovegaoshi/react-native-track-player.git",
     "react-native-vector-icons": "^9.2.0",
+    "react-native-video": "^5.2.1",
     "react-native-windows": "^0.65.0-0",
     "zustand": "^4.3.7"
   },

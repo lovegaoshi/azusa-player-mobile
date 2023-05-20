@@ -124,7 +124,10 @@ export default ({
       <RenameSongMenuItem
         getSongOnClick={() => selectedSongs()[0]}
         disabled={checking}
-        onSubmit={renameSong}
+        onSubmit={(rename: string) => {
+          closeMenu();
+          renameSong(rename);
+        }}
       />
       <Menu.Item
         leadingIcon={ICONS.SEARCH_IN_PLAYLIST}
