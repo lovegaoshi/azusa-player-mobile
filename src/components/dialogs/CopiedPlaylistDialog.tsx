@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Pressable, View } from 'react-native';
+import { Pressable, View, FlatList } from 'react-native';
 import {
   Button,
   Dialog,
@@ -9,10 +9,8 @@ import {
   Text,
   RadioButton,
 } from 'react-native-paper';
-import { FlashList } from '@shopify/flash-list';
 import { useTranslation } from 'react-i18next';
 import { useNoxSetting } from '../../hooks/useSetting';
-import { styles } from '../style';
 interface props {
   visible: boolean;
   fromList: NoxMedia.Playlist;
@@ -53,13 +51,19 @@ export default ({
       <Dialog
         visible={visible}
         onDismiss={handleClose}
-        style={{ maxHeight: '70%' }}
+        style={{ maxHeight: '60%', minHeight: '50%' }}
       >
-        <Dialog.Title>
-          {t('CopiedPlaylistDialog.title', { fromList })}
+        <Dialog.Title style={{ maxHeight: 100 }}>
+          {t('CopiedPlaylistDialog.title', {
+            title:
+              fromList.title.length > 20
+                ? fromList.title.substring(0, 20) + '...'
+                : fromList.title,
+          })}
         </Dialog.Title>
-        <Dialog.Content style={{ ...styles.topBarContainer, height: '60%' }}>
-          <FlashList
+        <Dialog.Content style={{ flex: 1, minHeight: '20%' }}>
+          <FlatList
+            style={{ flex: 6 }}
             data={playlistIds
               .filter(val => val !== fromList.id)
               .map(val => [val, playlists[val].title])}
@@ -81,10 +85,9 @@ export default ({
               </Pressable>
             )}
             keyExtractor={item => item[0]}
-            estimatedItemSize={20}
           />
         </Dialog.Content>
-        <Dialog.Actions>
+        <Dialog.Actions style={{ maxHeight: 60, paddingBottom: 0 }}>
           <Button onPress={handleClose}>{t('Dialog.cancel')}</Button>
           <Button onPress={handleSubmit}>{t('Dialog.ok')}</Button>
         </Dialog.Actions>

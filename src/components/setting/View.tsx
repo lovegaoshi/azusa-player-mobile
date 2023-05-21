@@ -10,8 +10,9 @@ import { useTranslation } from 'react-i18next';
 
 import GeneralSettings from './GeneralSettings';
 import SkinSettings from './SkinSettings';
+import DeveloperSettings from './DeveloperSettings';
 import { useNoxSetting } from '../../hooks/useSetting';
-import { ViewEnum } from '../../enums/View';
+import useRenderSettingItem from './useRenderSetting';
 
 enum ICONS {
   HOME = 'cog',
@@ -21,6 +22,7 @@ enum ICONS {
   // though a good time to think about oauth2 now
   BACKUP = 'backup-restore',
   INFO = 'information',
+  DEVELOPER = 'application-brackets',
 }
 
 enum VIEW {
@@ -28,6 +30,7 @@ enum VIEW {
   DUMMY = 'Features not implemented',
   GENERAL = 'General',
   SKIN = 'Skins',
+  DEVELOPER = 'Developer Options',
 }
 
 const Stack = createNativeStackNavigator();
@@ -40,6 +43,7 @@ export default ({ navigation }: props) => {
   const { t } = useTranslation();
   const navigationGlobal = useNavigation();
   const playerStyle = useNoxSetting(state => state.playerStyle);
+  const { renderListItem } = useRenderSettingItem();
 
   const DummySettings = () => {
     return (
@@ -71,42 +75,36 @@ export default ({ navigation }: props) => {
         }}
       >
         <List.Section>
-          <List.Item
-            left={props => <IconButton icon={ICONS.HOME} size={40} />}
-            title={String(t('Settings.GeneralSettingTitle'))}
-            description={String(t('Settings.GeneralSettingDesc'))}
-            onPress={() => navigation.navigate(VIEW.GENERAL)}
-            style={{}}
-            titleStyle={{ color: playerStyle.colors.primary }}
-            descriptionStyle={{ color: playerStyle.colors.secondary }}
-          />
-          <List.Item
-            left={props => <IconButton icon={ICONS.SKIN} size={40} />}
-            title={String(t('Settings.SkinSettingTitle'))}
-            description={String(t('Settings.SkinSettingDesc'))}
-            onPress={() => navigation.navigate(VIEW.SKIN)}
-            style={{}}
-            titleStyle={{ color: playerStyle.colors.primary }}
-            descriptionStyle={{ color: playerStyle.colors.secondary }}
-          />
-          <List.Item
-            left={props => <IconButton icon={ICONS.BACKUP} size={40} />}
-            title={String(t('Settings.BackupSettingTitle'))}
-            description={String(t('Settings.BackupSettingDesc'))}
-            onPress={() => navigation.navigate(VIEW.DUMMY)}
-            style={{}}
-            titleStyle={{ color: playerStyle.colors.primary }}
-            descriptionStyle={{ color: playerStyle.colors.secondary }}
-          />
-          <List.Item
-            left={props => <IconButton icon={ICONS.INFO} size={40} />}
-            title={String(t('Settings.InfoSettingTitle'))}
-            description={String(t('Settings.InfoSettingDesc'))}
-            onPress={() => navigation.navigate(VIEW.DUMMY)}
-            style={{}}
-            titleStyle={{ color: playerStyle.colors.primary }}
-            descriptionStyle={{ color: playerStyle.colors.secondary }}
-          />
+          {renderListItem(
+            ICONS.HOME,
+            'GeneralSetting',
+            () => navigation.navigate(VIEW.GENERAL),
+            'Settings'
+          )}
+          {renderListItem(
+            ICONS.SKIN,
+            'SkinSetting',
+            () => navigation.navigate(VIEW.SKIN),
+            'Settings'
+          )}
+          {renderListItem(
+            ICONS.BACKUP,
+            'BackupSetting',
+            () => navigation.navigate(VIEW.DUMMY),
+            'Settings'
+          )}
+          {renderListItem(
+            ICONS.DEVELOPER,
+            'DeveloperOptions',
+            () => navigation.navigate(VIEW.DEVELOPER),
+            'Settings'
+          )}
+          {renderListItem(
+            ICONS.INFO,
+            'InfoSetting',
+            () => navigation.navigate(VIEW.DUMMY),
+            'Settings'
+          )}
         </List.Section>
       </View>
     );
@@ -128,9 +126,26 @@ export default ({ navigation }: props) => {
           ),
         }}
       />
-      <Stack.Screen name={VIEW.DUMMY} component={DummySettings} />
-      <Stack.Screen name={VIEW.GENERAL} component={GeneralSettings} />
-      <Stack.Screen name={VIEW.SKIN} component={SkinSettings} />
+      <Stack.Screen
+        name={VIEW.DUMMY}
+        component={DummySettings}
+        options={{ title: String(t('Settings.FeatureNotImplemented')) }}
+      />
+      <Stack.Screen
+        name={VIEW.GENERAL}
+        component={GeneralSettings}
+        options={{ title: String(t('Settings.GeneralSettingName')) }}
+      />
+      <Stack.Screen
+        name={VIEW.SKIN}
+        component={SkinSettings}
+        options={{ title: String(t('Settings.SkinSettingName')) }}
+      />
+      <Stack.Screen
+        name={VIEW.DEVELOPER}
+        component={DeveloperSettings}
+        options={{ title: String(t('Settings.DeveloperOptionsName')) }}
+      />
     </Stack.Navigator>
   );
 };

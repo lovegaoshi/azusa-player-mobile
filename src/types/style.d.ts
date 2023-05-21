@@ -18,11 +18,16 @@ declare namespace NoxTheme {
     textInputSelectionColor: string;
   }
 
+  export interface backgroundImage {
+    type: string;
+    identifier: string;
+  }
+
   export interface style {
     metaData: metaData;
 
     gifs: Array<string>;
-    backgroundImages: Array<string>;
+    backgroundImages: Array<string | backgroundImage>;
     colors: any;
     customColors: customColors;
     // https://callstack.github.io/react-native-paper/docs/components/IconButton/

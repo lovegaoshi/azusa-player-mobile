@@ -1,10 +1,5 @@
 import React, { useEffect } from 'react';
-import {
-  ActivityIndicator,
-  Linking,
-  SafeAreaView,
-  ImageBackground,
-} from 'react-native';
+import { ActivityIndicator, Linking, SafeAreaView } from 'react-native';
 import {
   NavigationContainer,
   DarkTheme as NavigationDarkTheme,
@@ -27,6 +22,7 @@ import { useTranslation } from 'react-i18next';
 import { useSetupPlayer, Player } from './components/player/View';
 import Playlist from './components/playlist/View';
 import PlayerBottomPanel from './components/player/PlayerProgressControls';
+import MainBackground from './components/background/MainBackground';
 import { useNoxSetting } from './hooks/useSetting';
 import PlaylistDrawer from './components/playlists/View';
 import { ViewEnum } from './enums/View';
@@ -98,28 +94,24 @@ const App: React.FC = () => {
   // HACK: proof codewhisperer learns stackoverflow:
   // https://stackoverflow.com/questions/54599305/how-to-set-background-image-with-react-native-and-react-navigation
   return (
-    <PaperProvider
-      theme={{
-        ...defaultTheme,
-        colors: playerStyle.colors,
-      }}
-    >
-      <SafeAreaProvider>
-        <ImageBackground
-          source={{ uri: playerStyle.bkgrdImg }}
-          resizeMode="cover"
-          style={{ flex: 1 }}
-        >
-          <NavigationContainer
+    <SafeAreaProvider>
+      <MainBackground>
+        <Portal.Host>
+          <PaperProvider
             theme={{
               ...defaultTheme,
-              colors: {
-                ...defaultTheme.colors,
-                ...playerStyle.colors,
-              },
+              colors: playerStyle.colors,
             }}
           >
-            <Portal.Host>
+            <NavigationContainer
+              theme={{
+                ...defaultTheme,
+                colors: {
+                  ...defaultTheme.colors,
+                  ...playerStyle.colors,
+                },
+              }}
+            >
               <Drawer.Navigator
                 initialRouteName={ViewEnum.PLAYER_HOME}
                 drawerContent={PlaylistDrawer}
@@ -143,11 +135,11 @@ const App: React.FC = () => {
                   component={Settings}
                 />
               </Drawer.Navigator>
-            </Portal.Host>
-          </NavigationContainer>
-        </ImageBackground>
-      </SafeAreaProvider>
-    </PaperProvider>
+            </NavigationContainer>
+          </PaperProvider>
+        </Portal.Host>
+      </MainBackground>
+    </SafeAreaProvider>
   );
 };
 

@@ -1,9 +1,5 @@
 import React, { ReactNode, useRef, useState } from 'react';
-import {
-  DrawerContentScrollView,
-  DrawerItem,
-  DrawerItemList,
-} from '@react-navigation/drawer';
+import { DrawerItem, DrawerItemList } from '@react-navigation/drawer';
 import { v4 as uuidv4 } from 'uuid';
 import {
   IconButton,
@@ -18,28 +14,28 @@ import DraggableFlatList, {
   ScaleDecorator,
   RenderItemParams,
 } from 'react-native-draggable-flatlist';
-import { useTranslation } from 'react-i18next';
 
 import { useNoxSetting } from '../../hooks/useSetting';
 import { ViewEnum } from '../../enums/View';
 import AddPlaylistButton from '../buttons/AddPlaylistButton';
 import { STORAGE_KEYS } from '../../utils/ChromeStorage';
 import NewPlaylistDialog from '../dialogs/NewPlaylistDialog';
-import { TwoWayAlert } from '../../utils/Utils';
+import useAlert from '../dialogs/useAlert';
 
 export default (props: any) => {
-  const { t } = useTranslation();
   const navigation = useNavigation();
   const currentPlayingList = useNoxSetting(state => state.currentPlayingList);
   const currentPlaylist = useNoxSetting(state => state.currentPlaylist);
   const playlists = useNoxSetting(state => state.playlists);
   const playlistIds = useNoxSetting(state => state.playlistIds);
   const playerStyle = useNoxSetting(state => state.playerStyle);
+  const playerSetting = useNoxSetting(state => state.playerSetting);
   // TODO: and how to property type this?
   const addPlaylistButtonRef = useRef<any>(null);
   const setCurrentPlaylist = useNoxSetting(state => state.setCurrentPlaylist);
   const removePlaylist = useNoxSetting(state => state.removePlaylist);
   const setPlaylistIds = useNoxSetting(state => state.setPlaylistIds);
+  const { TwoWayAlert } = useAlert();
 
   // HACK: tried to make searchList draweritem button as addPlaylistButton, but
   // dialog disposes on textinput focus. created a dialog directly in this component
@@ -55,9 +51,7 @@ export default (props: any) => {
     TwoWayAlert(
       `Delete ${playlists[playlistId].title}?`,
       `Are you sure to delete playlist ${playlists[playlistId].title}?`,
-      () => removePlaylist(playlistId),
-      String(t('Dialog.cancel')),
-      String(t('Dialog.ok'))
+      () => removePlaylist(playlistId)
     );
   };
 
@@ -98,12 +92,8 @@ export default (props: any) => {
   };
 
   const searchPlaylistAsNewButton = () => (
-    <Pressable
-      onPress={() => setNewPlaylistDialogOpen(true)}
-      style={{ position: 'absolute', right: 10 }}
-      hitSlop={40}
-    >
-      <IconButton icon="new-box" size={30} />
+    <Pressable onPress={() => setNewPlaylistDialogOpen(true)} hitSlop={40}>
+      <IconButton icon="new-box" size={25} />
     </Pressable>
   );
 
@@ -163,6 +153,7 @@ export default (props: any) => {
       >
         {renderPlaylistWrapper({
           item: playlists[STORAGE_KEYS.SEARCH_PLAYLIST_KEY],
+          icon: searchPlaylistAsNewButton(),
         })}
       </TouchableRipple>
       <NewPlaylistDialog
@@ -186,7 +177,7 @@ export default (props: any) => {
       />
       <View>
         <Text style={{ textAlign: 'center', paddingBottom: 20 }}>
-          {`${playerStyle.metaData.themeName} @ 0.0.1 alpha`}
+          {`${playerStyle.metaData.themeName} @ ${playerSetting.noxVersion}`}
         </Text>
       </View>
     </View>

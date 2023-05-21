@@ -18,11 +18,10 @@ export default async function BiliFetch(
   if (Object.entries(params.headers).length === 0) {
     params.headers = customReqHeader(url, params.headers);
   }
-  if (!params.headers['User-Agent']) {
-    params.headers['User-Agent'] = DEFAULT_UA;
-  }
-  // console.log('url:',url)
-  // console.log('params:',params)
+  params.headers = new Headers({
+    'User-Agent': DEFAULT_UA,
+    ...params.headers,
+  });
   return fetch(url, params);
 }
 
