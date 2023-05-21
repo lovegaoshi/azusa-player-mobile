@@ -2,7 +2,8 @@
   "_comment": "src/localization/en/translation.json",
   "appDrawer": {
     "homeScreenName": "音乐",
-    "settingScreenName": "设置"
+    "settingScreenName": "设置",
+    "LoginName": "b站登录"
   },
   "Dialog": {
     "ok": "好的",

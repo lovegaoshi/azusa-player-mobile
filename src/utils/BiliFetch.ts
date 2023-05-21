@@ -22,6 +22,16 @@ export default async function BiliFetch(
     'User-Agent': DEFAULT_UA,
     ...params.headers,
   });
+  // https://stackoverflow.com/questions/35325370/how-do-i-post-a-x-www-form-urlencoded-request-using-fetch
+  if (params.body) {
+    const formBody = [];
+    for (const [key, value] of Object.entries(params.body)) {
+      formBody.push(
+        encodeURIComponent(key) + '=' + encodeURIComponent(String(value))
+      );
+    }
+    params.body = formBody.join('&');
+  }
   return fetch(url, params);
 }
 

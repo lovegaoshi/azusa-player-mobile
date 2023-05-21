@@ -3,4 +3,5 @@ export enum ViewEnum {
   LEFT_DRAWER = 'LeftDrawer',
   PLAYER_COVER = 'NoxCover',
   PLAYER_PLAYLIST = 'NoxPlaylist',
+  USER_LOGIN = 'NoxLogin',
 }

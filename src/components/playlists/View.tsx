@@ -1,13 +1,6 @@
 import React, { ReactNode, useRef, useState } from 'react';
 import { DrawerItem, DrawerItemList } from '@react-navigation/drawer';
-import { v4 as uuidv4 } from 'uuid';
-import {
-  IconButton,
-  Divider,
-  Text,
-  TouchableRipple,
-  Button,
-} from 'react-native-paper';
+import { IconButton, Divider, Text, TouchableRipple } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
 import { Pressable, Dimensions, View } from 'react-native';
 import DraggableFlatList, {
