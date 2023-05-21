@@ -14,9 +14,7 @@ import PlaylistInfo from './PlaylistInfo';
 import PlaylistMenuButton from '../buttons/PlaylistMenuButton';
 import { updateSubscribeFavList } from '../../utils/BiliSubscribe';
 import { songlistToTracklist } from '../../objects/Playlist';
-import { NoxRepeatMode } from '../player/enums/RepeatMode';
 import { PLAYLIST_ENUMS } from '../../enums/Playlist';
-import { chunkArray } from '../../utils/Utils';
 
 export default () => {
   const { t } = useTranslation();

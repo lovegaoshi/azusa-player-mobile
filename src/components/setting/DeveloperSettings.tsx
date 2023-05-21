@@ -6,8 +6,7 @@ import { useNoxSetting } from '../../hooks/useSetting';
 import { logStore, LOGLEVEL } from '../../utils/Logger';
 import GenericSelectDialog from '../dialogs/GenericSelectDialog';
 import useRenderSettingItem from './useRenderSetting';
-import { getVersion } from '../../utils/Version';
-import useAlert from '../dialogs/useAlert';
+import useVersionCheck from '../../hooks/useVersionCheck';
 
 enum ICONS {
   log = 'console',
@@ -40,7 +39,7 @@ export default () => {
   const [selectVisible, setSelectVisible] = React.useState(false);
   const playerStyle = useNoxSetting(state => state.playerStyle);
   const { renderListItem } = useRenderSettingItem();
-  const { OneWayAlert } = useAlert();
+  const { checkVersion } = useVersionCheck();
 
   const selectLogLevel = () => {
     setSelectVisible(true);
@@ -71,11 +70,6 @@ export default () => {
     } as SelectSettingEntry<number>);
   };
 
-  const checkVersion = async () => {
-    const version = await getVersion();
-    OneWayAlert('', version, () => void 0);
-  };
-
   return (
     <View
       style={{
@@ -94,7 +88,7 @@ export default () => {
           {renderListItem(
             ICONS.update,
             'VersionCheck',
-            () => void 0,
+            () => checkVersion(false),
             'DeveloperSettings'
           )}
         </List.Section>

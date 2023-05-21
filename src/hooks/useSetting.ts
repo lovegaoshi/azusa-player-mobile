@@ -23,6 +23,7 @@ interface initializedResults {
   currentPlayingList: NoxMedia.Playlist;
   currentPlayingID: string;
   playlists: { [key: string]: NoxMedia.Playlist };
+  storedPlayerSetting: NoxStorage.PlayerSettingDict;
 }
 
 interface NoxSetting {
@@ -61,7 +62,7 @@ interface NoxSetting {
   setFavoritePlaylist: (val: NoxMedia.Playlist) => void;
 
   playerSetting: NoxStorage.PlayerSettingDict;
-  setPlayerSetting: (val: NoxStorage.PlayerSettingDict) => void;
+  setPlayerSetting: (val: Partial<NoxStorage.PlayerSettingDict>) => void;
 
   addPlaylist: (val: NoxMedia.Playlist) => void;
   removePlaylist: (val: string) => void;
@@ -166,9 +167,10 @@ export const useNoxSetting = create<NoxSetting>((set, get) => ({
   },
 
   playerSetting: DEFAULT_SETTING,
-  setPlayerSetting: (val: NoxStorage.PlayerSettingDict) => {
-    set({ playerSetting: val });
-    saveSettings(val);
+  setPlayerSetting: (val: Partial<NoxStorage.PlayerSettingDict>) => {
+    const newPlayerSetting = { ...get().playerSetting, ...val };
+    set({ playerSetting: newPlayerSetting });
+    saveSettings(newPlayerSetting);
   },
 
   addPlaylist: (playlist: NoxMedia.Playlist) => {
@@ -220,7 +222,6 @@ export const useNoxSetting = create<NoxSetting>((set, get) => ({
   initPlayer: async (val: NoxStorage.PlayerStorageObject) => {
     const playingList =
       val.playlists[val.lastPlaylistId[0]] || dummyPlaylistList;
-
     const createdStyle = createStyle(val.skin);
     set({ currentPlayingId: val.lastPlaylistId[1] });
     set({ currentPlayingList: playingList });
@@ -230,7 +231,7 @@ export const useNoxSetting = create<NoxSetting>((set, get) => ({
     });
     set({ searchPlaylist: val.searchPlaylist });
     set({ favoritePlaylist: val.favoriPlaylist });
-    set({ playerSetting: val.settings ? val.settings : DEFAULT_SETTING });
+    set({ playerSetting: val.settings || DEFAULT_SETTING });
     set({ playlists: val.playlists });
     set({ playlistIds: val.playlistIds });
     set({
@@ -248,6 +249,7 @@ export const useNoxSetting = create<NoxSetting>((set, get) => ({
       playlists: val.playlists,
       currentPlayingList: playingList,
       currentPlayingID: val.lastPlaylistId[1],
+      storedPlayerSetting: val.settings || DEFAULT_SETTING,
     };
   },
 }));

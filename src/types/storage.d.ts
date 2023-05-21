@@ -7,6 +7,7 @@ declare namespace NoxStorage {
     settingExportLocation: string;
     personalCloudIP: string;
     noxVersion: string;
+    noxCheckedVersion: string;
     hideCoverInMobile: boolean;
     loadPlaylistAsArtist: boolean;
     sendBiliHeartbeat: boolean;

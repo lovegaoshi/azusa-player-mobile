@@ -29,6 +29,7 @@ export default (props: any) => {
   const playlists = useNoxSetting(state => state.playlists);
   const playlistIds = useNoxSetting(state => state.playlistIds);
   const playerStyle = useNoxSetting(state => state.playerStyle);
+  const playerSetting = useNoxSetting(state => state.playerSetting);
   // TODO: and how to property type this?
   const addPlaylistButtonRef = useRef<any>(null);
   const setCurrentPlaylist = useNoxSetting(state => state.setCurrentPlaylist);
@@ -176,7 +177,7 @@ export default (props: any) => {
       />
       <View>
         <Text style={{ textAlign: 'center', paddingBottom: 20 }}>
-          {`${playerStyle.metaData.themeName} @ 0.0.1 alpha`}
+          {`${playerStyle.metaData.themeName} @ ${playerSetting.noxVersion}`}
         </Text>
       </View>
     </View>

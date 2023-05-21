@@ -134,17 +134,17 @@ export default ({ navigation }: props) => {
       <Stack.Screen
         name={VIEW.GENERAL}
         component={GeneralSettings}
-        options={{ title: String(t('Settings.GeneralSettingTitle')) }}
+        options={{ title: String(t('Settings.GeneralSettingName')) }}
       />
       <Stack.Screen
         name={VIEW.SKIN}
         component={SkinSettings}
-        options={{ title: String(t('Settings.SkinSettingTitle')) }}
+        options={{ title: String(t('Settings.SkinSettingName')) }}
       />
       <Stack.Screen
         name={VIEW.DEVELOPER}
         component={DeveloperSettings}
-        options={{ title: String(t('Settings.DeveloperOptionsTitle')) }}
+        options={{ title: String(t('Settings.DeveloperOptionsName')) }}
       />
     </Stack.Navigator>
   );

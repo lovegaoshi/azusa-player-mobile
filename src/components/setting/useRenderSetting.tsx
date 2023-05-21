@@ -22,10 +22,7 @@ export default () => {
   );
 
   const saveSettings = (toggled: { [key: string]: any }) => {
-    setPlayerSetting({
-      ...playerSetting,
-      ...toggled,
-    });
+    setPlayerSetting(toggled);
   };
 
   /**
