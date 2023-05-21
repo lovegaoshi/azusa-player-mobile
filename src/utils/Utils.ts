@@ -18,39 +18,7 @@ export const seconds2MMSS = (sec_num: number) => {
     : `${String(minutes)}:${padding(seconds)}`;
 };
 
-export const TwoWayAlert = (
-  title: string,
-  message: string,
-  onSubmit: () => void,
-  cancelText = 'Cancel',
-  okText = 'OK'
-) => {
-  Alert.alert(title, message, [
-    {
-      text: cancelText,
-      onPress: () => void 0,
-      style: 'cancel',
-    },
-    {
-      text: okText,
-      onPress: onSubmit,
-    },
-  ]);
-};
-
-export const OneWayAlert = (
-  title: string,
-  message: string,
-  onPress: () => void,
-  okText = 'OK'
-) => {
-  Alert.alert(title, message, [{ text: okText, onPress: onPress }], {
-    cancelable: true,
-    onDismiss: onPress,
-  });
-};
-
-export function randomChoice(list: Array<any>) {
+export function randomChoice<T>(list: Array<T>) {
   return list[Math.floor(Math.random() * list.length) >> 0];
 }
 
@@ -59,9 +27,9 @@ export const rgb2rgba = (rgb: string, a = 1) => {
   return `rgba(${extractedRGB[0][0]}, ${extractedRGB[1][0]}, ${extractedRGB[2][0]}, ${a})`;
 };
 
-export const getUniqObjects = (
-  objects: Array<any>,
-  property: (object: any) => any
+export const getUniqObjects = <T>(
+  objects: Array<T>,
+  property: (object: T) => string
 ) => {
   const uniqKey = new Set();
   return objects.filter(object => {
@@ -79,7 +47,7 @@ export const getUniqObjects = (
  * @param size
  * @returns
  */
-export const chunkArray = (arr: Array<any>, size: number): Array<any[]> => {
+export const chunkArray = <T>(arr: Array<T>, size: number): Array<T[]> => {
   return arr.reduce((chunks, item, index) => {
     const chunkIndex = Math.floor(index / size);
     if (!chunks[chunkIndex]) {
@@ -87,5 +55,9 @@ export const chunkArray = (arr: Array<any>, size: number): Array<any[]> => {
     }
     chunks[chunkIndex].push(item);
     return chunks;
-  }, []);
+  }, [] as Array<T[]>);
+};
+
+export const charLength = (str: string) => {
+  return str.replace(/[\u0300-\u036f]/g, '').length;
 };

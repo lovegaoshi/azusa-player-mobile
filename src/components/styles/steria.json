@@ -40,7 +40,11 @@
       "https://i0.hdslb.com/bfs/garb/73731e0b8e6af9bd7c899947cc981a68c28a66b8.png"
     ],
     "backgroundImages": [
-      "https://koistatic.terrach.net/dbs-art/2022/08/20220824144703485.jpg"
+      "https://koistatic.terrach.net/dbs-art/2022/08/20220824144703485.jpg",
+      {
+        "type": "bvid",
+        "identifier": "BV1Da411M7ti"
+      }
     ],
     "customColors": {
       "maskedBackgroundColor": "rgba(255, 255, 255, 0.40)",

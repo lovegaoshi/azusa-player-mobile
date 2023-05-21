@@ -1,7 +1,6 @@
 /* eslint-disable prefer-const */
 import { create } from 'zustand';
 import { dummyPlaylist, dummyPlaylistList } from '../objects/Playlist';
-import { NoxRepeatMode } from '../components/player/enums/RepeatMode';
 import {
   DEFAULT_SETTING,
   STORAGE_KEYS,
@@ -15,10 +14,8 @@ import {
   savePlayerSkins,
 } from '../utils/ChromeStorage';
 import { createStyle } from '../components/style';
-import noxPlayingList, {
-  setPlayingList,
-  getCurrentTPQueue,
-} from '../store/playingList';
+import noxPlayingList, { setPlayingList } from '../store/playingList';
+import { resolveBackgroundImage } from '../components/background/MainBackground';
 
 const { getState, setState } = noxPlayingList;
 
@@ -26,6 +23,7 @@ interface initializedResults {
   currentPlayingList: NoxMedia.Playlist;
   currentPlayingID: string;
   playlists: { [key: string]: NoxMedia.Playlist };
+  storedPlayerSetting: NoxStorage.PlayerSettingDict;
 }
 
 interface NoxSetting {
@@ -64,7 +62,7 @@ interface NoxSetting {
   setFavoritePlaylist: (val: NoxMedia.Playlist) => void;
 
   playerSetting: NoxStorage.PlayerSettingDict;
-  setPlayerSetting: (val: NoxStorage.PlayerSettingDict) => void;
+  setPlayerSetting: (val: Partial<NoxStorage.PlayerSettingDict>) => void;
 
   addPlaylist: (val: NoxMedia.Playlist) => void;
   removePlaylist: (val: string) => void;
@@ -95,7 +93,15 @@ interface NoxSetting {
 export const useNoxSetting = create<NoxSetting>((set, get) => ({
   playerStyle: createStyle(),
   setPlayerStyle: (val: NoxTheme.style) => {
-    set({ playerStyle: createStyle(val) });
+    const createdStyle = createStyle(val);
+    resolveBackgroundImage(createdStyle.bkgrdImg).then(resolvedBackground =>
+      set({
+        playerStyle: {
+          ...createdStyle,
+          bkgrdImg: resolvedBackground,
+        },
+      })
+    );
     savePlayerSkin(val);
   },
   playerStyles: [],
@@ -161,9 +167,10 @@ export const useNoxSetting = create<NoxSetting>((set, get) => ({
   },
 
   playerSetting: DEFAULT_SETTING,
-  setPlayerSetting: (val: NoxStorage.PlayerSettingDict) => {
-    set({ playerSetting: val });
-    saveSettings(val);
+  setPlayerSetting: (val: Partial<NoxStorage.PlayerSettingDict>) => {
+    const newPlayerSetting = { ...get().playerSetting, ...val };
+    set({ playerSetting: newPlayerSetting });
+    saveSettings(newPlayerSetting);
   },
 
   addPlaylist: (playlist: NoxMedia.Playlist) => {
@@ -213,32 +220,36 @@ export const useNoxSetting = create<NoxSetting>((set, get) => ({
   },
 
   initPlayer: async (val: NoxStorage.PlayerStorageObject) => {
-    const playingList = 
-      val.playlists[val.lastPlaylistId[0]] ||
-      dummyPlaylistList;
+    const playingList =
+      val.playlists[val.lastPlaylistId[0]] || dummyPlaylistList;
+    const createdStyle = createStyle(val.skin);
     set({ currentPlayingId: val.lastPlaylistId[1] });
     set({ currentPlayingList: playingList });
     set({
       currentPlaylist:
-        val.playlists[val.lastPlaylistId[0]] ||
-        val.searchPlaylist,
+        val.playlists[val.lastPlaylistId[0]] || val.searchPlaylist,
     });
     set({ searchPlaylist: val.searchPlaylist });
     set({ favoritePlaylist: val.favoriPlaylist });
-    set({ playerSetting: val.settings ? val.settings : DEFAULT_SETTING });
+    set({ playerSetting: val.settings || DEFAULT_SETTING });
     set({ playlists: val.playlists });
     set({ playlistIds: val.playlistIds });
-    set({ playerStyle: createStyle(val.skin) });
+    set({
+      playerStyle: {
+        ...createdStyle,
+        bkgrdImg: await resolveBackgroundImage(createdStyle.bkgrdImg),
+      },
+    });
     set({ playerStyles: val.skins });
     setPlayingList(
-      (val.playlists[val.lastPlaylistId[0]] || val.searchPlaylist)
-        .songList
+      (val.playlists[val.lastPlaylistId[0]] || val.searchPlaylist).songList
     );
     setState({ playmode: val.playerRepeat });
     return {
       playlists: val.playlists,
       currentPlayingList: playingList,
       currentPlayingID: val.lastPlaylistId[1],
+      storedPlayerSetting: val.settings || DEFAULT_SETTING,
     };
   },
 }));

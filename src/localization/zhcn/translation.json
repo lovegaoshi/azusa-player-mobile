@@ -9,7 +9,7 @@
     "cancel": "算了"
   },
   "CopiedPlaylistDialog": {
-    "title": "将 {{fromList.title}} 送往..."
+    "title": "将 {{title}} 送往..."
   },
   "NewPlaylistDialog": {
     "title": "将歌单 {{fromList.title}} 新建为...",
@@ -84,15 +84,39 @@
     "fastBiliSearchName": "快速b站搜索",
     "fastBiliSearchDesc": "使用b站搜索时，不解析分p内容"
   },
+  "DeveloperSettings": {
+    "LogLevelName": "日志等级",
+    "LogLevelDesc": "设置日志等级",
+    "VersionCheckName": "检查版本",
+    "VersionCheckDesc": "检查github上发布的版本",
+    "LogLevel0": "调试",
+    "LogLevel1": "一般",
+    "LogLevel2": "警告",
+    "LogLevel3": "错误",
+    "LogLevel4": "致命错误",
+    "LogLevel5": "关闭"
+  },
   "Settings": {
-    "GeneralSettingTitle": "播放器设置",
+    "GeneralSettingName": "播放器设置",
     "GeneralSettingDesc": "杂七杂八的播放器设置",
-    "SkinSettingTitle": "播放器皮肤",
+    "SkinSettingName": "播放器皮肤",
     "SkinSettingDesc": "选择你喜欢的管人皮肤",
-    "BackupSettingTitle": "歌单备份",
+    "BackupSettingName": "歌单备份",
     "BackupSettingDesc": "歌单云端备份和恢复",
-    "InfoSettingTitle": "关于管人播放器",
+    "InfoSettingName": "关于管人播放器",
     "InfoSettingDesc": "版本说明",
+    "DeveloperOptionsName": "开发者选项",
+    "DeveloperOptionsDesc": "正在测试的功能",
     "FeatureNotImplemented": "功能孩妹实现"
+  },
+  "VersionUpdate": {
+    "NoUpdates": "管人播放器已经是最新版本。\n当前版本：{{currentVersion}}",
+    "UpdateCheckingSnackbar": "联网检查更新...",
+    "UpdateCheckingFailedSnackbar": "联网github检查更新失败",
+    "UpdateFoundTitle": "发现新版本",
+    "UpdateFoundContent": "管人播放器 {{noxCheckedVersion}} 已发布。前往gayhub下载。\n当前版本：{{currentVersion}}",
+    "UpdatedVersionAlertTitle": "管人播放器更新了",
+    "UpdatedVersionAlertContent": "管人播放器更新到了版本 {{version}}!去GitHub查看更新内容.",
+    "UpdateGo2Github": "前往Gayhub"
   }
 }

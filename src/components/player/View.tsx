@@ -10,6 +10,7 @@ import {
   Text,
 } from 'react-native';
 import { useNavigation, ParamListBase } from '@react-navigation/native';
+
 import { TrackInfo } from './';
 import { SetupService } from '../../services';
 import { DrawerNavigationProp } from '@react-navigation/drawer';
@@ -18,6 +19,7 @@ import { useNoxSetting } from '../../hooks/useSetting';
 import { songlistToTracklist } from '../../objects/Playlist';
 import { initPlayerObject } from '../../utils/ChromeStorage';
 import { getCurrentTPQueue } from '../../store/playingList';
+import useVersionCheck from '../../hooks/useVersionCheck';
 
 interface props {
   navigation: DrawerNavigationProp<ParamListBase>;
@@ -42,13 +44,19 @@ export function Player({ navigation }: props) {
 
 export function useSetupPlayer() {
   const [playerReady, setPlayerReady] = useState<boolean>(false);
+  const playerSetting = useNoxSetting(state => state.playerSetting);
   const initPlayer = useNoxSetting(state => state.initPlayer);
+  const { updateVersion, checkVersion } = useVersionCheck();
 
   useEffect(() => {
     let unmounted = false;
     (async () => {
-      const { currentPlayingID } = await initPlayer(await initPlayerObject());
+      const { currentPlayingID, storedPlayerSetting } = await initPlayer(
+        await initPlayerObject()
+      );
       await SetupService();
+      updateVersion(storedPlayerSetting);
+      checkVersion(true, storedPlayerSetting);
       if (unmounted) return;
       setPlayerReady(true);
       if (unmounted) return;

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { KeyboardAvoidingView, View } from 'react-native';
+import { View } from 'react-native';
 import {
   Button,
   Dialog,
@@ -60,34 +60,32 @@ export default ({
   return (
     <Portal>
       <Dialog visible={visible} onDismiss={handleClose}>
-        <KeyboardAvoidingView style={{ minHeight: '10%' }}>
-          <Dialog.Content>
-            <TextInput
-              label={String(t('PlaylistSettingsDialog.playlistNameLabel'))}
-              value={playlistName}
-              onChangeText={(val: string) => setPlaylistName(val)}
-              selectionColor={playerStyle.customColors.textInputSelectionColor}
-            />
-            <TextInput
-              label={String(t('PlaylistSettingsDialog.subscribeUrlLabel'))}
-              value={subscribeUrl}
-              onChangeText={(val: string) => setSubscribeUrl(val)}
-              selectionColor={playerStyle.customColors.textInputSelectionColor}
-            />
-            <TextInput
-              label={String(t('PlaylistSettingsDialog.blacklistedUrlLabel'))}
-              value={blacklistedUrl}
-              onChangeText={(val: string) => setBlacklistedUrl(val)}
-              selectionColor={playerStyle.customColors.textInputSelectionColor}
-            />
-            <View style={{ flexDirection: 'row' }}>
-              <Switch value={useBiliShazam} onValueChange={toggleBiliShazam} />
-              <Text style={{ fontSize: 18 }}>
-                {t('PlaylistSettingsDialog.useBiliShazamLabel')}
-              </Text>
-            </View>
-          </Dialog.Content>
-        </KeyboardAvoidingView>
+        <Dialog.Content>
+          <TextInput
+            label={String(t('PlaylistSettingsDialog.playlistNameLabel'))}
+            value={playlistName}
+            onChangeText={(val: string) => setPlaylistName(val)}
+            selectionColor={playerStyle.customColors.textInputSelectionColor}
+          />
+          <TextInput
+            label={String(t('PlaylistSettingsDialog.subscribeUrlLabel'))}
+            value={subscribeUrl}
+            onChangeText={(val: string) => setSubscribeUrl(val)}
+            selectionColor={playerStyle.customColors.textInputSelectionColor}
+          />
+          <TextInput
+            label={String(t('PlaylistSettingsDialog.blacklistedUrlLabel'))}
+            value={blacklistedUrl}
+            onChangeText={(val: string) => setBlacklistedUrl(val)}
+            selectionColor={playerStyle.customColors.textInputSelectionColor}
+          />
+          <View style={{ flexDirection: 'row' }}>
+            <Switch value={useBiliShazam} onValueChange={toggleBiliShazam} />
+            <Text style={{ fontSize: 18 }}>
+              {t('PlaylistSettingsDialog.useBiliShazamLabel')}
+            </Text>
+          </View>
+        </Dialog.Content>
 
         <Dialog.Actions>
           <Button onPress={handleClose}>Cancel</Button>

@@ -8,6 +8,7 @@ import {
   getSongListFromAudio,
   getYoutubeVideo,
 } from './DataProcess';
+import { logger } from './Logger';
 
 const extractBiliSeries = ({
   reExtracted,
@@ -139,8 +140,9 @@ export const searchBiliURLs = async ({
       fastSearch,
     });
   } catch (err) {
-    console.warn(err);
+    logger.warn(err);
   }
   progressEmitter(0);
+  logger.debug(results);
   return results;
 };

@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { KeyboardAvoidingView, View } from 'react-native';
 import {
   Button,
   Dialog,
@@ -43,18 +42,16 @@ export default ({
     <Portal>
       <Dialog visible={visible} onDismiss={handleClose}>
         <Dialog.Title>{t('RenameSongDialog.title', { song })}</Dialog.Title>
-        <KeyboardAvoidingView style={{ minHeight: '10%' }}>
-          <Dialog.Content>
-            <TextInput
-              label={String(t('RenameSongDialog.label'))}
-              value={name}
-              onChangeText={(val: string) => setName(val)}
-              onSubmitEditing={handleSubmit}
-              selectTextOnFocus
-              selectionColor={playerStyle.customColors.textInputSelectionColor}
-            />
-          </Dialog.Content>
-        </KeyboardAvoidingView>
+        <Dialog.Content>
+          <TextInput
+            label={String(t('RenameSongDialog.label'))}
+            value={name}
+            onChangeText={(val: string) => setName(val)}
+            onSubmitEditing={handleSubmit}
+            selectTextOnFocus
+            selectionColor={playerStyle.customColors.textInputSelectionColor}
+          />
+        </Dialog.Content>
 
         <Dialog.Actions>
           <Button onPress={handleClose}>Cancel</Button>

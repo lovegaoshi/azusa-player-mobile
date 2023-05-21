@@ -4,6 +4,7 @@ import { dummyPlaylist } from '../objects/Playlist';
 import { NoxRepeatMode } from '../components/player/enums/RepeatMode';
 import { PLAYLIST_ENUMS } from '../enums/Playlist';
 import AzusaTheme from '../components/styles/AzusaTheme';
+import { chunkArray as chunkArrayRaw } from '../utils/Utils';
 /**
  * noxplayer's storage handler.
  * ChromeStorage has quite a few changes from azusa player the chrome extension;
@@ -45,11 +46,12 @@ export const DEFAULT_SETTING: NoxStorage.PlayerSettingDict = {
   settingExportLocation: EXPORT_OPTIONS.LOCAL,
   personalCloudIP: '',
   noxVersion: 'latest',
+  noxCheckedVersion: 'latest',
   hideCoverInMobile: false,
   loadPlaylistAsArtist: false,
   sendBiliHeartbeat: false,
   noCookieBiliSearch: false,
-  playerRepeat: NoxRepeatMode,
+  playerRepeat: NoxRepeatMode.SHUFFLE,
   dataSaver: false,
   fastBiliSearch: false,
 };
@@ -85,18 +87,8 @@ export const removeItem = async (key: string) => {
  * @param size
  * @returns
  */
-const chunkArray = (
-  arr: Array<any>,
-  size = MAX_SONGLIST_SIZE
-): Array<any[]> => {
-  return arr.reduce((chunks, item, index) => {
-    const chunkIndex = Math.floor(index / size);
-    if (!chunks[chunkIndex]) {
-      chunks[chunkIndex] = [];
-    }
-    chunks[chunkIndex].push(item);
-    return chunks;
-  }, []);
+const chunkArray = <T>(arr: Array<T>, size = MAX_SONGLIST_SIZE): Array<T[]> => {
+  return chunkArrayRaw(arr, size);
 };
 
 /**
@@ -173,9 +165,7 @@ export const savePlayerSkins = async (skins: Array<any>) =>
   saveChucked(skins, STORAGE_KEYS.SKINSTORAGE);
 
 export const getPlayerSkins = async () =>
-  await loadChucked(
-    await getItem(STORAGE_KEYS.SKINSTORAGE) || []
-  );
+  await loadChucked((await getItem(STORAGE_KEYS.SKINSTORAGE)) || []);
 
 // no point to provide getters, as states are managed by zustand.
 // unlike azusaplayer which the storage context still reads localstorage, instaed
@@ -229,19 +219,25 @@ export const initPlayerObject =
     let playerObject = {
       settings: {
         ...DEFAULT_SETTING,
-        ...await getItem(STORAGE_KEYS.PLAYER_SETTING_KEY) || {},
+        ...((await getItem(STORAGE_KEYS.PLAYER_SETTING_KEY)) || {}),
       },
-      playlistIds: await getItem(STORAGE_KEYS.MY_FAV_LIST_KEY) || [],
+      playlistIds: (await getItem(STORAGE_KEYS.MY_FAV_LIST_KEY)) || [],
       playlists: {},
-      lastPlaylistId: await getItem(STORAGE_KEYS.LAST_PLAY_LIST) || ['NULL', 'NULL'],
+      lastPlaylistId: (await getItem(STORAGE_KEYS.LAST_PLAY_LIST)) || [
+        'NULL',
+        'NULL',
+      ],
       searchPlaylist: dummyPlaylist(
         'Search',
         PLAYLIST_ENUMS.TYPE_SEARCH_PLAYLIST
       ),
-      favoriPlaylist: await getItem(STORAGE_KEYS.FAVORITE_PLAYLIST_KEY) || dummyPlaylist('Favorite', PLAYLIST_ENUMS.TYPE_FAVORI_PLAYLIST),
-      playerRepeat: await getItem(STORAGE_KEYS.PLAYMODE_KEY) ||NoxRepeatMode.SHUFFLE,
-      skin: await getItem(STORAGE_KEYS.SKIN) || AzusaTheme,
-      skins: await getPlayerSkins() || [],
+      favoriPlaylist:
+        (await getItem(STORAGE_KEYS.FAVORITE_PLAYLIST_KEY)) ||
+        dummyPlaylist('Favorite', PLAYLIST_ENUMS.TYPE_FAVORI_PLAYLIST),
+      playerRepeat:
+        (await getItem(STORAGE_KEYS.PLAYMODE_KEY)) || NoxRepeatMode.SHUFFLE,
+      skin: (await getItem(STORAGE_KEYS.SKIN)) || AzusaTheme,
+      skins: (await getPlayerSkins()) || [],
     } as NoxStorage.PlayerStorageObject;
 
     playerObject.playlists[STORAGE_KEYS.SEARCH_PLAYLIST_KEY] =
