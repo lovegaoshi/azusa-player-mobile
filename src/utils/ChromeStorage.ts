@@ -30,6 +30,7 @@ export enum STORAGE_KEYS {
   PLAYMODE_KEY = 'Playmode',
   SKIN = 'PlayerSkin',
   SKINSTORAGE = 'PlayerSkinStorage',
+  COOKIES = 'Cookies',
 }
 
 export enum EXPORT_OPTIONS {
@@ -81,6 +82,18 @@ export const removeItem = async (key: string) => {
     console.warn(e);
   }
 };
+
+export const addCookie = async (site: string, setHeader: string) => {
+  const cookies = (await getItem(STORAGE_KEYS.COOKIES)) || {};
+  saveItem(STORAGE_KEYS.COOKIES, { ...cookies, [site]: setHeader });
+};
+
+export const removeCookie = async (site: string) => {
+  const cookies = (await getItem(STORAGE_KEYS.COOKIES)) || {};
+  cookies[site] = [];
+  saveItem(STORAGE_KEYS.COOKIES, cookies);
+};
+
 /**
  * splits an array to chunks of given size.
  * @param arr
@@ -238,6 +251,7 @@ export const initPlayerObject =
         (await getItem(STORAGE_KEYS.PLAYMODE_KEY)) || NoxRepeatMode.SHUFFLE,
       skin: (await getItem(STORAGE_KEYS.SKIN)) || AzusaTheme,
       skins: (await getPlayerSkins()) || [],
+      cookies: (await getItem(STORAGE_KEYS.COOKIES)) || {},
     } as NoxStorage.PlayerStorageObject;
 
     playerObject.playlists[STORAGE_KEYS.SEARCH_PLAYLIST_KEY] =

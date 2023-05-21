@@ -7,6 +7,7 @@ import TrackPlayer, {
   Event,
 } from 'react-native-track-player';
 import { IconButton } from 'react-native-paper';
+import CookieManager from '@react-native-cookies/cookies';
 
 import { PlaybackError } from './PlaybackError';
 import { PlayPauseButton } from './PlayPauseButton';
@@ -15,22 +16,14 @@ import { songlistToTracklist } from '../../objects/Playlist';
 import { NoxRepeatMode } from './enums/RepeatMode';
 import { savePlayMode } from '../../utils/ChromeStorage';
 import noxPlayingList, { getCurrentTPQueue } from '../../store/playingList';
-import { getLog } from '../../utils/Logger';
-import useAlert from '../dialogs/useAlert';
 
 const { getState, setState } = noxPlayingList;
-const setTP2Song = async (song: NoxMedia.Song) => {
-  await TrackPlayer.reset();
-  await TrackPlayer.setQueue(songlistToTracklist([song]));
-  TrackPlayer.play();
-};
 
 export const PlayerControls: React.FC = () => {
   const [playModeState, setPlayModeState] = React.useState<string>(
     getState().playmode
   );
   const playerStyle = useNoxSetting(state => state.playerStyle);
-  const { OneWayAlert } = useAlert();
 
   const setPlayMode = (val: string) => {
     setState({ playmode: val });
@@ -60,7 +53,8 @@ export const PlayerControls: React.FC = () => {
     }
   };
 
-  const onThumbsUp = () => OneWayAlert('log', getLog());
+  const onThumbsUp = () =>
+    CookieManager.get('https://www.bilibili.com').then(console.log);
 
   const findCurrentPlayIndex = () => {
     return getCurrentTPQueue().findIndex(val => val.id === currentPlayingId);

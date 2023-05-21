@@ -25,6 +25,7 @@
   "dependencies": {
     "@react-native-async-storage/async-storage": "^1.18.1",
     "@react-native-community/slider": "^4.4.2",
+    "@react-native-cookies/cookies": "^6.2.1",
     "@react-navigation/drawer": "^6.6.2",
     "@react-navigation/material-top-tabs": "^6.6.2",
     "@react-navigation/native": "^6.1.6",

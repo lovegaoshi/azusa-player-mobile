@@ -20,6 +20,7 @@ export default {
     'https://article.biliimg.com/bfs/article/d52dd3ef32408d62a172d6834332a572af95a5bc.jpg',
     'https://article.biliimg.com/bfs/article/3f1fa01d6bb5f5874e7bfa91933bc5f19daf079b.jpg',
     'https://article.biliimg.com/bfs/article/a64a32a63ea592edaa7f3da0d48946d0487b8341.png',
+    'https://article.biliimg.com/bfs/article/cf1865ed05dd93862abdaeb1ed6825749dffb95d.jpg',
   ],
   backgroundImages: [
     'https://cdn.donmai.us/original/ea/ec/__nox_nijisanji_and_3_more_drawn_by_netural__eaec50f6d554b731ffe4fcace255d0bd.png',

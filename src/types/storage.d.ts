@@ -28,5 +28,7 @@ declare namespace NoxStorage {
     playerRepeat: string;
     skin: NoxTheme.style;
     skins: any[];
+    // site: set-cookie header
+    cookies: { [key: string]: string };
   }
 }

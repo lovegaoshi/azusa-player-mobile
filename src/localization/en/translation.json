@@ -86,6 +86,8 @@
     "fastBiliSearchDesc": "Do not search for bilibili video episodes."
   },
   "DeveloperSettings": {
+    "LogName": "Show logs",
+    "LogDesc": "Show the current logs.",
     "LogLevelName": "Log Level",
     "LogLevelDesc": "set Log Level.",
     "VersionCheckName": "Check Version",

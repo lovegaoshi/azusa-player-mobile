@@ -86,6 +86,8 @@
     "fastBiliSearchDesc": "使用b站搜索时，不解析分p内容"
   },
   "DeveloperSettings": {
+    "LogName": "显示日志",
+    "LogDesc": "显示已经记录的日志",
     "LogLevelName": "日志等级",
     "LogLevelDesc": "设置日志等级",
     "VersionCheckName": "检查版本",
