@@ -20,8 +20,17 @@ const biliTagApiLimiter = new Bottleneck({
 });
 
 const awaitLimiter = new Bottleneck({
-  minTime: 2000,
+  minTime: 5000,
   maxConcurrent: 1,
 });
 
-export const throttler = { biliApiLimiter, biliTagApiLimiter, awaitLimiter };
+const bilih5ApiLimiter = new Bottleneck({
+  minTime: 120000,
+  maxConcurrent: 1,
+});
+
+export const throttler = {
+  biliApiLimiter,
+  biliTagApiLimiter,
+  bilih5ApiLimiter,
+};

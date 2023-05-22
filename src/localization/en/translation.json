@@ -113,7 +113,7 @@
     "FeatureNotImplemented": "Feature not implemented"
   },
   "Login": {
-    "BilibiliNotLoggedIn": "User not logged in",
+    "BilibiliNotLoggedIn": "User not logged in\nLogging in will use YOUR account info while querying bilibiliAPI. but it does enable things like thumbsup.",
     "BilibiliLoginButton": "Click to log in",
     "BilibiliLoginQRGeneration": "Generating QR code...",
     "BilibiliLoginQRGenerated": "Scan QR code in Bilibili app to login",

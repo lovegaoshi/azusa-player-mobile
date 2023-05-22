@@ -7,7 +7,6 @@ import TrackPlayer, {
   Event,
 } from 'react-native-track-player';
 import { IconButton } from 'react-native-paper';
-import CookieManager from '@react-native-cookies/cookies';
 
 import { PlaybackError } from './PlaybackError';
 import { PlayPauseButton } from './PlayPauseButton';
@@ -16,6 +15,7 @@ import { songlistToTracklist } from '../../objects/Playlist';
 import { NoxRepeatMode } from './enums/RepeatMode';
 import { savePlayMode } from '../../utils/ChromeStorage';
 import noxPlayingList, { getCurrentTPQueue } from '../../store/playingList';
+import ThumbsUpButton from './ThumbsUpButton';
 
 const { getState, setState } = noxPlayingList;
 
@@ -52,9 +52,6 @@ export const PlayerControls: React.FC = () => {
         break;
     }
   };
-
-  const onThumbsUp = () =>
-    CookieManager.get('https://www.bilibili.com').then(console.log);
 
   const findCurrentPlayIndex = () => {
     return getCurrentTPQueue().findIndex(val => val.id === currentPlayingId);
@@ -156,15 +153,7 @@ export const PlayerControls: React.FC = () => {
             backgroundColor: playerStyle.customColors.btnBackgroundColor,
           }}
         />
-        <IconButton
-          icon="thumb-up-outline"
-          onPress={onThumbsUp}
-          mode={playerStyle.playerControlIconContained}
-          size={30}
-          style={{
-            backgroundColor: playerStyle.customColors.btnBackgroundColor,
-          }}
-        />
+        {ThumbsUpButton()}
       </View>
     </View>
   );

@@ -98,8 +98,8 @@ const URL_QQ_SEARCH_POST = {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
-      referer: 'https://u.qq.com/',
     },
+    referrer: 'https://u.qq.com/',
     body: {
       comm: {
         ct: '19',
@@ -460,6 +460,7 @@ export const fetchBiliPaginatedAPI = async ({
     resolvedPromises.map(async pages => {
       return extract509Json(pages)
         .then(parsedJson => {
+          console.debug('jsion', parsedJson);
           getItems(parsedJson).forEach(m => {
             if (!favList.includes(m.bvid)) BVids.push(m);
           });
@@ -753,12 +754,11 @@ export const searchLyricOptions = async searchKey => {
   if (!searchKey) {
     throw new Error('Search key is required');
   }
-  logger.info('calling searchLyricOptions:', searchKey);
+  logger.info(`calling searchLyricOptions: ${searchKey}`);
   const API = getQQSearchAPI(searchKey);
-
   const res = await bfetch(API.src, API.params);
   const json = await res.json();
-
+  logger.debug(json);
   const data = json.req.data.body.song.list;
   return data.map((s, v) => ({
     key: s.mid,

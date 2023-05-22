@@ -61,3 +61,7 @@ export const chunkArray = <T>(arr: Array<T>, size: number): Array<T[]> => {
 export const charLength = (str: string) => {
   return str.replace(/[\u0300-\u036f]/g, '').length;
 };
+
+export function timeout(delay: number) {
+  return new Promise(res => setTimeout(res, delay));
+}

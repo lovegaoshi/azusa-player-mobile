@@ -83,6 +83,7 @@ export const removeItem = async (key: string) => {
   }
 };
 
+// we keep the set-cookie header for noxplayer's remove personal search option
 export const addCookie = async (site: string, setHeader: string) => {
   const cookies = (await getItem(STORAGE_KEYS.COOKIES)) || {};
   saveItem(STORAGE_KEYS.COOKIES, { ...cookies, [site]: setHeader });

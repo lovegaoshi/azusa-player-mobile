@@ -101,7 +101,7 @@
   },
   "Settings": {
     "GeneralSettingName": "播放器设置",
-    "GeneralSettingDesc": "杂七杂八的播放器设置",
+    "GeneralSettingDesc": "一般的播放器设置",
     "SkinSettingName": "播放器皮肤",
     "SkinSettingDesc": "选择你喜欢的管人皮肤",
     "BackupSettingName": "歌单备份",
