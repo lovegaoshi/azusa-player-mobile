@@ -30,5 +30,6 @@ declare namespace NoxStorage {
     skins: any[];
     // site: set-cookie header
     cookies: { [key: string]: string };
+    lyricMapping: Map<string, NoxMedia.LyricDetail
   }
 }
