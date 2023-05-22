@@ -65,12 +65,13 @@ export const sendBVLike = async (bvid: string) => {
     const biliJct = (await CookieManager.get('https://www.bilibili.com'))[
       'bili_jct'
     ]?.value;
+    if (!biliJct) return;
     const res = await bfetch(BILI_LIKE_API, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded',
       },
-      body: { bvid, like: '1', csrf: biliJct || '' },
+      body: { bvid, like: '1', csrf: biliJct },
       referrer: `https://www.bilibili.com/video/${bvid}/`,
       credentials: 'include',
     });
@@ -85,13 +86,15 @@ export const sendBVTriple = async (bvid: string) => {
     const biliJct = (await CookieManager.get('https://www.bilibili.com'))[
       'bili_jct'
     ]?.value;
+    if (!biliJct) return;
     const res = await bfetch(BILI_TRIP_API, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded',
-        referer: `https://www.bilibili.com/video/${bvid}/`,
       },
-      body: { bvid, like: '1', csrf: biliJct || '' },
+      body: { bvid, like: '1', csrf: biliJct },
+      referrer: `https://www.bilibili.com/video/${bvid}/`,
+      credentials: 'include',
     });
     return await res.json();
   } catch (error) {
