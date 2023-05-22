@@ -115,6 +115,8 @@
   "Login": {
     "BilibiliNotLoggedIn": "User not logged in\nLogging in will use YOUR account info while querying bilibiliAPI. but it does enable things like thumbsup.",
     "BilibiliLoginButton": "Click to log in",
+    "BilibiliCookieInputButton": "Click to manually input cookies",
+    "BilibiliCookieInputDialogTitle": "Add Bili Cookies",
     "BilibiliLoginQRGeneration": "Generating QR code...",
     "BilibiliLoginQRGenerated": "Scan QR code in Bilibili app to login",
     "BilibiliLoginQRGenerateFailed": "Bilibili QR code generation failed. Please check network.",

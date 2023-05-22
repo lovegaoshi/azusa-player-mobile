@@ -21,6 +21,7 @@ import bfetch from '../../utils/BiliFetch';
 import { addCookie } from '../../utils/ChromeStorage';
 import { getLoginStatus } from '../../utils/Login';
 import { timeout } from '../../utils/Utils';
+import GenericInputDialog from '../dialogs/GenericInputDialog';
 
 interface QRCodeReq {
   url: string;
@@ -38,15 +39,15 @@ interface props {
   navigation: DrawerNavigationProp<ParamListBase>;
 }
 
-const domain = 'bilibili.com';
+const domain = 'https://bilibili.com';
 const loginAPI = 'https://api.bilibili.com/x/web-interface/nav';
 const getQRCodeAPI =
-  //  'https://passport.bilibili.com/x/passport-login/web/qrcode/generate';
-  'https://passport.bilibili.com/qrcode/getLoginUrl';
+  'https://passport.bilibili.com/x/passport-login/web/qrcode/generate';
+//'https://passport.bilibili.com/qrcode/getLoginUrl';
 const probeQRCodeAPI =
-  //  'https://passport.bilibili.com/x/passport-login/web/qrcode/poll';
-  'https://passport.bilibili.com/qrcode/getLoginInfo';
-const oauthKey = 'oauthKey'; // 'qrcode_key'; //
+  'https://passport.bilibili.com/x/passport-login/web/qrcode/poll';
+//'https://passport.bilibili.com/qrcode/getLoginInfo';
+const oauthKey = 'qrcode_key'; // 'oauthKey';
 
 export default ({ navigation }: props) => {
   const { t } = useTranslation();
@@ -56,6 +57,7 @@ export default ({ navigation }: props) => {
   const [qrcodeExpire, setQrCodeExpire] = React.useState<number>(-1);
   const [loginInfo, setLoginInfo] = React.useState<LoginInfo | null>(null);
   const [initialize, setInitialize] = React.useState<boolean>(true);
+  const [inputCookieVisible, setInputCookieVisible] = React.useState(false);
 
   const getBiliLoginStatus = async () => {
     const loginSuccess = (json: any) => json.code === 0 && json.data.isLogin;
@@ -92,6 +94,10 @@ export default ({ navigation }: props) => {
 
   const probeQRLogin = async () => {
     try {
+      const response = await bfetch(
+        `${probeQRCodeAPI}?${oauthKey}=${qrcodeKey}`
+      );
+      /**
       const response = await bfetch(probeQRCodeAPI, {
         method: 'POST',
         headers: {
@@ -101,17 +107,13 @@ export default ({ navigation }: props) => {
           [oauthKey]: qrcodeKey,
         },
       });
-      /**
-      const response = await bfetch(
-        `https://passport.bilibili.com/x/passport-login/web/qrcode/poll?${oauthKey}=${qrcodeKey}`
-      );
        */
       const json = await response.json();
       logger.debug(
         `probing QR code login of ${qrcodeKey}, ${JSON.stringify(json)}`
       );
-      if (json.status) {
-        // json.code === 0
+      if (json.code === 0) {
+        // json.status
         const setCookie = response.headers.get('set-cookie');
         if (!setCookie) {
           logger.warn(
@@ -124,10 +126,14 @@ export default ({ navigation }: props) => {
         // url, refreshToken, timestamp.
         addCookie(`${domain}.data`, json.data);
         await CookieManager.setFromResponse(domain, setCookie);
+        // HACK: set-cookie header doenst work. im taking advantage of the json.data.url
+        // https://stackoverflow.com/questions/68805342/react-native-get-url-search-params
+        for (const match of json.data.url.matchAll(/[?&]([^=]+)=([^&]*)/g)) {
+          const [, key, value] = match;
+          await CookieManager.set(domain, { name: key, value });
+        }
         logger.debug(await CookieManager.get(domain));
         clearQRLogin();
-        // await timeout(2000);
-        // getBiliLoginStatus();
       }
     } catch (error) {
       // network error; abort qr login attempts
@@ -202,6 +208,13 @@ export default ({ navigation }: props) => {
           {t('Login.BilibiliLoginButton')}
         </Button>
         <View style={{ paddingVertical: 10 }} />
+        <Button
+          mode="contained-tonal"
+          onPress={() => setInputCookieVisible(true)}
+        >
+          {t('Login.BilibiliCookieInputButton')}
+        </Button>
+        <View style={{ paddingVertical: 10 }} />
         {qrcode !== '' && <QRCode value={qrcode} size={300} />}
       </View>
     );
@@ -251,6 +264,28 @@ export default ({ navigation }: props) => {
       ) : (
         loginPage()
       )}
+      <GenericInputDialog
+        options={['SESSDATA', 'bili_jct']}
+        visible={inputCookieVisible}
+        title={String(t('Login.BilibiliCookieInputDialogTitle'))}
+        onClose={() => setInputCookieVisible(false)}
+        onSubmit={async (input: { [key: string]: string }) => {
+          if (input.SESSDATA.length > 0 && input.bili_jct.length > 0) {
+            await CookieManager.set(domain, {
+              name: 'SESSDATA',
+              value: input.SESSDATA,
+            });
+            await CookieManager.set(domain, {
+              name: 'bili_jct',
+              value: input.bili_jct,
+            });
+            logger.debug(await CookieManager.get(domain));
+            clearQRLogin();
+            getBiliLoginStatus();
+          }
+          setInputCookieVisible(false);
+        }}
+      ></GenericInputDialog>
     </SafeAreaView>
   );
 };
