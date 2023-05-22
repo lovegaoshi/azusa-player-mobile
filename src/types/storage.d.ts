@@ -28,5 +28,6 @@ declare namespace NoxStorage {
     playerRepeat: string;
     skin: NoxTheme.style;
     skins: any[];
+    lyricMapping: Map<string, NoxMedia.LyricDetail>;
   }
 }
