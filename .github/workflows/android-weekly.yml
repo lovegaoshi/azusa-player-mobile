@@ -53,3 +53,6 @@ jobs:
         with:
           tag_name: weeklybuild
           files: app/build/outputs/apk/app-release.apk
+          
+      - name: Setup tmate session
+        uses: mxschmitt/action-tmate@v3
