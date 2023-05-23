@@ -24,8 +24,8 @@ jobs:
       - name: Install dependencies
         run: yarn
         
-      - name: mkdir
-        run: mkdir android/app/src/main/assets
+      - name: clean generated
+        run: rm -rf android/app/build/generated/
 
       - name: gradle build
         run: cd android && chmod +x gradlew && ./gradlew assembleRelease
