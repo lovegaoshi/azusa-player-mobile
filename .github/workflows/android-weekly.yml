@@ -18,6 +18,9 @@ jobs:
         with:
           java-version: 1.8
 
+      - name: alias yarn.cmd
+        run: alias yarn.cmd="yarn"        
+
       - name: Install dependencies
         run: yarn
         
