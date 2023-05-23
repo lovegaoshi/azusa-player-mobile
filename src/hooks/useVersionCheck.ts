@@ -28,7 +28,6 @@ export default () => {
     auto = true,
     currentPlayerSetting = playerSetting
   ) => {
-    console.log('autoversioncheck', currentPlayerSetting);
     if (!auto) {
       Snackbar.show({
         text: t('VersionUpdate.UpdateCheckingSnackbar'),

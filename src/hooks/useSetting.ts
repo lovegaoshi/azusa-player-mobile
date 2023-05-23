@@ -25,6 +25,7 @@ interface initializedResults {
   currentPlayingID: string;
   playlists: { [key: string]: NoxMedia.Playlist };
   storedPlayerSetting: NoxStorage.PlayerSettingDict;
+  cookies: { [key: string]: string };
 }
 
 interface NoxSetting {
@@ -266,6 +267,7 @@ export const useNoxSetting = create<NoxSetting>((set, get) => ({
       currentPlayingList: playingList,
       currentPlayingID: val.lastPlaylistId[1],
       storedPlayerSetting: val.settings || DEFAULT_SETTING,
+      cookies: val.cookies,
     };
   },
 }));

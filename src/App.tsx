@@ -28,6 +28,7 @@ import PlaylistDrawer from './components/playlists/View';
 import { ViewEnum } from './enums/View';
 import Settings from './components/setting/View';
 import './localization/i18n';
+import Bilibili from './components/login/Bilibili';
 
 const { LightTheme, DarkTheme } = adaptNavigationTheme({
   reactNavigationLight: NavigationDefaultTheme,
@@ -118,12 +119,21 @@ const App: React.FC = () => {
               >
                 <Drawer.Screen
                   name={ViewEnum.PLAYER_HOME}
-                  component={NoxPlayer}
                   options={{
-                    header: () => null,
-                    title: String(t('appDrawer.homeScreenName')),
                     drawerIcon: () => <IconButton icon="home-outline" />,
+                    title: String(t('appDrawer.homeScreenName')),
+                    header: () => null,
                   }}
+                  component={NoxPlayer}
+                />
+                <Drawer.Screen
+                  name={ViewEnum.USER_LOGIN}
+                  options={{
+                    drawerIcon: () => <IconButton icon="login-variant" />,
+                    title: String(t('appDrawer.LoginName')),
+                    header: () => null,
+                  }}
+                  component={Bilibili}
                 />
                 <Drawer.Screen
                   name={ViewEnum.LEFT_DRAWER}

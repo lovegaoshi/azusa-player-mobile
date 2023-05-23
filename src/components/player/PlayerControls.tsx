@@ -15,22 +15,15 @@ import { songlistToTracklist } from '../../objects/Playlist';
 import { NoxRepeatMode } from './enums/RepeatMode';
 import { savePlayMode } from '../../utils/ChromeStorage';
 import noxPlayingList, { getCurrentTPQueue } from '../../store/playingList';
-import { getLog } from '../../utils/Logger';
-import useAlert from '../dialogs/useAlert';
+import ThumbsUpButton from './ThumbsUpButton';
 
 const { getState, setState } = noxPlayingList;
-const setTP2Song = async (song: NoxMedia.Song) => {
-  await TrackPlayer.reset();
-  await TrackPlayer.setQueue(songlistToTracklist([song]));
-  TrackPlayer.play();
-};
 
 export const PlayerControls: React.FC = () => {
   const [playModeState, setPlayModeState] = React.useState<string>(
     getState().playmode
   );
   const playerStyle = useNoxSetting(state => state.playerStyle);
-  const { OneWayAlert } = useAlert();
 
   const setPlayMode = (val: string) => {
     setState({ playmode: val });
@@ -59,8 +52,6 @@ export const PlayerControls: React.FC = () => {
         break;
     }
   };
-
-  const onThumbsUp = () => OneWayAlert('log', getLog());
 
   const findCurrentPlayIndex = () => {
     return getCurrentTPQueue().findIndex(val => val.id === currentPlayingId);
@@ -162,15 +153,7 @@ export const PlayerControls: React.FC = () => {
             backgroundColor: playerStyle.customColors.btnBackgroundColor,
           }}
         />
-        <IconButton
-          icon="thumb-up-outline"
-          onPress={onThumbsUp}
-          mode={playerStyle.playerControlIconContained}
-          size={30}
-          style={{
-            backgroundColor: playerStyle.customColors.btnBackgroundColor,
-          }}
-        />
+        {ThumbsUpButton()}
       </View>
     </View>
   );

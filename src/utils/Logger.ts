@@ -50,7 +50,8 @@ export const logger = {
     if (logStore.getState().logLevel > LOGLEVEL.INFO) return;
     addLog('log', msg);
   },
-  error: (msg: any) => {
+  error: (error: any) => {
+    const msg = error instanceof Error ? error.message : String(error);
     console.error(msg);
     if (logStore.getState().logLevel > LOGLEVEL.ERROR) return;
     addLog('error', msg);

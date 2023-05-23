@@ -8,25 +8,9 @@ import VideoInfo from '../objects/VideoInfo';
 import { extractSongName } from './re';
 import bfetch from './BiliFetch';
 import { logger } from './Logger';
+import { throttler } from './throttle';
 
-/**
- * limits to bilibili API call to 200ms/call using bottleneck.
- * 100ms/call seems to brick IP after ~ 400 requests.
- */
-const biliApiLimiter = new Bottleneck({
-  minTime: 200,
-  maxConcurrent: 5,
-});
-
-/**
- * limits to bilibili.tag API call to 100ms/call using bottleneck
- * through experiment bilibili.tag seems to be more tolerable
- * than other APIs such as getvideoinfo
- */
-const biliTagApiLimiter = new Bottleneck({
-  minTime: 100,
-  maxConcurrent: 5,
-});
+const { biliApiLimiter, biliTagApiLimiter, awaitLimiter } = throttler;
 
 /**
  *  Video src info
@@ -75,9 +59,10 @@ const URL_BILICOLLE_INFO =
   'https://api.bilibili.com/x/polymer/space/seasons_archives_list?mid={mid}&season_id={sid}&sort_reverse=false&page_num={pn}&page_size=100';
 /**
  *  channel API Extract Info
+ *  TODO: this keeps having 403 problems. need to investigate in noxplayer.
  */
 const URL_BILICHANNEL_INFO =
-  'https://api.bilibili.com/x/space/wbi/arc/search?mid={mid}&pn={pn}&jsonp=jsonp&ps=50';
+  'https://api.bilibili.com/x/space/wbi/arc/search?mid={mid}&pn={pn}&jsonp=jsonp&ps=50&order_avoided=true&w_rid=5741a58656bd29a1c9b1e739736e6593&wts=1684683195';
 /**
  *  Fav List
  */
@@ -113,8 +98,8 @@ const URL_QQ_SEARCH_POST = {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
-      referer: 'https://u.qq.com/',
     },
+    referrer: 'https://u.qq.com/',
     body: {
       comm: {
         ct: '19',
@@ -475,6 +460,7 @@ export const fetchBiliPaginatedAPI = async ({
     resolvedPromises.map(async pages => {
       return extract509Json(pages)
         .then(parsedJson => {
+          console.debug('jsion', parsedJson);
           getItems(parsedJson).forEach(m => {
             if (!favList.includes(m.bvid)) BVids.push(m);
           });
@@ -604,6 +590,7 @@ export const fetchBiliChannelList = async (
     getItems: js => js.data.list.vlist,
     progressEmitter,
     favList,
+    limiter: awaitLimiter,
   });
 };
 
@@ -767,12 +754,11 @@ export const searchLyricOptions = async searchKey => {
   if (!searchKey) {
     throw new Error('Search key is required');
   }
-  logger.info('calling searchLyricOptions:', searchKey);
+  logger.info(`calling searchLyricOptions: ${searchKey}`);
   const API = getQQSearchAPI(searchKey);
-
   const res = await bfetch(API.src, API.params);
   const json = await res.json();
-
+  logger.debug(json);
   const data = json.req.data.body.song.list;
   return data.map((s, v) => ({
     key: s.mid,

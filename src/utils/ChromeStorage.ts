@@ -30,7 +30,8 @@ export enum STORAGE_KEYS {
   PLAYMODE_KEY = 'Playmode',
   SKIN = 'PlayerSkin',
   SKINSTORAGE = 'PlayerSkinStorage',
-  LYRIC_MAPPING = 'LyricMapping'
+  COOKIES = 'Cookies',
+  LYRIC_MAPPING = 'LyricMapping',
 }
 
 export enum EXPORT_OPTIONS {
@@ -59,7 +60,7 @@ export const DEFAULT_SETTING: NoxStorage.PlayerSettingDict = {
 
 export const saveItem = async (key: string, value: any) => {
   try {
-    console.log('saving %s %s into Map', key, value)
+    console.log('saving %s %s into Map', key, value);
     await AsyncStorage.setItem(key, JSON.stringify(value));
   } catch (e) {
     console.error(e);
@@ -83,6 +84,19 @@ export const removeItem = async (key: string) => {
     console.warn(e);
   }
 };
+
+// we keep the set-cookie header for noxplayer's remove personal search option
+export const addCookie = async (site: string, setHeader: string) => {
+  const cookies = (await getItem(STORAGE_KEYS.COOKIES)) || {};
+  saveItem(STORAGE_KEYS.COOKIES, { ...cookies, [site]: setHeader });
+};
+
+export const removeCookie = async (site: string) => {
+  const cookies = (await getItem(STORAGE_KEYS.COOKIES)) || {};
+  cookies[site] = [];
+  saveItem(STORAGE_KEYS.COOKIES, cookies);
+};
+
 /**
  * splits an array to chunks of given size.
  * @param arr
@@ -169,11 +183,12 @@ export const savePlayerSkins = async (skins: Array<any>) =>
 export const getPlayerSkins = async () =>
   await loadChucked((await getItem(STORAGE_KEYS.SKINSTORAGE)) || []);
 
-export const saveLyricMapping = async (lyricMapping: Map<string,NoxMedia.LyricDetail>) =>
-  saveItem(STORAGE_KEYS.LYRIC_MAPPING, lyricMapping );
+export const saveLyricMapping = async (
+  lyricMapping: Map<string, NoxMedia.LyricDetail>
+) => saveItem(STORAGE_KEYS.LYRIC_MAPPING, lyricMapping);
 
 export const getLyricMapping = async () =>
-  await getItem(STORAGE_KEYS.SKINSTORAGE);
+  await getItem(STORAGE_KEYS.LYRIC_MAPPING);
 
 // no point to provide getters, as states are managed by zustand.
 // unlike azusaplayer which the storage context still reads localstorage, instaed
@@ -246,7 +261,9 @@ export const initPlayerObject =
         (await getItem(STORAGE_KEYS.PLAYMODE_KEY)) || NoxRepeatMode.SHUFFLE,
       skin: (await getItem(STORAGE_KEYS.SKIN)) || AzusaTheme,
       skins: (await getPlayerSkins()) || [],
-      lyricMapping: (await getLyricMapping()) || new Map<string,NoxMedia.LyricDetail>
+      cookies: (await getItem(STORAGE_KEYS.COOKIES)) || {},
+      lyricMapping:
+        (await getLyricMapping()) || new Map<string, NoxMedia.LyricDetail>(),
     } as NoxStorage.PlayerStorageObject;
 
     playerObject.playlists[STORAGE_KEYS.SEARCH_PLAYLIST_KEY] =
@@ -260,7 +277,7 @@ export const initPlayerObject =
         if (retrievedPlaylist) playerObject.playlists[id] = retrievedPlaylist;
       })
     );
-    console.log(playerObject)
+    console.log(playerObject);
     return playerObject;
   };
 

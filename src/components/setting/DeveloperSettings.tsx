@@ -2,15 +2,19 @@ import * as React from 'react';
 import { View, ScrollView } from 'react-native';
 import { IconButton, List } from 'react-native-paper';
 import { useTranslation } from 'react-i18next';
+
 import { useNoxSetting } from '../../hooks/useSetting';
 import { logStore, LOGLEVEL } from '../../utils/Logger';
 import GenericSelectDialog from '../dialogs/GenericSelectDialog';
 import useRenderSettingItem from './useRenderSetting';
 import useVersionCheck from '../../hooks/useVersionCheck';
+import { getLog } from '../../utils/Logger';
+import useAlert from '../dialogs/useAlert';
 
 enum ICONS {
-  log = 'console',
+  setlog = 'console',
   update = 'update',
+  showlog = 'bug',
 }
 
 interface SelectSettingEntry<T> {
@@ -33,6 +37,7 @@ const { getState, setState } = logStore;
 
 export default () => {
   const { t } = useTranslation();
+  const { OneWayAlert } = useAlert();
   const [currentSelectOption, setCurrentSelectOption] = React.useState<
     SelectSettingEntry<any>
   >(dummySelectSettingEntry);
@@ -80,7 +85,13 @@ export default () => {
       <ScrollView>
         <List.Section>
           {renderListItem(
-            ICONS.log,
+            ICONS.showlog,
+            'Log',
+            () => OneWayAlert('log', getLog()),
+            'DeveloperSettings'
+          )}
+          {renderListItem(
+            ICONS.setlog,
             'LogLevel',
             selectLogLevel,
             'DeveloperSettings'

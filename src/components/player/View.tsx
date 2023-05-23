@@ -1,15 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import TrackPlayer, { useActiveTrack } from 'react-native-track-player';
-import {
-  ActivityIndicator,
-  Linking,
-  SafeAreaView,
-  StatusBar,
-  StyleSheet,
-  View,
-  Text,
-} from 'react-native';
-import { useNavigation, ParamListBase } from '@react-navigation/native';
+import { SafeAreaView, StatusBar, View } from 'react-native';
+import { ParamListBase } from '@react-navigation/native';
+import CookieManager from '@react-native-cookies/cookies';
 
 import { TrackInfo } from './';
 import { SetupService } from '../../services';
@@ -27,7 +20,6 @@ interface props {
 
 export function Player({ navigation }: props) {
   const track = useActiveTrack();
-  const navigationGlobal = useNavigation();
   const playerStyle = useNoxSetting(state => state.playerStyle);
   // TODO: component
 
@@ -44,16 +36,19 @@ export function Player({ navigation }: props) {
 
 export function useSetupPlayer() {
   const [playerReady, setPlayerReady] = useState<boolean>(false);
-  const playerSetting = useNoxSetting(state => state.playerSetting);
   const initPlayer = useNoxSetting(state => state.initPlayer);
   const { updateVersion, checkVersion } = useVersionCheck();
 
   useEffect(() => {
     let unmounted = false;
     (async () => {
-      const { currentPlayingID, storedPlayerSetting } = await initPlayer(
-        await initPlayerObject()
-      );
+      const { currentPlayingID, storedPlayerSetting, cookies } =
+        await initPlayer(await initPlayerObject());
+      /**
+       * this doesnt even seems necessary?
+      for (const [key, value] of Object.entries(cookies)) {
+        CookieManager.setFromResponse(key, value);
+      } */
       await SetupService();
       updateVersion(storedPlayerSetting);
       checkVersion(true, storedPlayerSetting);

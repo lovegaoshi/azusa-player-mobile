@@ -2,7 +2,8 @@
   "_comment": "src/localization/en/translation.json",
   "appDrawer": {
     "homeScreenName": "音乐",
-    "settingScreenName": "设置"
+    "settingScreenName": "设置",
+    "LoginName": "b站登录"
   },
   "Dialog": {
     "ok": "好的",
@@ -85,6 +86,8 @@
     "fastBiliSearchDesc": "使用b站搜索时，不解析分p内容"
   },
   "DeveloperSettings": {
+    "LogName": "显示日志",
+    "LogDesc": "显示已经记录的日志",
     "LogLevelName": "日志等级",
     "LogLevelDesc": "设置日志等级",
     "VersionCheckName": "检查版本",
@@ -98,7 +101,7 @@
   },
   "Settings": {
     "GeneralSettingName": "播放器设置",
-    "GeneralSettingDesc": "杂七杂八的播放器设置",
+    "GeneralSettingDesc": "一般的播放器设置",
     "SkinSettingName": "播放器皮肤",
     "SkinSettingDesc": "选择你喜欢的管人皮肤",
     "BackupSettingName": "歌单备份",

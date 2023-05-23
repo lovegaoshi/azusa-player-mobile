@@ -28,6 +28,8 @@ declare namespace NoxStorage {
     playerRepeat: string;
     skin: NoxTheme.style;
     skins: any[];
-    lyricMapping: Map<string, NoxMedia.LyricDetail>;
+    // site: set-cookie header
+    cookies: { [key: string]: string };
+    lyricMapping: Map<string, NoxMedia.LyricDetail
   }
 }

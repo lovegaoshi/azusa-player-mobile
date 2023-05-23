@@ -4,17 +4,20 @@ export const DEFAULT_UA =
 interface props {
   method: string;
   headers: any;
-  body: any | undefined;
+  body?: any;
+  referrer?: string;
+  credentials?: RequestCredentials_;
 }
 
 export default async function BiliFetch(
   url: string,
-  params: props = {
+  paramsProp: props = {
     method: 'GET',
     headers: {},
-    body: undefined,
+    credentials: 'omit',
   }
 ) {
+  const params = { ...paramsProp };
   if (Object.entries(params.headers).length === 0) {
     params.headers = customReqHeader(url, params.headers);
   }
@@ -22,6 +25,20 @@ export default async function BiliFetch(
     'User-Agent': DEFAULT_UA,
     ...params.headers,
   });
+  // https://stackoverflow.com/questions/35325370/how-do-i-post-a-x-www-form-urlencoded-request-using-fetch
+
+  if (
+    params.body &&
+    params.headers.get('Content-Type') === 'application/x-www-form-urlencoded'
+  ) {
+    const formBody = [];
+    for (const [key, value] of Object.entries(params.body)) {
+      formBody.push(
+        encodeURIComponent(key) + '=' + encodeURIComponent(String(value))
+      );
+    }
+    params.body = formBody.join('&');
+  }
   return fetch(url, params);
 }
 
