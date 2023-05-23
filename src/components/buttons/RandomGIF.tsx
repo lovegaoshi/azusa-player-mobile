@@ -48,6 +48,7 @@ export default function RandomGIFButton({
       <FastImage
         style={{ width: 72, height: 72 }}
         source={{ uri: gifs[randomGIFSrc] }}
+        resizeMode={FastImage.resizeMode.contain}
       />
     </Pressable>
   );
