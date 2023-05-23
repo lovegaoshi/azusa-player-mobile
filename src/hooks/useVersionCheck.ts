@@ -1,8 +1,9 @@
 import { useTranslation } from 'react-i18next';
 import { Linking } from 'react-native';
+import Snackbar from 'react-native-snackbar';
 import { useNoxSetting } from './useSetting';
 import useAlert from '../components/dialogs/useAlert';
-import Snackbar from 'react-native-snackbar';
+import { VERSIONS } from '../enums/Version';
 
 export default () => {
   const playerSetting = useNoxSetting(state => state.playerSetting);
@@ -72,7 +73,7 @@ export default () => {
   };
 
   const updateVersion = async (currentPlayerSetting = playerSetting) => {
-    const latest = '0.0.1a';
+    const latest = VERSIONS.latest;
     switch (currentPlayerSetting.noxVersion) {
       case latest:
         return;
