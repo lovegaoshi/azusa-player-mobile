@@ -112,6 +112,17 @@
     "DeveloperOptionsDesc": "正在测试的功能",
     "FeatureNotImplemented": "功能孩妹实现"
   },
+  "Login": {
+    "BilibiliNotLoggedIn": "用户未登录",
+    "BilibiliLoginButton": "Click to log in",
+    "BilibiliCookieInputButton": "Click to manually input cookies",
+    "BilibiliCookieInputDialogTitle": "Add Bili Cookies",
+    "BilibiliLoginQRGeneration": "Generating QR code...",
+    "BilibiliLoginQRGenerated": "Scan QR code in Bilibili app to login",
+    "BilibiliLoginQRGenerateFailed": "Bilibili QR code generation failed. Please check network.",
+    "BilibiliLoginQRExpired": "Bilibili QR code expired. Regenerate to login.",
+    "BilibiliLoginProbeFailed": "Checking QR code login status failed. Please check network."
+  },
   "VersionUpdate": {
     "NoUpdates": "管人播放器已经是最新版本。\n当前版本：{{currentVersion}}",
     "UpdateCheckingSnackbar": "联网检查更新...",

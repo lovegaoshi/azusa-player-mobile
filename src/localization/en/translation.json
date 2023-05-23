@@ -113,7 +113,7 @@
     "FeatureNotImplemented": "Feature not implemented"
   },
   "Login": {
-    "BilibiliNotLoggedIn": "User not logged in\nLogging in will use YOUR account info while querying bilibiliAPI. but it does enable things like thumbsup.",
+    "BilibiliNotLoggedIn": "User not logged in\n",
     "BilibiliLoginButton": "Click to log in",
     "BilibiliCookieInputButton": "Click to manually input cookies",
     "BilibiliCookieInputDialogTitle": "Add Bili Cookies",
