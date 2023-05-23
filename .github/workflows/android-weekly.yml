@@ -30,7 +30,9 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-      
+      - name: Get current date
+        id: date
+        run: echo "::set-output name=date::$(date +'%Y-%m-%d')"      
       - name: set up JDK 18
         uses: actions/setup-java@v2
         with:
@@ -52,5 +54,6 @@ jobs:
       - name: Release
         uses: softprops/action-gh-release@v1
         with:
-          tag_name: weeklybuild
+          tag_name: weekly-build-${{ steps.date.outputs.date }}
           files: android/app/build/outputs/apk/release/app-release.apk
+          prerelease: true
