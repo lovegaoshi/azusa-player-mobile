@@ -61,7 +61,8 @@
     "removeBrokenTitle": "清除失效bv号",
     "reloadBVIDTitle": "重载bv号",
     "clearPlaylistTitle": "清空歌单",
-    "removePlaylistTitle": "删除歌单"
+    "removePlaylistTitle": "删除歌单",
+    "all": "所有歌单"
   },
   "SongOperations": {
     "songSendToTitle": "送往...",
@@ -114,14 +115,14 @@
   },
   "Login": {
     "BilibiliNotLoggedIn": "用户未登录",
-    "BilibiliLoginButton": "Click to log in",
-    "BilibiliCookieInputButton": "Click to manually input cookies",
-    "BilibiliCookieInputDialogTitle": "Add Bili Cookies",
-    "BilibiliLoginQRGeneration": "Generating QR code...",
-    "BilibiliLoginQRGenerated": "Scan QR code in Bilibili app to login",
-    "BilibiliLoginQRGenerateFailed": "Bilibili QR code generation failed. Please check network.",
-    "BilibiliLoginQRExpired": "Bilibili QR code expired. Regenerate to login.",
-    "BilibiliLoginProbeFailed": "Checking QR code login status failed. Please check network."
+    "BilibiliLoginButton": "扫码登录",
+    "BilibiliCookieInputButton": "手动填入cookie（推荐）",
+    "BilibiliCookieInputDialogTitle": "填入b站cookie",
+    "BilibiliLoginQRGeneration": "正在生成二维码...",
+    "BilibiliLoginQRGenerated": "在b站APP扫码登录",
+    "BilibiliLoginQRGenerateFailed": "b站二维码生成失败，请检查网络",
+    "BilibiliLoginQRExpired": "b站二维码过期了",
+    "BilibiliLoginProbeFailed": "检查二维码失败，请检查网络"
   },
   "VersionUpdate": {
     "NoUpdates": "管人播放器已经是最新版本。\n当前版本：{{currentVersion}}",

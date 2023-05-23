@@ -14,6 +14,7 @@ import AddPlaylistButton from '../buttons/AddPlaylistButton';
 import { STORAGE_KEYS } from '../../utils/ChromeStorage';
 import NewPlaylistDialog from '../dialogs/NewPlaylistDialog';
 import useAlert from '../dialogs/useAlert';
+import ShuffleAllButton from './ShuffleAllButton';
 
 export default (props: any) => {
   const navigation = useNavigation();
@@ -85,7 +86,7 @@ export default (props: any) => {
   };
 
   const searchPlaylistAsNewButton = () => (
-    <Pressable onPress={() => setNewPlaylistDialogOpen(true)} hitSlop={40}>
+    <Pressable onPress={() => setNewPlaylistDialogOpen(true)}>
       <IconButton icon="new-box" size={25} />
     </Pressable>
   );
@@ -123,8 +124,23 @@ export default (props: any) => {
       <DrawerItemList {...props} />
       <Divider></Divider>
       <DrawerItem
-        label=""
-        icon={() => <AddPlaylistButton ref={addPlaylistButtonRef} />}
+        label={() => (
+          <View
+            style={{
+              flexDirection: 'row',
+              alignContent: 'center',
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}
+          >
+            <ShuffleAllButton />
+            <AddPlaylistButton ref={addPlaylistButtonRef} />
+            <IconButton
+              icon="timer-outline"
+              onPress={() => console.log(1234)}
+            />
+          </View>
+        )}
         onPress={
           // HACK: tooo lazy to lift this state up...
           addPlaylistButtonRef.current

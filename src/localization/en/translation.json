@@ -61,7 +61,8 @@
     "removeBrokenTitle": "Remove Broken",
     "reloadBVIDTitle": "Reload Bvids",
     "clearPlaylistTitle": "Clear",
-    "removePlaylistTitle": "Remove"
+    "removePlaylistTitle": "Remove",
+    "all": "All"
   },
   "SongOperations": {
     "songSendToTitle": "Send to...",
