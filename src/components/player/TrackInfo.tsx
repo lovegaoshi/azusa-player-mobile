@@ -37,7 +37,7 @@ export const TrackInfo: React.FC<{
   };
 
   const onImagePress = () => {
-    console.log('TrackInfo: Image Clicked');
+    console.log('TrackInfo: Image Clicked - ', track);
     Animated.parallel([
       Animated.timing(opacity, {
         toValue: 0,
@@ -81,7 +81,7 @@ export const TrackInfo: React.FC<{
             ]}
             pointerEvents={isImageVisible ? 'none' : 'auto'}
           >
-            <LyricView onLyricPress={onImagePress} title={track?.title} />
+            <LyricView onLyricPress={onImagePress} track={track} />
           </View>
         </>
       )}
@@ -124,7 +124,6 @@ const styles = StyleSheet.create({
     height: albumArtSize,
     marginTop: 15,
     opacity: 1,
-    backgroundColor: 'grey',
   },
   lyric: {
     width: Dimensions.get('window').width,

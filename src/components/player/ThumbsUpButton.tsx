@@ -2,7 +2,7 @@ import React from 'react';
 import { Linking } from 'react-native';
 import TrackPlayer, { Track } from 'react-native-track-player';
 import { IconButton } from 'react-native-paper';
-import CookieManager from '@react-native-cookies/cookies';
+
 import {
   checkBVLiked,
   sendBVLike,
@@ -15,6 +15,8 @@ enum THUMBUPSTATUS {
   notLoggedIn = 'web-cancel',
   notThumbedUp = 'thumb-up-outline',
   ThumbedUp = 'thumb-up',
+  // TODO: make this not stupid....
+  Tripled = 'star-face',
 }
 
 // TODO: can be a util function
@@ -28,8 +30,7 @@ const checkLiked = async (song: NoxMedia.Song | undefined) => {
   }
 };
 
-const go2SongURL = async (song: NoxMedia.Song | undefined) => {
-  if (!song) return;
+const go2SongURL = async (song: NoxMedia.Song) => {
   const url = `https://www.bilibili.com/video/${song.bvid}`;
   await Linking.openURL(url);
 };
@@ -44,16 +45,26 @@ export default () => {
     undefined
   );
 
-  const onClick = async () => {
+  const onClick = async (triple = false) => {
     if (!currentTrack?.song) return;
     switch (status) {
       case THUMBUPSTATUS.notThumbedUp:
-        sendBVLike(currentTrack.song.bvid).then(val =>
-          console.log('bvlike', val)
-        );
+        sendBVLike(currentTrack.song.bvid).then((res) => {
+          if (res.code === 0) setStatus(THUMBUPSTATUS.ThumbedUp);
+        });
+        break;
+      case THUMBUPSTATUS.ThumbedUp:
+        if (triple) {
+          // TODO: use that starred lottie animation
+          sendBVTriple(currentTrack.song.bvid).then((res) => {
+            if (res.code === 0) setStatus(THUMBUPSTATUS.Tripled);
+          });
+        }
         break;
       default:
-        go2SongURL(currentTrack?.song);
+        if (currentTrack?.song) {
+          go2SongURL(currentTrack?.song);
+        }
     }
   };
 
@@ -79,7 +90,10 @@ export default () => {
   return (
     <IconButton
       icon={status}
-      onPress={onClick}
+      onPress={() => onClick()}
+      // TODO: use moti to make animation on triple
+      // https://github.com/nandorojo/moti/discussions/148 
+      onLongPress={() => onClick(true)}
       mode={playerStyle.playerControlIconContained}
       size={30}
       style={{

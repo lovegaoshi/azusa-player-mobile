@@ -25,4 +25,10 @@ declare namespace NoxMedia {
     lastSubscribed: number;
     type: string;
   }
+
+  export interface LyricDetail {
+    songId: string;
+    lyricKey: string;
+    lyricOffset: number;
+  }
 }
