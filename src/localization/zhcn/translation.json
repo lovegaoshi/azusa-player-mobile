@@ -83,6 +83,8 @@
     "hideCoverInMobileDesc": "移动端不显示歌封面",
     "dataSaverName": "省流模式",
     "dataSaverDesc": "解析低质量素材节省流量",
+    "noCookieBiliSearchName": "个性化b站搜索结果",
+    "noCookieBiliSearchDesc": "搜索b站时提交cookies获得个性化搜索结果",
     "fastBiliSearchName": "快速b站搜索",
     "fastBiliSearchDesc": "使用b站搜索时，不解析分p内容"
   },

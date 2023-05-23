@@ -83,6 +83,8 @@
     "hideCoverInMobileDesc": "Hide the album cover.",
     "dataSaverName": "Data Saver",
     "dataSaverDesc": "Render low quality assets to save data.",
+    "noCookieBiliSearchName": "Bilibili Customized Search",
+    "noCookieBiliSearchDesc": "Enable credentials in bilibili search to show customized searchresults",
     "fastBiliSearchName": "Fast Bilibili Search",
     "fastBiliSearchDesc": "Do not search for bilibili video episodes."
   },

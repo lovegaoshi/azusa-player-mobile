@@ -11,6 +11,7 @@ declare namespace NoxStorage {
     hideCoverInMobile: boolean;
     loadPlaylistAsArtist: boolean;
     sendBiliHeartbeat: boolean;
+    // TODO: implement this feature
     noCookieBiliSearch: boolean;
     // TODO: implement this feature
     dataSaver: boolean;
