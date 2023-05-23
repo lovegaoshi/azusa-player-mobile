@@ -8,17 +8,18 @@ import { useNoxSetting } from '../../hooks/useSetting';
 import { songlistToTracklist } from '../../objects/Playlist';
 import { randomChoice } from '../../utils/Utils';
 import { ViewEnum } from '../../enums/View';
-import { STORAGE_KEYS } from '../../utils/ChromeStorage';
 
 export default () => {
   const navigation = useNavigation();
   const { t } = useTranslation();
   const playlists = useNoxSetting(state => state.playlists);
   const playlistIds = useNoxSetting(state => state.playlistIds);
+  const searchPlaylist = useNoxSetting(state => state.searchPlaylist);
   const setCurrentPlayingList = useNoxSetting(
     state => state.setCurrentPlayingList
   );
   const setCurrentPlayingId = useNoxSetting(state => state.setCurrentPlayingId);
+  const setSearchPlaylist = useNoxSetting(state => state.setSearchPlaylist);
 
   const shuffleAll = async () => {
     await TrackPlayer.reset();
@@ -26,11 +27,13 @@ export default () => {
       (acc, curr) => acc.concat(playlists[curr].songList),
       [] as NoxMedia.Song[]
     );
-    setCurrentPlayingList({
-      ...playlists[STORAGE_KEYS.SEARCH_PLAYLIST_KEY],
+    const newSearchPlaylist = {
+      ...searchPlaylist,
       title: String(t('PlaylistOperations.all')),
       songList: allSongs,
-    });
+    };
+    setSearchPlaylist(newSearchPlaylist);
+    setCurrentPlayingList(newSearchPlaylist);
     const song = randomChoice(allSongs);
     setCurrentPlayingId(song.id);
     await TrackPlayer.add(songlistToTracklist([song]));

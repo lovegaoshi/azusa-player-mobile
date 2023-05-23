@@ -62,7 +62,8 @@
     "reloadBVIDTitle": "重载bv号",
     "clearPlaylistTitle": "清空歌单",
     "removePlaylistTitle": "删除歌单",
-    "all": "所有歌单"
+    "all": "所有歌单",
+    "searchListName": "搜索歌单"
   },
   "SongOperations": {
     "songSendToTitle": "送往...",

@@ -62,7 +62,8 @@
     "reloadBVIDTitle": "Reload Bvids",
     "clearPlaylistTitle": "Clear",
     "removePlaylistTitle": "Remove",
-    "all": "All"
+    "all": "All",
+    "searchListName": "Search"
   },
   "SongOperations": {
     "songSendToTitle": "Send to...",

@@ -33,6 +33,7 @@ export default ({
     onSearched(searchedResult);
     const newSearchPlaylist = {
       ...searchPlaylist,
+      title: t('PlaylistOperations.searchListName'),
       songList: searchedResult,
       subscribeUrl: val.includes('http') ? [val] : [],
     };
