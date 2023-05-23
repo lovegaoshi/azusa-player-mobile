@@ -60,6 +60,7 @@ export default ({ navigation }: props) => {
   const [inputCookieVisible, setInputCookieVisible] = React.useState(false);
 
   const getBiliLoginStatus = async () => {
+    setInitialize(true);
     const loginSuccess = (json: any) => json.code === 0 && json.data.isLogin;
     const parseJSON = (json: any) => {
       return {
@@ -143,6 +144,23 @@ export default ({ navigation }: props) => {
         text: t('Login.BilibiliLoginProbeFailed'),
       });
     }
+  };
+
+  const manualInputCookies = async (input: { [key: string]: string }) => {
+    if (input.SESSDATA.length > 0 && input.bili_jct.length > 0) {
+      await CookieManager.set(domain, {
+        name: 'SESSDATA',
+        value: input.SESSDATA,
+      });
+      await CookieManager.set(domain, {
+        name: 'bili_jct',
+        value: input.bili_jct,
+      });
+      logger.debug(await CookieManager.get(domain));
+      clearQRLogin();
+      getBiliLoginStatus();
+    }
+    setInputCookieVisible(false);
   };
 
   // check QR login status every 4 seconds
@@ -269,22 +287,7 @@ export default ({ navigation }: props) => {
         visible={inputCookieVisible}
         title={String(t('Login.BilibiliCookieInputDialogTitle'))}
         onClose={() => setInputCookieVisible(false)}
-        onSubmit={async (input: { [key: string]: string }) => {
-          if (input.SESSDATA.length > 0 && input.bili_jct.length > 0) {
-            await CookieManager.set(domain, {
-              name: 'SESSDATA',
-              value: input.SESSDATA,
-            });
-            await CookieManager.set(domain, {
-              name: 'bili_jct',
-              value: input.bili_jct,
-            });
-            logger.debug(await CookieManager.get(domain));
-            clearQRLogin();
-            getBiliLoginStatus();
-          }
-          setInputCookieVisible(false);
-        }}
+        onSubmit={manualInputCookies}
       ></GenericInputDialog>
     </SafeAreaView>
   );
