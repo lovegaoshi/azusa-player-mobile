@@ -11,6 +11,7 @@ declare namespace NoxStorage {
     hideCoverInMobile: boolean;
     loadPlaylistAsArtist: boolean;
     sendBiliHeartbeat: boolean;
+    // TODO: implement this feature
     noCookieBiliSearch: boolean;
     // TODO: implement this feature
     dataSaver: boolean;
@@ -30,6 +31,6 @@ declare namespace NoxStorage {
     skins: any[];
     // site: set-cookie header
     cookies: { [key: string]: string };
-    lyricMapping: Map<string, NoxMedia.LyricDetail
+    lyricMapping: Map<string, NoxMedia.LyricDetail>;
   }
 }

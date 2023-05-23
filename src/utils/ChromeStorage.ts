@@ -5,6 +5,7 @@ import { NoxRepeatMode } from '../components/player/enums/RepeatMode';
 import { PLAYLIST_ENUMS } from '../enums/Playlist';
 import AzusaTheme from '../components/styles/AzusaTheme';
 import { chunkArray as chunkArrayRaw } from '../utils/Utils';
+import { VERSIONS } from '../enums/Version';
 /**
  * noxplayer's storage handler.
  * ChromeStorage has quite a few changes from azusa player the chrome extension;
@@ -47,8 +48,8 @@ export const DEFAULT_SETTING: NoxStorage.PlayerSettingDict = {
   keepSearchedSongListWhenPlaying: false,
   settingExportLocation: EXPORT_OPTIONS.LOCAL,
   personalCloudIP: '',
-  noxVersion: 'latest',
-  noxCheckedVersion: 'latest',
+  noxVersion: VERSIONS.latest,
+  noxCheckedVersion: VERSIONS.latest,
   hideCoverInMobile: false,
   loadPlaylistAsArtist: false,
   sendBiliHeartbeat: false,
@@ -238,8 +239,12 @@ export const savePlayMode = async (val: string) =>
 
 export const initPlayerObject =
   async (): Promise<NoxStorage.PlayerStorageObject> => {
-    // eslint-disable-next-line prefer-const
-    let playerObject = {
+    const lyricMappingDict = (await getLyricMapping()) || {};
+    const lyricMapping = new Map<string, NoxMedia.LyricDetail>();
+    for (const [key, value] of Object.entries(lyricMappingDict)) {
+      lyricMapping.set(key, value as NoxMedia.LyricDetail);
+    }
+    const playerObject = {
       settings: {
         ...DEFAULT_SETTING,
         ...((await getItem(STORAGE_KEYS.PLAYER_SETTING_KEY)) || {}),
@@ -262,8 +267,7 @@ export const initPlayerObject =
       skin: (await getItem(STORAGE_KEYS.SKIN)) || AzusaTheme,
       skins: (await getPlayerSkins()) || [],
       cookies: (await getItem(STORAGE_KEYS.COOKIES)) || {},
-      lyricMapping:
-        (await getLyricMapping()) || new Map<string, NoxMedia.LyricDetail>(),
+      lyricMapping,
     } as NoxStorage.PlayerStorageObject;
 
     playerObject.playlists[STORAGE_KEYS.SEARCH_PLAYLIST_KEY] =

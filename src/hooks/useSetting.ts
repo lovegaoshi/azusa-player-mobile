@@ -12,7 +12,7 @@ import {
   savelastPlaylistId,
   savePlayerSkin,
   savePlayerSkins,
-  saveLyricMapping
+  saveLyricMapping,
 } from '../utils/ChromeStorage';
 import { createStyle } from '../components/style';
 import noxPlayingList, { setPlayingList } from '../store/playingList';
@@ -69,8 +69,8 @@ interface NoxSetting {
   addPlaylist: (val: NoxMedia.Playlist) => void;
   removePlaylist: (val: string) => void;
 
-  lyricMapping: Map<string, NoxMedia.LyricDetail>
-  setLyricMapping: (val: NoxMedia.LyricDetail) => void
+  lyricMapping: Map<string, NoxMedia.LyricDetail>;
+  setLyricMapping: (val: NoxMedia.LyricDetail) => void;
 
   /**
    * updates a playlist with songs added and removed, and saves it. addSongs are added at the front.
@@ -225,14 +225,12 @@ export const useNoxSetting = create<NoxSetting>((set, get) => ({
     set({ playlistShouldReRender: !get().playlistShouldReRender });
   },
 
-  lyricMapping: new Map<string, NoxMedia.LyricDetail>,
-  setLyricMapping: (
-    val: NoxMedia.LyricDetail
-  ) => {
-    let lyricMapping = get().lyricMapping
-    lyricMapping.set(val.songId, val)
-    set({lyricMapping})
-    saveLyricMapping(lyricMapping)
+  lyricMapping: new Map<string, NoxMedia.LyricDetail>(),
+  setLyricMapping: (val: NoxMedia.LyricDetail) => {
+    let lyricMapping = get().lyricMapping;
+    lyricMapping.set(val.songId, val);
+    set({ lyricMapping });
+    saveLyricMapping(lyricMapping);
   },
 
   initPlayer: async (val: NoxStorage.PlayerStorageObject) => {
@@ -261,7 +259,7 @@ export const useNoxSetting = create<NoxSetting>((set, get) => ({
       (val.playlists[val.lastPlaylistId[0]] || val.searchPlaylist).songList
     );
     setState({ playmode: val.playerRepeat });
-    set({ lyricMapping: val.lyricMapping || new Map<string, NoxMedia.LyricDetail>})
+    set({ lyricMapping: val.lyricMapping });
     return {
       playlists: val.playlists,
       currentPlayingList: playingList,

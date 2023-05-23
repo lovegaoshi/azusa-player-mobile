@@ -61,7 +61,9 @@
     "removeBrokenTitle": "Remove Broken",
     "reloadBVIDTitle": "Reload Bvids",
     "clearPlaylistTitle": "Clear",
-    "removePlaylistTitle": "Remove"
+    "removePlaylistTitle": "Remove",
+    "all": "All",
+    "searchListName": "Search"
   },
   "SongOperations": {
     "songSendToTitle": "Send to...",
@@ -82,6 +84,8 @@
     "hideCoverInMobileDesc": "Hide the album cover.",
     "dataSaverName": "Data Saver",
     "dataSaverDesc": "Render low quality assets to save data.",
+    "noCookieBiliSearchName": "Bilibili Customized Search",
+    "noCookieBiliSearchDesc": "Enable credentials in bilibili search to show customized searchresults",
     "fastBiliSearchName": "Fast Bilibili Search",
     "fastBiliSearchDesc": "Do not search for bilibili video episodes."
   },
@@ -113,7 +117,7 @@
     "FeatureNotImplemented": "Feature not implemented"
   },
   "Login": {
-    "BilibiliNotLoggedIn": "User not logged in\nLogging in will use YOUR account info while querying bilibiliAPI. but it does enable things like thumbsup.",
+    "BilibiliNotLoggedIn": "User not logged in\n",
     "BilibiliLoginButton": "Click to log in",
     "BilibiliCookieInputButton": "Click to manually input cookies",
     "BilibiliCookieInputDialogTitle": "Add Bili Cookies",

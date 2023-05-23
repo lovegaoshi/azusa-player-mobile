@@ -694,6 +694,7 @@ export const fetchBiliSearchList = async (
           referer: 'https://www.bilibili.com',
           cookie: 'buvid3=coolbeans',
         },
+        credentials: 'omit',
       },
       resolveBiliBVID: fastSearch
         ? async (bvobjs, progressEmitter) => await fastSearchResolveBVID(bvobjs)

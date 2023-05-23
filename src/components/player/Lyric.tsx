@@ -16,7 +16,6 @@ import { searchLyricOptions, searchLyric } from '../../utils/Data';
 import { reExtractSongName } from '../../utils/re';
 import { IconButton } from 'react-native-paper';
 import { useNoxSetting } from '../../hooks/useSetting';
-import { updateFields } from '@/utils/Utils';
 
 const LYRIC_OFFSET_INTERVAL = 0.5;
 
@@ -26,8 +25,14 @@ interface ModalContainerProps {
   onRequestClose: () => void;
 }
 
-const useHasLrcFromLocal = (track:Track, lyricMapping:Map<string, NoxMedia.LyricDetail>) => {
-  return useMemo(() => lyricMapping.has(track?.song?.id), [track, lyricMapping]);
+const useHasLrcFromLocal = (
+  track: Track,
+  lyricMapping: Map<string, NoxMedia.LyricDetail>
+) => {
+  return useMemo(
+    () => lyricMapping.has(track?.song?.id),
+    [track, lyricMapping]
+  );
 };
 
 export const ModalContainer: React.FC<ModalContainerProps> = ({
@@ -71,17 +76,17 @@ export const LyricView = ({
 
   useEffect(() => {
     if (track !== undefined && track.title !== '') {
-      console.log('Initiating Lyric with new track...')
-      setCurrentTimeOffset(0)
-      setLrcOption(null)
-      setLrc('正在加载歌词...')
+      console.log('Initiating Lyric with new track...');
+      setCurrentTimeOffset(0);
+      setLrcOption(null);
+      setLrc('正在加载歌词...');
       // Initialize from storage if not new
       if (hasLrcFromLocal()) {
-        console.log('Loading Lrc from localStorage...')
+        console.log('Loading Lrc from localStorage...');
         const lrcDetail = lyricMapping.get(track?.song.id);
         searchLyric(lrcDetail?.lyricKey, setLrc);
-        setLrcOption({key:lrcDetail?.lyricKey})
-        setCurrentTimeOffset(lrcDetail!.lyricOffset)
+        setLrcOption({ key: lrcDetail?.lyricKey });
+        setCurrentTimeOffset(lrcDetail!.lyricOffset);
       }
       fetchAndSetLyricOptions();
     }
@@ -96,7 +101,7 @@ export const LyricView = ({
   };
 
   const updateLyricMapping = () => {
-    if(lrcOption !== null && lrcOption !== undefined){
+    if (lrcOption !== null && lrcOption !== undefined) {
       const newLrcDetail: NoxMedia.LyricDetail = {
         songId: track.song.id,
         lyricKey: lrcOption.key,
@@ -132,27 +137,25 @@ export const LyricView = ({
   const searchAndSetCurrentLyric = (index?: number) => {
     console.log('lrcoptions:', lrcOptions);
 
-    index = index === undefined ? 0 : index
-    if (lrcOptions.length == 0) 
-      setLrc('无法找到歌词,请手动搜索...')
-    else{
+    index = index === undefined ? 0 : index;
+    if (lrcOptions.length == 0) setLrc('无法找到歌词,请手动搜索...');
+    else {
       searchLyric(lrcOptions[index!].songMid, setLrc);
-      setLrcOption(lrcOptions[index!])
-      updateLyricMapping()
+      setLrcOption(lrcOptions[index!]);
+      updateLyricMapping();
     }
-    
   };
 
-  const LyricOptions = (key: String) => {
+  const LyricOptions = (key: string) => {
     setModalVisible(false);
     switch (key) {
       case 'LyricOptions': {
         setLyricSearchModalVisible(true);
-        break
+        break;
       }
       case 'LyricOffset': {
         setOffsetModalVisible(true);
-        break
+        break;
       }
     }
   };

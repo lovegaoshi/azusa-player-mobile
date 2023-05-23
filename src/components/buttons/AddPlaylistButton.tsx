@@ -4,22 +4,15 @@ import Dialog from '../dialogs/NewPlaylistDialog';
 
 const ICON = 'plus-circle-outline';
 
+interface props {
+  fromList?: NoxMedia.Playlist;
+  icon?: string;
+  // TODO: really object?
+  style?: object;
+}
+
 export default React.forwardRef(
-  (
-    {
-      fromList,
-      icon = ICON,
-      size = 30,
-      style = { position: 'absolute', right: 100 },
-    }: {
-      fromList?: NoxMedia.Playlist;
-      icon?: string;
-      size?: number;
-      // TODO: really object?
-      style?: object;
-    },
-    ref
-  ) => {
+  ({ fromList, icon = ICON, style = {} }: props, ref) => {
     const [dialogOpen, setDialogOpen] = useState(false);
     useImperativeHandle(ref, () => ({ setOpen: () => setDialogOpen(true) }), [
       dialogOpen,
@@ -30,7 +23,6 @@ export default React.forwardRef(
         <IconButton
           icon={icon}
           onPress={() => setDialogOpen(true)}
-          size={size}
           style={style}
         />
         <Dialog
