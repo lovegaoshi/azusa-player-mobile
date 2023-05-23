@@ -442,7 +442,7 @@ export const fetchBiliPaginatedAPI = async ({
     ),
 }) => {
   const res = await bfetch(url.replace('{pn}', 1), params);
-  const { data } = await extract509Json(res.clone());
+  const { data } = await res.clone().json();
   const mediaCount = getMediaCount(data);
   const BVids = [];
   const pagesPromises = [res];
@@ -458,7 +458,7 @@ export const fetchBiliPaginatedAPI = async ({
   const resolvedPromises = await Promise.all(pagesPromises);
   await Promise.all(
     resolvedPromises.map(async pages => {
-      return extract509Json(pages)
+      return pages.json()
         .then(parsedJson => {
           console.debug('jsion', parsedJson);
           getItems(parsedJson).forEach(m => {
@@ -707,15 +707,9 @@ export const fetchBiliSearchList = async (
 };
 
 /**
- * resolves fetchbilichannel 509 problem.
- * 509 problem is bilibili started to obfuscate responses of
- * URL_BILICHANNEL_INFO by adding {code:-509,msg:"too many requests"} to the
- * actual response JSON text string. I didnt figure out what is the safe
- * timeout but i assume its a lot. Plus, Bilibili doesnt care and only actually
- * aborts/bans IP until ~200 pages were queried. So the solution is to get the res text,
- * check if it has the code:-509 garbage, remove it, then JSON.parse as usual.
- * assumes special char \n and \r are the only ones to be taken
- * care of. if breaks, use a regex...
+ * used to resolve a bilibili 509 error.
+ * now bili completely switched to wbi signatures,
+ * leaving this for legacy reasons in case we have this stupid problem
  * @param {} res
  * @returns
  */
