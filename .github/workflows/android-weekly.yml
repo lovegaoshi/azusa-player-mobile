@@ -29,12 +29,9 @@ jobs:
         
       - name: react-native build
         run: npx react-native bundle --platform android --dev false --entry-file index.js --bundle-output android/app/src/main/assets/index.android.bundle --assets-dest android/app/src/main/res/
-      
-      - name: chmod gradlew
-        run: chmod +x gradlew
 
       - name: gradle build
-        run: cd android && ./gradlew assembleRelease
+        run: cd android && chmod +x gradlew && ./gradlew assembleRelease
         
       - name: Release
         uses: softprops/action-gh-release@v1
