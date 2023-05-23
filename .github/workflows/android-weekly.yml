@@ -1,0 +1,31 @@
+name: android weekly
+on:
+  schedule:
+    - cron: "0 0 * * 1"
+    
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      
+      - name: set up JDK 1.8
+        uses: actions/setup-java@v1
+        with:
+          java-version: 1.8
+
+      - name: Install dependencies
+        run: yarn
+        
+      - name: mkdir
+        run: mkdir android/app/src/main/assets
+        
+      - name: react-native build
+        run: npx react-native bundle --platform android --dev false --entry-file index.js --bundle-output android/app/src/main/assets/index.android.bundle --assets-dest android/app/src/main/res/
+
+      - name: gradle build
+        run: cd android && ./gradlew assembleRelease
+        
