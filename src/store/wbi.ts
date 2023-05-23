@@ -103,7 +103,7 @@ const wbiRefreshWrapper: any = async (
     return json;
 } 
 
-export const wbiQuery = async (url: string, URLParams: any, fetchParams?: any) => {
+export const wbiQuery = async (url: string, URLParams: {[key: string]: string}, fetchParams?: NoxNetwork.RequestInit) => {
     return wbiRefreshWrapper(() => bfetch(`${url}?${encWbi(URLParams)}`, fetchParams));
 }
 getWbiKeys();
