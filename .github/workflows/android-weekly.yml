@@ -52,7 +52,4 @@ jobs:
         uses: softprops/action-gh-release@v1
         with:
           tag_name: weeklybuild
-          files: app/build/outputs/apk/app-release.apk
-          
-      - name: Setup tmate session
-        uses: mxschmitt/action-tmate@v3
+          files: android/app/build/outputs/apk/release/app-release.apk
