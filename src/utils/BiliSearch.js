@@ -125,7 +125,7 @@ const reExtractSearch = async ({
  */
 export const searchBiliURLs = async ({
   input,
-  progressEmitter = () => void 0,
+  progressEmitter = () => undefined,
   favList = [],
   useBiliTag = false,
   fastSearch = false,

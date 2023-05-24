@@ -18,7 +18,7 @@ export const RenameSongMenuItem = ({
   getSongOnClick,
   disabled = false,
   onSubmit = (rename: string) => console.log(rename),
-  onCancel = () => void 0,
+  onCancel = () => undefined,
 }: menuProps) => {
   const { t } = useTranslation();
   const [dialogOpen, setDialogOpen] = useState(false);

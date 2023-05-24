@@ -119,7 +119,7 @@ export const useNoxSetting = create<NoxSetting>((set, get) => ({
   searchBarProgress: 0,
   searchBarProgressEmitter: (val: number) => {
     set({ searchBarProgress: val / 100 });
-    return void 0;
+    return undefined;
   },
   songMenuCoords: { x: 0, y: 0 },
   setSongMenuCoords: (val: NoxTheme.coordinates) =>

@@ -28,7 +28,7 @@ interface props {
 export default function RandomGIFButton({
   gifs,
   favList,
-  onClickCallback = () => void 0,
+  onClickCallback = () => undefined,
 }: props) {
   const [randomGIFSrc, setRandomGIFSrc] = useState(
     getRandomNumberExclude(gifs.length, -1)

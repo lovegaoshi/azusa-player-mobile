@@ -22,8 +22,8 @@ export default ({
   renderOptionTitle = val => String(val),
   title = undefined,
   defaultIndex = 0,
-  onClose = (index?: number) => void 0,
-  onSubmit = (index: number) => void 0,
+  onClose = (index?: number) => undefined,
+  onSubmit = (index: number) => undefined,
 }: // whelp. i tried.
 props<any>) => {
   const { t } = useTranslation();

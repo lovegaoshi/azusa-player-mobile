@@ -30,8 +30,8 @@ interface props {
 export default ({
   checking = false,
   checked = [],
-  resetChecked = () => void 0,
-  handleSearch = () => void 0,
+  resetChecked = () => undefined,
+  handleSearch = () => undefined,
 }: props) => {
   const { t } = useTranslation();
   const songMenuVisible = useNoxSetting(state => state.songMenuVisible);

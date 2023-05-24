@@ -20,8 +20,8 @@ interface props {
 export default ({
   visible,
   song,
-  onClose = () => void 0,
-  onSubmit = (rename: string) => void 0,
+  onClose = () => undefined,
+  onSubmit = (rename: string) => undefined,
 }: props) => {
   const { t } = useTranslation();
   const [name, setName] = useState(song.name);

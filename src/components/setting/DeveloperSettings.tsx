@@ -29,8 +29,8 @@ const dummySelectSettingEntry: SelectSettingEntry<string> = {
   options: [],
   renderOption: () => '',
   defaultIndex: 0,
-  onClose: () => void 0,
-  onSubmit: () => void 0,
+  onClose: () => undefined,
+  onSubmit: () => undefined,
 };
 
 const { getState, setState } = logStore;
@@ -111,7 +111,7 @@ export default () => {
         defaultIndex={currentSelectOption.defaultIndex}
         onClose={currentSelectOption.onClose}
         onSubmit={currentSelectOption.onSubmit}
-      ></GenericSelectDialog>
+      />
     </View>
   );
 };

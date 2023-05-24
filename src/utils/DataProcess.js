@@ -42,7 +42,7 @@ export const getBiliShazamedSongname = async info => {
 export const biliShazamOnSonglist = async (
   songlist,
   forced = false,
-  progressEmitter = val => void 0
+  progressEmitter = val => undefined
 ) => {
   const newSongList = songlist.map((song, index) => {
     if (song.biliShazamedName === undefined || forced) {
@@ -227,7 +227,7 @@ export const getSongsFromSteriaPlayer = async infos => {
 export const getBiliSeriesList = async ({
   mid,
   sid,
-  progressEmitter = () => void 0,
+  progressEmitter = () => undefined,
   favList = [],
   useBiliTag = false,
 }) => {
@@ -239,7 +239,7 @@ export const getBiliSeriesList = async ({
 
 export const getFavList = async ({
   mid,
-  progressEmitter = () => void 0,
+  progressEmitter = () => undefined,
   favList = [],
   useBiliTag = false,
 }) => {
@@ -252,7 +252,7 @@ export const getFavList = async ({
 export const getBiliColleList = async ({
   mid,
   sid,
-  progressEmitter = () => void 0,
+  progressEmitter = () => undefined,
   favList = [],
   useBiliTag = false,
 }) => {
@@ -264,7 +264,7 @@ export const getBiliColleList = async ({
 
 export const getBiliChannelList = async ({
   url,
-  progressEmitter = () => void 0,
+  progressEmitter = () => undefined,
   favList = [],
   useBiliTag = false,
 }) => {
@@ -276,7 +276,7 @@ export const getBiliChannelList = async ({
 
 export const getBilSearchList = async ({
   mid,
-  progressEmitter = () => void 0,
+  progressEmitter = () => undefined,
   useBiliTag = false,
   fastSearch = false,
 }) => {
@@ -288,7 +288,7 @@ export const getBilSearchList = async ({
 
 export const getBVIDList = async ({
   bvids,
-  progressEmitter = val => void 0,
+  progressEmitter = val => undefined,
   favList = [],
   useBiliTag = false,
 }) => {

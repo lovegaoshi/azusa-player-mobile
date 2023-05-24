@@ -67,7 +67,7 @@ interface FetcherProps {
  * generic paginated API resolver.
  * using biliChannel for dev example:
  * API url can be found here:
- * 
+ *
  */
 export const fetchPaginatedAPI = async ({
   url,
@@ -75,7 +75,7 @@ export const fetchPaginatedAPI = async ({
   getPageSize,
   getItems,
   resolveBiliBVID,
-  progressEmitter = () => void 0,
+  progressEmitter = () => undefined,
   favList = [],
   limiter = pageAPILimiter,
   params = undefined,
@@ -121,7 +121,7 @@ export const fetchPaginatedAPI = async ({
 };
 
 /**
- * instead of fetching all pages with promise.all, 
+ * instead of fetching all pages with promise.all,
  * this fetches pages with for of and achieves process
  * control to stop fetching when the first bvid is encountered.
  */
@@ -131,7 +131,7 @@ export const fetchAwaitPaginatedAPI = async ({
   getPageSize,
   getItems,
   resolveBiliBVID,
-  progressEmitter = () => void 0,
+  progressEmitter = () => undefined,
   favList = [],
   limiter = pageAPILimiter,
   params = undefined,
@@ -150,19 +150,21 @@ export const fetchAwaitPaginatedAPI = async ({
       page++
     ) {
       try {
-        const pageRes = await limiter.schedule(() => bfetch(url.replace('{pn}', String(page)), params)) as Response;
+        const pageRes = (await limiter.schedule(() =>
+          bfetch(url.replace('{pn}', String(page)), params)
+        )) as Response;
         const parsedJson = await jsonify(pageRes);
         for (const m of getItems(parsedJson)) {
           if (favList.includes(getBVID(m))) {
             return;
           }
           BVids.push(m);
-        }  
+        }
       } catch (e) {
         console.error('resolving page in fetchAwaitedPaginatedAPI', e);
       }
     }
-  }
+  };
   await resolvePage();
   // i dont know the smart way to do this out of the async loop, though luckily that O(2n) isnt that big of a deal
   return (await resolveBiliBVID(BVids, progressEmitter)).filter(

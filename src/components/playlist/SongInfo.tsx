@@ -16,7 +16,7 @@ function SongInfo({
   playSong,
   checkedList,
   checking = false,
-  onChecked = () => void 0,
+  onChecked = () => undefined,
 }: {
   item: NoxMedia.Song;
   index: number;

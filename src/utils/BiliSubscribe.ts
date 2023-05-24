@@ -15,7 +15,7 @@ export const updateSubscribeFavList = async ({
   listObj,
   subscribeUrls,
   updatePlaylist,
-  progressEmitter = () => void 0,
+  progressEmitter = () => undefined,
 }: props) => {
   try {
     const oldListLength = listObj.songList.length;

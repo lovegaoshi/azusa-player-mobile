@@ -12,8 +12,8 @@ interface menuProps {
 
 export default ({
   disabled = false,
-  onSubmit = (playlist: NoxMedia.Playlist) => void 0,
-  onCancel = () => void 0,
+  onSubmit = (playlist: NoxMedia.Playlist) => undefined,
+  onCancel = () => undefined,
 }: menuProps) => {
   const [dialogOpen, setDialogOpen] = useState(false);
 

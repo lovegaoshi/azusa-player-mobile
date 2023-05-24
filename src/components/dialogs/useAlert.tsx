@@ -12,7 +12,7 @@ export default () => {
     Alert.alert(title, message, [
       {
         text: String(t('Dialog.cancel')),
-        onPress: () => void 0,
+        onPress: () => undefined,
         style: 'cancel',
       },
       {

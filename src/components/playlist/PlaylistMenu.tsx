@@ -32,7 +32,7 @@ interface props {
 
 export default ({
   visible = false,
-  toggleVisible = () => void 0,
+  toggleVisible = () => undefined,
   menuCoords = { x: 0, y: 0 },
 }: props) => {
   const { t } = useTranslation();

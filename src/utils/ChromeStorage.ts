@@ -35,18 +35,12 @@ export enum STORAGE_KEYS {
   LYRIC_MAPPING = 'LyricMapping',
 }
 
-export enum EXPORT_OPTIONS {
-  LOCAL = '本地',
-  DROPBOX = 'Dropbox',
-  PERSONAL = '私有云',
-}
-
 export const DEFAULT_SETTING: NoxStorage.PlayerSettingDict = {
   autoRSSUpdate: false,
   skin: '诺莺nox',
   parseSongName: false,
   keepSearchedSongListWhenPlaying: false,
-  settingExportLocation: EXPORT_OPTIONS.LOCAL,
+  settingExportLocation: NoxStorage.EXPORT_OPTIONS.LOCAL,
   personalCloudIP: '',
   noxVersion: VERSIONS.latest,
   noxCheckedVersion: VERSIONS.latest,

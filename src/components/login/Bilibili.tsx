@@ -165,7 +165,7 @@ export default ({ navigation }: props) => {
 
   // check QR login status every 4 seconds
   React.useEffect(() => {
-    if (qrcodeExpire < 0) return () => void 0;
+    if (qrcodeExpire < 0) return () => undefined;
     const timer = setInterval(() => {
       setQrCodeExpire(val => val - 4);
       if (qrcodeExpire === 0) {

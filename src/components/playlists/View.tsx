@@ -135,7 +135,7 @@ export default (props: any) => {
           // HACK: tooo lazy to lift this state up...
           addPlaylistButtonRef.current
             ? () => addPlaylistButtonRef.current!.setOpen()
-            : () => void 0
+            : () => undefined
         }
       >
         <View
