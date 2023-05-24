@@ -1,31 +1,26 @@
-// @ts-nocheck
 import React, { useContext, useState } from 'react';
-import CloudUploadIcon from '@mui/icons-material/CloudUpload';
-import CloudDownloadIcon from '@mui/icons-material/CloudDownload';
-import IconButton from '@mui/material/IconButton';
-import Tooltip from '@mui/material/Tooltip';
-import { useSnackbar } from 'notistack';
-import CircularProgress from '@mui/material/CircularProgress';
-import TextField from '@mui/material/TextField';
-import { noxBackup, noxRestore } from '../../../utils/PersonalCloudAuth';
-import { StorageManagerCtx } from '../../../contexts/StorageManagerContext';
+import Snackbar from 'react-native-snackbar';
+import { View } from 'react-native';
+import { IconButton, TextInput } from 'react-native-paper';
 
-export function ImportSyncFavButton(
-  AddFavIcon: Object,
-  cloudAddress: string | undefined = undefined
-) {
-  const StorageManager = useContext(StorageManagerCtx);
-  const { enqueueSnackbar, closeSnackbar } = useSnackbar();
+import { noxBackup, noxRestore } from './PersonalCloudAuth';
+import { useNoxSetting } from '../../../hooks/useSetting';
+import { logger } from '../../../utils/Logger';
+import {
+  exportPlayerContent,
+  importPlayerContent,
+} from '../../../utils/ChromeStorage';
+
+export const ImportSyncFavButton = (cloudAddress: string) => {
   const [loading, setLoading] = useState(false);
+  const initPlayer = useNoxSetting(state => state.initPlayer);
 
   const errorHandling = (
-    e: Object,
+    e: Error,
     msg = '歌单同步自私有云失败，错误记录在控制台里'
   ) => {
-    console.error(e);
-    enqueueSnackbar(msg, {
-      variant: 'error',
-    });
+    logger.error(e);
+    Snackbar.show({ text: msg });
     setLoading(false);
   };
 
@@ -33,13 +28,11 @@ export function ImportSyncFavButton(
     setLoading(true);
     const response = await noxRestore(cloudAddress);
     if (response !== null) {
-      await StorageManager.importStorageRaw(response);
-      enqueueSnackbar('歌单同步自私有云成功！', {
-        variant: 'success',
-        autoHideDuration: 4000,
-      });
+      const initializedStorage = await importPlayerContent(response);
+      await initPlayer(initializedStorage!);
+      Snackbar.show({ text: '歌单同步自私有云成功！' });
     } else {
-      errorHandling('云端歌单不存在', '云端歌单不存在');
+      errorHandling(new Error('云端歌单不存在'), '云端歌单不存在');
     }
     setLoading(false);
     return response;
@@ -47,7 +40,7 @@ export function ImportSyncFavButton(
 
   return (
     <Tooltip title="下载歌单自私有云">
-      <IconButton size="large" onClick={loading ? () => {} : cloudDownload}>
+      <IconButton size="large" onClick={loading ? () => { } : cloudDownload}>
         {loading ? (
           // for the love of bloody mary, why is 1em 28px here but 24px next?
           <CircularProgress sx={AddFavIcon} size="24px" />
@@ -59,15 +52,12 @@ export function ImportSyncFavButton(
   );
 }
 
-export function ExportSyncFavButton(
-  AddFavIcon: Object,
-  cloudAddress: string | undefined = undefined
-) {
+export const ExportSyncFavButton = (cloudAddress: string) => {
   const StorageManager = useContext(StorageManagerCtx);
   const { enqueueSnackbar, closeSnackbar } = useSnackbar();
   const [loading, setLoading] = useState(false);
 
-  const errorHandling = (e: Object) => {
+  const errorHandling = (e: Error) => {
     console.error(e);
     enqueueSnackbar('歌单上传到私有云失败，错误记录在控制台里', {
       variant: 'error',
@@ -93,7 +83,7 @@ export function ExportSyncFavButton(
 
   return (
     <Tooltip title="上传歌单到私有云">
-      <IconButton size="large" onClick={loading ? () => {} : cloudUpload}>
+      <IconButton size="large" onClick={loading ? () => { } : cloudUpload}>
         {loading ? (
           // for the love of bloody mary, why is 1em 28px here but 24px next?
           <CircularProgress sx={AddFavIcon} size="24px" />
@@ -105,7 +95,8 @@ export function ExportSyncFavButton(
   );
 }
 
-export function SetPersonalCloudTextField(val: string, setVal: Function) {
+export const SetPersonalCloudTextField = () => {
+  const [val, setVal] = React.Usestate('');
   return (
     <TextField
       margin="dense"
@@ -118,4 +109,15 @@ export function SetPersonalCloudTextField(val: string, setVal: Function) {
       placeholder="末尾带/"
     />
   );
+}
+
+export default () => {
+  return (
+    <View>
+      {SetPersonalCloudTextField()}
+      <View style={{ flexDirection: 'row' }}>
+
+      </View>
+    </View>
+  )
 }

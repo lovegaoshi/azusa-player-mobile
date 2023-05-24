@@ -4234,10 +4234,9 @@ dotenv@^16.0.3:
   resolved "https://registry.yarnpkg.com/dotenv/-/dotenv-16.0.3.tgz#115aec42bac5053db3c456db30cc243a5a836a07"
   integrity sha512-7GO6HghkA5fYG9TYnNxi14/7K9f5occMlp3zXAuSxn7CKCxt9xbNWG7yF8hTCSUchlfWSe3uLmlPfigevRItzQ==
 
-dropbox@^10.34.0:
+"dropbox@git+https://lovegaoshi@github.com/lovegaoshi/dropbox-sdk-js.git":
   version "10.34.0"
-  resolved "https://registry.yarnpkg.com/dropbox/-/dropbox-10.34.0.tgz#a4b17dad4c320855fe45b5b9786a8aaf869c3ade"
-  integrity sha512-5jb5/XzU0fSnq36/hEpwT5/QIep7MgqKuxghEG44xCu7HruOAjPdOb3x0geXv5O/hd0nHpQpWO+r5MjYTpMvJg==
+  resolved "git+https://lovegaoshi@github.com/lovegaoshi/dropbox-sdk-js.git#5121f3bb76e0d1d7126f0ca01c9b0d78df2ff554"
   dependencies:
     node-fetch "^2.6.1"
 

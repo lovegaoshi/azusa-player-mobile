@@ -1,5 +1,7 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { strToU8, strFromU8, compressSync, decompressSync } from 'fflate';
+import { Alert } from 'react-native';
+
 import { dummyPlaylist } from '../objects/Playlist';
 import { NoxRepeatMode } from '../components/player/enums/RepeatMode';
 import { PLAYLIST_ENUMS } from '../enums/Playlist';
@@ -286,7 +288,8 @@ export const clearStorage = async () => await AsyncStorage.clear();
 // gzip
 export const exportPlayerContent = async () => {
   const allKeys = await AsyncStorage.getAllKeys();
-  return compressSync(strToU8(JSON.stringify(allKeys)));
+  const playerData = await AsyncStorage.multiGet(allKeys);
+  return compressSync(strToU8(JSON.stringify(playerData)));
 };
 
 export const importPlayerContent = async (content: Uint8Array) => {
@@ -294,7 +297,14 @@ export const importPlayerContent = async (content: Uint8Array) => {
     await AsyncStorage.multiSet(JSON.parse(strFromU8(decompressSync(content))));
     return await initPlayerObject();
   } catch {
-    return null;
+    // cannot recover, clear storage and reinitialize. good to give an alert too.
+    Alert.alert(
+      'ERROR',
+      'Error on loading previous setting data. user data is reset.',
+      [{ text: 'OK', onPress: () => undefined }],
+    );
+    await clearStorage();
+    return await initPlayerObject();
   }
 };
 
