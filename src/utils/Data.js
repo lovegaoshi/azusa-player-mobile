@@ -518,7 +518,7 @@ export const fetchAwaitBiliPaginatedAPI = async ({
   const BVids = [];
   if (await resolvePageJson(BVids, json)) {
     for (
-      let page = 2, n = Math.ceil(mediaCount / getPageSize(data));
+      let page = 2, n = Math.ceil(mediaCount / getPageSize(json.data));
       page <= n;
       page++
     ) {
@@ -589,7 +589,7 @@ export const fetchBiliChannelList = async (
     // TODO: do this properly with another URLSearchParams instance
     searchAPI += `&tid=${String(tidVal[1])}`;
   }
-  return fetchBiliPaginatedAPI({
+  return fetchAwaitBiliPaginatedAPI({
     url: searchAPI,
     getMediaCount: data => data.page.count,
     getPageSize: data => data.page.ps,

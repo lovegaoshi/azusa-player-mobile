@@ -68,7 +68,6 @@ export const getWbiKeys = async () => {
     json_content = await resp.json(),
     img_url = json_content.data.wbi_img.img_url,
     sub_url = json_content.data.wbi_img.sub_url;
-  logger.debug(json_content);
   wbiStore.setState({
     img_key: img_url
       .substring(img_url.lastIndexOf('/') + 1, img_url.length)
