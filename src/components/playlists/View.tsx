@@ -121,33 +121,36 @@ export default (props: any) => {
   // then convert this to a dnd list!!!
   return (
     <View {...props}>
+      <View style={{ height: 10 }}></View>
       <DrawerItemList {...props} />
       <Divider></Divider>
-      <DrawerItem
-        label={() => (
-          <View
-            style={{
-              flexDirection: 'row',
-              alignContent: 'center',
-              alignItems: 'center',
-              justifyContent: 'center',
-            }}
-          >
-            <ShuffleAllButton />
-            <AddPlaylistButton ref={addPlaylistButtonRef} />
-            <IconButton
-              icon="timer-outline"
-              onPress={() => console.log(1234)}
-            />
-          </View>
-        )}
+      <TouchableRipple
+        style={{
+          height: 50,
+          alignContent: 'center',
+          alignItems: 'center',
+          justifyContent: 'center',
+        }}
         onPress={
           // HACK: tooo lazy to lift this state up...
           addPlaylistButtonRef.current
             ? () => addPlaylistButtonRef.current!.setOpen()
             : () => void 0
         }
-      />
+      >
+        <View
+          style={{
+            flexDirection: 'row',
+            alignContent: 'center',
+            alignItems: 'center',
+            justifyContent: 'center',
+          }}
+        >
+          <ShuffleAllButton />
+          <AddPlaylistButton ref={addPlaylistButtonRef} />
+          <IconButton icon="timer-outline" onPress={() => console.log(1234)} />
+        </View>
+      </TouchableRipple>
       <TouchableRipple
         onPress={() => goToPlaylist(STORAGE_KEYS.SEARCH_PLAYLIST_KEY)}
         style={{
@@ -174,7 +177,7 @@ export default (props: any) => {
       <DraggableFlatList
         style={{
           // HACK: i dont know what to do at this point
-          maxHeight: Dimensions.get('window').height - 300,
+          maxHeight: Dimensions.get('window').height - 380,
         }}
         data={playlistIds.map(val => playlists[val])}
         // TODO: very retarded, but what?
