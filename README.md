@@ -1,5 +1,7 @@
 # Azusa-player-mobile
 
+[![android weekly](https://github.com/lovegaoshi/azusa-player-mobile/actions/workflows/android-weekly.yml/badge.svg)](https://github.com/lovegaoshi/azusa-player-mobile/actions/workflows/android-weekly.yml)
+
 Azusa-player-mobile uses a modified version of react-native-track-player for shuffle support. see https://github.com/lovegaoshi/react-native-track-player
 
 ## Running The Example App
