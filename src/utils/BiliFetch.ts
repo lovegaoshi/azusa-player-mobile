@@ -3,7 +3,7 @@ export const DEFAULT_UA =
 
 export default async function BiliFetch(
   url: string,
-  paramsProp: NoxNetwork.RequestInit = {
+  paramsProp: NoxNetwork.RequestInit | RequestInit = {
     method: 'GET',
     headers: {},
     credentials: 'omit',
