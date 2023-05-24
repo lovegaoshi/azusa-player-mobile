@@ -6,6 +6,7 @@ import { PLAYLIST_ENUMS } from '../enums/Playlist';
 import AzusaTheme from '../components/styles/AzusaTheme';
 import { chunkArray as chunkArrayRaw } from '../utils/Utils';
 import { VERSIONS } from '../enums/Version';
+import { EXPORT_OPTIONS } from '../enums/Sync';
 /**
  * noxplayer's storage handler.
  * ChromeStorage has quite a few changes from azusa player the chrome extension;
@@ -40,7 +41,7 @@ export const DEFAULT_SETTING: NoxStorage.PlayerSettingDict = {
   skin: '诺莺nox',
   parseSongName: false,
   keepSearchedSongListWhenPlaying: false,
-  settingExportLocation: NoxStorage.EXPORT_OPTIONS.LOCAL,
+  settingExportLocation: EXPORT_OPTIONS.LOCAL,
   personalCloudIP: '',
   noxVersion: VERSIONS.latest,
   noxCheckedVersion: VERSIONS.latest,

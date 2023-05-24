@@ -1,16 +1,12 @@
-declare namespace NoxStorage {
-  export enum EXPORT_OPTIONS {
-    LOCAL = '本地',
-    DROPBOX = 'Dropbox',
-    PERSONAL = '私有云',
-  }
+import { EXPORT_OPTIONS } from '../enums/Sync';
 
+declare namespace NoxStorage {
   export interface PlayerSettingDict {
     autoRSSUpdate: boolean;
     skin: string;
     parseSongName: boolean;
     keepSearchedSongListWhenPlaying: boolean;
-    settingExportLocation: string;
+    settingExportLocation: EXPORT_OPTIONS;
     personalCloudIP: string;
     noxVersion: string;
     noxCheckedVersion: string;
