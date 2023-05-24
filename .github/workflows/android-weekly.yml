@@ -62,6 +62,6 @@ jobs:
       - name: Release
         uses: softprops/action-gh-release@v1
         with:
-          tag_name: weekly-build-${{ steps.date.outputs.date }}
+          tag_name: ${{ github.ref }}-build-${{ steps.date.outputs.date }}
           files: android/app/build/outputs/apk/release/app-release.apk
           prerelease: true
