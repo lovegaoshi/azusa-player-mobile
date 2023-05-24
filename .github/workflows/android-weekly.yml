@@ -31,12 +31,18 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
       
+      - name: Get branch name
+        run: |
+          # Short name for current branch. For PRs, use target branch (base ref)
+          GIT_BRANCH=${GITHUB_BASE_REF:-${GITHUB_REF#refs/heads/}}
+          echo "GIT_BRANCH=$GIT_BRANCH" >> $GITHUB_ENV
+          
       - name: Get current date
         id: date
         run: echo "date=$(date +'%Y-%m-%d')" >> $GITHUB_OUTPUT     
 
       - name: set up JDK 18
-        uses: actions/setup-java@v2
+        uses: actions/setup-java@v3
         with:
           java-version: 18
           distribution: temurin
@@ -45,7 +51,6 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: '18'
-          cache: 'yarn'
 
       - name: alias yarn.cmd to yarn
         run: alias yarn.cmd="yarn"        
@@ -62,6 +67,6 @@ jobs:
       - name: Release
         uses: softprops/action-gh-release@v1
         with:
-          tag_name: ${{ github.ref }}-build-${{ steps.date.outputs.date }}
+          tag_name: ${{ env.GIT_BRANCH }}-build-${{ steps.date.outputs.date }}
           files: android/app/build/outputs/apk/release/app-release.apk
           prerelease: true
