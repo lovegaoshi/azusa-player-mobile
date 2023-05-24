@@ -1,3 +1,4 @@
+// @ts-nocheck
 // TODO: putting dropbox support on waitlist because it needs several node modules like crypto.
 // https://github.com/tradle/rn-nodeify#rn-nodeify
 // https://github.com/FormidableLabs/react-native-app-auth/blob/main/docs/config-examples/dropbox.md

@@ -1,3 +1,4 @@
+// @ts-nocheck
 import React, { useContext, useState } from 'react';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import CloudDownloadIcon from '@mui/icons-material/CloudDownload';
@@ -11,7 +12,7 @@ import { StorageManagerCtx } from '../../../contexts/StorageManagerContext';
 
 export function ImportSyncFavButton(
   AddFavIcon: Object,
-  cloudAddress: string | undefined = undefined,
+  cloudAddress: string | undefined = undefined
 ) {
   const StorageManager = useContext(StorageManagerCtx);
   const { enqueueSnackbar, closeSnackbar } = useSnackbar();
@@ -19,7 +20,7 @@ export function ImportSyncFavButton(
 
   const errorHandling = (
     e: Object,
-    msg = '歌单同步自私有云失败，错误记录在控制台里',
+    msg = '歌单同步自私有云失败，错误记录在控制台里'
   ) => {
     console.error(e);
     enqueueSnackbar(msg, {
@@ -45,11 +46,11 @@ export function ImportSyncFavButton(
   };
 
   return (
-    <Tooltip title='下载歌单自私有云'>
-      <IconButton size='large' onClick={loading ? () => {} : cloudDownload}>
+    <Tooltip title="下载歌单自私有云">
+      <IconButton size="large" onClick={loading ? () => {} : cloudDownload}>
         {loading ? (
           // for the love of bloody mary, why is 1em 28px here but 24px next?
-          <CircularProgress sx={AddFavIcon} size='24px' />
+          <CircularProgress sx={AddFavIcon} size="24px" />
         ) : (
           <CloudDownloadIcon sx={AddFavIcon} />
         )}
@@ -60,7 +61,7 @@ export function ImportSyncFavButton(
 
 export function ExportSyncFavButton(
   AddFavIcon: Object,
-  cloudAddress: string | undefined = undefined,
+  cloudAddress: string | undefined = undefined
 ) {
   const StorageManager = useContext(StorageManagerCtx);
   const { enqueueSnackbar, closeSnackbar } = useSnackbar();
@@ -91,11 +92,11 @@ export function ExportSyncFavButton(
   };
 
   return (
-    <Tooltip title='上传歌单到私有云'>
-      <IconButton size='large' onClick={loading ? () => {} : cloudUpload}>
+    <Tooltip title="上传歌单到私有云">
+      <IconButton size="large" onClick={loading ? () => {} : cloudUpload}>
         {loading ? (
           // for the love of bloody mary, why is 1em 28px here but 24px next?
-          <CircularProgress sx={AddFavIcon} size='24px' />
+          <CircularProgress sx={AddFavIcon} size="24px" />
         ) : (
           <CloudUploadIcon sx={AddFavIcon} />
         )}
@@ -107,14 +108,14 @@ export function ExportSyncFavButton(
 export function SetPersonalCloudTextField(val: string, setVal: Function) {
   return (
     <TextField
-      margin='dense'
-      id='PersonalCloudAddress'
-      label='私有云地址'
-      type='name'
-      onChange={(e) => setVal(e.target.value)}
+      margin="dense"
+      id="PersonalCloudAddress"
+      label="私有云地址"
+      type="name"
+      onChange={e => setVal(e.target.value)}
       value={val}
-      autoComplete='off'
-      placeholder='末尾带/'
+      autoComplete="off"
+      placeholder="末尾带/"
     />
   );
 }

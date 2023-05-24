@@ -17,6 +17,7 @@ import {
 import { createStyle } from '../components/style';
 import noxPlayingList, { setPlayingList } from '../store/playingList';
 import { resolveBackgroundImage } from '../components/background/MainBackground';
+import { NoxStorage } from '../types/storage';
 
 const { getState, setState } = noxPlayingList;
 
