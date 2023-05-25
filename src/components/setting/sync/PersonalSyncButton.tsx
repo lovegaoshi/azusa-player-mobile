@@ -3,6 +3,7 @@ import Snackbar from 'react-native-snackbar';
 import { View, ActivityIndicator } from 'react-native';
 import { IconButton, TextInput } from 'react-native-paper';
 import { useDebounce } from 'use-debounce';
+import { useUpdateEffect } from 'react-use';
 
 import { noxBackup, noxRestore } from './PersonalCloudAuth';
 import { useNoxSetting } from '../../../hooks/useSetting';
@@ -34,8 +35,10 @@ const ImportSyncFavButton = ({ cloudAddress, cloudID }: props) => {
     setLoading(true);
     const response = await noxRestore(cloudAddress, cloudID);
     if (response !== null) {
+      // error handling is in importPlayerContent. failure in there resets player data
+      // theoretically this is always safe
       const initializedStorage = await importPlayerContent(response);
-      await initPlayer(initializedStorage!);
+      await initPlayer(initializedStorage);
       Snackbar.show({ text: '歌单同步自私有云成功！' });
     } else {
       errorHandling(new Error('云端歌单不存在'), '云端歌单不存在');
@@ -107,7 +110,7 @@ const SetTextField = ({ settingKey, label, placeholder }: textProps) => {
   const [val, setVal] = useState(playerSetting[settingKey]);
   const [debouncedVal] = useDebounce(val, 1000);
 
-  React.useEffect(
+  useUpdateEffect(
     () => setPlayerSetting({ [settingKey]: debouncedVal }),
     [debouncedVal]
   );

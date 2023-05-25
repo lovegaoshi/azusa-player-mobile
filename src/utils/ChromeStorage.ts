@@ -10,6 +10,7 @@ import { chunkArray as chunkArrayRaw } from '../utils/Utils';
 import { VERSIONS } from '../enums/Version';
 import { EXPORT_OPTIONS } from '../enums/Sync';
 import { NoxStorage } from '../types/storage';
+import { logger } from './Logger';
 /**
  * noxplayer's storage handler.
  * ChromeStorage has quite a few changes from azusa player the chrome extension;
@@ -283,7 +284,6 @@ export const initPlayerObject =
         if (retrievedPlaylist) playerObject.playlists[id] = retrievedPlaylist;
       })
     );
-    console.log(playerObject);
     return playerObject;
   };
 
@@ -297,19 +297,31 @@ export const exportPlayerContent = async () => {
 };
 
 export const importPlayerContent = async (content: Uint8Array) => {
+  const parseImportedPartial = (
+    key: string,
+    parsedContent: Array<[string, string]>
+  ) => {
+    return JSON.parse(
+      parsedContent.filter((val: [string, string]) => val[0] === key)[0][1]
+    );
+  };
+
   try {
     const parsedContent = JSON.parse(strFromU8(decompressSync(content)));
-    const parsedSetting = parsedContent.filter(
-      (val: [string, any]) => val[0] === STORAGE_KEYS.PLAYER_SETTING_KEY
-    ) as NoxStorage.PlayerSettingDict;
-    if (parsedSetting?.appID !== appID) {
-      throw new Error('not valid appID');
+    const importedAppID = parseImportedPartial(
+      STORAGE_KEYS.PLAYER_SETTING_KEY,
+      parsedContent
+    ).appID;
+    if (importedAppID !== appID) {
+      // detect noxplayer imports...
+      throw new Error(`${importedAppID} is not valid appID`);
     } else {
       await clearStorage();
       await AsyncStorage.multiSet(parsedContent);
       return await initPlayerObject();
     }
-  } catch {
+  } catch (e) {
+    logger.error(e);
     // cannot recover, clear storage and reinitialize. good to give an alert too.
     Alert.alert(
       'ERROR',

@@ -10,7 +10,7 @@
  * check out the fastAPI docker I set up to your router/NAS/VPS to get started.
  *
  */
-
+import axios from 'axios';
 import { PERSONAL_CLOUD_SECRET } from '@env';
 
 /**
@@ -46,12 +46,26 @@ const getBiliUserKey = async () => (await getBiliUser()).uname;
  */
 export const noxRestore = async (cloudAddress: string, cloudID?: string) => {
   try {
+    // TODO: using axios as the following pr is currently only in react native preview
+    // see https://github.com/facebook/react-native/commit/5b597b5ff94953accc635ed3090186baeecb3873
+    // and https://stackoverflow.com/questions/76056351/error-filereader-readasarraybuffer-is-not-implemented
+    const res = await axios.get(
+      `${await cloudAddress}download/${cloudID || (await getBiliUserKey())}`,
+      { responseType: 'arraybuffer' }
+    );
+
+    if (res.status === 200) {
+      return new Uint8Array(await res.data);
+    }
+    /**
     const res = await fetch(
       `${await cloudAddress}download/${cloudID || (await getBiliUserKey())}`
     );
     if (res.status === 200) {
       return new Uint8Array(await res.arrayBuffer());
     }
+     * 
+     */
   } catch (e) {
     console.error(e);
   }
