@@ -27,6 +27,9 @@ jobs:
       contents: write
     steps:
       - name: Checkout
+        run: echo ${{needs.check_date.outputs.should_run}}
+    
+      - name: Checkout
         uses: actions/checkout@v3
         
       - name: Get branch name
