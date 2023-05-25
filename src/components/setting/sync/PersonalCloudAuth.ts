@@ -36,7 +36,7 @@ export const getBiliUser = async () => {
  * as "authentication." returns the currently logged in bilibili username.
  * @returns string
  */
-const getBiliUserKey = () => '爱搞事'; // async () => (await getBiliUser()).uname;
+const getBiliUserKey = async () => (await getBiliUser()).uname;
 
 /**
  * wraps up find noxplayer setting and download in one function;
@@ -44,10 +44,10 @@ const getBiliUserKey = () => '爱搞事'; // async () => (await getBiliUser()).u
  * @returns playerSetting object, or null
  * @param {string} cloudAddress web address for your personal cloud.
  */
-export const noxRestore = async (cloudAddress: string) => {
+export const noxRestore = async (cloudAddress: string, cloudID?: string) => {
   try {
     const res = await fetch(
-      `${await cloudAddress}download/${await getBiliUserKey()}`
+      `${await cloudAddress}download/${cloudID || (await getBiliUserKey())}`
     );
     if (res.status === 200) {
       return new Uint8Array(await res.arrayBuffer());
@@ -65,14 +65,19 @@ export const noxRestore = async (cloudAddress: string) => {
  * @param {string} cloudAddress web address for your personal cloud.
  * @returns
  */
-export const noxBackup = async (content: Blob, cloudAddress: string) => {
+export const noxBackup = async (
+  content: Uint8Array,
+  cloudAddress: string,
+  cloudID?: string
+) => {
   try {
+    console.log(cloudAddress);
     return await fetch(`${cloudAddress}upload`, {
       method: 'POST',
       headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json',
-        userid: encodeURIComponent(await getBiliUserKey()),
+        userid: encodeURIComponent(cloudID || (await getBiliUserKey())),
         'secret-key': PERSONAL_CLOUD_SECRET,
         'Content-Encoding': 'gzip',
       },

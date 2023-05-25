@@ -119,7 +119,8 @@
   "Sync": {
     "Local": "Local",
     "Dropbox": "Dropbox",
-    "PersonalCloud": "Personal Cloud"
+    "PersonalCloud": "Personal Cloud",
+    "ExportLocation": "Select Sync:"
   },
   "Login": {
     "BilibiliNotLoggedIn": "User not logged in\n",

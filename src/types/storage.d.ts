@@ -8,6 +8,7 @@ declare namespace NoxStorage {
     keepSearchedSongListWhenPlaying: boolean;
     settingExportLocation: EXPORT_OPTIONS;
     personalCloudIP: string;
+    personalCloudID: string;
     noxVersion: string;
     noxCheckedVersion: string;
     hideCoverInMobile: boolean;
@@ -18,6 +19,7 @@ declare namespace NoxStorage {
     // TODO: implement this feature
     dataSaver: boolean;
     fastBiliSearch: boolean;
+    appID: string;
     [key: string]: any;
   }
 

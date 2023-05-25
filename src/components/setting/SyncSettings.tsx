@@ -7,6 +7,7 @@ import { useNoxSetting } from '../../hooks/useSetting';
 import { loginDropbox } from './sync/DropboxAuth';
 import GenericSelectDialog from '../dialogs/GenericSelectDialog';
 import { EXPORT_OPTIONS } from '../../enums/Sync';
+import PersonalSyncButton from './sync/PersonalSyncButton';
 
 const EXPORT_OPTIONS_LIST = [
   EXPORT_OPTIONS.LOCAL,
@@ -52,9 +53,19 @@ export default () => {
         flex: 1,
       }}
     >
+      <View style={{ height: 10 }}></View>
+      <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
+        <Text variant="bodyLarge" style={{ paddingTop: 6 }}>
+          {t('Sync.ExportLocation')}
+        </Text>
+        <Button onPress={() => setSelectVisible(true)}>{renderOption()}</Button>
+      </View>
       <Button onPress={() => loginDropbox().then(console.log)}>GAGAGA</Button>
-      <Button onPress={() => setSelectVisible(true)}>{renderOption()}</Button>
-
+      {playerSetting.settingExportLocation === EXPORT_OPTIONS.PERSONAL ? (
+        <PersonalSyncButton />
+      ) : (
+        <></>
+      )}
       <GenericSelectDialog
         visible={selectVisible}
         options={currentSelectOption.options}

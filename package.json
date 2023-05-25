@@ -61,6 +61,7 @@
     "react-native-vector-icons": "^9.2.0",
     "react-native-video": "^5.2.1",
     "react-native-windows": "^0.65.0-0",
+    "use-debounce": "^9.0.4",
     "zustand": "^4.3.7"
   },
   "devDependencies": {

@@ -1,7 +1,8 @@
 import React, { useContext, useState } from 'react';
 import Snackbar from 'react-native-snackbar';
-import { View } from 'react-native';
+import { View, ActivityIndicator } from 'react-native';
 import { IconButton, TextInput } from 'react-native-paper';
+import { useDebounce } from 'use-debounce';
 
 import { noxBackup, noxRestore } from './PersonalCloudAuth';
 import { useNoxSetting } from '../../../hooks/useSetting';
@@ -11,7 +12,12 @@ import {
   importPlayerContent,
 } from '../../../utils/ChromeStorage';
 
-export const ImportSyncFavButton = (cloudAddress: string) => {
+interface props {
+  cloudAddress: string;
+  cloudID?: string;
+}
+
+const ImportSyncFavButton = ({ cloudAddress, cloudID }: props) => {
   const [loading, setLoading] = useState(false);
   const initPlayer = useNoxSetting(state => state.initPlayer);
 
@@ -26,7 +32,7 @@ export const ImportSyncFavButton = (cloudAddress: string) => {
 
   const cloudDownload = async () => {
     setLoading(true);
-    const response = await noxRestore(cloudAddress);
+    const response = await noxRestore(cloudAddress, cloudID);
     if (response !== null) {
       const initializedStorage = await importPlayerContent(response);
       await initPlayer(initializedStorage!);
@@ -38,86 +44,108 @@ export const ImportSyncFavButton = (cloudAddress: string) => {
     return response;
   };
 
-  return (
-    <Tooltip title="下载歌单自私有云">
-      <IconButton size="large" onClick={loading ? () => { } : cloudDownload}>
-        {loading ? (
-          // for the love of bloody mary, why is 1em 28px here but 24px next?
-          <CircularProgress sx={AddFavIcon} size="24px" />
-        ) : (
-          <CloudDownloadIcon sx={AddFavIcon} />
-        )}
-      </IconButton>
-    </Tooltip>
+  return loading ? (
+    <ActivityIndicator />
+  ) : (
+    <IconButton icon="cloud-download" onPress={cloudDownload} size={60} />
   );
-}
+};
 
-export const ExportSyncFavButton = (cloudAddress: string) => {
-  const StorageManager = useContext(StorageManagerCtx);
-  const { enqueueSnackbar, closeSnackbar } = useSnackbar();
+const ExportSyncFavButton = ({ cloudAddress, cloudID }: props) => {
   const [loading, setLoading] = useState(false);
 
-  const errorHandling = (e: Error) => {
-    console.error(e);
-    enqueueSnackbar('歌单上传到私有云失败，错误记录在控制台里', {
-      variant: 'error',
-    });
+  const errorHandling = (
+    e: Error,
+    msg = '歌单上传到私有云失败，错误记录在控制台里'
+  ) => {
+    logger.error(e);
+    Snackbar.show({ text: msg });
     setLoading(false);
   };
 
   const cloudUpload = async () => {
     setLoading(true);
-    const exportedDict = await StorageManager.exportStorageRaw();
-    const response = await noxBackup(exportedDict, cloudAddress);
+    const exportedDict = await exportPlayerContent();
+    const response = await noxBackup(exportedDict, cloudAddress, cloudID);
     if (response.status === 200) {
-      enqueueSnackbar('歌单上传到私有云成功！', {
-        variant: 'success',
-        autoHideDuration: 4000,
-      });
+      Snackbar.show({ text: '歌单上传到私有云成功！' });
     } else {
-      errorHandling(response);
+      errorHandling(new Error(String(response.status)));
     }
     setLoading(false);
     return response;
   };
 
-  return (
-    <Tooltip title="上传歌单到私有云">
-      <IconButton size="large" onClick={loading ? () => { } : cloudUpload}>
-        {loading ? (
-          // for the love of bloody mary, why is 1em 28px here but 24px next?
-          <CircularProgress sx={AddFavIcon} size="24px" />
-        ) : (
-          <CloudUploadIcon sx={AddFavIcon} />
-        )}
-      </IconButton>
-    </Tooltip>
+  return loading ? (
+    <ActivityIndicator />
+  ) : (
+    <IconButton icon="cloud-upload" onPress={cloudUpload} size={60} />
   );
+};
+
+interface textProps {
+  settingKey: string;
+  label: string;
+  placeholder: string;
 }
 
-export const SetPersonalCloudTextField = () => {
-  const [val, setVal] = React.Usestate('');
+const personalCloudIPTextField: textProps = {
+  settingKey: 'personalCloudIP',
+  label: '私有云地址',
+  placeholder: '末尾带/',
+};
+
+const personalCloudIDTextField: textProps = {
+  settingKey: 'personalCloudID',
+  label: '私有云key',
+  placeholder: '',
+};
+
+const SetTextField = ({ settingKey, label, placeholder }: textProps) => {
+  const playerSetting = useNoxSetting(state => state.playerSetting);
+  const setPlayerSetting = useNoxSetting(state => state.setPlayerSetting);
+  const [val, setVal] = useState(playerSetting[settingKey]);
+  const [debouncedVal] = useDebounce(val, 1000);
+
+  React.useEffect(
+    () => setPlayerSetting({ [settingKey]: debouncedVal }),
+    [debouncedVal]
+  );
+
   return (
-    <TextField
-      margin="dense"
-      id="PersonalCloudAddress"
-      label="私有云地址"
-      type="name"
-      onChange={e => setVal(e.target.value)}
+    <TextInput
+      label={label}
+      onChange={e => setVal(e.nativeEvent.text)}
       value={val}
-      autoComplete="off"
-      placeholder="末尾带/"
+      placeholder={placeholder}
     />
   );
-}
+};
 
 export default () => {
+  const playerSetting = useNoxSetting(state => state.playerSetting);
   return (
     <View>
-      {SetPersonalCloudTextField()}
-      <View style={{ flexDirection: 'row' }}>
-
+      <SetTextField {...personalCloudIPTextField} />
+      <SetTextField {...personalCloudIDTextField} />
+      <View
+        style={{
+          flexDirection: 'row',
+          alignItems: 'center',
+          alignContent: 'center',
+          justifyContent: 'center',
+        }}
+      >
+        <ImportSyncFavButton
+          cloudAddress={playerSetting.personalCloudIP}
+          cloudID={playerSetting.personalCloudID}
+        />
+        <View style={{ width: 20 }}></View>
+        <ExportSyncFavButton
+          cloudAddress={playerSetting.personalCloudIP}
+          cloudID={playerSetting.personalCloudID}
+        />
       </View>
     </View>
-  )
-}
+  );
+};

@@ -39,6 +39,8 @@ export enum STORAGE_KEYS {
   LYRIC_MAPPING = 'LyricMapping',
 }
 
+const appID = 'NoxPlayerMobile';
+
 export const DEFAULT_SETTING: NoxStorage.PlayerSettingDict = {
   autoRSSUpdate: false,
   skin: '诺莺nox',
@@ -46,6 +48,7 @@ export const DEFAULT_SETTING: NoxStorage.PlayerSettingDict = {
   keepSearchedSongListWhenPlaying: false,
   settingExportLocation: EXPORT_OPTIONS.LOCAL,
   personalCloudIP: '',
+  personalCloudID: 'azusamobile',
   noxVersion: VERSIONS.latest,
   noxCheckedVersion: VERSIONS.latest,
   hideCoverInMobile: false,
@@ -55,6 +58,7 @@ export const DEFAULT_SETTING: NoxStorage.PlayerSettingDict = {
   playerRepeat: NoxRepeatMode.SHUFFLE,
   dataSaver: false,
   fastBiliSearch: false,
+  appID,
 };
 
 export const saveItem = async (key: string, value: any) => {
@@ -294,14 +298,23 @@ export const exportPlayerContent = async () => {
 
 export const importPlayerContent = async (content: Uint8Array) => {
   try {
-    await AsyncStorage.multiSet(JSON.parse(strFromU8(decompressSync(content))));
-    return await initPlayerObject();
+    const parsedContent = JSON.parse(strFromU8(decompressSync(content)));
+    const parsedSetting = parsedContent.filter(
+      (val: [string, any]) => val[0] === STORAGE_KEYS.PLAYER_SETTING_KEY
+    ) as NoxStorage.PlayerSettingDict;
+    if (parsedSetting?.appID !== appID) {
+      throw new Error('not valid appID');
+    } else {
+      await clearStorage();
+      await AsyncStorage.multiSet(parsedContent);
+      return await initPlayerObject();
+    }
   } catch {
     // cannot recover, clear storage and reinitialize. good to give an alert too.
     Alert.alert(
       'ERROR',
       'Error on loading previous setting data. user data is reset.',
-      [{ text: 'OK', onPress: () => undefined }],
+      [{ text: 'OK', onPress: () => undefined }]
     );
     await clearStorage();
     return await initPlayerObject();
