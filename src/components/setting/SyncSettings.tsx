@@ -53,12 +53,11 @@ export default () => {
         flex: 1,
       }}
     >
-      <View style={{ height: 10 }}></View>
       <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
-        <Text variant="bodyLarge" style={{ paddingTop: 6 }}>
-          {t('Sync.ExportLocation')}
-        </Text>
-        <Button onPress={() => setSelectVisible(true)}>{renderOption()}</Button>
+        <Button
+          style={{ paddingVertical: 10 }}
+          onPress={() => setSelectVisible(true)}
+        >{`${t('Sync.ExportLocation')} ${renderOption()}`}</Button>
       </View>
       <Button onPress={() => loginDropbox().then(console.log)}>GAGAGA</Button>
       {playerSetting.settingExportLocation === EXPORT_OPTIONS.PERSONAL ? (

@@ -49,11 +49,17 @@ export const noxRestore = async (cloudAddress: string, cloudID?: string) => {
     // TODO: using axios as the following pr is currently only in react native preview
     // see https://github.com/facebook/react-native/commit/5b597b5ff94953accc635ed3090186baeecb3873
     // and https://stackoverflow.com/questions/76056351/error-filereader-readasarraybuffer-is-not-implemented
+
+    console.log(1);
+    // TODO: axios break at some unknown file size. unsure why.
     const res = await axios.get(
       `${await cloudAddress}download/${cloudID || (await getBiliUserKey())}`,
-      { responseType: 'arraybuffer' }
+      {
+        responseType: 'arraybuffer',
+        maxContentLength: Infinity,
+        maxBodyLength: Infinity,
+      }
     );
-
     if (res.status === 200) {
       return new Uint8Array(await res.data);
     }

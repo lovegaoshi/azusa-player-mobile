@@ -76,9 +76,10 @@ export const resolveUrl = async (song: NoxMedia.Song) => {
   // TODO: method is called MULTIPLE times. need to investigate and debounce.
   // luckily bilibili doesnt seem to care for now
   const url = await fetchPlayUrlPromise(song.bvid, song.id);
+  console.debug(url);
   return {
     url,
-    headers: customReqHeader(url, {}),
+    headers: customReqHeader(url, { referer: 'https://www.bilibili.com/' }),
     userAgent: DEFAULT_UA,
     urlRefreshTimeStamp: new Date().getTime(),
   };

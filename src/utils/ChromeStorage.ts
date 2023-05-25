@@ -1,8 +1,9 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { strToU8, strFromU8, compressSync, decompressSync } from 'fflate';
 import { Alert } from 'react-native';
+import { v4 as uuidv4 } from 'uuid';
 
-import { dummyPlaylist } from '../objects/Playlist';
+import { dummyPlaylist, dummyPlaylistList } from '../objects/Playlist';
 import { NoxRepeatMode } from '../components/player/enums/RepeatMode';
 import { PLAYLIST_ENUMS } from '../enums/Playlist';
 import AzusaTheme from '../components/styles/AzusaTheme';
@@ -156,7 +157,7 @@ export const savePlaylist = async (
       songList: await saveChucked(playlist.songList, playlist.id, false),
     };
     // save chunks
-    saveItem(overrideKey || playlist.id, savingPlaylist);
+    saveItem(overrideKey || playlist.id || uuidv4(), savingPlaylist);
   } catch (e) {
     console.error(e);
   }
@@ -170,8 +171,7 @@ export const savePlaylist = async (
  */
 export const getPlaylist = async (key: string): Promise<NoxMedia.Playlist> => {
   try {
-    // eslint-disable-next-line prefer-const
-    let retrievedPlaylist = await getItem(key);
+    const retrievedPlaylist = await getItem(key);
     if (retrievedPlaylist === null) return dummyPlaylist();
     retrievedPlaylist.songList = await loadChucked(retrievedPlaylist.songList);
     return retrievedPlaylist;
@@ -216,17 +216,21 @@ export const addPlaylist = async (
   return playlistIds;
 };
 
-export const delPlaylist = async (
-  playlist: NoxMedia.Playlist,
-  playlistIds: Array<string>
-) => {
-  playlistIds.splice(playlistIds.indexOf(playlist.id), 1);
+const delPlaylistRaw = async (playlist: NoxMedia.Playlist) => {
   removeItem(playlist.id);
   [
     ...Array(Math.ceil(playlist.songList.length / MAX_SONGLIST_SIZE)).keys(),
   ].forEach(index => {
     removeItem(`${playlist.id}.${index}`);
   });
+};
+
+export const delPlaylist = async (
+  playlist: NoxMedia.Playlist,
+  playlistIds: Array<string>
+) => {
+  playlistIds.splice(playlistIds.indexOf(playlist.id), 1);
+  delPlaylistRaw(playlist);
   savePlaylistIds(playlistIds);
   return playlistIds;
 };
@@ -296,24 +300,78 @@ export const exportPlayerContent = async () => {
   return compressSync(strToU8(JSON.stringify(playerData)));
 };
 
-export const importPlayerContent = async (content: Uint8Array) => {
-  const parseImportedPartial = (
-    key: string,
-    parsedContent: Array<[string, string]>
-  ) => {
-    return JSON.parse(
-      parsedContent.filter((val: [string, string]) => val[0] === key)[0][1]
-    );
-  };
+const clearPlaylists = async () => {
+  const playlistIds = (await getItem(STORAGE_KEYS.MY_FAV_LIST_KEY)) || [];
+  for (const playlistId of playlistIds) {
+    delPlaylistRaw(await getPlaylist(playlistId));
+  }
+  savePlaylistIds([]);
+};
 
+const importNoxExtensionContent = async (parsedContent: any) => {
+  // noxextension stores everything as a giant object as it doesnt have the sqlite 2MB entry limitation;
+  // it must have MyFavList as an array.
+  if (!Array.isArray(parsedContent['MyFavList'])) {
+    return false;
+  }
+
+  const clearPlaylistNImport = async () => {
+    await clearPlaylists();
+    for (const playlistID of parsedContent['MyFavList']) {
+      const playlist = parsedContent[playlistID];
+      console.log(playlist.info);
+      await savePlaylist({
+        ...dummyPlaylistList,
+        ...playlist,
+        ...playlist.info,
+      });
+    }
+    await savePlaylistIds(parsedContent['MyFavList']);
+  };
+  return new Promise((resolve, reject) => {
+    Alert.alert('ERROR', 'Are you importing from noxplayer extension?', [
+      {
+        text: 'Nn',
+        onPress: () => {
+          reject('user said no');
+        },
+        style: 'cancel',
+      },
+      {
+        text: 'Yes',
+        onPress: async () => {
+          await clearPlaylistNImport();
+          resolve(true);
+        },
+      },
+    ]);
+  });
+};
+
+export const importPlayerContent = async (content: Uint8Array) => {
   try {
     const parsedContent = JSON.parse(strFromU8(decompressSync(content)));
+    const parseImportedPartial = (
+      key: string,
+      parsedContent: Array<[string, string]>
+    ) => {
+      return JSON.parse(
+        parsedContent.filter((val: [string, string]) => val[0] === key)[0][1]
+      );
+    };
+    try {
+      // detect noxplayer imports...
+      if (await importNoxExtensionContent(parsedContent)) {
+        return await initPlayerObject();
+      }
+    } catch (e) {
+      console.error(e);
+    }
     const importedAppID = parseImportedPartial(
       STORAGE_KEYS.PLAYER_SETTING_KEY,
       parsedContent
     ).appID;
     if (importedAppID !== appID) {
-      // detect noxplayer imports...
       throw new Error(`${importedAppID} is not valid appID`);
     } else {
       await clearStorage();
@@ -331,16 +389,4 @@ export const importPlayerContent = async (content: Uint8Array) => {
     await clearStorage();
     return await initPlayerObject();
   }
-};
-
-// gzip
-export const importPlayerObjectOld = async (
-  playerObject: NoxStorage.PlayerStorageObject
-) => {
-  await clearStorage();
-  saveSettings(playerObject.settings);
-  savePlaylistIds(playerObject.playlistIds);
-  savelastPlaylistId(playerObject.lastPlaylistId);
-  saveFavPlaylist(playerObject.favoriPlaylist);
-  Object.entries(playerObject.playlists).forEach(val => savePlaylist(val[1]));
 };

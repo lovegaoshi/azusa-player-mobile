@@ -48,7 +48,7 @@ const ImportSyncFavButton = ({ cloudAddress, cloudID }: props) => {
   };
 
   return loading ? (
-    <ActivityIndicator />
+    <ActivityIndicator size={60} />
   ) : (
     <IconButton icon="cloud-download" onPress={cloudDownload} size={60} />
   );
@@ -80,7 +80,7 @@ const ExportSyncFavButton = ({ cloudAddress, cloudID }: props) => {
   };
 
   return loading ? (
-    <ActivityIndicator />
+    <ActivityIndicator size={60} />
   ) : (
     <IconButton icon="cloud-upload" onPress={cloudUpload} size={60} />
   );
