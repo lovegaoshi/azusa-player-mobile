@@ -22,7 +22,7 @@ jobs:
     name: Build
     runs-on: ubuntu-latest
     needs: check_date
-    if: env.SHOULD_RUN != 'false'   
+    if: ${{ env.SHOULD_RUN != 'false' }}  
     permissions: 
       contents: write
     steps:
