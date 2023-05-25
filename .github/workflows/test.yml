@@ -41,4 +41,4 @@ jobs:
         with:
           tag_name: ${{ env.GIT_BRANCH }}-build-${{ steps.date.outputs.date }}
           prerelease: true
-          target_commitish: env.GIT_BRANCH
+          target_commitish: ${{ env.GIT_BRANCH }}
