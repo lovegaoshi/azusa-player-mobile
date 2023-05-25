@@ -42,6 +42,6 @@ jobs:
       - name: Release
         uses: softprops/action-gh-release@v1
         with:
-          tag_name: ${{ env.GIT_BRANCH }}-build-${{ steps.date.outputs.date }}
+          tag_name: ${{ env.GIT_BRANCH }}-test
           prerelease: true
           target_commitish: ${{ env.GIT_BRANCH }}
