@@ -2,6 +2,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { fetchPlayUrlPromise } from '../utils/Data';
 import { reExtractSongName, extractParenthesis } from '../utils/re';
 import { customReqHeader, DEFAULT_UA } from '../utils/BiliFetch';
+import { logger } from '../utils/Logger';
 
 export const DEFAULT_NULL_URL = 'NULL';
 export const NULL_TRACK = { url: DEFAULT_NULL_URL, urlRefreshTimeStamp: 0 };
@@ -76,7 +77,7 @@ export const resolveUrl = async (song: NoxMedia.Song) => {
   // TODO: method is called MULTIPLE times. need to investigate and debounce.
   // luckily bilibili doesnt seem to care for now
   const url = await fetchPlayUrlPromise(song.bvid, song.id);
-  console.debug(url);
+  logger.debug(`resolved url', url)`);
   return {
     url,
     headers: customReqHeader(url, { referer: 'https://www.bilibili.com/' }),
