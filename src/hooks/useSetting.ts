@@ -269,4 +269,14 @@ export const useNoxSetting = create<NoxSetting>((set, get) => ({
       cookies: val.cookies,
     };
   },
+
+  exportLegacy: () => {
+    const exportedLegacy: object = {
+      MyFavList: get().playlistIds,
+    };
+    for (const [key, value] of Object.entries(get().playlists)) {
+      exportedLegacy[key] = value;
+    }
+    return exportedLegacy;
+  },
 }));

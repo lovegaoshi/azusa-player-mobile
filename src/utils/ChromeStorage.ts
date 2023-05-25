@@ -294,10 +294,12 @@ export const initPlayerObject =
 export const clearStorage = async () => await AsyncStorage.clear();
 
 // gzip
-export const exportPlayerContent = async () => {
-  const allKeys = await AsyncStorage.getAllKeys();
-  const playerData = await AsyncStorage.multiGet(allKeys);
-  return compressSync(strToU8(JSON.stringify(playerData)));
+export const exportPlayerContent = async (content?: any) => {
+  if (!content) {
+    const allKeys = await AsyncStorage.getAllKeys();
+    content = await AsyncStorage.multiGet(allKeys);
+  }
+  return compressSync(strToU8(JSON.stringify(content)));
 };
 
 const clearPlaylists = async () => {
