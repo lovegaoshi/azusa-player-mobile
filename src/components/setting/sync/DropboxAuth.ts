@@ -1,6 +1,4 @@
-// @ts-nocheck
-// TODO: fix these stupid types
-import { Dropbox as _Dropbox } from 'dropbox';
+import { Dropbox as _Dropbox, files } from 'dropbox';
 import { authorize } from 'react-native-app-auth';
 import { getArrayBufferForBlob } from 'react-native-blob-jsi-helper';
 
@@ -67,11 +65,13 @@ const find = async (query = DEFAULT_FILE_NAME) => {
   const data = await dbx.filesSearchV2({
     query,
     options: {
-      order_by: 'last_modified_time',
+      order_by: { '.tag': 'last_modified_time' },
     },
   });
   try {
-    return data.result.matches[0].metadata.metadata.path_display;
+    const fileMetadata = data.result.matches[0]
+      .metadata as files.MetadataV2Metadata;
+    return fileMetadata.metadata.path_display;
   } catch (e) {
     console.warn(`no ${query} found.`);
     return null;
@@ -89,7 +89,7 @@ const find = async (query = DEFAULT_FILE_NAME) => {
 const upload = async (content: Uint8Array, fpath = DEFAULT_FILE_PATH) => {
   return await dbx.filesUpload({
     path: fpath,
-    mode: 'overwrite',
+    mode: { '.tag': 'overwrite' },
     contents: content,
   });
 };
@@ -106,6 +106,7 @@ const download = async (fpath = DEFAULT_FILE_PATH) => {
     return null;
   }
   const downloadedFile = await dbx.filesDownload({ path: fpath });
+  // @ts-ignore: dropbox didnt have fileBlob in their sdk anywhere but UPGRADING.md
   const blob = getArrayBufferForBlob(downloadedFile.result.fileBlob);
   return new Uint8Array(blob);
 };
@@ -117,6 +118,9 @@ const download = async (fpath = DEFAULT_FILE_PATH) => {
  */
 export const noxRestore = async () => {
   const noxFile = await find();
+  if (!noxFile) {
+    throw new Error('noxfile is not found on dropbox.');
+  }
   return await download(noxFile);
 };
 
@@ -150,7 +154,7 @@ const checkAuthentication = async () => {
  * @returns
  */
 export const loginDropbox = async (
-  callback = () => any,
+  callback: () => any = () => undefined,
   errorCallback = console.error
 ) => {
   try {

@@ -6,6 +6,7 @@ module.exports = {
     'plugin:@typescript-eslint/recommended', // Uses the recommended rules from the @typescript-eslint/eslint-plugin
     'plugin:react-hooks/recommended',
     'plugin:prettier/recommended',
+    './node_modules/gts/',
   ],
   parserOptions: {
     ecmaVersion: 2017, // Allows for the parsing of modern ECMAScript features
