@@ -1,5 +1,5 @@
 
-name: PR Build
+name: PR Android Build
 on:
   pull_request:
     branches: [ master ]
