@@ -121,6 +121,7 @@ const SetTextField = ({ settingKey, label, placeholder }: textProps) => {
       onChange={e => setVal(e.nativeEvent.text)}
       value={val}
       placeholder={placeholder}
+      selectTextOnFocus
     />
   );
 };

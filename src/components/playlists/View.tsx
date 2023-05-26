@@ -72,7 +72,7 @@ export default (props: any) => {
             variant="bodyLarge"
             style={{
               fontWeight:
-                currentPlayingList.id === item.id ? 'bold' : undefined,
+                currentPlayingList.id === item?.id ? 'bold' : undefined,
             }}
           >
             {item.title}
@@ -105,7 +105,7 @@ export default (props: any) => {
           style={{
             paddingLeft: 25,
             backgroundColor:
-              currentPlaylist.id === item.id
+              currentPlaylist.id === item?.id
                 ? playerStyle.customColors.playlistDrawerBackgroundColor
                 : undefined,
             borderRadius: 40,
@@ -184,7 +184,7 @@ export default (props: any) => {
         onDragEnd={({ data }) =>
           setPlaylistIds(data.map(playlist => playlist.id))
         }
-        keyExtractor={item => item.id}
+        keyExtractor={item => item?.id}
         renderItem={renderItem}
       />
       <View>
