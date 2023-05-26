@@ -271,7 +271,9 @@ export const useNoxSetting = create<NoxSetting>((set, get) => ({
   },
 
   exportLegacy: () => {
-    const exportedLegacy: object = {
+    const exportedLegacy: {
+      [key: string]: NoxMedia.Playlist | string[];
+    } = {
       MyFavList: get().playlistIds,
     };
     for (const [key, value] of Object.entries(get().playlists)) {

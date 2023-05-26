@@ -2,6 +2,8 @@
 // TODO: fix these stupid types
 import { Dropbox as _Dropbox } from 'dropbox';
 import { authorize } from 'react-native-app-auth';
+import { getArrayBufferForBlob } from 'react-native-blob-jsi-helper';
+
 import { DROPBOX_KEY, DROPBOX_SECRET } from '@env';
 import { logger } from '../../../utils/Logger';
 
@@ -103,10 +105,9 @@ const download = async (fpath = DEFAULT_FILE_PATH) => {
   if (fpath === null) {
     return null;
   }
-  const blob = (
-    await dbx.filesDownload({ path: fpath })
-  ).result.fileBlob.arrayBuffer();
-  return new Uint8Array(await blob);
+  const downloadedFile = await dbx.filesDownload({ path: fpath });
+  const blob = getArrayBufferForBlob(downloadedFile.result.fileBlob);
+  return new Uint8Array(blob);
 };
 
 /**

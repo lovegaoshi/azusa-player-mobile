@@ -73,7 +73,6 @@ export default () => {
           onPress={() => setSelectVisible(true)}
         >{`${t('Sync.ExportLocation')} ${renderOption()}`}</Button>
       </View>
-      <Button onPress={() => loginDropbox().then(console.log)}>GAGAGA</Button>
       <SyncButton location={playerSetting.settingExportLocation}></SyncButton>
       <GenericSelectDialog
         visible={selectVisible}
