@@ -1,9 +1,6 @@
 // @ts-nocheck
-// TODO: putting dropbox support on waitlist because it needs several node modules like crypto.
-// https://github.com/tradle/rn-nodeify#rn-nodeify
-// https://github.com/FormidableLabs/react-native-app-auth/blob/main/docs/config-examples/dropbox.md
-// https://github.com/lovegaoshi/azusa-player/blob/nox-player/src/utils/dropboxauth.js
-import { DropboxAuth, Dropbox as _Dropbox } from 'dropbox';
+// TODO: fix these stupid types
+import { Dropbox as _Dropbox } from 'dropbox';
 import { authorize } from 'react-native-app-auth';
 import { DROPBOX_KEY, DROPBOX_SECRET } from '@env';
 import { logger } from '../../../utils/Logger';
@@ -43,13 +40,12 @@ export const getAuth = async (
   callback = () => checkAuthentication().then(console.log),
   errorHandling = console.error
 ) => {
-  console.log(authorize, config);
   const authState = await authorize(config);
   console.log(authState);
   const dropboxUID = authState.tokenAdditionalParameters?.account_id;
   if (dropboxUID) {
     dbx = new _Dropbox({
-      accessToken: dropboxUID,
+      accessToken: authState.accessToken, //dropboxUID,
     });
     callback();
   } else {
@@ -88,7 +84,7 @@ const find = async (query = DEFAULT_FILE_NAME) => {
  * @param {string} fpath
  * @returns
  */
-const upload = async (content: Blob, fpath = DEFAULT_FILE_PATH) => {
+const upload = async (content: Uint8Array, fpath = DEFAULT_FILE_PATH) => {
   return await dbx.filesUpload({
     path: fpath,
     mode: 'overwrite',
@@ -129,7 +125,7 @@ export const noxRestore = async () => {
  * @param {Object} content
  * @returns
  */
-export const noxBackup = async (content: Blob) => {
+export const noxBackup = async (content: Uint8Array) => {
   return await upload(content);
 };
 
@@ -153,7 +149,7 @@ const checkAuthentication = async () => {
  * @returns
  */
 export const loginDropbox = async (
-  callback = () => undefined,
+  callback = () => any,
   errorCallback = console.error
 ) => {
   try {

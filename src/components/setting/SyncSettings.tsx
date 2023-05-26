@@ -8,12 +8,26 @@ import { loginDropbox } from './sync/DropboxAuth';
 import GenericSelectDialog from '../dialogs/GenericSelectDialog';
 import { EXPORT_OPTIONS } from '../../enums/Sync';
 import PersonalSyncButton from './sync/PersonalSyncButton';
+import DropboxSyncButton from './sync/DropboxSyncButton';
 
 const EXPORT_OPTIONS_LIST = [
   EXPORT_OPTIONS.LOCAL,
   EXPORT_OPTIONS.DROPBOX,
   EXPORT_OPTIONS.PERSONAL,
 ];
+
+const SyncButton = ({ location }: { location: EXPORT_OPTIONS }) => {
+  switch (location) {
+    case EXPORT_OPTIONS.LOCAL:
+      return <></>;
+    case EXPORT_OPTIONS.DROPBOX:
+      return <DropboxSyncButton />;
+    case EXPORT_OPTIONS.PERSONAL:
+      return <PersonalSyncButton />;
+    default:
+      return <></>;
+  }
+};
 
 export default () => {
   const { t } = useTranslation();
@@ -60,11 +74,7 @@ export default () => {
         >{`${t('Sync.ExportLocation')} ${renderOption()}`}</Button>
       </View>
       <Button onPress={() => loginDropbox().then(console.log)}>GAGAGA</Button>
-      {playerSetting.settingExportLocation === EXPORT_OPTIONS.PERSONAL ? (
-        <PersonalSyncButton />
-      ) : (
-        <></>
-      )}
+      <SyncButton location={playerSetting.settingExportLocation}></SyncButton>
       <GenericSelectDialog
         visible={selectVisible}
         options={currentSelectOption.options}
