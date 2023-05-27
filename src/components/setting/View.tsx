@@ -11,6 +11,7 @@ import { useTranslation } from 'react-i18next';
 import GeneralSettings from './GeneralSettings';
 import SkinSettings from './SkinSettings';
 import DeveloperSettings from './DeveloperSettings';
+import SyncSettings from './SyncSettings';
 import { useNoxSetting } from '../../hooks/useSetting';
 import useRenderSettingItem from './useRenderSetting';
 
@@ -31,6 +32,7 @@ enum VIEW {
   GENERAL = 'General',
   SKIN = 'Skins',
   DEVELOPER = 'Developer Options',
+  BACKUP = 'Sync',
 }
 
 const Stack = createNativeStackNavigator();
@@ -90,7 +92,7 @@ export default ({ navigation }: props) => {
           {renderListItem(
             ICONS.BACKUP,
             'BackupSetting',
-            () => navigation.navigate(VIEW.DUMMY),
+            () => navigation.navigate(VIEW.BACKUP),
             'Settings'
           )}
           {renderListItem(
@@ -145,6 +147,11 @@ export default ({ navigation }: props) => {
         name={VIEW.DEVELOPER}
         component={DeveloperSettings}
         options={{ title: String(t('Settings.DeveloperOptionsName')) }}
+      />
+      <Stack.Screen
+        name={VIEW.BACKUP}
+        component={SyncSettings}
+        options={{ title: String(t('Settings.BackupSettingName')) }}
       />
     </Stack.Navigator>
   );

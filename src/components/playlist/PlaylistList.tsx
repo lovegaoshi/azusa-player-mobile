@@ -6,6 +6,8 @@ import { IconButton, Text } from 'react-native-paper';
 import TrackPlayer from 'react-native-track-player';
 import { Dimensions } from 'react-native';
 import { useTranslation } from 'react-i18next';
+import { useDebounce } from 'use-debounce';
+
 import { styles } from '../style';
 import SongInfo from './SongInfo';
 import { useNoxSetting } from '../../hooks/useSetting';
@@ -40,6 +42,7 @@ export default () => {
   const [shouldReRender, setShouldReRender] = useState(false);
   const [currentRows, setCurrentRows] = useState<NoxMedia.Song[]>([]);
   const [searchText, setSearchText] = useState('');
+  const [debouncedSearchText] = useDebounce(searchText, 500);
   const [refreshing, setRefreshing] = useState(false);
   const playlistRef = React.useRef<any>(null);
 
@@ -262,8 +265,7 @@ export default () => {
     setCurrentRows(currentPlaylist.songList);
   }, [currentPlaylist, playlistShouldReRender]);
 
-  // TODO: use debunceValue
-  useEffect(() => handleSearch(searchText), [searchText]);
+  useEffect(() => handleSearch(debouncedSearchText), [debouncedSearchText]);
 
   useEffect(() => {
     setShouldReRender(val => !val);

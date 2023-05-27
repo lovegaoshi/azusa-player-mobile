@@ -19,6 +19,14 @@ interface props {
   onSubmit?: (input: { [key: string]: string }) => void;
 }
 
+const DialogTitle = ({ title }: { title: string | undefined }) => {
+  if (!title) return <View></View>;
+  return (
+    <Dialog.Title style={{ maxHeight: 100 }}>
+      {title.length > 20 ? title.substring(0, 20) + '...' : title}
+    </Dialog.Title>
+  );
+};
 /**
  * a generic dialog that displays a list of items in inputs
  */
@@ -42,15 +50,6 @@ export default ({
     onSubmit(currentInput);
   };
 
-  const renderTitle = () => {
-    if (!title) return <View></View>;
-    return (
-      <Dialog.Title style={{ maxHeight: 100 }}>
-        {title.length > 20 ? title.substring(0, 20) + '...' : title}
-      </Dialog.Title>
-    );
-  };
-
   React.useEffect(
     () =>
       setCurrentInput(
@@ -65,7 +64,7 @@ export default ({
       onDismiss={handleClose}
       style={{ maxHeight: '60%', minHeight: '50%' }}
     >
-      {renderTitle()}
+      <DialogTitle title={title} />
       <Dialog.Content style={{ flex: 1, minHeight: '20%' }}>
         <FlatList
           style={{ flex: 6 }}

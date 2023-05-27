@@ -69,7 +69,7 @@ export async function PlaybackService() {
             TrackPlayer.load({ ...currentTrack, ...updatedMetadata });
           });
         })
-        .catch(() => console.error('resolveURL failed', event.track));
+        .catch(e => console.error('resolveURL failed', event.track, e));
     }
   });
 

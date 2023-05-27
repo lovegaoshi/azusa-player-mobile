@@ -1,24 +1,22 @@
-// https://github.com/FormidableLabs/react-native-app-auth/blob/main/docs/config-examples/dropbox.md
-// https://github.com/lovegaoshi/azusa-player/blob/nox-player/src/utils/dropboxauth.js
-import { DropboxAuth, Dropbox as _Dropbox } from 'dropbox';
+import { Dropbox as _Dropbox, files } from 'dropbox';
 import { authorize } from 'react-native-app-auth';
+import { getArrayBufferForBlob } from 'react-native-blob-jsi-helper';
+
 import { DROPBOX_KEY, DROPBOX_SECRET } from '@env';
-import { logger } from './logger';
+import { logger } from '../../../utils/Logger';
 
 const DEFAULT_FILE_NAME = 'nox.noxBackup';
 const DEFAULT_FILE_PATH = `/${DEFAULT_FILE_NAME}`;
 
 const config = {
-  clientId:  DROPBOX_KEY,
+  clientId: DROPBOX_KEY,
   clientSecret: DROPBOX_SECRET,
-  redirectUrl: 'com.noxplayer.noxplayermobile://oauth',
+  // change this in android/app/build.gradle
+  redirectUrl: 'com.noxplayer://oauth',
   scopes: [],
   serviceConfiguration: {
     authorizationEndpoint: 'https://www.dropbox.com/oauth2/authorize',
     tokenEndpoint: `https://www.dropbox.com/oauth2/token`,
-  },
-  additionalParameters: {
-    token_access_type: 'offline',
   },
 };
 
@@ -38,12 +36,16 @@ let dbx = new _Dropbox({
  * @param {function} callback function that process the returned url after oauth2.
  * @param {function} errorHandling
  */
-export const getAuth = async (callback = () => checkAuthentication().then(console.log), errorHandling = console.error) => {
+export const getAuth = async (
+  callback = () => checkAuthentication().then(console.log),
+  errorHandling = console.error
+) => {
   const authState = await authorize(config);
-  const dropboxUID = authState.tokenAdditionalParameters.account_id;
+  console.log(authState);
+  const dropboxUID = authState.tokenAdditionalParameters?.account_id;
   if (dropboxUID) {
     dbx = new _Dropbox({
-      accessToken: dropboxUID,
+      accessToken: authState.accessToken, //dropboxUID,
     });
     callback();
   } else {
@@ -58,15 +60,18 @@ export const getAuth = async (callback = () => checkAuthentication().then(consol
  * @param {string} query
  * @returns {string}
  */
+
 const find = async (query = DEFAULT_FILE_NAME) => {
   const data = await dbx.filesSearchV2({
     query,
     options: {
-      order_by: 'last_modified_time',
+      order_by: { '.tag': 'last_modified_time' },
     },
   });
   try {
-    return data.result.matches[0].metadata.metadata.path_display;
+    const fileMetadata = data.result.matches[0]
+      .metadata as files.MetadataV2Metadata;
+    return fileMetadata.metadata.path_display;
   } catch (e) {
     console.warn(`no ${query} found.`);
     return null;
@@ -81,10 +86,10 @@ const find = async (query = DEFAULT_FILE_NAME) => {
  * @param {string} fpath
  * @returns
  */
-const upload = async (content, fpath = DEFAULT_FILE_PATH) => {
+const upload = async (content: Uint8Array, fpath = DEFAULT_FILE_PATH) => {
   return await dbx.filesUpload({
     path: fpath,
-    mode: 'overwrite',
+    mode: { '.tag': 'overwrite' },
     contents: content,
   });
 };
@@ -100,8 +105,10 @@ const download = async (fpath = DEFAULT_FILE_PATH) => {
   if (fpath === null) {
     return null;
   }
-  const blob = (await dbx.filesDownload({ path: fpath })).result.fileBlob.arrayBuffer();
-  return new Uint8Array(await blob);
+  const downloadedFile = await dbx.filesDownload({ path: fpath });
+  // @ts-ignore: dropbox didnt have fileBlob in their sdk anywhere but UPGRADING.md
+  const blob = getArrayBufferForBlob(downloadedFile.result.fileBlob);
+  return new Uint8Array(blob);
 };
 
 /**
@@ -111,6 +118,9 @@ const download = async (fpath = DEFAULT_FILE_PATH) => {
  */
 export const noxRestore = async () => {
   const noxFile = await find();
+  if (!noxFile) {
+    throw new Error('noxfile is not found on dropbox.');
+  }
   return await download(noxFile);
 };
 
@@ -120,7 +130,7 @@ export const noxRestore = async () => {
  * @param {Object} content
  * @returns
  */
-export const noxBackup = async (content) => {
+export const noxBackup = async (content: Uint8Array) => {
   return await upload(content);
 };
 
@@ -143,9 +153,12 @@ const checkAuthentication = async () => {
  * @param {function} errorCallback
  * @returns
  */
-export const loginDropbox = async (callback = () => undefined, errorCallback = console.error) => {
+export const loginDropbox = async (
+  callback: () => any = () => undefined,
+  errorCallback = console.error
+) => {
   try {
-    if (!await checkAuthentication()) {
+    if (!(await checkAuthentication())) {
       console.debug('dropbox token expired, need to log in');
       await getAuth(callback, errorCallback);
     } else {

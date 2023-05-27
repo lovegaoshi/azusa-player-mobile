@@ -17,6 +17,7 @@ import {
 import { createStyle } from '../components/style';
 import noxPlayingList, { setPlayingList } from '../store/playingList';
 import { resolveBackgroundImage } from '../components/background/MainBackground';
+import { NoxStorage } from '../types/storage';
 
 const { getState, setState } = noxPlayingList;
 
@@ -119,7 +120,7 @@ export const useNoxSetting = create<NoxSetting>((set, get) => ({
   searchBarProgress: 0,
   searchBarProgressEmitter: (val: number) => {
     set({ searchBarProgress: val / 100 });
-    return void 0;
+    return undefined;
   },
   songMenuCoords: { x: 0, y: 0 },
   setSongMenuCoords: (val: NoxTheme.coordinates) =>
@@ -267,5 +268,17 @@ export const useNoxSetting = create<NoxSetting>((set, get) => ({
       storedPlayerSetting: val.settings || DEFAULT_SETTING,
       cookies: val.cookies,
     };
+  },
+
+  exportLegacy: () => {
+    const exportedLegacy: {
+      [key: string]: NoxMedia.Playlist | string[];
+    } = {
+      MyFavList: get().playlistIds,
+    };
+    for (const [key, value] of Object.entries(get().playlists)) {
+      exportedLegacy[key] = value;
+    }
+    return exportedLegacy;
   },
 }));

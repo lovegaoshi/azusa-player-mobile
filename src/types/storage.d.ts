@@ -1,11 +1,14 @@
+import { EXPORT_OPTIONS } from '../enums/Sync';
+
 declare namespace NoxStorage {
   export interface PlayerSettingDict {
     autoRSSUpdate: boolean;
     skin: string;
     parseSongName: boolean;
     keepSearchedSongListWhenPlaying: boolean;
-    settingExportLocation: string;
+    settingExportLocation: EXPORT_OPTIONS;
     personalCloudIP: string;
+    personalCloudID: string;
     noxVersion: string;
     noxCheckedVersion: string;
     hideCoverInMobile: boolean;
@@ -16,6 +19,7 @@ declare namespace NoxStorage {
     // TODO: implement this feature
     dataSaver: boolean;
     fastBiliSearch: boolean;
+    appID: string;
     [key: string]: any;
   }
 

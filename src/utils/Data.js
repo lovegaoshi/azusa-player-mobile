@@ -142,11 +142,11 @@ export const ENUMS = {
  * @returns promise that resolves the media stream url.
  */
 export const fetchPlayUrlPromise = async (bvid, cid) => {
-  const cidStr = cid.toString();
+  const cidStr = String(cid);
   if (cidStr.startsWith(ENUMS.audioType)) {
     return fetchAudioPlayUrlPromise(bvid);
   }
-  return fetchVideoPlayUrlPromise(bvid, cid);
+  return fetchVideoPlayUrlPromise(bvid, cidStr);
 };
 
 /**
@@ -165,12 +165,12 @@ export const fetchVideoPlayUrlPromise = async (
     `fethcVideoPlayURL: ${URL_PLAY_URL.replace('{bvid}', bvid).replace(
       '{cid}',
       cid
-    )}`
+    )} with ${extractType}`
   );
   // HACK:  this should be a breaking change that stringified cid
   // will never be not true.
   if (!cid || cid.includes('null')) {
-    cid = await fetchCID(bvid).catch(err => logger.error(err, 'cid', cid));
+    cid = await fetchCID(bvid);
   }
   try {
     const res = await bfetch(

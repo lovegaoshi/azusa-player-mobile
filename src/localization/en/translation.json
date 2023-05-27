@@ -116,6 +116,12 @@
     "DeveloperOptionsDesc": "Experimental Options in pre-release.",
     "FeatureNotImplemented": "Feature not implemented"
   },
+  "Sync": {
+    "Local": "Local",
+    "Dropbox": "Dropbox",
+    "PersonalCloud": "Personal Cloud",
+    "ExportLocation": "Select Sync:"
+  },
   "Login": {
     "BilibiliNotLoggedIn": "User not logged in\n",
     "BilibiliLoginButton": "Click to log in",

@@ -17,7 +17,7 @@ export default ({
   searchText,
   setSearchText,
   search = false,
-  onPressed = () => void 0,
+  onPressed = () => undefined,
 }: props) => {
   const { t } = useTranslation();
   const currentPlaylist = useNoxSetting(state => state.currentPlaylist);

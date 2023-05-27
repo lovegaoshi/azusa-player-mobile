@@ -40,8 +40,8 @@ interface menuProps {
 }
 export const CopiedPlaylistMenuItem = ({
   getFromListOnClick,
-  onSubmit = () => void 0,
-  onCancel = () => void 0,
+  onSubmit = () => undefined,
+  onCancel = () => undefined,
 }: menuProps) => {
   const { t } = useTranslation();
   const [dialogOpen, setDialogOpen] = useState(false);

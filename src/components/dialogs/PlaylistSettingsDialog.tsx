@@ -20,8 +20,8 @@ interface props {
 
 export default ({
   visible,
-  onClose = () => void 0,
-  onSubmit = () => void 0,
+  onClose = () => undefined,
+  onSubmit = () => undefined,
 }: props) => {
   const { t } = useTranslation();
   const playerStyle = useNoxSetting(state => state.playerStyle);

@@ -23,8 +23,8 @@ interface props {
 export default ({
   visible,
   fromList,
-  onClose = () => void 0,
-  onSubmit = () => void 0,
+  onClose = () => undefined,
+  onSubmit = () => undefined,
 }: props) => {
   const { t } = useTranslation();
   const [playlistName, setPlaylistName] = useState('');

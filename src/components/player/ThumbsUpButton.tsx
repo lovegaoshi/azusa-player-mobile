@@ -49,14 +49,14 @@ export default () => {
     if (!currentTrack?.song) return;
     switch (status) {
       case THUMBUPSTATUS.notThumbedUp:
-        sendBVLike(currentTrack.song.bvid).then((res) => {
+        sendBVLike(currentTrack.song.bvid).then(res => {
           if (res.code === 0) setStatus(THUMBUPSTATUS.ThumbedUp);
         });
         break;
       case THUMBUPSTATUS.ThumbedUp:
         if (triple) {
           // TODO: use that starred lottie animation
-          sendBVTriple(currentTrack.song.bvid).then((res) => {
+          sendBVTriple(currentTrack.song.bvid).then(res => {
             if (res.code === 0) setStatus(THUMBUPSTATUS.Tripled);
           });
         }
@@ -77,7 +77,10 @@ export default () => {
         return;
       }
       const liked = await checkLiked(track.song);
-      if (liked) {
+      logger.log(`liked: ${liked}`);
+      if (liked === undefined) {
+        setStatus(THUMBUPSTATUS.notLoggedIn);
+      } else if (liked) {
         setStatus(THUMBUPSTATUS.ThumbedUp);
       } else {
         setStatus(THUMBUPSTATUS.notThumbedUp);
@@ -92,7 +95,7 @@ export default () => {
       icon={status}
       onPress={() => onClick()}
       // TODO: use moti to make animation on triple
-      // https://github.com/nandorojo/moti/discussions/148 
+      // https://github.com/nandorojo/moti/discussions/148
       onLongPress={() => onClick(true)}
       mode={playerStyle.playerControlIconContained}
       size={30}
