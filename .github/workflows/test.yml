@@ -42,3 +42,13 @@ jobs:
         run: |
          echo "Tag name from GITHUB_REF_NAME: $GITHUB_REF_NAME"
          echo "Tag name from github.ref_name: ${{  github.ref_name }}"
+
+      - name: Get Recent Commit Tag
+        id: get_commit_tag
+        run: |
+          COMMIT_TAG=$(git describe --tags --abbrev=0)
+          echo "COMMIT_TAG=${COMMIT_TAG}" >> $GITHUB_ENV
+
+      - name: Display Commit Tag
+        run: |
+          echo "Commit Tag: $COMMIT_TAG"
