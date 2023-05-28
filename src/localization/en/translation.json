@@ -122,6 +122,9 @@
     "PersonalCloud": "Personal Cloud",
     "ExportLocation": "Select Sync:"
   },
+  "SleepTimer": {
+    "Title": "Sleep Timer"
+  },
   "Login": {
     "BilibiliNotLoggedIn": "User not logged in\n",
     "BilibiliLoginButton": "Click to log in",

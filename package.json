@@ -45,6 +45,7 @@
     "react-native": "0.71.4",
     "react-native-app-auth": "^6.4.3",
     "react-native-blob-jsi-helper": "^0.3.0",
+    "react-native-countdown-circle-timer": "^3.2.1",
     "react-native-draggable-flatlist": "^4.0.1",
     "react-native-fast-image": "^8.6.3",
     "react-native-gesture-handler": "^2.9.0",

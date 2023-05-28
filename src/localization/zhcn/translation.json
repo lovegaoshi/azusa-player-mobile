@@ -116,6 +116,15 @@
     "DeveloperOptionsDesc": "正在测试的功能",
     "FeatureNotImplemented": "功能孩妹实现"
   },
+  "Sync": {
+    "Local": "本地",
+    "Dropbox": "Dropbox",
+    "PersonalCloud": "私有云",
+    "ExportLocation": "选择同步方式："
+  },
+  "SleepTimer": {
+    "Title": "定时停止播放"
+  },
   "Login": {
     "BilibiliNotLoggedIn": "用户未登录",
     "BilibiliLoginButton": "扫码登录",

@@ -15,6 +15,7 @@ import { STORAGE_KEYS } from '../../utils/ChromeStorage';
 import NewPlaylistDialog from '../dialogs/NewPlaylistDialog';
 import useAlert from '../dialogs/useAlert';
 import ShuffleAllButton from './ShuffleAllButton';
+import TimerButton from './TimerButton';
 
 export default (props: any) => {
   const navigation = useNavigation();
@@ -148,7 +149,7 @@ export default (props: any) => {
         >
           <ShuffleAllButton />
           <AddPlaylistButton ref={addPlaylistButtonRef} />
-          <IconButton icon="timer-outline" onPress={() => console.log(1234)} />
+          <TimerButton />
         </View>
       </TouchableRipple>
       <TouchableRipple
