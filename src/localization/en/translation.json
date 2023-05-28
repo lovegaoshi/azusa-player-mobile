@@ -114,6 +114,9 @@
     "InfoSettingDesc": "Info about the app.",
     "DeveloperOptionsName": "Developer Options",
     "DeveloperOptionsDesc": "Experimental Options in pre-release.",
+    "LanguageOptionsName": "Change Language",
+    "LanguageOptionsDesc": "Change app language.",
+    "LanguageOptionsTitle": "Change Language",
     "FeatureNotImplemented": "Feature not implemented"
   },
   "Sync": {
@@ -121,6 +124,9 @@
     "Dropbox": "Dropbox",
     "PersonalCloud": "Personal Cloud",
     "ExportLocation": "Select Sync:"
+  },
+  "SleepTimer": {
+    "Title": "Sleep Timer"
   },
   "Login": {
     "BilibiliNotLoggedIn": "User not logged in\n",
@@ -134,11 +140,11 @@
     "BilibiliLoginProbeFailed": "Checking QR code login status failed. Please check network."
   },
   "VersionUpdate": {
-    "NoUpdates": "Noxplayer is already at the newest version.\nCurrent version:{{currentVersion}}",
+    "NoUpdates": "Noxplayer is already at the newest version.\nCurrent version:{{currentVersion}}\nDev version: {{devVersion}}",
     "UpdateCheckingSnackbar": "Checking updates...",
     "UpdateCheckingFailedSnackbar": "Checking update via github failed.",
     "UpdateFoundTitle": "New update found!",
-    "UpdateFoundContent": "Noxplayer version {{noxCheckedVersion}} is released. Go to gtihub to dowenload.\nCurrent version:{{currentVersion}}",
+    "UpdateFoundContent": "Noxplayer version {{noxCheckedVersion}} is released. Go to gtihub to dowenload.\nCurrent version:{{currentVersion}}\nDev version: {{devVersion}}",
     "UpdatedVersionAlertTitle": "Noxplayer updated!",
     "UpdatedVersionAlertContent": "Noxplayer updated to version {{version}}! Check out the release notes at github.",
     "UpdateGo2Github": "Go to Github"

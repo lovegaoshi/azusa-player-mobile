@@ -170,7 +170,3 @@ export const loginDropbox = async (
     return false;
   }
 };
-
-// uploadNox({'timestmap': new Date().toString()});
-// downloadNox().then(console.log);
-// authenticate().then(console.log)

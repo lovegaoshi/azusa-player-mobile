@@ -108,6 +108,7 @@ export default () => {
         visible={selectVisible}
         options={currentSelectOption.options}
         renderOptionTitle={currentSelectOption.renderOption}
+        title={String(t('DeveloperSettings.LogLevelName'))}
         defaultIndex={currentSelectOption.defaultIndex}
         onClose={currentSelectOption.onClose}
         onSubmit={currentSelectOption.onSubmit}

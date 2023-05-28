@@ -18,10 +18,15 @@ export default () => {
       );
       const json = await res.json();
       const noxCheckedVersion = json.tag_name;
+      const devres = await fetch(
+          'https://api.github.com/repos/lovegaoshi/azusa-player-mobile/releases'
+        ),
+        devjson = await devres.json(),
+        devCheckedVersion = devjson[0].tag_name;
       setPlayerSetting({ noxCheckedVersion });
-      return noxCheckedVersion;
+      return [noxCheckedVersion, devCheckedVersion];
     } catch {
-      return null;
+      return [null, null];
     }
   };
 
@@ -35,7 +40,7 @@ export default () => {
         duration: Snackbar.LENGTH_INDEFINITE,
       });
     }
-    const noxCheckedVersion = await getVersion();
+    const [noxCheckedVersion, devVersion] = await getVersion();
     Snackbar.dismiss();
     if (!noxCheckedVersion) {
       Snackbar.show({
@@ -51,6 +56,7 @@ export default () => {
         String(
           t('VersionUpdate.NoUpdates', {
             currentVersion: currentPlayerSetting.noxVersion,
+            devVersion,
           })
         )
       );
@@ -62,6 +68,7 @@ export default () => {
           t('VersionUpdate.UpdateFoundContent', {
             noxCheckedVersion,
             currentVersion: currentPlayerSetting.noxVersion,
+            devVersion,
           })
         ),
         () =>

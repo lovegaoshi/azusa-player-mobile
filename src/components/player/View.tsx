@@ -3,6 +3,7 @@ import TrackPlayer, { useActiveTrack } from 'react-native-track-player';
 import { SafeAreaView, StatusBar, View } from 'react-native';
 import { ParamListBase } from '@react-navigation/native';
 import CookieManager from '@react-native-cookies/cookies';
+import { useTranslation } from 'react-i18next';
 
 import { TrackInfo } from './';
 import { SetupService } from '../../services';
@@ -38,17 +39,19 @@ export function useSetupPlayer() {
   const [playerReady, setPlayerReady] = useState<boolean>(false);
   const initPlayer = useNoxSetting(state => state.initPlayer);
   const { updateVersion, checkVersion } = useVersionCheck();
+  const { i18n } = useTranslation();
 
   useEffect(() => {
     let unmounted = false;
     (async () => {
-      const { currentPlayingID, storedPlayerSetting, cookies } =
+      const { currentPlayingID, storedPlayerSetting, language } =
         await initPlayer(await initPlayerObject());
       /**
        * this doesnt even seems necessary?
       for (const [key, value] of Object.entries(cookies)) {
         CookieManager.setFromResponse(key, value);
       } */
+      i18n.changeLanguage(language);
       await SetupService();
       updateVersion(storedPlayerSetting);
       checkVersion(true, storedPlayerSetting);

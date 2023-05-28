@@ -20,6 +20,7 @@ declare namespace NoxStorage {
     dataSaver: boolean;
     fastBiliSearch: boolean;
     appID: string;
+    language?: string;
     [key: string]: any;
   }
 
@@ -36,5 +37,6 @@ declare namespace NoxStorage {
     // site: set-cookie header
     cookies: { [key: string]: string };
     lyricMapping: Map<string, NoxMedia.LyricDetail>;
+    language?: string;
   }
 }

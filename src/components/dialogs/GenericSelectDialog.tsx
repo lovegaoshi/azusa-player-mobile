@@ -54,40 +54,42 @@ export default ({
   React.useEffect(() => setCurrentIndex(defaultIndex), [defaultIndex]);
 
   return (
-    <Dialog
-      visible={visible}
-      onDismiss={handleClose}
-      style={{ maxHeight: '60%', minHeight: '50%' }}
-    >
-      <DialogTitle title={title} />
-      <Dialog.Content style={{ flex: 1, minHeight: '20%' }}>
-        <FlatList
-          style={{ flex: 6 }}
-          data={options}
-          renderItem={({ item, index }) => (
-            <Pressable
-              onPress={() => setCurrentIndex(index)}
-              style={{ paddingVertical: 5 }}
-              key={index}
-            >
-              <View style={{ flexDirection: 'row' }} key={index}>
-                <RadioButton
-                  value={item}
-                  status={currentIndex === index ? 'checked' : 'unchecked'}
-                  onPress={() => setCurrentIndex(index)}
-                />
-                <Text variant="titleLarge" style={{ paddingTop: 3 }}>
-                  {renderOptionTitle(item)}
-                </Text>
-              </View>
-            </Pressable>
-          )}
-        />
-      </Dialog.Content>
-      <Dialog.Actions style={{ maxHeight: 60, paddingBottom: 0 }}>
-        <Button onPress={handleClose}>{t('Dialog.cancel')}</Button>
-        <Button onPress={handleSubmit}>{t('Dialog.ok')}</Button>
-      </Dialog.Actions>
-    </Dialog>
+    <Portal>
+      <Dialog
+        visible={visible}
+        onDismiss={handleClose}
+        style={{ maxHeight: '60%', minHeight: '50%', zIndex: 100000 }}
+      >
+        <DialogTitle title={title} />
+        <Dialog.Content style={{ flex: 1, minHeight: '20%' }}>
+          <FlatList
+            style={{ flex: 6 }}
+            data={options}
+            renderItem={({ item, index }) => (
+              <Pressable
+                onPress={() => setCurrentIndex(index)}
+                style={{ paddingVertical: 5 }}
+                key={index}
+              >
+                <View style={{ flexDirection: 'row' }} key={index}>
+                  <RadioButton
+                    value={item}
+                    status={currentIndex === index ? 'checked' : 'unchecked'}
+                    onPress={() => setCurrentIndex(index)}
+                  />
+                  <Text variant="titleLarge" style={{ paddingTop: 3 }}>
+                    {renderOptionTitle(item)}
+                  </Text>
+                </View>
+              </Pressable>
+            )}
+          />
+        </Dialog.Content>
+        <Dialog.Actions style={{ maxHeight: 60, paddingBottom: 0 }}>
+          <Button onPress={handleClose}>{t('Dialog.cancel')}</Button>
+          <Button onPress={handleSubmit}>{t('Dialog.ok')}</Button>
+        </Dialog.Actions>
+      </Dialog>
+    </Portal>
   );
 };

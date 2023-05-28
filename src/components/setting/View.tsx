@@ -14,6 +14,7 @@ import DeveloperSettings from './DeveloperSettings';
 import SyncSettings from './SyncSettings';
 import { useNoxSetting } from '../../hooks/useSetting';
 import useRenderSettingItem from './useRenderSetting';
+import LanguageSettings from './LanguageSettings';
 
 enum ICONS {
   HOME = 'cog',
@@ -24,6 +25,7 @@ enum ICONS {
   BACKUP = 'backup-restore',
   INFO = 'information',
   DEVELOPER = 'application-brackets',
+  LANGUAGE = 'translate',
 }
 
 enum VIEW {
@@ -95,6 +97,7 @@ export default ({ navigation }: props) => {
             () => navigation.navigate(VIEW.BACKUP),
             'Settings'
           )}
+          <LanguageSettings icon={ICONS.LANGUAGE} />
           {renderListItem(
             ICONS.DEVELOPER,
             'DeveloperOptions',
