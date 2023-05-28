@@ -138,11 +138,11 @@
     "BilibiliLoginProbeFailed": "检查二维码失败，请检查网络"
   },
   "VersionUpdate": {
-    "NoUpdates": "管人播放器已经是最新版本。\n当前版本：{{currentVersion}}",
+    "NoUpdates": "管人播放器已经是最新版本。\n当前版本：{{currentVersion}}\n开发版本：{{devVersion}}",
     "UpdateCheckingSnackbar": "联网检查更新...",
     "UpdateCheckingFailedSnackbar": "联网github检查更新失败",
     "UpdateFoundTitle": "发现新版本",
-    "UpdateFoundContent": "管人播放器 {{noxCheckedVersion}} 已发布。前往gayhub下载。\n当前版本：{{currentVersion}}",
+    "UpdateFoundContent": "管人播放器 {{noxCheckedVersion}} 已发布。前往Github下载。\n当前版本：{{currentVersion}}\n开发版本：{{devVersion}}",
     "UpdatedVersionAlertTitle": "管人播放器更新了",
     "UpdatedVersionAlertContent": "管人播放器更新到了版本 {{version}}!去GitHub查看更新内容.",
     "UpdateGo2Github": "前往Gayhub"
