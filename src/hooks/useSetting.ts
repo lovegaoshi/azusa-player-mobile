@@ -133,7 +133,7 @@ export const useNoxSetting = create<NoxSetting>((set, get) => ({
     set({ songMenuSongIndexes: val }),
   playlistShouldReRender: false,
   togglePlaylistShouldReRender: () =>
-    set({ playlistShouldReRender: !get().playlistShouldReRender }),
+    set(state => ({ playlistShouldReRender: state.playlistShouldReRender })),
 
   currentPlayingId: '',
   // MOCK: is it slow? GeT a BeTtEr PhOnE

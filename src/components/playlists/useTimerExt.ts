@@ -5,7 +5,6 @@
 import React, { useEffect } from 'react';
 import { create } from 'zustand';
 import TrackPlayer from 'react-native-track-player';
-import BackgroundTimer from 'react-native-background-timer';
 
 interface TimerStore {
   minutes: number;
@@ -13,10 +12,9 @@ interface TimerStore {
   seconds: number;
   setSeconds: (val: number) => void;
   originalMMSS: [number, number];
+  setOriginalMMSS: (val: [number, number]) => void;
   startTimer: boolean;
   setStartTimer: (val: boolean) => void;
-  timerStart: () => void;
-  timerEnd: () => void;
   countdown: () => boolean;
 }
 
@@ -26,21 +24,9 @@ const timerStore = create<TimerStore>((set, get) => ({
   seconds: 0,
   setSeconds: (val: number) => set({ seconds: val }),
   originalMMSS: [30, 0],
+  setOriginalMMSS: (val: [number, number]) => set({ originalMMSS: val }),
   startTimer: false,
   setStartTimer: (val: boolean) => set({ startTimer: val }),
-  timerStart: () => {
-    set(state => ({
-      startTimer: true,
-      originalMMSS: [state.minutes, state.seconds],
-    }));
-  },
-  timerEnd: () => {
-    set(state => ({
-      startTimer: false,
-      minutes: state.originalMMSS[0],
-      seconds: state.originalMMSS[1],
-    }));
-  },
   countdown: () => {
     const seconds = get().seconds;
     const minutes = get().minutes;
@@ -62,38 +48,43 @@ export default () => {
   const setMinutes = timerStore(state => state.setMinutes);
   const seconds = timerStore(state => state.seconds);
   const setSeconds = timerStore(state => state.setSeconds);
+  const originalMMSS = timerStore(state => state.originalMMSS);
+  const setOriginalMMSS = timerStore(state => state.setOriginalMMSS);
   const startTimer = timerStore(state => state.startTimer);
   const setStartTimer = timerStore(state => state.setStartTimer);
-  const timerStartStore = timerStore(state => state.timerStart);
-  const timerEnd = timerStore(state => state.timerEnd);
   const countdown = timerStore(state => state.countdown);
 
   const timerStart = () => {
-    timerStartStore();
-    BackgroundTimer.runBackgroundTimer(runTimer, 1000);
+    setOriginalMMSS([minutes, seconds]);
+    setStartTimer(true);
   };
 
   const timerPause = () => {
-    BackgroundTimer.stopBackgroundTimer();
     setStartTimer(false);
   };
 
   const timerRestart = () => {
-    BackgroundTimer.stopBackgroundTimer();
-    timerEnd();
-    setTimeout(function () {
-      BackgroundTimer.stopBackgroundTimer();
-    }, 500);
+    setStartTimer(false);
+    setMinutes(originalMMSS[0]);
+    setSeconds(originalMMSS[1]);
   };
 
   const onTimerUp = () => TrackPlayer.pause();
 
-  const runTimer = () => {
-    if (countdown()) {
-      onTimerUp();
-      timerRestart();
-    }
-  };
+  useEffect(() => {
+    if (!startTimer) return () => {};
+    const timer = setInterval(() => {
+      if (countdown()) {
+        onTimerUp();
+        clearInterval(timer);
+        timerRestart();
+      }
+    }, 1000);
+
+    return () => {
+      clearInterval(timer);
+    };
+  });
 
   return {
     minutes,

@@ -45,7 +45,7 @@ export default ({
       <Dialog
         visible={visible}
         onDismiss={handleClose}
-        style={{ width: '50%' }}
+        style={{ width: '60%' }}
       >
         <Dialog.Title style={{ textAlign: 'center' }}>
           {t('SleepTimer.Title')}
