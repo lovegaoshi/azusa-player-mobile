@@ -1,6 +1,10 @@
 /* eslint-disable prefer-const */
 import { create } from 'zustand';
-import { dummyPlaylist, dummyPlaylistList } from '../objects/Playlist';
+import {
+  dummyPlaylist,
+  dummyPlaylistList,
+  updatePlaylistSongs,
+} from '../objects/Playlist';
 import {
   DEFAULT_SETTING,
   STORAGE_KEYS,
@@ -211,13 +215,7 @@ export const useNoxSetting = create<NoxSetting>((set, get) => ({
   ) => {
     let playlists = get().playlists;
     const currentPlaylist = get().currentPlaylist;
-    const playlistSongsId = playlist.songList.map(v => v.id);
-    const removeSongsId = removeSongs.map(v => v.id);
-    // FI"FO".
-    playlist.songList = addSongs
-      .filter(v => !playlistSongsId.includes(v.id))
-      .concat(playlist.songList)
-      .filter(v => !removeSongsId.includes(v.id));
+    updatePlaylistSongs(playlist, addSongs, removeSongs);
     playlists[playlist.id] = playlist;
     if (playlist.id === currentPlaylist.id) {
       set({ currentPlaylist: playlist });

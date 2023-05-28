@@ -93,7 +93,7 @@ export const TrackInfo: React.FC<{
         <View
           style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}
         >
-          <FavoriteButton />
+          <FavoriteButton track={track} />
         </View>
         <View
           style={{
