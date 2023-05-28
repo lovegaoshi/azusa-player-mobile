@@ -77,7 +77,11 @@ jobs:
         run: alias yarn.cmd="yarn"
 
       - name: Install dependencies
-        run: yarn
+        uses: nick-fields/retry@v2
+        with:
+          timeout_minutes: 10
+          max_attempts: 10
+          command: yarn
 
       - name: clean generated builds
         run: rm -rf android/app/build/generated/
