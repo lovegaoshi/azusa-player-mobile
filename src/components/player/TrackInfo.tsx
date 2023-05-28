@@ -13,6 +13,7 @@ import type { Track } from 'react-native-track-player';
 import { useNoxSetting } from '../../hooks/useSetting';
 import { getCurrentTPQueue } from '../../store/playingList';
 import { LyricView } from './Lyric';
+import { IconButton } from 'react-native-paper';
 
 export const TrackInfo: React.FC<{
   track?: Track;
@@ -88,25 +89,45 @@ export const TrackInfo: React.FC<{
       <Text style={[styles.titleText, { color: playerStyle.colors.primary }]}>
         {track?.title}
       </Text>
-      <Text
-        style={[styles.artistText, { color: playerStyle.colors.secondary }]}
-      >
-        {track?.artist}
-      </Text>
-      <Text
-        style={[styles.artistText, { color: playerStyle.colors.secondary }]}
-      >
-        {
-          // HACK: this becomes a problem when a playlist is renamed while playing.
-          // but its okay i think. its safer to guard against eg. playlist deletion?
-          currentPlayingList.title
-        }
-      </Text>
-      <Text
-        style={[styles.artistText, { color: playerStyle.colors.secondary }]}
-      >
-        {getTrackLocation()}
-      </Text>
+      <View style={{ flexDirection: 'row' }}>
+        <View
+          style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}
+        >
+          <IconButton icon="cards-heart-outline"></IconButton>
+        </View>
+        <View
+          style={{
+            flex: 4,
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}
+        >
+          <Text
+            style={[styles.artistText, { color: playerStyle.colors.secondary }]}
+          >
+            {track?.artist}
+          </Text>
+          <Text
+            style={[styles.artistText, { color: playerStyle.colors.secondary }]}
+          >
+            {
+              // HACK: this becomes a problem when a playlist is renamed while playing.
+              // but its okay i think. its safer to guard against eg. playlist deletion?
+              currentPlayingList.title
+            }
+          </Text>
+          <Text
+            style={[styles.artistText, { color: playerStyle.colors.secondary }]}
+          >
+            {getTrackLocation()}
+          </Text>
+        </View>
+        <View
+          style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}
+        >
+          <IconButton icon="dots-vertical"></IconButton>
+        </View>
+      </View>
     </View>
   );
 };
