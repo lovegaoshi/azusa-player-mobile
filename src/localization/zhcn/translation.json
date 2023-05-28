@@ -114,6 +114,7 @@
     "InfoSettingDesc": "版本说明",
     "DeveloperOptionsName": "开发者选项",
     "DeveloperOptionsDesc": "正在测试的功能",
+    "LanguageOptionsTitle": "选择语言",
     "FeatureNotImplemented": "功能孩妹实现"
   },
   "Sync": {

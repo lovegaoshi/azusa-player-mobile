@@ -114,6 +114,9 @@
     "InfoSettingDesc": "Info about the app.",
     "DeveloperOptionsName": "Developer Options",
     "DeveloperOptionsDesc": "Experimental Options in pre-release.",
+    "LanguageOptionsName": "Change Language",
+    "LanguageOptionsDesc": "Change app language.",
+    "LanguageOptionsTitle": "Change Language",
     "FeatureNotImplemented": "Feature not implemented"
   },
   "Sync": {

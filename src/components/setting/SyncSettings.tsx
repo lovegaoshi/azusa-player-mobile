@@ -35,6 +35,7 @@ export default () => {
   const playerSetting = useNoxSetting(state => state.playerSetting);
   const setPlayerSetting = useNoxSetting(state => state.setPlayerSetting);
   const [selectVisible, setSelectVisible] = React.useState(false);
+
   const renderOption = (option = playerSetting.settingExportLocation) => {
     switch (option) {
       case EXPORT_OPTIONS.LOCAL:
@@ -47,6 +48,7 @@ export default () => {
         return 'ERROR';
     }
   };
+
   const [currentSelectOption] = React.useState({
     options: EXPORT_OPTIONS_LIST,
     renderOption,
@@ -77,6 +79,7 @@ export default () => {
       <GenericSelectDialog
         visible={selectVisible}
         options={currentSelectOption.options}
+        title={String(t('Sync.ExportLocation'))}
         renderOptionTitle={currentSelectOption.renderOption}
         defaultIndex={currentSelectOption.defaultIndex}
         onClose={currentSelectOption.onClose}

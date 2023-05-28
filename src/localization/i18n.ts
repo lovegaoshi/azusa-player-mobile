@@ -3,9 +3,16 @@ import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
 import translationEN from './en/translation.json';
 import translationZHCN from './zhcn/translation.json';
+import { Platform, NativeModules } from 'react-native';
+
+const deviceLanguage =
+  Platform.OS === 'ios'
+    ? NativeModules.SettingsManager.settings.AppleLocale ||
+      NativeModules.SettingsManager.settings.AppleLanguages[0] //iOS 13
+    : NativeModules.I18nManager.localeIdentifier;
 
 export const resources = {
-  zhcn: {
+  'zh_CN_#Hans': {
     translation: translationZHCN,
   },
   en: {
@@ -16,7 +23,7 @@ export const resources = {
 i18n.use(initReactI18next).init({
   resources,
   compatibilityJSON: 'v3',
-  lng: 'zhcn',
+  lng: deviceLanguage,
   fallbackLng: 'en',
   interpolation: {
     escapeValue: false,

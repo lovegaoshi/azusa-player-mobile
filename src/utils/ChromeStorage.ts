@@ -61,6 +61,7 @@ export const DEFAULT_SETTING: NoxStorage.PlayerSettingDict = {
   dataSaver: false,
   fastBiliSearch: false,
   appID,
+  language: undefined,
 };
 
 export const saveItem = async (key: string, value: any) => {
