@@ -32,17 +32,16 @@ jobs:
         run: |
           if [[ $TIME_DIFF -gt $((60*60*24*7)) ]]; then
             echo "Last commit is older than a week."
-            echo "::set-output name=commit_changed::false"
+            echo "is_old_commit=true" >> $GITHUB_OUTPUT
           else
             echo "Last commit is within the past week."
-            echo "::set-output name=commit_changed::true"
+            echo "is_old_commit=false" >> $GITHUB_OUTPUT
           fi
-
   build:
     name: Build
     runs-on: ubuntu-latest
     needs: checkLastCommit
-    if: ${{ needs.checkLastCommit.outputs.commit_changed == 'true' }}
+    if: ${{ needs.checkLastCommit.outputs.is_old_commit == false }}
     permissions:
       contents: write
     steps:
