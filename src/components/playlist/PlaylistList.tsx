@@ -345,6 +345,10 @@ export default () => {
               checking={checking}
               checkedList={selected}
               onChecked={() => toggleSelected(getSongIndex(item, index))}
+              onLongPress={() => {
+                setChecking(true);
+                toggleSelected(getSongIndex(item, index));
+              }}
             />
           )}
           keyExtractor={(item, index) => `${item.id}.${index}`}

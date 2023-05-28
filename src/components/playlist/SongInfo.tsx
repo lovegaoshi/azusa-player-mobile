@@ -17,6 +17,7 @@ function SongInfo({
   checkedList,
   checking = false,
   onChecked = () => undefined,
+  onLongPress = () => undefined,
 }: {
   item: NoxMedia.Song;
   index: number;
@@ -24,6 +25,7 @@ function SongInfo({
   playSong: (song: NoxMedia.Song) => void;
   checking?: boolean;
   onChecked?: () => void;
+  onLongPress?: () => void;
   checkedList: boolean[];
 }) {
   const currentPlaylist = useNoxSetting(state => state.currentPlaylist);
@@ -68,7 +70,10 @@ function SongInfo({
         paddingLeft: 10,
       }}
     >
-      <TouchableRipple onPress={checking ? toggleCheck : () => playSong(item)}>
+      <TouchableRipple
+        onLongPress={checking ? toggleCheck : onLongPress}
+        onPress={checking ? toggleCheck : () => playSong(item)}
+      >
         <View style={{ flexDirection: 'row' }}>
           <View style={{ flex: 5 }}>
             <View style={{ flexDirection: 'row' }}>

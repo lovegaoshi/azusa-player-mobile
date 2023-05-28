@@ -15,6 +15,8 @@ interface TimerStore {
   setOriginalMMSS: (val: [number, number]) => void;
   startTimer: boolean;
   setStartTimer: (val: boolean) => void;
+  timerStart: () => void;
+  timerEnd: () => void;
   countdown: () => boolean;
 }
 
@@ -27,6 +29,19 @@ const timerStore = create<TimerStore>((set, get) => ({
   setOriginalMMSS: (val: [number, number]) => set({ originalMMSS: val }),
   startTimer: false,
   setStartTimer: (val: boolean) => set({ startTimer: val }),
+  timerStart: () => {
+    set(state => ({
+      startTimer: true,
+      originalMMSS: [state.minutes, state.seconds],
+    }));
+  },
+  timerEnd: () => {
+    set(state => ({
+      startTimer: false,
+      minutes: state.originalMMSS[0],
+      seconds: state.originalMMSS[1],
+    }));
+  },
   countdown: () => {
     const seconds = get().seconds;
     const minutes = get().minutes;
@@ -48,25 +63,18 @@ export default () => {
   const setMinutes = timerStore(state => state.setMinutes);
   const seconds = timerStore(state => state.seconds);
   const setSeconds = timerStore(state => state.setSeconds);
-  const originalMMSS = timerStore(state => state.originalMMSS);
-  const setOriginalMMSS = timerStore(state => state.setOriginalMMSS);
   const startTimer = timerStore(state => state.startTimer);
   const setStartTimer = timerStore(state => state.setStartTimer);
+  const timerStart = timerStore(state => state.timerStart);
+  const timerEnd = timerStore(state => state.timerEnd);
   const countdown = timerStore(state => state.countdown);
-
-  const timerStart = () => {
-    setOriginalMMSS([minutes, seconds]);
-    setStartTimer(true);
-  };
 
   const timerPause = () => {
     setStartTimer(false);
   };
 
   const timerRestart = () => {
-    setStartTimer(false);
-    setMinutes(originalMMSS[0]);
-    setSeconds(originalMMSS[1]);
+    timerEnd();
   };
 
   const onTimerUp = () => TrackPlayer.pause();
