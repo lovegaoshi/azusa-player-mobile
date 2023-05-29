@@ -1,6 +1,5 @@
 import React, { useCallback, useState } from 'react';
 import {
-  Image,
   StyleSheet,
   Text,
   View,
@@ -10,10 +9,11 @@ import {
 } from 'react-native';
 import type { Track } from 'react-native-track-player';
 
-import { useNoxSetting } from '../../hooks/useSetting';
-import { getCurrentTPQueue } from '../../store/playingList';
-import { LyricView } from './Lyric';
-import { IconButton } from 'react-native-paper';
+import { useNoxSetting } from '../../../hooks/useSetting';
+import { getCurrentTPQueue } from '../../../store/playingList';
+import { LyricView } from '../Lyric';
+import SongMenuButton from './SongMenuButton';
+import FavoriteButton from './FavoriteButton';
 
 export const TrackInfo: React.FC<{
   track?: Track;
@@ -93,7 +93,7 @@ export const TrackInfo: React.FC<{
         <View
           style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}
         >
-          <IconButton icon="cards-heart-outline"></IconButton>
+          <FavoriteButton track={track} />
         </View>
         <View
           style={{
@@ -125,7 +125,7 @@ export const TrackInfo: React.FC<{
         <View
           style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}
         >
-          <IconButton icon="dots-vertical"></IconButton>
+          <SongMenuButton track={track} />
         </View>
       </View>
     </View>

@@ -1,6 +1,10 @@
 /* eslint-disable prefer-const */
 import { create } from 'zustand';
-import { dummyPlaylist, dummyPlaylistList } from '../objects/Playlist';
+import {
+  dummyPlaylist,
+  dummyPlaylistList,
+  updatePlaylistSongs,
+} from '../objects/Playlist';
 import {
   DEFAULT_SETTING,
   STORAGE_KEYS,
@@ -49,15 +53,27 @@ interface NoxSetting {
   playlistShouldReRender: boolean;
   togglePlaylistShouldReRender: () => void;
 
+  /**
+   * currentPlayingId is the current playing song's id/cid. used to highlight
+   * what is current playing in the playlist view.
+   */
   currentPlayingId: string | null;
   setCurrentPlayingId: (val: string) => void;
+  /**
+   * currentPlayingList is a copied playlist of what's currently playing.
+   * its not a reference to existing playlists because sometimes the playing queue
+   * is different than the current playing list.
+   */
   currentPlayingList: NoxMedia.Playlist;
   setCurrentPlayingList: (val: NoxMedia.Playlist) => boolean;
   playlists: { [key: string]: NoxMedia.Playlist };
   playlistIds: Array<string>;
   setPlaylistIds: (val: Array<string>) => void;
 
-  // TODO: maybe this should be a string instead...
+  /**
+   * this is the current Playlist selected in the playlist view. it probably should be a string
+   * here but it is a reference to the actual playlist object for convenience.
+   */
   currentPlaylist: NoxMedia.Playlist;
   setCurrentPlaylist: (val: NoxMedia.Playlist) => void;
   searchPlaylist: NoxMedia.Playlist;
@@ -87,7 +103,7 @@ interface NoxSetting {
     val: NoxMedia.Playlist,
     addSongs: Array<NoxMedia.Song>,
     removeSongs: Array<NoxMedia.Song>
-  ) => void;
+  ) => NoxMedia.Playlist;
 
   initPlayer: (
     val: NoxStorage.PlayerStorageObject
@@ -211,13 +227,7 @@ export const useNoxSetting = create<NoxSetting>((set, get) => ({
   ) => {
     let playlists = get().playlists;
     const currentPlaylist = get().currentPlaylist;
-    const playlistSongsId = playlist.songList.map(v => v.id);
-    const removeSongsId = removeSongs.map(v => v.id);
-    // FI"FO".
-    playlist.songList = addSongs
-      .filter(v => !playlistSongsId.includes(v.id))
-      .concat(playlist.songList)
-      .filter(v => !removeSongsId.includes(v.id));
+    updatePlaylistSongs(playlist, addSongs, removeSongs);
     playlists[playlist.id] = playlist;
     if (playlist.id === currentPlaylist.id) {
       set({ currentPlaylist: playlist });
@@ -225,6 +235,7 @@ export const useNoxSetting = create<NoxSetting>((set, get) => ({
     set({ playlists });
     savePlaylist(playlist);
     set({ playlistShouldReRender: !get().playlistShouldReRender });
+    return playlist;
   },
 
   lyricMapping: new Map<string, NoxMedia.LyricDetail>(),
