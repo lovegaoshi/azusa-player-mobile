@@ -99,6 +99,7 @@ export const getSongListFromAudio = async ({ bvid }) => {
         lyric: lrc,
         page: 1,
         duration: info.duration,
+        album: info.title,
       }),
     ];
   }
@@ -114,6 +115,7 @@ export const getSongListFromAudio = async ({ bvid }) => {
       lyric: lrc,
       page: index + 1,
       duration: page.duration,
+      album: info.title,
     })
   );
 
@@ -137,6 +139,7 @@ export const getSongsFromBVids = async ({ infos, useBiliTag = false }) => {
           cover: info.picSrc,
           page: index + 1,
           duration: page.duration,
+          album: info.title,
         })
       )
     );
