@@ -63,44 +63,20 @@ export const biliShazamOnSonglist = async (
 export const getSongList = async ({ bvid, useBiliTag = false }) => {
   const info = await fetchVideoInfo(bvid);
   const lrc = '';
-  let songs = [];
-
-  // Case of single part video
-  if (info.pages.length === 1) {
-    // lrc = await fetchLRC(info.title)
-    return [
-      Song({
-        cid: info.pages[0].cid,
-        bvid,
-        name: info.title,
-        singer: info.uploader.name,
-        singerId: info.uploader.mid,
-        cover: info.picSrc,
-        lyric: lrc,
-        page: 1,
-        duration: info.duration,
-      }),
-    ];
-  }
-
-  // Can't use forEach, does not support await
-  for (let index = 0; index < info.pages.length; index++) {
-    const page = info.pages[index];
-    // lrc = fetchLRC(page.part)
-    songs.push(
-      Song({
-        cid: page.cid,
-        bvid,
-        name: page.part,
-        singer: info.uploader.name,
-        singerId: info.uploader.mid,
-        cover: info.picSrc,
-        lyric: lrc,
-        page: index + 1,
-        duration: page.duration,
-      })
-    );
-  }
+  let songs = info.pages.map((page, index) =>
+    Song({
+      cid: page.cid,
+      bvid,
+      name: page.part,
+      singer: info.uploader.name,
+      singerId: info.uploader.mid,
+      cover: info.picSrc,
+      lyric: lrc,
+      page: index + 1,
+      duration: page.duration,
+      album: info.title,
+    })
+  );
   if (useBiliTag) songs = await biliShazamOnSonglist(songs);
   return songs;
 };
@@ -108,7 +84,6 @@ export const getSongList = async ({ bvid, useBiliTag = false }) => {
 export const getSongListFromAudio = async ({ bvid }) => {
   const info = await fetchAudioInfo(bvid);
   const lrc = '';
-  const songs = [];
 
   // Case of single part video
   if (info.pages.length === 1) {
@@ -128,24 +103,19 @@ export const getSongListFromAudio = async ({ bvid }) => {
     ];
   }
 
-  // Can't use forEach, does not support await
-  for (let index = 0; index < info.pages.length; index++) {
-    const page = info.pages[index];
-    // lrc = fetchLRC(page.part)
-    songs.push(
-      Song({
-        cid: `${page.cid}-${bvid}`,
-        bvid,
-        name: page.part,
-        singer: info.uploader.name,
-        singerId: info.uploader.mid,
-        cover: info.picSrc,
-        lyric: lrc,
-        page: index + 1,
-        duration: page.duration,
-      })
-    );
-  }
+  const songs = info.pages.map((page, index) =>
+    Song({
+      cid: `${page.cid}-${bvid}`,
+      bvid,
+      name: page.part,
+      singer: info.uploader.name,
+      singerId: info.uploader.mid,
+      cover: info.picSrc,
+      lyric: lrc,
+      page: index + 1,
+      duration: page.duration,
+    })
+  );
 
   return songs;
 };
@@ -156,41 +126,20 @@ export const getSongsFromBVids = async ({ infos, useBiliTag = false }) => {
     if (!info) {
       return;
     }
-    // Case of single part video
-    if (info.pages.length === 1) {
-      // lrc = await fetchLRC(info.title)
-      songs.push(
+    songs = songs.concat(
+      info.pages.map((page, index) =>
         Song({
-          cid: info.pages[0].cid,
-          bvid: info.pages[0].bvid,
-          // this is stupidly slow because each of this async has to be awaited in a sync constructor?!
-          name: info.title,
+          cid: page.cid,
+          bvid: page.bvid,
+          name: page.part,
           singer: info.uploader.name,
           singerId: info.uploader.mid,
           cover: info.picSrc,
-          page: 1,
-          duration: info.duration,
+          page: index + 1,
+          duration: page.duration,
         })
-      );
-    } else {
-      // Can't use forEach, does not support await
-      for (let index = 0; index < info.pages.length; index++) {
-        const page = info.pages[index];
-        // lrc = fetchLRC(page.part)
-        songs.push(
-          Song({
-            cid: page.cid,
-            bvid: page.bvid,
-            name: page.part,
-            singer: info.uploader.name,
-            singerId: info.uploader.mid,
-            cover: info.picSrc,
-            page: index + 1,
-            duration: page.duration,
-          })
-        );
-      }
-    }
+      )
+    );
   }
   if (useBiliTag) songs = await biliShazamOnSonglist(songs);
   return songs;
