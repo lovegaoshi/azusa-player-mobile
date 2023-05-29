@@ -1,4 +1,4 @@
-package com.example;
+package com.noxplay.noxplayer;
 
 import android.app.Application;
 import com.facebook.react.PackageList;
@@ -8,8 +8,8 @@ import com.facebook.react.ReactPackage;
 import com.facebook.react.defaults.DefaultNewArchitectureEntryPoint;
 import com.facebook.react.defaults.DefaultReactNativeHost;
 import com.facebook.soloader.SoLoader;
+
 import java.util.List;
-import com.doublesymmetry.trackplayer.TrackPlayer;
 
 public class MainApplication extends Application implements ReactApplication {
 

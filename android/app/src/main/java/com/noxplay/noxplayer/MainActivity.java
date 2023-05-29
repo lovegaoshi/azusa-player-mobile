@@ -1,4 +1,4 @@
-package com.example;
+package com.noxplay.noxplayer;
 
 import android.os.Bundle;
 
