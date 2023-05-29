@@ -94,7 +94,6 @@ export default ({
         }
       : currentPlaylist2;
     updatePlaylist(newPlaylist, [], songs);
-    console.log(newPlaylist.songList.length);
     setCurrentPlayingList(newPlaylist);
 
     await TrackPlayer.reset();

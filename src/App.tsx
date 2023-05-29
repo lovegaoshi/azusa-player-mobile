@@ -29,6 +29,7 @@ import { ViewEnum } from './enums/View';
 import Settings from './components/setting/View';
 import './localization/i18n';
 import Bilibili from './components/login/Bilibili';
+import AppOpenSplash from './components/background/AppOpenSplash';
 
 const { LightTheme, DarkTheme } = adaptNavigationTheme({
   reactNavigationLight: NavigationDefaultTheme,
@@ -38,9 +39,21 @@ const { LightTheme, DarkTheme } = adaptNavigationTheme({
 const CombinedDefaultTheme = merge(MD3LightTheme, LightTheme);
 const CombinedDarkTheme = merge(MD3DarkTheme, DarkTheme);
 
+const useSplash = (duration = 1000) => {
+  const [isReady, setIsReady] = React.useState(false);
+  useEffect(() => {
+    // wait for 1000 ms and set isReady to true
+    setTimeout(() => {
+      setIsReady(true);
+    }, duration);
+  });
+  return isReady;
+};
+
 const App: React.FC = () => {
   const { t } = useTranslation();
   const isPlayerReady = useSetupPlayer();
+  const isSplashReady = useSplash(2000);
   const Drawer = createDrawerNavigator();
   const Tab = createMaterialTopTabNavigator();
   const playerStyle = useNoxSetting(state => state.playerStyle);
@@ -84,11 +97,11 @@ const App: React.FC = () => {
     };
   }, []);
 
-  if (!isPlayerReady) {
+  if (!isPlayerReady || !isSplashReady) {
     // TODO: this is the splash screen. get something cool from lottie.
     return (
       <SafeAreaView style={playerStyle.screenContainer}>
-        <ActivityIndicator />
+        <AppOpenSplash />
       </SafeAreaView>
     );
   }
