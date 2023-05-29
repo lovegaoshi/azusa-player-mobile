@@ -125,7 +125,7 @@ export const TrackInfo: React.FC<{
         <View
           style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}
         >
-          <SongMenuButton />
+          <SongMenuButton track={track} />
         </View>
       </View>
     </View>

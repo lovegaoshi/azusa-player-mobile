@@ -40,6 +40,7 @@ export default ({ track }: props) => {
     <IconButton
       icon={liked ? 'cards-heart' : 'cards-heart-outline'}
       onPress={onClick}
+      disabled={song === undefined}
       size={30}
     />
   );
