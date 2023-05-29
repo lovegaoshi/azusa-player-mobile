@@ -33,12 +33,19 @@ export const getPlaylistUniqBVIDs = (playlist: NoxMedia.Playlist) => {
 export const songlistToTracklist = (
   songList: Array<NoxMedia.Song>
 ): Track[] => {
+  /**
+   * for whatever reson hdslb sometimes returns http://.
+   * cleartext is not permitted.
+   */
+  const i0hdslbHTTPResolve = (url: String) =>
+    url.replace('http://', 'https://');
+
   return songList.map(song => {
     return {
       ...NULL_TRACK,
       title: song.parsedName,
       artist: song.singer,
-      artwork: song.cover,
+      artwork: i0hdslbHTTPResolve(song.cover),
       duration: song.duration,
       song: song,
     };
