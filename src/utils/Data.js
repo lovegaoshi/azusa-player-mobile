@@ -10,6 +10,8 @@ import bfetch from './BiliFetch';
 import { logger } from './Logger';
 import { throttler } from './throttle';
 import { wbiQuery } from '../stores/wbi';
+import steriatkFetch from './mediafetch/steriatk';
+import biliaudioFetch from './mediafetch/biliaudio';
 
 const { biliApiLimiter, biliTagApiLimiter, awaitLimiter } = throttler;
 
@@ -141,7 +143,20 @@ export const ENUMS = {
  * its used as an identifier.
  * @returns promise that resolves the media stream url.
  */
-export const fetchPlayUrlPromise = async (bvid, cid) => {
+export const fetchPlayUrlPromise = async v => {
+  const bvid = v.bvid;
+  const cid = v.id;
+  const regexResolveURLs = [
+    [steriatkFetch.regexResolveURLMatch, steriatkFetch.resolveURL],
+    [biliaudioFetch.regexResolveURLMatch, biliaudioFetch.resolveURL],
+  ];
+  console.debug(bvid, cid);
+  for (const reExtraction of regexResolveURLs) {
+    const reExtracted = reExtraction[0].exec(cid);
+    if (reExtracted !== null) {
+      return reExtraction[1](v);
+    }
+  }
   const cidStr = String(cid);
   if (cidStr.startsWith(ENUMS.audioType)) {
     return fetchAudioPlayUrlPromise(bvid);
