@@ -143,6 +143,5 @@ export const searchBiliURLs = async ({
     logger.warn(err);
   }
   progressEmitter(0);
-  logger.debug(results);
   return results;
 };

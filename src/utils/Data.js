@@ -9,7 +9,7 @@ import { extractSongName } from './re';
 import bfetch from './BiliFetch';
 import { logger } from './Logger';
 import { throttler } from './throttle';
-import { wbiQuery } from '../store/wbi';
+import { wbiQuery } from '../stores/wbi';
 
 const { biliApiLimiter, biliTagApiLimiter, awaitLimiter } = throttler;
 

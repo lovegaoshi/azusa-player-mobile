@@ -14,7 +14,7 @@ import { useNoxSetting } from '../../hooks/useSetting';
 import { songlistToTracklist } from '../../objects/Playlist';
 import { NoxRepeatMode } from './enums/RepeatMode';
 import { savePlayMode } from '../../utils/ChromeStorage';
-import noxPlayingList, { getCurrentTPQueue } from '../../store/playingList';
+import noxPlayingList, { getCurrentTPQueue } from '../../stores/playingList';
 import ThumbsUpButton from './ThumbsUpButton';
 
 const { getState, setState } = noxPlayingList;

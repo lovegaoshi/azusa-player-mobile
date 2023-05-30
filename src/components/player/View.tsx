@@ -12,7 +12,7 @@ import PlayerTopInfo from './PlayerTopInfo';
 import { useNoxSetting } from '../../hooks/useSetting';
 import { songlistToTracklist } from '../../objects/Playlist';
 import { initPlayerObject } from '../../utils/ChromeStorage';
-import { getCurrentTPQueue } from '../../store/playingList';
+import { getCurrentTPQueue } from '../../stores/playingList';
 import useVersionCheck from '../../hooks/useVersionCheck';
 
 interface props {
