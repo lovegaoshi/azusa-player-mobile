@@ -149,7 +149,7 @@ const App: React.FC = () => {
                   component={Bilibili}
                 />
                 <Drawer.Screen
-                  name={ViewEnum.LEFT_DRAWER}
+                  name={ViewEnum.SETTINGS}
                   options={{
                     drawerIcon: () => <IconButton icon="cog" />,
                     title: String(t('appDrawer.settingScreenName')),

@@ -2,6 +2,7 @@
   "_comment": "src/localization/en/translation.json",
   "appDrawer": {
     "homeScreenName": "Home",
+    "exploreScreenName": "Discover",
     "settingScreenName": "Settings",
     "LoginName": "User Login"
   },
