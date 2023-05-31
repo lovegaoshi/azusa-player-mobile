@@ -52,6 +52,8 @@ export const searchBiliURLs = async ({
           favList,
           useBiliTag,
         });
+        progressEmitter(0);
+        return results;
       }
     }
     results = await bilisearchFetch.regexFetch({
