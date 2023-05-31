@@ -44,7 +44,11 @@ export const customReqHeader = (
   url: string,
   reqHeader: { [key: string]: any }
 ) => {
-  if (/bilibili/.exec(url) || /bilivideo/.exec(url)) {
+  if (
+    /bilibili/.exec(url) ||
+    /bilivideo/.exec(url) ||
+    /akamaized.net/.exec(url)
+  ) {
     reqHeader.referer = 'https://www.bilibili.com/';
   } else if (/y.qq.com/.exec(url)) {
     reqHeader.referer = 'https://y.qq.com/';

@@ -3,6 +3,7 @@ import Video from 'react-native-video';
 import { useNoxSetting } from '../../hooks/useSetting';
 import { fetchVideoPlayUrlPromise } from '../../utils/Data';
 import React from 'react';
+import { customReqHeader } from '../../utils/BiliFetch';
 
 const mobileHeight = Dimensions.get('window').height;
 
@@ -69,7 +70,10 @@ export default (props: any) => {
       return (
         <>
           <Video
-            source={{ uri: playerStyle.bkgrdImg.identifier }}
+            source={{
+              uri: playerStyle.bkgrdImg.identifier,
+              headers: customReqHeader(playerStyle.bkgrdImg.identifier, {}),
+            }}
             style={{ width: '100%', height: '100%', position: 'absolute' }}
             repeat={true}
             muted={true}
