@@ -97,7 +97,6 @@ export const fetchBiliSearchList = async (
   } catch (e) {
     logger.error(e);
   }
-  progressEmitter(0);
   return val;
 };
 

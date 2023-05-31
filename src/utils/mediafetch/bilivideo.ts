@@ -69,7 +69,6 @@ export const fetchiliBVIDs = async (
     fetchVideoInfo(bvid, () => progressEmitter((100 * (index + 1)) / BVidLen))
   );
   const resolvedBVIDs = await Promise.all(BVidPromises);
-  progressEmitter(0);
   return resolvedBVIDs.filter(val => val) as VideoInfo[];
 };
 
@@ -104,7 +103,6 @@ export const songFetch = async ({
     [] as NoxMedia.Song[]
   );
   if (useBiliTag) songs = await biliShazamOnSonglist(songs);
-  progressEmitter(0);
   return songs;
 };
 

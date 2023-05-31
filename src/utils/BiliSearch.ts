@@ -41,11 +41,12 @@ export const searchBiliURLs = async ({
     [steriatkFetch.regexSearchMatch, steriatkFetch.regexFetch],
     [bilivideoFetch.regexSearchMatch, bilivideoFetch.regexFetch],
   ];
+  let results = [];
   try {
     for (const reExtraction of reExtractions) {
       const reExtracted = reExtraction[0].exec(input);
       if (reExtracted !== null) {
-        return await reExtraction[1]({
+        results = await reExtraction[1]({
           reExtracted,
           progressEmitter,
           favList,
@@ -53,11 +54,13 @@ export const searchBiliURLs = async ({
         });
       }
     }
-    return await bilisearchFetch.regexFetch({
+    results = await bilisearchFetch.regexFetch({
       url: input,
       progressEmitter,
       fastSearch,
     });
+    progressEmitter(0);
+    return results;
   } catch (err) {
     logger.warn(err);
   }
