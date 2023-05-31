@@ -1,5 +1,5 @@
 import { v4 as uuidv4 } from 'uuid';
-import { fetchPlayUrlPromise } from '../utils/Data';
+import { fetchPlayUrlPromise } from '../utils/mediafetch/resolveURL';
 import { reExtractSongName, extractParenthesis } from '../utils/re';
 import { customReqHeader, DEFAULT_UA } from '../utils/BiliFetch';
 import { logger } from '../utils/Logger';

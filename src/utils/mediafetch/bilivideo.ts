@@ -11,7 +11,7 @@
 import { regexFetchProps } from './generic';
 import { biliApiLimiter } from './throttle';
 
-import { biliShazamOnSonglist } from '../DataProcess';
+import { biliShazamOnSonglist } from './bilishazam';
 import VideoInfo from '../../objects/VideoInfo';
 import SongTS from '../../objects/Song';
 import { logger } from '../Logger';

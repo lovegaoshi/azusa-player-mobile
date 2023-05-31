@@ -1,7 +1,7 @@
 import { ImageBackground, Dimensions, View } from 'react-native';
 import Video from 'react-native-video';
 import { useNoxSetting } from '../../hooks/useSetting';
-import { fetchVideoPlayUrlPromise } from '../../utils/Data';
+import { fetchVideoPlayUrlPromise } from '../../utils/mediafetch/resolveURL';
 import React from 'react';
 import { customReqHeader } from '../../utils/BiliFetch';
 
