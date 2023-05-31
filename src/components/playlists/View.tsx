@@ -34,9 +34,9 @@ const useRenderDrawerItem = () => {
     <TouchableRipple onPress={() => navigation.navigate(view as never)}>
       <View style={{ flexDirection: 'row' }}>
         <IconButton icon={icon} size={32}></IconButton>
-        <Text variant="headlineSmall" style={{ paddingTop: 13 }}>
-          {t(text)}
-        </Text>
+        <View style={{ justifyContent: 'center' }}>
+          <Text variant="titleLarge">{t(text)}</Text>
+        </View>
       </View>
     </TouchableRipple>
   );
@@ -230,7 +230,8 @@ export default (props: any) => {
       <DraggableFlatList
         style={{
           // HACK: i dont know what to do at this point
-          maxHeight: Dimensions.get('window').height - 380,
+          // top padding 10 + draweritem 60 * 3 + buttons 50 + searchlist 53 + bottom info 40 = ~330
+          maxHeight: Dimensions.get('window').height - 330,
         }}
         data={playlistIds.map(val => playlists[val])}
         // TODO: very retarded, but what?
