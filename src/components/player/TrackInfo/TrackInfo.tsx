@@ -10,7 +10,7 @@ import {
 import type { Track } from 'react-native-track-player';
 
 import { useNoxSetting } from '../../../hooks/useSetting';
-import { getCurrentTPQueue } from '../../../store/playingList';
+import { getCurrentTPQueue } from '../../../stores/playingList';
 import { LyricView } from '../Lyric';
 import SongMenuButton from './SongMenuButton';
 import FavoriteButton from './FavoriteButton';

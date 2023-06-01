@@ -1,5 +1,5 @@
 import { v4 as uuidv4 } from 'uuid';
-import { fetchPlayUrlPromise } from '../utils/Data';
+import { fetchPlayUrlPromise } from '../utils/mediafetch/resolveURL';
 import { reExtractSongName, extractParenthesis } from '../utils/re';
 import { customReqHeader, DEFAULT_UA } from '../utils/BiliFetch';
 import { logger } from '../utils/Logger';
@@ -20,6 +20,7 @@ interface SongProps {
   page?: number;
   biliShazamedName?: string;
   duration: number;
+  album?: string;
 }
 
 export default ({
@@ -34,6 +35,7 @@ export default ({
   page,
   biliShazamedName,
   duration,
+  album,
 }: SongProps): NoxMedia.Song => {
   return {
     id: String(cid),
@@ -49,6 +51,7 @@ export default ({
     nameRaw: name,
     parsedName: reExtractSongName(name, singerId),
     duration,
+    album,
   };
 };
 
@@ -76,7 +79,7 @@ export const removeSongBiliShazamed = (song: NoxMedia.Song) => {
 export const resolveUrl = async (song: NoxMedia.Song) => {
   // TODO: method is called MULTIPLE times. need to investigate and debounce.
   // luckily bilibili doesnt seem to care for now
-  const url = await fetchPlayUrlPromise(song.bvid, song.id);
+  const url = await fetchPlayUrlPromise(song);
   logger.debug(`resolved url', url)`);
   return {
     url,

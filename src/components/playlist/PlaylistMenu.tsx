@@ -8,10 +8,11 @@ import playlistAnalytics from '../../utils/Analytics';
 import PlaylistSettingsButton from '../buttons/PlaylistSettingsButton';
 import { PLAYLIST_ENUMS } from '../../enums/Playlist';
 import { CopiedPlaylistMenuItem } from '../buttons/CopiedPlaylistButton';
-import { getBVIDList, biliShazamOnSonglist } from '../../utils/DataProcess';
+import { biliShazamOnSonglist } from '../../utils/mediafetch/bilishazam';
 import { getPlaylistUniqBVIDs } from '../../objects/Playlist';
-import { fetchVideoInfo } from '../../utils/Data';
+import { fetchVideoInfo } from '../../utils/mediafetch/bilivideo';
 import useAlert from '../dialogs/useAlert';
+import { songFetch, fetchiliBVIDs } from '../../utils/mediafetch/bilivideo';
 
 enum ICONS {
   SETTINGS = 'cog',
@@ -113,10 +114,9 @@ export default ({
           text: t('PlaylistOperations.reloading', { playlist }),
           duration: Snackbar.LENGTH_INDEFINITE,
         });
-        const newSongList = await getBVIDList({
-          bvids: getPlaylistUniqBVIDs(playlist),
-          progressEmitter,
-          useBiliTag: playlist.useBiliShazam,
+        const newSongList = await songFetch({
+          videoinfos: await fetchiliBVIDs(getPlaylistUniqBVIDs(playlist), progressEmitter), // await fetchiliBVID([reExtracted[1]!])
+          useBiliTag: playlist.useBiliShazam || false,
         });
         updatePlaylist(
           {
@@ -143,10 +143,11 @@ export default ({
     progressEmitter(100);
     getPlaylistUniqBVIDs(playlist).forEach(bvid =>
       promises.push(
-        fetchVideoInfo(bvid).then(val => validBVIds.push(val?.bvid))
+        fetchVideoInfo(bvid).then(val => { if (val) validBVIds.push(val.bvid) })
       )
     );
     await Promise.all(promises);
+    updatePlaylist({ ...playlist, songList: playlist.songList.filter(song => validBVIds.includes(song.bvid)) }, [], []);
     progressEmitter(0);
     Snackbar.dismiss();
     Snackbar.show({ text: t('PlaylistOperations.cleaned', { playlist }) });

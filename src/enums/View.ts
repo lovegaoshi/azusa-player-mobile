@@ -1,7 +1,8 @@
 export enum ViewEnum {
   PLAYER_HOME = 'NoxHome',
-  LEFT_DRAWER = 'LeftDrawer',
+  SETTINGS = 'NoxSettings',
   PLAYER_COVER = 'NoxCover',
   PLAYER_PLAYLIST = 'NoxPlaylist',
   USER_LOGIN = 'NoxLogin',
+  EXPORE = 'NoxExplore',
 }

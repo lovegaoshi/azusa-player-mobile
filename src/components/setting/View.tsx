@@ -43,32 +43,35 @@ interface props {
   navigation: DrawerNavigationProp<ParamListBase>;
 }
 
+export const DummySettings = () => {
+  const { t } = useTranslation();
+  const playerStyle = useNoxSetting(state => state.playerStyle);
+
+  return (
+    <View
+      style={{
+        backgroundColor: playerStyle.customColors.maskedBackgroundColor,
+        flex: 1,
+      }}
+    >
+      <Text
+        style={{
+          fontSize: 60,
+          color: playerStyle.colors.primary,
+          paddingLeft: 20,
+        }}
+      >
+        {t('Settings.FeatureNotImplemented')}
+      </Text>
+    </View>
+  );
+};
+
 export default ({ navigation }: props) => {
   const { t } = useTranslation();
   const navigationGlobal = useNavigation();
   const playerStyle = useNoxSetting(state => state.playerStyle);
   const { renderListItem } = useRenderSettingItem();
-
-  const DummySettings = () => {
-    return (
-      <View
-        style={{
-          backgroundColor: playerStyle.customColors.maskedBackgroundColor,
-          flex: 1,
-        }}
-      >
-        <Text
-          style={{
-            fontSize: 60,
-            color: playerStyle.colors.primary,
-            paddingLeft: 20,
-          }}
-        >
-          {t('Settings.FeatureNotImplemented')}
-        </Text>
-      </View>
-    );
-  };
 
   const HomeSettings = ({ navigation }: props) => {
     return (

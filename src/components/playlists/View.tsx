@@ -3,6 +3,7 @@ import { DrawerItem, DrawerItemList } from '@react-navigation/drawer';
 import { IconButton, Divider, Text, TouchableRipple } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
 import { Pressable, Dimensions, View } from 'react-native';
+import { useTranslation } from 'react-i18next';
 import DraggableFlatList, {
   ScaleDecorator,
   RenderItemParams,
@@ -17,6 +18,30 @@ import useAlert from '../dialogs/useAlert';
 import ShuffleAllButton from './ShuffleAllButton';
 import TimerButton from './TimerButton';
 
+const useRenderDrawerItem = () => {
+  const navigation = useNavigation();
+  const { t } = useTranslation();
+
+  return ({
+    view,
+    icon,
+    text,
+  }: {
+    view: string;
+    icon: string;
+    text: string;
+  }) => (
+    <TouchableRipple onPress={() => navigation.navigate(view as never)}>
+      <View style={{ flexDirection: 'row' }}>
+        <IconButton icon={icon} size={32}></IconButton>
+        <View style={{ justifyContent: 'center' }}>
+          <Text variant="titleLarge">{t(text)}</Text>
+        </View>
+      </View>
+    </TouchableRipple>
+  );
+};
+
 export default (props: any) => {
   const navigation = useNavigation();
   const currentPlayingList = useNoxSetting(state => state.currentPlayingList);
@@ -30,6 +55,7 @@ export default (props: any) => {
   const setCurrentPlaylist = useNoxSetting(state => state.setCurrentPlaylist);
   const removePlaylist = useNoxSetting(state => state.removePlaylist);
   const setPlaylistIds = useNoxSetting(state => state.setPlaylistIds);
+  const RenderDrawerItem = useRenderDrawerItem();
   const { TwoWayAlert } = useAlert();
 
   // HACK: tried to make searchList draweritem button as addPlaylistButton, but
@@ -123,7 +149,21 @@ export default (props: any) => {
   return (
     <View {...props}>
       <View style={{ height: 10 }}></View>
-      <DrawerItemList {...props} />
+      <RenderDrawerItem
+        icon={'home-outline'}
+        view={ViewEnum.PLAYER_HOME}
+        text={'appDrawer.homeScreenName'}
+      />
+      <RenderDrawerItem
+        icon={'login-variant'}
+        view={ViewEnum.USER_LOGIN}
+        text={'appDrawer.LoginName'}
+      />
+      <RenderDrawerItem
+        icon={'cog'}
+        view={ViewEnum.SETTINGS}
+        text={'appDrawer.settingScreenName'}
+      />
       <Divider></Divider>
       <TouchableRipple
         style={{
@@ -150,6 +190,18 @@ export default (props: any) => {
           <ShuffleAllButton />
           <AddPlaylistButton ref={addPlaylistButtonRef} />
           <TimerButton />
+          {false && (
+            <IconButton
+              icon={'login-variant'}
+              onPress={() => navigation.navigate(ViewEnum.USER_LOGIN as never)}
+            />
+          )}
+          {false && (
+            <IconButton
+              icon={'cog'}
+              onPress={() => navigation.navigate(ViewEnum.SETTINGS as never)}
+            />
+          )}
         </View>
       </TouchableRipple>
       <TouchableRipple
@@ -178,7 +230,8 @@ export default (props: any) => {
       <DraggableFlatList
         style={{
           // HACK: i dont know what to do at this point
-          maxHeight: Dimensions.get('window').height - 380,
+          // top padding 10 + draweritem 60 * 3 + buttons 50 + searchlist 53 + bottom info 40 = ~330
+          maxHeight: Dimensions.get('window').height - 330,
         }}
         data={playlistIds.map(val => playlists[val])}
         // TODO: very retarded, but what?

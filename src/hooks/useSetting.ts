@@ -19,7 +19,7 @@ import {
   saveLyricMapping,
 } from '../utils/ChromeStorage';
 import { createStyle } from '../components/style';
-import noxPlayingList, { setPlayingList } from '../store/playingList';
+import noxPlayingList, { setPlayingList } from '../stores/playingList';
 import { resolveBackgroundImage } from '../components/background/MainBackground';
 import { NoxStorage } from '../types/storage';
 

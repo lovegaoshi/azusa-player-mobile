@@ -13,6 +13,7 @@ declare namespace NoxMedia {
     biliShazamedName: string | undefined;
     page: number | undefined;
     duration: number;
+    album?: string;
   }
 
   export interface Playlist {
