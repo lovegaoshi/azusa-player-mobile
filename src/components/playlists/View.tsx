@@ -187,15 +187,11 @@ export default (props: any) => {
             justifyContent: 'center',
           }}
         >
+          <IconButton icon={'cards-heart'} onPress={() => undefined} />
           <ShuffleAllButton />
           <AddPlaylistButton ref={addPlaylistButtonRef} />
           <TimerButton />
-          {false && (
-            <IconButton
-              icon={'login-variant'}
-              onPress={() => navigation.navigate(ViewEnum.EXPORE as never)}
-            />
-          )}
+          <View style={{ width: 40, height: 40 }} />
           {false && (
             <IconButton
               icon={'cog'}

@@ -16,6 +16,7 @@ import { useNoxSetting } from '../../hooks/useSetting';
 import useRenderSettingItem from './useRenderSetting';
 import LanguageSettings from './LanguageSettings';
 import Bilibili from '../login/Bilibili';
+import { ScrollView } from 'react-native-gesture-handler';
 
 enum ICONS {
   HOME = 'cog',
@@ -84,45 +85,47 @@ export default ({ navigation }: props) => {
           backgroundColor: playerStyle.customColors.maskedBackgroundColor,
         }}
       >
-        <List.Section>
-          {renderListItem(
-            ICONS.HOME,
-            'GeneralSetting',
-            () => navigation.navigate(VIEW.GENERAL),
-            'Settings'
-          )}
-          {renderListItem(
-            ICONS.SKIN,
-            'SkinSetting',
-            () => navigation.navigate(VIEW.SKIN),
-            'Settings'
-          )}
-          {renderListItem(
-            ICONS.LOGIN,
-            'Login',
-            () => navigation.navigate(VIEW.LOGIN),
-            'Settings'
-          )}
-          {renderListItem(
-            ICONS.BACKUP,
-            'BackupSetting',
-            () => navigation.navigate(VIEW.BACKUP),
-            'Settings'
-          )}
-          <LanguageSettings icon={ICONS.LANGUAGE} />
-          {renderListItem(
-            ICONS.DEVELOPER,
-            'DeveloperOptions',
-            () => navigation.navigate(VIEW.DEVELOPER),
-            'Settings'
-          )}
-          {renderListItem(
-            ICONS.INFO,
-            'InfoSetting',
-            () => navigation.navigate(VIEW.DUMMY),
-            'Settings'
-          )}
-        </List.Section>
+        <ScrollView>
+          <List.Section>
+            {renderListItem(
+              ICONS.HOME,
+              'GeneralSetting',
+              () => navigation.navigate(VIEW.GENERAL),
+              'Settings'
+            )}
+            {renderListItem(
+              ICONS.SKIN,
+              'SkinSetting',
+              () => navigation.navigate(VIEW.SKIN),
+              'Settings'
+            )}
+            {renderListItem(
+              ICONS.LOGIN,
+              'Login',
+              () => navigation.navigate(VIEW.LOGIN),
+              'Settings'
+            )}
+            {renderListItem(
+              ICONS.BACKUP,
+              'BackupSetting',
+              () => navigation.navigate(VIEW.BACKUP),
+              'Settings'
+            )}
+            <LanguageSettings icon={ICONS.LANGUAGE} />
+            {renderListItem(
+              ICONS.DEVELOPER,
+              'DeveloperOptions',
+              () => navigation.navigate(VIEW.DEVELOPER),
+              'Settings'
+            )}
+            {renderListItem(
+              ICONS.INFO,
+              'InfoSetting',
+              () => navigation.navigate(VIEW.DUMMY),
+              'Settings'
+            )}
+          </List.Section>
+        </ScrollView>
       </View>
     );
   };

@@ -144,7 +144,6 @@ const App: React.FC = () => {
                   options={{
                     drawerIcon: () => <IconButton icon="compass" />,
                     title: String(t('appDrawer.exploreScreenName')),
-                    header: () => null,
                   }}
                   component={DummySettings}
                 />
