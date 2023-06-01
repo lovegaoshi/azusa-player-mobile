@@ -4,32 +4,7 @@ import { useTranslation } from 'react-i18next';
 
 import { dummyPlaylist } from '../../objects/Playlist';
 import { useNoxSetting } from '../../hooks/useSetting';
-
-interface InputProps {
-  handleSubmit: () => void;
-}
-const Input = React.forwardRef(({ handleSubmit }: InputProps, ref) => {
-  const { t } = useTranslation();
-  const [playlistName, setPlaylistName] = useState('');
-  const playerStyle = useNoxSetting(state => state.playerStyle);
-  React.useImperativeHandle(
-    ref,
-    () => ({ clearText: () => setPlaylistName(''), playlistName }),
-    [playlistName]
-  );
-
-  return (
-    <TextInput
-      style={{ flex: 5 }}
-      label={String(t('NewPlaylistDialog.label'))}
-      value={playlistName}
-      onChangeText={(val: string) => setPlaylistName(val)}
-      onSubmitEditing={handleSubmit}
-      selectionColor={playerStyle.customColors.textInputSelectionColor}
-      autoFocus
-    />
-  );
-});
+import PortaledInput from './PortaledInput';
 
 interface props {
   visible: boolean;
@@ -60,10 +35,10 @@ export default ({
       ? {
           ...fromList,
           id: dummyList.id,
-          title: inputRef.current.playlistName,
+          title: inputRef.current.name,
           type: dummyList.type,
         }
-      : { ...dummyList, title: inputRef.current.playlistName };
+      : { ...dummyList, title: inputRef.current.name };
     addPlaylist(newList);
     onSubmit();
   };
@@ -86,7 +61,13 @@ export default ({
             : t('NewPlaylistDialog.titleNew')}
         </Dialog.Title>
         <Dialog.Content>
-          <Input handleSubmit={handleSubmit} ref={inputRef} />
+          <PortaledInput
+            handleSubmit={handleSubmit}
+            ref={inputRef}
+            label={'NewPlaylistDialog.label'}
+            defaultName={''}
+            selectTextOnFocus={false}
+          />
         </Dialog.Content>
         <Dialog.Actions>
           <Button onPress={handleClose}>{t('Dialog.cancel')}</Button>

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Button, Dialog, Portal, TextInput } from 'react-native-paper';
 import { useTranslation } from 'react-i18next';
 import { useNoxSetting } from '../../hooks/useSetting';
+import PortaledInput from './PortaledInput';
 
 interface props {
   visible: boolean;
@@ -17,18 +18,13 @@ export default ({
   onSubmit = (rename: string) => undefined,
 }: props) => {
   const { t } = useTranslation();
-  const [name, setName] = useState(song.name);
-  const playerStyle = useNoxSetting(state => state.playerStyle);
-
-  React.useEffect(() => {
-    setName(song.name);
-  }, [song]);
+  const inputRef = React.useRef<any>();
 
   const handleClose = () => {
     onClose();
   };
   const handleSubmit = () => {
-    onSubmit(name);
+    onSubmit(inputRef.current.name);
   };
 
   return (
@@ -36,13 +32,11 @@ export default ({
       <Dialog visible={visible} onDismiss={handleClose}>
         <Dialog.Title>{t('RenameSongDialog.title', { song })}</Dialog.Title>
         <Dialog.Content>
-          <TextInput
-            label={String(t('RenameSongDialog.label'))}
-            value={name}
-            onChangeText={(val: string) => setName(val)}
-            onSubmitEditing={handleSubmit}
-            selectTextOnFocus
-            selectionColor={playerStyle.customColors.textInputSelectionColor}
+          <PortaledInput
+            handleSubmit={handleSubmit}
+            ref={inputRef}
+            label={'RenameSongDialog.label'}
+            defaultName={song.name}
           />
         </Dialog.Content>
 
