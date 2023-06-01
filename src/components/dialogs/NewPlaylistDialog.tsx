@@ -1,17 +1,10 @@
 import React, { useState } from 'react';
-import { View } from 'react-native';
-import {
-  Button,
-  Dialog,
-  Portal,
-  Provider,
-  TextInput,
-  Text,
-} from 'react-native-paper';
+import { Button, Dialog, Portal, TextInput } from 'react-native-paper';
 import { useTranslation } from 'react-i18next';
 
 import { dummyPlaylist } from '../../objects/Playlist';
 import { useNoxSetting } from '../../hooks/useSetting';
+import PortaledInput from './PortaledInput';
 
 interface props {
   visible: boolean;
@@ -27,27 +20,25 @@ export default ({
   onSubmit = () => undefined,
 }: props) => {
   const { t } = useTranslation();
-  const [playlistName, setPlaylistName] = useState('');
-  const playerStyle = useNoxSetting(state => state.playerStyle);
   const addPlaylist = useNoxSetting(state => state.addPlaylist);
+  const inputRef = React.useRef<any>();
 
   const handleClose = () => {
-    setPlaylistName('');
+    inputRef?.current?.clearText();
     onClose();
   };
 
   const handleSubmit = () => {
-    setPlaylistName('');
+    inputRef?.current?.clearText();
     const dummyList = dummyPlaylist();
     const newList = fromList
       ? {
           ...fromList,
           id: dummyList.id,
-          title: playlistName,
+          title: inputRef.current.name,
           type: dummyList.type,
         }
-      : { ...dummyList, title: playlistName };
-    console.log(newList, fromList);
+      : { ...dummyList, title: inputRef.current.name };
     addPlaylist(newList);
     onSubmit();
   };
@@ -70,13 +61,12 @@ export default ({
             : t('NewPlaylistDialog.titleNew')}
         </Dialog.Title>
         <Dialog.Content>
-          <TextInput
-            style={{ flex: 5 }}
-            label={String(t('NewPlaylistDialog.label'))}
-            value={playlistName}
-            onChangeText={(val: string) => setPlaylistName(val)}
-            onSubmitEditing={handleSubmit}
-            selectionColor={playerStyle.customColors.textInputSelectionColor}
+          <PortaledInput
+            handleSubmit={handleSubmit}
+            ref={inputRef}
+            label={'NewPlaylistDialog.label'}
+            defaultName={''}
+            selectTextOnFocus={false}
           />
         </Dialog.Content>
         <Dialog.Actions>

@@ -1,14 +1,6 @@
 import React, { useState } from 'react';
 import { Pressable, View, FlatList } from 'react-native';
-import {
-  Button,
-  Dialog,
-  Portal,
-  Provider,
-  TextInput,
-  Text,
-  RadioButton,
-} from 'react-native-paper';
+import { Button, Dialog, Portal, Text, RadioButton } from 'react-native-paper';
 import { useTranslation } from 'react-i18next';
 import { useNoxSetting } from '../../hooks/useSetting';
 interface props {

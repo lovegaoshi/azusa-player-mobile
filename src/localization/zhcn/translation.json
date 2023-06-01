@@ -115,6 +115,8 @@
     "InfoSettingDesc": "版本说明",
     "DeveloperOptionsName": "开发者选项",
     "DeveloperOptionsDesc": "正在测试的功能",
+    "LoginName": "B站登录",
+    "LoginDesc": "二维码或填入cookie登录b站",
     "LanguageOptionsTitle": "选择语言",
     "FeatureNotImplemented": "功能孩妹实现"
   },

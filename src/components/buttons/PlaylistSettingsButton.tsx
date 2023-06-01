@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
-import { IconButton, Menu } from 'react-native-paper';
+import { Menu } from 'react-native-paper';
+import { useTranslation } from 'react-i18next';
+
 import Dialog from '../dialogs/PlaylistSettingsDialog';
 
 const ICON = 'pencil';
@@ -15,6 +17,7 @@ export default ({
   onSubmit = (playlist: NoxMedia.Playlist) => undefined,
   onCancel = () => undefined,
 }: menuProps) => {
+  const { t } = useTranslation();
   const [dialogOpen, setDialogOpen] = useState(false);
 
   const handleClose = () => {
@@ -34,7 +37,7 @@ export default ({
         onPress={() => {
           setDialogOpen(true);
         }}
-        title="Settings..."
+        title={t('PlaylistOperations.playlistSettingsTitle')}
         disabled={disabled}
       />
       <Dialog

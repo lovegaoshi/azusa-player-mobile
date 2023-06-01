@@ -118,6 +118,8 @@
     "LanguageOptionsName": "Change Language",
     "LanguageOptionsDesc": "Change app language.",
     "LanguageOptionsTitle": "Change Language",
+    "LoginName": "Bilibili Login",
+    "LoginDesc": "login to bilibili.",
     "FeatureNotImplemented": "Feature not implemented"
   },
   "Sync": {

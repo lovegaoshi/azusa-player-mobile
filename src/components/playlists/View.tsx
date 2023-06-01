@@ -155,9 +155,9 @@ export default (props: any) => {
         text={'appDrawer.homeScreenName'}
       />
       <RenderDrawerItem
-        icon={'login-variant'}
-        view={ViewEnum.USER_LOGIN}
-        text={'appDrawer.LoginName'}
+        icon={'compass'}
+        view={ViewEnum.EXPORE}
+        text={'appDrawer.exploreScreenName'}
       />
       <RenderDrawerItem
         icon={'cog'}
@@ -187,15 +187,11 @@ export default (props: any) => {
             justifyContent: 'center',
           }}
         >
+          <IconButton icon={'cards-heart'} onPress={() => undefined} />
           <ShuffleAllButton />
           <AddPlaylistButton ref={addPlaylistButtonRef} />
           <TimerButton />
-          {false && (
-            <IconButton
-              icon={'login-variant'}
-              onPress={() => navigation.navigate(ViewEnum.USER_LOGIN as never)}
-            />
-          )}
+          <View style={{ width: 40, height: 40 }} />
           {false && (
             <IconButton
               icon={'cog'}

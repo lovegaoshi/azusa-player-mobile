@@ -6,6 +6,7 @@ import { View } from 'react-native';
 import { ParamListBase, useNavigation } from '@react-navigation/native';
 import { List, MD3Colors, IconButton, Text } from 'react-native-paper';
 import { DrawerNavigationProp } from '@react-navigation/drawer';
+import { ScrollView } from 'react-native-gesture-handler';
 import { useTranslation } from 'react-i18next';
 
 import GeneralSettings from './GeneralSettings';
@@ -15,6 +16,7 @@ import SyncSettings from './SyncSettings';
 import { useNoxSetting } from '../../hooks/useSetting';
 import useRenderSettingItem from './useRenderSetting';
 import LanguageSettings from './LanguageSettings';
+import Bilibili from '../login/Bilibili';
 
 enum ICONS {
   HOME = 'cog',
@@ -26,6 +28,7 @@ enum ICONS {
   INFO = 'information',
   DEVELOPER = 'application-brackets',
   LANGUAGE = 'translate',
+  LOGIN = 'login-variant',
 }
 
 enum VIEW {
@@ -35,6 +38,7 @@ enum VIEW {
   SKIN = 'Skins',
   DEVELOPER = 'Developer Options',
   BACKUP = 'Sync',
+  LOGIN = 'Login',
 }
 
 const Stack = createNativeStackNavigator();
@@ -81,39 +85,47 @@ export default ({ navigation }: props) => {
           backgroundColor: playerStyle.customColors.maskedBackgroundColor,
         }}
       >
-        <List.Section>
-          {renderListItem(
-            ICONS.HOME,
-            'GeneralSetting',
-            () => navigation.navigate(VIEW.GENERAL),
-            'Settings'
-          )}
-          {renderListItem(
-            ICONS.SKIN,
-            'SkinSetting',
-            () => navigation.navigate(VIEW.SKIN),
-            'Settings'
-          )}
-          {renderListItem(
-            ICONS.BACKUP,
-            'BackupSetting',
-            () => navigation.navigate(VIEW.BACKUP),
-            'Settings'
-          )}
-          <LanguageSettings icon={ICONS.LANGUAGE} />
-          {renderListItem(
-            ICONS.DEVELOPER,
-            'DeveloperOptions',
-            () => navigation.navigate(VIEW.DEVELOPER),
-            'Settings'
-          )}
-          {renderListItem(
-            ICONS.INFO,
-            'InfoSetting',
-            () => navigation.navigate(VIEW.DUMMY),
-            'Settings'
-          )}
-        </List.Section>
+        <ScrollView>
+          <List.Section>
+            {renderListItem(
+              ICONS.HOME,
+              'GeneralSetting',
+              () => navigation.navigate(VIEW.GENERAL),
+              'Settings'
+            )}
+            {renderListItem(
+              ICONS.SKIN,
+              'SkinSetting',
+              () => navigation.navigate(VIEW.SKIN),
+              'Settings'
+            )}
+            {renderListItem(
+              ICONS.LOGIN,
+              'Login',
+              () => navigation.navigate(VIEW.LOGIN),
+              'Settings'
+            )}
+            {renderListItem(
+              ICONS.BACKUP,
+              'BackupSetting',
+              () => navigation.navigate(VIEW.BACKUP),
+              'Settings'
+            )}
+            <LanguageSettings icon={ICONS.LANGUAGE} />
+            {renderListItem(
+              ICONS.DEVELOPER,
+              'DeveloperOptions',
+              () => navigation.navigate(VIEW.DEVELOPER),
+              'Settings'
+            )}
+            {renderListItem(
+              ICONS.INFO,
+              'InfoSetting',
+              () => navigation.navigate(VIEW.DUMMY),
+              'Settings'
+            )}
+          </List.Section>
+        </ScrollView>
       </View>
     );
   };
@@ -158,6 +170,11 @@ export default ({ navigation }: props) => {
         name={VIEW.BACKUP}
         component={SyncSettings}
         options={{ title: String(t('Settings.BackupSettingName')) }}
+      />
+      <Stack.Screen
+        name={VIEW.LOGIN}
+        component={Bilibili}
+        options={{ title: String(t('appDrawer.LoginName')) }}
       />
     </Stack.Navigator>
   );

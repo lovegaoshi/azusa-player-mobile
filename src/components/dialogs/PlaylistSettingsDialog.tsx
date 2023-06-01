@@ -10,7 +10,9 @@ import {
   Switch,
 } from 'react-native-paper';
 import { useTranslation } from 'react-i18next';
+
 import { useNoxSetting } from '../../hooks/useSetting';
+import PortaledInput from './PortaledInput';
 
 interface props {
   visible: boolean;
@@ -24,18 +26,14 @@ export default ({
   onSubmit = () => undefined,
 }: props) => {
   const { t } = useTranslation();
-  const playerStyle = useNoxSetting(state => state.playerStyle);
   const currentPlaylist = useNoxSetting(state => state.currentPlaylist);
   const updatePlaylist = useNoxSetting(state => state.updatePlaylist);
-  const [playlistName, setPlaylistName] = useState(currentPlaylist.title);
-  const [subscribeUrl, setSubscribeUrl] = useState('');
-  const [blacklistedUrl, setBlacklistedUrl] = useState('');
   const [useBiliShazam, setUseBiliShazam] = useState(false);
+  const nameRef = React.useRef<any>();
+  const subRef = React.useRef<any>();
+  const blacklistRef = React.useRef<any>();
 
   React.useEffect(() => {
-    setPlaylistName(currentPlaylist.title);
-    setSubscribeUrl(currentPlaylist.subscribeUrl.join(';'));
-    setBlacklistedUrl(currentPlaylist.blacklistedUrl.join(';'));
     setUseBiliShazam(currentPlaylist.useBiliShazam);
   }, [currentPlaylist]);
 
@@ -48,9 +46,9 @@ export default ({
   const handleSubmit = () => {
     const newPlaylist: NoxMedia.Playlist = {
       ...currentPlaylist,
-      title: playlistName,
-      subscribeUrl: Array.from(new Set(subscribeUrl.split(';'))),
-      blacklistedUrl: Array.from(new Set(blacklistedUrl.split(';'))),
+      title: nameRef.current.name,
+      subscribeUrl: Array.from(new Set(subRef.current.name.split(';'))),
+      blacklistedUrl: Array.from(new Set(blacklistRef.current.name.split(';'))),
       useBiliShazam: useBiliShazam,
     };
     updatePlaylist(newPlaylist, [], []);
@@ -61,23 +59,29 @@ export default ({
     <Portal>
       <Dialog visible={visible} onDismiss={handleClose}>
         <Dialog.Content>
-          <TextInput
-            label={String(t('PlaylistSettingsDialog.playlistNameLabel'))}
-            value={playlistName}
-            onChangeText={(val: string) => setPlaylistName(val)}
-            selectionColor={playerStyle.customColors.textInputSelectionColor}
+          <PortaledInput
+            handleSubmit={() => undefined}
+            ref={nameRef}
+            label={'RenameSongDialog.label'}
+            defaultName={currentPlaylist.title}
+            autofocus={false}
+            selectTextOnFocus={false}
           />
-          <TextInput
-            label={String(t('PlaylistSettingsDialog.subscribeUrlLabel'))}
-            value={subscribeUrl}
-            onChangeText={(val: string) => setSubscribeUrl(val)}
-            selectionColor={playerStyle.customColors.textInputSelectionColor}
+          <PortaledInput
+            handleSubmit={() => undefined}
+            ref={subRef}
+            label={'PlaylistSettingsDialog.subscribeUrlLabel'}
+            defaultName={currentPlaylist.subscribeUrl.join(';')}
+            autofocus={false}
+            selectTextOnFocus={false}
           />
-          <TextInput
-            label={String(t('PlaylistSettingsDialog.blacklistedUrlLabel'))}
-            value={blacklistedUrl}
-            onChangeText={(val: string) => setBlacklistedUrl(val)}
-            selectionColor={playerStyle.customColors.textInputSelectionColor}
+          <PortaledInput
+            handleSubmit={() => undefined}
+            ref={blacklistRef}
+            label={'PlaylistSettingsDialog.blacklistedUrlLabel'}
+            defaultName={currentPlaylist.blacklistedUrl.join(';')}
+            autofocus={false}
+            selectTextOnFocus={false}
           />
           <View style={{ flexDirection: 'row' }}>
             <Switch value={useBiliShazam} onValueChange={toggleBiliShazam} />
