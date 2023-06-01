@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { View } from 'react-native';
 import {
   IconButton,
@@ -16,7 +16,7 @@ interface props {
   onSubmit?: () => void;
 }
 
-export default ({
+const TimerDialog = ({
   visible,
   onClose = () => undefined,
   onSubmit = () => undefined,
@@ -41,7 +41,6 @@ export default ({
   };
 
   return (
-    <Portal>
       <Dialog
         visible={visible}
         onDismiss={handleClose}
@@ -98,6 +97,11 @@ export default ({
           </View>
         </Dialog.Content>
       </Dialog>
-    </Portal>
   );
 };
+
+export default (anyprops: props) => (
+  <Portal>
+    <TimerDialog {...anyprops}/>
+  </Portal>
+)
