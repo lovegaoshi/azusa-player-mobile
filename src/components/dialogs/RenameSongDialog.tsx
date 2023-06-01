@@ -1,12 +1,5 @@
 import React, { useState } from 'react';
-import {
-  Button,
-  Dialog,
-  Portal,
-  Provider,
-  Text,
-  TextInput,
-} from 'react-native-paper';
+import { Button, Dialog, Portal, TextInput } from 'react-native-paper';
 import { useTranslation } from 'react-i18next';
 import { useNoxSetting } from '../../hooks/useSetting';
 

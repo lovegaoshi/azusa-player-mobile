@@ -1,13 +1,5 @@
 import React, { useState } from 'react';
-import { View } from 'react-native';
-import {
-  Button,
-  Dialog,
-  Portal,
-  Provider,
-  TextInput,
-  Text,
-} from 'react-native-paper';
+import { Button, Dialog, Portal, TextInput } from 'react-native-paper';
 import { useTranslation } from 'react-i18next';
 
 import { dummyPlaylist } from '../../objects/Playlist';
@@ -47,7 +39,6 @@ export default ({
           type: dummyList.type,
         }
       : { ...dummyList, title: playlistName };
-    console.log(newList, fromList);
     addPlaylist(newList);
     onSubmit();
   };
@@ -77,6 +68,7 @@ export default ({
             onChangeText={(val: string) => setPlaylistName(val)}
             onSubmitEditing={handleSubmit}
             selectionColor={playerStyle.customColors.textInputSelectionColor}
+            autoFocus
           />
         </Dialog.Content>
         <Dialog.Actions>

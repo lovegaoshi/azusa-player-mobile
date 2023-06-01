@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import { View } from 'react-native';
-import { Button, Dialog, Portal, Provider, Text } from 'react-native-paper';
+import { Button, Dialog, Portal, Text } from 'react-native-paper';
 import { useTranslation } from 'react-i18next';
 
 interface props {
