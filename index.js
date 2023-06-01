@@ -1,3 +1,4 @@
+import './wdyr'; // <--- first import
 import { AppRegistry } from 'react-native';
 import TrackPlayer from 'react-native-track-player';
 import 'react-native-gesture-handler';

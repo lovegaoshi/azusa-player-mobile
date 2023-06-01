@@ -19,6 +19,7 @@ interface props {
   onClickCallback?: () => void;
 }
 
+const GIFStyle = { width: 72, height: 72 };
 /**
  * returns a button that shows a random gif from the input array. when clicked, change the gif into another one.
  * @param {string[]} gifs a list of gifs.
@@ -30,24 +31,27 @@ export default function RandomGIFButton({
   favList,
   onClickCallback = () => undefined,
 }: props) {
-  const [randomGIFSrc, setRandomGIFSrc] = useState(
-    getRandomNumberExclude(gifs.length, -1)
-  );
+  const [randomGIFSrc, setRandomGIFSrc] = useState(-1);
+  const [randomGIFURI, setRandomGIFURI] = useState({ uri: '' });
 
   useEffect(() => {
-    setRandomGIFSrc(getRandomNumberExclude(gifs.length, randomGIFSrc));
+    const newIndex = getRandomNumberExclude(gifs.length, randomGIFSrc);
+    setRandomGIFSrc(newIndex);
+    setRandomGIFURI({ uri: gifs[newIndex] });
   }, [favList]);
 
   return (
     <Pressable
       onPress={() => {
-        setRandomGIFSrc(getRandomNumberExclude(gifs.length, randomGIFSrc));
+        const newIndex = getRandomNumberExclude(gifs.length, randomGIFSrc);
+        setRandomGIFSrc(newIndex);
+        setRandomGIFURI({ uri: gifs[newIndex] });
         onClickCallback();
       }}
     >
       <FastImage
-        style={{ width: 72, height: 72 }}
-        source={{ uri: gifs[randomGIFSrc] }}
+        style={GIFStyle}
+        source={randomGIFURI}
         resizeMode={FastImage.resizeMode.contain}
       />
     </Pressable>
