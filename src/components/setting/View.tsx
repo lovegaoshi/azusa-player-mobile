@@ -6,6 +6,7 @@ import { View } from 'react-native';
 import { ParamListBase, useNavigation } from '@react-navigation/native';
 import { List, MD3Colors, IconButton, Text } from 'react-native-paper';
 import { DrawerNavigationProp } from '@react-navigation/drawer';
+import { ScrollView } from 'react-native-gesture-handler';
 import { useTranslation } from 'react-i18next';
 
 import GeneralSettings from './GeneralSettings';
@@ -16,7 +17,6 @@ import { useNoxSetting } from '../../hooks/useSetting';
 import useRenderSettingItem from './useRenderSetting';
 import LanguageSettings from './LanguageSettings';
 import Bilibili from '../login/Bilibili';
-import { ScrollView } from 'react-native-gesture-handler';
 
 enum ICONS {
   HOME = 'cog',
