@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { ActivityIndicator, Linking, SafeAreaView } from 'react-native';
+import { Linking, SafeAreaView } from 'react-native';
 import {
   NavigationContainer,
   DarkTheme as NavigationDarkTheme,
@@ -28,8 +28,8 @@ import PlaylistDrawer from './components/playlists/View';
 import { ViewEnum } from './enums/View';
 import Settings from './components/setting/View';
 import './localization/i18n';
-import Bilibili from './components/login/Bilibili';
 import AppOpenSplash from './components/background/AppOpenSplash';
+import { DummySettings } from './components/setting/View';
 
 const { LightTheme, DarkTheme } = adaptNavigationTheme({
   reactNavigationLight: NavigationDefaultTheme,
@@ -140,13 +140,13 @@ const App: React.FC = () => {
                   component={NoxPlayer}
                 />
                 <Drawer.Screen
-                  name={ViewEnum.USER_LOGIN}
+                  name={ViewEnum.EXPORE}
                   options={{
-                    drawerIcon: () => <IconButton icon="login-variant" />,
-                    title: String(t('appDrawer.LoginName')),
+                    drawerIcon: () => <IconButton icon="compass" />,
+                    title: String(t('appDrawer.exploreScreenName')),
                     header: () => null,
                   }}
-                  component={Bilibili}
+                  component={DummySettings}
                 />
                 <Drawer.Screen
                   name={ViewEnum.SETTINGS}

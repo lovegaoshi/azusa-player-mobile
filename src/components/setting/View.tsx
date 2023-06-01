@@ -15,6 +15,7 @@ import SyncSettings from './SyncSettings';
 import { useNoxSetting } from '../../hooks/useSetting';
 import useRenderSettingItem from './useRenderSetting';
 import LanguageSettings from './LanguageSettings';
+import Bilibili from '../login/Bilibili';
 
 enum ICONS {
   HOME = 'cog',
@@ -26,6 +27,7 @@ enum ICONS {
   INFO = 'information',
   DEVELOPER = 'application-brackets',
   LANGUAGE = 'translate',
+  LOGIN = 'login-variant',
 }
 
 enum VIEW {
@@ -35,6 +37,7 @@ enum VIEW {
   SKIN = 'Skins',
   DEVELOPER = 'Developer Options',
   BACKUP = 'Sync',
+  LOGIN = 'Login',
 }
 
 const Stack = createNativeStackNavigator();
@@ -92,6 +95,12 @@ export default ({ navigation }: props) => {
             ICONS.SKIN,
             'SkinSetting',
             () => navigation.navigate(VIEW.SKIN),
+            'Settings'
+          )}
+          {renderListItem(
+            ICONS.LOGIN,
+            'Login',
+            () => navigation.navigate(VIEW.LOGIN),
             'Settings'
           )}
           {renderListItem(
@@ -158,6 +167,11 @@ export default ({ navigation }: props) => {
         name={VIEW.BACKUP}
         component={SyncSettings}
         options={{ title: String(t('Settings.BackupSettingName')) }}
+      />
+      <Stack.Screen
+        name={VIEW.LOGIN}
+        component={Bilibili}
+        options={{ title: String(t('appDrawer.LoginName')) }}
       />
     </Stack.Navigator>
   );

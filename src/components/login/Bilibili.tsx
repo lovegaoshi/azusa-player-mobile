@@ -262,19 +262,6 @@ export default ({ navigation }: props) => {
         flex: 1,
       }}
     >
-      <Card.Title
-        title="Bilibili"
-        left={props => (
-          <IconButton
-            {...props}
-            icon="menu"
-            size={40}
-            onPress={() => navigation.openDrawer()}
-          />
-        )}
-        titleVariant="headlineLarge"
-        titleStyle={{ paddingLeft: 10 }}
-      />
       {initialize ? (
         <ActivityIndicator size={100} />
       ) : loginInfo ? (
@@ -292,3 +279,19 @@ export default ({ navigation }: props) => {
     </SafeAreaView>
   );
 };
+
+/** head bar
+      <Card.Title
+        title="Bilibili"
+        left={props => (
+          <IconButton
+            {...props}
+            icon="menu"
+            size={40}
+            onPress={() => navigation.openDrawer()}
+          />
+        )}
+        titleVariant="headlineLarge"
+        titleStyle={{ paddingLeft: 10 }}
+      />
+ */

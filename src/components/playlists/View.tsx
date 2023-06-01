@@ -155,9 +155,9 @@ export default (props: any) => {
         text={'appDrawer.homeScreenName'}
       />
       <RenderDrawerItem
-        icon={'login-variant'}
-        view={ViewEnum.USER_LOGIN}
-        text={'appDrawer.LoginName'}
+        icon={'compass'}
+        view={ViewEnum.EXPORE}
+        text={'appDrawer.exploreScreenName'}
       />
       <RenderDrawerItem
         icon={'cog'}
@@ -193,7 +193,7 @@ export default (props: any) => {
           {false && (
             <IconButton
               icon={'login-variant'}
-              onPress={() => navigation.navigate(ViewEnum.USER_LOGIN as never)}
+              onPress={() => navigation.navigate(ViewEnum.EXPORE as never)}
             />
           )}
           {false && (
