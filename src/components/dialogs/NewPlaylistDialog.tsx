@@ -5,6 +5,32 @@ import { useTranslation } from 'react-i18next';
 import { dummyPlaylist } from '../../objects/Playlist';
 import { useNoxSetting } from '../../hooks/useSetting';
 
+interface InputProps {
+  handleSubmit: () => void;
+}
+const Input = React.forwardRef(({ handleSubmit }: InputProps, ref) => {
+  const { t } = useTranslation();
+  const [playlistName, setPlaylistName] = useState('');
+  const playerStyle = useNoxSetting(state => state.playerStyle);
+  React.useImperativeHandle(
+    ref,
+    () => ({ clearText: () => setPlaylistName(''), playlistName }),
+    [playlistName]
+  );
+
+  return (
+    <TextInput
+      style={{ flex: 5 }}
+      label={String(t('NewPlaylistDialog.label'))}
+      value={playlistName}
+      onChangeText={(val: string) => setPlaylistName(val)}
+      onSubmitEditing={handleSubmit}
+      selectionColor={playerStyle.customColors.textInputSelectionColor}
+      autoFocus
+    />
+  );
+});
+
 interface props {
   visible: boolean;
   fromList?: NoxMedia.Playlist;
@@ -19,26 +45,25 @@ export default ({
   onSubmit = () => undefined,
 }: props) => {
   const { t } = useTranslation();
-  const [playlistName, setPlaylistName] = useState('');
-  const playerStyle = useNoxSetting(state => state.playerStyle);
   const addPlaylist = useNoxSetting(state => state.addPlaylist);
+  const inputRef = React.useRef<any>();
 
   const handleClose = () => {
-    setPlaylistName('');
+    inputRef?.current?.clearText();
     onClose();
   };
 
   const handleSubmit = () => {
-    setPlaylistName('');
+    inputRef?.current?.clearText();
     const dummyList = dummyPlaylist();
     const newList = fromList
       ? {
           ...fromList,
           id: dummyList.id,
-          title: playlistName,
+          title: inputRef.current.playlistName,
           type: dummyList.type,
         }
-      : { ...dummyList, title: playlistName };
+      : { ...dummyList, title: inputRef.current.playlistName };
     addPlaylist(newList);
     onSubmit();
   };
@@ -61,15 +86,7 @@ export default ({
             : t('NewPlaylistDialog.titleNew')}
         </Dialog.Title>
         <Dialog.Content>
-          <TextInput
-            style={{ flex: 5 }}
-            label={String(t('NewPlaylistDialog.label'))}
-            value={playlistName}
-            onChangeText={(val: string) => setPlaylistName(val)}
-            onSubmitEditing={handleSubmit}
-            selectionColor={playerStyle.customColors.textInputSelectionColor}
-            autoFocus
-          />
+          <Input handleSubmit={handleSubmit} ref={inputRef} />
         </Dialog.Content>
         <Dialog.Actions>
           <Button onPress={handleClose}>{t('Dialog.cancel')}</Button>
