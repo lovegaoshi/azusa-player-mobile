@@ -271,7 +271,7 @@ export const initPlayerObject =
         PLAYLIST_ENUMS.TYPE_SEARCH_PLAYLIST
       ),
       favoriPlaylist:
-        (await getItem(STORAGE_KEYS.FAVORITE_PLAYLIST_KEY)) ||
+        (await getPlaylist(STORAGE_KEYS.FAVORITE_PLAYLIST_KEY)) ||
         dummyPlaylist('Favorite', PLAYLIST_ENUMS.TYPE_FAVORI_PLAYLIST),
       playerRepeat:
         (await getItem(STORAGE_KEYS.PLAYMODE_KEY)) || NoxRepeatMode.SHUFFLE,
