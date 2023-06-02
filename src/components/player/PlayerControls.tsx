@@ -3,7 +3,6 @@ import { StyleSheet, View } from 'react-native';
 import TrackPlayer, {
   usePlaybackState,
   useTrackPlayerEvents,
-  RepeatMode,
   Event,
 } from 'react-native-track-player';
 import { IconButton } from 'react-native-paper';
@@ -12,46 +11,17 @@ import { PlaybackError } from './PlaybackError';
 import { PlayPauseButton } from './PlayPauseButton';
 import { useNoxSetting } from '../../hooks/useSetting';
 import { songlistToTracklist } from '../../objects/Playlist';
-import { NoxRepeatMode } from './enums/RepeatMode';
-import { savePlayMode } from '../../utils/ChromeStorage';
-import noxPlayingList, { getCurrentTPQueue } from '../../stores/playingList';
+import { getCurrentTPQueue } from '../../stores/playingList';
 import ThumbsUpButton from './ThumbsUpButton';
-
-const { getState, setState } = noxPlayingList;
+import PlayerModeButton from './PlayerModeButton';
 
 export const PlayerControls: React.FC = () => {
-  const [playModeState, setPlayModeState] = React.useState<string>(
-    getState().playmode
-  );
   const playerStyle = useNoxSetting(state => state.playerStyle);
 
-  const setPlayMode = (val: string) => {
-    setState({ playmode: val });
-    setPlayModeState(val);
-    savePlayMode(val);
-  };
   const currentPlayingId = useNoxSetting(state => state.currentPlayingId);
   const setCurrentPlayingId = useNoxSetting(state => state.setCurrentPlayingId);
 
   const playback = usePlaybackState();
-
-  const onClickPlaymode = () => {
-    switch (getState().playmode) {
-      case NoxRepeatMode.SHUFFLE:
-        setPlayMode(NoxRepeatMode.REPEAT);
-        break;
-      case NoxRepeatMode.REPEAT:
-        setPlayMode(NoxRepeatMode.REPEAT_TRACK);
-        TrackPlayer.setRepeatMode(RepeatMode.Track);
-        break;
-      case NoxRepeatMode.REPEAT_TRACK:
-        setPlayMode(NoxRepeatMode.SHUFFLE);
-        TrackPlayer.setRepeatMode(RepeatMode.Off);
-        break;
-      default:
-        break;
-    }
-  };
 
   const findCurrentPlayIndex = () => {
     return getCurrentTPQueue().findIndex(val => val.id === currentPlayingId);
@@ -116,24 +86,8 @@ export const PlayerControls: React.FC = () => {
         <></>
       )}
 
-      <View
-        style={[
-          styles.row,
-          {
-            justifyContent: 'center',
-            alignItems: 'center',
-          },
-        ]}
-      >
-        <IconButton
-          icon={playModeState}
-          onPress={onClickPlaymode}
-          mode={playerStyle.playerControlIconContained}
-          size={30}
-          style={{
-            backgroundColor: playerStyle.customColors.btnBackgroundColor,
-          }}
-        />
+      <View style={styles.row}>
+        <PlayerModeButton />
         <IconButton
           icon="skip-previous"
           onPress={performSkipToPrevious}
@@ -153,7 +107,7 @@ export const PlayerControls: React.FC = () => {
             backgroundColor: playerStyle.customColors.btnBackgroundColor,
           }}
         />
-        {ThumbsUpButton()}
+        <ThumbsUpButton />
       </View>
     </View>
   );
@@ -166,5 +120,7 @@ const styles = StyleSheet.create({
   },
   row: {
     flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });
