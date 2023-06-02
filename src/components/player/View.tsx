@@ -2,12 +2,11 @@ import React, { useEffect, useState } from 'react';
 import TrackPlayer, { useActiveTrack } from 'react-native-track-player';
 import { SafeAreaView, StatusBar, View } from 'react-native';
 import { ParamListBase } from '@react-navigation/native';
-import CookieManager from '@react-native-cookies/cookies';
+import { DrawerNavigationProp } from '@react-navigation/drawer';
 import { useTranslation } from 'react-i18next';
 
 import { TrackInfo } from './';
-import { SetupService } from '../../services';
-import { DrawerNavigationProp } from '@react-navigation/drawer';
+import { SetupService, AdditionalPlaybackService } from '../../services';
 import PlayerTopInfo from './PlayerTopInfo';
 import { useNoxSetting } from '../../hooks/useSetting';
 import { songlistToTracklist } from '../../objects/Playlist';
@@ -53,6 +52,9 @@ export function useSetupPlayer() {
       } */
       i18n.changeLanguage(language);
       await SetupService();
+      AdditionalPlaybackService({
+        noInterruption: storedPlayerSetting.noInterruption,
+      });
       updateVersion(storedPlayerSetting);
       checkVersion(true, storedPlayerSetting);
       if (unmounted) return;

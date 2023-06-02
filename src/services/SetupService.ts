@@ -25,7 +25,8 @@ const setupPlayer = async (
 
 export const SetupService = async () => {
   await setupPlayer({
-    autoHandleInterruptions: true,
+    // HACK: what have we done...
+    // autoHandleInterruptions: true,
   });
   await TrackPlayer.updateOptions({
     android: {

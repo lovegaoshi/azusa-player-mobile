@@ -41,67 +41,59 @@ const TimerDialog = ({
   };
 
   return (
-      <Dialog
-        visible={visible}
-        onDismiss={handleClose}
-        style={{ width: '60%' }}
-      >
-        <Dialog.Title style={{ textAlign: 'center' }}>
-          {t('SleepTimer.Title')}
-        </Dialog.Title>
-        <Dialog.Content>
-          <View style={{ flexDirection: 'row' }}>
-            <TextInput
-              keyboardType="numeric"
-              style={{
-                fontSize: 25,
-                flex: 1,
-                textAlign: 'right',
-                marginRight: -10,
-              }}
-              value={String(minutes)}
-              onChangeText={text => setMinutes(parseInt(text) || 0)}
-              disabled={startTimer}
-              textAlign="right"
-            />
-            <Text style={{ fontSize: 25, textAlign: 'center', paddingTop: 8 }}>
-              ：
-            </Text>
-            <TextInput
-              keyboardType="numeric"
-              style={{ fontSize: 25, flex: 1, marginLeft: -17 }}
-              value={String(seconds)}
-              onChangeText={text => setSeconds(parseInt(text) || 0)}
-              disabled={startTimer}
-            />
-          </View>
-          <View
+    <Dialog visible={visible} onDismiss={handleClose} style={{ width: '60%' }}>
+      <Dialog.Title style={{ textAlign: 'center' }}>
+        {t('SleepTimer.Title')}
+      </Dialog.Title>
+      <Dialog.Content>
+        <View style={{ flexDirection: 'row' }}>
+          <TextInput
+            keyboardType="numeric"
             style={{
-              flexDirection: 'row',
-              justifyContent: 'center',
-              height: 40,
+              fontSize: 25,
+              flex: 1,
+              textAlign: 'right',
+              marginRight: -10,
             }}
-          >
-            <IconButton
-              icon={startTimer ? 'pause' : 'play'}
-              onPress={() => {
-                startTimer ? timerPause() : timerStart();
-              }}
-              size={30}
-            />
-            <IconButton
-              size={30}
-              icon="refresh"
-              onPress={() => timerRestart()}
-            />
-          </View>
-        </Dialog.Content>
-      </Dialog>
+            value={String(minutes)}
+            onChangeText={text => setMinutes(parseInt(text) || 0)}
+            disabled={startTimer}
+            textAlign="right"
+          />
+          <Text style={{ fontSize: 25, textAlign: 'center', paddingTop: 8 }}>
+            ：
+          </Text>
+          <TextInput
+            keyboardType="numeric"
+            style={{ fontSize: 25, flex: 1, marginLeft: -17 }}
+            value={String(seconds)}
+            onChangeText={text => setSeconds(parseInt(text) || 0)}
+            disabled={startTimer}
+          />
+        </View>
+        <View
+          style={{
+            flexDirection: 'row',
+            justifyContent: 'center',
+            height: 40,
+          }}
+        >
+          <IconButton
+            icon={startTimer ? 'pause' : 'play'}
+            onPress={() => {
+              startTimer ? timerPause() : timerStart();
+            }}
+            size={30}
+          />
+          <IconButton size={30} icon="refresh" onPress={() => timerRestart()} />
+        </View>
+      </Dialog.Content>
+    </Dialog>
   );
 };
 
 export default (anyprops: props) => (
   <Portal>
-    <TimerDialog {...anyprops}/>
+    <TimerDialog {...anyprops} />
   </Portal>
-)
+);

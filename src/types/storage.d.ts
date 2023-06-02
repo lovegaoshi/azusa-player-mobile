@@ -11,6 +11,7 @@ declare namespace NoxStorage {
     personalCloudID: string;
     noxVersion: string;
     noxCheckedVersion: string;
+
     hideCoverInMobile: boolean;
     loadPlaylistAsArtist: boolean;
     sendBiliHeartbeat: boolean;
@@ -19,6 +20,8 @@ declare namespace NoxStorage {
     // TODO: implement this feature
     dataSaver: boolean;
     fastBiliSearch: boolean;
+    noInterruption: boolean;
+
     appID: string;
     language?: string;
     [key: string]: any;

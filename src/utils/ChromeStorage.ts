@@ -53,6 +53,7 @@ export const DEFAULT_SETTING: NoxStorage.PlayerSettingDict = {
   personalCloudID: 'azusamobile',
   noxVersion: VERSIONS.latest,
   noxCheckedVersion: VERSIONS.latest,
+
   hideCoverInMobile: false,
   loadPlaylistAsArtist: false,
   sendBiliHeartbeat: false,
@@ -60,6 +61,8 @@ export const DEFAULT_SETTING: NoxStorage.PlayerSettingDict = {
   playerRepeat: NoxRepeatMode.SHUFFLE,
   dataSaver: false,
   fastBiliSearch: false,
+  noInterruption: false,
+
   appID,
   language: undefined,
 };

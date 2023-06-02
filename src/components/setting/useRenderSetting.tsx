@@ -1,6 +1,12 @@
 import { useTranslation } from 'react-i18next';
 import { View, Text } from 'react-native';
-import { IconButton, List, Switch, TouchableRipple } from 'react-native-paper';
+import {
+  IconButton,
+  List,
+  Switch,
+  TouchableRipple,
+  Checkbox,
+} from 'react-native-paper';
 import { v4 as uuidv4 } from 'uuid';
 import { useNoxSetting } from '../../hooks/useSetting';
 
@@ -9,6 +15,7 @@ export interface SettingEntry {
   settingCategory: string;
   reRender?: boolean;
   settingType?: string;
+  checkbox?: boolean;
 }
 
 export default () => {
@@ -62,6 +69,7 @@ export default () => {
     settingName,
     settingCategory,
     reRender = false,
+    checkbox = false,
   }: SettingEntry) => {
     const onToggle = () => {
       saveSettings({ [settingName]: !playerSetting[settingName] });
@@ -92,10 +100,17 @@ export default () => {
               alignItems: 'flex-end',
             }}
           >
-            <Switch
-              value={playerSetting[settingName]}
-              onValueChange={onToggle}
-            />
+            {checkbox ? (
+              <Checkbox
+                status={playerSetting[settingName] ? 'checked' : 'unchecked'}
+                onPress={onToggle}
+              />
+            ) : (
+              <Switch
+                value={playerSetting[settingName]}
+                onValueChange={onToggle}
+              />
+            )}
           </View>
         </View>
       </TouchableRipple>
