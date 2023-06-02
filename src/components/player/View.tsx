@@ -51,10 +51,11 @@ export function useSetupPlayer() {
         CookieManager.setFromResponse(key, value);
       } */
       i18n.changeLanguage(language);
-      await SetupService();
-      AdditionalPlaybackService({
+      const serviceOptions = {
         noInterruption: storedPlayerSetting.noInterruption,
-      });
+      };
+      await SetupService(serviceOptions);
+      AdditionalPlaybackService(serviceOptions);
       updateVersion(storedPlayerSetting);
       checkVersion(true, storedPlayerSetting);
       if (unmounted) return;
