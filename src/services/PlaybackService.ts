@@ -1,16 +1,13 @@
 import TrackPlayer, { Event } from 'react-native-track-player';
 import { resolveUrl, NULL_TRACK } from '../objects/Song';
 import { initBiliHeartbeat } from '../utils/BiliOperate';
+import { NoxStorage } from '../types/storage';
 
 let lastBiliHeartBeat: string[] = ['', ''];
 
-interface props {
-  noInterruption?: boolean;
-}
-
 export async function AdditionalPlaybackService({
   noInterruption = false,
-}: props) {
+}: Partial<NoxStorage.PlayerSettingDict>) {
   TrackPlayer.addEventListener(Event.RemoteDuck, async event => {
     console.log('Event.RemoteDuck', event);
     if (noInterruption && event.paused) return;
