@@ -6,7 +6,7 @@ import { useNoxSetting } from '../../hooks/useSetting';
 
 export default ({ onSearched = (vals: any) => console.log(vals) }) => {
   const [searchVal, setSearchVal] = useState(
-    'https://raw.githubusercontent.com/lovegaoshi/azusa-player-mobile/dev/src/components/styles/steria.json'
+    'https://raw.githubusercontent.com/lovegaoshi/azusa-player-mobile/master/src/components/styles/steria.json'
   );
   const [searchProgress, progressEmitter] = useState(0);
   const playerStyle = useNoxSetting(state => state.playerStyle);
