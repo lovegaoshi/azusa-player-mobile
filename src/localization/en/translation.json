@@ -97,6 +97,8 @@
     "LogLevelDesc": "set Log Level.",
     "VersionCheckName": "Check Version",
     "VersionCheckDesc": "Check latest version released on github.",
+    "noInterruptionName": "No Interruption",
+    "noInterruptionDesc": "Disables Event.RemoteDuck to prevent interruption (NEED RESTART)",
     "LogLevel0": "DEBUG",
     "LogLevel1": "INFO",
     "LogLevel2": "WARN",

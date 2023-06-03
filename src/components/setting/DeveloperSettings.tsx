@@ -1,12 +1,12 @@
 import * as React from 'react';
 import { View, ScrollView } from 'react-native';
-import { IconButton, List } from 'react-native-paper';
+import { List } from 'react-native-paper';
 import { useTranslation } from 'react-i18next';
 
 import { useNoxSetting } from '../../hooks/useSetting';
 import { logStore, LOGLEVEL } from '../../utils/Logger';
 import GenericSelectDialog from '../dialogs/GenericSelectDialog';
-import useRenderSettingItem from './useRenderSetting';
+import useRenderSettingItem, { SettingEntry } from './useRenderSetting';
 import useVersionCheck from '../../hooks/useVersionCheck';
 import { getLog } from '../../utils/Logger';
 import useAlert from '../dialogs/useAlert';
@@ -33,6 +33,14 @@ const dummySelectSettingEntry: SelectSettingEntry<string> = {
   onSubmit: () => undefined,
 };
 
+const developerSettings: { [key: string]: SettingEntry } = {
+  noInterruption: {
+    settingName: 'noInterruption',
+    settingCategory: 'DeveloperSettings',
+    checkbox: true,
+  },
+};
+
 const { getState, setState } = logStore;
 
 export default () => {
@@ -43,7 +51,7 @@ export default () => {
   >(dummySelectSettingEntry);
   const [selectVisible, setSelectVisible] = React.useState(false);
   const playerStyle = useNoxSetting(state => state.playerStyle);
-  const { renderListItem } = useRenderSettingItem();
+  const { renderListItem, renderSetting } = useRenderSettingItem();
   const { checkVersion } = useVersionCheck();
 
   const selectLogLevel = () => {
@@ -84,6 +92,7 @@ export default () => {
     >
       <ScrollView>
         <List.Section>
+          {renderSetting(developerSettings.noInterruption)}
           {renderListItem(
             ICONS.showlog,
             'Log',

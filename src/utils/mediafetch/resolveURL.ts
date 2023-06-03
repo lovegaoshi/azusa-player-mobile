@@ -84,7 +84,13 @@ export const fetchVideoPlayUrlPromise = async (
   }
   try {
     const res = await bfetch(
-      URL_PLAY_URL.replace('{bvid}', bvid).replace('{cid}', String(cid))
+      URL_PLAY_URL.replace('{bvid}', bvid).replace('{cid}', String(cid)),
+      // to resolve >480p video sources
+      {
+        method: 'GET',
+        headers: {},
+        credentials: extractType === 'AudioUrl' ? 'omit' : 'include',
+      }
     );
     const json = await res.json();
     return extractResponseJson(json, extractType);

@@ -139,6 +139,7 @@ const albumArtSize = Math.min(
 const styles = StyleSheet.create({
   container: {
     alignItems: 'center',
+    paddingLeft: 5,
   },
   artwork: {
     width: albumArtSize,

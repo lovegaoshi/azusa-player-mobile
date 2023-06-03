@@ -1,8 +1,20 @@
 import TrackPlayer, { Event } from 'react-native-track-player';
 import { resolveUrl, NULL_TRACK } from '../objects/Song';
 import { initBiliHeartbeat } from '../utils/BiliOperate';
+import { NoxStorage } from '../types/storage';
 
 let lastBiliHeartBeat: string[] = ['', ''];
+
+export async function AdditionalPlaybackService({
+  noInterruption = false,
+}: Partial<NoxStorage.PlayerSettingDict>) {
+  TrackPlayer.addEventListener(Event.RemoteDuck, async event => {
+    console.log('Event.RemoteDuck', event);
+    if (noInterruption && event.paused) return;
+    if (event.paused) return TrackPlayer.pause();
+    if (event.permanent) return TrackPlayer.stop();
+  });
+}
 
 export async function PlaybackService() {
   TrackPlayer.addEventListener(Event.RemotePause, () => {
@@ -28,10 +40,6 @@ export async function PlaybackService() {
   TrackPlayer.addEventListener(Event.RemoteSeek, event => {
     console.log('Event.RemoteSeek', event);
     TrackPlayer.seekTo(event.position);
-  });
-
-  TrackPlayer.addEventListener(Event.RemoteDuck, async event => {
-    console.log('Event.RemoteDuck', event);
   });
 
   TrackPlayer.addEventListener(Event.PlaybackQueueEnded, event => {

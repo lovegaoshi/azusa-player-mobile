@@ -6,7 +6,6 @@ import {
   Text,
   FlatList,
   TouchableOpacity,
-  TextInput,
   Button,
 } from 'react-native';
 import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
@@ -14,7 +13,7 @@ import { Lyric } from 'react-native-lyric';
 import { Track, useProgress } from 'react-native-track-player';
 import { searchLyricOptions, searchLyric } from '../../utils/Data';
 import { reExtractSongName } from '../../utils/re';
-import { IconButton } from 'react-native-paper';
+import { IconButton, TextInput } from 'react-native-paper';
 import { useNoxSetting } from '../../hooks/useSetting';
 
 const LYRIC_OFFSET_INTERVAL = 0.5;
@@ -242,6 +241,8 @@ export const LyricView = ({
           onChangeText={setSearchText}
           placeholder={track === undefined ? '' : track.title}
           onSubmitEditing={() => fetchAndSetLyricOptions(searchText)}
+          selectionColor={playerStyle.customColors.textInputSelectionColor}
+          textColor={playerStyle.colors.text}
         />
         <FlatList
           data={lrcOptions}

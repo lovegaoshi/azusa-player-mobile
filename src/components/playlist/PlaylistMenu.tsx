@@ -55,11 +55,11 @@ export default ({
       [
         `歌单内总共有${analytics.songsUnique.size}首独特的歌`,
         `歌单内最常出现的歌：${analytics.songTop10
-          .slice(-5)
+          .slice(0, 5)
           .map(val => `${val[0]} (${String(val[1])})`)
           .join(', ')}`,
         `最近的新歌：${Array.from(analytics.songsUnique)
-          .slice(-5)
+          .slice(0, 5)
           .reverse()
           .join(', ')}`,
         `bv号总共有${String(analytics.bvid.size)}个，平均每bv号有${(
@@ -115,7 +115,10 @@ export default ({
           duration: Snackbar.LENGTH_INDEFINITE,
         });
         const newSongList = await songFetch({
-          videoinfos: await fetchiliBVIDs(getPlaylistUniqBVIDs(playlist), progressEmitter), // await fetchiliBVID([reExtracted[1]!])
+          videoinfos: await fetchiliBVIDs(
+            getPlaylistUniqBVIDs(playlist),
+            progressEmitter
+          ), // await fetchiliBVID([reExtracted[1]!])
           useBiliTag: playlist.useBiliShazam || false,
         });
         updatePlaylist(
@@ -143,11 +146,22 @@ export default ({
     progressEmitter(100);
     getPlaylistUniqBVIDs(playlist).forEach(bvid =>
       promises.push(
-        fetchVideoInfo(bvid).then(val => { if (val) validBVIds.push(val.bvid) })
+        fetchVideoInfo(bvid).then(val => {
+          if (val) validBVIds.push(val.bvid);
+        })
       )
     );
     await Promise.all(promises);
-    updatePlaylist({ ...playlist, songList: playlist.songList.filter(song => validBVIds.includes(song.bvid)) }, [], []);
+    updatePlaylist(
+      {
+        ...playlist,
+        songList: playlist.songList.filter(song =>
+          validBVIds.includes(song.bvid)
+        ),
+      },
+      [],
+      []
+    );
     progressEmitter(0);
     Snackbar.dismiss();
     Snackbar.show({ text: t('PlaylistOperations.cleaned', { playlist }) });

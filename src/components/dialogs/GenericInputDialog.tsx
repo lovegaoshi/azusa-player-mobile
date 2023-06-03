@@ -1,15 +1,9 @@
 import React, { useState } from 'react';
-import { Pressable, View, FlatList } from 'react-native';
-import {
-  Button,
-  Dialog,
-  Portal,
-  Text,
-  RadioButton,
-  TextInput,
-} from 'react-native-paper';
+import { View, FlatList } from 'react-native';
+import { Button, Dialog, TextInput } from 'react-native-paper';
 import { useTranslation } from 'react-i18next';
 import { logger } from '../../utils/Logger';
+import { useNoxSetting } from '../../hooks/useSetting';
 
 interface props {
   visible: boolean;
@@ -38,7 +32,8 @@ export default ({
   onSubmit = logger.debug,
 }: props) => {
   const { t } = useTranslation();
-  const [currentInput, setCurrentInput] = React.useState<{
+  const playerStyle = useNoxSetting(state => state.playerStyle);
+  const [currentInput, setCurrentInput] = useState<{
     [key: string]: string;
   }>({});
 
@@ -76,7 +71,9 @@ export default ({
               onChange={e =>
                 setCurrentInput({ ...currentInput, [item]: e.nativeEvent.text })
               }
-            ></TextInput>
+              selectionColor={playerStyle.customColors.textInputSelectionColor}
+              textColor={playerStyle.colors.text}
+            />
           )}
         />
       </Dialog.Content>

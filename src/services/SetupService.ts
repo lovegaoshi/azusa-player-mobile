@@ -5,6 +5,8 @@ import TrackPlayer, {
 } from 'react-native-track-player';
 import { Event } from 'react-native-track-player';
 
+import { NoxStorage } from '../types/storage';
+
 const setupPlayer = async (
   options: Parameters<typeof TrackPlayer.setupPlayer>[0]
 ) => {
@@ -23,9 +25,11 @@ const setupPlayer = async (
   }
 };
 
-export const SetupService = async () => {
+export const SetupService = async ({
+  noInterruption = false,
+}: Partial<NoxStorage.PlayerSettingDict>) => {
   await setupPlayer({
-    autoHandleInterruptions: true,
+    autoHandleInterruptions: noInterruption ? false : true,
   });
   await TrackPlayer.updateOptions({
     android: {

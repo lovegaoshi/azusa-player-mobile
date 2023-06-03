@@ -2,6 +2,9 @@ name: android weekly build
 on:
   schedule:
     - cron: '0 0 * * 1'
+  push:
+    branches:
+      - 'dev'
   workflow_dispatch:
 jobs:
   checkLastCommit:

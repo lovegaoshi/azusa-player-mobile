@@ -97,6 +97,8 @@
     "LogLevelDesc": "设置日志等级",
     "VersionCheckName": "检查版本",
     "VersionCheckDesc": "检查github上发布的版本",
+    "noInterruptionName": "不自动中断播放",
+    "noInterruptionDesc": "阻止Event.RemoteDuck中断播放（需重启）",
     "LogLevel0": "调试",
     "LogLevel1": "一般",
     "LogLevel2": "警告",

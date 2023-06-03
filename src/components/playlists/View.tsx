@@ -42,9 +42,55 @@ const useRenderDrawerItem = () => {
   );
 };
 
+const DefaultIcon = (
+  item: NoxMedia.Playlist,
+  deleteCallback: (id: string) => void
+) => {
+  const playerStyle = useNoxSetting(state => state.playerStyle);
+
+  return (
+    <IconButton
+      icon="close"
+      onPress={() => deleteCallback(item.id)}
+      size={25}
+      iconColor={playerStyle.colors.primary}
+    />
+  );
+};
+
+const PlaylistItem = ({
+  item,
+  icon,
+  confirmOnDelete = () => undefined,
+}: {
+  item: NoxMedia.Playlist;
+  icon?: ReactNode;
+  confirmOnDelete?: (id: string) => void;
+}) => {
+  const currentPlayingList = useNoxSetting(state => state.currentPlayingList);
+
+  if (!item) return <></>;
+  return (
+    <View style={{ flexDirection: 'row' }}>
+      <View style={{ flex: 4, justifyContent: 'center' }}>
+        <Text
+          variant="bodyLarge"
+          style={{
+            fontWeight: currentPlayingList.id === item?.id ? 'bold' : undefined,
+          }}
+        >
+          {item.title}
+        </Text>
+      </View>
+      <View style={{ flex: 1, alignItems: 'flex-end' }}>
+        {icon ? icon : DefaultIcon(item, () => confirmOnDelete(item.id))}
+      </View>
+    </View>
+  );
+};
+
 export default (props: any) => {
   const navigation = useNavigation();
-  const currentPlayingList = useNoxSetting(state => state.currentPlayingList);
   const currentPlaylist = useNoxSetting(state => state.currentPlaylist);
   const playlists = useNoxSetting(state => state.playlists);
   const playlistIds = useNoxSetting(state => state.playlistIds);
@@ -53,8 +99,8 @@ export default (props: any) => {
   // TODO: and how to property type this?
   const addPlaylistButtonRef = useRef<any>(null);
   const setCurrentPlaylist = useNoxSetting(state => state.setCurrentPlaylist);
-  const removePlaylist = useNoxSetting(state => state.removePlaylist);
   const setPlaylistIds = useNoxSetting(state => state.setPlaylistIds);
+  const removePlaylist = useNoxSetting(state => state.removePlaylist);
   const RenderDrawerItem = useRenderDrawerItem();
   const { TwoWayAlert } = useAlert();
 
@@ -62,11 +108,6 @@ export default (props: any) => {
   // dialog disposes on textinput focus. created a dialog directly in this component
   // instead and works fine.
   const [newPlaylistDialogOpen, setNewPlaylistDialogOpen] = useState(false);
-
-  const goToPlaylist = (playlistId: string) => {
-    setCurrentPlaylist(playlists[playlistId]);
-    navigation.navigate(ViewEnum.PLAYER_PLAYLIST as never);
-  };
 
   const confirmOnDelete = (playlistId: string) => {
     TwoWayAlert(
@@ -76,45 +117,18 @@ export default (props: any) => {
     );
   };
 
-  const renderPlaylistWrapper = ({
-    item,
-    icon,
-  }: {
-    item: NoxMedia.Playlist;
-    icon?: ReactNode;
-  }) => {
-    const defaultIcon = (item: NoxMedia.Playlist) => (
-      <IconButton
-        icon="close"
-        onPress={() => confirmOnDelete(item.id)}
-        size={25}
-      />
-    );
-
-    if (!item) return <></>;
-    return (
-      <View style={{ flexDirection: 'row' }}>
-        <View style={{ flex: 4, justifyContent: 'center' }}>
-          <Text
-            variant="bodyLarge"
-            style={{
-              fontWeight:
-                currentPlayingList.id === item?.id ? 'bold' : undefined,
-            }}
-          >
-            {item.title}
-          </Text>
-        </View>
-        <View style={{ flex: 1, alignItems: 'flex-end' }}>
-          {icon ? icon : defaultIcon(item)}
-        </View>
-      </View>
-    );
+  const goToPlaylist = (playlistId: string) => {
+    setCurrentPlaylist(playlists[playlistId]);
+    navigation.navigate(ViewEnum.PLAYER_PLAYLIST as never);
   };
 
-  const searchPlaylistAsNewButton = () => (
+  const SearchPlaylistAsNewButton = () => (
     <Pressable onPress={() => setNewPlaylistDialogOpen(true)}>
-      <IconButton icon="new-box" size={25} />
+      <IconButton
+        icon="new-box"
+        size={25}
+        iconColor={playerStyle.colors.primary}
+      />
     </Pressable>
   );
 
@@ -138,7 +152,7 @@ export default (props: any) => {
             borderRadius: 40,
           }}
         >
-          {renderPlaylistWrapper({ item })}
+          <PlaylistItem item={item} confirmOnDelete={confirmOnDelete} />
         </TouchableRipple>
       </ScaleDecorator>
     );
@@ -187,7 +201,10 @@ export default (props: any) => {
             justifyContent: 'center',
           }}
         >
-          <IconButton icon={'cards-heart'} onPress={() => undefined} />
+          <IconButton
+            icon={'cards-heart'}
+            onPress={() => goToPlaylist(STORAGE_KEYS.FAVORITE_PLAYLIST_KEY)}
+          />
           <ShuffleAllButton />
           <AddPlaylistButton ref={addPlaylistButtonRef} />
           <TimerButton />
@@ -212,10 +229,10 @@ export default (props: any) => {
           borderRadius: 40,
         }}
       >
-        {renderPlaylistWrapper({
-          item: playlists[STORAGE_KEYS.SEARCH_PLAYLIST_KEY],
-          icon: searchPlaylistAsNewButton(),
-        })}
+        <PlaylistItem
+          item={playlists[STORAGE_KEYS.SEARCH_PLAYLIST_KEY]}
+          icon={SearchPlaylistAsNewButton()}
+        />
       </TouchableRipple>
       <NewPlaylistDialog
         visible={newPlaylistDialogOpen}
