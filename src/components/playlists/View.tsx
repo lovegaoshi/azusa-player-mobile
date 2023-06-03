@@ -45,9 +45,18 @@ const useRenderDrawerItem = () => {
 const DefaultIcon = (
   item: NoxMedia.Playlist,
   deleteCallback: (id: string) => void
-) => (
-  <IconButton icon="close" onPress={() => deleteCallback(item.id)} size={25} />
-);
+) => {
+  const playerStyle = useNoxSetting(state => state.playerStyle);
+
+  return (
+    <IconButton
+      icon="close"
+      onPress={() => deleteCallback(item.id)}
+      size={25}
+      iconColor={playerStyle.colors.primary}
+    />
+  );
+};
 
 const PlaylistItem = ({
   item,
@@ -113,9 +122,13 @@ export default (props: any) => {
     navigation.navigate(ViewEnum.PLAYER_PLAYLIST as never);
   };
 
-  const searchPlaylistAsNewButton = () => (
+  const SearchPlaylistAsNewButton = () => (
     <Pressable onPress={() => setNewPlaylistDialogOpen(true)}>
-      <IconButton icon="new-box" size={25} />
+      <IconButton
+        icon="new-box"
+        size={25}
+        iconColor={playerStyle.colors.primary}
+      />
     </Pressable>
   );
 
@@ -218,7 +231,7 @@ export default (props: any) => {
       >
         <PlaylistItem
           item={playlists[STORAGE_KEYS.SEARCH_PLAYLIST_KEY]}
-          icon={searchPlaylistAsNewButton()}
+          icon={SearchPlaylistAsNewButton()}
         />
       </TouchableRipple>
       <NewPlaylistDialog

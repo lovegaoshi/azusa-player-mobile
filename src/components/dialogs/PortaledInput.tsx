@@ -39,6 +39,7 @@ export default React.forwardRef(
         selectTextOnFocus={selectTextOnFocus}
         selectionColor={playerStyle.customColors.textInputSelectionColor}
         autoFocus={autofocus}
+        textColor={playerStyle.colors.text}
       />
     );
   }

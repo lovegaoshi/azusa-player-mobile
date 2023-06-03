@@ -71,3 +71,4 @@ vendor/
 .metro-health-check*
 
 .env
+NoxExport.json

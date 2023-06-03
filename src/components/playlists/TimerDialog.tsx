@@ -9,6 +9,7 @@ import {
 } from 'react-native-paper';
 import { useTranslation } from 'react-i18next';
 import useTimer from './useTimer';
+import { useNoxSetting } from '../../hooks/useSetting';
 
 interface props {
   visible: boolean;
@@ -22,6 +23,7 @@ const TimerDialog = ({
   onSubmit = () => undefined,
 }: props) => {
   const { t } = useTranslation();
+  const playerStyle = useNoxSetting(state => state.playerStyle);
   const {
     minutes,
     seconds,
@@ -59,6 +61,8 @@ const TimerDialog = ({
             onChangeText={text => setMinutes(parseInt(text) || 0)}
             disabled={startTimer}
             textAlign="right"
+            selectionColor={playerStyle.customColors.textInputSelectionColor}
+            textColor={playerStyle.colors.text}
           />
           <Text style={{ fontSize: 25, textAlign: 'center', paddingTop: 8 }}>
             ：
@@ -69,6 +73,8 @@ const TimerDialog = ({
             value={String(seconds)}
             onChangeText={text => setSeconds(parseInt(text) || 0)}
             disabled={startTimer}
+            selectionColor={playerStyle.customColors.textInputSelectionColor}
+            textColor={playerStyle.colors.text}
           />
         </View>
         <View

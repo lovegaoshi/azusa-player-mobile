@@ -41,6 +41,7 @@ export default ({
           autoFocus
           selectTextOnFocus
           selectionColor={playerStyle.customColors.textInputSelectionColor}
+          textColor={playerStyle.colors.text}
         />
       ) : (
         <Pressable onPress={onPressed}>

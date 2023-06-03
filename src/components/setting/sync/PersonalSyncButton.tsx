@@ -106,6 +106,7 @@ const personalCloudIDTextField: textProps = {
 
 const SetTextField = ({ settingKey, label, placeholder }: textProps) => {
   const playerSetting = useNoxSetting(state => state.playerSetting);
+  const playerStyle = useNoxSetting(state => state.playerStyle);
   const setPlayerSetting = useNoxSetting(state => state.setPlayerSetting);
   const [val, setVal] = useState(playerSetting[settingKey]);
   const [debouncedVal] = useDebounce(val, 1000);
@@ -122,6 +123,8 @@ const SetTextField = ({ settingKey, label, placeholder }: textProps) => {
       value={val}
       placeholder={placeholder}
       selectTextOnFocus
+      selectionColor={playerStyle.customColors.textInputSelectionColor}
+      textColor={playerStyle.colors.text}
     />
   );
 };
