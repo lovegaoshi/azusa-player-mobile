@@ -26,6 +26,7 @@ export default ({
   onSubmit = () => undefined,
 }: props) => {
   const { t } = useTranslation();
+  const playerStyle = useNoxSetting(state => state.playerStyle);
   const currentPlaylist = useNoxSetting(state => state.currentPlaylist);
   const updatePlaylist = useNoxSetting(state => state.updatePlaylist);
   const [useBiliShazam, setUseBiliShazam] = useState(false);
@@ -84,7 +85,11 @@ export default ({
             selectTextOnFocus={false}
           />
           <View style={{ flexDirection: 'row' }}>
-            <Switch value={useBiliShazam} onValueChange={toggleBiliShazam} />
+            <Switch
+              value={useBiliShazam}
+              onValueChange={toggleBiliShazam}
+              color={playerStyle.colors.onSurfaceVariant}
+            />
             <Text style={{ fontSize: 18 }}>
               {t('PlaylistSettingsDialog.useBiliShazamLabel')}
             </Text>

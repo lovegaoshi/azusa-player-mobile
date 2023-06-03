@@ -109,6 +109,7 @@ export default () => {
               <Switch
                 value={playerSetting[settingName]}
                 onValueChange={onToggle}
+                color={playerStyle.colors.onSurfaceVariant}
               />
             )}
           </View>
