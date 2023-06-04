@@ -47,7 +47,7 @@ function SongInfo({
   ];
   // HACK: this is just a dummy value to indicate component
   // should be refreshed.
-  const [checkedState, setChecked] = React.useState(false);
+  const [, setChecked] = React.useState(false);
 
   const toggleCheck = () => {
     setChecked(val => !val);

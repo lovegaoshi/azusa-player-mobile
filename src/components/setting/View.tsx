@@ -86,45 +86,43 @@ export default ({ navigation }: props) => {
         }}
       >
         <ScrollView>
-          <List.Section>
-            {renderListItem(
-              ICONS.HOME,
-              'GeneralSetting',
-              () => navigation.navigate(VIEW.GENERAL),
-              'Settings'
-            )}
-            {renderListItem(
-              ICONS.SKIN,
-              'SkinSetting',
-              () => navigation.navigate(VIEW.SKIN),
-              'Settings'
-            )}
-            {renderListItem(
-              ICONS.LOGIN,
-              'Login',
-              () => navigation.navigate(VIEW.LOGIN),
-              'Settings'
-            )}
-            {renderListItem(
-              ICONS.BACKUP,
-              'BackupSetting',
-              () => navigation.navigate(VIEW.BACKUP),
-              'Settings'
-            )}
-            <LanguageSettings icon={ICONS.LANGUAGE} />
-            {renderListItem(
-              ICONS.DEVELOPER,
-              'DeveloperOptions',
-              () => navigation.navigate(VIEW.DEVELOPER),
-              'Settings'
-            )}
-            {renderListItem(
-              ICONS.INFO,
-              'InfoSetting',
-              () => navigation.navigate(VIEW.DUMMY),
-              'Settings'
-            )}
-          </List.Section>
+          {renderListItem(
+            ICONS.HOME,
+            'GeneralSetting',
+            () => navigation.navigate(VIEW.GENERAL),
+            'Settings'
+          )}
+          {renderListItem(
+            ICONS.SKIN,
+            'SkinSetting',
+            () => navigation.navigate(VIEW.SKIN),
+            'Settings'
+          )}
+          {renderListItem(
+            ICONS.LOGIN,
+            'Login',
+            () => navigation.navigate(VIEW.LOGIN),
+            'Settings'
+          )}
+          {renderListItem(
+            ICONS.BACKUP,
+            'BackupSetting',
+            () => navigation.navigate(VIEW.BACKUP),
+            'Settings'
+          )}
+          <LanguageSettings icon={ICONS.LANGUAGE} />
+          {renderListItem(
+            ICONS.DEVELOPER,
+            'DeveloperOptions',
+            () => navigation.navigate(VIEW.DEVELOPER),
+            'Settings'
+          )}
+          {renderListItem(
+            ICONS.INFO,
+            'InfoSetting',
+            () => navigation.navigate(VIEW.DUMMY),
+            'Settings'
+          )}
         </ScrollView>
       </View>
     );
