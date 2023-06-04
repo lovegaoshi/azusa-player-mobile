@@ -54,6 +54,7 @@ export default () => {
         onPress={onPress}
         titleStyle={{ color: playerStyle.colors.primary }}
         descriptionStyle={{ color: playerStyle.colors.secondary }}
+        style={{ paddingVertical: 0 }}
       />
     );
   };

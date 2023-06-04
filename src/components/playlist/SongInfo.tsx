@@ -8,6 +8,7 @@ import {
 import { View, GestureResponderEvent } from 'react-native';
 import { useNoxSetting } from '../../hooks/useSetting';
 import { seconds2MMSS } from '../../utils/Utils';
+import { PLAYLIST_ENUMS } from '../../enums/Playlist';
 
 function SongInfo({
   item,
@@ -37,13 +38,16 @@ function SongInfo({
     state => state.setSongMenuSongIndexes
   );
   const [title, id, artist] = [
-    playerSetting.parseSongName ? item.parsedName : item.name,
+    playerSetting.parseSongName &&
+    currentPlaylist.type !== PLAYLIST_ENUMS.TYPE_SEARCH_PLAYLIST
+      ? item.parsedName
+      : item.name,
     item.id,
     item.singer,
   ];
   // HACK: this is just a dummy value to indicate component
   // should be refreshed.
-  const [checkedState, setChecked] = React.useState(false);
+  const [, setChecked] = React.useState(false);
 
   const toggleCheck = () => {
     setChecked(val => !val);
