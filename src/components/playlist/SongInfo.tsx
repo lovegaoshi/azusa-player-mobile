@@ -37,7 +37,7 @@ function SongInfo({
   const setSongMenuSongIndexes = useNoxSetting(
     state => state.setSongMenuSongIndexes
   );
-  const [title, id, artist] = [
+  let [title, id, artist] = [
     playerSetting.parseSongName &&
     currentPlaylist.type !== PLAYLIST_ENUMS.TYPE_SEARCH_PLAYLIST
       ? item.parsedName
@@ -45,8 +45,13 @@ function SongInfo({
     item.id,
     item.singer,
   ];
-  // HACK: this is just a dummy value to indicate component
-  // should be refreshed.
+
+  // TODO: not really useful for me at least. maybe good enough for some?
+  artist =
+    item.album && item.name !== item.album
+      ? artist + ' - ' + item.album
+      : artist;
+
   const [, setChecked] = React.useState(false);
 
   const toggleCheck = () => {
@@ -90,12 +95,13 @@ function SongInfo({
                 </View>
               )}
               <View style={{ flex: 4.9 }}>
-                <Text variant="titleMedium">{`${String(
+                <Text variant="bodyLarge" numberOfLines={3}>{`${String(
                   index + 1
                 )}. ${title}`}</Text>
                 <Text
-                  variant="titleSmall"
+                  variant="bodySmall"
                   style={{ color: playerStyle.colors.secondary }}
+                  numberOfLines={1}
                 >
                   {artist}
                 </Text>

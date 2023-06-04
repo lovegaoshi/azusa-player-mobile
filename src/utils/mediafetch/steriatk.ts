@@ -46,6 +46,7 @@ const songFetch = (videoinfos: any[]) => {
       lyric: '',
       page: 0,
       duration: 0,
+      album: videoinfo.name,
     });
   });
 };
