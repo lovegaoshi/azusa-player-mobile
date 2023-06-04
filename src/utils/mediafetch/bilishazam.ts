@@ -49,7 +49,7 @@ const fetchVideoTagPromiseRaw = async ({ bvid, cid }: ids) => {
 export const biliShazamOnSonglist = async (
   songlist: NoxMedia.Song[],
   forced = false,
-  progressEmitter = (val: number) => undefined
+  progressEmitter: (val: number) => void = (val: number) => undefined
 ) => {
   const newSongList = songlist.map((song, index) => {
     if (song.biliShazamedName === undefined || forced) {
