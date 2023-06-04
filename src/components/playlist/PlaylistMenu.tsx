@@ -59,7 +59,7 @@ export default ({
           .map(val => `${val[0]} (${String(val[1])})`)
           .join(', ')}`,
         `最近的新歌：${Array.from(analytics.songsUnique)
-          .slice(0, 5)
+          .slice(-5)
           .reverse()
           .join(', ')}`,
         `bv号总共有${String(analytics.bvid.size)}个，平均每bv号有${(
