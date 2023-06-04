@@ -173,7 +173,7 @@ export default ({
       text: t('PlaylistOperations.bilishazaming', { playlist }),
       duration: Snackbar.LENGTH_INDEFINITE,
     });
-    const newSongList = await biliShazamOnSonglist(playlist.songList, false);
+    const newSongList = await biliShazamOnSonglist(playlist.songList, false, progressEmitter);
     updatePlaylist(
       {
         ...playlist,

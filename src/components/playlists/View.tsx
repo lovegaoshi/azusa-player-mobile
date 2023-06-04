@@ -158,8 +158,6 @@ export default (props: any) => {
     );
   };
 
-  // TODO: you dont have to use draweritem. you can use a typical list.
-  // then convert this to a dnd list!!!
   return (
     <View {...props}>
       <View style={{ height: 10 }}></View>

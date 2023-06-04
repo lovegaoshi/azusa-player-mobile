@@ -102,7 +102,7 @@ export const songFetch = async ({
     (acc, curr) => acc.concat(aggregateVideoInfo(curr)),
     [] as NoxMedia.Song[]
   );
-  if (useBiliTag) songs = await biliShazamOnSonglist(songs);
+  if (useBiliTag) songs = await biliShazamOnSonglist(songs, false, progressEmitter);
   return songs;
 };
 
