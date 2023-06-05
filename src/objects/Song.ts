@@ -21,6 +21,7 @@ interface SongProps {
   biliShazamedName?: string;
   duration: number;
   album?: string;
+  addedDate?: number;
 }
 
 export default ({
@@ -36,6 +37,7 @@ export default ({
   biliShazamedName,
   duration,
   album,
+  addedDate,
 }: SongProps): NoxMedia.Song => {
   return {
     id: String(cid),
@@ -52,6 +54,7 @@ export default ({
     parsedName: reExtractSongName(name, singerId),
     duration,
     album,
+    addedDate,
   };
 };
 
