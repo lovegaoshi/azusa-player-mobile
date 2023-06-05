@@ -24,27 +24,24 @@ export const updateSubscribeFavList = async ({
     if (subscribeUrls === undefined) {
       subscribeUrls = newPlaylist.subscribeUrl;
     }
-    if (subscribeUrls.length === 0 || subscribeUrls[0].length === 0)
+    if (subscribeUrls.length === 0 || subscribeUrls[0].length === 0) {
       return null;
-    // TODO: this is stupid. needs to change:
-    // 1. set the unique map first with newPlaylist, then
-    // in loop set new stuff into it, instead of concat lists
-    // 2. order this correctly. this for loop needs to be reversed
+    }
+    const favList = [
+      ...newPlaylist.songList.map(val => val.bvid),
+      ...newPlaylist.blacklistedUrl,
+    ]
     for (let i = 0, n = subscribeUrls.length; i < n; i++) {
       newPlaylist.songList = (
         await searchBiliURLs({
           input: subscribeUrls[i],
-          favList: [
-            ...newPlaylist.songList.map(val => val.bvid),
-            ...newPlaylist.blacklistedUrl,
-          ],
+          favList,
           useBiliTag: newPlaylist.useBiliShazam,
           progressEmitter,
         })
       ).concat(newPlaylist.songList);
     }
-    const uniqueSongList = new Map();
-    newPlaylist.songList.forEach(tag => uniqueSongList.set(tag.id, tag));
+    const uniqueSongList = newPlaylist.songList.reduce((arr, curr) => arr.set(curr.id, curr), new Map<string, NoxMedia.Song>())
     newPlaylist.songList = [...uniqueSongList.values()].map(val =>
       parseSongName(val)
     );

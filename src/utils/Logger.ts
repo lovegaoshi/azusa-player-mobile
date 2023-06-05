@@ -62,3 +62,5 @@ export const logger = {
     addLog('warn', msg);
   },
 };
+
+export default logger;
