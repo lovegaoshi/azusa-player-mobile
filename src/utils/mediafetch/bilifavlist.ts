@@ -10,27 +10,34 @@
  */
 import { logger } from '../Logger';
 import { regexFetchProps } from './generic';
-import { songFetch } from './bilivideo';
+import { songFetch, fetchVideoInfo } from './bilivideo';
+import VideoInfo from '../../objects/VideoInfo';
 import { fetchBiliPaginatedAPI } from './paginatedbili';
 
 const URL_FAV_LIST =
-  'https://api.bilibili.com/x/v3/fav/resource/list?media_id={mid}&pn={pn}&ps=20&keyword=&order=mtime&type=0&tid=0&platform=web&jsonp=jsonp';
+  'https://api.bilibili.com/x/v3/fav/resource/ids?media_id={mid}';
+
+export const getFavListBVID = async (mid: string, favList: string[] = []) => {
+  logger.info('calling fetchFavList');
+
+  const res = await fetch(URL_FAV_LIST.replace('{mid}', mid));
+  const json = await res.json();
+  const data = json.data as { bvid: string }[];
+  return data.map(val => val.bvid).filter(val => !favList.includes(val));
+};
 
 export const fetchFavList = async (
   mid: string,
   progressEmitter: (val: number) => void = () => undefined,
   favList: string[] = []
 ) => {
-  logger.info('calling fetchFavList');
-
-  return fetchBiliPaginatedAPI({
-    url: URL_FAV_LIST.replace('{mid}', mid),
-    getMediaCount: data => data.info.media_count,
-    getPageSize: () => 20,
-    getItems: js => js.data.medias,
-    progressEmitter,
-    favList,
-  });
+  const bvids = await getFavListBVID(mid, favList);
+  const BVidPromises = bvids.map((val, i) =>
+    fetchVideoInfo(val, () => {
+      progressEmitter((100 * (i + 1)) / bvids.length);
+    })
+  );
+  return (await Promise.all(BVidPromises)).filter(item => item) as VideoInfo[];
 };
 
 const regexFetch = async ({

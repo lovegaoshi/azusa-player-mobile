@@ -7,7 +7,7 @@ import {
   checkBVLiked,
   sendBVLike,
   sendBVTriple,
-} from '../../utils/BiliOperate';
+} from '../../utils/Bilibili/BiliOperate';
 import { useNoxSetting } from '../../hooks/useSetting';
 import { logger } from '../../utils/Logger';
 

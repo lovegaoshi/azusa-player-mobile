@@ -1,6 +1,6 @@
 import TrackPlayer, { Event } from 'react-native-track-player';
 import { resolveUrl, NULL_TRACK } from '../objects/Song';
-import { initBiliHeartbeat } from '../utils/BiliOperate';
+import { initBiliHeartbeat } from '../utils/Bilibili/BiliOperate';
 import { NoxStorage } from '../types/storage';
 
 let lastBiliHeartBeat: string[] = ['', ''];

@@ -26,6 +26,7 @@ declare namespace NoxMedia {
     useBiliShazam: boolean;
     lastSubscribed: number;
     type: string;
+    biliSync: boolean;
   }
 
   export interface LyricDetail {
