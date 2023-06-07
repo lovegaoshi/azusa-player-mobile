@@ -5,6 +5,7 @@ import bfetch from '../BiliFetch';
 import { getFavListBVID } from '../mediafetch/bilifavlist';
 import { humanishApiLimiter } from '../mediafetch/throttle';
 import { getBiliUser } from '../../components/setting/sync/PersonalCloudAuth';
+import { getPlaylistUniqBVIDs } from '../../objects/Playlist';
 
 const BILI_GETFAVLIST_API =
   'https://api.bilibili.com/x/v3/fav/folder/created/list-all?up_mid={mid}';
@@ -12,7 +13,7 @@ const BILI_CREFAVLIST_API = 'https://api.bilibili.com/x/v3/fav/folder/add';
 
 // https://api.bilibili.com/x/v3/fav/folder/created/list-all?up_mid=3493085134719196
 // not sure what fid means...
-interface GETFAVLIST_RES {
+export interface GETFAVLIST_RES {
   id: number;
   title: string;
   [key: string]: any;
@@ -20,13 +21,17 @@ interface GETFAVLIST_RES {
 
 // if len === 0 then create!
 export const getBiliFavlist = async (
-  usermid: string,
-  matchingTitle: string
+  usermid?: string,
+  matchingTitle?: string
 ) => {
-  const res = await fetch(BILI_GETFAVLIST_API.replace('{mid}', usermid));
+  const user = usermid ? { mid: usermid } : await getBiliUser();
+  if (!user.mid) return [];
+  const res = await fetch(BILI_GETFAVLIST_API.replace('{mid}', user.mid));
   const json = await res.json();
   const favlists = json.data.list as GETFAVLIST_RES[];
-  return favlists.filter(val => val.title === matchingTitle);
+  return matchingTitle
+    ? favlists.filter(val => val.title === matchingTitle)
+    : favlists;
 };
 
 export const createBiliFavlist = async (title: string) => {
@@ -52,9 +57,9 @@ export const createBiliFavlist = async (title: string) => {
   return json.data.id;
 };
 
-export const getOrInsertBiliFavlist = async (
-  usermid: string,
-  matchingTitle: string
+const getOrInsertBiliFavlist = async (
+  matchingTitle: string,
+  usermid?: string
 ) => {
   const getResult = await getBiliFavlist(usermid, matchingTitle);
   if (getResult.length > 0) {
@@ -111,15 +116,10 @@ export const syncFavlist = async (
   const user = await getBiliUser();
   if (!user.mid) return false;
   const favid = await getOrInsertBiliFavlist(
-    user.mid,
-    favlist.title.slice(0, 19)
+    favlist.title.slice(0, 19),
+    user.mid
   );
-  const uniqBVIDs = Array.from(
-    favlist.songList.reduce(
-      (accumulator, currentValue) => accumulator.add(currentValue.bvid),
-      new Set() as Set<string>
-    )
-  );
+  const uniqBVIDs = getPlaylistUniqBVIDs(favlist);
   await addToBiliFavlist(
     favid,
     uniqBVIDs.filter(val => val.startsWith('BV')),
