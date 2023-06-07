@@ -13,6 +13,7 @@ import { getPlaylistUniqBVIDs } from '../../objects/Playlist';
 import { fetchVideoInfo } from '../../utils/mediafetch/bilivideo';
 import useAlert from '../dialogs/useAlert';
 import { songFetch, fetchiliBVIDs } from '../../utils/mediafetch/bilivideo';
+import { syncFavlist } from '../../utils/Bilibili/bilifavOperate';
 
 enum ICONS {
   SETTINGS = 'cog',
@@ -23,6 +24,7 @@ enum ICONS {
   RELOAD_BVIDS = 'reload',
   CLEAR = 'notification-clear-all',
   REMOVE = 'trash-can',
+  BILISYNC = 'sync',
 }
 
 interface props {
@@ -46,6 +48,17 @@ export default ({
   const limitedPlaylistFeatures =
     currentPlaylist.type !== PLAYLIST_ENUMS.TYPE_TYPICA_PLAYLIST;
   const { OneWayAlert, TwoWayAlert } = useAlert();
+
+  const playlistSync2Bilibili = async (playlist = currentPlaylist) => {
+    Snackbar.show({
+      text: t('PlaylistOperations.bilisyncing', { playlist }),
+      duration: Snackbar.LENGTH_INDEFINITE,
+    });
+    await syncFavlist(playlist, progressEmitter);
+    progressEmitter(0);
+    Snackbar.dismiss();
+    Snackbar.show({ text: t('PlaylistOperations.bilisynced', { playlist }) });
+  };
 
   // TODO: useCallback?
   const playlistAnalysis = (playlist = currentPlaylist) => {
@@ -173,7 +186,11 @@ export default ({
       text: t('PlaylistOperations.bilishazaming', { playlist }),
       duration: Snackbar.LENGTH_INDEFINITE,
     });
-    const newSongList = await biliShazamOnSonglist(playlist.songList, false, progressEmitter);
+    const newSongList = await biliShazamOnSonglist(
+      playlist.songList,
+      false,
+      progressEmitter
+    );
     updatePlaylist(
       {
         ...playlist,
@@ -193,6 +210,11 @@ export default ({
       <CopiedPlaylistMenuItem
         getFromListOnClick={() => currentPlaylist}
         onSubmit={() => toggleVisible()}
+      />
+      <Menu.Item
+        leadingIcon={ICONS.BILISYNC}
+        onPress={() => playlistSync2Bilibili()}
+        title={t('PlaylistOperations.bilisyncTitle')}
       />
       <Menu.Item
         leadingIcon={ICONS.BILISHAZAM}

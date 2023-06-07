@@ -22,7 +22,8 @@
     "playlistNameLabel": "歌单名称",
     "subscribeUrlLabel": "b站订阅URL",
     "blacklistedUrlLabel": "黑名单BV号",
-    "useBiliShazamLabel": "使用b站识歌（王胡桃专用）"
+    "useBiliShazamLabel": "使用b站识歌（王胡桃专用）",
+    "useBiliSyncLabel": "b站收藏夹同步"
   },
   "RenameSongDialog": {
     "title": "将 {{song.name}} 重命名为...",
@@ -47,6 +48,8 @@
     "cleaned": "歌单 {{playlist.title}} 清理完成",
     "bilishazaming": "正在对歌单 {{playlist.title}} 用b站识歌...",
     "bilishazamed": "歌单 {{playlist.title}} b站识歌完成",
+    "bilisyncing": "正在对歌单 {{playlist.title}} 上传至b站...",
+    "bilisynced": "Playlist {{playlist.title}} 上传到乐b站",
     "clearListTitle": "清空 {{playlist.title}}?",
     "clearListMsg": "确定要清空歌单 {{playlist.title}} 吗?",
     "deleteListTitle": "删除 {{playlist.title}}?",
@@ -58,6 +61,7 @@
     "playlistSettingsTitle": "设置...",
     "playlistSendToTitle": "送往...",
     "bilishazamTitle": "b站识歌",
+    "bilisyncTitle": "同步为b站收藏夹",
     "analyticsTitle": "歌单统计",
     "removeBrokenTitle": "清除失效bv号",
     "reloadBVIDTitle": "重载bv号",
@@ -140,7 +144,8 @@
     "BilibiliLoginQRGenerated": "在b站APP扫码登录",
     "BilibiliLoginQRGenerateFailed": "b站二维码生成失败，请检查网络",
     "BilibiliLoginQRExpired": "b站二维码过期了",
-    "BilibiliLoginProbeFailed": "检查二维码失败，请检查网络"
+    "BilibiliLoginProbeFailed": "检查二维码失败，请检查网络",
+    "Disclaimer": "由于电梓播放器第三方的身份，使用b站账号cookie有可能导致被风控封号。虽然王胡桃本人以身试法自用cookie，但请最起码开小号使用b站功能"
   },
   "VersionUpdate": {
     "NoUpdates": "管人播放器已经是最新版本。\n当前版本：{{currentVersion}}\n开发版本：{{devVersion}}",

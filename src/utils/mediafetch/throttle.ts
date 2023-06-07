@@ -29,4 +29,14 @@ const bilih5ApiLimiter = new Bottleneck({
   maxConcurrent: 1,
 });
 
-export { biliApiLimiter, biliTagApiLimiter, bilih5ApiLimiter, awaitLimiter };
+const humanishApiLimiter = new Bottleneck({
+  minTime: 1000,
+  maxConcurrent: 5,
+});
+export {
+  biliApiLimiter,
+  biliTagApiLimiter,
+  bilih5ApiLimiter,
+  awaitLimiter,
+  humanishApiLimiter,
+};

@@ -17,6 +17,7 @@ import PlaylistMenuButton from '../buttons/PlaylistMenuButton';
 import { updateSubscribeFavList } from '../../utils/BiliSubscribe';
 import { songlistToTracklist } from '../../objects/Playlist';
 import { PLAYLIST_ENUMS } from '../../enums/Playlist';
+import { syncFavlist } from '../../utils/Bilibili/bilifavOperate';
 
 export default () => {
   const { t } = useTranslation();
@@ -250,6 +251,9 @@ export default () => {
       new Date().getTime() - currentPlaylist.lastSubscribed > 86400000
     ) {
       refreshPlaylist();
+      if (currentPlaylist.biliSync) {
+        syncFavlist(currentPlaylist);
+      }
     }
   }, [currentPlaylist]);
 

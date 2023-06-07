@@ -1,13 +1,6 @@
 import * as React from 'react';
 import { View, ActivityIndicator, SafeAreaView } from 'react-native';
-import {
-  Text,
-  IconButton,
-  TouchableRipple,
-  Card,
-  Avatar,
-  Button,
-} from 'react-native-paper';
+import { Text, Avatar, Button } from 'react-native-paper';
 import { useTranslation } from 'react-i18next';
 import QRCode from 'react-native-qrcode-svg';
 import Snackbar from 'react-native-snackbar';
@@ -20,8 +13,8 @@ import { logger } from '../../utils/Logger';
 import bfetch from '../../utils/BiliFetch';
 import { addCookie } from '../../utils/ChromeStorage';
 import { getLoginStatus } from '../../utils/Login';
-import { timeout } from '../../utils/Utils';
 import GenericInputDialog from '../dialogs/GenericInputDialog';
+import BiliSelectFavButtton from './BiliSelectFavButtton';
 
 interface QRCodeReq {
   url: string;
@@ -232,6 +225,7 @@ export default ({ navigation }: props) => {
         >
           {t('Login.BilibiliCookieInputButton')}
         </Button>
+        <Text>{t('Login.Disclaimer')}</Text>
         <View style={{ paddingVertical: 10 }} />
         {qrcode !== '' && <QRCode value={qrcode} size={300} />}
       </View>
@@ -245,12 +239,18 @@ export default ({ navigation }: props) => {
       CookieManager.clearAll();
     };
     return (
-      <View style={{ flexDirection: 'row', paddingLeft: 20 }}>
-        <Avatar.Image source={{ uri: loginInfo.avatar }}></Avatar.Image>
-        <View style={{ paddingLeft: 10 }}>
-          <Text variant="headlineSmall">{loginInfo.name}</Text>
-          <Button onPress={logout}>LOGOUT</Button>
+      <View style={{ paddingHorizontal: 5 }}>
+        <View
+          style={{ flexDirection: 'row', paddingLeft: 20, paddingVertical: 10 }}
+        >
+          <Avatar.Image source={{ uri: loginInfo.avatar }}></Avatar.Image>
+          <View style={{ paddingLeft: 10 }}>
+            <Text variant="headlineSmall">{loginInfo.name}</Text>
+            <Button onPress={logout}>LOGOUT</Button>
+          </View>
         </View>
+        <BiliSelectFavButtton />
+        <Text>{t('Login.Disclaimer')}</Text>
       </View>
     );
   };

@@ -22,7 +22,8 @@
     "playlistNameLabel": "Playlist Name",
     "subscribeUrlLabel": "Subscribe URL",
     "blacklistedUrlLabel": "Banned BVIDs",
-    "useBiliShazamLabel": "Use BiliShazam"
+    "useBiliShazamLabel": "Use BiliShazam",
+    "useBiliSyncLabel": "BiliSync as favorite"
   },
   "RenameSongDialog": {
     "title": "Remame {{song.name}} to...",
@@ -47,6 +48,8 @@
     "cleaned": "Playlist {{playlist.title}} broken links are cleaned",
     "bilishazaming": "Now shazaming {{playlist.title}}...",
     "bilishazamed": "Playlist {{playlist.title}} shazamed",
+    "bilisyncing": "Now syncing {{playlist.title}} to Bilibili...",
+    "bilisynced": "Playlist {{playlist.title}} synced",
     "clearListTitle": "Clear {{playlist.title}}?",
     "clearListMsg": "Are you sure to clear playlist {{playlist.title}}?",
     "deleteListTitle": "Delete {{playlist.title}}?",
@@ -58,6 +61,7 @@
     "playlistSettingsTitle": "Settings...",
     "playlistSendToTitle": "Send to...",
     "bilishazamTitle": "BiliShazam",
+    "bilisyncTitle": "BiliSync",
     "analyticsTitle": "Analytics",
     "removeBrokenTitle": "Remove Broken",
     "reloadBVIDTitle": "Reload Bvids",
@@ -142,7 +146,8 @@
     "BilibiliLoginQRGenerated": "Scan QR code in Bilibili app to login",
     "BilibiliLoginQRGenerateFailed": "Bilibili QR code generation failed. Please check network.",
     "BilibiliLoginQRExpired": "Bilibili QR code expired. Regenerate to login.",
-    "BilibiliLoginProbeFailed": "Checking QR code login status failed. Please check network."
+    "BilibiliLoginProbeFailed": "Checking QR code login status failed. Please check network.",
+    "Disclaimer": "Using bilibili cookies in this app may make your account BANNED due to API abuse. At the very least please don't use your main account."
   },
   "VersionUpdate": {
     "NoUpdates": "Noxplayer is already at the newest version.\nCurrent version:{{currentVersion}}\nDev version: {{devVersion}}",

@@ -14,6 +14,7 @@ declare namespace NoxMedia {
     page: number | undefined;
     duration: number;
     album?: string;
+    addedDate?: number;
   }
 
   export interface Playlist {
@@ -25,6 +26,7 @@ declare namespace NoxMedia {
     useBiliShazam: boolean;
     lastSubscribed: number;
     type: string;
+    biliSync: boolean;
   }
 
   export interface LyricDetail {

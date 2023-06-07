@@ -7,7 +7,7 @@ import {
   checkBVLiked,
   sendBVLike,
   sendBVTriple,
-} from '../../utils/BiliOperate';
+} from '../../utils/Bilibili/BiliOperate';
 import { useNoxSetting } from '../../hooks/useSetting';
 import { logger } from '../../utils/Logger';
 
@@ -24,7 +24,8 @@ const checkLiked = async (song: NoxMedia.Song | undefined) => {
   if (!song) {
     return 0;
   }
-  if (!Number.isNaN(Number(song.id))) {
+  if (song.bvid.startsWith('BV')) {
+    // if (!Number.isNaN(Number(song.id))) {
     // legacy bilivideo where id is cid and bvid is bvid
     return await checkBVLiked(song.bvid);
   }

@@ -1,8 +1,9 @@
 import Bottleneck from 'bottleneck';
 import CookieManager from '@react-native-cookies/cookies';
-import bfetch from './BiliFetch';
-import { throttler } from './throttle';
-import { logger } from './Logger';
+import bfetch from '../BiliFetch';
+import { throttler } from '../throttle';
+import { logger } from '../Logger';
+import { bvidToAid } from '../bvid';
 
 const BILI_LIKE_API = 'https://api.bilibili.com/x/web-interface/archive/like';
 const BILI_TRIP_API =
@@ -13,6 +14,7 @@ const BILI_HEARTBEAT_API =
   'https://api.bilibili.com/x/click-interface/web/heartbeat';
 const BILI_VIDEOINFO_API =
   'https://api.bilibili.com/x/web-interface/view?bvid=';
+const BILI_FAV_API = 'https://api.bilibili.com/x/v3/fav/resource/deal';
 
 const { bilih5ApiLimiter } = throttler;
 
@@ -111,4 +113,35 @@ export const checkBiliVideoPlayed = (bvid: string) => {
     .then(res => res.json())
     .then(json => logger.debug(`${bvid} view count:${json.data.stat.view}`))
     .catch(logger.error);
+};
+
+export const sendBVFavorite = async (
+  bvid: string,
+  addfav: string[] = [],
+  removefav: string[] = []
+) => {
+  try {
+    const biliJct = (await CookieManager.get('https://www.bilibili.com'))[
+      'bili_jct'
+    ]?.value;
+    if (!biliJct) return;
+    const res = await bfetch(BILI_FAV_API, {
+      credentials: 'include',
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      referrer: `https://www.bilibili.com/video/${bvid}/`,
+      body: {
+        rid: String(bvidToAid(bvid)),
+        add_media_ids: addfav.join(','),
+        del_media_ids: removefav.join(','),
+        csrf: biliJct,
+        type: '2',
+      },
+    });
+    return await res.json();
+  } catch (e) {
+    logger.error(`BVID favorite POST failed ${String(e)};`);
+  }
 };

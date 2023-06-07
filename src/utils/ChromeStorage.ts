@@ -325,11 +325,14 @@ const importNoxExtensionContent = async (parsedContent: any) => {
     await clearPlaylists();
     for (const playlistID of parsedContent['MyFavList']) {
       const playlist = parsedContent[playlistID];
-      console.log(playlist.info);
       await savePlaylist({
         ...dummyPlaylistList,
         ...playlist,
         ...playlist.info,
+        // HACK: seriously who thought of renaming variables is a good idea?
+        // oh right that was me
+        subscribeUrl: playlist.subscribeUrls,
+        blacklistedUrl: playlist.bannedBVids,
       });
     }
     await savePlaylistIds(parsedContent['MyFavList']);

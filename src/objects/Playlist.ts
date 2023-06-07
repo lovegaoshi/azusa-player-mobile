@@ -16,6 +16,7 @@ export const dummyPlaylist = (
     useBiliShazam: false,
     lastSubscribed: 0,
     type,
+    biliSync: false,
   };
 };
 

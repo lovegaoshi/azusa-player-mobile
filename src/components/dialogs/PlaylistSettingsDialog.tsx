@@ -30,15 +30,18 @@ export default ({
   const currentPlaylist = useNoxSetting(state => state.currentPlaylist);
   const updatePlaylist = useNoxSetting(state => state.updatePlaylist);
   const [useBiliShazam, setUseBiliShazam] = useState(false);
+  const [useBiliSync, setUseBiliSync] = useState(false);
   const nameRef = React.useRef<any>();
   const subRef = React.useRef<any>();
   const blacklistRef = React.useRef<any>();
 
   React.useEffect(() => {
     setUseBiliShazam(currentPlaylist.useBiliShazam);
+    setUseBiliSync(currentPlaylist.biliSync);
   }, [currentPlaylist]);
 
   const toggleBiliShazam = () => setUseBiliShazam(val => !val);
+  const toggleBiliSync = () => setUseBiliSync(val => !val);
 
   const handleClose = () => {
     onClose();
@@ -92,6 +95,16 @@ export default ({
             />
             <Text style={{ fontSize: 18 }}>
               {t('PlaylistSettingsDialog.useBiliShazamLabel')}
+            </Text>
+          </View>
+          <View style={{ flexDirection: 'row' }}>
+            <Switch
+              value={useBiliSync}
+              onValueChange={toggleBiliSync}
+              color={playerStyle.colors.onSurfaceVariant}
+            />
+            <Text style={{ fontSize: 18 }}>
+              {t('PlaylistSettingsDialog.useBiliSyncLabel')}
             </Text>
           </View>
         </Dialog.Content>
