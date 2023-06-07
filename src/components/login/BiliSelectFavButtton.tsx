@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Text, Avatar, Button, ActivityIndicator } from 'react-native-paper';
+import { Button, ActivityIndicator } from 'react-native-paper';
 import { useTranslation } from 'react-i18next';
 
 import {
@@ -9,9 +9,11 @@ import {
 import GenericCheckDialog from '../dialogs/GenericCheckDialog';
 import bilifavlistFetch from '../../utils/mediafetch/bilifavlist';
 import { dummyPlaylist } from '../../objects/Playlist';
+import { useNoxSetting } from '../../hooks/useSetting';
 
 export default () => {
   const { t } = useTranslation();
+  const addPlaylist = useNoxSetting(state => state.addPlaylist);
   const [visible, setVisible] = React.useState(false);
   const [favLists, setFavLists] = React.useState<GETFAVLIST_RES[]>([]);
   const [loading, setLoading] = React.useState(false);
@@ -28,8 +30,8 @@ export default () => {
     setLoading(true);
     for (const [i, v] of indices.entries()) {
       if (v) {
-        const favlist = dummyPlaylist(favLists[i].title);
-        favlist.songList = await bilifavlistFetch.regexFetch({
+        const newPlaylist = dummyPlaylist(favLists[i].title);
+        newPlaylist.songList = await bilifavlistFetch.regexFetch({
           reExtracted: [
             0,
             String(favLists[i].id),
@@ -38,6 +40,7 @@ export default () => {
           favList: [],
           useBiliTag: false,
         });
+        addPlaylist(newPlaylist);
       }
     }
     hideDialog();
@@ -56,6 +59,8 @@ export default () => {
         title="Check Dialog"
         options={favLists}
         onSubmit={onSubmit}
+        onClose={() => hideDialog()}
+        renderOptionTitle={(val: any) => val.title}
       />
     </>
   );
