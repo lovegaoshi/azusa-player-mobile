@@ -5,5 +5,5 @@ export enum NoxRepeatMode {
   SHUFFLE = 'shuffle',
   REPEAT = 'repeat',
   REPEAT_TRACK = 'repeat-once',
-  SUGGEST = 'clover',
+  SUGGEST = 'dice-multiple',
 }

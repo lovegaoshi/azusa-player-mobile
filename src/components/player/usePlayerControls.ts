@@ -4,6 +4,7 @@ import { useNoxSetting } from '../../hooks/useSetting';
 import { songlistToTracklist } from '../../objects/Playlist';
 import noxPlayingList, { getCurrentTPQueue } from '../../stores/playingList';
 import biliavideo from '../../utils/mediafetch/biliavideo';
+import { randomChoice } from '../../utils/Utils';
 import { NoxRepeatMode } from './enums/RepeatMode';
 
 const { getState } = noxPlayingList;
@@ -22,7 +23,7 @@ export default () => {
     return biliavideo.regexFetch({
       reExtracted: [
         '',
-        (await biliSuggest(currentSong.bvid))[0].aid,
+        randomChoice(await biliSuggest(currentSong.bvid)).aid,
         // HACK: sure sure regexpexecarray
       ] as unknown as RegExpExecArray,
     });
