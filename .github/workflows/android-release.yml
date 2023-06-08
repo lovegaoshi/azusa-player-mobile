@@ -69,6 +69,7 @@ jobs:
         uses: softprops/action-gh-release@v1
         with:
           name: 'Android ${{env.COMMIT_TAG}}'
+          tag_name: '${{env.COMMIT_TAG}}'
           files: android/app/build/outputs/apk/release/*.apk
           generate_release_notes: true
           target_commitish: ${{ env.GIT_BRANCH }}
