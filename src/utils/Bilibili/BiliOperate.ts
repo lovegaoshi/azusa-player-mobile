@@ -1,11 +1,14 @@
 import Bottleneck from 'bottleneck';
 import CookieManager from '@react-native-cookies/cookies';
+
 import bfetch from '../BiliFetch';
 import { throttler } from '../throttle';
 import { logger } from '../Logger';
 import { bvidToAid } from '../bvid';
 
 const BILI_LIKE_API = 'https://api.bilibili.com/x/web-interface/archive/like';
+const BILI_RELATED_API =
+  'https://api.bilibili.com/x/web-interface/archive/related?bvid={bvid}';
 const BILI_TRIP_API =
   'https://api.bilibili.com/x/web-interface/archive/like/triple';
 const BILI_VIDEOPLAY_API =
@@ -144,4 +147,10 @@ export const sendBVFavorite = async (
   } catch (e) {
     logger.error(`BVID favorite POST failed ${String(e)};`);
   }
+};
+
+export const biliSuggest = async (bvid: string) => {
+  const res = await bfetch(BILI_RELATED_API.replace('{bvid}', bvid)),
+    json = await res.json();
+  return json.data as any[];
 };

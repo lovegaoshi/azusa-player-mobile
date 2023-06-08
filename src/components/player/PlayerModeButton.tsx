@@ -31,8 +31,11 @@ export default () => {
         TrackPlayer.setRepeatMode(RepeatMode.Track);
         break;
       case NoxRepeatMode.REPEAT_TRACK:
-        setPlayMode(NoxRepeatMode.SHUFFLE);
+        setPlayMode(NoxRepeatMode.SUGGEST);
         TrackPlayer.setRepeatMode(RepeatMode.Off);
+        break;
+      case NoxRepeatMode.SUGGEST:
+        setPlayMode(NoxRepeatMode.SHUFFLE);
         break;
       default:
         break;
