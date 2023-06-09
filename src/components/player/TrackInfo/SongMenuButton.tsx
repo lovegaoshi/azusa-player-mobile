@@ -48,6 +48,7 @@ export default ({ track }: props) => {
         disabled={song === undefined}
       ></IconButton>
       <SongMenu
+        song={song}
         songMenuVisible={songMenuVisible}
         setSongMenuVisible={setSongMenuVisible}
         songMenuSongIndexes={[songMenuSongIndex]}
