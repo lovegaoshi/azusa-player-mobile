@@ -16,8 +16,8 @@ export default () => {
   };
 
   const getBiliSuggest = async () => {
-    const currentSong = getCurrentTPQueue()[findCurrentPlayIndex()];
-    if (!currentSong.bvid.startsWith('BV')) {
+    const currentSong = (await TrackPlayer.getActiveTrack())?.song;
+    if (!currentSong || !currentSong.bvid.startsWith('BV')) {
       throw new Error('not a bvid; bilisuggest fails');
     }
     return biliavideo.regexFetch({

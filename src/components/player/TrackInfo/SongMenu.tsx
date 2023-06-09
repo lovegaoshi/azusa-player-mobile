@@ -23,6 +23,7 @@ enum ICONS {
 }
 
 interface props {
+  song: NoxMedia.Song;
   songMenuVisible: boolean;
   setSongMenuVisible: (val: boolean) => void;
   songMenuSongIndexes: [number];
@@ -31,6 +32,7 @@ interface props {
 }
 
 export default ({
+  song,
   songMenuVisible,
   setSongMenuVisible,
   songMenuSongIndexes,
@@ -48,16 +50,8 @@ export default ({
 
   const closeMenu = React.useCallback(() => setSongMenuVisible(false), []);
 
-  const selectedSongIndexes = () => {
-    return songMenuSongIndexes;
-  };
-
-  const selectedSongs = () => {
-    return selectedSongIndexes().map(index => currentPlaylist.songList[index!]);
-  };
-
   const selectedPlaylist = () => {
-    const songs = selectedSongs();
+    const songs = [song];
     return {
       ...currentPlaylist,
       songList: songs,
@@ -84,7 +78,7 @@ export default ({
 
   const removeSongs = async (banBVID = false) => {
     const currentPlaylist2 = playlists[currentPlaylist.id];
-    const songs = selectedSongs();
+    const songs = [song];
     const newPlaylist = banBVID
       ? {
           ...currentPlaylist2,
@@ -122,7 +116,7 @@ export default ({
         onSubmit={closeMenu}
       />
       <RenameSongMenuItem
-        getSongOnClick={() => selectedSongs()[0]}
+        getSongOnClick={() => song}
         onSubmit={(rename: string) => {
           closeMenu();
           renameSong(rename);
@@ -131,9 +125,7 @@ export default ({
       <Menu.Item
         leadingIcon={ICONS.SEARCH_IN_PLAYLIST}
         onPress={() => {
-          handleSearch(
-            currentPlaylist.songList[songMenuSongIndexes[0]].parsedName
-          );
+          handleSearch(song.parsedName);
           closeMenu();
           // TODO: doesnt work.
           Keyboard.dismiss();
