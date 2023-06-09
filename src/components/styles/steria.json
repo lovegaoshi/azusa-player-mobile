@@ -685,5 +685,188 @@
       "backdrop": "rgba(49, 49, 37, 0.4)"
     },
     "playerControlIconContained": "contained"
+  },
+
+  {
+    "metaData": {
+      "themeName": "安妮播放器",
+      "themeDesc": "关注弃车人的骄傲你练直播间27484357",
+      "themeAuthor": "食梦莲lotus@bilibili",
+      "themeIcon": "https://i0.hdslb.com/bfs/face/81e39eb61a0cbefeb7a6647137167011a63e717f.jpg",
+      "darkTheme": false
+    },
+    "gifs": [
+      "https://article.biliimg.com/bfs/article/313c42ec86c5bdaa13ba3d8a5633e696bfd2412f.gif",
+      "https://article.biliimg.com/bfs/article/f961bb02daccadcc19daf191e5540e633fe4b104.gif",
+      "https://article.biliimg.com/bfs/article/5fb01231dff56e8b089126c6edfa6fc68c7b2be7.gif",
+      "https://article.biliimg.com/bfs/article/8dc01b02cd7dfeb8871dea607b4f191a5be80f64.gif",
+      "http://i0.hdslb.com/bfs/garb/e0434d5ee3ad0be34377ac0df78a6075cabf34e8.png",
+      "http://i0.hdslb.com/bfs/garb/e4bc12886185357562cd59d8d18257a8ad19d9e1.png",
+      "http://i0.hdslb.com/bfs/garb/9cf9238d185de745850b6b7c0468bb0654e9c30e.png",
+      "http://i0.hdslb.com/bfs/garb/e16087b121cb48dd34bab5a02ffc5601149b5ca4.png",
+      "http://i0.hdslb.com/bfs/garb/802462836f55a35bf09d6ad00e4ba52ed101d2f6.png",
+      "http://i0.hdslb.com/bfs/garb/22113e3f01f64e781754bf1297d3d201fb97a92c.png",
+      "http://i0.hdslb.com/bfs/garb/bf79e7b0df21f7a75a640ca5a6e76c9ed687acd3.png",
+      "http://i0.hdslb.com/bfs/garb/f4d9ae969e692ea086a4382698cf78f651bbc975.png",
+      "http://i0.hdslb.com/bfs/garb/c2d0bac0d3d98b3424cd58d6e68d79bd352359f6.png",
+      "http://i0.hdslb.com/bfs/garb/2cceff64dab9ab0d1ec389bda04655390fe4aea4.png",
+      "http://i0.hdslb.com/bfs/garb/ec5cc3729cffbfd6acafa9f6c7b9171f585299e3.png",
+      "http://i0.hdslb.com/bfs/garb/74bbe0803168dc873a7e97334b0bab85d337a39c.png",
+      "https://i0.hdslb.com/bfs/garb/b37c9278c3b1ad823f445917c30a00bd658acf66.png",
+      "https://i0.hdslb.com/bfs/garb/253c5586a97f1aaa22e17ec469a6d0e75a99f148.png",
+      "https://i0.hdslb.com/bfs/garb/41e3fe22f8a169ae272f6c70b548cb9ffc278a45.png",
+      "https://i0.hdslb.com/bfs/garb/a6c54394405511a3e4d10cc796a0e798949c4791.png",
+      "https://i0.hdslb.com/bfs/garb/7f792cec053aa661a3d3715bf7b9ef37642aa112.png",
+      "https://i0.hdslb.com/bfs/garb/035f77c4707d960ffaa2169d6101b89d771cbb75.png",
+      "https://i0.hdslb.com/bfs/garb/dc205fefca78819048d29140b4ddc32e0d5d086f.png",
+      "https://i0.hdslb.com/bfs/garb/79e3aee1e5549de0848d4bbcf9a9d18cb2c10ed5.png",
+      "https://i0.hdslb.com/bfs/garb/91b69182421ebfaa804ba11bd09bb52639d8e3bd.png",
+      "https://i0.hdslb.com/bfs/garb/3f5c5d13991b0ec003ff3ebd17395a0ae20a5118.png",
+      "https://i0.hdslb.com/bfs/garb/764ce00c835e6ebad91f3842a2b5ddb432f5e852.png",
+      "https://i0.hdslb.com/bfs/garb/fa1343dd7a34340d119e9870de6197398ca5c9a3.png"
+    ],
+    "backgroundImages": [
+      "https://article.biliimg.com/bfs/article/29af4ddfe6e9a2459b02ccb8181b414080babd65.png"
+    ],
+    "customColors": {
+      "maskedBackgroundColor": "rgba(255, 255, 255, 0.40)",
+      "playlistDrawerBackgroundColor": "#ffa6c9",
+      "playlistDrawerBackgroundColorTransparent": "rgba(255, 166, 201, 0.35)",
+      "progressThumbTintColor": "#ff1493",
+      "progressMinimumTrackTintColor": "#ff1493",
+      "progressMaximumTrackTintColor": "#FFFFFF"
+    },
+    "colors": {
+      "text": "#ff1493",
+      "primary": "#ff1493",
+      "onPrimary": "rgb(255, 255, 255)",
+      "primaryContainer": "rgb(255, 217, 223)",
+      "onPrimaryContainer": "rgb(63, 0, 22)",
+      "secondary": "#cc3366",
+      "onSecondary": "rgb(255, 255, 255)",
+      "secondaryContainer": "rgb(255, 217, 223)",
+      "onSecondaryContainer": "rgb(43, 21, 26)",
+      "tertiary": "rgb(122, 87, 50)",
+      "onTertiary": "rgb(255, 255, 255)",
+      "tertiaryContainer": "rgb(255, 220, 188)",
+      "onTertiaryContainer": "rgb(44, 23, 0)",
+      "error": "rgb(186, 26, 26)",
+      "onError": "rgb(255, 255, 255)",
+      "errorContainer": "rgb(255, 218, 214)",
+      "onErrorContainer": "rgb(65, 0, 2)",
+      "background": "rgba(255, 251, 255, 0.3)",
+      "onBackground": "#ff1493",
+      "surface": "rgb(255, 251, 255)",
+      "onSurface": "#ff1493",
+      "surfaceVariant": "rgb(243, 221, 224)",
+      "onSurfaceVariant": "#ff1493",
+      "outline": "rgb(132, 115, 117)",
+      "outlineVariant": "rgb(214, 194, 196)",
+      "shadow": "rgba(0, 0, 0)",
+      "scrim": "rgb(0, 0, 0)",
+      "inverseSurface": "rgb(54, 47, 48)",
+      "inverseOnSurface": "rgb(250, 238, 238)",
+      "inversePrimary": "rgb(255, 177, 192)",
+      "elevation": {
+        "level0": "transparent",
+        "level1": "rgb(250, 242, 247)",
+        "level2": "rgb(247, 236, 242)",
+        "level3": "rgb(244, 230, 237)",
+        "level4": "rgb(243, 229, 235)",
+        "level5": "rgb(241, 225, 232)"
+      },
+      "surfaceDisabled": "rgba(32, 26, 27, 0.12)",
+      "onSurfaceDisabled": "rgba(32, 26, 27, 0.38)",
+      "backdrop": "rgba(58, 45, 47, 0.4)"
+    }
+  },
+
+  {
+    "metaData": {
+      "themeName": "guraaaaaa",
+      "themeDesc": "A",
+      "themeAuthor": "lovegaoshi",
+      "themeIcon": "https://pbs.twimg.com/media/FLLR87OakAAs3Li.jpg",
+      "darkTheme": false
+    },
+    "gifs": [
+      "https://github.com/jonowo/walfie-gif-dl/blob/main/gifs/spin.gif?raw=true",
+      "https://github.com/jonowo/walfie-gif-dl/blob/main/gifs/shark_rap.gif?raw=true",
+      "https://github.com/jonowo/walfie-gif-dl/blob/main/gifs/vacuum.gif?raw=true",
+      "https://github.com/jonowo/walfie-gif-dl/blob/main/gifs/fitness_shark.gif?raw=true",
+      "https://github.com/jonowo/walfie-gif-dl/blob/main/gifs/taiko_shark.gif?raw=true",
+      "https://github.com/jonowo/walfie-gif-dl/blob/main/gifs/a_way_out.gif?raw=true",
+      "https://github.com/jonowo/walfie-gif-dl/blob/main/gifs/books.gif?raw=true",
+      "https://github.com/jonowo/walfie-gif-dl/blob/main/gifs/boating.gif?raw=true",
+      "https://github.com/jonowo/walfie-gif-dl/blob/main/gifs/karaoke.gif?raw=true",
+      "https://github.com/jonowo/walfie-gif-dl/blob/main/gifs/rhythm_gaming.gif?raw=true",
+      "https://github.com/jonowo/walfie-gif-dl/blob/main/gifs/plug_play.gif?raw=true",
+      "https://github.com/jonowo/walfie-gif-dl/blob/main/gifs/supermarket.gif?raw=true",
+      "https://i.kym-cdn.com/photos/images/original/002/019/817/d79.gif",
+      "https://i.kym-cdn.com/photos/images/original/002/498/345/71b.gif",
+      "https://64.media.tumblr.com/9521b5e88c3205af6f38f98ac98f7668/81dc912cde9331b1-61/s540x810/a78f5e5072a18703dae14d2c929be5de5192be67.gifv",
+      "https://64.media.tumblr.com/095318fd7179ebc2ae7630f5f9b43b08/81dc912cde9331b1-7d/s540x810/741e71abc947d54f5879fe9571b0af689a2c883b.gifv",
+      "https://64.media.tumblr.com/810c079a61fbc64b04e7e77aa3ed47aa/81dc912cde9331b1-b6/s540x810/3f48fcd826455dda941d9a527f6bfb8b2b286836.gifv",
+      "https://64.media.tumblr.com/6579b60f6e46e7f6196a60ebc386fc88/81dc912cde9331b1-25/s540x810/a143adbc5fe899ff53f7e1b870c2c9b365ae5550.gifv",
+      "https://64.media.tumblr.com/d3893fc5906f166dfc6b54bcb808f6ba/81dc912cde9331b1-98/s540x810/97f9319f598d427dbab7c6d4db4a623b82e5d66d.gifv"
+    ],
+
+    "backgroundImages": [
+      {
+        "type": "video",
+        "identifier": "https://cdn.donmai.us/original/ed/59/__gawr_gura_and_bloop_hololive_and_1_more_drawn_by_mokyuko_and_shikabashi_joxx__ed598bec0a9c3be5a9835c441ca40910.mp4"
+      }
+    ],
+    "customColors": {
+      "maskedBackgroundColor": "rgba(255, 255, 255, 0.40)",
+      "playlistDrawerBackgroundColor": "#FFDA1F",
+      "playlistDrawerBackgroundColorTransparent": "rgba(255, 166, 201, 0.35)",
+      "progressThumbTintColor": "#1e90ff",
+      "progressMinimumTrackTintColor": "#1e90ff",
+      "progressMaximumTrackTintColor": "#FFFFFF"
+    },
+    "colors": {
+      "text": "#1e90ff",
+      "primary": "#1e90ff",
+      "onPrimary": "rgb(255, 255, 255)",
+      "primaryContainer": "rgb(255, 217, 223)",
+      "onPrimaryContainer": "rgb(63, 0, 22)",
+      "secondary": "#00aaff",
+      "onSecondary": "rgb(255, 255, 255)",
+      "secondaryContainer": "rgb(255, 217, 223)",
+      "onSecondaryContainer": "rgb(43, 21, 26)",
+      "tertiary": "rgb(122, 87, 50)",
+      "onTertiary": "rgb(255, 255, 255)",
+      "tertiaryContainer": "rgb(255, 220, 188)",
+      "onTertiaryContainer": "rgb(44, 23, 0)",
+      "error": "rgb(186, 26, 26)",
+      "onError": "rgb(255, 255, 255)",
+      "errorContainer": "rgb(255, 218, 214)",
+      "onErrorContainer": "rgb(65, 0, 2)",
+      "background": "rgba(255, 251, 255, 0.3)",
+      "onBackground": "#1e90ff",
+      "surface": "rgb(255, 251, 255)",
+      "onSurface": "#1e90ff",
+      "surfaceVariant": "rgba(255, 251, 255, 0.2)",
+      "onSurfaceVariant": "#1e90ff",
+      "outline": "rgb(132, 115, 117)",
+      "outlineVariant": "rgb(214, 194, 196)",
+      "shadow": "rgba(0, 0, 0)",
+      "scrim": "rgb(0, 0, 0)",
+      "inverseSurface": "rgb(54, 47, 48)",
+      "inverseOnSurface": "rgb(250, 238, 238)",
+      "inversePrimary": "rgb(255, 177, 192)",
+      "elevation": {
+        "level0": "transparent",
+        "level1": "rgb(250, 242, 247)",
+        "level2": "rgb(247, 236, 242)",
+        "level3": "rgb(244, 230, 237)",
+        "level4": "rgb(243, 229, 235)",
+        "level5": "rgb(241, 225, 232)"
+      },
+      "surfaceDisabled": "rgba(32, 26, 27, 0.12)",
+      "onSurfaceDisabled": "rgba(32, 26, 27, 0.38)",
+      "backdrop": "rgba(58, 45, 47, 0.4)"
+    }
   }
 ]
