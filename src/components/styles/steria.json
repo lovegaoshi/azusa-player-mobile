@@ -868,5 +868,135 @@
       "onSurfaceDisabled": "rgba(32, 26, 27, 0.38)",
       "backdrop": "rgba(58, 45, 47, 0.4)"
     }
+  },
+  {
+    "metaData": {
+      "themeName": "塞克西废墟",
+      "themeDesc": "温柔 安定 直播间594461",
+      "themeAuthor": "塞克西废墟",
+      "themeIcon": "https://i0.hdslb.com/bfs/face/d26f5f499c8f7683ddb3120609e528a0ff61b050.jpg",
+      "darkTheme": false
+    },
+    "gifs": [
+      "https://i0.hdslb.com/bfs/garb/725909a043c0e2cf80b9ec68204f9285e22dd374.png",
+      "https://i0.hdslb.com/bfs/garb/bdc4bc7183ef6c50514a53c787af4c5c41ca463c.png",
+      "https://i0.hdslb.com/bfs/garb/b4d479abf66b9c9b27ec87e50a0651d9867f6a02.png",
+      "https://i0.hdslb.com/bfs/garb/9071475002ded0f0db8a676d9ec9b7d3f8f4296a.png",
+      "https://i0.hdslb.com/bfs/garb/44956d59ec2357efa84b9318f1da013bb6e472bf.png",
+      "https://i0.hdslb.com/bfs/garb/e5e85bd7985dee8c032414f96b1b0f90df90cf73.png",
+      "https://i0.hdslb.com/bfs/garb/a5e54a6e13b51b8328da706ca9374ebdf53de636.png",
+      "https://i0.hdslb.com/bfs/garb/801e5dc638f80f347118890be2ff2a5f546c2471.png",
+      "https://i0.hdslb.com/bfs/garb/8d318222222027255d3b7c5937a6ff2d2da56059.png",
+      "https://i0.hdslb.com/bfs/garb/cb8acab60ecae38fe203ac94724da813495c9968.png",
+      "https://i0.hdslb.com/bfs/garb/37c2fed6f6902b78fcfbd392dd43fa8c5b97f95e.png",
+      "https://i0.hdslb.com/bfs/garb/b294d87c71b7bef25b190fa4ab76c164aa0c919f.png",
+      "https://i0.hdslb.com/bfs/garb/a6c90fdbf0d9d99170598457e1352c1cb5172054.png",
+      "https://i0.hdslb.com/bfs/garb/06fc0db79dc44838648f0cf6ade1daf84c92d7e2.png",
+      "https://i0.hdslb.com/bfs/garb/3286611e0241fa0d1c9d7d30751a4845e89e4714.png",
+      "https://i0.hdslb.com/bfs/garb/b2a0213d15b2c4e209bb17ee1e98a7d94b5250eb.png",
+      "https://i0.hdslb.com/bfs/garb/b4c96209b69cfbdc1ac7ccaad1d9fe16fe87f551.png",
+      "https://i0.hdslb.com/bfs/garb/504510046cd1dda8f1b351c3b4ef9bba9069e608.png",
+      "https://i0.hdslb.com/bfs/garb/62776841a449612ed8306e0d235ca2112543f2e5.png",
+      "https://i0.hdslb.com/bfs/garb/e56aea6c3e4faaa2af80cc18153a4acd799d5979.png",
+      "https://i0.hdslb.com/bfs/garb/cb3c39077140b8f8d79c5e95e844e7f3febfa956.png",
+      "https://i0.hdslb.com/bfs/garb/d2d3ff2b56016dec0f3a10eb1106bfda05e07805.png",
+      "https://i0.hdslb.com/bfs/garb/e19c91c520fb2f40fb7b957f64c998f0a36e819f.png",
+      "https://i0.hdslb.com/bfs/garb/e6b589c9f014d851b653eb803bf33cf64cc244cb.png",
+      "https://i0.hdslb.com/bfs/garb/664f52af70b1b9f0496776ef640b7ce20b8ed9cd.png"
+    ],
+    "backgroundImages": [
+      "https://i0.hdslb.com/bfs/garb/9efbb127be4c5c86782be20827da13ab6c2255e1.jpg",
+      "https://i0.hdslb.com/bfs/garb/3c997740e4a131fce30d2c121e7f4bd4cb3bada6.jpg",
+      "https://i0.hdslb.com/bfs/garb/68f3d40343e3c33166d8407d38442c5e124b427d.jpg",
+      "https://i0.hdslb.com/bfs/garb/8b57e8e9a640c51fb3ab2c29d235f84bc13f6927.jpg",
+      "https://i0.hdslb.com/bfs/garb/7fc48881ec85a91ab451162d14749a50ebaff767.jpg"
+    ],
+    "customColors": {
+      "maskedBackgroundColor": "rgba(255, 255, 255, 0.40)",
+      "playlistDrawerBackgroundColor": "#ffa6c9",
+      "playlistDrawerBackgroundColorTransparent": "rgba(255, 166, 201, 0.35)",
+      "progressThumbTintColor": "#ff1493",
+      "progressMinimumTrackTintColor": "#ff1493",
+      "progressMaximumTrackTintColor": "#FFFFFF",
+      "textInputSelectionColor": "#ffa6c9"
+    },
+    "colors": {
+      "text": "#ff1493",
+      "primary": "#ff1493",
+      "onPrimary": "rgb(255, 255, 255)",
+      "primaryContainer": "rgb(255, 217, 223)",
+      "onPrimaryContainer": "rgb(63, 0, 22)",
+      "secondary": "#cc3366",
+      "onSecondary": "rgb(255, 255, 255)",
+      "secondaryContainer": "rgb(255, 217, 223)",
+      "onSecondaryContainer": "rgb(43, 21, 26)",
+      "tertiary": "rgb(122, 87, 50)",
+      "onTertiary": "rgb(255, 255, 255)",
+      "tertiaryContainer": "rgb(255, 220, 188)",
+      "onTertiaryContainer": "rgb(44, 23, 0)",
+      "error": "rgb(186, 26, 26)",
+      "onError": "rgb(255, 255, 255)",
+      "errorContainer": "rgb(255, 218, 214)",
+      "onErrorContainer": "rgb(65, 0, 2)",
+      "background": "rgba(255, 251, 255, 0.3)",
+      "onBackground": "#ff1493",
+      "surface": "rgb(255, 251, 255)",
+      "onSurface": "#ff1493",
+      "surfaceVariant": "rgb(243, 221, 224)",
+      "onSurfaceVariant": "#ff1493",
+      "outline": "rgb(132, 115, 117)",
+      "outlineVariant": "rgb(214, 194, 196)",
+      "shadow": "rgba(0, 0, 0)",
+      "scrim": "rgb(0, 0, 0)",
+      "inverseSurface": "rgb(54, 47, 48)",
+      "inverseOnSurface": "rgb(250, 238, 238)",
+      "inversePrimary": "rgb(255, 177, 192)",
+      "elevation": {
+        "level0": "transparent",
+        "level1": "rgb(250, 242, 247)",
+        "level2": "rgb(247, 236, 242)",
+        "level3": "rgb(244, 230, 237)",
+        "level4": "rgb(243, 229, 235)",
+        "level5": "rgb(241, 225, 232)"
+      },
+      "surfaceDisabled": "rgba(32, 26, 27, 0.12)",
+      "onSurfaceDisabled": "rgba(32, 26, 27, 0.38)",
+      "backdrop": "rgba(58, 45, 47, 0.4)"
+    }
+  },
+  {
+    "metaData": {
+      "themeName": "天马播放器",
+      "themeDesc": "你是压轴哦 好好看22605289哦",
+      "themeAuthor": "天马的冰淇淋小推车",
+      "themeIcon": "https://img.nga.178.com/attachments/mon_202105/14/-zue37Q16x-9sneZpT3cS15o-15o.jpg",
+      "darkTheme": false
+    },
+    "gifs": [
+      "https://i0.hdslb.com/bfs/garb/6429e53d4b4c6e42f9cffba4a98e6d98649b3094.png",
+      "https://i0.hdslb.com/bfs/garb/f42452eef1eb2af566e5f55878084f4664e16156.png",
+      "https://i0.hdslb.com/bfs/garb/5cddcc1b4495e34adf30ae6c2a4fe3cbf09dc5ae.png",
+      "https://i0.hdslb.com/bfs/garb/a13546c7289d9d33137b6d880a7254e722b97179.png",
+      "https://i0.hdslb.com/bfs/garb/3983331f57302844f457284347077ea34f232b9a.png",
+      "https://i0.hdslb.com/bfs/garb/5ec53e041f1f438b3f9202fa59a45b2cdabb34b3.png",
+      "https://i0.hdslb.com/bfs/garb/78e1982923e7b34487b59201ec7884a7b7ac896c.png",
+      "https://i0.hdslb.com/bfs/garb/ab86e4225db86df2652e82a1e7ec9e31d38a2278.png",
+      "https://i0.hdslb.com/bfs/garb/db575b4550e0ae925744b6f0c44787929bc92fa5.png",
+      "https://i0.hdslb.com/bfs/garb/e3855b5abec7bf5ab11db1f878f27563dd3fe873.png",
+      "https://i0.hdslb.com/bfs/garb/e3ef04b0560af535f97a4115f28f155c0f0202e7.png",
+      "https://i0.hdslb.com/bfs/garb/00dd8bd8192bac445c521a211422ef801c4b602d.png",
+      "https://i0.hdslb.com/bfs/garb/fd48bb09c1f4383ef9216a3b8b5117be93cbf150.png",
+      "https://i0.hdslb.com/bfs/garb/3954a435e7fee2fe06a19f6ba83f669e51e4ca79.png",
+      "https://i0.hdslb.com/bfs/garb/f017187b4a5da0e1770dea78689bd8bd160654a4.png",
+      "https://i0.hdslb.com/bfs/garb/74cc69b050170126acba84e0fda1620fd235355d.png",
+      "https://i0.hdslb.com/bfs/garb/4e98dc6d1abb5a50d51d8c4c4ab380315e1635e5.png",
+      "https://i0.hdslb.com/bfs/garb/a5a817d595f87b39e32ebe9b5a75e1071c2280b3.png",
+      "https://i0.hdslb.com/bfs/garb/1d313781054a4a22042fc05ef10f95bc09af40a8.png",
+      "https://i0.hdslb.com/bfs/garb/8d00f1d169421ef195bcf543e71d13c3e9bb966c.png"
+    ],
+    "backgroundImages": [
+      "https://i0.hdslb.com/bfs/garb/f97c35ee849743ee0969f5fca274ecc94d00e638.jpg",
+      "https://i0.hdslb.com/bfs/garb/eeec66368c9a92292b6ecda83e39ae4330af7085.jpg"
+    ]
   }
 ]
