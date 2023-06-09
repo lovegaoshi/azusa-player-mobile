@@ -150,6 +150,7 @@ export const sendBVFavorite = async (
 };
 
 export const biliSuggest = async (bvid: string) => {
+  logger.debug(`fetching biliSuggest wiht ${bvid}`);
   const res = await bfetch(BILI_RELATED_API.replace('{bvid}', bvid)),
     json = await res.json();
   return json.data as any[];
