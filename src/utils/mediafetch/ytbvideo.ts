@@ -12,10 +12,8 @@ import ytdl from 'ytdl-core';
 import { regexFetchProps } from './generic';
 import { biliApiLimiter } from './throttle';
 
-import VideoInfo from '../../objects/VideoInfo';
 import SongTS from '../../objects/Song';
 import { logger } from '../Logger';
-import bfetch from '../BiliFetch';
 
 const CIDPREFIX = 'youtube-';
 
@@ -146,7 +144,9 @@ export const fetchAudioInfoRaw = async (sid: string) => {
 }
     */
     const videoDetails = ytdlInfo.videoDetails;
-    console.log(videoDetails.thumbnails[0].url);
+    const validDurations = ytdlInfo.formats.filter(
+      format => format.approxDurationMs
+    );
     return [
       SongTS({
         cid: `${CIDPREFIX}-${sid}`,
@@ -158,11 +158,12 @@ export const fetchAudioInfoRaw = async (sid: string) => {
         cover: videoDetails.thumbnails[videoDetails.thumbnails.length - 1].url,
         lyric: '',
         page: 1,
-        duration: ytdlInfo.formats[0].approxDurationMs
-          ? Math.floor(
-              Number.parseInt(ytdlInfo.formats[0].approxDurationMs) / 1000
-            )
-          : 0,
+        duration:
+          validDurations.length > 0
+            ? Math.floor(
+                Number.parseInt(validDurations[0].approxDurationMs!) / 1000
+              )
+            : 0,
         album: videoDetails.title,
       }),
     ];
