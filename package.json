@@ -66,6 +66,7 @@
     "react-native-windows": "^0.65.0-0",
     "react-use": "^17.4.0",
     "use-debounce": "^9.0.4",
+    "ytdl-core": "git+https://lovegaoshi@github.com/lovegaoshi/node-ytdl-core.git",
     "zustand": "^4.3.7"
   },
   "devDependencies": {
