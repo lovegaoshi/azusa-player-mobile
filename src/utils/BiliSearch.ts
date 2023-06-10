@@ -9,6 +9,7 @@ import bilichannelFetch from './mediafetch/bilichannel';
 import biliaudioFetch from './mediafetch/biliaudio';
 import bilisearchFetch from './mediafetch/bilisearch';
 import bilichannelAudioFetch from '../utils/mediafetch/bilichannelAudio';
+import ytbvideoFetch from './mediafetch/ytbvideo';
 import { regexFetchProps } from './mediafetch/generic';
 
 /**
@@ -42,6 +43,7 @@ export const searchBiliURLs = async ({
     [bilifavlistFetch.regexSearchMatch2, bilifavlistFetch.regexFetch],
     [steriatkFetch.regexSearchMatch, steriatkFetch.regexFetch],
     [bilivideoFetch.regexSearchMatch, bilivideoFetch.regexFetch],
+    [ytbvideoFetch.regexSearchMatch, ytbvideoFetch.regexFetch],
   ];
   let results = [];
   try {

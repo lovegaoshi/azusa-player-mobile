@@ -2,6 +2,7 @@ import Bottleneck from 'bottleneck';
 import { biliApiLimiter } from './throttle';
 import VideoInfo from '../../objects/VideoInfo';
 import bfetch from '../BiliFetch';
+import logger from '../Logger';
 
 /**
  * the purpose of this media fetch library is to
@@ -110,6 +111,7 @@ export const fetchAwaitPaginatedAPI = async ({
   jsonify = res => res.json(),
   getBVID = (val: any) => val.bvid,
   fetcher = bfetch,
+  getJSONData = (json: any) => json.data,
 }: FetcherProps) => {
   // helper function that returns true if more page resolving is needed.
   const resolvePageJson = async (BVids: string[], json: any) => {
@@ -125,12 +127,13 @@ export const fetchAwaitPaginatedAPI = async ({
     fetcher(url.replace('{pn}', String(1)), params)
   );
   const json = await jsonify(res);
-  const mediaCount = getMediaCount(json);
+  const data = getJSONData(json);
+  const mediaCount = getMediaCount(data);
   const BVids: any[] = [];
 
   if (await resolvePageJson(BVids, json)) {
     for (
-      let page = 2, n = Math.ceil(mediaCount / getPageSize(json.data));
+      let page = 2, n = Math.ceil(mediaCount / getPageSize(data));
       page <= n;
       page++
     ) {

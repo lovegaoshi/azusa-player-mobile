@@ -1,5 +1,6 @@
 import steriatkFetch from './steriatk';
 import biliaudioFetch from './biliaudio';
+import ytbvideoFetch from './ytbvideo';
 import { logger } from '../Logger';
 import bfetch from '../BiliFetch';
 
@@ -44,6 +45,7 @@ export const fetchPlayUrlPromise = async (v: NoxMedia.Song) => {
   > = [
     [steriatkFetch.regexResolveURLMatch, steriatkFetch.resolveURL],
     [biliaudioFetch.regexResolveURLMatch, biliaudioFetch.resolveURL],
+    [ytbvideoFetch.regexResolveURLMatch, ytbvideoFetch.resolveURL],
   ];
   logger.debug({ bvid, cid });
   for (const reExtraction of regexResolveURLs) {
