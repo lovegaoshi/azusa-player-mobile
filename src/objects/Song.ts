@@ -54,7 +54,7 @@ export default ({
     parsedName: reExtractSongName(name, singerId),
     duration,
     album,
-    addedDate,
+    addedDate: addedDate || new Date().getTime(),
   };
 };
 

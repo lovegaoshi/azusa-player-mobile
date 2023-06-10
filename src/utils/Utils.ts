@@ -1,6 +1,7 @@
 import { Alert } from 'react-native';
 
 export const seconds2HHMMSS = (sec_num: number) => {
+  sec_num = Math.floor(sec_num);
   const padding = (num: number) => String(num).padStart(2, '0');
   const hours = Math.floor(sec_num / 3600);
   const minutes = Math.floor((sec_num - hours * 3600) / 60);
@@ -9,13 +10,14 @@ export const seconds2HHMMSS = (sec_num: number) => {
 };
 
 export const seconds2MMSS = (sec_num: number) => {
+  sec_num = Math.floor(sec_num);
   const padding = (num: number) => String(num).padStart(2, '0');
   const hours = Math.floor(sec_num / 3600);
   const minutes = Math.floor((sec_num - hours * 3600) / 60);
   const seconds = sec_num - hours * 3600 - minutes * 60;
   return hours > 0
     ? `${String(hours)}:${padding(minutes)}:${padding(seconds)}`
-    : `${String(minutes)}:${padding(seconds)}`;
+    : `${padding(minutes)}:${padding(seconds)}`;
 };
 
 export function randomChoice<T>(list: Array<T>) {
