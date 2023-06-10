@@ -20,10 +20,15 @@ export default () => {
     if (!currentSong || !currentSong.bvid.startsWith('BV')) {
       throw new Error('not a bvid; bilisuggest fails');
     }
+    // 130,音乐综合 29,音乐现场 59,演奏 31,翻唱 193,MV 30,VOCALOID·UTAU 194,电音 28,原创音乐
+    const musicTids = [130, 29, 59, 31, 193, 30, 194, 28];
+    const biliSuggested = (await biliSuggest(currentSong.bvid)).filter(val =>
+      musicTids.includes(val.tid)
+    );
     return biliavideo.regexFetch({
       reExtracted: [
         '',
-        randomChoice(await biliSuggest(currentSong.bvid)).aid,
+        randomChoice(biliSuggested).aid,
         // HACK: sure sure regexpexecarray
       ] as unknown as RegExpExecArray,
     });
