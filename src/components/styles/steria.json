@@ -1025,7 +1025,7 @@
       }
     ],
     "customColors": {
-      "maskedBackgroundColor": "rgba(0, 0, 0, 0.60)",
+      "maskedBackgroundColor": "rgba(0, 0, 0, 0.10)",
       "playlistDrawerBackgroundColor": "rebeccapurple",
       "playlistDrawerBackgroundColorTransparent": "rgba(102, 51, 153, 0.35)",
       "progressThumbTintColor": "#00BFFF",
