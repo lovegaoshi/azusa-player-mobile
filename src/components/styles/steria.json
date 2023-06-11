@@ -585,7 +585,7 @@
   {
     "metaData": {
       "themeName": "猫头鹰播放器",
-      "themeDesc": "给你一拳",
+      "themeDesc": "不看赫拉Kris给你一拳",
       "themeAuthor": "-哆啦A林-",
       "themeIcon": "https://i2.hdslb.com/bfs/face/7924b38811066f9aa8e8b2367fe826fc2d92d514.jpg",
       "darkTheme": true
@@ -686,12 +686,11 @@
     },
     "playerControlIconContained": "contained"
   },
-
   {
     "metaData": {
       "themeName": "安妮播放器",
       "themeDesc": "关注弃车人的骄傲你练直播间27484357",
-      "themeAuthor": "食梦莲lotus@bilibili",
+      "themeAuthor": "食梦莲lotus",
       "themeIcon": "https://i0.hdslb.com/bfs/face/81e39eb61a0cbefeb7a6647137167011a63e717f.jpg",
       "darkTheme": false
     },
@@ -998,5 +997,86 @@
       "https://i0.hdslb.com/bfs/garb/f97c35ee849743ee0969f5fca274ecc94d00e638.jpg",
       "https://i0.hdslb.com/bfs/garb/eeec66368c9a92292b6ecda83e39ae4330af7085.jpg"
     ]
+  },
+  {
+    "metaData": {
+      "themeName": "杠杠播放器",
+      "themeDesc": "正统唱见，纯情天使 3473884",
+      "themeAuthor": "-菫時-",
+      "themeIcon": "https://i2.hdslb.com/bfs/face/8f71e7aa2bc3c40621d23bed712710e04d6b8f75.jpg",
+      "darkTheme": true
+    },
+    "gifs": [
+      "http://i0.hdslb.com/bfs/live/e8073adeb52036d0d563c848c4b55b8449bc4b85.png",
+      "http://i0.hdslb.com/bfs/live/f2a7a0916015a741a192ae85ee593a39c6dd04a7.png",
+      "http://i0.hdslb.com/bfs/live/0a691aec40c738918014b27acfefa3b295b8a458.png",
+      "http://i0.hdslb.com/bfs/live/cdb1f3adeee987c1fe5303ca90443932edb23d30.png",
+      "http://i0.hdslb.com/bfs/live/c9450e570d7abcf5a920b65e18b9624b75c9d4fb.png",
+      "http://i0.hdslb.com/bfs/live/021761abdfe8dc417e5267b74877bebd43dcfd58.png",
+      "http://i0.hdslb.com/bfs/live/e0ae55eb80c6b7c01eeb042a26a3bd2938ed679a.png",
+      "http://i0.hdslb.com/bfs/live/bea985bcf662dc4d85c9f78633c57398b7c3d223.png",
+      "http://i0.hdslb.com/bfs/live/5b29c4c15e6b97da2df564899f84906fc800590b.png",
+      "http://i0.hdslb.com/bfs/live/a9fa62db7b7233dac30d3abd851b992710bc1649.png"
+    ],
+    "backgroundImages": [
+      {
+        "type": "bvid",
+        "identifier": "BV1jT41187Rr"
+      }
+    ],
+    "customColors": {
+      "maskedBackgroundColor": "rgba(0, 0, 0, 0.60)",
+      "playlistDrawerBackgroundColor": "rebeccapurple",
+      "playlistDrawerBackgroundColorTransparent": "rgba(102, 51, 153, 0.35)",
+      "progressThumbTintColor": "#00BFFF",
+      "progressMinimumTrackTintColor": "#00BFFF",
+      "progressMaximumTrackTintColor": "#FFFFFF",
+      "btnBackgroundColor": "rgb(72, 71, 58)",
+      "textInputSelectionColor": "rebeccapurple"
+    },
+    "colors": {
+      "primary": "#00BFFF",
+      "onPrimary": "rgb(50, 50, 0)",
+      "primaryContainer": "rgb(30, 30, 30)",
+      "onPrimaryContainer": "rgb(234, 234, 0)",
+      "secondary": "#97D5EA",
+      "onSecondary": "rgb(50, 50, 24)",
+      "secondaryContainer": "rgb(73, 72, 45)",
+      "onSecondaryContainer": "rgb(231, 228, 191)",
+      "tertiary": "rgb(164, 208, 189)",
+      "onTertiary": "rgb(11, 55, 42)",
+      "tertiaryContainer": "rgb(37, 78, 64)",
+      "onTertiaryContainer": "rgb(191, 236, 216)",
+      "error": "rgb(255, 180, 171)",
+      "onError": "rgb(105, 0, 5)",
+      "errorContainer": "rgb(147, 0, 10)",
+      "onErrorContainer": "rgb(255, 180, 171)",
+      "background": "rgba(0,0,0, 0.4)",
+      "onBackground": "rgb(230, 226, 217)",
+      "surface": "rgb(28, 28, 23)",
+      "onSurface": "#00BFFF",
+      "text": "#00BFFF",
+      "surfaceVariant": "rgb(10, 10, 10)",
+      "onSurfaceVariant": "#00BFFF",
+      "outline": "rgb(147, 145, 130)",
+      "outlineVariant": "rgb(72, 71, 58)",
+      "shadow": "rgb(0, 0, 0)",
+      "scrim": "rgb(0, 0, 0)",
+      "inverseSurface": "rgb(230, 226, 217)",
+      "inverseOnSurface": "rgb(49, 49, 43)",
+      "inversePrimary": "rgb(98, 98, 0)",
+      "elevation": {
+        "level0": "transparent",
+        "level1": "rgb(53, 56, 57)",
+        "level2": "rgb(10, 10, 10)",
+        "level3": "rgb(10, 10, 10)",
+        "level4": "rgb(49, 49, 20)",
+        "level5": "rgb(53, 53, 20)"
+      },
+      "surfaceDisabled": "rgba(230, 226, 217, 0.12)",
+      "onSurfaceDisabled": "rgba(230, 226, 217, 0.38)",
+      "backdrop": "rgba(49, 49, 37, 0.4)"
+    },
+    "playerControlIconContained": "contained"
   }
 ]
