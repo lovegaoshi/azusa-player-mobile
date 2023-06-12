@@ -16,6 +16,7 @@ import {
 } from 'react-native-paper';
 import merge from 'deepmerge';
 import { useTranslation } from 'react-i18next';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 import { useSetupPlayer, Player } from './components/player/View';
 import Playlist from './components/playlist/View';
@@ -106,56 +107,58 @@ const App: React.FC = () => {
   // HACK: proof codewhisperer learns stackoverflow:
   // https://stackoverflow.com/questions/54599305/how-to-set-background-image-with-react-native-and-react-navigation
   return (
-    <MainBackground>
-      <PaperProvider
-        theme={{
-          ...defaultTheme,
-          colors: playerStyle.colors,
-        }}
-      >
-        <NavigationContainer
+    <SafeAreaProvider>
+      <MainBackground>
+        <PaperProvider
           theme={{
             ...defaultTheme,
-            colors: {
-              ...defaultTheme.colors,
-              ...playerStyle.colors,
-            },
+            colors: playerStyle.colors,
           }}
         >
-          <Drawer.Navigator
-            initialRouteName={ViewEnum.PLAYER_HOME}
-            drawerContent={PlaylistDrawer}
+          <NavigationContainer
+            theme={{
+              ...defaultTheme,
+              colors: {
+                ...defaultTheme.colors,
+                ...playerStyle.colors,
+              },
+            }}
           >
-            <Drawer.Screen
-              name={ViewEnum.PLAYER_HOME}
-              options={{
-                drawerIcon: () => <IconButton icon="home-outline" />,
-                title: String(t('appDrawer.homeScreenName')),
-                header: () => null,
-              }}
-              component={NoxPlayer}
-            />
-            <Drawer.Screen
-              name={ViewEnum.EXPORE}
-              options={{
-                drawerIcon: () => <IconButton icon="compass" />,
-                title: String(t('appDrawer.exploreScreenName')),
-              }}
-              component={DummySettings}
-            />
-            <Drawer.Screen
-              name={ViewEnum.SETTINGS}
-              options={{
-                drawerIcon: () => <IconButton icon="cog" />,
-                title: String(t('appDrawer.settingScreenName')),
-                header: () => null,
-              }}
-              component={Settings}
-            />
-          </Drawer.Navigator>
-        </NavigationContainer>
-      </PaperProvider>
-    </MainBackground>
+            <Drawer.Navigator
+              initialRouteName={ViewEnum.PLAYER_HOME}
+              drawerContent={PlaylistDrawer}
+            >
+              <Drawer.Screen
+                name={ViewEnum.PLAYER_HOME}
+                options={{
+                  drawerIcon: () => <IconButton icon="home-outline" />,
+                  title: String(t('appDrawer.homeScreenName')),
+                  header: () => null,
+                }}
+                component={NoxPlayer}
+              />
+              <Drawer.Screen
+                name={ViewEnum.EXPORE}
+                options={{
+                  drawerIcon: () => <IconButton icon="compass" />,
+                  title: String(t('appDrawer.exploreScreenName')),
+                }}
+                component={DummySettings}
+              />
+              <Drawer.Screen
+                name={ViewEnum.SETTINGS}
+                options={{
+                  drawerIcon: () => <IconButton icon="cog" />,
+                  title: String(t('appDrawer.settingScreenName')),
+                  header: () => null,
+                }}
+                component={Settings}
+              />
+            </Drawer.Navigator>
+          </NavigationContainer>
+        </PaperProvider>
+      </MainBackground>
+    </SafeAreaProvider>
   );
 };
 
