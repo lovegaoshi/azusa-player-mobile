@@ -8601,9 +8601,9 @@ react-native-tab-view@^3.5.1:
   dependencies:
     use-latest-callback "^0.1.5"
 
-"react-native-track-player@git+https://lovegaoshi@github.com/lovegaoshi/react-native-track-player.git":
+"react-native-track-player@git+https://lovegaoshi@github.com/lovegaoshi/react-native-track-player.git#dev-android-auto":
   version "4.0.0-rc03"
-  resolved "git+https://lovegaoshi@github.com/lovegaoshi/react-native-track-player.git#4e1abd5fa05d56e28c73ff7538a2958ac527b41a"
+  resolved "git+https://lovegaoshi@github.com/lovegaoshi/react-native-track-player.git#2cfa59a7eb4e38bbb584d4e0885196d9e6c85446"
 
 react-native-url-polyfill@^1.3.0:
   version "1.3.0"
