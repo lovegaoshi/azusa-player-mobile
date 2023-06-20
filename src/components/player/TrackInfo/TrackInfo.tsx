@@ -53,39 +53,41 @@ export const TrackInfo: React.FC<{
 
   return (
     <View style={styles.container}>
-      {playerSetting.hideCoverInMobile ? null : (
-        <>
-          <TouchableWithoutFeedback onPress={onImagePress}>
-            <View
-              style={[
-                styles.container,
-                {
-                  opacity: isImageVisible ? 1 : 0,
-                  position: isImageVisible ? 'relative' : 'absolute',
-                },
-              ]}
-              pointerEvents={isImageVisible ? 'auto' : 'none'}
-            >
-              <Animated.Image
-                style={[styles.artwork, { opacity }]}
-                source={{ uri: `${track?.artwork}` }}
-              />
-            </View>
-          </TouchableWithoutFeedback>
+      <>
+        <TouchableWithoutFeedback onPress={onImagePress}>
           <View
             style={[
-              styles.lyric,
+              styles.container,
               {
-                opacity: isImageVisible ? 0 : 1,
-                position: isImageVisible ? 'absolute' : 'relative',
+                opacity: isImageVisible ? 1 : 0,
+                position: isImageVisible ? 'relative' : 'absolute',
               },
             ]}
-            pointerEvents={isImageVisible ? 'none' : 'auto'}
+            pointerEvents={isImageVisible ? 'auto' : 'none'}
           >
-            <LyricView onLyricPress={onImagePress} track={track} />
+            <Animated.Image
+              style={[styles.artwork, { opacity }]}
+              source={{
+                uri: playerSetting.hideCoverInMobile
+                  ? null
+                  : `${track?.artwork}`,
+              }}
+            />
           </View>
-        </>
-      )}
+        </TouchableWithoutFeedback>
+        <View
+          style={[
+            styles.lyric,
+            {
+              opacity: isImageVisible ? 0 : 1,
+              position: isImageVisible ? 'absolute' : 'relative',
+            },
+          ]}
+          pointerEvents={isImageVisible ? 'none' : 'auto'}
+        >
+          <LyricView onLyricPress={onImagePress} track={track} />
+        </View>
+      </>
       <Text style={[styles.titleText, { color: playerStyle.colors.primary }]}>
         {track?.title}
       </Text>
