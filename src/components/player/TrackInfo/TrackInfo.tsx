@@ -67,11 +67,13 @@ export const TrackInfo: React.FC<{
           >
             <Animated.Image
               style={[styles.artwork, { opacity }]}
-              source={{
-                uri: playerSetting.hideCoverInMobile
-                  ? null
-                  : `${track?.artwork}`,
-              }}
+              source={
+                playerSetting.hideCoverInMobile
+                  ? 0
+                  : {
+                      uri: `${track?.artwork}`,
+                    }
+              }
             />
           </View>
         </TouchableWithoutFeedback>
