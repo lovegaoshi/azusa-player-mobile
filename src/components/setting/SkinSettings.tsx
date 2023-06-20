@@ -90,12 +90,22 @@ export default () => {
               >
                 {skin.metaData.themeDesc}
               </Text>
-              <Text
-                variant={'labelLarge'}
-                style={{ color: playerStyle.colors.secondary }}
-              >
-                {skin.metaData.darkTheme ? 'Dark theme' : 'Light theme'}
-              </Text>
+              <View style={{ flexDirection: 'row' }}>
+                <IconButton
+                  icon={
+                    skin.metaData.darkTheme
+                      ? 'lightbulb-outline'
+                      : 'lightbulb-on'
+                  }
+                  size={25}
+                  style={{
+                    marginHorizontal: 0,
+                    marginVertical: 0,
+                    marginLeft: -8,
+                    marginTop: -8,
+                  }}
+                />
+              </View>
             </View>
           </View>
           <View style={{ alignContent: 'flex-end' }}>
