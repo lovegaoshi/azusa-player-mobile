@@ -11,7 +11,7 @@ const style = {
 
 export default (props: any) => (
   <FastImage
-    source={require('../../assets/splash/steria.jpg')}
+    source={require('../../assets/splash/steria2.jpg')}
     resizeMode={FastImage.resizeMode.contain}
     style={style}
     {...props}
