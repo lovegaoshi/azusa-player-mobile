@@ -66,14 +66,16 @@ const styles = StyleSheet.create({
     fontSize: 18,
   },
   container: {
-    width: '95%',
+    width: '100%',
     marginTop: 10,
     flexDirection: 'row',
+    paddingHorizontal: 15,
   },
   labelContainer: {
-    width: '90%',
+    width: '100%',
     flexDirection: 'row',
     justifyContent: 'space-between',
+    paddingHorizontal: 15,
   },
   labelText: {
     color: 'white',
