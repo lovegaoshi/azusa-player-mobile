@@ -15,6 +15,7 @@ import { addCookie } from '../../utils/ChromeStorage';
 import { getLoginStatus } from '../../utils/Login';
 import GenericInputDialog from '../dialogs/GenericInputDialog';
 import BiliSelectFavButtton from './BiliSelectFavButtton';
+import { throttler } from '../../utils/throttle';
 
 interface QRCodeReq {
   url: string;
@@ -41,6 +42,37 @@ const probeQRCodeAPI =
   'https://passport.bilibili.com/x/passport-login/web/qrcode/poll';
 //'https://passport.bilibili.com/qrcode/getLoginInfo';
 const oauthKey = 'qrcode_key'; // 'oauthKey';
+
+/**
+ * TODO: doesnt work! oh no!
+ */
+const loginQRVerification = async () => {
+  const verificationURL =
+    'https://passport.bilibili.com/x/passport-login/web/sso/list?biliCSRF=';
+  const biliJct = (await CookieManager.get('https://www.bilibili.com'))[
+    'bili_jct'
+  ]?.value;
+  const res = await throttler.biliApiLimiter.schedule(async () =>
+      bfetch(`${verificationURL}${biliJct}`, {
+        method: 'GET',
+        credentials: 'include',
+        headers: {},
+      })
+    ),
+    json = await res.json();
+  logger.debug(json);
+  await Promise.all(
+    json.data.sso.map((url: string) =>
+      throttler.biliApiLimiter.schedule(async () =>
+        bfetch(url, {
+          method: 'GET',
+          credentials: 'include',
+          headers: {},
+        })
+      )
+    )
+  );
+};
 
 export default ({ navigation }: props) => {
   const { t } = useTranslation();
@@ -124,7 +156,11 @@ export default ({ navigation }: props) => {
         // https://stackoverflow.com/questions/68805342/react-native-get-url-search-params
         for (const match of json.data.url.matchAll(/[?&]([^=]+)=([^&]*)/g)) {
           const [, key, value] = match;
-          await CookieManager.set(domain, { name: key, value });
+          try {
+            await CookieManager.set(domain, { name: key, value });
+          } catch {
+            logger.warn(`${key} and ${value} failed in saving cookie.`);
+          }
         }
         logger.debug(await CookieManager.get(domain));
         clearQRLogin();
