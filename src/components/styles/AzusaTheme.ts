@@ -101,4 +101,8 @@ export default {
     onSurfaceVariant: '#9400d3', // 'rgb(202, 199, 182)',
   },
   playerControlIconContained: undefined,
+  loadingIcon:
+    'https://i0.hdslb.com/bfs/garb/item/a041c59265e80c4d543ea4c909f01b377f07a6c5.webp',
+  progressThumbImage:
+    'https://i0.hdslb.com/bfs/garb/item/9abb811c70654ac57ca200510a25c04d82bd2c49.png',
 } as NoxTheme.style;

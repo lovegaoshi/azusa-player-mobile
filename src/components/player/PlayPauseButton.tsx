@@ -1,12 +1,19 @@
 import React from 'react';
-import { ActivityIndicator, StyleSheet, View } from 'react-native';
+import { ActivityIndicator, Image, StyleSheet, View } from 'react-native';
 import { IconButton } from 'react-native-paper';
 import TrackPlayer, {
   State,
   usePlayWhenReady,
 } from 'react-native-track-player';
+
 import { useDebouncedValue } from '../../hooks';
 import { useNoxSetting } from '../../hooks/useSetting';
+
+const LoadingIconStyle = {
+  width: 78,
+  height: 78,
+  marginTop: 0,
+};
 
 export const PlayPauseButton: React.FC<{
   state: State | undefined;
@@ -22,9 +29,18 @@ export const PlayPauseButton: React.FC<{
   const isEnded = state === State.Ended;
   const showPause = playWhenReady && !(isErrored || isEnded);
   const showBuffering = playWhenReady && isLoading;
-  return showBuffering ? (
-    <ActivityIndicator size={78} />
-  ) : (
+
+  if (showBuffering) {
+    return playerStyle.loadingIcon ? (
+      <Image
+        source={{ uri: playerStyle.loadingIcon }}
+        style={LoadingIconStyle}
+      />
+    ) : (
+      <ActivityIndicator size={78} />
+    );
+  }
+  return (
     <IconButton
       icon={showPause ? 'pause' : 'play'}
       onPress={showPause ? TrackPlayer.pause : TrackPlayer.play}

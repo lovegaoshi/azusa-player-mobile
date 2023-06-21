@@ -56,6 +56,8 @@ export const createStyle = (customStyle = AzusaTheme) => {
     },
     gifs: (customStyle.gifs || []) as any,
     bkgrdImg: randomChoice(customStyle.backgroundImages || []) as any,
+    loadingIcon: customStyle.loadingIcon as any,
+    progressThumbImage: customStyle.progressThumbImage as any,
   });
 };
 

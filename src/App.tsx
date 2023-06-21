@@ -52,7 +52,7 @@ const useSplash = (duration = 1000) => {
 const App: React.FC = () => {
   const { t } = useTranslation();
   const isPlayerReady = useSetupPlayer();
-  const isSplashReady = useSplash(__DEV__ ? 1 : 2000);
+  const isSplashReady = useSplash(__DEV__ ? 1 : 3000);
   const Drawer = createDrawerNavigator();
   const Tab = createMaterialTopTabNavigator();
   const playerStyle = useNoxSetting(state => state.playerStyle);

@@ -28,11 +28,13 @@ declare namespace NoxTheme {
 
     gifs: Array<string>;
     backgroundImages: Array<string | backgroundImage>;
+    loadingIcon?: string;
     colors: any;
     customColors: customColors;
     // https://callstack.github.io/react-native-paper/docs/components/IconButton/
     // Type: 'outlined' | 'contained' | 'contained-tonal'
-    playerControlIconContained: string | undefined;
+    playerControlIconContained?: string;
+    progressThumbImage?: string;
   }
 
   export interface coordinates {

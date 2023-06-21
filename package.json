@@ -30,6 +30,7 @@
     "@react-navigation/material-top-tabs": "^6.6.2",
     "@react-navigation/native": "^6.1.6",
     "@react-navigation/native-stack": "^6.9.12",
+    "@sharcoux/slider": "^6.1.2",
     "@shopify/flash-list": "^1.4.3",
     "axios": "^1.4.0",
     "babel-plugin-transform-remove-console": "^6.9.4",
