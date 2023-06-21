@@ -105,4 +105,11 @@ export default {
     'https://i0.hdslb.com/bfs/garb/item/a041c59265e80c4d543ea4c909f01b377f07a6c5.webp',
   progressThumbImage:
     'https://i0.hdslb.com/bfs/garb/item/9abb811c70654ac57ca200510a25c04d82bd2c49.png',
+  // TODO: I thought about implementing these in Progress.tsx onValueChange but got too lazy. meh.
+  progressThumbImageLeftDrag:
+    'https://i0.hdslb.com/bfs/garb/item/9abb811c70654ac57ca200510a25c04d82bd2c49.png',
+  progressThumbImageRightDrag:
+    'https://i0.hdslb.com/bfs/garb/item/c7b83ebe96b65fb8413fabba6936ec5f63506a02.png',
+  biliGarbCard:
+    'https://i0.hdslb.com/bfs/garb/item/ba79a6dcc3d0324ba98b8d60532af0545f72620c.png',
 } as NoxTheme.style;

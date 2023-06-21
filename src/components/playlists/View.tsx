@@ -1,8 +1,7 @@
 import React, { ReactNode, useRef, useState } from 'react';
-import { DrawerItem, DrawerItemList } from '@react-navigation/drawer';
 import { IconButton, Divider, Text, TouchableRipple } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
-import { Pressable, Dimensions, View } from 'react-native';
+import { Pressable, Dimensions, View, ImageBackground } from 'react-native';
 import { useTranslation } from 'react-i18next';
 import DraggableFlatList, {
   ScaleDecorator,
@@ -89,6 +88,21 @@ const PlaylistItem = ({
   );
 };
 
+const BiliCard = (props: any) => {
+  if (props.backgroundURI) {
+    return (
+      <ImageBackground
+        source={{
+          uri: props.backgroundURI,
+        }}
+      >
+        {props.children}
+      </ImageBackground>
+    );
+  }
+  return <>{props.children}</>;
+};
+
 export default (props: any) => {
   const navigation = useNavigation();
   const currentPlaylist = useNoxSetting(state => state.currentPlaylist);
@@ -161,11 +175,13 @@ export default (props: any) => {
   return (
     <View {...props}>
       <View style={{ height: 10 }}></View>
-      <RenderDrawerItem
-        icon={'home-outline'}
-        view={ViewEnum.PLAYER_HOME}
-        text={'appDrawer.homeScreenName'}
-      />
+      <BiliCard backgroundURI={playerStyle.biliGarbCard}>
+        <RenderDrawerItem
+          icon={'home-outline'}
+          view={ViewEnum.PLAYER_HOME}
+          text={'appDrawer.homeScreenName'}
+        />
+      </BiliCard>
       <RenderDrawerItem
         icon={'compass'}
         view={ViewEnum.EXPORE}

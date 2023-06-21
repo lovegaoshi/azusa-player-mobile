@@ -58,6 +58,11 @@ export const createStyle = (customStyle = AzusaTheme) => {
     bkgrdImg: randomChoice(customStyle.backgroundImages || []) as any,
     loadingIcon: customStyle.loadingIcon as any,
     progressThumbImage: customStyle.progressThumbImage as any,
+    progressThumbImageLeftDrag: (customStyle.progressThumbImageLeftDrag ||
+      customStyle.progressThumbImage) as any,
+    progressThumbImageRightDrag: (customStyle.progressThumbImageRightDrag ||
+      customStyle.progressThumbImage) as any,
+    biliGarbCard: customStyle.biliGarbCard as any,
   });
 };
 
