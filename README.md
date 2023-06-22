@@ -1,12 +1,80 @@
 # Azusa-player-mobile
 
-Azusa-player-mobile uses a modified version of react-native-track-player for shuffle support. see https://github.com/lovegaoshi/react-native-track-player
+[![android weekly](https://github.com/lovegaoshi/azusa-player-mobile/actions/workflows/android-weekly.yml/badge.svg?branch=master)](https://github.com/lovegaoshi/azusa-player-mobile/actions/workflows/android-weekly.yml)
 
-## Running The Example App
+<p align="center"><a href="https://github.com/kenmingwang/azusa-player"><img width="200" src="https://github.com/kenmingwang/azusa-player/blob/master/public/img/logo2-01.png?raw=true"></a></p>
 
-Node env: v14.20.0
+<p align="center">
+  <a href="https://github.com/kenmingwang/azusa-player/blob/master/LICENSE">
+    <img src="https://camo.githubusercontent.com/992daabc2aa4463339825f8333233ba330dd08c57068f6faf4bb598ab5a3df2e/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f6c6963656e73652d4d49542d627269676874677265656e2e737667" alt="Software License" data-canonical-src="https://img.shields.io/badge/license-MIT-brightgreen.svg" style="max-width: 100%;">
+  </a>
+  <a href="">
+    <img alt="GitHub release (latest by date)" src="https://img.shields.io/github/stars/kenmingwang/azusa-player">
+  </a>
+  <a href="https://github.com/kenmingwang/azusa-player/releases">
+    <img alt="GitHub release (latest by date)" src="https://img.shields.io/github/v/release/kenmingwang/azusa-player">
+  </a>
+  <a href="https://github.com/kenmingwang/azusa-player/actions/workflows/webpack.yml">
+    <img alt="GitHub Workflow Status" src="https://img.shields.io/github/actions/workflow/status/kenmingwang/azusa-player/webpack.yml">
+  </a>
+  </br>
+  <a href="https://chrome.google.com/webstore/detail/%E7%94%B5%E6%A2%93%E6%92%AD%E6%94%BE%E5%99%A8-%E7%AC%AC%E4%B8%89%E6%96%B9bilibili%E9%9F%B3%E9%A2%91%E6%92%AD%E6%94%BE%E5%99%A8/bdplgemfnbaefommicdebhboajognnhj">
+    <img alt="GitHub Workflow Status" src="https://img.shields.io/chrome-web-store/users/bdplgemfnbaefommicdebhboajognnhj?color=blue&label=chrome-user">
+  </a>
+  <a href="https://microsoftedge.microsoft.com/addons/detail/%E7%94%B5%E6%A2%93%E6%92%AD%E6%94%BE%E5%99%A8%E7%AC%AC%E4%B8%89%E6%96%B9bilibili%E9%9F%B3%E9%A2%91%E6%92%AD%E6%94%BE%E5%99%A8/bikfgaolchpolficinadmbmkkohkbkdf">
+    <img alt="GitHub all releases" src="https://img.shields.io/badge/dynamic/json?label=edge-user&query=%24.activeInstallCount&url=https%3A%2F%2Fmicrosoftedge.microsoft.com%2Faddons%2Fgetproductdetailsbycrxid%2Fbikfgaolchpolficinadmbmkkohkbkdf">
+  </a>
+  <a href="https://github.com/kenmingwang/azusa-player/releases">
+    <img alt="GitHub all releases" src="https://img.shields.io/github/downloads/kenmingwang/azusa-player/total">
+  </a>
+</p>
+<h3 align="center" style="color:purple">Azusa-Player-Mobile / 电梓播放器手机版</h3>
+<h4 align="center" style="color:purple">A 3rd party Bilibili audio player / 一个Bilibili第三方音频播放器</h4>
 
-yarn:
+## 项目简介
+
+- 是真正意义上的手机版《电梓播放器》(?): Azusa-Player！
+- 本质上是个 b 站第三方**音频在线播放器**，是插件版[电梓播放器](https://github.com/kenmingwang/azusa-player) 和[电闹播放器](https://github.com/lovegaoshi/azusa-player)的忠实移植；对标油管音乐，但是去除歌单推荐功能~2023年不会还有人用b站推荐听歌吧~，交互仿造AIMP，界面更简洁，设计更人性。
+  - 由于浏览器地八哥轻松简便并且我手机流量捉急，主要功能依然会在插件版[电闹播放器](https://github.com/lovegaoshi/azusa-player)优先更新
+- 目的是想让视频**轻量化**为音频，方便溜歌/歌单分类/下载等
+- 支持大部分b站视频链接，以及订阅链接实现歌单自动更新；更懂听管人歌切的你
+- 实现了歌名提取与歌词搜索
+- 支持换皮和自制皮肤
+- 支持歌单云备份、与插件版电闹播放器伪互通
+- 支持b站登录，点赞，三连，增加b站视频播放量
+- 技术栈为跨平台React Native支持安卓和苹果，众筹一台mac和果子商店99USD年费上架ios商店
+- **切片 man 不易，没有各位切片 man 也不会有这个项目的意义，请大家溜歌同时点右下方的点赞按钮点赞和三连 👍**
+- 自用为主要目的，不感兴趣的 feature 大概不会做，有问题可以[b 站私信](https://message.bilibili.com/#/whisper/mid1989881)
+ 
+## 为什么要使用管人播放器？
+
+市面上有很多播放器竞品，比如整合大量音乐网站，跨平台的[listen1](https://github.com/listen1/listen1_chrome_extension)、[洛雪音乐](https://github.com/lyswhut/lx-music-mobile)、[musicfree](https://github.com/maotoumao/MusicFree)；动画流畅的[MVVM播放器制作教程](https://github.com/KunMinX/Jetpack-MVVM-Best-Practice)；界面简洁好使的本地播放器[AIMP](https://www.aimp.ru/)；支持b站的也不是没有，为什么要用管人播放器？
+
+- 管人播放器之初为了溜阿梓歌切收藏夹而诞生，自从持久、稳定、每日投分p的第五代阿梓切歌人[HonmaMeiko](https://space.bilibili.com/590096/video?tid=0&keyword=&order=pubdate)接棒后，以及[自动切歌软件](https://www.bilibili.com/video/BV1WK411y7zW/?spm_id_from=333.999.0.0)研发成功可以大批量无人值守切各种没人切的管人歌势，管人播放器开发了对b站视频列表的支持，以及订阅b站链接的功能，专注于解决b站视频分p搜索孱弱，整合视频分p、视频列表、视频合集、收藏夹、空间~b站产品经理脑门被夹了搞这么多一样的玩意儿~等多种视频列表为一个统一的歌单。由于b站音乐区本身流量不足~依托答辩~，大多整合类播放器对于b站的支持很基础，并没有管人播放器类别支持广，没有订阅功能，也不整合b站增加播放量、点赞等操作。
+
+- 管人播放器开放用户自制管人皮肤，23年初b站大批量生产装扮，引领虚拟主播约稿提供大量皮肤素材用来自制皮肤。
+
+
+## 安装
+
+安卓用户在右边的release下载最新版本apk。
+
+## 使用
+请参考[电闹播放器的介绍](https://www.bilibili.com/video/BV1bv4y1p7K4/?spm_id_from=333.999.0.0)。
+
+## 界面
+<p float="left">
+<img alt="GitHub all releases" src="https://github.com/lovegaoshi/azusa-player-mobile/blob/3958211a07617d8e15e4be56da984dbd53d7e9fb/docs/docs/usage-tutorial/images/Screenshot_20230606_142623_APM.jpg" width=270>
+<img alt="GitHub all releases" src="https://github.com/lovegaoshi/azusa-player-mobile/blob/3958211a07617d8e15e4be56da984dbd53d7e9fb/docs/docs/usage-tutorial/images/Screenshot_20230606_142629_APM.jpg" width=270>
+<img alt="GitHub all releases" src="https://github.com/lovegaoshi/azusa-player-mobile/blob/3958211a07617d8e15e4be56da984dbd53d7e9fb/docs/docs/usage-tutorial/images/Screenshot_20230606_142636_APM.jpg" width=270>
+<img alt="GitHub all releases" src="https://github.com/lovegaoshi/azusa-player-mobile/blob/3958211a07617d8e15e4be56da984dbd53d7e9fb/docs/docs/usage-tutorial/images/Screenshot_20230606_142655_APM.jpg" width=270>
+<img alt="GitHub all releases" src="https://github.com/lovegaoshi/azusa-player-mobile/blob/3958211a07617d8e15e4be56da984dbd53d7e9fb/docs/docs/usage-tutorial/images/Screenshot_20230606_142941_APM.jpg" width=270>
+<img alt="GitHub all releases" src="https://github.com/lovegaoshi/azusa-player-mobile/blob/3958211a07617d8e15e4be56da984dbd53d7e9fb/docs/docs/usage-tutorial/images/Screenshot_20230606_143018_APM.jpg" width=270>
+</p>
+
+## 开发
+
+ios开发需要XCode。安卓开发需要android studio。
 ```
 git clone https://github.com/lovegaoshi/azusa-player-mobile.git
 yarn build
@@ -14,134 +82,98 @@ yarn
 cd ios && pod install && cd ..
 ```
 
-npm:
-```
-git clone https://github.com/lovegaoshi/azusa-player-mobile.git
-npm ci
-npm start
-cd ios && pod install && cd ..
-```
+IOS编译时请看https://github.com/lovegaoshi/azusa-player-mobile/issues/34。
 
-## Library Development
+## Licenses of used dependencies
 
-If you want to use the example project to work on features or bug fixes in
-the core library then there are a few things to keep in mind.
+[Azusa-player](https://github.com/kenmingwang/azusa-player): MIT
 
-#### TS/JS
+[@react-native-async-storage/async-storage](https://github.com/react-native-async-storage/async-storage): MIT
 
-If you want to work on the typescript files located in `src` (in the root
-project) you should run
+[@react-native-community/slider](https://github.com/callstack/react-native-slider): MIT 
 
-```
-yarn dev
-```
+[@react-native-cookies/cookies](https://github.com/react-native-cookies/cookies): MIT 
 
-The above command will automatically watch for changes int the `src` folder
-and recompile them while you work. Then they'll get automatically reloaded
-in a running instance of the `example` app so you can see your changes.
+[@react-navigation/drawer](https://github.com/react-navigation/react-navigation): [MIT](https://github.com/react-navigation/react-navigation/blob/main/packages/native/LICENSE)
 
-## iOS Native
+[@react-navigation/material-top-tabs](https://github.com/react-navigation/react-navigation): [MIT](https://github.com/react-navigation/react-navigation/blob/main/packages/native/LICENSE) 
 
-It's recommended that you make your changes directly in XCode. Which you can
-open quickly by running one of the following commands:
+[@react-navigation/native](https://github.com/react-navigation/native): MIT License
 
-From inside the `example` directory:
+[@react-navigation/native-stack](https://github.com/react-navigation/react-navigation): [MIT](https://github.com/react-navigation/react-navigation/blob/main/packages/native/LICENSE)
 
-```sh
-yarn ios:ide
-```
+[@shopify/flash-list](https://github.com/Shopify/flash-list): MIT License
 
-From the root directory:
+[axios](https://github.com/axios/axios): MIT License
 
-```sh
-yarn example ios:ide
-```
+[babel-plugin-transform-remove-console](https://github.com/Riokai/babel-plugin-transform-remove-console): Unknown
 
-Once opened you can simply navigate to the native dependencies, open their
-source files, modify them, or add breakpoints. See the screenshots below for
-specifically how to navigate to react-native-track-player and SwiftAudioEx
-dependencies (see screenshots below).
+[bottleneck](https://github.com/pydata/bottleneck): BSD 2-Clause "Simplified" License
 
-![Xcode RNTP](https://react-native-track-player.js.org/img/debugging/debug-ios-rntp.png)
-![Xcode SwiftAudioEx](https://react-native-track-player.js.org/img/debugging/debug-ios-swift-audio-ex.png)
+[deepmerge](https://github.com/TehShrike/deepmerge): MIT License
 
-## Android Native
+[dropbox](https://github.com/BenExile/Dropbox): MIT License
 
-You can modify any android native code for RNTP by simply opening the example
-android project in Android Studio and modifying the source:
+[fflate](https://github.com/101arrowz/fflate): MIT License
 
-**macOS Ex**
+[i18next](https://github.com/i18next/i18next): MIT License
 
-From inside the `example` directory:
+[md5](https://github.com/JieweiWei/md5): Apache License 2.0
 
-```sh
-yarn android:ide
-```
+[react](https://github.com/facebook/react): MIT License
 
-From the root directory:
+[react-i18next](https://github.com/i18next/react-i18next): MIT License
 
-```sh
-yarn example android:ide
-```
+[react-native](https://github.com/facebook/react-native): MIT License
 
-## KotlinAudio
+[react-native-app-auth](https://github.com/FormidableLabs/react-native-app-auth): MIT License
 
-If you need to resolve a bug that exists in `KotlinAudio` you'll need to build
-and install a local version of `KotlinAudio` in order to do so. Here's how:
+[react-native-background-timer](https://github.com/ocetnik/react-native-background-timer): MIT License
 
-#### 1. Clone the `KotlinAudio` project:
+[react-native-blob-jsi-helper](https://github.com/mrousavy/react-native-blob-jsi-helper): MIT License
 
-```sh
-git clone git@github.com:doublesymmetry/KotlinAudio.git
-```
+[react-native-countdown-circle-timer](https://github.com/vydimitrov/react-countdown-circle-timer): MIT 
 
-#### 2. Build and export to maven local which is the local dependency repository:
+[react-native-draggable-flatlist](https://github.com/computerjazz/react-native-draggable-flatlist): MIT License
 
-```sh
-cd KotlinAudio
-./gradlew -x test  build publishToMavenLocal
-```
+[react-native-fast-image](https://github.com/DylanVann/react-native-fast-image): MIT License
 
-Make a note of the `versionNumber` configured in the `kotlin-audio/build.gradle`
-file as you'll need this in the next step.
+[react-native-gesture-handler](https://github.com/software-mansion/react-native-gesture-handler): MIT License
 
-**NOTES:**
+[react-native-lyric](https://github.com/SKempin/Lyrics-King-React-Native): MIT License
 
-- The result of this is a local version of the build published here:
+[react-native-pager-view](https://github.com/callstack/react-native-pager-view): MIT License
 
-  ```
-  Windows: C:\Users\<user_name>\.m2
-  Linux: /home/<user_name>/.m2
-  macOS: /Users/<user_name>/.m2
-  ```
+[react-native-paper](https://github.com/callstack/react-native-paper): MIT License
 
-- The `-x test` skips tests for faster build. Make sure you run the test
-  before submitting a PR to the `KotlinAudio` project.
+[react-native-qrcode-svg](https://github.com/awesomejerry/react-native-qrcode-svg): MIT License
 
-#### 3. Point your RNTP dependency at the local build:
+[react-native-reanimated](https://github.com/software-mansion/react-native-reanimated): MIT License
 
-Please note that `<version_number>` below will need to be replaced with the
-`versionNumber` you got from `KotlinAudio/kotlin-audio/build.gradle`.
+[react-native-safe-area-context](https://github.com/th3rdwave/react-native-safe-area-context): MIT License
 
-```groovy
-// react-native-track-player/android/build.gradle
-...
+[react-native-screens](https://github.com/software-mansion/react-native-screens): MIT License
 
-dependencies {
-    // implementation 'com.github.DoubleSymmetry:KotlinAudio:v0.1.33' // this is remote
-    implementation 'com.github.doublesymmetry:kotlin-audio:<version_number>' // this is local
+[react-native-snackbar](https://github.com/cooperka/react-native-snackbar): MIT
 
-    ...
-}
-```
+[react-native-svg](https://github.com/software-mansion/react-native-svg): MIT License
 
-**NOTE:** there are small differences in the package naming.
+[react-native-tab-view](https://github.com/ptomasroos/react-native-scrollable-tab-view): Unknown
 
-#### 4. Install the new version of RNTP in the example app and build android:
+[react-native-track-player](https://github.com/doublesymmetry/react-native-track-player): Apache License 2.0
 
-```sh
-cd ./example
-yarn android
-```
+[react-native-url-polyfill](https://github.com/charpeni/react-native-url-polyfill): MIT License
 
-:confetti_ball: You've done it. :confetti_ball:
+[react-native-vector-icons](https://github.com/oblador/react-native-vector-icons): MIT License
+
+[react-native-video](https://github.com/react-native-video/react-native-video): MIT License
+
+[react-native-windows](https://github.com/microsoft/react-native-windows): MIT
+
+[react-use](https://github.com/streamich/react-use): The Unlicense
+
+[use-debounce](https://github.com/xnimorz/use-debounce): MIT License
+
+[zustand](https://github.com/pmndrs/zustand): MIT License
+
+
