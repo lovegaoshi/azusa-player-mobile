@@ -77,7 +77,7 @@ export const fetchBiliSearchList = async (
   try {
     val = await fetchBiliPaginatedAPI({
       url: URL_BILI_SEARCH.replace('{keyword}', kword),
-      getMediaCount: data => Math.min(data.numResults, data.pagesize * 2),
+      getMediaCount: data => Math.min(data.numResults, data.pagesize * 1),
       getPageSize: data => data.pagesize,
       getItems: js => js.data.result,
       progressEmitter,
