@@ -38,7 +38,7 @@ let dbx = new _Dropbox({
  */
 export const getAuth = async (
   callback = () => checkAuthentication().then(console.log),
-  errorHandling = console.error
+  errorHandling = logger.error
 ) => {
   const authState = await authorize(config);
   console.log(authState);
