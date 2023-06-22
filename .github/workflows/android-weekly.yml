@@ -86,7 +86,7 @@ jobs:
       - name: WGet Build Sign jks
         uses: wei/wget@v1
         with:
-          args: -O test.log ${{ secrets.REMOTE_KEYFILE_URL }}
+          args: -O ./android/app/noxupload.jks ${{ secrets.REMOTE_KEYFILE_URL }}
 
       - name: Install dependencies
         uses: nick-fields/retry@v2
