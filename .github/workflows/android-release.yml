@@ -5,9 +5,9 @@ on:
       - 'v[0-9]+.[0-9]+.[0-9]'
   workflow_dispatch:
 jobs:
-  prebuild:
-    name: pre-build
+  buildAPK:
     runs-on: ubuntu-latest
+    name: build APK
     permissions:
       contents: write
     steps:
@@ -71,22 +71,6 @@ jobs:
       - name: clean generated builds
         run: rm -rf android/app/build/generated/
 
-      - uses: actions/upload-artifact@v3
-        with:
-          name: prebuild-folder
-          path: ./ # or path/to/artifact
-
-  buildAPK:
-    runs-on: ubuntu-latest
-    name: Check latest commit
-    needs: prebuild
-    permissions:
-      contents: write
-    steps:
-      - uses: actions/download-artifact@v3
-        with:
-          name: prebuild-folder
-
       - name: gradle build APK
         run: cd android && chmod +x gradlew && ./gradlew assembleRelease
 
@@ -100,14 +84,69 @@ jobs:
 
   buildAAB:
     runs-on: ubuntu-latest
-    name: Check latest commit
-    needs: prebuild
+    name: build AAB
     permissions:
       contents: write
     steps:
-      - uses: actions/download-artifact@v3
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Get branch name
+        run: |
+          # Short name for current branch. For PRs, use target branch (base ref)
+          GIT_BRANCH=${GITHUB_BASE_REF:-${GITHUB_REF#refs/heads/}}
+          echo "GIT_BRANCH=$GIT_BRANCH" >> $GITHUB_ENV
+
+      - name: Get current date
+        id: date
+        run: echo "date=$(date +'%Y-%m-%d')" >> $GITHUB_OUTPUT
+
+      - name: set up JDK 18
+        uses: actions/setup-java@v3
         with:
-          name: prebuild-folder
+          java-version: 18
+          distribution: temurin
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: 'Create env file'
+        run: |
+          echo "${{ secrets.ENV_FILE }}" > .env
+
+      - name: alias yarn.cmd to yarn
+        run: alias yarn.cmd="yarn"
+
+      - name: Get Recent Commit Tag
+        id: get_commit_tag
+        run: |
+          COMMIT_TAG=$(git describe --tags --abbrev=0)
+          echo "COMMIT_TAG=${COMMIT_TAG}" >> $GITHUB_ENV
+
+      - name: Display Commit Tag
+        run: |
+          echo "Commit Tag: $COMMIT_TAG"
+
+      - name: Add Build Sign Keys
+        run: |
+          echo "${{ secrets.RELEASE_SIGN_PWD }}" >> ./android/gradle.properties
+
+      - name: WGet Build Sign jks
+        uses: wei/wget@v1
+        with:
+          args: -O ./android/app/noxupload.jks ${{ secrets.REMOTE_KEYFILE_URL }}
+
+      - name: Install dependencies
+        uses: nick-fields/retry@v2
+        with:
+          timeout_minutes: 10
+          max_attempts: 10
+          command: yarn
+
+      - name: clean generated builds
+        run: rm -rf android/app/build/generated/
 
       - name: gradle build AAB
         run: cd android && chmod +x gradlew && ./gradlew bundleRelease
