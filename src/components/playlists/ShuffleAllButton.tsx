@@ -19,6 +19,7 @@ export default () => {
     state => state.setCurrentPlayingList
   );
   const setCurrentPlayingId = useNoxSetting(state => state.setCurrentPlayingId);
+  const setCurrentPlaylist = useNoxSetting(state => state.setCurrentPlaylist);
   const setSearchPlaylist = useNoxSetting(state => state.setSearchPlaylist);
 
   const shuffleAll = async () => {
@@ -39,6 +40,7 @@ export default () => {
     await TrackPlayer.add(songlistToTracklist([song]));
     TrackPlayer.play();
     navigation.navigate(ViewEnum.PLAYER_HOME as never);
+    setCurrentPlaylist(newSearchPlaylist);
   };
 
   return <IconButton icon="shuffle" onPress={shuffleAll} />;

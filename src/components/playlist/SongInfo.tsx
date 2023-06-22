@@ -48,7 +48,7 @@ function SongInfo({
 
   // TODO: not really useful for me at least. maybe good enough for some?
   artist =
-    item.album && item.name !== item.album
+    item.album && item.parsedName !== item.album
       ? artist + ' - ' + item.album
       : artist;
 

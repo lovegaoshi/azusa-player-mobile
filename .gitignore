@@ -72,3 +72,5 @@ vendor/
 
 .env
 NoxExport.json
+*.jks
+*.aab

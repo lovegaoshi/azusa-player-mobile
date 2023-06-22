@@ -79,6 +79,15 @@ jobs:
       - name: alias yarn.cmd to yarn
         run: alias yarn.cmd="yarn"
 
+      - name: Add Build Sign Keys
+        run: |
+          echo "${{ secrets.RELEASE_SIGN_PWD }}" >> ./android/gradle.properties
+
+      - name: WGet Build Sign jks
+        uses: wei/wget@v1
+        with:
+          args: -O ./android/app/noxupload.jks ${{ secrets.REMOTE_KEYFILE_URL }}
+
       - name: Install dependencies
         uses: nick-fields/retry@v2
         with:

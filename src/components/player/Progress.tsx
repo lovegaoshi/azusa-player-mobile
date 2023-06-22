@@ -1,4 +1,4 @@
-import Slider from '@react-native-community/slider';
+import { Slider } from '@sharcoux/slider';
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import TrackPlayer, { useProgress } from 'react-native-track-player';
@@ -20,7 +20,11 @@ export const Progress: React.FC<{ live?: boolean }> = ({ live }) => {
         value={position}
         minimumValue={0}
         maximumValue={duration}
-        thumbTintColor={playerStyle.customColors.progressThumbTintColor}
+        thumbTintColor={
+          playerStyle.progressThumbImage
+            ? undefined
+            : playerStyle.customColors.progressThumbTintColor
+        }
         minimumTrackTintColor={
           playerStyle.customColors.progressMinimumTrackTintColor
         }
@@ -28,6 +32,17 @@ export const Progress: React.FC<{ live?: boolean }> = ({ live }) => {
           playerStyle.customColors.progressMaximumTrackTintColor
         }
         onSlidingComplete={TrackPlayer.seekTo}
+        thumbImage={
+          playerStyle.progressThumbImage
+            ? { uri: playerStyle.progressThumbImage }
+            : undefined
+        }
+        thumbSize={playerStyle.progressThumbImage ? 40 : undefined}
+        thumbStyle={{
+          backgroundColor: playerStyle.progressThumbImage
+            ? 'transparent'
+            : playerStyle.colors.primary,
+        }}
       />
       <View style={[styles.labelContainer, { paddingHorizontal: 10 }]}>
         <Text style={styles.labelText}>{formatSeconds(position)}</Text>
@@ -54,11 +69,13 @@ const styles = StyleSheet.create({
     width: '100%',
     marginTop: 10,
     flexDirection: 'row',
+    paddingHorizontal: 15,
   },
   labelContainer: {
     width: '100%',
     flexDirection: 'row',
     justifyContent: 'space-between',
+    paddingHorizontal: 15,
   },
   labelText: {
     color: 'white',

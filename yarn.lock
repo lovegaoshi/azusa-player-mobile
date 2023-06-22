@@ -2384,6 +2384,11 @@
   dependencies:
     nanoid "^3.1.23"
 
+"@sharcoux/slider@^6.1.2":
+  version "6.1.2"
+  resolved "https://registry.yarnpkg.com/@sharcoux/slider/-/slider-6.1.2.tgz#6e0eff3d9aeb7e4c601e9e2565edbdb275f8ae00"
+  integrity sha512-/jQjcvKdKeDM+IDxNgpx1lL/lp1A7SbXm7QSStTugHBmJuwKb5LLOovCeOj4iNGCZFZ0oGD+Ft5HJDjNNbrQJA==
+
 "@shopify/flash-list@^1.4.3":
   version "1.4.3"
   resolved "https://registry.yarnpkg.com/@shopify/flash-list/-/flash-list-1.4.3.tgz#b7a4fe03d64f3c5ce9646859b49b9d95307f203d"
