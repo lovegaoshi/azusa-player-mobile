@@ -16,7 +16,6 @@ import {
 } from 'react-native-paper';
 import merge from 'deepmerge';
 import { useTranslation } from 'react-i18next';
-import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 import { useSetupPlayer, Player } from './components/player/View';
 import Playlist from './components/playlist/View';
