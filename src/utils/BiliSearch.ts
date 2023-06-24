@@ -24,13 +24,7 @@ interface props {
   fastSearch?: boolean;
 }
 
-export const searchBiliURLs = async ({
-  input,
-  progressEmitter = val => undefined,
-  favList = [],
-  useBiliTag = false,
-  fastSearch = false,
-}: props) => {
+export const matchBiliURL = (input: string) => {
   const reExtractions: Array<
     [RegExp, (props: regexFetchProps) => Promise<NoxMedia.Song[]>]
   > = [
@@ -45,22 +39,35 @@ export const searchBiliURLs = async ({
     [bilivideoFetch.regexSearchMatch, bilivideoFetch.regexFetch],
     [ytbvideoFetch.regexSearchMatch, ytbvideoFetch.regexFetch],
   ];
-  let results = [];
-  try {
-    for (const reExtraction of reExtractions) {
-      const reExtracted = reExtraction[0].exec(input);
-      if (reExtracted !== null) {
-        results = await reExtraction[1]({
-          reExtracted,
-          progressEmitter,
-          favList,
-          useBiliTag,
-        });
-        progressEmitter(0);
-        return results;
-      }
+  for (const reExtraction of reExtractions) {
+    const reExtracted = reExtraction[0].exec(input);
+    if (reExtracted !== null) {
+      return { regexFetch: reExtraction[1], reExtracted };
     }
-    results = await bilisearchFetch.regexFetch({
+  }
+  return null;
+};
+
+export const searchBiliURLs = async ({
+  input,
+  progressEmitter = val => undefined,
+  favList = [],
+  useBiliTag = false,
+  fastSearch = false,
+}: props) => {
+  try {
+    const matchRegex = matchBiliURL(input);
+    if (matchRegex !== null) {
+      const results = await matchRegex.regexFetch({
+        reExtracted: matchRegex.reExtracted,
+        progressEmitter,
+        favList,
+        useBiliTag,
+      });
+      progressEmitter(0);
+      return results;
+    }
+    const results = await bilisearchFetch.regexFetch({
       url: input,
       progressEmitter,
       fastSearch,
