@@ -2,8 +2,9 @@ import React, { useState } from 'react';
 import { IconButton, Text, TextInput, ProgressBar } from 'react-native-paper';
 import { View } from 'react-native';
 import { useTranslation } from 'react-i18next';
+import { useClipboard } from '@react-native-clipboard/clipboard';
 
-import { searchBiliURLs } from '../../utils/BiliSearch';
+import { searchBiliURLs, matchBiliURL } from '../../utils/BiliSearch';
 import { useNoxSetting } from '../../hooks/useSetting';
 
 export default ({
@@ -20,6 +21,8 @@ export default ({
   const setCurrentPlaylist = useNoxSetting(state => state.setCurrentPlaylist);
   const playerSetting = useNoxSetting(state => state.playerSetting);
   const playerStyle = useNoxSetting(state => state.playerStyle);
+  const [prevClipboard, setPrevClipboard] = useState('');
+  const [clipboard] = useClipboard();
 
   const handleSearch = async (val = searchVal) => {
     progressEmitter(100);
@@ -40,6 +43,18 @@ export default ({
     setSearchPlaylist(newSearchPlaylist);
     setCurrentPlaylist(newSearchPlaylist);
   };
+
+  React.useEffect(() => {
+    console.log(clipboard);
+    if (clipboard !== prevClipboard) {
+      setPrevClipboard(clipboard);
+      const matchRegex = matchBiliURL(clipboard);
+      if (matchRegex !== null) {
+        setSearchVal(clipboard);
+        handleSearch(clipboard);
+      }
+    }
+  }, [clipboard]);
 
   return (
     <View style={{ width: '100%', height: 50 }}>

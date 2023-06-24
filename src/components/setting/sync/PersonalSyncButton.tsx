@@ -104,30 +104,33 @@ const personalCloudIDTextField: textProps = {
   placeholder: '',
 };
 
-const SetTextField = ({ settingKey, label, placeholder }: textProps) => {
-  const playerSetting = useNoxSetting(state => state.playerSetting);
-  const playerStyle = useNoxSetting(state => state.playerStyle);
-  const setPlayerSetting = useNoxSetting(state => state.setPlayerSetting);
-  const [val, setVal] = useState(playerSetting[settingKey]);
-  const [debouncedVal] = useDebounce(val, 1000);
+const SetTextField = React.memo(
+  ({ settingKey, label, placeholder }: textProps) => {
+    const playerSetting = useNoxSetting(state => state.playerSetting);
+    const playerStyle = useNoxSetting(state => state.playerStyle);
+    const setPlayerSetting = useNoxSetting(state => state.setPlayerSetting);
+    const [val, setVal] = useState(playerSetting[settingKey]);
+    const [debouncedVal] = useDebounce(val, 1000);
 
-  useUpdateEffect(
-    () => setPlayerSetting({ [settingKey]: debouncedVal }),
-    [debouncedVal]
-  );
+    useUpdateEffect(
+      () => setPlayerSetting({ [settingKey]: debouncedVal }),
+      [debouncedVal]
+    );
 
-  return (
-    <TextInput
-      label={label}
-      onChange={e => setVal(e.nativeEvent.text)}
-      value={val}
-      placeholder={placeholder}
-      selectTextOnFocus
-      selectionColor={playerStyle.customColors.textInputSelectionColor}
-      textColor={playerStyle.colors.text}
-    />
-  );
-};
+    return (
+      <TextInput
+        label={label}
+        onChange={e => setVal(e.nativeEvent.text)}
+        value={val}
+        placeholder={placeholder}
+        selectTextOnFocus
+        selectionColor={playerStyle.customColors.textInputSelectionColor}
+        textColor={playerStyle.colors.text}
+      />
+    );
+  },
+  () => true
+);
 
 export default () => {
   const playerSetting = useNoxSetting(state => state.playerSetting);

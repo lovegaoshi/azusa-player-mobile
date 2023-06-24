@@ -43,8 +43,12 @@ export function useSetupPlayer() {
   useEffect(() => {
     let unmounted = false;
     (async () => {
-      const { currentPlayingID, storedPlayerSetting, language } =
-        await initPlayer(await initPlayerObject());
+      const {
+        currentPlayingID,
+        storedPlayerSetting,
+        language,
+        lastPlayDuration,
+      } = await initPlayer(await initPlayerObject());
       /**
        * this doesnt even seems necessary?
       for (const [key, value] of Object.entries(cookies)) {
@@ -53,6 +57,7 @@ export function useSetupPlayer() {
       i18n.changeLanguage(language);
       const serviceOptions = {
         noInterruption: storedPlayerSetting.noInterruption,
+        lastPlayDuration,
       };
       await SetupService(serviceOptions);
       AdditionalPlaybackService(serviceOptions);

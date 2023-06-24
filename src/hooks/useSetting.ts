@@ -32,6 +32,7 @@ interface initializedResults {
   storedPlayerSetting: NoxStorage.PlayerSettingDict;
   cookies: { [key: string]: string };
   language?: string;
+  lastPlayDuration: number;
 }
 
 interface NoxSetting {
@@ -280,6 +281,7 @@ export const useNoxSetting = create<NoxSetting>((set, get) => ({
       storedPlayerSetting: val.settings || DEFAULT_SETTING,
       cookies: val.cookies,
       language: val.settings.language,
+      lastPlayDuration: val.lastPlayDuration,
     };
   },
 
