@@ -41,5 +41,6 @@ declare namespace NoxStorage {
     cookies: { [key: string]: string };
     lyricMapping: Map<string, NoxMedia.LyricDetail>;
     language?: string;
+    lastPlayDuration: number;
   }
 }

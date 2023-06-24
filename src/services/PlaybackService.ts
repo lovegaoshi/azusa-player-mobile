@@ -1,18 +1,31 @@
-import TrackPlayer, { Event } from 'react-native-track-player';
+import TrackPlayer, { Event, State } from 'react-native-track-player';
+
 import { resolveUrl, NULL_TRACK } from '../objects/Song';
 import { initBiliHeartbeat } from '../utils/Bilibili/BiliOperate';
 import { NoxStorage } from '../types/storage';
+import { saveLastPlayDuration } from '../utils/ChromeStorage';
+import logger from '../utils/Logger';
 
 let lastBiliHeartBeat: string[] = ['', ''];
 
 export async function AdditionalPlaybackService({
   noInterruption = false,
+  lastPlayDuration,
 }: Partial<NoxStorage.PlayerSettingDict>) {
   TrackPlayer.addEventListener(Event.RemoteDuck, async event => {
     console.log('Event.RemoteDuck', event);
     if (noInterruption && event.paused) return;
     if (event.paused) return TrackPlayer.pause();
     if (event.permanent) return TrackPlayer.stop();
+  });
+
+  const lastPlayedDuration = [lastPlayDuration];
+  TrackPlayer.addEventListener(Event.PlaybackState, event => {
+    if (lastPlayedDuration[0] && event.state === State.Ready) {
+      logger.debug(`initalized last played duration to ${lastPlayDuration}`);
+      TrackPlayer.seekTo(lastPlayedDuration[0]);
+      lastPlayedDuration[0] = null;
+    }
   });
 }
 
@@ -87,6 +100,10 @@ export async function PlaybackService() {
 
   TrackPlayer.addEventListener(Event.PlaybackState, event => {
     console.log('Event.PlaybackState', event);
+  });
+
+  TrackPlayer.addEventListener(Event.PlaybackProgressUpdated, event => {
+    saveLastPlayDuration(event.position);
   });
 
   TrackPlayer.addEventListener(

@@ -39,6 +39,7 @@ export enum STORAGE_KEYS {
   SKINSTORAGE = 'PlayerSkinStorage',
   COOKIES = 'Cookies',
   LYRIC_MAPPING = 'LyricMapping',
+  LAST_PLAY_DURATION = 'LastPlayDuration',
 }
 
 const appID = 'NoxPlayerMobile';
@@ -248,6 +249,9 @@ export const savelastPlaylistId = async (val: [string, string]) =>
 export const savePlayMode = async (val: string) =>
   saveItem(STORAGE_KEYS.PLAYMODE_KEY, val);
 
+export const saveLastPlayDuration = async (val: number) =>
+  saveItem(STORAGE_KEYS.LAST_PLAY_DURATION, val);
+
 export const initPlayerObject =
   async (): Promise<NoxStorage.PlayerStorageObject> => {
     const lyricMappingDict = (await getLyricMapping()) || {};
@@ -279,6 +283,7 @@ export const initPlayerObject =
       skins: (await getPlayerSkins()) || [],
       cookies: (await getItem(STORAGE_KEYS.COOKIES)) || {},
       lyricMapping,
+      lastPlayDuration: (await getItem(STORAGE_KEYS.LAST_PLAY_DURATION)) || 0,
     } as NoxStorage.PlayerStorageObject;
 
     playerObject.playlists[STORAGE_KEYS.SEARCH_PLAYLIST_KEY] =

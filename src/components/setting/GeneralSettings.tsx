@@ -20,18 +20,22 @@ const GEN_SETTING_BOOLEAN: SettingEntry[] = [
     settingName: 'hideCoverInMobile',
     settingCategory: 'GeneralSettings',
   },
+  /*
   {
     settingName: 'dataSaver',
     settingCategory: 'GeneralSettings',
   },
+  */
   {
     settingName: 'fastBiliSearch',
     settingCategory: 'GeneralSettings',
   },
+  /*
   {
     settingName: 'noCookieBiliSearch',
     settingCategory: 'GeneralSettings',
   },
+  */
 ];
 
 export default () => {
