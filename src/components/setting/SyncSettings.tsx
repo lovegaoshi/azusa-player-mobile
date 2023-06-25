@@ -1,11 +1,10 @@
 import * as React from 'react';
 import { View } from 'react-native';
-import { Text, Button } from 'react-native-paper';
+import { Button } from 'react-native-paper';
 import { useTranslation } from 'react-i18next';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 
 import { useNoxSetting } from '../../hooks/useSetting';
-import { loginDropbox } from './sync/DropboxAuth';
 import GenericSelectDialog from '../dialogs/GenericSelectDialog';
 import { EXPORT_OPTIONS } from '../../enums/Sync';
 import PersonalSyncButton from './sync/PersonalSyncButton';

@@ -30,16 +30,21 @@ export default () => {
     setLoading(true);
     for (const [i, v] of indices.entries()) {
       if (v) {
-        const newPlaylist = dummyPlaylist(favLists[i].title);
-        newPlaylist.songList = await bilifavlistFetch.regexFetch({
-          reExtracted: [
-            0,
-            String(favLists[i].id),
-            // HACK: only reExtracted[1] is used so hopefully fine...
-          ] as unknown as RegExpExecArray,
-          favList: [],
-          useBiliTag: false,
-        });
+        const newPlaylist = {
+          ...dummyPlaylist(favLists[i].title),
+          songList: await bilifavlistFetch.regexFetch({
+            reExtracted: [
+              0,
+              String(favLists[i].id),
+              // HACK: only reExtracted[1] is used so hopefully fine...
+            ] as unknown as RegExpExecArray,
+            favList: [],
+            useBiliTag: false,
+          }),
+          subscribeUrl: [
+            `https://space.bilibili.com/3493085134719196/favlist?fid=${favLists[i].id}`,
+          ],
+        };
         addPlaylist(newPlaylist);
       }
     }
