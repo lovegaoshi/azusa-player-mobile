@@ -4,7 +4,7 @@ import Dialog from '../dialogs/NewPlaylistDialog';
 
 const ICON = 'plus-circle-outline';
 
-interface props {
+interface Props {
   fromList?: NoxMedia.Playlist;
   icon?: string;
   // TODO: really object?
@@ -12,7 +12,7 @@ interface props {
 }
 
 export default React.forwardRef(
-  ({ fromList, icon = ICON, style = {} }: props, ref) => {
+  ({ fromList, icon = ICON, style = {} }: Props, ref) => {
     const [dialogOpen, setDialogOpen] = useState(false);
     useImperativeHandle(ref, () => ({ setOpen: () => setDialogOpen(true) }), [
       dialogOpen,

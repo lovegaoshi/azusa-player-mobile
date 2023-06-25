@@ -14,11 +14,11 @@ import { initPlayerObject } from '../../utils/ChromeStorage';
 import { getCurrentTPQueue } from '../../stores/playingList';
 import useVersionCheck from '../../hooks/useVersionCheck';
 
-interface props {
+interface Props {
   navigation: DrawerNavigationProp<ParamListBase>;
 }
 
-export function Player({ navigation }: props) {
+export function Player({ navigation }: Props) {
   const track = useActiveTrack();
   const playerStyle = useNoxSetting(state => state.playerStyle);
   // TODO: component

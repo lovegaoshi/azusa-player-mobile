@@ -29,7 +29,7 @@ interface LoginInfo {
   avatar: string;
 }
 
-interface props {
+interface Props {
   navigation: DrawerNavigationProp<ParamListBase>;
 }
 
@@ -74,7 +74,7 @@ const loginQRVerification = async () => {
   );
 };
 
-export default ({ navigation }: props) => {
+export default ({ navigation }: Props) => {
   const { t } = useTranslation();
   const playerStyle = useNoxSetting(state => state.playerStyle);
   const [qrcode, setQrCode] = React.useState<string>('');

@@ -6,7 +6,7 @@ import GenericSelectDialog from '../dialogs/GenericSelectDialog';
 import useRenderSettingItem from './useRenderSetting';
 import { useNoxSetting } from '../../hooks/useSetting';
 
-interface props {
+interface Props {
   icon: string;
 }
 
@@ -17,7 +17,7 @@ const availableLanguagesMap: { [key: string]: string } = {
   en: 'English',
 };
 
-export default ({ icon }: props) => {
+export default ({ icon }: Props) => {
   const { t, i18n } = useTranslation();
   const [visible, setVisible] = React.useState(false);
   const { renderListItem } = useRenderSettingItem();

@@ -43,7 +43,7 @@ enum VIEW {
 
 const Stack = createNativeStackNavigator();
 
-interface props {
+interface Props {
   navigation: DrawerNavigationProp<ParamListBase>;
 }
 
@@ -71,13 +71,13 @@ export const DummySettings = () => {
   );
 };
 
-export default ({ navigation }: props) => {
+export default ({ navigation }: Props) => {
   const { t } = useTranslation();
   const navigationGlobal = useNavigation();
   const playerStyle = useNoxSetting(state => state.playerStyle);
   const { renderListItem } = useRenderSettingItem();
 
-  const HomeSettings = ({ navigation }: props) => {
+  const HomeSettings = ({ navigation }: Props) => {
     return (
       <View
         style={{

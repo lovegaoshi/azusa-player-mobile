@@ -6,7 +6,7 @@ import { styles } from '../style';
 import { useNoxSetting } from '../../hooks/useSetting';
 import { seconds2HHMMSS } from '../../utils/Utils';
 
-interface props {
+interface Props {
   searchText: string;
   setSearchText: (val: string) => void;
   search?: boolean;
@@ -18,7 +18,7 @@ export default ({
   setSearchText,
   search = false,
   onPressed = () => undefined,
-}: props) => {
+}: Props) => {
   const { t } = useTranslation();
   const currentPlaylist = useNoxSetting(state => state.currentPlaylist);
   const playerStyle = useNoxSetting(state => state.playerStyle);

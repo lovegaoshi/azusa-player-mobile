@@ -11,7 +11,7 @@ import { useTranslation } from 'react-i18next';
 import useTimer from './useTimer';
 import { useNoxSetting } from '../../hooks/useSetting';
 
-interface props {
+interface Props {
   visible: boolean;
   onClose?: () => void;
   onSubmit?: () => void;
@@ -21,7 +21,7 @@ const TimerDialog = ({
   visible,
   onClose = () => undefined,
   onSubmit = () => undefined,
-}: props) => {
+}: Props) => {
   const { t } = useTranslation();
   const playerStyle = useNoxSetting(state => state.playerStyle);
   const {
@@ -98,7 +98,7 @@ const TimerDialog = ({
   );
 };
 
-export default (anyprops: props) => (
+export default (anyprops: Props) => (
   <Portal>
     <TimerDialog {...anyprops} />
   </Portal>

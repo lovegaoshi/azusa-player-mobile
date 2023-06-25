@@ -2,6 +2,7 @@ import * as React from 'react';
 import { View } from 'react-native';
 import { Text, Button } from 'react-native-paper';
 import { useTranslation } from 'react-i18next';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 
 import { useNoxSetting } from '../../hooks/useSetting';
 import { loginDropbox } from './sync/DropboxAuth';
@@ -11,7 +12,8 @@ import PersonalSyncButton from './sync/PersonalSyncButton';
 import DropboxSyncButton from './sync/DropboxSyncButton';
 
 const EXPORT_OPTIONS_LIST = [
-  EXPORT_OPTIONS.LOCAL,
+  // T
+  // EXPORT_OPTIONS.LOCAL,
   EXPORT_OPTIONS.DROPBOX,
   EXPORT_OPTIONS.PERSONAL,
 ];
@@ -29,7 +31,11 @@ const SyncButton = ({ location }: { location: EXPORT_OPTIONS }) => {
   }
 };
 
-export default () => {
+interface Props {
+  navigation: NativeStackNavigationProp<any>;
+}
+
+export default ({ navigation }: Props) => {
   const { t } = useTranslation();
   const playerStyle = useNoxSetting(state => state.playerStyle);
   const playerSetting = useNoxSetting(state => state.playerSetting);

@@ -16,7 +16,7 @@ import { regexFetchProps } from './mediafetch/generic';
  * assign the proper extractor based on the provided url. uses regex.
  * @returns
  */
-interface props {
+interface Props {
   input: string;
   progressEmitter?: (progress: number) => void;
   favList?: string[];
@@ -54,7 +54,7 @@ export const searchBiliURLs = async ({
   favList = [],
   useBiliTag = false,
   fastSearch = false,
-}: props) => {
+}: Props) => {
   try {
     const matchRegex = matchBiliURL(input);
     if (matchRegex !== null) {

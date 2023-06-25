@@ -3,7 +3,7 @@ import { Pressable, View, FlatList } from 'react-native';
 import { Button, Dialog, Portal, Text, RadioButton } from 'react-native-paper';
 import { useTranslation } from 'react-i18next';
 import { useNoxSetting } from '../../hooks/useSetting';
-interface props {
+interface Props {
   visible: boolean;
   fromList: NoxMedia.Playlist;
   onClose?: () => void;
@@ -15,7 +15,7 @@ export default ({
   fromList,
   onClose = () => undefined,
   onSubmit = () => undefined,
-}: props) => {
+}: Props) => {
   const { t } = useTranslation();
   const [playlistIndex, setPlaylistIndex] = useState('');
   const playlistIds = useNoxSetting(state => state.playlistIds);

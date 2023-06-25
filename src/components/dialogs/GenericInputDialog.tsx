@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next';
 import { logger } from '../../utils/Logger';
 import { useNoxSetting } from '../../hooks/useSetting';
 
-interface props {
+interface Props {
   visible: boolean;
   options: Array<string>;
   title?: string;
@@ -30,7 +30,7 @@ export default ({
   title = undefined,
   onClose = logger.debug,
   onSubmit = logger.debug,
-}: props) => {
+}: Props) => {
   const { t } = useTranslation();
   const playerStyle = useNoxSetting(state => state.playerStyle);
   const [currentInput, setCurrentInput] = useState<{
