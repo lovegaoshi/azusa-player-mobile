@@ -1,9 +1,7 @@
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
 import Snackbar from 'react-native-snackbar';
 import { View, ActivityIndicator } from 'react-native';
 import { IconButton, TextInput } from 'react-native-paper';
-import { useDebounce } from 'use-debounce';
-import { useUpdateEffect } from 'react-use';
 
 import { noxBackup, noxRestore } from './PersonalCloudAuth';
 import { useNoxSetting } from '../../../hooks/useSetting';
@@ -108,23 +106,18 @@ const SetTextField = ({ settingKey, label, placeholder }: textProps) => {
   const playerSetting = useNoxSetting(state => state.playerSetting);
   const playerStyle = useNoxSetting(state => state.playerStyle);
   const setPlayerSetting = useNoxSetting(state => state.setPlayerSetting);
-  const [val, setVal] = useState(playerSetting[settingKey]);
-  const [debouncedVal] = useDebounce(val, 1000);
 
-  useUpdateEffect(
-    () => setPlayerSetting({ [settingKey]: debouncedVal }),
-    [debouncedVal]
-  );
+  const saveVal = (val: string) => setPlayerSetting({ [settingKey]: val });
 
   return (
     <TextInput
       label={label}
-      onChange={e => setVal(e.nativeEvent.text)}
-      value={val}
+      defaultValue={playerSetting[settingKey]}
       placeholder={placeholder}
       selectTextOnFocus
       selectionColor={playerStyle.customColors.textInputSelectionColor}
       textColor={playerStyle.colors.text}
+      onEndEditing={e => saveVal(e.nativeEvent.text)}
     />
   );
 };
