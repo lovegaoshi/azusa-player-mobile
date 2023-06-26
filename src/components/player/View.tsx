@@ -60,7 +60,6 @@ export function useSetupPlayer() {
         lastPlayDuration,
       };
       await SetupService(serviceOptions);
-      AdditionalPlaybackService(serviceOptions);
       updateVersion(storedPlayerSetting);
       checkVersion(true, storedPlayerSetting);
       if (unmounted) return;
@@ -74,7 +73,9 @@ export function useSetupPlayer() {
         await TrackPlayer.add(songlistToTracklist([findCurrentSong]));
       } else {
         await TrackPlayer.add(songlistToTracklist([currentQueue[0]]));
+        serviceOptions.lastPlayDuration = 0;
       }
+      await AdditionalPlaybackService(serviceOptions);
       await TrackPlayer.pause();
     })();
     return () => {

@@ -12,7 +12,7 @@ import { regexFetchProps } from './generic';
 import { fetchAwaitPaginatedAPI } from './paginatedfetch';
 import SongTS from '../../objects/Song';
 
-const VIDEOINFO_API = `https://steria.vplayer.tk/api/musics/{pn}`;
+const VIDEOINFO_API = `https://steria.vplayer.tk/api/musics/{pn}?size=500`;
 // https://steria.vplayer.tk/api/musics/1
 const CIDPREFIX = 'steriatk-';
 
