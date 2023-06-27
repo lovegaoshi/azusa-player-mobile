@@ -9,14 +9,7 @@ import {
 } from 'react-native-paper';
 import { v4 as uuidv4 } from 'uuid';
 import { useNoxSetting } from '../../hooks/useSetting';
-
-export interface SettingEntry {
-  settingName: string;
-  settingCategory: string;
-  reRender?: boolean;
-  settingType?: string;
-  checkbox?: boolean;
-}
+import { SettingEntry } from './SetttingEntries';
 
 export default () => {
   const { t } = useTranslation();
@@ -44,13 +37,14 @@ export default () => {
     icon: string,
     settingName: string,
     onPress: () => void,
-    settingCategory = 'DeveloperSettings'
+    settingCategory = 'DeveloperSettings',
+    modifyDescription = (val: string) => val,
   ) => {
     return (
       <List.Item
         left={props => <IconButton icon={icon} size={40} />}
         title={String(t(`${settingCategory}.${settingName}Name`))}
-        description={t(`${settingCategory}.${settingName}Desc`)}
+        description={modifyDescription(t(`${settingCategory}.${settingName}Desc`))}
         onPress={onPress}
         titleStyle={{ color: playerStyle.colors.primary }}
         descriptionStyle={{ color: playerStyle.colors.secondary }}
