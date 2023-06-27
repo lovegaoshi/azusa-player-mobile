@@ -1,8 +1,10 @@
 import { v4 as uuidv4 } from 'uuid';
+
 import { fetchPlayUrlPromise } from '../utils/mediafetch/resolveURL';
 import { reExtractSongName, extractParenthesis } from '../utils/re';
 import { customReqHeader, DEFAULT_UA } from '../utils/BiliFetch';
 import { logger } from '../utils/Logger';
+import { loadCacheMedia } from '../utils/Cache';
 
 export const DEFAULT_NULL_URL = 'NULL';
 export const NULL_TRACK = { url: DEFAULT_NULL_URL, urlRefreshTimeStamp: 0 };
@@ -82,7 +84,7 @@ export const removeSongBiliShazamed = (song: NoxMedia.Song) => {
 export const resolveUrl = async (song: NoxMedia.Song) => {
   // TODO: method is called MULTIPLE times. need to investigate and debounce.
   // luckily bilibili doesnt seem to care for now
-  const url = await fetchPlayUrlPromise(song);
+  const url: string = loadCacheMedia(song) || (await fetchPlayUrlPromise(song));
   logger.debug(`resolved url', url)`);
   return {
     url,

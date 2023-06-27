@@ -40,6 +40,7 @@ export enum STORAGE_KEYS {
   COOKIES = 'Cookies',
   LYRIC_MAPPING = 'LyricMapping',
   LAST_PLAY_DURATION = 'LastPlayDuration',
+  CACHED_MEDIA_MAPPING = 'CachedMediaMapping',
 }
 
 const appID = 'NoxPlayerMobile';
@@ -66,6 +67,7 @@ export const DEFAULT_SETTING: NoxStorage.PlayerSettingDict = {
 
   appID,
   language: undefined,
+  cacheSize: 100,
 };
 
 export const saveItem = async (key: string, value: any) => {
@@ -93,6 +95,14 @@ export const removeItem = async (key: string) => {
   } catch (e) {
     console.warn(e);
   }
+};
+
+export const loadCachedMediaMapping = async () => {
+  return (await getItem(STORAGE_KEYS.CACHED_MEDIA_MAPPING)) || [];
+};
+
+export const saveCachedMediaMapping = async (val: any[]) => {
+  return await saveItem(STORAGE_KEYS.CACHED_MEDIA_MAPPING, val);
 };
 
 // we keep the set-cookie header for noxplayer's remove personal search option

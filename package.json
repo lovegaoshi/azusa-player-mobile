@@ -40,6 +40,7 @@
     "dropbox": "git+https://lovegaoshi@github.com/lovegaoshi/dropbox-sdk-js.git",
     "fflate": "^0.7.4",
     "i18next": "^22.4.15",
+    "lru-cache": "^10.0.0",
     "md5": "^2.3.0",
     "react": "18.2.0",
     "react-i18next": "^12.2.2",

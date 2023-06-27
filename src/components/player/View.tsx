@@ -11,6 +11,7 @@ import PlayerTopInfo from './PlayerTopInfo';
 import { useNoxSetting } from '../../hooks/useSetting';
 import { songlistToTracklist } from '../../objects/Playlist';
 import { initPlayerObject } from '../../utils/ChromeStorage';
+import { initCache } from '../../utils/Cache';
 import { getCurrentTPQueue } from '../../stores/playingList';
 import useVersionCheck from '../../hooks/useVersionCheck';
 
@@ -49,6 +50,7 @@ export function useSetupPlayer() {
         language,
         lastPlayDuration,
       } = await initPlayer(await initPlayerObject());
+      initCache({ max: storedPlayerSetting.cacheSize });
       /**
        * this doesnt even seems necessary?
       for (const [key, value] of Object.entries(cookies)) {

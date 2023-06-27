@@ -24,6 +24,7 @@ declare namespace NoxStorage {
 
     appID: string;
     language?: string;
+    cacheSize: number;
     [key: string]: any;
   }
 
