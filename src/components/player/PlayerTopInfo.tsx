@@ -7,11 +7,11 @@ import { ViewEnum } from '../../enums/View';
 import { useNoxSetting } from '../../hooks/useSetting';
 import RandomGIFButton from '../buttons/RandomGIF';
 
-interface props {
+interface Props {
   navigation: DrawerNavigationProp<ParamListBase>;
 }
 
-export default ({ navigation }: props) => {
+export default ({ navigation }: Props) => {
   const navigationGlobal = useNavigation();
   const playerStyle = useNoxSetting(state => state.playerStyle);
   const currentPlayingId = useNoxSetting(state => state.currentPlayingId);

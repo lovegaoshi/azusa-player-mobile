@@ -6,7 +6,7 @@ import { dummyPlaylist } from '../../objects/Playlist';
 import { useNoxSetting } from '../../hooks/useSetting';
 import PortaledInput from './PortaledInput';
 
-interface props {
+interface Props {
   visible: boolean;
   fromList?: NoxMedia.Playlist;
   onClose?: () => void;
@@ -18,7 +18,7 @@ export default ({
   fromList,
   onClose = () => undefined,
   onSubmit = () => undefined,
-}: props) => {
+}: Props) => {
   const { t } = useTranslation();
   const addPlaylist = useNoxSetting(state => state.addPlaylist);
   const inputRef = React.useRef<any>();

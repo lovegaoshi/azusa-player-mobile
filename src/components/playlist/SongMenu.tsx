@@ -20,7 +20,7 @@ enum ICONS {
   DETAIL = 'information-outline',
 }
 
-interface props {
+interface Props {
   checking?: boolean;
   checked?: boolean[];
   resetChecked?: () => void;
@@ -32,7 +32,7 @@ export default ({
   checked = [],
   resetChecked = () => undefined,
   handleSearch = () => undefined,
-}: props) => {
+}: Props) => {
   const { t } = useTranslation();
   const songMenuVisible = useNoxSetting(state => state.songMenuVisible);
   const setSongMenuVisible = useNoxSetting(state => state.setSongMenuVisible);

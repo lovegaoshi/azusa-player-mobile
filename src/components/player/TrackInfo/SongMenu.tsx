@@ -22,7 +22,7 @@ enum ICONS {
   DETAIL = 'information-outline',
 }
 
-interface props {
+interface Props {
   song: NoxMedia.Song;
   songMenuVisible: boolean;
   setSongMenuVisible: (val: boolean) => void;
@@ -38,7 +38,7 @@ export default ({
   songMenuSongIndexes,
   menuCoords = { x: 0, y: 0 },
   handleSearch = () => undefined,
-}: props) => {
+}: Props) => {
   const { t } = useTranslation();
   const currentPlaylist = useNoxSetting(state => state.currentPlayingList);
   const playlists = useNoxSetting(state => state.playlists);

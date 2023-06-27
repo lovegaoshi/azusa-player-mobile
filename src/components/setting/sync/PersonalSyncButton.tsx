@@ -1,9 +1,7 @@
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
 import Snackbar from 'react-native-snackbar';
 import { View, ActivityIndicator } from 'react-native';
 import { IconButton, TextInput } from 'react-native-paper';
-import { useDebounce } from 'use-debounce';
-import { useUpdateEffect } from 'react-use';
 
 import { noxBackup, noxRestore } from './PersonalCloudAuth';
 import { useNoxSetting } from '../../../hooks/useSetting';
@@ -13,12 +11,12 @@ import {
   importPlayerContent,
 } from '../../../utils/ChromeStorage';
 
-interface props {
+interface Props {
   cloudAddress: string;
   cloudID?: string;
 }
 
-const ImportSyncFavButton = ({ cloudAddress, cloudID }: props) => {
+const ImportSyncFavButton = ({ cloudAddress, cloudID }: Props) => {
   const [loading, setLoading] = useState(false);
   const initPlayer = useNoxSetting(state => state.initPlayer);
 
@@ -54,7 +52,7 @@ const ImportSyncFavButton = ({ cloudAddress, cloudID }: props) => {
   );
 };
 
-const ExportSyncFavButton = ({ cloudAddress, cloudID }: props) => {
+const ExportSyncFavButton = ({ cloudAddress, cloudID }: Props) => {
   const [loading, setLoading] = useState(false);
 
   const errorHandling = (
@@ -104,33 +102,25 @@ const personalCloudIDTextField: textProps = {
   placeholder: '',
 };
 
-const SetTextField = React.memo(
-  ({ settingKey, label, placeholder }: textProps) => {
-    const playerSetting = useNoxSetting(state => state.playerSetting);
-    const playerStyle = useNoxSetting(state => state.playerStyle);
-    const setPlayerSetting = useNoxSetting(state => state.setPlayerSetting);
-    const [val, setVal] = useState(playerSetting[settingKey]);
-    const [debouncedVal] = useDebounce(val, 1000);
+const SetTextField = ({ settingKey, label, placeholder }: textProps) => {
+  const playerSetting = useNoxSetting(state => state.playerSetting);
+  const playerStyle = useNoxSetting(state => state.playerStyle);
+  const setPlayerSetting = useNoxSetting(state => state.setPlayerSetting);
 
-    useUpdateEffect(
-      () => setPlayerSetting({ [settingKey]: debouncedVal }),
-      [debouncedVal]
-    );
+  const saveVal = (val: string) => setPlayerSetting({ [settingKey]: val });
 
-    return (
-      <TextInput
-        label={label}
-        onChange={e => setVal(e.nativeEvent.text)}
-        value={val}
-        placeholder={placeholder}
-        selectTextOnFocus
-        selectionColor={playerStyle.customColors.textInputSelectionColor}
-        textColor={playerStyle.colors.text}
-      />
-    );
-  },
-  () => true
-);
+  return (
+    <TextInput
+      label={label}
+      defaultValue={playerSetting[settingKey]}
+      placeholder={placeholder}
+      selectTextOnFocus
+      selectionColor={playerStyle.customColors.textInputSelectionColor}
+      textColor={playerStyle.colors.text}
+      onEndEditing={e => saveVal(e.nativeEvent.text)}
+    />
+  );
+};
 
 export default () => {
   const playerSetting = useNoxSetting(state => state.playerSetting);

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Button, Dialog, Portal, Text } from 'react-native-paper';
 import { useTranslation } from 'react-i18next';
 
-interface props {
+interface Props {
   visible: boolean;
   onClose?: () => void;
   onSubmit?: () => void;
@@ -12,7 +12,7 @@ export default ({
   visible,
   onClose = () => undefined,
   onSubmit = () => undefined,
-}: props) => {
+}: Props) => {
   const { t } = useTranslation();
   const handleClose = () => {
     onClose();

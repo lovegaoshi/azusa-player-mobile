@@ -14,7 +14,7 @@ import { useTranslation } from 'react-i18next';
 import { useNoxSetting } from '../../hooks/useSetting';
 import PortaledInput from './PortaledInput';
 
-interface props {
+interface Props {
   visible: boolean;
   onClose?: () => void;
   onSubmit?: (newPlaylist: NoxMedia.Playlist) => void;
@@ -24,7 +24,7 @@ export default ({
   visible,
   onClose = () => undefined,
   onSubmit = () => undefined,
-}: props) => {
+}: Props) => {
   const { t } = useTranslation();
   const playerStyle = useNoxSetting(state => state.playerStyle);
   const currentPlaylist = useNoxSetting(state => state.currentPlaylist);

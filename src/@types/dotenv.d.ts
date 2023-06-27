@@ -5,4 +5,5 @@ declare module '@env' {
   export const CHROMEAPP_CLIENT_ID: string;
   export const PERSONAL_CLOUD_SERVER: string;
   export const PERSONAL_CLOUD_SECRET: string;
+  export const APPSTORE: boolean;
 }

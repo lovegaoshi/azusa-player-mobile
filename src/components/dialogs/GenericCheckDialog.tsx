@@ -13,7 +13,7 @@ const DialogTitle = ({ title }: { title: string | undefined }) => {
   );
 };
 
-interface props<T> {
+interface Props<T> {
   visible: boolean;
   options: Array<T>;
   renderOptionTitle?: (val: T) => string;
@@ -32,7 +32,7 @@ export default ({
   title = undefined,
   onClose = (index?: boolean[]) => undefined,
   onSubmit = (index: boolean[]) => undefined,
-}: props<any>) => {
+}: Props<any>) => {
   const { t } = useTranslation();
   const [currentIndex, setCurrentIndex] = useState<boolean[]>([]);
 

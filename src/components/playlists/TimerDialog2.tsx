@@ -57,7 +57,7 @@ const joinNumbersToString = (numbers: number[]): string => {
 const parseTimerInput = (input: string): string =>
   joinNumbersToString(extractNumbersFromString(input));
 
-interface props {
+interface Props {
   visible: boolean;
   onClose?: () => void;
   onSubmit?: () => void;
@@ -67,7 +67,7 @@ export default ({
   visible,
   onClose = () => undefined,
   onSubmit = () => undefined,
-}: props) => {
+}: Props) => {
   const [isPlaying, setIsPlaying] = React.useState(false);
   const [duration, setDuration] = React.useState(1800);
   const [inputDuration, setInputDuration] = React.useState('3000');

@@ -250,10 +250,11 @@ export default () => {
       currentPlaylist.subscribeUrl[0].length > 0 &&
       new Date().getTime() - currentPlaylist.lastSubscribed > 86400000
     ) {
-      refreshPlaylist();
-      if (currentPlaylist.biliSync) {
-        syncFavlist(currentPlaylist);
-      }
+      refreshPlaylist().then(() => {
+        if (currentPlaylist.biliSync) {
+          syncFavlist(currentPlaylist);
+        }
+      });
     }
   }, [currentPlaylist]);
 

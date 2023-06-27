@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { useNoxSetting } from '../../hooks/useSetting';
 import PortaledInput from './PortaledInput';
 
-interface props {
+interface Props {
   visible: boolean;
   song: NoxMedia.Song;
   onClose?: () => void;
@@ -16,7 +16,7 @@ export default ({
   song,
   onClose = () => undefined,
   onSubmit = (rename: string) => undefined,
-}: props) => {
+}: Props) => {
   const { t } = useTranslation();
   const inputRef = React.useRef<any>();
 

@@ -5,11 +5,11 @@ import { Track } from 'react-native-track-player';
 import { useNoxSetting } from '../../../hooks/useSetting';
 import { updatePlaylistSongs } from '../../../objects/Playlist';
 
-interface props {
+interface Props {
   track?: Track;
 }
 
-export default ({ track }: props) => {
+export default ({ track }: Props) => {
   const song = track?.song as NoxMedia.Song;
   const favoritePlaylist = useNoxSetting(state => state.favoritePlaylist);
   const setFavoritePlaylist = useNoxSetting(state => state.setFavoritePlaylist);

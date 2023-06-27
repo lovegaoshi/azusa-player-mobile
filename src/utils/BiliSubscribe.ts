@@ -1,7 +1,7 @@
 import { searchBiliURLs } from './BiliSearch';
 import { parseSongName } from './re';
 
-interface props {
+interface Props {
   listObj: NoxMedia.Playlist;
   subscribeUrls?: Array<string>;
   updatePlaylist: (
@@ -16,7 +16,7 @@ export const updateSubscribeFavList = async ({
   subscribeUrls,
   updatePlaylist,
   progressEmitter = () => undefined,
-}: props) => {
+}: Props) => {
   try {
     const oldListLength = listObj.songList.length;
     // eslint-disable-next-line prefer-const
@@ -30,7 +30,7 @@ export const updateSubscribeFavList = async ({
     const favList = [
       ...newPlaylist.songList.map(val => val.bvid),
       ...newPlaylist.blacklistedUrl,
-    ]
+    ];
     for (let i = 0, n = subscribeUrls.length; i < n; i++) {
       newPlaylist.songList = (
         await searchBiliURLs({
@@ -41,7 +41,10 @@ export const updateSubscribeFavList = async ({
         })
       ).concat(newPlaylist.songList);
     }
-    const uniqueSongList = newPlaylist.songList.reduce((arr, curr) => arr.set(curr.id, curr), new Map<string, NoxMedia.Song>())
+    const uniqueSongList = newPlaylist.songList.reduce(
+      (arr, curr) => arr.set(curr.id, curr),
+      new Map<string, NoxMedia.Song>()
+    );
     newPlaylist.songList = [...uniqueSongList.values()].map(val =>
       parseSongName(val)
     );

@@ -13,7 +13,7 @@ const DialogTitle = ({ title }: { title: string | undefined }) => {
   );
 };
 
-interface props<T> {
+interface Props<T> {
   visible: boolean;
   options: Array<T>;
   renderOptionTitle?: (val: T) => string;
@@ -34,7 +34,7 @@ export default ({
   defaultIndex = 0,
   onClose = (index?: number) => undefined,
   onSubmit = (index: number) => undefined,
-}: props<any>) => {
+}: Props<any>) => {
   const { t } = useTranslation();
   const [currentIndex, setCurrentIndex] = useState(defaultIndex);
 

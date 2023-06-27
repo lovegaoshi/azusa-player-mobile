@@ -1,9 +1,17 @@
 import { useTranslation } from 'react-i18next';
 import { Linking } from 'react-native';
 import Snackbar from 'react-native-snackbar';
+import { APPSTORE } from '@env';
+
 import { useNoxSetting } from './useSetting';
 import useAlert from '../components/dialogs/useAlert';
 import { VERSIONS } from '../enums/Version';
+
+const regexVersion = (version: string) => {
+  const regexMatch = /\d+\.\d+\.\d+/.exec(version),
+    regexVersion = regexMatch ? regexMatch[0] : null;
+  return regexVersion;
+};
 
 export default () => {
   const playerSetting = useNoxSetting(state => state.playerSetting);
@@ -34,6 +42,7 @@ export default () => {
     auto = true,
     currentPlayerSetting = playerSetting
   ) => {
+    if (APPSTORE) return;
     if (!auto) {
       Snackbar.show({
         text: t('VersionUpdate.UpdateCheckingSnackbar'),
@@ -50,7 +59,10 @@ export default () => {
     }
     if (noxCheckedVersion === currentPlayerSetting.noxCheckedVersion && auto)
       return;
-    if (noxCheckedVersion === currentPlayerSetting.noxVersion) {
+    if (
+      regexVersion(noxCheckedVersion) ===
+      regexVersion(currentPlayerSetting.noxVersion)
+    ) {
       OneWayAlert(
         '',
         String(

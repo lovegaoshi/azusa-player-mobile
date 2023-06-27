@@ -14,11 +14,11 @@ import { initPlayerObject } from '../../utils/ChromeStorage';
 import { getCurrentTPQueue } from '../../stores/playingList';
 import useVersionCheck from '../../hooks/useVersionCheck';
 
-interface props {
+interface Props {
   navigation: DrawerNavigationProp<ParamListBase>;
 }
 
-export function Player({ navigation }: props) {
+export function Player({ navigation }: Props) {
   const track = useActiveTrack();
   const playerStyle = useNoxSetting(state => state.playerStyle);
   // TODO: component
@@ -60,7 +60,6 @@ export function useSetupPlayer() {
         lastPlayDuration,
       };
       await SetupService(serviceOptions);
-      AdditionalPlaybackService(serviceOptions);
       updateVersion(storedPlayerSetting);
       checkVersion(true, storedPlayerSetting);
       if (unmounted) return;
@@ -74,7 +73,9 @@ export function useSetupPlayer() {
         await TrackPlayer.add(songlistToTracklist([findCurrentSong]));
       } else {
         await TrackPlayer.add(songlistToTracklist([currentQueue[0]]));
+        serviceOptions.lastPlayDuration = 0;
       }
+      await AdditionalPlaybackService(serviceOptions);
       await TrackPlayer.pause();
     })();
     return () => {

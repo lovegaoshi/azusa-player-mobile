@@ -27,7 +27,7 @@ enum ICONS {
   BILISYNC = 'sync',
 }
 
-interface props {
+interface Props {
   visible?: boolean;
   toggleVisible?: () => void;
   menuCoords?: NoxTheme.coordinates;
@@ -37,7 +37,7 @@ export default ({
   visible = false,
   toggleVisible = () => undefined,
   menuCoords = { x: 0, y: 0 },
-}: props) => {
+}: Props) => {
   const { t } = useTranslation();
   const currentPlaylist = useNoxSetting(state => state.currentPlaylist);
   const updatePlaylist = useNoxSetting(state => state.updatePlaylist);
