@@ -1,4 +1,4 @@
-import { LRUCache } from 'lru-cache';
+import LRUCache from 'lru-cache';
 import RNFetchBlob from 'rn-fetch-blob';
 
 import {
@@ -6,7 +6,7 @@ import {
   saveCachedMediaMapping,
 } from './ChromeStorage';
 
-let cache: LRUCache<string, string, unknown>;
+let cache: LRUCache<string, string>;
 
 interface optionsProps {
   max: number;
@@ -38,24 +38,23 @@ export const saveCacheMedia = async (
   resolvedURL: any,
   extension?: string
 ) => {
-  if (cache.max < 1) return;
+  if (cache.max < 1 || !resolvedURL.url.startsWith('http')) return;
   if (!extension) {
     const regexMatch = /.+\/{2}.+\/{1}.+(\.\w+)\?*.*/.exec(resolvedURL.url);
-    extension = regexMatch ? regexMatch[0] : 'm4a';
+    extension = regexMatch ? regexMatch[1] : 'm4a';
   }
   // https://github.com/joltup/rn-fetch-blob#download-to-storage-directly
   RNFetchBlob.config({ fileCache: true, appendExt: extension })
     .fetch('GET', resolvedURL.url, resolvedURL.headers)
     .then(res => {
       cache.set(noxCacheKey(song), res.path());
-      console.log(res.path);
       dumpCache();
     });
 };
 
-export const loadCacheMedia = (song: NoxMedia.Song) => {
+export const loadCacheMedia = (song: NoxMedia.Song, prefix = 'file://') => {
   const cachedPath = cache.get(noxCacheKey(song));
   if (!cachedPath) return undefined;
   // no RNFetchBlob.fs.readStream?
-  return cachedPath;
+  return `${prefix}${cachedPath}`;
 };
