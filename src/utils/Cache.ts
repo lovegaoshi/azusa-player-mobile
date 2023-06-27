@@ -52,9 +52,9 @@ export const saveCacheMedia = async (
     });
 };
 
-export const loadCacheMedia = (song: NoxMedia.Song, prefix = 'file://') => {
+export const loadCacheMedia = async (song: NoxMedia.Song, prefix = 'file://') => {
   const cachedPath = cache.get(noxCacheKey(song));
-  if (!cachedPath) return undefined;
+  if (!cachedPath || !(await RNFetchBlob.fs.exists(cachedPath))) return undefined;
   // no RNFetchBlob.fs.readStream?
   return `${prefix}${cachedPath}`;
 };
