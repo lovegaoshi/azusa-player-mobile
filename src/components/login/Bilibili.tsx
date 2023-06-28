@@ -15,7 +15,6 @@ import { addCookie } from '../../utils/ChromeStorage';
 import { getLoginStatus } from '../../utils/Login';
 import GenericInputDialog from '../dialogs/GenericInputDialog';
 import BiliSelectFavButtton from './BiliSelectFavButtton';
-import { throttler } from '../../utils/throttle';
 
 interface QRCodeReq {
   url: string;
@@ -42,37 +41,6 @@ const probeQRCodeAPI =
   'https://passport.bilibili.com/x/passport-login/web/qrcode/poll';
 //'https://passport.bilibili.com/qrcode/getLoginInfo';
 const oauthKey = 'qrcode_key'; // 'oauthKey';
-
-/**
- * TODO: doesnt work! oh no!
- */
-const loginQRVerification = async () => {
-  const verificationURL =
-    'https://passport.bilibili.com/x/passport-login/web/sso/list?biliCSRF=';
-  const biliJct = (await CookieManager.get('https://www.bilibili.com'))[
-    'bili_jct'
-  ]?.value;
-  const res = await throttler.biliApiLimiter.schedule(async () =>
-      bfetch(`${verificationURL}${biliJct}`, {
-        method: 'GET',
-        credentials: 'include',
-        headers: {},
-      })
-    ),
-    json = await res.json();
-  logger.debug(json);
-  await Promise.all(
-    json.data.sso.map((url: string) =>
-      throttler.biliApiLimiter.schedule(async () =>
-        bfetch(url, {
-          method: 'GET',
-          credentials: 'include',
-          headers: {},
-        })
-      )
-    )
-  );
-};
 
 export default ({ navigation }: Props) => {
   const { t } = useTranslation();
