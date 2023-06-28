@@ -9,6 +9,7 @@ import { View, GestureResponderEvent } from 'react-native';
 import { useNoxSetting } from '../../hooks/useSetting';
 import { seconds2MMSS } from '../../utils/Utils';
 import { PLAYLIST_ENUMS } from '../../enums/Playlist';
+import { peekCache } from '../../utils/Cache';
 
 function SongInfo({
   item,

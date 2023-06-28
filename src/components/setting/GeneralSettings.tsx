@@ -1,7 +1,8 @@
 import * as React from 'react';
 import { View, Text, ScrollView } from 'react-native';
 import { useNoxSetting } from '../../hooks/useSetting';
-import useRenderSettingItem, { SettingEntry } from './useRenderSetting';
+import useRenderSettingItem from './useRenderSetting';
+import { SettingEntry } from './SetttingEntries';
 
 const GEN_SETTING_BOOLEAN: SettingEntry[] = [
   {

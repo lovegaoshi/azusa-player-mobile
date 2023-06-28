@@ -40,14 +40,15 @@ export enum STORAGE_KEYS {
   COOKIES = 'Cookies',
   LYRIC_MAPPING = 'LyricMapping',
   LAST_PLAY_DURATION = 'LastPlayDuration',
+  CACHED_MEDIA_MAPPING = 'CachedMediaMapping',
 }
 
 const appID = 'NoxPlayerMobile';
 
 export const DEFAULT_SETTING: NoxStorage.PlayerSettingDict = {
-  autoRSSUpdate: false,
+  autoRSSUpdate: true,
   skin: '诺莺nox',
-  parseSongName: false,
+  parseSongName: true,
   keepSearchedSongListWhenPlaying: false,
   settingExportLocation: EXPORT_OPTIONS.LOCAL,
   personalCloudIP: '',
@@ -61,11 +62,12 @@ export const DEFAULT_SETTING: NoxStorage.PlayerSettingDict = {
   noCookieBiliSearch: false,
   playerRepeat: NoxRepeatMode.SHUFFLE,
   dataSaver: false,
-  fastBiliSearch: false,
+  fastBiliSearch: true,
   noInterruption: false,
 
   appID,
   language: undefined,
+  cacheSize: 0,
 };
 
 export const saveItem = async (key: string, value: any) => {
@@ -93,6 +95,14 @@ export const removeItem = async (key: string) => {
   } catch (e) {
     console.warn(e);
   }
+};
+
+export const loadCachedMediaMapping = async () => {
+  return (await getItem(STORAGE_KEYS.CACHED_MEDIA_MAPPING)) || [];
+};
+
+export const saveCachedMediaMapping = async (val: any[]) => {
+  return await saveItem(STORAGE_KEYS.CACHED_MEDIA_MAPPING, val);
 };
 
 // we keep the set-cookie header for noxplayer's remove personal search option

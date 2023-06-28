@@ -7,32 +7,24 @@ import { APPSTORE } from '@env';
 import { useNoxSetting } from '../../hooks/useSetting';
 import { logStore, LOGLEVEL } from '../../utils/Logger';
 import GenericSelectDialog from '../dialogs/GenericSelectDialog';
-import useRenderSettingItem, { SettingEntry } from './useRenderSetting';
+import useRenderSettingItem from './useRenderSetting';
 import useVersionCheck from '../../hooks/useVersionCheck';
 import { getLog } from '../../utils/Logger';
 import useAlert from '../dialogs/useAlert';
+import {
+  SelectSettingEntry,
+  SettingEntry,
+  dummySelectSettingEntry,
+} from './SetttingEntries';
+import { clearCache } from '../../utils/Cache';
 
 enum ICONS {
   setlog = 'console',
   update = 'update',
   showlog = 'bug',
+  cache = 'floppy',
+  clearcache = 'delete-sweep',
 }
-
-interface SelectSettingEntry<T> {
-  options: Array<T>;
-  renderOption: (option: T) => string;
-  defaultIndex: number;
-  onClose: (index?: number) => void;
-  onSubmit: (index: number) => void;
-}
-
-const dummySelectSettingEntry: SelectSettingEntry<string> = {
-  options: [],
-  renderOption: () => '',
-  defaultIndex: 0,
-  onClose: () => undefined,
-  onSubmit: () => undefined,
-};
 
 const developerSettings: { [key: string]: SettingEntry } = {
   noInterruption: {
@@ -45,6 +37,8 @@ const developerSettings: { [key: string]: SettingEntry } = {
 const { getState, setState } = logStore;
 
 export default () => {
+  const playerSetting = useNoxSetting(state => state.playerSetting);
+  const setPlayerSetting = useNoxSetting(state => state.setPlayerSetting);
   const { t } = useTranslation();
   const { OneWayAlert } = useAlert();
   const [currentSelectOption, setCurrentSelectOption] = React.useState<
@@ -54,6 +48,15 @@ export default () => {
   const playerStyle = useNoxSetting(state => state.playerStyle);
   const { renderListItem, renderSetting } = useRenderSettingItem();
   const { checkVersion } = useVersionCheck();
+
+  const logLevelString = [
+    t('DeveloperSettings.LogLevel0'),
+    t('DeveloperSettings.LogLevel1'),
+    t('DeveloperSettings.LogLevel2'),
+    t('DeveloperSettings.LogLevel3'),
+    t('DeveloperSettings.LogLevel4'),
+    t('DeveloperSettings.LogLevel5'),
+  ];
 
   const selectLogLevel = () => {
     setSelectVisible(true);
@@ -66,21 +69,35 @@ export default () => {
         LOGLEVEL.CRITICAL,
         LOGLEVEL.NONE,
       ],
-      renderOption: (option: number) =>
-        [
-          t('DeveloperSettings.LogLevel0'),
-          t('DeveloperSettings.LogLevel1'),
-          t('DeveloperSettings.LogLevel2'),
-          t('DeveloperSettings.LogLevel3'),
-          t('DeveloperSettings.LogLevel4'),
-          t('DeveloperSettings.LogLevel5'),
-        ][option],
+      renderOption: (option: number) => logLevelString[option],
       defaultIndex: getState().logLevel,
       onClose: () => setSelectVisible(false),
       onSubmit: (index: number) => {
         setState({ logLevel: index });
         setSelectVisible(false);
       },
+      title: t('DeveloperSettings.LogLevel'),
+    } as SelectSettingEntry<number>);
+  };
+
+  const selectCacheLevel = () => {
+    setSelectVisible(true);
+    const options = [
+      0, // disabled
+      100, // ~500 MB
+      1000, // ~5 GB
+      9999, // 50 GB
+    ];
+    const defaultIndex = options.indexOf(playerSetting.cacheSize);
+    setCurrentSelectOption({
+      options,
+      defaultIndex: defaultIndex > -1 ? defaultIndex : 0,
+      onClose: () => setSelectVisible(false),
+      onSubmit: (index: number) => {
+        setPlayerSetting({ cacheSize: options[index] });
+        setSelectVisible(false);
+      },
+      title: t('DeveloperSettings.CacheSizeName'),
     } as SelectSettingEntry<number>);
   };
 
@@ -104,7 +121,8 @@ export default () => {
             ICONS.setlog,
             'LogLevel',
             selectLogLevel,
-            'DeveloperSettings'
+            'DeveloperSettings',
+            val => `${val}: ${logLevelString[getState().logLevel]}`
           )}
           {!APPSTORE &&
             renderListItem(
@@ -113,13 +131,29 @@ export default () => {
               () => checkVersion(false),
               'DeveloperSettings'
             )}
+          {renderListItem(
+            ICONS.cache,
+            'CacheSize',
+            selectCacheLevel,
+            'DeveloperSettings',
+            () =>
+              t('DeveloperSettings.CacheSizeDesc2', {
+                val: playerSetting.cacheSize,
+              })
+          )}
+          {renderListItem(
+            ICONS.clearcache,
+            'ClearCache',
+            clearCache,
+            'DeveloperSettings'
+          )}
         </List.Section>
       </ScrollView>
       <GenericSelectDialog
         visible={selectVisible}
         options={currentSelectOption.options}
         renderOptionTitle={currentSelectOption.renderOption}
-        title={String(t('DeveloperSettings.LogLevelName'))}
+        title={currentSelectOption.title}
         defaultIndex={currentSelectOption.defaultIndex}
         onClose={currentSelectOption.onClose}
         onSubmit={currentSelectOption.onSubmit}
