@@ -8,61 +8,17 @@ import { logger } from '../../utils/Logger';
 import bfetch from '../../utils/BiliFetch';
 import { addCookie } from '../../utils/ChromeStorage';
 import { getLoginStatus } from '../../utils/Login';
-import { throttler } from '../../utils/throttle';
+import { QRCodeReq, LoginInfo } from './useBiliLogin';
 
-export interface QRCodeReq {
-  url: string;
-  key: string;
-  expire: number;
-}
-
-export interface LoginInfo {
-  name: string;
-  id: string;
-  avatar: string;
-}
-
-// https://github.com/SocialSisterYi/bilibili-API-collect/blob/master/docs/login/login_action/QR.md#%E7%94%B3%E8%AF%B7%E4%BA%8C%E7%BB%B4%E7%A0%81web%E7%AB%AF
+// https://github.com/SocialSisterYi/bilibili-API-collect/blob/master/docs/login/login_action/QR.md#web%E7%AB%AF%E6%89%AB%E7%A0%81%E7%99%BB%E5%BD%95-%E6%97%A7%E7%89%88
 
 const domain = 'https://bilibili.com';
 const loginAPI = 'https://api.bilibili.com/x/web-interface/nav';
 const getQRCodeAPI =
-  'https://passport.bilibili.com/x/passport-login/web/qrcode/generate';
-//'https://passport.bilibili.com/qrcode/getLoginUrl';
+  'https://passport.bilibili.com/qrcode/getLoginUrl';
 const probeQRCodeAPI =
-  'https://passport.bilibili.com/x/passport-login/web/qrcode/poll';
-//'https://passport.bilibili.com/qrcode/getLoginInfo';
-const oauthKey = 'qrcode_key'; // 'oauthKey';
-/**
- * TODO: doesnt work! oh no!
- */
-const loginQRVerification = async () => {
-  const verificationURL =
-    'https://passport.bilibili.com/x/passport-login/web/sso/list?biliCSRF=';
-  const biliJct = (await CookieManager.get('https://www.bilibili.com'))[
-    'bili_jct'
-  ]?.value;
-  const res = await throttler.biliApiLimiter.schedule(async () =>
-    bfetch(`${verificationURL}${biliJct}`, {
-      method: 'GET',
-      credentials: 'include',
-      headers: {},
-    })
-  ),
-    json = await res.json();
-  logger.debug(json);
-  await Promise.all(
-    json.data.sso.map((url: string) =>
-      throttler.biliApiLimiter.schedule(async () =>
-        bfetch(url, {
-          method: 'GET',
-          credentials: 'include',
-          headers: {},
-        })
-      )
-    )
-  );
-};
+  'https://passport.bilibili.com/qrcode/getLoginInfo';
+const oauthKey = 'oauthKey';
 
 const useBiliLogin = () => {
   const { t } = useTranslation();
@@ -110,10 +66,6 @@ const useBiliLogin = () => {
 
   const probeQRLogin = async () => {
     try {
-      const response = await bfetch(
-        `${probeQRCodeAPI}?${oauthKey}=${qrcodeKey}`
-      );
-      /**
       const response = await bfetch(probeQRCodeAPI, {
         method: 'POST',
         headers: {
@@ -123,7 +75,6 @@ const useBiliLogin = () => {
           [oauthKey]: qrcodeKey,
         },
       });
-       */
       const json = await response.json();
       logger.debug(
         `probing QR code login of ${qrcodeKey}, ${JSON.stringify(json)}`

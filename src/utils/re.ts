@@ -268,6 +268,7 @@ export const reExtractSongName = (
       filename = extractWith(extractParenthesis(filename), [
         /【黑泽诺亚NOIR】(.+) - (.+)/,
         /【黑泽诺亚NOIR】(.+)/,
+        /【黑泽诺亚】【歌切】(.+) - (.+)/,
         /【黑泽诺亚】【歌切】(.+)/,
         /【黑泽诺亚】【.+】(.+)/,
         /【黑泽诺亚】(.+)/,
