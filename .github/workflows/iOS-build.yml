@@ -1,5 +1,8 @@
 name: ios auto release
 on:
+  push:
+    branches:
+      - 'dev-ios-action'
   workflow_dispatch:
 jobs:
   buildIPA:
@@ -39,16 +42,6 @@ jobs:
 
       - name: alias yarn.cmd to yarn
         run: alias yarn.cmd="yarn"
-
-      - name: Get Recent Commit Tag
-        id: get_commit_tag
-        run: |
-          COMMIT_TAG=$(git describe --tags --abbrev=0)
-          echo "COMMIT_TAG=${COMMIT_TAG}" >> $GITHUB_ENV
-
-      - name: Display Commit Tag
-        run: |
-          echo "Commit Tag: $COMMIT_TAG"}
 
       - name: Install dependencies
         uses: nick-fields/retry@v2
