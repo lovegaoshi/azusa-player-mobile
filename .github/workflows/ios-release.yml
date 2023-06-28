@@ -1,0 +1,81 @@
+name: ios auto release
+on:
+  workflow_dispatch:
+jobs:
+  buildIPA:
+    runs-on: macos-12
+    name: build AAB
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: python version_bump.py
+        run: |
+          python version_bump.py
+
+      - name: Get branch name
+        run: |
+          # Short name for current branch. For PRs, use target branch (base ref)
+          GIT_BRANCH=${GITHUB_BASE_REF:-${GITHUB_REF#refs/heads/}}
+          echo "GIT_BRANCH=$GIT_BRANCH" >> $GITHUB_ENV
+
+      - name: Get current date
+        id: date
+        run: echo "date=$(date +'%Y-%m-%d')" >> $GITHUB_OUTPUT
+
+      - name: set up JDK 18
+        uses: actions/setup-java@v3
+        with:
+          java-version: 18
+          distribution: temurin
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: 'Create env file'
+        run: |
+          echo "${{ secrets.ENV_FILE }}" > .env
+          echo "APPSTORE=true" >> .env
+
+      - name: alias yarn.cmd to yarn
+        run: alias yarn.cmd="yarn"
+
+      - name: Get Recent Commit Tag
+        id: get_commit_tag
+        run: |
+          COMMIT_TAG=$(git describe --tags --abbrev=0)
+          echo "COMMIT_TAG=${COMMIT_TAG}" >> $GITHUB_ENV
+
+      - name: Display Commit Tag
+        run: |
+          echo "Commit Tag: $COMMIT_TAG"}
+
+      - name: Install dependencies
+        uses: nick-fields/retry@v2
+        with:
+          timeout_minutes: 10
+          max_attempts: 10
+          command: yarn
+          
+      - name: Pod Install
+        run: cd ios && pod install
+
+      - name: build
+        run: cd ios && xcodebuild -scheme example -workspace example.xcworkspace -configuration Release clean archive -archivePath "build/APM.xcarchive" CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO CODE_SIGNING_ALLOWED=NO
+     
+      - name: archive to ipa
+        run: | 
+          mkdir ios/build/Payload
+          mv build/APM.xcarchive/Products/Applications/example.app build/Payload/examp
+le.app
+          cd build
+          zip -r APM.ipa Payload/
+
+      - uses: actions/upload-artifact@v3
+        with:
+          name: outputAAB
+          path: ios/build/APM.ipa # or path/to/artifact
