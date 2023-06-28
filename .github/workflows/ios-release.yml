@@ -70,8 +70,7 @@ jobs:
       - name: archive to ipa
         run: | 
           mkdir ios/build/Payload
-          mv build/APM.xcarchive/Products/Applications/example.app build/Payload/examp
-le.app
+          mv build/APM.xcarchive/Products/Applications/example.app build/Payload/example.app
           cd build
           zip -r APM.ipa Payload/
 
