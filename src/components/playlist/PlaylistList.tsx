@@ -98,6 +98,16 @@ export default () => {
         process: (val: RegExpExecArray, someRows: Array<NoxMedia.Song>) =>
           someRows.filter(row => row.parsedName === val[1]),
       },
+      {
+        regex: /artist:(.+)/,
+        process: (val: RegExpExecArray, someRows: Array<NoxMedia.Song>) =>
+          someRows.filter(row => row.singer.includes(val[1])),
+      },
+      {
+        regex: /album:(.+)/,
+        process: (val: RegExpExecArray, someRows: Array<NoxMedia.Song>) =>
+          someRows.filter(row => row.album?.includes(val[1])),
+      },
     ];
     let defaultExtraction = true;
     for (const searchSubStr of searchStr.split('|')) {
@@ -117,7 +127,6 @@ export default () => {
     return rows;
   };
 
-  // TODO: useDebunce here
   const handleSearch = (searchedVal = '') => {
     if (searchedVal === '') {
       setCurrentRows(currentPlaylist.songList);
@@ -233,8 +242,8 @@ export default () => {
     const currentIndex =
       toIndex < 0
         ? currentPlaylist.songList.findIndex(
-            song => song.id === currentPlayingId
-          )
+          song => song.id === currentPlayingId
+        )
         : toIndex;
     if (currentIndex > -1) {
       playlistRef.current.scrollToIndex({
@@ -276,7 +285,7 @@ export default () => {
 
   useEffect(() => {
     setShouldReRender(val => !val);
-  }, [currentPlayingId, checking, playlistShouldReRender]);
+  }, [currentPlayingId, checking, playlistShouldReRender, netInfo.type]);
 
   useEffect(() => {
     if (!searching) {
