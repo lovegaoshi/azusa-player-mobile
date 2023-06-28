@@ -11,6 +11,18 @@ import { seconds2MMSS } from '../../utils/Utils';
 import { PLAYLIST_ENUMS } from '../../enums/Playlist';
 import { peekCache } from '../../utils/Cache';
 
+interface Props {
+  item: NoxMedia.Song;
+  index: number;
+  currentPlaying: boolean;
+  playSong: (song: NoxMedia.Song) => void;
+  checking?: boolean;
+  onChecked?: () => void;
+  onLongPress?: () => void;
+  checkedList: boolean[];
+  networkCellular?: boolean;
+}
+
 function SongInfo({
   item,
   index,
@@ -20,16 +32,8 @@ function SongInfo({
   checking = false,
   onChecked = () => undefined,
   onLongPress = () => undefined,
-}: {
-  item: NoxMedia.Song;
-  index: number;
-  currentPlaying: boolean;
-  playSong: (song: NoxMedia.Song) => void;
-  checking?: boolean;
-  onChecked?: () => void;
-  onLongPress?: () => void;
-  checkedList: boolean[];
-}) {
+  networkCellular = false,
+}: Props) {
   const currentPlaylist = useNoxSetting(state => state.currentPlaylist);
   const playerSetting = useNoxSetting(state => state.playerSetting);
   const playerStyle = useNoxSetting(state => state.playerStyle);
@@ -78,6 +82,7 @@ function SongInfo({
           : 'transparent',
         borderRadius: 5,
         paddingLeft: 10,
+        opacity: peekCache(item) || !networkCellular ? undefined : 0.5,
       }}
     >
       <TouchableRipple

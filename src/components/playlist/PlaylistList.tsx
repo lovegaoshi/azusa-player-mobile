@@ -7,6 +7,7 @@ import TrackPlayer from 'react-native-track-player';
 import { Dimensions } from 'react-native';
 import { useTranslation } from 'react-i18next';
 import { useDebounce } from 'use-debounce';
+import { useNetInfo } from '@react-native-community/netinfo';
 
 import { styles } from '../style';
 import SongInfo from './SongInfo';
@@ -46,6 +47,7 @@ export default () => {
   const [debouncedSearchText] = useDebounce(searchText, 500);
   const [refreshing, setRefreshing] = useState(false);
   const playlistRef = React.useRef<any>(null);
+  const netInfo = useNetInfo();
 
   const resetSelected = (val = false) =>
     setSelected(Array(currentPlaylist.songList.length).fill(val));
@@ -354,6 +356,7 @@ export default () => {
                 setChecking(true);
                 toggleSelected(getSongIndex(item, index));
               }}
+              networkCellular={netInfo.type === 'cellular'}
             />
           )}
           keyExtractor={(item, index) => `${item.id}.${index}`}
