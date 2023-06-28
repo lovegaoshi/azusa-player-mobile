@@ -49,16 +49,17 @@ jobs:
           timeout_minutes: 10
           max_attempts: 10
           command: yarn
-          
+
       - name: Pod Install
         run: cd ios && pod install
 
       - name: build
         run: cd ios && xcodebuild -scheme example -workspace example.xcworkspace -configuration Release clean archive -archivePath "build/APM.xcarchive" CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO CODE_SIGNING_ALLOWED=NO
-     
+
       - name: archive to ipa
-        run: | 
-          mkdir ios/build/Payload
+        run: |
+          cd ios
+          mkdir build/Payload
           mv build/APM.xcarchive/Products/Applications/example.app build/Payload/example.app
           cd build
           zip -r APM.ipa Payload/
