@@ -1,4 +1,4 @@
-name: ios auto release
+name: iOS auto release
 on:
   workflow_dispatch:
 jobs:
