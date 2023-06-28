@@ -46,9 +46,9 @@ export enum STORAGE_KEYS {
 const appID = 'NoxPlayerMobile';
 
 export const DEFAULT_SETTING: NoxStorage.PlayerSettingDict = {
-  autoRSSUpdate: false,
+  autoRSSUpdate: true,
   skin: '诺莺nox',
-  parseSongName: false,
+  parseSongName: true,
   keepSearchedSongListWhenPlaying: false,
   settingExportLocation: EXPORT_OPTIONS.LOCAL,
   personalCloudIP: '',
@@ -62,12 +62,12 @@ export const DEFAULT_SETTING: NoxStorage.PlayerSettingDict = {
   noCookieBiliSearch: false,
   playerRepeat: NoxRepeatMode.SHUFFLE,
   dataSaver: false,
-  fastBiliSearch: false,
+  fastBiliSearch: true,
   noInterruption: false,
 
   appID,
   language: undefined,
-  cacheSize: 100,
+  cacheSize: 0,
 };
 
 export const saveItem = async (key: string, value: any) => {

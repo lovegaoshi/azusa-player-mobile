@@ -52,9 +52,24 @@ export const saveCacheMedia = async (
     });
 };
 
-export const loadCacheMedia = async (song: NoxMedia.Song, prefix = 'file://') => {
+export const loadCacheMedia = async (
+  song: NoxMedia.Song,
+  prefix = 'file://'
+) => {
   const cachedPath = cache.get(noxCacheKey(song));
-  if (!cachedPath || !(await RNFetchBlob.fs.exists(cachedPath))) return undefined;
+  if (!cachedPath || !(await RNFetchBlob.fs.exists(cachedPath)))
+    return undefined;
   // no RNFetchBlob.fs.readStream?
   return `${prefix}${cachedPath}`;
+};
+
+export const peekCache = (song: NoxMedia.Song) => {
+  return cache.peek(noxCacheKey(song));
+};
+
+export const clearCache = () => {
+  for (const val of cache.values()) {
+    RNFetchBlob.fs.unlink(val);
+  }
+  cache.clear();
 };

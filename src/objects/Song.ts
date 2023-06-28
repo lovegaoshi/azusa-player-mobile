@@ -86,6 +86,7 @@ export const resolveUrl = async (song: NoxMedia.Song) => {
   // luckily bilibili doesnt seem to care for now
   const url: string =
     (await loadCacheMedia(song)) || (await fetchPlayUrlPromise(song));
+  logger.debug(`[Song] ${song.name} is resolved to ${url}`);
   return {
     url,
     headers: customReqHeader(url, { referer: 'https://www.bilibili.com/' }),

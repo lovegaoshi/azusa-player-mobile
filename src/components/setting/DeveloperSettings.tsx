@@ -11,13 +11,19 @@ import useRenderSettingItem from './useRenderSetting';
 import useVersionCheck from '../../hooks/useVersionCheck';
 import { getLog } from '../../utils/Logger';
 import useAlert from '../dialogs/useAlert';
-import { SelectSettingEntry, SettingEntry, dummySelectSettingEntry } from './SetttingEntries';
+import {
+  SelectSettingEntry,
+  SettingEntry,
+  dummySelectSettingEntry,
+} from './SetttingEntries';
+import { clearCache } from '../../utils/Cache';
 
 enum ICONS {
   setlog = 'console',
   update = 'update',
   showlog = 'bug',
   cache = 'floppy',
+  clearcache = 'delete-sweep',
 }
 
 const developerSettings: { [key: string]: SettingEntry } = {
@@ -31,7 +37,6 @@ const developerSettings: { [key: string]: SettingEntry } = {
 const { getState, setState } = logStore;
 
 export default () => {
-
   const playerSetting = useNoxSetting(state => state.playerSetting);
   const setPlayerSetting = useNoxSetting(state => state.setPlayerSetting);
   const { t } = useTranslation();
@@ -64,14 +69,14 @@ export default () => {
         LOGLEVEL.CRITICAL,
         LOGLEVEL.NONE,
       ],
-      renderOption: (option: number) =>
-        logLevelString[option],
+      renderOption: (option: number) => logLevelString[option],
       defaultIndex: getState().logLevel,
       onClose: () => setSelectVisible(false),
       onSubmit: (index: number) => {
         setState({ logLevel: index });
         setSelectVisible(false);
       },
+      title: t('DeveloperSettings.LogLevel'),
     } as SelectSettingEntry<number>);
   };
 
@@ -81,7 +86,7 @@ export default () => {
       0, // disabled
       100, // ~500 MB
       1000, // ~5 GB
-      9999 // 50 GB
+      9999, // 50 GB
     ];
     const defaultIndex = options.indexOf(playerSetting.cacheSize);
     setCurrentSelectOption({
@@ -92,6 +97,7 @@ export default () => {
         setPlayerSetting({ cacheSize: options[index] });
         setSelectVisible(false);
       },
+      title: t('DeveloperSettings.CacheSizeName'),
     } as SelectSettingEntry<number>);
   };
 
@@ -116,7 +122,7 @@ export default () => {
             'LogLevel',
             selectLogLevel,
             'DeveloperSettings',
-            (val) => `${val}: ${logLevelString[getState().logLevel]}`
+            val => `${val}: ${logLevelString[getState().logLevel]}`
           )}
           {!APPSTORE &&
             renderListItem(
@@ -130,7 +136,16 @@ export default () => {
             'CacheSize',
             selectCacheLevel,
             'DeveloperSettings',
-            (val) => `max ${playerSetting.cacheSize} songs cached`
+            () =>
+              t('DeveloperSettings.CacheSizeDesc2', {
+                val: playerSetting.cacheSize,
+              })
+          )}
+          {renderListItem(
+            ICONS.clearcache,
+            'ClearCache',
+            clearCache,
+            'DeveloperSettings'
           )}
         </List.Section>
       </ScrollView>
@@ -138,7 +153,7 @@ export default () => {
         visible={selectVisible}
         options={currentSelectOption.options}
         renderOptionTitle={currentSelectOption.renderOption}
-        title={String(t('DeveloperSettings.LogLevelName'))}
+        title={currentSelectOption.title}
         defaultIndex={currentSelectOption.defaultIndex}
         onClose={currentSelectOption.onClose}
         onSubmit={currentSelectOption.onSubmit}
