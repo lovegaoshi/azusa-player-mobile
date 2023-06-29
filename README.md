@@ -59,6 +59,8 @@
 
 安卓用户在右边的release下载最新版本apk。
 
+苹果用户在右边的release下载最新版本ipa。然后[按这个方法](https://zhuanlan.zhihu.com/p/99397647)安装。大概。
+
 ## 使用
 请参考[电闹播放器的介绍](https://www.bilibili.com/video/BV1bv4y1p7K4/?spm_id_from=333.999.0.0)。
 
