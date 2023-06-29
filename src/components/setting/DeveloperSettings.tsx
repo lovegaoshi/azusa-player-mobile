@@ -16,7 +16,7 @@ import {
   SettingEntry,
   dummySelectSettingEntry,
 } from './SetttingEntries';
-import { clearCache } from '../../utils/Cache';
+import NoxMediaCache from '../../utils/Cache';
 
 enum ICONS {
   setlog = 'console',
@@ -144,8 +144,12 @@ export default () => {
           {renderListItem(
             ICONS.clearcache,
             'ClearCache',
-            clearCache,
-            'DeveloperSettings'
+            NoxMediaCache.clearCache,
+            'DeveloperSettings',
+            () =>
+              t('DeveloperSettings.ClearCacheDesc2', {
+                val: NoxMediaCache.cacheSize(),
+              })
           )}
         </List.Section>
       </ScrollView>
