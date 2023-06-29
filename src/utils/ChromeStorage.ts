@@ -67,7 +67,7 @@ export const DEFAULT_SETTING: NoxStorage.PlayerSettingDict = {
 
   appID,
   language: undefined,
-  cacheSize: 0,
+  cacheSize: 1,
 };
 
 export const saveItem = async (key: string, value: any) => {

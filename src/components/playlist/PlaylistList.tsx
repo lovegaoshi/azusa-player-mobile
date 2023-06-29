@@ -7,6 +7,7 @@ import TrackPlayer from 'react-native-track-player';
 import { Dimensions } from 'react-native';
 import { useTranslation } from 'react-i18next';
 import { useDebounce } from 'use-debounce';
+import { useNetInfo } from '@react-native-community/netinfo';
 
 import { styles } from '../style';
 import SongInfo from './SongInfo';
@@ -46,6 +47,7 @@ export default () => {
   const [debouncedSearchText] = useDebounce(searchText, 500);
   const [refreshing, setRefreshing] = useState(false);
   const playlistRef = React.useRef<any>(null);
+  const netInfo = useNetInfo();
 
   const resetSelected = (val = false) =>
     setSelected(Array(currentPlaylist.songList.length).fill(val));
@@ -96,6 +98,16 @@ export default () => {
         process: (val: RegExpExecArray, someRows: Array<NoxMedia.Song>) =>
           someRows.filter(row => row.parsedName === val[1]),
       },
+      {
+        regex: /artist:(.+)/,
+        process: (val: RegExpExecArray, someRows: Array<NoxMedia.Song>) =>
+          someRows.filter(row => row.singer.includes(val[1])),
+      },
+      {
+        regex: /album:(.+)/,
+        process: (val: RegExpExecArray, someRows: Array<NoxMedia.Song>) =>
+          someRows.filter(row => row.album?.includes(val[1])),
+      },
     ];
     let defaultExtraction = true;
     for (const searchSubStr of searchStr.split('|')) {
@@ -115,7 +127,6 @@ export default () => {
     return rows;
   };
 
-  // TODO: useDebunce here
   const handleSearch = (searchedVal = '') => {
     if (searchedVal === '') {
       setCurrentRows(currentPlaylist.songList);
@@ -231,8 +242,8 @@ export default () => {
     const currentIndex =
       toIndex < 0
         ? currentPlaylist.songList.findIndex(
-            song => song.id === currentPlayingId
-          )
+          song => song.id === currentPlayingId
+        )
         : toIndex;
     if (currentIndex > -1) {
       playlistRef.current.scrollToIndex({
@@ -274,7 +285,7 @@ export default () => {
 
   useEffect(() => {
     setShouldReRender(val => !val);
-  }, [currentPlayingId, checking, playlistShouldReRender]);
+  }, [currentPlayingId, checking, playlistShouldReRender, netInfo.type]);
 
   useEffect(() => {
     if (!searching) {
@@ -354,6 +365,7 @@ export default () => {
                 setChecking(true);
                 toggleSelected(getSongIndex(item, index));
               }}
+              networkCellular={netInfo.type === 'cellular'}
             />
           )}
           keyExtractor={(item, index) => `${item.id}.${index}`}
