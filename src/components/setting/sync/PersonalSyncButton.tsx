@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Snackbar from 'react-native-snackbar';
 import { View, ActivityIndicator } from 'react-native';
 import { IconButton, TextInput } from 'react-native-paper';
+import { useTranslation } from 'react-i18next';
 
 import { noxBackup, noxRestore } from './PersonalCloudAuth';
 import { useNoxSetting } from '../../../hooks/useSetting';
@@ -17,12 +18,13 @@ interface Props {
 }
 
 const ImportSyncFavButton = ({ cloudAddress, cloudID }: Props) => {
+  const { t } = useTranslation();
   const [loading, setLoading] = useState(false);
   const initPlayer = useNoxSetting(state => state.initPlayer);
 
   const errorHandling = (
     e: Error,
-    msg = '歌单同步自私有云失败，错误记录在控制台里'
+    msg = t('Sync.PersonalCloudDownloadFail')
   ) => {
     logger.error(e);
     Snackbar.show({ text: msg });
@@ -37,9 +39,9 @@ const ImportSyncFavButton = ({ cloudAddress, cloudID }: Props) => {
       // theoretically this is always safe
       const initializedStorage = await importPlayerContent(response);
       await initPlayer(initializedStorage);
-      Snackbar.show({ text: '歌单同步自私有云成功！' });
+      Snackbar.show({ text: t('Sync.PersonalCloudDownloadSuccess') });
     } else {
-      errorHandling(new Error('云端歌单不存在'), '云端歌单不存在');
+      errorHandling(new Error(String(t('Sync.PersonalCloudDownloadFail'))), String(t('Sync.PersonalCloudDownloadFail')));
     }
     setLoading(false);
     return response;
@@ -53,11 +55,12 @@ const ImportSyncFavButton = ({ cloudAddress, cloudID }: Props) => {
 };
 
 const ExportSyncFavButton = ({ cloudAddress, cloudID }: Props) => {
+  const { t } = useTranslation();
   const [loading, setLoading] = useState(false);
 
   const errorHandling = (
     e: Error,
-    msg = '歌单上传到私有云失败，错误记录在控制台里'
+    msg = String(t('Sync.PersonalCloudUploadFailSnackbar'))
   ) => {
     logger.error(e);
     Snackbar.show({ text: msg });
@@ -69,7 +72,7 @@ const ExportSyncFavButton = ({ cloudAddress, cloudID }: Props) => {
     const exportedDict = await exportPlayerContent();
     const response = await noxBackup(exportedDict, cloudAddress, cloudID);
     if (response.status === 200) {
-      Snackbar.show({ text: '歌单上传到私有云成功！' });
+      Snackbar.show({ text: t('Sync.PersonalCloudUploadSuccess') });
     } else {
       errorHandling(new Error(String(response.status)));
     }
@@ -90,23 +93,10 @@ interface textProps {
   placeholder: string;
 }
 
-const personalCloudIPTextField: textProps = {
-  settingKey: 'personalCloudIP',
-  label: '私有云地址',
-  placeholder: '末尾带/',
-};
-
-const personalCloudIDTextField: textProps = {
-  settingKey: 'personalCloudID',
-  label: '私有云key',
-  placeholder: '',
-};
-
 const SetTextField = ({ settingKey, label, placeholder }: textProps) => {
   const playerSetting = useNoxSetting(state => state.playerSetting);
   const playerStyle = useNoxSetting(state => state.playerStyle);
   const setPlayerSetting = useNoxSetting(state => state.setPlayerSetting);
-
   const saveVal = (val: string) => setPlayerSetting({ [settingKey]: val });
 
   return (
@@ -123,7 +113,21 @@ const SetTextField = ({ settingKey, label, placeholder }: textProps) => {
 };
 
 export default () => {
+  const { t } = useTranslation();
   const playerSetting = useNoxSetting(state => state.playerSetting);
+
+  const personalCloudIPTextField: textProps = {
+    settingKey: 'personalCloudIP',
+    label: t('Sync.personalCloudIPLabel'),
+    placeholder: t('Sync.personalCloudIPPlaceholder'),
+  };
+
+  const personalCloudIDTextField: textProps = {
+    settingKey: 'personalCloudID',
+    label: t('Sync.personalCloudKeyLabel'),
+    placeholder: t('Sync.personalCloudKeyPlaceholder'),
+  };
+
   return (
     <View>
       <SetTextField {...personalCloudIPTextField} />

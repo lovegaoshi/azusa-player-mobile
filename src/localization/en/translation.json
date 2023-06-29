@@ -138,7 +138,23 @@
     "Local": "Local",
     "Dropbox": "Dropbox",
     "PersonalCloud": "Personal Cloud",
-    "ExportLocation": "Select Sync:"
+    "ExportLocation": "Select Sync:",
+    "DropboxUploadSuccess": "歌单上传到Dropbox成功！",
+    "DropboxUploadFail": "云端歌单不存在",
+    "DropboxUploadFailSnackbar": "歌单上传到Dropbox失败，错误记录在控制台里",
+    "DropboxDownloadSuccess": "歌单同步自Dropbox成功！",
+    "DropboxDownloadFail": "云端歌单不存在",
+    "DropboxDownloadFailSnackbar": "歌单同步到Dropbox失败，错误记录在控制台里",
+    "PersonalCloudUploadSuccess": "歌单上传到PersonalCloud成功！",
+    "PersonalCloudUploadFail": "云端歌单不存在",
+    "PersonalCloudUploadFailSnackbar": "歌单上传到PersonalCloud失败，错误记录在控制台里",
+    "PersonalCloudDownloadSuccess": "歌单同步自PersonalCloud成功！",
+    "PersonalCloudDownloadFail": "云端歌单不存在",
+    "PersonalCloudDownloadFailSnackbar": "歌单同步到PersonalCloud失败，错误记录在控制台里",
+    "personalCloudIPPlaceholder": "end with forward slash /",
+    "personalCloudIPLabel": "Private cloud IP address",
+    "personalCloudKeyPlaceholder": "",
+    "personalCloudKeyLabel": "Private cloud key"
   },
   "SleepTimer": {
     "Title": "Sleep Timer"
@@ -164,5 +180,9 @@
     "UpdatedVersionAlertTitle": "Noxplayer updated!",
     "UpdatedVersionAlertContent": "Noxplayer updated to version {{version}}! Check out the release notes at github.",
     "UpdateGo2Github": "Go to Github"
+  },
+  "CustomSkin": {
+    "SearchFailMsg": "读入自定义皮肤JSON出错",
+    "SearchBarLabel": "自定义皮肤JSON网址"
   }
 }
