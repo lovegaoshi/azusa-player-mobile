@@ -87,7 +87,7 @@ jobs:
       - name: Release APK
         uses: softprops/action-gh-release@v1
         with:
-          name: 'Android ${{env.COMMIT_TAG}}'
+          name: 'Release ${{env.COMMIT_TAG}}'
           tag_name: '${{env.COMMIT_TAG}}'
           files: android/app/build/outputs/apk/release/*.apk
           generate_release_notes: true
@@ -246,7 +246,7 @@ jobs:
       - name: Release IPA
         uses: softprops/action-gh-release@v1
         with:
-          name: 'Android ${{env.COMMIT_TAG}}'
+          name: 'Release ${{env.COMMIT_TAG}}'
           tag_name: '${{env.COMMIT_TAG}}'
           files: ios/build/APM.ipa
           generate_release_notes: true
