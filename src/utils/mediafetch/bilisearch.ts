@@ -22,9 +22,10 @@ const URL_BILI_SEARCH =
 export const fetchBiliSearchList = async (
   kword: string,
   progressEmitter: (val: number) => void = () => undefined,
-  fastSearch = false
+  fastSearch = false,
+  cookiedSearch = false
 ) => {
-  function timestampToSeconds(timestamp: string) {
+  const timestampToSeconds = (timestamp: string) => {
     const timeArray = timestamp.split(':').map(parseFloat);
     let seconds = 0;
     if (timeArray.length === 1) {
@@ -37,7 +38,7 @@ export const fetchBiliSearchList = async (
       seconds = timeArray[0] * 3600 + timeArray[1] * 60 + timeArray[2]; // calculate total seconds
     }
     return seconds;
-  }
+  };
 
   const fastSearchResolveBVID = async (bvobjs: any[]) => {
     /**
@@ -88,7 +89,7 @@ export const fetchBiliSearchList = async (
           referer: 'https://www.bilibili.com',
           cookie: 'buvid3=coolbeans',
         },
-        credentials: 'omit',
+        credentials: cookiedSearch ? 'include' : 'omit',
       },
       resolveBiliBVID: fastSearch
         ? async (bvobjs, progressEmitter) => await fastSearchResolveBVID(bvobjs)
@@ -104,15 +105,22 @@ interface regexFetchProps {
   url: string;
   progressEmitter: (val: number) => void;
   fastSearch: boolean;
+  cookiedSearch?: boolean;
 }
 
 const regexFetch = async ({
   url,
   progressEmitter = () => undefined,
   fastSearch,
+  cookiedSearch = false,
 }: regexFetchProps) => {
   return songFetch({
-    videoinfos: await fetchBiliSearchList(url, progressEmitter, fastSearch),
+    videoinfos: await fetchBiliSearchList(
+      url,
+      progressEmitter,
+      fastSearch,
+      cookiedSearch
+    ),
     useBiliTag: false,
     progressEmitter,
   });

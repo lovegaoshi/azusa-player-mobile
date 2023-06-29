@@ -22,6 +22,7 @@ interface Props {
   favList?: string[];
   useBiliTag?: boolean;
   fastSearch?: boolean;
+  cookiedSearch?: boolean;
 }
 
 export const matchBiliURL = (input: string) => {
@@ -54,6 +55,7 @@ export const searchBiliURLs = async ({
   favList = [],
   useBiliTag = false,
   fastSearch = false,
+  cookiedSearch = false,
 }: Props) => {
   try {
     const matchRegex = matchBiliURL(input);
@@ -71,6 +73,7 @@ export const searchBiliURLs = async ({
       url: input,
       progressEmitter,
       fastSearch,
+      cookiedSearch,
     });
     progressEmitter(0);
     return results;
@@ -80,10 +83,3 @@ export const searchBiliURLs = async ({
   progressEmitter(0);
   return [];
 };
-
-/**
-   [
-      /youtu(?:.*\/v\/|.*v=|\.be\/)([A-Za-z0-9_-]{11})/,
-      ({ reExtracted }) => getYoutubeVideo({ bvid: reExtracted[1] }),
-    ],
- */
