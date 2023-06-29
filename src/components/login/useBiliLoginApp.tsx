@@ -165,9 +165,14 @@ const useBiliLogin = () => {
         addCookie(`${domain}.data`, json.data);
         for (const cookieEntry of json.data.cookie_info.cookies) {
           try {
-            await CookieManager.set(domain, cookieEntry);
+            await CookieManager.set(domain, {
+              name: cookieEntry.name,
+              value: cookieEntry.value,
+            });
           } catch {
-            logger.warn(`${cookieEntry} failed in saving cookie.`);
+            logger.warn(
+              `${JSON.stringify(cookieEntry)} failed in saving cookie.`
+            );
           }
         }
         await CookieManager.set(domain, {

@@ -100,7 +100,17 @@ export default ({ navigation }: Props) => {
         </Button>
         <Text>{t('Login.Disclaimer')}</Text>
         <View style={{ paddingVertical: 10 }} />
-        {qrcode !== '' && <QRCode value={qrcode} size={300} />}
+        {qrcode !== '' && (
+          <View
+            style={{
+              paddingHorizontal: 20,
+              paddingVertical: 20,
+              backgroundColor: 'white',
+            }}
+          >
+            <QRCode value={qrcode} size={300} />
+          </View>
+        )}
       </View>
     );
   };
