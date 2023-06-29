@@ -2,10 +2,11 @@ import * as React from 'react';
 import CookieManager from '@react-native-cookies/cookies';
 import { useTranslation } from 'react-i18next';
 import Snackbar from 'react-native-snackbar';
+import md5 from 'md5';
 
 import { useNoxSetting } from '../../hooks/useSetting';
 import { logger } from '../../utils/Logger';
-import bfetch from '../../utils/BiliFetch';
+import bfetch, { parseBodyParams } from '../../utils/BiliFetch';
 import { addCookie } from '../../utils/ChromeStorage';
 import { getLoginStatus } from '../../utils/Login';
 import { QRCodeReq, LoginInfo } from './useBiliLogin';
@@ -34,8 +35,12 @@ const loginAPI = 'https://api.bilibili.com/x/web-interface/nav';
 const getQRCodeAPI =
   'https://passport.bilibili.com/x/passport-tv-login/qrcode/auth_code';
 const probeQRCodeAPI =
-  'https://passport.bilibili.com/qrcode/getLoginInfo';
+  'https://passport.bilibili.com/x/passport-tv-login/qrcode/poll';
 const oauthKey = 'auth_code';
+
+const signBody = (body: any) => {
+  return md5(`${parseBodyParams(body)}59b43e04ad6965f34319062b478f83dd`);
+};
 
 const loginQRVerification = async () => {
   const verificationURL =
@@ -50,21 +55,21 @@ const loginQRVerification = async () => {
   ]?.value;
   if (!accessKey || !refreshToken) return false;
   const res = await throttler.biliApiLimiter.schedule(async () =>
-    bfetch(`${verificationURL}`, {
-      method: 'POST',
-      credentials: 'include',
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
-      },
-      body: {
-        appkey: '4409e2ce8ffd12b8',
-        ts: '0',
-        sign: 'e134154ed6add881d28fbdf68653cd9c',
-        'access_key': accessKey,
-        'refresh_token': refreshToken,
-      },
-    })
-  ),
+      bfetch(`${verificationURL}`, {
+        method: 'POST',
+        credentials: 'include',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: {
+          appkey: '4409e2ce8ffd12b8',
+          ts: '0',
+          sign: 'e134154ed6add881d28fbdf68653cd9c',
+          access_key: accessKey,
+          refresh_token: refreshToken,
+        },
+      })
+    ),
     json = await res.json();
   logger.debug(json);
 };
@@ -76,7 +81,6 @@ const useBiliLogin = () => {
   const [qrcodeExpire, setQrCodeExpire] = React.useState<number>(-1);
   const [loginInfo, setLoginInfo] = React.useState<LoginInfo | null>(null);
   const [initialize, setInitialize] = React.useState<boolean>(true);
-
 
   const getBiliLoginStatus = async () => {
     setInitialize(true);
@@ -100,20 +104,20 @@ const useBiliLogin = () => {
     setQrCodeExpire(-1);
   };
 
-
   const getQRLoginReq = async () => {
-    // https://github.com/SocialSisterYi/bilibili-API-collect/blob/master/docs/login/login_action/QR.md
-    // https://passport.bilibili.com/x/passport-login/web/qrcode/generate doesnt work.
+    const QRReqBody = {
+      appkey: '4409e2ce8ffd12b8',
+      local_id: '0',
+      ts: 0, //Math.floor(Date.now() / 1000),
+    };
     const response = await bfetch(getQRCodeAPI, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded',
       },
       body: {
-        appkey: '4409e2ce8ffd12b8',
-        local_id: '0',
-        ts: '0',
-        sign: 'e134154ed6add881d28fbdf68653cd9c',
+        ...QRReqBody,
+        sign: signBody(QRReqBody),
       },
     });
     const json = await response.json();
@@ -126,17 +130,20 @@ const useBiliLogin = () => {
 
   const probeQRLogin = async () => {
     try {
+      const probeBody = {
+        appkey: '4409e2ce8ffd12b8',
+        [oauthKey]: qrcodeKey,
+        local_id: '0',
+        ts: 0,
+      };
       const response = await bfetch(probeQRCodeAPI, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded',
         },
         body: {
-          appkey: '4409e2ce8ffd12b8',
-          local_id: '0',
-          ts: '0',
-          sign: 'e134154ed6add881d28fbdf68653cd9c',
-          [oauthKey]: qrcodeKey,
+          ...probeBody,
+          sign: signBody(probeBody),
         },
       });
       const json = await response.json();
@@ -163,8 +170,14 @@ const useBiliLogin = () => {
             logger.warn(`${cookieEntry} failed in saving cookie.`);
           }
         }
-        await CookieManager.set(domain, { name: 'access_token', value: json.data.access_token });
-        await CookieManager.set(domain, { name: 'refresh_token', value: json.data.refresh_token });
+        await CookieManager.set(domain, {
+          name: 'access_token',
+          value: json.data.access_token,
+        });
+        await CookieManager.set(domain, {
+          name: 'refresh_token',
+          value: json.data.refresh_token,
+        });
         logger.debug(await CookieManager.get(domain));
         clearQRLogin();
       }
@@ -177,7 +190,6 @@ const useBiliLogin = () => {
       });
     }
   };
-
 
   // check QR login status every 4 seconds
   React.useEffect(() => {
@@ -216,8 +228,7 @@ const useBiliLogin = () => {
     getBiliLoginStatus,
     getQRLoginReq,
     loginQRVerification,
-  }
-
+  };
 };
 
 export default useBiliLogin;

@@ -1,6 +1,16 @@
 export const DEFAULT_UA =
   'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/111.0.0.0 Safari/537.36 Edg/111.0.1661.62';
 
+export const parseBodyParams = (body: any) => {
+  const formBody = [];
+  for (const [key, value] of Object.entries(body)) {
+    formBody.push(
+      encodeURIComponent(key) + '=' + encodeURIComponent(String(value))
+    );
+  }
+  return formBody.join('&');
+};
+
 export default async function BiliFetch(
   url: string,
   paramsProp: NoxNetwork.RequestInit | RequestInit = {
@@ -23,13 +33,7 @@ export default async function BiliFetch(
     params.body &&
     params.headers.get('Content-Type') === 'application/x-www-form-urlencoded'
   ) {
-    const formBody = [];
-    for (const [key, value] of Object.entries(params.body)) {
-      formBody.push(
-        encodeURIComponent(key) + '=' + encodeURIComponent(String(value))
-      );
-    }
-    params.body = formBody.join('&');
+    params.body = parseBodyParams(params.body);
   }
   return fetch(url, params);
 }

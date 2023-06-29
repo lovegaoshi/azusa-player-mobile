@@ -12,7 +12,7 @@ import { useNoxSetting } from '../../hooks/useSetting';
 import { logger } from '../../utils/Logger';
 import GenericInputDialog from '../dialogs/GenericInputDialog';
 import BiliSelectFavButtton from './BiliSelectFavButtton';
-import useBiliLogin from './useBiliLogin';
+import useBiliLogin from './useBiliLoginApp';
 
 interface Props {
   navigation: DrawerNavigationProp<ParamListBase>;
@@ -36,7 +36,6 @@ export default ({ navigation }: Props) => {
     getBiliLoginStatus,
     getQRLoginReq,
   } = useBiliLogin();
-
 
   const manualInputCookies = async (input: { [key: string]: string }) => {
     if (input.SESSDATA.length > 0 && input.bili_jct.length > 0) {
