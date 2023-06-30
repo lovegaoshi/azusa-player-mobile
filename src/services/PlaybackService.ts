@@ -4,8 +4,8 @@ import { resolveUrl, NULL_TRACK } from '../objects/Song';
 import { initBiliHeartbeat } from '../utils/Bilibili/BiliOperate';
 import { NoxStorage } from '../types/storage';
 import { saveLastPlayDuration } from '../utils/ChromeStorage';
-import NoxMediaCache from '../utils/Cache';
 import logger from '../utils/Logger';
+import NoxCache from '../utils/Cache';
 
 let lastBiliHeartBeat: string[] = ['', ''];
 
@@ -87,7 +87,10 @@ export async function PlaybackService() {
       }
       resolveUrl(event.track.song)
         .then(updatedMetadata => {
-          NoxMediaCache.saveCacheMedia(event.track!.song, updatedMetadata);
+          NoxCache.noxMediaCache?.saveCacheMedia(
+            event.track!.song,
+            updatedMetadata
+          );
           TrackPlayer.getActiveTrack().then(currentTrack => {
             TrackPlayer.load({ ...currentTrack, ...updatedMetadata });
           });

@@ -180,6 +180,7 @@ jobs:
           packageName: com.noxplay.noxplayer
           releaseFiles: android/app/build/outputs/bundle/release/app-release.aab
           track: internal
+          status: draft
 
   buildIPA:
     runs-on: macos-12

@@ -9,7 +9,8 @@ import { View, GestureResponderEvent } from 'react-native';
 import { useNoxSetting } from '../../hooks/useSetting';
 import { seconds2MMSS } from '../../utils/Utils';
 import { PLAYLIST_ENUMS } from '../../enums/Playlist';
-import NoxMediaCache from '../../utils/Cache';
+import NoxCache from '../../utils/Cache';
+
 
 interface Props {
   item: NoxMedia.Song;
@@ -82,7 +83,7 @@ function SongInfo({
           : 'transparent',
         borderRadius: 5,
         paddingLeft: 10,
-        opacity: NoxMediaCache.peekCache(item) || !networkCellular ? undefined : 0.5,
+        opacity: NoxCache.noxMediaCache?.peekCache(item) || !networkCellular ? undefined : 0.5,
       }}
     >
       <TouchableRipple
