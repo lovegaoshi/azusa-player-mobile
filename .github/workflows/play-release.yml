@@ -72,6 +72,9 @@ jobs:
 
       - name: gradle build AAB
         run: cd android && chmod +x gradlew && ./gradlew bundleRelease
+        
+      - name: Push changes to master
+        uses: ad-m/github-push-action@master
           
       - uses: r0adkll/upload-google-play@v1
         with:
