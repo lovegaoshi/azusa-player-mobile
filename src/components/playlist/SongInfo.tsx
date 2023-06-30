@@ -9,7 +9,7 @@ import { View, GestureResponderEvent } from 'react-native';
 import { useNoxSetting } from '../../hooks/useSetting';
 import { seconds2MMSS } from '../../utils/Utils';
 import { PLAYLIST_ENUMS } from '../../enums/Playlist';
-import { peekCache } from '../../utils/Cache';
+import NoxMediaCache from '../../utils/Cache';
 
 interface Props {
   item: NoxMedia.Song;
@@ -44,7 +44,7 @@ function SongInfo({
   );
   let [title, id, artist] = [
     playerSetting.parseSongName &&
-    currentPlaylist.type !== PLAYLIST_ENUMS.TYPE_SEARCH_PLAYLIST
+      currentPlaylist.type !== PLAYLIST_ENUMS.TYPE_SEARCH_PLAYLIST
       ? item.parsedName
       : item.name,
     item.id,
@@ -82,7 +82,7 @@ function SongInfo({
           : 'transparent',
         borderRadius: 5,
         paddingLeft: 10,
-        opacity: peekCache(item) || !networkCellular ? undefined : 0.5,
+        opacity: NoxMediaCache.peekCache(item) || !networkCellular ? undefined : 0.5,
       }}
     >
       <TouchableRipple

@@ -2,10 +2,18 @@ import React, { useState } from 'react';
 import { IconButton, Text, TextInput, ProgressBar } from 'react-native-paper';
 import { View } from 'react-native';
 import { useTranslation } from 'react-i18next';
-import { useClipboard } from '@react-native-clipboard/clipboard';
+import ShareMenu, { ShareCallback } from 'react-native-share-menu';
+import { useNavigation } from '@react-navigation/native';
+import { ViewEnum } from '../../enums/View';
 
 import { searchBiliURLs, matchBiliURL } from '../../utils/BiliSearch';
 import { useNoxSetting } from '../../hooks/useSetting';
+
+type SharedItem = {
+  mimeType: string;
+  data: string;
+  extraData: any;
+};
 
 export default ({
   onSearched = (songs: Array<NoxMedia.Song>) => console.log(songs),
@@ -21,8 +29,37 @@ export default ({
   const setCurrentPlaylist = useNoxSetting(state => state.setCurrentPlaylist);
   const playerSetting = useNoxSetting(state => state.playerSetting);
   const playerStyle = useNoxSetting(state => state.playerStyle);
-  const [prevClipboard, setPrevClipboard] = useState('');
-  const [clipboard] = useClipboard();
+  const navigationGlobal = useNavigation();
+  const [sharedData, setSharedData] = useState<any>(null);
+  const [sharedMimeType, setSharedMimeType] = useState<string | null>(null);
+
+  const handleShare = React.useCallback((item?: SharedItem) => {
+    if (!item) {
+      return;
+    }
+
+    const { mimeType, data, extraData } = item;
+
+    setSharedData(data);
+    setSharedMimeType(mimeType);
+    // You can receive extra data from your custom Share View
+    navigationGlobal.navigate(ViewEnum.PLAYER_PLAYLIST as never);
+    handleSearch(data);
+  }, []);
+
+  React.useEffect(() => {
+    ShareMenu.getInitialShare(handleShare as ShareCallback);
+  }, []);
+
+  React.useEffect(() => {
+    const listener = ShareMenu.addNewShareListener(
+      handleShare as ShareCallback
+    );
+
+    return () => {
+      listener.remove();
+    };
+  }, []);
 
   const handleSearch = async (val = searchVal) => {
     progressEmitter(100);
@@ -43,18 +80,6 @@ export default ({
     setSearchPlaylist(newSearchPlaylist);
     setCurrentPlaylist(newSearchPlaylist);
   };
-
-  React.useEffect(() => {
-    console.log(clipboard);
-    if (clipboard !== prevClipboard) {
-      setPrevClipboard(clipboard);
-      const matchRegex = matchBiliURL(clipboard);
-      if (matchRegex !== null) {
-        setSearchVal(clipboard);
-        handleSearch(clipboard);
-      }
-    }
-  }, [clipboard]);
 
   return (
     <View style={{ width: '100%', height: 50 }}>

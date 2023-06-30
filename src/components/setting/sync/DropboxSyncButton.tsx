@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Snackbar from 'react-native-snackbar';
 import { View, ActivityIndicator } from 'react-native';
 import { IconButton } from 'react-native-paper';
+import { useTranslation } from 'react-i18next';
 
 import { loginDropbox, noxBackup, noxRestore } from './DropboxAuth';
 import { useNoxSetting } from '../../../hooks/useSetting';
@@ -12,12 +13,13 @@ import {
 } from '../../../utils/ChromeStorage';
 
 const ImportSyncFavButton = () => {
+  const { t } = useTranslation();
   const [loading, setLoading] = useState(false);
   const initPlayer = useNoxSetting(state => state.initPlayer);
 
   const errorHandling = (
     e: Error,
-    msg = '歌单同步自私有云失败，错误记录在控制台里'
+    msg = t('Sync.DropboxDownloadFail')
   ) => {
     logger.error(e);
     Snackbar.show({ text: msg });
@@ -32,9 +34,9 @@ const ImportSyncFavButton = () => {
       // theoretically this is always safe
       const initializedStorage = await importPlayerContent(response);
       await initPlayer(initializedStorage);
-      Snackbar.show({ text: '歌单同步自私有云成功！' });
+      Snackbar.show({ text: t('Sync.DropboxDownloadSuccess') });
     } else {
-      errorHandling(new Error('云端歌单不存在'), '云端歌单不存在');
+      errorHandling(new Error(String(t('Sync.DropboxDownloadFail'))), String(t('Sync.DropboxDownloadFail')));
     }
     setLoading(false);
     return response;
@@ -53,11 +55,12 @@ const ImportSyncFavButton = () => {
 };
 
 const ExportSyncFavButton = () => {
+  const { t } = useTranslation();
   const [loading, setLoading] = useState(false);
 
   const errorHandling = (
     e: Error,
-    msg = '歌单上传到私有云失败，错误记录在控制台里'
+    msg = String(t('Sync.DropboxUploadFailSnackbar'))
   ) => {
     logger.error(e);
     Snackbar.show({ text: msg });
@@ -69,7 +72,7 @@ const ExportSyncFavButton = () => {
     const exportedDict = await exportPlayerContent();
     const response = await noxBackup(exportedDict);
     if (response.status === 200) {
-      Snackbar.show({ text: '歌单上传到私有云成功！' });
+      Snackbar.show({ text: t('Sync.DropboxUploadSuccess') });
     } else {
       errorHandling(new Error(String(response.status)));
     }

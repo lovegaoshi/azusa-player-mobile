@@ -7,7 +7,8 @@ import {
 } from './ChromeStorage';
 
 interface optionsProps {
-  max: number;
+  max?: number;
+  [key: string]: any;
 }
 
 const noxCacheKey = (song: NoxMedia.Song) => `${song.bvid}|${song.id}`;
@@ -21,7 +22,7 @@ class NoxMediaCache {
     savedCache?: [string, LRUCache.Entry<string>][]
   ) {
     this.cache = new LRUCache<string, string>({
-      max: options.max,
+      max: options.max || 1,
       dispose: async (value, key) => {
         RNFetchBlob.fs.unlink(value);
       },
@@ -31,6 +32,9 @@ class NoxMediaCache {
       this.cache.load(savedCache);
     }
   }
+
+  loadCache = (cache: [string, LRUCache.Entry<string>][]) =>
+    this.cache.load(cache);
 
   dumpCache = () => {
     saveCachedMediaMapping(this.cache.dump());
@@ -73,25 +77,20 @@ class NoxMediaCache {
     }
     this.cache.clear();
   };
+  cacheSize = () => Array.from(this.cache.keys()).length;
 }
 
-let cache: LRUCache<string, string>;
+let cache: NoxMediaCache = new NoxMediaCache({ max: 1 });
 
 export const initCache = async (
   options: optionsProps,
   savedCache?: [string, LRUCache.Entry<string>][]
 ) => {
   try {
-    cache = new LRUCache<string, string>({
-      max: options.max,
-      dispose: async (value, key) => {
-        RNFetchBlob.fs.unlink(value);
-      },
-      allowStale: false,
-    } as LRUCache.Options<string, string>);
+    cache = new NoxMediaCache(options, savedCache);
   } catch (e) {
     console.error(e, cache, options);
-    cache = new LRUCache<string, string>({
+    cache = new NoxMediaCache({
       max: 1,
       dispose: async (value, key) => {
         RNFetchBlob.fs.unlink(value);
@@ -99,51 +98,8 @@ export const initCache = async (
       allowStale: false,
     } as LRUCache.Options<string, string>);
   }
-  cache.load(savedCache || (await loadCachedMediaMapping()));
+  cache.loadCache(savedCache || (await loadCachedMediaMapping()));
   return cache;
 };
 
-export const dumpCache = () => {
-  saveCachedMediaMapping(cache.dump());
-};
-
-export const saveCacheMedia = async (
-  song: NoxMedia.Song,
-  resolvedURL: any,
-  extension?: string
-) => {
-  if (cache.max < 2 || !resolvedURL.url.startsWith('http')) return;
-  if (!extension) {
-    const regexMatch = /.+\/{2}.+\/{1}.+(\.\w+)\?*.*/.exec(resolvedURL.url);
-    extension = regexMatch ? regexMatch[1] : 'm4a';
-  }
-  // https://github.com/joltup/rn-fetch-blob#download-to-storage-directly
-  RNFetchBlob.config({ fileCache: true, appendExt: extension })
-    .fetch('GET', resolvedURL.url, resolvedURL.headers)
-    .then(res => {
-      cache.set(noxCacheKey(song), res.path());
-      dumpCache();
-    });
-};
-
-export const loadCacheMedia = async (
-  song: NoxMedia.Song,
-  prefix = 'file://'
-) => {
-  const cachedPath = cache.get(noxCacheKey(song));
-  if (!cachedPath || !(await RNFetchBlob.fs.exists(cachedPath)))
-    return undefined;
-  // no RNFetchBlob.fs.readStream?
-  return `${prefix}${cachedPath}`;
-};
-
-export const peekCache = (song: NoxMedia.Song) => {
-  return cache.peek(noxCacheKey(song));
-};
-
-export const clearCache = () => {
-  for (const val of cache.values()) {
-    RNFetchBlob.fs.unlink(val);
-  }
-  cache.clear();
-};
+export default cache;

@@ -105,9 +105,10 @@
     "noInterruptionDesc": "阻止Event.RemoteDuck中断播放（需重启）",
     "CacheSizeName": "最大缓存歌数目",
     "CacheSizeDesc": "Disables Event.RemoteDuck to prevent interruption (NEED RESTART)",
-    "CacheSizeDesc2": "最大缓存 {{val}} 首歌",
+    "CacheSizeDesc2": "最大缓存 {{val}} 首歌（需重启）",
     "ClearCacheName": "清除缓存",
     "ClearCacheDesc": "删除所有缓存的歌曲",
+    "ClearCacheDesc2": "删除所有缓存的{{val}}首歌",
     "LogLevel0": "调试",
     "LogLevel1": "一般",
     "LogLevel2": "警告",
@@ -135,7 +136,23 @@
     "Local": "本地",
     "Dropbox": "Dropbox",
     "PersonalCloud": "私有云",
-    "ExportLocation": "选择同步方式："
+    "ExportLocation": "选择同步方式：",
+    "DropboxUploadSuccess": "歌单上传到Dropbox成功！",
+    "DropboxUploadFail": "云端歌单不存在",
+    "DropboxUploadFailSnackbar": "歌单上传到Dropbox失败，错误记录在控制台里",
+    "DropboxDownloadSuccess": "歌单同步自Dropbox成功！",
+    "DropboxDownloadFail": "云端歌单不存在",
+    "DropboxDownloadFailSnackbar": "歌单同步到Dropbox失败，错误记录在控制台里",
+    "PersonalCloudUploadSuccess": "歌单上传到PersonalCloud成功！",
+    "PersonalCloudUploadFail": "云端歌单不存在",
+    "PersonalCloudUploadFailSnackbar": "歌单上传到PersonalCloud失败，错误记录在控制台里",
+    "PersonalCloudDownloadSuccess": "歌单同步自PersonalCloud成功！",
+    "PersonalCloudDownloadFail": "云端歌单不存在",
+    "PersonalCloudDownloadFailSnackbar": "歌单同步到PersonalCloud失败，错误记录在控制台里",
+    "personalCloudIPPlaceholder": "末尾带/",
+    "personalCloudIPLabel": "私有云地址",
+    "personalCloudKeyPlaceholder": "",
+    "personalCloudKeyLabel": "私有云key"
   },
   "SleepTimer": {
     "Title": "定时停止播放"
@@ -161,5 +178,9 @@
     "UpdatedVersionAlertTitle": "管人播放器更新了",
     "UpdatedVersionAlertContent": "管人播放器更新到了版本 {{version}}!去GitHub查看更新内容.",
     "UpdateGo2Github": "前往Gayhub"
+  },
+  "CustomSkin": {
+    "SearchFailMsg": "读入自定义皮肤JSON出错",
+    "SearchBarLabel": "自定义皮肤JSON网址"
   }
 }

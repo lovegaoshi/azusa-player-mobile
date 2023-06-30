@@ -31,12 +31,10 @@ const GEN_SETTING_BOOLEAN: SettingEntry[] = [
     settingName: 'fastBiliSearch',
     settingCategory: 'GeneralSettings',
   },
-  /*
   {
     settingName: 'noCookieBiliSearch',
     settingCategory: 'GeneralSettings',
   },
-  */
 ];
 
 export default () => {
