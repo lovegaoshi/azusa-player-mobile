@@ -45,10 +45,10 @@ export default ({
         />
       ) : (
         <Pressable onPress={onPressed}>
-          <Text variant="titleMedium" style={{}}>
+          <Text variant="titleMedium" >
             {currentPlaylist.title}
           </Text>
-          <Text variant="labelMedium" style={{}}>
+          <Text variant="labelMedium">
             {`${currentPlaylist.songList.length} / ${seconds2HHMMSS(
               currentPlaylist.songList.reduce(
                 (accumulator, currentValue) =>

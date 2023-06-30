@@ -20,6 +20,38 @@ interface Props {
 
 const domain = 'https://bilibili.com';
 
+const notLoginTextStyle = {
+  paddingVertical: 20,
+  textAlign: 'center',
+} as any;
+
+const textContainerStyle = {
+  alignContent: 'center',
+  alignItems: 'center',
+} as any;
+
+const inputButtonContainerStyle = {
+  paddingVertical: 10,
+};
+
+const qrCodeContainerStyle = {
+  paddingHorizontal: 20,
+  paddingVertical: 20,
+  backgroundColor: 'white',
+};
+
+const loggedInContainerStyle = {
+  paddingHorizontal: 5,
+};
+
+const avatarContainerStyle = {
+  flexDirection: 'row',
+  paddingLeft: 20,
+  paddingVertical: 10,
+} as any;
+
+const avatarUsernameStyle = { paddingLeft: 10 };
+
 export default ({ navigation }: Props) => {
   const { t } = useTranslation();
   const playerStyle = useNoxSetting(state => state.playerStyle);
@@ -79,19 +111,16 @@ export default ({ navigation }: Props) => {
     };
 
     return (
-      <View style={{ alignContent: 'center', alignItems: 'center' }}>
+      <View style={textContainerStyle}>
         <Text
-          style={{
-            paddingVertical: 20,
-            textAlign: 'center',
-          }}
+          style={notLoginTextStyle}
         >
           {t('Login.BilibiliNotLoggedIn')}
         </Text>
         <Button mode="contained-tonal" onPress={generateBiliQRCode}>
           {t('Login.BilibiliLoginButton')}
         </Button>
-        <View style={{ paddingVertical: 10 }} />
+        <View style={inputButtonContainerStyle} />
         <Button
           mode="contained-tonal"
           onPress={() => setInputCookieVisible(true)}
@@ -99,18 +128,11 @@ export default ({ navigation }: Props) => {
           {t('Login.BilibiliCookieInputButton')}
         </Button>
         <Text>{t('Login.Disclaimer')}</Text>
-        <View style={{ paddingVertical: 10 }} />
-        {qrcode !== '' && (
-          <View
-            style={{
-              paddingHorizontal: 20,
-              paddingVertical: 20,
-              backgroundColor: 'white',
-            }}
-          >
+        <View style={qrCodeContainerStyle}>
+          {qrcode !== '' && (
             <QRCode value={qrcode} size={300} />
-          </View>
-        )}
+          )}
+        </View>
       </View>
     );
   };
@@ -122,12 +144,10 @@ export default ({ navigation }: Props) => {
       CookieManager.clearAll();
     };
     return (
-      <View style={{ paddingHorizontal: 5 }}>
-        <View
-          style={{ flexDirection: 'row', paddingLeft: 20, paddingVertical: 10 }}
-        >
+      <View style={loggedInContainerStyle}>
+        <View style={avatarContainerStyle}>
           <Avatar.Image source={{ uri: loginInfo.avatar }}></Avatar.Image>
-          <View style={{ paddingLeft: 10 }}>
+          <View style={avatarUsernameStyle}>
             <Text variant="headlineSmall">{loginInfo.name}</Text>
             <Button onPress={logout}>LOGOUT</Button>
           </View>
@@ -139,12 +159,10 @@ export default ({ navigation }: Props) => {
   };
 
   return (
-    <SafeAreaView
-      style={{
-        backgroundColor: playerStyle.customColors.maskedBackgroundColor,
-        flex: 1,
-      }}
-    >
+    <SafeAreaView style={{
+      backgroundColor: playerStyle.customColors.maskedBackgroundColor,
+      flex: 1,
+    }}>
       {initialize ? (
         <ActivityIndicator size={100} />
       ) : loginInfo ? (
@@ -162,19 +180,3 @@ export default ({ navigation }: Props) => {
     </SafeAreaView>
   );
 };
-
-/** head bar
-      <Card.Title
-        title="Bilibili"
-        left={props => (
-          <IconButton
-            {...props}
-            icon="menu"
-            size={40}
-            onPress={() => navigation.openDrawer()}
-          />
-        )}
-        titleVariant="headlineLarge"
-        titleStyle={{ paddingLeft: 10 }}
-      />
- */
