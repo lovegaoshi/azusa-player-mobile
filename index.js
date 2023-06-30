@@ -7,6 +7,8 @@ import 'react-native-url-polyfill/auto';
 import App from './src/App';
 import { PlaybackService } from './src/services';
 import { name as appName } from './app.json';
+import Share from './src/components/share/Share';
 
 AppRegistry.registerComponent(appName, () => App);
+AppRegistry.registerComponent('ShareMenuModuleComponent', () => Share);
 TrackPlayer.registerPlaybackService(() => PlaybackService);
