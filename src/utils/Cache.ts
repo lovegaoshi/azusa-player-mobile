@@ -11,6 +11,10 @@ interface optionsProps {
   [key: string]: any;
 }
 
+interface NoxCaches {
+  noxMediaCache?: NoxMediaCache;
+}
+
 const noxCacheKey = (song: NoxMedia.Song) => `${song.bvid}|${song.id}`;
 
 // TODO: use this! Don't let functioanl programming get over you!
@@ -46,6 +50,7 @@ class NoxMediaCache {
     extension?: string
   ) => {
     if (this.cache.max < 2 || !resolvedURL.url.startsWith('http')) return;
+    console.warn(this.cache);
     if (!extension) {
       const regexMatch = /.+\/{2}.+\/{1}.+(\.\w+)\?*.*/.exec(resolvedURL.url);
       extension = regexMatch ? regexMatch[1] : 'm4a';
@@ -80,17 +85,16 @@ class NoxMediaCache {
   cacheSize = () => Array.from(this.cache.keys()).length;
 }
 
-let cache: NoxMediaCache = new NoxMediaCache({ max: 1 });
+let cache: NoxCaches = {};
 
 export const initCache = async (
   options: optionsProps,
   savedCache?: [string, LRUCache.Entry<string>][]
 ) => {
   try {
-    cache = new NoxMediaCache(options, savedCache);
+    cache.noxMediaCache = new NoxMediaCache(options, savedCache);
   } catch (e) {
-    console.error(e, cache, options);
-    cache = new NoxMediaCache({
+    cache.noxMediaCache = new NoxMediaCache({
       max: 1,
       dispose: async (value, key) => {
         RNFetchBlob.fs.unlink(value);
@@ -98,7 +102,7 @@ export const initCache = async (
       allowStale: false,
     } as LRUCache.Options<string, string>);
   }
-  cache.loadCache(savedCache || (await loadCachedMediaMapping()));
+  cache.noxMediaCache.loadCache(savedCache || (await loadCachedMediaMapping()));
   return cache;
 };
 
