@@ -90,4 +90,5 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     height: 140,
   },
+  rowView: { flexDirection: 'row' as "row" },
 });

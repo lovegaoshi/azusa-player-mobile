@@ -4,10 +4,19 @@ import { Button, Dialog, Portal, Text, Checkbox } from 'react-native-paper';
 import { useTranslation } from 'react-i18next';
 import { v4 as uuidv4 } from 'uuid';
 
+const dialogTitleStyle = { maxHeight: 100 };
+const dialogStyle = { maxHeight: '60%', minHeight: '50%', zIndex: 100000 };
+const dialogContentStyle = { flex: 1, minHeight: '20%' };
+const flatListStyle = { flex: 6 };
+const pressableStyle = { paddingVertical: 5 };
+const viewStyle = { flexDirection: 'row' as "row" };
+const checkboxStyle = { paddingTop: 3 };
+const dialogActionsStyle = { maxHeight: 60, paddingBottom: 0 };
+
 const DialogTitle = ({ title }: { title: string | undefined }) => {
   if (!title) return <View></View>;
   return (
-    <Dialog.Title style={{ maxHeight: 100 }}>
+    <Dialog.Title style={dialogTitleStyle}>
       {title.length > 20 ? title.substring(0, 20) + '...' : title}
     </Dialog.Title>
   );
@@ -55,28 +64,24 @@ export default ({
 
   return (
     <Portal>
-      <Dialog
-        visible={visible}
-        onDismiss={handleClose}
-        style={{ maxHeight: '60%', minHeight: '50%', zIndex: 100000 }}
-      >
+      <Dialog visible={visible} onDismiss={handleClose} style={dialogStyle}>
         <DialogTitle title={title} />
-        <Dialog.Content style={{ flex: 1, minHeight: '20%' }}>
+        <Dialog.Content style={dialogContentStyle}>
           <FlatList
-            style={{ flex: 6 }}
+            style={flatListStyle}
             data={options}
             renderItem={({ item, index }) => (
               <Pressable
                 onPress={() => toggleIndex(index)}
-                style={{ paddingVertical: 5 }}
+                style={pressableStyle}
                 key={index}
               >
-                <View style={{ flexDirection: 'row' }} key={index}>
+                <View style={viewStyle} key={index}>
                   <Checkbox
                     status={currentIndex[index] ? 'checked' : 'unchecked'}
                     onPress={() => toggleIndex(index)}
                   />
-                  <Text variant="titleLarge" style={{ paddingTop: 3 }}>
+                  <Text variant="titleLarge" style={checkboxStyle}>
                     {renderOptionTitle(item)}
                   </Text>
                 </View>
@@ -84,7 +89,7 @@ export default ({
             )}
           />
         </Dialog.Content>
-        <Dialog.Actions style={{ maxHeight: 60, paddingBottom: 0 }}>
+        <Dialog.Actions style={dialogActionsStyle}>
           <Button onPress={handleClose}>{t('Dialog.cancel')}</Button>
           <Button onPress={handleSubmit}>{t('Dialog.ok')}</Button>
         </Dialog.Actions>

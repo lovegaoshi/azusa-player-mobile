@@ -36,6 +36,7 @@ const { LightTheme, DarkTheme } = adaptNavigationTheme({
 
 const CombinedDefaultTheme = merge(MD3LightTheme, LightTheme);
 const CombinedDarkTheme = merge(MD3DarkTheme, DarkTheme);
+const PlayerStyle = { backgroundColor: 'transparent' }
 
 const useSplash = (duration = 1000) => {
   const [isReady, setIsReady] = React.useState(false);
@@ -62,7 +63,7 @@ const App: React.FC = () => {
   function NoxPlayer() {
     return (
       <React.Fragment>
-        <Tab.Navigator style={{ backgroundColor: 'transparent' }}>
+        <Tab.Navigator style={PlayerStyle}>
           <Tab.Screen
             name={ViewEnum.PLAYER_COVER}
             component={Player}

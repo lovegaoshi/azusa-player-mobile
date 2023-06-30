@@ -3,6 +3,16 @@ import { Pressable, View, FlatList } from 'react-native';
 import { Button, Dialog, Portal, Text, RadioButton } from 'react-native-paper';
 import { useTranslation } from 'react-i18next';
 import { useNoxSetting } from '../../hooks/useSetting';
+import { styles } from '../style';
+
+const dialogStyle = { maxHeight: '60%', minHeight: '50%' };
+const dialogTitleStyle = { maxHeight: 100 };
+const dialogContentStyle = { flex: 1, minHeight: '20%' };
+const dialogListStyle = { flex: 6 };
+const dialogItemStyle = { paddingVertical: 5 };
+const dialogTextStyle = { paddingTop: 3 };
+const dialogActionStyle = { maxHeight: 60, paddingBottom: 0 };
+
 interface Props {
   visible: boolean;
   fromList: NoxMedia.Playlist;
@@ -43,9 +53,9 @@ export default ({
       <Dialog
         visible={visible}
         onDismiss={handleClose}
-        style={{ maxHeight: '60%', minHeight: '50%' }}
+        style={dialogStyle}
       >
-        <Dialog.Title style={{ maxHeight: 100 }}>
+        <Dialog.Title style={dialogTitleStyle}>
           {t('CopiedPlaylistDialog.title', {
             title:
               fromList.title.length > 20
@@ -53,24 +63,24 @@ export default ({
                 : fromList.title,
           })}
         </Dialog.Title>
-        <Dialog.Content style={{ flex: 1, minHeight: '20%' }}>
+        <Dialog.Content style={dialogContentStyle}>
           <FlatList
-            style={{ flex: 6 }}
+            style={dialogListStyle}
             data={playlistIds
               .filter(val => val !== fromList.id)
               .map(val => [val, playlists[val].title])}
             renderItem={({ item, index }) => (
               <Pressable
                 onPress={() => setPlaylistIndex(item[0])}
-                style={{ paddingVertical: 5 }}
+                style={dialogItemStyle}
               >
-                <View style={{ flexDirection: 'row' }}>
+                <View style={styles.rowView}>
                   <RadioButton
                     value={item[0]}
                     status={playlistIndex === item[0] ? 'checked' : 'unchecked'}
                     onPress={() => setPlaylistIndex(item[0])}
                   />
-                  <Text variant="titleLarge" style={{ paddingTop: 3 }}>
+                  <Text variant="titleLarge" style={dialogTextStyle}>
                     {item[1]}
                   </Text>
                 </View>
@@ -79,7 +89,7 @@ export default ({
             keyExtractor={item => item[0]}
           />
         </Dialog.Content>
-        <Dialog.Actions style={{ maxHeight: 60, paddingBottom: 0 }}>
+        <Dialog.Actions style={dialogActionStyle}>
           <Button onPress={handleClose}>{t('Dialog.cancel')}</Button>
           <Button onPress={handleSubmit}>{t('Dialog.ok')}</Button>
         </Dialog.Actions>

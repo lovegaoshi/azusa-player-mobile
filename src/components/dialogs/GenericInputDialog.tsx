@@ -5,6 +5,12 @@ import { useTranslation } from 'react-i18next';
 import { logger } from '../../utils/Logger';
 import { useNoxSetting } from '../../hooks/useSetting';
 
+const dialogTitleStyle = { maxHeight: 100 };
+const dialogStyle = { maxHeight: '60%', minHeight: '50%' };
+const dialogContentStyle = { flex: 1, minHeight: '20%' };
+const flatListStyle = { flex: 6 };
+const dialogActionsStyle = { maxHeight: 60, paddingBottom: 0 };
+
 interface Props {
   visible: boolean;
   options: Array<string>;
@@ -16,7 +22,7 @@ interface Props {
 const DialogTitle = ({ title }: { title: string | undefined }) => {
   if (!title) return <View></View>;
   return (
-    <Dialog.Title style={{ maxHeight: 100 }}>
+    <Dialog.Title style={dialogTitleStyle}>
       {title.length > 20 ? title.substring(0, 20) + '...' : title}
     </Dialog.Title>
   );
@@ -54,15 +60,11 @@ export default ({
   );
 
   return (
-    <Dialog
-      visible={visible}
-      onDismiss={handleClose}
-      style={{ maxHeight: '60%', minHeight: '50%' }}
-    >
+    <Dialog visible={visible} onDismiss={handleClose} style={dialogStyle}>
       <DialogTitle title={title} />
-      <Dialog.Content style={{ flex: 1, minHeight: '20%' }}>
+      <Dialog.Content style={dialogContentStyle}>
         <FlatList
-          style={{ flex: 6 }}
+          style={flatListStyle}
           data={options}
           renderItem={({ item, index }) => (
             <TextInput
@@ -77,7 +79,7 @@ export default ({
           )}
         />
       </Dialog.Content>
-      <Dialog.Actions style={{ maxHeight: 60, paddingBottom: 0 }}>
+      <Dialog.Actions style={dialogActionsStyle}>
         <Button onPress={handleClose}>{t('Dialog.cancel')}</Button>
         <Button onPress={handleSubmit}>{t('Dialog.ok')}</Button>
       </Dialog.Actions>
