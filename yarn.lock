@@ -8679,10 +8679,9 @@ react-native-screens@^3.20.0:
     react-freeze "^1.0.0"
     warn-once "^0.1.0"
 
-react-native-share-menu@^6.0.0:
+"react-native-share-menu@git+https://github.com/lovegaoshi/react-native-share-menu.git":
   version "6.0.0"
-  resolved "https://registry.npmjs.org/react-native-share-menu/-/react-native-share-menu-6.0.0.tgz#0398dd4537ca1138b774fcbff9b05a88c8329cf6"
-  integrity sha512-KdmRnqjI/B2MigSxGmhbYJ3WMJxKXj+0c47ANcVZ/PTzc2vtz6d1r4KQJgkBImXgNC+vowpuD2UGdPllxadr2A==
+  resolved "git+https://github.com/lovegaoshi/react-native-share-menu.git#369fe84d571b0c9a7a7aadda6de56a1572515513"
 
 react-native-snackbar@^2.4.0:
   version "2.6.2"

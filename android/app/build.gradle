@@ -202,10 +202,3 @@ dependencies {
 }
 
 apply from: file("../../node_modules/@react-native-community/cli-platform-android/native_modules.gradle"); applyNativeModulesAppBuildGradle(project)
-
-// https://stackoverflow.com/questions/69033022/message-error-resource-androidattr-lstar-not-found ???
-configurations.all {
-    resolutionStrategy {
-        force 'androidx.core:core-ktx:1.6.0'
-    }
-}
