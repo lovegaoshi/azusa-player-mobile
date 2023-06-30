@@ -12,6 +12,16 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
+      - name: python version_bump.py
+        run: |
+          python version_bump.py
+
+      - name: commit
+        run: |
+          git config --global user.email lovegaoshi@gaoshi.com
+          git config --global user.name lovegaoshi
+          git commit -m "build: release version bump" -a
+          
       - name: Get branch name
         run: |
           # Short name for current branch. For PRs, use target branch (base ref)
