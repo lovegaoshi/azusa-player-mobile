@@ -6,6 +6,8 @@ import React from 'react';
 import { customReqHeader } from '../../utils/BiliFetch';
 
 const mobileHeight = Dimensions.get('window').height;
+const mobileStyle = { flex: 1, height: mobileHeight };
+const fullscreenStyle = { width: '100%', height: '100%' };
 
 enum RESOLVE_TYPE {
   bvid = 'bvid',
@@ -45,7 +47,7 @@ export default (props: any) => {
       <ImageBackground
         source={{ uri: playerStyle.bkgrdImg }}
         resizeMode="cover"
-        style={{ flex: 1, height: mobileHeight }}
+        style={mobileStyle}
         {...props}
       >
         {props.children}
@@ -59,7 +61,7 @@ export default (props: any) => {
         <ImageBackground
           source={{ uri: playerStyle.bkgrdImg.identifier }}
           resizeMode="cover"
-          style={{ flex: 1, height: mobileHeight }}
+          style={mobileStyle}
           {...props}
         >
           {props.children}
@@ -80,7 +82,7 @@ export default (props: any) => {
             rate={1}
             resizeMode="cover"
           />
-          <View style={{ width: '100%', height: '100%' }}>
+          <View style={fullscreenStyle}>
             {props.children}
           </View>
         </>

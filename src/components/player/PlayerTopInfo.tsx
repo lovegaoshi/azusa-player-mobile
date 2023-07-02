@@ -11,14 +11,35 @@ interface Props {
   navigation: DrawerNavigationProp<ParamListBase>;
 }
 
+
+const iconButtonContainerStyle = {
+  alignContent: 'flex-start',
+} as any;
+
+const randomGifButtonContainerStyle = {
+  flex: 4,
+  alignContent: 'center',
+  alignItems: 'center',
+} as any;
+
+const playlistIconButtonContainerStyle = {
+  alignContent: 'flex-end',
+} as any;
+
 export default ({ navigation }: Props) => {
   const navigationGlobal = useNavigation();
   const playerStyle = useNoxSetting(state => state.playerStyle);
   const currentPlayingId = useNoxSetting(state => state.currentPlayingId);
-  // <Text>{''}</Text>
+
+  const containerStyle = {
+    ...playerStyle.playerTopBarContainer,
+    alignItems: 'center',
+  };
+
+
   return (
-    <View style={[playerStyle.playerTopBarContainer, { alignItems: 'center' }]}>
-      <View style={{ alignContent: 'flex-start' }}>
+    <View style={[containerStyle]}>
+      <View style={iconButtonContainerStyle}>
         <IconButton
           icon="menu"
           onPress={() => navigation.openDrawer()}
@@ -26,13 +47,13 @@ export default ({ navigation }: Props) => {
         />
       </View>
 
-      <View style={{ flex: 4, alignContent: 'center', alignItems: 'center' }}>
+      <View style={randomGifButtonContainerStyle}>
         <RandomGIFButton
           gifs={playerStyle.gifs}
           favList={String(currentPlayingId)}
         />
       </View>
-      <View style={{ alignContent: 'flex-end' }}>
+      <View style={playlistIconButtonContainerStyle}>
         <IconButton
           icon="playlist-music"
           onPress={() =>

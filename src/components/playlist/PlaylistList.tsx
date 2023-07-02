@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { View } from 'react-native';
+import { View, BackHandler } from 'react-native';
 import { FlashList } from '@shopify/flash-list';
 import Snackbar from 'react-native-snackbar';
 import { IconButton, Text } from 'react-native-paper';
@@ -8,6 +8,7 @@ import { Dimensions } from 'react-native';
 import { useTranslation } from 'react-i18next';
 import { useDebounce } from 'use-debounce';
 import { useNetInfo } from '@react-native-community/netinfo';
+import { useFocusEffect } from '@react-navigation/native';
 
 import { styles } from '../style';
 import SongInfo from './SongInfo';
@@ -242,8 +243,8 @@ export default () => {
     const currentIndex =
       toIndex < 0
         ? currentPlaylist.songList.findIndex(
-          song => song.id === currentPlayingId
-        )
+            song => song.id === currentPlayingId
+          )
         : toIndex;
     if (currentIndex > -1) {
       playlistRef.current.scrollToIndex({
@@ -292,6 +293,29 @@ export default () => {
       setSearchText('');
     }
   }, [searching]);
+
+  useFocusEffect(
+    React.useCallback(() => {
+      const onBackPress = () => {
+        if (checking) {
+          setChecking(false);
+          return true;
+        }
+        if (searching) {
+          setSearching(false);
+          return true;
+        }
+        return false;
+      };
+
+      const subscription = BackHandler.addEventListener(
+        'hardwareBackPress',
+        onBackPress
+      );
+
+      return () => subscription.remove();
+    }, [checking, setChecking, searching, setSearching])
+  );
 
   return (
     <View>

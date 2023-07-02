@@ -6,6 +6,7 @@ import Dialog from '../dialogs/CopiedPlaylistDialog';
 import { dummyPlaylistList } from '../../objects/Playlist';
 
 const ICON = 'playlist-plus';
+const btnStyle = { top: 10 };
 
 export const CopiedPlaylistButton = ({
   fromList,
@@ -21,7 +22,7 @@ export const CopiedPlaylistButton = ({
         onPress={() => setDialogOpen(true)}
         mode="contained"
         size={30}
-        style={{ top: 10 }}
+        style={btnStyle}
       />
       <Dialog
         visible={dialogOpen}

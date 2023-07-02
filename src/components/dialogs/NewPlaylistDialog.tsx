@@ -6,6 +6,13 @@ import { dummyPlaylist } from '../../objects/Playlist';
 import { useNoxSetting } from '../../hooks/useSetting';
 import PortaledInput from './PortaledInput';
 
+const dialogStyle = {
+  position: 'absolute' as 'absolute',
+  top: '20%',
+  left: 0,
+  right: 0,
+};
+
 interface Props {
   visible: boolean;
   fromList?: NoxMedia.Playlist;
@@ -33,11 +40,11 @@ export default ({
     const dummyList = dummyPlaylist();
     const newList = fromList
       ? {
-          ...fromList,
-          id: dummyList.id,
-          title: inputRef.current.name,
-          type: dummyList.type,
-        }
+        ...fromList,
+        id: dummyList.id,
+        title: inputRef.current.name,
+        type: dummyList.type,
+      }
       : { ...dummyList, title: inputRef.current.name };
     addPlaylist(newList);
     onSubmit();
@@ -48,12 +55,7 @@ export default ({
       <Dialog
         visible={visible}
         onDismiss={handleClose}
-        style={{
-          position: 'absolute',
-          top: '20%',
-          left: 0,
-          right: 0,
-        }}
+        style={dialogStyle}
       >
         <Dialog.Title>
           {fromList

@@ -125,6 +125,8 @@
     "BackupSettingDesc": "歌单云端备份和恢复",
     "InfoSettingName": "关于管人播放器",
     "InfoSettingDesc": "版本说明",
+    "SplashSettingName": "开屏广告",
+    "SplashSettingDesc": "观赏管人播放器的开屏广告",
     "DeveloperOptionsName": "开发者选项",
     "DeveloperOptionsDesc": "正在测试的功能",
     "LoginName": "B站登录",
@@ -182,5 +184,10 @@
   "CustomSkin": {
     "SearchFailMsg": "读入自定义皮肤JSON出错",
     "SearchBarLabel": "自定义皮肤JSON网址"
+  },
+  "About": {
+    "Disclaimer1": "本项目及其内容与哔哩哔哩公司或其任何关联公司和子公司无关、资助、授权、认可或以任何方式关联。（但我们真的很想，打电话给我们）",
+    "Disclaimer2": "本项目中使用的任何商标、服务标记、商号或其他知识产权均归各自所有者所有。",
+    "About1": "管人播放器是一个开源软件。您可以在 github.com/lovegaoshi/azusa-player-mobile 免费找到管人播放器的源代码。请考虑通过带有关键字的b站视频列表功能在哔哩哔哩上添加您的音乐流剪辑，以自动将歌切添加到视频列表中。"
   }
 }

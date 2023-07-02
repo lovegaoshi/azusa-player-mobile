@@ -13,12 +13,15 @@ import { useTranslation } from 'react-i18next';
 
 import { useNoxSetting } from '../../hooks/useSetting';
 import PortaledInput from './PortaledInput';
+import { styles } from '../style';
 
 interface Props {
   visible: boolean;
   onClose?: () => void;
   onSubmit?: (newPlaylist: NoxMedia.Playlist) => void;
 }
+
+const switchStyle = { fontSize: 18 };
 
 export default ({
   visible,
@@ -87,23 +90,23 @@ export default ({
             autofocus={false}
             selectTextOnFocus={false}
           />
-          <View style={{ flexDirection: 'row' }}>
+          <View style={styles.rowView}>
             <Switch
               value={useBiliShazam}
               onValueChange={toggleBiliShazam}
               color={playerStyle.colors.onSurfaceVariant}
             />
-            <Text style={{ fontSize: 18 }}>
+            <Text style={switchStyle}>
               {t('PlaylistSettingsDialog.useBiliShazamLabel')}
             </Text>
           </View>
-          <View style={{ flexDirection: 'row' }}>
+          <View style={styles.rowView}>
             <Switch
               value={useBiliSync}
               onValueChange={toggleBiliSync}
               color={playerStyle.colors.onSurfaceVariant}
             />
-            <Text style={{ fontSize: 18 }}>
+            <Text style={switchStyle}>
               {t('PlaylistSettingsDialog.useBiliSyncLabel')}
             </Text>
           </View>
