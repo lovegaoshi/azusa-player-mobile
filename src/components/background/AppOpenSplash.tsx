@@ -5,6 +5,7 @@ import { randomChoice } from '../../utils/Utils';
 const randomSplashes = randomChoice([
   () => require('../../assets/splash/steria2.jpg'),
   () => require('../../assets/splash/abu-10k-subs.gif'),
+  () => require('../../assets/splash/nox-3d.png'),
 ]);
 
 const style = {
