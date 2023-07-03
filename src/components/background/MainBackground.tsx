@@ -1,13 +1,11 @@
-import { ImageBackground, Dimensions, View } from 'react-native';
+import React from 'react';
+import { ImageBackground, Dimensions, View, StyleSheet } from 'react-native';
 import Video from 'react-native-video';
 import { useNoxSetting } from '../../hooks/useSetting';
 import { fetchVideoPlayUrlPromise } from '../../utils/mediafetch/resolveURL';
-import React from 'react';
 import { customReqHeader } from '../../utils/BiliFetch';
 
 const mobileHeight = Dimensions.get('window').height;
-const mobileStyle = { flex: 1, height: mobileHeight };
-const fullscreenStyle = { width: '100%', height: '100%' };
 
 enum RESOLVE_TYPE {
   bvid = 'bvid',
@@ -47,7 +45,7 @@ export default (props: any) => {
       <ImageBackground
         source={{ uri: playerStyle.bkgrdImg }}
         resizeMode="cover"
-        style={mobileStyle}
+        style={styles.mobileStyle}
         {...props}
       >
         {props.children}
@@ -61,7 +59,7 @@ export default (props: any) => {
         <ImageBackground
           source={{ uri: playerStyle.bkgrdImg.identifier }}
           resizeMode="cover"
-          style={mobileStyle}
+          style={styles.mobileStyle}
           {...props}
         >
           {props.children}
@@ -82,7 +80,7 @@ export default (props: any) => {
             rate={1}
             resizeMode="cover"
           />
-          <View style={fullscreenStyle}>
+          <View style={styles.fullscreenStyle}>
             {props.children}
           </View>
         </>
@@ -91,3 +89,19 @@ export default (props: any) => {
       return <>{props.children}</>;
   }
 };
+
+const styles = StyleSheet.create({
+  mobileStyle: {
+    flex: 1,
+    height: mobileHeight,
+  },
+  videoStyle: {
+    width: '100%',
+    height: '100%',
+    position: 'absolute',
+  },
+  fullscreenStyle: {
+    width: '100%',
+    height: '100%',
+  },
+});

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Snackbar from 'react-native-snackbar';
-import { View, ActivityIndicator } from 'react-native';
+import { View, ActivityIndicator, StyleSheet } from 'react-native';
 import { IconButton } from 'react-native-paper';
 import { useTranslation } from 'react-i18next';
 
@@ -15,12 +15,9 @@ import {
 const ImportSyncFavButton = () => {
   const { t } = useTranslation();
   const [loading, setLoading] = useState(false);
-  const initPlayer = useNoxSetting(state => state.initPlayer);
+  const initPlayer = useNoxSetting((state) => state.initPlayer);
 
-  const errorHandling = (
-    e: Error,
-    msg = t('Sync.DropboxDownloadFail')
-  ) => {
+  const errorHandling = (e: Error, msg = t('Sync.DropboxDownloadFail')) => {
     logger.error(e);
     Snackbar.show({ text: msg });
     setLoading(false);
@@ -30,13 +27,14 @@ const ImportSyncFavButton = () => {
     setLoading(true);
     const response = await noxRestore();
     if (response !== null) {
-      // error handling is in importPlayerContent. failure in there resets player data
-      // theoretically this is always safe
       const initializedStorage = await importPlayerContent(response);
       await initPlayer(initializedStorage);
       Snackbar.show({ text: t('Sync.DropboxDownloadSuccess') });
     } else {
-      errorHandling(new Error(String(t('Sync.DropboxDownloadFail'))), String(t('Sync.DropboxDownloadFail')));
+      errorHandling(
+        new Error(String(t('Sync.DropboxDownloadFail'))),
+        String(t('Sync.DropboxDownloadFail'))
+      );
     }
     setLoading(false);
     return response;
@@ -48,9 +46,14 @@ const ImportSyncFavButton = () => {
   };
 
   return loading ? (
-    <ActivityIndicator size={60} />
+    <ActivityIndicator size={60} style={styles.activityIndicator} />
   ) : (
-    <IconButton icon="cloud-download" onPress={loginAndDownload} size={60} />
+    <IconButton
+      icon="cloud-download"
+      onPress={loginAndDownload}
+      size={60}
+      style={styles.iconButton}
+    />
   );
 };
 
@@ -58,10 +61,7 @@ const ExportSyncFavButton = () => {
   const { t } = useTranslation();
   const [loading, setLoading] = useState(false);
 
-  const errorHandling = (
-    e: Error,
-    msg = String(t('Sync.DropboxUploadFailSnackbar'))
-  ) => {
+  const errorHandling = (e: Error, msg = String(t('Sync.DropboxUploadFailSnackbar'))) => {
     logger.error(e);
     Snackbar.show({ text: msg });
     setLoading(false);
@@ -86,25 +86,38 @@ const ExportSyncFavButton = () => {
   };
 
   return loading ? (
-    <ActivityIndicator size={60} />
+    <ActivityIndicator size={60} style={styles.activityIndicator} />
   ) : (
-    <IconButton icon="cloud-upload" onPress={loginAndUpload} size={60} />
+    <IconButton
+      icon="cloud-upload"
+      onPress={loginAndUpload}
+      size={60}
+      style={styles.iconButton}
+    />
   );
 };
 
 export default () => {
   return (
-    <View
-      style={{
-        flexDirection: 'row',
-        alignItems: 'center',
-        alignContent: 'center',
-        justifyContent: 'center',
-      }}
-    >
+    <View style={styles.container}>
       <ImportSyncFavButton />
-      <View style={{ width: 20 }}></View>
+      <View style={styles.spacing}></View>
       <ExportSyncFavButton />
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  activityIndicator: {
+  },
+  iconButton: {
+  },
+  spacing: {
+    width: 20,
+  },
+});

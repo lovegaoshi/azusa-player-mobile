@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { View, ActivityIndicator, SafeAreaView } from 'react-native';
+import { View, ActivityIndicator, SafeAreaView, StyleSheet } from 'react-native';
 import { Text, Avatar, Button } from 'react-native-paper';
 import { useTranslation } from 'react-i18next';
 import QRCode from 'react-native-qrcode-svg';
@@ -19,38 +19,6 @@ interface Props {
 }
 
 const domain = 'https://bilibili.com';
-
-const notLoginTextStyle = {
-  paddingVertical: 20,
-  textAlign: 'center',
-} as any;
-
-const textContainerStyle = {
-  alignContent: 'center',
-  alignItems: 'center',
-} as any;
-
-const inputButtonContainerStyle = {
-  paddingVertical: 10,
-};
-
-const qrCodeContainerStyle = {
-  paddingHorizontal: 20,
-  paddingVertical: 20,
-  backgroundColor: 'white',
-};
-
-const loggedInContainerStyle = {
-  paddingHorizontal: 5,
-};
-
-const avatarContainerStyle = {
-  flexDirection: 'row',
-  paddingLeft: 20,
-  paddingVertical: 10,
-} as any;
-
-const avatarUsernameStyle = { paddingLeft: 10 };
 
 export default ({ navigation }: Props) => {
   const { t } = useTranslation();
@@ -111,16 +79,14 @@ export default ({ navigation }: Props) => {
     };
 
     return (
-      <View style={textContainerStyle}>
-        <Text
-          style={notLoginTextStyle}
-        >
+      <View style={styles.textContainerStyle}>
+        <Text style={styles.notLoginTextStyle}>
           {t('Login.BilibiliNotLoggedIn')}
         </Text>
         <Button mode="contained-tonal" onPress={generateBiliQRCode}>
           {t('Login.BilibiliLoginButton')}
         </Button>
-        <View style={inputButtonContainerStyle} />
+        <View style={styles.inputButtonContainerStyle} />
         <Button
           mode="contained-tonal"
           onPress={() => setInputCookieVisible(true)}
@@ -128,11 +94,11 @@ export default ({ navigation }: Props) => {
           {t('Login.BilibiliCookieInputButton')}
         </Button>
         <Text>{t('Login.Disclaimer')}</Text>
-        <View style={qrCodeContainerStyle}>
-          {qrcode !== '' && (
+        {qrcode !== '' && (
+          <View style={styles.qrCodeContainerStyle}>
             <QRCode value={qrcode} size={300} />
-          )}
-        </View>
+          </View>
+        )}
       </View>
     );
   };
@@ -144,10 +110,10 @@ export default ({ navigation }: Props) => {
       CookieManager.clearAll();
     };
     return (
-      <View style={loggedInContainerStyle}>
-        <View style={avatarContainerStyle}>
+      <View style={styles.loggedInContainerStyle}>
+        <View style={styles.avatarContainerStyle}>
           <Avatar.Image source={{ uri: loginInfo.avatar }}></Avatar.Image>
-          <View style={avatarUsernameStyle}>
+          <View style={styles.avatarUsernameStyle}>
             <Text variant="headlineSmall">{loginInfo.name}</Text>
             <Button onPress={logout}>LOGOUT</Button>
           </View>
@@ -159,10 +125,12 @@ export default ({ navigation }: Props) => {
   };
 
   return (
-    <SafeAreaView style={{
-      backgroundColor: playerStyle.customColors.maskedBackgroundColor,
-      flex: 1,
-    }}>
+    <SafeAreaView
+      style={{
+        backgroundColor: playerStyle.customColors.maskedBackgroundColor,
+        flex: 1,
+      }}
+    >
       {initialize ? (
         <ActivityIndicator size={100} />
       ) : loginInfo ? (
@@ -180,3 +148,33 @@ export default ({ navigation }: Props) => {
     </SafeAreaView>
   );
 };
+
+const styles = StyleSheet.create({
+  notLoginTextStyle: {
+    paddingVertical: 20,
+    textAlign: 'center',
+  },
+  textContainerStyle: {
+    alignContent: 'center',
+    alignItems: 'center',
+  },
+  inputButtonContainerStyle: {
+    paddingVertical: 10,
+  },
+  qrCodeContainerStyle: {
+    paddingHorizontal: 20,
+    paddingVertical: 20,
+    backgroundColor: 'white',
+  },
+  loggedInContainerStyle: {
+    paddingHorizontal: 5,
+  },
+  avatarContainerStyle: {
+    flexDirection: 'row',
+    paddingLeft: 20,
+    paddingVertical: 10,
+  },
+  avatarUsernameStyle: {
+    paddingLeft: 10,
+  },
+});

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
 import { IconButton } from 'react-native-paper';
 import { useNavigation, ParamListBase } from '@react-navigation/native';
 import { DrawerNavigationProp } from '@react-navigation/drawer';
@@ -11,35 +11,14 @@ interface Props {
   navigation: DrawerNavigationProp<ParamListBase>;
 }
 
-
-const iconButtonContainerStyle = {
-  alignContent: 'flex-start',
-} as any;
-
-const randomGifButtonContainerStyle = {
-  flex: 4,
-  alignContent: 'center',
-  alignItems: 'center',
-} as any;
-
-const playlistIconButtonContainerStyle = {
-  alignContent: 'flex-end',
-} as any;
-
 export default ({ navigation }: Props) => {
   const navigationGlobal = useNavigation();
   const playerStyle = useNoxSetting(state => state.playerStyle);
   const currentPlayingId = useNoxSetting(state => state.currentPlayingId);
 
-  const containerStyle = {
-    ...playerStyle.playerTopBarContainer,
-    alignItems: 'center',
-  };
-
-
   return (
-    <View style={[containerStyle]}>
-      <View style={iconButtonContainerStyle}>
+    <View style={[styles.containerStyle, playerStyle.playerTopBarContainer]}>
+      <View style={styles.iconButtonContainerStyle}>
         <IconButton
           icon="menu"
           onPress={() => navigation.openDrawer()}
@@ -47,13 +26,13 @@ export default ({ navigation }: Props) => {
         />
       </View>
 
-      <View style={randomGifButtonContainerStyle}>
+      <View style={styles.randomGifButtonContainerStyle}>
         <RandomGIFButton
           gifs={playerStyle.gifs}
           favList={String(currentPlayingId)}
         />
       </View>
-      <View style={playlistIconButtonContainerStyle}>
+      <View style={styles.playlistIconButtonContainerStyle}>
         <IconButton
           icon="playlist-music"
           onPress={() =>
@@ -65,3 +44,20 @@ export default ({ navigation }: Props) => {
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  iconButtonContainerStyle: {
+    alignContent: 'flex-start',
+  },
+  randomGifButtonContainerStyle: {
+    flex: 4,
+    alignContent: 'center',
+    alignItems: 'center',
+  },
+  playlistIconButtonContainerStyle: {
+    alignContent: 'flex-end',
+  },
+  containerStyle: {
+    alignItems: 'center',
+  },
+});

@@ -1,16 +1,10 @@
 import * as React from 'react';
-import {
-  Checkbox,
-  IconButton,
-  Text,
-  TouchableRipple,
-} from 'react-native-paper';
-import { View, GestureResponderEvent } from 'react-native';
+import { Checkbox, IconButton, Text, TouchableRipple } from 'react-native-paper';
+import { View, GestureResponderEvent, StyleSheet } from 'react-native';
 import { useNoxSetting } from '../../hooks/useSetting';
 import { seconds2MMSS } from '../../utils/Utils';
 import { PLAYLIST_ENUMS } from '../../enums/Playlist';
 import NoxCache from '../../utils/Cache';
-
 
 interface Props {
   item: NoxMedia.Song;
@@ -24,7 +18,7 @@ interface Props {
   networkCellular?: boolean;
 }
 
-function SongInfo({
+const SongInfo = ({
   item,
   index,
   currentPlaying,
@@ -34,15 +28,13 @@ function SongInfo({
   onChecked = () => undefined,
   onLongPress = () => undefined,
   networkCellular = false,
-}: Props) {
+}: Props) => {
   const currentPlaylist = useNoxSetting(state => state.currentPlaylist);
   const playerSetting = useNoxSetting(state => state.playerSetting);
   const playerStyle = useNoxSetting(state => state.playerStyle);
   const setSongMenuCoords = useNoxSetting(state => state.setSongMenuCoords);
   const setSongMenuVisible = useNoxSetting(state => state.setSongMenuVisible);
-  const setSongMenuSongIndexes = useNoxSetting(
-    state => state.setSongMenuSongIndexes
-  );
+  const setSongMenuSongIndexes = useNoxSetting(state => state.setSongMenuSongIndexes);
   let [title, id, artist] = [
     playerSetting.parseSongName &&
       currentPlaylist.type !== PLAYLIST_ENUMS.TYPE_SEARCH_PLAYLIST
@@ -75,24 +67,23 @@ function SongInfo({
 
   return (
     <View
-      style={{
-        paddingTop: 5,
-        paddingBottom: 5,
-        backgroundColor: currentPlaying
-          ? playerStyle.customColors.playlistDrawerBackgroundColorTransparent
-          : 'transparent',
-        borderRadius: 5,
-        paddingLeft: 10,
-        opacity: NoxCache.noxMediaCache?.peekCache(item) || !networkCellular ? undefined : 0.5,
-      }}
+      style={[
+        styles.container,
+        {
+          backgroundColor: currentPlaying
+            ? playerStyle.customColors.playlistDrawerBackgroundColorTransparent
+            : 'transparent',
+          opacity: NoxCache.noxMediaCache?.peekCache(item) || !networkCellular ? undefined : 0.5,
+        },
+      ]}
     >
       <TouchableRipple
         onLongPress={checking ? toggleCheck : onLongPress}
         onPress={checking ? toggleCheck : () => playSong(item)}
       >
-        <View style={{ flexDirection: 'row' }}>
+        <View style={styles.row}>
           <View style={{ flex: 5 }}>
-            <View style={{ flexDirection: 'row' }}>
+            <View style={styles.row}>
               {checking && (
                 <View style={{ flex: 1 }}>
                   <Checkbox
@@ -115,14 +106,8 @@ function SongInfo({
               </View>
             </View>
           </View>
-          <View
-            style={{
-              flex: 2,
-              flexDirection: 'row',
-              justifyContent: 'flex-end',
-            }}
-          >
-            <Text variant="titleSmall" style={{ top: 13 }}>
+          <View style={styles.row}>
+            <Text variant="titleSmall" style={styles.time}>
               {seconds2MMSS(item.duration)}
             </Text>
             <IconButton
@@ -142,5 +127,21 @@ function SongInfo({
       </TouchableRipple>
     </View>
   );
-}
+};
+
+const styles = StyleSheet.create({
+  container: {
+    paddingTop: 5,
+    paddingBottom: 5,
+    borderRadius: 5,
+    paddingLeft: 10,
+  },
+  row: {
+    flexDirection: 'row',
+  },
+  time: {
+    top: 13,
+  },
+});
+
 export default SongInfo;

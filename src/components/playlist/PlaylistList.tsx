@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { View } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import { FlashList } from '@shopify/flash-list';
 import Snackbar from 'react-native-snackbar';
 import { IconButton, Text } from 'react-native-paper';
@@ -303,12 +303,7 @@ export default () => {
           onPressed={() => scrollTo()}
         />
         <View
-          style={{
-            flexDirection: 'row',
-            flex: 3,
-            bottom: 5,
-            justifyContent: 'flex-end',
-          }}
+          style={stylesLocal.container}
         >
           {checking && (
             <IconButton
@@ -342,12 +337,7 @@ export default () => {
         </View>
       </View>
       <View
-        style={{
-          ...styles.topBarContainer,
-          flex: 4,
-          // HACK: this should be justified as top bar and bottom bar all have a defined height.
-          maxHeight: Dimensions.get('window').height - 250,
-        }}
+        style={stylesLocal.playlistContainer}
       >
         <FlashList
           ref={ref => (playlistRef.current = ref)}
@@ -384,3 +374,17 @@ export default () => {
     </View>
   );
 };
+const stylesLocal = StyleSheet.create({
+  container: {
+    flexDirection: 'row',
+    flex: 3,
+    bottom: 5,
+    justifyContent: 'flex-end',
+  },
+  playlistContainer: {
+    ...styles.topBarContainer,
+    flex: 4,
+    // HACK: this should be justified as top bar and bottom bar all have a defined height.
+    maxHeight: Dimensions.get('window').height - 250,
+  },
+});

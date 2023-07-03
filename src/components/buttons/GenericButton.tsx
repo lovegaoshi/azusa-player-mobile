@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { IconButton } from 'react-native-paper';
+import { StyleSheet } from 'react-native';
 import Dialog from '../dialogs/GenericDialog';
 
 const ICON = 'shuffle';
-const btnStyle = { top: 10 };
 
 export default () => {
   const [dialogOpen, setDialogOpen] = useState(false);
@@ -15,7 +15,7 @@ export default () => {
         onPress={() => setDialogOpen(true)}
         mode="contained"
         size={30}
-        style={btnStyle}
+        style={styles.btnStyle}
       />
       <Dialog
         visible={dialogOpen}
@@ -25,3 +25,9 @@ export default () => {
     </React.Fragment>
   );
 };
+
+const styles = StyleSheet.create({
+  btnStyle: {
+    top: 10,
+  },
+});

@@ -2,9 +2,9 @@ import {
   createNativeStackNavigator,
   NativeStackNavigationProp,
 } from '@react-navigation/native-stack';
-import { View } from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
 import { ParamListBase, useNavigation } from '@react-navigation/native';
-import { List, MD3Colors, IconButton, Text } from 'react-native-paper';
+import { List, MD3Colors, IconButton } from 'react-native-paper';
 import { DrawerNavigationProp } from '@react-navigation/drawer';
 import { ScrollView } from 'react-native-gesture-handler';
 import { useTranslation } from 'react-i18next';
@@ -49,22 +49,11 @@ interface Props {
 
 export const DummySettings = () => {
   const { t } = useTranslation();
-  const playerStyle = useNoxSetting(state => state.playerStyle);
+  const playerStyle = useNoxSetting((state) => state.playerStyle);
 
   return (
-    <View
-      style={{
-        backgroundColor: playerStyle.customColors.maskedBackgroundColor,
-        flex: 1,
-      }}
-    >
-      <Text
-        style={{
-          fontSize: 60,
-          color: playerStyle.colors.primary,
-          paddingLeft: 20,
-        }}
-      >
+    <View style={[styles.dummySettingsContainer, { backgroundColor: playerStyle.customColors.maskedBackgroundColor }]}>
+      <Text style={[styles.dummySettingsText, { color: playerStyle.colors.primary }]}>
         {t('Settings.FeatureNotImplemented')}
       </Text>
     </View>
@@ -74,17 +63,12 @@ export const DummySettings = () => {
 export default ({ navigation }: Props) => {
   const { t } = useTranslation();
   const navigationGlobal = useNavigation();
-  const playerStyle = useNoxSetting(state => state.playerStyle);
+  const playerStyle = useNoxSetting((state) => state.playerStyle);
   const { renderListItem } = useRenderSettingItem();
 
   const HomeSettings = ({ navigation }: Props) => {
     return (
-      <View
-        style={{
-          flex: 1,
-          backgroundColor: playerStyle.customColors.maskedBackgroundColor,
-        }}
-      >
+      <View style={[styles.homeSettingsContainer, { backgroundColor: playerStyle.customColors.maskedBackgroundColor }]}>
         <ScrollView>
           {renderListItem(
             ICONS.HOME,
@@ -138,7 +122,7 @@ export default ({ navigation }: Props) => {
             <IconButton
               icon="menu"
               size={40}
-              style={{ width: 55, marginLeft: -5 }}
+              style={styles.menuButton}
               onPress={() => navigation.openDrawer()}
             />
           ),
@@ -177,3 +161,20 @@ export default ({ navigation }: Props) => {
     </Stack.Navigator>
   );
 };
+
+const styles = StyleSheet.create({
+  dummySettingsContainer: {
+    flex: 1,
+  },
+  dummySettingsText: {
+    fontSize: 60,
+    paddingLeft: 20,
+  },
+  homeSettingsContainer: {
+    flex: 1,
+  },
+  menuButton: {
+    width: 55,
+    marginLeft: -5,
+  },
+});

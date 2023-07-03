@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import { IconButton, Menu } from 'react-native-paper';
 import { useTranslation } from 'react-i18next';
+import { StyleSheet } from 'react-native';
 
 import Dialog from '../dialogs/CopiedPlaylistDialog';
 import { dummyPlaylistList } from '../../objects/Playlist';
 
 const ICON = 'playlist-plus';
-const btnStyle = { top: 10 };
 
 export const CopiedPlaylistButton = ({
   fromList,
@@ -22,7 +22,7 @@ export const CopiedPlaylistButton = ({
         onPress={() => setDialogOpen(true)}
         mode="contained"
         size={30}
-        style={btnStyle}
+        style={styles.btnStyle}
       />
       <Dialog
         visible={dialogOpen}
@@ -78,3 +78,7 @@ export const CopiedPlaylistMenuItem = ({
     </React.Fragment>
   );
 };
+
+const styles = StyleSheet.create({
+  btnStyle: { top: 10 }
+});

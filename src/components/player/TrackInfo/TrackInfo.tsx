@@ -27,13 +27,11 @@ export const TrackInfo: React.FC<{
   const getTrackLocation = () => {
     const currentTPQueue = getCurrentTPQueue();
     return track?.song
-      ? `#${
-          currentPlayingList.songList.findIndex(
-            song => song.id === track.song.id
-          ) + 1
-        } - ${
-          currentTPQueue.findIndex(song => song.id === track.song.id) + 1
-        }/${currentTPQueue.length}`
+      ? `#${currentPlayingList.songList.findIndex(
+        song => song.id === track.song.id
+      ) + 1
+      } - ${currentTPQueue.findIndex(song => song.id === track.song.id) + 1
+      }/${currentTPQueue.length}`
       : '';
   };
 
@@ -71,8 +69,8 @@ export const TrackInfo: React.FC<{
                 playerSetting.hideCoverInMobile
                   ? 0
                   : {
-                      uri: `${track?.artwork}`,
-                    }
+                    uri: `${track?.artwork}`,
+                  }
               }
             />
           </View>
@@ -93,19 +91,11 @@ export const TrackInfo: React.FC<{
       <Text style={[styles.titleText, { color: playerStyle.colors.primary }]}>
         {track?.title}
       </Text>
-      <View style={{ flexDirection: 'row' }}>
-        <View
-          style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}
-        >
+      <View style={styles.infoContainer}>
+        <View style={styles.favoriteButtonContainer}>
           <FavoriteButton track={track} />
         </View>
-        <View
-          style={{
-            flex: 4,
-            justifyContent: 'center',
-            alignItems: 'center',
-          }}
-        >
+        <View style={styles.artistInfoContainer}>
           <Text
             style={[styles.artistText, { color: playerStyle.colors.secondary }]}
           >
@@ -114,11 +104,7 @@ export const TrackInfo: React.FC<{
           <Text
             style={[styles.artistText, { color: playerStyle.colors.secondary }]}
           >
-            {
-              // HACK: this becomes a problem when a playlist is renamed while playing.
-              // but its okay i think. its safer to guard against eg. playlist deletion?
-              currentPlayingList.title
-            }
+            {currentPlayingList.title}
           </Text>
           <Text
             style={[styles.artistText, { color: playerStyle.colors.secondary }]}
@@ -126,9 +112,7 @@ export const TrackInfo: React.FC<{
             {getTrackLocation()}
           </Text>
         </View>
-        <View
-          style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}
-        >
+        <View style={styles.songMenuButtonContainer}>
           <SongMenuButton track={track} />
         </View>
       </View>
@@ -165,5 +149,23 @@ const styles = StyleSheet.create({
   artistText: {
     fontSize: 16,
     fontWeight: '200',
+  },
+  infoContainer: {
+    flexDirection: 'row',
+  },
+  favoriteButtonContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  artistInfoContainer: {
+    flex: 4,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  songMenuButtonContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });

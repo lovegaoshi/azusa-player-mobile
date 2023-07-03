@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { View } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import { Button } from 'react-native-paper';
 import { useTranslation } from 'react-i18next';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
@@ -36,9 +36,9 @@ interface Props {
 
 export default ({ navigation }: Props) => {
   const { t } = useTranslation();
-  const playerStyle = useNoxSetting(state => state.playerStyle);
-  const playerSetting = useNoxSetting(state => state.playerSetting);
-  const setPlayerSetting = useNoxSetting(state => state.setPlayerSetting);
+  const playerStyle = useNoxSetting((state) => state.playerStyle);
+  const playerSetting = useNoxSetting((state) => state.playerSetting);
+  const setPlayerSetting = useNoxSetting((state) => state.setPlayerSetting);
   const [selectVisible, setSelectVisible] = React.useState(false);
 
   const renderOption = (option = playerSetting.settingExportLocation) => {
@@ -69,14 +69,11 @@ export default ({ navigation }: Props) => {
 
   return (
     <View
-      style={{
-        backgroundColor: playerStyle.customColors.maskedBackgroundColor,
-        flex: 1,
-      }}
+      style={[styles.container, { backgroundColor: playerStyle.customColors.maskedBackgroundColor }]}
     >
-      <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
+      <View style={styles.buttonContainer}>
         <Button
-          style={{ paddingVertical: 10 }}
+          style={styles.button}
           onPress={() => setSelectVisible(true)}
         >{`${t('Sync.ExportLocation')} ${renderOption()}`}</Button>
       </View>
@@ -93,3 +90,16 @@ export default ({ navigation }: Props) => {
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+  buttonContainer: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+  },
+  button: {
+    paddingVertical: 10,
+  },
+});

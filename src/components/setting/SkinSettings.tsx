@@ -1,6 +1,6 @@
 import * as React from 'react';
 import FastImage from 'react-native-fast-image';
-import { View, FlatList, SafeAreaView } from 'react-native';
+import { View, FlatList, SafeAreaView, StyleSheet } from 'react-native';
 import {
   Text,
   IconButton,
@@ -29,10 +29,10 @@ const BuiltInThemes: DisplayTheme[] = [
 ];
 
 export default () => {
-  const playerStyle = useNoxSetting(state => state.playerStyle);
-  const setPlayerStyle = useNoxSetting(state => state.setPlayerStyle);
-  const playerStyles = useNoxSetting(state => state.playerStyles);
-  const setPlayerStyles = useNoxSetting(state => state.setPlayerStyles);
+  const playerStyle = useNoxSetting((state) => state.playerStyle);
+  const setPlayerStyle = useNoxSetting((state) => state.setPlayerStyle);
+  const playerStyles = useNoxSetting((state) => state.playerStyles);
+  const setPlayerStyles = useNoxSetting((state) => state.setPlayerStyles);
   const allThemes = BuiltInThemes.concat(playerStyles);
 
   const getThemeID = (skin: NoxTheme.style) =>
@@ -45,7 +45,7 @@ export default () => {
       throw new Error('requested skin URL is not an array. aborting.');
     }
     const uniqueSkins = getUniqObjects(
-      skins.filter(skin => skin.metaData).concat(playerStyles),
+      skins.filter((skin) => skin.metaData).concat(playerStyles),
       getThemeID
     );
     setPlayerStyles(uniqueSkins);
@@ -59,28 +59,17 @@ export default () => {
     };
 
     const deleteTheme = () =>
-      setPlayerStyles(playerStyles.filter(pSkin => pSkin !== skin));
+      setPlayerStyles(playerStyles.filter((pSkin) => pSkin !== skin));
 
     return (
       <TouchableRipple onPress={selectTheme}>
-        <View style={{ flexDirection: 'row' }}>
-          <View
-            style={{
-              flexDirection: 'row',
-              paddingVertical: 5,
-              flex: 5,
-              paddingLeft: 5,
-            }}
-          >
+        <View style={styles.skinItemContainer}>
+          <View style={styles.skinItemLeftContainer}>
             <FastImage
               source={{ uri: skin.metaData.themeIcon }}
-              style={{
-                width: 72,
-                height: 72,
-                borderRadius: 40,
-              }}
+              style={styles.skinItemImage}
             />
-            <View style={{ paddingLeft: 5 }}>
+            <View style={styles.skinItemTextContainer}>
               <Text
                 variant={'titleMedium'}
               >{`${skin.metaData.themeName} by ${skin.metaData.themeAuthor}`}</Text>
@@ -90,7 +79,7 @@ export default () => {
               >
                 {skin.metaData.themeDesc}
               </Text>
-              <View style={{ flexDirection: 'row' }}>
+              <View style={styles.lightbulbContainer}>
                 <IconButton
                   icon={
                     skin.metaData.darkTheme
@@ -98,17 +87,12 @@ export default () => {
                       : 'lightbulb-on'
                   }
                   size={25}
-                  style={{
-                    marginHorizontal: 0,
-                    marginVertical: 0,
-                    marginLeft: -8,
-                    marginTop: -8,
-                  }}
+                  style={styles.lightbulbIcon}
                 />
               </View>
             </View>
           </View>
-          <View style={{ alignContent: 'flex-end' }}>
+          <View style={styles.skinItemRightContainer}>
             <RadioButton
               value={themeID}
               status={checked === themeID ? 'checked' : 'unchecked'}
@@ -116,7 +100,7 @@ export default () => {
             />
             <IconButton
               icon="trash-can"
-              style={{ marginLeft: -3 }}
+              style={styles.deleteButton}
               onPress={deleteTheme}
               disabled={skin.builtin}
             />
@@ -128,17 +112,52 @@ export default () => {
 
   return (
     <SafeAreaView
-      style={{
-        backgroundColor: playerStyle.customColors.maskedBackgroundColor,
-        flex: 1,
-      }}
+      style={[styles.safeAreaView, { backgroundColor: playerStyle.customColors.maskedBackgroundColor }]}
     >
       <SkinSearchbar onSearched={loadCustomSkin} />
       <FlatList
         data={allThemes}
         renderItem={({ item, index }) => renderSkinItem(item)}
-        keyExtractor={item => getThemeID(item)}
+        keyExtractor={(item) => getThemeID(item)}
       />
     </SafeAreaView>
   );
 };
+
+const styles = StyleSheet.create({
+  safeAreaView: {
+    flex: 1,
+  },
+  skinItemContainer: {
+    flexDirection: 'row',
+  },
+  skinItemLeftContainer: {
+    flexDirection: 'row',
+    paddingVertical: 5,
+    flex: 5,
+    paddingLeft: 5,
+  },
+  skinItemImage: {
+    width: 72,
+    height: 72,
+    borderRadius: 40,
+  },
+  skinItemTextContainer: {
+    paddingLeft: 5,
+  },
+  lightbulbContainer: {
+    flexDirection: 'row',
+  },
+  lightbulbIcon: {
+    marginHorizontal: 0,
+    marginVertical: 0,
+    marginLeft: -8,
+    marginTop: -8,
+  },
+  skinItemRightContainer: {
+    alignContent: 'flex-end',
+  },
+  deleteButton: {
+    marginLeft: -3,
+  },
+});
