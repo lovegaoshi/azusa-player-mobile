@@ -36,7 +36,7 @@ const { LightTheme, DarkTheme } = adaptNavigationTheme({
 
 const CombinedDefaultTheme = merge(MD3LightTheme, LightTheme);
 const CombinedDarkTheme = merge(MD3DarkTheme, DarkTheme);
-const PlayerStyle = { backgroundColor: 'transparent' }
+const PlayerStyle = { backgroundColor: 'transparent' };
 
 const useSplash = (duration = 1000) => {
   const [isReady, setIsReady] = React.useState(false);

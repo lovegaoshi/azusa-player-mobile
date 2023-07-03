@@ -80,5 +80,5 @@ export const CopiedPlaylistMenuItem = ({
 };
 
 const styles = StyleSheet.create({
-  btnStyle: { top: 10 }
+  btnStyle: { top: 10 },
 });

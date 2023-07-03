@@ -13,12 +13,12 @@ import { SettingEntry } from './SetttingEntries';
 
 export default () => {
   const { t } = useTranslation();
-  const playerStyle = useNoxSetting((state) => state.playerStyle);
-  const playerSetting = useNoxSetting((state) => state.playerSetting);
-  const setPlayerSetting = useNoxSetting((state) => state.setPlayerSetting);
+  const playerStyle = useNoxSetting(state => state.playerStyle);
+  const playerSetting = useNoxSetting(state => state.playerSetting);
+  const setPlayerSetting = useNoxSetting(state => state.setPlayerSetting);
 
   const togglePlaylistReRender = useNoxSetting(
-    (state) => state.togglePlaylistShouldReRender
+    state => state.togglePlaylistShouldReRender
   );
 
   const saveSettings = (toggled: { [key: string]: any }) => {
@@ -42,7 +42,7 @@ export default () => {
   ) => {
     return (
       <List.Item
-        left={(props) => <IconButton icon={icon} size={40} />}
+        left={props => <IconButton icon={icon} size={40} />}
         title={String(t(`${settingCategory}.${settingName}Name`))}
         description={modifyDescription(
           t(`${settingCategory}.${settingName}Desc`)

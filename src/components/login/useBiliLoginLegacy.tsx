@@ -14,10 +14,8 @@ import { QRCodeReq, LoginInfo } from './useBiliLogin';
 
 const domain = 'https://bilibili.com';
 const loginAPI = 'https://api.bilibili.com/x/web-interface/nav';
-const getQRCodeAPI =
-  'https://passport.bilibili.com/qrcode/getLoginUrl';
-const probeQRCodeAPI =
-  'https://passport.bilibili.com/qrcode/getLoginInfo';
+const getQRCodeAPI = 'https://passport.bilibili.com/qrcode/getLoginUrl';
+const probeQRCodeAPI = 'https://passport.bilibili.com/qrcode/getLoginInfo';
 const oauthKey = 'oauthKey';
 
 const useBiliLogin = () => {
@@ -27,7 +25,6 @@ const useBiliLogin = () => {
   const [qrcodeExpire, setQrCodeExpire] = React.useState<number>(-1);
   const [loginInfo, setLoginInfo] = React.useState<LoginInfo | null>(null);
   const [initialize, setInitialize] = React.useState<boolean>(true);
-
 
   const getBiliLoginStatus = async () => {
     setInitialize(true);
@@ -50,7 +47,6 @@ const useBiliLogin = () => {
     setQrCode('');
     setQrCodeExpire(-1);
   };
-
 
   const getQRLoginReq = async () => {
     // https://github.com/SocialSisterYi/bilibili-API-collect/blob/master/docs/login/login_action/QR.md
@@ -116,7 +112,6 @@ const useBiliLogin = () => {
     }
   };
 
-
   // check QR login status every 4 seconds
   React.useEffect(() => {
     if (qrcodeExpire < 0) return () => undefined;
@@ -153,8 +148,7 @@ const useBiliLogin = () => {
     clearQRLogin,
     getBiliLoginStatus,
     getQRLoginReq,
-  }
-
+  };
 };
 
 export default useBiliLogin;

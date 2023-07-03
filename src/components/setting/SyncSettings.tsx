@@ -36,9 +36,9 @@ interface Props {
 
 export default ({ navigation }: Props) => {
   const { t } = useTranslation();
-  const playerStyle = useNoxSetting((state) => state.playerStyle);
-  const playerSetting = useNoxSetting((state) => state.playerSetting);
-  const setPlayerSetting = useNoxSetting((state) => state.setPlayerSetting);
+  const playerStyle = useNoxSetting(state => state.playerStyle);
+  const playerSetting = useNoxSetting(state => state.playerSetting);
+  const setPlayerSetting = useNoxSetting(state => state.setPlayerSetting);
   const [selectVisible, setSelectVisible] = React.useState(false);
 
   const renderOption = (option = playerSetting.settingExportLocation) => {
@@ -69,7 +69,10 @@ export default ({ navigation }: Props) => {
 
   return (
     <View
-      style={[styles.container, { backgroundColor: playerStyle.customColors.maskedBackgroundColor }]}
+      style={[
+        styles.container,
+        { backgroundColor: playerStyle.customColors.maskedBackgroundColor },
+      ]}
     >
       <View style={styles.buttonContainer}>
         <Button

@@ -80,9 +80,7 @@ export default (props: any) => {
             rate={1}
             resizeMode="cover"
           />
-          <View style={styles.fullscreenStyle}>
-            {props.children}
-          </View>
+          <View style={styles.fullscreenStyle}>{props.children}</View>
         </>
       );
     default:

@@ -29,10 +29,10 @@ const BuiltInThemes: DisplayTheme[] = [
 ];
 
 export default () => {
-  const playerStyle = useNoxSetting((state) => state.playerStyle);
-  const setPlayerStyle = useNoxSetting((state) => state.setPlayerStyle);
-  const playerStyles = useNoxSetting((state) => state.playerStyles);
-  const setPlayerStyles = useNoxSetting((state) => state.setPlayerStyles);
+  const playerStyle = useNoxSetting(state => state.playerStyle);
+  const setPlayerStyle = useNoxSetting(state => state.setPlayerStyle);
+  const playerStyles = useNoxSetting(state => state.playerStyles);
+  const setPlayerStyles = useNoxSetting(state => state.setPlayerStyles);
   const allThemes = BuiltInThemes.concat(playerStyles);
 
   const getThemeID = (skin: NoxTheme.style) =>
@@ -45,7 +45,7 @@ export default () => {
       throw new Error('requested skin URL is not an array. aborting.');
     }
     const uniqueSkins = getUniqObjects(
-      skins.filter((skin) => skin.metaData).concat(playerStyles),
+      skins.filter(skin => skin.metaData).concat(playerStyles),
       getThemeID
     );
     setPlayerStyles(uniqueSkins);
@@ -59,7 +59,7 @@ export default () => {
     };
 
     const deleteTheme = () =>
-      setPlayerStyles(playerStyles.filter((pSkin) => pSkin !== skin));
+      setPlayerStyles(playerStyles.filter(pSkin => pSkin !== skin));
 
     return (
       <TouchableRipple onPress={selectTheme}>
@@ -112,13 +112,16 @@ export default () => {
 
   return (
     <SafeAreaView
-      style={[styles.safeAreaView, { backgroundColor: playerStyle.customColors.maskedBackgroundColor }]}
+      style={[
+        styles.safeAreaView,
+        { backgroundColor: playerStyle.customColors.maskedBackgroundColor },
+      ]}
     >
       <SkinSearchbar onSearched={loadCustomSkin} />
       <FlatList
         data={allThemes}
         renderItem={({ item, index }) => renderSkinItem(item)}
-        keyExtractor={(item) => getThemeID(item)}
+        keyExtractor={item => getThemeID(item)}
       />
     </SafeAreaView>
   );

@@ -1,5 +1,10 @@
 import * as React from 'react';
-import { View, ActivityIndicator, SafeAreaView, StyleSheet } from 'react-native';
+import {
+  View,
+  ActivityIndicator,
+  SafeAreaView,
+  StyleSheet,
+} from 'react-native';
 import { Text, Avatar, Button } from 'react-native-paper';
 import { useTranslation } from 'react-i18next';
 import QRCode from 'react-native-qrcode-svg';

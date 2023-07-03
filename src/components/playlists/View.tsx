@@ -1,12 +1,13 @@
 import React, { ReactNode, useRef, useState } from 'react';
-import {
-  IconButton,
-  Divider,
-  Text,
-  TouchableRipple,
-} from 'react-native-paper';
+import { IconButton, Divider, Text, TouchableRipple } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
-import { Pressable, Dimensions, View, ImageBackground, StyleSheet } from 'react-native';
+import {
+  Pressable,
+  Dimensions,
+  View,
+  ImageBackground,
+  StyleSheet,
+} from 'react-native';
 import { useTranslation } from 'react-i18next';
 import DraggableFlatList, {
   ScaleDecorator,
@@ -209,7 +210,10 @@ export default (props: any) => {
         }
       >
         <View style={styles.addPlaylistButtonContent}>
-          <IconButton icon={'cards-heart'} onPress={() => goToPlaylist(STORAGE_KEYS.FAVORITE_PLAYLIST_KEY)} />
+          <IconButton
+            icon={'cards-heart'}
+            onPress={() => goToPlaylist(STORAGE_KEYS.FAVORITE_PLAYLIST_KEY)}
+          />
           <ShuffleAllButton />
           <AddPlaylistButton ref={addPlaylistButtonRef} />
           <TimerButton />
@@ -229,7 +233,8 @@ export default (props: any) => {
           {
             paddingLeft: 25,
             backgroundColor:
-              currentPlaylist.id === playlists[STORAGE_KEYS.SEARCH_PLAYLIST_KEY]?.id
+              currentPlaylist.id ===
+              playlists[STORAGE_KEYS.SEARCH_PLAYLIST_KEY]?.id
                 ? playerStyle.customColors.playlistDrawerBackgroundColor
                 : undefined,
           },
@@ -249,7 +254,9 @@ export default (props: any) => {
       <DraggableFlatList
         style={styles.draggableFlatList}
         data={playlistIds.map(val => playlists[val])}
-        onDragEnd={({ data }) => setPlaylistIds(data.map(playlist => playlist.id))}
+        onDragEnd={({ data }) =>
+          setPlaylistIds(data.map(playlist => playlist.id))
+        }
         keyExtractor={item => item?.id}
         renderItem={renderItem}
       />
@@ -271,7 +278,8 @@ const styles = StyleSheet.create({
     borderRadius: 40,
   },
   playlistItemTextContainer: {
-    flex: 4, justifyContent: 'center',
+    flex: 4,
+    justifyContent: 'center',
   },
   addPlaylistButtonContainer: {
     height: 50,

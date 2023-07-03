@@ -15,7 +15,7 @@ import {
 const ImportSyncFavButton = () => {
   const { t } = useTranslation();
   const [loading, setLoading] = useState(false);
-  const initPlayer = useNoxSetting((state) => state.initPlayer);
+  const initPlayer = useNoxSetting(state => state.initPlayer);
 
   const errorHandling = (e: Error, msg = t('Sync.DropboxDownloadFail')) => {
     logger.error(e);
@@ -61,7 +61,10 @@ const ExportSyncFavButton = () => {
   const { t } = useTranslation();
   const [loading, setLoading] = useState(false);
 
-  const errorHandling = (e: Error, msg = String(t('Sync.DropboxUploadFailSnackbar'))) => {
+  const errorHandling = (
+    e: Error,
+    msg = String(t('Sync.DropboxUploadFailSnackbar'))
+  ) => {
     logger.error(e);
     Snackbar.show({ text: msg });
     setLoading(false);
@@ -113,10 +116,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  activityIndicator: {
-  },
-  iconButton: {
-  },
+  activityIndicator: {},
+  iconButton: {},
   spacing: {
     width: 20,
   },

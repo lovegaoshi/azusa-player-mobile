@@ -41,7 +41,10 @@ const ImportSyncFavButton = ({ cloudAddress, cloudID }: Props) => {
       await initPlayer(initializedStorage);
       Snackbar.show({ text: t('Sync.PersonalCloudDownloadSuccess') });
     } else {
-      errorHandling(new Error(String(t('Sync.PersonalCloudDownloadFail'))), String(t('Sync.PersonalCloudDownloadFail')));
+      errorHandling(
+        new Error(String(t('Sync.PersonalCloudDownloadFail'))),
+        String(t('Sync.PersonalCloudDownloadFail'))
+      );
     }
     setLoading(false);
     return response;

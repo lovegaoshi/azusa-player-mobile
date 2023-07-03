@@ -243,8 +243,8 @@ export default () => {
     const currentIndex =
       toIndex < 0
         ? currentPlaylist.songList.findIndex(
-          song => song.id === currentPlayingId
-        )
+            song => song.id === currentPlayingId
+          )
         : toIndex;
     if (currentIndex > -1) {
       playlistRef.current.scrollToIndex({
@@ -326,9 +326,7 @@ export default () => {
           setSearchText={setSearchText}
           onPressed={() => scrollTo()}
         />
-        <View
-          style={stylesLocal.container}
-        >
+        <View style={stylesLocal.container}>
           {checking && (
             <IconButton
               icon="select-all"
@@ -360,9 +358,7 @@ export default () => {
           <PlaylistMenuButton disabled={checking} />
         </View>
       </View>
-      <View
-        style={stylesLocal.playlistContainer}
-      >
+      <View style={stylesLocal.playlistContainer}>
         <FlashList
           ref={ref => (playlistRef.current = ref)}
           data={currentRows}

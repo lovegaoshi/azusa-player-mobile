@@ -2,9 +2,9 @@ import {
   createNativeStackNavigator,
   NativeStackNavigationProp,
 } from '@react-navigation/native-stack';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import { ParamListBase, useNavigation } from '@react-navigation/native';
-import { List, MD3Colors, IconButton } from 'react-native-paper';
+import { List, MD3Colors, Text, IconButton } from 'react-native-paper';
 import { DrawerNavigationProp } from '@react-navigation/drawer';
 import { ScrollView } from 'react-native-gesture-handler';
 import { useTranslation } from 'react-i18next';
@@ -54,11 +54,21 @@ interface Props {
 
 export const DummySettings = () => {
   const { t } = useTranslation();
-  const playerStyle = useNoxSetting((state) => state.playerStyle);
+  const playerStyle = useNoxSetting(state => state.playerStyle);
 
   return (
-    <View style={[styles.dummySettingsContainer, { backgroundColor: playerStyle.customColors.maskedBackgroundColor }]}>
-      <Text style={[styles.dummySettingsText, { color: playerStyle.colors.primary }]}>
+    <View
+      style={[
+        styles.dummySettingsContainer,
+        { backgroundColor: playerStyle.customColors.maskedBackgroundColor },
+      ]}
+    >
+      <Text
+        style={[
+          styles.dummySettingsText,
+          { color: playerStyle.colors.primary },
+        ]}
+      >
         {t('Settings.FeatureNotImplemented')}
       </Text>
     </View>
@@ -68,12 +78,17 @@ export const DummySettings = () => {
 export default ({ navigation }: Props) => {
   const { t } = useTranslation();
   const navigationGlobal = useNavigation();
-  const playerStyle = useNoxSetting((state) => state.playerStyle);
+  const playerStyle = useNoxSetting(state => state.playerStyle);
   const { renderListItem } = useRenderSettingItem();
 
   const HomeSettings = ({ navigation }: Props) => {
     return (
-      <View style={[styles.homeSettingsContainer, { backgroundColor: playerStyle.customColors.maskedBackgroundColor }]}>
+      <View
+        style={[
+          styles.homeSettingsContainer,
+          { backgroundColor: playerStyle.customColors.maskedBackgroundColor },
+        ]}
+      >
         <ScrollView>
           {renderListItem(
             ICONS.HOME,

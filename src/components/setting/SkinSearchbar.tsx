@@ -6,13 +6,15 @@ import { useTranslation } from 'react-i18next';
 
 import { useNoxSetting } from '../../hooks/useSetting';
 
-const CustomSkinSearch = ({ onSearched = (vals: any) => console.log(vals) }) => {
+const CustomSkinSearch = ({
+  onSearched = (vals: any) => console.log(vals),
+}) => {
   const { t } = useTranslation();
   const [searchVal, setSearchVal] = useState(
     'https://raw.githubusercontent.com/lovegaoshi/azusa-player-mobile/master/src/components/styles/steria.json'
   );
   const [searchProgress, progressEmitter] = useState(0);
-  const playerStyle = useNoxSetting((state) => state.playerStyle);
+  const playerStyle = useNoxSetting(state => state.playerStyle);
 
   const handleSearch = async (val = searchVal) => {
     progressEmitter(100);
@@ -33,7 +35,7 @@ const CustomSkinSearch = ({ onSearched = (vals: any) => console.log(vals) }) => 
           style={styles.textInput}
           label={String(t('CustomSkin.SearchBarLabel'))}
           value={searchVal}
-          onChangeText={(val) => setSearchVal(val)}
+          onChangeText={val => setSearchVal(val)}
           onSubmitEditing={() => handleSearch(searchVal)}
           selectTextOnFocus
           selectionColor={playerStyle.customColors.textInputSelectionColor}

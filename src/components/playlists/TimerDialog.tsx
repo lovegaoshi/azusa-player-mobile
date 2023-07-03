@@ -78,11 +78,7 @@ const TimerDialog = ({
             }}
             size={30}
           />
-          <IconButton
-            size={30}
-            icon="refresh"
-            onPress={() => timerRestart()}
-          />
+          <IconButton size={30} icon="refresh" onPress={() => timerRestart()} />
         </View>
       </Dialog.Content>
     </Dialog>

@@ -20,7 +20,8 @@
     "fix": "gts fix",
     "prepare": "yarn run compile",
     "pretest": "yarn run compile",
-    "posttest": "yarn run lint"
+    "posttest": "yarn run lint",
+    "prettify": "prettier --write ./src"
   },
   "dependencies": {
     "@react-native-async-storage/async-storage": "^1.18.1",

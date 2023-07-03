@@ -1,5 +1,10 @@
 import * as React from 'react';
-import { Checkbox, IconButton, Text, TouchableRipple } from 'react-native-paper';
+import {
+  Checkbox,
+  IconButton,
+  Text,
+  TouchableRipple,
+} from 'react-native-paper';
 import { View, GestureResponderEvent, StyleSheet } from 'react-native';
 import { useNoxSetting } from '../../hooks/useSetting';
 import { seconds2MMSS } from '../../utils/Utils';
@@ -34,10 +39,12 @@ const SongInfo = ({
   const playerStyle = useNoxSetting(state => state.playerStyle);
   const setSongMenuCoords = useNoxSetting(state => state.setSongMenuCoords);
   const setSongMenuVisible = useNoxSetting(state => state.setSongMenuVisible);
-  const setSongMenuSongIndexes = useNoxSetting(state => state.setSongMenuSongIndexes);
+  const setSongMenuSongIndexes = useNoxSetting(
+    state => state.setSongMenuSongIndexes
+  );
   let [title, id, artist] = [
     playerSetting.parseSongName &&
-      currentPlaylist.type !== PLAYLIST_ENUMS.TYPE_SEARCH_PLAYLIST
+    currentPlaylist.type !== PLAYLIST_ENUMS.TYPE_SEARCH_PLAYLIST
       ? item.parsedName
       : item.name,
     item.id,
@@ -73,7 +80,10 @@ const SongInfo = ({
           backgroundColor: currentPlaying
             ? playerStyle.customColors.playlistDrawerBackgroundColorTransparent
             : 'transparent',
-          opacity: NoxCache.noxMediaCache?.peekCache(item) || !networkCellular ? undefined : 0.5,
+          opacity:
+            NoxCache.noxMediaCache?.peekCache(item) || !networkCellular
+              ? undefined
+              : 0.5,
         },
       ]}
     >
