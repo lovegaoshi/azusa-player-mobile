@@ -2,10 +2,12 @@ import { Dimensions } from 'react-native';
 import FastImage from 'react-native-fast-image';
 import { randomChoice } from '../../utils/Utils';
 
-const randomSplashes = randomChoice([
+export const localSplashes = [
   () => require('../../assets/splash/steria2.jpg'),
   () => require('../../assets/splash/abu-10k-subs.gif'),
-]);
+  () => require('../../assets/splash/nox-3d.png'),
+];
+const randomSplashes = randomChoice(localSplashes);
 
 const style = {
   flex: 1,

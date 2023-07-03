@@ -118,20 +118,22 @@
   },
   "Settings": {
     "GeneralSettingName": "General Settings",
-    "GeneralSettingDesc": "General settings for the app.",
+    "GeneralSettingDesc": "General APM settings",
     "SkinSettingName": "Skins",
-    "SkinSettingDesc": "Choose your skin.",
+    "SkinSettingDesc": "Change APM skin",
     "BackupSettingName": "Playlist Backup",
-    "BackupSettingDesc": "Backup your playlists.",
-    "InfoSettingName": "Info",
-    "InfoSettingDesc": "Info about the app.",
+    "BackupSettingDesc": "Backup APM playlists via Dropbox",
+    "InfoSettingName": "About",
+    "InfoSettingDesc": "About APM",
+    "SplashSettingName": "Splashes",
+    "SplashSettingDesc": "View APM's splash ads",
     "DeveloperOptionsName": "Developer Options",
-    "DeveloperOptionsDesc": "Experimental Options in pre-release.",
+    "DeveloperOptionsDesc": "Experimental Options in pre-release versions of APM",
     "LanguageOptionsName": "Change Language",
-    "LanguageOptionsDesc": "Change app language.",
+    "LanguageOptionsDesc": "Change app language",
     "LanguageOptionsTitle": "Change Language",
     "LoginName": "Bilibili Login",
-    "LoginDesc": "login to bilibili.",
+    "LoginDesc": "login to bilibili",
     "FeatureNotImplemented": "Feature not implemented"
   },
   "Sync": {
@@ -182,7 +184,12 @@
     "UpdateGo2Github": "Go to Github"
   },
   "CustomSkin": {
-    "SearchFailMsg": "读入自定义皮肤JSON出错",
-    "SearchBarLabel": "自定义皮肤JSON网址"
+    "SearchFailMsg": "Failed to load custom skin JSON file",
+    "SearchBarLabel": "Custom skin JSON web address"
+  },
+  "About": {
+    "Disclaimer1": "This project and its contents are not affiliated with, funded, authorized, endorsed by, or in any way associated with Bilibili Inc. or any of its affiliates and subsidiaries. (But we really want to, call us)",
+    "Disclaimer2": "Any trademark, service mark, trade name, or other intellectual property rights used in this project are owned by the respective owners.",
+    "About1": "APM is an open source software. You may find the source code of APM at github.com/lovegaoshi/azusa-player-mobile free of charge. Please consider adding your music stream cuts on bilibili via the video series list functionality with keywords to add videos into the series list automatically."
   }
 }

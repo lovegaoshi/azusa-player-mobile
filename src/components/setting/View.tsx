@@ -16,6 +16,8 @@ import SyncSettings from './SyncSettings';
 import { useNoxSetting } from '../../hooks/useSetting';
 import useRenderSettingItem from './useRenderSetting';
 import LanguageSettings from './LanguageSettings';
+import AboutSettings from './AboutSettings';
+import SplashSettings from './SplashSettings';
 import Bilibili from '../login/Bilibili';
 
 enum ICONS {
@@ -29,6 +31,7 @@ enum ICONS {
   DEVELOPER = 'application-brackets',
   LANGUAGE = 'translate',
   LOGIN = 'login-variant',
+  SPLASH_GALLARY = 'view-gallery',
 }
 
 enum VIEW {
@@ -39,6 +42,8 @@ enum VIEW {
   DEVELOPER = 'Developer Options',
   BACKUP = 'Sync',
   LOGIN = 'Login',
+  INFO = 'About',
+  SPLASH_GALLARY = 'Splash Gallary',
 }
 
 const Stack = createNativeStackNavigator();
@@ -102,9 +107,15 @@ export default ({ navigation }: Props) => {
             'Settings'
           )}
           {renderListItem(
+            ICONS.SPLASH_GALLARY,
+            'SplashSetting',
+            () => navigation.navigate(VIEW.SPLASH_GALLARY),
+            'Settings'
+          )}
+          {renderListItem(
             ICONS.INFO,
             'InfoSetting',
-            () => navigation.navigate(VIEW.DUMMY),
+            () => navigation.navigate(VIEW.INFO),
             'Settings'
           )}
         </ScrollView>
@@ -129,9 +140,14 @@ export default ({ navigation }: Props) => {
         }}
       />
       <Stack.Screen
-        name={VIEW.DUMMY}
-        component={DummySettings}
-        options={{ title: String(t('Settings.FeatureNotImplemented')) }}
+        name={VIEW.SPLASH_GALLARY}
+        component={SplashSettings}
+        options={{ title: String(t('Settings.SplashSettingName')) }}
+      />
+      <Stack.Screen
+        name={VIEW.INFO}
+        component={AboutSettings}
+        options={{ title: String(t('Settings.InfoSettingName')) }}
       />
       <Stack.Screen
         name={VIEW.GENERAL}
