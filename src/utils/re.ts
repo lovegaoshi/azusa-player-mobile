@@ -383,6 +383,9 @@ export const reExtractSongName = (
         [/(.+)-/, /【.+】(.+)/]
       );
       break;
+    case '58586':
+      filename = extractWith(extractParenthesis(filename), [/『(.+)』/]);
+      break;
     case '0':
       filename = extractWith(extractParenthesis(filename), []);
       break;
