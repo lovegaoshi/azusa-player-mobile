@@ -37,6 +37,7 @@ export const matchBiliURL = (input: string) => {
     [bilifavlistFetch.regexSearchMatch, bilifavlistFetch.regexFetch],
     [bilifavlistFetch.regexSearchMatch2, bilifavlistFetch.regexFetch],
     [steriatkFetch.regexSearchMatch, steriatkFetch.regexFetch],
+    [steriatkFetch.regexSearchMatch2, steriatkFetch.regexFetch],
     [bilivideoFetch.regexSearchMatch, bilivideoFetch.regexFetch],
     [ytbvideoFetch.regexSearchMatch, ytbvideoFetch.regexFetch],
   ];
