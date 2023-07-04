@@ -163,7 +163,6 @@ export default (props: any) => {
           disabled={isActive}
           onPress={() => goToPlaylist(item.id)}
           style={[
-            styles.playlistItemContainer,
             {
               paddingLeft: 25,
               backgroundColor:
@@ -229,7 +228,6 @@ export default (props: any) => {
       <TouchableRipple
         onPress={() => goToPlaylist(STORAGE_KEYS.SEARCH_PLAYLIST_KEY)}
         style={[
-          styles.playlistItemContainer,
           {
             paddingLeft: 25,
             backgroundColor:
@@ -275,7 +273,6 @@ const styles = StyleSheet.create({
   },
   playlistItemContainer: {
     flexDirection: 'row',
-    borderRadius: 40,
   },
   playlistItemTextContainer: {
     flex: 4,
@@ -308,5 +305,5 @@ const styles = StyleSheet.create({
   },
   drawerItemContainer: { flexDirection: 'row' },
   drawerItemTextContainer: { justifyContent: 'center' },
-  playlistItemIconContainer: { flex: 1, alignItems: 'flex-end' },
+  playlistItemIconContainer: { alignItems: 'flex-end' },
 });
