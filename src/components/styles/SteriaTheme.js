@@ -21,9 +21,8 @@ export default {
   ],
   backgroundImages: [
     {
-      type: 'video',
-      identifier:
-        'https://cdn.donmai.us/original/ed/59/__gawr_gura_and_bloop_hololive_and_1_more_drawn_by_mokyuko_and_shikabashi_joxx__ed598bec0a9c3be5a9835c441ca40910.mp4',
+      type: 'bvid',
+      identifier: 'BV1gc411A7zR',
     },
   ],
 
