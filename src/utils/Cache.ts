@@ -12,10 +12,10 @@ interface optionsProps {
 }
 
 interface NoxCaches {
-  noxMediaCache?: NoxMediaCache;
+  noxMediaCache: NoxMediaCache;
 }
 
-const noxCacheKey = (song: NoxMedia.Song) => `${song.bvid}|${song.id}`;
+export const noxCacheKey = (song: NoxMedia.Song) => `${song.bvid}|${song.id}`;
 
 // TODO: use this! Don't let functioanl programming get over you!
 class NoxMediaCache {
@@ -96,7 +96,15 @@ class NoxMediaCache {
   cacheSize = () => Array.from(this.cache.keys()).length;
 }
 
-let cache: NoxCaches = {};
+let cache: NoxCaches = {
+  noxMediaCache: new NoxMediaCache({
+    max: 1,
+    dispose: async (value, key) => {
+      RNFetchBlob.fs.unlink(value);
+    },
+    allowStale: false,
+  } as LRUCache.Options<string, string>),
+};
 
 export const initCache = async (
   options: optionsProps,
@@ -105,13 +113,7 @@ export const initCache = async (
   try {
     cache.noxMediaCache = new NoxMediaCache(options, savedCache);
   } catch (e) {
-    cache.noxMediaCache = new NoxMediaCache({
-      max: 1,
-      dispose: async (value, key) => {
-        RNFetchBlob.fs.unlink(value);
-      },
-      allowStale: false,
-    } as LRUCache.Options<string, string>);
+    console.error(e);
   }
   cache.noxMediaCache.loadCache(savedCache || (await loadCachedMediaMapping()));
   return cache;

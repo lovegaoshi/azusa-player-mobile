@@ -7,7 +7,7 @@ const useCleanCache = () => {
   const playlists = useNoxSetting(state => state.playlists);
   const playlistIds = useNoxSetting(state => state.playlistIds);
   const [orphanedCache] = useState(
-    NoxCache.noxMediaCache!.getOrphanedCache(
+    NoxCache.noxMediaCache.getOrphanedCache(
       playlistIds.reduce(
         (acc, curr) => acc.concat(playlists[curr].songList),
         [] as NoxMedia.Song[]
@@ -16,7 +16,7 @@ const useCleanCache = () => {
   );
 
   const cleanOrphanedCache = () => {
-    NoxCache.noxMediaCache?.cleanOrphanedCache(orphanedCache);
+    NoxCache.noxMediaCache.cleanOrphanedCache(orphanedCache);
   };
 
   return { orphanedCache, cleanOrphanedCache };

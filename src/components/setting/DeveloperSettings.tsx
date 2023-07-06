@@ -147,11 +147,11 @@ export default () => {
           {renderListItem(
             ICONS.clearcache,
             'ClearCache',
-            NoxCache.noxMediaCache!.clearCache,
+            NoxCache.noxMediaCache.clearCache,
             'DeveloperSettings',
             () =>
               t('DeveloperSettings.ClearCacheDesc2', {
-                val: NoxCache.noxMediaCache?.cacheSize() || 0,
+                val: NoxCache.noxMediaCache.cacheSize() || 0,
               })
           )}
           {renderListItem(

@@ -20,6 +20,7 @@ import { updateSubscribeFavList } from '../../utils/BiliSubscribe';
 import { songlistToTracklist } from '../../objects/Playlist';
 import { PLAYLIST_ENUMS } from '../../enums/Playlist';
 import { syncFavlist } from '../../utils/Bilibili/bilifavOperate';
+import noxCache, { noxCacheKey } from '../../utils/Cache';
 
 export default () => {
   const { t } = useTranslation();
@@ -49,6 +50,8 @@ export default () => {
   const [refreshing, setRefreshing] = useState(false);
   const playlistRef = React.useRef<any>(null);
   const netInfo = useNetInfo();
+  // TODO: slow?
+  const [cachedSongs] = useState(Array.from(noxCache.noxMediaCache.cache.keys()));
 
   const resetSelected = (val = false) =>
     setSelected(Array(currentPlaylist.songList.length).fill(val));
@@ -108,6 +111,11 @@ export default () => {
         regex: /album:(.+)/,
         process: (val: RegExpExecArray, someRows: Array<NoxMedia.Song>) =>
           someRows.filter(row => row.album?.includes(val[1])),
+      },
+      {
+        regex: /cached:(.+)/,
+        process: (val: RegExpExecArray, someRows: Array<NoxMedia.Song>) =>
+          someRows.filter(row => cachedSongs.includes(noxCacheKey(row))),
       },
     ];
     let defaultExtraction = true;
@@ -243,8 +251,8 @@ export default () => {
     const currentIndex =
       toIndex < 0
         ? currentPlaylist.songList.findIndex(
-            song => song.id === currentPlayingId
-          )
+          song => song.id === currentPlayingId
+        )
         : toIndex;
     if (currentIndex > -1) {
       playlistRef.current.scrollToIndex({
