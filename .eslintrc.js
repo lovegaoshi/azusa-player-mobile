@@ -24,5 +24,6 @@ module.exports = {
   },
   settings: {
     'import/ignore': ['node_modules/react-native/index\\.js$'],
+    react: { version: 'detect' },
   },
 };
