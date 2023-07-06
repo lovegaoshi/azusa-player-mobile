@@ -1,3 +1,7 @@
+---
+sidebar_position: 1
+---
+
 # Basic Usage
 
 ## Search for a bilibili URL
@@ -8,4 +12,4 @@
 
 ## Change APM skin
 
-VTuber skins is a key feature of APM. Right swipe to open Drawer -> Settings -> change skin. APM has Azusa (a light-purple theme) and Nox (a dark-yellow theme) built in. You can import your own defined skin! The example URL contains WeiSteria and Amelia Watson skins.
+Customized VTuber skins is a key feature of APM. Right swipe to open Drawer -> Settings -> change skin. APM has Azusa (a light-purple theme) and Nox (a dark-yellow theme) built in. You can import your own defined skin! The example URL contains WeiSteria and Amelia Watson skins.
