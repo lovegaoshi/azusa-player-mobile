@@ -1,17 +1,8 @@
 import React, { useState } from 'react';
-import { Pressable, View, FlatList } from 'react-native';
+import { Pressable, View, FlatList, StyleSheet } from 'react-native';
 import { Button, Dialog, Portal, Text, RadioButton } from 'react-native-paper';
 import { useTranslation } from 'react-i18next';
 import { useNoxSetting } from '../../hooks/useSetting';
-import { styles } from '../style';
-
-const dialogStyle = { maxHeight: '60%', minHeight: '50%' };
-const dialogTitleStyle = { maxHeight: 100 };
-const dialogContentStyle = { flex: 1, minHeight: '20%' };
-const dialogListStyle = { flex: 6 };
-const dialogItemStyle = { paddingVertical: 5 };
-const dialogTextStyle = { paddingTop: 3 };
-const dialogActionStyle = { maxHeight: 60, paddingBottom: 0 };
 
 interface Props {
   visible: boolean;
@@ -50,12 +41,8 @@ export default ({
 
   return (
     <Portal>
-      <Dialog
-        visible={visible}
-        onDismiss={handleClose}
-        style={dialogStyle}
-      >
-        <Dialog.Title style={dialogTitleStyle}>
+      <Dialog visible={visible} onDismiss={handleClose} style={styles.dialog}>
+        <Dialog.Title style={styles.dialogTitle}>
           {t('CopiedPlaylistDialog.title', {
             title:
               fromList.title.length > 20
@@ -63,16 +50,16 @@ export default ({
                 : fromList.title,
           })}
         </Dialog.Title>
-        <Dialog.Content style={dialogContentStyle}>
+        <Dialog.Content style={styles.dialogContent}>
           <FlatList
-            style={dialogListStyle}
+            style={styles.dialogList}
             data={playlistIds
               .filter(val => val !== fromList.id)
               .map(val => [val, playlists[val].title])}
             renderItem={({ item, index }) => (
               <Pressable
                 onPress={() => setPlaylistIndex(item[0])}
-                style={dialogItemStyle}
+                style={styles.dialogItem}
               >
                 <View style={styles.rowView}>
                   <RadioButton
@@ -80,7 +67,7 @@ export default ({
                     status={playlistIndex === item[0] ? 'checked' : 'unchecked'}
                     onPress={() => setPlaylistIndex(item[0])}
                   />
-                  <Text variant="titleLarge" style={dialogTextStyle}>
+                  <Text variant="titleLarge" style={styles.dialogText}>
                     {item[1]}
                   </Text>
                 </View>
@@ -89,7 +76,7 @@ export default ({
             keyExtractor={item => item[0]}
           />
         </Dialog.Content>
-        <Dialog.Actions style={dialogActionStyle}>
+        <Dialog.Actions style={styles.dialogAction}>
           <Button onPress={handleClose}>{t('Dialog.cancel')}</Button>
           <Button onPress={handleSubmit}>{t('Dialog.ok')}</Button>
         </Dialog.Actions>
@@ -97,3 +84,33 @@ export default ({
     </Portal>
   );
 };
+
+const styles = StyleSheet.create({
+  dialog: {
+    maxHeight: '60%',
+    minHeight: '50%',
+  },
+  dialogTitle: {
+    maxHeight: 100,
+  },
+  dialogContent: {
+    flex: 1,
+    minHeight: '20%',
+  },
+  dialogList: {
+    flex: 6,
+  },
+  dialogItem: {
+    paddingVertical: 5,
+  },
+  dialogText: {
+    paddingTop: 3,
+  },
+  dialogAction: {
+    maxHeight: 60,
+    paddingBottom: 0,
+  },
+  rowView: {
+    flexDirection: 'row',
+  },
+});

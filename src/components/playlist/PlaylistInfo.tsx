@@ -1,8 +1,7 @@
-import * as React from 'react';
+import React, { useEffect } from 'react';
 import { IconButton, Text, TextInput } from 'react-native-paper';
-import { View, Pressable } from 'react-native';
+import { View, Pressable, StyleSheet } from 'react-native';
 import { useTranslation } from 'react-i18next';
-import { styles } from '../style';
 import { useNoxSetting } from '../../hooks/useSetting';
 import { seconds2HHMMSS } from '../../utils/Utils';
 
@@ -23,12 +22,12 @@ export default ({
   const currentPlaylist = useNoxSetting(state => state.currentPlaylist);
   const playerStyle = useNoxSetting(state => state.playerStyle);
 
-  React.useEffect(() => {
+  useEffect(() => {
     setSearchText('');
   }, [currentPlaylist]);
 
   return (
-    <View style={{ flex: 3, paddingLeft: 10 }}>
+    <View style={styles.container}>
       {search ? (
         <TextInput
           placeholder={String(t('PlaylistSearchBar.label'))}
@@ -37,28 +36,39 @@ export default ({
           onChangeText={(val: string) => {
             setSearchText(val);
           }}
-          style={{ height: 40 }}
+          style={styles.textInput}
           autoFocus
           selectTextOnFocus
           selectionColor={playerStyle.customColors.textInputSelectionColor}
           textColor={playerStyle.colors.text}
         />
       ) : (
-        <Pressable onPress={onPressed}>
-          <Text variant="titleMedium" >
-            {currentPlaylist.title}
-          </Text>
-          <Text variant="labelMedium">
-            {`${currentPlaylist.songList.length} / ${seconds2HHMMSS(
-              currentPlaylist.songList.reduce(
-                (accumulator, currentValue) =>
-                  accumulator + currentValue.duration,
-                0
-              )
-            )}`}
-          </Text>
+        <Pressable onPress={onPressed} style={styles.pressable}>
+          <Text variant="titleMedium">{currentPlaylist.title}</Text>
+          <Text variant="labelMedium">{`${
+            currentPlaylist.songList.length
+          } / ${seconds2HHMMSS(
+            currentPlaylist.songList.reduce(
+              (accumulator, currentValue) =>
+                accumulator + currentValue.duration,
+              0
+            )
+          )}`}</Text>
         </Pressable>
       )}
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 3,
+    paddingLeft: 10,
+  },
+  textInput: {
+    height: 40,
+  },
+  pressable: {
+    // Add any additional styles for the Pressable component here
+  },
+});

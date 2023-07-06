@@ -1,17 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { Button, Dialog, Portal, TextInput } from 'react-native-paper';
+import { StyleSheet } from 'react-native';
 import { useTranslation } from 'react-i18next';
 
 import { dummyPlaylist } from '../../objects/Playlist';
 import { useNoxSetting } from '../../hooks/useSetting';
 import PortaledInput from './PortaledInput';
-
-const dialogStyle = {
-  position: 'absolute' as 'absolute',
-  top: '20%',
-  left: 0,
-  right: 0,
-};
 
 interface Props {
   visible: boolean;
@@ -28,7 +22,7 @@ export default ({
 }: Props) => {
   const { t } = useTranslation();
   const addPlaylist = useNoxSetting(state => state.addPlaylist);
-  const inputRef = React.useRef<any>();
+  const inputRef = useRef<any>();
 
   const handleClose = () => {
     inputRef?.current?.clearText();
@@ -40,11 +34,11 @@ export default ({
     const dummyList = dummyPlaylist();
     const newList = fromList
       ? {
-        ...fromList,
-        id: dummyList.id,
-        title: inputRef.current.name,
-        type: dummyList.type,
-      }
+          ...fromList,
+          id: dummyList.id,
+          title: inputRef.current.name,
+          type: dummyList.type,
+        }
       : { ...dummyList, title: inputRef.current.name };
     addPlaylist(newList);
     onSubmit();
@@ -52,11 +46,7 @@ export default ({
 
   return (
     <Portal>
-      <Dialog
-        visible={visible}
-        onDismiss={handleClose}
-        style={dialogStyle}
-      >
+      <Dialog visible={visible} onDismiss={handleClose} style={styles.dialog}>
         <Dialog.Title>
           {fromList
             ? t('NewPlaylistDialog.title', { fromList })
@@ -79,3 +69,12 @@ export default ({
     </Portal>
   );
 };
+
+const styles = StyleSheet.create({
+  dialog: {
+    position: 'absolute',
+    top: '20%',
+    left: 0,
+    right: 0,
+  },
+});

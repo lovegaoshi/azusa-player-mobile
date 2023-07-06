@@ -1,7 +1,13 @@
 import React, { ReactNode, useRef, useState } from 'react';
 import { IconButton, Divider, Text, TouchableRipple } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
-import { Pressable, Dimensions, View, ImageBackground } from 'react-native';
+import {
+  Pressable,
+  Dimensions,
+  View,
+  ImageBackground,
+  StyleSheet,
+} from 'react-native';
 import { useTranslation } from 'react-i18next';
 import DraggableFlatList, {
   ScaleDecorator,
@@ -31,9 +37,9 @@ const useRenderDrawerItem = () => {
     text: string;
   }) => (
     <TouchableRipple onPress={() => navigation.navigate(view as never)}>
-      <View style={{ flexDirection: 'row' }}>
-        <IconButton icon={icon} size={32}></IconButton>
-        <View style={{ justifyContent: 'center' }}>
+      <View style={styles.drawerItemContainer}>
+        <IconButton icon={icon} size={32} />
+        <View style={styles.drawerItemTextContainer}>
           <Text variant="titleLarge">{t(text)}</Text>
         </View>
       </View>
@@ -70,18 +76,21 @@ const PlaylistItem = ({
 
   if (!item) return <></>;
   return (
-    <View style={{ flexDirection: 'row' }}>
-      <View style={{ flex: 4, justifyContent: 'center' }}>
+    <View style={styles.playlistItemContainer}>
+      <View style={styles.playlistItemTextContainer}>
         <Text
           variant="bodyLarge"
-          style={{
-            fontWeight: currentPlayingList.id === item?.id ? 'bold' : undefined,
-          }}
+          style={[
+            {
+              fontWeight:
+                currentPlayingList.id === item?.id ? 'bold' : undefined,
+            },
+          ]}
         >
           {item.title}
         </Text>
       </View>
-      <View style={{ flex: 1, alignItems: 'flex-end' }}>
+      <View style={styles.playlistItemIconContainer}>
         {icon ? icon : DefaultIcon(item, () => confirmOnDelete(item.id))}
       </View>
     </View>
@@ -91,11 +100,7 @@ const PlaylistItem = ({
 const BiliCard = (props: any) => {
   if (props.backgroundURI) {
     return (
-      <ImageBackground
-        source={{
-          uri: props.backgroundURI,
-        }}
-      >
+      <ImageBackground source={{ uri: props.backgroundURI }}>
         {props.children}
       </ImageBackground>
     );
@@ -157,14 +162,15 @@ export default (props: any) => {
           onLongPress={drag}
           disabled={isActive}
           onPress={() => goToPlaylist(item.id)}
-          style={{
-            paddingLeft: 25,
-            backgroundColor:
-              currentPlaylist.id === item?.id
-                ? playerStyle.customColors.playlistDrawerBackgroundColor
-                : undefined,
-            borderRadius: 40,
-          }}
+          style={[
+            {
+              paddingLeft: 25,
+              backgroundColor:
+                currentPlaylist.id === item?.id
+                  ? playerStyle.customColors.playlistDrawerBackgroundColor
+                  : undefined,
+            },
+          ]}
         >
           <PlaylistItem item={item} confirmOnDelete={confirmOnDelete} />
         </TouchableRipple>
@@ -174,7 +180,7 @@ export default (props: any) => {
 
   return (
     <View {...props}>
-      <View style={{ height: 10 }}></View>
+      <View style={styles.topPadding} />
       <BiliCard backgroundURI={playerStyle.biliGarbCard}>
         <RenderDrawerItem
           icon={'home-outline'}
@@ -192,14 +198,9 @@ export default (props: any) => {
         view={ViewEnum.SETTINGS}
         text={'appDrawer.settingScreenName'}
       />
-      <Divider></Divider>
+      <Divider />
       <TouchableRipple
-        style={{
-          height: 50,
-          alignContent: 'center',
-          alignItems: 'center',
-          justifyContent: 'center',
-        }}
+        style={styles.addPlaylistButtonContainer}
         onPress={
           // HACK: tooo lazy to lift this state up...
           addPlaylistButtonRef.current
@@ -207,14 +208,7 @@ export default (props: any) => {
             : () => undefined
         }
       >
-        <View
-          style={{
-            flexDirection: 'row',
-            alignContent: 'center',
-            alignItems: 'center',
-            justifyContent: 'center',
-          }}
-        >
+        <View style={styles.addPlaylistButtonContent}>
           <IconButton
             icon={'cards-heart'}
             onPress={() => goToPlaylist(STORAGE_KEYS.FAVORITE_PLAYLIST_KEY)}
@@ -222,7 +216,7 @@ export default (props: any) => {
           <ShuffleAllButton />
           <AddPlaylistButton ref={addPlaylistButtonRef} />
           <TimerButton />
-          <View style={{ width: 40, height: 40 }} />
+          <View style={styles.addPlaylistButtonSpacer} />
           {false && (
             <IconButton
               icon={'cog'}
@@ -233,15 +227,16 @@ export default (props: any) => {
       </TouchableRipple>
       <TouchableRipple
         onPress={() => goToPlaylist(STORAGE_KEYS.SEARCH_PLAYLIST_KEY)}
-        style={{
-          paddingLeft: 25,
-          backgroundColor:
-            currentPlaylist.id ===
-            playlists[STORAGE_KEYS.SEARCH_PLAYLIST_KEY]?.id
-              ? playerStyle.customColors.playlistDrawerBackgroundColor
-              : undefined,
-          borderRadius: 40,
-        }}
+        style={[
+          {
+            paddingLeft: 25,
+            backgroundColor:
+              currentPlaylist.id ===
+              playlists[STORAGE_KEYS.SEARCH_PLAYLIST_KEY]?.id
+                ? playerStyle.customColors.playlistDrawerBackgroundColor
+                : undefined,
+          },
+        ]}
       >
         <PlaylistItem
           item={playlists[STORAGE_KEYS.SEARCH_PLAYLIST_KEY]}
@@ -255,24 +250,60 @@ export default (props: any) => {
         onSubmit={() => setNewPlaylistDialogOpen(false)}
       />
       <DraggableFlatList
-        style={{
-          // HACK: i dont know what to do at this point
-          // top padding 10 + draweritem 60 * 3 + buttons 50 + searchlist 53 + bottom info 40 = ~330
-          maxHeight: Dimensions.get('window').height - 330,
-        }}
+        style={styles.draggableFlatList}
         data={playlistIds.map(val => playlists[val])}
-        // TODO: very retarded, but what?
         onDragEnd={({ data }) =>
           setPlaylistIds(data.map(playlist => playlist.id))
         }
         keyExtractor={item => item?.id}
         renderItem={renderItem}
       />
-      <View>
-        <Text style={{ textAlign: 'center', paddingBottom: 20 }}>
+      <View style={styles.bottomInfo}>
+        <Text style={styles.bottomInfoText}>
           {`${playerStyle.metaData.themeName} @ ${playerSetting.noxVersion}`}
         </Text>
       </View>
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  topPadding: {
+    height: 10,
+  },
+  playlistItemContainer: {
+    flexDirection: 'row',
+  },
+  playlistItemTextContainer: {
+    flex: 4,
+    justifyContent: 'center',
+  },
+  addPlaylistButtonContainer: {
+    height: 50,
+    alignContent: 'center',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  addPlaylistButtonContent: {
+    flexDirection: 'row',
+    alignContent: 'center',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  addPlaylistButtonSpacer: {
+    width: 40,
+    height: 40,
+  },
+  draggableFlatList: {
+    maxHeight: Dimensions.get('window').height - 330,
+  },
+  bottomInfo: {
+    paddingBottom: 20,
+  },
+  bottomInfoText: {
+    textAlign: 'center',
+  },
+  drawerItemContainer: { flexDirection: 'row' },
+  drawerItemTextContainer: { justifyContent: 'center' },
+  playlistItemIconContainer: { alignItems: 'flex-end' },
+});

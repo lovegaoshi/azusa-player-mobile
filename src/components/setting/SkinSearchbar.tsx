@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
 import { IconButton, Text, TextInput, ProgressBar } from 'react-native-paper';
-import { View } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import Snackbar from 'react-native-snackbar';
 import { useTranslation } from 'react-i18next';
 
 import { useNoxSetting } from '../../hooks/useSetting';
 
-export default ({ onSearched = (vals: any) => console.log(vals) }) => {
+const CustomSkinSearch = ({
+  onSearched = (vals: any) => console.log(vals),
+}) => {
   const { t } = useTranslation();
   const [searchVal, setSearchVal] = useState(
     'https://raw.githubusercontent.com/lovegaoshi/azusa-player-mobile/master/src/components/styles/steria.json'
@@ -27,10 +29,10 @@ export default ({ onSearched = (vals: any) => console.log(vals) }) => {
   };
 
   return (
-    <View style={{ width: '100%' }}>
-      <View style={{ flexDirection: 'row', width: '100%' }}>
+    <View style={styles.container}>
+      <View style={styles.row}>
         <TextInput
-          style={{ flex: 5 }}
+          style={styles.textInput}
           label={String(t('CustomSkin.SearchBarLabel'))}
           value={searchVal}
           onChangeText={val => setSearchVal(val)}
@@ -52,3 +54,18 @@ export default ({ onSearched = (vals: any) => console.log(vals) }) => {
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    width: '100%',
+  },
+  row: {
+    flexDirection: 'row',
+    width: '100%',
+  },
+  textInput: {
+    flex: 5,
+  },
+});
+
+export default CustomSkinSearch;

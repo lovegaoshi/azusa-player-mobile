@@ -1,5 +1,5 @@
 import { useTranslation } from 'react-i18next';
-import { View, Text } from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
 import {
   IconButton,
   List,
@@ -38,17 +38,19 @@ export default () => {
     settingName: string,
     onPress: () => void,
     settingCategory = 'DeveloperSettings',
-    modifyDescription = (val: string) => val,
+    modifyDescription = (val: string) => val
   ) => {
     return (
       <List.Item
         left={props => <IconButton icon={icon} size={40} />}
         title={String(t(`${settingCategory}.${settingName}Name`))}
-        description={modifyDescription(t(`${settingCategory}.${settingName}Desc`))}
+        description={modifyDescription(
+          t(`${settingCategory}.${settingName}Desc`)
+        )}
         onPress={onPress}
         titleStyle={{ color: playerStyle.colors.primary }}
         descriptionStyle={{ color: playerStyle.colors.secondary }}
-        style={{ paddingVertical: 0 }}
+        style={styles.listItem}
       />
     );
   };
@@ -76,25 +78,29 @@ export default () => {
     return (
       <TouchableRipple
         onPress={onToggle}
-        style={{ paddingHorizontal: 10 }}
+        style={styles.touchableRipple}
         key={uuidv4()}
       >
-        <View style={{ flexDirection: 'row', paddingVertical: 10 }}>
-          <View style={{ flex: 5, paddingLeft: 5 }}>
-            <Text style={{ fontSize: 20, color: playerStyle.colors.primary }}>
+        <View style={styles.settingContainer}>
+          <View style={styles.settingTextContainer}>
+            <Text
+              style={[
+                styles.settingText,
+                { color: playerStyle.colors.primary },
+              ]}
+            >
               {t(`${settingCategory}.${settingName}Name`)}
             </Text>
-            <Text style={{ fontSize: 15, color: playerStyle.colors.secondary }}>
+            <Text
+              style={[
+                styles.settingDescription,
+                { color: playerStyle.colors.secondary },
+              ]}
+            >
               {t(`${settingCategory}.${settingName}Desc`)}
             </Text>
           </View>
-          <View
-            style={{
-              flex: 1,
-              paddingTop: 10,
-              alignItems: 'flex-end',
-            }}
-          >
+          <View style={styles.switchContainer}>
             {checkbox ? (
               <Checkbox
                 status={playerSetting[settingName] ? 'checked' : 'unchecked'}
@@ -115,3 +121,31 @@ export default () => {
 
   return { renderListItem, renderSetting };
 };
+
+const styles = StyleSheet.create({
+  listItem: {
+    paddingVertical: 0,
+  },
+  touchableRipple: {
+    paddingHorizontal: 10,
+  },
+  settingContainer: {
+    flexDirection: 'row',
+    paddingVertical: 10,
+  },
+  settingTextContainer: {
+    flex: 5,
+    paddingLeft: 5,
+  },
+  settingText: {
+    fontSize: 20,
+  },
+  settingDescription: {
+    fontSize: 15,
+  },
+  switchContainer: {
+    flex: 1,
+    paddingTop: 10,
+    alignItems: 'flex-end',
+  },
+});

@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { View } from 'react-native';
+import React, { useState, useRef, useEffect } from 'react';
+import { View, StyleSheet } from 'react-native';
 import {
   Button,
   Dialog,
@@ -13,15 +13,21 @@ import { useTranslation } from 'react-i18next';
 
 import { useNoxSetting } from '../../hooks/useSetting';
 import PortaledInput from './PortaledInput';
-import { styles } from '../style';
+
+const styles = StyleSheet.create({
+  switchContainer: {
+    flexDirection: 'row',
+  },
+  switchText: {
+    fontSize: 18,
+  },
+});
 
 interface Props {
   visible: boolean;
   onClose?: () => void;
   onSubmit?: (newPlaylist: NoxMedia.Playlist) => void;
 }
-
-const switchStyle = { fontSize: 18 };
 
 export default ({
   visible,
@@ -34,11 +40,11 @@ export default ({
   const updatePlaylist = useNoxSetting(state => state.updatePlaylist);
   const [useBiliShazam, setUseBiliShazam] = useState(false);
   const [useBiliSync, setUseBiliSync] = useState(false);
-  const nameRef = React.useRef<any>();
-  const subRef = React.useRef<any>();
-  const blacklistRef = React.useRef<any>();
+  const nameRef = useRef<any>();
+  const subRef = useRef<any>();
+  const blacklistRef = useRef<any>();
 
-  React.useEffect(() => {
+  useEffect(() => {
     setUseBiliShazam(currentPlaylist.useBiliShazam);
     setUseBiliSync(currentPlaylist.biliSync);
   }, [currentPlaylist]);
@@ -90,23 +96,23 @@ export default ({
             autofocus={false}
             selectTextOnFocus={false}
           />
-          <View style={styles.rowView}>
+          <View style={styles.switchContainer}>
             <Switch
               value={useBiliShazam}
               onValueChange={toggleBiliShazam}
               color={playerStyle.colors.onSurfaceVariant}
             />
-            <Text style={switchStyle}>
+            <Text style={styles.switchText}>
               {t('PlaylistSettingsDialog.useBiliShazamLabel')}
             </Text>
           </View>
-          <View style={styles.rowView}>
+          <View style={styles.switchContainer}>
             <Switch
               value={useBiliSync}
               onValueChange={toggleBiliSync}
               color={playerStyle.colors.onSurfaceVariant}
             />
-            <Text style={switchStyle}>
+            <Text style={styles.switchText}>
               {t('PlaylistSettingsDialog.useBiliSyncLabel')}
             </Text>
           </View>

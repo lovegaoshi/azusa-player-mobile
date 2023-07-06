@@ -31,6 +31,7 @@ const paginatedFetch = ({
     progressEmitter,
     favList,
     getBVID: item => `${CIDPREFIX}${item.id}`,
+    getJSONData: val => val,
   });
 };
 
@@ -66,6 +67,7 @@ const refreshSong = (song: NoxMedia.Song) => song;
 
 export default {
   regexSearchMatch: /steria.vplayer.tk/,
+  regexSearchMatch2: /Steria.vplayer.tk/,
   regexFetch,
   regexResolveURLMatch: /^steriatk-/,
   resolveURL,

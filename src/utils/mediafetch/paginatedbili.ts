@@ -1,6 +1,10 @@
 import { wbiQuery } from '../../stores/wbi';
 import { fetchiliBVIDs } from './bilivideo';
-import { fetchPaginatedAPI, fetchAwaitPaginatedAPI, FetcherProps } from './paginatedfetch';
+import {
+  fetchPaginatedAPI,
+  fetchAwaitPaginatedAPI,
+  FetcherProps,
+} from './paginatedfetch';
 import { biliApiLimiter } from './throttle';
 import bfetch from '../BiliFetch';
 

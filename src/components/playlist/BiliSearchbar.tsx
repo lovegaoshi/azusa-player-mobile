@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { IconButton, Text, TextInput, ProgressBar } from 'react-native-paper';
-import { View } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import { useTranslation } from 'react-i18next';
 import ShareMenu, { ShareCallback } from 'react-native-share-menu';
 import { useNavigation } from '@react-navigation/native';
@@ -33,7 +33,7 @@ export default ({
   const [sharedData, setSharedData] = useState<any>(null);
   const [sharedMimeType, setSharedMimeType] = useState<string | null>(null);
 
-  const handleShare = React.useCallback((item?: SharedItem) => {
+  const handleShare = useCallback((item?: SharedItem) => {
     if (!item) {
       return;
     }
@@ -47,11 +47,11 @@ export default ({
     handleSearch(data);
   }, []);
 
-  React.useEffect(() => {
+  useEffect(() => {
     ShareMenu.getInitialShare(handleShare as ShareCallback);
   }, []);
 
-  React.useEffect(() => {
+  useEffect(() => {
     const listener = ShareMenu.addNewShareListener(
       handleShare as ShareCallback
     );
@@ -82,10 +82,10 @@ export default ({
   };
 
   return (
-    <View style={{ width: '100%', height: 50 }}>
-      <View style={{ flexDirection: 'row', width: '100%' }}>
+    <View style={styles.container}>
+      <View style={styles.searchContainer}>
         <TextInput
-          style={{ flex: 5 }}
+          style={styles.textInput}
           label={String(t('BiliSearchBar.label'))}
           value={searchVal}
           onChangeText={val => setSearchVal(val)}
@@ -98,9 +98,6 @@ export default ({
           icon="search-web"
           onPress={() => handleSearch(searchVal)}
           size={30}
-          // TODO: how to color the square?
-          // borderColor: playerStyle.colors.surfaceVariant
-          style={{}}
         />
       </View>
       <ProgressBar
@@ -110,3 +107,17 @@ export default ({
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    width: '100%',
+    height: 50,
+  },
+  searchContainer: {
+    flexDirection: 'row',
+    width: '100%',
+  },
+  textInput: {
+    flex: 5,
+  },
+});

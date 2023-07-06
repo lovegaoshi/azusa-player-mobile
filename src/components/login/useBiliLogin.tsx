@@ -43,12 +43,12 @@ const loginQRVerification = async () => {
     'bili_jct'
   ]?.value;
   const res = await throttler.biliApiLimiter.schedule(async () =>
-    bfetch(`${verificationURL}${biliJct}`, {
-      method: 'GET',
-      credentials: 'include',
-      headers: {},
-    })
-  ),
+      bfetch(`${verificationURL}${biliJct}`, {
+        method: 'GET',
+        credentials: 'include',
+        headers: {},
+      })
+    ),
     json = await res.json();
   logger.debug(json);
   await Promise.all(
@@ -72,7 +72,6 @@ const useBiliLogin = () => {
   const [loginInfo, setLoginInfo] = React.useState<LoginInfo | null>(null);
   const [initialize, setInitialize] = React.useState<boolean>(true);
 
-
   const getBiliLoginStatus = async () => {
     setInitialize(true);
     const loginSuccess = (json: any) => json.code === 0 && json.data.isLogin;
@@ -94,7 +93,6 @@ const useBiliLogin = () => {
     setQrCode('');
     setQrCodeExpire(-1);
   };
-
 
   const getQRLoginReq = async () => {
     // https://github.com/SocialSisterYi/bilibili-API-collect/blob/master/docs/login/login_action/QR.md
@@ -165,7 +163,6 @@ const useBiliLogin = () => {
     }
   };
 
-
   // check QR login status every 4 seconds
   React.useEffect(() => {
     if (qrcodeExpire < 0) return () => undefined;
@@ -202,8 +199,7 @@ const useBiliLogin = () => {
     clearQRLogin,
     getBiliLoginStatus,
     getQRLoginReq,
-  }
-
+  };
 };
 
 export default useBiliLogin;

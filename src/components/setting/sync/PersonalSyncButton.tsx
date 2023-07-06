@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Snackbar from 'react-native-snackbar';
-import { View, ActivityIndicator } from 'react-native';
+import { View, ActivityIndicator, StyleSheet } from 'react-native';
 import { IconButton, TextInput } from 'react-native-paper';
 import { useTranslation } from 'react-i18next';
 
@@ -41,7 +41,10 @@ const ImportSyncFavButton = ({ cloudAddress, cloudID }: Props) => {
       await initPlayer(initializedStorage);
       Snackbar.show({ text: t('Sync.PersonalCloudDownloadSuccess') });
     } else {
-      errorHandling(new Error(String(t('Sync.PersonalCloudDownloadFail'))), String(t('Sync.PersonalCloudDownloadFail')));
+      errorHandling(
+        new Error(String(t('Sync.PersonalCloudDownloadFail'))),
+        String(t('Sync.PersonalCloudDownloadFail'))
+      );
     }
     setLoading(false);
     return response;
@@ -132,19 +135,12 @@ export default () => {
     <View>
       <SetTextField {...personalCloudIPTextField} />
       <SetTextField {...personalCloudIDTextField} />
-      <View
-        style={{
-          flexDirection: 'row',
-          alignItems: 'center',
-          alignContent: 'center',
-          justifyContent: 'center',
-        }}
-      >
+      <View style={styles.container}>
         <ImportSyncFavButton
           cloudAddress={playerSetting.personalCloudIP}
           cloudID={playerSetting.personalCloudID}
         />
-        <View style={{ width: 20 }}></View>
+        <View style={styles.emptyPlaceholder}></View>
         <ExportSyncFavButton
           cloudAddress={playerSetting.personalCloudIP}
           cloudID={playerSetting.personalCloudID}
@@ -153,3 +149,13 @@ export default () => {
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    alignContent: 'center',
+    justifyContent: 'center',
+  },
+  emptyPlaceholder: { width: 20 },
+});

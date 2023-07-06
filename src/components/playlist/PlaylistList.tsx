@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { View, BackHandler } from 'react-native';
+import { View, BackHandler, StyleSheet } from 'react-native';
 import { FlashList } from '@shopify/flash-list';
 import Snackbar from 'react-native-snackbar';
 import { IconButton, Text } from 'react-native-paper';
@@ -326,14 +326,7 @@ export default () => {
           setSearchText={setSearchText}
           onPressed={() => scrollTo()}
         />
-        <View
-          style={{
-            flexDirection: 'row',
-            flex: 3,
-            bottom: 5,
-            justifyContent: 'flex-end',
-          }}
-        >
+        <View style={stylesLocal.container}>
           {checking && (
             <IconButton
               icon="select-all"
@@ -365,14 +358,7 @@ export default () => {
           <PlaylistMenuButton disabled={checking} />
         </View>
       </View>
-      <View
-        style={{
-          ...styles.topBarContainer,
-          flex: 4,
-          // HACK: this should be justified as top bar and bottom bar all have a defined height.
-          maxHeight: Dimensions.get('window').height - 250,
-        }}
-      >
+      <View style={stylesLocal.playlistContainer}>
         <FlashList
           ref={ref => (playlistRef.current = ref)}
           data={currentRows}
@@ -408,3 +394,17 @@ export default () => {
     </View>
   );
 };
+const stylesLocal = StyleSheet.create({
+  container: {
+    flexDirection: 'row',
+    flex: 3,
+    bottom: 5,
+    justifyContent: 'flex-end',
+  },
+  playlistContainer: {
+    ...styles.topBarContainer,
+    flex: 4,
+    // HACK: this should be justified as top bar and bottom bar all have a defined height.
+    maxHeight: Dimensions.get('window').height - 250,
+  },
+});

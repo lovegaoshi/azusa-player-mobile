@@ -76,6 +76,17 @@ class NoxMediaCache {
     return this.cache.peek(noxCacheKey(song));
   };
 
+  getOrphanedCache = (songList: NoxMedia.Song[]) => {
+    const songListKeys = songList.map(song => noxCacheKey(song));
+    return Array.from(this.cache.keys()).filter(key =>
+      songListKeys.includes(key)
+    );
+  };
+
+  cleanOrphanedCache = (orphanedList: string[]) => {
+    orphanedList.forEach(val => RNFetchBlob.fs.unlink(val));
+  };
+
   clearCache = () => {
     for (const val of this.cache.values()) {
       RNFetchBlob.fs.unlink(val);

@@ -20,7 +20,7 @@ const s = [11, 10, 3, 8, 4, 6];
  * convert aid to bvid
  * @param {string | number} aid
  */
-const aidToBvid = (aid) => {
+const aidToBvid = aid => {
   /** convert aid to the integer "z", a large number used to calculate bvid */
   const z = (parseInt(aid) ^ xorN) + addN;
 
@@ -39,7 +39,7 @@ const aidToBvid = (aid) => {
  * convert bvid to aid
  * @param {string} bvid
  */
-const bvidToAid = (bvid) => {
+const bvidToAid = bvid => {
   let z = 0;
 
   s.forEach((bvidCharIndex, i) => {

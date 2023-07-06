@@ -17,6 +17,7 @@ import {
   dummySelectSettingEntry,
 } from './SetttingEntries';
 import NoxCache from '../../utils/Cache';
+import useCleanCache from '../../hooks/useCleanCache';
 
 enum ICONS {
   setlog = 'console',
@@ -24,6 +25,7 @@ enum ICONS {
   showlog = 'bug',
   cache = 'floppy',
   clearcache = 'delete-sweep',
+  clearOrphanCache = 'delete-empty',
 }
 
 const developerSettings: { [key: string]: SettingEntry } = {
@@ -48,6 +50,7 @@ export default () => {
   const playerStyle = useNoxSetting(state => state.playerStyle);
   const { renderListItem, renderSetting } = useRenderSettingItem();
   const { checkVersion } = useVersionCheck();
+  const { orphanedCache, cleanOrphanedCache } = useCleanCache();
 
   const logLevelString = [
     t('DeveloperSettings.LogLevel0'),
@@ -149,6 +152,16 @@ export default () => {
             () =>
               t('DeveloperSettings.ClearCacheDesc2', {
                 val: NoxCache.noxMediaCache?.cacheSize() || 0,
+              })
+          )}
+          {renderListItem(
+            ICONS.clearOrphanCache,
+            'ClearOrphanedCache',
+            cleanOrphanedCache,
+            'DeveloperSettings',
+            () =>
+              t('DeveloperSettings.ClearCacheDesc2', {
+                val: orphanedCache.length,
               })
           )}
         </List.Section>
