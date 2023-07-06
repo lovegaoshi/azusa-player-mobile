@@ -98,22 +98,22 @@ export default () => {
   ) => {
     const reExtractions = [
       {
-        regex: /parsed:(.+)/,
+        regex: /Parsed:(.+)/,
         process: (val: RegExpExecArray, someRows: Array<NoxMedia.Song>) =>
           someRows.filter(row => row.parsedName === val[1]),
       },
       {
-        regex: /artist:(.+)/,
+        regex: /Artist:(.+)/,
         process: (val: RegExpExecArray, someRows: Array<NoxMedia.Song>) =>
           someRows.filter(row => row.singer.includes(val[1])),
       },
       {
-        regex: /album:(.+)/,
+        regex: /Album:(.+)/,
         process: (val: RegExpExecArray, someRows: Array<NoxMedia.Song>) =>
           someRows.filter(row => row.album?.includes(val[1])),
       },
       {
-        regex: /cached:(.+)/,
+        regex: /Cached:(.+)/,
         process: (val: RegExpExecArray, someRows: Array<NoxMedia.Song>) =>
           someRows.filter(row => cachedSongs.includes(noxCacheKey(row))),
       },
