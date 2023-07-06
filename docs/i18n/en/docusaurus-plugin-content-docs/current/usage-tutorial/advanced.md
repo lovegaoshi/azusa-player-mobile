@@ -12,7 +12,7 @@ sidebar_position: 2
 
 登录 b 站可以将歌单同步为 b 站收藏夹，为视频点赞和三连。请注意若登录 b 站操作造成账号被风控和封禁，电梓播放器恕不负责，务必使用小号
 
-![Example banner](./images/Screenshot_20230606_142738_APM.jpg)
+![Example banner](../../../../../docs/usage-tutorial/images/Screenshot_20230606_142738_APM.jpg)
 
 ## b 站识歌
 
