@@ -27,6 +27,7 @@ export default () => {
   const setCurrentPlayingList = useNoxSetting(
     state => state.setCurrentPlayingList
   );
+  const currentPlayingList = useNoxSetting(state => state.currentPlayingList);
   const currentPlayingId = useNoxSetting(state => state.currentPlayingId);
   const playerSetting = useNoxSetting(state => state.playerSetting);
   const playerStyle = useNoxSetting(state => state.playerStyle);
@@ -51,7 +52,9 @@ export default () => {
   const playlistRef = React.useRef<any>(null);
   const netInfo = useNetInfo();
   // TODO: slow?
-  const [cachedSongs] = useState(Array.from(noxCache.noxMediaCache.cache.keys()));
+  const [cachedSongs] = useState(
+    Array.from(noxCache.noxMediaCache.cache.keys())
+  );
 
   const resetSelected = (val = false) =>
     setSelected(Array(currentPlaylist.songList.length).fill(val));
@@ -92,8 +95,11 @@ export default () => {
     searchStr: string,
     rows: Array<NoxMedia.Song>,
     defaultExtract = (someRows: Array<NoxMedia.Song>, searchstr: string) =>
-      someRows.filter(row =>
-        row.name.toLowerCase().includes(searchstr.toLowerCase())
+      someRows.filter(
+        row =>
+          row.name.toLowerCase().includes(searchstr.toLowerCase()) ||
+          row.singer.includes(searchstr) ||
+          row.album?.includes(searchstr)
       )
   ) => {
     const reExtractions = [
@@ -113,7 +119,7 @@ export default () => {
           someRows.filter(row => row.album?.includes(val[1])),
       },
       {
-        regex: /Cached:(.+)/,
+        regex: /Cached:/,
         process: (val: RegExpExecArray, someRows: Array<NoxMedia.Song>) =>
           someRows.filter(row => cachedSongs.includes(noxCacheKey(row))),
       },
@@ -180,7 +186,11 @@ export default () => {
      * song from zustand saved queue.
      */
 
-    if (song.id === currentPlayingId) return;
+    if (
+      song.id === currentPlayingId &&
+      currentPlaylist.id === currentPlayingList.id
+    )
+      return;
     await TrackPlayer.reset();
     const queuedSongList = playerSetting.keepSearchedSongListWhenPlaying
       ? currentRows
@@ -251,8 +261,8 @@ export default () => {
     const currentIndex =
       toIndex < 0
         ? currentPlaylist.songList.findIndex(
-          song => song.id === currentPlayingId
-        )
+            song => song.id === currentPlayingId
+          )
         : toIndex;
     if (currentIndex > -1) {
       playlistRef.current.scrollToIndex({
