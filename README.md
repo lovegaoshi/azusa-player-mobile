@@ -1,39 +1,28 @@
 # Azusa-player-mobile
 
-[![android weekly](https://github.com/lovegaoshi/azusa-player-mobile/actions/workflows/android-weekly.yml/badge.svg?branch=master)](https://github.com/lovegaoshi/azusa-player-mobile/actions/workflows/android-weekly.yml)
-
 <p align="center"><a href="https://github.com/kenmingwang/azusa-player"><img width="200" src="https://github.com/kenmingwang/azusa-player/blob/master/public/img/logo2-01.png?raw=true"></a></p>
 
 <p align="center">
-  <a href="https://github.com/kenmingwang/azusa-player/blob/master/LICENSE">
-    <img src="https://camo.githubusercontent.com/992daabc2aa4463339825f8333233ba330dd08c57068f6faf4bb598ab5a3df2e/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f6c6963656e73652d4d49542d627269676874677265656e2e737667" alt="Software License" data-canonical-src="https://img.shields.io/badge/license-MIT-brightgreen.svg" style="max-width: 100%;">
+  <a href="https://github.com/lovegaoshi/azusa-player-mobile/releases">
+    <img alt="GitHub release (latest by date)" src="https://github.com/lovegaoshi/azusa-player-mobile/actions/workflows/android-weekly.yml/badge.svg?branch=master">
   </a>
-  <a href="">
-    <img alt="GitHub release (latest by date)" src="https://img.shields.io/github/stars/kenmingwang/azusa-player">
+  <a href="https://github.com/lovegaoshi/azusa-player-mobile/releases">
+    <img alt="GitHub all releases" src="https://img.shields.io/github/downloads/lovegaoshi/azusa-player-mobile/total">
   </a>
-  <a href="https://github.com/kenmingwang/azusa-player/releases">
-    <img alt="GitHub release (latest by date)" src="https://img.shields.io/github/v/release/kenmingwang/azusa-player">
+  <a href="https://github.com/lovegaoshi/azusa-player-mobile/releases">
+    <img alt="GitHub release (latest by date)" src="https://img.shields.io/github/v/release/lovegaoshi/azusa-player-mobile">
   </a>
-  <a href="https://github.com/kenmingwang/azusa-player/actions/workflows/webpack.yml">
-    <img alt="GitHub Workflow Status" src="https://img.shields.io/github/actions/workflow/status/kenmingwang/azusa-player/webpack.yml">
-  </a>
-  </br>
-  <a href="https://chrome.google.com/webstore/detail/%E7%94%B5%E6%A2%93%E6%92%AD%E6%94%BE%E5%99%A8-%E7%AC%AC%E4%B8%89%E6%96%B9bilibili%E9%9F%B3%E9%A2%91%E6%92%AD%E6%94%BE%E5%99%A8/bdplgemfnbaefommicdebhboajognnhj">
-    <img alt="GitHub Workflow Status" src="https://img.shields.io/chrome-web-store/users/bdplgemfnbaefommicdebhboajognnhj?color=blue&label=chrome-user">
-  </a>
-  <a href="https://microsoftedge.microsoft.com/addons/detail/%E7%94%B5%E6%A2%93%E6%92%AD%E6%94%BE%E5%99%A8%E7%AC%AC%E4%B8%89%E6%96%B9bilibili%E9%9F%B3%E9%A2%91%E6%92%AD%E6%94%BE%E5%99%A8/bikfgaolchpolficinadmbmkkohkbkdf">
-    <img alt="GitHub all releases" src="https://img.shields.io/badge/dynamic/json?label=edge-user&query=%24.activeInstallCount&url=https%3A%2F%2Fmicrosoftedge.microsoft.com%2Faddons%2Fgetproductdetailsbycrxid%2Fbikfgaolchpolficinadmbmkkohkbkdf">
-  </a>
-  <a href="https://github.com/kenmingwang/azusa-player/releases">
-    <img alt="GitHub all releases" src="https://img.shields.io/github/downloads/kenmingwang/azusa-player/total">
-  </a>
+  
 </p>
+
 <h3 align="center" style="color:purple">Azusa-Player-Mobile / 电梓播放器手机版</h3>
 <h4 align="center" style="color:purple">A 3rd party Bilibili audio player / 一个Bilibili第三方音频播放器</h4>
 
 ## 项目简介
 
-- 是真正意义上的手机版《电梓播放器》(?): Azusa-Player！
+This project is a mobile adaptation of [电梓播放器](https://github.com/kenmingwang/azusa-player/releases). It's developed by [电梓播放器](https://github.com/kenmingwang/azusa-player/releases)'s developer [Nek](https://github.com/kenmingwang) and [电Nox播放器](https://github.com/lovegaoshi/azusa-player/tree/nox-player)'s developer [lovegaoshi](https://github.com/lovegaoshi).
+
+- 是真正意义上的手机版《[电梓播放器](https://github.com/kenmingwang/azusa-player/releases)》(?): Azusa-Player！
 - 本质上是个 b 站第三方**音频在线播放器**，是插件版[电梓播放器](https://github.com/kenmingwang/azusa-player) 和[电闹播放器](https://github.com/lovegaoshi/azusa-player)的忠实移植；对标油管音乐，但是去除歌单推荐功能~2023年不会还有人用b站推荐听歌吧~，交互仿造AIMP，界面更简洁，设计更人性。
   - 由于浏览器地八哥轻松简便并且我手机流量捉急，主要功能依然会在插件版[电闹播放器](https://github.com/lovegaoshi/azusa-player)优先更新
 - 目的是想让视频**轻量化**为音频，方便溜歌/歌单分类/下载等
@@ -42,9 +31,10 @@
 - 支持换皮和自制皮肤
 - 支持歌单云备份、与插件版电闹播放器伪互通
 - 支持b站登录，点赞，三连，增加b站视频播放量
-- 技术栈为跨平台React Native支持安卓和苹果，众筹一台mac和果子商店99USD年费上架ios商店
+- 技术栈为跨平台React Native支持安卓和 side loading 苹果
 - **切片 man 不易，没有各位切片 man 也不会有这个项目的意义，请大家溜歌同时点右下方的点赞按钮点赞和三连 👍**
 - 自用为主要目的，不感兴趣的 feature 大概不会做，有问题可以[b 站私信](https://message.bilibili.com/#/whisper/mid1989881)
+- APM supports steria.vplayer.tk. Simply put steria.vplayer.tk in the search bar.
  
 ## 为什么要使用管人播放器？
 
@@ -60,6 +50,10 @@
 安卓用户在右边的release下载最新版本apk。
 
 苹果用户在右边的release下载最新版本ipa。然后[按这个方法](https://zhuanlan.zhihu.com/p/99397647)安装。大概。
+
+There is an internal testing (unreviewed) version of APM on the Google Play Store. It is invitation by email only and only serves the purpose of enabling Android Auto (yes, APM does partially support android auto thanks to [me](https://github.com/lovegaoshi/react-native-track-player/tree/dev-android-auto)!). If you would like to use APM with Android Auto, consider enabling the developer options and enable unknown sources in Android Auto, or leave me your email to be in APM's internal testers email list.
+
+Although APM (or really, the react-native-track-player underneath APM) does support Apple CarPlay out of the box, CarPlay features can only be used by apps actually in the Apple AppStore and I do not have and loathe Apple products. Unless Nek decided to put APM in the AppStore, sucks to be an apple user :'(
 
 ## 使用
 请参考[电闹播放器的介绍](https://www.bilibili.com/video/BV1bv4y1p7K4/?spm_id_from=333.999.0.0)。
@@ -84,7 +78,7 @@ yarn
 cd ios && pod install && cd ..
 ```
 
-IOS编译时请看https://github.com/lovegaoshi/azusa-player-mobile/issues/34。
+IOS编译时请看https://github.com/lovegaoshi/azusa-player-mobile/issues/34  。
 
 ## Licenses of used dependencies
 
