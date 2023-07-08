@@ -20,12 +20,14 @@ import { updateSubscribeFavList } from '../../utils/BiliSubscribe';
 import { songlistToTracklist } from '../../objects/Playlist';
 import { PLAYLIST_ENUMS } from '../../enums/Playlist';
 import { syncFavlist } from '../../utils/Bilibili/bilifavOperate';
+import noxCache, { noxCacheKey } from '../../utils/Cache';
 
 export default () => {
   const { t } = useTranslation();
   const setCurrentPlayingList = useNoxSetting(
     state => state.setCurrentPlayingList
   );
+  const currentPlayingList = useNoxSetting(state => state.currentPlayingList);
   const currentPlayingId = useNoxSetting(state => state.currentPlayingId);
   const playerSetting = useNoxSetting(state => state.playerSetting);
   const playerStyle = useNoxSetting(state => state.playerStyle);
@@ -49,6 +51,10 @@ export default () => {
   const [refreshing, setRefreshing] = useState(false);
   const playlistRef = React.useRef<any>(null);
   const netInfo = useNetInfo();
+  // TODO: slow?
+  const [cachedSongs] = useState(
+    Array.from(noxCache.noxMediaCache.cache.keys())
+  );
 
   const resetSelected = (val = false) =>
     setSelected(Array(currentPlaylist.songList.length).fill(val));
@@ -89,25 +95,33 @@ export default () => {
     searchStr: string,
     rows: Array<NoxMedia.Song>,
     defaultExtract = (someRows: Array<NoxMedia.Song>, searchstr: string) =>
-      someRows.filter(row =>
-        row.name.toLowerCase().includes(searchstr.toLowerCase())
+      someRows.filter(
+        row =>
+          row.name.toLowerCase().includes(searchstr.toLowerCase()) ||
+          row.singer.includes(searchstr) ||
+          row.album?.includes(searchstr)
       )
   ) => {
     const reExtractions = [
       {
-        regex: /parsed:(.+)/,
+        regex: /Parsed:(.+)/,
         process: (val: RegExpExecArray, someRows: Array<NoxMedia.Song>) =>
           someRows.filter(row => row.parsedName === val[1]),
       },
       {
-        regex: /artist:(.+)/,
+        regex: /Artist:(.+)/,
         process: (val: RegExpExecArray, someRows: Array<NoxMedia.Song>) =>
           someRows.filter(row => row.singer.includes(val[1])),
       },
       {
-        regex: /album:(.+)/,
+        regex: /Album:(.+)/,
         process: (val: RegExpExecArray, someRows: Array<NoxMedia.Song>) =>
           someRows.filter(row => row.album?.includes(val[1])),
+      },
+      {
+        regex: /Cached:/,
+        process: (val: RegExpExecArray, someRows: Array<NoxMedia.Song>) =>
+          someRows.filter(row => cachedSongs.includes(noxCacheKey(row))),
       },
     ];
     let defaultExtraction = true;
@@ -172,7 +186,11 @@ export default () => {
      * song from zustand saved queue.
      */
 
-    if (song.id === currentPlayingId) return;
+    if (
+      song.id === currentPlayingId &&
+      currentPlaylist.id === currentPlayingList.id
+    )
+      return;
     await TrackPlayer.reset();
     const queuedSongList = playerSetting.keepSearchedSongListWhenPlaying
       ? currentRows

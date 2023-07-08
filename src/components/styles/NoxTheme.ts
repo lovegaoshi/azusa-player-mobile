@@ -33,6 +33,11 @@ export default {
   ],
   backgroundImages: [
     'https://cdn.donmai.us/original/ea/ec/__nox_nijisanji_and_3_more_drawn_by_netural__eaec50f6d554b731ffe4fcace255d0bd.png',
+    'https://i0.hdslb.com/bfs/baselabs/f99bb1115aee11c0f939914529fb3d4b06eee485.png',
+    {
+      type: 'biliNFTVideo',
+      identifier: '["102",18]',
+    },
   ],
 
   customColors: {
