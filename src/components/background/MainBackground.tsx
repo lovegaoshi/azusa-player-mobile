@@ -4,12 +4,14 @@ import Video from 'react-native-video';
 import { useNoxSetting } from '../../hooks/useSetting';
 import { fetchVideoPlayUrlPromise } from '../../utils/mediafetch/resolveURL';
 import { customReqHeader } from '../../utils/BiliFetch';
+import { biliNFTVideoFetch } from '../../utils/mediafetch/biliNFT';
 
 const mobileHeight = Dimensions.get('window').height;
 
 enum RESOLVE_TYPE {
   bvid = 'bvid',
   video = 'video',
+  biliNFTVideo = 'biliNFTVideo',
   image = 'image',
 }
 
@@ -28,6 +30,12 @@ export const resolveBackgroundImage = async (
           undefined,
           'VideoUrl'
         ),
+      };
+    case RESOLVE_TYPE.biliNFTVideo:
+      const [act_id, index] = JSON.parse(backgroundImage.identifier);
+      return {
+        type: RESOLVE_TYPE.video,
+        identifier: await biliNFTVideoFetch({ act_id, index }),
       };
     default:
       return backgroundImage;
