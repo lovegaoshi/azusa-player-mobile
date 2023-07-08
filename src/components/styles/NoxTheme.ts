@@ -30,6 +30,7 @@ export default {
     'https://i0.hdslb.com/bfs/new_dyn/6b1ceba3f1c433d494c98ef9eeb71a5e32898941.gif',
     'https://i0.hdslb.com/bfs/new_dyn/0043f21652277aba43afb176fe60ba3132898941.png',
     'https://i0.hdslb.com/bfs/new_dyn/def78a8ec272a9485d01278eb8353d1632898941.png',
+    'https://i0.hdslb.com/bfs/garb/item/8d26deac54428b567fb61be6198e601ea9a4622b.png',
   ],
   backgroundImages: [
     'https://cdn.donmai.us/original/ea/ec/__nox_nijisanji_and_3_more_drawn_by_netural__eaec50f6d554b731ffe4fcace255d0bd.png',
