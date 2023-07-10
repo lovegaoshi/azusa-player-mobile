@@ -31,6 +31,6 @@ const regexFetch = async ({
 };
 
 export default {
-  regexSearchMatch: /youtu(?:.*\/v\/|.*v=|\.be\/).+\?list=([^&]+)/,
+  regexSearchMatch: /youtu.*list=([^&]+)/,
   regexFetch,
 };
