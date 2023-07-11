@@ -160,7 +160,7 @@ export default () => {
             cleanOrphanedCache,
             'DeveloperSettings',
             () =>
-              t('DeveloperSettings.ClearCacheDesc2', {
+              t('DeveloperSettings.ClearOrphanedCacheDesc2', {
                 val: orphanedCache.length,
               })
           )}
