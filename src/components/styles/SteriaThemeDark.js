@@ -1,11 +1,11 @@
 export default {
   metaData: {
-    themeName: '安妮播放器',
-    themeDesc: '关注弃车人的骄傲你练直播间27484357',
-    themeAuthor: '食梦莲lotus@bilibili',
+    themeName: 'VV播放器（暗）',
+    themeDesc: '温柔 安定 直播间22924075',
+    themeAuthor: '薇薇单推人@b站',
     themeIcon:
-      'https://i0.hdslb.com/bfs/face/81e39eb61a0cbefeb7a6647137167011a63e717f.jpg',
-    darkTheme: false,
+      'https://i2.hdslb.com/bfs/face/b70f6e62e4582d4fa5d48d86047e64eb57d7504e.jpg',
+    darkTheme: true,
   },
 
   gifs: [
@@ -27,33 +27,33 @@ export default {
     'http://i0.hdslb.com/bfs/garb/74bbe0803168dc873a7e97334b0bab85d337a39c.png',
   ],
   backgroundImages: [
-    'https://koistatic.terrach.net/dbs-art/2022/08/20220824144703485.jpg',
+    'https://i0.hdslb.com/bfs/new_dyn/344ceb5ad5145571272b5f7f31797924355610.png',
   ],
 
   customColors: {
     // background color for any screens OTHER THAN the main player screen.
     // should have a low transparency to make text reading easier.
     // note its transparency STACKS with colors.background
-    maskedBackgroundColor: 'rgba(255, 255, 255, 0.40)',
+    maskedBackgroundColor: 'rgba(0, 0, 0, 0.60)',
     // playlist background when selected. should be the contrast color of the primary text color.
-    playlistDrawerBackgroundColor: '#ffa6c9',
+    playlistDrawerBackgroundColor: '#cc3366',
     // playlist background when selected. should be the contrast color of the primary text color.
     playlistDrawerBackgroundColorTransparent: 'rgba(255, 166, 201, 0.35)',
     // progress bar's round icon color.
-    progressThumbTintColor: '#ff1493',
+    progressThumbTintColor: '#ffa6c9',
     // progresss bar's whatever's left of the round icon
-    progressMinimumTrackTintColor: '#ff1493',
+    progressMinimumTrackTintColor: '#ffa6c9',
     // progresss bar's whatever's right of the round icon
     progressMaximumTrackTintColor: '#FFFFFF',
   },
 
   colors: {
-    text: '#ff1493',
-    primary: '#ff1493',
+    text: '#ffa6c9',
+    primary: '#ffa6c9',
     onPrimary: 'rgb(255, 255, 255)',
     primaryContainer: 'rgb(255, 217, 223)',
     onPrimaryContainer: 'rgb(63, 0, 22)',
-    secondary: '#cc3366',
+    secondary: '#ff1493',
     onSecondary: 'rgb(255, 255, 255)',
     secondaryContainer: 'rgb(255, 217, 223)',
     onSecondaryContainer: 'rgb(43, 21, 26)',
@@ -65,12 +65,12 @@ export default {
     onError: 'rgb(255, 255, 255)',
     errorContainer: 'rgb(255, 218, 214)',
     onErrorContainer: 'rgb(65, 0, 2)',
-    background: 'rgba(255, 251, 255, 0.3)',
-    onBackground: '#ff1493',
+    background: 'rgba(0,0,0, 0.4)',
+    onBackground: '#ffa6c9',
     surface: 'rgb(255, 251, 255)',
-    onSurface: '#ff1493',
+    onSurface: '#ffa6c9',
     surfaceVariant: 'rgb(243, 221, 224)',
-    onSurfaceVariant: '#ff1493',
+    onSurfaceVariant: '#ffa6c9',
     outline: 'rgb(132, 115, 117)',
     outlineVariant: 'rgb(214, 194, 196)',
     shadow: 'rgba(0, 0, 0)',

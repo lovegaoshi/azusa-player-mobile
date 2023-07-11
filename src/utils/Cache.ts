@@ -78,8 +78,8 @@ class NoxMediaCache {
 
   getOrphanedCache = (songList: NoxMedia.Song[]) => {
     const songListKeys = songList.map(song => noxCacheKey(song));
-    return Array.from(this.cache.keys()).filter(key =>
-      songListKeys.includes(key)
+    return Array.from(this.cache.keys()).filter(
+      key => !songListKeys.includes(key)
     );
   };
 
