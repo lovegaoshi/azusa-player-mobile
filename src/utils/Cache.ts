@@ -84,7 +84,11 @@ class NoxMediaCache {
   };
 
   cleanOrphanedCache = (orphanedList: string[]) => {
-    orphanedList.forEach(val => RNFetchBlob.fs.unlink(val));
+    orphanedList.forEach(val => {
+      const fspath = this.cache.get(val);
+      if (fspath) RNFetchBlob.fs.unlink(fspath);
+      this.cache.delete(val);
+    });
   };
 
   clearCache = () => {
