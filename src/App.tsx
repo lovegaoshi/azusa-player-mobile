@@ -22,6 +22,7 @@ import Playlist from './components/playlist/View';
 import PlayerBottomPanel from './components/player/PlayerProgressControls';
 import MainBackground from './components/background/MainBackground';
 import { useNoxSetting } from './hooks/useSetting';
+import useAAPlayback from './hooks/useAAPlayback';
 import PlaylistDrawer from './components/playlists/View';
 import { ViewEnum } from './enums/View';
 import Settings from './components/setting/View';
@@ -59,6 +60,7 @@ const App: React.FC = () => {
   const defaultTheme = playerStyle.metaData.darkTheme
     ? CombinedDarkTheme
     : CombinedDefaultTheme;
+  const AAPlayback = useAAPlayback();
 
   function NoxPlayer() {
     return (

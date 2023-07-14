@@ -22,7 +22,7 @@ import { PLAYLIST_ENUMS } from '../../enums/Playlist';
 import { syncFavlist } from '../../utils/Bilibili/bilifavOperate';
 import noxCache, { noxCacheKey } from '../../utils/Cache';
 
-export default () => {
+const PlaylistList = () => {
   const { t } = useTranslation();
   const setCurrentPlayingList = useNoxSetting(
     state => state.setCurrentPlayingList
@@ -426,3 +426,5 @@ const stylesLocal = StyleSheet.create({
     maxHeight: Dimensions.get('window').height - 250,
   },
 });
+
+export default PlaylistList;
