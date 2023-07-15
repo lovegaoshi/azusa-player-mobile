@@ -83,13 +83,10 @@ jobs:
         run: |
           echo "${{ secrets.RELEASE_SIGN_PWD }}" >> ./android/gradle.properties
 
-      - name: Get Build Sign jks
-        id: write_file
-        uses: timheuer/base64-to-file@v1.2
+      - name: WGet Build Sign jks
+        uses: wei/wget@v1
         with:
-          fileName: 'noxupload.jks'
-          fileDir: './android/app/'
-          encodedString: ${{ secrets.SIGNED_KEY_BASE64 }}
+          args: -O ./android/app/noxupload.jks ${{ secrets.REMOTE_KEYFILE_URL }}
 
       - name: Install dependencies
         uses: nick-fields/retry@v2
