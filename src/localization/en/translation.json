@@ -194,5 +194,8 @@
     "Disclaimer1": "This project and its contents are not affiliated with, funded, authorized, endorsed by, or in any way associated with Bilibili Inc. or any of its affiliates and subsidiaries. (But we really want to, call us)",
     "Disclaimer2": "Any trademark, service mark, trade name, or other intellectual property rights used in this project are owned by the respective owners.",
     "About1": "APM is an open source software. You may find the source code of APM at github.com/lovegaoshi/azusa-player-mobile free of charge. Please consider adding your music stream cuts on bilibili via the video series list functionality with keywords to add videos into the series list automatically."
+  },
+  "AndroidAuto": {
+    "PlaylistTab": "Playlists"
   }
 }
