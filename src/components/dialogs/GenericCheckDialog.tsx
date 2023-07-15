@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { Pressable, View, FlatList, StyleSheet } from 'react-native';
 import { Button, Dialog, Portal, Text, Checkbox } from 'react-native-paper';
 import { useTranslation } from 'react-i18next';
-import { v4 as uuidv4 } from 'uuid';
 
 const DialogTitle = ({ title }: { title: string | undefined }) => {
   if (!title) return <View></View>;
