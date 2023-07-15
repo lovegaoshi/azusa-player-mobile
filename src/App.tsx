@@ -22,13 +22,13 @@ import Playlist from './components/playlist/View';
 import PlayerBottomPanel from './components/player/PlayerProgressControls';
 import MainBackground from './components/background/MainBackground';
 import { useNoxSetting } from './hooks/useSetting';
-import useAAPlayback from './hooks/useAAPlayback';
 import PlaylistDrawer from './components/playlists/View';
 import { ViewEnum } from './enums/View';
 import Settings from './components/setting/View';
 import './localization/i18n';
 import AppOpenSplash from './components/background/AppOpenSplash';
 import { DummySettings } from './components/setting/View';
+import AzusaPlayer from './AzusaPlayer';
 
 const { LightTheme, DarkTheme } = adaptNavigationTheme({
   reactNavigationLight: NavigationDefaultTheme,
@@ -60,7 +60,6 @@ const App: React.FC = () => {
   const defaultTheme = playerStyle.metaData.darkTheme
     ? CombinedDarkTheme
     : CombinedDefaultTheme;
-  const AAPlayback = useAAPlayback();
 
   function NoxPlayer() {
     return (
@@ -109,56 +108,58 @@ const App: React.FC = () => {
   // HACK: proof codewhisperer learns stackoverflow:
   // https://stackoverflow.com/questions/54599305/how-to-set-background-image-with-react-native-and-react-navigation
   return (
-    <MainBackground>
-      <PaperProvider
-        theme={{
-          ...defaultTheme,
-          colors: playerStyle.colors,
-        }}
-      >
-        <NavigationContainer
+    <AzusaPlayer>
+      <MainBackground>
+        <PaperProvider
           theme={{
             ...defaultTheme,
-            colors: {
-              ...defaultTheme.colors,
-              ...playerStyle.colors,
-            },
+            colors: playerStyle.colors,
           }}
         >
-          <Drawer.Navigator
-            initialRouteName={ViewEnum.PLAYER_HOME}
-            drawerContent={PlaylistDrawer}
+          <NavigationContainer
+            theme={{
+              ...defaultTheme,
+              colors: {
+                ...defaultTheme.colors,
+                ...playerStyle.colors,
+              },
+            }}
           >
-            <Drawer.Screen
-              name={ViewEnum.PLAYER_HOME}
-              options={{
-                drawerIcon: () => <IconButton icon="home-outline" />,
-                title: String(t('appDrawer.homeScreenName')),
-                header: () => null,
-              }}
-              component={NoxPlayer}
-            />
-            <Drawer.Screen
-              name={ViewEnum.EXPORE}
-              options={{
-                drawerIcon: () => <IconButton icon="compass" />,
-                title: String(t('appDrawer.exploreScreenName')),
-              }}
-              component={DummySettings}
-            />
-            <Drawer.Screen
-              name={ViewEnum.SETTINGS}
-              options={{
-                drawerIcon: () => <IconButton icon="cog" />,
-                title: String(t('appDrawer.settingScreenName')),
-                header: () => null,
-              }}
-              component={Settings}
-            />
-          </Drawer.Navigator>
-        </NavigationContainer>
-      </PaperProvider>
-    </MainBackground>
+            <Drawer.Navigator
+              initialRouteName={ViewEnum.PLAYER_HOME}
+              drawerContent={PlaylistDrawer}
+            >
+              <Drawer.Screen
+                name={ViewEnum.PLAYER_HOME}
+                options={{
+                  drawerIcon: () => <IconButton icon="home-outline" />,
+                  title: String(t('appDrawer.homeScreenName')),
+                  header: () => null,
+                }}
+                component={NoxPlayer}
+              />
+              <Drawer.Screen
+                name={ViewEnum.EXPORE}
+                options={{
+                  drawerIcon: () => <IconButton icon="compass" />,
+                  title: String(t('appDrawer.exploreScreenName')),
+                }}
+                component={DummySettings}
+              />
+              <Drawer.Screen
+                name={ViewEnum.SETTINGS}
+                options={{
+                  drawerIcon: () => <IconButton icon="cog" />,
+                  title: String(t('appDrawer.settingScreenName')),
+                  header: () => null,
+                }}
+                component={Settings}
+              />
+            </Drawer.Navigator>
+          </NavigationContainer>
+        </PaperProvider>
+      </MainBackground>
+    </AzusaPlayer>
   );
 };
 

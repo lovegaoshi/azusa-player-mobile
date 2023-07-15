@@ -39,7 +39,9 @@ const useAAPlayback = () => {
   };
 
   const playFromMediaId = (mediaId: string) => {
+    console.log(`[playFromMediaId]: ${mediaId}`);
     if (mediaId.startsWith(PLAYLIST_MEDIAID)) {
+      mediaId = mediaId.substring(PLAYLIST_MEDIAID.length);
       // play a playlist.
       if (playlists[mediaId] === undefined) {
         return;
@@ -105,6 +107,15 @@ const useAAPlayback = () => {
   };
 
   const buildBrowseTree = () => {
+    console.log(
+      Object.keys(playlists).map(key => {
+        return {
+          mediaId: `${PLAYLIST_MEDIAID}${key}`,
+          title: playlists[key].title,
+          playable: '0',
+        };
+      })
+    );
     TrackPlayer.setBrowseTree({
       '/': [
         {
@@ -127,14 +138,13 @@ const useAAPlayback = () => {
     const listener = TrackPlayer.addEventListener(Event.RemotePlayId, e =>
       playFromMediaId(e.id)
     );
-    return () => listener.remove();
-  }, []);
-
-  useEffect(() => {
-    const listener = TrackPlayer.addEventListener(Event.RemotePlaySearch, e =>
+    const listener2 = TrackPlayer.addEventListener(Event.RemotePlaySearch, e =>
       playFromSearch(e.query.toLowerCase())
     );
-    return () => listener.remove();
+    return () => {
+      listener.remove();
+      listener2.remove();
+    };
   }, []);
 
   useEffect(() => {
