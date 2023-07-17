@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import TrackPlayer, { RepeatMode } from 'react-native-track-player';
 import { IconButton } from 'react-native-paper';
 
@@ -19,6 +19,13 @@ export default () => {
     setState({ playmode: val });
     setPlayModeState(val);
     savePlayMode(val);
+    switch (val) {
+      case NoxRepeatMode.REPEAT_TRACK:
+        TrackPlayer.setRepeatMode(RepeatMode.Track);
+        break;
+      default:
+        TrackPlayer.setRepeatMode(RepeatMode.Queue);
+    }
   };
 
   const onClickPlaymode = () => {
@@ -28,11 +35,9 @@ export default () => {
         break;
       case NoxRepeatMode.REPEAT:
         setPlayMode(NoxRepeatMode.REPEAT_TRACK);
-        TrackPlayer.setRepeatMode(RepeatMode.Track);
         break;
       case NoxRepeatMode.REPEAT_TRACK:
         setPlayMode(NoxRepeatMode.SUGGEST);
-        TrackPlayer.setRepeatMode(RepeatMode.Off);
         break;
       case NoxRepeatMode.SUGGEST:
         setPlayMode(NoxRepeatMode.SHUFFLE);
@@ -41,6 +46,10 @@ export default () => {
         break;
     }
   };
+
+  useEffect(() => {
+    setPlayMode(playModeState);
+  }, []);
 
   return (
     <IconButton
