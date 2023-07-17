@@ -2,7 +2,7 @@ import TrackPlayer, { Event, State } from 'react-native-track-player';
 
 import { resolveUrl, NULL_TRACK } from '../objects/Song';
 import { initBiliHeartbeat } from '../utils/Bilibili/BiliOperate';
-import { NoxStorage } from '../types/storage';
+import type { NoxStorage } from '../types/storage';
 import { saveLastPlayDuration } from '../utils/ChromeStorage';
 import logger from '../utils/Logger';
 import NoxCache from '../utils/Cache';

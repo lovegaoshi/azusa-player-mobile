@@ -10,7 +10,7 @@ import AzusaTheme from '../components/styles/AzusaTheme';
 import { chunkArray as chunkArrayRaw } from '../utils/Utils';
 import { VERSIONS } from '../enums/Version';
 import { EXPORT_OPTIONS } from '../enums/Sync';
-import { NoxStorage } from '../types/storage';
+import type { NoxStorage } from '../types/storage';
 import { logger } from './Logger';
 /**
  * noxplayer's storage handler.
