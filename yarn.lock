@@ -2076,11 +2076,6 @@
   resolved "https://registry.npmjs.org/@react-native-community/netinfo/-/netinfo-9.4.1.tgz#7b880758adca65fe47ee866cf7b00416b9dcc192"
   integrity sha512-dAbY5mfw+6Kas/GJ6QX9AZyY+K+eq9ad4Su6utoph/nxyH3whp5cMSgRNgE2VhGQVRZ/OG0qq3IaD3+wzoqJXw==
 
-"@react-native-community/slider@^4.4.2":
-  version "4.4.2"
-  resolved "https://registry.yarnpkg.com/@react-native-community/slider/-/slider-4.4.2.tgz#1fea0eb3ae31841fe87bd6c4fc67569066e9cf4b"
-  integrity sha512-D9bv+3Vd2gairAhnRPAghwccgEmoM7g562pm8i4qB3Esrms5mggF81G3UvCyc0w3jjtFHh8dpQkfEoKiP0NW/Q==
-
 "@react-native-cookies/cookies@^6.2.1":
   version "6.2.1"
   resolved "https://registry.yarnpkg.com/@react-native-cookies/cookies/-/cookies-6.2.1.tgz#54d50b9496400bbdc19e43c155f70f8f918999e3"
@@ -8598,10 +8593,9 @@ react-native-lyric@^1.0.2:
   resolved "https://registry.yarnpkg.com/react-native-lyric/-/react-native-lyric-1.0.2.tgz#5ab3de43754610b6beebf1b32ead72f0ffac8da2"
   integrity sha512-gdzwFkwCkTiQ61/ileW1CVIP3G9pTzE48MNmn/Ltw+dXqakdYRTB9EVUhb6UWO6sWSFaTuGZXjapdwMo3Ss4qw==
 
-react-native-pager-view@^6.2.0:
+"react-native-pager-view@git+https://github.com/alexhernandez/react-native-pager-view.git":
   version "6.2.0"
-  resolved "https://registry.yarnpkg.com/react-native-pager-view/-/react-native-pager-view-6.2.0.tgz#51380d93fbe47f6380dc71d613a787bf27a4ca37"
-  integrity sha512-pf9OnL/Tkr+5s4Gjmsn7xh91PtJLDa6qxYa/bmtUhd/+s4cQdWQ8DIFoOFghwZIHHHwVdWtoXkp6HtpjN+r20g==
+  resolved "git+https://github.com/alexhernandez/react-native-pager-view.git#2946c1c33df6cacc8f9f77220bb879b39bb75ace"
 
 react-native-paper@^5.7.0:
   version "5.9.1"
