@@ -1730,9 +1730,9 @@
     fastq "^1.6.0"
 
 "@react-native-async-storage/async-storage@^1.18.1":
-  version "1.19.0"
-  resolved "https://registry.npmjs.org/@react-native-async-storage/async-storage/-/async-storage-1.19.0.tgz#594aca9c20924b7955d62cf43797b4187e1e6cf8"
-  integrity sha512-xOFkz/FaQctD6yNJDur+WnHdSTigOs3pTz6HmfC8X8PYwcnnN3R9UxuWiwsfK8vvT2WioAxUkQt3lB7GySNA2w==
+  version "1.19.1"
+  resolved "https://registry.npmjs.org/@react-native-async-storage/async-storage/-/async-storage-1.19.1.tgz#09d35caaa31823b40fdfeebf95decf8f992a6274"
+  integrity sha512-5QXuGCtB+HL3VtKL2JN3+6t4qh8VXizK+aGDAv6Dqiq3MLrzgZHb4tjVgtEWMd8CcDtD/JqaAI1b6/EaYGtFIA==
   dependencies:
     merge-options "^3.0.4"
 
@@ -2441,6 +2441,13 @@
     "@react-native/virtualized-lists" "^0.72.4"
     "@types/react" "*"
 
+"@types/react-native@^0.61.15":
+  version "0.61.23"
+  resolved "https://registry.npmjs.org/@types/react-native/-/react-native-0.61.23.tgz#bff4e0311c229a5203eb37aacd4febf59f3e2980"
+  integrity sha512-upHmySsrVBDBokWWhYIKkKnpvadsHdioSjbBTu4xl7fjN0yb94KR5ngUOBXsyqAYqQzF+hP6qpvobG9M7Jr6hw==
+  dependencies:
+    "@types/react" "*"
+
 "@types/react-native@^0.71.6":
   version "0.71.8"
   resolved "https://registry.yarnpkg.com/@types/react-native/-/react-native-0.71.8.tgz#e7e6ba3c2d9306d7733447a5dd4403b502477d5c"
@@ -2459,6 +2466,15 @@
   version "18.2.14"
   resolved "https://registry.npmjs.org/@types/react/-/react-18.2.14.tgz#fa7a6fecf1ce35ca94e74874f70c56ce88f7a127"
   integrity sha512-A0zjq+QN/O0Kpe30hA1GidzyFjatVvrpIvWLxD+xv67Vt91TWWgco9IvrJBkeyHm1trGaFS/FSGqPlhyeZRm0g==
+  dependencies:
+    "@types/prop-types" "*"
+    "@types/scheduler" "*"
+    csstype "^3.0.2"
+
+"@types/react@^16.9.19":
+  version "16.14.43"
+  resolved "https://registry.npmjs.org/@types/react/-/react-16.14.43.tgz#bc6e7a0e99826809591d38ddf1193955de32c446"
+  integrity sha512-7zdjv7jvoLLQg1tTvpQsm+hyNUMT2mPlNV1+d0I8fbGhkJl82spopMyBlu4wb1dviZAxpGdk5eHu/muacknnfw==
   dependencies:
     "@types/prop-types" "*"
     "@types/scheduler" "*"
@@ -8645,6 +8661,14 @@ react-native-svg@^13.9.0:
     css-select "^5.1.0"
     css-tree "^1.1.3"
 
+"react-native-svga-player@git+https://lovegaoshi@github.com/lovegaoshi/react-native-svga-player.git":
+  version "1.1.0"
+  resolved "git+https://lovegaoshi@github.com/lovegaoshi/react-native-svga-player.git#d4a14d6849a8eaedbab20097e62074303eec01e1"
+  dependencies:
+    "@types/react" "^16.9.19"
+    "@types/react-native" "^0.61.15"
+    typescript "^3.7.5"
+
 react-native-tab-view@^3.5.1:
   version "3.5.2"
   resolved "https://registry.yarnpkg.com/react-native-tab-view/-/react-native-tab-view-3.5.2.tgz#2789b8af6148b16835869566bf13dc3b0e6c1b46"
@@ -10095,6 +10119,11 @@ typescript@4.8.4:
   version "4.8.4"
   resolved "https://registry.yarnpkg.com/typescript/-/typescript-4.8.4.tgz#c464abca159669597be5f96b8943500b238e60e6"
   integrity sha512-QCh+85mCy+h0IGff8r5XWzOVSbBO+KfeYrMQh7NJ58QujwcE22u+NUSmUxqF+un70P9GXKxa2HCNiTTMJknyjQ==
+
+typescript@^3.7.5:
+  version "3.9.10"
+  resolved "https://registry.npmjs.org/typescript/-/typescript-3.9.10.tgz#70f3910ac7a51ed6bef79da7800690b19bf778b8"
+  integrity sha512-w6fIxVE/H1PkLKcCPsFqKE7Kv7QUwhU8qQY2MueZXWx5cPZdwFupLgKK3vntcK98BtNHZtAF4LA/yl2a7k8R6Q==
 
 uglify-es@^3.1.9:
   version "3.3.9"

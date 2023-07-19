@@ -112,4 +112,6 @@ export default {
     'https://i0.hdslb.com/bfs/garb/item/c7b83ebe96b65fb8413fabba6936ec5f63506a02.png',
   biliGarbCard:
     'https://i0.hdslb.com/bfs/garb/item/ba79a6dcc3d0324ba98b8d60532af0545f72620c.png',
+  thumbupSVGA:
+    'https://i0.hdslb.com/bfs/garb/item/12e319ce1495e13d3ec62653c3fe8529a8adc9ab.bin',
 } as NoxTheme.style;

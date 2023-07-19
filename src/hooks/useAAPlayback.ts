@@ -78,6 +78,9 @@ const useAAPlayback = () => {
     // then go through the current playlist and match the loose song name with query.
     // then go through playlist names and match the exact playlist name with query.
     // then go through every playlist and match the loose song name with query.
+    if (query === '') {
+      playFromPlaylist(playlists[randomChoice(Object.keys(playlists))]);
+    }
     for (const song of currentPlayingList.songList) {
       if (song.name.toLowerCase() === query) {
         playFromPlaylist(currentPlayingList, song);

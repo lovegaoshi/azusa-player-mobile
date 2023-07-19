@@ -43,6 +43,8 @@ declare namespace NoxTheme {
     progressThumbImageRightDrag?: string;
     // this is the imagebackground for the home button in the left drawer menu. I'm using the card asset in biliGarb which is roughly 4:1 landscape.
     biliGarbCard?: string;
+    // this is the thumbs up animation in SVGA format. in biligarb this is .thumbup[0].properties.image_ani
+    thumbupSVGA?: string;
   }
 
   export interface coordinates {
