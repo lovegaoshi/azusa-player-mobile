@@ -1,0 +1,93 @@
+[
+  {
+    "metaData": {
+      "themeName": "雪绘Yukie",
+      "themeDesc": "不化身为猪猪的混沌公主不是好法师，欢迎领取绘绘公主的专属装扮！点开收获超可爱的小雪专属动态点赞、表情包和动态卡片噢030",
+      "themeAuthor": "NoxAutoGen",
+      "themeIcon": "https://i1.hdslb.com/bfs/face/416cf9ef2d8dfa4ce10dcc433c5628dd1e510ef4.jpg",
+      "darkTheme": true
+    },
+    "gifs": [
+      "https://i0.hdslb.com/bfs/emote/5d044705522d7eab985c9417110de5d79f026203.png",
+      "https://i0.hdslb.com/bfs/emote/37f6eb3131009a873848f4eac026c63e67821ff5.png",
+      "https://i0.hdslb.com/bfs/emote/2be085f3362b72b6315b52e24d2e7cccd2211237.png",
+      "https://i0.hdslb.com/bfs/emote/892ec2ea31bae16044c683b68b4744fda62f1eff.png",
+      "https://i0.hdslb.com/bfs/emote/73eea84c541597d7f29f9172cd1e3dec5b439fa6.png",
+      "https://i0.hdslb.com/bfs/emote/2a0a4739f8f8d194f327826b935cf2ae21f4fa83.png",
+      "https://i0.hdslb.com/bfs/emote/2ec900726596e6a736f4b3ab92b2d958df1314b0.png",
+      "https://i0.hdslb.com/bfs/emote/84a6a5c3373b3ed8e3b1eeff9e67c690e91239c0.png",
+      "https://i0.hdslb.com/bfs/emote/a2498a49547339f54b7554e97b2413270ef3f6d3.png",
+      "https://i0.hdslb.com/bfs/emote/b80062a574073cf99570566c81c1a0c63d395f0b.png",
+      "https://i0.hdslb.com/bfs/emote/f1c36ba716e39ff5fd42a0f2553128f48370eff7.png",
+      "https://i0.hdslb.com/bfs/emote/286b87a3fa8bb2ab9d3151af04eb6e0502f2cafd.png",
+      "https://i0.hdslb.com/bfs/emote/55a2ba3250dfead7dfa55df96ff3fb8769af5590.png",
+      "https://i0.hdslb.com/bfs/emote/9b3a1417aa8b1bee724d36bd9582f0d039cdf0f3.png",
+      "https://i0.hdslb.com/bfs/emote/176e87a5322fee95b669203703e5d6c872687665.png",
+      "https://i0.hdslb.com/bfs/emote/929f53bc92f6b988828b57040215f2f0be7bf8f6.png",
+      "https://i0.hdslb.com/bfs/emote/5d05076748fffa6763f77a13a3f5d1459a14a341.png",
+      "https://i0.hdslb.com/bfs/emote/eae064528a905e48ba9cf70b77e54fba3b89b37f.png",
+      "https://i0.hdslb.com/bfs/emote/bb2963825fd00a39271c26d1a15a721cea39e18e.png",
+      "https://i0.hdslb.com/bfs/emote/1bfe7a731d5e378156ed42179de0bd37a949ea83.png"
+    ],
+    "backgroundImages": [
+      "https://i0.hdslb.com/bfs/garb/item/aed7a022b072983bab380df955a251ba4ce2c072.jpg",
+      "https://i0.hdslb.com/bfs/garb/item/7a8980432388ba2396a5f95b59e7db85e2b08bbc.jpg",
+      "https://i0.hdslb.com/bfs/garb/item/ea5d55b864784ae66f35f071ba0d71b0ce8663d2.jpg"
+    ],
+    "customColors": {
+      "maskedBackgroundColor": "rgba(0, 0, 0, 0.60)",
+      "playlistDrawerBackgroundColor": "green",
+      "playlistDrawerBackgroundColorTransparent": "rgba(0, 255, 0, 0.35)",
+      "progressThumbTintColor": "rgb(235, 235, 0)",
+      "progressMinimumTrackTintColor": "rgb(235, 235, 0)",
+      "progressMaximumTrackTintColor": "#FFFFFF",
+      "btnBackgroundColor": "rgb(72, 71, 58)",
+      "textInputSelectionColor": "green"
+    },
+    "colors": {
+      "primary": "rgb(255, 255, 0)",
+      "onPrimary": "rgb(50, 50, 0)",
+      "primaryContainer": "rgb(73, 73, 0)",
+      "onPrimaryContainer": "rgb(234, 234, 0)",
+      "secondary": "rgb(202, 200, 165)",
+      "onSecondary": "rgb(50, 50, 24)",
+      "secondaryContainer": "rgb(73, 72, 45)",
+      "onSecondaryContainer": "rgb(231, 228, 191)",
+      "tertiary": "rgb(164, 208, 189)",
+      "onTertiary": "rgb(11, 55, 42)",
+      "tertiaryContainer": "rgb(37, 78, 64)",
+      "onTertiaryContainer": "rgb(191, 236, 216)",
+      "error": "rgb(255, 180, 171)",
+      "onError": "rgb(105, 0, 5)",
+      "errorContainer": "rgb(147, 0, 10)",
+      "onErrorContainer": "rgb(255, 180, 171)",
+      "background": "rgba(0,0,0, 0.4)",
+      "onBackground": "rgb(230, 226, 217)",
+      "surface": "rgb(28, 28, 23)",
+      "onSurface": "rgba(235, 235, 0, 1)",
+      "text": "rgb(255, 255, 0)",
+      "surfaceVariant": "rgb(10, 10, 10)",
+      "onSurfaceVariant": "rgb(225, 225, 0)",
+      "outline": "rgb(147, 145, 130)",
+      "outlineVariant": "rgb(72, 71, 58)",
+      "shadow": "rgb(0, 0, 0)",
+      "scrim": "rgb(0, 0, 0)",
+      "inverseSurface": "rgb(230, 226, 217)",
+      "inverseOnSurface": "rgb(49, 49, 43)",
+      "inversePrimary": "rgb(98, 98, 0)",
+      "elevation": {
+        "level0": "transparent",
+        "level1": "rgb(53, 56, 57)",
+        "level2": "rgb(10, 10, 10)",
+        "level3": "rgb(10, 10, 10)",
+        "level4": "rgb(49, 49, 20)",
+        "level5": "rgb(53, 53, 20)"
+      },
+      "surfaceDisabled": "rgba(230, 226, 217, 0.12)",
+      "onSurfaceDisabled": "rgba(230, 226, 217, 0.38)",
+      "backdrop": "rgba(49, 49, 37, 0.4)"
+    },
+    "thumbupSVGA": "https://i0.hdslb.com/bfs/garb/item/7f10868ac966ce4a723493f629a0f4fb0a07b4fd.bin",
+    "loadingIcon": "https://i0.hdslb.com/bfs/garb/item/515abb72c9ae537f8c63829c0cbf99992ed85cb7.webp"
+  }
+]
