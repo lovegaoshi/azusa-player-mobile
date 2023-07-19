@@ -32,6 +32,7 @@ export const resolveBackgroundImage = async (
         ),
       };
     case RESOLVE_TYPE.biliNFTVideo:
+      // eslint-disable-next-line no-case-declarations
       const [act_id, index] = JSON.parse(backgroundImage.identifier);
       return {
         type: RESOLVE_TYPE.video,
@@ -42,7 +43,7 @@ export const resolveBackgroundImage = async (
   }
 };
 
-export default (props: any) => {
+const MainBackground = (props: any) => {
   const playerStyle = useNoxSetting(state => state.playerStyle);
 
   // TODO: are these still necessary since they are behind await initPlayer?
@@ -111,3 +112,5 @@ const styles = StyleSheet.create({
     height: '100%',
   },
 });
+
+export default MainBackground;

@@ -15,7 +15,7 @@ const style = {
   width: Dimensions.get('window').width,
 };
 
-export default (props: any) => (
+const AppOpenSplash = (props: any) => (
   <FastImage
     source={randomSplashes()}
     resizeMode={FastImage.resizeMode.contain}
@@ -23,3 +23,5 @@ export default (props: any) => (
     {...props}
   />
 );
+
+export default AppOpenSplash;

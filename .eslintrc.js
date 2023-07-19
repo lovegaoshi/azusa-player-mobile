@@ -21,9 +21,11 @@ module.exports = {
     '@typescript-eslint/consistent-type-definitions': 'error',
     'react/react-in-jsx-scope': 'off',
     'prettier/prettier': ['error', { endOfLine: 'auto' }],
+    'react/display-name': 'off',
   },
   settings: {
-    'import/ignore': ['node_modules/react-native/index\\.js$'],
     react: { version: 'detect' },
+    // 'import/ignore': ['node_modules/react-native/index\\.js$'], doesnt work anymore..?
+    'import/ignore': ['react-native'],
   },
 };

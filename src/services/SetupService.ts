@@ -5,7 +5,7 @@ import TrackPlayer, {
 } from 'react-native-track-player';
 import { Event } from 'react-native-track-player';
 
-import { NoxStorage } from '../types/storage';
+import type { NoxStorage } from '../types/storage';
 
 const setupPlayer = async (
   options: Parameters<typeof TrackPlayer.setupPlayer>[0]

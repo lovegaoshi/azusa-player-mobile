@@ -63,6 +63,7 @@ export const createStyle = (customStyle = AzusaTheme) => {
     progressThumbImageRightDrag: (customStyle.progressThumbImageRightDrag ||
       customStyle.progressThumbImage) as any,
     biliGarbCard: customStyle.biliGarbCard as any,
+    thumbupSVGA: customStyle.thumbupSVGA as any,
   });
 };
 
@@ -90,5 +91,5 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     height: 140,
   },
-  rowView: { flexDirection: 'row' as 'row' },
+  rowView: { flexDirection: 'row' },
 });

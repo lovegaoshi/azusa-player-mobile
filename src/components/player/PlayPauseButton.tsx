@@ -50,16 +50,3 @@ export const PlayPauseButton: React.FC<{
     />
   );
 };
-
-const styles = StyleSheet.create({
-  playPause: {
-    width: 120,
-    textAlign: 'center',
-  },
-  statusContainer: {
-    height: 40,
-    width: 120,
-    marginTop: 20,
-    marginBottom: 60,
-  },
-});
