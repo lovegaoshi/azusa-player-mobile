@@ -1,4 +1,8 @@
-import TrackPlayer, { Event, State } from 'react-native-track-player';
+import TrackPlayer, {
+  Event,
+  State,
+  RepeatMode,
+} from 'react-native-track-player';
 
 import { resolveUrl, NULL_TRACK } from '../objects/Song';
 import { initBiliHeartbeat } from '../utils/Bilibili/BiliOperate';
@@ -6,7 +10,10 @@ import type { NoxStorage } from '../types/storage';
 import { saveLastPlayDuration } from '../utils/ChromeStorage';
 import logger from '../utils/Logger';
 import NoxCache from '../utils/Cache';
+import noxPlayingList from '../stores/playingList';
+import { NoxRepeatMode } from '../components/player/enums/RepeatMode';
 
+const { getState } = noxPlayingList;
 let lastBiliHeartBeat: string[] = ['', ''];
 
 export async function AdditionalPlaybackService({
@@ -92,7 +99,13 @@ export async function PlaybackService() {
             updatedMetadata
           );
           TrackPlayer.getActiveTrack().then(currentTrack => {
-            TrackPlayer.load({ ...currentTrack, ...updatedMetadata });
+            TrackPlayer.load({ ...currentTrack, ...updatedMetadata }).then(
+              () => {
+                if (getState().playmode === NoxRepeatMode.REPEAT_TRACK) {
+                  TrackPlayer.setRepeatMode(RepeatMode.Track);
+                }
+              }
+            );
           });
         })
         .catch(e => console.error('resolveURL failed', event.track, e));

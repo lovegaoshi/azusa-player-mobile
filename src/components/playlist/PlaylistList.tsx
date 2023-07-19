@@ -3,7 +3,7 @@ import { View, BackHandler, StyleSheet } from 'react-native';
 import { FlashList } from '@shopify/flash-list';
 import Snackbar from 'react-native-snackbar';
 import { IconButton, Text } from 'react-native-paper';
-import TrackPlayer from 'react-native-track-player';
+import TrackPlayer, { RepeatMode } from 'react-native-track-player';
 import { Dimensions } from 'react-native';
 import { useTranslation } from 'react-i18next';
 import { useDebounce } from 'use-debounce';
@@ -21,6 +21,10 @@ import { songlistToTracklist } from '../../objects/Playlist';
 import { PLAYLIST_ENUMS } from '../../enums/Playlist';
 import { syncFavlist } from '../../utils/Bilibili/bilifavOperate';
 import noxCache, { noxCacheKey } from '../../utils/Cache';
+import noxPlayingList from '../../stores/playingList';
+import { NoxRepeatMode } from '../player/enums/RepeatMode';
+
+const { getState } = noxPlayingList;
 
 const PlaylistList = () => {
   const { t } = useTranslation();
@@ -191,6 +195,9 @@ const PlaylistList = () => {
       currentPlaylist.id === currentPlayingList.id
     )
       return;
+    if (getState().playmode === NoxRepeatMode.REPEAT_TRACK) {
+      await TrackPlayer.setRepeatMode(RepeatMode.Off);
+    }
     await TrackPlayer.reset();
     const queuedSongList = playerSetting.keepSearchedSongListWhenPlaying
       ? currentRows

@@ -1,5 +1,6 @@
 import { Dropbox as _Dropbox, files } from 'dropbox';
 import { authorize } from 'react-native-app-auth';
+// @ts-ignore: Unreachable code error
 import { getArrayBufferForBlob } from 'react-native-blob-jsi-helper';
 
 import { DROPBOX_KEY, DROPBOX_SECRET } from '@env';
