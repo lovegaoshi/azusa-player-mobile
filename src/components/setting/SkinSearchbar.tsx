@@ -6,9 +6,12 @@ import { useTranslation } from 'react-i18next';
 
 import { useNoxSetting } from '../../hooks/useSetting';
 
+interface props {
+  onSearched: (val: any) => void;
+}
 const CustomSkinSearch = ({
   onSearched = (vals: any) => console.log(vals),
-}) => {
+}: props) => {
   const { t } = useTranslation();
   const [searchVal, setSearchVal] = useState(
     'https://raw.githubusercontent.com/lovegaoshi/azusa-player-mobile/master/src/components/styles/steria.json'
@@ -30,7 +33,12 @@ const CustomSkinSearch = ({
 
   return (
     <View style={styles.container}>
-      <View style={styles.row}>
+      <View
+        style={[
+          styles.row,
+          { backgroundColor: playerStyle.colors.surfaceVariant },
+        ]}
+      >
         <TextInput
           style={styles.textInput}
           label={String(t('CustomSkin.SearchBarLabel'))}
