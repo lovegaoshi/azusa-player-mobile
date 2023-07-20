@@ -1,6 +1,10 @@
 require File.join(File.dirname(`node --print "require.resolve('expo/package.json')"`), "scripts/autolinking")
-require_relative '../node_modules/react-native/scripts/react_native_pods'
-require_relative '../node_modules/@react-native-community/cli-platform-ios/native_modules'
+# Resolve react_native_pods.rb with node to allow for hoisting
+require Pod::Executable.execute_command('node', ['-p',
+  'require.resolve(
+    "react-native/scripts/react_native_pods.rb",
+    {paths: [process.argv[1]]},
+  )', __dir__]).strip
 
 # use cocoapods CDN per https://blog.cocoapods.org/CocoaPods-1.7.2/
 source 'https://cdn.cocoapods.org/'
@@ -52,10 +56,12 @@ target 'azusa-player-mobile' do
   end
 
   post_install do |installer|
-    react_native_post_install(
+  # https://github.com/facebook/react-native/blob/main/packages/react-native/scripts/react_native_pods.rb#L197-L202
+  react_native_post_install(
       installer,
       # Set `mac_catalyst_enabled` to `true` in order to apply patches
       # necessary for Mac Catalyst builds
+      config[:reactNativePath],
       :mac_catalyst_enabled => false
     )
     __apply_Xcode_12_5_M1_post_install_workaround(installer)
