@@ -9,7 +9,7 @@ import { List, MD3Colors, IconButton, Text } from 'react-native-paper';
 import { DrawerNavigationProp } from '@react-navigation/drawer';
 import { ScrollView } from 'react-native-gesture-handler';
 import { useTranslation } from 'react-i18next';
-import FastImage from 'react-native-fast-image';
+import { Image } from 'expo-image';
 import { Dimensions } from 'react-native';
 
 import { useNoxSetting } from '../../hooks/useSetting';
@@ -31,9 +31,9 @@ export default () => {
 
   return (
     <Pressable onPress={nextImage} style={style}>
-      <FastImage
+      <Image
         source={localSplashes[index]()}
-        resizeMode={FastImage.resizeMode.contain}
+        contentFit="contain"
         style={style}
       />
     </Pressable>

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import FastImage from 'react-native-fast-image';
+import { Image } from 'expo-image';
 import { View, FlatList, SafeAreaView, StyleSheet } from 'react-native';
 import {
   Text,
@@ -66,7 +66,7 @@ export default () => {
       <TouchableRipple onPress={selectTheme}>
         <View style={styles.skinItemContainer}>
           <View style={styles.skinItemLeftContainer}>
-            <FastImage
+            <Image
               source={{ uri: skin.metaData.themeIcon }}
               style={styles.skinItemImage}
             />
