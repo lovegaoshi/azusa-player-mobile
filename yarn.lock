@@ -6465,7 +6465,7 @@ glob@^6.0.1:
     once "^1.3.0"
     path-is-absolute "^1.0.0"
 
-glob@^7.0.0, glob@^7.0.5, glob@^7.1.1, glob@^7.1.2, glob@^7.1.3, glob@^7.1.4, glob@^7.1.6:
+glob@^7.0.0, glob@^7.0.5, glob@^7.1.1, glob@^7.1.2, glob@^7.1.3, glob@^7.1.4, glob@^7.1.6, glob@^7.2.3:
   version "7.2.3"
   resolved "https://registry.npmjs.org/glob/-/glob-7.2.3.tgz#b8df0fb802bbfa8e89bd1d938b4e16578ed44f2b"
   integrity sha512-nFR0zLpU2YCaRxwoCJvL6UvCH2JFyFVIvwTLsIf21AuHlMskA1hhTdk+LlYJtOlYt9v6dvszD2BGRqBL+iQK9Q==
@@ -10242,6 +10242,14 @@ react-native-base64@0.0.2:
 "react-native-blob-jsi-helper@git+https://github.com/lovegaoshi/react-native-blob-jsi-helper.git":
   version "0.3.1"
   resolved "git+https://github.com/lovegaoshi/react-native-blob-jsi-helper.git#b247bd73e7a522c794f3f14ee13f89dfede01c52"
+
+react-native-blob-util@^0.18.3:
+  version "0.18.3"
+  resolved "https://registry.yarnpkg.com/react-native-blob-util/-/react-native-blob-util-0.18.3.tgz#e3b408dfdd5b175093bbef23f33811f8ef3407ee"
+  integrity sha512-Gx5n1rxl6OcE+Xvj4vFD03Lyhpt+1BmkwU/lIFjPHAUMbSFBvfsOf0TG1cOjMxhw18cDVW7xgcueYZLRscuKPw==
+  dependencies:
+    base-64 "0.1.0"
+    glob "^7.2.3"
 
 react-native-clean-project@^4.0.1:
   version "4.0.1"

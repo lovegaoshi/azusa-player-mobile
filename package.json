@@ -51,6 +51,7 @@
     "react-native-app-auth": "git+https://github.com/lovegaoshi/react-native-app-auth.git",
     "react-native-background-timer": "git+https://github.com/lovegaoshi/react-native-background-timer.git",
     "react-native-blob-jsi-helper": "git+https://github.com/lovegaoshi/react-native-blob-jsi-helper.git",
+    "react-native-blob-util": "^0.18.3",
     "react-native-countdown-circle-timer": "^3.2.1",
     "react-native-draggable-flatlist": "^4.0.1",
     "react-native-gesture-handler": "^2.9.0",
