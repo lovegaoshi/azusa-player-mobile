@@ -15,9 +15,12 @@ type SharedItem = {
   extraData: any;
 };
 
+interface props {
+  onSearched: (val: any) => void;
+}
 export default ({
   onSearched = (songs: Array<NoxMedia.Song>) => console.log(songs),
-}) => {
+}: props) => {
   const { t } = useTranslation();
   const [searchVal, setSearchVal] = useState('');
   const searchProgress = useNoxSetting(state => state.searchBarProgress);
@@ -83,7 +86,12 @@ export default ({
 
   return (
     <View style={styles.container}>
-      <View style={styles.searchContainer}>
+      <View
+        style={[
+          styles.searchContainer,
+          { backgroundColor: playerStyle.colors.surfaceVariant },
+        ]}
+      >
         <TextInput
           style={styles.textInput}
           label={String(t('BiliSearchBar.label'))}

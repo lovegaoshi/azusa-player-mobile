@@ -24,7 +24,8 @@ end
 
 target 'azusa-player-mobile' do
   config = use_native_modules!
-
+  # for svga-player
+  pod 'Protobuf', '= 3.22.1'
   # Flags change depending on the env values.
   flags = get_default_flags()
 

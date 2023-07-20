@@ -73,10 +73,16 @@ export default () => {
             <View style={styles.skinItemTextContainer}>
               <Text
                 variant={'titleMedium'}
+                style={styles.skinTitleText}
+                numberOfLines={1}
+                ellipsizeMode="tail"
               >{`${skin.metaData.themeName} by ${skin.metaData.themeAuthor}`}</Text>
               <Text
                 variant={'labelLarge'}
-                style={{ color: playerStyle.colors.secondary }}
+                style={{
+                  color: playerStyle.colors.secondary,
+                  maxWidth: '90%',
+                }}
               >
                 {skin.metaData.themeDesc}
               </Text>
@@ -163,5 +169,8 @@ const styles = StyleSheet.create({
   },
   deleteButton: {
     marginLeft: -3,
+  },
+  skinTitleText: {
+    maxWidth: '100%',
   },
 });
