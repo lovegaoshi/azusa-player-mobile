@@ -127,7 +127,7 @@ export default () => {
       <SkinSearchbar onSearched={loadCustomSkin} />
       <FlatList
         data={allThemes}
-        renderItem={({ item, index }) => renderSkinItem(item)}
+        renderItem={({ item }: { item: any }) => renderSkinItem(item)}
         keyExtractor={item => getThemeID(item)}
       />
     </SafeAreaView>
