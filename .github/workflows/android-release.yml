@@ -1,4 +1,4 @@
-name: android auto release
+name: APM Automatic Release
 on:
   push:
     tags:
@@ -87,7 +87,7 @@ jobs:
       - name: Release APK
         uses: softprops/action-gh-release@v1
         with:
-          name: 'Android ${{env.COMMIT_TAG}}'
+          name: 'Release ${{env.COMMIT_TAG}}'
           tag_name: '${{env.COMMIT_TAG}}'
           files: android/app/build/outputs/apk/release/*.apk
           generate_release_notes: true
@@ -173,3 +173,92 @@ jobs:
         with:
           name: outputAAB
           path: android/app/build/outputs/bundle/release/*.aab # or path/to/artifact
+
+      - uses: r0adkll/upload-google-play@v1
+        with:
+          serviceAccountJsonPlainText: ${{ secrets.GOOGLE_PLAY_SERVICE_ACCOUNT_JSON }}
+          packageName: com.noxplay.noxplayer
+          releaseFiles: android/app/build/outputs/bundle/release/app-release.aab
+          track: internal
+          status: draft
+          changesNotSentForReview: true
+
+  buildIPA:
+    runs-on: macos-12
+    name: build IPA
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Get branch name
+        run: |
+          # Short name for current branch. For PRs, use target branch (base ref)
+          GIT_BRANCH=${GITHUB_BASE_REF:-${GITHUB_REF#refs/heads/}}
+          echo "GIT_BRANCH=$GIT_BRANCH" >> $GITHUB_ENV
+
+      - name: Get current date
+        id: date
+        run: echo "date=$(date +'%Y-%m-%d')" >> $GITHUB_OUTPUT
+
+      - name: set up JDK 18
+        uses: actions/setup-java@v3
+        with:
+          java-version: 18
+          distribution: temurin
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: 'Create env file'
+        run: |
+          echo "${{ secrets.ENV_FILE }}" > .env
+          echo "APPSTORE=true" >> .env
+
+      - name: alias yarn.cmd to yarn
+        run: alias yarn.cmd="yarn"
+
+      - name: Get Recent Commit Tag
+        id: get_commit_tag
+        run: |
+          COMMIT_TAG=$(git describe --tags --abbrev=0)
+          echo "COMMIT_TAG=${COMMIT_TAG}" >> $GITHUB_ENV
+
+      - name: Display Commit Tag
+        run: |
+          echo "Commit Tag: $COMMIT_TAG"
+
+      - name: Install dependencies
+        uses: nick-fields/retry@v2
+        with:
+          timeout_minutes: 10
+          max_attempts: 10
+          command: yarn
+
+      - name: Pod Install
+        run: cd ios && pod install
+
+      - name: Fix expo script
+        run: python scripts/expofix.py
+
+      - name: build
+        run: cd ios && xcodebuild -scheme example -workspace example.xcworkspace -configuration Release clean archive -archivePath "build/APM.xcarchive" CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO CODE_SIGNING_ALLOWED=NO
+
+      - name: archive to ipa
+        run: |
+          cd ios
+          mkdir build/Payload
+          mv build/APM.xcarchive/Products/Applications/example.app build/Payload/example.app
+          cd build
+          zip -r APM.ipa Payload/
+
+      - name: Release IPA
+        uses: softprops/action-gh-release@v1
+        with:
+          name: 'Release ${{env.COMMIT_TAG}}'
+          tag_name: '${{env.COMMIT_TAG}}'
+          files: ios/build/APM.ipa
+          generate_release_notes: true

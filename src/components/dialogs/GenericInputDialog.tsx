@@ -1,15 +1,9 @@
 import React, { useState } from 'react';
-import { View, FlatList } from 'react-native';
+import { View, FlatList, StyleSheet } from 'react-native';
 import { Button, Dialog, TextInput } from 'react-native-paper';
 import { useTranslation } from 'react-i18next';
 import { logger } from '../../utils/Logger';
 import { useNoxSetting } from '../../hooks/useSetting';
-
-const dialogTitleStyle = { maxHeight: 100 };
-const dialogStyle = { maxHeight: '60%', minHeight: '50%' };
-const dialogContentStyle = { flex: 1, minHeight: '20%' };
-const flatListStyle = { flex: 6 };
-const dialogActionsStyle = { maxHeight: 60, paddingBottom: 0 };
 
 interface Props {
   visible: boolean;
@@ -22,7 +16,7 @@ interface Props {
 const DialogTitle = ({ title }: { title: string | undefined }) => {
   if (!title) return <View></View>;
   return (
-    <Dialog.Title style={dialogTitleStyle}>
+    <Dialog.Title style={styles.dialogTitle}>
       {title.length > 20 ? title.substring(0, 20) + '...' : title}
     </Dialog.Title>
   );
@@ -60,11 +54,11 @@ export default ({
   );
 
   return (
-    <Dialog visible={visible} onDismiss={handleClose} style={dialogStyle}>
+    <Dialog visible={visible} onDismiss={handleClose} style={styles.dialog}>
       <DialogTitle title={title} />
-      <Dialog.Content style={dialogContentStyle}>
+      <Dialog.Content style={styles.dialogContent}>
         <FlatList
-          style={flatListStyle}
+          style={styles.flatList}
           data={options}
           renderItem={({ item, index }) => (
             <TextInput
@@ -79,10 +73,18 @@ export default ({
           )}
         />
       </Dialog.Content>
-      <Dialog.Actions style={dialogActionsStyle}>
+      <Dialog.Actions style={styles.dialogActions}>
         <Button onPress={handleClose}>{t('Dialog.cancel')}</Button>
         <Button onPress={handleSubmit}>{t('Dialog.ok')}</Button>
       </Dialog.Actions>
     </Dialog>
   );
 };
+
+const styles = StyleSheet.create({
+  dialogTitle: { maxHeight: 100 },
+  dialog: { maxHeight: '60%', minHeight: '50%' },
+  dialogContent: { flex: 1, minHeight: '20%' },
+  flatList: { flex: 6 },
+  dialogActions: { maxHeight: 60, paddingBottom: 0 },
+});

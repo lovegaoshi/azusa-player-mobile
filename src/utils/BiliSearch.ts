@@ -40,8 +40,8 @@ export const matchBiliURL = (input: string) => {
     [steriatkFetch.regexSearchMatch, steriatkFetch.regexFetch],
     [steriatkFetch.regexSearchMatch2, steriatkFetch.regexFetch],
     [bilivideoFetch.regexSearchMatch, bilivideoFetch.regexFetch],
-    [ytbvideoFetch.regexSearchMatch, ytbvideoFetch.regexFetch],
     [ytbplaylistFetch.regexSearchMatch, ytbplaylistFetch.regexFetch],
+    [ytbvideoFetch.regexSearchMatch, ytbvideoFetch.regexFetch],
   ];
   for (const reExtraction of reExtractions) {
     const reExtracted = reExtraction[0].exec(input);

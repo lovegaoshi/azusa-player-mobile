@@ -7,9 +7,11 @@
 const path = require('path');
 const escape = require('escape-string-regexp');
 const exclusionList = require('metro-config/src/defaults/exclusionList');
+const { getDefaultConfig, mergeConfig } = require('@react-native/metro-config');
 
 const root = path.resolve(__dirname, '..');
 const modules = Object.keys({});
+const config = {};
 
 // This stops "react-native run-windows" from causing the metro server to crash if its already running
 const blockList = [
@@ -24,22 +26,4 @@ const extraNodeModules = modules.reduce((acc, name) => {
   return acc;
 }, {});
 
-module.exports = {
-  projectRoot: __dirname,
-
-  // We need to make sure that only one version is loaded for peerDependencies
-  // So we exclude them at the root, and alias them to the versions in
-  // example's node_modules
-  resolver: {
-    blockList: exclusionList(blockList),
-    extraNodeModules,
-  },
-  transformer: {
-    getTransformOptions: async () => ({
-      transform: {
-        experimentalImportSupport: false,
-        inlineRequires: true,
-      },
-    }),
-  },
-};
+module.exports = mergeConfig(getDefaultConfig(__dirname), config);

@@ -1,5 +1,5 @@
 import LRUCache from 'lru-cache';
-import RNFetchBlob from 'rn-fetch-blob';
+import RNFetchBlob from 'react-native-blob-util';
 
 import {
   loadCachedMediaMapping,
@@ -100,7 +100,7 @@ class NoxMediaCache {
   cacheSize = () => Array.from(this.cache.keys()).length;
 }
 
-let cache: NoxCaches = {
+const cache: NoxCaches = {
   noxMediaCache: new NoxMediaCache({
     max: 1,
     dispose: async (value, key) => {

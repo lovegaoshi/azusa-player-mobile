@@ -1,10 +1,15 @@
-require_relative '../node_modules/react-native/scripts/react_native_pods'
-require_relative '../node_modules/@react-native-community/cli-platform-ios/native_modules'
+require File.join(File.dirname(`node --print "require.resolve('expo/package.json')"`), "scripts/autolinking")
+# Resolve react_native_pods.rb with node to allow for hoisting
+require Pod::Executable.execute_command('node', ['-p',
+  'require.resolve(
+    "react-native/scripts/react_native_pods.rb",
+    {paths: [process.argv[1]]},
+  )', __dir__]).strip
 
 # use cocoapods CDN per https://blog.cocoapods.org/CocoaPods-1.7.2/
 source 'https://cdn.cocoapods.org/'
 
-platform :ios, min_ios_version_supported
+platform :ios, '13.0'
 prepare_react_native_project!
 # If you are using a `react-native-flipper` your iOS build will fail when `NO_FLIPPER=1` is set.
 # because `react-native-flipper` depends on (FlipperKit,...) that will be excluded
@@ -51,12 +56,28 @@ target 'azusa-player-mobile' do
   end
 
   post_install do |installer|
-    react_native_post_install(
+  # https://github.com/facebook/react-native/blob/main/packages/react-native/scripts/react_native_pods.rb#L197-L202
+  react_native_post_install(
       installer,
       # Set `mac_catalyst_enabled` to `true` in order to apply patches
       # necessary for Mac Catalyst builds
+      config[:reactNativePath],
       :mac_catalyst_enabled => false
     )
     __apply_Xcode_12_5_M1_post_install_workaround(installer)
+  end
+end
+
+# https://github.com/expo/expo/issues/15959
+# though also https://github.com/facebook/react-native/issues/35664
+# which is temp fixed by https://github.com/facebook/react-native/issues/35664#issuecomment-1590189067
+# RN 0.72 fixes this?
+use_expo_modules!
+
+post_integrate do |installer|
+  begin
+    expo_patch_react_imports!(installer)
+  rescue => e
+    Pod::UI.warn e
   end
 end
