@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { Pressable, Image, StyleSheet } from 'react-native';
-import FastImage from 'react-native-fast-image';
+import { Pressable, StyleSheet } from 'react-native';
+import { Image } from 'expo-image';
 
 const getRandomNumberExclude = (randRange: number, exclude = -1) => {
   if (exclude > 0) {
@@ -32,7 +32,7 @@ export default function RandomGIFButton({
   onClickCallback = () => undefined,
 }: Props) {
   const [randomGIFSrc, setRandomGIFSrc] = useState(-1);
-  const [randomGIFURI, setRandomGIFURI] = useState({ uri: '' });
+  const [randomGIFURI, setRandomGIFURI] = useState({ uri: 'dummyVal' });
 
   useEffect(() => {
     const newIndex = getRandomNumberExclude(gifs.length, randomGIFSrc);
@@ -49,11 +49,7 @@ export default function RandomGIFButton({
         onClickCallback();
       }}
     >
-      <FastImage
-        style={GIFStyle}
-        source={randomGIFURI}
-        resizeMode={FastImage.resizeMode.contain}
-      />
+      <Image style={GIFStyle} source={randomGIFURI} contentFit="contain" />
     </Pressable>
   );
 }

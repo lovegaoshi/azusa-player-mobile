@@ -173,7 +173,7 @@ jobs:
         with:
           name: outputAAB
           path: android/app/build/outputs/bundle/release/*.aab # or path/to/artifact
-          
+
       - uses: r0adkll/upload-google-play@v1
         with:
           serviceAccountJsonPlainText: ${{ secrets.GOOGLE_PLAY_SERVICE_ACCOUNT_JSON }}
@@ -240,6 +240,9 @@ jobs:
 
       - name: Pod Install
         run: cd ios && pod install
+
+      - name: Fix expo script
+        run: python scripts/expofix.py
 
       - name: build
         run: cd ios && xcodebuild -scheme example -workspace example.xcworkspace -configuration Release clean archive -archivePath "build/APM.xcarchive" CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO CODE_SIGNING_ALLOWED=NO

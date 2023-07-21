@@ -1,5 +1,5 @@
 import { Dimensions } from 'react-native';
-import FastImage from 'react-native-fast-image';
+import { Image } from 'expo-image';
 import { randomChoice } from '../../utils/Utils';
 
 export const localSplashes = [
@@ -16,11 +16,11 @@ const style = {
 };
 
 const AppOpenSplash = (props: any) => (
-  <FastImage
+  <Image
     source={randomSplashes()}
-    resizeMode={FastImage.resizeMode.contain}
     style={style}
     {...props}
+    contentFit="contain"
   />
 );
 

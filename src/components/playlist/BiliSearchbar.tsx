@@ -9,11 +9,11 @@ import { ViewEnum } from '../../enums/View';
 import { searchBiliURLs, matchBiliURL } from '../../utils/BiliSearch';
 import { useNoxSetting } from '../../hooks/useSetting';
 
-type SharedItem = {
+interface SharedItem {
   mimeType: string;
   data: string;
   extraData: any;
-};
+}
 
 interface props {
   onSearched: (val: any) => void;
