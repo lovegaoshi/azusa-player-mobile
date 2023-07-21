@@ -11,6 +11,7 @@ import bilisearchFetch from './mediafetch/bilisearch';
 import bilichannelAudioFetch from '../utils/mediafetch/bilichannelAudio';
 import ytbvideoFetch from './mediafetch/ytbvideo';
 import ytbplaylistFetch from './mediafetch/ytbplaylist';
+import ytbmixlistFetch from './mediafetch/ytbmixlist';
 import { regexFetchProps } from './mediafetch/generic';
 
 /**
@@ -40,6 +41,8 @@ export const matchBiliURL = (input: string) => {
     [steriatkFetch.regexSearchMatch, steriatkFetch.regexFetch],
     [steriatkFetch.regexSearchMatch2, steriatkFetch.regexFetch],
     [bilivideoFetch.regexSearchMatch, bilivideoFetch.regexFetch],
+    [ytbmixlistFetch.regexSearchMatch, ytbmixlistFetch.regexFetch],
+    [ytbmixlistFetch.regexSearchMatch2, ytbmixlistFetch.regexFetch],
     [ytbplaylistFetch.regexSearchMatch, ytbplaylistFetch.regexFetch],
     [ytbvideoFetch.regexSearchMatch, ytbvideoFetch.regexFetch],
   ];
