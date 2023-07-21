@@ -163,7 +163,9 @@ const useAAPlayback = () => {
   }, []);
 
   useEffect(() => {
-    buildBrowseTree();
+    if (Platform.OS === 'android') {
+      buildBrowseTree();
+    }
   }, [playlistIds]);
 
   return null;

@@ -15,7 +15,7 @@ import { biliApiLimiter } from './throttle';
 import SongTS from '../../objects/Song';
 import { logger } from '../Logger';
 
-const CIDPREFIX = 'youtube-';
+export const CIDPREFIX = 'youtube-';
 
 const fetchYTBPlayUrlPromise = async (sid: string) => {
   try {
@@ -170,6 +170,7 @@ export const fetchAudioInfoRaw = async (sid: string) => {
   } catch (error) {
     logger.error(error);
     logger.warn(`Some issue happened when fetching biliAudio ${sid}`);
+    return [];
   }
 };
 
