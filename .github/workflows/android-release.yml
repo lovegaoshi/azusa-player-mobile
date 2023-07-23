@@ -241,11 +241,7 @@ jobs:
         run: cd ios && pod install
 
       - name: build
-        uses: nick-fields/retry@v2
-        with:
-          timeout_minutes: 100
-          max_attempts: 3
-          command: cd ios && xcodebuild -scheme example -workspace example.xcworkspace -configuration Release clean archive -archivePath "build/APM.xcarchive" CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO CODE_SIGNING_ALLOWED=NO
+        run: cd ios && xcodebuild -scheme example -workspace example.xcworkspace -configuration Release clean archive -archivePath "build/APM.xcarchive" CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO CODE_SIGNING_ALLOWED=NO
 
       - name: archive to ipa
         run: |

@@ -86,8 +86,8 @@ const MainBackground = (props: any) => {
             style={{ width: '100%', height: '100%', position: 'absolute' }}
             isLooping
             resizeMode={ResizeMode.COVER}
-            volume={0}
             shouldPlay={true}
+            isMuted={true}
           />
           <View style={styles.fullscreenStyle}>{props.children}</View>
         </>
