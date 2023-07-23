@@ -24,7 +24,12 @@ export default () => {
         TrackPlayer.setRepeatMode(RepeatMode.Track);
         break;
       default:
-        TrackPlayer.setRepeatMode(RepeatMode.Queue);
+        // NOTE: DO NOT CHANGE THIS TO OTHER MODES!
+        // APM uses zustand handles queue so it relies on
+        // RepeatMode.Off to properly trigger PlaybackQueueEnded
+        // and call zustand to load the next song in queue. this must be
+        // RepeatMode.Off.
+        TrackPlayer.setRepeatMode(RepeatMode.Off);
     }
   };
 
