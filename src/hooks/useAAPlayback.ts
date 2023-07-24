@@ -111,15 +111,7 @@ const useAAPlayback = () => {
   };
 
   const buildBrowseTree = () => {
-    console.log(
-      Object.keys(playlists).map(key => {
-        return {
-          mediaId: `${PLAYLIST_MEDIAID}${key}`,
-          title: playlists[key].title,
-          playable: '0',
-        };
-      })
-    );
+    if (Platform.OS !== 'android') return;
     TrackPlayer.setBrowseTree({
       '/': [
         {
@@ -162,13 +154,7 @@ const useAAPlayback = () => {
     };
   }, []);
 
-  useEffect(() => {
-    if (Platform.OS === 'android') {
-      buildBrowseTree();
-    }
-  }, [playlistIds]);
-
-  return null;
+  return { buildBrowseTree };
 };
 
 export default useAAPlayback;

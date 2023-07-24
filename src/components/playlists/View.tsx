@@ -15,6 +15,7 @@ import DraggableFlatList, {
 } from 'react-native-draggable-flatlist';
 
 import { useNoxSetting } from '../../hooks/useSetting';
+import useAAPlayback from '../../hooks/useAAPlayback';
 import { ViewEnum } from '../../enums/View';
 import AddPlaylistButton from '../buttons/AddPlaylistButton';
 import { STORAGE_KEYS } from '../../utils/ChromeStorage';
@@ -122,6 +123,7 @@ export default (props: any) => {
   const removePlaylist = useNoxSetting(state => state.removePlaylist);
   const RenderDrawerItem = useRenderDrawerItem();
   const { TwoWayAlert } = useAlert();
+  const { buildBrowseTree } = useAAPlayback();
 
   // HACK: tried to make searchList draweritem button as addPlaylistButton, but
   // dialog disposes on textinput focus. created a dialog directly in this component
@@ -178,6 +180,10 @@ export default (props: any) => {
     );
   };
 
+  useEffect(() => {
+    buildBrowseTree();
+  }, [playlistIds.length]);
+
   return (
     <View {...props}>
       <View style={styles.topPadding} />
@@ -232,7 +238,7 @@ export default (props: any) => {
             paddingLeft: 25,
             backgroundColor:
               currentPlaylist.id ===
-              playlists[STORAGE_KEYS.SEARCH_PLAYLIST_KEY]?.id
+                playlists[STORAGE_KEYS.SEARCH_PLAYLIST_KEY]?.id
                 ? playerStyle.customColors.playlistDrawerBackgroundColor
                 : undefined,
           },
