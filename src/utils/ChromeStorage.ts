@@ -336,8 +336,7 @@ const importNoxExtensionContent = async (parsedContent: any) => {
     return false;
   }
 
-  const clearPlaylistNImport = async () => {
-    await clearPlaylists();
+  const saveImportedPlaylist = async () => {
     for (const playlistID of parsedContent['MyFavList']) {
       const playlist = parsedContent[playlistID];
       await savePlaylist({
@@ -350,21 +349,43 @@ const importNoxExtensionContent = async (parsedContent: any) => {
         blacklistedUrl: playlist.bannedBVids,
       });
     }
+  };
+
+  const clearPlaylistNImport = async () => {
+    await clearPlaylists();
+    await saveImportedPlaylist();
     await savePlaylistIds(parsedContent['MyFavList']);
   };
+
+  const addImportedPlaylist = async () => {
+    await saveImportedPlaylist();
+    await savePlaylistIds(
+      (
+        await getItem(STORAGE_KEYS.MY_FAV_LIST_KEY)
+      ).concat(parsedContent['MyFavList'])
+    );
+  };
+
   return new Promise((resolve, reject) => {
     Alert.alert('ERROR', 'Are you importing from noxplayer extension?', [
       {
-        text: 'Nn',
+        text: 'No',
         onPress: () => {
           reject('user said no');
         },
         style: 'cancel',
       },
       {
-        text: 'Yes',
+        text: 'Overwrite',
         onPress: async () => {
           await clearPlaylistNImport();
+          resolve(true);
+        },
+      },
+      {
+        text: 'Add',
+        onPress: async () => {
+          await addImportedPlaylist();
           resolve(true);
         },
       },
