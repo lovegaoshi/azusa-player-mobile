@@ -1,4 +1,4 @@
-import React, { ReactNode, useRef, useState } from 'react';
+import React, { ReactNode, useRef, useState, useEffect } from 'react';
 import { IconButton, Divider, Text, TouchableRipple } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
 import {
@@ -123,6 +123,8 @@ export default (props: any) => {
   const removePlaylist = useNoxSetting(state => state.removePlaylist);
   const RenderDrawerItem = useRenderDrawerItem();
   const { TwoWayAlert } = useAlert();
+  // HACK: I know its bad! But somehow this hook isnt updating in its own
+  // useEffects...
   const { buildBrowseTree } = useAAPlayback();
 
   // HACK: tried to make searchList draweritem button as addPlaylistButton, but
@@ -238,7 +240,7 @@ export default (props: any) => {
             paddingLeft: 25,
             backgroundColor:
               currentPlaylist.id ===
-                playlists[STORAGE_KEYS.SEARCH_PLAYLIST_KEY]?.id
+              playlists[STORAGE_KEYS.SEARCH_PLAYLIST_KEY]?.id
                 ? playerStyle.customColors.playlistDrawerBackgroundColor
                 : undefined,
           },

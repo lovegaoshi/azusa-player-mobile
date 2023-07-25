@@ -28,7 +28,6 @@ import Settings from './components/setting/View';
 import './localization/i18n';
 import AppOpenSplash from './components/background/AppOpenSplash';
 import { DummySettings } from './components/setting/View';
-import AzusaPlayer from './AzusaPlayer';
 
 const { LightTheme, DarkTheme } = adaptNavigationTheme({
   reactNavigationLight: NavigationDefaultTheme,
@@ -108,58 +107,56 @@ const App: React.FC = () => {
   // HACK: proof codewhisperer learns stackoverflow:
   // https://stackoverflow.com/questions/54599305/how-to-set-background-image-with-react-native-and-react-navigation
   return (
-    <AzusaPlayer>
-      <MainBackground>
-        <PaperProvider
+    <MainBackground>
+      <PaperProvider
+        theme={{
+          ...defaultTheme,
+          colors: playerStyle.colors,
+        }}
+      >
+        <NavigationContainer
           theme={{
             ...defaultTheme,
-            colors: playerStyle.colors,
+            colors: {
+              ...defaultTheme.colors,
+              ...playerStyle.colors,
+            },
           }}
         >
-          <NavigationContainer
-            theme={{
-              ...defaultTheme,
-              colors: {
-                ...defaultTheme.colors,
-                ...playerStyle.colors,
-              },
-            }}
+          <Drawer.Navigator
+            initialRouteName={ViewEnum.PLAYER_HOME}
+            drawerContent={PlaylistDrawer}
           >
-            <Drawer.Navigator
-              initialRouteName={ViewEnum.PLAYER_HOME}
-              drawerContent={PlaylistDrawer}
-            >
-              <Drawer.Screen
-                name={ViewEnum.PLAYER_HOME}
-                options={{
-                  drawerIcon: () => <IconButton icon="home-outline" />,
-                  title: String(t('appDrawer.homeScreenName')),
-                  header: () => null,
-                }}
-                component={NoxPlayer}
-              />
-              <Drawer.Screen
-                name={ViewEnum.EXPORE}
-                options={{
-                  drawerIcon: () => <IconButton icon="compass" />,
-                  title: String(t('appDrawer.exploreScreenName')),
-                }}
-                component={DummySettings}
-              />
-              <Drawer.Screen
-                name={ViewEnum.SETTINGS}
-                options={{
-                  drawerIcon: () => <IconButton icon="cog" />,
-                  title: String(t('appDrawer.settingScreenName')),
-                  header: () => null,
-                }}
-                component={Settings}
-              />
-            </Drawer.Navigator>
-          </NavigationContainer>
-        </PaperProvider>
-      </MainBackground>
-    </AzusaPlayer>
+            <Drawer.Screen
+              name={ViewEnum.PLAYER_HOME}
+              options={{
+                drawerIcon: () => <IconButton icon="home-outline" />,
+                title: String(t('appDrawer.homeScreenName')),
+                header: () => null,
+              }}
+              component={NoxPlayer}
+            />
+            <Drawer.Screen
+              name={ViewEnum.EXPORE}
+              options={{
+                drawerIcon: () => <IconButton icon="compass" />,
+                title: String(t('appDrawer.exploreScreenName')),
+              }}
+              component={DummySettings}
+            />
+            <Drawer.Screen
+              name={ViewEnum.SETTINGS}
+              options={{
+                drawerIcon: () => <IconButton icon="cog" />,
+                title: String(t('appDrawer.settingScreenName')),
+                header: () => null,
+              }}
+              component={Settings}
+            />
+          </Drawer.Navigator>
+        </NavigationContainer>
+      </PaperProvider>
+    </MainBackground>
   );
 };
 

@@ -29,6 +29,7 @@ const useAAPlayback = () => {
     if (song === undefined) {
       if (playlist.songList.length === 0) {
         // no song exists.
+        logger.warn(`${playlist.id} is empty.`);
         return;
       } else {
         song = randomChoice(playlist.songList);
@@ -40,11 +41,12 @@ const useAAPlayback = () => {
   };
 
   const playFromMediaId = (mediaId: string) => {
-    console.log(`[playFromMediaId]: ${mediaId}`);
+    logger.log(`[playFromMediaId]: ${mediaId}`);
     if (mediaId.startsWith(PLAYLIST_MEDIAID)) {
       mediaId = mediaId.substring(PLAYLIST_MEDIAID.length);
       // play a playlist.
       if (playlists[mediaId] === undefined) {
+        logger.warn(`${mediaId} doesnt exist.`);
         return;
       }
       playFromPlaylist(playlists[mediaId]);
