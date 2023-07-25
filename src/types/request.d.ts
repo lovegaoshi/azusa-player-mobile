@@ -6,4 +6,9 @@ declare namespace NoxNetwork {
     referrer?: string;
     credentials?: RequestCredentials_;
   }
+
+  export interface ParsedNoxMediaURL {
+    url: string;
+    albumArt?: string;
+  }
 }

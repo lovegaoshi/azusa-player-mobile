@@ -3,7 +3,6 @@ import biliaudioFetch from './biliaudio';
 import ytbvideoFetch from './ytbvideo';
 import { logger } from '../Logger';
 import bfetch from '../BiliFetch';
-import { parsedURLObject } from './interfaces';
 
 /**
  *  Video src info
@@ -40,17 +39,17 @@ export const ENUMS = {
  */
 export const fetchPlayUrlPromise = async (
   v: NoxMedia.Song
-): Promise<parsedURLObject> => {
+): Promise<NoxNetwork.ParsedNoxMediaURL> => {
   const bvid = v.bvid;
   const cid = v.id;
   const regexResolveURLs: Array<
-    [RegExp, (song: NoxMedia.Song) => Promise<parsedURLObject>]
+    [RegExp, (song: NoxMedia.Song) => Promise<NoxNetwork.ParsedNoxMediaURL>]
   > = [
     [steriatkFetch.regexResolveURLMatch, steriatkFetch.resolveURL],
     [biliaudioFetch.regexResolveURLMatch, biliaudioFetch.resolveURL],
     [ytbvideoFetch.regexResolveURLMatch, ytbvideoFetch.resolveURL],
   ];
-  logger.debug({ bvid, cid });
+  logger.debug(`[resolveURL] ${{ bvid, cid }}`);
   for (const reExtraction of regexResolveURLs) {
     const reExtracted = reExtraction[0].exec(cid);
     if (reExtracted !== null) {
