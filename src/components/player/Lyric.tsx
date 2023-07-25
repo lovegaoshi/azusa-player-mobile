@@ -15,6 +15,7 @@ import { searchLyricOptions, searchLyric } from '../../utils/Data';
 import { reExtractSongName } from '../../utils/re';
 import { IconButton, TextInput } from 'react-native-paper';
 import { useNoxSetting } from '../../hooks/useSetting';
+import logger from '../../utils/Logger';
 
 const LYRIC_OFFSET_INTERVAL = 0.5;
 
@@ -75,13 +76,13 @@ export const LyricView = ({
 
   useEffect(() => {
     if (track !== undefined && track.title !== '') {
-      console.log('Initiating Lyric with new track...');
+      logger.log('Initiating Lyric with new track...');
       setCurrentTimeOffset(0);
       setLrcOption(null);
       setLrc('正在加载歌词...');
       // Initialize from storage if not new
       if (hasLrcFromLocal()) {
-        console.log('Loading Lrc from localStorage...');
+        logger.log('Loading Lrc from localStorage...');
         const lrcDetail = lyricMapping.get(track?.song.id);
         searchLyric(lrcDetail?.lyricKey, setLrc);
         setLrcOption({ key: lrcDetail?.lyricKey });
@@ -128,16 +129,16 @@ export const LyricView = ({
 
       setLrcOptions(options);
     } catch (error) {
-      console.error('Error fetching lyric options:', error);
+      logger.error(`Error fetching lyric options:${error}`);
       setLrcOptions([]);
     }
   };
 
   const searchAndSetCurrentLyric = (index?: number) => {
-    console.log('lrcoptions:', lrcOptions);
+    logger.log(`lrcoptions: ${lrcOptions}`);
 
     index = index === undefined ? 0 : index;
-    if (lrcOptions.length == 0) setLrc('无法找到歌词,请手动搜索...');
+    if (lrcOptions.length === 0) setLrc('无法找到歌词,请手动搜索...');
     else {
       searchLyric(lrcOptions[index!].songMid, setLrc);
       setLrcOption(lrcOptions[index!]);

@@ -43,12 +43,12 @@ const loginQRVerification = async () => {
     'bili_jct'
   ]?.value;
   const res = await throttler.biliApiLimiter.schedule(async () =>
-      bfetch(`${verificationURL}${biliJct}`, {
-        method: 'GET',
-        credentials: 'include',
-        headers: {},
-      })
-    ),
+    bfetch(`${verificationURL}${biliJct}`, {
+      method: 'GET',
+      credentials: 'include',
+      headers: {},
+    })
+  ),
     json = await res.json();
   await Promise.all(
     json.data.sso.map((url: string) =>
@@ -161,7 +161,7 @@ const useBiliLogin = () => {
     } catch (error) {
       // network error; abort qr login attempts
       clearQRLogin();
-      console.error(error);
+      logger.error(`[biliLogin] ${error}`);
       Snackbar.show({
         text: t('Login.BilibiliLoginProbeFailed'),
       });

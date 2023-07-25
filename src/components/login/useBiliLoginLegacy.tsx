@@ -111,7 +111,7 @@ const useBiliLogin = () => {
     } catch (error) {
       // network error; abort qr login attempts
       clearQRLogin();
-      console.error(error);
+      logger.error(`[biliLogin] ${error}`);
       Snackbar.show({
         text: t('Login.BilibiliLoginProbeFailed'),
       });

@@ -89,7 +89,6 @@ const ThumbsUpButton = () => {
       } else {
         setStatus(THUMBUPSTATUS.notThumbedUp);
       }
-      console.log('like set');
     };
     setLikedStatus();
   }, [currentPlayingId]);

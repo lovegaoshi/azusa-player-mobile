@@ -77,7 +77,6 @@ const MainBackground = (props: any) => {
         </ImageBackground>
       );
     case RESOLVE_TYPE.video:
-      console.log(playerStyle.bkgrdImg.identifier);
       return (
         <>
           <Video
