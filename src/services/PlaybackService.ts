@@ -30,7 +30,9 @@ export async function AdditionalPlaybackService({
   const lastPlayedDuration = [lastPlayDuration];
   TrackPlayer.addEventListener(Event.PlaybackState, event => {
     if (lastPlayedDuration[0] && event.state === State.Ready) {
-      logger.debug(`initalized last played duration to ${lastPlayDuration}`);
+      logger.debug(
+        `[Playback] initalized last played duration to ${lastPlayDuration}`
+      );
       TrackPlayer.seekTo(lastPlayedDuration[0]);
       lastPlayedDuration[0] = null;
     }

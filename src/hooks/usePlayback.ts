@@ -29,7 +29,7 @@ const usePlayback = () => {
     if (song === undefined) {
       if (playlist.songList.length === 0) {
         // no song exists.
-        logger.warn(`${playlist.id} is empty.`);
+        logger.warn(`[Playback] ${playlist.id} is empty.`);
         return;
       } else {
         song = randomChoice(playlist.songList);
@@ -46,7 +46,7 @@ const usePlayback = () => {
       mediaId = mediaId.substring(PLAYLIST_MEDIAID.length);
       // play a playlist.
       if (playlists[mediaId] === undefined) {
-        logger.warn(`${mediaId} doesnt exist.`);
+        logger.warn(`[Playback] ${mediaId} doesnt exist.`);
         return;
       }
       playFromPlaylist(playlists[mediaId]);

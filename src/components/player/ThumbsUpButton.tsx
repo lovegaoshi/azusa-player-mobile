@@ -81,7 +81,7 @@ const ThumbsUpButton = () => {
         return;
       }
       const liked = await checkLiked(track.song);
-      logger.log(`liked: ${liked}`);
+      logger.log(`[biliThumbup] liked: ${liked}`);
       if (liked === undefined) {
         setStatus(THUMBUPSTATUS.notLoggedIn);
       } else if (liked) {
