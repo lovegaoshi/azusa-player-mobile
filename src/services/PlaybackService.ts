@@ -2,6 +2,7 @@ import TrackPlayer, { Event, State } from 'react-native-track-player';
 
 import type { NoxStorage } from '../types/storage';
 import { saveLastPlayDuration } from '../utils/ChromeStorage';
+import logger from '../utils/Logger';
 
 export async function AdditionalPlaybackService({
   noInterruption = false,
