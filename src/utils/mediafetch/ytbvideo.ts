@@ -26,7 +26,7 @@ const fetchYTBPlayUrlPromise = async (sid: string) => {
     const videoDetails = ytdlInfo.videoDetails;
     return {
       url: ytdl.chooseFormat(ytdlInfo.formats, { quality: 'highestaudio' }).url,
-      albumArt: videoDetails.thumbnails[videoDetails.thumbnails.length - 1].url,
+      cover: videoDetails.thumbnails[videoDetails.thumbnails.length - 1].url,
     };
   } catch (e) {
     logger.error(e);

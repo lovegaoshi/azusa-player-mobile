@@ -1,20 +1,7 @@
-import TrackPlayer, {
-  Event,
-  State,
-  RepeatMode,
-} from 'react-native-track-player';
+import TrackPlayer, { Event, State } from 'react-native-track-player';
 
-import { resolveUrl, NULL_TRACK } from '../objects/Song';
-import { initBiliHeartbeat } from '../utils/Bilibili/BiliOperate';
 import type { NoxStorage } from '../types/storage';
 import { saveLastPlayDuration } from '../utils/ChromeStorage';
-import logger from '../utils/Logger';
-import NoxCache from '../utils/Cache';
-import noxPlayingList from '../stores/playingList';
-import { NoxRepeatMode } from '../components/player/enums/RepeatMode';
-
-const { getState } = noxPlayingList;
-let lastBiliHeartBeat: string[] = ['', ''];
 
 export async function AdditionalPlaybackService({
   noInterruption = false,
@@ -67,51 +54,6 @@ export async function PlaybackService() {
 
   TrackPlayer.addEventListener(Event.PlaybackQueueEnded, event => {
     console.log('Event.PlaybackQueueEnded', event);
-  });
-
-  TrackPlayer.addEventListener(Event.PlaybackActiveTrackChanged, event => {
-    console.log('Event.PlaybackActiveTrackChanged', event);
-    if (!event.track || !event.track.song) return;
-    // to resolve bilibili media stream URLs on the fly, TrackPlayer.load is used to
-    // replace the current track's url. its not documented? >:/
-    if (
-      event.index !== undefined &&
-      (event.track.url === NULL_TRACK.url ||
-        new Date().getTime() - event.track.urlRefreshTimeStamp > 3600000)
-    ) {
-      const heartBeatReq = [event.track.song.bvid, event.track.song.id];
-      // HACK: what if cid needs to be resolved on the fly?
-      // TODO: its too much of a hassle and I would like to just
-      // ask users to refresh their lists instead, if they really care
-      // about sending heartbeats.
-      if (
-        lastBiliHeartBeat[0] !== heartBeatReq[0] ||
-        lastBiliHeartBeat[1] !== heartBeatReq[1]
-      ) {
-        initBiliHeartbeat({
-          bvid: event.track.song.bvid,
-          cid: event.track.song.id,
-        });
-        lastBiliHeartBeat = heartBeatReq;
-      }
-      resolveUrl(event.track.song)
-        .then(updatedMetadata => {
-          NoxCache.noxMediaCache?.saveCacheMedia(
-            event.track!.song,
-            updatedMetadata
-          );
-          TrackPlayer.getActiveTrack().then(currentTrack => {
-            TrackPlayer.load({ ...currentTrack, ...updatedMetadata }).then(
-              () => {
-                if (getState().playmode === NoxRepeatMode.REPEAT_TRACK) {
-                  TrackPlayer.setRepeatMode(RepeatMode.Track);
-                }
-              }
-            );
-          });
-        })
-        .catch(e => console.error('resolveURL failed', event.track, e));
-    }
   });
 
   TrackPlayer.addEventListener(Event.PlaybackPlayWhenReadyChanged, event => {

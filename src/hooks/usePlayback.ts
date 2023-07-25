@@ -1,12 +1,20 @@
-import { EmitterSubscription, Platform } from 'react-native';
+import { Platform } from 'react-native';
 import { useEffect } from 'react';
-import TrackPlayer, { Event } from 'react-native-track-player';
+import TrackPlayer, { Event, RepeatMode } from 'react-native-track-player';
 import { useTranslation } from 'react-i18next';
 
 import { songlistToTracklist } from '../objects/Playlist';
 import { useNoxSetting } from './useSetting';
 import { randomChoice } from '../utils/Utils';
 import logger from '../utils/Logger';
+import { resolveUrl, NULL_TRACK } from '../objects/Song';
+import { initBiliHeartbeat } from '../utils/Bilibili/BiliOperate';
+import NoxCache from '../utils/Cache';
+import noxPlayingList from '../stores/playingList';
+import { NoxRepeatMode } from '../components/player/enums/RepeatMode';
+
+const { getState } = noxPlayingList;
+let lastBiliHeartBeat: string[] = ['', ''];
 
 const PLAYLIST_MEDIAID = 'playlist-';
 
@@ -41,7 +49,7 @@ const usePlayback = () => {
   };
 
   const playFromMediaId = (mediaId: string) => {
-    logger.log(`[playFromMediaId]: ${mediaId}`);
+    logger.info(`[playFromMediaId]: ${mediaId}`);
     if (mediaId.startsWith(PLAYLIST_MEDIAID)) {
       mediaId = mediaId.substring(PLAYLIST_MEDIAID.length);
       // play a playlist.
@@ -131,6 +139,54 @@ const usePlayback = () => {
       }),
     });
   };
+
+  useEffect(() => {
+    const listener = TrackPlayer.addEventListener(
+      Event.PlaybackActiveTrackChanged,
+      async event => {
+        console.log('Event.PlaybackActiveTrackChanged', event);
+        if (!event.track || !event.track.song) return;
+        // to resolve bilibili media stream URLs on the fly, TrackPlayer.load is used to
+        // replace the current track's url. its not documented? >:/
+        if (
+          event.index !== undefined &&
+          (event.track.url === NULL_TRACK.url ||
+            new Date().getTime() - event.track.urlRefreshTimeStamp > 3600000)
+        ) {
+          const heartBeatReq = [event.track.song.bvid, event.track.song.id];
+          // HACK: what if cid needs to be resolved on the fly?
+          // TODO: its too much of a hassle and I would like to just
+          // ask users to refresh their lists instead, if they really care
+          // about sending heartbeats.
+          if (
+            lastBiliHeartBeat[0] !== heartBeatReq[0] ||
+            lastBiliHeartBeat[1] !== heartBeatReq[1]
+          ) {
+            initBiliHeartbeat({
+              bvid: event.track.song.bvid,
+              cid: event.track.song.id,
+            });
+            lastBiliHeartBeat = heartBeatReq;
+          }
+          const updatedMetadata = await resolveUrl(event.track.song);
+          try {
+            NoxCache.noxMediaCache.saveCacheMedia(
+              event.track!.song,
+              updatedMetadata
+            );
+            const currentTrack = await TrackPlayer.getActiveTrack();
+            await TrackPlayer.load({ ...currentTrack, ...updatedMetadata });
+            if (getState().playmode === NoxRepeatMode.REPEAT_TRACK) {
+              TrackPlayer.setRepeatMode(RepeatMode.Track);
+            }
+          } catch (e) {
+            console.error('resolveURL failed', event.track, e);
+          }
+        }
+      }
+    );
+    return () => listener.remove();
+  }, []);
 
   return { buildBrowseTree, playFromMediaId, playFromSearch, playFromPlaylist };
 };

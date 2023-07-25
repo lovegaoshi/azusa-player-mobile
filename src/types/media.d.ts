@@ -7,11 +7,11 @@ declare namespace NoxMedia {
     singer: string;
     singerId: string | number;
     cover: string;
-    lyric: string | undefined;
-    lyricOffset: number | undefined;
+    lyric?: string;
+    lyricOffset?: number;
     parsedName: string;
-    biliShazamedName: string | undefined;
-    page: number | undefined;
+    biliShazamedName?: string;
+    page?: number;
     duration: number;
     album?: string;
     addedDate?: number;

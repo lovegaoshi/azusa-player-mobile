@@ -9,6 +9,7 @@ declare namespace NoxNetwork {
 
   export interface ParsedNoxMediaURL {
     url: string;
-    albumArt?: string;
+    cover?: string;
+    duration?: number;
   }
 }
