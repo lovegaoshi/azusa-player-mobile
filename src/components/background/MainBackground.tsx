@@ -25,11 +25,13 @@ export const resolveBackgroundImage = async (
     case RESOLVE_TYPE.bvid:
       return {
         type: RESOLVE_TYPE.video,
-        identifier: await fetchVideoPlayUrlPromise(
-          backgroundImage.identifier,
-          undefined,
-          'VideoUrl'
-        ),
+        identifier: (
+          await fetchVideoPlayUrlPromise(
+            backgroundImage.identifier,
+            undefined,
+            'VideoUrl'
+          )
+        ).url,
       };
     case RESOLVE_TYPE.biliNFTVideo:
       // eslint-disable-next-line no-case-declarations

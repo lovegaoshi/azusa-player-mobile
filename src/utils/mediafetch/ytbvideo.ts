@@ -23,7 +23,11 @@ const fetchYTBPlayUrlPromise = async (sid: string) => {
     const ytdlInfo = await ytdl.getInfo(
       `https://www.youtube.com/watch?v=${sid}`
     );
-    return ytdl.chooseFormat(ytdlInfo.formats, { quality: 'highestaudio' }).url;
+    const videoDetails = ytdlInfo.videoDetails;
+    return {
+      url: ytdl.chooseFormat(ytdlInfo.formats, { quality: 'highestaudio' }).url,
+      albumArt: videoDetails.thumbnails[videoDetails.thumbnails.length - 1].url,
+    };
   } catch (e) {
     logger.error(e);
     throw e;
@@ -188,7 +192,9 @@ const regexFetch = async ({ reExtracted, useBiliTag }: regexFetchProps) => {
   return audioInfo || [];
 };
 
-const resolveURL = (song: NoxMedia.Song) => fetchYTBPlayUrlPromise(song.bvid);
+const resolveURL = async (song: NoxMedia.Song) => {
+  return await fetchYTBPlayUrlPromise(song.bvid);
+};
 
 const refreshSong = (song: NoxMedia.Song) => song;
 

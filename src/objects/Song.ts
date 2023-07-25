@@ -84,13 +84,12 @@ export const removeSongBiliShazamed = (song: NoxMedia.Song) => {
 export const resolveUrl = async (song: NoxMedia.Song) => {
   // TODO: method is called MULTIPLE times. need to investigate and debounce.
   // luckily bilibili doesnt seem to care for now
-  const url: string =
-    (await NoxCache.noxMediaCache?.loadCacheMedia(song)) ||
-    (await fetchPlayUrlPromise(song));
-  logger.debug(`[Song] ${song.name} is resolved to ${url}`);
+  const cachedUrl = await NoxCache.noxMediaCache?.loadCacheMedia(song);
+  const url = cachedUrl ? { url: cachedUrl } : await fetchPlayUrlPromise(song);
+  logger.debug(`[SongResolveURL] ${song.name} is resolved to ${url.url}`);
   return {
-    url,
-    headers: customReqHeader(url, { referer: 'https://www.bilibili.com/' }),
+    url: url.url,
+    headers: customReqHeader(url.url, { referer: 'https://www.bilibili.com/' }),
     userAgent: DEFAULT_UA,
     urlRefreshTimeStamp: new Date().getTime(),
   };
