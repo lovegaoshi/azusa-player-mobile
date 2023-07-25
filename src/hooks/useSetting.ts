@@ -91,6 +91,9 @@ interface NoxSetting {
   lyricMapping: Map<string, NoxMedia.LyricDetail>;
   setLyricMapping: (val: NoxMedia.LyricDetail) => void;
 
+  externalSearchText: string;
+  setExternalSearchText: (val: string) => void;
+
   /**
    * updates a playlist with songs added and removed, and saves it. addSongs are added at the front.
    * manipulate val before this function to add songs in whatever order desired.
@@ -245,6 +248,11 @@ export const useNoxSetting = create<NoxSetting>((set, get) => ({
     lyricMapping.set(val.songId, val);
     set({ lyricMapping });
     saveLyricMapping(lyricMapping);
+  },
+
+  externalSearchText: '',
+  setExternalSearchText: (val: string) => {
+    set({ externalSearchText: val });
   },
 
   initPlayer: async (val: NoxStorage.PlayerStorageObject) => {

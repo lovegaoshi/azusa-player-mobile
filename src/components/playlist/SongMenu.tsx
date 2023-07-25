@@ -6,6 +6,8 @@ import { useTranslation } from 'react-i18next';
 import { useNoxSetting } from '../../hooks/useSetting';
 import { CopiedPlaylistMenuItem } from '../buttons/CopiedPlaylistButton';
 import { RenameSongMenuItem } from '../buttons/RenameSongButton';
+import { CIDPREFIX } from '../../utils/mediafetch/ytbvideo';
+import logger from '../../utils/Logger';
 
 enum ICONS {
   SEND_TO = 'playlist-plus',
@@ -18,6 +20,7 @@ enum ICONS {
   REMOVE = 'delete',
   REMOVE_AND_BAN_BVID = 'delete-forever',
   DETAIL = 'information-outline',
+  RADIO = 'radio-tower',
 }
 
 interface Props {
@@ -40,6 +43,9 @@ export default ({
   const songMenuSongIndexes = useNoxSetting(state => state.songMenuSongIndexes);
   const currentPlaylist = useNoxSetting(state => state.currentPlaylist);
   const updatePlaylist = useNoxSetting(state => state.updatePlaylist);
+  const setExternalSearchText = useNoxSetting(
+    state => state.setExternalSearchText
+  );
 
   const closeMenu = React.useCallback(() => setSongMenuVisible(false), []);
 
@@ -115,6 +121,25 @@ export default ({
     closeMenu();
   };
 
+  const startRadio = (song?: NoxMedia.Song) => {
+    if (song === undefined) {
+      song = selectedSongs()[0];
+    }
+    if (song.id.startsWith(CIDPREFIX)) {
+      setExternalSearchText(`youtu.be/list=RD${song.bvid}`);
+    } else {
+      logger.warn(`[startRadio] ${song.bvid} is not a youtube video`);
+    }
+    setSongMenuVisible(false);
+  };
+
+  const radioAvailable = (song?: NoxMedia.Song) => {
+    if (song === undefined) {
+      song = selectedSongs()[0];
+    }
+    return song?.id?.startsWith(CIDPREFIX);
+  };
+
   return (
     <Menu visible={songMenuVisible} onDismiss={closeMenu} anchor={menuCoord}>
       <CopiedPlaylistMenuItem
@@ -128,6 +153,12 @@ export default ({
           closeMenu();
           renameSong(rename);
         }}
+      />
+      <Menu.Item
+        leadingIcon={ICONS.RADIO}
+        disabled={checking || !radioAvailable()}
+        onPress={() => startRadio()}
+        title={t('SongOperations.songStartRadio')}
       />
       <Menu.Item
         leadingIcon={ICONS.SEARCH_IN_PLAYLIST}
