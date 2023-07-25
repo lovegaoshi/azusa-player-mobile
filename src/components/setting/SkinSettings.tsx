@@ -18,6 +18,12 @@ interface DisplayTheme extends NoxTheme.style {
   builtin: boolean;
 }
 
+interface SkinItemProps {
+  skin: DisplayTheme;
+  checked: string;
+  setChecked: (val: string) => void;
+}
+
 const BuiltInThemes: DisplayTheme[] = [
   {
     ...AzusaTheme,
@@ -29,9 +35,78 @@ const BuiltInThemes: DisplayTheme[] = [
   },
 ];
 
-export default () => {
+const SkinItem = ({ skin, checked, setChecked }: SkinItemProps) => {
   const playerStyle = useNoxSetting(state => state.playerStyle);
   const setPlayerStyle = useNoxSetting(state => state.setPlayerStyle);
+  const playerStyles = useNoxSetting(state => state.playerStyles);
+  const setPlayerStyles = useNoxSetting(state => state.setPlayerStyles);
+  const getThemeID = (skin: NoxTheme.style) =>
+    `${skin.metaData.themeName}.${skin.metaData.themeAuthor}`;
+  const themeID = getThemeID(skin);
+
+  const selectTheme = () => {
+    setChecked(themeID);
+    setPlayerStyle(skin);
+  };
+
+  const deleteTheme = () =>
+    setPlayerStyles(playerStyles.filter(pSkin => pSkin !== skin));
+
+  return (
+    <TouchableRipple onPress={selectTheme}>
+      <View style={styles.skinItemContainer}>
+        <View style={styles.skinItemLeftContainer}>
+          <Image
+            source={{ uri: skin.metaData.themeIcon }}
+            style={styles.skinItemImage}
+          />
+          <View style={styles.skinItemTextContainer}>
+            <Text
+              variant={'titleMedium'}
+              style={styles.skinTitleText}
+              numberOfLines={1}
+              ellipsizeMode="tail"
+            >{`${skin.metaData.themeName} by ${skin.metaData.themeAuthor}`}</Text>
+            <Text
+              variant={'labelLarge'}
+              style={{
+                color: playerStyle.colors.secondary,
+                maxWidth: '90%',
+              }}
+            >
+              {skin.metaData.themeDesc}
+            </Text>
+            <View style={styles.lightbulbContainer}>
+              <IconButton
+                icon={
+                  skin.metaData.darkTheme ? 'lightbulb-outline' : 'lightbulb-on'
+                }
+                size={25}
+                style={styles.lightbulbIcon}
+              />
+            </View>
+          </View>
+        </View>
+        <View style={styles.skinItemRightContainer}>
+          <RadioButton
+            value={themeID}
+            status={checked === themeID ? 'checked' : 'unchecked'}
+            onPress={selectTheme}
+          />
+          <IconButton
+            icon="trash-can"
+            style={styles.deleteButton}
+            onPress={deleteTheme}
+            disabled={skin.builtin}
+          />
+        </View>
+      </View>
+    </TouchableRipple>
+  );
+};
+
+const SkinSettings = () => {
+  const playerStyle = useNoxSetting(state => state.playerStyle);
   const playerStyles = useNoxSetting(state => state.playerStyles);
   const setPlayerStyles = useNoxSetting(state => state.setPlayerStyles);
   const allThemes = BuiltInThemes.concat(playerStyles);
@@ -52,71 +127,6 @@ export default () => {
     setPlayerStyles(uniqueSkins);
   };
 
-  const renderSkinItem = (skin: DisplayTheme) => {
-    const themeID = getThemeID(skin);
-    const selectTheme = () => {
-      setChecked(themeID);
-      setPlayerStyle(skin);
-    };
-
-    const deleteTheme = () =>
-      setPlayerStyles(playerStyles.filter(pSkin => pSkin !== skin));
-
-    return (
-      <TouchableRipple onPress={selectTheme}>
-        <View style={styles.skinItemContainer}>
-          <View style={styles.skinItemLeftContainer}>
-            <Image
-              source={{ uri: skin.metaData.themeIcon }}
-              style={styles.skinItemImage}
-            />
-            <View style={styles.skinItemTextContainer}>
-              <Text
-                variant={'titleMedium'}
-                style={styles.skinTitleText}
-                numberOfLines={1}
-                ellipsizeMode="tail"
-              >{`${skin.metaData.themeName} by ${skin.metaData.themeAuthor}`}</Text>
-              <Text
-                variant={'labelLarge'}
-                style={{
-                  color: playerStyle.colors.secondary,
-                  maxWidth: '90%',
-                }}
-              >
-                {skin.metaData.themeDesc}
-              </Text>
-              <View style={styles.lightbulbContainer}>
-                <IconButton
-                  icon={
-                    skin.metaData.darkTheme
-                      ? 'lightbulb-outline'
-                      : 'lightbulb-on'
-                  }
-                  size={25}
-                  style={styles.lightbulbIcon}
-                />
-              </View>
-            </View>
-          </View>
-          <View style={styles.skinItemRightContainer}>
-            <RadioButton
-              value={themeID}
-              status={checked === themeID ? 'checked' : 'unchecked'}
-              onPress={selectTheme}
-            />
-            <IconButton
-              icon="trash-can"
-              style={styles.deleteButton}
-              onPress={deleteTheme}
-              disabled={skin.builtin}
-            />
-          </View>
-        </View>
-      </TouchableRipple>
-    );
-  };
-
   return (
     <SafeAreaView
       style={[
@@ -127,7 +137,9 @@ export default () => {
       <SkinSearchbar onSearched={loadCustomSkin} />
       <FlatList
         data={allThemes}
-        renderItem={({ item }: { item: any }) => renderSkinItem(item)}
+        renderItem={({ item }: { item: DisplayTheme }) =>
+          SkinItem({ skin: item, checked, setChecked })
+        }
         keyExtractor={item => getThemeID(item)}
       />
     </SafeAreaView>
@@ -174,3 +186,5 @@ const styles = StyleSheet.create({
     maxWidth: '100%',
   },
 });
+
+export default SkinSettings;
