@@ -52,7 +52,7 @@ export default ({ navigation }: Props) => {
         name: 'bili_jct',
         value: input.bili_jct,
       });
-      logger.debug(await CookieManager.get(domain));
+      logger.debug(`[setCookie] ${await CookieManager.get(domain)}`);
       clearQRLogin();
       getBiliLoginStatus();
     }
@@ -79,7 +79,7 @@ export default ({ navigation }: Props) => {
         Snackbar.show({
           text: t('Login.BilibiliLoginQRGenerateFailed'),
         });
-        logger.error(error);
+        logger.error(`[biliLogin] ${error}`);
       }
     };
 

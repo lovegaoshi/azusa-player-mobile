@@ -71,7 +71,7 @@ const loginQRVerification = async () => {
       })
     ),
     json = await res.json();
-  logger.debug(json);
+  logger.debug(`[biliLogin] ${json}`);
 };
 
 const useBiliLogin = () => {
@@ -148,14 +148,18 @@ const useBiliLogin = () => {
       });
       const json = await response.json();
       logger.debug(
-        `probing QR code login of ${qrcodeKey}, ${JSON.stringify(json)}`
+        `[biliLogin] probing QR code login of ${qrcodeKey}, ${JSON.stringify(
+          json
+        )}`
       );
       if (json.code === 0) {
         // json.status
         const setCookie = response.headers.get('set-cookie');
         if (!setCookie) {
           logger.warn(
-            `no set-cookie header found; res: ${JSON.stringify(json)}`
+            `[biliLogin] no set-cookie header found; res: ${JSON.stringify(
+              json
+            )}`
           );
         } else {
           addCookie(domain, setCookie);
@@ -171,7 +175,9 @@ const useBiliLogin = () => {
             });
           } catch {
             logger.warn(
-              `${JSON.stringify(cookieEntry)} failed in saving cookie.`
+              `[biliLogin] ${JSON.stringify(
+                cookieEntry
+              )} failed in saving cookie.`
             );
           }
         }
@@ -183,7 +189,7 @@ const useBiliLogin = () => {
           name: 'refresh_token',
           value: json.data.refresh_token,
         });
-        logger.debug(await CookieManager.get(domain));
+        logger.debug(`[biliLogin] ${await CookieManager.get(domain)}`);
         clearQRLogin();
       }
     } catch (error) {
