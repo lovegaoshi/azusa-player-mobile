@@ -14,7 +14,7 @@ import { Track, useProgress } from 'react-native-track-player';
 import { searchLyricOptions, searchLyric } from '@utils/Data';
 import { reExtractSongName } from '@utils/re';
 import { IconButton, TextInput } from 'react-native-paper';
-import { useNoxSetting } from 'hooks/useSetting';
+import { useNoxSetting } from '@hooks/useSetting';
 import logger from '@utils/Logger';
 
 const LYRIC_OFFSET_INTERVAL = 0.5;

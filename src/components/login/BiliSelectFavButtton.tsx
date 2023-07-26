@@ -5,8 +5,8 @@ import { useTranslation } from 'react-i18next';
 import { getBiliFavlist, GETFAVLIST_RES } from '@utils/Bilibili/bilifavOperate';
 import GenericCheckDialog from '../dialogs/GenericCheckDialog';
 import bilifavlistFetch from '@utils/mediafetch/bilifavlist';
-import { dummyPlaylist } from 'objects/Playlist';
-import { useNoxSetting } from 'hooks/useSetting';
+import { dummyPlaylist } from '@objects/Playlist';
+import { useNoxSetting } from '@hooks/useSetting';
 
 export default () => {
   const { t } = useTranslation();

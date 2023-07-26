@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { IconButton } from 'react-native-paper';
 import { Track } from 'react-native-track-player';
 
-import { useNoxSetting } from 'hooks/useSetting';
-import { updatePlaylistSongs } from 'objects/Playlist';
+import { useNoxSetting } from '@hooks/useSetting';
+import { updatePlaylistSongs } from '@objects/Playlist';
 
 interface Props {
   track?: Track;

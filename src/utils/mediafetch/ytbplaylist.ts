@@ -1,6 +1,6 @@
 import { regexFetchProps } from './generic';
 import { fetchAudioInfo, CIDPREFIX } from './ytbvideo';
-import SongTS from 'objects/Song';
+import SongTS from '@objects/Song';
 import logger from '../Logger';
 
 const fetchYTPlaylist = async (

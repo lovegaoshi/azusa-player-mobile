@@ -5,11 +5,11 @@ import { useTranslation } from 'react-i18next';
 // eslint-disable-next-line import/no-unresolved
 import { APPSTORE } from '@env';
 
-import { useNoxSetting } from 'hooks/useSetting';
+import { useNoxSetting } from '@hooks/useSetting';
 import { logStore, LOGLEVEL, getLog } from '@utils/Logger';
 import GenericSelectDialog from '../dialogs/GenericSelectDialog';
 import { SettingListItem, renderSetting } from './useRenderSetting';
-import useVersionCheck from 'hooks/useVersionCheck';
+import useVersionCheck from '@hooks/useVersionCheck';
 import useAlert from '../dialogs/useAlert';
 import {
   SelectSettingEntry,
@@ -17,7 +17,7 @@ import {
   dummySelectSettingEntry,
 } from './SetttingEntries';
 import NoxCache from '@utils/Cache';
-import useCleanCache from 'hooks/useCleanCache';
+import useCleanCache from '@hooks/useCleanCache';
 
 enum ICONS {
   setlog = 'console',

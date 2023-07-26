@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { IconButton, Text, TextInput } from 'react-native-paper';
 import { View, Pressable, StyleSheet } from 'react-native';
 import { useTranslation } from 'react-i18next';
-import { useNoxSetting } from 'hooks/useSetting';
+import { useNoxSetting } from '@hooks/useSetting';
 import { seconds2HHMMSS } from '@utils/Utils';
 
 interface Props {

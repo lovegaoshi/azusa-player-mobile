@@ -4,9 +4,9 @@ import { Button } from 'react-native-paper';
 import { useTranslation } from 'react-i18next';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 
-import { useNoxSetting } from 'hooks/useSetting';
+import { useNoxSetting } from '@hooks/useSetting';
 import GenericSelectDialog from '../dialogs/GenericSelectDialog';
-import { EXPORT_OPTIONS } from 'enums/Sync';
+import { EXPORT_OPTIONS } from '@enums/Sync';
 import PersonalSyncButton from './sync/PersonalSyncButton';
 import DropboxSyncButton from './sync/DropboxSyncButton';
 

@@ -4,10 +4,10 @@ import TrackPlayer from 'react-native-track-player';
 import { useNavigation } from '@react-navigation/native';
 import { useTranslation } from 'react-i18next';
 
-import { useNoxSetting } from 'hooks/useSetting';
-import { songlistToTracklist } from 'objects/Playlist';
+import { useNoxSetting } from '@hooks/useSetting';
+import { songlistToTracklist } from '@objects/Playlist';
 import { randomChoice } from '@utils/Utils';
-import { ViewEnum } from 'enums/View';
+import { ViewEnum } from '@enums/View';
 
 export default () => {
   const navigation = useNavigation();

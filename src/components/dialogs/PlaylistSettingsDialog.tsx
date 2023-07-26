@@ -11,7 +11,7 @@ import {
 } from 'react-native-paper';
 import { useTranslation } from 'react-i18next';
 
-import { useNoxSetting } from 'hooks/useSetting';
+import { useNoxSetting } from '@hooks/useSetting';
 import PortaledInput from './PortaledInput';
 
 const styles = StyleSheet.create({

@@ -4,11 +4,11 @@ import { View, StyleSheet } from 'react-native';
 import { useTranslation } from 'react-i18next';
 import ShareMenu, { ShareCallback } from 'react-native-share-menu';
 import { useNavigation } from '@react-navigation/native';
-import { ViewEnum } from 'enums/View';
+import { ViewEnum } from '@enums/View';
 
 import { searchBiliURLs } from '@utils/BiliSearch';
-import { useNoxSetting } from 'hooks/useSetting';
-import usePlayback from 'hooks/usePlayback';
+import { useNoxSetting } from '@hooks/useSetting';
+import usePlayback from '@hooks/usePlayback';
 
 interface SharedItem {
   mimeType: string;

@@ -1,6 +1,6 @@
 import Bottleneck from 'bottleneck';
 import bfetch from '../BiliFetch';
-import { wbiQuery } from 'stores/wbi';
+import { wbiQuery } from '@stores/wbi';
 
 /**
  * the purpose of this media fetch library is to

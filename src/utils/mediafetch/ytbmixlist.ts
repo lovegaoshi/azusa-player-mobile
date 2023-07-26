@@ -1,6 +1,6 @@
 import { regexFetchProps } from './generic';
 import { CIDPREFIX } from './ytbvideo';
-import SongTS from 'objects/Song';
+import SongTS from '@objects/Song';
 import { timestampToSeconds } from '../Utils';
 import logger from '../Logger';
 

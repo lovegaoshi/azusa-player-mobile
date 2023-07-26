@@ -12,16 +12,16 @@ import { useFocusEffect } from '@react-navigation/native';
 
 import { styles } from '../style';
 import SongInfo from './SongInfo';
-import { useNoxSetting } from 'hooks/useSetting';
+import { useNoxSetting } from '@hooks/useSetting';
 import SongMenu from './SongMenu';
 import PlaylistInfo from './PlaylistInfo';
 import PlaylistMenuButton from '../buttons/PlaylistMenuButton';
 import { updateSubscribeFavList } from '@utils/BiliSubscribe';
-import { songlistToTracklist } from 'objects/Playlist';
-import { PLAYLIST_ENUMS } from 'enums/Playlist';
+import { songlistToTracklist } from '@objects/Playlist';
+import { PLAYLIST_ENUMS } from '@enums/Playlist';
 import { syncFavlist } from '@utils/Bilibili/bilifavOperate';
 import noxCache, { noxCacheKey } from '@utils/Cache';
-import noxPlayingList from 'stores/playingList';
+import noxPlayingList from '@stores/playingList';
 import { NoxRepeatMode } from '../player/enums/RepeatMode';
 
 const { getState } = noxPlayingList;

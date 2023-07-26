@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import Snackbar from 'react-native-snackbar';
 import md5 from 'md5';
 
-import { useNoxSetting } from 'hooks/useSetting';
+import { useNoxSetting } from '@hooks/useSetting';
 import { logger } from '@utils/Logger';
 import bfetch, { parseBodyParams } from '@utils/BiliFetch';
 import { addCookie } from '@utils/ChromeStorage';

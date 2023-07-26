@@ -14,7 +14,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { logger } from '../Logger';
 import { songFetch } from './bilivideo';
 import { fetchBiliPaginatedAPI } from './paginatedbili';
-import VideoInfo from 'objects/VideoInfo';
+import VideoInfo from '@objects/VideoInfo';
 import { timestampToSeconds } from '../Utils';
 
 const URL_BILI_SEARCH =

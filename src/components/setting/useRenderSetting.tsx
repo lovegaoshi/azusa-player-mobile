@@ -8,7 +8,7 @@ import {
   Checkbox,
 } from 'react-native-paper';
 import { v4 as uuidv4 } from 'uuid';
-import { useNoxSetting } from 'hooks/useSetting';
+import { useNoxSetting } from '@hooks/useSetting';
 import { SettingEntry } from './SetttingEntries';
 
 /**

@@ -11,7 +11,7 @@
 import { logger } from '../Logger';
 import { regexFetchProps } from './generic';
 import { songFetch, fetchVideoInfo } from './bilivideo';
-import VideoInfo from 'objects/VideoInfo';
+import VideoInfo from '@objects/VideoInfo';
 import { fetchBiliPaginatedAPI } from './paginatedbili';
 
 const URL_FAV_LIST =

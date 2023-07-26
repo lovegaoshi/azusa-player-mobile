@@ -1,8 +1,8 @@
 import TrackPlayer from 'react-native-track-player';
 import { biliSuggest } from '@utils/Bilibili/BiliOperate';
-import { useNoxSetting } from 'hooks/useSetting';
-import { songlistToTracklist } from 'objects/Playlist';
-import noxPlayingList, { getCurrentTPQueue } from 'stores/playingList';
+import { useNoxSetting } from '@hooks/useSetting';
+import { songlistToTracklist } from '@objects/Playlist';
+import noxPlayingList, { getCurrentTPQueue } from '@stores/playingList';
 import biliavideo from '@utils/mediafetch/biliavideo';
 import { randomChoice } from '@utils/Utils';
 import { NoxRepeatMode } from './enums/RepeatMode';

@@ -5,7 +5,7 @@ import { IconButton, TextInput } from 'react-native-paper';
 import { useTranslation } from 'react-i18next';
 
 import { noxBackup, noxRestore } from './PersonalCloudAuth';
-import { useNoxSetting } from 'hooks/useSetting';
+import { useNoxSetting } from '@hooks/useSetting';
 import { logger } from '@utils/Logger';
 import { exportPlayerContent, importPlayerContent } from '@utils/ChromeStorage';
 

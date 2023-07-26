@@ -11,8 +11,8 @@
 import { regexFetchProps } from './generic';
 import { biliApiLimiter } from './throttle';
 
-import VideoInfo from 'objects/VideoInfo';
-import SongTS from 'objects/Song';
+import VideoInfo from '@objects/VideoInfo';
+import SongTS from '@objects/Song';
 import { logger } from '../Logger';
 import bfetch from '../BiliFetch';
 

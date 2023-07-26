@@ -3,7 +3,7 @@ import { GestureResponderEvent, View } from 'react-native';
 import { IconButton } from 'react-native-paper';
 import { Track } from 'react-native-track-player';
 
-import { useNoxSetting } from 'hooks/useSetting';
+import { useNoxSetting } from '@hooks/useSetting';
 import SongMenu from './SongMenu';
 
 interface Props {

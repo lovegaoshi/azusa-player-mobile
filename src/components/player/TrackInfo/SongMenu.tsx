@@ -4,8 +4,8 @@ import { Keyboard } from 'react-native';
 import { useTranslation } from 'react-i18next';
 import TrackPlayer from 'react-native-track-player';
 
-import { useNoxSetting } from 'hooks/useSetting';
-import { songlistToTracklist } from 'objects/Playlist';
+import { useNoxSetting } from '@hooks/useSetting';
+import { songlistToTracklist } from '@objects/Playlist';
 import { CopiedPlaylistMenuItem } from '../../buttons/CopiedPlaylistButton';
 import { RenameSongMenuItem } from '../../buttons/RenameSongButton';
 
