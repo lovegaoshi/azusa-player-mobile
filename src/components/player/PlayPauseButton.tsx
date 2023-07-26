@@ -6,7 +6,7 @@ import TrackPlayer, {
   usePlayWhenReady,
 } from 'react-native-track-player';
 
-import { useDebouncedValue } from '@hooks';
+import { useDebouncedValue } from 'hooks';
 import { useNoxSetting } from '@hooks/useSetting';
 
 const LoadingIconStyle = {

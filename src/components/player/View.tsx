@@ -6,7 +6,7 @@ import { DrawerNavigationProp } from '@react-navigation/drawer';
 import { useTranslation } from 'react-i18next';
 
 import { TrackInfo } from './';
-import { SetupService, AdditionalPlaybackService } from '@services';
+import { SetupService, AdditionalPlaybackService } from 'services';
 import PlayerTopInfo from './PlayerTopInfo';
 import { useNoxSetting } from '@hooks/useSetting';
 import { songlistToTracklist } from '@objects/Playlist';
