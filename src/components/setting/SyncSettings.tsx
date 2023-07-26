@@ -6,9 +6,11 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 
 import { useNoxSetting } from '@hooks/useSetting';
 import GenericSelectDialog from '../dialogs/GenericSelectDialog';
+import GenericCheckDialog from '../dialogs/GenericCheckDialog';
 import { EXPORT_OPTIONS } from '@enums/Sync';
 import PersonalSyncButton from './sync/PersonalSyncButton';
 import DropboxSyncButton from './sync/DropboxSyncButton';
+import useSync from './sync/useSync';
 
 const EXPORT_OPTIONS_LIST = [
   // T
@@ -40,6 +42,12 @@ export default ({ navigation }: Props) => {
   const playerSetting = useNoxSetting(state => state.playerSetting);
   const setPlayerSetting = useNoxSetting(state => state.setPlayerSetting);
   const [selectVisible, setSelectVisible] = React.useState(false);
+  const {
+    restoreFromUint8Array,
+    syncPartialNoxExtension,
+    syncCheckVisible,
+    noxExtensionContent,
+  } = useSync();
 
   const renderOption = (option = playerSetting.settingExportLocation) => {
     switch (option) {

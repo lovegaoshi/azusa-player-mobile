@@ -330,6 +330,60 @@ const clearPlaylists = async () => {
   savePlaylistIds([]);
 };
 
+const saveImportedPlaylist = async (playlists: any[]) => {
+  for (const playlist of playlists) {
+    await savePlaylist({
+      ...dummyPlaylistList,
+      ...playlist,
+      ...playlist.info,
+      // HACK: seriously who thought of renaming variables is a good idea?
+      // oh right that was me
+      subscribeUrl: playlist.subscribeUrls,
+      blacklistedUrl: playlist.bannedBVids,
+    });
+  }
+};
+
+export const clearPlaylistNImport = async (parsedContent: any) => {
+  await clearPlaylists();
+  await saveImportedPlaylist(
+    parsedContent['MyFavList'].map((val: string) => parsedContent[val])
+  );
+  await savePlaylistIds(parsedContent['MyFavList']);
+};
+
+export const addImportedPlaylist = async (playlists: any[]) => {
+  await saveImportedPlaylist(playlists);
+  await savePlaylistIds(
+    (
+      await getItem(STORAGE_KEYS.MY_FAV_LIST_KEY)
+    ).concat(playlists.map(val => val.info.id))
+  );
+};
+
+const parseImportedPartial = (
+  key: string,
+  parsedContent: Array<[string, string]>
+) => {
+  return JSON.parse(
+    parsedContent.filter((val: [string, string]) => val[0] === key)[0][1]
+  );
+};
+
+export const importPlayerContentRaw = async (parsedContent: any) => {
+  const importedAppID = parseImportedPartial(
+    STORAGE_KEYS.PLAYER_SETTING_KEY,
+    parsedContent
+  ).appID;
+  if (importedAppID !== appID) {
+    throw new Error(`${importedAppID} is not valid appID`);
+  } else {
+    await clearStorage();
+    await AsyncStorage.multiSet(parsedContent);
+    return await initPlayerObject();
+  }
+};
+
 const importNoxExtensionContent = async (parsedContent: any) => {
   // noxextension stores everything as a giant object as it doesnt have the sqlite 2MB entry limitation;
   // it must have MyFavList as an array.
