@@ -162,7 +162,8 @@
     "personalCloudIPPlaceholder": "end with forward slash /",
     "personalCloudIPLabel": "Private cloud IP address",
     "personalCloudKeyPlaceholder": "",
-    "personalCloudKeyLabel": "Private cloud key"
+    "personalCloudKeyLabel": "Private cloud key",
+    "fileNotValidJson": "selected backup file is corrupted."
   },
   "SleepTimer": {
     "Title": "Sleep Timer"
