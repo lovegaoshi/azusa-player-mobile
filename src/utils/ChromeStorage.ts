@@ -64,6 +64,7 @@ export const DEFAULT_SETTING: NoxStorage.PlayerSettingDict = {
   dataSaver: false,
   fastBiliSearch: true,
   noInterruption: false,
+  updateLoadedTrack: false,
 
   appID,
   language: undefined,

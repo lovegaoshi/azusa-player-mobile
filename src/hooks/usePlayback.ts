@@ -1,5 +1,5 @@
 import { Platform } from 'react-native';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import TrackPlayer, {
   Event,
   RepeatMode,
@@ -149,6 +149,7 @@ const usePlayback = () => {
 
 export const usePlaybackListener = () => {
   const playerSetting = useNoxSetting(state => state.playerSetting);
+  const [newMetadata, setNewMetadata] = useState<any>({});
 
   useEffect(() => {
     const listener = TrackPlayer.addEventListener(
@@ -189,21 +190,36 @@ export const usePlaybackListener = () => {
             if (getState().playmode === NoxRepeatMode.REPEAT_TRACK) {
               TrackPlayer.setRepeatMode(RepeatMode.Track);
             }
+            setNewMetadata({ currentTrack, updatedMetadata });
           } catch (e) {
             console.error('resolveURL failed', event.track, e);
           }
         }
       }
     );
-    const listener2 = TrackPlayer.addEventListener(
+    return () => {
+      listener.remove();
+    };
+  }, []);
+
+  useEffect(() => {
+    if (!playerSetting.updateLoadedTrack) {
+      return () => null;
+    }
+    const listener = TrackPlayer.addEventListener(
       Event.PlaybackState,
-      async event => {}
+      async event => {
+        if (event.state === State.Ready && newMetadata.updatedMetadata) {
+          // TODO: supposed to update tracks now'
+          logger.warn('supposed to update tracks now');
+          setNewMetadata({});
+        }
+      }
     );
     return () => {
       listener.remove();
-      listener2.remove();
     };
-  }, []);
+  }, [playerSetting.updateLoadedTrack]);
 };
 
 export default usePlayback;

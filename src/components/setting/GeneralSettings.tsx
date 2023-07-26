@@ -35,6 +35,10 @@ const GEN_SETTING_BOOLEAN: SettingEntry[] = [
     settingName: 'noCookieBiliSearch',
     settingCategory: 'GeneralSettings',
   },
+  {
+    settingName: 'updateLoadedTrack',
+    settingCategory: 'GeneralSettings',
+  },
 ];
 
 export default () => {
