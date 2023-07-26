@@ -5,6 +5,7 @@ import { useTranslation } from 'react-i18next';
 import TrackPlayer from 'react-native-track-player';
 
 import { useNoxSetting } from '@hooks/useSetting';
+import useUpdatePlaylist from '@hooks/useUpdatePlaylist';
 import { songlistToTracklist } from '@objects/Playlist';
 import { CopiedPlaylistMenuItem } from '../../buttons/CopiedPlaylistButton';
 import { RenameSongMenuItem } from '../../buttons/RenameSongButton';
@@ -47,6 +48,7 @@ export default ({
   const setCurrentPlayingList = useNoxSetting(
     state => state.setCurrentPlayingList
   );
+  const { updateSongIndex } = useUpdatePlaylist();
 
   const closeMenu = React.useCallback(() => setSongMenuVisible(false), []);
 
@@ -64,16 +66,11 @@ export default ({
 
   const renameSong = (rename: string) => {
     const currentPlaylist2 = playlists[currentPlaylist.id];
-    const newPlaylist = {
-      ...currentPlaylist2,
-      songList: Array.from(currentPlaylist2.songList),
-    };
-    newPlaylist.songList[songMenuSongIndexes[0]] = {
-      ...newPlaylist.songList[songMenuSongIndexes[0]],
-      name: rename,
-      parsedName: rename,
-    };
-    updatePlaylist(newPlaylist, [], []);
+    updateSongIndex(
+      songMenuSongIndexes[0],
+      { name: rename, parsedName: rename },
+      currentPlaylist2
+    );
   };
 
   const removeSongs = async (banBVID = false) => {
@@ -81,11 +78,11 @@ export default ({
     const songs = [song];
     const newPlaylist = banBVID
       ? {
-          ...currentPlaylist2,
-          blacklistedUrl: currentPlaylist2.blacklistedUrl.concat(
-            songs.map(song => song.bvid)
-          ),
-        }
+        ...currentPlaylist2,
+        blacklistedUrl: currentPlaylist2.blacklistedUrl.concat(
+          songs.map(song => song.bvid)
+        ),
+      }
       : currentPlaylist2;
     updatePlaylist(newPlaylist, [], songs);
     setCurrentPlayingList(newPlaylist);
