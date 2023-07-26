@@ -3,7 +3,7 @@ import { View } from 'react-native';
 import { useTranslation } from 'react-i18next';
 
 import GenericSelectDialog from '../dialogs/GenericSelectDialog';
-import useRenderSettingItem from './useRenderSetting';
+import { SettingListItem } from './useRenderSetting';
 import { useNoxSetting } from '../../hooks/useSetting';
 
 interface Props {
@@ -20,7 +20,6 @@ const availableLanguagesMap: { [key: string]: string } = {
 export default ({ icon }: Props) => {
   const { t, i18n } = useTranslation();
   const [visible, setVisible] = React.useState(false);
-  const { renderListItem } = useRenderSettingItem();
   const language = useNoxSetting(state => state.playerSetting).language;
   const setPlayerSetting = useNoxSetting(state => state.setPlayerSetting);
 
@@ -32,12 +31,12 @@ export default ({ icon }: Props) => {
   };
   return (
     <View>
-      {renderListItem(
-        icon,
-        'LanguageOptions',
-        () => setVisible(true),
-        'Settings'
-      )}
+      <SettingListItem
+        icon={icon}
+        settingName="LanguageOptions"
+        onPress={() => setVisible(true)}
+        settingCategory="Settings"
+      />
       <GenericSelectDialog
         visible={visible}
         options={availableLanguages}

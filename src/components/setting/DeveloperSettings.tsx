@@ -8,7 +8,7 @@ import { APPSTORE } from '@env';
 import { useNoxSetting } from '../../hooks/useSetting';
 import { logStore, LOGLEVEL, getLog } from '../../utils/Logger';
 import GenericSelectDialog from '../dialogs/GenericSelectDialog';
-import useRenderSettingItem from './useRenderSetting';
+import { SettingListItem, renderSetting } from './useRenderSetting';
 import useVersionCheck from '../../hooks/useVersionCheck';
 import useAlert from '../dialogs/useAlert';
 import {
@@ -48,7 +48,6 @@ export default () => {
   >(dummySelectSettingEntry);
   const [selectVisible, setSelectVisible] = React.useState(false);
   const playerStyle = useNoxSetting(state => state.playerStyle);
-  const { renderListItem, renderSetting } = useRenderSettingItem();
   const { checkVersion } = useVersionCheck();
   const { orphanedCache, cleanOrphanedCache } = useCleanCache();
 
@@ -114,56 +113,63 @@ export default () => {
       <ScrollView>
         <List.Section>
           {renderSetting(developerSettings.noInterruption)}
-          {renderListItem(
-            ICONS.showlog,
-            'Log',
-            () => OneWayAlert('log', getLog()),
-            'DeveloperSettings'
+          <SettingListItem
+            icon={ICONS.showlog}
+            settingName="Log"
+            onPress={() => OneWayAlert('log', getLog())}
+            settingCategory="DeveloperSettings"
+          />
+          <SettingListItem
+            icon={ICONS.setlog}
+            settingName="LogLevel"
+            onPress={selectLogLevel}
+            settingCategory="DeveloperSettings"
+            modifyDescription={val =>
+              `${val}: ${logLevelString[getState().logLevel]}`
+            }
+          />
+          {!APPSTORE && (
+            <SettingListItem
+              icon={ICONS.update}
+              settingName="VersionCheck"
+              onPress={() => checkVersion(false)}
+              settingCategory="DeveloperSettings"
+            />
           )}
-          {renderListItem(
-            ICONS.setlog,
-            'LogLevel',
-            selectLogLevel,
-            'DeveloperSettings',
-            val => `${val}: ${logLevelString[getState().logLevel]}`
-          )}
-          {!APPSTORE &&
-            renderListItem(
-              ICONS.update,
-              'VersionCheck',
-              () => checkVersion(false),
-              'DeveloperSettings'
-            )}
-          {renderListItem(
-            ICONS.cache,
-            'CacheSize',
-            selectCacheLevel,
-            'DeveloperSettings',
-            () =>
+
+          <SettingListItem
+            icon={ICONS.cache}
+            settingName="CacheSize"
+            onPress={selectCacheLevel}
+            settingCategory="DeveloperSettings"
+            modifyDescription={() =>
               t('DeveloperSettings.CacheSizeDesc2', {
                 val: playerSetting.cacheSize,
               })
-          )}
-          {renderListItem(
-            ICONS.clearcache,
-            'ClearCache',
-            NoxCache.noxMediaCache.clearCache,
-            'DeveloperSettings',
-            () =>
+            }
+          />
+          <SettingListItem
+            icon={ICONS.clearcache}
+            settingName="ClearCache"
+            onPress={NoxCache.noxMediaCache.clearCache}
+            settingCategory="DeveloperSettings"
+            modifyDescription={() =>
               t('DeveloperSettings.ClearCacheDesc2', {
                 val: NoxCache.noxMediaCache.cacheSize() || 0,
               })
-          )}
-          {renderListItem(
-            ICONS.clearOrphanCache,
-            'ClearOrphanedCache',
-            cleanOrphanedCache,
-            'DeveloperSettings',
-            () =>
+            }
+          />
+          <SettingListItem
+            icon={ICONS.clearOrphanCache}
+            settingName="ClearOrphanedCache"
+            onPress={cleanOrphanedCache}
+            settingCategory="DeveloperSettings"
+            modifyDescription={() =>
               t('DeveloperSettings.ClearOrphanedCacheDesc2', {
                 val: orphanedCache.length,
               })
-          )}
+            }
+          />
         </List.Section>
       </ScrollView>
       <GenericSelectDialog

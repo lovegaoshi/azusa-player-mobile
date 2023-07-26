@@ -137,9 +137,9 @@ const SkinSettings = () => {
       <SkinSearchbar onSearched={loadCustomSkin} />
       <FlatList
         data={allThemes}
-        renderItem={({ item }: { item: DisplayTheme }) =>
-          SkinItem({ skin: item, checked, setChecked })
-        }
+        renderItem={({ item }: { item: DisplayTheme }) => (
+          <SkinItem skin={item} checked={checked} setChecked={setChecked} />
+        )}
         keyExtractor={item => getThemeID(item)}
       />
     </SafeAreaView>

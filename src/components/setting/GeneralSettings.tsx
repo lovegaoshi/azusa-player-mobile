@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { View, Text, ScrollView } from 'react-native';
 import { useNoxSetting } from '../../hooks/useSetting';
-import useRenderSettingItem from './useRenderSetting';
+import { renderSetting } from './useRenderSetting';
 import { SettingEntry } from './SetttingEntries';
 
 const GEN_SETTING_BOOLEAN: SettingEntry[] = [
@@ -39,7 +39,6 @@ const GEN_SETTING_BOOLEAN: SettingEntry[] = [
 
 export default () => {
   const playerStyle = useNoxSetting(state => state.playerStyle);
-  const { renderSetting } = useRenderSettingItem();
 
   return (
     <View
