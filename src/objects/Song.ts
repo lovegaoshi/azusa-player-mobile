@@ -92,6 +92,8 @@ export const resolveUrl = async (song: NoxMedia.Song) => {
     headers: customReqHeader(url.url, { referer: 'https://www.bilibili.com/' }),
     userAgent: DEFAULT_UA,
     urlRefreshTimeStamp: new Date().getTime(),
+    ...(url.cover && { artwork: url.cover }),
+    ...(url.duration && { duration: url.duration }),
   };
 };
 

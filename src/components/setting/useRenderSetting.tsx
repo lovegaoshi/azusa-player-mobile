@@ -80,11 +80,7 @@ const BooleanSetting = ({
   };
 
   return (
-    <TouchableRipple
-      onPress={onToggle}
-      style={styles.touchableRipple}
-      key={uuidv4()}
-    >
+    <TouchableRipple onPress={onToggle} style={styles.touchableRipple}>
       <View style={styles.settingContainer}>
         <View style={styles.settingTextContainer}>
           <Text
@@ -123,7 +119,7 @@ const BooleanSetting = ({
 export const renderSetting = (item: SettingEntry) => {
   switch (item.settingType) {
     default:
-      return <BooleanSetting {...item} />;
+      return <BooleanSetting {...item} key={uuidv4()} />;
   }
 };
 

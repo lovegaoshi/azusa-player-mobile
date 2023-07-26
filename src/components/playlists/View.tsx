@@ -16,6 +16,7 @@ import DraggableFlatList, {
 
 import { useNoxSetting } from '@hooks/useSetting';
 import useAAPlayback from '@hooks/useAAPlayback';
+import { usePlaybackListener } from '@hooks/usePlayback';
 import { ViewEnum } from '@enums/View';
 import AddPlaylistButton from '../buttons/AddPlaylistButton';
 import { STORAGE_KEYS } from '@utils/ChromeStorage';
@@ -126,6 +127,7 @@ export default (props: any) => {
   // HACK: I know its bad! But somehow this hook isnt updating in its own
   // useEffects...
   const { buildBrowseTree } = useAAPlayback();
+  const playbackListeners = usePlaybackListener();
 
   // HACK: tried to make searchList draweritem button as addPlaylistButton, but
   // dialog disposes on textinput focus. created a dialog directly in this component

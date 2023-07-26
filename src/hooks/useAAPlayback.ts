@@ -26,6 +26,9 @@ const useAAPlayback = () => {
     };
   }, []);
 
+  // HACK: this looks very stupid but AAPlaybackListener needs buildBrowseTree, PlayFromMediaID, etc.
+  // so might as well pass this off from AAPlaybackListener to register the listeners and use buildBrowseTree
+  // two birds in one stone.
   return { buildBrowseTree };
 };
 

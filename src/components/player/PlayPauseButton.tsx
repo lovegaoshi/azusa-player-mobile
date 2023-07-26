@@ -9,12 +9,6 @@ import TrackPlayer, {
 import { useDebouncedValue } from 'hooks';
 import { useNoxSetting } from '@hooks/useSetting';
 
-const LoadingIconStyle = {
-  width: 78,
-  height: 78,
-  marginTop: 0,
-};
-
 export const PlayPauseButton: React.FC<{
   state: State | undefined;
 }> = ({ state }) => {
@@ -34,7 +28,7 @@ export const PlayPauseButton: React.FC<{
     return playerStyle.loadingIcon ? (
       <Image
         source={{ uri: playerStyle.loadingIcon }}
-        style={LoadingIconStyle}
+        style={styles.LoadingIconStyle}
       />
     ) : (
       <ActivityIndicator size={78} />
@@ -50,3 +44,11 @@ export const PlayPauseButton: React.FC<{
     />
   );
 };
+
+const styles = StyleSheet.create({
+  LoadingIconStyle: {
+    width: 78,
+    height: 78,
+    marginTop: 0,
+  },
+});

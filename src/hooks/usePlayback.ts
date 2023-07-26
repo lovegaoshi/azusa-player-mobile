@@ -1,6 +1,10 @@
 import { Platform } from 'react-native';
 import { useEffect } from 'react';
-import TrackPlayer, { Event, RepeatMode } from 'react-native-track-player';
+import TrackPlayer, {
+  Event,
+  RepeatMode,
+  State,
+} from 'react-native-track-player';
 import { useTranslation } from 'react-i18next';
 
 import { songlistToTracklist } from '../objects/Playlist';
@@ -140,6 +144,12 @@ const usePlayback = () => {
     });
   };
 
+  return { buildBrowseTree, playFromMediaId, playFromSearch, playFromPlaylist };
+};
+
+export const usePlaybackListener = () => {
+  const playerSetting = useNoxSetting(state => state.playerSetting);
+
   useEffect(() => {
     const listener = TrackPlayer.addEventListener(
       Event.PlaybackActiveTrackChanged,
@@ -185,10 +195,15 @@ const usePlayback = () => {
         }
       }
     );
-    return () => listener.remove();
+    const listener2 = TrackPlayer.addEventListener(
+      Event.PlaybackState,
+      async event => {}
+    );
+    return () => {
+      listener.remove();
+      listener2.remove();
+    };
   }, []);
-
-  return { buildBrowseTree, playFromMediaId, playFromSearch, playFromPlaylist };
 };
 
 export default usePlayback;
