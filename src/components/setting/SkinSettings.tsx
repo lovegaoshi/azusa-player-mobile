@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Image } from 'expo-image';
+import Image from 'react-native-fast-image';
 import { View, FlatList, SafeAreaView, StyleSheet } from 'react-native';
 import {
   Text,
