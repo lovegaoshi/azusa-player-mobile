@@ -8,11 +8,11 @@ import {
   RadioButton,
 } from 'react-native-paper';
 import SkinSearchbar from './SkinSearchbar';
-import { useNoxSetting } from '../../hooks/useSetting';
+import { useNoxSetting } from 'hooks/useSetting';
 import AzusaTheme from '../styles/AzusaTheme';
 // import AzusaTheme from '../styles/SteriaTheme';
 import NoxTheme from '../styles/NoxTheme';
-import { getUniqObjects } from '../../utils/Utils';
+import { getUniqObjects } from '@utils/Utils';
 
 interface DisplayTheme extends NoxTheme.style {
   builtin: boolean;

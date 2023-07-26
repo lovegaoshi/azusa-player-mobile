@@ -3,12 +3,12 @@ import CookieManager from '@react-native-cookies/cookies';
 import { useTranslation } from 'react-i18next';
 import Snackbar from 'react-native-snackbar';
 
-import { useNoxSetting } from '../../hooks/useSetting';
-import { logger } from '../../utils/Logger';
-import bfetch from '../../utils/BiliFetch';
-import { addCookie } from '../../utils/ChromeStorage';
-import { getLoginStatus } from '../../utils/Login';
-import { throttler } from '../../utils/throttle';
+import { useNoxSetting } from 'hooks/useSetting';
+import { logger } from '@utils/Logger';
+import bfetch from '@utils/BiliFetch';
+import { addCookie } from '@utils/ChromeStorage';
+import { getLoginStatus } from '@utils/Login';
+import { throttler } from '@utils/throttle';
 
 export interface QRCodeReq {
   url: string;
@@ -43,12 +43,12 @@ const loginQRVerification = async () => {
     'bili_jct'
   ]?.value;
   const res = await throttler.biliApiLimiter.schedule(async () =>
-    bfetch(`${verificationURL}${biliJct}`, {
-      method: 'GET',
-      credentials: 'include',
-      headers: {},
-    })
-  ),
+      bfetch(`${verificationURL}${biliJct}`, {
+        method: 'GET',
+        credentials: 'include',
+        headers: {},
+      })
+    ),
     json = await res.json();
   await Promise.all(
     json.data.sso.map((url: string) =>

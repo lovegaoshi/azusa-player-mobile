@@ -3,11 +3,11 @@ import { Menu } from 'react-native-paper';
 import { Keyboard } from 'react-native';
 import { useTranslation } from 'react-i18next';
 
-import { useNoxSetting } from '../../hooks/useSetting';
+import { useNoxSetting } from 'hooks/useSetting';
 import { CopiedPlaylistMenuItem } from '../buttons/CopiedPlaylistButton';
 import { RenameSongMenuItem } from '../buttons/RenameSongButton';
-import { CIDPREFIX } from '../../utils/mediafetch/ytbvideo';
-import logger from '../../utils/Logger';
+import { CIDPREFIX } from '@utils/mediafetch/ytbvideo';
+import logger from '@utils/Logger';
 
 enum ICONS {
   SEND_TO = 'playlist-plus',

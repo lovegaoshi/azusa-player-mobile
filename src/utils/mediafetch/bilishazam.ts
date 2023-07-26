@@ -1,5 +1,5 @@
 // TODO: migrate to TS.
-import { setSongBiliShazamed } from '../../objects/Song';
+import { setSongBiliShazamed } from 'objects/Song';
 import bfetch from '../BiliFetch';
 import { biliTagApiLimiter } from './throttle';
 import { logger } from '../Logger';

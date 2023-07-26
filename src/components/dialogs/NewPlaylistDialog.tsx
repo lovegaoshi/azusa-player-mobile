@@ -3,8 +3,8 @@ import { Button, Dialog, Portal, TextInput } from 'react-native-paper';
 import { StyleSheet } from 'react-native';
 import { useTranslation } from 'react-i18next';
 
-import { dummyPlaylist } from '../../objects/Playlist';
-import { useNoxSetting } from '../../hooks/useSetting';
+import { dummyPlaylist } from 'objects/Playlist';
+import { useNoxSetting } from 'hooks/useSetting';
 import PortaledInput from './PortaledInput';
 
 interface Props {

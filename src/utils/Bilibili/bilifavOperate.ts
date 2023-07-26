@@ -4,8 +4,8 @@ import { sendBVFavorite } from './BiliOperate';
 import bfetch from '../BiliFetch';
 import { getFavListBVID } from '../mediafetch/bilifavlist';
 import { humanishApiLimiter } from '../mediafetch/throttle';
-import { getBiliUser } from '../../components/setting/sync/PersonalCloudAuth';
-import { getPlaylistUniqBVIDs } from '../../objects/Playlist';
+import { getBiliUser } from 'components/setting/sync/PersonalCloudAuth';
+import { getPlaylistUniqBVIDs } from 'objects/Playlist';
 
 const BILI_GETFAVLIST_API =
   'https://api.bilibili.com/x/v3/fav/folder/created/list-all?up_mid={mid}';

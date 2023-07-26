@@ -5,12 +5,9 @@ import { IconButton, TextInput } from 'react-native-paper';
 import { useTranslation } from 'react-i18next';
 
 import { noxBackup, noxRestore } from './PersonalCloudAuth';
-import { useNoxSetting } from '../../../hooks/useSetting';
-import { logger } from '../../../utils/Logger';
-import {
-  exportPlayerContent,
-  importPlayerContent,
-} from '../../../utils/ChromeStorage';
+import { useNoxSetting } from 'hooks/useSetting';
+import { logger } from '@utils/Logger';
+import { exportPlayerContent, importPlayerContent } from '@utils/ChromeStorage';
 
 interface Props {
   cloudAddress: string;

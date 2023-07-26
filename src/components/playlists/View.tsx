@@ -14,11 +14,11 @@ import DraggableFlatList, {
   RenderItemParams,
 } from 'react-native-draggable-flatlist';
 
-import { useNoxSetting } from '../../hooks/useSetting';
-import useAAPlayback from '../../hooks/useAAPlayback';
-import { ViewEnum } from '../../enums/View';
+import { useNoxSetting } from 'hooks/useSetting';
+import useAAPlayback from 'hooks/useAAPlayback';
+import { ViewEnum } from 'enums/View';
 import AddPlaylistButton from '../buttons/AddPlaylistButton';
-import { STORAGE_KEYS } from '../../utils/ChromeStorage';
+import { STORAGE_KEYS } from '@utils/ChromeStorage';
 import NewPlaylistDialog from '../dialogs/NewPlaylistDialog';
 import useAlert from '../dialogs/useAlert';
 import ShuffleAllButton from './ShuffleAllButton';

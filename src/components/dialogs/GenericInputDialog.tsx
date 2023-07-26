@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import { View, FlatList, StyleSheet } from 'react-native';
 import { Button, Dialog, TextInput } from 'react-native-paper';
 import { useTranslation } from 'react-i18next';
-import { logger } from '../../utils/Logger';
-import { useNoxSetting } from '../../hooks/useSetting';
+import { logger } from '@utils/Logger';
+import { useNoxSetting } from 'hooks/useSetting';
 
 interface Props {
   visible: boolean;

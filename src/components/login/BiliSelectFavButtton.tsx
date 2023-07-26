@@ -2,14 +2,11 @@ import * as React from 'react';
 import { Button, ActivityIndicator } from 'react-native-paper';
 import { useTranslation } from 'react-i18next';
 
-import {
-  getBiliFavlist,
-  GETFAVLIST_RES,
-} from '../../utils/Bilibili/bilifavOperate';
+import { getBiliFavlist, GETFAVLIST_RES } from '@utils/Bilibili/bilifavOperate';
 import GenericCheckDialog from '../dialogs/GenericCheckDialog';
-import bilifavlistFetch from '../../utils/mediafetch/bilifavlist';
-import { dummyPlaylist } from '../../objects/Playlist';
-import { useNoxSetting } from '../../hooks/useSetting';
+import bilifavlistFetch from '@utils/mediafetch/bilifavlist';
+import { dummyPlaylist } from 'objects/Playlist';
+import { useNoxSetting } from 'hooks/useSetting';
 
 export default () => {
   const { t } = useTranslation();

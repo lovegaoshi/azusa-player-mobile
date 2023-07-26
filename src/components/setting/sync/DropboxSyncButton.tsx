@@ -5,12 +5,9 @@ import { IconButton } from 'react-native-paper';
 import { useTranslation } from 'react-i18next';
 
 import { loginDropbox, noxBackup, noxRestore } from './DropboxAuth';
-import { useNoxSetting } from '../../../hooks/useSetting';
-import { logger } from '../../../utils/Logger';
-import {
-  exportPlayerContent,
-  importPlayerContent,
-} from '../../../utils/ChromeStorage';
+import { useNoxSetting } from 'hooks/useSetting';
+import { logger } from '@utils/Logger';
+import { exportPlayerContent, importPlayerContent } from '@utils/ChromeStorage';
 
 const ImportSyncFavButton = () => {
   const { t } = useTranslation();

@@ -3,7 +3,7 @@ import { Pressable } from 'react-native';
 import Image from 'react-native-fast-image';
 import { Dimensions } from 'react-native';
 
-import { useNoxSetting } from '../../hooks/useSetting';
+import { useNoxSetting } from 'hooks/useSetting';
 import { localSplashes } from '../background/AppOpenSplash';
 
 const style = {

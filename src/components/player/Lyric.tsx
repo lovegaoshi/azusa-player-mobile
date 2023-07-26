@@ -11,11 +11,11 @@ import {
 import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
 import { Lyric } from 'react-native-lyric';
 import { Track, useProgress } from 'react-native-track-player';
-import { searchLyricOptions, searchLyric } from '../../utils/Data';
-import { reExtractSongName } from '../../utils/re';
+import { searchLyricOptions, searchLyric } from '@utils/Data';
+import { reExtractSongName } from '@utils/re';
 import { IconButton, TextInput } from 'react-native-paper';
-import { useNoxSetting } from '../../hooks/useSetting';
-import logger from '../../utils/Logger';
+import { useNoxSetting } from 'hooks/useSetting';
+import logger from '@utils/Logger';
 
 const LYRIC_OFFSET_INTERVAL = 0.5;
 

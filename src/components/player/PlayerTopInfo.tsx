@@ -3,8 +3,8 @@ import { View, Text, StyleSheet } from 'react-native';
 import { IconButton } from 'react-native-paper';
 import { useNavigation, ParamListBase } from '@react-navigation/native';
 import { DrawerNavigationProp } from '@react-navigation/drawer';
-import { ViewEnum } from '../../enums/View';
-import { useNoxSetting } from '../../hooks/useSetting';
+import { ViewEnum } from 'enums/View';
+import { useNoxSetting } from 'hooks/useSetting';
 import RandomGIFButton from '../buttons/RandomGIF';
 
 interface Props {

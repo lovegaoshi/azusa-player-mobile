@@ -3,7 +3,11 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["./src/*"],
+      "*": ["./src/*"],
+      "@components/*": ["src/components/*"],
+      "@utils/*": ["src/utils/*"],
+      "@hooks/*": ["src/hooks/*"]
     },
     "allowJs": true,
     "allowSyntheticDefaultImports": true,
@@ -18,9 +22,7 @@
     "strict": true,
     "target": "esnext",
     "skipLibCheck": true,
-    "types": [
-      "node"
-    ]
+    "types": ["node"]
   },
   "include": ["src"],
   "exclude": ["node_modules", "**/__tests__/*"]

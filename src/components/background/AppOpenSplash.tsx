@@ -1,6 +1,7 @@
 import { Dimensions } from 'react-native';
 import Image from 'react-native-fast-image';
-import { randomChoice } from '../../utils/Utils';
+
+import { randomChoice } from '@utils/Utils';
 
 export const localSplashes = [
   () => require('../../assets/splash/steria2.jpg'),

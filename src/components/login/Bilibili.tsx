@@ -13,8 +13,8 @@ import { DrawerNavigationProp } from '@react-navigation/drawer';
 import { ParamListBase } from '@react-navigation/native';
 import CookieManager from '@react-native-cookies/cookies';
 
-import { useNoxSetting } from '../../hooks/useSetting';
-import { logger } from '../../utils/Logger';
+import { useNoxSetting } from 'hooks/useSetting';
+import { logger } from '@utils/Logger';
 import GenericInputDialog from '../dialogs/GenericInputDialog';
 import BiliSelectFavButtton from './BiliSelectFavButtton';
 import useBiliLogin from './useBiliLoginApp';

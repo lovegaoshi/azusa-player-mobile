@@ -9,7 +9,7 @@ import { DrawerNavigationProp } from '@react-navigation/drawer';
 import { ScrollView } from 'react-native-gesture-handler';
 import { useTranslation } from 'react-i18next';
 
-import { useNoxSetting } from '../../hooks/useSetting';
+import { useNoxSetting } from 'hooks/useSetting';
 
 export default () => {
   const { t } = useTranslation();

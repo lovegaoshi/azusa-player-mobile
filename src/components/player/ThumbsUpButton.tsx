@@ -8,9 +8,9 @@ import {
   checkBVLiked,
   sendBVLike,
   sendBVTriple,
-} from '../../utils/Bilibili/BiliOperate';
-import { useNoxSetting } from '../../hooks/useSetting';
-import { logger } from '../../utils/Logger';
+} from '@utils/Bilibili/BiliOperate';
+import { useNoxSetting } from 'hooks/useSetting';
+import { logger } from '@utils/Logger';
 
 enum THUMBUPSTATUS {
   notLoggedIn = 'web-cancel',

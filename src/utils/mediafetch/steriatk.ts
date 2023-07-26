@@ -10,7 +10,7 @@
  */
 import { regexFetchProps } from './generic';
 import { fetchAwaitPaginatedAPI } from './paginatedfetch';
-import SongTS from '../../objects/Song';
+import SongTS from 'objects/Song';
 
 const pagesize = 500;
 

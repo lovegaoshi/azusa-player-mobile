@@ -4,7 +4,7 @@ import { authorize } from 'react-native-app-auth';
 import { getArrayBufferForBlob } from 'react-native-blob-jsi-helper';
 
 import { DROPBOX_KEY, DROPBOX_SECRET } from '@env';
-import { logger } from '../../../utils/Logger';
+import { logger } from '@utils/Logger';
 
 const DEFAULT_FILE_NAME = 'nox.noxBackup';
 const DEFAULT_FILE_PATH = `/${DEFAULT_FILE_NAME}`;

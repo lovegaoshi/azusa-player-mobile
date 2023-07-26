@@ -1,10 +1,10 @@
 import React from 'react';
 import { ImageBackground, Dimensions, View, StyleSheet } from 'react-native';
 import { Video, ResizeMode } from 'expo-av';
-import { useNoxSetting } from '../../hooks/useSetting';
-import { fetchVideoPlayUrlPromise } from '../../utils/mediafetch/resolveURL';
-import { customReqHeader } from '../../utils/BiliFetch';
-import { biliNFTVideoFetch } from '../../utils/mediafetch/biliNFT';
+import { useNoxSetting } from '@hooks/useSetting';
+import { fetchVideoPlayUrlPromise } from '@utils/mediafetch/resolveURL';
+import { customReqHeader } from '@utils/BiliFetch';
+import { biliNFTVideoFetch } from '@utils/mediafetch/biliNFT';
 
 const mobileHeight = Dimensions.get('window').height;
 

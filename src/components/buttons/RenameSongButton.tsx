@@ -3,7 +3,7 @@ import { IconButton, Menu } from 'react-native-paper';
 import { useTranslation } from 'react-i18next';
 
 import Dialog from '../dialogs/RenameSongDialog';
-import { dummySongObj } from '../../objects/Song';
+import { dummySongObj } from 'objects/Song';
 
 const ICON = 'pencil';
 

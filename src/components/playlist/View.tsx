@@ -4,7 +4,7 @@ import { View } from 'react-native';
 import { styles } from '../style';
 import BiliSearchbar from './BiliSearchbar';
 import PlaylistList from './PlaylistList';
-import { useNoxSetting } from '../../hooks/useSetting';
+import { useNoxSetting } from 'hooks/useSetting';
 
 const Playlist = () => {
   const playerStyle = useNoxSetting(state => state.playerStyle);

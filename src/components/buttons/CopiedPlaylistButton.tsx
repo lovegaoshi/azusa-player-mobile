@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { StyleSheet } from 'react-native';
 
 import Dialog from '../dialogs/CopiedPlaylistDialog';
-import { dummyPlaylistList } from '../../objects/Playlist';
+import { dummyPlaylistList } from 'objects/Playlist';
 
 const ICON = 'playlist-plus';
 

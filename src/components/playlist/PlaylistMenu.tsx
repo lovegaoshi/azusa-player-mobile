@@ -3,17 +3,17 @@ import { Menu } from 'react-native-paper';
 import Snackbar from 'react-native-snackbar';
 import { useTranslation } from 'react-i18next';
 
-import { useNoxSetting } from '../../hooks/useSetting';
-import playlistAnalytics from '../../utils/Analytics';
+import { useNoxSetting } from 'hooks/useSetting';
+import playlistAnalytics from '@utils/Analytics';
 import PlaylistSettingsButton from '../buttons/PlaylistSettingsButton';
-import { PLAYLIST_ENUMS } from '../../enums/Playlist';
+import { PLAYLIST_ENUMS } from 'enums/Playlist';
 import { CopiedPlaylistMenuItem } from '../buttons/CopiedPlaylistButton';
-import { biliShazamOnSonglist } from '../../utils/mediafetch/bilishazam';
-import { getPlaylistUniqBVIDs } from '../../objects/Playlist';
-import { fetchVideoInfo } from '../../utils/mediafetch/bilivideo';
+import { biliShazamOnSonglist } from '@utils/mediafetch/bilishazam';
+import { getPlaylistUniqBVIDs } from 'objects/Playlist';
+import { fetchVideoInfo } from '@utils/mediafetch/bilivideo';
 import useAlert from '../dialogs/useAlert';
-import { songFetch, fetchiliBVIDs } from '../../utils/mediafetch/bilivideo';
-import { syncFavlist } from '../../utils/Bilibili/bilifavOperate';
+import { songFetch, fetchiliBVIDs } from '@utils/mediafetch/bilivideo';
+import { syncFavlist } from '@utils/Bilibili/bilifavOperate';
 
 enum ICONS {
   SETTINGS = 'cog',

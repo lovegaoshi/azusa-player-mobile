@@ -13,7 +13,7 @@ import GeneralSettings from './GeneralSettings';
 import SkinSettings from './SkinSettings';
 import DeveloperSettings from './DeveloperSettings';
 import SyncSettings from './SyncSettings';
-import { useNoxSetting } from '../../hooks/useSetting';
+import { useNoxSetting } from 'hooks/useSetting';
 import { SettingListItem } from './useRenderSetting';
 import LanguageSettings from './LanguageSettings';
 import AboutSettings from './AboutSettings';

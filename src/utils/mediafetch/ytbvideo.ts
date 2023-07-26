@@ -12,7 +12,7 @@ import ytdl from 'ytdl-core';
 import { regexFetchProps } from './generic';
 import { biliApiLimiter } from './throttle';
 
-import SongTS from '../../objects/Song';
+import SongTS from 'objects/Song';
 import { logger } from '../Logger';
 
 export const CIDPREFIX = 'youtube-';

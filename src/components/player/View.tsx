@@ -6,14 +6,14 @@ import { DrawerNavigationProp } from '@react-navigation/drawer';
 import { useTranslation } from 'react-i18next';
 
 import { TrackInfo } from './';
-import { SetupService, AdditionalPlaybackService } from '../../services';
+import { SetupService, AdditionalPlaybackService } from 'services';
 import PlayerTopInfo from './PlayerTopInfo';
-import { useNoxSetting } from '../../hooks/useSetting';
-import { songlistToTracklist } from '../../objects/Playlist';
-import { initPlayerObject } from '../../utils/ChromeStorage';
-import { initCache } from '../../utils/Cache';
-import { getCurrentTPQueue } from '../../stores/playingList';
-import useVersionCheck from '../../hooks/useVersionCheck';
+import { useNoxSetting } from 'hooks/useSetting';
+import { songlistToTracklist } from 'objects/Playlist';
+import { initPlayerObject } from '@utils/ChromeStorage';
+import { initCache } from '@utils/Cache';
+import { getCurrentTPQueue } from 'stores/playingList';
+import useVersionCheck from 'hooks/useVersionCheck';
 
 interface Props {
   navigation: DrawerNavigationProp<ParamListBase>;
