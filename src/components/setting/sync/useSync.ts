@@ -8,3 +8,12 @@ import { loginDropbox, noxBackup, noxRestore } from './DropboxAuth';
 import { useNoxSetting } from '@hooks/useSetting';
 import { logger } from '@utils/Logger';
 import { exportPlayerContent, importPlayerContent } from '@utils/ChromeStorage';
+
+const useSync = () => {
+  const { t } = useTranslation();
+  const initPlayer = useNoxSetting(state => state.initPlayer);
+
+  const restoreFromUint8Array = (res: Uint8Array) => {};
+};
+
+export default useSync;
