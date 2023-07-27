@@ -9,6 +9,8 @@ import useUpdatePlaylist from '@hooks/useUpdatePlaylist';
 import { songlistToTracklist } from '@objects/Playlist';
 import { CopiedPlaylistMenuItem } from '../../buttons/CopiedPlaylistButton';
 import { RenameSongMenuItem } from '../../buttons/RenameSongButton';
+import { CIDPREFIX } from '@utils/mediafetch/ytbvideo';
+import logger from '@utils/Logger';
 
 enum ICONS {
   SEND_TO = 'playlist-plus',
@@ -21,6 +23,7 @@ enum ICONS {
   REMOVE = 'delete',
   REMOVE_AND_BAN_BVID = 'delete-forever',
   DETAIL = 'information-outline',
+  RADIO = 'radio-tower',
 }
 
 interface Props {
@@ -32,6 +35,7 @@ interface Props {
   handleSearch?: (val: string) => void;
 }
 
+// TODO: refactro this into tracklist's songmenu
 export default ({
   song,
   songMenuVisible,
@@ -47,6 +51,9 @@ export default ({
   const setCurrentPlayingId = useNoxSetting(state => state.setCurrentPlayingId);
   const setCurrentPlayingList = useNoxSetting(
     state => state.setCurrentPlayingList
+  );
+  const setExternalSearchText = useNoxSetting(
+    state => state.setExternalSearchText
   );
   const { updateSongIndex } = useUpdatePlaylist();
 
@@ -78,11 +85,11 @@ export default ({
     const songs = [song];
     const newPlaylist = banBVID
       ? {
-        ...currentPlaylist2,
-        blacklistedUrl: currentPlaylist2.blacklistedUrl.concat(
-          songs.map(song => song.bvid)
-        ),
-      }
+          ...currentPlaylist2,
+          blacklistedUrl: currentPlaylist2.blacklistedUrl.concat(
+            songs.map(song => song.bvid)
+          ),
+        }
       : currentPlaylist2;
     updatePlaylist(newPlaylist, [], songs);
     setCurrentPlayingList(newPlaylist);
@@ -104,6 +111,14 @@ export default ({
   // track details page, in a seperate stack screen.
   const songInfo = () => {
     closeMenu();
+  };
+  const startRadio = () => {
+    if (song.id.startsWith(CIDPREFIX)) {
+      setExternalSearchText(`youtu.be/list=RD${song.bvid}`);
+    } else {
+      logger.warn(`[startRadio] ${song.bvid} is not a youtube video`);
+    }
+    setSongMenuVisible(false);
   };
 
   return (
