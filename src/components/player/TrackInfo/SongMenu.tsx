@@ -112,6 +112,15 @@ export default ({
   const songInfo = () => {
     closeMenu();
   };
+
+
+  const radioAvailable = () => {
+    if (song === undefined) {
+      song = selectedSongs()[0];
+    }
+    return song?.id?.startsWith(CIDPREFIX);
+  };
+
   const startRadio = () => {
     if (song.id.startsWith(CIDPREFIX)) {
       setExternalSearchText(`youtu.be/list=RD${song.bvid}`);
@@ -133,6 +142,12 @@ export default ({
           closeMenu();
           renameSong(rename);
         }}
+      />
+      <Menu.Item
+        leadingIcon={ICONS.RADIO}
+        disabled={checking || !radioAvailable()}
+        onPress={() => startRadio()}
+        title={t('SongOperations.songStartRadio')}
       />
       <Menu.Item
         leadingIcon={ICONS.SEARCH_IN_PLAYLIST}
