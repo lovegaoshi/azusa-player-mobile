@@ -181,7 +181,6 @@ jobs:
           releaseFiles: android/app/build/outputs/bundle/release/app-release.aab
           track: internal
           status: draft
-          changesNotSentForReview: true
 
   buildIPA:
     runs-on: macos-12
@@ -240,9 +239,6 @@ jobs:
 
       - name: Pod Install
         run: cd ios && pod install
-
-      - name: Fix expo script
-        run: python scripts/expofix.py
 
       - name: build
         run: cd ios && xcodebuild -scheme example -workspace example.xcworkspace -configuration Release clean archive -archivePath "build/APM.xcarchive" CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO CODE_SIGNING_ALLOWED=NO
