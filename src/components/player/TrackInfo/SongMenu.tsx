@@ -85,11 +85,11 @@ export default ({
     const songs = [song];
     const newPlaylist = banBVID
       ? {
-          ...currentPlaylist2,
-          blacklistedUrl: currentPlaylist2.blacklistedUrl.concat(
-            songs.map(song => song.bvid)
-          ),
-        }
+        ...currentPlaylist2,
+        blacklistedUrl: currentPlaylist2.blacklistedUrl.concat(
+          songs.map(song => song.bvid)
+        ),
+      }
       : currentPlaylist2;
     updatePlaylist(newPlaylist, [], songs);
     setCurrentPlayingList(newPlaylist);
@@ -113,13 +113,7 @@ export default ({
     closeMenu();
   };
 
-
-  const radioAvailable = () => {
-    if (song === undefined) {
-      song = selectedSongs()[0];
-    }
-    return song?.id?.startsWith(CIDPREFIX);
-  };
+  const radioAvailable = () => song?.id?.startsWith(CIDPREFIX);
 
   const startRadio = () => {
     if (song.id.startsWith(CIDPREFIX)) {
@@ -145,7 +139,7 @@ export default ({
       />
       <Menu.Item
         leadingIcon={ICONS.RADIO}
-        disabled={checking || !radioAvailable()}
+        disabled={!radioAvailable()}
         onPress={() => startRadio()}
         title={t('SongOperations.songStartRadio')}
       />
