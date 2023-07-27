@@ -19,14 +19,22 @@ const EXPORT_OPTIONS_LIST = [
   EXPORT_OPTIONS.PERSONAL,
 ];
 
-const SyncButton = ({ location }: { location: EXPORT_OPTIONS }) => {
+interface SyncInterface {
+  location: EXPORT_OPTIONS;
+  restoreFromUint8Array: (data: Uint8Array) => Promise<void>;
+}
+const SyncButton = ({ location, restoreFromUint8Array }: SyncInterface) => {
   switch (location) {
     case EXPORT_OPTIONS.LOCAL:
       return <></>;
     case EXPORT_OPTIONS.DROPBOX:
-      return <DropboxSyncButton />;
+      return (
+        <DropboxSyncButton restoreFromUint8Array={restoreFromUint8Array} />
+      );
     case EXPORT_OPTIONS.PERSONAL:
-      return <PersonalSyncButton />;
+      return (
+        <PersonalSyncButton restoreFromUint8Array={restoreFromUint8Array} />
+      );
     default:
       return <></>;
   }
@@ -46,6 +54,7 @@ export default ({ navigation }: Props) => {
     restoreFromUint8Array,
     syncPartialNoxExtension,
     syncCheckVisible,
+    setSyncCheckVisible,
     noxExtensionContent,
   } = useSync();
 
@@ -88,7 +97,10 @@ export default ({ navigation }: Props) => {
           onPress={() => setSelectVisible(true)}
         >{`${t('Sync.ExportLocation')} ${renderOption()}`}</Button>
       </View>
-      <SyncButton location={playerSetting.settingExportLocation}></SyncButton>
+      <SyncButton
+        location={playerSetting.settingExportLocation}
+        restoreFromUint8Array={restoreFromUint8Array}
+      ></SyncButton>
       <GenericSelectDialog
         visible={selectVisible}
         options={currentSelectOption.options}
@@ -97,6 +109,13 @@ export default ({ navigation }: Props) => {
         defaultIndex={currentSelectOption.defaultIndex}
         onClose={currentSelectOption.onClose}
         onSubmit={currentSelectOption.onSubmit}
+      />
+      <GenericCheckDialog
+        visible={syncCheckVisible}
+        title={String(t('Sync.SyncCheck'))}
+        options={noxExtensionContent}
+        onClose={() => setSyncCheckVisible(false)}
+        onSubmit={syncPartialNoxExtension}
       />
     </View>
   );

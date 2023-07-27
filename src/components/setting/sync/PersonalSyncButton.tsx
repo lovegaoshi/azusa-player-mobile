@@ -7,17 +7,25 @@ import { useTranslation } from 'react-i18next';
 import { noxBackup, noxRestore } from './PersonalCloudAuth';
 import { useNoxSetting } from '@hooks/useSetting';
 import { logger } from '@utils/Logger';
-import { exportPlayerContent, importPlayerContent } from '@utils/ChromeStorage';
+import { exportPlayerContent } from '@utils/ChromeStorage';
 
 interface Props {
   cloudAddress: string;
   cloudID?: string;
+  restoreFromUint8Array: (data: Uint8Array) => Promise<void>;
 }
 
-const ImportSyncFavButton = ({ cloudAddress, cloudID }: Props) => {
+interface MainProps {
+  restoreFromUint8Array: (data: Uint8Array) => Promise<void>;
+}
+
+const ImportSyncFavButton = ({
+  cloudAddress,
+  cloudID,
+  restoreFromUint8Array,
+}: Props) => {
   const { t } = useTranslation();
   const [loading, setLoading] = useState(false);
-  const initPlayer = useNoxSetting(state => state.initPlayer);
 
   const errorHandling = (
     e: Error,
@@ -34,8 +42,7 @@ const ImportSyncFavButton = ({ cloudAddress, cloudID }: Props) => {
     if (response !== null) {
       // error handling is in importPlayerContent. failure in there resets player data
       // theoretically this is always safe
-      const initializedStorage = await importPlayerContent(response);
-      await initPlayer(initializedStorage);
+      await restoreFromUint8Array(response);
       Snackbar.show({ text: t('Sync.PersonalCloudDownloadSuccess') });
     } else {
       errorHandling(
@@ -112,7 +119,7 @@ const SetTextField = ({ settingKey, label, placeholder }: textProps) => {
   );
 };
 
-export default () => {
+export default ({ restoreFromUint8Array }: MainProps) => {
   const { t } = useTranslation();
   const playerSetting = useNoxSetting(state => state.playerSetting);
 
@@ -136,11 +143,13 @@ export default () => {
         <ImportSyncFavButton
           cloudAddress={playerSetting.personalCloudIP}
           cloudID={playerSetting.personalCloudID}
+          restoreFromUint8Array={restoreFromUint8Array}
         />
         <View style={styles.emptyPlaceholder}></View>
         <ExportSyncFavButton
           cloudAddress={playerSetting.personalCloudIP}
           cloudID={playerSetting.personalCloudID}
+          restoreFromUint8Array={restoreFromUint8Array}
         />
       </View>
     </View>

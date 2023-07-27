@@ -33,21 +33,22 @@ const useSync = () => {
         String(t('Sync.NoxExtensionImportMsg')),
         [
           {
-            text: String(t('SyncNoxExtensionCancel')),
+            text: String(t('Sync.NoxExtensionCancel')),
             onPress: () => {
               reject('user said no');
             },
             style: 'cancel',
           },
           {
-            text: String(t('SyncNoxExtensionOverwrite')),
+            text: String(t('Sync.NoxExtensionOverwrite')),
             onPress: async () => {
               await clearPlaylistNImport(parsedContent);
+              await initPlayer(await initPlayerObject());
               resolve(true);
             },
           },
           {
-            text: String(t('SyncNoxExtensionAppend')),
+            text: String(t('Sync.NoxExtensionAppend')),
             onPress: async () => {
               setSyncCheckVisible(true);
               setNoxExtensionContent(
@@ -66,10 +67,15 @@ const useSync = () => {
 
   const syncPartialNoxExtension = async (checkedPlaylistIndexes: boolean[]) => {
     const checkedPlaylists = checkedPlaylistIndexes
-      .map((val, index) => (val ? cachedParsedContent[index] : undefined))
+      .map((val, index) =>
+        val
+          ? cachedParsedContent[cachedParsedContent.MyFavList[index]]
+          : undefined
+      )
       .filter(val => val);
     await addImportedPlaylist(checkedPlaylists);
     await initPlayer(await initPlayerObject());
+    setSyncCheckVisible(false);
     Snackbar.show({ text: t('Sync.DropboxDownloadSuccess') });
   };
 
@@ -77,7 +83,7 @@ const useSync = () => {
     return Array.isArray(parsedContent.MyFavList);
   };
 
-  const restoreFromUint8Array = (content: Uint8Array) => {
+  const restoreFromUint8Array = async (content: Uint8Array) => {
     let parsedContent;
     try {
       parsedContent = JSON.parse(strFromU8(decompressSync(content)));
@@ -90,9 +96,11 @@ const useSync = () => {
     }
     try {
       if (isSyncNoxExtension(parsedContent)) {
-        return syncNoxExtension(parsedContent);
+        await syncNoxExtension(parsedContent);
+        return;
       } else {
-        return importPlayerContentRaw(parsedContent);
+        await initPlayer(await importPlayerContentRaw(parsedContent));
+        return;
       }
     } catch (error) {
       logger.error(error);
@@ -106,6 +114,7 @@ const useSync = () => {
     restoreFromUint8Array,
     syncPartialNoxExtension,
     syncCheckVisible,
+    setSyncCheckVisible,
     noxExtensionContent,
   };
 };

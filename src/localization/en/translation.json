@@ -163,7 +163,12 @@
     "personalCloudIPLabel": "Private cloud IP address",
     "personalCloudKeyPlaceholder": "",
     "personalCloudKeyLabel": "Private cloud key",
-    "fileNotValidJson": "selected backup file is corrupted."
+    "fileNotValidJson": "selected backup file is corrupted.",
+    "NoxExtensionImportTitle": "noxplayer format detected",
+    "NoxExtensionImportMsg": "How do you want to import playlists from noxplayer?",
+    "Sync.NoxExtensionOverwrite": "Overwrite",
+    "Sync.NoxExtensionAppend": "Append",
+    "Sync.NoxExtensionCancel": "Cancel"
   },
   "SleepTimer": {
     "Title": "Sleep Timer"
