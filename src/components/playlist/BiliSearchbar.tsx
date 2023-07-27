@@ -35,6 +35,9 @@ export default ({
   const playerStyle = useNoxSetting(state => state.playerStyle);
   const navigationGlobal = useNavigation();
   const externalSearchText = useNoxSetting(state => state.externalSearchText);
+  const setExternalSearchText = useNoxSetting(
+    state => state.setExternalSearchText
+  );
   const [sharedData, setSharedData] = useState<any>(null);
   const [sharedMimeType, setSharedMimeType] = useState<string | null>(null);
   const { playFromPlaylist } = usePlayback();
@@ -47,6 +50,7 @@ export default ({
   useEffect(() => {
     if (externalSearchText.length > 0) {
       handleExternalSearch(externalSearchText, true);
+      setExternalSearchText('');
     }
   }, [externalSearchText]);
 

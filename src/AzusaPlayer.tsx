@@ -1,8 +1,8 @@
 import React from 'react';
-import useAAPlayback from './hooks/useAAPlayback';
+import { usePlaybackListener } from './hooks/usePlayback';
 
 const AzusaPlayer = (props: any) => {
-  const AAPlayback = useAAPlayback();
+  const playbackListeners = usePlaybackListener();
 
   return <>{props.children}</>;
 };
