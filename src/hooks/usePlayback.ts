@@ -18,7 +18,6 @@ import noxPlayingList from '../stores/playingList';
 import { NoxRepeatMode } from '../components/player/enums/RepeatMode';
 
 const { getState } = noxPlayingList;
-let lastBiliHeartBeat: string[] = ['', ''];
 
 const PLAYLIST_MEDIAID = 'playlist-';
 
@@ -150,57 +149,6 @@ const usePlayback = () => {
 export const usePlaybackListener = () => {
   const playerSetting = useNoxSetting(state => state.playerSetting);
   const [newMetadata, setNewMetadata] = useState<any>({});
-
-  useEffect(() => {
-    const listener = TrackPlayer.addEventListener(
-      Event.PlaybackActiveTrackChanged,
-      async event => {
-        console.log('Event.PlaybackActiveTrackChanged', event);
-        if (!event.track || !event.track.song) return;
-        // to resolve bilibili media stream URLs on the fly, TrackPlayer.load is used to
-        // replace the current track's url. its not documented? >:/
-        if (
-          event.index !== undefined &&
-          (event.track.url === NULL_TRACK.url ||
-            new Date().getTime() - event.track.urlRefreshTimeStamp > 3600000)
-        ) {
-          const heartBeatReq = [event.track.song.bvid, event.track.song.id];
-          // HACK: what if cid needs to be resolved on the fly?
-          // TODO: its too much of a hassle and I would like to just
-          // ask users to refresh their lists instead, if they really care
-          // about sending heartbeats.
-          if (
-            lastBiliHeartBeat[0] !== heartBeatReq[0] ||
-            lastBiliHeartBeat[1] !== heartBeatReq[1]
-          ) {
-            initBiliHeartbeat({
-              bvid: event.track.song.bvid,
-              cid: event.track.song.id,
-            });
-            lastBiliHeartBeat = heartBeatReq;
-          }
-          const updatedMetadata = await resolveUrl(event.track.song);
-          try {
-            NoxCache.noxMediaCache.saveCacheMedia(
-              event.track!.song,
-              updatedMetadata
-            );
-            const currentTrack = await TrackPlayer.getActiveTrack();
-            await TrackPlayer.load({ ...currentTrack, ...updatedMetadata });
-            if (getState().playmode === NoxRepeatMode.REPEAT_TRACK) {
-              TrackPlayer.setRepeatMode(RepeatMode.Track);
-            }
-            setNewMetadata({ currentTrack, updatedMetadata });
-          } catch (e) {
-            console.error('resolveURL failed', event.track, e);
-          }
-        }
-      }
-    );
-    return () => {
-      listener.remove();
-    };
-  }, []);
 
   useEffect(() => {
     if (!playerSetting.updateLoadedTrack) {
