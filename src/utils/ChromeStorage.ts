@@ -64,6 +64,7 @@ export const DEFAULT_SETTING: NoxStorage.PlayerSettingDict = {
   dataSaver: false,
   fastBiliSearch: true,
   noInterruption: false,
+  updateLoadedTrack: false,
 
   appID,
   language: undefined,
@@ -329,88 +330,56 @@ const clearPlaylists = async () => {
   savePlaylistIds([]);
 };
 
-const importNoxExtensionContent = async (parsedContent: any) => {
-  // noxextension stores everything as a giant object as it doesnt have the sqlite 2MB entry limitation;
-  // it must have MyFavList as an array.
-  if (!Array.isArray(parsedContent['MyFavList'])) {
-    return false;
+const saveImportedPlaylist = async (playlists: any[]) => {
+  for (const playlist of playlists) {
+    await savePlaylist({
+      ...dummyPlaylistList,
+      ...playlist,
+      ...playlist.info,
+      // HACK: seriously who thought of renaming variables is a good idea?
+      // oh right that was me
+      subscribeUrl: playlist.subscribeUrls,
+      blacklistedUrl: playlist.bannedBVids,
+    });
   }
-
-  const clearPlaylistNImport = async () => {
-    await clearPlaylists();
-    for (const playlistID of parsedContent['MyFavList']) {
-      const playlist = parsedContent[playlistID];
-      await savePlaylist({
-        ...dummyPlaylistList,
-        ...playlist,
-        ...playlist.info,
-        // HACK: seriously who thought of renaming variables is a good idea?
-        // oh right that was me
-        subscribeUrl: playlist.subscribeUrls,
-        blacklistedUrl: playlist.bannedBVids,
-      });
-    }
-    await savePlaylistIds(parsedContent['MyFavList']);
-  };
-  return new Promise((resolve, reject) => {
-    Alert.alert('ERROR', 'Are you importing from noxplayer extension?', [
-      {
-        text: 'Nn',
-        onPress: () => {
-          reject('user said no');
-        },
-        style: 'cancel',
-      },
-      {
-        text: 'Yes',
-        onPress: async () => {
-          await clearPlaylistNImport();
-          resolve(true);
-        },
-      },
-    ]);
-  });
 };
 
-export const importPlayerContent = async (content: Uint8Array) => {
-  try {
-    const parsedContent = JSON.parse(strFromU8(decompressSync(content)));
-    const parseImportedPartial = (
-      key: string,
-      parsedContent: Array<[string, string]>
-    ) => {
-      return JSON.parse(
-        parsedContent.filter((val: [string, string]) => val[0] === key)[0][1]
-      );
-    };
-    try {
-      // detect noxplayer imports...
-      if (await importNoxExtensionContent(parsedContent)) {
-        return await initPlayerObject();
-      }
-    } catch (e) {
-      console.error(e);
-    }
-    const importedAppID = parseImportedPartial(
-      STORAGE_KEYS.PLAYER_SETTING_KEY,
-      parsedContent
-    ).appID;
-    if (importedAppID !== appID) {
-      throw new Error(`${importedAppID} is not valid appID`);
-    } else {
-      await clearStorage();
-      await AsyncStorage.multiSet(parsedContent);
-      return await initPlayerObject();
-    }
-  } catch (e) {
-    logger.error(e);
-    // cannot recover, clear storage and reinitialize. good to give an alert too.
-    Alert.alert(
-      'ERROR',
-      'Error on loading previous setting data. user data is reset.',
-      [{ text: 'OK', onPress: () => undefined }]
-    );
+export const clearPlaylistNImport = async (parsedContent: any) => {
+  await clearPlaylists();
+  await saveImportedPlaylist(
+    parsedContent['MyFavList'].map((val: string) => parsedContent[val])
+  );
+  await savePlaylistIds(parsedContent['MyFavList']);
+};
+
+export const addImportedPlaylist = async (playlists: any[]) => {
+  await saveImportedPlaylist(playlists);
+  await savePlaylistIds(
+    (
+      await getItem(STORAGE_KEYS.MY_FAV_LIST_KEY)
+    ).concat(playlists.map(val => val.info.id))
+  );
+};
+
+const parseImportedPartial = (
+  key: string,
+  parsedContent: Array<[string, string]>
+) => {
+  return JSON.parse(
+    parsedContent.filter((val: [string, string]) => val[0] === key)[0][1]
+  );
+};
+
+export const importPlayerContentRaw = async (parsedContent: any) => {
+  const importedAppID = parseImportedPartial(
+    STORAGE_KEYS.PLAYER_SETTING_KEY,
+    parsedContent
+  ).appID;
+  if (importedAppID !== appID) {
+    throw new Error(`${importedAppID} is not valid appID`);
+  } else {
     await clearStorage();
+    await AsyncStorage.multiSet(parsedContent);
     return await initPlayerObject();
   }
 };

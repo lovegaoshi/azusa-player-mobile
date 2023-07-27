@@ -22,7 +22,7 @@ import {
   Props as CircleTimerProps,
 } from 'react-native-countdown-circle-timer';
 import TrackPlayer from 'react-native-track-player';
-import { seconds2MMSS } from '../../utils/Utils';
+import { seconds2MMSS } from '@utils/Utils';
 
 const HHMMSS2Seconds = (time: string): number => {
   const timeFactor = [1, 60, 60];

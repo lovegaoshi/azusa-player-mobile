@@ -1,10 +1,10 @@
 import React from 'react';
 import { ImageBackground, Dimensions, View, StyleSheet } from 'react-native';
 import { Video, ResizeMode } from 'expo-av';
-import { useNoxSetting } from '../../hooks/useSetting';
-import { fetchVideoPlayUrlPromise } from '../../utils/mediafetch/resolveURL';
-import { customReqHeader } from '../../utils/BiliFetch';
-import { biliNFTVideoFetch } from '../../utils/mediafetch/biliNFT';
+import { useNoxSetting } from '@hooks/useSetting';
+import { fetchVideoPlayUrlPromise } from '@utils/mediafetch/resolveURL';
+import { customReqHeader } from '@utils/BiliFetch';
+import { biliNFTVideoFetch } from '@utils/mediafetch/biliNFT';
 
 const mobileHeight = Dimensions.get('window').height;
 
@@ -25,11 +25,13 @@ export const resolveBackgroundImage = async (
     case RESOLVE_TYPE.bvid:
       return {
         type: RESOLVE_TYPE.video,
-        identifier: await fetchVideoPlayUrlPromise(
-          backgroundImage.identifier,
-          undefined,
-          'VideoUrl'
-        ),
+        identifier: (
+          await fetchVideoPlayUrlPromise(
+            backgroundImage.identifier,
+            undefined,
+            'VideoUrl'
+          )
+        ).url,
       };
     case RESOLVE_TYPE.biliNFTVideo:
       // eslint-disable-next-line no-case-declarations
@@ -75,7 +77,6 @@ const MainBackground = (props: any) => {
         </ImageBackground>
       );
     case RESOLVE_TYPE.video:
-      console.log(playerStyle.bkgrdImg.identifier);
       return (
         <>
           <Video

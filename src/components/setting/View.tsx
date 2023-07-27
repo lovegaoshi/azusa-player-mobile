@@ -13,8 +13,8 @@ import GeneralSettings from './GeneralSettings';
 import SkinSettings from './SkinSettings';
 import DeveloperSettings from './DeveloperSettings';
 import SyncSettings from './SyncSettings';
-import { useNoxSetting } from '../../hooks/useSetting';
-import useRenderSettingItem from './useRenderSetting';
+import { useNoxSetting } from '@hooks/useSetting';
+import { SettingListItem } from './useRenderSetting';
 import LanguageSettings from './LanguageSettings';
 import AboutSettings from './AboutSettings';
 import SplashSettings from './SplashSettings';
@@ -79,7 +79,6 @@ export default ({ navigation }: Props) => {
   const { t } = useTranslation();
   const navigationGlobal = useNavigation();
   const playerStyle = useNoxSetting(state => state.playerStyle);
-  const { renderListItem } = useRenderSettingItem();
 
   const HomeSettings = ({ navigation }: Props) => {
     return (
@@ -90,49 +89,49 @@ export default ({ navigation }: Props) => {
         ]}
       >
         <ScrollView>
-          {renderListItem(
-            ICONS.HOME,
-            'GeneralSetting',
-            () => navigation.navigate(VIEW.GENERAL),
-            'Settings'
-          )}
-          {renderListItem(
-            ICONS.SKIN,
-            'SkinSetting',
-            () => navigation.navigate(VIEW.SKIN),
-            'Settings'
-          )}
-          {renderListItem(
-            ICONS.LOGIN,
-            'Login',
-            () => navigation.navigate(VIEW.LOGIN),
-            'Settings'
-          )}
-          {renderListItem(
-            ICONS.BACKUP,
-            'BackupSetting',
-            () => navigation.navigate(VIEW.BACKUP),
-            'Settings'
-          )}
+          <SettingListItem
+            icon={ICONS.HOME}
+            settingName="GeneralSetting"
+            onPress={() => navigation.navigate(VIEW.GENERAL)}
+            settingCategory="Settings"
+          />
+          <SettingListItem
+            icon={ICONS.SKIN}
+            settingName="SkinSetting"
+            onPress={() => navigation.navigate(VIEW.SKIN)}
+            settingCategory="Settings"
+          />
+          <SettingListItem
+            icon={ICONS.LOGIN}
+            settingName="Login"
+            onPress={() => navigation.navigate(VIEW.LOGIN)}
+            settingCategory="Settings"
+          />
+          <SettingListItem
+            icon={ICONS.BACKUP}
+            settingName="BackupSetting"
+            onPress={() => navigation.navigate(VIEW.BACKUP)}
+            settingCategory="Settings"
+          />
           <LanguageSettings icon={ICONS.LANGUAGE} />
-          {renderListItem(
-            ICONS.DEVELOPER,
-            'DeveloperOptions',
-            () => navigation.navigate(VIEW.DEVELOPER),
-            'Settings'
-          )}
-          {renderListItem(
-            ICONS.SPLASH_GALLARY,
-            'SplashSetting',
-            () => navigation.navigate(VIEW.SPLASH_GALLARY),
-            'Settings'
-          )}
-          {renderListItem(
-            ICONS.INFO,
-            'InfoSetting',
-            () => navigation.navigate(VIEW.INFO),
-            'Settings'
-          )}
+          <SettingListItem
+            icon={ICONS.DEVELOPER}
+            settingName="DeveloperOptions"
+            onPress={() => navigation.navigate(VIEW.DEVELOPER)}
+            settingCategory="Settings"
+          />
+          <SettingListItem
+            icon={ICONS.SPLASH_GALLARY}
+            settingName="SplashSetting"
+            onPress={() => navigation.navigate(VIEW.SPLASH_GALLARY)}
+            settingCategory="Settings"
+          />
+          <SettingListItem
+            icon={ICONS.INFO}
+            settingName="InfoSetting"
+            onPress={() => navigation.navigate(VIEW.INFO)}
+            settingCategory="Settings"
+          />
         </ScrollView>
       </View>
     );

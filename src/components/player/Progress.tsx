@@ -2,8 +2,8 @@ import { Slider } from '@sharcoux/slider';
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import TrackPlayer, { useProgress } from 'react-native-track-player';
-import { useNoxSetting } from '../../hooks/useSetting';
-import { seconds2MMSS as formatSeconds } from '../../utils/Utils';
+import { useNoxSetting } from '@hooks/useSetting';
+import { seconds2MMSS as formatSeconds } from '@utils/Utils';
 
 export const Progress: React.FC<{ live?: boolean }> = ({ live }) => {
   const { position, duration } = useProgress();

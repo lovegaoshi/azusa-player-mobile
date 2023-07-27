@@ -5,17 +5,16 @@ import { IconButton } from 'react-native-paper';
 import { useTranslation } from 'react-i18next';
 
 import { loginDropbox, noxBackup, noxRestore } from './DropboxAuth';
-import { useNoxSetting } from '../../../hooks/useSetting';
-import { logger } from '../../../utils/Logger';
-import {
-  exportPlayerContent,
-  importPlayerContent,
-} from '../../../utils/ChromeStorage';
+import { logger } from '@utils/Logger';
+import { exportPlayerContent } from '@utils/ChromeStorage';
 
-const ImportSyncFavButton = () => {
+interface Props {
+  restoreFromUint8Array: (data: Uint8Array) => Promise<void>;
+}
+
+const ImportSyncFavButton = ({ restoreFromUint8Array }: Props) => {
   const { t } = useTranslation();
   const [loading, setLoading] = useState(false);
-  const initPlayer = useNoxSetting(state => state.initPlayer);
 
   const errorHandling = (e: Error, msg = t('Sync.DropboxDownloadFail')) => {
     logger.error(e);
@@ -27,8 +26,7 @@ const ImportSyncFavButton = () => {
     setLoading(true);
     const response = await noxRestore();
     if (response !== null) {
-      const initializedStorage = await importPlayerContent(response);
-      await initPlayer(initializedStorage);
+      await restoreFromUint8Array(response);
       Snackbar.show({ text: t('Sync.DropboxDownloadSuccess') });
     } else {
       errorHandling(
@@ -100,10 +98,10 @@ const ExportSyncFavButton = () => {
   );
 };
 
-export default () => {
+export default ({ restoreFromUint8Array }: Props) => {
   return (
     <View style={styles.container}>
-      <ImportSyncFavButton />
+      <ImportSyncFavButton restoreFromUint8Array={restoreFromUint8Array} />
       <View style={styles.spacing}></View>
       <ExportSyncFavButton />
     </View>

@@ -4,13 +4,13 @@ import { useTranslation } from 'react-i18next';
 import Snackbar from 'react-native-snackbar';
 import md5 from 'md5';
 
-import { useNoxSetting } from '../../hooks/useSetting';
-import { logger } from '../../utils/Logger';
-import bfetch, { parseBodyParams } from '../../utils/BiliFetch';
-import { addCookie } from '../../utils/ChromeStorage';
-import { getLoginStatus } from '../../utils/Login';
+import { useNoxSetting } from '@hooks/useSetting';
+import { logger } from '@utils/Logger';
+import bfetch, { parseBodyParams } from '@utils/BiliFetch';
+import { addCookie } from '@utils/ChromeStorage';
+import { getLoginStatus } from '@utils/Login';
 import { QRCodeReq, LoginInfo } from './useBiliLogin';
-import { throttler } from '../../utils/throttle';
+import { throttler } from '@utils/throttle';
 
 // https://github.com/SocialSisterYi/bilibili-API-collect/blob/master/docs/login/login_action/QR.md#web%E7%AB%AF%E6%89%AB%E7%A0%81%E7%99%BB%E5%BD%95-%E6%97%A7%E7%89%88
 /**
@@ -71,7 +71,7 @@ const loginQRVerification = async () => {
       })
     ),
     json = await res.json();
-  logger.debug(json);
+  logger.debug(`[biliLogin] ${json}`);
 };
 
 const useBiliLogin = () => {
@@ -148,14 +148,18 @@ const useBiliLogin = () => {
       });
       const json = await response.json();
       logger.debug(
-        `probing QR code login of ${qrcodeKey}, ${JSON.stringify(json)}`
+        `[biliLogin] probing QR code login of ${qrcodeKey}, ${JSON.stringify(
+          json
+        )}`
       );
       if (json.code === 0) {
         // json.status
         const setCookie = response.headers.get('set-cookie');
         if (!setCookie) {
           logger.warn(
-            `no set-cookie header found; res: ${JSON.stringify(json)}`
+            `[biliLogin] no set-cookie header found; res: ${JSON.stringify(
+              json
+            )}`
           );
         } else {
           addCookie(domain, setCookie);
@@ -171,7 +175,9 @@ const useBiliLogin = () => {
             });
           } catch {
             logger.warn(
-              `${JSON.stringify(cookieEntry)} failed in saving cookie.`
+              `[biliLogin] ${JSON.stringify(
+                cookieEntry
+              )} failed in saving cookie.`
             );
           }
         }
@@ -183,13 +189,13 @@ const useBiliLogin = () => {
           name: 'refresh_token',
           value: json.data.refresh_token,
         });
-        logger.debug(await CookieManager.get(domain));
+        logger.debug(`[biliLogin] ${await CookieManager.get(domain)}`);
         clearQRLogin();
       }
     } catch (error) {
       // network error; abort qr login attempts
       clearQRLogin();
-      console.error(error);
+      logger.error(`[biliLogin] ${error}`);
       Snackbar.show({
         text: t('Login.BilibiliLoginProbeFailed'),
       });

@@ -74,6 +74,7 @@
     "songSendToTitle": "送往...",
     "songRenameTitle": "改名...",
     "songSearchInPlaylistTitle": "在歌单内搜索",
+    "songStartRadio": "播放电台",
     "songRemoveTitle": "删除歌曲",
     "songRemoveNBanTitle": "删除并拉黑",
     "selectedSongs": "选择的歌"
@@ -88,9 +89,11 @@
     "hideCoverInMobileName": "不显示歌封面",
     "hideCoverInMobileDesc": "移动端不显示歌封面",
     "dataSaverName": "省流模式",
-    "dataSaverDesc": "解析低质量素材节省流量",
+    "dataSaverDesc": "TODO: 解析低质量素材节省流量",
     "noCookieBiliSearchName": "个性化b站搜索结果",
-    "noCookieBiliSearchDesc": "搜索b站时提交cookies获得个性化搜索结果",
+    "noCookieBiliSearchDesc": "TODO: 搜索b站时提交cookies获得个性化搜索结果",
+    "updateLoadedTrackName": "更新歌曲metadata",
+    "updateLoadedTrackDesc": "TODO: 当歌曲被解析时，更新歌曲的metadata",
     "fastBiliSearchName": "快速b站搜索",
     "fastBiliSearchDesc": "使用b站搜索时，不解析分p内容"
   },
@@ -157,7 +160,13 @@
     "personalCloudIPPlaceholder": "末尾带/",
     "personalCloudIPLabel": "私有云地址",
     "personalCloudKeyPlaceholder": "",
-    "personalCloudKeyLabel": "私有云key"
+    "personalCloudKeyLabel": "私有云key",
+    "fileNotValidJson": "备份文件格式不正确.",
+    "NoxExtensionImportTitle": "电闹播放器格式检测到",
+    "NoxExtensionImportMsg": "你想如何从电闹播放器备份文件导入歌单?",
+    "Sync.NoxExtensionOverwrite": "全部覆盖",
+    "Sync.NoxExtensionAppend": "选择加入",
+    "Sync.NoxExtensionCancel": "算了"
   },
   "SleepTimer": {
     "Title": "定时停止播放"

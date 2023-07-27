@@ -114,7 +114,9 @@ export const wbiQuery = async (
   const urlObj = new URL(url);
   const URLParams = new URLSearchParams(urlObj.search);
   const orlOrig = `${urlObj.origin}${urlObj.pathname}`;
-  logger.debug(`wbiQuery: ${orlOrig}?${encWbi(Object.fromEntries(URLParams))}`);
+  logger.debug(
+    `[wbiQuery] ${orlOrig}?${encWbi(Object.fromEntries(URLParams))}`
+  );
   return wbiRefreshWrapper(() =>
     bfetch(`${orlOrig}?${encWbi(Object.fromEntries(URLParams))}`, fetchParams)
   );

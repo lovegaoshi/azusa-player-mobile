@@ -11,8 +11,8 @@
 import { regexFetchProps } from './generic';
 import { biliApiLimiter } from './throttle';
 
-import VideoInfo from '../../objects/VideoInfo';
-import SongTS from '../../objects/Song';
+import VideoInfo from '@objects/VideoInfo';
+import SongTS from '@objects/Song';
 import { logger } from '../Logger';
 import bfetch from '../BiliFetch';
 
@@ -29,7 +29,7 @@ const fetchAudioPlayUrlPromise = async (sid: string) => {
     );
     const res = await bfetch(URL_AUDIO_PLAY_URL.replace('{sid}', sid));
     const json = await res.json();
-    return json.data.cdns[0];
+    return json.data.cdns[0] as string;
   } catch (e) {
     logger.error(e);
     throw e;
@@ -108,7 +108,9 @@ const regexFetch = async ({ reExtracted, useBiliTag }: regexFetchProps) => {
   });
 };
 
-const resolveURL = (song: NoxMedia.Song) => fetchAudioPlayUrlPromise(song.bvid);
+const resolveURL = async (song: NoxMedia.Song) => {
+  return { url: await fetchAudioPlayUrlPromise(song.bvid) };
+};
 
 const refreshSong = (song: NoxMedia.Song) => song;
 

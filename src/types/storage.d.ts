@@ -21,6 +21,7 @@ declare namespace NoxStorage {
     dataSaver: boolean;
     fastBiliSearch: boolean;
     noInterruption: boolean;
+    updateLoadedTrack: boolean;
 
     appID: string;
     language?: string;

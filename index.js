@@ -1,4 +1,5 @@
 import './wdyr'; // <--- first import
+import 'react-native-get-random-values';
 import { AppRegistry } from 'react-native';
 import TrackPlayer from 'react-native-track-player';
 import 'react-native-gesture-handler';

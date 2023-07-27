@@ -3,9 +3,9 @@ import TrackPlayer, { RepeatMode } from 'react-native-track-player';
 import { IconButton } from 'react-native-paper';
 
 import { NoxRepeatMode } from './enums/RepeatMode';
-import { useNoxSetting } from '../../hooks/useSetting';
-import noxPlayingList from '../../stores/playingList';
-import { savePlayMode } from '../../utils/ChromeStorage';
+import { useNoxSetting } from '@hooks/useSetting';
+import noxPlayingList from '@stores/playingList';
+import { savePlayMode } from '@utils/ChromeStorage';
 
 const { getState, setState } = noxPlayingList;
 

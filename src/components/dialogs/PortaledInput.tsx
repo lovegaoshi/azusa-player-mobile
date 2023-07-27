@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { TextInput } from 'react-native-paper';
 import { useTranslation } from 'react-i18next';
-import { useNoxSetting } from '../../hooks/useSetting';
+import { useNoxSetting } from '@hooks/useSetting';
 
 interface InputProps {
   defaultName: string;

@@ -10,7 +10,7 @@
  */
 import { regexFetchProps } from './generic';
 import { fetchAwaitPaginatedAPI } from './paginatedfetch';
-import SongTS from '../../objects/Song';
+import SongTS from '@objects/Song';
 
 const pagesize = 500;
 
@@ -61,7 +61,9 @@ const regexFetch = async ({
   return songFetch(await paginatedFetch({ progressEmitter, favList }));
 };
 
-const resolveURL = (song: NoxMedia.Song) => song.id.slice(9);
+const resolveURL = async (song: NoxMedia.Song) => {
+  return { url: song.id.slice(9) };
+};
 
 const refreshSong = (song: NoxMedia.Song) => song;
 

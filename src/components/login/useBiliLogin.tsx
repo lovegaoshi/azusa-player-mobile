@@ -3,12 +3,12 @@ import CookieManager from '@react-native-cookies/cookies';
 import { useTranslation } from 'react-i18next';
 import Snackbar from 'react-native-snackbar';
 
-import { useNoxSetting } from '../../hooks/useSetting';
-import { logger } from '../../utils/Logger';
-import bfetch from '../../utils/BiliFetch';
-import { addCookie } from '../../utils/ChromeStorage';
-import { getLoginStatus } from '../../utils/Login';
-import { throttler } from '../../utils/throttle';
+import { useNoxSetting } from '@hooks/useSetting';
+import { logger } from '@utils/Logger';
+import bfetch from '@utils/BiliFetch';
+import { addCookie } from '@utils/ChromeStorage';
+import { getLoginStatus } from '@utils/Login';
+import { throttler } from '@utils/throttle';
 
 export interface QRCodeReq {
   url: string;
@@ -50,7 +50,6 @@ const loginQRVerification = async () => {
       })
     ),
     json = await res.json();
-  logger.debug(json);
   await Promise.all(
     json.data.sso.map((url: string) =>
       throttler.biliApiLimiter.schedule(async () =>
@@ -124,18 +123,22 @@ const useBiliLogin = () => {
        */
       const json = await response.json();
       logger.debug(
-        `probing QR code login of ${qrcodeKey}, ${JSON.stringify(json)}`
+        `[biliLogin] probing QR code login of ${qrcodeKey}, ${JSON.stringify(
+          json
+        )}`
       );
       if (json.code === 0) {
         // json.status
         const setCookie = response.headers.get('set-cookie');
         if (!setCookie) {
           logger.warn(
-            `no set-cookie header found; res: ${JSON.stringify(json)}`
+            `[biliLogin] no set-cookie header found; res: ${JSON.stringify(
+              json
+            )}`
           );
           return;
         }
-        logger.debug(`setCookie string: ${setCookie}`);
+        logger.debug(`[biliLogin] setCookie string: ${setCookie}`);
         addCookie(domain, setCookie);
         // url, refreshToken, timestamp.
         addCookie(`${domain}.data`, json.data);
@@ -147,16 +150,18 @@ const useBiliLogin = () => {
           try {
             await CookieManager.set(domain, { name: key, value });
           } catch {
-            logger.warn(`${key} and ${value} failed in saving cookie.`);
+            logger.warn(
+              `[biliLogin] ${key} and ${value} failed in saving cookie.`
+            );
           }
         }
-        logger.debug(await CookieManager.get(domain));
+        logger.debug(`[biliLogin] ${await CookieManager.get(domain)}`);
         clearQRLogin();
       }
     } catch (error) {
       // network error; abort qr login attempts
       clearQRLogin();
-      console.error(error);
+      logger.error(`[biliLogin] ${error}`);
       Snackbar.show({
         text: t('Login.BilibiliLoginProbeFailed'),
       });

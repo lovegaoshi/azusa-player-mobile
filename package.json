@@ -41,7 +41,6 @@
     "dropbox": "git+https://lovegaoshi@github.com/lovegaoshi/dropbox-sdk-js.git",
     "expo": "^49.0.0",
     "expo-av": "^13.4.1",
-    "expo-image": "^1.3.2",
     "fflate": "^0.7.4",
     "i18next": "^22.4.15",
     "lru-cache": "7.14.0",
@@ -55,7 +54,9 @@
     "react-native-blob-util": "^0.18.3",
     "react-native-countdown-circle-timer": "^3.2.1",
     "react-native-draggable-flatlist": "^4.0.1",
+    "react-native-fast-image": "^8.6.3",
     "react-native-gesture-handler": "^2.9.0",
+    "react-native-get-random-values": "^1.9.0",
     "react-native-lyric": "^1.0.2",
     "react-native-pager-view": "git+https://github.com/alexhernandez/react-native-pager-view.git#patch-1",
     "react-native-paper": "^5.7.0",
@@ -74,6 +75,7 @@
     "react-native-windows": "^0.65.0-0",
     "react-use": "^17.4.0",
     "use-debounce": "^9.0.4",
+    "uuid": "^9.0.0",
     "ytdl-core": "git+https://lovegaoshi@github.com/lovegaoshi/node-ytdl-core.git",
     "zustand": "^4.3.7"
   },
@@ -102,6 +104,7 @@
     "cpx": "^1.5.0",
     "eslint": "^8.19.0",
     "eslint-config-prettier": "^8.8.0",
+    "eslint-import-resolver-babel-module": "^5.3.2",
     "eslint-plugin-import": "^2.27.5",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-prettier": "^4.2.1",
@@ -127,6 +130,9 @@
       "json",
       "node"
     ]
+  },
+  "engines": {
+    "node": ">=18.0.0"
   },
   "isSwift": true,
   "packageManager": "yarn@1.22.19"

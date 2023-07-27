@@ -9,7 +9,7 @@ import { IconButton } from 'react-native-paper';
 
 import { PlaybackError } from './PlaybackError';
 import { PlayPauseButton } from './PlayPauseButton';
-import { useNoxSetting } from '../../hooks/useSetting';
+import { useNoxSetting } from '@hooks/useSetting';
 import ThumbsUpButton from './ThumbsUpButton';
 import PlayerModeButton from './PlayerModeButton';
 import usePlayerControls from './usePlayerControls';

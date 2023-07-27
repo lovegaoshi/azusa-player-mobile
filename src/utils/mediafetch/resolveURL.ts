@@ -37,17 +37,19 @@ export const ENUMS = {
  * its used as an identifier.
  * @returns promise that resolves the media stream url.
  */
-export const fetchPlayUrlPromise = async (v: NoxMedia.Song) => {
+export const fetchPlayUrlPromise = async (
+  v: NoxMedia.Song
+): Promise<NoxNetwork.ParsedNoxMediaURL> => {
   const bvid = v.bvid;
   const cid = v.id;
   const regexResolveURLs: Array<
-    [RegExp, (song: NoxMedia.Song) => string | Promise<string>]
+    [RegExp, (song: NoxMedia.Song) => Promise<NoxNetwork.ParsedNoxMediaURL>]
   > = [
     [steriatkFetch.regexResolveURLMatch, steriatkFetch.resolveURL],
     [biliaudioFetch.regexResolveURLMatch, biliaudioFetch.resolveURL],
     [ytbvideoFetch.regexResolveURLMatch, ytbvideoFetch.resolveURL],
   ];
-  logger.debug({ bvid, cid });
+  logger.debug(`[resolveURL] ${{ bvid, cid }}`);
   for (const reExtraction of regexResolveURLs) {
     const reExtracted = reExtraction[0].exec(cid);
     if (reExtracted !== null) {
@@ -56,11 +58,12 @@ export const fetchPlayUrlPromise = async (v: NoxMedia.Song) => {
   }
   const cidStr = String(cid);
   if (cidStr.startsWith(ENUMS.audioType)) {
-    return fetchAudioPlayUrlPromise(bvid);
+    return biliaudioFetch.resolveURL(v);
   }
   return fetchVideoPlayUrlPromise(bvid, cidStr);
 };
 
+// TODO: why is this not refactored into bilivideo.ts?
 /**
  * returns the bilibili video stream url given a bvid and cid.
  * @param {string} bvid video's bvid. starts with BV.
@@ -95,27 +98,7 @@ export const fetchVideoPlayUrlPromise = async (
       }
     );
     const json = await res.json();
-    return extractResponseJson(json, extractType);
-  } catch (e) {
-    logger.error(e);
-    throw e;
-  }
-};
-
-/**
- * returns the bilibili audio stream url given a auid/sid.
- * @param {string} bvid audio's auid. starts with AU. eg.
- * https://www.bilibili.com/audio/au745350
- * @returns
- */
-export const fetchAudioPlayUrlPromise = async (sid: string) => {
-  try {
-    logger.debug(
-      `fethcAudioPlayURL:${URL_AUDIO_PLAY_URL.replace('{sid}', sid)}`
-    );
-    const res = await bfetch(URL_AUDIO_PLAY_URL.replace('{sid}', sid));
-    const json = await res.json();
-    return json.data.cdns[0];
+    return { url: extractResponseJson(json, extractType) as string };
   } catch (e) {
     logger.error(e);
     throw e;

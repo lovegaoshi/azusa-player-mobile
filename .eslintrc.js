@@ -27,5 +27,8 @@ module.exports = {
     react: { version: 'detect' },
     // 'import/ignore': ['node_modules/react-native/index\\.js$'], doesnt work anymore..?
     'import/ignore': ['react-native'],
+    'import/resolver': {
+      'babel-module': {},
+    },
   },
 };

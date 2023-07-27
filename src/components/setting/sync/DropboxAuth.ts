@@ -4,7 +4,7 @@ import { authorize } from 'react-native-app-auth';
 import { getArrayBufferForBlob } from 'react-native-blob-jsi-helper';
 
 import { DROPBOX_KEY, DROPBOX_SECRET } from '@env';
-import { logger } from '../../../utils/Logger';
+import { logger } from '@utils/Logger';
 
 const DEFAULT_FILE_NAME = 'nox.noxBackup';
 const DEFAULT_FILE_PATH = `/${DEFAULT_FILE_NAME}`;
@@ -42,7 +42,6 @@ export const getAuth = async (
   errorHandling = logger.error
 ) => {
   const authState = await authorize(config);
-  console.log(authState);
   const dropboxUID = authState.tokenAdditionalParameters?.account_id;
   if (dropboxUID) {
     dbx = new _Dropbox({
@@ -74,7 +73,7 @@ const find = async (query = DEFAULT_FILE_NAME) => {
       .metadata as files.MetadataV2Metadata;
     return fileMetadata.metadata.path_display;
   } catch (e) {
-    console.warn(`no ${query} found.`);
+    logger.warn(`no ${query} found.`);
     return null;
   }
 };
@@ -156,7 +155,7 @@ const checkAuthentication = async () => {
  */
 export const loginDropbox = async (
   callback: () => any = () => undefined,
-  errorCallback = console.error
+  errorCallback = logger.error
 ) => {
   try {
     if (!(await checkAuthentication())) {

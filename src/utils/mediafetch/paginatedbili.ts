@@ -1,4 +1,4 @@
-import { wbiQuery } from '../../stores/wbi';
+import { wbiQuery } from '@stores/wbi';
 import { fetchiliBVIDs } from './bilivideo';
 import {
   fetchPaginatedAPI,

@@ -8,9 +8,9 @@ import {
   checkBVLiked,
   sendBVLike,
   sendBVTriple,
-} from '../../utils/Bilibili/BiliOperate';
-import { useNoxSetting } from '../../hooks/useSetting';
-import { logger } from '../../utils/Logger';
+} from '@utils/Bilibili/BiliOperate';
+import { useNoxSetting } from '@hooks/useSetting';
+import { logger } from '@utils/Logger';
 
 enum THUMBUPSTATUS {
   notLoggedIn = 'web-cancel',
@@ -81,7 +81,7 @@ const ThumbsUpButton = () => {
         return;
       }
       const liked = await checkLiked(track.song);
-      logger.log(`liked: ${liked}`);
+      logger.log(`[biliThumbup] liked: ${liked}`);
       if (liked === undefined) {
         setStatus(THUMBUPSTATUS.notLoggedIn);
       } else if (liked) {
@@ -89,7 +89,6 @@ const ThumbsUpButton = () => {
       } else {
         setStatus(THUMBUPSTATUS.notThumbedUp);
       }
-      console.log('like set');
     };
     setLikedStatus();
   }, [currentPlayingId]);

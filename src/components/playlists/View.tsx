@@ -1,4 +1,4 @@
-import React, { ReactNode, useRef, useState } from 'react';
+import React, { ReactNode, useRef, useState, useEffect } from 'react';
 import { IconButton, Divider, Text, TouchableRipple } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
 import {
@@ -14,10 +14,12 @@ import DraggableFlatList, {
   RenderItemParams,
 } from 'react-native-draggable-flatlist';
 
-import { useNoxSetting } from '../../hooks/useSetting';
-import { ViewEnum } from '../../enums/View';
+import { useNoxSetting } from '@hooks/useSetting';
+import useAAPlayback from '@hooks/useAAPlayback';
+import { usePlaybackListener } from '@hooks/usePlayback';
+import { ViewEnum } from '@enums/View';
 import AddPlaylistButton from '../buttons/AddPlaylistButton';
-import { STORAGE_KEYS } from '../../utils/ChromeStorage';
+import { STORAGE_KEYS } from '@utils/ChromeStorage';
 import NewPlaylistDialog from '../dialogs/NewPlaylistDialog';
 import useAlert from '../dialogs/useAlert';
 import ShuffleAllButton from './ShuffleAllButton';
@@ -122,6 +124,10 @@ export default (props: any) => {
   const removePlaylist = useNoxSetting(state => state.removePlaylist);
   const RenderDrawerItem = useRenderDrawerItem();
   const { TwoWayAlert } = useAlert();
+  // HACK: I know its bad! But somehow this hook isnt updating in its own
+  // useEffects...
+  const { buildBrowseTree } = useAAPlayback();
+  const playbackListeners = usePlaybackListener();
 
   // HACK: tried to make searchList draweritem button as addPlaylistButton, but
   // dialog disposes on textinput focus. created a dialog directly in this component
@@ -177,6 +183,10 @@ export default (props: any) => {
       </ScaleDecorator>
     );
   };
+
+  useEffect(() => {
+    buildBrowseTree();
+  }, [playlistIds.length]);
 
   return (
     <View {...props}>

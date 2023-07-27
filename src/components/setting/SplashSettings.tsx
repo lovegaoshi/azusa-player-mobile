@@ -1,18 +1,9 @@
 import * as React from 'react';
-import {
-  createNativeStackNavigator,
-  NativeStackNavigationProp,
-} from '@react-navigation/native-stack';
 import { Pressable } from 'react-native';
-import { ParamListBase, useNavigation } from '@react-navigation/native';
-import { List, MD3Colors, IconButton, Text } from 'react-native-paper';
-import { DrawerNavigationProp } from '@react-navigation/drawer';
-import { ScrollView } from 'react-native-gesture-handler';
-import { useTranslation } from 'react-i18next';
-import { Image } from 'expo-image';
+import Image from 'react-native-fast-image';
 import { Dimensions } from 'react-native';
 
-import { useNoxSetting } from '../../hooks/useSetting';
+import { useNoxSetting } from '@hooks/useSetting';
 import { localSplashes } from '../background/AppOpenSplash';
 
 const style = {
@@ -33,8 +24,8 @@ export default () => {
     <Pressable onPress={nextImage} style={style}>
       <Image
         source={localSplashes[index]()}
-        contentFit="contain"
         style={style}
+        resizeMode={Image.resizeMode.contain}
       />
     </Pressable>
   );

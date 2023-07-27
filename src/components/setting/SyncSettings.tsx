@@ -4,11 +4,13 @@ import { Button } from 'react-native-paper';
 import { useTranslation } from 'react-i18next';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 
-import { useNoxSetting } from '../../hooks/useSetting';
+import { useNoxSetting } from '@hooks/useSetting';
 import GenericSelectDialog from '../dialogs/GenericSelectDialog';
-import { EXPORT_OPTIONS } from '../../enums/Sync';
+import GenericCheckDialog from '../dialogs/GenericCheckDialog';
+import { EXPORT_OPTIONS } from '@enums/Sync';
 import PersonalSyncButton from './sync/PersonalSyncButton';
 import DropboxSyncButton from './sync/DropboxSyncButton';
+import useSync from './sync/useSync';
 
 const EXPORT_OPTIONS_LIST = [
   // T
@@ -17,14 +19,22 @@ const EXPORT_OPTIONS_LIST = [
   EXPORT_OPTIONS.PERSONAL,
 ];
 
-const SyncButton = ({ location }: { location: EXPORT_OPTIONS }) => {
+interface SyncInterface {
+  location: EXPORT_OPTIONS;
+  restoreFromUint8Array: (data: Uint8Array) => Promise<void>;
+}
+const SyncButton = ({ location, restoreFromUint8Array }: SyncInterface) => {
   switch (location) {
     case EXPORT_OPTIONS.LOCAL:
       return <></>;
     case EXPORT_OPTIONS.DROPBOX:
-      return <DropboxSyncButton />;
+      return (
+        <DropboxSyncButton restoreFromUint8Array={restoreFromUint8Array} />
+      );
     case EXPORT_OPTIONS.PERSONAL:
-      return <PersonalSyncButton />;
+      return (
+        <PersonalSyncButton restoreFromUint8Array={restoreFromUint8Array} />
+      );
     default:
       return <></>;
   }
@@ -40,6 +50,13 @@ export default ({ navigation }: Props) => {
   const playerSetting = useNoxSetting(state => state.playerSetting);
   const setPlayerSetting = useNoxSetting(state => state.setPlayerSetting);
   const [selectVisible, setSelectVisible] = React.useState(false);
+  const {
+    restoreFromUint8Array,
+    syncPartialNoxExtension,
+    syncCheckVisible,
+    setSyncCheckVisible,
+    noxExtensionContent,
+  } = useSync();
 
   const renderOption = (option = playerSetting.settingExportLocation) => {
     switch (option) {
@@ -80,7 +97,10 @@ export default ({ navigation }: Props) => {
           onPress={() => setSelectVisible(true)}
         >{`${t('Sync.ExportLocation')} ${renderOption()}`}</Button>
       </View>
-      <SyncButton location={playerSetting.settingExportLocation}></SyncButton>
+      <SyncButton
+        location={playerSetting.settingExportLocation}
+        restoreFromUint8Array={restoreFromUint8Array}
+      ></SyncButton>
       <GenericSelectDialog
         visible={selectVisible}
         options={currentSelectOption.options}
@@ -89,6 +109,13 @@ export default ({ navigation }: Props) => {
         defaultIndex={currentSelectOption.defaultIndex}
         onClose={currentSelectOption.onClose}
         onSubmit={currentSelectOption.onSubmit}
+      />
+      <GenericCheckDialog
+        visible={syncCheckVisible}
+        title={String(t('Sync.SyncCheck'))}
+        options={noxExtensionContent}
+        onClose={() => setSyncCheckVisible(false)}
+        onSubmit={syncPartialNoxExtension}
       />
     </View>
   );

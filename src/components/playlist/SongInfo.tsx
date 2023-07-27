@@ -6,10 +6,10 @@ import {
   TouchableRipple,
 } from 'react-native-paper';
 import { View, GestureResponderEvent, StyleSheet } from 'react-native';
-import { useNoxSetting } from '../../hooks/useSetting';
-import { seconds2MMSS } from '../../utils/Utils';
-import { PLAYLIST_ENUMS } from '../../enums/Playlist';
-import NoxCache from '../../utils/Cache';
+import { useNoxSetting } from '@hooks/useSetting';
+import { seconds2MMSS } from '@utils/Utils';
+import { PLAYLIST_ENUMS } from '@enums/Playlist';
+import NoxCache from '@utils/Cache';
 
 interface Props {
   item: NoxMedia.Song;

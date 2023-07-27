@@ -4,7 +4,7 @@ import { View, StyleSheet } from 'react-native';
 import Snackbar from 'react-native-snackbar';
 import { useTranslation } from 'react-i18next';
 
-import { useNoxSetting } from '../../hooks/useSetting';
+import { useNoxSetting } from '@hooks/useSetting';
 
 interface props {
   onSearched: (val: any) => void;

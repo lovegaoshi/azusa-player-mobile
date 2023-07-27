@@ -1,6 +1,6 @@
 import Bottleneck from 'bottleneck';
 import { biliApiLimiter } from './throttle';
-import VideoInfo from '../../objects/VideoInfo';
+import VideoInfo from '@objects/VideoInfo';
 import bfetch from '../BiliFetch';
 import logger from '../Logger';
 

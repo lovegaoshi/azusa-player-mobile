@@ -1,6 +1,7 @@
 import { Dimensions } from 'react-native';
-import { Image } from 'expo-image';
-import { randomChoice } from '../../utils/Utils';
+import Image from 'react-native-fast-image';
+
+import { randomChoice } from '@utils/Utils';
 
 export const localSplashes = [
   () => require('../../assets/splash/steria2.jpg'),
@@ -20,7 +21,7 @@ const AppOpenSplash = (props: any) => (
     source={randomSplashes()}
     style={style}
     {...props}
-    contentFit="contain"
+    resizeMode={Image.resizeMode.contain}
   />
 );
 

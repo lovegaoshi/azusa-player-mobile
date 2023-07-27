@@ -1,13 +1,14 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { IconButton, Text, TextInput, ProgressBar } from 'react-native-paper';
+import { IconButton, TextInput, ProgressBar } from 'react-native-paper';
 import { View, StyleSheet } from 'react-native';
 import { useTranslation } from 'react-i18next';
 import ShareMenu, { ShareCallback } from 'react-native-share-menu';
 import { useNavigation } from '@react-navigation/native';
-import { ViewEnum } from '../../enums/View';
+import { ViewEnum } from '@enums/View';
 
-import { searchBiliURLs, matchBiliURL } from '../../utils/BiliSearch';
-import { useNoxSetting } from '../../hooks/useSetting';
+import { searchBiliURLs } from '@utils/BiliSearch';
+import { useNoxSetting } from '@hooks/useSetting';
+import usePlayback from '@hooks/usePlayback';
 
 interface SharedItem {
   mimeType: string;
@@ -33,8 +34,21 @@ export default ({
   const playerSetting = useNoxSetting(state => state.playerSetting);
   const playerStyle = useNoxSetting(state => state.playerStyle);
   const navigationGlobal = useNavigation();
+  const externalSearchText = useNoxSetting(state => state.externalSearchText);
   const [sharedData, setSharedData] = useState<any>(null);
   const [sharedMimeType, setSharedMimeType] = useState<string | null>(null);
+  const { playFromPlaylist } = usePlayback();
+
+  const handleExternalSearch = async (data: string, play = false) => {
+    navigationGlobal.navigate(ViewEnum.PLAYER_PLAYLIST as never);
+    await handleSearch(data, play);
+  };
+
+  useEffect(() => {
+    if (externalSearchText.length > 0) {
+      handleExternalSearch(externalSearchText, true);
+    }
+  }, [externalSearchText]);
 
   const handleShare = useCallback((item?: SharedItem) => {
     if (!item) {
@@ -46,8 +60,7 @@ export default ({
     setSharedData(data);
     setSharedMimeType(mimeType);
     // You can receive extra data from your custom Share View
-    navigationGlobal.navigate(ViewEnum.PLAYER_PLAYLIST as never);
-    handleSearch(data);
+    handleExternalSearch(data);
   }, []);
 
   useEffect(() => {
@@ -64,7 +77,7 @@ export default ({
     };
   }, []);
 
-  const handleSearch = async (val = searchVal) => {
+  const handleSearch = async (val = searchVal, play = false) => {
     progressEmitter(100);
     const searchedResult = (await searchBiliURLs({
       input: val,
@@ -82,6 +95,9 @@ export default ({
     };
     setSearchPlaylist(newSearchPlaylist);
     setCurrentPlaylist(newSearchPlaylist);
+    if (play) {
+      playFromPlaylist(newSearchPlaylist, newSearchPlaylist.songList[0]);
+    }
   };
 
   return (
