@@ -52,6 +52,7 @@ target 'azusa-player-mobile' do
 
   target 'exampleTests' do
     inherit! :complete
+    use_react_native!
     # Pods for testing
   end
 
@@ -64,6 +65,14 @@ target 'azusa-player-mobile' do
       config[:reactNativePath],
       :mac_catalyst_enabled => false
     )
+
+    # only fails in command line!!! ok with xcode GUI!
+    # https://github.com/facebook/react-native/issues/29709
+    installer.pods_project.targets.each do |target|
+      if target.name == "React-Core.common-AccessibilityResources"
+        target.remove_from_project
+      end
+    end
     __apply_Xcode_12_5_M1_post_install_workaround(installer)
   end
 end
