@@ -97,7 +97,7 @@ const ThumbsUpButton = () => {
     <View>
       {svgaVisible && playerStyle.thumbupSVGA && (
         <RNSvgaPlayer
-          style={styles.svgaButton}
+          style={[styles.svgaButton, { zIndex: playerStyle.thumbupZIndex }]}
           source={playerStyle.thumbupSVGA}
           onPercentage={val => {
             if (val > 0.9) setSvgaVisible(false);

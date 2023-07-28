@@ -64,6 +64,7 @@ export const createStyle = (customStyle = AzusaTheme) => {
       customStyle.progressThumbImage) as any,
     biliGarbCard: customStyle.biliGarbCard as any,
     thumbupSVGA: customStyle.thumbupSVGA as any,
+    thumbupZIndex: customStyle.thumbupZIndex as any,
   });
 };
 

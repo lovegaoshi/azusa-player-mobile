@@ -45,6 +45,8 @@ declare namespace NoxTheme {
     biliGarbCard?: string;
     // this is the thumbs up animation in SVGA format. in biligarb this is .thumbup[0].properties.image_ani
     thumbupSVGA?: string;
+    // thumbupSVGA's zIndex. >1 will be in front of the thumb up icon, <1 behind.
+    thumbupZIndex?: number;
   }
 
   export interface coordinates {

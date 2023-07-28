@@ -85,11 +85,11 @@ export default ({
     const songs = [song];
     const newPlaylist = banBVID
       ? {
-          ...currentPlaylist2,
-          blacklistedUrl: currentPlaylist2.blacklistedUrl.concat(
-            songs.map(song => song.bvid)
-          ),
-        }
+        ...currentPlaylist2,
+        blacklistedUrl: currentPlaylist2.blacklistedUrl.concat(
+          songs.map(song => song.bvid)
+        ),
+      }
       : currentPlaylist2;
     updatePlaylist(newPlaylist, [], songs);
     setCurrentPlayingList(newPlaylist);
@@ -112,6 +112,9 @@ export default ({
   const songInfo = () => {
     closeMenu();
   };
+
+  const radioAvailable = () => song?.id?.startsWith(CIDPREFIX);
+
   const startRadio = () => {
     if (song.id.startsWith(CIDPREFIX)) {
       setExternalSearchText(`youtu.be/list=RD${song.bvid}`);
@@ -133,6 +136,12 @@ export default ({
           closeMenu();
           renameSong(rename);
         }}
+      />
+      <Menu.Item
+        leadingIcon={ICONS.RADIO}
+        disabled={!radioAvailable()}
+        onPress={() => startRadio()}
+        title={t('SongOperations.songStartRadio')}
       />
       <Menu.Item
         leadingIcon={ICONS.SEARCH_IN_PLAYLIST}

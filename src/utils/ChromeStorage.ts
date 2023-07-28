@@ -107,7 +107,9 @@ export const saveCachedMediaMapping = async (val: any[]) => {
 };
 
 // we keep the set-cookie header for noxplayer's remove personal search option
+// TODO: security risk. move this to an encrypted storage.
 export const addCookie = async (site: string, setHeader: string) => {
+  return;
   const cookies = (await getItem(STORAGE_KEYS.COOKIES)) || {};
   saveItem(STORAGE_KEYS.COOKIES, { ...cookies, [site]: setHeader });
 };
