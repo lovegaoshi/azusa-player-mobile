@@ -2,8 +2,8 @@ import { Platform } from 'react-native';
 import { useEffect, useState } from 'react';
 import TrackPlayer, {
   Event,
-  RepeatMode,
   State,
+  useActiveTrack,
 } from 'react-native-track-player';
 import { useTranslation } from 'react-i18next';
 
@@ -11,13 +11,6 @@ import { songlistToTracklist } from '../objects/Playlist';
 import { useNoxSetting } from './useSetting';
 import { randomChoice } from '../utils/Utils';
 import logger from '../utils/Logger';
-import { resolveUrl, NULL_TRACK } from '../objects/Song';
-import { initBiliHeartbeat } from '../utils/Bilibili/BiliOperate';
-import NoxCache from '../utils/Cache';
-import noxPlayingList from '../stores/playingList';
-import { NoxRepeatMode } from '../components/player/enums/RepeatMode';
-
-const { getState } = noxPlayingList;
 
 const PLAYLIST_MEDIAID = 'playlist-';
 
@@ -30,25 +23,41 @@ const usePlayback = () => {
   const setCurrentPlayingList = useNoxSetting(
     state => state.setCurrentPlayingList
   );
+  const track = useActiveTrack();
+
+  const clearPlaylistUninterrupted = async () => {
+    const currentQueue = await TrackPlayer.getQueue();
+    const currentTrackIndex = await TrackPlayer.getActiveTrackIndex();
+    if (currentTrackIndex === undefined) return;
+    const removeTrackIndices = [...Array(currentQueue.length).keys()];
+    removeTrackIndices.splice(currentTrackIndex, 1);
+    await TrackPlayer.remove(removeTrackIndices);
+  };
 
   const playFromPlaylist = async (
     playlist: NoxMedia.Playlist,
-    song?: NoxMedia.Song
+    song?: NoxMedia.Song,
+    interruption = false
   ) => {
-    await TrackPlayer.reset();
     setCurrentPlayingList(playlist);
     if (song === undefined) {
       if (playlist.songList.length === 0) {
         // no song exists.
         logger.warn(`[Playback] ${playlist.id} is empty.`);
+        await TrackPlayer.reset();
         return;
       } else {
         song = randomChoice(playlist.songList);
       }
     }
     setCurrentPlayingId(song.id);
-    await TrackPlayer.add(songlistToTracklist([song]));
-    TrackPlayer.play();
+    if (!interruption && track?.song?.id === song.id) {
+      clearPlaylistUninterrupted();
+    } else {
+      await TrackPlayer.reset();
+      await TrackPlayer.add(songlistToTracklist([song]));
+      TrackPlayer.play();
+    }
   };
 
   const playFromMediaId = (mediaId: string) => {
