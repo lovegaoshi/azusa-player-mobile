@@ -9,7 +9,7 @@ import useUpdatePlaylist from '@hooks/useUpdatePlaylist';
 import { songlistToTracklist } from '@objects/Playlist';
 import { CopiedPlaylistMenuItem } from '../../buttons/CopiedPlaylistButton';
 import { RenameSongMenuItem } from '../../buttons/RenameSongButton';
-import { CIDPREFIX } from '@utils/mediafetch/ytbvideo';
+import useSongOperations from '@hooks/useSongOperations';
 import logger from '@utils/Logger';
 
 enum ICONS {
@@ -56,6 +56,7 @@ export default ({
     state => state.setExternalSearchText
   );
   const { updateSongIndex } = useUpdatePlaylist();
+  const { startRadio, radioAvailable } = useSongOperations();
 
   const closeMenu = React.useCallback(() => setSongMenuVisible(false), []);
 
@@ -85,11 +86,11 @@ export default ({
     const songs = [song];
     const newPlaylist = banBVID
       ? {
-        ...currentPlaylist2,
-        blacklistedUrl: currentPlaylist2.blacklistedUrl.concat(
-          songs.map(song => song.bvid)
-        ),
-      }
+          ...currentPlaylist2,
+          blacklistedUrl: currentPlaylist2.blacklistedUrl.concat(
+            songs.map(song => song.bvid)
+          ),
+        }
       : currentPlaylist2;
     updatePlaylist(newPlaylist, [], songs);
     setCurrentPlayingList(newPlaylist);
@@ -113,17 +114,6 @@ export default ({
     closeMenu();
   };
 
-  const radioAvailable = () => song?.id?.startsWith(CIDPREFIX);
-
-  const startRadio = () => {
-    if (song.id.startsWith(CIDPREFIX)) {
-      setExternalSearchText(`youtu.be/list=RD${song.bvid}`);
-    } else {
-      logger.warn(`[startRadio] ${song.bvid} is not a youtube video`);
-    }
-    setSongMenuVisible(false);
-  };
-
   return (
     <Menu visible={songMenuVisible} onDismiss={closeMenu} anchor={menuCoords}>
       <CopiedPlaylistMenuItem
@@ -139,8 +129,11 @@ export default ({
       />
       <Menu.Item
         leadingIcon={ICONS.RADIO}
-        disabled={!radioAvailable()}
-        onPress={() => startRadio()}
+        disabled={!radioAvailable(song)}
+        onPress={() => {
+          startRadio(song);
+          closeMenu();
+        }}
         title={t('SongOperations.songStartRadio')}
       />
       <Menu.Item

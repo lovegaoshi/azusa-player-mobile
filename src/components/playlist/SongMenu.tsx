@@ -6,7 +6,7 @@ import { useTranslation } from 'react-i18next';
 import { useNoxSetting } from '@hooks/useSetting';
 import { CopiedPlaylistMenuItem } from '../buttons/CopiedPlaylistButton';
 import { RenameSongMenuItem } from '../buttons/RenameSongButton';
-import { CIDPREFIX } from '@utils/mediafetch/ytbvideo';
+import useSongOperations from '@hooks/useSongOperations';
 import logger from '@utils/Logger';
 
 enum ICONS {
@@ -46,6 +46,7 @@ export default ({
   const setExternalSearchText = useNoxSetting(
     state => state.setExternalSearchText
   );
+  const { startRadio, radioAvailable } = useSongOperations();
 
   const closeMenu = React.useCallback(() => setSongMenuVisible(false), []);
 
@@ -121,25 +122,6 @@ export default ({
     closeMenu();
   };
 
-  const startRadio = (song?: NoxMedia.Song) => {
-    if (song === undefined) {
-      song = selectedSongs()[0];
-    }
-    if (song.id.startsWith(CIDPREFIX)) {
-      setExternalSearchText(`youtu.be/list=RD${song.bvid}`);
-    } else {
-      logger.warn(`[startRadio] ${song.bvid} is not a youtube video`);
-    }
-    setSongMenuVisible(false);
-  };
-
-  const radioAvailable = (song?: NoxMedia.Song) => {
-    if (song === undefined) {
-      song = selectedSongs()[0];
-    }
-    return song?.id?.startsWith(CIDPREFIX);
-  };
-
   return (
     <Menu visible={songMenuVisible} onDismiss={closeMenu} anchor={menuCoord}>
       <CopiedPlaylistMenuItem
@@ -156,8 +138,11 @@ export default ({
       />
       <Menu.Item
         leadingIcon={ICONS.RADIO}
-        disabled={checking || !radioAvailable()}
-        onPress={() => startRadio()}
+        disabled={checking || !radioAvailable(selectedSongs()[0])}
+        onPress={() => {
+          startRadio(selectedSongs()[0]);
+          closeMenu();
+        }}
         title={t('SongOperations.songStartRadio')}
       />
       <Menu.Item
