@@ -22,7 +22,7 @@ import { PLAYLIST_ENUMS } from '@enums/Playlist';
 import { syncFavlist } from '@utils/Bilibili/bilifavOperate';
 import noxCache, { noxCacheKey } from '@utils/Cache';
 import noxPlayingList from '@stores/playingList';
-import { NoxRepeatMode } from '../player/enums/RepeatMode';
+import { NoxRepeatMode } from '@enums/RepeatMode';
 
 const { getState } = noxPlayingList;
 

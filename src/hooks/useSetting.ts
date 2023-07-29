@@ -6,8 +6,6 @@ import {
   updatePlaylistSongs,
 } from '../objects/Playlist';
 import {
-  DEFAULT_SETTING,
-  STORAGE_KEYS,
   delPlaylist,
   saveFavPlaylist,
   savePlaylist,
@@ -18,6 +16,7 @@ import {
   savePlayerSkins,
   saveLyricMapping,
 } from '../utils/ChromeStorage';
+import { DEFAULT_SETTING, STORAGE_KEYS } from '@enums/Storage';
 import { createStyle } from '../components/style';
 import noxPlayingList, { setPlayingList } from '../stores/playingList';
 import { resolveBackgroundImage } from '../components/background/MainBackground';

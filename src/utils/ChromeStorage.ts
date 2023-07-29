@@ -1,17 +1,15 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { strToU8, strFromU8, compressSync, decompressSync } from 'fflate';
-import { Alert } from 'react-native';
 import { v4 as uuidv4 } from 'uuid';
 
 import { dummyPlaylist, dummyPlaylistList } from '../objects/Playlist';
-import { NoxRepeatMode } from '../components/player/enums/RepeatMode';
+import { NoxRepeatMode } from '../enums/RepeatMode';
 import { PLAYLIST_ENUMS } from '../enums/Playlist';
 import AzusaTheme from '../components/styles/AzusaTheme';
 import { chunkArray as chunkArrayRaw } from '../utils/Utils';
-import { VERSIONS } from '../enums/Version';
-import { EXPORT_OPTIONS } from '../enums/Sync';
 import type { NoxStorage } from '../types/storage';
 import { logger } from './Logger';
+import { STORAGE_KEYS, appID, DEFAULT_SETTING } from '@enums/Storage';
 /**
  * noxplayer's storage handler.
  * ChromeStorage has quite a few changes from azusa player the chrome extension;
@@ -26,50 +24,6 @@ import { logger } from './Logger';
 // see known storage limits:
 // https://react-native-async-storage.github.io/async-storage/docs/limits
 const MAX_SONGLIST_SIZE = 400;
-
-export enum STORAGE_KEYS {
-  PLAYER_SETTING_KEY = 'PlayerSetting',
-  FAVORITE_PLAYLIST_KEY = 'FavFavList-Special',
-  SEARCH_PLAYLIST_KEY = 'SearchPlaylist-Special',
-  LAST_PLAY_LIST = 'LastPlayList',
-  FAVLIST_AUTO_UPDATE_TIMESTAMP = 'favListAutoUpdateTimestamp',
-  MY_FAV_LIST_KEY = 'MyFavList',
-  PLAYMODE_KEY = 'Playmode',
-  SKIN = 'PlayerSkin',
-  SKINSTORAGE = 'PlayerSkinStorage',
-  COOKIES = 'Cookies',
-  LYRIC_MAPPING = 'LyricMapping',
-  LAST_PLAY_DURATION = 'LastPlayDuration',
-  CACHED_MEDIA_MAPPING = 'CachedMediaMapping',
-}
-
-const appID = 'NoxPlayerMobile';
-
-export const DEFAULT_SETTING: NoxStorage.PlayerSettingDict = {
-  autoRSSUpdate: true,
-  skin: '诺莺nox',
-  parseSongName: true,
-  keepSearchedSongListWhenPlaying: false,
-  settingExportLocation: EXPORT_OPTIONS.LOCAL,
-  personalCloudIP: '',
-  personalCloudID: 'azusamobile',
-  noxVersion: VERSIONS.latest,
-  noxCheckedVersion: VERSIONS.latest,
-
-  hideCoverInMobile: false,
-  loadPlaylistAsArtist: false,
-  sendBiliHeartbeat: false,
-  noCookieBiliSearch: false,
-  playerRepeat: NoxRepeatMode.SHUFFLE,
-  dataSaver: false,
-  fastBiliSearch: true,
-  noInterruption: false,
-  updateLoadedTrack: false,
-
-  appID,
-  language: undefined,
-  cacheSize: 1,
-};
 
 export const saveItem = async (key: string, value: any) => {
   try {

@@ -100,7 +100,7 @@ export const fetchVideoPlayUrlPromise = async (
     const json = await res.json();
     return { url: extractResponseJson(json, extractType) as string };
   } catch (e) {
-    logger.error(e);
+    logger.error(`[resolveURL]: ${e}`);
     throw e;
   }
 };
