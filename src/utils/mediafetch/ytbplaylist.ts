@@ -3,6 +3,36 @@ import { fetchAudioInfo, CIDPREFIX } from './ytbvideo';
 import SongTS from '@objects/Song';
 import logger from '../Logger';
 
+const fastYTPlaylistSongResolve = (val: any, data: any) => {
+  try {
+    return [
+      SongTS({
+        cid: `${CIDPREFIX}-${val.playlistVideoRenderer.videoId}`,
+        bvid: val.playlistVideoRenderer.videoId,
+        name: val.playlistVideoRenderer.title.runs[0].text,
+        nameRaw: val.playlistVideoRenderer.title.runs[0].text,
+        singer: val.playlistVideoRenderer.shortBylineText.runs[0].text,
+        singerId:
+          val.playlistVideoRenderer.shortBylineText.runs[0].navigationEndpoint
+            .browseEndpoint.browseId,
+        cover:
+          val.playlistVideoRenderer.thumbnail.thumbnails[
+            val.playlistVideoRenderer.thumbnail.thumbnails.length - 1
+          ].url,
+        lyric: '',
+        page: Number(val.playlistVideoRenderer.index.simpleText),
+        duration: Number(val.playlistVideoRenderer.lengthSeconds),
+        album: data.metadata.playlistMetadataRenderer.title,
+      }),
+    ];
+  } catch (e) {
+    logger.error(
+      `[fastYTPlaylistSongResolve] failed ${e} of ${JSON.stringify(val)}`
+    );
+    return [];
+  }
+};
+
 const fetchYTPlaylist = async (
   playlistId: string,
   progressEmitter: (val: number) => void,
@@ -20,27 +50,11 @@ const fetchYTPlaylist = async (
     }
     const data = JSON.parse(`${ytInitialData[1]}`);
     return data.contents.twoColumnBrowseResultsRenderer.tabs[0].tabRenderer.content.sectionListRenderer.contents[0].itemSectionRenderer.contents[0].playlistVideoListRenderer.contents
-      .map((val: any) => [
-        SongTS({
-          cid: `${CIDPREFIX}-${val.playlistVideoRenderer.videoId}`,
-          bvid: val.playlistVideoRenderer.videoId,
-          name: val.playlistVideoRenderer.title.runs[0].text,
-          nameRaw: val.playlistVideoRenderer.title.runs[0].text,
-          singer: val.playlistVideoRenderer.shortBylineText.runs[0].text,
-          singerId:
-            val.playlistVideoRenderer.shortBylineText.runs[0].navigationEndpoint
-              .browseEndpoint.browseId,
-          cover:
-            val.playlistVideoRenderer.thumbnail.thumbnails[
-              val.playlistVideoRenderer.thumbnail.thumbnails.length - 1
-            ].url,
-          lyric: '',
-          page: Number(val.playlistVideoRenderer.index.simpleText),
-          duration: Number(val.playlistVideoRenderer.lengthSeconds),
-          album: data.metadata.playlistMetadataRenderer.title,
-        }),
-      ])
-      .filter((val: NoxMedia.Song) => !favList.includes(val.bvid));
+      .map((val: any) => fastYTPlaylistSongResolve(val, data))
+      .filter(
+        (val: [NoxMedia.Song] | undefined) =>
+          val && !favList.includes(val[0]?.bvid)
+      );
   } catch (e) {
     logger.error(`[YTPlaylist] fast resolve failed: ${e}`);
     const matchedSet = new Set<string>();
