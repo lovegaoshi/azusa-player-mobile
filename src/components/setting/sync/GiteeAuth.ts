@@ -1,5 +1,5 @@
 import { authorize } from 'react-native-app-auth';
-import { fromByteArray } from 'base64-js';
+import { fromByteArray, toByteArray } from 'base64-js';
 
 import { GITEE_KEY, GITEE_SECRET } from '@env';
 import bfetch from '@utils/BiliFetch';
@@ -155,6 +155,22 @@ export const loginGitee = async (
   }
 };
 
+/**
+ * wraps up find noxplayer setting and download in one function;
+ * returns the JSON object of settting or null if not found.
+ * @returns playerSetting object, or null
+ */
+const noxRestore = async () => {
+  const res = await bfetch(
+    `https://gitee.com/api/v5/repos/${await getUserName()}/${APM_REPO_NAME}/contents/${APM_FILE_NAME}?access_token=${authToken}`
+  );
+  const noxFile = (await res.json()).content;
+  if (!noxFile) {
+    throw new Error('noxfile is not found on dropbox.');
+  }
+  return toByteArray(noxFile);
+};
+
 interface Props {
   restoreFromUint8Array: (data: Uint8Array) => Promise<void>;
 }
@@ -163,7 +179,7 @@ const GiteeSyncButton = ({ restoreFromUint8Array }: Props) =>
   GenericSyncButton({
     restoreFromUint8Array,
     noxBackup,
-    noxRestore: async () => undefined,
+    noxRestore,
     login: loginGitee,
   });
 
