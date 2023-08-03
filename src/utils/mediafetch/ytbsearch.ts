@@ -46,13 +46,8 @@ interface regexFetchProps {
   cookiedSearch?: boolean;
 }
 
-const regexFetch = async ({
-  url,
-  progressEmitter = () => undefined,
-  fastSearch,
-}: regexFetchProps) => {
-  const results = await fetchInnerTuneSearch(url);
-  return results.filter(val => val !== undefined);
+const regexFetch = async ({ url, fastSearch }: regexFetchProps) => {
+  return await fetchInnerTuneSearch(url);
 };
 
 export default {
