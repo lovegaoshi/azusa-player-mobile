@@ -40,7 +40,8 @@ const fetchInnerTunePlaylist = async (
   };
   const playlistData = await get_playlist(
     playlistId,
-    { limit: undefined },
+    // TODO: fix libmuse that limit=0 retrieves all
+    { limit: 999 },
     stopAfter
   );
   return playlistData.tracks
