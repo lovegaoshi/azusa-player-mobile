@@ -9,7 +9,7 @@ import GenericSelectDialog from '../dialogs/GenericSelectDialog';
 import GenericCheckDialog from '../dialogs/GenericCheckDialog';
 import { EXPORT_OPTIONS } from '@enums/Sync';
 import PersonalSyncButton from './sync/PersonalSyncButton';
-import DropboxSyncButton from './sync/DropboxSyncButton';
+import DropboxSyncButton from './sync/DropboxAuth';
 import GiteeSyncButton from './sync/GiteeAuth';
 import useSync from './sync/useSync';
 

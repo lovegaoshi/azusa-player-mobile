@@ -1,3 +1,4 @@
+// TODO: migrate to GenericSyncButton
 import React, { useState } from 'react';
 import Snackbar from 'react-native-snackbar';
 import { View, ActivityIndicator, StyleSheet } from 'react-native';

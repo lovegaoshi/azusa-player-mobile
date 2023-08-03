@@ -4,7 +4,7 @@ import { fromByteArray, toByteArray } from 'base64-js';
 import { GITEE_KEY, GITEE_SECRET } from '@env';
 import bfetch from '@utils/BiliFetch';
 import { logger } from '@utils/Logger';
-import GenericSyncButton from './GenericSyncButton';
+import GenericSyncButton, { GenericProps } from './GenericSyncButton';
 
 const APM_REPO_NAME = 'APMCloudSync';
 const APM_FILE_NAME = 'APM.noxbackup';
@@ -171,11 +171,7 @@ const noxRestore = async () => {
   return toByteArray(noxFile);
 };
 
-interface Props {
-  restoreFromUint8Array: (data: Uint8Array) => Promise<void>;
-}
-
-const GiteeSyncButton = ({ restoreFromUint8Array }: Props) =>
+const GiteeSyncButton = ({ restoreFromUint8Array }: GenericProps) =>
   GenericSyncButton({
     restoreFromUint8Array,
     noxBackup,

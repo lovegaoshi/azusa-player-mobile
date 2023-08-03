@@ -34,6 +34,10 @@ interface Props {
   ) => Promise<boolean>;
 }
 
+export interface GenericProps {
+  restoreFromUint8Array: (data: Uint8Array) => Promise<void>;
+}
+
 const ImportSyncFavButton = ({
   restoreFromUint8Array,
   noxRestore,
