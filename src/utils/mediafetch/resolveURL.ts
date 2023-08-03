@@ -125,9 +125,17 @@ export const fetchCID = async (bvid: string) => {
  * @returns
  */
 const extractResponseJson = (json: any, field: string) => {
+  const getBestBitrate = (data: any[]) =>
+    data.sort((a, b) => a.bandwidth < b.bandwidth)[0];
+
   switch (field) {
     case 'AudioUrl':
-      return json.data.dash.audio[0].baseUrl;
+      if (data.flac?.audio) {
+        return getBestBitrate(data.dash.flac.audio).baseUrl;
+      } else if (data.dolby?.audio) {
+        return getBestBitrate(data.dash.dolby.audio).baseUrl;
+      }
+      return getBestBitrate(data.dash.audio).baseUrl;
     case 'VideoUrl':
       return json.data.dash.video[0].baseUrl;
     case 'CID':
