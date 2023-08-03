@@ -8205,6 +8205,11 @@ jsonfile@^6.0.1:
   optionalDependencies:
     graceful-fs "^4.1.6"
 
+jsonpath-plus@7.2.0:
+  version "7.2.0"
+  resolved "https://registry.npmjs.org/jsonpath-plus/-/jsonpath-plus-7.2.0.tgz#7ad94e147b3ed42f7939c315d2b9ce490c5a3899"
+  integrity sha512-zBfiUPM5nD0YZSBT/o/fbCUlCcepMIdP0CJZxM1+KgA4f2T206f6VAg9e7mX35+KlMaIc5qXW34f3BnwJ3w+RA==
+
 "jsx-ast-utils@^2.4.1 || ^3.0.0":
   version "3.3.5"
   resolved "https://registry.npmjs.org/jsx-ast-utils/-/jsx-ast-utils-3.3.5.tgz#4766bd05a8e2a11af222becd19e15575e52a853a"
@@ -8275,6 +8280,12 @@ levn@^0.4.1:
   dependencies:
     prelude-ls "^1.2.1"
     type-check "~0.4.0"
+
+"libmuse@git+https://github.com/lovegaoshi/muse.git#apm-release":
+  version "0.0.1"
+  resolved "git+https://github.com/lovegaoshi/muse.git#0ea52d3751f8aa3eff0f65b8877db74f519f0828"
+  dependencies:
+    jsonpath-plus "7.2.0"
 
 lightningcss-darwin-arm64@1.19.0:
   version "1.19.0"

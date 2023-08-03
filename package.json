@@ -44,6 +44,7 @@
     "expo-secure-store": "~12.3.1",
     "fflate": "^0.7.4",
     "i18next": "^22.4.15",
+    "libmuse": "git+https://github.com/lovegaoshi/muse.git#apm-release",
     "lru-cache": "7.14.0",
     "md5": "^2.3.0",
     "react": "18.2.0",
