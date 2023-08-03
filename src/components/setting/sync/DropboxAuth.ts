@@ -159,7 +159,7 @@ export const loginDropbox = async (
 ) => {
   try {
     if (!(await checkAuthentication())) {
-      console.debug('dropbox token expired, need to log in');
+      logger.debug('dropbox token expired, need to log in');
       await getAuth(callback, errorCallback);
     } else {
       callback();
