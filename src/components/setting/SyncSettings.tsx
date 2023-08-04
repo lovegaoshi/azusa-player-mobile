@@ -9,7 +9,8 @@ import GenericSelectDialog from '../dialogs/GenericSelectDialog';
 import GenericCheckDialog from '../dialogs/GenericCheckDialog';
 import { EXPORT_OPTIONS } from '@enums/Sync';
 import PersonalSyncButton from './sync/PersonalSyncButton';
-import DropboxSyncButton from './sync/DropboxSyncButton';
+import DropboxSyncButton from './sync/DropboxAuth';
+import GiteeSyncButton from './sync/GiteeAuth';
 import useSync from './sync/useSync';
 
 const EXPORT_OPTIONS_LIST = [
@@ -17,6 +18,7 @@ const EXPORT_OPTIONS_LIST = [
   // EXPORT_OPTIONS.LOCAL,
   EXPORT_OPTIONS.DROPBOX,
   EXPORT_OPTIONS.PERSONAL,
+  EXPORT_OPTIONS.GITEE,
 ];
 
 interface SyncInterface {
@@ -35,6 +37,8 @@ const SyncButton = ({ location, restoreFromUint8Array }: SyncInterface) => {
       return (
         <PersonalSyncButton restoreFromUint8Array={restoreFromUint8Array} />
       );
+    case EXPORT_OPTIONS.GITEE:
+      return <GiteeSyncButton restoreFromUint8Array={restoreFromUint8Array} />;
     default:
       return <></>;
   }
@@ -66,6 +70,8 @@ export default ({ navigation }: Props) => {
         return t('Sync.Dropbox');
       case EXPORT_OPTIONS.PERSONAL:
         return t('Sync.PersonalCloud');
+      case EXPORT_OPTIONS.GITEE:
+        return t('Sync.Gitee');
       default:
         return 'ERROR';
     }

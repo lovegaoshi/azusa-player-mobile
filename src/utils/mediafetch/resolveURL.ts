@@ -100,7 +100,7 @@ export const fetchVideoPlayUrlPromise = async (
     const json = await res.json();
     return { url: extractResponseJson(json, extractType) as string };
   } catch (e) {
-    logger.error(e);
+    logger.error(`[resolveURL]: ${e}`);
     throw e;
   }
 };
@@ -125,9 +125,17 @@ export const fetchCID = async (bvid: string) => {
  * @returns
  */
 const extractResponseJson = (json: any, field: string) => {
+  const getBestBitrate = (data: any[]) =>
+    data.sort((a, b) => b.bandwidth - a.bandwidth)[0];
+
   switch (field) {
     case 'AudioUrl':
-      return json.data.dash.audio[0].baseUrl;
+      if (json.data.flac?.audio) {
+        return getBestBitrate(json.data.dash.flac.audio).baseUrl;
+      } else if (json.data.dolby?.audio) {
+        return getBestBitrate(json.data.dash.dolby.audio).baseUrl;
+      }
+      return getBestBitrate(json.data.dash.audio).baseUrl;
     case 'VideoUrl':
       return json.data.dash.video[0].baseUrl;
     case 'CID':

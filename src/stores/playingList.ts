@@ -1,6 +1,6 @@
 // vanilla store of zustand serving playbackServices.
 import { createStore } from 'zustand/vanilla';
-import { NoxRepeatMode } from '../components/player/enums/RepeatMode';
+import { NoxRepeatMode } from '../enums/RepeatMode';
 
 interface NoxPlaylistStore {
   playingList: Array<NoxMedia.Song>;

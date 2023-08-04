@@ -24,11 +24,11 @@ import MainBackground from './components/background/MainBackground';
 import { useNoxSetting } from './hooks/useSetting';
 import PlaylistDrawer from './components/playlists/View';
 import { ViewEnum } from './enums/View';
-import Settings from './components/setting/View';
+import Settings, { DummySettings } from './components/setting/View';
 import './localization/i18n';
 import AppOpenSplash from './components/background/AppOpenSplash';
-import { DummySettings } from './components/setting/View';
 import AzusaPlayer from './AzusaPlayer';
+import Explore from './components/explore/ytmusic/View';
 
 const { LightTheme, DarkTheme } = adaptNavigationTheme({
   reactNavigationLight: NavigationDefaultTheme,
@@ -144,7 +144,7 @@ const App: React.FC = () => {
                   drawerIcon: () => <IconButton icon="compass" />,
                   title: String(t('appDrawer.exploreScreenName')),
                 }}
-                component={DummySettings}
+                component={Explore}
               />
               <Drawer.Screen
                 name={ViewEnum.SETTINGS}

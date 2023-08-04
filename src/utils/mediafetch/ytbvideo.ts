@@ -29,7 +29,7 @@ const fetchYTBPlayUrlPromise = async (sid: string) => {
       cover: videoDetails.thumbnails[videoDetails.thumbnails.length - 1].url,
     };
   } catch (e) {
-    logger.error(e);
+    logger.error(`[ytbVideoresolve]: ${e}`);
     throw e;
   }
 };

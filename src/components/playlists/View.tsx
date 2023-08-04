@@ -18,7 +18,7 @@ import { useNoxSetting } from '@hooks/useSetting';
 import useAAPlayback from '@hooks/useAAPlayback';
 import { ViewEnum } from '@enums/View';
 import AddPlaylistButton from '../buttons/AddPlaylistButton';
-import { STORAGE_KEYS } from '@utils/ChromeStorage';
+import { STORAGE_KEYS } from '@enums/Storage';
 import NewPlaylistDialog from '../dialogs/NewPlaylistDialog';
 import useAlert from '../dialogs/useAlert';
 import ShuffleAllButton from './ShuffleAllButton';

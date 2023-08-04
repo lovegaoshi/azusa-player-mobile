@@ -4,15 +4,45 @@ import { View, ActivityIndicator, StyleSheet } from 'react-native';
 import { IconButton } from 'react-native-paper';
 import { useTranslation } from 'react-i18next';
 
-import { loginDropbox, noxBackup, noxRestore } from './DropboxAuth';
 import { logger } from '@utils/Logger';
 import { exportPlayerContent } from '@utils/ChromeStorage';
 
+interface ImportProps {
+  restoreFromUint8Array: (data: Uint8Array) => Promise<void>;
+  noxRestore: () => Promise<any>;
+  login: (
+    callback: () => any,
+    errorHandling: (e: Error) => void
+  ) => Promise<boolean>;
+}
+
+interface ExportProps {
+  noxBackup: (content: Uint8Array) => Promise<any>;
+  login: (
+    callback: () => any,
+    errorHandling: (e: Error) => void
+  ) => Promise<boolean>;
+}
+
 interface Props {
+  restoreFromUint8Array: (data: Uint8Array) => Promise<void>;
+  noxRestore: () => Promise<any>;
+  noxBackup: (content: Uint8Array) => Promise<any>;
+  login: (
+    callback: () => any,
+    errorHandling: (e: Error) => void
+  ) => Promise<boolean>;
+}
+
+export interface GenericProps {
   restoreFromUint8Array: (data: Uint8Array) => Promise<void>;
 }
 
-const ImportSyncFavButton = ({ restoreFromUint8Array }: Props) => {
+const ImportSyncFavButton = ({
+  restoreFromUint8Array,
+  noxRestore,
+  login,
+}: ImportProps) => {
   const { t } = useTranslation();
   const [loading, setLoading] = useState(false);
 
@@ -40,7 +70,7 @@ const ImportSyncFavButton = ({ restoreFromUint8Array }: Props) => {
 
   const loginAndDownload = async () => {
     setLoading(true);
-    await loginDropbox(cloudDownload, errorHandling);
+    await login(cloudDownload, errorHandling);
   };
 
   return loading ? (
@@ -55,7 +85,7 @@ const ImportSyncFavButton = ({ restoreFromUint8Array }: Props) => {
   );
 };
 
-const ExportSyncFavButton = () => {
+const ExportSyncFavButton = ({ noxBackup, login }: ExportProps) => {
   const { t } = useTranslation();
   const [loading, setLoading] = useState(false);
 
@@ -72,7 +102,7 @@ const ExportSyncFavButton = () => {
     setLoading(true);
     const exportedDict = await exportPlayerContent();
     const response = await noxBackup(exportedDict);
-    if (response.status === 200) {
+    if ([200, 201].includes(response.status)) {
       Snackbar.show({ text: t('Sync.DropboxUploadSuccess') });
     } else {
       errorHandling(new Error(String(response.status)));
@@ -83,7 +113,7 @@ const ExportSyncFavButton = () => {
 
   const loginAndUpload = async () => {
     setLoading(true);
-    await loginDropbox(cloudUpload, errorHandling);
+    await login(cloudUpload, errorHandling);
   };
 
   return loading ? (
@@ -98,12 +128,21 @@ const ExportSyncFavButton = () => {
   );
 };
 
-export default ({ restoreFromUint8Array }: Props) => {
+export default ({
+  restoreFromUint8Array,
+  login,
+  noxBackup,
+  noxRestore,
+}: Props) => {
   return (
     <View style={styles.container}>
-      <ImportSyncFavButton restoreFromUint8Array={restoreFromUint8Array} />
+      <ImportSyncFavButton
+        restoreFromUint8Array={restoreFromUint8Array}
+        login={login}
+        noxRestore={noxRestore}
+      />
       <View style={styles.spacing}></View>
-      <ExportSyncFavButton />
+      <ExportSyncFavButton login={login} noxBackup={noxBackup} />
     </View>
   );
 };

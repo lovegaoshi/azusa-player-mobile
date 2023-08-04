@@ -11,7 +11,7 @@ import { saveLastPlayDuration } from '../utils/ChromeStorage';
 import logger from '../utils/Logger';
 import NoxCache from '../utils/Cache';
 import noxPlayingList from '../stores/playingList';
-import { NoxRepeatMode } from '../components/player/enums/RepeatMode';
+import { NoxRepeatMode } from '../enums/RepeatMode';
 
 const { getState } = noxPlayingList;
 let lastBiliHeartBeat: string[] = ['', ''];

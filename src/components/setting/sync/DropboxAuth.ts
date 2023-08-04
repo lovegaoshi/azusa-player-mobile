@@ -5,6 +5,7 @@ import { getArrayBufferForBlob } from 'react-native-blob-jsi-helper';
 
 import { DROPBOX_KEY, DROPBOX_SECRET } from '@env';
 import { logger } from '@utils/Logger';
+import GenericSyncButton, { GenericProps } from './GenericSyncButton';
 
 const DEFAULT_FILE_NAME = 'nox.noxBackup';
 const DEFAULT_FILE_PATH = `/${DEFAULT_FILE_NAME}`;
@@ -159,7 +160,7 @@ export const loginDropbox = async (
 ) => {
   try {
     if (!(await checkAuthentication())) {
-      console.debug('dropbox token expired, need to log in');
+      logger.debug('dropbox token expired, need to log in');
       await getAuth(callback, errorCallback);
     } else {
       callback();
@@ -170,3 +171,13 @@ export const loginDropbox = async (
     return false;
   }
 };
+
+const DropboxSyncButton = ({ restoreFromUint8Array }: GenericProps) =>
+  GenericSyncButton({
+    restoreFromUint8Array,
+    noxBackup,
+    noxRestore,
+    login: loginDropbox,
+  });
+
+export default DropboxSyncButton;

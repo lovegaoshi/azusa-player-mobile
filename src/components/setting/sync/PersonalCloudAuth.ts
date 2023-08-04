@@ -13,6 +13,8 @@
 import axios from 'axios';
 import { PERSONAL_CLOUD_SECRET } from '@env';
 
+import { logger } from '@utils/Logger';
+
 /**
  * a simple personal cloud built with fastAPI. uses the current bili user
  * as "authentication." returns the currently logged in bilibili username.
@@ -24,8 +26,8 @@ export const getBiliUser = async () => {
     const res = await val.json();
     return res.data;
   } catch (e) {
-    console.error(
-      'failed to get bilibili login info. returning an empty dict instead.'
+    logger.error(
+      '[personalSync] failed to get bilibili login info. returning an empty dict instead.'
     );
     return { uname: '' };
   }
@@ -70,7 +72,7 @@ export const noxRestore = async (cloudAddress: string, cloudID?: string) => {
      * 
      */
   } catch (e) {
-    console.error(e);
+    logger.error(e);
   }
   return null;
 };
@@ -88,7 +90,7 @@ export const noxBackup = async (
   cloudID?: string
 ) => {
   try {
-    console.log(cloudAddress);
+    logger.debug(`[personalSync] syncing to ${cloudAddress}`);
     return await fetch(`${cloudAddress}upload`, {
       method: 'POST',
       headers: {
