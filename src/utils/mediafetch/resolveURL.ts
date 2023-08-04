@@ -125,8 +125,8 @@ export const fetchCID = async (bvid: string) => {
  * @returns
  */
 const extractResponseJson = (json: any, field: string) => {
-  const getBestBitrate = (data: any[]) => 
-    data.sort((a, b) => a.bandwidth < b.bandwidth)[0];
+  const getBestBitrate = (data: any[]) =>
+    data.sort((a, b) => b.bandwidth - a.bandwidth)[0];
 
   switch (field) {
     case 'AudioUrl':
