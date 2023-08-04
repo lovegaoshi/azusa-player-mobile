@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { IconButton, TextInput, ProgressBar } from 'react-native-paper';
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, GestureResponderEvent } from 'react-native';
 import { useTranslation } from 'react-i18next';
 import ShareMenu, { ShareCallback } from 'react-native-share-menu';
 import { useNavigation } from '@react-navigation/native';
@@ -9,6 +9,8 @@ import { ViewEnum } from '@enums/View';
 import { searchBiliURLs } from '@utils/BiliSearch';
 import { useNoxSetting } from '@hooks/useSetting';
 import usePlayback from '@hooks/usePlayback';
+import SearchMenu from './SearchMenu';
+import { loadDefaultSearch } from '@utils/ChromeStorage';
 
 interface SharedItem {
   mimeType: string;
@@ -41,6 +43,23 @@ export default ({
   const [sharedData, setSharedData] = useState<any>(null);
   const [sharedMimeType, setSharedMimeType] = useState<string | null>(null);
   const { playFromPlaylist } = usePlayback();
+  const [dialogOpen, setDialogOpen] = useState(false);
+  const [menuCoords, setMenuCoords] = useState<NoxTheme.coordinates>({
+    x: 0,
+    y: 0,
+  });
+
+  const handleMenuPress = (event: GestureResponderEvent) => {
+    setDialogOpen(true);
+    setMenuCoords({
+      x: event.nativeEvent.pageX,
+      y: event.nativeEvent.pageY,
+    });
+  };
+
+  const toggleVisible = () => {
+    setDialogOpen(val => !val);
+  };
 
   const handleExternalSearch = async (data: string, play = false) => {
     navigationGlobal.navigate(ViewEnum.PLAYER_PLAYLIST as never);
@@ -89,6 +108,7 @@ export default ({
       favList: [],
       useBiliTag: false,
       fastSearch: playerSetting.fastBiliSearch,
+      defaultSearch: await loadDefaultSearch(),
     })) as Array<NoxMedia.Song>;
     onSearched(searchedResult);
     const newSearchPlaylist = {
@@ -116,7 +136,7 @@ export default ({
           style={styles.textInput}
           label={String(t('BiliSearchBar.label'))}
           value={searchVal}
-          onChangeText={val => setSearchVal(val)}
+          onChangeText={setSearchVal}
           onSubmitEditing={() => handleSearch(searchVal)}
           selectTextOnFocus
           selectionColor={playerStyle.customColors.textInputSelectionColor}
@@ -125,7 +145,13 @@ export default ({
         <IconButton
           icon="search-web"
           onPress={() => handleSearch(searchVal)}
+          onLongPress={handleMenuPress}
           size={30}
+        />
+        <SearchMenu
+          visible={dialogOpen}
+          toggleVisible={toggleVisible}
+          menuCoords={menuCoords}
         />
       </View>
       <ProgressBar

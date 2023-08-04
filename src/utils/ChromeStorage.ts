@@ -9,7 +9,12 @@ import AzusaTheme from '../components/styles/AzusaTheme';
 import { chunkArray as chunkArrayRaw } from '../utils/Utils';
 import type { NoxStorage } from '../types/storage';
 import { logger } from './Logger';
-import { STORAGE_KEYS, appID, DEFAULT_SETTING } from '@enums/Storage';
+import {
+  STORAGE_KEYS,
+  appID,
+  DEFAULT_SETTING,
+  SEARCH_OPTIONS,
+} from '@enums/Storage';
 /**
  * noxplayer's storage handler.
  * ChromeStorage has quite a few changes from azusa player the chrome extension;
@@ -50,6 +55,16 @@ export const removeItem = async (key: string) => {
   } catch (e) {
     console.warn(e);
   }
+};
+
+export const loadDefaultSearch = async (): Promise<SEARCH_OPTIONS> => {
+  return (
+    (await getItem(STORAGE_KEYS.DEFAULT_SEARCH)) || SEARCH_OPTIONS.BILIBILI
+  );
+};
+
+export const saveDefaultSearch = async (val: SEARCH_OPTIONS) => {
+  return await saveItem(STORAGE_KEYS.DEFAULT_SEARCH, val);
 };
 
 export const loadCachedMediaMapping = async () => {

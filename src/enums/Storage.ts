@@ -17,6 +17,12 @@ export enum STORAGE_KEYS {
   LYRIC_MAPPING = 'LyricMapping',
   LAST_PLAY_DURATION = 'LastPlayDuration',
   CACHED_MEDIA_MAPPING = 'CachedMediaMapping',
+  DEFAULT_SEARCH = 'defaultSearch',
+}
+
+export enum SEARCH_OPTIONS {
+  BILIBILI = 'bilibili',
+  YOUTUBE = 'youtube',
 }
 
 export const appID = 'NoxPlayerMobile';

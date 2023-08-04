@@ -1,5 +1,6 @@
 import { logger } from './Logger';
 
+import { SEARCH_OPTIONS } from '@enums/Storage';
 import steriatkFetch from './mediafetch/steriatk';
 import bilivideoFetch from './mediafetch/bilivideo';
 import biliseriesFetch from './mediafetch/biliseries';
@@ -12,6 +13,7 @@ import bilichannelAudioFetch from '../utils/mediafetch/bilichannelAudio';
 import ytbvideoFetch from './mediafetch/ytbvideo';
 import ytbplaylistFetch from './mediafetch/ytbplaylist';
 import ytbmixlistFetch from './mediafetch/ytbmixlist';
+import ytbsearchFetch from './mediafetch/ytbsearch';
 import { regexFetchProps } from './mediafetch/generic';
 
 /**
@@ -25,6 +27,7 @@ interface Props {
   useBiliTag?: boolean;
   fastSearch?: boolean;
   cookiedSearch?: boolean;
+  defaultSearch?: SEARCH_OPTIONS;
 }
 
 export const matchBiliURL = (input: string) => {
@@ -62,6 +65,7 @@ export const searchBiliURLs = async ({
   useBiliTag = false,
   fastSearch = false,
   cookiedSearch = false,
+  defaultSearch = SEARCH_OPTIONS.BILIBILI,
 }: Props) => {
   try {
     const matchRegex = matchBiliURL(input);
@@ -74,13 +78,25 @@ export const searchBiliURLs = async ({
       });
       progressEmitter(0);
       return results;
+    } // bilisearchFetch
+    let results;
+    switch (defaultSearch) {
+      case SEARCH_OPTIONS.YOUTUBE:
+        results = await ytbsearchFetch.regexFetch({
+          url: input,
+          progressEmitter,
+          fastSearch,
+          cookiedSearch,
+        });
+        break;
+      default:
+        results = await bilisearchFetch.regexFetch({
+          url: input,
+          progressEmitter,
+          fastSearch,
+          cookiedSearch,
+        });
     }
-    const results = await bilisearchFetch.regexFetch({
-      url: input,
-      progressEmitter,
-      fastSearch,
-      cookiedSearch,
-    });
     progressEmitter(0);
     return results;
   } catch (err) {
