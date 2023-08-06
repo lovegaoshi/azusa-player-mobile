@@ -11,9 +11,10 @@ import {
 import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
 import { Lyric } from 'react-native-lyric';
 import { Track, useProgress } from 'react-native-track-player';
+import { IconButton, TextInput } from 'react-native-paper';
+
 import { searchLyricOptions, searchLyric } from '@utils/Data';
 import { reExtractSongName } from '@utils/re';
-import { IconButton, TextInput } from 'react-native-paper';
 import { useNoxSetting } from '@hooks/useSetting';
 import logger from '@utils/Logger';
 
@@ -54,12 +55,23 @@ export const ModalContainer: React.FC<ModalContainerProps> = ({
   );
 };
 
+interface LyricViewProps {
+  currentTime?: number;
+  onLyricPress: () => void;
+  track: Track;
+  artist: string;
+  height?: number;
+  showUI?: boolean;
+}
+
 export const LyricView = ({
   currentTime,
   onLyricPress,
   track,
   artist,
-}: any) => {
+  height,
+  showUI = true,
+}: LyricViewProps) => {
   const { position, duration } = useProgress();
   const [lrc, setLrc] = useState('正在加载歌词...');
   const [lrcOptions, setLrcOptions] = useState<any[]>([]);
@@ -120,6 +132,7 @@ export const LyricView = ({
   };
 
   const fetchAndSetLyricOptions = async (adhocTitle?: string) => {
+    if (track.title === undefined) return;
     try {
       let titleToFetch = adhocTitle === undefined ? track.title : adhocTitle;
       if (adhocTitle !== undefined)
@@ -184,103 +197,112 @@ export const LyricView = ({
           currentTime={(position + currentTimeOffset) * 1000}
           lineHeight={32}
           lineRenderer={lineRenderer}
+          height={height}
         />
       </TouchableWithoutFeedback>
-      <View style={styles.optionsButton}>
-        <IconButton
-          icon="more"
-          onPress={() => setModalVisible(!modalVisible)}
-        />
-      </View>
-      <ModalContainer
-        visible={modalVisible}
-        onRequestClose={() => setModalVisible(false)}
-      >
-        <View
-          style={[
-            styles.modalHeader,
-            { backgroundColor: playerStyle.colors.primary },
-          ]}
-        >
-          <Text style={styles.headerText}>更多</Text>
-          <TouchableOpacity onPress={() => setModalVisible(false)}>
-            <IconButton icon="chevron-down" />
-          </TouchableOpacity>
-        </View>
-        <FlatList
-          data={[
-            { key: 'LyricOptions', title: '更换歌词' },
-            { key: 'LyricOffset', title: '歌词时间调整' },
-          ]}
-          renderItem={({ item }) => (
-            <TouchableOpacity onPress={() => LyricOptions(item.key)}>
-              <Text style={styles.listItem}>{item.title}</Text>
-            </TouchableOpacity>
-          )}
-          keyExtractor={item => item.key}
-        />
-      </ModalContainer>
+      {showUI && (
+        <>
+          <View style={styles.optionsButton}>
+            <IconButton
+              icon="more"
+              onPress={() => setModalVisible(!modalVisible)}
+            />
+          </View>
+          <ModalContainer
+            visible={modalVisible}
+            onRequestClose={() => setModalVisible(false)}
+          >
+            <View
+              style={[
+                styles.modalHeader,
+                { backgroundColor: playerStyle.colors.primary },
+              ]}
+            >
+              <Text style={styles.headerText}>更多</Text>
+              <TouchableOpacity onPress={() => setModalVisible(false)}>
+                <IconButton icon="chevron-down" />
+              </TouchableOpacity>
+            </View>
+            <FlatList
+              data={[
+                { key: 'LyricOptions', title: '更换歌词' },
+                { key: 'LyricOffset', title: '歌词时间调整' },
+              ]}
+              renderItem={({ item }) => (
+                <TouchableOpacity onPress={() => LyricOptions(item.key)}>
+                  <Text style={styles.listItem}>{item.title}</Text>
+                </TouchableOpacity>
+              )}
+              keyExtractor={item => item.key}
+            />
+          </ModalContainer>
 
-      <ModalContainer
-        visible={lyricSearchModalVisible}
-        onRequestClose={() => setLyricSearchModalVisible(false)}
-      >
-        <View
-          style={[
-            styles.modalHeader,
-            { backgroundColor: playerStyle.colors.primary },
-          ]}
-        >
-          <Text style={styles.headerText}>歌词搜索</Text>
-          <TouchableOpacity onPress={() => setLyricSearchModalVisible(false)}>
-            <IconButton icon="chevron-down" />
-          </TouchableOpacity>
-        </View>
-        <TextInput
-          style={styles.searchBar}
-          value={searchText}
-          onChangeText={setSearchText}
-          placeholder={track === undefined ? '' : track.title}
-          onSubmitEditing={() => fetchAndSetLyricOptions(searchText)}
-          selectionColor={playerStyle.customColors.textInputSelectionColor}
-          textColor={playerStyle.colors.text}
-        />
-        <FlatList
-          data={lrcOptions}
-          renderItem={({ item, index }) => (
-            <TouchableOpacity onPress={() => searchAndSetCurrentLyric(index)}>
-              <Text style={styles.listItem}>{item.label}</Text>
-            </TouchableOpacity>
-          )}
-          keyExtractor={item => item.key}
-        />
-      </ModalContainer>
+          <ModalContainer
+            visible={lyricSearchModalVisible}
+            onRequestClose={() => setLyricSearchModalVisible(false)}
+          >
+            <View
+              style={[
+                styles.modalHeader,
+                { backgroundColor: playerStyle.colors.primary },
+              ]}
+            >
+              <Text style={styles.headerText}>歌词搜索</Text>
+              <TouchableOpacity
+                onPress={() => setLyricSearchModalVisible(false)}
+              >
+                <IconButton icon="chevron-down" />
+              </TouchableOpacity>
+            </View>
+            <TextInput
+              style={styles.searchBar}
+              value={searchText}
+              onChangeText={setSearchText}
+              placeholder={track === undefined ? '' : track.title}
+              onSubmitEditing={() => fetchAndSetLyricOptions(searchText)}
+              selectionColor={playerStyle.customColors.textInputSelectionColor}
+              textColor={playerStyle.colors.text}
+            />
+            <FlatList
+              data={lrcOptions}
+              renderItem={({ item, index }) => (
+                <TouchableOpacity
+                  onPress={() => searchAndSetCurrentLyric(index)}
+                >
+                  <Text style={styles.listItem}>{item.label}</Text>
+                </TouchableOpacity>
+              )}
+              keyExtractor={item => item.key}
+            />
+          </ModalContainer>
 
-      <Modal
-        animationType="fade"
-        transparent={true}
-        visible={offsetModalVisible}
-        onRequestClose={() => setOffsetModalVisible(false)}
-      >
-        <View style={styles.offsetModalView}>
-          <Button
-            title="+"
-            onPress={() => addSubtractOffset(true)}
-            color={playerStyle.colors.primary}
-          />
-          <Text style={styles.lyricOffsetText}>{currentTimeOffset}</Text>
-          <Button
-            title="-"
-            onPress={() => addSubtractOffset(false)}
-            color={playerStyle.colors.primary}
-          />
-          <Button
-            title="X"
-            onPress={() => setOffsetModalVisible(false)}
-            color={playerStyle.colors.primary}
-          />
-        </View>
-      </Modal>
+          <Modal
+            animationType="fade"
+            transparent={true}
+            visible={offsetModalVisible}
+            onRequestClose={() => setOffsetModalVisible(false)}
+          >
+            <View style={styles.offsetModalView}>
+              <Button
+                title="+"
+                onPress={() => addSubtractOffset(true)}
+                color={playerStyle.colors.primary}
+              />
+              <Text style={styles.lyricOffsetText}>{currentTimeOffset}</Text>
+              <Button
+                title="-"
+                onPress={() => addSubtractOffset(false)}
+                color={playerStyle.colors.primary}
+              />
+              <Button
+                title="X"
+                onPress={() => setOffsetModalVisible(false)}
+                color={playerStyle.colors.primary}
+              />
+            </View>
+          </Modal>
+        </>
+      )}
     </View>
   );
 };

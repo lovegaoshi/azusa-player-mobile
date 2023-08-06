@@ -5,4 +5,5 @@ export enum ViewEnum {
   PLAYER_PLAYLIST = 'NoxPlaylist',
   USER_LOGIN = 'NoxLogin',
   EXPORE = 'NoxExplore',
+  LYRICS = 'NoxLyrics',
 }
