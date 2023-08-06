@@ -87,7 +87,9 @@ export const TrackInfo: React.FC<{
           ]}
           pointerEvents={isImageVisible ? 'none' : 'auto'}
         >
-          <LyricView onLyricPress={onImagePress} track={track} />
+          {track && (
+            <LyricView onLyricPress={onImagePress} track={track} artist="n/a" />
+          )}
         </View>
       </>
       <Text style={[styles.titleText, { color: playerStyle.colors.primary }]}>
