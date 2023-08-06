@@ -11,9 +11,12 @@ import { saveLastPlayDuration } from '../utils/ChromeStorage';
 import logger from '../utils/Logger';
 import NoxCache from '../utils/Cache';
 import noxPlayingList from '../stores/playingList';
+import appStore from '@stores/appStore';
 import { NoxRepeatMode } from '../enums/RepeatMode';
+import { DeviceEventEmitter } from 'react-native';
 
 const { getState } = noxPlayingList;
+const { setState } = appStore;
 let lastBiliHeartBeat: string[] = ['', ''];
 
 export async function AdditionalPlaybackService({
@@ -40,6 +43,10 @@ export async function AdditionalPlaybackService({
 }
 
 export async function PlaybackService() {
+  DeviceEventEmitter.addListener('APMEnterPIP', (e: boolean) =>
+    setState({ pipMode: e })
+  );
+
   TrackPlayer.addEventListener(Event.RemotePause, () => {
     console.log('Event.RemotePause');
     TrackPlayer.pause();

@@ -16,7 +16,6 @@ import {
 } from 'react-native-paper';
 import merge from 'deepmerge';
 import { useTranslation } from 'react-i18next';
-
 import { useSetupPlayer, Player } from './components/player/View';
 import Playlist from './components/playlist/View';
 import PlayerBottomPanel from './components/player/PlayerProgressControls';
@@ -29,6 +28,7 @@ import './localization/i18n';
 import AppOpenSplash from './components/background/AppOpenSplash';
 import AzusaPlayer from './AzusaPlayer';
 import Explore from './components/explore/ytmusic/View';
+import PIPLyricView from './components/player/PIPLyric';
 
 const { LightTheme, DarkTheme } = adaptNavigationTheme({
   reactNavigationLight: NavigationDefaultTheme,
@@ -154,6 +154,15 @@ const App: React.FC = () => {
                   header: () => null,
                 }}
                 component={Settings}
+              />
+              <Drawer.Screen
+                name={ViewEnum.LYRICS}
+                options={{
+                  drawerIcon: () => <IconButton icon="cog" />,
+                  title: String(t('appDrawer.settingScreenName')),
+                  header: () => null,
+                }}
+                component={PIPLyricView}
               />
             </Drawer.Navigator>
           </NavigationContainer>

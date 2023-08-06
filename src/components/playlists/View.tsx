@@ -1,6 +1,6 @@
 import React, { ReactNode, useRef, useState, useEffect } from 'react';
 import { IconButton, Divider, Text, TouchableRipple } from 'react-native-paper';
-import { useNavigation } from '@react-navigation/native';
+import { DrawerActions, useNavigation } from '@react-navigation/native';
 import {
   Pressable,
   Dimensions,
@@ -13,6 +13,7 @@ import DraggableFlatList, {
   ScaleDecorator,
   RenderItemParams,
 } from 'react-native-draggable-flatlist';
+import { useStore } from 'zustand';
 
 import { useNoxSetting } from '@hooks/useSetting';
 import useAAPlayback from '@hooks/useAAPlayback';
@@ -23,6 +24,7 @@ import NewPlaylistDialog from '../dialogs/NewPlaylistDialog';
 import useAlert from '../dialogs/useAlert';
 import ShuffleAllButton from './ShuffleAllButton';
 import TimerButton from './TimerButton';
+import appStore from '@stores/appStore';
 
 const useRenderDrawerItem = () => {
   const navigation = useNavigation();
@@ -126,6 +128,7 @@ export default (props: any) => {
   // HACK: I know its bad! But somehow this hook isnt updating in its own
   // useEffects...
   const { buildBrowseTree } = useAAPlayback();
+  const PIPMode = useStore(appStore, state => state.pipMode);
 
   // HACK: tried to make searchList draweritem button as addPlaylistButton, but
   // dialog disposes on textinput focus. created a dialog directly in this component
@@ -186,7 +189,18 @@ export default (props: any) => {
     buildBrowseTree();
   }, [playlistIds.length]);
 
-  return (
+  useEffect(() => {
+    if (PIPMode) {
+      navigation.navigate(ViewEnum.LYRICS as never);
+      navigation.dispatch(DrawerActions.closeDrawer());
+    } else {
+      navigation.goBack();
+    }
+  }, [PIPMode]);
+
+  return PIPMode ? (
+    <></>
+  ) : (
     <View {...props}>
       <View style={styles.topPadding} />
       <BiliCard backgroundURI={playerStyle.biliGarbCard}>
