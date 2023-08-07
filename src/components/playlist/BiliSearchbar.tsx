@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { IconButton, TextInput, ProgressBar } from 'react-native-paper';
+import { ProgressBar, Searchbar } from 'react-native-paper';
 import { View, StyleSheet, GestureResponderEvent } from 'react-native';
 import { useTranslation } from 'react-i18next';
 import ShareMenu, { ShareCallback } from 'react-native-share-menu';
@@ -126,27 +126,16 @@ export default ({
 
   return (
     <View style={styles.container}>
-      <View
-        style={[
-          styles.searchContainer,
-          { backgroundColor: playerStyle.colors.surfaceVariant },
-        ]}
-      >
-        <TextInput
-          style={styles.textInput}
-          label={String(t('BiliSearchBar.label'))}
+      <View style={styles.searchContainer}>
+        <Searchbar
+          placeholder={String(t('BiliSearchBar.label'))}
           value={searchVal}
           onChangeText={setSearchVal}
           onSubmitEditing={() => handleSearch(searchVal)}
           selectTextOnFocus
+          style={styles.textInput}
           selectionColor={playerStyle.customColors.textInputSelectionColor}
-          textColor={playerStyle.colors.text}
-        />
-        <IconButton
-          icon="search-web"
-          onPress={() => handleSearch(searchVal)}
-          onLongPress={handleMenuPress}
-          size={30}
+          onIconPress={handleMenuPress}
         />
         <SearchMenu
           visible={dialogOpen}
@@ -157,6 +146,7 @@ export default ({
       <ProgressBar
         progress={Math.max(searchProgress, 0)}
         indeterminate={searchProgress === 1}
+        style={styles.progressBar}
       />
     </View>
   );
@@ -174,4 +164,5 @@ const styles = StyleSheet.create({
   textInput: {
     flex: 5,
   },
+  progressBar: { backgroundColor: 'rgba(0, 0, 0, 0)' },
 });

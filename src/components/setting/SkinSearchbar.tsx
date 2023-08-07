@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { IconButton, Text, TextInput, ProgressBar } from 'react-native-paper';
+import { Searchbar, ProgressBar } from 'react-native-paper';
 import { View, StyleSheet } from 'react-native';
 import Snackbar from 'react-native-snackbar';
 import { useTranslation } from 'react-i18next';
@@ -20,7 +20,7 @@ const CustomSkinSearch = ({
   const playerStyle = useNoxSetting(state => state.playerStyle);
 
   const handleSearch = async (val = searchVal) => {
-    progressEmitter(100);
+    progressEmitter(1);
     try {
       const searchedResult = await (await fetch(val)).json();
       onSearched(searchedResult);
@@ -33,31 +33,22 @@ const CustomSkinSearch = ({
 
   return (
     <View style={styles.container}>
-      <View
-        style={[
-          styles.row,
-          { backgroundColor: playerStyle.colors.surfaceVariant },
-        ]}
-      >
-        <TextInput
-          style={styles.textInput}
-          label={String(t('CustomSkin.SearchBarLabel'))}
+      <View style={styles.row}>
+        <Searchbar
+          placeholder={String(t('CustomSkin.SearchBarLabel'))}
           value={searchVal}
-          onChangeText={val => setSearchVal(val)}
+          onChangeText={setSearchVal}
           onSubmitEditing={() => handleSearch(searchVal)}
           selectTextOnFocus
+          style={styles.textInput}
           selectionColor={playerStyle.customColors.textInputSelectionColor}
-          textColor={playerStyle.colors.text}
-        />
-        <IconButton
-          icon="search-web"
-          onPress={() => handleSearch(searchVal)}
-          size={30}
+          onIconPress={() => handleSearch(searchVal)}
         />
       </View>
       <ProgressBar
         progress={Math.max(searchProgress, 0)}
         indeterminate={searchProgress === 1}
+        style={styles.progressBar}
       />
     </View>
   );
@@ -74,6 +65,7 @@ const styles = StyleSheet.create({
   textInput: {
     flex: 5,
   },
+  progressBar: { backgroundColor: 'rgba(0, 0, 0, 0)' },
 });
 
 export default CustomSkinSearch;

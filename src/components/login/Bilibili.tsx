@@ -1,11 +1,6 @@
 import * as React from 'react';
-import {
-  View,
-  ActivityIndicator,
-  SafeAreaView,
-  StyleSheet,
-} from 'react-native';
-import { Text, Avatar, Button } from 'react-native-paper';
+import { View, SafeAreaView, StyleSheet } from 'react-native';
+import { Text, Avatar, ActivityIndicator, Button } from 'react-native-paper';
 import { useTranslation } from 'react-i18next';
 import QRCode from 'react-native-qrcode-svg';
 import Snackbar from 'react-native-snackbar';
