@@ -5,7 +5,11 @@ import { GestureResponderEvent } from 'react-native';
 
 const ICON = 'dots-horizontal';
 
-export default ({ disabled = false }: { disabled: boolean }) => {
+interface Props {
+  disabled?: boolean;
+}
+
+export default ({ disabled = false }: Props) => {
   const [dialogOpen, setDialogOpen] = useState(false);
   const [menuCoords, setMenuCoords] = useState<NoxTheme.coordinates>({
     x: 0,

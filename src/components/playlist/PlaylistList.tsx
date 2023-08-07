@@ -422,7 +422,6 @@ const PlaylistList = () => {
 const stylesLocal = StyleSheet.create({
   container: {
     flexDirection: 'row',
-    flex: 3,
     bottom: 5,
     justifyContent: 'flex-end',
   },

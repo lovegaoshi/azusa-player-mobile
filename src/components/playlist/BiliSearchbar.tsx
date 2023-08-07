@@ -155,7 +155,9 @@ export default ({
 const styles = StyleSheet.create({
   container: {
     width: '100%',
-    height: 50,
+    height: 55,
+    paddingLeft: 15,
+    paddingTop: 5,
   },
   searchContainer: {
     flexDirection: 'row',

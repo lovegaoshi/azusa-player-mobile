@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { IconButton, Text, TextInput } from 'react-native-paper';
+import { Searchbar, Text, TextInput } from 'react-native-paper';
 import { View, Pressable, StyleSheet } from 'react-native';
 import { useTranslation } from 'react-i18next';
 import { useNoxSetting } from '@hooks/useSetting';
@@ -29,18 +29,17 @@ export default ({
   return (
     <View style={styles.container}>
       {search ? (
-        <TextInput
+        <Searchbar
           placeholder={String(t('PlaylistSearchBar.label'))}
           value={searchText}
-          dense
           onChangeText={(val: string) => {
             setSearchText(val);
           }}
           style={styles.textInput}
+          inputStyle={styles.searchInput}
           autoFocus
           selectTextOnFocus
           selectionColor={playerStyle.customColors.textInputSelectionColor}
-          textColor={playerStyle.colors.text}
         />
       ) : (
         <Pressable onPress={onPressed} style={styles.pressable}>
@@ -62,11 +61,14 @@ export default ({
 
 const styles = StyleSheet.create({
   container: {
-    flex: 3,
+    flex: 15,
     paddingLeft: 10,
   },
   textInput: {
     height: 40,
+  },
+  searchInput: {
+    marginTop: -8,
   },
   pressable: {
     // Add any additional styles for the Pressable component here
