@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { View, BackHandler, StyleSheet } from 'react-native';
 import { FlashList } from '@shopify/flash-list';
 import Snackbar from 'react-native-snackbar';
@@ -53,8 +53,9 @@ const PlaylistList = () => {
   const [searchText, setSearchText] = useState('');
   const [debouncedSearchText] = useDebounce(searchText, 500);
   const [refreshing, setRefreshing] = useState(false);
-  const playlistRef = React.useRef<any>(null);
+  const playlistRef = useRef<any>(null);
   const netInfo = useNetInfo();
+  const [playlistInfoUpdateCounter, setPlaylistInfoUpdateCounter] = useState(0);
   // TODO: slow?
   const [cachedSongs] = useState(
     Array.from(noxCache.noxMediaCache.cache.keys())
@@ -64,6 +65,7 @@ const PlaylistList = () => {
     setSelected(Array(currentPlaylist.songList.length).fill(val));
 
   const toggleSelected = useCallback((index: number) => {
+    setPlaylistInfoUpdateCounter(val => val + 1);
     setSelected((val: boolean[]) => {
       val[index] = !val[index];
       return val;
@@ -350,6 +352,9 @@ const PlaylistList = () => {
           searchText={searchText}
           setSearchText={setSearchText}
           onPressed={() => scrollTo()}
+          selected={selected}
+          checking={checking}
+          updateCounter={playlistInfoUpdateCounter}
         />
         <View style={stylesLocal.container}>
           {checking && (

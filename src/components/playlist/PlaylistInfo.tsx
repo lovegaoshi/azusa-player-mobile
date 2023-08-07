@@ -10,6 +10,9 @@ interface Props {
   setSearchText: (val: string) => void;
   search?: boolean;
   onPressed?: () => void;
+  selected: boolean[];
+  checking: boolean;
+  updateCounter: number;
 }
 
 export default ({
@@ -17,14 +20,50 @@ export default ({
   setSearchText,
   search = false,
   onPressed = () => undefined,
+  selected,
+  checking,
+  updateCounter,
 }: Props) => {
   const { t } = useTranslation();
   const currentPlaylist = useNoxSetting(state => state.currentPlaylist);
   const playerStyle = useNoxSetting(state => state.playerStyle);
 
+  const renderSongCount = () => {
+    if (checking) {
+      const selectedLength = selected.filter(val => val === true).length;
+      if (selectedLength !== 0) {
+        return selectedLength;
+      }
+    }
+    return currentPlaylist.songList.length;
+  };
+
+  const renderSongDuration = () => {
+    if (checking) {
+      const selectedLength = selected.filter(val => val === true).length;
+      if (selectedLength !== 0) {
+        const selectedDuration = currentPlaylist.songList
+          .filter((val, index) => selected[index])
+          .reduce(
+            (accumulator, currentValue) => accumulator + currentValue.duration,
+            0
+          );
+        return seconds2HHMMSS(selectedDuration);
+      }
+    }
+    return seconds2HHMMSS(
+      currentPlaylist.songList.reduce(
+        (accumulator, currentValue) => accumulator + currentValue.duration,
+        0
+      )
+    );
+  };
+
   useEffect(() => {
     setSearchText('');
   }, [currentPlaylist]);
+
+  useEffect(() => console.log(updateCounter), [updateCounter]);
 
   return (
     <View style={styles.container}>
@@ -44,15 +83,7 @@ export default ({
       ) : (
         <Pressable onPress={onPressed} style={styles.pressable}>
           <Text variant="titleMedium">{currentPlaylist.title}</Text>
-          <Text variant="labelMedium">{`${
-            currentPlaylist.songList.length
-          } / ${seconds2HHMMSS(
-            currentPlaylist.songList.reduce(
-              (accumulator, currentValue) =>
-                accumulator + currentValue.duration,
-              0
-            )
-          )}`}</Text>
+          <Text variant="labelMedium">{`${renderSongCount()} / ${renderSongDuration()}`}</Text>
         </Pressable>
       )}
     </View>
@@ -65,10 +96,10 @@ const styles = StyleSheet.create({
     paddingLeft: 10,
   },
   textInput: {
-    height: 40,
+    height: 45,
   },
   searchInput: {
-    marginTop: -8,
+    marginTop: -6,
   },
   pressable: {
     // Add any additional styles for the Pressable component here
