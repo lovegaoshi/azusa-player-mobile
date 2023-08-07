@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { IconButton, Text, TextInput } from 'react-native-paper';
+import { Searchbar, Text, TextInput } from 'react-native-paper';
 import { View, Pressable, StyleSheet } from 'react-native';
 import { useTranslation } from 'react-i18next';
 import { useNoxSetting } from '@hooks/useSetting';
@@ -10,6 +10,9 @@ interface Props {
   setSearchText: (val: string) => void;
   search?: boolean;
   onPressed?: () => void;
+  selected: boolean[];
+  checking: boolean;
+  updateCounter: number;
 }
 
 export default ({
@@ -17,43 +20,70 @@ export default ({
   setSearchText,
   search = false,
   onPressed = () => undefined,
+  selected,
+  checking,
+  updateCounter,
 }: Props) => {
   const { t } = useTranslation();
   const currentPlaylist = useNoxSetting(state => state.currentPlaylist);
   const playerStyle = useNoxSetting(state => state.playerStyle);
 
+  const renderSongCount = () => {
+    if (checking) {
+      const selectedLength = selected.filter(val => val === true).length;
+      if (selectedLength !== 0) {
+        return selectedLength;
+      }
+    }
+    return currentPlaylist.songList.length;
+  };
+
+  const renderSongDuration = () => {
+    if (checking) {
+      const selectedLength = selected.filter(val => val === true).length;
+      if (selectedLength !== 0) {
+        const selectedDuration = currentPlaylist.songList
+          .filter((val, index) => selected[index])
+          .reduce(
+            (accumulator, currentValue) => accumulator + currentValue.duration,
+            0
+          );
+        return seconds2HHMMSS(selectedDuration);
+      }
+    }
+    return seconds2HHMMSS(
+      currentPlaylist.songList.reduce(
+        (accumulator, currentValue) => accumulator + currentValue.duration,
+        0
+      )
+    );
+  };
+
   useEffect(() => {
     setSearchText('');
   }, [currentPlaylist]);
 
+  useEffect(() => console.log(updateCounter), [updateCounter]);
+
   return (
     <View style={styles.container}>
       {search ? (
-        <TextInput
+        <Searchbar
           placeholder={String(t('PlaylistSearchBar.label'))}
           value={searchText}
-          dense
           onChangeText={(val: string) => {
             setSearchText(val);
           }}
           style={styles.textInput}
+          inputStyle={styles.searchInput}
           autoFocus
           selectTextOnFocus
           selectionColor={playerStyle.customColors.textInputSelectionColor}
-          textColor={playerStyle.colors.text}
         />
       ) : (
         <Pressable onPress={onPressed} style={styles.pressable}>
           <Text variant="titleMedium">{currentPlaylist.title}</Text>
-          <Text variant="labelMedium">{`${
-            currentPlaylist.songList.length
-          } / ${seconds2HHMMSS(
-            currentPlaylist.songList.reduce(
-              (accumulator, currentValue) =>
-                accumulator + currentValue.duration,
-              0
-            )
-          )}`}</Text>
+          <Text variant="labelMedium">{`${renderSongCount()} / ${renderSongDuration()}`}</Text>
         </Pressable>
       )}
     </View>
@@ -62,11 +92,14 @@ export default ({
 
 const styles = StyleSheet.create({
   container: {
-    flex: 3,
+    flex: 15,
     paddingLeft: 10,
   },
   textInput: {
-    height: 40,
+    height: 45,
+  },
+  searchInput: {
+    marginTop: -6,
   },
   pressable: {
     // Add any additional styles for the Pressable component here

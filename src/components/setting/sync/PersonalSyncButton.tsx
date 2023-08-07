@@ -1,8 +1,8 @@
 // TODO: migrate to GenericSyncButton
 import React, { useState } from 'react';
 import Snackbar from 'react-native-snackbar';
-import { View, ActivityIndicator, StyleSheet } from 'react-native';
-import { IconButton, TextInput } from 'react-native-paper';
+import { View, StyleSheet } from 'react-native';
+import { ActivityIndicator, IconButton, TextInput } from 'react-native-paper';
 import { useTranslation } from 'react-i18next';
 
 import { noxBackup, noxRestore } from './PersonalCloudAuth';

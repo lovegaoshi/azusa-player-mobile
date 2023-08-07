@@ -1,6 +1,6 @@
 import React from 'react';
-import { ActivityIndicator, Image, StyleSheet, View } from 'react-native';
-import { IconButton } from 'react-native-paper';
+import { Image, StyleSheet, View } from 'react-native';
+import { ActivityIndicator, IconButton } from 'react-native-paper';
 import TrackPlayer, {
   State,
   usePlayWhenReady,
