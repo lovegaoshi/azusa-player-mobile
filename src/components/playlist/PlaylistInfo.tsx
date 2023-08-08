@@ -1,6 +1,6 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Searchbar, Text, TextInput } from 'react-native-paper';
-import { View, Pressable, StyleSheet } from 'react-native';
+import { View, Pressable, StyleSheet, Animated } from 'react-native';
 import { useTranslation } from 'react-i18next';
 import { useNoxSetting } from '@hooks/useSetting';
 import { seconds2HHMMSS } from '@utils/Utils';
@@ -27,6 +27,8 @@ export default ({
   const { t } = useTranslation();
   const currentPlaylist = useNoxSetting(state => state.currentPlaylist);
   const playerStyle = useNoxSetting(state => state.playerStyle);
+  const searchBarWidth = useRef(new Animated.Value(0)).current;
+  const opacity = useRef(new Animated.Value(1)).current;
 
   const renderSongCount = () => {
     if (checking) {
@@ -63,11 +65,39 @@ export default ({
     setSearchText('');
   }, [currentPlaylist]);
 
-  useEffect(() => console.log(updateCounter), [updateCounter]);
+  useEffect(() => {
+    if (search) {
+      Animated.parallel([
+        Animated.timing(searchBarWidth, {
+          toValue: 1,
+          duration: 180,
+          useNativeDriver: true,
+        }),
+        Animated.timing(opacity, {
+          toValue: 0,
+          duration: 220,
+          useNativeDriver: true,
+        }),
+      ]).start();
+    } else {
+      Animated.parallel([
+        Animated.timing(searchBarWidth, {
+          toValue: 0,
+          duration: 180,
+          useNativeDriver: true,
+        }),
+        Animated.timing(opacity, {
+          toValue: 1,
+          duration: 280,
+          useNativeDriver: true,
+        }),
+      ]).start();
+    }
+  }, [search]);
 
   return (
     <View style={styles.container}>
-      {search ? (
+      <Animated.View style={{ transform: [{ scaleX: searchBarWidth }] }}>
         <Searchbar
           placeholder={String(t('PlaylistSearchBar.label'))}
           value={searchText}
@@ -80,12 +110,14 @@ export default ({
           selectTextOnFocus
           selectionColor={playerStyle.customColors.textInputSelectionColor}
         />
-      ) : (
-        <Pressable onPress={onPressed} style={styles.pressable}>
+      </Animated.View>
+
+      <Animated.View style={[styles.pressable, { opacity }]}>
+        <Pressable onPress={onPressed}>
           <Text variant="titleMedium">{currentPlaylist.title}</Text>
           <Text variant="labelMedium">{`${renderSongCount()} / ${renderSongDuration()}`}</Text>
         </Pressable>
-      )}
+      </Animated.View>
     </View>
   );
 };
@@ -102,6 +134,9 @@ const styles = StyleSheet.create({
     marginTop: -6,
   },
   pressable: {
+    position: 'absolute',
+    paddingLeft: 15,
+    zIndex: -1,
     // Add any additional styles for the Pressable component here
   },
 });
