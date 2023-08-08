@@ -156,7 +156,7 @@ const styles = StyleSheet.create({
   container: {
     width: '100%',
     height: 55,
-    paddingLeft: 15,
+    paddingHorizontal: 5,
     paddingTop: 5,
   },
   searchContainer: {

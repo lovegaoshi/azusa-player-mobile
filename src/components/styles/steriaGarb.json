@@ -35,7 +35,7 @@
       "https://i0.hdslb.com/bfs/garb/item/ea5d55b864784ae66f35f071ba0d71b0ce8663d2.jpg"
     ],
     "customColors": {
-      "maskedBackgroundColor": "rgba(0, 0, 0, 0.60)",
+      "maskedBackgroundColor": "rgba(0, 0, 0, 0.30)",
       "playlistDrawerBackgroundColor": "green",
       "playlistDrawerBackgroundColorTransparent": "rgba(0, 255, 0, 0.35)",
       "progressThumbTintColor": "rgb(235, 235, 0)",
@@ -138,7 +138,7 @@
       }
     ],
     "customColors": {
-      "maskedBackgroundColor": "rgba(0, 0, 0, 0.60)",
+      "maskedBackgroundColor": "rgba(0, 0, 0, 0.30)",
       "playlistDrawerBackgroundColor": "green",
       "playlistDrawerBackgroundColorTransparent": "rgba(0, 255, 0, 0.35)",
       "progressThumbTintColor": "rgb(235, 235, 0)",
@@ -243,7 +243,7 @@
       }
     ],
     "customColors": {
-      "maskedBackgroundColor": "rgba(0, 0, 0, 0.60)",
+      "maskedBackgroundColor": "rgba(0, 0, 0, 0.30)",
       "playlistDrawerBackgroundColor": "green",
       "playlistDrawerBackgroundColorTransparent": "rgba(0, 255, 0, 0.35)",
       "progressThumbTintColor": "rgb(235, 235, 0)",

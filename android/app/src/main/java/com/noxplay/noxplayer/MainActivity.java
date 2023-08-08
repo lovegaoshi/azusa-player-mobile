@@ -72,6 +72,8 @@ public class MainActivity extends ReactActivity {
       this.getReactInstanceManager().getCurrentReactContext()
         .getJSModule(RCTDeviceEventEmitter.class)
         .emit("APMEnterPIP", true);
+      // HACK: a really stupid way to continue RN UI rendering
+      this.onResume();
     } else {
       // Restore the full-screen UI.
       getReactInstanceManager().getCurrentReactContext()
@@ -88,15 +90,8 @@ public class MainActivity extends ReactActivity {
     super.onPause();
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
       if (isInPictureInPictureMode()) {
-        this.onResume();
         // Continue playback
-        this.runOnUiThread(new Runnable() {
-          @Override
-          public void run() {
-            Log.d("APM", "APM PIP update ");
-
-          }
-        });
+        // for some reason my S21 doesn't trigger this  at all. pixel is fine.
       } else {
         // Use existing playback logic for paused Activity behavior.
       }
