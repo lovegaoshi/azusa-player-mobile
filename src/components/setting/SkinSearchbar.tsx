@@ -57,6 +57,8 @@ const CustomSkinSearch = ({
 const styles = StyleSheet.create({
   container: {
     width: '100%',
+    paddingHorizontal: 5,
+    paddingTop: 5,
   },
   row: {
     flexDirection: 'row',

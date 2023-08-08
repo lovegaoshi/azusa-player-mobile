@@ -172,7 +172,7 @@
       "https://static.zerochan.net/Watson.Amelia.full.3911744.jpg"
     ],
     "customColors": {
-      "maskedBackgroundColor": "rgba(0, 0, 0, 0.60)",
+      "maskedBackgroundColor": "rgba(0, 0, 0, 0.30)",
       "playlistDrawerBackgroundColor": "green",
       "playlistDrawerBackgroundColorTransparent": "rgba(0, 255, 0, 0.35)",
       "progressThumbTintColor": "rgb(235, 235, 0)",
@@ -273,14 +273,14 @@
     ],
 
     "customColors": {
-      "maskedBackgroundColor": "rgba(0, 0, 0, 0.60)",
+      "maskedBackgroundColor": "rgba(0, 0, 0, 0.30)",
       "playlistDrawerBackgroundColor": "rgba(255, 0, 0, 0.35)",
       "playlistDrawerBackgroundColorTransparent": "rgba(255, 0, 0, 0.35)",
       "progressThumbTintColor": "#f2003c",
       "progressMinimumTrackTintColor": "#f2003c",
       "progressMaximumTrackTintColor": "#FFFFFF",
       "btnBackgroundColor": "rgb(72, 71, 58)",
-      "textInputSelectionColor": "#f2003c"
+      "textInputSelectionColor": "lightgreen"
     },
     "colors": {
       "primary": "rgb(233, 233, 233)",
@@ -372,14 +372,14 @@
       }
     ],
     "customColors": {
-      "maskedBackgroundColor": "rgba(0, 0, 0, 0.60)",
+      "maskedBackgroundColor": "rgba(0, 0, 0, 0.30)",
       "playlistDrawerBackgroundColor": "rgba(255, 0, 0, 0.35)",
       "playlistDrawerBackgroundColorTransparent": "rgba(255, 0, 0, 0.35)",
       "progressThumbTintColor": "#f2003c",
       "progressMinimumTrackTintColor": "#f2003c",
       "progressMaximumTrackTintColor": "#FFFFFF",
       "btnBackgroundColor": "rgb(72, 71, 58)",
-      "textInputSelectionColor": "#f2003c"
+      "textInputSelectionColor": "lightgreen"
     },
     "colors": {
       "primary": "rgb(233, 233, 233)",
@@ -448,14 +448,14 @@
     ],
     "backgroundImages": [{ "type": "bvid", "identifier": "BV1rh4y1b7wU" }],
     "customColors": {
-      "maskedBackgroundColor": "rgba(0, 0, 0, 0.60)",
+      "maskedBackgroundColor": "rgba(0, 0, 0, 0.30)",
       "playlistDrawerBackgroundColor": "rgba(255, 0, 0, 0.35)",
       "playlistDrawerBackgroundColorTransparent": "rgba(255, 0, 0, 0.35)",
       "progressThumbTintColor": "#f2003c",
       "progressMinimumTrackTintColor": "#f2003c",
       "progressMaximumTrackTintColor": "#FFFFFF",
       "btnBackgroundColor": "rgb(72, 71, 58)",
-      "textInputSelectionColor": "#f2003c"
+      "textInputSelectionColor": "lightgreen"
     },
     "colors": {
       "primary": "rgb(233, 233, 233)",
@@ -660,7 +660,7 @@
       "https://article.biliimg.com/bfs/article/665f1975a070f013580832fef95621aef37a1b2c.png"
     ],
     "customColors": {
-      "maskedBackgroundColor": "rgba(0, 0, 0, 0.60)",
+      "maskedBackgroundColor": "rgba(0, 0, 0, 0.30)",
       "playlistDrawerBackgroundColor": "rebeccapurple",
       "playlistDrawerBackgroundColorTransparent": "rgba(102, 51, 153, 0.35)",
       "progressThumbTintColor": "#90ee90",
