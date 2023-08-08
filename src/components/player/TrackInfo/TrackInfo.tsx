@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useState, useRef } from 'react';
 import {
   StyleSheet,
   Text,
@@ -8,6 +8,7 @@ import {
   TouchableWithoutFeedback,
 } from 'react-native';
 import type { Track } from 'react-native-track-player';
+import Image from 'react-native-fast-image';
 
 import { useNoxSetting } from '@hooks/useSetting';
 import { getCurrentTPQueue } from '@stores/playingList';
@@ -22,7 +23,7 @@ export const TrackInfo: React.FC<{
   const playerStyle = useNoxSetting(state => state.playerStyle);
   const currentPlayingList = useNoxSetting(state => state.currentPlayingList);
   const [isImageVisible, setIsImageVisible] = useState(true);
-  const opacity = new Animated.Value(1);
+  const opacity = useRef(new Animated.Value(1)).current;
 
   const getTrackLocation = () => {
     const currentTPQueue = getCurrentTPQueue();
@@ -51,22 +52,33 @@ export const TrackInfo: React.FC<{
     });
   };
 
+  const onLyricPress = () => {
+    setIsImageVisible(!isImageVisible);
+    Animated.parallel([
+      Animated.timing(opacity, {
+        toValue: 1,
+        duration: 80,
+        useNativeDriver: true,
+      }),
+    ]).start();
+  };
+
   return (
     <View style={styles.container}>
       <>
         <TouchableWithoutFeedback onPress={onImagePress}>
-          <View
+          <Animated.View
             style={[
               styles.container,
               {
-                opacity: isImageVisible ? 1 : 0,
+                opacity,
                 position: isImageVisible ? 'relative' : 'absolute',
               },
             ]}
             pointerEvents={isImageVisible ? 'auto' : 'none'}
           >
-            <Animated.Image
-              style={[styles.artwork, { opacity }]}
+            <Image
+              style={[styles.artwork]}
               source={
                 playerSetting.hideCoverInMobile
                   ? 0
@@ -75,7 +87,7 @@ export const TrackInfo: React.FC<{
                     }
               }
             />
-          </View>
+          </Animated.View>
         </TouchableWithoutFeedback>
         <View
           style={[
@@ -88,7 +100,7 @@ export const TrackInfo: React.FC<{
           pointerEvents={isImageVisible ? 'none' : 'auto'}
         >
           {track && (
-            <LyricView onLyricPress={onImagePress} track={track} artist="n/a" />
+            <LyricView onLyricPress={onLyricPress} track={track} artist="n/a" />
           )}
         </View>
       </>
