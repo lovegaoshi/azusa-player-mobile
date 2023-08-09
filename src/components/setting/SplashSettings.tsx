@@ -45,9 +45,9 @@ export default () => {
         // responder. This typically means a gesture has succeeded
 
         if (gestureState.dx > 120) {
-          Animated.spring(position, {
-            toValue: { x: WindowWidth, y: gestureState.dy },
-            friction: 100,
+          Animated.timing(position, {
+            toValue: { x: WindowWidth + 100, y: gestureState.dy },
+            duration: 200,
             useNativeDriver: true,
           }).start(() => {
             console.log('splashes moved on right');
@@ -55,9 +55,9 @@ export default () => {
             position.setValue({ x: 0, y: 0 });
           });
         } else if (gestureState.dx < -120) {
-          Animated.spring(position, {
-            toValue: { x: -WindowWidth, y: gestureState.dy },
-            friction: 100,
+          Animated.timing(position, {
+            toValue: { x: -WindowWidth + 100, y: gestureState.dy },
+            duration: 200,
             useNativeDriver: true,
           }).start(() => {
             console.log('splashes moved on left');
