@@ -1,6 +1,6 @@
 import * as React from 'react';
 import Image from 'react-native-fast-image';
-import { View, FlatList, SafeAreaView, StyleSheet } from 'react-native';
+import { View, SafeAreaView, StyleSheet, Dimensions } from 'react-native';
 import {
   Text,
   IconButton,
@@ -11,7 +11,16 @@ import Animated, {
   Layout,
   LightSpeedInLeft,
   LightSpeedOutRight,
+  useAnimatedStyle,
+  useSharedValue,
+  withSpring,
+  runOnJS,
 } from 'react-native-reanimated';
+import {
+  ScrollView,
+  GestureDetector,
+  Gesture,
+} from 'react-native-gesture-handler';
 
 import SkinSearchbar from './SkinSearchbar';
 import { useNoxSetting } from '@hooks/useSetting';
@@ -19,7 +28,8 @@ import AzusaTheme from '../styles/AzusaTheme';
 // import AzusaTheme from '../styles/SteriaTheme';
 import NoxTheme from '../styles/NoxTheme';
 import { getUniqObjects } from '@utils/Utils';
-import { ScrollView } from 'react-native-gesture-handler';
+
+const WindowWidth = Dimensions.get('window').width;
 
 interface DisplayTheme extends NoxTheme.style {
   builtin: boolean;
@@ -50,73 +60,117 @@ const SkinItem = ({ skin, checked, setChecked }: SkinItemProps) => {
   const getThemeID = (skin: NoxTheme.style) =>
     `${skin.metaData.themeName}.${skin.metaData.themeAuthor}`;
   const themeID = getThemeID(skin);
+  const mounted = React.useRef(false);
+  const isPressed = useSharedValue(false);
+  const offset = useSharedValue({ x: 0, y: 0 });
+  const animatedStyles = useAnimatedStyle(() => {
+    return {
+      transform: [
+        { translateX: offset.value.x },
+        { translateY: offset.value.y },
+        { scale: withSpring(isPressed.value ? 1.2 : 1) },
+      ],
+    };
+  });
+
+  const deleteTheme = () =>
+    setPlayerStyles(playerStyles.filter(pSkin => pSkin !== skin));
+
+  const start = useSharedValue({ x: 0, y: 0 });
+  const gesture = Gesture.Pan()
+    .onBegin(() => {
+      isPressed.value = true;
+    })
+    .onUpdate(e => {
+      offset.value = {
+        x: e.translationX + start.value.x,
+        y: e.translationY + start.value.y,
+      };
+    })
+    .onEnd(() => {
+      if (Math.abs(offset.value.x) > WindowWidth * 0.4) {
+        runOnJS(deleteTheme)();
+      } else {
+        offset.value = {
+          x: withSpring(0),
+          y: withSpring(0),
+        };
+      }
+    })
+    .onFinalize(() => {
+      isPressed.value = false;
+    });
 
   const selectTheme = () => {
     setChecked(themeID);
     setPlayerStyle(skin);
   };
 
-  const deleteTheme = () =>
-    setPlayerStyles(playerStyles.filter(pSkin => pSkin !== skin));
+  React.useEffect(() => {
+    mounted.current = true;
+  }, []);
 
   return (
-    <Animated.View
-      entering={LightSpeedInLeft}
-      exiting={LightSpeedOutRight}
-      layout={Layout.springify()}
-    >
-      <TouchableRipple onPress={selectTheme}>
-        <View style={styles.skinItemContainer}>
-          <View style={styles.skinItemLeftContainer}>
-            <Image
-              source={{ uri: skin.metaData.themeIcon }}
-              style={styles.skinItemImage}
-            />
-            <View style={styles.skinItemTextContainer}>
-              <Text
-                variant={'titleMedium'}
-                style={styles.skinTitleText}
-                numberOfLines={1}
-                ellipsizeMode="tail"
-              >{`${skin.metaData.themeName} by ${skin.metaData.themeAuthor}`}</Text>
-              <Text
-                variant={'labelLarge'}
-                style={{
-                  color: playerStyle.colors.secondary,
-                  maxWidth: '90%',
-                }}
-              >
-                {skin.metaData.themeDesc}
-              </Text>
-              <View style={styles.lightbulbContainer}>
-                <IconButton
-                  icon={
-                    skin.metaData.darkTheme
-                      ? 'lightbulb-outline'
-                      : 'lightbulb-on'
-                  }
-                  size={25}
-                  style={styles.lightbulbIcon}
-                />
+    <GestureDetector gesture={gesture}>
+      <Animated.View
+        entering={mounted.current ? LightSpeedInLeft : undefined}
+        exiting={LightSpeedOutRight}
+        layout={Layout.springify()}
+        style={animatedStyles}
+      >
+        <TouchableRipple onPress={selectTheme}>
+          <View style={styles.skinItemContainer}>
+            <View style={styles.skinItemLeftContainer}>
+              <Image
+                source={{ uri: skin.metaData.themeIcon }}
+                style={styles.skinItemImage}
+              />
+              <View style={styles.skinItemTextContainer}>
+                <Text
+                  variant={'titleMedium'}
+                  style={styles.skinTitleText}
+                  numberOfLines={1}
+                  ellipsizeMode="tail"
+                >{`${skin.metaData.themeName} by ${skin.metaData.themeAuthor}`}</Text>
+                <Text
+                  variant={'labelLarge'}
+                  style={{
+                    color: playerStyle.colors.secondary,
+                    maxWidth: '90%',
+                  }}
+                >
+                  {skin.metaData.themeDesc}
+                </Text>
+                <View style={styles.lightbulbContainer}>
+                  <IconButton
+                    icon={
+                      skin.metaData.darkTheme
+                        ? 'lightbulb-outline'
+                        : 'lightbulb-on'
+                    }
+                    size={25}
+                    style={styles.lightbulbIcon}
+                  />
+                </View>
               </View>
             </View>
+            <View style={styles.skinItemRightContainer}>
+              <RadioButton
+                value={themeID}
+                status={checked === themeID ? 'checked' : 'unchecked'}
+                onPress={selectTheme}
+              />
+              <IconButton
+                icon="trash-can"
+                style={styles.deleteButton}
+                onPress={deleteTheme}
+                disabled={skin.builtin}
+              />
+            </View>
           </View>
-          <View style={styles.skinItemRightContainer}>
-            <RadioButton
-              value={themeID}
-              status={checked === themeID ? 'checked' : 'unchecked'}
-              onPress={selectTheme}
-            />
-            <IconButton
-              icon="trash-can"
-              style={styles.deleteButton}
-              onPress={deleteTheme}
-              disabled={skin.builtin}
-            />
-          </View>
-        </View>
-      </TouchableRipple>
-    </Animated.View>
+        </TouchableRipple>
+      </Animated.View>
+    </GestureDetector>
   );
 };
 
