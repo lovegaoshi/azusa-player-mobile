@@ -29,6 +29,7 @@ export default ({
   const playerStyle = useNoxSetting(state => state.playerStyle);
   const searchBarWidth = useRef(new Animated.Value(0)).current;
   const opacity = useRef(new Animated.Value(1)).current;
+  const [searchVisible, setSearchVisible] = useState(search);
 
   const renderSongCount = () => {
     if (checking) {
@@ -66,6 +67,7 @@ export default ({
   }, [currentPlaylist]);
 
   useEffect(() => {
+    setSearchVisible(true);
     if (search) {
       Animated.parallel([
         Animated.timing(searchBarWidth, {
@@ -91,25 +93,27 @@ export default ({
           duration: 280,
           useNativeDriver: true,
         }),
-      ]).start();
+      ]).start(() => setSearchVisible(false));
     }
   }, [search]);
 
   return (
     <View style={styles.container}>
       <Animated.View style={{ transform: [{ scaleX: searchBarWidth }] }}>
-        <Searchbar
-          placeholder={String(t('PlaylistSearchBar.label'))}
-          value={searchText}
-          onChangeText={(val: string) => {
-            setSearchText(val);
-          }}
-          style={styles.textInput}
-          inputStyle={styles.searchInput}
-          autoFocus
-          selectTextOnFocus
-          selectionColor={playerStyle.customColors.textInputSelectionColor}
-        />
+        {searchVisible && (
+          <Searchbar
+            placeholder={String(t('PlaylistSearchBar.label'))}
+            value={searchText}
+            onChangeText={(val: string) => {
+              setSearchText(val);
+            }}
+            style={styles.textInput}
+            inputStyle={styles.searchInput}
+            autoFocus
+            selectTextOnFocus
+            selectionColor={playerStyle.customColors.textInputSelectionColor}
+          />
+        )}
       </Animated.View>
 
       <Animated.View style={[styles.pressable, { opacity }]}>
