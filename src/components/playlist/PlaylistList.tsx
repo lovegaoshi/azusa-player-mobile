@@ -9,6 +9,7 @@ import { useTranslation } from 'react-i18next';
 import { useDebounce } from 'use-debounce';
 import { useNetInfo } from '@react-native-community/netinfo';
 import { useFocusEffect } from '@react-navigation/native';
+import Animated, { Layout, LightSpeedOutRight } from 'react-native-reanimated';
 
 import { styles } from '../style';
 import SongInfo from './SongInfo';
@@ -53,7 +54,7 @@ const PlaylistList = () => {
   const [searchText, setSearchText] = useState('');
   const [debouncedSearchText] = useDebounce(searchText, 500);
   const [refreshing, setRefreshing] = useState(false);
-  const playlistRef = useRef<any>(null);
+  const playlistRef = useRef<FlashList<NoxMedia.Song> | null>(null);
   const netInfo = useNetInfo();
   const [playlistInfoUpdateCounter, setPlaylistInfoUpdateCounter] = useState(0);
   // TODO: slow?
@@ -274,7 +275,7 @@ const PlaylistList = () => {
           )
         : toIndex;
     if (currentIndex > -1) {
-      playlistRef.current.scrollToIndex({
+      playlistRef.current?.scrollToIndex({
         index: currentIndex,
         viewPosition: 0.5,
       });
@@ -393,6 +394,13 @@ const PlaylistList = () => {
           ref={ref => (playlistRef.current = ref)}
           data={currentRows}
           renderItem={({ item, index }) => (
+            /*
+            TODO: figure out reanimated...
+            <Animated.View
+              exiting={LightSpeedOutRight}
+              layout={Layout.springify()}
+            >
+            */
             <SongInfo
               item={item}
               index={index}
@@ -407,6 +415,7 @@ const PlaylistList = () => {
               }}
               networkCellular={netInfo.type === 'cellular'}
             />
+            // </Animated.View>
           )}
           keyExtractor={(item, index) => `${item.id}.${index}`}
           estimatedItemSize={58}
@@ -420,6 +429,9 @@ const PlaylistList = () => {
         checked={selected}
         resetChecked={resetSelected}
         handleSearch={searchAndEnableSearch}
+        prepareForLayoutAnimationRender={() =>
+          playlistRef.current?.prepareForLayoutAnimationRender()
+        }
       />
     </View>
   );

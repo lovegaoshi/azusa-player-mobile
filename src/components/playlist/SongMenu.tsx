@@ -28,6 +28,7 @@ interface Props {
   checked?: boolean[];
   resetChecked?: () => void;
   handleSearch?: (val: string) => void;
+  prepareForLayoutAnimationRender: () => void;
 }
 
 export default ({
@@ -35,6 +36,7 @@ export default ({
   checked = [],
   resetChecked = () => undefined,
   handleSearch = () => undefined,
+  prepareForLayoutAnimationRender,
 }: Props) => {
   const { t } = useTranslation();
   const songMenuVisible = useNoxSetting(state => state.songMenuVisible);
@@ -102,6 +104,11 @@ export default ({
 
   const removeSongs = (banBVID = false) => {
     const songs = selectedSongs();
+    // TODO: figure out reanimated...
+    if (songs.length === 0) {
+      prepareForLayoutAnimationRender();
+    }
+    console.log(songs);
     const newPlaylist = banBVID
       ? {
           ...currentPlaylist,
