@@ -21,22 +21,28 @@ const musePlaylistItemToNoxSong = (val: any, data: any) => {
     });
   } catch {
     console.error(`[musePlaylistParse] fail: ${JSON.stringify(val)}`);
+    return [];
   }
 };
 
 const fetchInnerTuneSearch = async (
   searchVal: string
 ): Promise<NoxMedia.Song[]> => {
-  const playlistData = await search(searchVal, {
-    filter: 'songs',
-  });
-  return playlistData.categories[0].results
-    .flatMap((val: any) =>
+  const searchData = await Promise.all([
+    search(searchVal, {
+      filter: 'songs',
+    }),
+    search(searchVal, {
+      filter: 'videos',
+    }),
+  ]);
+  return searchData.flatMap(searchList =>
+    searchList.categories[0].results.flatMap((val: any) =>
       val && val.videoId
         ? musePlaylistItemToNoxSong(val, { title: val.title })
         : []
     )
-    .filter((val): val is NoxMedia.Song => val !== undefined);
+  );
 };
 
 interface regexFetchProps {
