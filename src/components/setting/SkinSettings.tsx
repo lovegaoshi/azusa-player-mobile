@@ -88,7 +88,7 @@ const SkinItem = ({ skin, checked, setChecked }: SkinItemProps) => {
       };
     })
     .onEnd(() => {
-      if (Math.abs(offset.value.x) > WindowWidth * 0.4) {
+      if (Math.abs(offset.value.x) > WindowWidth * 0.4 && !skin.builtin) {
         runOnJS(deleteTheme)();
       } else {
         offset.value = {
