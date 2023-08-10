@@ -174,7 +174,7 @@
   "Login": {
     "BilibiliNotLoggedIn": "用户未登录",
     "BilibiliLoginButton": "扫码登录",
-    "BilibiliCookieInputButton": "手动填入cookie（推荐）",
+    "BilibiliCookieInputButton": "手动填入cookie",
     "BilibiliCookieInputDialogTitle": "填入b站cookie",
     "BilibiliLoginQRGeneration": "正在生成二维码...",
     "BilibiliLoginQRGenerated": "在b站APP扫码登录",

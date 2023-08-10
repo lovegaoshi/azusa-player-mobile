@@ -176,8 +176,8 @@
   },
   "Login": {
     "BilibiliNotLoggedIn": "User not logged in\n",
-    "BilibiliLoginButton": "Click to log in",
-    "BilibiliCookieInputButton": "Click to manually input cookies",
+    "BilibiliLoginButton": "QR log in",
+    "BilibiliCookieInputButton": "Manually input cookies",
     "BilibiliCookieInputDialogTitle": "Add Bili Cookies",
     "BilibiliLoginQRGeneration": "Generating QR code...",
     "BilibiliLoginQRGenerated": "Scan QR code in Bilibili app to login",
