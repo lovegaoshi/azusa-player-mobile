@@ -4,8 +4,8 @@ import { View, StyleSheet, GestureResponderEvent } from 'react-native';
 import { useTranslation } from 'react-i18next';
 import ShareMenu, { ShareCallback } from 'react-native-share-menu';
 import { useNavigation } from '@react-navigation/native';
-import { ViewEnum } from '@enums/View';
 
+import { ViewEnum } from '@enums/View';
 import { searchBiliURLs } from '@utils/BiliSearch';
 import { useNoxSetting } from '@hooks/useSetting';
 import usePlayback from '@hooks/usePlayback';
@@ -155,9 +155,9 @@ export default ({
 const styles = StyleSheet.create({
   container: {
     width: '100%',
-    height: 55,
+    height: 60,
     paddingHorizontal: 5,
-    paddingTop: 5,
+    paddingTop: 10,
   },
   searchContainer: {
     flexDirection: 'row',
