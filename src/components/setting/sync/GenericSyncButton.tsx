@@ -74,12 +74,12 @@ const ImportSyncFavButton = ({
   };
 
   return loading ? (
-    <ActivityIndicator size={60} style={styles.activityIndicator} />
+    <ActivityIndicator size={50} style={styles.activityIndicator} />
   ) : (
     <IconButton
       icon="cloud-download"
       onPress={loginAndDownload}
-      size={60}
+      size={50}
       style={styles.iconButton}
     />
   );
@@ -117,12 +117,12 @@ const ExportSyncFavButton = ({ noxBackup, login }: ExportProps) => {
   };
 
   return loading ? (
-    <ActivityIndicator size={60} style={styles.activityIndicator} />
+    <ActivityIndicator size={50} style={styles.activityIndicator} />
   ) : (
     <IconButton
       icon="cloud-upload"
       onPress={loginAndUpload}
-      size={60}
+      size={50}
       style={styles.iconButton}
     />
   );
@@ -153,7 +153,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  activityIndicator: {},
+  activityIndicator: {
+    width: 78,
+    height: 78,
+  },
   iconButton: {},
   spacing: {
     width: 20,

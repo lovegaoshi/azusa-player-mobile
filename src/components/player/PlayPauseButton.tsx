@@ -31,7 +31,7 @@ export const PlayPauseButton: React.FC<{
         style={styles.LoadingIconStyle}
       />
     ) : (
-      <ActivityIndicator size={78} />
+      <ActivityIndicator size={50} style={styles.activityIndicator} />
     );
   }
   return (
@@ -50,5 +50,9 @@ const styles = StyleSheet.create({
     width: 78,
     height: 78,
     marginTop: 0,
+  },
+  activityIndicator: {
+    width: 78,
+    height: 78,
   },
 });
