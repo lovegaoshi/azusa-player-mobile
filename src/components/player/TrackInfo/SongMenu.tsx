@@ -11,6 +11,9 @@ import { CopiedPlaylistMenuItem } from '../../buttons/CopiedPlaylistButton';
 import { RenameSongMenuItem } from '../../buttons/RenameSongButton';
 import useSongOperations from '@hooks/useSongOperations';
 import logger from '@utils/Logger';
+import useAlert from '../../dialogs/useAlert';
+import { addR128Gain, getR128Gain } from '@stores/appStore';
+import { setR128Gain } from '@/utils/ffmpeg';
 
 enum ICONS {
   SEND_TO = 'playlist-plus',
@@ -24,6 +27,7 @@ enum ICONS {
   REMOVE_AND_BAN_BVID = 'delete-forever',
   DETAIL = 'information-outline',
   RADIO = 'radio-tower',
+  R128GAIN = 'radio-tower',
 }
 
 interface Props {
@@ -57,6 +61,7 @@ export default ({
   );
   const { updateSongIndex } = useUpdatePlaylist();
   const { startRadio, radioAvailable } = useSongOperations();
+  const { TwoWayAlert } = useAlert();
 
   const closeMenu = React.useCallback(() => setSongMenuVisible(false), []);
 
@@ -156,6 +161,17 @@ export default ({
         leadingIcon={ICONS.REMOVE_AND_BAN_BVID}
         onPress={() => removeSongs(true)}
         title={t('SongOperations.songRemoveNBanTitle')}
+      />
+      <Menu.Item
+        leadingIcon={ICONS.R128GAIN}
+        onPress={async () =>
+          TwoWayAlert(
+            `R128Gain of ${song.name}`,
+            `${getR128Gain(song)} dB`,
+            () => addR128Gain(song, '0')
+          )
+        }
+        title={t('SongOperations.songR128gain')}
       />
     </Menu>
   );

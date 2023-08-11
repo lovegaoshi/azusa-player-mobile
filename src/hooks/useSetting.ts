@@ -22,6 +22,7 @@ import noxPlayingList, { setPlayingList } from '../stores/playingList';
 import { resolveBackgroundImage } from '../components/background/MainBackground';
 import type { NoxStorage } from '../types/storage';
 import { setPlayerSetting as setPlayerSettingVanilla } from '@stores/playerSettingStore';
+import { initialize as appStoreInitialize } from '@stores/appStore';
 
 const { getState, setState } = noxPlayingList;
 
@@ -260,6 +261,7 @@ export const useNoxSetting = create<NoxSetting>((set, get) => ({
     const playingList =
       val.playlists[val.lastPlaylistId[0]] || dummyPlaylistList;
     const createdStyle = createStyle(val.skin);
+    await appStoreInitialize();
     set({ currentPlayingId: val.lastPlaylistId[1] });
     set({ currentPlayingList: playingList });
     set({

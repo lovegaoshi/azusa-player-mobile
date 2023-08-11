@@ -94,6 +94,8 @@
     "noCookieBiliSearchDesc": "TODO: 搜索b站时提交cookies获得个性化搜索结果",
     "updateLoadedTrackName": "更新歌曲metadata",
     "updateLoadedTrackDesc": "总是解析歌曲以更新metadata",
+    "r128gainName": "实时R128gain",
+    "r128gainDesc": "启用实时音量调整（仅在歌曲缓存开启时有用）",
     "fastBiliSearchName": "快速b站搜索",
     "fastBiliSearchDesc": "使用b站搜索时，不解析分p内容"
   },

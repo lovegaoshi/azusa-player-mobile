@@ -3,7 +3,11 @@ import { createStore } from 'zustand/vanilla';
 
 import { DEFAULT_SETTING } from '@enums/Storage';
 import type { NoxStorage } from '../types/storage';
-import { saveSettings } from '@utils/ChromeStorage';
+import {
+  saveSettings,
+  loadR128GainMapping,
+  saveR128GainMapping,
+} from '@utils/ChromeStorage';
 
 interface AppStore {
   playerSetting: NoxStorage.PlayerSettingDict;

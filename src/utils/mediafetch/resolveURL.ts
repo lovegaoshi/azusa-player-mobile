@@ -49,7 +49,7 @@ export const fetchPlayUrlPromise = async (
     [biliaudioFetch.regexResolveURLMatch, biliaudioFetch.resolveURL],
     [ytbvideoFetch.regexResolveURLMatch, ytbvideoFetch.resolveURL],
   ];
-  logger.debug(`[resolveURL] ${{ bvid, cid }}`);
+  logger.debug(`[resolveURL] ${bvid}, ${cid} }`);
   for (const reExtraction of regexResolveURLs) {
     const reExtracted = reExtraction[0].exec(cid);
     if (reExtracted !== null) {
@@ -100,7 +100,7 @@ export const fetchVideoPlayUrlPromise = async (
     const json = await res.json();
     return { url: extractResponseJson(json, extractType) as string };
   } catch (e) {
-    logger.error(`[resolveURL]: ${e}`);
+    logger.error(`[resolveURL] error: ${e}`);
     throw e;
   }
 };

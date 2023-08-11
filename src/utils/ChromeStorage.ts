@@ -57,6 +57,27 @@ export const removeItem = async (key: string) => {
   }
 };
 
+export const loadR128GainMapping = async () => {
+  return (
+    ((await getItem(STORAGE_KEYS.DEFAULT_SEARCH)) as NoxStorage.R128Dict) ||
+    ({} as NoxStorage.R128Dict)
+  );
+  // TODO: does dict get too long  that this is necessary?
+  const result = (await loadChucked(
+    (await getItem(STORAGE_KEYS.R128GAIN_MAPPING)) || []
+  )) as [string, string][];
+  return result.reduce((acc, val) => {
+    acc[val[0]] = val[1];
+    return acc;
+  }, {} as NoxStorage.R128Dict);
+};
+
+export const saveR128GainMapping = async (val: NoxStorage.R128Dict) => {
+  return await saveItem(STORAGE_KEYS.R128GAIN_MAPPING, val);
+  const result = Object.keys(val).map(key => [key, val[key]]);
+  return await saveChucked(result, STORAGE_KEYS.R128GAIN_MAPPING);
+};
+
 export const loadDefaultSearch = async (): Promise<SEARCH_OPTIONS> => {
   return (
     (await getItem(STORAGE_KEYS.DEFAULT_SEARCH)) || SEARCH_OPTIONS.BILIBILI

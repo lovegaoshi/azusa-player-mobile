@@ -75,6 +75,7 @@
     "songRenameTitle": "Rename...",
     "songSearchInPlaylistTitle": "Search in Playlist",
     "songStartRadio": "Start Radio",
+    "songR128gain": "R128Gain",
     "songRemoveTitle": "Remove",
     "songRemoveNBanTitle": "Remove and BAN",
     "selectedSongs": "Selected songs"
@@ -94,6 +95,8 @@
     "noCookieBiliSearchDesc": "TODO: Enable credentials in bilibili search to show customized searchresults",
     "updateLoadedTrackName": "Update Track Metadata",
     "updateLoadedTrackDesc": "Always retrieve the track metadata regardless of cache status",
+    "r128gainName": "R128gain OTF",
+    "r128gainDesc": "Enable on-the-fly R128gain (only works when cache is enabled)",
     "fastBiliSearchName": "Fast Bilibili Search",
     "fastBiliSearchDesc": "Do not search for bilibili video episodes."
   },

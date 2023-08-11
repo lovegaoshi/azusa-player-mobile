@@ -5,7 +5,7 @@ import TrackPlayer, {
 } from 'react-native-track-player';
 import { DeviceEventEmitter } from 'react-native';
 
-import { resolveUrl, NULL_TRACK } from '../objects/Song';
+import { resolveUrl, NULL_TRACK, parseSongR128gain } from '../objects/Song';
 import { initBiliHeartbeat } from '../utils/Bilibili/BiliOperate';
 import type { NoxStorage } from '../types/storage';
 import { saveLastPlayDuration } from '../utils/ChromeStorage';
@@ -76,50 +76,56 @@ export async function PlaybackService() {
     console.log('Event.PlaybackQueueEnded', event);
   });
 
-  TrackPlayer.addEventListener(Event.PlaybackActiveTrackChanged, event => {
-    console.log('Event.PlaybackActiveTrackChanged', event);
-    if (!event.track || !event.track.song) return;
-    // to resolve bilibili media stream URLs on the fly, TrackPlayer.load is used to
-    // replace the current track's url. its not documented? >:/
-    if (
-      event.index !== undefined &&
-      (event.track.url === NULL_TRACK.url ||
-        new Date().getTime() - event.track.urlRefreshTimeStamp > 3600000)
-    ) {
-      const heartBeatReq = [event.track.song.bvid, event.track.song.id];
-      // HACK: what if cid needs to be resolved on the fly?
-      // TODO: its too much of a hassle and I would like to just
-      // ask users to refresh their lists instead, if they really care
-      // about sending heartbeats.
-      if (
-        lastBiliHeartBeat[0] !== heartBeatReq[0] ||
-        lastBiliHeartBeat[1] !== heartBeatReq[1]
-      ) {
-        initBiliHeartbeat({
-          bvid: event.track.song.bvid,
-          cid: event.track.song.id,
-        });
-        lastBiliHeartBeat = heartBeatReq;
+  TrackPlayer.addEventListener(
+    Event.PlaybackActiveTrackChanged,
+    async event => {
+      console.log('Event.PlaybackActiveTrackChanged', event);
+      TrackPlayer.setVolume(1);
+      if (!event.track || !event.track.song) return;
+
+      // r128gain support:
+      if (event.track.url !== NULL_TRACK.url) {
+        await parseSongR128gain(event.track.song);
       }
-      resolveUrl(event.track.song)
-        .then(updatedMetadata => {
+      // to resolve bilibili media stream URLs on the fly, TrackPlayer.load is used to
+      // replace the current track's url. its not documented? >:/
+      if (
+        event.index !== undefined &&
+        (event.track.url === NULL_TRACK.url ||
+          new Date().getTime() - event.track.urlRefreshTimeStamp > 3600000)
+      ) {
+        const heartBeatReq = [event.track.song.bvid, event.track.song.id];
+        // HACK: what if cid needs to be resolved on the fly?
+        // TODO: its too much of a hassle and I would like to just
+        // ask users to refresh their lists instead, if they really care
+        // about sending heartbeats.
+        if (
+          lastBiliHeartBeat[0] !== heartBeatReq[0] ||
+          lastBiliHeartBeat[1] !== heartBeatReq[1]
+        ) {
+          initBiliHeartbeat({
+            bvid: event.track.song.bvid,
+            cid: event.track.song.id,
+          });
+          lastBiliHeartBeat = heartBeatReq;
+        }
+        try {
+          const updatedMetadata = await resolveUrl(event.track.song);
           NoxCache.noxMediaCache?.saveCacheMedia(
             event.track!.song,
             updatedMetadata
           );
-          TrackPlayer.getActiveTrack().then(currentTrack => {
-            TrackPlayer.load({ ...currentTrack, ...updatedMetadata }).then(
-              () => {
-                if (getState().playmode === NoxRepeatMode.REPEAT_TRACK) {
-                  TrackPlayer.setRepeatMode(RepeatMode.Track);
-                }
-              }
-            );
-          });
-        })
-        .catch(e => console.error('resolveURL failed', event.track, e));
+          const currentTrack = await TrackPlayer.getActiveTrack();
+          await TrackPlayer.load({ ...currentTrack, ...updatedMetadata });
+          if (getState().playmode === NoxRepeatMode.REPEAT_TRACK) {
+            TrackPlayer.setRepeatMode(RepeatMode.Track);
+          }
+        } catch (e) {
+          console.error('resolveURL failed', event.track, e);
+        }
+      }
     }
-  });
+  );
 
   TrackPlayer.addEventListener(Event.PlaybackPlayWhenReadyChanged, event => {
     console.log('Event.PlaybackPlayWhenReadyChanged', event);
