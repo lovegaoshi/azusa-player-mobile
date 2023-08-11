@@ -34,7 +34,7 @@ export const getR128Gain = (song: NoxMedia.Song) => {
   return r128gain[song.id] ?? null;
 };
 
-export const addR128Gain = (song: NoxMedia.Song, gain: string) => {
+export const addR128Gain = (song: NoxMedia.Song, gain: string | null) => {
   saveR128Gain({ [song.id]: gain });
 };
 

@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Menu } from 'react-native-paper';
-import { Keyboard } from 'react-native';
+import { Keyboard, Alert } from 'react-native';
 import { useTranslation } from 'react-i18next';
 import TrackPlayer from 'react-native-track-player';
 
@@ -13,7 +13,6 @@ import useSongOperations from '@hooks/useSongOperations';
 import logger from '@utils/Logger';
 import useAlert from '../../dialogs/useAlert';
 import { addR128Gain, getR128Gain } from '@stores/appStore';
-import { setR128Gain } from '@/utils/ffmpeg';
 
 enum ICONS {
   SEND_TO = 'playlist-plus',
@@ -27,7 +26,7 @@ enum ICONS {
   REMOVE_AND_BAN_BVID = 'delete-forever',
   DETAIL = 'information-outline',
   RADIO = 'radio-tower',
-  R128GAIN = 'radio-tower',
+  R128GAIN = 'replay',
 }
 
 interface Props {
@@ -61,7 +60,6 @@ export default ({
   );
   const { updateSongIndex } = useUpdatePlaylist();
   const { startRadio, radioAvailable } = useSongOperations();
-  const { TwoWayAlert } = useAlert();
 
   const closeMenu = React.useCallback(() => setSongMenuVisible(false), []);
 
@@ -91,11 +89,11 @@ export default ({
     const songs = [song];
     const newPlaylist = banBVID
       ? {
-          ...currentPlaylist2,
-          blacklistedUrl: currentPlaylist2.blacklistedUrl.concat(
-            songs.map(song => song.bvid)
-          ),
-        }
+        ...currentPlaylist2,
+        blacklistedUrl: currentPlaylist2.blacklistedUrl.concat(
+          songs.map(song => song.bvid)
+        ),
+      }
       : currentPlaylist2;
     updatePlaylist(newPlaylist, [], songs);
     setCurrentPlayingList(newPlaylist);
@@ -165,10 +163,15 @@ export default ({
       <Menu.Item
         leadingIcon={ICONS.R128GAIN}
         onPress={async () =>
-          TwoWayAlert(
+          Alert.alert(
             `R128Gain of ${song.name}`,
             `${getR128Gain(song)} dB`,
-            () => addR128Gain(song, '0')
+            [
+              { text: 'Nullify', onPress: () => addR128Gain(song, null) },
+              { text: 'Zero', onPress: () => addR128Gain(song, '+0') },
+              { text: 'OK' },
+            ],
+            { cancelable: true }
           )
         }
         title={t('SongOperations.songR128gain')}
