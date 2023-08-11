@@ -5,7 +5,7 @@ interface AppStore {
   pipMode: boolean;
 }
 
-const appStore = createStore<AppStore>(() => ({
+const appStore = createStore<AppStore>((set, get) => ({
   pipMode: false,
 }));
 

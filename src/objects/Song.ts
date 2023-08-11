@@ -5,9 +5,11 @@ import { reExtractSongName, extractParenthesis } from '../utils/re';
 import { customReqHeader, DEFAULT_UA } from '../utils/BiliFetch';
 import { logger } from '../utils/Logger';
 import NoxCache from '../utils/Cache';
+import playerSettingStore from '@stores/playerSettingStore';
 
 export const DEFAULT_NULL_URL = 'NULL';
 export const NULL_TRACK = { url: DEFAULT_NULL_URL, urlRefreshTimeStamp: 0 };
+const { getState } = playerSettingStore;
 
 interface SongProps {
   cid: string | number;
@@ -85,7 +87,14 @@ export const resolveUrl = async (song: NoxMedia.Song) => {
   // TODO: method is called MULTIPLE times. need to investigate and debounce.
   // luckily bilibili doesnt seem to care for now
   const cachedUrl = await NoxCache.noxMediaCache?.loadCacheMedia(song);
-  const url = cachedUrl ? { url: cachedUrl } : await fetchPlayUrlPromise(song);
+  const url = cachedUrl
+    ? {
+        ...(getState().playerSetting.updateLoadedTrack
+          ? await fetchPlayUrlPromise(song)
+          : {}),
+        url: cachedUrl,
+      }
+    : await fetchPlayUrlPromise(song);
   logger.debug(`[SongResolveURL] ${song.name} is resolved to ${url.url}`);
   return {
     url: url.url,

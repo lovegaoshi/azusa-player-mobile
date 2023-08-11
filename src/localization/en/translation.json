@@ -92,8 +92,8 @@
     "dataSaverDesc": "TODO: Render low quality assets to save data.",
     "noCookieBiliSearchName": "Bilibili Customized Search",
     "noCookieBiliSearchDesc": "TODO: Enable credentials in bilibili search to show customized searchresults",
-    "updateLoadedTrackName": "Update Loaded Track",
-    "updateLoadedTrackDesc": "TODO: When a track is loaded, update the refreshed metadata.",
+    "updateLoadedTrackName": "Update Track Metadata",
+    "updateLoadedTrackDesc": "Always retrieve the track metadata regardless of cache status",
     "fastBiliSearchName": "Fast Bilibili Search",
     "fastBiliSearchDesc": "Do not search for bilibili video episodes."
   },

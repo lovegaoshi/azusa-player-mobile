@@ -21,6 +21,7 @@ import { createStyle } from '../components/style';
 import noxPlayingList, { setPlayingList } from '../stores/playingList';
 import { resolveBackgroundImage } from '../components/background/MainBackground';
 import type { NoxStorage } from '../types/storage';
+import { setPlayerSetting as setPlayerSettingVanilla } from '@stores/playerSettingStore';
 
 const { getState, setState } = noxPlayingList;
 
@@ -198,6 +199,7 @@ export const useNoxSetting = create<NoxSetting>((set, get) => ({
     const newPlayerSetting = { ...get().playerSetting, ...val };
     set({ playerSetting: newPlayerSetting });
     saveSettings(newPlayerSetting);
+    setPlayerSettingVanilla(newPlayerSetting);
   },
 
   addPlaylist: (playlist: NoxMedia.Playlist) => {
@@ -266,7 +268,9 @@ export const useNoxSetting = create<NoxSetting>((set, get) => ({
     });
     set({ searchPlaylist: val.searchPlaylist });
     set({ favoritePlaylist: val.favoriPlaylist });
-    set({ playerSetting: val.settings || DEFAULT_SETTING });
+    const initializedPlayerSetting = val.settings || DEFAULT_SETTING;
+    set({ playerSetting: initializedPlayerSetting });
+    setPlayerSettingVanilla(initializedPlayerSetting);
     set({ playlists: val.playlists });
     set({ playlistIds: val.playlistIds });
     set({
