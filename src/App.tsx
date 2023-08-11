@@ -144,7 +144,7 @@ const App: React.FC = () => {
                   drawerIcon: () => <IconButton icon="compass" />,
                   title: String(t('appDrawer.exploreScreenName')),
                 }}
-                component={Explore}
+                component={DummySettings}
               />
               <Drawer.Screen
                 name={ViewEnum.SETTINGS}

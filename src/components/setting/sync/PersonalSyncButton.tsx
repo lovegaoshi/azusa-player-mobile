@@ -56,9 +56,9 @@ const ImportSyncFavButton = ({
   };
 
   return loading ? (
-    <ActivityIndicator size={60} />
+    <ActivityIndicator size={50} style={styles.activityIndicator} />
   ) : (
-    <IconButton icon="cloud-download" onPress={cloudDownload} size={60} />
+    <IconButton icon="cloud-download" onPress={cloudDownload} size={50} />
   );
 };
 
@@ -89,9 +89,9 @@ const ExportSyncFavButton = ({ cloudAddress, cloudID }: Props) => {
   };
 
   return loading ? (
-    <ActivityIndicator size={60} />
+    <ActivityIndicator size={50} style={styles.activityIndicator} />
   ) : (
-    <IconButton icon="cloud-upload" onPress={cloudUpload} size={60} />
+    <IconButton icon="cloud-upload" onPress={cloudUpload} size={50} />
   );
 };
 
@@ -165,4 +165,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   emptyPlaceholder: { width: 20 },
+  activityIndicator: {
+    width: 78,
+    height: 78,
+  },
 });

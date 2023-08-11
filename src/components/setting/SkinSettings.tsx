@@ -20,6 +20,7 @@ import {
   ScrollView,
   GestureDetector,
   Gesture,
+  GestureHandlerRootView,
 } from 'react-native-gesture-handler';
 
 import SkinSearchbar from './SkinSearchbar';
@@ -78,7 +79,18 @@ const SkinItem = ({ skin, checked, setChecked }: SkinItemProps) => {
 
   const start = useSharedValue({ x: 0, y: 0 });
   const gesture = Gesture.Pan()
-    .onBegin(() => {
+    .manualActivation(true)
+    .onTouchesMove((e, state) => {
+      console.log(e.changedTouches);
+      if (
+        e.changedTouches[0].x > 5 &&
+        e.changedTouches[0].x < 77 &&
+        e.changedTouches[0].y < 72
+      ) {
+        state.activate();
+      }
+    })
+    .onStart(() => {
       isPressed.value = true;
     })
     .onUpdate(e => {
@@ -88,7 +100,7 @@ const SkinItem = ({ skin, checked, setChecked }: SkinItemProps) => {
       };
     })
     .onEnd(() => {
-      if (Math.abs(offset.value.x) > WindowWidth * 0.4) {
+      if (Math.abs(offset.value.x) > WindowWidth * 0.4 && !skin.builtin) {
         runOnJS(deleteTheme)();
       } else {
         offset.value = {
@@ -204,16 +216,18 @@ const SkinSettings = () => {
       ]}
     >
       <SkinSearchbar onSearched={loadCustomSkin} />
-      <ScrollView>
-        {allThemes.map(item => (
-          <SkinItem
-            skin={item}
-            checked={checked}
-            setChecked={setChecked}
-            key={getThemeID(item)}
-          />
-        ))}
-      </ScrollView>
+      <GestureHandlerRootView>
+        <ScrollView>
+          {allThemes.map(item => (
+            <SkinItem
+              skin={item}
+              checked={checked}
+              setChecked={setChecked}
+              key={getThemeID(item)}
+            />
+          ))}
+        </ScrollView>
+      </GestureHandlerRootView>
     </SafeAreaView>
   );
 };

@@ -92,8 +92,8 @@
     "dataSaverDesc": "TODO: Render low quality assets to save data.",
     "noCookieBiliSearchName": "Bilibili Customized Search",
     "noCookieBiliSearchDesc": "TODO: Enable credentials in bilibili search to show customized searchresults",
-    "updateLoadedTrackName": "Update Loaded Track",
-    "updateLoadedTrackDesc": "TODO: When a track is loaded, update the refreshed metadata.",
+    "updateLoadedTrackName": "Update Track Metadata",
+    "updateLoadedTrackDesc": "Always retrieve the track metadata regardless of cache status",
     "fastBiliSearchName": "Fast Bilibili Search",
     "fastBiliSearchDesc": "Do not search for bilibili video episodes."
   },
@@ -176,8 +176,8 @@
   },
   "Login": {
     "BilibiliNotLoggedIn": "User not logged in\n",
-    "BilibiliLoginButton": "Click to log in",
-    "BilibiliCookieInputButton": "Click to manually input cookies",
+    "BilibiliLoginButton": "QR log in",
+    "BilibiliCookieInputButton": "Manually input cookies",
     "BilibiliCookieInputDialogTitle": "Add Bili Cookies",
     "BilibiliLoginQRGeneration": "Generating QR code...",
     "BilibiliLoginQRGenerated": "Scan QR code in Bilibili app to login",
