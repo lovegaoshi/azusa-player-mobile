@@ -81,7 +81,6 @@ const SkinItem = ({ skin, checked, setChecked }: SkinItemProps) => {
   const gesture = Gesture.Pan()
     .manualActivation(true)
     .onTouchesMove((e, state) => {
-      console.log(e.changedTouches);
       if (
         e.changedTouches[0].x > 5 &&
         e.changedTouches[0].x < 77 &&
@@ -216,18 +215,16 @@ const SkinSettings = () => {
       ]}
     >
       <SkinSearchbar onSearched={loadCustomSkin} />
-      <GestureHandlerRootView>
-        <ScrollView>
-          {allThemes.map(item => (
-            <SkinItem
-              skin={item}
-              checked={checked}
-              setChecked={setChecked}
-              key={getThemeID(item)}
-            />
-          ))}
-        </ScrollView>
-      </GestureHandlerRootView>
+      <ScrollView>
+        {allThemes.map(item => (
+          <SkinItem
+            skin={item}
+            checked={checked}
+            setChecked={setChecked}
+            key={getThemeID(item)}
+          />
+        ))}
+      </ScrollView>
     </SafeAreaView>
   );
 };
