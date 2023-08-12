@@ -22,6 +22,8 @@ declare namespace NoxStorage {
     fastBiliSearch: boolean;
     noInterruption: boolean;
     updateLoadedTrack: boolean;
+    r128gain: boolean;
+    prefetchTrack: boolean;
 
     appID: string;
     language?: string;
@@ -44,5 +46,9 @@ declare namespace NoxStorage {
     lyricMapping: Map<string, NoxMedia.LyricDetail>;
     language?: string;
     lastPlayDuration: number;
+  }
+
+  export interface R128Dict {
+    [key: string]: string | null;
   }
 }

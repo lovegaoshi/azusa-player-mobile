@@ -18,6 +18,7 @@ export enum STORAGE_KEYS {
   LAST_PLAY_DURATION = 'LastPlayDuration',
   CACHED_MEDIA_MAPPING = 'CachedMediaMapping',
   DEFAULT_SEARCH = 'defaultSearch',
+  R128GAIN_MAPPING = 'R128GainMapping',
 }
 
 export enum SEARCH_OPTIONS {
@@ -47,6 +48,8 @@ export const DEFAULT_SETTING: NoxStorage.PlayerSettingDict = {
   fastBiliSearch: true,
   noInterruption: false,
   updateLoadedTrack: false,
+  r128gain: false,
+  prefetchTrack: false,
 
   appID,
   language: undefined,

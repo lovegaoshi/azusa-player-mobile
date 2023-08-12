@@ -1,6 +1,12 @@
 import LRUCache from 'lru-cache';
 import RNFetchBlob from 'react-native-blob-util';
 
+import { r128gain, setR128Gain } from './ffmpeg';
+import { addR128Gain } from '@stores/appStore';
+import playerSettingStore from '@stores/playerSettingStore';
+
+const { getState } = playerSettingStore;
+
 import {
   loadCachedMediaMapping,
   saveCachedMediaMapping,
@@ -59,6 +65,13 @@ class NoxMediaCache {
       .fetch('GET', resolvedURL.url, resolvedURL.headers)
       .then(res => {
         this.cache.set(noxCacheKey(song), res.path());
+        if (getState().playerSetting.r128gain) {
+          console.debug('[FFMPEG] now starting FFMPEG r128gain...');
+          r128gain(res.path()).then(gain => {
+            addR128Gain(song, gain);
+            setR128Gain(gain);
+          });
+        }
         this.dumpCache();
       });
   };

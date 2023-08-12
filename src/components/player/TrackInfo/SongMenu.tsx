@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Menu } from 'react-native-paper';
-import { Keyboard } from 'react-native';
+import { Keyboard, Alert } from 'react-native';
 import { useTranslation } from 'react-i18next';
 import TrackPlayer from 'react-native-track-player';
 
@@ -11,6 +11,8 @@ import { CopiedPlaylistMenuItem } from '../../buttons/CopiedPlaylistButton';
 import { RenameSongMenuItem } from '../../buttons/RenameSongButton';
 import useSongOperations from '@hooks/useSongOperations';
 import logger from '@utils/Logger';
+import useAlert from '../../dialogs/useAlert';
+import { addR128Gain, getR128Gain } from '@stores/appStore';
 
 enum ICONS {
   SEND_TO = 'playlist-plus',
@@ -24,6 +26,7 @@ enum ICONS {
   REMOVE_AND_BAN_BVID = 'delete-forever',
   DETAIL = 'information-outline',
   RADIO = 'radio-tower',
+  R128GAIN = 'replay',
 }
 
 interface Props {
@@ -137,15 +140,20 @@ export default ({
         title={t('SongOperations.songStartRadio')}
       />
       <Menu.Item
-        leadingIcon={ICONS.SEARCH_IN_PLAYLIST}
-        onPress={() => {
-          handleSearch(song.parsedName);
-          closeMenu();
-          // TODO: doesnt work.
-          Keyboard.dismiss();
-        }}
-        disabled
-        title={t('SongOperations.songSearchInPlaylistTitle')}
+        leadingIcon={ICONS.R128GAIN}
+        onPress={async () =>
+          Alert.alert(
+            `R128Gain of ${song.parsedName}`,
+            `${getR128Gain(song)} dB`,
+            [
+              { text: 'Nullify', onPress: () => addR128Gain(song, null) },
+              { text: 'Zero', onPress: () => addR128Gain(song, '+0') },
+              { text: 'OK' },
+            ],
+            { cancelable: true }
+          )
+        }
+        title={t('SongOperations.songR128gain')}
       />
       <Menu.Item
         leadingIcon={ICONS.REMOVE}

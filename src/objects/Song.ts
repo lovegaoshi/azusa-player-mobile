@@ -6,6 +6,8 @@ import { customReqHeader, DEFAULT_UA } from '../utils/BiliFetch';
 import { logger } from '../utils/Logger';
 import NoxCache from '../utils/Cache';
 import playerSettingStore from '@stores/playerSettingStore';
+import { addR128Gain, getR128Gain } from '@stores/appStore';
+import { r128gain, setR128Gain } from '@utils/ffmpeg';
 
 export const DEFAULT_NULL_URL = 'NULL';
 export const NULL_TRACK = { url: DEFAULT_NULL_URL, urlRefreshTimeStamp: 0 };
@@ -83,13 +85,34 @@ export const removeSongBiliShazamed = (song: NoxMedia.Song) => {
   song.parsedName = reExtractSongName(song.name, song.singerId);
 };
 
+export const parseSongR128gain = async (song: NoxMedia.Song) => {
+  const playerSetting = getState().playerSetting;
+  const cachedR128gain = getR128Gain(song);
+  const cachedUrl = await NoxCache.noxMediaCache?.loadCacheMedia(song);
+  logger.debug(`[r128gain] found saved r128gain as ${cachedR128gain}`);
+  if (!playerSetting.r128gain) {
+    return { playerSetting, cachedR128gain, cachedUrl };
+  }
+  if (cachedR128gain) {
+    setR128Gain(cachedR128gain);
+  } else if (cachedUrl) {
+    logger.debug('[FFMPEG] r128gain null. now parsing FFMPEG r128gain...');
+    const gain = await r128gain(cachedUrl);
+    addR128Gain(song, gain);
+    setR128Gain(gain);
+  }
+  return { playerSetting, cachedR128gain, cachedUrl };
+};
+
 export const resolveUrl = async (song: NoxMedia.Song) => {
   // TODO: method is called MULTIPLE times. need to investigate and debounce.
   // luckily bilibili doesnt seem to care for now
+  logger.debug(`[SongResolveURL] start resolving ${song.name}`);
   const cachedUrl = await NoxCache.noxMediaCache?.loadCacheMedia(song);
+  const playerSetting = getState().playerSetting;
   const url = cachedUrl
     ? {
-        ...(getState().playerSetting.updateLoadedTrack
+        ...(playerSetting.updateLoadedTrack
           ? await fetchPlayUrlPromise(song)
           : {}),
         url: cachedUrl,

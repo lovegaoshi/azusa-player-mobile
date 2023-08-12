@@ -47,7 +47,7 @@ export const fetchBiliSearchList = async (
             {
               bvid: obj.bvid,
               part: '1',
-              cid: `null-${uuidv4()}`, // resolvedCids[index]
+              cid: `null-${obj.bvid}`, // resolvedCids[index]
               duration: timestampToSeconds(obj.duration),
             },
           ],
