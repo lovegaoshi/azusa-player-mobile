@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Button, Dialog, Portal, TextInput } from 'react-native-paper';
 import { useTranslation } from 'react-i18next';
 import { useNoxSetting } from '@hooks/useSetting';
-import PortaledInput from './PortaledInput';
+import PortaledInput, { PortalInputRef } from './PortaledInput';
 
 interface Props {
   visible: boolean;
@@ -18,13 +18,13 @@ export default ({
   onSubmit = (rename: string) => undefined,
 }: Props) => {
   const { t } = useTranslation();
-  const inputRef = React.useRef<any>();
+  const inputRef = React.useRef<PortalInputRef>();
 
   const handleClose = () => {
     onClose();
   };
   const handleSubmit = () => {
-    onSubmit(inputRef.current.name);
+    onSubmit(inputRef.current?.name || '');
   };
 
   return (

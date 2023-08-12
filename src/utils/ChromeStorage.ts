@@ -57,11 +57,22 @@ export const removeItem = async (key: string) => {
   }
 };
 
-export const loadR128GainMapping = async () => {
-  return (
-    ((await getItem(STORAGE_KEYS.DEFAULT_SEARCH)) as NoxStorage.R128Dict) ||
-    ({} as NoxStorage.R128Dict)
-  );
+/**
+ * a save helper function for mapping types ({string: val}).
+ * @returns nothing
+ */
+async function saveMapping<T>(key: STORAGE_KEYS, val: { [key: string]: T }) {
+  return await saveItem(key, val);
+  const result = Object.keys(val).map(key => [key, val[key]]);
+  return await saveChucked(result, STORAGE_KEYS.R128GAIN_MAPPING);
+}
+
+/**
+ * a save helper function for mapping types ({string: val}).
+ * @returns the mapping object
+ */
+const loadMapping = async (key: STORAGE_KEYS) => {
+  return (await getItem(key)) || {};
   // TODO: does dict get too long  that this is necessary?
   const result = (await loadChucked(
     (await getItem(STORAGE_KEYS.R128GAIN_MAPPING)) || []
@@ -72,10 +83,24 @@ export const loadR128GainMapping = async () => {
   }, {} as NoxStorage.R128Dict);
 };
 
+export const loadR128GainMapping = async () => {
+  return (await loadMapping(
+    STORAGE_KEYS.R128GAIN_MAPPING
+  )) as NoxStorage.R128Dict;
+};
+
 export const saveR128GainMapping = async (val: NoxStorage.R128Dict) => {
-  return await saveItem(STORAGE_KEYS.R128GAIN_MAPPING, val);
-  const result = Object.keys(val).map(key => [key, val[key]]);
-  return await saveChucked(result, STORAGE_KEYS.R128GAIN_MAPPING);
+  return await saveMapping(STORAGE_KEYS.R128GAIN_MAPPING, val);
+};
+
+export const loadABMapping = async () => {
+  return (await loadMapping(
+    STORAGE_KEYS.ABREPEAT_MAPPING
+  )) as NoxStorage.ABDict;
+};
+
+export const saveABMapping = async (val: NoxStorage.ABDict) => {
+  return await saveMapping(STORAGE_KEYS.ABREPEAT_MAPPING, val);
 };
 
 export const loadDefaultSearch = async (): Promise<SEARCH_OPTIONS> => {

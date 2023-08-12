@@ -76,6 +76,8 @@
     "songSearchInPlaylistTitle": "Search in Playlist",
     "songStartRadio": "Start Radio",
     "songR128gain": "R128Gain",
+    "abrepeat": "ABrepeat",
+    "abrepeatTitle": "{{song.parsedName}} A-B repeat",
     "songRemoveTitle": "Remove",
     "songRemoveNBanTitle": "Remove and BAN",
     "selectedSongs": "Selected songs"

@@ -19,6 +19,7 @@ export enum STORAGE_KEYS {
   CACHED_MEDIA_MAPPING = 'CachedMediaMapping',
   DEFAULT_SEARCH = 'defaultSearch',
   R128GAIN_MAPPING = 'R128GainMapping',
+  ABREPEAT_MAPPING = 'ABREPEATMapping',
 }
 
 export enum SEARCH_OPTIONS {

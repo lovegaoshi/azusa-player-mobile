@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next';
 
 import { dummyPlaylist } from '@objects/Playlist';
 import { useNoxSetting } from '@hooks/useSetting';
-import PortaledInput from './PortaledInput';
+import PortaledInput, { PortalInputRef } from './PortaledInput';
 
 interface Props {
   visible: boolean;
@@ -22,7 +22,7 @@ export default ({
 }: Props) => {
   const { t } = useTranslation();
   const addPlaylist = useNoxSetting(state => state.addPlaylist);
-  const inputRef = useRef<any>();
+  const inputRef = useRef<PortalInputRef>();
 
   const handleClose = () => {
     inputRef?.current?.clearText();
@@ -36,10 +36,10 @@ export default ({
       ? {
           ...fromList,
           id: dummyList.id,
-          title: inputRef.current.name,
+          title: inputRef.current?.name || '',
           type: dummyList.type,
         }
-      : { ...dummyList, title: inputRef.current.name };
+      : { ...dummyList, title: inputRef.current?.name || '' };
     addPlaylist(newList);
     onSubmit();
   };

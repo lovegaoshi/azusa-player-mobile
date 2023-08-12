@@ -11,8 +11,8 @@ import { CopiedPlaylistMenuItem } from '../../buttons/CopiedPlaylistButton';
 import { RenameSongMenuItem } from '../../buttons/RenameSongButton';
 import useSongOperations from '@hooks/useSongOperations';
 import logger from '@utils/Logger';
-import useAlert from '../../dialogs/useAlert';
 import { addR128Gain, getR128Gain } from '@stores/appStore';
+import ABSliderMenu from './ABSliderMenu';
 
 enum ICONS {
   SEND_TO = 'playlist-plus',
@@ -118,6 +118,11 @@ export default ({
     closeMenu();
   };
 
+  const setR128Gain = (gain: string | null) => {
+    addR128Gain(song, gain);
+    closeMenu();
+  };
+
   return (
     <Menu visible={songMenuVisible} onDismiss={closeMenu} anchor={menuCoords}>
       <CopiedPlaylistMenuItem
@@ -147,15 +152,16 @@ export default ({
             `R128Gain of ${song.parsedName}`,
             `${getR128Gain(song)} dB`,
             [
-              { text: 'Nullify', onPress: () => addR128Gain(song, null) },
-              { text: 'Zero', onPress: () => addR128Gain(song, '+0') },
-              { text: 'OK' },
+              { text: 'Nullify', onPress: () => setR128Gain(null) },
+              { text: 'Zero', onPress: () => setR128Gain('+0') },
+              { text: 'OK', onPress: closeMenu },
             ],
             { cancelable: true }
           )
         }
         title={t('SongOperations.songR128gain')}
       />
+      <ABSliderMenu song={song} closeMenu={closeMenu} />
       <Menu.Item
         leadingIcon={ICONS.REMOVE}
         onPress={() => removeSongs()}

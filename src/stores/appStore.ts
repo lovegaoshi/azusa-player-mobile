@@ -1,13 +1,20 @@
 // vanilla store of zustand serving playbackServices.
 import { createStore } from 'zustand/vanilla';
 
-import { loadR128GainMapping, saveR128GainMapping } from '@utils/ChromeStorage';
+import {
+  loadR128GainMapping,
+  saveR128GainMapping,
+  loadABMapping,
+  saveABMapping,
+} from '@utils/ChromeStorage';
 import type { NoxStorage } from '../types/storage';
 
 interface AppStore {
   pipMode: boolean;
   r128gain: NoxStorage.R128Dict;
   setR128gain: (val: NoxStorage.R128Dict) => void;
+  ABRepeat: NoxStorage.ABDict;
+  setABRepeat: (val: NoxStorage.ABDict) => void;
 }
 
 const appStore = createStore<AppStore>((set, get) => ({
@@ -17,10 +24,16 @@ const appStore = createStore<AppStore>((set, get) => ({
     set({ r128gain: val });
     saveR128GainMapping(val);
   },
+  ABRepeat: {},
+  setABRepeat: (val: NoxStorage.ABDict) => {
+    set({ ABRepeat: val });
+    saveABMapping(val);
+  },
 }));
 
 export const initialize = async () => {
   appStore.setState({ r128gain: await loadR128GainMapping() });
+  appStore.setState({ ABRepeat: await loadABMapping() });
 };
 
 export const saveR128Gain = async (val: NoxStorage.R128Dict) => {
@@ -36,6 +49,28 @@ export const getR128Gain = (song: NoxMedia.Song) => {
 
 export const addR128Gain = (song: NoxMedia.Song, gain: string | null) => {
   saveR128Gain({ [song.id]: gain });
+};
+
+export const saveABRepeat = async (val: NoxStorage.ABDict) => {
+  const newR128gain = { ...appStore.getState().ABRepeat, ...val };
+  appStore.setState({ ABRepeat: newR128gain });
+  saveABMapping(newR128gain);
+};
+
+export const getABRepeatRaw = (songId: string) => {
+  const { ABRepeat } = appStore.getState();
+  return ABRepeat[songId] ?? [0, 1];
+};
+
+export const getABRepeat = (song: NoxMedia.Song) => {
+  return getABRepeatRaw(song.id);
+};
+
+export const addABRepeat = (
+  song: NoxMedia.Song,
+  abrepeat: [number, number]
+) => {
+  saveABMapping({ [song.id]: abrepeat });
 };
 
 export default appStore;

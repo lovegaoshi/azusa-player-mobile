@@ -22,7 +22,10 @@ import noxPlayingList, { setPlayingList } from '../stores/playingList';
 import { resolveBackgroundImage } from '../components/background/MainBackground';
 import type { NoxStorage } from '../types/storage';
 import { setPlayerSetting as setPlayerSettingVanilla } from '@stores/playerSettingStore';
-import { initialize as appStoreInitialize } from '@stores/appStore';
+import {
+  initialize as appStoreInitialize,
+  getABRepeatRaw,
+} from '@stores/appStore';
 
 const { getState, setState } = noxPlayingList;
 
@@ -37,6 +40,9 @@ interface initializedResults {
 }
 
 interface NoxSetting {
+  currentABRepeat: [number, number];
+  setCurrentABRepeat: (val: [number, number]) => void;
+
   playerStyle: any;
   setPlayerStyle: (style: any) => void;
   playerStyles: any[];
@@ -120,6 +126,9 @@ interface NoxSetting {
  * as well as saving and loading states to/from asyncStorage.
  */
 export const useNoxSetting = create<NoxSetting>((set, get) => ({
+  currentABRepeat: [0, 1],
+  setCurrentABRepeat: (val: [number, number]) => set({ currentABRepeat: val }),
+
   playerStyle: createStyle(),
   setPlayerStyle: (val: NoxTheme.style) => {
     const createdStyle = createStyle(val);
@@ -161,6 +170,7 @@ export const useNoxSetting = create<NoxSetting>((set, get) => ({
   setCurrentPlayingId: (val: string) => {
     set({ currentPlayingId: val });
     savelastPlaylistId([get().currentPlayingList.id, val]);
+    set({ currentABRepeat: getABRepeatRaw(val) });
   },
   currentPlayingList: dummyPlaylistList,
   setCurrentPlayingList: (val: NoxMedia.Playlist) => {
@@ -263,6 +273,7 @@ export const useNoxSetting = create<NoxSetting>((set, get) => ({
     const createdStyle = createStyle(val.skin);
     await appStoreInitialize();
     set({ currentPlayingId: val.lastPlaylistId[1] });
+    set({ currentABRepeat: getABRepeatRaw(val.lastPlaylistId[1]) });
     set({ currentPlayingList: playingList });
     set({
       currentPlaylist:

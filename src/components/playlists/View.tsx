@@ -18,7 +18,9 @@ import { useStore } from 'zustand';
 import { useNoxSetting } from '@hooks/useSetting';
 import useAAPlayback from '@hooks/useAAPlayback';
 import { ViewEnum } from '@enums/View';
-import AddPlaylistButton from '../buttons/AddPlaylistButton';
+import AddPlaylistButton, {
+  AddPlaylistButtonRef,
+} from '../buttons/AddPlaylistButton';
 import { STORAGE_KEYS } from '@enums/Storage';
 import NewPlaylistDialog from '../dialogs/NewPlaylistDialog';
 import useAlert from '../dialogs/useAlert';
@@ -118,8 +120,7 @@ export default (props: any) => {
   const playlistIds = useNoxSetting(state => state.playlistIds);
   const playerStyle = useNoxSetting(state => state.playerStyle);
   const playerSetting = useNoxSetting(state => state.playerSetting);
-  // TODO: and how to property type this?
-  const addPlaylistButtonRef = useRef<any>(null);
+  const addPlaylistButtonRef = useRef<AddPlaylistButtonRef>(null);
   const setCurrentPlaylist = useNoxSetting(state => state.setCurrentPlaylist);
   const setPlaylistIds = useNoxSetting(state => state.setPlaylistIds);
   const removePlaylist = useNoxSetting(state => state.removePlaylist);
