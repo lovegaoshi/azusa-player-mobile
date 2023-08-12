@@ -14,9 +14,11 @@ import NoxCache from '../utils/Cache';
 import noxPlayingList, { getNextSong } from '../stores/playingList';
 import appStore from '@stores/appStore';
 import { NoxRepeatMode } from '../enums/RepeatMode';
+import playerSettingStore from '@stores/playerSettingStore';
 
 const { getState } = noxPlayingList;
 const { setState } = appStore;
+const getPlayerSetting = playerSettingStore.getState;
 let lastBiliHeartBeat: string[] = ['', ''];
 
 export async function AdditionalPlaybackService({
@@ -82,6 +84,15 @@ export async function PlaybackService() {
       console.log('Event.PlaybackActiveTrackChanged', event);
       TrackPlayer.setVolume(1);
       if (!event.track || !event.track.song) return;
+
+      // prefetch song:
+      if (getPlayerSetting().playerSetting.prefetchTrack) {
+        const nextSong = getNextSong(event.track.song);
+        if (nextSong) {
+          logger.debug(`[ResolveURL] prefetching ${nextSong.name}`);
+          resolveUrl(nextSong);
+        }
+      }
 
       // r128gain support:
       if (event.track.url !== NULL_TRACK.url) {
