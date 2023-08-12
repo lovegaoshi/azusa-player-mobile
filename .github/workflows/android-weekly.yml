@@ -85,9 +85,9 @@ jobs:
 
       - name: Separate Build Architecture
         run: |
-          echo "def enableSeparateBuildPerCPUArchitecture = true" >> ./android/build.gradle.tmp
-          cat ./android/build.gradle >> ./android/build.gradle.tmp
-          mv ./android/build.gradle.tmp ./android/build.gradle
+          echo "def enableSeparateBuildPerCPUArchitecture = true" >> ./android/app/build.gradle.tmp
+          cat ./android/app/build.gradle >> ./android/app/build.gradle.tmp
+          mv ./android/app/build.gradle.tmp ./android/app/build.gradle
 
       - name: WGet Build Sign jks
         uses: wei/wget@v1
