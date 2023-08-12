@@ -89,11 +89,11 @@ export default ({
     const songs = [song];
     const newPlaylist = banBVID
       ? {
-        ...currentPlaylist2,
-        blacklistedUrl: currentPlaylist2.blacklistedUrl.concat(
-          songs.map(song => song.bvid)
-        ),
-      }
+          ...currentPlaylist2,
+          blacklistedUrl: currentPlaylist2.blacklistedUrl.concat(
+            songs.map(song => song.bvid)
+          ),
+        }
       : currentPlaylist2;
     updatePlaylist(newPlaylist, [], songs);
     setCurrentPlayingList(newPlaylist);
@@ -140,31 +140,10 @@ export default ({
         title={t('SongOperations.songStartRadio')}
       />
       <Menu.Item
-        leadingIcon={ICONS.SEARCH_IN_PLAYLIST}
-        onPress={() => {
-          handleSearch(song.parsedName);
-          closeMenu();
-          // TODO: doesnt work.
-          Keyboard.dismiss();
-        }}
-        disabled
-        title={t('SongOperations.songSearchInPlaylistTitle')}
-      />
-      <Menu.Item
-        leadingIcon={ICONS.REMOVE}
-        onPress={() => removeSongs()}
-        title={t('SongOperations.songRemoveTitle')}
-      />
-      <Menu.Item
-        leadingIcon={ICONS.REMOVE_AND_BAN_BVID}
-        onPress={() => removeSongs(true)}
-        title={t('SongOperations.songRemoveNBanTitle')}
-      />
-      <Menu.Item
         leadingIcon={ICONS.R128GAIN}
         onPress={async () =>
           Alert.alert(
-            `R128Gain of ${song.name}`,
+            `R128Gain of ${song.parsedName}`,
             `${getR128Gain(song)} dB`,
             [
               { text: 'Nullify', onPress: () => addR128Gain(song, null) },
@@ -175,6 +154,16 @@ export default ({
           )
         }
         title={t('SongOperations.songR128gain')}
+      />
+      <Menu.Item
+        leadingIcon={ICONS.REMOVE}
+        onPress={() => removeSongs()}
+        title={t('SongOperations.songRemoveTitle')}
+      />
+      <Menu.Item
+        leadingIcon={ICONS.REMOVE_AND_BAN_BVID}
+        onPress={() => removeSongs(true)}
+        title={t('SongOperations.songRemoveNBanTitle')}
       />
     </Menu>
   );
