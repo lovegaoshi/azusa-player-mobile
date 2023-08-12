@@ -97,6 +97,8 @@
     "updateLoadedTrackDesc": "Always retrieve the track metadata regardless of cache status",
     "r128gainName": "R128gain OTF",
     "r128gainDesc": "Enable on-the-fly R128gain (only works when cache is enabled)",
+    "prefetchTrackName": "Prefetch Tracks",
+    "prefetchTrackDesc": "Prefetch the next track (only works when cache is enabled)",
     "fastBiliSearchName": "Fast Bilibili Search",
     "fastBiliSearchDesc": "Do not search for bilibili video episodes."
   },

@@ -49,6 +49,7 @@ export const DEFAULT_SETTING: NoxStorage.PlayerSettingDict = {
   noInterruption: false,
   updateLoadedTrack: false,
   r128gain: false,
+  prefetchTrack: false,
 
   appID,
   language: undefined,

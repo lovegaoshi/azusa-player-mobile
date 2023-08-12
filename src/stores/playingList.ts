@@ -29,5 +29,18 @@ export const getCurrentTPQueue = () => {
   return state.playingList;
 };
 
+export const getNextSong = (song: NoxMedia.Song) => {
+  const songId = song.id;
+  const queue = getCurrentTPQueue();
+  const index = queue.findIndex(val => val.id === songId) + 1;
+  if (index === 0) {
+    return null;
+  }
+  if (index >= queue.length) {
+    return queue[0];
+  }
+  return queue[index];
+};
+
 export default playlistStore;
 // const { getState, setState } =

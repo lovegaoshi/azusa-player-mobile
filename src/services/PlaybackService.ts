@@ -11,7 +11,7 @@ import type { NoxStorage } from '../types/storage';
 import { saveLastPlayDuration } from '../utils/ChromeStorage';
 import logger from '../utils/Logger';
 import NoxCache from '../utils/Cache';
-import noxPlayingList from '../stores/playingList';
+import noxPlayingList, { getNextSong } from '../stores/playingList';
 import appStore from '@stores/appStore';
 import { NoxRepeatMode } from '../enums/RepeatMode';
 

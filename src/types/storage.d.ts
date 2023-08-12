@@ -23,6 +23,7 @@ declare namespace NoxStorage {
     noInterruption: boolean;
     updateLoadedTrack: boolean;
     r128gain: boolean;
+    prefetchTrack: boolean;
 
     appID: string;
     language?: string;

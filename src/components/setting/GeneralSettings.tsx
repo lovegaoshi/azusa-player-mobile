@@ -43,6 +43,10 @@ const GEN_SETTING_BOOLEAN: SettingEntry[] = [
     settingName: 'r128gain',
     settingCategory: 'GeneralSettings',
   },
+  {
+    settingName: 'prefetchTrack',
+    settingCategory: 'GeneralSettings',
+  },
 ];
 
 export default () => {
