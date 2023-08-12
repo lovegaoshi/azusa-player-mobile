@@ -83,6 +83,10 @@ jobs:
         run: |
           echo "${{ secrets.RELEASE_SIGN_PWD }}" >> ./android/gradle.properties
 
+      - name: Separate Build Architecture
+        run: |
+          echo "def enableSeparateBuildPerCPUArchitecture = true" >> ./android/build.gradle
+
       - name: WGet Build Sign jks
         uses: wei/wget@v1
         with:

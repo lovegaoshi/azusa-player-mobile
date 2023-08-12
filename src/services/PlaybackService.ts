@@ -86,7 +86,8 @@ export async function PlaybackService() {
       if (!event.track || !event.track.song) return;
 
       // prefetch song:
-      if (getPlayerSetting().playerSetting.prefetchTrack) {
+      const playerSetting = getPlayerSetting().playerSetting;
+      if (playerSetting.prefetchTrack && playerSetting.cacheSize > 2) {
         const nextSong = getNextSong(event.track.song);
         if (nextSong) {
           logger.debug(`[ResolveURL] prefetching ${nextSong.name}`);

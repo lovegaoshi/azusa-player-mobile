@@ -27,6 +27,7 @@ enum ICONS {
   DETAIL = 'information-outline',
   RADIO = 'radio-tower',
   R128GAIN = 'replay',
+  ABREPEAT = 'ab-testing',
 }
 
 interface Props {
