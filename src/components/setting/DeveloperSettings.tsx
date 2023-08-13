@@ -8,7 +8,7 @@ import { APPSTORE } from '@env';
 import { useNoxSetting } from '@hooks/useSetting';
 import { logStore, LOGLEVEL, getLog } from '@utils/Logger';
 import GenericSelectDialog from '../dialogs/GenericSelectDialog';
-import { SettingListItem, renderSetting } from './useRenderSetting';
+import { SettingListItem, RenderSetting } from './useRenderSetting';
 import useVersionCheck from '@hooks/useVersionCheck';
 import useAlert from '../dialogs/useAlert';
 import {
@@ -33,6 +33,14 @@ const developerSettings: { [key: string]: SettingEntry } = {
     settingName: 'noInterruption',
     settingCategory: 'DeveloperSettings',
     checkbox: true,
+  },
+  r128gain: {
+    settingName: 'r128gain',
+    settingCategory: 'GeneralSettings',
+  },
+  prefetchTrack: {
+    settingName: 'prefetchTrack',
+    settingCategory: 'GeneralSettings',
   },
 };
 
@@ -112,7 +120,9 @@ export default () => {
     >
       <ScrollView>
         <List.Section>
-          {renderSetting(developerSettings.noInterruption)}
+          <RenderSetting item={developerSettings.noInterruption} />
+          <RenderSetting item={developerSettings.r128gain} />
+          <RenderSetting item={developerSettings.prefetchTrack} />
           <SettingListItem
             icon={ICONS.showlog}
             settingName="Log"

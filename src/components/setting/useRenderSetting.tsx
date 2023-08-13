@@ -116,7 +116,11 @@ const BooleanSetting = ({
   );
 };
 
-export const renderSetting = (item: SettingEntry) => {
+interface Props {
+  item: SettingEntry;
+}
+
+export const RenderSetting = ({ item }: Props) => {
   switch (item.settingType) {
     default:
       return <BooleanSetting {...item} key={uuidv4()} />;

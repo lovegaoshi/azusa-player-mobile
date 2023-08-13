@@ -15,6 +15,8 @@ interface AppStore {
   setR128gain: (val: NoxStorage.R128Dict) => void;
   ABRepeat: NoxStorage.ABDict;
   setABRepeat: (val: NoxStorage.ABDict) => void;
+  currentPlayingId: String;
+  setCurrentPlayingId: (val: String) => void;
 }
 
 const appStore = createStore<AppStore>((set, get) => ({
@@ -28,6 +30,10 @@ const appStore = createStore<AppStore>((set, get) => ({
   setABRepeat: (val: NoxStorage.ABDict) => {
     set({ ABRepeat: val });
     saveABMapping(val);
+  },
+  currentPlayingId: '',
+  setCurrentPlayingId: (val: String) => {
+    set({ currentPlayingId: val });
   },
 }));
 
@@ -70,7 +76,16 @@ export const addABRepeat = (
   song: NoxMedia.Song,
   abrepeat: [number, number]
 ) => {
-  saveABMapping({ [song.id]: abrepeat });
+  saveABRepeat({ [song.id]: abrepeat });
+};
+
+export const setCurrentPlaying = (song: NoxMedia.Song) => {
+  const currentPlayingId = appStore.getState().currentPlayingId;
+  if (currentPlayingId === song.id) {
+    return true;
+  }
+  appStore.setState({ currentPlayingId: song.id });
+  return false;
 };
 
 export default appStore;
