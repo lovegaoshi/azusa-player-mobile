@@ -30,6 +30,16 @@ const ABSlider = React.forwardRef<ABSRef, Props>(({ song }: Props, ref) => {
 
   return (
     <View>
+      <View style={styles.labelSpacer} />
+      <View style={styles.labelContainer}>
+        <Text style={styles.labelText}>
+          {formatSeconds(duration * range[0])}
+        </Text>
+        <Text style={styles.labelText}>
+          {formatSeconds(duration * range[1])}
+        </Text>
+      </View>
+      <View style={styles.labelSpacer} />
       <RangeSlider
         range={currentABRepeat}
         thumbTintColor={
@@ -41,14 +51,6 @@ const ABSlider = React.forwardRef<ABSRef, Props>(({ song }: Props, ref) => {
         outboundColor={playerStyle.customColors.progressMaximumTrackTintColor}
         inboundColor={playerStyle.customColors.progressMinimumTrackTintColor}
       />
-      <View style={[styles.labelContainer, { paddingHorizontal: 10 }]}>
-        <Text style={styles.labelText}>
-          {formatSeconds(duration * range[0])}
-        </Text>
-        <Text style={styles.labelText}>
-          {formatSeconds(duration * range[1])}
-        </Text>
-      </View>
     </View>
   );
 });
@@ -115,6 +117,9 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     paddingHorizontal: 15,
+  },
+  labelSpacer: {
+    height: 30,
   },
   labelText: {
     color: 'white',
