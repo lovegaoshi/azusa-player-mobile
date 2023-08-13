@@ -69,7 +69,7 @@ class NoxMediaCache {
           console.debug('[FFMPEG] now starting FFMPEG r128gain...');
           r128gain(res.path()).then(gain => {
             addR128Gain(song, gain);
-            setR128Gain(gain);
+            setR128Gain(gain, song);
           });
         }
         this.dumpCache();

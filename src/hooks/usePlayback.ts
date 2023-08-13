@@ -11,7 +11,6 @@ import { songlistToTracklist } from '../objects/Playlist';
 import { useNoxSetting } from './useSetting';
 import { randomChoice } from '../utils/Utils';
 import logger from '../utils/Logger';
-import { getABRepeatRaw, setCurrentPlaying } from '@stores/appStore';
 
 const PLAYLIST_MEDIAID = 'playlist-';
 
@@ -178,28 +177,6 @@ export const usePlaybackListener = () => {
       listener.remove();
     };
   }, [playerSetting.updateLoadedTrack]);
-
-  useEffect(() => {
-    // HACK: this works and feels terrible but I can't figure out something better.
-    const listener = TrackPlayer.addEventListener(
-      Event.PlaybackState,
-      async event => {
-        if (event.state !== State.Ready) return;
-        const song = (await TrackPlayer.getActiveTrack())
-          ?.song as NoxMedia.Song;
-        if (setCurrentPlaying(song)) return;
-        const abRepeat = getABRepeatRaw(song.id)[0];
-        if (abRepeat === 0) return;
-        TrackPlayer.seekTo(
-          (await TrackPlayer.getProgress()).duration *
-            getABRepeatRaw(song.id)[0]
-        );
-      }
-    );
-    return () => {
-      listener.remove();
-    };
-  }, []);
 };
 
 export default usePlayback;

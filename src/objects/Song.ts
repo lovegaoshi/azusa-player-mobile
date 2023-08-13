@@ -94,12 +94,12 @@ export const parseSongR128gain = async (song: NoxMedia.Song) => {
     return { playerSetting, cachedR128gain, cachedUrl };
   }
   if (cachedR128gain) {
-    setR128Gain(cachedR128gain);
+    setR128Gain(cachedR128gain, song);
   } else if (cachedUrl) {
     logger.debug('[FFMPEG] r128gain null. now parsing FFMPEG r128gain...');
     const gain = await r128gain(cachedUrl);
     addR128Gain(song, gain);
-    setR128Gain(gain);
+    setR128Gain(gain, song);
   }
   return { playerSetting, cachedR128gain, cachedUrl };
 };
