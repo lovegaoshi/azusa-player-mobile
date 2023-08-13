@@ -11,6 +11,7 @@ import {
   loadCachedMediaMapping,
   saveCachedMediaMapping,
 } from './ChromeStorage';
+import logger from './Logger';
 
 interface optionsProps {
   max?: number;
@@ -56,6 +57,7 @@ class NoxMediaCache {
     extension?: string
   ) => {
     if (this.cache.max < 2 || !resolvedURL.url.startsWith('http')) return;
+    logger.debug(`[Cache] fetching ${song.name} to cache...`);
     if (!extension) {
       const regexMatch = /.+\/{2}.+\/{1}.+(\.\w+)\?*.*/.exec(resolvedURL.url);
       extension = regexMatch ? regexMatch[1] : 'm4a';
