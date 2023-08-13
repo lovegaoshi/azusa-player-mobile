@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { View, Text, ScrollView } from 'react-native';
 import { useNoxSetting } from '@hooks/useSetting';
-import { renderSetting } from './useRenderSetting';
+import { RenderSetting } from './useRenderSetting';
 import { SettingEntry } from './SetttingEntries';
 
 const GEN_SETTING_BOOLEAN: SettingEntry[] = [
@@ -39,14 +39,6 @@ const GEN_SETTING_BOOLEAN: SettingEntry[] = [
     settingName: 'updateLoadedTrack',
     settingCategory: 'GeneralSettings',
   },
-  {
-    settingName: 'r128gain',
-    settingCategory: 'GeneralSettings',
-  },
-  {
-    settingName: 'prefetchTrack',
-    settingCategory: 'GeneralSettings',
-  },
 ];
 
 export default () => {
@@ -60,7 +52,7 @@ export default () => {
       }}
     >
       <ScrollView>
-        {GEN_SETTING_BOOLEAN.map(item => renderSetting(item))}
+        {GEN_SETTING_BOOLEAN.map(item => RenderSetting({ item }))}
       </ScrollView>
     </View>
   );

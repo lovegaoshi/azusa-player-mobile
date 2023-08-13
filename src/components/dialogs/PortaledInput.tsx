@@ -10,6 +10,12 @@ interface InputProps {
   autofocus?: boolean;
   selectTextOnFocus?: boolean;
 }
+
+export interface PortalInputRef {
+  clearText: () => void;
+  name: string;
+}
+
 export default React.forwardRef(
   (
     {

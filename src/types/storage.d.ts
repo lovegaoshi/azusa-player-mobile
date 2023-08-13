@@ -51,4 +51,8 @@ declare namespace NoxStorage {
   export interface R128Dict {
     [key: string]: string | null;
   }
+
+  export interface ABDict {
+    [key: string]: [number, number];
+  }
 }

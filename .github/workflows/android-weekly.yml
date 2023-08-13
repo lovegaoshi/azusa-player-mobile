@@ -105,6 +105,6 @@ jobs:
         uses: softprops/action-gh-release@v1
         with:
           tag_name: ${{ env.GIT_BRANCH }}-build-${{ steps.date.outputs.date }}
-          files: android/app/build/outputs/apk/release/*.apk
+          files: android/app/build/outputs/apk/release/app-arm64-v8a-release.apk
           prerelease: true
           target_commitish: ${{ env.GIT_BRANCH }}

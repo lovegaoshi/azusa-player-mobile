@@ -190,10 +190,10 @@ const SkinSettings = () => {
   const playerStyles = useNoxSetting(state => state.playerStyles);
   const setPlayerStyles = useNoxSetting(state => state.setPlayerStyles);
   const allThemes = BuiltInThemes.concat(playerStyles);
-
   const getThemeID = (skin: NoxTheme.style) =>
     `${skin.metaData.themeName}.${skin.metaData.themeAuthor}`;
   const [checked, setChecked] = React.useState(getThemeID(playerStyle));
+  const scrollViewRef = React.useRef<ScrollView | null>(null);
 
   const loadCustomSkin = async (skins: any) => {
     // skins MUST BE an array of objects
@@ -207,6 +207,22 @@ const SkinSettings = () => {
     setPlayerStyles(uniqueSkins);
   };
 
+  React.useEffect(() => {
+    const currentThemeIndex = allThemes.findIndex(
+      theme => getThemeID(theme) === checked
+    );
+    if (currentThemeIndex > -1) {
+      scrollViewRef.current?.scrollTo({
+        x: 0,
+        y: Math.max(
+          0,
+          currentThemeIndex * 107 - Dimensions.get('window').height / 2
+        ),
+        animated: false,
+      });
+    }
+  }, []);
+
   return (
     <SafeAreaView
       style={[
@@ -215,7 +231,7 @@ const SkinSettings = () => {
       ]}
     >
       <SkinSearchbar onSearched={loadCustomSkin} />
-      <ScrollView>
+      <ScrollView ref={scrollViewRef}>
         {allThemes.map(item => (
           <SkinItem
             skin={item}

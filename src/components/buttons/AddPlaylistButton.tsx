@@ -11,6 +11,10 @@ interface Props {
   style?: object;
 }
 
+export interface AddPlaylistButtonRef {
+  setOpen: () => void;
+}
+
 export default React.forwardRef(
   ({ fromList, icon = ICON, style = {} }: Props, ref) => {
     const [dialogOpen, setDialogOpen] = useState(false);

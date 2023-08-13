@@ -12,7 +12,7 @@ import {
 import { useTranslation } from 'react-i18next';
 
 import { useNoxSetting } from '@hooks/useSetting';
-import PortaledInput from './PortaledInput';
+import PortaledInput, { PortalInputRef } from './PortaledInput';
 
 const styles = StyleSheet.create({
   switchContainer: {
@@ -42,7 +42,7 @@ export default ({
   const [useBiliSync, setUseBiliSync] = useState(false);
   const nameRef = useRef<any>();
   const subRef = useRef<any>();
-  const blacklistRef = useRef<any>();
+  const blacklistRef = useRef<PortalInputRef>();
 
   useEffect(() => {
     setUseBiliShazam(currentPlaylist.useBiliShazam);
@@ -61,7 +61,9 @@ export default ({
       ...currentPlaylist,
       title: nameRef.current.name,
       subscribeUrl: Array.from(new Set(subRef.current.name.split(';'))),
-      blacklistedUrl: Array.from(new Set(blacklistRef.current.name.split(';'))),
+      blacklistedUrl: Array.from(
+        new Set(blacklistRef.current?.name.split(';'))
+      ),
       useBiliShazam: useBiliShazam,
     };
     updatePlaylist(newPlaylist, [], []);
