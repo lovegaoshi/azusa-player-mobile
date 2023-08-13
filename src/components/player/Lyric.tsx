@@ -148,7 +148,7 @@ export const LyricView = ({
   };
 
   const searchAndSetCurrentLyric = (index?: number) => {
-    logger.log(`lrcoptions: ${JSON.stringify(lrcOptions)}`);
+    console.debug(`lrcoptions: ${JSON.stringify(lrcOptions)}`);
 
     index = index === undefined ? 0 : index;
     if (lrcOptions.length === 0) setLrc('无法找到歌词,请手动搜索...');

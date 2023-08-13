@@ -12,9 +12,9 @@ import { saveLastPlayDuration } from '../utils/ChromeStorage';
 import logger from '../utils/Logger';
 import NoxCache from '../utils/Cache';
 import noxPlayingList, { getNextSong } from '../stores/playingList';
-import appStore from '@stores/appStore';
 import { NoxRepeatMode } from '../enums/RepeatMode';
 import playerSettingStore from '@stores/playerSettingStore';
+import appStore, { getABRepeatRaw, setCurrentPlaying } from '@stores/appStore';
 
 const { getState } = noxPlayingList;
 const { setState } = appStore;
@@ -45,6 +45,9 @@ export async function AdditionalPlaybackService({
 }
 
 export async function PlaybackService() {
+  let abRepeat = [0, 1];
+  let bRepeatDuration = 9999;
+
   DeviceEventEmitter.addListener('APMEnterPIP', (e: boolean) =>
     setState({ pipMode: e })
   );
@@ -143,12 +146,26 @@ export async function PlaybackService() {
     console.log('Event.PlaybackPlayWhenReadyChanged', event);
   });
 
-  TrackPlayer.addEventListener(Event.PlaybackState, event => {
+  TrackPlayer.addEventListener(Event.PlaybackState, async event => {
     console.log('Event.PlaybackState', event);
+    // AB repeat implementation
+    // HACK: this works and feels terrible but I can't figure out something better.
+    if (event.state !== State.Ready) return;
+    const song = (await TrackPlayer.getActiveTrack())?.song as NoxMedia.Song;
+    abRepeat = getABRepeatRaw(song.id);
+    if (setCurrentPlaying(song)) return;
+    const trackDuration = (await TrackPlayer.getProgress()).duration;
+    bRepeatDuration = abRepeat[1] * trackDuration;
+    if (abRepeat[0] === 0) return;
+    TrackPlayer.seekTo(trackDuration * abRepeat[0]);
   });
 
   TrackPlayer.addEventListener(Event.PlaybackProgressUpdated, event => {
     saveLastPlayDuration(event.position);
+    if (abRepeat[1] === 1) return;
+    if (event.position > bRepeatDuration) {
+      TrackPlayer.seekTo(event.duration);
+    }
   });
 
   TrackPlayer.addEventListener(

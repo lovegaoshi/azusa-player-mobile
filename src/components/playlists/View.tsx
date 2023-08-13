@@ -7,6 +7,7 @@ import {
   View,
   ImageBackground,
   StyleSheet,
+  Linking,
 } from 'react-native';
 import { useTranslation } from 'react-i18next';
 import DraggableFlatList, {
@@ -27,6 +28,7 @@ import useAlert from '../dialogs/useAlert';
 import ShuffleAllButton from './ShuffleAllButton';
 import TimerButton from './TimerButton';
 import appStore from '@stores/appStore';
+import logger from '@utils/Logger';
 
 const useRenderDrawerItem = () => {
   const navigation = useNavigation();
@@ -198,6 +200,22 @@ export default (props: any) => {
       navigation.goBack();
     }
   }, [PIPMode]);
+
+  useEffect(() => {
+    function deepLinkHandler(data: { url: string }) {
+      if (data.url === 'trackplayer://notification.click') {
+        logger.debug('[Drawer] click from notification; navigate to home');
+        navigation.navigate(ViewEnum.PLAYER_HOME as never);
+      }
+    }
+
+    // This event will be fired when the app is already open and the notification is clicked
+    const subscription = Linking.addEventListener('url', deepLinkHandler);
+
+    return () => {
+      subscription.remove();
+    };
+  }, []);
 
   return PIPMode ? (
     <></>

@@ -1,45 +1,14 @@
 import { Slider } from '@sharcoux/slider';
-import React, { useEffect, useRef } from 'react';
+import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import TrackPlayer, {
-  RepeatMode,
-  useProgress,
-} from 'react-native-track-player';
+import TrackPlayer, { useProgress } from 'react-native-track-player';
 
 import { useNoxSetting } from '@hooks/useSetting';
 import { seconds2MMSS as formatSeconds } from '@utils/Utils';
-import { getABRepeatRaw } from '@stores/appStore';
-import usePlayerControls from './usePlayerControls';
 
 export const Progress: React.FC<{ live?: boolean }> = ({ live }) => {
   const { position, duration } = useProgress();
   const playerStyle = useNoxSetting(state => state.playerStyle);
-  const currentPlayingId = useNoxSetting(state => state.currentPlayingId);
-  const abRepeat = useRef([0, 1]);
-  const bRepeatDuration = useRef(99999);
-  const { performSkipToNext } = usePlayerControls();
-
-  useEffect(() => {
-    if (!currentPlayingId) return;
-    const newBRepeat = getABRepeatRaw(currentPlayingId);
-    abRepeat.current = newBRepeat;
-    bRepeatDuration.current = newBRepeat[1] * duration;
-  }, [duration]);
-
-  useEffect(() => {
-    if (abRepeat.current[1] === 1) return;
-    if (position > bRepeatDuration.current) {
-      TrackPlayer.getRepeatMode().then(repeatMode => {
-        switch (repeatMode) {
-          case RepeatMode.Track:
-            TrackPlayer.seekTo(duration * abRepeat.current[0]);
-            break;
-          default:
-            performSkipToNext();
-        }
-      });
-    }
-  }, [position]);
 
   return live ? (
     <View style={styles.liveContainer}>
