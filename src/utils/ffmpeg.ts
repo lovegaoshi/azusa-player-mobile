@@ -29,8 +29,9 @@ export const setR128Gain = async (gain: string, song: NoxMedia.Song) => {
     logger.warn(`[ffmpeg] positive ${gain} dB is not yet supported!`);
     return;
   }
-  if (!song || song.id !== (await TrackPlayer.getActiveTrack())?.song?.id) {
+  if (song.id !== (await TrackPlayer.getActiveTrack())?.song?.id) {
     logger.warn(`${song.parsedName} is no longer the active track.`);
+    return;
   }
   try {
     const volume = Math.pow(10, -Number(gain.substring(1)) / 20);
