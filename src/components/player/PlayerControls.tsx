@@ -43,7 +43,10 @@ export const PlayerControls: React.FC = () => {
   return (
     <View style={styles.container}>
       {'error' in playback ? (
-        <PlaybackError error={playback.error.message} />
+        <PlaybackError
+          error={playback.error.message}
+          code={playback.error.code}
+        />
       ) : (
         <></>
       )}

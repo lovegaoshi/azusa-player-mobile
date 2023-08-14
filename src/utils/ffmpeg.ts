@@ -23,6 +23,12 @@ export const r128gain = async (fspath: string) => {
   return parseReplayGainLog(await session.getOutput());
 };
 
+export const ffmpegToMP3 = async (fspath: string) => {
+  await FFmpegKit.execute(`-i '${fspath}' -vn -ab 256k ${fspath}.mp3`);
+  RNFetchBlob.fs.unlink(fspath);
+  return `${fspath}.mp3`;
+};
+
 export const setR128Gain = async (gain: string, song: NoxMedia.Song) => {
   console.debug(`[r128gain] set r128gain to ${gain} dB`);
   if (gain[0] === '+') {

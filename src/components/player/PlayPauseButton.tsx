@@ -22,7 +22,7 @@ export const PlayPauseButton: React.FC<{
   const isErrored = state === State.Error;
   const isEnded = state === State.Ended;
   const showPause = playWhenReady && !(isErrored || isEnded);
-  const showBuffering = playWhenReady && isLoading;
+  const showBuffering = isErrored || (playWhenReady && isLoading);
 
   if (showBuffering) {
     return playerStyle.loadingIcon ? (
