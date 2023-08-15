@@ -107,11 +107,11 @@ export async function PlaybackService() {
         const nextSong = getNextSong(event.track.song);
         if (nextSong) {
           logger.debug(`[ResolveURL] prefetching ${nextSong.name}`);
-          await downloadPromiseMap[event.track.song.id];
+          await downloadPromiseMap[nextSong.id];
           addDownloadPromise(
-            event.track.song,
+            nextSong,
             NoxCache.noxMediaCache?.saveCacheMedia(
-              event.track.song,
+              nextSong,
               // resolveURL either finds cached file:/// or streamable https://
               // cached path will be bounded back in saveCacheMedia; only https will call RNBlobUtil
               await resolveUrl(nextSong)
