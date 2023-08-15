@@ -33,6 +33,8 @@
 - 多语言
 - 歌曲缓存
 - 安卓车机支持（要在android auto内打开开发者模式）
+- ffmpeg powered 音量均衡
+- AB 重复
 - **切片 man 不易，没有各位切片 man 也不会有这个项目的意义，请大家溜歌同时点右下方的点赞按钮点赞和三连 👍**
 - 自用为主要目的，不感兴趣的 feature 大概不会做，有问题可以[b 站私信](https://message.bilibili.com/#/whisper/mid1989881)
  
@@ -49,6 +51,8 @@
 安卓用户在右边的release下载最新版本apk。
 
 苹果用户在右边的release下载最新版本ipa。然后[按这个方法](https://zhuanlan.zhihu.com/p/99397647)安装。大概。
+
+我知道 APM 在 iOS 模拟器上像垃圾一样运行。但我不尊重 Apple 用户，也不会满足任何 iOS 生活质量要求。但Nek（[b 站私信](https://message.bilibili.com/#/whisper/mid1989881)）会。
 
 ## 使用
 请参考[电闹播放器的介绍](https://www.bilibili.com/video/BV1bv4y1p7K4/?spm_id_from=333.999.0.0)。
