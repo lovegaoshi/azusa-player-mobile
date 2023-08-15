@@ -85,6 +85,8 @@ export async function PlaybackService() {
     Event.PlaybackActiveTrackChanged,
     async event => {
       console.log('Event.PlaybackActiveTrackChanged', event);
+      const playerErrored =
+        (await TrackPlayer.getPlaybackState()).state === State.Error;
       TrackPlayer.setVolume(1);
       if (!event.track || !event.track.song) return;
 
@@ -134,6 +136,9 @@ export async function PlaybackService() {
           await TrackPlayer.load({ ...currentTrack, ...updatedMetadata });
           if (getState().playmode === NoxRepeatMode.REPEAT_TRACK) {
             TrackPlayer.setRepeatMode(RepeatMode.Track);
+          }
+          if (playerErrored) {
+            TrackPlayer.play();
           }
         } catch (e) {
           console.error('resolveURL failed', event.track, e);

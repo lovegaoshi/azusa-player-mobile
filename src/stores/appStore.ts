@@ -15,8 +15,10 @@ interface AppStore {
   setR128gain: (val: NoxStorage.R128Dict) => void;
   ABRepeat: NoxStorage.ABDict;
   setABRepeat: (val: NoxStorage.ABDict) => void;
-  currentPlayingId: String;
-  setCurrentPlayingId: (val: String) => void;
+  currentPlayingId: string;
+  setCurrentPlayingId: (val: string) => void;
+  fetchProgress: number;
+  setFetchProgress: (val: number) => void;
 }
 
 const appStore = createStore<AppStore>((set, get) => ({
@@ -32,8 +34,12 @@ const appStore = createStore<AppStore>((set, get) => ({
     saveABMapping(val);
   },
   currentPlayingId: '',
-  setCurrentPlayingId: (val: String) => {
+  setCurrentPlayingId: (val: string) => {
     set({ currentPlayingId: val });
+  },
+  fetchProgress: 100,
+  setFetchProgress: (val: number) => {
+    set({ fetchProgress: val });
   },
 }));
 
@@ -87,6 +93,10 @@ export const setCurrentPlaying = (song: NoxMedia.Song) => {
   appStore.setState({ currentPlayingId: song.id });
   // HACK: skips ABRepeat of the first song set by app (which should be handled by resumePlayback)
   return currentPlayingId === '';
+};
+
+export const setFetchProgress = (val: number) => {
+  appStore.setState({ fetchProgress: val });
 };
 
 export default appStore;

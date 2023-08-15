@@ -107,7 +107,7 @@ export const searchLyricOptions = async searchKey => {
   const API = getQQSearchAPI(searchKey);
   const res = await bfetch(API.src, API.params);
   const json = await res.json();
-  logger.debug(json);
+  console.debug(json);
   const data = json.req.data.body.song.list;
   return data.map((s, v) => ({
     key: s.mid,
