@@ -12,7 +12,7 @@ const parseReplayGainLog = (log: string) => {
   if (match[1][0] === '+') {
     logger.debug('[ffmpeg] r128gain of positive dB is not yet supported!');
   }
-  return Number(match[1].substring(1));
+  return Number(match[1]);
 };
 
 export const r128gain = async (fspath: string) => {

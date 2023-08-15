@@ -15,6 +15,12 @@ interface AppStore {
   setR128gain: (val: NoxStorage.R128Dict) => void;
   ABRepeat: NoxStorage.ABDict;
   setABRepeat: (val: NoxStorage.ABDict) => void;
+  // used for Event.PlaybackActiveTrackChanged.
+  // this is set immediately at Event.PlaybackActiveTrackChanged.
+  activeTrackPlayingId: string;
+  setActiveTrackPlayingId: (val: string) => void;
+  // used for ABRepeat so that ABRepeat will only seek to A once
+  // when playstate becomes ready.
   currentPlayingId: string;
   setCurrentPlayingId: (val: string) => void;
   fetchProgress: number;
@@ -36,6 +42,10 @@ const appStore = createStore<AppStore>((set, get) => ({
   setABRepeat: (val: NoxStorage.ABDict) => {
     set({ ABRepeat: val });
     saveABMapping(val);
+  },
+  activeTrackPlayingId: '',
+  setActiveTrackPlayingId: (val: string) => {
+    set({ activeTrackPlayingId: val });
   },
   currentPlayingId: '',
   setCurrentPlayingId: (val: string) => {
@@ -122,7 +132,7 @@ export const addDownloadProgress = async (
   };
   appStore.setState({
     downloadProgressMap: newDownloadProgressMap,
-    ...(currentAppStore.currentPlayingId === song.id && {
+    ...(currentAppStore.activeTrackPlayingId === song.id && {
       fetchProgress: progress,
     }),
   });

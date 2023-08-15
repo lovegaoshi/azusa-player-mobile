@@ -94,7 +94,7 @@ export async function PlaybackService() {
         (await TrackPlayer.getPlaybackState()).state === State.Error;
       TrackPlayer.setVolume(1);
       if (!event.track || !event.track.song) return;
-
+      setState({ activeTrackPlayingId: event.track.song.id });
       // prefetch song
       // only prefetches if fetching map doesnt register it.
       const playerSetting = getPlayerSetting().playerSetting;
