@@ -35,7 +35,7 @@ export const setR128Gain = async (
 ) => {
   console.debug(`[r128gain] set r128gain to ${gain} dB`);
   if (typeof gain === 'string') {
-    gain = Number(gain.substring(1));
+    gain = Number(gain);
   }
   if (gain >= 0) {
     logger.warn(`[ffmpeg] positive ${gain} dB is not yet supported!`);
@@ -46,7 +46,7 @@ export const setR128Gain = async (
     return;
   }
   try {
-    const volume = Math.pow(10, -gain / 20);
+    const volume = Math.pow(10, gain / 20);
     console.debug(`[r128gain] set r128gain volume to ${volume}`);
     return await TrackPlayer.setVolume(volume);
   } catch (e) {
