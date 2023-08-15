@@ -105,12 +105,17 @@ export async function PlaybackService() {
           await downloadPromiseMap[nextSong.id];
           addDownloadPromise(
             nextSong,
-            NoxCache.noxMediaCache?.saveCacheMedia(
-              nextSong,
-              // resolveURL either finds cached file:/// or streamable https://
-              // cached path will be bounded back in saveCacheMedia; only https will call RNBlobUtil
-              await resolveUrl(nextSong)
-            )
+            NoxCache.noxMediaCache
+              ?.saveCacheMedia(
+                nextSong,
+                // resolveURL either finds cached file:/// or streamable https://
+                // cached path will be bounded back in saveCacheMedia; only https will call RNBlobUtil
+                await resolveUrl(nextSong)
+              )
+              .then(val => {
+                parseSongR128gain(nextSong);
+                return val;
+              })
           );
         }
       }
