@@ -49,7 +49,7 @@ declare namespace NoxStorage {
   }
 
   export interface R128Dict {
-    [key: string]: string | null;
+    [key: string]: number | null;
   }
 
   export interface ABDict {

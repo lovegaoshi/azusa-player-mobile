@@ -121,9 +121,9 @@ export const resolveUrl = async (song: NoxMedia.Song) => {
   logger.debug(`[SongResolveURL] ${song.parsedName} is resolved to ${url.url}`);
   if (url.loudness) {
     logger.debug(
-      `[SongResolveURL] ${song.parsedName} contains loudness ${url.loudness}`
+      `[SongResolveURL] ${song.parsedName} contains loudness ${url.loudness} and ${url.perceivedLoudness}`
     );
-    addR128Gain(song, `${url.loudness > 0 ? '+' : ''}${String(url.loudness)}`);
+    addR128Gain(song, -url.loudness);
   }
   return {
     url: url.url,

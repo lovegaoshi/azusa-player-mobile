@@ -76,7 +76,7 @@ const loadMapping = async (key: STORAGE_KEYS) => {
   // TODO: does dict get too long  that this is necessary?
   const result = (await loadChucked(
     (await getItem(STORAGE_KEYS.R128GAIN_MAPPING)) || []
-  )) as [string, string][];
+  )) as [string, any][];
   return result.reduce((acc, val) => {
     acc[val[0]] = val[1];
     return acc;
