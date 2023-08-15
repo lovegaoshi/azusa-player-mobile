@@ -19,6 +19,10 @@ interface AppStore {
   setCurrentPlayingId: (val: string) => void;
   fetchProgress: number;
   setFetchProgress: (val: number) => void;
+  downloadProgressMap: NoxStorage.R128Dict;
+  setDownloadProgressMap: (val: NoxStorage.R128Dict) => void;
+  downloadPromiseMap: NoxStorage.DownloadDict;
+  setDownloadPromiseMap: (val: NoxStorage.DownloadDict) => void;
 }
 
 const appStore = createStore<AppStore>((set, get) => ({
@@ -40,6 +44,14 @@ const appStore = createStore<AppStore>((set, get) => ({
   fetchProgress: 100,
   setFetchProgress: (val: number) => {
     set({ fetchProgress: val });
+  },
+  downloadProgressMap: {},
+  setDownloadProgressMap: (val: NoxStorage.R128Dict) => {
+    set({ downloadProgressMap: val });
+  },
+  downloadPromiseMap: {},
+  setDownloadPromiseMap: (val: NoxStorage.DownloadDict) => {
+    set({ downloadPromiseMap: val });
   },
 }));
 
@@ -97,6 +109,34 @@ export const setCurrentPlaying = (song: NoxMedia.Song) => {
 
 export const setFetchProgress = (val: number) => {
   appStore.setState({ fetchProgress: val });
+};
+
+export const addDownloadProgress = async (
+  song: NoxMedia.Song,
+  progress: number
+) => {
+  const currentAppStore = appStore.getState();
+  const newDownloadProgressMap = {
+    ...currentAppStore.downloadProgressMap,
+    [song.id]: progress,
+  };
+  appStore.setState({
+    downloadProgressMap: newDownloadProgressMap,
+    ...(currentAppStore.currentPlayingId === song.id && {
+      fetchProgress: progress,
+    }),
+  });
+};
+
+export const addDownloadPromise = async (
+  song: NoxMedia.Song,
+  downloadPromise: Promise<string | void>
+) => {
+  const newMap = {
+    ...appStore.getState().downloadPromiseMap,
+    [song.id]: downloadPromise,
+  };
+  appStore.setState({ downloadPromiseMap: newMap });
 };
 
 export default appStore;

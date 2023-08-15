@@ -55,4 +55,8 @@ declare namespace NoxStorage {
   export interface ABDict {
     [key: string]: [number, number];
   }
+
+  export interface DownloadDict {
+    [key: string]: Promise<void | string>;
+  }
 }
