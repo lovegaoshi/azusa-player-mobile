@@ -11,5 +11,7 @@ declare namespace NoxNetwork {
     url: string;
     cover?: string;
     duration?: number;
+    loudness?: number;
+    perceivedLoudness?: number;
   }
 }

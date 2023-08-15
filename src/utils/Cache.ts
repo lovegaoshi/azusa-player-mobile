@@ -77,6 +77,9 @@ class NoxMediaCache {
     setFetchProgress(100);
     if (getState().playerSetting.r128gain) {
       console.debug('[FFMPEG] now starting FFMPEG r128gain...');
+      // REVIEW: why do I recalculate r128gain every time?
+      // its fairly fast. just get a better phone.
+      // && getR128Gain(song) === null
       const gain = await r128gain(res.path());
       addR128Gain(song, gain);
       setR128Gain(gain, song);

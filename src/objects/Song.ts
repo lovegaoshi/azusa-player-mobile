@@ -118,7 +118,13 @@ export const resolveUrl = async (song: NoxMedia.Song) => {
         url: cachedUrl,
       }
     : await fetchPlayUrlPromise(song);
-  logger.debug(`[SongResolveURL] ${song.name} is resolved to ${url.url}`);
+  logger.debug(`[SongResolveURL] ${song.parsedName} is resolved to ${url.url}`);
+  if (url.loudness) {
+    logger.debug(
+      `[SongResolveURL] ${song.parsedName} contains loudness ${url.loudness}`
+    );
+    addR128Gain(song, `${url.loudness > 0 ? '+' : ''}${String(url.loudness)}`);
+  }
   return {
     url: url.url,
     headers: customReqHeader(url.url, { referer: 'https://www.bilibili.com/' }),
