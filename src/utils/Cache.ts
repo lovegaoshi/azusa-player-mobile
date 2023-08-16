@@ -3,7 +3,11 @@ import LRUCache from 'lru-cache';
 import RNFetchBlob from 'react-native-blob-util';
 
 import { r128gain, setR128Gain, ffmpegToMP3 } from './ffmpeg';
-import { addR128Gain, addDownloadProgress } from '@stores/appStore';
+import {
+  addR128Gain,
+  addDownloadProgress,
+  getR128Gain,
+} from '@stores/appStore';
 import playerSettingStore from '@stores/playerSettingStore';
 
 const { getState } = playerSettingStore;
@@ -79,12 +83,14 @@ class NoxMediaCache {
     addDownloadProgress(song, 100);
     if (getState().playerSetting.r128gain) {
       console.debug('[FFMPEG] now starting FFMPEG r128gain...');
-      // REVIEW: why do I recalculate r128gain every time?
-      // its fairly fast. just get a better phone.
-      // && getR128Gain(song) === null
-      const gain = await r128gain(res.path());
-      addR128Gain(song, gain);
-      setR128Gain(gain, song);
+      const previousGain = getR128Gain(song);
+      if (previousGain === null) {
+        const gain = await r128gain(res.path());
+        addR128Gain(song, gain);
+        setR128Gain(gain, song);
+      } else {
+        setR128Gain(previousGain, song);
+      }
     }
     if (Platform.OS === 'ios') {
       const mp3Path = await ffmpegToMP3(res.path());
