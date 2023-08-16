@@ -148,15 +148,16 @@ export async function PlaybackService() {
           lastBiliHeartBeat = heartBeatReq;
         }
         try {
-          await downloadPromiseMap[event.track.song.id];
           const updatedMetadata = await resolveUrl(event.track.song);
-          addDownloadPromise(
-            event.track.song,
-            NoxCache.noxMediaCache?.saveCacheMedia(
+          downloadPromiseMap[event.track.song.id].then(() => {
+            addDownloadPromise(
               event.track.song,
-              updatedMetadata
-            )
-          );
+              NoxCache.noxMediaCache?.saveCacheMedia(
+                event.track.song,
+                resolveUrl(event.track.song)
+              )
+            );
+          });
           const currentTrack = await TrackPlayer.getActiveTrack();
           await TrackPlayer.load({ ...currentTrack, ...updatedMetadata });
           if (getState().playmode === NoxRepeatMode.REPEAT_TRACK) {
