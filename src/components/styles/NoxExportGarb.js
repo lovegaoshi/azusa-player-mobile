@@ -19,7 +19,9 @@ if (args.garbid === undefined) {
   throw Error('garbid is not defined.');
 }
 
-const steriaGarb = JSON.parse(fs.readFileSync('./steriaGarb.json', 'utf8'));
+const steriaGarb = JSON.parse(
+  fs.readFileSync('./src/components/styles/steriaGarb.json', 'utf8')
+);
 
 const req = await axios.get(
   `https://api.bilibili.com/x/garb/v2/mall/suit/detail?from=&from_id=&item_id=${args.garbid}`
@@ -59,7 +61,7 @@ convertedGarbData.backgroundImages = parsedGarbData.headmp4
 convertedGarbData.thumbupSVGA = parsedGarbData.thumbupSVGA;
 convertedGarbData.loadingIcon = parsedGarbData.loadingIcon;
 fs.writeFile(
-  './steriaGarb.json',
+  './src/components/styles/steriaGarb.json',
   JSON.stringify([...steriaGarb, convertedGarbData], null, 2),
   () => undefined
 );
