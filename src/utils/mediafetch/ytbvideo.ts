@@ -27,6 +27,9 @@ const fetchYTBPlayUrlPromise = async (sid: string) => {
     return {
       url: ytdl.chooseFormat(ytdlInfo.formats, { quality: 'highestaudio' }).url,
       cover: videoDetails.thumbnails[videoDetails.thumbnails.length - 1].url,
+      loudness: ytdlInfo.player_response.playerConfig.audioConfig.loudnessDb,
+      perceivedLoudness:
+        ytdlInfo.player_response.playerConfig.audioConfig.perceptualLoudnessDb,
     };
   } catch (e) {
     logger.error(`[ytbVideoresolve]: ${e}`);

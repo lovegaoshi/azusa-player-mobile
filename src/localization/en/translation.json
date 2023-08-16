@@ -101,6 +101,8 @@
     "r128gainDesc": "Enable on-the-fly R128gain (only works when cache is enabled)",
     "prefetchTrackName": "Prefetch Tracks",
     "prefetchTrackDesc": "Prefetch the next track (only works when cache is enabled)",
+    "chatGPTResolveSongNameName": "ChatGPT on Songs",
+    "chatGPTResolveSongNameDesc": "TODO: Use chatGPT to resolve song names",
     "fastBiliSearchName": "Fast Bilibili Search",
     "fastBiliSearchDesc": "Do not search for bilibili video episodes."
   },

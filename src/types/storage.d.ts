@@ -24,6 +24,7 @@ declare namespace NoxStorage {
     updateLoadedTrack: boolean;
     r128gain: boolean;
     prefetchTrack: boolean;
+    chatGPTResolveSongName: boolean;
 
     appID: string;
     language?: string;
@@ -49,10 +50,14 @@ declare namespace NoxStorage {
   }
 
   export interface R128Dict {
-    [key: string]: string | null;
+    [key: string]: number | null;
   }
 
   export interface ABDict {
     [key: string]: [number, number];
+  }
+
+  export interface DownloadDict {
+    [key: string]: Promise<void | string>;
   }
 }

@@ -118,7 +118,7 @@ export default ({
     closeMenu();
   };
 
-  const setR128Gain = (gain: string | null) => {
+  const setR128Gain = (gain: number | null) => {
     addR128Gain(song, gain);
     closeMenu();
   };
@@ -153,7 +153,7 @@ export default ({
             `${getR128Gain(song)} dB`,
             [
               { text: 'Nullify', onPress: () => setR128Gain(null) },
-              { text: 'Zero', onPress: () => setR128Gain('+0') },
+              { text: 'Zero', onPress: () => setR128Gain(0) },
               { text: 'OK', onPress: closeMenu },
             ],
             { cancelable: true }

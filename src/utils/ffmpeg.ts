@@ -12,7 +12,7 @@ const parseReplayGainLog = (log: string) => {
   if (match[1][0] === '+') {
     logger.debug('[ffmpeg] r128gain of positive dB is not yet supported!');
   }
-  return match[1];
+  return Number(match[1]);
 };
 
 export const r128gain = async (fspath: string) => {
@@ -29,9 +29,15 @@ export const ffmpegToMP3 = async (fspath: string) => {
   return `${fspath}.mp3`;
 };
 
-export const setR128Gain = async (gain: string, song: NoxMedia.Song) => {
+export const setR128Gain = async (
+  gain: number | string,
+  song: NoxMedia.Song
+) => {
   console.debug(`[r128gain] set r128gain to ${gain} dB`);
-  if (gain[0] === '+') {
+  if (typeof gain === 'string') {
+    gain = Number(gain);
+  }
+  if (gain >= 0) {
     logger.warn(`[ffmpeg] positive ${gain} dB is not yet supported!`);
     return;
   }
@@ -40,7 +46,7 @@ export const setR128Gain = async (gain: string, song: NoxMedia.Song) => {
     return;
   }
   try {
-    const volume = Math.pow(10, -Number(gain.substring(1)) / 20);
+    const volume = Math.pow(10, gain / 20);
     console.debug(`[r128gain] set r128gain volume to ${volume}`);
     return await TrackPlayer.setVolume(volume);
   } catch (e) {

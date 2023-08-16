@@ -86,7 +86,7 @@ export const removeSongBiliShazamed = (song: NoxMedia.Song) => {
 };
 
 export const parseSongR128gain = async (song: NoxMedia.Song) => {
-  const playerSetting = getState().playerSetting;
+  const { playerSetting } = getState();
   const cachedR128gain = getR128Gain(song);
   const cachedUrl = await NoxCache.noxMediaCache?.loadCacheMedia(song);
   logger.debug(`[r128gain] found saved r128gain as ${cachedR128gain}`);
@@ -109,7 +109,7 @@ export const resolveUrl = async (song: NoxMedia.Song) => {
   // luckily bilibili doesnt seem to care for now
   logger.debug(`[SongResolveURL] start resolving ${song.name}`);
   const cachedUrl = await NoxCache.noxMediaCache?.loadCacheMedia(song);
-  const playerSetting = getState().playerSetting;
+  const { playerSetting } = getState();
   const url = cachedUrl
     ? {
         ...(playerSetting.updateLoadedTrack
@@ -118,7 +118,13 @@ export const resolveUrl = async (song: NoxMedia.Song) => {
         url: cachedUrl,
       }
     : await fetchPlayUrlPromise(song);
-  logger.debug(`[SongResolveURL] ${song.name} is resolved to ${url.url}`);
+  logger.debug(`[SongResolveURL] ${song.parsedName} is resolved to ${url.url}`);
+  if (url.loudness) {
+    logger.debug(
+      `[SongResolveURL] ${song.parsedName} contains loudness ${url.loudness} and ${url.perceivedLoudness}`
+    );
+    addR128Gain(song, -url.loudness);
+  }
   return {
     url: url.url,
     headers: customReqHeader(url.url, { referer: 'https://www.bilibili.com/' }),

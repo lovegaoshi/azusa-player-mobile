@@ -42,6 +42,10 @@ const developerSettings: { [key: string]: SettingEntry } = {
     settingName: 'prefetchTrack',
     settingCategory: 'GeneralSettings',
   },
+  chatGPTSongName: {
+    settingName: 'chatGPTResolveSongName',
+    settingCategory: 'GeneralSettings',
+  },
 };
 
 const { getState, setState } = logStore;
@@ -123,6 +127,7 @@ export default () => {
           <RenderSetting item={developerSettings.noInterruption} />
           <RenderSetting item={developerSettings.r128gain} />
           <RenderSetting item={developerSettings.prefetchTrack} />
+          <RenderSetting item={developerSettings.chatGPTSongName} />
           <SettingListItem
             icon={ICONS.showlog}
             settingName="Log"

@@ -14,10 +14,15 @@ import NoxCache from '../utils/Cache';
 import noxPlayingList, { getNextSong } from '../stores/playingList';
 import { NoxRepeatMode } from '../enums/RepeatMode';
 import playerSettingStore from '@stores/playerSettingStore';
-import appStore, { getABRepeatRaw, setCurrentPlaying } from '@stores/appStore';
+import appStore, {
+  getABRepeatRaw,
+  setCurrentPlaying,
+  addDownloadPromise,
+} from '@stores/appStore';
 
 const { getState } = noxPlayingList;
 const { setState } = appStore;
+const getAppStoreState = appStore.getState;
 const getPlayerSetting = playerSettingStore.getState;
 let lastBiliHeartBeat: string[] = ['', ''];
 
@@ -89,18 +94,34 @@ export async function PlaybackService() {
         (await TrackPlayer.getPlaybackState()).state === State.Error;
       TrackPlayer.setVolume(1);
       if (!event.track || !event.track.song) return;
-
-      // prefetch song:
+      setState({ activeTrackPlayingId: event.track.song.id });
+      // prefetch song
       const playerSetting = getPlayerSetting().playerSetting;
+      const { downloadProgressMap, downloadPromiseMap } = getAppStoreState();
       if (playerSetting.prefetchTrack && playerSetting.cacheSize > 2) {
         const nextSong = getNextSong(event.track.song);
         if (nextSong) {
           logger.debug(`[ResolveURL] prefetching ${nextSong.name}`);
-          resolveUrl(nextSong);
+          await downloadPromiseMap[nextSong.id];
+          addDownloadPromise(
+            nextSong,
+            NoxCache.noxMediaCache
+              ?.saveCacheMedia(
+                nextSong,
+                // resolveURL either finds cached file:/// or streamable https://
+                // cached path will be bounded back in saveCacheMedia; only https will call RNBlobUtil
+                await resolveUrl(nextSong)
+              )
+              .then(val => {
+                parseSongR128gain(nextSong);
+                return val;
+              })
+          );
         }
       }
-
       // r128gain support:
+      // this is here to load existing R128Gain values or resolve new gain values from cached files only.
+      // another setR128Gain is in Cache.saveCacheMedia where the file is fetched, which is never a scenario here
       if (event.track.url !== NULL_TRACK.url) {
         await parseSongR128gain(event.track.song);
       }
@@ -127,10 +148,14 @@ export async function PlaybackService() {
           lastBiliHeartBeat = heartBeatReq;
         }
         try {
+          await downloadPromiseMap[event.track.song.id];
           const updatedMetadata = await resolveUrl(event.track.song);
-          NoxCache.noxMediaCache?.saveCacheMedia(
-            event.track!.song,
-            updatedMetadata
+          addDownloadPromise(
+            event.track.song,
+            NoxCache.noxMediaCache?.saveCacheMedia(
+              event.track.song,
+              updatedMetadata
+            )
           );
           const currentTrack = await TrackPlayer.getActiveTrack();
           await TrackPlayer.load({ ...currentTrack, ...updatedMetadata });

@@ -51,6 +51,7 @@ export const DEFAULT_SETTING: NoxStorage.PlayerSettingDict = {
   updateLoadedTrack: false,
   r128gain: false,
   prefetchTrack: false,
+  chatGPTResolveSongName: false,
 
   appID,
   language: undefined,
