@@ -149,13 +149,11 @@ export async function PlaybackService() {
         }
         try {
           const updatedMetadata = await resolveUrl(event.track.song);
+          const song = event.track.song as NoxMedia.Song;
           downloadPromiseMap[event.track.song.id].then(() => {
             addDownloadPromise(
-              event.track.song,
-              NoxCache.noxMediaCache?.saveCacheMedia(
-                event.track.song,
-                resolveUrl(event.track.song)
-              )
+              song,
+              NoxCache.noxMediaCache?.saveCacheMedia(song, resolveUrl(song))
             );
           });
           const currentTrack = await TrackPlayer.getActiveTrack();
