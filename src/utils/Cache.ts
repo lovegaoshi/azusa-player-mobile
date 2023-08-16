@@ -77,7 +77,7 @@ class NoxMediaCache {
       .progress((received, total) => {
         const progress = Math.floor((Number(received) * 100) / Number(total));
         addDownloadProgress(song, progress);
-        logger.debug(`${song.parsedName} progress: ${progress}%`);
+        logger.debug(`${song.parsedName} caching progress: ${progress}%`);
       });
     this.cache.set(noxCacheKey(song), res.path());
     addDownloadProgress(song, 100);
