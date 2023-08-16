@@ -272,6 +272,9 @@ export const reExtractSongName = (
         /【黑泽诺亚】【歌切】(.+)/,
         /【黑泽诺亚】【.+】(.+)/,
         /【黑泽诺亚】(.+)/,
+        // 【歌切】第一次爱的人-王心凌
+        /【歌切】(.+)-(.+)/,
+        /(.+) - (.+)/,
       ]);
       break;
     case '284940670': // "我是你的电吉他":
@@ -322,7 +325,11 @@ export const reExtractSongName = (
       break;
     case '440738032': // 安可周报
       // 【超可爱2D演绎】强风大背头，假发都吹掉了！「強風オールバック」
-      filename = extractWith(extractParenthesis(filename), [/「(.+)」/]);
+      // “总是『学不会』，再聪明一点”
+      filename = extractWith(extractParenthesis(filename), [
+        /「(.+)」/,
+        /『(.+)』/,
+      ]);
       break;
     case '37754047': // 咻咻满
       filename = extractWith(extractParenthesis(filename), [
