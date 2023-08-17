@@ -39,6 +39,10 @@ const GEN_SETTING_BOOLEAN: SettingEntry[] = [
     settingName: 'updateLoadedTrack',
     settingCategory: 'GeneralSettings',
   },
+  {
+    settingName: 'r128gain',
+    settingCategory: 'GeneralSettings',
+  },
 ];
 
 export default () => {

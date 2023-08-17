@@ -125,7 +125,6 @@ export default () => {
       <ScrollView>
         <List.Section>
           <RenderSetting item={developerSettings.noInterruption} />
-          <RenderSetting item={developerSettings.r128gain} />
           <RenderSetting item={developerSettings.prefetchTrack} />
           <RenderSetting item={developerSettings.chatGPTSongName} />
           <SettingListItem
