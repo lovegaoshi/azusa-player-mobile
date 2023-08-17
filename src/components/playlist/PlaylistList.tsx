@@ -56,7 +56,6 @@ const PlaylistList = () => {
   const [refreshing, setRefreshing] = useState(false);
   const playlistRef = useRef<FlashList<NoxMedia.Song> | null>(null);
   const netInfo = useNetInfo();
-  const [playlistInfoUpdateCounter, setPlaylistInfoUpdateCounter] = useState(0);
   // TODO: slow?
   const [cachedSongs] = useState(
     Array.from(noxCache.noxMediaCache.cache.keys())
@@ -66,7 +65,6 @@ const PlaylistList = () => {
     setSelected(Array(currentPlaylist.songList.length).fill(val));
 
   const toggleSelected = useCallback((index: number) => {
-    setPlaylistInfoUpdateCounter(val => val + 1);
     setSelected((val: boolean[]) => {
       val[index] = !val[index];
       return val;
@@ -355,7 +353,6 @@ const PlaylistList = () => {
           onPressed={() => scrollTo()}
           selected={selected}
           checking={checking}
-          updateCounter={playlistInfoUpdateCounter}
         />
         <View style={stylesLocal.container}>
           {checking && (
@@ -410,8 +407,8 @@ const PlaylistList = () => {
               checkedList={selected}
               onChecked={() => toggleSelected(getSongIndex(item, index))}
               onLongPress={() => {
-                setChecking(true);
                 toggleSelected(getSongIndex(item, index));
+                setChecking(true);
               }}
               networkCellular={netInfo.type === 'cellular'}
             />
