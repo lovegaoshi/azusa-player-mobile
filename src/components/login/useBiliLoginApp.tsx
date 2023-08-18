@@ -42,10 +42,7 @@ const signBody = (body: any) => {
   return md5(`${parseBodyParams(body)}59b43e04ad6965f34319062b478f83dd`);
 };
 
-const loginQRVerification = async () => {
-  const verificationURL =
-    'https://passport.bilibili.com/x/passport-login/oauth2/refresh_token';
-
+const getCookies = async () => {
   const accessKey = (await CookieManager.get('https://www.bilibili.com'))[
     'access_key'
   ]?.value;
@@ -53,6 +50,46 @@ const loginQRVerification = async () => {
   const refreshToken = (await CookieManager.get('https://www.bilibili.com'))[
     'refresh_token'
   ]?.value;
+  return { accessKey, refreshToken };
+};
+
+const validateCookies = async () => {
+  const verificationURL =
+    'https://passport.bilibili.com/x/passport-login/oauth2/info';
+
+  const { accessKey, refreshToken } = await getCookies();
+  if (!accessKey || !refreshToken) return false;
+  const probeBody = {
+    appkey: '4409e2ce8ffd12b8',
+    ts: 0,
+    actionKey: 'appkey',
+    access_key: accessKey,
+  };
+  const res = await throttler.biliApiLimiter.schedule(async () =>
+      bfetch(`${verificationURL}`, {
+        method: 'POST',
+        credentials: 'include',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: {
+          appkey: '4409e2ce8ffd12b8',
+          ts: '0',
+          sign: 'e134154ed6add881d28fbdf68653cd9c',
+          access_key: accessKey,
+          refresh_token: refreshToken,
+        },
+      })
+    ),
+    json = await res.json();
+  logger.debug(`[biliLogin] ${json}`);
+};
+
+const loginQRVerification = async () => {
+  const verificationURL =
+    'https://passport.bilibili.com/x/passport-login/oauth2/refresh_token';
+
+  const { accessKey, refreshToken } = await getCookies();
   if (!accessKey || !refreshToken) return false;
   const res = await throttler.biliApiLimiter.schedule(async () =>
       bfetch(`${verificationURL}`, {
@@ -200,6 +237,36 @@ const useBiliLogin = () => {
         text: t('Login.BilibiliLoginProbeFailed'),
       });
     }
+  };
+
+  /**
+   * this method converts input cookies into access_token and refresh_token via the APP way.
+   * @param SESSDATA
+   * @param bili_jct
+   */
+  const confirmWebQRCode = async (SESSDATA: string, bili_jct: string) => {
+    const { key } = await getQRLoginReq();
+
+    const res = await bfetch(
+      `https://passport.bilibili.com/x/passport-tv-login/h5/qrcode/confirm`,
+      {
+        method: 'POST',
+        credentials: 'include',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+          Cookie: `SESSDATA=${SESSDATA}; bili_jct=${bili_jct}`,
+          'User-Agent':
+            'Mozilla/5.0 (X11; Linux x86_64; rv:38.0) Gecko/20100101 Firefox/38.0 Iceweasel/38.2.1 BiliApp',
+        },
+        body: {
+          auth_code: key,
+          csrf: bili_jct,
+          scanning_type: 3,
+        },
+      }
+    );
+    const json = await res.json();
+    console.warn(json);
   };
 
   // check QR login status every 4 seconds
