@@ -56,4 +56,5 @@ export const DEFAULT_SETTING: NoxStorage.PlayerSettingDict = {
   appID,
   language: undefined,
   cacheSize: 1,
+  fadeInOutInterval: 500,
 };

@@ -29,6 +29,7 @@ declare namespace NoxStorage {
     appID: string;
     language?: string;
     cacheSize: number;
+    fadeInOutInterval: number;
     [key: string]: any;
   }
 

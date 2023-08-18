@@ -19,6 +19,8 @@ import appStore, {
   setCurrentPlaying,
   addDownloadPromise,
 } from '@stores/appStore';
+import { DEFAULT_SETTING } from '@enums/Storage';
+import { animatedVolumeChange } from '@utils/RNTPUtils';
 
 const { getState } = noxPlayingList;
 const { setState } = appStore;
@@ -113,7 +115,7 @@ export async function PlaybackService() {
                 await resolveUrl(nextSong)
               )
               .then(val => {
-                parseSongR128gain(nextSong);
+                parseSongR128gain(nextSong, DEFAULT_SETTING.fadeInOutInterval);
                 return val;
               })
           );
@@ -123,7 +125,12 @@ export async function PlaybackService() {
       // this is here to load existing R128Gain values or resolve new gain values from cached files only.
       // another setR128Gain is in Cache.saveCacheMedia where the file is fetched, which is never a scenario here
       if (event.track.url !== NULL_TRACK.url) {
-        await parseSongR128gain(event.track.song);
+        // this is when song is first played.
+        await parseSongR128gain(
+          event.track.song,
+          DEFAULT_SETTING.fadeInOutInterval,
+          0
+        );
       }
       // to resolve bilibili media stream URLs on the fly, TrackPlayer.load is used to
       // replace the current track's url. its not documented? >:/
@@ -203,6 +210,9 @@ export async function PlaybackService() {
 
   TrackPlayer.addEventListener(Event.PlaybackProgressUpdated, event => {
     saveLastPlayDuration(event.position);
+    if (event.position > Math.min(bRepeatDuration, event.duration) - 1) {
+      animatedVolumeChange(0, 500);
+    }
     if (abRepeat[1] === 1) return;
     if (event.position > bRepeatDuration) {
       TrackPlayer.seekTo(event.duration);

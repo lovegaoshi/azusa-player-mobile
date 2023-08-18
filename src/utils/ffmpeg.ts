@@ -1,6 +1,8 @@
 import { FFmpegKit } from 'ffmpeg-kit-react-native';
 import RNFetchBlob from 'react-native-blob-util';
 import TrackPlayer from 'react-native-track-player';
+import { animatedVolumeChange } from './RNTPUtils';
+
 import logger from './Logger';
 
 const parseReplayGainLog = (log: string) => {
@@ -31,7 +33,9 @@ export const ffmpegToMP3 = async (fspath: string) => {
 
 export const setR128Gain = async (
   gain: number | string,
-  song: NoxMedia.Song
+  song: NoxMedia.Song,
+  fade = 0,
+  init = -1
 ) => {
   console.debug(`[r128gain] set r128gain to ${gain} dB`);
   if (typeof gain === 'string') {
@@ -48,9 +52,9 @@ export const setR128Gain = async (
   try {
     const volume = Math.pow(10, gain / 20);
     console.debug(`[r128gain] set r128gain volume to ${volume}`);
-    return await TrackPlayer.setVolume(volume);
+    animatedVolumeChange(volume, fade, init);
   } catch (e) {
     logger.warn(`[ffmpeg] r128gain set error: ${e}`);
-    return await TrackPlayer.setVolume(1);
+    animatedVolumeChange(1, fade, init);
   }
 };
