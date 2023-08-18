@@ -150,12 +150,19 @@ export async function PlaybackService() {
         try {
           const updatedMetadata = await resolveUrl(event.track.song);
           const song = event.track.song as NoxMedia.Song;
-          downloadPromiseMap[event.track.song.id].then(() => {
+          const previousDownloadProgress =
+            downloadPromiseMap[event.track.song.id];
+          const downloadCachePromise = () => {
             addDownloadPromise(
               song,
               NoxCache.noxMediaCache?.saveCacheMedia(song, resolveUrl(song))
             );
-          });
+          };
+          if (previousDownloadProgress === undefined) {
+            downloadCachePromise();
+          } else {
+            downloadPromiseMap[event.track.song.id].then(downloadCachePromise);
+          }
           const currentTrack = await TrackPlayer.getActiveTrack();
           await TrackPlayer.load({ ...currentTrack, ...updatedMetadata });
           if (getState().playmode === NoxRepeatMode.REPEAT_TRACK) {
