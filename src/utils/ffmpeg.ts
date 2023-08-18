@@ -52,9 +52,9 @@ export const setR128Gain = async (
   try {
     const volume = Math.pow(10, gain / 20);
     console.debug(`[r128gain] set r128gain volume to ${volume}`);
-    animatedVolumeChange(volume, fade, init);
+    animatedVolumeChange({ val: volume, duration: fade, init });
   } catch (e) {
     logger.warn(`[ffmpeg] r128gain set error: ${e}`);
-    animatedVolumeChange(1, fade, init);
+    animatedVolumeChange({ val: 1, duration: fade, init });
   }
 };

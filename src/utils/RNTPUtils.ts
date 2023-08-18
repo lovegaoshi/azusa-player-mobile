@@ -6,12 +6,26 @@ const animatedVolume = new Animated.Value(1);
 
 animatedVolume.addListener(state => TrackPlayer.setVolume(state.value));
 
+interface animatedVolumeChangeProps {
+  val: number;
+  duration?: number;
+  init?: number;
+  callback?: () => void;
+}
+
 /**
  * to use: duration is the fade interval,
  * when song starts/R128gain is set, set init = 0.
  */
-export const animatedVolumeChange = (val: number, duration = 0, init = -1) => {
-  logger.debug(`animating volume to ${val} in ${duration}`);
+export const animatedVolumeChange = ({
+  val,
+  duration = 0,
+  init = -1,
+  callback = () => undefined,
+}: animatedVolumeChangeProps) => {
+  logger.debug(
+    `[FADING] animating volume from ${init} to ${val} in ${duration}`
+  );
   val = Math.min(val, 1);
   if (duration === 0) {
     animatedVolume.setValue(val);
@@ -25,5 +39,5 @@ export const animatedVolumeChange = (val: number, duration = 0, init = -1) => {
     toValue: val,
     useNativeDriver: true,
     duration,
-  }).start();
+  }).start(() => callback());
 };

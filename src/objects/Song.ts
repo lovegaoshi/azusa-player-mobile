@@ -95,6 +95,7 @@ export const parseSongR128gain = async (
   const cachedUrl = await NoxCache.noxMediaCache?.loadCacheMedia(song);
   logger.debug(`[r128gain] found saved r128gain as ${cachedR128gain}`);
   if (!playerSetting.r128gain) {
+    setR128Gain(0, song, fade, init);
     return { playerSetting, cachedR128gain, cachedUrl };
   }
   if (cachedR128gain) {
@@ -104,6 +105,8 @@ export const parseSongR128gain = async (
     const gain = await r128gain(cachedUrl);
     addR128Gain(song, gain);
     setR128Gain(gain, song, fade, init);
+  } else {
+    setR128Gain(0, song, fade, init);
   }
   return { playerSetting, cachedR128gain, cachedUrl };
 };

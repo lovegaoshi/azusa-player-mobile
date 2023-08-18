@@ -94,7 +94,7 @@ export async function PlaybackService() {
       console.log('Event.PlaybackActiveTrackChanged', event);
       const playerErrored =
         (await TrackPlayer.getPlaybackState()).state === State.Error;
-      TrackPlayer.setVolume(1);
+      await TrackPlayer.setVolume(0);
       if (!event.track || !event.track.song) return;
       setState({ activeTrackPlayingId: event.track.song.id });
       // prefetch song
@@ -126,6 +126,7 @@ export async function PlaybackService() {
       // another setR128Gain is in Cache.saveCacheMedia where the file is fetched, which is never a scenario here
       if (event.track.url !== NULL_TRACK.url) {
         // this is when song is first played.
+        logger.debug('[FADEIN] fading in...');
         await parseSongR128gain(
           event.track.song,
           DEFAULT_SETTING.fadeInOutInterval,
@@ -211,7 +212,8 @@ export async function PlaybackService() {
   TrackPlayer.addEventListener(Event.PlaybackProgressUpdated, event => {
     saveLastPlayDuration(event.position);
     if (event.position > Math.min(bRepeatDuration, event.duration) - 1) {
-      animatedVolumeChange(0, 500);
+      logger.debug('[FADEOUT] fading out....');
+      animatedVolumeChange({ val: 0, duration: 500 });
     }
     if (abRepeat[1] === 1) return;
     if (event.position > bRepeatDuration) {
