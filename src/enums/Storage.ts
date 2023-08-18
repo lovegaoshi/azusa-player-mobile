@@ -20,6 +20,7 @@ export enum STORAGE_KEYS {
   DEFAULT_SEARCH = 'defaultSearch',
   R128GAIN_MAPPING = 'R128GainMapping',
   ABREPEAT_MAPPING = 'ABREPEATMapping',
+  FADE_INTERVAL = 'fadeInterval',
 }
 
 export enum SEARCH_OPTIONS {
@@ -56,5 +57,4 @@ export const DEFAULT_SETTING: NoxStorage.PlayerSettingDict = {
   appID,
   language: undefined,
   cacheSize: 1,
-  fadeInOutInterval: 500,
 };

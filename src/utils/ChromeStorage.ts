@@ -57,6 +57,9 @@ export const removeItem = async (key: string) => {
   }
 };
 
+export const loadFadeInterval = async () => await getItem(STORAGE_KEYS.FADE_INTERVAL) || 500;
+export const saveFadeInterval = async (val: number) => await saveItem(STORAGE_KEYS.FADE_INTERVAL, val);
+
 /**
  * a save helper function for mapping types ({string: val}).
  * @returns nothing

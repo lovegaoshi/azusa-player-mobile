@@ -1,4 +1,5 @@
 import TrackPlayer from 'react-native-track-player';
+import { useStore } from 'zustand';
 
 import { biliSuggest } from '@utils/Bilibili/BiliOperate';
 import { useNoxSetting } from '@hooks/useSetting';
@@ -7,6 +8,8 @@ import noxPlayingList, { getCurrentTPQueue } from '@stores/playingList';
 import biliavideo from '@utils/mediafetch/biliavideo';
 import { randomChoice } from '@utils/Utils';
 import { NoxRepeatMode } from '@enums/RepeatMode';
+import { animatedVolumeChange } from '@utils/RNTPUtils';
+import appStore from '@stores/appStore';
 
 const { getState } = noxPlayingList;
 
@@ -15,6 +18,7 @@ export default () => {
   const findCurrentPlayIndex = () => {
     return getCurrentTPQueue().findIndex(val => val.id === currentPlayingId);
   };
+  const fadeIntervalMs = useStore(appStore, state => state.fadeIntervalMs);
 
   const getBiliSuggest = async () => {
     const currentSong = (await TrackPlayer.getActiveTrack())?.song;
@@ -47,7 +51,7 @@ export default () => {
     await TrackPlayer.add(songlistToTracklist(suggestedSong), 0);
   };
 
-  const performSkipToNext = async () => {
+  const performSkipToNextRaw = async () => {
     if (
       (await TrackPlayer.getActiveTrackIndex()) ===
       (await TrackPlayer.getQueue()).length - 1
@@ -67,7 +71,7 @@ export default () => {
     // setTP2Song(getCurrentTPQueue()[nextIndex]);
   };
 
-  const performSkipToPrevious = async () => {
+  const performSkipToPreviousRaw = async () => {
     if ((await TrackPlayer.getActiveTrackIndex()) === 0) {
       const currentTPQueue = getCurrentTPQueue();
       let nextIndex = findCurrentPlayIndex() - 1;
@@ -85,6 +89,22 @@ export default () => {
     }
     TrackPlayer.skipToPrevious();
     // setTP2Song(getCurrentTPQueue()[nextIndex]);
+  };
+
+  const performSkipToNext = () => {
+    animatedVolumeChange({
+      val: 0,
+      duration: fadeIntervalMs,
+      callback: performSkipToNextRaw,
+    });
+  };
+
+  const performSkipToPrevious = () => {
+    animatedVolumeChange({
+      val: 0,
+      duration: fadeIntervalMs,
+      callback: performSkipToPreviousRaw,
+    });
   };
 
   return {

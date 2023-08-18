@@ -115,7 +115,7 @@ export async function PlaybackService() {
                 await resolveUrl(nextSong)
               )
               .then(val => {
-                parseSongR128gain(nextSong, DEFAULT_SETTING.fadeInOutInterval);
+                parseSongR128gain(nextSong, getAppStoreState().fadeIntervalMs);
                 return val;
               })
           );
@@ -127,11 +127,7 @@ export async function PlaybackService() {
       if (event.track.url !== NULL_TRACK.url) {
         // this is when song is first played.
         logger.debug('[FADEIN] fading in...');
-        await parseSongR128gain(
-          event.track.song,
-          DEFAULT_SETTING.fadeInOutInterval,
-          0
-        );
+        await parseSongR128gain(event.track.song, 500, 0);
       }
       // to resolve bilibili media stream URLs on the fly, TrackPlayer.load is used to
       // replace the current track's url. its not documented? >:/
@@ -211,9 +207,16 @@ export async function PlaybackService() {
 
   TrackPlayer.addEventListener(Event.PlaybackProgressUpdated, event => {
     saveLastPlayDuration(event.position);
-    if (event.position > Math.min(bRepeatDuration, event.duration) - 1) {
+    const { fadeIntervalMs, fadeIntervalSec } = getAppStoreState();
+    if (
+      event.position >
+      Math.min(bRepeatDuration, event.duration) - fadeIntervalSec
+    ) {
       logger.debug('[FADEOUT] fading out....');
-      animatedVolumeChange({ val: 0, duration: 500 });
+      animatedVolumeChange({
+        val: 0,
+        duration: fadeIntervalMs,
+      });
     }
     if (abRepeat[1] === 1) return;
     if (event.position > bRepeatDuration) {
