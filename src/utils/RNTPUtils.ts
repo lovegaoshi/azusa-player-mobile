@@ -29,6 +29,7 @@ export const animatedVolumeChange = ({
   val = Math.min(val, 1);
   if (duration === 0) {
     animatedVolume.setValue(val);
+    callback();
     return;
   }
   if (init !== -1) {
