@@ -58,7 +58,7 @@ export const removeItem = async (key: string) => {
 };
 
 export const loadFadeInterval = async () =>
-  Number(await getItem(STORAGE_KEYS.FADE_INTERVAL)) || 500;
+  Number(await getItem(STORAGE_KEYS.FADE_INTERVAL)) || 0;
 export const saveFadeInterval = async (val: number) =>
   await saveItem(STORAGE_KEYS.FADE_INTERVAL, val);
 
