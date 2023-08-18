@@ -4,6 +4,7 @@ import { List } from 'react-native-paper';
 import { useTranslation } from 'react-i18next';
 // eslint-disable-next-line import/no-unresolved
 import { APPSTORE } from '@env';
+import { useStore } from 'zustand';
 
 import { useNoxSetting } from '@hooks/useSetting';
 import { logStore, LOGLEVEL, getLog } from '@utils/Logger';
@@ -18,6 +19,8 @@ import {
 } from './SetttingEntries';
 import NoxCache from '@utils/Cache';
 import useCleanCache from '@hooks/useCleanCache';
+import appStore from '@stores/appStore';
+import { saveFadeInterval } from '@utils/ChromeStorage';
 
 enum ICONS {
   setlog = 'console',
@@ -26,7 +29,15 @@ enum ICONS {
   cache = 'floppy',
   clearcache = 'delete-sweep',
   clearOrphanCache = 'delete-empty',
+  fade = 'shuffle-variant',
 }
+
+const FadeOptions = [
+  0,
+  500,
+  1000,
+  1500,
+]
 
 const developerSettings: { [key: string]: SettingEntry } = {
   noInterruption: {
@@ -62,6 +73,7 @@ export default () => {
   const playerStyle = useNoxSetting(state => state.playerStyle);
   const { checkVersion } = useVersionCheck();
   const { orphanedCache, cleanOrphanedCache } = useCleanCache();
+  const fadeIntervalMs = useStore(appStore, state => state.fadeIntervalMs);
 
   const logLevelString = [
     t('DeveloperSettings.LogLevel0'),
@@ -91,6 +103,21 @@ export default () => {
         setSelectVisible(false);
       },
       title: t('DeveloperSettings.LogLevel'),
+    } as SelectSettingEntry<number>);
+  };
+
+  const selectFade = () => {
+    setSelectVisible(true);
+    setCurrentSelectOption({
+      options: FadeOptions,
+      renderOption: (option: number) => String(option),
+      defaultIndex: 0,
+      onClose: () => setSelectVisible(false),
+      onSubmit: (index: number) => {
+        saveFadeInterval(FadeOptions[index]);
+        setSelectVisible(false);
+      },
+      title: t('DeveloperSettings.fadeIntervalMs'),
     } as SelectSettingEntry<number>);
   };
 
@@ -141,6 +168,13 @@ export default () => {
             modifyDescription={val =>
               `${val}: ${logLevelString[getState().logLevel]}`
             }
+          />
+          <SettingListItem
+            icon={ICONS.fade}
+            settingName="Fade"
+            onPress={selectFade}
+            settingCategory="DeveloperSettings"
+            modifyDescription={val => `${val}: ${fadeIntervalMs}ms`}
           />
           {!APPSTORE && (
             <SettingListItem
