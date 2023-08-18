@@ -86,6 +86,7 @@ export const fetchVideoPlayUrlPromise = async (
   // will never be not true.
   if (!cid || cid.includes('null')) {
     cid = await fetchCID(bvid);
+    logger.debug(`[resolveURL] cid resolved to be: ${cid}`);
   }
   try {
     const res = await bfetch(
