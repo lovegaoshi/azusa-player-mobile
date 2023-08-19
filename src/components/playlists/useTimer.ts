@@ -81,7 +81,7 @@ export default () => {
   const timerRestart = () => {
     BackgroundTimer.stopBackgroundTimer();
     timerEnd();
-    setTimeout(function () {
+    setTimeout(() => {
       BackgroundTimer.stopBackgroundTimer();
     }, 500);
   };
