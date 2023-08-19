@@ -104,20 +104,26 @@ export async function PlaybackService() {
         const nextSong = getNextSong(event.track.song);
         if (nextSong) {
           logger.debug(`[ResolveURL] prefetching ${nextSong.name}`);
-          await downloadPromiseMap[nextSong.id];
-          addDownloadPromise(
-            nextSong,
-            NoxCache.noxMediaCache
-              ?.saveCacheMedia(
-                nextSong,
-                // resolveURL either finds cached file:/// or streamable https://
-                // cached path will be bounded back in saveCacheMedia; only https will call RNBlobUtil
-                await resolveUrl(nextSong)
-              )
-              .then(val => {
-                parseSongR128gain(nextSong, getAppStoreState().fadeIntervalMs);
-                return val;
-              })
+          const nextDownloadProgress =
+            downloadPromiseMap[nextSong.id] || new Promise(() => 1);
+          nextDownloadProgress.then(async () =>
+            addDownloadPromise(
+              nextSong,
+              NoxCache.noxMediaCache
+                ?.saveCacheMedia(
+                  nextSong,
+                  // resolveURL either finds cached file:/// or streamable https://
+                  // cached path will be bounded back in saveCacheMedia; only https will call RNBlobUtil
+                  await resolveUrl(nextSong)
+                )
+                .then(val => {
+                  parseSongR128gain(
+                    nextSong,
+                    getAppStoreState().fadeIntervalMs
+                  );
+                  return val;
+                })
+            )
           );
         }
       }

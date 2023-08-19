@@ -267,6 +267,7 @@ const useBiliLogin = () => {
     );
     const json = await res.json();
     console.warn(json);
+    clearQRLogin();
   };
 
   // check QR login status every 4 seconds
@@ -306,6 +307,7 @@ const useBiliLogin = () => {
     getBiliLoginStatus,
     getQRLoginReq,
     loginQRVerification,
+    confirmWebQRCode,
   };
 };
 

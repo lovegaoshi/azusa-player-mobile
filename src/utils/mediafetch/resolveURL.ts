@@ -3,6 +3,7 @@ import biliaudioFetch from './biliaudio';
 import ytbvideoFetch from './ytbvideo';
 import { logger } from '../Logger';
 import bfetch from '../BiliFetch';
+import { regexMatchOperations } from '../Utils';
 
 /**
  *  Video src info
@@ -42,25 +43,26 @@ export const fetchPlayUrlPromise = async (
 ): Promise<NoxNetwork.ParsedNoxMediaURL> => {
   const bvid = v.bvid;
   const cid = v.id;
-  const regexResolveURLs: Array<
-    [RegExp, (song: NoxMedia.Song) => Promise<NoxNetwork.ParsedNoxMediaURL>]
-  > = [
-    [steriatkFetch.regexResolveURLMatch, steriatkFetch.resolveURL],
-    [biliaudioFetch.regexResolveURLMatch, biliaudioFetch.resolveURL],
-    [ytbvideoFetch.regexResolveURLMatch, ytbvideoFetch.resolveURL],
-  ];
+  const regexResolveURLs: NoxUtils.RegexMatchOperations<NoxNetwork.ParsedNoxMediaURL> =
+    [
+      [steriatkFetch.regexResolveURLMatch, steriatkFetch.resolveURL],
+      [biliaudioFetch.regexResolveURLMatch, biliaudioFetch.resolveURL],
+      [ytbvideoFetch.regexResolveURLMatch, ytbvideoFetch.resolveURL],
+    ];
   logger.debug(`[resolveURL] ${bvid}, ${cid} }`);
-  for (const reExtraction of regexResolveURLs) {
-    const reExtracted = reExtraction[0].exec(cid);
-    if (reExtracted !== null) {
-      return reExtraction[1](v);
+
+  const fallback = () => {
+    const cidStr = String(cid);
+    if (cidStr.startsWith(ENUMS.audioType)) {
+      return biliaudioFetch.resolveURL(v);
     }
-  }
-  const cidStr = String(cid);
-  if (cidStr.startsWith(ENUMS.audioType)) {
-    return biliaudioFetch.resolveURL(v);
-  }
-  return fetchVideoPlayUrlPromise(bvid, cidStr);
+    return fetchVideoPlayUrlPromise(bvid, cidStr);
+  };
+  return regexMatchOperations({
+    song: v,
+    regexOperations: regexResolveURLs,
+    fallback,
+  });
 };
 
 // TODO: why is this not refactored into bilivideo.ts?

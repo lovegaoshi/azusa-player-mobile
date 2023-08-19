@@ -22,7 +22,8 @@ export default () => {
 
   const getBiliSuggest = async () => {
     const currentSong = (await TrackPlayer.getActiveTrack())?.song;
-    if (!currentSong || !currentSong.bvid.startsWith('BV')) {
+    if (!currentSong) throw new Error('[PlaySuggest] currenSong is not valid!');
+    if (!currentSong.bvid.startsWith('BV')) {
       throw new Error('not a bvid; bilisuggest fails');
     }
     // 130,音乐综合 29,音乐现场 59,演奏 31,翻唱 193,MV 30,VOCALOID·UTAU 194,电音 28,原创音乐

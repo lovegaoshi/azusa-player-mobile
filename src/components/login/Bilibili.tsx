@@ -35,6 +35,7 @@ export default ({ navigation }: Props) => {
     clearQRLogin,
     getBiliLoginStatus,
     getQRLoginReq,
+    confirmWebQRCode = () => undefined,
   } = useBiliLogin();
 
   const manualInputCookies = async (input: { [key: string]: string }) => {
@@ -47,9 +48,12 @@ export default ({ navigation }: Props) => {
         name: 'bili_jct',
         value: input.bili_jct,
       });
-      logger.debug(`[setCookie] ${await CookieManager.get(domain)}`);
+      logger.debug(`[setCookie] manually input cookie;`);
       clearQRLogin();
       getBiliLoginStatus();
+      // https://github.com/biliup/biliup-rs/issues/75
+      // doesnt work:(
+      // confirmWebQRCode(input.SESSDATA, input.bili_jct);
     }
     setInputCookieVisible(false);
   };
