@@ -28,6 +28,12 @@ export default ({
   const searchBarWidth = useRef(new Animated.Value(0)).current;
   const opacity = useRef(new Animated.Value(1)).current;
   const [searchVisible, setSearchVisible] = useState(search);
+  const playlistSearchAutoFocus = useNoxSetting(
+    state => state.playlistSearchAutoFocus
+  );
+  const setPlaylistSearchAutoFocus = useNoxSetting(
+    state => state.setPlaylistSearchAutoFocus
+  );
 
   const renderSongCount = () => {
     if (checking) {
@@ -78,7 +84,7 @@ export default ({
           duration: 220,
           useNativeDriver: true,
         }),
-      ]).start();
+      ]).start(() => setPlaylistSearchAutoFocus(true));
     } else {
       Animated.parallel([
         Animated.timing(searchBarWidth, {
@@ -107,7 +113,7 @@ export default ({
             }}
             style={styles.textInput}
             inputStyle={styles.searchInput}
-            autoFocus
+            autoFocus={playlistSearchAutoFocus}
             selectTextOnFocus
             selectionColor={playerStyle.customColors.textInputSelectionColor}
           />

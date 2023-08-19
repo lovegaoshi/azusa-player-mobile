@@ -48,6 +48,9 @@ export default ({
   const setExternalSearchText = useNoxSetting(
     state => state.setExternalSearchText
   );
+  const setPlaylistSearchAutoFocus = useNoxSetting(
+    state => state.setPlaylistSearchAutoFocus
+  );
   const { startRadio, radioAvailable } = useSongOperations();
 
   const closeMenu = React.useCallback(() => setSongMenuVisible(false), []);
@@ -159,8 +162,7 @@ export default ({
             currentPlaylist.songList[songMenuSongIndexes[0]].parsedName
           );
           closeMenu();
-          // TODO: doesnt work.
-          Keyboard.dismiss();
+          setPlaylistSearchAutoFocus(false);
         }}
         disabled={checking}
         title={t('SongOperations.songSearchInPlaylistTitle')}

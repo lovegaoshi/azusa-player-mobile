@@ -82,3 +82,24 @@ export const charLength = (str: string) => {
 export function timeout(delay: number) {
   return new Promise(res => setTimeout(res, delay));
 }
+
+interface regexMatchOperationsProps<T> {
+  song: NoxMedia.Song;
+  regexOperations: Array<[RegExp, (song: NoxMedia.Song) => Promise<T>]>;
+  fallback: (song: NoxMedia.Song) => Promise<T>;
+  regexMatching?: (song: NoxMedia.Song) => string;
+}
+export const regexMatchOperations = <T>({
+  song,
+  regexOperations,
+  fallback,
+  regexMatching = (song: NoxMedia.Song) => song.id,
+}: regexMatchOperationsProps<T>) => {
+  for (const reExtraction of regexOperations) {
+    const reExtracted = reExtraction[0].exec(regexMatching(song));
+    if (reExtracted !== null) {
+      return reExtraction[1](song);
+    }
+  }
+  return fallback(song);
+};
