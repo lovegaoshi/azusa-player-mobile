@@ -29,6 +29,7 @@ export const animatedVolumeChange = ({
   val = Math.min(val, 1);
   if (duration === 0) {
     animatedVolume.setValue(val);
+    TrackPlayer.setVolume(val);
     callback();
     return;
   }
