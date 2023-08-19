@@ -3,6 +3,7 @@ import { Pressable, View, FlatList, StyleSheet } from 'react-native';
 import { Button, Dialog, Portal, Text, RadioButton } from 'react-native-paper';
 import { useTranslation } from 'react-i18next';
 import { useNoxSetting } from '@hooks/useSetting';
+import logger from '@utils/Logger';
 
 interface Props {
   visible: boolean;
@@ -30,7 +31,9 @@ export default ({
 
   const handleSubmit = () => {
     setPlaylistIndex('');
+    logger.debug(`[SendTo] cmd received, sending to ${playlistIndex}`);
     if (!playlists[playlistIndex]) {
+      logger.debug(`[SendTo] Sending to list ${playlistIndex} DNE`);
       onClose();
       return;
     }

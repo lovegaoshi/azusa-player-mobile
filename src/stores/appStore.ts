@@ -6,6 +6,7 @@ import {
   saveR128GainMapping,
   loadABMapping,
   saveABMapping,
+  loadFadeInterval,
 } from '@utils/ChromeStorage';
 import type { NoxStorage } from '../types/storage';
 
@@ -29,6 +30,8 @@ interface AppStore {
   setDownloadProgressMap: (val: NoxStorage.R128Dict) => void;
   downloadPromiseMap: NoxStorage.DownloadDict;
   setDownloadPromiseMap: (val: NoxStorage.DownloadDict) => void;
+  fadeIntervalMs: number;
+  fadeIntervalSec: number;
 }
 
 const appStore = createStore<AppStore>((set, get) => ({
@@ -63,11 +66,18 @@ const appStore = createStore<AppStore>((set, get) => ({
   setDownloadPromiseMap: (val: NoxStorage.DownloadDict) => {
     set({ downloadPromiseMap: val });
   },
+  fadeIntervalMs: 500,
+  fadeIntervalSec: 0.5,
 }));
 
-export const initialize = async () => {
-  appStore.setState({ r128gain: await loadR128GainMapping() });
-  appStore.setState({ ABRepeat: await loadABMapping() });
+export const initialize = async (val: NoxStorage.PlayerStorageObject) => {
+  const fadeInterval = await loadFadeInterval();
+  appStore.setState({
+    r128gain: await loadR128GainMapping(),
+    ABRepeat: await loadABMapping(),
+    fadeIntervalMs: fadeInterval,
+    fadeIntervalSec: fadeInterval / 1000,
+  });
 };
 
 export const saveR128Gain = async (val: NoxStorage.R128Dict) => {
@@ -148,6 +158,8 @@ export const addDownloadPromise = async (
   };
   appStore.setState({ downloadPromiseMap: newMap });
 };
+
+// export const setFadeInterval =
 
 export default appStore;
 // const { getState, setState } =

@@ -5,6 +5,7 @@ import { useNoxSetting } from '@hooks/useSetting';
 import { fetchVideoPlayUrlPromise } from '@utils/mediafetch/resolveURL';
 import { customReqHeader } from '@utils/BiliFetch';
 import { biliNFTVideoFetch } from '@utils/mediafetch/biliNFT';
+import logger from '@utils/Logger';
 
 const mobileHeight = Dimensions.get('window').height;
 
@@ -89,6 +90,7 @@ const MainBackground = (props: any) => {
             resizeMode={ResizeMode.COVER}
             shouldPlay={true}
             isMuted={true}
+            onError={logger.error}
           />
           <View style={styles.fullscreenStyle}>{props.children}</View>
         </>

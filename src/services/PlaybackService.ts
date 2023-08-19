@@ -19,6 +19,8 @@ import appStore, {
   setCurrentPlaying,
   addDownloadPromise,
 } from '@stores/appStore';
+import { DEFAULT_SETTING } from '@enums/Storage';
+import { animatedVolumeChange } from '@utils/RNTPUtils';
 
 const { getState } = noxPlayingList;
 const { setState } = appStore;
@@ -92,7 +94,7 @@ export async function PlaybackService() {
       console.log('Event.PlaybackActiveTrackChanged', event);
       const playerErrored =
         (await TrackPlayer.getPlaybackState()).state === State.Error;
-      TrackPlayer.setVolume(1);
+      await TrackPlayer.setVolume(0);
       if (!event.track || !event.track.song) return;
       setState({ activeTrackPlayingId: event.track.song.id });
       // prefetch song
@@ -113,7 +115,7 @@ export async function PlaybackService() {
                 await resolveUrl(nextSong)
               )
               .then(val => {
-                parseSongR128gain(nextSong);
+                parseSongR128gain(nextSong, getAppStoreState().fadeIntervalMs);
                 return val;
               })
           );
@@ -123,7 +125,9 @@ export async function PlaybackService() {
       // this is here to load existing R128Gain values or resolve new gain values from cached files only.
       // another setR128Gain is in Cache.saveCacheMedia where the file is fetched, which is never a scenario here
       if (event.track.url !== NULL_TRACK.url) {
-        await parseSongR128gain(event.track.song);
+        // this is when song is first played.
+        logger.debug('[FADEIN] fading in...');
+        await parseSongR128gain(event.track.song, 500, 0);
       }
       // to resolve bilibili media stream URLs on the fly, TrackPlayer.load is used to
       // replace the current track's url. its not documented? >:/
@@ -148,15 +152,26 @@ export async function PlaybackService() {
           lastBiliHeartBeat = heartBeatReq;
         }
         try {
-          await downloadPromiseMap[event.track.song.id];
           const updatedMetadata = await resolveUrl(event.track.song);
-          addDownloadPromise(
-            event.track.song,
-            NoxCache.noxMediaCache?.saveCacheMedia(
-              event.track.song,
-              updatedMetadata
-            )
-          );
+          const song = event.track.song as NoxMedia.Song;
+          const previousDownloadProgress =
+            downloadPromiseMap[event.track.song.id];
+          if (previousDownloadProgress === undefined) {
+            addDownloadPromise(
+              song,
+              NoxCache.noxMediaCache?.saveCacheMedia(song, updatedMetadata)
+            );
+          } else {
+            previousDownloadProgress.then(async () => {
+              addDownloadPromise(
+                song,
+                NoxCache.noxMediaCache?.saveCacheMedia(
+                  song,
+                  await resolveUrl(song)
+                )
+              );
+            });
+          }
           const currentTrack = await TrackPlayer.getActiveTrack();
           await TrackPlayer.load({ ...currentTrack, ...updatedMetadata });
           if (getState().playmode === NoxRepeatMode.REPEAT_TRACK) {
@@ -192,6 +207,17 @@ export async function PlaybackService() {
 
   TrackPlayer.addEventListener(Event.PlaybackProgressUpdated, event => {
     saveLastPlayDuration(event.position);
+    const { fadeIntervalMs, fadeIntervalSec } = getAppStoreState();
+    if (
+      event.position >
+      Math.min(bRepeatDuration, event.duration) - fadeIntervalSec
+    ) {
+      logger.debug('[FADEOUT] fading out....');
+      animatedVolumeChange({
+        val: 0,
+        duration: fadeIntervalMs,
+      });
+    }
     if (abRepeat[1] === 1) return;
     if (event.position > bRepeatDuration) {
       TrackPlayer.seekTo(event.duration);

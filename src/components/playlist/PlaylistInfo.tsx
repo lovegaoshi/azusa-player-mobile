@@ -12,7 +12,6 @@ interface Props {
   onPressed?: () => void;
   selected: boolean[];
   checking: boolean;
-  updateCounter: number;
 }
 
 export default ({
@@ -22,7 +21,6 @@ export default ({
   onPressed = () => undefined,
   selected,
   checking,
-  updateCounter,
 }: Props) => {
   const { t } = useTranslation();
   const currentPlaylist = useNoxSetting(state => state.currentPlaylist);

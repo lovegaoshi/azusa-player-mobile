@@ -1,6 +1,8 @@
 import { FFmpegKit } from 'ffmpeg-kit-react-native';
 import RNFetchBlob from 'react-native-blob-util';
 import TrackPlayer from 'react-native-track-player';
+import { animatedVolumeChange } from './RNTPUtils';
+
 import logger from './Logger';
 
 const parseReplayGainLog = (log: string) => {
@@ -31,26 +33,29 @@ export const ffmpegToMP3 = async (fspath: string) => {
 
 export const setR128Gain = async (
   gain: number | string,
-  song: NoxMedia.Song
+  song: NoxMedia.Song,
+  fade = 0,
+  init = -1
 ) => {
   console.debug(`[r128gain] set r128gain to ${gain} dB`);
   if (typeof gain === 'string') {
     gain = Number(gain);
   }
-  if (gain >= 0) {
-    logger.warn(`[ffmpeg] positive ${gain} dB is not yet supported!`);
-    return;
-  }
   if (song.id !== (await TrackPlayer.getActiveTrack())?.song?.id) {
     logger.warn(`${song.parsedName} is no longer the active track.`);
+    return;
+  }
+  if (gain >= 0) {
+    logger.warn(`[ffmpeg] positive ${gain} dB is not yet supported!`);
+    animatedVolumeChange({ val: 1, duration: fade, init });
     return;
   }
   try {
     const volume = Math.pow(10, gain / 20);
     console.debug(`[r128gain] set r128gain volume to ${volume}`);
-    return await TrackPlayer.setVolume(volume);
+    animatedVolumeChange({ val: volume, duration: fade, init });
   } catch (e) {
     logger.warn(`[ffmpeg] r128gain set error: ${e}`);
-    return await TrackPlayer.setVolume(1);
+    animatedVolumeChange({ val: 1, duration: fade, init });
   }
 };

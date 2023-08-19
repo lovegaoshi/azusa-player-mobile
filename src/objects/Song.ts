@@ -85,21 +85,28 @@ export const removeSongBiliShazamed = (song: NoxMedia.Song) => {
   song.parsedName = reExtractSongName(song.name, song.singerId);
 };
 
-export const parseSongR128gain = async (song: NoxMedia.Song) => {
+export const parseSongR128gain = async (
+  song: NoxMedia.Song,
+  fade = 0,
+  init = -1
+) => {
   const { playerSetting } = getState();
   const cachedR128gain = getR128Gain(song);
   const cachedUrl = await NoxCache.noxMediaCache?.loadCacheMedia(song);
   logger.debug(`[r128gain] found saved r128gain as ${cachedR128gain}`);
   if (!playerSetting.r128gain) {
+    setR128Gain(0, song, fade, init);
     return { playerSetting, cachedR128gain, cachedUrl };
   }
   if (cachedR128gain) {
-    setR128Gain(cachedR128gain, song);
+    setR128Gain(cachedR128gain, song, fade, init);
   } else if (cachedUrl) {
     logger.debug('[FFMPEG] r128gain null. now parsing FFMPEG r128gain...');
     const gain = await r128gain(cachedUrl);
     addR128Gain(song, gain);
-    setR128Gain(gain, song);
+    setR128Gain(gain, song, fade, init);
+  } else {
+    setR128Gain(0, song, fade, init);
   }
   return { playerSetting, cachedR128gain, cachedUrl };
 };

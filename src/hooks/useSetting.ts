@@ -271,7 +271,7 @@ export const useNoxSetting = create<NoxSetting>((set, get) => ({
     const playingList =
       val.playlists[val.lastPlaylistId[0]] || dummyPlaylistList;
     const createdStyle = createStyle(val.skin);
-    await appStoreInitialize();
+    await appStoreInitialize(val);
     set({ currentPlayingId: val.lastPlaylistId[1] });
     set({ currentABRepeat: getABRepeatRaw(val.lastPlaylistId[1]) });
     set({ currentPlayingList: playingList });
