@@ -133,7 +133,11 @@ export async function PlaybackService() {
       if (event.track.url !== NULL_TRACK.url) {
         // this is when song is first played.
         logger.debug('[FADEIN] fading in...');
-        await parseSongR128gain(event.track.song, 500, 0);
+        await parseSongR128gain(
+          event.track.song,
+          getAppStoreState().fadeIntervalMs,
+          0
+        );
       }
       // to resolve bilibili media stream URLs on the fly, TrackPlayer.load is used to
       // replace the current track's url. its not documented? >:/
