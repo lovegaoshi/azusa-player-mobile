@@ -40,6 +40,9 @@ interface initializedResults {
 }
 
 interface NoxSetting {
+  playlistSearchAutoFocus: boolean;
+  setPlaylistSearchAutoFocus: (val: boolean) => void;
+
   currentABRepeat: [number, number];
   setCurrentABRepeat: (val: [number, number]) => void;
 
@@ -126,6 +129,10 @@ interface NoxSetting {
  * as well as saving and loading states to/from asyncStorage.
  */
 export const useNoxSetting = create<NoxSetting>((set, get) => ({
+  playlistSearchAutoFocus: true,
+  setPlaylistSearchAutoFocus: (val: boolean) =>
+    set({ playlistSearchAutoFocus: val }),
+
   currentABRepeat: [0, 1],
   setCurrentABRepeat: (val: [number, number]) => set({ currentABRepeat: val }),
 
