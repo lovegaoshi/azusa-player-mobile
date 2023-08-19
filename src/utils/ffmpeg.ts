@@ -41,12 +41,13 @@ export const setR128Gain = async (
   if (typeof gain === 'string') {
     gain = Number(gain);
   }
-  if (gain >= 0) {
-    logger.warn(`[ffmpeg] positive ${gain} dB is not yet supported!`);
-    return;
-  }
   if (song.id !== (await TrackPlayer.getActiveTrack())?.song?.id) {
     logger.warn(`${song.parsedName} is no longer the active track.`);
+    return;
+  }
+  if (gain >= 0) {
+    logger.warn(`[ffmpeg] positive ${gain} dB is not yet supported!`);
+    animatedVolumeChange({ val: 1, duration: fade, init });
     return;
   }
   try {

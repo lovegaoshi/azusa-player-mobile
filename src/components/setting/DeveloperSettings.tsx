@@ -32,12 +32,7 @@ enum ICONS {
   fade = 'shuffle-variant',
 }
 
-const FadeOptions = [
-  0,
-  500,
-  1000,
-  1500,
-]
+const FadeOptions = [0, 500, 1000, 1500];
 
 const developerSettings: { [key: string]: SettingEntry } = {
   noInterruption: {
@@ -117,7 +112,7 @@ export default () => {
         saveFadeInterval(FadeOptions[index]);
         setSelectVisible(false);
       },
-      title: t('DeveloperSettings.fadeIntervalMs'),
+      title: t('DeveloperSettings.FadeTitle'),
     } as SelectSettingEntry<number>);
   };
 
