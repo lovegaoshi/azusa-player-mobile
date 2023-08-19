@@ -14,6 +14,7 @@ import { biliApiLimiter } from './throttle';
 
 import SongTS from '@objects/Song';
 import { logger } from '../Logger';
+import { randomChoice } from '../Utils';
 
 export const CIDPREFIX = 'youtube-';
 
@@ -41,23 +42,6 @@ export const fetchAudioInfoRaw = async (sid: string) => {
   logger.info(`calling fetch YTB info of sid`);
   const ytdlInfo = await ytdl.getInfo(`https://www.youtube.com/watch?v=${sid}`);
   try {
-    /*
-    might be very useful for youtubeSuggest.
-      related_videos: [
-    {
-      id: 'tCMrzOdmtcc',
-      title: 'The Way You Move',
-      published: '7 years ago',
-      author: [Object],
-      short_view_count_text: '25M',
-      view_count: '25863244',
-      length_seconds: 234,
-      thumbnails: [Array],
-      richThumbnails: [],
-      isLive: false
-    },
-    */
-    const relatedVideos = ytdlInfo.related_videos;
     /*
      videoDetails: {
     embed: {
@@ -190,6 +174,49 @@ export const fetchAudioInfo = async (
     return fetchAudioInfoRaw(bvid);
   });
 
+export const suggest = async (song: NoxMedia.Song) => {
+  const ytdlInfo = await ytdl.getInfo(
+    `https://www.youtube.com/watch?v=${song.bvid}`
+  );
+  /*
+  might be very useful for youtubeSuggest.
+    related_videos: [
+  {
+    id: 'tCMrzOdmtcc',
+    title: 'The Way You Move',
+    published: '7 years ago',
+    author: [Object],
+    short_view_count_text: '25M',
+    view_count: '25863244',
+    length_seconds: 234,
+    thumbnails: [Array],
+    richThumbnails: [],
+    isLive: false
+  },
+  */
+  const relatedVideos = ytdlInfo.related_videos.filter(song => song.id);
+  const suggestSong = randomChoice(relatedVideos); // or relatedVideos[0];
+  return SongTS({
+    cid: `${CIDPREFIX}-${suggestSong.id}`,
+    bvid: suggestSong.id!,
+    name: suggestSong.title!,
+    nameRaw: suggestSong.title!,
+    // string is a to be removed type so this is safe
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    singer: String(suggestSong.author.name),
+    // string is a to be removed type so this is safe
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    singerId: String(suggestSong.author.channel_url),
+    cover: suggestSong.thumbnails[0].url,
+    lyric: '',
+    page: 1,
+    duration: Number(suggestSong.length_seconds),
+    album: suggestSong.title,
+  });
+};
+
 const regexFetch = async ({ reExtracted, useBiliTag }: regexFetchProps) => {
   const audioInfo = await fetchAudioInfo(reExtracted[1]!);
   return audioInfo || [];
@@ -207,4 +234,5 @@ export default {
   regexResolveURLMatch: /^youtube-/,
   resolveURL,
   refreshSong,
+  suggest,
 };
