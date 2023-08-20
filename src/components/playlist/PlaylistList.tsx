@@ -1,10 +1,9 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react';
-import { View, BackHandler, StyleSheet } from 'react-native';
+import { View, BackHandler, StyleSheet, Dimensions } from 'react-native';
 import { FlashList } from '@shopify/flash-list';
 import Snackbar from 'react-native-snackbar';
-import { IconButton, Text } from 'react-native-paper';
+import { IconButton } from 'react-native-paper';
 import TrackPlayer, { RepeatMode } from 'react-native-track-player';
-import { Dimensions } from 'react-native';
 import { useTranslation } from 'react-i18next';
 import { useDebounce } from 'use-debounce';
 import { useNetInfo } from '@react-native-community/netinfo';

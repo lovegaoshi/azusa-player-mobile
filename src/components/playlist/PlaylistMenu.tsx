@@ -10,9 +10,12 @@ import { PLAYLIST_ENUMS } from '@enums/Playlist';
 import { CopiedPlaylistMenuItem } from '../buttons/CopiedPlaylistButton';
 import { biliShazamOnSonglist } from '@utils/mediafetch/bilishazam';
 import { getPlaylistUniqBVIDs } from '@objects/Playlist';
-import { fetchVideoInfo } from '@utils/mediafetch/bilivideo';
 import useAlert from '../dialogs/useAlert';
-import { songFetch, fetchiliBVIDs } from '@utils/mediafetch/bilivideo';
+import {
+  songFetch,
+  fetchiliBVIDs,
+  fetchVideoInfo,
+} from '@utils/mediafetch/bilivideo';
 import { syncFavlist } from '@utils/Bilibili/bilifavOperate';
 
 enum ICONS {
@@ -150,7 +153,7 @@ export default ({
   };
 
   const playlistCleanup = async (playlist = currentPlaylist) => {
-    const promises: Promise<any>[] = [];
+    const promises: Promise<void>[] = [];
     const validBVIds: Array<string> = [];
     Snackbar.show({
       text: t('PlaylistOperations.cleaning', { playlist }),
