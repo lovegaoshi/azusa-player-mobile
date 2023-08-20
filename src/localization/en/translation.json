@@ -219,5 +219,11 @@
   },
   "AndroidAuto": {
     "PlaylistTab": "Playlists"
+  },
+  "PlaylistRegex": {
+    "absoluteMatch": "Absolute match",
+    "artistMatch": "Artist",
+    "albumMatch": "Album",
+    "cachedMatch": "Cached"
   }
 }
