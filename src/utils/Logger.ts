@@ -26,12 +26,14 @@ export const getLog = () => {
     .join('\n');
 };
 
+export const resetLog = () => {
+  logStore.setState({ logs: [] });
+};
+
 export const addLog = (level: string, msg: any) => {
-  logStore.setState(state => {
-    return {
-      logs: [{ level, msg: JSON.stringify(msg) }].concat(state.logs),
-    };
-  });
+  logStore.setState(state => ({
+    logs: [{ level, msg: JSON.stringify(msg) }].concat(state.logs),
+  }));
 };
 
 export const logger = {

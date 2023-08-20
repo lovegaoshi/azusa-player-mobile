@@ -42,6 +42,7 @@
     "dropbox": "git+https://lovegaoshi@github.com/lovegaoshi/dropbox-sdk-js.git",
     "expo": "^49.0.0",
     "expo-av": "^13.4.1",
+    "expo-clipboard": "~4.3.1",
     "expo-secure-store": "~12.3.1",
     "fflate": "^0.7.4",
     "ffmpeg-kit-react-native": "^5.1.0",
