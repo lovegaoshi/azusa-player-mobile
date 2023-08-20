@@ -42,6 +42,8 @@ interface initializedResults {
 interface NoxSetting {
   playlistSearchAutoFocus: boolean;
   setPlaylistSearchAutoFocus: (val: boolean) => void;
+  playlistInfoUpdate: boolean;
+  togglePlaylistInfoUpdate: () => void;
 
   currentABRepeat: [number, number];
   setCurrentABRepeat: (val: [number, number]) => void;
@@ -132,6 +134,11 @@ export const useNoxSetting = create<NoxSetting>((set, get) => ({
   playlistSearchAutoFocus: true,
   setPlaylistSearchAutoFocus: (val: boolean) =>
     set({ playlistSearchAutoFocus: val }),
+  playlistInfoUpdate: true,
+  togglePlaylistInfoUpdate: () =>
+    set(state => ({
+      playlistInfoUpdate: !state.playlistInfoUpdate,
+    })),
 
   currentABRepeat: [0, 1],
   setCurrentABRepeat: (val: [number, number]) => set({ currentABRepeat: val }),
@@ -170,7 +177,7 @@ export const useNoxSetting = create<NoxSetting>((set, get) => ({
     set({ songMenuSongIndexes: val }),
   playlistShouldReRender: false,
   togglePlaylistShouldReRender: () =>
-    set(state => ({ playlistShouldReRender: state.playlistShouldReRender })),
+    set(state => ({ playlistShouldReRender: !state.playlistShouldReRender })),
 
   currentPlayingId: '',
   // MOCK: is it slow? GeT a BeTtEr PhOnE

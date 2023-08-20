@@ -46,6 +46,7 @@ export default ({
   const setPlaylistSearchAutoFocus = useNoxSetting(
     state => state.setPlaylistSearchAutoFocus
   );
+  const playlistInfoUpdate = useNoxSetting(state => state.playlistInfoUpdate);
   const [dialogOpen, setDialogOpen] = useState(false);
   const [menuCoords, setMenuCoords] = useState<NoxTheme.coordinates>({
     x: 0,

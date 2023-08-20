@@ -58,11 +58,15 @@ const PlaylistList = () => {
   const [cachedSongs] = useState(
     Array.from(noxCache.noxMediaCache.cache.keys())
   );
+  const togglePlaylistInfoUpdate = useNoxSetting(
+    state => state.togglePlaylistInfoUpdate
+  );
 
   const resetSelected = (val = false) =>
     setSelected(Array(currentPlaylist.songList.length).fill(val));
 
   const toggleSelected = useCallback((index: number) => {
+    togglePlaylistInfoUpdate();
     setSelected((val: boolean[]) => {
       val[index] = !val[index];
       return val;
