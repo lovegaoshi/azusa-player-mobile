@@ -393,6 +393,10 @@ export const reExtractSongName = (
     case '58586':
       filename = extractWith(extractParenthesis(filename), [/『(.+)』/]);
       break;
+    case '20159625':
+      // 雨爱-咻咻满-2023年8月20日-直播歌切
+      filename = extractWith(extractParenthesis(filename), [/(.+)-咻咻满-/]);
+      break;
     case '0':
       filename = extractWith(extractParenthesis(filename), []);
       break;
