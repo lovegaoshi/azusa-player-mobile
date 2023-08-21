@@ -35,7 +35,7 @@ export default ({ navigation }: Props) => {
     clearQRLogin,
     getBiliLoginStatus,
     getQRLoginReq,
-    confirmWebQRCode = () => undefined,
+    loginQRVerification,
   } = useBiliLogin();
 
   const manualInputCookies = async (input: { [key: string]: string }) => {
@@ -54,6 +54,19 @@ export default ({ navigation }: Props) => {
       // https://github.com/biliup/biliup-rs/issues/75
       // doesnt work:(
       // confirmWebQRCode(input.SESSDATA, input.bili_jct);
+    } else if (
+      input.access_token.length > 0 &&
+      input.refresh_token.length > 0
+    ) {
+      await CookieManager.set(domain, {
+        name: 'access_key',
+        value: input.access_token,
+      });
+      await CookieManager.set(domain, {
+        name: 'refresh_token',
+        value: input.refresh_token,
+      });
+      loginQRVerification();
     }
     setInputCookieVisible(false);
   };
@@ -143,7 +156,7 @@ export default ({ navigation }: Props) => {
         loginPage()
       )}
       <GenericInputDialog
-        options={['SESSDATA', 'bili_jct']}
+        options={['SESSDATA', 'bili_jct', 'access_token', 'refresh_token']}
         visible={inputCookieVisible}
         title={String(t('Login.BilibiliCookieInputDialogTitle'))}
         onClose={() => setInputCookieVisible(false)}

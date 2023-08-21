@@ -54,7 +54,13 @@ export default ({
 
   return (
     <Portal>
-      <Dialog visible={visible} onDismiss={handleClose} style={styles.dialog}>
+      <Dialog
+        visible={visible}
+        onDismiss={handleClose}
+        style={{
+          minHeight: options.length > 5 ? '50%' : options.length * 55 + 110,
+        }}
+      >
         <DialogTitle title={title} />
         <Dialog.Content style={styles.dialogContent}>
           <FlatList
@@ -92,11 +98,6 @@ export default ({
 const styles = StyleSheet.create({
   dialogTitle: {
     maxHeight: 100,
-  },
-  dialog: {
-    maxHeight: '60%',
-    minHeight: '50%',
-    zIndex: 100000,
   },
   dialogContent: {
     flex: 1,
