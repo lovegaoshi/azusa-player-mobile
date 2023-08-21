@@ -23,6 +23,8 @@ const domain = 'https://bilibili.com';
 export default ({ navigation }: Props) => {
   const { t } = useTranslation();
   const playerStyle = useNoxSetting(state => state.playerStyle);
+  const appRefresh = useNoxSetting(state => state.appRefresh);
+  const setAppRefresh = useNoxSetting(state => state.setAppRefresh);
   const [inputCookieVisible, setInputCookieVisible] = React.useState(false);
   const {
     qrcode,
@@ -39,36 +41,41 @@ export default ({ navigation }: Props) => {
   } = useBiliLogin();
 
   const manualInputCookies = async (input: { [key: string]: string }) => {
-    if (input.SESSDATA.length > 0 && input.bili_jct.length > 0) {
-      await CookieManager.set(domain, {
-        name: 'SESSDATA',
-        value: input.SESSDATA,
-      });
-      await CookieManager.set(domain, {
-        name: 'bili_jct',
-        value: input.bili_jct,
-      });
-      logger.debug(`[setCookie] manually input cookie;`);
-      clearQRLogin();
-      getBiliLoginStatus();
-      // https://github.com/biliup/biliup-rs/issues/75
-      // doesnt work:(
-      // confirmWebQRCode(input.SESSDATA, input.bili_jct);
-    } else if (
-      input.access_token.length > 0 &&
-      input.refresh_token.length > 0
-    ) {
-      await CookieManager.set(domain, {
-        name: 'access_key',
-        value: input.access_token,
-      });
-      await CookieManager.set(domain, {
-        name: 'refresh_token',
-        value: input.refresh_token,
-      });
-      loginQRVerification();
+    try {
+      if (input.SESSDATA.length > 0 && input.bili_jct.length > 0) {
+        await CookieManager.set(domain, {
+          name: 'SESSDATA',
+          value: input.SESSDATA,
+        });
+        await CookieManager.set(domain, {
+          name: 'bili_jct',
+          value: input.bili_jct,
+        });
+        logger.debug(`[setCookie] manually input cookie;`);
+        clearQRLogin();
+        getBiliLoginStatus();
+        // https://github.com/biliup/biliup-rs/issues/75
+        // doesnt work:(
+        // confirmWebQRCode(input.SESSDATA, input.bili_jct);
+      } else if (
+        input.access_token.length > 0 &&
+        input.refresh_token.length > 0
+      ) {
+        await CookieManager.set(domain, {
+          name: 'access_key',
+          value: input.access_token,
+        });
+        await CookieManager.set(domain, {
+          name: 'refresh_token',
+          value: input.refresh_token,
+        });
+        loginQRVerification().then(() => getBiliLoginStatus());
+      }
+    } catch (e) {
+      logger.error(`[setCookie] ${e}`);
+    } finally {
+      setInputCookieVisible(false);
     }
-    setInputCookieVisible(false);
   };
 
   const loginPage = () => {
@@ -140,6 +147,11 @@ export default ({ navigation }: Props) => {
       </View>
     );
   };
+
+  React.useEffect(() => {
+    if (appRefresh) return;
+    loginQRVerification();
+  }, []);
 
   return (
     <SafeAreaView

@@ -37,6 +37,8 @@ const getQRCodeAPI =
 const probeQRCodeAPI =
   'https://passport.bilibili.com/x/passport-tv-login/qrcode/poll';
 const oauthKey = 'auth_code';
+const verificationURL =
+  'https://passport.bilibili.com/x/passport-login/oauth2/refresh_token';
 
 const signBody = (body: any) => {
   return md5(`${parseBodyParams(body)}59b43e04ad6965f34319062b478f83dd`);
@@ -53,17 +55,15 @@ const getCookies = async () => {
   return { accessKey, refreshToken };
 };
 
-const validateCookies = async () => {
-  const verificationURL =
-    'https://passport.bilibili.com/x/passport-login/oauth2/info';
-
+const loginQRVerification = async () => {
   const { accessKey, refreshToken } = await getCookies();
   if (!accessKey || !refreshToken) return false;
-  const probeBody = {
-    appkey: '4409e2ce8ffd12b8',
-    ts: 0,
-    actionKey: 'appkey',
+  const qrBody = {
     access_key: accessKey,
+    actionKey: 'appkey',
+    appkey: '4409e2ce8ffd12b8',
+    refresh_token: refreshToken,
+    ts: '0',
   };
   const res = await throttler.biliApiLimiter.schedule(async () =>
       bfetch(`${verificationURL}`, {
@@ -73,42 +73,33 @@ const validateCookies = async () => {
           'Content-Type': 'application/x-www-form-urlencoded',
         },
         body: {
-          appkey: '4409e2ce8ffd12b8',
-          ts: '0',
-          sign: 'e134154ed6add881d28fbdf68653cd9c',
-          access_key: accessKey,
-          refresh_token: refreshToken,
+          ...qrBody,
+          sign: signBody(qrBody),
         },
       })
     ),
     json = await res.json();
-  logger.debug(`[biliLogin] ${json}`);
-};
-
-const loginQRVerification = async () => {
-  const verificationURL =
-    'https://passport.bilibili.com/x/passport-login/oauth2/refresh_token';
-
-  const { accessKey, refreshToken } = await getCookies();
-  if (!accessKey || !refreshToken) return false;
-  const res = await throttler.biliApiLimiter.schedule(async () =>
-      bfetch(`${verificationURL}`, {
-        method: 'POST',
-        credentials: 'include',
-        headers: {
-          'Content-Type': 'application/x-www-form-urlencoded',
-        },
-        body: {
-          appkey: '4409e2ce8ffd12b8',
-          ts: '0',
-          sign: 'e134154ed6add881d28fbdf68653cd9c',
-          access_key: accessKey,
-          refresh_token: refreshToken,
-        },
-      })
-    ),
-    json = await res.json();
-  logger.debug(`[biliLogin] ${json}`);
+  await CookieManager.set(domain, {
+    name: 'access_key',
+    value: json.data.token_info.access_token,
+  });
+  await CookieManager.set(domain, {
+    name: 'refresh_token',
+    value: json.data.token_info.refresh_token,
+  });
+  await CookieManager.set(domain, {
+    name: 'SESSDATA',
+    value: json.data.cookie_info.cookies.filter(
+      (val: any) => val.name === 'SESSDATA'
+    )[0].value,
+  });
+  await CookieManager.set(domain, {
+    name: 'bili_jct',
+    value: json.data.cookie_info.cookies.filter(
+      (val: any) => val.name === 'bili_jct'
+    )[0].value,
+  });
+  // logger.debug(`[biliLogin] ${JSON.stringify(json)}`);
 };
 
 const useBiliLogin = () => {
@@ -226,7 +217,7 @@ const useBiliLogin = () => {
           name: 'refresh_token',
           value: json.data.refresh_token,
         });
-        logger.debug(`[biliLogin] ${await CookieManager.get(domain)}`);
+        // logger.debug(`[biliLogin] ${await CookieManager.get(domain)}`);
         clearQRLogin();
       }
     } catch (error) {
