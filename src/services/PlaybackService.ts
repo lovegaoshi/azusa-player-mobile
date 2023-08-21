@@ -94,7 +94,10 @@ export async function PlaybackService() {
       console.log('Event.PlaybackActiveTrackChanged', event);
       const playerErrored =
         (await TrackPlayer.getPlaybackState()).state === State.Error;
-      await TrackPlayer.setVolume(0);
+      // I think repeat_TRACK doesnt trigger setR128gain..?
+      if (getState().playmode !== NoxRepeatMode.REPEAT_TRACK) {
+        await TrackPlayer.setVolume(0);
+      }
       if (!event.track || !event.track.song) return;
       setState({ activeTrackPlayingId: event.track.song.id });
       // prefetch song
