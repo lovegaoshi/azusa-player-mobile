@@ -1,15 +1,13 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react';
-import { View, BackHandler, StyleSheet } from 'react-native';
+import { View, BackHandler, StyleSheet, Dimensions } from 'react-native';
 import { FlashList } from '@shopify/flash-list';
 import Snackbar from 'react-native-snackbar';
-import { IconButton, Text } from 'react-native-paper';
+import { IconButton } from 'react-native-paper';
 import TrackPlayer, { RepeatMode } from 'react-native-track-player';
-import { Dimensions } from 'react-native';
 import { useTranslation } from 'react-i18next';
 import { useDebounce } from 'use-debounce';
 import { useNetInfo } from '@react-native-community/netinfo';
 import { useFocusEffect } from '@react-navigation/native';
-import Animated, { Layout, LightSpeedOutRight } from 'react-native-reanimated';
 
 import { styles } from '../style';
 import SongInfo from './SongInfo';
@@ -19,7 +17,7 @@ import PlaylistInfo from './PlaylistInfo';
 import PlaylistMenuButton from '../buttons/PlaylistMenuButton';
 import { updateSubscribeFavList } from '@utils/BiliSubscribe';
 import { songlistToTracklist } from '@objects/Playlist';
-import { PLAYLIST_ENUMS } from '@enums/Playlist';
+import { PLAYLIST_ENUMS, SearchRegex } from '@enums/Playlist';
 import { syncFavlist } from '@utils/Bilibili/bilifavOperate';
 import noxCache, { noxCacheKey } from '@utils/Cache';
 import noxPlayingList from '@stores/playingList';
@@ -60,11 +58,15 @@ const PlaylistList = () => {
   const [cachedSongs] = useState(
     Array.from(noxCache.noxMediaCache.cache.keys())
   );
+  const togglePlaylistInfoUpdate = useNoxSetting(
+    state => state.togglePlaylistInfoUpdate
+  );
 
   const resetSelected = (val = false) =>
     setSelected(Array(currentPlaylist.songList.length).fill(val));
 
   const toggleSelected = useCallback((index: number) => {
+    togglePlaylistInfoUpdate();
     setSelected((val: boolean[]) => {
       val[index] = !val[index];
       return val;
@@ -109,22 +111,22 @@ const PlaylistList = () => {
   ) => {
     const reExtractions = [
       {
-        regex: /Parsed:(.+)/,
+        regex: SearchRegex.absoluteMatch.regex,
         process: (val: RegExpExecArray, someRows: Array<NoxMedia.Song>) =>
           someRows.filter(row => row.parsedName === val[1]),
       },
       {
-        regex: /Artist:(.+)/,
+        regex: SearchRegex.artistMatch.regex,
         process: (val: RegExpExecArray, someRows: Array<NoxMedia.Song>) =>
           someRows.filter(row => row.singer.includes(val[1])),
       },
       {
-        regex: /Album:(.+)/,
+        regex: SearchRegex.albumMatch.regex,
         process: (val: RegExpExecArray, someRows: Array<NoxMedia.Song>) =>
           someRows.filter(row => row.album?.includes(val[1])),
       },
       {
-        regex: /Cached:/,
+        regex: SearchRegex.cachedMatch.regex,
         process: (val: RegExpExecArray, someRows: Array<NoxMedia.Song>) =>
           someRows.filter(row => cachedSongs.includes(noxCacheKey(row))),
       },

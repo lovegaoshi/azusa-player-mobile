@@ -11,6 +11,7 @@ import { useNoxSetting } from '@hooks/useSetting';
 import usePlayback from '@hooks/usePlayback';
 import SearchMenu from './SearchMenu';
 import { loadDefaultSearch } from '@utils/ChromeStorage';
+import logger from '@utils/Logger';
 
 interface SharedItem {
   mimeType: string;
@@ -68,6 +69,9 @@ export default ({
 
   useEffect(() => {
     if (externalSearchText.length > 0) {
+      logger.debug(
+        `[search] performing external serach: ${externalSearchText}`
+      );
       handleExternalSearch(externalSearchText, true);
       setExternalSearchText('');
     }

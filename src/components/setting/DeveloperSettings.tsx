@@ -1,13 +1,14 @@
 import * as React from 'react';
-import { View, ScrollView } from 'react-native';
+import { View, ScrollView, Alert } from 'react-native';
 import { List } from 'react-native-paper';
 import { useTranslation } from 'react-i18next';
 // eslint-disable-next-line import/no-unresolved
 import { APPSTORE } from '@env';
 import { useStore } from 'zustand';
+import * as Clipboard from 'expo-clipboard';
 
 import { useNoxSetting } from '@hooks/useSetting';
-import { logStore, LOGLEVEL, getLog } from '@utils/Logger';
+import { logStore, LOGLEVEL, getLog, resetLog } from '@utils/Logger';
 import GenericSelectDialog from '../dialogs/GenericSelectDialog';
 import { SettingListItem, RenderSetting } from './useRenderSetting';
 import useVersionCheck from '@hooks/useVersionCheck';
@@ -137,6 +138,20 @@ export default () => {
     } as SelectSettingEntry<number>);
   };
 
+  const showLog = () => {
+    const logs = getLog();
+    Alert.alert(
+      'Log',
+      logs,
+      [
+        { text: 'Clear', onPress: () => resetLog() },
+        { text: 'Copy', onPress: () => Clipboard.setStringAsync(logs) },
+        { text: 'OK', onPress: () => undefined },
+      ],
+      { cancelable: true }
+    );
+  };
+
   return (
     <View
       style={{
@@ -152,7 +167,7 @@ export default () => {
           <SettingListItem
             icon={ICONS.showlog}
             settingName="Log"
-            onPress={() => OneWayAlert('log', getLog())}
+            onPress={showLog}
             settingCategory="DeveloperSettings"
           />
           <SettingListItem

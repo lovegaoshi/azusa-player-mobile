@@ -40,8 +40,12 @@ interface initializedResults {
 }
 
 interface NoxSetting {
+  appRefresh: boolean;
+  setAppRefresh: () => void;
   playlistSearchAutoFocus: boolean;
   setPlaylistSearchAutoFocus: (val: boolean) => void;
+  playlistInfoUpdate: boolean;
+  togglePlaylistInfoUpdate: () => void;
 
   currentABRepeat: [number, number];
   setCurrentABRepeat: (val: [number, number]) => void;
@@ -129,9 +133,16 @@ interface NoxSetting {
  * as well as saving and loading states to/from asyncStorage.
  */
 export const useNoxSetting = create<NoxSetting>((set, get) => ({
+  appRefresh: false,
+  setAppRefresh: () => set({ appRefresh: true }),
   playlistSearchAutoFocus: true,
   setPlaylistSearchAutoFocus: (val: boolean) =>
     set({ playlistSearchAutoFocus: val }),
+  playlistInfoUpdate: true,
+  togglePlaylistInfoUpdate: () =>
+    set(state => ({
+      playlistInfoUpdate: !state.playlistInfoUpdate,
+    })),
 
   currentABRepeat: [0, 1],
   setCurrentABRepeat: (val: [number, number]) => set({ currentABRepeat: val }),
@@ -170,7 +181,7 @@ export const useNoxSetting = create<NoxSetting>((set, get) => ({
     set({ songMenuSongIndexes: val }),
   playlistShouldReRender: false,
   togglePlaylistShouldReRender: () =>
-    set(state => ({ playlistShouldReRender: state.playlistShouldReRender })),
+    set(state => ({ playlistShouldReRender: !state.playlistShouldReRender })),
 
   currentPlayingId: '',
   // MOCK: is it slow? GeT a BeTtEr PhOnE

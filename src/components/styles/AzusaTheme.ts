@@ -83,6 +83,12 @@ export default {
     'https://i0.hdslb.com/bfs/garb/item/56549820b2458a440b0eaa97b27fd3fba3232375.jpg',
     'https://i0.hdslb.com/bfs/garb/item/37fc8d2acf41b0fe7ec3b9732297d8e2832f21e4.png',
     'https://i0.hdslb.com/bfs/garb/item/589adb63eae72b89f2022b040c333a42125b7ae9.jpg',
+    'https://i0.hdslb.com/bfs/baselabs/56f4e80511335e86863765622fb74cf3ff0cc3ee.png',
+    {
+      type: 'biliNFTVideo',
+      identifier: '["161",10]',
+    },
+    'https://i0.hdslb.com/bfs/baselabs/023a645451d96c96b8a8591872ecaf8ef99f3c72.png',
   ],
 
   customColors: {

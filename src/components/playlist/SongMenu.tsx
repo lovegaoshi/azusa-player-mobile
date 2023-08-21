@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { Menu } from 'react-native-paper';
-import { Keyboard } from 'react-native';
 import { useTranslation } from 'react-i18next';
 
 import { useNoxSetting } from '@hooks/useSetting';

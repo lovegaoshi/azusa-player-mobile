@@ -1,7 +1,16 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Searchbar, Text, TextInput } from 'react-native-paper';
-import { View, Pressable, StyleSheet, Animated } from 'react-native';
+import { Searchbar, Text } from 'react-native-paper';
+import {
+  View,
+  Pressable,
+  StyleSheet,
+  Animated,
+  Dimensions,
+  GestureResponderEvent,
+} from 'react-native';
 import { useTranslation } from 'react-i18next';
+
+import SearchMenu from './PlaylistSearchMenu';
 import { useNoxSetting } from '@hooks/useSetting';
 import { seconds2HHMMSS } from '@utils/Utils';
 
@@ -25,15 +34,36 @@ export default ({
   const { t } = useTranslation();
   const currentPlaylist = useNoxSetting(state => state.currentPlaylist);
   const playerStyle = useNoxSetting(state => state.playerStyle);
+  const searchContainerRef = useRef<any>(null);
   const searchBarWidth = useRef(new Animated.Value(0)).current;
   const opacity = useRef(new Animated.Value(1)).current;
+  const searchBkgrdWidth = useRef(new Animated.Value(0)).current;
+  const searchBkgrdHeight = useRef(new Animated.Value(0)).current;
   const [searchVisible, setSearchVisible] = useState(search);
-  const playlistSearchAutoFocus = useNoxSetting(
+  const playlistSearchAutoFocus: boolean = useNoxSetting(
     state => state.playlistSearchAutoFocus
   );
   const setPlaylistSearchAutoFocus = useNoxSetting(
     state => state.setPlaylistSearchAutoFocus
   );
+  const playlistInfoUpdate = useNoxSetting(state => state.playlistInfoUpdate);
+  const [dialogOpen, setDialogOpen] = useState(false);
+  const [menuCoords, setMenuCoords] = useState<NoxTheme.coordinates>({
+    x: 0,
+    y: 0,
+  });
+
+  const handleMenuPress = (event: GestureResponderEvent) => {
+    setDialogOpen(true);
+    setMenuCoords({
+      x: event.nativeEvent.pageX,
+      y: event.nativeEvent.pageY,
+    });
+  };
+
+  const toggleVisible = () => {
+    setDialogOpen(val => !val);
+  };
 
   const renderSongCount = () => {
     if (checking) {
@@ -84,7 +114,23 @@ export default ({
           duration: 220,
           useNativeDriver: true,
         }),
-      ]).start(() => setPlaylistSearchAutoFocus(true));
+      ]).start();
+
+      Animated.timing(searchBkgrdWidth, {
+        toValue: 100,
+        duration: 280,
+        useNativeDriver: false,
+      }).start(() => {
+        if (playlistSearchAutoFocus) {
+          searchContainerRef.current?.focus();
+          Animated.timing(searchBkgrdHeight, {
+            toValue: 50,
+            duration: 180,
+            useNativeDriver: false,
+          }).start();
+        }
+        setPlaylistSearchAutoFocus(true);
+      });
     } else {
       Animated.parallel([
         Animated.timing(searchBarWidth, {
@@ -97,13 +143,53 @@ export default ({
           duration: 280,
           useNativeDriver: true,
         }),
+        Animated.timing(searchBkgrdWidth, {
+          toValue: 0,
+          duration: 180,
+          useNativeDriver: false,
+        }),
+        Animated.timing(searchBkgrdHeight, {
+          toValue: 0,
+          duration: 180,
+          useNativeDriver: false,
+        }),
       ]).start(() => setSearchVisible(false));
     }
   }, [search]);
 
+  /**
+   * pull down menu:
+      <Animated.View
+        style={[
+          {
+            position: 'absolute',
+            backgroundColor: 'grey',
+            width: searchBkgrdWidth.interpolate({
+              inputRange: [0, 100],
+              outputRange: ['0%', '100%'],
+            }),
+            height: searchBkgrdHeight.interpolate({
+              inputRange: [0, 100],
+              outputRange: [50, 100],
+            }),
+          },
+        ]}
+      ></Animated.View>
+   */
+
   return (
     <View style={styles.container}>
-      <Animated.View style={{ transform: [{ scaleX: searchBarWidth }] }}>
+      <Animated.View
+        style={[
+          {
+            width: searchBkgrdWidth.interpolate({
+              inputRange: [0, 100],
+              outputRange: ['0%', '100%'],
+            }),
+          },
+          { zIndex: 2 },
+        ]}
+      >
         {searchVisible && (
           <Searchbar
             placeholder={String(t('PlaylistSearchBar.label'))}
@@ -113,9 +199,12 @@ export default ({
             }}
             style={styles.textInput}
             inputStyle={styles.searchInput}
-            autoFocus={playlistSearchAutoFocus}
+            ref={searchContainerRef}
+            // autoFocus={playlistSearchAutoFocus}
             selectTextOnFocus
             selectionColor={playerStyle.customColors.textInputSelectionColor}
+            icon={search ? 'format-list-checkbox' : () => undefined}
+            onIconPress={handleMenuPress}
           />
         )}
       </Animated.View>
@@ -126,6 +215,12 @@ export default ({
           <Text variant="labelMedium">{`${renderSongCount()} / ${renderSongDuration()}`}</Text>
         </Pressable>
       </Animated.View>
+      <SearchMenu
+        visible={dialogOpen}
+        toggleVisible={toggleVisible}
+        menuCoords={menuCoords}
+        setSearchCategory={setSearchText}
+      />
     </View>
   );
 };
@@ -137,6 +232,7 @@ const styles = StyleSheet.create({
   },
   textInput: {
     height: 45,
+    zIndex: 15,
   },
   searchInput: {
     marginTop: -6,

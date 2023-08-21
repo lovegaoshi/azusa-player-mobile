@@ -42,15 +42,14 @@ const SongInfo = ({
   const setSongMenuSongIndexes = useNoxSetting(
     state => state.setSongMenuSongIndexes
   );
-  let [title, id, artist] = [
+
+  const title =
     playerSetting.parseSongName &&
     currentPlaylist.type !== PLAYLIST_ENUMS.TYPE_SEARCH_PLAYLIST
       ? item.parsedName
-      : item.name,
-    item.id,
-    item.singer,
-  ];
-
+      : item.name;
+  const id = item.id;
+  let artist = item.singer;
   // TODO: not really useful for me at least. maybe good enough for some?
   artist =
     item.album && item.parsedName !== item.album
