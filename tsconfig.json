@@ -7,6 +7,7 @@
       "*": ["./src/*"],
       "@components/*": ["src/components/*"],
       "@utils/*": ["src/utils/*"],
+      "@assets/*": ["src/assets/*"],
       "@enums/*": ["src/enums/*"],
       "@objects/*": ["src/objects/*"],
       "@services/*": ["src/services/*"],

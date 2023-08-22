@@ -58,6 +58,7 @@ export default {
     progressMaximumTrackTintColor: '#FFFFFF',
     btnBackgroundColor: 'rgb(72, 71, 58)',
     textInputSelectionColor: 'green',
+    playerControlIconBkgrdColor: '#444444',
   },
 
   colors: {

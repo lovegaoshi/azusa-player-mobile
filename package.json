@@ -48,6 +48,7 @@
     "ffmpeg-kit-react-native": "^5.1.0",
     "i18next": "^22.4.15",
     "libmuse": "git+https://github.com/lovegaoshi/muse.git#apm-release",
+    "lottie-react-native": "^6.2.0",
     "lru-cache": "7.14.0",
     "md5": "^2.3.0",
     "react": "18.2.0",

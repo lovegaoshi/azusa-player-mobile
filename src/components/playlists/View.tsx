@@ -70,20 +70,24 @@ const DefaultIcon = (
   );
 };
 
+interface PlaylistItemProps {
+  item: NoxMedia.Playlist;
+  icon?: ReactNode;
+  confirmOnDelete?: (id: string) => void;
+  leadColor?: string;
+}
 const PlaylistItem = ({
   item,
   icon,
   confirmOnDelete = () => undefined,
-}: {
-  item: NoxMedia.Playlist;
-  icon?: ReactNode;
-  confirmOnDelete?: (id: string) => void;
-}) => {
+  leadColor,
+}: PlaylistItemProps) => {
   const currentPlayingList = useNoxSetting(state => state.currentPlayingList);
 
   if (!item) return <></>;
   return (
     <View style={styles.playlistItemContainer}>
+      <View style={{ backgroundColor: leadColor, width: 15 }}></View>
       <View style={styles.playlistItemTextContainer}>
         <Text
           variant="bodyLarge"
@@ -91,6 +95,7 @@ const PlaylistItem = ({
             {
               fontWeight:
                 currentPlayingList.id === item?.id ? 'bold' : undefined,
+              paddingHorizontal: 10,
             },
           ]}
         >
@@ -118,6 +123,7 @@ const BiliCard = (props: any) => {
 export default (props: any) => {
   const navigation = useNavigation();
   const currentPlaylist = useNoxSetting(state => state.currentPlaylist);
+  const currentPlayingList = useNoxSetting(state => state.currentPlayingList);
   const playlists = useNoxSetting(state => state.playlists);
   const playlistIds = useNoxSetting(state => state.playlistIds);
   const playerStyle = useNoxSetting(state => state.playerStyle);
@@ -174,7 +180,6 @@ export default (props: any) => {
           onPress={() => goToPlaylist(item.id)}
           style={[
             {
-              paddingLeft: 25,
               backgroundColor:
                 currentPlaylist.id === item?.id
                   ? playerStyle.customColors.playlistDrawerBackgroundColor
@@ -182,7 +187,15 @@ export default (props: any) => {
             },
           ]}
         >
-          <PlaylistItem item={item} confirmOnDelete={confirmOnDelete} />
+          <PlaylistItem
+            item={item}
+            confirmOnDelete={confirmOnDelete}
+            leadColor={
+              currentPlayingList.id === item?.id
+                ? playerStyle.customColors.playlistDrawerBackgroundColor
+                : undefined
+            }
+          />
         </TouchableRipple>
       </ScaleDecorator>
     );

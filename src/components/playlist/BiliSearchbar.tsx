@@ -1,6 +1,11 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { ProgressBar, Searchbar } from 'react-native-paper';
-import { View, StyleSheet, GestureResponderEvent } from 'react-native';
+import {
+  View,
+  StyleSheet,
+  GestureResponderEvent,
+  Platform,
+} from 'react-native';
 import { useTranslation } from 'react-i18next';
 import ShareMenu, { ShareCallback } from 'react-native-share-menu';
 import { useNavigation } from '@react-navigation/native';
@@ -91,10 +96,12 @@ export default ({
   }, []);
 
   useEffect(() => {
+    if (Platform.OS !== 'android') return;
     ShareMenu.getInitialShare(handleShare as ShareCallback);
   }, []);
 
   useEffect(() => {
+    if (Platform.OS !== 'android') return;
     const listener = ShareMenu.addNewShareListener(
       handleShare as ShareCallback
     );

@@ -85,7 +85,12 @@ export default ({
             )}
           />
         </Dialog.Content>
-        <Dialog.Actions style={styles.dialogActions}>
+        <Dialog.Actions
+          style={[
+            styles.dialogActions,
+            { marginTop: options.length > 5 ? 0 : -100 },
+          ]}
+        >
           <Button onPress={handleClose}>{t('Dialog.cancel')}</Button>
           <Button onPress={handleSubmit}>{t('Dialog.ok')}</Button>
         </Dialog.Actions>
