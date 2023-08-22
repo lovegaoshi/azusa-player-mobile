@@ -16,6 +16,7 @@ declare namespace NoxTheme {
     progressMaximumTrackTintColor: string;
     btnBackgroundColor: string;
     textInputSelectionColor: string;
+    playerControlIconBkgrdColor?: string;
   }
 
   export interface backgroundImage {

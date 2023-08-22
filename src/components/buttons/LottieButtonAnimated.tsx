@@ -1,0 +1,79 @@
+import React, { useRef } from 'react';
+import { Pressable, Animated, Easing } from 'react-native';
+import LottieView, { AnimationObject } from 'lottie-react-native';
+
+import { useNoxSetting } from '@hooks/useSetting';
+
+interface Props {
+  src: AnimationObject;
+  onPressClicked: () => void;
+  onPressNotClicked: () => void;
+  strokes?: string[];
+  size: number;
+  clicked: boolean;
+  clickedLottieProgress?: number;
+  duration?: number;
+}
+
+const AnimatedLottieView = Animated.createAnimatedComponent(LottieView);
+
+const LottieButtonAnimated = ({
+  src,
+  onPressClicked,
+  onPressNotClicked,
+  clickedLottieProgress = 0.5,
+  strokes = [],
+  size,
+  clicked,
+  duration = 340,
+}: Props) => {
+  const playerStyle = useNoxSetting(state => state.playerStyle);
+  const animationProgress = useRef(
+    new Animated.Value(clicked ? clickedLottieProgress : 0)
+  );
+
+  const onPressBtn = () => {
+    if (clicked) {
+      onPressClicked();
+      Animated.timing(animationProgress.current, {
+        toValue: 1,
+        duration,
+        easing: Easing.linear,
+        useNativeDriver: false,
+      }).start(() => animationProgress.current.setValue(0));
+    } else {
+      onPressNotClicked();
+      onPressClicked();
+      Animated.timing(animationProgress.current, {
+        toValue: clickedLottieProgress,
+        duration,
+        easing: Easing.linear,
+        useNativeDriver: false,
+      }).start();
+    }
+  };
+
+  return (
+    <Pressable
+      style={{
+        backgroundColor: playerStyle.customColors.btnBackgroundColor,
+        width: size + 16,
+        height: size + 16,
+        borderRadius: size / 2 + 8,
+      }}
+      onPress={onPressBtn}
+    >
+      <AnimatedLottieView
+        source={src}
+        progress={animationProgress.current}
+        style={{ width: size, height: size, marginLeft: 8, marginTop: 8 }}
+        colorFilters={strokes.map(keypath => ({
+          keypath,
+          color: playerStyle.colors.primary,
+        }))}
+      />
+    </Pressable>
+  );
+};
+
+export default LottieButtonAnimated;

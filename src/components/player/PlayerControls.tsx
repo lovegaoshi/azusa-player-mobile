@@ -13,6 +13,7 @@ import { useNoxSetting } from '@hooks/useSetting';
 import ThumbsUpButton from './ThumbsUpButton';
 import PlayerModeButton from './PlayerModeButton';
 import usePlayerControls from './usePlayerControls';
+import LottieButton from '../buttons/LottieButton';
 
 export const PlayerControls: React.FC = () => {
   const playerStyle = useNoxSetting(state => state.playerStyle);
@@ -50,24 +51,18 @@ export const PlayerControls: React.FC = () => {
 
       <View style={styles.row}>
         <PlayerModeButton />
-        <IconButton
-          icon="skip-previous"
-          onPress={performSkipToPrevious}
-          mode={playerStyle.playerControlIconContained}
+        <LottieButton
+          src={require('@assets/lottie/skip-backwards.json')}
           size={40}
-          style={{
-            backgroundColor: playerStyle.customColors.btnBackgroundColor,
-          }}
+          onPress={performSkipToPrevious}
+          strokes={['Line', 'Triange', 'Triange  2']}
         />
         <PlayPauseButton state={playback.state} />
-        <IconButton
-          icon="skip-next"
-          onPress={performSkipToNext}
-          mode={playerStyle.playerControlIconContained}
+        <LottieButton
+          src={require('@assets/lottie/skip-forwards.json')}
           size={40}
-          style={{
-            backgroundColor: playerStyle.customColors.btnBackgroundColor,
-          }}
+          onPress={performSkipToNext}
+          strokes={['Line', 'Triangle 1', 'Triangle 2']}
         />
         <ThumbsUpButton />
       </View>

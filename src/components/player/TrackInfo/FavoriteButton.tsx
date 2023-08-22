@@ -4,6 +4,7 @@ import { Track } from 'react-native-track-player';
 
 import { useNoxSetting } from '@hooks/useSetting';
 import { updatePlaylistSongs } from '@objects/Playlist';
+import LottieButtonAnimated from '@components/buttons/LottieButtonAnimated';
 
 interface Props {
   track?: Track;
@@ -36,6 +37,18 @@ export default ({ track }: Props) => {
     [track]
   );
 
+  return (
+    <LottieButtonAnimated
+      src={require('@assets/lottie/Heart.json')}
+      size={30}
+      onPressClicked={onClick}
+      onPressNotClicked={onClick}
+      clicked={liked}
+      clickedLottieProgress={0.5}
+      strokes={['Rays 2', 'Fill 2', 'Heart Outlines 2']}
+      duration={500}
+    />
+  );
   return (
     <IconButton
       icon={liked ? 'cards-heart' : 'cards-heart-outline'}
