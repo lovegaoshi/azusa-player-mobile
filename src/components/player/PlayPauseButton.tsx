@@ -62,7 +62,7 @@ export const PlayPauseButton: React.FC<{
         style={styles.LoadingIconStyle}
       />
     ) : (
-      <ActivityIndicator size={50} style={styles.activityIndicator} />
+      <ActivityIndicator size={55} style={styles.activityIndicator} />
     );
   }
   return (
@@ -78,7 +78,7 @@ export const PlayPauseButton: React.FC<{
       <AnimatedLottieView
         source={require('@assets/lottie/PauseGoAndBack.json')}
         progress={animationProgress.current}
-        style={{ width: 50, height: 50, marginLeft: 9, marginTop: 8 }}
+        style={{ width: 50, height: 50, marginLeft: 8, marginTop: 8 }}
         colorFilters={[
           { keypath: 'Play 2', color: playerStyle.colors.primary },
           { keypath: 'Play', color: playerStyle.colors.primary },
@@ -106,7 +106,7 @@ const styles = StyleSheet.create({
     marginTop: 0,
   },
   activityIndicator: {
-    width: 78,
-    height: 78,
+    width: 66,
+    height: 66,
   },
 });
