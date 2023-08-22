@@ -28,12 +28,14 @@ import { useNoxSetting } from '@hooks/useSetting';
 import AzusaTheme from '../styles/AzusaTheme';
 // import AzusaTheme from '../styles/SteriaTheme';
 import NoxTheme from '../styles/NoxTheme';
+import AdaptiveTheme from '../styles/DefaultAdaptiveTheme';
 import { getUniqObjects } from '@utils/Utils';
 
 const WindowWidth = Dimensions.get('window').width;
 
-interface DisplayTheme extends NoxTheme.style {
+interface DisplayTheme extends NoxTheme.Style {
   builtin: boolean;
+  isAdaptive?: boolean;
 }
 
 interface SkinItemProps {
@@ -43,6 +45,10 @@ interface SkinItemProps {
 }
 
 const BuiltInThemes: DisplayTheme[] = [
+  {
+    ...AdaptiveTheme,
+    builtin: true,
+  },
   {
     ...AzusaTheme,
     builtin: true,
@@ -58,7 +64,7 @@ const SkinItem = ({ skin, checked, setChecked }: SkinItemProps) => {
   const setPlayerStyle = useNoxSetting(state => state.setPlayerStyle);
   const playerStyles = useNoxSetting(state => state.playerStyles);
   const setPlayerStyles = useNoxSetting(state => state.setPlayerStyles);
-  const getThemeID = (skin: NoxTheme.style) =>
+  const getThemeID = (skin: NoxTheme.Style) =>
     `${skin.metaData.themeName}.${skin.metaData.themeAuthor}`;
   const themeID = getThemeID(skin);
   const mounted = React.useRef(false);
@@ -190,7 +196,7 @@ const SkinSettings = () => {
   const playerStyles = useNoxSetting(state => state.playerStyles);
   const setPlayerStyles = useNoxSetting(state => state.setPlayerStyles);
   const allThemes = BuiltInThemes.concat(playerStyles);
-  const getThemeID = (skin: NoxTheme.style) =>
+  const getThemeID = (skin: NoxTheme.Style) =>
     `${skin.metaData.themeName}.${skin.metaData.themeAuthor}`;
   const [checked, setChecked] = React.useState(getThemeID(playerStyle));
   const scrollViewRef = React.useRef<ScrollView | null>(null);

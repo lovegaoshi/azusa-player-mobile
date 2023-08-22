@@ -24,7 +24,7 @@ declare namespace NoxTheme {
     identifier: string;
   }
 
-  export interface style {
+  export interface Style {
     metaData: metaData;
 
     gifs: Array<string>;
@@ -53,5 +53,10 @@ declare namespace NoxTheme {
   export interface coordinates {
     x: number;
     y: number;
+  }
+
+  export interface AdaptiveStyle extends Style {
+    isAdaptive: boolean;
+    darkTheme: style;
   }
 }

@@ -148,7 +148,7 @@ export const useNoxSetting = create<NoxSetting>((set, get) => ({
   setCurrentABRepeat: (val: [number, number]) => set({ currentABRepeat: val }),
 
   playerStyle: createStyle(),
-  setPlayerStyle: (val: NoxTheme.style) => {
+  setPlayerStyle: (val: NoxTheme.Style) => {
     const createdStyle = createStyle(val);
     resolveBackgroundImage(createdStyle.bkgrdImg).then(resolvedBackground =>
       set({
