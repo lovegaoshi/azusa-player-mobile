@@ -64,7 +64,7 @@ export default ({
         <DialogTitle title={title} />
         <Dialog.Content style={styles.dialogContent}>
           <FlatList
-            style={styles.flatList}
+            style={[styles.flatList]}
             data={options}
             renderItem={({ item, index }) => (
               <Pressable
@@ -86,7 +86,12 @@ export default ({
             )}
           />
         </Dialog.Content>
-        <Dialog.Actions style={styles.dialogActions}>
+        <Dialog.Actions
+          style={[
+            styles.dialogActions,
+            { marginTop: options.length > 5 ? 0 : -100 },
+          ]}
+        >
           <Button onPress={handleClose}>{t('Dialog.cancel')}</Button>
           <Button onPress={handleSubmit}>{t('Dialog.ok')}</Button>
         </Dialog.Actions>
