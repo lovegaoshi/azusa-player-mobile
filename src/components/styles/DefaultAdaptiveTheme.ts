@@ -6,8 +6,8 @@ const DefaultAdaptiveTheme: NoxTheme.AdaptiveStyle = {
   isAdaptive: true,
   darkTheme: {
     ...NoxTheme,
-    metadata: {
-      ...AzusaTheme.metaData,
+    metaData: {
+      ...NoxTheme.metaData,
       themeName: 'AzusaNox Theme',
       themeDesc: 'Adaptive Theme combining Nox and Azusa themes',
     },

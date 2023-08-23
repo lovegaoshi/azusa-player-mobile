@@ -58,6 +58,6 @@ declare namespace NoxTheme {
 
   export interface AdaptiveStyle extends Style {
     isAdaptive: true;
-    darkTheme: style;
+    darkTheme: Style;
   }
 }
