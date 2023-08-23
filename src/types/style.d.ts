@@ -48,6 +48,7 @@ declare namespace NoxTheme {
     thumbupSVGA?: string;
     // thumbupSVGA's zIndex. >1 will be in front of the thumb up icon, <1 behind.
     thumbupZIndex?: number;
+    isAdaptive: false;
   }
 
   export interface coordinates {
@@ -56,7 +57,7 @@ declare namespace NoxTheme {
   }
 
   export interface AdaptiveStyle extends Style {
-    isAdaptive: boolean;
+    isAdaptive: true;
     darkTheme: style;
   }
 }

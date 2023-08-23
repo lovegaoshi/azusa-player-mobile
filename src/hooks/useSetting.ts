@@ -12,7 +12,6 @@ import {
   savePlaylistIds,
   saveSettings,
   savelastPlaylistId,
-  savePlayerSkin,
   savePlayerSkins,
   saveLyricMapping,
 } from '../utils/ChromeStorage';
@@ -26,6 +25,7 @@ import {
   initialize as appStoreInitialize,
   getABRepeatRaw,
 } from '@stores/appStore';
+import { setPlayerStyle as setPlayerStyleFunc } from './useTheme';
 
 const { getState, setState } = noxPlayingList;
 
@@ -149,16 +149,7 @@ export const useNoxSetting = create<NoxSetting>((set, get) => ({
 
   playerStyle: createStyle(),
   setPlayerStyle: (val: NoxTheme.Style) => {
-    const createdStyle = createStyle(val);
-    resolveBackgroundImage(createdStyle.bkgrdImg).then(resolvedBackground =>
-      set({
-        playerStyle: {
-          ...createdStyle,
-          bkgrdImg: resolvedBackground,
-        },
-      })
-    );
-    savePlayerSkin(val);
+    setPlayerStyleFunc(val).then(playerStyle => set({ playerStyle }));
   },
   playerStyles: [],
   setPlayerStyles: (val: any[]) => {
