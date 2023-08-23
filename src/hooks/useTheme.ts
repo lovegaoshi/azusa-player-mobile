@@ -15,11 +15,10 @@ export const setPlayerStyle = async (
       : val
     : val;
   const createdStyle = createStyle(createFromStyle);
-  const bkgrdImg = await resolveBackgroundImage(createdStyle.bkgrdImg);
   if (save) savePlayerSkin(val);
   return {
     ...createdStyle,
-    bkgrdImg,
+    bkgrdImg: await resolveBackgroundImage(createdStyle.bkgrdImg),
   };
 };
 

@@ -35,7 +35,6 @@ const WindowWidth = Dimensions.get('window').width;
 
 interface DisplayTheme extends NoxTheme.Style {
   builtin: boolean;
-  adaptive?: boolean;
 }
 
 interface SkinItemProps {
@@ -47,9 +46,9 @@ interface SkinItemProps {
 const BuiltInThemes: DisplayTheme[] = [
   {
     ...AdaptiveTheme,
-    // HACK: uh... this is getting stupid
-    isAdaptive: false,
-    adaptive: true,
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore: super HACK
+    isAdaptive: true,
     builtin: true,
   },
   {
