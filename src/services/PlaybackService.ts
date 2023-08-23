@@ -94,10 +94,7 @@ export async function PlaybackService() {
       console.log('Event.PlaybackActiveTrackChanged', event);
       const playerErrored =
         (await TrackPlayer.getPlaybackState()).state === State.Error;
-      // I think repeat_TRACK doesnt trigger setR128gain..?
-      if (getState().playmode !== NoxRepeatMode.REPEAT_TRACK) {
-        await TrackPlayer.setVolume(0);
-      }
+      await TrackPlayer.setVolume(0);
       if (!event.track || !event.track.song) return;
       setState({ activeTrackPlayingId: event.track.song.id });
       // prefetch song
@@ -225,11 +222,13 @@ export async function PlaybackService() {
       event.position >
       Math.min(bRepeatDuration, event.duration) - fadeIntervalSec
     ) {
-      logger.debug('[FADEOUT] fading out....');
-      animatedVolumeChange({
-        val: 0,
-        duration: fadeIntervalMs,
-      });
+      if (getState().playmode !== NoxRepeatMode.REPEAT_TRACK) {
+        logger.debug('[FADEOUT] fading out....');
+        animatedVolumeChange({
+          val: 0,
+          duration: fadeIntervalMs,
+        });
+      }
     }
     if (abRepeat[1] === 1) return;
     if (event.position > bRepeatDuration) {
