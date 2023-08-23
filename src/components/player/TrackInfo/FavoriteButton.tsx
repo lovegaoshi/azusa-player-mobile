@@ -41,8 +41,7 @@ export default ({ track }: Props) => {
     <LottieButtonAnimated
       src={require('@assets/lottie/Heart.json')}
       size={30}
-      onPressClicked={onClick}
-      onPressNotClicked={onClick}
+      onPress={onClick}
       clicked={liked}
       clickedLottieProgress={0.5}
       strokes={['Rays 2', 'Fill 2', 'Heart Outlines 2']}

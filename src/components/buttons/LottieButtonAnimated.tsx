@@ -6,8 +6,7 @@ import { useNoxSetting } from '@hooks/useSetting';
 
 interface Props {
   src: AnimationObject;
-  onPressClicked: () => void;
-  onPressNotClicked: () => void;
+  onPress: () => void;
   strokes?: string[];
   size: number;
   clicked: boolean;
@@ -19,8 +18,7 @@ const AnimatedLottieView = Animated.createAnimatedComponent(LottieView);
 
 const LottieButtonAnimated = ({
   src,
-  onPressClicked,
-  onPressNotClicked,
+  onPress,
   clickedLottieProgress = 0.5,
   strokes = [],
   size,
@@ -28,13 +26,23 @@ const LottieButtonAnimated = ({
   duration = 340,
 }: Props) => {
   const playerStyle = useNoxSetting(state => state.playerStyle);
+  const managedClicked = useRef(clicked);
   const animationProgress = useRef(
     new Animated.Value(clicked ? clickedLottieProgress : 0)
   );
 
+  React.useEffect(() => {
+    if (clicked === managedClicked.current) {
+      return;
+    }
+    animationProgress.current.setValue(clicked ? clickedLottieProgress : 0);
+    managedClicked.current = clicked;
+  }, [clicked]);
+
   const onPressBtn = () => {
+    managedClicked.current = !clicked;
+    onPress();
     if (clicked) {
-      onPressClicked();
       Animated.timing(animationProgress.current, {
         toValue: 1,
         duration,
@@ -42,8 +50,6 @@ const LottieButtonAnimated = ({
         useNativeDriver: false,
       }).start(() => animationProgress.current.setValue(0));
     } else {
-      onPressNotClicked();
-      onPressClicked();
       Animated.timing(animationProgress.current, {
         toValue: clickedLottieProgress,
         duration,
