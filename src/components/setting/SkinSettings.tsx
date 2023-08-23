@@ -28,7 +28,7 @@ import { useNoxSetting } from '@hooks/useSetting';
 import AzusaTheme from '../styles/AzusaTheme';
 // import AzusaTheme from '../styles/SteriaTheme';
 import NoxTheme from '../styles/NoxTheme';
-import AdaptiveTheme from '../styles/DefaultAdaptiveTheme';
+import AdaptiveTheme from '../styles/AdaptiveTheme';
 import { getUniqObjects } from '@utils/Utils';
 
 const WindowWidth = Dimensions.get('window').width;

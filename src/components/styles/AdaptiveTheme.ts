@@ -9,12 +9,14 @@ const DefaultAdaptiveTheme: NoxTheme.AdaptiveStyle = {
     metaData: {
       ...NoxTheme.metaData,
       themeName: 'AzusaNox Theme',
+      themeAuthor: 'nek7mi',
       themeDesc: 'Adaptive Theme combining Nox and Azusa themes',
     },
   },
   metaData: {
     ...AzusaTheme.metaData,
     themeName: 'AzusaNox Theme',
+    themeAuthor: 'nek7mi',
     themeDesc: 'Adaptive Theme combining Nox and Azusa themes',
   },
 };
