@@ -285,7 +285,6 @@ export default (props: any) => {
         onPress={() => goToPlaylist(STORAGE_KEYS.SEARCH_PLAYLIST_KEY)}
         style={[
           {
-            paddingLeft: 25,
             backgroundColor:
               currentPlaylist.id ===
               playlists[STORAGE_KEYS.SEARCH_PLAYLIST_KEY]?.id
