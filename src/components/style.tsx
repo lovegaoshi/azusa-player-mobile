@@ -3,7 +3,9 @@ import NoxTheme from './styles/NoxTheme';
 import AzusaTheme from './styles/AzusaTheme';
 import { randomChoice } from '../utils/Utils';
 
-export const createStyle = (customStyle = AzusaTheme) => {
+export const createStyle = (
+  customStyle: NoxTheme.Style | NoxTheme.AdaptiveStyle = AzusaTheme
+) => {
   const refTheme = customStyle.metaData.darkTheme ? NoxTheme : AzusaTheme;
   return StyleSheet.create({
     metaData: {

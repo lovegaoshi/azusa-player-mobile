@@ -24,7 +24,7 @@ declare namespace NoxTheme {
     identifier: string;
   }
 
-  export interface style {
+  export interface Style {
     metaData: metaData;
 
     gifs: Array<string>;
@@ -48,10 +48,16 @@ declare namespace NoxTheme {
     thumbupSVGA?: string;
     // thumbupSVGA's zIndex. >1 will be in front of the thumb up icon, <1 behind.
     thumbupZIndex?: number;
+    isAdaptive: false;
   }
 
   export interface coordinates {
     x: number;
     y: number;
+  }
+
+  export interface AdaptiveStyle extends Style {
+    isAdaptive: true;
+    darkTheme: Style;
   }
 }

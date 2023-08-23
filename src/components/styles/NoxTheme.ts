@@ -112,4 +112,4 @@ export default {
     backdrop: 'rgba(49, 49, 37, 0.4)',
   },
   playerControlIconContained: 'contained',
-} as NoxTheme.style;
+} as NoxTheme.Style;

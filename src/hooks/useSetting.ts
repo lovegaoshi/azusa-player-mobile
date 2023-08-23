@@ -12,7 +12,6 @@ import {
   savePlaylistIds,
   saveSettings,
   savelastPlaylistId,
-  savePlayerSkin,
   savePlayerSkins,
   saveLyricMapping,
 } from '../utils/ChromeStorage';
@@ -26,6 +25,7 @@ import {
   initialize as appStoreInitialize,
   getABRepeatRaw,
 } from '@stores/appStore';
+import { setPlayerStyle as setPlayerStyleFunc } from './useTheme';
 
 const { getState, setState } = noxPlayingList;
 
@@ -148,17 +148,8 @@ export const useNoxSetting = create<NoxSetting>((set, get) => ({
   setCurrentABRepeat: (val: [number, number]) => set({ currentABRepeat: val }),
 
   playerStyle: createStyle(),
-  setPlayerStyle: (val: NoxTheme.style) => {
-    const createdStyle = createStyle(val);
-    resolveBackgroundImage(createdStyle.bkgrdImg).then(resolvedBackground =>
-      set({
-        playerStyle: {
-          ...createdStyle,
-          bkgrdImg: resolvedBackground,
-        },
-      })
-    );
-    savePlayerSkin(val);
+  setPlayerStyle: (val: NoxTheme.Style) => {
+    setPlayerStyleFunc(val).then(playerStyle => set({ playerStyle }));
   },
   playerStyles: [],
   setPlayerStyles: (val: any[]) => {
@@ -288,7 +279,6 @@ export const useNoxSetting = create<NoxSetting>((set, get) => ({
   initPlayer: async (val: NoxStorage.PlayerStorageObject) => {
     const playingList =
       val.playlists[val.lastPlaylistId[0]] || dummyPlaylistList;
-    const createdStyle = createStyle(val.skin);
     await appStoreInitialize(val);
     set({ currentPlayingId: val.lastPlaylistId[1] });
     set({ currentABRepeat: getABRepeatRaw(val.lastPlaylistId[1]) });
@@ -305,10 +295,7 @@ export const useNoxSetting = create<NoxSetting>((set, get) => ({
     set({ playlists: val.playlists });
     set({ playlistIds: val.playlistIds });
     set({
-      playerStyle: {
-        ...createdStyle,
-        bkgrdImg: await resolveBackgroundImage(createdStyle.bkgrdImg),
-      },
+      playerStyle: await setPlayerStyleFunc(val.skin, false),
     });
     set({ playerStyles: val.skins });
     setPlayingList(

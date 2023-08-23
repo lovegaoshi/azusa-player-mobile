@@ -1,6 +1,7 @@
 import React from 'react';
 import { ImageBackground, Dimensions, View, StyleSheet } from 'react-native';
-import { Video, ResizeMode } from 'expo-av';
+// import { Video, ResizeMode } from 'expo-av';
+import Video from 'react-native-video';
 import { useNoxSetting } from '@hooks/useSetting';
 import { fetchVideoPlayUrlPromise } from '@utils/mediafetch/resolveURL';
 import { customReqHeader } from '@utils/BiliFetch';
@@ -86,11 +87,17 @@ const MainBackground = (props: any) => {
               headers: customReqHeader(playerStyle.bkgrdImg.identifier, {}),
             }}
             style={{ width: '100%', height: '100%', position: 'absolute' }}
+            onError={logger.error}
+            /**
             isLooping
             resizeMode={ResizeMode.COVER}
             shouldPlay={true}
             isMuted={true}
-            onError={logger.error}
+             *
+             */
+            repeat
+            muted
+            resizeMode="cover"
           />
           <View style={styles.fullscreenStyle}>{props.children}</View>
         </>

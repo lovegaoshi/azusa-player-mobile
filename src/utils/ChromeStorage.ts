@@ -241,8 +241,11 @@ export const saveSettings = async (setting: NoxStorage.PlayerSettingDict) =>
 export const savePlaylistIds = async (val: string[]) =>
   saveItem(STORAGE_KEYS.MY_FAV_LIST_KEY, val);
 
-export const savePlayerSkin = async (val: NoxTheme.style) =>
-  saveItem(STORAGE_KEYS.SKIN, val);
+export const savePlayerSkin = async (
+  val: NoxTheme.Style | NoxTheme.AdaptiveStyle
+) => saveItem(STORAGE_KEYS.SKIN, val);
+
+export const getPlayerSkin = async () => await getItem(STORAGE_KEYS.SKIN);
 
 export const addPlaylist = async (
   playlist: NoxMedia.Playlist,

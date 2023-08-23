@@ -40,7 +40,7 @@ declare namespace NoxStorage {
     searchPlaylist: NoxMedia.Playlist;
     favoriPlaylist: NoxMedia.Playlist;
     playerRepeat: string;
-    skin: NoxTheme.style;
+    skin: NoxTheme.Style;
     skins: any[];
     // site: set-cookie header
     cookies: { [key: string]: string };

@@ -57,7 +57,9 @@ export const PlayerControls: React.FC = () => {
           onPress={performSkipToPrevious}
           strokes={['Line', 'Triange', 'Triange  2']}
         />
+        <View style={styles.btnSpacer} />
         <PlayPauseButton state={playback.state} />
+        <View style={styles.btnSpacer} />
         <LottieButton
           src={require('@assets/lottie/skip-forwards.json')}
           size={40}
@@ -81,4 +83,5 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
+  btnSpacer: { width: 6 },
 });
