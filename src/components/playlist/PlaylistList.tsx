@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react';
-import { View, BackHandler, StyleSheet, Dimensions } from 'react-native';
+import { View, BackHandler, StyleSheet, Dimensions, ImageBackground } from 'react-native';
 import { FlashList } from '@shopify/flash-list';
 import Snackbar from 'react-native-snackbar';
 import { IconButton } from 'react-native-paper';
@@ -22,8 +22,29 @@ import { syncFavlist } from '@utils/Bilibili/bilifavOperate';
 import noxCache, { noxCacheKey } from '@utils/Cache';
 import noxPlayingList from '@stores/playingList';
 import { NoxRepeatMode } from '@enums/RepeatMode';
+import { i0hdslbHTTPResolve } from '@utils/Utils';
 
 const { getState } = noxPlayingList;
+
+interface BackgroundProps {
+  song: NoxMedia.Song;
+  current?: boolean;
+  children: JSX.Element;
+}
+const SongBackground = (props: BackgroundProps) => {
+  return props.current ? (
+    <ImageBackground
+      source={{ uri: i0hdslbHTTPResolve(props.song.cover) }}
+      resizeMode="cover"
+      style={stylesLocal.songInfoBackgroundBanner}
+      imageStyle={stylesLocal.songInfoBackgroundImg}
+    >
+      {props.children}
+    </ImageBackground>
+  ) : (
+    props.children
+  );
+};
 
 const PlaylistList = () => {
   const { t } = useTranslation();
@@ -271,8 +292,8 @@ const PlaylistList = () => {
     const currentIndex =
       toIndex < 0
         ? currentPlaylist.songList.findIndex(
-            song => song.id === currentPlayingId
-          )
+          song => song.id === currentPlayingId
+        )
         : toIndex;
     if (currentIndex > -1) {
       playlistRef.current?.scrollToIndex({
@@ -400,29 +421,32 @@ const PlaylistList = () => {
               layout={Layout.springify()}
             >
             */
-            <SongInfo
-              item={item}
-              index={index}
-              currentPlaying={item.id === currentPlayingId}
-              playSong={playSong}
-              checking={checking}
-              checkedList={selected}
-              onChecked={() => toggleSelected(getSongIndex(item, index))}
-              onLongPress={() => {
-                toggleSelected(getSongIndex(item, index));
-                setChecking(true);
-              }}
-              networkCellular={netInfo.type === 'cellular'}
-            />
+            <SongBackground song={item} current={item.id === currentPlayingId}>
+              <SongInfo
+                item={item}
+                index={index}
+                currentPlaying={item.id === currentPlayingId}
+                playSong={playSong}
+                checking={checking}
+                checkedList={selected}
+                onChecked={() => toggleSelected(getSongIndex(item, index))}
+                onLongPress={() => {
+                  toggleSelected(getSongIndex(item, index));
+                  setChecking(true);
+                }}
+                networkCellular={netInfo.type === 'cellular'}
+              />
+            </SongBackground>
             // </Animated.View>
-          )}
+          )
+          }
           keyExtractor={(item, index) => `${item.id}.${index}`}
           estimatedItemSize={58}
           extraData={shouldReRender}
           onRefresh={refreshPlaylist}
           refreshing={refreshing}
         />
-      </View>
+      </View >
       <SongMenu
         checking={checking}
         checked={selected}
@@ -432,7 +456,7 @@ const PlaylistList = () => {
           playlistRef.current?.prepareForLayoutAnimationRender()
         }
       />
-    </View>
+    </View >
   );
 };
 const stylesLocal = StyleSheet.create({
@@ -447,6 +471,8 @@ const stylesLocal = StyleSheet.create({
     // HACK: this should be justified as top bar and bottom bar all have a defined height.
     maxHeight: Dimensions.get('window').height - 250,
   },
+  songInfoBackgroundImg: { opacity: 0.5 },
+  songInfoBackgroundBanner: { flex: 1 },
 });
 
 export default PlaylistList;
