@@ -23,12 +23,12 @@ import {
   GestureHandlerRootView,
 } from 'react-native-gesture-handler';
 
-import SkinSearchbar from './SkinSearchbar';
+import SkinSearchbar from '../SkinSearchbar';
 import { useNoxSetting } from '@hooks/useSetting';
-import AzusaTheme from '../styles/AzusaTheme';
+import AzusaTheme from '../../styles/AzusaTheme';
 // import AzusaTheme from '../styles/SteriaTheme';
-import NoxTheme from '../styles/NoxTheme';
-import AdaptiveTheme from '../styles/AdaptiveTheme';
+import NoxTheme from '../../styles/NoxTheme';
+import AdaptiveTheme from '../../styles/AdaptiveTheme';
 import { getUniqObjects } from '@utils/Utils';
 
 const WindowWidth = Dimensions.get('window').width;

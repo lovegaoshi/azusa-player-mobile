@@ -1,5 +1,11 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react';
-import { View, BackHandler, StyleSheet, Dimensions, ImageBackground } from 'react-native';
+import {
+  View,
+  BackHandler,
+  StyleSheet,
+  Dimensions,
+  ImageBackground,
+} from 'react-native';
 import { FlashList } from '@shopify/flash-list';
 import Snackbar from 'react-native-snackbar';
 import { IconButton } from 'react-native-paper';
@@ -292,8 +298,8 @@ const PlaylistList = () => {
     const currentIndex =
       toIndex < 0
         ? currentPlaylist.songList.findIndex(
-          song => song.id === currentPlayingId
-        )
+            song => song.id === currentPlayingId
+          )
         : toIndex;
     if (currentIndex > -1) {
       playlistRef.current?.scrollToIndex({
@@ -421,7 +427,12 @@ const PlaylistList = () => {
               layout={Layout.springify()}
             >
             */
-            <SongBackground song={item} current={item.id === currentPlayingId}>
+            <SongBackground
+              song={item}
+              current={
+                playerSetting.updateLoadedTrack && item.id === currentPlayingId
+              }
+            >
               <SongInfo
                 item={item}
                 index={index}
@@ -438,15 +449,14 @@ const PlaylistList = () => {
               />
             </SongBackground>
             // </Animated.View>
-          )
-          }
+          )}
           keyExtractor={(item, index) => `${item.id}.${index}`}
           estimatedItemSize={58}
           extraData={shouldReRender}
           onRefresh={refreshPlaylist}
           refreshing={refreshing}
         />
-      </View >
+      </View>
       <SongMenu
         checking={checking}
         checked={selected}
@@ -456,7 +466,7 @@ const PlaylistList = () => {
           playlistRef.current?.prepareForLayoutAnimationRender()
         }
       />
-    </View >
+    </View>
   );
 };
 const stylesLocal = StyleSheet.create({
