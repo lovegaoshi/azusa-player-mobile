@@ -37,7 +37,9 @@
 - AB 重复
 - **切片 man 不易，没有各位切片 man 也不会有这个项目的意义，请大家溜歌同时点右下方的点赞按钮点赞和三连 👍**
 - 自用为主要目的，不感兴趣的 feature 大概不会做，有问题可以[b 站私信](https://message.bilibili.com/#/whisper/mid1989881)
- 
+
+**This project uses free icon assets from [Icon8](https://www.bing.com/ck/a?!&&p=ed5a97b253ab67c8JmltdHM9MTY5MjgzNTIwMCZpZ3VpZD0yY2M0ODAwMS1hZGI1LTZiZGMtMzA1NS05MjYyYWM1YjZhZjAmaW5zaWQ9NTIwMw&ptn=3&hsh=3&fclid=2cc48001-adb5-6bdc-3055-9262ac5b6af0&psq=icon8&u=a1aHR0cHM6Ly9pY29uczguY29tLw&ntb=1).**
+
 ## 为什么要使用管人播放器？
 
 市面上有很多播放器竞品，比如整合大量音乐网站，跨平台的[listen1](https://github.com/listen1/listen1_chrome_extension)、[洛雪音乐](https://github.com/lyswhut/lx-music-mobile)、[musicfree](https://github.com/maotoumao/MusicFree)；动画流畅的[MVVM播放器制作教程](https://github.com/KunMinX/Jetpack-MVVM-Best-Practice)；界面简洁好使的本地播放器[AIMP](https://www.aimp.ru/)；支持b站的也不是没有，为什么要用管人播放器？
