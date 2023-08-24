@@ -1,5 +1,6 @@
 /* eslint-disable prefer-const */
 import { create } from 'zustand';
+
 import {
   dummyPlaylist,
   dummyPlaylistList,
@@ -302,6 +303,7 @@ export const useNoxSetting = create<NoxSetting>((set, get) => ({
     );
     setState({ playmode: val.playerRepeat });
     set({ lyricMapping: val.lyricMapping });
+
     return {
       playlists: val.playlists,
       currentPlayingList: playingList,

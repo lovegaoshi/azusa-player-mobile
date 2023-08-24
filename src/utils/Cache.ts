@@ -12,10 +12,7 @@ import playerSettingStore from '@stores/playerSettingStore';
 
 const { getState } = playerSettingStore;
 
-import {
-  loadCachedMediaMapping,
-  saveCachedMediaMapping,
-} from './ChromeStorage';
+import { getCachedMediaMapping, saveCachedMediaMapping } from './ChromeStorage';
 import logger from './Logger';
 import TrackPlayer from 'react-native-track-player';
 
@@ -165,7 +162,7 @@ export const initCache = async (
   } catch (e) {
     console.error(e);
   }
-  cache.noxMediaCache.loadCache(savedCache || (await loadCachedMediaMapping()));
+  cache.noxMediaCache.loadCache(savedCache || (await getCachedMediaMapping()));
   return cache;
 };
 

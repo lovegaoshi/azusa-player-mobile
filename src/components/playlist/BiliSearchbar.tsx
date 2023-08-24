@@ -15,7 +15,7 @@ import { searchBiliURLs } from '@utils/BiliSearch';
 import { useNoxSetting } from '@hooks/useSetting';
 import usePlayback from '@hooks/usePlayback';
 import SearchMenu from './SearchMenu';
-import { loadDefaultSearch } from '@utils/ChromeStorage';
+import { getDefaultSearch } from '@utils/ChromeStorage';
 import logger from '@utils/Logger';
 
 interface SharedItem {
@@ -119,7 +119,7 @@ export default ({
       favList: [],
       useBiliTag: false,
       fastSearch: playerSetting.fastBiliSearch,
-      defaultSearch: await loadDefaultSearch(),
+      defaultSearch: await getDefaultSearch(),
     })) as Array<NoxMedia.Song>;
     onSearched(searchedResult);
     const newSearchPlaylist = {

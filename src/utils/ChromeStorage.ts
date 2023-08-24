@@ -1,6 +1,7 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { strToU8, strFromU8, compressSync, decompressSync } from 'fflate';
 import { v4 as uuidv4 } from 'uuid';
+import { Appearance, ColorSchemeName } from 'react-native';
 
 import { dummyPlaylist, dummyPlaylistList } from '../objects/Playlist';
 import { NoxRepeatMode } from '../enums/RepeatMode';
@@ -57,7 +58,7 @@ export const removeItem = async (key: string) => {
   }
 };
 
-export const loadFadeInterval = async () =>
+export const getFadeInterval = async () =>
   Number(await getItem(STORAGE_KEYS.FADE_INTERVAL)) || 0;
 export const saveFadeInterval = async (val: number) =>
   await saveItem(STORAGE_KEYS.FADE_INTERVAL, val);
@@ -76,7 +77,7 @@ async function saveMapping<T>(key: STORAGE_KEYS, val: { [key: string]: T }) {
  * a save helper function for mapping types ({string: val}).
  * @returns the mapping object
  */
-const loadMapping = async (key: STORAGE_KEYS) => {
+const getMapping = async (key: STORAGE_KEYS) => {
   return (await getItem(key)) || {};
   // TODO: does dict get too long  that this is necessary?
   const result = (await loadChucked(
@@ -88,8 +89,8 @@ const loadMapping = async (key: STORAGE_KEYS) => {
   }, {} as NoxStorage.R128Dict);
 };
 
-export const loadR128GainMapping = async () => {
-  return (await loadMapping(
+export const getR128GainMapping = async () => {
+  return (await getMapping(
     STORAGE_KEYS.R128GAIN_MAPPING
   )) as NoxStorage.R128Dict;
 };
@@ -98,17 +99,15 @@ export const saveR128GainMapping = async (val: NoxStorage.R128Dict) => {
   return await saveMapping(STORAGE_KEYS.R128GAIN_MAPPING, val);
 };
 
-export const loadABMapping = async () => {
-  return (await loadMapping(
-    STORAGE_KEYS.ABREPEAT_MAPPING
-  )) as NoxStorage.ABDict;
+export const getABMapping = async () => {
+  return (await getMapping(STORAGE_KEYS.ABREPEAT_MAPPING)) as NoxStorage.ABDict;
 };
 
 export const saveABMapping = async (val: NoxStorage.ABDict) => {
   return await saveMapping(STORAGE_KEYS.ABREPEAT_MAPPING, val);
 };
 
-export const loadDefaultSearch = async (): Promise<SEARCH_OPTIONS> => {
+export const getDefaultSearch = async (): Promise<SEARCH_OPTIONS> => {
   return (
     (await getItem(STORAGE_KEYS.DEFAULT_SEARCH)) || SEARCH_OPTIONS.BILIBILI
   );
@@ -118,12 +117,22 @@ export const saveDefaultSearch = async (val: SEARCH_OPTIONS) => {
   return await saveItem(STORAGE_KEYS.DEFAULT_SEARCH, val);
 };
 
-export const loadCachedMediaMapping = async () => {
+export const getCachedMediaMapping = async () => {
   return (await getItem(STORAGE_KEYS.CACHED_MEDIA_MAPPING)) || [];
 };
 
 export const saveCachedMediaMapping = async (val: any[]) => {
   return await saveItem(STORAGE_KEYS.CACHED_MEDIA_MAPPING, val);
+};
+
+export const getColorScheme = async () => {
+  const colorScheme = (await getItem(STORAGE_KEYS.COLORTHEME)) || null;
+  Appearance.setColorScheme(colorScheme);
+  return colorScheme;
+};
+
+export const saveColorScheme = async (val: ColorSchemeName) => {
+  return await saveItem(STORAGE_KEYS.COLORTHEME, val);
 };
 
 // we keep the set-cookie header for noxplayer's remove personal search option
@@ -320,6 +329,7 @@ export const initPlayerObject =
       cookies: (await getItem(STORAGE_KEYS.COOKIES)) || {},
       lyricMapping,
       lastPlayDuration: (await getItem(STORAGE_KEYS.LAST_PLAY_DURATION)) || 0,
+      colorScheme: await getColorScheme(),
     } as NoxStorage.PlayerStorageObject;
 
     playerObject.playlists[STORAGE_KEYS.SEARCH_PLAYLIST_KEY] =

@@ -2,11 +2,11 @@
 import { createStore } from 'zustand/vanilla';
 
 import {
-  loadR128GainMapping,
+  getR128GainMapping,
   saveR128GainMapping,
-  loadABMapping,
+  getABMapping,
   saveABMapping,
-  loadFadeInterval,
+  getFadeInterval,
 } from '@utils/ChromeStorage';
 import type { NoxStorage } from '../types/storage';
 
@@ -71,10 +71,10 @@ const appStore = createStore<AppStore>((set, get) => ({
 }));
 
 export const initialize = async (val: NoxStorage.PlayerStorageObject) => {
-  const fadeInterval = await loadFadeInterval();
+  const fadeInterval = await getFadeInterval();
   appStore.setState({
-    r128gain: await loadR128GainMapping(),
-    ABRepeat: await loadABMapping(),
+    r128gain: await getR128GainMapping(),
+    ABRepeat: await getABMapping(),
     fadeIntervalMs: fadeInterval,
     fadeIntervalSec: fadeInterval / 1000,
   });

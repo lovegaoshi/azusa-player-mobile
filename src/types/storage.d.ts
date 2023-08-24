@@ -1,3 +1,5 @@
+import { ColorSchemeName } from 'react-native';
+
 import { EXPORT_OPTIONS } from '../enums/Sync';
 
 declare namespace NoxStorage {
@@ -49,6 +51,7 @@ declare namespace NoxStorage {
     lyricMapping: Map<string, NoxMedia.LyricDetail>;
     language?: string;
     lastPlayDuration: number;
+    colorScheme: ColorSchemeName;
   }
 
   export interface R128Dict {
