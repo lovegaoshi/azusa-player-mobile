@@ -46,6 +46,7 @@ export default ({ track }: Props) => {
       clickedLottieProgress={0.5}
       strokes={['Rays 2', 'Fill 2', 'Heart Outlines 2']}
       duration={500}
+      pressableStyle={{ backgroundColor: undefined }}
     />
   );
   return (

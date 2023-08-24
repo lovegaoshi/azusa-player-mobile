@@ -29,6 +29,7 @@ import ShuffleAllButton from './ShuffleAllButton';
 import TimerButton from './TimerButton';
 import appStore from '@stores/appStore';
 import logger from '@utils/Logger';
+import useTheme from '@hooks/useTheme';
 
 const useRenderDrawerItem = () => {
   const navigation = useNavigation();
@@ -137,6 +138,7 @@ export default (props: any) => {
   // HACK: I know its bad! But somehow this hook isnt updating in its own
   // useEffects...
   const { buildBrowseTree } = useAAPlayback();
+  const usedTheme = useTheme();
   const PIPMode = useStore(appStore, state => state.pipMode);
 
   // HACK: tried to make searchList draweritem button as addPlaylistButton, but
@@ -283,7 +285,6 @@ export default (props: any) => {
         onPress={() => goToPlaylist(STORAGE_KEYS.SEARCH_PLAYLIST_KEY)}
         style={[
           {
-            paddingLeft: 25,
             backgroundColor:
               currentPlaylist.id ===
               playlists[STORAGE_KEYS.SEARCH_PLAYLIST_KEY]?.id

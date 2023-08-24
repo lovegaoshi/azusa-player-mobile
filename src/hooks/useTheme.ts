@@ -4,8 +4,10 @@ import { useColorScheme, Appearance } from 'react-native';
 import { getPlayerSkin, savePlayerSkin } from '../utils/ChromeStorage';
 import { createStyle } from '../components/style';
 import { resolveBackgroundImage } from '../components/background/MainBackground';
+import logger from '@utils/Logger';
+import { useNoxSetting } from './useSetting';
 
-export const setPlayerStyle = async (
+export const savePlayerStyle = async (
   val: NoxTheme.Style | NoxTheme.AdaptiveStyle,
   save = true
 ) => {
@@ -23,6 +25,7 @@ export const setPlayerStyle = async (
 };
 
 const useTheme = () => {
+  const setPlayerStyleState = useNoxSetting(state => state.setPlayerStyle);
   const colorScheme = useColorScheme();
 
   const changeAdaptiveTheme = async () => {
@@ -30,6 +33,7 @@ const useTheme = () => {
     if (currentTheme === null || !currentTheme?.isAdaptive) {
       return;
     }
+    setPlayerStyleState(currentTheme, false);
   };
 
   useEffect(() => {

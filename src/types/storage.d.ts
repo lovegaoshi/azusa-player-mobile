@@ -24,7 +24,9 @@ declare namespace NoxStorage {
     updateLoadedTrack: boolean;
     r128gain: boolean;
     prefetchTrack: boolean;
+    // TODO: implement this feature
     chatGPTResolveSongName: boolean;
+    trackCoverArtCard: boolean;
 
     appID: string;
     language?: string;

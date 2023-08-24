@@ -98,6 +98,7 @@ const MainBackground = (props: any) => {
             repeat
             muted
             resizeMode="cover"
+            preventsDisplaySleepDuringVideoPlayback={false}
           />
           <View style={styles.fullscreenStyle}>{props.children}</View>
         </>

@@ -1,5 +1,8 @@
 import { Alert } from 'react-native';
 
+export const i0hdslbHTTPResolve = (url: String) =>
+  url.replace('http://', 'https://');
+
 export const seconds2HHMMSS = (sec_num: number) => {
   sec_num = Math.floor(sec_num);
   const padding = (num: number) => String(num).padStart(2, '0');

@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import { Pressable, Animated, Easing } from 'react-native';
+import { Pressable, Animated, Easing, ViewStyle } from 'react-native';
 import LottieView, { AnimationObject } from 'lottie-react-native';
 
 import { useNoxSetting } from '@hooks/useSetting';
@@ -12,6 +12,8 @@ interface Props {
   clicked: boolean;
   clickedLottieProgress?: number;
   duration?: number;
+  pressableStyle?: ViewStyle;
+  lottieStyle?: ViewStyle;
 }
 
 const AnimatedLottieView = Animated.createAnimatedComponent(LottieView);
@@ -24,6 +26,8 @@ const LottieButtonAnimated = ({
   size,
   clicked,
   duration = 340,
+  pressableStyle,
+  lottieStyle,
 }: Props) => {
   const playerStyle = useNoxSetting(state => state.playerStyle);
   const managedClicked = useRef(clicked);
@@ -66,13 +70,20 @@ const LottieButtonAnimated = ({
         width: size + 16,
         height: size + 16,
         borderRadius: size / 2 + 8,
+        ...pressableStyle,
       }}
       onPress={onPressBtn}
     >
       <AnimatedLottieView
         source={src}
         progress={animationProgress.current}
-        style={{ width: size, height: size, marginLeft: 8, marginTop: 8 }}
+        style={{
+          width: size,
+          height: size,
+          marginLeft: 8,
+          marginTop: 8,
+          ...lottieStyle,
+        }}
         colorFilters={strokes.map(keypath => ({
           keypath,
           color: playerStyle.colors.primary,

@@ -10,7 +10,7 @@ import { ScrollView } from 'react-native-gesture-handler';
 import { useTranslation } from 'react-i18next';
 
 import GeneralSettings from './GeneralSettings';
-import SkinSettings from './SkinSettings';
+import AppearanceSettings from './appearances/View';
 import DeveloperSettings from './DeveloperSettings';
 import SyncSettings from './SyncSettings';
 import { useNoxSetting } from '@hooks/useSetting';
@@ -97,7 +97,7 @@ export default ({ navigation }: Props) => {
           />
           <SettingListItem
             icon={ICONS.SKIN}
-            settingName="SkinSetting"
+            settingName="AppearanceSetting"
             onPress={() => navigation.navigate(VIEW.SKIN)}
             settingCategory="Settings"
           />
@@ -170,8 +170,8 @@ export default ({ navigation }: Props) => {
       />
       <Stack.Screen
         name={VIEW.SKIN}
-        component={SkinSettings}
-        options={{ title: String(t('Settings.SkinSettingName')) }}
+        component={AppearanceSettings}
+        options={{ title: String(t('Settings.AppearanceSettingName')) }}
       />
       <Stack.Screen
         name={VIEW.DEVELOPER}

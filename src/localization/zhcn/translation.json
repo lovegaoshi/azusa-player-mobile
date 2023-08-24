@@ -101,6 +101,10 @@
     "r128gainDesc": "启用实时音量调整（仅在歌曲缓存开启时有用）",
     "prefetchTrackName": "歌曲预加载",
     "prefetchTrackDesc": "预加载下一首歌（仅在歌曲缓存开启时有用）",
+    "chatGPTResolveSongNameName": "ChatGPT找歌",
+    "chatGPTResolveSongNameDesc": "TODO：用chatGPT解析歌名",
+    "trackCoverArtCardName": "专辑封面",
+    "trackCoverArtCardDesc": "选定歌的时候，背景条图显示专辑封面",
     "fastBiliSearchName": "快速b站搜索",
     "fastBiliSearchDesc": "使用b站搜索时不解析分p内容"
   },
@@ -135,6 +139,8 @@
   "Settings": {
     "GeneralSettingName": "播放器设置",
     "GeneralSettingDesc": "一般的播放器设置",
+    "AppearanceSettingName": "播放器外观",
+    "AppearanceSettingDesc": "修改管人播放器的外观选项",
     "SkinSettingName": "播放器皮肤",
     "SkinSettingDesc": "选择你喜欢的管人皮肤",
     "BackupSettingName": "歌单备份",

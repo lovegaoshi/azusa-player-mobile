@@ -1,7 +1,9 @@
 import { Track } from 'react-native-track-player';
 import { v4 as uuidv4 } from 'uuid';
+
 import { NULL_TRACK } from './Song';
 import { PLAYLIST_ENUMS } from '../enums/Playlist';
+import { i0hdslbHTTPResolve } from '@utils/Utils';
 
 export const dummyPlaylist = (
   title = 'Search',
@@ -34,13 +36,6 @@ export const getPlaylistUniqBVIDs = (playlist: NoxMedia.Playlist) => {
 export const songlistToTracklist = (
   songList: Array<NoxMedia.Song>
 ): Track[] => {
-  /**
-   * for whatever reson hdslb sometimes returns http://.
-   * cleartext is not permitted.
-   */
-  const i0hdslbHTTPResolve = (url: String) =>
-    url.replace('http://', 'https://');
-
   return songList.map(song => {
     return {
       ...NULL_TRACK,

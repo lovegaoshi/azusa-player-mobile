@@ -18,14 +18,13 @@ import {
 import { DEFAULT_SETTING, STORAGE_KEYS } from '@enums/Storage';
 import { createStyle } from '../components/style';
 import noxPlayingList, { setPlayingList } from '../stores/playingList';
-import { resolveBackgroundImage } from '../components/background/MainBackground';
 import type { NoxStorage } from '../types/storage';
 import { setPlayerSetting as setPlayerSettingVanilla } from '@stores/playerSettingStore';
 import {
   initialize as appStoreInitialize,
   getABRepeatRaw,
 } from '@stores/appStore';
-import { setPlayerStyle as setPlayerStyleFunc } from './useTheme';
+import { savePlayerStyle } from './useTheme';
 
 const { getState, setState } = noxPlayingList;
 
@@ -51,7 +50,7 @@ interface NoxSetting {
   setCurrentABRepeat: (val: [number, number]) => void;
 
   playerStyle: any;
-  setPlayerStyle: (style: any) => void;
+  setPlayerStyle: (style: any, save?: boolean) => void;
   playerStyles: any[];
   setPlayerStyles: (val: any[]) => void;
 
@@ -148,8 +147,8 @@ export const useNoxSetting = create<NoxSetting>((set, get) => ({
   setCurrentABRepeat: (val: [number, number]) => set({ currentABRepeat: val }),
 
   playerStyle: createStyle(),
-  setPlayerStyle: (val: NoxTheme.Style) => {
-    setPlayerStyleFunc(val).then(playerStyle => set({ playerStyle }));
+  setPlayerStyle: (val: NoxTheme.Style, save = true) => {
+    savePlayerStyle(val, save).then(playerStyle => set({ playerStyle }));
   },
   playerStyles: [],
   setPlayerStyles: (val: any[]) => {
@@ -295,7 +294,7 @@ export const useNoxSetting = create<NoxSetting>((set, get) => ({
     set({ playlists: val.playlists });
     set({ playlistIds: val.playlistIds });
     set({
-      playerStyle: await setPlayerStyleFunc(val.skin, false),
+      playerStyle: await savePlayerStyle(val.skin, false),
     });
     set({ playerStyles: val.skins });
     setPlayingList(
