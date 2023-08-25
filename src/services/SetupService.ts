@@ -1,11 +1,10 @@
-import TrackPlayer, {
-  AppKilledPlaybackBehavior,
-  Capability,
-  RepeatMode,
-} from 'react-native-track-player';
-import { Event } from 'react-native-track-player';
+import TrackPlayer, { RepeatMode } from 'react-native-track-player';
 
 import type { NoxStorage } from '../types/storage';
+import { initRNTPOptions } from '../utils/RNTPUtils';
+import appStore from '@stores/appStore';
+
+const { setState } = appStore;
 
 const setupPlayer = async (
   options: Parameters<typeof TrackPlayer.setupPlayer>[0]
@@ -32,27 +31,8 @@ export const SetupService = async ({
     autoHandleInterruptions: noInterruption ? false : true,
     maxCacheSize: 1024 * 100,
   });
-  await TrackPlayer.updateOptions({
-    android: {
-      appKilledPlaybackBehavior:
-        AppKilledPlaybackBehavior.StopPlaybackAndRemoveNotification,
-    },
-    // This flag is now deprecated. Please use the above to define playback mode.
-    // stoppingAppPausesPlayback: true,
-    capabilities: [
-      Capability.Play,
-      Capability.Pause,
-      Capability.SkipToNext,
-      Capability.SkipToPrevious,
-      Capability.SeekTo,
-    ],
-    compactCapabilities: [
-      Capability.Play,
-      Capability.Pause,
-      Capability.SkipToNext,
-      Capability.SkipToPrevious,
-    ],
-    progressUpdateEventInterval: 1,
-  });
+  const RNTPOptions = initRNTPOptions();
+  setState({ RNTPOptions });
+  await TrackPlayer.updateOptions(RNTPOptions);
   await TrackPlayer.setRepeatMode(RepeatMode.Off);
 };

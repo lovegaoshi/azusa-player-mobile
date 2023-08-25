@@ -1,5 +1,6 @@
 // vanilla store of zustand serving playbackServices.
 import { createStore } from 'zustand/vanilla';
+import { UpdateOptions } from 'react-native-track-player';
 
 import {
   getR128GainMapping,
@@ -32,6 +33,7 @@ interface AppStore {
   setDownloadPromiseMap: (val: NoxStorage.DownloadDict) => void;
   fadeIntervalMs: number;
   fadeIntervalSec: number;
+  RNTPOptions?: UpdateOptions;
 }
 
 const appStore = createStore<AppStore>((set, get) => ({
@@ -159,7 +161,4 @@ export const addDownloadPromise = async (
   appStore.setState({ downloadPromiseMap: newMap });
 };
 
-// export const setFadeInterval =
-
 export default appStore;
-// const { getState, setState } =

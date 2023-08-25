@@ -1,5 +1,9 @@
-import { Animated } from 'react-native';
-import TrackPlayer from 'react-native-track-player';
+import { Animated, Platform } from 'react-native';
+import TrackPlayer, {
+  AppKilledPlaybackBehavior,
+  Capability,
+  UpdateOptions,
+} from 'react-native-track-player';
 import logger from './Logger';
 
 const animatedVolume = new Animated.Value(1);
@@ -42,4 +46,42 @@ export const animatedVolumeChange = ({
     useNativeDriver: true,
     duration,
   }).start(() => callback());
+};
+
+export const initRNTPOptions = () => {
+  const options: UpdateOptions = {
+    android: {
+      appKilledPlaybackBehavior:
+        AppKilledPlaybackBehavior.StopPlaybackAndRemoveNotification,
+    },
+    // This flag is now deprecated. Please use the above to define playback mode.
+    // stoppingAppPausesPlayback: true,
+    capabilities: [
+      Capability.Play,
+      Capability.Pause,
+      Capability.SkipToNext,
+      Capability.SkipToPrevious,
+      Capability.SeekTo,
+    ],
+    compactCapabilities: [
+      Capability.Play,
+      Capability.Pause,
+      Capability.SkipToNext,
+      Capability.SkipToPrevious,
+    ],
+    progressUpdateEventInterval: 1,
+  };
+  if (Platform.OS === 'android') {
+    options.capabilities = options.capabilities!.concat([
+      Capability.JumpBackward,
+      Capability.JumpForward,
+    ]);
+    options.compactCapabilities = options.compactCapabilities!.concat([
+      Capability.JumpBackward,
+      Capability.JumpForward,
+    ]);
+    options.forwardJumpInterval = 1;
+    options.backwardJumpInterval = 1;
+  }
+  return options;
 };
