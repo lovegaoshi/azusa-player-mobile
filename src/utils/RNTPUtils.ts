@@ -4,6 +4,8 @@ import TrackPlayer, {
   Capability,
   UpdateOptions,
 } from 'react-native-track-player';
+
+import { getPlaybackModeNotifIcon } from '../stores/playingList';
 import logger from './Logger';
 
 const animatedVolume = new Animated.Value(1);
@@ -48,6 +50,13 @@ export const animatedVolumeChange = ({
   }).start(() => callback());
 };
 
+/**
+ * see export function useSetupPlayer.
+ * wait SetupService(serviceOptions) is called after await initPlayer(await initPlayerObject())
+ * and because initializePlaybackMode(val.playerRepeat) is called within initPlayer
+ * playlistStore.playmode is already set
+ * this should return the correct icon for playback mode.
+ */
 export const initRNTPOptions = () => {
   const options: UpdateOptions = {
     android: {
@@ -82,6 +91,7 @@ export const initRNTPOptions = () => {
     ]);
     options.forwardJumpInterval = 1;
     options.backwardJumpInterval = 1;
+    options.rewindIcon = getPlaybackModeNotifIcon()[0];
   }
   return options;
 };
