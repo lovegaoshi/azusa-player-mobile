@@ -47,19 +47,17 @@ export const getNextSong = (song: NoxMedia.Song) => {
   return queue[index];
 };
 
-/**
- * calls TP.setRepeatMode by the input repeat mode, saves repeat mode into asnycStorage, then
- * returns the icon associated with the repeat mode (for notification bar).
- */
-export const initializePlaybackMode = (state: string) => {
+export const getPlaybackModeNotifIcon = (state?: string) => {
   let nextIcon;
+  if (!state) {
+    state = playlistStore.getState().playmode;
+  }
   // NOTE: DO NOT CHANGE THIS TO OTHER MODES!
   // APM uses zustand handles queue so it relies on
   // RepeatMode.Off to properly trigger PlaybackQueueEnded
   // and call zustand to load the next song in queue. this must be
   // RepeatMode.Off.
   let TPRepeatMode = RepeatMode.Off;
-
   switch (state) {
     case NoxRepeatMode.REPEAT:
       nextIcon = require('@assets/icons/repeatModeRepeat.png');
@@ -77,6 +75,15 @@ export const initializePlaybackMode = (state: string) => {
     default:
       break;
   }
+  return [nextIcon, TPRepeatMode];
+};
+
+/**
+ * calls TP.setRepeatMode by the input repeat mode, saves repeat mode into asnycStorage, then
+ * returns the icon associated with the repeat mode (for notification bar).
+ */
+export const initializePlaybackMode = (state: string) => {
+  const [nextIcon, TPRepeatMode] = getPlaybackModeNotifIcon(state);
   TrackPlayer.setRepeatMode(TPRepeatMode);
   savePlayMode(state);
   return nextIcon;
