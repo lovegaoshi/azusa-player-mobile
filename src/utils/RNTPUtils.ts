@@ -1,6 +1,11 @@
-import { Animated, AppState } from 'react-native';
-import TrackPlayer from 'react-native-track-player';
+import { Animated, Platform, AppState } from 'react-native';
+import TrackPlayer, {
+  AppKilledPlaybackBehavior,
+  Capability,
+  UpdateOptions,
+} from 'react-native-track-player';
 
+import { getPlaybackModeNotifIcon } from '../stores/playingList';
 import logger from './Logger';
 
 const animatedVolume = new Animated.Value(1);
@@ -46,4 +51,48 @@ export const animatedVolumeChange = ({
     useNativeDriver: true,
     duration,
   }).start(() => callback());
+};
+
+/**
+ * see export function useSetupPlayer.
+ * wait SetupService(serviceOptions) is called after await initPlayer(await initPlayerObject())
+ * and because initializePlaybackMode(val.playerRepeat) is called within initPlayer
+ * playlistStore.playmode is already set
+ * this should return the correct icon for playback mode.
+ */
+export const initRNTPOptions = () => {
+  const options: UpdateOptions = {
+    android: {
+      appKilledPlaybackBehavior:
+        AppKilledPlaybackBehavior.StopPlaybackAndRemoveNotification,
+    },
+    // This flag is now deprecated. Please use the above to define playback mode.
+    // stoppingAppPausesPlayback: true,
+    capabilities: [
+      Capability.Play,
+      Capability.Pause,
+      Capability.SkipToNext,
+      Capability.SkipToPrevious,
+      Capability.SeekTo,
+    ],
+    compactCapabilities: [
+      Capability.Play,
+      Capability.Pause,
+      Capability.SkipToNext,
+      Capability.SkipToPrevious,
+    ],
+    progressUpdateEventInterval: 1,
+  };
+  if (Platform.OS === 'android') {
+    options.capabilities = options.capabilities!.concat([
+      Capability.JumpBackward,
+    ]);
+    options.compactCapabilities = options.compactCapabilities!.concat([
+      Capability.JumpBackward,
+    ]);
+    options.forwardJumpInterval = 1;
+    options.backwardJumpInterval = 1;
+    options.rewindIcon = getPlaybackModeNotifIcon()[0];
+  }
+  return options;
 };

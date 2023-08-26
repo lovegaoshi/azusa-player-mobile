@@ -5,7 +5,7 @@ import { DEFAULT_SETTING } from '@enums/Storage';
 import type { NoxStorage } from '../types/storage';
 import {
   saveSettings,
-  loadR128GainMapping,
+  getR128GainMapping,
   saveR128GainMapping,
 } from '@utils/ChromeStorage';
 

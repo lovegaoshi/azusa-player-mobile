@@ -89,8 +89,6 @@
     "parseSongNameDesc": "Show automatically parsed song names in playlist.",
     "keepSearchedSongListWhenPlayingName": "Play searched results",
     "keepSearchedSongListWhenPlayingDesc": "When searching in a playlist, play the seached results.",
-    "hideCoverInMobileName": "Hide album cover",
-    "hideCoverInMobileDesc": "Hide the album cover.",
     "dataSaverName": "Data Saver",
     "dataSaverDesc": "TODO: Render low quality assets to save data.",
     "noCookieBiliSearchName": "Bilibili Customized Search",
@@ -103,8 +101,6 @@
     "prefetchTrackDesc": "Prefetch the next track (only works when cache is enabled)",
     "chatGPTResolveSongNameName": "ChatGPT on Songs",
     "chatGPTResolveSongNameDesc": "TODO: Use chatGPT to resolve song names",
-    "trackCoverArtCardName": "Track Cover Art",
-    "trackCoverArtCardDesc": "Show a song's cover art when selected",
     "fastBiliSearchName": "Fast Bilibili Search",
     "fastBiliSearchDesc": "Do not search for bilibili video episodes."
   },
@@ -157,6 +153,17 @@
     "LoginName": "Bilibili Login",
     "LoginDesc": "login to bilibili",
     "FeatureNotImplemented": "Feature not implemented"
+  },
+  "AppearanceSettings": {
+    "ColorSchemeName": "Select Color Scheme",
+    "ColorSchemeDesc": "Current color scheme is {{ scheme }}",
+    "ColorSchemeLight": "light",
+    "ColorSchemeDark": "dark",
+    "ColorSchemeAdaptive": "adaptive",
+    "hideCoverInMobileName": "Hide album cover",
+    "hideCoverInMobileDesc": "Hide the album cover.",
+    "trackCoverArtCardName": "Track Cover Art",
+    "trackCoverArtCardDesc": "Show a song's cover art when selected"
   },
   "Sync": {
     "Local": "Local",

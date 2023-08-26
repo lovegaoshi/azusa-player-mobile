@@ -1,12 +1,13 @@
 // vanilla store of zustand serving playbackServices.
 import { createStore } from 'zustand/vanilla';
+import { UpdateOptions } from 'react-native-track-player';
 
 import {
-  loadR128GainMapping,
+  getR128GainMapping,
   saveR128GainMapping,
-  loadABMapping,
+  getABMapping,
   saveABMapping,
-  loadFadeInterval,
+  getFadeInterval,
 } from '@utils/ChromeStorage';
 import type { NoxStorage } from '../types/storage';
 
@@ -32,6 +33,7 @@ interface AppStore {
   setDownloadPromiseMap: (val: NoxStorage.DownloadDict) => void;
   fadeIntervalMs: number;
   fadeIntervalSec: number;
+  RNTPOptions?: UpdateOptions;
 }
 
 const appStore = createStore<AppStore>((set, get) => ({
@@ -71,10 +73,10 @@ const appStore = createStore<AppStore>((set, get) => ({
 }));
 
 export const initialize = async (val: NoxStorage.PlayerStorageObject) => {
-  const fadeInterval = await loadFadeInterval();
+  const fadeInterval = await getFadeInterval();
   appStore.setState({
-    r128gain: await loadR128GainMapping(),
-    ABRepeat: await loadABMapping(),
+    r128gain: await getR128GainMapping(),
+    ABRepeat: await getABMapping(),
     fadeIntervalMs: fadeInterval,
     fadeIntervalSec: fadeInterval / 1000,
   });
@@ -159,7 +161,4 @@ export const addDownloadPromise = async (
   appStore.setState({ downloadPromiseMap: newMap });
 };
 
-// export const setFadeInterval =
-
 export default appStore;
-// const { getState, setState } =

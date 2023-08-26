@@ -21,7 +21,7 @@ import { SettingEntry } from './SetttingEntries';
  * @returns
  */
 interface SetttingListInterface {
-  icon: string;
+  icon?: string;
   settingName: string;
   onPress: () => void;
   settingCategory?: string;
@@ -40,7 +40,7 @@ export const SettingListItem = ({
 
   return (
     <List.Item
-      left={props => <IconButton icon={icon} size={40} />}
+      left={props => (icon ? <IconButton icon={icon} size={40} /> : <></>)}
       title={String(t(`${settingCategory}.${settingName}Name`))}
       description={modifyDescription(
         t(`${settingCategory}.${settingName}Desc`)

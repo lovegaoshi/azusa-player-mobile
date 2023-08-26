@@ -48,5 +48,7 @@
                 <data android:scheme="com.googleusercontent.apps.369249578889-cvr47cn786i0scicobhlljidu1b32572"/>
             </intent-filter>
         </activity>
+        <meta-data android:name="com.google.android.gms.car.application"
+            android:resource="@xml/automotive_app_desc"/>
     </application>
 </manifest>

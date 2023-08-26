@@ -89,8 +89,6 @@
     "parseSongNameDesc": "用正则表达式提取歌名",
     "keepSearchedSongListWhenPlayingName": "播放搜索结果歌单",
     "keepSearchedSongListWhenPlayingDesc": "搜索歌单时，按搜索的结果播放歌单",
-    "hideCoverInMobileName": "不显示歌封面",
-    "hideCoverInMobileDesc": "移动端不显示歌封面",
     "dataSaverName": "省流模式",
     "dataSaverDesc": "TODO: 解析低质量素材节省流量",
     "noCookieBiliSearchName": "个性化b站搜索结果",
@@ -103,8 +101,6 @@
     "prefetchTrackDesc": "预加载下一首歌（仅在歌曲缓存开启时有用）",
     "chatGPTResolveSongNameName": "ChatGPT找歌",
     "chatGPTResolveSongNameDesc": "TODO：用chatGPT解析歌名",
-    "trackCoverArtCardName": "专辑封面",
-    "trackCoverArtCardDesc": "选定歌的时候，背景条图显示专辑封面",
     "fastBiliSearchName": "快速b站搜索",
     "fastBiliSearchDesc": "使用b站搜索时不解析分p内容"
   },
@@ -155,6 +151,17 @@
     "LoginDesc": "二维码或填入cookie登录b站",
     "LanguageOptionsTitle": "选择语言",
     "FeatureNotImplemented": "功能孩妹实现"
+  },
+  "AppearanceSettings": {
+    "ColorSchemeName": "选择皮肤主题",
+    "ColorSchemeDesc": "当前皮肤主题是{{ scheme }}",
+    "ColorSchemeLight": "亮色",
+    "ColorSchemeDark": "暗色",
+    "ColorSchemeAdaptive": "跟随系统",
+    "hideCoverInMobileName": "不显示歌封面",
+    "hideCoverInMobileDesc": "移动端不显示歌封面",
+    "trackCoverArtCardName": "专辑封面",
+    "trackCoverArtCardDesc": "选定歌的时候，背景条图显示专辑封面"
   },
   "Sync": {
     "Local": "本地",

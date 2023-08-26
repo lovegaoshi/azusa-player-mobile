@@ -1,5 +1,6 @@
 /* eslint-disable prefer-const */
 import { create } from 'zustand';
+
 import {
   dummyPlaylist,
   dummyPlaylistList,
@@ -17,7 +18,7 @@ import {
 } from '../utils/ChromeStorage';
 import { DEFAULT_SETTING, STORAGE_KEYS } from '@enums/Storage';
 import { createStyle } from '../components/style';
-import noxPlayingList, { setPlayingList } from '../stores/playingList';
+import { setPlayingList, initializePlaybackMode } from '../stores/playingList';
 import type { NoxStorage } from '../types/storage';
 import { setPlayerSetting as setPlayerSettingVanilla } from '@stores/playerSettingStore';
 import {
@@ -25,8 +26,6 @@ import {
   getABRepeatRaw,
 } from '@stores/appStore';
 import { savePlayerStyle } from './useTheme';
-
-const { getState, setState } = noxPlayingList;
 
 interface initializedResults {
   currentPlayingList: NoxMedia.Playlist;
@@ -300,8 +299,9 @@ export const useNoxSetting = create<NoxSetting>((set, get) => ({
     setPlayingList(
       (val.playlists[val.lastPlaylistId[0]] || val.searchPlaylist).songList
     );
-    setState({ playmode: val.playerRepeat });
+    initializePlaybackMode(val.playerRepeat);
     set({ lyricMapping: val.lyricMapping });
+
     return {
       playlists: val.playlists,
       currentPlayingList: playingList,

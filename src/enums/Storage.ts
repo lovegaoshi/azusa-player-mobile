@@ -21,6 +21,7 @@ export enum STORAGE_KEYS {
   R128GAIN_MAPPING = 'R128GainMapping',
   ABREPEAT_MAPPING = 'ABREPEATMapping',
   FADE_INTERVAL = 'fadeInterval',
+  COLORTHEME = 'ColorTheme',
 }
 
 export enum SEARCH_OPTIONS {

@@ -3,7 +3,7 @@ import TrackPlayer, {
   State,
   RepeatMode,
 } from 'react-native-track-player';
-import { DeviceEventEmitter } from 'react-native';
+import { DeviceEventEmitter, Platform } from 'react-native';
 
 import { resolveUrl, NULL_TRACK, parseSongR128gain } from '../objects/Song';
 import { initBiliHeartbeat } from '../utils/Bilibili/BiliOperate';
@@ -11,7 +11,10 @@ import type { NoxStorage } from '../types/storage';
 import { saveLastPlayDuration } from '../utils/ChromeStorage';
 import logger from '../utils/Logger';
 import NoxCache from '../utils/Cache';
-import noxPlayingList, { getNextSong } from '../stores/playingList';
+import noxPlayingList, {
+  getNextSong,
+  cycleThroughPlaymode,
+} from '../stores/playingList';
 import { NoxRepeatMode } from '../enums/RepeatMode';
 import playerSettingStore from '@stores/playerSettingStore';
 import appStore, {
@@ -76,7 +79,14 @@ export async function PlaybackService() {
 
   TrackPlayer.addEventListener(Event.RemoteJumpBackward, async event => {
     console.log('Event.RemoteJumpBackward', event);
-    TrackPlayer.seekBy(-event.interval);
+    if (Platform.OS === 'android') {
+      const newRNTPOptions = {
+        ...getAppStoreState().RNTPOptions,
+        rewindIcon: cycleThroughPlaymode(),
+      };
+      TrackPlayer.updateOptions(newRNTPOptions);
+      setState({ RNTPOptions: newRNTPOptions });
+    }
   });
 
   TrackPlayer.addEventListener(Event.RemoteSeek, event => {
