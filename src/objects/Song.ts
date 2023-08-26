@@ -21,6 +21,7 @@ interface SongProps {
   singer: string;
   singerId: string | number;
   cover: string;
+  highresCover?: string;
   lyric?: string;
   lyricOffset?: number;
   page?: number;

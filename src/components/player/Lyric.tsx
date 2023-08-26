@@ -193,6 +193,7 @@ export const LyricView = ({
     <View style={styles.container}>
       <TouchableWithoutFeedback onPress={onLyricPress}>
         <Lyric
+          style={{ marginTop: 30, height: 500 }}
           lrc={lrc}
           currentTime={(position + currentTimeOffset) * 1000}
           lineHeight={32}

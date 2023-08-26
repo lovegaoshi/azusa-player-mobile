@@ -82,7 +82,7 @@ const PlaylistList = () => {
   const playlistRef = useRef<FlashList<NoxMedia.Song> | null>(null);
   const netInfo = useNetInfo();
   // TODO: slow?
-  const [cachedSongs, setCachedSongs] = useState([]);
+  const [cachedSongs, setCachedSongs] = useState<string[]>([]);
   const togglePlaylistInfoUpdate = useNoxSetting(
     state => state.togglePlaylistInfoUpdate
   );
@@ -296,8 +296,8 @@ const PlaylistList = () => {
     const currentIndex =
       toIndex < 0
         ? currentPlaylist.songList.findIndex(
-          song => song.id === currentPlayingId
-        )
+            song => song.id === currentPlayingId
+          )
         : toIndex;
     if (currentIndex > -1) {
       playlistRef.current?.scrollToIndex({
@@ -429,7 +429,7 @@ const PlaylistList = () => {
             <SongBackground
               song={item}
               current={
-                playerSetting.updateLoadedTrack && item.id === currentPlayingId
+                playerSetting.trackCoverArtCard && item.id === currentPlayingId
               }
             >
               <SongInfo
