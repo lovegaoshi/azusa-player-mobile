@@ -34,6 +34,7 @@ interface AppStore {
   fadeIntervalMs: number;
   fadeIntervalSec: number;
   RNTPOptions?: UpdateOptions;
+  setRNTPOptions: (val: UpdateOptions) => void;
 }
 
 const appStore = createStore<AppStore>((set, get) => ({
@@ -70,6 +71,9 @@ const appStore = createStore<AppStore>((set, get) => ({
   },
   fadeIntervalMs: 500,
   fadeIntervalSec: 0.5,
+  setRNTPOptions: (val: UpdateOptions) => {
+    set({ RNTPOptions: val });
+  },
 }));
 
 export const initialize = async (val: NoxStorage.PlayerStorageObject) => {

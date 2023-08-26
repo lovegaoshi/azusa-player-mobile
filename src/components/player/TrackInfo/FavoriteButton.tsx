@@ -1,10 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import { IconButton } from 'react-native-paper';
-import { Track } from 'react-native-track-player';
+import TrackPlayer, {
+  Event,
+  Track,
+  useTrackPlayerEvents,
+} from 'react-native-track-player';
+import { useStore } from 'zustand';
 
 import { useNoxSetting } from '@hooks/useSetting';
 import { updatePlaylistSongs } from '@objects/Playlist';
 import LottieButtonAnimated from '@components/buttons/LottieButtonAnimated';
+import appStore from '@stores/appStore';
+import { Platform } from 'react-native';
+import logger from '@utils/Logger';
+
+const getAppStoreState = appStore.getState;
 
 interface Props {
   track?: Track;
@@ -17,25 +27,43 @@ export default ({ track }: Props) => {
   const [liked, setLiked] = useState(
     favoritePlaylist.songList.filter(val => val.id === song?.id).length > 0
   );
+  const setRNTPOptions = useStore(appStore, state => state.setRNTPOptions);
 
   const onClick = () => {
     if (!song) return;
     if (liked) {
-      setLiked(false);
       setFavoritePlaylist(updatePlaylistSongs(favoritePlaylist, [], [song]));
     } else {
-      setLiked(true);
       setFavoritePlaylist(updatePlaylistSongs(favoritePlaylist, [song], []));
+    }
+    setLiked(!liked);
+    setHeart(!liked);
+  };
+
+  const setHeart = (heart = false) => {
+    if (Platform.OS === 'android') {
+      const newRNTPOptions = {
+        ...getAppStoreState().RNTPOptions,
+        forwardIcon: heart
+          ? require('@assets/icons/heart.png')
+          : require('@assets/icons/heart-outline.png'),
+      };
+      TrackPlayer.updateOptions(newRNTPOptions);
+      setRNTPOptions(newRNTPOptions);
     }
   };
 
-  useEffect(
-    () =>
-      setLiked(
-        favoritePlaylist.songList.filter(val => val.id === song?.id).length > 0
-      ),
-    [track]
-  );
+  useTrackPlayerEvents([Event.RemoteJumpForward], () => {
+    logger.log('[Event.RemoteJumpForward] button pressed.');
+    onClick();
+  });
+
+  useEffect(() => {
+    const liked =
+      favoritePlaylist.songList.filter(val => val.id === song?.id).length > 0;
+    setHeart(liked);
+    setLiked(liked);
+  }, [track]);
 
   return (
     <LottieButtonAnimated

@@ -194,7 +194,7 @@ export default (props: any) => {
             confirmOnDelete={confirmOnDelete}
             leadColor={
               currentPlayingList.id === item?.id
-                ? playerStyle.customColors.playlistDrawerBackgroundColor
+                ? playerStyle.colors.primary //customColors.playlistDrawerBackgroundColor
                 : undefined
             }
           />
