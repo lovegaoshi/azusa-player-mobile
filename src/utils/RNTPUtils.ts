@@ -1,4 +1,4 @@
-import { Animated, Platform } from 'react-native';
+import { Animated, Platform, AppState } from 'react-native';
 import TrackPlayer, {
   AppKilledPlaybackBehavior,
   Capability,
@@ -30,12 +30,15 @@ export const animatedVolumeChange = ({
   callback = () => undefined,
 }: animatedVolumeChangeProps) => {
   logger.debug(
-    `[FADING] animating volume from ${init} to ${val} in ${duration}`
+    `[FADING] animating volume from ${init} to ${val} in ${duration}; ${AppState.currentState}`
   );
+  if (AppState.currentState !== 'active') {
+    // need to figure out a way to run Animated.timing in background. probably needs our own module
+    duration = 0;
+  }
   val = Math.min(val, 1);
   if (duration === 0) {
     animatedVolume.setValue(val);
-    TrackPlayer.setVolume(val);
     callback();
     return;
   }
