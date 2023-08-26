@@ -1,5 +1,6 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { strToU8, strFromU8, compressSync, decompressSync } from 'fflate';
+import { strToU8, compressSync } from 'fflate';
 import { v4 as uuidv4 } from 'uuid';
 import { Appearance, ColorSchemeName } from 'react-native';
 
@@ -9,7 +10,6 @@ import { PLAYLIST_ENUMS } from '../enums/Playlist';
 import AzusaTheme from '../components/styles/AzusaTheme';
 import { chunkArray as chunkArrayRaw } from '../utils/Utils';
 import type { NoxStorage } from '../types/storage';
-import { logger } from './Logger';
 import {
   STORAGE_KEYS,
   appID,
@@ -87,6 +87,18 @@ const getMapping = async (key: STORAGE_KEYS) => {
     acc[val[0]] = val[1];
     return acc;
   }, {} as NoxStorage.R128Dict);
+};
+
+export const getRegExtractMapping = async () => {
+  return (
+    ((await getItem(
+      STORAGE_KEYS.REGEXTRACT_MAPPING
+    )) as NoxRegExt.JSONExtractor[]) || []
+  );
+};
+
+export const saveRegextractMapping = async (val: NoxRegExt.JSONExtractor[]) => {
+  return await saveItem(STORAGE_KEYS.REGEXTRACT_MAPPING, val);
 };
 
 export const getR128GainMapping = async () => {

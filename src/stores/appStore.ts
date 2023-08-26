@@ -8,8 +8,11 @@ import {
   getABMapping,
   saveABMapping,
   getFadeInterval,
+  getRegExtractMapping,
 } from '@utils/ChromeStorage';
 import type { NoxStorage } from '../types/storage';
+import rejson from '@utils/rejson.json';
+import { LoadJSONRegExtractors } from '@utils/re';
 
 interface AppStore {
   pipMode: boolean;
@@ -35,6 +38,7 @@ interface AppStore {
   fadeIntervalSec: number;
   RNTPOptions?: UpdateOptions;
   setRNTPOptions: (val: UpdateOptions) => void;
+  reExtractSongName: (name: string, uploader: string | number) => string;
 }
 
 const appStore = createStore<AppStore>((set, get) => ({
@@ -74,16 +78,30 @@ const appStore = createStore<AppStore>((set, get) => ({
   setRNTPOptions: (val: UpdateOptions) => {
     set({ RNTPOptions: val });
   },
+  reExtractSongName: (val: string) => val,
 }));
 
-export const initialize = async (val: NoxStorage.PlayerStorageObject) => {
+export const initialize = async () => {
   const fadeInterval = await getFadeInterval();
+  const savedRegExt = await getRegExtractMapping();
   appStore.setState({
     r128gain: await getR128GainMapping(),
     ABRepeat: await getABMapping(),
     fadeIntervalMs: fadeInterval,
     fadeIntervalSec: fadeInterval / 1000,
+    reExtractSongName: LoadJSONRegExtractors(
+      savedRegExt.concat(rejson as NoxRegExt.JSONExtractor[])
+    ),
   });
+};
+
+export const reExtractSongName = appStore.getState().reExtractSongName;
+
+export const parseSongName = (song: NoxMedia.Song): NoxMedia.Song => {
+  return {
+    ...song,
+    parsedName: reExtractSongName(song.name, song.singerId),
+  };
 };
 
 export const saveR128Gain = async (val: NoxStorage.R128Dict) => {

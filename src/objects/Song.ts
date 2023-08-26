@@ -1,12 +1,12 @@
 import { v4 as uuidv4 } from 'uuid';
 
 import { fetchPlayUrlPromise } from '../utils/mediafetch/resolveURL';
-import { reExtractSongName, extractParenthesis } from '../utils/re';
+import { extractParenthesis } from '../utils/re';
 import { customReqHeader, DEFAULT_UA } from '../utils/BiliFetch';
 import { logger } from '../utils/Logger';
 import NoxCache from '../utils/Cache';
 import playerSettingStore from '@stores/playerSettingStore';
-import { addR128Gain, getR128Gain } from '@stores/appStore';
+import { addR128Gain, getR128Gain, reExtractSongName } from '@stores/appStore';
 import { r128gain, setR128Gain } from '@utils/ffmpeg';
 
 export const DEFAULT_NULL_URL = 'NULL';

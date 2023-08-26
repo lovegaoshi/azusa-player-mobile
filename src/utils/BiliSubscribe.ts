@@ -1,5 +1,5 @@
 import { searchBiliURLs } from './BiliSearch';
-import { parseSongName } from './re';
+import { parseSongName } from '@stores/appStore';
 
 interface Props {
   listObj: NoxMedia.Playlist;

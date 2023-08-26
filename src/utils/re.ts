@@ -1,34 +1,23 @@
-import rejson from './rejson.json';
+import { REOPERATIONTYPE } from '@enums/Utils';
 
-enum OPERATIONTYPE {
-  extractWith = 1,
-  extractParenthesis = 2,
-}
-
-type Operation = [OPERATIONTYPE, string[]?];
-export interface JSONExtractor {
-  uploaders: string[];
-  operations: Operation[];
-}
-
-const operation2RegExtractor = (operation: Operation) => {
+const operation2RegExtractor = (operation: NoxRegExt.Operation) => {
   const regExps = operation[1]?.map(val => new RegExp(val));
   switch (operation[0]) {
-    case OPERATIONTYPE.extractWith:
+    case REOPERATIONTYPE.extractWith:
       return (val: string) => extractWith(val, regExps);
-    case OPERATIONTYPE.extractParenthesis:
+    case REOPERATIONTYPE.extractParenthesis:
       return (val: string) => extractParenthesis(val);
     default:
       return (val: string) => val;
   }
 };
 
-const operations2RegExtractor = (operations: Operation[]) => {
+const operations2RegExtractor = (operations: NoxRegExt.Operation[]) => {
   const extractors = operations.map(operation2RegExtractor);
   return (val: string) => extractors.reduce((acc, curr) => curr(acc), val);
 };
 
-export const LoadJSONRegExtractors = (json: JSONExtractor[]) => {
+export const LoadJSONRegExtractors = (json: NoxRegExt.JSONExtractor[]) => {
   const extractors: [string[], (val: string) => string][] = json.map(val => [
     val.uploaders,
     operations2RegExtractor(val.operations),
@@ -90,21 +79,9 @@ export const extractWith = (
   return filename;
 };
 
-export const reExtractSongName = LoadJSONRegExtractors(
-  rejson as JSONExtractor[]
-);
-
 export const getName = (song: NoxMedia.Song, parsed = false) => {
   if (parsed) {
     return song.parsedName ? song.parsedName : song.name;
   }
   return song.name;
-};
-
-export const parseSongName = (song: NoxMedia.Song): NoxMedia.Song => {
-  return {
-    ...song,
-    parsedName: reExtractSongName(song.name, song.singerId),
-  };
-  song.parsedName = reExtractSongName(song.name, song.singerId);
 };

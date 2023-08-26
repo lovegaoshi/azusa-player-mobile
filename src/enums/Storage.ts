@@ -22,6 +22,7 @@ export enum STORAGE_KEYS {
   ABREPEAT_MAPPING = 'ABREPEATMapping',
   FADE_INTERVAL = 'fadeInterval',
   COLORTHEME = 'ColorTheme',
+  REGEXTRACT_MAPPING = 'RegexExtract',
 }
 
 export enum SEARCH_OPTIONS {
