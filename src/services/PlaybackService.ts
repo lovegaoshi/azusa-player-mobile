@@ -22,7 +22,6 @@ import appStore, {
   setCurrentPlaying,
   addDownloadPromise,
 } from '@stores/appStore';
-import { DEFAULT_SETTING } from '@enums/Storage';
 import { animatedVolumeChange } from '@utils/RNTPUtils';
 
 const { getState } = noxPlayingList;
@@ -74,7 +73,7 @@ export async function PlaybackService() {
 
   TrackPlayer.addEventListener(Event.RemoteJumpForward, async event => {
     console.log('Event.RemoteJumpForward', event);
-    TrackPlayer.seekBy(event.interval);
+    // TrackPlayer.seekBy(event.interval);
   });
 
   TrackPlayer.addEventListener(Event.RemoteJumpBackward, async event => {

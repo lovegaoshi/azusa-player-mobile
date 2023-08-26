@@ -74,7 +74,7 @@
     "react-native-svg": "^13.9.0",
     "react-native-svga-player": "git+https://lovegaoshi@github.com/lovegaoshi/react-native-svga-player.git",
     "react-native-tab-view": "^3.5.1",
-    "react-native-track-player": "git+https://lovegaoshi@github.com/lovegaoshi/react-native-track-player.git#dev-android-auto",
+    "react-native-track-player": "git+https://lovegaoshi@github.com/lovegaoshi/react-native-track-player.git#APM",
     "react-native-url-polyfill": "^1.3.0",
     "react-native-vector-icons": "^9.2.0",
     "react-native-video": "^5.2.1",

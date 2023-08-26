@@ -86,9 +86,11 @@ export const initRNTPOptions = () => {
   if (Platform.OS === 'android') {
     options.capabilities = options.capabilities!.concat([
       Capability.JumpBackward,
+      Capability.JumpForward,
     ]);
     options.compactCapabilities = options.compactCapabilities!.concat([
       Capability.JumpBackward,
+      Capability.JumpForward,
     ]);
     options.forwardJumpInterval = 1;
     options.backwardJumpInterval = 1;
