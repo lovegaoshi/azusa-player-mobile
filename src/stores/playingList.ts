@@ -84,8 +84,9 @@ export const getPlaybackModeNotifIcon = (state?: string) => {
  */
 export const initializePlaybackMode = (state: string) => {
   const [nextIcon, TPRepeatMode] = getPlaybackModeNotifIcon(state);
-  TrackPlayer.setRepeatMode(TPRepeatMode);
+  playlistStore.setState({ playmode: state });
   savePlayMode(state);
+  TrackPlayer.setRepeatMode(TPRepeatMode).catch(e => 'many error wow');
   return nextIcon;
 };
 
@@ -111,7 +112,6 @@ export const cycleThroughPlaymode = () => {
       break;
   }
   if (nextState) {
-    playlistStore.setState({ playmode: nextState });
     return initializePlaybackMode(nextState);
   }
   return null;
