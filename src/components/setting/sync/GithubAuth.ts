@@ -2,7 +2,7 @@ import { authorize } from 'react-native-app-auth';
 import { fromByteArray, toByteArray } from 'base64-js';
 
 // eslint-disable-next-line import/no-unresolved
-import { GITEE_KEY, GITEE_SECRET } from '@env';
+import { GITHUB_KEY, GITHUB_SECRET } from '@env';
 import bfetch from '@utils/BiliFetch';
 import { logger } from '@utils/Logger';
 import GenericSyncButton, { GenericProps } from './GenericSyncButton';
@@ -12,13 +12,15 @@ const APM_FILE_NAME = 'APM.noxbackup';
 
 const config = {
   redirectUrl: 'com.noxplayer://oauthredirect',
-  clientId: GITEE_KEY,
-  clientSecret: GITEE_SECRET,
-  scopes: ['projects', 'user_info'],
+  clientId: GITHUB_KEY,
+  clientSecret: GITHUB_SECRET,
+  scopes: ['identity'],
   additionalHeaders: { Accept: 'application/json' },
   serviceConfiguration: {
-    authorizationEndpoint: 'https://gitee.com/oauth/authorize',
-    tokenEndpoint: 'https://gitee.com/oauth/token',
+    authorizationEndpoint: 'https://github.com/login/oauth/authorize',
+    tokenEndpoint: 'https://github.com/login/oauth/access_token',
+    revocationEndpoint:
+      'https://github.com/settings/connections/applications/<client-id>',
   },
 };
 
@@ -74,14 +76,14 @@ export const syncToGitee = async ({
   }
   logger.debug(`[gitee] start syncing ${username}`);
   await createAPMRepo();
-  logger.debug('[gitee] created repo');
+  logger.debug(`[gitee] created repo`);
   const res = await bfetch(
     `https://gitee.com/api/v5/repos/${username}/${APM_REPO_NAME}/contents/%2F?access_token=${token}`
   );
   const data = await res.json();
   logger.debug(`[gitee] file fetched: ${data.sha}`);
   if (res.status === 200) {
-    logger.debug('[gitee] updating backup file');
+    logger.debug(`[gitee] updating backup file`);
     for (const repofile of data) {
       if (repofile.name === APM_FILE_NAME) {
         // do something
@@ -103,7 +105,7 @@ export const syncToGitee = async ({
       }
     }
   }
-  logger.debug('[gitee] creating backup file');
+  logger.debug(`[gitee] creating backup file`);
   // file doesnt exist. create instaed.
   return await bfetch(
     `https://gitee.com/api/v5/repos/${username}/${APM_REPO_NAME}/contents/${APM_FILE_NAME}`,

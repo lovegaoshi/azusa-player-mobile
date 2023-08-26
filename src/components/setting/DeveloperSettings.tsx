@@ -6,13 +6,15 @@ import { useTranslation } from 'react-i18next';
 import { APPSTORE } from '@env';
 import { useStore } from 'zustand';
 import * as Clipboard from 'expo-clipboard';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { DrawerNavigationProp } from '@react-navigation/drawer';
+import { ParamListBase } from '@react-navigation/native';
 
 import { useNoxSetting } from '@hooks/useSetting';
 import { logStore, LOGLEVEL, getLog, resetLog } from '@utils/Logger';
 import GenericSelectDialog from '../dialogs/GenericSelectDialog';
 import { SettingListItem, RenderSetting } from './useRenderSetting';
 import useVersionCheck from '@hooks/useVersionCheck';
-import useAlert from '../dialogs/useAlert';
 import {
   SelectSettingEntry,
   SettingEntry,
@@ -22,6 +24,8 @@ import NoxCache from '@utils/Cache';
 import useCleanCache from '@hooks/useCleanCache';
 import appStore from '@stores/appStore';
 import { saveFadeInterval } from '@utils/ChromeStorage';
+import DummySettings from './DummySettings';
+import GroupView from '../background/GroupView';
 
 enum ICONS {
   setlog = 'console',
@@ -31,7 +35,15 @@ enum ICONS {
   clearcache = 'delete-sweep',
   clearOrphanCache = 'delete-empty',
   fade = 'shuffle-variant',
+  plugins = 'puzzle',
 }
+
+enum VIEW {
+  HOME = 'Settings',
+  PLUGINS = 'Plugins',
+}
+
+const Stack = createNativeStackNavigator();
 
 const FadeOptions = [0, 500, 1000, 1500];
 
@@ -49,20 +61,25 @@ const developerSettings: { [key: string]: SettingEntry } = {
     settingName: 'prefetchTrack',
     settingCategory: 'GeneralSettings',
   },
+  /**
   chatGPTSongName: {
     settingName: 'chatGPTResolveSongName',
     settingCategory: 'GeneralSettings',
   },
+   */
 };
 
 const { getState, setState } = logStore;
 
-export default () => {
+interface Props {
+  navigation: DrawerNavigationProp<ParamListBase>;
+}
+const Home = ({ navigation }: Props) => {
   const playerSetting = useNoxSetting(state => state.playerSetting);
   const setPlayerSetting = useNoxSetting(state => state.setPlayerSetting);
   const { t } = useTranslation();
-  const { OneWayAlert } = useAlert();
   const [currentSelectOption, setCurrentSelectOption] = React.useState<
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     SelectSettingEntry<any>
   >(dummySelectSettingEntry);
   const [selectVisible, setSelectVisible] = React.useState(false);
@@ -161,9 +178,26 @@ export default () => {
     >
       <ScrollView>
         <List.Section>
-          <RenderSetting item={developerSettings.noInterruption} />
-          <RenderSetting item={developerSettings.prefetchTrack} />
-          <RenderSetting item={developerSettings.chatGPTSongName} />
+          <GroupView>
+            <View>
+              <RenderSetting item={developerSettings.noInterruption} />
+              <RenderSetting item={developerSettings.prefetchTrack} />
+            </View>
+          </GroupView>
+          <SettingListItem
+            icon={ICONS.plugins}
+            settingName="PluginsSetting"
+            onPress={() => navigation.navigate(VIEW.PLUGINS)}
+            settingCategory="Settings"
+          />
+          {!APPSTORE && (
+            <SettingListItem
+              icon={ICONS.update}
+              settingName="VersionCheck"
+              onPress={() => checkVersion(false)}
+              settingCategory="DeveloperSettings"
+            />
+          )}
           <SettingListItem
             icon={ICONS.showlog}
             settingName="Log"
@@ -186,15 +220,6 @@ export default () => {
             settingCategory="DeveloperSettings"
             modifyDescription={val => `${val}: ${fadeIntervalMs}ms`}
           />
-          {!APPSTORE && (
-            <SettingListItem
-              icon={ICONS.update}
-              settingName="VersionCheck"
-              onPress={() => checkVersion(false)}
-              settingCategory="DeveloperSettings"
-            />
-          )}
-
           <SettingListItem
             icon={ICONS.cache}
             settingName="CacheSize"
@@ -242,3 +267,22 @@ export default () => {
     </View>
   );
 };
+
+const DevSettingsView = () => {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen
+        name={VIEW.HOME}
+        component={Home}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name={VIEW.PLUGINS}
+        component={DummySettings}
+        options={{ headerShown: false }}
+      />
+    </Stack.Navigator>
+  );
+};
+
+export default DevSettingsView;

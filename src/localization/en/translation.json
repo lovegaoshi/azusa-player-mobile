@@ -135,6 +135,8 @@
   "Settings": {
     "GeneralSettingName": "General Settings",
     "GeneralSettingDesc": "General APM settings",
+    "PluginsSettingName": "Plugins",
+    "PluginsSettingDesc": "DEV: DO NOT TOUCH",
     "AppearanceSettingName": "Appearance",
     "AppearanceSettingDesc": "Change APM appearances",
     "SkinSettingName": "Skins",
