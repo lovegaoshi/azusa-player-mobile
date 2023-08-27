@@ -1,7 +1,4 @@
-import {
-  createNativeStackNavigator,
-  NativeStackNavigationProp,
-} from '@react-navigation/native-stack';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { View, StyleSheet } from 'react-native';
 import { ParamListBase, useNavigation } from '@react-navigation/native';
 import { List, MD3Colors, Text, IconButton } from 'react-native-paper';
@@ -19,6 +16,7 @@ import LanguageSettings from './LanguageSettings';
 import AboutSettings from './AboutSettings';
 import SplashSettings from './SplashSettings';
 import Bilibili from '../login/Bilibili';
+import DummySettings from './DummySettings';
 
 enum ICONS {
   HOME = 'cog',
@@ -51,29 +49,6 @@ const Stack = createNativeStackNavigator();
 interface Props {
   navigation: DrawerNavigationProp<ParamListBase>;
 }
-
-export const DummySettings = () => {
-  const { t } = useTranslation();
-  const playerStyle = useNoxSetting(state => state.playerStyle);
-
-  return (
-    <View
-      style={[
-        styles.dummySettingsContainer,
-        { backgroundColor: playerStyle.customColors.maskedBackgroundColor },
-      ]}
-    >
-      <Text
-        style={[
-          styles.dummySettingsText,
-          { color: playerStyle.colors.primary },
-        ]}
-      >
-        {t('Settings.FeatureNotImplemented')}
-      </Text>
-    </View>
-  );
-};
 
 export default ({ navigation }: Props) => {
   const { t } = useTranslation();
@@ -193,13 +168,6 @@ export default ({ navigation }: Props) => {
 };
 
 const styles = StyleSheet.create({
-  dummySettingsContainer: {
-    flex: 1,
-  },
-  dummySettingsText: {
-    fontSize: 60,
-    paddingLeft: 20,
-  },
   homeSettingsContainer: {
     flex: 1,
   },

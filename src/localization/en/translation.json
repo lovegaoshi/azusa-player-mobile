@@ -135,6 +135,8 @@
   "Settings": {
     "GeneralSettingName": "General Settings",
     "GeneralSettingDesc": "General APM settings",
+    "PluginsSettingName": "Plugins",
+    "PluginsSettingDesc": "Plugins may modify app behavior. Continue with discretion.",
     "AppearanceSettingName": "Appearance",
     "AppearanceSettingDesc": "Change APM appearances",
     "SkinSettingName": "Skins",
@@ -153,6 +155,23 @@
     "LoginName": "Bilibili Login",
     "LoginDesc": "login to bilibili",
     "FeatureNotImplemented": "Feature not implemented"
+  },
+  "PluginSettings": {
+    "UpdatingRegExpFromGithub": "Update RegExp rules from Github...",
+    "UpdatedRegExpFromGithub": "Updated RegExp rules from GitHub!",
+    "UpdateFailRegExpFromGithub": "Updated RegExp rules from GitHub FAILED.",
+    "UpdatingR128GainFromGithub": "Update R128Gain rules from Github...",
+    "UpdatedR128GainFromGithub": "Updated R128Gain rules from GitHub!",
+    "UpdateFailR128GainFromGithub": "Updated R128Gain rules from GitHub FAILED.",
+    "UpdatingABRepeatFromGithub": "Update ABRepeat rules from Github...",
+    "UpdatedABRepeatFromGithub": "Updated ABRepeat rules from GitHub!",
+    "UpdateFailABRepeatFromGithub": "Updated ABRepeat rules from GitHub FAILED.",
+    "RegExpName": "Update RegExp",
+    "RegExpDesc": "Update RegExp rules from GitHub",
+    "R128GainName": "Update R18Gain",
+    "R128GainDesc": "Update R18Gain rules from GitHub",
+    "ABRepeatName": "Update ABRepeat",
+    "ABRepeatDesc": "Update ABRepeat rules from GitHub"
   },
   "AppearanceSettings": {
     "ColorSchemeName": "Select Color Scheme",

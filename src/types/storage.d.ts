@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { ColorSchemeName } from 'react-native';
 
 import { EXPORT_OPTIONS } from '../enums/Sync';

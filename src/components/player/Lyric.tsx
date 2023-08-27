@@ -14,18 +14,25 @@ import { Track, useProgress } from 'react-native-track-player';
 import { IconButton, TextInput } from 'react-native-paper';
 
 import { searchLyricOptions, searchLyric } from '@utils/Data';
-import { reExtractSongName } from '@utils/re';
+import { reExtractSongName } from '@stores/appStore';
 import { useNoxSetting } from '@hooks/useSetting';
 import logger from '@utils/Logger';
 
 const LYRIC_OFFSET_INTERVAL = 0.5;
 
 interface ModalContainerProps {
-  children: any;
+  children: JSX.Element[];
   visible: boolean;
   onRequestClose: () => void;
 }
 
+interface LyricLineProps {
+  lrcLine: { millisecond: number; content: string };
+  index: number;
+  active: boolean;
+}
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const useHasLrcFromLocal = (
   track: Track,
   lyricMapping: Map<string, NoxMedia.LyricDetail>
@@ -72,7 +79,7 @@ export const LyricView = ({
   height,
   showUI = true,
 }: LyricViewProps) => {
-  const { position, duration } = useProgress();
+  const { position } = useProgress();
   const [lrc, setLrc] = useState('正在加载歌词...');
   const [lrcOptions, setLrcOptions] = useState<any[]>([]);
   const [lrcOption, setLrcOption] = useState<any>();
@@ -174,7 +181,7 @@ export const LyricView = ({
   };
 
   const lineRenderer = useCallback(
-    ({ lrcLine: { millisecond, content }, index, active }: any) => (
+    ({ lrcLine: { millisecond, content }, index, active }: LyricLineProps) => (
       <Text
         style={{
           textAlign: 'center',

@@ -8,4 +8,6 @@ declare module '@env' {
   export const APPSTORE: boolean;
   export const GITEE_SECRET: string;
   export const GITEE_KEY: string;
+  export const GITHUB_SECRET: string;
+  export const GITHUB_KEY: string;
 }

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable prefer-const */
 import { create } from 'zustand';
 
@@ -277,7 +278,7 @@ export const useNoxSetting = create<NoxSetting>((set, get) => ({
   initPlayer: async (val: NoxStorage.PlayerStorageObject) => {
     const playingList =
       val.playlists[val.lastPlaylistId[0]] || dummyPlaylistList;
-    await appStoreInitialize(val);
+    await appStoreInitialize();
     set({ currentPlayingId: val.lastPlaylistId[1] });
     set({ currentABRepeat: getABRepeatRaw(val.lastPlaylistId[1]) });
     set({ currentPlayingList: playingList });

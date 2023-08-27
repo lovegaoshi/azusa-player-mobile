@@ -87,8 +87,8 @@
     "zustand": "^4.3.7"
   },
   "devDependencies": {
-    "@babel/core": "^7.20.0",
-    "@babel/preset-env": "^7.20.0",
+    "@babel/core": "^7.22.11",
+    "@babel/preset-env": "^7.22.10",
     "@babel/runtime": "^7.20.0",
     "@react-native-community/eslint-config": "^3.2.0",
     "@tsconfig/react-native": "^2.0.2",
@@ -106,7 +106,7 @@
     "@typescript-eslint/parser": "^5.36.0",
     "@welldone-software/why-did-you-render": "^7.0.1",
     "argparse": "^2.0.1",
-    "babel-jest": "^29.2.1",
+    "babel-jest": "^29.6.4",
     "babel-plugin-module-resolver": "^4.0.0",
     "cpx": "^1.5.0",
     "eslint": "^8.19.0",
