@@ -26,6 +26,7 @@ import appStore from '@stores/appStore';
 import { saveFadeInterval } from '@utils/ChromeStorage';
 import DummySettings from './DummySettings';
 import GroupView from '../background/GroupView';
+import PluginSettings from './plugins/View';
 
 enum ICONS {
   setlog = 'console',
@@ -278,7 +279,7 @@ const DevSettingsView = () => {
       />
       <Stack.Screen
         name={VIEW.PLUGINS}
-        component={DummySettings}
+        component={PluginSettings}
         options={{ headerShown: false }}
       />
     </Stack.Navigator>

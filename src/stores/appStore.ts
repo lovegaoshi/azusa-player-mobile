@@ -90,7 +90,9 @@ export const initialize = async () => {
     fadeIntervalMs: fadeInterval,
     fadeIntervalSec: fadeInterval / 1000,
     reExtractSongName: LoadJSONRegExtractors(
-      savedRegExt.concat(rejson as NoxRegExt.JSONExtractor[])
+      savedRegExt.length > 0
+        ? savedRegExt
+        : (rejson as NoxRegExt.JSONExtractor[])
     ),
   });
 };
