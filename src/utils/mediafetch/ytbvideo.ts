@@ -39,7 +39,7 @@ const fetchYTBPlayUrlPromise = async (sid: string) => {
 };
 
 export const fetchAudioInfoRaw = async (sid: string) => {
-  logger.info(`calling fetch YTB info of sid`);
+  logger.info(`calling fetch YTB info of sid ${sid}`);
   const ytdlInfo = await ytdl.getInfo(`https://www.youtube.com/watch?v=${sid}`);
   try {
     /*
@@ -217,7 +217,7 @@ export const suggest = async (song: NoxMedia.Song) => {
   });
 };
 
-const regexFetch = async ({ reExtracted, useBiliTag }: regexFetchProps) => {
+const regexFetch = async ({ reExtracted }: regexFetchProps) => {
   const audioInfo = await fetchAudioInfo(reExtracted[1]!);
   return audioInfo || [];
 };
