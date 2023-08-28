@@ -1,12 +1,13 @@
 import { View, StyleSheet } from 'react-native';
 import { useTranslation } from 'react-i18next';
+import Snackbar from 'react-native-snackbar';
 
 import { useNoxSetting } from '@hooks/useSetting';
 import { SettingListItem } from '../useRenderSetting';
 import { saveRegextractMapping } from '@utils/ChromeStorage';
-import Snackbar from 'react-native-snackbar';
-
+import { downloadR128GainDB } from './r128gain/Sync';
 import logger from '@utils/Logger';
+import { snackBarWrapper } from '@utils/Utils';
 
 interface SnackbarMsg {
   updating: string;
@@ -57,6 +58,14 @@ const PluginSettings = () => {
         icon={'regex'}
         settingName="RegExp"
         onPress={() => updateFromGithub(snarbarMsg('RegExp'))}
+        settingCategory="PluginSettings"
+      />
+      <SettingListItem
+        icon={'cloud-sync'}
+        settingName="R128Gain"
+        onPress={() =>
+          snackBarWrapper(snarbarMsg('R128Gain'), downloadR128GainDB)
+        }
         settingCategory="PluginSettings"
       />
     </View>
