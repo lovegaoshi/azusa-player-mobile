@@ -10,4 +10,5 @@ declare module '@env' {
   export const GITEE_KEY: string;
   export const GITHUB_SECRET: string;
   export const GITHUB_KEY: string;
+  export const RGAIN_URL: string;
 }
