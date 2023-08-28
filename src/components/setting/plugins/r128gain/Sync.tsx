@@ -1,3 +1,5 @@
+import axios from 'axios';
+import { strFromU8, decompressSync } from 'fflate';
 // eslint-disable-next-line import/no-unresolved
 import { RGAIN_URL } from '@env';
 
@@ -16,11 +18,35 @@ interface R128GainDB {
   abrepeat?: string;
 }
 
-export const downloadR128GainDB = async () => {
+export const downloadGZippedR128GainDB = async () => {
+  const res = await axios.get(
+    'https://raw.githubusercontent.com/lovegaoshi/APM-r128gain/main/rules.gzip',
+    {
+      responseType: 'arraybuffer',
+      maxContentLength: Infinity,
+      maxBodyLength: Infinity,
+    }
+  );
+  if (res.status === 200) {
+    const content = new Uint8Array(await res.data);
+    return JSON.parse(strFromU8(decompressSync(content))) as R128GainDB[];
+  }
+  throw new Error('rules.gzip is not resolved as a Uint8Array:(');
+};
+
+export const downloadUncompressedR128GainDB = async () => {
   const res = await fetch(
     'https://raw.githubusercontent.com/lovegaoshi/APM-r128gain/main/rules.json'
   );
   const json = (await res.json()) as R128GainDB[];
+  return json;
+};
+
+export const downloadR128GainDB = async () => {
+  /*
+  const json = await downloadUncompressedR128GainDB();
+   */
+  const json = await downloadGZippedR128GainDB();
   const currentR128Gain = await getR128GainMapping();
   const currentABRepeat = await getABMapping();
   const parsedR128Gain = json.reduce((acc, curr) => {
