@@ -20,7 +20,6 @@
     "fix": "gts fix",
     "prepare": "yarn run compile",
     "pretest": "yarn run compile",
-    "posttest": "yarn run lint",
     "prettify": "prettier --write ./src"
   },
   "dependencies": {
