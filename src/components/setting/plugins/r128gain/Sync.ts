@@ -29,7 +29,9 @@ export const downloadGZippedR128GainDB = async () => {
   );
   if (res.status === 200) {
     const content = new Uint8Array(await res.data);
-    return JSON.parse(strFromU8(decompressSync(content))) as R128GainDB[];
+    return JSON.parse(
+      strFromU8(decompressSync(decompressSync(content)))
+    ) as R128GainDB[];
   }
   throw new Error('rules.gzip is not resolved as a Uint8Array:(');
 };
