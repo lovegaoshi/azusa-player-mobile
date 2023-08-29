@@ -18,6 +18,7 @@ interface R128GainDB {
   abrepeat?: string;
 }
 
+// TODO: marks my stupidity bc github already gzips, you dum
 export const downloadGZippedR128GainDB = async () => {
   const res = await axios.get(
     'https://raw.githubusercontent.com/lovegaoshi/APM-r128gain/main/rules.gzip',
@@ -45,10 +46,9 @@ export const downloadUncompressedR128GainDB = async () => {
 };
 
 export const downloadR128GainDB = async () => {
-  /*
   const json = await downloadUncompressedR128GainDB();
-   */
-  const json = await downloadGZippedR128GainDB();
+
+  // const json = await downloadGZippedR128GainDB();
   const currentR128Gain = await getR128GainMapping();
   const currentABRepeat = await getABMapping();
   const parsedR128Gain = json.reduce((acc, curr) => {
@@ -123,6 +123,7 @@ export const downloadR128GainDB = async () => {
       Accept: 'application/json',
       'Content-Type': 'application/json',
     },
+    // TODO: gzip this
     body: JSON.stringify(uploadR128Dict),
   });
   logger.debug(uploadRes);
