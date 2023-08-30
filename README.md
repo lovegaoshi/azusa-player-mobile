@@ -18,6 +18,10 @@
 <h3 align="center" style="color:purple">Azusa-Player-Mobile / 电梓播放器手机版</h3>
 <h4 align="center" style="color:purple">A 3rd party Bilibili audio player / 一个Bilibili第三方音频播放器</h4>
 
+<div align="center">
+<a href="https://github.com/lovegaoshi/azusa-player-mobile#%E9%A1%B9%E7%9B%AE%E7%AE%80%E4%BB%8B">项目简介</a><a href="https://github.com/lovegaoshi/azusa-player-mobile#"></a>&nbsp;&nbsp;&nbsp;<a href="https://github.com/lovegaoshi/azusa-player-mobile#安装">安装</a>&nbsp;&nbsp;&nbsp;<a href="https://github.com/lovegaoshi/azusa-player-mobile#界面">界面</a>&nbsp;&nbsp;&nbsp;<a href="https://github.com/lovegaoshi/azusa-player-mobile#捐助">捐助</a>   
+</div>
+
 ## 项目简介
 
 - 是真正意义上的手机版《[电梓播放器](https://github.com/kenmingwang/azusa-player/releases)》(?): Azusa-Player！
@@ -45,8 +49,8 @@
 市面上有很多播放器竞品，比如整合大量音乐网站，跨平台的[listen1](https://github.com/listen1/listen1_chrome_extension)、[洛雪音乐](https://github.com/lyswhut/lx-music-mobile)、[musicfree](https://github.com/maotoumao/MusicFree)；动画流畅的[MVVM播放器制作教程](https://github.com/KunMinX/Jetpack-MVVM-Best-Practice)；界面简洁好使的本地播放器[AIMP](https://www.aimp.ru/)；支持b站的也不是没有，为什么要用管人播放器？
 
 - 管人播放器之初为了溜阿梓歌切收藏夹而诞生，自从持久、稳定、每日投分p的第五代阿梓切歌人[HonmaMeiko](https://space.bilibili.com/590096/video?tid=0&keyword=&order=pubdate)接棒后，以及[自动切歌软件](https://www.bilibili.com/video/BV1WK411y7zW/?spm_id_from=333.999.0.0)研发成功可以大批量无人值守切各种没人切的管人歌势，管人播放器开发了对b站视频列表的支持，以及订阅b站链接的功能，专注于解决b站视频分p搜索孱弱，整合视频分p、视频列表、视频合集、收藏夹、空间~b站产品经理脑门被夹了搞这么多一样的玩意儿~等多种视频列表为一个统一的歌单。由于b站音乐区本身流量不足~依托答辩~，大多整合类播放器对于b站的支持很基础，并没有管人播放器类别支持广，没有订阅功能，也不整合b站增加播放量、点赞等操作。
-- 没有播放器支持歌单订阅功能。
-- 没有可以简易给管人痴定制皮肤的播放器。AIMP的皮肤制作我不会，其他播放器要么只能切换黑白和换色，要么可以手动更换背景，要么只有预设皮肤。管人播放器借b站23年开放管人装扮和NFT的契机，提供了简易把b站装扮导入管人播放器的方法。
+- 绝大部分播放器不支持歌单订阅功能。
+- 没有可以简易给管人痴定制皮肤的播放器。AIMP的皮肤制作复杂，其他播放器或只能切换黑白和换色，或只可以手动更换背景，或只有预设皮肤。管人播放器借b站23年开放管人装扮和NFT的契机，提供了简易把b站装扮导入管人播放器的方法，皮肤随便做。
 
 ## 安装
 
@@ -81,7 +85,11 @@ yarn
 cd ios && pod install && cd ..
 ```
 
-IOS编译时请看https://github.com/lovegaoshi/azusa-player-mobile/issues/34  。
+## 捐助
+
+感谢你对中国管人事业的支持。您赞助的每一分钱将用于购买《博德之门3》。
+
+<p align="center"><a href="https://github.com/lovegaoshi/azusa-player-mobile"><img width="200" src="https://github.com/lovegaoshi/azusa-player-mobile/blob/5795492b49048046b36583502f74caa9fdb2badb/docs/docs/usage-tutorial/images/sponsor.jpg"></a></p>
 
 ## Licenses of used dependencies
 
@@ -174,5 +182,4 @@ IOS编译时请看https://github.com/lovegaoshi/azusa-player-mobile/issues/34  �
 [use-debounce](https://github.com/xnimorz/use-debounce): MIT License
 
 [zustand](https://github.com/pmndrs/zustand): MIT License
-
 
