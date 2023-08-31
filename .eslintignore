@@ -2,3 +2,4 @@ build/
 docs/
 wdyr.ts
 testing/
+__mocks__/
