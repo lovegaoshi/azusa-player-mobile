@@ -104,6 +104,7 @@ const SongInfo = ({
               <View style={{ flex: 4.9 }}>
                 <Text variant="bodyLarge" numberOfLines={3}>{`${String(
                   index + 1
+                  // ${' (' + item.source + ')' || ''}
                 )}. ${title}`}</Text>
                 <Text
                   variant="bodySmall"

@@ -4,6 +4,7 @@ import ytbvideoFetch from './ytbvideo';
 import { logger } from '../Logger';
 import bfetch from '../BiliFetch';
 import { regexMatchOperations } from '../Utils';
+import { resolver, MUSICFREE } from './mfsdk';
 
 /**
  *  Video src info
@@ -58,6 +59,20 @@ export const fetchPlayUrlPromise = async (
     }
     return fetchVideoPlayUrlPromise(bvid, cidStr);
   };
+
+  if (v.source && v.source in MUSICFREE) {
+    const vsource = v.source as MUSICFREE;
+    const result = await resolver[vsource](
+      v as unknown as IMusic.IMusicItem,
+      'high'
+    );
+    console.warn(result, v);
+    if (!result) {
+      throw new Error(`[resolveURL] ${bvid}, ${cid} failed.`);
+    }
+    return result;
+  }
+
   return regexMatchOperations({
     song: v,
     regexOperations: regexResolveURLs,

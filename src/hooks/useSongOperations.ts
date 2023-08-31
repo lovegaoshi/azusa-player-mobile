@@ -3,6 +3,7 @@ import * as React from 'react';
 import { useNoxSetting } from '@hooks/useSetting';
 import { CIDPREFIX } from '@utils/mediafetch/ytbvideo';
 import logger from '@utils/Logger';
+import { SOURCE } from '@enums/MediaFetch';
 
 const useSongOperations = () => {
   const setExternalSearchText = useNoxSetting(
@@ -11,7 +12,7 @@ const useSongOperations = () => {
   const setSongMenuVisible = useNoxSetting(state => state.setSongMenuVisible);
 
   const startRadio = (song: NoxMedia.Song) => {
-    if (song.id.startsWith(CIDPREFIX)) {
+    if (song.id?.startsWith(CIDPREFIX)) {
       setExternalSearchText(`youtu.be/list=RD${song.bvid}`);
     } else {
       logger.warn(`[startRadio] ${song.bvid} is not a youtube video`);
@@ -19,9 +20,8 @@ const useSongOperations = () => {
     setSongMenuVisible(false);
   };
 
-  const radioAvailable = (song: NoxMedia.Song) => {
-    return song?.id?.startsWith(CIDPREFIX);
-  };
+  const radioAvailable = (song?: NoxMedia.Song) =>
+    song?.source === SOURCE.ytbvideo || song?.id?.startsWith(CIDPREFIX);
 
   return { startRadio, radioAvailable };
 };

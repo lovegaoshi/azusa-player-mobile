@@ -49,10 +49,6 @@ export default ({
         onPress={() => setDefaultSearch(SEARCH_OPTIONS.YOUTUBE)}
         title={'Youtube'}
       />
-      <Menu.Item
-        onPress={() => setDefaultSearch(MUSICFREE.aggregated)}
-        title={`MusicFree.${MUSICFREE.aggregated}`}
-      />
     </Menu>
   );
 };

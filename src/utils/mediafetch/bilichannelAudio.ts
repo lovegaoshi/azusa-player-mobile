@@ -8,6 +8,7 @@
  * steps to refactor:
  * each site needs a fetch to parse regex extracted, a videoinfo fetcher and a song fetcher.
  */
+import { SOURCE } from '@enums/MediaFetch';
 import logger from '../Logger';
 import { regexFetchProps } from './generic';
 import { fetchAwaitBiliPaginatedAPI } from './paginatedbili';
@@ -41,6 +42,7 @@ const songFetch = async ({
         page: 1,
         duration: info.duration,
         album: info.title,
+        source: SOURCE.biliaudio,
       }),
     ];
   };

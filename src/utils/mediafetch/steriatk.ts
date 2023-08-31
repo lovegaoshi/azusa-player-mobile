@@ -8,6 +8,7 @@
  * steps to refactor:
  * each site needs a fetch to parse regex extracted, a videoinfo fetcher and a song fetcher.
  */
+import { SOURCE } from '@enums/MediaFetch';
 import { regexFetchProps } from './generic';
 import { fetchAwaitPaginatedAPI } from './paginatedfetch';
 import SongTS from '@objects/Song';
@@ -50,6 +51,7 @@ const songFetch = (videoinfos: any[]) => {
       page: 0,
       duration: 0,
       album: videoinfo.name,
+      source: SOURCE.steriatk,
     });
   });
 };

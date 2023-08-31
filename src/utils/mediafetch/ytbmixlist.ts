@@ -3,6 +3,7 @@ import { CIDPREFIX } from './ytbvideo';
 import SongTS from '@objects/Song';
 import { timestampToSeconds } from '../Utils';
 import logger from '../Logger';
+import { SOURCE } from '@enums/MediaFetch';
 
 const fetchYTPlaylist = async (
   playlistId: string,
@@ -40,6 +41,7 @@ const fetchYTPlaylist = async (
           val.playlistPanelVideoRenderer.lengthText.simpleText
         ),
         album: data.contents.twoColumnWatchNextResults.playlist.playlist.title,
+        source: SOURCE.ytbvideo,
       }),
     ])
     .filter((val: NoxMedia.Song) => !favList.includes(val.bvid));

@@ -11,6 +11,9 @@ import * as xmly from '@mfsdk/xmly/index';
 
 import logger from '../Logger';
 
+// This is exactly why users should NOT inject whatever scripts
+// into your app.
+
 export enum MUSICFREE {
   fivesing = 'fivesing',
   kugou = 'kugou',
@@ -28,13 +31,13 @@ const IMusicToNoxMedia = (val: IMusic.IMusicItem, source: MUSICFREE) => {
   return {
     // HACK: so NoxMedia.Song can be shoved into getMediaSource
     ...val,
-    id: val.id,
+    id: String(val.id),
     bvid: val.bvid || val.id,
     name: val.title,
     nameRaw: val.title,
     singer: val.artist,
     singerId: val.id,
-    cover: val.artwork,
+    cover: val.artwork || '',
     lyric: val.lrc,
     parsedName: val.title,
     source,
@@ -110,7 +113,14 @@ export const searcher = {
   },
 };
 
-export const resolver = {
+type Resolver = {
+  [key in MUSICFREE]: (
+    v: IMusic.IMusicItem,
+    q: string
+  ) => Promise<{ url: string } | undefined | null>;
+};
+
+export const resolver: Resolver = {
   [MUSICFREE.fivesing]: fivesing.getMediaSource,
   [MUSICFREE.kugou]: kugou.getMediaSource,
   [MUSICFREE.qq]: qq.getMediaSource,
@@ -120,4 +130,7 @@ export const resolver = {
   [MUSICFREE.netease]: netease.getMediaSource,
   [MUSICFREE.qianqian]: qianqian.getMediaSource,
   [MUSICFREE.xmly]: xmly.getMediaSource,
+  [MUSICFREE.aggregated]: () => {
+    throw new Error('Function not implemented.');
+  },
 };
