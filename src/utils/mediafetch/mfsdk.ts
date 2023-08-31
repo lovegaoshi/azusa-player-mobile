@@ -90,7 +90,7 @@ const qianqianSearch = async (query: string) =>
 const xmlySearch = async (query: string) =>
   genericSearch(query, xmly, MUSICFREE.xmly);
 
-export const searcher = {
+const aggregatedSearcher = {
   [MUSICFREE.fivesing]: fiveSingSearch,
   [MUSICFREE.kugou]: kugouSearch,
   [MUSICFREE.qq]: qqSearch,
@@ -100,18 +100,19 @@ export const searcher = {
   [MUSICFREE.netease]: neteaseSearch,
   [MUSICFREE.qianqian]: qianqianSearch,
   [MUSICFREE.xmly]: xmlySearch,
-  [MUSICFREE.aggregated]: async (query: string) => {
-    const res = await Promise.all([
-      fiveSingSearch(query),
-      kugouSearch(query),
-      qqSearch(query),
-      kuwoSearch(query),
-      maoerfmSearch(query),
-      miguSearch(query),
-      neteaseSearch(query),
-      qianqianSearch(query),
-      xmlySearch(query),
-    ]);
+  [MUSICFREE.aggregated]: () => {
+    throw new Error('Function not implemented.');
+  },
+};
+
+export const searcher = {
+  ...aggregatedSearcher,
+  [MUSICFREE.aggregated]: async (query: string, searchWith?: MUSICFREE[]) => {
+    const res = await Promise.all(
+      searchWith
+        ? searchWith.map(key => aggregatedSearcher[key](query))
+        : Object.values(aggregatedSearcher).map(searcher => searcher(query))
+    );
     return res.flat();
   },
 };
