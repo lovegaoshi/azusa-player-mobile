@@ -25,6 +25,7 @@ module.exports = api => {
               '@stores': './src/stores',
               '@hooks': './src/hooks',
               '@assets': './src/assets',
+              '@mfsdk': './MusicFreePlugins/dist',
             },
           },
         ],

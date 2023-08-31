@@ -15,6 +15,7 @@ declare namespace NoxMedia {
     duration: number;
     album?: string;
     addedDate?: number;
+    source?: string;
   }
 
   export interface Playlist {

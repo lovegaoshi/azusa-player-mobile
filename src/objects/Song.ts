@@ -29,6 +29,7 @@ interface SongProps {
   duration: number;
   album?: string;
   addedDate?: number;
+  source?: string;
 }
 
 export default ({
@@ -45,6 +46,7 @@ export default ({
   duration,
   album,
   addedDate,
+  source,
 }: SongProps): NoxMedia.Song => {
   return {
     id: String(cid),
@@ -62,6 +64,7 @@ export default ({
     duration,
     album,
     addedDate: addedDate || new Date().getTime(),
+    source,
   };
 };
 

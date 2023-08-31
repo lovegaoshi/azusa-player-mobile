@@ -13,7 +13,7 @@
       "@services/*": ["src/services/*"],
       "@stores/*": ["src/stores/*"],
       "@hooks/*": ["src/hooks/*"],
-      "@mfsdk/*": ["MusicFreePlugins/dist/*"]
+      "@mfsdk/*": ["./MusicFreePlugins/dist/*"]
     },
     "allowJs": true,
     "allowSyntheticDefaultImports": true,
