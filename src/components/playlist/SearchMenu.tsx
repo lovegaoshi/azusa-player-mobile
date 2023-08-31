@@ -5,6 +5,7 @@ import Svg, { Path } from 'react-native-svg';
 
 import { SEARCH_OPTIONS } from '@enums/Storage';
 import { saveDefaultSearch } from '@utils/ChromeStorage';
+import { MUSICFREE } from '@utils/mediafetch/mfsdk';
 
 const ICONS = {
   BILIBILI: () => (
@@ -31,7 +32,7 @@ export default ({
 }: Props) => {
   const { t } = useTranslation();
 
-  const setDefaultSearch = (defaultSearch: SEARCH_OPTIONS) => {
+  const setDefaultSearch = (defaultSearch: SEARCH_OPTIONS | MUSICFREE) => {
     toggleVisible();
     saveDefaultSearch(defaultSearch);
   };
@@ -47,6 +48,10 @@ export default ({
         leadingIcon={ICONS.YOUTUBE}
         onPress={() => setDefaultSearch(SEARCH_OPTIONS.YOUTUBE)}
         title={'Youtube'}
+      />
+      <Menu.Item
+        onPress={() => setDefaultSearch(MUSICFREE.aggregated)}
+        title={`MusicFree.${MUSICFREE.aggregated}`}
       />
     </Menu>
   );
