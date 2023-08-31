@@ -97,7 +97,7 @@ export const songFetch = async ({
         page: index + 1,
         duration: page.duration,
         album: info.title,
-        source: SOURCE.bilibili,
+        source: SOURCE.bilivideo,
       });
     });
   let songs = videoinfos.reduce(

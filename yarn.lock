@@ -11075,14 +11075,14 @@ react-native-get-random-values@^1.9.0:
   dependencies:
     fast-base64-decode "^1.0.0"
 
-react-native-lyric@^1.0.2:
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/react-native-lyric/-/react-native-lyric-1.0.2.tgz#5ab3de43754610b6beebf1b32ead72f0ffac8da2"
-  integrity sha512-gdzwFkwCkTiQ61/ileW1CVIP3G9pTzE48MNmn/Ltw+dXqakdYRTB9EVUhb6UWO6sWSFaTuGZXjapdwMo3Ss4qw==
+"react-native-lyric@git+https://github.com/lovegaoshi/react-native-lyric.git":
+  version "1.0.1"
+  resolved "git+https://github.com/lovegaoshi/react-native-lyric.git#a2d4776e35ec1bccd4f5bdcbc9d0ec185984ea83"
 
-"react-native-pager-view@git+https://github.com/alexhernandez/react-native-pager-view.git#patch-1":
-  version "6.2.0"
-  resolved "git+https://github.com/alexhernandez/react-native-pager-view.git#ea0a2bd1efa1c5b29abce9978973d4bf27d70d4d"
+react-native-pager-view@^6.2.1:
+  version "6.2.1"
+  resolved "https://registry.npmjs.org/react-native-pager-view/-/react-native-pager-view-6.2.1.tgz#985d21bbb7d7bc012f4c142dedbb98ce4bdea104"
+  integrity sha512-fZ8chez5J+w831nSnbtK8hwlCiMy1DgpFv8xG6ajXLsAI8uMkGvP554QDIDNlUoCuVwMf7OFyd32Y2Nm2Iaj9Q==
 
 react-native-paper@^5.7.0:
   version "5.10.3"
@@ -11117,9 +11117,9 @@ react-native-safe-area-context@^4.5.2:
   integrity sha512-X2pJG2ttmAbiGlItWedvDkZg1T1ikmEDiz+7HsiIwAIm2UbFqlhqn+B1JF53mSxPzdNaDcCQVHRNPvj8oFu6Yg==
 
 react-native-screens@^3.20.0:
-  version "3.24.0"
-  resolved "https://registry.npmjs.org/react-native-screens/-/react-native-screens-3.24.0.tgz#3d40199f9e2594c8d6e9f065772ebb842ecf53f4"
-  integrity sha512-ncAxY6Fja1eDwxMWsWG1S2lDWbE45f8XtdpKkY+Ovwg52iEov7uWx302PsvBkPpK9dGV4u6f2ZRoZGZYBvSbbA==
+  version "3.25.0"
+  resolved "https://registry.npmjs.org/react-native-screens/-/react-native-screens-3.25.0.tgz#cf45e271ce733c9cf782fef8c9b3eb9e53faf01d"
+  integrity sha512-TSC2Ad0hh763I8QT6XxMsPXAagQ+RawDSdFtKRvIz9fCYr96AjRwwaqmYivbqlDywOgcRBkIVynkFtp0ThmlYw==
   dependencies:
     react-freeze "^1.0.0"
     warn-once "^0.1.0"

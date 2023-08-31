@@ -31,16 +31,19 @@ const IMusicToNoxMedia = (val: IMusic.IMusicItem, source: MUSICFREE) => {
   return {
     // HACK: so NoxMedia.Song can be shoved into getMediaSource
     ...val,
-    id: String(val.id),
-    bvid: val.bvid || val.id,
+    id: `${source}-${String(val.id)}`,
+    bvid: String(val.bvid || val.id),
     name: val.title,
     nameRaw: val.title,
     singer: val.artist,
     singerId: val.id,
-    cover: val.artwork || '',
+    cover:
+      val.artwork ||
+      'https://i2.hdslb.com/bfs/face/b70f6e62e4582d4fa5d48d86047e64eb57d7504e.jpg',
     lyric: val.lrc,
     parsedName: val.title,
     source,
+    duration: val.duration | 0,
   } as NoxMedia.Song;
 };
 
@@ -113,23 +116,50 @@ export const searcher = {
   },
 };
 
+type MFResolve = (
+  v: IMusic.IMusicItem,
+  q: string
+) => Promise<{ url: string } | undefined | null>;
+
 type Resolver = {
   [key in MUSICFREE]: (
-    v: IMusic.IMusicItem,
-    q: string
+    v: NoxMedia.Song,
+    quality?: string
   ) => Promise<{ url: string } | undefined | null>;
 };
 
+const resolverWrapper = (
+  v: NoxMedia.Song,
+  resolver: MFResolve,
+  quality = 'high'
+) =>
+  resolver(
+    {
+      ...v,
+      id: v.id.substring((v.source?.length || -1) + 1),
+    } as unknown as IMusic.IMusicItem,
+    quality
+  );
+
 export const resolver: Resolver = {
-  [MUSICFREE.fivesing]: fivesing.getMediaSource,
-  [MUSICFREE.kugou]: kugou.getMediaSource,
-  [MUSICFREE.qq]: qq.getMediaSource,
-  [MUSICFREE.kuwo]: kuwo.getMediaSource,
-  [MUSICFREE.maoerfm]: maoerfm.getMediaSource,
-  [MUSICFREE.migu]: migu.getMediaSource,
-  [MUSICFREE.netease]: netease.getMediaSource,
-  [MUSICFREE.qianqian]: qianqian.getMediaSource,
-  [MUSICFREE.xmly]: xmly.getMediaSource,
+  [MUSICFREE.fivesing]: (v: NoxMedia.Song, quality?: string) =>
+    resolverWrapper(v, fivesing.getMediaSource, quality),
+  [MUSICFREE.kugou]: (v: NoxMedia.Song, quality?: string) =>
+    resolverWrapper(v, kugou.getMediaSource, quality),
+  [MUSICFREE.qq]: (v: NoxMedia.Song, quality?: string) =>
+    resolverWrapper(v, qq.getMediaSource, quality),
+  [MUSICFREE.kuwo]: (v: NoxMedia.Song, quality?: string) =>
+    resolverWrapper(v, kuwo.getMediaSource, quality),
+  [MUSICFREE.maoerfm]: (v: NoxMedia.Song, quality?: string) =>
+    resolverWrapper(v, maoerfm.getMediaSource, quality),
+  [MUSICFREE.migu]: (v: NoxMedia.Song, quality?: string) =>
+    resolverWrapper(v, migu.getMediaSource, quality),
+  [MUSICFREE.netease]: (v: NoxMedia.Song, quality?: string) =>
+    resolverWrapper(v, netease.getMediaSource, quality),
+  [MUSICFREE.qianqian]: (v: NoxMedia.Song, quality?: string) =>
+    resolverWrapper(v, qianqian.getMediaSource, quality),
+  [MUSICFREE.xmly]: (v: NoxMedia.Song, quality?: string) =>
+    resolverWrapper(v, xmly.getMediaSource, quality),
   [MUSICFREE.aggregated]: () => {
     throw new Error('Function not implemented.');
   },
