@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 /* eslint-disable import/no-unresolved */
 import * as fivesing from '@mfsdk/5sing/index';
 import * as kugou from '@mfsdk/kugou/index';

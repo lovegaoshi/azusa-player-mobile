@@ -2,30 +2,11 @@ import steriatkFetch from './steriatk';
 import biliaudioFetch from './biliaudio';
 import ytbvideoFetch from './ytbvideo';
 import { logger } from '../Logger';
-import bfetch from '../BiliFetch';
 import { regexMatchOperations } from '../Utils';
 import { resolver, MUSICFREE } from './mfsdk';
+import { fetchVideoPlayUrlPromise } from './bilivideo';
 
-/**
- *  Video src info
- */
-const URL_PLAY_URL =
-  'https://api.bilibili.com/x/player/playurl?cid={cid}&bvid={bvid}&qn=64&fnval=16';
-
-/**
- *  bilibili API to get an audio's stream src url.
- * https://github.com/SocialSisterYi/bilibili-API-collect/blob/master/audio/musicstream_url.md
- * https://api.bilibili.com/audio/music-service-c/url doesnt work.
- * au must be removed, eg. https://www.bilibili.com/audio/music-service-c/web/url?sid=745350
- */
-const URL_AUDIO_PLAY_URL =
-  'https://www.bilibili.com/audio/music-service-c/web/url?sid={sid}';
-/**
- *  BVID -> CID
- */
-const URL_BVID_TO_CID =
-  'https://api.bilibili.com/x/player/pagelist?bvid={bvid}&jsonp=jsonp';
-
+// TODO: remove this, believe this is for legacy reasons?
 export const ENUMS = {
   audioType: 'audio',
   youtube: 'youtube.video',
@@ -40,7 +21,8 @@ export const ENUMS = {
  * @returns promise that resolves the media stream url.
  */
 export const fetchPlayUrlPromise = async (
-  v: NoxMedia.Song
+  v: NoxMedia.Song,
+  iOS = true
 ): Promise<NoxNetwork.ParsedNoxMediaURL> => {
   const bvid = v.bvid;
   const cid = v.id;
@@ -57,7 +39,7 @@ export const fetchPlayUrlPromise = async (
     if (cidStr.startsWith(ENUMS.audioType)) {
       return biliaudioFetch.resolveURL(v);
     }
-    return fetchVideoPlayUrlPromise(bvid, cidStr);
+    return fetchVideoPlayUrlPromise({ bvid, cid: cidStr, iOS });
   };
 
   if (v.source && v.source in MUSICFREE) {
@@ -76,89 +58,4 @@ export const fetchPlayUrlPromise = async (
     regexOperations: regexResolveURLs,
     fallback,
   });
-};
-
-// TODO: why is this not refactored into bilivideo.ts?
-/**
- * returns the bilibili video stream url given a bvid and cid.
- * @param {string} bvid video's bvid. starts with BV.
- * @param {string | undefined} cid optional; if not provided, bvid is used to fetch cid. note
- * some videos have episodes that this may not be accurate.
- * @returns
- */
-export const fetchVideoPlayUrlPromise = async (
-  bvid: string,
-  cid?: string,
-  extractType = 'AudioUrl'
-) => {
-  logger.debug(
-    `fethcVideoPlayURL: ${URL_PLAY_URL.replace('{bvid}', bvid).replace(
-      '{cid}',
-      String(cid)
-    )} with ${extractType}`
-  );
-  // HACK:  this should be a breaking change that stringified cid
-  // will never be not true.
-  if (!cid || cid.includes('null')) {
-    cid = await fetchCID(bvid);
-    logger.debug(`[resolveURL] cid resolved to be: ${cid}`);
-  }
-  try {
-    const res = await bfetch(
-      URL_PLAY_URL.replace('{bvid}', bvid).replace('{cid}', String(cid)),
-      // to resolve >480p video sources
-      {
-        method: 'GET',
-        headers: {},
-        credentials: extractType === 'AudioUrl' ? 'omit' : 'include',
-      }
-    );
-    const json = await res.json();
-    return { url: extractResponseJson(json, extractType) as string };
-  } catch (e) {
-    logger.error(`[resolveURL] error: ${e}`);
-    throw e;
-  }
-};
-
-/**
- *
- * @param {string} bvid
- * @returns
- */
-export const fetchCID = async (bvid: string) => {
-  // logger.log('Data.js Calling fetchCID:' + URL_BVID_TO_CID.replace("{bvid}", bvid))
-  const res = await bfetch(URL_BVID_TO_CID.replace('{bvid}', bvid));
-  const json = await res.json();
-  const cid = extractResponseJson(json, 'CID');
-  return cid;
-};
-
-/**
- * Private Util to extract json, see https://github.com/SocialSisterYi/bilibili-API-collect
- * @param {Object} json
- * @param {string} field
- * @returns
- */
-const extractResponseJson = (json: any, field: string) => {
-  const getBestBitrate = (data: any[]) =>
-    data.sort((a, b) => b.bandwidth - a.bandwidth)[0];
-
-  switch (field) {
-    case 'AudioUrl':
-      if (json.data.flac?.audio) {
-        return getBestBitrate(json.data.dash.flac.audio).baseUrl;
-      } else if (json.data.dolby?.audio) {
-        return getBestBitrate(json.data.dash.dolby.audio).baseUrl;
-      }
-      return getBestBitrate(json.data.dash.audio).baseUrl;
-    case 'VideoUrl':
-      return json.data.dash.video[0].baseUrl;
-    case 'CID':
-      return json.data[0].cid;
-    case 'AudioInfo':
-      return {};
-    default:
-      throw new Error(`invalid field type: ${field} to parse JSON response`);
-  }
 };
