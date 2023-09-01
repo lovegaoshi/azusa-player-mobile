@@ -97,7 +97,8 @@ export const initialize = async () => {
   });
 };
 
-export const reExtractSongName = appStore.getState().reExtractSongName;
+export const reExtractSongName = (name: string, uploader: string | number) => 
+  appStore.getState().reExtractSongName(name, uploader);
 
 export const parseSongName = (song: NoxMedia.Song): NoxMedia.Song => {
   return {
