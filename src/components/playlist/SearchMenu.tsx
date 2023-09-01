@@ -2,10 +2,12 @@ import * as React from 'react';
 import { Menu } from 'react-native-paper';
 import { useTranslation } from 'react-i18next';
 import Svg, { Path } from 'react-native-svg';
+import Image from 'react-native-fast-image';
 
 import { SEARCH_OPTIONS } from '@enums/Storage';
 import { saveDefaultSearch } from '@utils/ChromeStorage';
 import { MUSICFREE } from '@utils/mediafetch/mfsdk';
+import { StyleSheet } from 'react-native';
 
 const ICONS = {
   BILIBILI: () => (
@@ -50,9 +52,19 @@ export default ({
         title={'Youtube'}
       />
       <Menu.Item
+        leadingIcon={() => (
+          <Image
+            source={require('@assets/icons/musicfree.png')}
+            style={style.musicFreeIcon}
+          />
+        )}
         onPress={() => setDefaultSearch(MUSICFREE.aggregated)}
         title={`MusicFree.${MUSICFREE.aggregated}`}
       />
     </Menu>
   );
 };
+
+const style = StyleSheet.create({
+  musicFreeIcon: { width: 40, height: 40, marginLeft: -5, marginTop: 4 },
+});

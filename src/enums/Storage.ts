@@ -23,6 +23,7 @@ export enum STORAGE_KEYS {
   FADE_INTERVAL = 'fadeInterval',
   COLORTHEME = 'ColorTheme',
   REGEXTRACT_MAPPING = 'RegexExtract',
+  MUSICFREE_PLUGIN = 'MusicFreePlugin',
 }
 
 export enum SEARCH_OPTIONS {

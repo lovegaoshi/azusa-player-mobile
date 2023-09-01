@@ -16,6 +16,7 @@ import ytbmixlistFetch from './mediafetch/ytbmixlist';
 import ytbsearchFetch from './mediafetch/ytbsearch';
 import { regexFetchProps } from './mediafetch/generic';
 import { MUSICFREE, searcher } from './mediafetch/mfsdk';
+import { getMusicFreePlugin } from './ChromeStorage';
 
 /**
  * assign the proper extractor based on the provided url. uses regex.
@@ -91,7 +92,10 @@ export const searchBiliURLs = async ({
         });
         break;
       case MUSICFREE.aggregated:
-        results = await searcher[MUSICFREE.aggregated](input);
+        results = await searcher[MUSICFREE.aggregated](
+          input,
+          await getMusicFreePlugin()
+        );
         break;
       default:
         results = await bilisearchFetch.regexFetch({

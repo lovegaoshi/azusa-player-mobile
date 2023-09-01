@@ -19,6 +19,7 @@ interface Props<T> {
   title?: string;
   onClose?: (index?: boolean[]) => void;
   onSubmit?: (index: boolean[]) => void;
+  selectedIndices?: boolean[];
 }
 
 /**
@@ -29,8 +30,9 @@ export default ({
   options,
   renderOptionTitle = val => String(val),
   title = undefined,
-  onClose = (index?: boolean[]) => undefined,
-  onSubmit = (index: boolean[]) => undefined,
+  onClose = () => undefined,
+  onSubmit = () => undefined,
+  selectedIndices,
 }: Props<any>) => {
   const { t } = useTranslation();
   const [currentIndex, setCurrentIndex] = useState<boolean[]>([]);
@@ -43,13 +45,11 @@ export default ({
     onSubmit(currentIndex);
   };
 
-  const toggleIndex = (index: number) => {
+  const toggleIndex = (index: number) =>
     setCurrentIndex(currentIndex.map((val, i) => (i === index ? !val : val)));
-  };
-
   React.useEffect(
-    () => setCurrentIndex(Array(options.length).fill(false)),
-    [options]
+    () => setCurrentIndex(selectedIndices || Array(options.length).fill(false)),
+    [options, selectedIndices]
   );
 
   return (

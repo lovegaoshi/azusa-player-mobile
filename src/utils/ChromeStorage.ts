@@ -59,6 +59,14 @@ export const removeItem = async (key: string) => {
   }
 };
 
+export const setMusicFreePlugin = async (val: MUSICFREE[]) => {
+  return await saveItem(STORAGE_KEYS.MUSICFREE_PLUGIN, val);
+};
+
+export const getMusicFreePlugin = async (): Promise<MUSICFREE[]> => {
+  return (await getItem(STORAGE_KEYS.MUSICFREE_PLUGIN)) || [];
+};
+
 export const getFadeInterval = async () =>
   Number(await getItem(STORAGE_KEYS.FADE_INTERVAL)) || 0;
 export const saveFadeInterval = async (val: number) =>

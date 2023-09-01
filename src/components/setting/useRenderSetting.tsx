@@ -21,7 +21,7 @@ import { SettingEntry } from './SetttingEntries';
  * @returns
  */
 interface SetttingListInterface {
-  icon?: string;
+  icon?: string | (() => JSX.Element);
   settingName: string;
   onPress: () => void;
   settingCategory?: string;
@@ -38,9 +38,19 @@ export const SettingListItem = ({
   const { t } = useTranslation();
   const playerStyle = useNoxSetting(state => state.playerStyle);
 
+  const getIcon = () => {
+    if (typeof icon === 'string') {
+      return <IconButton icon={icon} size={40} />;
+    } else if (typeof icon === 'function') {
+      return icon();
+    } else {
+      return <></>;
+    }
+  };
+
   return (
     <List.Item
-      left={props => (icon ? <IconButton icon={icon} size={40} /> : <></>)}
+      left={getIcon}
       title={String(t(`${settingCategory}.${settingName}Name`))}
       description={modifyDescription(
         t(`${settingCategory}.${settingName}Desc`)
