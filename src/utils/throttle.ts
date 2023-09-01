@@ -33,4 +33,5 @@ export const throttler = {
   biliApiLimiter,
   biliTagApiLimiter,
   bilih5ApiLimiter,
+  awaitLimiter,
 };

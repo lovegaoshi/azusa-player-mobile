@@ -12,7 +12,8 @@
       "@objects/*": ["src/objects/*"],
       "@services/*": ["src/services/*"],
       "@stores/*": ["src/stores/*"],
-      "@hooks/*": ["src/hooks/*"]
+      "@hooks/*": ["src/hooks/*"],
+      "@mfsdk/*": ["./MusicFreePlugins/dist/*"]
     },
     "allowJs": true,
     "allowSyntheticDefaultImports": true,
@@ -30,5 +31,5 @@
     "types": ["node"]
   },
   "include": ["src"],
-  "exclude": ["node_modules", "**/__tests__/*"]
+  "exclude": ["node_modules", "**/__tests__/*", "MusicFreePlugins"]
 }

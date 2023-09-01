@@ -24,7 +24,6 @@ import NoxCache from '@utils/Cache';
 import useCleanCache from '@hooks/useCleanCache';
 import appStore from '@stores/appStore';
 import { saveFadeInterval } from '@utils/ChromeStorage';
-import DummySettings from './DummySettings';
 import GroupView from '../background/GroupView';
 import PluginSettings from './plugins/View';
 

@@ -9,7 +9,7 @@ import {
   Button,
 } from 'react-native';
 import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
-import { Lyric } from 'react-native-lyric';
+import { Lrc as Lyric } from 'react-native-lyric';
 import { Track, useProgress } from 'react-native-track-player';
 import { IconButton, TextInput } from 'react-native-paper';
 

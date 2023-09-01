@@ -15,6 +15,7 @@ import { biliApiLimiter } from './throttle';
 import SongTS from '@objects/Song';
 import { logger } from '../Logger';
 import { randomChoice } from '../Utils';
+import { SOURCE } from '@enums/MediaFetch';
 
 export const CIDPREFIX = 'youtube-';
 
@@ -39,7 +40,7 @@ const fetchYTBPlayUrlPromise = async (sid: string) => {
 };
 
 export const fetchAudioInfoRaw = async (sid: string) => {
-  logger.info(`calling fetch YTB info of sid`);
+  logger.info(`calling fetch YTB info of sid ${sid}`);
   const ytdlInfo = await ytdl.getInfo(`https://www.youtube.com/watch?v=${sid}`);
   try {
     /*
@@ -156,6 +157,7 @@ export const fetchAudioInfoRaw = async (sid: string) => {
               )
             : 0,
         album: videoDetails.title,
+        source: SOURCE.ytbvideo,
       }),
     ];
   } catch (error) {
@@ -214,10 +216,11 @@ export const suggest = async (song: NoxMedia.Song) => {
     page: 1,
     duration: Number(suggestSong.length_seconds),
     album: suggestSong.title,
+    source: SOURCE.ytbvideo,
   });
 };
 
-const regexFetch = async ({ reExtracted, useBiliTag }: regexFetchProps) => {
+const regexFetch = async ({ reExtracted }: regexFetchProps) => {
   const audioInfo = await fetchAudioInfo(reExtracted[1]!);
   return audioInfo || [];
 };

@@ -16,6 +16,7 @@ import {
   DEFAULT_SETTING,
   SEARCH_OPTIONS,
 } from '@enums/Storage';
+import { MUSICFREE } from './mediafetch/mfsdk';
 /**
  * noxplayer's storage handler.
  * ChromeStorage has quite a few changes from azusa player the chrome extension;
@@ -56,6 +57,14 @@ export const removeItem = async (key: string) => {
   } catch (e) {
     console.warn(e);
   }
+};
+
+export const setMusicFreePlugin = async (val: MUSICFREE[]) => {
+  return await saveItem(STORAGE_KEYS.MUSICFREE_PLUGIN, val);
+};
+
+export const getMusicFreePlugin = async (): Promise<MUSICFREE[]> => {
+  return (await getItem(STORAGE_KEYS.MUSICFREE_PLUGIN)) || [];
 };
 
 export const getFadeInterval = async () =>
@@ -125,7 +134,7 @@ export const getDefaultSearch = async (): Promise<SEARCH_OPTIONS> => {
   );
 };
 
-export const saveDefaultSearch = async (val: SEARCH_OPTIONS) => {
+export const saveDefaultSearch = async (val: SEARCH_OPTIONS | MUSICFREE) => {
   return await saveItem(STORAGE_KEYS.DEFAULT_SEARCH, val);
 };
 

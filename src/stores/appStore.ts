@@ -41,7 +41,7 @@ interface AppStore {
   reExtractSongName: (name: string, uploader: string | number) => string;
 }
 
-const appStore = createStore<AppStore>((set, get) => ({
+const appStore = createStore<AppStore>(set => ({
   pipMode: false,
   r128gain: {},
   setR128gain: (val: NoxStorage.R128Dict) => {

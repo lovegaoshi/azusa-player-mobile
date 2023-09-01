@@ -16,6 +16,7 @@ import VideoInfo from '@objects/VideoInfo';
 import SongTS from '@objects/Song';
 import { logger } from '../Logger';
 import bfetch from '../BiliFetch';
+import { SOURCE } from '@enums/MediaFetch';
 
 const URL_VIDEO_INFO =
   'https://api.bilibili.com/x/web-interface/view?bvid={bvid}';
@@ -96,6 +97,7 @@ export const songFetch = async ({
         page: index + 1,
         duration: page.duration,
         album: info.title,
+        source: SOURCE.bilivideo,
       });
     });
   let songs = videoinfos.reduce(

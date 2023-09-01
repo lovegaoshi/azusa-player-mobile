@@ -1,3 +1,4 @@
+import * as React from 'react';
 import { View, StyleSheet } from 'react-native';
 import { useTranslation } from 'react-i18next';
 import Snackbar from 'react-native-snackbar';
@@ -8,6 +9,7 @@ import { saveRegextractMapping } from '@utils/ChromeStorage';
 import { downloadR128GainDB } from './r128gain/Sync';
 import logger from '@utils/Logger';
 import { snackBarWrapper } from '@utils/Utils';
+import MusicFreeButton from './MusicFreeButton';
 
 interface SnackbarMsg {
   updating: string;
@@ -68,6 +70,7 @@ const PluginSettings = () => {
         }
         settingCategory="PluginSettings"
       />
+      <MusicFreeButton />
     </View>
   );
 };

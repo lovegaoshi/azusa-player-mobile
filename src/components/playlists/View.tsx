@@ -287,7 +287,7 @@ export default (props: any) => {
           {
             backgroundColor:
               currentPlaylist.id ===
-              playlists[STORAGE_KEYS.SEARCH_PLAYLIST_KEY]?.id
+                playlists[STORAGE_KEYS.SEARCH_PLAYLIST_KEY]?.id
                 ? playerStyle.customColors.playlistDrawerBackgroundColor
                 : undefined,
           },
@@ -296,6 +296,12 @@ export default (props: any) => {
         <PlaylistItem
           item={playlists[STORAGE_KEYS.SEARCH_PLAYLIST_KEY]}
           icon={SearchPlaylistAsNewButton()}
+          leadColor={
+            currentPlayingList.id ===
+            playlists[STORAGE_KEYS.SEARCH_PLAYLIST_KEY].id
+              ? playerStyle.colors.primary //customColors.playlistDrawerBackgroundColor
+              : undefined
+          }
         />
       </TouchableRipple>
       <NewPlaylistDialog
