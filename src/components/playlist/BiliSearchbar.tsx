@@ -15,7 +15,7 @@ import { searchBiliURLs } from '@utils/BiliSearch';
 import { useNoxSetting } from '@hooks/useSetting';
 import usePlayback from '@hooks/usePlayback';
 import SearchMenu from './SearchMenu';
-import { getDefaultSearch } from '@utils/ChromeStorage';
+import { getDefaultSearch, getMusicFreePlugin } from '@utils/ChromeStorage';
 import logger from '@utils/Logger';
 
 interface SharedItem {
@@ -54,8 +54,10 @@ export default ({
     x: 0,
     y: 0,
   });
+  const [showMusicFree, setShowMusicFree] = useState(false);
 
-  const handleMenuPress = (event: GestureResponderEvent) => {
+  const handleMenuPress = async (event: GestureResponderEvent) => {
+    setShowMusicFree((await getMusicFreePlugin()).length > 0);
     setDialogOpen(true);
     setMenuCoords({
       x: event.nativeEvent.pageX,
@@ -152,6 +154,7 @@ export default ({
           visible={dialogOpen}
           toggleVisible={toggleVisible}
           menuCoords={menuCoords}
+          showMusicFree={showMusicFree}
         />
       </View>
       <ProgressBar

@@ -25,12 +25,14 @@ interface Props {
   visible?: boolean;
   toggleVisible?: () => void;
   menuCoords?: NoxTheme.coordinates;
+  showMusicFree?: boolean;
 }
 
 export default ({
   visible = false,
   toggleVisible = () => undefined,
   menuCoords = { x: 0, y: 0 },
+  showMusicFree,
 }: Props) => {
   const { t } = useTranslation();
 
@@ -51,16 +53,18 @@ export default ({
         onPress={() => setDefaultSearch(SEARCH_OPTIONS.YOUTUBE)}
         title={'Youtube'}
       />
-      <Menu.Item
-        leadingIcon={() => (
-          <Image
-            source={require('@assets/icons/musicfree.png')}
-            style={style.musicFreeIcon}
-          />
-        )}
-        onPress={() => setDefaultSearch(MUSICFREE.aggregated)}
-        title={`MusicFree.${MUSICFREE.aggregated}`}
-      />
+      {showMusicFree && (
+        <Menu.Item
+          leadingIcon={() => (
+            <Image
+              source={require('@assets/icons/musicfree.png')}
+              style={style.musicFreeIcon}
+            />
+          )}
+          onPress={() => setDefaultSearch(MUSICFREE.aggregated)}
+          title={`MusicFree.${MUSICFREE.aggregated}`}
+        />
+      )}
     </Menu>
   );
 };
