@@ -3356,9 +3356,9 @@
   integrity sha512-J8xLz7q2OFulZ2cyGTLE1TbbZcjpno7FaN6zdJNrgAdrJ+DZzh/uFR6YrTb4C+nXakvud8Q4+rbhoIWlYQbUFQ==
 
 "@types/node@^14.11.2":
-  version "14.18.56"
-  resolved "https://registry.npmjs.org/@types/node/-/node-14.18.56.tgz#09e092d684cd8cfbdb3c5e5802672712242f2600"
-  integrity sha512-+k+57NVS9opgrEn5l9c0gvD1r6C+PtyhVE4BTnMMRwiEA8ZO8uFcs6Yy2sXIy0eC95ZurBtRSvhZiHXBysbl6w==
+  version "14.18.57"
+  resolved "https://registry.npmjs.org/@types/node/-/node-14.18.57.tgz#5c0d143f7437ed847b7ae05392440d77984d429b"
+  integrity sha512-AV54VmsNLLPoUm+EBroYLyXQUI8kfG+oFIocRw5DjA6R+8wg7VV1Vqoi9sdjbjk1Zmxhxp+ecLqLdybnfV6MGQ==
 
 "@types/normalize-package-data@^2.4.0":
   version "2.4.1"
@@ -8780,7 +8780,7 @@ levn@^0.4.1:
 
 "libmuse@git+https://github.com/lovegaoshi/muse.git#apm-release":
   version "0.0.1"
-  resolved "git+https://github.com/lovegaoshi/muse.git#c390668d7699063fab17427476582762745845a1"
+  resolved "git+https://github.com/lovegaoshi/muse.git#bdb55768a34e4410ac982a3f7f69c3b591eb5fdb"
   dependencies:
     jsonpath-plus "7.2.0"
 
@@ -11112,9 +11112,9 @@ react-native-reanimated@^3.1.0:
     invariant "^2.2.4"
 
 react-native-safe-area-context@^4.5.2:
-  version "4.7.1"
-  resolved "https://registry.npmjs.org/react-native-safe-area-context/-/react-native-safe-area-context-4.7.1.tgz#b7be2d68dee909717cfa439bb5c7966042d231e8"
-  integrity sha512-X2pJG2ttmAbiGlItWedvDkZg1T1ikmEDiz+7HsiIwAIm2UbFqlhqn+B1JF53mSxPzdNaDcCQVHRNPvj8oFu6Yg==
+  version "4.7.2"
+  resolved "https://registry.npmjs.org/react-native-safe-area-context/-/react-native-safe-area-context-4.7.2.tgz#1673aa99b6a9235e7faaf5a248e69795d6e54e07"
+  integrity sha512-5fy/hRNJ7bI/U2SliOeKf0D80J4lXPc1NsRiNS7Xaz8YTnqlzWib1ViItkwKPfufe54YKzVBMmM32RpdzvO2gg==
 
 react-native-screens@3.24.0:
   version "3.24.0"

@@ -116,16 +116,26 @@ export const parseSongR128gain = async (
 };
 
 export const resolveUrl = async (song: NoxMedia.Song, iOS = true) => {
+  const updateMetadata = async () => {
+    try {
+      const { playerSetting } = getState();
+      return playerSetting.updateLoadedTrack
+        ? await fetchPlayUrlPromise(song)
+        : {};
+    } catch {
+      return {};
+    }
+  };
   // TODO: method is called MULTIPLE times. need to investigate and debounce.
   // luckily bilibili doesnt seem to care for now
   logger.debug(`[SongResolveURL] start resolving ${song.name}`);
   const cachedUrl = await NoxCache.noxMediaCache?.loadCacheMedia(song);
-  const { playerSetting } = getState();
+  logger.debug(
+    `[SongResolveURL] cache ${cachedUrl ? 'found' : 'missed'}, ${song.id}`
+  );
   const url = cachedUrl
     ? {
-        ...(playerSetting.updateLoadedTrack
-          ? await fetchPlayUrlPromise(song)
-          : {}),
+        ...updateMetadata(),
         url: cachedUrl,
       }
     : await fetchPlayUrlPromise(song, iOS);
