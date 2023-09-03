@@ -143,7 +143,7 @@ export const resolveUrl = async (song: NoxMedia.Song, iOS = true) => {
   );
   const url = cachedUrl
     ? {
-        ...updateMetadata(),
+        ...(await updateMetadata()),
         url: cachedUrl,
       }
     : await fetchPlayUrlPromise(song, iOS);

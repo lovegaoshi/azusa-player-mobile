@@ -90,7 +90,7 @@ export default ({
     }
 
     const { mimeType, data, extraData } = item;
-
+    if (data === sharedData) return;
     setSharedData(data);
     setSharedMimeType(mimeType);
     // You can receive extra data from your custom Share View
