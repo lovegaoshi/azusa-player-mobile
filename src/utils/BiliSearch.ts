@@ -15,6 +15,7 @@ import ytbplaylistFetch from './mediafetch/ytbplaylist';
 import ytbmixlistFetch from './mediafetch/ytbmixlist';
 import ytbsearchFetch from './mediafetch/ytbsearch';
 import bililiveFetch from './mediafetch/bililive';
+import bilisubliveFetch from './mediafetch/bilisublive';
 import { regexFetchProps } from './mediafetch/generic';
 import { MUSICFREE, searcher } from './mediafetch/mfsdk';
 import { getMusicFreePlugin } from './ChromeStorage';
@@ -52,6 +53,7 @@ export const matchBiliURL = (input: string) => {
     [ytbvideoFetch.regexSearchMatch, ytbvideoFetch.regexFetch],
     [bilivideoFetch.regexSearchMatch, bilivideoFetch.regexFetch],
     [bililiveFetch.regexSearchMatch, bililiveFetch.regexFetch],
+    [bilisubliveFetch.regexSearchMatch, bilisubliveFetch.regexFetch],
   ];
   for (const reExtraction of reExtractions) {
     const reExtracted = reExtraction[0].exec(input);
