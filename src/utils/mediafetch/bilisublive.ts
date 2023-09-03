@@ -69,16 +69,17 @@ const getSubList = async (
 ) => {
   // https://api.bilibili.com/x/relation/followings?vmid=3493085134719196
   const videoInfos = await fetchBiliPaginatedAPI({
-    url: `https://api.bilibili.com/x/relation/followings?vmid=${uid}&pn={pn}`,
+    // url: `https://api.bilibili.com/x/relation/followings?vmid=${uid}&pn={pn}`,
+    url: `https://app.biliapi.net/x/v2/relation/followings?vmid=${uid}&pn={pn}`,
     // dont get more than 5 pages?
-    // getMediaCount: (data: any) => Math.min(250, data.total),
-    getMediaCount: (data: any) => data.total,
+    getMediaCount: (data: any) => Math.min(250, data.total),
+    // getMediaCount: (data: any) => data.total,
     getPageSize: () => 50,
     getItems: (js: any) => js.data.list,
     progressEmitter,
     favList,
     resolveBiliBVID: async bvobjs =>
-      await getRoomInfos(bvobjs.map((obj: any) => obj.bvid)),
+      await getRoomInfos(bvobjs.map((obj: any) => obj.mid)),
   });
   return videoInfos.map(info => videoInfo2Song(info));
 };
