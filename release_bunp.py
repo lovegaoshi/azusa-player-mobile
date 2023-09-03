@@ -40,10 +40,10 @@ if __name__ == '__main__':
     args = parser.parse_args()
     version = get_version()
     new_version = autoincrease_version(
-        version=version, inc=VersionUpdate.MINOR)
+        version=version, inc=VersionUpdate.PATCH)
     fix_content(Path('./src/enums/Version.ts'), lambda line: line.replace(
         version, new_version
     ))
     subprocess.call(['git', 'commit', '-am', f'release: {new_version}'])
     subprocess.call(['git', 'tag', f'v{new_version}'])
-    subprocess.call(['git', 'push', 'origin', 'master'])
+    subprocess.call(['git', 'push', 'origin', 'master', '--tags'])
