@@ -1,0 +1,19 @@
+name: APM Test Suite
+on:
+  pull_request:
+    branches:
+      - master
+  workflow_dispatch:
+
+jobs:
+  jest:
+    runs-on: ubuntu-latest
+    name: APM tests
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: python version_bump.py
+        run: |
+          yarn test

@@ -64,6 +64,7 @@ jobs:
 
       - name: Add Build Sign Keys
         run: |
+          git submodule update --init --recursive
           echo "${{ secrets.RELEASE_SIGN_PWD }}" >> ./android/gradle.properties
 
       - name: WGet Build Sign jks
@@ -149,6 +150,7 @@ jobs:
 
       - name: Add Build Sign Keys
         run: |
+          git submodule update --init --recursive
           echo "${{ secrets.RELEASE_SIGN_PWD }}" >> ./android/gradle.properties
 
       - name: WGet Build Sign jks
@@ -216,6 +218,7 @@ jobs:
         run: |
           echo "${{ secrets.ENV_FILE }}" > .env
           echo "APPSTORE=true" >> .env
+          git submodule update --init --recursive
 
       - name: alias yarn.cmd to yarn
         run: alias yarn.cmd="yarn"

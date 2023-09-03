@@ -129,8 +129,8 @@ export const resolveUrl = async (song: NoxMedia.Song, iOS = true) => {
         ? await fetchPlayUrlPromise(song)
         : {};
     } catch (e) {
-      logger.warn('failed to resolve updated MetaData');
-      logger.warn(e);
+      logger.warn('failed to resolve updated MetaData')
+      logger.warn(e)
       return {};
     }
   };
