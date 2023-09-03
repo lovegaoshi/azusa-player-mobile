@@ -74,3 +74,4 @@ vendor/
 NoxExport.json
 *.jks
 *.aab
+*.pyc
