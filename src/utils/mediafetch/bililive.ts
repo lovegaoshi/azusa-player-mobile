@@ -3,8 +3,9 @@ import { regexFetchProps } from './generic';
 import SongTS from '@objects/Song';
 import { logger } from '../Logger';
 import bfetch from '../BiliFetch';
+import { biliApiLimiter } from './throttle';
 
-const CIDPREFIX = 'bililive';
+export const CIDPREFIX = 'bililive';
 
 interface BiliLiveRoomInfo {
   room_id: string;
@@ -42,7 +43,7 @@ const getLiver = async (roomID: string) => {
   return uidJson.data.info as LiverData;
 };
 
-const fetchVideoInfo = async (aid: string) => {
+const fetchVideoInfoRaw = async (aid: string) => {
   logger.info(`[biliLive] calling fetchVideoInfo of ${aid}`);
   try {
     const roomInfo = await getRoomInfo(aid);
@@ -65,6 +66,9 @@ const fetchVideoInfo = async (aid: string) => {
     throw error;
   }
 };
+
+const fetchVideoInfo = async (aid: string) =>
+  biliApiLimiter.schedule(() => fetchVideoInfoRaw(aid));
 
 const regexFetch = async ({ reExtracted }: regexFetchProps) => {
   return [await fetchVideoInfo(reExtracted[1]!)];

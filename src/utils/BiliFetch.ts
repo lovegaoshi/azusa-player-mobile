@@ -1,3 +1,5 @@
+import Bottleneck from 'bottleneck';
+
 export const DEFAULT_UA =
   'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/111.0.0.0 Safari/537.36 Edg/111.0.1661.62';
 
@@ -17,7 +19,8 @@ export default async function BiliFetch(
     method: 'GET',
     headers: {},
     credentials: 'omit',
-  }
+  },
+  throttler?: Bottleneck
 ) {
   const params = { ...paramsProp };
   if (Object.entries(params.headers).length === 0) {
@@ -35,7 +38,9 @@ export default async function BiliFetch(
   ) {
     params.body = parseBodyParams(params.body);
   }
-  return fetch(url, params);
+  return throttler === undefined
+    ? fetch(url, params)
+    : throttler.schedule(() => fetch(url, params));
 }
 
 /**
