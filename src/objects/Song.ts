@@ -17,7 +17,7 @@ interface SongProps {
   cid: string | number;
   bvid: string;
   name: string;
-  nameRaw: string;
+  nameRaw?: string;
   singer: string;
   singerId: string | number;
   cover: string;
@@ -26,10 +26,12 @@ interface SongProps {
   lyricOffset?: number;
   page?: number;
   biliShazamedName?: string;
-  duration: number;
+  duration?: number;
   album?: string;
   addedDate?: number;
   source?: string;
+  isLive?: boolean;
+  liveStatus?: boolean;
 }
 
 export default ({
@@ -43,10 +45,12 @@ export default ({
   lyricOffset,
   page,
   biliShazamedName,
-  duration,
+  duration = 0,
   album,
   addedDate,
   source,
+  isLive,
+  liveStatus,
 }: SongProps): NoxMedia.Song => {
   return {
     id: String(cid),
@@ -65,6 +69,8 @@ export default ({
     album,
     addedDate: addedDate || new Date().getTime(),
     source,
+    isLive,
+    liveStatus,
   };
 };
 
@@ -115,20 +121,30 @@ export const parseSongR128gain = async (
   return { playerSetting, cachedR128gain, cachedUrl };
 };
 
-export const resolveUrl = async (song: NoxMedia.Song) => {
+export const resolveUrl = async (song: NoxMedia.Song, iOS = true) => {
+  const updateMetadata = async () => {
+    try {
+      const { playerSetting } = getState();
+      return playerSetting.updateLoadedTrack
+        ? await fetchPlayUrlPromise(song)
+        : {};
+    } catch {
+      return {};
+    }
+  };
   // TODO: method is called MULTIPLE times. need to investigate and debounce.
   // luckily bilibili doesnt seem to care for now
   logger.debug(`[SongResolveURL] start resolving ${song.name}`);
   const cachedUrl = await NoxCache.noxMediaCache?.loadCacheMedia(song);
-  const { playerSetting } = getState();
+  logger.debug(
+    `[SongResolveURL] cache ${cachedUrl ? 'found' : 'missed'}, ${song.id}`
+  );
   const url = cachedUrl
     ? {
-        ...(playerSetting.updateLoadedTrack
-          ? await fetchPlayUrlPromise(song)
-          : {}),
+        ...updateMetadata(),
         url: cachedUrl,
       }
-    : await fetchPlayUrlPromise(song);
+    : await fetchPlayUrlPromise(song, iOS);
   logger.debug(`[SongResolveURL] ${song.parsedName} is resolved to ${url.url}`);
   if (url.loudness) {
     logger.debug(

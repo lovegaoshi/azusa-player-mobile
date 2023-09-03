@@ -3,7 +3,7 @@ import { ImageBackground, Dimensions, View, StyleSheet } from 'react-native';
 // import { Video, ResizeMode } from 'expo-av';
 import Video from 'react-native-video';
 import { useNoxSetting } from '@hooks/useSetting';
-import { fetchVideoPlayUrlPromise } from '@utils/mediafetch/resolveURL';
+import { fetchVideoPlayUrlPromise } from '@utils/mediafetch/bilivideo';
 import { customReqHeader } from '@utils/BiliFetch';
 import { biliNFTVideoFetch } from '@utils/mediafetch/biliNFT';
 import logger from '@utils/Logger';
@@ -28,11 +28,10 @@ export const resolveBackgroundImage = async (
       return {
         type: RESOLVE_TYPE.video,
         identifier: (
-          await fetchVideoPlayUrlPromise(
-            backgroundImage.identifier,
-            undefined,
-            'VideoUrl'
-          )
+          await fetchVideoPlayUrlPromise({
+            bvid: backgroundImage.identifier,
+            extractType: 'VideoUrl',
+          })
         ).url,
       };
     case RESOLVE_TYPE.biliNFTVideo:

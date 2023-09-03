@@ -16,6 +16,8 @@ declare namespace NoxMedia {
     album?: string;
     addedDate?: number;
     source?: string;
+    isLive?: boolean;
+    liveStatus?: boolean;
   }
 
   export interface Playlist {

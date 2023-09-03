@@ -1,3 +1,5 @@
+import { Platform } from 'react-native';
+
 /**
  * refactor:
  * bilisearch workflow:
@@ -10,7 +12,6 @@
  */
 import { regexFetchProps } from './generic';
 import { biliApiLimiter } from './throttle';
-
 import { biliShazamOnSonglist } from './bilishazam';
 import VideoInfo from '@objects/VideoInfo';
 import SongTS from '@objects/Song';
@@ -20,6 +21,15 @@ import { SOURCE } from '@enums/MediaFetch';
 
 const URL_VIDEO_INFO =
   'https://api.bilibili.com/x/web-interface/view?bvid={bvid}';
+const URL_PLAY_URL =
+  'https://api.bilibili.com/x/player/playurl?cid={cid}&bvid={bvid}&qn=64&fnval=16';
+const URL_PLAY_URL_IOS =
+  'https://api.bilibili.com/x/player/playurl?cid={cid}&bvid={bvid}&qn=6&fnval=16&platform=html5';
+/**
+ *  BVID -> CID
+ */
+const URL_BVID_TO_CID =
+  'https://api.bilibili.com/x/player/pagelist?bvid={bvid}&jsonp=jsonp';
 
 const fetchVideoInfoRaw = async (bvid: string) => {
   logger.info(
@@ -114,6 +124,106 @@ const regexFetch = async ({ reExtracted, useBiliTag }: regexFetchProps) => {
     videoinfos: await fetchiliBVIDs([reExtracted[1]!]), // await fetchiliBVID([reExtracted[1]!])
     useBiliTag: useBiliTag || false,
   });
+};
+
+interface FetchPlayURL {
+  bvid: string;
+  cid?: string;
+  extractType?: string;
+  // enable iOS HLS fix.
+  iOS?: boolean;
+}
+
+export const fetchVideoPlayUrlPromise = async ({
+  bvid,
+  cid,
+  extractType = 'AudioUrl',
+  iOS = true,
+}: FetchPlayURL) => {
+  logger.debug(
+    `fethcVideoPlayURL: ${URL_PLAY_URL.replace('{bvid}', bvid).replace(
+      '{cid}',
+      String(cid)
+    )} with ${extractType}`
+  );
+  // HACK:  this should be a breaking change that stringified cid
+  // will never be not true.
+  if (!cid || cid.includes('null')) {
+    cid = await fetchCID(bvid);
+    logger.debug(`[resolveURL] cid resolved to be: ${cid}`);
+  }
+  try {
+    // iOS: resolve lowest res video?
+    if (iOS && Platform.OS === 'ios') {
+      const res = await bfetch(
+        URL_PLAY_URL_IOS.replace('{bvid}', bvid).replace('{cid}', String(cid)),
+        {
+          method: 'GET',
+          headers: {},
+          credentials: 'omit',
+        }
+      );
+      const json = await res.json();
+      logger.debug(`[iOS resolveURL] ${JSON.stringify(json.data)}`);
+      return { url: json.data.durl[0].url as string };
+    }
+    const res = await bfetch(
+      URL_PLAY_URL.replace('{bvid}', bvid).replace('{cid}', String(cid)),
+      // to resolve >480p video sources
+      {
+        method: 'GET',
+        headers: {},
+        credentials: extractType === 'AudioUrl' ? 'omit' : 'include',
+      }
+    );
+    const json = await res.json();
+    return { url: extractResponseJson(json, extractType) as string };
+  } catch (e) {
+    logger.error(`[resolveURL] error: ${e}`);
+    throw e;
+  }
+};
+
+/**
+ *
+ * @param {string} bvid
+ * @returns
+ */
+export const fetchCID = async (bvid: string) => {
+  // logger.log('Data.js Calling fetchCID:' + URL_BVID_TO_CID.replace("{bvid}", bvid))
+  const res = await bfetch(URL_BVID_TO_CID.replace('{bvid}', bvid));
+  const json = await res.json();
+  const cid = extractResponseJson(json, 'CID');
+  return cid;
+};
+
+/**
+ * Private Util to extract json, see https://github.com/SocialSisterYi/bilibili-API-collect
+ * @param {Object} json
+ * @param {string} field
+ * @returns
+ */
+const extractResponseJson = (json: any, field: string) => {
+  const getBestBitrate = (data: any[]) =>
+    data.sort((a, b) => b.bandwidth - a.bandwidth)[0];
+
+  switch (field) {
+    case 'AudioUrl':
+      if (json.data.flac?.audio) {
+        return getBestBitrate(json.data.dash.flac.audio).baseUrl;
+      } else if (json.data.dolby?.audio) {
+        return getBestBitrate(json.data.dash.dolby.audio).baseUrl;
+      }
+      return getBestBitrate(json.data.dash.audio).baseUrl;
+    case 'VideoUrl':
+      return json.data.dash.video[0].baseUrl;
+    case 'CID':
+      return json.data[0].cid;
+    case 'AudioInfo':
+      return {};
+    default:
+      throw new Error(`invalid field type: ${field} to parse JSON response`);
+  }
 };
 
 const resolveURL = () => undefined;

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 /* eslint-disable import/no-unresolved */
 // @ts-ignore
 import * as fivesing from '@mfsdk/5sing/index';

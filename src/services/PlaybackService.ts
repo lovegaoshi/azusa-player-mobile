@@ -123,7 +123,7 @@ export async function PlaybackService() {
                   nextSong,
                   // resolveURL either finds cached file:/// or streamable https://
                   // cached path will be bounded back in saveCacheMedia; only https will call RNBlobUtil
-                  await resolveUrl(nextSong)
+                  await resolveUrl(nextSong, false)
                 )
                 .then(val => {
                   parseSongR128gain(
@@ -178,7 +178,12 @@ export async function PlaybackService() {
           if (previousDownloadProgress === undefined) {
             addDownloadPromise(
               song,
-              NoxCache.noxMediaCache?.saveCacheMedia(song, updatedMetadata)
+              NoxCache.noxMediaCache?.saveCacheMedia(
+                song,
+                Platform.OS === 'ios'
+                  ? await resolveUrl(event.track.song, false)
+                  : updatedMetadata
+              )
             );
           } else {
             previousDownloadProgress.then(async () => {
@@ -186,7 +191,7 @@ export async function PlaybackService() {
                 song,
                 NoxCache.noxMediaCache?.saveCacheMedia(
                   song,
-                  await resolveUrl(song)
+                  await resolveUrl(song, false)
                 )
               );
             });
@@ -228,11 +233,14 @@ export async function PlaybackService() {
     saveLastPlayDuration(event.position);
     const { fadeIntervalMs, fadeIntervalSec } = getAppStoreState();
     if (
+      event.duration > 0 &&
       event.position >
-      Math.min(bRepeatDuration, event.duration) - fadeIntervalSec
+        Math.min(bRepeatDuration, event.duration) - fadeIntervalSec
     ) {
       if (getState().playmode !== NoxRepeatMode.REPEAT_TRACK) {
-        logger.debug('[FADEOUT] fading out....');
+        logger.debug(
+          `[FADEOUT] fading out....${event.position} / ${event.duration}`
+        );
         animatedVolumeChange({
           val: 0,
           duration: fadeIntervalMs,

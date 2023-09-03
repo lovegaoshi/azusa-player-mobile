@@ -16,7 +16,9 @@ export const Progress: React.FC<{ live?: boolean }> = ({ live }) => {
 
   return live ? (
     <View style={styles.liveContainer}>
-      <Text style={styles.liveText}>Live Stream</Text>
+      <Text style={[styles.liveText, { color: playerStyle.colors.primary }]}>
+        Live Stream
+      </Text>
     </View>
   ) : (
     <View style={styles.container}>
@@ -69,9 +71,9 @@ export const Progress: React.FC<{ live?: boolean }> = ({ live }) => {
 
 const styles = StyleSheet.create({
   liveContainer: {
-    height: 100,
     alignItems: 'center',
     flexDirection: 'row',
+    paddingBottom: 28,
   },
   liveText: {
     color: 'white',

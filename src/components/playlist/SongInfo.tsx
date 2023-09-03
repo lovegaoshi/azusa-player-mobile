@@ -80,7 +80,8 @@ const SongInfo = ({
             ? playerStyle.customColors.playlistDrawerBackgroundColorTransparent
             : 'transparent',
           opacity:
-            NoxCache.noxMediaCache?.peekCache(item) || !networkCellular
+            item.liveStatus !== false &&
+            (NoxCache.noxMediaCache?.peekCache(item) || !networkCellular)
               ? undefined
               : 0.5,
         },
