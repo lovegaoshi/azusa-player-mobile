@@ -17,7 +17,7 @@ interface SongProps {
   cid: string | number;
   bvid: string;
   name: string;
-  nameRaw: string;
+  nameRaw?: string;
   singer: string;
   singerId: string | number;
   cover: string;
@@ -26,10 +26,12 @@ interface SongProps {
   lyricOffset?: number;
   page?: number;
   biliShazamedName?: string;
-  duration: number;
+  duration?: number;
   album?: string;
   addedDate?: number;
   source?: string;
+  isLive?: boolean;
+  liveStatus?: boolean;
 }
 
 export default ({
@@ -43,10 +45,12 @@ export default ({
   lyricOffset,
   page,
   biliShazamedName,
-  duration,
+  duration = 0,
   album,
   addedDate,
   source,
+  isLive,
+  liveStatus,
 }: SongProps): NoxMedia.Song => {
   return {
     id: String(cid),
@@ -65,6 +69,8 @@ export default ({
     album,
     addedDate: addedDate || new Date().getTime(),
     source,
+    isLive,
+    liveStatus,
   };
 };
 

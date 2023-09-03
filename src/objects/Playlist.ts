@@ -44,6 +44,7 @@ export const songlistToTracklist = (
       artwork: i0hdslbHTTPResolve(song.cover),
       duration: song.duration,
       song: song,
+      isLiveStream: song.isLive,
     };
   });
 };

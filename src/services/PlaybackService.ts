@@ -233,11 +233,14 @@ export async function PlaybackService() {
     saveLastPlayDuration(event.position);
     const { fadeIntervalMs, fadeIntervalSec } = getAppStoreState();
     if (
+      event.duration > 0 &&
       event.position >
-      Math.min(bRepeatDuration, event.duration) - fadeIntervalSec
+        Math.min(bRepeatDuration, event.duration) - fadeIntervalSec
     ) {
       if (getState().playmode !== NoxRepeatMode.REPEAT_TRACK) {
-        logger.debug('[FADEOUT] fading out....');
+        logger.debug(
+          `[FADEOUT] fading out....${event.position} / ${event.duration}`
+        );
         animatedVolumeChange({
           val: 0,
           duration: fadeIntervalMs,

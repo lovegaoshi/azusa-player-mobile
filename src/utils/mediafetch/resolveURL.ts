@@ -1,6 +1,7 @@
 import steriatkFetch from './steriatk';
 import biliaudioFetch from './biliaudio';
 import ytbvideoFetch from './ytbvideo';
+import bililiveFetch from './bililive';
 import { logger } from '../Logger';
 import { regexMatchOperations } from '../Utils';
 import { resolver, MUSICFREE } from './mfsdk';
@@ -31,6 +32,7 @@ export const fetchPlayUrlPromise = async (
       [steriatkFetch.regexResolveURLMatch, steriatkFetch.resolveURL],
       [biliaudioFetch.regexResolveURLMatch, biliaudioFetch.resolveURL],
       [ytbvideoFetch.regexResolveURLMatch, ytbvideoFetch.resolveURL],
+      [bililiveFetch.regexResolveURLMatch, bililiveFetch.resolveURL],
     ];
   logger.debug(`[resolveURL] ${bvid}, ${cid} }`);
 
