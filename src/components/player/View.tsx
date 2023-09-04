@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import TrackPlayer, { useActiveTrack } from 'react-native-track-player';
-import { SafeAreaView, StatusBar, View } from 'react-native';
+import { SafeAreaView, StatusBar, View, NativeModules } from 'react-native';
 import { ParamListBase } from '@react-navigation/native';
 import { DrawerNavigationProp } from '@react-navigation/drawer';
 import { useTranslation } from 'react-i18next';
@@ -14,6 +14,8 @@ import { initPlayerObject } from '@utils/ChromeStorage';
 import { initCache } from '@utils/Cache';
 import { getCurrentTPQueue } from '@stores/playingList';
 import useVersionCheck from '@hooks/useVersionCheck';
+
+const { NoxAndroidAutoModule } = NativeModules;
 
 interface Props {
   navigation: DrawerNavigationProp<ParamListBase>;
@@ -79,6 +81,7 @@ export function useSetupPlayer() {
       }
       await AdditionalPlaybackService(serviceOptions);
       await TrackPlayer.pause();
+      NoxAndroidAutoModule.disableShowWhenLocked();
     })();
     return () => {
       unmounted = true;
