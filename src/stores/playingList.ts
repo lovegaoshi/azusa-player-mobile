@@ -47,8 +47,10 @@ export const getNextSong = (song: NoxMedia.Song) => {
   return queue[index];
 };
 
-export const getPlaybackModeNotifIcon = (state?: string) => {
-  let nextIcon;
+export const getPlaybackModeNotifIcon = (
+  state?: string
+): [number, RepeatMode] => {
+  let nextIcon = require('@assets/icons/repeatModeRepeat.png');
   if (!state) {
     state = playlistStore.getState().playmode;
   }
@@ -114,7 +116,7 @@ export const cycleThroughPlaymode = () => {
   if (nextState) {
     return initializePlaybackMode(nextState);
   }
-  return null;
+  return undefined;
 };
 
 export default playlistStore;

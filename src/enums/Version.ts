@@ -1,3 +1,3 @@
 export enum VERSIONS {
-  latest = '2.7.6克信版',
+  latest = '2.8.3克信版',
 }
