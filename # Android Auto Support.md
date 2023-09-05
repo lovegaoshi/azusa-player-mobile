@@ -4,7 +4,7 @@ Make sure to read through [Google's guidelines](https://developer.android.com/tr
 
 ## Using RN < 0.71?
 
-You may need to manually edit HeadlessJsMediaService.java to make it compatible with your current RN version. See Podverse.
+You may need to manually edit HeadlessJsMediaService.java to make it compatible with your current RN version. See [Podverse's RNTP fork](https://github.com/lovegaoshi/react-native-track-player/tree/dev-podverse-aa) that uses RN 0.66.
 
 ## Necessary Declarations
 
@@ -32,7 +32,7 @@ Make `automotive_app_desc.xml` under your project's `android/src/main/res/xml` w
 </automotiveApp>
 ```
 
-Lastly enable via Settings -> Apps -> Android Auto -> In-App Notification Settings -> vertical dot on the top right corner -> Developer Settings -> Unknown Sources. This is necessary for any app not in the play store yet.
+Lastly enable any app to show in Android Auto via Settings -> Apps -> Android Auto -> In-App Notification Settings -> vertical dot on the top right corner -> Developer Settings -> Unknown Sources. This is necessary for any app not in the play store yet.
 
 This will immediately enable your RNTP app to have synced media control in Android Auto.
 
