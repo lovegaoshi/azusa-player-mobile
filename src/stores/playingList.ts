@@ -116,7 +116,7 @@ export const cycleThroughPlaymode = () => {
   if (nextState) {
     return initializePlaybackMode(nextState);
   }
-  return null;
+  return undefined;
 };
 
 export default playlistStore;
