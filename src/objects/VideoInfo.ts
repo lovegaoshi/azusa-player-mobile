@@ -12,6 +12,7 @@ export default class VideoInfo {
   }>;
   bvid: string;
   duration: number;
+  liveStatus?: boolean;
 
   constructor(
     title: string,
