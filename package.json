@@ -19,7 +19,7 @@
     "compile": "tsc",
     "fix": "gts fix",
     "prepare": "yarn run compile",
-    "pretest": "yarn run compile",
+    "pretest1": "yarn run compile",
     "prettify": "prettier --write ./src"
   },
   "dependencies": {
