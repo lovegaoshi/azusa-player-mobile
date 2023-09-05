@@ -1,4 +1,5 @@
 package com.noxplay.noxplayer
+
 import android.os.Build
 import androidx.annotation.RequiresApi
 import com.facebook.react.bridge.NativeModule
