@@ -206,6 +206,7 @@ export const LyricView = ({
           lineHeight={32}
           lineRenderer={lineRenderer}
           height={height}
+          noScrollThrottle={true}
         />
       </TouchableWithoutFeedback>
       {showUI && (
