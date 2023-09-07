@@ -69,6 +69,7 @@ interface LyricViewProps {
   artist: string;
   height?: number;
   showUI?: boolean;
+  noScrollThrottle?: boolean;
 }
 
 export const LyricView = ({
@@ -78,6 +79,7 @@ export const LyricView = ({
   artist,
   height,
   showUI = true,
+  noScrollThrottle = true,
 }: LyricViewProps) => {
   const { position } = useProgress();
   const [lrc, setLrc] = useState('正在加载歌词...');
@@ -206,7 +208,7 @@ export const LyricView = ({
           lineHeight={32}
           lineRenderer={lineRenderer}
           height={height}
-          noScrollThrottle={true}
+          noScrollThrottle={noScrollThrottle}
         />
       </TouchableWithoutFeedback>
       {showUI && (

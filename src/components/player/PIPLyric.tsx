@@ -31,6 +31,7 @@ const PIPLyricView = () => {
       // HACK: for problems see https://github.com/facebook/react-native/issues/34324
       height={height - 10}
       showUI={false}
+      noScrollThrottle={true}
     />
   ) : (
     <></>
