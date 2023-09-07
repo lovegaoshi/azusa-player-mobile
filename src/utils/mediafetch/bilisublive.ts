@@ -3,7 +3,6 @@ import axios from 'axios';
 import { regexFetchProps } from './generic';
 import SongTS from '@objects/Song';
 import { logger } from '../Logger';
-import bfetch from '../BiliFetch';
 import { CIDPREFIX } from './bililive';
 import { fetchBiliPaginatedAPI } from './paginatedbili';
 import VideoInfo from '@objects/VideoInfo';
@@ -22,7 +21,7 @@ const getRoomInfos = async (uids: number[]) => {
         // If both objects have the same 'check' value, maintain the original order.
         return 0;
       }
-      if (a.live_status) {
+      if (a.live_status === 1) {
         // If 'a' has 'check' set to true, it should come before 'b'.
         return -1;
       } else {
@@ -70,7 +69,7 @@ const videoInfo2Song = (val: VideoInfo) =>
     singerId: val.uploader.mid,
     cover: val.picSrc,
     isLive: true,
-    liveStatus: val.liveStatus,
+    liveStatus: val.liveStatus === 1,
   });
 const getSubList = async (
   uid: string,

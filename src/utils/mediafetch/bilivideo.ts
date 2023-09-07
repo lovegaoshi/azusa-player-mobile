@@ -25,11 +25,6 @@ const URL_PLAY_URL =
   'https://api.bilibili.com/x/player/playurl?cid={cid}&bvid={bvid}&qn=64&fnval=16';
 const URL_PLAY_URL_IOS =
   'https://api.bilibili.com/x/player/playurl?cid={cid}&bvid={bvid}&qn=6&fnval=16&platform=html5';
-/**
- *  BVID -> CID
- */
-const URL_BVID_TO_CID =
-  'https://api.bilibili.com/x/player/pagelist?bvid={bvid}&jsonp=jsonp';
 
 const fetchVideoInfoRaw = async (bvid: string) => {
   logger.info(
@@ -191,7 +186,9 @@ export const fetchVideoPlayUrlPromise = async ({
  */
 export const fetchCID = async (bvid: string) => {
   // logger.log('Data.js Calling fetchCID:' + URL_BVID_TO_CID.replace("{bvid}", bvid))
-  const res = await bfetch(URL_BVID_TO_CID.replace('{bvid}', bvid));
+  const res = await bfetch(
+    `https://api.bilibili.com/x/player/pagelist?bvid=${bvid}&jsonp=jsonp`
+  );
   const json = await res.json();
   const cid = extractResponseJson(json, 'CID');
   return cid;
