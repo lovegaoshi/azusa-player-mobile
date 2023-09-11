@@ -21,6 +21,7 @@ import appStore, {
   getABRepeatRaw,
   setCurrentPlaying,
   addDownloadPromise,
+  getR128Gain,
 } from '@stores/appStore';
 import { animatedVolumeChange } from '@utils/RNTPUtils';
 
@@ -63,12 +64,17 @@ export async function PlaybackService() {
 
   TrackPlayer.addEventListener(Event.RemotePause, () => {
     console.log('Event.RemotePause');
-    TrackPlayer.pause();
+    TrackPlayer.fadeOutPause(getAppStoreState().fadeIntervalMs);
   });
 
-  TrackPlayer.addEventListener(Event.RemotePlay, () => {
+  TrackPlayer.addEventListener(Event.RemotePlay, async () => {
     console.log('Event.RemotePlay');
+    const { fadeIntervalMs } = getAppStoreState();
     TrackPlayer.play();
+    TrackPlayer.setAnimatedVolume({
+      volume: getR128Gain() || 1,
+      duration: fadeIntervalMs,
+    });
   });
 
   TrackPlayer.addEventListener(Event.RemoteJumpForward, async event => {

@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useMemo, useState } from 'react';
+import React, { useState } from 'react';
 import { useWindowDimensions } from 'react-native';
 
 import TrackPlayer, { Track } from 'react-native-track-player';
