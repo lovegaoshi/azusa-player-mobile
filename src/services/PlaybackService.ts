@@ -11,19 +11,20 @@ import type { NoxStorage } from '../types/storage';
 import { saveLastPlayDuration } from '../utils/ChromeStorage';
 import logger from '../utils/Logger';
 import NoxCache from '../utils/Cache';
-import noxPlayingList, {
-  getNextSong,
-  cycleThroughPlaymode,
-} from '../stores/playingList';
+import noxPlayingList, { getNextSong } from '../stores/playingList';
 import { NoxRepeatMode } from '../enums/RepeatMode';
 import playerSettingStore from '@stores/playerSettingStore';
 import appStore, {
   getABRepeatRaw,
   setCurrentPlaying,
   addDownloadPromise,
-  getR128Gain,
 } from '@stores/appStore';
-import { animatedVolumeChange } from '@utils/RNTPUtils';
+import {
+  animatedVolumeChange,
+  fadePause,
+  fadePlay,
+  cycleThroughPlaymode,
+} from '@utils/RNTPUtils';
 
 const { getState } = noxPlayingList;
 const { setState } = appStore;
@@ -64,17 +65,12 @@ export async function PlaybackService() {
 
   TrackPlayer.addEventListener(Event.RemotePause, () => {
     console.log('Event.RemotePause');
-    TrackPlayer.fadeOutPause(getAppStoreState().fadeIntervalMs);
+    fadePause();
   });
 
   TrackPlayer.addEventListener(Event.RemotePlay, async () => {
     console.log('Event.RemotePlay');
-    const { fadeIntervalMs } = getAppStoreState();
-    TrackPlayer.play();
-    TrackPlayer.setAnimatedVolume({
-      volume: getR128Gain() || 1,
-      duration: fadeIntervalMs,
-    });
+    fadePlay();
   });
 
   TrackPlayer.addEventListener(Event.RemoteJumpForward, async event => {
@@ -84,14 +80,7 @@ export async function PlaybackService() {
 
   TrackPlayer.addEventListener(Event.RemoteJumpBackward, async event => {
     console.log('Event.RemoteJumpBackward', event);
-    if (Platform.OS === 'android') {
-      const newRNTPOptions = {
-        ...getAppStoreState().RNTPOptions,
-        rewindIcon: cycleThroughPlaymode(),
-      };
-      TrackPlayer.updateOptions(newRNTPOptions);
-      setState({ RNTPOptions: newRNTPOptions });
-    }
+    cycleThroughPlaymode();
   });
 
   TrackPlayer.addEventListener(Event.RemoteSeek, event => {

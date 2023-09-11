@@ -5,9 +5,14 @@ import TrackPlayer, {
   UpdateOptions,
 } from 'react-native-track-player';
 
-import { getPlaybackModeNotifIcon } from '../stores/playingList';
 import logger from './Logger';
+import appStore, { getR128Gain } from '@stores/appStore';
+import {
+  cycleThroughPlaymode as cyclePlaymode,
+  getPlaybackModeNotifIcon,
+} from '@stores/playingList';
 
+const { getState, setState } = appStore;
 const animatedVolume = new Animated.Value(1);
 
 animatedVolume.addListener(state => TrackPlayer.setVolume(state.value));
@@ -102,4 +107,28 @@ export const initRNTPOptions = () => {
     };
   }
   return options;
+};
+
+export const fadePause = () =>
+  TrackPlayer.fadeOutPause(getState().fadeIntervalMs);
+
+export const fadePlay = async () => {
+  const { fadeIntervalMs } = getState();
+  TrackPlayer.play();
+  TrackPlayer.setAnimatedVolume({
+    volume: getR128Gain() || 1,
+    duration: fadeIntervalMs,
+  });
+};
+
+export const cycleThroughPlaymode = () => {
+  const rewindIcon = cyclePlaymode();
+  if (Platform.OS === 'android') {
+    const newRNTPOptions = {
+      ...getState().RNTPOptions,
+      rewindIcon,
+    };
+    TrackPlayer.updateOptions(newRNTPOptions);
+    setState({ RNTPOptions: newRNTPOptions });
+  }
 };

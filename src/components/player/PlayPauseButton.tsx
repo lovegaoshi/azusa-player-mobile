@@ -9,9 +9,7 @@ import TrackPlayer, {
 import { useDebouncedValue } from 'hooks';
 import { useNoxSetting } from '@hooks/useSetting';
 import LottieButtonAnimated from '../buttons/LottieButtonAnimated';
-import appStore, { getR128Gain } from '@stores/appStore';
-
-const getAppStoreState = appStore.getState;
+import { fadePause, fadePlay } from '@utils/RNTPUtils';
 
 export const PlayPauseButton: React.FC<{
   state: State | undefined;
@@ -28,18 +26,6 @@ export const PlayPauseButton: React.FC<{
   const showPause = playWhenReady && !(isErrored || isEnded);
   const showBuffering = isErrored || (playWhenReady && isLoading);
 
-  const onPause = () =>
-    TrackPlayer.fadeOutPause(getAppStoreState().fadeIntervalMs);
-
-  const onPlay = () => {
-    const { fadeIntervalMs } = getAppStoreState();
-    TrackPlayer.play();
-    TrackPlayer.setAnimatedVolume({
-      volume: getR128Gain() || 1,
-      duration: fadeIntervalMs,
-    });
-  };
-
   if (showBuffering) {
     return playerStyle.loadingIcon ? (
       <Image
@@ -54,7 +40,7 @@ export const PlayPauseButton: React.FC<{
     <LottieButtonAnimated
       src={require('@assets/lottie/PauseGoAndBack.json')}
       size={50}
-      onPress={showPause ? onPause : onPlay}
+      onPress={showPause ? fadePause : fadePlay}
       clicked={!showPause}
       strokes={['Play', 'Play 2', 'Pause', 'Pause 3']}
     />
