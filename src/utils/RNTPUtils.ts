@@ -3,6 +3,7 @@ import TrackPlayer, {
   AppKilledPlaybackBehavior,
   Capability,
   UpdateOptions,
+  Track,
 } from 'react-native-track-player';
 
 import logger from './Logger';
@@ -11,9 +12,12 @@ import {
   cycleThroughPlaymode as cyclePlaymode,
   getPlaybackModeNotifIcon,
 } from '@stores/playingList';
+import { i0hdslbHTTPResolve } from '@utils/Utils';
+import { resolveUrl } from '@objects/Song';
 
 const { getState, setState } = appStore;
 const animatedVolume = new Animated.Value(1);
+const NULL_TRACK = { url: 'NULL', urlRefreshTimeStamp: 0 };
 
 animatedVolume.addListener(state => TrackPlayer.setVolume(state.value));
 
@@ -131,4 +135,24 @@ export const cycleThroughPlaymode = () => {
     TrackPlayer.updateOptions(newRNTPOptions);
     setState({ RNTPOptions: newRNTPOptions });
   }
+};
+
+export const songlistToTracklist = async (
+  songList: Array<NoxMedia.Song>
+): Promise<Track[]> => {
+  return Promise.all(
+    songList.map(async song => {
+      return {
+        ...NULL_TRACK,
+        title: song.parsedName,
+        artist: song.singer,
+        artwork: i0hdslbHTTPResolve(song.cover),
+        duration: song.duration,
+        song: song,
+        isLiveStream: song.isLive,
+        // TODO: add a throttler here
+        ...(await resolveUrl(song)),
+      };
+    })
+  );
 };
