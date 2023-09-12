@@ -141,13 +141,13 @@ export const fetchVideoPlayUrlPromise = async ({
       String(cid)
     )} with ${extractType}`
   );
-  // HACK:  this should be a breaking change that stringified cid
-  // will never be not true.
-  if (!cid || cid.includes('null')) {
-    cid = await fetchCID(bvid);
-    logger.debug(`[resolveURL] cid resolved to be: ${cid}`);
-  }
   try {
+    // HACK:  this should be a breaking change that stringified cid
+    // will never be not true.
+    if (!cid || cid.includes('null')) {
+      cid = await fetchCID(bvid);
+      logger.debug(`[resolveURL] cid resolved to be: ${cid}`);
+    }
     // iOS: resolve lowest res video?
     if (iOS && Platform.OS === 'ios') {
       const res = await bfetch(
