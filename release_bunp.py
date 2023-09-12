@@ -37,10 +37,12 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(description="ina music segment")
     parser.add_argument("--version", type=str,
                         help="file path or weblink", default=get_version())
+    parser.add_argument("--inc", type=int,
+                        help="file path or weblink", default=VersionUpdate.PATCH)
     args = parser.parse_args()
     version = get_version()
     new_version = autoincrease_version(
-        version=version, inc=VersionUpdate.PATCH)
+        version=version, inc=args.inc)
     fix_content(Path('./src/enums/Version.ts'), lambda line: line.replace(
         version, new_version
     ))
