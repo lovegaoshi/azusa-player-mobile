@@ -3,26 +3,24 @@ import TrackPlayer, {
   State,
   RepeatMode,
 } from 'react-native-track-player';
-import { DeviceEventEmitter, Platform } from 'react-native';
+import { DeviceEventEmitter } from 'react-native';
 
-import { resolveUrl, NULL_TRACK, parseSongR128gain } from '../objects/Song';
+import { NULL_TRACK, parseSongR128gain } from '../objects/Song';
 import { initBiliHeartbeat } from '../utils/Bilibili/BiliOperate';
 import type { NoxStorage } from '../types/storage';
 import { saveLastPlayDuration } from '../utils/ChromeStorage';
 import logger from '../utils/Logger';
-import NoxCache from '../utils/Cache';
-import noxPlayingList, {
-  getNextSong,
-  cycleThroughPlaymode,
-} from '../stores/playingList';
+import noxPlayingList, { getNextSong } from '../stores/playingList';
 import { NoxRepeatMode } from '../enums/RepeatMode';
 import playerSettingStore from '@stores/playerSettingStore';
-import appStore, {
-  getABRepeatRaw,
-  setCurrentPlaying,
-  addDownloadPromise,
-} from '@stores/appStore';
-import { animatedVolumeChange } from '@utils/RNTPUtils';
+import appStore, { getABRepeatRaw, setCurrentPlaying } from '@stores/appStore';
+import {
+  animatedVolumeChange,
+  fadePause,
+  fadePlay,
+  cycleThroughPlaymode,
+  resolveAndCache,
+} from '@utils/RNTPUtils';
 
 const { getState } = noxPlayingList;
 const { setState } = appStore;
@@ -63,12 +61,12 @@ export async function PlaybackService() {
 
   TrackPlayer.addEventListener(Event.RemotePause, () => {
     console.log('Event.RemotePause');
-    TrackPlayer.pause();
+    fadePause();
   });
 
-  TrackPlayer.addEventListener(Event.RemotePlay, () => {
+  TrackPlayer.addEventListener(Event.RemotePlay, async () => {
     console.log('Event.RemotePlay');
-    TrackPlayer.play();
+    fadePlay();
   });
 
   TrackPlayer.addEventListener(Event.RemoteJumpForward, async event => {
@@ -78,14 +76,7 @@ export async function PlaybackService() {
 
   TrackPlayer.addEventListener(Event.RemoteJumpBackward, async event => {
     console.log('Event.RemoteJumpBackward', event);
-    if (Platform.OS === 'android') {
-      const newRNTPOptions = {
-        ...getAppStoreState().RNTPOptions,
-        rewindIcon: cycleThroughPlaymode(),
-      };
-      TrackPlayer.updateOptions(newRNTPOptions);
-      setState({ RNTPOptions: newRNTPOptions });
-    }
+    cycleThroughPlaymode();
   });
 
   TrackPlayer.addEventListener(Event.RemoteSeek, event => {
@@ -108,32 +99,12 @@ export async function PlaybackService() {
       setState({ activeTrackPlayingId: event.track.song.id });
       // prefetch song
       const playerSetting = getPlayerSetting().playerSetting;
-      const { downloadProgressMap, downloadPromiseMap } = getAppStoreState();
+      const { downloadPromiseMap } = getAppStoreState();
       if (playerSetting.prefetchTrack && playerSetting.cacheSize > 2) {
         const nextSong = getNextSong(event.track.song);
         if (nextSong) {
           logger.debug(`[ResolveURL] prefetching ${nextSong.name}`);
-          const nextDownloadProgress =
-            downloadPromiseMap[nextSong.id] || new Promise(() => 1);
-          nextDownloadProgress.then(async () =>
-            addDownloadPromise(
-              nextSong,
-              NoxCache.noxMediaCache
-                ?.saveCacheMedia(
-                  nextSong,
-                  // resolveURL either finds cached file:/// or streamable https://
-                  // cached path will be bounded back in saveCacheMedia; only https will call RNBlobUtil
-                  await resolveUrl(nextSong, false)
-                )
-                .then(val => {
-                  parseSongR128gain(
-                    nextSong,
-                    getAppStoreState().fadeIntervalMs
-                  );
-                  return val;
-                })
-            )
-          );
+          resolveAndCache(nextSong);
         }
       }
       // r128gain support:
@@ -148,54 +119,30 @@ export async function PlaybackService() {
           0
         );
       }
+      const heartBeatReq = [event.track.song.bvid, event.track.song.id];
+      // HACK: what if cid needs to be resolved on the fly?
+      // TODO: its too much of a hassle and I would like to just
+      // ask users to refresh their lists instead, if they really care
+      // about sending heartbeats.
+      if (
+        lastBiliHeartBeat[0] !== heartBeatReq[0] ||
+        lastBiliHeartBeat[1] !== heartBeatReq[1]
+      ) {
+        initBiliHeartbeat({
+          bvid: event.track.song.bvid,
+          cid: event.track.song.id,
+        });
+        lastBiliHeartBeat = heartBeatReq;
+      }
       // to resolve bilibili media stream URLs on the fly, TrackPlayer.load is used to
       // replace the current track's url. its not documented? >:/
       if (
         event.index !== undefined &&
-        (event.track.url === NULL_TRACK.url ||
-          new Date().getTime() - event.track.urlRefreshTimeStamp > 3600000)
+        new Date().getTime() - event.track.urlRefreshTimeStamp > 3600000
       ) {
-        const heartBeatReq = [event.track.song.bvid, event.track.song.id];
-        // HACK: what if cid needs to be resolved on the fly?
-        // TODO: its too much of a hassle and I would like to just
-        // ask users to refresh their lists instead, if they really care
-        // about sending heartbeats.
-        if (
-          lastBiliHeartBeat[0] !== heartBeatReq[0] ||
-          lastBiliHeartBeat[1] !== heartBeatReq[1]
-        ) {
-          initBiliHeartbeat({
-            bvid: event.track.song.bvid,
-            cid: event.track.song.id,
-          });
-          lastBiliHeartBeat = heartBeatReq;
-        }
         try {
-          const updatedMetadata = await resolveUrl(event.track.song);
           const song = event.track.song as NoxMedia.Song;
-          const previousDownloadProgress =
-            downloadPromiseMap[event.track.song.id];
-          if (previousDownloadProgress === undefined) {
-            addDownloadPromise(
-              song,
-              NoxCache.noxMediaCache?.saveCacheMedia(
-                song,
-                Platform.OS === 'ios'
-                  ? await resolveUrl(event.track.song, false)
-                  : updatedMetadata
-              )
-            );
-          } else {
-            previousDownloadProgress.then(async () => {
-              addDownloadPromise(
-                song,
-                NoxCache.noxMediaCache?.saveCacheMedia(
-                  song,
-                  await resolveUrl(song, false)
-                )
-              );
-            });
-          }
+          const updatedMetadata = await resolveAndCache(song);
           const currentTrack = await TrackPlayer.getActiveTrack();
           await TrackPlayer.load({ ...currentTrack, ...updatedMetadata });
           if (getState().playmode === NoxRepeatMode.REPEAT_TRACK) {
@@ -263,5 +210,9 @@ export async function PlaybackService() {
         artwork: activeTrack?.artwork,
       });
     }
+  );
+
+  TrackPlayer.addEventListener(Event.PlaybackAnimatedVolumeChanged, () =>
+    logger.debug('animated volume finished event triggered')
   );
 }

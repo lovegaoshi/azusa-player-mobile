@@ -9,6 +9,7 @@ import TrackPlayer, {
 import { useDebouncedValue } from 'hooks';
 import { useNoxSetting } from '@hooks/useSetting';
 import LottieButtonAnimated from '../buttons/LottieButtonAnimated';
+import { fadePause, fadePlay } from '@utils/RNTPUtils';
 
 export const PlayPauseButton: React.FC<{
   state: State | undefined;
@@ -39,7 +40,7 @@ export const PlayPauseButton: React.FC<{
     <LottieButtonAnimated
       src={require('@assets/lottie/PauseGoAndBack.json')}
       size={50}
-      onPress={showPause ? TrackPlayer.pause : TrackPlayer.play}
+      onPress={showPause ? fadePause : fadePlay}
       clicked={!showPause}
       strokes={['Play', 'Play 2', 'Pause', 'Pause 3']}
     />

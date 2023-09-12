@@ -5,7 +5,6 @@ import {
   useTrackPlayerEvents,
   Event,
 } from 'react-native-track-player';
-import { IconButton } from 'react-native-paper';
 
 import { PlaybackError } from './PlaybackError';
 import { PlayPauseButton } from './PlayPauseButton';
@@ -24,9 +23,12 @@ export const PlayerControls: React.FC = () => {
 
   // HACK:  this shouldnt be here? but where?
   useTrackPlayerEvents([Event.PlaybackActiveTrackChanged], event => {
-    if (event.track && event.track.song)
+    if (event.track && event.track.song) {
       setCurrentPlayingId(event.track.song.id);
-    else setCurrentPlayingId('');
+    } else {
+      console.log('currentTrack', event.track, event.track?.song);
+      //setCurrentPlayingId('');
+    }
   });
 
   useTrackPlayerEvents([Event.PlaybackQueueEnded], () => {

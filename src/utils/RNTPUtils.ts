@@ -3,12 +3,23 @@ import TrackPlayer, {
   AppKilledPlaybackBehavior,
   Capability,
   UpdateOptions,
+  Track,
 } from 'react-native-track-player';
 
-import { getPlaybackModeNotifIcon } from '../stores/playingList';
 import logger from './Logger';
+import appStore, { addDownloadPromise, getR128Gain } from '@stores/appStore';
+import {
+  cycleThroughPlaymode as cyclePlaymode,
+  getPlaybackModeNotifIcon,
+} from '@stores/playingList';
+import { i0hdslbHTTPResolve } from '@utils/Utils';
+import { resolveUrl, parseSongR128gain } from '@objects/Song';
+import NoxCache from './Cache';
+import { setTPR128Gain } from './ffmpeg';
 
+const { getState, setState } = appStore;
 const animatedVolume = new Animated.Value(1);
+const NULL_TRACK = { url: 'NULL', urlRefreshTimeStamp: 0 };
 
 animatedVolume.addListener(state => TrackPlayer.setVolume(state.value));
 
@@ -102,4 +113,58 @@ export const initRNTPOptions = () => {
     };
   }
   return options;
+};
+
+export const fadePause = () =>
+  TrackPlayer.fadeOutPause(getState().fadeIntervalMs);
+
+export const fadePlay = async () => {
+  const { fadeIntervalMs } = getState();
+  setTPR128Gain(getR128Gain() || 0, fadeIntervalMs, 0);
+  TrackPlayer.play();
+};
+
+export const cycleThroughPlaymode = () => {
+  const rewindIcon = cyclePlaymode();
+  if (Platform.OS === 'android') {
+    const newRNTPOptions = {
+      ...getState().RNTPOptions,
+      rewindIcon,
+    };
+    TrackPlayer.updateOptions(newRNTPOptions);
+    setState({ RNTPOptions: newRNTPOptions });
+  }
+};
+
+export const resolveAndCache = async (song: NoxMedia.Song) => {
+  const resolvedUrl = await resolveUrl(song);
+  const { downloadPromiseMap, fadeIntervalMs } = getState();
+  const previousDownloadProgress =
+    downloadPromiseMap[song.id] ||
+    addDownloadPromise(
+      song,
+      NoxCache.noxMediaCache?.saveCacheMedia(song, resolvedUrl)
+    );
+  previousDownloadProgress.then(() => parseSongR128gain(song, fadeIntervalMs));
+  return resolvedUrl;
+};
+export const songlistToTracklist = async (
+  songList: Array<NoxMedia.Song>
+): Promise<Track[]> => {
+  return Promise.all(
+    songList.map(async song => {
+      const resolvedUrl = await resolveAndCache(song);
+      return {
+        ...NULL_TRACK,
+        title: song.parsedName,
+        artist: song.singer,
+        artwork: i0hdslbHTTPResolve(song.cover),
+        duration: song.duration,
+        song: song,
+        isLiveStream: song.isLive,
+        // TODO: add a throttler here
+        ...resolvedUrl,
+      };
+    })
+  );
 };

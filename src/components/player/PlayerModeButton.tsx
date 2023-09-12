@@ -3,7 +3,8 @@ import { IconButton } from 'react-native-paper';
 import { useStore } from 'zustand';
 
 import { useNoxSetting } from '@hooks/useSetting';
-import noxPlayingList, { cycleThroughPlaymode } from '@stores/playingList';
+import noxPlayingList from '@stores/playingList';
+import { cycleThroughPlaymode } from '@utils/RNTPUtils';
 
 export default () => {
   const playerStyle = useNoxSetting(state => state.playerStyle);

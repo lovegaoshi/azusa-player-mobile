@@ -9,11 +9,11 @@ import { TrackInfo } from './';
 import { SetupService, AdditionalPlaybackService } from 'services';
 import PlayerTopInfo from './PlayerTopInfo';
 import { useNoxSetting } from '@hooks/useSetting';
-import { songlistToTracklist } from '@objects/Playlist';
 import { initPlayerObject } from '@utils/ChromeStorage';
 import { initCache } from '@utils/Cache';
 import { getCurrentTPQueue } from '@stores/playingList';
 import useVersionCheck from '@hooks/useVersionCheck';
+import { songlistToTracklist } from '@utils/RNTPUtils';
 
 const { NoxAndroidAutoModule } = NativeModules;
 
@@ -74,9 +74,9 @@ export function useSetupPlayer() {
         val => val.id === currentPlayingID
       );
       if (findCurrentSong) {
-        await TrackPlayer.add(songlistToTracklist([findCurrentSong]));
+        await TrackPlayer.add(await songlistToTracklist([findCurrentSong]));
       } else {
-        await TrackPlayer.add(songlistToTracklist([currentQueue[0]]));
+        await TrackPlayer.add(await songlistToTracklist([currentQueue[0]]));
         serviceOptions.lastPlayDuration = 0;
       }
       await AdditionalPlaybackService(serviceOptions);

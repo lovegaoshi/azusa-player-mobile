@@ -12,7 +12,8 @@ const getRoomInfos = async (uids: number[]) => {
   logger.info(`[biliLive] calling fetchVideoInfo of ${uids}`);
   const response = await axios.post(
     'https://api.live.bilibili.com/room/v1/Room/get_status_info_by_uids',
-    { uids }
+    { uids },
+    { withCredentials: false }
   );
   const json = response.data;
   return Object.values(json.data)

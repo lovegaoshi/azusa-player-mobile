@@ -6,13 +6,13 @@ import TrackPlayer from 'react-native-track-player';
 
 import { useNoxSetting } from '@hooks/useSetting';
 import useUpdatePlaylist from '@hooks/useUpdatePlaylist';
-import { songlistToTracklist } from '@objects/Playlist';
 import { CopiedPlaylistMenuItem } from '../../buttons/CopiedPlaylistButton';
 import { RenameSongMenuItem } from '../../buttons/RenameSongButton';
 import useSongOperations from '@hooks/useSongOperations';
 import logger from '@utils/Logger';
 import { addR128Gain, getR128Gain } from '@stores/appStore';
 import ABSliderMenu from './ABSliderMenu';
+import { songlistToTracklist } from '@utils/RNTPUtils';
 
 enum ICONS {
   SEND_TO = 'playlist-plus',
@@ -104,7 +104,7 @@ export default ({
       const song = newPlaylist.songList[0];
 
       setCurrentPlayingId(song.id);
-      await TrackPlayer.add(songlistToTracklist([song]));
+      await TrackPlayer.add(await songlistToTracklist([song]));
       TrackPlayer.play();
     }
 

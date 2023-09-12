@@ -5,9 +5,9 @@ import { useNavigation } from '@react-navigation/native';
 import { useTranslation } from 'react-i18next';
 
 import { useNoxSetting } from '@hooks/useSetting';
-import { songlistToTracklist } from '@objects/Playlist';
 import { randomChoice } from '@utils/Utils';
 import { ViewEnum } from '@enums/View';
+import { songlistToTracklist } from '@utils/RNTPUtils';
 
 export default () => {
   const navigation = useNavigation();
@@ -37,7 +37,7 @@ export default () => {
     setCurrentPlayingList(newSearchPlaylist);
     const song = randomChoice(allSongs);
     setCurrentPlayingId(song.id);
-    await TrackPlayer.add(songlistToTracklist([song]));
+    await TrackPlayer.add(await songlistToTracklist([song]));
     TrackPlayer.play();
     navigation.navigate(ViewEnum.PLAYER_HOME as never);
     setCurrentPlaylist(newSearchPlaylist);

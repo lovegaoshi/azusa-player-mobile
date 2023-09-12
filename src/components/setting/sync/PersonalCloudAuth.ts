@@ -11,6 +11,7 @@
  *
  */
 import axios from 'axios';
+// eslint-disable-next-line import/no-unresolved
 import { PERSONAL_CLOUD_SECRET } from '@env';
 
 import { logger } from '@utils/Logger';
@@ -22,7 +23,7 @@ import { logger } from '@utils/Logger';
  */
 export const getBiliUser = async () => {
   try {
-    const val = await fetch('https://api.bilibili.com/nav');
+    const val = await fetch('https://api.bilibili.com/x/web-interface/nav');
     const res = await val.json();
     return res.data;
   } catch (e) {
@@ -69,7 +70,7 @@ export const noxRestore = async (cloudAddress: string, cloudID?: string) => {
     if (res.status === 200) {
       return new Uint8Array(await res.arrayBuffer());
     }
-     * 
+     *
      */
   } catch (e) {
     logger.error(e);

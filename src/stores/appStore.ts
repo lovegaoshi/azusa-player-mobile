@@ -97,7 +97,7 @@ export const initialize = async () => {
   });
 };
 
-export const reExtractSongName = (name: string, uploader: string | number) => 
+export const reExtractSongName = (name: string, uploader: string | number) =>
   appStore.getState().reExtractSongName(name, uploader);
 
 export const parseSongName = (song: NoxMedia.Song): NoxMedia.Song => {
@@ -113,9 +113,9 @@ export const saveR128Gain = async (val: NoxStorage.R128Dict) => {
   saveR128GainMapping(newR128gain);
 };
 
-export const getR128Gain = (song: NoxMedia.Song) => {
-  const { r128gain } = appStore.getState();
-  return r128gain[song.id] ?? null;
+export const getR128Gain = (song?: NoxMedia.Song) => {
+  const { r128gain, currentPlayingId } = appStore.getState();
+  return r128gain[song ? song.id : currentPlayingId] ?? null;
 };
 
 export const addR128Gain = (song: NoxMedia.Song, gain: number | null) => {
@@ -184,6 +184,7 @@ export const addDownloadPromise = async (
     [song.id]: downloadPromise,
   };
   appStore.setState({ downloadPromiseMap: newMap });
+  return downloadPromise;
 };
 
 export default appStore;

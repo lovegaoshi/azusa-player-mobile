@@ -3,12 +3,11 @@ import { useStore } from 'zustand';
 
 import { biliSuggest } from '@utils/Bilibili/BiliOperate';
 import { useNoxSetting } from '@hooks/useSetting';
-import { songlistToTracklist } from '@objects/Playlist';
 import noxPlayingList, { getCurrentTPQueue } from '@stores/playingList';
 import biliavideo from '@utils/mediafetch/biliavideo';
 import { randomChoice, regexMatchOperations } from '@utils/Utils';
 import { NoxRepeatMode } from '@enums/RepeatMode';
-import { animatedVolumeChange } from '@utils/RNTPUtils';
+import { animatedVolumeChange, songlistToTracklist } from '@utils/RNTPUtils';
 import appStore from '@stores/appStore';
 import ytbvideoFetch from '@utils/mediafetch/ytbvideo';
 
@@ -61,10 +60,10 @@ export default () => {
     }
     const suggestedSong = [await getBiliSuggest()];
     if (next) {
-      await TrackPlayer.add(songlistToTracklist(suggestedSong));
+      await TrackPlayer.add(await songlistToTracklist(suggestedSong));
       return;
     }
-    await TrackPlayer.add(songlistToTracklist(suggestedSong), 0);
+    await TrackPlayer.add(await songlistToTracklist(suggestedSong), 0);
   };
 
   const performSkipToNextRaw = async () => {
@@ -80,7 +79,10 @@ export default () => {
       try {
         await skipToBiliSuggest();
       } catch {
-        await TrackPlayer.add(songlistToTracklist([currentTPQueue[nextIndex]]));
+        // TODO: this will just grow infinitely. WTF was i thinking?
+        await TrackPlayer.add(
+          await songlistToTracklist([currentTPQueue[nextIndex]])
+        );
       }
     }
     TrackPlayer.skipToNext();
@@ -98,7 +100,7 @@ export default () => {
         await skipToBiliSuggest(false);
       } catch {
         await TrackPlayer.add(
-          songlistToTracklist([currentTPQueue[nextIndex]]),
+          await songlistToTracklist([currentTPQueue[nextIndex]]),
           0
         );
       }

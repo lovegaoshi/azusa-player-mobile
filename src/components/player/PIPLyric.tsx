@@ -1,6 +1,5 @@
-import React, { useCallback, useEffect, useMemo, useState } from 'react';
+import React, { useState } from 'react';
 import { useWindowDimensions } from 'react-native';
-
 import TrackPlayer, { Track } from 'react-native-track-player';
 import { useStore } from 'zustand';
 
@@ -31,6 +30,7 @@ const PIPLyricView = () => {
       // HACK: for problems see https://github.com/facebook/react-native/issues/34324
       height={height - 10}
       showUI={false}
+      noScrollThrottle={true}
     />
   ) : (
     <></>

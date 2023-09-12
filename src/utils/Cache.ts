@@ -1,6 +1,7 @@
 import { Platform } from 'react-native';
 import LRUCache from 'lru-cache';
 import RNFetchBlob from 'react-native-blob-util';
+import TrackPlayer from 'react-native-track-player';
 
 import { r128gain, setR128Gain, ffmpegToMP3 } from './ffmpeg';
 import {
@@ -9,12 +10,10 @@ import {
   getR128Gain,
 } from '@stores/appStore';
 import playerSettingStore from '@stores/playerSettingStore';
-
-const { getState } = playerSettingStore;
-
 import { getCachedMediaMapping, saveCachedMediaMapping } from './ChromeStorage';
 import logger from './Logger';
-import TrackPlayer from 'react-native-track-player';
+
+const { getState } = playerSettingStore;
 
 interface optionsProps {
   max?: number;

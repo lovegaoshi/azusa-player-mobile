@@ -31,6 +31,22 @@ export const ffmpegToMP3 = async (fspath: string) => {
   return `${fspath}.mp3`;
 };
 
+export const setTPR128Gain = async (gain: number, fade = 0, init = -1) => {
+  if (gain >= 0) {
+    logger.warn(`[ffmpeg] positive ${gain} dB is not yet supported!`);
+    animatedVolumeChange({ val: 1, duration: fade, init });
+    return;
+  }
+  try {
+    const volume = Math.pow(10, gain / 20);
+    console.debug(`[r128gain] set r128gain volume to ${volume}`);
+    animatedVolumeChange({ val: volume, duration: fade, init });
+  } catch (e) {
+    logger.warn(`[ffmpeg] r128gain set error: ${e}`);
+    animatedVolumeChange({ val: 1, duration: fade, init });
+  }
+};
+
 export const setR128Gain = async (
   gain: number | string,
   song: NoxMedia.Song,
@@ -45,17 +61,5 @@ export const setR128Gain = async (
     logger.warn(`${song.parsedName} is no longer the active track.`);
     return;
   }
-  if (gain >= 0) {
-    logger.warn(`[ffmpeg] positive ${gain} dB is not yet supported!`);
-    animatedVolumeChange({ val: 1, duration: fade, init });
-    return;
-  }
-  try {
-    const volume = Math.pow(10, gain / 20);
-    console.debug(`[r128gain] set r128gain volume to ${volume}`);
-    animatedVolumeChange({ val: volume, duration: fade, init });
-  } catch (e) {
-    logger.warn(`[ffmpeg] r128gain set error: ${e}`);
-    animatedVolumeChange({ val: 1, duration: fade, init });
-  }
+  setTPR128Gain(gain, fade, init);
 };
