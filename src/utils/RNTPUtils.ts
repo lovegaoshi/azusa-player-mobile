@@ -15,6 +15,7 @@ import {
 import { i0hdslbHTTPResolve } from '@utils/Utils';
 import { resolveUrl, parseSongR128gain } from '@objects/Song';
 import NoxCache from './Cache';
+import { setTPR128Gain } from './ffmpeg';
 
 const { getState, setState } = appStore;
 const animatedVolume = new Animated.Value(1);
@@ -119,11 +120,8 @@ export const fadePause = () =>
 
 export const fadePlay = async () => {
   const { fadeIntervalMs } = getState();
+  setTPR128Gain(getR128Gain() || 0, fadeIntervalMs, 0);
   TrackPlayer.play();
-  TrackPlayer.setAnimatedVolume({
-    volume: getR128Gain() || 1,
-    duration: fadeIntervalMs,
-  });
 };
 
 export const cycleThroughPlaymode = () => {

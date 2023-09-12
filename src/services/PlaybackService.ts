@@ -3,22 +3,17 @@ import TrackPlayer, {
   State,
   RepeatMode,
 } from 'react-native-track-player';
-import { DeviceEventEmitter, Platform } from 'react-native';
+import { DeviceEventEmitter } from 'react-native';
 
-import { resolveUrl, NULL_TRACK, parseSongR128gain } from '../objects/Song';
+import { NULL_TRACK, parseSongR128gain } from '../objects/Song';
 import { initBiliHeartbeat } from '../utils/Bilibili/BiliOperate';
 import type { NoxStorage } from '../types/storage';
 import { saveLastPlayDuration } from '../utils/ChromeStorage';
 import logger from '../utils/Logger';
-import NoxCache from '../utils/Cache';
 import noxPlayingList, { getNextSong } from '../stores/playingList';
 import { NoxRepeatMode } from '../enums/RepeatMode';
 import playerSettingStore from '@stores/playerSettingStore';
-import appStore, {
-  getABRepeatRaw,
-  setCurrentPlaying,
-  addDownloadPromise,
-} from '@stores/appStore';
+import appStore, { getABRepeatRaw, setCurrentPlaying } from '@stores/appStore';
 import {
   animatedVolumeChange,
   fadePause,
@@ -215,5 +210,9 @@ export async function PlaybackService() {
         artwork: activeTrack?.artwork,
       });
     }
+  );
+
+  TrackPlayer.addEventListener(Event.PlaybackAnimatedVolumeChanged, () =>
+    logger.debug('animated volume finished event triggered')
   );
 }
