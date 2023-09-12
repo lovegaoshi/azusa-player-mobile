@@ -7,6 +7,10 @@ declare namespace NoxNetwork {
     referrer?: string;
     credentials?: RequestCredentials_;
   }
+  /**
+   * this interface denotes the parsed resolveURL object from each fetcher.
+   * TODO: refactor into below...
+   */
 
   export interface ParsedNoxMediaURL {
     url: string;
@@ -14,5 +18,18 @@ declare namespace NoxNetwork {
     duration?: number;
     loudness?: number;
     perceivedLoudness?: number;
+  }
+  /**
+   * this interface denotes the FINAL parsed resolveURL object.
+   */
+  export interface ResolvedNoxMediaURL {
+    duration?: number;
+    artwork?: string;
+    url: string;
+    headers: {
+      [key: string]: any;
+    };
+    userAgent: string;
+    urlRefreshTimeStamp: number;
   }
 }

@@ -6,7 +6,12 @@ import { customReqHeader, DEFAULT_UA } from '../utils/BiliFetch';
 import { logger } from '../utils/Logger';
 import NoxCache from '../utils/Cache';
 import playerSettingStore from '@stores/playerSettingStore';
-import { addR128Gain, getR128Gain, reExtractSongName } from '@stores/appStore';
+import {
+  addR128Gain,
+  getR128Gain,
+  reExtractSongName,
+  cacheResolvedURL,
+} from '@stores/appStore';
 import { r128gain, setR128Gain } from '@utils/ffmpeg';
 
 export const DEFAULT_NULL_URL = 'NULL';
@@ -141,27 +146,34 @@ export const resolveUrl = async (song: NoxMedia.Song, iOS = true) => {
   logger.debug(
     `[SongResolveURL] cache ${cachedUrl ? 'found' : 'missed'}, ${song.id}`
   );
-  const url = cachedUrl
-    ? {
-        ...(await updateMetadata()),
-        url: cachedUrl,
-      }
-    : await fetchPlayUrlPromise(song, iOS);
-  logger.debug(`[SongResolveURL] ${song.parsedName} is resolved to ${url.url}`);
-  if (url.loudness) {
+  const cacheWrapper = async (
+    song: NoxMedia.Song
+  ): Promise<NoxNetwork.ResolvedNoxMediaURL> => {
+    const url = cachedUrl
+      ? {
+          ...(await updateMetadata()),
+          url: cachedUrl,
+        }
+      : await fetchPlayUrlPromise(song, iOS);
     logger.debug(
-      `[SongResolveURL] ${song.parsedName} contains loudness ${url.loudness} and ${url.perceivedLoudness}`
+      `[SongResolveURL] ${song.parsedName} is resolved to ${url.url}`
     );
-    addR128Gain(song, -url.loudness);
-  }
-  return {
-    url: url.url,
-    headers: customReqHeader(url.url, { referer: 'https://www.bilibili.com/' }),
-    userAgent: DEFAULT_UA,
-    urlRefreshTimeStamp: new Date().getTime(),
-    ...(url.cover && { artwork: url.cover }),
-    ...(url.duration && { duration: url.duration }),
+    if (url.loudness) {
+      logger.debug(
+        `[SongResolveURL] ${song.parsedName} contains loudness ${url.loudness} and ${url.perceivedLoudness}`
+      );
+      addR128Gain(song, -url.loudness);
+    }
+    return {
+      url: url.url,
+      headers: customReqHeader(url.url),
+      userAgent: DEFAULT_UA,
+      urlRefreshTimeStamp: new Date().getTime(),
+      ...(url.cover && { artwork: url.cover }),
+      ...(url.duration && { duration: url.duration }),
+    };
   };
+  return cacheResolvedURL(song, cacheWrapper);
 };
 
 export const dummySong = (): NoxMedia.Song => {

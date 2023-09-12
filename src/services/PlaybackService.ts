@@ -3,7 +3,7 @@ import TrackPlayer, {
   State,
   RepeatMode,
 } from 'react-native-track-player';
-import { DeviceEventEmitter } from 'react-native';
+import { DeviceEventEmitter, Platform } from 'react-native';
 
 import { NULL_TRACK, parseSongR128gain } from '../objects/Song';
 import { initBiliHeartbeat } from '../utils/Bilibili/BiliOperate';
@@ -99,13 +99,13 @@ export async function PlaybackService() {
       setState({ activeTrackPlayingId: event.track.song.id });
       // prefetch song
       const playerSetting = getPlayerSetting().playerSetting;
-      const { downloadPromiseMap } = getAppStoreState();
-      if (playerSetting.prefetchTrack && playerSetting.cacheSize > 2) {
-        const nextSong = getNextSong(event.track.song);
-        if (nextSong) {
-          logger.debug(`[ResolveURL] prefetching ${nextSong.name}`);
-          resolveAndCache(nextSong);
-        }
+      const nextSong = getNextSong(event.track.song);
+      if (nextSong) {
+        logger.debug(`[ResolveURL] prefetching ${nextSong.name}`);
+        resolveAndCache(
+          nextSong,
+          !(playerSetting.prefetchTrack && playerSetting.cacheSize > 2)
+        );
       }
       // r128gain support:
       // this is here to load existing R128Gain values or resolve new gain values from cached files only.
@@ -211,8 +211,9 @@ export async function PlaybackService() {
       });
     }
   );
-
-  TrackPlayer.addEventListener(Event.PlaybackAnimatedVolumeChanged, () =>
-    logger.debug('animated volume finished event triggered')
-  );
+  if (Platform.OS === 'android') {
+    TrackPlayer.addEventListener(Event.PlaybackAnimatedVolumeChanged, () =>
+      logger.debug('animated volume finished event triggered')
+    );
+  }
 }

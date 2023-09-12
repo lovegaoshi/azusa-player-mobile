@@ -13,6 +13,7 @@ import {
 import type { NoxStorage } from '../types/storage';
 import rejson from '@utils/rejson.json';
 import { LoadJSONRegExtractors } from '@utils/re';
+import logger from '@utils/Logger';
 
 interface AppStore {
   pipMode: boolean;
@@ -39,6 +40,7 @@ interface AppStore {
   RNTPOptions?: UpdateOptions;
   setRNTPOptions: (val: UpdateOptions) => void;
   reExtractSongName: (name: string, uploader: string | number) => string;
+  cachedResolveURLMap: { [key: string]: NoxNetwork.ResolvedNoxMediaURL };
 }
 
 const appStore = createStore<AppStore>(set => ({
@@ -79,6 +81,7 @@ const appStore = createStore<AppStore>(set => ({
     set({ RNTPOptions: val });
   },
   reExtractSongName: (val: string) => val,
+  cachedResolveURLMap: {},
 }));
 
 export const initialize = async () => {
@@ -185,6 +188,26 @@ export const addDownloadPromise = async (
   };
   appStore.setState({ downloadPromiseMap: newMap });
   return downloadPromise;
+};
+
+export const cacheResolvedURL = async (
+  song: NoxMedia.Song,
+  resolveURL: (song: NoxMedia.Song) => Promise<NoxNetwork.ResolvedNoxMediaURL>
+) => {
+  const cachedResolveURLMap = appStore.getState().cachedResolveURLMap;
+  const cachedResolvedURL = cachedResolveURLMap[song.id];
+  if (
+    cachedResolvedURL === undefined ||
+    new Date().getTime() - cachedResolvedURL.urlRefreshTimeStamp > 3600000
+  ) {
+    logger.debug(`[CacheResolveURL] ${song.parsedName} needs to be refetched.`);
+    const result = await resolveURL(song);
+    appStore.setState({
+      cachedResolveURLMap: { ...cachedResolveURLMap, [song.id]: result },
+    });
+    return result;
+  }
+  return cachedResolvedURL;
 };
 
 export default appStore;

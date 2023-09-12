@@ -22,7 +22,8 @@ export default async function BiliFetch(
   },
   throttler?: Bottleneck
 ) {
-  const params = { ...paramsProp };
+  // BREAKING: does 2s timeout break stuff? does this work at all?
+  const params = { timeout: 2000, ...paramsProp };
   if (Object.entries(params.headers).length === 0) {
     params.headers = customReqHeader(url, params.headers);
   }
@@ -51,7 +52,7 @@ export default async function BiliFetch(
  */
 export const customReqHeader = (
   url: string,
-  reqHeader: { [key: string]: any }
+  reqHeader: { [key: string]: any } = {}
 ) => {
   if (
     /bilibili/.exec(url) ||

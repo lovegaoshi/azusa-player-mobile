@@ -18,7 +18,6 @@ export const updateSubscribeFavList = async ({
   progressEmitter = () => undefined,
 }: Props) => {
   try {
-    const oldListLength = listObj.songList.length;
     // eslint-disable-next-line prefer-const
     let newPlaylist = { ...listObj, lastSubscribed: new Date().getTime() };
     if (subscribeUrls === undefined) {
