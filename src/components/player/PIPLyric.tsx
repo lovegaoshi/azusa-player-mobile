@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { useWindowDimensions } from 'react-native';
-
 import TrackPlayer, { Track } from 'react-native-track-player';
 import { useStore } from 'zustand';
 
