@@ -45,7 +45,7 @@ enum VIEW {
 
 const Stack = createNativeStackNavigator();
 
-const FadeOptions = [0, 500, 1000, 1500];
+const FadeOptions = [0, 250, 500, 1000];
 
 const developerSettings: { [key: string]: SettingEntry } = {
   noInterruption: {
