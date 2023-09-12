@@ -3,7 +3,7 @@ import TrackPlayer, {
   State,
   RepeatMode,
 } from 'react-native-track-player';
-import { DeviceEventEmitter } from 'react-native';
+import { DeviceEventEmitter, Platform } from 'react-native';
 
 import { NULL_TRACK, parseSongR128gain } from '../objects/Song';
 import { initBiliHeartbeat } from '../utils/Bilibili/BiliOperate';
@@ -211,8 +211,9 @@ export async function PlaybackService() {
       });
     }
   );
-
-  TrackPlayer.addEventListener(Event.PlaybackAnimatedVolumeChanged, () =>
-    logger.debug('animated volume finished event triggered')
-  );
+  if (Platform.OS === 'android') {
+    TrackPlayer.addEventListener(Event.PlaybackAnimatedVolumeChanged, () =>
+      logger.debug('animated volume finished event triggered')
+    );
+  }
 }

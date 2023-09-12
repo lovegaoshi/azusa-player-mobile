@@ -6,7 +6,7 @@ import TrackPlayer, {
   Track,
 } from 'react-native-track-player';
 
-import logger from './Logger';
+import { logger } from './Logger';
 import appStore, { addDownloadPromise, getR128Gain } from '@stores/appStore';
 import {
   cycleThroughPlaymode as cyclePlaymode,

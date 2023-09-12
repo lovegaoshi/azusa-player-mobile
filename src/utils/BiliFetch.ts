@@ -52,7 +52,7 @@ export default async function BiliFetch(
  */
 export const customReqHeader = (
   url: string,
-  reqHeader: { [key: string]: any }
+  reqHeader: { [key: string]: any } = {}
 ) => {
   if (
     /bilibili/.exec(url) ||
