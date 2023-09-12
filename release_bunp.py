@@ -13,12 +13,20 @@ class VersionUpdate(Enum):
     PATCH = 3
 
 
+VersionUpdateDict = {
+    1: VersionUpdate.MAJOR,
+    2: VersionUpdate.MINOR,
+    3: VersionUpdate.PATCH
+}
+
+
 def autoincrease_version(version=get_version(), inc=VersionUpdate.PATCH):
     rematch = re.compile(r'(\d+)\.(\d+)\.(\d+)').match(version)
     logging.debug(f'increase version release from {version}')
     major = int(rematch.group(1))
     minor = int(rematch.group(2))
     patch = int(rematch.group(3))
+    print(inc, inc == VersionUpdate.MINOR)
     if inc == VersionUpdate.MAJOR:
         major += 1
         minor = 0
@@ -38,11 +46,11 @@ if __name__ == '__main__':
     parser.add_argument("--version", type=str,
                         help="file path or weblink", default=get_version())
     parser.add_argument("--inc", type=int,
-                        help="file path or weblink", default=VersionUpdate.PATCH)
+                        help="file path or weblink", default=3)
     args = parser.parse_args()
     version = get_version()
     new_version = autoincrease_version(
-        version=version, inc=args.inc)
+        version=version, inc=VersionUpdateDict[args.inc])
     fix_content(Path('./src/enums/Version.ts'), lambda line: line.replace(
         version, new_version
     ))
