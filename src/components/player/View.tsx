@@ -1,6 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import TrackPlayer, { useActiveTrack } from 'react-native-track-player';
-import { SafeAreaView, StatusBar, View, NativeModules } from 'react-native';
+import {
+  SafeAreaView,
+  StatusBar,
+  View,
+  NativeModules,
+  Platform,
+} from 'react-native';
 import { ParamListBase } from '@react-navigation/native';
 import { DrawerNavigationProp } from '@react-navigation/drawer';
 import { useTranslation } from 'react-i18next';
@@ -81,7 +87,9 @@ export function useSetupPlayer() {
       }
       await AdditionalPlaybackService(serviceOptions);
       await TrackPlayer.pause();
-      NoxAndroidAutoModule.disableShowWhenLocked();
+      if (Platform.OS === 'android') {
+        NoxAndroidAutoModule.disableShowWhenLocked();
+      }
     })();
     return () => {
       unmounted = true;
