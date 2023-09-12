@@ -66,7 +66,7 @@ export const matchBiliURL = (input: string) => {
 
 export const searchBiliURLs = async ({
   input,
-  progressEmitter = val => undefined,
+  progressEmitter = () => undefined,
   favList = [],
   useBiliTag = false,
   fastSearch = false,

@@ -71,6 +71,7 @@ const videoInfo2Song = (val: VideoInfo) =>
     cover: val.picSrc,
     isLive: true,
     liveStatus: val.liveStatus === 1,
+    album: val.desc,
   });
 const getSubList = async (
   uid: string,
@@ -87,7 +88,7 @@ const getSubList = async (
     getPageSize: () => 50,
     getItems: (js: any) => js.data.list,
     progressEmitter,
-    favList,
+    favList: [],
     resolveBiliBVID: async bvobjs =>
       await getRoomInfos(bvobjs.map((obj: any) => obj.mid)),
   });
