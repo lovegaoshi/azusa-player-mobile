@@ -73,6 +73,9 @@ export function useSetupPlayer() {
       updateVersion(storedPlayerSetting);
       checkVersion(true, storedPlayerSetting);
       if (unmounted) return;
+      if (Platform.OS === 'android') {
+        NoxAndroidAutoModule.disableShowWhenLocked();
+      }
       setPlayerReady(true);
       if (unmounted) return;
       const currentQueue = getCurrentTPQueue();
@@ -87,9 +90,6 @@ export function useSetupPlayer() {
       }
       await AdditionalPlaybackService(serviceOptions);
       await TrackPlayer.pause();
-      if (Platform.OS === 'android') {
-        NoxAndroidAutoModule.disableShowWhenLocked();
-      }
     })();
     return () => {
       unmounted = true;
