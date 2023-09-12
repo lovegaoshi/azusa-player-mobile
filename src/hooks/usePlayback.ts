@@ -7,10 +7,10 @@ import TrackPlayer, {
 } from 'react-native-track-player';
 import { useTranslation } from 'react-i18next';
 
-import { songlistToTracklist } from '../objects/Playlist';
 import { useNoxSetting } from './useSetting';
 import { randomChoice } from '../utils/Utils';
 import logger from '../utils/Logger';
+import { songlistToTracklist } from '@utils/RNTPUtils';
 
 const PLAYLIST_MEDIAID = 'playlist-';
 
@@ -55,7 +55,7 @@ const usePlayback = () => {
       clearPlaylistUninterrupted();
     } else {
       await TrackPlayer.reset();
-      await TrackPlayer.add(songlistToTracklist([song]));
+      await TrackPlayer.add(await songlistToTracklist([song]));
       TrackPlayer.play();
     }
   };

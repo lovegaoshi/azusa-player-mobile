@@ -184,6 +184,7 @@ export const addDownloadPromise = async (
     [song.id]: downloadPromise,
   };
   appStore.setState({ downloadPromiseMap: newMap });
+  return downloadPromise;
 };
 
 export default appStore;

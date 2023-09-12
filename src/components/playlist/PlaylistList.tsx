@@ -22,13 +22,13 @@ import SongMenu from './SongMenu';
 import PlaylistInfo from './PlaylistInfo';
 import PlaylistMenuButton from '../buttons/PlaylistMenuButton';
 import { updateSubscribeFavList } from '@utils/BiliSubscribe';
-import { songlistToTracklist } from '@objects/Playlist';
 import { PLAYLIST_ENUMS, SearchRegex } from '@enums/Playlist';
 import { syncFavlist } from '@utils/Bilibili/bilifavOperate';
 import noxCache, { noxCacheKey } from '@utils/Cache';
 import noxPlayingList from '@stores/playingList';
 import { NoxRepeatMode } from '@enums/RepeatMode';
 import { i0hdslbHTTPResolve } from '@utils/Utils';
+import { songlistToTracklist } from '@utils/RNTPUtils';
 
 const { getState } = noxPlayingList;
 
@@ -232,7 +232,7 @@ const PlaylistList = () => {
       : currentPlaylist.songList;
     setCurrentPlayingList({ ...currentPlaylist, songList: queuedSongList });
     setCurrentPlayingId(song.id);
-    await TrackPlayer.add(songlistToTracklist([song]));
+    await TrackPlayer.add(await songlistToTracklist([song]));
     TrackPlayer.play();
     return;
     /*

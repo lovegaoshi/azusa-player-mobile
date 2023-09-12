@@ -7,13 +7,14 @@ import TrackPlayer, {
 } from 'react-native-track-player';
 
 import logger from './Logger';
-import appStore, { getR128Gain } from '@stores/appStore';
+import appStore, { addDownloadPromise, getR128Gain } from '@stores/appStore';
 import {
   cycleThroughPlaymode as cyclePlaymode,
   getPlaybackModeNotifIcon,
 } from '@stores/playingList';
 import { i0hdslbHTTPResolve } from '@utils/Utils';
-import { resolveUrl } from '@objects/Song';
+import { resolveUrl, parseSongR128gain } from '@objects/Song';
+import NoxCache from './Cache';
 
 const { getState, setState } = appStore;
 const animatedVolume = new Animated.Value(1);
@@ -137,11 +138,24 @@ export const cycleThroughPlaymode = () => {
   }
 };
 
+export const resolveAndCache = async (song: NoxMedia.Song) => {
+  const resolvedUrl = await resolveUrl(song);
+  const { downloadPromiseMap, fadeIntervalMs } = getState();
+  const previousDownloadProgress =
+    downloadPromiseMap[song.id] ||
+    addDownloadPromise(
+      song,
+      NoxCache.noxMediaCache?.saveCacheMedia(song, resolvedUrl)
+    );
+  previousDownloadProgress.then(() => parseSongR128gain(song, fadeIntervalMs));
+  return resolvedUrl;
+};
 export const songlistToTracklist = async (
   songList: Array<NoxMedia.Song>
 ): Promise<Track[]> => {
   return Promise.all(
     songList.map(async song => {
+      const resolvedUrl = await resolveAndCache(song);
       return {
         ...NULL_TRACK,
         title: song.parsedName,
@@ -151,7 +165,7 @@ export const songlistToTracklist = async (
         song: song,
         isLiveStream: song.isLive,
         // TODO: add a throttler here
-        ...(await resolveUrl(song)),
+        ...resolvedUrl,
       };
     })
   );
