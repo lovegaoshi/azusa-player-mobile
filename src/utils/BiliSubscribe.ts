@@ -10,16 +10,17 @@ interface Props {
     removeSongs: NoxMedia.Song[]
   ) => void;
   progressEmitter: (val: number) => void;
+  overwriteOnRefresh?: () => boolean;
 }
 export const updateSubscribeFavList = async ({
   listObj,
   subscribeUrls,
   updatePlaylist,
   progressEmitter = () => undefined,
+  overwriteOnRefresh = () => listObj.title.includes('live'),
 }: Props) => {
   try {
-    // eslint-disable-next-line prefer-const
-    let newPlaylist = { ...listObj, lastSubscribed: new Date().getTime() };
+    const newPlaylist = { ...listObj, lastSubscribed: new Date().getTime() };
     if (subscribeUrls === undefined) {
       subscribeUrls = newPlaylist.subscribeUrl;
     }
@@ -40,10 +41,18 @@ export const updateSubscribeFavList = async ({
         })
       ).concat(newPlaylist.songList);
     }
-    const uniqueSongList = newPlaylist.songList.reduce(
-      (arr, curr) => arr.set(curr.id, curr),
-      new Map<string, NoxMedia.Song>()
-    );
+    const uniqueSongList = new Map<string, NoxMedia.Song>();
+    if (overwriteOnRefresh()) {
+      newPlaylist.songList.forEach(song => {
+        if (!uniqueSongList.has(song.id)) {
+          uniqueSongList.set(song.id, song);
+        }
+      });
+    } else {
+      newPlaylist.songList.forEach(song => {
+        uniqueSongList.set(song.id, song);
+      });
+    }
     newPlaylist.songList = [...uniqueSongList.values()].map(val =>
       parseSongName(val)
     );
