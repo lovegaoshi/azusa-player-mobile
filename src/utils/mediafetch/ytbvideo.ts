@@ -176,7 +176,7 @@ export const fetchAudioInfo = async (
     return fetchAudioInfoRaw(bvid);
   });
 
-export const suggest = async (song: NoxMedia.Song) => {
+const suggest = async (song: NoxMedia.Song) => {
   const ytdlInfo = await ytdl.getInfo(
     `https://www.youtube.com/watch?v=${song.bvid}`
   );

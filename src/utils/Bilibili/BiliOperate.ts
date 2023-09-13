@@ -1,4 +1,3 @@
-import Bottleneck from 'bottleneck';
 import CookieManager from '@react-native-cookies/cookies';
 
 import bfetch from '../BiliFetch';
@@ -13,8 +12,6 @@ const BILI_TRIP_API =
   'https://api.bilibili.com/x/web-interface/archive/like/triple';
 const BILI_VIDEOPLAY_API =
   'https://api.bilibili.com/x/click-interface/click/web/h5';
-const BILI_HEARTBEAT_API =
-  'https://api.bilibili.com/x/click-interface/web/heartbeat';
 const BILI_VIDEOINFO_API =
   'https://api.bilibili.com/x/web-interface/view?bvid=';
 const BILI_FAV_API = 'https://api.bilibili.com/x/v3/fav/resource/deal';
