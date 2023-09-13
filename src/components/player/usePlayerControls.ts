@@ -51,6 +51,7 @@ export default () => {
       song: currentSong,
       regexOperations: regexResolveURLs,
       fallback,
+      regexMatching: song => song.id,
     });
   };
 

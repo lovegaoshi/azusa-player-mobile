@@ -59,5 +59,6 @@ export const fetchPlayUrlPromise = async (
     song: v,
     regexOperations: regexResolveURLs,
     fallback,
+    regexMatching: song => song.id,
   });
 };
