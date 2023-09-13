@@ -29,7 +29,7 @@ const fetchYTBPlayUrlPromise = async (sid: string, iOS = true) => {
     const videoDetails = ytdlInfo.videoDetails;
     const url =
       Platform.OS === 'ios' && iOS
-        ? ytdl.chooseFormat(ytdlInfo.formats, { quality: 'lowest' }).url
+        ? ytdl.chooseFormat(ytdlInfo.formats, { quality: 'highestaudio' }).url
         : ytdl.chooseFormat(ytdlInfo.formats, { quality: 'highestaudio' }).url;
     return {
       url,
