@@ -7,7 +7,11 @@ import TrackPlayer, {
 } from 'react-native-track-player';
 
 import { logger } from './Logger';
-import appStore, { addDownloadPromise, getR128Gain } from '@stores/appStore';
+import appStore, {
+  addDownloadPromise,
+  getR128Gain,
+  resetResolvedURL,
+} from '@stores/appStore';
 import {
   cycleThroughPlaymode as cyclePlaymode,
   getPlaybackModeNotifIcon,
@@ -138,7 +142,7 @@ export const cycleThroughPlaymode = () => {
 
 export const resolveAndCache = async (song: NoxMedia.Song, dry = false) => {
   const resolvedUrl = await resolveUrl(song);
-  // a dry run doesnt do any caching to disk, but does resolve to the cached map.
+  // a dry run doesnt cache to disk, but does resolve to the cached map.
   if (dry) return resolvedUrl;
   const { downloadPromiseMap, fadeIntervalMs } = getState();
   const previousDownloadProgress =
@@ -147,7 +151,12 @@ export const resolveAndCache = async (song: NoxMedia.Song, dry = false) => {
       song,
       NoxCache.noxMediaCache?.saveCacheMedia(song, resolvedUrl)
     );
-  previousDownloadProgress.then(() => parseSongR128gain(song, fadeIntervalMs));
+  previousDownloadProgress.then(() => {
+    // after cache to disk is fully resolved, process r128gain and
+    // clears the current cache so it can be redirected to the disk cache
+    parseSongR128gain(song, fadeIntervalMs);
+    resetResolvedURL(song);
+  });
   return resolvedUrl;
 };
 export const songlistToTracklist = async (

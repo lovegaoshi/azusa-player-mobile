@@ -114,18 +114,18 @@ export function timeout(delay: number) {
   return new Promise(res => setTimeout(res, delay));
 }
 
-interface regexMatchOperationsProps<T> {
-  song: NoxMedia.Song;
-  regexOperations: Array<[RegExp, (song: NoxMedia.Song) => Promise<T>]>;
-  fallback: (song: NoxMedia.Song) => Promise<T>;
-  regexMatching?: (song: NoxMedia.Song) => string;
+interface regexMatchOperationsProps<K, T> {
+  song: K;
+  regexOperations: Array<[RegExp, (song: K) => Promise<T>]>;
+  fallback: (song: K) => Promise<T>;
+  regexMatching: (song: K) => string;
 }
-export const regexMatchOperations = <T>({
+export const regexMatchOperations = <K, T>({
   song,
   regexOperations,
   fallback,
-  regexMatching = (song: NoxMedia.Song) => song.id,
-}: regexMatchOperationsProps<T>) => {
+  regexMatching,
+}: regexMatchOperationsProps<K, T>) => {
   for (const reExtraction of regexOperations) {
     const reExtracted = reExtraction[0].exec(regexMatching(song));
     if (reExtracted !== null) {

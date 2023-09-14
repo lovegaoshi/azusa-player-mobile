@@ -45,15 +45,6 @@ export const PlayPauseButton: React.FC<{
       strokes={['Play', 'Play 2', 'Pause', 'Pause 3']}
     />
   );
-  return (
-    <IconButton
-      icon={showPause ? 'pause' : 'play'}
-      onPress={showPause ? TrackPlayer.pause : TrackPlayer.play}
-      mode={playerStyle.playerControlIconContained}
-      size={50}
-      style={{ backgroundColor: playerStyle.customColors.btnBackgroundColor }}
-    />
-  );
 };
 
 const styles = StyleSheet.create({

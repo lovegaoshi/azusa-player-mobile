@@ -1,4 +1,5 @@
 import ytdl from 'ytdl-core';
+import { Platform } from 'react-native';
 /**
  * refactor:
  * bilisearch workflow:
@@ -19,15 +20,19 @@ import { SOURCE } from '@enums/MediaFetch';
 
 export const CIDPREFIX = 'youtube-';
 
-const fetchYTBPlayUrlPromise = async (sid: string) => {
+const fetchYTBPlayUrlPromise = async (sid: string, iOS = true) => {
   try {
     logger.debug(`fetch YTB playURL promise:${sid}`);
     const ytdlInfo = await ytdl.getInfo(
       `https://www.youtube.com/watch?v=${sid}`
     );
     const videoDetails = ytdlInfo.videoDetails;
+    const url =
+      Platform.OS === 'ios' && iOS
+        ? ytdl.chooseFormat(ytdlInfo.formats, { quality: 'highestaudio' }).url
+        : ytdl.chooseFormat(ytdlInfo.formats, { quality: 'highestaudio' }).url;
     return {
-      url: ytdl.chooseFormat(ytdlInfo.formats, { quality: 'highestaudio' }).url,
+      url,
       cover: videoDetails.thumbnails[videoDetails.thumbnails.length - 1].url,
       loudness: ytdlInfo.player_response.playerConfig.audioConfig.loudnessDb,
       perceivedLoudness:
@@ -176,7 +181,7 @@ export const fetchAudioInfo = async (
     return fetchAudioInfoRaw(bvid);
   });
 
-export const suggest = async (song: NoxMedia.Song) => {
+const suggest = async (song: NoxMedia.Song) => {
   const ytdlInfo = await ytdl.getInfo(
     `https://www.youtube.com/watch?v=${song.bvid}`
   );

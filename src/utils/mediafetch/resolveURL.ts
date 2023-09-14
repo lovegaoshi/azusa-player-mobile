@@ -13,6 +13,7 @@ export const ENUMS = {
   youtube: 'youtube.video',
 };
 
+type regResolve = NoxUtils.RegexMatchOperations<NoxNetwork.ParsedNoxMediaURL>;
 /**
  * a parent method that returns the media's stream url given an id.
  * @param {string} bvid media's id.
@@ -27,13 +28,16 @@ export const fetchPlayUrlPromise = async (
 ): Promise<NoxNetwork.ParsedNoxMediaURL> => {
   const bvid = v.bvid;
   const cid = v.id;
-  const regexResolveURLs: NoxUtils.RegexMatchOperations<NoxNetwork.ParsedNoxMediaURL> =
-    [
-      [steriatkFetch.regexResolveURLMatch, steriatkFetch.resolveURL],
-      [biliaudioFetch.regexResolveURLMatch, biliaudioFetch.resolveURL],
-      [ytbvideoFetch.regexResolveURLMatch, ytbvideoFetch.resolveURL],
-      [bililiveFetch.regexResolveURLMatch, bililiveFetch.resolveURL],
-    ];
+  const regexResolveURLs: regResolve = [
+    [steriatkFetch.regexResolveURLMatch, steriatkFetch.resolveURL],
+    [biliaudioFetch.regexResolveURLMatch, biliaudioFetch.resolveURL],
+    [ytbvideoFetch.regexResolveURLMatch, ytbvideoFetch.resolveURL],
+    [bililiveFetch.regexResolveURLMatch, bililiveFetch.resolveURL],
+  ];
+  const regexResolveURLsWrapped: regResolve = regexResolveURLs.map(entry => [
+    entry[0],
+    (song: NoxMedia.Song) => entry[1](song, iOS),
+  ]);
   logger.debug(`[resolveURL] ${bvid}, ${cid} }`);
 
   const fallback = () => {
@@ -57,7 +61,8 @@ export const fetchPlayUrlPromise = async (
 
   return regexMatchOperations({
     song: v,
-    regexOperations: regexResolveURLs,
+    regexOperations: regexResolveURLsWrapped,
     fallback,
+    regexMatching: song => song.id,
   });
 };

@@ -40,7 +40,9 @@ interface AppStore {
   RNTPOptions?: UpdateOptions;
   setRNTPOptions: (val: UpdateOptions) => void;
   reExtractSongName: (name: string, uploader: string | number) => string;
-  cachedResolveURLMap: { [key: string]: NoxNetwork.ResolvedNoxMediaURL };
+  cachedResolveURLMap: {
+    [key: string]: NoxNetwork.ResolvedNoxMediaURL | undefined;
+  };
 }
 
 const appStore = createStore<AppStore>(set => ({
@@ -198,7 +200,7 @@ export const cacheResolvedURL = async (
   const cachedResolvedURL = cachedResolveURLMap[song.id];
   if (
     cachedResolvedURL === undefined ||
-    new Date().getTime() - cachedResolvedURL.urlRefreshTimeStamp > 3600000
+    new Date().getTime() - cachedResolvedURL.urlRefreshTimeStamp > 1200000
   ) {
     logger.debug(`[CacheResolveURL] ${song.parsedName} needs to be refetched.`);
     const result = await resolveURL(song);
@@ -208,6 +210,19 @@ export const cacheResolvedURL = async (
     return result;
   }
   return cachedResolvedURL;
+};
+
+export const resetResolvedURL = (song?: NoxMedia.Song) => {
+  if (song) {
+    const cachedResolveURLMap = appStore.getState().cachedResolveURLMap;
+    appStore.setState({
+      cachedResolveURLMap: { ...cachedResolveURLMap, [song.id]: undefined },
+    });
+  } else {
+    appStore.setState({
+      cachedResolveURLMap: {},
+    });
+  }
 };
 
 export default appStore;
