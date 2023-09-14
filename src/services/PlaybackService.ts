@@ -13,7 +13,11 @@ import logger from '../utils/Logger';
 import noxPlayingList, { getNextSong } from '../stores/playingList';
 import { NoxRepeatMode } from '../enums/RepeatMode';
 import playerSettingStore from '@stores/playerSettingStore';
-import appStore, { getABRepeatRaw, setCurrentPlaying } from '@stores/appStore';
+import appStore, {
+  getABRepeatRaw,
+  resetResolvedURL,
+  setCurrentPlaying,
+} from '@stores/appStore';
 import {
   animatedVolumeChange,
   fadePause,
@@ -96,6 +100,9 @@ export async function PlaybackService() {
         (await TrackPlayer.getPlaybackState()).state === State.Error;
       await TrackPlayer.setVolume(0);
       if (!event.track || !event.track.song) return;
+      if (playerErrored) {
+        resetResolvedURL(event.track.song);
+      }
       setState({ activeTrackPlayingId: event.track.song.id });
       // prefetch song
       const playerSetting = getPlayerSetting().playerSetting;
