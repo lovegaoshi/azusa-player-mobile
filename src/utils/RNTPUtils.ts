@@ -152,8 +152,9 @@ export const resolveAndCache = async (song: NoxMedia.Song, dry = false) => {
       NoxCache.noxMediaCache?.saveCacheMedia(song, resolvedUrl)
     );
   previousDownloadProgress.then(() => {
-    // after cache to disk is fully resolved, process r128gain and
-    // clears the current cache so it can be redirected to the disk cache
+    logger.debug(
+      `[cache] ${song.parsedName} completed. now clearing cache and set R128gain...`
+    );
     parseSongR128gain(song, fadeIntervalMs);
     resetResolvedURL(song);
   });

@@ -14,7 +14,7 @@ import { useNoxSetting } from '@hooks/useSetting';
 import { getCurrentTPQueue } from '@stores/playingList';
 import { LyricView } from '../Lyric';
 import SongMenuButton from './SongMenuButton';
-import FavoriteButton from './FavoriteButton';
+import FavReloadButton from './FavReloadButton';
 
 export const TrackInfo: React.FC<{
   track?: Track;
@@ -28,13 +28,11 @@ export const TrackInfo: React.FC<{
   const getTrackLocation = () => {
     const currentTPQueue = getCurrentTPQueue();
     return track?.song
-      ? `#${
-          currentPlayingList.songList.findIndex(
-            song => song.id === track.song.id
-          ) + 1
-        } - ${
-          currentTPQueue.findIndex(song => song.id === track.song.id) + 1
-        }/${currentTPQueue.length}`
+      ? `#${currentPlayingList.songList.findIndex(
+        song => song.id === track.song.id
+      ) + 1
+      } - ${currentTPQueue.findIndex(song => song.id === track.song.id) + 1
+      }/${currentTPQueue.length}`
       : '';
   };
 
@@ -84,8 +82,8 @@ export const TrackInfo: React.FC<{
                 playerSetting.hideCoverInMobile
                   ? 0
                   : {
-                      uri: `${track?.artwork}`,
-                    }
+                    uri: `${track?.artwork}`,
+                  }
               }
             />
           </Animated.View>
@@ -110,7 +108,7 @@ export const TrackInfo: React.FC<{
       </Text>
       <View style={styles.infoContainer}>
         <View style={styles.favoriteButtonContainer}>
-          <FavoriteButton track={track} />
+          <FavReloadButton track={track} />
         </View>
         <View style={styles.artistInfoContainer}>
           <Text

@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { IconButton } from 'react-native-paper';
 import TrackPlayer, {
   Event,
   Track,
@@ -75,14 +74,6 @@ export default ({ track }: Props) => {
       strokes={['Rays 2', 'Fill 2', 'Heart Outlines 2']}
       duration={500}
       pressableStyle={{ backgroundColor: undefined }}
-    />
-  );
-  return (
-    <IconButton
-      icon={liked ? 'cards-heart' : 'cards-heart-outline'}
-      onPress={onClick}
-      disabled={song === undefined}
-      size={30}
     />
   );
 };
