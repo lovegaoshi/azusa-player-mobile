@@ -22,10 +22,10 @@ export default ({ track }: Props) => {
 
   return (
     <LottieButton
-      src={require('@assets/lottie/skip-forwards.json')}
+      src={require('@assets/lottie/refresh.json')}
       size={30}
       onPress={onClick}
-      strokes={['Line', 'Triangle 1', 'Triangle 2']}
+      strokes={['Arrowhead', 'Line', 'Arrowhead 2', 'Line']}
     />
   );
 };
