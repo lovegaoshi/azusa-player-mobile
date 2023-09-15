@@ -53,6 +53,7 @@ export const TrackInfo: React.FC<{
   };
 
   const onLyricPress = () => {
+    console.log('TrackInfo: Lyric Clicked - ', track);
     setIsImageVisible(!isImageVisible);
     Animated.parallel([
       Animated.timing(opacity, {
