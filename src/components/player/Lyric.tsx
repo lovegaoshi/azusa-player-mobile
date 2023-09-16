@@ -183,33 +183,39 @@ export const LyricView = ({
   };
 
   const lineRenderer = useCallback(
-    ({ lrcLine: { millisecond, content }, index, active }: LyricLineProps) => (
-      <Text
-        style={{
-          textAlign: 'center',
-          color: active
-            ? playerStyle.colors.primary
-            : playerStyle.colors.secondary,
-        }}
-      >
-        {content}
-      </Text>
+    ({ lrcLine: { content }, active }: LyricLineProps) => (
+      <TouchableWithoutFeedback onPress={onLyricPress}>
+        <View style={{ padding: 7 }}>
+          <Text
+            style={{
+              textAlign: 'center',
+              color: active
+                ? playerStyle.colors.primary
+                : playerStyle.colors.secondary,
+            }}
+          >
+            {content}
+          </Text>
+        </View>
+      </TouchableWithoutFeedback>
     ),
-    []
+    [playerStyle]
   );
 
   return (
     <View style={styles.container}>
       <TouchableWithoutFeedback onPress={onLyricPress}>
-        <Lyric
-          style={{ marginTop: 30, height: 500 }}
-          lrc={lrc}
-          currentTime={(position + currentTimeOffset) * 1000}
-          lineHeight={32}
-          lineRenderer={lineRenderer}
-          height={height}
-          noScrollThrottle={noScrollThrottle}
-        />
+        <View onStartShouldSetResponder={() => true}>
+          <Lyric
+            style={{ marginTop: 30, height: 500 }}
+            lrc={lrc}
+            currentTime={(position + currentTimeOffset) * 1000}
+            lineHeight={32}
+            lineRenderer={lineRenderer}
+            height={height}
+            noScrollThrottle={noScrollThrottle}
+          />
+        </View>
       </TouchableWithoutFeedback>
       {showUI && (
         <>
