@@ -204,19 +204,15 @@ export const LyricView = ({
 
   return (
     <View style={styles.container}>
-      <TouchableWithoutFeedback onPress={onLyricPress}>
-        <View onStartShouldSetResponder={() => true}>
-          <Lyric
-            style={{ marginTop: 30, height: 500 }}
-            lrc={lrc}
-            currentTime={(position + currentTimeOffset) * 1000}
-            lineHeight={32}
-            lineRenderer={lineRenderer}
-            height={height}
-            noScrollThrottle={noScrollThrottle}
-          />
-        </View>
-      </TouchableWithoutFeedback>
+      <Lyric
+        style={{ marginTop: 30, height: 500 }}
+        lrc={lrc}
+        currentTime={(position + currentTimeOffset) * 1000}
+        lineHeight={32}
+        lineRenderer={lineRenderer}
+        height={height}
+        noScrollThrottle={noScrollThrottle}
+      />
       {showUI && (
         <>
           <View style={styles.optionsButton}>
