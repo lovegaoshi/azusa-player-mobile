@@ -37,7 +37,7 @@ export const TrackInfo: React.FC<{
   };
 
   const onImagePress = () => {
-    console.log('TrackInfo: Image Clicked - ', track);
+    console.log('TrackInfo: Image Clicked - ');
     Animated.parallel([
       Animated.timing(opacity, {
         toValue: 0,
@@ -45,21 +45,23 @@ export const TrackInfo: React.FC<{
         useNativeDriver: true,
       }),
     ]).start(() => {
-      console.log('TrackInfo: Setting imagevisible to', !isImageVisible);
+      console.log('TrackInfo: Setting imagevisible to Image', !isImageVisible);
       setIsImageVisible(!isImageVisible);
     });
   };
 
   const onLyricPress = () => {
-    console.log('TrackInfo: Lyric Clicked - ', track);
-    setIsImageVisible(!isImageVisible);
+    console.log('TrackInfo: Lyric Clicked - ');
+    setIsImageVisible(true);
     Animated.parallel([
       Animated.timing(opacity, {
         toValue: 1,
         duration: 80,
         useNativeDriver: true,
       }),
-    ]).start();
+    ]).start(() => {
+      console.log('TrackInfo: Setting to Lyric', true);
+    });
   };
 
   return (
