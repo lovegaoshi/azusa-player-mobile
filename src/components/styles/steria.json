@@ -726,6 +726,22 @@
       "darkTheme": false
     },
     "gifs": [
+      "https://i0.hdslb.com/bfs/garb/b37c9278c3b1ad823f445917c30a00bd658acf66.png",
+      "https://i0.hdslb.com/bfs/garb/253c5586a97f1aaa22e17ec469a6d0e75a99f148.png",
+      "https://i0.hdslb.com/bfs/garb/41e3fe22f8a169ae272f6c70b548cb9ffc278a45.png",
+      "https://i0.hdslb.com/bfs/garb/a6c54394405511a3e4d10cc796a0e798949c4791.png",
+      "https://i0.hdslb.com/bfs/garb/7f792cec053aa661a3d3715bf7b9ef37642aa112.png",
+      "https://i0.hdslb.com/bfs/garb/035f77c4707d960ffaa2169d6101b89d771cbb75.png",
+      "https://i0.hdslb.com/bfs/garb/dc205fefca78819048d29140b4ddc32e0d5d086f.png",
+      "https://i0.hdslb.com/bfs/garb/91b69182421ebfaa804ba11bd09bb52639d8e3bd.png",
+      "https://i0.hdslb.com/bfs/garb/3f5c5d13991b0ec003ff3ebd17395a0ae20a5118.png",
+      "https://i0.hdslb.com/bfs/garb/82688bda70202170d33d34b0ae7c8f8c4c0dfc76.png",
+      "https://i0.hdslb.com/bfs/garb/764ce00c835e6ebad91f3842a2b5ddb432f5e852.png",
+      "https://i0.hdslb.com/bfs/garb/fa1343dd7a34340d119e9870de6197398ca5c9a3.png",
+      "https://i0.hdslb.com/bfs/garb/79e3aee1e5549de0848d4bbcf9a9d18cb2c10ed5.png",
+      "https://i0.hdslb.com/bfs/garb/5e0c31a09ef8ea4b3842127b902149152a0e7a65.png",
+      "https://i0.hdslb.com/bfs/garb/639b5777a6358d9876a2df92a1537339f63c1028.png",
+      "https://i0.hdslb.com/bfs/garb/f08407a2485f83bb1e89e11f1a2ca5918c9e264e.png",
       "https://article.biliimg.com/bfs/article/313c42ec86c5bdaa13ba3d8a5633e696bfd2412f.gif",
       "https://article.biliimg.com/bfs/article/f961bb02daccadcc19daf191e5540e633fe4b104.gif",
       "https://article.biliimg.com/bfs/article/5fb01231dff56e8b089126c6edfa6fc68c7b2be7.gif",
@@ -759,7 +775,8 @@
       "https://img.nga.178.com/attachments/mon_202307/27/-zue37Q2s-5wzyKmToS6o-6m.jpg"
     ],
     "backgroundImages": [
-      "https://article.biliimg.com/bfs/article/29af4ddfe6e9a2459b02ccb8181b414080babd65.png"
+      "https://article.biliimg.com/bfs/article/29af4ddfe6e9a2459b02ccb8181b414080babd65.png",
+      "https://album.biliimg.com/bfs/new_dyn/07fe4f21afa406a0efb90eb50e99ca8c1676354.jpg"
     ],
     "customColors": {
       "maskedBackgroundColor": "rgba(255, 255, 255, 0.40)",

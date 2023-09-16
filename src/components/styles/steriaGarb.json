@@ -27,8 +27,7 @@
       "https://i0.hdslb.com/bfs/emote/5d05076748fffa6763f77a13a3f5d1459a14a341.png",
       "https://i0.hdslb.com/bfs/emote/eae064528a905e48ba9cf70b77e54fba3b89b37f.png",
       "https://i0.hdslb.com/bfs/emote/bb2963825fd00a39271c26d1a15a721cea39e18e.png",
-      "https://i0.hdslb.com/bfs/emote/1bfe7a731d5e378156ed42179de0bd37a949ea83.png",
-      "https://i0.hdslb.com/bfs/baselabs/4e967e911903748ec42e1811d9aaa2823c4aaacf.png"
+      "https://i0.hdslb.com/bfs/emote/1bfe7a731d5e378156ed42179de0bd37a949ea83.png"
     ],
     "backgroundImages": [
       "https://i0.hdslb.com/bfs/garb/item/aed7a022b072983bab380df955a251ba4ce2c072.jpg",
@@ -38,7 +37,8 @@
         "type": "biliNFTVideo",
         "identifier": "[\"161\",8]"
       },
-      "https://i0.hdslb.com/bfs/baselabs/638ee09086ff11d4de2e85d4100fa512de5704d8.png"
+      "https://i0.hdslb.com/bfs/baselabs/638ee09086ff11d4de2e85d4100fa512de5704d8.png",
+      "https://i0.hdslb.com/bfs/baselabs/4e967e911903748ec42e1811d9aaa2823c4aaacf.png"
     ],
     "customColors": {
       "maskedBackgroundColor": "rgba(0, 0, 0, 0.30)",
