@@ -14,6 +14,23 @@ sidebar_position: 1
 
 ![Example banner](./images/Screenshot_20230606_143018_APM.jpg)
 
+支持的鏈接為：
+
+1. bv/av: https://www.bilibili.com/video/BV1kk4y1b7uE?p=1
+2. b 站視頻合集：https://space.bilibili.com/529249/channel/collectiondetail?sid=186394
+3. b 站視頻列表：https://space.bilibili.com/3493085134719196/channel/seriesdetail?sid=2939321
+4. b 站收藏夾：https://space.bilibili.com/3493085134719196/favlist
+5. b 站個人空間：https://space.bilibili.com/529249/video?tid=3&special_type=&pn=1&keyword=&order=pubdate
+6. b 站音頻：https://www.bilibili.com/audio/au3680653?type=3
+7. b 站音頻空間：https://space.bilibili.com/529249/audio
+8. b 站直播：https://live.bilibili.com/282208
+9. b 站關注列表：https://space.bilibili.com/3493085134719196/fans/follow
+10. steria.vplayer.tk
+11. 油管 watch：https://www.youtube.com/watch?v=qMRClp8ltME
+12. 油管播放列表：https://www.youtube.com/playlist?list=PL-mVqujjjwGjZu3wli3iOh0FBdSU6tsNO
+13. 油管 mix 列表：
+14. [MusicFreePlugins](https://github.com/maotoumao/MusicFreePlugins)支持的拓展
+
 ## 把搜索的歌新建为歌单
 
 按搜索歌单右边的 new 按钮将搜索的歌新建为一个歌单。
