@@ -1,10 +1,7 @@
 import React from 'react';
 import { Image, StyleSheet } from 'react-native';
-import { ActivityIndicator, IconButton } from 'react-native-paper';
-import TrackPlayer, {
-  State,
-  usePlayWhenReady,
-} from 'react-native-track-player';
+import { ActivityIndicator } from 'react-native-paper';
+import { State, usePlayWhenReady } from 'react-native-track-player';
 
 import { useDebouncedValue } from 'hooks';
 import { useNoxSetting } from '@hooks/useSetting';
