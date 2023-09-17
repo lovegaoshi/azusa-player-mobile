@@ -240,7 +240,7 @@
     lru-cache "^5.1.1"
     semver "^6.3.1"
 
-"@babel/helper-create-class-features-plugin@^7.18.6", "@babel/helper-create-class-features-plugin@^7.22.9":
+"@babel/helper-create-class-features-plugin@^7.18.6":
   version "7.22.10"
   resolved "https://registry.npmjs.org/@babel/helper-create-class-features-plugin/-/helper-create-class-features-plugin-7.22.10.tgz#dd2612d59eac45588021ac3d6fa976d08f4e95a3"
   integrity sha512-5IBb77txKYQPpOEdUdIhBx8VrZyDCQ+H82H0+5dX1TmuscP5vJKEE3cKurjtIw/vFwzbVH48VweE78kVDBrqjA==
@@ -1048,21 +1048,12 @@
     "@babel/helper-plugin-utils" "^7.22.5"
     "@babel/helper-simple-access" "^7.22.5"
 
-"@babel/plugin-transform-modules-commonjs@^7.22.15":
+"@babel/plugin-transform-modules-commonjs@^7.22.15", "@babel/plugin-transform-modules-commonjs@^7.22.5":
   version "7.22.15"
   resolved "https://registry.npmjs.org/@babel/plugin-transform-modules-commonjs/-/plugin-transform-modules-commonjs-7.22.15.tgz#b11810117ed4ee7691b29bd29fd9f3f98276034f"
   integrity sha512-jWL4eh90w0HQOTKP2MoXXUpVxilxsB2Vl4ji69rSjS3EcZ/v4sBmn+A3NpepuJzBhOaEBbR7udonlHHn5DWidg==
   dependencies:
     "@babel/helper-module-transforms" "^7.22.15"
-    "@babel/helper-plugin-utils" "^7.22.5"
-    "@babel/helper-simple-access" "^7.22.5"
-
-"@babel/plugin-transform-modules-commonjs@^7.22.5":
-  version "7.22.11"
-  resolved "https://registry.npmjs.org/@babel/plugin-transform-modules-commonjs/-/plugin-transform-modules-commonjs-7.22.11.tgz#d7991d3abad199c03b68ee66a64f216c47ffdfae"
-  integrity sha512-o2+bg7GDS60cJMgz9jWqRUsWkMzLCxp+jFDeDUT5sjRlAxcJWZ2ylNdI7QQ2+CH5hWu7OnN+Cv3htt7AkSf96g==
-  dependencies:
-    "@babel/helper-module-transforms" "^7.22.9"
     "@babel/helper-plugin-utils" "^7.22.5"
     "@babel/helper-simple-access" "^7.22.5"
 
@@ -1328,13 +1319,13 @@
     "@babel/helper-plugin-utils" "^7.22.5"
     "@babel/plugin-syntax-typescript" "^7.22.5"
 
-"@babel/plugin-transform-typescript@^7.22.5":
-  version "7.22.9"
-  resolved "https://registry.npmjs.org/@babel/plugin-transform-typescript/-/plugin-transform-typescript-7.22.9.tgz#91e08ad1eb1028ecc62662a842e93ecfbf3c7234"
-  integrity sha512-BnVR1CpKiuD0iobHPaM1iLvcwPYN2uVFAqoLVSpEDKWuOikoCv5HbKLxclhKYUXlWkX86DoZGtqI4XhbOsyrMg==
+"@babel/plugin-transform-typescript@^7.22.15", "@babel/plugin-transform-typescript@^7.22.5":
+  version "7.22.15"
+  resolved "https://registry.npmjs.org/@babel/plugin-transform-typescript/-/plugin-transform-typescript-7.22.15.tgz#15adef906451d86349eb4b8764865c960eb54127"
+  integrity sha512-1uirS0TnijxvQLnlv5wQBwOX3E1wCFX7ITv+9pBV2wKEk4K+M5tqDaoNXnTH8tjEIYHLO98MwiTWO04Ggz4XuA==
   dependencies:
     "@babel/helper-annotate-as-pure" "^7.22.5"
-    "@babel/helper-create-class-features-plugin" "^7.22.9"
+    "@babel/helper-create-class-features-plugin" "^7.22.15"
     "@babel/helper-plugin-utils" "^7.22.5"
     "@babel/plugin-syntax-typescript" "^7.22.5"
 
@@ -1483,7 +1474,7 @@
     "@babel/types" "^7.4.4"
     esutils "^2.0.2"
 
-"@babel/preset-typescript@^7.13.0", "@babel/preset-typescript@^7.16.7":
+"@babel/preset-typescript@^7.13.0":
   version "7.22.5"
   resolved "https://registry.npmjs.org/@babel/preset-typescript/-/preset-typescript-7.22.5.tgz#16367d8b01d640e9a507577ed4ee54e0101e51c8"
   integrity sha512-YbPaal9LxztSGhmndR46FmAbkJ/1fAsw293tSU+I5E5h+cnJ3d4GTwyUgGYmOXJYdGA+uNePle4qbaRzj2NISQ==
@@ -1493,6 +1484,17 @@
     "@babel/plugin-syntax-jsx" "^7.22.5"
     "@babel/plugin-transform-modules-commonjs" "^7.22.5"
     "@babel/plugin-transform-typescript" "^7.22.5"
+
+"@babel/preset-typescript@^7.16.7":
+  version "7.22.15"
+  resolved "https://registry.npmjs.org/@babel/preset-typescript/-/preset-typescript-7.22.15.tgz#43db30516fae1d417d748105a0bc95f637239d48"
+  integrity sha512-HblhNmh6yM+cU4VwbBRpxFhxsTdfS1zsvH9W+gEjD0ARV9+8B4sNfpI6GuhePti84nuvhiwKS539jKPFHskA9A==
+  dependencies:
+    "@babel/helper-plugin-utils" "^7.22.5"
+    "@babel/helper-validator-option" "^7.22.15"
+    "@babel/plugin-syntax-jsx" "^7.22.5"
+    "@babel/plugin-transform-modules-commonjs" "^7.22.15"
+    "@babel/plugin-transform-typescript" "^7.22.15"
 
 "@babel/preset-typescript@^7.17.12":
   version "7.21.5"
@@ -3255,9 +3257,9 @@
   integrity sha512-uro+a+np3+5Jf0vZy/y5F3Iu2jpiMz/XY2n2UcGH+eNPnV+uJD44MXw9sviCRSH1PlfdCT/C7HGDdxnMJuhc/Q==
 
 "@shopify/flash-list@^1.4.3":
-  version "1.5.0"
-  resolved "https://registry.npmjs.org/@shopify/flash-list/-/flash-list-1.5.0.tgz#f1cf3c4f9bb706a58c3d1f794ddfaedb5872f431"
-  integrity sha512-XeocevDIXastr6jh3TPo1MzV5XkdqTyWtw/j8kUhz9EOBc2SzNWbpJWyzrAsYKlqYNrnxxs0P9C0amlX2jaQnw==
+  version "1.6.1"
+  resolved "https://registry.npmjs.org/@shopify/flash-list/-/flash-list-1.6.1.tgz#7a46d8ec4e125b8b7bf686777d932c7c950e00c7"
+  integrity sha512-SlBlpP7+zol6D1SKaf402aS30Qgwdjwb8/Qn2CupYwXnTcu2l8TiXB766vcsIvKTqUO7ELfQnCwCq8NXx55FsQ==
   dependencies:
     recyclerlistview "4.2.0"
     tslib "2.4.0"
@@ -9051,9 +9053,9 @@ loose-envify@^1.0.0, loose-envify@^1.1.0, loose-envify@^1.4.0:
     js-tokens "^3.0.0 || ^4.0.0"
 
 lottie-react-native@^6.2.0:
-  version "6.2.0"
-  resolved "https://registry.npmjs.org/lottie-react-native/-/lottie-react-native-6.2.0.tgz#b63d358ca4b112f23997f5fe8118b6ac4662a7ed"
-  integrity sha512-r0I+BPV2oC50/c5Lr41MmLJigH7TVrh4qu/ssWRj1UPpELxVwJlofbaN4mH91ruVw4LqB2mICbXVqUBVgoP64g==
+  version "6.3.1"
+  resolved "https://registry.npmjs.org/lottie-react-native/-/lottie-react-native-6.3.1.tgz#3ad152da79601e6a79ea811436a12a84fe1a4a72"
+  integrity sha512-M18nAVYeGMF//bhL27D2zuMcrFPH0jbD/deBvcWi0CCcfZf6LQfx45xt+cuDqwr5nh6dMm+ta8KfZJmkbNhtlg==
 
 lru-cache@7.14.0:
   version "7.14.0"
@@ -11204,9 +11206,9 @@ react-native-qrcode-svg@^6.2.0:
     qrcode "^1.5.1"
 
 react-native-reanimated@^3.1.0:
-  version "3.4.2"
-  resolved "https://registry.npmjs.org/react-native-reanimated/-/react-native-reanimated-3.4.2.tgz#744154fead6d8d31d5bd9ac617d8c84d74a6f697"
-  integrity sha512-FbtG+f1PB005vDTJSv4zAnTK7nNXi+FjFgbAM5gOzIZDajfph2BFMSUstzIsN8T77+OKuugUBmcTqLnQ24EBVg==
+  version "3.5.2"
+  resolved "https://registry.npmjs.org/react-native-reanimated/-/react-native-reanimated-3.5.2.tgz#c7b4e70ee3210e26e6326d3e43f9299590898c5d"
+  integrity sha512-Uv9imJ6ZC7F/tTSpjjfo/0AZlw19Lag63+MUqF6p483LOoRkYtYP3JmtVV402mQWfhL1LPMeyAu/1spRjPKCCQ==
   dependencies:
     "@babel/plugin-transform-object-assign" "^7.16.7"
     "@babel/preset-typescript" "^7.16.7"
