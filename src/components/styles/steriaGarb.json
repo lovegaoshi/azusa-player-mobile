@@ -144,21 +144,21 @@
       }
     ],
     "customColors": {
-      "maskedBackgroundColor": "rgba(0, 0, 0, 0.30)",
-      "playlistDrawerBackgroundColor": "green",
-      "playlistDrawerBackgroundColorTransparent": "rgba(0, 255, 0, 0.35)",
-      "progressThumbTintColor": "rgb(235, 235, 0)",
-      "progressMinimumTrackTintColor": "rgb(235, 235, 0)",
+      "maskedBackgroundColor": "rgba(0, 0, 0, 0.10)",
+      "playlistDrawerBackgroundColor": "rebeccapurple",
+      "playlistDrawerBackgroundColorTransparent": "rgba(102, 51, 153, 0.35)",
+      "progressThumbTintColor": "#00BFFF",
+      "progressMinimumTrackTintColor": "#00BFFF",
       "progressMaximumTrackTintColor": "#FFFFFF",
       "btnBackgroundColor": "rgb(72, 71, 58)",
-      "textInputSelectionColor": "green"
+      "textInputSelectionColor": "rebeccapurple"
     },
     "colors": {
-      "primary": "rgb(255, 255, 0)",
+      "primary": "#00BFFF",
       "onPrimary": "rgb(50, 50, 0)",
-      "primaryContainer": "rgb(73, 73, 0)",
+      "primaryContainer": "rgb(30, 30, 30)",
       "onPrimaryContainer": "rgb(234, 234, 0)",
-      "secondary": "rgb(202, 200, 165)",
+      "secondary": "#97D5EA",
       "onSecondary": "rgb(50, 50, 24)",
       "secondaryContainer": "rgb(73, 72, 45)",
       "onSecondaryContainer": "rgb(231, 228, 191)",
@@ -173,10 +173,10 @@
       "background": "rgba(0,0,0, 0.4)",
       "onBackground": "rgb(230, 226, 217)",
       "surface": "rgb(28, 28, 23)",
-      "onSurface": "rgba(235, 235, 0, 1)",
-      "text": "rgb(255, 255, 0)",
+      "onSurface": "#00BFFF",
+      "text": "#00BFFF",
       "surfaceVariant": "rgb(10, 10, 10)",
-      "onSurfaceVariant": "rgb(225, 225, 0)",
+      "onSurfaceVariant": "#00BFFF",
       "outline": "rgb(147, 145, 130)",
       "outlineVariant": "rgb(72, 71, 58)",
       "shadow": "rgb(0, 0, 0)",
@@ -196,6 +196,7 @@
       "onSurfaceDisabled": "rgba(230, 226, 217, 0.38)",
       "backdrop": "rgba(49, 49, 37, 0.4)"
     },
+    "playerControlIconContained": "contained",
     "thumbupSVGA": "https://i0.hdslb.com/bfs/garb/item/ea8ee52825528ec63765ab41a9e8c3acb2290687.bin",
     "loadingIcon": "https://i0.hdslb.com/bfs/garb/item/0b8550136db960f8a35db6f53e58df20cdf9c0f4.webp"
   },
@@ -448,7 +449,8 @@
       "https://i0.hdslb.com/bfs/garb/169be3c9e9d9e2545b07a12a0d70f6455bc9f7aa.jpg",
       "https://i0.hdslb.com/bfs/garb/1c3c199537e278c0f3afc6ff4e4492aebf1bbffb.jpg",
       "https://i0.hdslb.com/bfs/garb/a108b9b3b947127e69b3f9c7911d72f53c17ee1a.jpg",
-      "https://i0.hdslb.com/bfs/garb/b065d08ff7f85418973a8f3883b5b6d88963898e.jpg"
+      "https://i0.hdslb.com/bfs/garb/b065d08ff7f85418973a8f3883b5b6d88963898e.jpg",
+      "https://i0.hdslb.com/bfs/new_dyn/17f74d87c4f078d930ec29b8179213782196632.gif"
     ],
     "customColors": {
       "maskedBackgroundColor": "rgba(0, 0, 0, 0.60)",
