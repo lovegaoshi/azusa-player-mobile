@@ -10,19 +10,17 @@ const Playlist = () => {
   const playerStyle = useNoxSetting(state => state.playerStyle);
 
   return (
-    <SafeAreaView style={playerStyle.screenContainer}>
-      <View
-        style={[
-          styles.contentContainer,
-          { backgroundColor: playerStyle.customColors.maskedBackgroundColor },
-        ]}
-      >
-        <BiliSearchbar
-          onSearched={(songs: Array<NoxMedia.Song>) => console.log(songs)}
-        />
-        <PlaylistList />
-      </View>
-    </SafeAreaView>
+    <View
+      style={[
+        styles.contentContainer,
+        { backgroundColor: playerStyle.customColors.maskedBackgroundColor },
+      ]}
+    >
+      <BiliSearchbar
+        onSearched={(songs: Array<NoxMedia.Song>) => console.log(songs)}
+      />
+      <PlaylistList />
+    </View>
   );
 };
 

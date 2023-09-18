@@ -287,7 +287,7 @@ export default (props: any) => {
           {
             backgroundColor:
               currentPlaylist.id ===
-                playlists[STORAGE_KEYS.SEARCH_PLAYLIST_KEY]?.id
+              playlists[STORAGE_KEYS.SEARCH_PLAYLIST_KEY]?.id
                 ? playerStyle.customColors.playlistDrawerBackgroundColor
                 : undefined,
           },

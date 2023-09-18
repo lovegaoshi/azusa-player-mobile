@@ -14,6 +14,10 @@
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 		9B521D0C26610C0700EF0C3A /* dummy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B521D0B26610C0700EF0C3A /* dummy.swift */; };
 		A7ED8C5E3242B7A11910AC34 /* libPods-azusa-player-mobile.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 13EEFF6BBEF989EDAD5FC4B7 /* libPods-azusa-player-mobile.a */; };
+		AA9F058A2AB48946005FA2C6 /* libavfilter.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA9F05892AB48946005FA2C6 /* libavfilter.xcframework */; };
+		AA9F058B2AB48946005FA2C6 /* libavfilter.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = AA9F05892AB48946005FA2C6 /* libavfilter.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		AA9F058E2AB489B1005FA2C6 /* libavutil.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA9F058D2AB489B1005FA2C6 /* libavutil.xcframework */; };
+		AA9F058F2AB489B1005FA2C6 /* libavutil.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = AA9F058D2AB489B1005FA2C6 /* libavutil.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		BDB3121DF2250E03AB81F873 /* ExpoModulesProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 629CB7CB958060A0F3604281 /* ExpoModulesProvider.swift */; };
 		C53F31B167C9C77C0619117A /* ExpoModulesProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 138345A294D5D87DC84127A5 /* ExpoModulesProvider.swift */; };
 		F161E43DC15C3C1CE6A17FC9 /* libPods-azusa-player-mobile-exampleTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 28468BD50B4AAEF16D728F55 /* libPods-azusa-player-mobile-exampleTests.a */; };
@@ -28,6 +32,21 @@
 			remoteInfo = example;
 		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		AA9F058C2AB48946005FA2C6 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				AA9F058F2AB489B1005FA2C6 /* libavutil.xcframework in Embed Frameworks */,
+				AA9F058B2AB48946005FA2C6 /* libavfilter.xcframework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		00E356EE1AD99517003FC87E /* exampleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = exampleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -52,6 +71,8 @@
 		9B521D0A26610C0600EF0C3A /* example-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "example-Bridging-Header.h"; sourceTree = "<group>"; };
 		9B521D0B26610C0700EF0C3A /* dummy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dummy.swift; sourceTree = "<group>"; };
 		9E1BC3386E26E34AEF891FF5 /* Pods-azusa-player-mobile.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-azusa-player-mobile.debug.xcconfig"; path = "Target Support Files/Pods-azusa-player-mobile/Pods-azusa-player-mobile.debug.xcconfig"; sourceTree = "<group>"; };
+		AA9F05892AB48946005FA2C6 /* libavfilter.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = libavfilter.xcframework; path = "Pods/ffmpeg-kit-ios-audio/libavfilter.xcframework"; sourceTree = "<group>"; };
+		AA9F058D2AB489B1005FA2C6 /* libavutil.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = libavutil.xcframework; path = "Pods/ffmpeg-kit-ios-audio/libavutil.xcframework"; sourceTree = "<group>"; };
 		C6A6377EE893F59DCD177B16 /* Pods-example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-example.debug.xcconfig"; path = "Target Support Files/Pods-example/Pods-example.debug.xcconfig"; sourceTree = "<group>"; };
 		DDFCE76F143B5D90F2157D05 /* Pods-example-exampleTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-example-exampleTests.release.xcconfig"; path = "Target Support Files/Pods-example-exampleTests/Pods-example-exampleTests.release.xcconfig"; sourceTree = "<group>"; };
 		E050A9D69F20B323551604B0 /* Pods-example-exampleTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-example-exampleTests.debug.xcconfig"; path = "Target Support Files/Pods-example-exampleTests/Pods-example-exampleTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -71,6 +92,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AA9F058A2AB48946005FA2C6 /* libavfilter.xcframework in Frameworks */,
+				AA9F058E2AB489B1005FA2C6 /* libavutil.xcframework in Frameworks */,
 				A7ED8C5E3242B7A11910AC34 /* libPods-azusa-player-mobile.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -113,6 +136,8 @@
 		2D16E6871FA4F8E400B85C8A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				AA9F058D2AB489B1005FA2C6 /* libavutil.xcframework */,
+				AA9F05892AB48946005FA2C6 /* libavfilter.xcframework */,
 				9B521D0626604D3800EF0C3A /* AVFoundation.framework */,
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
 				13EEFF6BBEF989EDAD5FC4B7 /* libPods-azusa-player-mobile.a */,
@@ -231,6 +256,7 @@
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
 				4D1A105E8DA4143AA121A89C /* [CP] Embed Pods Frameworks */,
 				2D80E31B57EB46A621A04C76 /* [CP] Copy Pods Resources */,
+				AA9F058C2AB48946005FA2C6 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
