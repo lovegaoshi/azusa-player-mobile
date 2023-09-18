@@ -1,11 +1,5 @@
-import {
-  createNativeStackNavigator,
-  NativeStackNavigationProp,
-} from '@react-navigation/native-stack';
 import { View } from 'react-native';
-import { ParamListBase, useNavigation } from '@react-navigation/native';
-import { List, MD3Colors, IconButton, Text } from 'react-native-paper';
-import { DrawerNavigationProp } from '@react-navigation/drawer';
+import { Text } from 'react-native-paper';
 import { ScrollView } from 'react-native-gesture-handler';
 import { useTranslation } from 'react-i18next';
 

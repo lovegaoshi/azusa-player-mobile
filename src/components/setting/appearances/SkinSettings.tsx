@@ -20,7 +20,6 @@ import {
   ScrollView,
   GestureDetector,
   Gesture,
-  GestureHandlerRootView,
 } from 'react-native-gesture-handler';
 
 import SkinSearchbar from '../SkinSearchbar';

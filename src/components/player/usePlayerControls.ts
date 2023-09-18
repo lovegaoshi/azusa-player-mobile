@@ -67,7 +67,7 @@ export default () => {
     await TrackPlayer.add(await songlistToTracklist(suggestedSong), 0);
   };
 
-  const performSkipToNextRaw = async () => {
+  const prepareSkipToNext = async () => {
     if (
       (await TrackPlayer.getActiveTrackIndex()) ===
       (await TrackPlayer.getQueue()).length - 1
@@ -86,11 +86,9 @@ export default () => {
         );
       }
     }
-    TrackPlayer.skipToNext();
-    // setTP2Song(getCurrentTPQueue()[nextIndex]);
   };
 
-  const performSkipToPreviousRaw = async () => {
+  const prepareSkipToPrevious = async () => {
     if ((await TrackPlayer.getActiveTrackIndex()) === 0) {
       const currentTPQueue = getCurrentTPQueue();
       let nextIndex = findCurrentPlayIndex() - 1;
@@ -106,23 +104,23 @@ export default () => {
         );
       }
     }
-    TrackPlayer.skipToPrevious();
-    // setTP2Song(getCurrentTPQueue()[nextIndex]);
   };
 
   const performSkipToNext = () => {
+    const preparePromise = prepareSkipToNext();
     animatedVolumeChange({
       val: 0,
       duration: fadeIntervalMs,
-      callback: performSkipToNextRaw,
+      callback: () => preparePromise.then(() => TrackPlayer.skipToNext()),
     });
   };
 
   const performSkipToPrevious = () => {
+    const preparePromise = prepareSkipToPrevious();
     animatedVolumeChange({
       val: 0,
       duration: fadeIntervalMs,
-      callback: performSkipToPreviousRaw,
+      callback: () => preparePromise.then(() => TrackPlayer.skipToPrevious()),
     });
   };
 
