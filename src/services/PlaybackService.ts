@@ -224,8 +224,9 @@ export async function PlaybackService() {
     }
   );
   if (Platform.OS === 'android') {
-    TrackPlayer.addEventListener(Event.PlaybackAnimatedVolumeChanged, () =>
-      logger.debug('animated volume finished event triggered')
-    );
+    TrackPlayer.addEventListener(Event.PlaybackAnimatedVolumeChanged, () => {
+      logger.debug('animated volume finished event triggered');
+      getAppStoreState().animatedVolumeChangedCallback();
+    });
   }
 }

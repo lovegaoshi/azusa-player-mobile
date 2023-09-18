@@ -43,6 +43,7 @@ interface AppStore {
   cachedResolveURLMap: {
     [key: string]: NoxNetwork.ResolvedNoxMediaURL | undefined;
   };
+  animatedVolumeChangedCallback: () => void;
 }
 
 const appStore = createStore<AppStore>(set => ({
@@ -84,6 +85,7 @@ const appStore = createStore<AppStore>(set => ({
   },
   reExtractSongName: (val: string) => val,
   cachedResolveURLMap: {},
+  animatedVolumeChangedCallback: () => undefined,
 }));
 
 export const initialize = async () => {
