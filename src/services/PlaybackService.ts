@@ -230,6 +230,7 @@ export async function PlaybackService() {
     TrackPlayer.addEventListener(Event.PlaybackAnimatedVolumeChanged, () => {
       logger.debug('animated volume finished event triggered');
       getAppStoreState().animatedVolumeChangedCallback();
+      setState({ animatedVolumeChangedCallback: () => undefined });
     });
   }
 }
