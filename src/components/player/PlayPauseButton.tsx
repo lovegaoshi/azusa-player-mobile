@@ -1,12 +1,15 @@
 import React from 'react';
 import { Image, StyleSheet } from 'react-native';
 import { ActivityIndicator } from 'react-native-paper';
-import { State, usePlayWhenReady } from 'react-native-track-player';
+import TrackPlayer, {
+  State,
+  usePlayWhenReady,
+} from 'react-native-track-player';
 
 import { useDebouncedValue } from 'hooks';
 import { useNoxSetting } from '@hooks/useSetting';
 import LottieButtonAnimated from '../buttons/LottieButtonAnimated';
-import { fadePause, fadePlay } from '@utils/RNTPUtils';
+import { fadePause } from '@utils/RNTPUtils';
 
 export const PlayPauseButton: React.FC<{
   state: State | undefined;
@@ -37,7 +40,7 @@ export const PlayPauseButton: React.FC<{
     <LottieButtonAnimated
       src={require('@assets/lottie/PauseGoAndBack.json')}
       size={50}
-      onPress={showPause ? fadePause : fadePlay}
+      onPress={showPause ? fadePause : () => TrackPlayer.play()}
       clicked={!showPause}
       strokes={['Play', 'Play 2', 'Pause', 'Pause 3']}
     />
