@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { StyleSheet } from 'react-native';
 import NoxTheme from './styles/NoxTheme';
 import AzusaTheme from './styles/AzusaTheme';

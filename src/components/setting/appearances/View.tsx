@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { useTranslation } from 'react-i18next';
-import { ParamListBase, useNavigation } from '@react-navigation/native';
+import { ParamListBase } from '@react-navigation/native';
 import { Appearance, StyleSheet, View, ColorSchemeName } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import { DrawerNavigationProp } from '@react-navigation/drawer';
@@ -42,9 +42,9 @@ const Stack = createNativeStackNavigator();
 
 const MainView = ({ navigation }: Props) => {
   const { t } = useTranslation();
-  const navigationGlobal = useNavigation();
   const playerStyle = useNoxSetting(state => state.playerStyle);
   const [currentSelectOption, setCurrentSelectOption] = React.useState<
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     SelectSettingEntry<any>
   >(dummySelectSettingEntry);
   const [selectVisible, setSelectVisible] = React.useState(false);

@@ -1,6 +1,12 @@
 import * as React from 'react';
 import Image from 'react-native-fast-image';
-import { View, SafeAreaView, StyleSheet, Dimensions } from 'react-native';
+import {
+  View,
+  SafeAreaView,
+  StyleSheet,
+  Dimensions,
+  Platform,
+} from 'react-native';
 import {
   Text,
   IconButton,
@@ -20,7 +26,6 @@ import {
   ScrollView,
   GestureDetector,
   Gesture,
-  GestureHandlerRootView,
 } from 'react-native-gesture-handler';
 
 import SkinSearchbar from '../SkinSearchbar';
@@ -125,12 +130,22 @@ const SkinItem = ({ skin, checked, setChecked }: SkinItemProps) => {
     setPlayerStyle(skin);
   };
 
+  const GestureWrapper = (props: { children: JSX.Element }) => {
+    if (Platform.OS === 'ios') {
+      return props.children;
+    } else {
+      return (
+        <GestureDetector gesture={gesture}>{props.children}</GestureDetector>
+      );
+    }
+  };
+
   React.useEffect(() => {
     mounted.current = true;
   }, []);
 
   return (
-    <GestureDetector gesture={gesture}>
+    <GestureWrapper>
       <Animated.View
         entering={mounted.current ? LightSpeedInLeft : undefined}
         exiting={LightSpeedOutRight}
@@ -189,7 +204,7 @@ const SkinItem = ({ skin, checked, setChecked }: SkinItemProps) => {
           </View>
         </TouchableRipple>
       </Animated.View>
-    </GestureDetector>
+    </GestureWrapper>
   );
 };
 
