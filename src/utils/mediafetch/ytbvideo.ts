@@ -20,6 +20,20 @@ import { SOURCE } from '@enums/MediaFetch';
 
 export const CIDPREFIX = 'youtube-';
 
+const resolveIOSURL = (formats: ytdl.videoFormat[]) => {
+  // iOS can't play OGG, but mp4a is fine.
+  const filteredFormats = formats.filter(format =>
+    format.codecs.includes('mp4a')
+  );
+  const audioOnlyFormats = filteredFormats.filter(format => !format.hasVideo);
+  return ytdl.chooseFormat(
+    audioOnlyFormats.length === 0 ? filteredFormats : audioOnlyFormats,
+    {
+      quality: 'highestaudio',
+    }
+  ).url;
+};
+
 const fetchYTBPlayUrlPromise = async (sid: string, iOS = true) => {
   try {
     logger.debug(`fetch YTB playURL promise:${sid}`);
@@ -29,12 +43,7 @@ const fetchYTBPlayUrlPromise = async (sid: string, iOS = true) => {
     const videoDetails = ytdlInfo.videoDetails;
     const url =
       Platform.OS === 'ios' && iOS
-        ? ytdl.chooseFormat(
-            ytdlInfo.formats.filter(format => format.codecs.includes('mp4a')),
-            {
-              quality: 'highestaudio',
-            }
-          ).url
+        ? resolveIOSURL(ytdlInfo.formats)
         : ytdl.chooseFormat(ytdlInfo.formats, { quality: 'highestaudio' }).url;
     return {
       url,
