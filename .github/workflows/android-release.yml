@@ -241,7 +241,7 @@ jobs:
           command: yarn
 
       - name: Pod Install
-        run: cd ios && pod install
+        run: cd ios && pod install --repo-update
 
       - name: build
         run: cd ios && xcodebuild -scheme example -workspace example.xcworkspace -configuration Release clean archive -archivePath "build/APM.xcarchive" CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO CODE_SIGNING_ALLOWED=NO
