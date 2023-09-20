@@ -7,7 +7,7 @@ import noxPlayingList, { getCurrentTPQueue } from '@stores/playingList';
 import biliavideo from '@utils/mediafetch/biliavideo';
 import { randomChoice, regexMatchOperations } from '@utils/Utils';
 import { NoxRepeatMode } from '@enums/RepeatMode';
-import { animatedVolumeChange, songlistToTracklist } from '@utils/RNTPUtils';
+import { songlistToTracklist } from '@utils/RNTPUtils';
 import appStore from '@stores/appStore';
 import ytbvideoFetch from '@utils/mediafetch/ytbvideo';
 
