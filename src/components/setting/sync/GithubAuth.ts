@@ -14,13 +14,12 @@ const config = {
   redirectUrl: 'com.noxplayer://oauthredirect',
   clientId: GITHUB_KEY,
   clientSecret: GITHUB_SECRET,
-  scopes: ['identity'],
+  scopes: ['identity', 'repo'],
   additionalHeaders: { Accept: 'application/json' },
   serviceConfiguration: {
     authorizationEndpoint: 'https://github.com/login/oauth/authorize',
     tokenEndpoint: 'https://github.com/login/oauth/access_token',
-    revocationEndpoint:
-      'https://github.com/settings/connections/applications/<client-id>',
+    revocationEndpoint: `https://github.com/settings/connections/applications/${GITHUB_KEY}`,
   },
 };
 
@@ -32,7 +31,7 @@ export const getAuth = async (
 ) => {
   const authState = await authorize(config);
   if (authState.accessToken) {
-    logger.debug('gitee login successful');
+    logger.debug('github login successful');
     authToken = authState.accessToken;
     callback();
   } else {

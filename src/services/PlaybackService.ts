@@ -19,7 +19,6 @@ import appStore, {
   setCurrentPlaying,
 } from '@stores/appStore';
 import {
-  animatedVolumeChange,
   fadePause,
   fadePlay,
   cycleThroughPlaymode,
@@ -70,7 +69,7 @@ export async function PlaybackService() {
 
   TrackPlayer.addEventListener(Event.RemotePlay, async () => {
     console.log('Event.RemotePlay');
-    fadePlay();
+    TrackPlayer.play();
   });
 
   TrackPlayer.addEventListener(Event.RemoteJumpForward, async event => {
@@ -176,6 +175,9 @@ export async function PlaybackService() {
 
   TrackPlayer.addEventListener(Event.PlaybackState, async event => {
     console.log('Event.PlaybackState', event);
+    if (event.state === State.Playing) {
+      fadePlay();
+    }
     // AB repeat implementation
     // HACK: this works and feels terrible but I can't figure out something better.
     if (event.state !== State.Ready) return;
@@ -200,8 +202,8 @@ export async function PlaybackService() {
         logger.debug(
           `[FADEOUT] fading out....${event.position} / ${event.duration}`
         );
-        animatedVolumeChange({
-          val: 0,
+        TrackPlayer.setAnimatedVolume({
+          volume: 0,
           duration: fadeIntervalMs,
         });
       }
@@ -227,6 +229,7 @@ export async function PlaybackService() {
     TrackPlayer.addEventListener(Event.PlaybackAnimatedVolumeChanged, () => {
       logger.debug('animated volume finished event triggered');
       getAppStoreState().animatedVolumeChangedCallback();
+      setState({ animatedVolumeChangedCallback: () => undefined });
     });
   }
 }
