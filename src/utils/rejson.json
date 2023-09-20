@@ -256,6 +256,10 @@
     "operations": [[2], [1, ["(.+)-咻咻满-"]]]
   },
   {
+    "uploaders": ["35659076"],
+    "operations": [[1, ["【赫卡特_Hecate】(.+)（直播歌切）"]]]
+  },
+  {
     "uploaders": [""],
     "operations": [[2], [1, []]]
   }

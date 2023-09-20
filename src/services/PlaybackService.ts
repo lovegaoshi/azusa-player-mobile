@@ -19,7 +19,6 @@ import appStore, {
   setCurrentPlaying,
 } from '@stores/appStore';
 import {
-  animatedVolumeChange,
   fadePause,
   fadePlay,
   cycleThroughPlaymode,
@@ -203,8 +202,8 @@ export async function PlaybackService() {
         logger.debug(
           `[FADEOUT] fading out....${event.position} / ${event.duration}`
         );
-        animatedVolumeChange({
-          val: 0,
+        TrackPlayer.setAnimatedVolume({
+          volume: 0,
           duration: fadeIntervalMs,
         });
       }

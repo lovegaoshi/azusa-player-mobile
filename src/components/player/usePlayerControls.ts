@@ -12,6 +12,7 @@ import appStore from '@stores/appStore';
 import ytbvideoFetch from '@utils/mediafetch/ytbvideo';
 
 const { getState } = noxPlayingList;
+const setAppStore = appStore.setState;
 const regexResolveURLs: NoxUtils.RegexMatchOperations<NoxMedia.Song> = [
   [ytbvideoFetch.regexResolveURLMatch, ytbvideoFetch.suggest],
 ];
@@ -108,20 +109,25 @@ export default () => {
 
   const performSkipToNext = () => {
     const preparePromise = prepareSkipToNext();
-    animatedVolumeChange({
-      val: 0,
+    const callback = () => preparePromise.then(() => TrackPlayer.skipToNext());
+    TrackPlayer.setAnimatedVolume({
+      volume: 0,
       duration: fadeIntervalMs,
-      callback: () => preparePromise.then(() => TrackPlayer.skipToNext()),
+      callback,
     });
+    setAppStore({ animatedVolumeChangedCallback: callback });
   };
 
   const performSkipToPrevious = () => {
     const preparePromise = prepareSkipToPrevious();
-    animatedVolumeChange({
-      val: 0,
+    const callback = () =>
+      preparePromise.then(() => TrackPlayer.skipToPrevious());
+    TrackPlayer.setAnimatedVolume({
+      volume: 0,
       duration: fadeIntervalMs,
-      callback: () => preparePromise.then(() => TrackPlayer.skipToPrevious()),
+      callback,
     });
+    setAppStore({ animatedVolumeChangedCallback: callback });
   };
 
   return {
