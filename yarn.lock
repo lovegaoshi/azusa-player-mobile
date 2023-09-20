@@ -11267,7 +11267,7 @@ react-native-tab-view@^3.5.1:
 
 "react-native-track-player@git+https://lovegaoshi@github.com/lovegaoshi/react-native-track-player.git#APM":
   version "4.0.0-rc08"
-  resolved "git+https://lovegaoshi@github.com/lovegaoshi/react-native-track-player.git#0a426c142ba21750ca1475af2fa49d6bd9c597ea"
+  resolved "git+https://lovegaoshi@github.com/lovegaoshi/react-native-track-player.git#4a0e1b8246c302071c5f445d00000fd0971a9465"
 
 react-native-url-polyfill@^1.3.0:
   version "1.3.0"
