@@ -22,12 +22,18 @@ export const CIDPREFIX = 'youtube-';
 
 const resolveIOSURL = (formats: ytdl.videoFormat[]) => {
   // iOS can't play OGG, but mp4a is fine.
+  // iOS audio only mp4a has double the duration, but why?
+  // this is observable in safari.
+  // for now use the video + audio format that is fine.
+  // maybe we can "fix" this via setDuration?
   const filteredFormats = formats.filter(format =>
     format.codecs.includes('mp4a')
   );
-  const audioOnlyFormats = filteredFormats.filter(format => !format.hasVideo);
+  const combinedFormats = filteredFormats.filter(
+    format => format.hasVideo && format.hasAudio
+  );
   return ytdl.chooseFormat(
-    audioOnlyFormats.length === 0 ? filteredFormats : audioOnlyFormats,
+    combinedFormats.length === 0 ? filteredFormats : combinedFormats,
     {
       quality: 'highestaudio',
     }
@@ -244,8 +250,8 @@ const regexFetch = async ({ reExtracted }: regexFetchProps) => {
   return audioInfo || [];
 };
 
-const resolveURL = async (song: NoxMedia.Song) => {
-  return await fetchYTBPlayUrlPromise(song.bvid);
+const resolveURL = async (song: NoxMedia.Song, iOS = true) => {
+  return await fetchYTBPlayUrlPromise(song.bvid, iOS);
 };
 
 const refreshSong = (song: NoxMedia.Song) => song;
