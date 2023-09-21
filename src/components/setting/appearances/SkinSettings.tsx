@@ -77,15 +77,13 @@ const SkinItem = ({ skin, checked, setChecked }: SkinItemProps) => {
   const mounted = React.useRef(false);
   const isPressed = useSharedValue(false);
   const offset = useSharedValue({ x: 0, y: 0 });
-  const animatedStyles = useAnimatedStyle(() => {
-    return {
-      transform: [
-        { translateX: offset.value.x },
-        { translateY: offset.value.y },
-        { scale: withSpring(isPressed.value ? 1.2 : 1) },
-      ],
-    };
-  });
+  const animatedStyles = useAnimatedStyle(() => ({
+    transform: [
+      { translateX: offset.value.x },
+      { translateY: offset.value.y },
+      { scale: withSpring(isPressed.value ? 1.2 : 1) },
+    ],
+  }));
 
   const deleteTheme = () =>
     setPlayerStyles(playerStyles.filter(pSkin => pSkin !== skin));
