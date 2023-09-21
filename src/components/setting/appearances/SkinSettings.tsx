@@ -26,6 +26,7 @@ import {
   ScrollView,
   GestureDetector,
   Gesture,
+  PanGesture,
 } from 'react-native-gesture-handler';
 
 import SkinSearchbar from '../SkinSearchbar';
@@ -66,6 +67,21 @@ const BuiltInThemes: DisplayTheme[] = [
   },
 ];
 
+const GestureWrapper = (props: {
+  children: JSX.Element;
+  gesture: PanGesture;
+}) => {
+  if (Platform.OS === 'ios') {
+    return props.children;
+  } else {
+    return (
+      <GestureDetector gesture={props.gesture}>
+        {props.children}
+      </GestureDetector>
+    );
+  }
+};
+
 const SkinItem = ({ skin, checked, setChecked }: SkinItemProps) => {
   const playerStyle = useNoxSetting(state => state.playerStyle);
   const setPlayerStyle = useNoxSetting(state => state.setPlayerStyle);
@@ -77,15 +93,13 @@ const SkinItem = ({ skin, checked, setChecked }: SkinItemProps) => {
   const mounted = React.useRef(false);
   const isPressed = useSharedValue(false);
   const offset = useSharedValue({ x: 0, y: 0 });
-  const animatedStyles = useAnimatedStyle(() => {
-    return {
-      transform: [
-        { translateX: offset.value.x },
-        { translateY: offset.value.y },
-        { scale: withSpring(isPressed.value ? 1.2 : 1) },
-      ],
-    };
-  });
+  const animatedStyles = useAnimatedStyle(() => ({
+    transform: [
+      { translateX: offset.value.x },
+      { translateY: offset.value.y },
+      { scale: withSpring(isPressed.value ? 1.2 : 1) },
+    ],
+  }));
 
   const deleteTheme = () =>
     setPlayerStyles(playerStyles.filter(pSkin => pSkin !== skin));
@@ -130,22 +144,12 @@ const SkinItem = ({ skin, checked, setChecked }: SkinItemProps) => {
     setPlayerStyle(skin);
   };
 
-  const GestureWrapper = (props: { children: JSX.Element }) => {
-    if (Platform.OS === 'ios') {
-      return props.children;
-    } else {
-      return (
-        <GestureDetector gesture={gesture}>{props.children}</GestureDetector>
-      );
-    }
-  };
-
   React.useEffect(() => {
     mounted.current = true;
   }, []);
 
   return (
-    <GestureWrapper>
+    <GestureWrapper gesture={gesture}>
       <Animated.View
         entering={mounted.current ? LightSpeedInLeft : undefined}
         exiting={LightSpeedOutRight}

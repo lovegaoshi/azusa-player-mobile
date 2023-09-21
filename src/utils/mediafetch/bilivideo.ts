@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Platform } from 'react-native';
 
 /**
@@ -22,7 +23,7 @@ import { SOURCE } from '@enums/MediaFetch';
 const URL_VIDEO_INFO =
   'https://api.bilibili.com/x/web-interface/view?bvid={bvid}';
 const URL_PLAY_URL =
-  'https://api.bilibili.com/x/player/playurl?cid={cid}&bvid={bvid}&qn=64&fnval=16';
+  'https://api.bilibili.com/x/player/playurl?cid={cid}&bvid={bvid}&qn=64&fnval=16&try_look=1';
 const URL_PLAY_URL_IOS =
   'https://api.bilibili.com/x/player/playurl?cid={cid}&bvid={bvid}&qn=6&fnval=16&platform=html5';
 
