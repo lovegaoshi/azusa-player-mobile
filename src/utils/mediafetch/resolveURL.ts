@@ -13,7 +13,7 @@ export const ENUMS = {
   youtube: 'youtube.video',
 };
 
-type regResolve = NoxUtils.RegexMatchOperations<NoxNetwork.ParsedNoxMediaURL>;
+type regResolve = NoxUtils.RegexMatchResolve<NoxNetwork.ParsedNoxMediaURL>;
 /**
  * a parent method that returns the media's stream url given an id.
  * @param {string} bvid media's id.
