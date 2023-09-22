@@ -1,5 +1,11 @@
 import React from 'react';
-import { ImageBackground, Dimensions, View, StyleSheet } from 'react-native';
+import {
+  ImageBackground,
+  Dimensions,
+  View,
+  StyleSheet,
+  Platform,
+} from 'react-native';
 // import { Video, ResizeMode } from 'expo-av';
 import Video from 'react-native-video';
 import { useNoxSetting } from '@hooks/useSetting';
@@ -31,7 +37,7 @@ export const resolveBackgroundImage = async (
           await fetchVideoPlayUrlPromise({
             bvid: backgroundImage.identifier,
             extractType: 'VideoUrl',
-            iOS: false,
+            iOS: Platform.OS === 'ios',
           })
         ).url,
       };
