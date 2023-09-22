@@ -90,20 +90,22 @@ export const TrackInfo: React.FC<{
             />
           </Animated.View>
         </TouchableWithoutFeedback>
-        <View
-          style={[
-            styles.lyric,
-            {
-              opacity: isImageVisible ? 0 : 1,
-              position: isImageVisible ? 'absolute' : 'relative',
-            },
-          ]}
-          pointerEvents={isImageVisible ? 'none' : 'auto'}
-        >
-          {track && (
-            <LyricView onLyricPress={onLyricPress} track={track} artist="n/a" />
-          )}
-        </View>
+        <TouchableWithoutFeedback onPress={onImagePress}>
+          <View
+            style={[
+              styles.lyric,
+              {
+                opacity: isImageVisible ? 0 : 1,
+                position: isImageVisible ? 'absolute' : 'relative',
+              },
+            ]}
+            pointerEvents={isImageVisible ? 'none' : 'auto'}
+          >
+            {track && (
+              <LyricView onLyricPress={onLyricPress} track={track} artist="n/a" />
+            )}
+          </View>
+        </TouchableWithoutFeedback>
       </>
       <Text style={[styles.titleText, { color: playerStyle.colors.primary }]}>
         {track?.title}
