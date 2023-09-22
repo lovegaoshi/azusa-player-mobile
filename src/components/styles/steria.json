@@ -1374,5 +1374,95 @@
       "onSurfaceDisabled": "rgba(32, 26, 27, 0.38)",
       "backdrop": "rgba(58, 45, 47, 0.4)"
     }
+  },
+  {
+    "metaData": {
+      "themeName": "Hecate播放器",
+      "themeDesc": "https://live.bilibili.com/27266811",
+      "themeAuthor": "lovegaoshi",
+      "themeIcon": "https://album.biliimg.com/bfs/new_dyn/11642862078938f8b5e41e01d26d6a01402110060.jpg",
+      "darkTheme": true
+    },
+    "gifs": [
+      "https://i0.hdslb.com/bfs/garb/b132854c2f458b50e384e83d5d2f12a169e07310.png",
+      "https://i0.hdslb.com/bfs/garb/a4ff3b85529ceae3c2a743b2c56c15861453b837.png",
+      "https://i0.hdslb.com/bfs/garb/9c3cbe8884e058e0d7ce6da381cbced52e63f377.png",
+      "https://i0.hdslb.com/bfs/garb/82d4025a53e9105584a9c37e1ae640b883ab81ff.png",
+      "https://i0.hdslb.com/bfs/garb/53fe3c5b9eca515235569a0e2012344ac3bdc87c.png",
+      "https://i0.hdslb.com/bfs/garb/ef0153d2d632b92d1409516d79f3d6df5c0f3bc3.png",
+      "https://i0.hdslb.com/bfs/garb/d046cfb439c26d3c53e07a8c7f0fc36fe39ad6d0.png",
+      "https://i0.hdslb.com/bfs/garb/fc92ad72336544537b3cb37cce3d276d4b1cde1d.png",
+      "http://i0.hdslb.com/bfs/live/f448a8304d1b93a6c586e2f90d239fe3ce15d168.png",
+      "http://i0.hdslb.com/bfs/live/a2e4a54ec84b679d999a49225b86237d4637bfad.png",
+      "http://i0.hdslb.com/bfs/live/bdb7d64cd071ed239c908187af957fbb300c20ad.png",
+      "http://i0.hdslb.com/bfs/live/d6e0dd46444f3797ea8ec099bec1160e39a12d5f.png",
+      "http://i0.hdslb.com/bfs/live/3b28666a7f82db76c4f0a1f73426a625603c78d5.png",
+      "http://i0.hdslb.com/bfs/live/037a6b5f5fb38123fc9d82e4c3517a405a4b0659.png",
+      "http://i0.hdslb.com/bfs/live/94a35899761a48d32433c538dcba4c92949f4694.png",
+      "http://i0.hdslb.com/bfs/live/29ba48e9810d38f185029cd8d2f0001bc250ea7a.png",
+      "http://i0.hdslb.com/bfs/live/26cc655901bb37ceacd6679e70d88cd9019c042d.png",
+      "https://album.biliimg.com/bfs/new_dyn/11642862078938f8b5e41e01d26d6a01402110060.jpg",
+      "https://album.biliimg.com/bfs/new_dyn/3fafaa7692851cfd869771bde3c0add7402110060.jpg"
+    ],
+    "backgroundImages": [
+      {
+        "type": "bvid",
+        "identifier": "BV1nY411r7um"
+      }
+    ],
+    "customColors": {
+      "maskedBackgroundColor": "rgba(0, 0, 0, 0.60)",
+      "playlistDrawerBackgroundColor": "rebeccapurple",
+      "playlistDrawerBackgroundColorTransparent": "rgba(102, 51, 153, 0.35)",
+      "progressThumbTintColor": "#00BFFF",
+      "progressMinimumTrackTintColor": "#00BFFF",
+      "progressMaximumTrackTintColor": "#FFFFFF",
+      "btnBackgroundColor": "rgb(72, 71, 58)",
+      "textInputSelectionColor": "rebeccapurple"
+    },
+    "colors": {
+      "primary": "#00BFFF",
+      "onPrimary": "rgb(50, 50, 0)",
+      "primaryContainer": "rgb(30, 30, 30)",
+      "onPrimaryContainer": "rgb(234, 234, 0)",
+      "secondary": "#97D5EA",
+      "onSecondary": "rgb(50, 50, 24)",
+      "secondaryContainer": "rgb(73, 72, 45)",
+      "onSecondaryContainer": "rgb(231, 228, 191)",
+      "tertiary": "rgb(164, 208, 189)",
+      "onTertiary": "rgb(11, 55, 42)",
+      "tertiaryContainer": "rgb(37, 78, 64)",
+      "onTertiaryContainer": "rgb(191, 236, 216)",
+      "error": "rgb(255, 180, 171)",
+      "onError": "rgb(105, 0, 5)",
+      "errorContainer": "rgb(147, 0, 10)",
+      "onErrorContainer": "rgb(255, 180, 171)",
+      "background": "rgba(0,0,0, 0.4)",
+      "onBackground": "rgb(230, 226, 217)",
+      "surface": "rgb(28, 28, 23)",
+      "onSurface": "#00BFFF",
+      "text": "#00BFFF",
+      "surfaceVariant": "rgb(10, 10, 10)",
+      "onSurfaceVariant": "#00BFFF",
+      "outline": "rgb(147, 145, 130)",
+      "outlineVariant": "rgb(72, 71, 58)",
+      "shadow": "rgb(0, 0, 0)",
+      "scrim": "rgb(0, 0, 0)",
+      "inverseSurface": "rgb(230, 226, 217)",
+      "inverseOnSurface": "rgb(49, 49, 43)",
+      "inversePrimary": "rgb(98, 98, 0)",
+      "elevation": {
+        "level0": "transparent",
+        "level1": "rgb(53, 56, 57)",
+        "level2": "rgb(10, 10, 10)",
+        "level3": "rgb(10, 10, 10)",
+        "level4": "rgb(49, 49, 20)",
+        "level5": "rgb(53, 53, 20)"
+      },
+      "surfaceDisabled": "rgba(230, 226, 217, 0.12)",
+      "onSurfaceDisabled": "rgba(230, 226, 217, 0.38)",
+      "backdrop": "rgba(49, 49, 37, 0.4)"
+    },
+    "playerControlIconContained": "contained"
   }
 ]
