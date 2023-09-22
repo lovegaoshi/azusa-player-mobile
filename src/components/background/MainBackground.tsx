@@ -31,6 +31,7 @@ export const resolveBackgroundImage = async (
           await fetchVideoPlayUrlPromise({
             bvid: backgroundImage.identifier,
             extractType: 'VideoUrl',
+            iOS: false,
           })
         ).url,
       };
