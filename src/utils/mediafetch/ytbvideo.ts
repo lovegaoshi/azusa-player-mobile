@@ -201,7 +201,7 @@ export const fetchAudioInfo = async (
     return fetchAudioInfoRaw(bvid);
   });
 
-const suggest = async (song: NoxMedia.Song) => {
+const suggest = async (song: NoxMedia.Song, filterMW = <T>(v: T[]) => v[0]) => {
   const ytdlInfo = await ytdl.getInfo(
     `https://www.youtube.com/watch?v=${song.bvid}`
   );
@@ -222,7 +222,7 @@ const suggest = async (song: NoxMedia.Song) => {
   },
   */
   const relatedVideos = ytdlInfo.related_videos.filter(song => song.id);
-  const suggestSong = randomChoice(relatedVideos); // or relatedVideos[0];
+  const suggestSong = filterMW(relatedVideos); // or relatedVideos[0];
   return SongTS({
     cid: `${CIDPREFIX}-${suggestSong.id}`,
     bvid: suggestSong.id!,

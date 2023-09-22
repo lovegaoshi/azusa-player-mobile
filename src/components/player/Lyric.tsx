@@ -8,7 +8,6 @@ import {
   TouchableOpacity,
   Button,
 } from 'react-native';
-import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
 import { Lrc as Lyric } from 'react-native-lyric';
 import { Track, useProgress } from 'react-native-track-player';
 import { IconButton, TextInput } from 'react-native-paper';
@@ -184,20 +183,18 @@ export const LyricView = ({
 
   const lineRenderer = useCallback(
     ({ lrcLine: { content }, active }: LyricLineProps) => (
-      <TouchableWithoutFeedback onPress={onLyricPress}>
-        <View style={{ padding: 7 }}>
-          <Text
-            style={{
-              textAlign: 'center',
-              color: active
-                ? playerStyle.colors.primary
-                : playerStyle.colors.secondary,
-            }}
-          >
-            {content}
-          </Text>
-        </View>
-      </TouchableWithoutFeedback>
+      <View style={{ padding: 7 }}>
+        <Text
+          style={{
+            textAlign: 'center',
+            color: active
+              ? playerStyle.colors.primary
+              : playerStyle.colors.secondary,
+          }}
+        >
+          {content}
+        </Text>
+      </View>
     ),
     [playerStyle]
   );

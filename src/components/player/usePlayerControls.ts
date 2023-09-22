@@ -13,7 +13,7 @@ import ytbvideoFetch from '@utils/mediafetch/ytbvideo';
 
 const { getState } = noxPlayingList;
 const setAppStore = appStore.setState;
-const regexResolveURLs: NoxUtils.RegexMatchOperations<NoxMedia.Song> = [
+const regexResolveURLs: NoxUtils.RegexMatchSuggest<NoxMedia.Song> = [
   [ytbvideoFetch.regexResolveURLMatch, ytbvideoFetch.suggest],
 ];
 // 130,音乐综合 29,音乐现场 59,演奏 31,翻唱 193,MV 30,VOCALOID·UTAU 194,电音 28,原创音乐
@@ -30,6 +30,10 @@ export default () => {
     const currentSong = (await TrackPlayer.getActiveTrack())?.song;
     if (!currentSong) throw new Error('[PlaySuggest] currenSong is not valid!');
 
+    const filterMW = (v: any[]) => {
+      return randomChoice(v);
+    };
+
     const fallback = async () => {
       if (!currentSong.bvid.startsWith('BV')) {
         throw new Error('not a bvid; bilisuggest fails');
@@ -41,7 +45,7 @@ export default () => {
         await biliavideo.regexFetch({
           reExtracted: [
             '',
-            randomChoice(biliSuggested).aid,
+            filterMW(biliSuggested).aid,
             // HACK: sure sure regexpexecarray
           ] as unknown as RegExpExecArray,
         })
@@ -50,7 +54,10 @@ export default () => {
 
     return regexMatchOperations({
       song: currentSong,
-      regexOperations: regexResolveURLs,
+      regexOperations: regexResolveURLs.map(resolver => [
+        resolver[0],
+        (song: NoxMedia.Song) => resolver[1](song, filterMW),
+      ]),
       fallback,
       regexMatching: song => song.id,
     });
@@ -109,7 +116,11 @@ export default () => {
 
   const performSkipToNext = () => {
     const preparePromise = prepareSkipToNext();
-    const callback = () => preparePromise.then(() => TrackPlayer.skipToNext());
+    const callback = () =>
+      preparePromise.then(async () => {
+        await TrackPlayer.skipToNext();
+        TrackPlayer.play();
+      });
     TrackPlayer.setAnimatedVolume({
       volume: 0,
       duration: fadeIntervalMs,
@@ -121,7 +132,10 @@ export default () => {
   const performSkipToPrevious = () => {
     const preparePromise = prepareSkipToPrevious();
     const callback = () =>
-      preparePromise.then(() => TrackPlayer.skipToPrevious());
+      preparePromise.then(async () => {
+        await TrackPlayer.skipToPrevious();
+        TrackPlayer.play();
+      });
     TrackPlayer.setAnimatedVolume({
       volume: 0,
       duration: fadeIntervalMs,

@@ -58,7 +58,7 @@
     "react": "18.2.0",
     "react-i18next": "^12.2.2",
     "react-native": "0.72.4",
-    "react-native-app-auth": "git+https://github.com/lovegaoshi/react-native-app-auth.git",
+    "react-native-app-auth": "^7.0.0",
     "react-native-background-timer": "git+https://github.com/lovegaoshi/react-native-background-timer.git",
     "react-native-blob-jsi-helper": "git+https://github.com/lovegaoshi/react-native-blob-jsi-helper.git",
     "react-native-blob-util": "^0.18.3",
