@@ -116,7 +116,11 @@ export default () => {
 
   const performSkipToNext = () => {
     const preparePromise = prepareSkipToNext();
-    const callback = () => preparePromise.then(() => TrackPlayer.skipToNext());
+    const callback = () =>
+      preparePromise.then(async () => {
+        await TrackPlayer.skipToNext();
+        TrackPlayer.play();
+      });
     TrackPlayer.setAnimatedVolume({
       volume: 0,
       duration: fadeIntervalMs,
@@ -128,7 +132,10 @@ export default () => {
   const performSkipToPrevious = () => {
     const preparePromise = prepareSkipToPrevious();
     const callback = () =>
-      preparePromise.then(() => TrackPlayer.skipToPrevious());
+      preparePromise.then(async () => {
+        await TrackPlayer.skipToPrevious();
+        TrackPlayer.play();
+      });
     TrackPlayer.setAnimatedVolume({
       volume: 0,
       duration: fadeIntervalMs,
