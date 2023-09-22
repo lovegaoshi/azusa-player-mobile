@@ -34,7 +34,8 @@ const MAX_SONGLIST_SIZE = 400;
 
 export const saveItem = async (key: string, value: any) => {
   try {
-    console.log('saving %s %s into Map', key, value);
+    // only enable this for serious debugging:P
+    // console.log('saving %s %s into Map', key, value);
     await AsyncStorage.setItem(key, JSON.stringify(value));
   } catch (e) {
     console.error(e);
