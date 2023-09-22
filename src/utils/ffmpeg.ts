@@ -38,7 +38,7 @@ export const setTPR128Gain = async (gain: number, fade = 0, init = -1) => {
   }
   try {
     const volume = Math.pow(10, gain / 20);
-    console.debug(`[r128gain] set r128gain volume to ${volume}`);
+    logger.debug(`[r128gain] set r128gain volume to ${volume}`);
     TrackPlayer.setAnimatedVolume({ volume, duration: fade, init });
   } catch (e) {
     logger.warn(`[ffmpeg] r128gain set error: ${e}`);
@@ -52,7 +52,7 @@ export const setR128Gain = async (
   fade = 0,
   init = -1
 ) => {
-  console.debug(`[r128gain] set r128gain to ${gain} dB`);
+  logger.debug(`[r128gain] set r128gain to ${gain} dB`);
   if (typeof gain === 'string') {
     gain = Number(gain);
   }

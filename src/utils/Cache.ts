@@ -83,7 +83,7 @@ class NoxMediaCache {
     this.cache.set(noxCacheKey(song), res.path());
     addDownloadProgress(song, 100);
     if (getState().playerSetting.r128gain) {
-      console.debug('[FFMPEG] now starting FFMPEG r128gain...');
+      logger.debug('[FFMPEG] now starting FFMPEG r128gain...');
       const previousGain = getR128Gain(song);
       if (previousGain === null) {
         const gain = await r128gain(res.path());
@@ -100,7 +100,7 @@ class NoxMediaCache {
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-expect-error
       if (playbackState.error?.code === 'ios_failed_to_load_resource') {
-        console.warn(
+        logger.warn(
           `iOS m4s playback error of ${song.parsedName}. loading cached mp3...`
         );
         const currentTrack = await TrackPlayer.getActiveTrack();
