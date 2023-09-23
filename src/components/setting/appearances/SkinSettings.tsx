@@ -66,7 +66,7 @@ const BuiltInThemes: DisplayTheme[] = [
 ];
 
 const GestureWrapper = (props: {
-  children: JSX.Element;
+  children: React.JSX.Element;
   gesture: PanGesture;
 }) => {
   if (Platform.OS === 'ios') {

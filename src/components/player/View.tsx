@@ -11,7 +11,7 @@ import { ParamListBase } from '@react-navigation/native';
 import { DrawerNavigationProp } from '@react-navigation/drawer';
 import { useTranslation } from 'react-i18next';
 
-import { TrackInfo } from './';
+import TrackInfo from './TrackInfo/TrackInfo';
 import { SetupService, AdditionalPlaybackService } from 'services';
 import PlayerTopInfo from './PlayerTopInfo';
 import { useNoxSetting } from '@hooks/useSetting';

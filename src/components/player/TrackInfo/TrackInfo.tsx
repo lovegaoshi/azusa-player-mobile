@@ -1,7 +1,6 @@
-import React, { useCallback, useState, useRef } from 'react';
+import React, { useState, useRef } from 'react';
 import {
   StyleSheet,
-  Text,
   View,
   Dimensions,
   Animated,
@@ -10,35 +9,21 @@ import {
 import type { Track } from 'react-native-track-player';
 import Image from 'react-native-fast-image';
 
+import TrackInfoTemplate from './TrackInfoTemplate';
 import { useNoxSetting } from '@hooks/useSetting';
-import { getCurrentTPQueue } from '@stores/playingList';
 import { LyricView } from '../Lyric';
-import SongMenuButton from './SongMenuButton';
-import FavReloadButton from './FavReloadButton';
 
-export const TrackInfo: React.FC<{
+interface Props {
   track?: Track;
-}> = ({ track }) => {
+  windowWidth?: number;
+}
+const TrackInfo: React.FC<Props> = ({ track, windowWidth }) => {
   const playerSetting = useNoxSetting(state => state.playerSetting);
-  const playerStyle = useNoxSetting(state => state.playerStyle);
-  const currentPlayingList = useNoxSetting(state => state.currentPlayingList);
   const [isImageVisible, setIsImageVisible] = useState(true);
   const opacity = useRef(new Animated.Value(1)).current;
   const dimension = Dimensions.get('window');
-  const albumArtSize = Math.min(dimension.width, dimension.height);
-
-  const getTrackLocation = () => {
-    const currentTPQueue = getCurrentTPQueue();
-    return track?.song
-      ? `#${
-          currentPlayingList.songList.findIndex(
-            song => song.id === track.song.id
-          ) + 1
-        } - ${
-          currentTPQueue.findIndex(song => song.id === track.song.id) + 1
-        }/${currentTPQueue.length}`
-      : '';
-  };
+  const albumArtSize =
+    windowWidth || Math.min(dimension.width, dimension.height);
 
   const onImagePress = () => {
     console.log('TrackInfo: Image Clicked - ');
@@ -69,7 +54,7 @@ export const TrackInfo: React.FC<{
   };
 
   return (
-    <View style={styles.container}>
+    <TrackInfoTemplate>
       <>
         <TouchableWithoutFeedback onPress={onImagePress}>
           <Animated.View
@@ -114,37 +99,11 @@ export const TrackInfo: React.FC<{
           </View>
         </TouchableWithoutFeedback>
       </>
-      <Text style={[styles.titleText, { color: playerStyle.colors.primary }]}>
-        {track?.title}
-      </Text>
-      <View style={styles.infoContainer}>
-        <View style={styles.favoriteButtonContainer}>
-          <FavReloadButton track={track} />
-        </View>
-        <View style={styles.artistInfoContainer}>
-          <Text
-            style={[styles.artistText, { color: playerStyle.colors.secondary }]}
-          >
-            {track?.artist}
-          </Text>
-          <Text
-            style={[styles.artistText, { color: playerStyle.colors.secondary }]}
-          >
-            {currentPlayingList.title}
-          </Text>
-          <Text
-            style={[styles.artistText, { color: playerStyle.colors.secondary }]}
-          >
-            {getTrackLocation()}
-          </Text>
-        </View>
-        <View style={styles.songMenuButtonContainer}>
-          <SongMenuButton track={track} />
-        </View>
-      </View>
-    </View>
+    </TrackInfoTemplate>
   );
 };
+
+export default TrackInfo;
 
 const styles = StyleSheet.create({
   container: {
@@ -156,34 +115,5 @@ const styles = StyleSheet.create({
   },
   lyric: {
     opacity: 1,
-  },
-  titleText: {
-    fontSize: 18,
-    fontWeight: '600',
-    color: 'grey',
-    marginTop: 15,
-    paddingHorizontal: 5,
-  },
-  artistText: {
-    fontSize: 16,
-    fontWeight: '200',
-  },
-  infoContainer: {
-    flexDirection: 'row',
-  },
-  favoriteButtonContainer: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  artistInfoContainer: {
-    flex: 4,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  songMenuButtonContainer: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
   },
 });

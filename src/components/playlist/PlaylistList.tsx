@@ -35,7 +35,7 @@ const { getState } = noxPlayingList;
 interface BackgroundProps {
   song: NoxMedia.Song;
   current?: boolean;
-  children: JSX.Element;
+  children: React.JSX.Element;
 }
 const SongBackground = (props: BackgroundProps) => {
   return props.current ? (

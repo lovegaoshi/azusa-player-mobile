@@ -1,3 +1,4 @@
+import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { View, Text, StyleSheet } from 'react-native';
 import {
@@ -21,7 +22,7 @@ import { SettingEntry } from './SetttingEntries';
  * @returns
  */
 interface SetttingListInterface {
-  icon?: string | (() => JSX.Element);
+  icon?: string | (() => React.JSX.Element);
   settingName: string;
   onPress: () => void;
   settingCategory?: string;

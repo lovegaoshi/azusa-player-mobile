@@ -52,7 +52,7 @@ export const resolveBackgroundImage = async (
   }
 };
 
-const MainBackground = (props: { children: JSX.Element }) => {
+const MainBackground = (props: { children: React.JSX.Element }) => {
   const playerStyle = useNoxSetting(state => state.playerStyle);
   const isLandscape = useIsLandscape();
   const mobileHeight = Dimensions.get('window').height;
