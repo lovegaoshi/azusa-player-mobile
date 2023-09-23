@@ -29,6 +29,7 @@ declare namespace NoxTheme {
 
     gifs: Array<string>;
     backgroundImages: Array<string | backgroundImage>;
+    backgroundImagesLandscape?: Array<string | backgroundImage>;
     colors: any;
     customColors: customColors;
     // https://callstack.github.io/react-native-paper/docs/components/IconButton/

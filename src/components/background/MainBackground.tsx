@@ -13,6 +13,7 @@ import { fetchVideoPlayUrlPromise } from '@utils/mediafetch/bilivideo';
 import { customReqHeader } from '@utils/BiliFetch';
 import { biliNFTVideoFetch } from '@utils/mediafetch/biliNFT';
 import logger from '@utils/Logger';
+import { useIsLandscape } from '@hooks/useOrientation';
 
 const mobileHeight = Dimensions.get('window').height;
 
@@ -53,33 +54,36 @@ export const resolveBackgroundImage = async (
   }
 };
 
-const MainBackground = (props: any) => {
+const MainBackground = (props: { children: JSX.Element }) => {
   const playerStyle = useNoxSetting(state => state.playerStyle);
+  const isLandscape = useIsLandscape();
+  const bkgrdImg =
+    isLandscape && playerStyle.bkgrdImgLandscape
+      ? playerStyle.bkgrdImgLandscape
+      : playerStyle.bkgrdImg;
 
   // TODO: are these still necessary since they are behind await initPlayer?
-  if (!playerStyle.bkgrdImg) return <>{props.children}</>;
+  if (!bkgrdImg) return <>{props.children}</>;
 
-  if (typeof playerStyle.bkgrdImg === 'string') {
+  if (typeof bkgrdImg === 'string') {
     return (
       <ImageBackground
-        source={{ uri: playerStyle.bkgrdImg }}
+        source={{ uri: bkgrdImg }}
         resizeMode="cover"
         style={styles.mobileStyle}
-        {...props}
       >
         {props.children}
       </ImageBackground>
     );
   }
 
-  switch (playerStyle.bkgrdImg.type) {
+  switch (bkgrdImg.type) {
     case RESOLVE_TYPE.image:
       return (
         <ImageBackground
-          source={{ uri: playerStyle.bkgrdImg.identifier }}
+          source={{ uri: bkgrdImg.identifier }}
           resizeMode="cover"
           style={styles.mobileStyle}
-          {...props}
         >
           {props.children}
         </ImageBackground>
@@ -89,8 +93,8 @@ const MainBackground = (props: any) => {
         <>
           <Video
             source={{
-              uri: playerStyle.bkgrdImg.identifier,
-              headers: customReqHeader(playerStyle.bkgrdImg.identifier, {}),
+              uri: bkgrdImg.identifier,
+              headers: customReqHeader(bkgrdImg.identifier, {}),
             }}
             style={{ width: '100%', height: '100%', position: 'absolute' }}
             onError={logger.error}

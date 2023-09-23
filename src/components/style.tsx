@@ -59,6 +59,9 @@ export const createStyle = (
     },
     gifs: (customStyle.gifs || []) as any,
     bkgrdImg: randomChoice(customStyle.backgroundImages || []) as any,
+    bkgrdImgLandscape: randomChoice(
+      customStyle.backgroundImagesLandscape || []
+    ) as any,
     loadingIcon: customStyle.loadingIcon as any,
     progressThumbImage: customStyle.progressThumbImage as any,
     progressThumbImageLeftDrag: (customStyle.progressThumbImageLeftDrag ||
