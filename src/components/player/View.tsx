@@ -85,7 +85,8 @@ export function useSetupPlayer() {
       if (findCurrentSong) {
         await TrackPlayer.add(await songlistToTracklist([findCurrentSong]));
       } else {
-        await TrackPlayer.add(await songlistToTracklist([currentQueue[0]]));
+        currentQueue[0] &&
+          (await TrackPlayer.add(await songlistToTracklist([currentQueue[0]])));
         serviceOptions.lastPlayDuration = 0;
       }
       await AdditionalPlaybackService(serviceOptions);

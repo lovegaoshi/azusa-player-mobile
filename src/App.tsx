@@ -1,10 +1,63 @@
 import { SafeAreaProvider } from 'react-native-safe-area-context';
+import React, { useEffect } from 'react';
+import { Linking, SafeAreaView, StyleSheet } from 'react-native';
+
 import AzusaPlayer from './AzusaPlayer';
+import { useSetupPlayer } from './components/player/View';
+import { useIsLandscape } from './hooks/useOrientation';
+import AppOpenSplash from './components/background/AppOpenSplash';
+
+const useSplash = (duration = 1000) => {
+  const [isReady, setIsReady] = React.useState(false);
+  useEffect(() => {
+    // wait for 1000 ms and set isReady to true
+    setTimeout(() => {
+      setIsReady(true);
+    }, duration);
+  });
+  return isReady;
+};
 
 export default function App() {
+  const isSplashReady = useSplash(__DEV__ ? 1 : 2500);
+  const isPlayerReady = useSetupPlayer();
+  const isLandscape = useIsLandscape();
+
+  useEffect(() => {
+    function deepLinkHandler(data: { url: string }) {
+      console.log('deepLinkHandler', data.url);
+    }
+
+    // This event will be fired when the app is already open and the notification is clicked
+    const subscription = Linking.addEventListener('url', deepLinkHandler);
+
+    // When you launch the closed app from the notification or any other link
+    Linking.getInitialURL().then(url => console.log('getInitialURL', url));
+
+    return () => {
+      subscription.remove();
+    };
+  }, []);
+
+  if (!isPlayerReady || !isSplashReady) {
+    return (
+      <SafeAreaView style={styles.screenContainer}>
+        <AppOpenSplash />
+      </SafeAreaView>
+    );
+  }
+
   return (
     <SafeAreaProvider>
       <AzusaPlayer />
     </SafeAreaProvider>
   );
 }
+
+const styles = StyleSheet.create({
+  screenContainer: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+});
