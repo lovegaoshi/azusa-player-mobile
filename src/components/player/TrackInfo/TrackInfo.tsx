@@ -24,6 +24,8 @@ export const TrackInfo: React.FC<{
   const currentPlayingList = useNoxSetting(state => state.currentPlayingList);
   const [isImageVisible, setIsImageVisible] = useState(true);
   const opacity = useRef(new Animated.Value(1)).current;
+  const dimension = Dimensions.get('window');
+  const albumArtSize = Math.min(dimension.width, dimension.height);
 
   const getTrackLocation = () => {
     const currentTPQueue = getCurrentTPQueue();
@@ -81,7 +83,10 @@ export const TrackInfo: React.FC<{
             pointerEvents={isImageVisible ? 'auto' : 'none'}
           >
             <Image
-              style={[styles.artwork]}
+              style={[
+                styles.artwork,
+                { width: albumArtSize, height: albumArtSize },
+              ]}
               source={
                 playerSetting.hideCoverInMobile
                   ? 0
@@ -99,6 +104,8 @@ export const TrackInfo: React.FC<{
               {
                 opacity: isImageVisible ? 0 : 1,
                 position: isImageVisible ? 'absolute' : 'relative',
+                width: dimension.width,
+                height: dimension.height,
               },
             ]}
             pointerEvents={isImageVisible ? 'none' : 'auto'}
@@ -139,23 +146,15 @@ export const TrackInfo: React.FC<{
   );
 };
 
-const albumArtSize = Math.min(
-  Dimensions.get('window').width,
-  Dimensions.get('window').height
-);
 const styles = StyleSheet.create({
   container: {
     alignItems: 'center',
   },
   artwork: {
-    width: albumArtSize,
-    height: albumArtSize,
     marginTop: 15,
     opacity: 1,
   },
   lyric: {
-    width: Dimensions.get('window').width,
-    height: Dimensions.get('window').height,
     opacity: 1,
   },
   titleText: {

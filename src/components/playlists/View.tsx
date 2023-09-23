@@ -311,7 +311,10 @@ export default (props: any) => {
         onSubmit={() => setNewPlaylistDialogOpen(false)}
       />
       <DraggableFlatList
-        style={styles.draggableFlatList}
+        style={[
+          styles.draggableFlatList,
+          { maxHeight: Dimensions.get('window').height - 330 },
+        ]}
         data={playlistIds.map(val => playlists[val])}
         onDragEnd={({ data }) =>
           setPlaylistIds(data.map(playlist => playlist.id))
@@ -355,9 +358,7 @@ const styles = StyleSheet.create({
     width: 40,
     height: 40,
   },
-  draggableFlatList: {
-    maxHeight: Dimensions.get('window').height - 330,
-  },
+  draggableFlatList: {},
   bottomInfo: {
     paddingBottom: 20,
   },

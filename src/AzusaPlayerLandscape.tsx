@@ -69,6 +69,7 @@ const AzusaPlayer = () => {
     ? CombinedDarkTheme
     : CombinedDefaultTheme;
   const insets = useSafeAreaInsets();
+  const mobileWidth = Dimensions.get('window').width;
 
   return (
     <MainBackground>
@@ -99,16 +100,10 @@ const AzusaPlayer = () => {
           >
             <View style={styles.sidebar}></View>
             <View
-              style={[
-                styles.playerPanel,
-                { width: Dimensions.get('window').width / 2 - 100 },
-              ]}
+              style={[styles.playerPanel, { width: mobileWidth / 2 - 100 }]}
             ></View>
             <View
-              style={[
-                styles.playlistPanel,
-                { width: Dimensions.get('window').width / 2 },
-              ]}
+              style={[styles.playlistPanel, { width: mobileWidth / 2 }]}
             ></View>
           </View>
         </NavigationContainer>

@@ -414,7 +414,15 @@ const PlaylistList = () => {
           <PlaylistMenuButton disabled={checking} />
         </View>
       </View>
-      <View style={stylesLocal.playlistContainer}>
+      <View
+        style={[
+          stylesLocal.playlistContainer,
+          {
+            // HACK: this should be justified as top bar and bottom bar all have a defined height.
+            maxHeight: Dimensions.get('window').height - 250,
+          },
+        ]}
+      >
         <FlashList
           ref={ref => (playlistRef.current = ref)}
           data={currentRows}
@@ -477,8 +485,6 @@ const stylesLocal = StyleSheet.create({
   playlistContainer: {
     ...styles.topBarContainer,
     flex: 4,
-    // HACK: this should be justified as top bar and bottom bar all have a defined height.
-    maxHeight: Dimensions.get('window').height - 250,
   },
   songInfoBackgroundImg: { opacity: 0.5 },
   songInfoBackgroundBanner: { flex: 1 },

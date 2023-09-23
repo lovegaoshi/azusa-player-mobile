@@ -1,21 +1,16 @@
 import * as React from 'react';
 import {
-  Pressable,
   View,
   Animated,
   StyleSheet,
   PanResponder,
+  Dimensions,
 } from 'react-native';
 import Image from 'react-native-fast-image';
-import { Dimensions } from 'react-native';
 
-import { useNoxSetting } from '@hooks/useSetting';
 import { localSplashes } from '../background/AppOpenSplash';
 
-const isZeroVisible = (index: number, arrLen: number, repeat = false) => {};
-
 export default () => {
-  const playerStyle = useNoxSetting(state => state.playerStyle);
   const [index, setIndex] = React.useState(0);
   const position = React.useRef(new Animated.ValueXY()).current;
   const panResponder = React.useRef(

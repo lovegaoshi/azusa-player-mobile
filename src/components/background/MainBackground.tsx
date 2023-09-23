@@ -15,8 +15,6 @@ import { biliNFTVideoFetch } from '@utils/mediafetch/biliNFT';
 import logger from '@utils/Logger';
 import { useIsLandscape } from '@hooks/useOrientation';
 
-const mobileHeight = Dimensions.get('window').height;
-
 enum RESOLVE_TYPE {
   bvid = 'bvid',
   video = 'video',
@@ -57,6 +55,7 @@ export const resolveBackgroundImage = async (
 const MainBackground = (props: { children: JSX.Element }) => {
   const playerStyle = useNoxSetting(state => state.playerStyle);
   const isLandscape = useIsLandscape();
+  const mobileHeight = Dimensions.get('window').height;
   const bkgrdImg =
     isLandscape && playerStyle.bkgrdImgLandscape
       ? playerStyle.bkgrdImgLandscape
@@ -70,7 +69,7 @@ const MainBackground = (props: { children: JSX.Element }) => {
       <ImageBackground
         source={{ uri: bkgrdImg }}
         resizeMode="cover"
-        style={styles.mobileStyle}
+        style={[styles.mobileStyle, { height: mobileHeight }]}
       >
         {props.children}
       </ImageBackground>
@@ -83,7 +82,7 @@ const MainBackground = (props: { children: JSX.Element }) => {
         <ImageBackground
           source={{ uri: bkgrdImg.identifier }}
           resizeMode="cover"
-          style={styles.mobileStyle}
+          style={[styles.mobileStyle, { height: mobileHeight }]}
         >
           {props.children}
         </ImageBackground>
@@ -121,7 +120,6 @@ const MainBackground = (props: { children: JSX.Element }) => {
 const styles = StyleSheet.create({
   mobileStyle: {
     flex: 1,
-    height: mobileHeight,
   },
   videoStyle: {
     width: '100%',
