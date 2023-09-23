@@ -113,12 +113,12 @@ export default ({
     console.log(songs);
     const newPlaylist = banBVID
       ? {
-          ...currentPlaylist,
-          blacklistedUrl: currentPlaylist.blacklistedUrl.concat(
-            songs.map(song => song.bvid)
-          ),
-        }
-      : currentPlaylist;
+        ...currentPlaylist,
+        blacklistedUrl: currentPlaylist.blacklistedUrl.concat(
+          songs.map(song => song.bvid)
+        ),
+      }
+      : { ...currentPlaylist };
     updatePlaylist(newPlaylist, [], songs);
     setSongMenuVisible(false);
     resetChecked();
