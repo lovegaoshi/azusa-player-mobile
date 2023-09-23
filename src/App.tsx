@@ -3,9 +3,10 @@ import React, { useEffect } from 'react';
 import { Linking, SafeAreaView, StyleSheet } from 'react-native';
 
 import AzusaPlayer from './AzusaPlayer';
+import AzusaPlayerLandscape from './AzusaPlayerLandscape';
+import AppOpenSplash from './components/background/AppOpenSplash';
 import { useSetupPlayer } from './components/player/View';
 import { useIsLandscape } from './hooks/useOrientation';
-import AppOpenSplash from './components/background/AppOpenSplash';
 
 const useSplash = (duration = 1000) => {
   const [isReady, setIsReady] = React.useState(false);
@@ -49,7 +50,7 @@ export default function App() {
 
   return (
     <SafeAreaProvider>
-      <AzusaPlayer />
+      {isLandscape ? <AzusaPlayerLandscape /> : <AzusaPlayer />}
     </SafeAreaProvider>
   );
 }
