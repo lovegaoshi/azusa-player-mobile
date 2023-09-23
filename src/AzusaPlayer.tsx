@@ -29,6 +29,7 @@ import './localization/i18n';
 import Explore from './components/explore/ytmusic/View';
 import PIPLyricView from './components/player/PIPLyric';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { ICONS } from '@enums/Icons';
 
 const { LightTheme, DarkTheme } = adaptNavigationTheme({
   reactNavigationLight: NavigationDefaultTheme,
@@ -103,7 +104,7 @@ const AzusaPlayer = () => {
               <Drawer.Screen
                 name={ViewEnum.PLAYER_HOME}
                 options={{
-                  drawerIcon: () => <IconButton icon="ßhome-outline" />,
+                  drawerIcon: () => <IconButton icon={ICONS.homeScreen} />,
                   title: String(t('appDrawer.homeScreenName')),
                   header: () => null,
                 }}
@@ -112,7 +113,7 @@ const AzusaPlayer = () => {
               <Drawer.Screen
                 name={ViewEnum.EXPORE}
                 options={{
-                  drawerIcon: () => <IconButton icon="compass" />,
+                  drawerIcon: () => <IconButton icon={ICONS.exploreScreen} />,
                   title: String(t('appDrawer.exploreScreenName')),
                 }}
                 component={DummySettings}
@@ -120,7 +121,7 @@ const AzusaPlayer = () => {
               <Drawer.Screen
                 name={ViewEnum.SETTINGS}
                 options={{
-                  drawerIcon: () => <IconButton icon="cog" />,
+                  drawerIcon: () => <IconButton icon={ICONS.settingScreen} />,
                   title: String(t('appDrawer.settingScreenName')),
                   header: () => null,
                 }}

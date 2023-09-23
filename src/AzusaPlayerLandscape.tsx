@@ -16,6 +16,7 @@ import {
 } from 'react-native-paper';
 import merge from 'deepmerge';
 import { useTranslation } from 'react-i18next';
+
 import { Player } from './components/player/View';
 import Playlist from './components/playlist/View';
 import PlayerBottomPanel from './components/player/PlayerProgressControls';
@@ -29,6 +30,8 @@ import './localization/i18n';
 import Explore from './components/explore/ytmusic/View';
 import PIPLyricView from './components/player/PIPLyric';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import LandscapePlayer from './components/landscape/LandscapePlayer';
+import LandscapeActions from './components/landscape/LandscapeActions';
 
 const { LightTheme, DarkTheme } = adaptNavigationTheme({
   reactNavigationLight: NavigationDefaultTheme,
@@ -70,6 +73,7 @@ const AzusaPlayer = () => {
     : CombinedDefaultTheme;
   const insets = useSafeAreaInsets();
   const mobileWidth = Dimensions.get('window').width;
+  const playerPanelWidth = mobileWidth / 2 - 100;
 
   return (
     <MainBackground>
@@ -98,10 +102,8 @@ const AzusaPlayer = () => {
               flexDirection: 'row',
             }}
           >
-            <View style={styles.sidebar}></View>
-            <View
-              style={[styles.playerPanel, { width: mobileWidth / 2 - 100 }]}
-            ></View>
+            <LandscapeActions />
+            <LandscapePlayer panelWidth={playerPanelWidth} />
             <View
               style={[styles.playlistPanel, { width: mobileWidth / 2 }]}
             ></View>
@@ -119,10 +121,6 @@ const styles = StyleSheet.create({
     width: 100,
     backgroundColor: 'black',
   },
-  playerPanel: {
-    backgroundColor: 'blue',
-  },
-  playlistPanel: {
-    backgroundColor: 'red',
-  },
+  playerPanel: {},
+  playlistPanel: {},
 });

@@ -54,7 +54,7 @@ const TrackInfo: React.FC<Props> = ({ track, windowWidth }) => {
   };
 
   return (
-    <TrackInfoTemplate>
+    <TrackInfoTemplate track={track}>
       <>
         <TouchableWithoutFeedback onPress={onImagePress}>
           <Animated.View

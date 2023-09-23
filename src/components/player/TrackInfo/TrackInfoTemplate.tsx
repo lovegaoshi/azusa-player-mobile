@@ -109,7 +109,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   artwork: {
-    marginTop: 15,
     opacity: 1,
   },
   lyric: {
@@ -121,6 +120,8 @@ const styles = StyleSheet.create({
     color: 'grey',
     marginTop: 15,
     paddingHorizontal: 5,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   artistText: {
     fontSize: 16,
@@ -131,8 +132,9 @@ const styles = StyleSheet.create({
   },
   favoriteButtonContainer: {
     flex: 1,
-    justifyContent: 'center',
+    // justifyContent: 'center',
     alignItems: 'center',
+    marginTop: -10,
   },
   artistInfoContainer: {
     flex: 4,
@@ -141,7 +143,8 @@ const styles = StyleSheet.create({
   },
   songMenuButtonContainer: {
     flex: 1,
-    justifyContent: 'center',
+    // justifyContent: 'center',
     alignItems: 'center',
+    marginTop: -10,
   },
 });
