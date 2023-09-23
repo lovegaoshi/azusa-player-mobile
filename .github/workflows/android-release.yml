@@ -2,7 +2,7 @@ name: APM Automatic Release
 on:
   push:
     tags:
-      - 'v[0-9]+.[0-9]+.[0-9]'
+      - 'v[0-9]+.[0-9]+.[0-9]+'
   workflow_dispatch:
 jobs:
   buildAPK:
