@@ -62,8 +62,6 @@ export const ModalContainer: React.FC<ModalContainerProps> = ({
 };
 
 interface LyricViewProps {
-  currentTime?: number;
-  onLyricPress: () => void;
   track: Track;
   artist: string;
   height?: number;
@@ -72,8 +70,6 @@ interface LyricViewProps {
 }
 
 export const LyricView = ({
-  currentTime,
-  onLyricPress,
   track,
   artist,
   height,

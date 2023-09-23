@@ -28,11 +28,13 @@ export const TrackInfo: React.FC<{
   const getTrackLocation = () => {
     const currentTPQueue = getCurrentTPQueue();
     return track?.song
-      ? `#${currentPlayingList.songList.findIndex(
-        song => song.id === track.song.id
-      ) + 1
-      } - ${currentTPQueue.findIndex(song => song.id === track.song.id) + 1
-      }/${currentTPQueue.length}`
+      ? `#${
+          currentPlayingList.songList.findIndex(
+            song => song.id === track.song.id
+          ) + 1
+        } - ${
+          currentTPQueue.findIndex(song => song.id === track.song.id) + 1
+        }/${currentTPQueue.length}`
       : '';
   };
 
@@ -46,7 +48,7 @@ export const TrackInfo: React.FC<{
       }),
     ]).start(() => {
       console.log('TrackInfo: Setting imagevisible to Image', !isImageVisible);
-      setIsImageVisible(!isImageVisible);
+      setIsImageVisible(false);
     });
   };
 
@@ -84,13 +86,13 @@ export const TrackInfo: React.FC<{
                 playerSetting.hideCoverInMobile
                   ? 0
                   : {
-                    uri: `${track?.artwork}`,
-                  }
+                      uri: `${track?.artwork}`,
+                    }
               }
             />
           </Animated.View>
         </TouchableWithoutFeedback>
-        <TouchableWithoutFeedback onPress={onImagePress}>
+        <TouchableWithoutFeedback onPress={onLyricPress}>
           <View
             style={[
               styles.lyric,
@@ -101,9 +103,7 @@ export const TrackInfo: React.FC<{
             ]}
             pointerEvents={isImageVisible ? 'none' : 'auto'}
           >
-            {track && (
-              <LyricView onLyricPress={onLyricPress} track={track} artist="n/a" />
-            )}
+            {track && <LyricView track={track} artist="n/a" />}
           </View>
         </TouchableWithoutFeedback>
       </>
