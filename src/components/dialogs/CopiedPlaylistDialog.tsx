@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Pressable, View, FlatList, StyleSheet } from 'react-native';
 import { Button, Dialog, Portal, Text, RadioButton } from 'react-native-paper';
 import { useTranslation } from 'react-i18next';
+
 import { useNoxSetting } from '@hooks/useSetting';
 import logger from '@utils/Logger';
 
