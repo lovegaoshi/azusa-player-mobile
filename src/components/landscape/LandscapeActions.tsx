@@ -1,6 +1,7 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import { IconButton } from 'react-native-paper';
+import { useNavigation, ParamListBase } from '@react-navigation/native';
 
 import { ICONS } from '@enums/Icons';
 import RandomGIFButton from '../buttons/RandomGIF';
@@ -10,6 +11,7 @@ export default () => {
   const playerStyle = useNoxSetting(state => state.playerStyle);
   const currentPlayingId = useNoxSetting(state => state.currentPlayingId);
   const iconSize = 80;
+  const navigationGlobal = useNavigation();
 
   return (
     <View style={styles.sidebar}>
