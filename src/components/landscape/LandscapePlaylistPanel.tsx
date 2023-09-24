@@ -6,6 +6,7 @@ import DummySettings from '../setting/DummySettings';
 import LandscapeLyricView from './LandscapeLyric';
 import Settings from '../setting/View';
 import Playlist from '../playlist/View';
+import LandscapePlaylists from './LandscapePlaylists';
 
 const Stack = createNativeStackNavigator();
 
@@ -27,6 +28,11 @@ export default ({ panelWidth }: Props) => {
         <Stack.Screen
           name={ViewEnum.PLAYER_PLAYLIST}
           component={Playlist}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name={ViewEnum.PLAYER_PLAYLISTS}
+          component={LandscapePlaylists}
           options={{ headerShown: false }}
         />
         <Stack.Screen

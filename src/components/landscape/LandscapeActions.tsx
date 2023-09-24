@@ -1,5 +1,5 @@
-import React from 'react';
-import { StyleSheet, View } from 'react-native';
+import React, { useEffect } from 'react';
+import { Linking, StyleSheet, View } from 'react-native';
 import { IconButton } from 'react-native-paper';
 import { useNavigation, ParamListBase } from '@react-navigation/native';
 
@@ -7,12 +7,29 @@ import { ICONS } from '@enums/Icons';
 import RandomGIFButton from '../buttons/RandomGIF';
 import { useNoxSetting } from '@hooks/useSetting';
 import { ViewEnum } from '@enums/View';
+import { logger } from '@utils/Logger';
 
 export default () => {
   const playerStyle = useNoxSetting(state => state.playerStyle);
   const currentPlayingId = useNoxSetting(state => state.currentPlayingId);
   const iconSize = 80;
   const navigationGlobal = useNavigation();
+
+  useEffect(() => {
+    function deepLinkHandler(data: { url: string }) {
+      if (data.url === 'trackplayer://notification.click') {
+        logger.debug('[Drawer] click from notification; navigate to home');
+        navigationGlobal.navigate(ViewEnum.PLAYER_HOME as never);
+      }
+    }
+
+    // This event will be fired when the app is already open and the notification is clicked
+    const subscription = Linking.addEventListener('url', deepLinkHandler);
+
+    return () => {
+      subscription.remove();
+    };
+  }, []);
 
   return (
     <View style={styles.sidebar}>
@@ -32,7 +49,7 @@ export default () => {
         icon={ICONS.playlistScreen}
         size={iconSize}
         onPress={() =>
-          navigationGlobal.navigate(ViewEnum.PLAYER_PLAYLIST as never)
+          navigationGlobal.navigate(ViewEnum.PLAYER_PLAYLISTS as never)
         }
       />
       <IconButton

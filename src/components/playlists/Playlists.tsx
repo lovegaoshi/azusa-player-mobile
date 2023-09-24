@@ -1,23 +1,13 @@
-import React, { useRef, useState, useEffect } from 'react';
-import { IconButton, Divider, Text, TouchableRipple } from 'react-native-paper';
-import { DrawerActions, useNavigation } from '@react-navigation/native';
-import {
-  Pressable,
-  Dimensions,
-  View,
-  ImageBackground,
-  StyleSheet,
-  Linking,
-} from 'react-native';
-import { useTranslation } from 'react-i18next';
+import React, { useRef, useState } from 'react';
+import { IconButton, Text, TouchableRipple } from 'react-native-paper';
+import { useNavigation } from '@react-navigation/native';
+import { Pressable, Dimensions, View, StyleSheet } from 'react-native';
 import DraggableFlatList, {
   ScaleDecorator,
   RenderItemParams,
 } from 'react-native-draggable-flatlist';
-import { useStore } from 'zustand';
 
 import { useNoxSetting } from '@hooks/useSetting';
-import useAAPlayback from '@hooks/useAAPlayback';
 import { ViewEnum } from '@enums/View';
 import AddPlaylistButton, {
   AddPlaylistButtonRef,
@@ -25,47 +15,16 @@ import AddPlaylistButton, {
 import { STORAGE_KEYS } from '@enums/Storage';
 import NewPlaylistDialog from '../dialogs/NewPlaylistDialog';
 import useAlert from '../dialogs/useAlert';
-import ShuffleAllButton from './ShuffleAllButton';
-import TimerButton from './TimerButton';
-import appStore from '@stores/appStore';
-import logger from '@utils/Logger';
-import useTheme from '@hooks/useTheme';
-import PlaylistItem from './PlaylistItem';
-import Playlists from './Playlists';
+import ShuffleAllButton from '@components/playlists/ShuffleAllButton';
+import TimerButton from '@components/playlists/TimerButton';
+import PlaylistItem from '@components/playlists/PlaylistItem';
 
 interface Props {
-  view: string;
-  icon: string;
-  text: string;
+  flatListHeight?: number;
 }
-const RenderDrawerItem = ({ view, icon, text }: Props) => {
-  const navigation = useNavigation();
-  const { t } = useTranslation();
-
-  return (
-    <TouchableRipple onPress={() => navigation.navigate(view as never)}>
-      <View style={styles.drawerItemContainer}>
-        <IconButton icon={icon} size={32} />
-        <View style={styles.drawerItemTextContainer}>
-          <Text variant="titleLarge">{t(text)}</Text>
-        </View>
-      </View>
-    </TouchableRipple>
-  );
-};
-
-const BiliCard = (props: any) => {
-  if (props.backgroundURI) {
-    return (
-      <ImageBackground source={{ uri: props.backgroundURI }}>
-        {props.children}
-      </ImageBackground>
-    );
-  }
-  return <>{props.children}</>;
-};
-
-export default (props: any) => {
+export default ({
+  flatListHeight = Dimensions.get('window').height - 330,
+}: Props) => {
   const navigation = useNavigation();
   const currentPlaylist = useNoxSetting(state => state.currentPlaylist);
   const currentPlayingList = useNoxSetting(state => state.currentPlayingList);
@@ -80,9 +39,6 @@ export default (props: any) => {
   const { TwoWayAlert } = useAlert();
   // HACK: I know its bad! But somehow this hook isnt updating in its own
   // useEffects...
-  const { buildBrowseTree } = useAAPlayback();
-  const usedTheme = useTheme();
-  const PIPMode = useStore(appStore, state => state.pipMode);
 
   // HACK: tried to make searchList draweritem button as addPlaylistButton, but
   // dialog disposes on textinput focus. created a dialog directly in this component
@@ -146,64 +102,88 @@ export default (props: any) => {
     );
   };
 
-  useEffect(() => {
-    buildBrowseTree();
-  }, [playlistIds.length]);
-
-  useEffect(() => {
-    if (PIPMode) {
-      navigation.navigate(ViewEnum.LYRICS as never);
-      navigation.dispatch(DrawerActions.closeDrawer());
-    } else {
-      navigation.goBack();
-    }
-  }, [PIPMode]);
-
-  useEffect(() => {
-    function deepLinkHandler(data: { url: string }) {
-      if (data.url === 'trackplayer://notification.click') {
-        logger.debug('[Drawer] click from notification; navigate to home');
-        navigation.navigate(ViewEnum.PLAYER_HOME as never);
-      }
-    }
-
-    // This event will be fired when the app is already open and the notification is clicked
-    const subscription = Linking.addEventListener('url', deepLinkHandler);
-
-    return () => {
-      subscription.remove();
-    };
-  }, []);
-
-  return PIPMode ? (
-    <></>
-  ) : (
-    <View {...props} style={{ flex: 1 }}>
-      <View style={styles.topPadding} />
-      <BiliCard backgroundURI={playerStyle.biliGarbCard}>
-        <RenderDrawerItem
-          icon={'home-outline'}
-          view={ViewEnum.PLAYER_HOME}
-          text={'appDrawer.homeScreenName'}
+  return (
+    <View style={styles.flexContainer}>
+      <TouchableRipple
+        style={styles.addPlaylistButtonContainer}
+        onPress={
+          // HACK: tooo lazy to lift this state up...
+          addPlaylistButtonRef.current
+            ? () => addPlaylistButtonRef.current!.setOpen()
+            : () => undefined
+        }
+      >
+        <View style={styles.addPlaylistButtonContent}>
+          <IconButton
+            icon={'cards-heart'}
+            onPress={() => goToPlaylist(STORAGE_KEYS.FAVORITE_PLAYLIST_KEY)}
+          />
+          <ShuffleAllButton />
+          <AddPlaylistButton ref={addPlaylistButtonRef} />
+          <TimerButton />
+          <View style={styles.addPlaylistButtonSpacer} />
+          {false && (
+            <IconButton
+              icon={'cog'}
+              onPress={() => navigation.navigate(ViewEnum.SETTINGS as never)}
+            />
+          )}
+        </View>
+      </TouchableRipple>
+      <TouchableRipple
+        onPress={() => goToPlaylist(STORAGE_KEYS.SEARCH_PLAYLIST_KEY)}
+        style={[
+          {
+            backgroundColor:
+              currentPlaylist.id ===
+              playlists[STORAGE_KEYS.SEARCH_PLAYLIST_KEY]?.id
+                ? playerStyle.customColors.playlistDrawerBackgroundColor
+                : undefined,
+          },
+        ]}
+      >
+        <PlaylistItem
+          item={playlists[STORAGE_KEYS.SEARCH_PLAYLIST_KEY]}
+          icon={SearchPlaylistAsNewButton()}
+          leadColor={
+            currentPlayingList.id ===
+            playlists[STORAGE_KEYS.SEARCH_PLAYLIST_KEY].id
+              ? playerStyle.colors.primary //customColors.playlistDrawerBackgroundColor
+              : undefined
+          }
         />
-      </BiliCard>
-      <RenderDrawerItem
-        icon={'compass'}
-        view={ViewEnum.EXPORE}
-        text={'appDrawer.exploreScreenName'}
+      </TouchableRipple>
+      <NewPlaylistDialog
+        visible={newPlaylistDialogOpen}
+        fromList={playlists[STORAGE_KEYS.SEARCH_PLAYLIST_KEY]}
+        onClose={() => setNewPlaylistDialogOpen(false)}
+        onSubmit={() => setNewPlaylistDialogOpen(false)}
       />
-      <RenderDrawerItem
-        icon={'cog'}
-        view={ViewEnum.SETTINGS}
-        text={'appDrawer.settingScreenName'}
-      />
-      <Divider />
-      <Playlists />
+      <View style={styles.addPlaylistButtonSpacer} />
+      <View style={{ flex: 1, justifyContent: 'flex-end' }}>
+        <DraggableFlatList
+          style={[styles.draggableFlatList]}
+          data={playlistIds.map(val => playlists[val])}
+          onDragEnd={({ data }) =>
+            setPlaylistIds(data.map(playlist => playlist.id))
+          }
+          keyExtractor={item => item?.id}
+          renderItem={renderItem}
+        />
+        <View style={styles.bottomInfo}>
+          <Text style={styles.bottomInfoText}>
+            {`${playerStyle.metaData.themeName} @ ${playerSetting.noxVersion}`}
+          </Text>
+        </View>
+      </View>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
+  flexContainer: {
+    flex: 1,
+  },
   topPadding: {
     height: 10,
   },
