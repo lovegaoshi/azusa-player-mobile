@@ -10,7 +10,7 @@ interface Props {
 export default ({ panelWidth }: Props) => {
   const track = useActiveTrack();
   const playerStyle = useNoxSetting(state => state.playerStyle);
-  const iconSize = (panelWidth - 180) / 5;
+  const iconSize = (panelWidth - 250) / 5;
 
   return (
     <View
