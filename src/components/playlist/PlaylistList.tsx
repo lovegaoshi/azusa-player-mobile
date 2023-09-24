@@ -5,6 +5,7 @@ import {
   StyleSheet,
   Dimensions,
   ImageBackground,
+  StyleProp,
 } from 'react-native';
 import { FlashList } from '@shopify/flash-list';
 import Snackbar from 'react-native-snackbar';
@@ -52,7 +53,11 @@ const SongBackground = (props: BackgroundProps) => {
   );
 };
 
-const PlaylistList = () => {
+interface Props {
+  playlistViewStyle?: StyleProp<View>;
+}
+
+const PlaylistList = ({ playlistViewStyle }: Props) => {
   const { t } = useTranslation();
   const setCurrentPlayingList = useNoxSetting(
     state => state.setCurrentPlayingList
@@ -201,23 +206,6 @@ const PlaylistList = () => {
   };
 
   const playSong = async (song: NoxMedia.Song) => {
-    /**
-     * use zustand queue management implementation.
-     * motivation: setQueue transfers a lot of track[] from js bridge to native which is costly.
-     * solution:
-     * 1. playSong no longer usse RNTP.setQueue; it instead clears the queue and only add the current song.
-     * this is shown 2b very fast.
-     * 2. Without exoplayer/RNTP managing the queue, zustand vanilla holds the queue information.
-     * any queue manipulation happens in js which is fast to my needs.
-     * 3. exoplayer/RNTP never natually play a song backwards. it only goes forward. whenever user
-     * press back/previous song button, either button event or remotePRevious will be triggered.
-     * the entire queue is reset again with only 1 song.
-     * 4. RNTP no longer handles playmode other than repeat track. other than repeat track, it will
-     * be repeat mode off. along with queue size = 1, this guarantees PlaybackQueueEnded to be fired
-     * when the current song finished playback. this  will be the queue to zustand to insert the next
-     * song from zustand saved queue.
-     */
-
     if (
       song.id === currentPlayingId &&
       currentPlaylist.id === currentPlayingList.id
@@ -235,40 +223,6 @@ const PlaylistList = () => {
     await TrackPlayer.add(await songlistToTracklist([song]));
     TrackPlayer.play();
     return;
-    /*
-    // setQueue implementation
-    const skipNPlay = async (index: number) => {
-      await TrackPlayer.skip(index);
-      await TrackPlayer.play();
-    };
-
-    const reloadPlaylistAndPlay = async () => {
-      let tracks = songlistToTracklist(queuedSongList);
-      if (playmode === NoxRepeatMode.SHUFFLE) {
-        tracks = [...tracks].sort(() => Math.random() - 0.5);
-      }
-      // await TrackPlayer.setQueue(tracks);
-      TrackPlayer.reset();
-      const splicedTracks = chunkArray(tracks, 500);
-      for (const splicedTrack of splicedTracks) {
-        await TrackPlayer.add(splicedTrack);
-      }
-      await skipNPlay(tracks.findIndex(track => track.song.id === song.id));
-    };
-
-    setCurrentPlayingId(song.id);
-    if (setCurrentPlayingList({ ...currentPlaylist, songList: currentRows })) {
-      reloadPlaylistAndPlay();
-    } else {
-      const tracks = await TrackPlayer.getQueue();
-      const trackIndex = tracks.findIndex(track => track.song?.id === song.id);
-      if (trackIndex === -1) {
-        await reloadPlaylistAndPlay();
-      } else {
-        await skipNPlay(trackIndex);
-      }
-    }
-     */
   };
 
   const refreshPlaylist = async () => {
@@ -372,7 +326,7 @@ const PlaylistList = () => {
   );
 
   return (
-    <View>
+    <View style={stylesLocal.mainContainer}>
       <View style={[styles.topBarContainer, { top: 10 }]}>
         <PlaylistInfo
           search={searching}
@@ -414,26 +368,11 @@ const PlaylistList = () => {
           <PlaylistMenuButton disabled={checking} />
         </View>
       </View>
-      <View
-        style={[
-          stylesLocal.playlistContainer,
-          {
-            // HACK: this should be justified as top bar and bottom bar all have a defined height.
-            maxHeight: Dimensions.get('window').height - 250,
-          },
-        ]}
-      >
+      <View style={stylesLocal.playlistContainer}>
         <FlashList
           ref={ref => (playlistRef.current = ref)}
           data={currentRows}
           renderItem={({ item, index }) => (
-            /*
-            TODO: figure out reanimated...
-            <Animated.View
-              exiting={LightSpeedOutRight}
-              layout={Layout.springify()}
-            >
-            */
             <SongBackground
               song={item}
               current={
@@ -482,6 +421,7 @@ const stylesLocal = StyleSheet.create({
     bottom: 5,
     justifyContent: 'flex-end',
   },
+  mainContainer: { flex: 1 },
   playlistContainer: {
     ...styles.topBarContainer,
     flex: 4,

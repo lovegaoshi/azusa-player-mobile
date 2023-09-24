@@ -28,7 +28,13 @@ export default () => {
         size={iconSize}
         onPress={() => navigationGlobal.navigate(ViewEnum.LYRICS as never)}
       />
-      <IconButton icon={ICONS.playlistScreen} size={iconSize} />
+      <IconButton
+        icon={ICONS.playlistScreen}
+        size={iconSize}
+        onPress={() =>
+          navigationGlobal.navigate(ViewEnum.PLAYER_PLAYLIST as never)
+        }
+      />
       <IconButton
         icon={ICONS.exploreScreen}
         size={iconSize}

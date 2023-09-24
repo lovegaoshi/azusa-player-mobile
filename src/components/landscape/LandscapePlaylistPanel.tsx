@@ -1,10 +1,11 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { View } from 'react-native';
+import { Dimensions, View } from 'react-native';
 
 import { ViewEnum } from '@enums/View';
 import DummySettings from '../setting/DummySettings';
 import LandscapeLyricView from './LandscapeLyric';
 import Settings from '../setting/View';
+import Playlist from '../playlist/View';
 
 const Stack = createNativeStackNavigator();
 
@@ -14,7 +15,9 @@ interface Props {
 
 export default ({ panelWidth }: Props) => {
   return (
-    <View style={{ width: panelWidth }}>
+    <View
+      style={{ width: panelWidth, height: Dimensions.get('window').height }}
+    >
       <Stack.Navigator>
         <Stack.Screen
           name={ViewEnum.LYRICS}
@@ -23,7 +26,7 @@ export default ({ panelWidth }: Props) => {
         />
         <Stack.Screen
           name={ViewEnum.PLAYER_PLAYLIST}
-          component={DummySettings}
+          component={Playlist}
           options={{ headerShown: false }}
         />
         <Stack.Screen

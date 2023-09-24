@@ -11,16 +11,15 @@ import usePlayerControls from '@components/player/usePlayerControls';
 import LottieButton from '../buttons/LottieButton';
 
 interface Props {
-  panelWidth?: number;
+  iconSize?: number;
 }
 const PlayerControls: React.FC<Props> = ({
-  panelWidth = Dimensions.get('window').width,
+  iconSize = (Dimensions.get('window').width - 180) / 5,
 }) => {
   const playerStyle = useNoxSetting(state => state.playerStyle);
 
   const { performSkipToNext, performSkipToPrevious } = usePlayerControls();
   const playback = usePlaybackState();
-  const iconSize = (panelWidth - 150) / 5;
 
   return (
     <View style={styles.container}>

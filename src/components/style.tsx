@@ -55,7 +55,7 @@ export const createStyle = (
       flexDirection: 'column',
       width: '100%',
       alignItems: 'center',
-      height: 140,
+      height: 128,
     },
     gifs: (customStyle.gifs || []) as any,
     bkgrdImg: randomChoice(customStyle.backgroundImages || []) as any,
@@ -97,7 +97,7 @@ export const styles = StyleSheet.create({
     flexDirection: 'column',
     width: '100%',
     alignItems: 'center',
-    height: 140,
+    height: 128,
   },
   rowView: { flexDirection: 'row' },
 });

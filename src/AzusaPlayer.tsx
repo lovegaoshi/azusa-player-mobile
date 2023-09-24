@@ -44,7 +44,7 @@ const NoxPlayer = () => {
   const Tab = createMaterialTopTabNavigator();
 
   return (
-    <React.Fragment>
+    <View style={{ flex: 1, justifyContent: 'flex-end' }}>
       <Tab.Navigator style={PlayerStyle}>
         <Tab.Screen
           name={ViewEnum.PLAYER_COVER}
@@ -58,7 +58,7 @@ const NoxPlayer = () => {
         />
       </Tab.Navigator>
       <PlayerBottomPanel />
-    </React.Fragment>
+    </View>
   );
 };
 

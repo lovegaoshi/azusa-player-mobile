@@ -12,7 +12,7 @@ export default () => {
     <View
       style={[
         playerStyle.actionRowContainer,
-        { backgroundColor: playerStyle.colors.background, marginBottom: -10 },
+        { backgroundColor: playerStyle.colors.background },
       ]}
     >
       <Progress live={track?.isLiveStream} />

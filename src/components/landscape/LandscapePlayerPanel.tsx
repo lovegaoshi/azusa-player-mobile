@@ -10,7 +10,7 @@ interface Props {
 export default ({ panelWidth }: Props) => {
   const track = useActiveTrack();
   return (
-    <View>
+    <View style={{ justifyContent: 'flex-end' }}>
       <TrackInfoTemplate track={track} windowWidth={panelWidth} />
       <LandscapePlayerProgress panelWidth={panelWidth} />
     </View>

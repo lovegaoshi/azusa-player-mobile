@@ -10,6 +10,7 @@ interface Props {
 export default ({ panelWidth }: Props) => {
   const track = useActiveTrack();
   const playerStyle = useNoxSetting(state => state.playerStyle);
+  const iconSize = (panelWidth - 180) / 5;
 
   return (
     <View
@@ -18,11 +19,12 @@ export default ({ panelWidth }: Props) => {
         {
           backgroundColor: playerStyle.colors.background,
           width: panelWidth,
+          height: iconSize + 78,
         },
       ]}
     >
       <Progress live={track?.isLiveStream} />
-      <PlayerControls panelWidth={panelWidth} />
+      <PlayerControls iconSize={iconSize} />
     </View>
   );
 };
