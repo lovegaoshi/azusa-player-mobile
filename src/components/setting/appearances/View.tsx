@@ -2,8 +2,13 @@ import * as React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { useTranslation } from 'react-i18next';
 import { ParamListBase } from '@react-navigation/native';
-import { Appearance, StyleSheet, View, ColorSchemeName } from 'react-native';
-import { ScrollView } from 'react-native-gesture-handler';
+import {
+  Appearance,
+  StyleSheet,
+  View,
+  ColorSchemeName,
+  ScrollView,
+} from 'react-native';
 import { DrawerNavigationProp } from '@react-navigation/drawer';
 
 import SkinSettings from './SkinSettings';

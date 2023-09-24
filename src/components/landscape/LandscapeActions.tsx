@@ -6,6 +6,7 @@ import { useNavigation, ParamListBase } from '@react-navigation/native';
 import { ICONS } from '@enums/Icons';
 import RandomGIFButton from '../buttons/RandomGIF';
 import { useNoxSetting } from '@hooks/useSetting';
+import { ViewEnum } from '@enums/View';
 
 export default () => {
   const playerStyle = useNoxSetting(state => state.playerStyle);
@@ -22,10 +23,22 @@ export default () => {
           iconsize={iconSize}
         />
       </View>
-      <IconButton icon={ICONS.homeScreen} size={iconSize} />
-      <IconButton icon={ICONS.exploreScreen} size={iconSize} />
-      <IconButton icon={ICONS.settingScreen} size={iconSize} />
+      <IconButton
+        icon={ICONS.homeScreen}
+        size={iconSize}
+        onPress={() => navigationGlobal.navigate(ViewEnum.LYRICS as never)}
+      />
       <IconButton icon={ICONS.playlistScreen} size={iconSize} />
+      <IconButton
+        icon={ICONS.exploreScreen}
+        size={iconSize}
+        onPress={() => navigationGlobal.navigate(ViewEnum.EXPORE as never)}
+      />
+      <IconButton
+        icon={ICONS.settingScreen}
+        size={iconSize}
+        onPress={() => navigationGlobal.navigate(ViewEnum.SETTINGS as never)}
+      />
     </View>
   );
 };

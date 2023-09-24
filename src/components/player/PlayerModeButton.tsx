@@ -6,7 +6,10 @@ import { useNoxSetting } from '@hooks/useSetting';
 import noxPlayingList from '@stores/playingList';
 import { cycleThroughPlaymode } from '@utils/RNTPUtils';
 
-export default () => {
+interface Props {
+  iconSize?: number;
+}
+export default ({ iconSize = 30 }: Props) => {
   const playerStyle = useNoxSetting(state => state.playerStyle);
   const playMode = useStore(noxPlayingList, state => state.playmode);
 
@@ -15,7 +18,7 @@ export default () => {
       icon={playMode}
       onPress={cycleThroughPlaymode}
       mode={playerStyle.playerControlIconContained}
-      size={30}
+      size={iconSize}
       style={{
         backgroundColor: playerStyle.customColors.btnBackgroundColor,
       }}

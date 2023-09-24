@@ -37,7 +37,10 @@ const go2SongURL = async (song: NoxMedia.Song) => {
   await Linking.openURL(url);
 };
 
-const ThumbsUpButton = () => {
+interface Props {
+  iconSize?: number;
+}
+const ThumbsUpButton = ({ iconSize = 30 }: Props) => {
   const playerStyle = useNoxSetting(state => state.playerStyle);
   const currentPlayingId = useNoxSetting(state => state.currentPlayingId);
   const [status, setStatus] = React.useState<THUMBUPSTATUS>(
@@ -111,7 +114,7 @@ const ThumbsUpButton = () => {
         // https://github.com/nandorojo/moti/discussions/148
         onLongPress={() => onClick(true)}
         mode={playerStyle.playerControlIconContained}
-        size={30}
+        size={iconSize}
         style={{
           backgroundColor: playerStyle.customColors.btnBackgroundColor,
           zIndex: 1,

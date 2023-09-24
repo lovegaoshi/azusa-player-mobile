@@ -4,6 +4,7 @@ import { View } from 'react-native';
 import { ViewEnum } from '@enums/View';
 import DummySettings from '../setting/DummySettings';
 import LandscapeLyricView from './LandscapeLyric';
+import Settings from '../setting/View';
 
 const Stack = createNativeStackNavigator();
 
@@ -23,6 +24,16 @@ export default ({ panelWidth }: Props) => {
         <Stack.Screen
           name={ViewEnum.PLAYER_PLAYLIST}
           component={DummySettings}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name={ViewEnum.EXPORE}
+          component={DummySettings}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name={ViewEnum.SETTINGS}
+          component={Settings}
           options={{ headerShown: false }}
         />
       </Stack.Navigator>

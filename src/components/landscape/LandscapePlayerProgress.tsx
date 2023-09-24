@@ -1,10 +1,13 @@
 import { View } from 'react-native';
 import { useActiveTrack } from 'react-native-track-player';
-import { Progress } from './Progress';
-import { PlayerControls } from './PlayerControls';
+import { Progress } from '@components/player/Progress';
+import PlayerControls from './PlayerControlsSquared';
 import { useNoxSetting } from '@hooks/useSetting';
 
-export default () => {
+interface Props {
+  panelWidth: number;
+}
+export default ({ panelWidth }: Props) => {
   const track = useActiveTrack();
   const playerStyle = useNoxSetting(state => state.playerStyle);
 
@@ -12,11 +15,14 @@ export default () => {
     <View
       style={[
         playerStyle.actionRowContainer,
-        { backgroundColor: playerStyle.colors.background, marginBottom: -10 },
+        {
+          backgroundColor: playerStyle.colors.background,
+          width: panelWidth,
+        },
       ]}
     >
       <Progress live={track?.isLiveStream} />
-      <PlayerControls />
+      <PlayerControls panelWidth={panelWidth} />
     </View>
   );
 };
