@@ -18,9 +18,8 @@ interface Props {
   gifs: Array<string>;
   favList: string;
   onClickCallback?: () => void;
+  iconsize?: number;
 }
-
-const GIFStyle = { width: 72, height: 72 };
 /**
  * returns a button that shows a random gif from the input array. when clicked, change the gif into another one.
  * @param {string[]} gifs a list of gifs.
@@ -31,6 +30,7 @@ export default function RandomGIFButton({
   gifs,
   favList,
   onClickCallback = () => undefined,
+  iconsize = 72,
 }: Props) {
   const [randomGIFSrc, setRandomGIFSrc] = useState(-1);
   const [randomGIFURI, setRandomGIFURI] = useState({ uri: 'dummyVal' });
@@ -51,7 +51,7 @@ export default function RandomGIFButton({
       }}
     >
       <Image
-        style={GIFStyle}
+        style={{ width: iconsize, height: iconsize }}
         source={randomGIFURI}
         resizeMode={Image.resizeMode.contain}
         // contentFit="contain"

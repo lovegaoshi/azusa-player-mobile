@@ -20,7 +20,7 @@ import logger from '@utils/Logger';
 const LYRIC_OFFSET_INTERVAL = 0.5;
 
 interface ModalContainerProps {
-  children: JSX.Element[];
+  children: React.JSX.Element[];
   visible: boolean;
   onRequestClose: () => void;
 }

@@ -37,8 +37,6 @@ import NoxTheme from '../../styles/NoxTheme';
 import AdaptiveTheme from '../../styles/AdaptiveTheme';
 import { getUniqObjects } from '@utils/Utils';
 
-const WindowWidth = Dimensions.get('window').width;
-
 interface DisplayTheme extends NoxTheme.Style {
   builtin: boolean;
 }
@@ -68,7 +66,7 @@ const BuiltInThemes: DisplayTheme[] = [
 ];
 
 const GestureWrapper = (props: {
-  children: JSX.Element;
+  children: React.JSX.Element;
   gesture: PanGesture;
 }) => {
   if (Platform.OS === 'ios') {
@@ -100,6 +98,7 @@ const SkinItem = ({ skin, checked, setChecked }: SkinItemProps) => {
       { scale: withSpring(isPressed.value ? 1.2 : 1) },
     ],
   }));
+  const WindowWidth = Dimensions.get('window').width;
 
   const deleteTheme = () =>
     setPlayerStyles(playerStyles.filter(pSkin => pSkin !== skin));

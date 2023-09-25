@@ -1,10 +1,11 @@
+import React from 'react';
 import { View, StyleSheet } from 'react-native';
 import { useNoxSetting } from '@hooks/useSetting';
 import { Text } from 'react-native-paper';
 
 interface Props {
   title?: string;
-  children: JSX.Element;
+  children: React.JSX.Element;
 }
 
 export default (props: Props) => {

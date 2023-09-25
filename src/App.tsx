@@ -1,11 +1,13 @@
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import React, { useEffect } from 'react';
 import { Linking, SafeAreaView, StyleSheet } from 'react-native';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
 import AzusaPlayer from './AzusaPlayer';
+import AzusaPlayerLandscape from './components/landscape/AzusaPlayerLandscape';
+import AppOpenSplash from './components/background/AppOpenSplash';
 import { useSetupPlayer } from './components/player/View';
 import { useIsLandscape } from './hooks/useOrientation';
-import AppOpenSplash from './components/background/AppOpenSplash';
 
 const useSplash = (duration = 1000) => {
   const [isReady, setIsReady] = React.useState(false);
@@ -48,9 +50,11 @@ export default function App() {
   }
 
   return (
-    <SafeAreaProvider>
-      <AzusaPlayer />
-    </SafeAreaProvider>
+    <GestureHandlerRootView style={styles.gestureContainer}>
+      <SafeAreaProvider>
+        {isLandscape ? <AzusaPlayerLandscape /> : <AzusaPlayer />}
+      </SafeAreaProvider>
+    </GestureHandlerRootView>
   );
 }
 
@@ -59,5 +63,8 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  gestureContainer: {
+    flex: 1,
   },
 });

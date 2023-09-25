@@ -13,8 +13,7 @@ import { fetchVideoPlayUrlPromise } from '@utils/mediafetch/bilivideo';
 import { customReqHeader } from '@utils/BiliFetch';
 import { biliNFTVideoFetch } from '@utils/mediafetch/biliNFT';
 import logger from '@utils/Logger';
-
-const mobileHeight = Dimensions.get('window').height;
+import { useIsLandscape } from '@hooks/useOrientation';
 
 enum RESOLVE_TYPE {
   bvid = 'bvid',
@@ -53,35 +52,47 @@ export const resolveBackgroundImage = async (
   }
 };
 
-const MainBackground = (props: any) => {
+const MainBackground = (props: { children: React.JSX.Element }) => {
   const playerStyle = useNoxSetting(state => state.playerStyle);
+  const isLandscape = useIsLandscape();
+  const mobileHeight = Dimensions.get('window').height;
+  const bkgrdImg =
+    isLandscape && playerStyle.bkgrdImgLandscape
+      ? playerStyle.bkgrdImgLandscape
+      : playerStyle.bkgrdImg;
 
   // TODO: are these still necessary since they are behind await initPlayer?
-  if (!playerStyle.bkgrdImg) return <>{props.children}</>;
+  if (!bkgrdImg) return <>{props.children}</>;
 
-  if (typeof playerStyle.bkgrdImg === 'string') {
+  if (typeof bkgrdImg === 'string') {
     return (
       <ImageBackground
-        source={{ uri: playerStyle.bkgrdImg }}
+        source={{ uri: bkgrdImg }}
         resizeMode="cover"
-        style={styles.mobileStyle}
-        {...props}
+        style={[styles.mobileStyle, { height: mobileHeight }]}
       >
-        {props.children}
+        <View
+          style={{ backgroundColor: playerStyle.colors.background, flex: 1 }}
+        >
+          {props.children}
+        </View>
       </ImageBackground>
     );
   }
 
-  switch (playerStyle.bkgrdImg.type) {
+  switch (bkgrdImg.type) {
     case RESOLVE_TYPE.image:
       return (
         <ImageBackground
-          source={{ uri: playerStyle.bkgrdImg.identifier }}
+          source={{ uri: bkgrdImg.identifier }}
           resizeMode="cover"
-          style={styles.mobileStyle}
-          {...props}
+          style={[styles.mobileStyle, { height: mobileHeight }]}
         >
-          {props.children}
+          <View
+            style={{ backgroundColor: playerStyle.colors.background, flex: 1 }}
+          >
+            {props.children}
+          </View>
         </ImageBackground>
       );
     case RESOLVE_TYPE.video:
@@ -89,8 +100,8 @@ const MainBackground = (props: any) => {
         <>
           <Video
             source={{
-              uri: playerStyle.bkgrdImg.identifier,
-              headers: customReqHeader(playerStyle.bkgrdImg.identifier, {}),
+              uri: bkgrdImg.identifier,
+              headers: customReqHeader(bkgrdImg.identifier, {}),
             }}
             style={{ width: '100%', height: '100%', position: 'absolute' }}
             onError={logger.error}
@@ -106,7 +117,14 @@ const MainBackground = (props: any) => {
             resizeMode="cover"
             preventsDisplaySleepDuringVideoPlayback={false}
           />
-          <View style={styles.fullscreenStyle}>{props.children}</View>
+          <View
+            style={[
+              styles.fullscreenStyle,
+              { backgroundColor: playerStyle.colors.background },
+            ]}
+          >
+            {props.children}
+          </View>
         </>
       );
     default:
@@ -117,7 +135,6 @@ const MainBackground = (props: any) => {
 const styles = StyleSheet.create({
   mobileStyle: {
     flex: 1,
-    height: mobileHeight,
   },
   videoStyle: {
     width: '100%',

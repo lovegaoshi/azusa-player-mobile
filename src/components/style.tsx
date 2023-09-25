@@ -55,10 +55,13 @@ export const createStyle = (
       flexDirection: 'column',
       width: '100%',
       alignItems: 'center',
-      height: 140,
+      height: 128,
     },
     gifs: (customStyle.gifs || []) as any,
     bkgrdImg: randomChoice(customStyle.backgroundImages || []) as any,
+    bkgrdImgLandscape: randomChoice(
+      customStyle.backgroundImagesLandscape || []
+    ) as any,
     loadingIcon: customStyle.loadingIcon as any,
     progressThumbImage: customStyle.progressThumbImage as any,
     progressThumbImageLeftDrag: (customStyle.progressThumbImageLeftDrag ||
@@ -94,7 +97,7 @@ export const styles = StyleSheet.create({
     flexDirection: 'column',
     width: '100%',
     alignItems: 'center',
-    height: 140,
+    height: 128,
   },
   rowView: { flexDirection: 'row' },
 });

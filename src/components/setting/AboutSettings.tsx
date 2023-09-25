@@ -1,6 +1,5 @@
-import { View } from 'react-native';
+import { View, ScrollView } from 'react-native';
 import { Text } from 'react-native-paper';
-import { ScrollView } from 'react-native-gesture-handler';
 import { useTranslation } from 'react-i18next';
 
 import { useNoxSetting } from '@hooks/useSetting';

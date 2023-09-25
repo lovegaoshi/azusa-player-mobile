@@ -1,9 +1,8 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, ScrollView } from 'react-native';
 import { ParamListBase, useNavigation } from '@react-navigation/native';
 import { List, MD3Colors, Text, IconButton } from 'react-native-paper';
 import { DrawerNavigationProp } from '@react-navigation/drawer';
-import { ScrollView } from 'react-native-gesture-handler';
 import { useTranslation } from 'react-i18next';
 
 import GeneralSettings from './GeneralSettings';
@@ -52,7 +51,6 @@ interface Props {
 
 export default ({ navigation }: Props) => {
   const { t } = useTranslation();
-  const navigationGlobal = useNavigation();
   const playerStyle = useNoxSetting(state => state.playerStyle);
 
   const HomeSettings = ({ navigation }: Props) => {

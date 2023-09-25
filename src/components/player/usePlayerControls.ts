@@ -1,4 +1,7 @@
-import TrackPlayer from 'react-native-track-player';
+import TrackPlayer, {
+  useTrackPlayerEvents,
+  Event,
+} from 'react-native-track-player';
 import { useStore } from 'zustand';
 
 import { biliSuggest } from '@utils/Bilibili/BiliOperate';
@@ -21,6 +24,7 @@ const musicTids = [130, 29, 59, 31, 193, 30, 194, 28];
 
 export default () => {
   const currentPlayingId = useNoxSetting(state => state.currentPlayingId);
+  const setCurrentPlayingId = useNoxSetting(state => state.setCurrentPlayingId);
   const findCurrentPlayIndex = () => {
     return getCurrentTPQueue().findIndex(val => val.id === currentPlayingId);
   };
@@ -30,6 +34,7 @@ export default () => {
     const currentSong = (await TrackPlayer.getActiveTrack())?.song;
     if (!currentSong) throw new Error('[PlaySuggest] currenSong is not valid!');
 
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const filterMW = (v: any[]) => {
       return randomChoice(v);
     };
@@ -143,6 +148,24 @@ export default () => {
     });
     setAppStore({ animatedVolumeChangedCallback: callback });
   };
+
+  useTrackPlayerEvents([Event.PlaybackActiveTrackChanged], event => {
+    if (event.track && event.track.song) {
+      setCurrentPlayingId(event.track.song.id);
+    }
+  });
+
+  useTrackPlayerEvents([Event.PlaybackQueueEnded], () => {
+    performSkipToNext();
+  });
+
+  useTrackPlayerEvents([Event.RemoteNext], () => {
+    performSkipToNext();
+  });
+
+  useTrackPlayerEvents([Event.RemotePrevious], () => {
+    performSkipToPrevious();
+  });
 
   return {
     performSkipToNext,

@@ -11,9 +11,11 @@ import { useNoxSetting } from '@hooks/useSetting';
 import LottieButtonAnimated from '../buttons/LottieButtonAnimated';
 import { fadePause } from '@utils/RNTPUtils';
 
-export const PlayPauseButton: React.FC<{
+interface Props {
   state: State | undefined;
-}> = ({ state }) => {
+  iconSize?: number;
+}
+export const PlayPauseButton: React.FC<Props> = ({ state, iconSize = 50 }) => {
   const playerStyle = useNoxSetting(state => state.playerStyle);
   const playWhenReady = usePlayWhenReady();
   const isLoading = useDebouncedValue(
@@ -25,21 +27,22 @@ export const PlayPauseButton: React.FC<{
   const isEnded = state === State.Ended;
   const showPause = playWhenReady && !(isErrored || isEnded);
   const showBuffering = isErrored || (playWhenReady && isLoading);
+  const iconContainerStyle = { width: iconSize + 16, height: iconSize + 16 };
 
   if (showBuffering) {
     return playerStyle.loadingIcon ? (
       <Image
         source={{ uri: playerStyle.loadingIcon }}
-        style={styles.LoadingIconStyle}
+        style={[styles.LoadingIconStyle, iconContainerStyle]}
       />
     ) : (
-      <ActivityIndicator size={45} style={styles.activityIndicator} />
+      <ActivityIndicator size={iconSize - 5} style={iconContainerStyle} />
     );
   }
   return (
     <LottieButtonAnimated
       src={require('@assets/lottie/PauseGoAndBack.json')}
-      size={50}
+      size={iconSize}
       onPress={showPause ? fadePause : () => TrackPlayer.play()}
       clicked={!showPause}
       strokes={['Play', 'Play 2', 'Pause', 'Pause 3']}
@@ -49,12 +52,6 @@ export const PlayPauseButton: React.FC<{
 
 const styles = StyleSheet.create({
   LoadingIconStyle: {
-    width: 66,
-    height: 66,
     marginTop: 0,
-  },
-  activityIndicator: {
-    width: 66,
-    height: 66,
   },
 });

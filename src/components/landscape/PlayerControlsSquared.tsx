@@ -1,16 +1,21 @@
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
+import { Dimensions, StyleSheet, View } from 'react-native';
 import { usePlaybackState } from 'react-native-track-player';
 
-import { PlaybackError } from './PlaybackError';
-import { PlayPauseButton } from './PlayPauseButton';
+import { PlaybackError } from '@components/player/PlaybackError';
+import { PlayPauseButton } from '@components/player/PlayPauseButton';
 import { useNoxSetting } from '@hooks/useSetting';
-import ThumbsUpButton from './ThumbsUpButton';
-import PlayerModeButton from './PlayerModeButton';
-import usePlayerControls from './usePlayerControls';
+import ThumbsUpButton from '@components/player/ThumbsUpButton';
+import PlayerModeButton from '@components/player/PlayerModeButton';
+import usePlayerControls from '@components/player/usePlayerControls';
 import LottieButton from '../buttons/LottieButton';
 
-export const PlayerControls: React.FC = () => {
+interface Props {
+  iconSize?: number;
+}
+const PlayerControls: React.FC<Props> = ({
+  iconSize = (Dimensions.get('window').width - 180) / 5,
+}) => {
   const playerStyle = useNoxSetting(state => state.playerStyle);
 
   const { performSkipToNext, performSkipToPrevious } = usePlayerControls();
@@ -24,28 +29,35 @@ export const PlayerControls: React.FC = () => {
         <></>
       )}
 
-      <View style={styles.row}>
-        <PlayerModeButton />
+      <View
+        style={[
+          styles.row,
+          { backgroundColor: playerStyle.customColors.btnBackgroundColor },
+        ]}
+      >
+        <PlayerModeButton iconSize={iconSize} />
         <LottieButton
           src={require('@assets/lottie/skip-backwards.json')}
-          size={40}
+          size={iconSize}
           onPress={performSkipToPrevious}
           strokes={['Line', 'Triange', 'Triange  2']}
         />
         <View style={styles.btnSpacer} />
-        <PlayPauseButton state={playback.state} />
+        <PlayPauseButton state={playback.state} iconSize={iconSize} />
         <View style={styles.btnSpacer} />
         <LottieButton
           src={require('@assets/lottie/skip-forwards.json')}
-          size={40}
+          size={iconSize}
           onPress={performSkipToNext}
           strokes={['Line', 'Triangle 1', 'Triangle 2']}
         />
-        <ThumbsUpButton />
+        <ThumbsUpButton iconSize={iconSize} />
       </View>
     </View>
   );
 };
+
+export default PlayerControls;
 
 const styles = StyleSheet.create({
   container: {
