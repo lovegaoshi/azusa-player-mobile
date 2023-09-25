@@ -40,7 +40,16 @@ export default () => {
   }, []);
 
   return (
-    <View style={styles.sidebar}>
+    <View
+      style={[
+        styles.sidebar,
+        {
+          backgroundColor: playerStyle.metaData.darkTheme
+            ? 'rgb(44, 40, 49)'
+            : 'rgb(243, 237, 246)',
+        },
+      ]}
+    >
       <View style={styles.randomGifButtonContainerStyle}>
         <RandomGIFButton
           gifs={playerStyle.gifs}
