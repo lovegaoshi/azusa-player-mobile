@@ -22,7 +22,7 @@
     "isolatedModules": true,
     "resolveJsonModule": true,
     "jsx": "react-native",
-    "lib": ["es2021"],
+    "lib": ["ESNext"],
     "moduleResolution": "node",
     "outDir": "./lib",
     "strict": true,

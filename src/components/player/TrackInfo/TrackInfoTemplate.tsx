@@ -3,9 +3,9 @@ import {
   StyleSheet,
   Text,
   View,
-  Dimensions,
   Animated,
   TouchableWithoutFeedback,
+  ViewStyle,
 } from 'react-native';
 import type { Track } from 'react-native-track-player';
 import Image from 'react-native-fast-image';
@@ -18,21 +18,23 @@ import FavReloadButton from './FavReloadButton';
 interface Props {
   track?: Track;
   windowWidth?: number;
+  windowHeight?: number;
   onImagePress?: () => void;
   children?: React.JSX.Element;
+  containerStyle?: ViewStyle;
 }
 const TrackInfoTemplate: React.FC<Props> = ({
   track,
   windowWidth,
+  windowHeight,
   onImagePress = () => undefined,
   children,
+  containerStyle,
 }) => {
   const playerSetting = useNoxSetting(state => state.playerSetting);
   const playerStyle = useNoxSetting(state => state.playerStyle);
   const currentPlayingList = useNoxSetting(state => state.currentPlayingList);
-  const dimension = Dimensions.get('window');
-  const albumArtSize =
-    windowWidth || Math.min(dimension.width, dimension.height);
+  const coverStyle = { width: windowWidth, height: windowHeight || '100%' };
 
   const getTrackLocation = () => {
     const currentTPQueue = getCurrentTPQueue();
@@ -51,10 +53,9 @@ const TrackInfoTemplate: React.FC<Props> = ({
     <TouchableWithoutFeedback onPress={onImagePress}>
       <Animated.View style={styles.container}>
         <Image
-          style={[
-            styles.artwork,
-            { width: albumArtSize, height: albumArtSize },
-          ]}
+          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+          // @ts-expect-error
+          style={[styles.artwork, coverStyle]}
           source={
             playerSetting.hideCoverInMobile
               ? 0
@@ -68,7 +69,7 @@ const TrackInfoTemplate: React.FC<Props> = ({
   );
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, containerStyle]}>
       {children || <AlbumArt />}
       <Text style={[styles.titleText, { color: playerStyle.colors.primary }]}>
         {track?.title}

@@ -15,6 +15,15 @@ export default () => {
   const iconSize = 80;
   const navigationGlobal = useNavigation();
 
+  const onPlaylistPress = () => {
+    navigationGlobal.navigate(
+      navigationGlobal.getState().routes.at(-1)?.name ===
+        ViewEnum.PLAYER_PLAYLIST
+        ? (ViewEnum.PLAYER_PLAYLISTS as never)
+        : (ViewEnum.PLAYER_PLAYLIST as never)
+    );
+  };
+
   useEffect(() => {
     function deepLinkHandler(data: { url: string }) {
       if (data.url === 'trackplayer://notification.click') {
@@ -22,7 +31,6 @@ export default () => {
         navigationGlobal.navigate(ViewEnum.PLAYER_HOME as never);
       }
     }
-
     // This event will be fired when the app is already open and the notification is clicked
     const subscription = Linking.addEventListener('url', deepLinkHandler);
 
@@ -48,9 +56,7 @@ export default () => {
       <IconButton
         icon={ICONS.playlistScreen}
         size={iconSize}
-        onPress={() =>
-          navigationGlobal.navigate(ViewEnum.PLAYER_PLAYLISTS as never)
-        }
+        onPress={onPlaylistPress}
       />
       <IconButton
         icon={ICONS.exploreScreen}
