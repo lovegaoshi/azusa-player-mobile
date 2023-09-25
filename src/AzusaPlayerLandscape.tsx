@@ -54,6 +54,9 @@ const AzusaPlayer = () => {
             colors: {
               ...defaultTheme.colors,
               ...playerStyle.colors,
+              // HACK: compensate for my bad design. now applying background
+              // at MainBackground level instaed of here.
+              background: undefined,
             },
           }}
         >

@@ -71,7 +71,11 @@ const MainBackground = (props: { children: React.JSX.Element }) => {
         resizeMode="cover"
         style={[styles.mobileStyle, { height: mobileHeight }]}
       >
-        {props.children}
+        <View
+          style={{ backgroundColor: playerStyle.colors.background, flex: 1 }}
+        >
+          {props.children}
+        </View>
       </ImageBackground>
     );
   }
@@ -84,7 +88,11 @@ const MainBackground = (props: { children: React.JSX.Element }) => {
           resizeMode="cover"
           style={[styles.mobileStyle, { height: mobileHeight }]}
         >
-          {props.children}
+          <View
+            style={{ backgroundColor: playerStyle.colors.background, flex: 1 }}
+          >
+            {props.children}
+          </View>
         </ImageBackground>
       );
     case RESOLVE_TYPE.video:
@@ -109,7 +117,14 @@ const MainBackground = (props: { children: React.JSX.Element }) => {
             resizeMode="cover"
             preventsDisplaySleepDuringVideoPlayback={false}
           />
-          <View style={styles.fullscreenStyle}>{props.children}</View>
+          <View
+            style={[
+              styles.fullscreenStyle,
+              { backgroundColor: playerStyle.colors.background },
+            ]}
+          >
+            {props.children}
+          </View>
         </>
       );
     default:
