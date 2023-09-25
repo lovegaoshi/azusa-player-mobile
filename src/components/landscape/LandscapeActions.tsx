@@ -17,7 +17,7 @@ export default () => {
 
   const onPlaylistPress = () => {
     navigationGlobal.navigate(
-      navigationGlobal.getState().routes.at(-1)?.name ===
+      navigationGlobal.getState()?.routes?.at(-1)?.name ===
         ViewEnum.PLAYER_PLAYLIST
         ? (ViewEnum.PLAYER_PLAYLISTS as never)
         : (ViewEnum.PLAYER_PLAYLIST as never)
