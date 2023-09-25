@@ -38,7 +38,7 @@ const AzusaPlayer = () => {
     : CombinedDefaultTheme;
   const insets = useSafeAreaInsets();
   const { width, height } = Dimensions.get('window');
-  const actionPanelWidth = Math.min(80, height / 5);
+  const actionPanelWidth = Math.min(120, height / 5);
   const playerPanelWidth = width / 2 - actionPanelWidth;
 
   return (
