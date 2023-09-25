@@ -14,13 +14,13 @@ import {
 import merge from 'deepmerge';
 import { useTranslation } from 'react-i18next';
 
-import MainBackground from './components/background/MainBackground';
-import { useNoxSetting } from './hooks/useSetting';
-import './localization/i18n';
+import MainBackground from '../background/MainBackground';
+import { useNoxSetting } from '../../hooks/useSetting';
+import '../../localization/i18n';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import LandscapePlayerPanel from './components/landscape/LandscapePlayerPanel';
-import LandscapeActions from './components/landscape/LandscapeActions';
-import LandscapePlaylistPanel from './components/landscape/LandscapePlaylistPanel';
+import LandscapePlayerPanel from './LandscapePlayerPanel';
+import LandscapeActions from './LandscapeActions';
+import LandscapePlaylistPanel from './LandscapePlaylistPanel';
 
 const { LightTheme, DarkTheme } = adaptNavigationTheme({
   reactNavigationLight: NavigationDefaultTheme,
@@ -37,8 +37,9 @@ const AzusaPlayer = () => {
     ? CombinedDarkTheme
     : CombinedDefaultTheme;
   const insets = useSafeAreaInsets();
-  const mobileWidth = Dimensions.get('window').width;
-  const playerPanelWidth = mobileWidth / 2 - 100;
+  const { width, height } = Dimensions.get('window');
+  const actionPanelWidth = Math.min(80, height / 5);
+  const playerPanelWidth = width / 2 - actionPanelWidth;
 
   return (
     <MainBackground>
@@ -70,9 +71,9 @@ const AzusaPlayer = () => {
               flexDirection: 'row',
             }}
           >
-            <LandscapeActions />
+            <LandscapeActions panelWidth={actionPanelWidth} />
             <LandscapePlayerPanel panelWidth={playerPanelWidth} />
-            <LandscapePlaylistPanel panelWidth={mobileWidth / 2} />
+            <LandscapePlaylistPanel panelWidth={width / 2} />
           </View>
         </NavigationContainer>
       </PaperProvider>
@@ -84,7 +85,6 @@ export default AzusaPlayer;
 
 const styles = StyleSheet.create({
   sidebar: {
-    width: 100,
     backgroundColor: 'black',
   },
   playerPanel: {},

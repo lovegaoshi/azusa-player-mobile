@@ -15,14 +15,16 @@ interface Props {
 }
 
 export default ({ panelWidth }: Props) => {
+  const panelStyle = {
+    width: panelWidth,
+    height: Dimensions.get('window').height,
+  };
   return (
-    <View
-      style={{ width: panelWidth, height: Dimensions.get('window').height }}
-    >
+    <View style={panelStyle}>
       <Stack.Navigator>
         <Stack.Screen
           name={ViewEnum.LYRICS}
-          component={LandscapeLyricView}
+          component={() => <LandscapeLyricView panelStyle={panelStyle} />}
           options={{ headerShown: false }}
         />
         <Stack.Screen

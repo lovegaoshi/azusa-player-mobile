@@ -1,36 +1,15 @@
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { IconButton, Divider, Text, TouchableRipple } from 'react-native-paper';
 import { DrawerActions, useNavigation } from '@react-navigation/native';
-import {
-  Pressable,
-  Dimensions,
-  View,
-  ImageBackground,
-  StyleSheet,
-  Linking,
-} from 'react-native';
+import { View, ImageBackground, StyleSheet, Linking } from 'react-native';
 import { useTranslation } from 'react-i18next';
-import DraggableFlatList, {
-  ScaleDecorator,
-  RenderItemParams,
-} from 'react-native-draggable-flatlist';
 import { useStore } from 'zustand';
 
 import { useNoxSetting } from '@hooks/useSetting';
 import useAAPlayback from '@hooks/useAAPlayback';
 import { ViewEnum } from '@enums/View';
-import AddPlaylistButton, {
-  AddPlaylistButtonRef,
-} from '../buttons/AddPlaylistButton';
-import { STORAGE_KEYS } from '@enums/Storage';
-import NewPlaylistDialog from '../dialogs/NewPlaylistDialog';
-import useAlert from '../dialogs/useAlert';
-import ShuffleAllButton from './ShuffleAllButton';
-import TimerButton from './TimerButton';
 import appStore from '@stores/appStore';
 import logger from '@utils/Logger';
-import useTheme from '@hooks/useTheme';
-import PlaylistItem from './PlaylistItem';
 import Playlists from './Playlists';
 
 interface Props {
@@ -67,84 +46,12 @@ const BiliCard = (props: any) => {
 
 export default (props: any) => {
   const navigation = useNavigation();
-  const currentPlaylist = useNoxSetting(state => state.currentPlaylist);
-  const currentPlayingList = useNoxSetting(state => state.currentPlayingList);
-  const playlists = useNoxSetting(state => state.playlists);
   const playlistIds = useNoxSetting(state => state.playlistIds);
   const playerStyle = useNoxSetting(state => state.playerStyle);
-  const playerSetting = useNoxSetting(state => state.playerSetting);
-  const addPlaylistButtonRef = useRef<AddPlaylistButtonRef>(null);
-  const setCurrentPlaylist = useNoxSetting(state => state.setCurrentPlaylist);
-  const setPlaylistIds = useNoxSetting(state => state.setPlaylistIds);
-  const removePlaylist = useNoxSetting(state => state.removePlaylist);
-  const { TwoWayAlert } = useAlert();
   // HACK: I know its bad! But somehow this hook isnt updating in its own
   // useEffects...
   const { buildBrowseTree } = useAAPlayback();
-  const usedTheme = useTheme();
   const PIPMode = useStore(appStore, state => state.pipMode);
-
-  // HACK: tried to make searchList draweritem button as addPlaylistButton, but
-  // dialog disposes on textinput focus. created a dialog directly in this component
-  // instead and works fine.
-  const [newPlaylistDialogOpen, setNewPlaylistDialogOpen] = useState(false);
-
-  const confirmOnDelete = (playlistId: string) => {
-    TwoWayAlert(
-      `Delete ${playlists[playlistId].title}?`,
-      `Are you sure to delete playlist ${playlists[playlistId].title}?`,
-      () => removePlaylist(playlistId)
-    );
-  };
-
-  const goToPlaylist = (playlistId: string) => {
-    setCurrentPlaylist(playlists[playlistId]);
-    navigation.navigate(ViewEnum.PLAYER_PLAYLIST as never);
-  };
-
-  const SearchPlaylistAsNewButton = () => (
-    <Pressable onPress={() => setNewPlaylistDialogOpen(true)}>
-      <IconButton
-        icon="new-box"
-        size={25}
-        iconColor={playerStyle.colors.primary}
-      />
-    </Pressable>
-  );
-
-  const renderItem = ({
-    item,
-    drag,
-    isActive,
-  }: RenderItemParams<NoxMedia.Playlist>) => {
-    return (
-      <ScaleDecorator>
-        <TouchableRipple
-          onLongPress={drag}
-          disabled={isActive}
-          onPress={() => goToPlaylist(item.id)}
-          style={[
-            {
-              backgroundColor:
-                currentPlaylist.id === item?.id
-                  ? playerStyle.customColors.playlistDrawerBackgroundColor
-                  : undefined,
-            },
-          ]}
-        >
-          <PlaylistItem
-            item={item}
-            confirmOnDelete={confirmOnDelete}
-            leadColor={
-              currentPlayingList.id === item?.id
-                ? playerStyle.colors.primary //customColors.playlistDrawerBackgroundColor
-                : undefined
-            }
-          />
-        </TouchableRipple>
-      </ScaleDecorator>
-    );
-  };
 
   useEffect(() => {
     buildBrowseTree();

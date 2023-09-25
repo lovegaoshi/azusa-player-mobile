@@ -34,7 +34,10 @@ const TrackInfoTemplate: React.FC<Props> = ({
   const playerSetting = useNoxSetting(state => state.playerSetting);
   const playerStyle = useNoxSetting(state => state.playerStyle);
   const currentPlayingList = useNoxSetting(state => state.currentPlayingList);
-  const coverStyle = { width: windowWidth, height: windowHeight || '100%' };
+  const coverStyle = {
+    width: windowWidth || '100%',
+    height: windowHeight || '100%',
+  };
 
   const getTrackLocation = () => {
     const currentTPQueue = getCurrentTPQueue();

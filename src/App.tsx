@@ -4,7 +4,7 @@ import { Linking, SafeAreaView, StyleSheet } from 'react-native';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
 import AzusaPlayer from './AzusaPlayer';
-import AzusaPlayerLandscape from './AzusaPlayerLandscape';
+import AzusaPlayerLandscape from './components/landscape/AzusaPlayerLandscape';
 import AppOpenSplash from './components/background/AppOpenSplash';
 import { useSetupPlayer } from './components/player/View';
 import { useIsLandscape } from './hooks/useOrientation';

@@ -15,7 +15,9 @@ export default ({ panelWidth }: Props) => {
         track={track}
         windowWidth={panelWidth}
         containerStyle={{ flex: 1, justifyContent: 'flex-end' }}
-      />
+      >
+        <></>
+      </TrackInfoTemplate>
       <LandscapePlayerProgress panelWidth={panelWidth} />
     </View>
   );

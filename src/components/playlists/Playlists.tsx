@@ -159,8 +159,7 @@ export default ({
         onClose={() => setNewPlaylistDialogOpen(false)}
         onSubmit={() => setNewPlaylistDialogOpen(false)}
       />
-      <View style={styles.addPlaylistButtonSpacer} />
-      <View style={{ flex: 1, justifyContent: 'flex-end' }}>
+      <View style={{ flex: 1 }}>
         <DraggableFlatList
           style={[styles.draggableFlatList]}
           data={playlistIds.map(val => playlists[val])}
@@ -170,11 +169,11 @@ export default ({
           keyExtractor={item => item?.id}
           renderItem={renderItem}
         />
-        <View style={styles.bottomInfo}>
-          <Text style={styles.bottomInfoText}>
-            {`${playerStyle.metaData.themeName} @ ${playerSetting.noxVersion}`}
-          </Text>
-        </View>
+      </View>
+      <View style={styles.bottomInfo}>
+        <Text style={styles.bottomInfoText}>
+          {`${playerStyle.metaData.themeName} @ ${playerSetting.noxVersion}`}
+        </Text>
       </View>
     </View>
   );

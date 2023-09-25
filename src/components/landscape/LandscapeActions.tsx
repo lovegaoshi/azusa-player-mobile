@@ -9,11 +9,14 @@ import { useNoxSetting } from '@hooks/useSetting';
 import { ViewEnum } from '@enums/View';
 import { logger } from '@utils/Logger';
 
-export default () => {
+interface Props {
+  panelWidth?: number;
+}
+export default ({ panelWidth = 110 }: Props) => {
   const playerStyle = useNoxSetting(state => state.playerStyle);
   const currentPlayingId = useNoxSetting(state => state.currentPlayingId);
-  const iconSize = 80;
   const navigationGlobal = useNavigation();
+  const iconSize = panelWidth - 30;
 
   const onPlaylistPress = () => {
     navigationGlobal.navigate(
@@ -44,6 +47,7 @@ export default () => {
       style={[
         styles.sidebar,
         {
+          width: panelWidth,
           backgroundColor: playerStyle.metaData.darkTheme
             ? 'rgb(44, 40, 49)'
             : 'rgb(243, 237, 246)',
@@ -83,7 +87,6 @@ export default () => {
 
 const styles = StyleSheet.create({
   sidebar: {
-    width: 100,
     flexDirection: 'column',
     backgroundColor: 'lightgrey',
   },
