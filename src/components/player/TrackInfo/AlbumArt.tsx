@@ -85,29 +85,29 @@ const AlbumArt: React.FC<Props> = ({
               playerSetting.hideCoverInMobile
                 ? 0
                 : {
-                    uri: `${track?.artwork}`,
-                  }
+                  uri: `${track?.artwork}`,
+                }
             }
           />
         </Animated.View>
       </TouchableWithoutFeedback>
-      <TouchableWithoutFeedback onPress={onLyricPress}>
-        <View
-          style={[
-            styles.lyric,
-            {
-              opacity: isImageVisible ? 0 : 1,
-              position: isImageVisible ? 'absolute' : 'relative',
-              width: dimension.width,
-              height: dimension.height,
-            },
-            lyricStyle,
-          ]}
-          pointerEvents={isImageVisible ? 'none' : 'auto'}
-        >
-          {track && <LyricView track={track} artist="n/a" />}
-        </View>
-      </TouchableWithoutFeedback>
+      <View
+        style={[
+          styles.lyric,
+          {
+            opacity: isImageVisible ? 0 : 1,
+            position: isImageVisible ? 'absolute' : 'relative',
+            width: dimension.width,
+            height: dimension.height,
+          },
+          lyricStyle,
+        ]}
+        pointerEvents={isImageVisible ? 'none' : 'auto'}
+      >
+        {track && (
+          <LyricView track={track} artist="n/a" onPress={onLyricPress} />
+        )}
+      </View>
     </>
   );
 };
