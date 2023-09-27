@@ -10,7 +10,7 @@ interface Props {
 export default ({ panelWidth }: Props) => {
   const track = useActiveTrack();
   return (
-    <View style={{ justifyContent: 'flex-end' }}>
+    <View style={{ justifyContent: 'flex-end', width: panelWidth }}>
       <TrackInfoTemplate
         track={track}
         windowWidth={panelWidth}
