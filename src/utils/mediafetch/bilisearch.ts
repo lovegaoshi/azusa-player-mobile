@@ -9,8 +9,6 @@
  * steps to refactor:
  * each site needs a fetch to parse regex extracted, a videoinfo fetcher and a song fetcher.
  */
-import { v4 as uuidv4 } from 'uuid';
-
 import { logger } from '../Logger';
 import { songFetch } from './bilivideo';
 import { fetchBiliPaginatedAPI } from './paginatedbili';
@@ -26,6 +24,7 @@ export const fetchBiliSearchList = async (
   fastSearch = false,
   cookiedSearch = false
 ) => {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const fastSearchResolveBVID = async (bvobjs: any[]) => {
     /**
      * cids should be resolved at this stage,
@@ -36,7 +35,7 @@ export const fetchBiliSearchList = async (
     );
      */
     return bvobjs.map(
-      (obj, index) =>
+      obj =>
         new VideoInfo(
           obj.title.replaceAll(/<[^<>]*em[^<>]*>/g, ''),
           obj.description,
@@ -78,7 +77,7 @@ export const fetchBiliSearchList = async (
         credentials: cookiedSearch ? 'include' : 'omit',
       },
       resolveBiliBVID: fastSearch
-        ? async (bvobjs, progressEmitter) => await fastSearchResolveBVID(bvobjs)
+        ? async bvobjs => await fastSearchResolveBVID(bvobjs)
         : undefined,
     });
   } catch (e) {

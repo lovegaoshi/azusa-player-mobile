@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Platform } from 'react-native';
 import LRUCache from 'lru-cache';
 import RNFetchBlob from 'react-native-blob-util';
@@ -11,7 +12,7 @@ import {
 } from '@stores/appStore';
 import playerSettingStore from '@stores/playerSettingStore';
 import { getCachedMediaMapping, saveCachedMediaMapping } from './ChromeStorage';
-import logger from './Logger';
+import { logger } from './Logger';
 
 const { getState } = playerSettingStore;
 
@@ -36,7 +37,7 @@ class NoxMediaCache {
   ) {
     this.cache = new LRUCache<string, string>({
       max: options.max || 1,
-      dispose: async (value, key) => {
+      dispose: async value => {
         RNFetchBlob.fs.unlink(value);
       },
       allowStale: false,
@@ -150,7 +151,7 @@ class NoxMediaCache {
 const cache: NoxCaches = {
   noxMediaCache: new NoxMediaCache({
     max: 1,
-    dispose: async (value, key) => {
+    dispose: async value => {
       RNFetchBlob.fs.unlink(value);
     },
     allowStale: false,

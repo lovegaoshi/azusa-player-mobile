@@ -1,6 +1,6 @@
-import React, { useState, useEffect, useCallback } from 'react';
-import { AppRegistry, Text, View, Image, Button } from 'react-native';
-import ShareMenu, { ShareMenuReactView } from 'react-native-share-menu';
+import React, { useState, useEffect } from 'react';
+import { Text, View, Image, Button } from 'react-native';
+import { ShareMenuReactView } from 'react-native-share-menu';
 
 const Share = () => {
   const [sharedData, setSharedData] = useState('');

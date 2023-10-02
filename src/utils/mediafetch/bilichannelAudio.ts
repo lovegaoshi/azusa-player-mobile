@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /**
  * refactor:
  * bilisearch workflow:
@@ -9,7 +10,7 @@
  * each site needs a fetch to parse regex extracted, a videoinfo fetcher and a song fetcher.
  */
 import { SOURCE } from '@enums/MediaFetch';
-import logger from '../Logger';
+import { logger } from '../Logger';
 import { regexFetchProps } from './generic';
 import { fetchAwaitBiliPaginatedAPI } from './paginatedbili';
 import { awaitLimiter } from './throttle';

@@ -71,14 +71,11 @@ export const fetchAudioInfo = async (
 
 export const songFetch = async ({
   videoinfos,
-  useBiliTag,
 }: {
   videoinfos: VideoInfo[];
-  useBiliTag: boolean;
 }) => {
   const aggregateVideoInfo = (info: VideoInfo) =>
-    info.pages.map((page: any, index: number) => {
-      const filename = info.pages.length === 1 ? info.title : page.part;
+    info.pages.map(() => {
       return SongTS({
         cid: `${info.pages[0].cid}-${info.bvid}`,
         bvid: info.bvid,
@@ -101,12 +98,11 @@ export const songFetch = async ({
   return songs;
 };
 
-const regexFetch = async ({ reExtracted, useBiliTag }: regexFetchProps) => {
+const regexFetch = async ({ reExtracted }: regexFetchProps) => {
   const audioInfo = await fetchAudioInfo(reExtracted[1]!);
   if (!audioInfo) return [];
   return songFetch({
     videoinfos: [audioInfo], // await fetchiliBVID([reExtracted[1]!])
-    useBiliTag: useBiliTag || false,
   });
 };
 

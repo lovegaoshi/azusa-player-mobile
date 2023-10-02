@@ -1,10 +1,10 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect } from 'react';
 import { useColorScheme, Appearance } from 'react-native';
 
 import { getPlayerSkin, savePlayerSkin } from '../utils/ChromeStorage';
 import { createStyle } from '../components/style';
 import { resolveBackgroundImage } from '../components/background/MainBackground';
-import logger from '@utils/Logger';
 import { useNoxSetting } from './useSetting';
 
 export const savePlayerStyle = async (

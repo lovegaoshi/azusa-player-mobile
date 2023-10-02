@@ -15,7 +15,6 @@ import { biliApiLimiter } from './throttle';
 
 import SongTS from '@objects/Song';
 import { logger } from '../Logger';
-import { randomChoice } from '../Utils';
 import { SOURCE } from '@enums/MediaFetch';
 
 export const CIDPREFIX = 'youtube-';

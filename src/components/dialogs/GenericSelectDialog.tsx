@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useState } from 'react';
 import { Pressable, View, FlatList, StyleSheet } from 'react-native';
 import { Button, Dialog, Portal, Text, RadioButton } from 'react-native-paper';
@@ -31,8 +32,8 @@ export default ({
   renderOptionTitle = val => String(val),
   title = undefined,
   defaultIndex = 0,
-  onClose = (index?: number) => undefined,
-  onSubmit = (index: number) => undefined,
+  onClose = () => undefined,
+  onSubmit = () => undefined,
 }: Props<any>) => {
   const { t } = useTranslation();
   const [currentIndex, setCurrentIndex] = useState(defaultIndex);

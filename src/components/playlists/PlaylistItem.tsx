@@ -3,7 +3,6 @@ import { IconButton, Text } from 'react-native-paper';
 import { StyleSheet, View } from 'react-native';
 
 import { useNoxSetting } from '@hooks/useSetting';
-import useAAPlayback from '@hooks/useAAPlayback';
 
 const DefaultIcon = (
   item: NoxMedia.Playlist,

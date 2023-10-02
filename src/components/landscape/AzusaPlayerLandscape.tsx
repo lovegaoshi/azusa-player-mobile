@@ -1,5 +1,5 @@
 import React from 'react';
-import { Dimensions, StyleSheet, View } from 'react-native';
+import { Dimensions, View } from 'react-native';
 import {
   NavigationContainer,
   DarkTheme as NavigationDarkTheme,
@@ -12,7 +12,6 @@ import {
   Provider as PaperProvider,
 } from 'react-native-paper';
 import merge from 'deepmerge';
-import { useTranslation } from 'react-i18next';
 
 import MainBackground from '../background/MainBackground';
 import { useNoxSetting } from '../../hooks/useSetting';
@@ -31,7 +30,6 @@ const CombinedDefaultTheme = merge(MD3LightTheme, LightTheme);
 const CombinedDarkTheme = merge(MD3DarkTheme, DarkTheme);
 
 const AzusaPlayer = () => {
-  const { t } = useTranslation();
   const playerStyle = useNoxSetting(state => state.playerStyle);
   const defaultTheme = playerStyle.metaData.darkTheme
     ? CombinedDarkTheme
@@ -82,11 +80,3 @@ const AzusaPlayer = () => {
 };
 
 export default AzusaPlayer;
-
-const styles = StyleSheet.create({
-  sidebar: {
-    backgroundColor: 'black',
-  },
-  playerPanel: {},
-  playlistPanel: {},
-});

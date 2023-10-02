@@ -41,6 +41,7 @@ const LottieButtonAnimated = ({
     }
     animationProgress.current.setValue(clicked ? clickedLottieProgress : 0);
     managedClicked.current = clicked;
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [clicked]);
 
   const onPressBtn = () => {

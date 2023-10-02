@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Pressable, StyleSheet } from 'react-native';
+import { Pressable } from 'react-native';
 // import { Image } from 'expo-image';
 import Image from 'react-native-fast-image';
 

@@ -5,7 +5,6 @@ import {
   Pressable,
   StyleSheet,
   Animated,
-  Dimensions,
   GestureResponderEvent,
 } from 'react-native';
 import { useTranslation } from 'react-i18next';
@@ -34,6 +33,7 @@ export default ({
   const { t } = useTranslation();
   const currentPlaylist = useNoxSetting(state => state.currentPlaylist);
   const playerStyle = useNoxSetting(state => state.playerStyle);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const searchContainerRef = useRef<any>(null);
   const searchBarWidth = useRef(new Animated.Value(0)).current;
   const opacity = useRef(new Animated.Value(1)).current;
@@ -46,7 +46,6 @@ export default ({
   const setPlaylistSearchAutoFocus = useNoxSetting(
     state => state.setPlaylistSearchAutoFocus
   );
-  const playlistInfoUpdate = useNoxSetting(state => state.playlistInfoUpdate);
   const [dialogOpen, setDialogOpen] = useState(false);
   const [menuCoords, setMenuCoords] = useState<NoxTheme.coordinates>({
     x: 0,

@@ -26,7 +26,6 @@ import { ViewEnum } from './enums/View';
 import Settings from './components/setting/View';
 import DummySettings from './components/setting/DummySettings';
 import './localization/i18n';
-import Explore from './components/explore/ytmusic/View';
 import PIPLyricView from './components/player/PIPLyric';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { ICONS } from '@enums/Icons';

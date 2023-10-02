@@ -1,5 +1,5 @@
-import React, { useState, useRef } from 'react';
-import { Button, Dialog, Portal, TextInput } from 'react-native-paper';
+import React, { useRef } from 'react';
+import { Button, Dialog, Portal } from 'react-native-paper';
 import { StyleSheet } from 'react-native';
 import { useTranslation } from 'react-i18next';
 

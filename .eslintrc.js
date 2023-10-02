@@ -22,6 +22,9 @@ module.exports = {
     'react/react-in-jsx-scope': 'off',
     'prettier/prettier': ['error', { endOfLine: 'auto' }],
     'react/display-name': 'off',
+    'react-hooks/exhaustive-deps': 'off',
+    'import/no-named-as-default': 'off',
+    'import/no-named-as-default-member': 'off',
   },
   settings: {
     react: { version: 'detect' },

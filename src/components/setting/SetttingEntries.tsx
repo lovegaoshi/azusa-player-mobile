@@ -1,5 +1,3 @@
-export interface EnterSettingEntry {}
-
 export interface SelectSettingEntry<T> {
   options: Array<T>;
   renderOption: (option: T) => string;

@@ -12,7 +12,7 @@ interface NoxPlaylistStore {
   setPlaymode: (val: string) => void;
 }
 
-const playlistStore = createStore<NoxPlaylistStore>((set, get) => ({
+const playlistStore = createStore<NoxPlaylistStore>(set => ({
   playingList: [],
   playingListShuffled: [],
   playmode: NoxRepeatMode.SHUFFLE,
@@ -88,7 +88,7 @@ export const initializePlaybackMode = (state: string) => {
   const [nextIcon, TPRepeatMode] = getPlaybackModeNotifIcon(state);
   playlistStore.setState({ playmode: state });
   savePlayMode(state);
-  TrackPlayer.setRepeatMode(TPRepeatMode).catch(e => 'many error wow');
+  TrackPlayer.setRepeatMode(TPRepeatMode);
   return nextIcon;
 };
 

@@ -6,6 +6,7 @@ import bfetch from '@utils/BiliFetch';
 // Extracted from Youtube APP (Originally from: pytube)
 const CLIENT_ID =
   '861556708454-d6dlm3lh05idd8npek18k6be8ba3oc68.apps.googleusercontent.com';
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const CLIENT_SECRET = 'SboVhoG9s0rNafixCSGGKXAT';
 
 interface Props {

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { wbiQuery } from '@stores/wbi';
 import { fetchiliBVIDs } from './bilivideo';
 import {

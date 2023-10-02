@@ -9,7 +9,7 @@ import { NULL_TRACK, parseSongR128gain } from '../objects/Song';
 import { initBiliHeartbeat } from '../utils/Bilibili/BiliOperate';
 import type { NoxStorage } from '../types/storage';
 import { saveLastPlayDuration } from '../utils/ChromeStorage';
-import logger from '../utils/Logger';
+import { logger } from '../utils/Logger';
 import noxPlayingList, { getNextSong } from '../stores/playingList';
 import { NoxRepeatMode } from '../enums/RepeatMode';
 import playerSettingStore from '@stores/playerSettingStore';

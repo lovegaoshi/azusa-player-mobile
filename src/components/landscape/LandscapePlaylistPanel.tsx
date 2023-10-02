@@ -4,7 +4,7 @@ import { Dimensions, View } from 'react-native';
 import { ViewEnum } from '@enums/View';
 import DummySettings from '../setting/DummySettings';
 import LandscapeLyricView from './LandscapeLyric';
-import Settings from '../setting/View';
+import { SettingsLandscape as Settings } from '../setting/View';
 import Playlist from '../playlist/View';
 import Playlists from '../playlists/Playlists';
 

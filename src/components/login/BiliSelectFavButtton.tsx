@@ -62,6 +62,7 @@ export default () => {
         options={favLists}
         onSubmit={onSubmit}
         onClose={() => hideDialog()}
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         renderOptionTitle={(val: any) => val.title}
       />
     </>

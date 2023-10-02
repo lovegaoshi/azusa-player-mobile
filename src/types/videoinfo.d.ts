@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 declare namespace NoxMediaInfo {
   /**
    * this interface serves

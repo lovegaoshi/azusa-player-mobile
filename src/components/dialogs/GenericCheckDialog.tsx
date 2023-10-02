@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useState } from 'react';
 import { Pressable, View, FlatList, StyleSheet } from 'react-native';
 import { Button, Dialog, Portal, Text, Checkbox } from 'react-native-paper';

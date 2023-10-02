@@ -30,6 +30,7 @@ declare namespace NoxTheme {
     gifs: Array<string>;
     backgroundImages: Array<string | backgroundImage>;
     backgroundImagesLandscape?: Array<string | backgroundImage>;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     colors: any;
     customColors: customColors;
     // https://callstack.github.io/react-native-paper/docs/components/IconButton/

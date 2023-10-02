@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Menu } from 'react-native-paper';
-import { Keyboard, Alert } from 'react-native';
+import { Alert } from 'react-native';
 import { useTranslation } from 'react-i18next';
 import TrackPlayer from 'react-native-track-player';
 
@@ -9,7 +9,6 @@ import useUpdatePlaylist from '@hooks/useUpdatePlaylist';
 import { CopiedPlaylistMenuItem } from '../../buttons/CopiedPlaylistButton';
 import { RenameSongMenuItem } from '../../buttons/RenameSongButton';
 import useSongOperations from '@hooks/useSongOperations';
-import logger from '@utils/Logger';
 import { addR128Gain, getR128Gain } from '@stores/appStore';
 import ABSliderMenu from './ABSliderMenu';
 import { songlistToTracklist } from '@utils/RNTPUtils';
@@ -46,7 +45,6 @@ export default ({
   setSongMenuVisible,
   songMenuSongIndexes,
   menuCoords = { x: 0, y: 0 },
-  handleSearch = () => undefined,
 }: Props) => {
   const { t } = useTranslation();
   const currentPlaylist = useNoxSetting(state => state.currentPlayingList);
@@ -55,9 +53,6 @@ export default ({
   const setCurrentPlayingId = useNoxSetting(state => state.setCurrentPlayingId);
   const setCurrentPlayingList = useNoxSetting(
     state => state.setCurrentPlayingList
-  );
-  const setExternalSearchText = useNoxSetting(
-    state => state.setExternalSearchText
   );
   const { updateSongIndex } = useUpdatePlaylist();
   const { startRadio, radioAvailable } = useSongOperations();
@@ -109,13 +104,6 @@ export default ({
     }
 
     setSongMenuVisible(false);
-  };
-
-  // do we even need this feature?
-  // if do id like this to be like AIMP3's
-  // track details page, in a seperate stack screen.
-  const songInfo = () => {
-    closeMenu();
   };
 
   const setR128Gain = (gain: number | null) => {

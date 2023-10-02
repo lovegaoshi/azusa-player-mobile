@@ -1,12 +1,5 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react';
-import {
-  View,
-  BackHandler,
-  StyleSheet,
-  Dimensions,
-  ImageBackground,
-  StyleProp,
-} from 'react-native';
+import { View, BackHandler, StyleSheet, ImageBackground } from 'react-native';
 import { FlashList } from '@shopify/flash-list';
 import Snackbar from 'react-native-snackbar';
 import { IconButton } from 'react-native-paper';
@@ -53,11 +46,7 @@ const SongBackground = (props: BackgroundProps) => {
   );
 };
 
-interface Props {
-  playlistViewStyle?: StyleProp<View>;
-}
-
-const PlaylistList = ({ playlistViewStyle }: Props) => {
+const PlaylistList = () => {
   const { t } = useTranslation();
   const setCurrentPlayingList = useNoxSetting(
     state => state.setCurrentPlayingList

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import Bottleneck from 'bottleneck';
 import bfetch from '../BiliFetch';
 import { wbiQuery } from '@stores/wbi';

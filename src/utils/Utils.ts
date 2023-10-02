@@ -1,6 +1,6 @@
 import Snackbar from 'react-native-snackbar';
 
-import logger from './Logger';
+import { logger } from './Logger';
 
 interface SnackbarMsg {
   updating: string;

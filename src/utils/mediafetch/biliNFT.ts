@@ -1,4 +1,4 @@
-import { logger } from '../Logger';
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import bfetch from '../BiliFetch';
 
 // see https://github.com/lovegaoshi/biliNFT

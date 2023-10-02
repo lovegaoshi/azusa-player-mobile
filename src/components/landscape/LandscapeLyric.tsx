@@ -5,6 +5,7 @@ import { useNoxSetting } from '@hooks/useSetting';
 import AlbumArt from '../player/TrackInfo/AlbumArt';
 
 interface Props {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   panelStyle?: any;
 }
 const LandscapeLyricView = ({ panelStyle }: Props) => {

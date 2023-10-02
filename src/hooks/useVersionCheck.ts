@@ -1,6 +1,7 @@
 import { useTranslation } from 'react-i18next';
 import { Linking } from 'react-native';
 import Snackbar from 'react-native-snackbar';
+// eslint-disable-next-line import/no-unresolved
 import { APPSTORE } from '@env';
 
 import { useNoxSetting } from './useSetting';

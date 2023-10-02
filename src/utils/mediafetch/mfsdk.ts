@@ -19,7 +19,7 @@ import * as qianqian from '@mfsdk/qianqian/index';
 // @ts-ignore
 import * as xmly from '@mfsdk/xmly/index';
 
-import logger from '../Logger';
+import { logger } from '../Logger';
 
 // This is exactly why users should NOT inject whatever scripts
 // into your app.
@@ -59,6 +59,7 @@ const IMusicToNoxMedia = (val: IMusic.IMusicItem, source: MUSICFREE) => {
 
 const genericSearch = async (
   query: string,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   module: any,
   source: MUSICFREE
 ): Promise<NoxMedia.Song[]> => {

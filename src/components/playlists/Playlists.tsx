@@ -1,7 +1,7 @@
 import React, { useRef, useState } from 'react';
 import { IconButton, Text, TouchableRipple } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
-import { Pressable, Dimensions, View, StyleSheet } from 'react-native';
+import { Pressable, View, StyleSheet } from 'react-native';
 import DraggableFlatList, {
   ScaleDecorator,
   RenderItemParams,
@@ -19,12 +19,7 @@ import ShuffleAllButton from '@components/playlists/ShuffleAllButton';
 import TimerButton from '@components/playlists/TimerButton';
 import PlaylistItem from '@components/playlists/PlaylistItem';
 
-interface Props {
-  flatListHeight?: number;
-}
-export default ({
-  flatListHeight = Dimensions.get('window').height - 330,
-}: Props) => {
+export default () => {
   const navigation = useNavigation();
   const currentPlaylist = useNoxSetting(state => state.currentPlaylist);
   const currentPlayingList = useNoxSetting(state => state.currentPlayingList);

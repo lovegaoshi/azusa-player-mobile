@@ -138,7 +138,7 @@ const checkAuthentication = async () => {
 };
 
 export const loginGitee = async (
-  callback: () => any = () => undefined,
+  callback: () => Promise<void> = async () => undefined,
   errorCallback = logger.error
 ) => {
   try {

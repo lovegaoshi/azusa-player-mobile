@@ -36,6 +36,7 @@ const paginatedFetch = ({
   });
 };
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const songFetch = (videoinfos: any[]) => {
   return videoinfos.map(videoinfo => {
     return SongTS({

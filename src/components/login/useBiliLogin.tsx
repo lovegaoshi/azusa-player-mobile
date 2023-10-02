@@ -1,9 +1,9 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import * as React from 'react';
 import CookieManager from '@react-native-cookies/cookies';
 import { useTranslation } from 'react-i18next';
 import Snackbar from 'react-native-snackbar';
 
-import { useNoxSetting } from '@hooks/useSetting';
 import { logger } from '@utils/Logger';
 import bfetch from '@utils/BiliFetch';
 import { addCookie } from '@utils/ChromeStorage';
@@ -36,6 +36,7 @@ const oauthKey = 'qrcode_key'; // 'oauthKey';
 /**
  * TODO: doesnt work! oh no!
  */
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const loginQRVerification = async () => {
   const verificationURL =
     'https://passport.bilibili.com/x/passport-login/web/sso/list?biliCSRF=';

@@ -1,10 +1,10 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import * as React from 'react';
 import CookieManager from '@react-native-cookies/cookies';
 import { useTranslation } from 'react-i18next';
 import Snackbar from 'react-native-snackbar';
 import md5 from 'md5';
 
-import { useNoxSetting } from '@hooks/useSetting';
 import { logger } from '@utils/Logger';
 import bfetch, { parseBodyParams } from '@utils/BiliFetch';
 import { addCookie } from '@utils/ChromeStorage';
@@ -239,7 +239,7 @@ const useBiliLogin = () => {
     const { key } = await getQRLoginReq();
 
     const res = await bfetch(
-      `https://passport.bilibili.com/x/passport-tv-login/h5/qrcode/confirm`,
+      'https://passport.bilibili.com/x/passport-tv-login/h5/qrcode/confirm',
       {
         method: 'POST',
         credentials: 'include',

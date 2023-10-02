@@ -1,8 +1,6 @@
-import * as React from 'react';
-
 import { useNoxSetting } from '@hooks/useSetting';
 import { CIDPREFIX } from '@utils/mediafetch/ytbvideo';
-import logger from '@utils/Logger';
+import { logger } from '@utils/Logger';
 import { SOURCE } from '@enums/MediaFetch';
 
 const useSongOperations = () => {

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useRef, useEffect } from 'react';
 import { Pressable, Animated, Easing } from 'react-native';
 import LottieView, { AnimationObject } from 'lottie-react-native';

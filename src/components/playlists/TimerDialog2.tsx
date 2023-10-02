@@ -63,11 +63,7 @@ interface Props {
   onSubmit?: () => void;
 }
 
-export default ({
-  visible,
-  onClose = () => undefined,
-  onSubmit = () => undefined,
-}: Props) => {
+export default ({ visible, onClose = () => undefined }: Props) => {
   const [isPlaying, setIsPlaying] = React.useState(false);
   const [duration, setDuration] = React.useState(1800);
   const [inputDuration, setInputDuration] = React.useState('3000');
@@ -76,9 +72,6 @@ export default ({
 
   const handleClose = () => {
     onClose();
-  };
-  const handleSubmit = () => {
-    onSubmit();
   };
 
   const CircleTimerWrapper = React.useCallback(

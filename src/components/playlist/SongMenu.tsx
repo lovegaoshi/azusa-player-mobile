@@ -6,8 +6,6 @@ import { useNoxSetting } from '@hooks/useSetting';
 import { CopiedPlaylistMenuItem } from '../buttons/CopiedPlaylistButton';
 import { RenameSongMenuItem } from '../buttons/RenameSongButton';
 import useSongOperations from '@hooks/useSongOperations';
-import logger from '@utils/Logger';
-
 enum ICONS {
   SEND_TO = 'playlist-plus',
   COPY_SONG_NAME = '',
@@ -44,9 +42,6 @@ export default ({
   const songMenuSongIndexes = useNoxSetting(state => state.songMenuSongIndexes);
   const currentPlaylist = useNoxSetting(state => state.currentPlaylist);
   const updatePlaylist = useNoxSetting(state => state.updatePlaylist);
-  const setExternalSearchText = useNoxSetting(
-    state => state.setExternalSearchText
-  );
   const setPlaylistSearchAutoFocus = useNoxSetting(
     state => state.setPlaylistSearchAutoFocus
   );
@@ -99,11 +94,6 @@ export default ({
     updatePlaylist(newPlaylist, [], []);
   };
 
-  // do we even want this feature anymore?
-  const reloadSongs = async () => {
-    return;
-  };
-
   const removeSongs = (banBVID = false) => {
     const songs = selectedSongs();
     // TODO: figure out reanimated...
@@ -113,22 +103,15 @@ export default ({
     console.log(songs);
     const newPlaylist = banBVID
       ? {
-        ...currentPlaylist,
-        blacklistedUrl: currentPlaylist.blacklistedUrl.concat(
-          songs.map(song => song.bvid)
-        ),
-      }
+          ...currentPlaylist,
+          blacklistedUrl: currentPlaylist.blacklistedUrl.concat(
+            songs.map(song => song.bvid)
+          ),
+        }
       : { ...currentPlaylist };
     updatePlaylist(newPlaylist, [], songs);
     setSongMenuVisible(false);
     resetChecked();
-  };
-
-  // do we even need this feature?
-  // if do id like this to be like AIMP3's
-  // track details page, in a seperate stack screen.
-  const songInfo = () => {
-    closeMenu();
   };
 
   return (
