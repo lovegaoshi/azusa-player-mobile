@@ -19,7 +19,7 @@ import {
 } from '../utils/ChromeStorage';
 import { DEFAULT_SETTING, STORAGE_KEYS } from '@enums/Storage';
 import { createStyle } from '../components/style';
-import { setPlayingList, initializePlaybackMode } from '../stores/playingList';
+import { setPlayingList } from '../stores/playingList';
 import type { NoxStorage } from '../types/storage';
 import { setPlayerSetting as setPlayerSettingVanilla } from '@stores/playerSettingStore';
 import {
@@ -36,6 +36,7 @@ interface initializedResults {
   cookies: { [key: string]: string };
   language?: string;
   lastPlayDuration: number;
+  playbackMode: string;
 }
 
 interface NoxSetting {
@@ -300,7 +301,6 @@ export const useNoxSetting = create<NoxSetting>((set, get) => ({
     setPlayingList(
       (val.playlists[val.lastPlaylistId[0]] || val.searchPlaylist).songList
     );
-    initializePlaybackMode(val.playerRepeat);
     set({ lyricMapping: val.lyricMapping });
 
     return {
@@ -311,6 +311,7 @@ export const useNoxSetting = create<NoxSetting>((set, get) => ({
       cookies: val.cookies,
       language: val.settings.language,
       lastPlayDuration: val.lastPlayDuration,
+      playbackMode: val.playerRepeat,
     };
   },
 
