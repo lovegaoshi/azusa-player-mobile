@@ -155,16 +155,16 @@ export async function PlaybackService() {
           const song = event.track.song as NoxMedia.Song;
           const updatedMetadata = await resolveAndCache(song);
           const currentTrack = await TrackPlayer.getActiveTrack();
-          await TrackPlayer.load({ ...currentTrack, ...updatedMetadata });
-          if (getState().playmode === NoxRepeatMode.REPEAT_TRACK) {
-            TrackPlayer.setRepeatMode(RepeatMode.Track);
-          }
+          await TrackPlayer.load({ ...currentTrack, ...updatedMetadata })
           if (playerErrored) {
             TrackPlayer.play();
           }
         } catch (e) {
           console.error('resolveURL failed', event.track, e);
         }
+      }
+      if (getState().playmode === NoxRepeatMode.REPEAT_TRACK) {
+        TrackPlayer.setRepeatMode(RepeatMode.Track);
       }
     }
   );
