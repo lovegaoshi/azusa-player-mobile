@@ -63,31 +63,28 @@ export default () => {
     </Pressable>
   );
 
-  const renderItem = ({
-    item,
-    drag,
-    isActive,
-  }: RenderItemParams<NoxMedia.Playlist>) => {
+  const renderItem = ({ item, drag, isActive }: RenderItemParams<string>) => {
+    const playlist = playlists[item];
     return (
       <ScaleDecorator>
         <TouchableRipple
           onLongPress={drag}
           disabled={isActive}
-          onPress={() => goToPlaylist(item.id)}
+          onPress={() => goToPlaylist(item)}
           style={[
             {
               backgroundColor:
-                currentPlaylist.id === item?.id
+                currentPlaylist.id === item
                   ? playerStyle.customColors.playlistDrawerBackgroundColor
                   : undefined,
             },
           ]}
         >
           <PlaylistItem
-            item={item}
+            item={playlist}
             confirmOnDelete={confirmOnDelete}
             leadColor={
-              currentPlayingList.id === item?.id
+              currentPlayingList.id === item
                 ? playerStyle.colors.primary //customColors.playlistDrawerBackgroundColor
                 : undefined
             }
@@ -157,11 +154,9 @@ export default () => {
       <View style={{ flex: 1 }}>
         <DraggableFlatList
           style={[styles.draggableFlatList]}
-          data={playlistIds.map(val => playlists[val])}
-          onDragEnd={({ data }) =>
-            setPlaylistIds(data.map(playlist => playlist.id))
-          }
-          keyExtractor={item => item?.id}
+          data={playlistIds}
+          onDragEnd={({ data }) => setPlaylistIds(data)}
+          keyExtractor={item => item}
           renderItem={renderItem}
         />
       </View>
