@@ -1,18 +1,15 @@
 import React, { useState } from 'react';
 import { useWindowDimensions } from 'react-native';
 import TrackPlayer, { Track } from 'react-native-track-player';
-import { useStore } from 'zustand';
 
 import { useNoxSetting } from '@hooks/useSetting';
 import { LyricView } from './Lyric';
-import appStore from '@stores/appStore';
 
 const PIPLyricView = () => {
   const [currentTrack, setCurrentTrack] = useState<Track | undefined>(
     undefined
   );
   const currentPlayingId = useNoxSetting(state => state.currentPlayingId);
-  const PIPMode = useStore(appStore, state => state.pipMode);
   const { height } = useWindowDimensions();
 
   React.useEffect(() => {
@@ -22,7 +19,7 @@ const PIPLyricView = () => {
     setLikedStatus();
   }, [currentPlayingId]);
 
-  return PIPMode && currentTrack ? (
+  return currentTrack ? (
     <LyricView
       track={currentTrack}
       artist={'n/a'}

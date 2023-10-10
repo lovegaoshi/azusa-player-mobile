@@ -54,20 +54,10 @@ export default (props: any) => {
   // HACK: I know its bad! But somehow this hook isnt updating in its own
   // useEffects...
   const { buildBrowseTree } = useAAPlayback();
-  const PIPMode = useStore(appStore, state => state.pipMode);
 
   useEffect(() => {
     buildBrowseTree();
   }, [playlistIds.length]);
-
-  useEffect(() => {
-    if (PIPMode) {
-      navigation.navigate(ViewEnum.LYRICS as never);
-      navigation.dispatch(DrawerActions.closeDrawer());
-    } else {
-      navigation.goBack();
-    }
-  }, [PIPMode]);
 
   useEffect(() => {
     function deepLinkHandler(data: { url: string }) {
@@ -85,9 +75,7 @@ export default (props: any) => {
     };
   }, []);
 
-  return PIPMode ? (
-    <></>
-  ) : (
+  return (
     <View {...props} style={{ flex: 1 }}>
       <View style={styles.topPadding} />
       <BiliCard backgroundURI={playerStyle.biliGarbCard}>

@@ -2,12 +2,16 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 import React, { useEffect } from 'react';
 import { Linking, SafeAreaView, StyleSheet } from 'react-native';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import { useStore } from 'zustand';
 
 import AzusaPlayer from './AzusaPlayer';
 import AzusaPlayerLandscape from './components/landscape/AzusaPlayerLandscape';
 import AppOpenSplash from './components/background/AppOpenSplash';
 import { useSetupPlayer } from './components/player/View';
 import { useIsLandscape } from './hooks/useOrientation';
+import appStore from '@stores/appStore';
+import PIPLyricView from './components/player/PIPLyric';
+import MainBackground from './components/background/MainBackground';
 
 const useSplash = (duration = 1000) => {
   const [isReady, setIsReady] = React.useState(false);
@@ -24,6 +28,7 @@ export default function App() {
   const isSplashReady = useSplash(__DEV__ ? 1 : 2500);
   const isPlayerReady = useSetupPlayer();
   const isLandscape = useIsLandscape();
+  const PIPMode = useStore(appStore, state => state.pipMode);
 
   useEffect(() => {
     function deepLinkHandler(data: { url: string }) {
@@ -52,7 +57,15 @@ export default function App() {
   return (
     <GestureHandlerRootView style={styles.gestureContainer}>
       <SafeAreaProvider>
-        {isLandscape ? <AzusaPlayerLandscape /> : <AzusaPlayer />}
+        <MainBackground>
+          {PIPMode ? (
+            <PIPLyricView />
+          ) : isLandscape ? (
+            <AzusaPlayerLandscape />
+          ) : (
+            <AzusaPlayer />
+          )}
+        </MainBackground>
       </SafeAreaProvider>
     </GestureHandlerRootView>
   );
