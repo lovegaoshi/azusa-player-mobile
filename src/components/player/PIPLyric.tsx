@@ -4,6 +4,7 @@ import TrackPlayer, { Track } from 'react-native-track-player';
 
 import { useNoxSetting } from '@hooks/useSetting';
 import { LyricView } from './Lyric';
+import usePlayerControls from '@components/player/usePlayerControls';
 
 const PIPLyricView = () => {
   const [currentTrack, setCurrentTrack] = useState<Track | undefined>(
@@ -11,6 +12,7 @@ const PIPLyricView = () => {
   );
   const currentPlayingId = useNoxSetting(state => state.currentPlayingId);
   const { height } = useWindowDimensions();
+  const _ = usePlayerControls();
 
   React.useEffect(() => {
     const setLikedStatus = async () => {
