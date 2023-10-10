@@ -13,7 +13,6 @@ import {
 } from 'react-native-paper';
 import merge from 'deepmerge';
 
-import MainBackground from '../background/MainBackground';
 import { useNoxSetting } from '../../hooks/useSetting';
 import '../../localization/i18n';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
@@ -40,42 +39,40 @@ const AzusaPlayer = () => {
   const playerPanelWidth = width / 2 - actionPanelWidth;
 
   return (
-    <MainBackground>
-      <PaperProvider
+    <PaperProvider
+      theme={{
+        ...defaultTheme,
+        colors: playerStyle.colors,
+      }}
+    >
+      <NavigationContainer
         theme={{
           ...defaultTheme,
-          colors: playerStyle.colors,
+          colors: {
+            ...defaultTheme.colors,
+            ...playerStyle.colors,
+            // HACK: compensate for my bad design. now applying background
+            // at MainBackground level instaed of here.
+            background: undefined,
+          },
         }}
       >
-        <NavigationContainer
-          theme={{
-            ...defaultTheme,
-            colors: {
-              ...defaultTheme.colors,
-              ...playerStyle.colors,
-              // HACK: compensate for my bad design. now applying background
-              // at MainBackground level instaed of here.
-              background: undefined,
-            },
+        <View
+          style={{
+            flex: 1,
+            // Paddings to handle safe area
+            paddingTop: insets.top,
+            paddingLeft: insets.left,
+            paddingRight: insets.right,
+            flexDirection: 'row',
           }}
         >
-          <View
-            style={{
-              flex: 1,
-              // Paddings to handle safe area
-              paddingTop: insets.top,
-              paddingLeft: insets.left,
-              paddingRight: insets.right,
-              flexDirection: 'row',
-            }}
-          >
-            <LandscapeActions panelWidth={actionPanelWidth} />
-            <LandscapePlayerPanel panelWidth={playerPanelWidth} />
-            <LandscapePlaylistPanel panelWidth={width / 2} />
-          </View>
-        </NavigationContainer>
-      </PaperProvider>
-    </MainBackground>
+          <LandscapeActions panelWidth={actionPanelWidth} />
+          <LandscapePlayerPanel panelWidth={playerPanelWidth} />
+          <LandscapePlaylistPanel panelWidth={width / 2} />
+        </View>
+      </NavigationContainer>
+    </PaperProvider>
   );
 };
 

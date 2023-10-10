@@ -19,14 +19,12 @@ import { useTranslation } from 'react-i18next';
 import { Player } from './components/player/View';
 import Playlist from './components/playlist/View';
 import PlayerBottomPanel from './components/player/PlayerProgressControls';
-import MainBackground from './components/background/MainBackground';
 import { useNoxSetting } from './hooks/useSetting';
 import PlaylistDrawer from './components/playlists/View';
 import { ViewEnum } from './enums/View';
 import Settings from './components/setting/View';
 import DummySettings from './components/setting/DummySettings';
 import './localization/i18n';
-import PIPLyricView from './components/player/PIPLyric';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { ICONS } from '@enums/Icons';
 
@@ -71,78 +69,67 @@ const AzusaPlayer = () => {
   const insets = useSafeAreaInsets();
 
   return (
-    <MainBackground>
-      <PaperProvider
+    <PaperProvider
+      theme={{
+        ...defaultTheme,
+        colors: playerStyle.colors,
+      }}
+    >
+      <NavigationContainer
         theme={{
           ...defaultTheme,
-          colors: playerStyle.colors,
+          colors: {
+            ...defaultTheme.colors,
+            ...playerStyle.colors,
+            // HACK: compensate for my bad design. now applying background
+            // at MainBackground level instaed of here.
+            background: undefined,
+          },
         }}
       >
-        <NavigationContainer
-          theme={{
-            ...defaultTheme,
-            colors: {
-              ...defaultTheme.colors,
-              ...playerStyle.colors,
-              // HACK: compensate for my bad design. now applying background
-              // at MainBackground level instaed of here.
-              background: undefined,
-            },
+        <View
+          style={{
+            flex: 1,
+            // Paddings to handle safe area
+            paddingTop: insets.top,
+            paddingLeft: insets.left,
+            paddingRight: insets.right,
           }}
         >
-          <View
-            style={{
-              flex: 1,
-              // Paddings to handle safe area
-              paddingTop: insets.top,
-              paddingLeft: insets.left,
-              paddingRight: insets.right,
-            }}
+          <Drawer.Navigator
+            initialRouteName={ViewEnum.PLAYER_HOME}
+            drawerContent={PlaylistDrawer}
           >
-            <Drawer.Navigator
-              initialRouteName={ViewEnum.PLAYER_HOME}
-              drawerContent={PlaylistDrawer}
-            >
-              <Drawer.Screen
-                name={ViewEnum.PLAYER_HOME}
-                options={{
-                  drawerIcon: () => <IconButton icon={ICONS.homeScreen} />,
-                  title: String(t('appDrawer.homeScreenName')),
-                  header: () => null,
-                }}
-                component={NoxPlayer}
-              />
-              <Drawer.Screen
-                name={ViewEnum.EXPORE}
-                options={{
-                  drawerIcon: () => <IconButton icon={ICONS.exploreScreen} />,
-                  title: String(t('appDrawer.exploreScreenName')),
-                }}
-                component={DummySettings}
-              />
-              <Drawer.Screen
-                name={ViewEnum.SETTINGS}
-                options={{
-                  drawerIcon: () => <IconButton icon={ICONS.settingScreen} />,
-                  title: String(t('appDrawer.settingScreenName')),
-                  header: () => null,
-                }}
-                component={Settings}
-              />
-              <Drawer.Screen
-                name={ViewEnum.LYRICS}
-                options={{
-                  drawerIcon: () => <IconButton icon="cog" />,
-                  title: String(t('appDrawer.settingScreenName')),
-                  header: () => null,
-                }}
-                component={PIPLyricView}
-              />
-            </Drawer.Navigator>
-          </View>
-        </NavigationContainer>
-      </PaperProvider>
-    </MainBackground>
+            <Drawer.Screen
+              name={ViewEnum.PLAYER_HOME}
+              options={{
+                drawerIcon: () => <IconButton icon={ICONS.homeScreen} />,
+                title: String(t('appDrawer.homeScreenName')),
+                header: () => null,
+              }}
+              component={NoxPlayer}
+            />
+            <Drawer.Screen
+              name={ViewEnum.EXPORE}
+              options={{
+                drawerIcon: () => <IconButton icon={ICONS.exploreScreen} />,
+                title: String(t('appDrawer.exploreScreenName')),
+              }}
+              component={DummySettings}
+            />
+            <Drawer.Screen
+              name={ViewEnum.SETTINGS}
+              options={{
+                drawerIcon: () => <IconButton icon={ICONS.settingScreen} />,
+                title: String(t('appDrawer.settingScreenName')),
+                header: () => null,
+              }}
+              component={Settings}
+            />
+          </Drawer.Navigator>
+        </View>
+      </NavigationContainer>
+    </PaperProvider>
   );
 };
 
