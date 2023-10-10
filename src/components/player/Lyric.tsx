@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import {
   Modal,
@@ -15,7 +16,7 @@ import { IconButton, TextInput } from 'react-native-paper';
 import { searchLyricOptions, searchLyric } from '@utils/Data';
 import { reExtractSongName } from '@stores/appStore';
 import { useNoxSetting } from '@hooks/useSetting';
-import logger from '@utils/Logger';
+import { logger } from '@utils/Logger';
 
 const LYRIC_OFFSET_INTERVAL = 0.5;
 
@@ -80,7 +81,9 @@ export const LyricView = ({
 }: LyricViewProps) => {
   const { position } = useProgress();
   const [lrc, setLrc] = useState('正在加载歌词...');
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [lrcOptions, setLrcOptions] = useState<any[]>([]);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [lrcOption, setLrcOption] = useState<any>();
   const [modalVisible, setModalVisible] = useState(false);
   const [lyricSearchModalVisible, setLyricSearchModalVisible] = useState(false);

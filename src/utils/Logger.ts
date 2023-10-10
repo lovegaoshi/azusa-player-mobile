@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { createStore } from 'zustand/vanilla';
 
 export enum LOGLEVEL {

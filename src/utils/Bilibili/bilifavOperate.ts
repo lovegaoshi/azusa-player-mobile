@@ -16,6 +16,7 @@ const BILI_CREFAVLIST_API = 'https://api.bilibili.com/x/v3/fav/folder/add';
 export interface GETFAVLIST_RES {
   id: number;
   title: string;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   [key: string]: any;
 }
 
@@ -47,7 +48,7 @@ export const createBiliFavlist = async (title: string) => {
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded',
     },
-    referrer: `https://www.bilibili.com/`,
+    referrer: 'https://www.bilibili.com/',
     body: {
       title,
       csrf: biliJct,
@@ -71,7 +72,7 @@ const getOrInsertBiliFavlist = async (
 export const addToBiliFavlist = async (
   favlistid: string,
   bvids: string[],
-  progressEmitter: (val: number) => void = (val: number) => undefined
+  progressEmitter: (val: number) => void = () => undefined
 ) => {
   const sendBVLikeEmitter = async (
     bvid: string,

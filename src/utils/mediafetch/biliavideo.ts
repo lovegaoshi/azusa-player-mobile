@@ -36,6 +36,7 @@ const fetchVideoInfoRaw = async (aid: string) => {
       data.videos,
       data.pic,
       data.owner,
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       data.pages.map((s: any) => {
         return {
           bvid: data.bvid,
@@ -48,6 +49,7 @@ const fetchVideoInfoRaw = async (aid: string) => {
       data.duration
     );
     return v;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (error: any) {
     logger.error(error.message);
     logger.warn(`Some issue happened when fetching ${aid}`);

@@ -13,7 +13,7 @@ import {
 import type { NoxStorage } from '../types/storage';
 import rejson from '@utils/rejson.json';
 import { LoadJSONRegExtractors } from '@utils/re';
-import logger from '@utils/Logger';
+import { logger } from '@utils/Logger';
 
 interface AppStore {
   pipMode: boolean;

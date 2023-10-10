@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { useEffect } from 'react';
 import { IconButton, Divider, Text, TouchableRipple } from 'react-native-paper';
 import { DrawerActions, useNavigation } from '@react-navigation/native';
 import { View, ImageBackground, StyleSheet, Linking } from 'react-native';
@@ -9,7 +10,7 @@ import { useNoxSetting } from '@hooks/useSetting';
 import useAAPlayback from '@hooks/useAAPlayback';
 import { ViewEnum } from '@enums/View';
 import appStore from '@stores/appStore';
-import logger from '@utils/Logger';
+import { logger } from '@utils/Logger';
 import Playlists from './Playlists';
 
 interface Props {
@@ -33,6 +34,7 @@ const RenderDrawerItem = ({ view, icon, text }: Props) => {
   );
 };
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const BiliCard = (props: any) => {
   if (props.backgroundURI) {
     return (
@@ -44,6 +46,7 @@ const BiliCard = (props: any) => {
   return <>{props.children}</>;
 };
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export default (props: any) => {
   const navigation = useNavigation();
   const playlistIds = useNoxSetting(state => state.playlistIds);

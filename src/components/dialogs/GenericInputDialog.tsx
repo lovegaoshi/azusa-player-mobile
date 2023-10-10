@@ -66,7 +66,7 @@ export default ({
         <FlatList
           style={styles.flatList}
           data={options}
-          renderItem={({ item, index }) => (
+          renderItem={({ item }) => (
             <TextInput
               label={item}
               value={currentInput[item]}

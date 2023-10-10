@@ -4,15 +4,12 @@ import { usePlaybackState } from 'react-native-track-player';
 
 import { PlaybackError } from './PlaybackError';
 import { PlayPauseButton } from './PlayPauseButton';
-import { useNoxSetting } from '@hooks/useSetting';
 import ThumbsUpButton from './ThumbsUpButton';
 import PlayerModeButton from './PlayerModeButton';
 import usePlayerControls from './usePlayerControls';
 import LottieButton from '../buttons/LottieButton';
 
 export const PlayerControls: React.FC = () => {
-  const playerStyle = useNoxSetting(state => state.playerStyle);
-
   const { performSkipToNext, performSkipToPrevious } = usePlayerControls();
   const playback = usePlaybackState();
 

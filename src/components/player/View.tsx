@@ -17,7 +17,7 @@ import PlayerTopInfo from './PlayerTopInfo';
 import { useNoxSetting } from '@hooks/useSetting';
 import { initPlayerObject } from '@utils/ChromeStorage';
 import { initCache } from '@utils/Cache';
-import { getCurrentTPQueue } from '@stores/playingList';
+import { getCurrentTPQueue, initializePlaybackMode } from '@stores/playingList';
 import useVersionCheck from '@hooks/useVersionCheck';
 import { songlistToTracklist } from '@utils/RNTPUtils';
 
@@ -57,6 +57,7 @@ export function useSetupPlayer() {
         storedPlayerSetting,
         language,
         lastPlayDuration,
+        playbackMode,
       } = await initPlayer(await initPlayerObject());
       initCache({ max: storedPlayerSetting.cacheSize });
       /**
@@ -70,6 +71,7 @@ export function useSetupPlayer() {
         lastPlayDuration,
       };
       await SetupService(serviceOptions);
+      initializePlaybackMode(playbackMode);
       updateVersion(storedPlayerSetting);
       checkVersion(true, storedPlayerSetting);
       if (unmounted) return;

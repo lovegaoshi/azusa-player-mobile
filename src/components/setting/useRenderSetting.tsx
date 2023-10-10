@@ -79,6 +79,7 @@ const BooleanSetting = ({
     state => state.togglePlaylistShouldReRender
   );
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const saveSettings = (toggled: { [key: string]: any }) => {
     setPlayerSetting(toggled);
   };

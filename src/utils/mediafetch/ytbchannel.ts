@@ -1,9 +1,9 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { get_playlist } from 'libmuse';
 
 import { regexFetchProps } from './generic';
-import { fetchAudioInfo, CIDPREFIX } from './ytbvideo';
+import { CIDPREFIX } from './ytbvideo';
 import SongTS from '@objects/Song';
-import logger from '../Logger';
 import { SOURCE } from '@enums/MediaFetch';
 
 const musePlaylistItemToNoxSong = (val: any, data: any) => {
@@ -56,11 +56,7 @@ const fetchInnerTunePlaylist = async (
     .filter((val): val is NoxMedia.Song => val !== undefined);
 };
 
-const regexFetch = async ({
-  reExtracted,
-  progressEmitter = () => undefined,
-  favList = [],
-}: regexFetchProps) => {
+const regexFetch = async ({ reExtracted, favList = [] }: regexFetchProps) => {
   const results = await fetchInnerTunePlaylist(
     // fetchYTPlaylist(
     reExtracted[1],

@@ -18,7 +18,6 @@ const usePlayback = () => {
   const { t } = useTranslation();
   const currentPlayingList = useNoxSetting(state => state.currentPlayingList);
   const playlists = useNoxSetting(state => state.playlists);
-  const playlistIds = useNoxSetting(state => state.playlistIds);
   const setCurrentPlayingId = useNoxSetting(state => state.setCurrentPlayingId);
   const setCurrentPlayingList = useNoxSetting(
     state => state.setCurrentPlayingList
@@ -157,6 +156,7 @@ const usePlayback = () => {
 
 export const usePlaybackListener = () => {
   const playerSetting = useNoxSetting(state => state.playerSetting);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [newMetadata, setNewMetadata] = useState<any>({});
 
   useEffect(() => {

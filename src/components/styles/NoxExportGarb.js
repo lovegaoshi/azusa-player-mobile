@@ -1,3 +1,5 @@
+/* eslint-disable node/no-extraneous-import */
+/* eslint-disable node/no-unsupported-features/es-syntax */
 import { ArgumentParser } from 'argparse';
 import axios from 'axios';
 import fs from 'fs';

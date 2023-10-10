@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import Bottleneck from 'bottleneck';
 
 export const DEFAULT_UA =

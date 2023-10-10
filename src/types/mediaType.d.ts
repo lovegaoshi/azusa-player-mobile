@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /** 音乐 */
 declare namespace IMusic {
   interface IMusicItem {

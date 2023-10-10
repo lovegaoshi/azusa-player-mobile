@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { Linking, StyleSheet, View } from 'react-native';
 import { IconButton } from 'react-native-paper';
-import { useNavigation, ParamListBase } from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
 
 import { ICONS } from '@enums/Icons';
 import RandomGIFButton from '../buttons/RandomGIF';

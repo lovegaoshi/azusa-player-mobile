@@ -16,7 +16,9 @@ interface Props {
   track?: Track;
   windowWidth?: number;
   windowHeight?: number;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   albumArtStyle?: any;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   lyricStyle?: any;
 }
 const AlbumArt: React.FC<Props> = ({
@@ -85,8 +87,8 @@ const AlbumArt: React.FC<Props> = ({
               playerSetting.hideCoverInMobile
                 ? 0
                 : {
-                  uri: `${track?.artwork}`,
-                }
+                    uri: `${track?.artwork}`,
+                  }
             }
           />
         </Animated.View>

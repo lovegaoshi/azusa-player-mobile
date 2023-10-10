@@ -1,7 +1,7 @@
 import React, { useRef, useState } from 'react';
 import { IconButton, Text, TouchableRipple } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
-import { Pressable, Dimensions, View, StyleSheet } from 'react-native';
+import { Pressable, View, StyleSheet } from 'react-native';
 import DraggableFlatList, {
   ScaleDecorator,
   RenderItemParams,
@@ -19,12 +19,7 @@ import ShuffleAllButton from '@components/playlists/ShuffleAllButton';
 import TimerButton from '@components/playlists/TimerButton';
 import PlaylistItem from '@components/playlists/PlaylistItem';
 
-interface Props {
-  flatListHeight?: number;
-}
-export default ({
-  flatListHeight = Dimensions.get('window').height - 330,
-}: Props) => {
+export default () => {
   const navigation = useNavigation();
   const currentPlaylist = useNoxSetting(state => state.currentPlaylist);
   const currentPlayingList = useNoxSetting(state => state.currentPlayingList);
@@ -68,31 +63,28 @@ export default ({
     </Pressable>
   );
 
-  const renderItem = ({
-    item,
-    drag,
-    isActive,
-  }: RenderItemParams<NoxMedia.Playlist>) => {
+  const renderItem = ({ item, drag, isActive }: RenderItemParams<string>) => {
+    const playlist = playlists[item];
     return (
       <ScaleDecorator>
         <TouchableRipple
           onLongPress={drag}
           disabled={isActive}
-          onPress={() => goToPlaylist(item.id)}
+          onPress={() => goToPlaylist(item)}
           style={[
             {
               backgroundColor:
-                currentPlaylist.id === item?.id
+                currentPlaylist.id === item
                   ? playerStyle.customColors.playlistDrawerBackgroundColor
                   : undefined,
             },
           ]}
         >
           <PlaylistItem
-            item={item}
+            item={playlist}
             confirmOnDelete={confirmOnDelete}
             leadColor={
-              currentPlayingList.id === item?.id
+              currentPlayingList.id === item
                 ? playerStyle.colors.primary //customColors.playlistDrawerBackgroundColor
                 : undefined
             }
@@ -162,11 +154,9 @@ export default ({
       <View style={{ flex: 1 }}>
         <DraggableFlatList
           style={[styles.draggableFlatList]}
-          data={playlistIds.map(val => playlists[val])}
-          onDragEnd={({ data }) =>
-            setPlaylistIds(data.map(playlist => playlist.id))
-          }
-          keyExtractor={item => item?.id}
+          data={playlistIds}
+          onDragEnd={({ data }) => setPlaylistIds(data)}
+          keyExtractor={item => item}
           renderItem={renderItem}
         />
       </View>

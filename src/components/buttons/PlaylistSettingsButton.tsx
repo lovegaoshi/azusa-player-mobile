@@ -14,7 +14,7 @@ interface menuProps {
 
 export default ({
   disabled = false,
-  onSubmit = (playlist: NoxMedia.Playlist) => undefined,
+  onSubmit = () => undefined,
   onCancel = () => undefined,
 }: menuProps) => {
   const { t } = useTranslation();

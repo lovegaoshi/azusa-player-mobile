@@ -2,7 +2,6 @@ import { regexFetchProps } from './generic';
 import { CIDPREFIX } from './ytbvideo';
 import SongTS from '@objects/Song';
 import { timestampToSeconds } from '../Utils';
-import logger from '../Logger';
 import { SOURCE } from '@enums/MediaFetch';
 
 const fetchYTPlaylist = async (
@@ -20,31 +19,35 @@ const fetchYTPlaylist = async (
     throw Error();
   }
   const data = JSON.parse(`${ytInitialData[1]}`);
-  return data.contents.twoColumnWatchNextResults.playlist.playlist.contents
-    .map((val: any, index: number) => [
-      SongTS({
-        cid: `${CIDPREFIX}-${val.playlistPanelVideoRenderer.videoId}`,
-        bvid: val.playlistPanelVideoRenderer.videoId,
-        name: val.playlistPanelVideoRenderer.title.simpleText,
-        nameRaw: val.playlistPanelVideoRenderer.title.simpleText,
-        singer: val.playlistPanelVideoRenderer.shortBylineText.runs[0].text,
-        singerId:
-          val.playlistPanelVideoRenderer.shortBylineText.runs[0]
-            .navigationEndpoint.browseEndpoint.browseId,
-        cover:
-          val.playlistPanelVideoRenderer.thumbnail.thumbnails[
-            val.playlistPanelVideoRenderer.thumbnail.thumbnails.length - 1
-          ].url,
-        lyric: '',
-        page: index,
-        duration: timestampToSeconds(
-          val.playlistPanelVideoRenderer.lengthText.simpleText
-        ),
-        album: data.contents.twoColumnWatchNextResults.playlist.playlist.title,
-        source: SOURCE.ytbvideo,
-      }),
-    ])
-    .filter((val: NoxMedia.Song) => !favList.includes(val.bvid));
+  return (
+    data.contents.twoColumnWatchNextResults.playlist.playlist.contents
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      .map((val: any, index: number) => [
+        SongTS({
+          cid: `${CIDPREFIX}-${val.playlistPanelVideoRenderer.videoId}`,
+          bvid: val.playlistPanelVideoRenderer.videoId,
+          name: val.playlistPanelVideoRenderer.title.simpleText,
+          nameRaw: val.playlistPanelVideoRenderer.title.simpleText,
+          singer: val.playlistPanelVideoRenderer.shortBylineText.runs[0].text,
+          singerId:
+            val.playlistPanelVideoRenderer.shortBylineText.runs[0]
+              .navigationEndpoint.browseEndpoint.browseId,
+          cover:
+            val.playlistPanelVideoRenderer.thumbnail.thumbnails[
+              val.playlistPanelVideoRenderer.thumbnail.thumbnails.length - 1
+            ].url,
+          lyric: '',
+          page: index,
+          duration: timestampToSeconds(
+            val.playlistPanelVideoRenderer.lengthText.simpleText
+          ),
+          album:
+            data.contents.twoColumnWatchNextResults.playlist.playlist.title,
+          source: SOURCE.ytbvideo,
+        }),
+      ])
+      .filter((val: NoxMedia.Song) => !favList.includes(val.bvid))
+  );
 };
 const regexFetch = async ({
   reExtracted,

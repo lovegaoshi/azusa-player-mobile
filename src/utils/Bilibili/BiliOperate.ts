@@ -150,5 +150,6 @@ export const biliSuggest = async (bvid: string) => {
   logger.debug(`fetching biliSuggest wiht ${bvid}`);
   const res = await bfetch(BILI_RELATED_API.replace('{bvid}', bvid)),
     json = await res.json();
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   return json.data as any[];
 };

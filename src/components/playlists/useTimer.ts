@@ -2,7 +2,6 @@
  * this is the zustand version of timerContext in noxplayer. replace there to this.
  */
 
-import React, { useEffect } from 'react';
 import { create } from 'zustand';
 import TrackPlayer from 'react-native-track-player';
 import BackgroundTimer from 'react-native-background-timer';
@@ -44,11 +43,11 @@ const timerStore = create<TimerStore>((set, get) => ({
   countdown: () => {
     const seconds = get().seconds;
     const minutes = get().minutes;
-    if (seconds > 0) set(state => ({ seconds: seconds - 1 }));
+    if (seconds > 0) set(() => ({ seconds: seconds - 1 }));
     if (seconds <= 0) {
       if (minutes > 0) {
         set({ seconds: 59 });
-        set(state => ({ minutes: minutes - 1 }));
+        set(() => ({ minutes: minutes - 1 }));
         return false;
       }
       return true;

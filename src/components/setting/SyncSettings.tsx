@@ -2,7 +2,6 @@ import * as React from 'react';
 import { View, StyleSheet } from 'react-native';
 import { Button } from 'react-native-paper';
 import { useTranslation } from 'react-i18next';
-import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 
 import { useNoxSetting } from '@hooks/useSetting';
 import GenericSelectDialog from '../dialogs/GenericSelectDialog';
@@ -44,11 +43,7 @@ const SyncButton = ({ location, restoreFromUint8Array }: SyncInterface) => {
   }
 };
 
-interface Props {
-  navigation: NativeStackNavigationProp<any>;
-}
-
-export default ({ navigation }: Props) => {
+export default () => {
   const { t } = useTranslation();
   const playerStyle = useNoxSetting(state => state.playerStyle);
   const playerSetting = useNoxSetting(state => state.playerSetting);

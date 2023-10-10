@@ -1,4 +1,3 @@
-// TODO: migrate to TS.
 import { setSongBiliShazamed } from '@objects/Song';
 import bfetch from '../BiliFetch';
 import { biliTagApiLimiter } from './throttle';
@@ -49,7 +48,7 @@ const fetchVideoTagPromiseRaw = async ({ bvid, cid }: ids) => {
 export const biliShazamOnSonglist = async (
   songlist: NoxMedia.Song[],
   forced = false,
-  progressEmitter: (val: number) => void = (val: number) => undefined
+  progressEmitter: (val: number) => void = () => undefined
 ) => {
   const newSongList = songlist.map((song, index) => {
     if (song.biliShazamedName === undefined || forced) {

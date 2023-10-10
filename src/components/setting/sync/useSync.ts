@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { useState } from 'react';
 import Snackbar from 'react-native-snackbar';
 import { useTranslation } from 'react-i18next';
 import { Alert } from 'react-native';

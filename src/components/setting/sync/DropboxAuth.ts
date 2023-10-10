@@ -1,8 +1,11 @@
 import { Dropbox as _Dropbox, files } from 'dropbox';
 import { authorize } from 'react-native-app-auth';
-// @ts-ignore: Unreachable code error
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore: dropbox didnt have fileBlob in their sdk anywhere but UPGRADING.md
+// eslint-disable-next-line import/no-unresolved
 import { getArrayBufferForBlob } from 'react-native-blob-jsi-helper';
 
+// eslint-disable-next-line import/no-unresolved
 import { DROPBOX_KEY, DROPBOX_SECRET } from '@env';
 import { logger } from '@utils/Logger';
 import GenericSyncButton, { GenericProps } from './GenericSyncButton';
@@ -18,7 +21,7 @@ const config = {
   scopes: [],
   serviceConfiguration: {
     authorizationEndpoint: 'https://www.dropbox.com/oauth2/authorize',
-    tokenEndpoint: `https://www.dropbox.com/oauth2/token`,
+    tokenEndpoint: 'https://www.dropbox.com/oauth2/token',
   },
 };
 
@@ -107,6 +110,7 @@ const download = async (fpath = DEFAULT_FILE_PATH) => {
     return null;
   }
   const downloadedFile = await dbx.filesDownload({ path: fpath });
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-ignore: dropbox didnt have fileBlob in their sdk anywhere but UPGRADING.md
   const blob = getArrayBufferForBlob(downloadedFile.result.fileBlob);
   return new Uint8Array(blob);
@@ -155,7 +159,7 @@ const checkAuthentication = async () => {
  * @returns
  */
 export const loginDropbox = async (
-  callback: () => any = () => undefined,
+  callback: () => Promise<void> = async () => undefined,
   errorCallback = logger.error
 ) => {
   try {

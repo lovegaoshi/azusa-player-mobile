@@ -19,6 +19,7 @@ interface ABSRef {
   range: [number, number];
 }
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const ABSlider = React.forwardRef<ABSRef, Props>(({ song }: Props, ref) => {
   const { duration } = useProgress();
   const playerStyle = useNoxSetting(state => state.playerStyle);

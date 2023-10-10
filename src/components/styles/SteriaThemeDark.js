@@ -1,3 +1,4 @@
+// eslint-disable-next-line node/no-unsupported-features/es-syntax
 export default {
   metaData: {
     themeName: 'VV播放器（暗）',

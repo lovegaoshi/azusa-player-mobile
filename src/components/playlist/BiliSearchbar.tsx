@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useState, useEffect, useCallback } from 'react';
 import { ProgressBar, Searchbar } from 'react-native-paper';
 import {
@@ -46,8 +47,9 @@ export default ({
   const setExternalSearchText = useNoxSetting(
     state => state.setExternalSearchText
   );
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [sharedData, setSharedData] = useState<any>(null);
-  const [sharedMimeType, setSharedMimeType] = useState<string | null>(null);
+  const [, setSharedMimeType] = useState<string | null>(null);
   const { playFromPlaylist } = usePlayback();
   const [dialogOpen, setDialogOpen] = useState(false);
   const [menuCoords, setMenuCoords] = useState<NoxTheme.coordinates>({
@@ -89,7 +91,7 @@ export default ({
       return;
     }
 
-    const { mimeType, data, extraData } = item;
+    const { mimeType, data } = item;
     if (data === sharedData) return;
     setSharedData(data);
     setSharedMimeType(mimeType);

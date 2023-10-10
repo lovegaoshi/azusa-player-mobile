@@ -1,7 +1,6 @@
-import React, { useState } from 'react';
-import { Button, Dialog, Portal, TextInput } from 'react-native-paper';
+import React from 'react';
+import { Button, Dialog, Portal } from 'react-native-paper';
 import { useTranslation } from 'react-i18next';
-import { useNoxSetting } from '@hooks/useSetting';
 import PortaledInput, { PortalInputRef } from './PortaledInput';
 
 interface Props {
@@ -15,7 +14,7 @@ export default ({
   visible,
   song,
   onClose = () => undefined,
-  onSubmit = (rename: string) => undefined,
+  onSubmit = () => undefined,
 }: Props) => {
   const { t } = useTranslation();
   const inputRef = React.useRef<PortalInputRef>();

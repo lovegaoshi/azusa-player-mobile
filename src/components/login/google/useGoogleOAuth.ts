@@ -21,5 +21,6 @@ const config = {
 // Log in to get an authentication token
 export const getAuthCode = async () => {
   const authState = await authorize(config);
+  // eslint-disable-next-line import/no-named-as-default-member
   logger.log(authState);
 };

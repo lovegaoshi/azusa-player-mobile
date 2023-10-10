@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useState } from 'react';
 import Snackbar from 'react-native-snackbar';
 import { View, StyleSheet } from 'react-native';

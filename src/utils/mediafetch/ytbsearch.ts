@@ -1,8 +1,8 @@
-import { search, SearchSong } from 'libmuse';
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { search } from 'libmuse';
 
 import { CIDPREFIX } from './ytbvideo';
 import SongTS from '@objects/Song';
-import logger from '../Logger';
 import { SOURCE } from '@enums/MediaFetch';
 
 const musePlaylistItemToNoxSong = (val: any, data: any) => {
@@ -54,7 +54,7 @@ interface regexFetchProps {
   cookiedSearch?: boolean;
 }
 
-const regexFetch = async ({ url, fastSearch }: regexFetchProps) => {
+const regexFetch = async ({ url }: regexFetchProps) => {
   return await fetchInnerTuneSearch(url);
 };
 

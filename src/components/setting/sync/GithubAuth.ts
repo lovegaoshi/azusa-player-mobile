@@ -75,14 +75,14 @@ export const syncToGitee = async ({
   }
   logger.debug(`[gitee] start syncing ${username}`);
   await createAPMRepo();
-  logger.debug(`[gitee] created repo`);
+  logger.debug('[gitee] created repo');
   const res = await bfetch(
     `https://gitee.com/api/v5/repos/${username}/${APM_REPO_NAME}/contents/%2F?access_token=${token}`
   );
   const data = await res.json();
   logger.debug(`[gitee] file fetched: ${data.sha}`);
   if (res.status === 200) {
-    logger.debug(`[gitee] updating backup file`);
+    logger.debug('[gitee] updating backup file');
     for (const repofile of data) {
       if (repofile.name === APM_FILE_NAME) {
         // do something
@@ -104,7 +104,7 @@ export const syncToGitee = async ({
       }
     }
   }
-  logger.debug(`[gitee] creating backup file`);
+  logger.debug('[gitee] creating backup file');
   // file doesnt exist. create instaed.
   return await bfetch(
     `https://gitee.com/api/v5/repos/${username}/${APM_REPO_NAME}/contents/${APM_FILE_NAME}`,
@@ -139,7 +139,7 @@ const checkAuthentication = async () => {
 };
 
 export const loginGitee = async (
-  callback: () => any = () => undefined,
+  callback: () => Promise<void> = async () => undefined,
   errorCallback = logger.error
 ) => {
   try {

@@ -17,11 +17,7 @@ interface Props {
   onSubmit?: () => void;
 }
 
-const TimerDialog = ({
-  visible,
-  onClose = () => undefined,
-  onSubmit = () => undefined,
-}: Props) => {
+const TimerDialog = ({ visible, onClose = () => undefined }: Props) => {
   const { t } = useTranslation();
   const playerStyle = useNoxSetting(state => state.playerStyle);
   const {
@@ -37,9 +33,6 @@ const TimerDialog = ({
 
   const handleClose = () => {
     onClose();
-  };
-  const handleSubmit = () => {
-    onSubmit();
   };
 
   return (

@@ -12,7 +12,7 @@ import { useNoxSetting } from '@hooks/useSetting';
 import { fetchVideoPlayUrlPromise } from '@utils/mediafetch/bilivideo';
 import { customReqHeader } from '@utils/BiliFetch';
 import { biliNFTVideoFetch } from '@utils/mediafetch/biliNFT';
-import logger from '@utils/Logger';
+import { logger } from '@utils/Logger';
 import { useIsLandscape } from '@hooks/useOrientation';
 
 enum RESOLVE_TYPE {

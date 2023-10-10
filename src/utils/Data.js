@@ -1,3 +1,5 @@
+/* eslint-disable node/no-unsupported-features/es-syntax */
+/* eslint-disable node/no-missing-import */
 /* eslint-disable @typescript-eslint/no-empty-function */
 /* eslint-disable no-undef */
 // TODO: migrate to ts; Im working with data.ts.template but doing a poor job.
@@ -64,7 +66,7 @@ export const fetchLRC = async (name, setLyric, setSongTitle) => {
   const songName = extractSongName(name);
   setSongTitle(songName);
 
-  const songFile = songs.find((v, i, a) => v.includes(songName));
+  const songFile = songs.find(v => v.includes(songName));
   // use song name to get the LRC
   try {
     const lrc = await bfetch(URL_LRC_BASE.replace('{songFile}', songFile));
@@ -79,24 +81,6 @@ export const fetchLRC = async (name, setLyric, setSongTitle) => {
   } catch (error) {
     setLyric('[00:00.000] 无法找到歌词');
   }
-};
-
-/**
- * used to resolve a bilibili 509 error.
- * now bili completely switched to wbi signatures,
- * leaving this for legacy reasons in case we have this stupid problem
- * @param {} res
- * @returns
- */
-const extract509Json = async res => {
-  let resText = await res.text();
-  if (resText.includes('"code":-509,')) {
-    resText = resText
-      .slice(resText.indexOf('}') + 1)
-      .replaceAll('\n', '')
-      .replaceAll('\r', '');
-  }
-  return JSON.parse(resText);
 };
 
 export const searchLyricOptions = async searchKey => {
@@ -117,7 +101,7 @@ export const searchLyricOptions = async searchKey => {
 };
 
 const getQQSearchAPI = searchKey => {
-  let API = JSON.parse(JSON.stringify(URL_QQ_SEARCH_POST));
+  const API = JSON.parse(JSON.stringify(URL_QQ_SEARCH_POST));
   API.params.body.req.param.query = searchKey;
   API.params.body = JSON.stringify(API.params.body);
   return API;

@@ -60,7 +60,7 @@ export default ({
             data={playlistIds
               .filter(val => val !== fromList.id)
               .map(val => [val, playlists[val].title])}
-            renderItem={({ item, index }) => (
+            renderItem={({ item }) => (
               <Pressable
                 onPress={() => setPlaylistIndex(item[0])}
                 style={styles.dialogItem}

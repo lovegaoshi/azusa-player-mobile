@@ -4,8 +4,6 @@ import { Text, Avatar, ActivityIndicator, Button } from 'react-native-paper';
 import { useTranslation } from 'react-i18next';
 import QRCode from 'react-native-qrcode-svg';
 import Snackbar from 'react-native-snackbar';
-import { DrawerNavigationProp } from '@react-navigation/drawer';
-import { ParamListBase } from '@react-navigation/native';
 import CookieManager from '@react-native-cookies/cookies';
 
 import { useNoxSetting } from '@hooks/useSetting';
@@ -14,17 +12,12 @@ import GenericInputDialog from '../dialogs/GenericInputDialog';
 import BiliSelectFavButtton from './BiliSelectFavButtton';
 import useBiliLogin from './useBiliLoginApp';
 
-interface Props {
-  navigation: DrawerNavigationProp<ParamListBase>;
-}
-
 const domain = 'https://bilibili.com';
 
-export default ({ navigation }: Props) => {
+export default () => {
   const { t } = useTranslation();
   const playerStyle = useNoxSetting(state => state.playerStyle);
   const appRefresh = useNoxSetting(state => state.appRefresh);
-  const setAppRefresh = useNoxSetting(state => state.setAppRefresh);
   const [inputCookieVisible, setInputCookieVisible] = React.useState(false);
   const {
     qrcode,
@@ -51,7 +44,7 @@ export default ({ navigation }: Props) => {
           name: 'bili_jct',
           value: input.bili_jct,
         });
-        logger.debug(`[setCookie] manually input cookie;`);
+        logger.debug('[setCookie] manually input cookie;');
         clearQRLogin();
         getBiliLoginStatus();
         // https://github.com/biliup/biliup-rs/issues/75

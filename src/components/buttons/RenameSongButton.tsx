@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { IconButton, Menu } from 'react-native-paper';
+import { Menu } from 'react-native-paper';
 import { useTranslation } from 'react-i18next';
 
 import Dialog from '../dialogs/RenameSongDialog';

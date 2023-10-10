@@ -221,6 +221,7 @@ const SkinSettings = () => {
   const [checked, setChecked] = React.useState(getThemeID(playerStyle));
   const scrollViewRef = React.useRef<ScrollView | null>(null);
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const loadCustomSkin = async (skins: any) => {
     // skins MUST BE an array of objects
     if (!Array.isArray(skins)) {

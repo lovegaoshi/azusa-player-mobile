@@ -1,14 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { View, StyleSheet } from 'react-native';
-import {
-  Button,
-  Dialog,
-  Portal,
-  Provider,
-  Text,
-  TextInput,
-  Switch,
-} from 'react-native-paper';
+import { Button, Dialog, Portal, Text, Switch } from 'react-native-paper';
 import { useTranslation } from 'react-i18next';
 
 import { useNoxSetting } from '@hooks/useSetting';
@@ -40,7 +32,9 @@ export default ({
   const updatePlaylist = useNoxSetting(state => state.updatePlaylist);
   const [useBiliShazam, setUseBiliShazam] = useState(false);
   const [useBiliSync, setUseBiliSync] = useState(false);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const nameRef = useRef<any>();
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const subRef = useRef<any>();
   const blacklistRef = useRef<PortalInputRef>();
 

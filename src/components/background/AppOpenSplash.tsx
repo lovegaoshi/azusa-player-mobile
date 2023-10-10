@@ -16,11 +16,10 @@ const style = {
   width: Dimensions.get('window').width,
 };
 
-const AppOpenSplash = (props: any) => (
+const AppOpenSplash = () => (
   <Image
     source={randomSplashes()}
     style={style}
-    {...props}
     resizeMode={Image.resizeMode.contain}
   />
 );

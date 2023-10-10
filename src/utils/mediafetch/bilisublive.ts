@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import axios from 'axios';
 
 import { regexFetchProps } from './generic';
@@ -75,8 +76,7 @@ const videoInfo2Song = (val: VideoInfo) =>
   });
 const getSubList = async (
   uid: string,
-  progressEmitter: (val: number) => void = () => undefined,
-  favList: string[] = []
+  progressEmitter: (val: number) => void = () => undefined
 ) => {
   // https://api.bilibili.com/x/relation/followings?vmid=3493085134719196
   const videoInfos = await fetchBiliPaginatedAPI({
@@ -98,8 +98,7 @@ const getSubList = async (
 const regexFetch = async ({
   reExtracted,
   progressEmitter = () => undefined,
-  favList,
-}: regexFetchProps) => getSubList(reExtracted[1]!, progressEmitter, favList);
+}: regexFetchProps) => getSubList(reExtracted[1]!, progressEmitter);
 
 export default {
   regexSearchMatch: /space\.bilibili\.com\/(\d+)\/fans\/follow/,

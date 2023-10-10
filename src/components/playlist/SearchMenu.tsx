@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { Menu } from 'react-native-paper';
-import { useTranslation } from 'react-i18next';
 import Svg, { Path } from 'react-native-svg';
 import Image from 'react-native-fast-image';
 
@@ -34,8 +33,6 @@ export default ({
   menuCoords = { x: 0, y: 0 },
   showMusicFree,
 }: Props) => {
-  const { t } = useTranslation();
-
   const setDefaultSearch = (defaultSearch: SEARCH_OPTIONS | MUSICFREE) => {
     toggleVisible();
     saveDefaultSearch(defaultSearch);

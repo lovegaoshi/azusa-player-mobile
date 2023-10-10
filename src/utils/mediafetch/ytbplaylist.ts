@@ -1,9 +1,10 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { get_playlist } from 'libmuse';
 
 import { regexFetchProps } from './generic';
 import { fetchAudioInfo, CIDPREFIX } from './ytbvideo';
 import SongTS from '@objects/Song';
-import logger from '../Logger';
+import { logger } from '../Logger';
 import { SOURCE } from '@enums/MediaFetch';
 
 const musePlaylistItemToNoxSong = (val: any, data: any) => {
@@ -84,16 +85,12 @@ const fastYTPlaylistSongResolve = (val: any, data: any) => {
   }
 };
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const fetchYTPlaylist = async (
   playlistId: string,
   progressEmitter: (val: number) => void,
   favList: string[]
 ): Promise<NoxMedia.Song[]> => {
-  try {
-    const data = get_playlist(playlistId, { limit: 1000 });
-  } catch (e) {
-    logger.error(`[ytbPlaylist] libmuse resolve failed: ${e}`);
-  }
   const res = await fetch(
     `https://www.youtube.com/playlist?list=${playlistId}`
   );
@@ -130,11 +127,7 @@ const fetchYTPlaylist = async (
   }
 };
 
-const regexFetch = async ({
-  reExtracted,
-  progressEmitter = () => undefined,
-  favList = [],
-}: regexFetchProps) => {
+const regexFetch = async ({ reExtracted, favList = [] }: regexFetchProps) => {
   const results = await fetchInnerTunePlaylist(
     // fetchYTPlaylist(
     reExtracted[1],
