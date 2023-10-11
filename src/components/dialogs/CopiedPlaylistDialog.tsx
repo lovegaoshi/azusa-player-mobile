@@ -91,7 +91,6 @@ export default ({
 
 const styles = StyleSheet.create({
   dialog: {
-    maxHeight: '60%',
     minHeight: '50%',
   },
   dialogTitle: {
