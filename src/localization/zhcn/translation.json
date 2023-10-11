@@ -81,6 +81,7 @@
     "abrepeatTitle": "{{song.parsedName}} A-B重复",
     "songRemoveTitle": "删除歌曲",
     "songRemoveNBanTitle": "删除并拉黑",
+    "reloadSong": "Reload",
     "selectedSongs": "选择的歌"
   },
   "GeneralSettings": {

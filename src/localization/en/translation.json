@@ -81,6 +81,7 @@
     "abrepeatTitle": "{{song.parsedName}} A-B repeat",
     "songRemoveTitle": "Remove",
     "songRemoveNBanTitle": "Remove and BAN",
+    "reloadSong": "Reload",
     "selectedSongs": "Selected songs"
   },
   "GeneralSettings": {

@@ -66,3 +66,12 @@ export const fetchPlayUrlPromise = async (
     regexMatching: song => song.id,
   });
 };
+
+export const refreshMetadata = async (
+  v: NoxMedia.Song
+): Promise<Partial<NoxMedia.Song>> => {
+  const metadata = await fetchPlayUrlPromise(v);
+  return {
+    ...(metadata.cover && { cover: metadata.cover }),
+  };
+};

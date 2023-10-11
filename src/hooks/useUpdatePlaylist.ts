@@ -1,5 +1,6 @@
 import { useNoxSetting } from '@hooks/useSetting';
 import { logger } from '@utils/Logger';
+import { refreshMetadata } from '@utils/mediafetch/resolveURL';
 
 const useUpdatePlaylist = () => {
   const currentPlaylist = useNoxSetting(state => state.currentPlayingList);
@@ -38,7 +39,17 @@ const useUpdatePlaylist = () => {
     updatePlaylist(newPlaylist, [], []);
   };
 
-  return { updateSong, updateSongIndex };
+  const updateSongMetadata = async (
+    index: number,
+    playlist: NoxMedia.Playlist
+  ) => {
+    const song = playlist.songList[index];
+    const metadata = await refreshMetadata(song);
+    updateSongIndex(index, metadata, playlist);
+    return metadata;
+  };
+
+  return { updateSong, updateSongIndex, updateSongMetadata };
 };
 
 export default useUpdatePlaylist;

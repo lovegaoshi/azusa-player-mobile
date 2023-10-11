@@ -54,7 +54,7 @@ export default ({
   const setCurrentPlayingList = useNoxSetting(
     state => state.setCurrentPlayingList
   );
-  const { updateSongIndex } = useUpdatePlaylist();
+  const { updateSongIndex, updateSongMetadata } = useUpdatePlaylist();
   const { startRadio, radioAvailable } = useSongOperations();
 
   const closeMenu = React.useCallback(() => setSongMenuVisible(false), []);
@@ -80,16 +80,23 @@ export default ({
     );
   };
 
+  const reloadSong = async () => {
+    const currentPlaylist2 = playlists[currentPlaylist.id];
+    const metadata = updateSongMetadata(songMenuSongIndexes[0], currentPlaylist2);
+    // TODO: call TP.updateMetadatabyindex something something
+    return metadata;
+  };
+
   const removeSongs = async (banBVID = false) => {
     const currentPlaylist2 = playlists[currentPlaylist.id];
     const songs = [song];
     const newPlaylist = banBVID
       ? {
-          ...currentPlaylist2,
-          blacklistedUrl: currentPlaylist2.blacklistedUrl.concat(
-            songs.map(song => song.bvid)
-          ),
-        }
+        ...currentPlaylist2,
+        blacklistedUrl: currentPlaylist2.blacklistedUrl.concat(
+          songs.map(song => song.bvid)
+        ),
+      }
       : currentPlaylist2;
     updatePlaylist(newPlaylist, [], songs);
     setCurrentPlayingList(newPlaylist);
@@ -123,6 +130,14 @@ export default ({
           closeMenu();
           renameSong(rename);
         }}
+      />
+      <Menu.Item
+        leadingIcon={ICONS.RELOAD}
+        onPress={() => {
+          closeMenu();
+          reloadSong();
+        }}
+        title={t('SongOperations.reloadSong')}
       />
       <Menu.Item
         leadingIcon={ICONS.RADIO}
