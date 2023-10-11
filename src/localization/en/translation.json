@@ -23,7 +23,8 @@
     "subscribeUrlLabel": "Subscribe URL",
     "blacklistedUrlLabel": "Banned BVIDs",
     "useBiliShazamLabel": "Use BiliShazam",
-    "useBiliSyncLabel": "BiliSync as favorite"
+    "useBiliSyncLabel": "BiliSync as favorite",
+    "useNewSongOverwriteLabel": "New songs overwrite"
   },
   "RenameSongDialog": {
     "title": "Remame {{song.name}} to...",

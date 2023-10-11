@@ -32,6 +32,7 @@ export default ({
   const updatePlaylist = useNoxSetting(state => state.updatePlaylist);
   const [useBiliShazam, setUseBiliShazam] = useState(false);
   const [useBiliSync, setUseBiliSync] = useState(false);
+  const [useNewSongOverwrite, setUseNewSongOverwrite] = useState(false);
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const nameRef = useRef<any>();
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -45,6 +46,8 @@ export default ({
 
   const toggleBiliShazam = () => setUseBiliShazam(val => !val);
   const toggleBiliSync = () => setUseBiliSync(val => !val);
+  const toggleNewSongOverwrite = () =>
+    setUseNewSongOverwrite(val => !val);
 
   const handleClose = () => {
     onClose();
@@ -59,6 +62,8 @@ export default ({
         new Set(blacklistRef.current?.name.split(';'))
       ),
       useBiliShazam: useBiliShazam,
+      biliSync: useBiliSync,
+      newSongOverwrite: useNewSongOverwrite,
     };
     updatePlaylist(newPlaylist, [], []);
     onSubmit(newPlaylist);
@@ -110,6 +115,16 @@ export default ({
             />
             <Text style={styles.switchText}>
               {t('PlaylistSettingsDialog.useBiliSyncLabel')}
+            </Text>
+          </View>
+          <View style={styles.switchContainer}>
+            <Switch
+              value={useNewSongOverwrite}
+              onValueChange={toggleNewSongOverwrite}
+              color={playerStyle.colors.onSurfaceVariant}
+            />
+            <Text style={styles.switchText}>
+              {t('PlaylistSettingsDialog.useNewSongOverwriteLabel')}
             </Text>
           </View>
         </Dialog.Content>

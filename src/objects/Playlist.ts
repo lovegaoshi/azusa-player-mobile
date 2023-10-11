@@ -19,6 +19,7 @@ export const dummyPlaylist = (
     lastSubscribed: 0,
     type,
     biliSync: false,
+    newSongOverwrite: false,
   };
 };
 
