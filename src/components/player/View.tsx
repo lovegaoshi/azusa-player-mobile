@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import TrackPlayer, { useActiveTrack } from 'react-native-track-player';
+import TrackPlayer from 'react-native-track-player';
 import {
   SafeAreaView,
   StatusBar,
@@ -20,6 +20,7 @@ import { initCache } from '@utils/Cache';
 import { getCurrentTPQueue, initializePlaybackMode } from '@stores/playingList';
 import useVersionCheck from '@hooks/useVersionCheck';
 import { songlistToTracklist } from '@utils/RNTPUtils';
+import useActiveTrack from '@hooks/useActiveTrack';
 
 const { NoxAndroidAutoModule } = NativeModules;
 
@@ -28,9 +29,11 @@ interface Props {
 }
 
 export function Player({ navigation }: Props) {
-  const track = useActiveTrack();
+  const { track, updateTrack } = useActiveTrack();
   const playerStyle = useNoxSetting(state => state.playerStyle);
-  // TODO: component
+  const setUpdateTrack = useNoxSetting(state => state.setUpdateTrack);
+
+  useEffect(() => setUpdateTrack(updateTrack), []);
 
   return (
     <SafeAreaView style={playerStyle.screenContainer}>
