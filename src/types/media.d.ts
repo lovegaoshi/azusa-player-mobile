@@ -30,6 +30,7 @@ declare namespace NoxMedia {
     lastSubscribed: number;
     type: string;
     biliSync: boolean;
+    newSongOverwrite?: boolean;
   }
 
   export interface LyricDetail {

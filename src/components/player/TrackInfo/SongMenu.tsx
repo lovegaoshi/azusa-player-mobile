@@ -12,6 +12,7 @@ import useSongOperations from '@hooks/useSongOperations';
 import { addR128Gain, getR128Gain } from '@stores/appStore';
 import ABSliderMenu from './ABSliderMenu';
 import { songlistToTracklist } from '@utils/RNTPUtils';
+import useActiveTrack from '@hooks/useActiveTrack';
 
 enum ICONS {
   SEND_TO = 'playlist-plus',
@@ -54,7 +55,9 @@ export default ({
   const setCurrentPlayingList = useNoxSetting(
     state => state.setCurrentPlayingList
   );
-  const { updateSongIndex } = useUpdatePlaylist();
+  const updateTrack = useNoxSetting(state => state.updateTrack);
+
+  const { updateSongIndex, updateSongMetadata } = useUpdatePlaylist();
   const { startRadio, radioAvailable } = useSongOperations();
 
   const closeMenu = React.useCallback(() => setSongMenuVisible(false), []);
@@ -71,13 +74,30 @@ export default ({
     };
   };
 
-  const renameSong = (rename: string) => {
+  const renameSong = async (rename: string) => {
     const currentPlaylist2 = playlists[currentPlaylist.id];
     updateSongIndex(
       songMenuSongIndexes[0],
       { name: rename, parsedName: rename },
       currentPlaylist2
     );
+    const index = await TrackPlayer.getActiveTrackIndex();
+    index !== undefined && (await TrackPlayer.updateMetadataForTrack(index, {
+      title: rename,
+    }));
+    updateTrack();
+  };
+
+  const reloadSong = async () => {
+    const currentPlaylist2 = playlists[currentPlaylist.id];
+    const metadata = await updateSongMetadata(songMenuSongIndexes[0], currentPlaylist2);
+    const index = await TrackPlayer.getActiveTrackIndex();
+    index !== undefined && (await TrackPlayer.updateMetadataForTrack(index, {
+      title: metadata.name,
+      artwork: metadata.cover,
+    }));
+    updateTrack();
+    return metadata;
   };
 
   const removeSongs = async (banBVID = false) => {
@@ -85,11 +105,11 @@ export default ({
     const songs = [song];
     const newPlaylist = banBVID
       ? {
-          ...currentPlaylist2,
-          blacklistedUrl: currentPlaylist2.blacklistedUrl.concat(
-            songs.map(song => song.bvid)
-          ),
-        }
+        ...currentPlaylist2,
+        blacklistedUrl: currentPlaylist2.blacklistedUrl.concat(
+          songs.map(song => song.bvid)
+        ),
+      }
       : currentPlaylist2;
     updatePlaylist(newPlaylist, [], songs);
     setCurrentPlayingList(newPlaylist);
@@ -123,6 +143,14 @@ export default ({
           closeMenu();
           renameSong(rename);
         }}
+      />
+      <Menu.Item
+        leadingIcon={ICONS.RELOAD}
+        onPress={() => {
+          closeMenu();
+          reloadSong();
+        }}
+        title={t('SongOperations.reloadSong')}
       />
       <Menu.Item
         leadingIcon={ICONS.RADIO}

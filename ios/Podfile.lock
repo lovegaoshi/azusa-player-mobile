@@ -118,7 +118,7 @@ PODS:
   - libwebp/sharpyuv (1.3.2)
   - libwebp/webp (1.3.2):
     - libwebp/sharpyuv
-  - lottie-ios (4.3.0)
+  - lottie-ios (4.3.3)
   - lottie-react-native (6.3.1):
     - lottie-ios (~> 4.3.0)
     - React-Core
@@ -424,7 +424,7 @@ PODS:
   - React-jsinspector (0.72.4)
   - React-logger (0.72.4):
     - glog
-  - react-native-app-auth (7.0.0-rc2):
+  - react-native-app-auth (7.0.0):
     - AppAuth (~> 1.6)
     - React-Core
   - react-native-background-timer (2.4.1):
@@ -449,7 +449,7 @@ PODS:
     - SVGAPlayer
   - react-native-track-player (4.0.0-rc08):
     - React-Core
-    - SwiftAudioEx (= 1.0.0-rc.7)
+    - SwiftAudioEx (= 1.0.0-rc.8)
   - react-native-video (5.2.1):
     - React-Core
     - react-native-video/Video (= 5.2.1)
@@ -575,9 +575,9 @@ PODS:
     - SDWebImageWebPCoder (~> 0.8.4)
   - RNFlashList (1.6.1):
     - React-Core
-  - RNGestureHandler (2.12.1):
+  - RNGestureHandler (2.13.1):
     - React-Core
-  - RNReanimated (3.5.2):
+  - RNReanimated (3.5.4):
     - DoubleConversion
     - FBLazyVector
     - glog
@@ -613,7 +613,7 @@ PODS:
     - React
   - RNSnackbar (2.6.2):
     - React-Core
-  - RNSVG (13.13.0):
+  - RNSVG (13.14.0):
     - React-Core
   - RNVectorIcons (9.2.0):
     - React-Core
@@ -633,7 +633,7 @@ PODS:
     - SVGAPlayer/ProtoFiles
   - SVGAPlayer/ProtoFiles (2.5.7):
     - Protobuf (~> 3.4)
-  - SwiftAudioEx (1.0.0-rc.7)
+  - SwiftAudioEx (1.0.0-rc.8)
   - Yoga (1.14.0)
   - YogaKit (1.18.1):
     - Yoga (~> 1.14)
@@ -945,7 +945,7 @@ SPEC CHECKSUMS:
   hermes-engine: 81191603c4eaa01f5e4ae5737a9efcf64756c7b2
   libevent: 4049cae6c81cdb3654a443be001fb9bdceff7913
   libwebp: 1786c9f4ff8a279e4dac1e8f385004d5fc253009
-  lottie-ios: c69214a487e1a1465a231c1918c6ce174e2d45bc
+  lottie-ios: 25e7b2675dad5c3ddad369ac9baab03560c5bfdd
   lottie-react-native: c9f1db4f4124dcce9f8159e65d8dc6e8bcb11fb4
   OpenSSL-Universal: ebc357f1e6bc71fa463ccb2fe676756aff50e88c
   Protobuf: d7f7c8329edf5eb8af65547a8ba3e9c1cee927d5
@@ -964,7 +964,7 @@ SPEC CHECKSUMS:
   React-jsiexecutor: c7f826e40fa9cab5d37cab6130b1af237332b594
   React-jsinspector: aaed4cf551c4a1c98092436518c2d267b13a673f
   React-logger: da1ebe05ae06eb6db4b162202faeafac4b435e77
-  react-native-app-auth: 05c3b875b27bb65fe321bd5dc38cc1c04c5158be
+  react-native-app-auth: 1d12b6874a24152715a381d8e9149398ce7c2c95
   react-native-background-timer: 17ea5e06803401a379ebf1f20505b793ac44d0fe
   react-native-blob-jsi-helper: 13c10135af4614dbc0712afba5960784cd44f043
   react-native-blob-util: c5430d091e011b7fc57f888c356da2a2ff8dc8ad
@@ -974,7 +974,7 @@ SPEC CHECKSUMS:
   react-native-pager-view: d211379f61895b6349bd7e571b44a26d005c2975
   react-native-safe-area-context: 7aa8e6d9d0f3100a820efb1a98af68aa747f9284
   react-native-svga-player: f1c7faf0864b22437b9b7cc7d7aa202d56f3906c
-  react-native-track-player: 2ad3514ee10048615c54f35ad9bb5d847d140807
+  react-native-track-player: cb09f9c28361ff11b02732a89f2882102a22977a
   react-native-video: c26780b224543c62d5e1b2a7244a5cd1b50e8253
   react-native-webview: 669ae162965f629a8d6a4bdd3b99a304d36ef1f2
   React-NativeModulesApple: edb5ace14f73f4969df6e7b1f3e41bef0012740f
@@ -997,19 +997,19 @@ SPEC CHECKSUMS:
   RNCAsyncStorage: c913ede1fa163a71cea118ed4670bbaaa4b511bb
   RNFastImage: 5c9c9fed9c076e521b3f509fe79e790418a544e8
   RNFlashList: 236646d48f224a034f35baa0242e1b77db063b1e
-  RNGestureHandler: c0d04458598fcb26052494ae23dda8f8f5162b13
-  RNReanimated: 2491645f0883526f4470d8b5c761308709ba31f8
+  RNGestureHandler: 38aa38413896620338948fbb5c90579a7b1c3fde
+  RNReanimated: ab2e96c6d5591c3dfbb38a464f54c8d17fb34a87
   RNScreens: b21dc57dfa2b710c30ec600786a3fc223b1b92e7
   RNShareMenu: cb9dac548c8bf147d06f0bf07296ad51ea9f5fc3
   RNSnackbar: 3727b42bf6c4314a53c18185b5203e915a4ab020
-  RNSVG: ed492aaf3af9ca01bc945f7a149d76d62e73ec82
+  RNSVG: d00c8f91c3cbf6d476451313a18f04d220d4f396
   RNVectorIcons: fcc2f6cb32f5735b586e66d14103a74ce6ad61f8
   SDWebImage: a7f831e1a65eb5e285e3fb046a23fcfbf08e696d
   SDWebImageWebPCoder: 908b83b6adda48effe7667cd2b7f78c897e5111d
   SocketRocket: f32cd54efbe0f095c4d7594881e52619cfe80b17
   SSZipArchive: fe6a26b2a54d5a0890f2567b5cc6de5caa600aef
   SVGAPlayer: 318b85a78b61292d6ae9dfcd651f3f0d1cdadd86
-  SwiftAudioEx: a6ef015f89f49d2ec1c352dc440805375029d5a7
+  SwiftAudioEx: ebe6244f6f4d75a4ac5d65b36d3b6a911a2689b8
   Yoga: 3efc43e0d48686ce2e8c60f99d4e6bd349aff981
   YogaKit: f782866e155069a2cca2517aafea43200b01fd5a
 

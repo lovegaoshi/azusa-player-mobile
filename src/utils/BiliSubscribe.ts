@@ -17,7 +17,7 @@ export const updateSubscribeFavList = async ({
   subscribeUrls,
   updatePlaylist,
   progressEmitter = () => undefined,
-  overwriteOnRefresh = () => listObj.title.includes('live'),
+  overwriteOnRefresh = () => listObj.newSongOverwrite || listObj.title.includes('live'),
 }: Props) => {
   try {
     const newPlaylist = { ...listObj, lastSubscribed: new Date().getTime() };

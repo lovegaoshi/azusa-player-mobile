@@ -40,6 +40,8 @@ interface initializedResults {
 }
 
 interface NoxSetting {
+  updateTrack: () => void;
+  setUpdateTrack: (val: () => void) => void;
   appRefresh: boolean;
   setAppRefresh: () => void;
   playlistSearchAutoFocus: boolean;
@@ -133,6 +135,9 @@ interface NoxSetting {
  * as well as saving and loading states to/from asyncStorage.
  */
 export const useNoxSetting = create<NoxSetting>((set, get) => ({
+  updateTrack: () => undefined,
+  setUpdateTrack: updateTrack => set({ updateTrack }),
+
   appRefresh: false,
   setAppRefresh: () => set({ appRefresh: true }),
   playlistSearchAutoFocus: true,
