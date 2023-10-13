@@ -4,6 +4,7 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Build
 import android.provider.Settings
+import android.view.WindowManager
 import androidx.annotation.RequiresApi
 import com.facebook.react.bridge.Promise
 import com.facebook.react.bridge.ReactApplicationContext
@@ -32,4 +33,14 @@ class NoxAndroidAutoModule(reactContext: ReactApplicationContext) : ReactContext
     context.startActivity(intent);
   }
 
+  @ReactMethod fun keepScreenOn(screenOn: Boolean = true) {
+    val context = reactApplicationContext;
+    val activity = context.currentActivity;
+    val window = activity?.window;
+    if (screenOn) {
+      window?.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+    } else {
+      window?.clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+    }
+  }
 }
