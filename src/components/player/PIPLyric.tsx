@@ -12,6 +12,7 @@ const PIPLyricView = () => {
   );
   const currentPlayingId = useNoxSetting(state => state.currentPlayingId);
   const { height } = useWindowDimensions();
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const _ = usePlayerControls();
 
   React.useEffect(() => {

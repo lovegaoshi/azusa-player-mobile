@@ -155,7 +155,7 @@ export async function PlaybackService() {
           const song = event.track.song as NoxMedia.Song;
           const updatedMetadata = await resolveAndCache(song);
           const currentTrack = await TrackPlayer.getActiveTrack();
-          await TrackPlayer.load({ ...currentTrack, ...updatedMetadata })
+          await TrackPlayer.load({ ...currentTrack, ...updatedMetadata });
           if (playerErrored) {
             TrackPlayer.play();
           }

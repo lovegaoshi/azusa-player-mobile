@@ -12,7 +12,6 @@ import useSongOperations from '@hooks/useSongOperations';
 import { addR128Gain, getR128Gain } from '@stores/appStore';
 import ABSliderMenu from './ABSliderMenu';
 import { songlistToTracklist } from '@utils/RNTPUtils';
-import useActiveTrack from '@hooks/useActiveTrack';
 
 enum ICONS {
   SEND_TO = 'playlist-plus',
@@ -82,20 +81,25 @@ export default ({
       currentPlaylist2
     );
     const index = await TrackPlayer.getActiveTrackIndex();
-    index !== undefined && (await TrackPlayer.updateMetadataForTrack(index, {
-      title: rename,
-    }));
+    index !== undefined &&
+      (await TrackPlayer.updateMetadataForTrack(index, {
+        title: rename,
+      }));
     updateTrack();
   };
 
   const reloadSong = async () => {
     const currentPlaylist2 = playlists[currentPlaylist.id];
-    const metadata = await updateSongMetadata(songMenuSongIndexes[0], currentPlaylist2);
+    const metadata = await updateSongMetadata(
+      songMenuSongIndexes[0],
+      currentPlaylist2
+    );
     const index = await TrackPlayer.getActiveTrackIndex();
-    index !== undefined && (await TrackPlayer.updateMetadataForTrack(index, {
-      title: metadata.name,
-      artwork: metadata.cover,
-    }));
+    index !== undefined &&
+      (await TrackPlayer.updateMetadataForTrack(index, {
+        title: metadata.name,
+        artwork: metadata.cover,
+      }));
     updateTrack();
     return metadata;
   };
@@ -105,11 +109,11 @@ export default ({
     const songs = [song];
     const newPlaylist = banBVID
       ? {
-        ...currentPlaylist2,
-        blacklistedUrl: currentPlaylist2.blacklistedUrl.concat(
-          songs.map(song => song.bvid)
-        ),
-      }
+          ...currentPlaylist2,
+          blacklistedUrl: currentPlaylist2.blacklistedUrl.concat(
+            songs.map(song => song.bvid)
+          ),
+        }
       : currentPlaylist2;
     updatePlaylist(newPlaylist, [], songs);
     setCurrentPlayingList(newPlaylist);
