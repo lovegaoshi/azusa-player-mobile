@@ -228,7 +228,7 @@ export const useNoxSetting = create<NoxSetting>((set, get) => ({
   },
 
   addPlaylist: (playlist: NoxMedia.Playlist) => {
-    let playlistIds = get().playlistIds;
+    let playlistIds = Array.from(get().playlistIds);
     let playlists = get().playlists;
     playlistIds.push(playlist.id);
     playlists[playlist.id] = playlist;

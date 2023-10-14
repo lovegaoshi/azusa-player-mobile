@@ -46,8 +46,7 @@ export default ({
 
   const toggleBiliShazam = () => setUseBiliShazam(val => !val);
   const toggleBiliSync = () => setUseBiliSync(val => !val);
-  const toggleNewSongOverwrite = () =>
-    setUseNewSongOverwrite(val => !val);
+  const toggleNewSongOverwrite = () => setUseNewSongOverwrite(val => !val);
 
   const handleClose = () => {
     onClose();

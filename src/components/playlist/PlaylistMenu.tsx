@@ -17,6 +17,7 @@ import {
   fetchVideoInfo,
 } from '@utils/mediafetch/bilivideo';
 import { syncFavlist } from '@utils/Bilibili/bilifavOperate';
+import usePlaylistOperation from '@hooks/usePlaylistOperation';
 
 enum ICONS {
   SETTINGS = 'cog',
@@ -44,7 +45,7 @@ export default ({
   const { t } = useTranslation();
   const currentPlaylist = useNoxSetting(state => state.currentPlaylist);
   const updatePlaylist = useNoxSetting(state => state.updatePlaylist);
-  const removePlaylist = useNoxSetting(state => state.removePlaylist);
+  const { removePlaylist } = usePlaylistOperation();
   const progressEmitter = useNoxSetting(
     state => state.searchBarProgressEmitter
   );

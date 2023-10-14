@@ -84,7 +84,6 @@ public class MainActivity extends ReactActivity {
       getReactInstanceManager().getCurrentReactContext()
         .getJSModule(RCTDeviceEventEmitter.class)
         .emit("APMEnterPIP", false);
-
     }
     super.onPictureInPictureModeChanged(isInPictureInPictureMode, newConfig);
   }
