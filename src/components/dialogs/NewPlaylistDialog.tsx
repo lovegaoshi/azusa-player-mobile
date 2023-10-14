@@ -4,7 +4,7 @@ import { StyleSheet } from 'react-native';
 import { useTranslation } from 'react-i18next';
 
 import { dummyPlaylist } from '@objects/Playlist';
-import { useNoxSetting } from '@hooks/useSetting';
+import usePlaylistOperation from '@hooks/usePlaylistOperation';
 import PortaledInput, { PortalInputRef } from './PortaledInput';
 
 interface Props {
@@ -21,7 +21,7 @@ export default ({
   onSubmit = () => undefined,
 }: Props) => {
   const { t } = useTranslation();
-  const addPlaylist = useNoxSetting(state => state.addPlaylist);
+  const { addPlaylist } = usePlaylistOperation();
   const inputRef = useRef<PortalInputRef>();
 
   const handleClose = () => {

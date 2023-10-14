@@ -6,11 +6,11 @@ import { getBiliFavlist, GETFAVLIST_RES } from '@utils/Bilibili/bilifavOperate';
 import GenericCheckDialog from '../dialogs/GenericCheckDialog';
 import bilifavlistFetch from '@utils/mediafetch/bilifavlist';
 import { dummyPlaylist } from '@objects/Playlist';
-import { useNoxSetting } from '@hooks/useSetting';
+import usePlaylistOperation from '@hooks/usePlaylistOperation';
 
 export default () => {
   const { t } = useTranslation();
-  const addPlaylist = useNoxSetting(state => state.addPlaylist);
+  const { addPlaylist } = usePlaylistOperation();
   const [visible, setVisible] = React.useState(false);
   const [favLists, setFavLists] = React.useState<GETFAVLIST_RES[]>([]);
   const [loading, setLoading] = React.useState(false);

@@ -18,6 +18,7 @@ import useAlert from '../dialogs/useAlert';
 import ShuffleAllButton from '@components/playlists/ShuffleAllButton';
 import TimerButton from '@components/playlists/TimerButton';
 import PlaylistItem from '@components/playlists/PlaylistItem';
+import usePlaylistOperation from '@hooks/usePlaylistOperation';
 
 export default () => {
   const navigation = useNavigation();
@@ -30,7 +31,7 @@ export default () => {
   const addPlaylistButtonRef = useRef<AddPlaylistButtonRef>(null);
   const setCurrentPlaylist = useNoxSetting(state => state.setCurrentPlaylist);
   const setPlaylistIds = useNoxSetting(state => state.setPlaylistIds);
-  const removePlaylist = useNoxSetting(state => state.removePlaylist);
+  const { removePlaylist } = usePlaylistOperation();
   const { TwoWayAlert } = useAlert();
   // HACK: I know its bad! But somehow this hook isnt updating in its own
   // useEffects...

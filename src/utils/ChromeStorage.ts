@@ -238,16 +238,19 @@ export const savePlaylist = async (
  * @param key playlist ID.
  * @returns
  */
-export const getPlaylist = async (key: string): Promise<NoxMedia.Playlist> => {
+export const getPlaylist = async (
+  key: string,
+  defaultPlaylist: () => NoxMedia.Playlist = dummyPlaylist
+): Promise<NoxMedia.Playlist> => {
   try {
     const retrievedPlaylist = await getItem(key);
-    if (retrievedPlaylist === null) return dummyPlaylist();
+    if (retrievedPlaylist === null) return defaultPlaylist();
     retrievedPlaylist.songList = await loadChucked(retrievedPlaylist.songList);
     return retrievedPlaylist;
   } catch (e) {
     console.error(e);
   }
-  return dummyPlaylist();
+  return defaultPlaylist();
 };
 
 export const savePlayerSkins = async (skins: Array<any>) =>
@@ -341,9 +344,10 @@ export const initPlayerObject =
         'Search',
         PLAYLIST_ENUMS.TYPE_SEARCH_PLAYLIST
       ),
-      favoriPlaylist:
-        (await getPlaylist(STORAGE_KEYS.FAVORITE_PLAYLIST_KEY)) ||
-        dummyPlaylist('Favorite', PLAYLIST_ENUMS.TYPE_FAVORI_PLAYLIST),
+      favoriPlaylist: await getPlaylist(
+        STORAGE_KEYS.FAVORITE_PLAYLIST_KEY,
+        () => dummyPlaylist('Favorite', PLAYLIST_ENUMS.TYPE_FAVORI_PLAYLIST)
+      ),
       playerRepeat:
         (await getItem(STORAGE_KEYS.PLAYMODE_KEY)) || NoxRepeatMode.SHUFFLE,
       skin: (await getItem(STORAGE_KEYS.SKIN)) || AzusaTheme,
