@@ -261,6 +261,10 @@
     "operations": [[1, ["【赫卡特_Hecate】(.+)（直播歌切）"]]]
   },
   {
+    "uploaders": ["KuroKazuma"],
+    "operations": [[2], [1, [".+ - \\d+ (.+)"]]]
+  },
+  {
     "uploaders": [""],
     "operations": [[2], [1, []]]
   }
