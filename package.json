@@ -27,7 +27,7 @@
     "@react-native-async-storage/async-storage": "^1.18.1",
     "@react-native-community/netinfo": "^9.3.10",
     "@react-native-cookies/cookies": "git+https://github.com/alexhernandez/cookies.git#patch-1",
-    "@react-native/metro-config": "0.72.9",
+    "@react-native/metro-config": "^0.74.0",
     "@react-navigation/drawer": "^6.6.2",
     "@react-navigation/material-top-tabs": "^6.6.2",
     "@react-navigation/native": "^6.1.6",
@@ -55,6 +55,7 @@
     "lottie-react-native": "^6.2.0",
     "lru-cache": "7.14.0",
     "md5": "^2.3.0",
+    "metro": "^0.79.1",
     "qs": "^6.11.2",
     "react": "18.2.0",
     "react-i18next": "^12.2.2",
@@ -85,12 +86,15 @@
     "react-native-vector-icons": "^9.2.0",
     "react-native-video": "^5.2.1",
     "react-native-webview": "^13.3.0",
-    "react-native-windows": "^0.65.0-0",
+    "react-native-windows": "^0.72.14",
     "react-use": "^17.4.0",
     "use-debounce": "^9.0.4",
     "uuid": "^9.0.0",
     "ytdl-core": "git+https://lovegaoshi@github.com/lovegaoshi/node-ytdl-core.git",
     "zustand": "^4.3.7"
+  },
+  "resolutions": {
+    "metro": "^0.79.1"
   },
   "devDependencies": {
     "@babel/core": "^7.23.2",
