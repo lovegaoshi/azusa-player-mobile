@@ -43,4 +43,9 @@ class NoxAndroidAutoModule(reactContext: ReactApplicationContext) : ReactContext
       window?.clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
     }
   }
+
+  @ReactMethod fun isGestureNavigationMode(callback: Promise) {
+    val context = reactApplicationContext
+    callback.resolve(Settings.Secure.getInt(context.contentResolver, "navigation_mode", 0) == 2)
+  }
 }
