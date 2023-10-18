@@ -21,7 +21,7 @@ const URL_LRC_BASE =
 /**
  *  QQ SongSearch API POST
  */
-const URL_QQ_SEARCH_POST = {
+const URL_QQ_SEARCH_POST = () => ({
   src: 'https://u.y.qq.com/cgi-bin/musicu.fcg',
   params: {
     method: 'POST',
@@ -48,7 +48,7 @@ const URL_QQ_SEARCH_POST = {
       },
     },
   },
-};
+});
 
 /**
  *  QQ LyricSearchAPI
@@ -101,7 +101,7 @@ export const searchLyricOptions = async searchKey => {
 };
 
 const getQQSearchAPI = searchKey => {
-  const API = JSON.parse(JSON.stringify(URL_QQ_SEARCH_POST));
+  const API = URL_QQ_SEARCH_POST();
   API.params.body.req.param.query = searchKey;
   API.params.body = JSON.stringify(API.params.body);
   return API;
