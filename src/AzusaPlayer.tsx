@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react';
-import { NativeModules, Platform, View } from 'react-native';
+import React from 'react';
+import { View } from 'react-native';
 import {
   NavigationContainer,
   DarkTheme as NavigationDarkTheme,
@@ -27,32 +27,16 @@ import DummySettings from './components/setting/DummySettings';
 import './localization/i18n';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { ICONS } from '@enums/Icons';
+import NoxAndroidBottomTab from './components/bottomtab/NoxBottomTab';
 
 const { LightTheme, DarkTheme } = adaptNavigationTheme({
   reactNavigationLight: NavigationDefaultTheme,
   reactNavigationDark: NavigationDarkTheme,
 });
 
-const { NoxAndroidAutoModule } = NativeModules;
-
 const CombinedDefaultTheme = merge(MD3LightTheme, LightTheme);
 const CombinedDarkTheme = merge(MD3DarkTheme, DarkTheme);
 const PlayerStyle = { backgroundColor: 'transparent' };
-
-const NoxAndroidBottomTab = () => {
-  const [gestureMode, setGestureMode] = React.useState(false);
-  useEffect(() => {
-    // TODO: how to use await instead of states and useEffect?
-    if (Platform.OS === 'android') {
-      NoxAndroidAutoModule.isGestureNavigationMode().then(setGestureMode);
-    }
-  }, []);
-
-  if (gestureMode) {
-    return <></>;
-  }
-  return <></>;
-};
 
 const NoxPlayer = () => {
   const Tab = createMaterialTopTabNavigator();
