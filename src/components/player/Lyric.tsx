@@ -105,6 +105,7 @@ export const LyricView = ({
       if (hasLrcFromLocal()) {
         logger.log('Loading Lrc from localStorage...');
         const lrcDetail = lyricMapping.get(track?.song.id);
+        if (lrcDetail === undefined) return;
         searchLyric(lrcDetail?.lyricKey, setLrc);
         setLrcOption({ key: lrcDetail?.lyricKey });
         setCurrentTimeOffset(lrcDetail!.lyricOffset);
