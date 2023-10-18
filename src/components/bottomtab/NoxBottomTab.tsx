@@ -22,6 +22,8 @@ const NoxAndroidBottomTab = () => {
     return (<View style={styles.panel}>
       <IconButton
         icon="playlist-music"
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        //@ts-ignore
         onPress={() => navigationGlobal.openDrawer()}
       />
       <IconButton icon="music" onPress={() => navigationGlobal.navigate(ViewEnum.PLAYER_HOME as never)} />
