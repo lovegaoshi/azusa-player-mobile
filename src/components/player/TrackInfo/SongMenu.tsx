@@ -183,14 +183,9 @@ export default ({
       />
       <ABSliderMenu song={song} closeMenu={closeMenu} />
       <Menu.Item
-        leadingIcon={ICONS.REMOVE}
-        onPress={() => removeSongs()}
-        title={t('SongOperations.songRemoveTitle')}
-      />
-      <Menu.Item
         leadingIcon={ICONS.REMOVE_AND_BAN_BVID}
         onPress={() => removeSongs(true)}
-        title={t('SongOperations.songRemoveNBanTitle')}
+        title={t('SongOperations.songRemoveTitle')}
       />
     </Menu>
   );
