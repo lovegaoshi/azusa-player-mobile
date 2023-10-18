@@ -3,7 +3,6 @@ import { View, BackHandler, StyleSheet, ImageBackground } from 'react-native';
 import { FlashList } from '@shopify/flash-list';
 import Snackbar from 'react-native-snackbar';
 import { IconButton } from 'react-native-paper';
-import TrackPlayer, { RepeatMode } from 'react-native-track-player';
 import { useTranslation } from 'react-i18next';
 import { useDebounce } from 'use-debounce';
 import { useNetInfo } from '@react-native-community/netinfo';
@@ -19,12 +18,8 @@ import { updateSubscribeFavList } from '@utils/BiliSubscribe';
 import { PLAYLIST_ENUMS, SearchRegex } from '@enums/Playlist';
 import { syncFavlist } from '@utils/Bilibili/bilifavOperate';
 import noxCache, { noxCacheKey } from '@utils/Cache';
-import noxPlayingList from '@stores/playingList';
-import { NoxRepeatMode } from '@enums/RepeatMode';
 import { i0hdslbHTTPResolve } from '@utils/Utils';
-import { songlistToTracklist } from '@utils/RNTPUtils';
-
-const { getState } = noxPlayingList;
+import usePlayback from '@hooks/usePlayback';
 
 interface BackgroundProps {
   song: NoxMedia.Song;
@@ -48,14 +43,10 @@ const SongBackground = (props: BackgroundProps) => {
 
 const PlaylistList = () => {
   const { t } = useTranslation();
-  const setCurrentPlayingList = useNoxSetting(
-    state => state.setCurrentPlayingList
-  );
   const currentPlayingList = useNoxSetting(state => state.currentPlayingList);
   const currentPlayingId = useNoxSetting(state => state.currentPlayingId);
   const playerSetting = useNoxSetting(state => state.playerSetting);
   const playerStyle = useNoxSetting(state => state.playerStyle);
-  const setCurrentPlayingId = useNoxSetting(state => state.setCurrentPlayingId);
   const currentPlaylist = useNoxSetting(state => state.currentPlaylist);
   const playlistShouldReRender = useNoxSetting(
     state => state.playlistShouldReRender
@@ -80,6 +71,7 @@ const PlaylistList = () => {
   const togglePlaylistInfoUpdate = useNoxSetting(
     state => state.togglePlaylistInfoUpdate
   );
+  const { playFromPlaylist } = usePlayback();
 
   const resetSelected = (val = false) =>
     setSelected(Array(currentPlaylist.songList.length).fill(val));
@@ -200,18 +192,11 @@ const PlaylistList = () => {
       currentPlaylist.id === currentPlayingList.id
     )
       return;
-    if (getState().playmode === NoxRepeatMode.REPEAT_TRACK) {
-      await TrackPlayer.setRepeatMode(RepeatMode.Off);
-    }
-    await TrackPlayer.reset();
+
     const queuedSongList = playerSetting.keepSearchedSongListWhenPlaying
       ? currentRows
       : currentPlaylist.songList;
-    setCurrentPlayingList({ ...currentPlaylist, songList: queuedSongList });
-    setCurrentPlayingId(song.id);
-    await TrackPlayer.add(await songlistToTracklist([song]));
-    TrackPlayer.play();
-    return;
+    playFromPlaylist({ ...currentPlaylist, songList: queuedSongList }, song);
   };
 
   const refreshPlaylist = async () => {
@@ -239,8 +224,8 @@ const PlaylistList = () => {
     const currentIndex =
       toIndex < 0
         ? currentPlaylist.songList.findIndex(
-            song => song.id === currentPlayingId
-          )
+          song => song.id === currentPlayingId
+        )
         : toIndex;
     if (currentIndex > -1) {
       playlistRef.current?.scrollToIndex({

@@ -4,6 +4,7 @@ import TrackPlayer, {
   Event,
   State,
   useActiveTrack,
+  RepeatMode,
 } from 'react-native-track-player';
 import { useTranslation } from 'react-i18next';
 
@@ -11,8 +12,12 @@ import { useNoxSetting } from './useSetting';
 import { randomChoice } from '../utils/Utils';
 import logger from '../utils/Logger';
 import { songlistToTracklist } from '@utils/RNTPUtils';
+import { NoxRepeatMode } from '@enums/RepeatMode';
+import noxPlayingList from '@stores/playingList';
 
 const PLAYLIST_MEDIAID = 'playlist-';
+
+const { getState } = noxPlayingList;
 
 const usePlayback = () => {
   const { t } = useTranslation();
@@ -39,6 +44,9 @@ const usePlayback = () => {
     interruption = false
   ) => {
     setCurrentPlayingList(playlist);
+    if (getState().playmode === NoxRepeatMode.REPEAT_TRACK) {
+      await TrackPlayer.setRepeatMode(RepeatMode.Off);
+    }
     if (song === undefined) {
       if (playlist.songList.length === 0) {
         // no song exists.
