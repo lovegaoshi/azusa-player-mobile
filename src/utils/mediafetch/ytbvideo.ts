@@ -220,28 +220,31 @@ const suggest = async (song: NoxMedia.Song, filterMW = <T>(v: T[]) => v[0]) => {
     isLive: false
   },
   */
-  const relatedVideos = ytdlInfo.related_videos.filter(song => song.id);
-  const suggestSong = filterMW(relatedVideos); // or relatedVideos[0];
-  return SongTS({
-    cid: `${CIDPREFIX}-${suggestSong.id}`,
-    bvid: suggestSong.id!,
-    name: suggestSong.title!,
-    nameRaw: suggestSong.title!,
-    // string is a to be removed type so this is safe
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
-    singer: String(suggestSong.author.name),
-    // string is a to be removed type so this is safe
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
-    singerId: String(suggestSong.author.channel_url),
-    cover: suggestSong.thumbnails[0].url,
-    lyric: '',
-    page: 1,
-    duration: Number(suggestSong.length_seconds),
-    album: suggestSong.title,
-    source: SOURCE.ytbvideo,
-  });
+  const relatedVideos = ytdlInfo.related_videos
+    .filter(song => song.id)
+    .map(suggestSong =>
+      SongTS({
+        cid: `${CIDPREFIX}-${suggestSong.id}`,
+        bvid: suggestSong.id!,
+        name: suggestSong.title!,
+        nameRaw: suggestSong.title!,
+        // string is a to be removed type so this is safe
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
+        singer: String(suggestSong.author.name),
+        // string is a to be removed type so this is safe
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
+        singerId: String(suggestSong.author.channel_url),
+        cover: suggestSong.thumbnails[0].url,
+        lyric: '',
+        page: 1,
+        duration: Number(suggestSong.length_seconds),
+        album: suggestSong.title,
+        source: SOURCE.ytbvideo,
+      })
+    );
+  return filterMW(relatedVideos); // or relatedVideos[0];
 };
 
 const regexFetch = async ({ reExtracted }: regexFetchProps) => {

@@ -104,7 +104,9 @@
     "chatGPTResolveSongNameName": "ChatGPT找歌",
     "chatGPTResolveSongNameDesc": "TODO：用chatGPT解析歌名",
     "fastBiliSearchName": "快速b站搜索",
-    "fastBiliSearchDesc": "使用b站搜索时不解析分p内容"
+    "fastBiliSearchDesc": "使用b站搜索时不解析分p内容",
+    "suggestedSkipLongVideoName": "推荐播放跳过长视频",
+    "suggestedSkipLongVideoDesc": "推荐播放时跳过超过10分钟的视频"
   },
   "DeveloperSettings": {
     "LogName": "显示日志",

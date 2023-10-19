@@ -27,6 +27,9 @@ import {
   getABRepeatRaw,
 } from '@stores/appStore';
 import { savePlayerStyle } from './useTheme';
+import { NativeModules, Platform } from 'react-native';
+
+const { NoxAndroidAutoModule } = NativeModules;
 
 interface initializedResults {
   currentPlayingList: NoxMedia.Playlist;
@@ -40,6 +43,7 @@ interface initializedResults {
 }
 
 interface NoxSetting {
+  gestureMode: boolean;
   updateTrack: () => void;
   setUpdateTrack: (val: () => void) => void;
   appRefresh: boolean;
@@ -135,6 +139,7 @@ interface NoxSetting {
  * as well as saving and loading states to/from asyncStorage.
  */
 export const useNoxSetting = create<NoxSetting>((set, get) => ({
+  gestureMode: false,
   updateTrack: () => undefined,
   setUpdateTrack: updateTrack => set({ updateTrack }),
 
@@ -282,6 +287,11 @@ export const useNoxSetting = create<NoxSetting>((set, get) => ({
   },
 
   initPlayer: async (val: NoxStorage.PlayerStorageObject) => {
+    if (Platform.OS === 'android') {
+      NoxAndroidAutoModule.isGestureNavigationMode().then(
+        (gestureMode: boolean) => set({ gestureMode })
+      );
+    }
     const playingList =
       val.playlists[val.lastPlaylistId[0]] || dummyPlaylistList;
     await appStoreInitialize();

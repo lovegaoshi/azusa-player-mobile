@@ -104,7 +104,9 @@
     "chatGPTResolveSongNameName": "ChatGPT on Songs",
     "chatGPTResolveSongNameDesc": "TODO: Use chatGPT to resolve song names",
     "fastBiliSearchName": "Fast Bilibili Search",
-    "fastBiliSearchDesc": "Do not search for bilibili video episodes."
+    "fastBiliSearchDesc": "Do not search for bilibili video episodes.",
+    "suggestedSkipLongVideoName": "Skip Long Recommended Video",
+    "suggestedSkipLongVideoDesc": "Skip > 10 min videos when in playing suggested mode."
   },
   "DeveloperSettings": {
     "LogName": "Show logs",

@@ -14,7 +14,7 @@ export default ({ panelWidth }: Props) => {
       <TrackInfoTemplate
         track={track}
         windowWidth={panelWidth}
-        containerStyle={{ flex: 1, justifyContent: 'flex-end' }}
+        containerStyle={{ flex: 1, paddingTop: 20 }}
       >
         <></>
       </TrackInfoTemplate>
