@@ -1,23 +1,15 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 /* eslint-disable import/no-unresolved */
-// @ts-ignore
 import * as fivesing from '@mfsdk/5sing/index';
-// @ts-ignore
 import * as kugou from '@mfsdk/kugou/index';
-// @ts-ignore
 import * as qq from '@mfsdk/qq/index';
-// @ts-ignore
 import * as kuwo from '@mfsdk/kuwo/index';
-// @ts-ignore
 import * as maoerfm from '@mfsdk/maoerfm/index';
-// @ts-ignore
 import * as migu from '@mfsdk/migu/index';
-// @ts-ignore
 import * as netease from '@mfsdk/netease/index';
-// @ts-ignore
 import * as qianqian from '@mfsdk/qianqian/index';
-// @ts-ignore
 import * as xmly from '@mfsdk/xmly/index';
+import * as kuiaishou from '@mfsdk/kuaishou/index';
 
 import { logger } from '../Logger';
 
@@ -34,6 +26,7 @@ export enum MUSICFREE {
   netease = 'netease',
   qianqian = 'qianqian',
   xmly = 'xmly',
+  kuaishou = 'kuaishou',
   aggregated = 'aggregated',
 }
 
@@ -101,6 +94,9 @@ const qianqianSearch = async (query: string) =>
 const xmlySearch = async (query: string) =>
   genericSearch(query, xmly, MUSICFREE.xmly);
 
+const kuaishouSearch = async (query: string) =>
+  genericSearch(query, kuiaishou, MUSICFREE.kuaishou);
+
 const aggregatedSearcher = {
   [MUSICFREE.fivesing]: fiveSingSearch,
   [MUSICFREE.kugou]: kugouSearch,
@@ -111,6 +107,7 @@ const aggregatedSearcher = {
   [MUSICFREE.netease]: neteaseSearch,
   [MUSICFREE.qianqian]: qianqianSearch,
   [MUSICFREE.xmly]: xmlySearch,
+  [MUSICFREE.kuaishou]: kuaishouSearch,
   [MUSICFREE.aggregated]: () => {
     throw new Error('Function not implemented.');
   },
@@ -172,6 +169,8 @@ export const resolver: Resolver = {
     resolverWrapper(v, qianqian.getMediaSource, quality),
   [MUSICFREE.xmly]: (v: NoxMedia.Song, quality?: string) =>
     resolverWrapper(v, xmly.getMediaSource, quality),
+  [MUSICFREE.kuaishou]: (v: NoxMedia.Song, quality?: string) =>
+    resolverWrapper(v, kuiaishou.getMediaSource, quality),
   [MUSICFREE.aggregated]: () => {
     throw new Error('Function not implemented.');
   },

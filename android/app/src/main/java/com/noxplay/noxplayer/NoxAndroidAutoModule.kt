@@ -16,31 +16,36 @@ class NoxAndroidAutoModule(reactContext: ReactApplicationContext) : ReactContext
   override fun getName() = "NoxAndroidAutoModule"
   @RequiresApi(Build.VERSION_CODES.O_MR1)
   @ReactMethod fun disableShowWhenLocked() {
-    val activity = reactApplicationContext.currentActivity;
-    activity?.setShowWhenLocked(false);
-    activity?.setTurnScreenOn(false);
+    val activity = reactApplicationContext.currentActivity
+    activity?.setShowWhenLocked(false)
+    activity?.setTurnScreenOn(false)
   }
   @ReactMethod fun getDrawOverAppsPermission(callback: Promise) {
-    val context = reactApplicationContext;
-    val activity = context.currentActivity;
-    callback.resolve(Settings.canDrawOverlays(activity));
+    val context = reactApplicationContext
+    val activity = context.currentActivity
+    callback.resolve(Settings.canDrawOverlays(activity))
   }
 
   @ReactMethod fun askDrawOverAppsPermission() {
-    val context = reactApplicationContext;
-    val intent = Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION, Uri.parse("package:com.noxplay.noxplayer"));
-    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-    context.startActivity(intent);
+    val context = reactApplicationContext
+    val intent = Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION, Uri.parse("package:com.noxplay.noxplayer"))
+    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+    context.startActivity(intent)
   }
 
   @ReactMethod fun keepScreenOn(screenOn: Boolean = true) {
-    val context = reactApplicationContext;
-    val activity = context.currentActivity;
-    val window = activity?.window;
+    val context = reactApplicationContext
+    val activity = context.currentActivity
+    val window = activity?.window
     if (screenOn) {
-      window?.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+      window?.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
     } else {
-      window?.clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+      window?.clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
     }
+  }
+
+  @ReactMethod fun isGestureNavigationMode(callback: Promise) {
+    val context = reactApplicationContext
+    callback.resolve(Settings.Secure.getInt(context.contentResolver, "navigation_mode", 0) == 2)
   }
 }

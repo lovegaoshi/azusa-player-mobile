@@ -55,5 +55,5 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-  btnSpacer: { width: 6 },
+  btnSpacer: { width: 8 },
 });

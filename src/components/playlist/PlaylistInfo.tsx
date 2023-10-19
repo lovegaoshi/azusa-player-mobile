@@ -40,6 +40,9 @@ export default ({
   const searchBkgrdWidth = useRef(new Animated.Value(0)).current;
   const searchBkgrdHeight = useRef(new Animated.Value(0)).current;
   const [searchVisible, setSearchVisible] = useState(search);
+  // TODO: a more elegant way to signal content update
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const playlistInfoUpdate = useNoxSetting(state => state.playlistInfoUpdate);
   const playlistSearchAutoFocus: boolean = useNoxSetting(
     state => state.playlistSearchAutoFocus
   );
@@ -155,27 +158,7 @@ export default ({
       ]).start(() => setSearchVisible(false));
     }
   }, [search]);
-
-  /**
-   * pull down menu:
-      <Animated.View
-        style={[
-          {
-            position: 'absolute',
-            backgroundColor: 'grey',
-            width: searchBkgrdWidth.interpolate({
-              inputRange: [0, 100],
-              outputRange: ['0%', '100%'],
-            }),
-            height: searchBkgrdHeight.interpolate({
-              inputRange: [0, 100],
-              outputRange: [50, 100],
-            }),
-          },
-        ]}
-      ></Animated.View>
-   */
-
+  
   return (
     <View style={styles.container}>
       <Animated.View
@@ -199,7 +182,6 @@ export default ({
             style={styles.textInput}
             inputStyle={styles.searchInput}
             ref={searchContainerRef}
-            // autoFocus={playlistSearchAutoFocus}
             selectTextOnFocus
             selectionColor={playerStyle.customColors.textInputSelectionColor}
             icon={search ? 'format-list-checkbox' : () => undefined}
@@ -240,6 +222,5 @@ const styles = StyleSheet.create({
     position: 'absolute',
     paddingLeft: 15,
     zIndex: -1,
-    // Add any additional styles for the Pressable component here
   },
 });

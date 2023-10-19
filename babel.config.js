@@ -1,5 +1,3 @@
-const path = require('path');
-
 module.exports = api => {
   const isTest = api.env('test');
   if (isTest) {
