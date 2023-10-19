@@ -1,11 +1,15 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { View } from 'react-native';
 import {
   NavigationContainer,
   DarkTheme as NavigationDarkTheme,
   DefaultTheme as NavigationDefaultTheme,
+  ParamListBase,
 } from '@react-navigation/native';
-import { createDrawerNavigator } from '@react-navigation/drawer';
+import {
+  createDrawerNavigator,
+  DrawerNavigationProp,
+} from '@react-navigation/drawer';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import {
   IconButton,
@@ -16,6 +20,7 @@ import {
 } from 'react-native-paper';
 import merge from 'deepmerge';
 import { useTranslation } from 'react-i18next';
+
 import { Player } from './components/player/View';
 import Playlist from './components/playlist/View';
 import PlayerBottomPanel from './components/player/PlayerProgressControls';
@@ -38,8 +43,14 @@ const CombinedDefaultTheme = merge(MD3LightTheme, LightTheme);
 const CombinedDarkTheme = merge(MD3DarkTheme, DarkTheme);
 const PlayerStyle = { backgroundColor: 'transparent' };
 
-const NoxPlayer = () => {
+interface Props {
+  navigation: DrawerNavigationProp<ParamListBase>;
+  setNavigation?: (val: DrawerNavigationProp<ParamListBase>) => void;
+}
+const NoxPlayer = ({ navigation, setNavigation = () => undefined }: Props) => {
   const Tab = createMaterialTopTabNavigator();
+
+  useEffect(() => setNavigation(navigation), []);
 
   return (
     <View style={{ flex: 1, justifyContent: 'flex-end' }}>
@@ -56,7 +67,6 @@ const NoxPlayer = () => {
         />
       </Tab.Navigator>
       <PlayerBottomPanel />
-      <NoxAndroidBottomTab />
     </View>
   );
 };
@@ -69,6 +79,12 @@ const AzusaPlayer = () => {
     ? CombinedDarkTheme
     : CombinedDefaultTheme;
   const insets = useSafeAreaInsets();
+  const [navigation, setNavigation] = React.useState<
+    DrawerNavigationProp<ParamListBase> | undefined
+  >(undefined);
+
+  const NoxPlayer2 = ({ navigation }: Props) =>
+    NoxPlayer({ navigation, setNavigation });
 
   return (
     <PaperProvider
@@ -109,7 +125,7 @@ const AzusaPlayer = () => {
                 title: String(t('appDrawer.homeScreenName')),
                 header: () => null,
               }}
-              component={NoxPlayer}
+              component={NoxPlayer2}
             />
             <Drawer.Screen
               name={ViewEnum.EXPORE}
@@ -129,6 +145,7 @@ const AzusaPlayer = () => {
               component={Settings}
             />
           </Drawer.Navigator>
+          <NoxAndroidBottomTab navigation={navigation} />
         </View>
       </NavigationContainer>
     </PaperProvider>
