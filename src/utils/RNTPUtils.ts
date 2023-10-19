@@ -110,11 +110,13 @@ export const initRNTPOptions = () => {
     options.forwardJumpInterval = 1;
     options.backwardJumpInterval = 1;
     options.rewindIcon = getPlaybackModeNotifIcon()[0];
+    /**
     options.customActions = {
       customActionsList: ['customForward', 'customBackward'],
       customForward: getPlaybackModeNotifIcon()[0],
       customBackward: getPlaybackModeNotifIcon()[0],
     };
+    */
   }
   return options;
 };
