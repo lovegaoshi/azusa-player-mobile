@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { NativeModules, Platform, StyleSheet, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import { IconButton } from 'react-native-paper';
 import { useNavigation, ParamListBase } from '@react-navigation/native';
 import {
@@ -9,8 +9,6 @@ import {
 
 import { ViewEnum } from '@enums/View';
 import { useNoxSetting } from '@hooks/useSetting';
-
-const { NoxAndroidAutoModule } = NativeModules;
 
 interface IconProps {
   icon: string;
@@ -38,17 +36,10 @@ interface Props {
   navigation?: DrawerNavigationProp<ParamListBase>;
 }
 const NoxAndroidBottomTab = ({ navigation }: Props) => {
-  const [gestureMode, setGestureMode] = React.useState(false);
   const navigationGlobal = useNavigation();
   const playerStyle = useNoxSetting(state => state.playerStyle);
+  const gestureMode = useNoxSetting(state => state.gestureMode);
   const [route, setRoute] = React.useState('music');
-
-  useEffect(() => {
-    // TODO: how to use await instead of states and useEffect?
-    if (Platform.OS === 'android') {
-      NoxAndroidAutoModule.isGestureNavigationMode().then(setGestureMode);
-    }
-  }, []);
 
   const isDrawerOpen = () => {
     if (navigation === undefined) return false;

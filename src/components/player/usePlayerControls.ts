@@ -24,6 +24,7 @@ const musicTids = [130, 29, 59, 31, 193, 30, 194, 28];
 
 export default () => {
   const currentPlayingId = useNoxSetting(state => state.currentPlayingId);
+  const playerSetting = useNoxSetting(state => state.playerSetting);
   const setCurrentPlayingId = useNoxSetting(state => state.setCurrentPlayingId);
   const findCurrentPlayIndex = () => {
     return getCurrentTPQueue().findIndex(val => val.id === currentPlayingId);
@@ -36,7 +37,14 @@ export default () => {
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const filterMW = (v: any[]) => {
-      return randomChoice(v);
+      let list = v;
+      if (playerSetting.suggestedSkipLongVideo) {
+        list = v.filter(song => song.duration < 600);
+        if (list.length === 0) {
+          list = v;
+        }
+      }
+      return randomChoice(list);
     };
 
     const fallback = async () => {

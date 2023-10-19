@@ -57,6 +57,7 @@ export const DEFAULT_SETTING: NoxStorage.PlayerSettingDict = {
   prefetchTrack: false,
   chatGPTResolveSongName: false,
   trackCoverArtCard: false,
+  suggestedSkipLongVideo: true,
 
   appID,
   language: undefined,

@@ -72,7 +72,7 @@ const TrackInfoTemplate: React.FC<Props> = ({
   );
 
   return (
-    <View style={[styles.container, containerStyle]}>
+    <View style={[styles.container, containerStyle, { width: windowWidth }]}>
       {children || <AlbumArt />}
       <Text style={[styles.titleText, { color: playerStyle.colors.primary }]}>
         {track?.title}
