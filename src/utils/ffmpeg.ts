@@ -31,14 +31,14 @@ export const ffmpegToMP3 = async (fspath: string) => {
 };
 
 export const setTPR128Gain = async (gain: number, fade = 0, init = -1) => {
-  if (gain >= 0) {
+  if (gain > 0) {
     logger.warn(`[ffmpeg] positive ${gain} dB is not yet supported!`);
     TrackPlayer.setAnimatedVolume({ volume: 1, duration: fade, init });
     return;
   }
   try {
     const volume = Math.pow(10, gain / 20);
-    logger.debug(`[r128gain] set r128gain volume to ${volume}`);
+    logger.debug(`[r128gain] set r128gain volume to ${volume} in ${fade}`);
     TrackPlayer.setAnimatedVolume({ volume, duration: fade, init });
   } catch (e) {
     logger.warn(`[ffmpeg] r128gain set error: ${e}`);
@@ -57,7 +57,7 @@ export const setR128Gain = async (
     gain = Number(gain);
   }
   if (song.id !== (await TrackPlayer.getActiveTrack())?.song?.id) {
-    logger.warn(`${song.parsedName} is no longer the active track.`);
+    logger.debug(`${song.parsedName} is no longer the active track.`);
     return;
   }
   setTPR128Gain(gain, fade, init);
