@@ -19,16 +19,16 @@ const GEN_SETTING_BOOLEAN: SettingEntry[] = [
   },
   /*
   {
-    settingName: 'dataSaver',
+    settingName: 'noCookieBiliSearch',
     settingCategory: 'GeneralSettings',
   },
   */
   {
-    settingName: 'fastBiliSearch',
+    settingName: 'dataSaver',
     settingCategory: 'GeneralSettings',
   },
   {
-    settingName: 'noCookieBiliSearch',
+    settingName: 'fastBiliSearch',
     settingCategory: 'GeneralSettings',
   },
   {
