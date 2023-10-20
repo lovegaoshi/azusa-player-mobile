@@ -9,7 +9,7 @@ import TrackPlayer, {
 import { logger } from './Logger';
 import appStore, {
   addDownloadPromise,
-  getR128Gain,
+  getR128GainAsync,
   resetResolvedURL,
 } from '@stores/appStore';
 import {
@@ -126,7 +126,7 @@ export const fadePause = () =>
 
 export const fadePlay = async () => {
   const { fadeIntervalMs } = getState();
-  setTPR128Gain(getR128Gain() || 0, fadeIntervalMs, 0);
+  setTPR128Gain((await getR128GainAsync()) || 0, fadeIntervalMs, 0);
 };
 
 export const cycleThroughPlaymode = () => {

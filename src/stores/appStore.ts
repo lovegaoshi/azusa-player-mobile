@@ -1,6 +1,6 @@
 // vanilla store of zustand serving playbackServices.
 import { createStore } from 'zustand/vanilla';
-import { UpdateOptions } from 'react-native-track-player';
+import TrackPlayer, { UpdateOptions } from 'react-native-track-player';
 
 import {
   getR128GainMapping,
@@ -123,6 +123,13 @@ export const saveR128Gain = async (val: NoxStorage.R128Dict) => {
 export const getR128Gain = (song?: NoxMedia.Song) => {
   const { r128gain, currentPlayingId } = appStore.getState();
   return r128gain[song ? song.id : currentPlayingId] ?? null;
+};
+
+export const getR128GainAsync = async (song?: NoxMedia.Song) => {
+  if (song === undefined) {
+    song = (await TrackPlayer.getActiveTrack())?.song;
+  }
+  return getR128Gain(song);
 };
 
 export const addR128Gain = (song: NoxMedia.Song, gain: number | null) => {

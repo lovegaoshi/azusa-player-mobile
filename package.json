@@ -21,7 +21,7 @@
     "prepare": "yarn run compile",
     "pretest": "yarn run compile",
     "prettify": "prettier --write ./src",
-    "ios:build": "cd ios; rm Podfile.lock; pod install; cd .."
+    "ios:build": "yarn; cd ios; rm Podfile.lock; pod pod install --repo-update; cd .."
   },
   "dependencies": {
     "@react-native-async-storage/async-storage": "^1.18.1",
