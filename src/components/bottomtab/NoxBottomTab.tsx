@@ -61,37 +61,39 @@ const NoxAndroidBottomTab = ({ navigation }: Props) => {
 
   if (gestureMode) {
     return (
-      <View
-        style={[
-          styles.panel,
-          { backgroundColor: playerStyle.colors.background },
-        ]}
-      >
-        <BottomIconButton
-          icon={renderIcon(Routes.playlist)}
-          onPress={onDrawerPress}
-        />
-        <BottomIconButton
-          icon={renderIcon(Routes.music)}
-          onPress={() => {
-            navigationGlobal.navigate(ViewEnum.PLAYER_HOME as never);
-            setRoute(Routes.music);
-          }}
-        />
-        <BottomIconButton
-          icon={renderIcon(Routes.explore)}
-          onPress={() => {
-            navigationGlobal.navigate(ViewEnum.EXPORE as never);
-            setRoute(Routes.explore);
-          }}
-        />
-        <BottomIconButton
-          icon={renderIcon(Routes.setting)}
-          onPress={() => {
-            navigationGlobal.navigate(ViewEnum.SETTINGS as never);
-            setRoute(Routes.setting);
-          }}
-        />
+      <View style={{ backgroundColor: playerStyle.colors.background }}>
+        <View
+          style={[
+            styles.panel,
+            { backgroundColor: playerStyle.colors.background },
+          ]}
+        >
+          <BottomIconButton
+            icon={renderIcon(Routes.playlist)}
+            onPress={onDrawerPress}
+          />
+          <BottomIconButton
+            icon={renderIcon(Routes.music)}
+            onPress={() => {
+              navigationGlobal.navigate(ViewEnum.PLAYER_HOME as never);
+              setRoute(Routes.music);
+            }}
+          />
+          <BottomIconButton
+            icon={renderIcon(Routes.explore)}
+            onPress={() => {
+              navigationGlobal.navigate(ViewEnum.EXPORE as never);
+              setRoute(Routes.explore);
+            }}
+          />
+          <BottomIconButton
+            icon={renderIcon(Routes.setting)}
+            onPress={() => {
+              navigationGlobal.navigate(ViewEnum.SETTINGS as never);
+              setRoute(Routes.setting);
+            }}
+          />
+        </View>
       </View>
     );
   }
