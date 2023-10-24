@@ -439,8 +439,10 @@ export const importPlayerContentRaw = async (parsedContent: any) => {
   if (importedAppID !== appID) {
     throw new Error(`${importedAppID} is not valid appID`);
   } else {
+    const oldCache = await getCachedMediaMapping();
     await clearStorage();
     await AsyncStorage.multiSet(parsedContent);
+    await saveCachedMediaMapping(oldCache);
     return await initPlayerObject();
   }
 };
