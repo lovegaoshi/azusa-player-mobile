@@ -3,7 +3,6 @@ import { useEffect, useState } from 'react';
 import TrackPlayer, {
   Event,
   State,
-  useActiveTrack,
   RepeatMode,
 } from 'react-native-track-player';
 import { useTranslation } from 'react-i18next';
@@ -40,11 +39,11 @@ const usePlayback = () => {
   const { t } = useTranslation();
   const currentPlayingList = useNoxSetting(state => state.currentPlayingList);
   const playlists = useNoxSetting(state => state.playlists);
+  const currentPlayingId = useNoxSetting(state => state.currentPlayingId);
   const setCurrentPlayingId = useNoxSetting(state => state.setCurrentPlayingId);
   const setCurrentPlayingList = useNoxSetting(
     state => state.setCurrentPlayingList
   );
-  const track = useActiveTrack();
   const netInfo = useNetInfo();
   const playerSetting = useNoxSetting(state => state.playerSetting);
 
@@ -81,10 +80,12 @@ const usePlayback = () => {
         song = randomChoice(playlist.songList);
       }
     }
-    setCurrentPlayingId(song.id);
-    if (!interruption && track?.song?.id === song.id) {
+    // HACK: track?.song? is somehow updated already here
+    // TODO: fix this
+    if (!interruption && currentPlayingId === song.id) {
       clearPlaylistUninterrupted();
     } else {
+      setCurrentPlayingId(song.id);
       await TrackPlayer.reset();
       await TrackPlayer.add(await songlistToTracklist([song]));
       TrackPlayer.play();
