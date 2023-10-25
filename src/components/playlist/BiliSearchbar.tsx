@@ -135,7 +135,10 @@ export default ({
     setSearchPlaylist(newSearchPlaylist);
     setCurrentPlaylist(newSearchPlaylist);
     if (play) {
-      playFromPlaylist(newSearchPlaylist, newSearchPlaylist.songList[0]);
+      playFromPlaylist({
+        playlist: newSearchPlaylist,
+        song: newSearchPlaylist.songList[0],
+      });
     }
   };
 

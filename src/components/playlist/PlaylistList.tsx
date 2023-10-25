@@ -196,7 +196,10 @@ const PlaylistList = () => {
     const queuedSongList = playerSetting.keepSearchedSongListWhenPlaying
       ? currentRows
       : currentPlaylist.songList;
-    playFromPlaylist({ ...currentPlaylist, songList: queuedSongList }, song);
+    playFromPlaylist({
+      playlist: { ...currentPlaylist, songList: queuedSongList },
+      song,
+    });
   };
 
   const refreshPlaylist = async () => {
@@ -224,8 +227,8 @@ const PlaylistList = () => {
     const currentIndex =
       toIndex < 0
         ? currentPlaylist.songList.findIndex(
-          song => song.id === currentPlayingId
-        )
+            song => song.id === currentPlayingId
+          )
         : toIndex;
     if (currentIndex > -1) {
       playlistRef.current?.scrollToIndex({
