@@ -11,7 +11,7 @@
     "start": "react-native start",
     "test": "jest",
     "lint": "gts lint",
-    "fresh": "rm -rf node_modules ; cd .. && yarn build ; cd example && yarn install",
+    "fresh": "rm -rf node_modules ; yarn; git submodule update --recursive --remote",
     "types": "tsc --noEmit true",
     "ci:lint": "eslint src --max-warnings=0",
     "ci:format": "prettier --check src",
