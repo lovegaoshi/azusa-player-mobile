@@ -7,6 +7,7 @@ import { useTranslation } from 'react-i18next';
 import { useDebounce } from 'use-debounce';
 import { useNetInfo } from '@react-native-community/netinfo';
 import { useFocusEffect } from '@react-navigation/native';
+import { activateKeepAwakeAsync, deactivateKeepAwake } from 'expo-keep-awake';
 
 import { styles } from '../style';
 import SongInfo from './SongInfo';
@@ -217,6 +218,7 @@ const PlaylistList = () => {
       duration: Snackbar.LENGTH_INDEFINITE,
     });
     setRefreshing(true);
+    activateKeepAwakeAsync();
     await updateSubscribeFavList({
       listObj: currentPlaylist,
       progressEmitter,
@@ -227,6 +229,7 @@ const PlaylistList = () => {
       text: t('PlaylistOperations.updated', { playlist: currentPlaylist }),
     });
     setRefreshing(false);
+    deactivateKeepAwake();
   };
 
   const scrollTo = (toIndex = -1) => {
