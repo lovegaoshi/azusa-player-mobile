@@ -66,6 +66,7 @@ const TrackInfoTemplate: React.FC<Props> = ({
                   uri: `${track?.artwork}`,
                 }
           }
+          transition={{ effect: 'flip-from-top' }}
         />
       </Animated.View>
     </TouchableWithoutFeedback>
