@@ -7,7 +7,7 @@ import {
   PanResponder,
   Dimensions,
 } from 'react-native';
-import Image from 'react-native-fast-image';
+import { Image } from 'expo-image';
 
 import { localSplashes } from '../background/AppOpenSplash';
 
@@ -141,7 +141,7 @@ export default () => {
                   : undefined
               }
               style={styles.splashCard}
-              resizeMode={Image.resizeMode.contain}
+              resizeMode={'contain'}
             />
           </Animated.View>
         ))

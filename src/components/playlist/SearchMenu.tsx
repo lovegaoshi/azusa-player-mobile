@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Menu } from 'react-native-paper';
 import Svg, { Path } from 'react-native-svg';
-import Image from 'react-native-fast-image';
+import { Image } from 'expo-image';
 
 import { SEARCH_OPTIONS } from '@enums/Storage';
 import { saveDefaultSearch } from '@utils/ChromeStorage';

@@ -1,5 +1,5 @@
 import { Dimensions } from 'react-native';
-import Image from 'react-native-fast-image';
+import { Image } from 'expo-image';
 
 import { randomChoice } from '@utils/Utils';
 
@@ -17,11 +17,7 @@ const style = {
 };
 
 const AppOpenSplash = () => (
-  <Image
-    source={randomSplashes()}
-    style={style}
-    resizeMode={Image.resizeMode.contain}
-  />
+  <Image source={randomSplashes()} style={style} resizeMode={'contain'} />
 );
 
 export default AppOpenSplash;

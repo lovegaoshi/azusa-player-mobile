@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Pressable } from 'react-native';
 // import { Image } from 'expo-image';
-import Image from 'react-native-fast-image';
+import { Image } from 'expo-image';
 
 const getRandomNumberExclude = (randRange: number, exclude = -1) => {
   if (exclude > 0) {
@@ -53,7 +53,7 @@ export default function RandomGIFButton({
       <Image
         style={{ width: iconsize, height: iconsize }}
         source={randomGIFURI}
-        resizeMode={Image.resizeMode.contain}
+        resizeMode={'contain'}
         // contentFit="contain"
       />
     </Pressable>

@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
-import Image from 'react-native-fast-image';
+import { Image } from 'expo-image';
 
 import GenericCheckDialog from '../../dialogs/GenericCheckDialog';
 import { SettingListItem } from '../useRenderSetting';
