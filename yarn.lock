@@ -10063,7 +10063,7 @@ react-native-app-auth@^7.0.0:
 
 "react-native-background-timer@git+https://github.com/lovegaoshi/react-native-background-timer.git":
   version "2.4.1"
-  resolved "git+https://github.com/lovegaoshi/react-native-background-timer.git#b19ef919f36517fc873bf5a2bee38409e0b91aad"
+  resolved "git+https://github.com/lovegaoshi/react-native-background-timer.git#dce9c87de766027b51d39326d598477a74dfe91c"
 
 react-native-base64@0.0.2:
   version "0.0.2"

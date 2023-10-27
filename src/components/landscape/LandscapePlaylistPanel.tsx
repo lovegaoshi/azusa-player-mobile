@@ -19,12 +19,15 @@ export default ({ panelWidth }: Props) => {
     width: panelWidth,
     height: Dimensions.get('window').height,
   };
+
+  const WrappedLyricView = () => <LandscapeLyricView panelStyle={panelStyle} />;
+
   return (
     <View style={panelStyle}>
       <Stack.Navigator>
         <Stack.Screen
           name={ViewEnum.LYRICS}
-          component={() => <LandscapeLyricView panelStyle={panelStyle} />}
+          component={WrappedLyricView}
           options={{ headerShown: false }}
         />
         <Stack.Screen
