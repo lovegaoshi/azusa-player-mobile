@@ -20,6 +20,7 @@ import { syncFavlist } from '@utils/Bilibili/bilifavOperate';
 import noxCache, { noxCacheKey } from '@utils/Cache';
 import { i0hdslbHTTPResolve } from '@utils/Utils';
 import usePlayback from '@hooks/usePlayback';
+import useTPControls from '@hooks/useTPControls';
 
 interface BackgroundProps {
   song: NoxMedia.Song;
@@ -45,6 +46,7 @@ const PlaylistList = () => {
   const { t } = useTranslation();
   const currentPlayingList = useNoxSetting(state => state.currentPlayingList);
   const currentPlayingId = useNoxSetting(state => state.currentPlayingId);
+  const setCurrentPlayingId = useNoxSetting(state => state.setCurrentPlayingId);
   const playerSetting = useNoxSetting(state => state.playerSetting);
   const playerStyle = useNoxSetting(state => state.playerStyle);
   const currentPlaylist = useNoxSetting(state => state.currentPlaylist);
@@ -72,6 +74,7 @@ const PlaylistList = () => {
     state => state.togglePlaylistInfoUpdate
   );
   const { playFromPlaylist } = usePlayback();
+  const { preformFade } = useTPControls();
 
   const resetSelected = (val = false) =>
     setSelected(Array(currentPlaylist.songList.length).fill(val));
@@ -192,14 +195,17 @@ const PlaylistList = () => {
       currentPlaylist.id === currentPlayingList.id
     )
       return;
-
+    // hACK: more responsive
+    setCurrentPlayingId(song.id);
     const queuedSongList = playerSetting.keepSearchedSongListWhenPlaying
       ? currentRows
       : currentPlaylist.songList;
-    playFromPlaylist({
-      playlist: { ...currentPlaylist, songList: queuedSongList },
-      song,
-    });
+    const callback = () =>
+      playFromPlaylist({
+        playlist: { ...currentPlaylist, songList: queuedSongList },
+        song,
+      });
+    preformFade(callback);
   };
 
   const refreshPlaylist = async () => {
