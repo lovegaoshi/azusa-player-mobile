@@ -58,6 +58,9 @@ const PlaylistList = () => {
     state => state.searchBarProgressEmitter
   );
   const updatePlaylist = useNoxSetting(state => state.updatePlaylist);
+  const setPlaylistSearchAutoFocus = useNoxSetting(
+    state => state.setPlaylistSearchAutoFocus
+  );
 
   const [selected, setSelected] = useState<boolean[]>([]);
   const [checking, setChecking] = useState(false);
@@ -247,6 +250,19 @@ const PlaylistList = () => {
     }
   };
 
+  /**
+   * playlistShouldReRender is a global state that indicates playlist should be
+   * refreshed. right now its only called when the playlist is updated in updatePlaylist.
+   * this should in turn clear all searching, checking and filtering.
+   */
+  useEffect(() => {
+    resetSelected();
+    setChecking(false);
+    setSearching(false);
+    setCurrentRows(currentPlaylist.songList);
+    setCachedSongs(Array.from(noxCache.noxMediaCache.cache.keys()));
+  }, [currentPlaylist, playlistShouldReRender]);
+
   useEffect(() => {
     if (
       playerSetting.autoRSSUpdate &&
@@ -263,21 +279,10 @@ const PlaylistList = () => {
     }
     if (playerSetting.dataSaver && netInfo.type === 'cellular') {
       searchAndEnableSearch(SearchRegex.cachedMatch.text);
+      handleSearch(SearchRegex.cachedMatch.text);
+      setPlaylistSearchAutoFocus(false);
     }
   }, [currentPlaylist]);
-
-  /**
-   * playlistShouldReRender is a global state that indicates playlist should be
-   * refreshed. right now its only called when the playlist is updated in updatePlaylist.
-   * this should in turn clear all searching, checking and filtering.
-   */
-  useEffect(() => {
-    resetSelected();
-    setChecking(false);
-    setSearching(false);
-    setCurrentRows(currentPlaylist.songList);
-    setCachedSongs(Array.from(noxCache.noxMediaCache.cache.keys()));
-  }, [currentPlaylist, playlistShouldReRender]);
 
   useEffect(() => handleSearch(debouncedSearchText), [debouncedSearchText]);
 
