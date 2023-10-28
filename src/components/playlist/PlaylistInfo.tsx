@@ -158,7 +158,7 @@ export default ({
       ]).start(() => setSearchVisible(false));
     }
   }, [search]);
-  
+
   return (
     <View style={styles.container}>
       <Animated.View

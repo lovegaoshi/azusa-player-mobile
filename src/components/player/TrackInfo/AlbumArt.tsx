@@ -7,7 +7,7 @@ import {
   TouchableWithoutFeedback,
 } from 'react-native';
 import type { Track } from 'react-native-track-player';
-import Image from 'react-native-fast-image';
+import { Image } from 'expo-image';
 
 import { useNoxSetting } from '@hooks/useSetting';
 import { LyricView } from '../Lyric';
@@ -90,6 +90,7 @@ const AlbumArt: React.FC<Props> = ({
                     uri: `${track?.artwork}`,
                   }
             }
+            transition={{ effect: 'flip-from-top' }}
           />
         </Animated.View>
       </TouchableWithoutFeedback>

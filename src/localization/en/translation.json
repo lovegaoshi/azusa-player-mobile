@@ -92,7 +92,7 @@
     "keepSearchedSongListWhenPlayingName": "Play searched results",
     "keepSearchedSongListWhenPlayingDesc": "When searching in a playlist, play the seached results.",
     "dataSaverName": "Data Saver",
-    "dataSaverDesc": "TODO: Render low quality assets to save data.",
+    "dataSaverDesc": "Prefers cached songs when using cellular data",
     "noCookieBiliSearchName": "Bilibili Customized Search",
     "noCookieBiliSearchDesc": "TODO: Enable credentials in bilibili search to show customized searchresults",
     "updateLoadedTrackName": "Update Track Metadata",

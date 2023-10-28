@@ -92,7 +92,7 @@
     "keepSearchedSongListWhenPlayingName": "播放搜索结果歌单",
     "keepSearchedSongListWhenPlayingDesc": "搜索歌单时，按搜索的结果播放歌单",
     "dataSaverName": "省流模式",
-    "dataSaverDesc": "TODO: 解析低质量素材节省流量",
+    "dataSaverDesc": "使用流量时优先播放缓存的歌曲",
     "noCookieBiliSearchName": "个性化b站搜索结果",
     "noCookieBiliSearchDesc": "TODO: 搜索b站时提交cookies获得个性化搜索结果",
     "updateLoadedTrackName": "更新歌曲metadata",

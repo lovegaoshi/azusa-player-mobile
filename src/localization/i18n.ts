@@ -3,13 +3,29 @@ import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
 import translationEN from './en/translation.json';
 import translationZHCN from './zhcn/translation.json';
-import { Platform, NativeModules } from 'react-native';
+import { Settings, I18nManager, Platform, NativeModules } from 'react-native';
 
-const deviceLanguage =
+function getLocale() {
+  let currentLocale = 'en';
+
+  if (Platform.OS === 'ios') {
+    const settings = Settings.get('AppleLocale');
+    const locale = settings || settings?.[0];
+    if (locale) currentLocale = locale;
+  } else {
+    const locale = I18nManager.getConstants().localeIdentifier;
+    if (locale) currentLocale = locale;
+  }
+
+  return currentLocale;
+}
+const deviceLanguage = getLocale();
+/**
   Platform.OS === 'ios'
     ? NativeModules.SettingsManager.settings.AppleLocale ||
       NativeModules.SettingsManager.settings.AppleLanguages[0] //iOS 13
     : NativeModules.I18nManager.localeIdentifier;
+ */
 
 export const resources = {
   'zh_CN_#Hans': {

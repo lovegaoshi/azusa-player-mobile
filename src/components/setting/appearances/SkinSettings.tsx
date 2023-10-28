@@ -1,5 +1,5 @@
 import * as React from 'react';
-import Image from 'react-native-fast-image';
+import { Image } from 'expo-image';
 import {
   View,
   SafeAreaView,

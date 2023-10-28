@@ -100,6 +100,7 @@ export const searchLyricOptions = async (searchKey: string) => {
   const json = await res.json();
   console.debug(json);
   const data = json.req.data.body.song.list;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   return data.map((s: any, v: any) => ({
     key: s.mid,
     songMid: s.mid,

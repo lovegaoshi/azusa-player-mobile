@@ -16,7 +16,7 @@ PODS:
     - ExpoModulesCore
   - EXFont (11.4.0):
     - ExpoModulesCore
-  - Expo (49.0.15):
+  - Expo (49.0.16):
     - ExpoModulesCore
   - ExpoClipboard (4.3.1):
     - ExpoModulesCore
@@ -123,6 +123,9 @@ PODS:
     - lottie-ios (~> 4.3.0)
     - React-Core
   - OpenSSL-Universal (1.1.1100)
+  - PromisesObjC (2.3.1)
+  - PromisesSwift (2.3.1):
+    - PromisesObjC (= 2.3.1)
   - Protobuf (3.22.1)
   - RCT-Folly (2021.07.22.00):
     - boost
@@ -447,13 +450,14 @@ PODS:
   - react-native-svga-player (1.1.0):
     - React
     - SVGAPlayer
-  - react-native-track-player (4.0.0-rc09):
+  - react-native-track-player (4.0.0):
     - React-Core
-    - SwiftAudioEx (= 1.0.0-rc.10)
-  - react-native-video (5.2.1):
+    - SwiftAudioEx (= 1.0.0)
+  - react-native-video (6.0.0-alpha.8):
     - React-Core
-    - react-native-video/Video (= 5.2.1)
-  - react-native-video/Video (5.2.1):
+    - react-native-video/Video (= 6.0.0-alpha.8)
+  - react-native-video/Video (6.0.0-alpha.8):
+    - PromisesSwift
     - React-Core
   - react-native-webview (13.6.2):
     - React-Core
@@ -573,9 +577,9 @@ PODS:
     - React-Core
     - SDWebImage (~> 5.11.1)
     - SDWebImageWebPCoder (~> 0.8.4)
-  - RNFlashList (1.6.1):
+  - RNFlashList (1.6.2):
     - React-Core
-  - RNGestureHandler (2.13.3):
+  - RNGestureHandler (2.13.4):
     - RCT-Folly (= 2021.07.22.00)
     - React-Core
   - RNReanimated (3.5.4):
@@ -634,7 +638,7 @@ PODS:
     - SVGAPlayer/ProtoFiles
   - SVGAPlayer/ProtoFiles (2.5.7):
     - Protobuf (~> 3.4)
-  - SwiftAudioEx (1.0.0-rc.10)
+  - SwiftAudioEx (1.0.0)
   - Yoga (1.14.0)
   - YogaKit (1.18.1):
     - Yoga (~> 1.14)
@@ -757,6 +761,8 @@ SPEC REPOS:
     - libwebp
     - lottie-ios
     - OpenSSL-Universal
+    - PromisesObjC
+    - PromisesSwift
     - Protobuf
     - SDWebImage
     - SDWebImageWebPCoder
@@ -924,7 +930,7 @@ SPEC CHECKSUMS:
   EXConstants: ce5bbea779da8031ac818c36bea41b10e14d04e1
   EXFileSystem: 2b826a3bf1071a4b80a8457e97124783d1ac860e
   EXFont: 738c44c390953ebcbab075a4848bfbef025fd9ee
-  Expo: 4ddd44075a2e7c7c63a0f5b1e05223be74d48bc6
+  Expo: fcfd60c1ed6806dee5103b210335ae0c72f675ed
   ExpoClipboard: 695f274f8e028cd113837f917da40c76850877eb
   ExpoKeepAwake: be4cbd52d9b177cde0fd66daa1913afa3161fc1d
   ExpoModulesCore: 51cb2e7ab4c8da14be3f40b66d54c1781002e99d
@@ -949,6 +955,8 @@ SPEC CHECKSUMS:
   lottie-ios: 25e7b2675dad5c3ddad369ac9baab03560c5bfdd
   lottie-react-native: c9f1db4f4124dcce9f8159e65d8dc6e8bcb11fb4
   OpenSSL-Universal: ebc357f1e6bc71fa463ccb2fe676756aff50e88c
+  PromisesObjC: c50d2056b5253dadbd6c2bea79b0674bd5a52fa4
+  PromisesSwift: 28dca69a9c40779916ac2d6985a0192a5cb4a265
   Protobuf: d7f7c8329edf5eb8af65547a8ba3e9c1cee927d5
   RCT-Folly: 424b8c9a7a0b9ab2886ffe9c3b041ef628fd4fb1
   RCTRequired: 28469809442eb4eb5528462705f7d852948c8a74
@@ -975,8 +983,8 @@ SPEC CHECKSUMS:
   react-native-pager-view: 02a5c4962530f7efc10dd51ee9cdabeff5e6c631
   react-native-safe-area-context: 238cd8b619e05cb904ccad97ef42e84d1b5ae6ec
   react-native-svga-player: f1c7faf0864b22437b9b7cc7d7aa202d56f3906c
-  react-native-track-player: 904ab55cdc68ebfb398df287bc46f195327f69c8
-  react-native-video: c26780b224543c62d5e1b2a7244a5cd1b50e8253
+  react-native-track-player: ec01d92e7c66d6383926e6028f4f233c7a831062
+  react-native-video: 86950ad481cec184d7c9420ec3bca0c27904bbcd
   react-native-webview: 8fc09f66a1a5b16bbe37c3878fda27d5982bb776
   React-NativeModulesApple: 02e35e9a51e10c6422f04f5e4076a7c02243fff2
   React-perflogger: e3596db7e753f51766bceadc061936ef1472edc3
@@ -997,8 +1005,8 @@ SPEC CHECKSUMS:
   ReactCommon: dd03c17275c200496f346af93a7b94c53f3093a4
   RNCAsyncStorage: c913ede1fa163a71cea118ed4670bbaaa4b511bb
   RNFastImage: 5c9c9fed9c076e521b3f509fe79e790418a544e8
-  RNFlashList: 236646d48f224a034f35baa0242e1b77db063b1e
-  RNGestureHandler: fa40ab6b6cafaa7609294d31f8e8fbbd0cce8ea6
+  RNFlashList: 1983f915ae34e9253e413f31387959590d102f5e
+  RNGestureHandler: 6e46dde1f87e5f018a54fe5d40cd0e0b942b49ee
   RNReanimated: ab2e96c6d5591c3dfbb38a464f54c8d17fb34a87
   RNScreens: b21dc57dfa2b710c30ec600786a3fc223b1b92e7
   RNShareMenu: cb9dac548c8bf147d06f0bf07296ad51ea9f5fc3
@@ -1010,7 +1018,7 @@ SPEC CHECKSUMS:
   SocketRocket: f32cd54efbe0f095c4d7594881e52619cfe80b17
   SSZipArchive: fe6a26b2a54d5a0890f2567b5cc6de5caa600aef
   SVGAPlayer: 318b85a78b61292d6ae9dfcd651f3f0d1cdadd86
-  SwiftAudioEx: 8cc0c9e67a8d3222fc0f2b3064404f86e341192a
+  SwiftAudioEx: 6f511018b7a0fdfd14ed1bb4081f953588245cc0
   Yoga: b76f1acfda8212aa16b7e26bcce3983230c82603
   YogaKit: f782866e155069a2cca2517aafea43200b01fd5a
 
