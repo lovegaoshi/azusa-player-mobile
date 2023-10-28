@@ -261,6 +261,9 @@ const PlaylistList = () => {
         }
       });
     }
+    if (playerSetting.dataSaver && netInfo.type === 'cellular') {
+      searchAndEnableSearch(SearchRegex.cachedMatch.text);
+    }
   }, [currentPlaylist]);
 
   /**
