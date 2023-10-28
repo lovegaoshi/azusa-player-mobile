@@ -72,32 +72,31 @@ const TrackInfoTemplate: React.FC<Props> = ({
     </TouchableWithoutFeedback>
   );
 
+  const textStyle = [
+    styles.titleText,
+    {
+      color: playerStyle.colors.primary,
+    },
+  ];
+  const textSubStyle = [
+    styles.artistText,
+    {
+      color: playerStyle.colors.secondary,
+    },
+  ];
+
   return (
     <View style={[styles.container, containerStyle, { width: windowWidth }]}>
       {children || <AlbumArt />}
-      <Text style={[styles.titleText, { color: playerStyle.colors.primary }]}>
-        {track?.title}
-      </Text>
+      <Text style={textStyle}>{track?.title}</Text>
       <View style={styles.infoContainer}>
         <View style={styles.favoriteButtonContainer}>
           <FavReloadButton track={track} />
         </View>
         <View style={styles.artistInfoContainer}>
-          <Text
-            style={[styles.artistText, { color: playerStyle.colors.secondary }]}
-          >
-            {track?.artist}
-          </Text>
-          <Text
-            style={[styles.artistText, { color: playerStyle.colors.secondary }]}
-          >
-            {currentPlayingList.title}
-          </Text>
-          <Text
-            style={[styles.artistText, { color: playerStyle.colors.secondary }]}
-          >
-            {getTrackLocation()}
-          </Text>
+          <Text style={textSubStyle}>{track?.artist}</Text>
+          <Text style={textSubStyle}>{currentPlayingList.title}</Text>
+          <Text style={textSubStyle}>{getTrackLocation()}</Text>
         </View>
         <View style={styles.songMenuButtonContainer}>
           <SongMenuButton track={track} />
