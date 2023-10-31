@@ -250,7 +250,7 @@ jobs:
         run: |
           cd ios
           mkdir build/Payload
-          mv build/APM.xcarchive/Products/Applications/example.app build/Payload/example.app
+          mv build/APM.xcarchive/Products/Applications/AzusaPlayer.app build/Payload/AzusaPlayer.app
           cd build
           zip -r APM.ipa Payload/
 
