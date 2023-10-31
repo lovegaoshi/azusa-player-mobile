@@ -53,7 +53,7 @@ target 'azusa-player-mobile' do
     :app_path => "#{Pod::Config.instance.installation_root}/.."
   )
 
-  target 'exampleTests' do
+  target 'APMTests' do
     inherit! :complete
     use_react_native!
     # Pods for testing

@@ -6,8 +6,8 @@ import {
   StyleSheet,
   Platform,
 } from 'react-native';
-import { Video, ResizeMode } from 'expo-av';
-// import Video from 'react-native-video';
+// import { Video, ResizeMode } from 'expo-av';
+import Video from 'react-native-video';
 import { useNoxSetting } from '@hooks/useSetting';
 import { fetchVideoPlayUrlPromise } from '@utils/mediafetch/bilivideo';
 import { customReqHeader } from '@utils/BiliFetch';
@@ -105,17 +105,17 @@ const MainBackground = (props: { children: React.JSX.Element }) => {
             }}
             style={{ width: '100%', height: '100%', position: 'absolute' }}
             onError={logger.error}
+            /**
             isLooping
             resizeMode={ResizeMode.COVER}
             shouldPlay={true}
             isMuted={true}
-            /**
+             *
+             */
             repeat
             muted
             resizeMode="cover"
             preventsDisplaySleepDuringVideoPlayback={false}
-             *
-             */
           />
           <View
             style={[

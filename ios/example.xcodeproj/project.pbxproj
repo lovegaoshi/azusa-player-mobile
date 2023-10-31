@@ -17,8 +17,8 @@
 		AA9F058A2AB48946005FA2C6 /* libavfilter.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA9F05892AB48946005FA2C6 /* libavfilter.xcframework */; };
 		AA9F058E2AB489B1005FA2C6 /* libavutil.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA9F058D2AB489B1005FA2C6 /* libavutil.xcframework */; };
 		BDB3121DF2250E03AB81F873 /* ExpoModulesProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 629CB7CB958060A0F3604281 /* ExpoModulesProvider.swift */; };
-		C53F31B167C9C77C0619117A /* ExpoModulesProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 138345A294D5D87DC84127A5 /* ExpoModulesProvider.swift */; };
-		F161E43DC15C3C1CE6A17FC9 /* libPods-azusa-player-mobile-exampleTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 28468BD50B4AAEF16D728F55 /* libPods-azusa-player-mobile-exampleTests.a */; };
+		DC4736F4D25A78F1E3AF4737 /* ExpoModulesProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BED8643AF15A76097355103 /* ExpoModulesProvider.swift */; };
+		DD0F20A1AEB65330E3293A26 /* libPods-azusa-player-mobile-APMTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9820FB6C9BC4AE8228F06F70 /* libPods-azusa-player-mobile-APMTests.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -32,10 +32,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		00E356EE1AD99517003FC87E /* exampleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = exampleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		00E356EE1AD99517003FC87E /* APMTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = APMTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00E356F21AD99517003FC87E /* exampleTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = exampleTests.m; sourceTree = "<group>"; };
-		138345A294D5D87DC84127A5 /* ExpoModulesProvider.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ExpoModulesProvider.swift; path = "Pods/Target Support Files/Pods-azusa-player-mobile-exampleTests/ExpoModulesProvider.swift"; sourceTree = "<group>"; };
 		13B07F961A680F5B00A75B9A /* AzusaPlayer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AzusaPlayer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = example/AppDelegate.h; sourceTree = "<group>"; };
 		13B07FB01A68108700A75B9A /* AppDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = AppDelegate.mm; path = example/AppDelegate.mm; sourceTree = "<group>"; };
@@ -43,13 +42,16 @@
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = example/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = example/main.m; sourceTree = "<group>"; };
 		13EEFF6BBEF989EDAD5FC4B7 /* libPods-azusa-player-mobile.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-azusa-player-mobile.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		28468BD50B4AAEF16D728F55 /* libPods-azusa-player-mobile-exampleTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-azusa-player-mobile-exampleTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		1BED8643AF15A76097355103 /* ExpoModulesProvider.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ExpoModulesProvider.swift; path = "Pods/Target Support Files/Pods-azusa-player-mobile-APMTests/ExpoModulesProvider.swift"; sourceTree = "<group>"; };
+		269A6C2B650C46BC21877CBC /* Pods-azusa-player-mobile-APMTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-azusa-player-mobile-APMTests.debug.xcconfig"; path = "Target Support Files/Pods-azusa-player-mobile-APMTests/Pods-azusa-player-mobile-APMTests.debug.xcconfig"; sourceTree = "<group>"; };
 		2C2F9802D9A70707E1CB329F /* Pods-example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-example.release.xcconfig"; path = "Target Support Files/Pods-example/Pods-example.release.xcconfig"; sourceTree = "<group>"; };
 		3E446D4365C1A108616D8ADA /* Pods-azusa-player-mobile.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-azusa-player-mobile.release.xcconfig"; path = "Target Support Files/Pods-azusa-player-mobile/Pods-azusa-player-mobile.release.xcconfig"; sourceTree = "<group>"; };
 		629CB7CB958060A0F3604281 /* ExpoModulesProvider.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ExpoModulesProvider.swift; path = "Pods/Target Support Files/Pods-azusa-player-mobile/ExpoModulesProvider.swift"; sourceTree = "<group>"; };
 		7CA01EA30DD1126F19B1D56B /* Pods-azusa-player-mobile-exampleTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-azusa-player-mobile-exampleTests.debug.xcconfig"; path = "Target Support Files/Pods-azusa-player-mobile-exampleTests/Pods-azusa-player-mobile-exampleTests.debug.xcconfig"; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = example/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		90F8A623B625BC290532B128 /* Pods-azusa-player-mobile-exampleTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-azusa-player-mobile-exampleTests.release.xcconfig"; path = "Target Support Files/Pods-azusa-player-mobile-exampleTests/Pods-azusa-player-mobile-exampleTests.release.xcconfig"; sourceTree = "<group>"; };
+		9820FB6C9BC4AE8228F06F70 /* libPods-azusa-player-mobile-APMTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-azusa-player-mobile-APMTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		9ACBB5246153355184C73F02 /* Pods-azusa-player-mobile-APMTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-azusa-player-mobile-APMTests.release.xcconfig"; path = "Target Support Files/Pods-azusa-player-mobile-APMTests/Pods-azusa-player-mobile-APMTests.release.xcconfig"; sourceTree = "<group>"; };
 		9B521D0626604D3800EF0C3A /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		9B521D0A26610C0600EF0C3A /* example-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "example-Bridging-Header.h"; sourceTree = "<group>"; };
 		9B521D0B26610C0700EF0C3A /* dummy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dummy.swift; sourceTree = "<group>"; };
@@ -67,7 +69,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F161E43DC15C3C1CE6A17FC9 /* libPods-azusa-player-mobile-exampleTests.a in Frameworks */,
+				DD0F20A1AEB65330E3293A26 /* libPods-azusa-player-mobile-APMTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -124,7 +126,7 @@
 				9B521D0626604D3800EF0C3A /* AVFoundation.framework */,
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
 				13EEFF6BBEF989EDAD5FC4B7 /* libPods-azusa-player-mobile.a */,
-				28468BD50B4AAEF16D728F55 /* libPods-azusa-player-mobile-exampleTests.a */,
+				9820FB6C9BC4AE8228F06F70 /* libPods-azusa-player-mobile-APMTests.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -148,6 +150,8 @@
 				3E446D4365C1A108616D8ADA /* Pods-azusa-player-mobile.release.xcconfig */,
 				7CA01EA30DD1126F19B1D56B /* Pods-azusa-player-mobile-exampleTests.debug.xcconfig */,
 				90F8A623B625BC290532B128 /* Pods-azusa-player-mobile-exampleTests.release.xcconfig */,
+				269A6C2B650C46BC21877CBC /* Pods-azusa-player-mobile-APMTests.debug.xcconfig */,
+				9ACBB5246153355184C73F02 /* Pods-azusa-player-mobile-APMTests.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -179,7 +183,7 @@
 			isa = PBXGroup;
 			children = (
 				13B07F961A680F5B00A75B9A /* AzusaPlayer.app */,
-				00E356EE1AD99517003FC87E /* exampleTests.xctest */,
+				00E356EE1AD99517003FC87E /* APMTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -188,25 +192,25 @@
 			isa = PBXGroup;
 			children = (
 				5649813EF9C3E8AABB3DDC07 /* azusa-player-mobile */,
-				DD80F96B639BBA7F52A4C6E1 /* exampleTests */,
+				A1A899CD916F0697C6997D97 /* APMTests */,
 			);
 			name = ExpoModulesProviders;
 			sourceTree = "<group>";
 		};
-		DD80F96B639BBA7F52A4C6E1 /* exampleTests */ = {
+		A1A899CD916F0697C6997D97 /* APMTests */ = {
 			isa = PBXGroup;
 			children = (
-				138345A294D5D87DC84127A5 /* ExpoModulesProvider.swift */,
+				1BED8643AF15A76097355103 /* ExpoModulesProvider.swift */,
 			);
-			name = exampleTests;
+			name = APMTests;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		00E356ED1AD99517003FC87E /* exampleTests */ = {
+		00E356ED1AD99517003FC87E /* APMTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "exampleTests" */;
+			buildConfigurationList = 00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "APMTests" */;
 			buildPhases = (
 				514ACECEF4829034DF0719ED /* [CP] Check Pods Manifest.lock */,
 				19E39CA29D49615F5D2CB2A0 /* [Expo] Configure project */,
@@ -221,9 +225,9 @@
 			dependencies = (
 				00E356F51AD99517003FC87E /* PBXTargetDependency */,
 			);
-			name = exampleTests;
+			name = APMTests;
 			productName = exampleTests;
-			productReference = 00E356EE1AD99517003FC87E /* exampleTests.xctest */;
+			productReference = 00E356EE1AD99517003FC87E /* APMTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 		13B07F861A680F5B00A75B9A /* azusa-player-mobile */ = {
@@ -281,7 +285,7 @@
 			projectRoot = "";
 			targets = (
 				13B07F861A680F5B00A75B9A /* azusa-player-mobile */,
-				00E356ED1AD99517003FC87E /* exampleTests */,
+				00E356ED1AD99517003FC87E /* APMTests */,
 			);
 		};
 /* End PBXProject section */
@@ -339,7 +343,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# This script configures Expo modules and generates the modules provider file.\nbash -l -c \"./Pods/Target\\ Support\\ Files/Pods-azusa-player-mobile-exampleTests/expo-configure-project.sh\"\n";
+			shellScript = "# This script configures Expo modules and generates the modules provider file.\nbash -l -c \"./Pods/Target\\ Support\\ Files/Pods-azusa-player-mobile-APMTests/expo-configure-project.sh\"\n";
 		};
 		1D12CCA46F8200FDC26C87C5 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -412,7 +416,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-azusa-player-mobile-exampleTests-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-azusa-player-mobile-APMTests-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -425,15 +429,15 @@
 			files = (
 			);
 			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-azusa-player-mobile-exampleTests/Pods-azusa-player-mobile-exampleTests-resources-${CONFIGURATION}-input-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-azusa-player-mobile-APMTests/Pods-azusa-player-mobile-APMTests-resources-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-azusa-player-mobile-exampleTests/Pods-azusa-player-mobile-exampleTests-resources-${CONFIGURATION}-output-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-azusa-player-mobile-APMTests/Pods-azusa-player-mobile-APMTests-resources-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-azusa-player-mobile-exampleTests/Pods-azusa-player-mobile-exampleTests-resources.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-azusa-player-mobile-APMTests/Pods-azusa-player-mobile-APMTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		7153C7FB55B649A2A827D9A9 /* [Expo] Configure project */ = {
@@ -461,15 +465,15 @@
 			files = (
 			);
 			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-azusa-player-mobile-exampleTests/Pods-azusa-player-mobile-exampleTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-azusa-player-mobile-APMTests/Pods-azusa-player-mobile-APMTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-azusa-player-mobile-exampleTests/Pods-azusa-player-mobile-exampleTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-azusa-player-mobile-APMTests/Pods-azusa-player-mobile-APMTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-azusa-player-mobile-exampleTests/Pods-azusa-player-mobile-exampleTests-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-azusa-player-mobile-APMTests/Pods-azusa-player-mobile-APMTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		FD10A7F022414F080027D42C /* Start Packager */ = {
@@ -499,7 +503,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				00E356F31AD99517003FC87E /* exampleTests.m in Sources */,
-				C53F31B167C9C77C0619117A /* ExpoModulesProvider.swift in Sources */,
+				DC4736F4D25A78F1E3AF4737 /* ExpoModulesProvider.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -527,7 +531,7 @@
 /* Begin XCBuildConfiguration section */
 		00E356F61AD99517003FC87E /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 7CA01EA30DD1126F19B1D56B /* Pods-azusa-player-mobile-exampleTests.debug.xcconfig */;
+			baseConfigurationReference = 269A6C2B650C46BC21877CBC /* Pods-azusa-player-mobile-APMTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -548,7 +552,7 @@
 					"$(inherited)",
 				);
 				OTHER_SWIFT_FLAGS = "$(inherited) -D EXPO_CONFIGURATION_DEBUG";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.noxplay.noxplayerTest;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/example.app/example";
@@ -557,7 +561,7 @@
 		};
 		00E356F71AD99517003FC87E /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 90F8A623B625BC290532B128 /* Pods-azusa-player-mobile-exampleTests.release.xcconfig */;
+			baseConfigurationReference = 9ACBB5246153355184C73F02 /* Pods-azusa-player-mobile-APMTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -575,7 +579,7 @@
 					"$(inherited)",
 				);
 				OTHER_SWIFT_FLAGS = "$(inherited) -D EXPO_CONFIGURATION_RELEASE";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.noxplay.noxplayerTest;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/example.app/example";
@@ -710,7 +714,11 @@
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_CFLAGS = "$(inherited)";
 				OTHER_CPLUSPLUSFLAGS = "$(inherited)";
-				OTHER_LDFLAGS = "$(inherited)  ";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-Wl",
+					"-ld_classic",
+				);
 				REACT_NATIVE_PATH = "${PODS_ROOT}/../../node_modules/react-native";
 				SDKROOT = iphoneos;
 				SWIFT_VERSION = 4.0;
@@ -776,7 +784,11 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				OTHER_CFLAGS = "$(inherited)";
 				OTHER_CPLUSPLUSFLAGS = "$(inherited)";
-				OTHER_LDFLAGS = "$(inherited)  ";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-Wl",
+					"-ld_classic",
+				);
 				REACT_NATIVE_PATH = "${PODS_ROOT}/../../node_modules/react-native";
 				SDKROOT = iphoneos;
 				SWIFT_VERSION = 4.0;
@@ -787,7 +799,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "exampleTests" */ = {
+		00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "APMTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				00E356F61AD99517003FC87E /* Debug */,

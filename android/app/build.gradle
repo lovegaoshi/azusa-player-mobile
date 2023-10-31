@@ -130,11 +130,6 @@ android {
 
 dependencies {
 
-    // android auto from chatgpt
-    implementation 'androidx.mediarouter:mediarouter:1.2.0'
-    implementation 'com.google.android.gms:play-services-cast-framework:20.0.0'
-    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
-
     // For animated GIF support
     implementation 'com.facebook.fresco:animated-gif:2.5.0'
 
