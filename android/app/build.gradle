@@ -2,6 +2,7 @@ apply plugin: "com.android.application"
 apply plugin: "com.facebook.react"
 apply plugin: "kotlin-android"
 apply from: "../../node_modules/react-native-vector-icons/fonts.gradle"
+apply from: "../../node_modules/react-native-code-push/android/codepush.gradle"
 
 import org.apache.tools.ant.taskdefs.condition.Os
 
