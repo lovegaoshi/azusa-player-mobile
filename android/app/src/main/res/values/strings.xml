@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">APM</string>
+    <string moduleConfig="true" name="CodePushDeploymentKey">r-Ioq8wnNEO-rSWn57I08syRY46vF_EKDdVIJ</string>
 </resources>

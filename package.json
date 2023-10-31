@@ -21,7 +21,8 @@
     "prepare": "yarn run compile",
     "pretest": "yarn run compile",
     "prettify": "prettier --write ./src",
-    "ios:build": "yarn; cd ios; rm Podfile.lock; pod install --repo-update; cd .."
+    "ios:build": "yarn; cd ios; rm Podfile.lock; pod install --repo-update; cd ..",
+    "codepush": "appcenter codepush release-react -a lovegaoshi/Azusa-Player-Mobile"
   },
   "dependencies": {
     "@react-native-async-storage/async-storage": "^1.18.1",
@@ -66,6 +67,7 @@
     "react-native-background-timer": "git+https://github.com/lovegaoshi/react-native-background-timer.git",
     "react-native-blob-jsi-helper": "git+https://github.com/lovegaoshi/react-native-blob-jsi-helper.git",
     "react-native-blob-util": "^0.19.2",
+    "react-native-code-push": "^8.1.0",
     "react-native-countdown-circle-timer": "^3.2.1",
     "react-native-draggable-flatlist": "^4.0.1",
     "react-native-gesture-handler": "^2.9.0",
