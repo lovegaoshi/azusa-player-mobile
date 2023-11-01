@@ -82,6 +82,12 @@ jobs:
       - name: clean generated builds
         run: rm -rf android/app/build/generated/
 
+      - name: codepush to prod
+        run: |
+          npm install -g appcenter-cli
+          yarn codepush --token ${{secrets.CODEPUSH_ACCESS_TOKEN}}
+          yarn codepush:promote --token ${{secrets.CODEPUSH_ACCESS_TOKEN}}
+
       - name: gradle build APK
         run: cd android && chmod +x gradlew && ./gradlew assembleRelease
 
