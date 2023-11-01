@@ -115,6 +115,7 @@ const MainBackground = (props: { children: React.JSX.Element }) => {
             repeat
             muted
             resizeMode="cover"
+            disableFocus={true}
             preventsDisplaySleepDuringVideoPlayback={false}
           />
           <View
