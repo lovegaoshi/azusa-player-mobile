@@ -24,7 +24,8 @@
     "ios:build": "yarn; cd ios; rm Podfile.lock; pod install --repo-update; cd ..",
     "codepush": "appcenter codepush release-react -a lovegaoshi/Azusa-Player-Mobile",
     "codepush:rollback": "appcenter codepush rollback -a lovegaoshi/Azusa-Player-Mobile Production",
-    "codepush:promote": "appcenter codepush promote -a lovegaoshi/Azusa-Player-Mobile -s Staging -d Production"
+    "codepush:promote": "appcenter codepush promote -a lovegaoshi/Azusa-Player-Mobile -s Staging -d Production",
+    "release": "git switch master; git pull; python release_bump.py"
   },
   "dependencies": {
     "@react-native-async-storage/async-storage": "^1.18.1",
