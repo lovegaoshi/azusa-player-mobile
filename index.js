@@ -11,6 +11,6 @@ import { PlaybackService } from './src/services';
 import { name as appName } from './app.json';
 import Share from './src/components/share/Share';
 
-AppRegistry.registerComponent(appName, () => codePush(App));
+AppRegistry.registerComponent(appName, () => App); // codePush(App)
 AppRegistry.registerComponent('ShareMenuModuleComponent', () => Share);
 TrackPlayer.registerPlaybackService(() => PlaybackService);
