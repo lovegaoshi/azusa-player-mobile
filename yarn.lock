@@ -2300,10 +2300,10 @@
     picocolors "^1.0.0"
     tslib "^2.6.0"
 
-"@react-native-async-storage/async-storage@^1.18.1":
-  version "1.19.3"
-  resolved "https://registry.npmjs.org/@react-native-async-storage/async-storage/-/async-storage-1.19.3.tgz#ad5fe3ed0a82d4624aa4500321c1e09c02daeb46"
-  integrity sha512-CwGfoHCWdPOTPS+2fW6YRE1fFBpT9++ahLEroX5hkgwyoQ+TkmjOaUxixdEIoVua9Pz5EF2pGOIJzqOTMWfBlA==
+"@react-native-async-storage/async-storage@^1.19.4":
+  version "1.19.4"
+  resolved "https://registry.yarnpkg.com/@react-native-async-storage/async-storage/-/async-storage-1.19.4.tgz#f3c8648fa6d06f085e30f68f0810ea8e53165ace"
+  integrity sha512-Stj6Q1v5knTMaYOinEEJl030SzJWEhqW+IYI5uA9Nl9Olo+vDUecmQXqpIxELucwOGDJ8KwvI0UL22UHudwZeQ==
   dependencies:
     merge-options "^3.0.4"
 
@@ -2495,10 +2495,10 @@
   resolved "https://registry.npmjs.org/@react-native-community/eslint-plugin/-/eslint-plugin-1.3.0.tgz#9e558170c106bbafaa1ef502bd8e6d4651012bf9"
   integrity sha512-+zDZ20NUnSWghj7Ku5aFphMzuM9JulqCW+aPXT6IfIXFbb8tzYTTOSeRFOtuekJ99ibW2fUCSsjuKNlwDIbHFg==
 
-"@react-native-community/netinfo@^9.3.10":
-  version "9.4.1"
-  resolved "https://registry.npmjs.org/@react-native-community/netinfo/-/netinfo-9.4.1.tgz#7b880758adca65fe47ee866cf7b00416b9dcc192"
-  integrity sha512-dAbY5mfw+6Kas/GJ6QX9AZyY+K+eq9ad4Su6utoph/nxyH3whp5cMSgRNgE2VhGQVRZ/OG0qq3IaD3+wzoqJXw==
+"@react-native-community/netinfo@^10.0.0":
+  version "10.0.0"
+  resolved "https://registry.yarnpkg.com/@react-native-community/netinfo/-/netinfo-10.0.0.tgz#c4a7f92abc993dc91211d240fde8e2ae474c5d97"
+  integrity sha512-cJZ7q85EY93xML1IYW7yi1+YGuYmha4EtMyJLoiZL0Bqwz7Jaie/zUiTlAJVzvHaGpaAIWQyF2cXEIf60JWoPw==
 
 "@react-native-cookies/cookies@git+https://github.com/alexhernandez/cookies.git#patch-1":
   version "6.2.1"
@@ -3057,10 +3057,10 @@
     "@types/scheduler" "*"
     csstype "^3.0.2"
 
-"@types/react@^18.0.24":
-  version "18.2.33"
-  resolved "https://registry.npmjs.org/@types/react/-/react-18.2.33.tgz#055356243dc4350a9ee6c6a2c07c5cae12e38877"
-  integrity sha512-v+I7S+hu3PIBoVkKGpSYYpiBT1ijqEzWpzQD62/jm4K74hPpSP7FF9BnKG6+fg2+62weJYkkBWDJlZt5JO/9hg==
+"@types/react@^18.2.34":
+  version "18.2.34"
+  resolved "https://registry.yarnpkg.com/@types/react/-/react-18.2.34.tgz#aed20f19473721ba328feb99d1ec3307ebc1a8dd"
+  integrity sha512-U6eW/alrRk37FU/MS2RYMjx0Va2JGIVXELTODaTIYgvWGCV4Y4TfTUzG8DdmpDNIT0Xpj/R7GfyHOJJrDttcvg==
   dependencies:
     "@types/prop-types" "*"
     "@types/scheduler" "*"
@@ -10634,8 +10634,8 @@ react-native-tab-view@^3.5.1:
     use-latest-callback "^0.1.5"
 
 "react-native-track-player@git+https://lovegaoshi@github.com/lovegaoshi/react-native-track-player.git#APM":
-  version "4.0.0"
-  resolved "git+https://lovegaoshi@github.com/lovegaoshi/react-native-track-player.git#4c31f1d8c31e09708514f296eae82c51c63d7848"
+  version "4.0.1"
+  resolved "git+https://lovegaoshi@github.com/lovegaoshi/react-native-track-player.git#e3376800e5cae52ad227a32dc7a2f18016cefcb3"
 
 react-native-url-polyfill@^2.0.0:
   version "2.0.0"
@@ -10669,10 +10669,10 @@ react-native-webview@^13.3.0:
     escape-string-regexp "2.0.0"
     invariant "2.2.4"
 
-react-native-windows@^0.72.17:
-  version "0.72.17"
-  resolved "https://registry.yarnpkg.com/react-native-windows/-/react-native-windows-0.72.17.tgz#6f14c6c01e750bc4ef47c664305d4aaa5a49eca1"
-  integrity sha512-SWP1RwUQioJAuMDUXDND0T/bwJqets0wW2MGXgRoyxcgHt0TM2BRaCFN3e8ilBrf9vchMo69QN/P5ljB17Q4IQ==
+react-native-windows@^0.72.18:
+  version "0.72.18"
+  resolved "https://registry.yarnpkg.com/react-native-windows/-/react-native-windows-0.72.18.tgz#627ff38773cbcdd29dc291475dc7311ea8b41fce"
+  integrity sha512-wcC7/JfpxFAO8rlc37tSdFQ4u3ysQN2xKYU05JxLpe1VHql8kIuRUBZs20cUn/flOLmfxmm6NplCGx9HTVALyw==
   dependencies:
     "@babel/runtime" "^7.0.0"
     "@jest/create-cache-key-function" "^29.2.1"
