@@ -2761,10 +2761,10 @@
     color "^4.2.3"
     warn-once "^0.1.0"
 
-"@react-navigation/native-stack@^6.9.12":
-  version "6.9.16"
-  resolved "https://registry.npmjs.org/@react-navigation/native-stack/-/native-stack-6.9.16.tgz#d3dfc1ebe51da34eff36d5475d7b33d982a59758"
-  integrity sha512-SrmBGr5YvRxDtdTacOkA/wvqwpt9kt+AsYpmt82hKMPKpu0v98WONedTXDzi6whhY3jeT2GZkwF8hyrJ+wDbTA==
+"@react-navigation/native-stack@^6.9.17":
+  version "6.9.17"
+  resolved "https://registry.yarnpkg.com/@react-navigation/native-stack/-/native-stack-6.9.17.tgz#4fc370b14be07296423ae8c00940fb002c6001b5"
+  integrity sha512-X8p8aS7JptQq7uZZNFEvfEcPf6tlK4PyVwYDdryRbG98B4bh2wFQYMThxvqa+FGEN7USEuHdv2mF0GhFKfX0ew==
   dependencies:
     "@react-navigation/elements" "^1.3.21"
     warn-once "^0.1.0"
@@ -8301,7 +8301,7 @@ jsonfile@^6.0.1:
 
 jsonpath-plus@7.2.0:
   version "7.2.0"
-  resolved "https://registry.npmjs.org/jsonpath-plus/-/jsonpath-plus-7.2.0.tgz#7ad94e147b3ed42f7939c315d2b9ce490c5a3899"
+  resolved "https://registry.yarnpkg.com/jsonpath-plus/-/jsonpath-plus-7.2.0.tgz#7ad94e147b3ed42f7939c315d2b9ce490c5a3899"
   integrity sha512-zBfiUPM5nD0YZSBT/o/fbCUlCcepMIdP0CJZxM1+KgA4f2T206f6VAg9e7mX35+KlMaIc5qXW34f3BnwJ3w+RA==
 
 "jsx-ast-utils@^2.4.1 || ^3.0.0":
@@ -8382,7 +8382,7 @@ levn@^0.4.1:
 
 "libmuse@git+https://github.com/lovegaoshi/muse.git#apm-release":
   version "0.0.1"
-  resolved "git+https://github.com/lovegaoshi/muse.git#195986c04dcd07ef5c56b7e29aeee9d75820dbc0"
+  resolved "git+https://github.com/lovegaoshi/muse.git#5e2ba2b9ffc42813526d50604a714569da9a0781"
   dependencies:
     jsonpath-plus "7.2.0"
 
@@ -13146,9 +13146,9 @@ yocto-queue@^0.1.0:
   dependencies:
     query-string "^8.1.0"
 
-zustand@^4.4.5:
-  version "4.4.5"
-  resolved "https://registry.yarnpkg.com/zustand/-/zustand-4.4.5.tgz#0d5571affb30906b0c07c16557f2779ede9f4d8c"
-  integrity sha512-jgIrBBLKncQW74PA2Lclct3gwD4aPughwGE4FqlXrv3rDqQox7JCn8rwUiFK6ygJcbBAvfTf8fF+ICg7HLD2FQ==
+zustand@^4.4.6:
+  version "4.4.6"
+  resolved "https://registry.yarnpkg.com/zustand/-/zustand-4.4.6.tgz#03c78e3e2686c47095c93714c0c600b72a6512bd"
+  integrity sha512-Rb16eW55gqL4W2XZpJh0fnrATxYEG3Apl2gfHTyDSE965x/zxslTikpNch0JgNjJA9zK6gEFW8Fl6d1rTZaqgg==
   dependencies:
     use-sync-external-store "1.2.0"
