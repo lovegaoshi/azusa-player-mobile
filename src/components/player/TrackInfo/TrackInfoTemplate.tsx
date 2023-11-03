@@ -6,10 +6,11 @@ import {
   Animated,
   TouchableWithoutFeedback,
   ViewStyle,
+  Easing,
 } from 'react-native';
 import type { Track } from 'react-native-track-player';
 import { Image } from 'expo-image';
-import MarqueeText from 'react-native-marquee';
+import MarqueeText from 'react-native-text-ticker';
 
 import { useNoxSetting } from '@hooks/useSetting';
 import { getCurrentTPQueue } from '@stores/playingList';
@@ -90,12 +91,11 @@ const TrackInfoTemplate: React.FC<Props> = ({
     <View style={[styles.container, containerStyle, { width: windowWidth }]}>
       {children || <AlbumArt />}
       <MarqueeText
+        duration={3000}
+        animationType={'bounce'}
+        bounceDelay={2000}
         style={textStyle}
-        speed={1}
-        marqueeOnStart={true}
-        loop={true}
-        consecutive={true}
-        delay={1000}
+        easing={Easing.linear}
       >
         {track?.title}
       </MarqueeText>
@@ -148,7 +148,7 @@ const styles = StyleSheet.create({
     flex: 1,
     // justifyContent: 'center',
     alignItems: 'center',
-    marginTop: -10,
+    marginTop: -5,
   },
   artistInfoContainer: {
     flex: 4,
@@ -159,6 +159,6 @@ const styles = StyleSheet.create({
     flex: 1,
     // justifyContent: 'center',
     alignItems: 'center',
-    marginTop: -10,
+    marginTop: -5,
   },
 });
