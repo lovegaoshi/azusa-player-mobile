@@ -76,6 +76,7 @@
     "react-native-gesture-handler": "^2.9.0",
     "react-native-get-random-values": "^1.9.0",
     "react-native-lyric": "git+https://github.com/lovegaoshi/react-native-lyric.git",
+    "react-native-marquee": "^0.5.0",
     "react-native-pager-view": "^6.2.1",
     "react-native-paper": "^5.7.0",
     "react-native-qrcode-svg": "^6.2.0",

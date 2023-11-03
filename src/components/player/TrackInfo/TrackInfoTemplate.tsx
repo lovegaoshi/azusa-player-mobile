@@ -9,6 +9,7 @@ import {
 } from 'react-native';
 import type { Track } from 'react-native-track-player';
 import { Image } from 'expo-image';
+import MarqueeText from 'react-native-marquee';
 
 import { useNoxSetting } from '@hooks/useSetting';
 import { getCurrentTPQueue } from '@stores/playingList';
@@ -88,7 +89,16 @@ const TrackInfoTemplate: React.FC<Props> = ({
   return (
     <View style={[styles.container, containerStyle, { width: windowWidth }]}>
       {children || <AlbumArt />}
-      <Text style={textStyle}>{track?.title}</Text>
+      <MarqueeText
+        style={textStyle}
+        speed={1}
+        marqueeOnStart={true}
+        loop={true}
+        consecutive={true}
+        delay={1000}
+      >
+        {track?.title}
+      </MarqueeText>
       <View style={styles.infoContainer}>
         <View style={styles.favoriteButtonContainer}>
           <FavReloadButton track={track} />

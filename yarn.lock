@@ -2761,7 +2761,7 @@
     color "^4.2.3"
     warn-once "^0.1.0"
 
-"@react-navigation/native-stack@^6.9.17":
+"@react-navigation/native-stack@^6.9.11", "@react-navigation/native-stack@^6.9.17":
   version "6.9.17"
   resolved "https://registry.yarnpkg.com/@react-navigation/native-stack/-/native-stack-6.9.17.tgz#4fc370b14be07296423ae8c00940fb002c6001b5"
   integrity sha512-X8p8aS7JptQq7uZZNFEvfEcPf6tlK4PyVwYDdryRbG98B4bh2wFQYMThxvqa+FGEN7USEuHdv2mF0GhFKfX0ew==
@@ -10555,6 +10555,13 @@ react-native-get-random-values@^1.9.0:
 "react-native-lyric@git+https://github.com/lovegaoshi/react-native-lyric.git":
   version "1.0.1"
   resolved "git+https://github.com/lovegaoshi/react-native-lyric.git#fd4fefb76f6aa62bd971ba734d62edc4b20aa32d"
+
+react-native-marquee@^0.5.0:
+  version "0.5.0"
+  resolved "https://registry.yarnpkg.com/react-native-marquee/-/react-native-marquee-0.5.0.tgz#c0e9e8152aff76d297072305d12d6d9c93d82824"
+  integrity sha512-s2BKaZDdJp4I522H+cCPWFEwMeg+OllNCjVD5WQ5kdyIlcXkB2PFD3BzQ3T5hFlF/1KazYYlM4TaZ/nPJhJM7w==
+  dependencies:
+    "@react-navigation/native-stack" "^6.9.11"
 
 react-native-pager-view@^6.2.1:
   version "6.2.2"
