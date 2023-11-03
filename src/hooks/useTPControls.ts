@@ -1,4 +1,4 @@
-import TrackPlayer from 'react-native-track-player';
+import TrackPlayer, { State } from 'react-native-track-player';
 import { useStore } from 'zustand';
 
 import { biliSuggest } from '@utils/Bilibili/BiliOperate';
@@ -123,13 +123,18 @@ export default () => {
     }
   };
 
-  const preformFade = (callback: () => void) => {
-    TrackPlayer.setAnimatedVolume({
-      volume: 0,
-      duration: fadeIntervalMs,
-      callback,
-    });
-    setAppStore({ animatedVolumeChangedCallback: callback });
+  const preformFade = async (callback: () => void) => {
+    const isPlaying = await TrackPlayer.getPlaybackState();
+    if (isPlaying.state === State.Playing) {
+      TrackPlayer.setAnimatedVolume({
+        volume: 0,
+        duration: fadeIntervalMs,
+        callback,
+      });
+      setAppStore({ animatedVolumeChangedCallback: callback });
+    } else {
+      callback();
+    }
   };
 
   const performSkipToNext = () => {
