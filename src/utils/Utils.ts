@@ -96,14 +96,17 @@ export const getUniqObjects = <T>(
  * @returns
  */
 export const chunkArray = <T>(arr: Array<T>, size: number): Array<T[]> => {
-  return arr.reduce((chunks, item, index) => {
-    const chunkIndex = Math.floor(index / size);
-    if (!chunks[chunkIndex]) {
-      chunks[chunkIndex] = [];
-    }
-    chunks[chunkIndex].push(item);
-    return chunks;
-  }, [] as Array<T[]>);
+  return arr.reduce(
+    (chunks, item, index) => {
+      const chunkIndex = Math.floor(index / size);
+      if (!chunks[chunkIndex]) {
+        chunks[chunkIndex] = [];
+      }
+      chunks[chunkIndex].push(item);
+      return chunks;
+    },
+    [] as Array<T[]>
+  );
 };
 
 export const charLength = (str: string) => {

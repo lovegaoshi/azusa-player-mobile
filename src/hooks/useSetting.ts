@@ -294,7 +294,7 @@ export const useNoxSetting = create<NoxSetting>((set, get) => ({
         );
         break;
       default:
-        set({gestureMode: true});
+        set({ gestureMode: true });
         break;
     }
     const playingList =

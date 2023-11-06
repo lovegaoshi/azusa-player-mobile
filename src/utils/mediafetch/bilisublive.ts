@@ -43,7 +43,7 @@ const getRoomInfos = async (uids: number[]) => {
           bvid: roomInfo.room_id,
           duration: 0,
           liveStatus: roomInfo.live_status,
-        } as VideoInfo)
+        }) as VideoInfo
       /*
     SongTS({
       cid: `${CIDPREFIX}-${roomInfo.room_id}`,

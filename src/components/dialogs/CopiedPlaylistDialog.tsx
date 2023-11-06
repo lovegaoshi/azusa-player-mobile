@@ -5,6 +5,10 @@ import { useTranslation } from 'react-i18next';
 
 import { useNoxSetting } from '@hooks/useSetting';
 import logger from '@utils/Logger';
+import noxPlayingList from '@stores/playingList';
+import { NoxRepeatMode } from '@enums/RepeatMode';
+
+const { getState } = noxPlayingList;
 
 interface Props {
   visible: boolean;
@@ -21,6 +25,7 @@ export default ({
 }: Props) => {
   const { t } = useTranslation();
   const [playlistIndex, setPlaylistIndex] = useState('');
+  const playlistRef = React.useRef<FlatList<string[]>>(null);
   const playlistIds = useNoxSetting(state => state.playlistIds);
   const playlists = useNoxSetting(state => state.playlists);
   const updatePlaylist = useNoxSetting(state => state.updatePlaylist);
@@ -43,6 +48,26 @@ export default ({
     onSubmit();
   };
 
+  const playlistList = () => {
+    const filteredPlaylists =
+      getState().playmode === NoxRepeatMode.SUGGEST
+        ? playlistIds
+        : playlistIds.filter(val => val !== fromList.id);
+    return filteredPlaylists.map(val => [val, playlists[val].title]);
+  };
+
+
+  React.useEffect(() => {
+
+    // TODO: this is not scrolling?
+    if (visible && getState().playmode === NoxRepeatMode.SUGGEST) {
+      playlistRef.current?.scrollToIndex({
+        index: playlistIds.indexOf(fromList.id),
+      })
+      setPlaylistIndex(fromList.id);
+    }
+  }, [visible])
+
   return (
     <Portal>
       <Dialog visible={visible} onDismiss={handleClose} style={styles.dialog}>
@@ -57,9 +82,8 @@ export default ({
         <Dialog.Content style={styles.dialogContent}>
           <FlatList
             style={styles.dialogList}
-            data={playlistIds
-              .filter(val => val !== fromList.id)
-              .map(val => [val, playlists[val].title])}
+            data={playlistList()}
+            ref={playlistRef}
             renderItem={({ item }) => (
               <Pressable
                 onPress={() => setPlaylistIndex(item[0])}

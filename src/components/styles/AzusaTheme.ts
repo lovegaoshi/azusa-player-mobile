@@ -104,9 +104,9 @@ export default {
   },
   colors: {
     ...DefaultTheme.colors,
-    text: 'rgb(103, 80, 164)',//'#9457eb',
+    text: 'rgb(103, 80, 164)', //'#9457eb',
     background: 'rgba(255, 255, 255, 0.4)',
-    onSurfaceVariant: 'rgb(103, 80, 164)',// '#9400d3', // 'rgb(202, 199, 182)',
+    onSurfaceVariant: 'rgb(103, 80, 164)', // '#9400d3', // 'rgb(202, 199, 182)',
   },
   playerControlIconContained: undefined,
   loadingIcon:
