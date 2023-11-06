@@ -83,7 +83,7 @@ const AzusaPlayer = () => {
     DrawerNavigationProp<ParamListBase> | undefined
   >(undefined);
 
-  const NoxPlayer2 = ({ navigation }: Props) =>
+  const NoxPlayerWrapper = ({ navigation }: Props) =>
     NoxPlayer({ navigation, setNavigation });
 
   return (
@@ -125,7 +125,7 @@ const AzusaPlayer = () => {
                 title: String(t('appDrawer.homeScreenName')),
                 header: () => null,
               }}
-              component={NoxPlayer2}
+              component={NoxPlayerWrapper}
             />
             <Drawer.Screen
               name={ViewEnum.EXPORE}
