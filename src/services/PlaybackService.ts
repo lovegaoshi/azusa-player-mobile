@@ -210,9 +210,8 @@ export async function PlaybackService() {
     }
     if (abRepeat[1] === 1) return;
     if (event.position > bRepeatDuration) {
-      // HACK: we are not implementing sponsorblock so why not just TP.skipToNext?
-      // TrackPlayer.seekTo(event.duration);
-      TrackPlayer.skipToNext();
+      // TODO: move this to usePlayerControl and use performSkipToNext
+      TrackPlayer.seekTo(event.duration);
     }
   });
 
