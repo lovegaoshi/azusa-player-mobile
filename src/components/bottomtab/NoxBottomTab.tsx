@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, View, Platform } from 'react-native';
 import { IconButton } from 'react-native-paper';
 import { useNavigation, ParamListBase } from '@react-navigation/native';
 import {
@@ -103,6 +103,7 @@ const NoxAndroidBottomTab = ({ navigation }: Props) => {
 const styles = StyleSheet.create({
   panel: {
     flexDirection: 'row',
+    paddingBottom: Platform.OS === 'ios' ? 20 : 0,
   },
   iconButton: {
     flex: 1,
