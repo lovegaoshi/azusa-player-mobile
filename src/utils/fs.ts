@@ -13,7 +13,7 @@ export const writeTxtFile = async (
       // encoding, should be one of `base64`, `utf8`, `ascii`
       'utf8',
       // should data append to existing content ?
-      true
+      false
     )
     .then(stream => Promise.all(content.map(val => stream.write(val))))
     // Use array destructuring to get the stream object from the first item of the array we get from Promise.all()
