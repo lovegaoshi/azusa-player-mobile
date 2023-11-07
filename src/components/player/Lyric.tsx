@@ -8,10 +8,11 @@ import {
   FlatList,
   TouchableOpacity,
   Button,
+  TextInput,
 } from 'react-native';
 import { Lrc as Lyric } from 'react-native-lyric';
 import { Track, useProgress } from 'react-native-track-player';
-import { IconButton, TextInput } from 'react-native-paper';
+import { IconButton } from 'react-native-paper';
 
 import { searchLyricOptions, searchLyric } from '@utils/LyricFetch';
 import { reExtractSongName } from '@stores/appStore';
@@ -101,35 +102,42 @@ export const LyricView = ({
       setCurrentTimeOffset(0);
       setLrcOption(null);
       setLrc('正在加载歌词...');
+      setSearchText(track.title || '');
       // Initialize from storage if not new
       if (hasLrcFromLocal()) {
-        logger.log('Loading Lrc from localStorage...');
+        logger.log('[lyric] Loading Lrc from localStorage...');
         const lrcDetail = lyricMapping.get(track?.song.id);
         if (lrcDetail === undefined) return;
-        searchLyric(lrcDetail?.lyricKey, setLrc);
         setLrcOption({ key: lrcDetail?.lyricKey });
         setCurrentTimeOffset(lrcDetail!.lyricOffset);
+        setLrc(lrcDetail.lyric);
       }
       fetchAndSetLyricOptions();
     }
   }, [track]);
 
   useEffect(() => {
-    if (!hasLrcFromLocal()) searchAndSetCurrentLyric();
+    if (!hasLrcFromLocal()) {
+      searchAndSetCurrentLyric();
+    }
   }, [lrcOptions]);
 
   const hasLrcFromLocal = () => {
     return lyricMapping.has(track?.song?.id);
   };
 
-  const updateLyricMapping = () => {
+  const updateLyricMapping = (
+    newLrcDetail: Partial<NoxMedia.LyricDetail> = {}
+  ) => {
     if (lrcOption !== null && lrcOption !== undefined) {
-      const newLrcDetail: NoxMedia.LyricDetail = {
+      const lyricDeatail: NoxMedia.LyricDetail = {
         songId: track.song.id,
         lyricKey: lrcOption.key,
         lyricOffset: currentTimeOffset,
+        lyric: lrc,
+        ...newLrcDetail,
       };
-      setLyricMapping(newLrcDetail);
+      setLyricMapping(lyricDeatail);
     }
   };
 
@@ -138,7 +146,7 @@ export const LyricView = ({
       ? currentTimeOffset + LYRIC_OFFSET_INTERVAL
       : currentTimeOffset - LYRIC_OFFSET_INTERVAL;
     setCurrentTimeOffset(newTimeOffset);
-    updateLyricMapping();
+    updateLyricMapping({ lyricOffset: newTimeOffset });
   };
 
   const fetchAndSetLyricOptions = async (adhocTitle?: string) => {
@@ -157,15 +165,15 @@ export const LyricView = ({
     }
   };
 
-  const searchAndSetCurrentLyric = (index?: number) => {
+  const searchAndSetCurrentLyric = async (index?: number) => {
     console.debug(`lrcoptions: ${JSON.stringify(lrcOptions)}`);
 
     index = index === undefined ? 0 : index;
     if (lrcOptions.length === 0) setLrc('无法找到歌词,请手动搜索...');
     else {
-      searchLyric(lrcOptions[index!].songMid, setLrc);
+      const lyric = await searchLyric(lrcOptions[index!].songMid, setLrc);
       setLrcOption(lrcOptions[index!]);
-      updateLyricMapping();
+      updateLyricMapping({ lyric });
     }
   };
 
@@ -201,6 +209,14 @@ export const LyricView = ({
     [playerStyle]
   );
 
+  const customizedStyles = {
+    headerText: [styles.headerText, { color: playerStyle.colors.primary }],
+    modelContainer: [
+      styles.modalHeader,
+      { backgroundColor: playerStyle.colors.primaryContainer },
+    ],
+  };
+
   return (
     <View style={styles.container}>
       <Lyric
@@ -225,25 +241,31 @@ export const LyricView = ({
             visible={modalVisible}
             onRequestClose={() => setModalVisible(false)}
           >
-            <View
-              style={[
-                styles.modalHeader,
-                { backgroundColor: playerStyle.colors.primary },
-              ]}
-            >
-              <Text style={styles.headerText}>更多</Text>
+            <View style={customizedStyles.modelContainer}>
+              <Text style={customizedStyles.headerText}>更多</Text>
               <TouchableOpacity onPress={() => setModalVisible(false)}>
-                <IconButton icon="chevron-down" />
+                <IconButton
+                  iconColor={playerStyle.colors.primary}
+                  icon="chevron-down"
+                />
               </TouchableOpacity>
             </View>
             <FlatList
+              style={{ backgroundColor: playerStyle.colors.primaryContainer }}
               data={[
                 { key: 'LyricOptions', title: '更换歌词' },
                 { key: 'LyricOffset', title: '歌词时间调整' },
               ]}
               renderItem={({ item }) => (
                 <TouchableOpacity onPress={() => LyricOptions(item.key)}>
-                  <Text style={styles.listItem}>{item.title}</Text>
+                  <Text
+                    style={[
+                      styles.listItem,
+                      { color: playerStyle.colors.secondary },
+                    ]}
+                  >
+                    {item.title}
+                  </Text>
                 </TouchableOpacity>
               )}
               keyExtractor={item => item.key}
@@ -254,35 +276,46 @@ export const LyricView = ({
             visible={lyricSearchModalVisible}
             onRequestClose={() => setLyricSearchModalVisible(false)}
           >
-            <View
-              style={[
-                styles.modalHeader,
-                { backgroundColor: playerStyle.colors.primary },
-              ]}
-            >
-              <Text style={styles.headerText}>歌词搜索</Text>
+            <View style={customizedStyles.modelContainer}>
+              <Text style={customizedStyles.headerText}>歌词搜索</Text>
               <TouchableOpacity
                 onPress={() => setLyricSearchModalVisible(false)}
               >
-                <IconButton icon="chevron-down" />
+                <IconButton
+                  iconColor={playerStyle.colors.primary}
+                  icon="chevron-down"
+                />
               </TouchableOpacity>
             </View>
             <TextInput
-              style={styles.searchBar}
+              style={[
+                styles.searchBar,
+                {
+                  backgroundColor: playerStyle.colors.primaryContainer,
+                  color: playerStyle.colors.primary,
+                },
+              ]}
               value={searchText}
               onChangeText={setSearchText}
               placeholder={track === undefined ? '' : track.title}
               onSubmitEditing={() => fetchAndSetLyricOptions(searchText)}
               selectionColor={playerStyle.customColors.textInputSelectionColor}
-              textColor={playerStyle.colors.text}
             />
             <FlatList
+              style={{ backgroundColor: playerStyle.colors.primaryContainer }}
               data={lrcOptions}
               renderItem={({ item, index }) => (
                 <TouchableOpacity
                   onPress={() => searchAndSetCurrentLyric(index)}
                 >
-                  <Text style={styles.listItem}>{item.label}</Text>
+                  <Text
+                    style={[
+                      styles.listItem,
+                      { color: playerStyle.colors.secondary },
+                    ]}
+                  >
+                    {item.label}
+                  </Text>
                 </TouchableOpacity>
               )}
               keyExtractor={item => item.key}
@@ -299,18 +332,25 @@ export const LyricView = ({
               <Button
                 title="+"
                 onPress={() => addSubtractOffset(true)}
-                color={playerStyle.colors.primary}
+                color={playerStyle.colors.primaryContainer}
               />
-              <Text style={styles.lyricOffsetText}>{currentTimeOffset}</Text>
+              <Text
+                style={[
+                  styles.lyricOffsetText,
+                  { backgroundColor: playerStyle.colors.primaryContainer },
+                ]}
+              >
+                {currentTimeOffset}
+              </Text>
               <Button
                 title="-"
                 onPress={() => addSubtractOffset(false)}
-                color={playerStyle.colors.primary}
+                color={playerStyle.colors.primaryContainer}
               />
               <Button
                 title="X"
                 onPress={() => setOffsetModalVisible(false)}
-                color={playerStyle.colors.primary}
+                color={playerStyle.colors.primaryContainer}
               />
             </View>
           </Modal>
@@ -367,18 +407,15 @@ const styles = StyleSheet.create({
 
   listItem: {
     padding: 10,
-    fontSize: 18,
+    fontSize: 16,
     borderTopColor: 'grey',
   },
   searchBar: {
     height: 40,
-    borderColor: '#999',
-    borderWidth: 1,
     paddingLeft: 15,
     backgroundColor: '#f0f0f0',
     fontSize: 16,
     color: '#333',
-    marginBottom: 10,
   },
   offsetModalView: {
     position: 'absolute',
@@ -403,6 +440,6 @@ const styles = StyleSheet.create({
     fontSize: 12,
     color: 'black',
     textAlign: 'center',
-    marginVertical: 5,
+    paddingVertical: 5,
   },
 });

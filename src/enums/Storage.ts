@@ -14,7 +14,7 @@ export enum STORAGE_KEYS {
   SKIN = 'PlayerSkin',
   SKINSTORAGE = 'PlayerSkinStorage',
   COOKIES = 'Cookies',
-  LYRIC_MAPPING = 'LyricMapping',
+  LYRIC_MAPPING = 'NewLyricMapping',
   LAST_PLAY_DURATION = 'LastPlayDuration',
   CACHED_MEDIA_MAPPING = 'CachedMediaMapping',
   DEFAULT_SEARCH = 'defaultSearch',

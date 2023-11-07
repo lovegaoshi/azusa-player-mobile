@@ -129,7 +129,7 @@ export const searchLyric = async (
     return;
   }
 
-  let finalLrc = json.lyric;
+  let finalLrc = json.lyric as string;
 
   // Merge trans Lyrics
   if (json.trans) {
@@ -137,4 +137,5 @@ export const searchLyric = async (
   }
   // logger.log(finalLrc)
   setLyric(finalLrc);
+  return finalLrc;
 };
