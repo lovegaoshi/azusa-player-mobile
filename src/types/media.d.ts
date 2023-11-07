@@ -37,5 +37,6 @@ declare namespace NoxMedia {
     songId: string;
     lyricKey: string;
     lyricOffset: number;
+    lyric: string;
   }
 }

@@ -104,19 +104,22 @@ export const LyricView = ({
       setSearchText(track.title || "");
       // Initialize from storage if not new
       if (hasLrcFromLocal()) {
-        logger.log('Loading Lrc from localStorage...');
+        logger.log('[lyric] Loading Lrc from localStorage...');
         const lrcDetail = lyricMapping.get(track?.song.id);
         if (lrcDetail === undefined) return;
         searchLyric(lrcDetail?.lyricKey, setLrc);
         setLrcOption({ key: lrcDetail?.lyricKey });
         setCurrentTimeOffset(lrcDetail!.lyricOffset);
+        setLrc(lrcDetail.lyric);
       }
       fetchAndSetLyricOptions();
     }
   }, [track]);
 
   useEffect(() => {
-    if (!hasLrcFromLocal()) searchAndSetCurrentLyric();
+    if (!hasLrcFromLocal()) {
+      searchAndSetCurrentLyric();
+    }
   }, [lrcOptions]);
 
   const hasLrcFromLocal = () => {
@@ -129,6 +132,7 @@ export const LyricView = ({
         songId: track.song.id,
         lyricKey: lrcOption.key,
         lyricOffset: currentTimeOffset,
+        lyric: lrc,
       };
       setLyricMapping(newLrcDetail);
     }

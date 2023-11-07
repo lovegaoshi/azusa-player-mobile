@@ -316,11 +316,7 @@ export const saveLastPlayDuration = async (val: number) =>
 
 export const initPlayerObject =
   async (): Promise<NoxStorage.PlayerStorageObject> => {
-    const lyricMappingDict = (await getLyricMapping()) || {};
-    const lyricMapping = new Map<string, NoxMedia.LyricDetail>();
-    for (const [key, value] of Object.entries(lyricMappingDict)) {
-      lyricMapping.set(key, value as NoxMedia.LyricDetail);
-    }
+    const lyricMapping = (await getLyricMapping()) || {};
     const playerObject = {
       settings: {
         ...DEFAULT_SETTING,
