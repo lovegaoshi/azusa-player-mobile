@@ -18,6 +18,7 @@ import { searchLyricOptions, searchLyric } from '@utils/LyricFetch';
 import { reExtractSongName } from '@stores/appStore';
 import { useNoxSetting } from '@hooks/useSetting';
 import { logger } from '@utils/Logger';
+import { readTxtFile, writeTxtFile } from '@utils/fs';
 
 const LYRIC_OFFSET_INTERVAL = 0.5;
 
@@ -103,16 +104,37 @@ export const LyricView = ({
       setLrcOption(null);
       setLrc('正在加载歌词...');
       setSearchText(track.title || '');
+      const lrcOptionPromise = fetchAndSetLyricOptions();
       // Initialize from storage if not new
+      // HACK: probably needs to be refactored because teh state updates
+      // but if it works it works
       if (hasLrcFromLocal()) {
         logger.log('[lyric] Loading Lrc from localStorage...');
         const lrcDetail = lyricMapping.get(track?.song.id);
         if (lrcDetail === undefined) return;
         setLrcOption({ key: lrcDetail?.lyricKey });
         setCurrentTimeOffset(lrcDetail!.lyricOffset);
-        setLrc(lrcDetail.lyric);
+        readTxtFile(lrcDetail.lyric, 'lrc/').then(readlrc => {
+          if (readlrc) {
+            logger.debug('[lrc] read local lrc and loading...');
+            setLrc(readlrc);
+          } else if (lrcDetail.lyric.endsWith('.txt')) {
+            logger.debug('[lrc] local lrc no longer exists, fetching new...');
+            lrcOptionPromise.then(
+              val => val && searchAndSetCurrentLyric(undefined, val)
+            );
+          } else {
+            logger.debug(
+              '[lrc] local lrc seems to be the content itself, loading that...'
+            );
+            setLrc(lrcDetail.lyric);
+          }
+        });
+      } else {
+        lrcOptionPromise.then(
+          val => val && searchAndSetCurrentLyric(undefined, val)
+        );
       }
-      fetchAndSetLyricOptions();
     }
   }, [track]);
 
@@ -130,12 +152,14 @@ export const LyricView = ({
     newLrcDetail: Partial<NoxMedia.LyricDetail> = {}
   ) => {
     if (lrcOption !== null && lrcOption !== undefined) {
+      const lrcpath = `${track.song.id}.txt`;
+      writeTxtFile(lrcpath, [newLrcDetail.lyric || lrc], 'lrc/');
       const lyricDeatail: NoxMedia.LyricDetail = {
         songId: track.song.id,
         lyricKey: lrcOption.key,
         lyricOffset: currentTimeOffset,
-        lyric: lrc,
         ...newLrcDetail,
+        lyric: lrcpath,
       };
       setLyricMapping(lyricDeatail);
     }
@@ -159,20 +183,27 @@ export const LyricView = ({
       const options = await searchLyricOptions(titleToFetch);
 
       setLrcOptions(options);
+      return options;
     } catch (error) {
       logger.error(`Error fetching lyric options:${error}`);
       setLrcOptions([]);
     }
   };
 
-  const searchAndSetCurrentLyric = async (index?: number) => {
-    console.debug(`lrcoptions: ${JSON.stringify(lrcOptions)}`);
+  const searchAndSetCurrentLyric = async (
+    index?: number,
+    resolvedLrcOptions = lrcOptions
+  ) => {
+    console.debug(`lrcoptions: ${JSON.stringify(resolvedLrcOptions)}`);
 
     index = index === undefined ? 0 : index;
-    if (lrcOptions.length === 0) setLrc('无法找到歌词,请手动搜索...');
+    if (resolvedLrcOptions.length === 0) setLrc('无法找到歌词,请手动搜索...');
     else {
-      const lyric = await searchLyric(lrcOptions[index!].songMid, setLrc);
-      setLrcOption(lrcOptions[index!]);
+      const lyric = await searchLyric(
+        resolvedLrcOptions[index!].songMid,
+        setLrc
+      );
+      setLrcOption(resolvedLrcOptions[index!]);
       updateLyricMapping({ lyric });
     }
   };
