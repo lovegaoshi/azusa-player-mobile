@@ -136,6 +136,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 5,
     justifyContent: 'center',
     alignItems: 'center',
+    width: '100%',
   },
   artistText: {
     fontSize: 16,

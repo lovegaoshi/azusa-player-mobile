@@ -71,12 +71,13 @@ export default () => {
     }
     if (event.state !== State.Ready) return;
     const song = (await TrackPlayer.getActiveTrack())?.song as NoxMedia.Song;
-    setABRepeat(getABRepeatRaw(song.id));
+    const newABRepeat = getABRepeatRaw(song.id);
+    setABRepeat(newABRepeat);
     if (setCurrentPlaying(song)) return;
     const trackDuration = (await TrackPlayer.getProgress()).duration;
-    setBRepeatDuration(abRepeat[1] * trackDuration);
-    if (abRepeat[0] === 0) return;
-    TrackPlayer.seekTo(trackDuration * abRepeat[0]);
+    setBRepeatDuration(newABRepeat[1] * trackDuration);
+    if (newABRepeat[0] === 0) return;
+    TrackPlayer.seekTo(trackDuration * newABRepeat[0]);
   });
 
   return {
