@@ -3006,10 +3006,10 @@
   resolved "https://registry.npmjs.org/@types/prop-types/-/prop-types-15.7.9.tgz#b6f785caa7ea1fe4414d9df42ee0ab67f23d8a6d"
   integrity sha512-n1yyPsugYNSmHgxDFjicaI2+gCNjsBck8UX9kuofAKlc0h1bL+20oSF72KeNaW2DUlesbEVCFgyV2dPGTiY42g==
 
-"@types/react-native-background-timer@^2.0.0":
-  version "2.0.1"
-  resolved "https://registry.npmjs.org/@types/react-native-background-timer/-/react-native-background-timer-2.0.1.tgz#e599cc1d0700d308bf20867e838135ee8bcf25be"
-  integrity sha512-cCcvaZRI3dr1lsjqD7ZdL7H1H/CC4zeKQ9QZMbFQwlj8medmJkQUfEQXAbcTpWc7pur09feTpCCFOAEhR0Z4JA==
+"@types/react-native-background-timer@^2.0.2":
+  version "2.0.2"
+  resolved "https://registry.npmjs.org/@types/react-native-background-timer/-/react-native-background-timer-2.0.2.tgz#22f9126124068a0ee6a812e16f98e270c2b9b2c7"
+  integrity sha512-cMAep0M5yqUHjiiRPvGiviqiJYdI45KSjbI5ufsIFSQGFwHwrHJC/8yawNhy0G3Gix6fufWLsEj6jC5niUNHiQ==
 
 "@types/react-native-share-menu@^5.0.2":
   version "5.0.4"
@@ -10574,7 +10574,7 @@ react-native-get-random-values@^1.9.0:
 
 "react-native-lyric@git+https://github.com/lovegaoshi/react-native-lyric.git":
   version "1.0.1"
-  resolved "git+https://github.com/lovegaoshi/react-native-lyric.git#fd4fefb76f6aa62bd971ba734d62edc4b20aa32d"
+  resolved "git+https://github.com/lovegaoshi/react-native-lyric.git#d540ca240e262f400ab49acc5a7e9b0544241832"
 
 react-native-pager-view@^6.2.1:
   version "6.2.2"

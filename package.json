@@ -116,7 +116,7 @@
     "@types/node": "^20.8.10",
     "@types/react": "^18.2.36",
     "@types/react-native": "^0.72.5",
-    "@types/react-native-background-timer": "^2.0.0",
+    "@types/react-native-background-timer": "^2.0.2",
     "@types/react-native-share-menu": "^5.0.2",
     "@types/react-native-video": "^5.0.14",
     "@types/react-test-renderer": "^18.0.0",

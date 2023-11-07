@@ -107,7 +107,6 @@ export const LyricView = ({
         logger.log('[lyric] Loading Lrc from localStorage...');
         const lrcDetail = lyricMapping.get(track?.song.id);
         if (lrcDetail === undefined) return;
-        searchLyric(lrcDetail?.lyricKey, setLrc);
         setLrcOption({ key: lrcDetail?.lyricKey });
         setCurrentTimeOffset(lrcDetail!.lyricOffset);
         setLrc(lrcDetail.lyric);
@@ -126,15 +125,16 @@ export const LyricView = ({
     return lyricMapping.has(track?.song?.id);
   };
 
-  const updateLyricMapping = () => {
+  const updateLyricMapping = (newLrcDetail: Partial<NoxMedia.LyricDetail> = {}) => {
     if (lrcOption !== null && lrcOption !== undefined) {
-      const newLrcDetail: NoxMedia.LyricDetail = {
+      const lyricDeatail: NoxMedia.LyricDetail = {
         songId: track.song.id,
         lyricKey: lrcOption.key,
         lyricOffset: currentTimeOffset,
         lyric: lrc,
+        ...newLrcDetail,
       };
-      setLyricMapping(newLrcDetail);
+      setLyricMapping(lyricDeatail);
     }
   };
 
@@ -143,7 +143,7 @@ export const LyricView = ({
       ? currentTimeOffset + LYRIC_OFFSET_INTERVAL
       : currentTimeOffset - LYRIC_OFFSET_INTERVAL;
     setCurrentTimeOffset(newTimeOffset);
-    updateLyricMapping();
+    updateLyricMapping({lyricOffset: newTimeOffset});
   };
 
   const fetchAndSetLyricOptions = async (adhocTitle?: string) => {
@@ -162,15 +162,15 @@ export const LyricView = ({
     }
   };
 
-  const searchAndSetCurrentLyric = (index?: number) => {
+  const searchAndSetCurrentLyric = async (index?: number) => {
     console.debug(`lrcoptions: ${JSON.stringify(lrcOptions)}`);
 
     index = index === undefined ? 0 : index;
     if (lrcOptions.length === 0) setLrc('无法找到歌词,请手动搜索...');
     else {
-      searchLyric(lrcOptions[index!].songMid, setLrc);
+      const lyric = await searchLyric(lrcOptions[index!].songMid, setLrc);
       setLrcOption(lrcOptions[index!]);
-      updateLyricMapping();
+      updateLyricMapping({lyric});
     }
   };
 
