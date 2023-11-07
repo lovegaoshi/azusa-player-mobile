@@ -4,7 +4,6 @@ apply plugin: "kotlin-android"
 apply from: "../../node_modules/react-native-vector-icons/fonts.gradle"
 apply from: "../../node_modules/react-native-code-push/android/codepush.gradle"
 
-import org.apache.tools.ant.taskdefs.condition.Os
 
 /**
 
@@ -80,8 +79,8 @@ android {
         applicationId "com.noxplay.noxplayer"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 75
-        versionName "2.10.15"
+        versionCode 77
+        versionName "2.11.4"
         manifestPlaceholders = [
             appAuthRedirectScheme: 'com.noxplayer'
         ]
@@ -138,9 +137,9 @@ dependencies {
     implementation 'com.facebook.fresco:animated-webp:2.5.0'
     implementation 'com.facebook.fresco:webpsupport:2.5.0'
 
-    implementation 'com.android.support:appcompat-v7:25.0.0'
-    implementation 'com.android.support:support-annotations:25.0.0'
-    implementation 'com.android.support:design:25.0.0'
+    implementation 'com.android.support:appcompat-v7:28.0.0'
+    implementation 'com.android.support:support-annotations:28.0.0'
+    implementation 'com.android.support:design:28.0.0'
 
     // The version of react-native is set by the React Native Gradle Plugin
     implementation("com.facebook.react:react-android")

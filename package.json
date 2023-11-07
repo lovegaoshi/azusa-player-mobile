@@ -1,6 +1,6 @@
 {
   "name": "azusa-player-mobile",
-  "version": "2.10.15",
+  "version": "2.11.4",
   "private": true,
   "scripts": {
     "android": "react-native run-android",
@@ -25,7 +25,8 @@
     "codepush": "appcenter codepush release-react -a lovegaoshi/Azusa-Player-Mobile",
     "codepush:rollback": "appcenter codepush rollback -a lovegaoshi/Azusa-Player-Mobile Production",
     "codepush:promote": "appcenter codepush promote -a lovegaoshi/Azusa-Player-Mobile -s Staging -d Production",
-    "dep": "yarn upgrade-interactive --latest"
+    "dep": "yarn upgrade-interactive --latest",
+    "release": "git switch master; git pull; python release_bump.py"
   },
   "dependencies": {
     "@react-native-async-storage/async-storage": "^1.19.4",
