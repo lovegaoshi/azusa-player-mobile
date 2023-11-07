@@ -2,6 +2,7 @@ import { useState } from 'react';
 
 import { useNoxSetting } from './useSetting';
 import NoxCache from '../utils/Cache';
+import { lsFiles, unlinkFiles } from '@utils/fs';
 
 const useCleanCache = () => {
   const playlists = useNoxSetting(state => state.playlists);
@@ -17,7 +18,13 @@ const useCleanCache = () => {
 
   const [orphanedCache, setOrphanCache] = useState(getOrphanCache());
 
-  const cleanOrphanedCache = () => {
+  const cleanOrphanedCache = async () => {
+    const RNBlobTempFiles = await lsFiles();
+    const cachedKeys = Array.from(NoxCache.noxMediaCache.cache.values());
+    const abandonedFiles = RNBlobTempFiles.list
+      .map(val => `${RNBlobTempFiles.dirpath}/${val}`)
+      .filter(val => !cachedKeys.includes(val));
+    unlinkFiles(abandonedFiles);
     NoxCache.noxMediaCache.cleanOrphanedCache(orphanedCache);
     setOrphanCache(getOrphanCache());
   };

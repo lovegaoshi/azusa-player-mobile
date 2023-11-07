@@ -32,3 +32,17 @@ export const readTxtFile = async (filename: string, subfolder = '') => {
     return undefined;
   }
 };
+
+export const lsFiles = async (
+  dirpath = `${fsdirs.DocumentDir}`,
+  prefix = 'ReactNativeBlobUtilTmp_'
+) => {
+  const list = await RNFetchBlob.fs.ls(dirpath);
+  return {
+    dirpath,
+    list: list.filter(val => val.startsWith(prefix)),
+  };
+};
+
+export const unlinkFiles = (filelist: string[]) =>
+  Promise.all(filelist.map(val => RNFetchBlob.fs.unlink(val)));
