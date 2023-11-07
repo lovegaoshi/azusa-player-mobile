@@ -7,6 +7,8 @@ import {
   TouchableWithoutFeedback,
   ViewStyle,
   Easing,
+  TextStyle,
+  StyleProp,
 } from 'react-native';
 import type { Track } from 'react-native-track-player';
 import { Image } from 'expo-image';
@@ -90,15 +92,7 @@ const TrackInfoTemplate: React.FC<Props> = ({
   return (
     <View style={[styles.container, containerStyle, { width: windowWidth }]}>
       {children || <AlbumArt />}
-      <MarqueeText
-        duration={3000}
-        animationType={'bounce'}
-        bounceDelay={2000}
-        style={textStyle}
-        easing={Easing.linear}
-      >
-        {track?.title}
-      </MarqueeText>
+      <SongTitle style={textStyle} text={track?.title} />
       <View style={styles.infoContainer}>
         <View style={styles.favoriteButtonContainer}>
           <FavReloadButton track={track} />
@@ -113,6 +107,26 @@ const TrackInfoTemplate: React.FC<Props> = ({
         </View>
       </View>
     </View>
+  );
+};
+
+interface SongTitleProps {
+  style: StyleProp<TextStyle>;
+  text?: string;
+}
+const SongTitle = (props: SongTitleProps) => {
+  return __DEV__ ? (
+    <Text style={props.style}>{props.text}</Text>
+  ) : (
+    <MarqueeText
+      duration={3000}
+      animationType={'bounce'}
+      bounceDelay={2000}
+      style={props.style}
+      easing={Easing.linear}
+    >
+      {props.text}
+    </MarqueeText>
   );
 };
 

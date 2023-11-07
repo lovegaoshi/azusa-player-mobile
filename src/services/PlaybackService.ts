@@ -12,7 +12,7 @@ import { logger } from '../utils/Logger';
 import noxPlayingList, { getNextSong } from '../stores/playingList';
 import { NoxRepeatMode } from '../enums/RepeatMode';
 import playerSettingStore from '@stores/playerSettingStore';
-import appStore, {resetResolvedURL} from '@stores/appStore';
+import appStore, { resetResolvedURL } from '@stores/appStore';
 import {
   fadePause,
   cycleThroughPlaymode,
@@ -49,9 +49,6 @@ export async function AdditionalPlaybackService({
 }
 
 export async function PlaybackService() {
-  let abRepeat = [0, 1];
-  let bRepeatDuration = 9999;
-
   DeviceEventEmitter.addListener('APMEnterPIP', (e: boolean) =>
     setState({ pipMode: e })
   );

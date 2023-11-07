@@ -10653,10 +10653,9 @@ react-native-tab-view@^3.5.1:
   dependencies:
     use-latest-callback "^0.1.5"
 
-react-native-text-ticker@^1.14.0:
+"react-native-text-ticker@git+https://lovegaoshi@github.com/lovegaoshi/react-native-text-ticker.git":
   version "1.14.0"
-  resolved "https://registry.yarnpkg.com/react-native-text-ticker/-/react-native-text-ticker-1.14.0.tgz#dc537d2c587efc18ef19db9a85dc678a28aa8c57"
-  integrity sha512-8TNGTcW43dfnCqIuXVA7F1Ny8SKGrw0pIrNS5nM7eda+6AsuPTZh3JQ2CwmSRYfsrlnS4QFrpyo5ykpI8nvtCw==
+  resolved "git+https://lovegaoshi@github.com/lovegaoshi/react-native-text-ticker.git#e14a1a191b5925f27a0cfd8676b938146e109544"
 
 "react-native-track-player@git+https://lovegaoshi@github.com/lovegaoshi/react-native-track-player.git#APM":
   version "4.0.1"
