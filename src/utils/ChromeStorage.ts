@@ -73,23 +73,29 @@ export const getFadeInterval = async () =>
 export const saveFadeInterval = async (val: number) =>
   await saveItem(STORAGE_KEYS.FADE_INTERVAL, val);
 
-const arrayToObject = (val: [string, any]) => val.reduce((acc, val) => {
-  acc[val[0]] = val[1];
-  return acc;
-}, {});
+const arrayToObject = (val: [string, any]) =>
+  val.reduce((acc, val) => {
+    acc[val[0]] = val[1];
+    return acc;
+  }, {});
 
 /**
  * a save helper function for mapping types ({string: val}).
  * @returns the mapping object
  */
-const getMapping = async (key: STORAGE_KEYS, transform: (val: any) => any = arrayToObject) => {
+const getMapping = async (
+  key: STORAGE_KEYS,
+  transform: (val: any) => any = arrayToObject
+) => {
   try {
     const result = await getItem(key);
-    if (result === null) return {};
-    return Array.isArray(result) ? transform(await loadChucked(result)) : result
+    if (result === null) return transform([]);
+    return Array.isArray(result)
+      ? transform(await loadChucked(result))
+      : result;
   } catch (e) {
-    console.error(`failed to resolve mapping resources for ${key}.`)
-    return {};
+    console.error(`failed to resolve mapping resources for ${key}.`);
+    return transform([]);
   }
 };
 
@@ -111,15 +117,15 @@ export const getR128GainMapping = async () => {
   )) as NoxStorage.R128Dict;
 };
 
-export const saveR128GainMapping = (val: NoxStorage.R128Dict) => 
-saveChucked(STORAGE_KEYS.R128GAIN_MAPPING, Object.entries(val));
+export const saveR128GainMapping = (val: NoxStorage.R128Dict) =>
+  saveChucked(STORAGE_KEYS.R128GAIN_MAPPING, Object.entries(val));
 
 export const getABMapping = async () => {
   return (await getMapping(STORAGE_KEYS.ABREPEAT_MAPPING)) as NoxStorage.ABDict;
 };
 
-export const saveABMapping = async (val: NoxStorage.ABDict) => 
-saveChucked(STORAGE_KEYS.ABREPEAT_MAPPING, Object.entries(val));
+export const saveABMapping = async (val: NoxStorage.ABDict) =>
+  saveChucked(STORAGE_KEYS.ABREPEAT_MAPPING, Object.entries(val));
 
 export const getDefaultSearch = async (): Promise<SEARCH_OPTIONS> => {
   return (
@@ -253,10 +259,11 @@ export const getPlayerSkins = async () =>
 
 export const saveLyricMapping = async (
   lyricMapping: Map<string, NoxMedia.LyricDetail>
-) => saveChucked(STORAGE_KEYS.LYRIC_MAPPING, Array.from(lyricMapping.entries()));
+) =>
+  saveChucked(STORAGE_KEYS.LYRIC_MAPPING, Array.from(lyricMapping.entries()));
 
 export const getLyricMapping = () =>
-  getMapping(STORAGE_KEYS.LYRIC_MAPPING, (val: any) => new Map(val))
+  getMapping(STORAGE_KEYS.LYRIC_MAPPING, (val: any) => new Map(val));
 
 // no point to provide getters, as states are managed by zustand.
 // unlike azusaplayer which the storage context still reads localstorage, instaed
