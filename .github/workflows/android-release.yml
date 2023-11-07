@@ -99,8 +99,11 @@ jobs:
           files: android/app/build/outputs/apk/release/*.apk
           generate_release_notes: true
 
-      - name: Push changes to master
-        uses: ad-m/github-push-action@master
+      - name: codepush to prod
+        run: |
+          npm install -g appcenter-cli
+          yarn codepush --token ${{secrets.CODEPUSH_ACCESS_TOKEN}}
+          yarn codepush:promote --token ${{secrets.CODEPUSH_ACCESS_TOKEN}}
 
   buildAAB:
     runs-on: ubuntu-latest
@@ -189,6 +192,12 @@ jobs:
           releaseFiles: android/app/build/outputs/bundle/release/app-release.aab
           track: internal
           # status: draft
+
+      - name: git pull
+        run: git pull
+
+      - name: Push changes to master
+        uses: ad-m/github-push-action@master
 
   buildIPA:
     runs-on: macos-12

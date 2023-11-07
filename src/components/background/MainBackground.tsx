@@ -36,12 +36,11 @@ export const resolveBackgroundImage = async (
           await fetchVideoPlayUrlPromise({
             bvid: backgroundImage.identifier,
             extractType: 'VideoUrl',
-            iOS: Platform.OS === 'ios',
+            //. iOS: Platform.OS === 'ios',
           })
         ).url,
       };
     case RESOLVE_TYPE.biliNFTVideo:
-      // eslint-disable-next-line no-case-declarations
       const [act_id, index] = JSON.parse(backgroundImage.identifier);
       return {
         type: RESOLVE_TYPE.video,

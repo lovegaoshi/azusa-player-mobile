@@ -88,20 +88,4 @@ public class MainActivity extends ReactActivity {
     super.onPictureInPictureModeChanged(isInPictureInPictureMode, newConfig);
   }
 
-  @Override
-  public void onPause() {
-    // If called while in PiP mode, do not pause playback
-    super.onPause();
-    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-      if (isInPictureInPictureMode()) {
-        // Continue playback
-        // for some reason my S21 doesn't trigger this  at all. pixel is fine.
-      } else {
-        // Use existing playback logic for paused Activity behavior.
-      }
-    } else {
-
-    }
-  }
-
 }

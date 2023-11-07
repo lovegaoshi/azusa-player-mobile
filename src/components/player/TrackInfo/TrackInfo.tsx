@@ -27,7 +27,7 @@ const TrackInfo: React.FC<Props> = ({ track, windowWidth }) => {
 
 const styles = StyleSheet.create({
   albumArt: {
-    paddingTop: 10,
+    paddingTop: 15,
   },
 });
 

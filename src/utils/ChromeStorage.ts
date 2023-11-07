@@ -416,9 +416,9 @@ export const clearPlaylistNImport = async (parsedContent: any) => {
 export const addImportedPlaylist = async (playlists: any[]) => {
   await saveImportedPlaylist(playlists);
   await savePlaylistIds(
-    (
-      await getItem(STORAGE_KEYS.MY_FAV_LIST_KEY)
-    ).concat(playlists.map(val => val.info.id))
+    (await getItem(STORAGE_KEYS.MY_FAV_LIST_KEY)).concat(
+      playlists.map(val => val.info.id)
+    )
   );
 };
 

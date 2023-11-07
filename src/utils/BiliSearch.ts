@@ -35,26 +35,6 @@ interface Props {
 }
 
 export const matchBiliURL = (input: string) => {
-  const reExtractions: Array<
-    [RegExp, (props: regexFetchProps) => Promise<NoxMedia.Song[]>]
-  > = [
-    [biliseriesFetch.regexSearchMatch, biliseriesFetch.regexFetch],
-    [bilicolleFetch.regexSearchMatch, bilicolleFetch.regexFetch],
-    [bilichannelFetch.regexSearchMatch, bilichannelFetch.regexFetch],
-    [bilichannelAudioFetch.regexSearchMatch, bilichannelAudioFetch.regexFetch],
-    [biliaudioFetch.regexSearchMatch, biliaudioFetch.regexFetch],
-    [bilifavlistFetch.regexSearchMatch, bilifavlistFetch.regexFetch],
-    [bilifavlistFetch.regexSearchMatch2, bilifavlistFetch.regexFetch],
-    [steriatkFetch.regexSearchMatch, steriatkFetch.regexFetch],
-    [steriatkFetch.regexSearchMatch2, steriatkFetch.regexFetch],
-    [ytbmixlistFetch.regexSearchMatch, ytbmixlistFetch.regexFetch],
-    [ytbmixlistFetch.regexSearchMatch2, ytbmixlistFetch.regexFetch],
-    [ytbplaylistFetch.regexSearchMatch, ytbplaylistFetch.regexFetch],
-    [ytbvideoFetch.regexSearchMatch, ytbvideoFetch.regexFetch],
-    [bilivideoFetch.regexSearchMatch, bilivideoFetch.regexFetch],
-    [bililiveFetch.regexSearchMatch, bililiveFetch.regexFetch],
-    [bilisubliveFetch.regexSearchMatch, bilisubliveFetch.regexFetch],
-  ];
   for (const reExtraction of reExtractions) {
     const reExtracted = reExtraction[0].exec(input);
     if (reExtracted !== null) {
@@ -117,3 +97,25 @@ export const searchBiliURLs = async ({
   progressEmitter(0);
   return [];
 };
+
+
+const reExtractions: Array<
+  [RegExp, (props: regexFetchProps) => Promise<NoxMedia.Song[]>]
+> = [
+  [biliseriesFetch.regexSearchMatch, biliseriesFetch.regexFetch],
+  [bilicolleFetch.regexSearchMatch, bilicolleFetch.regexFetch],
+  [bilichannelFetch.regexSearchMatch, bilichannelFetch.regexFetch],
+  [bilichannelAudioFetch.regexSearchMatch, bilichannelAudioFetch.regexFetch],
+  [biliaudioFetch.regexSearchMatch, biliaudioFetch.regexFetch],
+  [bilifavlistFetch.regexSearchMatch, bilifavlistFetch.regexFetch],
+  [bilifavlistFetch.regexSearchMatch2, bilifavlistFetch.regexFetch],
+  [steriatkFetch.regexSearchMatch, steriatkFetch.regexFetch],
+  [steriatkFetch.regexSearchMatch2, steriatkFetch.regexFetch],
+  [ytbmixlistFetch.regexSearchMatch, ytbmixlistFetch.regexFetch],
+  [ytbmixlistFetch.regexSearchMatch2, ytbmixlistFetch.regexFetch],
+  [ytbplaylistFetch.regexSearchMatch, ytbplaylistFetch.regexFetch],
+  [ytbvideoFetch.regexSearchMatch, ytbvideoFetch.regexFetch],
+  [bilivideoFetch.regexSearchMatch, bilivideoFetch.regexFetch],
+  [bililiveFetch.regexSearchMatch, bililiveFetch.regexFetch],
+  [bilisubliveFetch.regexSearchMatch, bilisubliveFetch.regexFetch],
+];

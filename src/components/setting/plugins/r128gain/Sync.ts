@@ -66,7 +66,7 @@ export const downloadR128GainDB = async () => {
     try {
       const numberedABRepeat = JSON.parse(curr.abrepeat || '') as [
         number,
-        number
+        number,
       ];
       if (
         Array.isArray(numberedABRepeat) &&

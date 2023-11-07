@@ -287,10 +287,15 @@ export const useNoxSetting = create<NoxSetting>((set, get) => ({
   },
 
   initPlayer: async (val: NoxStorage.PlayerStorageObject) => {
-    if (Platform.OS === 'android') {
-      NoxAndroidAutoModule.isGestureNavigationMode().then(
-        (gestureMode: boolean) => set({ gestureMode })
-      );
+    switch (Platform.OS) {
+      case 'android':
+        NoxAndroidAutoModule.isGestureNavigationMode().then(
+          (gestureMode: boolean) => set({ gestureMode })
+        );
+        break;
+      default:
+        set({ gestureMode: true });
+        break;
     }
     const playingList =
       val.playlists[val.lastPlaylistId[0]] || dummyPlaylistList;

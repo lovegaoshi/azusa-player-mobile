@@ -49,9 +49,10 @@
 市面上有很多播放器竞品，比如整合大量音乐网站，跨平台的[~listen1~](https://github.com/listen1/listen1_chrome_extension)、[~洛雪音乐~](https://github.com/lyswhut/lx-music-mobile)、[musicfree](https://github.com/maotoumao/MusicFree)；动画elegent的[namida](https://github.com/namidaco/namida)；界面简洁好使的本地播放器[AIMP](https://www.aimp.ru/)；支持b站的也不是没有，为什么要用管人播放器？
 
 - 管人播放器之初为了溜阿梓歌切收藏夹而诞生，自从持久、稳定、每日投分p的第五代阿梓切歌人[HonmaMeiko](https://space.bilibili.com/590096/video?tid=0&keyword=&order=pubdate)接棒后，以及[自动切歌软件](https://www.bilibili.com/video/BV1WK411y7zW/?spm_id_from=333.999.0.0)研发成功可以大批量无人值守切各种没人切的管人歌势，管人播放器开发了对b站视频列表的支持，以及订阅b站链接的功能，专注于解决b站视频分p搜索孱弱，整合视频分p、视频列表、视频合集、收藏夹、空间~b站产品经理脑门被夹了搞这么多一样的玩意儿~等多种视频列表为一个统一的歌单。由于b站音乐区本身流量不足~依托答辩~，大多整合类播放器对于b站的支持很基础，并没有管人播放器类别支持广，没有订阅功能，也不整合b站增加播放量、点赞等操作。
-- 绝大部分播放器不支持歌单订阅功能。
-- 没有可以给管人痴定制皮肤的播放器。
-- 绑ffmpeg做OTF音量均衡，和用RN做Android Auto适配的播放器仅此一家。
+- 管人播放器支持歌单订阅。
+- 管人播放器给管人痴定制皮肤。
+- 管人播放器绑ffmpeg做OTF音量均衡.
+- 管人播放器有业界领先的React Native Android Auto适配。
 
 ## 安装
 

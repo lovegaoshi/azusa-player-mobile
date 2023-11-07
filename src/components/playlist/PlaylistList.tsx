@@ -70,7 +70,7 @@ const PlaylistList = () => {
   const [searchText, setSearchText] = useState('');
   const [debouncedSearchText] = useDebounce(searchText, 500);
   const [refreshing, setRefreshing] = useState(false);
-  const playlistRef = useRef<FlashList<NoxMedia.Song> | null>(null);
+  const playlistRef = useRef<FlashList<NoxMedia.Song>>(null);
   const netInfo = useNetInfo();
   // TODO: slow?
   const [cachedSongs, setCachedSongs] = useState<string[]>([]);
@@ -364,7 +364,7 @@ const PlaylistList = () => {
       </View>
       <View style={stylesLocal.playlistContainer}>
         <FlashList
-          ref={ref => (playlistRef.current = ref)}
+          ref={playlistRef}
           data={currentRows}
           renderItem={({ item, index }) => (
             <SongBackground

@@ -8,19 +8,13 @@ import { DeviceEventEmitter, Platform } from 'react-native';
 import { NULL_TRACK, parseSongR128gain } from '../objects/Song';
 import { initBiliHeartbeat } from '../utils/Bilibili/BiliOperate';
 import type { NoxStorage } from '../types/storage';
-import { saveLastPlayDuration } from '../utils/ChromeStorage';
 import { logger } from '../utils/Logger';
 import noxPlayingList, { getNextSong } from '../stores/playingList';
 import { NoxRepeatMode } from '../enums/RepeatMode';
 import playerSettingStore from '@stores/playerSettingStore';
-import appStore, {
-  getABRepeatRaw,
-  resetResolvedURL,
-  setCurrentPlaying,
-} from '@stores/appStore';
+import appStore, {resetResolvedURL} from '@stores/appStore';
 import {
   fadePause,
-  fadePlay,
   cycleThroughPlaymode,
   resolveAndCache,
 } from '@utils/RNTPUtils';
@@ -173,60 +167,6 @@ export async function PlaybackService() {
     console.log('Event.PlaybackPlayWhenReadyChanged', event);
   });
 
-  TrackPlayer.addEventListener(Event.PlaybackState, async event => {
-    console.log('Event.PlaybackState', event);
-    if (event.state === State.Playing) {
-      fadePlay();
-    }
-    // AB repeat implementation
-    // HACK: this works and feels terrible but I can't figure out something better.
-    if (event.state !== State.Ready) return;
-    const song = (await TrackPlayer.getActiveTrack())?.song as NoxMedia.Song;
-    abRepeat = getABRepeatRaw(song.id);
-    if (setCurrentPlaying(song)) return;
-    const trackDuration = (await TrackPlayer.getProgress()).duration;
-    bRepeatDuration = abRepeat[1] * trackDuration;
-    if (abRepeat[0] === 0) return;
-    TrackPlayer.seekTo(trackDuration * abRepeat[0]);
-  });
-
-  TrackPlayer.addEventListener(Event.PlaybackProgressUpdated, event => {
-    saveLastPlayDuration(event.position);
-    const { fadeIntervalMs, fadeIntervalSec } = getAppStoreState();
-    if (
-      event.duration > 0 &&
-      event.position >
-        Math.min(bRepeatDuration, event.duration) - fadeIntervalSec
-    ) {
-      if (getState().playmode !== NoxRepeatMode.REPEAT_TRACK) {
-        logger.debug(
-          `[FADEOUT] fading out....${event.position} / ${event.duration}`
-        );
-        TrackPlayer.setAnimatedVolume({
-          volume: 0,
-          duration: fadeIntervalMs,
-        });
-      }
-    }
-    if (abRepeat[1] === 1) return;
-    if (event.position > bRepeatDuration) {
-      // HACK: we are not implementing sponsorblock so why not just TP.skipToNext?
-      // TrackPlayer.seekTo(event.duration);
-      TrackPlayer.skipToNext();
-    }
-  });
-
-  TrackPlayer.addEventListener(
-    Event.PlaybackMetadataReceived,
-    async ({ title, artist }) => {
-      const activeTrack = await TrackPlayer.getActiveTrack();
-      TrackPlayer.updateNowPlayingMetadata({
-        artist: [title, artist].filter(Boolean).join(' - '),
-        title: activeTrack?.title,
-        artwork: activeTrack?.artwork,
-      });
-    }
-  );
   if (Platform.OS === 'android') {
     TrackPlayer.addEventListener(Event.PlaybackAnimatedVolumeChanged, () => {
       logger.debug('animated volume finished event triggered');

@@ -13,7 +13,7 @@ import { Lrc as Lyric } from 'react-native-lyric';
 import { Track, useProgress } from 'react-native-track-player';
 import { IconButton, TextInput } from 'react-native-paper';
 
-import { searchLyricOptions, searchLyric } from '@utils/Data';
+import { searchLyricOptions, searchLyric } from '@utils/LyricFetch';
 import { reExtractSongName } from '@stores/appStore';
 import { useNoxSetting } from '@hooks/useSetting';
 import { logger } from '@utils/Logger';
