@@ -73,30 +73,24 @@ export const getFadeInterval = async () =>
 export const saveFadeInterval = async (val: number) =>
   await saveItem(STORAGE_KEYS.FADE_INTERVAL, val);
 
-/**
- * a save helper function for mapping types ({string: val}).
- * @returns nothing
- */
-async function saveMapping<T>(key: STORAGE_KEYS, val: { [key: string]: T }) {
-  return await saveItem(key, val);
-  const result = Object.keys(val).map(key => [key, val[key]]);
-  return await saveChucked(result, STORAGE_KEYS.R128GAIN_MAPPING);
-}
+const arrayToObject = (val: [string, any]) => val.reduce((acc, val) => {
+  acc[val[0]] = val[1];
+  return acc;
+}, {});
 
 /**
  * a save helper function for mapping types ({string: val}).
  * @returns the mapping object
  */
-const getMapping = async (key: STORAGE_KEYS) => {
-  return (await getItem(key)) || {};
-  // TODO: does dict get too long  that this is necessary?
-  const result = (await loadChucked(
-    (await getItem(STORAGE_KEYS.R128GAIN_MAPPING)) || []
-  )) as [string, any][];
-  return result.reduce((acc, val) => {
-    acc[val[0]] = val[1];
-    return acc;
-  }, {} as NoxStorage.R128Dict);
+const getMapping = async (key: STORAGE_KEYS, transform: (val: any) => any = arrayToObject) => {
+  try {
+    const result = await getItem(key);
+    if (result === null) return {};
+    return Array.isArray(result) ? transform(await loadChucked(result)) : result
+  } catch (e) {
+    console.error(`failed to resolve mapping resources for ${key}.`)
+    return {};
+  }
 };
 
 export const getRegExtractMapping = async () => {
@@ -117,17 +111,15 @@ export const getR128GainMapping = async () => {
   )) as NoxStorage.R128Dict;
 };
 
-export const saveR128GainMapping = async (val: NoxStorage.R128Dict) => {
-  return await saveMapping(STORAGE_KEYS.R128GAIN_MAPPING, val);
-};
+export const saveR128GainMapping = (val: NoxStorage.R128Dict) => 
+saveChucked(STORAGE_KEYS.R128GAIN_MAPPING, Object.entries(val));
 
 export const getABMapping = async () => {
   return (await getMapping(STORAGE_KEYS.ABREPEAT_MAPPING)) as NoxStorage.ABDict;
 };
 
-export const saveABMapping = async (val: NoxStorage.ABDict) => {
-  return await saveMapping(STORAGE_KEYS.ABREPEAT_MAPPING, val);
-};
+export const saveABMapping = async (val: NoxStorage.ABDict) => 
+saveChucked(STORAGE_KEYS.ABREPEAT_MAPPING, Object.entries(val));
 
 export const getDefaultSearch = async (): Promise<SEARCH_OPTIONS> => {
   return (
@@ -189,8 +181,8 @@ const chunkArray = <T>(arr: Array<T>, size = MAX_SONGLIST_SIZE): Array<T[]> => {
  * @param key
  */
 const saveChucked = async (
-  objects: Array<any>,
   key: string,
+  objects: Array<any>,
   saveToStorage = true
 ) => {
   // splice into chunks
@@ -223,7 +215,7 @@ export const savePlaylist = async (
   try {
     const savingPlaylist = {
       ...playlist,
-      songList: await saveChucked(playlist.songList, playlist.id, false),
+      songList: await saveChucked(playlist.id, playlist.songList, false),
     };
     // save chunks
     saveItem(overrideKey || playlist.id || uuidv4(), savingPlaylist);
@@ -254,17 +246,17 @@ export const getPlaylist = async (
 };
 
 export const savePlayerSkins = async (skins: Array<any>) =>
-  saveChucked(skins, STORAGE_KEYS.SKINSTORAGE);
+  saveChucked(STORAGE_KEYS.SKINSTORAGE, skins);
 
 export const getPlayerSkins = async () =>
   await loadChucked((await getItem(STORAGE_KEYS.SKINSTORAGE)) || []);
 
 export const saveLyricMapping = async (
   lyricMapping: Map<string, NoxMedia.LyricDetail>
-) => saveItem(STORAGE_KEYS.LYRIC_MAPPING, lyricMapping);
+) => saveChucked(STORAGE_KEYS.LYRIC_MAPPING, Array.from(lyricMapping.entries()));
 
-export const getLyricMapping = async () =>
-  await getItem(STORAGE_KEYS.LYRIC_MAPPING);
+export const getLyricMapping = () =>
+  getMapping(STORAGE_KEYS.LYRIC_MAPPING, (val: any) => new Map(val))
 
 // no point to provide getters, as states are managed by zustand.
 // unlike azusaplayer which the storage context still reads localstorage, instaed
