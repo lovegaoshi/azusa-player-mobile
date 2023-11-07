@@ -99,12 +99,6 @@ jobs:
           files: android/app/build/outputs/apk/release/*.apk
           generate_release_notes: true
 
-      - name: codepush to prod
-        run: |
-          npm install -g appcenter-cli
-          yarn codepush --token ${{secrets.CODEPUSH_ACCESS_TOKEN}}
-          yarn codepush:promote --token ${{secrets.CODEPUSH_ACCESS_TOKEN}}
-
   buildAAB:
     runs-on: ubuntu-latest
     name: build AAB
@@ -194,7 +188,7 @@ jobs:
           # status: draft
 
       - name: git pull
-        run: git pull
+        run: git pull origin master
 
       - name: Push changes to master
         uses: ad-m/github-push-action@master
