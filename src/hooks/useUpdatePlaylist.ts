@@ -4,6 +4,7 @@ import { refreshMetadata } from '@utils/mediafetch/resolveURL';
 
 const useUpdatePlaylist = () => {
   const currentPlaylist = useNoxSetting(state => state.currentPlayingList);
+  const currentPlayingId = useNoxSetting(state => state.currentPlayingId);
   const playlists = useNoxSetting(state => state.playlists);
   const updatePlaylist = useNoxSetting(state => state.updatePlaylist);
 
@@ -49,7 +50,25 @@ const useUpdatePlaylist = () => {
     return metadata;
   };
 
-  return { updateSong, updateSongIndex, updateSongMetadata };
+  const updateCurrentSongMetadata = async (override = false) => {
+    const playlist = playlists[currentPlaylist.id];
+    const index = playlist.songList.findIndex(
+      song => song.id === currentPlayingId
+    );
+    const song = playlist.songList[index];
+    if (!override && !song.metadataOnLoad) return;
+    logger.debug(`[metadata] attempting to udpate ${song.name} metadata:`);
+    const metadata = await refreshMetadata(song);
+    updateSongIndex(index, metadata, playlist);
+    return metadata;
+  };
+
+  return {
+    updateSong,
+    updateSongIndex,
+    updateSongMetadata,
+    updateCurrentSongMetadata,
+  };
 };
 
 export default useUpdatePlaylist;

@@ -1,10 +1,5 @@
 import { Platform } from 'react-native';
-import { useEffect, useState } from 'react';
-import TrackPlayer, {
-  Event,
-  State,
-  RepeatMode,
-} from 'react-native-track-player';
+import TrackPlayer, { RepeatMode } from 'react-native-track-player';
 import { useTranslation } from 'react-i18next';
 import { useNetInfo } from '@react-native-community/netinfo';
 
@@ -199,32 +194,6 @@ const usePlayback = () => {
 
   return { buildBrowseTree, playFromMediaId, playFromSearch, playFromPlaylist };
 };
-
-export const usePlaybackListener = () => {
-  const playerSetting = useNoxSetting(state => state.playerSetting);
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const [newMetadata, setNewMetadata] = useState<any>({});
-
-  useEffect(() => {
-    if (!playerSetting.updateLoadedTrack) {
-      return () => null;
-    }
-    const listener = TrackPlayer.addEventListener(
-      Event.PlaybackState,
-      async event => {
-        if (event.state === State.Ready && newMetadata.updatedMetadata) {
-          // TODO: supposed to update tracks now'
-          logger.warn('supposed to update tracks now');
-          setNewMetadata({});
-        }
-      }
-    );
-    return () => {
-      listener.remove();
-    };
-  }, [playerSetting.updateLoadedTrack]);
-};
-
 export default usePlayback;
 
 interface PlayFromPlaylist {

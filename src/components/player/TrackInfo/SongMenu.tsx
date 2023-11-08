@@ -16,10 +16,7 @@ import { songlistToTracklist } from '@utils/RNTPUtils';
 enum ICONS {
   SEND_TO = 'playlist-plus',
   COPY_SONG_NAME = '',
-  COPY_SONG_URL = '',
-  GOTO_BILIBILI = '',
   SEARCH_IN_PLAYLIST = 'text-search',
-  RENAME = '',
   RELOAD = 'refresh',
   REMOVE = 'delete',
   REMOVE_AND_BAN_BVID = 'delete-forever',

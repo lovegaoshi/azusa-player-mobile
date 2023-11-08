@@ -25,7 +25,7 @@ export default ({ track }: Props) => {
       src={require('@assets/lottie/refresh.json')}
       size={30}
       onPress={onClick}
-      strokes={['Arrowhead', 'Line', 'Arrowhead 2', 'Line']}
+      strokes={['Arrowhead', 'Line', 'Arrowhead 2', 'Line 2']}
     />
   );
 };

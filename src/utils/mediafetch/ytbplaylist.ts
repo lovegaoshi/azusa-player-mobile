@@ -22,6 +22,7 @@ const musePlaylistItemToNoxSong = (val: any, data: any) => {
       duration: val.duration_seconds,
       album: data.title,
       source: SOURCE.ytbvideo,
+      metadataOnLoad: true,
     });
   } catch {
     console.error(`[musePlaylistParse] fail: ${JSON.stringify(val)}`);
@@ -76,6 +77,7 @@ const fastYTPlaylistSongResolve = (val: any, data: any) => {
       duration: Number(val.playlistVideoRenderer.lengthSeconds),
       album: data.metadata.playlistMetadataRenderer.title,
       source: SOURCE.ytbvideo,
+      metadataOnLoad: true,
     });
   } catch (e) {
     logger.error(

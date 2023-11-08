@@ -37,6 +37,7 @@ interface SongProps {
   source?: string;
   isLive?: boolean;
   liveStatus?: boolean;
+  metadataOnLoad?: boolean;
 }
 
 export default ({
@@ -56,6 +57,7 @@ export default ({
   source,
   isLive,
   liveStatus,
+  metadataOnLoad,
 }: SongProps): NoxMedia.Song => {
   return {
     id: String(cid),
@@ -76,6 +78,7 @@ export default ({
     source,
     isLive,
     liveStatus,
+    metadataOnLoad,
   };
 };
 

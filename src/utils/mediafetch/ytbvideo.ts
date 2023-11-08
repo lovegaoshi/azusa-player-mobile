@@ -182,6 +182,7 @@ export const fetchAudioInfoRaw = async (sid: string) => {
             : 0,
         album: videoDetails.title,
         source: SOURCE.ytbvideo,
+        metadataOnLoad: true,
       }),
     ];
   } catch (error) {
@@ -242,6 +243,7 @@ const suggest = async (song: NoxMedia.Song, filterMW = <T>(v: T[]) => v[0]) => {
         duration: Number(suggestSong.length_seconds),
         album: suggestSong.title,
         source: SOURCE.ytbvideo,
+        metadataOnLoad: true,
       })
     );
   return filterMW(relatedVideos); // or relatedVideos[0];

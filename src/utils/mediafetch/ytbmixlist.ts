@@ -44,6 +44,7 @@ const fetchYTPlaylist = async (
           album:
             data.contents.twoColumnWatchNextResults.playlist.playlist.title,
           source: SOURCE.ytbvideo,
+          metadataOnLoad: true,
         }),
       ])
       .filter((val: NoxMedia.Song) => !favList.includes(val.bvid))
