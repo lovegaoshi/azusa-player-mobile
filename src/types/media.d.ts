@@ -18,6 +18,7 @@ declare namespace NoxMedia {
     source?: string;
     isLive?: boolean;
     liveStatus?: boolean;
+    metadataOnLoad?: boolean;
   }
 
   export interface Playlist {

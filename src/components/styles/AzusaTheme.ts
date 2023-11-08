@@ -93,7 +93,7 @@ export default {
   ],
 
   customColors: {
-    maskedBackgroundColor: 'rgba(255, 255, 255, 0.4)',
+    maskedBackgroundColor: 'rgba(255, 255, 255, 0.5)',
     playlistDrawerBackgroundColor: '#dcd0ff',
     playlistDrawerBackgroundColorTransparent: '#dcd0ff',
     progressThumbTintColor: '#a76bcf',

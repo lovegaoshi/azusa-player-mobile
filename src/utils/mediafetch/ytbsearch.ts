@@ -20,6 +20,7 @@ const musePlaylistItemToNoxSong = (val: any, data: any) => {
       duration: val.duration_seconds,
       album: data.title,
       source: SOURCE.ytbvideo,
+      metadataOnLoad: true,
     });
   } catch {
     console.error(`[musePlaylistParse] fail: ${JSON.stringify(val)}`);

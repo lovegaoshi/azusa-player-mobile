@@ -62,7 +62,7 @@ export const Progress: React.FC<{ live?: boolean }> = ({ live }) => {
       <View style={[styles.labelContainer, { paddingHorizontal: 10 }]}>
         <Text style={styles.labelText}>{formatSeconds(position)}</Text>
         <Text style={styles.labelText}>
-          {formatSeconds(Math.max(0, duration - position))}
+          {`-${formatSeconds(Math.max(0, duration - position))}`}
         </Text>
       </View>
     </View>
