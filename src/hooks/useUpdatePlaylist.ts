@@ -52,6 +52,7 @@ const useUpdatePlaylist = () => {
 
   const updateCurrentSongMetadata = async (override = false) => {
     const playlist = playlists[currentPlaylist.id];
+    if (playlist === undefined) return;
     const index = playlist.songList.findIndex(
       song => song.id === currentPlayingId
     );
