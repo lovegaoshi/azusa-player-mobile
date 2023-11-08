@@ -169,5 +169,7 @@ const styles = StyleSheet.create({
   },
   splashCard: {
     flex: 1,
+    // HACK: ???
+    marginTop: -140,
   },
 });

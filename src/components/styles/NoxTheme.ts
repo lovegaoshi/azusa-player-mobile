@@ -45,7 +45,7 @@ export default {
     // background color for any screens OTHER THAN the main player screen.
     // should have a low transparency to make text reading easier.
     // note its transparency STACKS with colors.background
-    maskedBackgroundColor: 'rgba(0, 0, 0, 0.30)',
+    maskedBackgroundColor: 'rgba(0, 0, 0, 0.50)',
     // playlist background when selected. should be the contrast color of the primary text color.
     playlistDrawerBackgroundColor: 'green',
     // playlist background when selected. should be the contrast color of the primary text color.
