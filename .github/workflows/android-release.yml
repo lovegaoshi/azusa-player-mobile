@@ -22,7 +22,11 @@ jobs:
         run: |
           git config --global user.email lovegaoshi@gaoshi.com
           git config --global user.name lovegaoshi
+          git pull origin master
           git commit -m "build: release version bump" -a
+
+      - name: Push changes to master
+        uses: ad-m/github-push-action@master
 
       - name: Get branch name
         run: |
@@ -178,12 +182,6 @@ jobs:
         with:
           name: outputAAB
           path: android/app/build/outputs/bundle/release/*.aab # or path/to/artifact
-
-      - name: git pull
-        run: git pull origin master
-
-      - name: Push changes to master
-        uses: ad-m/github-push-action@master
 
       - uses: r0adkll/upload-google-play@v1
         with:
