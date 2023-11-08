@@ -115,9 +115,7 @@ interface SongTitleProps {
   text?: string;
 }
 const SongTitle = (props: SongTitleProps) => {
-  return __DEV__ ? (
-    <Text style={props.style}>{props.text}</Text>
-  ) : (
+  return (
     <MarqueeText
       duration={3000}
       animationType={'bounce'}
