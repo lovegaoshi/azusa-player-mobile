@@ -73,5 +73,6 @@ export const refreshMetadata = async (
   const metadata = await fetchPlayUrlPromise(v);
   return {
     ...(metadata.cover && { cover: metadata.cover }),
+    metadataOnLoad: false,
   };
 };
