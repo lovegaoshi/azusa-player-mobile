@@ -63,11 +63,13 @@
 我知道 APM 在 iOS 模拟器上像垃圾一样运行。但我不尊重 Apple 用户，也不会满足任何 iOS 生活质量要求。但Nek（[b 站私信](https://message.bilibili.com/#/whisper/mid1989881)）会。
 
 ## 使用
+
 请参考[电闹播放器的介绍](https://www.bilibili.com/video/BV1bv4y1p7K4/?spm_id_from=333.999.0.0)。
 
 有问题？在issues下留言。
 
 ## 界面
+
 <p float="left">
 <img alt="GitHub all releases" src="https://github.com/lovegaoshi/azusa-player-mobile/blob/3958211a07617d8e15e4be56da984dbd53d7e9fb/docs/docs/usage-tutorial/images/Screenshot_20230606_142623_APM.jpg" width=270>
 <img alt="GitHub all releases" src="https://github.com/lovegaoshi/azusa-player-mobile/blob/3958211a07617d8e15e4be56da984dbd53d7e9fb/docs/docs/usage-tutorial/images/Screenshot_20230606_142629_APM.jpg" width=270>
@@ -77,15 +79,26 @@
 <img alt="GitHub all releases" src="https://github.com/lovegaoshi/azusa-player-mobile/blob/3958211a07617d8e15e4be56da984dbd53d7e9fb/docs/docs/usage-tutorial/images/Screenshot_20230606_143018_APM.jpg" width=270>
 </p>
 
+APM 支持在WSA （Windows Subsystem for Android）下运行，有横屏适配！内存占用3GB，专为买了64GB内存不知道怎么用的你。
+
+<p align="center"><a href="https://github.com/lovegaoshi/azusa-player-mobile"><img width="200" src="https://github.com/lovegaoshi/azusa-player-mobile/blob/68ac53b75021b16895693ce2ec78f88e79f16503/docs/docs/usage-tutorial/images/wsa-portrait.jpg"></a></p>
+
+<p align="center"><a href="https://github.com/lovegaoshi/azusa-player-mobile"><img width="200" src="https://github.com/lovegaoshi/azusa-player-mobile/blob/68ac53b75021b16895693ce2ec78f88e79f16503/docs/docs/usage-tutorial/images/wsa-landscape.jpg"></a></p>
+
 ## 开发
 
 ios开发需要XCode。安卓开发需要android studio。
+
 ```
 git clone https://github.com/lovegaoshi/azusa-player-mobile.git
 yarn build
 yarn
 cd ios && pod install && cd ..
 ```
+
+### MF插件
+
+APM偷偷做了MusicFree插件适配。你可以参考MusicFree插件编写，然后放到你自己编译的APM里用，如果你太痴迷管人只想用APM的话。
 
 ## 捐助
 
@@ -99,13 +112,13 @@ cd ios && pod install && cd ..
 
 [@react-native-async-storage/async-storage](https://github.com/react-native-async-storage/async-storage): MIT
 
-[@react-native-community/slider](https://github.com/callstack/react-native-slider): MIT 
+[@react-native-community/slider](https://github.com/callstack/react-native-slider): MIT
 
-[@react-native-cookies/cookies](https://github.com/react-native-cookies/cookies): MIT 
+[@react-native-cookies/cookies](https://github.com/react-native-cookies/cookies): MIT
 
 [@react-navigation/drawer](https://github.com/react-navigation/react-navigation): [MIT](https://github.com/react-navigation/react-navigation/blob/main/packages/native/LICENSE)
 
-[@react-navigation/material-top-tabs](https://github.com/react-navigation/react-navigation): [MIT](https://github.com/react-navigation/react-navigation/blob/main/packages/native/LICENSE) 
+[@react-navigation/material-top-tabs](https://github.com/react-navigation/react-navigation): [MIT](https://github.com/react-navigation/react-navigation/blob/main/packages/native/LICENSE)
 
 [@react-navigation/native](https://github.com/react-navigation/native): MIT License
 
@@ -141,7 +154,7 @@ cd ios && pod install && cd ..
 
 [react-native-blob-jsi-helper](https://github.com/mrousavy/react-native-blob-jsi-helper): MIT License
 
-[react-native-countdown-circle-timer](https://github.com/vydimitrov/react-countdown-circle-timer): MIT 
+[react-native-countdown-circle-timer](https://github.com/vydimitrov/react-countdown-circle-timer): MIT
 
 [react-native-draggable-flatlist](https://github.com/computerjazz/react-native-draggable-flatlist): MIT License
 
@@ -184,4 +197,3 @@ cd ios && pod install && cd ..
 [use-debounce](https://github.com/xnimorz/use-debounce): MIT License
 
 [zustand](https://github.com/pmndrs/zustand): MIT License
-
