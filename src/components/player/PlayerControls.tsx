@@ -23,6 +23,7 @@ export const PlayerControls: React.FC = () => {
 
       <View style={styles.row}>
         <PlayerModeButton />
+        <View style={styles.btnSpacer} />
         <LottieButton
           src={require('@assets/lottie/skip-backwards.json')}
           size={40}

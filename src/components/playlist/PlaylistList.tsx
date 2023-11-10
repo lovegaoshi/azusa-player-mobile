@@ -28,18 +28,18 @@ interface BackgroundProps {
   current?: boolean;
   children: React.JSX.Element;
 }
-const SongBackground = (props: BackgroundProps) => {
-  return props.current ? (
+const SongBackground = ({ song, current, children }: BackgroundProps) => {
+  return current ? (
     <ImageBackground
-      source={{ uri: i0hdslbHTTPResolve(props.song.cover) }}
+      source={{ uri: i0hdslbHTTPResolve(song.cover) }}
       resizeMode="cover"
       style={stylesLocal.songInfoBackgroundBanner}
       imageStyle={stylesLocal.songInfoBackgroundImg}
     >
-      {props.children}
+      {children}
     </ImageBackground>
   ) : (
-    props.children
+    children
   );
 };
 
