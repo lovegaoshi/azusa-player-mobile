@@ -1,11 +1,5 @@
 import React from 'react';
-import {
-  ImageBackground,
-  Dimensions,
-  View,
-  StyleSheet,
-  Platform,
-} from 'react-native';
+import { ImageBackground, Dimensions, View, StyleSheet } from 'react-native';
 // import { Video, ResizeMode } from 'expo-av';
 import Video from 'react-native-video';
 import { useNoxSetting } from '@hooks/useSetting';
@@ -40,18 +34,19 @@ export const resolveBackgroundImage = async (
           })
         ).url,
       };
-    case RESOLVE_TYPE.biliNFTVideo:
+    case RESOLVE_TYPE.biliNFTVideo: {
       const [act_id, index] = JSON.parse(backgroundImage.identifier);
       return {
         type: RESOLVE_TYPE.video,
         identifier: await biliNFTVideoFetch({ act_id, index }),
       };
+    }
     default:
       return backgroundImage;
   }
 };
 
-const MainBackground = (props: { children: React.JSX.Element }) => {
+const MainBackground = ({ children }: { children: React.JSX.Element }) => {
   const playerStyle = useNoxSetting(state => state.playerStyle);
   const isLandscape = useIsLandscape();
   const mobileHeight = Dimensions.get('window').height;
@@ -61,7 +56,7 @@ const MainBackground = (props: { children: React.JSX.Element }) => {
       : playerStyle.bkgrdImg;
 
   // TODO: are these still necessary since they are behind await initPlayer?
-  if (!bkgrdImg) return <>{props.children}</>;
+  if (!bkgrdImg) return <>{children}</>;
 
   if (typeof bkgrdImg === 'string') {
     return (
@@ -73,7 +68,7 @@ const MainBackground = (props: { children: React.JSX.Element }) => {
         <View
           style={{ backgroundColor: playerStyle.colors.background, flex: 1 }}
         >
-          {props.children}
+          {children}
         </View>
       </ImageBackground>
     );
@@ -90,7 +85,7 @@ const MainBackground = (props: { children: React.JSX.Element }) => {
           <View
             style={{ backgroundColor: playerStyle.colors.background, flex: 1 }}
           >
-            {props.children}
+            {children}
           </View>
         </ImageBackground>
       );
@@ -123,12 +118,12 @@ const MainBackground = (props: { children: React.JSX.Element }) => {
               { backgroundColor: playerStyle.colors.background },
             ]}
           >
-            {props.children}
+            {children}
           </View>
         </>
       );
     default:
-      return <>{props.children}</>;
+      return <>{children}</>;
   }
 };
 

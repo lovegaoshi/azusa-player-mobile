@@ -113,10 +113,10 @@ const ThumbsUpButton = ({ iconSize = 30 }: Props) => {
         // TODO: use moti to make animation on triple
         // https://github.com/nandorojo/moti/discussions/148
         onLongPress={() => onClick(true)}
-        mode={playerStyle.playerControlIconContained}
+        // mode={playerStyle.playerControlIconContained}
         size={iconSize}
         style={{
-          backgroundColor: playerStyle.customColors.btnBackgroundColor,
+          // backgroundColor: playerStyle.customColors.btnBackgroundColor,
           zIndex: 1,
         }}
         disabled={status === THUMBUPSTATUS.notLoggedIn}

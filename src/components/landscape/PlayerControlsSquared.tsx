@@ -36,6 +36,7 @@ const PlayerControls: React.FC<Props> = ({
         ]}
       >
         <PlayerModeButton iconSize={iconSize} />
+        <View style={styles.btnSpacer} />
         <LottieButton
           src={require('@assets/lottie/skip-backwards.json')}
           size={iconSize}

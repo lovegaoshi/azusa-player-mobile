@@ -23,11 +23,13 @@ export const PlayerControls: React.FC = () => {
 
       <View style={styles.row}>
         <PlayerModeButton />
+        <View style={styles.btnSpacer} />
         <LottieButton
           src={require('@assets/lottie/skip-backwards.json')}
           size={40}
           onPress={performSkipToPrevious}
           strokes={['Line', 'Triange', 'Triange  2']}
+          style={{ backgroundColor: undefined }}
         />
         <View style={styles.btnSpacer} />
         <PlayPauseButton state={playback.state} />
@@ -37,6 +39,7 @@ export const PlayerControls: React.FC = () => {
           size={40}
           onPress={performSkipToNext}
           strokes={['Line', 'Triangle 1', 'Triangle 2']}
+          style={{ backgroundColor: undefined }}
         />
         <ThumbsUpButton />
       </View>

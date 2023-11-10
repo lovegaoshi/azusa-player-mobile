@@ -3,6 +3,7 @@ import { Pressable, Animated, Easing, ViewStyle } from 'react-native';
 import LottieView, { AnimationObject } from 'lottie-react-native';
 
 import { useNoxSetting } from '@hooks/useSetting';
+import ShadowedElement from './ShadowedElement';
 
 interface Props {
   src: AnimationObject;
@@ -65,32 +66,33 @@ const LottieButtonAnimated = ({
   };
 
   return (
-    <Pressable
+    <ShadowedElement
       style={{
         backgroundColor: playerStyle.customColors.btnBackgroundColor,
+        borderRadius: size / 2 + 8,
         width: size + 16,
         height: size + 16,
-        borderRadius: size / 2 + 8,
         ...pressableStyle,
       }}
-      onPress={onPressBtn}
     >
-      <AnimatedLottieView
-        source={src}
-        progress={animationProgress.current}
-        style={{
-          width: size,
-          height: size,
-          marginLeft: 8,
-          marginTop: 8,
-          ...lottieStyle,
-        }}
-        colorFilters={strokes.map(keypath => ({
-          keypath,
-          color: playerStyle.colors.primary,
-        }))}
-      />
-    </Pressable>
+      <Pressable onPress={onPressBtn}>
+        <AnimatedLottieView
+          source={src}
+          progress={animationProgress.current}
+          style={{
+            width: size,
+            height: size,
+            marginLeft: 8,
+            marginTop: 8,
+            ...lottieStyle,
+          }}
+          colorFilters={strokes.map(keypath => ({
+            keypath,
+            color: playerStyle.colors.primary,
+          }))}
+        />
+      </Pressable>
+    </ShadowedElement>
   );
 };
 
