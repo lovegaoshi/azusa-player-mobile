@@ -19,6 +19,7 @@ interface Props {
   clickStates: any[];
   clickedLottieProgress?: number[];
   duration?: number;
+  accessibilityLabel?: string;
 }
 
 const AnimatedLottieView = Animated.createAnimatedComponent(LottieView);
@@ -32,6 +33,7 @@ const LottieButtonAnimated = ({
   clickStates,
   clickedLottieProgress = clickedStatesMap[clickStates.length],
   duration = 340,
+  accessibilityLabel,
 }: Props) => {
   const playerStyle = useNoxSetting(state => state.playerStyle);
   const managedState = useRef(clickState);
@@ -76,7 +78,7 @@ const LottieButtonAnimated = ({
         borderRadius: size / 2 + 8,
       }}
     >
-      <Pressable onPress={onPressBtn}>
+      <Pressable onPress={onPressBtn} accessibilityLabel={accessibilityLabel}>
         <AnimatedLottieView
           source={src}
           progress={animationProgress.current}
