@@ -14,6 +14,15 @@ export const Progress: React.FC<{ live?: boolean }> = ({ live }) => {
   const playerStyle = useNoxSetting(state => state.playerStyle);
   const fetchProgress = useStore(appStore, state => state.fetchProgress);
 
+  const progressTextStyle = [
+    styles.labelText,
+    {
+      color: playerStyle.metaData.darkTheme
+        ? 'white'
+        : playerStyle.colors.primary,
+    },
+  ];
+
   return live ? (
     <View style={styles.liveContainer}>
       <Text style={[styles.liveText, { color: playerStyle.colors.primary }]}>
@@ -60,8 +69,8 @@ export const Progress: React.FC<{ live?: boolean }> = ({ live }) => {
         />
       </View>
       <View style={[styles.labelContainer, { paddingHorizontal: 10 }]}>
-        <Text style={styles.labelText}>{formatSeconds(position)}</Text>
-        <Text style={styles.labelText}>
+        <Text style={progressTextStyle}>{formatSeconds(position)}</Text>
+        <Text style={progressTextStyle}>
           {`-${formatSeconds(Math.max(0, duration - position))}`}
         </Text>
       </View>
