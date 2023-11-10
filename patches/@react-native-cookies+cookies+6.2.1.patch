@@ -1,0 +1,15 @@
+diff --git a/node_modules/@react-native-cookies/cookies/android/build.gradle b/node_modules/@react-native-cookies/cookies/android/build.gradle
+index 13c7e43..7bfdb11 100644
+--- a/node_modules/@react-native-cookies/cookies/android/build.gradle
++++ b/node_modules/@react-native-cookies/cookies/android/build.gradle
+@@ -44,6 +44,10 @@ apply plugin: 'com.android.library'
+ android {
+     compileSdkVersion safeExtGet('compileSdkVersion', DEFAULT_COMPILE_SDK_VERSION)
+     buildToolsVersion safeExtGet('buildToolsVersion', DEFAULT_BUILD_TOOLS_VERSION)
++    def agpVersion = com.android.Version.ANDROID_GRADLE_PLUGIN_VERSION
++    if (agpVersion.tokenize('.')[0].toInteger() >= 7) {
++      namespace "com.reactnativecommunity.cookies"
++    }
+     defaultConfig {
+         minSdkVersion safeExtGet('minSdkVersion', DEFAULT_MIN_SDK_VERSION)
+         targetSdkVersion safeExtGet('targetSdkVersion', DEFAULT_TARGET_SDK_VERSION)

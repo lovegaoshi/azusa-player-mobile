@@ -10,12 +10,14 @@ interface Props {
   onPress: () => void;
   icon: string;
   style?: ViewStyle;
+  accessibilityLabel?: string;
 }
 export default ({
   iconSize = 30,
   onPress = () => undefined,
   icon,
   style,
+  accessibilityLabel,
 }: Props) => {
   const playerStyle = useNoxSetting(state => state.playerStyle);
   const size = iconSize;
@@ -37,6 +39,7 @@ export default ({
           marginLeft: 8,
           marginTop: 8,
         }}
+        accessibilityLabel={accessibilityLabel}
       >
         <Icon
           source={icon}

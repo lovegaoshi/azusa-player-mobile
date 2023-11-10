@@ -262,5 +262,8 @@
     "artistMatch": "Artist",
     "albumMatch": "Album",
     "cachedMatch": "Cached"
+  },
+  "Accessibility": {
+    "gif": "GIF"
   }
 }

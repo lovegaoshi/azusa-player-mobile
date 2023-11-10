@@ -4,7 +4,6 @@ import org.apache.tools.ant.taskdefs.condition.Os
 
 buildscript {
     ext {
-        buildToolsVersion = "33.0.0"
         minSdkVersion = 24
         compileSdkVersion = 34
         targetSdkVersion = 34
@@ -21,7 +20,7 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath('com.android.tools.build:gradle:7.4.2')
+        classpath('com.android.tools.build:gradle:8.1.2')
         classpath("com.facebook.react:react-native-gradle-plugin")
       classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion")
     }

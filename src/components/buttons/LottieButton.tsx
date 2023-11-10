@@ -12,9 +12,17 @@ interface Props {
   strokes?: string[];
   size: number;
   style?: ViewStyle;
+  accessibilityLabel?: string;
 }
 
-const LottieButton = ({ src, onPress, strokes = [], size, style }: Props) => {
+const LottieButton = ({
+  src,
+  onPress,
+  strokes = [],
+  size,
+  style,
+  accessibilityLabel,
+}: Props) => {
   const playerStyle = useNoxSetting(state => state.playerStyle);
   const animationRef = useRef<LottieView>(null);
 
@@ -33,7 +41,7 @@ const LottieButton = ({ src, onPress, strokes = [], size, style }: Props) => {
         ...style,
       }}
     >
-      <Pressable onPress={onPressBtn}>
+      <Pressable onPress={onPressBtn} accessibilityLabel={accessibilityLabel}>
         <LottieView
           ref={animationRef}
           source={src}
