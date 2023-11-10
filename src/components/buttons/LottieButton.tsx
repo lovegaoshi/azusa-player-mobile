@@ -4,15 +4,17 @@ import LottieView, { AnimationObject } from 'lottie-react-native';
 
 import { useNoxSetting } from '@hooks/useSetting';
 import ShadowedElement from './ShadowedElement';
+import { ViewStyle } from 'react-native-windows';
 
 interface Props {
   src: AnimationObject;
   onPress: () => void;
   strokes?: string[];
   size: number;
+  style?: ViewStyle;
 }
 
-const LottieButton = ({ src, onPress, strokes = [], size }: Props) => {
+const LottieButton = ({ src, onPress, strokes = [], size, style }: Props) => {
   const playerStyle = useNoxSetting(state => state.playerStyle);
   const animationRef = useRef<LottieView>(null);
 
@@ -28,6 +30,7 @@ const LottieButton = ({ src, onPress, strokes = [], size }: Props) => {
         width: size + 16,
         height: size + 16,
         borderRadius: size / 2 + 8,
+        ...style,
       }}
     >
       <Pressable onPress={onPressBtn}>

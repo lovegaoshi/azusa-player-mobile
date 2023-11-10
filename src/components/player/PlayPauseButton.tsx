@@ -46,6 +46,9 @@ export const PlayPauseButton: React.FC<Props> = ({ state, iconSize = 50 }) => {
       onPress={showPause ? fadePause : () => TrackPlayer.play()}
       clicked={!showPause}
       strokes={['Play', 'Play 2', 'Pause', 'Pause 3']}
+      pressableStyle={{
+        backgroundColor: playerStyle.colors.onPrimary,
+      }}
     />
   );
 };

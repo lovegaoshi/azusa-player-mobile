@@ -16,6 +16,7 @@ export default ({ iconSize = 30 }: Props) => {
       iconSize={iconSize}
       icon={playMode}
       onPress={cycleThroughPlaymode}
+      style={{ backgroundColor: undefined }}
     />
   );
 };
