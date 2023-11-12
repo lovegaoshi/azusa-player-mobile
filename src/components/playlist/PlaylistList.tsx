@@ -14,7 +14,7 @@ import SongInfo from './SongInfo';
 import { useNoxSetting } from '@hooks/useSetting';
 import SongMenu from './SongMenu';
 import PlaylistInfo from './PlaylistInfo';
-import PlaylistMenuButton from '../buttons/PlaylistMenuButton';
+import PlaylistMenuButton from './PlaylistMenuButton';
 import { updateSubscribeFavList } from '@utils/BiliSubscribe';
 import { PLAYLIST_ENUMS, SearchRegex } from '@enums/Playlist';
 import { syncFavlist } from '@utils/Bilibili/bilifavOperate';
