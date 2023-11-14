@@ -8,7 +8,7 @@ import { SettingListItem } from '../useRenderSetting';
 import { saveRegextractMapping } from '@utils/ChromeStorage';
 import { downloadR128GainDB } from './r128gain/Sync';
 import logger from '@utils/Logger';
-import { snackBarWrapper } from '@utils/Utils';
+import { showSnackbar } from '@utils/Snackbar';
 import MusicFreeButton from './MusicFreeButton';
 
 interface SnackbarMsg {
@@ -65,9 +65,7 @@ const PluginSettings = () => {
       <SettingListItem
         icon={'cloud-sync'}
         settingName="R128Gain"
-        onPress={() =>
-          snackBarWrapper(snarbarMsg('R128Gain'), downloadR128GainDB)
-        }
+        onPress={() => showSnackbar(snarbarMsg('R128Gain'), downloadR128GainDB)}
         settingCategory="PluginSettings"
       />
       <MusicFreeButton />
