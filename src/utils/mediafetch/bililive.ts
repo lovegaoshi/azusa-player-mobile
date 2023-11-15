@@ -2,7 +2,7 @@ import { regexFetchProps } from './generic';
 
 import SongTS from '@objects/Song';
 import { logger } from '../Logger';
-import bfetch from '../BiliFetch';
+import bfetch from '@utils/BiliFetch';
 import { biliApiLimiter } from './throttle';
 
 export const CIDPREFIX = 'bililive';

@@ -13,7 +13,7 @@ import { regexFetchProps } from './generic';
 import { logger } from '../Logger';
 import { songFetch, fetchVideoInfo } from './bilivideo';
 import VideoInfo from '@objects/VideoInfo';
-import bfetch from '../BiliFetch';
+import bfetch from '@utils/BiliFetch';
 
 const URL_BILISERIES_INFO =
   'https://api.bilibili.com/x/series/archives?mid={mid}&series_id={sid}&only_normal=true&sort=desc&pn={pn}&ps=30';

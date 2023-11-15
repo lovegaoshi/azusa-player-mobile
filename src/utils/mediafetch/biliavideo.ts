@@ -13,7 +13,7 @@ import { biliApiLimiter } from './throttle';
 
 import VideoInfo from '@objects/VideoInfo';
 import { logger } from '../Logger';
-import bfetch from '../BiliFetch';
+import bfetch from '@utils/BiliFetch';
 import { songFetch } from './bilivideo';
 
 const URL_VIDEO_INFO =

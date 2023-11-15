@@ -7,7 +7,7 @@ import {
   FetcherProps,
 } from './paginatedfetch';
 import { biliApiLimiter } from './throttle';
-import bfetch from '../BiliFetch';
+import bfetch from '@utils/BiliFetch';
 
 export const fetchBiliPaginatedAPI = async ({
   url,

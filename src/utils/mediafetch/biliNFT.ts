@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import bfetch from '../BiliFetch';
+import bfetch from '@utils/BiliFetch';
 
 // see https://github.com/lovegaoshi/biliNFT
 

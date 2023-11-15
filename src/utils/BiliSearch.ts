@@ -49,7 +49,7 @@ export const searchBiliURLs = async ({
   progressEmitter = () => undefined,
   favList = [],
   useBiliTag = false,
-  fastSearch = false,
+  fastSearch = true,
   cookiedSearch = false,
   defaultSearch = SEARCH_OPTIONS.BILIBILI,
 }: Props) => {
