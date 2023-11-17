@@ -84,7 +84,7 @@
       "onPrimary": "rgb(255, 255, 255)",
       "primaryContainer": "rgb(255, 217, 223)",
       "onPrimaryContainer": "rgb(63, 0, 22)",
-      "secondary": "#cc3366",
+      "secondary": "#FF8AC9",
       "onSecondary": "rgb(255, 255, 255)",
       "secondaryContainer": "rgb(255, 217, 223)",
       "onSecondaryContainer": "rgb(43, 21, 26)",
