@@ -252,12 +252,12 @@
     "customColors": {
       "maskedBackgroundColor": "rgba(0, 0, 0, 0.30)",
       "playlistDrawerBackgroundColor": "rgb(73, 0, 73)",
-      "playlistDrawerBackgroundColorTransparent": "rgba(0, 255, 0, 0.35)",
+      "playlistDrawerBackgroundColorTransparent": "rgba(73, 0, 73, 0.35)",
       "progressThumbTintColor": "#ffb0db",
       "progressMinimumTrackTintColor": "#ffb0db",
       "progressMaximumTrackTintColor": "#FFFFFF",
       "btnBackgroundColor": "#ffb0db",
-      "textInputSelectionColor": "green"
+      "textInputSelectionColor": "rgb(73, 0, 73)"
     },
     "colors": {
       "text": "#ff76c0",
