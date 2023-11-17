@@ -245,8 +245,8 @@
       "https://i0.hdslb.com/bfs/garb/9ca00a3bfc226c722a4fa721fe12d3d8087bbd29.jpg",
       "https://i0.hdslb.com/bfs/garb/bf64f42bf09f43ef630be69fc2a0ac390bdc6b0c.jpg",
       {
-        "type": "video",
-        "identifier": "https://upos-sz-mirrorali.bilivideo.com/panguxcodeboss/6b/8k/_000005grwkmpgp2i22dih2milci8k6b-1-152111110023.mp4?e=ig8euxZM2rNcNbdlhoNvNC8BqJIzNbfq9rVEuxTEnE8L5F6VnEsSTx0vkX8fqJeYTj_lta53NCM=&uipk=5&nbs=1&deadline=1700236931&gen=playurlv2&os=alibv&oi=0&trid=3b502b23d33741af9f915934f7c0e929B&mid=0&platform=html5&upsig=d003b381f938e9822186166b7973512c&uparams=e,uipk,nbs,deadline,gen,os,oi,trid,mid,platform&bvc=vod&nettype=0&orderid=0,3&logo=00000000&f=B_0_0"
+        "type": "biliGarbHeadVideo",
+        "identifier": "131147801"
       }
     ],
     "customColors": {
