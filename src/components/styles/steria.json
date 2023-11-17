@@ -159,7 +159,7 @@
       "themeName": "薇Steria·轻翎歌",
       "themeAuthor": "NoxAutoGen",
       "themeIcon": "https://i2.hdslb.com/bfs/face/b70f6e62e4582d4fa5d48d86047e64eb57d7504e.jpg",
-      "darkTheme": false
+      "darkTheme": true
     },
     "gifs": [
       "https://i0.hdslb.com/bfs/new_dyn/a510875262cf9bcc292c2d86a3557ac6121042172.png",
@@ -280,7 +280,7 @@
       "background": "rgba(0,0,0, 0.4)",
       "onBackground": "rgb(230, 226, 217)",
       "surface": "rgb(28, 28, 23)",
-      "onSurface": "rgba(235, 235, 0, 1)",
+      "onSurface": "#ff1493",
       "surfaceVariant": "rgb(10, 10, 10)",
       "onSurfaceVariant": "rgb(225, 225, 0)",
       "outline": "rgb(147, 145, 130)",
