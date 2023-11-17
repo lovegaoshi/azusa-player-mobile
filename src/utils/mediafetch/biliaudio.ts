@@ -14,7 +14,7 @@ import { biliApiLimiter } from './throttle';
 import VideoInfo from '@objects/VideoInfo';
 import SongTS from '@objects/Song';
 import { logger } from '../Logger';
-import bfetch from '../BiliFetch';
+import bfetch from '@utils/BiliFetch';
 import { SOURCE } from '@enums/MediaFetch';
 
 const URL_AUDIO_INFO =

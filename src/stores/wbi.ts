@@ -10,8 +10,8 @@
 
 import { createStore } from 'zustand/vanilla';
 import md5 from 'md5';
-import bfetch from '../utils/BiliFetch';
-import { logger } from '../utils/Logger';
+import bfetch from '@utils/BiliFetch';
+import { logger } from '@utils/Logger';
 
 interface wbiStore {
   img_key: string;

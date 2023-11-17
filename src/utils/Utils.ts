@@ -1,33 +1,3 @@
-import Snackbar from 'react-native-snackbar';
-
-import { logger } from './Logger';
-
-interface SnackbarMsg {
-  updating: string;
-  updated: string;
-  updateFail: string;
-}
-export const snackBarWrapper = async <T>(
-  msg: SnackbarMsg,
-  callback: () => Promise<T>
-) => {
-  try {
-    Snackbar.show({
-      text: msg.updating,
-      duration: Snackbar.LENGTH_INDEFINITE,
-    });
-    const result = await callback();
-    Snackbar.show({
-      text: msg.updated,
-    });
-    return result;
-  } catch (e) {
-    logger.error(e);
-    Snackbar.show({
-      text: msg.updateFail,
-    });
-  }
-};
 export const i0hdslbHTTPResolve = (url: String) =>
   url.replace('http://', 'https://');
 

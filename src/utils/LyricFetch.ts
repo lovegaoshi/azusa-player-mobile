@@ -4,7 +4,7 @@
 /* eslint-disable no-undef */
 
 import { extractSongName } from './re';
-import bfetch from './BiliFetch';
+import bfetch from '@utils/BiliFetch';
 import { logger } from './Logger';
 
 /**

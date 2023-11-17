@@ -1,6 +1,6 @@
 import CookieManager from '@react-native-cookies/cookies';
 
-import bfetch from '../BiliFetch';
+import bfetch from '@utils/BiliFetch';
 import { throttler } from '../throttle';
 import { logger } from '../Logger';
 import { bvidToAid } from '../bvid';

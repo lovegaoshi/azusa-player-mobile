@@ -1,5 +1,5 @@
 import { setSongBiliShazamed } from '@objects/Song';
-import bfetch from '../BiliFetch';
+import bfetch from '@utils/BiliFetch';
 import { biliTagApiLimiter } from './throttle';
 import { logger } from '../Logger';
 

@@ -17,8 +17,8 @@ import ytbsearchFetch from './mediafetch/ytbsearch';
 import bililiveFetch from './mediafetch/bililive';
 import bilisubliveFetch from './mediafetch/bilisublive';
 import { regexFetchProps } from './mediafetch/generic';
-import { MUSICFREE, searcher } from './mediafetch/mfsdk';
-import { getMusicFreePlugin } from './ChromeStorage';
+import { MUSICFREE, searcher } from '@utils/mediafetch/mfsdk';
+import { getMusicFreePlugin } from '@utils/ChromeStorage';
 
 /**
  * assign the proper extractor based on the provided url. uses regex.
@@ -49,7 +49,7 @@ export const searchBiliURLs = async ({
   progressEmitter = () => undefined,
   favList = [],
   useBiliTag = false,
-  fastSearch = false,
+  fastSearch = true,
   cookiedSearch = false,
   defaultSearch = SEARCH_OPTIONS.BILIBILI,
 }: Props) => {
@@ -97,7 +97,6 @@ export const searchBiliURLs = async ({
   progressEmitter(0);
   return [];
 };
-
 
 const reExtractions: Array<
   [RegExp, (props: regexFetchProps) => Promise<NoxMedia.Song[]>]

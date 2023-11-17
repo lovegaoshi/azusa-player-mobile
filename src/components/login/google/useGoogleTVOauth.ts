@@ -1,7 +1,6 @@
 import { useState } from 'react';
 
 import bfetch from '@utils/BiliFetch';
-// const bfetch = require('../../../utils/BiliFetch');
 
 // Extracted from Youtube APP (Originally from: pytube)
 const CLIENT_ID =

@@ -1,7 +1,7 @@
 import CookieManager from '@react-native-cookies/cookies';
 
 import { sendBVFavorite } from './BiliOperate';
-import bfetch from '../BiliFetch';
+import bfetch from '@utils/BiliFetch';
 import { getFavListBVID } from '../mediafetch/bilifavlist';
 import { humanishApiLimiter } from '../mediafetch/throttle';
 import { getBiliUser } from 'components/setting/sync/PersonalCloudAuth';

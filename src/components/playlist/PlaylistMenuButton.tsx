@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { IconButton } from 'react-native-paper';
-import Dialog from '../playlist/PlaylistMenu';
+import Dialog from './PlaylistMenu';
 import { GestureResponderEvent } from 'react-native';
 
 const ICON = 'dots-horizontal';

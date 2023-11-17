@@ -2,7 +2,7 @@
 import Bottleneck from 'bottleneck';
 import { biliApiLimiter } from './throttle';
 import VideoInfo from '@objects/VideoInfo';
-import bfetch from '../BiliFetch';
+import bfetch from '@utils/BiliFetch';
 
 /**
  * the purpose of this media fetch library is to

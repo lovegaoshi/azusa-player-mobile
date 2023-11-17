@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Menu } from 'react-native-paper';
 import { useTranslation } from 'react-i18next';
 
-import Dialog from '../dialogs/PlaylistSettingsDialog';
+import Dialog from './PlaylistSettingsDialog';
 
 const ICON = 'pencil';
 

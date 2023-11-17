@@ -6,6 +6,7 @@ import { useNoxSetting } from '@hooks/useSetting';
 import { fetchVideoPlayUrlPromise } from '@utils/mediafetch/bilivideo';
 import { customReqHeader } from '@utils/BiliFetch';
 import { biliNFTVideoFetch } from '@utils/mediafetch/biliNFT';
+import { biliGarbHeadVideoFetch } from '@utils/mediafetch/biliGarb';
 import { logger } from '@utils/Logger';
 import { useIsLandscape } from '@hooks/useOrientation';
 
@@ -13,6 +14,7 @@ enum RESOLVE_TYPE {
   bvid = 'bvid',
   video = 'video',
   biliNFTVideo = 'biliNFTVideo',
+  biliGarbHeadVideo = 'biliGarbHeadVideo',
   image = 'image',
 }
 
@@ -41,6 +43,14 @@ export const resolveBackgroundImage = async (
         identifier: await biliNFTVideoFetch({ act_id, index }),
       };
     }
+    case RESOLVE_TYPE.biliGarbHeadVideo:
+      return {
+        type: RESOLVE_TYPE.video,
+        identifier: await biliGarbHeadVideoFetch({
+          act_id: backgroundImage.identifier,
+        }),
+      };
+
     default:
       return backgroundImage;
   }
