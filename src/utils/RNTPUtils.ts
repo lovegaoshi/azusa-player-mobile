@@ -17,7 +17,7 @@ import {
   getPlaybackModeNotifIcon,
 } from '@stores/playingList';
 import { i0hdslbHTTPResolve } from '@utils/Utils';
-import { resolveUrl, parseSongR128gain } from '@objects/Song';
+import { resolveUrl, parseSongR128gain } from '@utils/SongOperations';
 import NoxCache from './Cache';
 import { setTPR128Gain } from './ffmpeg';
 

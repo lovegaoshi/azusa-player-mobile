@@ -5,7 +5,8 @@ import TrackPlayer, {
 } from 'react-native-track-player';
 import { DeviceEventEmitter, Platform } from 'react-native';
 
-import { NULL_TRACK, parseSongR128gain } from '../objects/Song';
+import { NULL_TRACK } from '../objects/Song';
+import { parseSongR128gain } from '../utils/SongOperations';
 import { initBiliHeartbeat } from '../utils/Bilibili/BiliOperate';
 import type { NoxStorage } from '../types/storage';
 import { logger } from '../utils/Logger';
