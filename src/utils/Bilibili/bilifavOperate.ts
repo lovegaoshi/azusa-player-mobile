@@ -1,10 +1,9 @@
-import CookieManager from '@react-native-cookies/cookies';
-
-import { sendBVFavorite } from './BiliOperate';
 import bfetch from '@utils/BiliFetch';
+import getBiliUser from '@utils/Bilibili/BiliUser';
+import { getBiliJct } from '@utils/Bilibili/biliCookies';
+import { sendBVFavorite } from './BiliOperate';
 import { getFavListBVID } from '../mediafetch/bilifavlist';
 import { humanishApiLimiter } from '../mediafetch/throttle';
-import getBiliUser from '@utils/Bilibili/BiliUser';
 import { getPlaylistUniqBVIDs } from '@objects/Playlist';
 
 const BILI_GETFAVLIST_API =
@@ -36,9 +35,7 @@ export const getBiliFavlist = async (
 };
 
 export const createBiliFavlist = async (title: string) => {
-  const biliJct = (await CookieManager.get('https://www.bilibili.com'))[
-    'bili_jct'
-  ]?.value;
+  const biliJct = await getBiliJct();
   if (!biliJct) {
     throw new Error('no cookie');
   }
