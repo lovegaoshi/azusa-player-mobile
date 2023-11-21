@@ -4,7 +4,7 @@ import { sendBVFavorite } from './BiliOperate';
 import bfetch from '@utils/BiliFetch';
 import { getFavListBVID } from '../mediafetch/bilifavlist';
 import { humanishApiLimiter } from '../mediafetch/throttle';
-import { getBiliUser } from 'components/setting/sync/PersonalCloudAuth';
+import getBiliUser from '@utils/Bilibili/BiliUser';
 import { getPlaylistUniqBVIDs } from '@objects/Playlist';
 
 const BILI_GETFAVLIST_API =
