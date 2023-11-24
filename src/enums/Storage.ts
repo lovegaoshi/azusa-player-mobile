@@ -34,6 +34,10 @@ export enum SEARCH_OPTIONS {
 export const appID = 'NoxPlayerMobile';
 
 export const DEFAULT_SETTING: NoxStorage.PlayerSettingDict = {
+  playMode: 'NA',
+  defaultPlayMode: 'NA',
+  defaultVolume: 1,
+
   autoRSSUpdate: true,
   skin: '诺莺nox',
   parseSongName: true,
