@@ -19,7 +19,7 @@ import {
 import { i0hdslbHTTPResolve } from '@utils/Utils';
 import { resolveUrl, parseSongR128gain } from '@utils/SongOperations';
 import NoxCache from './Cache';
-import { setTPR128Gain } from './ffmpeg';
+import { setTPR128Gain } from './ffmpeg/ffmpeg';
 
 const { getState, setState } = appStore;
 const animatedVolume = new Animated.Value(1);

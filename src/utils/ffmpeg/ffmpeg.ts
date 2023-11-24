@@ -2,7 +2,7 @@ import { FFmpegKit } from 'ffmpeg-kit-react-native';
 import RNFetchBlob from 'react-native-blob-util';
 import TrackPlayer from 'react-native-track-player';
 
-import { logger } from './Logger';
+import { logger } from '../Logger';
 
 const parseReplayGainLog = (log: string) => {
   const regex = /Parsed_replaygain.+ track_gain = (.+) dB/g;

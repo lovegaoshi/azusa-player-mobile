@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable prefer-const */
 import { create } from 'zustand';
+import { NativeModules, Platform } from 'react-native';
 
 import {
   dummyPlaylist,
@@ -27,7 +28,6 @@ import {
   getABRepeatRaw,
 } from '@stores/appStore';
 import { savePlayerStyle } from './useTheme';
-import { NativeModules, Platform } from 'react-native';
 
 const { NoxAndroidAutoModule } = NativeModules;
 

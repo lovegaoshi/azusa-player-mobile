@@ -4,7 +4,7 @@ import LRUCache from 'lru-cache';
 import RNFetchBlob from 'react-native-blob-util';
 import TrackPlayer from 'react-native-track-player';
 
-import { r128gain, setR128Gain, ffmpegToMP3 } from './ffmpeg';
+import { r128gain, setR128Gain, ffmpegToMP3 } from './ffmpeg/ffmpeg';
 import {
   addR128Gain,
   addDownloadProgress,

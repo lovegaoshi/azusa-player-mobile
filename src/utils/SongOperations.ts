@@ -4,7 +4,7 @@ import { logger } from '../utils/Logger';
 import NoxCache from '../utils/Cache';
 import playerSettingStore from '@stores/playerSettingStore';
 import { addR128Gain, getR128Gain, cacheResolvedURL } from '@stores/appStore';
-import { r128gain, setR128Gain } from '@utils/ffmpeg';
+import { r128gain, setR128Gain } from '@utils/ffmpeg/ffmpeg';
 
 export const DEFAULT_NULL_URL = 'NULL';
 export const NULL_TRACK = { url: DEFAULT_NULL_URL, urlRefreshTimeStamp: 0 };

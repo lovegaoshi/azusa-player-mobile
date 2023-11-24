@@ -11,7 +11,7 @@
     "start": "react-native start",
     "test": "jest",
     "lint": "gts lint",
-    "fresh": "rm -rf node_modules ; yarn; git submodule update --recursive --remote",
+    "fresh": "rm -rf node_modules && yarn && git submodule update --recursive --remote",
     "types": "tsc --noEmit true",
     "ci:lint": "eslint src --max-warnings=0",
     "ci:format": "prettier --check src",
@@ -21,12 +21,12 @@
     "prepare": "yarn run compile",
     "pretest": "yarn run compile",
     "prettify": "prettier --write ./src",
-    "ios:build": "yarn; cd ios; rm Podfile.lock; pod install --repo-update; cd ..",
+    "ios:build": "yarn && cd ios && rm Podfile.lock && pod install --repo-update && cd ..",
     "codepush": "appcenter codepush release-react -a lovegaoshi/Azusa-Player-Mobile",
     "codepush:rollback": "appcenter codepush rollback -a lovegaoshi/Azusa-Player-Mobile Production",
     "codepush:promote": "appcenter codepush promote -a lovegaoshi/Azusa-Player-Mobile -s Staging -d Production",
     "dep": "yarn upgrade-interactive --latest",
-    "release": "git switch master; git pull; python release_bump.py",
+    "release": "git switch master && git pull && python release_bump.py",
     "postinstall": "patch-package"
   },
   "dependencies": {
