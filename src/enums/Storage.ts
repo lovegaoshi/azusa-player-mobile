@@ -3,6 +3,8 @@ import { VERSIONS } from './Version';
 import { EXPORT_OPTIONS } from './Sync';
 import type { NoxStorage } from '../types/storage';
 
+export { EXPORT_OPTIONS } from './Sync';
+
 export enum STORAGE_KEYS {
   PLAYER_SETTING_KEY = 'PlayerSetting',
   FAVORITE_PLAYLIST_KEY = 'FavFavList-Special',
