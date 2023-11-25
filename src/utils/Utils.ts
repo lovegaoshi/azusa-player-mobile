@@ -116,3 +116,10 @@ export const arrayToObject = (val: [string, never][]) =>
     acc[curr[0]] = curr[1];
     return acc;
   }, {} as anyDict);
+
+export const r128gain2Volume = (gain: number) => {
+  if (gain > 0) {
+    return 1;
+  }
+  return Math.pow(10, gain / 20);
+};
