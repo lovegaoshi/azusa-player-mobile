@@ -311,7 +311,7 @@ export const useNoxSetting = create<NoxSetting>((set, get) => ({
     });
     set({ searchPlaylist: val.searchPlaylist });
     set({ favoritePlaylist: val.favoriPlaylist });
-    const initializedPlayerSetting = val.settings || DEFAULT_SETTING;
+    const initializedPlayerSetting = val.settings;
     set({ playerSetting: initializedPlayerSetting });
     setPlayerSettingVanilla(initializedPlayerSetting);
     set({ playlists: val.playlists });

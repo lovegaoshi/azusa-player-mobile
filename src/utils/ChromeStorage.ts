@@ -265,6 +265,11 @@ export const getLyricMapping = () =>
 export const saveSettings = async (setting: NoxStorage.PlayerSettingDict) =>
   saveItem(STORAGE_KEYS.PLAYER_SETTING_KEY, setting);
 
+export const getSettings = async () => ({
+  ...DEFAULT_SETTING,
+  ...((await getItem(STORAGE_KEYS.PLAYER_SETTING_KEY)) || {}),
+});
+
 export const savePlaylistIds = async (val: string[]) =>
   saveItem(STORAGE_KEYS.MY_FAV_LIST_KEY, val);
 

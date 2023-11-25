@@ -3,7 +3,7 @@ import { createStore } from 'zustand/vanilla';
 
 import { DEFAULT_SETTING } from '@enums/Storage';
 import type { NoxStorage } from '../types/storage';
-import { saveSettings } from '@utils/ChromeStorage';
+import { saveSettings, getSettings } from '@utils/ChromeStorage';
 
 interface AppStore {
   playerSetting: NoxStorage.PlayerSettingDict;
@@ -18,6 +18,12 @@ const playerSettingStore = createStore<AppStore>((set, get) => ({
     saveSettings(newPlayerSetting);
   },
 }));
+
+export const initializePlayerSetting = async () => {
+  playerSettingStore.setState({
+    playerSetting: await getSettings(),
+  });
+};
 
 export const setPlayerSetting = (
   newSetting: Partial<NoxStorage.PlayerSettingDict>
