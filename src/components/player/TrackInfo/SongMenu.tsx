@@ -9,7 +9,7 @@ import useUpdatePlaylist from '@hooks/useUpdatePlaylist';
 import { CopiedPlaylistMenuItem } from '../../buttons/CopiedPlaylistButton';
 import { RenameSongMenuItem } from '../../buttons/RenameSongButton';
 import useSongOperations from '@hooks/useSongOperations';
-import { addR128Gain, getR128Gain } from '@stores/appStore';
+import { addR128Gain, getR128Gain } from '@utils/ffmpeg/r128Store';
 import ABSliderMenu from './ABSliderMenu';
 import { songlistToTracklist } from '@utils/RNTPUtils';
 

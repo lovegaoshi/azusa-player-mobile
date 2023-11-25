@@ -27,6 +27,7 @@ import {
   initialize as appStoreInitialize,
   getABRepeatRaw,
 } from '@stores/appStore';
+import { initializeR128Gain } from '@utils/ffmpeg/r128Store';
 import { savePlayerStyle } from './useTheme';
 
 const { NoxAndroidAutoModule } = NativeModules;
@@ -300,6 +301,7 @@ export const useNoxSetting = create<NoxSetting>((set, get) => ({
     const playingList =
       val.playlists[val.lastPlaylistId[0]] || dummyPlaylistList;
     await appStoreInitialize();
+    await initializeR128Gain();
     set({ currentPlayingId: val.lastPlaylistId[1] });
     set({ currentABRepeat: getABRepeatRaw(val.lastPlaylistId[1]) });
     set({ currentPlayingList: playingList });

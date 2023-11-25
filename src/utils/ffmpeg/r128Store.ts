@@ -33,7 +33,7 @@ export const initializeR128Gain = async () => {
   });
 };
 
-export const saveR128Gain = async (val: NoxStorage.R128Dict) => {
+const saveR128Gain = async (val: NoxStorage.R128Dict) => {
   const newR128gain = { ...appStore.getState().r128gain, ...val };
   appStore.setState({ r128gain: newR128gain });
   saveR128GainMapping(newR128gain);

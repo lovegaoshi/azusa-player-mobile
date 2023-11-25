@@ -5,11 +5,8 @@ import RNFetchBlob from 'react-native-blob-util';
 import TrackPlayer from 'react-native-track-player';
 
 import { r128gain, setR128Gain, ffmpegToMP3 } from './ffmpeg/ffmpeg';
-import {
-  addR128Gain,
-  addDownloadProgress,
-  getR128Gain,
-} from '@stores/appStore';
+import { addDownloadProgress } from '@stores/appStore';
+import { addR128Gain, getR128Gain } from '@utils/ffmpeg/r128Store';
 import playerSettingStore from '@stores/playerSettingStore';
 import { getCachedMediaMapping, saveCachedMediaMapping } from './ChromeStorage';
 import { logger } from './Logger';

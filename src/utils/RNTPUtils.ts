@@ -9,9 +9,9 @@ import TrackPlayer, {
 import { logger } from './Logger';
 import appStore, {
   addDownloadPromise,
-  getR128GainAsync,
   resetResolvedURL,
 } from '@stores/appStore';
+import { getR128GainAsync } from './ffmpeg/r128RN';
 import {
   cycleThroughPlaymode as cyclePlaymode,
   getPlaybackModeNotifIcon,

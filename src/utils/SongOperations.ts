@@ -3,7 +3,8 @@ import { customReqHeader, DEFAULT_UA } from '../utils/BiliFetch';
 import { logger } from '../utils/Logger';
 import NoxCache from '../utils/Cache';
 import playerSettingStore from '@stores/playerSettingStore';
-import { addR128Gain, getR128Gain, cacheResolvedURL } from '@stores/appStore';
+import { cacheResolvedURL } from '@stores/appStore';
+import { addR128Gain, getR128Gain } from '@utils/ffmpeg/r128Store';
 import { r128gain, setR128Gain } from '@utils/ffmpeg/ffmpeg';
 
 export const DEFAULT_NULL_URL = 'NULL';
