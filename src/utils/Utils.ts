@@ -107,3 +107,12 @@ export const regexMatchOperations = <K, T>({
   }
   return fallback(song);
 };
+
+interface anyDict {
+  [key: string]: never;
+}
+export const arrayToObject = (val: [string, never][]) =>
+  val.reduce((acc, curr) => {
+    acc[curr[0]] = curr[1];
+    return acc;
+  }, {} as anyDict);
