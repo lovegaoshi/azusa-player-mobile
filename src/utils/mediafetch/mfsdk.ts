@@ -20,6 +20,10 @@ import * as qianqian from '@mfsdk/qianqian/index';
 import * as xmly from '@mfsdk/xmly/index';
 // @ts-ignore
 import * as kuiaishou from '@mfsdk/kuaishou/index';
+// @ts-ignore
+import * as yinyuetai from '@mfsdk/yinyuetai/index';
+// @ts-ignore
+import * as youtube from '@mfsdk/youtube/index';
 
 import { logger } from '../Logger';
 
@@ -38,6 +42,8 @@ export enum MUSICFREE {
   xmly = 'xmly',
   kuaishou = 'kuaishou',
   aggregated = 'aggregated',
+  yinyuetai = 'yinyuetai',
+  youtube = 'mfsdkyoutube',
 }
 
 const IMusicToNoxMedia = (val: IMusic.IMusicItem, source: MUSICFREE) => {
@@ -108,6 +114,12 @@ const xmlySearch = async (query: string) =>
 const kuaishouSearch = async (query: string) =>
   genericSearch(query, kuiaishou, MUSICFREE.kuaishou);
 
+const yinyuetaiSearch = async (query: string) =>
+  genericSearch(query, yinyuetai, MUSICFREE.yinyuetai);
+
+const youtubeSearch = async (query: string) =>
+  genericSearch(query, youtube, MUSICFREE.youtube);
+
 const aggregatedSearcher = {
   [MUSICFREE.fivesing]: fiveSingSearch,
   [MUSICFREE.kugou]: kugouSearch,
@@ -119,6 +131,8 @@ const aggregatedSearcher = {
   [MUSICFREE.qianqian]: qianqianSearch,
   [MUSICFREE.xmly]: xmlySearch,
   [MUSICFREE.kuaishou]: kuaishouSearch,
+  [MUSICFREE.yinyuetai]: yinyuetaiSearch,
+  [MUSICFREE.youtube]: youtubeSearch,
   [MUSICFREE.aggregated]: () => {
     throw new Error('Function not implemented.');
   },
@@ -182,6 +196,10 @@ export const resolver: Resolver = {
     resolverWrapper(v, xmly.getMediaSource, quality),
   [MUSICFREE.kuaishou]: (v: NoxMedia.Song, quality?: string) =>
     resolverWrapper(v, kuiaishou.getMediaSource, quality),
+  [MUSICFREE.yinyuetai]: (v: NoxMedia.Song, quality?: string) =>
+    resolverWrapper(v, yinyuetai.getMediaSource, quality),
+  [MUSICFREE.youtube]: (v: NoxMedia.Song, quality?: string) =>
+    resolverWrapper(v, youtube.getMediaSource, quality),
   [MUSICFREE.aggregated]: () => {
     throw new Error('Function not implemented.');
   },
