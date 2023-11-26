@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 
 import GenericSelectDialog from '../dialogs/GenericSelectDialog';
 import { SettingListItem } from './useRenderSetting';
-import { useNoxSetting } from '@hooks/useSetting';
+import { useNoxSetting } from '@stores/useApp';
 
 interface Props {
   icon: string;

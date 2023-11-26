@@ -5,7 +5,6 @@ import { useTranslation } from 'react-i18next';
 import { Alert } from 'react-native';
 import { strFromU8, decompressSync } from 'fflate';
 
-import { useNoxSetting } from '@hooks/useSetting';
 import { logger } from '@utils/Logger';
 import {
   importPlayerContentRaw,
@@ -13,6 +12,7 @@ import {
   clearPlaylistNImport,
   addImportedPlaylist,
 } from '@utils/ChromeStorage';
+import useInitializeStore from '@stores/initializeStores';
 
 /**
  * this hook will handle all sync back from file operations. it will
@@ -22,7 +22,7 @@ import {
  */
 const useSync = () => {
   const { t } = useTranslation();
-  const initPlayer = useNoxSetting(state => state.initPlayer);
+  const { initializeStores } = useInitializeStore();
   const [syncCheckVisible, setSyncCheckVisible] = useState(false);
   const [noxExtensionContent, setNoxExtensionContent] = useState<string[]>([]);
   const [cachedParsedContent, setCachedParsedContent] = useState<any>(null);
@@ -44,7 +44,7 @@ const useSync = () => {
             text: String(t('Sync.NoxExtensionOverwrite')),
             onPress: async () => {
               await clearPlaylistNImport(parsedContent);
-              await initPlayer(await initPlayerObject());
+              await initializeStores(await initPlayerObject());
               resolve(true);
             },
           },
@@ -75,7 +75,7 @@ const useSync = () => {
       )
       .filter(val => val);
     await addImportedPlaylist(checkedPlaylists);
-    await initPlayer(await initPlayerObject());
+    await initializeStores(await initPlayerObject());
     setSyncCheckVisible(false);
     Snackbar.show({ text: t('Sync.DropboxDownloadSuccess') });
   };
@@ -100,7 +100,7 @@ const useSync = () => {
         await syncNoxExtension(parsedContent);
         return;
       } else {
-        await initPlayer(await importPlayerContentRaw(parsedContent));
+        await initializeStores(await importPlayerContentRaw(parsedContent));
         return;
       }
     } catch (error) {

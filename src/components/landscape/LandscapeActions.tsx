@@ -5,7 +5,7 @@ import { useNavigation } from '@react-navigation/native';
 
 import { ICONS } from '@enums/Icons';
 import RandomGIFButton from '../buttons/RandomGIF';
-import { useNoxSetting } from '@hooks/useSetting';
+import { useNoxSetting } from '@stores/useApp';
 import { ViewEnum } from '@enums/View';
 import { logger } from '@utils/Logger';
 

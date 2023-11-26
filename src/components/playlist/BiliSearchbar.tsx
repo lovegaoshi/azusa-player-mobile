@@ -13,7 +13,7 @@ import { useNavigation } from '@react-navigation/native';
 
 import { ViewEnum } from '@enums/View';
 import { searchBiliURLs } from '@utils/BiliSearch';
-import { useNoxSetting } from '@hooks/useSetting';
+import { useNoxSetting } from '@stores/useApp';
 import usePlayback from '@hooks/usePlayback';
 import SearchMenu from './SearchMenu';
 import { getDefaultSearch, getMusicFreePlugin } from '@utils/ChromeStorage';

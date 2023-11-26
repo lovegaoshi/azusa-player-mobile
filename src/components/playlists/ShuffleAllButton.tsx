@@ -4,7 +4,7 @@ import TrackPlayer from 'react-native-track-player';
 import { useNavigation } from '@react-navigation/native';
 import { useTranslation } from 'react-i18next';
 
-import { useNoxSetting } from '@hooks/useSetting';
+import { useNoxSetting } from '@stores/useApp';
 import { randomChoice } from '@utils/Utils';
 import { ViewEnum } from '@enums/View';
 import { songlistToTracklist } from '@utils/RNTPUtils';

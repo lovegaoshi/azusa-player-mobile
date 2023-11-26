@@ -10,7 +10,7 @@ import {
 import { useTranslation } from 'react-i18next';
 
 import SearchMenu from './PlaylistSearchMenu';
-import { useNoxSetting } from '@hooks/useSetting';
+import { useNoxSetting } from '@stores/useApp';
 import { seconds2HHMMSS } from '@utils/Utils';
 
 interface Props {

@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import { useNoxSetting } from './useSetting';
+import { useNoxSetting } from '@stores/useApp';
 import NoxCache from '../utils/Cache';
 import { lsFiles, unlinkFiles } from '@utils/fs';
 

@@ -2,7 +2,7 @@ import React, { ReactNode } from 'react';
 import { IconButton, Text } from 'react-native-paper';
 import { StyleSheet, View } from 'react-native';
 
-import { useNoxSetting } from '@hooks/useSetting';
+import { useNoxSetting } from '@stores/useApp';
 
 const DefaultIcon = (
   item: NoxMedia.Playlist,

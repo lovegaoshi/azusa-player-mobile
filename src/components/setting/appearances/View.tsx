@@ -13,7 +13,7 @@ import { DrawerNavigationProp } from '@react-navigation/drawer';
 
 import SkinSettings from './SkinSettings';
 import { SettingListItem, RenderSetting } from '../useRenderSetting';
-import { useNoxSetting } from '@hooks/useSetting';
+import { useNoxSetting } from '@stores/useApp';
 import GenericSelectDialog from '@components/dialogs/GenericSelectDialog';
 import {
   SelectSettingEntry,

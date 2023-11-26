@@ -3,7 +3,7 @@ import { Menu } from 'react-native-paper';
 import Snackbar from 'react-native-snackbar';
 import { useTranslation } from 'react-i18next';
 
-import { useNoxSetting } from '@hooks/useSetting';
+import { useNoxSetting } from '@stores/useApp';
 import playlistAnalytics from '@utils/Analytics';
 import PlaylistSettingsButton from './PlaylistSettingsButton';
 import { PLAYLIST_ENUMS } from '@enums/Playlist';

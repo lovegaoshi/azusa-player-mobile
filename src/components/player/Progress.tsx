@@ -5,7 +5,7 @@ import TrackPlayer, { useProgress } from 'react-native-track-player';
 import { ProgressBar } from 'react-native-paper';
 import { useStore } from 'zustand';
 
-import { useNoxSetting } from '@hooks/useSetting';
+import { useNoxSetting } from '@stores/useApp';
 import { seconds2MMSS as formatSeconds } from '@utils/Utils';
 import appStore from '@stores/appStore';
 

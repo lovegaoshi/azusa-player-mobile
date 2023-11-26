@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { View, ScrollView } from 'react-native';
-import { useNoxSetting } from '@hooks/useSetting';
+import { useNoxSetting } from '@stores/useApp';
 import { RenderSetting } from './useRenderSetting';
 import { SettingEntry } from './SetttingEntries';
 

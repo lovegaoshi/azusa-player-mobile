@@ -3,7 +3,7 @@ import TrackPlayer, { RepeatMode } from 'react-native-track-player';
 import { useTranslation } from 'react-i18next';
 import { useNetInfo } from '@react-native-community/netinfo';
 
-import { useNoxSetting } from './useSetting';
+import { useNoxSetting } from '@stores/useApp';
 import { randomChoice } from '../utils/Utils';
 import logger from '../utils/Logger';
 import { songlistToTracklist } from '@utils/RNTPUtils';

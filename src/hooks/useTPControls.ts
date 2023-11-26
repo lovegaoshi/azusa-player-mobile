@@ -2,7 +2,7 @@ import TrackPlayer, { State } from 'react-native-track-player';
 import { useStore } from 'zustand';
 
 import { biliSuggest } from '@utils/Bilibili/BiliOperate';
-import { useNoxSetting } from '@hooks/useSetting';
+import { useNoxSetting } from '@stores/useApp';
 import noxPlayingList, { getCurrentTPQueue } from '@stores/playingList';
 import biliavideo from '@utils/mediafetch/biliavideo';
 import { randomChoice, regexMatchOperations } from '@utils/Utils';

@@ -1,4 +1,4 @@
-import { useNoxSetting } from '@hooks/useSetting';
+import { useNoxSetting } from '@stores/useApp';
 import { CIDPREFIX } from '@utils/mediafetch/ytbvideo';
 import { logger } from '@utils/Logger';
 import { SOURCE } from '@enums/MediaFetch';

@@ -4,7 +4,7 @@ import Snackbar from 'react-native-snackbar';
 // eslint-disable-next-line import/no-unresolved
 import { APPSTORE } from '@env';
 
-import { useNoxSetting } from './useSetting';
+import { useNoxSetting } from '@stores/useApp';
 import useAlert from '../components/dialogs/useAlert';
 import { VERSIONS } from '../enums/Version';
 

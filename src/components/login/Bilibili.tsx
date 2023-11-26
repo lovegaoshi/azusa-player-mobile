@@ -6,7 +6,7 @@ import QRCode from 'react-native-qrcode-svg';
 import Snackbar from 'react-native-snackbar';
 import CookieManager from '@react-native-cookies/cookies';
 
-import { useNoxSetting } from '@hooks/useSetting';
+import { useNoxSetting } from '@stores/useApp';
 import { logger } from '@utils/Logger';
 import GenericInputDialog from '../dialogs/GenericInputDialog';
 import BiliSelectFavButtton from './BiliSelectFavButtton';

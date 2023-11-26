@@ -4,7 +4,7 @@ import { Alert } from 'react-native';
 import { useTranslation } from 'react-i18next';
 import TrackPlayer from 'react-native-track-player';
 
-import { useNoxSetting } from '@hooks/useSetting';
+import { useNoxSetting } from '@stores/useApp';
 import useUpdatePlaylist from '@hooks/useUpdatePlaylist';
 import { CopiedPlaylistMenuItem } from '../../buttons/CopiedPlaylistButton';
 import { RenameSongMenuItem } from '../../buttons/RenameSongButton';

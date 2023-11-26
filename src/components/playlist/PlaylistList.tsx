@@ -11,7 +11,7 @@ import { activateKeepAwakeAsync, deactivateKeepAwake } from 'expo-keep-awake';
 
 import { styles } from '../style';
 import SongInfo from './SongInfo';
-import { useNoxSetting } from '@hooks/useSetting';
+import { useNoxSetting } from '@stores/useApp';
 import SongMenu from './SongMenu';
 import PlaylistInfo from './PlaylistInfo';
 import PlaylistMenuButton from './PlaylistMenuButton';

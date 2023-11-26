@@ -4,7 +4,7 @@ import { usePlaybackState } from 'react-native-track-player';
 
 import { PlaybackError } from '@components/player/PlaybackError';
 import { PlayPauseButton } from '@components/player/PlayPauseButton';
-import { useNoxSetting } from '@hooks/useSetting';
+import { useNoxSetting } from '@stores/useApp';
 import ThumbsUpButton from '@components/player/ThumbsUpButton';
 import PlayerModeButton from '@components/player/PlayerModeButton';
 import usePlayerControls from '@components/player/usePlayerControls';

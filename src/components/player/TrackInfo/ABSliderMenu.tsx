@@ -5,7 +5,7 @@ import { useProgress } from 'react-native-track-player';
 import { RangeSlider } from '@sharcoux/slider';
 import { StyleSheet, Text, View } from 'react-native';
 
-import { useNoxSetting } from '@hooks/useSetting';
+import { useNoxSetting } from '@stores/useApp';
 import GenericDialog from '@components/dialogs/GenericDialog';
 import { seconds2MMSS as formatSeconds } from '@utils/Utils';
 import { addABRepeat } from '@stores/appStore';

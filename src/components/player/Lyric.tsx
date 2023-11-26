@@ -16,7 +16,7 @@ import { IconButton } from 'react-native-paper';
 
 import { searchLyricOptions, searchLyric } from '@utils/LyricFetch';
 import { reExtractSongName } from '@stores/appStore';
-import { useNoxSetting } from '@hooks/useSetting';
+import { useNoxSetting } from '@stores/useApp';
 import { logger } from '@utils/Logger';
 import { readTxtFile, writeTxtFile } from '@utils/fs';
 

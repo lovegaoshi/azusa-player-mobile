@@ -1,7 +1,7 @@
 import React from 'react';
 import { Icon } from 'react-native-paper';
 
-import { useNoxSetting } from '@hooks/useSetting';
+import { useNoxSetting } from '@stores/useApp';
 import ShadowedElement from '@components/buttons/ShadowedElement';
 import { Pressable, ViewStyle } from 'react-native';
 

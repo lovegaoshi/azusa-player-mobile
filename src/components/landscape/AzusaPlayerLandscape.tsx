@@ -13,7 +13,7 @@ import {
 } from 'react-native-paper';
 import merge from 'deepmerge';
 
-import { useNoxSetting } from '../../hooks/useSetting';
+import { useNoxSetting } from '@stores/useApp';
 import '../../localization/i18n';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import LandscapePlayerPanel from './LandscapePlayerPanel';

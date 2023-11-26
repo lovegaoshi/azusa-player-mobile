@@ -14,7 +14,7 @@ import type { Track } from 'react-native-track-player';
 import { Image } from 'expo-image';
 import MarqueeText from 'react-native-text-ticker';
 
-import { useNoxSetting } from '@hooks/useSetting';
+import { useNoxSetting } from '@stores/useApp';
 import { getCurrentTPQueue } from '@stores/playingList';
 import SongMenuButton from './SongMenuButton';
 import FavReloadButton from './FavReloadButton';
