@@ -8,7 +8,7 @@ import { dummyPlaylist, dummyPlaylistList } from '../objects/Playlist';
 import { NoxRepeatMode } from '../enums/RepeatMode';
 import { PLAYLIST_ENUMS } from '../enums/Playlist';
 import AzusaTheme from '../components/styles/AzusaTheme';
-import { chunkArray as chunkArrayRaw } from '../utils/Utils';
+import { chunkArray as chunkArrayRaw, arrayToObject } from '../utils/Utils';
 import type { NoxStorage } from '../types/storage';
 import {
   STORAGE_KEYS,
@@ -72,12 +72,6 @@ export const getFadeInterval = async () =>
   Number(await getItem(STORAGE_KEYS.FADE_INTERVAL)) || 0;
 export const saveFadeInterval = async (val: number) =>
   await saveItem(STORAGE_KEYS.FADE_INTERVAL, val);
-
-const arrayToObject = (val: [string, any]) =>
-  val.reduce((acc, val) => {
-    acc[val[0]] = val[1];
-    return acc;
-  }, {});
 
 /**
  * a save helper function for mapping types ({string: val}).
@@ -270,6 +264,11 @@ export const getLyricMapping = () =>
 // of keeping them as states.
 export const saveSettings = async (setting: NoxStorage.PlayerSettingDict) =>
   saveItem(STORAGE_KEYS.PLAYER_SETTING_KEY, setting);
+
+export const getSettings = async () => ({
+  ...DEFAULT_SETTING,
+  ...((await getItem(STORAGE_KEYS.PLAYER_SETTING_KEY)) || {}),
+});
 
 export const savePlaylistIds = async (val: string[]) =>
   saveItem(STORAGE_KEYS.MY_FAV_LIST_KEY, val);

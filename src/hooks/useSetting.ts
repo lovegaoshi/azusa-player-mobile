@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable prefer-const */
 import { create } from 'zustand';
+import { NativeModules, Platform } from 'react-native';
 
 import {
   dummyPlaylist,
@@ -26,8 +27,8 @@ import {
   initialize as appStoreInitialize,
   getABRepeatRaw,
 } from '@stores/appStore';
+import { initializeR128Gain } from '@utils/ffmpeg/r128Store';
 import { savePlayerStyle } from './useTheme';
-import { NativeModules, Platform } from 'react-native';
 
 const { NoxAndroidAutoModule } = NativeModules;
 
@@ -300,6 +301,7 @@ export const useNoxSetting = create<NoxSetting>((set, get) => ({
     const playingList =
       val.playlists[val.lastPlaylistId[0]] || dummyPlaylistList;
     await appStoreInitialize();
+    await initializeR128Gain();
     set({ currentPlayingId: val.lastPlaylistId[1] });
     set({ currentABRepeat: getABRepeatRaw(val.lastPlaylistId[1]) });
     set({ currentPlayingList: playingList });
@@ -309,7 +311,7 @@ export const useNoxSetting = create<NoxSetting>((set, get) => ({
     });
     set({ searchPlaylist: val.searchPlaylist });
     set({ favoritePlaylist: val.favoriPlaylist });
-    const initializedPlayerSetting = val.settings || DEFAULT_SETTING;
+    const initializedPlayerSetting = val.settings;
     set({ playerSetting: initializedPlayerSetting });
     setPlayerSettingVanilla(initializedPlayerSetting);
     set({ playlists: val.playlists });

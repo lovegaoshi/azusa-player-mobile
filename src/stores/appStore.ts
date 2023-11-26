@@ -1,10 +1,8 @@
 // vanilla store of zustand serving playbackServices.
 import { createStore } from 'zustand/vanilla';
-import TrackPlayer, { UpdateOptions } from 'react-native-track-player';
+import { UpdateOptions } from 'react-native-track-player';
 
 import {
-  getR128GainMapping,
-  saveR128GainMapping,
   getABMapping,
   saveABMapping,
   getFadeInterval,
@@ -17,8 +15,6 @@ import { logger } from '@utils/Logger';
 
 interface AppStore {
   pipMode: boolean;
-  r128gain: NoxStorage.R128Dict;
-  setR128gain: (val: NoxStorage.R128Dict) => void;
   ABRepeat: NoxStorage.ABDict;
   setABRepeat: (val: NoxStorage.ABDict) => void;
   // used for Event.PlaybackActiveTrackChanged.
@@ -48,11 +44,6 @@ interface AppStore {
 
 const appStore = createStore<AppStore>(set => ({
   pipMode: false,
-  r128gain: {},
-  setR128gain: (val: NoxStorage.R128Dict) => {
-    set({ r128gain: val });
-    saveR128GainMapping(val);
-  },
   ABRepeat: {},
   setABRepeat: (val: NoxStorage.ABDict) => {
     set({ ABRepeat: val });
@@ -92,7 +83,6 @@ export const initialize = async () => {
   const fadeInterval = await getFadeInterval();
   const savedRegExt = await getRegExtractMapping();
   appStore.setState({
-    r128gain: await getR128GainMapping(),
     ABRepeat: await getABMapping(),
     fadeIntervalMs: fadeInterval,
     fadeIntervalSec: fadeInterval / 1000,
@@ -112,28 +102,6 @@ export const parseSongName = (song: NoxMedia.Song): NoxMedia.Song => {
     ...song,
     parsedName: reExtractSongName(song.name, song.singerId),
   };
-};
-
-export const saveR128Gain = async (val: NoxStorage.R128Dict) => {
-  const newR128gain = { ...appStore.getState().r128gain, ...val };
-  appStore.setState({ r128gain: newR128gain });
-  saveR128GainMapping(newR128gain);
-};
-
-export const getR128Gain = (song?: NoxMedia.Song) => {
-  const { r128gain, currentPlayingId } = appStore.getState();
-  return r128gain[song ? song.id : currentPlayingId] ?? null;
-};
-
-export const getR128GainAsync = async (song?: NoxMedia.Song) => {
-  if (song === undefined) {
-    song = (await TrackPlayer.getActiveTrack())?.song;
-  }
-  return getR128Gain(song);
-};
-
-export const addR128Gain = (song: NoxMedia.Song, gain: number | null) => {
-  saveR128Gain({ [song.id]: gain });
 };
 
 export const saveABRepeat = async (val: NoxStorage.ABDict) => {

@@ -3,6 +3,8 @@ import { VERSIONS } from './Version';
 import { EXPORT_OPTIONS } from './Sync';
 import type { NoxStorage } from '../types/storage';
 
+export { EXPORT_OPTIONS } from './Sync';
+
 export enum STORAGE_KEYS {
   PLAYER_SETTING_KEY = 'PlayerSetting',
   FAVORITE_PLAYLIST_KEY = 'FavFavList-Special',
@@ -34,6 +36,10 @@ export enum SEARCH_OPTIONS {
 export const appID = 'NoxPlayerMobile';
 
 export const DEFAULT_SETTING: NoxStorage.PlayerSettingDict = {
+  playMode: 'NA',
+  defaultPlayMode: 'NA',
+  defaultVolume: 1,
+
   autoRSSUpdate: true,
   skin: '诺莺nox',
   parseSongName: true,

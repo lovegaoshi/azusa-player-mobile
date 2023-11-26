@@ -1,8 +1,7 @@
-import CookieManager from '@react-native-cookies/cookies';
-
+import { getBiliJct } from '@utils/Bilibili/biliCookies';
 import bfetch from '@utils/BiliFetch';
+import { logger } from '@utils/Logger';
 import { throttler } from '../throttle';
-import { logger } from '../Logger';
 import { bvidToAid } from '../bvid';
 
 const BILI_LIKE_API = 'https://api.bilibili.com/x/web-interface/archive/like';
@@ -64,9 +63,7 @@ export const checkBVLiked = async (bvid: string) => {
  */
 export const sendBVLike = async (bvid: string) => {
   try {
-    const biliJct = (await CookieManager.get('https://www.bilibili.com'))[
-      'bili_jct'
-    ]?.value;
+    const biliJct = await getBiliJct();
     if (!biliJct) return;
     const res = await bfetch(BILI_LIKE_API, {
       method: 'POST',
@@ -85,9 +82,7 @@ export const sendBVLike = async (bvid: string) => {
 
 export const sendBVTriple = async (bvid: string) => {
   try {
-    const biliJct = (await CookieManager.get('https://www.bilibili.com'))[
-      'bili_jct'
-    ]?.value;
+    const biliJct = await getBiliJct();
     if (!biliJct) return;
     const res = await bfetch(BILI_TRIP_API, {
       method: 'POST',
@@ -121,9 +116,7 @@ export const sendBVFavorite = async (
   removefav: string[] = []
 ) => {
   try {
-    const biliJct = (await CookieManager.get('https://www.bilibili.com'))[
-      'bili_jct'
-    ]?.value;
+    const biliJct = await getBiliJct();
     if (!biliJct) return;
     const res = await bfetch(BILI_FAV_API, {
       credentials: 'include',

@@ -5,6 +5,10 @@ import { EXPORT_OPTIONS } from '../enums/Sync';
 
 declare namespace NoxStorage {
   export interface PlayerSettingDict {
+    playMode: string;
+    defaultPlayMode: string;
+    defaultVolume: number;
+
     autoRSSUpdate: boolean;
     skin: string;
     parseSongName: boolean;

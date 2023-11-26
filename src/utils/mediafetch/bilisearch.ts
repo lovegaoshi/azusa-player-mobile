@@ -71,9 +71,9 @@ export const fetchBiliSearchList = async (
       params: {
         method: 'GET',
         headers: {
-          referer: 'https://www.bilibili.com',
           cookie: 'buvid3=coolbeans',
         },
+        referrer: 'https://www.bilibili.com',
         credentials: cookiedSearch ? 'include' : 'omit',
       },
       resolveBiliBVID: fastSearch

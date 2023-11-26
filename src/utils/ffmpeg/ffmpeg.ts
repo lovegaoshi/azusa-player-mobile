@@ -2,7 +2,8 @@ import { FFmpegKit } from 'ffmpeg-kit-react-native';
 import RNFetchBlob from 'react-native-blob-util';
 import TrackPlayer from 'react-native-track-player';
 
-import { logger } from './Logger';
+import { logger } from '../Logger';
+import { r128gain2Volume } from '../Utils';
 
 const parseReplayGainLog = (log: string) => {
   const regex = /Parsed_replaygain.+ track_gain = (.+) dB/g;
@@ -31,19 +32,9 @@ export const ffmpegToMP3 = async (fspath: string) => {
 };
 
 export const setTPR128Gain = async (gain: number, fade = 0, init = -1) => {
-  if (gain > 0) {
-    logger.warn(`[ffmpeg] positive ${gain} dB is not yet supported!`);
-    TrackPlayer.setAnimatedVolume({ volume: 1, duration: fade, init });
-    return;
-  }
-  try {
-    const volume = Math.pow(10, gain / 20);
-    logger.debug(`[r128gain] set r128gain volume to ${volume} in ${fade}`);
-    TrackPlayer.setAnimatedVolume({ volume, duration: fade, init });
-  } catch (e) {
-    logger.warn(`[ffmpeg] r128gain set error: ${e}`);
-    TrackPlayer.setAnimatedVolume({ volume: 1, duration: fade, init });
-  }
+  const volume = r128gain2Volume(gain);
+  logger.debug(`[r128gain] set r128gain volume to ${volume} in ${fade}`);
+  TrackPlayer.setAnimatedVolume({ volume, duration: fade, init });
 };
 
 export const setR128Gain = async (

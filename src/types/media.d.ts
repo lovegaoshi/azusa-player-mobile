@@ -22,14 +22,17 @@ declare namespace NoxMedia {
   }
 
   export interface Playlist {
-    songList: Array<NoxMedia.Song>;
     title: string;
     id: string;
+    type: string;
+
+    songList: Array<NoxMedia.Song>;
+
     subscribeUrl: Array<string>;
     blacklistedUrl: Array<string>;
-    useBiliShazam: boolean;
     lastSubscribed: number;
-    type: string;
+
+    useBiliShazam: boolean;
     biliSync: boolean;
     newSongOverwrite?: boolean;
   }

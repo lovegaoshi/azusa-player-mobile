@@ -9,17 +9,17 @@ import TrackPlayer, {
 import { logger } from './Logger';
 import appStore, {
   addDownloadPromise,
-  getR128GainAsync,
   resetResolvedURL,
 } from '@stores/appStore';
+import { getR128GainAsync } from './ffmpeg/r128RN';
 import {
   cycleThroughPlaymode as cyclePlaymode,
   getPlaybackModeNotifIcon,
 } from '@stores/playingList';
 import { i0hdslbHTTPResolve } from '@utils/Utils';
-import { resolveUrl, parseSongR128gain } from '@objects/Song';
+import { resolveUrl, parseSongR128gain } from '@utils/SongOperations';
 import NoxCache from './Cache';
-import { setTPR128Gain } from './ffmpeg';
+import { setTPR128Gain } from './ffmpeg/ffmpeg';
 
 const { getState, setState } = appStore;
 const animatedVolume = new Animated.Value(1);
