@@ -41,9 +41,9 @@ export enum MUSICFREE {
   qianqian = 'qianqian',
   xmly = 'xmly',
   kuaishou = 'kuaishou',
-  aggregated = 'aggregated',
   yinyuetai = 'yinyuetai',
   youtube = 'mfsdkyoutube',
+  aggregated = 'aggregated',
 }
 
 const IMusicToNoxMedia = (val: IMusic.IMusicItem, source: MUSICFREE) => {

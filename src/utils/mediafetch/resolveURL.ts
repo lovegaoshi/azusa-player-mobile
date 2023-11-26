@@ -47,8 +47,7 @@ export const fetchPlayUrlPromise = async (
     }
     return fetchVideoPlayUrlPromise({ bvid, cid: cidStr, iOS });
   };
-
-  if (v.source && v.source in MUSICFREE) {
+  if (v.source && Object.values(MUSICFREE).includes(v.source as MUSICFREE)) {
     const vsource = v.source as MUSICFREE;
     const result = await resolver[vsource](v);
     console.warn(result, v);
