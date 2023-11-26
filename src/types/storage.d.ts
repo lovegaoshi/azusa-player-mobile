@@ -60,6 +60,17 @@ declare namespace NoxStorage {
     colorScheme: ColorSchemeName;
   }
 
+  export interface initializedResults {
+    currentPlayingList: NoxMedia.Playlist;
+    currentPlayingID: string;
+    playlists: { [key: string]: NoxMedia.Playlist };
+    storedPlayerSetting: NoxStorage.PlayerSettingDict;
+    cookies: { [key: string]: string };
+    language?: string;
+    lastPlayDuration: number;
+    playbackMode: string;
+  }
+
   export interface R128Dict {
     [key: string]: number | null;
   }
