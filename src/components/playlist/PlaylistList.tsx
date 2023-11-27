@@ -22,6 +22,7 @@ import noxCache, { noxCacheKey } from '@utils/Cache';
 import { i0hdslbHTTPResolve } from '@utils/Utils';
 import usePlayback from '@hooks/usePlayback';
 import useTPControls from '@hooks/useTPControls';
+import { reParseSearch as reParseSearchRaw } from '@utils/re';
 
 interface BackgroundProps {
   song: NoxMedia.Song;
@@ -116,55 +117,19 @@ const PlaylistList = () => {
     setShouldReRender(val => !val);
   };
 
-  const reParseSearch = (
-    searchStr: string,
-    rows: Array<NoxMedia.Song>,
-    defaultExtract = (someRows: Array<NoxMedia.Song>, searchstr: string) =>
-      someRows.filter(
-        row =>
-          row.name.toLowerCase().includes(searchstr.toLowerCase()) ||
-          row.singer.includes(searchstr) ||
-          row.album?.includes(searchstr)
-      )
-  ) => {
-    const reExtractions = [
-      {
-        regex: SearchRegex.absoluteMatch.regex,
-        process: (val: RegExpExecArray, someRows: Array<NoxMedia.Song>) =>
-          someRows.filter(row => row.parsedName === val[1]),
-      },
-      {
-        regex: SearchRegex.artistMatch.regex,
-        process: (val: RegExpExecArray, someRows: Array<NoxMedia.Song>) =>
-          someRows.filter(row => row.singer.includes(val[1])),
-      },
-      {
-        regex: SearchRegex.albumMatch.regex,
-        process: (val: RegExpExecArray, someRows: Array<NoxMedia.Song>) =>
-          someRows.filter(row => row.album?.includes(val[1])),
-      },
+  const reParseSearch = (searchStr: string, rows: Array<NoxMedia.Song>) => {
+    const extraReExtract = [
       {
         regex: SearchRegex.cachedMatch.regex,
         process: (val: RegExpExecArray, someRows: Array<NoxMedia.Song>) =>
           someRows.filter(row => cachedSongs.includes(noxCacheKey(row))),
       },
     ];
-    let defaultExtraction = true;
-    for (const searchSubStr of searchStr.split('|')) {
-      for (const reExtraction of reExtractions) {
-        const extracted = reExtraction.regex.exec(searchSubStr);
-        if (extracted !== null) {
-          rows = reExtraction.process(extracted, rows);
-          defaultExtraction = false;
-          break;
-        }
-      }
-    }
-    // if none matches, treat as a generic search, check if any field contains the search string
-    if (defaultExtraction) {
-      rows = defaultExtract(rows, searchStr);
-    }
-    return rows;
+    return reParseSearchRaw({
+      searchStr,
+      rows,
+      extraReExtract,
+    });
   };
 
   const handleSearch = (searchedVal = '') => {

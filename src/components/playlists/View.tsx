@@ -103,22 +103,6 @@ const styles = StyleSheet.create({
   topPadding: {
     height: 10,
   },
-  addPlaylistButtonContainer: {
-    height: 50,
-    alignContent: 'center',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  addPlaylistButtonContent: {
-    flexDirection: 'row',
-    alignContent: 'center',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  addPlaylistButtonSpacer: {
-    width: 40,
-    height: 40,
-  },
   draggableFlatList: {},
   bottomInfo: {
     paddingBottom: 20,
