@@ -18,7 +18,7 @@ import {
   saveLyricMapping,
 } from '@utils/ChromeStorage';
 import { DEFAULT_SETTING, STORAGE_KEYS } from '@enums/Storage';
-import { setPlayerSetting as setPlayerSettingVanilla } from '@stores/playerSettingStore';
+import { setPlayerSetting as setPlayerSettingVanilla } from './playerSettingStore';
 import { savePlayerStyle } from '@hooks/useTheme';
 import { createStyle } from '@components/style';
 import { getABRepeatRaw } from './appStore';
