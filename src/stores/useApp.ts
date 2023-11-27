@@ -110,8 +110,8 @@ interface NoxSetting {
    */
   updatePlaylist: (
     val: NoxMedia.Playlist,
-    addSongs: Array<NoxMedia.Song>,
-    removeSongs: Array<NoxMedia.Song>
+    addSongs?: Array<NoxMedia.Song>,
+    removeSongs?: Array<NoxMedia.Song>
   ) => NoxMedia.Playlist;
 
   initPlayer: (
