@@ -24,7 +24,7 @@ import { createStyle } from '@components/style';
 import { getABRepeatRaw } from './appStore';
 import { setPlayingList } from '@stores/playingList';
 import type { NoxStorage } from '../types/storage';
-import DummyLyricDetail from '@objects/LyricDetail';
+import DummyLyricDetail from '../objects/LyricDetail';
 
 interface NoxSetting {
   gestureMode: boolean;
