@@ -24,6 +24,7 @@ import { createStyle } from '@components/style';
 import { getABRepeatRaw } from './appStore';
 import { setPlayingList } from '@stores/playingList';
 import type { NoxStorage } from '../types/storage';
+import DummyLyricDetail from '@objects/LyricDetail';
 
 interface NoxSetting {
   gestureMode: boolean;
@@ -259,9 +260,16 @@ export const useNoxSetting = create<NoxSetting>((set, get) => ({
   },
 
   lyricMapping: new Map<string, NoxMedia.LyricDetail>(),
-  setLyricMapping: (val: NoxMedia.LyricDetail) => {
-    let lyricMapping = get().lyricMapping;
-    lyricMapping.set(val.songId, val);
+  setLyricMapping: (val: Partial<NoxMedia.LyricDetail>) => {
+    if (!val.songId) {
+      return;
+    }
+    const lyricMapping = get().lyricMapping;
+    lyricMapping.set(val.songId, {
+      ...DummyLyricDetail,
+      ...lyricMapping.get(val.songId),
+      ...val,
+    });
     set({ lyricMapping });
     saveLyricMapping(lyricMapping);
   },
