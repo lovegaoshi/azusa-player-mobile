@@ -124,7 +124,10 @@ export const r128gain2Volume = (gain: number) => {
   return Math.pow(10, gain / 20);
 };
 
-export const filterUndefined = <T, K>(myArray: T[], myFunc: (val: T) => K) =>
+export const filterUndefined = <T, K>(
+  myArray: T[],
+  myFunc: (val: T) => K | undefined
+) =>
   myArray.flatMap(v => {
     const val = myFunc(v);
     return val ? [val] : [];
