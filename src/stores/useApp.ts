@@ -22,7 +22,7 @@ import { setPlayerSetting as setPlayerSettingVanilla } from '@stores/playerSetti
 import { savePlayerStyle } from '@hooks/useTheme';
 import { createStyle } from '@components/style';
 import { getABRepeatRaw } from './appStore';
-import { setPlayingList } from './playingList';
+import { setPlayingList } from '@stores/playingList';
 import type { NoxStorage } from '../types/storage';
 
 interface NoxSetting {
