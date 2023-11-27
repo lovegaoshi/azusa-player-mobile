@@ -234,11 +234,10 @@ export const useNoxSetting = create<NoxSetting>((set, get) => ({
     if (currentPlaylist.id === playlistId) {
       set({ currentPlaylist: playlists[STORAGE_KEYS.SEARCH_PLAYLIST_KEY] });
     }
-    delPlaylist(playlists[playlistId], playlistIds).then(() => {
-      delete playlists[playlistId];
-      playlistIds = playlistIds.filter(v => v !== playlistId);
-      set({ playlists, playlistIds });
-    });
+    delPlaylist(playlists[playlistId], playlistIds);
+    delete playlists[playlistId];
+    playlistIds = playlistIds.filter(v => v !== playlistId);
+    set({ playlists, playlistIds });
   },
 
   updatePlaylist: (
