@@ -10790,11 +10790,6 @@ react-native-code-push@^8.1.0:
     semver "^7.3.5"
     xcode "3.0.1"
 
-react-native-countdown-circle-timer@^3.2.1:
-  version "3.2.1"
-  resolved "https://registry.npmjs.org/react-native-countdown-circle-timer/-/react-native-countdown-circle-timer-3.2.1.tgz#077548e943fcf24b47c7e5ce2f12c1dfa35833c2"
-  integrity sha512-iHiOgipG0hMprerswqUCUfjGo9hL0UhKNS0BGh4o6yY9Lu7f3VXQ7EJt757Obwn74AiF5MOHURIdqldoGnVrDw==
-
 react-native-dotenv@^3.4.8:
   version "3.4.9"
   resolved "https://registry.npmjs.org/react-native-dotenv/-/react-native-dotenv-3.4.9.tgz#621c5b0c1d0c5c7f569bfe5a1d804bec7885c010"

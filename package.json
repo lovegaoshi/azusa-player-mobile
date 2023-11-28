@@ -76,7 +76,6 @@
     "react-native-blob-jsi-helper": "^0.3.1",
     "react-native-blob-util": "^0.19.4",
     "react-native-code-push": "^8.1.0",
-    "react-native-countdown-circle-timer": "^3.2.1",
     "react-native-draggable-flatlist": "^4.0.1",
     "react-native-gesture-handler": "^2.14.0",
     "react-native-get-random-values": "^1.10.0",
