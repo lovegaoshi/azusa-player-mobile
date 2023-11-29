@@ -8,7 +8,7 @@ import {
   Text,
 } from 'react-native-paper';
 import { useTranslation } from 'react-i18next';
-import useTimer from './useTimer';
+import useTimer from './useTimerRN';
 import { useNoxSetting } from '@stores/useApp';
 
 interface Props {
