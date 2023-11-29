@@ -325,13 +325,15 @@ export const initPlayerObject =
         STORAGE_KEYS.FAVORITE_PLAYLIST_KEY,
         () => dummyPlaylist('Favorite', PLAYLIST_ENUMS.TYPE_FAVORI_PLAYLIST)
       ),
-      playerRepeat:
-        (await getItem(STORAGE_KEYS.PLAYMODE_KEY)) || NoxRepeatMode.SHUFFLE,
-      skin: (await getItem(STORAGE_KEYS.SKIN)) || AzusaTheme,
+      playerRepeat: await getItem(
+        STORAGE_KEYS.PLAYMODE_KEY,
+        NoxRepeatMode.SHUFFLE
+      ),
+      skin: await getItem(STORAGE_KEYS.SKIN, AzusaTheme),
       skins: (await getPlayerSkins()) || [],
-      cookies: (await getItem(STORAGE_KEYS.COOKIES)) || {},
+      cookies: await getItem(STORAGE_KEYS.COOKIES, {}),
       lyricMapping,
-      lastPlayDuration: (await getItem(STORAGE_KEYS.LAST_PLAY_DURATION)) || 0,
+      lastPlayDuration: await getItem(STORAGE_KEYS.LAST_PLAY_DURATION, 0),
       colorScheme: await getColorScheme(),
     } as NoxStorage.PlayerStorageObject;
 
