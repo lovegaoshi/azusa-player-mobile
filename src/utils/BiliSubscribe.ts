@@ -2,7 +2,7 @@ import { searchBiliURLs } from './BiliSearch';
 import { parseSongName } from '@stores/appStore';
 
 interface Props {
-  listObj: NoxMedia.Playlist;
+  playlist: NoxMedia.Playlist;
   subscribeUrls?: Array<string>;
   updatePlaylist: (
     playlist: NoxMedia.Playlist,
@@ -13,15 +13,15 @@ interface Props {
   overwriteOnRefresh?: () => boolean;
 }
 export const updateSubscribeFavList = async ({
-  listObj,
+  playlist,
   subscribeUrls,
   updatePlaylist,
   progressEmitter = () => undefined,
   overwriteOnRefresh = () =>
-    listObj.newSongOverwrite || listObj.title.includes('live'),
+    playlist.newSongOverwrite || playlist.title.includes('live'),
 }: Props) => {
   try {
-    const newPlaylist = { ...listObj, lastSubscribed: new Date().getTime() };
+    const newPlaylist = { ...playlist, lastSubscribed: new Date().getTime() };
     if (subscribeUrls === undefined) {
       subscribeUrls = newPlaylist.subscribeUrl;
     }

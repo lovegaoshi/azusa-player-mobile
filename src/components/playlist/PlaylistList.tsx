@@ -197,7 +197,7 @@ const PlaylistList = () => {
     setRefreshing(true);
     activateKeepAwakeAsync();
     await updateSubscribeFavList({
-      listObj: currentPlaylist,
+      playlist: currentPlaylist,
       progressEmitter,
       updatePlaylist,
     });
