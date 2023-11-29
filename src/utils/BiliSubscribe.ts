@@ -11,7 +11,7 @@ interface Props {
   ) => void;
   progressEmitter?: (val: number) => void;
   overwriteOnRefresh?: () => boolean;
-  callback?: () => void;
+  callback?: (newPlaylist: NoxMedia.Playlist) => void;
 }
 export const updateSubscribeFavList = async ({
   playlist,
@@ -22,54 +22,49 @@ export const updateSubscribeFavList = async ({
     playlist.newSongOverwrite || playlist.title.includes('live'),
   callback = () => undefined,
 }: Props) => {
-  try {
-    const newPlaylist = { ...playlist, lastSubscribed: new Date().getTime() };
-    if (subscribeUrls === undefined) {
-      subscribeUrls = newPlaylist.subscribeUrl;
-    }
-    if (subscribeUrls.length === 0 || subscribeUrls[0].length === 0) {
-      return null;
-    }
-    const favList = [
-      ...newPlaylist.songList.map(val => val.bvid),
-      ...newPlaylist.blacklistedUrl,
-    ];
-    for (let i = 0, n = subscribeUrls.length; i < n; i++) {
-      newPlaylist.songList = (
-        await searchBiliURLs({
-          input: subscribeUrls[i],
-          favList,
-          useBiliTag: newPlaylist.useBiliShazam,
-          progressEmitter,
-        })
-      ).concat(newPlaylist.songList);
-    }
-    const uniqueSongList = new Map<string, NoxMedia.Song>();
-    if (overwriteOnRefresh()) {
-      newPlaylist.songList.forEach(song => {
-        if (!uniqueSongList.has(song.id)) {
-          uniqueSongList.set(song.id, song);
-        }
-      });
-    } else {
-      newPlaylist.songList.forEach(song => {
-        uniqueSongList.set(song.id, song);
-      });
-    }
-    newPlaylist.songList = [...uniqueSongList.values()].map(val =>
-      parseSongName(val)
-    );
-    // This sounds like a performance disaster
-    // as currentPlaylist will be changed,
-    // but flashlist seems too performant to care.
-    // MOCK: GeT a BeTtEr PhOnE
-    // TODO: revert lastSubscribed to a dedicated playerSettings field
-    // like noxplayer did, instead of being a playlist field
-    updatePlaylist(newPlaylist, [], []);
-    callback();
-    return newPlaylist;
-  } catch (err) {
-    console.warn(err);
+  const newPlaylist = { ...playlist, lastSubscribed: new Date().getTime() };
+  if (subscribeUrls === undefined) {
+    subscribeUrls = newPlaylist.subscribeUrl;
+  }
+  if (subscribeUrls.length === 0 || subscribeUrls[0].length === 0) {
     return null;
   }
+  const favList = [
+    ...newPlaylist.songList.map(val => val.bvid),
+    ...newPlaylist.blacklistedUrl,
+  ];
+  for (let i = 0, n = subscribeUrls.length; i < n; i++) {
+    newPlaylist.songList = (
+      await searchBiliURLs({
+        input: subscribeUrls[i],
+        favList,
+        useBiliTag: newPlaylist.useBiliShazam,
+        progressEmitter,
+      })
+    ).concat(newPlaylist.songList);
+  }
+  const uniqueSongList = new Map<string, NoxMedia.Song>();
+  if (overwriteOnRefresh()) {
+    newPlaylist.songList.forEach(song => {
+      if (!uniqueSongList.has(song.id)) {
+        uniqueSongList.set(song.id, song);
+      }
+    });
+  } else {
+    newPlaylist.songList.forEach(song => {
+      uniqueSongList.set(song.id, song);
+    });
+  }
+  newPlaylist.songList = [...uniqueSongList.values()].map(val =>
+    parseSongName(val)
+  );
+  // This sounds like a performance disaster
+  // as currentPlaylist will be changed,
+  // but flashlist seems too performant to care.
+  // MOCK: GeT a BeTtEr PhOnE
+  // TODO: revert lastSubscribed to a dedicated playerSettings field
+  // like noxplayer did, instead of being a playlist field
+  updatePlaylist(newPlaylist, [], []);
+  callback(newPlaylist);
+  return newPlaylist;
 };

@@ -23,6 +23,7 @@ import { i0hdslbHTTPResolve } from '@utils/Utils';
 import usePlayback from '@hooks/usePlayback';
 import useTPControls from '@hooks/useTPControls';
 import { reParseSearch as reParseSearchRaw } from '@utils/re';
+import logger from '@utils/Logger';
 
 interface BackgroundProps {
   song: NoxMedia.Song;
@@ -196,11 +197,16 @@ const PlaylistList = () => {
     });
     setRefreshing(true);
     activateKeepAwakeAsync();
-    await updateSubscribeFavList({
-      playlist: currentPlaylist,
-      progressEmitter,
-      updatePlaylist,
-    });
+    try {
+      await updateSubscribeFavList({
+        playlist: currentPlaylist,
+        progressEmitter,
+        updatePlaylist,
+      });
+    } catch (e) {
+      logger.error('[refreshPlaylist] failed');
+      logger.error(e);
+    }
     Snackbar.dismiss();
     Snackbar.show({
       text: t('PlaylistOperations.updated', { playlist: currentPlaylist }),
