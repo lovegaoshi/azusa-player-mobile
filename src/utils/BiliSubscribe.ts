@@ -9,7 +9,7 @@ interface Props {
     addSongs: NoxMedia.Song[],
     removeSongs: NoxMedia.Song[]
   ) => void;
-  progressEmitter: (val: number) => void;
+  progressEmitter?: (val: number) => void;
   overwriteOnRefresh?: () => boolean;
 }
 export const updateSubscribeFavList = async ({
