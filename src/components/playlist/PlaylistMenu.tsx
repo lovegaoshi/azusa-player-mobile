@@ -4,7 +4,7 @@ import Snackbar from 'react-native-snackbar';
 import { useTranslation } from 'react-i18next';
 
 import { useNoxSetting } from '@stores/useApp';
-import playlistAnalytics from '@utils/Analytics';
+import useAnalytics from '@utils/Analytics';
 import PlaylistSettingsButton from './PlaylistSettingsButton';
 import { PLAYLIST_ENUMS } from '@enums/Playlist';
 import { CopiedPlaylistMenuItem } from '../buttons/CopiedPlaylistButton';
@@ -45,6 +45,7 @@ export default ({
   const { t } = useTranslation();
   const currentPlaylist = useNoxSetting(state => state.currentPlaylist);
   const updatePlaylist = useNoxSetting(state => state.updatePlaylist);
+  const { analyzePlaylist } = useAnalytics();
   const { removePlaylist } = usePlaylistOperation();
   const progressEmitter = useNoxSetting(
     state => state.searchBarProgressEmitter
@@ -64,33 +65,9 @@ export default ({
     Snackbar.show({ text: t('PlaylistOperations.bilisynced', { playlist }) });
   };
 
-  // TODO: useCallback?
   const playlistAnalysis = (playlist = currentPlaylist) => {
-    const analytics = playlistAnalytics(playlist);
-    OneWayAlert(
-      `歌单 ${playlist.title} 的统计信息`,
-      [
-        `歌单内总共有${analytics.songsUnique.size}首独特的歌`,
-        `歌单内最常出现的歌：${analytics.songTop10
-          .slice(0, 5)
-          .map(val => `${val[0]} (${String(val[1])})`)
-          .join(', ')}`,
-        `最近的新歌：${Array.from(analytics.songsUnique)
-          .slice(-5)
-          .reverse()
-          .join(', ')}`,
-        `bv号总共有${String(analytics.bvid.size)}个，平均每bv号有${(
-          analytics.totalCount / analytics.bvid.size
-        ).toFixed(1)}首歌`,
-        `shazam失败的歌数: ${String(analytics.invalidShazamCount)}/${String(
-          analytics.totalCount
-        )} (${(
-          (analytics.invalidShazamCount * 100) /
-          analytics.totalCount
-        ).toFixed(1)}%)`,
-      ].join('\n'),
-      toggleVisible
-    );
+    const analytics = analyzePlaylist(playlist, 5);
+    OneWayAlert(analytics.title, analytics.content.join('\n'), toggleVisible);
   };
 
   const confirmOnPlaylistClear = (playlist = currentPlaylist) => {
