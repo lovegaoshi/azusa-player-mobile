@@ -11,6 +11,7 @@ interface Props {
   ) => void;
   progressEmitter?: (val: number) => void;
   overwriteOnRefresh?: () => boolean;
+  callback?: () => void;
 }
 export const updateSubscribeFavList = async ({
   playlist,
@@ -19,6 +20,7 @@ export const updateSubscribeFavList = async ({
   progressEmitter = () => undefined,
   overwriteOnRefresh = () =>
     playlist.newSongOverwrite || playlist.title.includes('live'),
+  callback = () => undefined,
 }: Props) => {
   try {
     const newPlaylist = { ...playlist, lastSubscribed: new Date().getTime() };
@@ -64,7 +66,8 @@ export const updateSubscribeFavList = async ({
     // TODO: revert lastSubscribed to a dedicated playerSettings field
     // like noxplayer did, instead of being a playlist field
     updatePlaylist(newPlaylist, [], []);
-    return newPlaylist.songList;
+    callback();
+    return newPlaylist;
   } catch (err) {
     console.warn(err);
     return null;
