@@ -4,7 +4,7 @@ import Snackbar from 'react-native-snackbar';
 import { useTranslation } from 'react-i18next';
 
 import { useNoxSetting } from '@stores/useApp';
-import useAnalytics from '@utils/Analytics';
+import usePlaylist from '@hooks/usePlaylist';
 import PlaylistSettingsButton from './PlaylistSettingsButton';
 import { PLAYLIST_ENUMS } from '@enums/Playlist';
 import { CopiedPlaylistMenuItem } from '../buttons/CopiedPlaylistButton';
@@ -45,7 +45,7 @@ export default ({
   const { t } = useTranslation();
   const currentPlaylist = useNoxSetting(state => state.currentPlaylist);
   const updatePlaylist = useNoxSetting(state => state.updatePlaylist);
-  const { analyzePlaylist } = useAnalytics();
+  const { analyzePlaylist } = usePlaylist();
   const { removePlaylist } = usePlaylistOperation();
   const progressEmitter = useNoxSetting(
     state => state.searchBarProgressEmitter
