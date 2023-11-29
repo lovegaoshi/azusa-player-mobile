@@ -96,7 +96,9 @@ export default ({
     if (countdown()) {
       onTimerUp();
       timerRestart();
+      return true;
     }
+    return false;
   };
 
   return {
