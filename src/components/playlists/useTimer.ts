@@ -3,8 +3,8 @@
  */
 
 import { create } from 'zustand';
-import TrackPlayer from 'react-native-track-player';
-import BackgroundTimer from 'react-native-background-timer';
+
+import logger from '@utils/Logger';
 
 interface TimerStore {
   minutes: number;
@@ -56,7 +56,17 @@ const timerStore = create<TimerStore>((set, get) => ({
   },
 }));
 
-export default () => {
+interface Props {
+  onTimerPause?: () => void;
+  onTimerRestart?: () => void;
+  onTimerUp?: () => void;
+}
+
+export default ({
+  onTimerPause = () => logger.debug('[timer] paused'),
+  onTimerRestart = () => logger.debug('[timer] restarted'),
+  onTimerUp = () => logger.debug('[timer] up'),
+}: Props) => {
   const minutes = timerStore(state => state.minutes);
   const setMinutes = timerStore(state => state.setMinutes);
   const seconds = timerStore(state => state.seconds);
@@ -69,23 +79,18 @@ export default () => {
 
   const timerStart = () => {
     timerStartStore();
-    BackgroundTimer.runBackgroundTimer(runTimer, 1000);
+    // Add countdown functions here, either a setInterval or RN.backgroundTimer.
   };
 
   const timerPause = () => {
-    BackgroundTimer.stopBackgroundTimer();
+    onTimerPause();
     setStartTimer(false);
   };
 
   const timerRestart = () => {
-    BackgroundTimer.stopBackgroundTimer();
+    onTimerRestart();
     timerEnd();
-    setTimeout(() => {
-      BackgroundTimer.stopBackgroundTimer();
-    }, 500);
   };
-
-  const onTimerUp = () => TrackPlayer.pause();
 
   const runTimer = () => {
     if (countdown()) {
@@ -103,5 +108,7 @@ export default () => {
     timerRestart,
     timerStart,
     timerPause,
+    runTimer,
+    timerStartStore,
   };
 };
