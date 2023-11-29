@@ -8,15 +8,7 @@ import usePlaylist from '@hooks/usePlaylist';
 import PlaylistSettingsButton from './PlaylistSettingsButton';
 import { PLAYLIST_ENUMS } from '@enums/Playlist';
 import { CopiedPlaylistMenuItem } from '../buttons/CopiedPlaylistButton';
-import { biliShazamOnSonglist } from '@utils/mediafetch/bilishazam';
-import { getPlaylistUniqBVIDs } from '@objects/Playlist';
 import useAlert from '../dialogs/useAlert';
-import {
-  songFetch,
-  fetchiliBVIDs,
-  fetchVideoInfo,
-} from '@utils/mediafetch/bilivideo';
-import { syncFavlist } from '@utils/Bilibili/bilifavOperate';
 import usePlaylistOperation from '@hooks/usePlaylistOperation';
 
 enum ICONS {
@@ -44,29 +36,31 @@ export default ({
 }: Props) => {
   const { t } = useTranslation();
   const currentPlaylist = useNoxSetting(state => state.currentPlaylist);
-  const updatePlaylist = useNoxSetting(state => state.updatePlaylist);
-  const { analyzePlaylist } = usePlaylist();
+  const {
+    playlistAnalyze,
+    playlistCleanup,
+    playlistBiliShazam,
+    playlistReload,
+    playlistClear,
+    playlistSync2Bilibili,
+  } = usePlaylist();
   const { removePlaylist } = usePlaylistOperation();
-  const progressEmitter = useNoxSetting(
-    state => state.searchBarProgressEmitter
-  );
   const limitedPlaylistFeatures =
     currentPlaylist.type !== PLAYLIST_ENUMS.TYPE_TYPICA_PLAYLIST;
   const { OneWayAlert, TwoWayAlert } = useAlert();
 
-  const playlistSync2Bilibili = async (playlist = currentPlaylist) => {
+  const playlistSync2BilibiliRN = async (playlist = currentPlaylist) => {
     Snackbar.show({
       text: t('PlaylistOperations.bilisyncing', { playlist }),
       duration: Snackbar.LENGTH_INDEFINITE,
     });
-    await syncFavlist(playlist, progressEmitter);
-    progressEmitter(0);
+    await playlistSync2Bilibili(playlist);
     Snackbar.dismiss();
     Snackbar.show({ text: t('PlaylistOperations.bilisynced', { playlist }) });
   };
 
   const playlistAnalysis = (playlist = currentPlaylist) => {
-    const analytics = analyzePlaylist(playlist, 5);
+    const analytics = playlistAnalyze(playlist, 5);
     OneWayAlert(analytics.title, analytics.content.join('\n'), toggleVisible);
   };
 
@@ -75,14 +69,7 @@ export default ({
       t('PlaylistOperations.clearListTitle', { playlist }),
       t('PlaylistOperations.clearListMsg', { playlist }),
       () => {
-        updatePlaylist(
-          {
-            ...playlist,
-            songList: [],
-          },
-          [],
-          []
-        );
+        playlistClear(playlist);
         toggleVisible();
       }
     );
@@ -108,21 +95,7 @@ export default ({
           text: t('PlaylistOperations.reloading', { playlist }),
           duration: Snackbar.LENGTH_INDEFINITE,
         });
-        const newSongList = await songFetch({
-          videoinfos: await fetchiliBVIDs(
-            getPlaylistUniqBVIDs(playlist),
-            progressEmitter
-          ), // await fetchiliBVID([reExtracted[1]!])
-          useBiliTag: playlist.useBiliShazam || false,
-        });
-        updatePlaylist(
-          {
-            ...playlist,
-            songList: newSongList!,
-          },
-          [],
-          []
-        );
+        await playlistReload(playlist);
         Snackbar.dismiss();
         Snackbar.show({ text: t('PlaylistOperations.reloaded', { playlist }) });
         toggleVisible();
@@ -130,59 +103,24 @@ export default ({
     );
   };
 
-  const playlistCleanup = async (playlist = currentPlaylist) => {
-    const promises: Promise<void>[] = [];
-    const validBVIds: Array<string> = [];
+  const playlistCleanupRN = async (playlist = currentPlaylist) => {
     Snackbar.show({
       text: t('PlaylistOperations.cleaning', { playlist }),
       duration: Snackbar.LENGTH_INDEFINITE,
     });
-    progressEmitter(100);
-    getPlaylistUniqBVIDs(playlist).forEach(bvid =>
-      promises.push(
-        fetchVideoInfo(bvid).then(val => {
-          if (val) validBVIds.push(val.bvid);
-        })
-      )
-    );
-    await Promise.all(promises);
-    updatePlaylist(
-      {
-        ...playlist,
-        songList: playlist.songList.filter(song =>
-          validBVIds.includes(song.bvid)
-        ),
-      },
-      [],
-      []
-    );
-    progressEmitter(0);
+    await playlistCleanup(playlist);
     Snackbar.dismiss();
     Snackbar.show({ text: t('PlaylistOperations.cleaned', { playlist }) });
   };
 
-  const playlistBiliShazam = async (playlist = currentPlaylist) => {
-    progressEmitter(100);
+  const playlistBiliShazamRN = async (playlist = currentPlaylist) => {
     Snackbar.show({
       text: t('PlaylistOperations.bilishazaming', { playlist }),
       duration: Snackbar.LENGTH_INDEFINITE,
     });
-    const newSongList = await biliShazamOnSonglist(
-      playlist.songList,
-      false,
-      progressEmitter
-    );
-    updatePlaylist(
-      {
-        ...playlist,
-        songList: newSongList,
-      },
-      [],
-      []
-    );
+    await playlistBiliShazam(playlist);
     Snackbar.dismiss();
     Snackbar.show({ text: t('PlaylistOperations.bilishazamed', { playlist }) });
-    progressEmitter(0);
   };
 
   return (
@@ -194,12 +132,12 @@ export default ({
       />
       <Menu.Item
         leadingIcon={ICONS.BILISYNC}
-        onPress={() => playlistSync2Bilibili()}
+        onPress={() => playlistSync2BilibiliRN()}
         title={t('PlaylistOperations.bilisyncTitle')}
       />
       <Menu.Item
         leadingIcon={ICONS.BILISHAZAM}
-        onPress={() => playlistBiliShazam()}
+        onPress={() => playlistBiliShazamRN()}
         title={t('PlaylistOperations.bilishazamTitle')}
       />
       <Menu.Item
@@ -209,7 +147,7 @@ export default ({
       />
       <Menu.Item
         leadingIcon={ICONS.REMOVE_BROKEN}
-        onPress={() => playlistCleanup()}
+        onPress={() => playlistCleanupRN()}
         title={t('PlaylistOperations.removeBrokenTitle')}
         disabled={limitedPlaylistFeatures}
       />

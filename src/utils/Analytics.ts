@@ -55,7 +55,7 @@ const playlistAnalysis = (favList: { songList: Array<NoxMedia.Song> }) => {
 
 // TODO: once i18n is added we have to use as a hook. right now looks dumb.
 const useAnalytics = () => {
-  const analyzePlaylist = (playlist: NoxMedia.Playlist, topX = 5) => {
+  const playlistAnalyze = (playlist: NoxMedia.Playlist, topX = 5) => {
     const analytics = playlistAnalysis(playlist);
     return {
       title: `歌单 ${playlist.title} 的统计信息`,
@@ -81,7 +81,7 @@ const useAnalytics = () => {
       ],
     };
   };
-  return { analyzePlaylist };
+  return { playlistAnalyze };
 };
 
 export default useAnalytics;
