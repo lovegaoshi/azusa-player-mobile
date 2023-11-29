@@ -1,14 +1,15 @@
-import * as React from 'react';
 import Snackbar from 'react-native-snackbar';
 import { useTranslation } from 'react-i18next';
 
 import { useNoxSetting } from '@stores/useApp';
 import usePlaylist from './usePlaylist';
-import { PLAYLIST_ENUMS } from '@enums/Playlist';
 import useAlert from '@components/dialogs/useAlert';
 import usePlaylistOperation from './usePlaylistOperation';
 
-export default () => {
+interface Props {
+  callback?: () => void;
+}
+export default ({ callback = () => {} }: Props) => {
   const { t } = useTranslation();
   const currentPlaylist = useNoxSetting(state => state.currentPlaylist);
   const {
@@ -20,8 +21,6 @@ export default () => {
     playlistSync2Bilibili,
   } = usePlaylist();
   const { removePlaylist } = usePlaylistOperation();
-  const limitedPlaylistFeatures =
-    currentPlaylist.type !== PLAYLIST_ENUMS.TYPE_TYPICA_PLAYLIST;
   const { OneWayAlert, TwoWayAlert } = useAlert();
 
   const playlistSync2BilibiliRN = async (playlist = currentPlaylist) => {
@@ -36,7 +35,7 @@ export default () => {
 
   const playlistAnalysis = (playlist = currentPlaylist) => {
     const analytics = playlistAnalyze(playlist, 5);
-    OneWayAlert(analytics.title, analytics.content.join('\n'), toggleVisible);
+    OneWayAlert(analytics.title, analytics.content.join('\n'), callback);
   };
 
   const confirmOnPlaylistClear = (playlist = currentPlaylist) => {
@@ -45,7 +44,7 @@ export default () => {
       t('PlaylistOperations.clearListMsg', { playlist }),
       () => {
         playlistClear(playlist);
-        toggleVisible();
+        callback();
       }
     );
   };
@@ -56,7 +55,7 @@ export default () => {
       t('PlaylistOperations.deleteListMsg', { playlist }),
       () => {
         removePlaylist(playlist.id);
-        toggleVisible();
+        callback();
       }
     );
   };
@@ -73,7 +72,7 @@ export default () => {
         await playlistReload(playlist);
         Snackbar.dismiss();
         Snackbar.show({ text: t('PlaylistOperations.reloaded', { playlist }) });
-        toggleVisible();
+        callback();
       }
     );
   };
@@ -97,5 +96,13 @@ export default () => {
     Snackbar.dismiss();
     Snackbar.show({ text: t('PlaylistOperations.bilishazamed', { playlist }) });
   };
-  return {};
+  return {
+    playlistSync2BilibiliRN,
+    playlistAnalysis,
+    confirmOnPlaylistClear,
+    confirmOnPlaylistDelete,
+    confirmOnPlaylistReload,
+    playlistCleanupRN,
+    playlistBiliShazamRN,
+  };
 };
