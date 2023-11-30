@@ -12,11 +12,11 @@ import ShareMenu, { ShareCallback } from 'react-native-share-menu';
 import { useNavigation } from '@react-navigation/native';
 
 import { ViewEnum } from '@enums/View';
-import { searchBiliURLs } from '@utils/BiliSearch';
 import { useNoxSetting } from '@stores/useApp';
 import usePlayback from '@hooks/usePlayback';
+import useBiliSearch from '@hooks/useBiliSearch';
 import SearchMenu from './SearchMenu';
-import { getDefaultSearch, getMusicFreePlugin } from '@utils/ChromeStorage';
+import { getMusicFreePlugin } from '@utils/ChromeStorage';
 import logger from '@utils/Logger';
 
 interface SharedItem {
@@ -32,15 +32,7 @@ export default ({
   onSearched = (songs: Array<NoxMedia.Song>) => console.log(songs),
 }: props) => {
   const { t } = useTranslation();
-  const [searchVal, setSearchVal] = useState('');
   const searchProgress = useNoxSetting(state => state.searchBarProgress);
-  const progressEmitter = useNoxSetting(
-    state => state.searchBarProgressEmitter
-  );
-  const searchPlaylist = useNoxSetting(state => state.searchPlaylist);
-  const setSearchPlaylist = useNoxSetting(state => state.setSearchPlaylist);
-  const setCurrentPlaylist = useNoxSetting(state => state.setCurrentPlaylist);
-  const playerSetting = useNoxSetting(state => state.playerSetting);
   const playerStyle = useNoxSetting(state => state.playerStyle);
   const navigationGlobal = useNavigation();
   const externalSearchText = useNoxSetting(state => state.externalSearchText);
@@ -57,6 +49,10 @@ export default ({
     y: 0,
   });
   const [showMusicFree, setShowMusicFree] = useState(false);
+  const { searchVal, setSearchVal, handleSearch } = useBiliSearch({
+    onSearched,
+    searchListTitle: t('PlaylistOperations.searchListName'),
+  });
 
   const handleMenuPress = async (event: GestureResponderEvent) => {
     setShowMusicFree((await getMusicFreePlugin()).length > 0);
@@ -71,9 +67,9 @@ export default ({
     setDialogOpen(val => !val);
   };
 
-  const handleExternalSearch = async (data: string, play = false) => {
+  const handleExternalSearch = (data: string) => {
     navigationGlobal.navigate(ViewEnum.PLAYER_PLAYLIST as never);
-    await handleSearch(data, play);
+    return handleSearch(data);
   };
 
   useEffect(() => {
@@ -81,7 +77,12 @@ export default ({
       logger.debug(
         `[search] performing external serach: ${externalSearchText}`
       );
-      handleExternalSearch(externalSearchText, true);
+      handleExternalSearch(externalSearchText).then(newSearchPlaylist =>
+        playFromPlaylist({
+          playlist: newSearchPlaylist,
+          song: newSearchPlaylist.songList[0],
+        })
+      );
       setExternalSearchText('');
     }
   }, [externalSearchText]);
@@ -114,33 +115,6 @@ export default ({
       listener.remove();
     };
   }, []);
-
-  const handleSearch = async (val = searchVal, play = false) => {
-    progressEmitter(100);
-    const searchedResult = (await searchBiliURLs({
-      input: val,
-      progressEmitter,
-      favList: [],
-      useBiliTag: false,
-      fastSearch: playerSetting.fastBiliSearch,
-      defaultSearch: await getDefaultSearch(),
-    })) as Array<NoxMedia.Song>;
-    onSearched(searchedResult);
-    const newSearchPlaylist = {
-      ...searchPlaylist,
-      title: t('PlaylistOperations.searchListName'),
-      songList: searchedResult,
-      subscribeUrl: val.includes('http') ? [val] : [],
-    };
-    setSearchPlaylist(newSearchPlaylist);
-    setCurrentPlaylist(newSearchPlaylist);
-    if (play) {
-      playFromPlaylist({
-        playlist: newSearchPlaylist,
-        song: newSearchPlaylist.songList[0],
-      });
-    }
-  };
 
   return (
     <View style={styles.container}>
