@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { View, BackHandler, StyleSheet } from 'react-native';
 import { FlashList } from '@shopify/flash-list';
 import { IconButton } from 'react-native-paper';
@@ -28,66 +28,34 @@ const PlaylistList = () => {
   const playerSetting = useNoxSetting(state => state.playerSetting);
   const playerStyle = useNoxSetting(state => state.playerStyle);
   const currentPlaylist = useNoxSetting(state => state.currentPlaylist);
-  const { refreshPlaylist, refreshing } = usePlaylist(currentPlaylist);
+  const {
+    refreshPlaylist,
+    refreshing,
+    rows,
+    setRows,
+    selected,
+    resetSelected,
+    toggleSelected,
+    toggleSelectedAll,
+    shouldReRender,
+    setShouldReRender,
+  } = usePlaylist(currentPlaylist);
   const playlistShouldReRender = useNoxSetting(
     state => state.playlistShouldReRender
   );
   const setPlaylistSearchAutoFocus = useNoxSetting(
     state => state.setPlaylistSearchAutoFocus
   );
-
-  const [selected, setSelected] = useState<boolean[]>([]);
   const [checking, setChecking] = useState(false);
   const [searching, setSearching] = useState(false);
-  const [shouldReRender, setShouldReRender] = useState(false);
-  const [currentRows, setCurrentRows] = useState<NoxMedia.Song[]>([]);
   const [searchText, setSearchText] = useState('');
   const [debouncedSearchText] = useDebounce(searchText, 500);
   const playlistRef = useRef<FlashList<NoxMedia.Song>>(null);
   const netInfo = useNetInfo();
   // TODO: slow?
   const [cachedSongs, setCachedSongs] = useState<string[]>([]);
-  const togglePlaylistInfoUpdate = useNoxSetting(
-    state => state.togglePlaylistInfoUpdate
-  );
   const { playFromPlaylist } = usePlayback();
   const { preformFade } = useTPControls();
-
-  const resetSelected = (val = false) =>
-    setSelected(Array(currentPlaylist.songList.length).fill(val));
-
-  const toggleSelected = useCallback((index: number) => {
-    togglePlaylistInfoUpdate();
-    setSelected((val: boolean[]) => {
-      val[index] = !val[index];
-      return val;
-    });
-  }, []);
-
-  const toggleSelectedAll = () => {
-    const mapCheckedIndices = (selectedIndices: number[], checked = true) => {
-      setSelected(
-        Array(currentPlaylist.songList.length)
-          .fill(false)
-          .map((val, index) =>
-            selectedIndices.includes(index) ? checked : val
-          )
-      );
-    };
-
-    if (selected.length === 0) return;
-    if (currentRows === currentPlaylist.songList) {
-      selected[0] ? resetSelected() : resetSelected(true);
-    } else {
-      // TODO: there has to be a more elegant way
-      // but alas it works!
-      const selectedIndices = currentRows.map(val =>
-        currentPlaylist.songList.indexOf(val)
-      );
-      mapCheckedIndices(selectedIndices, !selected[selectedIndices[0]]);
-    }
-    setShouldReRender(val => !val);
-  };
 
   const reParseSearch = (searchStr: string, rows: Array<NoxMedia.Song>) => {
     const extraReExtract = [
@@ -106,10 +74,10 @@ const PlaylistList = () => {
 
   const handleSearch = (searchedVal = '') => {
     if (searchedVal === '') {
-      setCurrentRows(currentPlaylist.songList);
+      setRows(currentPlaylist.songList);
       return;
     }
-    setCurrentRows(reParseSearch(searchedVal, currentPlaylist.songList));
+    setRows(reParseSearch(searchedVal, currentPlaylist.songList));
   };
 
   /**
@@ -120,7 +88,7 @@ const PlaylistList = () => {
    * @returns
    */
   const getSongIndex = (item: NoxMedia.Song, index: number) => {
-    return currentRows === currentPlaylist.songList
+    return rows === currentPlaylist.songList
       ? index
       : currentPlaylist.songList.findIndex(row => row.id === item.id);
   };
@@ -141,7 +109,7 @@ const PlaylistList = () => {
     // REVIEW: playfromplaylist also checks currentPlayingId. how is that possible?
     setCurrentPlayingId(song.id);
     const queuedSongList = playerSetting.keepSearchedSongListWhenPlaying
-      ? currentRows
+      ? rows
       : currentPlaylist.songList;
     const callback = () =>
       playFromPlaylist({
@@ -182,7 +150,7 @@ const PlaylistList = () => {
     resetSelected();
     setChecking(false);
     setSearching(false);
-    setCurrentRows(currentPlaylist.songList);
+    setRows(currentPlaylist.songList);
     setCachedSongs(Array.from(noxCache.noxMediaCache.cache.keys()));
   }, [currentPlaylist, playlistShouldReRender]);
 
@@ -288,7 +256,7 @@ const PlaylistList = () => {
       <View style={stylesLocal.playlistContainer}>
         <FlashList
           ref={playlistRef}
-          data={currentRows}
+          data={rows}
           renderItem={({ item, index }) => (
             <SongBackground
               song={item}

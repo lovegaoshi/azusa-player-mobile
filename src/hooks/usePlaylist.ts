@@ -6,8 +6,8 @@ import { useNoxSetting } from '../stores/useApp';
 
 export interface UseFav {
   rows: NoxMedia.Song[];
-  performSearch: (searchedVal: string) => void;
   setRows: (v: NoxMedia.Song[]) => void;
+  performSearch: (searchedVal: string) => void;
   handleSearch: (searchedVal: string) => void;
   rssUpdate: (subscribeUrls?: string[]) => Promise<NoxMedia.Playlist>;
   saveCurrentList: () => void;
