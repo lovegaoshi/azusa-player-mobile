@@ -3,14 +3,13 @@ import React, { useState, useRef } from 'react';
 import { reParseSearch } from '../utils/re';
 import { updateSubscribeFavList } from '../utils/BiliSubscribe';
 import { useNoxSetting } from '../stores/useApp';
-import logger from '@utils/Logger';
 
 export interface UseFav {
   rows: NoxMedia.Song[];
   setRows: (v: NoxMedia.Song[]) => void;
   performSearch: (searchedVal: string) => void;
   handleSearch: (searchedVal: string) => void;
-  rssUpdate: (subscribeUrls?: string[]) => Promise<NoxMedia.Playlist | void>;
+  rssUpdate: (subscribeUrls?: string[]) => Promise<NoxMedia.Playlist>;
   saveCurrentList: () => void;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   searchBarRef: React.MutableRefObject<any>;
@@ -50,22 +49,13 @@ const usePlaylist = (playlist: NoxMedia.Playlist): UseFav => {
     setRows(reParseSearch({ searchStr: searchedVal, rows: playlist.songList }));
   };
 
-  const rssUpdate = async (subscribeUrls?: string[]) => {
-    try {
-      setRefreshing(true);
-      return updateSubscribeFavList({
-        playlist,
-        subscribeUrls,
-        progressEmitter,
-        updatePlaylist,
-      });
-    } catch (e) {
-      logger.error('[RSS update] failed!');
-      logger.error(e);
-    } finally {
-      setRefreshing(false);
-    }
-  };
+  const rssUpdate = (subscribeUrls?: string[]) =>
+    updateSubscribeFavList({
+      playlist,
+      subscribeUrls,
+      progressEmitter,
+      updatePlaylist,
+    });
 
   /**
    * forcefully search a string in the playlist.
