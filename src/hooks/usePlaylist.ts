@@ -15,6 +15,11 @@ export interface UseFav {
   searchBarRef: React.MutableRefObject<any>;
   refreshing: boolean;
   setRefreshing: (v: boolean) => void;
+  getSongIndex: (item: NoxMedia.Song, index: number) => number;
+  playSong: (
+    song: NoxMedia.Song,
+    callback: (p: NoxMedia.Playlist, s: NoxMedia.Song) => void
+  ) => void;
 }
 
 /**
@@ -25,6 +30,10 @@ export interface UseFav {
 const usePlaylist = (playlist: NoxMedia.Playlist): UseFav => {
   const [rows, setRows] = useState<NoxMedia.Song[]>([]);
   const [refreshing, setRefreshing] = useState(false);
+  const playerSetting = useNoxSetting(state => state.playerSetting);
+  const currentPlayingList = useNoxSetting(state => state.currentPlayingList);
+  const currentPlayingId = useNoxSetting(state => state.currentPlayingId);
+  const setCurrentPlayingId = useNoxSetting(state => state.setCurrentPlayingId);
   const updatePlaylist = useNoxSetting(state => state.updatePlaylist);
   const progressEmitter = useNoxSetting(
     state => state.searchBarProgressEmitter
@@ -65,6 +74,35 @@ const usePlaylist = (playlist: NoxMedia.Playlist): UseFav => {
     handleSearch(searchedVal);
   };
 
+  /**
+   * get a given song item/index combo used in flashlist's accurate index,
+   * as currentRows may be at a filtered view and the index will not be reliable.
+   * @param item
+   * @param index
+   * @returns
+   */
+  const getSongIndex = (item: NoxMedia.Song, index: number) => {
+    return rows === playlist.songList
+      ? index
+      : playlist.songList.findIndex(row => row.id === item.id);
+  };
+
+  const playSong = (
+    song: NoxMedia.Song,
+    callback: (p: NoxMedia.Playlist, s: NoxMedia.Song) => void
+  ) => {
+    if (song.id === currentPlayingId && playlist.id === currentPlayingList.id)
+      return;
+    // HACK: more responsive, so the current song banner will show
+    // immediately instead of watiting for fade to complete
+    // REVIEW: playfromplaylist also checks currentPlayingId. how is that possible?
+    setCurrentPlayingId(song.id);
+    const queuedSongList = playerSetting.keepSearchedSongListWhenPlaying
+      ? rows
+      : playlist.songList;
+    return callback({ ...playlist, songList: queuedSongList }, song);
+  };
+
   return {
     rows,
     setRows,
@@ -75,6 +113,8 @@ const usePlaylist = (playlist: NoxMedia.Playlist): UseFav => {
     performSearch,
     refreshing,
     setRefreshing,
+    getSongIndex,
+    playSong,
   };
 };
 
