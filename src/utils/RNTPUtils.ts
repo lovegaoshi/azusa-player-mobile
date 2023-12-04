@@ -197,3 +197,9 @@ export const playSongUninterrupted = async (song: NoxMedia.Song) => {
   await TrackPlayer.skip(currentQueue.length);
   await TrackPlayer.play();
 };
+
+export const playSongInterrupted = async (song: NoxMedia.Song) => {
+  await TrackPlayer.reset();
+  await TrackPlayer.add(await songlistToTracklist([song]));
+  TrackPlayer.play();
+};

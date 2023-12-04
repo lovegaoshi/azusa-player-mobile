@@ -7,8 +7,9 @@ import { useNoxSetting } from '@stores/useApp';
 import { randomChoice } from '../utils/Utils';
 import logger from '../utils/Logger';
 import {
-  songlistToTracklist,
   clearPlaylistUninterrupted,
+  playSongUninterrupted,
+  playSongInterrupted,
 } from '@utils/RNTPUtils';
 import { NoxRepeatMode } from '@enums/RepeatMode';
 import noxPlayingList from '@stores/playingList';
@@ -71,18 +72,12 @@ const usePlayback = () => {
     }
     // HACK: track?.song? is somehow updated already here
     // TODO: fix this
+    setCurrentPlayingId(song.id);
     if (interruption) {
-      setCurrentPlayingId(song.id);
-      await TrackPlayer.reset();
-      await TrackPlayer.add(await songlistToTracklist([song]));
-      TrackPlayer.play();
-      return;
+      return await playSongInterrupted(song);
     }
     if (currentPlayingId !== song.id) {
-      const currentQueue = await TrackPlayer.getQueue();
-      await TrackPlayer.add(await songlistToTracklist([song]));
-      await TrackPlayer.skip(currentQueue.length);
-      await TrackPlayer.play();
+      await playSongUninterrupted(song);
     }
     clearPlaylistUninterrupted();
   };
