@@ -3,10 +3,14 @@ import TrackPlayer, { RepeatMode } from 'react-native-track-player';
 import { useTranslation } from 'react-i18next';
 import { useNetInfo } from '@react-native-community/netinfo';
 
-import { useNoxSetting } from './useSetting';
+import { useNoxSetting } from '@stores/useApp';
 import { randomChoice } from '../utils/Utils';
 import logger from '../utils/Logger';
-import { songlistToTracklist } from '@utils/RNTPUtils';
+import {
+  clearPlaylistUninterrupted,
+  playSongUninterrupted,
+  playSongInterrupted,
+} from '@utils/RNTPUtils';
 import { NoxRepeatMode } from '@enums/RepeatMode';
 import noxPlayingList from '@stores/playingList';
 import noxCache from '@utils/Cache';
@@ -45,15 +49,6 @@ const usePlayback = () => {
   const isDataSaving = () =>
     playerSetting.dataSaver && netInfo.type === 'cellular';
 
-  const clearPlaylistUninterrupted = async () => {
-    const currentQueue = await TrackPlayer.getQueue();
-    const currentTrackIndex = await TrackPlayer.getActiveTrackIndex();
-    if (currentTrackIndex === undefined) return;
-    const removeTrackIndices = [...Array(currentQueue.length).keys()];
-    removeTrackIndices.splice(currentTrackIndex, 1);
-    await TrackPlayer.remove(removeTrackIndices);
-  };
-
   const playFromPlaylist = async ({
     playlist,
     song,
@@ -77,14 +72,14 @@ const usePlayback = () => {
     }
     // HACK: track?.song? is somehow updated already here
     // TODO: fix this
-    if (!interruption && currentPlayingId === song.id) {
-      clearPlaylistUninterrupted();
-    } else {
-      setCurrentPlayingId(song.id);
-      await TrackPlayer.reset();
-      await TrackPlayer.add(await songlistToTracklist([song]));
-      TrackPlayer.play();
+    setCurrentPlayingId(song.id);
+    if (interruption) {
+      return await playSongInterrupted(song);
     }
+    if (currentPlayingId !== song.id) {
+      await playSongUninterrupted(song);
+    }
+    clearPlaylistUninterrupted();
   };
 
   const playFromMediaId = (mediaId: string) => {

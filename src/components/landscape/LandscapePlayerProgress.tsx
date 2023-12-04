@@ -2,7 +2,7 @@ import { View } from 'react-native';
 import { useActiveTrack } from 'react-native-track-player';
 import { Progress } from '@components/player/Progress';
 import PlayerControls from './PlayerControlsSquared';
-import { useNoxSetting } from '@hooks/useSetting';
+import { useNoxSetting } from '@stores/useApp';
 
 interface Props {
   panelWidth: number;

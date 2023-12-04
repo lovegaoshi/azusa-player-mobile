@@ -9,7 +9,7 @@ import {
 import type { Track } from 'react-native-track-player';
 import { Image } from 'expo-image';
 
-import { useNoxSetting } from '@hooks/useSetting';
+import { useNoxSetting } from '@stores/useApp';
 import { LyricView } from '../Lyric';
 
 interface Props {

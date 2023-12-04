@@ -5,7 +5,7 @@ import { useColorScheme, Appearance } from 'react-native';
 import { getPlayerSkin, savePlayerSkin } from '../utils/ChromeStorage';
 import { createStyle } from '../components/style';
 import { resolveBackgroundImage } from '../components/background/MainBackground';
-import { useNoxSetting } from './useSetting';
+import { useNoxSetting } from '@stores/useApp';
 
 export const savePlayerStyle = async (
   val: NoxTheme.Style | NoxTheme.AdaptiveStyle,

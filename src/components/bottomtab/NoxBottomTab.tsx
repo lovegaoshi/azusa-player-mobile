@@ -8,7 +8,7 @@ import {
 } from '@react-navigation/drawer';
 
 import { ViewEnum } from '@enums/View';
-import { useNoxSetting } from '@hooks/useSetting';
+import { useNoxSetting } from '@stores/useApp';
 
 interface IconProps {
   icon: string;

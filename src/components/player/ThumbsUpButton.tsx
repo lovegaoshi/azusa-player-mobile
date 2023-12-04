@@ -9,7 +9,7 @@ import {
   sendBVLike,
   sendBVTriple,
 } from '@utils/Bilibili/BiliOperate';
-import { useNoxSetting } from '@hooks/useSetting';
+import { useNoxSetting } from '@stores/useApp';
 import { logger } from '@utils/Logger';
 
 enum THUMBUPSTATUS {

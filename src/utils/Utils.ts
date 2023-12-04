@@ -123,3 +123,21 @@ export const r128gain2Volume = (gain: number) => {
   }
   return Math.pow(10, gain / 20);
 };
+
+export const filterUndefined = <T, K>(
+  myArray: T[],
+  myFunc: (val: T) => K | undefined
+) =>
+  myArray.flatMap(v => {
+    const val = myFunc(v);
+    return val ? [val] : [];
+  });
+
+export const reorder = <T>(list: T[], startIndex: number, endIndex: number) => {
+  const result = Array.from(list);
+  const [removed] = result.splice(startIndex, 1);
+  if (removed === undefined) return result;
+  result.splice(endIndex, 0, removed);
+
+  return result;
+};

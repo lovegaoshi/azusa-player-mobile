@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable prefer-const */
 import { create } from 'zustand';
-import { NativeModules, Platform } from 'react-native';
 
 import {
   dummyPlaylist,
@@ -17,34 +16,19 @@ import {
   savelastPlaylistId,
   savePlayerSkins,
   saveLyricMapping,
-} from '../utils/ChromeStorage';
+} from '@utils/ChromeStorage';
 import { DEFAULT_SETTING, STORAGE_KEYS } from '@enums/Storage';
-import { createStyle } from '../components/style';
-import { setPlayingList } from '../stores/playingList';
+import { setPlayerSetting as setPlayerSettingVanilla } from './playerSettingStore';
+import { savePlayerStyle } from '@hooks/useTheme';
+import { createStyle } from '@components/style';
+import { getABRepeatRaw } from './appStore';
+import { setPlayingList } from '@stores/playingList';
 import type { NoxStorage } from '../types/storage';
-import { setPlayerSetting as setPlayerSettingVanilla } from '@stores/playerSettingStore';
-import {
-  initialize as appStoreInitialize,
-  getABRepeatRaw,
-} from '@stores/appStore';
-import { initializeR128Gain } from '@utils/ffmpeg/r128Store';
-import { savePlayerStyle } from './useTheme';
-
-const { NoxAndroidAutoModule } = NativeModules;
-
-interface initializedResults {
-  currentPlayingList: NoxMedia.Playlist;
-  currentPlayingID: string;
-  playlists: { [key: string]: NoxMedia.Playlist };
-  storedPlayerSetting: NoxStorage.PlayerSettingDict;
-  cookies: { [key: string]: string };
-  language?: string;
-  lastPlayDuration: number;
-  playbackMode: string;
-}
+import DummyLyricDetail from '../objects/LyricDetail';
 
 interface NoxSetting {
   gestureMode: boolean;
+  setGestureMode: (val: boolean) => void;
   updateTrack: () => void;
   setUpdateTrack: (val: () => void) => void;
   appRefresh: boolean;
@@ -126,13 +110,13 @@ interface NoxSetting {
    */
   updatePlaylist: (
     val: NoxMedia.Playlist,
-    addSongs: Array<NoxMedia.Song>,
-    removeSongs: Array<NoxMedia.Song>
+    addSongs?: Array<NoxMedia.Song>,
+    removeSongs?: Array<NoxMedia.Song>
   ) => NoxMedia.Playlist;
 
   initPlayer: (
     val: NoxStorage.PlayerStorageObject
-  ) => Promise<initializedResults>;
+  ) => Promise<NoxStorage.initializedResults>;
 }
 
 /**
@@ -140,7 +124,9 @@ interface NoxSetting {
  * as well as saving and loading states to/from asyncStorage.
  */
 export const useNoxSetting = create<NoxSetting>((set, get) => ({
-  gestureMode: false,
+  gestureMode: true,
+  setGestureMode: (val: boolean) => set({ gestureMode: val }),
+
   updateTrack: () => undefined,
   setUpdateTrack: updateTrack => set({ updateTrack }),
 
@@ -249,11 +235,10 @@ export const useNoxSetting = create<NoxSetting>((set, get) => ({
     if (currentPlaylist.id === playlistId) {
       set({ currentPlaylist: playlists[STORAGE_KEYS.SEARCH_PLAYLIST_KEY] });
     }
-    delPlaylist(playlists[playlistId], playlistIds).then(() => {
-      delete playlists[playlistId];
-      playlistIds = playlistIds.filter(v => v !== playlistId);
-      set({ playlists, playlistIds });
-    });
+    delPlaylist(playlists[playlistId], playlistIds);
+    delete playlists[playlistId];
+    playlistIds = playlistIds.filter(v => v !== playlistId);
+    set({ playlists, playlistIds });
   },
 
   updatePlaylist: (
@@ -275,9 +260,16 @@ export const useNoxSetting = create<NoxSetting>((set, get) => ({
   },
 
   lyricMapping: new Map<string, NoxMedia.LyricDetail>(),
-  setLyricMapping: (val: NoxMedia.LyricDetail) => {
-    let lyricMapping = get().lyricMapping;
-    lyricMapping.set(val.songId, val);
+  setLyricMapping: (val: Partial<NoxMedia.LyricDetail>) => {
+    if (!val.songId) {
+      return;
+    }
+    const lyricMapping = get().lyricMapping;
+    lyricMapping.set(val.songId, {
+      ...DummyLyricDetail,
+      ...lyricMapping.get(val.songId),
+      ...val,
+    });
     set({ lyricMapping });
     saveLyricMapping(lyricMapping);
   },
@@ -288,20 +280,8 @@ export const useNoxSetting = create<NoxSetting>((set, get) => ({
   },
 
   initPlayer: async (val: NoxStorage.PlayerStorageObject) => {
-    switch (Platform.OS) {
-      case 'android':
-        NoxAndroidAutoModule.isGestureNavigationMode().then(
-          (gestureMode: boolean) => set({ gestureMode })
-        );
-        break;
-      default:
-        set({ gestureMode: true });
-        break;
-    }
     const playingList =
       val.playlists[val.lastPlaylistId[0]] || dummyPlaylistList;
-    await appStoreInitialize();
-    await initializeR128Gain();
     set({ currentPlayingId: val.lastPlaylistId[1] });
     set({ currentABRepeat: getABRepeatRaw(val.lastPlaylistId[1]) });
     set({ currentPlayingList: playingList });

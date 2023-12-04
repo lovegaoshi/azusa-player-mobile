@@ -42,14 +42,17 @@ export const saveItem = async (key: string, value: any) => {
   }
 };
 
-export const getItem = async (key: string): Promise<null | any> => {
+export const getItem = async (
+  key: string,
+  defaultVal: unknown = null
+): Promise<null | any> => {
   try {
     const retrievedStr = await AsyncStorage.getItem(key);
-    return retrievedStr === null ? null : JSON.parse(retrievedStr);
+    return retrievedStr === null ? defaultVal : JSON.parse(retrievedStr);
   } catch (e) {
     console.error(e);
   }
-  return null;
+  return defaultVal;
 };
 
 export const removeItem = async (key: string) => {
@@ -60,13 +63,11 @@ export const removeItem = async (key: string) => {
   }
 };
 
-export const setMusicFreePlugin = async (val: MUSICFREE[]) => {
-  return await saveItem(STORAGE_KEYS.MUSICFREE_PLUGIN, val);
-};
+export const setMusicFreePlugin = (val: MUSICFREE[]) =>
+  saveItem(STORAGE_KEYS.MUSICFREE_PLUGIN, val);
 
-export const getMusicFreePlugin = async (): Promise<MUSICFREE[]> => {
-  return (await getItem(STORAGE_KEYS.MUSICFREE_PLUGIN)) || [];
-};
+export const getMusicFreePlugin = (): Promise<MUSICFREE[]> =>
+  getItem(STORAGE_KEYS.MUSICFREE_PLUGIN, []);
 
 export const getFadeInterval = async () =>
   Number(await getItem(STORAGE_KEYS.FADE_INTERVAL)) || 0;
@@ -93,51 +94,35 @@ const getMapping = async (
   }
 };
 
-export const getRegExtractMapping = async () => {
-  return (
-    ((await getItem(
-      STORAGE_KEYS.REGEXTRACT_MAPPING
-    )) as NoxRegExt.JSONExtractor[]) || []
-  );
-};
+export const getRegExtractMapping = (): Promise<NoxRegExt.JSONExtractor[]> =>
+  getItem(STORAGE_KEYS.REGEXTRACT_MAPPING, []);
 
-export const saveRegextractMapping = async (val: NoxRegExt.JSONExtractor[]) => {
-  return await saveItem(STORAGE_KEYS.REGEXTRACT_MAPPING, val);
-};
+export const saveRegextractMapping = (val: NoxRegExt.JSONExtractor[]) =>
+  saveItem(STORAGE_KEYS.REGEXTRACT_MAPPING, val);
 
-export const getR128GainMapping = async () => {
-  return (await getMapping(
-    STORAGE_KEYS.R128GAIN_MAPPING
-  )) as NoxStorage.R128Dict;
-};
+export const getR128GainMapping = (): Promise<NoxStorage.R128Dict> =>
+  getMapping(STORAGE_KEYS.R128GAIN_MAPPING);
 
 export const saveR128GainMapping = (val: NoxStorage.R128Dict) =>
   saveChucked(STORAGE_KEYS.R128GAIN_MAPPING, Object.entries(val));
 
-export const getABMapping = async () => {
-  return (await getMapping(STORAGE_KEYS.ABREPEAT_MAPPING)) as NoxStorage.ABDict;
-};
+export const getABMapping = (): Promise<NoxStorage.ABDict> =>
+  getMapping(STORAGE_KEYS.ABREPEAT_MAPPING);
 
 export const saveABMapping = async (val: NoxStorage.ABDict) =>
   saveChucked(STORAGE_KEYS.ABREPEAT_MAPPING, Object.entries(val));
 
-export const getDefaultSearch = async (): Promise<SEARCH_OPTIONS> => {
-  return (
-    (await getItem(STORAGE_KEYS.DEFAULT_SEARCH)) || SEARCH_OPTIONS.BILIBILI
-  );
-};
+export const getDefaultSearch = (): Promise<SEARCH_OPTIONS> =>
+  getItem(STORAGE_KEYS.DEFAULT_SEARCH, SEARCH_OPTIONS.BILIBILI);
 
-export const saveDefaultSearch = async (val: SEARCH_OPTIONS | MUSICFREE) => {
-  return await saveItem(STORAGE_KEYS.DEFAULT_SEARCH, val);
-};
+export const saveDefaultSearch = (val: SEARCH_OPTIONS | MUSICFREE) =>
+  saveItem(STORAGE_KEYS.DEFAULT_SEARCH, val);
 
-export const getCachedMediaMapping = async () => {
-  return (await getItem(STORAGE_KEYS.CACHED_MEDIA_MAPPING)) || [];
-};
+export const getCachedMediaMapping = () =>
+  getItem(STORAGE_KEYS.CACHED_MEDIA_MAPPING, []);
 
-export const saveCachedMediaMapping = async (val: any[]) => {
-  return await saveItem(STORAGE_KEYS.CACHED_MEDIA_MAPPING, val);
-};
+export const saveCachedMediaMapping = (val: any[]) =>
+  saveItem(STORAGE_KEYS.CACHED_MEDIA_MAPPING, val);
 
 export const getColorScheme = async () => {
   const colorScheme = (await getItem(STORAGE_KEYS.COLORTHEME)) || null;
@@ -145,9 +130,8 @@ export const getColorScheme = async () => {
   return colorScheme;
 };
 
-export const saveColorScheme = async (val: ColorSchemeName) => {
-  return await saveItem(STORAGE_KEYS.COLORTHEME, val);
-};
+export const saveColorScheme = (val: ColorSchemeName) =>
+  saveItem(STORAGE_KEYS.COLORTHEME, val);
 
 // we keep the set-cookie header for noxplayer's remove personal search option
 // TODO: security risk. move this to an encrypted storage.
@@ -249,7 +233,7 @@ export const savePlayerSkins = async (skins: Array<any>) =>
   saveChucked(STORAGE_KEYS.SKINSTORAGE, skins);
 
 export const getPlayerSkins = async () =>
-  await loadChucked((await getItem(STORAGE_KEYS.SKINSTORAGE)) || []);
+  await loadChucked(await getItem(STORAGE_KEYS.SKINSTORAGE, []));
 
 export const saveLyricMapping = async (
   lyricMapping: Map<string, NoxMedia.LyricDetail>
@@ -262,24 +246,23 @@ export const getLyricMapping = () =>
 // no point to provide getters, as states are managed by zustand.
 // unlike azusaplayer which the storage context still reads localstorage, instaed
 // of keeping them as states.
-export const saveSettings = async (setting: NoxStorage.PlayerSettingDict) =>
+export const saveSettings = (setting: NoxStorage.PlayerSettingDict) =>
   saveItem(STORAGE_KEYS.PLAYER_SETTING_KEY, setting);
 
 export const getSettings = async () => ({
   ...DEFAULT_SETTING,
-  ...((await getItem(STORAGE_KEYS.PLAYER_SETTING_KEY)) || {}),
+  ...(await getItem(STORAGE_KEYS.PLAYER_SETTING_KEY, {})),
 });
 
-export const savePlaylistIds = async (val: string[]) =>
+export const savePlaylistIds = (val: string[]) =>
   saveItem(STORAGE_KEYS.MY_FAV_LIST_KEY, val);
 
-export const savePlayerSkin = async (
-  val: NoxTheme.Style | NoxTheme.AdaptiveStyle
-) => saveItem(STORAGE_KEYS.SKIN, val);
+export const savePlayerSkin = (val: NoxTheme.Style | NoxTheme.AdaptiveStyle) =>
+  saveItem(STORAGE_KEYS.SKIN, val);
 
-export const getPlayerSkin = async () => await getItem(STORAGE_KEYS.SKIN);
+export const getPlayerSkin = () => getItem(STORAGE_KEYS.SKIN);
 
-export const addPlaylist = async (
+export const addPlaylist = (
   playlist: NoxMedia.Playlist,
   playlistIds: Array<string>
 ) => {
@@ -289,7 +272,7 @@ export const addPlaylist = async (
   return playlistIds;
 };
 
-const delPlaylistRaw = async (playlist: NoxMedia.Playlist) => {
+const delPlaylistRaw = (playlist: NoxMedia.Playlist) => {
   removeItem(playlist.id);
   [
     ...Array(Math.ceil(playlist.songList.length / MAX_SONGLIST_SIZE)).keys(),
@@ -298,7 +281,7 @@ const delPlaylistRaw = async (playlist: NoxMedia.Playlist) => {
   });
 };
 
-export const delPlaylist = async (
+export const delPlaylist = (
   playlist: NoxMedia.Playlist,
   playlistIds: Array<string>
 ) => {
@@ -308,16 +291,16 @@ export const delPlaylist = async (
   return playlistIds;
 };
 
-export const saveFavPlaylist = async (playlist: NoxMedia.Playlist) =>
+export const saveFavPlaylist = (playlist: NoxMedia.Playlist) =>
   savePlaylist(playlist, STORAGE_KEYS.FAVORITE_PLAYLIST_KEY);
 
-export const savelastPlaylistId = async (val: [string, string]) =>
+export const savelastPlaylistId = (val: [string, string]) =>
   saveItem(STORAGE_KEYS.LAST_PLAY_LIST, val);
 
-export const savePlayMode = async (val: string) =>
+export const savePlayMode = (val: string) =>
   saveItem(STORAGE_KEYS.PLAYMODE_KEY, val);
 
-export const saveLastPlayDuration = async (val: number) =>
+export const saveLastPlayDuration = (val: number) =>
   saveItem(STORAGE_KEYS.LAST_PLAY_DURATION, val);
 
 export const initPlayerObject =
@@ -342,13 +325,15 @@ export const initPlayerObject =
         STORAGE_KEYS.FAVORITE_PLAYLIST_KEY,
         () => dummyPlaylist('Favorite', PLAYLIST_ENUMS.TYPE_FAVORI_PLAYLIST)
       ),
-      playerRepeat:
-        (await getItem(STORAGE_KEYS.PLAYMODE_KEY)) || NoxRepeatMode.SHUFFLE,
-      skin: (await getItem(STORAGE_KEYS.SKIN)) || AzusaTheme,
+      playerRepeat: await getItem(
+        STORAGE_KEYS.PLAYMODE_KEY,
+        NoxRepeatMode.SHUFFLE
+      ),
+      skin: await getItem(STORAGE_KEYS.SKIN, AzusaTheme),
       skins: (await getPlayerSkins()) || [],
-      cookies: (await getItem(STORAGE_KEYS.COOKIES)) || {},
+      cookies: await getItem(STORAGE_KEYS.COOKIES, {}),
       lyricMapping,
-      lastPlayDuration: (await getItem(STORAGE_KEYS.LAST_PLAY_DURATION)) || 0,
+      lastPlayDuration: await getItem(STORAGE_KEYS.LAST_PLAY_DURATION, 0),
       colorScheme: await getColorScheme(),
     } as NoxStorage.PlayerStorageObject;
 
@@ -366,7 +351,7 @@ export const initPlayerObject =
     return playerObject;
   };
 
-export const clearStorage = async () => await AsyncStorage.clear();
+export const clearStorage = () => AsyncStorage.clear();
 
 // gzip
 export const exportPlayerContent = async (content?: any) => {

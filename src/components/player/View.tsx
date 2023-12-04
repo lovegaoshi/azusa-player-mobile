@@ -14,13 +14,14 @@ import { useTranslation } from 'react-i18next';
 import TrackInfo from './TrackInfo/TrackInfo';
 import { SetupService, AdditionalPlaybackService } from 'services';
 import PlayerTopInfo from './PlayerTopInfo';
-import { useNoxSetting } from '@hooks/useSetting';
+import { useNoxSetting } from '@stores/useApp';
 import { initPlayerObject } from '@utils/ChromeStorage';
 import { initCache } from '@utils/Cache';
 import { getCurrentTPQueue, initializePlaybackMode } from '@stores/playingList';
 import useVersionCheck from '@hooks/useVersionCheck';
 import { songlistToTracklist } from '@utils/RNTPUtils';
 import useActiveTrack from '@hooks/useActiveTrack';
+import useInitializeStore from '@stores/initializeStores';
 
 const { NoxAndroidAutoModule } = NativeModules;
 
@@ -48,7 +49,7 @@ export function Player({ navigation }: Props) {
 
 export function useSetupPlayer() {
   const [playerReady, setPlayerReady] = useState<boolean>(false);
-  const initPlayer = useNoxSetting(state => state.initPlayer);
+  const { initializeStores } = useInitializeStore();
   const { updateVersion, checkVersion } = useVersionCheck();
   const { i18n } = useTranslation();
 
@@ -61,7 +62,7 @@ export function useSetupPlayer() {
         language,
         lastPlayDuration,
         playbackMode,
-      } = await initPlayer(await initPlayerObject());
+      } = await initializeStores(await initPlayerObject());
       initCache({ max: storedPlayerSetting.cacheSize });
       /**
        * this doesnt even seems necessary?

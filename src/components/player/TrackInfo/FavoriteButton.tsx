@@ -6,7 +6,7 @@ import TrackPlayer, {
 } from 'react-native-track-player';
 import { useStore } from 'zustand';
 
-import { useNoxSetting } from '@hooks/useSetting';
+import { useNoxSetting } from '@stores/useApp';
 import { updatePlaylistSongs } from '@objects/Playlist';
 import LottieButtonAnimated from '@components/buttons/LottieButtonAnimated';
 import appStore from '@stores/appStore';

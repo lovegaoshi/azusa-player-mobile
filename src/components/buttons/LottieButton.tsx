@@ -2,7 +2,7 @@ import React, { useRef } from 'react';
 import { Pressable } from 'react-native';
 import LottieView, { AnimationObject } from 'lottie-react-native';
 
-import { useNoxSetting } from '@hooks/useSetting';
+import { useNoxSetting } from '@stores/useApp';
 import ShadowedElement from './ShadowedElement';
 import { ViewStyle } from 'react-native-windows';
 

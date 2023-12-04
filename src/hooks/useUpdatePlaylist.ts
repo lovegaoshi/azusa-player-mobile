@@ -1,4 +1,4 @@
-import { useNoxSetting } from '@hooks/useSetting';
+import { useNoxSetting } from '@stores/useApp';
 import { logger } from '@utils/Logger';
 import { refreshMetadata } from '@utils/mediafetch/resolveURL';
 

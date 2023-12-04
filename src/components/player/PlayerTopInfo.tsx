@@ -4,7 +4,7 @@ import { IconButton } from 'react-native-paper';
 import { useNavigation, ParamListBase } from '@react-navigation/native';
 import { DrawerNavigationProp } from '@react-navigation/drawer';
 import { ViewEnum } from '@enums/View';
-import { useNoxSetting } from '@hooks/useSetting';
+import { useNoxSetting } from '@stores/useApp';
 import RandomGIFButton from '../buttons/RandomGIF';
 
 interface Props {

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useWindowDimensions } from 'react-native';
 import TrackPlayer, { Track } from 'react-native-track-player';
 
-import { useNoxSetting } from '@hooks/useSetting';
+import { useNoxSetting } from '@stores/useApp';
 import { LyricView } from './Lyric';
 import usePlayerControls from '@components/player/usePlayerControls';
 

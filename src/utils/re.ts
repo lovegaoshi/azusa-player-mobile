@@ -1,4 +1,5 @@
 import { REOPERATIONTYPE } from '@enums/Utils';
+import { SearchRegex } from '@enums/Playlist';
 
 const operation2RegExtractor = (operation: NoxRegExt.Operation) => {
   const regExps = operation[1]?.map(val => new RegExp(val));
@@ -84,4 +85,70 @@ export const getName = (song: NoxMedia.Song, parsed = false) => {
     return song.parsedName ? song.parsedName : song.name;
   }
   return song.name;
+};
+
+interface reExtract {
+  regex: RegExp;
+  process: (
+    val: RegExpExecArray,
+    someRows: Array<NoxMedia.Song>
+  ) => NoxMedia.Song[];
+}
+
+const reExtractionsDefault: reExtract[] = [
+  {
+    regex: SearchRegex.absoluteMatch.regex,
+    process: (val: RegExpExecArray, someRows: Array<NoxMedia.Song>) =>
+      someRows.filter(row => row.parsedName === val[1]),
+  },
+  {
+    regex: SearchRegex.artistMatch.regex,
+    process: (val: RegExpExecArray, someRows: Array<NoxMedia.Song>) =>
+      someRows.filter(row => row.singer.includes(val[1])),
+  },
+  {
+    regex: SearchRegex.albumMatch.regex,
+    process: (val: RegExpExecArray, someRows: Array<NoxMedia.Song>) =>
+      someRows.filter(row => row.album?.includes(val[1])),
+  },
+];
+
+interface reParseSearchProps {
+  searchStr: string;
+  rows: Array<NoxMedia.Song>;
+  defaultExtract?: (
+    someRows: Array<NoxMedia.Song>,
+    searchstr: string
+  ) => NoxMedia.Song[];
+  extraReExtract?: reExtract[];
+}
+export const reParseSearch = ({
+  searchStr,
+  rows,
+  defaultExtract = (someRows: Array<NoxMedia.Song>, searchstr: string) =>
+    someRows.filter(
+      row =>
+        row.name.toLowerCase().includes(searchstr.toLowerCase()) ||
+        row.singer.includes(searchstr) ||
+        row.album?.includes(searchstr)
+    ),
+  extraReExtract = [],
+}: reParseSearchProps) => {
+  const reExtractions = [...reExtractionsDefault, ...extraReExtract];
+  let defaultExtraction = true;
+  for (const searchSubStr of searchStr.split('|')) {
+    for (const reExtraction of reExtractions) {
+      const extracted = reExtraction.regex.exec(searchSubStr);
+      if (extracted !== null) {
+        rows = reExtraction.process(extracted, rows);
+        defaultExtraction = false;
+        break;
+      }
+    }
+  }
+  // if none matches, treat as a generic search, check if any field contains the search string
+  if (defaultExtraction) {
+    rows = defaultExtract(rows, searchStr);
+  }
+  return rows;
 };

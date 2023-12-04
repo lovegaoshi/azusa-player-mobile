@@ -30,7 +30,7 @@ import {
 } from 'react-native-gesture-handler';
 
 import SkinSearchbar from '../SkinSearchbar';
-import { useNoxSetting } from '@hooks/useSetting';
+import { useNoxSetting } from '@stores/useApp';
 import AzusaTheme from '../../styles/AzusaTheme';
 // import AzusaTheme from '../styles/SteriaTheme';
 import NoxTheme from '../../styles/NoxTheme';

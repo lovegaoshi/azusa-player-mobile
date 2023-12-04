@@ -8,10 +8,10 @@ import {
   getFadeInterval,
   getRegExtractMapping,
 } from '@utils/ChromeStorage';
-import type { NoxStorage } from '../types/storage';
 import rejson from '@utils/rejson.json';
-import { LoadJSONRegExtractors } from '@utils/re';
 import { logger } from '@utils/Logger';
+import { LoadJSONRegExtractors } from '../utils/re';
+import type { NoxStorage } from '../types/storage';
 
 interface AppStore {
   pipMode: boolean;

@@ -10,7 +10,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { DrawerNavigationProp } from '@react-navigation/drawer';
 import { ParamListBase } from '@react-navigation/native';
 
-import { useNoxSetting } from '@hooks/useSetting';
+import { useNoxSetting } from '@stores/useApp';
 import { logStore, LOGLEVEL, getLog, resetLog } from '@utils/Logger';
 import GenericSelectDialog from '../dialogs/GenericSelectDialog';
 import { SettingListItem, RenderSetting } from './useRenderSetting';

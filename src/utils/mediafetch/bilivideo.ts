@@ -20,6 +20,13 @@ import { logger } from '../Logger';
 import bfetch from '@utils/BiliFetch';
 import { SOURCE } from '@enums/MediaFetch';
 
+export enum FieldEnum {
+  AudioUrl = 'AudioUrl',
+  VideoUrl = 'VideoUrl',
+  CID = 'CID',
+  AudioInfo = 'AudioInfo',
+}
+
 const URL_VIDEO_INFO =
   'https://api.bilibili.com/x/web-interface/view?bvid={bvid}';
 const URL_PLAY_URL =
@@ -130,10 +137,13 @@ interface FetchPlayURL {
   iOS?: boolean;
 }
 
+export const fetchVideoPlayUrl = async (bvid: string) =>
+  (await fetchVideoPlayUrlPromise({ bvid, extractType: FieldEnum.VideoUrl }))
+    .url;
 export const fetchVideoPlayUrlPromise = async ({
   bvid,
   cid,
-  extractType = 'AudioUrl',
+  extractType = FieldEnum.AudioUrl,
   iOS = true,
 }: FetchPlayURL) => {
   logger.debug(
@@ -169,7 +179,7 @@ export const fetchVideoPlayUrlPromise = async ({
       {
         method: 'GET',
         headers: {},
-        credentials: extractType === 'AudioUrl' ? 'omit' : 'include',
+        credentials: extractType === FieldEnum.AudioUrl ? 'omit' : 'include',
       }
     );
     const json = await res.json();
@@ -191,7 +201,7 @@ export const fetchCID = async (bvid: string) => {
     `https://api.bilibili.com/x/player/pagelist?bvid=${bvid}&jsonp=jsonp`
   );
   const json = await res.json();
-  const cid = extractResponseJson(json, 'CID');
+  const cid = extractResponseJson(json, FieldEnum.CID);
   return cid;
 };
 
@@ -206,18 +216,18 @@ const extractResponseJson = (json: any, field: string) => {
     data.sort((a, b) => b.bandwidth - a.bandwidth)[0];
 
   switch (field) {
-    case 'AudioUrl':
+    case FieldEnum.AudioUrl:
       if (json.data.flac?.audio) {
         return getBestBitrate(json.data.dash.flac.audio).baseUrl;
       } else if (json.data.dolby?.audio) {
         return getBestBitrate(json.data.dash.dolby.audio).baseUrl;
       }
       return getBestBitrate(json.data.dash.audio).baseUrl;
-    case 'VideoUrl':
+    case FieldEnum.VideoUrl:
       return json.data.dash.video[0].baseUrl;
-    case 'CID':
+    case FieldEnum.CID:
       return json.data[0].cid;
-    case 'AudioInfo':
+    case FieldEnum.AudioInfo:
       return {};
     default:
       throw new Error(`invalid field type: ${field} to parse JSON response`);

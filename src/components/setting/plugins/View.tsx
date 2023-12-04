@@ -3,7 +3,7 @@ import { View, StyleSheet } from 'react-native';
 import { useTranslation } from 'react-i18next';
 import Snackbar from 'react-native-snackbar';
 
-import { useNoxSetting } from '@hooks/useSetting';
+import { useNoxSetting } from '@stores/useApp';
 import { SettingListItem } from '../useRenderSetting';
 import { saveRegextractMapping } from '@utils/ChromeStorage';
 import { downloadR128GainDB } from './r128gain/Sync';

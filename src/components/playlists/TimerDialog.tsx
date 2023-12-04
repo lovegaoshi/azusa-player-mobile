@@ -8,8 +8,8 @@ import {
   Text,
 } from 'react-native-paper';
 import { useTranslation } from 'react-i18next';
-import useTimer from './useTimer';
-import { useNoxSetting } from '@hooks/useSetting';
+import useTimer from './useTimerRN';
+import { useNoxSetting } from '@stores/useApp';
 
 interface Props {
   visible: boolean;

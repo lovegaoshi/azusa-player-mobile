@@ -3,7 +3,7 @@ import React, { useRef, useEffect } from 'react';
 import { Pressable, Animated, Easing } from 'react-native';
 import LottieView, { AnimationObject } from 'lottie-react-native';
 
-import { useNoxSetting } from '@hooks/useSetting';
+import { useNoxSetting } from '@stores/useApp';
 import ShadowedElement from './ShadowedElement';
 
 const clickedStatesMap = Array.from(Array(10).keys()).map(curr =>

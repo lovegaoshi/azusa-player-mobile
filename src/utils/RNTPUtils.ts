@@ -181,3 +181,25 @@ export const songlistToTracklist = async (
     })
   );
 };
+
+export const clearPlaylistUninterrupted = async () => {
+  const currentQueue = await TrackPlayer.getQueue();
+  const currentTrackIndex = await TrackPlayer.getActiveTrackIndex();
+  if (currentTrackIndex === undefined) return;
+  const removeTrackIndices = [...Array(currentQueue.length).keys()];
+  removeTrackIndices.splice(currentTrackIndex, 1);
+  await TrackPlayer.remove(removeTrackIndices);
+};
+
+export const playSongUninterrupted = async (song: NoxMedia.Song) => {
+  const currentQueue = await TrackPlayer.getQueue();
+  await TrackPlayer.add(await songlistToTracklist([song]));
+  await TrackPlayer.skip(currentQueue.length);
+  await TrackPlayer.play();
+};
+
+export const playSongInterrupted = async (song: NoxMedia.Song) => {
+  await TrackPlayer.reset();
+  await TrackPlayer.add(await songlistToTracklist([song]));
+  TrackPlayer.play();
+};

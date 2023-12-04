@@ -5,7 +5,7 @@ import TrackPlayer, {
   State,
 } from 'react-native-track-player';
 
-import { useNoxSetting } from '@hooks/useSetting';
+import { useNoxSetting } from '@stores/useApp';
 import useTPControls from '@hooks/useTPControls';
 import { saveLastPlayDuration } from '@utils/ChromeStorage';
 import { logger } from '@utils/Logger';

@@ -5,7 +5,7 @@ import { useNavigation } from '@react-navigation/native';
 import { View, ImageBackground, StyleSheet, Linking } from 'react-native';
 import { useTranslation } from 'react-i18next';
 
-import { useNoxSetting } from '@hooks/useSetting';
+import { useNoxSetting } from '@stores/useApp';
 import useAAPlayback from '@hooks/useAAPlayback';
 import { ViewEnum } from '@enums/View';
 import { logger } from '@utils/Logger';
@@ -102,22 +102,6 @@ export default (props: any) => {
 const styles = StyleSheet.create({
   topPadding: {
     height: 10,
-  },
-  addPlaylistButtonContainer: {
-    height: 50,
-    alignContent: 'center',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  addPlaylistButtonContent: {
-    flexDirection: 'row',
-    alignContent: 'center',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  addPlaylistButtonSpacer: {
-    width: 40,
-    height: 40,
   },
   draggableFlatList: {},
   bottomInfo: {

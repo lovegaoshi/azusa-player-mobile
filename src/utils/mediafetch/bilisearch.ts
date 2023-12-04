@@ -18,15 +18,9 @@ import { timestampToSeconds } from '../Utils';
 const URL_BILI_SEARCH =
   'https://api.bilibili.com/x/web-interface/search/type?search_type=video&keyword={keyword}&page={pn}&tids=3';
 
-export const fetchBiliSearchList = async (
-  kword: string,
-  progressEmitter: (val: number) => void = () => undefined,
-  fastSearch = false,
-  cookiedSearch = false
-) => {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const fastSearchResolveBVID = async (bvobjs: any[]) => {
-    /**
+export // eslint-disable-next-line @typescript-eslint/no-explicit-any
+const fastSearchResolveBVID = async (bvobjs: any[]) => {
+  /**
      * cids should be resolved at this stage,
      * or on the fly using fetchCID. the latter saves
      * search time but now song.id loses identification.
@@ -34,28 +28,34 @@ export const fetchBiliSearchList = async (
       bvobjs.map(obj => fetchCID(obj.bvid))
     );
      */
-    return bvobjs.map(
-      obj =>
-        new VideoInfo(
-          obj.title.replaceAll(/<[^<>]*em[^<>]*>/g, ''),
-          obj.description,
-          1,
-          `https:${obj.pic}`,
-          { mid: obj.mid, name: obj.author, face: obj.upic },
-          [
-            {
-              bvid: obj.bvid,
-              part: '1',
-              cid: `null-${obj.bvid}`, // resolvedCids[index]
-              duration: timestampToSeconds(obj.duration),
-            },
-          ],
-          obj.bvid,
-          timestampToSeconds(obj.duration)
-        )
-    );
-  };
+  return bvobjs.map(
+    obj =>
+      new VideoInfo(
+        obj.title.replaceAll(/<[^<>]*em[^<>]*>/g, ''),
+        obj.description,
+        1,
+        `https:${obj.pic}`,
+        { mid: obj.mid, name: obj.author, face: obj.upic },
+        [
+          {
+            bvid: obj.bvid,
+            part: '1',
+            cid: `null-${obj.bvid}`, // resolvedCids[index]
+            duration: timestampToSeconds(obj.duration),
+          },
+        ],
+        obj.bvid,
+        timestampToSeconds(obj.duration)
+      )
+  );
+};
 
+export const fetchBiliSearchList = async (
+  kword: string,
+  progressEmitter: (val: number) => void = () => undefined,
+  fastSearch = false,
+  cookiedSearch = false
+) => {
   // this API needs a random buvid3 value, or a valid SESSDATA;
   // otherwise will return error 412. for users didnt login to bilibili,
   // setting a random buvid3 would enable this API.
