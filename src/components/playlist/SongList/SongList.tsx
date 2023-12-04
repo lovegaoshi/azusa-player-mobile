@@ -1,13 +1,10 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { View, BackHandler, StyleSheet } from 'react-native';
 import { FlashList } from '@shopify/flash-list';
-import Snackbar from 'react-native-snackbar';
 import { IconButton } from 'react-native-paper';
-import { useTranslation } from 'react-i18next';
 import { useDebounce } from 'use-debounce';
 import { useNetInfo } from '@react-native-community/netinfo';
 import { useFocusEffect } from '@react-navigation/native';
-import { activateKeepAwakeAsync, deactivateKeepAwake } from 'expo-keep-awake';
 
 import { styles } from '../../style';
 import SongInfo from './SongInfo';
@@ -16,30 +13,25 @@ import { useNoxSetting } from '@stores/useApp';
 import SongMenu from './SongMenu';
 import PlaylistInfo from '../Info/PlaylistInfo';
 import PlaylistMenuButton from '../Menu/PlaylistMenuButton';
-import { updateSubscribeFavList } from '@utils/BiliSubscribe';
 import { PLAYLIST_ENUMS, SearchRegex } from '@enums/Playlist';
 import { syncFavlist } from '@utils/Bilibili/bilifavOperate';
 import noxCache, { noxCacheKey } from '@utils/Cache';
 import usePlayback from '@hooks/usePlayback';
 import useTPControls from '@hooks/useTPControls';
 import { reParseSearch as reParseSearchRaw } from '@utils/re';
-import logger from '@utils/Logger';
+import usePlaylist from '../usePlaylist';
 
 const PlaylistList = () => {
-  const { t } = useTranslation();
   const currentPlayingList = useNoxSetting(state => state.currentPlayingList);
   const currentPlayingId = useNoxSetting(state => state.currentPlayingId);
   const setCurrentPlayingId = useNoxSetting(state => state.setCurrentPlayingId);
   const playerSetting = useNoxSetting(state => state.playerSetting);
   const playerStyle = useNoxSetting(state => state.playerStyle);
   const currentPlaylist = useNoxSetting(state => state.currentPlaylist);
+  const { refreshPlaylist, refreshing } = usePlaylist(currentPlaylist);
   const playlistShouldReRender = useNoxSetting(
     state => state.playlistShouldReRender
   );
-  const progressEmitter = useNoxSetting(
-    state => state.searchBarProgressEmitter
-  );
-  const updatePlaylist = useNoxSetting(state => state.updatePlaylist);
   const setPlaylistSearchAutoFocus = useNoxSetting(
     state => state.setPlaylistSearchAutoFocus
   );
@@ -51,7 +43,6 @@ const PlaylistList = () => {
   const [currentRows, setCurrentRows] = useState<NoxMedia.Song[]>([]);
   const [searchText, setSearchText] = useState('');
   const [debouncedSearchText] = useDebounce(searchText, 500);
-  const [refreshing, setRefreshing] = useState(false);
   const playlistRef = useRef<FlashList<NoxMedia.Song>>(null);
   const netInfo = useNetInfo();
   // TODO: slow?
@@ -165,34 +156,6 @@ const PlaylistList = () => {
     // for it, but performFade is not exactly functional on android (it replies
     // on an event to emit) so we have to do conditionals outside of playFromPlaylist.
     preformFade(callback);
-  };
-
-  const refreshPlaylist = async () => {
-    if (currentPlaylist.type !== PLAYLIST_ENUMS.TYPE_TYPICA_PLAYLIST) {
-      return;
-    }
-    Snackbar.show({
-      text: t('PlaylistOperations.updating', { playlist: currentPlaylist }),
-      duration: Snackbar.LENGTH_INDEFINITE,
-    });
-    setRefreshing(true);
-    activateKeepAwakeAsync();
-    try {
-      await updateSubscribeFavList({
-        playlist: currentPlaylist,
-        progressEmitter,
-        updatePlaylist,
-      });
-    } catch (e) {
-      logger.error('[refreshPlaylist] failed');
-      logger.error(e);
-    }
-    Snackbar.dismiss();
-    Snackbar.show({
-      text: t('PlaylistOperations.updated', { playlist: currentPlaylist }),
-    });
-    setRefreshing(false);
-    deactivateKeepAwake();
   };
 
   const scrollTo = (toIndex = -1) => {
