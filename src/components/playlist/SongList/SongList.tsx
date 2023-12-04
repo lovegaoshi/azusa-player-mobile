@@ -9,13 +9,13 @@ import { useNetInfo } from '@react-native-community/netinfo';
 import { useFocusEffect } from '@react-navigation/native';
 import { activateKeepAwakeAsync, deactivateKeepAwake } from 'expo-keep-awake';
 
-import { styles } from '../style';
-import SongInfo from './SongList/SongInfo';
-import SongBackground from './SongList/SongBackground';
+import { styles } from '../../style';
+import SongInfo from './SongInfo';
+import SongBackground from './SongBackground';
 import { useNoxSetting } from '@stores/useApp';
 import SongMenu from './SongMenu';
-import PlaylistInfo from './PlaylistInfo';
-import PlaylistMenuButton from './Menu/PlaylistMenuButton';
+import PlaylistInfo from '../Info/PlaylistInfo';
+import PlaylistMenuButton from '../Menu/PlaylistMenuButton';
 import { updateSubscribeFavList } from '@utils/BiliSubscribe';
 import { PLAYLIST_ENUMS, SearchRegex } from '@enums/Playlist';
 import { syncFavlist } from '@utils/Bilibili/bilifavOperate';
