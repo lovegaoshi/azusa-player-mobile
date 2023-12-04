@@ -13,7 +13,7 @@ import SearchMenu from './PlaylistSearchMenu';
 import { useNoxSetting } from '@stores/useApp';
 import { seconds2HHMMSS } from '@utils/Utils';
 
-interface HookProps {
+interface UsePlaylist {
   searchText: string;
   setSearchText: (val: string) => void;
   search?: boolean;
@@ -22,7 +22,7 @@ interface HookProps {
 }
 
 interface Props {
-  usePlaylist: HookProps;
+  usePlaylist: UsePlaylist;
   onPressed?: () => void;
 }
 
