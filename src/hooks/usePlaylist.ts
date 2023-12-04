@@ -5,12 +5,13 @@ import { updateSubscribeFavList } from '../utils/BiliSubscribe';
 import { useNoxSetting } from '../stores/useApp';
 
 export interface UseFav {
+  playlist: NoxMedia.Playlist;
   rows: NoxMedia.Song[];
   setRows: (v: NoxMedia.Song[]) => void;
   performSearch: (searchedVal: string) => void;
   handleSearch: (searchedVal: string) => void;
   rssUpdate: (subscribeUrls?: string[]) => Promise<NoxMedia.Playlist>;
-  saveCurrentList: () => void;
+  saveCurrentList: (nPlaylist: Partial<NoxMedia.Playlist>) => void;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   searchBarRef: React.MutableRefObject<any>;
   refreshing: boolean;
@@ -38,7 +39,8 @@ const usePlaylist = (playlist: NoxMedia.Playlist): UseFav => {
   const progressEmitter = useNoxSetting(
     state => state.searchBarProgressEmitter
   );
-  const saveCurrentList = () => updatePlaylist(playlist);
+  const saveCurrentList = (v: Partial<NoxMedia.Playlist>) =>
+    updatePlaylist({ ...playlist, ...v });
   const searchBarRef = useRef();
 
   const handleSearch = (searchedVal: string) => {
@@ -104,6 +106,7 @@ const usePlaylist = (playlist: NoxMedia.Playlist): UseFav => {
   };
 
   return {
+    playlist,
     rows,
     setRows,
     handleSearch,
