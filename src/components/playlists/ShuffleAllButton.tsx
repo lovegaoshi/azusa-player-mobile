@@ -1,13 +1,11 @@
 import React from 'react';
 import { IconButton } from 'react-native-paper';
-import TrackPlayer from 'react-native-track-player';
 import { useNavigation } from '@react-navigation/native';
 import { useTranslation } from 'react-i18next';
 
 import { useNoxSetting } from '@stores/useApp';
-import { randomChoice } from '@utils/Utils';
 import { ViewEnum } from '@enums/View';
-import { songlistToTracklist } from '@utils/RNTPUtils';
+import usePlayback from '@hooks/usePlayback';
 
 export default () => {
   const navigation = useNavigation();
@@ -15,15 +13,10 @@ export default () => {
   const playlists = useNoxSetting(state => state.playlists);
   const playlistIds = useNoxSetting(state => state.playlistIds);
   const searchPlaylist = useNoxSetting(state => state.searchPlaylist);
-  const setCurrentPlayingList = useNoxSetting(
-    state => state.setCurrentPlayingList
-  );
-  const setCurrentPlayingId = useNoxSetting(state => state.setCurrentPlayingId);
   const setCurrentPlaylist = useNoxSetting(state => state.setCurrentPlaylist);
   const setSearchPlaylist = useNoxSetting(state => state.setSearchPlaylist);
-
+  const { playFromPlaylist } = usePlayback();
   const shuffleAll = async () => {
-    await TrackPlayer.reset();
     const allSongs = playlistIds.reduce(
       (acc, curr) => acc.concat(playlists[curr].songList),
       [] as NoxMedia.Song[]
@@ -34,11 +27,7 @@ export default () => {
       songList: allSongs,
     };
     setSearchPlaylist(newSearchPlaylist);
-    setCurrentPlayingList(newSearchPlaylist);
-    const song = randomChoice(allSongs);
-    setCurrentPlayingId(song.id);
-    await TrackPlayer.add(await songlistToTracklist([song]));
-    TrackPlayer.play();
+    await playFromPlaylist({ playlist: newSearchPlaylist });
     navigation.navigate(ViewEnum.PLAYER_HOME as never);
     setCurrentPlaylist(newSearchPlaylist);
   };

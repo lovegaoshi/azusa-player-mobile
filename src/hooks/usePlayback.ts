@@ -6,7 +6,10 @@ import { useNetInfo } from '@react-native-community/netinfo';
 import { useNoxSetting } from '@stores/useApp';
 import { randomChoice } from '../utils/Utils';
 import logger from '../utils/Logger';
-import { songlistToTracklist } from '@utils/RNTPUtils';
+import {
+  songlistToTracklist,
+  clearPlaylistUninterrupted,
+} from '@utils/RNTPUtils';
 import { NoxRepeatMode } from '@enums/RepeatMode';
 import noxPlayingList from '@stores/playingList';
 import noxCache from '@utils/Cache';
@@ -45,15 +48,6 @@ const usePlayback = () => {
   const isDataSaving = () =>
     playerSetting.dataSaver && netInfo.type === 'cellular';
 
-  const clearPlaylistUninterrupted = async () => {
-    const currentQueue = await TrackPlayer.getQueue();
-    const currentTrackIndex = await TrackPlayer.getActiveTrackIndex();
-    if (currentTrackIndex === undefined) return;
-    const removeTrackIndices = [...Array(currentQueue.length).keys()];
-    removeTrackIndices.splice(currentTrackIndex, 1);
-    await TrackPlayer.remove(removeTrackIndices);
-  };
-
   const playFromPlaylist = async ({
     playlist,
     song,
@@ -77,14 +71,20 @@ const usePlayback = () => {
     }
     // HACK: track?.song? is somehow updated already here
     // TODO: fix this
-    if (!interruption && currentPlayingId === song.id) {
-      clearPlaylistUninterrupted();
-    } else {
+    if (interruption) {
       setCurrentPlayingId(song.id);
       await TrackPlayer.reset();
       await TrackPlayer.add(await songlistToTracklist([song]));
       TrackPlayer.play();
+      return;
     }
+    if (currentPlayingId !== song.id) {
+      const currentQueue = await TrackPlayer.getQueue();
+      await TrackPlayer.add(await songlistToTracklist([song]));
+      await TrackPlayer.skip(currentQueue.length);
+      await TrackPlayer.play();
+    }
+    clearPlaylistUninterrupted();
   };
 
   const playFromMediaId = (mediaId: string) => {

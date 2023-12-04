@@ -11,7 +11,7 @@ import { RenameSongMenuItem } from '../../buttons/RenameSongButton';
 import useSongOperations from '@hooks/useSongOperations';
 import { addR128Gain, getR128Gain } from '@utils/ffmpeg/r128Store';
 import ABSliderMenu from './ABSliderMenu';
-import { songlistToTracklist } from '@utils/RNTPUtils';
+import usePlayback from '@hooks/usePlayback';
 
 enum ICONS {
   SEND_TO = 'playlist-plus',
@@ -47,14 +47,11 @@ export default ({
   const currentPlaylist = useNoxSetting(state => state.currentPlayingList);
   const playlists = useNoxSetting(state => state.playlists);
   const updatePlaylist = useNoxSetting(state => state.updatePlaylist);
-  const setCurrentPlayingId = useNoxSetting(state => state.setCurrentPlayingId);
-  const setCurrentPlayingList = useNoxSetting(
-    state => state.setCurrentPlayingList
-  );
   const updateTrack = useNoxSetting(state => state.updateTrack);
 
   const { updateSongIndex, updateSongMetadata } = useUpdatePlaylist();
   const { startRadio, radioAvailable } = useSongOperations();
+  const { playFromPlaylist } = usePlayback();
 
   const closeMenu = React.useCallback(() => setSongMenuVisible(false), []);
 
@@ -113,17 +110,7 @@ export default ({
         }
       : currentPlaylist2;
     updatePlaylist(newPlaylist, [], songs);
-    setCurrentPlayingList(newPlaylist);
-
-    await TrackPlayer.reset();
-    if (newPlaylist.songList.length > 0) {
-      const song = newPlaylist.songList[0];
-
-      setCurrentPlayingId(song.id);
-      await TrackPlayer.add(await songlistToTracklist([song]));
-      TrackPlayer.play();
-    }
-
+    playFromPlaylist({ playlist: newPlaylist });
     setSongMenuVisible(false);
   };
 
