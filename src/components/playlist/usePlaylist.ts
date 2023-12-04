@@ -1,4 +1,5 @@
-import React, { useState, useEffect, useCallback, useRef } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
+import { FlashList } from '@shopify/flash-list';
 import Snackbar from 'react-native-snackbar';
 import { useTranslation } from 'react-i18next';
 import { useDebounce } from 'use-debounce';
@@ -36,6 +37,7 @@ export default (playlist: NoxMedia.Playlist) => {
   const playlistShouldReRender = useNoxSetting(
     state => state.playlistShouldReRender
   );
+  const playlistRef = useRef<FlashList<NoxMedia.Song>>(null);
   const usedPlaylist = usePlaylist(playlist);
   const { setRefreshing, rssUpdate, rows, setRows } = usedPlaylist;
   const { playFromPlaylist } = usePlayback();
@@ -158,6 +160,19 @@ export default (playlist: NoxMedia.Playlist) => {
     usedPlaylist.playSong(song, playSongCallback);
   };
 
+  const scrollTo = (toIndex = -1) => {
+    const currentIndex =
+      toIndex < 0
+        ? playlist.songList.findIndex(song => song.id === currentPlayingId)
+        : toIndex;
+    if (currentIndex > -1) {
+      playlistRef.current?.scrollToIndex({
+        index: currentIndex,
+        viewPosition: 0.5,
+      });
+    }
+  };
+
   useEffect(() => {
     if (
       playerSetting.autoRSSUpdate &&
@@ -200,6 +215,10 @@ export default (playlist: NoxMedia.Playlist) => {
     }
   }, [searching]);
 
+  useEffect(() => {
+    setShouldReRender(val => !val);
+  }, [currentPlayingId, checking, playlistShouldReRender, netInfo.type]);
+
   return {
     ...usedPlaylist,
     refreshPlaylist,
@@ -222,5 +241,7 @@ export default (playlist: NoxMedia.Playlist) => {
     handleSearch,
     searchAndEnableSearch,
     playSong,
+    scrollTo,
+    playlistRef,
   };
 };

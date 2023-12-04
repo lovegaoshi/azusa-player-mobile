@@ -17,21 +17,25 @@ enum ICONS {
   RADIO = 'radio-tower',
 }
 
-interface Props {
+interface UsePlaylist {
   checking?: boolean;
   checked?: boolean[];
   resetChecked?: () => void;
   handleSearch?: (val: string) => void;
+}
+
+interface Props {
+  usePlaylist: UsePlaylist;
   prepareForLayoutAnimationRender: () => void;
 }
 
-export default ({
-  checking = false,
-  checked = [],
-  resetChecked = () => undefined,
-  handleSearch = () => undefined,
-  prepareForLayoutAnimationRender,
-}: Props) => {
+export default ({ usePlaylist, prepareForLayoutAnimationRender }: Props) => {
+  const {
+    checking = false,
+    checked = [],
+    resetChecked = () => undefined,
+    handleSearch = () => undefined,
+  } = usePlaylist;
   const { t } = useTranslation();
   const songMenuVisible = useNoxSetting(state => state.songMenuVisible);
   const setSongMenuVisible = useNoxSetting(state => state.setSongMenuVisible);

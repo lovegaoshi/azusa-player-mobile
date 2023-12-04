@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React from 'react';
 import { View, BackHandler, StyleSheet } from 'react-native';
 import { FlashList } from '@shopify/flash-list';
 import { IconButton } from 'react-native-paper';
@@ -18,51 +18,24 @@ const PlaylistList = () => {
   const currentPlayingId = useNoxSetting(state => state.currentPlayingId);
   const playerStyle = useNoxSetting(state => state.playerStyle);
   const currentPlaylist = useNoxSetting(state => state.currentPlaylist);
+  const usedPlaylist = usePlaylist(currentPlaylist);
   const {
     refreshPlaylist,
     refreshing,
     rows,
-    selected,
-    resetSelected,
     toggleSelected,
     toggleSelectedAll,
     shouldReRender,
-    setShouldReRender,
     checking,
     setChecking,
     searching,
     setSearching,
     onBackPress,
-    searchText,
-    setSearchText,
-    searchAndEnableSearch,
     getSongIndex,
-    playSong,
-  } = usePlaylist(currentPlaylist);
-  const playlistShouldReRender = useNoxSetting(
-    state => state.playlistShouldReRender
-  );
-  const playlistRef = useRef<FlashList<NoxMedia.Song>>(null);
+    scrollTo,
+    playlistRef,
+  } = usedPlaylist;
   const netInfo = useNetInfo();
-
-  const scrollTo = (toIndex = -1) => {
-    const currentIndex =
-      toIndex < 0
-        ? currentPlaylist.songList.findIndex(
-            song => song.id === currentPlayingId
-          )
-        : toIndex;
-    if (currentIndex > -1) {
-      playlistRef.current?.scrollToIndex({
-        index: currentIndex,
-        viewPosition: 0.5,
-      });
-    }
-  };
-
-  useEffect(() => {
-    setShouldReRender(val => !val);
-  }, [currentPlayingId, checking, playlistShouldReRender, netInfo.type]);
 
   useFocusEffect(
     React.useCallback(() => {
@@ -78,14 +51,7 @@ const PlaylistList = () => {
   return (
     <View style={stylesLocal.mainContainer}>
       <View style={[styles.topBarContainer, { top: 10 }]}>
-        <PlaylistInfo
-          search={searching}
-          searchText={searchText}
-          setSearchText={setSearchText}
-          onPressed={() => scrollTo()}
-          selected={selected}
-          checking={checking}
-        />
+        <PlaylistInfo onPressed={() => scrollTo()} usePlaylist={usedPlaylist} />
         <View style={stylesLocal.container}>
           {checking && (
             <IconButton
@@ -128,9 +94,7 @@ const PlaylistList = () => {
                 item={item}
                 index={index}
                 currentPlaying={item.id === currentPlayingId}
-                playSong={playSong}
-                checking={checking}
-                checkedList={selected}
+                usePlaylist={usedPlaylist}
                 onChecked={() => toggleSelected(getSongIndex(item, index))}
                 onLongPress={() => {
                   toggleSelected(getSongIndex(item, index));
@@ -149,10 +113,7 @@ const PlaylistList = () => {
         />
       </View>
       <SongMenu
-        checking={checking}
-        checked={selected}
-        resetChecked={resetSelected}
-        handleSearch={searchAndEnableSearch}
+        usePlaylist={usedPlaylist}
         prepareForLayoutAnimationRender={() =>
           playlistRef.current?.prepareForLayoutAnimationRender()
         }
