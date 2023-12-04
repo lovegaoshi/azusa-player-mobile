@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react';
-import { View, BackHandler, StyleSheet, ImageBackground } from 'react-native';
+import { View, BackHandler, StyleSheet } from 'react-native';
 import { FlashList } from '@shopify/flash-list';
 import Snackbar from 'react-native-snackbar';
 import { IconButton } from 'react-native-paper';
@@ -10,7 +10,8 @@ import { useFocusEffect } from '@react-navigation/native';
 import { activateKeepAwakeAsync, deactivateKeepAwake } from 'expo-keep-awake';
 
 import { styles } from '../style';
-import SongInfo from './SongInfo';
+import SongInfo from './SongList/SongInfo';
+import SongBackground from './SongList/SongBackground';
 import { useNoxSetting } from '@stores/useApp';
 import SongMenu from './SongMenu';
 import PlaylistInfo from './PlaylistInfo';
@@ -19,31 +20,10 @@ import { updateSubscribeFavList } from '@utils/BiliSubscribe';
 import { PLAYLIST_ENUMS, SearchRegex } from '@enums/Playlist';
 import { syncFavlist } from '@utils/Bilibili/bilifavOperate';
 import noxCache, { noxCacheKey } from '@utils/Cache';
-import { i0hdslbHTTPResolve } from '@utils/Utils';
 import usePlayback from '@hooks/usePlayback';
 import useTPControls from '@hooks/useTPControls';
 import { reParseSearch as reParseSearchRaw } from '@utils/re';
 import logger from '@utils/Logger';
-
-interface BackgroundProps {
-  song: NoxMedia.Song;
-  current?: boolean;
-  children: React.JSX.Element;
-}
-const SongBackground = ({ song, current, children }: BackgroundProps) => {
-  return current ? (
-    <ImageBackground
-      source={{ uri: i0hdslbHTTPResolve(song.cover) }}
-      resizeMode="cover"
-      style={stylesLocal.songInfoBackgroundBanner}
-      imageStyle={stylesLocal.songInfoBackgroundImg}
-    >
-      {children}
-    </ImageBackground>
-  ) : (
-    children
-  );
-};
 
 const PlaylistList = () => {
   const { t } = useTranslation();
