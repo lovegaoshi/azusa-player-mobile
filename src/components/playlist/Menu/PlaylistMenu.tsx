@@ -4,9 +4,9 @@ import { useTranslation } from 'react-i18next';
 
 import { useNoxSetting } from '@stores/useApp';
 import usePlaylist from '@hooks/usePlaylistRN';
-import PlaylistSettingsButton from './PlaylistSettingsButton';
+import PlaylistSettingsButton from '../Setting/PlaylistSettingsButton';
 import { PLAYLIST_ENUMS } from '@enums/Playlist';
-import { CopiedPlaylistMenuItem } from '../buttons/CopiedPlaylistButton';
+import { CopiedPlaylistMenuItem } from '../../buttons/CopiedPlaylistButton';
 
 enum ICONS {
   SETTINGS = 'cog',
