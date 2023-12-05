@@ -3,6 +3,7 @@ import { Menu } from 'react-native-paper';
 import { useTranslation } from 'react-i18next';
 
 import { useNoxSetting } from '@stores/useApp';
+import useUpdatePlaylist from '@hooks/useUpdatePlaylist';
 import { CopiedPlaylistMenuItem } from '@components/buttons/CopiedPlaylistButton';
 import RenameSongButton from '@components/player/TrackInfo/RenameSong/RenameSongButton';
 import useSongOperations from '@hooks/useSongOperations';
@@ -43,6 +44,7 @@ export default ({ usePlaylist, prepareForLayoutAnimationRender }: Props) => {
   const songMenuSongIndexes = useNoxSetting(state => state.songMenuSongIndexes);
   const currentPlaylist = useNoxSetting(state => state.currentPlaylist);
   const updatePlaylist = useNoxSetting(state => state.updatePlaylist);
+  const { updateSongIndex } = useUpdatePlaylist();
   const setPlaylistSearchAutoFocus = useNoxSetting(
     state => state.setPlaylistSearchAutoFocus
   );
@@ -82,18 +84,11 @@ export default ({ usePlaylist, prepareForLayoutAnimationRender }: Props) => {
     };
   };
 
-  const renameSong = (rename: string) => {
-    const newPlaylist = {
-      ...currentPlaylist,
-      songList: Array.from(currentPlaylist.songList),
-    };
-    newPlaylist.songList[songMenuSongIndexes[0]] = {
-      ...newPlaylist.songList[songMenuSongIndexes[0]],
-      name: rename,
-      parsedName: rename,
-    };
-    updatePlaylist(newPlaylist, [], []);
-  };
+  const renameSong = (name: string) =>
+    updateSongIndex(songMenuSongIndexes[0], {
+      name,
+      parsedName: name,
+    });
 
   const removeSongs = (banBVID = false) => {
     const songs = selectedSongs();

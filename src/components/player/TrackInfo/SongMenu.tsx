@@ -67,17 +67,15 @@ export default ({
     };
   };
 
-  const renameSong = async (rename: string) => {
-    const currentPlaylist2 = playlists[currentPlaylist.id];
-    updateSongIndex(
-      songMenuSongIndexes[0],
-      { name: rename, parsedName: rename },
-      currentPlaylist2
-    );
+  const renameSong = async (name: string) => {
+    updateSongIndex(songMenuSongIndexes[0], {
+      name,
+      parsedName: name,
+    });
     const index = await TrackPlayer.getActiveTrackIndex();
     index !== undefined &&
       (await TrackPlayer.updateMetadataForTrack(index, {
-        title: rename,
+        title: name,
       }));
     updateTrack();
   };
