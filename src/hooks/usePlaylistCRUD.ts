@@ -1,5 +1,6 @@
 import { useNoxSetting } from '@stores/useApp';
 import { logger } from '@utils/Logger';
+import { removeSongBiliShazamed } from '../objects/Song';
 import { refreshMetadata } from '../utils/mediafetch/resolveURL';
 import useAnalytics from '../utils/Analytics';
 import { getPlaylistUniqBVIDs } from '../objects/Playlist';
@@ -201,6 +202,13 @@ const usePlaylistCRUD = (mPlaylist?: NoxMedia.Playlist) => {
     rssUpdate(undefined, newPlaylist);
   };
 
+  const playlistRemoveBiliShazamed = (playlist = getPlaylist()) => {
+    updatePlaylist({
+      ...playlist,
+      songList: playlist.songList.map(song => removeSongBiliShazamed(song)),
+    });
+  };
+
   return {
     updateSong,
     updateSongIndex,
@@ -217,6 +225,7 @@ const usePlaylistCRUD = (mPlaylist?: NoxMedia.Playlist) => {
     removeSongsFromAllLists,
     rssUpdate,
     reloadBVid,
+    playlistRemoveBiliShazamed,
   };
 };
 
