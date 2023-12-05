@@ -176,6 +176,11 @@ const usePlaylistCRUD = () => {
     return newPlaylist;
   };
 
+  const removeSongsFromAllLists = (songs: NoxMedia.Song[], banBVID = false) =>
+    Object.values(playlists).forEach(playlist =>
+      removeSongs(songs, banBVID, playlist)
+    );
+
   return {
     updateSong,
     updateSongIndex,
@@ -189,6 +194,7 @@ const usePlaylistCRUD = () => {
     playlistSync2Bilibili,
     playlistUpdate,
     removeSongs,
+    removeSongsFromAllLists,
   };
 };
 
