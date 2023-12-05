@@ -11,7 +11,6 @@ export interface UseFav {
   performSearch: (searchedVal: string) => void;
   handleSearch: (searchedVal: string) => void;
   rssUpdate: (subscribeUrls?: string[]) => Promise<NoxMedia.Playlist>;
-  saveCurrentList: (nPlaylist: Partial<NoxMedia.Playlist>) => void;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   searchBarRef: React.MutableRefObject<any>;
   refreshing: boolean;
@@ -39,8 +38,6 @@ const usePlaylist = (playlist: NoxMedia.Playlist): UseFav => {
   const progressEmitter = useNoxSetting(
     state => state.searchBarProgressEmitter
   );
-  const saveCurrentList = (v: Partial<NoxMedia.Playlist>) =>
-    updatePlaylist({ ...playlist, ...v });
   const searchBarRef = useRef();
 
   const handleSearch = (searchedVal: string) => {
@@ -111,7 +108,6 @@ const usePlaylist = (playlist: NoxMedia.Playlist): UseFav => {
     setRows,
     handleSearch,
     rssUpdate,
-    saveCurrentList,
     searchBarRef,
     performSearch,
     refreshing,
