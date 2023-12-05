@@ -83,7 +83,8 @@ const usePlaylistCRUD = (mPlaylist?: NoxMedia.Playlist) => {
     progressEmitter(100);
     const promises: Promise<void>[] = [];
     const validBVIds: Array<string> = [];
-    getPlaylistUniqBVIDs(playlist).forEach(bvid =>
+    const uniqBVIds = getPlaylistUniqBVIDs(playlist);
+    uniqBVIds.forEach(bvid =>
       promises.push(
         fetchVideoInfo(bvid).then(val => {
           if (val) validBVIds.push(val.bvid);
@@ -102,6 +103,7 @@ const usePlaylistCRUD = (mPlaylist?: NoxMedia.Playlist) => {
       []
     );
     progressEmitter(0);
+    return uniqBVIds.length - validBVIds.length;
   };
 
   const playlistBiliShazam = async (playlist = getPlaylist()) => {
