@@ -46,10 +46,10 @@ export default ({
   const { t } = useTranslation();
   const currentPlaylist = useNoxSetting(state => state.currentPlayingList);
   const playlists = useNoxSetting(state => state.playlists);
-  const updatePlaylist = useNoxSetting(state => state.updatePlaylist);
   const updateTrack = useNoxSetting(state => state.updateTrack);
 
-  const { updateSongIndex, updateSongMetadata } = usePlaylistCRUD();
+  const playlistCRUD = usePlaylistCRUD();
+  const { updateSongIndex, updateSongMetadata } = playlistCRUD;
   const { startRadio, radioAvailable } = useSongOperations();
   const { playFromPlaylist } = usePlayback();
 
@@ -97,18 +97,7 @@ export default ({
   };
 
   const removeSongs = async (banBVID = false) => {
-    const currentPlaylist2 = playlists[currentPlaylist.id];
-    const songs = [song];
-    const newPlaylist = banBVID
-      ? {
-          ...currentPlaylist2,
-          blacklistedUrl: currentPlaylist2.blacklistedUrl.concat(
-            songs.map(song => song.bvid)
-          ),
-        }
-      : currentPlaylist2;
-    updatePlaylist(newPlaylist, [], songs);
-    playFromPlaylist({ playlist: newPlaylist });
+    playFromPlaylist({ playlist: playlistCRUD.removeSongs([song], banBVID) });
     setSongMenuVisible(false);
   };
 

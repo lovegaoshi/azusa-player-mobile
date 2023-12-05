@@ -43,8 +43,8 @@ export default ({ usePlaylist, prepareForLayoutAnimationRender }: Props) => {
   const menuCoord = useNoxSetting(state => state.songMenuCoords);
   const songMenuSongIndexes = useNoxSetting(state => state.songMenuSongIndexes);
   const currentPlaylist = useNoxSetting(state => state.currentPlaylist);
-  const updatePlaylist = useNoxSetting(state => state.updatePlaylist);
-  const { updateSongIndex } = usePlaylistCRUD();
+  const playlistCRUD = usePlaylistCRUD();
+  const { updateSongIndex } = playlistCRUD;
   const setPlaylistSearchAutoFocus = useNoxSetting(
     state => state.setPlaylistSearchAutoFocus
   );
@@ -96,16 +96,7 @@ export default ({ usePlaylist, prepareForLayoutAnimationRender }: Props) => {
     if (songs.length === 0) {
       prepareForLayoutAnimationRender();
     }
-    console.log(songs);
-    const newPlaylist = banBVID
-      ? {
-          ...currentPlaylist,
-          blacklistedUrl: currentPlaylist.blacklistedUrl.concat(
-            songs.map(song => song.bvid)
-          ),
-        }
-      : { ...currentPlaylist };
-    updatePlaylist(newPlaylist, [], songs);
+    playlistCRUD.removeSongs(songs, banBVID);
     setSongMenuVisible(false);
     resetChecked();
   };

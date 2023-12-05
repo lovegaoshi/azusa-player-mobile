@@ -62,8 +62,10 @@ const usePlaylistCRUD = () => {
     return metadata;
   };
 
-  const updateCurrentSongMetadata = async (override = false) => {
-    const playlist = playlists[currentPlaylist.id];
+  const updateCurrentSongMetadata = async (
+    override = false,
+    playlist = getPlaylist()
+  ) => {
     if (playlist === undefined) return;
     const index = playlist.songList.findIndex(
       song => song.id === currentPlayingId
@@ -76,7 +78,7 @@ const usePlaylistCRUD = () => {
     return metadata;
   };
 
-  const playlistCleanup = async (playlist = currentPlaylist) => {
+  const playlistCleanup = async (playlist = getPlaylist()) => {
     progressEmitter(100);
     const promises: Promise<void>[] = [];
     const validBVIds: Array<string> = [];
@@ -101,7 +103,7 @@ const usePlaylistCRUD = () => {
     progressEmitter(0);
   };
 
-  const playlistBiliShazam = async (playlist = currentPlaylist) => {
+  const playlistBiliShazam = async (playlist = getPlaylist()) => {
     progressEmitter(100);
     const newSongList = await biliShazamOnSonglist(
       playlist.songList,
@@ -137,7 +139,7 @@ const usePlaylistCRUD = () => {
     );
   };
 
-  const playlistClear = (playlist = currentPlaylist) =>
+  const playlistClear = (playlist = getPlaylist()) =>
     updatePlaylist(
       {
         ...playlist,
@@ -147,15 +149,33 @@ const usePlaylistCRUD = () => {
       []
     );
 
-  const playlistSync2Bilibili = async (playlist = currentPlaylist) => {
+  const playlistSync2Bilibili = async (playlist = getPlaylist()) => {
     await syncFavlist(playlist, progressEmitter);
     progressEmitter(0);
   };
 
   const playlistUpdate = (
-    playlist = currentPlaylist,
-    v: Partial<NoxMedia.Playlist>
+    v: Partial<NoxMedia.Playlist>,
+    playlist = currentPlaylist
   ) => updatePlaylist({ ...playlist, ...v });
+
+  const removeSongs = (
+    songs: NoxMedia.Song[],
+    banBVID = false,
+    playlist = getPlaylist()
+  ) => {
+    const newPlaylist = banBVID
+      ? {
+          ...playlist,
+          blacklistedUrl: playlist.blacklistedUrl.concat(
+            songs.map(song => song.bvid)
+          ),
+        }
+      : playlist;
+    updatePlaylist(newPlaylist, [], songs);
+    return newPlaylist;
+  };
+
   return {
     updateSong,
     updateSongIndex,
@@ -168,6 +188,7 @@ const usePlaylistCRUD = () => {
     playlistClear,
     playlistSync2Bilibili,
     playlistUpdate,
+    removeSongs,
   };
 };
 
