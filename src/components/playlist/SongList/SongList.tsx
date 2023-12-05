@@ -12,7 +12,7 @@ import { useNoxSetting } from '@stores/useApp';
 import SongMenu from './SongMenu';
 import PlaylistInfo from '../Info/PlaylistInfo';
 import PlaylistMenuButton from '../Menu/PlaylistMenuButton';
-import usePlaylist from '../usePlaylist';
+import usePlaylist from '../usePlaylistRN';
 
 const PlaylistList = () => {
   const currentPlayingId = useNoxSetting(state => state.currentPlayingId);

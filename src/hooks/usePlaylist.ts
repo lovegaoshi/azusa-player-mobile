@@ -1,8 +1,8 @@
 import React, { useState, useRef } from 'react';
 
 import { reParseSearch } from '../utils/re';
-import { updateSubscribeFavList } from '../utils/BiliSubscribe';
 import { useNoxSetting } from '../stores/useApp';
+import usePlaylistCRUD from './usePlaylistCRUD';
 
 export interface UsePlaylist {
   playlist: NoxMedia.Playlist;
@@ -34,10 +34,7 @@ const usePlaylist = (playlist: NoxMedia.Playlist): UsePlaylist => {
   const currentPlayingList = useNoxSetting(state => state.currentPlayingList);
   const currentPlayingId = useNoxSetting(state => state.currentPlayingId);
   const setCurrentPlayingId = useNoxSetting(state => state.setCurrentPlayingId);
-  const updatePlaylist = useNoxSetting(state => state.updatePlaylist);
-  const progressEmitter = useNoxSetting(
-    state => state.searchBarProgressEmitter
-  );
+  const playlistCRUD = usePlaylistCRUD(playlist);
   const searchBarRef = useRef();
 
   const handleSearch = (searchedVal: string) => {
@@ -48,14 +45,17 @@ const usePlaylist = (playlist: NoxMedia.Playlist): UsePlaylist => {
     setRows(reParseSearch({ searchStr: searchedVal, rows: playlist.songList }));
   };
 
-  const rssUpdate = (subscribeUrls?: string[]) =>
-    updateSubscribeFavList({
-      playlist,
-      subscribeUrls,
-      progressEmitter,
-      updatePlaylist,
-    });
-
+  const rssUpdate = async (subscribeUrls?: string[]) => {
+    setRefreshing(true);
+    try {
+      const result = await playlistCRUD.rssUpdate(subscribeUrls);
+      setRefreshing(false);
+      return result;
+    } catch (e) {
+      setRefreshing(false);
+      throw e;
+    }
+  };
   /**
    * forcefully search a string in the playlist.
    * setting the searchbar ref's value directly is bugged with

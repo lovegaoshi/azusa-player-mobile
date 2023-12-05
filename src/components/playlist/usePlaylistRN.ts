@@ -39,7 +39,7 @@ export default (playlist: NoxMedia.Playlist) => {
   );
   const playlistRef = useRef<FlashList<NoxMedia.Song>>(null);
   const usedPlaylist = usePlaylist(playlist);
-  const { setRefreshing, rssUpdate, rows, setRows } = usedPlaylist;
+  const { rssUpdate, rows, setRows } = usedPlaylist;
   const { playFromPlaylist } = usePlayback();
   const { preformFade } = useTPControls();
 
@@ -51,7 +51,6 @@ export default (playlist: NoxMedia.Playlist) => {
       text: t('PlaylistOperations.updating', { playlist }),
       duration: Snackbar.LENGTH_INDEFINITE,
     });
-    setRefreshing(true);
     activateKeepAwakeAsync();
     try {
       await rssUpdate();
@@ -63,7 +62,6 @@ export default (playlist: NoxMedia.Playlist) => {
     Snackbar.show({
       text: t('PlaylistOperations.updated', { playlist }),
     });
-    setRefreshing(false);
     deactivateKeepAwake();
   };
 

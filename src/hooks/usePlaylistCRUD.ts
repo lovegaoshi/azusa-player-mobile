@@ -10,8 +10,9 @@ import {
 } from '../utils/mediafetch/bilivideo';
 import { biliShazamOnSonglist } from '../utils/mediafetch/bilishazam';
 import { syncFavlist } from '../utils/Bilibili/bilifavOperate';
+import { updateSubscribeFavList } from '../utils/BiliSubscribe';
 
-const usePlaylistCRUD = () => {
+const usePlaylistCRUD = (mPlaylist?: NoxMedia.Playlist) => {
   const { playlistAnalyze } = useAnalytics();
   const currentPlaylist = useNoxSetting(state => state.currentPlayingList);
   const currentPlayingId = useNoxSetting(state => state.currentPlayingId);
@@ -21,7 +22,7 @@ const usePlaylistCRUD = () => {
     state => state.searchBarProgressEmitter
   );
 
-  const getPlaylist = () => playlists[currentPlaylist.id];
+  const getPlaylist = () => mPlaylist || playlists[currentPlaylist.id];
 
   const updateSong = (
     song: NoxMedia.Song,
@@ -181,6 +182,23 @@ const usePlaylistCRUD = () => {
       removeSongs(songs, banBVID, playlist)
     );
 
+  const rssUpdate = (subscribeUrls?: string[], playlist = getPlaylist()) =>
+    updateSubscribeFavList({
+      playlist,
+      subscribeUrls,
+      progressEmitter,
+      updatePlaylist,
+    });
+  // TODO: i dont think this is how it works
+  const reloadBVid = (songs: NoxMedia.Song[], playlist = getPlaylist()) => {
+    const bvids = Array.from(new Set(songs.map(song => song.bvid)));
+    const newPlaylist: NoxMedia.Playlist = {
+      ...playlist,
+      songList: playlist.songList.filter(song => !bvids.includes(song.bvid)),
+    };
+    rssUpdate(undefined, newPlaylist);
+  };
+
   return {
     updateSong,
     updateSongIndex,
@@ -195,6 +213,8 @@ const usePlaylistCRUD = () => {
     playlistUpdate,
     removeSongs,
     removeSongsFromAllLists,
+    rssUpdate,
+    reloadBVid,
   };
 };
 
