@@ -11,7 +11,7 @@ import {
 import { biliShazamOnSonglist } from '../utils/mediafetch/bilishazam';
 import { syncFavlist } from '../utils/Bilibili/bilifavOperate';
 
-const useUpdatePlaylist = () => {
+const usePlaylistCRUD = () => {
   const { playlistAnalyze } = useAnalytics();
   const currentPlaylist = useNoxSetting(state => state.currentPlayingList);
   const currentPlayingId = useNoxSetting(state => state.currentPlayingId);
@@ -171,4 +171,4 @@ const useUpdatePlaylist = () => {
   };
 };
 
-export default useUpdatePlaylist;
+export default usePlaylistCRUD;

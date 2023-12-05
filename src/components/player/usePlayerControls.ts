@@ -13,7 +13,7 @@ import appStore, { getABRepeatRaw, setCurrentPlaying } from '@stores/appStore';
 import noxPlayingList from '@stores/playingList';
 import { NoxRepeatMode } from '@enums/RepeatMode';
 import { fadePlay } from '@utils/RNTPUtils';
-import useUpdatePlaylist from '@hooks/useUpdatePlaylist';
+import usePlaylistCRUD from '@hooks/usePlaylistCRUD';
 
 const { getState } = noxPlayingList;
 const { fadeIntervalMs, fadeIntervalSec } = appStore.getState();
@@ -23,7 +23,7 @@ export default () => {
   const [abRepeat, setABRepeat] = React.useState<[number, number]>([0, 1]);
   const [bRepeatDuration, setBRepeatDuration] = React.useState(9999);
   const setCurrentPlayingId = useNoxSetting(state => state.setCurrentPlayingId);
-  const { updateCurrentSongMetadata } = useUpdatePlaylist();
+  const { updateCurrentSongMetadata } = usePlaylistCRUD();
 
   useTrackPlayerEvents([Event.PlaybackActiveTrackChanged], event => {
     if (event.track && event.track.song) {

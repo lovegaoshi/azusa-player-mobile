@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next';
 import TrackPlayer from 'react-native-track-player';
 
 import { useNoxSetting } from '@stores/useApp';
-import useUpdatePlaylist from '@hooks/useUpdatePlaylist';
+import usePlaylistCRUD from '@hooks/usePlaylistCRUD';
 import { CopiedPlaylistMenuItem } from '@components/buttons/CopiedPlaylistButton';
 import RenameSongButton from './RenameSong/RenameSongButton';
 import useSongOperations from '@hooks/useSongOperations';
@@ -49,7 +49,7 @@ export default ({
   const updatePlaylist = useNoxSetting(state => state.updatePlaylist);
   const updateTrack = useNoxSetting(state => state.updateTrack);
 
-  const { updateSongIndex, updateSongMetadata } = useUpdatePlaylist();
+  const { updateSongIndex, updateSongMetadata } = usePlaylistCRUD();
   const { startRadio, radioAvailable } = useSongOperations();
   const { playFromPlaylist } = usePlayback();
 
