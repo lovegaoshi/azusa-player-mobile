@@ -96,6 +96,11 @@ export default () => {
     progressEmitter(0);
   };
 
+  const playlistUpdate = (
+    playlist = currentPlaylist,
+    v: Partial<NoxMedia.Playlist>
+  ) => updatePlaylist({ ...playlist, ...v });
+
   return {
     playlistAnalyze,
     playlistCleanup,
@@ -103,5 +108,6 @@ export default () => {
     playlistReload,
     playlistClear,
     playlistSync2Bilibili,
+    playlistUpdate,
   };
 };
