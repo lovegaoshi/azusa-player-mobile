@@ -85,11 +85,12 @@ export const setSongBiliShazamed = (
   } as NoxMedia.Song;
 };
 
-export const removeSongBiliShazamed = (song: NoxMedia.Song) => {
-  song.biliShazamedName = undefined;
-  song.name = song.nameRaw;
-  song.parsedName = reExtractSongName(song.name, song.singerId);
-};
+export const removeSongBiliShazamed = (song: NoxMedia.Song): NoxMedia.Song => ({
+  ...song,
+  biliShazamedName: undefined,
+  name: song.nameRaw,
+  parsedName: reExtractSongName(song.name, song.singerId),
+});
 
 export const dummySong = (): NoxMedia.Song => {
   return {

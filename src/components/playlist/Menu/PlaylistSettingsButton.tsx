@@ -2,36 +2,34 @@ import React, { useState } from 'react';
 import { Menu } from 'react-native-paper';
 import { useTranslation } from 'react-i18next';
 
-import Dialog from '../dialogs/RenameSongDialog';
-import { dummySongObj } from '@objects/Song';
+import Dialog from './PlaylistSettingsDialog';
 
 const ICON = 'pencil';
 
-interface menuProps {
-  getSongOnClick: () => NoxMedia.Song;
+interface Props {
   disabled?: boolean;
-  onSubmit?: (rename: string) => void;
+  onSubmit?: (playlist: NoxMedia.Playlist) => void;
   onCancel?: () => void;
+  playlist: NoxMedia.Playlist;
 }
 
-export const RenameSongMenuItem = ({
-  getSongOnClick,
+export default ({
   disabled = false,
-  onSubmit = (rename: string) => console.log(rename),
+  onSubmit = () => undefined,
   onCancel = () => undefined,
-}: menuProps) => {
+  playlist,
+}: Props) => {
   const { t } = useTranslation();
   const [dialogOpen, setDialogOpen] = useState(false);
-  const [song, setSong] = useState(dummySongObj);
 
   const handleClose = () => {
     setDialogOpen(false);
     onCancel();
   };
 
-  const handleSubmit = (rename: string) => {
+  const handleSubmit = (playlist: NoxMedia.Playlist) => {
     setDialogOpen(false);
-    onSubmit(rename);
+    onSubmit(playlist);
   };
 
   return (
@@ -40,14 +38,13 @@ export const RenameSongMenuItem = ({
         leadingIcon={ICON}
         onPress={() => {
           setDialogOpen(true);
-          setSong(getSongOnClick());
         }}
-        title={t('SongOperations.songRenameTitle')}
+        title={t('PlaylistOperations.playlistSettingsTitle')}
         disabled={disabled}
       />
       <Dialog
+        playlist={playlist}
         visible={dialogOpen}
-        song={song}
         onClose={handleClose}
         onSubmit={handleSubmit}
       />

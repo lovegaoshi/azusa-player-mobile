@@ -2,9 +2,9 @@ import Snackbar from 'react-native-snackbar';
 import { useTranslation } from 'react-i18next';
 
 import { useNoxSetting } from '@stores/useApp';
-import usePlaylist from './usePlaylist';
+import usePlaylistCRUD from './usePlaylistCRUD';
 import useAlert from '@components/dialogs/useAlert';
-import usePlaylistOperation from './usePlaylistOperation';
+import usePlaylistAA from './usePlaylistAA';
 
 interface Props {
   callback?: () => void;
@@ -19,8 +19,8 @@ export default ({ callback = () => {} }: Props) => {
     playlistReload,
     playlistClear,
     playlistSync2Bilibili,
-  } = usePlaylist();
-  const { removePlaylist } = usePlaylistOperation();
+  } = usePlaylistCRUD();
+  const { removePlaylist } = usePlaylistAA();
   const { OneWayAlert, TwoWayAlert } = useAlert();
 
   const playlistSync2BilibiliRN = async (playlist = currentPlaylist) => {

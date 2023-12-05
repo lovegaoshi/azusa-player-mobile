@@ -4,9 +4,9 @@ import { Image } from 'expo-image';
 import { randomChoice } from '@utils/Utils';
 
 export const localSplashes = [
-  () => require('../../assets/splash/steria2.jpg'),
-  () => require('../../assets/splash/abu-10k-subs.gif'),
-  () => require('../../assets/splash/nox-3d.png'),
+  () => require('@assets/splash/steria2.jpg'),
+  () => require('@assets/splash/abu-10k-subs.gif'),
+  () => require('@assets/splash/nox-3d.png'),
 ];
 const randomSplashes = randomChoice(localSplashes);
 

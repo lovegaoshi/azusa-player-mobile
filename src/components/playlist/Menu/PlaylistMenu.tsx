@@ -2,11 +2,10 @@ import * as React from 'react';
 import { Menu } from 'react-native-paper';
 import { useTranslation } from 'react-i18next';
 
-import { useNoxSetting } from '@stores/useApp';
 import usePlaylist from '@hooks/usePlaylistRN';
 import PlaylistSettingsButton from './PlaylistSettingsButton';
 import { PLAYLIST_ENUMS } from '@enums/Playlist';
-import { CopiedPlaylistMenuItem } from '../buttons/CopiedPlaylistButton';
+import { CopiedPlaylistMenuItem } from '@components/buttons/CopiedPlaylistButton';
 
 enum ICONS {
   SETTINGS = 'cog',
@@ -24,15 +23,16 @@ interface Props {
   visible?: boolean;
   toggleVisible?: () => void;
   menuCoords?: NoxTheme.coordinates;
+  playlist: NoxMedia.Playlist;
 }
 
 export default ({
   visible = false,
   toggleVisible = () => undefined,
   menuCoords = { x: 0, y: 0 },
+  playlist,
 }: Props) => {
   const { t } = useTranslation();
-  const currentPlaylist = useNoxSetting(state => state.currentPlaylist);
   const {
     playlistSync2BilibiliRN,
     playlistAnalysis,
@@ -43,13 +43,16 @@ export default ({
     playlistBiliShazamRN,
   } = usePlaylist({ callback: toggleVisible });
   const limitedPlaylistFeatures =
-    currentPlaylist.type !== PLAYLIST_ENUMS.TYPE_TYPICA_PLAYLIST;
+    playlist.type !== PLAYLIST_ENUMS.TYPE_TYPICA_PLAYLIST;
 
   return (
     <Menu visible={visible} onDismiss={toggleVisible} anchor={menuCoords}>
-      <PlaylistSettingsButton disabled={limitedPlaylistFeatures} />
+      <PlaylistSettingsButton
+        disabled={limitedPlaylistFeatures}
+        playlist={playlist}
+      />
       <CopiedPlaylistMenuItem
-        getFromListOnClick={() => currentPlaylist}
+        getFromListOnClick={() => playlist}
         onSubmit={() => toggleVisible()}
       />
       <Menu.Item

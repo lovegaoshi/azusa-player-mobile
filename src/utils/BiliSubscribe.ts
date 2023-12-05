@@ -21,7 +21,7 @@ export const updateSubscribeFavList = async ({
   overwriteOnRefresh = () =>
     playlist.newSongOverwrite || playlist.title.includes('live'),
   callback = () => undefined,
-}: Props) => {
+}: Props): Promise<NoxMedia.Playlist> => {
   const newPlaylist = { ...playlist, lastSubscribed: new Date().getTime() };
   if (subscribeUrls === undefined) {
     subscribeUrls = newPlaylist.subscribeUrl;

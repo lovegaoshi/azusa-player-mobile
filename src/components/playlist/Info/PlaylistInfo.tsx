@@ -13,23 +13,27 @@ import SearchMenu from './PlaylistSearchMenu';
 import { useNoxSetting } from '@stores/useApp';
 import { seconds2HHMMSS } from '@utils/Utils';
 
-interface Props {
+interface UsePlaylist {
   searchText: string;
   setSearchText: (val: string) => void;
   search?: boolean;
-  onPressed?: () => void;
   selected: boolean[];
   checking: boolean;
 }
 
-export default ({
-  searchText,
-  setSearchText,
-  search = false,
-  onPressed = () => undefined,
-  selected,
-  checking,
-}: Props) => {
+interface Props {
+  usePlaylist: UsePlaylist;
+  onPressed?: () => void;
+}
+
+export default ({ usePlaylist, onPressed = () => undefined }: Props) => {
+  const {
+    searchText,
+    setSearchText,
+    search = false,
+    selected,
+    checking,
+  } = usePlaylist;
   const { t } = useTranslation();
   const currentPlaylist = useNoxSetting(state => state.currentPlaylist);
   const playerStyle = useNoxSetting(state => state.playerStyle);

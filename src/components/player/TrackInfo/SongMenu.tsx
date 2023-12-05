@@ -5,9 +5,9 @@ import { useTranslation } from 'react-i18next';
 import TrackPlayer from 'react-native-track-player';
 
 import { useNoxSetting } from '@stores/useApp';
-import useUpdatePlaylist from '@hooks/useUpdatePlaylist';
-import { CopiedPlaylistMenuItem } from '../../buttons/CopiedPlaylistButton';
-import { RenameSongMenuItem } from '../../buttons/RenameSongButton';
+import usePlaylistCRUD from '@hooks/usePlaylistCRUD';
+import { CopiedPlaylistMenuItem } from '@components/buttons/CopiedPlaylistButton';
+import RenameSongButton from './RenameSong/RenameSongButton';
 import useSongOperations from '@hooks/useSongOperations';
 import { addR128Gain, getR128Gain } from '@utils/ffmpeg/r128Store';
 import ABSliderMenu from './ABSliderMenu';
@@ -46,10 +46,10 @@ export default ({
   const { t } = useTranslation();
   const currentPlaylist = useNoxSetting(state => state.currentPlayingList);
   const playlists = useNoxSetting(state => state.playlists);
-  const updatePlaylist = useNoxSetting(state => state.updatePlaylist);
   const updateTrack = useNoxSetting(state => state.updateTrack);
 
-  const { updateSongIndex, updateSongMetadata } = useUpdatePlaylist();
+  const playlistCRUD = usePlaylistCRUD();
+  const { updateSongIndex, updateSongMetadata } = playlistCRUD;
   const { startRadio, radioAvailable } = useSongOperations();
   const { playFromPlaylist } = usePlayback();
 
@@ -67,17 +67,15 @@ export default ({
     };
   };
 
-  const renameSong = async (rename: string) => {
-    const currentPlaylist2 = playlists[currentPlaylist.id];
-    updateSongIndex(
-      songMenuSongIndexes[0],
-      { name: rename, parsedName: rename },
-      currentPlaylist2
-    );
+  const renameSong = async (name: string) => {
+    updateSongIndex(songMenuSongIndexes[0], {
+      name,
+      parsedName: name,
+    });
     const index = await TrackPlayer.getActiveTrackIndex();
     index !== undefined &&
       (await TrackPlayer.updateMetadataForTrack(index, {
-        title: rename,
+        title: name,
       }));
     updateTrack();
   };
@@ -99,18 +97,7 @@ export default ({
   };
 
   const removeSongs = async (banBVID = false) => {
-    const currentPlaylist2 = playlists[currentPlaylist.id];
-    const songs = [song];
-    const newPlaylist = banBVID
-      ? {
-          ...currentPlaylist2,
-          blacklistedUrl: currentPlaylist2.blacklistedUrl.concat(
-            songs.map(song => song.bvid)
-          ),
-        }
-      : currentPlaylist2;
-    updatePlaylist(newPlaylist, [], songs);
-    playFromPlaylist({ playlist: newPlaylist });
+    playFromPlaylist({ playlist: playlistCRUD.removeSongs([song], banBVID) });
     setSongMenuVisible(false);
   };
 
@@ -125,7 +112,7 @@ export default ({
         getFromListOnClick={selectedPlaylist}
         onSubmit={closeMenu}
       />
-      <RenameSongMenuItem
+      <RenameSongButton
         getSongOnClick={() => song}
         onSubmit={(rename: string) => {
           closeMenu();

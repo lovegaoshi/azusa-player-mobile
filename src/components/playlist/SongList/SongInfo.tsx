@@ -11,15 +11,19 @@ import { seconds2MMSS } from '@utils/Utils';
 import { PLAYLIST_ENUMS } from '@enums/Playlist';
 import NoxCache from '@utils/Cache';
 
+interface UsePlaylist {
+  playSong: (song: NoxMedia.Song) => void;
+  checking?: boolean;
+  selected: boolean[];
+}
+
 interface Props {
   item: NoxMedia.Song;
   index: number;
   currentPlaying: boolean;
-  playSong: (song: NoxMedia.Song) => void;
-  checking?: boolean;
-  onChecked?: () => void;
+  usePlaylist: UsePlaylist;
   onLongPress?: () => void;
-  checkedList: boolean[];
+  onChecked?: () => void;
   networkCellular?: boolean;
 }
 
@@ -27,13 +31,12 @@ const SongInfo = ({
   item,
   index,
   currentPlaying,
-  playSong,
-  checkedList,
-  checking = false,
-  onChecked = () => undefined,
+  usePlaylist,
   onLongPress = () => undefined,
+  onChecked = () => undefined,
   networkCellular = false,
 }: Props) => {
+  const { playSong, checking = false, selected } = usePlaylist;
   const currentPlaylist = useNoxSetting(state => state.currentPlaylist);
   const playerSetting = useNoxSetting(state => state.playerSetting);
   const playerStyle = useNoxSetting(state => state.playerStyle);
@@ -69,7 +72,7 @@ const SongInfo = ({
     // which I dont think its terribly bad?
     return currentPlaylist.songList.findIndex(song => song.id === id);
   };
-  const checked = checkedList[getSongIndex()];
+  const checked = selected[getSongIndex()];
 
   return (
     <View

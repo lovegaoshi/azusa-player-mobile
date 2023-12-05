@@ -3,8 +3,9 @@ import { Menu } from 'react-native-paper';
 import { useTranslation } from 'react-i18next';
 
 import { useNoxSetting } from '@stores/useApp';
-import { CopiedPlaylistMenuItem } from '../buttons/CopiedPlaylistButton';
-import { RenameSongMenuItem } from '../buttons/RenameSongButton';
+import usePlaylistCRUD from '@hooks/usePlaylistCRUD';
+import { CopiedPlaylistMenuItem } from '@components/buttons/CopiedPlaylistButton';
+import RenameSongButton from '@components/player/TrackInfo/RenameSong/RenameSongButton';
 import useSongOperations from '@hooks/useSongOperations';
 enum ICONS {
   SEND_TO = 'playlist-plus',
@@ -17,28 +18,33 @@ enum ICONS {
   RADIO = 'radio-tower',
 }
 
-interface Props {
+interface UsePlaylist {
   checking?: boolean;
   checked?: boolean[];
   resetChecked?: () => void;
   handleSearch?: (val: string) => void;
+}
+
+interface Props {
+  usePlaylist: UsePlaylist;
   prepareForLayoutAnimationRender: () => void;
 }
 
-export default ({
-  checking = false,
-  checked = [],
-  resetChecked = () => undefined,
-  handleSearch = () => undefined,
-  prepareForLayoutAnimationRender,
-}: Props) => {
+export default ({ usePlaylist, prepareForLayoutAnimationRender }: Props) => {
+  const {
+    checking = false,
+    checked = [],
+    resetChecked = () => undefined,
+    handleSearch = () => undefined,
+  } = usePlaylist;
   const { t } = useTranslation();
   const songMenuVisible = useNoxSetting(state => state.songMenuVisible);
   const setSongMenuVisible = useNoxSetting(state => state.setSongMenuVisible);
   const menuCoord = useNoxSetting(state => state.songMenuCoords);
   const songMenuSongIndexes = useNoxSetting(state => state.songMenuSongIndexes);
   const currentPlaylist = useNoxSetting(state => state.currentPlaylist);
-  const updatePlaylist = useNoxSetting(state => state.updatePlaylist);
+  const playlistCRUD = usePlaylistCRUD();
+  const { updateSongIndex } = playlistCRUD;
   const setPlaylistSearchAutoFocus = useNoxSetting(
     state => state.setPlaylistSearchAutoFocus
   );
@@ -78,18 +84,11 @@ export default ({
     };
   };
 
-  const renameSong = (rename: string) => {
-    const newPlaylist = {
-      ...currentPlaylist,
-      songList: Array.from(currentPlaylist.songList),
-    };
-    newPlaylist.songList[songMenuSongIndexes[0]] = {
-      ...newPlaylist.songList[songMenuSongIndexes[0]],
-      name: rename,
-      parsedName: rename,
-    };
-    updatePlaylist(newPlaylist, [], []);
-  };
+  const renameSong = (name: string) =>
+    updateSongIndex(songMenuSongIndexes[0], {
+      name,
+      parsedName: name,
+    });
 
   const removeSongs = (banBVID = false) => {
     const songs = selectedSongs();
@@ -97,16 +96,7 @@ export default ({
     if (songs.length === 0) {
       prepareForLayoutAnimationRender();
     }
-    console.log(songs);
-    const newPlaylist = banBVID
-      ? {
-          ...currentPlaylist,
-          blacklistedUrl: currentPlaylist.blacklistedUrl.concat(
-            songs.map(song => song.bvid)
-          ),
-        }
-      : { ...currentPlaylist };
-    updatePlaylist(newPlaylist, [], songs);
+    playlistCRUD.removeSongs(songs, banBVID);
     setSongMenuVisible(false);
     resetChecked();
   };
@@ -117,7 +107,7 @@ export default ({
         getFromListOnClick={selectedPlaylist}
         onSubmit={closeMenu}
       />
-      <RenameSongMenuItem
+      <RenameSongButton
         getSongOnClick={() => selectedSongs()[0]}
         disabled={checking}
         onSubmit={(rename: string) => {

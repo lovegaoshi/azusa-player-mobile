@@ -2,8 +2,8 @@ import * as React from 'react';
 import { View } from 'react-native';
 
 import { styles } from '../style';
-import BiliSearchbar from './BiliSearchbar';
-import PlaylistList from './PlaylistList';
+import BiliSearchbar from './BiliSearch/BiliSearchbar';
+import PlaylistList from './SongList/SongList';
 import { useNoxSetting } from '@stores/useApp';
 
 const Playlist = () => {

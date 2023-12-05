@@ -1,7 +1,9 @@
 import React from 'react';
 import { Button, Dialog, Portal } from 'react-native-paper';
 import { useTranslation } from 'react-i18next';
-import PortaledInput, { PortalInputRef } from './PortaledInput';
+import PortaledInput, {
+  PortalInputRef,
+} from '@components/dialogs/PortaledInput';
 
 interface Props {
   visible: boolean;
