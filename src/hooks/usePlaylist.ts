@@ -20,6 +20,7 @@ export interface UseFav {
     song: NoxMedia.Song,
     callback: (p: NoxMedia.Playlist, s: NoxMedia.Song) => void
   ) => void;
+  saveCurrentList: () => void;
 }
 
 /**
@@ -102,6 +103,10 @@ const usePlaylist = (playlist: NoxMedia.Playlist): UseFav => {
     return callback({ ...playlist, songList: queuedSongList }, song);
   };
 
+  // TODO: very stupid, refactor this
+  // shouldnt mutate NoxMedia.Song for renaming!!!
+  const saveCurrentList = () => updatePlaylist(playlist);
+
   return {
     playlist,
     rows,
@@ -114,6 +119,7 @@ const usePlaylist = (playlist: NoxMedia.Playlist): UseFav => {
     setRefreshing,
     getSongIndex,
     playSong,
+    saveCurrentList,
   };
 };
 

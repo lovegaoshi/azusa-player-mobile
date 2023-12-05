@@ -42,6 +42,7 @@ module.exports = api => {
           alias: {
             tests: ['./tests/'],
             '@components': './src/components',
+            '@types': './src/types',
             '@utils': './src/utils',
             '@enums': './src/enums',
             '@objects': './src/objects',

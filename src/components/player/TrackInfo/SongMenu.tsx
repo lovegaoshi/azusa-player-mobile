@@ -6,8 +6,8 @@ import TrackPlayer from 'react-native-track-player';
 
 import { useNoxSetting } from '@stores/useApp';
 import useUpdatePlaylist from '@hooks/useUpdatePlaylist';
-import { CopiedPlaylistMenuItem } from '../../buttons/CopiedPlaylistButton';
-import { RenameSongMenuItem } from '../../buttons/RenameSongButton';
+import { CopiedPlaylistMenuItem } from '@components/buttons/CopiedPlaylistButton';
+import RenameSongButton from './RenameSong/RenameSongButton';
 import useSongOperations from '@hooks/useSongOperations';
 import { addR128Gain, getR128Gain } from '@utils/ffmpeg/r128Store';
 import ABSliderMenu from './ABSliderMenu';
@@ -125,7 +125,7 @@ export default ({
         getFromListOnClick={selectedPlaylist}
         onSubmit={closeMenu}
       />
-      <RenameSongMenuItem
+      <RenameSongButton
         getSongOnClick={() => song}
         onSubmit={(rename: string) => {
           closeMenu();

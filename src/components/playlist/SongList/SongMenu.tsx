@@ -3,8 +3,8 @@ import { Menu } from 'react-native-paper';
 import { useTranslation } from 'react-i18next';
 
 import { useNoxSetting } from '@stores/useApp';
-import { CopiedPlaylistMenuItem } from '../../buttons/CopiedPlaylistButton';
-import { RenameSongMenuItem } from '../../buttons/RenameSongButton';
+import { CopiedPlaylistMenuItem } from '@components/buttons/CopiedPlaylistButton';
+import RenameSongButton from '@components/player/TrackInfo/RenameSong/RenameSongButton';
 import useSongOperations from '@hooks/useSongOperations';
 enum ICONS {
   SEND_TO = 'playlist-plus',
@@ -121,7 +121,7 @@ export default ({ usePlaylist, prepareForLayoutAnimationRender }: Props) => {
         getFromListOnClick={selectedPlaylist}
         onSubmit={closeMenu}
       />
-      <RenameSongMenuItem
+      <RenameSongButton
         getSongOnClick={() => selectedSongs()[0]}
         disabled={checking}
         onSubmit={(rename: string) => {

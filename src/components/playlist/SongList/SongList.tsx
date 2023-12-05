@@ -5,7 +5,7 @@ import { IconButton } from 'react-native-paper';
 import { useNetInfo } from '@react-native-community/netinfo';
 import { useFocusEffect } from '@react-navigation/native';
 
-import { styles } from '../../style';
+import { styles } from '@components/style';
 import SongInfo from './SongInfo';
 import SongBackground from './SongBackground';
 import { useNoxSetting } from '@stores/useApp';

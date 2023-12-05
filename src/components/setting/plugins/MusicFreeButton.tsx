@@ -2,7 +2,7 @@ import * as React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Image } from 'expo-image';
 
-import GenericCheckDialog from '../../dialogs/GenericCheckDialog';
+import GenericCheckDialog from '@components/dialogs/GenericCheckDialog';
 import { SettingListItem } from '../useRenderSetting';
 import { MUSICFREE } from '@utils/mediafetch/mfsdk';
 import { getMusicFreePlugin, setMusicFreePlugin } from '@utils/ChromeStorage';

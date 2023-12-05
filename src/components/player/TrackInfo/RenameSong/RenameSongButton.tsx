@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Menu } from 'react-native-paper';
 import { useTranslation } from 'react-i18next';
 
-import Dialog from '../dialogs/RenameSongDialog';
+import Dialog from './RenameSongDialog';
 import { dummySongObj } from '@objects/Song';
 
 const ICON = 'pencil';
@@ -14,7 +14,7 @@ interface menuProps {
   onCancel?: () => void;
 }
 
-export const RenameSongMenuItem = ({
+export default ({
   getSongOnClick,
   disabled = false,
   onSubmit = (rename: string) => console.log(rename),

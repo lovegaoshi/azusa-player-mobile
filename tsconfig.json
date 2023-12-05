@@ -6,6 +6,7 @@
       "@/*": ["./src/*"],
       "*": ["./src/*"],
       "@components/*": ["src/components/*"],
+      "@types/*": ["src/types/*"],
       "@utils/*": ["src/utils/*"],
       "@assets/*": ["src/assets/*"],
       "@enums/*": ["src/enums/*"],
