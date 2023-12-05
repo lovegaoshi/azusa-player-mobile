@@ -45,6 +45,12 @@ export default (playlist: NoxMedia.Playlist) => {
   useEffect(loadSetting, [playlist]);
 
   return {
+    subscribeUrl,
+    setSubscribeUrl,
+    blacklistedUrl,
+    setBlacklistedUrl,
+    title,
+    setTitle,
     useBiliShazam,
     useBiliSync,
     useNewSongOverwrite,
