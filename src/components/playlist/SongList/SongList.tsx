@@ -81,7 +81,7 @@ const PlaylistList = () => {
                 : undefined
             }
           />
-          <PlaylistMenuButton disabled={checking} />
+          <PlaylistMenuButton disabled={checking} playlist={currentPlaylist} />
         </View>
       </View>
       <View style={stylesLocal.playlistContainer}>

@@ -6,17 +6,19 @@ import Dialog from './PlaylistSettingsDialog';
 
 const ICON = 'pencil';
 
-interface menuProps {
+interface Props {
   disabled?: boolean;
   onSubmit?: (playlist: NoxMedia.Playlist) => void;
   onCancel?: () => void;
+  playlist: NoxMedia.Playlist;
 }
 
 export default ({
   disabled = false,
   onSubmit = () => undefined,
   onCancel = () => undefined,
-}: menuProps) => {
+  playlist,
+}: Props) => {
   const { t } = useTranslation();
   const [dialogOpen, setDialogOpen] = useState(false);
 
@@ -41,6 +43,7 @@ export default ({
         disabled={disabled}
       />
       <Dialog
+        playlist={playlist}
         visible={dialogOpen}
         onClose={handleClose}
         onSubmit={handleSubmit}

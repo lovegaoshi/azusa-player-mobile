@@ -8,9 +8,10 @@ const ICON = 'dots-horizontal';
 
 interface Props {
   disabled?: boolean;
+  playlist: NoxMedia.Playlist;
 }
 
-export default ({ disabled = false }: Props) => {
+export default ({ disabled = false, playlist }: Props) => {
   const [dialogOpen, setDialogOpen] = useState(false);
   const [menuCoords, setMenuCoords] = useState<NoxTheme.coordinates>({
     x: 0,
@@ -41,6 +42,7 @@ export default ({ disabled = false }: Props) => {
         visible={dialogOpen}
         toggleVisible={toggleVisible}
         menuCoords={menuCoords}
+        playlist={playlist}
       />
     </React.Fragment>
   );
