@@ -4,7 +4,7 @@ import { reParseSearch } from '../utils/re';
 import { updateSubscribeFavList } from '../utils/BiliSubscribe';
 import { useNoxSetting } from '../stores/useApp';
 
-export interface UseFav {
+export interface UsePlaylist {
   playlist: NoxMedia.Playlist;
   rows: NoxMedia.Song[];
   setRows: (v: NoxMedia.Song[]) => void;
@@ -20,7 +20,6 @@ export interface UseFav {
     song: NoxMedia.Song,
     callback: (p: NoxMedia.Playlist, s: NoxMedia.Song) => void
   ) => void;
-  saveCurrentList: () => void;
 }
 
 /**
@@ -28,7 +27,7 @@ export interface UseFav {
  * @param playlist
  * @returns
  */
-const usePlaylist = (playlist: NoxMedia.Playlist): UseFav => {
+const usePlaylist = (playlist: NoxMedia.Playlist): UsePlaylist => {
   const [rows, setRows] = useState<NoxMedia.Song[]>([]);
   const [refreshing, setRefreshing] = useState(false);
   const playerSetting = useNoxSetting(state => state.playerSetting);
@@ -103,10 +102,6 @@ const usePlaylist = (playlist: NoxMedia.Playlist): UseFav => {
     return callback({ ...playlist, songList: queuedSongList }, song);
   };
 
-  // TODO: very stupid, refactor this
-  // shouldnt mutate NoxMedia.Song for renaming!!!
-  const saveCurrentList = () => updatePlaylist(playlist);
-
   return {
     playlist,
     rows,
@@ -119,7 +114,6 @@ const usePlaylist = (playlist: NoxMedia.Playlist): UseFav => {
     setRefreshing,
     getSongIndex,
     playSong,
-    saveCurrentList,
   };
 };
 
