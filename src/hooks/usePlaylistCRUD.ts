@@ -193,13 +193,20 @@ const usePlaylistCRUD = (mPlaylist?: NoxMedia.Playlist) => {
       updatePlaylist,
     });
   // TODO: i dont think this is how it works
-  const reloadBVid = (songs: NoxMedia.Song[], playlist = getPlaylist()) => {
+  const reloadBVid = async (
+    songs: NoxMedia.Song[],
+    playlist = getPlaylist()
+  ) => {
     const bvids = Array.from(new Set(songs.map(song => song.bvid)));
     const newPlaylist: NoxMedia.Playlist = {
       ...playlist,
       songList: playlist.songList.filter(song => !bvids.includes(song.bvid)),
     };
-    rssUpdate(undefined, newPlaylist);
+    const newSongList = await songFetch({
+      videoinfos: await fetchiliBVIDs(bvids, progressEmitter),
+      useBiliTag: playlist.useBiliShazam || false,
+    });
+    updatePlaylist(newPlaylist, newSongList);
   };
 
   const playlistRemoveBiliShazamed = (playlist = getPlaylist()) => {
