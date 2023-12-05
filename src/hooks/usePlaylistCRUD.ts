@@ -199,6 +199,30 @@ const usePlaylistCRUD = (mPlaylist?: NoxMedia.Playlist) => {
     rssUpdate(undefined, newPlaylist);
   };
 
+  const cleanInvalidBVIds = async (playlist = getPlaylist()) => {
+    const uniqBVIds: string[] = [];
+    const promises = [];
+    const validBVIds: string[] = [];
+    for (const song of playlist.songList) {
+      if (uniqBVIds.includes(song.bvid)) continue;
+      uniqBVIds.push(song.bvid);
+      // fetchVideoInfo either returns a valid object or unidentified.
+      promises.push(
+        fetchVideoInfo(song.bvid).then(val => {
+          if (val !== undefined) {
+            validBVIds.push(val.bvid);
+          }
+        })
+      );
+    }
+    await Promise.all(promises);
+    updatePlaylist(
+      playlist,
+      [],
+      playlist.songList.filter(song => !validBVIds.includes(song.bvid))
+    );
+  };
+
   return {
     updateSong,
     updateSongIndex,
@@ -215,6 +239,7 @@ const usePlaylistCRUD = (mPlaylist?: NoxMedia.Playlist) => {
     removeSongsFromAllLists,
     rssUpdate,
     reloadBVid,
+    cleanInvalidBVIds,
   };
 };
 
