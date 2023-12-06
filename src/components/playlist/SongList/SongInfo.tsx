@@ -13,7 +13,7 @@ import NoxCache from '@utils/Cache';
 
 interface UsePlaylist {
   playSong: (song: NoxMedia.Song) => void;
-  checking?: boolean;
+  checking: boolean;
   selected: boolean[];
 }
 
@@ -36,7 +36,7 @@ const SongInfo = ({
   onChecked = () => undefined,
   networkCellular = false,
 }: Props) => {
-  const { playSong, checking = false, selected } = usePlaylist;
+  const { playSong, checking, selected } = usePlaylist;
   const currentPlaylist = useNoxSetting(state => state.currentPlaylist);
   const playerSetting = useNoxSetting(state => state.playerSetting);
   const playerStyle = useNoxSetting(state => state.playerStyle);
