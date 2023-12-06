@@ -22,6 +22,7 @@ export const updateSubscribeFavList = async ({
     playlist.newSongOverwrite || playlist.title.includes('live'),
   callback = () => undefined,
 }: Props): Promise<NoxMedia.Playlist> => {
+  progressEmitter(100);
   const newPlaylist = { ...playlist, lastSubscribed: new Date().getTime() };
   if (subscribeUrls === undefined) {
     subscribeUrls = newPlaylist.subscribeUrl;
@@ -66,5 +67,6 @@ export const updateSubscribeFavList = async ({
   // like noxplayer did, instead of being a playlist field
   updatePlaylist(newPlaylist, [], []);
   callback(newPlaylist);
+  progressEmitter(0);
   return newPlaylist;
 };

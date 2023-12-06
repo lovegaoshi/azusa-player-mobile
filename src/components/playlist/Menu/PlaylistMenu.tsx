@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Menu } from 'react-native-paper';
 import { useTranslation } from 'react-i18next';
 
-import usePlaylist from '@hooks/usePlaylistRN';
+import usePlaylist from './usePlaylistMenu';
 import PlaylistSettingsButton from './PlaylistSettingsButton';
 import { PLAYLIST_ENUMS } from '@enums/Playlist';
 import { CopiedPlaylistMenuItem } from '@components/buttons/CopiedPlaylistButton';
@@ -34,13 +34,13 @@ export default ({
 }: Props) => {
   const { t } = useTranslation();
   const {
-    playlistSync2BilibiliRN,
-    playlistAnalysis,
+    playlistSync2Bilibili,
+    playlistAnalyze,
     confirmOnPlaylistClear,
     confirmOnPlaylistDelete,
     confirmOnPlaylistReload,
-    playlistCleanupRN,
-    playlistBiliShazamRN,
+    playlistCleanup,
+    playlistBiliShazam,
   } = usePlaylist({ callback: toggleVisible });
   const limitedPlaylistFeatures =
     playlist.type !== PLAYLIST_ENUMS.TYPE_TYPICA_PLAYLIST;
@@ -57,22 +57,22 @@ export default ({
       />
       <Menu.Item
         leadingIcon={ICONS.BILISYNC}
-        onPress={() => playlistSync2BilibiliRN()}
+        onPress={() => playlistSync2Bilibili()}
         title={t('PlaylistOperations.bilisyncTitle')}
       />
       <Menu.Item
         leadingIcon={ICONS.BILISHAZAM}
-        onPress={() => playlistBiliShazamRN()}
+        onPress={() => playlistBiliShazam()}
         title={t('PlaylistOperations.bilishazamTitle')}
       />
       <Menu.Item
         leadingIcon={ICONS.ANALYTICS}
-        onPress={() => playlistAnalysis()}
+        onPress={() => playlistAnalyze()}
         title={t('PlaylistOperations.analyticsTitle')}
       />
       <Menu.Item
         leadingIcon={ICONS.REMOVE_BROKEN}
-        onPress={() => playlistCleanupRN()}
+        onPress={() => playlistCleanup()}
         title={t('PlaylistOperations.removeBrokenTitle')}
         disabled={limitedPlaylistFeatures}
       />

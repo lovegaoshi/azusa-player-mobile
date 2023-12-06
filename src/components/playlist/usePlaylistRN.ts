@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { FlashList } from '@shopify/flash-list';
 import Snackbar from 'react-native-snackbar';
 import { useTranslation } from 'react-i18next';
@@ -19,27 +19,31 @@ import useTPControls from '@hooks/useTPControls';
 export default (playlist: NoxMedia.Playlist) => {
   const { t } = useTranslation();
   const netInfo = useNetInfo();
-  const [shouldReRender, setShouldReRender] = useState(false);
-  const [selected, setSelected] = useState<boolean[]>([]);
+  const usedPlaylist = usePlaylist(playlist);
+  const {
+    rssUpdate,
+    setRows,
+    searchText,
+    searchAndEnableSearch,
+    resetSelected,
+    setChecking,
+    setSearching,
+    searching,
+    setSearchText,
+    setShouldReRender,
+    checking,
+  } = usedPlaylist;
   const [cachedSongs, setCachedSongs] = useState<string[]>([]);
-  const [checking, setChecking] = useState(false);
-  const [searching, setSearching] = useState(false);
-  const [searchText, setSearchText] = useState('');
   const [debouncedSearchText] = useDebounce(searchText, 500);
   const playerSetting = useNoxSetting(state => state.playerSetting);
   const currentPlayingId = useNoxSetting(state => state.currentPlayingId);
   const setPlaylistSearchAutoFocus = useNoxSetting(
     state => state.setPlaylistSearchAutoFocus
   );
-  const togglePlaylistInfoUpdate = useNoxSetting(
-    state => state.togglePlaylistInfoUpdate
-  );
   const playlistShouldReRender = useNoxSetting(
     state => state.playlistShouldReRender
   );
   const playlistRef = useRef<FlashList<NoxMedia.Song>>(null);
-  const usedPlaylist = usePlaylist(playlist);
-  const { rssUpdate, rows, setRows } = usedPlaylist;
   const { playFromPlaylist } = usePlayback();
   const { preformFade } = useTPControls();
 
@@ -65,40 +69,6 @@ export default (playlist: NoxMedia.Playlist) => {
     deactivateKeepAwake();
   };
 
-  const resetSelected = (val = false) =>
-    setSelected(Array(playlist.songList.length).fill(val));
-
-  const toggleSelected = useCallback((index: number) => {
-    togglePlaylistInfoUpdate();
-    setSelected((val: boolean[]) => {
-      val[index] = !val[index];
-      return val;
-    });
-  }, []);
-
-  const toggleSelectedAll = () => {
-    const mapCheckedIndices = (selectedIndices: number[], checked = true) => {
-      setSelected(
-        Array(playlist.songList.length)
-          .fill(false)
-          .map((val, index) =>
-            selectedIndices.includes(index) ? checked : val
-          )
-      );
-    };
-
-    if (selected.length === 0) return;
-    if (rows === playlist.songList) {
-      selected[0] ? resetSelected() : resetSelected(true);
-    } else {
-      // TODO: there has to be a more elegant way
-      // but alas it works!
-      const selectedIndices = rows.map(val => playlist.songList.indexOf(val));
-      mapCheckedIndices(selectedIndices, !selected[selectedIndices[0]]);
-    }
-    setShouldReRender(val => !val);
-  };
-
   const reParseSearch = (searchStr: string, rows: Array<NoxMedia.Song>) => {
     const extraReExtract = [
       {
@@ -120,23 +90,6 @@ export default (playlist: NoxMedia.Playlist) => {
       return;
     }
     setRows(reParseSearch(searchedVal, playlist.songList));
-  };
-
-  const searchAndEnableSearch = (val: string) => {
-    setSearchText(val);
-    setSearching(true);
-  };
-
-  const onBackPress = () => {
-    if (checking) {
-      setChecking(false);
-      return true;
-    }
-    if (searching) {
-      setSearching(false);
-      return true;
-    }
-    return false;
   };
 
   const playSong = async (song: NoxMedia.Song) => {
@@ -220,24 +173,10 @@ export default (playlist: NoxMedia.Playlist) => {
   return {
     ...usedPlaylist,
     refreshPlaylist,
-    selected,
-    setSelected,
-    resetSelected,
-    toggleSelected,
-    toggleSelectedAll,
-    shouldReRender,
-    setShouldReRender,
-    checking,
-    setChecking,
-    searching,
-    setSearching,
     cachedSongs,
     setCachedSongs,
-    onBackPress,
     searchText,
-    setSearchText,
     handleSearch,
-    searchAndEnableSearch,
     playSong,
     scrollTo,
     playlistRef,

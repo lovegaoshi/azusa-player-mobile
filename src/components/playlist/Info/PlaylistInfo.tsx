@@ -16,7 +16,7 @@ import { seconds2HHMMSS } from '@utils/Utils';
 interface UsePlaylist {
   searchText: string;
   setSearchText: (val: string) => void;
-  search?: boolean;
+  searching: boolean;
   selected: boolean[];
   checking: boolean;
 }
@@ -27,13 +27,8 @@ interface Props {
 }
 
 export default ({ usePlaylist, onPressed = () => undefined }: Props) => {
-  const {
-    searchText,
-    setSearchText,
-    search = false,
-    selected,
-    checking,
-  } = usePlaylist;
+  const { searchText, setSearchText, searching, selected, checking } =
+    usePlaylist;
   const { t } = useTranslation();
   const currentPlaylist = useNoxSetting(state => state.currentPlaylist);
   const playerStyle = useNoxSetting(state => state.playerStyle);
@@ -43,7 +38,7 @@ export default ({ usePlaylist, onPressed = () => undefined }: Props) => {
   const opacity = useRef(new Animated.Value(1)).current;
   const searchBkgrdWidth = useRef(new Animated.Value(0)).current;
   const searchBkgrdHeight = useRef(new Animated.Value(0)).current;
-  const [searchVisible, setSearchVisible] = useState(search);
+  const [searchVisible, setSearchVisible] = useState(searching);
   // TODO: a more elegant way to signal content update
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const playlistInfoUpdate = useNoxSetting(state => state.playlistInfoUpdate);
@@ -108,7 +103,7 @@ export default ({ usePlaylist, onPressed = () => undefined }: Props) => {
 
   useEffect(() => {
     setSearchVisible(true);
-    if (search) {
+    if (searching) {
       Animated.parallel([
         Animated.timing(searchBarWidth, {
           toValue: 1,
@@ -161,7 +156,7 @@ export default ({ usePlaylist, onPressed = () => undefined }: Props) => {
         }),
       ]).start(() => setSearchVisible(false));
     }
-  }, [search]);
+  }, [searching]);
 
   return (
     <View style={styles.container}>
@@ -188,7 +183,7 @@ export default ({ usePlaylist, onPressed = () => undefined }: Props) => {
             ref={searchContainerRef}
             selectTextOnFocus
             selectionColor={playerStyle.customColors.textInputSelectionColor}
-            icon={search ? 'format-list-checkbox' : () => undefined}
+            icon={searching ? 'format-list-checkbox' : () => undefined}
             onIconPress={handleMenuPress}
           />
         )}
