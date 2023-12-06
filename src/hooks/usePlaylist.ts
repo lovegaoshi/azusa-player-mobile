@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useCallback } from 'react';
 
 import { reParseSearch } from '../utils/re';
 import { useNoxSetting } from '../stores/useApp';
@@ -8,18 +8,34 @@ export interface UsePlaylist {
   playlist: NoxMedia.Playlist;
   rows: NoxMedia.Song[];
   setRows: (v: NoxMedia.Song[]) => void;
+  selected: boolean[];
+  setSelected: (v: boolean[]) => void;
+  checking: boolean;
+  setChecking: React.Dispatch<React.SetStateAction<boolean>>;
+  searching: boolean;
+  setSearching: React.Dispatch<React.SetStateAction<boolean>>;
+  setSearchText: (v: string) => void;
+  searchText: string;
+  shouldReRender: boolean;
+  setShouldReRender: React.Dispatch<React.SetStateAction<boolean>>;
+
   performSearch: (searchedVal: string) => void;
   handleSearch: (searchedVal: string) => void;
   rssUpdate: (subscribeUrls?: string[]) => Promise<NoxMedia.Playlist>;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   searchBarRef: React.MutableRefObject<any>;
   refreshing: boolean;
-  setRefreshing: (v: boolean) => void;
+  setRefreshing: React.Dispatch<React.SetStateAction<boolean>>;
   getSongIndex: (item: NoxMedia.Song, index: number) => number;
   playSong: (
     song: NoxMedia.Song,
     callback: (p: NoxMedia.Playlist, s: NoxMedia.Song) => void
   ) => void;
+  resetSelected: () => void;
+  toggleSelected: (index: number) => void;
+  toggleSelectedAll: () => void;
+  searchAndEnableSearch: (searchedVal: string) => void;
+  onBackPress: () => boolean;
 }
 
 /**
@@ -30,10 +46,18 @@ export interface UsePlaylist {
 const usePlaylist = (playlist: NoxMedia.Playlist): UsePlaylist => {
   const [rows, setRows] = useState<NoxMedia.Song[]>([]);
   const [refreshing, setRefreshing] = useState(false);
+  const [selected, setSelected] = useState<boolean[]>([]);
+  const [checking, setChecking] = useState(false);
+  const [searching, setSearching] = useState(false);
+  const [searchText, setSearchText] = useState('');
+  const [shouldReRender, setShouldReRender] = useState(false);
   const playerSetting = useNoxSetting(state => state.playerSetting);
   const currentPlayingList = useNoxSetting(state => state.currentPlayingList);
   const currentPlayingId = useNoxSetting(state => state.currentPlayingId);
   const setCurrentPlayingId = useNoxSetting(state => state.setCurrentPlayingId);
+  const togglePlaylistInfoUpdate = useNoxSetting(
+    state => state.togglePlaylistInfoUpdate
+  );
   const playlistCRUD = usePlaylistCRUD(playlist);
   const searchBarRef = useRef();
 
@@ -102,10 +126,73 @@ const usePlaylist = (playlist: NoxMedia.Playlist): UsePlaylist => {
     return callback({ ...playlist, songList: queuedSongList }, song);
   };
 
+  const resetSelected = (val = false) =>
+    setSelected(Array(playlist.songList.length).fill(val));
+
+  const toggleSelected = useCallback((index: number) => {
+    togglePlaylistInfoUpdate();
+    setSelected((val: boolean[]) => {
+      val[index] = !val[index];
+      return val;
+    });
+  }, []);
+
+  const toggleSelectedAll = () => {
+    const mapCheckedIndices = (selectedIndices: number[], checked = true) => {
+      setSelected(
+        Array(playlist.songList.length)
+          .fill(false)
+          .map((val, index) =>
+            selectedIndices.includes(index) ? checked : val
+          )
+      );
+    };
+
+    if (selected.length === 0) return;
+    if (rows === playlist.songList) {
+      selected[0] ? resetSelected() : resetSelected(true);
+    } else {
+      // TODO: there has to be a more elegant way
+      // but alas it works!
+      const selectedIndices = rows.map(val => playlist.songList.indexOf(val));
+      mapCheckedIndices(selectedIndices, !selected[selectedIndices[0]]);
+    }
+    setShouldReRender(val => !val);
+  };
+
+  const searchAndEnableSearch = (val: string) => {
+    setSearchText(val);
+    setSearching(true);
+  };
+
+  const onBackPress = () => {
+    if (checking) {
+      setChecking(false);
+      return true;
+    }
+    if (searching) {
+      setSearching(false);
+      return true;
+    }
+    return false;
+  };
+
   return {
     playlist,
+
     rows,
     setRows,
+    selected,
+    setSelected,
+    checking,
+    setChecking,
+    searching,
+    setSearching,
+    searchText,
+    setSearchText,
+    shouldReRender,
+    setShouldReRender,
+
     handleSearch,
     rssUpdate,
     searchBarRef,
@@ -114,6 +201,12 @@ const usePlaylist = (playlist: NoxMedia.Playlist): UsePlaylist => {
     setRefreshing,
     getSongIndex,
     playSong,
+
+    resetSelected,
+    toggleSelected,
+    toggleSelectedAll,
+    searchAndEnableSearch,
+    onBackPress,
   };
 };
 
