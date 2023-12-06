@@ -2,9 +2,9 @@ import Snackbar from 'react-native-snackbar';
 import { useTranslation } from 'react-i18next';
 
 import { useNoxSetting } from '@stores/useApp';
-import usePlaylistCRUD from './usePlaylistCRUD';
+import usePlaylistCRUD from '@hooks/usePlaylistCRUD';
 import useAlert from '@components/dialogs/useAlert';
-import usePlaylistAA from './usePlaylistAA';
+import usePlaylistAA from '@hooks/usePlaylistAA';
 
 interface Props {
   callback?: () => void;
@@ -12,29 +12,22 @@ interface Props {
 export default ({ callback = () => {} }: Props) => {
   const { t } = useTranslation();
   const currentPlaylist = useNoxSetting(state => state.currentPlaylist);
-  const {
-    playlistAnalyze,
-    playlistCleanup,
-    playlistBiliShazam,
-    playlistReload,
-    playlistClear,
-    playlistSync2Bilibili,
-  } = usePlaylistCRUD();
+  const playlistCRUD = usePlaylistCRUD();
   const { removePlaylist } = usePlaylistAA();
   const { OneWayAlert, TwoWayAlert } = useAlert();
 
-  const playlistSync2BilibiliRN = async (playlist = currentPlaylist) => {
+  const playlistSync2Bilibili = async (playlist = currentPlaylist) => {
     Snackbar.show({
       text: t('PlaylistOperations.bilisyncing', { playlist }),
       duration: Snackbar.LENGTH_INDEFINITE,
     });
-    await playlistSync2Bilibili(playlist);
+    await playlistCRUD.playlistSync2Bilibili(playlist);
     Snackbar.dismiss();
     Snackbar.show({ text: t('PlaylistOperations.bilisynced', { playlist }) });
   };
 
-  const playlistAnalysis = (playlist = currentPlaylist) => {
-    const analytics = playlistAnalyze(playlist, 5);
+  const playlistAnalyze = (playlist = currentPlaylist) => {
+    const analytics = playlistCRUD.playlistAnalyze(playlist, 5);
     OneWayAlert(analytics.title, analytics.content.join('\n'), callback);
   };
 
@@ -43,7 +36,7 @@ export default ({ callback = () => {} }: Props) => {
       t('PlaylistOperations.clearListTitle', { playlist }),
       t('PlaylistOperations.clearListMsg', { playlist }),
       () => {
-        playlistClear(playlist);
+        playlistCRUD.playlistClear(playlist);
         callback();
       }
     );
@@ -69,7 +62,7 @@ export default ({ callback = () => {} }: Props) => {
           text: t('PlaylistOperations.reloading', { playlist }),
           duration: Snackbar.LENGTH_INDEFINITE,
         });
-        await playlistReload(playlist);
+        await playlistCRUD.playlistReload(playlist);
         Snackbar.dismiss();
         Snackbar.show({ text: t('PlaylistOperations.reloaded', { playlist }) });
         callback();
@@ -77,32 +70,32 @@ export default ({ callback = () => {} }: Props) => {
     );
   };
 
-  const playlistCleanupRN = async (playlist = currentPlaylist) => {
+  const playlistCleanup = async (playlist = currentPlaylist) => {
     Snackbar.show({
       text: t('PlaylistOperations.cleaning', { playlist }),
       duration: Snackbar.LENGTH_INDEFINITE,
     });
-    await playlistCleanup(playlist);
+    await playlistCRUD.playlistCleanup(playlist);
     Snackbar.dismiss();
     Snackbar.show({ text: t('PlaylistOperations.cleaned', { playlist }) });
   };
 
-  const playlistBiliShazamRN = async (playlist = currentPlaylist) => {
+  const playlistBiliShazam = async (playlist = currentPlaylist) => {
     Snackbar.show({
       text: t('PlaylistOperations.bilishazaming', { playlist }),
       duration: Snackbar.LENGTH_INDEFINITE,
     });
-    await playlistBiliShazam(playlist);
+    await playlistCRUD.playlistBiliShazam(playlist);
     Snackbar.dismiss();
     Snackbar.show({ text: t('PlaylistOperations.bilishazamed', { playlist }) });
   };
   return {
-    playlistSync2BilibiliRN,
-    playlistAnalysis,
+    playlistSync2Bilibili,
+    playlistAnalyze,
     confirmOnPlaylistClear,
     confirmOnPlaylistDelete,
     confirmOnPlaylistReload,
-    playlistCleanupRN,
-    playlistBiliShazamRN,
+    playlistCleanup,
+    playlistBiliShazam,
   };
 };
