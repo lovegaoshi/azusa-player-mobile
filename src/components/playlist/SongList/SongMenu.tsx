@@ -19,10 +19,10 @@ enum ICONS {
 }
 
 interface UsePlaylist {
-  checking?: boolean;
-  checked?: boolean[];
-  resetChecked?: () => void;
-  handleSearch?: (val: string) => void;
+  checking: boolean;
+  selected: boolean[];
+  resetSelected: () => void;
+  searchAndEnableSearch: (val: string) => void;
 }
 
 interface Props {
@@ -33,9 +33,9 @@ interface Props {
 export default ({ usePlaylist, prepareForLayoutAnimationRender }: Props) => {
   const {
     checking = false,
-    checked = [],
-    resetChecked = () => undefined,
-    handleSearch = () => undefined,
+    selected,
+    resetSelected,
+    searchAndEnableSearch,
   } = usePlaylist;
   const { t } = useTranslation();
   const songMenuVisible = useNoxSetting(state => state.songMenuVisible);
@@ -54,7 +54,7 @@ export default ({ usePlaylist, prepareForLayoutAnimationRender }: Props) => {
 
   const selectedSongIndexes = () => {
     if (checking) {
-      const result = checked
+      const result = selected
         .map((val, index) => {
           if (val) {
             return index;
@@ -98,7 +98,7 @@ export default ({ usePlaylist, prepareForLayoutAnimationRender }: Props) => {
     }
     playlistCRUD.removeSongs(songs, banBVID);
     setSongMenuVisible(false);
-    resetChecked();
+    resetSelected();
   };
 
   return (
@@ -127,7 +127,7 @@ export default ({ usePlaylist, prepareForLayoutAnimationRender }: Props) => {
       <Menu.Item
         leadingIcon={ICONS.SEARCH_IN_PLAYLIST}
         onPress={() => {
-          handleSearch(
+          searchAndEnableSearch(
             currentPlaylist.songList[songMenuSongIndexes[0]].parsedName
           );
           closeMenu();
