@@ -28,6 +28,7 @@ export const updateSubscribeFavList = async ({
     subscribeUrls = newPlaylist.subscribeUrl;
   }
   if (subscribeUrls.length === 0 || subscribeUrls[0].length === 0) {
+    progressEmitter(0);
     throw new Error('[biliSubscribe] nothing to subscribe');
   }
   const favList = [

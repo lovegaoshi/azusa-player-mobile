@@ -20,9 +20,9 @@ enum ICONS {
 
 interface UsePlaylist {
   checking: boolean;
-  selected: boolean[];
   resetSelected: () => void;
   searchAndEnableSearch: (val: string) => void;
+  getSelectedSongs: () => NoxMedia.Song[] | undefined;
 }
 
 interface Props {
@@ -31,12 +31,8 @@ interface Props {
 }
 
 export default ({ usePlaylist, prepareForLayoutAnimationRender }: Props) => {
-  const {
-    checking = false,
-    selected,
-    resetSelected,
-    searchAndEnableSearch,
-  } = usePlaylist;
+  const { checking, resetSelected, searchAndEnableSearch, getSelectedSongs } =
+    usePlaylist;
   const { t } = useTranslation();
   const songMenuVisible = useNoxSetting(state => state.songMenuVisible);
   const setSongMenuVisible = useNoxSetting(state => state.setSongMenuVisible);
@@ -52,24 +48,11 @@ export default ({ usePlaylist, prepareForLayoutAnimationRender }: Props) => {
 
   const closeMenu = React.useCallback(() => setSongMenuVisible(false), []);
 
-  const selectedSongIndexes = () => {
-    if (checking) {
-      const result = selected
-        .map((val, index) => {
-          if (val) {
-            return index;
-          }
-        })
-        .filter(val => val !== undefined);
-      if (result.length > 0) {
-        return result;
-      }
-    }
-    return songMenuSongIndexes;
-  };
-
   const selectedSongs = () => {
-    return selectedSongIndexes().map(index => currentPlaylist.songList[index!]);
+    return (
+      getSelectedSongs() ||
+      songMenuSongIndexes.map(index => currentPlaylist.songList[index!])
+    );
   };
 
   const selectedPlaylist = () => {
@@ -96,7 +79,7 @@ export default ({ usePlaylist, prepareForLayoutAnimationRender }: Props) => {
     if (songs.length === 0) {
       prepareForLayoutAnimationRender();
     }
-    playlistCRUD.removeSongs(songs, banBVID);
+    playlistCRUD.removeSongs(songs, banBVID, currentPlaylist);
     setSongMenuVisible(false);
     resetSelected();
   };

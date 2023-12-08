@@ -1,4 +1,4 @@
-import React, { useState, useRef, useCallback } from 'react';
+import React, { useState, useRef, useCallback, useEffect } from 'react';
 
 import { reParseSearch } from '../utils/re';
 import { useNoxSetting } from '../stores/useApp';
@@ -36,6 +36,7 @@ export interface UsePlaylist {
   toggleSelectedAll: () => void;
   searchAndEnableSearch: (searchedVal: string) => void;
   onBackPress: () => boolean;
+  getSelectedSongs: () => NoxMedia.Song[] | undefined;
 }
 
 /**
@@ -177,6 +178,23 @@ const usePlaylist = (playlist: NoxMedia.Playlist): UsePlaylist => {
     return false;
   };
 
+  const getSelectedSongs = () => {
+    if (checking) {
+      const result = selected
+        .map((val, index) => {
+          if (val) {
+            return index;
+          }
+        })
+        .filter(val => val !== undefined);
+      if (result.length > 0) {
+        return result.map(index => playlist.songList[index!]);
+      }
+    }
+  };
+
+  useEffect(() => setChecking(false), [playlist]);
+
   return {
     playlist,
 
@@ -207,6 +225,7 @@ const usePlaylist = (playlist: NoxMedia.Playlist): UsePlaylist => {
     toggleSelectedAll,
     searchAndEnableSearch,
     onBackPress,
+    getSelectedSongs,
   };
 };
 
