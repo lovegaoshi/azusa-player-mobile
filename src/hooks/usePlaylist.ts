@@ -1,4 +1,4 @@
-import React, { useState, useRef, useCallback } from 'react';
+import React, { useState, useRef, useCallback, useEffect } from 'react';
 
 import { reParseSearch } from '../utils/re';
 import { useNoxSetting } from '../stores/useApp';
@@ -192,6 +192,8 @@ const usePlaylist = (playlist: NoxMedia.Playlist): UsePlaylist => {
       }
     }
   };
+
+  useEffect(() => setChecking(false), [playlist]);
 
   return {
     playlist,
