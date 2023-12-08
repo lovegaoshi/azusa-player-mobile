@@ -36,6 +36,7 @@ export interface UsePlaylist {
   toggleSelectedAll: () => void;
   searchAndEnableSearch: (searchedVal: string) => void;
   onBackPress: () => boolean;
+  getSelectedSongs: () => NoxMedia.Song[] | undefined;
 }
 
 /**
@@ -177,6 +178,21 @@ const usePlaylist = (playlist: NoxMedia.Playlist): UsePlaylist => {
     return false;
   };
 
+  const getSelectedSongs = () => {
+    if (checking) {
+      const result = selected
+        .map((val, index) => {
+          if (val) {
+            return index;
+          }
+        })
+        .filter(val => val !== undefined);
+      if (result.length > 0) {
+        return result.map(index => playlist.songList[index!]);
+      }
+    }
+  };
+
   return {
     playlist,
 
@@ -207,6 +223,7 @@ const usePlaylist = (playlist: NoxMedia.Playlist): UsePlaylist => {
     toggleSelectedAll,
     searchAndEnableSearch,
     onBackPress,
+    getSelectedSongs,
   };
 };
 
