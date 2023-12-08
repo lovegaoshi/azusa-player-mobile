@@ -75,7 +75,6 @@ export default ({ usePlaylist, prepareForLayoutAnimationRender }: Props) => {
 
   const removeSongs = (banBVID = false) => {
     const songs = selectedSongs();
-    console.log(songs);
     // TODO: figure out reanimated...
     if (songs.length === 0) {
       prepareForLayoutAnimationRender();
