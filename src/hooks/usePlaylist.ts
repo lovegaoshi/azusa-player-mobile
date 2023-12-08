@@ -63,6 +63,7 @@ const usePlaylist = (playlist: NoxMedia.Playlist): UsePlaylist => {
   const searchBarRef = useRef();
 
   const handleSearch = (searchedVal: string) => {
+    setSearchText(searchedVal);
     if (searchedVal === '') {
       setRows(playlist.songList);
       return;
