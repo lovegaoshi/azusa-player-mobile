@@ -218,15 +218,16 @@ export const getPlaylist = async (
   key: string,
   defaultPlaylist: () => NoxMedia.Playlist = dummyPlaylist
 ): Promise<NoxMedia.Playlist> => {
+  const dPlaylist = defaultPlaylist();
   try {
     const retrievedPlaylist = await getItem(key);
-    if (retrievedPlaylist === null) return defaultPlaylist();
+    if (retrievedPlaylist === null) return dPlaylist;
     retrievedPlaylist.songList = await loadChucked(retrievedPlaylist.songList);
-    return retrievedPlaylist;
+    return { ...dPlaylist, ...retrievedPlaylist };
   } catch (e) {
     console.error(e);
   }
-  return defaultPlaylist();
+  return dPlaylist;
 };
 
 export const savePlayerSkins = async (skins: Array<any>) =>
