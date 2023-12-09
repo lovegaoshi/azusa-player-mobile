@@ -1,6 +1,6 @@
 import steriatkFetch from './steriatk';
 import biliaudioFetch from './biliaudio';
-import ytbvideoFetch from './ytbvideo';
+import ytbvideoFetch from '@utils/mediafetch/ytbvideo';
 import bililiveFetch from './bililive';
 import { logger } from '../Logger';
 import { regexMatchOperations } from '../Utils';

@@ -10,7 +10,7 @@ import bilichannelFetch from './mediafetch/bilichannel';
 import biliaudioFetch from './mediafetch/biliaudio';
 import bilisearchFetch from '@utils/mediafetch/bilisearch';
 import bilichannelAudioFetch from './mediafetch/bilichannelAudio';
-import ytbvideoFetch from './mediafetch/ytbvideo';
+import ytbvideoFetch from '@utils/mediafetch/ytbvideo';
 import ytbplaylistFetch from './mediafetch/ytbplaylist';
 import ytbmixlistFetch from './mediafetch/ytbmixlist';
 import ytbsearchFetch from './mediafetch/ytbsearch';

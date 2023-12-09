@@ -8,7 +8,7 @@ export const parseBodyParams = (body: any) => {
   const formBody = [];
   for (const [key, value] of Object.entries(body)) {
     formBody.push(
-      encodeURIComponent(key) + '=' + encodeURIComponent(String(value))
+      `${encodeURIComponent(key)}=${encodeURIComponent(String(value))}`
     );
   }
   return formBody.join('&');
