@@ -8,7 +8,8 @@ import { getArrayBufferForBlob } from 'react-native-blob-jsi-helper';
 // eslint-disable-next-line import/no-unresolved
 import { DROPBOX_KEY, DROPBOX_SECRET } from '@env';
 import { logger } from '@utils/Logger';
-import GenericSyncButton, { GenericProps } from './GenericSyncButton';
+import GenericSyncButton from './GenericSyncButton';
+import { GenericProps } from './GenericSyncProps';
 import {
   checkAuthentication,
   noxBackup,

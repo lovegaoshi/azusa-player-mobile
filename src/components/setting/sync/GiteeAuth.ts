@@ -3,7 +3,8 @@ import { authorize } from 'react-native-app-auth';
 // eslint-disable-next-line import/no-unresolved
 import { GITEE_KEY, GITEE_SECRET } from '@env';
 import { logger } from '@utils/Logger';
-import GenericSyncButton, { GenericProps } from './GenericSyncButton';
+import GenericSyncButton from './GenericSyncButton';
+import { GenericProps } from './GenericSyncProps';
 import { checkAuthentication, noxBackup, noxRestore } from '@utils/sync/Gitee';
 
 const config = {

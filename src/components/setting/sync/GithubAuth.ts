@@ -5,7 +5,8 @@ import { fromByteArray, toByteArray } from 'base64-js';
 import { GITHUB_KEY, GITHUB_SECRET } from '@env';
 import bfetch from '@utils/BiliFetch';
 import { logger } from '@utils/Logger';
-import GenericSyncButton, { GenericProps } from './GenericSyncButton';
+import GenericSyncButton from './GenericSyncButton';
+import { GenericProps } from './GenericSyncProps';
 
 const APM_REPO_NAME = 'APMCloudSync';
 const APM_FILE_NAME = 'APM.noxbackup';

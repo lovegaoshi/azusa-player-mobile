@@ -10,10 +10,6 @@ import { logger } from '@utils/Logger';
 import { exportPlayerContent } from '@utils/ChromeStorage';
 import { ImportProps, ExportProps, Props } from './GenericSyncProps';
 
-export interface GenericProps {
-  restoreFromUint8Array: (data: Uint8Array) => Promise<void>;
-}
-
 const ImportSyncFavButton = ({
   restoreFromUint8Array,
   noxRestore,

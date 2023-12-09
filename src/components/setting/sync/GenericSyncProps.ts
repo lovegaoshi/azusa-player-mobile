@@ -26,3 +26,7 @@ export interface Props {
     errorHandling: (e: Error) => void
   ) => Promise<boolean>;
 }
+
+export interface GenericProps {
+  restoreFromUint8Array: (data: Uint8Array) => Promise<void>;
+}
