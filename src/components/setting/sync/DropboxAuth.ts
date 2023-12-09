@@ -43,7 +43,7 @@ let dbx = new _Dropbox({
  * @param {function} callback function that process the returned url after oauth2.
  * @param {function} errorHandling
  */
-export const getAuth = async (
+const getAuth = async (
   callback = () => checkAuthentication(dbx).then(console.log),
   errorHandling = logger.error
 ) => {
@@ -69,7 +69,7 @@ export const getAuth = async (
  * @param {function} errorCallback
  * @returns
  */
-export const loginDropbox = async (
+const loginDropbox = async (
   callback: () => Promise<void> = async () => undefined,
   errorCallback = logger.error
 ) => {
