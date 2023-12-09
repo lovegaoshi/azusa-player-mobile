@@ -375,12 +375,12 @@ const saveImportedPlaylist = async (playlists: any[]) => {
   for (const playlist of playlists) {
     await savePlaylist({
       ...dummyPlaylistList,
-      ...playlist,
-      ...playlist.info,
       // HACK: seriously who thought of renaming variables is a good idea?
       // oh right that was me
       subscribeUrl: playlist.subscribeUrls,
       blacklistedUrl: playlist.bannedBVids,
+      ...playlist,
+      ...playlist.info,
     });
   }
 };
@@ -388,9 +388,11 @@ const saveImportedPlaylist = async (playlists: any[]) => {
 export const clearPlaylistNImport = async (parsedContent: any) => {
   await clearPlaylists();
   await saveImportedPlaylist(
-    parsedContent['MyFavList'].map((val: string) => parsedContent[val])
+    parsedContent[STORAGE_KEYS.MY_FAV_LIST_KEY].map(
+      (val: string) => parsedContent[val]
+    )
   );
-  await savePlaylistIds(parsedContent['MyFavList']);
+  await savePlaylistIds(parsedContent[STORAGE_KEYS.MY_FAV_LIST_KEY]);
 };
 
 export const addImportedPlaylist = async (playlists: any[]) => {
