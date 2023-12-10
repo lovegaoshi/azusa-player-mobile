@@ -120,6 +120,7 @@ const ThumbsUpButton = ({ iconSize = 30 }: Props) => {
           zIndex: 1,
         }}
         disabled={status === THUMBUPSTATUS.notLoggedIn}
+        theme={{ colors: { onSurfaceVariant: playerStyle.colors.primary } }}
       />
     </View>
   );
