@@ -1,6 +1,5 @@
 import React from 'react';
 import { Linking, StyleSheet, View } from 'react-native';
-import TrackPlayer, { Track } from 'react-native-track-player';
 import { IconButton } from 'react-native-paper';
 import RNSvgaPlayer from 'react-native-svga-player';
 
@@ -11,6 +10,7 @@ import {
 } from '@utils/Bilibili/BiliOperate';
 import { useNoxSetting } from '@stores/useApp';
 import { logger } from '@utils/Logger';
+import useActiveTrack from '@hooks/useActiveTrack';
 
 enum THUMBUPSTATUS {
   notLoggedIn = 'web-cancel',
@@ -41,44 +41,39 @@ interface Props {
   iconSize?: number;
 }
 const ThumbsUpButton = ({ iconSize = 30 }: Props) => {
+  const { track } = useActiveTrack();
   const playerStyle = useNoxSetting(state => state.playerStyle);
-  const currentPlayingId = useNoxSetting(state => state.currentPlayingId);
   const [status, setStatus] = React.useState<THUMBUPSTATUS>(
     THUMBUPSTATUS.notLoggedIn
-  );
-  const [currentTrack, setCurrentTrack] = React.useState<Track | undefined>(
-    undefined
   );
   const [svgaVisible, setSvgaVisible] = React.useState(false);
 
   const onClick = async (triple = false) => {
-    if (!currentTrack?.song) return;
+    if (!track?.song) return;
     setSvgaVisible(true);
     switch (status) {
       case THUMBUPSTATUS.notThumbedUp:
-        sendBVLike(currentTrack.song.bvid).then(res => {
+        sendBVLike(track.song.bvid).then(res => {
           if (res.code === 0) setStatus(THUMBUPSTATUS.ThumbedUp);
         });
         break;
       case THUMBUPSTATUS.ThumbedUp:
         if (triple) {
           // TODO: use that starred lottie animation
-          sendBVTriple(currentTrack.song.bvid).then(res => {
+          sendBVTriple(track.song.bvid).then(res => {
             if (res.code === 0) setStatus(THUMBUPSTATUS.Tripled);
           });
         }
         break;
       default:
-        if (currentTrack?.song) {
-          go2SongURL(currentTrack?.song);
+        if (track?.song) {
+          go2SongURL(track?.song);
         }
     }
   };
 
   React.useEffect(() => {
     const setLikedStatus = async () => {
-      const track = await TrackPlayer.getActiveTrack();
-      setCurrentTrack(track);
       if (!track || !track.song) {
         setStatus(THUMBUPSTATUS.notLoggedIn);
         return;
@@ -94,7 +89,7 @@ const ThumbsUpButton = ({ iconSize = 30 }: Props) => {
       }
     };
     setLikedStatus();
-  }, [currentPlayingId]);
+  }, [track]);
 
   return (
     <View>
