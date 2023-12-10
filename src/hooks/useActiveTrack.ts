@@ -14,8 +14,6 @@ const useTrack = () => {
 
   React.useEffect(() => setTrack(activeTrack), [activeTrack]);
 
-  React.useEffect(() => console.log(track), [track]);
-
   return { track, updateTrack };
 };
 
