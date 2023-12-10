@@ -10531,10 +10531,10 @@ prettier@^2.7.1:
   resolved "https://registry.npmjs.org/prettier/-/prettier-2.8.8.tgz#e8c5d7e98a4305ffe3de2e1fc4aca1a71c28b1da"
   integrity sha512-tdN8qQGvNjw4CHbY+XXk0JgCXn9QiF21a55rBe5LJAU+kDyC4WQn4+awm2Xfk2lQMk5fKup9XgzTZtGkjBdP9Q==
 
-prettier@^3.0.3:
-  version "3.1.0"
-  resolved "https://registry.npmjs.org/prettier/-/prettier-3.1.0.tgz#c6d16474a5f764ea1a4a373c593b779697744d5e"
-  integrity sha512-TQLvXjq5IAibjh8EpBIkNKxO749UEWABoiIZehEPiY4GNpVdhaFKqSTu+QrlU6D2dPAfubRmtJTi4K4YkQ5eXw==
+prettier@^3.1.1:
+  version "3.1.1"
+  resolved "https://registry.npmjs.org/prettier/-/prettier-3.1.1.tgz#6ba9f23165d690b6cbdaa88cb0807278f7019848"
+  integrity sha512-22UbSzg8luF4UuZtzgiUOfcGM8s4tjBv6dJRT7j275NXsy2jb4aJa4NNveul5x4eqlF1wuhuR2RElK71RvmVaw==
 
 pretty-bytes@5.6.0:
   version "5.6.0"
@@ -10963,7 +10963,7 @@ react-native-tab-view@^3.5.1:
 
 "react-native-track-player@git+https://lovegaoshi@github.com/lovegaoshi/react-native-track-player.git#APM":
   version "4.0.1"
-  resolved "git+https://lovegaoshi@github.com/lovegaoshi/react-native-track-player.git#00e6e539876e03929752e09b4dd1d86f41dc800b"
+  resolved "git+https://lovegaoshi@github.com/lovegaoshi/react-native-track-player.git#057702961aecdc6fce7956a86af340f2bed9dbbd"
 
 react-native-url-polyfill@^2.0.0:
   version "2.0.0"
