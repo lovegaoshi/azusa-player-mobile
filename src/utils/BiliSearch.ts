@@ -54,6 +54,7 @@ export const searchBiliURLs = async ({
   defaultSearch = SEARCH_OPTIONS.BILIBILI,
 }: Props) => {
   try {
+    progressEmitter(100);
     const matchRegex = matchBiliURL(input);
     if (matchRegex !== null) {
       const results = await matchRegex.regexFetch({
