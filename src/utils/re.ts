@@ -27,7 +27,7 @@ export const LoadJSONRegExtractors = (json: NoxRegExt.JSONExtractor[]) => {
     uploader = String(uploader);
     for (const [uploaderList, extractor] of extractors) {
       if (uploaderList.includes(uploader)) {
-        return extractor(songName);
+        return extractSongName(extractor(songName));
       }
     }
     return extractSongName(songName);

@@ -8,37 +8,7 @@ import { activateKeepAwakeAsync, deactivateKeepAwake } from 'expo-keep-awake';
 
 import { logger } from '@utils/Logger';
 import { exportPlayerContent } from '@utils/ChromeStorage';
-
-interface ImportProps {
-  restoreFromUint8Array: (data: Uint8Array) => Promise<void>;
-  noxRestore: () => Promise<any>;
-  login: (
-    callback: () => any,
-    errorHandling: (e: Error) => void
-  ) => Promise<boolean>;
-}
-
-interface ExportProps {
-  noxBackup: (content: Uint8Array) => Promise<any>;
-  login: (
-    callback: () => any,
-    errorHandling: (e: Error) => void
-  ) => Promise<boolean>;
-}
-
-interface Props {
-  restoreFromUint8Array: (data: Uint8Array) => Promise<void>;
-  noxRestore: () => Promise<any>;
-  noxBackup: (content: Uint8Array) => Promise<any>;
-  login: (
-    callback: () => any,
-    errorHandling: (e: Error) => void
-  ) => Promise<boolean>;
-}
-
-export interface GenericProps {
-  restoreFromUint8Array: (data: Uint8Array) => Promise<void>;
-}
+import { ImportProps, ExportProps, Props } from './GenericSyncProps';
 
 const ImportSyncFavButton = ({
   restoreFromUint8Array,

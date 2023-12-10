@@ -175,7 +175,6 @@ export default (playlist: NoxMedia.Playlist) => {
     refreshPlaylist,
     cachedSongs,
     setCachedSongs,
-    searchText,
     handleSearch,
     playSong,
     scrollTo,

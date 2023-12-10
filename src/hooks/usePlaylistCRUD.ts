@@ -10,7 +10,7 @@ import {
   fetchiliBVIDs,
 } from '../utils/mediafetch/bilivideo';
 import { biliShazamOnSonglist } from '../utils/mediafetch/bilishazam';
-import { syncFavlist } from '../utils/Bilibili/bilifavOperate';
+import { syncFavlist } from '@utils/Bilibili/bilifavOperate';
 import { updateSubscribeFavList } from '../utils/BiliSubscribe';
 
 const usePlaylistCRUD = (mPlaylist?: NoxMedia.Playlist) => {

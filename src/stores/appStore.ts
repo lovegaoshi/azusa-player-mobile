@@ -8,8 +8,8 @@ import {
   getFadeInterval,
   getRegExtractMapping,
 } from '@utils/ChromeStorage';
-import rejson from '@utils/rejson.json';
 import { logger } from '@utils/Logger';
+import rejson from '../utils/rejson.json';
 import { LoadJSONRegExtractors } from '../utils/re';
 import type { NoxStorage } from '../types/storage';
 

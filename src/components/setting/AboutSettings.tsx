@@ -16,7 +16,7 @@ export default () => {
       }}
     >
       <ScrollView>
-        <Text>{}</Text>
+        <Text>{''}</Text>
         <Text
           style={{
             fontSize: 20,
@@ -26,7 +26,7 @@ export default () => {
         >
           {t('About.Disclaimer1')}
         </Text>
-        <Text>{}</Text>
+        <Text>{''}</Text>
         <Text
           style={{
             fontSize: 20,
@@ -36,7 +36,7 @@ export default () => {
         >
           {t('About.Disclaimer2')}
         </Text>
-        <Text>{}</Text>
+        <Text>{''}</Text>
         <Text
           style={{
             fontSize: 20,

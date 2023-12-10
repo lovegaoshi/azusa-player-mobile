@@ -1,4 +1,4 @@
-import { Dropbox as _Dropbox, files } from 'dropbox';
+import { Dropbox as _Dropbox } from 'dropbox';
 import { authorize } from 'react-native-app-auth';
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore: dropbox didnt have fileBlob in their sdk anywhere but UPGRADING.md
@@ -8,10 +8,13 @@ import { getArrayBufferForBlob } from 'react-native-blob-jsi-helper';
 // eslint-disable-next-line import/no-unresolved
 import { DROPBOX_KEY, DROPBOX_SECRET } from '@env';
 import { logger } from '@utils/Logger';
-import GenericSyncButton, { GenericProps } from './GenericSyncButton';
-
-const DEFAULT_FILE_NAME = 'nox.noxBackup';
-const DEFAULT_FILE_PATH = `/${DEFAULT_FILE_NAME}`;
+import GenericSyncButton from './GenericSyncButton';
+import { GenericProps } from './GenericSyncProps';
+import {
+  checkAuthentication,
+  noxBackup,
+  noxRestore,
+} from '@utils/sync/Dropbox';
 
 const config = {
   clientId: DROPBOX_KEY,
@@ -41,8 +44,8 @@ let dbx = new _Dropbox({
  * @param {function} callback function that process the returned url after oauth2.
  * @param {function} errorHandling
  */
-export const getAuth = async (
-  callback = () => checkAuthentication().then(console.log),
+const getAuth = async (
+  callback = () => checkAuthentication(dbx).then(console.log),
   errorHandling = logger.error
 ) => {
   const authState = await authorize(config);
@@ -58,97 +61,6 @@ export const getAuth = async (
 };
 
 /**
- * lists the noxplayer setting in dropbox.
- * returns either null if nothing is found, or the path_display of it
- * that can be used to retrieve content.
- * @param {string} query
- * @returns {string}
- */
-
-const find = async (query = DEFAULT_FILE_NAME) => {
-  const data = await dbx.filesSearchV2({
-    query,
-    options: {
-      order_by: { '.tag': 'last_modified_time' },
-    },
-  });
-  try {
-    const fileMetadata = data.result.matches[0]
-      .metadata as files.MetadataV2Metadata;
-    return fileMetadata.metadata.path_display;
-  } catch (e) {
-    logger.warn(`no ${query} found.`);
-    return null;
-  }
-};
-
-/**
- * upload the noxplayer setting file to dropbox, with the mode
- * overwrite. As a sync function there is no need to keep multiple
- * versions.
- * @param {Object} content
- * @param {string} fpath
- * @returns
- */
-const upload = async (content: Uint8Array, fpath = DEFAULT_FILE_PATH) => {
-  return await dbx.filesUpload({
-    path: fpath,
-    mode: { '.tag': 'overwrite' },
-    contents: content,
-  });
-};
-// upload({'new': 'content'}).then(console.log)
-
-/**
- * download the noxplayer setting from dropbox.
- * returns the parsed JSON object or null if not found.
- * @param {string} fpath
- * @returns playerSetting object, or null
- */
-const download = async (fpath = DEFAULT_FILE_PATH) => {
-  if (fpath === null) {
-    return null;
-  }
-  const downloadedFile = await dbx.filesDownload({ path: fpath });
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  // @ts-ignore: dropbox didnt have fileBlob in their sdk anywhere but UPGRADING.md
-  const blob = getArrayBufferForBlob(downloadedFile.result.fileBlob);
-  return new Uint8Array(blob);
-};
-
-/**
- * wraps up find noxplayer setting and download in one function;
- * returns the JSON object of settting or null if not found.
- * @returns playerSetting object, or null
- */
-export const noxRestore = async () => {
-  const noxFile = await find();
-  if (!noxFile) {
-    throw new Error('noxfile is not found on dropbox.');
-  }
-  return await download(noxFile);
-};
-
-/**
- * wraps up upload noxplayer setting. returns the response
- * if successful.
- * @param {Object} content
- * @returns
- */
-export const noxBackup = async (content: Uint8Array) => {
-  return await upload(content);
-};
-
-const checkAuthentication = async () => {
-  try {
-    await dbx.usersGetCurrentAccount();
-    return true;
-  } catch (e) {
-    return false;
-  }
-};
-
-/**
  * Check if dropbox token is valid by performing a simple
  * userGetCurrentAccount API request. if fails, acquire the token
  * again via getAuth. afterwards, the callback function is chained.
@@ -158,12 +70,12 @@ const checkAuthentication = async () => {
  * @param {function} errorCallback
  * @returns
  */
-export const loginDropbox = async (
+const loginDropbox = async (
   callback: () => Promise<void> = async () => undefined,
   errorCallback = logger.error
 ) => {
   try {
-    if (!(await checkAuthentication())) {
+    if (!(await checkAuthentication(dbx))) {
       logger.debug('dropbox token expired, need to log in');
       await getAuth(callback, errorCallback);
     } else {
@@ -179,8 +91,8 @@ export const loginDropbox = async (
 const DropboxSyncButton = ({ restoreFromUint8Array }: GenericProps) =>
   GenericSyncButton({
     restoreFromUint8Array,
-    noxBackup,
-    noxRestore,
+    noxBackup: v => noxBackup(dbx, v),
+    noxRestore: () => noxRestore(dbx, async v => getArrayBufferForBlob(v)),
     login: loginDropbox,
   });
 
