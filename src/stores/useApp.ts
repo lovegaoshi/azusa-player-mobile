@@ -282,28 +282,26 @@ export const useNoxSetting = create<NoxSetting>((set, get) => ({
   initPlayer: async (val: NoxStorage.PlayerStorageObject) => {
     const playingList =
       val.playlists[val.lastPlaylistId[0]] || dummyPlaylistList;
-    set({ currentPlayingId: val.lastPlaylistId[1] });
-    set({ currentABRepeat: getABRepeatRaw(val.lastPlaylistId[1]) });
-    set({ currentPlayingList: playingList });
+    const initializedPlayerSetting = val.settings;
     set({
+      currentPlayingId: val.lastPlaylistId[1],
+      currentABRepeat: getABRepeatRaw(val.lastPlaylistId[1]),
+      currentPlayingList: playingList,
       currentPlaylist:
         val.playlists[val.lastPlaylistId[0]] || val.searchPlaylist,
-    });
-    set({ searchPlaylist: val.searchPlaylist });
-    set({ favoritePlaylist: val.favoriPlaylist });
-    const initializedPlayerSetting = val.settings;
-    set({ playerSetting: initializedPlayerSetting });
-    setPlayerSettingVanilla(initializedPlayerSetting);
-    set({ playlists: val.playlists });
-    set({ playlistIds: val.playlistIds });
-    set({
+      searchPlaylist: val.searchPlaylist,
+      favoritePlaylist: val.favoriPlaylist,
+      playerSetting: initializedPlayerSetting,
+      playlists: val.playlists,
+      playlistIds: val.playlistIds,
       playerStyle: await savePlayerStyle(val.skin, false),
+      playerStyles: val.skins,
+      lyricMapping: val.lyricMapping,
     });
-    set({ playerStyles: val.skins });
+    setPlayerSettingVanilla(initializedPlayerSetting);
     setPlayingList(
       (val.playlists[val.lastPlaylistId[0]] || val.searchPlaylist).songList
     );
-    set({ lyricMapping: val.lyricMapping });
 
     return {
       playlists: val.playlists,
