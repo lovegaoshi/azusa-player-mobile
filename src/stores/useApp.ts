@@ -19,7 +19,7 @@ import {
 } from '@utils/ChromeStorage';
 import { DEFAULT_SETTING, STORAGE_KEYS } from '@enums/Storage';
 import { setPlayerSetting as setPlayerSettingVanilla } from './playerSettingStore';
-import { savePlayerStyle } from '@hooks/useTheme';
+import { savePlayerStyle } from '@utils/StyleStorage';
 import { createStyle } from '@components/style';
 import { getABRepeatRaw } from './appStore';
 import { setPlayingList } from '@stores/playingList';
