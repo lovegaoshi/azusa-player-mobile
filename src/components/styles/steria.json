@@ -1680,5 +1680,104 @@
       "backdrop": "rgba(49, 49, 37, 0.4)"
     },
     "playerControlIconContained": "contained"
-  }
+  },
+    {
+    "metaData": {
+      "themeName": "七海地雷系",
+      "themeDesc": "https://live.bilibili.com/21452505",
+      "themeAuthor": "Disjoint Nulovrsis",
+      "themeIcon": "https://i0.hdslb.com/bfs/emote/b1f2cddb77816c8d4a979c3c6b71324afdc3f6e9.png",
+      "darkTheme": false
+    
+    },
+    "gifs": [
+    'https://i0.hdslb.com/bfs/emote/b1f2cddb77816c8d4a979c3c6b71324afdc3f6e9.png',
+    'https://i0.hdslb.com/bfs/emote/66cf350aff6daa887484eb0a9dec7247abdb45f7.png',
+    'https://i0.hdslb.com/bfs/emote/4e6617256d792c51359887dd03d8b3689a0aee2f.png',
+    'https://i0.hdslb.com/bfs/emote/b626ada27b337382eb10b4753e638ef71de1cc8a.png',
+    'https://i0.hdslb.com/bfs/emote/b60efae53939a4596cb53812bfed7a41acbdc878.png',
+    'https://i0.hdslb.com/bfs/emote/0748e42cae63c22419d499fcf85e1ab131248b99.png',
+    'https://i0.hdslb.com/bfs/emote/2e30ed58197b455ac4a204e44e571a4c0d29b061.png',
+    'https://i0.hdslb.com/bfs/emote/7b01328b13f73b936a48cdef419cd200c0888155.png',
+    'https://i0.hdslb.com/bfs/emote/3f19148f9bdf72654591e45f3b20165699982c64.png',
+    'https://i0.hdslb.com/bfs/emote/891e851d7d68f18da3246f7b806a90b7748da535.png',
+    'https://i0.hdslb.com/bfs/emote/3827bbd911dfed74b7991abae322f79624a4a1b9.png',
+    'https://i0.hdslb.com/bfs/emote/ec165b91d79a68efae59124f73ef6cb2eb3bf8eb.png',
+    'https://i0.hdslb.com/bfs/emote/66b0cd6605bc57838af48b3d41e5d9e6b59c2b86.png',
+    'https://i0.hdslb.com/bfs/emote/3d78f59b9279235f8467657a82ebc3c25611e48c.png',
+    'https://i0.hdslb.com/bfs/emote/3d79569637cb3a66b4127b7886493105db1328cd.png',
+    'https://i0.hdslb.com/bfs/emote/6cb8e5d087fd9a0f7a763b5e25e7e456c187b018.png',
+    'https://i0.hdslb.com/bfs/emote/7d41d3052fd5a15a66341a827ba74e0f6a748a84.png',
+    'https://i0.hdslb.com/bfs/emote/17e5bfaf86266173a3f8dd1f333a368d5e1dea3f.png',
+    'https://i0.hdslb.com/bfs/emote/26805dea0c9384d2f4474fe3d3a1895974aa6359.png',
+    'https://i0.hdslb.com/bfs/emote/042110bdc9625d9e1a94722882b240295005aff2.png',
+    'https://i0.hdslb.com/bfs/emote/73156af1ac47463439f674750719625dbf94162d.png',
+    'https://i0.hdslb.com/bfs/emote/1b9059ad4c1ac07eb8760e91545d0c645a9a4e98.png',
+    'https://i0.hdslb.com/bfs/emote/28feedcb52dde8a6b547ead1791de5b76ef640d0.png',
+    'https://i0.hdslb.com/bfs/emote/10b965ce450ad0ab01a898d435505117646fe5f5.png',
+    'https://i0.hdslb.com/bfs/emote/c714d1a78a7ce1266e9f1e3d5031a561ee558993.png',
+    ],
+    "backgroundImages": [
+    'https://i0.hdslb.com/bfs/garb/item/8a5d755f7bf9c13159c89373eb42c2268f20eaf8.jpg',
+    'https://i0.hdslb.com/bfs/garb/item/84c19737e32a1669304b95c46d545ffb40b54343.jpg',
+    'https://i0.hdslb.com/bfs/garb/item/3fadb3065ce841e060c1d536657836450fe2d44d.jpg',
+    'https://i0.hdslb.com/bfs/garb/item/bf7815ac8fe141c29df4b70c39e6221cf8a6015a.jpg',
+    'https://i0.hdslb.com/bfs/garb/item/234268cf5b4bef9bec289b190dc251c4584852f4.jpg',
+
+    ],
+    "customColors": {
+      "maskedBackgroundColor": "rgba(255, 255, 255, 0.40)",
+      "playlistDrawerBackgroundColor": "#ffa6c9",
+      "playlistDrawerBackgroundColorTransparent": "rgba(255, 166, 201, 0.35)",
+      "progressThumbTintColor": "#ff1493",
+      "progressMinimumTrackTintColor": "#ff1493",
+      "progressMaximumTrackTintColor": "#FFFFFF",
+      "textInputSelectionColor": "#ffa6c9"
+    },
+    "colors": {
+      "text": "#ff1493",
+      "primary": "#ff1493",
+      "onPrimary": "rgb(255, 255, 255)",
+      "primaryContainer": "rgb(255, 217, 223)",
+      "onPrimaryContainer": "rgb(63, 0, 22)",
+      "secondary": "#cc3366",
+      "onSecondary": "rgb(255, 255, 255)",
+      "secondaryContainer": "rgb(255, 217, 223)",
+      "onSecondaryContainer": "rgb(43, 21, 26)",
+      "tertiary": "rgb(122, 87, 50)",
+      "onTertiary": "rgb(255, 255, 255)",
+      "tertiaryContainer": "rgb(255, 220, 188)",
+      "onTertiaryContainer": "rgb(44, 23, 0)",
+      "error": "rgb(186, 26, 26)",
+      "onError": "rgb(255, 255, 255)",
+      "errorContainer": "rgb(255, 218, 214)",
+      "onErrorContainer": "rgb(65, 0, 2)",
+      "background": "rgba(255, 251, 255, 0.3)",
+      "onBackground": "#ff1493",
+      "surface": "rgb(255, 251, 255)",
+      "onSurface": "#ff1493",
+      "surfaceVariant": "rgb(243, 221, 224)",
+      "onSurfaceVariant": "#ff1493",
+      "outline": "rgb(132, 115, 117)",
+      "outlineVariant": "rgb(214, 194, 196)",
+      "shadow": "rgba(0, 0, 0)",
+      "scrim": "rgb(0, 0, 0)",
+      "inverseSurface": "rgb(54, 47, 48)",
+      "inverseOnSurface": "rgb(250, 238, 238)",
+      "inversePrimary": "rgb(255, 177, 192)",
+      "elevation": {
+        "level0": "transparent",
+        "level1": "rgb(250, 242, 247)",
+        "level2": "rgb(247, 236, 242)",
+        "level3": "rgb(244, 230, 237)",
+        "level4": "rgb(243, 229, 235)",
+        "level5": "rgb(241, 225, 232)"
+      },
+      "surfaceDisabled": "rgba(32, 26, 27, 0.12)",
+      "onSurfaceDisabled": "rgba(32, 26, 27, 0.38)",
+      "backdrop": "rgba(58, 45, 47, 0.4)"
+    }
+  },
+
+
 ]
