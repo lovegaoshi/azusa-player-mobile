@@ -132,7 +132,7 @@ export default (playlist: NoxMedia.Playlist) => {
   useEffect(() => {
     resetSelected();
     setChecking(false);
-    // setSearching(false);
+    setSearching(false);
     setRows(playlist.songList);
     setCachedSongs(Array.from(noxCache.noxMediaCache.cache.keys()));
   }, [playlist, playlistShouldReRender]);
