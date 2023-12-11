@@ -22,6 +22,7 @@ export default ({ track }: Props) => {
     y: 0,
   });
   const currentPlayingList = useNoxSetting(state => state.currentPlayingList);
+  const playerStyle = useNoxSetting(state => state.playerStyle);
 
   const handlePress = (event: GestureResponderEvent) => {
     setSongMenuVisible(true);
@@ -46,7 +47,8 @@ export default ({ track }: Props) => {
         size={30}
         onPress={handlePress}
         disabled={song === undefined}
-      ></IconButton>
+        theme={{ colors: { onSurfaceVariant: playerStyle.colors.primary } }}
+      />
       <SongMenu
         song={song}
         songMenuVisible={songMenuVisible}

@@ -129,6 +129,13 @@ export default ({ usePlaylist, prepareForLayoutAnimationRender }: Props) => {
         onPress={() => removeSongs(true)}
         title={t('SongOperations.songRemoveNBanTitle')}
       />
+      {__DEV__ && (
+        <Menu.Item
+          leadingIcon={ICONS.REMOVE_AND_BAN_BVID}
+          onPress={() => console.log(selectedSongs())}
+          title={'console.log'}
+        />
+      )}
     </Menu>
   );
 };

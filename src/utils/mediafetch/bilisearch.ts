@@ -14,9 +14,25 @@ import { songFetch } from './bilivideo';
 import { fetchBiliPaginatedAPI } from './paginatedbili';
 import VideoInfo from '@objects/VideoInfo';
 import { timestampToSeconds } from '../Utils';
+import bfetch from '../BiliFetch';
 
 const URL_BILI_SEARCH =
   'https://api.bilibili.com/x/web-interface/search/type?search_type=video&keyword={keyword}&page={pn}&tids=3';
+
+let cookie: string;
+
+const getCookie = async (cookiedSearch = false) => {
+  if (!cookie) {
+    const res = await bfetch('https://api.bilibili.com/x/frontend/finger/spi');
+    const json = await res.json();
+    cookie = `buvid3=${json.data.b_3};buvid4=${json.data.b_4}`;
+  }
+  if (cookiedSearch) {
+    // TODO: get cookie from biliCookies and add to here.
+    return cookie;
+  }
+  return cookie;
+};
 
 export // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const fastSearchResolveBVID = async (bvobjs: any[]) => {
@@ -63,7 +79,7 @@ export const fetchBiliSearchList = async (
   try {
     val = await fetchBiliPaginatedAPI({
       url: URL_BILI_SEARCH.replace('{keyword}', kword),
-      getMediaCount: data => Math.min(data.numResults, data.pagesize * 1),
+      getMediaCount: data => Math.min(data.numResults, data.pagesize * 2),
       getPageSize: data => data.pagesize,
       getItems: js => js.data.result,
       progressEmitter,
@@ -71,10 +87,11 @@ export const fetchBiliSearchList = async (
       params: {
         method: 'GET',
         headers: {
-          cookie: 'buvid3=coolbeans',
+          cookie: await getCookie(cookiedSearch),
         },
         referrer: 'https://www.bilibili.com',
-        credentials: cookiedSearch ? 'include' : 'omit',
+        // HACK: setting to omit will use whatever cookie I set above.
+        credentials: 'omit',
       },
       resolveBiliBVID: fastSearch
         ? async bvobjs => await fastSearchResolveBVID(bvobjs)
