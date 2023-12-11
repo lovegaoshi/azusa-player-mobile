@@ -24,6 +24,8 @@ import * as kuiaishou from '@mfsdk/kuaishou/index';
 import * as yinyuetai from '@mfsdk/yinyuetai/index';
 // @ts-ignore
 import * as youtube from '@mfsdk/youtube/index';
+// @ts-ignore
+import * as audiomack from '@mfsdk/audiomack/index';
 
 import { logger } from '../Logger';
 
@@ -43,6 +45,7 @@ export enum MUSICFREE {
   kuaishou = 'kuaishou',
   yinyuetai = 'yinyuetai',
   youtube = 'mfsdkyoutube',
+  audiomack = 'audiomack',
   aggregated = 'aggregated',
 }
 
@@ -120,6 +123,9 @@ const yinyuetaiSearch = async (query: string) =>
 const youtubeSearch = async (query: string) =>
   genericSearch(query, youtube, MUSICFREE.youtube);
 
+const audiomackSearch = async (query: string) =>
+  genericSearch(query, audiomack, MUSICFREE.audiomack);
+
 const aggregatedSearcher = {
   [MUSICFREE.fivesing]: fiveSingSearch,
   [MUSICFREE.kugou]: kugouSearch,
@@ -133,6 +139,7 @@ const aggregatedSearcher = {
   [MUSICFREE.kuaishou]: kuaishouSearch,
   [MUSICFREE.yinyuetai]: yinyuetaiSearch,
   [MUSICFREE.youtube]: youtubeSearch,
+  [MUSICFREE.audiomack]: audiomackSearch,
   [MUSICFREE.aggregated]: () => {
     throw new Error('Function not implemented.');
   },
@@ -200,6 +207,8 @@ export const resolver: Resolver = {
     resolverWrapper(v, yinyuetai.getMediaSource, quality),
   [MUSICFREE.youtube]: (v: NoxMedia.Song, quality?: string) =>
     resolverWrapper(v, youtube.getMediaSource, quality),
+  [MUSICFREE.audiomack]: (v: NoxMedia.Song, quality?: string) =>
+    resolverWrapper(v, audiomack.getMediaSource, quality),
   [MUSICFREE.aggregated]: () => {
     throw new Error('Function not implemented.');
   },
