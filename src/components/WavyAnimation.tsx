@@ -19,15 +19,24 @@ const initialVerticalOffset = 10;
 
 interface Props {
   playing?: boolean;
+  progress?: number;
 }
-export default function WaveAnimation({ playing = false }: Props) {
+export default function WaveAnimation({
+  playing = false,
+  progress = 0,
+}: Props) {
   const verticalOffset = useValue(initialVerticalOffset);
   const amplitude = useValue(initialAmplitude);
   const clock = useClockValue();
 
+  if (progress <= 0) {
+    progress = 1;
+    playing = false;
+  }
+
   const createWavePath = (phase = 20) => {
     const points: [number, number][] = Array.from(
-      { length: width },
+      { length: width * progress },
       (_, index) => {
         const angle = (index / width) * (Math.PI * frequency) + phase;
         return [
@@ -38,7 +47,7 @@ export default function WaveAnimation({ playing = false }: Props) {
     );
     const lineGenerator = line().curve(curveBasis);
     const waveLine = lineGenerator(points);
-    const bottomLine = `L${width},${height} L${0}, ${height}`;
+    const bottomLine = `L${width * progress},${height} L${0}, ${height}`;
     return `${waveLine} ${bottomLine} Z`;
   };
 
@@ -47,7 +56,7 @@ export default function WaveAnimation({ playing = false }: Props) {
     const start = Skia.Path.MakeFromSVGString(createWavePath(current));
     const end = Skia.Path.MakeFromSVGString(createWavePath(Math.PI * current));
     return start!.interpolate(end!, 0.5)!;
-  }, [clock, verticalOffset]);
+  }, [clock, verticalOffset, progress]);
 
   const gradientStart = useComputedValue(() => {
     return vec(0, verticalOffset.current);

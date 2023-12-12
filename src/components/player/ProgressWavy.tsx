@@ -1,14 +1,18 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
-import { usePlayWhenReady } from 'react-native-track-player';
+import { usePlayWhenReady, useProgress } from 'react-native-track-player';
 
 import WaveAnimation from '../WavyAnimation';
 
 export default () => {
   const playWhenReady = usePlayWhenReady();
+  const { position, duration } = useProgress();
+
+  if (position === 0) return;
+
   return (
     <View style={styles.waveProgressContainer}>
-      <WaveAnimation playing={playWhenReady} />
+      <WaveAnimation playing={playWhenReady} progress={position / duration} />
     </View>
   );
 };
