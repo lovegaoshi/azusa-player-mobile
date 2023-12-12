@@ -3,6 +3,7 @@ import { useActiveTrack } from 'react-native-track-player';
 import { Progress } from './Progress';
 import { PlayerControls } from './PlayerControls';
 import { useNoxSetting } from '@stores/useApp';
+import { styles } from '../style';
 
 export default () => {
   const track = useActiveTrack();
@@ -11,7 +12,7 @@ export default () => {
   return (
     <View
       style={[
-        playerStyle.actionRowContainer,
+        styles.actionRowContainer,
         { backgroundColor: playerStyle.colors.background },
       ]}
     >

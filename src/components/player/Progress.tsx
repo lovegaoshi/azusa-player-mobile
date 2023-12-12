@@ -1,10 +1,11 @@
-import { Slider } from '@sharcoux/slider';
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import TrackPlayer, { useProgress } from 'react-native-track-player';
 import { ProgressBar } from 'react-native-paper';
 import { useStore } from 'zustand';
+import { Slider } from '@sharcoux/slider';
 
+import ProgressWavy from './ProgressWavy';
 import { useNoxSetting } from '@stores/useApp';
 import { seconds2MMSS as formatSeconds } from '@utils/Utils';
 import appStore from '@stores/appStore';
@@ -31,6 +32,7 @@ export const Progress: React.FC<{ live?: boolean }> = ({ live }) => {
     </View>
   ) : (
     <View style={styles.container}>
+      <ProgressWavy />
       <View style={styles.progressContainer}>
         <Slider
           style={styles.progressBar}
@@ -95,6 +97,7 @@ const styles = StyleSheet.create({
   progressContainer: {
     width: '100%',
     paddingHorizontal: 25,
+    marginTop: -20,
   },
   progressBar: {
     width: '100%',

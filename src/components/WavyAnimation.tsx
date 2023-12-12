@@ -6,19 +6,21 @@ import {
   Skia,
   useClockValue,
   useComputedValue,
-  useTouchHandler,
   useValue,
   vec,
 } from '@shopify/react-native-skia';
 import { line, curveBasis } from 'd3';
 const dimension = Dimensions.get('window');
 const width = dimension.width;
-const height = dimension.height;
+const height = 30;
 const frequency = 2;
 const initialAmplitude = 10;
-const initialVerticalOffset = 100;
+const initialVerticalOffset = 10;
 
-export default function WaveAnimation() {
+interface Props {
+  playing?: boolean;
+}
+export default function WaveAnimation({ playing = false }: Props) {
   const verticalOffset = useValue(initialVerticalOffset);
   const amplitude = useValue(initialAmplitude);
   const clock = useClockValue();
@@ -30,7 +32,7 @@ export default function WaveAnimation() {
         const angle = (index / width) * (Math.PI * frequency) + phase;
         return [
           index,
-          amplitude.current * Math.sin(angle) + verticalOffset.current,
+          amplitude.current * Math.sin(angle) + verticalOffset.current + 10,
         ];
       }
     );
@@ -41,7 +43,7 @@ export default function WaveAnimation() {
   };
 
   const animatedPath = useComputedValue(() => {
-    const current = (clock.current / 255) % 255;
+    const current = (clock.current / 500) % 255;
     const start = Skia.Path.MakeFromSVGString(createWavePath(current));
     const end = Skia.Path.MakeFromSVGString(createWavePath(Math.PI * current));
     return start!.interpolate(end!, 0.5)!;
@@ -55,21 +57,11 @@ export default function WaveAnimation() {
     return vec(0, verticalOffset.current + 500);
   }, [verticalOffset]);
 
-  const onToucHandler = useTouchHandler({
-    onActive: ({ y }) => {
-      if (y > initialVerticalOffset) {
-        verticalOffset.current = Math.min(height, y);
-        amplitude.current = Math.max(
-          0,
-          (height - verticalOffset.current) * 0.025
-        );
-      }
-    },
-  });
+  if (!playing) return;
 
   return (
     <View style={styles.container}>
-      <Canvas style={styles.canvas} onTouch={onToucHandler}>
+      <Canvas style={styles.canvas}>
         <Path path={animatedPath} style={'fill'} color={'cyan'}>
           <LinearGradient
             start={gradientStart}
@@ -85,7 +77,6 @@ export default function WaveAnimation() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
   },
   canvas: {
     flex: 1,
