@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import { usePlayWhenReady, useProgress } from 'react-native-track-player';
 
-import WaveAnimation from '../WavyAnimation';
+import WaveAnimation from './WavyAnimation';
 import { useNoxSetting } from '@stores/useApp';
 
 export default () => {

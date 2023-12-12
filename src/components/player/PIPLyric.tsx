@@ -4,7 +4,7 @@ import TrackPlayer, { Track } from 'react-native-track-player';
 
 import { useNoxSetting } from '@stores/useApp';
 import { LyricView } from './Lyric';
-import usePlayerControls from '@components/player/usePlayerControls';
+import usePlayerControls from '@components/player/controls/usePlayerControls';
 
 const PIPLyricView = () => {
   const [currentTrack, setCurrentTrack] = useState<Track | undefined>(

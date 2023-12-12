@@ -7,7 +7,7 @@ import { PlayPauseButton } from './PlayPauseButton';
 import ThumbsUpButton from './ThumbsUpButton';
 import PlayerModeButton from './PlayerModeButton';
 import usePlayerControls from './usePlayerControls';
-import LottieButton from '../buttons/LottieButton';
+import LottieButton from '@components/buttons/LottieButton';
 
 export const PlayerControls: React.FC = () => {
   const { performSkipToNext, performSkipToPrevious } = usePlayerControls();

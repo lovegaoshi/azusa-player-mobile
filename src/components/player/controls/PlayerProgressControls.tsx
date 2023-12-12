@@ -3,7 +3,7 @@ import { useActiveTrack } from 'react-native-track-player';
 import { Progress } from './Progress';
 import { PlayerControls } from './PlayerControls';
 import { useNoxSetting } from '@stores/useApp';
-import { styles } from '../style';
+import { styles } from '@components/style';
 
 export default () => {
   const track = useActiveTrack();

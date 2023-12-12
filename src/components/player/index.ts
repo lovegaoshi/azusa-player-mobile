@@ -1,3 +1,3 @@
-export * from './PlayerControls';
-export * from './PlayPauseButton';
-export * from './Progress';
+export * from './controls/PlayerControls';
+export * from './controls/PlayPauseButton';
+export * from './controls/Progress';

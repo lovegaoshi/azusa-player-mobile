@@ -1,6 +1,6 @@
 import { View } from 'react-native';
 import { useActiveTrack } from 'react-native-track-player';
-import { Progress } from '@components/player/Progress';
+import { Progress } from '@components/player/controls/Progress';
 import PlayerControls from './PlayerControlsSquared';
 import { useNoxSetting } from '@stores/useApp';
 import { styles } from '../style';
