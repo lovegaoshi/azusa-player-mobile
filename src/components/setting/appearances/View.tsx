@@ -98,6 +98,12 @@ const MainView = ({ navigation }: Props) => {
             settingCategory: 'AppearanceSettings',
           }}
         />
+        <RenderSetting
+          item={{
+            settingName: 'wavyProgressBar',
+            settingCategory: 'AppearanceSettings',
+          }}
+        />
         <SettingListItem
           settingName="ColorScheme"
           onPress={selectColorScheme}
