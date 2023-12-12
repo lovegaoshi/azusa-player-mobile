@@ -39,8 +39,11 @@ export default function WaveAnimation({
         const angle = (index / width) * (Math.PI * frequency) + phase;
         return [
           index,
-          (amplitude.current * Math.sin(angle) + verticalOffset.current + 10) /
-            gaussian(index / width),
+          amplitude.current *
+            (Math.sin(angle) - 1) *
+            gaussian(index / extrapolatedWidth) +
+            verticalOffset.current +
+            17,
         ];
       }
     );
