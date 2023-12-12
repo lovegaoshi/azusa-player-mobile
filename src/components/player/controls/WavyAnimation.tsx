@@ -28,15 +28,11 @@ export default function WaveAnimation({
   const verticalOffset = useValue(initialVerticalOffset);
   const amplitude = useValue(initialAmplitude);
   const clock = useClockValue();
-
-  if (progress <= 0) {
-    progress = 1;
-    playing = false;
-  }
+  const extrapolatedWidth = Math.max(width * progress * 0.9 - 3, 0);
 
   const createWavePath = (phase = 20) => {
     const points: [number, number][] = Array.from(
-      { length: width * progress },
+      { length: extrapolatedWidth },
       (_, index) => {
         const angle = (index / width) * (Math.PI * frequency) + phase;
         return [
@@ -47,8 +43,8 @@ export default function WaveAnimation({
     );
     const lineGenerator = line().curve(curveBasis);
     const waveLine = lineGenerator(points);
-    const bottomLine = `L${width * progress},${height} L${0}, ${height}`;
-    return `${waveLine} ${bottomLine} Z`;
+    const bottomLine = `L${extrapolatedWidth},${height} L${0}, ${height}`;
+    return `${waveLine || bottomLine} ${bottomLine} Z`;
   };
 
   const animatedPath = useComputedValue(() => {
