@@ -33,6 +33,7 @@ import './localization/i18n';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { ICONS } from '@enums/Icons';
 import NoxBottomTab from './components/bottomtab/NoxBottomTab';
+import WaveAnimation from './components/WavyAnimation';
 
 const { LightTheme, DarkTheme } = adaptNavigationTheme({
   reactNavigationLight: NavigationDefaultTheme,
@@ -133,7 +134,7 @@ const AzusaPlayer = () => {
                 drawerIcon: () => <IconButton icon={ICONS.exploreScreen} />,
                 title: String(t('appDrawer.exploreScreenName')),
               }}
-              component={DummySettings}
+              component={WaveAnimation}
             />
             <Drawer.Screen
               name={ViewEnum.SETTINGS}
