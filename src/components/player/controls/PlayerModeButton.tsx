@@ -3,7 +3,7 @@ import { useStore } from 'zustand';
 
 import noxPlayingList from '@stores/playingList';
 import { cycleThroughPlaymode } from '@utils/RNTPUtils';
-import ShadowedButton from '../buttons/ShadowedButton';
+import ShadowedButton from '@components/buttons/ShadowedButton';
 
 interface Props {
   iconSize?: number;

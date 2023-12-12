@@ -23,7 +23,7 @@ import { useTranslation } from 'react-i18next';
 
 import { Player } from './components/player/View';
 import Playlist from './components/playlist/View';
-import PlayerBottomPanel from './components/player/PlayerProgressControls';
+import PlayerBottomPanel from './components/player/controls/PlayerProgressControls';
 import { useNoxSetting } from '@stores/useApp';
 import PlaylistDrawer from './components/playlists/View';
 import { ViewEnum } from './enums/View';

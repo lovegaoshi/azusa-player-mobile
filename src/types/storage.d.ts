@@ -35,6 +35,7 @@ declare namespace NoxStorage {
     chatGPTResolveSongName: boolean;
     trackCoverArtCard: boolean;
     suggestedSkipLongVideo: boolean;
+    wavyProgressBar: boolean;
 
     appID: string;
     language?: string;

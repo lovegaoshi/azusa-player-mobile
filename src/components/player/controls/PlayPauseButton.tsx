@@ -8,7 +8,7 @@ import TrackPlayer, {
 
 import { useDebouncedValue } from 'hooks';
 import { useNoxSetting } from '@stores/useApp';
-import LottieButtonAnimated from '../buttons/LottieButtonAnimated';
+import LottieButtonAnimated from '@components/buttons/LottieButtonAnimated';
 import { fadePause } from '@utils/RNTPUtils';
 
 interface Props {

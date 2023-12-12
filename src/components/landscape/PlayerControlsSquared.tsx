@@ -2,12 +2,12 @@ import React from 'react';
 import { Dimensions, StyleSheet, View } from 'react-native';
 import { usePlaybackState } from 'react-native-track-player';
 
-import { PlaybackError } from '@components/player/PlaybackError';
-import { PlayPauseButton } from '@components/player/PlayPauseButton';
+import { PlaybackError } from '@components/player/controls/PlaybackError';
+import { PlayPauseButton } from '@components/player/controls/PlayPauseButton';
 import { useNoxSetting } from '@stores/useApp';
-import ThumbsUpButton from '@components/player/ThumbsUpButton';
-import PlayerModeButton from '@components/player/PlayerModeButton';
-import usePlayerControls from '@components/player/usePlayerControls';
+import ThumbsUpButton from '@components/player/controls/ThumbsUpButton';
+import PlayerModeButton from '@components/player/controls/PlayerModeButton';
+import usePlayerControls from '@components/player/controls/usePlayerControls';
 import LottieButton from '../buttons/LottieButton';
 
 interface Props {

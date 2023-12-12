@@ -64,6 +64,7 @@ export const DEFAULT_SETTING: NoxStorage.PlayerSettingDict = {
   chatGPTResolveSongName: false,
   trackCoverArtCard: false,
   suggestedSkipLongVideo: true,
+  wavyProgressBar: false,
 
   appID,
   language: undefined,
