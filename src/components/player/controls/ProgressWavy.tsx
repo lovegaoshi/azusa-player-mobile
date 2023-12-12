@@ -9,11 +9,16 @@ export default () => {
   const playWhenReady = usePlayWhenReady();
   const { position, duration } = useProgress();
   const playerSetting = useNoxSetting(state => state.playerSetting);
+  const playerStyle = useNoxSetting(state => state.playerStyle);
 
   return (
     <View style={styles.waveProgressContainer}>
       {playerSetting.wavyProgressBar && (
-        <WaveAnimation playing={true} progress={position / duration} />
+        <WaveAnimation
+          playing={playWhenReady}
+          progress={position / duration}
+          color={playerStyle.customColors.progressMinimumTrackTintColor}
+        />
       )}
     </View>
   );

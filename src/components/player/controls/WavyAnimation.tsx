@@ -1,15 +1,17 @@
 import { Dimensions, StyleSheet, View } from 'react-native';
 import {
   Canvas,
-  LinearGradient,
   Path,
   Skia,
   useClockValue,
   useComputedValue,
   useValue,
+  LinearGradient,
   vec,
 } from '@shopify/react-native-skia';
 import { line, curveBasis } from 'd3';
+import { colord } from 'colord';
+
 import { gaussian } from '@utils/Gaussian';
 
 const dimension = Dimensions.get('window');
@@ -22,21 +24,24 @@ const initialVerticalOffset = 10;
 interface Props {
   playing?: boolean;
   progress?: number;
+  color?: string;
 }
 export default function WaveAnimation({
   playing = false,
   progress = 0,
+  color = 'white',
 }: Props) {
   const verticalOffset = useValue(initialVerticalOffset);
   const amplitude = useValue(initialAmplitude);
   const clock = useClockValue();
   const extrapolatedWidth = Math.max(width * progress * 0.9 - 3, 0);
+  const parsedColor = colord(color);
 
   const createWavePath = (phase = 20) => {
     const points: [number, number][] = Array.from(
       { length: extrapolatedWidth },
       (_, index) => {
-        const angle = (index / width) * (Math.PI * frequency) + phase;
+        const angle = (1 - index / width) * (Math.PI * frequency) + phase;
         return [
           index,
           amplitude.current *
@@ -60,26 +65,40 @@ export default function WaveAnimation({
     return start!.interpolate(end!, 0.5)!;
   }, [clock, verticalOffset, progress]);
 
+  const animatedPath2 = useComputedValue(() => {
+    const current = (clock.current / 700) % 255;
+    const start = Skia.Path.MakeFromSVGString(createWavePath(current));
+    const end = Skia.Path.MakeFromSVGString(createWavePath(Math.PI * current));
+    return start!.interpolate(end!, 0.5)!;
+  }, [clock, verticalOffset, progress]);
+
   const gradientStart = useComputedValue(() => {
-    return vec(0, verticalOffset.current);
-  }, [verticalOffset]);
+    return vec(0, 0);
+  }, [width]);
 
   const gradientEnd = useComputedValue(() => {
-    return vec(0, verticalOffset.current + 500);
-  }, [verticalOffset]);
+    return vec(width, 0);
+  }, [width]);
 
   if (!playing) return <></>;
 
   return (
     <View style={styles.container}>
       <Canvas style={styles.canvas}>
-        <Path path={animatedPath} style={'fill'} color={'cyan'}>
-          <LinearGradient
-            start={gradientStart}
-            end={gradientEnd}
-            colors={['cyan', 'blue']}
-          />
+        <Path path={animatedPath} style={'fill'} color={color}>
+          {false && (
+            <LinearGradient
+              start={gradientStart}
+              end={gradientEnd}
+              colors={['cyan', 'blue']}
+            />
+          )}
         </Path>
+        <Path
+          path={animatedPath2}
+          style={'fill'}
+          color={parsedColor.alpha(0.9).toRgbString()}
+        ></Path>
       </Canvas>
     </View>
   );
