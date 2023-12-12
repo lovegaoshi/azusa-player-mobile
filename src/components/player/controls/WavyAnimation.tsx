@@ -39,7 +39,7 @@ export default function WaveAnimation({
         const angle = (index / width) * (Math.PI * frequency) + phase;
         return [
           index,
-          (amplitude.current * Math.sin(angle) + verticalOffset.current + 10) *
+          (amplitude.current * Math.sin(angle) + verticalOffset.current + 10) /
             gaussian(index / width),
         ];
       }
@@ -65,7 +65,7 @@ export default function WaveAnimation({
     return vec(0, verticalOffset.current + 500);
   }, [verticalOffset]);
 
-  if (!playing) return;
+  if (!playing) return <></>;
 
   return (
     <View style={styles.container}>
