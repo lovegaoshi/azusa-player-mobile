@@ -10,6 +10,8 @@ import {
   vec,
 } from '@shopify/react-native-skia';
 import { line, curveBasis } from 'd3';
+import { gaussian } from '@utils/Gaussian';
+
 const dimension = Dimensions.get('window');
 const width = dimension.width;
 const height = 30;
@@ -37,7 +39,8 @@ export default function WaveAnimation({
         const angle = (index / width) * (Math.PI * frequency) + phase;
         return [
           index,
-          amplitude.current * Math.sin(angle) + verticalOffset.current + 10,
+          (amplitude.current * Math.sin(angle) + verticalOffset.current + 10) *
+            gaussian(index / width),
         ];
       }
     );
