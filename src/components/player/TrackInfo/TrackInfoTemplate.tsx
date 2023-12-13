@@ -144,7 +144,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: '600',
     color: 'grey',
-    marginTop: 15,
+    marginTop: 10,
     paddingHorizontal: 5,
     justifyContent: 'center',
     alignItems: 'center',
