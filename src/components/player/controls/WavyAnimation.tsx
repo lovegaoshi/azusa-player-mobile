@@ -38,24 +38,30 @@ export default function WaveAnimation({
   const parsedColor = colord(color);
 
   const createWavePath = (phase = 20) => {
-    const points: [number, number][] = Array.from(
-      { length: extrapolatedWidth },
-      (_, index) => {
-        const angle = (1 - index / width) * (Math.PI * frequency) + phase;
-        return [
-          index,
-          amplitude.current *
-            (Math.sin(angle) - 1) *
-            gaussian(index / extrapolatedWidth) +
-            verticalOffset.current +
-            17,
-        ];
-      }
-    );
+    const points: [number, number][] =
+      extrapolatedWidth < 6
+        ? []
+        : Array.from(
+            { length: Math.floor(extrapolatedWidth / 6) },
+            (_, index) => {
+              index *= 6;
+              const angle = (1 - index / width) * (Math.PI * frequency) + phase;
+              return [
+                index,
+                amplitude.current *
+                  (Math.sin(angle) - 1) *
+                  gaussian(index / extrapolatedWidth) +
+                  verticalOffset.current +
+                  17,
+              ];
+            }
+          );
     const lineGenerator = line().curve(curveBasis);
     const waveLine = lineGenerator(points);
     const bottomLine = `L${extrapolatedWidth},${height} L${0}, ${height}`;
-    return `${waveLine || bottomLine} ${bottomLine} Z`;
+    return waveLine
+      ? `${waveLine} ${bottomLine} Z`
+      : `L${0},${0} L${0}, ${0} L${0},${0} L${0}, ${0} Z`;
   };
 
   const animatedPath = useComputedValue(() => {
@@ -85,6 +91,11 @@ export default function WaveAnimation({
   return (
     <View style={styles.container}>
       <Canvas style={styles.canvas}>
+        <Path
+          path={animatedPath2}
+          style={'fill'}
+          color={parsedColor.hue(20).toRgbString()}
+        ></Path>
         <Path path={animatedPath} style={'fill'} color={color}>
           {false && (
             <LinearGradient
@@ -94,11 +105,6 @@ export default function WaveAnimation({
             />
           )}
         </Path>
-        <Path
-          path={animatedPath2}
-          style={'fill'}
-          color={parsedColor.alpha(0.9).toRgbString()}
-        ></Path>
       </Canvas>
     </View>
   );
