@@ -97,7 +97,7 @@ const styles = StyleSheet.create({
   progressContainer: {
     width: '100%',
     paddingHorizontal: 25,
-    marginTop: -20,
+    marginTop: -22,
   },
   progressBar: {
     width: '100%',

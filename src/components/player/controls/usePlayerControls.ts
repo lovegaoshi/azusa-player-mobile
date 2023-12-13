@@ -62,6 +62,10 @@ export default () => {
     }
     if (abRepeat[1] === 1) return;
     if (event.position > bRepeatDuration) {
+      if (getState().playmode === NoxRepeatMode.REPEAT_TRACK) {
+        TrackPlayer.seekTo(abRepeat[0] * event.duration);
+        return;
+      }
       performSkipToNext();
     }
   });

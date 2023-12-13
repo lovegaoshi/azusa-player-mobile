@@ -18,7 +18,7 @@ const dimension = Dimensions.get('window');
 const width = dimension.width;
 const height = 30;
 const frequency = 2;
-const initialAmplitude = 10;
+const initialAmplitude = 3;
 const initialVerticalOffset = 10;
 
 interface Props {
