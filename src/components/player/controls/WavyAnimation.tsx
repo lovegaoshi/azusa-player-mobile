@@ -20,6 +20,7 @@ const height = 30;
 const frequency = 2;
 const initialAmplitude = 3;
 const initialVerticalOffset = 10;
+const samplingInterval = 10;
 
 interface Props {
   playing?: boolean;
@@ -39,12 +40,12 @@ export default function WaveAnimation({
 
   const createWavePath = (phase = 20) => {
     const points: [number, number][] =
-      extrapolatedWidth < 6
+      extrapolatedWidth < samplingInterval
         ? []
         : Array.from(
-            { length: Math.floor(extrapolatedWidth / 6) },
+            { length: Math.floor(extrapolatedWidth / samplingInterval) },
             (_, index) => {
-              index *= 6;
+              index *= samplingInterval;
               const angle = (1 - index / width) * (Math.PI * frequency) + phase;
               return [
                 index,

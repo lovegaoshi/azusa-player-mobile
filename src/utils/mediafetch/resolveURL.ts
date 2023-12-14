@@ -5,7 +5,7 @@ import bililiveFetch from './bililive';
 import { logger } from '../Logger';
 import { regexMatchOperations } from '../Utils';
 import { resolver, MUSICFREE } from './mfsdk';
-import { fetchVideoPlayUrlPromise } from './bilivideo';
+import bilivideoFetch, { fetchVideoPlayUrlPromise } from './bilivideo';
 
 // TODO: remove this, believe this is for legacy reasons?
 export const ENUMS = {
@@ -13,7 +13,9 @@ export const ENUMS = {
   youtube: 'youtube.video',
 };
 
-type regResolve = NoxUtils.RegexMatchResolve<NoxNetwork.ParsedNoxMediaURL>;
+type regResolve = NoxUtils.RegexMatchResolve<
+  Promise<NoxNetwork.ParsedNoxMediaURL>
+>;
 /**
  * a parent method that returns the media's stream url given an id.
  * @param {string} bvid media's id.
@@ -74,4 +76,18 @@ export const refreshMetadata = async (
     ...(metadata.cover && { cover: metadata.cover }),
     metadataOnLoad: false,
   };
+};
+
+export const songExport2URL = (v: NoxMedia.Song): string => {
+  const regexOperations: NoxUtils.RegexMatchResolve<string> = [
+    [biliaudioFetch.regexResolveURLMatch, biliaudioFetch.export2URL],
+    [ytbvideoFetch.regexResolveURLMatch, ytbvideoFetch.export2URL],
+  ];
+
+  return regexMatchOperations({
+    song: v,
+    regexOperations,
+    fallback: bilivideoFetch.export2URL,
+    regexMatching: song => song.id,
+  });
 };

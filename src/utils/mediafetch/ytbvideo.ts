@@ -260,6 +260,9 @@ const resolveURL = async (song: NoxMedia.Song, iOS = true) => {
 
 const refreshSong = (song: NoxMedia.Song) => song;
 
+const export2URL = (song: NoxMedia.Song) =>
+  `https://www.youtube.com/watch?v=${song.bvid}`;
+
 export default {
   regexSearchMatch: /youtu(?:.*\/v\/|.*v=|\.be\/)([A-Za-z0-9_-]{11})/,
   regexFetch,
@@ -267,4 +270,5 @@ export default {
   resolveURL,
   refreshSong,
   suggest,
+  export2URL,
 };
