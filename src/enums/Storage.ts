@@ -36,8 +36,8 @@ export enum SEARCH_OPTIONS {
 export const appID = 'NoxPlayerMobile';
 
 export const DEFAULT_SETTING: NoxStorage.PlayerSettingDict = {
-  playMode: 'NA',
-  defaultPlayMode: 'NA',
+  playMode: 'shufflePlay',
+  defaultPlayMode: 'shufflePlay',
   defaultVolume: 1,
 
   autoRSSUpdate: true,
