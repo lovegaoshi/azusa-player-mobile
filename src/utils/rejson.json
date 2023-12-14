@@ -261,8 +261,19 @@
     "operations": [[1, ["【赫卡特_Hecate】(.+)（直播歌切）"]]]
   },
   {
-    "uploaders": ["KuroKazuma"],
+    "uploaders": [
+      "https://www.youtube.com/channel/UC8zj2Yzx74dhSxXjHI_3o1g",
+      "UC8zj2Yzx74dhSxXjHI_3o1g"
+    ],
     "operations": [[2], [1, [".+ - \\d+ (.+)"]]]
+  },
+  {
+    "uploaders": ["103795364"],
+    "operations": [[2], [1, ["郭德纲相声经典-(.+)"]]]
+  },
+  {
+    "uploaders": ["402110060"],
+    "operations": [[2], [1, ["「(.+)」"]]]
   },
   {
     "uploaders": [""],

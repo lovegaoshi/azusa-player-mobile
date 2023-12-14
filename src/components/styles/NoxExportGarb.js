@@ -55,8 +55,8 @@ convertedGarbData.backgroundImages = parsedGarbData.headmp4
   ? [
       ...parsedGarbData.portraits,
       {
-        type: 'video',
-        identifier: parsedGarbData.headmp4,
+        type: 'biliGarbHeadVideo',
+        identifier: args.garbid,
       },
     ]
   : parsedGarbData.portraits;
