@@ -77,7 +77,7 @@ export const refreshMetadata = async (
 };
 
 type reg2URL = NoxUtils.RegexMatchResolve<string>;
-export const SongExport2URL = async (v: NoxMedia.Song): Promise<string> => {
+export const songExport2URL = async (v: NoxMedia.Song): Promise<string> => {
   const regexOperations: reg2URL = [
     [
       biliaudioFetch.regexResolveURLMatch,
