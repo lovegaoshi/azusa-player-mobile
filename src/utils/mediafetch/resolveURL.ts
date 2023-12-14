@@ -13,7 +13,9 @@ export const ENUMS = {
   youtube: 'youtube.video',
 };
 
-type regResolve = NoxUtils.RegexMatchResolve<NoxNetwork.ParsedNoxMediaURL>;
+type regResolve = NoxUtils.RegexMatchResolve<
+  Promise<NoxNetwork.ParsedNoxMediaURL>
+>;
 /**
  * a parent method that returns the media's stream url given an id.
  * @param {string} bvid media's id.
@@ -76,23 +78,16 @@ export const refreshMetadata = async (
   };
 };
 
-type reg2URL = NoxUtils.RegexMatchResolve<string>;
-export const songExport2URL = async (v: NoxMedia.Song): Promise<string> => {
-  const regexOperations: reg2URL = [
-    [
-      biliaudioFetch.regexResolveURLMatch,
-      async v => biliaudioFetch.export2URL(v),
-    ],
-    [
-      ytbvideoFetch.regexResolveURLMatch,
-      async v => ytbvideoFetch.export2URL(v),
-    ],
+export const songExport2URL = (v: NoxMedia.Song): string => {
+  const regexOperations: NoxUtils.RegexMatchResolve<string> = [
+    [biliaudioFetch.regexResolveURLMatch, biliaudioFetch.export2URL],
+    [ytbvideoFetch.regexResolveURLMatch, ytbvideoFetch.export2URL],
   ];
 
   return regexMatchOperations({
     song: v,
     regexOperations,
-    fallback: async v => bilivideoFetch.export2URL(v),
+    fallback: bilivideoFetch.export2URL,
     regexMatching: song => song.id,
   });
 };
