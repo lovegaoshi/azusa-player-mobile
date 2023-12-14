@@ -238,10 +238,15 @@ const resolveURL = () => undefined;
 
 const refreshSong = (song: NoxMedia.Song) => song;
 
+const export2URL = (song: NoxMedia.Song) =>
+  `https://www.bilibili.com/video/${song.bvid}${
+    song.page ? `?p=${song.page}` : ''
+  }`;
 export default {
   regexSearchMatch: /(BV[^/?]+)/,
   regexFetch,
   regexResolveURLMatch: /^null-/,
   resolveURL,
   refreshSong,
+  export2URL,
 };

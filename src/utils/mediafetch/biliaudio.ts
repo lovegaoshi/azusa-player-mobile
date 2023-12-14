@@ -112,10 +112,14 @@ const resolveURL = async (song: NoxMedia.Song) => {
 
 const refreshSong = (song: NoxMedia.Song) => song;
 
+const export2URL = (song: NoxMedia.Song) =>
+  `https://www.bilibili.com/audio/au${song.bvid}`;
+
 export default {
   regexSearchMatch: /bilibili.com\/audio\/au([^/?]+)/,
   regexFetch,
   regexResolveURLMatch: /^biliaudio-/,
   resolveURL,
   refreshSong,
+  export2URL,
 };

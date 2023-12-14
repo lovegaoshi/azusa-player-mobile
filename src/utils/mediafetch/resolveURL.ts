@@ -5,7 +5,7 @@ import bililiveFetch from './bililive';
 import { logger } from '../Logger';
 import { regexMatchOperations } from '../Utils';
 import { resolver, MUSICFREE } from './mfsdk';
-import { fetchVideoPlayUrlPromise } from './bilivideo';
+import bilivideoFetch, { fetchVideoPlayUrlPromise } from './bilivideo';
 
 // TODO: remove this, believe this is for legacy reasons?
 export const ENUMS = {
@@ -74,4 +74,25 @@ export const refreshMetadata = async (
     ...(metadata.cover && { cover: metadata.cover }),
     metadataOnLoad: false,
   };
+};
+
+type reg2URL = NoxUtils.RegexMatchResolve<string>;
+export const SongExport2URL = async (v: NoxMedia.Song): Promise<string> => {
+  const regexOperations: reg2URL = [
+    [
+      biliaudioFetch.regexResolveURLMatch,
+      async v => biliaudioFetch.export2URL(v),
+    ],
+    [
+      ytbvideoFetch.regexResolveURLMatch,
+      async v => ytbvideoFetch.export2URL(v),
+    ],
+  ];
+
+  return regexMatchOperations({
+    song: v,
+    regexOperations,
+    fallback: async v => bilivideoFetch.export2URL(v),
+    regexMatching: song => song.id,
+  });
 };
