@@ -87,8 +87,22 @@ export default {
     'https://i0.hdslb.com/bfs/baselabs/56f4e80511335e86863765622fb74cf3ff0cc3ee.png',
     {
       type: 'biliNFTVideo',
-      identifier: '["161",10]',
+      identifier: '["161","华美乐章·阿梓"]',
     },
+    {
+      type: 'biliNFTVideo',
+      identifier: '["161","盛夏江南 阿梓"]',
+    },
+    {
+      type: 'biliNFTVideo',
+      identifier: '["161","变速系列·阿梓"]',
+    },
+    {
+      type: 'biliNFTVideo',
+      identifier: '["161","春去夏来 阿梓"]',
+    },
+    'https://i0.hdslb.com/bfs/baselabs/2b86c6b2a77f1569cd088eb72fb2d2eb6a007236.png',
+    'https://i0.hdslb.com/bfs/baselabs/c0ccbe248d254542763317cde9d7b8b53f603395.png',
     'https://i0.hdslb.com/bfs/baselabs/023a645451d96c96b8a8591872ecaf8ef99f3c72.png',
   ],
 
