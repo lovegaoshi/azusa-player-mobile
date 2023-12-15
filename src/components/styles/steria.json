@@ -1399,11 +1399,7 @@
     "backgroundImages": [
       {
         "type": "biliNFTVideo",
-        "identifier": "[\"100531\",1]"
-      },
-      {
-        "type": "biliNFTVideo",
-        "identifier": "[\"100531\",2]"
+        "identifier": "[\"100531\",0]"
       }
     ],
     "customColors": {
