@@ -35,8 +35,22 @@
       "https://i0.hdslb.com/bfs/garb/item/ea5d55b864784ae66f35f071ba0d71b0ce8663d2.jpg",
       {
         "type": "biliNFTVideo",
-        "identifier": "[\"161\",8]"
+        "identifier": "[\"161\",\"晚宴一角·雪绘\"]"
       },
+      {
+        "type": "biliNFTVideo",
+        "identifier": "[\"161\",\"水球作战 雪绘\"]"
+      },
+      {
+        "type": "biliNFTVideo",
+        "identifier": "[\"161\",\"变速系列·雪绘\"]"
+      },
+      {
+        "type": "biliNFTVideo",
+        "identifier": "[\"161\",\"雪之回眸 雪绘\"]"
+      },
+      "https://i0.hdslb.com/bfs/baselabs/2040bcd25067332120eac9b4da054ffda9c599b7.png",
+      "https://i0.hdslb.com/bfs/baselabs/f7126fd072154f5d4fd8e970e901239be6a2a7c7.png",
       "https://i0.hdslb.com/bfs/baselabs/638ee09086ff11d4de2e85d4100fa512de5704d8.png",
       "https://i0.hdslb.com/bfs/baselabs/4e967e911903748ec42e1811d9aaa2823c4aaacf.png"
     ],
