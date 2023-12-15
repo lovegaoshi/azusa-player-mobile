@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View, BackHandler, StyleSheet } from 'react-native';
 import { FlashList } from '@shopify/flash-list';
 import { IconButton } from 'react-native-paper';
@@ -36,6 +36,14 @@ const PlaylistList = () => {
     playlistRef,
   } = usedPlaylist;
   const netInfo = useNetInfo();
+  const [completeScrollBarHeight, setCompleteScrollBarHeight] = useState(1);
+  const [visibleScrollBarHeight, setVisibleScrollBarHeight] = useState(0.5);
+
+  const scrollIndicatorSize =
+    completeScrollBarHeight > visibleScrollBarHeight
+      ? (visibleScrollBarHeight * visibleScrollBarHeight) /
+        completeScrollBarHeight
+      : visibleScrollBarHeight;
 
   useFocusEffect(
     React.useCallback(() => {
@@ -111,6 +119,32 @@ const PlaylistList = () => {
           onRefresh={refreshPlaylist}
           refreshing={refreshing}
         />
+        <View
+          style={{
+            height: '100%',
+            width: 6,
+            //backgroundColor: '#52057b',
+            borderRadius: 8,
+          }}
+        >
+          <View
+            style={{
+              height: '99%',
+              width: 6,
+              //backgroundColor: '#52057b',
+              borderRadius: 8,
+            }}
+          >
+            <View
+              style={{
+                width: 6,
+                borderRadius: 8,
+                backgroundColor: 'white',
+                height: '50%',
+              }}
+            />
+          </View>
+        </View>
       </View>
       <SongMenu
         usePlaylist={usedPlaylist}

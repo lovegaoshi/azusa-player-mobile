@@ -20,7 +20,7 @@ const height = 30;
 const frequency = 2;
 const initialAmplitude = 3;
 const initialVerticalOffset = 10;
-const samplingInterval = 10;
+const samplingInterval = 5;
 
 interface Props {
   playing?: boolean;
