@@ -1400,6 +1400,10 @@
       {
         "type": "biliNFTVideo",
         "identifier": "[\"100531\",1]"
+      },
+      {
+        "type": "biliNFTVideo",
+        "identifier": "[\"100531\",2]"
       }
     ],
     "customColors": {
