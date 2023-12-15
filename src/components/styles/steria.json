@@ -1398,23 +1398,9 @@
     ],
     "backgroundImages": [
       {
-        "type": "bvid",
-        "identifier": "BV1jT41187Rr"
-      },
-      {
         "type": "biliNFTVideo",
         "identifier": "[\"100531\",1]"
-      },
-      {
-        "type": "biliNFTVideo",
-        "identifier": "[\"100531\",2]"
-      },
-      "https://i0.hdslb.com/bfs/garb/open/7988dba60d2636ef492357946e4f8cc7fc256266.png",
-      "https://i0.hdslb.com/bfs/garb/open/fbfd3275492467fd3eb05777ed715d0cc80e82f3.png",
-      "https://i0.hdslb.com/bfs/garb/open/85d8cc6e3b20581f2de40dfe901d0343cb4aa180.png",
-      "https://i0.hdslb.com/bfs/garb/open/f65052988abfa011646222bd317a090ce451b76a.png",
-      "https://i0.hdslb.com/bfs/garb/open/b5e0937b0f563c2c7ddce1aceb64bc205b1b3649.png",
-      "https://i0.hdslb.com/bfs/garb/open/b4a3bc3301cf23bc7d3adebdba8e8b2f6ced3ad2.png"
+      }
     ],
     "customColors": {
       "maskedBackgroundColor": "rgba(0, 0, 0, 0.10)",
