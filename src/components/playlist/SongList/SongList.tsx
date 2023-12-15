@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { View, BackHandler, StyleSheet } from 'react-native';
+import React, { useState, useRef } from 'react';
+import { View, BackHandler, StyleSheet, Animated } from 'react-native';
 import { FlashList } from '@shopify/flash-list';
 import { IconButton } from 'react-native-paper';
 import { useNetInfo } from '@react-native-community/netinfo';
@@ -37,13 +37,27 @@ const PlaylistList = () => {
   } = usedPlaylist;
   const netInfo = useNetInfo();
   const [completeScrollBarHeight, setCompleteScrollBarHeight] = useState(1);
-  const [visibleScrollBarHeight, setVisibleScrollBarHeight] = useState(0.5);
-
+  const [visibleScrollBarHeight, setVisibleScrollBarHeight] = useState(0);
+  const scrollIndicator = useRef(new Animated.Value(0)).current;
   const scrollIndicatorSize =
     completeScrollBarHeight > visibleScrollBarHeight
       ? (visibleScrollBarHeight * visibleScrollBarHeight) /
         completeScrollBarHeight
       : visibleScrollBarHeight;
+
+  const difference =
+    visibleScrollBarHeight > scrollIndicatorSize
+      ? visibleScrollBarHeight - scrollIndicatorSize
+      : 1;
+
+  const scrollIndicatorPosition = Animated.multiply(
+    scrollIndicator,
+    visibleScrollBarHeight / completeScrollBarHeight
+  ).interpolate({
+    inputRange: [0, difference],
+    outputRange: [0, difference],
+    extrapolate: 'clamp',
+  });
 
   useFocusEffect(
     React.useCallback(() => {
@@ -94,6 +108,21 @@ const PlaylistList = () => {
       </View>
       <View style={stylesLocal.playlistContainer}>
         <FlashList
+          onContentSizeChange={height => {
+            setCompleteScrollBarHeight(height);
+          }}
+          onLayout={({
+            nativeEvent: {
+              layout: { height },
+            },
+          }) => {
+            setVisibleScrollBarHeight(height);
+          }}
+          onScroll={Animated.event(
+            [{ nativeEvent: { contentOffset: { y: scrollIndicator } } }],
+            { useNativeDriver: false }
+          )}
+          showsVerticalScrollIndicator={false}
           ref={playlistRef}
           data={rows}
           renderItem={({ item, index }) => (
@@ -127,31 +156,23 @@ const PlaylistList = () => {
             borderRadius: 8,
           }}
         >
-          <View
+          <Animated.View
             style={{
-              height: '99%',
               width: 6,
-              //backgroundColor: '#52057b',
               borderRadius: 8,
+              backgroundColor: 'white',
+              height: scrollIndicatorSize,
+              transform: [{ translateY: scrollIndicatorPosition }],
             }}
-          >
-            <View
-              style={{
-                width: 6,
-                borderRadius: 8,
-                backgroundColor: 'white',
-                height: '50%',
-              }}
-            />
-          </View>
+          />
         </View>
+        <SongMenu
+          usePlaylist={usedPlaylist}
+          prepareForLayoutAnimationRender={() =>
+            playlistRef.current?.prepareForLayoutAnimationRender()
+          }
+        />
       </View>
-      <SongMenu
-        usePlaylist={usedPlaylist}
-        prepareForLayoutAnimationRender={() =>
-          playlistRef.current?.prepareForLayoutAnimationRender()
-        }
-      />
     </View>
   );
 };
