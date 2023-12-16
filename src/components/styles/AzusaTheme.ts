@@ -91,10 +91,6 @@ export default {
     },
     {
       type: 'biliNFTVideo',
-      identifier: '["161","盛夏江南 阿梓"]',
-    },
-    {
-      type: 'biliNFTVideo',
       identifier: '["161","变速系列·阿梓"]',
     },
     {
