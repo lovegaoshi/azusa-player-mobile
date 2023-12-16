@@ -1,7 +1,6 @@
 import { Platform } from 'react-native';
 import TrackPlayer, { RepeatMode } from 'react-native-track-player';
 import { useTranslation } from 'react-i18next';
-import { useNetInfo } from '@react-native-community/netinfo';
 
 import { useNoxSetting } from '@stores/useApp';
 import { randomChoice } from '../utils/Utils';
@@ -14,6 +13,7 @@ import {
 import { NoxRepeatMode } from '@enums/RepeatMode';
 import noxPlayingList from '@stores/playingList';
 import noxCache from '@utils/Cache';
+import useDataSaver from './useDataSaver';
 
 const PLAYLIST_MEDIAID = 'playlist-';
 
@@ -43,11 +43,7 @@ const usePlayback = () => {
   const setCurrentPlayingList = useNoxSetting(
     state => state.setCurrentPlayingList
   );
-  const netInfo = useNetInfo();
-  const playerSetting = useNoxSetting(state => state.playerSetting);
-
-  const isDataSaving = () =>
-    playerSetting.dataSaver && netInfo.type === 'cellular';
+  const { isDataSaving } = useDataSaver();
 
   const playFromPlaylist = async ({
     playlist,
@@ -93,7 +89,7 @@ const usePlayback = () => {
       }
       playFromPlaylist({
         playlist: playlists[mediaId],
-        playlistParser: dataSaverPlaylistWrapper(isDataSaving()),
+        playlistParser: dataSaverPlaylistWrapper(isDataSaving),
       });
     } else {
       // mediaId should follow the format of ${NoxMedia.Song.bvid}|${NoxMedia.Song.id}
@@ -108,7 +104,7 @@ const usePlayback = () => {
           playFromPlaylist({
             playlist: currentPlayingList,
             song,
-            playlistParser: dataSaverPlaylistWrapper(isDataSaving()),
+            playlistParser: dataSaverPlaylistWrapper(isDataSaving),
           });
           return;
         }
@@ -119,7 +115,7 @@ const usePlayback = () => {
             playFromPlaylist({
               playlist,
               song,
-              playlistParser: dataSaverPlaylistWrapper(isDataSaving()),
+              playlistParser: dataSaverPlaylistWrapper(isDataSaving),
             });
             return;
           }

@@ -86,7 +86,6 @@ const PlaylistList = () => {
       </View>
       <View style={stylesLocal.playlistContainer}>
         <FlashList
-          showsVerticalScrollIndicator={false}
           ref={playlistRef}
           data={rows}
           renderItem={({ item, index }) => (
