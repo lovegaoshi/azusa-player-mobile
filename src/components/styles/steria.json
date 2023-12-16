@@ -1317,7 +1317,10 @@
       "https://article.biliimg.com/bfs/article/c126e69dfd58cb66a1b77d7e04648a57e33ac7db.gif"
     ],
     "backgroundImages": [
-      "https://i0.hdslb.com/bfs/new_dyn/3bfaf5371423695933f096d9c6acfc0c10547021.jpg",
+      {
+        "type": "biliNFTVideo",
+        "identifier": "[\"100531\",0]"
+      },
       {
         "type": "bvid",
         "identifier": "BV1jT41187Rr"
