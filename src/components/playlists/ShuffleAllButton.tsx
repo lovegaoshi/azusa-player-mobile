@@ -6,6 +6,8 @@ import { useTranslation } from 'react-i18next';
 import { useNoxSetting } from '@stores/useApp';
 import { ViewEnum } from '@enums/View';
 import usePlayback from '@hooks/usePlayback';
+import useDataSaver from '@hooks/useDataSaver';
+import noxCache, { noxCacheKey } from '@utils/Cache';
 
 export default () => {
   const navigation = useNavigation();
@@ -16,11 +18,34 @@ export default () => {
   const setCurrentPlaylist = useNoxSetting(state => state.setCurrentPlaylist);
   const setSearchPlaylist = useNoxSetting(state => state.setSearchPlaylist);
   const { playFromPlaylist } = usePlayback();
+  const { isDataSaving } = useDataSaver();
   const shuffleAll = async () => {
-    const allSongs = playlistIds.reduce(
+    let allSongs = playlistIds.reduce(
       (acc, curr) => acc.concat(playlists[curr].songList),
       [] as NoxMedia.Song[]
     );
+    if (isDataSaving) {
+      const cachedSongs = Array.from(noxCache.noxMediaCache.cache.keys());
+      allSongs = allSongs
+        .filter(song => cachedSongs.includes(noxCacheKey(song)))
+        .filter(
+          (song, index, arr) =>
+            arr.findIndex(val => val.id === song.id) === index
+        );
+    }
+    /**
+     *
+
+    let allSongs: NoxMedia.Song[] = [];
+    let uniqSongIds: string[] = [];
+    for (const playlistId of playlistIds) {
+      const playlist = playlists[playlistId];
+      allSongs = allSongs.concat(
+        playlist.songList.filter(val => !uniqSongIds.includes(val.id))
+      );
+      uniqSongIds = uniqSongIds.concat(playlist.songList.map(song => song.id));
+    }
+     */
     const newSearchPlaylist = {
       ...searchPlaylist,
       title: String(t('PlaylistOperations.all')),

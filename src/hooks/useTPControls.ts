@@ -22,8 +22,8 @@ const musicTids = [130, 29, 59, 31, 193, 30, 194, 28];
 export default () => {
   const currentPlayingId = useNoxSetting(state => state.currentPlayingId);
   const playerSetting = useNoxSetting(state => state.playerSetting);
-  const findCurrentPlayIndex = () => {
-    return getCurrentTPQueue().findIndex(val => val.id === currentPlayingId);
+  const findCurrentPlayIndex = (queue = getCurrentTPQueue()) => {
+    return queue.findIndex(val => val.id === currentPlayingId);
   };
   const fadeIntervalMs = useStore(appStore, state => state.fadeIntervalMs);
 
@@ -90,10 +90,17 @@ export default () => {
       (await TrackPlayer.getQueue()).length - 1
     ) {
       const currentTPQueue = getCurrentTPQueue();
-      let nextIndex = findCurrentPlayIndex() + 1;
+      let nextIndex = findCurrentPlayIndex(currentTPQueue) + 1;
       if (nextIndex > currentTPQueue.length - 1) {
         nextIndex = 0;
       }
+      console.log(
+        '[debugnext]',
+        nextIndex,
+        currentTPQueue.length,
+        currentTPQueue[nextIndex],
+        currentTPQueue.slice(15, 30)
+      );
       try {
         await skipToBiliSuggest();
       } catch {
@@ -108,7 +115,7 @@ export default () => {
   const prepareSkipToPrevious = async () => {
     if ((await TrackPlayer.getActiveTrackIndex()) === 0) {
       const currentTPQueue = getCurrentTPQueue();
-      let nextIndex = findCurrentPlayIndex() - 1;
+      let nextIndex = findCurrentPlayIndex(currentTPQueue) - 1;
       if (nextIndex < 0) {
         nextIndex = currentTPQueue.length - 1;
       }

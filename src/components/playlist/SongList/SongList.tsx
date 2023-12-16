@@ -111,13 +111,20 @@ const PlaylistList = () => {
           onRefresh={refreshPlaylist}
           refreshing={refreshing}
         />
+        <View
+          style={{
+            height: '100%',
+            width: 6,
+            borderRadius: 8,
+          }}
+        ></View>
+        <SongMenu
+          usePlaylist={usedPlaylist}
+          prepareForLayoutAnimationRender={() =>
+            playlistRef.current?.prepareForLayoutAnimationRender()
+          }
+        />
       </View>
-      <SongMenu
-        usePlaylist={usedPlaylist}
-        prepareForLayoutAnimationRender={() =>
-          playlistRef.current?.prepareForLayoutAnimationRender()
-        }
-      />
     </View>
   );
 };
