@@ -9,6 +9,7 @@ import { biliNFTVideoFetch } from '@utils/mediafetch/biliNFT';
 import { biliGarbHeadVideoFetch } from '@utils/mediafetch/biliGarb';
 import { logger } from '@utils/Logger';
 import { useIsLandscape } from '@hooks/useOrientation';
+import NoxCache from '@utils/Cache';
 
 enum RESOLVE_TYPE {
   bvid = 'bvid',
@@ -28,21 +29,31 @@ export const resolveBackgroundImage = async (
     case RESOLVE_TYPE.bvid:
       return {
         type: RESOLVE_TYPE.video,
-        identifier: await fetchVideoPlayUrl(backgroundImage.identifier),
+        identifier: await NoxCache.noxMediaCache?.loadCacheFunction(
+          `${RESOLVE_TYPE.bvid}-${backgroundImage.identifier}`,
+          () => fetchVideoPlayUrl(backgroundImage.identifier)
+        ),
       };
     case RESOLVE_TYPE.biliNFTVideo: {
       const [act_id, index] = JSON.parse(backgroundImage.identifier);
       return {
         type: RESOLVE_TYPE.video,
-        identifier: await biliNFTVideoFetch({ act_id, index }),
+        identifier: await NoxCache.noxMediaCache?.loadCacheFunction(
+          `${RESOLVE_TYPE.biliNFTVideo}-${backgroundImage.identifier}`,
+          () => biliNFTVideoFetch({ act_id, index })
+        ),
       };
     }
     case RESOLVE_TYPE.biliGarbHeadVideo:
       return {
         type: RESOLVE_TYPE.video,
-        identifier: await biliGarbHeadVideoFetch({
-          act_id: backgroundImage.identifier,
-        }),
+        identifier: await NoxCache.noxMediaCache?.loadCacheFunction(
+          `${RESOLVE_TYPE.biliGarbHeadVideo}-${backgroundImage.identifier}`,
+          () =>
+            biliGarbHeadVideoFetch({
+              act_id: backgroundImage.identifier,
+            })
+        ),
       };
 
     default:
