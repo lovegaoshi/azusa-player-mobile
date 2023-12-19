@@ -12,13 +12,11 @@ import {
 import { line, curveBasis } from 'd3';
 import { colord } from 'colord';
 
-import { gaussian } from '@utils/Gaussian';
-
 const dimension = Dimensions.get('window');
 const width = dimension.width;
 const height = 30;
 const frequency = 2;
-const initialAmplitude = 3;
+const initialAmplitude = 10;
 const initialVerticalOffset = 10;
 const samplingInterval = 5;
 
@@ -49,9 +47,7 @@ export default function WaveAnimation({
               const angle = (1 - index / width) * (Math.PI * frequency) + phase;
               return [
                 index,
-                amplitude.current *
-                  (Math.sin(angle) - 1) *
-                  gaussian(index / extrapolatedWidth) +
+                amplitude.current * (Math.sin(angle) - 1) +
                   verticalOffset.current +
                   17,
               ];
