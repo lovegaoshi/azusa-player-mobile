@@ -90,6 +90,7 @@ export default ({ callback = () => {} }: Props) => {
     Snackbar.show({ text: t('PlaylistOperations.bilishazamed', { playlist }) });
   };
   return {
+    ...playlistCRUD,
     playlistSync2Bilibili,
     playlistAnalyze,
     confirmOnPlaylistClear,

@@ -220,9 +220,10 @@ const usePlaylistCRUD = (mPlaylist?: NoxMedia.Playlist) => {
 
   const sortPlaylist = (
     sort = SORT_OPTIONS.PREVIOUS_ORDER,
+    ascend = false,
     playlist = getPlaylist()
   ) => {
-    updatePlaylist(sortPlaylistR(playlist, sort));
+    updatePlaylist(sortPlaylistR(playlist, sort, ascend));
   };
 
   return {

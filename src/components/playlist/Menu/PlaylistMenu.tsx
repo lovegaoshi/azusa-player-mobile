@@ -6,6 +6,7 @@ import usePlaylist from './usePlaylistMenu';
 import PlaylistSettingsButton from './PlaylistSettingsButton';
 import { PLAYLIST_ENUMS } from '@enums/Playlist';
 import { CopiedPlaylistMenuItem } from '@components/buttons/CopiedPlaylistButton';
+import PlaylistSortButton from './PlaylistSortButton';
 
 enum ICONS {
   SETTINGS = 'cog',
@@ -17,6 +18,7 @@ enum ICONS {
   CLEAR = 'notification-clear-all',
   REMOVE = 'trash-can',
   BILISYNC = 'sync',
+  SORT = 'sort',
 }
 
 interface Props {
@@ -41,6 +43,7 @@ export default ({
     confirmOnPlaylistReload,
     playlistCleanup,
     playlistBiliShazam,
+    sortPlaylist,
   } = usePlaylist({ callback: toggleVisible });
   const limitedPlaylistFeatures =
     playlist.type !== PLAYLIST_ENUMS.TYPE_TYPICA_PLAYLIST;
@@ -55,6 +58,7 @@ export default ({
         getFromListOnClick={() => playlist}
         onSubmit={() => toggleVisible()}
       />
+      <PlaylistSortButton sortPlaylist={sortPlaylist} />
       <Menu.Item
         leadingIcon={ICONS.BILISYNC}
         onPress={() => playlistSync2Bilibili()}

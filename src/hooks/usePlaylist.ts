@@ -38,7 +38,11 @@ export interface UsePlaylist {
   searchAndEnableSearch: (searchedVal: string) => void;
   onBackPress: () => boolean;
   getSelectedSongs: () => NoxMedia.Song[] | undefined;
-  sortPlaylist: (sort?: SORT_OPTIONS, playlist?: NoxMedia.Playlist) => void;
+  sortPlaylist: (
+    sort?: SORT_OPTIONS,
+    ascend?: boolean,
+    playlist?: NoxMedia.Playlist
+  ) => void;
 }
 
 /**

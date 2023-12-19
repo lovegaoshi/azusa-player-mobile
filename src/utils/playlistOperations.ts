@@ -17,7 +17,8 @@ export const updatePlaylistSongs = (
 
 export const sortPlaylist = (
   playlist: NoxMedia.Playlist,
-  sort: SORT_OPTIONS = SORT_OPTIONS.PREVIOUS_ORDER
+  sort: SORT_OPTIONS = SORT_OPTIONS.PREVIOUS_ORDER,
+  ascend = false
 ): NoxMedia.Playlist => {
   playlist.sort = sort;
   if (SORT_OPTIONS.PREVIOUS_ORDER === sort) {
@@ -46,7 +47,7 @@ export const sortPlaylist = (
           return song;
         })
         // and sort by order
-        .sort((a, b) => b.order! - a.order!),
+        .sort((a, b) => (ascend ? a.order! - b.order! : b.order! - a.order!)),
     };
   }
   // for any other sorting methods, first re-apply order to all songs
@@ -59,21 +60,27 @@ export const sortPlaylist = (
       return {
         ...playlist,
         songList: playlist.songList.sort((a, b) =>
-          a.parsedName.localeCompare(b.parsedName)
+          ascend
+            ? a.parsedName.localeCompare(b.parsedName)
+            : b.parsedName.localeCompare(a.parsedName)
         ),
       };
     case SORT_OPTIONS.ARTIST:
       return {
         ...playlist,
         songList: playlist.songList.sort((a, b) =>
-          a.singer.localeCompare(b.singer)
+          ascend
+            ? a.singer.localeCompare(b.singer)
+            : b.singer.localeCompare(a.singer)
         ),
       };
     case SORT_OPTIONS.ALBUM:
       return {
         ...playlist,
         songList: playlist.songList.sort((a, b) =>
-          (a.album ?? '').localeCompare(b.album ?? '')
+          ascend
+            ? (a.album ?? '').localeCompare(b.album ?? '')
+            : (b.album ?? '').localeCompare(a.album ?? '')
         ),
       };
     default:
