@@ -35,6 +35,8 @@ declare namespace NoxMedia {
     useBiliShazam: boolean;
     biliSync: boolean;
     newSongOverwrite?: boolean;
+
+    sort?: SORT_OPTIONS;
   }
 
   export interface LyricDetail {

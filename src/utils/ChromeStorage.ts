@@ -9,7 +9,6 @@ import { NoxRepeatMode } from '../enums/RepeatMode';
 import { PLAYLIST_ENUMS } from '../enums/Playlist';
 import AzusaTheme from '../components/styles/AzusaTheme';
 import { chunkArray as chunkArrayRaw, arrayToObject } from '../utils/Utils';
-import type { NoxStorage } from '../types/storage';
 import {
   STORAGE_KEYS,
   appID,

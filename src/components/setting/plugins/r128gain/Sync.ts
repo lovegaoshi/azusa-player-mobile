@@ -4,7 +4,6 @@ import { strFromU8, decompressSync } from 'fflate';
 import { RGAIN_URL } from '@env';
 
 import { logger } from '@utils/Logger';
-import type { NoxStorage } from '../../../../types/storage';
 import {
   saveABMapping,
   saveR128GainMapping,
@@ -94,7 +93,7 @@ export const downloadR128GainDB = async () => {
 
   const oldR128gainKeys = Object.keys(parsedR128Gain).map(val => val);
   const oldABgainKeys = Object.keys(parsedABRepeat).map(val => val);
-  const newR128GainDB = {} as { [key: string]: R128GainDB };
+  const newR128GainDB: { [key: string]: R128GainDB } = {};
   Object.entries(currentR128Gain).forEach(([key, value]) => {
     if (oldR128gainKeys.includes(key)) return;
     if (newR128GainDB[key] === undefined) {

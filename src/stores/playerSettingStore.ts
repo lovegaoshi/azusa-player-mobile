@@ -2,7 +2,6 @@
 import { createStore } from 'zustand/vanilla';
 
 import { DEFAULT_SETTING } from '@enums/Storage';
-import type { NoxStorage } from '../types/storage';
 import { saveSettings, getSettings } from '@utils/ChromeStorage';
 
 interface AppStore {

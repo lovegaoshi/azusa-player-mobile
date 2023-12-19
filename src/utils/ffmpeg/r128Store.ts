@@ -2,7 +2,6 @@
 import { createStore } from 'zustand/vanilla';
 
 import { getR128GainMapping, saveR128GainMapping } from '@utils/ChromeStorage';
-import type { NoxStorage } from '../../types/storage';
 
 interface AppStore {
   pipMode: boolean;
