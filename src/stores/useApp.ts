@@ -3,7 +3,7 @@
 import { create } from 'zustand';
 
 import { dummyPlaylist, dummyPlaylistList } from '../objects/Playlist';
-import { updatePlaylistSongs } from '@utils/playlistOperations';
+import { updatePlaylistSongs } from '../utils/playlistOperations';
 import {
   delPlaylist,
   saveFavPlaylist,

@@ -46,7 +46,7 @@ export const sortPlaylist = (
           return song;
         })
         // and sort by order
-        .sort((a, b) => a.order! - b.order!),
+        .sort((a, b) => b.order! - a.order!),
     };
   }
   // for any other sorting methods, first re-apply order to all songs
