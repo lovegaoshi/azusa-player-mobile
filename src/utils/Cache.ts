@@ -10,6 +10,7 @@ import { addR128Gain, getR128Gain } from '@utils/ffmpeg/r128Store';
 import playerSettingStore from '@stores/playerSettingStore';
 import { getCachedMediaMapping, saveCachedMediaMapping } from './ChromeStorage';
 import { logger } from './Logger';
+import { customReqHeader } from './BiliFetch';
 
 const { getState } = playerSettingStore;
 
@@ -109,12 +110,41 @@ class NoxMediaCache {
     this.dumpCache();
   };
 
-  loadCacheMedia = async (song: NoxMedia.Song, prefix = 'file://') => {
-    const cachedPath = this.cache.get(noxCacheKey(song));
+  loadCacheObject = async (identifier: string, prefix = 'file://') => {
+    const cachedPath = this.cache.get(identifier);
     if (!cachedPath || !(await RNFetchBlob.fs.exists(cachedPath)))
       return undefined;
     // no RNFetchBlob.fs.readStream?
     return `${prefix}${cachedPath}`;
+  };
+
+  loadCacheMedia = async (song: NoxMedia.Song, prefix = 'file://') =>
+    this.loadCacheObject(noxCacheKey(song), prefix);
+
+  loadCacheFunction = async (
+    identifier: string,
+    getURL: () => Promise<string>
+  ) => {
+    logger.debug(`[NoxCache] looking up ${identifier} from cache...`);
+    const cachedPath = await this.loadCacheObject(identifier);
+    if (cachedPath !== undefined) return cachedPath;
+    const resolvedURL = await getURL();
+    if (this.cache.max < 2) return resolvedURL;
+    logger.debug(`[NoxCache] fetching ${identifier} to cache...`);
+    // https://github.com/joltup/rn-fetch-blob#download-to-storage-directly
+    RNFetchBlob.config({
+      fileCache: true,
+    })
+      .fetch('GET', resolvedURL, customReqHeader(resolvedURL))
+      .progress((received, total) => {
+        const progress = Math.floor((Number(received) * 100) / Number(total));
+        logger.debug(`[NoxCache] ${identifier} caching progress: ${progress}%`);
+      })
+      .then(res => {
+        this.cache.set(identifier, res.path());
+        this.dumpCache();
+      });
+    return resolvedURL;
   };
 
   peekCache = (song: NoxMedia.Song) => {
