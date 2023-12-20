@@ -11,7 +11,6 @@ import {
 import { logger } from '@utils/Logger';
 import rejson from '../utils/rejson.json';
 import { LoadJSONRegExtractors } from '../utils/re';
-import type { NoxStorage } from '../types/storage';
 
 interface AppStore {
   pipMode: boolean;

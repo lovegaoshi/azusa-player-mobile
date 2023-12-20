@@ -3,7 +3,6 @@ import { useNoxSetting } from './useApp';
 
 import { initialize as initializeAppStore } from './appStore';
 import { initializeR128Gain } from '../utils/ffmpeg/r128Store';
-import type { NoxStorage } from '../types/storage';
 
 const { NoxAndroidAutoModule } = NativeModules;
 

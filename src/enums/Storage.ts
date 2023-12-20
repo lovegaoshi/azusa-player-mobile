@@ -1,7 +1,6 @@
 import { NoxRepeatMode } from './RepeatMode';
 import { VERSIONS } from './Version';
 import { EXPORT_OPTIONS } from './Sync';
-import type { NoxStorage } from '../types/storage';
 
 export { EXPORT_OPTIONS } from './Sync';
 

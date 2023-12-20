@@ -1,46 +1,53 @@
-declare namespace NoxMedia {
-  export interface Song {
-    id: string;
-    bvid: string;
-    name: string;
-    nameRaw: string;
-    singer: string;
-    singerId: string | number;
-    cover: string;
-    lyric?: string;
-    lyricOffset?: number;
-    parsedName: string;
-    biliShazamedName?: string;
-    page?: number;
-    duration: number;
-    album?: string;
-    addedDate?: number;
-    source?: string;
-    isLive?: boolean;
-    liveStatus?: boolean;
-    metadataOnLoad?: boolean;
-  }
+import { SORT_OPTIONS } from '@enums/Playlist';
 
-  export interface Playlist {
-    title: string;
-    id: string;
-    type: string;
+declare global {
+  namespace NoxMedia {
+    export interface Song {
+      id: string;
+      bvid: string;
+      name: string;
+      nameRaw: string;
+      singer: string;
+      singerId: string | number;
+      cover: string;
+      lyric?: string;
+      lyricOffset?: number;
+      parsedName: string;
+      biliShazamedName?: string;
+      page?: number;
+      duration: number;
+      album?: string;
+      addedDate?: number;
+      source?: string;
+      isLive?: boolean;
+      liveStatus?: boolean;
+      metadataOnLoad?: boolean;
+      order?: number;
+    }
 
-    songList: Array<NoxMedia.Song>;
+    export interface Playlist {
+      title: string;
+      id: string;
+      type: string;
 
-    subscribeUrl: Array<string>;
-    blacklistedUrl: Array<string>;
-    lastSubscribed: number;
+      songList: Array<NoxMedia.Song>;
 
-    useBiliShazam: boolean;
-    biliSync: boolean;
-    newSongOverwrite?: boolean;
-  }
+      subscribeUrl: Array<string>;
+      blacklistedUrl: Array<string>;
+      lastSubscribed: number;
 
-  export interface LyricDetail {
-    songId: string;
-    lyricKey: string;
-    lyricOffset: number;
-    lyric: string;
+      useBiliShazam: boolean;
+      biliSync: boolean;
+      newSongOverwrite?: boolean;
+
+      sort?: SORT_OPTIONS;
+    }
+
+    export interface LyricDetail {
+      songId: string;
+      lyricKey: string;
+      lyricOffset: number;
+      lyric: string;
+    }
   }
 }

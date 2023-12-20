@@ -12,6 +12,8 @@ import {
 import { biliShazamOnSonglist } from '../utils/mediafetch/bilishazam';
 import { syncFavlist } from '@utils/Bilibili/bilifavOperate';
 import { updateSubscribeFavList } from '../utils/BiliSubscribe';
+import { sortPlaylist as sortPlaylistR } from '../utils/playlistOperations';
+import { SORT_OPTIONS } from '../enums/Playlist';
 
 const usePlaylistCRUD = (mPlaylist?: NoxMedia.Playlist) => {
   const { playlistAnalyze } = useAnalytics();
@@ -216,6 +218,14 @@ const usePlaylistCRUD = (mPlaylist?: NoxMedia.Playlist) => {
     });
   };
 
+  const sortPlaylist = (
+    sort = SORT_OPTIONS.PREVIOUS_ORDER,
+    ascend = false,
+    playlist = getPlaylist()
+  ) => {
+    updatePlaylist(sortPlaylistR(playlist, sort, ascend));
+  };
+
   return {
     updateSong,
     updateSongIndex,
@@ -233,6 +243,7 @@ const usePlaylistCRUD = (mPlaylist?: NoxMedia.Playlist) => {
     rssUpdate,
     reloadBVid,
     playlistRemoveBiliShazamed,
+    sortPlaylist,
   };
 };
 

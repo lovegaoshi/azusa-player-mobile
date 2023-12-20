@@ -21,6 +21,7 @@ interface Props<T> {
   defaultIndex?: number;
   onClose?: (index?: number) => void;
   onSubmit?: (index: number) => void;
+  children?: React.ReactNode;
 }
 
 /**
@@ -34,6 +35,7 @@ export default ({
   defaultIndex = 0,
   onClose = () => undefined,
   onSubmit = () => undefined,
+  children,
 }: Props<any>) => {
   const { t } = useTranslation();
   const [currentIndex, setCurrentIndex] = useState(defaultIndex);
@@ -64,6 +66,7 @@ export default ({
       >
         <DialogTitle title={title} />
         <Dialog.Content style={styles.dialogContent}>
+          {children}
           <FlatList
             style={[styles.flatList]}
             data={options}

@@ -2,11 +2,8 @@
 /* eslint-disable prefer-const */
 import { create } from 'zustand';
 
-import {
-  dummyPlaylist,
-  dummyPlaylistList,
-  updatePlaylistSongs,
-} from '../objects/Playlist';
+import { dummyPlaylist, dummyPlaylistList } from '../objects/Playlist';
+import { updatePlaylistSongs } from '../utils/playlistOperations';
 import {
   delPlaylist,
   saveFavPlaylist,
@@ -23,7 +20,6 @@ import { savePlayerStyle } from '@utils/StyleStorage';
 import { createStyle } from '@components/style';
 import { getABRepeatRaw } from './appStore';
 import { setPlayingList } from '@stores/playingList';
-import type { NoxStorage } from '../types/storage';
 import DummyLyricDetail from '../objects/LyricDetail';
 
 interface NoxSetting {

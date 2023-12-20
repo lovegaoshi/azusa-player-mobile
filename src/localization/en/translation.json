@@ -69,6 +69,14 @@
     "clearPlaylistTitle": "Clear",
     "removePlaylistTitle": "Remove",
     "all": "All",
+    "sortTitle": "Sort by...",
+    "sortDialogTitle": "Sort {{playlist.title}} by...",
+    "ascending": "Ascending?",
+    "sortTITLE": "title",
+    "sortARTIST": "artist",
+    "sortALBUM": "album",
+    "sortDATE": "date",
+    "sortPREVIOUS_ORDER": "previous",
     "searchListName": "Search"
   },
   "SongOperations": {

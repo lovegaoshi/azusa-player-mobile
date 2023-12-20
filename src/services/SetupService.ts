@@ -1,6 +1,5 @@
 import TrackPlayer, { RepeatMode } from 'react-native-track-player';
 
-import type { NoxStorage } from '../types/storage';
 import { initRNTPOptions } from '../utils/RNTPUtils';
 import appStore from '@stores/appStore';
 
