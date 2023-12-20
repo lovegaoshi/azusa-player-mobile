@@ -38,7 +38,9 @@ const parsedGarbData = {
   portraits: Object.keys(garbdata.suit_items.space_bg[0].properties)
     .filter(val => val.includes('_portrait'))
     .map(val => garbdata.suit_items.space_bg[0].properties[val]),
-  loadingIcon: garbdata.suit_items.loading[0]?.properties?.loading_url,
+  loadingIcon: garbdata.suit_items.loading
+    ? garbdata.suit_items.loading[0]?.properties?.loading_url
+    : undefined,
   headmp4: garbdata.suit_items.skin[0].properties.head_myself_mp4_bg,
   thumbupSVGA: garbdata.suit_items.thumbup[0].properties.image_ani,
   themeIcon: garbdata.fan_user.avatar,
