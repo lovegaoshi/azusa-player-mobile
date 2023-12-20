@@ -90,7 +90,7 @@ interface NoxSetting {
   removePlaylist: (val: string) => void;
 
   lyricMapping: Map<string, NoxMedia.LyricDetail>;
-  setLyricMapping: (val: NoxMedia.LyricDetail) => void;
+  setLyricMapping: (val: Partial<NoxMedia.LyricDetail>) => void;
 
   externalSearchText: string;
   setExternalSearchText: (val: string) => void;
