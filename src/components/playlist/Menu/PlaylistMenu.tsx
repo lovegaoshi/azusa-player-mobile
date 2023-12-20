@@ -58,7 +58,11 @@ export default ({
         getFromListOnClick={() => playlist}
         onSubmit={() => toggleVisible()}
       />
-      <PlaylistSortButton sortPlaylist={sortPlaylist} />
+      <PlaylistSortButton
+        sortPlaylist={sortPlaylist}
+        playlist={playlist}
+        onCancel={() => toggleVisible()}
+      />
       <Menu.Item
         leadingIcon={ICONS.BILISYNC}
         onPress={() => playlistSync2Bilibili()}
