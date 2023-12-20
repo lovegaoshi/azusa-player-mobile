@@ -1,8 +1,3 @@
-/* eslint-disable node/no-unsupported-features/es-syntax */
-/* eslint-disable node/no-missing-import */
-/* eslint-disable @typescript-eslint/no-empty-function */
-/* eslint-disable no-undef */
-
 import { extractSongName } from './re';
 import bfetch from '@utils/BiliFetch';
 import { logger } from './Logger';
@@ -90,7 +85,9 @@ export const fetchLRC = async (
   }
 };
 
-export const searchLyricOptions = async (searchKey: string) => {
+export const searchLyricOptions = async (
+  searchKey: string
+): Promise<NoxNetwork.NoxFetchedLyric[]> => {
   if (!searchKey) {
     throw new Error('Search key is required');
   }
@@ -126,7 +123,7 @@ export const searchLyric = async (
   const json = await res.json();
   if (!json.lyric) {
     setLyric('[00:00.000] 无法找到歌词,请手动搜索');
-    return;
+    return '[00:00.000] 无法找到歌词,请手动搜索';
   }
 
   let finalLrc = json.lyric as string;

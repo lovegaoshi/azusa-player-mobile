@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useCallback, useEffect, useMemo, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import {
   Modal,
   View,
@@ -33,17 +33,6 @@ interface LyricLineProps {
   index: number;
   active: boolean;
 }
-
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-const useHasLrcFromLocal = (
-  track: Track,
-  lyricMapping: Map<string, NoxMedia.LyricDetail>
-) => {
-  return useMemo(
-    () => lyricMapping.has(track?.song?.id),
-    [track, lyricMapping]
-  );
-};
 
 export const ModalContainer: React.FC<ModalContainerProps> = ({
   children,
@@ -97,46 +86,47 @@ export const LyricView = ({
   const lyricMapping = useNoxSetting(state => state.lyricMapping);
   const setLyricMapping = useNoxSetting(state => state.setLyricMapping);
 
-  useEffect(() => {
-    if (track === undefined || track.title === '') return;
+  const loadLocalLrc = async () => {
+    if (!hasLrcFromLocal()) return false;
+    logger.log('[lyric] Loading Lrc from localStorage...');
+    const lrcDetail = lyricMapping.get(track?.song.id);
+    if (lrcDetail === undefined) return false;
+    setLrcOption({ key: lrcDetail?.lyricKey });
+    setCurrentTimeOffset(lrcDetail!.lyricOffset);
+    if (lrcDetail.lyric.endsWith('.txt')) {
+      const readlrc = await readTxtFile(lrcDetail.lyric, 'lrc/');
+      if (readlrc) {
+        logger.debug('[lrc] read local lrc and loading...');
+        setLrc(readlrc);
+        return true;
+      } else if (lrcDetail.lyric.endsWith('.txt')) {
+        logger.debug('[lrc] local lrc no longer exists, fetching new...');
+      }
+      return false;
+    }
+    logger.debug(
+      '[lrc] local lrc seems to be the content itself, loading that...'
+    );
+    setLrc(lrcDetail.lyric);
+    return true;
+  };
+  const initialize = async () => {
     logger.log('Initiating Lyric with new track...');
     setCurrentTimeOffset(0);
     setLrcOption(null);
     setLrc('正在加载歌词...');
     setSearchText(track.title || '');
-    const lrcOptionPromise = fetchAndSetLyricOptions();
-    const loadLocalLrc = async () => {
-      if (!hasLrcFromLocal()) return false;
-      logger.log('[lyric] Loading Lrc from localStorage...');
-      const lrcDetail = lyricMapping.get(track?.song.id);
-      if (lrcDetail === undefined) return false;
-      setLrcOption({ key: lrcDetail?.lyricKey });
-      setCurrentTimeOffset(lrcDetail!.lyricOffset);
-      if (lrcDetail.lyric.endsWith('.txt')) {
-        const readlrc = await readTxtFile(lrcDetail.lyric, 'lrc/');
-        if (readlrc) {
-          logger.debug('[lrc] read local lrc and loading...');
-          setLrc(readlrc);
-          return true;
-        } else if (lrcDetail.lyric.endsWith('.txt')) {
-          logger.debug('[lrc] local lrc no longer exists, fetching new...');
-        }
-        return false;
-      }
-      logger.debug(
-        '[lrc] local lrc seems to be the content itself, loading that...'
-      );
-      setLrc(lrcDetail.lyric);
-      return true;
-    };
     // Initialize from storage if not new
-    loadLocalLrc().then(
-      localLrcLoaded =>
-        !localLrcLoaded &&
-        lrcOptionPromise.then(
-          val => val && searchAndSetCurrentLyric(undefined, val)
-        )
-    );
+    const localLrcLoaded = await loadLocalLrc();
+    if (!localLrcLoaded) {
+      const lrcOptionPromise = await fetchAndSetLyricOptions();
+      searchAndSetCurrentLyric(undefined, lrcOptionPromise);
+    }
+  };
+
+  useEffect(() => {
+    if (track === undefined || track.title === '') return;
+    initialize();
   }, [track]);
 
   useEffect(() => {
