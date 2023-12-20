@@ -86,47 +86,46 @@ export const LyricView = ({
   const lyricMapping = useNoxSetting(state => state.lyricMapping);
   const setLyricMapping = useNoxSetting(state => state.setLyricMapping);
 
-  const loadLocalLrc = async () => {
-    if (!hasLrcFromLocal()) return false;
-    logger.log('[lyric] Loading Lrc from localStorage...');
-    const lrcDetail = lyricMapping.get(track?.song.id);
-    if (lrcDetail === undefined) return false;
-    setLrcOption({ key: lrcDetail?.lyricKey });
-    setCurrentTimeOffset(lrcDetail!.lyricOffset);
-    if (lrcDetail.lyric.endsWith('.txt')) {
-      const readlrc = await readTxtFile(lrcDetail.lyric, 'lrc/');
-      if (readlrc) {
-        logger.debug('[lrc] read local lrc and loading...');
-        setLrc(readlrc);
-        return true;
-      } else if (lrcDetail.lyric.endsWith('.txt')) {
-        logger.debug('[lrc] local lrc no longer exists, fetching new...');
-      }
-      return false;
-    }
-    logger.debug(
-      '[lrc] local lrc seems to be the content itself, loading that...'
-    );
-    setLrc(lrcDetail.lyric);
-    return true;
-  };
-  const initialize = async () => {
-    logger.log('Initiating Lyric with new track...');
-    setCurrentTimeOffset(0);
-    setLrcOption(null);
-    setLrc('正在加载歌词...');
-    setSearchText(track.title || '');
-    // Initialize from storage if not new
-    const localLrcLoaded = await loadLocalLrc();
-    if (!localLrcLoaded) {
-      const lrcOptionPromise = await fetchAndSetLyricOptions();
-      searchAndSetCurrentLyric(undefined, lrcOptionPromise);
-    }
-  };
-
   useEffect(() => {
     if (track === undefined || track.title === '') return;
-    initialize();
+
+    const loadLocalLrc = async () => {
+      if (!hasLrcFromLocal()) return false;
+      logger.log('[lyric] Loading Lrc from localStorage...');
+      const lrcDetail = lyricMapping.get(track?.song.id);
+      if (lrcDetail === undefined) return false;
+      setLrcOption({ key: lrcDetail?.lyricKey });
+      setCurrentTimeOffset(lrcDetail!.lyricOffset);
+      if (lrcDetail.lyric.endsWith('.txt')) {
+        const readlrc = await readTxtFile(lrcDetail.lyric, 'lrc/');
+        if (readlrc) {
+          logger.debug('[lrc] read local lrc and loading...');
+          setLrc(readlrc);
+          return true;
+        } else if (lrcDetail.lyric.endsWith('.txt')) {
+          logger.debug('[lrc] local lrc no longer exists, fetching new...');
+        }
+        return false;
+      }
+      logger.debug(
+        '[lrc] local lrc seems to be the content itself, loading that...'
+      );
+      setLrc(lrcDetail.lyric);
+      return true;
+    };
+    (async () => {
+      logger.log('Initiating Lyric with new track...');
+      setCurrentTimeOffset(0);
+      setLrcOption(null);
+      setLrc('正在加载歌词...');
+      setSearchText(track.title || '');
+      // Initialize from storage if not new
+      const localLrcLoaded = await loadLocalLrc();
+      if (!localLrcLoaded) {
+        const lrcOptionPromise = await fetchAndSetLyricOptions();
+        searchAndSetCurrentLyric(undefined, lrcOptionPromise);
+      }
+    })();
   }, [track]);
 
   useEffect(() => {
