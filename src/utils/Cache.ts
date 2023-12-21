@@ -198,4 +198,9 @@ export const initCache = async (
   return cache;
 };
 
+export const cacheWrapper = (
+  identifier: string,
+  getURL: () => Promise<string>
+) => cache.noxMediaCache.loadCacheFunction(identifier, getURL);
+
 export default cache;

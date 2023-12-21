@@ -2,7 +2,7 @@ import { Appearance } from 'react-native';
 
 import { savePlayerSkin } from './ChromeStorage';
 import { createStyle } from '../components/style';
-import { resolveBackgroundImage } from '../components/background/MainBackground';
+import { resolveBackgroundImage } from '@utils/mediafetch/mainbackgroundfetch';
 
 export const savePlayerStyle = async (
   val: NoxTheme.Style | NoxTheme.AdaptiveStyle,
