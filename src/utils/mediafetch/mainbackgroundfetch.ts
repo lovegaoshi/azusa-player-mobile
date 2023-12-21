@@ -1,6 +1,6 @@
-import { fetchVideoPlayUrl } from '@utils/mediafetch/bilivideo';
-import { biliNFTVideoFetch } from '@utils/mediafetch/biliNFT';
-import { biliGarbHeadVideoFetch } from '@utils/mediafetch/biliGarb';
+import { fetchVideoPlayUrl } from './bilivideo';
+import { biliNFTVideoFetch } from './biliNFT';
+import { biliGarbHeadVideoFetch } from './biliGarb';
 import { cacheWrapper } from '@utils/Cache';
 
 export enum RESOLVE_TYPE {
