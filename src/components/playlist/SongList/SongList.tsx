@@ -23,6 +23,7 @@ const PlaylistList = () => {
     refreshPlaylist,
     refreshing,
     rows,
+    setRows,
     toggleSelected,
     toggleSelectedAll,
     shouldReRender,
@@ -81,7 +82,11 @@ const PlaylistList = () => {
                 : undefined
             }
           />
-          <PlaylistMenuButton disabled={checking} playlist={currentPlaylist} />
+          <PlaylistMenuButton
+            disabled={checking}
+            playlist={currentPlaylist}
+            songListUpdateHalt={() => setRows([])}
+          />
         </View>
       </View>
       <View style={stylesLocal.playlistContainer}>
