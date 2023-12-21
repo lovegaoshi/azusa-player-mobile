@@ -101,7 +101,12 @@ export default {
     'https://i0.hdslb.com/bfs/baselabs/c0ccbe248d254542763317cde9d7b8b53f603395.png',
     'https://i0.hdslb.com/bfs/baselabs/023a645451d96c96b8a8591872ecaf8ef99f3c72.png',
   ],
-
+  backgroundImagesLandscape: [
+    {
+      type: 'bvid',
+      identifier: 'BV11S4y1d7v9',
+    },
+  ],
   customColors: {
     maskedBackgroundColor: 'rgba(255, 255, 255, 0.5)',
     playlistDrawerBackgroundColor: '#dcd0ff',
@@ -114,7 +119,7 @@ export default {
   },
   colors: {
     ...DefaultTheme.colors,
-    text: 'rgb(103, 80, 164)', //'#9457eb',
+    text: 'rgb(103, 80, 164)',
     background: 'rgba(255, 255, 255, 0.4)',
     onSurfaceVariant: 'rgb(103, 80, 164)', // '#9400d3', // 'rgb(202, 199, 182)',
   },
@@ -132,4 +137,4 @@ export default {
     'https://i0.hdslb.com/bfs/garb/item/ba79a6dcc3d0324ba98b8d60532af0545f72620c.png',
   thumbupSVGA:
     'https://i0.hdslb.com/bfs/garb/item/12e319ce1495e13d3ec62653c3fe8529a8adc9ab.bin',
-} as NoxTheme.Style;
+} as unknown as NoxTheme.Style;
