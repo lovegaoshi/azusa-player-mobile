@@ -2,7 +2,6 @@ import { Appearance } from 'react-native';
 
 import { savePlayerSkin } from './ChromeStorage';
 import { createStyle } from '../components/style';
-import { resolveBackgroundImage } from '../components/background/MainBackground';
 
 export const savePlayerStyle = async (
   val: NoxTheme.Style | NoxTheme.AdaptiveStyle,
@@ -15,8 +14,5 @@ export const savePlayerStyle = async (
     : val;
   const createdStyle = createStyle(createFromStyle);
   if (save) savePlayerSkin(val);
-  return {
-    ...createdStyle,
-    bkgrdImg: await resolveBackgroundImage(createdStyle.bkgrdImg),
-  };
+  return createdStyle;
 };

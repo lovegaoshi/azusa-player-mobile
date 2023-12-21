@@ -99,6 +99,16 @@
         "identifier": "BV1Da411M7ti"
       }
     ],
+    "backgroundImagesLandscape": [
+      {
+        "type": "bvid",
+        "identifier": "BV1h24y1T78N"
+      },
+      {
+        "type": "bvid",
+        "identifier": "BV13w411m7iV"
+      }
+    ],
     "customColors": {
       "maskedBackgroundColor": "rgba(255, 255, 255, 0.40)",
       "playlistDrawerBackgroundColor": "#ffa6c9",
@@ -375,6 +385,12 @@
     "backgroundImages": [
       "https://static.zerochan.net/Watson.Amelia.full.3911744.jpg"
     ],
+    "backgroundImagesLandscape": [
+      {
+        "type": "video",
+        "identifier": "https://rare-gallery.com/livewalls/imgpreview/143356-gawr-gura-and-amelia-watson-vibing-near-a-campfire.mp4"
+      }
+    ],
     "customColors": {
       "maskedBackgroundColor": "rgba(0, 0, 0, 0.30)",
       "playlistDrawerBackgroundColor": "green",
@@ -475,7 +491,13 @@
     "backgroundImages": [
       "https://article.biliimg.com/bfs/article/285e598078047f8060a9f29affc891adf486331c.png"
     ],
-
+    "backgroundImagesLandscape": [
+      {
+        "type": "bvid",
+        "identifier": "BV15e411u7T9"
+      },
+      "https://img.nga.178.com/attachments/mon_202309/22/-zue37Q18w-baydXmZ67.jpeg"
+    ],
     "customColors": {
       "maskedBackgroundColor": "rgba(0, 0, 0, 0.30)",
       "playlistDrawerBackgroundColor": "rgba(255, 0, 0, 0.35)",
@@ -575,6 +597,9 @@
         "identifier": "https://i0.hdslb.com/bfs/garb/item/037772406cfc4c12fd6bb45d9ec64ff281b35ed1.mp4"
       }
     ],
+    "backgroundImagesLandscape": [
+      "https://i2.hdslb.com/bfs/archive/ec91f760738bd0a7af955b4f2797d70f0fcab40a.jpg"
+    ],
     "customColors": {
       "maskedBackgroundColor": "rgba(0, 0, 0, 0.30)",
       "playlistDrawerBackgroundColor": "rgba(255, 0, 0, 0.35)",
@@ -651,6 +676,16 @@
       "https://i0.hdslb.com/bfs/live/ed07c7fb8b6d8cf800c47449dd453d7041aa2f0c.png"
     ],
     "backgroundImages": [{ "type": "bvid", "identifier": "BV1rh4y1b7wU" }],
+    "backgroundImagesLandscape": [
+      {
+        "type": "bvid",
+        "identifier": "BV1rh4y1b7wU"
+      },
+      {
+        "type": "bvid",
+        "identifier": "BV1SH4y1o7rk"
+      }
+    ],
     "customColors": {
       "maskedBackgroundColor": "rgba(0, 0, 0, 0.30)",
       "playlistDrawerBackgroundColor": "rgba(255, 0, 0, 0.35)",
@@ -759,6 +794,12 @@
         "identifier": "https://img-baofun.zhhainiao.com/pcwallpaper_ugc_mobile/preview/6c47b1ed421707815dc3e28f74a5a6db_preview.mp4"
       }
     ],
+    "backgroundImagesLandscape": [
+      {
+        "type": "video",
+        "identifier": "https://img-baofun.zhhainiao.com/pcwallpaper_ugc/preview/994eec6c1203516f81c2db75f02c3789_preview.mp4"
+      }
+    ],
     "customColors": {
       "maskedBackgroundColor": "rgba(0, 0, 0, 0.60)",
       "playlistDrawerBackgroundColor": "rebeccapurple",
@@ -862,6 +903,9 @@
     ],
     "backgroundImages": [
       "https://article.biliimg.com/bfs/article/665f1975a070f013580832fef95621aef37a1b2c.png"
+    ],
+    "backgroundImagesLandscape": [
+      "http://i0.hdslb.com/bfs/live/room_bg/f969cfa685038d4d8210c9aa2844677bc5a58eeb.jpg"
     ],
     "customColors": {
       "maskedBackgroundColor": "rgba(0, 0, 0, 0.30)",
@@ -979,6 +1023,12 @@
       "https://article.biliimg.com/bfs/article/29af4ddfe6e9a2459b02ccb8181b414080babd65.png",
       "https://album.biliimg.com/bfs/new_dyn/07fe4f21afa406a0efb90eb50e99ca8c1676354.jpg"
     ],
+    "backgroundImagesLandscape": [
+      {
+        "type": "bvid",
+        "identifier": "BV1Yv4y1C7K5"
+      }
+    ],
     "customColors": {
       "maskedBackgroundColor": "rgba(255, 255, 255, 0.40)",
       "playlistDrawerBackgroundColor": "#ffa6c9",
@@ -1071,6 +1121,12 @@
       {
         "type": "video",
         "identifier": "https://cdn.donmai.us/original/ed/59/__gawr_gura_and_bloop_hololive_and_1_more_drawn_by_mokyuko_and_shikabashi_joxx__ed598bec0a9c3be5a9835c441ca40910.mp4"
+      }
+    ],
+    "backgroundImagesLandscape": [
+      {
+        "type": "video",
+        "identifier": "https://static.moewalls.com/videos/preview/2021/gawr-gura-atlantis-virtual-youtuber-preview.mp4"
       }
     ],
     "customColors": {
@@ -1168,6 +1224,12 @@
       "https://i0.hdslb.com/bfs/garb/7fc48881ec85a91ab451162d14749a50ebaff767.jpg",
       "https://i0.hdslb.com/bfs/new_dyn/8f22c393e49af2f90de7219b0bce6f0b13692113.png"
     ],
+    "backgroundImagesLandscape": [
+      {
+        "type": "bvid",
+        "identifier": "BV1VM411q7j6"
+      }
+    ],
     "customColors": {
       "maskedBackgroundColor": "rgba(255, 255, 255, 0.40)",
       "playlistDrawerBackgroundColor": "#ffa6c9",
@@ -1256,6 +1318,9 @@
       "https://i0.hdslb.com/bfs/new_dyn/d281f51d34dadc70ae053e49969fb4ab286649.jpg",
       "https://i0.hdslb.com/bfs/garb/f97c35ee849743ee0969f5fca274ecc94d00e638.jpg",
       "https://i0.hdslb.com/bfs/garb/eeec66368c9a92292b6ecda83e39ae4330af7085.jpg"
+    ],
+    "backgroundImagesLandscape": [
+      "https://i0.hdslb.com/bfs/archive/430a3a6e90f342d25ef44ecf2e14b32e6fb71083.jpg"
     ]
   },
   {
@@ -1583,6 +1648,12 @@
       "https://i0.hdslb.com/bfs/garb/1167eb2420f0480ab506f5d7d9bc18271800e57f.jpg",
       "https://i0.hdslb.com/bfs/garb/54b09bc72cf1537c0ba0f11eb9bc13091b01aad1.jpg",
       "https://i0.hdslb.com/bfs/garb/95874aff3686bee1b0c942658bade9543f8c6302.jpg"
+    ],
+    "backgroundImagesLandscape": [
+      {
+        "type": "bvid",
+        "identifier": "BV1nj411X7Vr"
+      }
     ],
     "customColors": {
       "maskedBackgroundColor": "rgba(255, 255, 255, 0.40)",
