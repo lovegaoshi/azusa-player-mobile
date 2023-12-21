@@ -69,6 +69,14 @@
     "clearPlaylistTitle": "清空歌单",
     "removePlaylistTitle": "删除歌单",
     "all": "所有歌单",
+    "sortTitle": "排序...",
+    "sortDialogTitle": "为歌单 {{playlist.title}} 排序",
+    "ascending": "顺序?",
+    "sortTITLE": "歌曲名",
+    "sortARTIST": "up主人",
+    "sortALBUM": "视频名",
+    "sortDATE": "日期",
+    "sortPREVIOUS_ORDER": "之前的顺序",
     "searchListName": "搜索歌单"
   },
   "SongOperations": {

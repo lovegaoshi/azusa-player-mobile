@@ -17,12 +17,10 @@ const GEN_SETTING_BOOLEAN: SettingEntry[] = [
     settingName: 'keepSearchedSongListWhenPlaying',
     settingCategory: 'GeneralSettings',
   },
-  /*
   {
     settingName: 'noCookieBiliSearch',
     settingCategory: 'GeneralSettings',
   },
-  */
   {
     settingName: 'dataSaver',
     settingCategory: 'GeneralSettings',
