@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { ImageBackground, Dimensions, View, StyleSheet } from 'react-native';
 // import { Video, ResizeMode } from 'expo-av';
 import Video from 'react-native-video';
@@ -6,35 +6,26 @@ import { useNoxSetting } from '@stores/useApp';
 import { customReqHeader } from '@utils/BiliFetch';
 import { logger } from '@utils/Logger';
 import { useIsLandscape } from '@hooks/useOrientation';
-import { RESOLVE_TYPE } from '@utils/mediafetch/mainbackgroundfetch';
+import resolveBackgroundImage, {
+  RESOLVE_TYPE,
+} from '@utils/mediafetch/mainbackgroundfetch';
 
 const MainBackground = ({ children }: { children: React.JSX.Element }) => {
   const playerStyle = useNoxSetting(state => state.playerStyle);
   const isLandscape = useIsLandscape();
   const mobileHeight = Dimensions.get('window').height;
-  const bkgrdImg =
+  const [bkgrdImg, setBkgrdImg] = useState<NoxTheme.backgroundImage>();
+  const bkgrdImgRaw =
     isLandscape && playerStyle.bkgrdImgLandscape
       ? playerStyle.bkgrdImgLandscape
       : playerStyle.bkgrdImg;
 
+  React.useEffect(() => {
+    resolveBackgroundImage(bkgrdImgRaw).then(setBkgrdImg);
+  }, [bkgrdImgRaw]);
+
   // TODO: are these still necessary since they are behind await initPlayer?
   if (!bkgrdImg) return <>{children}</>;
-
-  if (typeof bkgrdImg === 'string') {
-    return (
-      <ImageBackground
-        source={{ uri: bkgrdImg }}
-        resizeMode="cover"
-        style={[styles.mobileStyle, { height: mobileHeight }]}
-      >
-        <View
-          style={{ backgroundColor: playerStyle.colors.background, flex: 1 }}
-        >
-          {children}
-        </View>
-      </ImageBackground>
-    );
-  }
 
   switch (bkgrdImg.type) {
     case RESOLVE_TYPE.image:
