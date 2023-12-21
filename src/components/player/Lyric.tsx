@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useCallback, useEffect, useMemo, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import {
   Modal,
   View,
@@ -33,17 +33,6 @@ interface LyricLineProps {
   index: number;
   active: boolean;
 }
-
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-const useHasLrcFromLocal = (
-  track: Track,
-  lyricMapping: Map<string, NoxMedia.LyricDetail>
-) => {
-  return useMemo(
-    () => lyricMapping.has(track?.song?.id),
-    [track, lyricMapping]
-  );
-};
 
 export const ModalContainer: React.FC<ModalContainerProps> = ({
   children,
@@ -99,12 +88,7 @@ export const LyricView = ({
 
   useEffect(() => {
     if (track === undefined || track.title === '') return;
-    logger.log('Initiating Lyric with new track...');
-    setCurrentTimeOffset(0);
-    setLrcOption(null);
-    setLrc('正在加载歌词...');
-    setSearchText(track.title || '');
-    const lrcOptionPromise = fetchAndSetLyricOptions();
+
     const loadLocalLrc = async () => {
       if (!hasLrcFromLocal()) return false;
       logger.log('[lyric] Loading Lrc from localStorage...');
@@ -129,14 +113,19 @@ export const LyricView = ({
       setLrc(lrcDetail.lyric);
       return true;
     };
-    // Initialize from storage if not new
-    loadLocalLrc().then(
-      localLrcLoaded =>
-        !localLrcLoaded &&
-        lrcOptionPromise.then(
-          val => val && searchAndSetCurrentLyric(undefined, val)
-        )
-    );
+    (async () => {
+      logger.log('Initiating Lyric with new track...');
+      setCurrentTimeOffset(0);
+      setLrcOption(null);
+      setLrc('正在加载歌词...');
+      setSearchText(track.title || '');
+      // Initialize from storage if not new
+      const localLrcLoaded = await loadLocalLrc();
+      if (!localLrcLoaded) {
+        const lrcOptionPromise = await fetchAndSetLyricOptions();
+        searchAndSetCurrentLyric(undefined, lrcOptionPromise);
+      }
+    })();
   }, [track]);
 
   useEffect(() => {

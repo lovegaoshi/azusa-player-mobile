@@ -32,4 +32,10 @@ declare namespace NoxNetwork {
     userAgent: string;
     urlRefreshTimeStamp: number;
   }
+
+  export interface NoxFetchedLyric {
+    key: string;
+    songMid: string;
+    label: string;
+  }
 }

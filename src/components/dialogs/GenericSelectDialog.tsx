@@ -27,7 +27,7 @@ interface Props<T> {
 /**
  * a generic dialog that displays a list of items in radiobuttons.
  */
-export default ({
+export default function GenericSelectDialog<T>({
   visible,
   options,
   renderOptionTitle = val => String(val),
@@ -36,7 +36,7 @@ export default ({
   onClose = () => undefined,
   onSubmit = () => undefined,
   children,
-}: Props<any>) => {
+}: Props<T>) {
   const { t } = useTranslation();
   const [currentIndex, setCurrentIndex] = useState(defaultIndex);
 
@@ -78,7 +78,7 @@ export default ({
               >
                 <View style={styles.rowView} key={index}>
                   <RadioButton
-                    value={item}
+                    value={String(item)}
                     status={currentIndex === index ? 'checked' : 'unchecked'}
                     onPress={() => setCurrentIndex(index)}
                   />
@@ -102,7 +102,7 @@ export default ({
       </Dialog>
     </Portal>
   );
-};
+}
 
 const styles = StyleSheet.create({
   dialogTitle: {
