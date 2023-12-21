@@ -462,6 +462,9 @@
       "https://i0.hdslb.com/bfs/garb/b065d08ff7f85418973a8f3883b5b6d88963898e.jpg",
       "https://i0.hdslb.com/bfs/new_dyn/17f74d87c4f078d930ec29b8179213782196632.gif"
     ],
+    "backgroundImagesLandscape": [
+      "http://i0.hdslb.com/bfs/live/room_bg/1428a93e4a983a7a6e7ba3dc62b064e403fc8354.png"
+    ],
     "customColors": {
       "maskedBackgroundColor": "rgba(0, 0, 0, 0.60)",
       "playlistDrawerBackgroundColor": "green",
@@ -590,6 +593,12 @@
       {
         "type": "biliGarbHeadVideo",
         "identifier": "134553101"
+      }
+    ],
+    "backgroundImagesLandscape": [
+      {
+        "type": "video",
+        "identifier": "https://img-baofun.zhhainiao.com/pcwallpaper_ugc/preview/2d4813a4df47201b40f8be2a71d60bf1_preview.mp4"
       }
     ],
     "customColors": {
