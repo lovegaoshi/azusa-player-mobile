@@ -54,7 +54,9 @@ export default () => {
       }}
     >
       <ScrollView>
-        {GEN_SETTING_BOOLEAN.map(item => RenderSetting({ item }))}
+        {GEN_SETTING_BOOLEAN.map(item => (
+          <RenderSetting item={item} key={item.settingName} />
+        ))}
       </ScrollView>
     </View>
   );

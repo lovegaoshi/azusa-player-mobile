@@ -26,6 +26,7 @@ interface Props {
   toggleVisible?: () => void;
   menuCoords?: NoxTheme.coordinates;
   playlist: NoxMedia.Playlist;
+  songListUpdateHalt: () => void;
 }
 
 export default ({
@@ -33,6 +34,7 @@ export default ({
   toggleVisible = () => undefined,
   menuCoords = { x: 0, y: 0 },
   playlist,
+  songListUpdateHalt,
 }: Props) => {
   const { t } = useTranslation();
   const {
@@ -56,12 +58,15 @@ export default ({
       />
       <CopiedPlaylistMenuItem
         getFromListOnClick={() => playlist}
-        onSubmit={() => toggleVisible()}
+        onSubmit={toggleVisible}
       />
       <PlaylistSortButton
-        sortPlaylist={sortPlaylist}
+        sortPlaylist={(o, a, p) => {
+          songListUpdateHalt();
+          sortPlaylist(o, a, p);
+        }}
         playlist={playlist}
-        onCancel={() => toggleVisible()}
+        onCancel={toggleVisible}
       />
       <Menu.Item
         leadingIcon={ICONS.BILISYNC}
