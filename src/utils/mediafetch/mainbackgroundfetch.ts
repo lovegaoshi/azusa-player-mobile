@@ -11,9 +11,7 @@ export enum RESOLVE_TYPE {
   image = 'image',
 }
 
-export const resolveBackgroundImage = async (
-  backgroundImage: string | NoxTheme.backgroundImage
-) => {
+export default async (backgroundImage: string | NoxTheme.backgroundImage) => {
   if (typeof backgroundImage === 'string') {
     return { type: RESOLVE_TYPE.image, identifier: backgroundImage };
   }
