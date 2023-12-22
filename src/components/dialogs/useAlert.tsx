@@ -4,11 +4,30 @@ import { useTranslation } from 'react-i18next';
 export default () => {
   const { t } = useTranslation();
 
-  const TwoWayAlert = (
+  const ThreeWayAlert = (
     title: string,
     message: string,
-    onSubmit: () => void
-  ) => {
+    onSubmit: () => void,
+    partialTitle: string,
+    onPartial: () => void
+  ) =>
+    Alert.alert(title, message, [
+      {
+        text: String(t('Dialog.cancel')),
+        onPress: () => undefined,
+        style: 'cancel',
+      },
+      {
+        text: partialTitle,
+        onPress: onPartial,
+      },
+      {
+        text: String(t('Dialog.ok')),
+        onPress: onSubmit,
+      },
+    ]);
+
+  const TwoWayAlert = (title: string, message: string, onSubmit: () => void) =>
     Alert.alert(title, message, [
       {
         text: String(t('Dialog.cancel')),
@@ -20,14 +39,12 @@ export default () => {
         onPress: onSubmit,
       },
     ]);
-  };
-
   const OneWayAlert = (
     title: string,
     message: string,
     // eslint-disable-next-line @typescript-eslint/no-empty-function
     onPress = () => {}
-  ) => {
+  ) =>
     Alert.alert(
       title,
       message,
@@ -37,10 +54,10 @@ export default () => {
         onDismiss: onPress,
       }
     );
-  };
 
   return {
     OneWayAlert,
     TwoWayAlert,
+    ThreeWayAlert,
   };
 };

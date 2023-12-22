@@ -244,6 +244,9 @@
     "Disclaimer": "Using bilibili cookies in this app may make your account BANNED due to API abuse. At the very least please don't use your main account."
   },
   "VersionUpdate": {
+    "DownloadAPK": "Update",
+    "DownloadingAPK": "Downloading the latest APM armv8 APK...",
+    "DownloadedAPK": "Update APM",
     "NoUpdates": "Noxplayer is already at the newest version.\nCurrent version:{{currentVersion}}\nDev version: {{devVersion}}",
     "UpdateCheckingSnackbar": "Checking updates...",
     "UpdateCheckingFailedSnackbar": "Checking update via github failed.",
