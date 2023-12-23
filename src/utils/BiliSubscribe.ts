@@ -23,6 +23,7 @@ export const updateSubscribeFavList = async ({
     playlist.newSongOverwrite || playlist.title.includes('live'),
   callback = () => undefined,
 }: Props): Promise<NoxMedia.Playlist> => {
+  progressEmitter(100);
   let newPlaylist = { ...playlist, lastSubscribed: new Date().getTime() };
   if ([PLAYLIST_ENUMS.TYPE_FAVORI_PLAYLIST].includes(playlist.type))
     throw new Error('[biliSubscribe] incorrect playlist type for subscription');
