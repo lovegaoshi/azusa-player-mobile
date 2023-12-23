@@ -41,7 +41,13 @@ declare global {
       newSongOverwrite?: boolean;
 
       sort?: SORT_OPTIONS;
-      refresh?: (v: Playlist) => Promise<Song[]>;
+      refresh?: (v: Playlist) => Promise<Partial<Playlist>>;
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      refreshToken?: any;
+    }
+
+    export interface SearchPlaylist extends Partial<Playlist> {
+      songList: Array<Song>;
     }
 
     export interface LyricDetail {

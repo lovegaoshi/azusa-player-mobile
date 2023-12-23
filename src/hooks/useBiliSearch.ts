@@ -25,22 +25,20 @@ export default ({
 
   const handleSearch = async (val = searchVal) => {
     progressEmitter(100);
-    const searchedResult = (
-      await searchBiliURLs({
-        input: val,
-        progressEmitter,
-        favList: [],
-        useBiliTag: false,
-        fastSearch: playerSetting.fastBiliSearch,
-        cookiedSearch: playerSetting.noCookieBiliSearch,
-        defaultSearch: await getDefaultSearch(),
-      })
-    ).songList;
+    const searchedResult = await searchBiliURLs({
+      input: val,
+      progressEmitter,
+      favList: [],
+      useBiliTag: false,
+      fastSearch: playerSetting.fastBiliSearch,
+      cookiedSearch: playerSetting.noCookieBiliSearch,
+      defaultSearch: await getDefaultSearch(),
+    });
     onSearched(searchedResult);
     const newSearchPlaylist = {
       ...searchPlaylist,
+      ...searchedResult,
       title: searchListTitle,
-      songList: searchedResult,
       subscribeUrl: val.includes('http') ? [val] : [],
     };
     setSearchPlaylist(newSearchPlaylist);
