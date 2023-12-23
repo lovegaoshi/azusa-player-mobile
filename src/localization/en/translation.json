@@ -102,7 +102,7 @@
     "dataSaverName": "Data Saver",
     "dataSaverDesc": "Prefers cached songs when using cellular data",
     "noCookieBiliSearchName": "Bilibili Customized Search",
-    "noCookieBiliSearchDesc": "TODO: Enable credentials in bilibili search to show customized searchresults",
+    "noCookieBiliSearchDesc": "Enable credentials in bilibili search to show customized searchresults",
     "updateLoadedTrackName": "Update Track Metadata",
     "updateLoadedTrackDesc": "Always retrieve the track metadata regardless of cache status",
     "r128gainName": "R128gain OTF",

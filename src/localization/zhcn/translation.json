@@ -102,7 +102,7 @@
     "dataSaverName": "省流模式",
     "dataSaverDesc": "使用流量时优先播放缓存的歌曲",
     "noCookieBiliSearchName": "个性化b站搜索结果",
-    "noCookieBiliSearchDesc": "TODO: 搜索b站时提交cookies获得个性化搜索结果",
+    "noCookieBiliSearchDesc": "搜索b站时提交cookies获得个性化搜索结果",
     "updateLoadedTrackName": "更新歌曲metadata",
     "updateLoadedTrackDesc": "总是解析歌曲以更新metadata",
     "r128gainName": "实时R128gain",
