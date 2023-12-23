@@ -15,7 +15,7 @@ import { fetchBiliPaginatedAPI } from './paginatedbili';
 import VideoInfo from '@objects/VideoInfo';
 import { timestampToSeconds } from '../Utils';
 import bfetch from '../BiliFetch';
-import { getBiliCookie } from '../Bilibili/biliCookies';
+import { getBiliCookie } from '@utils/Bilibili/biliCookies';
 
 const URL_BILI_SEARCH =
   'https://api.bilibili.com/x/web-interface/search/type?search_type=video&keyword={keyword}&page={pn}&tids=3';
