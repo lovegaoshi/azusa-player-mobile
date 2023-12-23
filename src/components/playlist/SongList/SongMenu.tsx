@@ -39,8 +39,7 @@ export default ({ usePlaylist, prepareForLayoutAnimationRender }: Props) => {
   const menuCoord = useNoxSetting(state => state.songMenuCoords);
   const songMenuSongIndexes = useNoxSetting(state => state.songMenuSongIndexes);
   const currentPlaylist = useNoxSetting(state => state.currentPlaylist);
-  const playlistCRUD = usePlaylistCRUD();
-  const { updateSongIndex } = playlistCRUD;
+  const playlistCRUD = usePlaylistCRUD(currentPlaylist);
   const setPlaylistSearchAutoFocus = useNoxSetting(
     state => state.setPlaylistSearchAutoFocus
   );
@@ -68,10 +67,14 @@ export default ({ usePlaylist, prepareForLayoutAnimationRender }: Props) => {
   };
 
   const renameSong = (name: string) =>
-    updateSongIndex(songMenuSongIndexes[0], {
-      name,
-      parsedName: name,
-    });
+    playlistCRUD.updateSongIndex(
+      songMenuSongIndexes[0],
+      {
+        name,
+        parsedName: name,
+      },
+      currentPlaylist
+    );
 
   const removeSongs = (banBVID = false) => {
     const songs = selectedSongs();
