@@ -43,7 +43,7 @@ export const updateSubscribeFavList = async ({
         useBiliTag: newPlaylist.useBiliShazam,
         progressEmitter,
       })
-    ).concat(newPlaylist.songList);
+    ).songList.concat(newPlaylist.songList);
   }
   const uniqueSongList = new Map<string, NoxMedia.Song>();
   if (overwriteOnRefresh()) {

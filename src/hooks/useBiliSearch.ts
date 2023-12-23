@@ -25,15 +25,17 @@ export default ({
 
   const handleSearch = async (val = searchVal) => {
     progressEmitter(100);
-    const searchedResult = (await searchBiliURLs({
-      input: val,
-      progressEmitter,
-      favList: [],
-      useBiliTag: false,
-      fastSearch: playerSetting.fastBiliSearch,
-      cookiedSearch: playerSetting.noCookieBiliSearch,
-      defaultSearch: await getDefaultSearch(),
-    })) as Array<NoxMedia.Song>;
+    const searchedResult = (
+      await searchBiliURLs({
+        input: val,
+        progressEmitter,
+        favList: [],
+        useBiliTag: false,
+        fastSearch: playerSetting.fastBiliSearch,
+        cookiedSearch: playerSetting.noCookieBiliSearch,
+        defaultSearch: await getDefaultSearch(),
+      })
+    ).songList;
     onSearched(searchedResult);
     const newSearchPlaylist = {
       ...searchPlaylist,

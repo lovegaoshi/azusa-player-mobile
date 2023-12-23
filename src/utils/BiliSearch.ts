@@ -64,7 +64,7 @@ export const searchBiliURLs = async ({
         useBiliTag,
       });
       progressEmitter(0);
-      return results;
+      return { songList: results };
     } // bilisearchFetch
     let results;
     switch (defaultSearch) {
@@ -91,12 +91,12 @@ export const searchBiliURLs = async ({
         });
     }
     progressEmitter(0);
-    return results;
+    return { songList: results };
   } catch (err) {
     logger.warn(err);
   }
   progressEmitter(0);
-  return [];
+  return { songList: [] };
 };
 
 interface ReExtraction {
