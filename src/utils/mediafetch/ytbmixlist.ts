@@ -6,11 +6,13 @@ import { SOURCE } from '@enums/MediaFetch';
 
 const fetchYTPlaylist = async (
   playlistId: string,
-  progressEmitter: (val: number) => void,
-  favList: string[]
+  favList: string[],
+  mixlistId?: string
 ): Promise<NoxMedia.Song[][]> => {
   const res = await fetch(
-    `https://www.youtube.com/watch?v=${playlistId}&list=RD${playlistId}`
+    `https://www.youtube.com/watch?v=${playlistId}&list=RD${
+      mixlistId ?? playlistId
+    }`
   );
   const content = await res.text();
   // https://www.thepythoncode.com/code/get-youtube-data-python
@@ -50,15 +52,11 @@ const fetchYTPlaylist = async (
       .filter((val: NoxMedia.Song) => !favList.includes(val.bvid))
   );
 };
-const regexFetch = async ({
-  reExtracted,
-  progressEmitter = () => undefined,
-  favList = [],
-}: regexFetchProps) => {
+const regexFetch = async ({ reExtracted, favList = [] }: regexFetchProps) => {
   const results = await fetchYTPlaylist(
     reExtracted[1],
-    progressEmitter,
-    favList
+    favList,
+    reExtracted[2]
   );
   return results
     .filter(val => val !== undefined)
@@ -68,5 +66,7 @@ const regexFetch = async ({
 export default {
   regexSearchMatch: /youtu(?:.*\/v\/|.*v=|\.be\/)([A-Za-z0-9_-]{11})&list=RD/,
   regexSearchMatch2: /youtu.*list=RD([^&]+)/,
+  regexSearchMatch3:
+    /youtu(?:.*\/v\/|.*v=|\.be\/)([A-Za-z0-9_-]{11})&list=RD(.+)/,
   regexFetch,
 };

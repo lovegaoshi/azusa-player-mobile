@@ -30,7 +30,7 @@ declare global {
       id: string;
       type: string;
 
-      songList: Array<NoxMedia.Song>;
+      songList: Array<Song>;
 
       subscribeUrl: Array<string>;
       blacklistedUrl: Array<string>;
@@ -41,6 +41,7 @@ declare global {
       newSongOverwrite?: boolean;
 
       sort?: SORT_OPTIONS;
+      refresh?: (v: Playlist) => Promise<Song[]>;
     }
 
     export interface LyricDetail {
