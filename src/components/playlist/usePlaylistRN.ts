@@ -48,9 +48,6 @@ export default (playlist: NoxMedia.Playlist) => {
   const { preformFade } = useTPControls();
 
   const refreshPlaylist = async () => {
-    if (playlist.type !== PLAYLIST_ENUMS.TYPE_TYPICA_PLAYLIST) {
-      return;
-    }
     Snackbar.show({
       text: t('PlaylistOperations.updating', { playlist }),
       duration: Snackbar.LENGTH_INDEFINITE,

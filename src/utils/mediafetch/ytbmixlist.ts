@@ -63,12 +63,22 @@ const refresh = async (v: NoxMedia.Playlist) => {
   if (v.refreshToken) {
     results.songList = await fetchYTPlaylist(
       v.refreshToken[0],
-      v.songList.map(s => s.id),
+      v.songList.map(s => s.bvid),
       v.refreshToken[1]
     );
     results.refreshToken = [
       results.songList[results.songList.length - 1].bvid,
       v.refreshToken[1],
+    ];
+  } else {
+    results.songList = await fetchYTPlaylist(
+      v.songList[v.songList.length - 1].bvid,
+      v.songList.map(s => s.bvid),
+      v.songList[0].bvid
+    );
+    results.refreshToken = [
+      results.songList[results.songList.length - 1].bvid,
+      v.songList[0].bvid,
     ];
   }
   return results;

@@ -38,7 +38,11 @@ export const matchBiliURL = (input: string) => {
   for (const reExtraction of reExtractions) {
     const reExtracted = reExtraction.match.exec(input);
     if (reExtracted !== null) {
-      return { regexFetch: reExtraction.fetch, reExtracted };
+      return {
+        regexFetch: reExtraction.fetch,
+        reExtracted,
+        refresh: reExtraction.refresh,
+      };
     }
   }
   return null;
@@ -66,6 +70,7 @@ export const searchBiliURLs = async ({
         favList,
         useBiliTag,
       });
+      results.refresh = matchRegex.refresh;
       progressEmitter(0);
       return results;
     } // bilisearchFetch
@@ -103,7 +108,7 @@ export const searchBiliURLs = async ({
 interface ReExtraction {
   match: RegExp;
   fetch: (v: regexFetchProps) => Promise<NoxMedia.Song[]>;
-  refresh?: (v: NoxMedia.Playlist) => Promise<NoxMedia.Song[]>;
+  refresh?: (v: NoxMedia.Playlist) => Promise<NoxMedia.SearchPlaylist>;
 }
 
 const reExtractions: ReExtraction[] = [
@@ -134,10 +139,12 @@ const reExtractions: ReExtraction[] = [
   {
     match: ytbmixlistFetch.regexSearchMatch,
     fetch: ytbmixlistFetch.regexFetch,
+    refresh: ytbmixlistFetch.refresh,
   },
   {
     match: ytbmixlistFetch.regexSearchMatch2,
     fetch: ytbmixlistFetch.regexFetch,
+    refresh: ytbmixlistFetch.refresh,
   },
   {
     match: ytbplaylistFetch.regexSearchMatch,
