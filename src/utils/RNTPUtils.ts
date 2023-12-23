@@ -126,7 +126,7 @@ export const fadePause = () =>
 
 export const fadePlay = async () => {
   const { fadeIntervalMs } = getState();
-  setTPR128Gain((await getR128GainAsync()) || 0, fadeIntervalMs, 0);
+  setTPR128Gain(await getR128GainAsync(), fadeIntervalMs, 0);
 };
 
 export const cycleThroughPlaymode = () => {

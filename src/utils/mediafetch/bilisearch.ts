@@ -15,6 +15,7 @@ import { fetchBiliPaginatedAPI } from './paginatedbili';
 import VideoInfo from '@objects/VideoInfo';
 import { timestampToSeconds } from '../Utils';
 import bfetch from '../BiliFetch';
+import { getBiliCookie } from '../Bilibili/biliCookies';
 
 const URL_BILI_SEARCH =
   'https://api.bilibili.com/x/web-interface/search/type?search_type=video&keyword={keyword}&page={pn}&tids=3';
@@ -22,14 +23,14 @@ const URL_BILI_SEARCH =
 let cookie: string;
 
 const getCookie = async (cookiedSearch = false) => {
+  // TODO: add refresh here?
   if (!cookie) {
     const res = await bfetch('https://api.bilibili.com/x/frontend/finger/spi');
     const json = await res.json();
     cookie = `buvid3=${json.data.b_3};buvid4=${json.data.b_4}`;
   }
   if (cookiedSearch) {
-    // TODO: get cookie from biliCookies and add to here.
-    return cookie;
+    return `${cookie};SESSDATA=${await getBiliCookie('SESSDATA')}`;
   }
   return cookie;
 };

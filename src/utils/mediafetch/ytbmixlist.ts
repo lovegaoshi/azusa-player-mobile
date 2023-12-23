@@ -6,11 +6,13 @@ import { SOURCE } from '@enums/MediaFetch';
 
 const fetchYTPlaylist = async (
   playlistId: string,
-  progressEmitter: (val: number) => void,
-  favList: string[]
-): Promise<NoxMedia.Song[][]> => {
+  favList: string[],
+  mixlistId?: string
+) => {
   const res = await fetch(
-    `https://www.youtube.com/watch?v=${playlistId}&list=RD${playlistId}`
+    `https://www.youtube.com/watch?v=${playlistId}&list=RD${
+      mixlistId ?? playlistId
+    }`
   );
   const content = await res.text();
   // https://www.thepythoncode.com/code/get-youtube-data-python
@@ -19,7 +21,8 @@ const fetchYTPlaylist = async (
     throw Error();
   }
   const data = JSON.parse(`${ytInitialData[1]}`);
-  return (
+
+  const results: NoxMedia.Song[][] =
     data.contents.twoColumnWatchNextResults.playlist.playlist.contents
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       .map((val: any, index: number) => [
@@ -47,26 +50,45 @@ const fetchYTPlaylist = async (
           metadataOnLoad: true,
         }),
       ])
-      .filter((val: NoxMedia.Song) => !favList.includes(val.bvid))
-  );
-};
-const regexFetch = async ({
-  reExtracted,
-  progressEmitter = () => undefined,
-  favList = [],
-}: regexFetchProps) => {
-  const results = await fetchYTPlaylist(
-    reExtracted[1],
-    progressEmitter,
-    favList
-  );
+      .filter((val: NoxMedia.Song) => !favList.includes(val.bvid));
   return results
     .filter(val => val !== undefined)
     .reduce((acc, curr) => acc!.concat(curr!), [] as NoxMedia.Song[]);
+};
+const regexFetch = ({ reExtracted, favList = [] }: regexFetchProps) =>
+  fetchYTPlaylist(reExtracted[1], favList, reExtracted[2]);
+
+const refresh = async (v: NoxMedia.Playlist) => {
+  const results: NoxMedia.SearchPlaylist = { songList: [] };
+  if (v.refreshToken) {
+    results.songList = await fetchYTPlaylist(
+      v.refreshToken[0],
+      v.songList.map(s => s.bvid),
+      v.refreshToken[1]
+    );
+    results.refreshToken = [
+      results.songList[results.songList.length - 1].bvid,
+      v.refreshToken[1],
+    ];
+  } else {
+    results.songList = await fetchYTPlaylist(
+      v.songList[v.songList.length - 1].bvid,
+      v.songList.map(s => s.bvid),
+      v.songList[0].bvid
+    );
+    results.refreshToken = [
+      results.songList[results.songList.length - 1].bvid,
+      v.songList[0].bvid,
+    ];
+  }
+  return results;
 };
 
 export default {
   regexSearchMatch: /youtu(?:.*\/v\/|.*v=|\.be\/)([A-Za-z0-9_-]{11})&list=RD/,
   regexSearchMatch2: /youtu.*list=RD([^&]+)/,
+  regexSearchMatch3:
+    /youtu(?:.*\/v\/|.*v=|\.be\/)([A-Za-z0-9_-]{11})&list=RD(.+)/,
   regexFetch,
+  refresh,
 };

@@ -1,0 +1,13 @@
+diff --git a/node_modules/react-native-blob-util/fetch.js b/node_modules/react-native-blob-util/fetch.js
+index ed4e67f..3b6fef6 100644
+--- a/node_modules/react-native-blob-util/fetch.js
++++ b/node_modules/react-native-blob-util/fetch.js
+@@ -270,7 +270,7 @@ export function fetch(...args: any): Promise {
+                         fs.session(options.session).add(data);
+                 }
+                 respInfo.rnfbEncode = rawType;
+-                if ('uninit' in respInfo && respInfo.uninit) // event didn't fire yet so we override it here
++                if ('uninit' in respInfo && respInfo.uninit && responseInfo) // event didn't fire yet so we override it here
+                     respInfo = responseInfo;
+                 resolve(new FetchBlobResponse(taskId, respInfo, data));
+             }

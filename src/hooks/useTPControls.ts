@@ -94,13 +94,6 @@ export default () => {
       if (nextIndex > currentTPQueue.length - 1) {
         nextIndex = 0;
       }
-      console.log(
-        '[debugnext]',
-        nextIndex,
-        currentTPQueue.length,
-        currentTPQueue[nextIndex],
-        currentTPQueue.slice(15, 30)
-      );
       try {
         await skipToBiliSuggest();
       } catch {

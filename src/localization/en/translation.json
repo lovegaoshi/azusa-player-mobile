@@ -102,7 +102,7 @@
     "dataSaverName": "Data Saver",
     "dataSaverDesc": "Prefers cached songs when using cellular data",
     "noCookieBiliSearchName": "Bilibili Customized Search",
-    "noCookieBiliSearchDesc": "TODO: Enable credentials in bilibili search to show customized searchresults",
+    "noCookieBiliSearchDesc": "Enable credentials in bilibili search to show customized searchresults",
     "updateLoadedTrackName": "Update Track Metadata",
     "updateLoadedTrackDesc": "Always retrieve the track metadata regardless of cache status",
     "r128gainName": "R128gain OTF",
@@ -244,6 +244,9 @@
     "Disclaimer": "Using bilibili cookies in this app may make your account BANNED due to API abuse. At the very least please don't use your main account."
   },
   "VersionUpdate": {
+    "DownloadAPK": "Update",
+    "DownloadingAPK": "Downloading the latest APM armv8 APK...",
+    "DownloadedAPK": "Update APM",
     "NoUpdates": "Noxplayer is already at the newest version.\nCurrent version:{{currentVersion}}\nDev version: {{devVersion}}",
     "UpdateCheckingSnackbar": "Checking updates...",
     "UpdateCheckingFailedSnackbar": "Checking update via github failed.",

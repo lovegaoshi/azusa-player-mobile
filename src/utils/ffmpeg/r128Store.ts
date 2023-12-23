@@ -4,13 +4,8 @@ import { createStore } from 'zustand/vanilla';
 import { getR128GainMapping, saveR128GainMapping } from '@utils/ChromeStorage';
 
 interface AppStore {
-  pipMode: boolean;
   r128gain: NoxStorage.R128Dict;
   setR128gain: (val: NoxStorage.R128Dict) => void;
-  // used for ABRepeat so that ABRepeat will only seek to A once
-  // when playstate becomes ready.
-  currentPlayingId: string;
-  setCurrentPlayingId: (val: string) => void;
 }
 
 const appStore = createStore<AppStore>(set => ({
@@ -19,10 +14,6 @@ const appStore = createStore<AppStore>(set => ({
   setR128gain: (val: NoxStorage.R128Dict) => {
     set({ r128gain: val });
     saveR128GainMapping(val);
-  },
-  currentPlayingId: '',
-  setCurrentPlayingId: (val: string) => {
-    set({ currentPlayingId: val });
   },
 }));
 
@@ -38,23 +29,13 @@ const saveR128Gain = async (val: NoxStorage.R128Dict) => {
   saveR128GainMapping(newR128gain);
 };
 
-export const getR128Gain = (song?: NoxMedia.Song) => {
-  const { r128gain, currentPlayingId } = appStore.getState();
-  return r128gain[song ? song.id : currentPlayingId] ?? null;
+export const getR128Gain = (song: NoxMedia.Song) => {
+  const { r128gain } = appStore.getState();
+  return r128gain[song.id] ?? 0;
 };
 
 export const addR128Gain = (song: NoxMedia.Song, gain: number | null) => {
   saveR128Gain({ [song.id]: gain });
-};
-
-export const setCurrentPlaying = (song: NoxMedia.Song) => {
-  const currentPlayingId = appStore.getState().currentPlayingId;
-  if (currentPlayingId === song.id) {
-    return true;
-  }
-  appStore.setState({ currentPlayingId: song.id });
-  // HACK: skips ABRepeat of the first song set by app (which should be handled by resumePlayback)
-  return currentPlayingId === '';
 };
 
 export default appStore;

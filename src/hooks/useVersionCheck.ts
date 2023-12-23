@@ -1,5 +1,5 @@
 import { useTranslation } from 'react-i18next';
-import { Linking } from 'react-native';
+import { Linking, Platform } from 'react-native';
 import Snackbar from 'react-native-snackbar';
 // eslint-disable-next-line import/no-unresolved
 import { APPSTORE } from '@env';
@@ -7,6 +7,8 @@ import { APPSTORE } from '@env';
 import { useNoxSetting } from '@stores/useApp';
 import useAlert from '../components/dialogs/useAlert';
 import { VERSIONS } from '../enums/Version';
+import logger from '@utils/Logger';
+import useInstallAPK from './useInstallAPK';
 
 const regexVersion = (version: string) => {
   const regexMatch = /\d+\.\d+\.\d+/.exec(version),
@@ -17,26 +19,34 @@ const regexVersion = (version: string) => {
 export default () => {
   const playerSetting = useNoxSetting(state => state.playerSetting);
   const setPlayerSetting = useNoxSetting(state => state.setPlayerSetting);
-  const { OneWayAlert, TwoWayAlert } = useAlert();
+  const { OneWayAlert, TwoWayAlert, ThreeWayAlert } = useAlert();
+  const { RNFetchDownloadAPK } = useInstallAPK();
   const { t } = useTranslation();
 
   const getVersion = async () => {
+    let noxCheckedVersion: string | undefined;
+    let noxAPKUrl: string | undefined;
+    let devVersion: string | undefined;
     try {
       const res = await fetch(
         'https://api.github.com/repos/lovegaoshi/azusa-player-mobile/releases/latest'
       );
       const json = await res.json();
-      const noxCheckedVersion = json.tag_name;
+      noxCheckedVersion = json.tag_name;
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      noxAPKUrl = json.assets.filter((f: any) =>
+        f.name.includes('arm64-v8a')
+      )[0].browser_download_url;
       const devres = await fetch(
           'https://api.github.com/repos/lovegaoshi/azusa-player-mobile/releases'
         ),
-        devjson = await devres.json(),
-        devCheckedVersion = devjson[0].tag_name;
+        devjson = await devres.json();
+      devVersion = devjson[0].tag_name;
       setPlayerSetting({ noxCheckedVersion });
-      return [noxCheckedVersion, devCheckedVersion];
-    } catch {
-      return [null, null];
+    } catch (e) {
+      logger.error(e);
     }
+    return { noxCheckedVersion, devVersion, noxAPKUrl };
   };
 
   const checkVersion = async (
@@ -50,7 +60,7 @@ export default () => {
         duration: Snackbar.LENGTH_INDEFINITE,
       });
     }
-    const [noxCheckedVersion, devVersion] = await getVersion();
+    const { noxCheckedVersion, devVersion, noxAPKUrl } = await getVersion();
     Snackbar.dismiss();
     if (!noxCheckedVersion) {
       Snackbar.show({
@@ -75,6 +85,25 @@ export default () => {
       );
     } else {
       setPlayerSetting({ noxCheckedVersion });
+      if (Platform.OS === 'android') {
+        ThreeWayAlert(
+          String(t('VersionUpdate.UpdateFoundTitle')),
+          String(
+            t('VersionUpdate.UpdateFoundContent', {
+              noxCheckedVersion,
+              currentVersion: currentPlayerSetting.noxVersion,
+              devVersion,
+            })
+          ),
+          () =>
+            Linking.openURL(
+              'https://github.com/lovegaoshi/azusa-player-mobile/releases/latest'
+            ),
+          String(t('VersionUpdate.DownloadAPK')),
+          () => RNFetchDownloadAPK(noxAPKUrl!)
+        );
+        return;
+      }
       TwoWayAlert(
         String(t('VersionUpdate.UpdateFoundTitle')),
         String(

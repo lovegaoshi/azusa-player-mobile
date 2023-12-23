@@ -1,4 +1,5 @@
 import { searchBiliURLs } from './BiliSearch';
+import { PLAYLIST_ENUMS } from '../enums/Playlist';
 import { parseSongName } from '@stores/appStore';
 
 interface Props {
@@ -23,28 +24,38 @@ export const updateSubscribeFavList = async ({
   callback = () => undefined,
 }: Props): Promise<NoxMedia.Playlist> => {
   progressEmitter(100);
-  const newPlaylist = { ...playlist, lastSubscribed: new Date().getTime() };
-  if (subscribeUrls === undefined) {
-    subscribeUrls = newPlaylist.subscribeUrl;
+  let newPlaylist = { ...playlist, lastSubscribed: new Date().getTime() };
+  if ([PLAYLIST_ENUMS.TYPE_FAVORI_PLAYLIST].includes(playlist.type))
+    throw new Error('[biliSubscribe] incorrect playlist type for subscription');
+  if (playlist.type === PLAYLIST_ENUMS.TYPE_SEARCH_PLAYLIST) {
+    if (!playlist.refresh)
+      throw new Error('[biliSubscribe] nothing to subscribe');
+    newPlaylist = { ...newPlaylist, ...(await playlist.refresh(newPlaylist)) };
+    newPlaylist.songList = newPlaylist.songList.concat(playlist.songList);
+  } else {
+    if (subscribeUrls === undefined) {
+      subscribeUrls = newPlaylist.subscribeUrl;
+    }
+    if (subscribeUrls.length === 0 || subscribeUrls[0].length === 0) {
+      progressEmitter(0);
+      throw new Error('[biliSubscribe] nothing to subscribe');
+    }
+    const favList = [
+      ...newPlaylist.songList.map(val => val.bvid),
+      ...newPlaylist.blacklistedUrl,
+    ];
+    for (const subscribeUrl of subscribeUrls) {
+      newPlaylist.songList = (
+        await searchBiliURLs({
+          input: subscribeUrl,
+          favList,
+          useBiliTag: newPlaylist.useBiliShazam,
+          progressEmitter,
+        })
+      ).songList.concat(newPlaylist.songList);
+    }
   }
-  if (subscribeUrls.length === 0 || subscribeUrls[0].length === 0) {
-    progressEmitter(0);
-    throw new Error('[biliSubscribe] nothing to subscribe');
-  }
-  const favList = [
-    ...newPlaylist.songList.map(val => val.bvid),
-    ...newPlaylist.blacklistedUrl,
-  ];
-  for (let i = 0, n = subscribeUrls.length; i < n; i++) {
-    newPlaylist.songList = (
-      await searchBiliURLs({
-        input: subscribeUrls[i],
-        favList,
-        useBiliTag: newPlaylist.useBiliShazam,
-        progressEmitter,
-      })
-    ).concat(newPlaylist.songList);
-  }
+
   const uniqueSongList = new Map<string, NoxMedia.Song>();
   if (overwriteOnRefresh()) {
     newPlaylist.songList.forEach(song => {

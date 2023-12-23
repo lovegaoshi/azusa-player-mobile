@@ -1,4 +1,4 @@
-import { SORT_OPTIONS } from '@enums/Playlist';
+import { SORT_OPTIONS, PLAYLIST_ENUMS } from '@enums/Playlist';
 
 declare global {
   namespace NoxMedia {
@@ -28,9 +28,9 @@ declare global {
     export interface Playlist {
       title: string;
       id: string;
-      type: string;
+      type: PLAYLIST_ENUMS;
 
-      songList: Array<NoxMedia.Song>;
+      songList: Array<Song>;
 
       subscribeUrl: Array<string>;
       blacklistedUrl: Array<string>;
@@ -41,6 +41,16 @@ declare global {
       newSongOverwrite?: boolean;
 
       sort?: SORT_OPTIONS;
+      // function to support infinite loading; only applicable to
+      // search playlists. bc we stringify playlists, this will be
+      // lost upon loading from storage
+      refresh?: (v: Playlist) => Promise<SearchPlaylist>;
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      refreshToken?: any;
+    }
+
+    export interface SearchPlaylist extends Partial<Playlist> {
+      songList: Array<Song>;
     }
 
     export interface LyricDetail {

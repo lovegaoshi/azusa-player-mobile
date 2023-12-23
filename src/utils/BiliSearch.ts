@@ -36,9 +36,13 @@ interface Props {
 
 export const matchBiliURL = (input: string) => {
   for (const reExtraction of reExtractions) {
-    const reExtracted = reExtraction[0].exec(input);
+    const reExtracted = reExtraction.match.exec(input);
     if (reExtracted !== null) {
-      return { regexFetch: reExtraction[1], reExtracted };
+      return {
+        regexFetch: reExtraction.fetch,
+        reExtracted,
+        refresh: reExtraction.refresh,
+      };
     }
   }
   return null;
@@ -53,23 +57,26 @@ export const searchBiliURLs = async ({
   cookiedSearch = false,
   defaultSearch = SEARCH_OPTIONS.BILIBILI,
 }: Props) => {
+  const results: NoxMedia.SearchPlaylist = {
+    songList: [],
+  };
   try {
     progressEmitter(100);
     const matchRegex = matchBiliURL(input);
     if (matchRegex !== null) {
-      const results = await matchRegex.regexFetch({
+      results.songList = await matchRegex.regexFetch({
         reExtracted: matchRegex.reExtracted,
         progressEmitter,
         favList,
         useBiliTag,
       });
+      results.refresh = matchRegex.refresh;
       progressEmitter(0);
       return results;
     } // bilisearchFetch
-    let results;
     switch (defaultSearch) {
       case SEARCH_OPTIONS.YOUTUBE:
-        results = await ytbsearchFetch.regexFetch({
+        results.songList = await ytbsearchFetch.regexFetch({
           url: input,
           progressEmitter,
           fastSearch,
@@ -77,13 +84,13 @@ export const searchBiliURLs = async ({
         });
         break;
       case MUSICFREE.aggregated:
-        results = await searcher[MUSICFREE.aggregated](
+        results.songList = await searcher[MUSICFREE.aggregated](
           input,
           await getMusicFreePlugin()
         );
         break;
       default:
-        results = await bilisearchFetch.regexFetch({
+        results.songList = await bilisearchFetch.regexFetch({
           url: input,
           progressEmitter,
           fastSearch,
@@ -91,31 +98,63 @@ export const searchBiliURLs = async ({
         });
     }
     progressEmitter(0);
-    return results;
   } catch (err) {
     logger.warn(err);
   }
   progressEmitter(0);
-  return [];
+  return results;
 };
 
-const reExtractions: Array<
-  [RegExp, (props: regexFetchProps) => Promise<NoxMedia.Song[]>]
-> = [
-  [biliseriesFetch.regexSearchMatch, biliseriesFetch.regexFetch],
-  [bilicolleFetch.regexSearchMatch, bilicolleFetch.regexFetch],
-  [bilichannelFetch.regexSearchMatch, bilichannelFetch.regexFetch],
-  [bilichannelAudioFetch.regexSearchMatch, bilichannelAudioFetch.regexFetch],
-  [biliaudioFetch.regexSearchMatch, biliaudioFetch.regexFetch],
-  [bilifavlistFetch.regexSearchMatch, bilifavlistFetch.regexFetch],
-  [bilifavlistFetch.regexSearchMatch2, bilifavlistFetch.regexFetch],
-  [steriatkFetch.regexSearchMatch, steriatkFetch.regexFetch],
-  [steriatkFetch.regexSearchMatch2, steriatkFetch.regexFetch],
-  [ytbmixlistFetch.regexSearchMatch, ytbmixlistFetch.regexFetch],
-  [ytbmixlistFetch.regexSearchMatch2, ytbmixlistFetch.regexFetch],
-  [ytbplaylistFetch.regexSearchMatch, ytbplaylistFetch.regexFetch],
-  [ytbvideoFetch.regexSearchMatch, ytbvideoFetch.regexFetch],
-  [bilivideoFetch.regexSearchMatch, bilivideoFetch.regexFetch],
-  [bililiveFetch.regexSearchMatch, bililiveFetch.regexFetch],
-  [bilisubliveFetch.regexSearchMatch, bilisubliveFetch.regexFetch],
+interface ReExtraction {
+  match: RegExp;
+  fetch: (v: regexFetchProps) => Promise<NoxMedia.Song[]>;
+  refresh?: (v: NoxMedia.Playlist) => Promise<NoxMedia.SearchPlaylist>;
+}
+
+const reExtractions: ReExtraction[] = [
+  {
+    match: biliseriesFetch.regexSearchMatch,
+    fetch: biliseriesFetch.regexFetch,
+  },
+  { match: bilicolleFetch.regexSearchMatch, fetch: bilicolleFetch.regexFetch },
+  {
+    match: bilichannelFetch.regexSearchMatch,
+    fetch: bilichannelFetch.regexFetch,
+  },
+  {
+    match: bilichannelAudioFetch.regexSearchMatch,
+    fetch: bilichannelAudioFetch.regexFetch,
+  },
+  { match: biliaudioFetch.regexSearchMatch, fetch: biliaudioFetch.regexFetch },
+  {
+    match: bilifavlistFetch.regexSearchMatch,
+    fetch: bilifavlistFetch.regexFetch,
+  },
+  {
+    match: bilifavlistFetch.regexSearchMatch2,
+    fetch: bilifavlistFetch.regexFetch,
+  },
+  { match: steriatkFetch.regexSearchMatch, fetch: steriatkFetch.regexFetch },
+  { match: steriatkFetch.regexSearchMatch2, fetch: steriatkFetch.regexFetch },
+  {
+    match: ytbmixlistFetch.regexSearchMatch,
+    fetch: ytbmixlistFetch.regexFetch,
+    refresh: ytbmixlistFetch.refresh,
+  },
+  {
+    match: ytbmixlistFetch.regexSearchMatch2,
+    fetch: ytbmixlistFetch.regexFetch,
+    refresh: ytbmixlistFetch.refresh,
+  },
+  {
+    match: ytbplaylistFetch.regexSearchMatch,
+    fetch: ytbplaylistFetch.regexFetch,
+  },
+  { match: ytbvideoFetch.regexSearchMatch, fetch: ytbvideoFetch.regexFetch },
+  { match: bilivideoFetch.regexSearchMatch, fetch: bilivideoFetch.regexFetch },
+  { match: bililiveFetch.regexSearchMatch, fetch: bililiveFetch.regexFetch },
+  {
+    match: bilisubliveFetch.regexSearchMatch,
+    fetch: bilisubliveFetch.regexFetch,
+  },
 ];
