@@ -7,5 +7,5 @@ export const getR128GainAsync = async (song?: NoxMedia.Song) => {
     song = (await TrackPlayer.getActiveTrack())?.song;
   }
   if (!song) return 0;
-  return getR128Gain(song);
+  return getR128Gain(song) ?? 0;
 };

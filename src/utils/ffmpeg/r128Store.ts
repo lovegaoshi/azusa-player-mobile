@@ -31,7 +31,7 @@ const saveR128Gain = async (val: NoxStorage.R128Dict) => {
 
 export const getR128Gain = (song: NoxMedia.Song) => {
   const { r128gain } = appStore.getState();
-  return r128gain[song.id] ?? 0;
+  return r128gain[song.id];
 };
 
 export const addR128Gain = (song: NoxMedia.Song, gain: number | null) => {
