@@ -86,6 +86,7 @@
     "react-native-paper": "^5.11.4",
     "react-native-qrcode-svg": "^6.2.0",
     "react-native-reanimated": "^3.6.1",
+    "react-native-reanimated-carousel": "^3.5.1",
     "react-native-safe-area-context": "^4.8.0",
     "react-native-screens": "3.29.0",
     "react-native-shadow-2": "^7.0.8",

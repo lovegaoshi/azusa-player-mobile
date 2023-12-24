@@ -11575,6 +11575,11 @@ react-native-qrcode-svg@^6.2.0:
     prop-types "^15.8.0"
     qrcode "^1.5.1"
 
+react-native-reanimated-carousel@^3.5.1:
+  version "3.5.1"
+  resolved "https://registry.npmjs.org/react-native-reanimated-carousel/-/react-native-reanimated-carousel-3.5.1.tgz#3605b9959ffc0aa1c6b8b8736d98f91f46e36b17"
+  integrity sha512-9BBQV6JAYSQm2lV7MFtT4mzapXmW4IZO6s38gfiJL84Jg23ivGB1UykcNQauKgtHyhtW2NuZJzItb1s42lM+hA==
+
 react-native-reanimated@^3.6.1:
   version "3.6.1"
   resolved "https://registry.npmjs.org/react-native-reanimated/-/react-native-reanimated-3.6.1.tgz#5add41efafac6d0befd9786e752e7f26dbe903b7"
