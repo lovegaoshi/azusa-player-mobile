@@ -24,6 +24,7 @@ const { setState } = appStore;
 const getAppStoreState = appStore.getState;
 const getPlayerSetting = playerSettingStore.getState;
 let lastBiliHeartBeat: string[] = ['', ''];
+const lastPlayedDuration: { val?: number } = { val: 0 };
 
 export async function AdditionalPlaybackService({
   noInterruption = false,
@@ -36,14 +37,14 @@ export async function AdditionalPlaybackService({
     if (event.permanent) return TrackPlayer.stop();
   });
 
-  const lastPlayedDuration = [lastPlayDuration];
+  lastPlayedDuration.val = lastPlayDuration;
   TrackPlayer.addEventListener(Event.PlaybackState, event => {
-    if (lastPlayedDuration[0] && event.state === State.Ready) {
+    if (lastPlayedDuration.val && event.state === State.Ready) {
       logger.debug(
         `[Playback] initalized last played duration to ${lastPlayDuration}`
       );
-      TrackPlayer.seekTo(lastPlayedDuration[0]);
-      lastPlayedDuration[0] = null;
+      TrackPlayer.seekTo(lastPlayedDuration.val);
+      lastPlayedDuration.val = undefined;
     }
   });
 }

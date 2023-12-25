@@ -139,6 +139,7 @@ const Home = ({ navigation }: Props) => {
     const options = [
       0, // disabled
       100, // ~500 MB
+      200,
       1000, // ~5 GB
       9999, // 50 GB
     ];
