@@ -32,7 +32,7 @@ export const ffmpegToMP3 = async (fspath: string) => {
 };
 
 export const setTPR128Gain = async (gain: number, fade = 0, init = -1) => {
-  const volume = r128gain2Volume(gain);
+  const volume = r128gain2Volume(gain || 0);
   logger.debug(`[r128gain] set r128gain volume to ${volume} in ${fade}`);
   TrackPlayer.setAnimatedVolume({ volume, duration: fade, init });
 };
@@ -46,6 +46,7 @@ export const setR128Gain = async (
   logger.debug(`[r128gain] set r128gain to ${gain} dB`);
   if (typeof gain === 'string') {
     gain = Number(gain);
+    if (Number.isNaN(gain)) gain = 0;
   }
   if (song.id !== (await TrackPlayer.getActiveTrack())?.song?.id) {
     logger.debug(`${song.parsedName} is no longer the active track.`);

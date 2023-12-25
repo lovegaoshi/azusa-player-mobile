@@ -17,7 +17,7 @@ export interface log {
 
 export const logStore = createStore<{ logs: log[]; logLevel: number }>(() => ({
   logs: [],
-  logLevel: LOGLEVEL.NONE,
+  logLevel: LOGLEVEL.ERROR,
 }));
 
 export const getLog = () => {

@@ -32,7 +32,10 @@ export const parseSongR128gain = async (
     addR128Gain(song, gain);
     setR128Gain(gain, song, fade, init);
   } else {
-    setR128Gain(0, song, fade, init);
+    logger.debug(
+      '[FFMPEG] waiting for r128gain to be parsed. priming to no gain.'
+    );
+    setR128Gain(0, song, 0, init);
   }
   return { playerSetting, cachedR128gain, cachedUrl };
 };

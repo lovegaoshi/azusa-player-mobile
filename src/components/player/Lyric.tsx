@@ -115,6 +115,8 @@ export const LyricView = ({
     };
     (async () => {
       logger.log('Initiating Lyric with new track...');
+      // HACK: UX is too bad if this is not always fetched
+      const lrcOptionPromise = fetchAndSetLyricOptions();
       setCurrentTimeOffset(0);
       setLrcOption(null);
       setLrc('正在加载歌词...');
@@ -122,8 +124,7 @@ export const LyricView = ({
       // Initialize from storage if not new
       const localLrcLoaded = await loadLocalLrc();
       if (!localLrcLoaded) {
-        const lrcOptionPromise = await fetchAndSetLyricOptions();
-        searchAndSetCurrentLyric(undefined, lrcOptionPromise);
+        lrcOptionPromise.then(v => searchAndSetCurrentLyric(undefined, v));
       }
     })();
   }, [track]);
