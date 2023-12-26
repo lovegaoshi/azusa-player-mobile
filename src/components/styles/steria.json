@@ -1822,6 +1822,9 @@
       "darkTheme": true
     },
     "gifs": [
+      "https://i0.hdslb.com/bfs/new_dyn/f1ff634e41e87905bd9d0a5400873335402110060.jpg",
+      "https://i0.hdslb.com/bfs/new_dyn/478e55c353a8e9eb5dff21c99dcf5b6f402110060.jpg",
+      "https://i0.hdslb.com/bfs/new_dyn/51f329f41e8bb4cea67001a5ac07e459402110060.jpg",
       "https://album.biliimg.com/bfs/new_dyn/c89835acff27358b13f586a4bdfc25a2402110060.jpg",
       "https://i0.hdslb.com/bfs/new_dyn/0bd401305b3ac380735f2d5e28c1323b1145870530.jpg",
       "https://i0.hdslb.com/bfs/new_dyn/1d2042e2899a335576cc2676b06b7f4e1145870530.jpg",
@@ -1862,6 +1865,9 @@
         "type": "bvid",
         "identifier": "BV1eH4y1m71q"
       }
+    ],
+    "backgroundImagesLandscape": [
+      "https://i0.hdslb.com/bfs/new_dyn/a9459a7b575f7404e6fde8689ecaaf06402110060.png"
     ],
     "customColors": {
       "maskedBackgroundColor": "rgba(0, 0, 0, 0.60)",
