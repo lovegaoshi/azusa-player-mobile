@@ -10,6 +10,8 @@ interface NoxPlaylistStore {
   playingListShuffled: Array<NoxMedia.Song>;
   currentPlayingIndex: number;
   // TODO: depreciate useApp's currentPlayingId
+  // watch out for the things needed to be added like
+  // saveLastPlayedSongId, etc  set in useApp.
   currentPlayingId: string;
   playmode: NoxRepeatMode;
 }

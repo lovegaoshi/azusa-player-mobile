@@ -168,7 +168,6 @@ export const useNoxSetting = create<NoxSetting>((set, get) => ({
     set(state => ({ playlistShouldReRender: !state.playlistShouldReRender })),
 
   currentPlayingId: '',
-  // MOCK: is it slow? GeT a BeTtEr PhOnE
   setCurrentPlayingId: (val: string) => {
     set({ currentPlayingId: val });
     savelastPlaylistId([get().currentPlayingList.id, val]);
