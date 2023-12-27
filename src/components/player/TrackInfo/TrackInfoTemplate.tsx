@@ -13,9 +13,10 @@ import {
 import type { Track } from 'react-native-track-player';
 import { Image } from 'expo-image';
 import MarqueeText from 'react-native-text-ticker';
+import { useStore } from 'zustand';
 
 import { useNoxSetting } from '@stores/useApp';
-import { getCurrentTPQueue } from '@stores/playingList';
+import NoxPlayingList from '@stores/playingList';
 import SongMenuButton from './SongMenuButton';
 import FavReloadButton from './FavReloadButton';
 
@@ -38,21 +39,22 @@ const TrackInfoTemplate: React.FC<Props> = ({
   const playerSetting = useNoxSetting(state => state.playerSetting);
   const playerStyle = useNoxSetting(state => state.playerStyle);
   const currentPlayingList = useNoxSetting(state => state.currentPlayingList);
+  const currentPlayingIndex = useStore(
+    NoxPlayingList,
+    s => s.currentPlayingIndex
+  );
   const coverStyle = {
     width: windowWidth || '100%',
     height: windowHeight || '100%',
   };
 
   const getTrackLocation = () => {
-    const currentTPQueue = getCurrentTPQueue();
     return track?.song
       ? `#${
           currentPlayingList.songList.findIndex(
             song => song.id === track.song.id
           ) + 1
-        } - ${
-          currentTPQueue.findIndex(song => song.id === track.song.id) + 1
-        }/${currentTPQueue.length}`
+        } - ${currentPlayingIndex + 1}/${currentPlayingList.songList.length}`
       : '';
   };
 

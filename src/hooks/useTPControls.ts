@@ -3,7 +3,7 @@ import { useStore } from 'zustand';
 
 import { biliSuggest } from '@utils/Bilibili/BiliOperate';
 import { useNoxSetting } from '@stores/useApp';
-import noxPlayingList, { getCurrentTPQueue } from '@stores/playingList';
+import noxPlayingList, { playNextSong } from '@stores/playingList';
 import biliavideo from '@utils/mediafetch/biliavideo';
 import { randomChoice, regexMatchOperations } from '@utils/Utils';
 import { NoxRepeatMode } from '@enums/RepeatMode';
@@ -11,7 +11,6 @@ import { songlistToTracklist } from '@utils/RNTPUtils';
 import appStore from '@stores/appStore';
 import ytbvideoFetch from '@utils/mediafetch/ytbvideo';
 
-const { getState } = noxPlayingList;
 const setAppStore = appStore.setState;
 const regexResolveURLs: NoxUtils.RegexMatchSuggest<NoxMedia.Song> = [
   [ytbvideoFetch.regexResolveURLMatch, ytbvideoFetch.suggest],
@@ -20,11 +19,7 @@ const regexResolveURLs: NoxUtils.RegexMatchSuggest<NoxMedia.Song> = [
 const musicTids = [130, 29, 59, 31, 193, 30, 194, 28];
 
 export default () => {
-  const currentPlayingId = useNoxSetting(state => state.currentPlayingId);
   const playerSetting = useNoxSetting(state => state.playerSetting);
-  const findCurrentPlayIndex = (queue = getCurrentTPQueue()) => {
-    return queue.findIndex(val => val.id === currentPlayingId);
-  };
   const fadeIntervalMs = useStore(appStore, state => state.fadeIntervalMs);
 
   const getBiliSuggest = async () => {
@@ -73,7 +68,7 @@ export default () => {
   };
 
   const skipToBiliSuggest = async (next = true) => {
-    if (getState().playmode !== NoxRepeatMode.SUGGEST) {
+    if (noxPlayingList.getState().playmode !== NoxRepeatMode.SUGGEST) {
       throw new Error('playmode is not bilisuggest.');
     }
     const suggestedSong = [await getBiliSuggest()];
@@ -85,40 +80,27 @@ export default () => {
   };
 
   const prepareSkipToNext = async () => {
+    const nextSong = playNextSong();
     if (
       (await TrackPlayer.getActiveTrackIndex()) ===
       (await TrackPlayer.getQueue()).length - 1
     ) {
-      const currentTPQueue = getCurrentTPQueue();
-      let nextIndex = findCurrentPlayIndex(currentTPQueue) + 1;
-      if (nextIndex > currentTPQueue.length - 1) {
-        nextIndex = 0;
-      }
       try {
         await skipToBiliSuggest();
       } catch {
         // TODO: this will just grow infinitely. WTF was i thinking?
-        await TrackPlayer.add(
-          await songlistToTracklist([currentTPQueue[nextIndex]])
-        );
+        await TrackPlayer.add(await songlistToTracklist([nextSong]));
       }
     }
   };
 
   const prepareSkipToPrevious = async () => {
+    const nextSong = playNextSong(-1);
     if ((await TrackPlayer.getActiveTrackIndex()) === 0) {
-      const currentTPQueue = getCurrentTPQueue();
-      let nextIndex = findCurrentPlayIndex(currentTPQueue) - 1;
-      if (nextIndex < 0) {
-        nextIndex = currentTPQueue.length - 1;
-      }
       try {
         await skipToBiliSuggest(false);
       } catch {
-        await TrackPlayer.add(
-          await songlistToTracklist([currentTPQueue[nextIndex]]),
-          0
-        );
+        await TrackPlayer.add(await songlistToTracklist([nextSong]), 0);
       }
     }
   };

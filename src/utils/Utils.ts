@@ -36,9 +36,13 @@ export const timestampToSeconds = (timestamp: string) => {
   return seconds;
 };
 
-export function randomChoice<T>(list: Array<T>) {
-  return list[Math.floor(Math.random() * list.length) >> 0];
-}
+export const randomNumber = (v: number) => {
+  return Math.floor(Math.random() * v) >> 0;
+};
+
+export const randomChoice = <T>(list: Array<T>) => {
+  return list[randomNumber(list.length)];
+};
 
 export const rgb2rgba = (rgb: string, a = 1) => {
   const extractedRGB = [...rgb.matchAll(/(\d+)/g)];
@@ -83,9 +87,9 @@ export const charLength = (str: string) => {
   return str.replace(/[\u0300-\u036f]/g, '').length;
 };
 
-export function timeout(delay: number) {
+export const timeout = (delay: number) => {
   return new Promise(res => setTimeout(res, delay));
-}
+};
 
 interface regexMatchOperationsProps<K, T> {
   song: K;
