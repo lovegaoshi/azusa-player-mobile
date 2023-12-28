@@ -307,7 +307,7 @@ export const useNoxSetting = create<NoxSetting>((set, get) => ({
       cookies: val.cookies,
       language: val.settings.language,
       lastPlayDuration: val.lastPlayDuration,
-      playbackMode: val.playerRepeat,
+      playbackMode: val.playbackMode,
     };
   },
 

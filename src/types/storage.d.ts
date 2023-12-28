@@ -2,6 +2,7 @@
 import { ColorSchemeName } from 'react-native';
 
 import { EXPORT_OPTIONS } from '../enums/Sync';
+import { NoxRepeatMode } from '../enums/RepeatMode';
 declare global {
   namespace NoxStorage {
     export interface PlayerSettingDict {
@@ -22,9 +23,7 @@ declare global {
       hideCoverInMobile: boolean;
       loadPlaylistAsArtist: boolean;
       sendBiliHeartbeat: boolean;
-      // TODO: implement this feature
       noCookieBiliSearch: boolean;
-      // TODO: implement this feature
       dataSaver: boolean;
       fastBiliSearch: boolean;
       noInterruption: boolean;
@@ -50,7 +49,7 @@ declare global {
       lastPlaylistId: [string, string];
       searchPlaylist: NoxMedia.Playlist;
       favoriPlaylist: NoxMedia.Playlist;
-      playerRepeat: string;
+      playbackMode: NoxRepeatMode;
       skin: NoxTheme.Style;
       skins: any[];
       // site: set-cookie header
@@ -69,7 +68,7 @@ declare global {
       cookies: { [key: string]: string };
       language?: string;
       lastPlayDuration: number;
-      playbackMode: string;
+      playbackMode: NoxRepeatMode;
     }
 
     export interface R128Dict {

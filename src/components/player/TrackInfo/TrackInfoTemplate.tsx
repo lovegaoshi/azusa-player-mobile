@@ -13,7 +13,6 @@ import {
 import type { Track } from 'react-native-track-player';
 import { Image } from 'expo-image';
 import MarqueeText from 'react-native-text-ticker';
-import { useStore } from 'zustand';
 
 import { useNoxSetting } from '@stores/useApp';
 import NoxPlayingList from '@stores/playingList';
@@ -39,10 +38,6 @@ const TrackInfoTemplate: React.FC<Props> = ({
   const playerSetting = useNoxSetting(state => state.playerSetting);
   const playerStyle = useNoxSetting(state => state.playerStyle);
   const currentPlayingList = useNoxSetting(state => state.currentPlayingList);
-  const currentPlayingIndex = useStore(
-    NoxPlayingList,
-    s => s.currentPlayingIndex
-  );
   const coverStyle = {
     width: windowWidth || '100%',
     height: windowHeight || '100%',
@@ -54,7 +49,9 @@ const TrackInfoTemplate: React.FC<Props> = ({
           currentPlayingList.songList.findIndex(
             song => song.id === track.song.id
           ) + 1
-        } - ${currentPlayingIndex + 1}/${currentPlayingList.songList.length}`
+        } - ${NoxPlayingList.getState().currentPlayingIndex + 1}/${
+          currentPlayingList.songList.length
+        }`
       : '';
   };
 

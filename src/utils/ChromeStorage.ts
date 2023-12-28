@@ -325,7 +325,7 @@ export const initPlayerObject =
         STORAGE_KEYS.FAVORITE_PLAYLIST_KEY,
         () => dummyPlaylist('Favorite', PLAYLIST_ENUMS.TYPE_FAVORI_PLAYLIST)
       ),
-      playerRepeat: await getItem(
+      playbackMode: await getItem(
         STORAGE_KEYS.PLAYMODE_KEY,
         NoxRepeatMode.SHUFFLE
       ),
