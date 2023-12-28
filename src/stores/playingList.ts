@@ -2,6 +2,7 @@
 import { createStore } from 'zustand/vanilla';
 import TrackPlayer, { RepeatMode } from 'react-native-track-player';
 
+import { clearPlaylistUninterrupted } from '@utils/RNTPUtils';
 import { NoxRepeatMode } from '../enums/RepeatMode';
 import { savePlayMode } from '@utils/ChromeStorage';
 
@@ -127,6 +128,7 @@ export const initializePlaybackMode = (state: NoxRepeatMode) => {
   playlistStore.setState({ playmode: state });
   if (RefreshPlayingIndex.includes(state)) {
     setPlayingIndex(0, playlistStore.getState().currentPlayingId);
+    clearPlaylistUninterrupted();
   }
   savePlayMode(state);
   TrackPlayer.setRepeatMode(TPRepeatMode);
