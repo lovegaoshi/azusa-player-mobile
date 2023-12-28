@@ -43,8 +43,7 @@ const CombinedDefaultTheme = merge(MD3LightTheme, LightTheme);
 const CombinedDarkTheme = merge(MD3DarkTheme, DarkTheme);
 const PlayerStyle = { backgroundColor: 'transparent' };
 
-interface Props {
-  navigation: DrawerNavigationProp<ParamListBase>;
+interface Props extends NoxComponent.NavigationProps {
   setNavigation?: (val: DrawerNavigationProp<ParamListBase>) => void;
 }
 const NoxPlayer = ({ navigation, setNavigation = () => undefined }: Props) => {
@@ -79,9 +78,8 @@ const AzusaPlayer = () => {
     ? CombinedDarkTheme
     : CombinedDefaultTheme;
   const insets = useSafeAreaInsets();
-  const [navigation, setNavigation] = React.useState<
-    DrawerNavigationProp<ParamListBase> | undefined
-  >(undefined);
+  const [navigation, setNavigation] =
+    React.useState<DrawerNavigationProp<ParamListBase>>();
 
   const NoxPlayerWrapper = ({ navigation }: Props) =>
     NoxPlayer({ navigation, setNavigation });

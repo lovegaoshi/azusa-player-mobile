@@ -1,17 +1,12 @@
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
 import { IconButton } from 'react-native-paper';
-import { useNavigation, ParamListBase } from '@react-navigation/native';
-import { DrawerNavigationProp } from '@react-navigation/drawer';
+import { useNavigation } from '@react-navigation/native';
 import { ViewEnum } from '@enums/View';
 import { useNoxSetting } from '@stores/useApp';
 import RandomGIFButton from '../buttons/RandomGIF';
 
-interface Props {
-  navigation: DrawerNavigationProp<ParamListBase>;
-}
-
-export default ({ navigation }: Props) => {
+export default ({ navigation }: NoxComponent.NavigationProps) => {
   const navigationGlobal = useNavigation();
   const playerStyle = useNoxSetting(state => state.playerStyle);
   const currentPlayingId = useNoxSetting(state => state.currentPlayingId);

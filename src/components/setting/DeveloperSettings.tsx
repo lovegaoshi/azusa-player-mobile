@@ -7,8 +7,6 @@ import { APPSTORE } from '@env';
 import { useStore } from 'zustand';
 import * as Clipboard from 'expo-clipboard';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { DrawerNavigationProp } from '@react-navigation/drawer';
-import { ParamListBase } from '@react-navigation/native';
 
 import { useNoxSetting } from '@stores/useApp';
 import { logStore, LOGLEVEL, getLog, resetLog } from '@utils/Logger';
@@ -71,10 +69,7 @@ const developerSettings: { [key: string]: SettingEntry } = {
 
 const { getState, setState } = logStore;
 
-interface Props {
-  navigation: DrawerNavigationProp<ParamListBase>;
-}
-const Home = ({ navigation }: Props) => {
+const Home = ({ navigation }: NoxComponent.NavigationProps) => {
   const playerSetting = useNoxSetting(state => state.playerSetting);
   const setPlayerSetting = useNoxSetting(state => state.setPlayerSetting);
   const { t } = useTranslation();

@@ -1,11 +1,8 @@
 import React from 'react';
 import { StyleSheet, View, Platform } from 'react-native';
 import { IconButton } from 'react-native-paper';
-import { useNavigation, ParamListBase } from '@react-navigation/native';
-import {
-  DrawerNavigationProp,
-  getDrawerStatusFromState,
-} from '@react-navigation/drawer';
+import { useNavigation } from '@react-navigation/native';
+import { getDrawerStatusFromState } from '@react-navigation/drawer';
 
 import { ViewEnum } from '@enums/View';
 import { useNoxSetting } from '@stores/useApp';
@@ -32,10 +29,7 @@ enum Routes {
   setting = 'cog',
 }
 
-interface Props {
-  navigation?: DrawerNavigationProp<ParamListBase>;
-}
-const NoxAndroidBottomTab = ({ navigation }: Props) => {
+const NoxAndroidBottomTab = ({ navigation }: NoxComponent.NavigationProps2) => {
   const navigationGlobal = useNavigation();
   const playerStyle = useNoxSetting(state => state.playerStyle);
   const gestureMode = useNoxSetting(state => state.gestureMode);
