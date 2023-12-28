@@ -34,7 +34,7 @@ export function Player({ navigation }: NoxComponent.NavigationProps) {
     <SafeAreaView style={playerStyle.screenContainer}>
       <StatusBar barStyle={'light-content'} />
       <View style={playerStyle.contentContainer}>
-        <PlayerTopInfo navigation={navigation}></PlayerTopInfo>
+        <PlayerTopInfo navigation={navigation} />
         <TrackInfo track={track} />
       </View>
     </SafeAreaView>

@@ -1,15 +1,11 @@
 import React from 'react';
-import TrackPlayer, { Track } from 'react-native-track-player';
+import TrackPlayer from 'react-native-track-player';
 
 import LottieButton from '@components/buttons/LottieButton';
 import { resetResolvedURL } from '@stores/appStore';
 import { resolveAndCache } from '@utils/RNTPUtils';
 
-interface Props {
-  track?: Track;
-}
-
-export default ({ track }: Props) => {
+export default ({ track }: NoxComponent.TrackProps) => {
   const song = track?.song as NoxMedia.Song;
 
   const onClick = async () => {
