@@ -19,7 +19,7 @@ import { setPlayerSetting as setPlayerSettingVanilla } from './playerSettingStor
 import { savePlayerStyle } from '@utils/StyleStorage';
 import { createStyle } from '@components/style';
 import { getABRepeatRaw } from './appStore';
-import { setPlayingList } from '@stores/playingList';
+import { setPlayingList, setPlayingIndex } from '@stores/playingList';
 import DummyLyricDetail from '../objects/LyricDetail';
 
 interface NoxSetting {
@@ -168,7 +168,6 @@ export const useNoxSetting = create<NoxSetting>((set, get) => ({
     set(state => ({ playlistShouldReRender: !state.playlistShouldReRender })),
 
   currentPlayingId: '',
-  // MOCK: is it slow? GeT a BeTtEr PhOnE
   setCurrentPlayingId: (val: string) => {
     set({ currentPlayingId: val });
     savelastPlaylistId([get().currentPlayingList.id, val]);
@@ -298,6 +297,7 @@ export const useNoxSetting = create<NoxSetting>((set, get) => ({
     setPlayingList(
       (val.playlists[val.lastPlaylistId[0]] || val.searchPlaylist).songList
     );
+    setPlayingIndex(0, val.lastPlaylistId[1]);
 
     return {
       playlists: val.playlists,
@@ -307,7 +307,7 @@ export const useNoxSetting = create<NoxSetting>((set, get) => ({
       cookies: val.cookies,
       language: val.settings.language,
       lastPlayDuration: val.lastPlayDuration,
-      playbackMode: val.playerRepeat,
+      playbackMode: val.playbackMode,
     };
   },
 

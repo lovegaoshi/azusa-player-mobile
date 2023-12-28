@@ -11,7 +11,7 @@ import {
   playSongInterrupted,
 } from '@utils/RNTPUtils';
 import { NoxRepeatMode } from '@enums/RepeatMode';
-import noxPlayingList from '@stores/playingList';
+import noxPlayingList, { setPlayingIndex } from '@stores/playingList';
 import noxCache from '@utils/Cache';
 import useDataSaver from './useDataSaver';
 
@@ -66,6 +66,7 @@ const usePlayback = () => {
         song = randomChoice(playlist.songList);
       }
     }
+    setPlayingIndex(0, song.id);
     // HACK: track?.song? is somehow updated already here
     // TODO: fix this
     setCurrentPlayingId(song.id);

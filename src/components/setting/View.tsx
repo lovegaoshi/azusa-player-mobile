@@ -18,10 +18,7 @@ import Bilibili from '../login/Bilibili';
 
 enum ICONS {
   HOME = 'cog',
-  // TODO: need to figure out the skin object story first before implementing this
   SKIN = 'palette',
-  // TODO: need to figure out bili SESSIONDATA first before implementing this.
-  // though a good time to think about oauth2 now
   BACKUP = 'backup-restore',
   INFO = 'information',
   DEVELOPER = 'application-brackets',

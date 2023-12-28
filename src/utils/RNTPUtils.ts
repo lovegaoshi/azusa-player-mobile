@@ -71,7 +71,7 @@ export const animatedVolumeChange = ({
 /**
  * see export function useSetupPlayer.
  * wait SetupService(serviceOptions) is called after await initPlayer(await initPlayerObject())
- * and because initializePlaybackMode(val.playerRepeat) is called within initPlayer
+ * and because initializePlaybackMode(val.playbackMode) is called within initPlayer
  * playlistStore.playmode is already set
  * this should return the correct icon for playback mode.
  */

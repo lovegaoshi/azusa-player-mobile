@@ -53,7 +53,6 @@ const SongInfo = ({
       : item.name;
   const id = item.id;
   let artist = item.singer;
-  // TODO: not really useful for me at least. maybe good enough for some?
   artist =
     item.album && item.parsedName !== item.album
       ? artist + ' - ' + item.album

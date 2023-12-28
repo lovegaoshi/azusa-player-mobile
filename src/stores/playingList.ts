@@ -8,16 +8,52 @@ import { savePlayMode } from '@utils/ChromeStorage';
 interface NoxPlaylistStore {
   playingList: Array<NoxMedia.Song>;
   playingListShuffled: Array<NoxMedia.Song>;
-  playmode: string;
-  setPlaymode: (val: string) => void;
+  currentPlayingIndex: number;
+  // TODO: depreciate useApp's currentPlayingId
+  // watch out for the things needed to be added like
+  // saveLastPlayedSongId, etc  set in useApp.
+  currentPlayingId: string;
+  playmode: NoxRepeatMode;
 }
 
-const playlistStore = createStore<NoxPlaylistStore>(set => ({
+const playlistStore = createStore<NoxPlaylistStore>(() => ({
   playingList: [],
   playingListShuffled: [],
+  currentPlayingIndex: -1,
+  currentPlayingId: '',
   playmode: NoxRepeatMode.SHUFFLE,
-  setPlaymode: (val: string) => set({ playmode: val }),
 }));
+
+export const setPlayingIndex = (index = 0, songId?: string) => {
+  if (songId) {
+    index = getCurrentTPQueue().findIndex(v => v.id === songId);
+  } else {
+    songId = getCurrentTPQueue()[index].id;
+  }
+  playlistStore.setState({
+    currentPlayingIndex: index,
+    currentPlayingId: songId,
+  });
+};
+
+/**
+ * WARN: actually moves currentPlayingIndex
+ * @param direction
+ */
+export const playNextIndex = (direction = 1, set = true) => {
+  const { currentPlayingIndex, playingList } = playlistStore.getState();
+  let newIndex = currentPlayingIndex + direction;
+  if (newIndex < 0) {
+    newIndex = playingList.length - 1;
+  } else if (newIndex >= playingList.length) {
+    newIndex = 0;
+  }
+  if (set) setPlayingIndex(newIndex);
+  return newIndex;
+};
+
+export const playNextSong = (direction = 1, set = true) =>
+  getCurrentTPQueue()[playNextIndex(direction, set)];
 
 export const setPlayingList = (list: Array<NoxMedia.Song>) => {
   playlistStore.setState({
@@ -26,9 +62,10 @@ export const setPlayingList = (list: Array<NoxMedia.Song>) => {
   });
 };
 
-export const getCurrentTPQueue = () => {
+export const getCurrentTPQueue = (playmode?: NoxRepeatMode) => {
   const state = playlistStore.getState();
-  if (state.playmode === NoxRepeatMode.SHUFFLE) {
+  if (!playmode) playmode = state.playmode;
+  if (playmode === NoxRepeatMode.SHUFFLE) {
     return state.playingListShuffled;
   }
   return state.playingList;
@@ -39,7 +76,7 @@ export const getNextSong = (song: NoxMedia.Song) => {
   const queue = getCurrentTPQueue();
   const index = queue.findIndex(val => val.id === songId) + 1;
   if (index === 0) {
-    return null;
+    return;
   }
   if (index >= queue.length) {
     return queue[0];
@@ -80,13 +117,17 @@ export const getPlaybackModeNotifIcon = (
   return [nextIcon, TPRepeatMode];
 };
 
+const RefreshPlayingIndex = [NoxRepeatMode.SHUFFLE, NoxRepeatMode.REPEAT];
 /**
  * calls TP.setRepeatMode by the input repeat mode, saves repeat mode into asnycStorage, then
  * returns the icon associated with the repeat mode (for notification bar).
  */
-export const initializePlaybackMode = (state: string) => {
+export const initializePlaybackMode = (state: NoxRepeatMode) => {
   const [nextIcon, TPRepeatMode] = getPlaybackModeNotifIcon(state);
   playlistStore.setState({ playmode: state });
+  if (RefreshPlayingIndex.includes(state)) {
+    setPlayingIndex(0, playlistStore.getState().currentPlayingId);
+  }
   savePlayMode(state);
   TrackPlayer.setRepeatMode(TPRepeatMode);
   return nextIcon;
