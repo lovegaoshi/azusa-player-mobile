@@ -819,5 +819,110 @@
       "backdrop": "rgba(49, 49, 37, 0.4)"
     },
     "thumbupSVGA": "https://i0.hdslb.com/bfs/garb/item/09e58b7d8c1acb98875f48b600ca71f6c118f410.bin"
+  },
+  {
+    "metaData": {
+      "themeName": "RO姬偶像收藏集",
+      "themeDesc": "【RO姬偶像收藏集】是哔哩哔哩携手RO姬_Official定制打造的个人数字集卡，每张卡片都定格了RO姬绝赞的偶像瞬间，期待大家一起来探索RO姬的绝美画卷！",
+      "themeAuthor": "NoxAutoGen",
+      "themeIcon": "https://i0.hdslb.com/bfs/garb/1ebfc9982ca7a9bdd1b63aeb57fae727709cfc32.png",
+      "darkTheme": true
+    },
+    "gifs": [
+      "https://i0.hdslb.com/bfs/garb/2b0028ee94bbc40cf902ce090db67bc37bf4be27.png",
+      "https://i0.hdslb.com/bfs/garb/af97729893df669491114d9dcd33f5257396cc89.png",
+      "https://i0.hdslb.com/bfs/garb/90390062a3c023c1b50d4c8c22f8591d7befb827.png",
+      "https://i0.hdslb.com/bfs/garb/5698951db7846e7d56f54ed22c500e9807f7e077.png",
+      "https://i0.hdslb.com/bfs/garb/19dfb7e5298365a011f3f68b01eafe686253ab2e.png",
+      "https://i0.hdslb.com/bfs/garb/b8d8f9d9c7ef29824fee5f9369941175123df2bc.png",
+      "https://i0.hdslb.com/bfs/garb/7768d328b2ec42e6d96759044ad134f1c675ce7b.png",
+      "https://i0.hdslb.com/bfs/garb/c23560c231ce8f7a892ee8ccb368662cf1663c1b.png",
+      "https://i0.hdslb.com/bfs/garb/98fb373a6309dcc1c7eb2f669560423def73c73a.png",
+      "https://i0.hdslb.com/bfs/garb/01337c838f8fc5aa84c84643c7e2b9361e4eb59a.png",
+      "https://i0.hdslb.com/bfs/garb/d6d6fbe288334149da98b4d9dfa543aab2911794.png",
+      "https://i0.hdslb.com/bfs/garb/c9cc0e75d6ac990fec5f5724e740c1e047fded8e.png",
+      "https://i0.hdslb.com/bfs/garb/ac41e6316f037b6f259e4271de4ac919dd605ba2.png",
+      "https://i0.hdslb.com/bfs/garb/4c699b002401493e8d70c6669df4e62354478138.png",
+      "https://i0.hdslb.com/bfs/garb/e1632a190df9221030fe56e3d78cc3e05ba95731.png",
+      "https://i0.hdslb.com/bfs/garb/baabe4a9822e7b894a1b55a7d9cbb0dfeef9b21e.png",
+      "https://i0.hdslb.com/bfs/garb/e1d5f3995f1ea5722b92eaa3a6a0c50ed8098788.png",
+      "https://i0.hdslb.com/bfs/garb/a1c923611e373f5d68ee2d4c973ff5b2d4966e78.png",
+      "https://i0.hdslb.com/bfs/garb/ccac8fbe496e5d54c73707482c7b5836e6af7cd0.png",
+      "https://i0.hdslb.com/bfs/garb/6faa4517b2a51c912b2f33bd8ace2c403dc9fa5e.png"
+    ],
+    "backgroundImages": [
+      "https://i0.hdslb.com/bfs/garb/item/62cd3a1fc7d2086e6b1b2ad5c89da077c705d5b2.png",
+      {
+        "type": "biliNFTVideo",
+        "identifier": "[\"100600\",\"赛博魅影\"]"
+      },
+      {
+        "type": "biliNFTVideo",
+        "identifier": "[\"100600\",\"雪夜恋歌\"]"
+      },
+      {
+        "type": "biliNFTVideo",
+        "identifier": "[\"100600\",\"休憩时光\"]"
+      },
+      "https://i0.hdslb.com/bfs/garb/open/a2854235e4d00e76a1215a945289ba65d1e770f6.png",
+      "https://i0.hdslb.com/bfs/garb/open/008257e71d681af848e7f525c13fbe93b780b057.png",
+      "https://i0.hdslb.com/bfs/garb/open/b7a923030a632027f61948b7a16f2672862181d2.png",
+      "https://i0.hdslb.com/bfs/garb/open/dfeac52c93d856721d8ebf79942cea15f280bde1.png",
+      "https://i0.hdslb.com/bfs/garb/open/d5d49b1a531e1ea213b344efe79e045a02507509.png",
+      "https://i0.hdslb.com/bfs/garb/open/37bbd428e904f5c0fbe34f61c2e41ac7b26dce99.png"
+    ],
+    "customColors": {
+      "maskedBackgroundColor": "rgba(0, 0, 0, 0.60)",
+      "playlistDrawerBackgroundColor": "green",
+      "playlistDrawerBackgroundColorTransparent": "rgba(0, 255, 0, 0.35)",
+      "progressThumbTintColor": "rgb(235, 235, 0)",
+      "progressMinimumTrackTintColor": "rgb(235, 235, 0)",
+      "progressMaximumTrackTintColor": "#FFFFFF",
+      "btnBackgroundColor": "rgb(72, 71, 58)",
+      "textInputSelectionColor": "green"
+    },
+    "colors": {
+      "primary": "rgb(255, 255, 0)",
+      "onPrimary": "rgb(50, 50, 0)",
+      "primaryContainer": "rgb(73, 73, 0)",
+      "onPrimaryContainer": "rgb(234, 234, 0)",
+      "secondary": "rgb(202, 200, 165)",
+      "onSecondary": "rgb(50, 50, 24)",
+      "secondaryContainer": "rgb(73, 72, 45)",
+      "onSecondaryContainer": "rgb(231, 228, 191)",
+      "tertiary": "rgb(164, 208, 189)",
+      "onTertiary": "rgb(11, 55, 42)",
+      "tertiaryContainer": "rgb(37, 78, 64)",
+      "onTertiaryContainer": "rgb(191, 236, 216)",
+      "error": "rgb(255, 180, 171)",
+      "onError": "rgb(105, 0, 5)",
+      "errorContainer": "rgb(147, 0, 10)",
+      "onErrorContainer": "rgb(255, 180, 171)",
+      "background": "rgba(0,0,0, 0.4)",
+      "onBackground": "rgb(230, 226, 217)",
+      "surface": "rgb(28, 28, 23)",
+      "onSurface": "rgba(235, 235, 0, 1)",
+      "text": "rgb(255, 255, 0)",
+      "surfaceVariant": "rgb(10, 10, 10)",
+      "onSurfaceVariant": "rgb(225, 225, 0)",
+      "outline": "rgb(147, 145, 130)",
+      "outlineVariant": "rgb(72, 71, 58)",
+      "shadow": "rgb(0, 0, 0)",
+      "scrim": "rgb(0, 0, 0)",
+      "inverseSurface": "rgb(230, 226, 217)",
+      "inverseOnSurface": "rgb(49, 49, 43)",
+      "inversePrimary": "rgb(98, 98, 0)",
+      "elevation": {
+        "level0": "transparent",
+        "level1": "rgb(53, 56, 57)",
+        "level2": "rgb(10, 10, 10)",
+        "level3": "rgb(10, 10, 10)",
+        "level4": "rgb(49, 49, 20)",
+        "level5": "rgb(53, 53, 20)"
+      },
+      "surfaceDisabled": "rgba(230, 226, 217, 0.12)",
+      "onSurfaceDisabled": "rgba(230, 226, 217, 0.38)",
+      "backdrop": "rgba(49, 49, 37, 0.4)"
+    }
   }
 ]

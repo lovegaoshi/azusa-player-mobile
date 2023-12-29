@@ -6,12 +6,6 @@ import fs from 'fs';
 import SteriaTheme from './SteriaTheme.js';
 import SteriaThemeDark from './SteriaThemeDark.js';
 
-/**
- * 
-https://api.bilibili.com/x/vas/dlc_act/act/basic?act_id={藏品id}
-https://api.bilibili.com/x/vas/dlc_act/act/item/list?act_id={藏品id}
- */
-
 const parser = new ArgumentParser({
   description: 'Argparse example',
 });
@@ -39,17 +33,36 @@ const listReq = await axios.get(
 );
 
 const garbdata = basicReq.data.data;
+const garblistdata = listReq.data.data;
 const parsedGarbData = {
   themeName: garbdata.act_title,
   themeDesc: garbdata.product_introduce,
-  gifs: garbdata.suit_items.emoji_package[0].items.map(
-    val => val.properties.image
+  gifs: [],
+  themeIcon: garbdata.act_y_img,
+  portraits: garblistdata.item_list.map(item =>
+    item.card_item.video_list
+      ? {
+          type: 'biliNFTVideo',
+          identifier: `["${args.garbid}","${item.card_item.card_name}"]`,
+        }
+      : item.card_item.card_img
   ),
-  portraits: Object.keys(garbdata.suit_items.space_bg[0].properties)
-    .filter(val => val.includes('_portrait'))
-    .map(val => garbdata.suit_items.space_bg[0].properties[val]),
-  themeIcon: garbdata.fan_user.avatar,
 };
+
+const emojiId = garbdata.collect_list.filter(v =>
+  v.redeem_item_name.includes('表情包')
+)[0]?.redeem_item_id;
+
+if (emojiId) {
+  const realEmojiId = (
+    await axios.get(`https://bili-nft.vercel.app/get-emote/?mid=${emojiId}`)
+  ).data.id;
+  parsedGarbData.gifs = (
+    await axios.get(
+      `https://api.bilibili.com/x/emote/package?business=reply&ids=${realEmojiId}`
+    )
+  ).data.data.packages[0].emote.map(v => v.url);
+}
 
 const convertedGarbData = args.lighttheme ? SteriaTheme : SteriaThemeDark;
 
@@ -58,17 +71,8 @@ convertedGarbData.metaData.themeDesc = parsedGarbData.themeDesc;
 convertedGarbData.metaData.themeAuthor = 'NoxAutoGen';
 convertedGarbData.metaData.themeIcon = parsedGarbData.themeIcon;
 convertedGarbData.gifs = parsedGarbData.gifs;
-convertedGarbData.backgroundImages = parsedGarbData.headmp4
-  ? [
-      ...parsedGarbData.portraits,
-      {
-        type: 'biliGarbHeadVideo',
-        identifier: args.garbid,
-      },
-    ]
-  : parsedGarbData.portraits;
-convertedGarbData.thumbupSVGA = parsedGarbData.thumbupSVGA;
-convertedGarbData.loadingIcon = parsedGarbData.loadingIcon;
+
+convertedGarbData.backgroundImages = parsedGarbData.portraits;
 fs.writeFile(
   './src/components/styles/steriaGarb.json',
   JSON.stringify([...steriaGarb, convertedGarbData], null, 2),
