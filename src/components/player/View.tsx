@@ -7,8 +7,6 @@ import {
   NativeModules,
   Platform,
 } from 'react-native';
-import { ParamListBase } from '@react-navigation/native';
-import { DrawerNavigationProp } from '@react-navigation/drawer';
 import { useTranslation } from 'react-i18next';
 
 import TrackInfo from './TrackInfo/TrackInfo';
@@ -25,11 +23,7 @@ import useInitializeStore from '@stores/initializeStores';
 
 const { NoxAndroidAutoModule } = NativeModules;
 
-interface Props {
-  navigation: DrawerNavigationProp<ParamListBase>;
-}
-
-export function Player({ navigation }: Props) {
+export function Player({ navigation }: NoxComponent.NavigationProps) {
   const { track, updateTrack } = useActiveTrack();
   const playerStyle = useNoxSetting(state => state.playerStyle);
   const setUpdateTrack = useNoxSetting(state => state.setUpdateTrack);
@@ -40,7 +34,7 @@ export function Player({ navigation }: Props) {
     <SafeAreaView style={playerStyle.screenContainer}>
       <StatusBar barStyle={'light-content'} />
       <View style={playerStyle.contentContainer}>
-        <PlayerTopInfo navigation={navigation}></PlayerTopInfo>
+        <PlayerTopInfo navigation={navigation} />
         <TrackInfo track={track} />
       </View>
     </SafeAreaView>

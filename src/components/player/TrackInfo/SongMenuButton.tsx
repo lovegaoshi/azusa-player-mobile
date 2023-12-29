@@ -1,16 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { GestureResponderEvent, View } from 'react-native';
 import { IconButton } from 'react-native-paper';
-import { Track } from 'react-native-track-player';
 
 import { useNoxSetting } from '@stores/useApp';
 import SongMenu from './SongMenu';
 
-interface Props {
-  track?: Track;
-}
-
-export default ({ track }: Props) => {
+export default ({ track }: NoxComponent.TrackProps) => {
   const song = track?.song as NoxMedia.Song;
   const [songMenuVisible, setSongMenuVisible] = useState(false);
   // TODO: this is calculated at TrackInfo as well. its time to put the songIndex

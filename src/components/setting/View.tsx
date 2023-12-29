@@ -1,8 +1,6 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { View, StyleSheet, ScrollView } from 'react-native';
-import { ParamListBase } from '@react-navigation/native';
 import { IconButton } from 'react-native-paper';
-import { DrawerNavigationProp } from '@react-navigation/drawer';
 import { useTranslation } from 'react-i18next';
 
 import GeneralSettings from './GeneralSettings';
@@ -41,8 +39,7 @@ enum VIEW {
 
 const Stack = createNativeStackNavigator();
 
-interface Props {
-  navigation: DrawerNavigationProp<ParamListBase>;
+interface Props extends NoxComponent.NavigationProps {
   headerBackVisible?: boolean;
 }
 

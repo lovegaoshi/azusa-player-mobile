@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import TrackPlayer, {
   Event,
-  Track,
   useTrackPlayerEvents,
 } from 'react-native-track-player';
 import { useStore } from 'zustand';
@@ -15,11 +14,7 @@ import logger from '@utils/Logger';
 
 const getAppStoreState = appStore.getState;
 
-interface Props {
-  track?: Track;
-}
-
-export default ({ track }: Props) => {
+export default ({ track }: NoxComponent.TrackProps) => {
   const song = track?.song as NoxMedia.Song;
   const favoritePlaylist = useNoxSetting(state => state.favoritePlaylist);
   const setFavoritePlaylist = useNoxSetting(state => state.setFavoritePlaylist);

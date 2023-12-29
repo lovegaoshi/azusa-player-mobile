@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { useTranslation } from 'react-i18next';
-import { ParamListBase } from '@react-navigation/native';
 import {
   Appearance,
   StyleSheet,
@@ -9,7 +8,6 @@ import {
   ColorSchemeName,
   ScrollView,
 } from 'react-native';
-import { DrawerNavigationProp } from '@react-navigation/drawer';
 
 import SkinSettings from './SkinSettings';
 import { SettingListItem, RenderSetting } from '../useRenderSetting';
@@ -20,10 +18,6 @@ import {
   dummySelectSettingEntry,
 } from '../SetttingEntries';
 import { saveColorScheme } from '@utils/ChromeStorage';
-
-interface Props {
-  navigation: DrawerNavigationProp<ParamListBase>;
-}
 
 enum VIEW {
   HOME = 'AppearanceHome',
@@ -45,7 +39,7 @@ const ColorSchemei18n = (
 
 const Stack = createNativeStackNavigator();
 
-const MainView = ({ navigation }: Props) => {
+const MainView = ({ navigation }: NoxComponent.NavigationProps) => {
   const { t } = useTranslation();
   const playerStyle = useNoxSetting(state => state.playerStyle);
   const [currentSelectOption, setCurrentSelectOption] = React.useState<

@@ -26,26 +26,10 @@ export default () => {
     );
     if (isDataSaving) {
       const cachedSongs = Array.from(noxCache.noxMediaCache.cache.keys());
-      allSongs = allSongs
-        .filter(song => cachedSongs.includes(noxCacheKey(song)))
-        .filter(
-          (song, index, arr) =>
-            arr.findIndex(val => val.id === song.id) === index
-        );
-    }
-    /**
-     *
-
-    let allSongs: NoxMedia.Song[] = [];
-    let uniqSongIds: string[] = [];
-    for (const playlistId of playlistIds) {
-      const playlist = playlists[playlistId];
-      allSongs = allSongs.concat(
-        playlist.songList.filter(val => !uniqSongIds.includes(val.id))
+      allSongs = allSongs.filter(song =>
+        cachedSongs.includes(noxCacheKey(song))
       );
-      uniqSongIds = uniqSongIds.concat(playlist.songList.map(song => song.id));
     }
-     */
     const newSearchPlaylist = {
       ...searchPlaylist,
       title: String(t('PlaylistOperations.all')),
