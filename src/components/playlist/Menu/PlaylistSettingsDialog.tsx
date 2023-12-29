@@ -113,8 +113,8 @@ export default ({
         </Dialog.Content>
 
         <Dialog.Actions>
-          <Button onPress={handleClose}>Cancel</Button>
-          <Button onPress={handleSubmit}>Done</Button>
+          <Button onPress={handleClose}>{t('Dialog.cancel')}</Button>
+          <Button onPress={handleSubmit}>{t('Dialog.ok')}</Button>
         </Dialog.Actions>
       </Dialog>
     </Portal>
