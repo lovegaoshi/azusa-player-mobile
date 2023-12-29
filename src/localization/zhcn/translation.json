@@ -111,6 +111,8 @@
     "prefetchTrackDesc": "预加载下一首歌（仅在歌曲缓存开启时有用）",
     "chatGPTResolveSongNameName": "ChatGPT找歌",
     "chatGPTResolveSongNameDesc": "TODO：用chatGPT解析歌名",
+    "screenAlwaysWakeName": "歌词界面常亮",
+    "screenAlwaysWakeDesc": "在歌词界面屏幕常亮",
     "fastBiliSearchName": "快速b站搜索",
     "fastBiliSearchDesc": "使用b站搜索时不解析分p内容",
     "suggestedSkipLongVideoName": "推荐播放跳过长视频",

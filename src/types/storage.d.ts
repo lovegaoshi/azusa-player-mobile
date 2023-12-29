@@ -35,6 +35,7 @@ declare global {
       trackCoverArtCard: boolean;
       suggestedSkipLongVideo: boolean;
       wavyProgressBar: boolean;
+      screenAlwaysWake: boolean;
 
       appID: string;
       language?: string;

@@ -8,6 +8,8 @@ import {
 } from 'react-native';
 import type { Track } from 'react-native-track-player';
 import { Image } from 'expo-image';
+import { useFocusEffect } from '@react-navigation/native';
+import { activateKeepAwakeAsync, deactivateKeepAwake } from 'expo-keep-awake';
 
 import { useNoxSetting } from '@stores/useApp';
 import { LyricView } from '../Lyric';
@@ -16,10 +18,8 @@ interface Props {
   track?: Track;
   windowWidth?: number;
   windowHeight?: number;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  albumArtStyle?: any;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  lyricStyle?: any;
+  albumArtStyle?: NoxComponent.ViewStyleProp;
+  lyricStyle?: NoxComponent.ViewStyleProp;
 }
 const AlbumArt: React.FC<Props> = ({
   track,
@@ -64,6 +64,17 @@ const AlbumArt: React.FC<Props> = ({
       console.log('TrackInfo: Setting to Lyric', true);
     });
   };
+
+  useFocusEffect(
+    React.useCallback(() => {
+      if (playerSetting.screenAlwaysWake && !isImageVisible) {
+        console.log(`screen mount?, ${isImageVisible}`);
+        activateKeepAwakeAsync();
+        return deactivateKeepAwake;
+      }
+      return () => undefined;
+    }, [isImageVisible, playerSetting.screenAlwaysWake])
+  );
 
   return (
     <>

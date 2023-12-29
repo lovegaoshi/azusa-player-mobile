@@ -51,12 +51,12 @@ const developerSettings: { [key: string]: SettingEntry } = {
     settingCategory: 'DeveloperSettings',
     checkbox: true,
   },
-  r128gain: {
-    settingName: 'r128gain',
-    settingCategory: 'GeneralSettings',
-  },
   prefetchTrack: {
     settingName: 'prefetchTrack',
+    settingCategory: 'GeneralSettings',
+  },
+  screenAlwaysWake: {
+    settingName: 'screenAlwaysWake',
     settingCategory: 'GeneralSettings',
   },
   /**
@@ -178,6 +178,7 @@ const Home = ({ navigation }: NoxComponent.NavigationProps) => {
             <View>
               <RenderSetting item={developerSettings.noInterruption} />
               <RenderSetting item={developerSettings.prefetchTrack} />
+              <RenderSetting item={developerSettings.screenAlwaysWake} />
             </View>
           </GroupView>
           <SettingListItem

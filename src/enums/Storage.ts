@@ -64,6 +64,7 @@ export const DEFAULT_SETTING: NoxStorage.PlayerSettingDict = {
   trackCoverArtCard: false,
   suggestedSkipLongVideo: true,
   wavyProgressBar: false,
+  screenAlwaysWake: false,
 
   appID,
   language: undefined,
