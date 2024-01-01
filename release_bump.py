@@ -20,9 +20,9 @@ VersionUpdateDict = {
 }
 
 
-def autoincrease_version(version=get_version(), inc=VersionUpdate.PATCH):
-    rematch = re.compile(r'(\d+)\.(\d+)\.(\d+)').match(version)
-    logging.debug(f'increase version release from {version}')
+def autoincrease_version(current_version=get_version(), inc=VersionUpdate.PATCH, append=''):
+    rematch = re.compile(r'(\d+)\.(\d+)\.(\d+)').match(current_version)
+    logging.debug(f'increase version release from {current_version}')
     major = int(rematch.group(1))
     minor = int(rematch.group(2))
     patch = int(rematch.group(3))
@@ -35,7 +35,7 @@ def autoincrease_version(version=get_version(), inc=VersionUpdate.PATCH):
         patch = 0
     elif inc == VersionUpdate.PATCH:
         patch += 1
-    return f'{major}.{minor}.{patch}'
+    return f'{major}.{minor}.{patch}{append}'
 
 
 if __name__ == '__main__':
@@ -49,7 +49,7 @@ if __name__ == '__main__':
     args = parser.parse_args()
     version = get_version()
     new_version = autoincrease_version(
-        version=version, inc=VersionUpdateDict[args.inc])
+        current_version=version, inc=VersionUpdateDict[args.inc])
     fix_content(Path('./src/enums/Version.ts'), lambda line: line.replace(
         version, new_version
     ))
