@@ -924,5 +924,120 @@
       "onSurfaceDisabled": "rgba(230, 226, 217, 0.38)",
       "backdrop": "rgba(49, 49, 37, 0.4)"
     }
+  },
+  {
+    "metaData": {
+      "themeName": "幻境之夜纱依收藏集",
+      "themeDesc": "【幻境之夜】是角色纱依shayi个人系列收藏集的第一弹，包含了纱依在与大家相遇前一部分旅程的记忆碎片画面，希望大家喜欢。",
+      "themeAuthor": "NoxAutoGen",
+      "themeIcon": "https://i0.hdslb.com/bfs/garb/3c220ae6bce6b3fce3a97734f767c58f44042536.jpg",
+      "darkTheme": true
+    },
+    "gifs": [
+      "https://i0.hdslb.com/bfs/garb/bf6ff9a871820954ac7f6b243d14f8c74295cac1.png",
+      "https://i0.hdslb.com/bfs/garb/f48f45df9e3bf79593f3aac3fddcff4dd9d39cbd.png",
+      "https://i0.hdslb.com/bfs/garb/fdc5186974f28e4248684d0a21d5376d1990f028.png",
+      "https://i0.hdslb.com/bfs/garb/82dcca7339b24c6df276bf1cc62b35267e7dfcc6.png",
+      "https://i0.hdslb.com/bfs/garb/d857917e87a45b4bc2532921a0715d88dd00a773.png",
+      "https://i0.hdslb.com/bfs/garb/e1f237bd5dc8a06bdcc0f72df5db205f3d8862ea.png",
+      "https://i0.hdslb.com/bfs/garb/8c5efb1b224dea09b5f802df7a9c6fdce8611459.png",
+      "https://i0.hdslb.com/bfs/garb/1fb8aef0d69d60fc2cd1e1cef5b4e74886b389ad.png",
+      "https://i0.hdslb.com/bfs/garb/a87b64eb85872e3bd599a5c7fe2ed453969bbdb0.png",
+      "https://i0.hdslb.com/bfs/garb/84898065d55ef67bde01e5762ac32ab94b96abfe.png",
+      "https://i0.hdslb.com/bfs/garb/8bce259f291e39b22763707918ab53ebc4a21217.png",
+      "https://i0.hdslb.com/bfs/garb/a3e5a6515422495ca3173be40d81e716c58ce602.png",
+      "https://i0.hdslb.com/bfs/garb/369cb68a7eed3ac1e0c1be458630c83784f85d24.png",
+      "https://i0.hdslb.com/bfs/garb/2f3152c19a5ce9f9ef59caccfef08ee1ad1ab764.png",
+      "https://i0.hdslb.com/bfs/garb/6f704a0c5ed8aa38e680d16b2903a332c9464244.png",
+      "https://i0.hdslb.com/bfs/garb/9fe043fa1337346f8a3a55879428aeb08222c632.png",
+      "https://i0.hdslb.com/bfs/garb/c6f19ca18d62b151b2049f35ea46e003ad1c3585.png",
+      "https://i0.hdslb.com/bfs/garb/4d757501518a4127de855b34750a4cae20f7f354.png",
+      "https://i0.hdslb.com/bfs/garb/da58863628f9d847945274312638694f266ecb07.png",
+      "https://i0.hdslb.com/bfs/garb/42260c5ed1232814cb291192808fa0bf67e0d1bc.png"
+    ],
+    "backgroundImages": [
+      {
+        "type": "biliNFTVideo",
+        "identifier": "[\"100787\",\"永恒夜明\"]"
+      },
+      {
+        "type": "biliNFTVideo",
+        "identifier": "[\"100787\",\"盈梦之蝶\"]"
+      },
+      {
+        "type": "biliNFTVideo",
+        "identifier": "[\"100787\",\"浮游夜歌\"]"
+      },
+      "https://i0.hdslb.com/bfs/garb/open/ed9075a1717adc72501c1931c51e9766debfd7c2.png",
+      "https://i0.hdslb.com/bfs/garb/open/543a046691203f326b2bc0145d5ab680e247d238.png",
+      "https://i0.hdslb.com/bfs/garb/open/d4ea8c5038ad8af77a7f1a74b3d90216e4a21421.png",
+      "https://i0.hdslb.com/bfs/garb/open/bb89c14795ce463370dfe793656c84086ab53350.png",
+      "https://i0.hdslb.com/bfs/garb/open/98f04ff539f30cff4932a60e31fe7a2acf8bc54a.png",
+      {
+        "type": "biliNFTVideo",
+        "identifier": "[\"100787\",\"教堂晚钟\"]"
+      },
+      {
+        "type": "biliNFTVideo",
+        "identifier": "[\"100787\",\"明媚晨曦\"]"
+      },
+      {
+        "type": "biliNFTVideo",
+        "identifier": "[\"100787\",\"誓约之花\"]"
+      }
+    ],
+    "customColors": {
+      "maskedBackgroundColor": "rgba(0, 0, 0, 0.60)",
+      "playlistDrawerBackgroundColor": "green",
+      "playlistDrawerBackgroundColorTransparent": "rgba(0, 255, 0, 0.35)",
+      "progressThumbTintColor": "rgb(235, 235, 0)",
+      "progressMinimumTrackTintColor": "rgb(235, 235, 0)",
+      "progressMaximumTrackTintColor": "#FFFFFF",
+      "btnBackgroundColor": "rgb(72, 71, 58)",
+      "textInputSelectionColor": "green"
+    },
+    "colors": {
+      "primary": "rgb(255, 255, 0)",
+      "onPrimary": "rgb(50, 50, 0)",
+      "primaryContainer": "rgb(73, 73, 0)",
+      "onPrimaryContainer": "rgb(234, 234, 0)",
+      "secondary": "rgb(202, 200, 165)",
+      "onSecondary": "rgb(50, 50, 24)",
+      "secondaryContainer": "rgb(73, 72, 45)",
+      "onSecondaryContainer": "rgb(231, 228, 191)",
+      "tertiary": "rgb(164, 208, 189)",
+      "onTertiary": "rgb(11, 55, 42)",
+      "tertiaryContainer": "rgb(37, 78, 64)",
+      "onTertiaryContainer": "rgb(191, 236, 216)",
+      "error": "rgb(255, 180, 171)",
+      "onError": "rgb(105, 0, 5)",
+      "errorContainer": "rgb(147, 0, 10)",
+      "onErrorContainer": "rgb(255, 180, 171)",
+      "background": "rgba(0,0,0, 0.4)",
+      "onBackground": "rgb(230, 226, 217)",
+      "surface": "rgb(28, 28, 23)",
+      "onSurface": "rgba(235, 235, 0, 1)",
+      "text": "rgb(255, 255, 0)",
+      "surfaceVariant": "rgb(10, 10, 10)",
+      "onSurfaceVariant": "rgb(225, 225, 0)",
+      "outline": "rgb(147, 145, 130)",
+      "outlineVariant": "rgb(72, 71, 58)",
+      "shadow": "rgb(0, 0, 0)",
+      "scrim": "rgb(0, 0, 0)",
+      "inverseSurface": "rgb(230, 226, 217)",
+      "inverseOnSurface": "rgb(49, 49, 43)",
+      "inversePrimary": "rgb(98, 98, 0)",
+      "elevation": {
+        "level0": "transparent",
+        "level1": "rgb(53, 56, 57)",
+        "level2": "rgb(10, 10, 10)",
+        "level3": "rgb(10, 10, 10)",
+        "level4": "rgb(49, 49, 20)",
+        "level5": "rgb(53, 53, 20)"
+      },
+      "surfaceDisabled": "rgba(230, 226, 217, 0.12)",
+      "onSurfaceDisabled": "rgba(230, 226, 217, 0.38)",
+      "backdrop": "rgba(49, 49, 37, 0.4)"
+    }
   }
 ]
