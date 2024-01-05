@@ -7,6 +7,8 @@ import usePlaylistCRUD from '@hooks/usePlaylistCRUD';
 import { CopiedPlaylistMenuItem } from '@components/buttons/CopiedPlaylistButton';
 import RenameSongButton from '@components/player/TrackInfo/RenameSong/RenameSongButton';
 import useSongOperations from '@hooks/useSongOperations';
+import { SearchRegex } from '@enums/Playlist';
+
 enum ICONS {
   SEND_TO = 'playlist-plus',
   COPY_SONG_NAME = '',
@@ -114,7 +116,9 @@ export default ({ usePlaylist, prepareForLayoutAnimationRender }: Props) => {
         leadingIcon={ICONS.SEARCH_IN_PLAYLIST}
         onPress={() => {
           searchAndEnableSearch(
-            currentPlaylist.songList[songMenuSongIndexes[0]].parsedName
+            `${SearchRegex.absoluteMatch.text}${
+              currentPlaylist.songList[songMenuSongIndexes[0]].parsedName
+            }`
           );
           closeMenu();
           setPlaylistSearchAutoFocus(false);

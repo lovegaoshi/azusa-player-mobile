@@ -21,7 +21,7 @@ import {
 import merge from 'deepmerge';
 import { useTranslation } from 'react-i18next';
 
-import { Player } from './components/player/View';
+import Player from './components/player/View';
 import Playlist from './components/playlist/View';
 import PlayerBottomPanel from './components/player/controls/PlayerProgressControls';
 import { useNoxSetting } from '@stores/useApp';
