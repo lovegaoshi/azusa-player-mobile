@@ -33,6 +33,7 @@ export default {
     'https://i0.hdslb.com/bfs/garb/item/8d26deac54428b567fb61be6198e601ea9a4622b.png',
   ],
   backgroundImages: [
+    'https://i0.hdslb.com/bfs/new_dyn/2325a96b0d32e59f59a326f2398b5902529249.png',
     'https://cdn.donmai.us/original/ea/ec/__nox_nijisanji_and_3_more_drawn_by_netural__eaec50f6d554b731ffe4fcace255d0bd.png',
     'https://i0.hdslb.com/bfs/baselabs/f99bb1115aee11c0f939914529fb3d4b06eee485.png',
     {
