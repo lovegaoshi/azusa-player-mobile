@@ -40,7 +40,7 @@
     "@react-navigation/native-stack": "^6.9.17",
     "@sharcoux/slider": "^7.0.6",
     "@shopify/flash-list": "^1.6.3",
-    "@shopify/react-native-skia": "^0.1.225",
+    "@shopify/react-native-skia": "0.1.225",
     "axios": "^1.6.5",
     "babel-plugin-transform-remove-console": "^6.9.4",
     "base64-js": "^1.5.1",
