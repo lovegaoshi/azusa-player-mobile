@@ -23,7 +23,6 @@ export const updateSubscribeFavList = async ({
     playlist.newSongOverwrite || playlist.title.includes('live'),
   callback = () => undefined,
 }: Props): Promise<NoxMedia.Playlist> => {
-  progressEmitter(100);
   let newPlaylist = { ...playlist, lastSubscribed: new Date().getTime() };
   if ([PLAYLIST_ENUMS.TYPE_FAVORI_PLAYLIST].includes(playlist.type))
     throw new Error('[biliSubscribe] incorrect playlist type for subscription');
@@ -37,7 +36,6 @@ export const updateSubscribeFavList = async ({
       subscribeUrls = newPlaylist.subscribeUrl;
     }
     if (subscribeUrls.length === 0 || subscribeUrls[0].length === 0) {
-      progressEmitter(0);
       throw new Error('[biliSubscribe] nothing to subscribe');
     }
     const favList = [
@@ -79,6 +77,5 @@ export const updateSubscribeFavList = async ({
   // like noxplayer did, instead of being a playlist field
   updatePlaylist(newPlaylist, [], []);
   callback(newPlaylist);
-  progressEmitter(0);
   return newPlaylist;
 };
