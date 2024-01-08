@@ -65,6 +65,7 @@ export const DEFAULT_SETTING: NoxStorage.PlayerSettingDict = {
   suggestedSkipLongVideo: true,
   wavyProgressBar: false,
   screenAlwaysWake: false,
+  biliEditAPI: false,
 
   appID,
   language: undefined,

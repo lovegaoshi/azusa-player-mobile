@@ -111,6 +111,8 @@
     "prefetchTrackDesc": "Prefetch the next track (only works when cache is enabled)",
     "chatGPTResolveSongNameName": "ChatGPT on Songs",
     "chatGPTResolveSongNameDesc": "TODO: Use chatGPT to resolve song names",
+    "biliEditAPIName": "use bilibili edit API",
+    "biliEditAPIDesc": "use bilibili edit API when renaming songs",
     "screenAlwaysWakeName": "Lyric screen always on",
     "screenAlwaysWakeDesc": "turn screen always on at lyric screen",
     "fastBiliSearchName": "Fast Bilibili Search",
