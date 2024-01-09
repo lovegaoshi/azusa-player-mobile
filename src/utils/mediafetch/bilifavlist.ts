@@ -44,13 +44,13 @@ const regexFetch = async ({
   progressEmitter = () => undefined,
   favList,
   useBiliTag,
-}: regexFetchProps) => {
-  return songFetch({
+}: regexFetchProps): Promise<NoxNetwork.NoxRegexFetch> => ({
+  songList: await songFetch({
     videoinfos: await fetchFavList(reExtracted[1]!, progressEmitter, favList),
     useBiliTag: useBiliTag || false,
     progressEmitter,
-  });
-};
+  }),
+});
 
 const resolveURL = () => undefined;
 

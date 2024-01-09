@@ -29,15 +29,17 @@ export default () => {
       if (v) {
         const newPlaylist = {
           ...dummyPlaylist(favLists[i].title),
-          songList: await bilifavlistFetch.regexFetch({
-            reExtracted: [
-              0,
-              String(favLists[i].id),
-              // HACK: only reExtracted[1] is used so hopefully fine...
-            ] as unknown as RegExpExecArray,
-            favList: [],
-            useBiliTag: false,
-          }),
+          songList: (
+            await bilifavlistFetch.regexFetch({
+              reExtracted: [
+                0,
+                String(favLists[i].id),
+                // HACK: only reExtracted[1] is used so hopefully fine...
+              ] as unknown as RegExpExecArray,
+              favList: [],
+              useBiliTag: false,
+            })
+          ).songList,
           subscribeUrl: [
             `https://space.bilibili.com/3493085134719196/favlist?fid=${favLists[i].id}`,
           ],

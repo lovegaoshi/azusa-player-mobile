@@ -53,7 +53,7 @@ export default () => {
             // HACK: sure sure regexpexecarray
           ] as unknown as RegExpExecArray,
         })
-      )[0];
+      ).songList[0];
     };
 
     return regexMatchOperations({

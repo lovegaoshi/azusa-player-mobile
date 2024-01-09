@@ -57,14 +57,17 @@ const fetchInnerTunePlaylist = async (
     .filter((val): val is NoxMedia.Song => val !== undefined);
 };
 
-const regexFetch = async ({ reExtracted, favList = [] }: regexFetchProps) => {
+const regexFetch = async ({
+  reExtracted,
+  favList = [],
+}: regexFetchProps): Promise<NoxNetwork.NoxRegexFetch> => {
   const results = await fetchInnerTunePlaylist(
     // fetchYTPlaylist(
     reExtracted[1],
     // progressEmitter,
     favList
   );
-  return results.filter(val => val !== undefined);
+  return { songList: results.filter(val => val !== undefined) };
 };
 
 export default {

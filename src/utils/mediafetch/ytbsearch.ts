@@ -55,8 +55,10 @@ interface regexFetchProps {
   cookiedSearch?: boolean;
 }
 
-const regexFetch = async ({ url }: regexFetchProps) => {
-  return await fetchInnerTuneSearch(url);
+const regexFetch = async ({
+  url,
+}: regexFetchProps): Promise<NoxNetwork.NoxRegexFetch> => {
+  return { songList: await fetchInnerTuneSearch(url) };
 };
 
 export default {

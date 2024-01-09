@@ -60,9 +60,9 @@ const songFetch = (videoinfos: any[]) => {
 const regexFetch = async ({
   progressEmitter,
   favList,
-}: Partial<regexFetchProps>) => {
-  return songFetch(await paginatedFetch({ progressEmitter, favList }));
-};
+}: Partial<regexFetchProps>): Promise<NoxNetwork.NoxRegexFetch> => ({
+  songList: songFetch(await paginatedFetch({ progressEmitter, favList })),
+});
 
 const resolveURL = async (song: NoxMedia.Song) => {
   return { url: song.id.slice(9) };

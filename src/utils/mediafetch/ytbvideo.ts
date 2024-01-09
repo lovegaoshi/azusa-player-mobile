@@ -249,9 +249,11 @@ const suggest = async (song: NoxMedia.Song, filterMW = <T>(v: T[]) => v[0]) => {
   return filterMW(relatedVideos); // or relatedVideos[0];
 };
 
-const regexFetch = async ({ reExtracted }: regexFetchProps) => {
+const regexFetch = async ({
+  reExtracted,
+}: regexFetchProps): Promise<NoxNetwork.NoxRegexFetch> => {
   const audioInfo = await fetchAudioInfo(reExtracted[1]!);
-  return audioInfo || [];
+  return { songList: audioInfo || [] };
 };
 
 const resolveURL = async (song: NoxMedia.Song, iOS = true) => {

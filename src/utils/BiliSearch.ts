@@ -57,14 +57,14 @@ export const searchBiliURLs = async ({
   cookiedSearch = false,
   defaultSearch = SEARCH_OPTIONS.BILIBILI,
 }: Props) => {
-  const results: NoxMedia.SearchPlaylist = {
+  let results: NoxMedia.SearchPlaylist = {
     songList: [],
   };
   try {
     progressEmitter(100);
     const matchRegex = matchBiliURL(input);
     if (matchRegex !== null) {
-      results.songList = await matchRegex.regexFetch({
+      results = await matchRegex.regexFetch({
         reExtracted: matchRegex.reExtracted,
         progressEmitter,
         favList,
@@ -76,7 +76,7 @@ export const searchBiliURLs = async ({
     } // bilisearchFetch
     switch (defaultSearch) {
       case SEARCH_OPTIONS.YOUTUBE:
-        results.songList = await ytbsearchFetch.regexFetch({
+        results = await ytbsearchFetch.regexFetch({
           url: input,
           progressEmitter,
           fastSearch,
@@ -90,7 +90,7 @@ export const searchBiliURLs = async ({
         );
         break;
       default:
-        results.songList = await bilisearchFetch.regexFetch({
+        results = await bilisearchFetch.regexFetch({
           url: input,
           progressEmitter,
           fastSearch,
@@ -107,7 +107,7 @@ export const searchBiliURLs = async ({
 
 interface ReExtraction {
   match: RegExp;
-  fetch: (v: regexFetchProps) => Promise<NoxMedia.Song[]>;
+  fetch: (v: regexFetchProps) => Promise<NoxNetwork.NoxRegexFetch>;
   refresh?: (v: NoxMedia.Playlist) => Promise<NoxMedia.SearchPlaylist>;
 }
 
