@@ -58,9 +58,18 @@ const fetchYTPlaylist = async (
 const regexFetch = async ({
   reExtracted,
   favList = [],
-}: regexFetchProps): Promise<NoxNetwork.NoxRegexFetch> => ({
-  songList: await fetchYTPlaylist(reExtracted[1], favList, reExtracted[2]),
-});
+}: regexFetchProps): Promise<NoxNetwork.NoxRegexFetch> => {
+  const songList = await fetchYTPlaylist(
+    reExtracted[1],
+    favList,
+    reExtracted[2]
+  );
+  return {
+    songList,
+    refresh,
+    refreshToken: [songList[songList.length - 1].bvid, songList[0].bvid],
+  };
+};
 
 const refresh = async (v: NoxMedia.Playlist) => {
   const results: NoxMedia.SearchPlaylist = { songList: [] };
