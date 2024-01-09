@@ -38,4 +38,10 @@ declare namespace NoxNetwork {
     songMid: string;
     label: string;
   }
+
+  export interface NoxRegexFetch {
+    songList: NoxMedia.Song[];
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    refreshToken?: any;
+  }
 }
