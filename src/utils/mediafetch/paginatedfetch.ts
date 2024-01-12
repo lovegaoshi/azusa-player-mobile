@@ -32,6 +32,7 @@ export interface FetcherProps {
   getBVID?: (val: any) => any;
   getJSONData?: (json: any) => any;
   fetcher?: (url: string, params?: any) => Promise<Response>;
+  startPage?: number;
 }
 
 /**
@@ -54,8 +55,9 @@ export const fetchPaginatedAPI = async ({
   getBVID = (val: any) => val.bvid,
   getJSONData = (json: any) => json.data,
   fetcher = bfetch,
+  startPage = 1,
 }: FetcherProps) => {
-  const res = await fetcher(url.replace('{pn}', String(1)), params);
+  const res = await fetcher(url.replace('{pn}', String(startPage)), params);
   const data = getJSONData(await jsonify(res.clone()));
   const mediaCount = getMediaCount(data);
   const BVids: string[] = [];
@@ -65,7 +67,7 @@ export const fetchPaginatedAPI = async ({
     }),
   ];
   for (
-    let page = 2, n = Math.ceil(mediaCount / getPageSize(data));
+    let page = startPage + 1, n = Math.ceil(mediaCount / getPageSize(data));
     page <= n;
     page++
   ) {

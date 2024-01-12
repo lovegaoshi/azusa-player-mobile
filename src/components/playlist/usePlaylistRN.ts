@@ -43,6 +43,9 @@ export default (playlist: NoxMedia.Playlist) => {
   const playlistShouldReRender = useNoxSetting(
     state => state.playlistShouldReRender
   );
+  const progressEmitter = useNoxSetting(
+    state => state.searchBarProgressEmitter
+  );
   const playlistRef = useRef<FlashList<NoxMedia.Song>>(null);
   const { playFromPlaylist } = usePlayback();
   const { preformFade } = useTPControls();
@@ -52,6 +55,7 @@ export default (playlist: NoxMedia.Playlist) => {
       text: t('PlaylistOperations.updating', { playlist }),
       duration: Snackbar.LENGTH_INDEFINITE,
     });
+    progressEmitter(100);
     activateKeepAwakeAsync();
     try {
       await rssUpdate();
@@ -63,6 +67,7 @@ export default (playlist: NoxMedia.Playlist) => {
     Snackbar.show({
       text: t('PlaylistOperations.updated', { playlist }),
     });
+    progressEmitter(0);
     deactivateKeepAwake();
   };
 

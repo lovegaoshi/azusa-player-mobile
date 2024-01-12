@@ -38,7 +38,7 @@ export default {
     'https://i0.hdslb.com/bfs/baselabs/f99bb1115aee11c0f939914529fb3d4b06eee485.png',
     {
       type: 'biliNFTVideo',
-      identifier: '["102",18]',
+      identifier: '["102","动感·诺莺"]',
     },
   ],
   backgroundImagesLandscape: [

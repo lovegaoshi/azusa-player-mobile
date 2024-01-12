@@ -98,12 +98,17 @@ export const songFetch = async ({
   return songs;
 };
 
-const regexFetch = async ({ reExtracted }: regexFetchProps) => {
+const regexFetch = async ({
+  reExtracted,
+}: regexFetchProps): Promise<NoxNetwork.NoxRegexFetch> => {
   const audioInfo = await fetchAudioInfo(reExtracted[1]!);
-  if (!audioInfo) return [];
-  return songFetch({
-    videoinfos: [audioInfo], // await fetchiliBVID([reExtracted[1]!])
-  });
+  return {
+    songList: audioInfo
+      ? await songFetch({
+          videoinfos: [audioInfo],
+        })
+      : [],
+  };
 };
 
 const resolveURL = async (song: NoxMedia.Song) => {

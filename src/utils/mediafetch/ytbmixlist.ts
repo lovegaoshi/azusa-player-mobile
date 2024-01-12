@@ -55,8 +55,21 @@ const fetchYTPlaylist = async (
     .filter(val => val !== undefined)
     .reduce((acc, curr) => acc!.concat(curr!), [] as NoxMedia.Song[]);
 };
-const regexFetch = ({ reExtracted, favList = [] }: regexFetchProps) =>
-  fetchYTPlaylist(reExtracted[1], favList, reExtracted[2]);
+const regexFetch = async ({
+  reExtracted,
+  favList = [],
+}: regexFetchProps): Promise<NoxNetwork.NoxRegexFetch> => {
+  const songList = await fetchYTPlaylist(
+    reExtracted[1],
+    favList,
+    reExtracted[2]
+  );
+  return {
+    songList,
+    refresh,
+    refreshToken: [songList[songList.length - 1].bvid, songList[0].bvid],
+  };
+};
 
 const refresh = async (v: NoxMedia.Playlist) => {
   const results: NoxMedia.SearchPlaylist = { songList: [] };

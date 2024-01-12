@@ -122,12 +122,15 @@ export const songFetch = async ({
   return songs;
 };
 
-const regexFetch = async ({ reExtracted, useBiliTag }: regexFetchProps) => {
-  return songFetch({
+const regexFetch = async ({
+  reExtracted,
+  useBiliTag,
+}: regexFetchProps): Promise<NoxNetwork.NoxRegexFetch> => ({
+  songList: await songFetch({
     videoinfos: await fetchiliBVIDs([reExtracted[1]!]), // await fetchiliBVID([reExtracted[1]!])
     useBiliTag: useBiliTag || false,
-  });
-};
+  }),
+});
 
 interface FetchPlayURL {
   bvid: string;

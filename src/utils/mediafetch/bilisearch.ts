@@ -71,7 +71,8 @@ export const fetchBiliSearchList = async (
   kword: string,
   progressEmitter: (val: number) => void = () => undefined,
   fastSearch = false,
-  cookiedSearch = false
+  cookiedSearch = false,
+  startPage = 1
 ) => {
   // this API needs a random buvid3 value, or a valid SESSDATA;
   // otherwise will return error 412. for users didnt login to bilibili,
@@ -97,6 +98,7 @@ export const fetchBiliSearchList = async (
       resolveBiliBVID: fastSearch
         ? async bvobjs => await fastSearchResolveBVID(bvobjs)
         : undefined,
+      startPage,
     });
   } catch (e) {
     logger.error(e);
@@ -116,8 +118,8 @@ const regexFetch = async ({
   progressEmitter = () => undefined,
   fastSearch,
   cookiedSearch = false,
-}: regexFetchProps) => {
-  return songFetch({
+}: regexFetchProps): Promise<NoxNetwork.NoxRegexFetch> => ({
+  songList: await songFetch({
     videoinfos: await fetchBiliSearchList(
       url,
       progressEmitter,
@@ -126,7 +128,33 @@ const regexFetch = async ({
     ),
     useBiliTag: false,
     progressEmitter,
-  });
+  }),
+  refresh: v => refresh({ v, fastSearch, cookiedSearch }),
+  refreshToken: [url, 3],
+});
+
+interface RefreshProps {
+  v: NoxMedia.Playlist;
+  fastSearch: boolean;
+  cookiedSearch?: boolean;
+}
+const refresh = async ({ v, fastSearch, cookiedSearch }: RefreshProps) => {
+  const results: NoxMedia.SearchPlaylist = { songList: [] };
+  if (v.refreshToken) {
+    const [url, startPage] = v.refreshToken;
+    results.songList = await songFetch({
+      videoinfos: await fetchBiliSearchList(
+        url,
+        undefined,
+        fastSearch,
+        cookiedSearch,
+        startPage
+      ),
+      useBiliTag: false,
+    });
+    results.refreshToken = [url, startPage + 2];
+  }
+  return results;
 };
 
 const resolveURL = () => undefined;

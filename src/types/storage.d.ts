@@ -3,6 +3,8 @@ import { ColorSchemeName } from 'react-native';
 
 import { EXPORT_OPTIONS } from '../enums/Sync';
 import { NoxRepeatMode } from '../enums/RepeatMode';
+import { SEARCH_OPTIONS } from '../enums/Storage';
+
 declare global {
   namespace NoxStorage {
     export interface PlayerSettingDict {
@@ -59,6 +61,7 @@ declare global {
       language?: string;
       lastPlayDuration: number;
       colorScheme: ColorSchemeName;
+      defaultSearchOptions?: SEARCH_OPTIONS;
     }
 
     export interface initializedResults {

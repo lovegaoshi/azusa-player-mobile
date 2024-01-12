@@ -1,11 +1,11 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import TrackPlayer, { useProgress } from 'react-native-track-player';
+import { useProgress } from 'react-native-track-player';
 import { ProgressBar } from 'react-native-paper';
 import { useStore } from 'zustand';
-import { Slider } from '@sharcoux/slider';
 
 import ProgressWavy from './ProgressWavy';
+import ProgressBarAPM from './ProgressBar';
 import { useNoxSetting } from '@stores/useApp';
 import { seconds2MMSS as formatSeconds } from '@utils/Utils';
 import appStore from '@stores/appStore';
@@ -34,36 +34,7 @@ export const Progress: React.FC<{ live?: boolean }> = ({ live }) => {
     <View style={styles.container}>
       <ProgressWavy />
       <View style={styles.progressContainer}>
-        <Slider
-          style={styles.progressBar}
-          value={position}
-          minimumValue={0}
-          maximumValue={duration}
-          thumbTintColor={
-            playerStyle.progressThumbImage
-              ? undefined
-              : playerStyle.customColors.progressThumbTintColor
-          }
-          minimumTrackTintColor={
-            playerStyle.customColors.progressMinimumTrackTintColor
-          }
-          maximumTrackTintColor={
-            playerStyle.customColors.progressMaximumTrackTintColor
-          }
-          onSlidingComplete={TrackPlayer.seekTo}
-          thumbImage={
-            playerStyle.progressThumbImage
-              ? { uri: playerStyle.progressThumbImage }
-              : undefined
-          }
-          thumbSize={playerStyle.progressThumbImage ? 40 : undefined}
-          thumbStyle={{
-            backgroundColor: playerStyle.progressThumbImage
-              ? 'transparent'
-              : playerStyle.colors.primary,
-          }}
-          maxTrackStyle={styles.transparent}
-        />
+        <ProgressBarAPM />
         <ProgressBar
           progress={fetchProgress / 100}
           color={playerStyle.customColors.progressMaximumTrackTintColor}
@@ -99,12 +70,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: 25,
     marginTop: -22,
   },
-  progressBar: {
-    width: '100%',
-    marginTop: 10,
-    flexDirection: 'row',
-    zIndex: 2,
-  },
   progressBarDouble: {
     position: 'absolute',
     top: -14,
@@ -122,5 +87,4 @@ const styles = StyleSheet.create({
     color: 'white',
     fontVariant: ['tabular-nums'],
   },
-  transparent: { backgroundColor: 'transparent' },
 });

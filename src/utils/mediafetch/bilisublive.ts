@@ -98,7 +98,9 @@ const getSubList = async (
 const regexFetch = async ({
   reExtracted,
   progressEmitter = () => undefined,
-}: regexFetchProps) => getSubList(reExtracted[1]!, progressEmitter);
+}: regexFetchProps): Promise<NoxNetwork.NoxRegexFetch> => ({
+  songList: await getSubList(reExtracted[1]!, progressEmitter),
+});
 
 export default {
   regexSearchMatch: /space\.bilibili\.com\/(\d+)\/fans\/follow/,

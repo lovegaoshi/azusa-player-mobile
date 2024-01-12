@@ -78,12 +78,15 @@ export const fetchiliAVIDs = async (
   return resolvedBVIDs.filter(val => val) as VideoInfo[];
 };
 
-const regexFetch = async ({ reExtracted, useBiliTag }: regexFetchProps) => {
-  return songFetch({
+const regexFetch = async ({
+  reExtracted,
+  useBiliTag,
+}: regexFetchProps): Promise<NoxNetwork.NoxRegexFetch> => ({
+  songList: await songFetch({
     videoinfos: await fetchiliAVIDs([reExtracted[1]!]), // await fetchiliBVID([reExtracted[1]!])
     useBiliTag: useBiliTag || false,
-  });
-};
+  }),
+});
 
 const resolveURL = () => undefined;
 

@@ -335,6 +335,7 @@ export const initPlayerObject =
       lyricMapping,
       lastPlayDuration: await getItem(STORAGE_KEYS.LAST_PLAY_DURATION, 0),
       colorScheme: await getColorScheme(),
+      defaultSearchOptions: await getDefaultSearch(),
     } as NoxStorage.PlayerStorageObject;
 
     playerObject.playlists[STORAGE_KEYS.SEARCH_PLAYLIST_KEY] =

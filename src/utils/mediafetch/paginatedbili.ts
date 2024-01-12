@@ -23,6 +23,7 @@ export const fetchBiliPaginatedAPI = async ({
       bvobjs.map((obj: any) => obj.bvid),
       progressEmitter2
     ),
+  startPage = 1,
 }: FetcherProps) => {
   return fetchPaginatedAPI({
     url,
@@ -35,6 +36,7 @@ export const fetchBiliPaginatedAPI = async ({
     limiter,
     resolveBiliBVID,
     fetcher: url.includes('/wbi/') ? wbiQuery : bfetch,
+    startPage,
   });
 };
 

@@ -70,9 +70,11 @@ const fetchVideoInfoRaw = async (aid: string) => {
 const fetchVideoInfo = async (aid: string) =>
   biliApiLimiter.schedule(() => fetchVideoInfoRaw(aid));
 
-const regexFetch = async ({ reExtracted }: regexFetchProps) => {
-  return [await fetchVideoInfo(reExtracted[1]!)];
-};
+const regexFetch = async ({
+  reExtracted,
+}: regexFetchProps): Promise<NoxNetwork.NoxRegexFetch> => ({
+  songList: [await fetchVideoInfo(reExtracted[1]!)],
+});
 
 const resolveURL = async (
   song: NoxMedia.Song
