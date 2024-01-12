@@ -18,6 +18,7 @@ import useBiliSearch from '@hooks/useBiliSearch';
 import SearchMenu from './SearchMenu';
 import { getMusicFreePlugin } from '@utils/ChromeStorage';
 import logger from '@utils/Logger';
+import { getIcon } from './Icons';
 
 interface SharedItem {
   mimeType: string;
@@ -32,9 +33,10 @@ export default ({
   onSearched = (songs: Array<NoxMedia.Song>) => console.log(songs),
 }: props) => {
   const { t } = useTranslation();
+  const searchOption = useNoxSetting(state => state.searchOption);
   const searchProgress = useNoxSetting(state => state.searchBarProgress);
-  const playerStyle = useNoxSetting(state => state.playerStyle);
   const navigationGlobal = useNavigation();
+  const playerStyle = useNoxSetting(state => state.playerStyle);
   const externalSearchText = useNoxSetting(state => state.externalSearchText);
   const setExternalSearchText = useNoxSetting(
     state => state.setExternalSearchText
@@ -128,6 +130,7 @@ export default ({
           style={styles.textInput}
           selectionColor={playerStyle.customColors.textInputSelectionColor}
           onIconPress={handleMenuPress}
+          icon={getIcon(searchOption)}
         />
         <SearchMenu
           visible={dialogOpen}
