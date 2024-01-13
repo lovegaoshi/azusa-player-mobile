@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { StyleSheet } from 'react-native';
 import TrackPlayer, { useProgress } from 'react-native-track-player';
 import { Slider } from '@sharcoux/slider';
@@ -8,7 +8,6 @@ import { useNoxSetting } from '@stores/useApp';
 export default () => {
   const { position, duration } = useProgress(200);
   const playerStyle = useNoxSetting(state => state.playerStyle);
-  useEffect(() => console.log(position), [position]);
 
   return (
     <Slider

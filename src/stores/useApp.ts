@@ -296,6 +296,7 @@ export const useNoxSetting = create<NoxSetting>((set, get) => ({
       playerStyle: await savePlayerStyle(val.skin, false),
       playerStyles: val.skins,
       lyricMapping: val.lyricMapping,
+      searchOption: val.defaultSearchOptions,
     });
     setPlayerSettingVanilla(initializedPlayerSetting);
     setPlayingList(

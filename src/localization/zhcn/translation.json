@@ -171,6 +171,8 @@
   "AppearanceSettings": {
     "ColorSchemeName": "选择皮肤主题",
     "ColorSchemeDesc": "当前皮肤主题是{{ scheme }}",
+    "wavyProgressBarName": "波浪形播放进度条",
+    "wavyProgressBarDesc": "显示一个有点像三星的波浪形播放进度条",
     "ColorSchemeLight": "亮色",
     "ColorSchemeDark": "暗色",
     "ColorSchemeAdaptive": "跟随系统",
