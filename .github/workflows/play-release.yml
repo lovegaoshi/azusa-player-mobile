@@ -18,10 +18,10 @@ jobs:
 
       - name: commit
         run: |
-          git config --global user.email lovegaoshi@gaoshi.com
+          git config --global user.email 106490582+lovegaoshi@users.noreply.github.com
           git config --global user.name lovegaoshi
           git commit -m "build: release version bump" -a
-          
+
       - name: Get branch name
         run: |
           # Short name for current branch. For PRs, use target branch (base ref)
@@ -56,6 +56,10 @@ jobs:
           git submodule update --init --recursive
           echo "${{ secrets.RELEASE_SIGN_PWD }}" >> ./android/gradle.properties
 
+      - name: python fixHTTP
+        run: |
+          python fixHTTP.py
+
       - name: WGet Build Sign jks
         uses: wei/wget@v1
         with:
@@ -73,10 +77,10 @@ jobs:
 
       - name: gradle build AAB
         run: cd android && chmod +x gradlew && ./gradlew bundleRelease
-        
+
       - name: Push changes to master
         uses: ad-m/github-push-action@master
-          
+
       - uses: r0adkll/upload-google-play@v1
         with:
           serviceAccountJsonPlainText: ${{ secrets.GOOGLE_PLAY_SERVICE_ACCOUNT_JSON }}

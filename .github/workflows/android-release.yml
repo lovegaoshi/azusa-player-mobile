@@ -20,7 +20,7 @@ jobs:
 
       - name: commit
         run: |
-          git config --global user.email lovegaoshi@gaoshi.com
+          git config --global user.email 106490582+lovegaoshi@users.noreply.github.com
           git config --global user.name lovegaoshi
           git pull origin master
           git commit -m "build: release version bump" -a
@@ -70,6 +70,10 @@ jobs:
         run: |
           git submodule update --init --recursive
           echo "${{ secrets.RELEASE_SIGN_PWD }}" >> ./android/gradle.properties
+
+      - name: python fixHTTP
+        run: |
+          python fixHTTP.py
 
       - name: WGet Build Sign jks
         uses: wei/wget@v1
