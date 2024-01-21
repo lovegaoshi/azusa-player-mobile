@@ -84,6 +84,10 @@ jobs:
           git submodule update --init --recursive
           echo "${{ secrets.RELEASE_SIGN_PWD }}" >> ./android/gradle.properties
 
+      - name: python fixHTTP
+        run: |
+          python fixHTTP.py
+
       - name: WGet Build Sign jks
         uses: wei/wget@v1
         with:
