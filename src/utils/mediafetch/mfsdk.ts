@@ -82,7 +82,7 @@ const genericSearch = async (
       IMusicToNoxMedia(val, source)
     );
   } catch (e) {
-    logger.error('[mfsdk] failed to resolve');
+    logger.error(`[mfsdk] ${source} failed to resolve`);
     logger.error(e);
   }
   return [];
