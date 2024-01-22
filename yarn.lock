@@ -3152,14 +3152,6 @@
     invariant "^2.2.4"
     nullthrows "^1.1.1"
 
-"@react-native/virtualized-lists@^0.72.4":
-  version "0.72.8"
-  resolved "https://registry.npmjs.org/@react-native/virtualized-lists/-/virtualized-lists-0.72.8.tgz#a2c6a91ea0f1d40eb5a122fb063daedb92ed1dc3"
-  integrity sha512-J3Q4Bkuo99k7mu+jPS9gSUSgq+lLRSI/+ahXNwV92XgJ/8UgOTxu2LPwhJnBk/sQKxq7E8WkZBnBiozukQMqrw==
-  dependencies:
-    invariant "^2.2.4"
-    nullthrows "^1.1.1"
-
 "@react-navigation/core@^6.4.10":
   version "6.4.10"
   resolved "https://registry.npmjs.org/@react-navigation/core/-/core-6.4.10.tgz#0c52621968b35e3a75e189e823d3b9e3bad77aff"
@@ -3294,10 +3286,10 @@
   resolved "https://registry.npmjs.org/@tootallnate/quickjs-emscripten/-/quickjs-emscripten-0.23.0.tgz#db4ecfd499a9765ab24002c3b696d02e6d32a12c"
   integrity sha512-C5Mc6rdnsaJDjO3UpGW/CQTHtCKaYlScZTly4JIu97Jxo/odCiH0ITnDXSJPTOrEKk/ycSZ0AOgTmkDtkOsvIA==
 
-"@tsconfig/react-native@^3.0.2":
-  version "3.0.2"
-  resolved "https://registry.npmjs.org/@tsconfig/react-native/-/react-native-3.0.2.tgz#f7db242eee4820f5a3d0edcc86c920bb7d9ec0f2"
-  integrity sha512-F7IoHEqf741lut4Z2K+IkWQRvXAhBiZMeY5L7BysG7Z2Z3MlIyFR+AagD8jQ/CqC1vowGnRwfLjeuwIpaeoJxA==
+"@tsconfig/react-native@^3.0.3":
+  version "3.0.3"
+  resolved "https://registry.yarnpkg.com/@tsconfig/react-native/-/react-native-3.0.3.tgz#38b306639571a0cd025467f90031897b52928986"
+  integrity sha512-3FVk8Uwb5YRwaHW/4dpcYQa5TTJSBXzIHRBDn3l+YmsXqFfcVGii+G8RPboC6I9iGgtUTxKHz3Y+6WDJDwVXnA==
 
 "@types/babel__core@^7.1.14":
   version "7.20.5"
@@ -3665,13 +3657,12 @@
   dependencies:
     "@types/react" "*"
 
-"@types/react-native@^0.72.6":
-  version "0.72.8"
-  resolved "https://registry.npmjs.org/@types/react-native/-/react-native-0.72.8.tgz#eb6238fab289f5f132f7ccf138bdfe6f21ed93e1"
-  integrity sha512-St6xA7+EoHN5mEYfdWnfYt0e8u6k2FR0P9s2arYgakQGFgU1f9FlPrIEcj0X24pLCF5c5i3WVuLCUdiCYHmOoA==
+"@types/react-native@^0.73.0":
+  version "0.73.0"
+  resolved "https://registry.yarnpkg.com/@types/react-native/-/react-native-0.73.0.tgz#b316be230745779814caa533360262140b0f5984"
+  integrity sha512-6ZRPQrYM72qYKGWidEttRe6M5DZBEV5F+MHMHqd4TTYx0tfkcdrUFGdef6CCxY0jXU7wldvd/zA/b0A/kTeJmA==
   dependencies:
-    "@react-native/virtualized-lists" "^0.72.4"
-    "@types/react" "*"
+    react-native "*"
 
 "@types/react-test-renderer@^18.0.6":
   version "18.0.7"
@@ -6771,10 +6762,10 @@ expo-asset@~9.0.2:
     invariant "^2.2.4"
     md5-file "^3.2.3"
 
-expo-clipboard@~4.5.0:
-  version "4.5.0"
-  resolved "https://registry.npmjs.org/expo-clipboard/-/expo-clipboard-4.5.0.tgz#4ef8f1f5635dbe4813503898d7372c2e278fbc6c"
-  integrity sha512-M3RfLWYuD+gNo8C305oa0zySQIwtomI4nrY0gXkNB6Ud7+99K+k0JNKPEZQohCa7XgL1YZRbJxth/zrbxSnxZQ==
+expo-clipboard@~5.0.1:
+  version "5.0.1"
+  resolved "https://registry.yarnpkg.com/expo-clipboard/-/expo-clipboard-5.0.1.tgz#a62a021a9444740d180d60f915cca8242a323716"
+  integrity sha512-JH853QJPr5W3h87If3aDTnMK+ESSIrwzU2TdfZrqZttVDY2pMIf/w37mVHHNYodXM4ATHXadtOkjKbAa0DWwUg==
 
 expo-constants@~15.4.0:
   version "15.4.5"
@@ -6807,10 +6798,10 @@ expo-keep-awake@^12.8.2, expo-keep-awake@~12.8.2:
   resolved "https://registry.yarnpkg.com/expo-keep-awake/-/expo-keep-awake-12.8.2.tgz#6cfdf8ad02b5fa130f99d4a1eb98e459d5b4332e"
   integrity sha512-uiQdGbSX24Pt8nGbnmBtrKq6xL/Tm3+DuDRGBk/3ZE/HlizzNosGRIufIMJ/4B4FRw4dw8KU81h2RLuTjbay6g==
 
-expo-modules-autolinking@1.10.1:
-  version "1.10.1"
-  resolved "https://registry.yarnpkg.com/expo-modules-autolinking/-/expo-modules-autolinking-1.10.1.tgz#a10c4dd400440fe3d78ff7298cda208bb65a340b"
-  integrity sha512-obHAsZwTewP5o1CQh17fttyJz+Rvoji5lJ6yZJdtIEap0Xaldj7/qJSofqBmoT6SUTD4V6af174YABJ3QQhbRQ==
+expo-modules-autolinking@1.10.2:
+  version "1.10.2"
+  resolved "https://registry.yarnpkg.com/expo-modules-autolinking/-/expo-modules-autolinking-1.10.2.tgz#a413235941c2f7167f5e5d5b66807f7417a5a8ea"
+  integrity sha512-OEeoz0+zGx5EJwGtDm9pSywCr+gUCaisZV0mNkK7V3fuRl+EVPBSsI+957JwAc4ZxVps95jy28eLcRRtQ33yVg==
   dependencies:
     "@expo/config" "~8.5.0"
     chalk "^4.1.0"
@@ -6831,10 +6822,10 @@ expo-secure-store@~12.8.1:
   resolved "https://registry.yarnpkg.com/expo-secure-store/-/expo-secure-store-12.8.1.tgz#369a570702fa1dc0c49ea41a5ab18aca2a986d38"
   integrity sha512-Ju3jmkHby4w7rIzdYAt9kQyQ7HhHJ0qRaiQOInknhOLIltftHjEgF4I1UmzKc7P5RCfGNmVbEH729Pncp/sHXQ==
 
-expo@^50.0.1:
-  version "50.0.1"
-  resolved "https://registry.yarnpkg.com/expo/-/expo-50.0.1.tgz#d9370b8f3b513630394a57b2e29845ee7b741e34"
-  integrity sha512-dX4ziV2PVPbQ6mfu+ZHisqNuV6jJFPR3cfxMY3INE2e0JiOsS7cSLKKxEQ3fRha6+itmJ7oPaqkfUKxX/pmkbA==
+expo@^50.0.2:
+  version "50.0.2"
+  resolved "https://registry.yarnpkg.com/expo/-/expo-50.0.2.tgz#65870c9fb9c34f5a2d1892ab1ece03b77a27bdad"
+  integrity sha512-nHb/ACe+vVm8lKkKj3LIWgypQI9oGSe9aNSzeJhT3/sBW/KIrnaSMgjs0WujqEJ85xMiXt7EQlwIFIdtBW82jg==
   dependencies:
     "@babel/runtime" "^7.20.0"
     "@expo/cli" "0.17.1"
@@ -6847,7 +6838,7 @@ expo@^50.0.1:
     expo-file-system "~16.0.4"
     expo-font "~11.10.2"
     expo-keep-awake "~12.8.2"
-    expo-modules-autolinking "1.10.1"
+    expo-modules-autolinking "1.10.2"
     expo-modules-core "1.11.7"
     fbemitter "^3.0.0"
     whatwg-url-without-unicode "8.0.0-3"
@@ -7890,10 +7881,10 @@ hyphenate-style-name@^1.0.3:
   resolved "https://registry.npmjs.org/hyphenate-style-name/-/hyphenate-style-name-1.0.4.tgz#691879af8e220aea5750e8827db4ef62a54e361d"
   integrity sha512-ygGZLjmXfPHj+ZWh6LwbC37l43MhfztxetbFCoYTM2VjkIUpeHgSNn7QIyVFj7YQ1Wl9Cbw5sholVJPzWvC2MQ==
 
-i18next@^23.7.16:
-  version "23.7.16"
-  resolved "https://registry.npmjs.org/i18next/-/i18next-23.7.16.tgz#7026d18b7a3ac9e2ecfeb78da5e4da5ca33312ef"
-  integrity sha512-SrqFkMn9W6Wb43ZJ9qrO6U2U4S80RsFMA7VYFSqp7oc7RllQOYDCdRfsse6A7Cq/V8MnpxKvJCYgM8++27n4Fw==
+i18next@^23.7.18:
+  version "23.7.18"
+  resolved "https://registry.yarnpkg.com/i18next/-/i18next-23.7.18.tgz#4f219e3702b08342c5519bc2cda7d09c67edebb9"
+  integrity sha512-b9N2KjRCYQNlUvE1Kc83g8knyUkL5NiZQOp9BsTR/v/LXk6Fzz+doOzTg2/826XK28mCgBkYLNAtixjE58qpCw==
   dependencies:
     "@babel/runtime" "^7.23.2"
 
@@ -11330,10 +11321,10 @@ react-freeze@^1.0.0:
   resolved "https://registry.npmjs.org/react-freeze/-/react-freeze-1.0.3.tgz#5e3ca90e682fed1d73a7cb50c2c7402b3e85618d"
   integrity sha512-ZnXwLQnGzrDpHBHiC56TXFXvmolPeMjTn1UOm610M4EXGzbEDR7oOIyS2ZiItgbs6eZc4oU/a0hpk8PrcKvv5g==
 
-react-i18next@^13.5.0:
-  version "13.5.0"
-  resolved "https://registry.npmjs.org/react-i18next/-/react-i18next-13.5.0.tgz#44198f747628267a115c565f0c736a50a76b1ab0"
-  integrity sha512-CFJ5NDGJ2MUyBohEHxljOq/39NQ972rh1ajnadG9BjTk+UXbHLq4z5DKEbEQBDoIhUmmbuS/fIMJKo6VOax1HA==
+react-i18next@^14.0.1:
+  version "14.0.1"
+  resolved "https://registry.yarnpkg.com/react-i18next/-/react-i18next-14.0.1.tgz#75351b25be076ad7391360b5a111b59ca87e0b63"
+  integrity sha512-TMV8hFismBmpMdIehoFHin/okfvgjFhp723RYgIqB4XyhDobVMyukyM3Z8wtTRmajyFMZrBl/OaaXF2P6WjUAw==
   dependencies:
     "@babel/runtime" "^7.22.5"
     html-parse-stringify "^3.0.1"
@@ -11756,10 +11747,10 @@ react-universal-interface@^0.6.2:
   resolved "https://registry.npmjs.org/react-universal-interface/-/react-universal-interface-0.6.2.tgz#5e8d438a01729a4dbbcbeeceb0b86be146fe2b3b"
   integrity sha512-dg8yXdcQmvgR13RIlZbTRQOoUrDciFVoSBZILwjE2LFISxZZ8loVJKAkuzswl5js8BHda79bIb2b84ehU8IjXw==
 
-react-use@^17.4.3:
-  version "17.4.3"
-  resolved "https://registry.yarnpkg.com/react-use/-/react-use-17.4.3.tgz#7c2309024f7e554be492241292edbd11342028ed"
-  integrity sha512-05Oyuwn4ZccdzLD4ttLbMe8TkobdKpOj7YCFE9VhVpbXrTWZpvCcMyroRw/Banh1RIcQRcM06tfzPpY5D9sTsQ==
+react-use@^17.5.0:
+  version "17.5.0"
+  resolved "https://registry.yarnpkg.com/react-use/-/react-use-17.5.0.tgz#1fae45638828a338291efa0f0c61862db7ee6442"
+  integrity sha512-PbfwSPMwp/hoL847rLnm/qkjg3sTRCvn6YhUZiHaUa3FA6/aNoFX79ul5Xt70O1rK+9GxSVqkY0eTwMdsR/bWg==
   dependencies:
     "@types/js-cookie" "^2.2.6"
     "@xobotyi/scrollbar-width" "^1.9.5"
@@ -14077,9 +14068,9 @@ yocto-queue@^0.1.0:
   dependencies:
     query-string "^8.1.0"
 
-zustand@^4.4.7:
-  version "4.4.7"
-  resolved "https://registry.npmjs.org/zustand/-/zustand-4.4.7.tgz#355406be6b11ab335f59a66d2cf9815e8f24038c"
-  integrity sha512-QFJWJMdlETcI69paJwhSMJz7PPWjVP8Sjhclxmxmxv/RYI7ZOvR5BHX+ktH0we9gTWQMxcne8q1OY8xxz604gw==
+zustand@^4.5.0:
+  version "4.5.0"
+  resolved "https://registry.yarnpkg.com/zustand/-/zustand-4.5.0.tgz#141354af56f91de378aa6c4b930032ab338f3ef0"
+  integrity sha512-zlVFqS5TQ21nwijjhJlx4f9iGrXSL0o/+Dpy4txAP22miJ8Ti6c1Ol1RLNN98BMib83lmDH/2KmLwaNXpjrO1A==
   dependencies:
     use-sync-external-store "1.2.0"
