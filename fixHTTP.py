@@ -1,17 +1,5 @@
-from pathlib import Path
 import os
-
-
-def fix_content(path: str, transform) -> None:
-    content = []
-    with open(Path(path), encoding='utf8') as f:
-        for i in f:
-            content.append(transform(i))
-
-    with open(Path(path), 'w', encoding='utf8') as f:
-        for line in content:
-            f.write(line)
-
+from scripts.dev_cleartext import fix_content
 
 if __name__ == '__main__':
     mfplugin_dir = './MusicFreePlugins/dist'
