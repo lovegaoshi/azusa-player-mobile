@@ -10,8 +10,7 @@
  */
 import { logger } from '../Logger';
 import { regexFetchProps } from './generic';
-import { songFetch, fetchVideoInfo } from './bilivideo';
-import VideoInfo from '@objects/VideoInfo';
+import { bvFetch } from './bilivideo';
 
 const URL_FAV_LIST =
   'https://api.bilibili.com/x/v3/fav/resource/ids?media_id={mid}';
@@ -25,18 +24,8 @@ export const getFavListBVID = async (mid: string, favList: string[] = []) => {
   return data.map(val => val.bvid).filter(val => !favList.includes(val));
 };
 
-export const fetchFavList = async (
-  mid: string,
-  progressEmitter: (val: number) => void = () => undefined,
-  favList: string[] = []
-) => {
-  const bvids = await getFavListBVID(mid, favList);
-  const BVidPromises = bvids.map((val, i) =>
-    fetchVideoInfo(val, () => {
-      progressEmitter((100 * (i + 1)) / bvids.length);
-    })
-  );
-  return (await Promise.all(BVidPromises)).filter(item => item) as VideoInfo[];
+export const fetchFavList = async (mid: string, favList: string[] = []) => {
+  return await getFavListBVID(mid, favList);
 };
 
 const regexFetch = async ({
@@ -44,13 +33,13 @@ const regexFetch = async ({
   progressEmitter = () => undefined,
   favList,
   useBiliTag,
-}: regexFetchProps): Promise<NoxNetwork.NoxRegexFetch> => ({
-  songList: await songFetch({
-    videoinfos: await fetchFavList(reExtracted[1]!, progressEmitter, favList),
+}: regexFetchProps) =>
+  bvFetch({
+    bvids: await fetchFavList(reExtracted[1]!, favList),
     useBiliTag: useBiliTag || false,
     progressEmitter,
-  }),
-});
+    reExtracted: [] as unknown as RegExpExecArray,
+  });
 
 const resolveURL = () => undefined;
 
