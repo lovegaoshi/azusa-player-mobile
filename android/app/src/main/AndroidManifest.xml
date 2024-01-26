@@ -6,6 +6,7 @@
     
     <!--com.github.yyued:SVGAPlayer-Android:2.6.1 has allowBackup = true; doing tools:replace below. -->
     <application    
+        android:usesCleartextTraffic="false"
         tools:replace="android:allowBackup"
         android:name="com.noxplay.noxplayer.MainApplication"
         android:allowBackup="false"

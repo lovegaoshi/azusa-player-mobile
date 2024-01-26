@@ -10,47 +10,76 @@
  */
 import { logger } from '../Logger';
 import { regexFetchProps } from './generic';
-import { songFetch, fetchVideoInfo } from './bilivideo';
-import VideoInfo from '@objects/VideoInfo';
+import { bvFetch } from './bilivideo';
+import biliaudioFetch from './biliaudio';
 
 const URL_FAV_LIST =
   'https://api.bilibili.com/x/v3/fav/resource/ids?media_id={mid}';
 
-export const getFavListBVID = async (mid: string, favList: string[] = []) => {
+interface BiliFavListData {
+  id: number;
+  type: number;
+  bv_id: string;
+  bvid: string;
+}
+
+const getFavList = async (mid: string) => {
   logger.info('calling fetchFavList');
 
   const res = await fetch(URL_FAV_LIST.replace('{mid}', mid));
   const json = await res.json();
-  const data = json.data as { bvid: string }[];
-  return data.map(val => val.bvid).filter(val => !favList.includes(val));
+  const data = json.data as BiliFavListData[];
+  return data;
 };
 
-export const fetchFavList = async (
+export const getFavListBVID = async (
   mid: string,
-  progressEmitter: (val: number) => void = () => undefined,
-  favList: string[] = []
+  favList: string[] = [],
+  type = 2
 ) => {
-  const bvids = await getFavListBVID(mid, favList);
-  const BVidPromises = bvids.map((val, i) =>
-    fetchVideoInfo(val, () => {
-      progressEmitter((100 * (i + 1)) / bvids.length);
-    })
-  );
-  return (await Promise.all(BVidPromises)).filter(item => item) as VideoInfo[];
+  const data = await getFavList(mid);
+  return data
+    .filter(val => val.type === type)
+    .map(val => val.bvid)
+    .filter(val => !favList.includes(val));
 };
 
 const regexFetch = async ({
   reExtracted,
   progressEmitter = () => undefined,
-  favList,
+  favList = [],
   useBiliTag,
-}: regexFetchProps): Promise<NoxNetwork.NoxRegexFetch> => ({
-  songList: await songFetch({
-    videoinfos: await fetchFavList(reExtracted[1]!, progressEmitter, favList),
+}: regexFetchProps) => {
+  // TODO: refactor this???
+  const favFetched = await getFavList(reExtracted[1]!);
+  const bvids = favFetched
+    .filter(val => val.type === 2)
+    .map(val => val.bvid)
+    .filter(val => !favList.includes(val));
+  // HACK: https://api.bilibili.com/x/v3/fav/resource/ids?media_id=2446762296
+  const avids = favFetched
+    .filter(val => val.type === 12)
+    .map(val => String(val.id))
+    .filter(val => !favList.includes(val));
+
+  const BVfetched = await bvFetch({
+    bvids,
     useBiliTag: useBiliTag || false,
     progressEmitter,
-  }),
-});
+    reExtracted: [] as unknown as RegExpExecArray,
+  });
+
+  const AVfetched = await Promise.all(
+    avids.map(avid =>
+      biliaudioFetch.regexFetch({
+        reExtracted: [0, Number(avid)] as unknown as RegExpExecArray,
+      })
+    )
+  );
+  return {
+    songList: BVfetched.songList.concat(AVfetched.map(v => v.songList).flat()),
+  };
+};
 
 const resolveURL = () => undefined;
 

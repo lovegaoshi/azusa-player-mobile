@@ -74,7 +74,7 @@ export const fetchVideoInfo = async (
     return fetchVideoInfoRaw(bvid);
   });
 
-export const fetchiliBVIDs = async (
+export const fetchBiliBVIDs = async (
   BVids: string[],
   progressEmitter: (val: number) => void = () => undefined
 ) => {
@@ -122,15 +122,28 @@ export const songFetch = async ({
   return songs;
 };
 
-const regexFetch = async ({
-  reExtracted,
+interface BVRegFetchProps extends regexFetchProps {
+  bvids: string[];
+}
+
+export const bvFetch = async ({
+  bvids,
   useBiliTag,
-}: regexFetchProps): Promise<NoxNetwork.NoxRegexFetch> => ({
+  progressEmitter = () => undefined,
+}: BVRegFetchProps): Promise<NoxNetwork.NoxRegexFetch> => ({
   songList: await songFetch({
-    videoinfos: await fetchiliBVIDs([reExtracted[1]!]), // await fetchiliBVID([reExtracted[1]!])
+    videoinfos: await fetchBiliBVIDs(bvids, progressEmitter), // await fetchiliBVID([reExtracted[1]!])
     useBiliTag: useBiliTag || false,
+    progressEmitter,
   }),
 });
+
+const regexFetch = ({ reExtracted, useBiliTag }: regexFetchProps) =>
+  bvFetch({
+    reExtracted,
+    useBiliTag,
+    bvids: [reExtracted[1]!],
+  });
 
 interface FetchPlayURL {
   bvid: string;
