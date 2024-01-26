@@ -7,7 +7,7 @@ import { getPlaylistUniqBVIDs } from '../objects/Playlist';
 import {
   fetchVideoInfo,
   songFetch,
-  fetchiliBVIDs,
+  fetchBiliBVIDs,
 } from '../utils/mediafetch/bilivideo';
 import { biliShazamOnSonglist } from '../utils/mediafetch/bilishazam';
 import { syncFavlist } from '@utils/Bilibili/bilifavOperate';
@@ -129,7 +129,7 @@ const usePlaylistCRUD = (mPlaylist?: NoxMedia.Playlist) => {
 
   const playlistReload = async (playlist = currentPlaylist) => {
     const newSongList = await songFetch({
-      videoinfos: await fetchiliBVIDs(
+      videoinfos: await fetchBiliBVIDs(
         getPlaylistUniqBVIDs(playlist),
         progressEmitter
       ), // await fetchiliBVID([reExtracted[1]!])
@@ -205,7 +205,7 @@ const usePlaylistCRUD = (mPlaylist?: NoxMedia.Playlist) => {
       songList: playlist.songList.filter(song => !bvids.includes(song.bvid)),
     };
     const newSongList = await songFetch({
-      videoinfos: await fetchiliBVIDs(bvids, progressEmitter),
+      videoinfos: await fetchBiliBVIDs(bvids, progressEmitter),
       useBiliTag: playlist.useBiliShazam || false,
     });
     updatePlaylist(newPlaylist, newSongList);

@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { wbiQuery } from '@stores/wbi';
-import { fetchiliBVIDs } from './bilivideo';
+import { fetchBiliBVIDs } from './bilivideo';
 import {
   fetchPaginatedAPI,
   fetchAwaitPaginatedAPI,
@@ -19,7 +19,7 @@ export const fetchBiliPaginatedAPI = async ({
   params = undefined,
   limiter = biliApiLimiter,
   resolveBiliBVID = async (bvobjs, progressEmitter2) =>
-    await fetchiliBVIDs(
+    await fetchBiliBVIDs(
       bvobjs.map((obj: any) => obj.bvid),
       progressEmitter2
     ),
@@ -50,7 +50,7 @@ export const fetchAwaitBiliPaginatedAPI = async ({
   params = undefined,
   limiter = biliApiLimiter,
   resolveBiliBVID = async (bvobjs, progressEmitter2) =>
-    await fetchiliBVIDs(
+    await fetchBiliBVIDs(
       bvobjs.map((obj: any) => obj.bvid),
       progressEmitter2
     ),
