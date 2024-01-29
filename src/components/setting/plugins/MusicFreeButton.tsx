@@ -4,7 +4,7 @@ import { Image } from 'expo-image';
 
 import GenericCheckDialog from '@components/dialogs/GenericCheckDialog';
 import { SettingListItem } from '../useRenderSetting';
-import { MUSICFREE } from '@utils/mediafetch/mfsdk';
+import { MUSICFREE } from '@utils/mediafetch/musicfree';
 import { getMusicFreePlugin, setMusicFreePlugin } from '@utils/ChromeStorage';
 import { StyleSheet } from 'react-native';
 

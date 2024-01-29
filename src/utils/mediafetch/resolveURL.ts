@@ -4,7 +4,7 @@ import ytbvideoFetch from '@utils/mediafetch/ytbvideo';
 import bililiveFetch from './bililive';
 import { logger } from '../Logger';
 import { regexMatchOperations } from '../Utils';
-import { resolver, MUSICFREE } from './mfsdk';
+import { resolver, MUSICFREE } from './musicfree';
 import bilivideoFetch, { fetchVideoPlayUrlPromise } from './bilivideo';
 
 // TODO: remove this, believe this is for legacy reasons?

@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Menu } from 'react-native-paper';
 
 import { SEARCH_OPTIONS } from '@enums/Storage';
-import { MUSICFREE } from '@utils/mediafetch/mfsdk';
+import { MUSICFREE } from '@utils/mediafetch/musicfree';
 import ICONS from './Icons';
 import { useNoxSetting } from '@stores/useApp';
 

@@ -15,7 +15,7 @@ import {
   DEFAULT_SETTING,
   SEARCH_OPTIONS,
 } from '@enums/Storage';
-import { MUSICFREE } from './mediafetch/mfsdk';
+import { MUSICFREE } from './mediafetch/musicfree';
 /**
  * noxplayer's storage handler.
  * ChromeStorage has quite a few changes from azusa player the chrome extension;
