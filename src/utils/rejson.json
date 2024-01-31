@@ -276,6 +276,10 @@
     "operations": [[2], [1, ["「(.+)」"]]]
   },
   {
+    "uploaders": ["1487367615"],
+    "operations": [[2], [1, ["【赫卡特_Hecate】(.+)"]]]
+  },
+  {
     "uploaders": [""],
     "operations": [[2], [1, []]]
   }
