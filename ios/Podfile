@@ -68,6 +68,9 @@ target 'azusa-player-mobile' do
       if target.name == "React-Core.common-AccessibilityResources"
         target.remove_from_project
       end
+      if target.name == "React-Core.common-RCTI18nStrings"
+        target.remove_from_project
+      end
     end
   end
 end
