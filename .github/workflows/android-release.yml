@@ -196,7 +196,7 @@ jobs:
           # status: draft
 
   buildIPA:
-    runs-on: macos-12
+    runs-on: macos-14
     name: build IPA
     permissions:
       contents: write
