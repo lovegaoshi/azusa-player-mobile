@@ -17,7 +17,7 @@
                BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
                BuildableName = "AzusaPlayer.app"
                BlueprintName = "azusa-player-mobile"
-               ReferencedContainer = "container:example.xcodeproj">
+               ReferencedContainer = "container:APM.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -35,7 +35,7 @@
                BlueprintIdentifier = "00E356ED1AD99517003FC87E"
                BuildableName = "APMTests.xctest"
                BlueprintName = "APMTests"
-               ReferencedContainer = "container:example.xcodeproj">
+               ReferencedContainer = "container:APM.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -57,7 +57,7 @@
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
             BuildableName = "AzusaPlayer.app"
             BlueprintName = "azusa-player-mobile"
-            ReferencedContainer = "container:example.xcodeproj">
+            ReferencedContainer = "container:APM.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -74,7 +74,7 @@
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
             BuildableName = "AzusaPlayer.app"
             BlueprintName = "azusa-player-mobile"
-            ReferencedContainer = "container:example.xcodeproj">
+            ReferencedContainer = "container:APM.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
