@@ -13,6 +13,7 @@ import { regexFetchProps } from './generic';
 import { songFetch } from './bilivideo';
 import { fetchAwaitBiliPaginatedAPI } from './paginatedbili';
 import { awaitLimiter } from './throttle';
+import { getDm } from '../Bilibili/bilidm';
 
 const URL_BILICHANNEL_INFO =
   'https://api.bilibili.com/x/space/wbi/arc/search?mid={mid}&pn={pn}&jsonp=jsonp&ps=50';
@@ -31,7 +32,7 @@ export const fetchBiliChannelList = async (
     searchAPI += `&tid=${String(tidVal[1])}`;
   }
   return fetchAwaitBiliPaginatedAPI({
-    url: searchAPI,
+    url: searchAPI + getDm(),
     getMediaCount: data => data.page.count,
     getPageSize: data => data.page.ps,
     getItems: js => js.data.list.vlist,
