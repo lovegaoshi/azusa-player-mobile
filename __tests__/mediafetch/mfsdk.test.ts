@@ -1,4 +1,4 @@
-import { searcher, MUSICFREE, resolver } from '@utils/mediafetch/mfsdk';
+import { searcher, MUSICFREE, resolver } from '@utils/mediafetch/musicfree';
 
 test('test musicfree sdk', async () => {
   const content = await searcher[MUSICFREE.fivesing]('maroon 5', 1, 'music');

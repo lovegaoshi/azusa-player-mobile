@@ -17,7 +17,7 @@ import ytbsearchFetch from './mediafetch/ytbsearch';
 import bililiveFetch from './mediafetch/bililive';
 import bilisubliveFetch from './mediafetch/bilisublive';
 import { regexFetchProps } from './mediafetch/generic';
-import { MUSICFREE, searcher } from '@utils/mediafetch/mfsdk';
+import { MUSICFREE, searcher } from './mediafetch/musicfree';
 import { getMusicFreePlugin } from '@utils/ChromeStorage';
 
 /**

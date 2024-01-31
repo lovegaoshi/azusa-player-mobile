@@ -22,7 +22,7 @@ import { createStyle } from '@components/style';
 import { getABRepeatRaw } from './appStore';
 import { setPlayingList, setPlayingIndex } from '@stores/playingList';
 import DummyLyricDetail from '../objects/LyricDetail';
-import { MUSICFREE } from '@utils/mediafetch/mfsdk';
+import { MUSICFREE } from '../utils/mediafetch/musicfree';
 
 interface NoxSetting {
   searchOption: SEARCH_OPTIONS | MUSICFREE;
