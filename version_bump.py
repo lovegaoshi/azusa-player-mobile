@@ -35,6 +35,25 @@ def bump_version():
         for line in build_gradle:
             f.write(line)
 
+    build_gradle = []
+    with open(Path('./ios/APM.xcodeproj/project.pbxproj'), encoding='utf8') as f:
+        for line in f:
+            find_version_code = re.search(
+                r'(.+CURRENT_PROJECT_VERSION = )(\d+);', line)
+            find_version_name = re.search(
+                r'(.+MARKETING_VERSION = ).+;', line)
+            if not '//' in line and find_version_code:
+                build_gradle.append(
+                    f"{find_version_code.group(1)}{int(find_version_code.group(2)) + 1};\n")
+            elif find_version_name:
+                build_gradle.append(
+                    f"{find_version_name.group(1)}{new_version};\n")
+            else:
+                build_gradle.append(line)
+    with open(Path('./ios/APM.xcodeproj/project.pbxproj'), 'w', encoding='utf8') as f:
+        for line in build_gradle:
+            f.write(line)
+
 
 if __name__ == '__main__':
     bump_version()
