@@ -38,6 +38,7 @@ export default () => {
       i18n.changeLanguage(language);
       const serviceOptions = {
         noInterruption: storedPlayerSetting.noInterruption,
+        keepForeground: storedPlayerSetting.keepForeground,
         lastPlayDuration,
       };
       await SetupService(serviceOptions);

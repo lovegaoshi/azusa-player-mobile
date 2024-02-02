@@ -68,6 +68,9 @@ export const animatedVolumeChange = ({
   }).start(() => callback());
 };
 
+interface RNTPOptions {
+  keepForeground?: boolean;
+}
 /**
  * see export function useSetupPlayer.
  * wait SetupService(serviceOptions) is called after await initPlayer(await initPlayerObject())
@@ -75,11 +78,12 @@ export const animatedVolumeChange = ({
  * playlistStore.playmode is already set
  * this should return the correct icon for playback mode.
  */
-export const initRNTPOptions = () => {
+export const initRNTPOptions = ({ keepForeground = false }: RNTPOptions) => {
   const options: UpdateOptions = {
     android: {
       appKilledPlaybackBehavior:
         AppKilledPlaybackBehavior.StopPlaybackAndRemoveNotification,
+      stopForegroundGracePeriod: keepForeground ? 99999999 : 5,
     },
     // This flag is now deprecated. Please use the above to define playback mode.
     // stoppingAppPausesPlayback: true,
