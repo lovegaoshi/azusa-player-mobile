@@ -1,15 +1,14 @@
 import * as React from 'react';
-import { View, ScrollView, Alert } from 'react-native';
+import { View, ScrollView } from 'react-native';
 import { List } from 'react-native-paper';
 import { useTranslation } from 'react-i18next';
 // eslint-disable-next-line import/no-unresolved
 import { APPSTORE } from '@env';
 import { useStore } from 'zustand';
-import * as Clipboard from 'expo-clipboard';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import { useNoxSetting } from '@stores/useApp';
-import { logStore, LOGLEVEL, getLog, resetLog } from '@utils/Logger';
+import { logStore, LOGLEVEL } from '@utils/Logger';
 import GenericSelectDialog from '../dialogs/GenericSelectDialog';
 import { SettingListItem, RenderSetting } from './useRenderSetting';
 import useVersionCheck from '@hooks/useVersionCheck';
@@ -24,6 +23,8 @@ import appStore from '@stores/appStore';
 import { saveFadeInterval } from '@utils/ChromeStorage';
 import GroupView from '../background/GroupView';
 import PluginSettings from './plugins/View';
+import showLog from './debug/Log';
+import { showDebugLog } from './debug/DebugConsole';
 
 enum ICONS {
   setlog = 'console',
@@ -53,10 +54,6 @@ const developerSettings: { [key: string]: SettingEntry } = {
   },
   prefetchTrack: {
     settingName: 'prefetchTrack',
-    settingCategory: 'GeneralSettings',
-  },
-  screenAlwaysWake: {
-    settingName: 'screenAlwaysWake',
     settingCategory: 'GeneralSettings',
   },
   /**
@@ -151,20 +148,6 @@ const Home = ({ navigation }: NoxComponent.NavigationProps) => {
     } as SelectSettingEntry<number>);
   };
 
-  const showLog = () => {
-    const logs = getLog();
-    Alert.alert(
-      'Log',
-      logs,
-      [
-        { text: 'Clear', onPress: () => resetLog() },
-        { text: 'Copy', onPress: () => Clipboard.setStringAsync(logs) },
-        { text: 'OK', onPress: () => undefined },
-      ],
-      { cancelable: true }
-    );
-  };
-
   return (
     <View
       style={{
@@ -178,7 +161,6 @@ const Home = ({ navigation }: NoxComponent.NavigationProps) => {
             <View>
               <RenderSetting item={developerSettings.noInterruption} />
               <RenderSetting item={developerSettings.prefetchTrack} />
-              <RenderSetting item={developerSettings.screenAlwaysWake} />
             </View>
           </GroupView>
           <SettingListItem
@@ -195,6 +177,12 @@ const Home = ({ navigation }: NoxComponent.NavigationProps) => {
               settingCategory="DeveloperSettings"
             />
           )}
+          <SettingListItem
+            icon={ICONS.showlog}
+            settingName="DebugLog"
+            onPress={showDebugLog}
+            settingCategory="DeveloperSettings"
+          />
           <SettingListItem
             icon={ICONS.showlog}
             settingName="Log"
