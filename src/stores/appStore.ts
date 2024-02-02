@@ -68,8 +68,8 @@ const appStore = createStore<AppStore>(set => ({
   setDownloadPromiseMap: (val: NoxStorage.DownloadDict) => {
     set({ downloadPromiseMap: val });
   },
-  fadeIntervalMs: 500,
-  fadeIntervalSec: 0.5,
+  fadeIntervalMs: 0,
+  fadeIntervalSec: 0,
   setRNTPOptions: (val: UpdateOptions) => {
     set({ RNTPOptions: val });
   },

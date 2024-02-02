@@ -191,7 +191,7 @@ const Home = ({ navigation }: NoxComponent.NavigationProps) => {
           <SettingListItem
             icon={ICONS.showlog}
             settingName="Log"
-            onPress={showLog}
+            onPress={() => showLog()}
             settingCategory="DeveloperSettings"
           />
           <SettingListItem
