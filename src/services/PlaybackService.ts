@@ -115,12 +115,9 @@ export async function PlaybackService() {
       // another setR128Gain is in Cache.saveCacheMedia where the file is fetched, which is never a scenario here
       if (event.track.url !== NULL_TRACK.url) {
         // this is when song is first played.
-        logger.debug('[FADEIN] fading in...');
-        await parseSongR128gain(
-          event.track.song,
-          getAppStoreState().fadeIntervalMs,
-          0
-        );
+        const fadeIntervalMs = getAppStoreState().fadeIntervalMs;
+        logger.debug(`[FADEIN] fading in of ${fadeIntervalMs}...`);
+        await parseSongR128gain(event.track.song, fadeIntervalMs, 0);
       }
       const heartBeatReq = [event.track.song.bvid, event.track.song.id];
       // HACK: what if cid needs to be resolved on the fly?
@@ -166,8 +163,10 @@ export async function PlaybackService() {
   });
 
   if (Platform.OS === 'android') {
-    TrackPlayer.addEventListener(Event.PlaybackAnimatedVolumeChanged, () => {
-      logger.debug('animated volume finished event triggered');
+    TrackPlayer.addEventListener(Event.PlaybackAnimatedVolumeChanged, e => {
+      logger.debug(
+        `animated volume finished event triggered: ${JSON.stringify(e)}`
+      );
       getAppStoreState().animatedVolumeChangedCallback();
       setState({ animatedVolumeChangedCallback: () => undefined });
     });
