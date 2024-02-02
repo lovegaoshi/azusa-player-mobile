@@ -41,6 +41,10 @@ const GEN_SETTING_BOOLEAN: SettingEntry[] = [
     settingName: 'suggestedSkipLongVideo',
     settingCategory: 'GeneralSettings',
   },
+  {
+    settingName: 'screenAlwaysWake',
+    settingCategory: 'GeneralSettings',
+  },
 ];
 
 export default () => {

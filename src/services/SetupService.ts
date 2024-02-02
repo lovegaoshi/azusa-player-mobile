@@ -25,12 +25,13 @@ const setupPlayer = async (
 
 export const SetupService = async ({
   noInterruption = false,
+  keepForeground = false,
 }: Partial<NoxStorage.PlayerSettingDict>) => {
   await setupPlayer({
     autoHandleInterruptions: noInterruption ? false : true,
     maxCacheSize: 1024 * 100,
   });
-  const RNTPOptions = initRNTPOptions();
+  const RNTPOptions = initRNTPOptions({ keepForeground });
   setState({ RNTPOptions });
   await TrackPlayer.updateOptions(RNTPOptions);
   await TrackPlayer.setRepeatMode(RepeatMode.Off);
