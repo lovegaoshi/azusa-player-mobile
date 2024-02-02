@@ -66,6 +66,7 @@ export const DEFAULT_SETTING: NoxStorage.PlayerSettingDict = {
   wavyProgressBar: false,
   screenAlwaysWake: false,
   biliEditAPI: false,
+  keepForeground: false,
 
   appID,
   language: undefined,

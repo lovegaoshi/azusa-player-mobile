@@ -56,6 +56,10 @@ const developerSettings: { [key: string]: SettingEntry } = {
     settingName: 'prefetchTrack',
     settingCategory: 'GeneralSettings',
   },
+  keepForeground: {
+    settingName: 'keepForeground',
+    settingCategory: 'GeneralSettings',
+  },
   /**
   chatGPTSongName: {
     settingName: 'chatGPTResolveSongName',
@@ -161,6 +165,7 @@ const Home = ({ navigation }: NoxComponent.NavigationProps) => {
             <View>
               <RenderSetting item={developerSettings.noInterruption} />
               <RenderSetting item={developerSettings.prefetchTrack} />
+              <RenderSetting item={developerSettings.keepForeground} />
             </View>
           </GroupView>
           <SettingListItem

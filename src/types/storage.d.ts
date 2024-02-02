@@ -38,6 +38,7 @@ declare global {
       suggestedSkipLongVideo: boolean;
       wavyProgressBar: boolean;
       screenAlwaysWake: boolean;
+      keepForeground: boolean;
 
       appID: string;
       language?: string;
