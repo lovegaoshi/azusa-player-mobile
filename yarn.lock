@@ -3999,10 +3999,10 @@
     "@types/scheduler" "*"
     csstype "^3.0.2"
 
-"@types/react@^18.2.51":
-  version "18.2.51"
-  resolved "https://registry.npmjs.org/@types/react/-/react-18.2.51.tgz#01ede6dfc712796257a3443bf8d613149e5c322a"
-  integrity sha512-XeoMaU4CzyjdRr3c4IQQtiH7Rpo18V07rYZUucEZQwOUEtGgTXv7e6igQiQ+xnV6MbMe1qjEmKdgMNnfppnXfg==
+"@types/react@^18.2.52":
+  version "18.2.52"
+  resolved "https://registry.npmjs.org/@types/react/-/react-18.2.52.tgz#83ca0c62bd1ff31464dac4cf1937e55c78f77aa2"
+  integrity sha512-E/YjWh3tH+qsLKaUzgpZb5AY0ChVa+ZJzF7ogehVILrFpdQk6nC/WXOv0bfFEABbXbgNxLBGU7IIZByPKb6eBw==
   dependencies:
     "@types/prop-types" "*"
     "@types/scheduler" "*"
@@ -11845,7 +11845,7 @@ react-native-tab-view@^3.5.1:
 
 "react-native-track-player@git+https://lovegaoshi@github.com/lovegaoshi/react-native-track-player.git#APM":
   version "4.0.1"
-  resolved "git+https://lovegaoshi@github.com/lovegaoshi/react-native-track-player.git#db916b1645cc96e7d90a6ebd67a4446bd81f8003"
+  resolved "git+https://lovegaoshi@github.com/lovegaoshi/react-native-track-player.git#740e01e7f4260555c547ce8bb1f83d4efc641131"
 
 react-native-url-polyfill@^2.0.0:
   version "2.0.0"
