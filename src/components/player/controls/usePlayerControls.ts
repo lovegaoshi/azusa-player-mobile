@@ -46,6 +46,7 @@ export default () => {
   useTrackPlayerEvents([Event.PlaybackProgressUpdated], event => {
     saveLastPlayDuration(event.position);
     if (
+      fadeIntervalSec > 0 &&
       event.duration > 0 &&
       event.position >
         Math.min(bRepeatDuration, event.duration) - fadeIntervalSec

@@ -38,9 +38,7 @@ export default ({ track }: NoxComponent.TrackProps) => {
     if (Platform.OS === 'android') {
       const newRNTPOptions = {
         ...getAppStoreState().RNTPOptions,
-        forwardIcon: heart
-          ? require('@assets/icons/heart.png')
-          : require('@assets/icons/heart-outline.png'),
+        forwardIcon: heart ? 1 : 0,
       };
       TrackPlayer.updateOptions(newRNTPOptions);
       setRNTPOptions(newRNTPOptions);

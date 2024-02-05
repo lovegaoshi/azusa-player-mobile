@@ -88,7 +88,7 @@ export const getNextSong = (song: NoxMedia.Song) => {
 export const getPlaybackModeNotifIcon = (
   state?: string
 ): [number, RepeatMode] => {
-  let nextIcon = require('@assets/icons/repeatModeRepeat.png');
+  let nextIcon = 2;
   if (!state) {
     state = playlistStore.getState().playmode;
   }
@@ -100,17 +100,17 @@ export const getPlaybackModeNotifIcon = (
   let TPRepeatMode = RepeatMode.Off;
   switch (state) {
     case NoxRepeatMode.REPEAT:
-      nextIcon = require('@assets/icons/repeatModeRepeat.png');
+      nextIcon = 2;
       break;
     case NoxRepeatMode.REPEAT_TRACK:
-      nextIcon = require('@assets/icons/repeatModeRepeatTrack.png');
+      nextIcon = 3;
       TPRepeatMode = RepeatMode.Track;
       break;
     case NoxRepeatMode.SUGGEST:
-      nextIcon = require('@assets/icons/repeatModeSuggest.png');
+      nextIcon = 5;
       break;
     case NoxRepeatMode.SHUFFLE:
-      nextIcon = require('@assets/icons/repeatModeShuffle.png');
+      nextIcon = 4;
       break;
     default:
       break;
