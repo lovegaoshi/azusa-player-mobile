@@ -3999,10 +3999,10 @@
     "@types/scheduler" "*"
     csstype "^3.0.2"
 
-"@types/react@^18.2.53":
-  version "18.2.53"
-  resolved "https://registry.yarnpkg.com/@types/react/-/react-18.2.53.tgz#09c21b4621aaad5fed6a5045b33a7430749d8dc5"
-  integrity sha512-52IHsMDT8qATp9B9zoOyobW8W3/0QhaJQTw1HwRj0UY2yBpCAQ7+S/CqHYQ8niAm3p4ji+rWUQ9UCib0GxQ60w==
+"@types/react@^18.2.54":
+  version "18.2.54"
+  resolved "https://registry.yarnpkg.com/@types/react/-/react-18.2.54.tgz#0899236363ab39cb12690367cbb62febb56bc94c"
+  integrity sha512-039k+vrVJymDoe2y+HLk3O3oI3sa+C8KNjuDKofqrIJK26ramnqLNj9VJTaxAzFGMvpW/79HrrAJapHzpQ9fGQ==
   dependencies:
     "@types/prop-types" "*"
     "@types/scheduler" "*"
@@ -11686,10 +11686,10 @@ react-native-clean-project@^4.0.1:
   resolved "https://registry.npmjs.org/react-native-clean-project/-/react-native-clean-project-4.0.3.tgz#7ea174d2cb789e0c1d24defbeba561fcbf1beb9e"
   integrity sha512-tWNhac5R4BetY7sZSRgaWUDSMpT207nJRuUwMZInmYJR3HucMZGIIUaiDH/pbFxXSDq4GMj4P7FnHxGLDobJ8w==
 
-react-native-code-push@^8.1.1:
-  version "8.1.1"
-  resolved "https://registry.npmjs.org/react-native-code-push/-/react-native-code-push-8.1.1.tgz#ddc8a2007c0c4367750cc4c38514e6c5e9df5393"
-  integrity sha512-QTgTGVJIv7jKUbJXhLh85UxnRyOj+cXzNd9OgF+siY1QKpEvxFUAukeR2NQP4F149lrlwTu+QFkEJDsrP003aQ==
+react-native-code-push@^8.2.1:
+  version "8.2.1"
+  resolved "https://registry.yarnpkg.com/react-native-code-push/-/react-native-code-push-8.2.1.tgz#25b2f1d2e6e30065d85f1707365462b2fbc22833"
+  integrity sha512-YCNDRTcVoK7pBMmm/CqOr+J3Pb7HjjHsWoke/xizv7Xx1NTN90k6jDykzAItiBMxJ0bc+zdFP1qNsZRT1NKHOg==
   dependencies:
     code-push "^4.2.0"
     glob "^7.1.7"
@@ -11845,7 +11845,7 @@ react-native-tab-view@^3.5.1:
 
 "react-native-track-player@git+https://lovegaoshi@github.com/lovegaoshi/react-native-track-player.git#APM":
   version "4.0.1"
-  resolved "git+https://lovegaoshi@github.com/lovegaoshi/react-native-track-player.git#bb8d846436b17805933a5ddd4a74392561536323"
+  resolved "git+https://lovegaoshi@github.com/lovegaoshi/react-native-track-player.git#fe074697eb6f2cbecf398dc8e59815b68c05318f"
 
 react-native-url-polyfill@^2.0.0:
   version "2.0.0"
