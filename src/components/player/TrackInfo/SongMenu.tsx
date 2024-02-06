@@ -2,7 +2,6 @@ import * as React from 'react';
 import { Menu } from 'react-native-paper';
 import { Alert } from 'react-native';
 import { useTranslation } from 'react-i18next';
-import TrackPlayer from 'react-native-track-player';
 
 import { useNoxSetting } from '@stores/useApp';
 import usePlaylistCRUD from '@hooks/usePlaylistCRUD';
@@ -72,12 +71,7 @@ export default ({
       name,
       parsedName: name,
     });
-    const index = await TrackPlayer.getActiveTrackIndex();
-    index !== undefined &&
-      (await TrackPlayer.updateMetadataForTrack(index, {
-        title: name,
-      }));
-    updateTrack();
+    updateTrack({ title: name });
   };
 
   const reloadSong = async () => {
@@ -86,13 +80,10 @@ export default ({
       songMenuSongIndexes[0],
       currentPlaylist2
     );
-    const index = await TrackPlayer.getActiveTrackIndex();
-    index !== undefined &&
-      (await TrackPlayer.updateMetadataForTrack(index, {
-        title: metadata.name,
-        artwork: metadata.cover,
-      }));
-    updateTrack();
+    updateTrack({
+      title: metadata.name,
+      artwork: metadata.cover,
+    });
     return metadata;
   };
 

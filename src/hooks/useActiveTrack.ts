@@ -5,9 +5,10 @@ const useTrack = () => {
   const activeTrack = useActiveTrack();
   const [track, setTrack] = React.useState<Track | undefined>(activeTrack);
 
-  const updateTrack = async () => {
+  const updateTrack = async (metadata: Partial<Track> = {}) => {
     const index = await TrackPlayer.getActiveTrackIndex();
     if (index === undefined) return;
+    await TrackPlayer.updateMetadataForTrack(index, metadata);
     const queue = await TrackPlayer.getQueue();
     setTrack({ ...queue[index] });
   };
