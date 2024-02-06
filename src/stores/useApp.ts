@@ -30,7 +30,8 @@ interface NoxSetting {
 
   gestureMode: boolean;
   setGestureMode: (val: boolean) => void;
-  updateTrack: () => void;
+  // TODO: fix type
+  updateTrack: (metadata: any) => void;
   setUpdateTrack: (val: () => void) => void;
   appRefresh: boolean;
   setAppRefresh: () => void;

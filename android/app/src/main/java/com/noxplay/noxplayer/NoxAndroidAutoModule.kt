@@ -18,29 +18,32 @@ import com.facebook.react.bridge.ReactMethod
 class NoxAndroidAutoModule(reactContext: ReactApplicationContext) : ReactContextBaseJavaModule(reactContext) {
   override fun getName() = "NoxAndroidAutoModule"
 
-  @RequiresApi(Build.VERSION_CODES.R)
   @ReactMethod fun getLastExitReason(callback: Promise) {
     try {
       val activity = reactApplicationContext.currentActivity
       val am = activity?.getSystemService(Context.ACTIVITY_SERVICE) as ActivityManager
-      val reason = am.getHistoricalProcessExitReasons("com.noxplay.noxplayer",0,0)[0].reason
-      callback.resolve(reason in intArrayOf(
-        ApplicationExitInfo.REASON_USER_REQUESTED,
-        ApplicationExitInfo.REASON_USER_STOPPED,
-        ApplicationExitInfo.REASON_EXIT_SELF,
-        ApplicationExitInfo.REASON_PACKAGE_UPDATED,
-        ApplicationExitInfo.REASON_PERMISSION_CHANGE
-      ))
+      if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+        val reason = am.getHistoricalProcessExitReasons("com.noxplay.noxplayer",0,0)[0].reason
+        callback.resolve(reason in intArrayOf(
+          ApplicationExitInfo.REASON_USER_REQUESTED,
+          ApplicationExitInfo.REASON_USER_STOPPED,
+          ApplicationExitInfo.REASON_EXIT_SELF,
+          ApplicationExitInfo.REASON_PERMISSION_CHANGE
+        ))
+      } else {
+        callback.resolve(true)
+      }
     } catch (e: Exception) {
       callback.resolve(true)
     }
   }
 
-  @RequiresApi(Build.VERSION_CODES.O_MR1)
   @ReactMethod fun disableShowWhenLocked() {
     val activity = reactApplicationContext.currentActivity
-    activity?.setShowWhenLocked(false)
-    activity?.setTurnScreenOn(false)
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O_MR1) {
+      activity?.setShowWhenLocked(false)
+      activity?.setTurnScreenOn(false)
+    }
   }
   @ReactMethod fun getDrawOverAppsPermission(callback: Promise) {
     val context = reactApplicationContext
