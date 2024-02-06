@@ -8,7 +8,7 @@
     "ios": "react-native run-ios",
     "ios:ide": "open ios/*.xcworkspace/",
     "windows": "react-native run-windows",
-    "start": "react-native start",
+    "start": "react-native start --experimental-debugger",
     "test": "jest",
     "lint": "gts lint",
     "fresh": "rm -rf node_modules && yarn && git submodule update --recursive --remote",

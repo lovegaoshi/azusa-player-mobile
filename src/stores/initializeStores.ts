@@ -13,6 +13,13 @@ const useInitializeStore = () => {
   const initializeStores = async (val: NoxStorage.PlayerStorageObject) => {
     switch (Platform.OS) {
       case 'android':
+        try {
+          if (!(await NoxAndroidAutoModule.getLastExitReason())) {
+            val.lastPlaylistId = ['DUMMY', 'DUMMY'];
+          }
+        } catch {
+          // TODO: do something?
+        }
         NoxAndroidAutoModule.isGestureNavigationMode().then(
           (gestureMode: boolean) => setGestureMode(gestureMode)
         );
