@@ -96,9 +96,13 @@ export const initRNTPOptions = ({ keepForeground = false }: RNTPOptions) => {
     ],
     compactCapabilities: [
       Capability.Play,
-      Capability.Pause,
-      Capability.SkipToNext,
       Capability.SkipToPrevious,
+      Capability.SkipToNext,
+    ],
+    notificationCapabilities: [
+      Capability.Play,
+      Capability.SkipToPrevious,
+      Capability.SkipToNext,
     ],
     progressUpdateEventInterval: 1,
   };
@@ -107,13 +111,13 @@ export const initRNTPOptions = ({ keepForeground = false }: RNTPOptions) => {
       Capability.JumpBackward,
       Capability.JumpForward,
     ]);
-    options.compactCapabilities = options.compactCapabilities!.concat([
-      Capability.JumpBackward,
-      Capability.JumpForward,
-    ]);
+    options.notificationCapabilities = options.notificationCapabilities!.concat(
+      [Capability.JumpBackward, Capability.JumpForward]
+    );
     options.forwardJumpInterval = 1;
     options.backwardJumpInterval = 1;
     options.rewindIcon = getPlaybackModeNotifIcon()[0];
+    options.forwardIcon = 0;
     /**
     options.customActions = {
       customActionsList: ['customForward', 'customBackward'],
