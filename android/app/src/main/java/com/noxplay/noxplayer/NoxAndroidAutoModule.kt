@@ -1,5 +1,8 @@
 package com.noxplay.noxplayer
 
+import android.app.ActivityManager
+import android.app.ApplicationExitInfo
+import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Build
@@ -14,6 +17,25 @@ import com.facebook.react.bridge.ReactMethod
 
 class NoxAndroidAutoModule(reactContext: ReactApplicationContext) : ReactContextBaseJavaModule(reactContext) {
   override fun getName() = "NoxAndroidAutoModule"
+
+  @RequiresApi(Build.VERSION_CODES.R)
+  @ReactMethod fun getLastExitReason(callback: Promise) {
+    try {
+      val activity = reactApplicationContext.currentActivity
+      val am = activity?.getSystemService(Context.ACTIVITY_SERVICE) as ActivityManager
+      val reason = am.getHistoricalProcessExitReasons("com.noxplay.noxplayer",0,0)[0].reason
+      callback.resolve(reason in intArrayOf(
+        ApplicationExitInfo.REASON_USER_REQUESTED,
+        ApplicationExitInfo.REASON_USER_STOPPED,
+        ApplicationExitInfo.REASON_EXIT_SELF,
+        ApplicationExitInfo.REASON_PACKAGE_UPDATED,
+        ApplicationExitInfo.REASON_PERMISSION_CHANGE
+      ))
+    } catch (e: Exception) {
+      callback.resolve(true)
+    }
+  }
+
   @RequiresApi(Build.VERSION_CODES.O_MR1)
   @ReactMethod fun disableShowWhenLocked() {
     val activity = reactApplicationContext.currentActivity
