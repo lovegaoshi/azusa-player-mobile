@@ -12,6 +12,7 @@ import { useIsLandscape } from './hooks/useOrientation';
 import appStore from '@stores/appStore';
 import PIPLyricView from './components/player/PIPLyric';
 import MainBackground from './components/background/MainBackground';
+import useTheme from './hooks/useTheme';
 
 const useSplash = (duration = 1000) => {
   const [isReady, setIsReady] = React.useState(false);
@@ -29,6 +30,8 @@ export default function App() {
   const isPlayerReady = useSetupPlayer();
   const isLandscape = useIsLandscape();
   const PIPMode = useStore(appStore, state => state.pipMode);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const usedTheme = useTheme();
 
   useEffect(() => {
     function deepLinkHandler(data: { url: string }) {
