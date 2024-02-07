@@ -22,7 +22,7 @@ const URL_AUDIO_INFO =
   'https://www.bilibili.com/audio/music-service-c/web/song/info?sid={sid}';
 const URL_AUDIO_PLAY_URL =
   'https://www.bilibili.com/audio/music-service-c/web/url?sid={sid}';
-const CIDPREFIX = 'biliaudio-';
+const CIDPREFIX = `${SOURCE.biliaudio}-`;
 
 const fetchAudioPlayUrlPromise = async (sid: string) => {
   try {
@@ -70,15 +70,11 @@ export const fetchAudioInfo = async (
     return fetchAudioInfoRaw(bvid);
   });
 
-export const songFetch = async ({
-  videoinfos,
-}: {
-  videoinfos: VideoInfo[];
-}) => {
+export const songFetch = ({ videoinfos }: { videoinfos: VideoInfo[] }) => {
   const aggregateVideoInfo = (info: VideoInfo) =>
     info.pages.map(() => {
       return SongTS({
-        cid: `${info.pages[0].cid}-${info.bvid}`,
+        cid: `${CIDPREFIX}-${info.bvid}`,
         bvid: info.bvid,
         name: info.title,
         nameRaw: info.title,

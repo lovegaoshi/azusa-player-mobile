@@ -11,9 +11,10 @@
  */
 import { logger } from '../Logger';
 import { regexFetchProps } from './generic';
-import { baFetch } from './biliaudio';
+import { songFetch } from './biliaudio';
 import { fetchBiliPaginatedAPI } from './paginatedbili';
 import { getBiliCookie } from '@utils/Bilibili/biliCookies';
+import VideoInfo from '@objects/VideoInfo';
 
 /**
  * 
@@ -84,7 +85,22 @@ const fetchBiliAudioColleList = async (
     getItems: (js: any) => js.data.data,
     progressEmitter,
     favList,
-    resolveBiliBVID: v => v,
+    resolveBiliBVID: v =>
+      v.map(
+        (data: any) =>
+          new VideoInfo(
+            data.title,
+            data.intro,
+            1,
+            data.cover,
+            { name: data.uname, mid: data.uid, face: data.uid },
+            // HACK: pages doesnt really do anything except for counting...
+            // needs to be refactored out
+            [{} as any],
+            data.id,
+            data.duration
+          )
+      ),
     params: {
       method: 'GET',
       headers: {
@@ -102,14 +118,12 @@ const regexFetch = async ({
   progressEmitter = () => undefined,
   favList,
 }: regexFetchProps): Promise<NoxNetwork.NoxRegexFetch> => {
-  const vInfos = await fetchBiliAudioColleList(
+  const videoinfos = await fetchBiliAudioColleList(
     reExtracted[1]!,
     progressEmitter,
     favList
   );
-  // HACK: really need to depreciate videoInfo
-  // @ts-ignore
-  return { songList: await baFetch(vInfos.map(v => v.id)) };
+  return { songList: songFetch({ videoinfos }) };
 };
 
 const resolveURL = () => undefined;
