@@ -13,6 +13,7 @@ import { logger } from '../Logger';
 import { regexFetchProps } from './generic';
 import { baFetch } from './biliaudio';
 import { fetchBiliPaginatedAPI } from './paginatedbili';
+import { getBiliCookie } from '@utils/Bilibili/biliCookies';
 
 /**
  * 
@@ -84,7 +85,15 @@ const fetchBiliAudioColleList = async (
     progressEmitter,
     favList,
     resolveBiliBVID: v => v,
-    params: {},
+    params: {
+      method: 'GET',
+      headers: {
+        cookie: `SESSDATA=${await getBiliCookie('SESSDATA')}`,
+      },
+      referrer: 'https://www.bilibili.com',
+      // HACK: setting to omit will use whatever cookie I set above.
+      credentials: 'omit',
+    },
   });
 };
 
@@ -92,16 +101,15 @@ const regexFetch = async ({
   reExtracted,
   progressEmitter = () => undefined,
   favList,
-  useBiliTag,
 }: regexFetchProps): Promise<NoxNetwork.NoxRegexFetch> => {
   const vInfos = await fetchBiliAudioColleList(
     reExtracted[1]!,
     progressEmitter,
     favList
   );
-
-  console.log(vInfos);
-  return { songList: [] };
+  // HACK: really need to depreciate videoInfo
+  // @ts-ignore
+  return { songList: await baFetch(vInfos.map(v => v.id)) };
 };
 
 const resolveURL = () => undefined;
@@ -109,10 +117,9 @@ const resolveURL = () => undefined;
 const refreshSong = (song: NoxMedia.Song) => song;
 
 export default {
-  regexSearchMatch:
-    /space.bilibili\.com\/(\d+)\/channel\/collectiondetail\?sid=(\d+)/,
+  regexSearchMatch: /bilibili\.com\/audio\/mycollection\/(\d+)/,
   regexFetch,
-  regexResolveURLMatch: /^null-/,
+  regexResolveURLMatch: /^biliaudio-/,
   resolveURL,
   refreshSong,
 };

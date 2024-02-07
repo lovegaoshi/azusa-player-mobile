@@ -2,6 +2,7 @@ import { logger } from './Logger';
 
 import { SEARCH_OPTIONS } from '@enums/Storage';
 import steriatkFetch from './mediafetch/steriatk';
+import biliAudioColleFetch from './mediafetch/biliAudioColle';
 import bilivideoFetch from './mediafetch/bilivideo';
 import biliseriesFetch from './mediafetch/biliseries';
 import bilicolleFetch from './mediafetch/bilicolle';
@@ -112,6 +113,10 @@ interface ReExtraction {
 }
 
 const reExtractions: ReExtraction[] = [
+  {
+    match: biliAudioColleFetch.regexSearchMatch,
+    fetch: biliAudioColleFetch.regexFetch,
+  },
   {
     match: biliseriesFetch.regexSearchMatch,
     fetch: biliseriesFetch.regexFetch,
