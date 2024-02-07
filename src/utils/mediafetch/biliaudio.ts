@@ -24,7 +24,7 @@ const URL_AUDIO_PLAY_URL =
   'https://www.bilibili.com/audio/music-service-c/web/url?sid={sid}';
 const CIDPREFIX = `${SOURCE.biliaudio}-`;
 
-const fetchAudioPlayUrlPromise = async (sid: string) => {
+const fetchPlayUrlPromise = async (sid: string) => {
   try {
     logger.debug(
       `fethcAudioPlayURL:${URL_AUDIO_PLAY_URL.replace('{sid}', sid)}`
@@ -112,7 +112,7 @@ const regexFetch = async ({
 });
 
 const resolveURL = async (song: NoxMedia.Song) => {
-  return { url: await fetchAudioPlayUrlPromise(song.bvid) };
+  return { url: await fetchPlayUrlPromise(song.bvid) };
 };
 
 const refreshSong = (song: NoxMedia.Song) => song;

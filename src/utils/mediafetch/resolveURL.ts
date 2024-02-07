@@ -2,6 +2,7 @@ import steriatkFetch from './steriatk';
 import biliaudioFetch from './biliaudio';
 import ytbvideoFetch from '@utils/mediafetch/ytbvideo';
 import bililiveFetch from './bililive';
+import biliBangumiFetch from './biliBangumi';
 import { logger } from '../Logger';
 import { regexMatchOperations } from '../Utils';
 import { resolver, MUSICFREE } from './musicfree';
@@ -35,6 +36,7 @@ export const fetchPlayUrlPromise = async (
     [biliaudioFetch.regexResolveURLMatch, biliaudioFetch.resolveURL],
     [ytbvideoFetch.regexResolveURLMatch, ytbvideoFetch.resolveURL],
     [bililiveFetch.regexResolveURLMatch, bililiveFetch.resolveURL],
+    [biliBangumiFetch.regexResolveURLMatch, biliBangumiFetch.resolveURL],
   ];
   const regexResolveURLsWrapped: regResolve = regexResolveURLs.map(entry => [
     entry[0],
@@ -82,6 +84,7 @@ export const songExport2URL = (v: NoxMedia.Song): string => {
   const regexOperations: NoxUtils.RegexMatchResolve<string> = [
     [biliaudioFetch.regexResolveURLMatch, biliaudioFetch.export2URL],
     [ytbvideoFetch.regexResolveURLMatch, ytbvideoFetch.export2URL],
+    [biliBangumiFetch.regexResolveURLMatch, biliBangumiFetch.export2URL],
   ];
 
   return regexMatchOperations({
