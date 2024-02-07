@@ -118,7 +118,6 @@ export const initRNTPOptions = ({ keepForeground = false }: RNTPOptions) => {
     options.backwardJumpInterval = 1;
     options.rewindIcon = getPlaybackModeNotifIcon()[0];
     options.forwardIcon = 0;
-    options.nextIcon = 0;
     /**
     options.customActions = {
       customActionsList: ['customForward', 'customBackward'],

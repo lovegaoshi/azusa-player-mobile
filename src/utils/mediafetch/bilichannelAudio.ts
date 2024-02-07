@@ -19,7 +19,7 @@ import SongTS from '@objects/Song';
 // https://api.bilibili.com/audio/music-service/web/song/upper?uid=741520&pn=1&ps=70&order=1
 const URL_BILICHANNEL_AUDIO_INFO =
   'https://api.bilibili.com/audio/music-service/web/song/upper?uid=741520&pn={pn}&ps=30&order=1';
-const CIDPREFIX = 'biliaudio-';
+const CIDPREFIX = `${SOURCE.biliaudio}-`;
 
 // i'm not going to pretend this songFetch stuff is not stupid and just bypass any of them here.
 // key is to ignore resolveBiliBVID and set as (val) => val; then completely bypass VideoInfo

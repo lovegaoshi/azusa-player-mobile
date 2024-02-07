@@ -16,12 +16,13 @@ import SongTS from '@objects/Song';
 import { logger } from '../Logger';
 import bfetch from '@utils/BiliFetch';
 import { SOURCE } from '@enums/MediaFetch';
+import { filterUndefined } from '../Utils';
 
 const URL_AUDIO_INFO =
   'https://www.bilibili.com/audio/music-service-c/web/song/info?sid={sid}';
 const URL_AUDIO_PLAY_URL =
   'https://www.bilibili.com/audio/music-service-c/web/url?sid={sid}';
-const CIDPREFIX = 'biliaudio-';
+const CIDPREFIX = `${SOURCE.biliaudio}-`;
 
 const fetchAudioPlayUrlPromise = async (sid: string) => {
   try {
@@ -69,15 +70,11 @@ export const fetchAudioInfo = async (
     return fetchAudioInfoRaw(bvid);
   });
 
-export const songFetch = async ({
-  videoinfos,
-}: {
-  videoinfos: VideoInfo[];
-}) => {
+export const songFetch = ({ videoinfos }: { videoinfos: VideoInfo[] }) => {
   const aggregateVideoInfo = (info: VideoInfo) =>
     info.pages.map(() => {
       return SongTS({
-        cid: `${info.pages[0].cid}-${info.bvid}`,
+        cid: `${CIDPREFIX}-${info.bvid}`,
         bvid: info.bvid,
         name: info.title,
         nameRaw: info.title,
@@ -98,18 +95,21 @@ export const songFetch = async ({
   return songs;
 };
 
+export const baFetch = async (auids: string[]) => {
+  const audioInfo = filterUndefined(
+    await Promise.all(auids.map(auid => fetchAudioInfo(auid))),
+    v => v
+  );
+  return songFetch({
+    videoinfos: audioInfo,
+  });
+};
+
 const regexFetch = async ({
   reExtracted,
-}: regexFetchProps): Promise<NoxNetwork.NoxRegexFetch> => {
-  const audioInfo = await fetchAudioInfo(reExtracted[1]!);
-  return {
-    songList: audioInfo
-      ? await songFetch({
-          videoinfos: [audioInfo],
-        })
-      : [],
-  };
-};
+}: regexFetchProps): Promise<NoxNetwork.NoxRegexFetch> => ({
+  songList: await baFetch([reExtracted[1]!]),
+});
 
 const resolveURL = async (song: NoxMedia.Song) => {
   return { url: await fetchAudioPlayUrlPromise(song.bvid) };
