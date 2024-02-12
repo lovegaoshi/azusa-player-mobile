@@ -26,10 +26,15 @@ export const fetchBiliChannelList = async (
   logger.info('calling fetchBiliChannelList');
   const mid = /.*space.bilibili\.com\/(\d+)\/video.*/.exec(url)![1];
   let searchAPI = URL_BILICHANNEL_INFO.replace('{mid}', mid!);
-  const tidVal = /tid=(\d+)/.exec(url);
+  const urlObj = new URL(url);
+  const URLParams = new URLSearchParams(urlObj.search);
+  const tidVal = URLParams.get('tid');
   if (tidVal) {
-    // TODO: do this properly with another URLSearchParams instance
-    searchAPI += `&tid=${String(tidVal[1])}`;
+    searchAPI += `&tid=${tidVal}`;
+  }
+  const kwVal = URLParams.get('keyword');
+  if (kwVal) {
+    searchAPI += `&keyword=${kwVal}`;
   }
   return fetchAwaitBiliPaginatedAPI({
     url: searchAPI + getDm(),
