@@ -88,6 +88,7 @@ jobs:
         run: |
           python fixHTTP.py
           python ./scripts/dev_cleartext.py
+          python release_bump.py --dev
 
       - name: WGet Build Sign jks
         uses: wei/wget@v1

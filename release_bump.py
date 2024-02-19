@@ -40,19 +40,27 @@ def autoincrease_version(current_version=get_version(), inc=VersionUpdate.PATCH,
 
 if __name__ == '__main__':
     import argparse
+    from datetime import datetime
     logging.basicConfig(level=logging.DEBUG)
     parser = argparse.ArgumentParser(description="ina music segment")
     parser.add_argument("--version", type=str,
                         help="file path or weblink", default=get_version())
     parser.add_argument("--inc", type=int,
                         help="file path or weblink", default=3)
+    parser.add_argument("--dev",
+                        help="add dev", default=False, action='store_true')
     args = parser.parse_args()
     version = get_version()
-    new_version = autoincrease_version(
-        current_version=version, inc=VersionUpdateDict[args.inc])
-    fix_content(Path('./src/enums/Version.ts'), lambda line: line.replace(
-        version, new_version
-    ))
-    subprocess.call(['git', 'commit', '-am', f'release: {new_version}'])
-    subprocess.call(['git', 'tag', f'v{new_version}'])
-    subprocess.call(['git', 'push', 'origin', 'master', '--tags'])
+    if args.dev:
+        fix_content(Path('./src/enums/Version.ts'), lambda line: line.replace(
+            version, f'{datetime.now().strftime("%Y.%m.%d")}-dev'
+        ))
+    else:
+        new_version = autoincrease_version(
+            current_version=version, inc=VersionUpdateDict[args.inc])
+        fix_content(Path('./src/enums/Version.ts'), lambda line: line.replace(
+            version, new_version
+        ))
+        subprocess.call(['git', 'commit', '-am', f'release: {new_version}'])
+        subprocess.call(['git', 'tag', f'v{new_version}'])
+        subprocess.call(['git', 'push', 'origin', 'master', '--tags'])
