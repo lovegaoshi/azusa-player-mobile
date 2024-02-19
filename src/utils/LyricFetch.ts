@@ -1,3 +1,5 @@
+import he from 'he';
+
 import { extractSongName } from './re';
 import bfetch from '@utils/BiliFetch';
 import { logger } from './Logger';
@@ -133,6 +135,6 @@ export const searchLyric = async (
     finalLrc = `${json.trans}\n${finalLrc}`;
   }
   // logger.log(finalLrc)
-  setLyric(finalLrc);
+  setLyric(he.decode(finalLrc));
   return finalLrc;
 };

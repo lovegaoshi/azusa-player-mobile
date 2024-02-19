@@ -1,4 +1,5 @@
 import { v4 as uuidv4 } from 'uuid';
+import he from 'he';
 
 import { extractParenthesis } from '../utils/re';
 import { reExtractSongName } from '@stores/appStore';
@@ -50,8 +51,8 @@ export default ({
   return {
     id: String(cid),
     bvid,
-    name,
-    singer,
+    name: he.decode(name),
+    singer: he.decode(singer),
     cover,
     singerId,
     lyric,
