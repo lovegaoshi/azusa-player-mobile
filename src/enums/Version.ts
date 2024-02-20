@@ -1,3 +1,3 @@
 export enum VERSIONS {
-  latest = '2.12.9',
+  latest = '2.12.10',
 }

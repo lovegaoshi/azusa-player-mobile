@@ -49,11 +49,13 @@ if __name__ == '__main__':
                         help="file path or weblink", default=3)
     parser.add_argument("--dev",
                         help="add dev", default=False, action='store_true')
+    parser.add_argument("--devstr",
+                        help="add dev", type=str, default='-dev')
     args = parser.parse_args()
     version = get_version()
     if args.dev:
         fix_content(Path('./src/enums/Version.ts'), lambda line: line.replace(
-            version, f'{datetime.now().strftime("%Y.%m.%d")}-dev'
+            version, f'{datetime.now().strftime("%Y.%m.%d")}-{args.devstr}'
         ))
     else:
         new_version = autoincrease_version(
