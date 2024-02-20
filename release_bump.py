@@ -55,7 +55,11 @@ if __name__ == '__main__':
     version = get_version()
     if args.dev:
         fix_content(Path('./src/enums/Version.ts'), lambda line: line.replace(
-            version, f'{datetime.now().strftime("%Y.%m.%d")}-{args.devstr}'
+            version, f'{datetime.now().strftime("%Y.%m.%d")}{args.devstr}'
+        ))
+    elif args.devstr != '-dev':
+        fix_content(Path('./src/enums/Version.ts'), lambda line: line.replace(
+            version, f'{version}{args.devstr}'
         ))
     else:
         new_version = autoincrease_version(
