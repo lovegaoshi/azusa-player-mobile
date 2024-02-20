@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import TrackPlayer from 'react-native-track-player';
+import TrackPlayer, { RepeatMode } from 'react-native-track-player';
 import { NativeModules, Platform } from 'react-native';
 import { useTranslation } from 'react-i18next';
 
@@ -64,6 +64,7 @@ export default () => {
       }
       await AdditionalPlaybackService(serviceOptions);
       await TrackPlayer.pause();
+      TrackPlayer.setRepeatMode(RepeatMode.Queue);
     })();
     return () => {
       unmounted = true;
