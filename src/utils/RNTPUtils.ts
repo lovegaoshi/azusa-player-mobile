@@ -98,11 +98,13 @@ export const initRNTPOptions = ({ keepForeground = false }: RNTPOptions) => {
       Capability.Play,
       Capability.SkipToPrevious,
       Capability.SkipToNext,
+      Capability.SeekTo,
     ],
     notificationCapabilities: [
       Capability.Play,
       Capability.SkipToPrevious,
       Capability.SkipToNext,
+      Capability.SeekTo,
     ],
     progressUpdateEventInterval: 1,
   };
