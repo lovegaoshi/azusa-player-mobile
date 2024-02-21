@@ -134,7 +134,8 @@ export const searchLyric = async (
   if (json.trans) {
     finalLrc = `${json.trans}\n${finalLrc}`;
   }
+  finalLrc = he.decode(finalLrc);
   // logger.log(finalLrc)
-  setLyric(he.decode(finalLrc));
+  setLyric(finalLrc);
   return finalLrc;
 };
