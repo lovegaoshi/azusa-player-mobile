@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { Menu } from 'react-native-paper';
+import * as DocumentPicker from 'expo-document-picker';
 
 import { SEARCH_OPTIONS } from '@enums/Storage';
 import { MUSICFREE } from '@utils/mediafetch/musicfree';
@@ -44,6 +45,18 @@ export default ({
           title={`MusicFree.${MUSICFREE.aggregated}`}
         />
       )}
+      <Menu.Item
+        leadingIcon={ICONS.LOCAL}
+        onPress={async () => {
+          console.log(
+            await DocumentPicker.getDocumentAsync({
+              copyToCacheDirectory: false,
+              type: 'audio/*',
+            })
+          );
+        }}
+        title={'Local'}
+      />
     </Menu>
   );
 };

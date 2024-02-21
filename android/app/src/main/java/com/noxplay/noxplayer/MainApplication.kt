@@ -2,6 +2,9 @@ package com.noxplay.noxplayer
 
 import android.app.Application
 import android.content.res.Configuration
+import android.net.Uri
+import android.provider.MediaStore
+import android.util.Log
 import com.facebook.react.PackageList
 import com.facebook.react.ReactApplication
 import com.facebook.react.ReactNativeHost
@@ -52,6 +55,29 @@ class MainApplication : Application(), ReactApplication {
         if (BuildConfig.IS_NEW_ARCHITECTURE_ENABLED) {
             // If you opted-in for the New Architecture, we load the native entry point for this app.
             load()
+        }
+        val uri = Uri.parse("content://com.android.externalstorage.documents/document/primary%3AMusic")
+        Log.d("RNTP", MediaStore.Audio.Media.getContentUri(
+          MediaStore.VOLUME_EXTERNAL
+        ).toString())
+      Log.d("RNTP", MediaStore.Audio.Media.getContentUri(
+        MediaStore.VOLUME_INTERNAL
+      ).toString())
+        val query = this.contentResolver.query(
+          MediaStore.Audio.Media.EXTERNAL_CONTENT_URI,
+          arrayOf(
+            MediaStore.Audio.Media._ID,
+            MediaStore.Audio.Media.RELATIVE_PATH,
+            MediaStore.Audio.Media.DISPLAY_NAME
+            ), null,null, null)
+        query?.use { cursor ->
+          Log.d("RNTP", cursor.count.toString())
+          val idColumn = cursor.getColumnIndexOrThrow(MediaStore.Video.Media._ID)
+          val pathColumn = cursor.getColumnIndexOrThrow(MediaStore.Video.Media.RELATIVE_PATH)
+          val nameColumn = cursor.getColumnIndexOrThrow(MediaStore.Video.Media.DISPLAY_NAME)
+            while (cursor.moveToNext()) {
+              Log.d("RNTP", cursor.getString(idColumn) + cursor.getString(pathColumn) + cursor.getString(nameColumn))
+            }
         }
         onApplicationCreate(this)
     }
