@@ -15,13 +15,16 @@ jobs:
       - name: python version_bump.py
         run: |
           python version_bump.py
-          python release_bump.py --devstr=-gplay
 
       - name: commit
         run: |
           git config --global user.email 106490582+lovegaoshi@users.noreply.github.com
           git config --global user.name lovegaoshi
           git commit -m "build: release version bump" -a
+
+      - name: python version_bump.py
+        run: |
+          python release_bump.py --devstr=-gplay
 
       - name: Get branch name
         run: |
