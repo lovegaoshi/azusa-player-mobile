@@ -1,10 +1,16 @@
-import { FFmpegKit } from 'ffmpeg-kit-react-native';
+import { FFmpegKit, FFprobeKit } from 'ffmpeg-kit-react-native';
 import RNFetchBlob from 'react-native-blob-util';
 import TrackPlayer from 'react-native-track-player';
 
 import { logger } from '../Logger';
 import { r128gain2Volume } from '../Utils';
 
+export const probeMetadata = async (fspath: string) => {
+  const session = await FFprobeKit.execute(
+    `-show_format -print_format json '${fspath}'`
+  );
+  console.log(await session.getOutput());
+};
 const parseReplayGainLog = (log: string) => {
   const regex = /Parsed_replaygain.+ track_gain = (.+) dB/g;
   regex.exec(log);

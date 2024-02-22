@@ -9,6 +9,7 @@ import ICONS from './Icons';
 import { useNoxSetting } from '@stores/useApp';
 import { rgb2Hex } from '@utils/Utils';
 import logger from '@utils/Logger';
+import { probeMetadata } from '@utils/ffmpeg/ffmpeg';
 
 const { NoxAndroidAutoModule } = NativeModules;
 
@@ -68,7 +69,11 @@ export default ({
           let parsedURI = uri
             .substring(uri.indexOf('%3A') + 3, uri.lastIndexOf('%2F'))
             .replaceAll('%2F', '/');
-          console.log(await NoxAndroidAutoModule.listMediaDir(parsedURI, true));
+          let mediaFiles = await NoxAndroidAutoModule.listMediaDir(
+            parsedURI,
+            true
+          );
+          mediaFiles.forEach((v: any) => probeMetadata(v.realPath));
           return;
         }}
         title={'Local'}

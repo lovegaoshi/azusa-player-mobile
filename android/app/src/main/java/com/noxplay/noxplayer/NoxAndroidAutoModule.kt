@@ -32,16 +32,17 @@ class NoxAndroidAutoModule(reactContext: ReactApplicationContext) :
         arrayOf(
           MediaStore.Audio.Media._ID,
           MediaStore.Audio.Media.RELATIVE_PATH,
-          MediaStore.Audio.Media.DISPLAY_NAME
+          MediaStore.Audio.Media.DISPLAY_NAME,
+          MediaStore.Audio.Media.DATA
         ), null,null, null)
       query?.use { cursor ->
         val idColumn = cursor.getColumnIndexOrThrow(MediaStore.Video.Media._ID)
         val pathColumn = cursor.getColumnIndexOrThrow(MediaStore.Video.Media.RELATIVE_PATH)
         val nameColumn = cursor.getColumnIndexOrThrow(MediaStore.Video.Media.DISPLAY_NAME)
+        val dataColumn = cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.DATA)
         while (cursor.moveToNext()) {
           val mediaPath = cursor.getString(pathColumn)
           if (mediaPath == relativeDir || (subdir && mediaPath.startsWith(relativeDir))) {
-
             val mediaItem = Arguments.createMap()
             mediaItem.putString("URI",
               "content:/" + ContentUris.appendId(
@@ -49,12 +50,14 @@ class NoxAndroidAutoModule(reactContext: ReactApplicationContext) :
                 cursor.getLong(idColumn)).build().toString())
             mediaItem.putString("relativePath",mediaPath)
             mediaItem.putString("fileName", cursor.getString(nameColumn))
+            mediaItem.putString("realPath", cursor.getString(dataColumn))
             results.pushMap(mediaItem)
           }
         }
       }
       callback.resolve(results)
     } catch (e: Exception) {
+      Log.e("NoxFileUtil", e.toString())
       callback.resolve(results)
     }
   }
