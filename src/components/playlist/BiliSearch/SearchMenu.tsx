@@ -8,6 +8,7 @@ import { MUSICFREE } from '@utils/mediafetch/musicfree';
 import ICONS from './Icons';
 import { useNoxSetting } from '@stores/useApp';
 import { rgb2Hex } from '@utils/Utils';
+import logger from '@utils/Logger';
 
 const { NoxAndroidAutoModule } = NativeModules;
 
@@ -53,14 +54,22 @@ export default ({
       <Menu.Item
         leadingIcon={() => ICONS.LOCAL(rgb2Hex(playerStyle.colors.primary))}
         onPress={async () => {
-          console.log(await NoxAndroidAutoModule.listMediaDir('Music/', true));
-          return;
-          console.log(
+          let selectedFile = (
             await DocumentPicker.getDocumentAsync({
               copyToCacheDirectory: false,
               type: 'audio/*',
             })
-          );
+          ).assets;
+          if (!selectedFile) return;
+          // TODO: he.decode?
+          let uri = selectedFile[0].uri;
+          logger.debug(`[DocumentPicker] selected uri: ${uri}`);
+          // content://com.android.externalstorage.documents/document/primary%3AMusic%2FTttt%2FGggg.mp3
+          let parsedURI = uri
+            .substring(uri.indexOf('%3A') + 3, uri.lastIndexOf('%2F'))
+            .replaceAll('%2F', '/');
+          console.log(await NoxAndroidAutoModule.listMediaDir(parsedURI, true));
+          return;
         }}
         title={'Local'}
       />
