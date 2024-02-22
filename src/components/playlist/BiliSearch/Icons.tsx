@@ -27,9 +27,12 @@ const ICONS = {
       style={style.musicFreeIcon}
     />
   ),
-  LOCAL: () => (
+  LOCAL: (fill?: string) => (
     <Svg width={24} height={24} viewBox="0 0 24 24">
-      <Path d="M120-160v-160h720v160H120Zm80-40h80v-80h-80v80Zm-80-440v-160h720v160H120Zm80-40h80v-80h-80v80Zm-80 280v-160h720v160H120Zm80-40h80v-80h-80v80Z"></Path>
+      <Path
+        fill={fill}
+        d="M120-160v-160h720v160H120Zm80-40h80v-80h-80v80Zm-80-440v-160h720v160H120Zm80-40h80v-80h-80v80Zm-80 280v-160h720v160H120Zm80-40h80v-80h-80v80Z"
+      ></Path>
     </Svg>
   ),
 };
