@@ -18,6 +18,7 @@ interface Props {
   toggleVisible?: () => void;
   menuCoords?: NoxTheme.coordinates;
   showMusicFree?: boolean;
+  setSearchVal: (v: string) => void;
 }
 
 export default ({
@@ -25,12 +26,28 @@ export default ({
   toggleVisible = () => undefined,
   menuCoords = { x: 0, y: 0 },
   showMusicFree,
+  setSearchVal,
 }: Props) => {
   const playerStyle = useNoxSetting(state => state.playerStyle);
   const setSearchOption = useNoxSetting(state => state.setSearchOption);
   const setDefaultSearch = (defaultSearch: SEARCH_OPTIONS | MUSICFREE) => {
     toggleVisible();
     setSearchOption(defaultSearch);
+  };
+  const chooseLocalFolder = async () => {
+    let selectedFile = (
+      await DocumentPicker.getDocumentAsync({
+        copyToCacheDirectory: false,
+        type: 'audio/*',
+      })
+    ).assets;
+    if (!selectedFile) return;
+    const uri = selectedFile[0].uri;
+    let mediaFiles = await NoxAndroidAutoModule.listMediaFileByID(
+      uri.substring(uri.lastIndexOf('%3A') + 3)
+    );
+    setSearchVal(`local://${mediaFiles[0].relativePath}`);
+    toggleVisible();
   };
 
   return (
@@ -54,28 +71,7 @@ export default ({
       )}
       <Menu.Item
         leadingIcon={() => ICONS.LOCAL(rgb2Hex(playerStyle.colors.primary))}
-        onPress={async () => {
-          let selectedFile = (
-            await DocumentPicker.getDocumentAsync({
-              copyToCacheDirectory: false,
-              type: 'audio/*',
-            })
-          ).assets;
-          if (!selectedFile) return;
-          // TODO: he.decode?
-          let uri = selectedFile[0].uri;
-          logger.debug(`[DocumentPicker] selected uri: ${uri}`);
-          // content://com.android.externalstorage.documents/document/primary%3AMusic%2FTttt%2FGggg.mp3
-          let parsedURI = uri
-            .substring(uri.indexOf('%3A') + 3, uri.lastIndexOf('%2F'))
-            .replaceAll('%2F', '/');
-          let mediaFiles = await NoxAndroidAutoModule.listMediaDir(
-            parsedURI,
-            true
-          );
-          mediaFiles.forEach((v: any) => probeMetadata(v.realPath));
-          return;
-        }}
+        onPress={chooseLocalFolder}
         title={'Local'}
       />
     </Menu>

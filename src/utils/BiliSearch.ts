@@ -20,6 +20,7 @@ import ytbmixlistFetch from './mediafetch/ytbmixlist';
 import ytbsearchFetch from './mediafetch/ytbsearch';
 import bililiveFetch from './mediafetch/bililive';
 import bilisubliveFetch from './mediafetch/bilisublive';
+import localFetch from '@utils/mediafetch/local';
 import { regexFetchProps } from './mediafetch/generic';
 import { MUSICFREE, searcher } from './mediafetch/musicfree';
 import { getMusicFreePlugin } from '@utils/ChromeStorage';
@@ -116,6 +117,10 @@ interface ReExtraction {
 }
 
 const reExtractions: ReExtraction[] = [
+  {
+    match: localFetch.regexSearchMatch,
+    fetch: localFetch.regexFetch,
+  },
   {
     match: biliBangumiFetch.regexSearchMatch,
     fetch: biliBangumiFetch.regexFetch,

@@ -7,10 +7,13 @@ import { r128gain2Volume } from '../Utils';
 
 export const probeMetadata = async (fspath: string) => {
   const session = await FFprobeKit.execute(
-    `-show_format -print_format json '${fspath}'`
+    `-v quiet -print_format json -show_format '${fspath}'`
   );
-  console.log(await session.getOutput());
+  const parsedMetadata = JSON.parse(await session.getOutput());
+  logger.debug(parsedMetadata);
+  return parsedMetadata.format;
 };
+
 const parseReplayGainLog = (log: string) => {
   const regex = /Parsed_replaygain.+ track_gain = (.+) dB/g;
   regex.exec(log);

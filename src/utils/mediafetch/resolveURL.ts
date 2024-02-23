@@ -3,6 +3,7 @@ import biliaudioFetch from './biliaudio';
 import ytbvideoFetch from '@utils/mediafetch/ytbvideo';
 import bililiveFetch from './bililive';
 import biliBangumiFetch from './biliBangumi';
+import localFetch from '@utils/mediafetch/local';
 import { logger } from '../Logger';
 import { regexMatchOperations } from '../Utils';
 import { resolver, MUSICFREE } from './musicfree';
@@ -37,6 +38,7 @@ export const fetchPlayUrlPromise = async (
     [ytbvideoFetch.regexResolveURLMatch, ytbvideoFetch.resolveURL],
     [bililiveFetch.regexResolveURLMatch, bililiveFetch.resolveURL],
     [biliBangumiFetch.regexResolveURLMatch, biliBangumiFetch.resolveURL],
+    [localFetch.regexResolveURLMatch, localFetch.resolveURL],
   ];
   const regexResolveURLsWrapped: regResolve = regexResolveURLs.map(entry => [
     entry[0],
