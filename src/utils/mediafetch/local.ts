@@ -9,6 +9,7 @@
  * each site needs a fetch to parse regex extracted, a videoinfo fetcher and a song fetcher.
  */
 import { Platform, NativeModules } from 'react-native';
+import RNFetchBlob from 'react-native-blob-util';
 
 import { probeMetadata, cacheAlbumArt } from '@utils/ffmpeg/ffmpeg';
 import { SOURCE } from '@enums/MediaFetch';
@@ -55,7 +56,9 @@ const regexFetch = async ({
 });
 
 const resolveURL = async (song: NoxMedia.Song) => {
-  return { url: song.bvid, cover: await cacheAlbumArt(song.bvid) };
+  const artworkURI = await cacheAlbumArt(song.bvid);
+  const artworkBase64 = await RNFetchBlob.fs.readFile(artworkURI, 'base64');
+  return { url: song.bvid, cover: `data:image/png;base64,${artworkBase64}` };
 };
 
 const refreshSong = (song: NoxMedia.Song) => song;

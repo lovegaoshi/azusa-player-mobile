@@ -46,6 +46,7 @@ const AlbumArt: React.FC<Props> = ({
         useNativeDriver: true,
       }),
     ]).start(() => {
+      console.log('artwork', track?.artwork);
       console.log('TrackInfo: Setting imagevisible to Image', !isImageVisible);
       setIsImageVisible(false);
     });
