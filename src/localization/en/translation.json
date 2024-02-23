@@ -284,5 +284,8 @@
   },
   "Accessibility": {
     "gif": "GIF"
+  },
+  "Menu": {
+    "local": "Local"
   }
 }
