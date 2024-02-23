@@ -15,6 +15,8 @@ import { probeMetadata, cacheAlbumArt } from '@utils/ffmpeg/ffmpeg';
 import { SOURCE } from '@enums/MediaFetch';
 import { regexFetchProps } from './generic';
 import SongTS from '@objects/Song';
+import logger from '../Logger';
+import { filterUndefined } from '../Utils';
 
 const { NoxAndroidAutoModule } = NativeModules;
 
@@ -25,26 +27,35 @@ const songFetch = async (
 ): Promise<NoxMedia.Song[]> => {
   if (Platform.OS !== 'android') return [];
   const mediaFiles = await NoxAndroidAutoModule.listMediaDir(fpath, true);
-  return Promise.all(
-    mediaFiles
-      .filter((v: any) => !favlist.includes(v.realPath))
-      .map(async (v: any) => {
-        const probedMetadata = await probeMetadata(v.realPath);
-        return SongTS({
-          cid: `${SOURCE.local}-${v.realPath}`,
-          bvid: `file://${v.realPath}`,
-          name: probedMetadata.tags?.title || v.fileName,
-          nameRaw: probedMetadata.tags?.title || v.fileName,
-          singer: probedMetadata.tags?.artist || '',
-          singerId: probedMetadata.tags?.artist || '',
-          cover: '',
-          lyric: '',
-          page: 0,
-          duration: Number(probedMetadata.duration) || 0,
-          album: probedMetadata.tags?.album || '',
-          source: SOURCE.local,
-        });
-      })
+  return filterUndefined(
+    await Promise.all(
+      mediaFiles
+        .filter((v: any) => !favlist.includes(v.realPath))
+        .map(async (v: any) => {
+          try {
+            const probedMetadata = await probeMetadata(v.realPath);
+            return SongTS({
+              cid: `${SOURCE.local}-${v.realPath}`,
+              bvid: `file://${v.realPath}`,
+              name: probedMetadata.tags?.title || v.fileName,
+              nameRaw: probedMetadata.tags?.title || v.fileName,
+              singer: probedMetadata.tags?.artist || '',
+              singerId: probedMetadata.tags?.artist || '',
+              cover: '',
+              lyric: '',
+              page: 0,
+              duration: Number(probedMetadata.duration) || 0,
+              album: probedMetadata.tags?.album || '',
+              source: SOURCE.local,
+            });
+          } catch (e) {
+            logger.warn(e);
+            logger.warn(v);
+            return null;
+          }
+        })
+    ),
+    v => v
   );
 };
 
