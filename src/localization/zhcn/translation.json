@@ -253,5 +253,8 @@
     "artistMatch": "搜索歌手",
     "albumMatch": "搜索专辑",
     "cachedMatch": "已缓存"
+  },
+  "Menu": {
+    "local": "本di"
   }
 }

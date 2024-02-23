@@ -137,6 +137,7 @@ export default ({
           toggleVisible={toggleVisible}
           menuCoords={menuCoords}
           showMusicFree={showMusicFree}
+          setSearchVal={setSearchVal}
         />
       </View>
       <ProgressBar

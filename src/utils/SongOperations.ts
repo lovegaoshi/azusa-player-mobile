@@ -60,6 +60,7 @@ export const resolveUrl = async (song: NoxMedia.Song, iOS = true) => {
   logger.debug(
     `[SongResolveURL] cache ${cachedUrl ? 'found' : 'missed'}, ${song.id}`
   );
+
   const cacheWrapper = async (
     song: NoxMedia.Song
   ): Promise<NoxNetwork.ResolvedNoxMediaURL> => {

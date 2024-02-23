@@ -1,9 +1,26 @@
-import { FFmpegKit } from 'ffmpeg-kit-react-native';
+import { FFmpegKit, FFprobeKit } from 'ffmpeg-kit-react-native';
 import RNFetchBlob from 'react-native-blob-util';
 import TrackPlayer from 'react-native-track-player';
 
 import { logger } from '../Logger';
 import { r128gain2Volume } from '../Utils';
+
+export const cacheAlbumArt = async (fpath: string) => {
+  // HACK: exoplayer handles embedded art but I also need this for the UI...
+  await FFmpegKit.execute(
+    `-i '${fpath}' -an -vcodec copy ${RNFetchBlob.fs.dirs.CacheDir}/tempCover.jpg`
+  );
+  return `${RNFetchBlob.fs.dirs.CacheDir}/tempCover.jpg`;
+};
+
+export const probeMetadata = async (fspath: string) => {
+  const session = await FFprobeKit.execute(
+    `-v quiet -print_format json -show_format '${fspath}'`
+  );
+  const parsedMetadata = JSON.parse(await session.getOutput());
+  logger.debug(parsedMetadata);
+  return parsedMetadata.format;
+};
 
 const parseReplayGainLog = (log: string) => {
   const regex = /Parsed_replaygain.+ track_gain = (.+) dB/g;

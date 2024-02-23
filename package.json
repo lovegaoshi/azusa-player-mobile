@@ -56,6 +56,7 @@
     "dropbox": "git+https://lovegaoshi@github.com/lovegaoshi/dropbox-sdk-js.git",
     "expo": "^50.0.7",
     "expo-clipboard": "~5.0.1",
+    "expo-document-picker": "~11.10.1",
     "expo-image": "^1.10.6",
     "expo-keep-awake": "^12.8.2",
     "expo-secure-store": "~12.8.1",

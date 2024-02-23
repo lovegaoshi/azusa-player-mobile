@@ -49,6 +49,28 @@ export const rgb2rgba = (rgb: string, a = 1) => {
   return `rgba(${extractedRGB[0][0]}, ${extractedRGB[1][0]}, ${extractedRGB[2][0]}, ${a})`;
 };
 
+const rgbToHex = (r: number, g: number, b: number) =>
+  '#' +
+  [r, g, b]
+    .map(x => {
+      const hex = x.toString(16);
+      return hex.length === 1 ? '0' + hex : hex;
+    })
+    .join('');
+
+export const rgb2Hex = (rgb: string) => {
+  try {
+    const extractedRGB = [...rgb.matchAll(/(\d+)/g)];
+    return rgbToHex(
+      Number(extractedRGB[0][0]),
+      Number(extractedRGB[1][0]),
+      Number(extractedRGB[2][0])
+    );
+  } catch {
+    return rgb;
+  }
+};
+
 export const getUniqObjects = <T>(
   objects: Array<T>,
   property: (object: T) => string
