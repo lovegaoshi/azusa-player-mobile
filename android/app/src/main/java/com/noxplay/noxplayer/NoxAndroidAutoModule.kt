@@ -24,7 +24,7 @@ class NoxAndroidAutoModule(reactContext: ReactApplicationContext) :
   ReactContextBaseJavaModule(reactContext) {
   override fun getName() = "NoxAndroidAutoModule"
 
-  @ReactMethod fun listMediaDir(relativeDir: String, subdir: Boolean, callback: Promise) {
+  private fun _listMediaDir(relativeDir: String, subdir: Boolean, selection: String? = null): WritableArray {
     val results: WritableArray = WritableNativeArray()
     try {
       val query = reactApplicationContext.contentResolver.query(
@@ -34,7 +34,7 @@ class NoxAndroidAutoModule(reactContext: ReactApplicationContext) :
           MediaStore.Audio.Media.RELATIVE_PATH,
           MediaStore.Audio.Media.DISPLAY_NAME,
           MediaStore.Audio.Media.DATA
-        ), null,null, null)
+        ), selection,null, null)
       query?.use { cursor ->
         val idColumn = cursor.getColumnIndexOrThrow(MediaStore.Video.Media._ID)
         val pathColumn = cursor.getColumnIndexOrThrow(MediaStore.Video.Media.RELATIVE_PATH)
@@ -55,11 +55,18 @@ class NoxAndroidAutoModule(reactContext: ReactApplicationContext) :
           }
         }
       }
-      callback.resolve(results)
     } catch (e: Exception) {
       Log.e("NoxFileUtil", e.toString())
-      callback.resolve(results)
     }
+    return results
+  }
+
+  @ReactMethod fun listMediaDir(relativeDir: String, subdir: Boolean, callback: Promise) {
+    callback.resolve(_listMediaDir(relativeDir, subdir))
+  }
+
+  @ReactMethod fun listMediaFile(relativeDir: String, subdir: Boolean, filename: String, callback: Promise) {
+    callback.resolve(_listMediaDir(relativeDir, subdir, "${MediaStore.Audio.Media.DISPLAY_NAME} = $filename"))
   }
 
   @ReactMethod fun getLastExitReason(callback: Promise) {
