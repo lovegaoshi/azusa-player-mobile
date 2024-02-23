@@ -8,9 +8,9 @@
  * steps to refactor:
  * each site needs a fetch to parse regex extracted, a videoinfo fetcher and a song fetcher.
  */
-import { Platform, NativeModules } from 'react-native';
+import { NativeModules } from 'react-native';
 
-import { probeMetadata } from '@utils/ffmpeg/ffmpeg';
+import { probeMetadata, cacheAlbumArt } from '@utils/ffmpeg/ffmpeg';
 import { SOURCE } from '@enums/MediaFetch';
 import { regexFetchProps } from './generic';
 import SongTS from '@objects/Song';
@@ -35,8 +35,7 @@ const songFetch = async (
           nameRaw: probedMetadata.tags?.title || v.fileName,
           singer: probedMetadata.tags?.artist || '',
           singerId: probedMetadata.tags?.artist || '',
-          cover:
-            'https://i2.hdslb.com/bfs/face/b70f6e62e4582d4fa5d48d86047e64eb57d7504e.jpg',
+          cover: '',
           lyric: '',
           page: 0,
           duration: Number(probedMetadata.duration) || 0,
@@ -55,7 +54,7 @@ const regexFetch = async ({
 });
 
 const resolveURL = async (song: NoxMedia.Song) => {
-  return { url: song.bvid };
+  return { url: song.bvid, cover: await cacheAlbumArt(song.bvid) };
 };
 
 const refreshSong = (song: NoxMedia.Song) => song;

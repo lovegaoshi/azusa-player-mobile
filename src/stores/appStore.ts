@@ -11,6 +11,7 @@ import {
 import { logger } from '@utils/Logger';
 import rejson from '../utils/rejson.json';
 import { LoadJSONRegExtractors } from '../utils/re';
+import { SOURCE } from '@enums/MediaFetch';
 
 interface AppStore {
   pipMode: boolean;
@@ -180,9 +181,12 @@ export const cacheResolvedURL = async (
   ) {
     logger.debug(`[CacheResolveURL] ${song.parsedName} needs to be refetched.`);
     const result = await resolveURL(song);
-    appStore.setState({
-      cachedResolveURLMap: { ...cachedResolveURLMap, [song.id]: result },
-    });
+    // HACK: do not cache any local source files
+    if (song.source !== SOURCE.local) {
+      appStore.setState({
+        cachedResolveURLMap: { ...cachedResolveURLMap, [song.id]: result },
+      });
+    }
     return result;
   }
   return cachedResolvedURL;
