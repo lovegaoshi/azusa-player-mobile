@@ -1,6 +1,12 @@
 import Bottleneck from 'bottleneck';
 
 /**
+ */
+const singleLimiter = new Bottleneck({
+  minTime: 10,
+  maxConcurrent: 1,
+});
+/**
  * limits to bilibili API call to 200ms/call using bottleneck.
  * 100ms/call seems to brick IP after ~ 400 requests.
  */
@@ -34,6 +40,7 @@ const humanishApiLimiter = new Bottleneck({
   maxConcurrent: 5,
 });
 export {
+  singleLimiter,
   biliApiLimiter,
   biliTagApiLimiter,
   bilih5ApiLimiter,

@@ -17,43 +17,50 @@ import { regexFetchProps } from './generic';
 import SongTS from '@objects/Song';
 import logger from '../Logger';
 import { filterUndefined } from '../Utils';
+import { singleLimiter } from './throttle';
 
 const { NoxAndroidAutoModule } = NativeModules;
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const songFetch = async (
   fpath: string,
-  favlist: string[]
+  favlist: string[],
+  progressEmitter: (val: number) => void = () => undefined
 ): Promise<NoxMedia.Song[]> => {
   if (Platform.OS !== 'android') return [];
   const mediaFiles = await NoxAndroidAutoModule.listMediaDir(fpath, true);
+  const uniqMediaFiles = mediaFiles.filter(
+    (v: any) => !favlist.includes(v.realPath)
+  );
   return filterUndefined(
     await Promise.all(
-      mediaFiles
-        .filter((v: any) => !favlist.includes(v.realPath))
-        .map(async (v: any) => {
-          try {
-            const probedMetadata = await probeMetadata(v.realPath);
-            return SongTS({
-              cid: `${SOURCE.local}-${v.realPath}`,
-              bvid: `file://${v.realPath}`,
-              name: probedMetadata.tags?.title || v.fileName,
-              nameRaw: probedMetadata.tags?.title || v.fileName,
-              singer: probedMetadata.tags?.artist || '',
-              singerId: probedMetadata.tags?.artist || '',
-              cover: '',
-              lyric: '',
-              page: 0,
-              duration: Number(probedMetadata.duration) || 0,
-              album: probedMetadata.tags?.album || '',
-              source: SOURCE.local,
-            });
-          } catch (e) {
-            logger.warn(e);
-            logger.warn(v);
-            return null;
-          }
-        })
+      uniqMediaFiles.map(async (v: any, index: number) => {
+        try {
+          const probedMetadata = await singleLimiter.schedule(async () => {
+            progressEmitter((100 * (index + 1)) / uniqMediaFiles.length);
+            return probeMetadata(v.realPath);
+          });
+
+          return SongTS({
+            cid: `${SOURCE.local}-${v.realPath}`,
+            bvid: `file://${v.realPath}`,
+            name: probedMetadata.tags?.title || v.fileName,
+            nameRaw: probedMetadata.tags?.title || v.fileName,
+            singer: probedMetadata.tags?.artist || '',
+            singerId: probedMetadata.tags?.artist || '',
+            cover: '',
+            lyric: '',
+            page: 0,
+            duration: Number(probedMetadata.duration) || 0,
+            album: probedMetadata.tags?.album || '',
+            source: SOURCE.local,
+          });
+        } catch (e) {
+          logger.warn(e);
+          logger.warn(v);
+          return null;
+        }
+      })
     ),
     v => v
   );
@@ -62,8 +69,9 @@ const songFetch = async (
 const regexFetch = async ({
   reExtracted,
   favList = [],
+  progressEmitter,
 }: regexFetchProps): Promise<NoxNetwork.NoxRegexFetch> => ({
-  songList: await songFetch(reExtracted[1]!, favList),
+  songList: await songFetch(reExtracted[1]!, favList, progressEmitter),
 });
 
 const resolveURL = async (song: NoxMedia.Song) => {
