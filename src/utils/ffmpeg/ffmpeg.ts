@@ -37,10 +37,10 @@ const parseReplayGainLog = (log: string) => {
 };
 
 export const r128gain = async (fspath: string) => {
+  logger.debug(`[ffmpeg] probing r128gain of ${fspath}`);
   const session = await FFmpegKit.execute(
-    `-i '${fspath}' -filter_complex '[0:a]aformat=channel_layouts=stereo:sample_fmts=s16:sample_rates=48000[s0];[s0]asplit=2:outputs=2[s1][s2];[s1]replaygain[s3];[s3]anullsink;[s2]ebur128=framelog=verbose[s5]' -map '[s5]' -f null ${fspath}.tmp -hide_banner -nostats`
+    `-i '${fspath}' -nostats -filter_complex replaygain -f null -`
   );
-  RNFetchBlob.fs.unlink(`${fspath}.tmp`);
   return parseReplayGainLog(await session.getOutput());
 };
 
