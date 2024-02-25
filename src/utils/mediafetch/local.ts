@@ -75,8 +75,13 @@ const regexFetch = async ({
 });
 
 const resolveURL = async (song: NoxMedia.Song) => {
-  const artworkURI = await cacheAlbumArt(song.bvid);
-  const artworkBase64 = await RNFetchBlob.fs.readFile(artworkURI, 'base64');
+  let artworkBase64 = '';
+  try {
+    const artworkURI = await cacheAlbumArt(song.bvid);
+    artworkBase64 = await RNFetchBlob.fs.readFile(artworkURI, 'base64');
+  } catch (e) {
+    logger.warn(`[localResolver] cannot resolve artwork of ${song.bvid}`);
+  }
   return { url: song.bvid, cover: `data:image/png;base64,${artworkBase64}` };
 };
 
