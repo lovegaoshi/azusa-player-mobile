@@ -35,7 +35,7 @@ export default ({
     setSearchOption(defaultSearch);
   };
   const chooseLocalFolder = async () => {
-    let selectedFile = (
+    const selectedFile = (
       await DocumentPicker.getDocumentAsync({
         copyToCacheDirectory: false,
         type: 'audio/*',
@@ -43,10 +43,19 @@ export default ({
     ).assets;
     if (!selectedFile) return;
     const uri = selectedFile[0].uri;
-    let mediaFiles = await NoxAndroidAutoModule.listMediaFileByID(
+    const parsedURI = decodeURIComponent(
       uri.substring(uri.lastIndexOf('%3A') + 3)
     );
-    setSearchVal(`local://${mediaFiles[0].relativePath}`);
+    if (Number.isNaN(Number.parseInt(parsedURI))) {
+      setSearchVal(
+        `local://${parsedURI.substring(0, parsedURI.lastIndexOf('/'))}`
+      );
+    } else {
+      const mediaFiles = await NoxAndroidAutoModule.listMediaFileByID(
+        uri.substring(uri.lastIndexOf('%3A') + 3)
+      );
+      setSearchVal(`local://${mediaFiles[0].relativePath}`);
+    }
     toggleVisible();
   };
 
