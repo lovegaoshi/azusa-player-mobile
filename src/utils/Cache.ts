@@ -122,7 +122,7 @@ class NoxMediaCache {
   loadCacheMedia = (song: NoxMedia.Song, prefix = 'file://') => {
     // HACK: return song.source if song is local.
     if (song.source === SOURCE.local) {
-      return song.bvid;
+      // return song.bvid;
     }
     return this.loadCacheObject(noxCacheKey(song), prefix);
   };

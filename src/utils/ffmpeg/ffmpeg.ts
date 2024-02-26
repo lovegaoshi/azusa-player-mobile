@@ -9,7 +9,9 @@ export const cacheAlbumArt = async (fpath: string) => {
   const tempArtPath = `${RNFetchBlob.fs.dirs.CacheDir}/tempCover.jpg`;
   try {
     RNFetchBlob.fs.unlink(tempArtPath);
-  } catch {}
+  } catch {
+    // noop
+  }
   // HACK: exoplayer handles embedded art but I also need this for the UI...
   await FFmpegKit.execute(`-i '${fpath}' -an -vcodec copy ${tempArtPath}`);
   return tempArtPath;
