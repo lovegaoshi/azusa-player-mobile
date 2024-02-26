@@ -33,13 +33,15 @@ class NoxAndroidAutoModule(reactContext: ReactApplicationContext) :
           MediaStore.Audio.Media._ID,
           MediaStore.Audio.Media.RELATIVE_PATH,
           MediaStore.Audio.Media.DISPLAY_NAME,
-          MediaStore.Audio.Media.DATA
+          MediaStore.Audio.Media.DATA,
+          MediaStore.Audio.Media.TITLE,
+          MediaStore.Audio.Media.ALBUM,
+          MediaStore.Audio.Media.ARTIST,
+          MediaStore.Audio.Media.BITRATE,
+          MediaStore.Audio.Media.DURATION,
         ), selection,null, null)
       query?.use { cursor ->
-        val idColumn = cursor.getColumnIndexOrThrow(MediaStore.Audio.Media._ID)
         val pathColumn = cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.RELATIVE_PATH)
-        val nameColumn = cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.DISPLAY_NAME)
-        val dataColumn = cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.DATA)
         while (cursor.moveToNext()) {
           val mediaPath = cursor.getString(pathColumn)
           if (mediaPath == relativeDir || (subdir && mediaPath.startsWith(relativeDir))) {
@@ -47,10 +49,29 @@ class NoxAndroidAutoModule(reactContext: ReactApplicationContext) :
             mediaItem.putString("URI",
               "content:/" + ContentUris.appendId(
                 Uri.Builder().path(MediaStore.Audio.Media.EXTERNAL_CONTENT_URI.path),
-                cursor.getLong(idColumn)).build().toString())
+                cursor.getLong(cursor.getColumnIndexOrThrow(MediaStore.Audio.Media._ID))).build().toString())
             mediaItem.putString("relativePath",mediaPath)
-            mediaItem.putString("fileName", cursor.getString(nameColumn))
-            mediaItem.putString("realPath", cursor.getString(dataColumn))
+            mediaItem.putString("fileName",
+              cursor.getString(cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.DISPLAY_NAME))
+            )
+            mediaItem.putString("realPath",
+              cursor.getString(cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.DATA))
+            )
+            mediaItem.putString("title",
+              cursor.getString(cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.TITLE))
+            )
+            mediaItem.putString("album",
+              cursor.getString(cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.ALBUM))
+            )
+            mediaItem.putString("artist",
+              cursor.getString(cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.ARTIST))
+            )
+            mediaItem.putString("duration",
+              cursor.getString(cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.DURATION))
+            )
+            mediaItem.putString("bitrate",
+              cursor.getString(cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.BITRATE))
+            )
             results.pushMap(mediaItem)
           }
         }
