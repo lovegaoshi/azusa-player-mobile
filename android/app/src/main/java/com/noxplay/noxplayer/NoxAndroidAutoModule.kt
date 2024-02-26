@@ -67,7 +67,7 @@ class NoxAndroidAutoModule(reactContext: ReactApplicationContext) :
 
   @ReactMethod fun listMediaFileByFName(filename: String, callback: Promise) {
     callback.resolve(_listMediaDir("", true,
-      "${MediaStore.Audio.Media.DISPLAY_NAME} = $filename"))
+      "${MediaStore.Audio.Media.DISPLAY_NAME} IN ('$filename')"))
   }
 
   @ReactMethod fun listMediaFileByID(id: String, callback: Promise) {
