@@ -79,8 +79,8 @@ android {
         applicationId "com.noxplay.noxplayer"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 123
-        versionName "2.13.2"
+        versionCode 124
+        versionName "2.13.3"
         manifestPlaceholders = [
             appAuthRedirectScheme: 'com.noxplayer'
         ]
