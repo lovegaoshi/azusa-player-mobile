@@ -1,10 +1,11 @@
 import * as React from 'react';
 import { Menu } from 'react-native-paper';
 import * as DocumentPicker from 'expo-document-picker';
-import { Platform, NativeModules } from 'react-native';
+import { Platform, NativeModules, PermissionsAndroid } from 'react-native';
 import { useTranslation } from 'react-i18next';
 
 import { SEARCH_OPTIONS } from '@enums/Storage';
+import useAlert from '@components/dialogs/useAlert';
 import { MUSICFREE } from '@utils/mediafetch/musicfree';
 import ICONS from './Icons';
 import { useNoxSetting } from '@stores/useApp';
@@ -28,13 +29,21 @@ export default ({
   setSearchVal,
 }: Props) => {
   const { t } = useTranslation();
+  const { OneWayAlert } = useAlert();
   const playerStyle = useNoxSetting(state => state.playerStyle);
   const setSearchOption = useNoxSetting(state => state.setSearchOption);
   const setDefaultSearch = (defaultSearch: SEARCH_OPTIONS | MUSICFREE) => {
     toggleVisible();
     setSearchOption(defaultSearch);
   };
-  const chooseLocalFolder = async () => {
+  const chooseLocalFolderAndroid = async () => {
+    const androidPermission = await PermissionsAndroid.request(
+      PermissionsAndroid.PERMISSIONS.READ_MEDIA_AUDIO
+    );
+    if (androidPermission !== PermissionsAndroid.RESULTS.GRANTED) {
+      OneWayAlert('dude', 'this aint gonna work without permissions');
+      return;
+    }
     const selectedFile = (
       await DocumentPicker.getDocumentAsync({
         copyToCacheDirectory: false,
@@ -81,7 +90,7 @@ export default ({
       {Platform.OS === 'android' && (
         <Menu.Item
           leadingIcon={() => ICONS.LOCAL(rgb2Hex(playerStyle.colors.primary))}
-          onPress={chooseLocalFolder}
+          onPress={chooseLocalFolderAndroid}
           title={t('Menu.local')}
         />
       )}

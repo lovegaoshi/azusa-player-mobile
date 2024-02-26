@@ -36,31 +36,30 @@ const songFetch = async (
   return filterUndefined(
     await Promise.all(
       uniqMediaFiles.map(async (v: any, index: number) => {
+        let probedMetadata: any = {};
         try {
-          const probedMetadata = await singleLimiter.schedule(async () => {
+          probedMetadata = await singleLimiter.schedule(() => {
             progressEmitter((100 * (index + 1)) / uniqMediaFiles.length);
             return probeMetadata(v.realPath);
-          });
-
-          return SongTS({
-            cid: `${SOURCE.local}-${v.realPath}`,
-            bvid: `file://${v.realPath}`,
-            name: probedMetadata.tags?.title || v.fileName,
-            nameRaw: probedMetadata.tags?.title || v.fileName,
-            singer: probedMetadata.tags?.artist || '',
-            singerId: probedMetadata.tags?.artist || '',
-            cover: '',
-            lyric: '',
-            page: 0,
-            duration: Number(probedMetadata.duration) || 0,
-            album: probedMetadata.tags?.album || '',
-            source: SOURCE.local,
           });
         } catch (e) {
           logger.warn(e);
           logger.warn(v);
-          return null;
         }
+        return SongTS({
+          cid: `${SOURCE.local}-${v.realPath}`,
+          bvid: `file://${v.realPath}`,
+          name: probedMetadata.tags?.title || v.fileName,
+          nameRaw: probedMetadata.tags?.title || v.fileName,
+          singer: probedMetadata.tags?.artist || '',
+          singerId: probedMetadata.tags?.artist || '',
+          cover: '',
+          lyric: '',
+          page: 0,
+          duration: Number(probedMetadata.duration) || 0,
+          album: probedMetadata.tags?.album || '',
+          source: SOURCE.local,
+        });
       })
     ),
     v => v
