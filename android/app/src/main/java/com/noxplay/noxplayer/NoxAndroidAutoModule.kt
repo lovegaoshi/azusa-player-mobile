@@ -66,11 +66,11 @@ class NoxAndroidAutoModule(reactContext: ReactApplicationContext) :
             mediaItem.putString("artist",
               cursor.getString(cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.ARTIST))
             )
-            mediaItem.putString("duration",
-              cursor.getString(cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.DURATION))
+            mediaItem.putInt("duration",
+              cursor.getInt(cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.DURATION))
             )
-            mediaItem.putString("bitrate",
-              cursor.getString(cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.BITRATE))
+            mediaItem.putInt("bitrate",
+              cursor.getInt(cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.BITRATE))
             )
             results.pushMap(mediaItem)
           }

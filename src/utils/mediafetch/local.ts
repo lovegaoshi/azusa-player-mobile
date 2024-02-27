@@ -17,7 +17,6 @@ import { SOURCE } from '@enums/MediaFetch';
 import { regexFetchProps } from './generic';
 import SongTS from '@objects/Song';
 import logger from '../Logger';
-import { filterUndefined } from '../Utils';
 import { singleLimiter } from './throttle';
 
 const { NoxAndroidAutoModule } = NativeModules;
@@ -29,40 +28,53 @@ const songFetch = async (
   progressEmitter: (val: number) => void = () => undefined
 ): Promise<NoxMedia.Song[]> => {
   if (Platform.OS !== 'android') return [];
-  const mediaFiles = await NoxAndroidAutoModule.listMediaDir(fpath, true);
-  const uniqMediaFiles = mediaFiles.filter(
-    (v: any) => !favlist.includes(v.realPath)
+  const mediaFiles: NoxUtils.NoxFileUtilMediaInfo[] =
+    await NoxAndroidAutoModule.listMediaDir(fpath, true);
+  const uniqMediaFiles = mediaFiles.filter(v => !favlist.includes(v.realPath));
+  return uniqMediaFiles.map(v =>
+    SongTS({
+      cid: `${SOURCE.local}-${v.realPath}`,
+      bvid: `file://${v.realPath}`,
+      name: v.title,
+      nameRaw: v.title,
+      singer: v.artist,
+      singerId: v.artist,
+      cover: '',
+      lyric: '',
+      page: 0,
+      duration: v.duration,
+      album: v.album,
+      source: SOURCE.local,
+    })
   );
-  return filterUndefined(
-    await Promise.all(
-      uniqMediaFiles.map(async (v: any, index: number) => {
-        let probedMetadata: any = {};
-        try {
-          probedMetadata = await singleLimiter.schedule(() => {
-            progressEmitter((100 * (index + 1)) / uniqMediaFiles.length);
-            return probeMetadata(v.realPath);
-          });
-        } catch (e) {
-          logger.warn(e);
-          logger.warn(v);
-        }
-        return SongTS({
-          cid: `${SOURCE.local}-${v.realPath}`,
-          bvid: `file://${v.realPath}`,
-          name: probedMetadata.tags?.title || v.fileName,
-          nameRaw: probedMetadata.tags?.title || v.fileName,
-          singer: probedMetadata.tags?.artist || '',
-          singerId: probedMetadata.tags?.artist || '',
-          cover: '',
-          lyric: '',
-          page: 0,
-          duration: Number(probedMetadata.duration) || 0,
-          album: probedMetadata.tags?.album || '',
-          source: SOURCE.local,
+  // TODO: no longer needs FFProbe
+  return await Promise.all(
+    uniqMediaFiles.map(async (v, index) => {
+      let probedMetadata: any = {};
+      try {
+        probedMetadata = await singleLimiter.schedule(() => {
+          progressEmitter((100 * (index + 1)) / uniqMediaFiles.length);
+          return probeMetadata(v.realPath);
         });
-      })
-    ),
-    v => v
+      } catch (e) {
+        logger.warn(e);
+        logger.warn(v);
+      }
+      return SongTS({
+        cid: `${SOURCE.local}-${v.realPath}`,
+        bvid: `file://${v.realPath}`,
+        name: probedMetadata.tags?.title || v.fileName,
+        nameRaw: probedMetadata.tags?.title || v.fileName,
+        singer: probedMetadata.tags?.artist || '',
+        singerId: probedMetadata.tags?.artist || '',
+        cover: '',
+        lyric: '',
+        page: 0,
+        duration: Number(probedMetadata.duration) || 0,
+        album: probedMetadata.tags?.album || '',
+        source: SOURCE.local,
+      });
+    })
   );
 };
 
