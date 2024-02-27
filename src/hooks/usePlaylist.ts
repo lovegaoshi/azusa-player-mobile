@@ -98,7 +98,7 @@ const usePlaylist = (playlist: NoxMedia.Playlist): UsePlaylist => {
     setTimeout(() => {
       if (searchBarRef.current) {
         // TODO: fix type
-        // @ts-ignore
+        // @ts-expect-error
         searchBarRef.current.value = searchedVal;
       }
     }, 100);

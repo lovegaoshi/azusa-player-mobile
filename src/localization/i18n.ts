@@ -3,7 +3,7 @@ import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
 import translationEN from './en/translation.json';
 import translationZHCN from './zhcn/translation.json';
-import { Settings, I18nManager, Platform, NativeModules } from 'react-native';
+import { Settings, I18nManager, Platform } from 'react-native';
 
 function getLocale() {
   let currentLocale = 'en';

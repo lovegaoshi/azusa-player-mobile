@@ -22,10 +22,6 @@ jobs:
           git config --global user.name lovegaoshi
           git commit -m "build: release version bump" -a
 
-      - name: python version_bump.py
-        run: |
-          python release_bump.py --devstr=-gplay
-
       - name: Get branch name
         run: |
           # Short name for current branch. For PRs, use target branch (base ref)

@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { BackHandler, SafeAreaView, StyleSheet } from 'react-native';
-import { Text, Avatar, Button } from 'react-native-paper';
+import { Button } from 'react-native-paper';
 import { WebView } from 'react-native-webview';
 import { useFocusEffect } from '@react-navigation/native';
 
@@ -39,5 +39,3 @@ const Explore = () => {
 };
 
 export default Explore;
-
-const styles = StyleSheet.create({});
