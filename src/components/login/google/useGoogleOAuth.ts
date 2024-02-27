@@ -1,8 +1,6 @@
 import { authorize } from 'react-native-app-auth';
 
 import logger from '@utils/Logger';
-import { getValueFor, save } from '@utils/SecureStorage';
-import { DEFAULT_UA } from '@utils/BiliFetch';
 
 const config = {
   issuer: 'https://accounts.google.com',

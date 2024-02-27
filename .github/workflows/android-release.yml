@@ -119,7 +119,6 @@ jobs:
       - name: python version_bump.py
         run: |
           python version_bump.py
-          python release_bump.py --devstr=-gplay
 
       - name: Get branch name
         run: |

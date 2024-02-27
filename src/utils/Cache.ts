@@ -58,6 +58,21 @@ class NoxMediaCache {
     resolvedURL: any,
     extension?: string
   ) => {
+    const parseR128Gain = async () => {
+      if (getState().playerSetting.r128gain) {
+        logger.debug('[FFMPEG] now starting FFMPEG r128gain...');
+        const previousGain = getR128Gain(song);
+        if (previousGain === null) {
+          const gain = await r128gain(res.path());
+          addR128Gain(song, gain);
+          setR128Gain(gain, song);
+        } else {
+          setR128Gain(previousGain, song);
+        }
+      }
+    };
+    // HACK: local files also need r128gain
+    if (resolvedURL.url.startsWith('file://')) parseR128Gain();
     if (
       this.cache.max < 2 ||
       !resolvedURL.url.startsWith('http') ||
@@ -82,17 +97,7 @@ class NoxMediaCache {
       });
     this.cache.set(noxCacheKey(song), res.path());
     addDownloadProgress(song, 100);
-    if (getState().playerSetting.r128gain) {
-      logger.debug('[FFMPEG] now starting FFMPEG r128gain...');
-      const previousGain = getR128Gain(song);
-      if (previousGain === null) {
-        const gain = await r128gain(res.path());
-        addR128Gain(song, gain);
-        setR128Gain(gain, song);
-      } else {
-        setR128Gain(previousGain, song);
-      }
-    }
+    await parseR128Gain();
     if (Platform.OS === 'ios') {
       const mp3Path = await ffmpegToMP3(res.path());
       this.cache.set(noxCacheKey(song), mp3Path);
@@ -154,6 +159,7 @@ class NoxMediaCache {
   };
 
   peekCache = (song: NoxMedia.Song) => {
+    if (song.source === SOURCE.local) return true;
     return this.cache.peek(noxCacheKey(song));
   };
 

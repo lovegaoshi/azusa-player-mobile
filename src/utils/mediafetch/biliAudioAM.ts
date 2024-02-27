@@ -16,8 +16,8 @@ import { fetchBiliPaginatedAPI } from './paginatedbili';
 import VideoInfo from '@objects/VideoInfo';
 
 /**
- * 
- * 
+ *
+ *
  * https://www.bilibili.com/audio/music-service-c/web/song/of-coll?sid=33443222&pn=1&ps=100
  {
     "code": 0,

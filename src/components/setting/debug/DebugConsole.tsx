@@ -5,7 +5,7 @@ import GenericDialog from '@components/dialogs/GenericDialog';
 import showLog from './Log';
 
 export default () => {
-  const [visible, setVisible] = React.useState(false);
+  const [visible] = React.useState(false);
   return <GenericDialog visible={visible}></GenericDialog>;
 };
 
