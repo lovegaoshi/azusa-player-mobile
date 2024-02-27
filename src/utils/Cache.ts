@@ -159,6 +159,7 @@ class NoxMediaCache {
   };
 
   peekCache = (song: NoxMedia.Song) => {
+    if (song.source === SOURCE.local) return true;
     return this.cache.peek(noxCacheKey(song));
   };
 

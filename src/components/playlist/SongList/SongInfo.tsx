@@ -83,6 +83,7 @@ const SongInfo = ({
             : 'transparent',
           opacity:
             item.liveStatus !== false &&
+            !playerSetting.dataSaver &&
             (NoxCache.noxMediaCache?.peekCache(item) || !networkCellular)
               ? undefined
               : 0.5,
