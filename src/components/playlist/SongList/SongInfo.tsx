@@ -74,7 +74,8 @@ const SongInfo = ({
   const checked = selected[getSongIndex()];
 
   const isItemSolid = () => {
-    if (item.liveStatus === true || !networkCellular) return true;
+    if (item.liveStatus === false) return false;
+    if (!networkCellular) return true;
     if (playerSetting.dataSaver && !NoxCache.noxMediaCache?.peekCache(item)) {
       return false;
     }
