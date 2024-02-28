@@ -73,6 +73,14 @@ const SongInfo = ({
   };
   const checked = selected[getSongIndex()];
 
+  const isItemSolid = () => {
+    if (item.liveStatus === true || !networkCellular) return true;
+    if (playerSetting.dataSaver && !NoxCache.noxMediaCache?.peekCache(item)) {
+      return false;
+    }
+    return true;
+  };
+
   return (
     <View
       style={[
@@ -81,12 +89,7 @@ const SongInfo = ({
           backgroundColor: currentPlaying
             ? playerStyle.customColors.playlistDrawerBackgroundColorTransparent
             : 'transparent',
-          opacity:
-            item.liveStatus === true ||
-            (!playerSetting.dataSaver &&
-              (NoxCache.noxMediaCache?.peekCache(item) || !networkCellular))
-              ? undefined
-              : 0.5,
+          opacity: isItemSolid() ? undefined : 0.5,
         },
       ]}
     >
