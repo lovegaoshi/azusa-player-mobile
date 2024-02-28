@@ -15,7 +15,7 @@ import { songFetch } from './bilivideo';
 import { fetchBiliPaginatedAPI } from './paginatedbili';
 
 const URL_BILICOLLE_INFO =
-  'https://api.bilibili.com/x/polymer/space/seasons_archives_list?mid={mid}&season_id={sid}&sort_reverse=false&page_num={pn}&page_size=100';
+  'https://api.bilibili.com/x/polymer/space/seasons_archives_list?mid={mid}&season_id={sid}&sort_reverse=true&page_num={pn}&page_size=100';
 
 const fetchBiliColleList = async (
   mid: string,
