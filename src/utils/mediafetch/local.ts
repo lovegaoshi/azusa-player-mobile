@@ -86,7 +86,9 @@ const regexFetch = async ({
   songList: await songFetch(reExtracted[1]!, favList, progressEmitter),
 });
 
-const resolveURL = async (song: NoxMedia.Song) => {
+const resolveURL = async (song: NoxMedia.Song) => ({ url: song.bvid });
+
+const resolveArtwork = async (song: NoxMedia.Song) => {
   let artworkBase64 = '';
   try {
     const artworkURI = await cacheAlbumArt(song.bvid);
@@ -94,7 +96,7 @@ const resolveURL = async (song: NoxMedia.Song) => {
   } catch (e) {
     logger.warn(`[localResolver] cannot resolve artwork of ${song.bvid}`);
   }
-  return { url: song.bvid, cover: `data:image/png;base64,${artworkBase64}` };
+  return `data:image/png;base64,${artworkBase64}`;
 };
 
 const refreshSong = (song: NoxMedia.Song) => song;
@@ -105,4 +107,5 @@ export default {
   regexResolveURLMatch: /^local-/,
   resolveURL,
   refreshSong,
+  resolveArtwork,
 };

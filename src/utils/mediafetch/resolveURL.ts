@@ -96,3 +96,15 @@ export const songExport2URL = (v: NoxMedia.Song): string => {
     regexMatching: song => song.id,
   });
 };
+export const songResolveArtwork = (v: NoxMedia.Song) => {
+  const regexOperations: NoxUtils.RegexMatchResolve<Promise<string>> = [
+    [localFetch.regexResolveURLMatch, localFetch.resolveArtwork],
+  ];
+
+  return regexMatchOperations({
+    song: v,
+    regexOperations,
+    fallback: () => Promise.resolve(''),
+    regexMatching: song => song.id,
+  });
+};

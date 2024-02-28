@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import {
   StyleSheet,
   View,
@@ -13,6 +13,7 @@ import { activateKeepAwakeAsync, deactivateKeepAwake } from 'expo-keep-awake';
 
 import { useNoxSetting } from '@stores/useApp';
 import { LyricView } from '../Lyric';
+import { songResolveArtwork } from '@utils/mediafetch/resolveURL';
 
 interface Props {
   track?: Track;
@@ -30,6 +31,7 @@ const AlbumArt: React.FC<Props> = ({
 }) => {
   const playerSetting = useNoxSetting(state => state.playerSetting);
   const [isImageVisible, setIsImageVisible] = useState(true);
+  const [overwriteAlbumArt, setOverwriteAlbumArt] = useState('');
   const opacity = useRef(new Animated.Value(1)).current;
   const dimension = Dimensions.get('window');
   const coverStyle = {
@@ -76,6 +78,13 @@ const AlbumArt: React.FC<Props> = ({
     }, [isImageVisible, playerSetting.screenAlwaysWake])
   );
 
+  useEffect(() => {
+    setOverwriteAlbumArt('');
+    if (!track?.artwork && track?.song) {
+      songResolveArtwork(track?.song).then(setOverwriteAlbumArt);
+    }
+  }, [track]);
+
   return (
     <>
       <TouchableWithoutFeedback onPress={onImagePress}>
@@ -98,7 +107,7 @@ const AlbumArt: React.FC<Props> = ({
               playerSetting.hideCoverInMobile
                 ? 0
                 : {
-                    uri: `${track?.artwork}`,
+                    uri: `${track?.artwork || overwriteAlbumArt}`,
                   }
             }
             transition={{ effect: 'flip-from-top' }}
