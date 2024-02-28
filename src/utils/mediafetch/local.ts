@@ -42,7 +42,7 @@ const songFetch = async (
       cover: '',
       lyric: '',
       page: 0,
-      duration: v.duration,
+      duration: v.duration / 1000,
       album: v.album,
       source: SOURCE.local,
     })
