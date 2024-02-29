@@ -39,7 +39,9 @@ export default ({
       ...searchPlaylist,
       ...searchedResult,
       title: searchListTitle,
-      subscribeUrl: val.includes('http') ? [val] : [],
+      subscribeUrl:
+        // HACK: add these search URLs to playlist's subscribe watch folder
+        val.startsWith('http') || val.startsWith('local://') ? [val] : [],
     };
     setSearchPlaylist(newSearchPlaylist);
     setCurrentPlaylist(newSearchPlaylist);

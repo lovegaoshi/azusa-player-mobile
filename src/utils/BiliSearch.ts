@@ -21,10 +21,17 @@ import ytbsearchFetch from './mediafetch/ytbsearch';
 import bililiveFetch from './mediafetch/bililive';
 import bilisubliveFetch from './mediafetch/bilisublive';
 import localFetch from '@utils/mediafetch/local';
+import b23tvFetch from './mediafetch/b23tv';
 import { regexFetchProps } from './mediafetch/generic';
 import { MUSICFREE, searcher } from './mediafetch/musicfree';
 import { getMusicFreePlugin } from '@utils/ChromeStorage';
 
+const reExtractionsShortURL: ReExtraction<string>[] = [
+  {
+    match: b23tvFetch.regexSearchMatch,
+    fetch: b23tvFetch.regexFetch,
+  },
+];
 /**
  * assign the proper extractor based on the provided url. uses regex.
  * @returns
@@ -39,8 +46,11 @@ interface Props {
   defaultSearch?: SEARCH_OPTIONS | MUSICFREE;
 }
 
-export const matchBiliURL = (input: string) => {
-  for (const reExtraction of reExtractions) {
+export const matchBiliURL = <T>(
+  input: string,
+  extractions: ReExtraction<T>[]
+) => {
+  for (const reExtraction of extractions) {
     const reExtracted = reExtraction.match.exec(input);
     if (reExtracted !== null) {
       return {
@@ -67,7 +77,13 @@ export const searchBiliURLs = async ({
   };
   try {
     progressEmitter(100);
-    const matchRegex = matchBiliURL(input);
+    const matchShortURL = matchBiliURL(input, reExtractionsShortURL);
+    if (matchShortURL !== null) {
+      input = await matchShortURL.regexFetch({
+        reExtracted: matchShortURL.reExtracted,
+      });
+    }
+    const matchRegex = matchBiliURL(input, reExtractions);
     if (matchRegex !== null) {
       results = await matchRegex.regexFetch({
         reExtracted: matchRegex.reExtracted,
@@ -110,13 +126,13 @@ export const searchBiliURLs = async ({
   return results;
 };
 
-interface ReExtraction {
+interface ReExtraction<T> {
   match: RegExp;
-  fetch: (v: regexFetchProps) => Promise<NoxNetwork.NoxRegexFetch>;
+  fetch: (v: regexFetchProps) => Promise<T>;
   refresh?: (v: NoxMedia.Playlist) => Promise<NoxMedia.SearchPlaylist>;
 }
 
-const reExtractions: ReExtraction[] = [
+const reExtractions: ReExtraction<NoxNetwork.NoxRegexFetch>[] = [
   {
     match: localFetch.regexSearchMatch,
     fetch: localFetch.regexFetch,
