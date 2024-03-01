@@ -30,6 +30,15 @@ sidebar_position: 1
 12. 油管播放列表：https://www.youtube.com/playlist?list=PL-mVqujjjwGjZu3wli3iOh0FBdSU6tsNO
 13. 油管 mix 列表：
 14. [MusicFreePlugins](https://github.com/maotoumao/MusicFreePlugins)支持的拓展
+15. b23.tv: b23.tv/
+16. b站番剧: https://www.bilibili.com/bangumi/play/ep813990
+17. b站音頻歌单: https://www.bilibili.com/audio/mycollection/33443222
+18. b站音頻歌单: https://www.bilibili.com/audio/similarsongs/3680653
+19. b站音頻歌单: https://www.bilibili.com/audio/am10624
+
+## 網站搜索
+
+支援b站、y站、本地音樂（僅android）和musicfree（偷來的）；按左邊的按鈕選擇
 
 ## 把搜索的歌新建为歌单
 
