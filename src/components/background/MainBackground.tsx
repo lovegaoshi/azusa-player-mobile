@@ -24,10 +24,7 @@ const MainBackground = ({ children }: { children: React.JSX.Element }) => {
     resolveBackgroundImage(bkgrdImgRaw).then(setBkgrdImg);
   }, [bkgrdImgRaw]);
 
-  // TODO: are these still necessary since they are behind await initPlayer?
-  if (!bkgrdImg) return <>{children}</>;
-
-  switch (bkgrdImg.type) {
+  switch (bkgrdImg?.type) {
     case RESOLVE_TYPE.image:
       return (
         <ImageBackground
@@ -47,11 +44,16 @@ const MainBackground = ({ children }: { children: React.JSX.Element }) => {
         <>
           <Video
             source={{
-              uri: bkgrdImg.identifier,
+              uri: 'file:///data/user/0/com.noxplay.noxplayer.dev/files/ReactNativeBlobUtilTmp_0mwl4wtveuroyz3cg067ka.mp4',
               headers: customReqHeader(bkgrdImg.identifier, {}),
             }}
             style={{ width: '100%', height: '100%', position: 'absolute' }}
-            onError={logger.error}
+            onError={e => {
+              logger.error(JSON.stringify(e));
+              logger.error(
+                `with: ${bkgrdImg.identifier} + ${JSON.stringify(customReqHeader(bkgrdImg.identifier, {}))}`
+              );
+            }}
             /**
             isLooping
             resizeMode={ResizeMode.COVER}
