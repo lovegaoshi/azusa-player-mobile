@@ -213,6 +213,7 @@ export const initCache = async (
 export const cacheWrapper = (
   identifier: string,
   getURL: () => Promise<string>
-) => cache.noxMediaCache.loadCacheFunction(identifier, getURL);
+  // HACK: investigate why RNV6 doesnt play m4s resolved from biliVideo; until then temporarily disable cacheWrapper
+) => getURL(); // cache.noxMediaCache.loadCacheFunction(identifier, getURL);
 
 export default cache;
