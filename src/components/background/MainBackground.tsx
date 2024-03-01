@@ -66,6 +66,9 @@ const MainBackground = ({ children }: { children: React.JSX.Element }) => {
             resizeMode="cover"
             disableFocus={true}
             preventsDisplaySleepDuringVideoPlayback={false}
+            bufferConfig={{
+              cacheSizeMB: 200,
+            }}
           />
           <View
             style={[

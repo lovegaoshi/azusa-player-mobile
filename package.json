@@ -101,7 +101,7 @@
     "react-native-track-player": "git+https://lovegaoshi@github.com/lovegaoshi/react-native-track-player.git#APM",
     "react-native-url-polyfill": "^2.0.0",
     "react-native-vector-icons": "^10.0.3",
-    "react-native-video": "^5.2.1",
+    "react-native-video": "git+https://github.com/lovegaoshi/react-native-video.git#dev-android-cache-singleton",
     "react-native-webview": "^13.8.1",
     "react-native-windows": "^0.73.8",
     "react-use": "^17.5.0",
