@@ -44,7 +44,7 @@ const MainBackground = ({ children }: { children: React.JSX.Element }) => {
         <>
           <Video
             source={{
-              uri: 'file:///data/user/0/com.noxplay.noxplayer.dev/files/ReactNativeBlobUtilTmp_0mwl4wtveuroyz3cg067ka.mp4',
+              uri: bkgrdImg.identifier,
               headers: customReqHeader(bkgrdImg.identifier, {}),
             }}
             style={{ width: '100%', height: '100%', position: 'absolute' }}
@@ -66,6 +66,9 @@ const MainBackground = ({ children }: { children: React.JSX.Element }) => {
             resizeMode="cover"
             disableFocus={true}
             preventsDisplaySleepDuringVideoPlayback={false}
+            bufferConfig={{
+              cacheSizeMB: 200,
+            }}
           />
           <View
             style={[
