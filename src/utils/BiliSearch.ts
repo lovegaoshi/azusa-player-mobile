@@ -118,7 +118,6 @@ export const searchBiliURLs = async ({
           cookiedSearch,
         });
     }
-    progressEmitter(0);
   } catch (err) {
     logger.warn(err);
   }
