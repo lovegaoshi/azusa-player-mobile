@@ -62,6 +62,7 @@ if __name__ == '__main__':
             version, f'{version}{args.devstr}'
         ))
     else:
+        subprocess.call(['git', 'switch', 'master'])
         new_version = autoincrease_version(
             current_version=version, inc=VersionUpdateDict[args.inc])
         fix_content(Path('./src/enums/Version.ts'), lambda line: line.replace(
@@ -70,3 +71,4 @@ if __name__ == '__main__':
         subprocess.call(['git', 'commit', '-am', f'release: {new_version}'])
         subprocess.call(['git', 'tag', f'v{new_version}'])
         subprocess.call(['git', 'push', 'origin', 'master', '--tags'])
+        subprocess.call(['git', 'switch', 'dev'])
