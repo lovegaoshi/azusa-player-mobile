@@ -17,7 +17,7 @@ import {
   SelectSettingEntry,
   dummySelectSettingEntry,
 } from '../SetttingEntries';
-import { saveColorScheme } from '@utils/ChromeStorage';
+import { saveColorScheme, getColorScheme } from '@utils/ChromeStorage';
 
 enum VIEW {
   HOME = 'AppearanceHome',
@@ -48,10 +48,10 @@ const MainView = ({ navigation }: NoxComponent.NavigationProps) => {
   >(dummySelectSettingEntry);
   const [selectVisible, setSelectVisible] = React.useState(false);
 
-  const selectColorScheme = () => {
+  const selectColorScheme = async () => {
     setSelectVisible(true);
     const options: ColorSchemeName[] = [null, 'light', 'dark'];
-    const defaultIndex = options.indexOf(Appearance.getColorScheme() || null);
+    const defaultIndex = options.indexOf((await getColorScheme()) || null);
     setCurrentSelectOption({
       options,
       renderOption: (option: ColorSchemeName) => ColorSchemei18n(option, t),
