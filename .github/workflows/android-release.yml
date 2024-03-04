@@ -12,7 +12,7 @@ jobs:
       contents: write
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: python version_bump.py
         run: |
@@ -29,13 +29,13 @@ jobs:
         run: echo "date=$(date +'%Y-%m-%d')" >> $GITHUB_OUTPUT
 
       - name: set up JDK 18
-        uses: actions/setup-java@v3
+        uses: actions/setup-java@v4
         with:
           java-version: 18
           distribution: temurin
 
       - name: Set up Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: '18'
 
@@ -78,7 +78,7 @@ jobs:
           args: -O ./android/app/noxupload.jks ${{ secrets.REMOTE_KEYFILE_URL }}
 
       - name: Install dependencies
-        uses: nick-fields/retry@v2
+        uses: nick-fields/retry@v3
         with:
           timeout_minutes: 10
           max_attempts: 10
@@ -111,7 +111,7 @@ jobs:
       contents: write
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: python version_bump.py
         run: |
@@ -128,13 +128,13 @@ jobs:
         run: echo "date=$(date +'%Y-%m-%d')" >> $GITHUB_OUTPUT
 
       - name: set up JDK 18
-        uses: actions/setup-java@v3
+        uses: actions/setup-java@v4
         with:
           java-version: 18
           distribution: temurin
 
       - name: Set up Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: '18'
 
@@ -176,7 +176,7 @@ jobs:
           args: -O ./android/app/noxupload.jks ${{ secrets.REMOTE_KEYFILE_URL }}
 
       - name: Install dependencies
-        uses: nick-fields/retry@v2
+        uses: nick-fields/retry@v3
         with:
           timeout_minutes: 10
           max_attempts: 10
@@ -188,7 +188,7 @@ jobs:
       - name: gradle build AAB
         run: cd android && chmod +x gradlew && ./gradlew bundleRelease
 
-      - uses: actions/upload-artifact@v3
+      - uses: actions/upload-artifact@v4
         with:
           name: outputAAB
           path: android/app/build/outputs/bundle/release/*.aab # or path/to/artifact
@@ -208,7 +208,7 @@ jobs:
       contents: write
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Get branch name
         run: |
@@ -221,13 +221,13 @@ jobs:
         run: echo "date=$(date +'%Y-%m-%d')" >> $GITHUB_OUTPUT
 
       - name: set up JDK 18
-        uses: actions/setup-java@v3
+        uses: actions/setup-java@v4
         with:
           java-version: 18
           distribution: temurin
 
       - name: Set up Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: '18'
 
@@ -251,7 +251,7 @@ jobs:
           echo "Commit Tag: $COMMIT_TAG"
 
       - name: Install dependencies
-        uses: nick-fields/retry@v2
+        uses: nick-fields/retry@v3
         with:
           timeout_minutes: 10
           max_attempts: 10
