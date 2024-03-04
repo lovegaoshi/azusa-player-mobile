@@ -18,9 +18,6 @@ jobs:
         run: |
           python version_bump.py
 
-      - name: Push changes to master
-        uses: ad-m/github-push-action@master
-
       - name: Get branch name
         run: |
           # Short name for current branch. For PRs, use target branch (base ref)
@@ -158,6 +155,15 @@ jobs:
       - name: Display Commit Tag
         run: |
           echo "Commit Tag: $COMMIT_TAG"
+
+      - name: commit
+        run: |
+          git config --global user.email 106490582+lovegaoshi@users.noreply.github.com
+          git config --global user.name lovegaoshi
+          git commit -m "build: release version bump" -a
+
+      - name: Push changes to master
+        uses: ad-m/github-push-action@master
 
       - name: Add Build Sign Keys
         run: |
