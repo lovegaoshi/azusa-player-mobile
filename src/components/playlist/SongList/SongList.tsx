@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View, BackHandler, StyleSheet } from 'react-native';
 import { FlashList } from '@shopify/flash-list';
 import { IconButton } from 'react-native-paper';
@@ -13,6 +13,7 @@ import SongMenu from './SongMenu';
 import PlaylistInfo from '../Info/PlaylistInfo';
 import PlaylistMenuButton from '../Menu/PlaylistMenuButton';
 import usePlaylist from '../usePlaylistRN';
+import SongListScrollbar from './SongListScrollbar';
 
 const PlaylistList = () => {
   const currentPlayingId = useNoxSetting(state => state.currentPlayingId);
@@ -37,6 +38,9 @@ const PlaylistList = () => {
     playlistRef,
   } = usedPlaylist;
   const netInfo = useNetInfo();
+  const [scrollViewHeight, setScrollViewHeight] = useState(0);
+  const [contentViewHeight, setContentViewHeight] = useState(0);
+  const [scrollPositionY, setScrollPositionY] = useState(0);
 
   useFocusEffect(
     React.useCallback(() => {
@@ -89,7 +93,13 @@ const PlaylistList = () => {
           />
         </View>
       </View>
-      <View style={stylesLocal.playlistContainer}>
+      <SongListScrollbar
+        style={stylesLocal.playlistContainer}
+        scrollViewReference={playlistRef}
+        scrollViewHeight={scrollViewHeight}
+        contentViewHeight={contentViewHeight}
+        scrollPositionY={scrollPositionY}
+      >
         <FlashList
           ref={playlistRef}
           data={rows}
@@ -115,21 +125,29 @@ const PlaylistList = () => {
           extraData={shouldReRender}
           onRefresh={refreshPlaylist}
           refreshing={refreshing}
-        />
-        <View
-          style={{
-            height: '100%',
-            width: 6,
-            borderRadius: 8,
+          showsVerticalScrollIndicator={false}
+          onLayout={({
+            nativeEvent: {
+              layout: { height },
+            },
+          }) => {
+            setScrollViewHeight(height);
           }}
-        ></View>
+          onContentSizeChange={(_, contentHeight) => {
+            setContentViewHeight(contentHeight);
+          }}
+          onScroll={({ nativeEvent: { contentOffset, contentSize } }) => {
+            setScrollPositionY(contentOffset.y);
+            setContentViewHeight(contentSize.height);
+          }}
+        />
         <SongMenu
           usePlaylist={usedPlaylist}
           prepareForLayoutAnimationRender={() =>
             playlistRef.current?.prepareForLayoutAnimationRender()
           }
         />
-      </View>
+      </SongListScrollbar>
     </View>
   );
 };
