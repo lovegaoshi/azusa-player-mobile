@@ -47,6 +47,7 @@ jobs:
         run: |
           echo "${{ secrets.ENV_FILE }}" > .env
           echo "APPSTORE=true" >> .env
+          echo "${{ secrets.SENTRY_PROPERTIES }}" > ./android/sentry.properties
 
       - name: alias yarn.cmd to yarn
         run: alias yarn.cmd="yarn"
