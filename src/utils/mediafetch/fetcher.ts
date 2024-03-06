@@ -91,7 +91,6 @@ export const fetchPaginatedAPI = async ({
         })
         .catch((err: any) => {
           console.error(err, pages);
-          pages.text().then(console.log);
         });
     })
   );

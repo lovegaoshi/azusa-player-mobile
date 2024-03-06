@@ -5,6 +5,7 @@ import TrackPlayer, { RepeatMode } from 'react-native-track-player';
 import { clearPlaylistUninterrupted } from '@utils/RNTPUtils';
 import { NoxRepeatMode } from '../enums/RepeatMode';
 import { savePlayMode } from '@utils/ChromeStorage';
+import logger from '@utils/Logger';
 
 interface NoxPlaylistStore {
   playingList: Array<NoxMedia.Song>;
@@ -26,10 +27,18 @@ const playlistStore = createStore<NoxPlaylistStore>(() => ({
 }));
 
 export const setPlayingIndex = (index = 0, songId?: string) => {
+  const currentQueue = getCurrentTPQueue();
   if (songId) {
-    index = getCurrentTPQueue().findIndex(v => v.id === songId);
+    index = currentQueue.findIndex(v => v.id === songId);
   } else {
-    songId = getCurrentTPQueue()[index].id;
+    try {
+      songId = currentQueue[index].id;
+    } catch {
+      logger.warn(
+        `[setPlayingIndex] could not get index ${index} from current queue: ${JSON.stringify(currentQueue)} `
+      );
+      return;
+    }
   }
   playlistStore.setState({
     currentPlayingIndex: index,
