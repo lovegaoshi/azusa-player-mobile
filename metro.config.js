@@ -9,9 +9,17 @@ const escape = require('escape-string-regexp');
 const exclusionList = require('metro-config/src/defaults/exclusionList');
 const { getDefaultConfig, mergeConfig } = require('@react-native/metro-config');
 
+const {
+  createSentryMetroSerializer
+} = require("@sentry/react-native/dist/js/tools/sentryMetroSerializer");
+
 const root = path.resolve(__dirname, '..');
 const modules = Object.keys({});
-const config = {};
+const config = {
+  serializer: {
+    customSerializer: createSentryMetroSerializer()
+  }
+};
 
 // This stops "react-native run-windows" from causing the metro server to crash if its already running
 const blockList = [
