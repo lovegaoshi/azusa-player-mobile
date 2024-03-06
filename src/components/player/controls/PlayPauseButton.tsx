@@ -1,5 +1,6 @@
 import React from 'react';
-import { Image, StyleSheet } from 'react-native';
+import { StyleSheet } from 'react-native';
+import { Image } from 'expo-image';
 import { ActivityIndicator } from 'react-native-paper';
 import TrackPlayer, {
   State,
