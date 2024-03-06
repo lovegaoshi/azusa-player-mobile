@@ -76,3 +76,4 @@ NoxExport.json
 *.aab
 *.pyc
 test.js
+sentry.properties

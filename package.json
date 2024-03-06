@@ -39,6 +39,7 @@
     "@react-navigation/material-top-tabs": "^6.6.10",
     "@react-navigation/native": "^6.1.14",
     "@react-navigation/native-stack": "^6.9.22",
+    "@sentry/react-native": "^5.19.2",
     "@sharcoux/slider": "^7.1.1",
     "@shopify/flash-list": "^1.6.3",
     "@shopify/react-native-skia": "0.1.225",
