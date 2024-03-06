@@ -42,6 +42,7 @@ jobs:
       - name: 'Create env file'
         run: |
           echo "${{ secrets.ENV_FILE }}" > .env
+          echo "${{ secrets.SENTRY_PROPERTIES }}" > ./android/sentry.properties
 
       - name: alias yarn.cmd to yarn
         run: alias yarn.cmd="yarn"
@@ -142,6 +143,7 @@ jobs:
         run: |
           echo "${{ secrets.ENV_FILE }}" > .env
           echo "APPSTORE=true" >> .env
+          echo "${{ secrets.SENTRY_PROPERTIES }}" > ./android/sentry.properties
 
       - name: alias yarn.cmd to yarn
         run: alias yarn.cmd="yarn"
@@ -235,6 +237,7 @@ jobs:
         run: |
           echo "${{ secrets.ENV_FILE }}" > .env
           echo "APPSTORE=true" >> .env
+          echo "${{ secrets.SENTRY_PROPERTIES }}" > ./ios/sentry.properties
           git submodule update --init --recursive
 
       - name: alias yarn.cmd to yarn
