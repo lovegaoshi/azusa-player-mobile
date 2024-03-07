@@ -10,7 +10,7 @@ import Animated, {
   runOnJS,
 } from 'react-native-reanimated';
 
-const SCROLLBAR_HIDE_TIMEOUT = 5000;
+const SCROLLBAR_HIDE_TIMEOUT = 3000;
 const SCROLLBAR_ANIM_TIME = 300;
 
 interface Props {

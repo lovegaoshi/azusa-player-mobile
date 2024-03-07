@@ -22,8 +22,8 @@ enum THUMBUPSTATUS {
 
 // TODO: can be a util function
 const checkLiked = async (song: NoxMedia.Song | undefined) => {
-  if (!song) {
-    return 0;
+  if (!(song && song.bvid)) {
+    return;
   }
   if (song.bvid.startsWith('BV')) {
     // if (!Number.isNaN(Number(song.id))) {
