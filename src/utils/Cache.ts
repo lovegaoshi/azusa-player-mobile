@@ -37,7 +37,7 @@ class NoxMediaCache {
     this.cache = new LRUCache<string, string>({
       max: options.max || 1,
       dispose: async value => {
-        RNFetchBlob.fs.unlink(value);
+        RNFetchBlob.fs.unlink(value).catch();
       },
       allowStale: false,
     });
@@ -154,7 +154,8 @@ class NoxMediaCache {
       .then(res => {
         this.cache.set(identifier, res.path());
         this.dumpCache();
-      });
+      })
+      .catch();
     return resolvedURL;
   };
 
@@ -173,14 +174,14 @@ class NoxMediaCache {
   cleanOrphanedCache = (orphanedList: string[]) => {
     orphanedList.forEach(val => {
       const fspath = this.cache.get(val);
-      if (fspath) RNFetchBlob.fs.unlink(fspath);
+      if (fspath) RNFetchBlob.fs.unlink(fspath).catch();
       this.cache.delete(val);
     });
   };
 
   clearCache = () => {
     for (const val of this.cache.values()) {
-      RNFetchBlob.fs.unlink(val);
+      RNFetchBlob.fs.unlink(val).catch();
     }
     this.cache.clear();
   };
@@ -191,7 +192,7 @@ const cache: NoxCaches = {
   noxMediaCache: new NoxMediaCache({
     max: 1,
     dispose: async value => {
-      RNFetchBlob.fs.unlink(value);
+      RNFetchBlob.fs.unlink(value).catch();
     },
     allowStale: false,
   } as LRUCache.Options<string, string>),
