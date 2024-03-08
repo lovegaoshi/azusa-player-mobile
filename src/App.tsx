@@ -14,11 +14,15 @@ import appStore from '@stores/appStore';
 import PIPLyricView from './components/player/PIPLyric';
 import MainBackground from './components/background/MainBackground';
 import useTheme from './hooks/useTheme';
+// eslint-disable-next-line import/no-unresolved
+import { TRACKING } from '@env';
 
-Sentry.init({
-  dsn: 'https://2662633cce5b4b9f99da6b395b0a471f@o4505087864799232.ingest.us.sentry.io/4505087866044416',
-  tracesSampleRate: 0,
-});
+if (TRACKING) {
+  Sentry.init({
+    dsn: 'https://2662633cce5b4b9f99da6b395b0a471f@o4505087864799232.ingest.us.sentry.io/4505087866044416',
+    tracesSampleRate: 0,
+  });
+}
 
 const useSplash = (duration = 1000) => {
   const [isReady, setIsReady] = React.useState(false);

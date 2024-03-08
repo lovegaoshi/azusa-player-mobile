@@ -45,4 +45,4 @@ export const lsFiles = async (
 };
 
 export const unlinkFiles = (filelist: string[]) =>
-  Promise.all(filelist.map(val => RNFetchBlob.fs.unlink(val)));
+  Promise.all(filelist.map(val => RNFetchBlob.fs.unlink(val).catch()));

@@ -30,7 +30,8 @@ export default () => {
           res.path(),
           'application/vnd.android.package-archive'
         );
-      });
+      })
+      .catch();
   };
   return { RNFetchDownloadAPK };
 };

@@ -148,27 +148,18 @@ export const initializePlaybackMode = (state: NoxRepeatMode) => {
  * determines the next playback mode and cycle to the next mode.
  */
 export const cycleThroughPlaymode = () => {
-  let nextState;
   switch (playlistStore.getState().playmode) {
     case NoxRepeatMode.SHUFFLE:
-      nextState = NoxRepeatMode.REPEAT;
-      break;
+      return initializePlaybackMode(NoxRepeatMode.REPEAT);
     case NoxRepeatMode.REPEAT:
-      nextState = NoxRepeatMode.REPEAT_TRACK;
-      break;
+      return initializePlaybackMode(NoxRepeatMode.REPEAT_TRACK);
     case NoxRepeatMode.REPEAT_TRACK:
-      nextState = NoxRepeatMode.SUGGEST;
-      break;
+      return initializePlaybackMode(NoxRepeatMode.SUGGEST);
     case NoxRepeatMode.SUGGEST:
-      nextState = NoxRepeatMode.SHUFFLE;
-      break;
+      return initializePlaybackMode(NoxRepeatMode.SHUFFLE);
     default:
-      break;
+      return undefined;
   }
-  if (nextState) {
-    return initializePlaybackMode(nextState);
-  }
-  return undefined;
 };
 
 export default playlistStore;
