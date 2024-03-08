@@ -6,6 +6,7 @@ declare module '@env' {
   export const PERSONAL_CLOUD_SERVER: string;
   export const PERSONAL_CLOUD_SECRET: string;
   export const APPSTORE: boolean;
+  export const TRACKING: boolean;
   export const GITEE_SECRET: string;
   export const GITEE_KEY: string;
   export const GITHUB_SECRET: string;
