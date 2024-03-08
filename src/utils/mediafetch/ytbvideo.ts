@@ -63,7 +63,7 @@ const fetchYTBPlayUrlPromise = async (sid: string, iOS = true) => {
   }
 };
 
-export const fetchAudioInfoRaw = async (sid: string) => {
+const fetchAudioInfoRaw = async (sid: string) => {
   logger.info(`calling fetch YTB info of sid ${sid}`);
   const ytdlInfo = await ytdl.getInfo(`https://www.youtube.com/watch?v=${sid}`);
   try {

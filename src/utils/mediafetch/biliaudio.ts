@@ -9,14 +9,13 @@
  * each site needs a fetch to parse regex extracted, a videoinfo fetcher and a song fetcher.
  */
 import { regexFetchProps } from './generic';
-import { biliApiLimiter } from './throttle';
 
 import VideoInfo from '@objects/VideoInfo';
 import SongTS from '@objects/Song';
 import { logger } from '../Logger';
 import bfetch from '@utils/BiliFetch';
 import { SOURCE } from '@enums/MediaFetch';
-import { filterUndefined } from '../Utils';
+import { biliApiLimiter } from './throttle';
 
 const URL_AUDIO_INFO =
   'https://www.bilibili.com/audio/music-service-c/web/song/info?sid={sid}';
@@ -37,38 +36,6 @@ const fetchPlayUrlPromise = async (sid: string) => {
     throw e;
   }
 };
-
-export const fetchAudioInfoRaw = async (sid: string) => {
-  logger.info('calling fetcAudioInfo');
-  const res = await bfetch(URL_AUDIO_INFO.replace('{sid}', sid));
-  const json = await res.json();
-  try {
-    const { data } = json;
-    const v = new VideoInfo(
-      data.title,
-      data.intro,
-      1,
-      data.cover,
-      { name: data.uname, mid: data.uid, face: data.uid },
-      [{ cid: CIDPREFIX, bvid: sid, part: '1', duration: data.duration }],
-      sid,
-      data.duration
-    );
-    return v;
-  } catch (error) {
-    logger.error(error);
-    logger.warn(`Some issue happened when fetching biliAudio ${sid}`);
-  }
-};
-
-export const fetchAudioInfo = async (
-  bvid: string,
-  progressEmitter: () => void = () => undefined
-) =>
-  await biliApiLimiter.schedule(() => {
-    progressEmitter();
-    return fetchAudioInfoRaw(bvid);
-  });
 
 export const songFetch = ({ videoinfos }: { videoinfos: VideoInfo[] }) => {
   const aggregateVideoInfo = (info: VideoInfo) =>
@@ -96,13 +63,31 @@ export const songFetch = ({ videoinfos }: { videoinfos: VideoInfo[] }) => {
 };
 
 export const baFetch = async (auids: string[]) => {
-  const audioInfo = filterUndefined(
-    await Promise.all(auids.map(auid => fetchAudioInfo(auid))),
-    v => v
+  logger.info('calling fetcAudioInfo');
+
+  return Promise.all(
+    auids.map(sid =>
+      biliApiLimiter.schedule(async () => {
+        const res = await bfetch(URL_AUDIO_INFO.replace('{sid}', sid));
+        const json = await res.json();
+        const { data } = json;
+        return SongTS({
+          cid: `${CIDPREFIX}-${sid}`,
+          bvid: sid,
+          name: data.title,
+          nameRaw: data.title,
+          singer: data.uname,
+          singerId: data.uid,
+          cover: data.cover,
+          lyric: '',
+          page: 1,
+          duration: data.duration,
+          album: data.title,
+          source: SOURCE.biliaudio,
+        });
+      })
+    )
   );
-  return songFetch({
-    videoinfos: audioInfo,
-  });
 };
 
 const regexFetch = async ({
