@@ -81,7 +81,8 @@ export const fetchPaginatedAPI = async ({
       return jsonify(pages)
         .then((parsedJson: any) => {
           getItems(parsedJson).forEach(m => {
-            if (!favList.includes(getBVID(m))) BVids.push(m);
+            if (!favList.includes(getBVID(m)) && !BVids.includes(m))
+              BVids.push(m);
           });
         })
         .catch((err: any) => {
