@@ -72,10 +72,10 @@ export const LyricView = ({
 }: LyricViewProps) => {
   const { position } = useProgress();
   const [lrc, setLrc] = useState('正在加载歌词...');
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const [lrcOptions, setLrcOptions] = useState<any[]>([]);
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const [lrcOption, setLrcOption] = useState<any>();
+  const [lrcOptions, setLrcOptions] = useState<NoxNetwork.NoxFetchedLyric[]>(
+    []
+  );
+  const [lrcOption, setLrcOption] = useState<NoxNetwork.NoxFetchedLyric>();
   const [modalVisible, setModalVisible] = useState(false);
   const [lyricSearchModalVisible, setLyricSearchModalVisible] = useState(false);
   const [currentTimeOffset, setCurrentTimeOffset] = useState(0);
@@ -89,12 +89,15 @@ export const LyricView = ({
   useEffect(() => {
     if (track === undefined || track.title === '') return;
 
-    const loadLocalLrc = async () => {
+    const loadLocalLrc = async (
+      lyricPromise: Promise<NoxNetwork.NoxFetchedLyric[]>
+    ) => {
       if (!hasLrcFromLocal()) return false;
       logger.log('[lyric] Loading Lrc from localStorage...');
       const lrcDetail = lyricMapping.get(track?.song.id);
       if (lrcDetail === undefined) return false;
-      setLrcOption({ key: lrcDetail?.lyricKey });
+      const lrcKey = lrcDetail?.lyricKey;
+      setLrcOption({ key: lrcKey, songMid: lrcKey, label: lrcKey });
       setCurrentTimeOffset(lrcDetail!.lyricOffset);
       if (lrcDetail.lyric.endsWith('.txt')) {
         const readlrc = await readTxtFile(lrcDetail.lyric, 'lrc/');
@@ -105,7 +108,8 @@ export const LyricView = ({
         } else if (lrcDetail.lyric.endsWith('.txt')) {
           logger.debug('[lrc] local lrc no longer exists, fetching new...');
         }
-        return false;
+        searchAndSetCurrentLyric(0, await lyricPromise, lrcKey);
+        return true;
       }
       logger.debug(
         '[lrc] local lrc seems to be the content itself, loading that...'
@@ -118,11 +122,11 @@ export const LyricView = ({
       // HACK: UX is too bad if this is not always fetched
       const lrcOptionPromise = fetchAndSetLyricOptions();
       setCurrentTimeOffset(0);
-      setLrcOption(null);
+      setLrcOption(undefined);
       setLrc('正在加载歌词...');
       setSearchText(track.title || '');
       // Initialize from storage if not new
-      const localLrcLoaded = await loadLocalLrc();
+      const localLrcLoaded = await loadLocalLrc(lrcOptionPromise);
       if (!localLrcLoaded) {
         lrcOptionPromise.then(v => searchAndSetCurrentLyric(undefined, v));
       }
@@ -165,7 +169,7 @@ export const LyricView = ({
   };
 
   const fetchAndSetLyricOptions = async (adhocTitle?: string) => {
-    if (track.title === undefined) return;
+    if (track.title === undefined) return [];
     try {
       let titleToFetch = adhocTitle === undefined ? track.title : adhocTitle;
       if (adhocTitle !== undefined)
@@ -179,19 +183,19 @@ export const LyricView = ({
       logger.error(`Error fetching lyric options:${error}`);
       setLrcOptions([]);
     }
+    return [];
   };
 
   const searchAndSetCurrentLyric = async (
-    index?: number,
-    resolvedLrcOptions = lrcOptions
+    index = 0,
+    resolvedLrcOptions = lrcOptions,
+    lyricMid?: string
   ) => {
     console.debug(`lrcoptions: ${JSON.stringify(resolvedLrcOptions)}`);
-
-    index = index === undefined ? 0 : index;
     if (resolvedLrcOptions.length === 0) setLrc('无法找到歌词,请手动搜索...');
     else {
       const lyric = await searchLyric(
-        resolvedLrcOptions[index!].songMid,
+        lyricMid || resolvedLrcOptions[index!].songMid,
         setLrc
       );
       setLrcOption(resolvedLrcOptions[index!]);
