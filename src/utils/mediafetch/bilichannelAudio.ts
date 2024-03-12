@@ -15,6 +15,7 @@ import { regexFetchProps } from './generic';
 import { fetchAwaitBiliPaginatedAPI } from './paginatedbili';
 import { awaitLimiter } from './throttle';
 import SongTS from '@objects/Song';
+import { info } from 'console';
 
 // https://api.bilibili.com/audio/music-service/web/song/upper?uid=741520&pn=1&ps=70&order=1
 const URL_BILICHANNEL_AUDIO_INFO =
@@ -35,22 +36,23 @@ export const fetchBiliChannelAudioList = async (
     progressEmitter,
     favList,
     limiter: awaitLimiter,
-    resolveBiliBVID: async (info: any) => [
-      SongTS({
-        cid: `${CIDPREFIX}-${info.id}`,
-        bvid: info.id,
-        name: info.title,
-        nameRaw: info.title,
-        singer: info.uname,
-        singerId: info.uid,
-        cover: info.cover,
-        lyric: '',
-        page: 1,
-        duration: info.duration,
-        album: info.title,
-        source: SOURCE.biliaudio,
-      }),
-    ],
+    resolveBiliBVID: async infos =>
+      infos.map(info =>
+        SongTS({
+          cid: `${CIDPREFIX}-${info.id}`,
+          bvid: info.id,
+          name: info.title,
+          nameRaw: info.title,
+          singer: info.uname,
+          singerId: info.uid,
+          cover: info.cover,
+          lyric: '',
+          page: 1,
+          duration: info.duration,
+          album: info.title,
+          source: SOURCE.biliaudio,
+        })
+      ),
   });
 };
 

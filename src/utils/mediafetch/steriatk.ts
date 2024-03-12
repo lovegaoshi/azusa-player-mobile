@@ -10,7 +10,7 @@
  */
 import { SOURCE } from '@enums/MediaFetch';
 import { regexFetchProps } from './generic';
-import { fetchAwaitPaginatedAPI } from './paginatedfetch2';
+import { fetchAwaitPaginatedAPI } from './paginatedfetch';
 import SongTS from '@objects/Song';
 
 const pagesize = 500;

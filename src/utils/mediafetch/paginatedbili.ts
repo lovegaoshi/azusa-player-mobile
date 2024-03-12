@@ -5,7 +5,7 @@ import {
   fetchPaginatedAPI,
   fetchAwaitPaginatedAPI,
   FetcherProps,
-} from './paginatedfetch2';
+} from './paginatedfetch';
 import { biliApiLimiter } from './throttle';
 import bfetch from '@utils/BiliFetch';
 

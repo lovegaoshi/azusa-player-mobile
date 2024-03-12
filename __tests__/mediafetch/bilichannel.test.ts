@@ -1,4 +1,4 @@
-import fetcher from '@utils/mediafetch/biliChannel';
+import fetcher from '@utils/mediafetch/bilichannel';
 
 test('biliChannel', async () => {
   const content = await fetcher.regexFetch({
