@@ -1,20 +1,11 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-/**
- * refactor:
- * bilisearch workflow:
- * reExtractSearch matches regex patterns and use the corresponding fetch functions;
- * fetch function takes extracted and calls a dataProcess.js fetch function;
- * dataprocess fetch function fetches VIDEOINFO using data.js fetch function, then parses into SONGS
- * data.js fetch function fetches VIDEOINFO.
- * steps to refactor:
- * each site needs a fetch to parse regex extracted, a videoinfo fetcher and a song fetcher.
- */
+
 import { logger } from '../Logger';
 import { regexFetchProps } from './generic';
-import { songFetch } from './biliaudio';
-import { fetchBiliPaginatedAPI } from './paginatedbili';
+import { fetchBiliPaginatedAPI } from './paginatedbili2';
 import { getBiliCookie } from '@utils/Bilibili/biliCookies';
-import VideoInfo from '@objects/VideoInfo';
+import { SOURCE } from '@enums/MediaFetch';
+import SongTS from '@objects/Song';
 
 /**
  * 
@@ -86,20 +77,21 @@ const fetchBiliAudioColleList = async (
     progressEmitter,
     favList,
     resolveBiliBVID: v =>
-      v.map(
-        (data: any) =>
-          new VideoInfo(
-            data.title,
-            data.intro,
-            1,
-            data.cover,
-            { name: data.uname, mid: data.uid, face: data.uid },
-            // HACK: pages doesnt really do anything except for counting...
-            // needs to be refactored out
-            [{} as any],
-            data.id,
-            data.duration
-          )
+      v.map((data: any) =>
+        SongTS({
+          cid: `${SOURCE.biliaudio}-${data.id}`,
+          bvid: data.id,
+          name: data.title,
+          nameRaw: data.title,
+          singer: data.uname,
+          singerId: data.uid,
+          cover: data.cover,
+          lyric: '',
+          page: 1,
+          duration: data.duration,
+          album: data.title,
+          source: SOURCE.biliaudio,
+        })
       ),
     params: {
       method: 'GET',
@@ -117,14 +109,13 @@ const regexFetch = async ({
   reExtracted,
   progressEmitter = () => undefined,
   favList,
-}: regexFetchProps): Promise<NoxNetwork.NoxRegexFetch> => {
-  const videoinfos = await fetchBiliAudioColleList(
+}: regexFetchProps): Promise<NoxNetwork.NoxRegexFetch> => ({
+  songList: await fetchBiliAudioColleList(
     reExtracted[1]!,
     progressEmitter,
     favList
-  );
-  return { songList: songFetch({ videoinfos }) };
-};
+  ),
+});
 
 const resolveURL = () => undefined;
 

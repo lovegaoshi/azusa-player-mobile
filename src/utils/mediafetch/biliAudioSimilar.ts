@@ -12,8 +12,8 @@
 import { logger } from '../Logger';
 import { regexFetchProps } from './generic';
 import bfetch from '@utils/BiliFetch';
-import { songFetch } from './biliaudio';
-import VideoInfo from '@objects/VideoInfo';
+import { SOURCE } from '@enums/MediaFetch';
+import SongTS from '@objects/Song';
 
 /**
  * 
@@ -68,20 +68,21 @@ const fetchBiliAudioSimilarList = async (
   logger.info('calling fetchBiliAudioSimilarList');
   const res = await bfetch(API.replace('{sid}', sid));
   const json = await res.json();
-  return json.data.map(
-    (data: any) =>
-      new VideoInfo(
-        data.title,
-        data.intro,
-        1,
-        data.cover,
-        { name: data.uname, mid: data.uid, face: data.uid },
-        // HACK: pages doesnt really do anything except for counting...
-        // needs to be refactored out
-        [{} as any],
-        data.id,
-        data.duration
-      )
+  return json.data.map((data: any) =>
+    SongTS({
+      cid: `${SOURCE.biliaudio}-${data.id}`,
+      bvid: data.id,
+      name: data.title,
+      nameRaw: data.title,
+      singer: data.uname,
+      singerId: data.uid,
+      cover: data.cover,
+      lyric: '',
+      page: 1,
+      duration: data.duration,
+      album: data.title,
+      source: SOURCE.biliaudio,
+    })
   );
 };
 
@@ -89,14 +90,13 @@ const regexFetch = async ({
   reExtracted,
   progressEmitter = () => undefined,
   favList,
-}: regexFetchProps): Promise<NoxNetwork.NoxRegexFetch> => {
-  const videoinfos = await fetchBiliAudioSimilarList(
+}: regexFetchProps): Promise<NoxNetwork.NoxRegexFetch> => ({
+  songList: await fetchBiliAudioSimilarList(
     reExtracted[1]!,
     progressEmitter,
     favList
-  );
-  return { songList: songFetch({ videoinfos }) };
-};
+  ),
+});
 
 const resolveURL = () => undefined;
 

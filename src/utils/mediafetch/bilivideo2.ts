@@ -74,10 +74,7 @@ export const fetchBiliBVIDs = async (
     fetchBVID(bvid, () => progressEmitter((100 * (index + 1)) / BVidLen))
   );
   const songs = (await Promise.all(BVidPromises)).flat();
-  if (useBiliTag) {
-    return biliShazamOnSonglist(songs, false, progressEmitter);
-  }
-  return songs;
+  return biliShazamOnSonglist(songs, false, progressEmitter, useBiliTag);
 };
 
 interface BVRegFetchProps extends regexFetchProps {

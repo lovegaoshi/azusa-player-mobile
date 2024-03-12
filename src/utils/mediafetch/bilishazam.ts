@@ -45,11 +45,13 @@ const fetchVideoTagPromiseRaw = async ({ bvid, cid }: ids) => {
  * @param {boolean} forced
  * @returns
  */
-export const biliShazamOnSonglist = async (
+export const biliShazamOnSonglist = (
   songlist: NoxMedia.Song[],
   forced = false,
-  progressEmitter: (val: number) => void = () => undefined
+  progressEmitter: (val: number) => void = () => undefined,
+  biliShazam = false
 ) => {
+  if (!biliShazam) return songlist;
   const newSongList = songlist.map((song, index) => {
     if (song.biliShazamedName === undefined || forced) {
       return new Promise<NoxMedia.Song>(resolve =>
@@ -63,5 +65,5 @@ export const biliShazamOnSonglist = async (
     }
     return song;
   });
-  return await Promise.all(newSongList);
+  return Promise.all(newSongList);
 };
