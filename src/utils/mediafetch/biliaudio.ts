@@ -10,7 +10,6 @@
  */
 import { regexFetchProps } from './generic';
 
-import VideoInfo from '@objects/VideoInfo';
 import SongTS from '@objects/Song';
 import { logger } from '../Logger';
 import bfetch from '@utils/BiliFetch';
@@ -35,31 +34,6 @@ const fetchPlayUrlPromise = async (sid: string) => {
     logger.error(e);
     throw e;
   }
-};
-
-export const songFetch = ({ videoinfos }: { videoinfos: VideoInfo[] }) => {
-  const aggregateVideoInfo = (info: VideoInfo) =>
-    info.pages.map(() => {
-      return SongTS({
-        cid: `${CIDPREFIX}-${info.bvid}`,
-        bvid: info.bvid,
-        name: info.title,
-        nameRaw: info.title,
-        singer: info.uploader.name,
-        singerId: info.uploader.mid,
-        cover: info.picSrc,
-        lyric: '',
-        page: 1,
-        duration: info.duration,
-        album: info.title,
-        source: SOURCE.biliaudio,
-      });
-    });
-  const songs = videoinfos.reduce(
-    (acc, curr) => acc.concat(aggregateVideoInfo(curr)),
-    [] as NoxMedia.Song[]
-  );
-  return songs;
 };
 
 export const baFetch = async (auids: string[]) => {

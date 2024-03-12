@@ -6,7 +6,6 @@ import SongTS from '@objects/Song';
 import { logger } from '../Logger';
 import { CIDPREFIX } from './bililive';
 import { fetchBiliPaginatedAPI } from './paginatedbili';
-import VideoInfo from '@objects/VideoInfo';
 
 // https://github.com/SocialSisterYi/bilibili-API-collect/blob/master/docs/live/info.md#%E6%89%B9%E9%87%8F%E6%9F%A5%E8%AF%A2%E7%9B%B4%E6%92%AD%E9%97%B4%E7%8A%B6%E6%80%81
 const getRoomInfos = async (uids: number[]) => {
@@ -62,19 +61,6 @@ const getRoomInfos = async (uids: number[]) => {
     );
 };
 
-const videoInfo2Song = (val: VideoInfo) =>
-  SongTS({
-    ...val,
-    cid: `${CIDPREFIX}-${val.bvid}`,
-    source: CIDPREFIX,
-    name: val.title,
-    singer: val.uploader.name,
-    singerId: val.uploader.mid,
-    cover: val.picSrc,
-    isLive: true,
-    liveStatus: val.liveStatus === 1,
-    album: val.desc,
-  });
 const getSubList = async (
   uid: string,
   progressEmitter: (val: number) => void = () => undefined
