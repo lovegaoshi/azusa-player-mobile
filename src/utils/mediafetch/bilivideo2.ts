@@ -89,7 +89,7 @@ export const bvFetch = async ({
   useBiliTag,
   progressEmitter = () => undefined,
 }: BVRegFetchProps): Promise<NoxNetwork.NoxRegexFetch> => ({
-  songList: await fetchBiliBVIDs(bvids, progressEmitter),
+  songList: await fetchBiliBVIDs(bvids, progressEmitter, useBiliTag),
 });
 
 const regexFetch = ({ reExtracted, useBiliTag }: regexFetchProps) =>

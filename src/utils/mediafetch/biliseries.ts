@@ -11,7 +11,7 @@
 import { regexFetchProps } from './generic';
 
 import { logger } from '../Logger';
-import { bvFetch } from './bilivideo';
+import { bvFetch } from './bilivideo2';
 import bfetch from '@utils/BiliFetch';
 
 const URL_BILISERIES_INFO =
