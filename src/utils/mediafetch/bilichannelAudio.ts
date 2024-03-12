@@ -35,7 +35,7 @@ export const fetchBiliChannelAudioList = async (
     progressEmitter,
     favList,
     limiter: awaitLimiter,
-    resolveBiliBVID: async info => [
+    resolveBiliBVID: async (info: any) => [
       SongTS({
         cid: `${CIDPREFIX}-${info.id}`,
         bvid: info.id,

@@ -76,7 +76,7 @@ const fetchBiliAudioColleList = async (
     getItems: (js: any) => js.data.data,
     progressEmitter,
     favList,
-    resolveBiliBVID: v =>
+    resolveBiliBVID: async v =>
       v.map((data: any) =>
         SongTS({
           cid: `${SOURCE.biliaudio}-${data.id}`,

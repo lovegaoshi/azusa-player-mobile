@@ -20,7 +20,7 @@ export interface FetcherProps {
   getPageSize: (val: any) => number;
   getItems: (val: any) => Array<any>;
   resolveBiliBVID?: (
-    bvobjs: any,
+    bvobjs: any[],
     progressEmitter: ProgressEmitter
   ) => Promise<NoxMedia.Song[]>;
   progressEmitter?: ProgressEmitter;
