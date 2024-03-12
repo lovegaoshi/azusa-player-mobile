@@ -1,6 +1,6 @@
 import { logger } from '../Logger';
 import { regexFetchProps } from './generic';
-import { bvFetch } from './bilivideo2';
+import { bvFetch } from './bilivideo';
 import biliaudioFetch from './biliaudio';
 
 const URL_FAV_LIST =

@@ -1,10 +1,10 @@
 import { logger } from '../Logger';
-import { songFetch } from './bilivideo';
 import { fetchBiliPaginatedAPI } from './paginatedbili';
-import VideoInfo from '@objects/VideoInfo';
 import { timestampToSeconds } from '../Utils';
 import bfetch from '../BiliFetch';
 import { getBiliCookie } from '@utils/Bilibili/biliCookies';
+import SongTS from '@objects/Song';
+import { SOURCE } from '@enums/MediaFetch';
 
 const URL_BILI_SEARCH =
   'https://api.bilibili.com/x/web-interface/search/type?search_type=video&keyword={keyword}&page={pn}&tids=3';
@@ -34,26 +34,23 @@ const fastSearchResolveBVID = async (bvobjs: any[]) => {
       bvobjs.map(obj => fetchCID(obj.bvid))
     );
      */
-  return bvobjs.map(
-    obj =>
-      new VideoInfo(
-        obj.title.replaceAll(/<[^<>]*em[^<>]*>/g, ''),
-        obj.description,
-        1,
-        `https:${obj.pic}`,
-        { mid: obj.mid, name: obj.author, face: obj.upic },
-        [
-          {
-            bvid: obj.bvid,
-            part: '1',
-            cid: `null-${obj.bvid}`, // resolvedCids[index]
-            duration: timestampToSeconds(obj.duration),
-          },
-        ],
-        obj.bvid,
-        timestampToSeconds(obj.duration)
-      )
-  );
+  return bvobjs.map(obj => {
+    const name = obj.title.replaceAll(/<[^<>]*em[^<>]*>/g, '');
+    return SongTS({
+      cid: `null-${obj.bvid}`,
+      bvid: obj.bvid,
+      name: name,
+      nameRaw: name,
+      singer: obj.author,
+      singerId: obj.mid,
+      cover: `https:${obj.pic}`,
+      lyric: '',
+      page: 1,
+      duration: timestampToSeconds(obj.duration),
+      album: name,
+      source: SOURCE.bilivideo,
+    });
+  });
 };
 
 export const fetchBiliSearchList = async (
@@ -62,13 +59,12 @@ export const fetchBiliSearchList = async (
   fastSearch = false,
   cookiedSearch = false,
   startPage = 1
-) => {
+): Promise<NoxMedia.Song[]> => {
   // this API needs a random buvid3 value, or a valid SESSDATA;
   // otherwise will return error 412. for users didnt login to bilibili,
   // setting a random buvid3 would enable this API.
-  let val: VideoInfo[] = [];
   try {
-    val = await fetchBiliPaginatedAPI({
+    return await fetchBiliPaginatedAPI({
       url: URL_BILI_SEARCH.replace('{keyword}', kword),
       getMediaCount: data => Math.min(data.numResults, data.pagesize * 2),
       getPageSize: data => data.pagesize,
@@ -92,7 +88,7 @@ export const fetchBiliSearchList = async (
   } catch (e) {
     logger.error(e);
   }
-  return val;
+  return [];
 };
 
 interface regexFetchProps {
@@ -108,16 +104,12 @@ const regexFetch = async ({
   fastSearch,
   cookiedSearch = false,
 }: regexFetchProps): Promise<NoxNetwork.NoxRegexFetch> => ({
-  songList: await songFetch({
-    videoinfos: await fetchBiliSearchList(
-      url,
-      progressEmitter,
-      fastSearch,
-      cookiedSearch
-    ),
-    useBiliTag: false,
+  songList: await fetchBiliSearchList(
+    url,
     progressEmitter,
-  }),
+    fastSearch,
+    cookiedSearch
+  ),
   refresh: v => refresh({ v, fastSearch, cookiedSearch }),
   refreshToken: [url, 3],
 });
@@ -131,16 +123,13 @@ const refresh = async ({ v, fastSearch, cookiedSearch }: RefreshProps) => {
   const results: NoxMedia.SearchPlaylist = { songList: [] };
   if (v.refreshToken) {
     const [url, startPage] = v.refreshToken;
-    results.songList = await songFetch({
-      videoinfos: await fetchBiliSearchList(
-        url,
-        undefined,
-        fastSearch,
-        cookiedSearch,
-        startPage
-      ),
-      useBiliTag: false,
-    });
+    results.songList = await fetchBiliSearchList(
+      url,
+      undefined,
+      fastSearch,
+      cookiedSearch,
+      startPage
+    );
     results.refreshToken = [url, startPage + 2];
   }
   return results;

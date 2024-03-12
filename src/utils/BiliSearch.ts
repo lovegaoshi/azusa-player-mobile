@@ -6,7 +6,7 @@ import biliBangumiFetch from './mediafetch/biliBangumi';
 import biliAudioAMFetch from './mediafetch/biliAudioAM';
 import biliAudioColleFetch from './mediafetch/biliAudioColle';
 import biliAudioSimilarFetch from './mediafetch/biliAudioSimilar';
-import bilivideoFetch from './mediafetch/bilivideo2';
+import bilivideoFetch from './mediafetch/bilivideo';
 import biliavideoFetch from './mediafetch/biliavideo';
 import biliseriesFetch from './mediafetch/biliseries';
 import bilicolleFetch from './mediafetch/bilicolle';

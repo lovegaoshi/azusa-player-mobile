@@ -10,7 +10,7 @@
  */
 import { logger } from '../Logger';
 import { regexFetchProps } from './generic';
-import { fetchAwaitBiliPaginatedAPI } from './paginatedbili2';
+import { fetchAwaitBiliPaginatedAPI } from './paginatedbili';
 import { awaitLimiter } from './throttle';
 import { getDm } from '../Bilibili/bilidm';
 import { biliShazamOnSonglist } from './bilishazam';

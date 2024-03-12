@@ -33,17 +33,18 @@ const getRoomInfos = async (uids: number[]) => {
     })
     .map(
       (roomInfo: any) =>
-        ({
-          title: roomInfo.title,
-          desc: `b站直播间${roomInfo.room_id}`,
-          videoCount: 0,
-          picSrc: roomInfo.cover_from_user,
-          uploader: { mid: roomInfo.uid, name: roomInfo.uname, face: '' },
-          pages: [],
+        SongTS({
+          cid: `${CIDPREFIX}-${roomInfo.room_id}`,
           bvid: roomInfo.room_id,
-          duration: 0,
-          liveStatus: roomInfo.live_status,
-        }) as VideoInfo
+          source: CIDPREFIX,
+          name: roomInfo.title,
+          singer: roomInfo.uname,
+          singerId: roomInfo.uid,
+          cover: roomInfo.cover_from_user,
+          isLive: true,
+          liveStatus: roomInfo.live_status === 1,
+          album: `b站直播间${roomInfo.room_id}`,
+        })
       /*
     SongTS({
       cid: `${CIDPREFIX}-${roomInfo.room_id}`,
@@ -79,7 +80,7 @@ const getSubList = async (
   progressEmitter: (val: number) => void = () => undefined
 ) => {
   // https://api.bilibili.com/x/relation/followings?vmid=3493085134719196
-  const videoInfos = await fetchBiliPaginatedAPI({
+  return fetchBiliPaginatedAPI({
     // url: `https://api.bilibili.com/x/relation/followings?vmid=${uid}&pn={pn}`,
     url: `https://app.biliapi.net/x/v2/relation/followings?vmid=${uid}&pn={pn}`,
     // dont get more than 5 pages?
@@ -92,7 +93,6 @@ const getSubList = async (
     resolveBiliBVID: async bvobjs =>
       await getRoomInfos(bvobjs.map((obj: any) => obj.mid)),
   });
-  return videoInfos.map(info => videoInfo2Song(info));
 };
 
 const regexFetch = async ({

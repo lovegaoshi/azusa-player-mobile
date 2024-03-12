@@ -2,7 +2,7 @@
 
 import { logger } from '../Logger';
 import { regexFetchProps } from './generic';
-import { fetchBiliPaginatedAPI } from './paginatedbili2';
+import { fetchBiliPaginatedAPI } from './paginatedbili';
 import { getBiliCookie } from '@utils/Bilibili/biliCookies';
 import { SOURCE } from '@enums/MediaFetch';
 import SongTS from '@objects/Song';

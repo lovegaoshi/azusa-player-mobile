@@ -48,10 +48,11 @@ export default ({
   liveStatus,
   metadataOnLoad,
 }: SongProps): NoxMedia.Song => {
+  name = he.decode(name);
   return {
     id: String(cid),
     bvid,
-    name: he.decode(name),
+    name,
     singer: he.decode(singer),
     cover,
     singerId,

@@ -21,39 +21,6 @@ const URL_BILICHANNEL_AUDIO_INFO =
   'https://api.bilibili.com/audio/music-service/web/song/upper?uid=741520&pn={pn}&ps=30&order=1';
 const CIDPREFIX = `${SOURCE.biliaudio}-`;
 
-// i'm not going to pretend this songFetch stuff is not stupid and just bypass any of them here.
-// key is to ignore resolveBiliBVID and set as (val) => val; then completely bypass VideoInfo
-const songFetch = async ({
-  videoinfos,
-}: {
-  videoinfos: any[];
-  useBiliTag: boolean;
-}) => {
-  const aggregateVideoInfo = (info: any) => {
-    return [
-      SongTS({
-        cid: `${CIDPREFIX}-${info.id}`,
-        bvid: info.id,
-        name: info.title,
-        nameRaw: info.title,
-        singer: info.uname,
-        singerId: info.uid,
-        cover: info.cover,
-        lyric: '',
-        page: 1,
-        duration: info.duration,
-        album: info.title,
-        source: SOURCE.biliaudio,
-      }),
-    ];
-  };
-  const songs = videoinfos.reduce(
-    (acc, curr) => acc.concat(aggregateVideoInfo(curr)),
-    [] as NoxMedia.Song[]
-  );
-  return songs;
-};
-
 export const fetchBiliChannelAudioList = async (
   mid: string,
   progressEmitter: (val: number) => void = () => undefined,
@@ -68,7 +35,22 @@ export const fetchBiliChannelAudioList = async (
     progressEmitter,
     favList,
     limiter: awaitLimiter,
-    resolveBiliBVID: val => val,
+    resolveBiliBVID: async info => [
+      SongTS({
+        cid: `${CIDPREFIX}-${info.id}`,
+        bvid: info.id,
+        name: info.title,
+        nameRaw: info.title,
+        singer: info.uname,
+        singerId: info.uid,
+        cover: info.cover,
+        lyric: '',
+        page: 1,
+        duration: info.duration,
+        album: info.title,
+        source: SOURCE.biliaudio,
+      }),
+    ],
   });
 };
 
@@ -78,14 +60,11 @@ const regexFetch = async ({
   favList,
   useBiliTag,
 }: regexFetchProps): Promise<NoxNetwork.NoxRegexFetch> => ({
-  songList: await songFetch({
-    videoinfos: await fetchBiliChannelAudioList(
-      reExtracted[1]!,
-      progressEmitter,
-      favList
-    ),
-    useBiliTag: useBiliTag || false,
-  }),
+  songList: await fetchBiliChannelAudioList(
+    reExtracted[1]!,
+    progressEmitter,
+    favList
+  ),
 });
 
 const resolveURL = () => undefined;
