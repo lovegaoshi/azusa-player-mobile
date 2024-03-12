@@ -28,7 +28,24 @@ const paginatedFetch = ({
     getMediaCount: json => json.total,
     getPageSize: () => pagesize,
     getItems: json => json.data,
-    resolveBiliBVID: BVobjs => BVobjs,
+    resolveBiliBVID: async BVobjs =>
+      BVobjs.map(videoinfo =>
+        SongTS({
+          cid: `${CIDPREFIX}${videoinfo.url}`,
+          bvid: `${CIDPREFIX}${videoinfo.id}`,
+          name: videoinfo.name,
+          nameRaw: videoinfo.name,
+          singer: videoinfo.artist,
+          singerId: 'steria.vplayer.tk',
+          cover:
+            'https://i2.hdslb.com/bfs/face/b70f6e62e4582d4fa5d48d86047e64eb57d7504e.jpg',
+          lyric: '',
+          page: 0,
+          duration: 0,
+          album: videoinfo.name,
+          source: SOURCE.steriatk,
+        })
+      ),
     progressEmitter,
     favList,
     getBVID: item => `${CIDPREFIX}${item.id}`,
@@ -36,32 +53,11 @@ const paginatedFetch = ({
   });
 };
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-const songFetch = (videoinfos: any[]) => {
-  return videoinfos.map(videoinfo => {
-    return SongTS({
-      cid: `${CIDPREFIX}${videoinfo.url}`,
-      bvid: `${CIDPREFIX}${videoinfo.id}`,
-      name: videoinfo.name,
-      nameRaw: videoinfo.name,
-      singer: videoinfo.artist,
-      singerId: 'steria.vplayer.tk',
-      cover:
-        'https://i2.hdslb.com/bfs/face/b70f6e62e4582d4fa5d48d86047e64eb57d7504e.jpg',
-      lyric: '',
-      page: 0,
-      duration: 0,
-      album: videoinfo.name,
-      source: SOURCE.steriatk,
-    });
-  });
-};
-
 const regexFetch = async ({
   progressEmitter,
   favList,
 }: Partial<regexFetchProps>): Promise<NoxNetwork.NoxRegexFetch> => ({
-  songList: songFetch(await paginatedFetch({ progressEmitter, favList })),
+  songList: await paginatedFetch({ progressEmitter, favList }),
 });
 
 const resolveURL = async (song: NoxMedia.Song) => {

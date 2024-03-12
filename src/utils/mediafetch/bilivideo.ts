@@ -1,20 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Platform } from 'react-native';
 
-/**
- * refactor:
- * bilisearch workflow:
- * reExtractSearch matches regex patterns and use the corresponding fetch functions;
- * fetch function takes extracted and calls a dataProcess.js fetch function;
- * dataprocess fetch function fetches VIDEOINFO using data.js fetch function, then parses into SONGS
- * data.js fetch function fetches VIDEOINFO.
- * steps to refactor:
- * each site needs a fetch to parse regex extracted, a videoinfo fetcher and a song fetcher.
- */
 import { regexFetchProps } from './generic';
 import { biliApiLimiter } from './throttle';
 import { biliShazamOnSonglist } from './bilishazam';
-import VideoInfo from '@objects/VideoInfo';
 import SongTS from '@objects/Song';
 import { logger } from '../Logger';
 import bfetch from '@utils/BiliFetch';
@@ -34,92 +23,58 @@ const URL_PLAY_URL =
 const URL_PLAY_URL_IOS =
   'https://api.bilibili.com/x/player/playurl?cid={cid}&bvid={bvid}&qn=6&fnval=16&platform=html5';
 
-const fetchVideoInfoRaw = async (bvid: string) => {
+const fetchBVIDRaw = async (bvid: string): Promise<NoxMedia.Song[]> => {
   logger.info(
-    `calling fetchVideoInfo of ${bvid} of ${URL_VIDEO_INFO.replace(
-      '{bvid}',
-      bvid
-    )}`
+    `calling fetchBVID of ${bvid} of ${URL_VIDEO_INFO.replace('{bvid}', bvid)}`
   );
   try {
     const res = await bfetch(URL_VIDEO_INFO.replace('{bvid}', bvid));
     const json = await res.json();
     const { data } = json;
-    const v = new VideoInfo(
-      data.title,
-      data.desc,
-      data.videos,
-      data.pic,
-      data.owner,
-      data.pages.map((s: any) => {
-        return { bvid, part: s.part, cid: s.cid, duration: s.duration };
-      }),
-      bvid,
-      data.duration
-    );
-    return v;
+    return data.pages.map((page: any, index: number) => {
+      const filename = data.pages.length === 1 ? data.title : page.part;
+      return SongTS({
+        cid: page.cid,
+        bvid,
+        name: filename,
+        nameRaw: filename,
+        singer: data.owner.name,
+        singerId: data.owner.mid,
+        cover: data.pic,
+        lyric: '',
+        page: index + 1,
+        duration: page.duration,
+        album: data.title,
+        source: SOURCE.bilivideo,
+      });
+    });
   } catch (error: any) {
     logger.error(error.message);
     logger.warn(`Some issue happened when fetching ${bvid}`);
-    // throw error;
+    return [];
   }
 };
 
-export const fetchVideoInfo = async (
+export const fetchBVID = async (
   bvid: string,
   progressEmitter: () => void = () => undefined
 ) =>
   await biliApiLimiter.schedule(() => {
     progressEmitter();
-    return fetchVideoInfoRaw(bvid);
+    return fetchBVIDRaw(bvid);
   });
 
 export const fetchBiliBVIDs = async (
   BVids: string[],
-  progressEmitter: (val: number) => void = () => undefined
+  progressEmitter: (val: number) => void = () => undefined,
+  useBiliTag = false
 ) => {
   const BVidLen = BVids.length;
   const BVidPromises = BVids.map((bvid, index) =>
-    fetchVideoInfo(bvid, () => progressEmitter((100 * (index + 1)) / BVidLen))
+    fetchBVID(bvid, () => progressEmitter((100 * (index + 1)) / BVidLen))
   );
-  const resolvedBVIDs = await Promise.all(BVidPromises);
-  return resolvedBVIDs.filter(val => val) as VideoInfo[];
-};
-
-export const songFetch = async ({
-  videoinfos,
-  useBiliTag,
-  progressEmitter = () => undefined,
-}: {
-  videoinfos: VideoInfo[];
-  useBiliTag: boolean;
-  progressEmitter?: (val: number) => void;
-}) => {
-  const aggregateVideoInfo = (info: VideoInfo) =>
-    info.pages.map((page: any, index: number) => {
-      const filename = info.pages.length === 1 ? info.title : page.part;
-      return SongTS({
-        cid: page.cid,
-        bvid: info.bvid,
-        name: filename,
-        nameRaw: filename,
-        singer: info.uploader.name,
-        singerId: info.uploader.mid,
-        cover: info.picSrc,
-        lyric: '',
-        page: index + 1,
-        duration: page.duration,
-        album: info.title,
-        source: SOURCE.bilivideo,
-      });
-    });
-  let songs = videoinfos.reduce(
-    (acc, curr) => acc.concat(aggregateVideoInfo(curr)),
-    [] as NoxMedia.Song[]
-  );
-  if (useBiliTag)
-    songs = await biliShazamOnSonglist(songs, false, progressEmitter);
-  return songs;
+  const songs = (await Promise.all(BVidPromises)).flat();
+  return biliShazamOnSonglist(songs, false, progressEmitter, useBiliTag);
 };
 
 interface BVRegFetchProps extends regexFetchProps {
@@ -131,11 +86,7 @@ export const bvFetch = async ({
   useBiliTag,
   progressEmitter = () => undefined,
 }: BVRegFetchProps): Promise<NoxNetwork.NoxRegexFetch> => ({
-  songList: await songFetch({
-    videoinfos: await fetchBiliBVIDs(bvids, progressEmitter), // await fetchiliBVID([reExtracted[1]!])
-    useBiliTag: useBiliTag || false,
-    progressEmitter,
-  }),
+  songList: await fetchBiliBVIDs(bvids, progressEmitter, useBiliTag),
 });
 
 const regexFetch = ({ reExtracted, useBiliTag }: regexFetchProps) =>

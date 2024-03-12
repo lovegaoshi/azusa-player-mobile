@@ -11,7 +11,7 @@
  */
 import { logger } from '../Logger';
 import { regexFetchProps } from './generic';
-import { songFetch } from './bilivideo';
+import { biliShazamOnSonglist } from './bilishazam';
 import { fetchBiliPaginatedAPI } from './paginatedbili';
 
 const URL_BILICOLLE_INFO =
@@ -41,16 +41,17 @@ const regexFetch = async ({
   favList,
   useBiliTag,
 }: regexFetchProps): Promise<NoxNetwork.NoxRegexFetch> => ({
-  songList: await songFetch({
-    videoinfos: await fetchBiliColleList(
+  songList: await biliShazamOnSonglist(
+    await fetchBiliColleList(
       reExtracted[1]!,
       reExtracted[2]!,
       progressEmitter,
       favList
     ),
-    useBiliTag: useBiliTag || false,
+    false,
     progressEmitter,
-  }),
+    useBiliTag || false
+  ),
 });
 
 const resolveURL = () => undefined;

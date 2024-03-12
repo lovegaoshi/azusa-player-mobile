@@ -10,10 +10,10 @@
  */
 import { logger } from '../Logger';
 import { regexFetchProps } from './generic';
-import { songFetch } from './bilivideo';
 import { fetchAwaitBiliPaginatedAPI } from './paginatedbili';
 import { awaitLimiter } from './throttle';
 import { getDm } from '../Bilibili/bilidm';
+import { biliShazamOnSonglist } from './bilishazam';
 
 const URL_BILICHANNEL_INFO =
   'https://api.bilibili.com/x/space/wbi/arc/search?mid={mid}&pn={pn}&jsonp=jsonp&ps=50';
@@ -53,15 +53,12 @@ const regexFetch = async ({
   favList,
   useBiliTag,
 }: regexFetchProps): Promise<NoxNetwork.NoxRegexFetch> => ({
-  songList: await songFetch({
-    videoinfos: await fetchBiliChannelList(
-      reExtracted.input,
-      progressEmitter,
-      favList
-    ),
-    useBiliTag: useBiliTag || false,
+  songList: await biliShazamOnSonglist(
+    await fetchBiliChannelList(reExtracted.input, progressEmitter, favList),
+    false,
     progressEmitter,
-  }),
+    useBiliTag || false
+  ),
 });
 
 const resolveURL = () => undefined;

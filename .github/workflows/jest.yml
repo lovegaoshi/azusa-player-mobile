@@ -24,4 +24,4 @@ jobs:
       - name: run tests
         run: |
           git submodule update --init --recursive
-          yarn test
+          yarn test --runInBand

@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import Bottleneck from 'bottleneck';
 import { biliApiLimiter } from './throttle';
-import VideoInfo from '@objects/VideoInfo';
 import bfetch from '@utils/BiliFetch';
 
 /**
@@ -21,9 +20,9 @@ export interface FetcherProps {
   getPageSize: (val: any) => number;
   getItems: (val: any) => Array<any>;
   resolveBiliBVID?: (
-    bvobjs: any,
+    bvobjs: any[],
     progressEmitter: ProgressEmitter
-  ) => Promise<VideoInfo[]>;
+  ) => Promise<NoxMedia.Song[]>;
   progressEmitter?: ProgressEmitter;
   favList?: Array<any>;
   limiter?: Bottleneck;
@@ -81,7 +80,8 @@ export const fetchPaginatedAPI = async ({
       return jsonify(pages)
         .then((parsedJson: any) => {
           getItems(parsedJson).forEach(m => {
-            if (!favList.includes(getBVID(m))) BVids.push(m);
+            if (!favList.includes(getBVID(m)) && !BVids.includes(m))
+              BVids.push(m);
           });
         })
         .catch((err: any) => {

@@ -4,11 +4,7 @@ import { removeSongBiliShazamed } from '../objects/Song';
 import { refreshMetadata } from '../utils/mediafetch/resolveURL';
 import useAnalytics from '../utils/Analytics';
 import { getPlaylistUniqBVIDs } from '../objects/Playlist';
-import {
-  fetchVideoInfo,
-  songFetch,
-  fetchBiliBVIDs,
-} from '../utils/mediafetch/bilivideo';
+import { fetchBiliBVIDs } from '@utils/mediafetch/bilivideo';
 import { biliShazamOnSonglist } from '../utils/mediafetch/bilishazam';
 import { syncFavlist } from '@utils/Bilibili/bilifavOperate';
 import { updateSubscribeFavList } from '../utils/BiliSubscribe';
@@ -89,8 +85,8 @@ const usePlaylistCRUD = (mPlaylist?: NoxMedia.Playlist) => {
     const uniqBVIds = getPlaylistUniqBVIDs(playlist);
     uniqBVIds.forEach(bvid =>
       promises.push(
-        fetchVideoInfo(bvid).then(val => {
-          if (val) validBVIds.push(val.bvid);
+        fetchBiliBVIDs([bvid]).then(val => {
+          if (val) validBVIds.push(bvid);
         })
       )
     );
@@ -128,13 +124,11 @@ const usePlaylistCRUD = (mPlaylist?: NoxMedia.Playlist) => {
   };
 
   const playlistReload = async (playlist = currentPlaylist) => {
-    const newSongList = await songFetch({
-      videoinfos: await fetchBiliBVIDs(
-        getPlaylistUniqBVIDs(playlist),
-        progressEmitter
-      ), // await fetchiliBVID([reExtracted[1]!])
-      useBiliTag: playlist.useBiliShazam || false,
-    });
+    const newSongList = await fetchBiliBVIDs(
+      getPlaylistUniqBVIDs(playlist),
+      progressEmitter,
+      playlist.useBiliShazam || false
+    );
     updatePlaylist(
       {
         ...playlist,
@@ -204,10 +198,11 @@ const usePlaylistCRUD = (mPlaylist?: NoxMedia.Playlist) => {
       ...playlist,
       songList: playlist.songList.filter(song => !bvids.includes(song.bvid)),
     };
-    const newSongList = await songFetch({
-      videoinfos: await fetchBiliBVIDs(bvids, progressEmitter),
-      useBiliTag: playlist.useBiliShazam || false,
-    });
+    const newSongList = await fetchBiliBVIDs(
+      getPlaylistUniqBVIDs(playlist),
+      progressEmitter,
+      playlist.useBiliShazam || false
+    );
     updatePlaylist(newPlaylist, newSongList);
   };
 
