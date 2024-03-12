@@ -107,7 +107,11 @@ class NoxAndroidAutoModule(reactContext: ReactApplicationContext) :
           ApplicationExitInfo.REASON_USER_REQUESTED,
           ApplicationExitInfo.REASON_USER_STOPPED,
           ApplicationExitInfo.REASON_EXIT_SELF,
-          ApplicationExitInfo.REASON_PERMISSION_CHANGE
+          ApplicationExitInfo.REASON_PERMISSION_CHANGE,
+          ApplicationExitInfo.REASON_PACKAGE_UPDATED,
+          ApplicationExitInfo.REASON_EXCESSIVE_RESOURCE_USAGE,
+          ApplicationExitInfo.REASON_LOW_MEMORY,
+          ApplicationExitInfo.REASON_SIGNALED,
         ))
       } else {
         callback.resolve(true)
