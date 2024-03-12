@@ -7,6 +7,7 @@ import biliAudioAMFetch from './mediafetch/biliAudioAM';
 import biliAudioColleFetch from './mediafetch/biliAudioColle';
 import biliAudioSimilarFetch from './mediafetch/biliAudioSimilar';
 import bilivideoFetch from './mediafetch/bilivideo2';
+import biliavideoFetch from './mediafetch/biliavideo';
 import biliseriesFetch from './mediafetch/biliseries';
 import bilicolleFetch from './mediafetch/bilicolle';
 import bilifavlistFetch from './mediafetch/bilifavlist';
@@ -192,6 +193,10 @@ const reExtractions: ReExtraction<NoxNetwork.NoxRegexFetch>[] = [
   },
   { match: ytbvideoFetch.regexSearchMatch, fetch: ytbvideoFetch.regexFetch },
   { match: bilivideoFetch.regexSearchMatch, fetch: bilivideoFetch.regexFetch },
+  {
+    match: biliavideoFetch.regexSearchMatch,
+    fetch: biliavideoFetch.regexFetch,
+  },
   { match: bililiveFetch.regexSearchMatch, fetch: bililiveFetch.regexFetch },
   {
     match: bilisubliveFetch.regexSearchMatch,
