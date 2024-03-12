@@ -4,7 +4,7 @@ import { removeSongBiliShazamed } from '../objects/Song';
 import { refreshMetadata } from '../utils/mediafetch/resolveURL';
 import useAnalytics from '../utils/Analytics';
 import { getPlaylistUniqBVIDs } from '../objects/Playlist';
-import { fetchBiliBVIDs } from '@utils/mediafetch/bilivideo';
+import { fetchBiliBVIDs } from '../utils/mediafetch/bilivideo';
 import { biliShazamOnSonglist } from '../utils/mediafetch/bilishazam';
 import { syncFavlist } from '@utils/Bilibili/bilifavOperate';
 import { updateSubscribeFavList } from '../utils/BiliSubscribe';
