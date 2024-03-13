@@ -27,7 +27,7 @@ const PIPLyricView = () => {
       track={currentTrack}
       artist={'n/a'}
       // HACK: for problems see https://github.com/facebook/react-native/issues/34324
-      height={height - 10}
+      height={height / 2 - 10}
       showUI={false}
       noScrollThrottle={true}
     />

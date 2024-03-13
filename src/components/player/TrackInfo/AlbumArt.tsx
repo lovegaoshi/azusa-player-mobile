@@ -128,7 +128,12 @@ const AlbumArt: React.FC<Props> = ({
         pointerEvents={isImageVisible ? 'none' : 'auto'}
       >
         {track && (
-          <LyricView track={track} artist="n/a" onPress={onLyricPress} />
+          <LyricView
+            track={track}
+            artist="n/a"
+            onPress={onLyricPress}
+            height={dimension.height / 2 + 100}
+          />
         )}
       </View>
     </>
