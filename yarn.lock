@@ -11894,7 +11894,7 @@ react-native-get-random-values@^1.11.0:
 
 "react-native-lyric@git+https://github.com/lovegaoshi/react-native-lyric.git":
   version "1.0.1"
-  resolved "git+https://github.com/lovegaoshi/react-native-lyric.git#b15205f5f1839b4a038873d4c7365445fa684752"
+  resolved "git+https://github.com/lovegaoshi/react-native-lyric.git#a1f32b2e615db77b603b4fb98579d7a7e20ca663"
 
 react-native-pager-view@^6.2.3:
   version "6.2.3"
