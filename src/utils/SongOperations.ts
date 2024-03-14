@@ -19,7 +19,7 @@ export const parseSongR128gain = async (
   const { playerSetting } = getState();
   const cachedR128gain = getR128Gain(song);
   // HACK: hard code local file logic
-  const cachedUrl = song.bvid.startsWith('file://')
+  const cachedUrl = song.bvid?.startsWith?.('file://')
     ? song.bvid
     : await NoxCache.noxMediaCache?.loadCacheMedia(song);
   logger.debug(`[r128gain] found saved r128gain as ${cachedR128gain}`);

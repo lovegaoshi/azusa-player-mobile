@@ -79,7 +79,7 @@ export default (playlist: NoxMedia.Playlist) => {
           someRows.filter(
             row =>
               // HACK: cachedSongs also include local files
-              row.bvid.startsWith('file://') ||
+              row?.bvid?.startsWith?.('file://') ||
               cachedSongs.includes(noxCacheKey(row))
           ),
       },

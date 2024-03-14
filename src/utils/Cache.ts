@@ -37,6 +37,7 @@ class NoxMediaCache {
     this.cache = new LRUCache<string, string>({
       max: options.max || 1,
       dispose: async value => {
+        logger.debug(`[cache] ${value} is being purged as its not used.`);
         RNFetchBlob.fs.unlink(value).catch();
       },
       allowStale: false,

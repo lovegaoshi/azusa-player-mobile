@@ -24,7 +24,7 @@ const useCleanCache = () => {
     const abandonedFiles = RNBlobTempFiles.list
       .map(val => `${RNBlobTempFiles.dirpath}/${val}`)
       .filter(val => !cachedKeys.includes(val));
-    unlinkFiles(abandonedFiles);
+    unlinkFiles(abandonedFiles).catch();
     NoxCache.noxMediaCache.cleanOrphanedCache(orphanedCache);
     setOrphanCache(getOrphanCache());
   };

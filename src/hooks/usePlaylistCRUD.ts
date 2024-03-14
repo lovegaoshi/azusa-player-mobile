@@ -71,7 +71,7 @@ const usePlaylistCRUD = (mPlaylist?: NoxMedia.Playlist) => {
       song => song.id === currentPlayingId
     );
     const song = playlist.songList[index];
-    if (!override && !song.metadataOnLoad) return;
+    if (!override && !song?.metadataOnLoad) return;
     logger.debug(`[metadata] attempting to udpate ${song.name} metadata:`);
     const metadata = await refreshMetadata(song);
     updateSongIndex(index, metadata, playlist);

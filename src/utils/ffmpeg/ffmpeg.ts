@@ -29,7 +29,11 @@ const parseReplayGainLog = (log: string) => {
   const regex = /Parsed_replaygain.+ track_gain = (.+) dB/g;
   regex.exec(log);
   const match = regex.exec(log);
-  if (!match) throw new Error('[ffmpeg] no replaygain found!');
+  if (!match) {
+    logger.error('[ffmpeg] no replaygain found!');
+    logger.debug(`[ffmpeg] debug log:${log}`);
+    return 0;
+  }
   logger.debug(`[ffmpeg] r128gain resolved: ${match[1]} dB`);
   if (match[1][0] === '+') {
     logger.debug('[ffmpeg] r128gain of positive dB is not yet supported!');
