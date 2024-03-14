@@ -1722,5 +1722,233 @@
       "onSurfaceDisabled": "rgba(230, 226, 217, 0.38)",
       "backdrop": "rgba(49, 49, 37, 0.4)"
     }
+  },
+  {
+    "metaData": {
+      "themeName": "洛天依收藏集",
+      "themeDesc": "【洛天依收藏集】是哔哩哔哩携手洛天依打造的个人数字艺术计划，全新打造极具观赏性的色彩绘画、精美动画等视听艺术。每张数字卡片都将拥有独特编号，期待大家一起来解锁洛天依的绝美画面，感受留驻在东方世界中的微妙细节与美好永恒。\n洛天依，世界首位中文虚拟歌手，2012年7月12日正式出道，以其多样的音乐风格和创作生态深受广大乐迷的喜爱。经典作品包括《普通DISCO》、《达拉崩吧》、《追光使者》等，使得洛天依奠定其中国虚拟歌手的标杆地位。",
+      "themeAuthor": "NoxAutoGen",
+      "themeIcon": "https://i0.hdslb.com/bfs/garb/4e8be350947c928e6c9b0d92e2d9c30a13aa74ad.jpg",
+      "darkTheme": true
+    },
+    "gifs": [
+      "https://i0.hdslb.com/bfs/emote/5cf1df6ded6282ba5650554bf943ef62fb02ef09.png",
+      "https://i0.hdslb.com/bfs/emote/f74596413b084023eaee0aac819bb5b7a240ad63.png",
+      "https://i0.hdslb.com/bfs/emote/262410e0a8949d4b916d90738b8fae4f7325f150.png",
+      "https://i0.hdslb.com/bfs/emote/6721534fea203a7c46d0a9b69baf17eb1f515f1c.png",
+      "https://i0.hdslb.com/bfs/emote/4fd272c4f5546ae9ebcf9a83e92c07da1afffaa5.png",
+      "https://i0.hdslb.com/bfs/emote/38e9e6b42eccfc24655a8d7686d691b37ae0f0d7.png",
+      "https://i0.hdslb.com/bfs/emote/5e121ec35f81853ead62de08105e71165f16f4fa.png",
+      "https://i0.hdslb.com/bfs/emote/c508c61ea88aeea94e32ec7912bfeab0af3de1f0.png",
+      "https://i0.hdslb.com/bfs/emote/41bfa9b1e4a0890a55c08f123deadb83062f85be.png",
+      "https://i0.hdslb.com/bfs/emote/7f7b9ced94a3ea9fd829f55471012af7ac2bbb75.png",
+      "https://i0.hdslb.com/bfs/emote/23530ab8ef23161634c2448d1a52156b53c201ab.png",
+      "https://i0.hdslb.com/bfs/emote/5198248e0ee238468992b8e3680ce138a67e58a3.png",
+      "https://i0.hdslb.com/bfs/emote/3eb6208440605f629b88d00bb3273a8d5c1cbae5.png",
+      "https://i0.hdslb.com/bfs/emote/67b18cfdf3b5bfb925648ac9c0d076654e10df99.png",
+      "https://i0.hdslb.com/bfs/emote/9c0952eed6189a3ddc50dfa2e6f2138a4d7f2990.png",
+      "https://i0.hdslb.com/bfs/emote/3bb054046d7d8072924cc45c245d4cb772aa58c0.png",
+      "https://i0.hdslb.com/bfs/emote/6d84c79efd4b4997af9a4db0643d32c1c36524b4.png",
+      "https://i0.hdslb.com/bfs/emote/8a0900e7f2030aab63f19fabbc20b98340f90898.png",
+      "https://i0.hdslb.com/bfs/emote/9b26671b731c029ac269f9f0bfcb2ae703e57bb4.png",
+      "https://i0.hdslb.com/bfs/emote/1128593ef6d7954bbecba5df9a412ac49766e276.png"
+    ],
+    "backgroundImages": [
+      {
+        "type": "biliNFTVideo",
+        "identifier": "[\"171\",\"黠若山娆\"]"
+      },
+      {
+        "type": "biliNFTVideo",
+        "identifier": "[\"171\",\"天上的风\"]"
+      },
+      {
+        "type": "biliNFTVideo",
+        "identifier": "[\"171\",\"山海雪鸮\"]"
+      },
+      {
+        "type": "biliNFTVideo",
+        "identifier": "[\"171\",\"宇宙舞曲\"]"
+      },
+      {
+        "type": "biliNFTVideo",
+        "identifier": "[\"171\",\"Blue Ice\"]"
+      },
+      {
+        "type": "biliNFTVideo",
+        "identifier": "[\"171\",\"歌行四方\"]"
+      },
+      {
+        "type": "biliNFTVideo",
+        "identifier": "[\"171\",\"祝福魔法\"]"
+      },
+      {
+        "type": "biliNFTVideo",
+        "identifier": "[\"171\",\"源流万世大哉乾元\"]"
+      },
+      {
+        "type": "biliNFTVideo",
+        "identifier": "[\"171\",\"光怪陆离\"]"
+      },
+      {
+        "type": "biliNFTVideo",
+        "identifier": "[\"171\",\"吟游四方\"]"
+      },
+      {
+        "type": "biliNFTVideo",
+        "identifier": "[\"171\",\"蝶变\"]"
+      },
+      {
+        "type": "biliNFTVideo",
+        "identifier": "[\"171\",\"花火灿灿\"]"
+      },
+      {
+        "type": "biliNFTVideo",
+        "identifier": "[\"171\",\"月舞长空\"]"
+      },
+      {
+        "type": "biliNFTVideo",
+        "identifier": "[\"171\",\"首窥龙堑见岳见渊\"]"
+      },
+      {
+        "type": "biliNFTVideo",
+        "identifier": "[\"171\",\"山腰嬉闹\"]"
+      },
+      {
+        "type": "biliNFTVideo",
+        "identifier": "[\"171\",\"向往光明\"]"
+      },
+      {
+        "type": "biliNFTVideo",
+        "identifier": "[\"171\",\"BUTTERFLY\"]"
+      },
+      {
+        "type": "biliNFTVideo",
+        "identifier": "[\"171\",\"温泉花火\"]"
+      },
+      {
+        "type": "biliNFTVideo",
+        "identifier": "[\"171\",\"月华似水\"]"
+      },
+      {
+        "type": "biliNFTVideo",
+        "identifier": "[\"171\",\"潜龙长生应紫微\"]"
+      },
+      {
+        "type": "biliNFTVideo",
+        "identifier": "[\"171\",\"粉色夕阳\"]"
+      },
+      {
+        "type": "biliNFTVideo",
+        "identifier": "[\"171\",\"天音悠扬\"]"
+      },
+      {
+        "type": "biliNFTVideo",
+        "identifier": "[\"171\",\"如蝶花开\"]"
+      },
+      {
+        "type": "biliNFTVideo",
+        "identifier": "[\"171\",\"星光漫游\"]"
+      },
+      {
+        "type": "biliNFTVideo",
+        "identifier": "[\"171\",\"霓衣欲舞\"]"
+      },
+      "https://i0.hdslb.com/bfs/baselabs/bdd48de8757f733728c9618ad2c53ac4f7444766.png",
+      "https://i0.hdslb.com/bfs/baselabs/9939d58d9925c9f245a0f4485f383068cca6833f.png",
+      "https://i0.hdslb.com/bfs/baselabs/e9ce194329718d98c22b05cefc8216b8ad76f20f.png",
+      "https://i0.hdslb.com/bfs/baselabs/919b899cb9f953db33297a5696f680b181f54c24.png",
+      "https://i0.hdslb.com/bfs/baselabs/1c8e7ad36d86a3e473031451095dd0e1533d0058.png",
+      "https://i0.hdslb.com/bfs/baselabs/b818c49e2e6c82759119a00c8dcad9874a5d8654.png",
+      "https://i0.hdslb.com/bfs/baselabs/ac99ef093f259c65cc409abe605da9e937d82d11.png",
+      "https://i0.hdslb.com/bfs/baselabs/508f27125f7c7ab6f305585860b3d2eedab854f0.png",
+      "https://i0.hdslb.com/bfs/baselabs/c107f236fed1e8f170e17f77dc04b860f682899b.png",
+      "https://i0.hdslb.com/bfs/baselabs/99b3d0d9aa5f638dc3983a9ea7684832728d5cc5.png",
+      "https://i0.hdslb.com/bfs/baselabs/6ea85eed874989b7a7e063e409553f8c2e1b019b.png",
+      "https://i0.hdslb.com/bfs/baselabs/4497cd5606ca56351b80c9c1cbca2eff3bd3a304.png",
+      "https://i0.hdslb.com/bfs/baselabs/f8f3a8d143d52a72848e610e64bb3e1c0179f2af.png",
+      "https://i0.hdslb.com/bfs/baselabs/b0777acb14926cab71a6fe957dd6e40055dacff9.png",
+      "https://i0.hdslb.com/bfs/baselabs/6a5406bc923e34049771723c933bf7d7f4165b9a.png",
+      "https://i0.hdslb.com/bfs/baselabs/1b41493dfc60f8d35a82094cc58db65730844481.png",
+      "https://i0.hdslb.com/bfs/baselabs/e960ad899a4a232a620baf5529e97a5620011aa8.png",
+      "https://i0.hdslb.com/bfs/baselabs/821a2a18c4c8674c505c727fe044dae8ee4fe4dc.png",
+      "https://i0.hdslb.com/bfs/baselabs/c0a0bcdf91357b0f51788c212282b9a4be61d006.png",
+      "https://i0.hdslb.com/bfs/baselabs/129152237d1b712e03a1d0c772eae04d1726dead.png",
+      "https://i0.hdslb.com/bfs/baselabs/7d81b8fd27b7507f3f00dec005ca6936da54030f.png",
+      "https://i0.hdslb.com/bfs/baselabs/894206f29b0ffdd88e8ec993852e22e1a317fe87.png",
+      "https://i0.hdslb.com/bfs/baselabs/79bf56f91f3939d5017ea3db8ded32c5887a7c80.png",
+      "https://i0.hdslb.com/bfs/baselabs/36e79f26f31652296545959d588e39c2a72b7cbd.png",
+      "https://i0.hdslb.com/bfs/baselabs/35a8763dca0dc9bce712a60b28dd54cfb8a336a3.png",
+      "https://i0.hdslb.com/bfs/baselabs/0403e205059da86bbb6ac8073dbe629ff15fc6ae.png",
+      "https://i0.hdslb.com/bfs/baselabs/8ddb7fd71b964040773fd885e5462fb5132b3933.png",
+      "https://i0.hdslb.com/bfs/baselabs/3ba73f989b944be60ee29eec64d5f380f81e6359.png",
+      "https://i0.hdslb.com/bfs/baselabs/5f65dd57af9526976982643a7f3c1c84c7be0369.png",
+      "https://i0.hdslb.com/bfs/baselabs/fa3585c7cd3275ce60006911cab9c2b0dbd04040.png",
+      "https://i0.hdslb.com/bfs/baselabs/436a1b34c386cc8b841a635b6fc6884d67d7c1d3.png",
+      "https://i0.hdslb.com/bfs/baselabs/289ef0c7c3d5e7fb71c34acb88150edb76896490.png",
+      "https://i0.hdslb.com/bfs/baselabs/2574ff7cd3faaf89ede83f6d33a89047e077f86a.png",
+      "https://i0.hdslb.com/bfs/baselabs/b163785c164f0c073d2723994172bc301e3cb318.png",
+      "https://i0.hdslb.com/bfs/baselabs/5e0bee894fc69b2c0b2a206d4aa1df57406e5b33.png",
+      "https://i0.hdslb.com/bfs/baselabs/671a1a8845bdbe061fd509904a7875f25e9d1133.png",
+      "https://i0.hdslb.com/bfs/baselabs/a79468decd6624be89e30a186c8d16808a6a3350.png",
+      "https://i0.hdslb.com/bfs/baselabs/64a83f3606f69f86608fe061fe2b0bcced7bef83.png",
+      "https://i0.hdslb.com/bfs/baselabs/1e8e44d3739e9786a668407887ca2a6113c94cca.png",
+      "https://i0.hdslb.com/bfs/baselabs/8d6e322b1ce9eac28c7095dae71fd854658e3940.png",
+      "https://i0.hdslb.com/bfs/baselabs/d4b982e7490cc0632edf30b8d4b6422e0c2d0220.png",
+      "https://i0.hdslb.com/bfs/baselabs/8fb056d80b48bde16fcab05b21fa7a92c1aaae03.png"
+    ],
+    "customColors": {
+      "maskedBackgroundColor": "rgba(0, 0, 0, 0.60)",
+      "playlistDrawerBackgroundColor": "green",
+      "playlistDrawerBackgroundColorTransparent": "rgba(0, 255, 0, 0.35)",
+      "progressThumbTintColor": "rgb(235, 235, 0)",
+      "progressMinimumTrackTintColor": "rgb(235, 235, 0)",
+      "progressMaximumTrackTintColor": "#FFFFFF",
+      "btnBackgroundColor": "rgb(72, 71, 58)",
+      "textInputSelectionColor": "green"
+    },
+    "colors": {
+      "primary": "rgb(255, 255, 0)",
+      "onPrimary": "rgb(50, 50, 0)",
+      "primaryContainer": "rgb(73, 73, 0)",
+      "onPrimaryContainer": "rgb(234, 234, 0)",
+      "secondary": "rgb(202, 200, 165)",
+      "onSecondary": "rgb(50, 50, 24)",
+      "secondaryContainer": "rgb(73, 72, 45)",
+      "onSecondaryContainer": "rgb(231, 228, 191)",
+      "tertiary": "rgb(164, 208, 189)",
+      "onTertiary": "rgb(11, 55, 42)",
+      "tertiaryContainer": "rgb(37, 78, 64)",
+      "onTertiaryContainer": "rgb(191, 236, 216)",
+      "error": "rgb(255, 180, 171)",
+      "onError": "rgb(105, 0, 5)",
+      "errorContainer": "rgb(147, 0, 10)",
+      "onErrorContainer": "rgb(255, 180, 171)",
+      "background": "rgba(0,0,0, 0.4)",
+      "onBackground": "rgb(230, 226, 217)",
+      "surface": "rgb(28, 28, 23)",
+      "onSurface": "rgba(235, 235, 0, 1)",
+      "text": "rgb(255, 255, 0)",
+      "surfaceVariant": "rgb(10, 10, 10)",
+      "onSurfaceVariant": "rgb(225, 225, 0)",
+      "outline": "rgb(147, 145, 130)",
+      "outlineVariant": "rgb(72, 71, 58)",
+      "shadow": "rgb(0, 0, 0)",
+      "scrim": "rgb(0, 0, 0)",
+      "inverseSurface": "rgb(230, 226, 217)",
+      "inverseOnSurface": "rgb(49, 49, 43)",
+      "inversePrimary": "rgb(98, 98, 0)",
+      "elevation": {
+        "level0": "transparent",
+        "level1": "rgb(53, 56, 57)",
+        "level2": "rgb(10, 10, 10)",
+        "level3": "rgb(10, 10, 10)",
+        "level4": "rgb(49, 49, 20)",
+        "level5": "rgb(53, 53, 20)"
+      },
+      "surfaceDisabled": "rgba(230, 226, 217, 0.12)",
+      "onSurfaceDisabled": "rgba(230, 226, 217, 0.38)",
+      "backdrop": "rgba(49, 49, 37, 0.4)"
+    }
   }
 ]
