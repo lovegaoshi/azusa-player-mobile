@@ -21,14 +21,12 @@ enum THUMBUPSTATUS {
 }
 
 // TODO: can be a util function
-const checkLiked = async (song: NoxMedia.Song | undefined) => {
-  if (!(song && song.bvid)) {
-    return;
-  }
-  if (song.bvid.startsWith('BV')) {
+const checkLiked = (song?: NoxMedia.Song) => {
+  if (!song) return;
+  if (song.bvid?.startsWith?.('BV')) {
     // if (!Number.isNaN(Number(song.id))) {
     // legacy bilivideo where id is cid and bvid is bvid
-    return await checkBVLiked(song.bvid);
+    return checkBVLiked(song.bvid);
   }
 };
 

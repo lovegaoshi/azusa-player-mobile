@@ -135,6 +135,7 @@ const usePlayback = () => {
       playFromPlaylist({
         playlist: playlists[randomChoice(Object.keys(playlists))],
       });
+      return;
     }
     for (const song of currentPlayingList.songList) {
       if (song.name.toLowerCase() === query) {
