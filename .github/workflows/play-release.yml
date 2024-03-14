@@ -1,5 +1,4 @@
 name: APM Manual AAB Release
-# be warned there is no version bump!
 on:
   workflow_dispatch:
 jobs:

@@ -1,4 +1,4 @@
-name: android weekly build
+name: APM dev Build
 on:
   schedule:
     - cron: '0 0 * * 1'
