@@ -146,6 +146,8 @@
     "ClearOrphanedCacheName": "Clear Orphaned Cache",
     "ClearOrphanedCacheDesc": "Clear all cached songs.",
     "ClearOrphanedCacheDesc2": "Clear all orphaned cached {{val}} songs.",
+    "DebugLogName": "Player Status",
+    "DebugLogDesc": "Show TP's current status",
     "LogLevel0": "DEBUG",
     "LogLevel1": "INFO",
     "LogLevel2": "WARN",
