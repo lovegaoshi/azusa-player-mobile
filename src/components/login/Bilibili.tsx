@@ -132,7 +132,7 @@ export default () => {
           <Avatar.Image source={{ uri: loginInfo.avatar }}></Avatar.Image>
           <View style={styles.avatarUsernameStyle}>
             <Text variant="headlineSmall">{loginInfo.name}</Text>
-            <Button onPress={logout}>LOGOUT</Button>
+            <Button onPress={logout}>{t('Login.Logout')}</Button>
           </View>
         </View>
         <BiliSelectFavButtton />

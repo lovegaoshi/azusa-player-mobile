@@ -137,7 +137,7 @@
     "noInterruptionName": "不自动中断播放",
     "noInterruptionDesc": "阻止Event.RemoteDuck中断播放（需重启）",
     "CacheSizeName": "最大缓存歌数目",
-    "CacheSizeDesc": "Disables Event.RemoteDuck to prevent interruption (NEED RESTART)",
+    "CacheSizeDesc": "阻止Event.RemoteDuck中断播放（需重启）",
     "CacheSizeDesc2": "最大缓存 {{val}} 首歌（需重启）",
     "ClearCacheName": "清除缓存",
     "ClearCacheDesc": "删除所有缓存的歌曲",
@@ -227,7 +227,8 @@
     "BilibiliLoginQRExpired": "b站二维码过期了",
     "BilibiliLoginProbeFailed": "检查二维码失败，请检查网络",
     "Disclaimer": "由于电梓播放器第三方的身份，使用b站账号cookie有可能导致被风控封号。虽然王胡桃本人以身试法自用cookie，但请最起码开小号使用b站功能",
-    "SyncBiliFavlist": "自b站收藏夹同步"
+    "SyncBiliFavlist": "自b站收藏夹同步",
+    "Logout": "登出"
   },
   "VersionUpdate": {
     "NoUpdates": "管人播放器已经是最新版本。\n当前版本：{{currentVersion}}\n开发版本：{{devVersion}}",

@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState } from 'react';
+import i18n from 'i18next';
 
 import { searchBiliURLs } from '@utils/BiliSearch';
 import { useNoxSetting } from '../stores/useApp';
@@ -11,7 +12,7 @@ interface props {
 }
 export default ({
   onSearched = (songs: Array<NoxMedia.Song>) => console.log(songs),
-  searchListTitle = 'Search',
+  searchListTitle = i18n.t('PlaylistOperations.searchListName'),
 }: props) => {
   const [searchVal, setSearchVal] = useState('');
   const progressEmitter = useNoxSetting(

@@ -252,7 +252,8 @@
     "BilibiliLoginQRExpired": "Bilibili QR code expired. Regenerate to login.",
     "BilibiliLoginProbeFailed": "Checking QR code login status failed. Please check network.",
     "Disclaimer": "Using bilibili cookies in this app may BAN your account/IP due to API abuse. At the very least use a spare account.",
-    "SyncBiliFavlist": "Sync from bilibili favorites"
+    "SyncBiliFavlist": "Sync from bilibili favorites",
+    "Logout": "LOGOUT"
   },
   "VersionUpdate": {
     "DownloadAPK": "Update",
