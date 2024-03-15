@@ -105,9 +105,8 @@ export const LyricView = ({
           logger.debug('[lrc] read local lrc and loading...');
           setLrc(readlrc);
           return true;
-        } else if (lrcDetail.lyric.endsWith('.txt')) {
-          logger.debug('[lrc] local lrc no longer exists, fetching new...');
         }
+        logger.debug('[lrc] local lrc no longer exists, fetching new...');
         searchAndSetCurrentLyric(0, await lyricPromise, lrcKey);
         return true;
       }
@@ -143,15 +142,19 @@ export const LyricView = ({
     return lyricMapping.has(track?.song?.id);
   };
 
-  const updateLyricMapping = (
-    newLrcDetail: Partial<NoxMedia.LyricDetail> = {}
-  ) => {
-    if (lrcOption !== null && lrcOption !== undefined) {
+  const updateLyricMapping = ({
+    resolvedLrc = lrcOption,
+    newLrcDetail = {},
+  }: {
+    resolvedLrc?: NoxNetwork.NoxFetchedLyric;
+    newLrcDetail?: Partial<NoxMedia.LyricDetail>;
+  }) => {
+    if (resolvedLrc !== null && resolvedLrc !== undefined) {
       const lrcpath = `${track.song.id}.txt`;
       writeTxtFile(lrcpath, [newLrcDetail.lyric || lrc], 'lrc/');
       const lyricDeatail: NoxMedia.LyricDetail = {
         songId: track.song.id,
-        lyricKey: lrcOption.key,
+        lyricKey: resolvedLrc.key,
         lyricOffset: currentTimeOffset,
         ...newLrcDetail,
         lyric: lrcpath,
@@ -165,7 +168,7 @@ export const LyricView = ({
       ? currentTimeOffset + LYRIC_OFFSET_INTERVAL
       : currentTimeOffset - LYRIC_OFFSET_INTERVAL;
     setCurrentTimeOffset(newTimeOffset);
-    updateLyricMapping({ lyricOffset: newTimeOffset });
+    updateLyricMapping({ newLrcDetail: { lyricOffset: newTimeOffset } });
   };
 
   const fetchAndSetLyricOptions = async (adhocTitle?: string) => {
@@ -194,12 +197,10 @@ export const LyricView = ({
     console.debug(`lrcoptions: ${JSON.stringify(resolvedLrcOptions)}`);
     if (resolvedLrcOptions.length === 0) setLrc('无法找到歌词,请手动搜索...');
     else {
-      const lyric = await searchLyric(
-        lyricMid || resolvedLrcOptions[index!].songMid,
-        setLrc
-      );
-      setLrcOption(resolvedLrcOptions[index!]);
-      updateLyricMapping({ lyric });
+      const resolvedLrc = resolvedLrcOptions[index!];
+      const lyric = await searchLyric(lyricMid || resolvedLrc.songMid, setLrc);
+      setLrcOption(resolvedLrc);
+      updateLyricMapping({ newLrcDetail: { lyric }, resolvedLrc });
     }
   };
 
