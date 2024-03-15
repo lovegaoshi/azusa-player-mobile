@@ -1,4 +1,5 @@
 import he from 'he';
+import i18n from 'i18next';
 
 import { extractSongName } from './re';
 import bfetch from '@utils/BiliFetch';
@@ -68,14 +69,14 @@ export const fetchLRC = async (
 
   const songFile = songs.find(v => v.includes(songName));
   if (songFile === undefined) {
-    setLyric('[00:00.000] 无法找到歌词');
+    setLyric(i18n.t('Lyric.notFound'));
     return;
   }
   // use song name to get the LRC
   try {
     const lrc = await bfetch(URL_LRC_BASE.replace('{songFile}', songFile));
     if (lrc.status !== 200) {
-      setLyric('[00:00.000] 无法找到歌词');
+      setLyric(i18n.t('Lyric.notFound'));
       return;
     }
 
@@ -83,7 +84,7 @@ export const fetchLRC = async (
     setLyric(text.replaceAll('\r\n', '\n'));
     return text.replaceAll('\r\n', '\n');
   } catch (error) {
-    setLyric('[00:00.000] 无法找到歌词');
+    setLyric(i18n.t('Lyric.notFound'));
   }
 };
 
@@ -124,8 +125,8 @@ export const searchLyric = async (
   const res = await bfetch(URL_QQ_LYRIC.replace('{SongMid}', searchMID));
   const json = await res.json();
   if (!json.lyric) {
-    setLyric('[00:00.000] 无法找到歌词,请手动搜索');
-    return '[00:00.000] 无法找到歌词,请手动搜索';
+    setLyric(i18n.t('Lyric.notFound'));
+    return i18n.t('Lyric.notFound');
   }
 
   let finalLrc = json.lyric as string;
