@@ -7,7 +7,7 @@ import { useNoxSetting } from '../stores/useApp';
 import { getDefaultSearch } from '@utils/ChromeStorage';
 
 interface props {
-  onSearched: (val: any) => void;
+  onSearched?: (val: any) => void;
   searchListTitle?: string;
 }
 export default ({
