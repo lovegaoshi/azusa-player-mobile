@@ -63,7 +63,7 @@ export default ({
     nameRaw: name,
     parsedName: reExtractSongName(name, singerId),
     duration,
-    album,
+    album: album ? he.decode(album) : name,
     addedDate: addedDate || new Date().getTime(),
     source,
     isLive,

@@ -9,7 +9,6 @@ import com.facebook.react.ReactPackage
 import com.facebook.react.defaults.DefaultNewArchitectureEntryPoint.load
 import com.facebook.react.defaults.DefaultReactNativeHost
 import com.facebook.soloader.SoLoader
-import com.microsoft.codepush.react.CodePush
 import expo.modules.ApplicationLifecycleDispatcher.onApplicationCreate
 import expo.modules.ApplicationLifecycleDispatcher.onConfigurationChanged
 import expo.modules.ReactNativeHostWrapper
@@ -17,12 +16,6 @@ import expo.modules.ReactNativeHostWrapper
 class MainApplication : Application(), ReactApplication {
     override val reactNativeHost: ReactNativeHost =
         ReactNativeHostWrapper(this, object : DefaultReactNativeHost(this) {
-            // 2. Override the getJSBundleFile method in order to let
-            // the CodePush runtime determine where to get the JS
-            // bundle location from on each app start
-            override fun getJSBundleFile(): String? {
-                return CodePush.getJSBundleFile()
-            }
 
             override fun getUseDeveloperSupport(): Boolean {
                 return BuildConfig.DEBUG

@@ -8,11 +8,14 @@ import { CopiedPlaylistMenuItem } from '@components/buttons/CopiedPlaylistButton
 import RenameSongButton from '@components/player/TrackInfo/RenameSong/RenameSongButton';
 import useSongOperations from '@hooks/useSongOperations';
 import { SearchRegex } from '@enums/Playlist';
+import { SOURCE } from '@enums/MediaFetch';
+import useBiliSearch from '@hooks/useBiliSearch';
 
 enum ICONS {
   SEND_TO = 'playlist-plus',
   COPY_SONG_NAME = '',
   SEARCH_IN_PLAYLIST = 'text-search',
+  SEARCH_BVID = 'search-web',
   RELOAD = 'refresh',
   REMOVE = 'delete',
   REMOVE_AND_BAN_BVID = 'delete-forever',
@@ -46,6 +49,7 @@ export default ({ usePlaylist, prepareForLayoutAnimationRender }: Props) => {
     state => state.setPlaylistSearchAutoFocus
   );
   const { startRadio, radioAvailable } = useSongOperations();
+  const { setSearchVal, handleSearch } = useBiliSearch({});
 
   const closeMenu = React.useCallback(() => setSongMenuVisible(false), []);
 
@@ -126,6 +130,19 @@ export default ({ usePlaylist, prepareForLayoutAnimationRender }: Props) => {
         disabled={checking}
         title={t('SongOperations.songSearchInPlaylistTitle')}
       />
+      {selectedSongs()[0]?.source === SOURCE.bilivideo && (
+        <Menu.Item
+          leadingIcon={ICONS.SEARCH_BVID}
+          onPress={() => {
+            const song = selectedSongs()[0];
+            setSearchVal(song.bvid);
+            handleSearch(song.bvid);
+            closeMenu();
+          }}
+          disabled={checking}
+          title={t('SongOperations.BVIDSearchTitle')}
+        />
+      )}
       <Menu.Item
         leadingIcon={ICONS.REMOVE}
         onPress={() => removeSongs()}

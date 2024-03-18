@@ -1,4 +1,4 @@
-import { biliNFTVideoFetch } from '@utils/mediafetch/biliNFT';
+import { biliNFTVideoFetch } from '../../src/utils/mediafetch/biliNFT';
 
 test('biliNFT', async () => {
   const content = await biliNFTVideoFetch({

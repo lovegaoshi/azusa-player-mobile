@@ -3,6 +3,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { strToU8, compressSync } from 'fflate';
 import { v4 as uuidv4 } from 'uuid';
 import { Appearance, ColorSchemeName } from 'react-native';
+import i18n from 'i18next';
 
 import { dummyPlaylist, dummyPlaylistList } from '../objects/Playlist';
 import { NoxRepeatMode } from '../enums/RepeatMode';
@@ -318,7 +319,7 @@ export const initPlayerObject =
         'NULL',
       ],
       searchPlaylist: dummyPlaylist(
-        'Search',
+        i18n.t('PlaylistOperations.searchListName'),
         PLAYLIST_ENUMS.TYPE_SEARCH_PLAYLIST
       ),
       favoriPlaylist: await getPlaylist(

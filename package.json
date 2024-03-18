@@ -80,7 +80,6 @@
     "react-native-background-timer": "git+https://github.com/lovegaoshi/react-native-background-timer.git",
     "react-native-blob-jsi-helper": "^0.3.1",
     "react-native-blob-util": "^0.19.8",
-    "react-native-code-push": "^8.2.1",
     "react-native-draggable-flatlist": "^4.0.1",
     "react-native-gesture-handler": "^2.15.0",
     "react-native-get-random-values": "^1.11.0",

@@ -134,9 +134,9 @@ export default ({
             `R128Gain of ${song.parsedName}`,
             `${getR128Gain(song)} dB`,
             [
-              { text: 'Nullify', onPress: () => setR128Gain(null) },
-              { text: 'Zero', onPress: () => setR128Gain(0) },
-              { text: 'OK', onPress: closeMenu },
+              { text: t('Dialog.nullify'), onPress: () => setR128Gain(null) },
+              { text: t('Dialog.zero'), onPress: () => setR128Gain(0) },
+              { text: t('Dialog.ok'), onPress: closeMenu },
             ],
             { cancelable: true }
           )
