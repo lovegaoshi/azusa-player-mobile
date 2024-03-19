@@ -1241,7 +1241,27 @@
       "https://i0.hdslb.com/bfs/garb/d2d3ff2b56016dec0f3a10eb1106bfda05e07805.png",
       "https://i0.hdslb.com/bfs/garb/e19c91c520fb2f40fb7b957f64c998f0a36e819f.png",
       "https://i0.hdslb.com/bfs/garb/e6b589c9f014d851b653eb803bf33cf64cc244cb.png",
-      "https://i0.hdslb.com/bfs/garb/664f52af70b1b9f0496776ef640b7ce20b8ed9cd.png"
+      "https://i0.hdslb.com/bfs/garb/664f52af70b1b9f0496776ef640b7ce20b8ed9cd.png",
+      "https://i0.hdslb.com/bfs/garb/97d6dc59236af09a562932667a8465957734b396.png",
+      "https://i0.hdslb.com/bfs/garb/c4b11f010878256e6405c5271babe0c77e830b59.png",
+      "https://i0.hdslb.com/bfs/garb/c467d92991ec176349c4dfd65fbd88c3e1375b12.png",
+      "https://i0.hdslb.com/bfs/garb/e9bfb61ce223c1734c7bddfc5c6336f5e21ab5d0.png",
+      "https://i0.hdslb.com/bfs/garb/37315fb3021e919565cde6f84a386ffa2f5bf15a.png",
+      "https://i0.hdslb.com/bfs/garb/edb99a293c69d76cbb9cefa441784403f48fc245.png",
+      "https://i0.hdslb.com/bfs/garb/12e4ad726f054d9d9549be9b415272f0fb186ab1.png",
+      "https://i0.hdslb.com/bfs/garb/759247499a6e01892a22c4e062396cb945fb64fd.png",
+      "https://i0.hdslb.com/bfs/garb/5d75f775496520214e792d3f35a0e6d96e505b7a.png",
+      "https://i0.hdslb.com/bfs/garb/ff7bcf28381f9c860266bb14cc0067f0327cae57.png",
+      "https://i0.hdslb.com/bfs/garb/55e6634f9c78f6ddb0c5e93531896012665880c8.png",
+      "https://i0.hdslb.com/bfs/garb/567f7bc4b0d305420bfc1f9e6cb7b676d00b35b0.png",
+      "https://i0.hdslb.com/bfs/garb/95ec55113054e964e74c8678ff0a3abe80a2f678.png",
+      "https://i0.hdslb.com/bfs/garb/ca7d32d6ecdeda3f2a4a58b50f5ceb945a6cab0c.png",
+      "https://i0.hdslb.com/bfs/garb/965fe54855b4f9eefdab97749ef79bbb8029e121.png",
+      "https://i0.hdslb.com/bfs/garb/b0c1bbac6dcd0ca9bacdd0ea86fe8a3121e92818.png",
+      "https://i0.hdslb.com/bfs/garb/d865a2764e06d76bbbed3a0004c02838a3aa1da9.png",
+      "https://i0.hdslb.com/bfs/garb/29f0ee4a77b1da4d18c76034cd24df2e3169de0d.png",
+      "https://i0.hdslb.com/bfs/garb/5060a97c5b3b95c6609c9a3b9f36c3f1e29434f9.png",
+      "https://i0.hdslb.com/bfs/garb/73a4a0e381ccd35fb57b72af85943c01afce3560.png"
     ],
     "backgroundImages": [
       "https://i0.hdslb.com/bfs/garb/9efbb127be4c5c86782be20827da13ab6c2255e1.jpg",
@@ -1249,7 +1269,30 @@
       "https://i0.hdslb.com/bfs/garb/68f3d40343e3c33166d8407d38442c5e124b427d.jpg",
       "https://i0.hdslb.com/bfs/garb/8b57e8e9a640c51fb3ab2c29d235f84bc13f6927.jpg",
       "https://i0.hdslb.com/bfs/garb/7fc48881ec85a91ab451162d14749a50ebaff767.jpg",
-      "https://i0.hdslb.com/bfs/new_dyn/8f22c393e49af2f90de7219b0bce6f0b13692113.png"
+      "https://i0.hdslb.com/bfs/new_dyn/8f22c393e49af2f90de7219b0bce6f0b13692113.png",
+      {
+        "type": "biliNFTVideo",
+        "identifier": "[\"101287\",\"海的誓约\"]"
+      },
+      {
+        "type": "biliNFTVideo",
+        "identifier": "[\"101287\",\"海的回响\"]"
+      },
+      "https://i0.hdslb.com/bfs/garb/open/53564f764a2d12471f984c3eab6b0d1465d49c00.png",
+      {
+        "type": "biliNFTVideo",
+        "identifier": "[\"101287\",\"圣诞礼物\"]"
+      },
+      "https://i0.hdslb.com/bfs/garb/open/b9d26c2883ce77b588196a2adad83cb0709ff90e.jpg",
+      "https://i0.hdslb.com/bfs/garb/open/2d778a7bc969d75c0bd708eee1ac4aefa35f2789.jpg",
+      "https://i0.hdslb.com/bfs/garb/open/448bb88515b74a92d53ab948472a5423406098b6.png",
+      "https://i0.hdslb.com/bfs/garb/open/9257150f2984df97e1563c07a9ae91e48bdb07aa.png",
+      "https://i0.hdslb.com/bfs/garb/open/0f3051a12f530992e648a2ec2af8d4a29de5d01b.png",
+      "https://i0.hdslb.com/bfs/garb/open/9d7e7201542540a9535c7fc9f44147c6ee8f80c0.jpg",
+      {
+        "type": "biliNFTVideo",
+        "identifier": "[\"101287\",\"kirakira\"]"
+      }
     ],
     "backgroundImagesLandscape": [
       {
