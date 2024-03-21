@@ -152,7 +152,7 @@ export const fetchVideoPlayUrlPromise = async ({
     const json = await res.json();
     return { url: extractResponseJson(json, extractType) as string };
   } catch (e) {
-    logger.error(`[resolveURL] error: ${e}`);
+    logger.error(`[resolveURL] error: ${e} of bvid:${bvid}, cid:${cid}`);
     throw e;
   }
 };
@@ -189,7 +189,9 @@ const extractResponseJson = (json: any, field: string) => {
       } else if (json.data.dolby?.audio) {
         return getBestBitrate(json.data.dash.dolby.audio).baseUrl;
       }
-      return getBestBitrate(json.data.dash.audio).baseUrl;
+      if (json.data.dash) return getBestBitrate(json.data.dash.audio).baseUrl;
+      if (json.data.durl) return json.data.durl[0].url;
+      throw Error('[extractResponseJson] no audio url');
     case FieldEnum.VideoUrl:
       return json.data.dash.video[0].baseUrl;
     case FieldEnum.CID:
