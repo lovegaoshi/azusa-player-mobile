@@ -5,10 +5,10 @@ import {
   Skia,
   useClockValue,
   useComputedValue,
-  useValue,
   LinearGradient,
   vec,
 } from '@shopify/react-native-skia';
+import { useDerivedValue, useSharedValue } from 'react-native-reanimated';
 import { line, curveBasis } from 'd3';
 import { colord } from 'colord';
 
@@ -32,8 +32,8 @@ export default function WaveAnimation({
   progress = 0,
   color = 'white',
 }: Props) {
-  const verticalOffset = useValue(initialVerticalOffset);
-  const amplitude = useValue(initialAmplitude);
+  const verticalOffset = useSharedValue(initialVerticalOffset);
+  const amplitude = useSharedValue(initialAmplitude);
   const clock = useClockValue();
   const extrapolatedWidth = Math.max(width * progress * 0.9 - 3, 0);
   const parsedColor = colord(color);
@@ -49,10 +49,10 @@ export default function WaveAnimation({
               const angle = (1 - index / width) * (Math.PI * frequency) + phase;
               return [
                 index,
-                amplitude.current *
+                amplitude.value *
                   gaussian(index / extrapolatedWidth, 1.3) *
                   (Math.sin(angle) - 1) +
-                  verticalOffset.current +
+                  verticalOffset.value +
                   17,
               ];
             }

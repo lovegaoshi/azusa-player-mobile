@@ -3,6 +3,8 @@ import he from 'he';
 
 import { extractParenthesis } from '../utils/re';
 import { reExtractSongName } from '@stores/appStore';
+import { SOURCE } from '@enums/MediaFetch';
+import { MUSICFREE } from '@utils/mediafetch/musicfree';
 
 export const DEFAULT_NULL_URL = 'NULL';
 export const NULL_TRACK = { url: DEFAULT_NULL_URL, urlRefreshTimeStamp: 0 };
@@ -23,7 +25,7 @@ interface SongProps {
   duration?: number;
   album?: string;
   addedDate?: number;
-  source?: string;
+  source?: SOURCE | MUSICFREE;
   isLive?: boolean;
   liveStatus?: boolean;
   metadataOnLoad?: boolean;

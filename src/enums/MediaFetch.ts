@@ -4,5 +4,6 @@ export enum SOURCE {
   steriatk = 'steriatk',
   ytbvideo = 'ytbvideo',
   biliBangumi = 'biliBangumi',
+  biliLive = 'bililive',
   local = 'local',
 }

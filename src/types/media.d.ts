@@ -1,4 +1,6 @@
 import { SORT_OPTIONS, PLAYLIST_ENUMS } from '@enums/Playlist';
+import { SOURCE } from '@enums/MediaFetch';
+import { MUSICFREE } from '@utils/mediafetch/musicfree';
 
 declare global {
   namespace NoxMedia {
@@ -18,7 +20,7 @@ declare global {
       duration: number;
       album?: string;
       addedDate?: number;
-      source?: string;
+      source?: SOURCE | MUSICFREE;
       isLive?: boolean;
       liveStatus?: boolean;
       metadataOnLoad?: boolean;
