@@ -66,7 +66,6 @@ jobs:
         run: |
           git config --global user.email 106490582+lovegaoshi@users.noreply.github.com
           git config --global user.name lovegaoshi
-          git pull origin master
           git commit -m "build: release version bump" -a
 
       - name: python fixHTTP
