@@ -2420,5 +2420,108 @@
       "onSurfaceDisabled": "rgba(230, 226, 217, 0.38)",
       "backdrop": "rgba(49, 49, 37, 0.4)"
     }
+  },
+  {
+    "metaData": {
+      "themeName": "Hiiro收藏集-春晖庆典",
+      "themeDesc": "【Hiiro收藏集-春晖庆典】是哔哩哔哩携手Hiiro定制打造的个人数字集卡，其中的每张数字卡片都将拥有独特编号，期待大家来一起解锁Hiiro春日与周年的绝美瞬间！",
+      "themeAuthor": "NoxAutoGen",
+      "themeIcon": "https://i0.hdslb.com/bfs/garb/31ad1a796ea1a570ecaad486392e41da60479390.jpg",
+      "darkTheme": true
+    },
+    "gifs": [
+      "https://i0.hdslb.com/bfs/garb/8a406804135957e4968ea2ba8a84e63b41c14005.png",
+      "https://i0.hdslb.com/bfs/garb/6535a2f4338ee0a63da85d776ced39635099636c.png",
+      "https://i0.hdslb.com/bfs/garb/b396567161c638072ad3fa8a1d774f072ccf1b3f.png",
+      "https://i0.hdslb.com/bfs/garb/75e6d127679d1368896b53aad95e1e66bbbca1e6.png",
+      "https://i0.hdslb.com/bfs/garb/1e98bbadd36f2dcfa97cc0c0e32878db4f42e614.png",
+      "https://i0.hdslb.com/bfs/garb/27fc3e7811365de4913a0d781fc7ce0a73779850.png",
+      "https://i0.hdslb.com/bfs/garb/ff2e013530d4e80071cb244ad3f0328dd8b17d5b.png",
+      "https://i0.hdslb.com/bfs/garb/459654c7ed80bdfcba7f9af95407407d1088263f.png",
+      "https://i0.hdslb.com/bfs/garb/76122595b2ab6ab671ca6174d6cd6377e5476179.png",
+      "https://i0.hdslb.com/bfs/garb/bfce2c86cc3bc85508e259fb8ba19efb9f56763e.png",
+      "https://i0.hdslb.com/bfs/garb/baa3e38483d70f6da81990b15cc2d9ca652bce61.png",
+      "https://i0.hdslb.com/bfs/garb/3964686a8e290c3cf790ebf89aeb0c5c38466c93.png",
+      "https://i0.hdslb.com/bfs/garb/4ec1679a3bc463402592739cf7736c2a7647b9c1.png",
+      "https://i0.hdslb.com/bfs/garb/d384d5cf8f3d71c301f24908034ad5356be2dd93.png",
+      "https://i0.hdslb.com/bfs/garb/e8cb4db3108f297bd402873ae3d64f4a051f611c.png",
+      "https://i0.hdslb.com/bfs/garb/dd4368ff317d464eef802f41e48f7c5ec97d077b.png",
+      "https://i0.hdslb.com/bfs/garb/4e5a0447033703fe39878766c401c4ee7c53ccab.png",
+      "https://i0.hdslb.com/bfs/garb/955b4e6cbfe68ebaa1814a8e4ba17ae8706b4f6b.png",
+      "https://i0.hdslb.com/bfs/garb/5c673b4cbc7a31973ee6041e7e9a149393dd6881.png",
+      "https://i0.hdslb.com/bfs/garb/cfc6698f51ea747cf8a835882219c48b8e783812.png"
+    ],
+    "backgroundImages": [
+      {
+        "type": "biliNFTVideo",
+        "identifier": "[\"101395\",\"Hiiro·浪漫黑巧\"]"
+      },
+      {
+        "type": "biliNFTVideo",
+        "identifier": "[\"101395\",\"Hiiro·周年华彩\"]"
+      },
+      {
+        "type": "biliNFTVideo",
+        "identifier": "[\"101395\",\"Hiiro·娇俏猫影\"]"
+      },
+      "https://i0.hdslb.com/bfs/garb/open/41d94f41c89a58564bb782a7ac0d9a3748566086.png",
+      "https://i0.hdslb.com/bfs/garb/open/c1de644e73c511de31e7c660cc7d502cfac97722.png",
+      "https://i0.hdslb.com/bfs/garb/open/e2936e42882d0f14ff165dbc8b01a3d6acdc4996.png",
+      "https://i0.hdslb.com/bfs/garb/open/814a49acd8553df3b6bbf096a604b067a64e0475.png",
+      "https://i0.hdslb.com/bfs/garb/open/2be7a412c38b096cc449c43b48bde447c4d420c5.png"
+    ],
+    "customColors": {
+      "maskedBackgroundColor": "rgba(0, 0, 0, 0.60)",
+      "playlistDrawerBackgroundColor": "green",
+      "playlistDrawerBackgroundColorTransparent": "rgba(0, 255, 0, 0.35)",
+      "progressThumbTintColor": "rgb(235, 235, 0)",
+      "progressMinimumTrackTintColor": "rgb(235, 235, 0)",
+      "progressMaximumTrackTintColor": "#FFFFFF",
+      "btnBackgroundColor": "rgb(72, 71, 58)",
+      "textInputSelectionColor": "green"
+    },
+    "colors": {
+      "primary": "rgb(255, 255, 0)",
+      "onPrimary": "rgb(50, 50, 0)",
+      "primaryContainer": "rgb(73, 73, 0)",
+      "onPrimaryContainer": "rgb(234, 234, 0)",
+      "secondary": "rgb(202, 200, 165)",
+      "onSecondary": "rgb(50, 50, 24)",
+      "secondaryContainer": "rgb(73, 72, 45)",
+      "onSecondaryContainer": "rgb(231, 228, 191)",
+      "tertiary": "rgb(164, 208, 189)",
+      "onTertiary": "rgb(11, 55, 42)",
+      "tertiaryContainer": "rgb(37, 78, 64)",
+      "onTertiaryContainer": "rgb(191, 236, 216)",
+      "error": "rgb(255, 180, 171)",
+      "onError": "rgb(105, 0, 5)",
+      "errorContainer": "rgb(147, 0, 10)",
+      "onErrorContainer": "rgb(255, 180, 171)",
+      "background": "rgba(0,0,0, 0.4)",
+      "onBackground": "rgb(230, 226, 217)",
+      "surface": "rgb(28, 28, 23)",
+      "onSurface": "rgba(235, 235, 0, 1)",
+      "text": "rgb(255, 255, 0)",
+      "surfaceVariant": "rgb(10, 10, 10)",
+      "onSurfaceVariant": "rgb(225, 225, 0)",
+      "outline": "rgb(147, 145, 130)",
+      "outlineVariant": "rgb(72, 71, 58)",
+      "shadow": "rgb(0, 0, 0)",
+      "scrim": "rgb(0, 0, 0)",
+      "inverseSurface": "rgb(230, 226, 217)",
+      "inverseOnSurface": "rgb(49, 49, 43)",
+      "inversePrimary": "rgb(98, 98, 0)",
+      "elevation": {
+        "level0": "transparent",
+        "level1": "rgb(53, 56, 57)",
+        "level2": "rgb(10, 10, 10)",
+        "level3": "rgb(10, 10, 10)",
+        "level4": "rgb(49, 49, 20)",
+        "level5": "rgb(53, 53, 20)"
+      },
+      "surfaceDisabled": "rgba(230, 226, 217, 0.12)",
+      "onSurfaceDisabled": "rgba(230, 226, 217, 0.38)",
+      "backdrop": "rgba(49, 49, 37, 0.4)"
+    }
   }
 ]
