@@ -7,4 +7,4 @@ test('bilicolle', async () => {
   });
   // console.log(content);
   expect(content?.songList[0]?.id).not.toBeNull();
-});
+}, 50000);
