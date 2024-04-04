@@ -41,9 +41,9 @@ const useSplash = (duration = 1000) => {
   return isReady;
 };
 
-export default function App() {
-  const isSplashReady = useSplash(__DEV__ ? 1 : 2500);
-  const isPlayerReady = useSetupPlayer();
+export default function App(appProps: NoxComponent.AppProps) {
+  const isSplashReady = useSplash(__DEV__ || appProps.intentData ? 1 : 2500);
+  const isPlayerReady = useSetupPlayer(appProps);
   const isLandscape = useIsLandscape();
   const PIPMode = useStore(appStore, state => state.pipMode);
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -59,7 +59,6 @@ export default function App() {
 
     // When you launch the closed app from the notification or any other link
     Linking.getInitialURL().then(url => console.log('getInitialURL', url));
-
     return () => {
       subscription.remove();
     };

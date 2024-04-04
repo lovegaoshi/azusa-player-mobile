@@ -10,10 +10,11 @@ import { getCurrentTPQueue, initializePlaybackMode } from '@stores/playingList';
 import useVersionCheck from '@hooks/useVersionCheck';
 import { songlistToTracklist } from '@utils/RNTPUtils';
 import useInitializeStore from '@stores/initializeStores';
+import { INTENT_DATA } from '@enums/Intent';
 
 const { NoxAndroidAutoModule } = NativeModules;
 
-export default () => {
+export default ({ intentData }: NoxComponent.AppProps) => {
   const [playerReady, setPlayerReady] = useState<boolean>(false);
   const { initializeStores } = useInitializeStore();
   const { updateVersion, checkVersion } = useVersionCheck();
@@ -60,7 +61,14 @@ export default () => {
         serviceOptions.lastPlayDuration = 0;
       }
       await AdditionalPlaybackService(serviceOptions);
-      await TrackPlayer.pause();
+      switch (intentData) {
+        case INTENT_DATA.resume:
+          await TrackPlayer.play();
+          break;
+        case INTENT_DATA.playAll:
+        default:
+          await TrackPlayer.pause();
+      }
       if (Platform.OS === 'android') {
         NoxAndroidAutoModule.disableShowWhenLocked();
       }
