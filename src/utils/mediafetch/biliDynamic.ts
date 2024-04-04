@@ -2,6 +2,7 @@ import { logger } from '../Logger';
 import SongTS from '@objects/Song';
 import bfetch from '@utils/BiliFetch';
 import { BiliMusicTid, SOURCE } from '@enums/MediaFetch';
+import { biliApiLimiter } from './throttle';
 
 const API =
   'https://api.bilibili.com/x/web-interface/dynamic/region?rid={rid}&ps=50&pn={pn}';
@@ -25,8 +26,8 @@ const dynamicToSong = (data: any) =>
 export const fetchDynamic = async (rid = '3', page = 1) => {
   logger.info(`[biliDynamic] calling fetchDynamic of ${rid}`);
   try {
-    const res = await bfetch(
-      API.replace('{rid}', rid).replace('{pn}', page.toString())
+    const res = await biliApiLimiter.schedule(() =>
+      bfetch(API.replace('{rid}', rid).replace('{pn}', page.toString()))
     );
     const json = await res.json();
     const results = {} as { [key: number]: NoxMedia.Song[] };
