@@ -2,9 +2,14 @@ import { Platform } from 'react-native';
 import { useEffect } from 'react';
 import TrackPlayer, { Event } from 'react-native-track-player';
 import usePlayback from './usePlayback';
+import { useNoxSetting } from '@stores/useApp';
+import { INTENT_DATA } from '@enums/Intent';
 
 const useAAPlayback = () => {
-  const { buildBrowseTree, playFromMediaId, playFromSearch } = usePlayback();
+  const { buildBrowseTree, playFromMediaId, playFromSearch, shuffleAll } =
+    usePlayback();
+  const intentData = useNoxSetting(state => state.intentData);
+  const setIntentData = useNoxSetting(state => state.setIntentData);
 
   useEffect(() => {
     if (Platform.OS !== 'android') return () => null;
@@ -18,6 +23,14 @@ const useAAPlayback = () => {
       console.log('Event.RemoteSkip', event);
       TrackPlayer.skip(event.index).then(() => TrackPlayer.play());
     });
+
+    // HACK: for some reason I decided to register AA related listeners here.
+    // I need the intent shuffleall handling somewhere it only runs once, which
+    // is here... but this looks BAD.
+    if (intentData === INTENT_DATA.playAll) {
+      shuffleAll();
+      setIntentData();
+    }
 
     return () => {
       listener.remove();

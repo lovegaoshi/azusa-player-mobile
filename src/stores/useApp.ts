@@ -23,8 +23,12 @@ import { getABRepeatRaw } from './appStore';
 import { setPlayingList, setPlayingIndex } from '@stores/playingList';
 import DummyLyricDetail from '../objects/LyricDetail';
 import { MUSICFREE } from '../utils/mediafetch/musicfree';
+import { INTENT_DATA } from '@enums/Intent';
 
 interface NoxSetting {
+  intentData?: INTENT_DATA;
+  setIntentData: (val?: INTENT_DATA) => void;
+
   searchOption: SEARCH_OPTIONS | MUSICFREE;
   setSearchOption: (val: SEARCH_OPTIONS | MUSICFREE) => void;
 
@@ -126,6 +130,8 @@ interface NoxSetting {
  * as well as saving and loading states to/from asyncStorage.
  */
 export const useNoxSetting = create<NoxSetting>((set, get) => ({
+  setIntentData: intentData => set({ intentData }),
+
   searchOption: SEARCH_OPTIONS.BILIBILI,
   setSearchOption: v => {
     set({ searchOption: v });
