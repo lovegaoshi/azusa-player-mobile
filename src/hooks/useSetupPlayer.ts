@@ -11,7 +11,7 @@ import useVersionCheck from '@hooks/useVersionCheck';
 import { songlistToTracklist } from '@utils/RNTPUtils';
 import useInitializeStore from '@stores/initializeStores';
 import { INTENT_DATA } from '@enums/Intent';
-import usePlayback from '@hooks/usePlayback';
+import { useNoxSetting } from '@stores/useApp';
 
 const { NoxAndroidAutoModule } = NativeModules;
 
@@ -19,8 +19,8 @@ export default ({ intentData }: NoxComponent.AppProps) => {
   const [playerReady, setPlayerReady] = useState<boolean>(false);
   const { initializeStores } = useInitializeStore();
   const { updateVersion, checkVersion } = useVersionCheck();
+  const setIntentData = useNoxSetting(state => state.setIntentData);
   const { i18n } = useTranslation();
-  const { shuffleAll } = usePlayback();
 
   useEffect(() => {
     let unmounted = false;
@@ -63,14 +63,13 @@ export default ({ intentData }: NoxComponent.AppProps) => {
         serviceOptions.lastPlayDuration = 0;
       }
       await AdditionalPlaybackService(serviceOptions);
+      setIntentData(intentData);
       switch (intentData) {
         case INTENT_DATA.resume:
           await TrackPlayer.play();
           break;
         case INTENT_DATA.playAll:
-          await shuffleAll();
-          await TrackPlayer.play();
-          break;
+        // this hook cannot use usePlayback bc of rerendering.
         default:
           await TrackPlayer.pause();
       }
