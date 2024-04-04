@@ -5,7 +5,11 @@ import { fetchDynamic } from '@utils/mediafetch/biliDynamic';
 import { fetchRanking } from '@utils/mediafetch/biliRanking';
 import { styles } from '@components/style';
 
-const BiliSongCatsCard = ({ songs = [] }: { songs?: NoxMedia.Song[] }) => {
+interface BiliCatSongs {
+  [key: number]: NoxMedia.Song[];
+}
+
+const BiliSongCatsCard = ({ songs = {} }: { songs?: BiliCatSongs }) => {
   return (
     <View>
       <ScrollView
@@ -27,12 +31,8 @@ const BiliSongCatsCard = ({ songs = [] }: { songs?: NoxMedia.Song[] }) => {
 };
 
 export default () => {
-  const [biliDynamic, setBiliDynamic] = React.useState<{
-    [key: number]: NoxMedia.Song[];
-  }>({});
-  const [biliRanking, setBiliRanking] = React.useState<{
-    [key: number]: NoxMedia.Song[];
-  }>({});
+  const [biliDynamic, setBiliDynamic] = React.useState<BiliCatSongs>({});
+  const [biliRanking, setBiliRanking] = React.useState<BiliCatSongs>({});
   const [loading, setLoading] = React.useState(true);
 
   React.useEffect(() => {

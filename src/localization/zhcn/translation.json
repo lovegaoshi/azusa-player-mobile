@@ -1,5 +1,14 @@
 {
   "_comment": "src/localization/en/translation.json",
+  "BiliCategory": {
+    "3": "音乐",
+    "28": "原创音乐",
+    "31": "翻唱",
+    "30": "Vocaloid",
+    "59": "演奏",
+    "193": "MV",
+    "29": "音乐现场"
+  },
   "appDrawer": {
     "homeScreenName": "音乐",
     "exploreScreenName": "发现",
