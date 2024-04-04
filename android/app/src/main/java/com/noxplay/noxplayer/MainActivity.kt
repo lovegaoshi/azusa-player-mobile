@@ -33,17 +33,31 @@ class MainActivity : ReactActivity() {
         return "azusa-player-mobile"
     }
 
+    class APMReactActivityDelegate(activity: ReactActivity, componentName: String):
+        DefaultReactActivityDelegate(activity, componentName, fabricEnabled) {
+            private val mActivity = activity
+
+            override fun onCreate(savedInstanceState: Bundle?) {
+              super.onCreate(savedInstanceState)
+            }
+
+            override fun getLaunchOptions(): Bundle? {
+              val launchOptions = super.getLaunchOptions() ?: Bundle()
+              launchOptions.putString("intentData", mActivity.intent.dataString)
+              return launchOptions
+            }
+        }
+
     /**
      * Returns the instance of the [ReactActivityDelegate]. Here we use a util class [ ] which allows you to easily enable Fabric and Concurrent React
      * (aka React 18) with two boolean flags.
      */
     override fun createReactActivityDelegate(): ReactActivityDelegate {
         return ReactActivityDelegateWrapper(
-            this, BuildConfig.IS_NEW_ARCHITECTURE_ENABLED, DefaultReactActivityDelegate(
-                this,
-            mainComponentName,  // If you opted-in for the New Architecture, we enable the Fabric Renderer.
-                fabricEnabled
-            )
+            this, BuildConfig.IS_NEW_ARCHITECTURE_ENABLED, APMReactActivityDelegate(
+            this,
+                   mainComponentName,  // If you opted-in for the New Architecture, we enable the Fabric Renderer.
+                )
         )
     }
 

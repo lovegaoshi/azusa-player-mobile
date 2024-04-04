@@ -1,0 +1,28 @@
+<shortcuts xmlns:android="http://schemas.android.com/apk/res/android">
+  <shortcut
+    android:shortcutId="resume"
+    android:enabled="true"
+    android:icon="@drawable/media3_icon_circular_play"
+    android:shortcutShortLabel="@string/resume"
+    android:shortcutLongLabel="@string/resume">
+    <intent
+      android:action="android.intent.action.VIEW"
+      android:data="resume"
+      android:targetPackage="com.noxplay.noxplayer"
+      android:targetClass="com.noxplay.noxplayer.MainActivity" />
+  </shortcut>
+  <shortcut
+    android:shortcutId="play_all"
+    android:enabled="true"
+    android:icon="@drawable/media3_icon_circular_play"
+    android:shortcutShortLabel="@string/play_all"
+    android:shortcutLongLabel="@string/play_all">
+    <intent
+      android:action="android.intent.action.VIEW"
+      android:data="play_all"
+      android:targetPackage="com.noxplay.noxplayer"
+      android:targetClass="com.noxplay.noxplayer.MainActivity" />
+  </shortcut>
+  <!-- Specify more shortcuts here. -->
+</shortcuts>
+
