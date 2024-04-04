@@ -46,6 +46,8 @@ export default () => {
       updateVersion(storedPlayerSetting);
       checkVersion(true, storedPlayerSetting);
       if (unmounted) return;
+      setPlayerReady(true);
+      if (unmounted) return;
       const currentQueue = getCurrentTPQueue();
       const findCurrentSong = currentQueue.find(
         val => val.id === currentPlayingID
@@ -63,8 +65,6 @@ export default () => {
         NoxAndroidAutoModule.disableShowWhenLocked();
       }
     })();
-    setPlayerReady(true);
-    if (unmounted) return;
     return () => {
       unmounted = true;
     };

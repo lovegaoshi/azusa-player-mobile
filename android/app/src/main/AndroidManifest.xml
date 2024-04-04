@@ -27,7 +27,7 @@
             android:supportsPictureInPicture="true"
             android:resizeableActivity="true"
             android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|screenSize|smallestScreenSize|uiMode"
-          android:launchMode="singleTask"
+            android:launchMode="singleTask"
             android:windowSoftInputMode="adjustResize"
             android:networkSecurityConfig="@xml/network_security_config"
             android:exported="true">
@@ -44,6 +44,8 @@
               <action android:name="android.media.action.MEDIA_PLAY_FROM_SEARCH" />
               <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
+            <meta-data android:name="android.app.shortcuts"
+              android:resource="@xml/shortcuts" />
         </activity>
         <activity
             android:name="net.openid.appauth.RedirectUriReceiverActivity"

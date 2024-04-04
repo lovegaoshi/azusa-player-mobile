@@ -1,0 +1,19 @@
+<shortcuts xmlns:android="http://schemas.android.com/apk/res/android">
+  <shortcut
+    android:shortcutId="compose"
+    android:enabled="true"
+    android:icon="@drawable/media3_icon_circular_play"
+    android:shortcutShortLabel="@string/resume"
+    android:shortcutLongLabel="@string/resume">
+    <intent
+      android:action="android.intent.action.VIEW"
+      android:data="resume"
+      android:targetPackage="com.noxplay.noxplayer"
+      android:targetClass="com.noxplay.noxplayer.MainActivity" />
+    <!-- If your shortcut is associated with multiple intents, include them
+         here. The last intent in the list determines what the user sees when
+         they launch this shortcut. -->
+  </shortcut>
+  <!-- Specify more shortcuts here. -->
+</shortcuts>
+
