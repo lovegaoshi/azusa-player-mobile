@@ -1,7 +1,7 @@
 import { logger } from '../Logger';
 import SongTS from '@objects/Song';
 import bfetch from '@utils/BiliFetch';
-import { SOURCE } from '@enums/MediaFetch';
+import { BiliMusicTid, SOURCE } from '@enums/MediaFetch';
 
 const API =
   'https://api.bilibili.com/x/web-interface/dynamic/region?rid={rid}&ps=50&pn={pn}';
@@ -31,6 +31,7 @@ export const fetchDynamic = async (rid = '3', page = 1) => {
     const json = await res.json();
     const results = {} as { [key: number]: NoxMedia.Song[] };
     json.data.archives.forEach((v: any) => {
+      if (!BiliMusicTid.includes(v.tid)) return;
       if (results[v.tid]) {
         results[v.tid].push(dynamicToSong(v));
       } else {

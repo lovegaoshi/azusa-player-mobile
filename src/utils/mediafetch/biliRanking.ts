@@ -1,7 +1,7 @@
 import { logger } from '../Logger';
 import SongTS from '@objects/Song';
 import bfetch from '@utils/BiliFetch';
-import { SOURCE } from '@enums/MediaFetch';
+import { SOURCE, BiliMusicTid } from '@enums/MediaFetch';
 
 const API = 'https://api.bilibili.com/x/web-interface/ranking/v2?rid={rid}';
 
@@ -28,6 +28,7 @@ export const fetchRanking = async (rid = '3') => {
     const json = await res.json();
     const results = {} as { [key: number]: NoxMedia.Song[] };
     json.data.list.forEach((v: any) => {
+      if (!BiliMusicTid.includes(v.tid)) return;
       if (results[v.tid]) {
         results[v.tid].push(rankingToSong(v));
       } else {

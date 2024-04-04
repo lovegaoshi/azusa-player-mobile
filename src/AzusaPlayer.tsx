@@ -28,7 +28,7 @@ import { useNoxSetting } from '@stores/useApp';
 import PlaylistDrawer from './components/playlists/View';
 import { ViewEnum } from './enums/View';
 import Settings from './components/setting/View';
-import DummySettings from './components/setting/DummySettings';
+import Explore from './components/explore/View';
 import './localization/i18n';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { ICONS } from '@enums/Icons';
@@ -131,7 +131,7 @@ const AzusaPlayer = () => {
                 drawerIcon: () => <IconButton icon={ICONS.exploreScreen} />,
                 title: String(t('appDrawer.exploreScreenName')),
               }}
-              component={DummySettings}
+              component={Explore}
             />
             <Drawer.Screen
               name={ViewEnum.SETTINGS}
