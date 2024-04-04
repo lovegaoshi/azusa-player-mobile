@@ -111,13 +111,10 @@ const regexFetch = async ({
 
 const resolveURL = () => undefined;
 
-const refreshSong = (song: NoxMedia.Song) => song;
-
 export default {
   // https://www.bilibili.com/audio/am10624
   regexSearchMatch: /bilibili\.com\/audio\/am(\d+)/,
   regexFetch,
   regexResolveURLMatch: /^biliaudio-/,
   resolveURL,
-  refreshSong,
 };

@@ -137,12 +137,9 @@ const refresh = async ({ v, fastSearch, cookiedSearch }: RefreshProps) => {
 
 const resolveURL = () => undefined;
 
-const refreshSong = (song: NoxMedia.Song) => song;
-
 export default {
   regexSearchMatch: /space.bilibili\.com\/(\d+)\/video/,
   regexFetch,
   regexResolveURLMatch: /^null-/,
   resolveURL,
-  refreshSong,
 };
