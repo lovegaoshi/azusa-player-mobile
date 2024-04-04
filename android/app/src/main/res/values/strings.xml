@@ -2,5 +2,5 @@
     <string name="app_name">APM</string>
     <string name="resume">Resume</string>
     <string name="play_all">Play All</string>
-    <string moduleConfig="true" name="CodePushDeploymentKey">lQswnrvwmZ4nr7VybQTCvJhsk0LsmOo7BD7hk</string>
+    <string moduleConfig="true" name="CodePushDeploymentKey" translatable="false">lQswnrvwmZ4nr7VybQTCvJhsk0LsmOo7BD7hk</string>
 </resources>

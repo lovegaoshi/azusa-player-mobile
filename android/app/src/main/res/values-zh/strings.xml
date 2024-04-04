@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">APM</string>
+    <string name="resume">继续播放</string>
+    <string name="play_all">全部播放</string>
+</resources>
