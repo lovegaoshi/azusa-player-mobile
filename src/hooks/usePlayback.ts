@@ -12,7 +12,7 @@ import {
 } from '@utils/RNTPUtils';
 import { NoxRepeatMode } from '@enums/RepeatMode';
 import noxPlayingList, { setPlayingIndex } from '@stores/playingList';
-import noxCache from '@utils/Cache';
+import noxCache, { noxCacheKey } from '@utils/Cache';
 import useDataSaver from './useDataSaver';
 
 const PLAYLIST_MEDIAID = 'playlist-';
@@ -37,8 +37,12 @@ const dataSaverPlaylistWrapper = (datasave = true) => {
 const usePlayback = () => {
   const { t } = useTranslation();
   const currentPlayingList = useNoxSetting(state => state.currentPlayingList);
+  const playlistIds = useNoxSetting(state => state.playlistIds);
   const playlists = useNoxSetting(state => state.playlists);
   const currentPlayingId = useNoxSetting(state => state.currentPlayingId);
+  const searchPlaylist = useNoxSetting(state => state.searchPlaylist);
+  const setCurrentPlaylist = useNoxSetting(state => state.setCurrentPlaylist);
+  const setSearchPlaylist = useNoxSetting(state => state.setSearchPlaylist);
   const setCurrentPlayingId = useNoxSetting(state => state.setCurrentPlayingId);
   const setCurrentPlayingList = useNoxSetting(
     state => state.setCurrentPlayingList
@@ -77,6 +81,28 @@ const usePlayback = () => {
       await playSongUninterrupted(song);
     }
     clearPlaylistUninterrupted();
+  };
+
+  const shuffleAll = async () => {
+    console.log(playlistIds, playlists);
+    let allSongs = playlistIds.reduce(
+      (acc, curr) => acc.concat(playlists[curr].songList),
+      [] as NoxMedia.Song[]
+    );
+    if (isDataSaving) {
+      const cachedSongs = Array.from(noxCache.noxMediaCache.cache.keys());
+      allSongs = allSongs.filter(song =>
+        cachedSongs.includes(noxCacheKey(song))
+      );
+    }
+    const newSearchPlaylist = {
+      ...searchPlaylist,
+      title: String(t('PlaylistOperations.all')),
+      songList: allSongs,
+    };
+    setSearchPlaylist(newSearchPlaylist);
+    await playFromPlaylist({ playlist: newSearchPlaylist });
+    setCurrentPlaylist(newSearchPlaylist);
   };
 
   const playFromMediaId = (mediaId: string) => {
@@ -185,7 +211,13 @@ const usePlayback = () => {
     });
   };
 
-  return { buildBrowseTree, playFromMediaId, playFromSearch, playFromPlaylist };
+  return {
+    buildBrowseTree,
+    playFromMediaId,
+    playFromSearch,
+    playFromPlaylist,
+    shuffleAll,
+  };
 };
 export default usePlayback;
 

@@ -11,6 +11,7 @@ import useVersionCheck from '@hooks/useVersionCheck';
 import { songlistToTracklist } from '@utils/RNTPUtils';
 import useInitializeStore from '@stores/initializeStores';
 import { INTENT_DATA } from '@enums/Intent';
+import usePlayback from '@hooks/usePlayback';
 
 const { NoxAndroidAutoModule } = NativeModules;
 
@@ -19,6 +20,7 @@ export default ({ intentData }: NoxComponent.AppProps) => {
   const { initializeStores } = useInitializeStore();
   const { updateVersion, checkVersion } = useVersionCheck();
   const { i18n } = useTranslation();
+  const { shuffleAll } = usePlayback();
 
   useEffect(() => {
     let unmounted = false;
@@ -66,6 +68,9 @@ export default ({ intentData }: NoxComponent.AppProps) => {
           await TrackPlayer.play();
           break;
         case INTENT_DATA.playAll:
+          await shuffleAll();
+          await TrackPlayer.play();
+          break;
         default:
           await TrackPlayer.pause();
       }
