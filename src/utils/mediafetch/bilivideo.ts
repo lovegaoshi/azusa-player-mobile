@@ -184,7 +184,8 @@ const extractResponseJson = (json: any, field: string) => {
 
   switch (field) {
     case FieldEnum.AudioUrl:
-      if (!json.data) throw Error('[extractResponseJson] no audio url');
+      if (!json.data)
+        throw Error(`[extractResponseJson] no audio url from ${json}`);
       if (json.data.flac?.audio) {
         return getBestBitrate(json.data.dash.flac.audio).baseUrl;
       } else if (json.data.dolby?.audio) {
@@ -192,7 +193,7 @@ const extractResponseJson = (json: any, field: string) => {
       }
       if (json.data.dash) return getBestBitrate(json.data.dash.audio).baseUrl;
       if (json.data.durl) return json.data.durl[0].url;
-      throw Error('[extractResponseJson] no audio url');
+      throw Error(`[extractResponseJson] no audio url from ${json}`);
     case FieldEnum.VideoUrl:
       return json.data.dash.video[0].baseUrl;
     case FieldEnum.CID:
@@ -200,7 +201,7 @@ const extractResponseJson = (json: any, field: string) => {
     case FieldEnum.AudioInfo:
       return {};
     default:
-      throw new Error(`invalid field type: ${field} to parse JSON response`);
+      throw new Error(`invalid field type: ${field} to parse JSON response from ${json}`);
   }
 };
 
