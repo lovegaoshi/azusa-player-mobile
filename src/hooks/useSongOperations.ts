@@ -1,5 +1,4 @@
 import { useNoxSetting } from '@stores/useApp';
-import { CIDPREFIX } from '@utils/mediafetch/ytbvideo';
 import { logger } from '@utils/Logger';
 import { SOURCE } from '@enums/MediaFetch';
 
@@ -10,16 +9,22 @@ const useSongOperations = () => {
   const setSongMenuVisible = useNoxSetting(state => state.setSongMenuVisible);
 
   const startRadio = (song: NoxMedia.Song) => {
-    if (song.id?.startsWith(CIDPREFIX)) {
-      setExternalSearchText(`youtu.be/list=RD${song.bvid}`);
-    } else {
-      logger.warn(`[startRadio] ${song.bvid} is not a youtube video`);
+    switch (song.source) {
+      case SOURCE.ytbvideo:
+        setExternalSearchText(`youtu.be/${song.bvid}`);
+        break;
+      case SOURCE.bilivideo:
+        setExternalSearchText(`bilibili.com/video/similarvideo/${song.bvid}`);
+      default:
+        logger.warn(
+          `[startRadio] ${song.bvid} deos not have a start radio handle.`
+        );
     }
     setSongMenuVisible(false);
   };
 
   const radioAvailable = (song?: NoxMedia.Song) =>
-    song?.source === SOURCE.ytbvideo || song?.id?.startsWith(CIDPREFIX);
+    [SOURCE.ytbvideo, SOURCE.bilivideo].includes(song?.source as SOURCE);
 
   return { startRadio, radioAvailable };
 };
