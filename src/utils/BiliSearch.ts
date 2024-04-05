@@ -2,6 +2,7 @@ import { logger } from './Logger';
 
 import { SEARCH_OPTIONS } from '@enums/Storage';
 import steriatkFetch from './mediafetch/steriatk';
+import biliVideoSimilarFetch from './mediafetch/biliVideoSimilar';
 import biliBangumiFetch from './mediafetch/biliBangumi';
 import biliAudioAMFetch from './mediafetch/biliAudioAM';
 import biliAudioColleFetch from './mediafetch/biliAudioColle';
@@ -133,6 +134,10 @@ interface ReExtraction<T> {
 }
 
 const reExtractions: ReExtraction<NoxNetwork.NoxRegexFetch>[] = [
+  {
+    match: biliVideoSimilarFetch.regexSearchMatch,
+    fetch: biliVideoSimilarFetch.regexFetch,
+  },
   {
     match: localFetch.regexSearchMatch,
     fetch: localFetch.regexFetch,

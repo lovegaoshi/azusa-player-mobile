@@ -63,12 +63,9 @@ const regexFetch = async ({
 
 const resolveURL = () => undefined;
 
-const refreshSong = (song: NoxMedia.Song) => song;
-
 export default {
   regexSearchMatch: /space.bilibili\.com\/(\d+)\/video/,
   regexFetch,
   regexResolveURLMatch: /^null-/,
   resolveURL,
-  refreshSong,
 };

@@ -81,12 +81,9 @@ const regexFetch = async ({
 
 const resolveURL = () => undefined;
 
-const refreshSong = (song: NoxMedia.Song) => song;
-
 export default {
   regexSearchMatch: /av(\d+)/,
   regexFetch,
   regexResolveURLMatch: /^null-/,
   resolveURL,
-  refreshSong,
 };

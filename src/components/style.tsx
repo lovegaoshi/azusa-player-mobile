@@ -76,6 +76,7 @@ export const createStyle = (
 };
 
 export const styles = StyleSheet.create({
+  flex: { flex: 1 },
   screenContainer: {
     flex: 1,
     backgroundColor: 'white',

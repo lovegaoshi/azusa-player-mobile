@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { BackHandler, SafeAreaView, StyleSheet } from 'react-native';
+import { BackHandler, SafeAreaView } from 'react-native';
 import { Button } from 'react-native-paper';
 import { WebView } from 'react-native-webview';
 import { useFocusEffect } from '@react-navigation/native';

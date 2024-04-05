@@ -100,13 +100,10 @@ const regexFetch = async ({
 
 const resolveURL = () => undefined;
 
-const refreshSong = (song: NoxMedia.Song) => song;
-
 export default {
   // https://www.bilibili.com/audio/similarsongs/3680653
   regexSearchMatch: /bilibili\.com\/audio\/similarsongs\/(\d+)/,
   regexFetch,
   regexResolveURLMatch: /^biliaudio-/,
   resolveURL,
-  refreshSong,
 };

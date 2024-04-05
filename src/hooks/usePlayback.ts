@@ -83,6 +83,21 @@ const usePlayback = () => {
     clearPlaylistUninterrupted();
   };
 
+  const playAsSearchList = async ({
+    songs,
+    title = String(t('PlaylistsDrawer.SearchListTitle')),
+    song,
+  }: PlayAsSearchList) => {
+    const newSearchPlaylist = {
+      ...searchPlaylist,
+      title,
+      songList: songs,
+    };
+    setSearchPlaylist(newSearchPlaylist);
+    await playFromPlaylist({ playlist: newSearchPlaylist, song });
+    setCurrentPlaylist(newSearchPlaylist);
+  };
+
   const shuffleAll = async () => {
     console.log(playlistIds, playlists);
     let allSongs = playlistIds.reduce(
@@ -95,14 +110,10 @@ const usePlayback = () => {
         cachedSongs.includes(noxCacheKey(song))
       );
     }
-    const newSearchPlaylist = {
-      ...searchPlaylist,
+    playAsSearchList({
+      songs: allSongs,
       title: String(t('PlaylistOperations.all')),
-      songList: allSongs,
-    };
-    setSearchPlaylist(newSearchPlaylist);
-    await playFromPlaylist({ playlist: newSearchPlaylist });
-    setCurrentPlaylist(newSearchPlaylist);
+    });
   };
 
   const playFromMediaId = (mediaId: string) => {
@@ -217,6 +228,7 @@ const usePlayback = () => {
     playFromSearch,
     playFromPlaylist,
     shuffleAll,
+    playAsSearchList,
   };
 };
 export default usePlayback;
@@ -226,4 +238,10 @@ interface PlayFromPlaylist {
   song?: NoxMedia.Song;
   interruption?: boolean;
   playlistParser?: (playlist: NoxMedia.Playlist) => NoxMedia.Playlist;
+}
+
+interface PlayAsSearchList {
+  songs: NoxMedia.Song[];
+  title?: string;
+  song?: NoxMedia.Song;
 }
