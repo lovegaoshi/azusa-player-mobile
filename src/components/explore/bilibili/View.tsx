@@ -5,16 +5,19 @@ import {
   Dimensions,
   FlatList,
   TouchableOpacity,
+  RefreshControl,
 } from 'react-native';
 import { Text } from 'react-native-paper';
 import { Image } from 'expo-image';
 import { useTranslation } from 'react-i18next';
+import { useNavigation } from '@react-navigation/native';
 
 import { fetchDynamic } from '@utils/mediafetch/biliDynamic';
 import { fetchRanking } from '@utils/mediafetch/biliRanking';
 import { styles } from '@components/style';
 import { useNoxSetting } from '@stores/useApp';
 import usePlayback from '@hooks/usePlayback';
+import { ViewEnum } from '@enums/View';
 
 interface BiliCatSongs {
   [key: number]: NoxMedia.Song[];
@@ -29,8 +32,11 @@ const BiliSongCard = ({
   songs = [],
   category = 'Dummy Category',
 }: BiliSongCardProp) => {
+  const navigationGlobal = useNavigation();
   const playerStyle = useNoxSetting(state => state.playerStyle);
   const { playAsSearchList } = usePlayback();
+
+  const fontColor = playerStyle.metaData.darkTheme ? 'white' : 'black';
 
   return (
     <View
@@ -41,7 +47,7 @@ const BiliSongCard = ({
         paddingLeft: 5,
       }}
     >
-      <Text style={{ fontSize: 20, color: 'white' }}>{category}</Text>
+      <Text style={{ fontSize: 20, color: fontColor }}>{category}</Text>
       <FlatList
         showsVerticalScrollIndicator={false}
         data={songs}
@@ -49,7 +55,10 @@ const BiliSongCard = ({
           <View style={{ paddingVertical: 10 }}>
             <TouchableOpacity
               style={{ height: 70, flexDirection: 'row' }}
-              onPress={() => playAsSearchList({ songs, song: item })}
+              onPress={() => {
+                navigationGlobal.navigate(ViewEnum.PLAYER_PLAYLIST as never);
+                playAsSearchList({ songs, song: item });
+              }}
             >
               <Image
                 style={{ width: 70, height: 70, borderRadius: 5 }}
@@ -58,7 +67,7 @@ const BiliSongCard = ({
               <View style={{ flex: 1 }}>
                 <Text
                   style={{
-                    color: playerStyle.metaData.darkTheme ? 'white' : 'black',
+                    color: fontColor,
                     paddingLeft: 5,
                     flex: 1,
                   }}
@@ -88,12 +97,15 @@ const BiliSongCatsCard = ({ songs = {} }: { songs?: BiliCatSongs }) => {
 
   return (
     <View>
-      <Text style={{ fontSize: 20 }}>BiliCards</Text>
+      <Text style={{ fontSize: 20, paddingLeft: 5, paddingBottom: 10 }}>
+        {t('BiliCategory.ranking')}
+      </Text>
       <ScrollView
         horizontal
         disableIntervalMomentum
         snapToInterval={Dimensions.get('window').width * 0.8}
         showsVerticalScrollIndicator={false}
+        showsHorizontalScrollIndicator={false}
       >
         {Object.keys(songs).map(k => (
           <BiliSongCard
@@ -111,18 +123,23 @@ const BiliSongCatsCard = ({ songs = {} }: { songs?: BiliCatSongs }) => {
 export default () => {
   const [biliDynamic, setBiliDynamic] = React.useState<BiliCatSongs>({});
   const [biliRanking, setBiliRanking] = React.useState<BiliCatSongs>({});
+  const [refreshing, setRefreshing] = React.useState(false);
   const [loading, setLoading] = React.useState(true);
 
+  const initData = async () =>
+    Promise.all([
+      fetchRanking().then(setBiliRanking),
+      // fetchDynamic().then(setBiliDynamic),
+    ]);
+
+  const onRefresh = React.useCallback(() => {
+    setRefreshing(true);
+    initData().then(() => setRefreshing(false));
+  }, []);
+
   React.useEffect(() => {
-    const init = async () => {
-      if (!loading) return;
-      await Promise.all([
-        fetchRanking().then(setBiliRanking),
-        // fetchDynamic().then(setBiliDynamic),
-      ]);
-      setLoading(false);
-    };
-    init();
+    if (!loading) return;
+    initData().then(() => setLoading(false));
   }, []);
 
   if (loading) {
@@ -134,7 +151,12 @@ export default () => {
   }
 
   return (
-    <ScrollView style={styles.flex}>
+    <ScrollView
+      style={styles.flex}
+      refreshControl={
+        <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+      }
+    >
       <Text style={{ paddingHorizontal: 5, fontSize: 20 }}>
         Bilibili experimental discover page
       </Text>

@@ -1,6 +1,7 @@
 {
   "_comment": "src/localization/en/translation.json",
   "BiliCategory": {
+    "ranking": "b站音乐区排行榜",
     "3": "音乐",
     "28": "原创音乐",
     "31": "翻唱",
