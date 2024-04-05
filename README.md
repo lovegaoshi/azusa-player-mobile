@@ -79,11 +79,9 @@
 <img alt="GitHub all releases" src="https://github.com/lovegaoshi/azusa-player-mobile/blob/3958211a07617d8e15e4be56da984dbd53d7e9fb/docs/docs/usage-tutorial/images/Screenshot_20230606_143018_APM.jpg" width=270>
 </p>
 
-APM 支持在WSA （Windows Subsystem for Android）下运行，有横屏适配！内存占用3GB，专为买了64GB内存不知道怎么用的你。
+APM 有横屏适配！
 
 <p align="center"><a href="https://github.com/lovegaoshi/azusa-player-mobile"><img src="https://github.com/lovegaoshi/azusa-player-mobile/blob/a89c26ac561a9e6431066e6c0c79cb689e9f19b4/docs/docs/usage-tutorial/images/wsa-landscape.png"></a></p>
-
-<p align="center"><a href="https://github.com/lovegaoshi/azusa-player-mobile"><img src="https://github.com/lovegaoshi/azusa-player-mobile/blob/79491d45b00b98868fd343fe35811e6466d417e0/docs/docs/usage-tutorial/images/wsa-portrait.png"></a></p>
 
 ## 开发
 
