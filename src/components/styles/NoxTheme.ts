@@ -9,6 +9,17 @@ export default {
   },
 
   gifs: [
+    'https://i0.hdslb.com/bfs/garb/8d47d54e44efcfd3e54ea804b03da64c19d1eee8.png',
+    'https://i0.hdslb.com/bfs/garb/08ac2d7f8e9e4ada2f35723ba25b621a6db8d434.png',
+    'https://i0.hdslb.com/bfs/garb/0bbf27a60a7a0efb1496630ca2808b6a59c2b3b5.png',
+    'https://i0.hdslb.com/bfs/garb/ac4a42f8c7135c94ba35235b8dac32af07ce6441.png',
+    'https://i0.hdslb.com/bfs/garb/28707cfda1f2eafb33c37960906e42aa0b3e4d58.png',
+    'https://i0.hdslb.com/bfs/garb/6ad88aca3c9f23d5beac2626e1db590c2f94b14d.png',
+    'https://i0.hdslb.com/bfs/garb/63c5bb0f871f14215f4a45cb7e36fe2cd48acac7.png',
+    'https://i0.hdslb.com/bfs/garb/55f2de6746d2bb076a927448119bc24829ec751b.png',
+    'https://i0.hdslb.com/bfs/garb/2d78c6a1f24bec5c1449363cc822f0a9c77a847a.png',
+    'https://i0.hdslb.com/bfs/garb/180790bd980001decc736891e765664ea32dd6c8.png',
+    'https://i0.hdslb.com/bfs/garb/359953d7e833bc72af871b813742954eca37d986.png',
     'https://i0.hdslb.com/bfs/new_dyn/697096d892a7193d33dbdc0edc5e2c9f5053504.gif',
     'https://i0.hdslb.com/bfs/new_dyn/d9f4d8ea6686304cefff9ce096f0f4135053504.gif',
     'https://i0.hdslb.com/bfs/new_dyn/2e678361788e9fd518fb47bc5ab15e8b5053504.gif',
