@@ -2,7 +2,6 @@ import * as React from 'react';
 import Svg, { Path } from 'react-native-svg';
 import { Image } from 'expo-image';
 import { StyleSheet } from 'react-native';
-import { SEARCH_OPTIONS } from '@enums/Storage';
 
 const ICONS = {
   BILIBILI: () => (
@@ -39,9 +38,9 @@ const ICONS = {
 
 export const getIcon = (icon: string) => {
   switch (icon) {
-    case SEARCH_OPTIONS.BILIBILI:
+    case NoxEnum.Storage.SearchOptions.BILIBILI:
       return ICONS.BILIBILI;
-    case SEARCH_OPTIONS.YOUTUBE:
+    case NoxEnum.Storage.SearchOptions.YOUTUBE:
       return ICONS.YOUTUBE;
     default:
       return ICONS.MUSICFREE;

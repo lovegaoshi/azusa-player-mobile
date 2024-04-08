@@ -1,6 +1,5 @@
 import { logger } from './Logger';
 
-import { SEARCH_OPTIONS } from '@enums/Storage';
 import steriatkFetch from './mediafetch/steriatk';
 import biliVideoSimilarFetch from './mediafetch/biliVideoSimilar';
 import biliBangumiFetch from './mediafetch/biliBangumi';
@@ -45,7 +44,7 @@ interface Props {
   useBiliTag?: boolean;
   fastSearch?: boolean;
   cookiedSearch?: boolean;
-  defaultSearch?: SEARCH_OPTIONS | MUSICFREE;
+  defaultSearch?: NoxEnum.Storage.SearchOptions | MUSICFREE;
 }
 
 export const matchBiliURL = <T>(
@@ -72,7 +71,7 @@ export const searchBiliURLs = async ({
   useBiliTag = false,
   fastSearch = true,
   cookiedSearch = false,
-  defaultSearch = SEARCH_OPTIONS.BILIBILI,
+  defaultSearch = NoxEnum.Storage.SearchOptions.BILIBILI,
 }: Props) => {
   let results: NoxMedia.SearchPlaylist = {
     songList: [],
@@ -98,7 +97,7 @@ export const searchBiliURLs = async ({
       return results;
     } // bilisearchFetch
     switch (defaultSearch) {
-      case SEARCH_OPTIONS.YOUTUBE:
+      case NoxEnum.Storage.SearchOptions.YOUTUBE:
         results = await ytbsearchFetch.regexFetch({
           url: input,
           progressEmitter,

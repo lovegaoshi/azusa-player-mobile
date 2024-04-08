@@ -1,7 +1,5 @@
 // vanilla store of zustand serving playbackServices.
 import { createStore } from 'zustand/vanilla';
-
-import { DEFAULT_SETTING } from '@enums/Storage';
 import { saveSettings, getSettings } from '@utils/ChromeStorage';
 
 interface AppStore {
@@ -10,7 +8,7 @@ interface AppStore {
 }
 
 const playerSettingStore = createStore<AppStore>((set, get) => ({
-  playerSetting: DEFAULT_SETTING,
+  playerSetting: NoxEnum.Storage.DefaultSetting,
   setPlayerSetting: (val: Partial<NoxStorage.PlayerSettingDict>) => {
     const newPlayerSetting = { ...get().playerSetting, ...val };
     set({ playerSetting: newPlayerSetting });

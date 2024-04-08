@@ -1,9 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { ColorSchemeName } from 'react-native';
 
-import { EXPORT_OPTIONS } from '../enums/Sync';
-import { SEARCH_OPTIONS } from '../enums/Storage';
-
 declare global {
   namespace NoxStorage {
     export interface PlayerSettingDict {
@@ -15,7 +12,7 @@ declare global {
       skin: string;
       parseSongName: boolean;
       keepSearchedSongListWhenPlaying: boolean;
-      settingExportLocation: EXPORT_OPTIONS;
+      settingExportLocation: NoxEnum.Sync.ExportOptions;
       personalCloudIP: string;
       personalCloudID: string;
       noxVersion: string;
@@ -61,7 +58,7 @@ declare global {
       language?: string;
       lastPlayDuration: number;
       colorScheme: ColorSchemeName;
-      defaultSearchOptions?: SEARCH_OPTIONS;
+      defaultSearchOptions?: NoxEnum.Storage.SearchOptions;
     }
 
     export interface initializedResults {
