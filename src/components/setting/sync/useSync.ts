@@ -13,6 +13,7 @@ import {
   addImportedPlaylist,
 } from '@utils/ChromeStorage';
 import useInitializeStore from '@stores/initializeStores';
+import { STORAGE_KEYS } from '@enums/Storage';
 
 /**
  * this hook will handle all sync back from file operations. it will
@@ -53,7 +54,7 @@ const useSync = () => {
             onPress: async () => {
               setSyncCheckVisible(true);
               setNoxExtensionContent(
-                parsedContent[NoxEnum.Storage.StorageKeys.MY_FAV_LIST_KEY].map(
+                parsedContent[STORAGE_KEYS.MY_FAV_LIST_KEY].map(
                   (val: any) =>
                     parsedContent[val].title || parsedContent[val].info.title
                 )

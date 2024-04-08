@@ -7,6 +7,7 @@ import { useTranslation } from 'react-i18next';
 
 import { useNoxSetting } from '@stores/useApp';
 import useAAPlayback from '@hooks/useAAPlayback';
+import { ViewEnum } from '@enums/View';
 import { logger } from '@utils/Logger';
 import Playlists from './Playlists';
 
@@ -60,7 +61,7 @@ export default (props: any) => {
     function deepLinkHandler(data: { url: string }) {
       if (data.url === 'trackplayer://notification.click') {
         logger.debug('[Drawer] click from notification; navigate to home');
-        navigation.navigate(NoxEnum.View.View.PLAYER_HOME as never);
+        navigation.navigate(ViewEnum.PLAYER_HOME as never);
       }
     }
 
@@ -78,18 +79,18 @@ export default (props: any) => {
       <BiliCard backgroundURI={playerStyle.biliGarbCard}>
         <RenderDrawerItem
           icon={'home-outline'}
-          view={NoxEnum.View.View.PLAYER_HOME}
+          view={ViewEnum.PLAYER_HOME}
           text={'appDrawer.homeScreenName'}
         />
       </BiliCard>
       <RenderDrawerItem
         icon={'compass'}
-        view={NoxEnum.View.View.EXPORE}
+        view={ViewEnum.EXPORE}
         text={'appDrawer.exploreScreenName'}
       />
       <RenderDrawerItem
         icon={'cog'}
-        view={NoxEnum.View.View.SETTINGS}
+        view={ViewEnum.SETTINGS}
         text={'appDrawer.settingScreenName'}
       />
       <Divider />

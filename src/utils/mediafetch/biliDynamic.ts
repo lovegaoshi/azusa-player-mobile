@@ -1,6 +1,7 @@
 import { logger } from '../Logger';
 import SongTS from '@objects/Song';
 import bfetch from '@utils/BiliFetch';
+import { BiliMusicTid, SOURCE } from '@enums/MediaFetch';
 import { biliApiLimiter } from './throttle';
 
 const API =
@@ -19,7 +20,7 @@ const dynamicToSong = (data: any) =>
     page: 1,
     duration: data.duration,
     album: data.title,
-    source: NoxEnum.MediaFetch.Source.Bilivideo,
+    source: SOURCE.bilivideo,
   });
 
 export const fetchDynamic = async (rid = '3', page = 1) => {
@@ -31,7 +32,7 @@ export const fetchDynamic = async (rid = '3', page = 1) => {
     const json = await res.json();
     const results = {} as { [key: number]: NoxMedia.Song[] };
     json.data.archives.forEach((v: any) => {
-      if (!NoxEnum.MediaFetch.BiliMusicTid.includes(v.tid)) return;
+      if (!BiliMusicTid.includes(v.tid)) return;
       if (results[v.tid]) {
         results[v.tid].push(dynamicToSong(v));
       } else {

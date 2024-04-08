@@ -13,11 +13,12 @@ import { regexFetchProps } from './generic';
 import SongTS from '@objects/Song';
 import { logger } from '../Logger';
 import bfetch from '@utils/BiliFetch';
+import { SOURCE } from '@enums/MediaFetch';
 
 const API = 'https://api.bilibili.com/pgc/view/web/season?ep_id={ep}';
 const API_PLAY =
   'https://api.bilibili.com/pgc/player/web/playurl?cid={cid}&ep_id={ep}';
-const CIDPREFIX = `${NoxEnum.MediaFetch.Source.BiliBangumi}-`;
+const CIDPREFIX = `${SOURCE.biliBangumi}-`;
 
 const fetchPlayUrlPromise = async (cid: string, epid: string) => {
   try {
@@ -54,7 +55,7 @@ const regexFetch = async ({
         page: 1,
         duration: ep.duration,
         album: ep.share_copy,
-        source: NoxEnum.MediaFetch.Source.BiliBangumi,
+        source: SOURCE.biliBangumi,
       })
     ),
   };

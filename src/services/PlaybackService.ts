@@ -10,6 +10,7 @@ import { parseSongR128gain } from '../utils/SongOperations';
 import { initBiliHeartbeat } from '../utils/Bilibili/BiliOperate';
 import { logger } from '../utils/Logger';
 import noxPlayingList, { getNextSong } from '../stores/playingList';
+import { NoxRepeatMode } from '../enums/RepeatMode';
 import playerSettingStore from '@stores/playerSettingStore';
 import appStore, { resetResolvedURL } from '@stores/appStore';
 import {
@@ -151,7 +152,7 @@ export async function PlaybackService() {
           console.error('resolveURL failed', event.track, e);
         }
       }
-      if (getState().playmode === NoxEnum.RNTP.NoxRepeatMode.REPEAT_TRACK) {
+      if (getState().playmode === NoxRepeatMode.REPEAT_TRACK) {
         TrackPlayer.setRepeatMode(RepeatMode.Track);
       }
     }

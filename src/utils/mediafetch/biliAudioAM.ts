@@ -3,6 +3,7 @@
 import { logger } from '../Logger';
 import { regexFetchProps } from './generic';
 import { fetchBiliPaginatedAPI } from './paginatedbili';
+import { SOURCE } from '@enums/MediaFetch';
 import SongTS from '@objects/Song';
 
 /**
@@ -77,7 +78,7 @@ const fetchBiliAudioColleList = async (
     resolveBiliBVID: async v =>
       v.map((data: any) =>
         SongTS({
-          cid: `${NoxEnum.MediaFetch.Source.Biliaudio}-${data.id}`,
+          cid: `${SOURCE.biliaudio}-${data.id}`,
           bvid: data.id,
           name: data.title,
           nameRaw: data.title,
@@ -88,7 +89,7 @@ const fetchBiliAudioColleList = async (
           page: 1,
           duration: data.duration,
           album: data.title,
-          source: NoxEnum.MediaFetch.Source.Biliaudio,
+          source: SOURCE.biliaudio,
         })
       ),
   });

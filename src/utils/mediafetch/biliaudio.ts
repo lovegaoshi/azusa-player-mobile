@@ -13,13 +13,14 @@ import { regexFetchProps } from './generic';
 import SongTS from '@objects/Song';
 import { logger } from '../Logger';
 import bfetch from '@utils/BiliFetch';
+import { SOURCE } from '@enums/MediaFetch';
 import { biliApiLimiter } from './throttle';
 
 const URL_AUDIO_INFO =
   'https://www.bilibili.com/audio/music-service-c/web/song/info?sid={sid}';
 const URL_AUDIO_PLAY_URL =
   'https://www.bilibili.com/audio/music-service-c/web/url?sid={sid}';
-const CIDPREFIX = `${NoxEnum.MediaFetch.Source.Biliaudio}-`;
+const CIDPREFIX = `${SOURCE.biliaudio}-`;
 
 const fetchPlayUrlPromise = async (sid: string) => {
   try {
@@ -56,7 +57,7 @@ export const baFetch = async (auids: string[]) => {
           page: 1,
           duration: data.duration,
           album: data.title,
-          source: NoxEnum.MediaFetch.Source.Biliaudio,
+          source: SOURCE.biliaudio,
         });
       })
     )
