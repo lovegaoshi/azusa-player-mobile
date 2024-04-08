@@ -6,7 +6,6 @@ import { Appearance, ColorSchemeName } from 'react-native';
 import i18n from 'i18next';
 
 import { dummyPlaylist, dummyPlaylistList } from '../objects/Playlist';
-import { NoxRepeatMode } from '../enums/RepeatMode';
 import { PLAYLIST_ENUMS } from '../enums/Playlist';
 import AzusaTheme from '../components/styles/AzusaTheme';
 import { chunkArray as chunkArrayRaw, arrayToObject } from '../utils/Utils';
@@ -328,7 +327,7 @@ export const initPlayerObject =
       ),
       playbackMode: await getItem(
         STORAGE_KEYS.PLAYMODE_KEY,
-        NoxRepeatMode.SHUFFLE
+        NoxEnumRNTP.NoxRepeatMode.SHUFFLE
       ),
       skin: await getItem(STORAGE_KEYS.SKIN, AzusaTheme),
       skins: (await getPlayerSkins()) || [],

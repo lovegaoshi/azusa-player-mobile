@@ -27,3 +27,12 @@ declare namespace NoxEnumMediaFetch {
 
   export const BiliMusicTid = [28, 31, 59, 193, 29];
 }
+
+declare namespace NoxEnumRNTP {
+  export enum NoxRepeatMode {
+    SHUFFLE = 'shuffle',
+    REPEAT = 'repeat',
+    REPEAT_TRACK = 'repeat-once',
+    SUGGEST = 'dice-multiple',
+  }
+}

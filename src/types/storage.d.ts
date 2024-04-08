@@ -2,7 +2,6 @@
 import { ColorSchemeName } from 'react-native';
 
 import { EXPORT_OPTIONS } from '../enums/Sync';
-import { NoxRepeatMode } from '../enums/RepeatMode';
 import { SEARCH_OPTIONS } from '../enums/Storage';
 
 declare global {
@@ -53,7 +52,7 @@ declare global {
       lastPlaylistId: [string, string];
       searchPlaylist: NoxMedia.Playlist;
       favoriPlaylist: NoxMedia.Playlist;
-      playbackMode: NoxRepeatMode;
+      playbackMode: NoxEnumRNTP.NoxRepeatMode;
       skin: NoxTheme.Style;
       skins: any[];
       // site: set-cookie header
@@ -73,7 +72,7 @@ declare global {
       cookies: { [key: string]: string };
       language?: string;
       lastPlayDuration: number;
-      playbackMode: NoxRepeatMode;
+      playbackMode: NoxEnumRNTP.NoxRepeatMode;
     }
 
     export interface R128Dict {

@@ -6,7 +6,6 @@ import { useNoxSetting } from '@stores/useApp';
 import noxPlayingList, { playNextSong } from '@stores/playingList';
 import biliavideo from '@utils/mediafetch/biliavideo';
 import { randomChoice, regexMatchOperations } from '@utils/Utils';
-import { NoxRepeatMode } from '@enums/RepeatMode';
 import { songlistToTracklist } from '@utils/RNTPUtils';
 import appStore from '@stores/appStore';
 import ytbvideoFetch from '@utils/mediafetch/ytbvideo';
@@ -68,7 +67,9 @@ export default () => {
   };
 
   const skipToBiliSuggest = async (next = true) => {
-    if (noxPlayingList.getState().playmode !== NoxRepeatMode.SUGGEST) {
+    if (
+      noxPlayingList.getState().playmode !== NoxEnumRNTP.NoxRepeatMode.SUGGEST
+    ) {
       throw new Error('playmode is not bilisuggest.');
     }
     const suggestedSong = [await getBiliSuggest()];

@@ -6,7 +6,6 @@ import { useTranslation } from 'react-i18next';
 import { useNoxSetting } from '@stores/useApp';
 import logger from '@utils/Logger';
 import noxPlayingList from '@stores/playingList';
-import { NoxRepeatMode } from '@enums/RepeatMode';
 
 const { getState } = noxPlayingList;
 
@@ -50,7 +49,7 @@ export default ({
 
   const playlistList = () => {
     const filteredPlaylists =
-      getState().playmode === NoxRepeatMode.SUGGEST
+      getState().playmode === NoxEnumRNTP.NoxRepeatMode.SUGGEST
         ? playlistIds
         : playlistIds.filter(val => val !== fromList.id);
     return filteredPlaylists.map(val => [val, playlists[val].title]);
@@ -58,7 +57,7 @@ export default ({
 
   React.useEffect(() => {
     // TODO: this is not scrolling?
-    if (visible && getState().playmode === NoxRepeatMode.SUGGEST) {
+    if (visible && getState().playmode === NoxEnumRNTP.NoxRepeatMode.SUGGEST) {
       playlistRef.current?.scrollToIndex({
         index: playlistIds.indexOf(fromList.id),
       });

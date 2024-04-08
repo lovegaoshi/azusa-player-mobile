@@ -1,4 +1,3 @@
-import { NoxRepeatMode } from './RepeatMode';
 import { VERSIONS } from './Version';
 import { EXPORT_OPTIONS } from './Sync';
 
@@ -53,7 +52,7 @@ export const DEFAULT_SETTING: NoxStorage.PlayerSettingDict = {
   loadPlaylistAsArtist: false,
   sendBiliHeartbeat: false,
   noCookieBiliSearch: false,
-  playbackMode: NoxRepeatMode.SHUFFLE,
+  playbackMode: NoxEnumRNTP.NoxRepeatMode.SHUFFLE,
   dataSaver: false,
   fastBiliSearch: true,
   noInterruption: false,
