@@ -2,6 +2,7 @@ import React from 'react';
 import { View, StyleSheet } from 'react-native';
 import { IconButton } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
+import { ViewEnum } from '@enums/View';
 import { useNoxSetting } from '@stores/useApp';
 import RandomGIFButton from '../buttons/RandomGIF';
 
@@ -30,9 +31,7 @@ export default ({ navigation }: NoxComponent.NavigationProps) => {
         <IconButton
           icon="playlist-music"
           onPress={() =>
-            navigationGlobal.navigate(
-              NoxEnum.View.View.PLAYER_PLAYLIST as never
-            )
+            navigationGlobal.navigate(ViewEnum.PLAYER_PLAYLIST as never)
           }
           size={40}
         />

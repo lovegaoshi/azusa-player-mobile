@@ -11,6 +11,7 @@ import { saveLastPlayDuration } from '@utils/ChromeStorage';
 import { logger } from '@utils/Logger';
 import appStore, { getABRepeatRaw, setCurrentPlaying } from '@stores/appStore';
 import noxPlayingList from '@stores/playingList';
+import { NoxRepeatMode } from '@enums/RepeatMode';
 import { fadePlay } from '@utils/RNTPUtils';
 import usePlaylistCRUD from '@hooks/usePlaylistCRUD';
 
@@ -50,7 +51,7 @@ export default () => {
       event.position >
         Math.min(bRepeatDuration, event.duration) - fadeIntervalSec
     ) {
-      if (getState().playmode !== NoxEnum.RNTP.NoxRepeatMode.REPEAT_TRACK) {
+      if (getState().playmode !== NoxRepeatMode.REPEAT_TRACK) {
         logger.debug(
           `[FADEOUT] fading out....${event.position} / ${event.duration}`
         );
@@ -62,7 +63,7 @@ export default () => {
     }
     if (abRepeat[1] === 1) return;
     if (event.position > bRepeatDuration) {
-      if (getState().playmode === NoxEnum.RNTP.NoxRepeatMode.REPEAT_TRACK) {
+      if (getState().playmode === NoxRepeatMode.REPEAT_TRACK) {
         TrackPlayer.seekTo(abRepeat[0] * event.duration);
         return;
       }

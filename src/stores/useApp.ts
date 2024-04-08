@@ -15,6 +15,7 @@ import {
   saveLyricMapping,
   saveDefaultSearch,
 } from '@utils/ChromeStorage';
+import { DEFAULT_SETTING, STORAGE_KEYS, SEARCH_OPTIONS } from '@enums/Storage';
 import { setPlayerSetting as setPlayerSettingVanilla } from './playerSettingStore';
 import { savePlayerStyle } from '@utils/StyleStorage';
 import { createStyle } from '@components/style';
@@ -22,13 +23,14 @@ import { getABRepeatRaw } from './appStore';
 import { setPlayingList, setPlayingIndex } from '@stores/playingList';
 import DummyLyricDetail from '../objects/LyricDetail';
 import { MUSICFREE } from '../utils/mediafetch/musicfree';
+import { INTENT_DATA } from '@enums/Intent';
 
 interface NoxSetting {
-  intentData?: NoxEnum.Intent.IntentData;
-  setIntentData: (val?: NoxEnum.Intent.IntentData) => void;
+  intentData?: INTENT_DATA;
+  setIntentData: (val?: INTENT_DATA) => void;
 
-  searchOption: NoxEnum.Storage.SearchOptions | MUSICFREE;
-  setSearchOption: (val: NoxEnum.Storage.SearchOptions | MUSICFREE) => void;
+  searchOption: SEARCH_OPTIONS | MUSICFREE;
+  setSearchOption: (val: SEARCH_OPTIONS | MUSICFREE) => void;
 
   gestureMode: boolean;
   setGestureMode: (val: boolean) => void;
@@ -130,7 +132,7 @@ interface NoxSetting {
 export const useNoxSetting = create<NoxSetting>((set, get) => ({
   setIntentData: intentData => set({ intentData }),
 
-  searchOption: NoxEnum.Storage.SearchOptions.BILIBILI,
+  searchOption: SEARCH_OPTIONS.BILIBILI,
   setSearchOption: v => {
     set({ searchOption: v });
     saveDefaultSearch(v);
@@ -208,18 +210,18 @@ export const useNoxSetting = create<NoxSetting>((set, get) => ({
   searchPlaylist: dummyPlaylist(),
   setSearchPlaylist: val => {
     let playlists = get().playlists;
-    playlists[NoxEnum.Storage.StorageKeys.SEARCH_PLAYLIST_KEY] = val;
+    playlists[STORAGE_KEYS.SEARCH_PLAYLIST_KEY] = val;
     set({ searchPlaylist: val, playlists });
   },
   favoritePlaylist: dummyPlaylist(),
   setFavoritePlaylist: val => {
     let playlists = get().playlists;
-    playlists[NoxEnum.Storage.StorageKeys.FAVORITE_PLAYLIST_KEY] = val;
+    playlists[STORAGE_KEYS.FAVORITE_PLAYLIST_KEY] = val;
     saveFavPlaylist(val);
     set({ favoritePlaylist: val, playlists });
   },
 
-  playerSetting: NoxEnum.Storage.DefaultSetting,
+  playerSetting: DEFAULT_SETTING,
   setPlayerSetting: val => {
     const newPlayerSetting = { ...get().playerSetting, ...val };
     set({ playerSetting: newPlayerSetting });
@@ -241,10 +243,7 @@ export const useNoxSetting = create<NoxSetting>((set, get) => ({
     let playlists = get().playlists;
     const currentPlaylist = get().currentPlaylist;
     if (currentPlaylist.id === playlistId) {
-      set({
-        currentPlaylist:
-          playlists[NoxEnum.Storage.StorageKeys.SEARCH_PLAYLIST_KEY],
-      });
+      set({ currentPlaylist: playlists[STORAGE_KEYS.SEARCH_PLAYLIST_KEY] });
     }
     delPlaylist(playlists[playlistId], playlistIds);
     delete playlists[playlistId];
@@ -316,7 +315,7 @@ export const useNoxSetting = create<NoxSetting>((set, get) => ({
       playlists: val.playlists,
       currentPlayingList: playingList,
       currentPlayingID: val.lastPlaylistId[1],
-      storedPlayerSetting: val.settings || NoxEnum.Storage.DefaultSetting,
+      storedPlayerSetting: val.settings || DEFAULT_SETTING,
       cookies: val.cookies,
       language: val.settings.language,
       lastPlayDuration: val.lastPlayDuration,

@@ -4,6 +4,7 @@ import { get_playlist } from 'libmuse';
 import { regexFetchProps } from './generic';
 import { CIDPREFIX } from './ytbvideo';
 import SongTS from '@objects/Song';
+import { SOURCE } from '@enums/MediaFetch';
 
 const musePlaylistItemToNoxSong = (val: any, data: any) => {
   try {
@@ -20,7 +21,7 @@ const musePlaylistItemToNoxSong = (val: any, data: any) => {
       page: 1,
       duration: val.duration_seconds,
       album: data.title,
-      source: NoxEnum.MediaFetch.Source.Ytbvideo,
+      source: SOURCE.ytbvideo,
       metadataOnLoad: true,
     });
   } catch {

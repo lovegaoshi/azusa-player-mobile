@@ -1,9 +1,12 @@
+import { REOPERATIONTYPE } from '@enums/Utils';
+import { SearchRegex } from '@enums/Playlist';
+
 const operation2RegExtractor = (operation: NoxRegExt.Operation) => {
   const regExps = operation[1]?.map(val => new RegExp(val));
   switch (operation[0]) {
-    case NoxEnum.Util.RegexType.extractWith:
+    case REOPERATIONTYPE.extractWith:
       return (val: string) => extractWith(val, regExps);
-    case NoxEnum.Util.RegexType.extractParenthesis:
+    case REOPERATIONTYPE.extractParenthesis:
       return (val: string) => extractParenthesis(val);
     default:
       return (val: string) => val;
@@ -94,17 +97,17 @@ interface reExtract {
 
 const reExtractionsDefault: reExtract[] = [
   {
-    regex: NoxEnum.Playlist.SearchRegex.absoluteMatch.regex,
+    regex: SearchRegex.absoluteMatch.regex,
     process: (val: RegExpExecArray, someRows: Array<NoxMedia.Song>) =>
       someRows.filter(row => row.parsedName === val[1]),
   },
   {
-    regex: NoxEnum.Playlist.SearchRegex.artistMatch.regex,
+    regex: SearchRegex.artistMatch.regex,
     process: (val: RegExpExecArray, someRows: Array<NoxMedia.Song>) =>
       someRows.filter(row => row.singer.includes(val[1])),
   },
   {
-    regex: NoxEnum.Playlist.SearchRegex.albumMatch.regex,
+    regex: SearchRegex.albumMatch.regex,
     process: (val: RegExpExecArray, someRows: Array<NoxMedia.Song>) =>
       someRows.filter(row => row.album?.includes(val[1])),
   },

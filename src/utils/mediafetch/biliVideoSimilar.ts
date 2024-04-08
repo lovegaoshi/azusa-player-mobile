@@ -3,6 +3,7 @@
 import { logger } from '../Logger';
 import { regexFetchProps } from './generic';
 import bfetch from '@utils/BiliFetch';
+import { SOURCE, BiliMusicTid } from '@enums/MediaFetch';
 import SongTS from '@objects/Song';
 import { fetchBVID } from './bilivideo';
 
@@ -19,7 +20,7 @@ const fetchBiliVideoSimilarList = async (bvid: string) => {
   return (await fetchBVID(bvid)).concat(
     json.data
       // limit similar videos to music only.
-      .filter((v: any) => NoxEnum.MediaFetch.BiliMusicTid.includes(v.tid))
+      .filter((v: any) => BiliMusicTid.includes(v.tid))
       .map((data: any) =>
         SongTS({
           cid: data.cid,
@@ -33,7 +34,7 @@ const fetchBiliVideoSimilarList = async (bvid: string) => {
           page: 1,
           duration: data.duration,
           album: data.title,
-          source: NoxEnum.MediaFetch.Source.Bilivideo,
+          source: SOURCE.bilivideo,
         })
       )
   );

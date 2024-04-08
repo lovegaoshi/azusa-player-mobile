@@ -1,4 +1,5 @@
 import { searchBiliURLs } from './BiliSearch';
+import { PLAYLIST_ENUMS } from '../enums/Playlist';
 import { parseSongName } from '@stores/appStore';
 
 interface Props {
@@ -23,13 +24,9 @@ export const updateSubscribeFavList = async ({
   callback = () => undefined,
 }: Props): Promise<NoxMedia.Playlist> => {
   let newPlaylist = { ...playlist, lastSubscribed: new Date().getTime() };
-  if (
-    [NoxEnum.Playlist.PlaylistEnums.TYPE_FAVORI_PLAYLIST].includes(
-      playlist.type
-    )
-  )
+  if ([PLAYLIST_ENUMS.TYPE_FAVORI_PLAYLIST].includes(playlist.type))
     throw new Error('[biliSubscribe] incorrect playlist type for subscription');
-  if (playlist.type === NoxEnum.Playlist.PlaylistEnums.TYPE_SEARCH_PLAYLIST) {
+  if (playlist.type === PLAYLIST_ENUMS.TYPE_SEARCH_PLAYLIST) {
     if (!playlist.refresh)
       throw new Error('[biliSubscribe] nothing to subscribe');
     newPlaylist = { ...newPlaylist, ...(await playlist.refresh(newPlaylist)) };

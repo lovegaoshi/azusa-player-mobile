@@ -10,6 +10,7 @@ import { getCurrentTPQueue, initializePlaybackMode } from '@stores/playingList';
 import useVersionCheck from '@hooks/useVersionCheck';
 import { songlistToTracklist } from '@utils/RNTPUtils';
 import useInitializeStore from '@stores/initializeStores';
+import { INTENT_DATA } from '@enums/Intent';
 import { useNoxSetting } from '@stores/useApp';
 
 const { NoxAndroidAutoModule } = NativeModules;
@@ -64,10 +65,10 @@ export default ({ intentData }: NoxComponent.AppProps) => {
       await AdditionalPlaybackService(serviceOptions);
       setIntentData(intentData);
       switch (intentData) {
-        case NoxEnum.Intent.IntentData.Resume:
+        case INTENT_DATA.resume:
           await TrackPlayer.play();
           break;
-        case NoxEnum.Intent.IntentData.PlayAll:
+        case INTENT_DATA.playAll:
         // this hook cannot use usePlayback bc of rerendering.
         default:
           await TrackPlayer.pause();

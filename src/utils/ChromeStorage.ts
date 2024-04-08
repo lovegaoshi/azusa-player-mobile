@@ -6,8 +6,16 @@ import { Appearance, ColorSchemeName } from 'react-native';
 import i18n from 'i18next';
 
 import { dummyPlaylist, dummyPlaylistList } from '../objects/Playlist';
+import { NoxRepeatMode } from '../enums/RepeatMode';
+import { PLAYLIST_ENUMS } from '../enums/Playlist';
 import AzusaTheme from '../components/styles/AzusaTheme';
 import { chunkArray as chunkArrayRaw, arrayToObject } from '../utils/Utils';
+import {
+  STORAGE_KEYS,
+  appID,
+  DEFAULT_SETTING,
+  SEARCH_OPTIONS,
+} from '@enums/Storage';
 import { MUSICFREE } from './mediafetch/musicfree';
 /**
  * noxplayer's storage handler.
@@ -56,22 +64,22 @@ export const removeItem = async (key: string) => {
 };
 
 export const setMusicFreePlugin = (val: MUSICFREE[]) =>
-  saveItem(NoxEnum.Storage.StorageKeys.MUSICFREE_PLUGIN, val);
+  saveItem(STORAGE_KEYS.MUSICFREE_PLUGIN, val);
 
 export const getMusicFreePlugin = (): Promise<MUSICFREE[]> =>
-  getItem(NoxEnum.Storage.StorageKeys.MUSICFREE_PLUGIN, []);
+  getItem(STORAGE_KEYS.MUSICFREE_PLUGIN, []);
 
 export const getFadeInterval = async () =>
-  Number(await getItem(NoxEnum.Storage.StorageKeys.FADE_INTERVAL)) || 0;
+  Number(await getItem(STORAGE_KEYS.FADE_INTERVAL)) || 0;
 export const saveFadeInterval = async (val: number) =>
-  await saveItem(NoxEnum.Storage.StorageKeys.FADE_INTERVAL, val);
+  await saveItem(STORAGE_KEYS.FADE_INTERVAL, val);
 
 /**
  * a save helper function for mapping types ({string: val}).
  * @returns the mapping object
  */
 const getMapping = async (
-  key: NoxEnum.Storage.StorageKeys,
+  key: STORAGE_KEYS,
   transform: (val: any) => any = arrayToObject
 ) => {
   try {
@@ -87,70 +95,56 @@ const getMapping = async (
 };
 
 export const getRegExtractMapping = (): Promise<NoxRegExt.JSONExtractor[]> =>
-  getItem(NoxEnum.Storage.StorageKeys.REGEXTRACT_MAPPING, []);
+  getItem(STORAGE_KEYS.REGEXTRACT_MAPPING, []);
 
 export const saveRegextractMapping = (val: NoxRegExt.JSONExtractor[]) =>
-  saveItem(NoxEnum.Storage.StorageKeys.REGEXTRACT_MAPPING, val);
+  saveItem(STORAGE_KEYS.REGEXTRACT_MAPPING, val);
 
 export const getR128GainMapping = (): Promise<NoxStorage.R128Dict> =>
-  getMapping(NoxEnum.Storage.StorageKeys.R128GAIN_MAPPING);
+  getMapping(STORAGE_KEYS.R128GAIN_MAPPING);
 
 export const saveR128GainMapping = (val: NoxStorage.R128Dict) =>
-  saveChucked(
-    NoxEnum.Storage.StorageKeys.R128GAIN_MAPPING,
-    Object.entries(val)
-  );
+  saveChucked(STORAGE_KEYS.R128GAIN_MAPPING, Object.entries(val));
 
 export const getABMapping = (): Promise<NoxStorage.ABDict> =>
-  getMapping(NoxEnum.Storage.StorageKeys.ABREPEAT_MAPPING);
+  getMapping(STORAGE_KEYS.ABREPEAT_MAPPING);
 
 export const saveABMapping = async (val: NoxStorage.ABDict) =>
-  saveChucked(
-    NoxEnum.Storage.StorageKeys.ABREPEAT_MAPPING,
-    Object.entries(val)
-  );
+  saveChucked(STORAGE_KEYS.ABREPEAT_MAPPING, Object.entries(val));
 
-export const getDefaultSearch = (): Promise<NoxEnum.Storage.SearchOptions> =>
-  getItem(
-    NoxEnum.Storage.StorageKeys.DEFAULT_SEARCH,
-    NoxEnum.Storage.SearchOptions.BILIBILI
-  );
+export const getDefaultSearch = (): Promise<SEARCH_OPTIONS> =>
+  getItem(STORAGE_KEYS.DEFAULT_SEARCH, SEARCH_OPTIONS.BILIBILI);
 
-export const saveDefaultSearch = (
-  val: NoxEnum.Storage.SearchOptions | MUSICFREE
-) => saveItem(NoxEnum.Storage.StorageKeys.DEFAULT_SEARCH, val);
+export const saveDefaultSearch = (val: SEARCH_OPTIONS | MUSICFREE) =>
+  saveItem(STORAGE_KEYS.DEFAULT_SEARCH, val);
 
 export const getCachedMediaMapping = () =>
-  getItem(NoxEnum.Storage.StorageKeys.CACHED_MEDIA_MAPPING, []);
+  getItem(STORAGE_KEYS.CACHED_MEDIA_MAPPING, []);
 
 export const saveCachedMediaMapping = (val: any[]) =>
-  saveItem(NoxEnum.Storage.StorageKeys.CACHED_MEDIA_MAPPING, val);
+  saveItem(STORAGE_KEYS.CACHED_MEDIA_MAPPING, val);
 
 export const getColorScheme = async () => {
-  const colorScheme =
-    (await getItem(NoxEnum.Storage.StorageKeys.COLORTHEME)) || null;
+  const colorScheme = (await getItem(STORAGE_KEYS.COLORTHEME)) || null;
   Appearance.setColorScheme(colorScheme);
   return colorScheme;
 };
 
 export const saveColorScheme = (val: ColorSchemeName) =>
-  saveItem(NoxEnum.Storage.StorageKeys.COLORTHEME, val);
+  saveItem(STORAGE_KEYS.COLORTHEME, val);
 
 // we keep the set-cookie header for noxplayer's remove personal search option
 // TODO: security risk. move this to an encrypted storage.
 export const addCookie = async (site: string, setHeader: string) => {
   return;
-  const cookies = (await getItem(NoxEnum.Storage.StorageKeys.COOKIES)) || {};
-  saveItem(NoxEnum.Storage.StorageKeys.COOKIES, {
-    ...cookies,
-    [site]: setHeader,
-  });
+  const cookies = (await getItem(STORAGE_KEYS.COOKIES)) || {};
+  saveItem(STORAGE_KEYS.COOKIES, { ...cookies, [site]: setHeader });
 };
 
 export const removeCookie = async (site: string) => {
-  const cookies = (await getItem(NoxEnum.Storage.StorageKeys.COOKIES)) || {};
+  const cookies = (await getItem(STORAGE_KEYS.COOKIES)) || {};
   cookies[site] = [];
-  saveItem(NoxEnum.Storage.StorageKeys.COOKIES, cookies);
+  saveItem(STORAGE_KEYS.COOKIES, cookies);
 };
 
 /**
@@ -237,43 +231,37 @@ export const getPlaylist = async (
 };
 
 export const savePlayerSkins = async (skins: Array<any>) =>
-  saveChucked(NoxEnum.Storage.StorageKeys.SKINSTORAGE, skins);
+  saveChucked(STORAGE_KEYS.SKINSTORAGE, skins);
 
 export const getPlayerSkins = async () =>
-  await loadChucked(await getItem(NoxEnum.Storage.StorageKeys.SKINSTORAGE, []));
+  await loadChucked(await getItem(STORAGE_KEYS.SKINSTORAGE, []));
 
 export const saveLyricMapping = async (
   lyricMapping: Map<string, NoxMedia.LyricDetail>
 ) =>
-  saveChucked(
-    NoxEnum.Storage.StorageKeys.LYRIC_MAPPING,
-    Array.from(lyricMapping.entries())
-  );
+  saveChucked(STORAGE_KEYS.LYRIC_MAPPING, Array.from(lyricMapping.entries()));
 
 export const getLyricMapping = () =>
-  getMapping(
-    NoxEnum.Storage.StorageKeys.LYRIC_MAPPING,
-    (val: any) => new Map(val)
-  );
+  getMapping(STORAGE_KEYS.LYRIC_MAPPING, (val: any) => new Map(val));
 
 // no point to provide getters, as states are managed by zustand.
 // unlike azusaplayer which the storage context still reads localstorage, instaed
 // of keeping them as states.
 export const saveSettings = (setting: NoxStorage.PlayerSettingDict) =>
-  saveItem(NoxEnum.Storage.StorageKeys.PLAYER_SETTING_KEY, setting);
+  saveItem(STORAGE_KEYS.PLAYER_SETTING_KEY, setting);
 
 export const getSettings = async () => ({
-  ...NoxEnum.Storage.DefaultSetting,
-  ...(await getItem(NoxEnum.Storage.StorageKeys.PLAYER_SETTING_KEY, {})),
+  ...DEFAULT_SETTING,
+  ...(await getItem(STORAGE_KEYS.PLAYER_SETTING_KEY, {})),
 });
 
 export const savePlaylistIds = (val: string[]) =>
-  saveItem(NoxEnum.Storage.StorageKeys.MY_FAV_LIST_KEY, val);
+  saveItem(STORAGE_KEYS.MY_FAV_LIST_KEY, val);
 
 export const savePlayerSkin = (val: NoxTheme.Style | NoxTheme.AdaptiveStyle) =>
-  saveItem(NoxEnum.Storage.StorageKeys.SKIN, val);
+  saveItem(STORAGE_KEYS.SKIN, val);
 
-export const getPlayerSkin = () => getItem(NoxEnum.Storage.StorageKeys.SKIN);
+export const getPlayerSkin = () => getItem(STORAGE_KEYS.SKIN);
 
 export const addPlaylist = (
   playlist: NoxMedia.Playlist,
@@ -305,63 +293,55 @@ export const delPlaylist = (
 };
 
 export const saveFavPlaylist = (playlist: NoxMedia.Playlist) =>
-  savePlaylist(playlist, NoxEnum.Storage.StorageKeys.FAVORITE_PLAYLIST_KEY);
+  savePlaylist(playlist, STORAGE_KEYS.FAVORITE_PLAYLIST_KEY);
 
 export const savelastPlaylistId = (val: [string, string]) =>
-  saveItem(NoxEnum.Storage.StorageKeys.LAST_PLAY_LIST, val);
+  saveItem(STORAGE_KEYS.LAST_PLAY_LIST, val);
 
 export const savePlayMode = (val: string) =>
-  saveItem(NoxEnum.Storage.StorageKeys.PLAYMODE_KEY, val);
+  saveItem(STORAGE_KEYS.PLAYMODE_KEY, val);
 
 export const saveLastPlayDuration = (val: number) =>
-  saveItem(NoxEnum.Storage.StorageKeys.LAST_PLAY_DURATION, val);
+  saveItem(STORAGE_KEYS.LAST_PLAY_DURATION, val);
 
 export const initPlayerObject =
   async (): Promise<NoxStorage.PlayerStorageObject> => {
     const lyricMapping = (await getLyricMapping()) || {};
     const playerObject = {
       settings: {
-        ...NoxEnum.Storage.DefaultSetting,
-        ...((await getItem(NoxEnum.Storage.StorageKeys.PLAYER_SETTING_KEY)) ||
-          {}),
+        ...DEFAULT_SETTING,
+        ...((await getItem(STORAGE_KEYS.PLAYER_SETTING_KEY)) || {}),
       },
-      playlistIds:
-        (await getItem(NoxEnum.Storage.StorageKeys.MY_FAV_LIST_KEY)) || [],
+      playlistIds: (await getItem(STORAGE_KEYS.MY_FAV_LIST_KEY)) || [],
       playlists: {},
-      lastPlaylistId: (await getItem(
-        NoxEnum.Storage.StorageKeys.LAST_PLAY_LIST
-      )) || ['NULL', 'NULL'],
+      lastPlaylistId: (await getItem(STORAGE_KEYS.LAST_PLAY_LIST)) || [
+        'NULL',
+        'NULL',
+      ],
       searchPlaylist: dummyPlaylist(
         i18n.t('PlaylistOperations.searchListName'),
-        NoxEnum.Playlist.PlaylistEnums.TYPE_SEARCH_PLAYLIST
+        PLAYLIST_ENUMS.TYPE_SEARCH_PLAYLIST
       ),
       favoriPlaylist: await getPlaylist(
-        NoxEnum.Storage.StorageKeys.FAVORITE_PLAYLIST_KEY,
-        () =>
-          dummyPlaylist(
-            'Favorite',
-            NoxEnum.Playlist.PlaylistEnums.TYPE_FAVORI_PLAYLIST
-          )
+        STORAGE_KEYS.FAVORITE_PLAYLIST_KEY,
+        () => dummyPlaylist('Favorite', PLAYLIST_ENUMS.TYPE_FAVORI_PLAYLIST)
       ),
       playbackMode: await getItem(
-        NoxEnum.Storage.StorageKeys.PLAYMODE_KEY,
-        NoxEnum.RNTP.NoxRepeatMode.SHUFFLE
+        STORAGE_KEYS.PLAYMODE_KEY,
+        NoxRepeatMode.SHUFFLE
       ),
-      skin: await getItem(NoxEnum.Storage.StorageKeys.SKIN, AzusaTheme),
+      skin: await getItem(STORAGE_KEYS.SKIN, AzusaTheme),
       skins: (await getPlayerSkins()) || [],
-      cookies: await getItem(NoxEnum.Storage.StorageKeys.COOKIES, {}),
+      cookies: await getItem(STORAGE_KEYS.COOKIES, {}),
       lyricMapping,
-      lastPlayDuration: await getItem(
-        NoxEnum.Storage.StorageKeys.LAST_PLAY_DURATION,
-        0
-      ),
+      lastPlayDuration: await getItem(STORAGE_KEYS.LAST_PLAY_DURATION, 0),
       colorScheme: await getColorScheme(),
       defaultSearchOptions: await getDefaultSearch(),
     } as NoxStorage.PlayerStorageObject;
 
-    playerObject.playlists[NoxEnum.Storage.StorageKeys.SEARCH_PLAYLIST_KEY] =
+    playerObject.playlists[STORAGE_KEYS.SEARCH_PLAYLIST_KEY] =
       playerObject.searchPlaylist;
-    playerObject.playlists[NoxEnum.Storage.StorageKeys.FAVORITE_PLAYLIST_KEY] =
+    playerObject.playlists[STORAGE_KEYS.FAVORITE_PLAYLIST_KEY] =
       playerObject.favoriPlaylist;
 
     await Promise.all(
@@ -385,8 +365,7 @@ export const exportPlayerContent = async (content?: any) => {
 };
 
 const clearPlaylists = async () => {
-  const playlistIds =
-    (await getItem(NoxEnum.Storage.StorageKeys.MY_FAV_LIST_KEY)) || [];
+  const playlistIds = (await getItem(STORAGE_KEYS.MY_FAV_LIST_KEY)) || [];
   for (const playlistId of playlistIds) {
     delPlaylistRaw(await getPlaylist(playlistId));
   }
@@ -410,19 +389,17 @@ const saveImportedPlaylist = async (playlists: any[]) => {
 export const clearPlaylistNImport = async (parsedContent: any) => {
   await clearPlaylists();
   await saveImportedPlaylist(
-    parsedContent[NoxEnum.Storage.StorageKeys.MY_FAV_LIST_KEY].map(
+    parsedContent[STORAGE_KEYS.MY_FAV_LIST_KEY].map(
       (val: string) => parsedContent[val]
     )
   );
-  await savePlaylistIds(
-    parsedContent[NoxEnum.Storage.StorageKeys.MY_FAV_LIST_KEY]
-  );
+  await savePlaylistIds(parsedContent[STORAGE_KEYS.MY_FAV_LIST_KEY]);
 };
 
 export const addImportedPlaylist = async (playlists: any[]) => {
   await saveImportedPlaylist(playlists);
   await savePlaylistIds(
-    (await getItem(NoxEnum.Storage.StorageKeys.MY_FAV_LIST_KEY)).concat(
+    (await getItem(STORAGE_KEYS.MY_FAV_LIST_KEY)).concat(
       playlists.map(val => val.info.id)
     )
   );
@@ -439,10 +416,10 @@ const parseImportedPartial = (
 
 export const importPlayerContentRaw = async (parsedContent: any) => {
   const importedAppID = parseImportedPartial(
-    NoxEnum.Storage.StorageKeys.PLAYER_SETTING_KEY,
+    STORAGE_KEYS.PLAYER_SETTING_KEY,
     parsedContent
   ).appID;
-  if (importedAppID !== NoxEnum.Storage.AppID) {
+  if (importedAppID !== appID) {
     throw new Error(`${importedAppID} is not valid appID`);
   } else {
     const oldCache = await getCachedMediaMapping();

@@ -3,8 +3,10 @@ import { Linking, StyleSheet, View } from 'react-native';
 import { IconButton } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
 
+import { ICONS } from '@enums/Icons';
 import RandomGIFButton from '../buttons/RandomGIF';
 import { useNoxSetting } from '@stores/useApp';
+import { ViewEnum } from '@enums/View';
 import { logger } from '@utils/Logger';
 
 interface Props {
@@ -19,9 +21,9 @@ export default ({ panelWidth = 110 }: Props) => {
   const onPlaylistPress = () => {
     navigationGlobal.navigate(
       navigationGlobal.getState()?.routes?.at(-1)?.name ===
-        NoxEnum.View.View.PLAYER_PLAYLIST
-        ? (NoxEnum.View.View.PLAYER_PLAYLISTS as never)
-        : (NoxEnum.View.View.PLAYER_PLAYLIST as never)
+        ViewEnum.PLAYER_PLAYLIST
+        ? (ViewEnum.PLAYER_PLAYLISTS as never)
+        : (ViewEnum.PLAYER_PLAYLIST as never)
     );
   };
 
@@ -29,7 +31,7 @@ export default ({ panelWidth = 110 }: Props) => {
     function deepLinkHandler(data: { url: string }) {
       if (data.url === 'trackplayer://notification.click') {
         logger.debug('[Drawer] click from notification; navigate to home');
-        navigationGlobal.navigate(NoxEnum.View.View.PLAYER_HOME as never);
+        navigationGlobal.navigate(ViewEnum.PLAYER_HOME as never);
       }
     }
     // This event will be fired when the app is already open and the notification is clicked
@@ -60,30 +62,24 @@ export default ({ panelWidth = 110 }: Props) => {
         />
       </View>
       <IconButton
-        icon={NoxEnum.Icons.ScreenIcons.HomeScreen}
+        icon={ICONS.homeScreen}
         size={iconSize}
-        onPress={() =>
-          navigationGlobal.navigate(NoxEnum.View.View.LYRICS as never)
-        }
+        onPress={() => navigationGlobal.navigate(ViewEnum.LYRICS as never)}
       />
       <IconButton
-        icon={NoxEnum.Icons.ScreenIcons.PlaylistScreen}
+        icon={ICONS.playlistScreen}
         size={iconSize}
         onPress={onPlaylistPress}
       />
       <IconButton
-        icon={NoxEnum.Icons.ScreenIcons.ExploreScreen}
+        icon={ICONS.exploreScreen}
         size={iconSize}
-        onPress={() =>
-          navigationGlobal.navigate(NoxEnum.View.View.EXPORE as never)
-        }
+        onPress={() => navigationGlobal.navigate(ViewEnum.EXPORE as never)}
       />
       <IconButton
-        icon={NoxEnum.Icons.ScreenIcons.SettingScreen}
+        icon={ICONS.settingScreen}
         size={iconSize}
-        onPress={() =>
-          navigationGlobal.navigate(NoxEnum.View.View.SETTINGS as never)
-        }
+        onPress={() => navigationGlobal.navigate(ViewEnum.SETTINGS as never)}
       />
     </View>
   );

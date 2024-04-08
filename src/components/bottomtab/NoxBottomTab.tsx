@@ -4,6 +4,7 @@ import { IconButton } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
 import { getDrawerStatusFromState } from '@react-navigation/drawer';
 
+import { ViewEnum } from '@enums/View';
 import { useNoxSetting } from '@stores/useApp';
 
 interface IconProps {
@@ -68,21 +69,21 @@ const NoxAndroidBottomTab = ({ navigation }: NoxComponent.NavigationProps2) => {
           <BottomIconButton
             icon={renderIcon(Routes.music)}
             onPress={() => {
-              navigationGlobal.navigate(NoxEnum.View.View.PLAYER_HOME as never);
+              navigationGlobal.navigate(ViewEnum.PLAYER_HOME as never);
               setRoute(Routes.music);
             }}
           />
           <BottomIconButton
             icon={renderIcon(Routes.explore)}
             onPress={() => {
-              navigationGlobal.navigate(NoxEnum.View.View.EXPORE as never);
+              navigationGlobal.navigate(ViewEnum.EXPORE as never);
               setRoute(Routes.explore);
             }}
           />
           <BottomIconButton
             icon={renderIcon(Routes.setting)}
             onPress={() => {
-              navigationGlobal.navigate(NoxEnum.View.View.SETTINGS as never);
+              navigationGlobal.navigate(ViewEnum.SETTINGS as never);
               setRoute(Routes.setting);
             }}
           />

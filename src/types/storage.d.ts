@@ -1,6 +1,10 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { ColorSchemeName } from 'react-native';
 
+import { EXPORT_OPTIONS } from '../enums/Sync';
+import { NoxRepeatMode } from '../enums/RepeatMode';
+import { SEARCH_OPTIONS } from '../enums/Storage';
+
 declare global {
   namespace NoxStorage {
     export interface PlayerSettingDict {
@@ -12,7 +16,7 @@ declare global {
       skin: string;
       parseSongName: boolean;
       keepSearchedSongListWhenPlaying: boolean;
-      settingExportLocation: NoxEnum.Sync.ExportOptions;
+      settingExportLocation: EXPORT_OPTIONS;
       personalCloudIP: string;
       personalCloudID: string;
       noxVersion: string;
@@ -49,7 +53,7 @@ declare global {
       lastPlaylistId: [string, string];
       searchPlaylist: NoxMedia.Playlist;
       favoriPlaylist: NoxMedia.Playlist;
-      playbackMode: NoxEnum.RNTP.NoxRepeatMode;
+      playbackMode: NoxRepeatMode;
       skin: NoxTheme.Style;
       skins: any[];
       // site: set-cookie header
@@ -58,7 +62,7 @@ declare global {
       language?: string;
       lastPlayDuration: number;
       colorScheme: ColorSchemeName;
-      defaultSearchOptions?: NoxEnum.Storage.SearchOptions;
+      defaultSearchOptions?: SEARCH_OPTIONS;
     }
 
     export interface initializedResults {
@@ -69,7 +73,7 @@ declare global {
       cookies: { [key: string]: string };
       language?: string;
       lastPlayDuration: number;
-      playbackMode: NoxEnum.RNTP.NoxRepeatMode;
+      playbackMode: NoxRepeatMode;
     }
 
     export interface R128Dict {

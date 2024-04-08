@@ -1,5 +1,6 @@
 import { useNoxSetting } from '@stores/useApp';
 import { logger } from '@utils/Logger';
+import { SOURCE } from '@enums/MediaFetch';
 
 const useSongOperations = () => {
   const setExternalSearchText = useNoxSetting(
@@ -9,10 +10,10 @@ const useSongOperations = () => {
 
   const startRadio = (song: NoxMedia.Song) => {
     switch (song.source) {
-      case NoxEnum.MediaFetch.Source.Ytbvideo:
+      case SOURCE.ytbvideo:
         setExternalSearchText(`youtu.be/${song.bvid}`);
         break;
-      case NoxEnum.MediaFetch.Source.Bilivideo:
+      case SOURCE.bilivideo:
         setExternalSearchText(`bilibili.com/video/similarvideo/${song.bvid}`);
       default:
         logger.warn(
@@ -23,10 +24,7 @@ const useSongOperations = () => {
   };
 
   const radioAvailable = (song?: NoxMedia.Song) =>
-    [
-      NoxEnum.MediaFetch.Source.Ytbvideo,
-      NoxEnum.MediaFetch.Source.Bilivideo,
-    ].includes(song?.source as NoxEnum.MediaFetch.Source);
+    [SOURCE.ytbvideo, SOURCE.bilivideo].includes(song?.source as SOURCE);
 
   return { startRadio, radioAvailable };
 };
