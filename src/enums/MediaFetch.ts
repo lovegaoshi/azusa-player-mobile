@@ -22,4 +22,4 @@ MV	mv	193	为音乐作品配合拍摄或制作的音乐录影带（Music Video�
 音乐教学	tutorial	244	以音乐教学为目的的内容	/v/music/tutorial
 电音(已下线)	electronic	194	以电子合成器、音乐软体等产生的电子声响制作的音乐	/v/music/electronic
 */
-export const BiliMusicTid = [28, 31, 59, 193, 29];
+export const BiliMusicTid = [28, 31, 59, 193]; // , 29

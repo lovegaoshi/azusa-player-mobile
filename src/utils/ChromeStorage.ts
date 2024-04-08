@@ -9,7 +9,7 @@ import { dummyPlaylist, dummyPlaylistList } from '../objects/Playlist';
 import { NoxRepeatMode } from '../enums/RepeatMode';
 import { PLAYLIST_ENUMS } from '../enums/Playlist';
 import AzusaTheme from '../components/styles/AzusaTheme';
-import { chunkArray as chunkArrayRaw, arrayToObject } from '../utils/Utils';
+import { chunkArray, arrayToObject } from '../utils/Utils';
 import {
   STORAGE_KEYS,
   appID,
@@ -148,16 +148,6 @@ export const removeCookie = async (site: string) => {
 };
 
 /**
- * splits an array to chunks of given size.
- * @param arr
- * @param size
- * @returns
- */
-const chunkArray = <T>(arr: Array<T>, size = MAX_SONGLIST_SIZE): Array<T[]> => {
-  return chunkArrayRaw(arr, size);
-};
-
-/**
  * a generic chunk splitter to store arrays that may exceed 2MB storage limits.
  * see known storage limits:
  * https://react-native-async-storage.github.io/async-storage/docs/limits
@@ -170,7 +160,7 @@ const saveChucked = async (
   saveToStorage = true
 ) => {
   // splice into chunks
-  const chuckedObject = chunkArray(objects);
+  const chuckedObject = chunkArray(objects, MAX_SONGLIST_SIZE);
   const chuckedIndices = chuckedObject.map((val, index) => `${key}.${index}`);
   chuckedObject.forEach((list, index) => saveItem(chuckedIndices[index], list));
   if (saveToStorage) {

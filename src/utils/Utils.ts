@@ -91,7 +91,7 @@ export const getUniqObjects = <T>(
  * @param size
  * @returns
  */
-export const chunkArray = <T>(arr: Array<T>, size: number): Array<T[]> => {
+export const chunkArray = <T>(arr: Array<T>, size = 400): Array<T[]> => {
   return arr.reduce(
     (chunks, item, index) => {
       const chunkIndex = Math.floor(index / size);
