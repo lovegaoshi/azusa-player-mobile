@@ -14,8 +14,8 @@ declare namespace NoxEnumIntent {
   }
 }
 
-declare namespace NoxMediaFetch {
-  export enum MediaFetch {
+declare namespace NoxEnumMediaFetch {
+  export enum Source {
     Biliaudio = 'biliaudio',
     Bilivideo = 'bilivideo',
     Steriatk = 'steriatk',

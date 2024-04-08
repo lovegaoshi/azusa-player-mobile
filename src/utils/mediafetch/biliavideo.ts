@@ -4,7 +4,6 @@ import { biliApiLimiter } from './throttle';
 import { logger } from '../Logger';
 import bfetch from '@utils/BiliFetch';
 import { biliShazamOnSonglist } from './bilishazam';
-import { SOURCE } from '@enums/MediaFetch';
 import SongTS from '@objects/Song';
 
 const URL_VIDEO_INFO =
@@ -32,7 +31,7 @@ const fetchAVIDRaw = async (aid: string): Promise<NoxMedia.Song[]> => {
         page: index + 1,
         duration: page.duration,
         album: data.title,
-        source: SOURCE.bilivideo,
+        source: NoxEnumMediaFetch.Source.Bilivideo,
       });
     });
     // eslint-disable-next-line @typescript-eslint/no-explicit-any

@@ -9,18 +9,16 @@
  * steps to refactor:
  * each site needs a fetch to parse regex extracted, a videoinfo fetcher and a song fetcher.
  */
-import { SOURCE } from '@enums/MediaFetch';
 import { logger } from '../Logger';
 import { regexFetchProps } from './generic';
 import { fetchAwaitBiliPaginatedAPI } from './paginatedbili';
 import { awaitLimiter } from './throttle';
 import SongTS from '@objects/Song';
-import { info } from 'console';
 
 // https://api.bilibili.com/audio/music-service/web/song/upper?uid=741520&pn=1&ps=70&order=1
 const URL_BILICHANNEL_AUDIO_INFO =
   'https://api.bilibili.com/audio/music-service/web/song/upper?uid=741520&pn={pn}&ps=30&order=1';
-const CIDPREFIX = `${SOURCE.biliaudio}-`;
+const CIDPREFIX = `${NoxEnumMediaFetch.Source.Biliaudio}-`;
 
 export const fetchBiliChannelAudioList = async (
   mid: string,
@@ -50,7 +48,7 @@ export const fetchBiliChannelAudioList = async (
           page: 1,
           duration: info.duration,
           album: info.title,
-          source: SOURCE.biliaudio,
+          source: NoxEnumMediaFetch.Source.Biliaudio,
         })
       ),
   });

@@ -8,7 +8,6 @@ import { CopiedPlaylistMenuItem } from '@components/buttons/CopiedPlaylistButton
 import RenameSongButton from '@components/player/TrackInfo/RenameSong/RenameSongButton';
 import useSongOperations from '@hooks/useSongOperations';
 import { SearchRegex } from '@enums/Playlist';
-import { SOURCE } from '@enums/MediaFetch';
 import useBiliSearch from '@hooks/useBiliSearch';
 
 enum ICONS {
@@ -130,7 +129,7 @@ export default ({ usePlaylist, prepareForLayoutAnimationRender }: Props) => {
         disabled={checking}
         title={t('SongOperations.songSearchInPlaylistTitle')}
       />
-      {selectedSongs()[0]?.source === NoxMediaFetch.MediaFetch.Bilivideo && (
+      {selectedSongs()[0]?.source === NoxEnumMediaFetch.Source.Bilivideo && (
         <Menu.Item
           leadingIcon={ICONS.SEARCH_BVID}
           onPress={() => {
