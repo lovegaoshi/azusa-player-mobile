@@ -16,6 +16,7 @@ export const BiliSongRow = ({
 }: BiliSongCardProp) => {
   const navigationGlobal = useNavigation();
   const playerStyle = useNoxSetting(state => state.playerStyle);
+  const scroll = useNoxSetting(state => state.incSongListScrollCounter);
   const { playAsSearchList } = usePlayback();
 
   const fontColor = playerStyle.metaData.darkTheme ? 'white' : 'black';
@@ -24,8 +25,8 @@ export const BiliSongRow = ({
     <View
       style={{
         width: Dimensions.get('window').width,
-        paddingRight: 10,
         paddingLeft: 5,
+        paddingBottom: 10,
       }}
     >
       {title && (
@@ -42,7 +43,10 @@ export const BiliSongRow = ({
             <TouchableOpacity
               onPress={() => {
                 navigationGlobal.navigate(ViewEnum.PLAYER_PLAYLIST as never);
-                playAsSearchList({ songs: totalSongs || songs, song: item });
+                playAsSearchList({
+                  songs: totalSongs || songs,
+                  song: item,
+                }).then(() => setTimeout(scroll, 500));
               }}
             >
               <Image

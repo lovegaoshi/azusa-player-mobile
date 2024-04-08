@@ -26,6 +26,9 @@ import { MUSICFREE } from '../utils/mediafetch/musicfree';
 import { INTENT_DATA } from '@enums/Intent';
 
 interface NoxSetting {
+  songListScrollCounter: number;
+  incSongListScrollCounter: () => void;
+
   intentData?: INTENT_DATA;
   setIntentData: (val?: INTENT_DATA) => void;
 
@@ -130,6 +133,12 @@ interface NoxSetting {
  * as well as saving and loading states to/from asyncStorage.
  */
 export const useNoxSetting = create<NoxSetting>((set, get) => ({
+  songListScrollCounter: 0,
+  incSongListScrollCounter: () =>
+    set(state => ({
+      songListScrollCounter: state.songListScrollCounter + 1,
+    })),
+
   setIntentData: intentData => set({ intentData }),
 
   searchOption: SEARCH_OPTIONS.BILIBILI,

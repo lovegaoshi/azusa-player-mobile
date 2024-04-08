@@ -33,6 +33,7 @@ export const BiliSongCard = ({
 }: BiliSongCardProp) => {
   const navigationGlobal = useNavigation();
   const playerStyle = useNoxSetting(state => state.playerStyle);
+  const scroll = useNoxSetting(state => state.incSongListScrollCounter);
   const { playAsSearchList } = usePlayback();
 
   const fontColor = playerStyle.metaData.darkTheme ? 'white' : 'black';
@@ -56,7 +57,11 @@ export const BiliSongCard = ({
               style={{ height: 70, flexDirection: 'row' }}
               onPress={() => {
                 navigationGlobal.navigate(ViewEnum.PLAYER_PLAYLIST as never);
-                playAsSearchList({ songs: totalSongs || songs, song: item });
+                playAsSearchList({
+                  songs: totalSongs || songs,
+                  song: item,
+                  // HACK: oh well.
+                }).then(() => setTimeout(scroll, 500));
               }}
             >
               <Image

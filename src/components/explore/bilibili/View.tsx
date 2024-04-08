@@ -48,6 +48,9 @@ export default () => {
       }
     >
       <BiliSongsTabCard songs={biliRanking} title={t('BiliCategory.ranking')} />
+      <Text style={{ fontSize: 20, paddingLeft: 5, paddingBottom: 10 }}>
+        {t('BiliCategory.dynamic')}
+      </Text>
       {Object.keys(biliDynamic).map((k, i) => (
         <BiliSongRow
           key={`BiliDynamicRow${i}`}
