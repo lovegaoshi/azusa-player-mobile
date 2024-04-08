@@ -1,0 +1,4 @@
+defaults.url=https://sentry.io/
+defaults.org=example-org
+defaults.project=example-project
+auth.token=sntrys_YOUR_TOKEN_HERE
