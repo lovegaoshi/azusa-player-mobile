@@ -6,6 +6,8 @@ const esModules = [
   '@react-native',
   'react-native',
   'decode-uri-component',
+  'libmuse',
+  'lodash',
 ].join('|');
 
 const config = {
