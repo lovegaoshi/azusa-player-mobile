@@ -6,7 +6,6 @@ import { Appearance, ColorSchemeName } from 'react-native';
 import i18n from 'i18next';
 
 import { dummyPlaylist, dummyPlaylistList } from '../objects/Playlist';
-import { PLAYLIST_ENUMS } from '../enums/Playlist';
 import AzusaTheme from '../components/styles/AzusaTheme';
 import { chunkArray as chunkArrayRaw, arrayToObject } from '../utils/Utils';
 import { MUSICFREE } from './mediafetch/musicfree';
@@ -334,11 +333,15 @@ export const initPlayerObject =
       )) || ['NULL', 'NULL'],
       searchPlaylist: dummyPlaylist(
         i18n.t('PlaylistOperations.searchListName'),
-        PLAYLIST_ENUMS.TYPE_SEARCH_PLAYLIST
+        NoxEnum.Playlist.PlaylistEnums.TYPE_SEARCH_PLAYLIST
       ),
       favoriPlaylist: await getPlaylist(
         NoxEnum.Storage.StorageKeys.FAVORITE_PLAYLIST_KEY,
-        () => dummyPlaylist('Favorite', PLAYLIST_ENUMS.TYPE_FAVORI_PLAYLIST)
+        () =>
+          dummyPlaylist(
+            'Favorite',
+            NoxEnum.Playlist.PlaylistEnums.TYPE_FAVORI_PLAYLIST
+          )
       ),
       playbackMode: await getItem(
         NoxEnum.Storage.StorageKeys.PLAYMODE_KEY,

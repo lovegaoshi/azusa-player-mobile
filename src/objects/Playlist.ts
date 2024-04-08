@@ -1,11 +1,9 @@
 import { v4 as uuidv4 } from 'uuid';
 import i18n from 'i18next';
 
-import { PLAYLIST_ENUMS } from '../enums/Playlist';
-
 export const dummyPlaylist = (
   title = i18n.t('PlaylistOperations.searchListName'),
-  type = PLAYLIST_ENUMS.TYPE_TYPICA_PLAYLIST
+  type = NoxEnum.Playlist.PlaylistEnums.TYPE_TYPICA_PLAYLIST
 ): NoxMedia.Playlist => {
   return {
     songList: [],

@@ -7,7 +7,6 @@ import { useNetInfo } from '@react-native-community/netinfo';
 import { activateKeepAwakeAsync, deactivateKeepAwake } from 'expo-keep-awake';
 
 import { useNoxSetting } from '@stores/useApp';
-import { PLAYLIST_ENUMS, SearchRegex } from '@enums/Playlist';
 import usePlaylist from '@hooks/usePlaylist';
 import logger from '@utils/Logger';
 import noxCache, { noxCacheKey } from '@utils/Cache';
@@ -74,7 +73,7 @@ export default (playlist: NoxMedia.Playlist) => {
   const reParseSearch = (searchStr: string, rows: Array<NoxMedia.Song>) => {
     const extraReExtract = [
       {
-        regex: SearchRegex.cachedMatch.regex,
+        regex: NoxEnum.Playlist.SearchRegex.cachedMatch.regex,
         process: (val: RegExpExecArray, someRows: Array<NoxMedia.Song>) =>
           someRows.filter(
             row =>
@@ -147,7 +146,7 @@ export default (playlist: NoxMedia.Playlist) => {
   useEffect(() => {
     if (
       playerSetting.autoRSSUpdate &&
-      playlist.type === PLAYLIST_ENUMS.TYPE_TYPICA_PLAYLIST &&
+      playlist.type === NoxEnum.Playlist.PlaylistEnums.TYPE_TYPICA_PLAYLIST &&
       playlist.subscribeUrl.length > 0 &&
       playlist.subscribeUrl[0].length > 0 &&
       new Date().getTime() - playlist.lastSubscribed > 86400000
@@ -159,8 +158,8 @@ export default (playlist: NoxMedia.Playlist) => {
       });
     }
     if (playerSetting.dataSaver && netInfo.type === 'cellular') {
-      searchAndEnableSearch(SearchRegex.cachedMatch.text);
-      handleSearch(SearchRegex.cachedMatch.text);
+      searchAndEnableSearch(NoxEnum.Playlist.SearchRegex.cachedMatch.text);
+      handleSearch(NoxEnum.Playlist.SearchRegex.cachedMatch.text);
       setPlaylistSearchAutoFocus(false);
     }
   }, [playlist]);

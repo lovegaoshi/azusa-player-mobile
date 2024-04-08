@@ -3,7 +3,6 @@ import { Menu, Checkbox, Text } from 'react-native-paper';
 import { useTranslation } from 'react-i18next';
 
 import Dialog from '@components/dialogs/GenericSelectDialog';
-import { SORT_OPTIONS } from '@enums/Playlist';
 import { StyleSheet } from 'react-native-windows';
 import { View } from 'react-native';
 
@@ -12,7 +11,7 @@ const ICON = 'sort';
 interface Props {
   onCancel?: () => void;
   sortPlaylist: (
-    sortOptions: SORT_OPTIONS,
+    sortOptions: NoxEnum.Playlist.SortOptions,
     ascending: boolean,
     playlist: NoxMedia.Playlist
   ) => void;
@@ -27,7 +26,7 @@ export default ({
   const { t } = useTranslation();
   const [dialogOpen, setDialogOpen] = useState(false);
   const [ascending, setAscending] = useState(false);
-  const sortOptions = Object.entries(SORT_OPTIONS);
+  const sortOptions = Object.entries(NoxEnum.Playlist.SortOptions);
 
   const handleClose = () => {
     setDialogOpen(false);
