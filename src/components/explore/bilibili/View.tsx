@@ -17,7 +17,6 @@ import { fetchRanking } from '@utils/mediafetch/biliRanking';
 import { styles } from '@components/style';
 import { useNoxSetting } from '@stores/useApp';
 import usePlayback from '@hooks/usePlayback';
-import { ViewEnum } from '@enums/View';
 
 interface BiliCatSongs {
   [key: number]: NoxMedia.Song[];
@@ -56,7 +55,9 @@ const BiliSongCard = ({
             <TouchableOpacity
               style={{ height: 70, flexDirection: 'row' }}
               onPress={() => {
-                navigationGlobal.navigate(ViewEnum.PLAYER_PLAYLIST as never);
+                navigationGlobal.navigate(
+                  NoxEnumView.View.PLAYER_PLAYLIST as never
+                );
                 playAsSearchList({ songs, song: item });
               }}
             >

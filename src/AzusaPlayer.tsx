@@ -26,7 +26,6 @@ import Playlist from './components/playlist/View';
 import PlayerBottomPanel from './components/player/controls/PlayerProgressControls';
 import { useNoxSetting } from '@stores/useApp';
 import PlaylistDrawer from './components/playlists/View';
-import { ViewEnum } from './enums/View';
 import Settings from './components/setting/View';
 import Explore from './components/explore/View';
 import './localization/i18n';
@@ -54,12 +53,12 @@ const NoxPlayer = ({ navigation, setNavigation = () => undefined }: Props) => {
     <View style={{ flex: 1, justifyContent: 'flex-end' }}>
       <Tab.Navigator style={PlayerStyle}>
         <Tab.Screen
-          name={ViewEnum.PLAYER_COVER}
+          name={NoxEnumView.View.PLAYER_COVER}
           component={Player}
           options={{ tabBarStyle: { display: 'none' } }}
         />
         <Tab.Screen
-          name={ViewEnum.PLAYER_PLAYLIST}
+          name={NoxEnumView.View.PLAYER_PLAYLIST}
           component={Playlist}
           options={{ tabBarStyle: { display: 'none' } }}
         />
@@ -112,11 +111,11 @@ const AzusaPlayer = () => {
           }}
         >
           <Drawer.Navigator
-            initialRouteName={ViewEnum.PLAYER_HOME}
+            initialRouteName={NoxEnumView.View.PLAYER_HOME}
             drawerContent={PlaylistDrawer}
           >
             <Drawer.Screen
-              name={ViewEnum.PLAYER_HOME}
+              name={NoxEnumView.View.PLAYER_HOME}
               options={{
                 drawerIcon: () => (
                   <IconButton icon={NoxEnumIcons.ScreenIcons.HomeScreen} />
@@ -127,7 +126,7 @@ const AzusaPlayer = () => {
               component={NoxPlayerWrapper}
             />
             <Drawer.Screen
-              name={ViewEnum.EXPORE}
+              name={NoxEnumView.View.EXPORE}
               options={{
                 drawerIcon: () => (
                   <IconButton icon={NoxEnumIcons.ScreenIcons.ExploreScreen} />
@@ -137,7 +136,7 @@ const AzusaPlayer = () => {
               component={Explore}
             />
             <Drawer.Screen
-              name={ViewEnum.SETTINGS}
+              name={NoxEnumView.View.SETTINGS}
               options={{
                 drawerIcon: () => (
                   <IconButton icon={NoxEnumIcons.ScreenIcons.SettingScreen} />

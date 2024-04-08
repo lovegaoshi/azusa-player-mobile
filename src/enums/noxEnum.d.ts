@@ -36,3 +36,16 @@ declare namespace NoxEnumRNTP {
     SUGGEST = 'dice-multiple',
   }
 }
+
+declare namespace NoxEnumView {
+  export enum View {
+    PLAYER_HOME = 'NoxHome',
+    SETTINGS = 'NoxSettings',
+    PLAYER_COVER = 'NoxCover',
+    PLAYER_PLAYLIST = 'NoxPlaylist',
+    PLAYER_PLAYLISTS = 'NoxPlaylists',
+    USER_LOGIN = 'NoxLogin',
+    EXPORE = 'NoxExplore',
+    LYRICS = 'NoxLyrics',
+  }
+}
