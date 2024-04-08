@@ -130,7 +130,7 @@ export default ({ usePlaylist, prepareForLayoutAnimationRender }: Props) => {
         disabled={checking}
         title={t('SongOperations.songSearchInPlaylistTitle')}
       />
-      {selectedSongs()[0]?.source === SOURCE.bilivideo && (
+      {selectedSongs()[0]?.source === NoxMediaFetch.MediaFetch.Bilivideo && (
         <Menu.Item
           leadingIcon={ICONS.SEARCH_BVID}
           onPress={() => {

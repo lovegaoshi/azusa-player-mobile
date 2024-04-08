@@ -3,7 +3,6 @@ import { Linking, StyleSheet, View } from 'react-native';
 import { IconButton } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
 
-import { ICONS } from '@enums/Icons';
 import RandomGIFButton from '../buttons/RandomGIF';
 import { useNoxSetting } from '@stores/useApp';
 import { ViewEnum } from '@enums/View';
@@ -62,22 +61,22 @@ export default ({ panelWidth = 110 }: Props) => {
         />
       </View>
       <IconButton
-        icon={ICONS.homeScreen}
+        icon={NoxEnumIcons.ScreenIcons.HomeScreen}
         size={iconSize}
         onPress={() => navigationGlobal.navigate(ViewEnum.LYRICS as never)}
       />
       <IconButton
-        icon={ICONS.playlistScreen}
+        icon={NoxEnumIcons.ScreenIcons.PlaylistScreen}
         size={iconSize}
         onPress={onPlaylistPress}
       />
       <IconButton
-        icon={ICONS.exploreScreen}
+        icon={NoxEnumIcons.ScreenIcons.ExploreScreen}
         size={iconSize}
         onPress={() => navigationGlobal.navigate(ViewEnum.EXPORE as never)}
       />
       <IconButton
-        icon={ICONS.settingScreen}
+        icon={NoxEnumIcons.ScreenIcons.SettingScreen}
         size={iconSize}
         onPress={() => navigationGlobal.navigate(ViewEnum.SETTINGS as never)}
       />
