@@ -9,10 +9,10 @@ const useSongOperations = () => {
 
   const startRadio = (song: NoxMedia.Song) => {
     switch (song.source) {
-      case NoxEnumMediaFetch.Source.Ytbvideo:
+      case NoxEnum.MediaFetch.Source.Ytbvideo:
         setExternalSearchText(`youtu.be/${song.bvid}`);
         break;
-      case NoxEnumMediaFetch.Source.Bilivideo:
+      case NoxEnum.MediaFetch.Source.Bilivideo:
         setExternalSearchText(`bilibili.com/video/similarvideo/${song.bvid}`);
       default:
         logger.warn(
@@ -24,9 +24,9 @@ const useSongOperations = () => {
 
   const radioAvailable = (song?: NoxMedia.Song) =>
     [
-      NoxEnumMediaFetch.Source.Ytbvideo,
-      NoxEnumMediaFetch.Source.Bilivideo,
-    ].includes(song?.source as NoxEnumMediaFetch.Source);
+      NoxEnum.MediaFetch.Source.Ytbvideo,
+      NoxEnum.MediaFetch.Source.Bilivideo,
+    ].includes(song?.source as NoxEnum.MediaFetch.Source);
 
   return { startRadio, radioAvailable };
 };

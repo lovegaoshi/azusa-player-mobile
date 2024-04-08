@@ -44,7 +44,7 @@ const fetchBVIDRaw = async (bvid: string): Promise<NoxMedia.Song[]> => {
         page: index + 1,
         duration: page.duration,
         album: data.title,
-        source: NoxEnumMediaFetch.Source.Bilivideo,
+        source: NoxEnum.MediaFetch.Source.Bilivideo,
       });
     });
   } catch (error: any) {

@@ -25,27 +25,27 @@ export default ({ panelWidth }: Props) => {
     <View style={panelStyle}>
       <Stack.Navigator>
         <Stack.Screen
-          name={NoxEnumView.View.LYRICS}
+          name={NoxEnum.View.View.LYRICS}
           component={WrappedLyricView}
           options={{ headerShown: false }}
         />
         <Stack.Screen
-          name={NoxEnumView.View.PLAYER_PLAYLIST}
+          name={NoxEnum.View.View.PLAYER_PLAYLIST}
           component={Playlist}
           options={{ headerShown: false }}
         />
         <Stack.Screen
-          name={NoxEnumView.View.PLAYER_PLAYLISTS}
+          name={NoxEnum.View.View.PLAYER_PLAYLISTS}
           component={Playlists}
           options={{ headerShown: false }}
         />
         <Stack.Screen
-          name={NoxEnumView.View.EXPORE}
+          name={NoxEnum.View.View.EXPORE}
           component={DummySettings}
           options={{ headerShown: false }}
         />
         <Stack.Screen
-          name={NoxEnumView.View.SETTINGS}
+          name={NoxEnum.View.View.SETTINGS}
           component={Settings}
           options={{ headerShown: false }}
         />

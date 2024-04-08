@@ -32,7 +32,7 @@ const songFetch = async (
   const uniqMediaFiles = mediaFiles.filter(v => !favlist.includes(v.realPath));
   return uniqMediaFiles.map(v =>
     SongTS({
-      cid: `${NoxEnumMediaFetch.Source.Local}-${v.realPath}`,
+      cid: `${NoxEnum.MediaFetch.Source.Local}-${v.realPath}`,
       bvid: `file://${v.realPath}`,
       name: v.title,
       nameRaw: v.title,
@@ -43,7 +43,7 @@ const songFetch = async (
       page: 0,
       duration: v.duration / 1000,
       album: v.album,
-      source: NoxEnumMediaFetch.Source.Local,
+      source: NoxEnum.MediaFetch.Source.Local,
     })
   );
   // TODO: no longer needs FFProbe
@@ -60,7 +60,7 @@ const songFetch = async (
         logger.warn(v);
       }
       return SongTS({
-        cid: `${NoxEnumMediaFetch.Source.Local}-${v.realPath}`,
+        cid: `${NoxEnum.MediaFetch.Source.Local}-${v.realPath}`,
         bvid: `file://${v.realPath}`,
         name: probedMetadata.tags?.title || v.fileName,
         nameRaw: probedMetadata.tags?.title || v.fileName,
@@ -71,7 +71,7 @@ const songFetch = async (
         page: 0,
         duration: Number(probedMetadata.duration) || 0,
         album: probedMetadata.tags?.album || '',
-        source: NoxEnumMediaFetch.Source.Local,
+        source: NoxEnum.MediaFetch.Source.Local,
       });
     })
   );

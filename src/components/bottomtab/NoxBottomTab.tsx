@@ -68,21 +68,21 @@ const NoxAndroidBottomTab = ({ navigation }: NoxComponent.NavigationProps2) => {
           <BottomIconButton
             icon={renderIcon(Routes.music)}
             onPress={() => {
-              navigationGlobal.navigate(NoxEnumView.View.PLAYER_HOME as never);
+              navigationGlobal.navigate(NoxEnum.View.View.PLAYER_HOME as never);
               setRoute(Routes.music);
             }}
           />
           <BottomIconButton
             icon={renderIcon(Routes.explore)}
             onPress={() => {
-              navigationGlobal.navigate(NoxEnumView.View.EXPORE as never);
+              navigationGlobal.navigate(NoxEnum.View.View.EXPORE as never);
               setRoute(Routes.explore);
             }}
           />
           <BottomIconButton
             icon={renderIcon(Routes.setting)}
             onPress={() => {
-              navigationGlobal.navigate(NoxEnumView.View.SETTINGS as never);
+              navigationGlobal.navigate(NoxEnum.View.View.SETTINGS as never);
               setRoute(Routes.setting);
             }}
           />

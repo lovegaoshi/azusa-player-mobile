@@ -52,7 +52,7 @@ export const DEFAULT_SETTING: NoxStorage.PlayerSettingDict = {
   loadPlaylistAsArtist: false,
   sendBiliHeartbeat: false,
   noCookieBiliSearch: false,
-  playbackMode: NoxEnumRNTP.NoxRepeatMode.SHUFFLE,
+  playbackMode: NoxEnum.RNTP.NoxRepeatMode.SHUFFLE,
   dataSaver: false,
   fastBiliSearch: true,
   noInterruption: false,

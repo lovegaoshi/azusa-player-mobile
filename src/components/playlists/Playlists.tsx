@@ -50,7 +50,7 @@ export default () => {
 
   const goToPlaylist = (playlistId: string) => {
     setCurrentPlaylist(playlists[playlistId]);
-    navigation.navigate(NoxEnumView.View.PLAYER_PLAYLIST as never);
+    navigation.navigate(NoxEnum.View.View.PLAYER_PLAYLIST as never);
   };
 
   const SearchPlaylistAsNewButton = () => (
@@ -118,7 +118,7 @@ export default () => {
             <IconButton
               icon={'cog'}
               onPress={() =>
-                navigation.navigate(NoxEnumView.View.SETTINGS as never)
+                navigation.navigate(NoxEnum.View.View.SETTINGS as never)
               }
             />
           )}

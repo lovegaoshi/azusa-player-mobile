@@ -327,7 +327,7 @@ export const initPlayerObject =
       ),
       playbackMode: await getItem(
         STORAGE_KEYS.PLAYMODE_KEY,
-        NoxEnumRNTP.NoxRepeatMode.SHUFFLE
+        NoxEnum.RNTP.NoxRepeatMode.SHUFFLE
       ),
       skin: await getItem(STORAGE_KEYS.SKIN, AzusaTheme),
       skins: (await getPlayerSkins()) || [],

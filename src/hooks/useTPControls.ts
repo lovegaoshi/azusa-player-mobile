@@ -68,7 +68,7 @@ export default () => {
 
   const skipToBiliSuggest = async (next = true) => {
     if (
-      noxPlayingList.getState().playmode !== NoxEnumRNTP.NoxRepeatMode.SUGGEST
+      noxPlayingList.getState().playmode !== NoxEnum.RNTP.NoxRepeatMode.SUGGEST
     ) {
       throw new Error('playmode is not bilisuggest.');
     }

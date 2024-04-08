@@ -151,7 +151,7 @@ export async function PlaybackService() {
           console.error('resolveURL failed', event.track, e);
         }
       }
-      if (getState().playmode === NoxEnumRNTP.NoxRepeatMode.REPEAT_TRACK) {
+      if (getState().playmode === NoxEnum.RNTP.NoxRepeatMode.REPEAT_TRACK) {
         TrackPlayer.setRepeatMode(RepeatMode.Track);
       }
     }

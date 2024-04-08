@@ -18,7 +18,7 @@ import SongTS from '@objects/Song';
 // https://api.bilibili.com/audio/music-service/web/song/upper?uid=741520&pn=1&ps=70&order=1
 const URL_BILICHANNEL_AUDIO_INFO =
   'https://api.bilibili.com/audio/music-service/web/song/upper?uid=741520&pn={pn}&ps=30&order=1';
-const CIDPREFIX = `${NoxEnumMediaFetch.Source.Biliaudio}-`;
+const CIDPREFIX = `${NoxEnum.MediaFetch.Source.Biliaudio}-`;
 
 export const fetchBiliChannelAudioList = async (
   mid: string,
@@ -48,7 +48,7 @@ export const fetchBiliChannelAudioList = async (
           page: 1,
           duration: info.duration,
           album: info.title,
-          source: NoxEnumMediaFetch.Source.Biliaudio,
+          source: NoxEnum.MediaFetch.Source.Biliaudio,
         })
       ),
   });

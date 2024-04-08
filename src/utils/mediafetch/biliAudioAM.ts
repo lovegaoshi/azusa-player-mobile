@@ -77,7 +77,7 @@ const fetchBiliAudioColleList = async (
     resolveBiliBVID: async v =>
       v.map((data: any) =>
         SongTS({
-          cid: `${NoxEnumMediaFetch.Source.Biliaudio}-${data.id}`,
+          cid: `${NoxEnum.MediaFetch.Source.Biliaudio}-${data.id}`,
           bvid: data.id,
           name: data.title,
           nameRaw: data.title,
@@ -88,7 +88,7 @@ const fetchBiliAudioColleList = async (
           page: 1,
           duration: data.duration,
           album: data.title,
-          source: NoxEnumMediaFetch.Source.Biliaudio,
+          source: NoxEnum.MediaFetch.Source.Biliaudio,
         })
       ),
   });

@@ -31,7 +31,7 @@ const fetchAVIDRaw = async (aid: string): Promise<NoxMedia.Song[]> => {
         page: index + 1,
         duration: page.duration,
         album: data.title,
-        source: NoxEnumMediaFetch.Source.Bilivideo,
+        source: NoxEnum.MediaFetch.Source.Bilivideo,
       });
     });
     // eslint-disable-next-line @typescript-eslint/no-explicit-any

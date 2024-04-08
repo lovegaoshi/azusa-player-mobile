@@ -45,7 +45,7 @@ const fetchYTPlaylist = async (
           ),
           album:
             data.contents.twoColumnWatchNextResults.playlist.playlist.title,
-          source: NoxEnumMediaFetch.Source.Ytbvideo,
+          source: NoxEnum.MediaFetch.Source.Ytbvideo,
           metadataOnLoad: true,
         }),
       ])

@@ -25,8 +25,8 @@ import DummyLyricDetail from '../objects/LyricDetail';
 import { MUSICFREE } from '../utils/mediafetch/musicfree';
 
 interface NoxSetting {
-  intentData?: NoxEnumIntent.IntentData;
-  setIntentData: (val?: NoxEnumIntent.IntentData) => void;
+  intentData?: NoxEnum.Intent.IntentData;
+  setIntentData: (val?: NoxEnum.Intent.IntentData) => void;
 
   searchOption: SEARCH_OPTIONS | MUSICFREE;
   setSearchOption: (val: SEARCH_OPTIONS | MUSICFREE) => void;

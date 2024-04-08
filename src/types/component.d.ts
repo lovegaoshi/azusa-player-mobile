@@ -6,7 +6,7 @@ import { Track } from 'react-native-track-player';
 declare global {
   namespace NoxComponent {
     interface AppProps {
-      intentData?: NoxEnumIntent.IntentData;
+      intentData?: NoxEnum.Intent.IntentData;
     }
     interface NavigationProps {
       navigation: DrawerNavigationProp<ParamListBase>;

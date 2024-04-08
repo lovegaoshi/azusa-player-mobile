@@ -53,12 +53,12 @@ const NoxPlayer = ({ navigation, setNavigation = () => undefined }: Props) => {
     <View style={{ flex: 1, justifyContent: 'flex-end' }}>
       <Tab.Navigator style={PlayerStyle}>
         <Tab.Screen
-          name={NoxEnumView.View.PLAYER_COVER}
+          name={NoxEnum.View.View.PLAYER_COVER}
           component={Player}
           options={{ tabBarStyle: { display: 'none' } }}
         />
         <Tab.Screen
-          name={NoxEnumView.View.PLAYER_PLAYLIST}
+          name={NoxEnum.View.View.PLAYER_PLAYLIST}
           component={Playlist}
           options={{ tabBarStyle: { display: 'none' } }}
         />
@@ -111,14 +111,14 @@ const AzusaPlayer = () => {
           }}
         >
           <Drawer.Navigator
-            initialRouteName={NoxEnumView.View.PLAYER_HOME}
+            initialRouteName={NoxEnum.View.View.PLAYER_HOME}
             drawerContent={PlaylistDrawer}
           >
             <Drawer.Screen
-              name={NoxEnumView.View.PLAYER_HOME}
+              name={NoxEnum.View.View.PLAYER_HOME}
               options={{
                 drawerIcon: () => (
-                  <IconButton icon={NoxEnumIcons.ScreenIcons.HomeScreen} />
+                  <IconButton icon={NoxEnum.Icons.ScreenIcons.HomeScreen} />
                 ),
                 title: String(t('appDrawer.homeScreenName')),
                 header: () => null,
@@ -126,20 +126,20 @@ const AzusaPlayer = () => {
               component={NoxPlayerWrapper}
             />
             <Drawer.Screen
-              name={NoxEnumView.View.EXPORE}
+              name={NoxEnum.View.View.EXPORE}
               options={{
                 drawerIcon: () => (
-                  <IconButton icon={NoxEnumIcons.ScreenIcons.ExploreScreen} />
+                  <IconButton icon={NoxEnum.Icons.ScreenIcons.ExploreScreen} />
                 ),
                 title: String(t('appDrawer.exploreScreenName')),
               }}
               component={Explore}
             />
             <Drawer.Screen
-              name={NoxEnumView.View.SETTINGS}
+              name={NoxEnum.View.View.SETTINGS}
               options={{
                 drawerIcon: () => (
-                  <IconButton icon={NoxEnumIcons.ScreenIcons.SettingScreen} />
+                  <IconButton icon={NoxEnum.Icons.ScreenIcons.SettingScreen} />
                 ),
                 title: String(t('appDrawer.settingScreenName')),
                 header: () => null,

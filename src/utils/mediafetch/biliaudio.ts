@@ -19,7 +19,7 @@ const URL_AUDIO_INFO =
   'https://www.bilibili.com/audio/music-service-c/web/song/info?sid={sid}';
 const URL_AUDIO_PLAY_URL =
   'https://www.bilibili.com/audio/music-service-c/web/url?sid={sid}';
-const CIDPREFIX = `${NoxEnumMediaFetch.Source.Biliaudio}-`;
+const CIDPREFIX = `${NoxEnum.MediaFetch.Source.Biliaudio}-`;
 
 const fetchPlayUrlPromise = async (sid: string) => {
   try {
@@ -56,7 +56,7 @@ export const baFetch = async (auids: string[]) => {
           page: 1,
           duration: data.duration,
           album: data.title,
-          source: NoxEnumMediaFetch.Source.Biliaudio,
+          source: NoxEnum.MediaFetch.Source.Biliaudio,
         });
       })
     )

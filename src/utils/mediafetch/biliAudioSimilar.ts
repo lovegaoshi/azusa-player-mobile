@@ -69,7 +69,7 @@ const fetchBiliAudioSimilarList = async (
   const json = await res.json();
   return json.data.map((data: any) =>
     SongTS({
-      cid: `${NoxEnumMediaFetch.Source.Biliaudio}-${data.id}`,
+      cid: `${NoxEnum.MediaFetch.Source.Biliaudio}-${data.id}`,
       bvid: data.id,
       name: data.title,
       nameRaw: data.title,
@@ -80,7 +80,7 @@ const fetchBiliAudioSimilarList = async (
       page: 1,
       duration: data.duration,
       album: data.title,
-      source: NoxEnumMediaFetch.Source.Biliaudio,
+      source: NoxEnum.MediaFetch.Source.Biliaudio,
     })
   );
 };

@@ -32,9 +32,9 @@ const getRoomInfos = async (uids: number[]) => {
     .map(
       (roomInfo: any) =>
         SongTS({
-          cid: `${NoxEnumMediaFetch.Source.BiliLive}-${roomInfo.room_id}`,
+          cid: `${NoxEnum.MediaFetch.Source.BiliLive}-${roomInfo.room_id}`,
           bvid: roomInfo.room_id,
-          source: NoxEnumMediaFetch.Source.BiliLive,
+          source: NoxEnum.MediaFetch.Source.BiliLive,
           name: roomInfo.title,
           singer: roomInfo.uname,
           singerId: roomInfo.uid,

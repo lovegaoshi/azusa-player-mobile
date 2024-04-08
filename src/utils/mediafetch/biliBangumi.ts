@@ -17,7 +17,7 @@ import bfetch from '@utils/BiliFetch';
 const API = 'https://api.bilibili.com/pgc/view/web/season?ep_id={ep}';
 const API_PLAY =
   'https://api.bilibili.com/pgc/player/web/playurl?cid={cid}&ep_id={ep}';
-const CIDPREFIX = `${NoxEnumMediaFetch.Source.BiliBangumi}-`;
+const CIDPREFIX = `${NoxEnum.MediaFetch.Source.BiliBangumi}-`;
 
 const fetchPlayUrlPromise = async (cid: string, epid: string) => {
   try {
@@ -54,7 +54,7 @@ const regexFetch = async ({
         page: 1,
         duration: ep.duration,
         album: ep.share_copy,
-        source: NoxEnumMediaFetch.Source.BiliBangumi,
+        source: NoxEnum.MediaFetch.Source.BiliBangumi,
       })
     ),
   };

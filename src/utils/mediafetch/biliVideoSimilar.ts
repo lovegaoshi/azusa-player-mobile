@@ -19,7 +19,7 @@ const fetchBiliVideoSimilarList = async (bvid: string) => {
   return (await fetchBVID(bvid)).concat(
     json.data
       // limit similar videos to music only.
-      .filter((v: any) => NoxEnumMediaFetch.BiliMusicTid.includes(v.tid))
+      .filter((v: any) => NoxEnum.MediaFetch.BiliMusicTid.includes(v.tid))
       .map((data: any) =>
         SongTS({
           cid: data.cid,
@@ -33,7 +33,7 @@ const fetchBiliVideoSimilarList = async (bvid: string) => {
           page: 1,
           duration: data.duration,
           album: data.title,
-          source: NoxEnumMediaFetch.Source.Bilivideo,
+          source: NoxEnum.MediaFetch.Source.Bilivideo,
         })
       )
   );

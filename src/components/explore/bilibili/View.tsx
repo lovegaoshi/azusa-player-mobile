@@ -56,7 +56,7 @@ const BiliSongCard = ({
               style={{ height: 70, flexDirection: 'row' }}
               onPress={() => {
                 navigationGlobal.navigate(
-                  NoxEnumView.View.PLAYER_PLAYLIST as never
+                  NoxEnum.View.View.PLAYER_PLAYLIST as never
                 );
                 playAsSearchList({ songs, song: item });
               }}

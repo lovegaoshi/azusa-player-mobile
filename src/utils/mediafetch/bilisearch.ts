@@ -47,7 +47,7 @@ const fastSearchResolveBVID = async (bvobjs: any[]) => {
       page: 1,
       duration: timestampToSeconds(obj.duration),
       album: name,
-      source: NoxEnumMediaFetch.Source.Bilivideo,
+      source: NoxEnum.MediaFetch.Source.Bilivideo,
     });
   });
 };

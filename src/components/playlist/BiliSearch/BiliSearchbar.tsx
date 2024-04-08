@@ -69,7 +69,7 @@ export default ({
   };
 
   const handleExternalSearch = (data: string) => {
-    navigationGlobal.navigate(NoxEnumView.View.PLAYER_PLAYLIST as never);
+    navigationGlobal.navigate(NoxEnum.View.View.PLAYER_PLAYLIST as never);
     return handleSearch(data);
   };
 

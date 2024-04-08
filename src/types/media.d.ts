@@ -19,7 +19,7 @@ declare global {
       duration: number;
       album?: string;
       addedDate?: number;
-      source?: NoxEnumMediaFetch.Source | MUSICFREE;
+      source?: NoxEnum.MediaFetch.Source | MUSICFREE;
       isLive?: boolean;
       liveStatus?: boolean;
       metadataOnLoad?: boolean;

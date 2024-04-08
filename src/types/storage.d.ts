@@ -52,7 +52,7 @@ declare global {
       lastPlaylistId: [string, string];
       searchPlaylist: NoxMedia.Playlist;
       favoriPlaylist: NoxMedia.Playlist;
-      playbackMode: NoxEnumRNTP.NoxRepeatMode;
+      playbackMode: NoxEnum.RNTP.NoxRepeatMode;
       skin: NoxTheme.Style;
       skins: any[];
       // site: set-cookie header
@@ -72,7 +72,7 @@ declare global {
       cookies: { [key: string]: string };
       language?: string;
       lastPlayDuration: number;
-      playbackMode: NoxEnumRNTP.NoxRepeatMode;
+      playbackMode: NoxEnum.RNTP.NoxRepeatMode;
     }
 
     export interface R128Dict {

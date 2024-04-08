@@ -1,12 +1,11 @@
-import { REOPERATIONTYPE } from '@enums/Utils';
 import { SearchRegex } from '@enums/Playlist';
 
 const operation2RegExtractor = (operation: NoxRegExt.Operation) => {
   const regExps = operation[1]?.map(val => new RegExp(val));
   switch (operation[0]) {
-    case REOPERATIONTYPE.extractWith:
+    case NoxEnum.Util.RegexType.extractWith:
       return (val: string) => extractWith(val, regExps);
-    case REOPERATIONTYPE.extractParenthesis:
+    case NoxEnum.Util.RegexType.extractParenthesis:
       return (val: string) => extractParenthesis(val);
     default:
       return (val: string) => val;

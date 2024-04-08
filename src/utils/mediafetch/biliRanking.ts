@@ -18,7 +18,7 @@ const rankingToSong = (data: any) =>
     page: 1,
     duration: data.duration,
     album: data.title,
-    source: NoxEnumMediaFetch.Source.Bilivideo,
+    source: NoxEnum.MediaFetch.Source.Bilivideo,
   });
 
 export const fetchRanking = async (rid = '3') => {
@@ -30,7 +30,7 @@ export const fetchRanking = async (rid = '3') => {
     const json = await res.json();
     const results = {} as { [key: number]: NoxMedia.Song[] };
     json.data.list.forEach((v: any) => {
-      if (!NoxEnumMediaFetch.BiliMusicTid.includes(v.tid)) return;
+      if (!NoxEnum.MediaFetch.BiliMusicTid.includes(v.tid)) return;
       if (results[v.tid]) {
         results[v.tid].push(rankingToSong(v));
       } else {

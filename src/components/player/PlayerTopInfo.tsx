@@ -30,7 +30,9 @@ export default ({ navigation }: NoxComponent.NavigationProps) => {
         <IconButton
           icon="playlist-music"
           onPress={() =>
-            navigationGlobal.navigate(NoxEnumView.View.PLAYER_PLAYLIST as never)
+            navigationGlobal.navigate(
+              NoxEnum.View.View.PLAYER_PLAYLIST as never
+            )
           }
           size={40}
         />

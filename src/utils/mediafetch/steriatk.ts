@@ -42,7 +42,7 @@ const paginatedFetch = ({
           page: 0,
           duration: 0,
           album: videoinfo.name,
-          source: NoxEnumMediaFetch.Source.Steriatk,
+          source: NoxEnum.MediaFetch.Source.Steriatk,
         })
       ),
     progressEmitter,

@@ -8,7 +8,7 @@ export default () => {
   const { shuffleAll } = usePlayback();
   const onPressed = async () => {
     await shuffleAll();
-    navigation.navigate(NoxEnumView.View.PLAYER_HOME as never);
+    navigation.navigate(NoxEnum.View.View.PLAYER_HOME as never);
   };
 
   return <IconButton icon="shuffle" onPress={onPressed} />;

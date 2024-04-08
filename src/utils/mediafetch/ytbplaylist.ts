@@ -20,7 +20,7 @@ const musePlaylistItemToNoxSong = (val: any, data: any) => {
       page: 1,
       duration: val.duration_seconds,
       album: data.title,
-      source: NoxEnumMediaFetch.Source.Ytbvideo,
+      source: NoxEnum.MediaFetch.Source.Ytbvideo,
       metadataOnLoad: true,
     });
   } catch {
@@ -75,7 +75,7 @@ const fastYTPlaylistSongResolve = (val: any, data: any) => {
       page: Number(val.playlistVideoRenderer.index.simpleText),
       duration: Number(val.playlistVideoRenderer.lengthSeconds),
       album: data.metadata.playlistMetadataRenderer.title,
-      source: NoxEnumMediaFetch.Source.Ytbvideo,
+      source: NoxEnum.MediaFetch.Source.Ytbvideo,
       metadataOnLoad: true,
     });
   } catch (e) {

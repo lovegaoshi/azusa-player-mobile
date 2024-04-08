@@ -60,7 +60,7 @@ export default (props: any) => {
     function deepLinkHandler(data: { url: string }) {
       if (data.url === 'trackplayer://notification.click') {
         logger.debug('[Drawer] click from notification; navigate to home');
-        navigation.navigate(NoxEnumView.View.PLAYER_HOME as never);
+        navigation.navigate(NoxEnum.View.View.PLAYER_HOME as never);
       }
     }
 
@@ -78,18 +78,18 @@ export default (props: any) => {
       <BiliCard backgroundURI={playerStyle.biliGarbCard}>
         <RenderDrawerItem
           icon={'home-outline'}
-          view={NoxEnumView.View.PLAYER_HOME}
+          view={NoxEnum.View.View.PLAYER_HOME}
           text={'appDrawer.homeScreenName'}
         />
       </BiliCard>
       <RenderDrawerItem
         icon={'compass'}
-        view={NoxEnumView.View.EXPORE}
+        view={NoxEnum.View.View.EXPORE}
         text={'appDrawer.exploreScreenName'}
       />
       <RenderDrawerItem
         icon={'cog'}
-        view={NoxEnumView.View.SETTINGS}
+        view={NoxEnum.View.View.SETTINGS}
         text={'appDrawer.settingScreenName'}
       />
       <Divider />
