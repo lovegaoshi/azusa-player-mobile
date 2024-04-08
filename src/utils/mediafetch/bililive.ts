@@ -4,7 +4,6 @@ import SongTS from '@objects/Song';
 import { logger } from '../Logger';
 import bfetch from '@utils/BiliFetch';
 import { biliApiLimiter } from './throttle';
-import { SOURCE } from '@enums/MediaFetch';
 
 interface BiliLiveRoomInfo {
   room_id: string;
@@ -48,14 +47,14 @@ const fetchVideoInfoRaw = async (aid: string) => {
     const roomInfo = await getRoomInfo(aid);
     const liverInfo = await getLiver(roomInfo.room_id);
     return SongTS({
-      cid: `${SOURCE.biliLive}-${roomInfo.room_id}`,
+      cid: `${NoxEnum.MediaFetch.Source.BiliLive}-${roomInfo.room_id}`,
       bvid: roomInfo.room_id,
       name: roomInfo.title,
       singer: liverInfo.uname,
       cover: roomInfo.user_cover,
       singerId: aid,
       album: `b站直播间${aid}`,
-      source: SOURCE.biliLive,
+      source: NoxEnum.MediaFetch.Source.BiliLive,
       isLive: true,
       liveStatus: roomInfo.live_status === 1,
     });

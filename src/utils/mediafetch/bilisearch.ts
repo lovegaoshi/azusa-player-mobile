@@ -4,7 +4,6 @@ import { timestampToSeconds } from '../Utils';
 import bfetch from '../BiliFetch';
 import { getBiliCookie } from '@utils/Bilibili/biliCookies';
 import SongTS from '@objects/Song';
-import { SOURCE } from '@enums/MediaFetch';
 
 const URL_BILI_SEARCH =
   'https://api.bilibili.com/x/web-interface/search/type?search_type=video&keyword={keyword}&page={pn}&tids=3';
@@ -48,7 +47,7 @@ const fastSearchResolveBVID = async (bvobjs: any[]) => {
       page: 1,
       duration: timestampToSeconds(obj.duration),
       album: name,
-      source: SOURCE.bilivideo,
+      source: NoxEnum.MediaFetch.Source.Bilivideo,
     });
   });
 };

@@ -8,11 +8,9 @@ import DraggableFlatList, {
 } from 'react-native-draggable-flatlist';
 
 import { useNoxSetting } from '@stores/useApp';
-import { ViewEnum } from '@enums/View';
 import AddPlaylistButton, {
   AddPlaylistButtonRef,
 } from '../buttons/AddPlaylistButton';
-import { STORAGE_KEYS } from '@enums/Storage';
 import NewPlaylistDialog from '../dialogs/NewPlaylistDialog';
 import useAlert from '../dialogs/useAlert';
 import ShuffleAllButton from '@components/playlists/ShuffleAllButton';
@@ -51,7 +49,7 @@ export default () => {
 
   const goToPlaylist = (playlistId: string) => {
     setCurrentPlaylist(playlists[playlistId]);
-    navigation.navigate(ViewEnum.PLAYER_PLAYLIST as never);
+    navigation.navigate(NoxEnum.View.View.PLAYER_PLAYLIST as never);
   };
 
   const SearchPlaylistAsNewButton = () => (
@@ -109,7 +107,9 @@ export default () => {
         <View style={styles.addPlaylistButtonContent}>
           <IconButton
             icon={'cards-heart'}
-            onPress={() => goToPlaylist(STORAGE_KEYS.FAVORITE_PLAYLIST_KEY)}
+            onPress={() =>
+              goToPlaylist(NoxEnum.Storage.StorageKeys.FAVORITE_PLAYLIST_KEY)
+            }
           />
           <ShuffleAllButton />
           <AddPlaylistButton ref={addPlaylistButtonRef} />
@@ -118,29 +118,33 @@ export default () => {
           {false && (
             <IconButton
               icon={'cog'}
-              onPress={() => navigation.navigate(ViewEnum.SETTINGS as never)}
+              onPress={() =>
+                navigation.navigate(NoxEnum.View.View.SETTINGS as never)
+              }
             />
           )}
         </View>
       </TouchableRipple>
       <TouchableRipple
-        onPress={() => goToPlaylist(STORAGE_KEYS.SEARCH_PLAYLIST_KEY)}
+        onPress={() =>
+          goToPlaylist(NoxEnum.Storage.StorageKeys.SEARCH_PLAYLIST_KEY)
+        }
         style={[
           {
             backgroundColor:
               currentPlaylist.id ===
-              playlists[STORAGE_KEYS.SEARCH_PLAYLIST_KEY]?.id
+              playlists[NoxEnum.Storage.StorageKeys.SEARCH_PLAYLIST_KEY]?.id
                 ? playerStyle.customColors.playlistDrawerBackgroundColor
                 : undefined,
           },
         ]}
       >
         <PlaylistItem
-          item={playlists[STORAGE_KEYS.SEARCH_PLAYLIST_KEY]}
+          item={playlists[NoxEnum.Storage.StorageKeys.SEARCH_PLAYLIST_KEY]}
           icon={SearchPlaylistAsNewButton()}
           leadColor={
             currentPlayingList.id ===
-            playlists[STORAGE_KEYS.SEARCH_PLAYLIST_KEY].id
+            playlists[NoxEnum.Storage.StorageKeys.SEARCH_PLAYLIST_KEY].id
               ? playerStyle.colors.primary //customColors.playlistDrawerBackgroundColor
               : undefined
           }
@@ -148,7 +152,7 @@ export default () => {
       </TouchableRipple>
       <NewPlaylistDialog
         visible={newPlaylistDialogOpen}
-        fromList={playlists[STORAGE_KEYS.SEARCH_PLAYLIST_KEY]}
+        fromList={playlists[NoxEnum.Storage.StorageKeys.SEARCH_PLAYLIST_KEY]}
         onClose={() => setNewPlaylistDialogOpen(false)}
         onSubmit={() => setNewPlaylistDialogOpen(false)}
       />

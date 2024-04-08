@@ -1,5 +1,3 @@
-import { SORT_OPTIONS, PLAYLIST_ENUMS } from '@enums/Playlist';
-import { SOURCE } from '@enums/MediaFetch';
 import { MUSICFREE } from '@utils/mediafetch/musicfree';
 
 declare global {
@@ -20,7 +18,7 @@ declare global {
       duration: number;
       album?: string;
       addedDate?: number;
-      source?: SOURCE | MUSICFREE;
+      source?: NoxEnum.MediaFetch.Source | MUSICFREE;
       isLive?: boolean;
       liveStatus?: boolean;
       metadataOnLoad?: boolean;
@@ -30,7 +28,7 @@ declare global {
     export interface Playlist {
       title: string;
       id: string;
-      type: PLAYLIST_ENUMS;
+      type: NoxEnum.Playlist.PlaylistEnums;
 
       songList: Array<Song>;
 
@@ -42,7 +40,7 @@ declare global {
       biliSync: boolean;
       newSongOverwrite?: boolean;
 
-      sort?: SORT_OPTIONS;
+      sort?: NoxEnum.Playlist.SortOptions;
       // function to support infinite loading; only applicable to
       // search playlists. bc we stringify playlists, this will be
       // lost upon loading from storage

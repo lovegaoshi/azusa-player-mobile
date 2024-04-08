@@ -4,7 +4,6 @@ import axios from 'axios';
 import { regexFetchProps } from './generic';
 import SongTS from '@objects/Song';
 import { logger } from '../Logger';
-import { SOURCE } from '@enums/MediaFetch';
 import { fetchBiliPaginatedAPI } from './paginatedbili';
 
 // https://github.com/SocialSisterYi/bilibili-API-collect/blob/master/docs/live/info.md#%E6%89%B9%E9%87%8F%E6%9F%A5%E8%AF%A2%E7%9B%B4%E6%92%AD%E9%97%B4%E7%8A%B6%E6%80%81
@@ -33,9 +32,9 @@ const getRoomInfos = async (uids: number[]) => {
     .map(
       (roomInfo: any) =>
         SongTS({
-          cid: `${SOURCE.biliLive}-${roomInfo.room_id}`,
+          cid: `${NoxEnum.MediaFetch.Source.BiliLive}-${roomInfo.room_id}`,
           bvid: roomInfo.room_id,
-          source: SOURCE.biliLive,
+          source: NoxEnum.MediaFetch.Source.BiliLive,
           name: roomInfo.title,
           singer: roomInfo.uname,
           singerId: roomInfo.uid,

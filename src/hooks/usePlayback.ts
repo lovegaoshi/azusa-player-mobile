@@ -10,7 +10,6 @@ import {
   playSongUninterrupted,
   playSongInterrupted,
 } from '@utils/RNTPUtils';
-import { NoxRepeatMode } from '@enums/RepeatMode';
 import noxPlayingList, { setPlayingIndex } from '@stores/playingList';
 import noxCache, { noxCacheKey } from '@utils/Cache';
 import useDataSaver from './useDataSaver';
@@ -57,7 +56,7 @@ const usePlayback = () => {
   }: PlayFromPlaylist) => {
     playlist = playlistParser(playlist);
     setCurrentPlayingList(playlist);
-    if (getState().playmode === NoxRepeatMode.REPEAT_TRACK) {
+    if (getState().playmode === NoxEnum.RNTP.NoxRepeatMode.REPEAT_TRACK) {
       await TrackPlayer.setRepeatMode(RepeatMode.Off);
     }
     if (song === undefined) {

@@ -3,8 +3,8 @@ import he from 'he';
 
 import { extractParenthesis } from '../utils/re';
 import { reExtractSongName } from '@stores/appStore';
-import { SOURCE } from '@enums/MediaFetch';
 import { MUSICFREE } from '@utils/mediafetch/musicfree';
+import { i0hdslbHTTPResolve } from '@utils/Utils';
 
 export const DEFAULT_NULL_URL = 'NULL';
 export const NULL_TRACK = { url: DEFAULT_NULL_URL, urlRefreshTimeStamp: 0 };
@@ -25,7 +25,7 @@ interface SongProps {
   duration?: number;
   album?: string;
   addedDate?: number;
-  source?: SOURCE | MUSICFREE;
+  source?: NoxEnum.MediaFetch.Source | MUSICFREE;
   isLive?: boolean;
   liveStatus?: boolean;
   metadataOnLoad?: boolean;
@@ -56,7 +56,7 @@ export default ({
     bvid,
     name,
     singer: he.decode(singer),
-    cover,
+    cover: i0hdslbHTTPResolve(cover),
     singerId,
     lyric,
     lyricOffset,

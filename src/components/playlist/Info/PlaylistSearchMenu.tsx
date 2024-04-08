@@ -2,8 +2,6 @@ import * as React from 'react';
 import { Menu } from 'react-native-paper';
 import { useTranslation } from 'react-i18next';
 
-import { SearchRegex } from '@enums/Playlist';
-
 interface Props {
   visible?: boolean;
   toggleVisible?: () => void;
@@ -21,10 +19,10 @@ export default ({
 
   return (
     <Menu visible={visible} onDismiss={toggleVisible} anchor={menuCoords}>
-      {Object.keys(SearchRegex).map((entry, index) => (
+      {Object.keys(NoxEnum.Playlist.SearchRegex).map((entry, index) => (
         <Menu.Item
           onPress={() => {
-            setSearchCategory(SearchRegex[entry]?.text);
+            setSearchCategory(NoxEnum.Playlist.SearchRegex[entry]?.text);
             toggleVisible();
           }}
           title={String(t(`PlaylistRegex.${entry}`))}

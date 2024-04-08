@@ -3,7 +3,6 @@ import { createStore } from 'zustand/vanilla';
 import TrackPlayer, { RepeatMode } from 'react-native-track-player';
 
 import { clearPlaylistUninterrupted } from '@utils/RNTPUtils';
-import { NoxRepeatMode } from '../enums/RepeatMode';
 import { savePlayMode } from '@utils/ChromeStorage';
 import logger from '@utils/Logger';
 
@@ -15,7 +14,7 @@ interface NoxPlaylistStore {
   // watch out for the things needed to be added like
   // saveLastPlayedSongId, etc  set in useApp.
   currentPlayingId: string;
-  playmode: NoxRepeatMode;
+  playmode: NoxEnum.RNTP.NoxRepeatMode;
 }
 
 const playlistStore = createStore<NoxPlaylistStore>(() => ({
@@ -23,7 +22,7 @@ const playlistStore = createStore<NoxPlaylistStore>(() => ({
   playingListShuffled: [],
   currentPlayingIndex: -1,
   currentPlayingId: '',
-  playmode: NoxRepeatMode.SHUFFLE,
+  playmode: NoxEnum.RNTP.NoxRepeatMode.SHUFFLE,
 }));
 
 export const setPlayingIndex = (index = 0, songId?: string) => {
@@ -72,10 +71,10 @@ export const setPlayingList = (list: Array<NoxMedia.Song>) => {
   });
 };
 
-export const getCurrentTPQueue = (playmode?: NoxRepeatMode) => {
+export const getCurrentTPQueue = (playmode?: NoxEnum.RNTP.NoxRepeatMode) => {
   const state = playlistStore.getState();
   if (!playmode) playmode = state.playmode;
-  if (playmode === NoxRepeatMode.SHUFFLE) {
+  if (playmode === NoxEnum.RNTP.NoxRepeatMode.SHUFFLE) {
     return state.playingListShuffled;
   }
   return state.playingList;
@@ -108,17 +107,17 @@ export const getPlaybackModeNotifIcon = (
   // RepeatMode.Off.
   let TPRepeatMode = RepeatMode.Off;
   switch (state) {
-    case NoxRepeatMode.REPEAT:
+    case NoxEnum.RNTP.NoxRepeatMode.REPEAT:
       nextIcon = 2;
       break;
-    case NoxRepeatMode.REPEAT_TRACK:
+    case NoxEnum.RNTP.NoxRepeatMode.REPEAT_TRACK:
       nextIcon = 3;
       TPRepeatMode = RepeatMode.Track;
       break;
-    case NoxRepeatMode.SUGGEST:
+    case NoxEnum.RNTP.NoxRepeatMode.SUGGEST:
       nextIcon = 5;
       break;
-    case NoxRepeatMode.SHUFFLE:
+    case NoxEnum.RNTP.NoxRepeatMode.SHUFFLE:
       nextIcon = 4;
       break;
     default:
@@ -127,12 +126,15 @@ export const getPlaybackModeNotifIcon = (
   return [nextIcon, TPRepeatMode];
 };
 
-const RefreshPlayingIndex = [NoxRepeatMode.SHUFFLE, NoxRepeatMode.REPEAT];
+const RefreshPlayingIndex = [
+  NoxEnum.RNTP.NoxRepeatMode.SHUFFLE,
+  NoxEnum.RNTP.NoxRepeatMode.REPEAT,
+];
 /**
  * calls TP.setRepeatMode by the input repeat mode, saves repeat mode into asnycStorage, then
  * returns the icon associated with the repeat mode (for notification bar).
  */
-export const initializePlaybackMode = (state: NoxRepeatMode) => {
+export const initializePlaybackMode = (state: NoxEnum.RNTP.NoxRepeatMode) => {
   const [nextIcon, TPRepeatMode] = getPlaybackModeNotifIcon(state);
   playlistStore.setState({ playmode: state });
   if (RefreshPlayingIndex.includes(state)) {
@@ -149,14 +151,14 @@ export const initializePlaybackMode = (state: NoxRepeatMode) => {
  */
 export const cycleThroughPlaymode = () => {
   switch (playlistStore.getState().playmode) {
-    case NoxRepeatMode.SHUFFLE:
-      return initializePlaybackMode(NoxRepeatMode.REPEAT);
-    case NoxRepeatMode.REPEAT:
-      return initializePlaybackMode(NoxRepeatMode.REPEAT_TRACK);
-    case NoxRepeatMode.REPEAT_TRACK:
-      return initializePlaybackMode(NoxRepeatMode.SUGGEST);
-    case NoxRepeatMode.SUGGEST:
-      return initializePlaybackMode(NoxRepeatMode.SHUFFLE);
+    case NoxEnum.RNTP.NoxRepeatMode.SHUFFLE:
+      return initializePlaybackMode(NoxEnum.RNTP.NoxRepeatMode.REPEAT);
+    case NoxEnum.RNTP.NoxRepeatMode.REPEAT:
+      return initializePlaybackMode(NoxEnum.RNTP.NoxRepeatMode.REPEAT_TRACK);
+    case NoxEnum.RNTP.NoxRepeatMode.REPEAT_TRACK:
+      return initializePlaybackMode(NoxEnum.RNTP.NoxRepeatMode.SUGGEST);
+    case NoxEnum.RNTP.NoxRepeatMode.SUGGEST:
+      return initializePlaybackMode(NoxEnum.RNTP.NoxRepeatMode.SHUFFLE);
     default:
       return undefined;
   }

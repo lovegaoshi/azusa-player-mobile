@@ -6,7 +6,6 @@ import { useTranslation } from 'react-i18next';
 import { useNoxSetting } from '@stores/useApp';
 import GenericSelectDialog from '../dialogs/GenericSelectDialog';
 import GenericCheckDialog from '../dialogs/GenericCheckDialog';
-import { EXPORT_OPTIONS } from '@enums/Sync';
 import PersonalSyncButton from './sync/PersonalSyncButton';
 import DropboxSyncButton from './sync/DropboxAuth';
 import GiteeSyncButton from './sync/GiteeAuth';
@@ -15,28 +14,28 @@ import useSync from './sync/useSync';
 const EXPORT_OPTIONS_LIST = [
   // T
   // EXPORT_OPTIONS.LOCAL,
-  EXPORT_OPTIONS.DROPBOX,
-  EXPORT_OPTIONS.PERSONAL,
-  EXPORT_OPTIONS.GITEE,
+  NoxEnum.Sync.ExportOptions.DROPBOX,
+  NoxEnum.Sync.ExportOptions.PERSONAL,
+  NoxEnum.Sync.ExportOptions.GITEE,
 ];
 
 interface SyncInterface {
-  location: EXPORT_OPTIONS;
+  location: NoxEnum.Sync.ExportOptions;
   restoreFromUint8Array: (data: Uint8Array) => Promise<void>;
 }
 const SyncButton = ({ location, restoreFromUint8Array }: SyncInterface) => {
   switch (location) {
-    case EXPORT_OPTIONS.LOCAL:
+    case NoxEnum.Sync.ExportOptions.LOCAL:
       return <></>;
-    case EXPORT_OPTIONS.DROPBOX:
+    case NoxEnum.Sync.ExportOptions.DROPBOX:
       return (
         <DropboxSyncButton restoreFromUint8Array={restoreFromUint8Array} />
       );
-    case EXPORT_OPTIONS.PERSONAL:
+    case NoxEnum.Sync.ExportOptions.PERSONAL:
       return (
         <PersonalSyncButton restoreFromUint8Array={restoreFromUint8Array} />
       );
-    case EXPORT_OPTIONS.GITEE:
+    case NoxEnum.Sync.ExportOptions.GITEE:
       return <GiteeSyncButton restoreFromUint8Array={restoreFromUint8Array} />;
     default:
       return <></>;
@@ -59,13 +58,13 @@ export default () => {
 
   const renderOption = (option = playerSetting.settingExportLocation) => {
     switch (option) {
-      case EXPORT_OPTIONS.LOCAL:
+      case NoxEnum.Sync.ExportOptions.LOCAL:
         return t('Sync.Local');
-      case EXPORT_OPTIONS.DROPBOX:
+      case NoxEnum.Sync.ExportOptions.DROPBOX:
         return t('Sync.Dropbox');
-      case EXPORT_OPTIONS.PERSONAL:
+      case NoxEnum.Sync.ExportOptions.PERSONAL:
         return t('Sync.PersonalCloud');
-      case EXPORT_OPTIONS.GITEE:
+      case NoxEnum.Sync.ExportOptions.GITEE:
         return t('Sync.Gitee');
       default:
         return 'ERROR';

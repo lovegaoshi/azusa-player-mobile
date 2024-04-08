@@ -7,8 +7,6 @@ import usePlaylistCRUD from '@hooks/usePlaylistCRUD';
 import { CopiedPlaylistMenuItem } from '@components/buttons/CopiedPlaylistButton';
 import RenameSongButton from '@components/player/TrackInfo/RenameSong/RenameSongButton';
 import useSongOperations from '@hooks/useSongOperations';
-import { SearchRegex } from '@enums/Playlist';
-import { SOURCE } from '@enums/MediaFetch';
 import useBiliSearch from '@hooks/useBiliSearch';
 
 enum ICONS {
@@ -120,7 +118,7 @@ export default ({ usePlaylist, prepareForLayoutAnimationRender }: Props) => {
         leadingIcon={ICONS.SEARCH_IN_PLAYLIST}
         onPress={() => {
           searchAndEnableSearch(
-            `${SearchRegex.absoluteMatch.text}${
+            `${NoxEnum.Playlist.SearchRegex.absoluteMatch.text}${
               currentPlaylist.songList[songMenuSongIndexes[0]].parsedName
             }`
           );
@@ -130,7 +128,7 @@ export default ({ usePlaylist, prepareForLayoutAnimationRender }: Props) => {
         disabled={checking}
         title={t('SongOperations.songSearchInPlaylistTitle')}
       />
-      {selectedSongs()[0]?.source === SOURCE.bilivideo && (
+      {selectedSongs()[0]?.source === NoxEnum.MediaFetch.Source.Bilivideo && (
         <Menu.Item
           leadingIcon={ICONS.SEARCH_BVID}
           onPress={() => {
