@@ -14,7 +14,7 @@ import { useNavigation } from '@react-navigation/native';
 import { chunkArray } from '@utils/Utils';
 import { useNoxSetting } from '@stores/useApp';
 import usePlayback from '@hooks/usePlayback';
-import { ViewEnum } from '@enums/View';
+import { NoxRoutes } from '@enums/Routes';
 
 export interface BiliCatSongs {
   [key: number]: NoxMedia.Song[];
@@ -56,7 +56,7 @@ export const BiliSongCard = ({
             <TouchableOpacity
               style={{ height: 70, flexDirection: 'row' }}
               onPress={() => {
-                navigationGlobal.navigate(ViewEnum.PLAYER_PLAYLIST as never);
+                navigationGlobal.navigate(NoxRoutes.Playlist as never);
                 playAsSearchList({
                   songs: totalSongs || songs,
                   song: item,

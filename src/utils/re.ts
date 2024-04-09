@@ -4,9 +4,9 @@ import { SearchRegex } from '@enums/Playlist';
 const operation2RegExtractor = (operation: NoxRegExt.Operation) => {
   const regExps = operation[1]?.map(val => new RegExp(val));
   switch (operation[0]) {
-    case ReOperationType.extractWith:
+    case ReOperationType.ExtractWith:
       return (val: string) => extractWith(val, regExps);
-    case ReOperationType.extractParenthesis:
+    case ReOperationType.ExtractParenthesis:
       return (val: string) => extractParenthesis(val);
     default:
       return (val: string) => val;

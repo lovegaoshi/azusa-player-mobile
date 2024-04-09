@@ -1,7 +1,7 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { Dimensions, View } from 'react-native';
 
-import { ViewEnum } from '@enums/View';
+import { NoxRoutes } from '@enums/Routes';
 import DummySettings from '../setting/DummySettings';
 import LandscapeLyricView from './LandscapeLyric';
 import { SettingsLandscape as Settings } from '../setting/View';
@@ -26,27 +26,27 @@ export default ({ panelWidth }: Props) => {
     <View style={panelStyle}>
       <Stack.Navigator>
         <Stack.Screen
-          name={ViewEnum.LYRICS}
+          name={NoxRoutes.Lyrics}
           component={WrappedLyricView}
           options={{ headerShown: false }}
         />
         <Stack.Screen
-          name={ViewEnum.PLAYER_PLAYLIST}
+          name={NoxRoutes.Playlist}
           component={Playlist}
           options={{ headerShown: false }}
         />
         <Stack.Screen
-          name={ViewEnum.PLAYER_PLAYLISTS}
+          name={NoxRoutes.PlaylistsDrawer}
           component={Playlists}
           options={{ headerShown: false }}
         />
         <Stack.Screen
-          name={ViewEnum.EXPORE}
+          name={NoxRoutes.Explore}
           component={DummySettings}
           options={{ headerShown: false }}
         />
         <Stack.Screen
-          name={ViewEnum.SETTINGS}
+          name={NoxRoutes.Settings}
           component={Settings}
           options={{ headerShown: false }}
         />

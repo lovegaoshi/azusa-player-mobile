@@ -6,7 +6,7 @@ import { useNavigation } from '@react-navigation/native';
 
 import { useNoxSetting } from '@stores/useApp';
 import usePlayback from '@hooks/usePlayback';
-import { ViewEnum } from '@enums/View';
+import { NoxRoutes } from '@enums/Routes';
 import { BiliSongCardProp } from './SongTab';
 
 export const BiliSongRow = ({
@@ -42,7 +42,7 @@ export const BiliSongRow = ({
           <View style={{ paddingHorizontal: 5, flex: 1 }}>
             <TouchableOpacity
               onPress={() => {
-                navigationGlobal.navigate(ViewEnum.PLAYER_PLAYLIST as never);
+                navigationGlobal.navigate(NoxRoutes.Playlist as never);
                 playAsSearchList({
                   songs: totalSongs || songs,
                   song: item,

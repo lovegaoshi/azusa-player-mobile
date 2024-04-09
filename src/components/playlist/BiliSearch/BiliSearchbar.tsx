@@ -11,7 +11,7 @@ import { useTranslation } from 'react-i18next';
 import ShareMenu, { ShareCallback } from 'react-native-share-menu';
 import { useNavigation } from '@react-navigation/native';
 
-import { ViewEnum } from '@enums/View';
+import { NoxRoutes } from '@enums/Routes';
 import { useNoxSetting } from '@stores/useApp';
 import usePlayback from '@hooks/usePlayback';
 import useBiliSearch from '@hooks/useBiliSearch';
@@ -70,7 +70,7 @@ export default ({
   };
 
   const handleExternalSearch = (data: string) => {
-    navigationGlobal.navigate(ViewEnum.PLAYER_PLAYLIST as never);
+    navigationGlobal.navigate(NoxRoutes.Playlist as never);
     return handleSearch(data);
   };
 

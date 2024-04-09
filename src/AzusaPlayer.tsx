@@ -26,7 +26,7 @@ import Playlist from './components/playlist/View';
 import PlayerBottomPanel from './components/player/controls/PlayerProgressControls';
 import { useNoxSetting } from '@stores/useApp';
 import PlaylistDrawer from './components/playlists/View';
-import { ViewEnum } from './enums/View';
+import { NoxRoutes } from './enums/Routes';
 import Settings from './components/setting/View';
 import Explore from './components/explore/View';
 import './localization/i18n';
@@ -55,12 +55,12 @@ const NoxPlayer = ({ navigation, setNavigation = () => undefined }: Props) => {
     <View style={{ flex: 1, justifyContent: 'flex-end' }}>
       <Tab.Navigator style={PlayerStyle}>
         <Tab.Screen
-          name={ViewEnum.PLAYER_COVER}
+          name={NoxRoutes.PlayerCover}
           component={Player}
           options={{ tabBarStyle: { display: 'none' } }}
         />
         <Tab.Screen
-          name={ViewEnum.PLAYER_PLAYLIST}
+          name={NoxRoutes.Playlist}
           component={Playlist}
           options={{ tabBarStyle: { display: 'none' } }}
         />
@@ -113,11 +113,11 @@ const AzusaPlayer = () => {
           }}
         >
           <Drawer.Navigator
-            initialRouteName={ViewEnum.PLAYER_HOME}
+            initialRouteName={NoxRoutes.PlayerHome}
             drawerContent={PlaylistDrawer}
           >
             <Drawer.Screen
-              name={ViewEnum.PLAYER_HOME}
+              name={NoxRoutes.PlayerHome}
               options={{
                 drawerIcon: () => <IconButton icon={ScreenIcons.HomeScreen} />,
                 title: String(t('appDrawer.homeScreenName')),
@@ -126,7 +126,7 @@ const AzusaPlayer = () => {
               component={NoxPlayerWrapper}
             />
             <Drawer.Screen
-              name={ViewEnum.EXPORE}
+              name={NoxRoutes.Explore}
               options={{
                 drawerIcon: () => (
                   <IconButton icon={ScreenIcons.ExploreScreen} />
@@ -136,7 +136,7 @@ const AzusaPlayer = () => {
               component={Explore}
             />
             <Drawer.Screen
-              name={ViewEnum.SETTINGS}
+              name={NoxRoutes.Settings}
               options={{
                 drawerIcon: () => (
                   <IconButton icon={ScreenIcons.SettingScreen} />

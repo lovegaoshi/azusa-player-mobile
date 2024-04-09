@@ -5,11 +5,11 @@ import { useNoxSetting } from '@stores/useApp';
 import BiliExplore from './bilibili/View';
 import { styles } from '../style';
 
-enum Routes {
+enum NoxRoutes {
   bilibili = 'bilibili',
 }
 
-const exploreContent = (route: Routes) => {
+const exploreContent = (route: NoxRoutes) => {
   switch (route) {
     default:
       return <BiliExplore />;
@@ -17,7 +17,7 @@ const exploreContent = (route: Routes) => {
 };
 
 export default () => {
-  const [currentRoute, setCurrentRoute] = React.useState(Routes.bilibili);
+  const [currentRoute, setCurrentRoute] = React.useState(NoxRoutes.bilibili);
   const playerStyle = useNoxSetting(state => state.playerStyle);
 
   return (

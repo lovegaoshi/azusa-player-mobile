@@ -214,7 +214,7 @@ const usePlaylistCRUD = (mPlaylist?: NoxMedia.Playlist) => {
   };
 
   const sortPlaylist = (
-    sort = SortOptions.PREVIOUS_ORDER,
+    sort = SortOptions.PreviousOrder,
     ascend = false,
     playlist = getPlaylist()
   ) => {

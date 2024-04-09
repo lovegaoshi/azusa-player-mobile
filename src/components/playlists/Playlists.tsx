@@ -8,7 +8,7 @@ import DraggableFlatList, {
 } from 'react-native-draggable-flatlist';
 
 import { useNoxSetting } from '@stores/useApp';
-import { ViewEnum } from '@enums/View';
+import { NoxRoutes } from '@enums/Routes';
 import AddPlaylistButton, {
   AddPlaylistButtonRef,
 } from '../buttons/AddPlaylistButton';
@@ -51,7 +51,7 @@ export default () => {
 
   const goToPlaylist = (playlistId: string) => {
     setCurrentPlaylist(playlists[playlistId]);
-    navigation.navigate(ViewEnum.PLAYER_PLAYLIST as never);
+    navigation.navigate(NoxRoutes.Playlist as never);
   };
 
   const SearchPlaylistAsNewButton = () => (
@@ -118,7 +118,7 @@ export default () => {
           {false && (
             <IconButton
               icon={'cog'}
-              onPress={() => navigation.navigate(ViewEnum.SETTINGS as never)}
+              onPress={() => navigation.navigate(NoxRoutes.Settings as never)}
             />
           )}
         </View>

@@ -46,8 +46,8 @@ export const DefaultSetting: NoxStorage.PlayerSettingDict = {
   settingExportLocation: SyncOptions.DROPBOX,
   personalCloudIP: '',
   personalCloudID: 'azusamobile',
-  noxVersion: Versions.latest,
-  noxCheckedVersion: Versions.latest,
+  noxVersion: Versions.Latest,
+  noxCheckedVersion: Versions.Latest,
 
   hideCoverInMobile: false,
   loadPlaylistAsArtist: false,
