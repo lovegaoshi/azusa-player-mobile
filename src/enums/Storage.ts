@@ -1,10 +1,10 @@
 import { NoxRepeatMode } from './RepeatMode';
-import { VERSIONS } from './Version';
-import { EXPORT_OPTIONS } from './Sync';
+import { Versions } from './Version';
+import { SyncOptions } from './Sync';
 
-export { EXPORT_OPTIONS } from './Sync';
+export { SyncOptions } from './Sync';
 
-export enum STORAGE_KEYS {
+export enum StorageKeys {
   PLAYER_SETTING_KEY = 'PlayerSetting',
   FAVORITE_PLAYLIST_KEY = 'FavFavList-Special',
   SEARCH_PLAYLIST_KEY = 'SearchPlaylist-Special',
@@ -32,9 +32,9 @@ export enum SEARCH_OPTIONS {
   YOUTUBE = 'youtube',
 }
 
-export const appID = 'NoxPlayerMobile';
+export const AppID = 'NoxPlayerMobile';
 
-export const DEFAULT_SETTING: NoxStorage.PlayerSettingDict = {
+export const DefaultSetting: NoxStorage.PlayerSettingDict = {
   playMode: 'shufflePlay',
   defaultPlayMode: 'shufflePlay',
   defaultVolume: 1,
@@ -43,11 +43,11 @@ export const DEFAULT_SETTING: NoxStorage.PlayerSettingDict = {
   skin: '诺莺nox',
   parseSongName: true,
   keepSearchedSongListWhenPlaying: false,
-  settingExportLocation: EXPORT_OPTIONS.DROPBOX,
+  settingExportLocation: SyncOptions.DROPBOX,
   personalCloudIP: '',
   personalCloudID: 'azusamobile',
-  noxVersion: VERSIONS.latest,
-  noxCheckedVersion: VERSIONS.latest,
+  noxVersion: Versions.latest,
+  noxCheckedVersion: Versions.latest,
 
   hideCoverInMobile: false,
   loadPlaylistAsArtist: false,
@@ -68,7 +68,7 @@ export const DEFAULT_SETTING: NoxStorage.PlayerSettingDict = {
   biliEditAPI: false,
   keepForeground: false,
 
-  appID,
+  appID: AppID,
   language: undefined,
   cacheSize: 1,
 };

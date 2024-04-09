@@ -3,7 +3,7 @@ import React, { useState, useRef, useCallback, useEffect } from 'react';
 import { reParseSearch } from '../utils/re';
 import { useNoxSetting } from '../stores/useApp';
 import usePlaylistCRUD from './usePlaylistCRUD';
-import { SORT_OPTIONS } from '@enums/Playlist';
+import { SortOptions } from '@enums/Playlist';
 
 export interface UsePlaylist {
   playlist: NoxMedia.Playlist;
@@ -39,7 +39,7 @@ export interface UsePlaylist {
   onBackPress: () => boolean;
   getSelectedSongs: () => NoxMedia.Song[] | undefined;
   sortPlaylist: (
-    sort?: SORT_OPTIONS,
+    sort?: SortOptions,
     ascend?: boolean,
     playlist?: NoxMedia.Playlist
   ) => void;

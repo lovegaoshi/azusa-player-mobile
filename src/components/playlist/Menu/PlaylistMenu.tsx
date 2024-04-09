@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 
 import usePlaylist from './usePlaylistMenu';
 import PlaylistSettingsButton from './PlaylistSettingsButton';
-import { PLAYLIST_ENUMS } from '@enums/Playlist';
+import { PlaylistTypes } from '@enums/Playlist';
 import { CopiedPlaylistMenuItem } from '@components/buttons/CopiedPlaylistButton';
 import PlaylistSortButton from './PlaylistSortButton';
 
@@ -48,7 +48,7 @@ export default ({
     sortPlaylist,
   } = usePlaylist({ callback: toggleVisible });
   const limitedPlaylistFeatures =
-    playlist.type !== PLAYLIST_ENUMS.TYPE_TYPICA_PLAYLIST;
+    playlist.type !== PlaylistTypes.TYPE_TYPICA_PLAYLIST;
 
   return (
     <Menu visible={visible} onDismiss={toggleVisible} anchor={menuCoords}>

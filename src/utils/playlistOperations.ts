@@ -1,4 +1,4 @@
-import { SORT_OPTIONS } from '@enums/Playlist';
+import { SortOptions } from '@enums/Playlist';
 
 export const updatePlaylistSongs = (
   playlist: NoxMedia.Playlist,
@@ -17,11 +17,11 @@ export const updatePlaylistSongs = (
 
 export const sortPlaylist = (
   playlist: NoxMedia.Playlist,
-  sort: SORT_OPTIONS = SORT_OPTIONS.PREVIOUS_ORDER,
+  sort: SortOptions = SortOptions.PREVIOUS_ORDER,
   ascend = false
 ): NoxMedia.Playlist => {
   playlist.sort = sort;
-  if (SORT_OPTIONS.PREVIOUS_ORDER === sort) {
+  if (SortOptions.PREVIOUS_ORDER === sort) {
     // first get the largest order number in the songlist:
     let largestOrder = 0;
     let songsWithoutOrder = 1;
@@ -56,7 +56,7 @@ export const sortPlaylist = (
     (song, index) => (song.order = songListLength - index)
   );
   switch (sort) {
-    case SORT_OPTIONS.TITLE:
+    case SortOptions.TITLE:
       return {
         ...playlist,
         songList: playlist.songList.sort((a, b) =>
@@ -65,7 +65,7 @@ export const sortPlaylist = (
             : b.parsedName.localeCompare(a.parsedName)
         ),
       };
-    case SORT_OPTIONS.ARTIST:
+    case SortOptions.ARTIST:
       return {
         ...playlist,
         songList: playlist.songList.sort((a, b) =>
@@ -74,7 +74,7 @@ export const sortPlaylist = (
             : b.singer.localeCompare(a.singer)
         ),
       };
-    case SORT_OPTIONS.ALBUM:
+    case SortOptions.ALBUM:
       return {
         ...playlist,
         songList: playlist.songList.sort((a, b) =>

@@ -6,7 +6,7 @@ import { APPSTORE } from '@env';
 
 import { useNoxSetting } from '@stores/useApp';
 import useAlert from '../components/dialogs/useAlert';
-import { VERSIONS } from '../enums/Version';
+import { Versions } from '../enums/Version';
 import logger from '@utils/Logger';
 import useInstallAPK from './useInstallAPK';
 
@@ -122,7 +122,7 @@ export default () => {
   };
 
   const updateVersion = async (currentPlayerSetting = playerSetting) => {
-    const latest = VERSIONS.latest;
+    const latest = Versions.latest;
     switch (currentPlayerSetting.noxVersion) {
       case latest:
         return;

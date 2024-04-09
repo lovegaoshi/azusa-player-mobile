@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { ColorSchemeName } from 'react-native';
 
-import { EXPORT_OPTIONS } from '../enums/Sync';
+import { SyncOptions } from '../enums/Sync';
 import { NoxRepeatMode } from '../enums/RepeatMode';
 import { SEARCH_OPTIONS } from '../enums/Storage';
 
@@ -16,7 +16,7 @@ declare global {
       skin: string;
       parseSongName: boolean;
       keepSearchedSongListWhenPlaying: boolean;
-      settingExportLocation: EXPORT_OPTIONS;
+      settingExportLocation: SyncOptions;
       personalCloudIP: string;
       personalCloudID: string;
       noxVersion: string;

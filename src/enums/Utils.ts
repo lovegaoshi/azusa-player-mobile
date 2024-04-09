@@ -1,4 +1,4 @@
-export enum REOPERATIONTYPE {
+export enum ReOperationType {
   extractWith = 1,
   extractParenthesis = 2,
 }
