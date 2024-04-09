@@ -8,7 +8,7 @@ import { PLAYLIST_ENUMS } from '@enums/Playlist';
 import { CopiedPlaylistMenuItem } from '@components/buttons/CopiedPlaylistButton';
 import PlaylistSortButton from './PlaylistSortButton';
 
-enum ICONS {
+enum Icons {
   SETTINGS = 'cog',
   BILISHAZAM = 'magnify-plus',
   REMOVE_BILISHAZAM = 'magnify-close',
@@ -69,40 +69,40 @@ export default ({
         onCancel={toggleVisible}
       />
       <Menu.Item
-        leadingIcon={ICONS.BILISYNC}
+        leadingIcon={Icons.BILISYNC}
         onPress={() => playlistSync2Bilibili()}
         title={t('PlaylistOperations.bilisyncTitle')}
       />
       <Menu.Item
-        leadingIcon={ICONS.BILISHAZAM}
+        leadingIcon={Icons.BILISHAZAM}
         onPress={() => playlistBiliShazam()}
         title={t('PlaylistOperations.bilishazamTitle')}
       />
       <Menu.Item
-        leadingIcon={ICONS.ANALYTICS}
+        leadingIcon={Icons.ANALYTICS}
         onPress={() => playlistAnalyze()}
         title={t('PlaylistOperations.analyticsTitle')}
       />
       <Menu.Item
-        leadingIcon={ICONS.REMOVE_BROKEN}
+        leadingIcon={Icons.REMOVE_BROKEN}
         onPress={() => playlistCleanup()}
         title={t('PlaylistOperations.removeBrokenTitle')}
         disabled={limitedPlaylistFeatures}
       />
       <Menu.Item
-        leadingIcon={ICONS.RELOAD_BVIDS}
+        leadingIcon={Icons.RELOAD_BVIDS}
         onPress={() => confirmOnPlaylistReload()}
         title={t('PlaylistOperations.reloadBVIDTitle')}
         disabled={limitedPlaylistFeatures}
       />
       <Menu.Item
-        leadingIcon={ICONS.CLEAR}
+        leadingIcon={Icons.CLEAR}
         onPress={() => confirmOnPlaylistClear()}
         title={t('PlaylistOperations.clearPlaylistTitle')}
         disabled={limitedPlaylistFeatures}
       />
       <Menu.Item
-        leadingIcon={ICONS.REMOVE}
+        leadingIcon={Icons.REMOVE}
         onPress={() => confirmOnPlaylistDelete()}
         title={t('PlaylistOperations.removePlaylistTitle')}
         disabled={limitedPlaylistFeatures}

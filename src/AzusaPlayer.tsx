@@ -31,7 +31,7 @@ import Settings from './components/setting/View';
 import Explore from './components/explore/View';
 import './localization/i18n';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { ICONS } from '@enums/Icons';
+import { ScreenIcons } from '@enums/Icons';
 import NoxBottomTab from './components/bottomtab/NoxBottomTab';
 
 const { LightTheme, DarkTheme } = adaptNavigationTheme({
@@ -119,7 +119,7 @@ const AzusaPlayer = () => {
             <Drawer.Screen
               name={ViewEnum.PLAYER_HOME}
               options={{
-                drawerIcon: () => <IconButton icon={ICONS.homeScreen} />,
+                drawerIcon: () => <IconButton icon={ScreenIcons.homeScreen} />,
                 title: String(t('appDrawer.homeScreenName')),
                 header: () => null,
               }}
@@ -128,7 +128,9 @@ const AzusaPlayer = () => {
             <Drawer.Screen
               name={ViewEnum.EXPORE}
               options={{
-                drawerIcon: () => <IconButton icon={ICONS.exploreScreen} />,
+                drawerIcon: () => (
+                  <IconButton icon={ScreenIcons.exploreScreen} />
+                ),
                 title: String(t('appDrawer.exploreScreenName')),
               }}
               component={Explore}
@@ -136,7 +138,9 @@ const AzusaPlayer = () => {
             <Drawer.Screen
               name={ViewEnum.SETTINGS}
               options={{
-                drawerIcon: () => <IconButton icon={ICONS.settingScreen} />,
+                drawerIcon: () => (
+                  <IconButton icon={ScreenIcons.settingScreen} />
+                ),
                 title: String(t('appDrawer.settingScreenName')),
                 header: () => null,
               }}

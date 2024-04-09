@@ -14,7 +14,7 @@ import AboutSettings from './AboutSettings';
 import SplashSettings from './SplashSettings';
 import Bilibili from '../login/Bilibili';
 
-enum ICONS {
+enum Icons {
   HOME = 'cog',
   SKIN = 'palette',
   BACKUP = 'backup-restore',
@@ -55,44 +55,44 @@ const HomeSettings = ({ navigation }: Props) => {
     >
       <ScrollView>
         <SettingListItem
-          icon={ICONS.HOME}
+          icon={Icons.HOME}
           settingName="GeneralSetting"
           onPress={() => navigation.navigate(VIEW.GENERAL)}
           settingCategory="Settings"
         />
         <SettingListItem
-          icon={ICONS.SKIN}
+          icon={Icons.SKIN}
           settingName="AppearanceSetting"
           onPress={() => navigation.navigate(VIEW.SKIN)}
           settingCategory="Settings"
         />
         <SettingListItem
-          icon={ICONS.LOGIN}
+          icon={Icons.LOGIN}
           settingName="Login"
           onPress={() => navigation.navigate(VIEW.LOGIN)}
           settingCategory="Settings"
         />
         <SettingListItem
-          icon={ICONS.BACKUP}
+          icon={Icons.BACKUP}
           settingName="BackupSetting"
           onPress={() => navigation.navigate(VIEW.BACKUP)}
           settingCategory="Settings"
         />
-        <LanguageSettings icon={ICONS.LANGUAGE} />
+        <LanguageSettings icon={Icons.LANGUAGE} />
         <SettingListItem
-          icon={ICONS.DEVELOPER}
+          icon={Icons.DEVELOPER}
           settingName="DeveloperOptions"
           onPress={() => navigation.navigate(VIEW.DEVELOPER)}
           settingCategory="Settings"
         />
         <SettingListItem
-          icon={ICONS.SPLASH_GALLARY}
+          icon={Icons.SPLASH_GALLARY}
           settingName="SplashSetting"
           onPress={() => navigation.navigate(VIEW.SPLASH_GALLARY)}
           settingCategory="Settings"
         />
         <SettingListItem
-          icon={ICONS.INFO}
+          icon={Icons.INFO}
           settingName="InfoSetting"
           onPress={() => navigation.navigate(VIEW.INFO)}
           settingCategory="Settings"

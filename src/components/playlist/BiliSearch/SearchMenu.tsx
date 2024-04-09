@@ -7,7 +7,7 @@ import { useTranslation } from 'react-i18next';
 import { SEARCH_OPTIONS } from '@enums/Storage';
 import useAlert from '@components/dialogs/useAlert';
 import { MUSICFREE } from '@utils/mediafetch/musicfree';
-import ICONS from './Icons';
+import Icons from './Icons';
 import { useNoxSetting } from '@stores/useApp';
 import { rgb2Hex } from '@utils/Utils';
 
@@ -71,25 +71,25 @@ export default ({
   return (
     <Menu visible={visible} onDismiss={toggleVisible} anchor={menuCoords}>
       <Menu.Item
-        leadingIcon={ICONS.BILIBILI}
+        leadingIcon={Icons.BILIBILI}
         onPress={() => setDefaultSearch(SEARCH_OPTIONS.BILIBILI)}
         title={'Bilibili'}
       />
       <Menu.Item
-        leadingIcon={ICONS.YOUTUBE}
+        leadingIcon={Icons.YOUTUBE}
         onPress={() => setDefaultSearch(SEARCH_OPTIONS.YOUTUBE)}
         title={'Youtube'}
       />
       {showMusicFree && (
         <Menu.Item
-          leadingIcon={ICONS.MUSICFREE}
+          leadingIcon={Icons.MUSICFREE}
           onPress={() => setDefaultSearch(MUSICFREE.aggregated)}
           title={`MusicFree.${MUSICFREE.aggregated}`}
         />
       )}
       {Platform.OS === 'android' && (
         <Menu.Item
-          leadingIcon={() => ICONS.LOCAL(rgb2Hex(playerStyle.colors.primary))}
+          leadingIcon={() => Icons.LOCAL(rgb2Hex(playerStyle.colors.primary))}
           onPress={chooseLocalFolderAndroid}
           title={t('Menu.local')}
         />
