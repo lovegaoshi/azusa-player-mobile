@@ -51,7 +51,7 @@ export default () => {
       event.position >
         Math.min(bRepeatDuration, event.duration) - fadeIntervalSec
     ) {
-      if (getState().playmode !== NoxRepeatMode.REPEAT_TRACK) {
+      if (getState().playmode !== NoxRepeatMode.RepeatTrack) {
         logger.debug(
           `[FADEOUT] fading out....${event.position} / ${event.duration}`
         );
@@ -63,7 +63,7 @@ export default () => {
     }
     if (abRepeat[1] === 1) return;
     if (event.position > bRepeatDuration) {
-      if (getState().playmode === NoxRepeatMode.REPEAT_TRACK) {
+      if (getState().playmode === NoxRepeatMode.RepeatTrack) {
         TrackPlayer.seekTo(abRepeat[0] * event.duration);
         return;
       }

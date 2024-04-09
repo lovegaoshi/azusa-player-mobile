@@ -68,7 +68,7 @@ export default () => {
   };
 
   const skipToBiliSuggest = async (next = true) => {
-    if (noxPlayingList.getState().playmode !== NoxRepeatMode.SUGGEST) {
+    if (noxPlayingList.getState().playmode !== NoxRepeatMode.Suggest) {
       throw new Error('playmode is not bilisuggest.');
     }
     const suggestedSong = [await getBiliSuggest()];

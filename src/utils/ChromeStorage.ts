@@ -316,7 +316,7 @@ export const initPlayerObject =
       ),
       playbackMode: await getItem(
         StorageKeys.PLAYMODE_KEY,
-        NoxRepeatMode.SHUFFLE
+        NoxRepeatMode.Shuffle
       ),
       skin: await getItem(StorageKeys.SKIN, AzusaTheme),
       skins: (await getPlayerSkins()) || [],

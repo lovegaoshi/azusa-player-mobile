@@ -50,7 +50,7 @@ export default ({
 
   const playlistList = () => {
     const filteredPlaylists =
-      getState().playmode === NoxRepeatMode.SUGGEST
+      getState().playmode === NoxRepeatMode.Suggest
         ? playlistIds
         : playlistIds.filter(val => val !== fromList.id);
     return filteredPlaylists.map(val => [val, playlists[val].title]);
@@ -58,7 +58,7 @@ export default ({
 
   React.useEffect(() => {
     // TODO: this is not scrolling?
-    if (visible && getState().playmode === NoxRepeatMode.SUGGEST) {
+    if (visible && getState().playmode === NoxRepeatMode.Suggest) {
       playlistRef.current?.scrollToIndex({
         index: playlistIds.indexOf(fromList.id),
       });
