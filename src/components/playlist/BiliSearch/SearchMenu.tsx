@@ -4,7 +4,7 @@ import * as DocumentPicker from 'expo-document-picker';
 import { Platform, NativeModules, PermissionsAndroid } from 'react-native';
 import { useTranslation } from 'react-i18next';
 
-import { SEARCH_OPTIONS } from '@enums/Storage';
+import { SearchOptions } from '@enums/Storage';
 import useAlert from '@components/dialogs/useAlert';
 import { MUSICFREE } from '@utils/mediafetch/musicfree';
 import Icons from './Icons';
@@ -32,7 +32,7 @@ export default ({
   const { OneWayAlert } = useAlert();
   const playerStyle = useNoxSetting(state => state.playerStyle);
   const setSearchOption = useNoxSetting(state => state.setSearchOption);
-  const setDefaultSearch = (defaultSearch: SEARCH_OPTIONS | MUSICFREE) => {
+  const setDefaultSearch = (defaultSearch: SearchOptions | MUSICFREE) => {
     toggleVisible();
     setSearchOption(defaultSearch);
   };
@@ -72,12 +72,12 @@ export default ({
     <Menu visible={visible} onDismiss={toggleVisible} anchor={menuCoords}>
       <Menu.Item
         leadingIcon={Icons.BILIBILI}
-        onPress={() => setDefaultSearch(SEARCH_OPTIONS.BILIBILI)}
+        onPress={() => setDefaultSearch(SearchOptions.BILIBILI)}
         title={'Bilibili'}
       />
       <Menu.Item
         leadingIcon={Icons.YOUTUBE}
-        onPress={() => setDefaultSearch(SEARCH_OPTIONS.YOUTUBE)}
+        onPress={() => setDefaultSearch(SearchOptions.YOUTUBE)}
         title={'Youtube'}
       />
       {showMusicFree && (

@@ -27,7 +27,7 @@ export enum StorageKeys {
   MUSICFREE_PLUGIN = 'MusicFreePlugin',
 }
 
-export enum SEARCH_OPTIONS {
+export enum SearchOptions {
   BILIBILI = 'bilibili',
   YOUTUBE = 'youtube',
 }

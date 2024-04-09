@@ -15,7 +15,7 @@ import {
   saveLyricMapping,
   saveDefaultSearch,
 } from '@utils/ChromeStorage';
-import { DefaultSetting, StorageKeys, SEARCH_OPTIONS } from '@enums/Storage';
+import { DefaultSetting, StorageKeys, SearchOptions } from '@enums/Storage';
 import { setPlayerSetting as setPlayerSettingVanilla } from './playerSettingStore';
 import { savePlayerStyle } from '@utils/StyleStorage';
 import { createStyle } from '@components/style';
@@ -32,8 +32,8 @@ interface NoxSetting {
   intentData?: IntentData;
   setIntentData: (val?: IntentData) => void;
 
-  searchOption: SEARCH_OPTIONS | MUSICFREE;
-  setSearchOption: (val: SEARCH_OPTIONS | MUSICFREE) => void;
+  searchOption: SearchOptions | MUSICFREE;
+  setSearchOption: (val: SearchOptions | MUSICFREE) => void;
 
   gestureMode: boolean;
   setGestureMode: (val: boolean) => void;
@@ -141,7 +141,7 @@ export const useNoxSetting = create<NoxSetting>((set, get) => ({
 
   setIntentData: intentData => set({ intentData }),
 
-  searchOption: SEARCH_OPTIONS.BILIBILI,
+  searchOption: SearchOptions.BILIBILI,
   setSearchOption: v => {
     set({ searchOption: v });
     saveDefaultSearch(v);

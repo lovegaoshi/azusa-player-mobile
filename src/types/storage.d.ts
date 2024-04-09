@@ -3,7 +3,7 @@ import { ColorSchemeName } from 'react-native';
 
 import { SyncOptions } from '../enums/Sync';
 import { NoxRepeatMode } from '../enums/RepeatMode';
-import { SEARCH_OPTIONS } from '../enums/Storage';
+import { SearchOptions } from '../enums/Storage';
 
 declare global {
   namespace NoxStorage {
@@ -62,7 +62,7 @@ declare global {
       language?: string;
       lastPlayDuration: number;
       colorScheme: ColorSchemeName;
-      defaultSearchOptions?: SEARCH_OPTIONS;
+      defaultSearchOptions?: SearchOptions;
     }
 
     export interface initializedResults {

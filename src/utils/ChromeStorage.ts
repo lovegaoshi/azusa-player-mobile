@@ -14,7 +14,7 @@ import {
   StorageKeys,
   AppID,
   DefaultSetting,
-  SEARCH_OPTIONS,
+  SearchOptions,
 } from '@enums/Storage';
 import { MUSICFREE } from './mediafetch/musicfree';
 /**
@@ -112,10 +112,10 @@ export const getABMapping = (): Promise<NoxStorage.ABDict> =>
 export const saveABMapping = async (val: NoxStorage.ABDict) =>
   saveChucked(StorageKeys.ABREPEAT_MAPPING, Object.entries(val));
 
-export const getDefaultSearch = (): Promise<SEARCH_OPTIONS> =>
-  getItem(StorageKeys.DEFAULT_SEARCH, SEARCH_OPTIONS.BILIBILI);
+export const getDefaultSearch = (): Promise<SearchOptions> =>
+  getItem(StorageKeys.DEFAULT_SEARCH, SearchOptions.BILIBILI);
 
-export const saveDefaultSearch = (val: SEARCH_OPTIONS | MUSICFREE) =>
+export const saveDefaultSearch = (val: SearchOptions | MUSICFREE) =>
   saveItem(StorageKeys.DEFAULT_SEARCH, val);
 
 export const getCachedMediaMapping = () =>
