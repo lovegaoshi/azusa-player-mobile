@@ -47,7 +47,13 @@ const MainBackground = ({ children }: { children: React.JSX.Element }) => {
               uri: bkgrdImg.identifier,
               headers: customReqHeader(bkgrdImg.identifier, {}),
             }}
-            style={{ width: '100%', height: '100%', position: 'absolute' }}
+            style={[
+              styles.videoStyle,
+              {
+                width: Dimensions.get('window').width,
+                height: Dimensions.get('window').height,
+              },
+            ]}
             onError={e => {
               logger.error(JSON.stringify(e));
               logger.error(
@@ -90,8 +96,6 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   videoStyle: {
-    width: '100%',
-    height: '100%',
     position: 'absolute',
   },
   fullscreenStyle: {
