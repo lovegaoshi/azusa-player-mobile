@@ -13,7 +13,7 @@ import resolveBackgroundImage, {
 const MainBackground = ({ children }: { children: React.JSX.Element }) => {
   const playerStyle = useNoxSetting(state => state.playerStyle);
   const isLandscape = useIsLandscape();
-  const mobileHeight = Dimensions.get('window').height;
+  const { width, height } = Dimensions.get('window');
   const [bkgrdImg, setBkgrdImg] = useState<NoxTheme.backgroundImage>();
   const bkgrdImgRaw =
     isLandscape && playerStyle.bkgrdImgLandscape
@@ -30,7 +30,7 @@ const MainBackground = ({ children }: { children: React.JSX.Element }) => {
         <ImageBackground
           source={{ uri: bkgrdImg.identifier }}
           resizeMode="cover"
-          style={[styles.mobileStyle, { height: mobileHeight }]}
+          style={[styles.mobileStyle, { height }]}
         >
           <View
             style={{ backgroundColor: playerStyle.colors.background, flex: 1 }}
@@ -47,13 +47,7 @@ const MainBackground = ({ children }: { children: React.JSX.Element }) => {
               uri: bkgrdImg.identifier,
               headers: customReqHeader(bkgrdImg.identifier, {}),
             }}
-            style={[
-              styles.videoStyle,
-              {
-                width: Dimensions.get('window').width,
-                height: Dimensions.get('window').height,
-              },
-            ]}
+            style={[styles.videoStyle, { width, height }]}
             onError={e => {
               logger.error(JSON.stringify(e));
               logger.error(
