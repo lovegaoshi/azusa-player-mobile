@@ -1,7 +1,7 @@
 export enum PlaylistTypes {
-  TYPE_TYPICA_PLAYLIST = 'typical',
-  TYPE_SEARCH_PLAYLIST = 'search',
-  TYPE_FAVORI_PLAYLIST = 'favorite',
+  Typical = 'typical',
+  Search = 'search',
+  Favorite = 'favorite',
 }
 
 export const SearchRegex: { [key: string]: { regex: RegExp; text: string } } = {

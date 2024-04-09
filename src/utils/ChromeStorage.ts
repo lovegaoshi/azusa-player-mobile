@@ -309,10 +309,10 @@ export const initPlayerObject =
       ],
       searchPlaylist: dummyPlaylist(
         i18n.t('PlaylistOperations.searchListName'),
-        PlaylistTypes.TYPE_SEARCH_PLAYLIST
+        PlaylistTypes.Search
       ),
       favoriPlaylist: await getPlaylist(StorageKeys.FAVORITE_PLAYLIST_KEY, () =>
-        dummyPlaylist('Favorite', PlaylistTypes.TYPE_FAVORI_PLAYLIST)
+        dummyPlaylist('Favorite', PlaylistTypes.Favorite)
       ),
       playbackMode: await getItem(
         StorageKeys.PLAYMODE_KEY,

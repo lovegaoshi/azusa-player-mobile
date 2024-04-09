@@ -47,8 +47,7 @@ const SongInfo = ({
   );
 
   const title =
-    playerSetting.parseSongName &&
-    currentPlaylist.type !== PlaylistTypes.TYPE_SEARCH_PLAYLIST
+    playerSetting.parseSongName && currentPlaylist.type !== PlaylistTypes.Search
       ? item.parsedName
       : item.name;
   const id = item.id;

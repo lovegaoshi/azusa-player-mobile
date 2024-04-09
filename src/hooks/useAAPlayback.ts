@@ -27,7 +27,7 @@ const useAAPlayback = () => {
     // HACK: for some reason I decided to register AA related listeners here.
     // I need the intent shuffleall handling somewhere it only runs once, which
     // is here... but this looks BAD.
-    if (intentData === IntentData.playAll) {
+    if (intentData === IntentData.PlayAll) {
       shuffleAll();
       setIntentData();
     }

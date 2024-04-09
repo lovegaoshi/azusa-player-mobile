@@ -1,6 +1,6 @@
 export enum ScreenIcons {
-  homeScreen = 'home',
-  exploreScreen = 'compass',
-  settingScreen = 'cog',
-  playlistScreen = 'playlist-music',
+  HomeScreen = 'home',
+  ExploreScreen = 'compass',
+  SettingScreen = 'cog',
+  PlaylistScreen = 'playlist-music',
 }

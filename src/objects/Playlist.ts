@@ -5,7 +5,7 @@ import { PlaylistTypes } from '../enums/Playlist';
 
 export const dummyPlaylist = (
   title = i18n.t('PlaylistOperations.searchListName'),
-  type = PlaylistTypes.TYPE_TYPICA_PLAYLIST
+  type = PlaylistTypes.Typical
 ): NoxMedia.Playlist => {
   return {
     songList: [],

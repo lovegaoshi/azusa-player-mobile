@@ -119,7 +119,7 @@ const AzusaPlayer = () => {
             <Drawer.Screen
               name={ViewEnum.PLAYER_HOME}
               options={{
-                drawerIcon: () => <IconButton icon={ScreenIcons.homeScreen} />,
+                drawerIcon: () => <IconButton icon={ScreenIcons.HomeScreen} />,
                 title: String(t('appDrawer.homeScreenName')),
                 header: () => null,
               }}
@@ -129,7 +129,7 @@ const AzusaPlayer = () => {
               name={ViewEnum.EXPORE}
               options={{
                 drawerIcon: () => (
-                  <IconButton icon={ScreenIcons.exploreScreen} />
+                  <IconButton icon={ScreenIcons.ExploreScreen} />
                 ),
                 title: String(t('appDrawer.exploreScreenName')),
               }}
@@ -139,7 +139,7 @@ const AzusaPlayer = () => {
               name={ViewEnum.SETTINGS}
               options={{
                 drawerIcon: () => (
-                  <IconButton icon={ScreenIcons.settingScreen} />
+                  <IconButton icon={ScreenIcons.SettingScreen} />
                 ),
                 title: String(t('appDrawer.settingScreenName')),
                 header: () => null,

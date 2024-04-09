@@ -62,22 +62,22 @@ export default ({ panelWidth = 110 }: Props) => {
         />
       </View>
       <IconButton
-        icon={ScreenIcons.homeScreen}
+        icon={ScreenIcons.HomeScreen}
         size={iconSize}
         onPress={() => navigationGlobal.navigate(ViewEnum.LYRICS as never)}
       />
       <IconButton
-        icon={ScreenIcons.playlistScreen}
+        icon={ScreenIcons.PlaylistScreen}
         size={iconSize}
         onPress={onPlaylistPress}
       />
       <IconButton
-        icon={ScreenIcons.exploreScreen}
+        icon={ScreenIcons.ExploreScreen}
         size={iconSize}
         onPress={() => navigationGlobal.navigate(ViewEnum.EXPORE as never)}
       />
       <IconButton
-        icon={ScreenIcons.settingScreen}
+        icon={ScreenIcons.SettingScreen}
         size={iconSize}
         onPress={() => navigationGlobal.navigate(ViewEnum.SETTINGS as never)}
       />
