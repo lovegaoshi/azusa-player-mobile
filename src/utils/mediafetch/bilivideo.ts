@@ -7,7 +7,7 @@ import { biliShazamOnSonglist } from './bilishazam';
 import SongTS from '@objects/Song';
 import { logger } from '../Logger';
 import bfetch from '@utils/BiliFetch';
-import { SOURCE } from '@enums/MediaFetch';
+import { Source } from '@enums/MediaFetch';
 
 export enum FieldEnum {
   AudioUrl = 'AudioUrl',
@@ -45,7 +45,7 @@ const fetchBVIDRaw = async (bvid: string): Promise<NoxMedia.Song[]> => {
         page: index + 1,
         duration: page.duration,
         album: data.title,
-        source: SOURCE.bilivideo,
+        source: Source.bilivideo,
       });
     });
   } catch (error: any) {
@@ -201,7 +201,9 @@ const extractResponseJson = (json: any, field: string) => {
     case FieldEnum.AudioInfo:
       return {};
     default:
-      throw new Error(`invalid field type: ${field} to parse JSON response from ${json}`);
+      throw new Error(
+        `invalid field type: ${field} to parse JSON response from ${json}`
+      );
   }
 };
 

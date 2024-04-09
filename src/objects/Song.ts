@@ -3,7 +3,7 @@ import he from 'he';
 
 import { extractParenthesis } from '../utils/re';
 import { reExtractSongName } from '@stores/appStore';
-import { SOURCE } from '@enums/MediaFetch';
+import { Source } from '@enums/MediaFetch';
 import { MUSICFREE } from '@utils/mediafetch/musicfree';
 import { i0hdslbHTTPResolve } from '@utils/Utils';
 
@@ -26,7 +26,7 @@ interface SongProps {
   duration?: number;
   album?: string;
   addedDate?: number;
-  source?: SOURCE | MUSICFREE;
+  source?: Source | MUSICFREE;
   isLive?: boolean;
   liveStatus?: boolean;
   metadataOnLoad?: boolean;

@@ -12,7 +12,7 @@
 import { logger } from '../Logger';
 import { regexFetchProps } from './generic';
 import bfetch from '@utils/BiliFetch';
-import { SOURCE } from '@enums/MediaFetch';
+import { Source } from '@enums/MediaFetch';
 import SongTS from '@objects/Song';
 
 /**
@@ -70,7 +70,7 @@ const fetchBiliAudioSimilarList = async (
   const json = await res.json();
   return json.data.map((data: any) =>
     SongTS({
-      cid: `${SOURCE.biliaudio}-${data.id}`,
+      cid: `${Source.biliaudio}-${data.id}`,
       bvid: data.id,
       name: data.title,
       nameRaw: data.title,
@@ -81,7 +81,7 @@ const fetchBiliAudioSimilarList = async (
       page: 1,
       duration: data.duration,
       album: data.title,
-      source: SOURCE.biliaudio,
+      source: Source.biliaudio,
     })
   );
 };

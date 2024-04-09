@@ -1,5 +1,5 @@
 import { SORT_OPTIONS, PLAYLIST_ENUMS } from '@enums/Playlist';
-import { SOURCE } from '@enums/MediaFetch';
+import { Source } from '@enums/MediaFetch';
 import { MUSICFREE } from '@utils/mediafetch/musicfree';
 
 declare global {
@@ -20,7 +20,7 @@ declare global {
       duration: number;
       album?: string;
       addedDate?: number;
-      source?: SOURCE | MUSICFREE;
+      source?: Source | MUSICFREE;
       isLive?: boolean;
       liveStatus?: boolean;
       metadataOnLoad?: boolean;

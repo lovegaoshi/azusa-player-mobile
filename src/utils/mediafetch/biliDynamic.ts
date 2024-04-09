@@ -1,7 +1,7 @@
 import { logger } from '../Logger';
 import SongTS from '@objects/Song';
 import bfetch from '@utils/BiliFetch';
-import { BiliMusicTid, SOURCE } from '@enums/MediaFetch';
+import { BiliMusicTid, Source } from '@enums/MediaFetch';
 import { biliApiLimiter } from './throttle';
 
 const API =
@@ -20,7 +20,7 @@ const dynamicToSong = (data: any) =>
     page: 1,
     duration: data.duration,
     album: data.title,
-    source: SOURCE.bilivideo,
+    source: Source.bilivideo,
   });
 
 export const fetchDynamic = async (rid = '3', page = 1) => {

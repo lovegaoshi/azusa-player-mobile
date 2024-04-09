@@ -23,14 +23,14 @@ import { getABRepeatRaw } from './appStore';
 import { setPlayingList, setPlayingIndex } from '@stores/playingList';
 import DummyLyricDetail from '../objects/LyricDetail';
 import { MUSICFREE } from '../utils/mediafetch/musicfree';
-import { INTENT_DATA } from '@enums/Intent';
+import { IntentData } from '@enums/Intent';
 
 interface NoxSetting {
   songListScrollCounter: number;
   incSongListScrollCounter: () => void;
 
-  intentData?: INTENT_DATA;
-  setIntentData: (val?: INTENT_DATA) => void;
+  intentData?: IntentData;
+  setIntentData: (val?: IntentData) => void;
 
   searchOption: SEARCH_OPTIONS | MUSICFREE;
   setSearchOption: (val: SEARCH_OPTIONS | MUSICFREE) => void;

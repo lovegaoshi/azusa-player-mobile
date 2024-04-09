@@ -15,7 +15,7 @@ import { biliApiLimiter } from './throttle';
 
 import SongTS from '@objects/Song';
 import { logger } from '../Logger';
-import { SOURCE } from '@enums/MediaFetch';
+import { Source } from '@enums/MediaFetch';
 
 export const CIDPREFIX = 'youtube-';
 
@@ -181,7 +181,7 @@ const fetchAudioInfoRaw = async (sid: string) => {
               )
             : 0,
         album: videoDetails.title,
-        source: SOURCE.ytbvideo,
+        source: Source.ytbvideo,
         metadataOnLoad: true,
       }),
     ];
@@ -242,7 +242,7 @@ const suggest = async (song: NoxMedia.Song, filterMW = <T>(v: T[]) => v[0]) => {
         page: 1,
         duration: Number(suggestSong.length_seconds),
         album: suggestSong.title,
-        source: SOURCE.ytbvideo,
+        source: Source.ytbvideo,
         metadataOnLoad: true,
       })
     );

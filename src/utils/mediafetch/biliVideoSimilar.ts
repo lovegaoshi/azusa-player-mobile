@@ -3,7 +3,7 @@
 import { logger } from '../Logger';
 import { regexFetchProps } from './generic';
 import bfetch from '@utils/BiliFetch';
-import { SOURCE, BiliMusicTid } from '@enums/MediaFetch';
+import { Source, BiliMusicTid } from '@enums/MediaFetch';
 import SongTS from '@objects/Song';
 import { fetchBVID } from './bilivideo';
 
@@ -34,7 +34,7 @@ const fetchBiliVideoSimilarList = async (bvid: string) => {
           page: 1,
           duration: data.duration,
           album: data.title,
-          source: SOURCE.bilivideo,
+          source: Source.bilivideo,
         })
       )
   );

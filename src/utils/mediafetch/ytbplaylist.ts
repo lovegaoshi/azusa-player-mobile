@@ -5,7 +5,7 @@ import { regexFetchProps } from './generic';
 import { fetchAudioInfo, CIDPREFIX } from './ytbvideo';
 import SongTS from '@objects/Song';
 import { logger } from '../Logger';
-import { SOURCE } from '@enums/MediaFetch';
+import { Source } from '@enums/MediaFetch';
 
 const musePlaylistItemToNoxSong = (val: any, data: any) => {
   try {
@@ -21,7 +21,7 @@ const musePlaylistItemToNoxSong = (val: any, data: any) => {
       page: 1,
       duration: val.duration_seconds,
       album: data.title,
-      source: SOURCE.ytbvideo,
+      source: Source.ytbvideo,
       metadataOnLoad: true,
     });
   } catch {
@@ -76,7 +76,7 @@ const fastYTPlaylistSongResolve = (val: any, data: any) => {
       page: Number(val.playlistVideoRenderer.index.simpleText),
       duration: Number(val.playlistVideoRenderer.lengthSeconds),
       album: data.metadata.playlistMetadataRenderer.title,
-      source: SOURCE.ytbvideo,
+      source: Source.ytbvideo,
       metadataOnLoad: true,
     });
   } catch (e) {

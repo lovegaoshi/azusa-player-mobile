@@ -1,4 +1,4 @@
-export enum SOURCE {
+export enum Source {
   biliaudio = 'biliaudio',
   bilivideo = 'bilivideo',
   steriatk = 'steriatk',
