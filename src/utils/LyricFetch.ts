@@ -15,19 +15,12 @@ export const searchLyricOptions = async (
   }
 };
 
-export const searchLyric = async (
-  searchMID: string,
-  setLyric: (v: string) => void,
-  source = LrcSource.QQ
-) => {
-  let lrc = '';
+export const searchLyric = async (searchMID: string, source = LrcSource.QQ) => {
   switch (source) {
     case LrcSource.Kugou:
-      lrc = await kugouLrcFetch.getLyric(searchMID);
+      return kugouLrcFetch.getLyric(searchMID);
     case LrcSource.QQ:
     default:
-      lrc = await qqLrcFetch.getLyric(searchMID);
+      return qqLrcFetch.getLyric(searchMID);
   }
-  setLyric(lrc);
-  return lrc;
 };

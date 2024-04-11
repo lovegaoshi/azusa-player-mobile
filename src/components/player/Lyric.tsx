@@ -202,7 +202,8 @@ export const LyricView = ({
     if (resolvedLrcOptions.length === 0) setLrc('无法找到歌词,请手动搜索...');
     else {
       const resolvedLrc = resolvedLrcOptions[index!];
-      const lyric = await searchLyric(lyricMid || resolvedLrc.songMid, setLrc);
+      const lyric = await searchLyric(lyricMid || resolvedLrc.songMid);
+      setLrc(lyric);
       setLrcOption(resolvedLrc);
       updateLyricMapping({ newLrcDetail: { lyric }, resolvedLrc });
     }
