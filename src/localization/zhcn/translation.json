@@ -127,6 +127,8 @@
     "chatGPTResolveSongNameDesc": "TODO：用chatGPT解析歌名",
     "keepForegroundName": "费电",
     "keepForegroundDesc": "保持前台服务，贼拉费电",
+    "karaokeLyricsName": "逐字歌词",
+    "karaokeLyricsDesc": "使用逐字歌词",
     "biliEditAPIName": "使用b站修改投稿API",
     "biliEditAPIDesc": "更改歌名时，使用b站修改投稿API",
     "screenAlwaysWakeName": "歌词界面常亮",

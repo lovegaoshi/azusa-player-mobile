@@ -39,6 +39,7 @@ declare global {
       wavyProgressBar: boolean;
       screenAlwaysWake: boolean;
       keepForeground: boolean;
+      karaokeLyrics: boolean;
 
       appID: string;
       language?: string;
