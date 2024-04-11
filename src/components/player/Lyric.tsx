@@ -70,7 +70,10 @@ export const LyricView = ({
   noScrollThrottle = true,
   onPress = () => undefined,
 }: LyricViewProps) => {
-  const { position } = useProgress(30);
+  const playerSetting = useNoxSetting(state => state.playerSetting);
+  const { position } = useProgress(
+    playerSetting.karaokeLyrics ? 30 : undefined
+  );
   const [lrc, setLrc] = useState('正在加载歌词...');
   const [lrcOptions, setLrcOptions] = useState<NoxNetwork.NoxFetchedLyric[]>(
     []
@@ -83,7 +86,6 @@ export const LyricView = ({
   const [searchText, setSearchText] = useState('');
 
   const playerStyle = useNoxSetting(state => state.playerStyle);
-  const playerSetting = useNoxSetting(state => state.playerSetting);
   const lyricMapping = useNoxSetting(state => state.lyricMapping);
   const setLyricMapping = useNoxSetting(state => state.setLyricMapping);
 
