@@ -1,6 +1,7 @@
 import { SortOptions, PlaylistTypes } from '@enums/Playlist';
 import { Source } from '@enums/MediaFetch';
 import { MUSICFREE } from '@utils/mediafetch/musicfree';
+import { LrcSource } from '@enums/LyricFetch';
 
 declare global {
   namespace NoxMedia {
@@ -60,6 +61,7 @@ declare global {
       lyricKey: string;
       lyricOffset: number;
       lyric: string;
+      source?: LrcSource;
     }
   }
 }

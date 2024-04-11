@@ -161,6 +161,7 @@ export const LyricView = ({
         lyricOffset: currentTimeOffset,
         ...newLrcDetail,
         lyric: lrcpath,
+        source: resolvedLrc.source,
       };
       setLyricMapping(lyricDeatail);
     }
