@@ -1,5 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useCallback, useEffect, useState } from 'react';
+import i18n from 'i18next';
 import {
   Modal,
   View,
@@ -74,7 +75,7 @@ export const LyricView = ({
   const { position } = useProgress(
     playerSetting.karaokeLyrics ? 30 : undefined
   );
-  const [lrc, setLrc] = useState('正在加载歌词...');
+  const [lrc, setLrc] = useState(i18n.t('Lyric.loading'));
   const [lrcOptions, setLrcOptions] = useState<NoxNetwork.NoxFetchedLyric[]>(
     []
   );
@@ -96,7 +97,7 @@ export const LyricView = ({
       lyricPromise: Promise<NoxNetwork.NoxFetchedLyric[]>
     ) => {
       if (!hasLrcFromLocal()) return false;
-      logger.log('[lyric] Loading Lrc from localStorage...');
+      logger.log('[lrc] Loading Lrc from localStorage...');
       const lrcDetail = lyricMapping.get(track?.song.id);
       if (lrcDetail === undefined) return false;
       const lrcKey = lrcDetail?.lyricKey;
@@ -120,12 +121,12 @@ export const LyricView = ({
       return true;
     };
     (async () => {
-      logger.log('Initiating Lyric with new track...');
+      logger.log('[lrc] Initiating Lyric with new track...');
       // HACK: UX is too bad if this is not always fetched
       const lrcOptionPromise = fetchAndSetLyricOptions();
       setCurrentTimeOffset(0);
       setLrcOption(undefined);
-      setLrc('正在加载歌词...');
+      setLrc(i18n.t('Lyric.loading'));
       setSearchText(track.title || '');
       // Initialize from storage if not new
       const localLrcLoaded = await loadLocalLrc(lrcOptionPromise);
@@ -187,7 +188,7 @@ export const LyricView = ({
       setLrcOptions(options);
       return options;
     } catch (error) {
-      logger.error(`Error fetching lyric options:${error}`);
+      logger.error(`[lrc] Error fetching lyric options:${error}`);
       setLrcOptions([]);
     }
     return [];
@@ -199,7 +200,7 @@ export const LyricView = ({
     lyricMid?: string
   ) => {
     console.debug(`lrcoptions: ${JSON.stringify(resolvedLrcOptions)}`);
-    if (resolvedLrcOptions.length === 0) setLrc('无法找到歌词,请手动搜索...');
+    if (resolvedLrcOptions.length === 0) setLrc(i18n.t('Lyric.notFound'));
     else {
       const resolvedLrc = resolvedLrcOptions[index!];
       const lyric = await searchLyric(lyricMid || resolvedLrc.songMid);

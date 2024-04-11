@@ -298,6 +298,7 @@
     "local": "Local"
   },
   "Lyric": {
+    "loading": "Loading lyric...",
     "notFound": "[00:00.000] Lyric was not found"
   }
 }
