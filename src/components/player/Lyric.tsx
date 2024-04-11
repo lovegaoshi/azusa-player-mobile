@@ -245,8 +245,6 @@ export const LyricView = ({
     ],
   };
 
-  useEffect(() => console.log(position), [position]);
-
   return (
     <View style={styles.container}>
       <Lyric
