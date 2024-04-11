@@ -57,7 +57,7 @@ const usePlayback = () => {
   }: PlayFromPlaylist) => {
     playlist = playlistParser(playlist);
     setCurrentPlayingList(playlist);
-    if (getState().playmode === NoxRepeatMode.REPEAT_TRACK) {
+    if (getState().playmode === NoxRepeatMode.RepeatTrack) {
       await TrackPlayer.setRepeatMode(RepeatMode.Off);
     }
     if (song === undefined) {

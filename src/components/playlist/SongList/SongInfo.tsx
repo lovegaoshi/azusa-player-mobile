@@ -8,7 +8,7 @@ import {
 import { View, GestureResponderEvent, StyleSheet } from 'react-native';
 import { useNoxSetting } from '@stores/useApp';
 import { seconds2MMSS } from '@utils/Utils';
-import { PLAYLIST_ENUMS } from '@enums/Playlist';
+import { PlaylistTypes } from '@enums/Playlist';
 import NoxCache from '@utils/Cache';
 
 interface UsePlaylist {
@@ -47,8 +47,7 @@ const SongInfo = ({
   );
 
   const title =
-    playerSetting.parseSongName &&
-    currentPlaylist.type !== PLAYLIST_ENUMS.TYPE_SEARCH_PLAYLIST
+    playerSetting.parseSongName && currentPlaylist.type !== PlaylistTypes.Search
       ? item.parsedName
       : item.name;
   const id = item.id;

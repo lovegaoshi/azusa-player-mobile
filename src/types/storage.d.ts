@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { ColorSchemeName } from 'react-native';
 
-import { EXPORT_OPTIONS } from '../enums/Sync';
+import { SyncOptions } from '../enums/Sync';
 import { NoxRepeatMode } from '../enums/RepeatMode';
-import { SEARCH_OPTIONS } from '../enums/Storage';
+import { SearchOptions } from '../enums/Storage';
 
 declare global {
   namespace NoxStorage {
@@ -16,7 +16,7 @@ declare global {
       skin: string;
       parseSongName: boolean;
       keepSearchedSongListWhenPlaying: boolean;
-      settingExportLocation: EXPORT_OPTIONS;
+      settingExportLocation: SyncOptions;
       personalCloudIP: string;
       personalCloudID: string;
       noxVersion: string;
@@ -39,6 +39,7 @@ declare global {
       wavyProgressBar: boolean;
       screenAlwaysWake: boolean;
       keepForeground: boolean;
+      karaokeLyrics: boolean;
 
       appID: string;
       language?: string;
@@ -62,7 +63,7 @@ declare global {
       language?: string;
       lastPlayDuration: number;
       colorScheme: ColorSchemeName;
-      defaultSearchOptions?: SEARCH_OPTIONS;
+      defaultSearchOptions?: SearchOptions;
     }
 
     export interface initializedResults {

@@ -1,7 +1,7 @@
-export enum PLAYLIST_ENUMS {
-  TYPE_TYPICA_PLAYLIST = 'typical',
-  TYPE_SEARCH_PLAYLIST = 'search',
-  TYPE_FAVORI_PLAYLIST = 'favorite',
+export enum PlaylistTypes {
+  Typical = 'typical',
+  Search = 'search',
+  Favorite = 'favorite',
 }
 
 export const SearchRegex: { [key: string]: { regex: RegExp; text: string } } = {
@@ -11,10 +11,10 @@ export const SearchRegex: { [key: string]: { regex: RegExp; text: string } } = {
   cachedMatch: { regex: /Cached:/, text: 'Cached:' },
 };
 
-export enum SORT_OPTIONS {
-  TITLE = 'title',
-  ARTIST = 'artist',
-  ALBUM = 'album',
-  DATE = 'date',
-  PREVIOUS_ORDER = 'previous',
+export enum SortOptions {
+  Title = 'title',
+  Artist = 'artist',
+  Album = 'album',
+  Date = 'date',
+  PreviousOrder = 'previous',
 }

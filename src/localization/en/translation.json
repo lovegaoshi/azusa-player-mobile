@@ -116,6 +116,8 @@
     "chatGPTResolveSongNameDesc": "TODO: Use chatGPT to resolve song names",
     "keepForegroundName": "Keep Foreground Service",
     "keepForegroundDesc": "enable to waste a LOT of battery",
+    "karaokeLyricsName": "Karaoke Lyrics",
+    "karaokeLyricsDesc": "Show karaoke style lyrics",
     "biliEditAPIName": "use bilibili edit API",
     "biliEditAPIDesc": "use bilibili edit API when renaming songs",
     "screenAlwaysWakeName": "Lyric screen always on",

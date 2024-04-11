@@ -2,9 +2,9 @@ import * as React from 'react';
 import Svg, { Path } from 'react-native-svg';
 import { Image } from 'expo-image';
 import { StyleSheet } from 'react-native';
-import { SEARCH_OPTIONS } from '@enums/Storage';
+import { SearchOptions } from '@enums/Storage';
 
-const ICONS = {
+const Icons = {
   BILIBILI: () => (
     <Svg width={24} height={24} viewBox="0 0 24 24">
       <Path
@@ -39,16 +39,16 @@ const ICONS = {
 
 export const getIcon = (icon: string) => {
   switch (icon) {
-    case SEARCH_OPTIONS.BILIBILI:
-      return ICONS.BILIBILI;
-    case SEARCH_OPTIONS.YOUTUBE:
-      return ICONS.YOUTUBE;
+    case SearchOptions.BILIBILI:
+      return Icons.BILIBILI;
+    case SearchOptions.YOUTUBE:
+      return Icons.YOUTUBE;
     default:
-      return ICONS.MUSICFREE;
+      return Icons.MUSICFREE;
   }
 };
 
-export default ICONS;
+export default Icons;
 
 const style = StyleSheet.create({
   musicFreeIcon: { width: 40, height: 40, marginLeft: -5, marginTop: 4 },

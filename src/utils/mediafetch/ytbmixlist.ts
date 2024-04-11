@@ -2,7 +2,7 @@ import { regexFetchProps } from './generic';
 import { CIDPREFIX } from './ytbvideo';
 import SongTS from '@objects/Song';
 import { timestampToSeconds } from '../Utils';
-import { SOURCE } from '@enums/MediaFetch';
+import { Source } from '@enums/MediaFetch';
 
 const fetchYTPlaylist = async (
   playlistId: string,
@@ -46,7 +46,7 @@ const fetchYTPlaylist = async (
           ),
           album:
             data.contents.twoColumnWatchNextResults.playlist.playlist.title,
-          source: SOURCE.ytbvideo,
+          source: Source.ytbvideo,
           metadataOnLoad: true,
         }),
       ])

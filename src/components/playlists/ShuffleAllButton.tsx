@@ -1,7 +1,7 @@
 import React from 'react';
 import { IconButton } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
-import { ViewEnum } from '@enums/View';
+import { NoxRoutes } from '@enums/Routes';
 import usePlayback from '@hooks/usePlayback';
 
 export default () => {
@@ -9,7 +9,7 @@ export default () => {
   const { shuffleAll } = usePlayback();
   const onPressed = async () => {
     await shuffleAll();
-    navigation.navigate(ViewEnum.PLAYER_HOME as never);
+    navigation.navigate(NoxRoutes.PlayerHome as never);
   };
 
   return <IconButton icon="shuffle" onPress={onPressed} />;

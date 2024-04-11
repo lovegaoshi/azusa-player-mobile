@@ -23,7 +23,7 @@ const playlistStore = createStore<NoxPlaylistStore>(() => ({
   playingListShuffled: [],
   currentPlayingIndex: -1,
   currentPlayingId: '',
-  playmode: NoxRepeatMode.SHUFFLE,
+  playmode: NoxRepeatMode.Shuffle,
 }));
 
 export const setPlayingIndex = (index = 0, songId?: string) => {
@@ -75,7 +75,7 @@ export const setPlayingList = (list: Array<NoxMedia.Song>) => {
 export const getCurrentTPQueue = (playmode?: NoxRepeatMode) => {
   const state = playlistStore.getState();
   if (!playmode) playmode = state.playmode;
-  if (playmode === NoxRepeatMode.SHUFFLE) {
+  if (playmode === NoxRepeatMode.Shuffle) {
     return state.playingListShuffled;
   }
   return state.playingList;
@@ -108,17 +108,17 @@ export const getPlaybackModeNotifIcon = (
   // RepeatMode.Off.
   let TPRepeatMode = RepeatMode.Off;
   switch (state) {
-    case NoxRepeatMode.REPEAT:
+    case NoxRepeatMode.Repeat:
       nextIcon = 2;
       break;
-    case NoxRepeatMode.REPEAT_TRACK:
+    case NoxRepeatMode.RepeatTrack:
       nextIcon = 3;
       TPRepeatMode = RepeatMode.Track;
       break;
-    case NoxRepeatMode.SUGGEST:
+    case NoxRepeatMode.Suggest:
       nextIcon = 5;
       break;
-    case NoxRepeatMode.SHUFFLE:
+    case NoxRepeatMode.Shuffle:
       nextIcon = 4;
       break;
     default:
@@ -127,7 +127,7 @@ export const getPlaybackModeNotifIcon = (
   return [nextIcon, TPRepeatMode];
 };
 
-const RefreshPlayingIndex = [NoxRepeatMode.SHUFFLE, NoxRepeatMode.REPEAT];
+const RefreshPlayingIndex = [NoxRepeatMode.Shuffle, NoxRepeatMode.Repeat];
 /**
  * calls TP.setRepeatMode by the input repeat mode, saves repeat mode into asnycStorage, then
  * returns the icon associated with the repeat mode (for notification bar).
@@ -149,14 +149,14 @@ export const initializePlaybackMode = (state: NoxRepeatMode) => {
  */
 export const cycleThroughPlaymode = () => {
   switch (playlistStore.getState().playmode) {
-    case NoxRepeatMode.SHUFFLE:
-      return initializePlaybackMode(NoxRepeatMode.REPEAT);
-    case NoxRepeatMode.REPEAT:
-      return initializePlaybackMode(NoxRepeatMode.REPEAT_TRACK);
-    case NoxRepeatMode.REPEAT_TRACK:
-      return initializePlaybackMode(NoxRepeatMode.SUGGEST);
-    case NoxRepeatMode.SUGGEST:
-      return initializePlaybackMode(NoxRepeatMode.SHUFFLE);
+    case NoxRepeatMode.Shuffle:
+      return initializePlaybackMode(NoxRepeatMode.Repeat);
+    case NoxRepeatMode.Repeat:
+      return initializePlaybackMode(NoxRepeatMode.RepeatTrack);
+    case NoxRepeatMode.RepeatTrack:
+      return initializePlaybackMode(NoxRepeatMode.Suggest);
+    case NoxRepeatMode.Suggest:
+      return initializePlaybackMode(NoxRepeatMode.Shuffle);
     default:
       return undefined;
   }

@@ -1,4 +1,4 @@
-export enum EXPORT_OPTIONS {
+export enum SyncOptions {
   LOCAL = '本地',
   DROPBOX = 'Dropbox',
   PERSONAL = '私有云',

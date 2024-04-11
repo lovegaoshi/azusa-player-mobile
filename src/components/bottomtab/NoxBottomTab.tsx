@@ -4,7 +4,7 @@ import { IconButton } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
 import { getDrawerStatusFromState } from '@react-navigation/drawer';
 
-import { ViewEnum } from '@enums/View';
+import { NoxRoutes } from '@enums/Routes';
 import { useNoxSetting } from '@stores/useApp';
 
 interface IconProps {
@@ -22,7 +22,7 @@ const BottomIconButton = ({ icon, onPress }: IconProps) => {
   );
 };
 
-enum Routes {
+enum RouteIcons {
   playlist = 'playlist-music',
   music = 'music-note',
   explore = 'compass',
@@ -42,7 +42,7 @@ const NoxAndroidBottomTab = ({ navigation }: NoxComponent.NavigationProps2) => {
 
   const onDrawerPress = () => {
     if (navigation === undefined) return;
-    setRoute(Routes.playlist);
+    setRoute(RouteIcons.playlist);
     if (isDrawerOpen()) {
       navigation.closeDrawer();
       return;
@@ -50,7 +50,7 @@ const NoxAndroidBottomTab = ({ navigation }: NoxComponent.NavigationProps2) => {
     navigation.openDrawer();
   };
 
-  const renderIcon = (icon: Routes) =>
+  const renderIcon = (icon: RouteIcons) =>
     route === icon ? icon : `${icon}-outline`;
 
   if (gestureMode) {
@@ -63,28 +63,28 @@ const NoxAndroidBottomTab = ({ navigation }: NoxComponent.NavigationProps2) => {
           ]}
         >
           <BottomIconButton
-            icon={renderIcon(Routes.playlist)}
+            icon={renderIcon(RouteIcons.playlist)}
             onPress={onDrawerPress}
           />
           <BottomIconButton
-            icon={renderIcon(Routes.music)}
+            icon={renderIcon(RouteIcons.music)}
             onPress={() => {
-              navigationGlobal.navigate(ViewEnum.PLAYER_HOME as never);
-              setRoute(Routes.music);
+              navigationGlobal.navigate(NoxRoutes.PlayerHome as never);
+              setRoute(RouteIcons.music);
             }}
           />
           <BottomIconButton
-            icon={renderIcon(Routes.explore)}
+            icon={renderIcon(RouteIcons.explore)}
             onPress={() => {
-              navigationGlobal.navigate(ViewEnum.EXPORE as never);
-              setRoute(Routes.explore);
+              navigationGlobal.navigate(NoxRoutes.Explore as never);
+              setRoute(RouteIcons.explore);
             }}
           />
           <BottomIconButton
-            icon={renderIcon(Routes.setting)}
+            icon={renderIcon(RouteIcons.setting)}
             onPress={() => {
-              navigationGlobal.navigate(ViewEnum.SETTINGS as never);
-              setRoute(Routes.setting);
+              navigationGlobal.navigate(NoxRoutes.Settings as never);
+              setRoute(RouteIcons.setting);
             }}
           />
         </View>

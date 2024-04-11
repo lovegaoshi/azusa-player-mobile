@@ -1,10 +1,10 @@
 import { NoxRepeatMode } from './RepeatMode';
-import { VERSIONS } from './Version';
-import { EXPORT_OPTIONS } from './Sync';
+import { Versions } from './Version';
+import { SyncOptions } from './Sync';
 
-export { EXPORT_OPTIONS } from './Sync';
+export { SyncOptions } from './Sync';
 
-export enum STORAGE_KEYS {
+export enum StorageKeys {
   PLAYER_SETTING_KEY = 'PlayerSetting',
   FAVORITE_PLAYLIST_KEY = 'FavFavList-Special',
   SEARCH_PLAYLIST_KEY = 'SearchPlaylist-Special',
@@ -27,14 +27,14 @@ export enum STORAGE_KEYS {
   MUSICFREE_PLUGIN = 'MusicFreePlugin',
 }
 
-export enum SEARCH_OPTIONS {
+export enum SearchOptions {
   BILIBILI = 'bilibili',
   YOUTUBE = 'youtube',
 }
 
-export const appID = 'NoxPlayerMobile';
+export const AppID = 'NoxPlayerMobile';
 
-export const DEFAULT_SETTING: NoxStorage.PlayerSettingDict = {
+export const DefaultSetting: NoxStorage.PlayerSettingDict = {
   playMode: 'shufflePlay',
   defaultPlayMode: 'shufflePlay',
   defaultVolume: 1,
@@ -43,17 +43,17 @@ export const DEFAULT_SETTING: NoxStorage.PlayerSettingDict = {
   skin: '诺莺nox',
   parseSongName: true,
   keepSearchedSongListWhenPlaying: false,
-  settingExportLocation: EXPORT_OPTIONS.DROPBOX,
+  settingExportLocation: SyncOptions.DROPBOX,
   personalCloudIP: '',
   personalCloudID: 'azusamobile',
-  noxVersion: VERSIONS.latest,
-  noxCheckedVersion: VERSIONS.latest,
+  noxVersion: Versions.Latest,
+  noxCheckedVersion: Versions.Latest,
 
   hideCoverInMobile: false,
   loadPlaylistAsArtist: false,
   sendBiliHeartbeat: false,
   noCookieBiliSearch: false,
-  playbackMode: NoxRepeatMode.SHUFFLE,
+  playbackMode: NoxRepeatMode.Shuffle,
   dataSaver: false,
   fastBiliSearch: true,
   noInterruption: false,
@@ -67,8 +67,9 @@ export const DEFAULT_SETTING: NoxStorage.PlayerSettingDict = {
   screenAlwaysWake: false,
   biliEditAPI: false,
   keepForeground: false,
+  karaokeLyrics: false,
 
-  appID,
+  appID: AppID,
   language: undefined,
   cacheSize: 1,
 };

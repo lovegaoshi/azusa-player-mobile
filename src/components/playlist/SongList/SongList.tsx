@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, BackHandler, StyleSheet } from 'react-native';
 import { FlashList } from '@shopify/flash-list';
 import { IconButton } from 'react-native-paper';
@@ -19,6 +19,9 @@ const PlaylistList = () => {
   const currentPlayingId = useNoxSetting(state => state.currentPlayingId);
   const playerStyle = useNoxSetting(state => state.playerStyle);
   const currentPlaylist = useNoxSetting(state => state.currentPlaylist);
+  const songListScrollCounter = useNoxSetting(
+    state => state.songListScrollCounter
+  );
   const usedPlaylist = usePlaylist(currentPlaylist);
   const {
     refreshPlaylist,
@@ -41,6 +44,8 @@ const PlaylistList = () => {
   const [scrollViewHeight, setScrollViewHeight] = useState(0);
   const [contentViewHeight, setContentViewHeight] = useState(0);
   const [scrollPositionY, setScrollPositionY] = useState(0);
+
+  useEffect(() => scrollTo(), [songListScrollCounter]);
 
   useFocusEffect(
     React.useCallback(() => {

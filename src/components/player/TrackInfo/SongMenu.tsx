@@ -12,7 +12,7 @@ import { addR128Gain, getR128Gain } from '@utils/ffmpeg/r128Store';
 import ABSliderMenu from './ABSliderMenu';
 import usePlayback from '@hooks/usePlayback';
 
-enum ICONS {
+enum Icons {
   SEND_TO = 'playlist-plus',
   COPY_SONG_NAME = '',
   SEARCH_IN_PLAYLIST = 'text-search',
@@ -111,7 +111,7 @@ export default ({
         }}
       />
       <Menu.Item
-        leadingIcon={ICONS.RELOAD}
+        leadingIcon={Icons.RELOAD}
         onPress={() => {
           closeMenu();
           reloadSong();
@@ -119,7 +119,7 @@ export default ({
         title={t('SongOperations.reloadSong')}
       />
       <Menu.Item
-        leadingIcon={ICONS.RADIO}
+        leadingIcon={Icons.RADIO}
         disabled={!radioAvailable(song)}
         onPress={() => {
           startRadio(song);
@@ -128,7 +128,7 @@ export default ({
         title={t('SongOperations.songStartRadio')}
       />
       <Menu.Item
-        leadingIcon={ICONS.R128GAIN}
+        leadingIcon={Icons.R128GAIN}
         onPress={async () =>
           Alert.alert(
             `R128Gain of ${song.parsedName}`,
@@ -145,7 +145,7 @@ export default ({
       />
       <ABSliderMenu song={song} closeMenu={closeMenu} />
       <Menu.Item
-        leadingIcon={ICONS.REMOVE_AND_BAN_BVID}
+        leadingIcon={Icons.REMOVE_AND_BAN_BVID}
         onPress={() => removeSongs(true)}
         title={t('SongOperations.songRemoveTitle')}
       />

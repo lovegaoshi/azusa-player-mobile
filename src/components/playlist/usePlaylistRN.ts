@@ -7,7 +7,7 @@ import { useNetInfo } from '@react-native-community/netinfo';
 import { activateKeepAwakeAsync, deactivateKeepAwake } from 'expo-keep-awake';
 
 import { useNoxSetting } from '@stores/useApp';
-import { PLAYLIST_ENUMS, SearchRegex } from '@enums/Playlist';
+import { PlaylistTypes, SearchRegex } from '@enums/Playlist';
 import usePlaylist from '@hooks/usePlaylist';
 import logger from '@utils/Logger';
 import noxCache, { noxCacheKey } from '@utils/Cache';
@@ -147,7 +147,7 @@ export default (playlist: NoxMedia.Playlist) => {
   useEffect(() => {
     if (
       playerSetting.autoRSSUpdate &&
-      playlist.type === PLAYLIST_ENUMS.TYPE_TYPICA_PLAYLIST &&
+      playlist.type === PlaylistTypes.Typical &&
       playlist.subscribeUrl.length > 0 &&
       playlist.subscribeUrl[0].length > 0 &&
       new Date().getTime() - playlist.lastSubscribed > 86400000

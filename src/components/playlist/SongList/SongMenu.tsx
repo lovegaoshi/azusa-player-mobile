@@ -8,10 +8,10 @@ import { CopiedPlaylistMenuItem } from '@components/buttons/CopiedPlaylistButton
 import RenameSongButton from '@components/player/TrackInfo/RenameSong/RenameSongButton';
 import useSongOperations from '@hooks/useSongOperations';
 import { SearchRegex } from '@enums/Playlist';
-import { SOURCE } from '@enums/MediaFetch';
+import { Source } from '@enums/MediaFetch';
 import useBiliSearch from '@hooks/useBiliSearch';
 
-enum ICONS {
+enum Icons {
   SEND_TO = 'playlist-plus',
   COPY_SONG_NAME = '',
   SEARCH_IN_PLAYLIST = 'text-search',
@@ -108,7 +108,7 @@ export default ({ usePlaylist, prepareForLayoutAnimationRender }: Props) => {
         }}
       />
       <Menu.Item
-        leadingIcon={ICONS.RADIO}
+        leadingIcon={Icons.RADIO}
         disabled={checking || !radioAvailable(selectedSongs()[0])}
         onPress={() => {
           startRadio(selectedSongs()[0]);
@@ -117,7 +117,7 @@ export default ({ usePlaylist, prepareForLayoutAnimationRender }: Props) => {
         title={t('SongOperations.songStartRadio')}
       />
       <Menu.Item
-        leadingIcon={ICONS.SEARCH_IN_PLAYLIST}
+        leadingIcon={Icons.SEARCH_IN_PLAYLIST}
         onPress={() => {
           searchAndEnableSearch(
             `${SearchRegex.absoluteMatch.text}${
@@ -130,9 +130,9 @@ export default ({ usePlaylist, prepareForLayoutAnimationRender }: Props) => {
         disabled={checking}
         title={t('SongOperations.songSearchInPlaylistTitle')}
       />
-      {selectedSongs()[0]?.source === SOURCE.bilivideo && (
+      {selectedSongs()[0]?.source === Source.bilivideo && (
         <Menu.Item
-          leadingIcon={ICONS.SEARCH_BVID}
+          leadingIcon={Icons.SEARCH_BVID}
           onPress={() => {
             const song = selectedSongs()[0];
             setSearchVal(song.bvid);
@@ -144,18 +144,18 @@ export default ({ usePlaylist, prepareForLayoutAnimationRender }: Props) => {
         />
       )}
       <Menu.Item
-        leadingIcon={ICONS.REMOVE}
+        leadingIcon={Icons.REMOVE}
         onPress={() => removeSongs()}
         title={t('SongOperations.songRemoveTitle')}
       />
       <Menu.Item
-        leadingIcon={ICONS.REMOVE_AND_BAN_BVID}
+        leadingIcon={Icons.REMOVE_AND_BAN_BVID}
         onPress={() => removeSongs(true)}
         title={t('SongOperations.songRemoveNBanTitle')}
       />
       {__DEV__ && (
         <Menu.Item
-          leadingIcon={ICONS.REMOVE_AND_BAN_BVID}
+          leadingIcon={Icons.REMOVE_AND_BAN_BVID}
           onPress={() => console.log(selectedSongs())}
           title={'console.log'}
         />

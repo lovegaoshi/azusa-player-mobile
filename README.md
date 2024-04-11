@@ -92,6 +92,7 @@ git clone https://github.com/lovegaoshi/azusa-player-mobile.git
 yarn build
 yarn
 cd ios && pod install && cd ..
+mv ios/sentry.properties.example ios/sentry.properties
 ```
 
 ### MF插件

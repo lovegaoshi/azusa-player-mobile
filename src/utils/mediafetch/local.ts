@@ -13,7 +13,7 @@ import { Platform, NativeModules } from 'react-native';
 import RNFetchBlob from 'react-native-blob-util';
 
 import { probeMetadata, cacheAlbumArt } from '@utils/ffmpeg/ffmpeg';
-import { SOURCE } from '@enums/MediaFetch';
+import { Source } from '@enums/MediaFetch';
 import { regexFetchProps } from './generic';
 import SongTS from '@objects/Song';
 import logger from '../Logger';
@@ -33,7 +33,7 @@ const songFetch = async (
   const uniqMediaFiles = mediaFiles.filter(v => !favlist.includes(v.realPath));
   return uniqMediaFiles.map(v =>
     SongTS({
-      cid: `${SOURCE.local}-${v.realPath}`,
+      cid: `${Source.local}-${v.realPath}`,
       bvid: `file://${v.realPath}`,
       name: v.title,
       nameRaw: v.title,
@@ -44,7 +44,7 @@ const songFetch = async (
       page: 0,
       duration: v.duration / 1000,
       album: v.album,
-      source: SOURCE.local,
+      source: Source.local,
     })
   );
   // TODO: no longer needs FFProbe
@@ -61,7 +61,7 @@ const songFetch = async (
         logger.warn(v);
       }
       return SongTS({
-        cid: `${SOURCE.local}-${v.realPath}`,
+        cid: `${Source.local}-${v.realPath}`,
         bvid: `file://${v.realPath}`,
         name: probedMetadata.tags?.title || v.fileName,
         nameRaw: probedMetadata.tags?.title || v.fileName,
@@ -72,7 +72,7 @@ const songFetch = async (
         page: 0,
         duration: Number(probedMetadata.duration) || 0,
         album: probedMetadata.tags?.album || '',
-        source: SOURCE.local,
+        source: Source.local,
       });
     })
   );

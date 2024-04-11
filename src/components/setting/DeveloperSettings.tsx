@@ -26,7 +26,7 @@ import PluginSettings from './plugins/View';
 import showLog from './debug/Log';
 import { showDebugLog } from './debug/DebugConsole';
 
-enum ICONS {
+enum Icons {
   setlog = 'console',
   update = 'update',
   showlog = 'bug',
@@ -58,6 +58,10 @@ const developerSettings: { [key: string]: SettingEntry } = {
   },
   keepForeground: {
     settingName: 'keepForeground',
+    settingCategory: 'GeneralSettings',
+  },
+  karaokeLyrics: {
+    settingName: 'karaokeLyrics',
     settingCategory: 'GeneralSettings',
   },
   /**
@@ -166,36 +170,37 @@ const Home = ({ navigation }: NoxComponent.NavigationProps) => {
               <RenderSetting item={developerSettings.noInterruption} />
               <RenderSetting item={developerSettings.prefetchTrack} />
               <RenderSetting item={developerSettings.keepForeground} />
+              <RenderSetting item={developerSettings.karaokeLyrics} />
             </View>
           </GroupView>
           <SettingListItem
-            icon={ICONS.plugins}
+            icon={Icons.plugins}
             settingName="PluginsSetting"
             onPress={() => navigation.navigate(VIEW.PLUGINS)}
             settingCategory="Settings"
           />
           {!APPSTORE && (
             <SettingListItem
-              icon={ICONS.update}
+              icon={Icons.update}
               settingName="VersionCheck"
               onPress={() => checkVersion(false)}
               settingCategory="DeveloperSettings"
             />
           )}
           <SettingListItem
-            icon={ICONS.showlog}
+            icon={Icons.showlog}
             settingName="DebugLog"
             onPress={showDebugLog}
             settingCategory="DeveloperSettings"
           />
           <SettingListItem
-            icon={ICONS.showlog}
+            icon={Icons.showlog}
             settingName="Log"
             onPress={() => showLog()}
             settingCategory="DeveloperSettings"
           />
           <SettingListItem
-            icon={ICONS.setlog}
+            icon={Icons.setlog}
             settingName="LogLevel"
             onPress={selectLogLevel}
             settingCategory="DeveloperSettings"
@@ -204,14 +209,14 @@ const Home = ({ navigation }: NoxComponent.NavigationProps) => {
             }
           />
           <SettingListItem
-            icon={ICONS.fade}
+            icon={Icons.fade}
             settingName="Fade"
             onPress={selectFade}
             settingCategory="DeveloperSettings"
             modifyDescription={val => `${val}: ${fadeIntervalMs}ms`}
           />
           <SettingListItem
-            icon={ICONS.cache}
+            icon={Icons.cache}
             settingName="CacheSize"
             onPress={selectCacheLevel}
             settingCategory="DeveloperSettings"
@@ -222,7 +227,7 @@ const Home = ({ navigation }: NoxComponent.NavigationProps) => {
             }
           />
           <SettingListItem
-            icon={ICONS.clearcache}
+            icon={Icons.clearcache}
             settingName="ClearCache"
             onPress={NoxCache.noxMediaCache.clearCache}
             settingCategory="DeveloperSettings"
@@ -233,7 +238,7 @@ const Home = ({ navigation }: NoxComponent.NavigationProps) => {
             }
           />
           <SettingListItem
-            icon={ICONS.clearOrphanCache}
+            icon={Icons.clearOrphanCache}
             settingName="ClearOrphanedCache"
             onPress={cleanOrphanedCache}
             settingCategory="DeveloperSettings"

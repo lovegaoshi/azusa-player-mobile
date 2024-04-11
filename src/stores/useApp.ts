@@ -15,7 +15,7 @@ import {
   saveLyricMapping,
   saveDefaultSearch,
 } from '@utils/ChromeStorage';
-import { DEFAULT_SETTING, STORAGE_KEYS, SEARCH_OPTIONS } from '@enums/Storage';
+import { DefaultSetting, StorageKeys, SearchOptions } from '@enums/Storage';
 import { setPlayerSetting as setPlayerSettingVanilla } from './playerSettingStore';
 import { savePlayerStyle } from '@utils/StyleStorage';
 import { createStyle } from '@components/style';
@@ -23,14 +23,17 @@ import { getABRepeatRaw } from './appStore';
 import { setPlayingList, setPlayingIndex } from '@stores/playingList';
 import DummyLyricDetail from '../objects/LyricDetail';
 import { MUSICFREE } from '../utils/mediafetch/musicfree';
-import { INTENT_DATA } from '@enums/Intent';
+import { IntentData } from '@enums/Intent';
 
 interface NoxSetting {
-  intentData?: INTENT_DATA;
-  setIntentData: (val?: INTENT_DATA) => void;
+  songListScrollCounter: number;
+  incSongListScrollCounter: () => void;
 
-  searchOption: SEARCH_OPTIONS | MUSICFREE;
-  setSearchOption: (val: SEARCH_OPTIONS | MUSICFREE) => void;
+  intentData?: IntentData;
+  setIntentData: (val?: IntentData) => void;
+
+  searchOption: SearchOptions | MUSICFREE;
+  setSearchOption: (val: SearchOptions | MUSICFREE) => void;
 
   gestureMode: boolean;
   setGestureMode: (val: boolean) => void;
@@ -130,9 +133,15 @@ interface NoxSetting {
  * as well as saving and loading states to/from asyncStorage.
  */
 export const useNoxSetting = create<NoxSetting>((set, get) => ({
+  songListScrollCounter: 0,
+  incSongListScrollCounter: () =>
+    set(state => ({
+      songListScrollCounter: state.songListScrollCounter + 1,
+    })),
+
   setIntentData: intentData => set({ intentData }),
 
-  searchOption: SEARCH_OPTIONS.BILIBILI,
+  searchOption: SearchOptions.BILIBILI,
   setSearchOption: v => {
     set({ searchOption: v });
     saveDefaultSearch(v);
@@ -210,18 +219,18 @@ export const useNoxSetting = create<NoxSetting>((set, get) => ({
   searchPlaylist: dummyPlaylist(),
   setSearchPlaylist: val => {
     let playlists = get().playlists;
-    playlists[STORAGE_KEYS.SEARCH_PLAYLIST_KEY] = val;
+    playlists[StorageKeys.SEARCH_PLAYLIST_KEY] = val;
     set({ searchPlaylist: val, playlists });
   },
   favoritePlaylist: dummyPlaylist(),
   setFavoritePlaylist: val => {
     let playlists = get().playlists;
-    playlists[STORAGE_KEYS.FAVORITE_PLAYLIST_KEY] = val;
+    playlists[StorageKeys.FAVORITE_PLAYLIST_KEY] = val;
     saveFavPlaylist(val);
     set({ favoritePlaylist: val, playlists });
   },
 
-  playerSetting: DEFAULT_SETTING,
+  playerSetting: DefaultSetting,
   setPlayerSetting: val => {
     const newPlayerSetting = { ...get().playerSetting, ...val };
     set({ playerSetting: newPlayerSetting });
@@ -243,7 +252,7 @@ export const useNoxSetting = create<NoxSetting>((set, get) => ({
     let playlists = get().playlists;
     const currentPlaylist = get().currentPlaylist;
     if (currentPlaylist.id === playlistId) {
-      set({ currentPlaylist: playlists[STORAGE_KEYS.SEARCH_PLAYLIST_KEY] });
+      set({ currentPlaylist: playlists[StorageKeys.SEARCH_PLAYLIST_KEY] });
     }
     delPlaylist(playlists[playlistId], playlistIds);
     delete playlists[playlistId];
@@ -315,7 +324,7 @@ export const useNoxSetting = create<NoxSetting>((set, get) => ({
       playlists: val.playlists,
       currentPlayingList: playingList,
       currentPlayingID: val.lastPlaylistId[1],
-      storedPlayerSetting: val.settings || DEFAULT_SETTING,
+      storedPlayerSetting: val.settings || DefaultSetting,
       cookies: val.cookies,
       language: val.settings.language,
       lastPlayDuration: val.lastPlayDuration,

@@ -26,12 +26,12 @@ import Playlist from './components/playlist/View';
 import PlayerBottomPanel from './components/player/controls/PlayerProgressControls';
 import { useNoxSetting } from '@stores/useApp';
 import PlaylistDrawer from './components/playlists/View';
-import { ViewEnum } from './enums/View';
+import { NoxRoutes } from './enums/Routes';
 import Settings from './components/setting/View';
 import Explore from './components/explore/View';
 import './localization/i18n';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { ICONS } from '@enums/Icons';
+import { ScreenIcons } from '@enums/Icons';
 import NoxBottomTab from './components/bottomtab/NoxBottomTab';
 
 const { LightTheme, DarkTheme } = adaptNavigationTheme({
@@ -55,12 +55,12 @@ const NoxPlayer = ({ navigation, setNavigation = () => undefined }: Props) => {
     <View style={{ flex: 1, justifyContent: 'flex-end' }}>
       <Tab.Navigator style={PlayerStyle}>
         <Tab.Screen
-          name={ViewEnum.PLAYER_COVER}
+          name={NoxRoutes.PlayerCover}
           component={Player}
           options={{ tabBarStyle: { display: 'none' } }}
         />
         <Tab.Screen
-          name={ViewEnum.PLAYER_PLAYLIST}
+          name={NoxRoutes.Playlist}
           component={Playlist}
           options={{ tabBarStyle: { display: 'none' } }}
         />
@@ -113,30 +113,34 @@ const AzusaPlayer = () => {
           }}
         >
           <Drawer.Navigator
-            initialRouteName={ViewEnum.PLAYER_HOME}
+            initialRouteName={NoxRoutes.PlayerHome}
             drawerContent={PlaylistDrawer}
           >
             <Drawer.Screen
-              name={ViewEnum.PLAYER_HOME}
+              name={NoxRoutes.PlayerHome}
               options={{
-                drawerIcon: () => <IconButton icon={ICONS.homeScreen} />,
+                drawerIcon: () => <IconButton icon={ScreenIcons.HomeScreen} />,
                 title: String(t('appDrawer.homeScreenName')),
                 header: () => null,
               }}
               component={NoxPlayerWrapper}
             />
             <Drawer.Screen
-              name={ViewEnum.EXPORE}
+              name={NoxRoutes.Explore}
               options={{
-                drawerIcon: () => <IconButton icon={ICONS.exploreScreen} />,
+                drawerIcon: () => (
+                  <IconButton icon={ScreenIcons.ExploreScreen} />
+                ),
                 title: String(t('appDrawer.exploreScreenName')),
               }}
               component={Explore}
             />
             <Drawer.Screen
-              name={ViewEnum.SETTINGS}
+              name={NoxRoutes.Settings}
               options={{
-                drawerIcon: () => <IconButton icon={ICONS.settingScreen} />,
+                drawerIcon: () => (
+                  <IconButton icon={ScreenIcons.SettingScreen} />
+                ),
                 title: String(t('appDrawer.settingScreenName')),
                 header: () => null,
               }}

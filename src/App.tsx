@@ -75,8 +75,8 @@ export default function App(appProps: NoxComponent.AppProps) {
 
   return (
     <GestureHandlerRootView style={styles.gestureContainer}>
-      <SafeAreaProvider>
-        <MainBackground>
+      <MainBackground>
+        <SafeAreaProvider>
           {PIPMode ? (
             <PIPLyricView />
           ) : isLandscape ? (
@@ -84,8 +84,8 @@ export default function App(appProps: NoxComponent.AppProps) {
           ) : (
             <AzusaPlayer />
           )}
-        </MainBackground>
-      </SafeAreaProvider>
+        </SafeAreaProvider>
+      </MainBackground>
     </GestureHandlerRootView>
   );
 }

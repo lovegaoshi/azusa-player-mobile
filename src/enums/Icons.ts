@@ -1,6 +1,6 @@
-export enum ICONS {
-  homeScreen = 'home',
-  exploreScreen = 'compass',
-  settingScreen = 'cog',
-  playlistScreen = 'playlist-music',
+export enum ScreenIcons {
+  HomeScreen = 'home',
+  ExploreScreen = 'compass',
+  SettingScreen = 'cog',
+  PlaylistScreen = 'playlist-music',
 }

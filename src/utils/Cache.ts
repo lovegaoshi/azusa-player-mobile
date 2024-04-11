@@ -11,7 +11,7 @@ import playerSettingStore from '@stores/playerSettingStore';
 import { getCachedMediaMapping, saveCachedMediaMapping } from './ChromeStorage';
 import { logger } from './Logger';
 import { customReqHeader } from './BiliFetch';
-import { SOURCE } from '@enums/MediaFetch';
+import { Source } from '@enums/MediaFetch';
 
 const { getState } = playerSettingStore;
 
@@ -127,7 +127,7 @@ class NoxMediaCache {
 
   loadCacheMedia = (song: NoxMedia.Song, prefix = 'file://') => {
     // HACK: return song.source if song is local.
-    if (song.source === SOURCE.local) {
+    if (song.source === Source.local) {
       // return song.bvid;
     }
     return this.loadCacheObject(noxCacheKey(song), prefix);
@@ -161,7 +161,7 @@ class NoxMediaCache {
   };
 
   peekCache = (song: NoxMedia.Song) => {
-    if (song.source === SOURCE.local) return true;
+    if (song.source === Source.local) return true;
     return this.cache.peek(noxCacheKey(song));
   };
 

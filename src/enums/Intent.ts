@@ -1,4 +1,4 @@
-export enum INTENT_DATA {
-  resume = 'resume',
-  playAll = 'play_all',
+export enum IntentData {
+  Resume = 'resume',
+  PlayAll = 'play_all',
 }
