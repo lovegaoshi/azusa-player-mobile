@@ -293,53 +293,63 @@ export const savePlayMode = (val: string) =>
 export const saveLastPlayDuration = (val: number) =>
   saveItem(StorageKeys.LAST_PLAY_DURATION, val);
 
-export const initPlayerObject =
-  async (): Promise<NoxStorage.PlayerStorageObject> => {
-    const lyricMapping = (await getLyricMapping()) || {};
-    const playerObject = {
-      settings: {
-        ...DefaultSetting,
-        ...((await getItem(StorageKeys.PLAYER_SETTING_KEY)) || {}),
-      },
-      playlistIds: (await getItem(StorageKeys.MY_FAV_LIST_KEY)) || [],
-      playlists: {},
-      lastPlaylistId: (await getItem(StorageKeys.LAST_PLAY_LIST)) || [
-        'NULL',
-        'NULL',
-      ],
-      searchPlaylist: dummyPlaylist(
-        i18n.t('PlaylistOperations.searchListName'),
-        PlaylistTypes.Search
-      ),
-      favoriPlaylist: await getPlaylist(StorageKeys.FAVORITE_PLAYLIST_KEY, () =>
-        dummyPlaylist('Favorite', PlaylistTypes.Favorite)
-      ),
-      playbackMode: await getItem(
-        StorageKeys.PLAYMODE_KEY,
-        NoxRepeatMode.Shuffle
-      ),
-      skin: await getItem(StorageKeys.SKIN, AzusaTheme),
-      skins: (await getPlayerSkins()) || [],
-      cookies: await getItem(StorageKeys.COOKIES, {}),
-      lyricMapping,
-      lastPlayDuration: await getItem(StorageKeys.LAST_PLAY_DURATION, 0),
-      colorScheme: await getColorScheme(),
-      defaultSearchOptions: await getDefaultSearch(),
-    } as NoxStorage.PlayerStorageObject;
+export const initPlayerObject = async (
+  safeMode = false
+): Promise<NoxStorage.PlayerStorageObject> => {
+  const lyricMapping = (await getLyricMapping()) || {};
+  const playerObject = {
+    settings: {
+      ...DefaultSetting,
+      ...((await getItem(StorageKeys.PLAYER_SETTING_KEY)) || {}),
+    },
+    playlistIds: (await getItem(StorageKeys.MY_FAV_LIST_KEY)) || [],
+    playlists: {},
+    lastPlaylistId: (await getItem(StorageKeys.LAST_PLAY_LIST)) || [
+      'NULL',
+      'NULL',
+    ],
+    searchPlaylist: dummyPlaylist(
+      i18n.t('PlaylistOperations.searchListName'),
+      PlaylistTypes.Search
+    ),
+    favoriPlaylist: await getPlaylist(StorageKeys.FAVORITE_PLAYLIST_KEY, () =>
+      dummyPlaylist('Favorite', PlaylistTypes.Favorite)
+    ),
+    playbackMode: await getItem(
+      StorageKeys.PLAYMODE_KEY,
+      NoxRepeatMode.Shuffle
+    ),
+    skin: await getItem(StorageKeys.SKIN, AzusaTheme),
+    skins: (await getPlayerSkins()) || [],
+    cookies: await getItem(StorageKeys.COOKIES, {}),
+    lyricMapping,
+    lastPlayDuration: await getItem(StorageKeys.LAST_PLAY_DURATION, 0),
+    colorScheme: await getColorScheme(),
+    defaultSearchOptions: await getDefaultSearch(),
+  } as NoxStorage.PlayerStorageObject;
 
-    playerObject.playlists[StorageKeys.SEARCH_PLAYLIST_KEY] =
-      playerObject.searchPlaylist;
-    playerObject.playlists[StorageKeys.FAVORITE_PLAYLIST_KEY] =
-      playerObject.favoriPlaylist;
+  if (safeMode) {
+    playerObject.settings = { ...DefaultSetting };
+    playerObject.lastPlaylistId = ['NULL', 'NULL'];
+    playerObject.playbackMode = NoxRepeatMode.Shuffle;
+    playerObject.lastPlayDuration = 0;
+    playerObject.defaultSearchOptions = undefined;
+  }
 
-    await Promise.all(
-      playerObject.playlistIds.map(async id => {
-        const retrievedPlaylist = await getPlaylist(id);
-        if (retrievedPlaylist) playerObject.playlists[id] = retrievedPlaylist;
-      })
-    );
-    return playerObject;
-  };
+  playerObject.playlists[StorageKeys.SEARCH_PLAYLIST_KEY] =
+    playerObject.searchPlaylist;
+  playerObject.playlists[StorageKeys.FAVORITE_PLAYLIST_KEY] =
+    playerObject.favoriPlaylist;
+
+  await Promise.all(
+    playerObject.playlistIds.map(async id => {
+      const retrievedPlaylist = await getPlaylist(id);
+      if (retrievedPlaylist) playerObject.playlists[id] = retrievedPlaylist;
+    })
+  );
+
+  return playerObject;
+};
 
 export const clearStorage = () => AsyncStorage.clear();
 
