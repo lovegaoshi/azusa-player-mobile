@@ -128,7 +128,7 @@
     "@types/jest": "^29.5.12",
     "@types/md5": "^2.3.5",
     "@types/node": "^20.12.7",
-    "@types/react": "^18.2.75",
+    "@types/react": "^18.2.77",
     "@types/react-native": "^0.73.0",
     "@types/react-native-background-timer": "^2.0.2",
     "@types/react-native-share-menu": "^5.0.5",

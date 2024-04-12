@@ -31,7 +31,7 @@ const AlbumArt: React.FC<Props> = ({
 }) => {
   const playerSetting = useNoxSetting(state => state.playerSetting);
   const [isImageVisible, setIsImageVisible] = useState(true);
-  const [isLrcVisible, setIsLrcVisible] = useState(true);
+  const [isLrcVisible, setIsLrcVisible] = useState(false);
   const [overwriteAlbumArt, setOverwriteAlbumArt] = useState('');
   const opacity = useRef(new Animated.Value(1)).current;
   const dimension = Dimensions.get('window');
