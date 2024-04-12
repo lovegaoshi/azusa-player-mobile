@@ -1,5 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useCallback, useEffect, useState } from 'react';
+import i18n from 'i18next';
 import {
   Modal,
   View,
@@ -19,6 +20,7 @@ import { reExtractSongName } from '@stores/appStore';
 import { useNoxSetting } from '@stores/useApp';
 import { logger } from '@utils/Logger';
 import { readTxtFile, writeTxtFile } from '@utils/fs';
+import { LrcSource } from '@enums/LyricFetch';
 
 const LYRIC_OFFSET_INTERVAL = 0.5;
 
@@ -60,6 +62,7 @@ interface LyricViewProps {
   showUI?: boolean;
   noScrollThrottle?: boolean;
   onPress?: () => void;
+  visible?: boolean;
 }
 
 export const LyricView = ({
@@ -69,12 +72,13 @@ export const LyricView = ({
   showUI = true,
   noScrollThrottle = true,
   onPress = () => undefined,
+  visible = true,
 }: LyricViewProps) => {
   const playerSetting = useNoxSetting(state => state.playerSetting);
   const { position } = useProgress(
     playerSetting.karaokeLyrics ? 30 : undefined
   );
-  const [lrc, setLrc] = useState('正在加载歌词...');
+  const [lrc, setLrc] = useState(i18n.t('Lyric.loading'));
   const [lrcOptions, setLrcOptions] = useState<NoxNetwork.NoxFetchedLyric[]>(
     []
   );
@@ -96,7 +100,7 @@ export const LyricView = ({
       lyricPromise: Promise<NoxNetwork.NoxFetchedLyric[]>
     ) => {
       if (!hasLrcFromLocal()) return false;
-      logger.log('[lyric] Loading Lrc from localStorage...');
+      logger.log('[lrc] Loading Lrc from localStorage...');
       const lrcDetail = lyricMapping.get(track?.song.id);
       if (lrcDetail === undefined) return false;
       const lrcKey = lrcDetail?.lyricKey;
@@ -110,7 +114,7 @@ export const LyricView = ({
           return true;
         }
         logger.debug('[lrc] local lrc no longer exists, fetching new...');
-        searchAndSetCurrentLyric(0, await lyricPromise, lrcKey);
+        searchAndSetCurrentLyric(0, await lyricPromise, lrcDetail);
         return true;
       }
       logger.debug(
@@ -120,12 +124,12 @@ export const LyricView = ({
       return true;
     };
     (async () => {
-      logger.log('Initiating Lyric with new track...');
+      logger.log('[lrc] Initiating Lyric with new track...');
       // HACK: UX is too bad if this is not always fetched
       const lrcOptionPromise = fetchAndSetLyricOptions();
       setCurrentTimeOffset(0);
       setLrcOption(undefined);
-      setLrc('正在加载歌词...');
+      setLrc(i18n.t('Lyric.loading'));
       setSearchText(track.title || '');
       // Initialize from storage if not new
       const localLrcLoaded = await loadLocalLrc(lrcOptionPromise);
@@ -161,6 +165,7 @@ export const LyricView = ({
         lyricOffset: currentTimeOffset,
         ...newLrcDetail,
         lyric: lrcpath,
+        source: resolvedLrc.source,
       };
       setLyricMapping(lyricDeatail);
     }
@@ -181,12 +186,17 @@ export const LyricView = ({
       if (adhocTitle !== undefined)
         titleToFetch = reExtractSongName(titleToFetch, artist);
       else titleToFetch = reExtractSongName(track.title, artist);
-      const options = await searchLyricOptions(titleToFetch);
+      const options = (
+        await Promise.all([
+          searchLyricOptions(titleToFetch),
+          searchLyricOptions(titleToFetch, LrcSource.Kugou),
+        ])
+      ).flat();
 
       setLrcOptions(options);
       return options;
     } catch (error) {
-      logger.error(`Error fetching lyric options:${error}`);
+      logger.error(`[lrc] Error fetching lyric options:${error}`);
       setLrcOptions([]);
     }
     return [];
@@ -195,13 +205,16 @@ export const LyricView = ({
   const searchAndSetCurrentLyric = async (
     index = 0,
     resolvedLrcOptions = lrcOptions,
-    lyricMid?: string
+    resolvedLyric?: NoxMedia.LyricDetail
   ) => {
     console.debug(`lrcoptions: ${JSON.stringify(resolvedLrcOptions)}`);
-    if (resolvedLrcOptions.length === 0) setLrc('无法找到歌词,请手动搜索...');
+    if (resolvedLrcOptions.length === 0) setLrc(i18n.t('Lyric.notFound'));
     else {
       const resolvedLrc = resolvedLrcOptions[index!];
-      const lyric = await searchLyric(lyricMid || resolvedLrc.songMid, setLrc);
+      const lyric = resolvedLyric
+        ? await searchLyric(resolvedLyric.lyricKey, resolvedLyric.source)
+        : await searchLyric(resolvedLrc.songMid, resolvedLrc.source);
+      setLrc(lyric);
       setLrcOption(resolvedLrc);
       updateLyricMapping({ newLrcDetail: { lyric }, resolvedLrc });
     }
@@ -246,6 +259,8 @@ export const LyricView = ({
       { backgroundColor: playerStyle.colors.primaryContainer },
     ],
   };
+
+  if (!visible) return;
 
   return (
     <View style={styles.container}>
