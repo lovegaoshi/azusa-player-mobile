@@ -23,6 +23,18 @@
       android:targetPackage="com.noxplay.noxplayer"
       android:targetClass="com.noxplay.noxplayer.MainActivity" />
   </shortcut>
+  <shortcut
+      android:shortcutId="safe_mode"
+      android:enabled="true"
+      android:icon="@drawable/fingerprint_dialog_error"
+      android:shortcutShortLabel="@string/safe_mode"
+      android:shortcutLongLabel="@string/safe_mode">
+    <intent
+        android:action="android.intent.action.VIEW"
+        android:data="safe_mode"
+        android:targetPackage="com.noxplay.noxplayer"
+        android:targetClass="com.noxplay.noxplayer.MainActivity" />
+  </shortcut>
   <!-- Specify more shortcuts here. -->
 </shortcuts>
 

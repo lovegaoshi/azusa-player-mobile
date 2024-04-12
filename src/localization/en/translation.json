@@ -299,6 +299,7 @@
   },
   "Lyric": {
     "loading": "Loading lyric...",
+    "failedToFetch": "lrc failed to fetch",
     "notFound": "[00:00.000] Lyric was not found"
   }
 }

@@ -31,7 +31,9 @@ export default ({ intentData }: NoxComponent.AppProps) => {
         language,
         lastPlayDuration,
         playbackMode,
-      } = await initializeStores(await initPlayerObject());
+      } = await initializeStores(
+        await initPlayerObject(intentData === IntentData.SafeMode)
+      );
       initCache({ max: storedPlayerSetting.cacheSize });
       /**
        * this doesnt even seems necessary?
