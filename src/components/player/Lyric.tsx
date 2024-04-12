@@ -11,7 +11,7 @@ import {
   Button,
   TextInput,
 } from 'react-native';
-import { Lrc as Lyric } from 'react-native-lyric';
+import { Lrc as Lyric, KaraokeMode } from 'react-native-lyric';
 import { Track, useProgress } from 'react-native-track-player';
 import { IconButton } from 'react-native-paper';
 
@@ -76,7 +76,7 @@ export const LyricView = ({
 }: LyricViewProps) => {
   const playerSetting = useNoxSetting(state => state.playerSetting);
   const { position } = useProgress(
-    playerSetting.karaokeLyrics ? 30 : undefined
+    playerSetting.karaokeLyrics ? 50 : undefined
   );
   const [lrc, setLrc] = useState(i18n.t('Lyric.loading'));
   const [lrcOptions, setLrcOptions] = useState<NoxNetwork.NoxFetchedLyric[]>(
@@ -269,11 +269,14 @@ export const LyricView = ({
         lrc={lrc}
         currentTime={(position + currentTimeOffset) * 1000}
         lineHeight={32}
-        lineRenderer={lineRenderer}
         height={height}
         noScrollThrottle={noScrollThrottle}
         onPress={onPress}
-        useMaskedView={playerSetting.karaokeLyrics}
+        karaokeOnColor={playerStyle.colors.primary}
+        karaokeOffColor={playerStyle.colors.secondary}
+        karaokeMode={
+          playerSetting.karaokeLyrics ? KaraokeMode.OnlyRealKaraoke : undefined
+        }
       />
       {showUI && (
         <>
