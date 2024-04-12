@@ -12110,7 +12110,7 @@ react-native-get-random-values@^1.11.0:
 
 "react-native-lyric@git+https://github.com/lovegaoshi/react-native-lyric.git#dev":
   version "1.0.1"
-  resolved "git+https://github.com/lovegaoshi/react-native-lyric.git#689087712c96d1d69ea240856c58e029c2bc9b97"
+  resolved "git+https://github.com/lovegaoshi/react-native-lyric.git#b141a77252a9afe9b74f2e70e02bc02188c1c5c3"
   dependencies:
     "@react-native-masked-view/masked-view" "^0.3.1"
 
