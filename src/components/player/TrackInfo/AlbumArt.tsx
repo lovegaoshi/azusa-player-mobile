@@ -31,6 +31,7 @@ const AlbumArt: React.FC<Props> = ({
 }) => {
   const playerSetting = useNoxSetting(state => state.playerSetting);
   const [isImageVisible, setIsImageVisible] = useState(true);
+  const [isLrcVisible, setIsLrcVisible] = useState(true);
   const [overwriteAlbumArt, setOverwriteAlbumArt] = useState('');
   const opacity = useRef(new Animated.Value(1)).current;
   const dimension = Dimensions.get('window');
@@ -41,6 +42,7 @@ const AlbumArt: React.FC<Props> = ({
 
   const onImagePress = () => {
     console.log('TrackInfo: Image Clicked - ');
+    setIsLrcVisible(true);
     Animated.parallel([
       Animated.timing(opacity, {
         toValue: 0,
@@ -56,6 +58,7 @@ const AlbumArt: React.FC<Props> = ({
   const onLyricPress = () => {
     console.log('TrackInfo: Lyric Clicked - ');
     setIsImageVisible(true);
+    setIsLrcVisible(false);
     Animated.parallel([
       Animated.timing(opacity, {
         toValue: 1,
@@ -119,7 +122,7 @@ const AlbumArt: React.FC<Props> = ({
           styles.lyric,
           {
             opacity: isImageVisible ? 0 : 1,
-            position: isImageVisible ? 'absolute' : 'relative',
+            position: !isLrcVisible ? 'absolute' : 'relative',
             width: dimension.width,
             height: dimension.height,
           },
@@ -133,6 +136,7 @@ const AlbumArt: React.FC<Props> = ({
             artist="n/a"
             onPress={onLyricPress}
             height={dimension.height / 2 + 100}
+            visible={isLrcVisible}
           />
         )}
       </View>

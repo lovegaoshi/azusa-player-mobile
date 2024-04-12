@@ -61,6 +61,7 @@ interface LyricViewProps {
   showUI?: boolean;
   noScrollThrottle?: boolean;
   onPress?: () => void;
+  visible?: boolean;
 }
 
 export const LyricView = ({
@@ -70,6 +71,7 @@ export const LyricView = ({
   showUI = true,
   noScrollThrottle = true,
   onPress = () => undefined,
+  visible = true,
 }: LyricViewProps) => {
   const playerSetting = useNoxSetting(state => state.playerSetting);
   const { position } = useProgress(
@@ -249,6 +251,8 @@ export const LyricView = ({
       { backgroundColor: playerStyle.colors.primaryContainer },
     ],
   };
+
+  if (!visible) return;
 
   return (
     <View style={styles.container}>
