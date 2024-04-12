@@ -25,10 +25,10 @@
 ## 项目简介
 
 - 是真正意义上的手机版《[电梓播放器](https://github.com/kenmingwang/azusa-player/releases)》(?): Azusa-Player！
-- 本质上是个 b 站第三方**音频在线播放器**，是插件版[电梓播放器](https://github.com/kenmingwang/azusa-player) 和[电闹播放器](https://github.com/lovegaoshi/azusa-player)的忠实移植；对标油管音乐，去除歌单推荐功能~2023年不会还有人用b站推荐听歌吧~，交互仿造AIMP，复古简约。
-  - 由于浏览器地八哥轻松简便并且我手机流量捉急，主要功能依然会在插件版[电闹播放器](https://github.com/lovegaoshi/azusa-player)优先更新
+- 本质上是个 b 站第三方**音频在线播放器**，是插件版[电梓播放器](https://github.com/kenmingwang/azusa-player) 和[电闹播放器](https://github.com/lovegaoshi/azusa-player)的忠实移植；对标油管音乐，去除歌单推荐功能~2024年不会还有人用b站推荐听歌吧~，交互仿造AIMP，复古简约。
+- 功能会在插件版[电闹播放器](https://github.com/lovegaoshi/azusa-player)同步更新
 - 目的是想让视频**轻量化**为音频，方便溜歌/歌单分类/下载等
-- b站视频链接，部分油管视频链接，steria.vplayer.tk
+- 播放b站，油管，steria.tk，musicFree插件，本地歌
 - 歌单订阅更新
 - 歌名提取与歌词搜索
 - 换皮和自制皮肤
@@ -39,6 +39,7 @@
 - Android Auto支持
 - ffmpeg powered 音量均衡
 - AB 重复
+- 逐字歌词
 - **切片 man 不易，没有各位切片 man 也不会有这个项目的意义，请大家溜歌同时点右下方的点赞按钮点赞和三连 👍**
 - 自用为主要目的，不感兴趣的 feature 大概不会做，有问题可以[b 站私信](https://message.bilibili.com/#/whisper/mid1989881)
 
@@ -60,7 +61,7 @@
 
 苹果用户在右边的release下载最新版本ipa。然后[按这个方法](https://zhuanlan.zhihu.com/p/99397647)安装。大概。
 
-我知道 APM 在 iOS 模拟器上像垃圾一样运行。但我不尊重 Apple 用户，也不会满足任何 iOS 生活质量要求。但Nek（[b 站私信](https://message.bilibili.com/#/whisper/mid1989881)）会。
+没果机,只知道iOS模拟器上能跑APM。有问题[b 站私信](https://message.bilibili.com/#/whisper/mid1989881)Nek。
 
 ## 使用
 
@@ -85,7 +86,7 @@ APM 有横屏适配！
 
 ## 开发
 
-ios开发需要XCode。安卓开发需要android studio。
+ios开发需要XCode。安卓开发需要android studio。编译问题请看github Actions
 
 ```
 git clone https://github.com/lovegaoshi/azusa-player-mobile.git
