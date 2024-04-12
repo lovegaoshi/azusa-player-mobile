@@ -53,10 +53,10 @@ export const searchLyricOptions = async (
   const json = await res.json();
   const data = json.req.data.body.song.list;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  return data.map((s: any, v: any) => ({
+  return data.map((s: any) => ({
     key: s.mid,
     songMid: s.mid,
-    label: `${v}. ${s.name} / ${s.singer[0].name}`,
+    label: `[${LrcSource.QQ}] ${s.name} / ${s.singer[0].name}`,
     source: LrcSource.QQ,
   }));
 };

@@ -20,6 +20,7 @@ import { reExtractSongName } from '@stores/appStore';
 import { useNoxSetting } from '@stores/useApp';
 import { logger } from '@utils/Logger';
 import { readTxtFile, writeTxtFile } from '@utils/fs';
+import { LrcSource } from '@enums/LyricFetch';
 
 const LYRIC_OFFSET_INTERVAL = 0.5;
 
@@ -113,7 +114,7 @@ export const LyricView = ({
           return true;
         }
         logger.debug('[lrc] local lrc no longer exists, fetching new...');
-        searchAndSetCurrentLyric(0, await lyricPromise, lrcKey);
+        searchAndSetCurrentLyric(0, await lyricPromise, lrcDetail);
         return true;
       }
       logger.debug(
@@ -185,7 +186,12 @@ export const LyricView = ({
       if (adhocTitle !== undefined)
         titleToFetch = reExtractSongName(titleToFetch, artist);
       else titleToFetch = reExtractSongName(track.title, artist);
-      const options = await searchLyricOptions(titleToFetch);
+      const options = (
+        await Promise.all([
+          searchLyricOptions(titleToFetch),
+          searchLyricOptions(titleToFetch, LrcSource.Kugou),
+        ])
+      ).flat();
 
       setLrcOptions(options);
       return options;
@@ -199,13 +205,15 @@ export const LyricView = ({
   const searchAndSetCurrentLyric = async (
     index = 0,
     resolvedLrcOptions = lrcOptions,
-    lyricMid?: string
+    resolvedLyric?: NoxMedia.LyricDetail
   ) => {
     console.debug(`lrcoptions: ${JSON.stringify(resolvedLrcOptions)}`);
     if (resolvedLrcOptions.length === 0) setLrc(i18n.t('Lyric.notFound'));
     else {
       const resolvedLrc = resolvedLrcOptions[index!];
-      const lyric = await searchLyric(lyricMid || resolvedLrc.songMid);
+      const lyric = resolvedLyric
+        ? await searchLyric(resolvedLyric.lyricKey, resolvedLyric.source)
+        : await searchLyric(resolvedLrc.songMid, resolvedLrc.source);
       setLrc(lyric);
       setLrcOption(resolvedLrc);
       updateLyricMapping({ newLrcDetail: { lyric }, resolvedLrc });

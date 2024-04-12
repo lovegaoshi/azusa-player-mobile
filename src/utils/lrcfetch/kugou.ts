@@ -1,5 +1,6 @@
 // https://github.com/bingaha/kugou-lrc
 import { strFromU8, decompressSync } from 'fflate';
+import { decode as atob } from 'base-64';
 
 import bfetch from '@utils/BiliFetch';
 import { biliApiLimiter } from '@utils/mediafetch/throttle';
@@ -38,7 +39,7 @@ const getKugouLyricOptions = async (
     key: info.hash,
     songMid: info.hash,
     source: LrcSource.Kugou,
-    label: info.filename,
+    label: `[${LrcSource.Kugou}] ${info.filename}`,
   }));
 };
 
