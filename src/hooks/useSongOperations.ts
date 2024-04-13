@@ -11,7 +11,7 @@ const useSongOperations = () => {
   const startRadio = (song: NoxMedia.Song) => {
     switch (song.source) {
       case Source.ytbvideo:
-        setExternalSearchText(`youtu.be/${song.bvid}`);
+        setExternalSearchText(`youtu.be/list=RD${song.bvid}`);
         break;
       case Source.bilivideo:
         setExternalSearchText(`bilibili.com/video/similarvideo/${song.bvid}`);

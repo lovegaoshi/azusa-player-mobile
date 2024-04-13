@@ -5,7 +5,7 @@ import RNFetchBlob from 'react-native-blob-util';
 import TrackPlayer from 'react-native-track-player';
 
 import { r128gain, setR128Gain, ffmpegToMP3 } from './ffmpeg/ffmpeg';
-import { addDownloadProgress } from '@stores/appStore';
+import { addDownloadProgress, setFetchProgress } from '@stores/appStore';
 import { addR128Gain, getR128Gain } from '@utils/ffmpeg/r128Store';
 import playerSettingStore from '@stores/playerSettingStore';
 import { getCachedMediaMapping, saveCachedMediaMapping } from './ChromeStorage';
@@ -74,12 +74,14 @@ class NoxMediaCache {
     };
     // HACK: local files also need r128gain
     if (resolvedURL.url.startsWith('file://')) parseR128Gain();
-    if (
-      this.cache.max < 2 ||
-      !resolvedURL.url.startsWith('http') ||
-      song.isLive
-    )
+    if (this.cache.max < 2 || song.isLive) {
+      setFetchProgress(0);
       return;
+    }
+    if (!resolvedURL.url.startsWith('http')) {
+      setFetchProgress(100);
+      return;
+    }
     logger.debug(`[Cache] fetching ${song.name} to cache...`);
     if (!extension) {
       const regexMatch = /.+\/{2}.+\/{1}.+(\.\w+)\?*.*/.exec(resolvedURL.url);
