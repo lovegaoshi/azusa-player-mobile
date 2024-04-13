@@ -1905,6 +1905,11 @@
       "darkTheme": true
     },
     "gifs": [
+      "https://album.biliimg.com/bfs/new_dyn/229e8bdc3a59418be511bdf1a70f70c1402110060.jpg",
+      "https://album.biliimg.com/bfs/new_dyn/d13818489e775a4eaf8e4ceae735e469402110060.png",
+      "https://album.biliimg.com/bfs/new_dyn/b33feeb2da0cb31ac9cf89e24c6d1d20402110060.png",
+      "https://i0.hdslb.com/bfs/new_dyn/57356238b7dfd5dab0aeef55b3dba77d402110060.jpg",
+      "https://i0.hdslb.com/bfs/new_dyn/9b86f4c8a8ce5ab5a4d58e722a749e08402110060.gif",
       "https://i0.hdslb.com/bfs/new_dyn/2229a6e08ded4b3d613d45dbb3c12c601145870530.png",
       "https://i0.hdslb.com/bfs/new_dyn/a6b83cc9284e23e5690ab0a00422c1761145870530.png",
       "https://i0.hdslb.com/bfs/new_dyn/6c04ad446be692d1a2bf3e253043e3d01145870530.png",
@@ -1952,6 +1957,15 @@
       {
         "type": "bvid",
         "identifier": "BV1eH4y1m71q"
+      },
+      {
+        "type": "bvid",
+        "identifier": "BV19W421w7Fi"
+      },
+      "https://i0.hdslb.com/bfs/new_dyn/33f24ffd344113c143d9e5080f8593aa402110060.jpg",
+      {
+        "type": "bvid",
+        "identifier": "BV11F4m1c7jL"
       }
     ],
     "backgroundImagesLandscape": [
