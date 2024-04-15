@@ -4503,10 +4503,10 @@
     "@types/scheduler" "*"
     csstype "^3.0.2"
 
-"@types/react@^18.2.77":
-  version "18.2.77"
-  resolved "https://registry.npmjs.org/@types/react/-/react-18.2.77.tgz#af2f857b6a6dfb6ca89ec102ebc147b1f1616880"
-  integrity sha512-CUT9KUUF+HytDM7WiXKLF9qUSg4tGImwy4FXTlfEDPEkkNUzJ7rVFolYweJ9fS1ljoIaP7M7Rdjc5eUm/Yu5AA==
+"@types/react@^18.2.78":
+  version "18.2.78"
+  resolved "https://registry.npmjs.org/@types/react/-/react-18.2.78.tgz#94aec453d0ccca909998a2b4b2fd78af15a7d2fe"
+  integrity sha512-qOwdPnnitQY4xKlKayt42q5W5UQrSHjgoXNVEtxeqdITJ99k4VXJOP3vt8Rkm9HmgJpH50UNU+rlqfkfWOqp0A==
   dependencies:
     "@types/prop-types" "*"
     csstype "^3.0.2"
@@ -8759,10 +8759,10 @@ hyphenate-style-name@^1.0.3:
   resolved "https://registry.npmjs.org/hyphenate-style-name/-/hyphenate-style-name-1.0.4.tgz#691879af8e220aea5750e8827db4ef62a54e361d"
   integrity sha512-ygGZLjmXfPHj+ZWh6LwbC37l43MhfztxetbFCoYTM2VjkIUpeHgSNn7QIyVFj7YQ1Wl9Cbw5sholVJPzWvC2MQ==
 
-i18next@^23.11.1:
-  version "23.11.1"
-  resolved "https://registry.yarnpkg.com/i18next/-/i18next-23.11.1.tgz#8e384b6ad7d6ba70c40cb86e020438251a5ff8b1"
-  integrity sha512-mXw4A24BiPZKRsbb9ewgSvjYd6fxFCNwJyfK6nYfSTIAX2GkCWcb598m3DFkDZmqADatvuASrKo6qwORz3VwTQ==
+i18next@^23.11.2:
+  version "23.11.2"
+  resolved "https://registry.npmjs.org/i18next/-/i18next-23.11.2.tgz#4c0e8192a9ba230fe7dc68b76459816ab601826e"
+  integrity sha512-qMBm7+qT8jdpmmDw/kQD16VpmkL9BdL+XNAK5MNbNFaf1iQQq35ZbPrSlqmnNPOSUY4m342+c0t0evinF5l7sA==
   dependencies:
     "@babel/runtime" "^7.23.2"
 
@@ -12048,10 +12048,10 @@ react-native-blob-jsi-helper@^0.3.1:
   resolved "https://registry.npmjs.org/react-native-blob-jsi-helper/-/react-native-blob-jsi-helper-0.3.1.tgz#582d982d76c1b51aa259b1c569aade4cfc148694"
   integrity sha512-/stY23PFePcJMwQsnnySLC4aNWiJnje0i/9tQFK6JCFOE8QclgWvCvUITS5Im0SO8mR3VzDLwAhbppWBjYWpLA==
 
-react-native-blob-util@^0.19.8:
-  version "0.19.8"
-  resolved "https://registry.yarnpkg.com/react-native-blob-util/-/react-native-blob-util-0.19.8.tgz#c31aeeebcbbbb1c10faec4346955ed9374a1d9d3"
-  integrity sha512-u2x8nRcOUwuLkrReRrXIBrJmLcTJz6W4YQREAcrJ3hXtNvItFDxzt/OzRjwBtiLN0JYVfjQyalpoQ/1BhiaLgA==
+react-native-blob-util@^0.19.9:
+  version "0.19.9"
+  resolved "https://registry.npmjs.org/react-native-blob-util/-/react-native-blob-util-0.19.9.tgz#6f2c27d77cd36b9e03c967c54930491404d9d780"
+  integrity sha512-gIuErPqGbBIAPWf+K07x/8mRZ80Waz9DWgwMdQ8zWgms8kYfAji0GNk2gvZZ0y9MKe61jme7oOdZ7InWLRy2GA==
   dependencies:
     base-64 "0.1.0"
     glob "^10.3.10"
@@ -12231,13 +12231,13 @@ react-native-vector-icons@^10.0.3:
     yargs "^16.1.1"
 
 "react-native-video@git+https://github.com/lovegaoshi/react-native-video.git#dev-android-cache":
-  version "6.0.0-beta.5"
-  resolved "git+https://github.com/lovegaoshi/react-native-video.git#88b4bff079efab8b665f67780b87c2a79dcbebfb"
+  version "6.0.0-beta.8"
+  resolved "git+https://github.com/lovegaoshi/react-native-video.git#eb0262eb706d07b804443e72dfd0d8706442f1a9"
 
-react-native-webview@^13.8.4:
-  version "13.8.4"
-  resolved "https://registry.yarnpkg.com/react-native-webview/-/react-native-webview-13.8.4.tgz#03b2870090ad6c326a6460ba2f50e5243eb65a94"
-  integrity sha512-dFoM9EfkAb++ZzycZyKRnjZtNUn85cf6bWp1iBlkgyNml7ULzR1gfaPT3qESoA3K1RfTmf5Xhw0M2In2A3a3wg==
+react-native-webview@^13.8.5:
+  version "13.8.5"
+  resolved "https://registry.npmjs.org/react-native-webview/-/react-native-webview-13.8.5.tgz#1ce4706042fb83c85c6e45f6948d97477dc5bee2"
+  integrity sha512-EkMuuss3g+xwkjCEJQeqaRYgRidks+EiQe4pmyxrYBvPQvx/pt3tb23x9t4v359gYSMktSGOVBTlvg8JWGFXiA==
   dependencies:
     escape-string-regexp "2.0.0"
     invariant "2.2.4"
