@@ -118,12 +118,12 @@ export default (playlist: NoxMedia.Playlist) => {
     usedPlaylist.playSong(song, playSongCallback);
   };
 
-  const scrollTo = (toIndex = -1) => {
+  const scrollTo = (toIndex = -1, reset = false) => {
     const currentIndex =
       toIndex < 0
         ? playlist.songList.findIndex(song => song.id === currentPlayingId)
         : toIndex;
-    if (currentIndex > -1) {
+    if (currentIndex > -1 || reset) {
       playlistRef.current?.scrollToIndex({
         index: currentIndex,
         viewPosition: 0.5,
