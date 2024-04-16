@@ -31,6 +31,7 @@ export default () => {
   const addPlaylistButtonRef = useRef<AddPlaylistButtonRef>(null);
   const setCurrentPlaylist = useNoxSetting(state => state.setCurrentPlaylist);
   const setPlaylistIds = useNoxSetting(state => state.setPlaylistIds);
+  const scroll = useNoxSetting(state => state.incSongListScrollCounter);
   const { removePlaylist } = usePlaylistAA();
   const { TwoWayAlert } = useAlert();
   // HACK: I know its bad! But somehow this hook isnt updating in its own
@@ -51,6 +52,7 @@ export default () => {
 
   const goToPlaylist = (playlistId: string) => {
     setCurrentPlaylist(playlists[playlistId]);
+    scroll();
     navigation.navigate(NoxRoutes.Playlist as never);
   };
 

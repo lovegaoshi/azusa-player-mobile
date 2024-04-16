@@ -45,7 +45,7 @@ const PlaylistList = () => {
   const [contentViewHeight, setContentViewHeight] = useState(0);
   const [scrollPositionY, setScrollPositionY] = useState(0);
 
-  useEffect(() => scrollTo(), [songListScrollCounter]);
+  useEffect(() => scrollTo(-1, true), [songListScrollCounter]);
 
   useFocusEffect(
     React.useCallback(() => {
