@@ -14,7 +14,7 @@ import {
   RadioButton,
 } from 'react-native-paper';
 import Animated, {
-  Layout,
+  LinearTransition,
   LightSpeedInLeft,
   LightSpeedOutRight,
   useAnimatedStyle,
@@ -23,7 +23,7 @@ import Animated, {
   runOnJS,
 } from 'react-native-reanimated';
 import {
-  ScrollView,
+  FlatList,
   GestureDetector,
   Gesture,
   PanGesture,
@@ -148,63 +148,65 @@ const SkinItem = ({ skin, checked, setChecked }: SkinItemProps) => {
 
   return (
     <GestureWrapper gesture={gesture}>
-      <Animated.View
-        entering={mounted.current ? LightSpeedInLeft : undefined}
-        exiting={LightSpeedOutRight}
-        layout={Layout.springify()}
-        style={animatedStyles}
-      >
-        <TouchableRipple onPress={selectTheme}>
-          <View style={styles.skinItemContainer}>
-            <View style={styles.skinItemLeftContainer}>
-              <Image
-                source={{ uri: skin.metaData.themeIcon }}
-                style={styles.skinItemImage}
-              />
-              <View style={styles.skinItemTextContainer}>
-                <Text
-                  variant={'titleMedium'}
-                  style={styles.skinTitleText}
-                  numberOfLines={1}
-                  ellipsizeMode="tail"
-                >{`${skin.metaData.themeName} by ${skin.metaData.themeAuthor}`}</Text>
-                <Text
-                  variant={'labelLarge'}
-                  style={{
-                    color: playerStyle.colors.secondary,
-                    maxWidth: '90%',
-                  }}
-                >
-                  {skin.metaData.themeDesc}
-                </Text>
-                <View style={styles.lightbulbContainer}>
-                  <IconButton
-                    icon={
-                      skin.metaData.darkTheme
-                        ? 'lightbulb-outline'
-                        : 'lightbulb-on'
-                    }
-                    size={25}
-                    style={styles.lightbulbIcon}
-                  />
+      <Animated.View layout={LinearTransition.springify()}>
+        <Animated.View
+          entering={mounted.current ? LightSpeedInLeft : undefined}
+          exiting={LightSpeedOutRight}
+          style={animatedStyles}
+        >
+          <TouchableRipple onPress={selectTheme}>
+            <View style={styles.skinItemContainer}>
+              <View style={styles.skinItemLeftContainer}>
+                <Image
+                  source={{ uri: skin.metaData.themeIcon }}
+                  style={styles.skinItemImage}
+                />
+                <View style={styles.skinItemTextContainer}>
+                  <Text
+                    variant={'titleMedium'}
+                    style={styles.skinTitleText}
+                    numberOfLines={1}
+                    ellipsizeMode="tail"
+                  >{`${skin.metaData.themeName} by ${skin.metaData.themeAuthor}`}</Text>
+                  <Text
+                    variant={'labelLarge'}
+                    style={{
+                      color: playerStyle.colors.secondary,
+                      maxWidth: '90%',
+                    }}
+                    numberOfLines={2}
+                  >
+                    {skin.metaData.themeDesc}
+                  </Text>
+                  <View style={styles.lightbulbContainer}>
+                    <IconButton
+                      icon={
+                        skin.metaData.darkTheme
+                          ? 'lightbulb-outline'
+                          : 'lightbulb-on'
+                      }
+                      size={25}
+                      style={styles.lightbulbIcon}
+                    />
+                  </View>
                 </View>
               </View>
+              <View style={styles.skinItemRightContainer}>
+                <RadioButton
+                  value={themeID}
+                  status={checked === themeID ? 'checked' : 'unchecked'}
+                  onPress={selectTheme}
+                />
+                <IconButton
+                  icon="trash-can"
+                  style={styles.deleteButton}
+                  onPress={deleteTheme}
+                  disabled={skin.builtin}
+                />
+              </View>
             </View>
-            <View style={styles.skinItemRightContainer}>
-              <RadioButton
-                value={themeID}
-                status={checked === themeID ? 'checked' : 'unchecked'}
-                onPress={selectTheme}
-              />
-              <IconButton
-                icon="trash-can"
-                style={styles.deleteButton}
-                onPress={deleteTheme}
-                disabled={skin.builtin}
-              />
-            </View>
-          </View>
-        </TouchableRipple>
+          </TouchableRipple>
+        </Animated.View>
       </Animated.View>
     </GestureWrapper>
   );
@@ -218,7 +220,7 @@ const SkinSettings = () => {
   const getThemeID = (skin: NoxTheme.Style) =>
     `${skin.metaData.themeName}.${skin.metaData.themeAuthor}`;
   const [checked, setChecked] = React.useState(getThemeID(playerStyle));
-  const scrollViewRef = React.useRef<ScrollView | null>(null);
+  const scrollViewRef = React.useRef<FlatList | null>(null);
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const loadCustomSkin = async (skins: any) => {
@@ -238,12 +240,8 @@ const SkinSettings = () => {
       theme => getThemeID(theme) === checked
     );
     if (currentThemeIndex > -1) {
-      scrollViewRef.current?.scrollTo({
-        x: 0,
-        y: Math.max(
-          0,
-          currentThemeIndex * 107 - Dimensions.get('window').height / 2
-        ),
+      scrollViewRef.current?.scrollToIndex({
+        index: currentThemeIndex,
         animated: false,
       });
     }
@@ -257,16 +255,24 @@ const SkinSettings = () => {
       ]}
     >
       <SkinSearchbar onSearched={loadCustomSkin} />
-      <ScrollView ref={scrollViewRef}>
-        {allThemes.map(item => (
+      <FlatList
+        ref={scrollViewRef}
+        data={allThemes}
+        onScrollToIndexFailed={e => console.error(e)}
+        getItemLayout={(data, index) => ({
+          length: 107,
+          offset: 107 * index,
+          index,
+        })}
+        renderItem={({ item }) => (
           <SkinItem
             skin={item}
             checked={checked}
             setChecked={setChecked}
             key={getThemeID(item)}
           />
-        ))}
-      </ScrollView>
+        )}
+      />
     </SafeAreaView>
   );
 };
