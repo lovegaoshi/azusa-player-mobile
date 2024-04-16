@@ -3,12 +3,14 @@ import {
   Canvas,
   Path,
   Skia,
-  useClockValue,
-  useComputedValue,
+  useClock,
   LinearGradient,
   vec,
 } from '@shopify/react-native-skia';
-import { useDerivedValue, useSharedValue } from 'react-native-reanimated';
+import {
+  useDerivedValue as useComputedValue,
+  useSharedValue,
+} from 'react-native-reanimated';
 import { line, curveBasis } from 'd3';
 import { colord } from 'colord';
 
@@ -34,7 +36,7 @@ export default function WaveAnimation({
 }: Props) {
   const verticalOffset = useSharedValue(initialVerticalOffset);
   const amplitude = useSharedValue(initialAmplitude);
-  const clock = useClockValue();
+  const clock = useClock();
   const extrapolatedWidth = Math.max(width * progress * 0.9 - 3, 0);
   const parsedColor = colord(color);
 
@@ -66,14 +68,14 @@ export default function WaveAnimation({
   };
 
   const animatedPath = useComputedValue(() => {
-    const current = (clock.current / 500) % 255;
+    const current = (clock.value / 500) % 255;
     const start = Skia.Path.MakeFromSVGString(createWavePath(current));
     const end = Skia.Path.MakeFromSVGString(createWavePath(Math.PI * current));
     return start!.interpolate(end!, 0.5)!;
   }, [clock, verticalOffset, progress]);
 
   const animatedPath2 = useComputedValue(() => {
-    const current = (clock.current / 700) % 255;
+    const current = (clock.value / 700) % 255;
     const start = Skia.Path.MakeFromSVGString(createWavePath(current));
     const end = Skia.Path.MakeFromSVGString(createWavePath(Math.PI * current));
     return start!.interpolate(end!, 0.5)!;
