@@ -213,9 +213,9 @@ export const LyricView = ({
     else {
       const resolvedLrc = resolvedLrcOptions[index!];
       const lyric = resolvedLyric
-        ? resolvedLrc.lrc ??
-          (await searchLyric(resolvedLyric.lyricKey, resolvedLyric.source))
-        : await searchLyric(resolvedLrc.songMid, resolvedLrc.source);
+        ? await searchLyric(resolvedLyric.lyricKey, resolvedLyric.source)
+        : resolvedLrc.lrc ??
+          (await searchLyric(resolvedLrc.songMid, resolvedLrc.source));
       setLrc(lyric);
       setLrcOption(resolvedLrc);
       updateLyricMapping({ newLrcDetail: { lyric }, resolvedLrc });

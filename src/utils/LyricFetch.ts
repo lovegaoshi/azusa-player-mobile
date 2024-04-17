@@ -21,7 +21,7 @@ export const searchLyricOptions = async (
         return qqLrcFetch.getLrcOptions(searchKey);
     }
   } catch (e) {
-    logger.error(`[lrcOptionFetch] ${searchKey} & ${source}: ${e}`);
+    logger.warn(`[lrcOptionFetch] ${searchKey} & ${source}: ${e}`);
     return [];
   }
 };
@@ -32,13 +32,14 @@ export const searchLyric = async (searchMID: string, source = LrcSource.QQ) => {
       case LrcSource.Kugou:
         return kugouLrcFetch.getLyric(searchMID);
       case LrcSource.QQQrc:
+        return 'oh no!';
         return qqQrcFetch.getLyric(searchMID);
       case LrcSource.QQ:
       default:
         return qqLrcFetch.getLyric(searchMID);
     }
   } catch (e) {
-    logger.error(`[lrcFetch] ${searchMID} & ${source}: ${e}`);
+    logger.warn(`[lrcFetch] ${searchMID} & ${source}: ${e}`);
     return i18n.t('Lyric.failedToFetch');
   }
 };
