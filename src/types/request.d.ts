@@ -41,6 +41,7 @@ declare global {
       songMid: string;
       label: string;
       source?: LrcSource;
+      lrc?: string;
     }
 
     export interface NoxRegexFetch {
