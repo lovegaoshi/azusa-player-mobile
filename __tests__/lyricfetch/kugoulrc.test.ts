@@ -6,4 +6,4 @@ test('kugou lrc', async () => {
   expect(lrcContent.length).not.toBe(0);
   const content = await kugouLrcFetch.getLrcOptions('hillsong young wake');
   expect(content[0].key).not.toBeNull();
-});
+}, 33333);
