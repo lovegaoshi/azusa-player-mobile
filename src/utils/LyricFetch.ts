@@ -13,12 +13,12 @@ export const searchLyricOptions = async (
   try {
     switch (source) {
       case LrcSource.Kugou:
-        return kugouLrcFetch.getLrcOptions(searchKey);
+        return await kugouLrcFetch.getLrcOptions(searchKey);
       case LrcSource.QQQrc:
-        return qqQrcFetch.getLrcOptions(searchKey);
+        return await qqQrcFetch.getLrcOptions(searchKey);
       case LrcSource.QQ:
       default:
-        return qqLrcFetch.getLrcOptions(searchKey);
+        return await qqLrcFetch.getLrcOptions(searchKey);
     }
   } catch (e) {
     logger.warn(`[lrcOptionFetch] ${searchKey} & ${source}: ${e}`);
@@ -32,7 +32,6 @@ export const searchLyric = async (searchMID: string, source = LrcSource.QQ) => {
       case LrcSource.Kugou:
         return kugouLrcFetch.getLyric(searchMID);
       case LrcSource.QQQrc:
-        return 'oh no!';
         return qqQrcFetch.getLyric(searchMID);
       case LrcSource.QQ:
       default:
