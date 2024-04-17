@@ -188,6 +188,7 @@ export const LyricView = ({
       else titleToFetch = reExtractSongName(track.title, artist);
       const options = (
         await Promise.all([
+          searchLyricOptions(titleToFetch, LrcSource.QQQrc),
           searchLyricOptions(titleToFetch),
           searchLyricOptions(titleToFetch, LrcSource.Kugou),
         ])
@@ -212,7 +213,8 @@ export const LyricView = ({
     else {
       const resolvedLrc = resolvedLrcOptions[index!];
       const lyric = resolvedLyric
-        ? await searchLyric(resolvedLyric.lyricKey, resolvedLyric.source)
+        ? resolvedLrc.lrc ??
+          (await searchLyric(resolvedLyric.lyricKey, resolvedLyric.source))
         : await searchLyric(resolvedLrc.songMid, resolvedLrc.source);
       setLrc(lyric);
       setLrcOption(resolvedLrc);

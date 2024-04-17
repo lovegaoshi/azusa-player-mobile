@@ -6,7 +6,7 @@ import bfetch from '@utils/BiliFetch';
 import { biliApiLimiter } from '@utils/mediafetch/throttle';
 import { LrcSource } from '@enums/LyricFetch';
 import { logger } from '../Logger';
-import { stringify } from 'querystring';
+import { decodeQrc } from './qrcdecoder';
 
 const SearchSongAPI = 'https://u.y.qq.com/cgi-bin/musicu.fcg';
 
@@ -58,41 +58,23 @@ const searchPost = (kw: string): any => {
   };
 };
 
-const qqDecrypt = (content: string) => {
-  // https://blog.csdn.net/weixin_42146086/article/details/117543439
-  const encrypt_key = [
-    64, 71, 97, 119, 94, 50, 116, 71, 81, 54, 49, 45, 206, 210, 110, 105,
-  ];
-  const slicedContent = content.slice(4);
-  const decryptedContent = Uint8Array.from(
-    slicedContent,
-    (c, i) => c.charCodeAt(0) ^ encrypt_key[i % encrypt_key.length]
-  );
-  return strFromU8(decompressSync(decryptedContent));
-};
-
 const getQrcLyricOptions = async (
   kw: string
 ): Promise<NoxNetwork.NoxFetchedLyric[]> => {
   logger.debug(`[qrc] calling getQrcLyricOptions: ${kw}`);
   const res = await bfetch(SearchSongAPI, searchPost(kw));
   const json = await res.json();
-  if (
-    json['music.musichallSong.PlayLyricInfo.GetPlayLyricInfo']?.data?.lyric
-      .length > 0
-  ) {
+  const data = json['music.musichallSong.PlayLyricInfo.GetPlayLyricInfo']?.data;
+  if (data.lyric.length > 0) {
     return [
       {
-        key: json['music.musichallSong.PlayLyricInfo.GetPlayLyricInfo'].data
-          .songID,
-        songMid:
-          json['music.musichallSong.PlayLyricInfo.GetPlayLyricInfo'].data
-            .songID,
+        key: data.songID,
+        songMid: data.songID,
         source: LrcSource.QQQrc,
         label: `[${LrcSource.QQQrc}] ${kw}`,
-        lrc: qqDecrypt(
-          json['music.musichallSong.PlayLyricInfo.GetPlayLyricInfo'].data.lyric
-        ),
+        // HACK: this should be safe as the search param specifies
+        // encrypt:1 and qrc:1
+        lrc: decodeQrc(data.lyric),
       },
     ];
   }
@@ -102,7 +84,7 @@ const getQrcLyricOptions = async (
     key: info,
     songMid: info,
     source: LrcSource.QQQrc,
-    label: `[${LrcSource.QQQrc}] ${info.filename}(${info})`,
+    label: `[${LrcSource.QQQrc}] ${kw}(${info})`,
   }));
 };
 
@@ -118,7 +100,7 @@ const getQrcLyric = async (songMid: string) => {
   const json = await res.json();
   const data = json['music.musichallSong.PlayLyricInfo.GetPlayLyricInfo'].data;
   if (data.qrc == 0) return atob(data.lyric);
-  return qqDecrypt(data.lyric);
+  return decodeQrc(data.lyric);
 };
 
 export default {
