@@ -301,5 +301,13 @@
     "loading": "Loading lyric...",
     "failedToFetch": "lrc failed to fetch",
     "notFound": "[00:00.000] Lyric was not found"
+  },
+  "PlaylistAnalytics": {
+    "title": "Playlist Analytics of {{val}}",
+    "uniqCount": "Playlist has {{val}} unique songs;",
+    "topX": "Most common songs: {{val}}",
+    "new": "New songs: {{val}}",
+    "avg": "Playlist contains a total of {{val1}} bvids, and {{val2}} songs per bvid on average;",
+    "shazamFailed": "shazam failed statistics: {{val1}} ({{val2}}%)"
   }
 }

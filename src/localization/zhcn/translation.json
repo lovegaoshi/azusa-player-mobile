@@ -283,5 +283,13 @@
     "loading": "正在加载...",
     "failedToFetch": "歌词加载失败,请手动搜索",
     "notFound": "[00:00.000] 无法找到歌词,请手动搜索"
+  },
+  "PlaylistAnalytics": {
+    "title": "歌单 {{val}} 的统计信息",
+    "uniqCount": "歌单内总共有{{val}}首独特的歌",
+    "topX": "歌单内最常出现的歌：{{val}}",
+    "new": "最近的新歌：{{val}}",
+    "avg": "bv号总共有{{val1}}个，平均每bv号有{{val2}}首歌",
+    "shazamFailed": "shazam失败的歌数: {{val1}} ({{val2}}%)"
   }
 }

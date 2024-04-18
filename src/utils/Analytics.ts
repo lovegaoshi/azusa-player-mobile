@@ -1,3 +1,5 @@
+import i18n from 'i18next';
+
 interface SongOccurenceDict {
   [name: string]: number;
 }
@@ -53,35 +55,40 @@ const playlistAnalysis = (favList: { songList: Array<NoxMedia.Song> }) => {
   return results;
 };
 
-// TODO: once i18n is added we have to use as a hook. right now looks dumb.
-const useAnalytics = () => {
-  const playlistAnalyze = (playlist: NoxMedia.Playlist, topX = 5) => {
-    const analytics = playlistAnalysis(playlist);
-    return {
-      title: `歌单 ${playlist.title} 的统计信息`,
-      content: [
-        `歌单内总共有${analytics.songsUnique.size}首独特的歌`,
-        `歌单内最常出现的歌：${analytics.songTop10
+// TODO: add i18n as i18n.t('PlaylistOperations.searchListName')
+export default (playlist: NoxMedia.Playlist, topX = 5) => {
+  const analytics = playlistAnalysis(playlist);
+  return {
+    title: i18n.t('PlaylistAnalytics.title', { val: playlist.title }),
+    content: [
+      i18n.t('PlaylistAnalytics.uniqCount', {
+        val: analytics.songsUnique.size,
+      }),
+      i18n.t('PlaylistAnalytics.topX', {
+        val: analytics.songTop10
           .slice(0, topX)
           .map(val => `${val[0]} (${String(val[1])})`)
-          .join(', ')}`,
-        `最近的新歌：${Array.from(analytics.songsUnique)
+          .join(', '),
+      }),
+      i18n.t('PlaylistAnalytics.new', {
+        val: Array.from(analytics.songsUnique)
           .slice(topX * -1)
           .reverse()
-          .join(', ')}`,
-        `bv号总共有${String(analytics.bvid.size)}个，平均每bv号有${(
-          analytics.totalCount / analytics.bvid.size
-        ).toFixed(1)}首歌`,
-        `shazam失败的歌数: ${String(analytics.invalidShazamCount)}/${String(
+          .join(', '),
+      }),
+      i18n.t('PlaylistAnalytics.avg', {
+        val1: String(analytics.bvid.size),
+        val2: (analytics.totalCount / analytics.bvid.size).toFixed(1),
+      }),
+      i18n.t('PlaylistAnalytics.shazamFailed', {
+        val1: `${String(analytics.invalidShazamCount)}/${String(
           analytics.totalCount
-        )} (${(
+        )}`,
+        val2: (
           (analytics.invalidShazamCount * 100) /
           analytics.totalCount
-        ).toFixed(1)}%)`,
-      ],
-    };
+        ).toFixed(1),
+      }),
+    ],
   };
-  return { playlistAnalyze };
 };
-
-export default useAnalytics;
