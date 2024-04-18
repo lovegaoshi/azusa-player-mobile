@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import i18n from 'i18next';
 import {
   Modal,
@@ -186,16 +186,17 @@ export const LyricView = ({
       if (adhocTitle !== undefined)
         titleToFetch = reExtractSongName(titleToFetch, artist);
       else titleToFetch = reExtractSongName(track.title, artist);
-      const options = (
-        await Promise.all([
-          searchLyricOptions(titleToFetch, LrcSource.QQQrc),
-          searchLyricOptions(titleToFetch),
-          searchLyricOptions(titleToFetch, LrcSource.Kugou),
-        ])
-      ).flat();
-
-      setLrcOptions(options);
-      return options;
+      const options = await Promise.all([
+        searchLyricOptions(titleToFetch, LrcSource.QQQrc),
+        searchLyricOptions(titleToFetch),
+        searchLyricOptions(titleToFetch, LrcSource.Kugou),
+      ]);
+      if (options[0].length !== 1) {
+        options.push(options.shift()!);
+      }
+      const flattenedOptions = options.flat();
+      setLrcOptions(flattenedOptions);
+      return flattenedOptions;
     } catch (error) {
       logger.error(`[lrc] Error fetching lyric options:${error}`);
       setLrcOptions([]);
