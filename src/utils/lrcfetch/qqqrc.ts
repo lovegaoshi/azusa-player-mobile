@@ -77,6 +77,8 @@ const getQrcLyricOptions = async (
       },
     ];
   }
+  return [];
+  // HACK: temporarily disable this because it has encoding problems
   return json[
     'music.musichallSong.PlayLyricInfo.GetPlayLyricInfo'
   ].data.vecSongID.map((info: any) => ({
