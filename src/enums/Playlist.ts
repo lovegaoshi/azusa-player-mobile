@@ -12,9 +12,9 @@ export const SearchRegex: { [key: string]: { regex: RegExp; text: string } } = {
 };
 
 export enum SortOptions {
-  Title = 'title',
-  Artist = 'artist',
-  Album = 'album',
-  Date = 'date',
-  PreviousOrder = 'previous',
+  Title = 'TITLE',
+  Artist = 'ARTIST',
+  Album = 'ALBUM',
+  Date = 'DATE',
+  PreviousOrder = 'PREVIOUS_ORDER',
 }

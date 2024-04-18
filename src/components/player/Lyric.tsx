@@ -236,24 +236,6 @@ export const LyricView = ({
     }
   };
 
-  const lineRenderer = useCallback(
-    ({ lrcLine: { content }, active }: LyricLineProps) => (
-      <View style={{ padding: 7 }}>
-        <Text
-          style={{
-            textAlign: 'center',
-            color: active
-              ? playerStyle.colors.primary
-              : playerStyle.colors.secondary,
-          }}
-        >
-          {content}
-        </Text>
-      </View>
-    ),
-    [playerStyle]
-  );
-
   const customizedStyles = {
     headerText: [styles.headerText, { color: playerStyle.colors.primary }],
     modelContainer: [
