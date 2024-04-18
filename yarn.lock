@@ -4086,10 +4086,10 @@
     recyclerlistview "4.2.0"
     tslib "2.4.0"
 
-"@shopify/react-native-skia@1.2.1":
-  version "1.2.1"
-  resolved "https://registry.yarnpkg.com/@shopify/react-native-skia/-/react-native-skia-1.2.1.tgz#9aa8a91ec0855230001e21194f771974d7de26c4"
-  integrity sha512-uTvii22umQHFgLty/K6w4yzuu3Xe6w9n6oa6+297FddCS1iZqQrk5XvOrQIYzFz+ycgI1RLtoWjL9bKrA9Hdjw==
+"@shopify/react-native-skia@1.2.2":
+  version "1.2.2"
+  resolved "https://registry.yarnpkg.com/@shopify/react-native-skia/-/react-native-skia-1.2.2.tgz#15bceda8f32d5b990a866b4f29b9d7b7cdce61ae"
+  integrity sha512-YlDNJXTCstlOmyJxeQjaTaef8ACLuEPMDrSgEichQM3ELlWuU1HTSVbpXW2x4LbbEDPXwu/aF/16MUN8pzzcmA==
   dependencies:
     canvaskit-wasm "0.39.1"
     react-reconciler "0.27.0"
@@ -12167,7 +12167,7 @@ react-native-get-random-values@^1.11.0:
 
 "react-native-lyric@git+https://github.com/lovegaoshi/react-native-lyric.git#dev":
   version "1.0.1"
-  resolved "git+https://github.com/lovegaoshi/react-native-lyric.git#b626b0dcb84144888e50348ba9b6553a38cb4ded"
+  resolved "git+https://github.com/lovegaoshi/react-native-lyric.git#7fa633c7ff4b075f33944ed58b3ee38b1ee396f8"
   dependencies:
     "@react-native-masked-view/masked-view" "^0.3.1"
 
@@ -12389,10 +12389,10 @@ react-native@*:
     ws "^6.2.2"
     yargs "^17.6.2"
 
-react-native@0.73.6:
-  version "0.73.6"
-  resolved "https://registry.npmjs.org/react-native/-/react-native-0.73.6.tgz#ed4c675e205a34bd62c4ce8b9bd1ca5c85126d5b"
-  integrity sha512-oqmZe8D2/VolIzSPZw+oUd6j/bEmeRHwsLn1xLA5wllEYsZ5zNuMsDus235ONOnCRwexqof/J3aztyQswSmiaA==
+react-native@0.73.7:
+  version "0.73.7"
+  resolved "https://registry.yarnpkg.com/react-native/-/react-native-0.73.7.tgz#88cc4b6b1b2a0618694f4a6d265cf5f790f72525"
+  integrity sha512-LfI/INAC9jTf80bBHJQo0SfTEPQADsU8HoLaW7xQKjYXUX40dhu3AoyNEkMOHY4cpQyjEliQZ4dQpQMy733KRQ==
   dependencies:
     "@jest/create-cache-key-function" "^29.6.3"
     "@react-native-community/cli" "12.3.6"
