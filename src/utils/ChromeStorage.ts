@@ -275,10 +275,11 @@ export const delPlaylist = (
   playlist: NoxMedia.Playlist,
   playlistIds: Array<string>
 ) => {
-  playlistIds.splice(playlistIds.indexOf(playlist.id), 1);
+  let playlistIds2 = [...playlistIds];
+  playlistIds2.splice(playlistIds2.indexOf(playlist.id), 1);
   delPlaylistRaw(playlist);
-  savePlaylistIds(playlistIds);
-  return playlistIds;
+  savePlaylistIds(playlistIds2);
+  return playlistIds2;
 };
 
 export const saveFavPlaylist = (playlist: NoxMedia.Playlist) =>

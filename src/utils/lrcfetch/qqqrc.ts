@@ -1,5 +1,4 @@
 // https://github.com/bingaha/kugou-lrc
-import { strFromU8, decompressSync } from 'fflate';
 import { decode as atob, encode as btoa } from 'base-64';
 
 import bfetch from '@utils/BiliFetch';
@@ -78,6 +77,8 @@ const getQrcLyricOptions = async (
       },
     ];
   }
+  return [];
+  // HACK: temporarily disable this because it has encoding problems
   return json[
     'music.musichallSong.PlayLyricInfo.GetPlayLyricInfo'
   ].data.vecSongID.map((info: any) => ({

@@ -68,7 +68,14 @@ export default ({
 
   return (
     <Portal>
-      <Dialog visible={visible} onDismiss={handleClose} style={styles.dialog}>
+      <Dialog
+        visible={visible}
+        onDismiss={handleClose}
+        style={[
+          styles.dialog,
+          { height: `${10 + playlistList().length * 10}%` },
+        ]}
+      >
         <Dialog.Title style={styles.dialogTitle}>
           {t('CopiedPlaylistDialog.title', {
             title:
@@ -101,11 +108,11 @@ export default ({
             )}
             keyExtractor={item => item[0]}
           />
+          <Dialog.Actions style={styles.dialogAction}>
+            <Button onPress={handleClose}>{t('Dialog.cancel')}</Button>
+            <Button onPress={handleSubmit}>{t('Dialog.ok')}</Button>
+          </Dialog.Actions>
         </Dialog.Content>
-        <Dialog.Actions style={styles.dialogAction}>
-          <Button onPress={handleClose}>{t('Dialog.cancel')}</Button>
-          <Button onPress={handleSubmit}>{t('Dialog.ok')}</Button>
-        </Dialog.Actions>
       </Dialog>
     </Portal>
   );
@@ -113,17 +120,18 @@ export default ({
 
 const styles = StyleSheet.create({
   dialog: {
-    minHeight: '50%',
+    minHeight: '30%',
+    maxHeight: '50%',
   },
   dialogTitle: {
     maxHeight: 100,
   },
   dialogContent: {
     flex: 1,
-    minHeight: '20%',
+    justifyContent: 'flex-end',
   },
   dialogList: {
-    flex: 6,
+    flex: 1,
   },
   dialogItem: {
     paddingVertical: 5,
