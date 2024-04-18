@@ -1,6 +1,7 @@
 import { searchBiliURLs } from './BiliSearch';
 import { PlaylistTypes } from '../enums/Playlist';
 import { parseSongName } from '@stores/appStore';
+import logger from './Logger';
 
 interface Props {
   playlist: NoxMedia.Playlist;
@@ -22,13 +23,18 @@ export const updateSubscribeFavList = async ({
   overwriteOnRefresh = () =>
     playlist.newSongOverwrite || playlist.title.includes('live'),
   callback = () => undefined,
-}: Props): Promise<NoxMedia.Playlist> => {
+}: Props): Promise<NoxMedia.Playlist | undefined> => {
   let newPlaylist = { ...playlist, lastSubscribed: new Date().getTime() };
-  if ([PlaylistTypes.Favorite].includes(playlist.type))
-    throw new Error('[biliSubscribe] incorrect playlist type for subscription');
+  if ([PlaylistTypes.Favorite].includes(playlist.type)) {
+    logger.warn('[biliSubscribe] incorrect playlist type for subscription');
+    return;
+  }
   if (playlist.type === PlaylistTypes.Search) {
-    if (!playlist.refresh)
-      throw new Error('[biliSubscribe] nothing to subscribe');
+    if (!playlist.refresh) {
+      // HACK: disabling error throwing at this point.
+      logger.debug('[biliSubscribe] nothing to subscribe');
+      return;
+    }
     newPlaylist = { ...newPlaylist, ...(await playlist.refresh(newPlaylist)) };
     newPlaylist.songList = newPlaylist.songList.concat(playlist.songList);
   } else {
@@ -36,7 +42,8 @@ export const updateSubscribeFavList = async ({
       subscribeUrls = newPlaylist.subscribeUrl;
     }
     if (subscribeUrls.length === 0 || subscribeUrls[0].length === 0) {
-      throw new Error('[biliSubscribe] nothing to subscribe');
+      logger.debug('[biliSubscribe] nothing to subscribe');
+      return;
     }
     const favList = [
       ...newPlaylist.songList.map(val => val.bvid),
