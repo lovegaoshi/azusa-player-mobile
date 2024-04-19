@@ -126,7 +126,7 @@ export const sendBVFavorite = async (
       },
       referrer: `https://www.bilibili.com/video/${bvid}/`,
       body: {
-        rid: BVIDtoAID(bvid),
+        rid: await BVIDtoAID(bvid),
         add_media_ids: addfav.join(','),
         del_media_ids: removefav.join(','),
         csrf: biliJct,
