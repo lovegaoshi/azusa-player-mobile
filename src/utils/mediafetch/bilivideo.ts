@@ -64,6 +64,13 @@ export const fetchBVID = async (
     return fetchBVIDRaw(bvid);
   });
 
+export const BVIDtoAID = (bvid: string): Promise<string> =>
+  biliApiLimiter.schedule(async () => {
+    const res = await bfetch(URL_VIDEO_INFO.replace('{bvid}', bvid));
+    const json = await res.json();
+    return String(json.data.aid);
+  });
+
 export const fetchBiliBVIDs = async (
   BVids: string[],
   progressEmitter: (val: number) => void = () => undefined,

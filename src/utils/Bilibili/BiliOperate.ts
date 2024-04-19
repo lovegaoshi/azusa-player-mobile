@@ -2,7 +2,7 @@ import { getBiliJct } from '@utils/Bilibili/biliCookies';
 import bfetch from '@utils/BiliFetch';
 import { logger } from '@utils/Logger';
 import { throttler } from '../throttle';
-import { bvidToAid } from '../bvid';
+import { BVIDtoAID } from '../mediafetch/bilivideo';
 
 const BILI_LIKE_API = 'https://api.bilibili.com/x/web-interface/archive/like';
 const BILI_RELATED_API =
@@ -126,7 +126,7 @@ export const sendBVFavorite = async (
       },
       referrer: `https://www.bilibili.com/video/${bvid}/`,
       body: {
-        rid: String(bvidToAid(bvid)),
+        rid: BVIDtoAID(bvid),
         add_media_ids: addfav.join(','),
         del_media_ids: removefav.join(','),
         csrf: biliJct,
