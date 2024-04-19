@@ -25,6 +25,7 @@ export enum StorageKeys {
   COLORTHEME = 'ColorTheme',
   REGEXTRACT_MAPPING = 'RegexExtract',
   MUSICFREE_PLUGIN = 'MusicFreePlugin',
+  AA_PERMISSION = 'AndroidAutoPermission',
 }
 
 export enum SearchOptions {

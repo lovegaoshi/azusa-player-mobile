@@ -9,6 +9,7 @@ import AzusaPlayer from './AzusaPlayer';
 import AzusaPlayerLandscape from './components/landscape/AzusaPlayerLandscape';
 import AppOpenSplash from './components/background/AppOpenSplash';
 import useSetupPlayer from './hooks/useSetupPlayer';
+import useAndroidAuto from './hooks/useAndroidAuto';
 import { useIsLandscape } from './hooks/useOrientation';
 import appStore from '@stores/appStore';
 import PIPLyricView from './components/player/PIPLyric';
@@ -44,6 +45,7 @@ const useSplash = (duration = 1000) => {
 
 export default function App(appProps: NoxComponent.AppProps) {
   const isSplashReady = useSplash(__DEV__ || appProps.intentData ? 1 : 2500);
+  const { checkDrawOverAppsPermission } = useAndroidAuto();
   const isPlayerReady = useSetupPlayer(appProps);
   const isLandscape = useIsLandscape();
   const PIPMode = useStore(appStore, state => state.pipMode);
@@ -60,6 +62,7 @@ export default function App(appProps: NoxComponent.AppProps) {
 
     // When you launch the closed app from the notification or any other link
     Linking.getInitialURL().then(url => console.log('getInitialURL', url));
+    checkDrawOverAppsPermission();
     return () => {
       subscription.remove();
     };

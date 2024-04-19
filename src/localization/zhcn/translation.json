@@ -268,7 +268,8 @@
     "About1": "管人播放器是一个开源软件。您可以在 github.com/lovegaoshi/azusa-player-mobile 免费找到管人播放器的源代码。请考虑通过带有关键字的b站视频列表功能在哔哩哔哩上添加您的音乐流剪辑，以自动将歌切添加到视频列表中。"
   },
   "AndroidAuto": {
-    "PlaylistTab": "播放列表"
+    "PlaylistTab": "播放列表",
+    "Permission": "嗨！APM 在技术上受到限制，只能启用“绘制其他应用程序”权限才能在 Android Auto 上正常运行。为获得最佳体验，如果您打算与汽车一起使用，请按 OK 和启用该权限。"
   },
   "PlaylistRegex": {
     "absoluteMatch": "绝对匹配",
