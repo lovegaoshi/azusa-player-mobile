@@ -87,7 +87,7 @@ jobs:
 
       - name: python fixHTTP
         run: |
-          python fixHTTP.py
+          python ./scripts/fixHTTP.py
           python ./scripts/dev_cleartext.py
           python release_bump.py --dev
 
