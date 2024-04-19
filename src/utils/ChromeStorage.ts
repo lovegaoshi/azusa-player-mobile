@@ -8,7 +8,7 @@ import i18n from 'i18next';
 import { dummyPlaylist, dummyPlaylistList } from '../objects/Playlist';
 import { NoxRepeatMode } from '../enums/RepeatMode';
 import { PlaylistTypes } from '../enums/Playlist';
-import AzusaTheme from '../components/styles/AzusaTheme';
+import AdaptiveTheme from '@components/styles/AdaptiveTheme';
 import { chunkArray, arrayToObject } from '../utils/Utils';
 import {
   StorageKeys,
@@ -320,7 +320,7 @@ export const initPlayerObject = async (
       StorageKeys.PLAYMODE_KEY,
       NoxRepeatMode.Shuffle
     ),
-    skin: await getItem(StorageKeys.SKIN, AzusaTheme),
+    skin: await getItem(StorageKeys.SKIN, AdaptiveTheme),
     skins: (await getPlayerSkins()) || [],
     cookies: await getItem(StorageKeys.COOKIES, {}),
     lyricMapping,
