@@ -4,7 +4,7 @@ from enum import Enum
 import subprocess
 from pathlib import Path
 from version_bump import get_version
-from fixHTTP import fix_content
+from dev_cleartext import fix_content
 
 
 class VersionUpdate(Enum):

@@ -1,5 +1,4 @@
 from pathlib import Path
-import os
 
 
 def fix_content(path: str, transform) -> None:

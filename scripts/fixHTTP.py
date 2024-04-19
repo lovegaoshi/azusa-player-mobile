@@ -1,5 +1,5 @@
 import os
-from scripts.dev_cleartext import fix_content
+from dev_cleartext import fix_content
 
 if __name__ == '__main__':
     mfplugin_dir = './MusicFreePlugins/dist'

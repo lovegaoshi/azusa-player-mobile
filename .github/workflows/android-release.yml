@@ -16,7 +16,7 @@ jobs:
 
       - name: python version_bump.py
         run: |
-          python version_bump.py
+          python ./scripts/version_bump.py
 
       - name: Get branch name
         run: |
@@ -70,12 +70,15 @@ jobs:
 
       - name: python fixHTTP
         run: |
-          python fixHTTP.py
+          python ./scripts/fixHTTP.py
 
-      - name: WGet Build Sign jks
-        uses: wei/wget@v1
+      - name: Build Sign jks
+        id: write_file
+        uses: timheuer/base64-to-file@v1.2
         with:
-          args: -O ./android/app/noxupload.jks ${{ secrets.REMOTE_KEYFILE_URL }}
+          fileName: 'noxupload.jks'
+          fileDir: './android/app'
+          encodedString: ${{ secrets.SIGNED_KEY_BASE64 }}
 
       - name: Install dependencies
         uses: nick-fields/retry@v3
@@ -115,7 +118,7 @@ jobs:
 
       - name: python version_bump.py
         run: |
-          python version_bump.py
+          python ./scripts/version_bump.py
 
       - name: Get branch name
         run: |
@@ -171,10 +174,17 @@ jobs:
           git submodule update --init --recursive
           echo "${{ secrets.RELEASE_SIGN_PWD }}" >> ./android/gradle.properties
 
-      - name: WGet Build Sign jks
-        uses: wei/wget@v1
+      - name: python fixHTTP
+        run: |
+          python ./scripts/fixHTTP.py
+
+      - name: Build Sign jks
+        id: write_file
+        uses: timheuer/base64-to-file@v1.2
         with:
-          args: -O ./android/app/noxupload.jks ${{ secrets.REMOTE_KEYFILE_URL }}
+          fileName: 'noxupload.jks'
+          fileDir: './android/app'
+          encodedString: ${{ secrets.SIGNED_KEY_BASE64 }}
 
       - name: Install dependencies
         uses: nick-fields/retry@v3
@@ -261,6 +271,10 @@ jobs:
 
       - name: Pod Install
         run: cd ios && rm Podfile.lock && pod install --repo-update
+
+      - name: python fixHTTP
+        run: |
+          python ./scripts/fixHTTP.py
 
       - name: build
         run: cd ios && xcodebuild -scheme APM -workspace example.xcworkspace -configuration Release clean archive -archivePath "build/APM.xcarchive" CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO CODE_SIGNING_ALLOWED=NO
