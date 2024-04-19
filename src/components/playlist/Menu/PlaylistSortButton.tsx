@@ -47,7 +47,7 @@ export default ({
         onPress={() => {
           setDialogOpen(true);
         }}
-        title={t('PlaylistOperations.sortTitle')}
+        title={t('PlaylistOperations.sortDiagTitle')}
       />
       <Dialog
         options={sortOptions.map(val => val[0])}

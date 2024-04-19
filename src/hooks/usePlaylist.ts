@@ -22,7 +22,9 @@ export interface UsePlaylist {
 
   performSearch: (searchedVal: string) => void;
   handleSearch: (searchedVal: string) => void;
-  rssUpdate: (subscribeUrls?: string[]) => Promise<NoxMedia.Playlist>;
+  rssUpdate: (
+    subscribeUrls?: string[]
+  ) => Promise<NoxMedia.Playlist | undefined>;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   searchBarRef: React.MutableRefObject<any>;
   refreshing: boolean;

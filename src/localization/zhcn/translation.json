@@ -82,14 +82,14 @@
     "clearPlaylistTitle": "清空歌单",
     "removePlaylistTitle": "删除歌单",
     "all": "所有歌单",
-    "sortTitle": "排序...",
-    "sortDialogTitle": "为歌单 {{playlist.title}} 排序",
+    "SortDiagTitle": "排序...",
+    "sortDialogTitle": "为歌单 {{playlist.title}} 排序...",
     "ascending": "顺序?",
-    "sortTITLE": "歌曲名",
-    "sortARTIST": "up主人",
-    "sortALBUM": "视频名",
-    "sortDATE": "日期",
-    "sortPREVIOUS_ORDER": "之前的顺序",
+    "sortTitle": "歌曲名",
+    "sortArtist": "up主人",
+    "sortAlbum": "视频名",
+    "sortDate": "日期",
+    "sortPreviousOrder": "之前的顺序",
     "searchListName": "搜索歌单"
   },
   "SongOperations": {
@@ -268,7 +268,8 @@
     "About1": "管人播放器是一个开源软件。您可以在 github.com/lovegaoshi/azusa-player-mobile 免费找到管人播放器的源代码。请考虑通过带有关键字的b站视频列表功能在哔哩哔哩上添加您的音乐流剪辑，以自动将歌切添加到视频列表中。"
   },
   "AndroidAuto": {
-    "PlaylistTab": "播放列表"
+    "PlaylistTab": "播放列表",
+    "Permission": "嗨！APM 在技术上受到限制，只能启用“绘制其他应用程序”权限才能在 Android Auto 上正常运行。为获得最佳体验，如果您打算与汽车一起使用，请按 OK 和启用该权限。"
   },
   "PlaylistRegex": {
     "absoluteMatch": "绝对匹配",
@@ -283,5 +284,13 @@
     "loading": "正在加载...",
     "failedToFetch": "歌词加载失败,请手动搜索",
     "notFound": "[00:00.000] 无法找到歌词,请手动搜索"
+  },
+  "PlaylistAnalytics": {
+    "title": "歌单 {{val}} 的统计信息",
+    "uniqCount": "歌单内总共有{{val}}首独特的歌",
+    "topX": "歌单内最常出现的歌：{{val}}",
+    "new": "最近的新歌：{{val}}",
+    "avg": "bv号总共有{{val1}}个，平均每bv号有{{val2}}首歌",
+    "shazamFailed": "shazam失败的歌数: {{val1}} ({{val2}}%)"
   }
 }

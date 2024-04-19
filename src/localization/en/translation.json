@@ -71,14 +71,14 @@
     "clearPlaylistTitle": "Clear",
     "removePlaylistTitle": "Remove",
     "all": "All",
-    "sortTitle": "Sort by...",
+    "sortDiagTitle": "Sort by...",
     "sortDialogTitle": "Sort {{playlist.title}} by...",
     "ascending": "Ascending?",
-    "sortTITLE": "title",
-    "sortARTIST": "artist",
-    "sortALBUM": "album",
-    "sortDATE": "date",
-    "sortPREVIOUS_ORDER": "previous",
+    "sortTitle": "title",
+    "sortArtist": "artist",
+    "sortAlbum": "album",
+    "sortDate": "date",
+    "sortPreviousOrder": "previous",
     "searchListName": "Search"
   },
   "SongOperations": {
@@ -283,7 +283,8 @@
     "About1": "APM is an open source software. You may find the source code of APM at github.com/lovegaoshi/azusa-player-mobile free of charge. Please consider adding your music stream cuts on bilibili via the video series list functionality with keywords to add videos into the series list automatically."
   },
   "AndroidAuto": {
-    "PlaylistTab": "Playlists"
+    "PlaylistTab": "Playlists",
+    "Permission": "Hi! APM is technically limited that only by enabling the \"display over other apps\" permission ensures properly functionalities on Android Auto. For the best experience please press OK and enable it if you intend to use APM with a car."
   },
   "PlaylistRegex": {
     "absoluteMatch": "Absolute match",
@@ -301,5 +302,13 @@
     "loading": "Loading lyric...",
     "failedToFetch": "lrc failed to fetch",
     "notFound": "[00:00.000] Lyric was not found"
+  },
+  "PlaylistAnalytics": {
+    "title": "Playlist Analytics of {{val}}",
+    "uniqCount": "Playlist has {{val}} unique songs;",
+    "topX": "Most common songs: {{val}}",
+    "new": "New songs: {{val}}",
+    "avg": "Playlist contains a total of {{val1}} bvids, and {{val2}} songs per bvid on average;",
+    "shazamFailed": "shazam failed statistics: {{val1}} ({{val2}}%)"
   }
 }

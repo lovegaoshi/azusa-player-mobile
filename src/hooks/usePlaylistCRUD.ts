@@ -2,7 +2,7 @@ import { useNoxSetting } from '@stores/useApp';
 import { logger } from '@utils/Logger';
 import { removeSongBiliShazamed } from '../objects/Song';
 import { refreshMetadata } from '../utils/mediafetch/resolveURL';
-import useAnalytics from '../utils/Analytics';
+import playlistAnalyze from '../utils/Analytics';
 import { getPlaylistUniqBVIDs } from '../objects/Playlist';
 import { fetchBiliBVIDs } from '../utils/mediafetch/bilivideo';
 import { biliShazamOnSonglist } from '../utils/mediafetch/bilishazam';
@@ -12,7 +12,6 @@ import { sortPlaylist as sortPlaylistR } from '../utils/playlistOperations';
 import { SortOptions } from '../enums/Playlist';
 
 const usePlaylistCRUD = (mPlaylist?: NoxMedia.Playlist) => {
-  const { playlistAnalyze } = useAnalytics();
   const currentPlaylist = useNoxSetting(state => state.currentPlayingList);
   const currentPlayingId = useNoxSetting(state => state.currentPlayingId);
   const playlists = useNoxSetting(state => state.playlists);
