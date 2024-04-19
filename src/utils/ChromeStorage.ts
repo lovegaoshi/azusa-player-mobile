@@ -8,7 +8,7 @@ import i18n from 'i18next';
 import { dummyPlaylist, dummyPlaylistList } from '../objects/Playlist';
 import { NoxRepeatMode } from '../enums/RepeatMode';
 import { PlaylistTypes } from '../enums/Playlist';
-import AdaptiveTheme from '@components/styles/AdaptiveTheme';
+import AdaptiveTheme from '../components/styles/AdaptiveTheme';
 import { chunkArray, arrayToObject } from '../utils/Utils';
 import {
   StorageKeys,
