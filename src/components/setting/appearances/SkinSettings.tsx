@@ -242,7 +242,7 @@ const SkinSettings = () => {
     if (currentThemeIndex > -1) {
       scrollViewRef.current?.scrollToIndex({
         index: currentThemeIndex,
-        viewOffset: -214,
+        viewOffset: 414,
         animated: false,
       });
     }
