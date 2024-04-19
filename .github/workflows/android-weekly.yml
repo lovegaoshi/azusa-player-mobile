@@ -89,7 +89,7 @@ jobs:
         run: |
           python ./scripts/fixHTTP.py
           python ./scripts/dev_cleartext.py
-          python ./release_bump.py --dev
+          python ./scripts/release_bump.py --dev
 
       - name: Build Sign jks
         id: write_file
