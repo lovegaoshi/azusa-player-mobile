@@ -2690,6 +2690,24 @@
       "https://i0.hdslb.com/bfs/garb/87c31f8cd20f51ef446b97ecf17ff63f456548af.png"
     ],
     "backgroundImages": [
+      {
+        "type": "biliNFTVideo",
+        "identifier": "[\"101677\",\"派对留影\"]"
+      },
+      {
+        "type": "biliNFTVideo",
+        "identifier": "[\"101677\",\"春樱烂漫\"]"
+      },
+      {
+        "type": "biliNFTVideo",
+        "identifier": "[\"101677\",\"夏荷灼灼\"]"
+      },
+      "https://i0.hdslb.com/bfs/garb/open/86b09d85f9add1b0b461e0cf6405595414a2dd2b.png",
+      "https://i0.hdslb.com/bfs/garb/open/b8e681a94093f3bf128cdb8ad873cfe3ac34a3ba.png",
+      "https://i0.hdslb.com/bfs/garb/open/033d1664f1ebe2d2099950f137afda4e842bf8a2.png",
+      "https://i0.hdslb.com/bfs/garb/open/55609a269597d26723506a40fc97b0997c0d0c2e.png",
+      "https://i0.hdslb.com/bfs/garb/open/278b89511de9501172fe4600cbd7bf7514e3e82d.png",
+      "https://i0.hdslb.com/bfs/garb/open/2ec2258ef263401938f1f6e3cd8a60f9c293c471.png",
       "https://i0.hdslb.com/bfs/garb/3ea4e4842187ae56604f688072421dfd67492b42.png",
       "https://i0.hdslb.com/bfs/garb/b3c97280d93c9a5e5e6cb678b8d42cd22a87b74c.png",
       "https://i0.hdslb.com/bfs/garb/d9ad54d79594f4bdb2db73f086c1e8f79f79e7a7.png",
@@ -2700,6 +2718,10 @@
         "type": "biliGarbHeadVideo",
         "identifier": "118037701"
       }
+    ],
+    "backgroundImagesLandscape": [
+      "https://article.biliimg.com/bfs/article/75411f4029f31ef369f2f2d187d0ee493493085134719196.jpg",
+      "https://article.biliimg.com/bfs/article/ba7b41f98883526710ae627bcfbb4e3a3493085134719196.jpg"
     ],
     "customColors": {
       "maskedBackgroundColor": "rgba(0, 0, 0, 0.30)",
