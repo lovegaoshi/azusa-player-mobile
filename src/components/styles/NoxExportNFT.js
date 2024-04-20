@@ -49,7 +49,7 @@ const parsedGarbData = {
   ),
 };
 
-const emojiId = garbdata.collect_list.filter(v =>
+const emojiId = garbdata.collect_list?.filter(v =>
   v.redeem_item_name.includes('表情包')
 )[0]?.redeem_item_id;
 
