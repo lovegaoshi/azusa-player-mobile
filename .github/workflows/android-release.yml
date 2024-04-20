@@ -210,6 +210,7 @@ jobs:
           packageName: com.noxplay.noxplayer
           releaseFiles: android/app/build/outputs/bundle/release/app-release.aab
           track: internal
+          changesNotSentForReview: true
           # status: draft
 
   buildIPA:
