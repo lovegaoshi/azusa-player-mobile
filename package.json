@@ -21,11 +21,9 @@
     "prepare": "yarn run compile",
     "pretest": "yarn run compile",
     "prettify": "prettier --write ./src",
-    "ios:build": "yarn && cd ios && rm Podfile.lock && pod install --repo-update && cd ..",
-    "codepush": "appcenter codepush release-react -a lovegaoshi/Azusa-Player-Mobile",
-    "codepush:rollback": "appcenter codepush rollback -a lovegaoshi/Azusa-Player-Mobile Production",
-    "codepush:promote": "appcenter codepush promote -a lovegaoshi/Azusa-Player-Mobile -s Staging -d Production",
-    "dep": "yarn upgrade-interactive --latest",
+    "build": "yarn; yarn post install",
+    "ios:build": "yarn build && cd ios && rm Podfile.lock && pod install --repo-update && cd ..",
+    "dep": "yarn upgrade-interactive",
     "release": "git switch master && git pull && python release_bump.py",
     "postinstall": "patch-package"
   },
@@ -165,5 +163,5 @@
     "node": ">=18.0.0"
   },
   "isSwift": true,
-  "packageManager": "yarn@1.22.19"
+  "packageManager": "yarn@4.1.1"
 }
