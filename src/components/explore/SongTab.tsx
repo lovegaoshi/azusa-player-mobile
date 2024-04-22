@@ -124,18 +124,14 @@ export const BiliSongCatsCard = ({ songs = {} }: { songs?: BiliCatSongs }) => {
   );
 };
 
-export const BiliSongsTabCard = ({
-  songs = {},
+export const BiliSongsArrayTabCard = ({
+  songs = [],
   title,
 }: {
-  songs?: BiliCatSongs;
+  songs?: NoxMedia.Song[];
   title: string;
 }) => {
-  const concatSongs = Object.values(songs).reduce(
-    (acc, curr) => acc.concat(curr),
-    []
-  );
-  const splicedSongs: NoxMedia.Song[][] = chunkArray(concatSongs, 4);
+  const splicedSongs: NoxMedia.Song[][] = chunkArray(songs, 4);
 
   return (
     <View>
@@ -150,14 +146,25 @@ export const BiliSongsTabCard = ({
         showsHorizontalScrollIndicator={false}
       >
         {splicedSongs.map((k, i) => (
-          <BiliSongCard
-            key={`BiliRankTab${i}`}
-            songs={k}
-            totalSongs={concatSongs}
-          />
+          <BiliSongCard key={`BiliRankTab${i}`} songs={k} totalSongs={songs} />
         ))}
         <View style={{ width: Dimensions.get('window').width * 0.2 }}></View>
       </ScrollView>
     </View>
   );
+};
+
+export const BiliSongsTabCard = ({
+  songs = {},
+  title,
+}: {
+  songs?: BiliCatSongs;
+  title: string;
+}) => {
+  const concatSongs = Object.values(songs).reduce(
+    (acc, curr) => acc.concat(curr),
+    []
+  );
+
+  return <BiliSongsArrayTabCard title={title} songs={concatSongs} />;
 };

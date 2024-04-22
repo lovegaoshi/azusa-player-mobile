@@ -1,6 +1,7 @@
 {
   "_comment": "src/localization/en/translation.json",
   "BiliCategory": {
+    "top": "b站音乐区TOP",
     "ranking": "b站音乐区排行榜",
     "dynamic": "b站音乐区动态",
     "3": "音乐",
@@ -275,7 +276,9 @@
     "absoluteMatch": "绝对匹配",
     "artistMatch": "搜索歌手",
     "albumMatch": "搜索专辑",
-    "cachedMatch": "已缓存"
+    "cachedMatch": "已缓存",
+    "durationLessMatch": "长度小于",
+    "durationMoreMatch": "长度大于"
   },
   "Menu": {
     "local": "本地"

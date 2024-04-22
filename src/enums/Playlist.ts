@@ -9,6 +9,8 @@ export const SearchRegex: { [key: string]: { regex: RegExp; text: string } } = {
   artistMatch: { regex: /Artist:(.+)/, text: 'Artist:' },
   albumMatch: { regex: /Album:(.+)/, text: 'Album:' },
   cachedMatch: { regex: /Cached:/, text: 'Cached:' },
+  durationLessMatch: { regex: /Duration<:(\d+)/, text: 'Duration<:' },
+  durationMoreMatch: { regex: /Duration>:(\d+)/, text: 'Duration>:' },
 };
 
 export enum SortOptions {
