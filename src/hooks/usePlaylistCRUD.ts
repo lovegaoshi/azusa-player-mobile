@@ -109,7 +109,8 @@ const usePlaylistCRUD = (mPlaylist?: NoxMedia.Playlist) => {
     const newSongList = await biliShazamOnSonglist(
       playlist.songList,
       false,
-      progressEmitter
+      progressEmitter,
+      true
     );
     updatePlaylist(
       {
