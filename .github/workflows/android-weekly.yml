@@ -107,7 +107,7 @@ jobs:
         with:
           timeout_minutes: 10
           max_attempts: 10
-          command: yarn build
+          command: yarn install; yarn postinstall
 
       - name: clean generated builds
         run: rm -rf android/app/build/generated/
