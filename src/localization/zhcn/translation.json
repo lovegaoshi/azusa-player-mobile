@@ -1,6 +1,7 @@
 {
   "_comment": "src/localization/en/translation.json",
   "BiliCategory": {
+    "top": "b站音乐区TOP",
     "ranking": "b站音乐区排行榜",
     "dynamic": "b站音乐区动态",
     "3": "音乐",
