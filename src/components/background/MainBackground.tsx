@@ -67,6 +67,7 @@ const MainBackground = ({ children }: { children: React.JSX.Element }) => {
             disableFocus={true}
             preventsDisplaySleepDuringVideoPlayback={false}
             bufferConfig={{
+              // @ts-ignore
               cacheSizeMB: 200,
             }}
           />
