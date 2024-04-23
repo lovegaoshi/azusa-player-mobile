@@ -5,12 +5,12 @@ import { Source } from '@enums/MediaFetch';
 const headFetch = async (url: string): Promise<NoxMedia.Song | undefined> => {
   if (!url.startsWith('https://')) return;
   try {
-    const res = await bfetch(url, {
-      method: 'HEAD',
-    });
+    const res = await bfetch(url, { method: 'HEAD' });
     if (res.headers.get('content-type')?.startsWith('audio')) {
-      const fn = url.substring(url.lastIndexOf('/') + 1);
       const urlObj = new URL(url);
+      const fn = urlObj.pathname.substring(
+        urlObj.pathname.lastIndexOf('/') + 1
+      );
       return SongTS({
         cid: `${Source.rawhttp}-${url}`,
         bvid: url,
