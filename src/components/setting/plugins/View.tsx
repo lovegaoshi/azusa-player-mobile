@@ -22,14 +22,17 @@ const PluginSettings = () => {
   const { t } = useTranslation();
   const playerStyle = useNoxSetting(state => state.playerStyle);
   const setSnack = useSnack(state => state.setSnack);
-  const updateWithSnack = (name: string, callback: () => Promise<void>) => {
+  const updateWithSnack = (
+    name: string,
+    processFunction: () => Promise<void>
+  ) => {
     setSnack({
       snackMsg: {
         processing: t(`PluginSettings.Updating${name}FromGithub`),
         success: t(`PluginSettings.Updated${name}FromGithub`),
         fail: t(`PluginSettings.UpdateFail${name}FromGithub`),
       },
-      callback,
+      processFunction,
     });
   };
 

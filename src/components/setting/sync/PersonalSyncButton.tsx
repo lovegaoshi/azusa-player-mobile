@@ -1,6 +1,5 @@
 // TODO: migrate to GenericSyncButton
 import React, { useState } from 'react';
-import Snackbar from 'react-native-snackbar';
 import { View, StyleSheet } from 'react-native';
 import { ActivityIndicator, IconButton, TextInput } from 'react-native-paper';
 import { useTranslation } from 'react-i18next';
@@ -9,6 +8,7 @@ import { noxBackup, noxRestore } from './PersonalCloudAuth';
 import { useNoxSetting } from '@stores/useApp';
 import { logger } from '@utils/Logger';
 import { exportPlayerContent } from '@utils/ChromeStorage';
+import useSnack from '@stores/useSnack';
 
 interface Props {
   cloudAddress: string;
@@ -26,6 +26,7 @@ const ImportSyncFavButton = ({
   restoreFromUint8Array,
 }: Props) => {
   const { t } = useTranslation();
+  const setSnack = useSnack(state => state.setSnack);
   const [loading, setLoading] = useState(false);
 
   const errorHandling = (
@@ -33,7 +34,7 @@ const ImportSyncFavButton = ({
     msg = t('Sync.PersonalCloudDownloadFail')
   ) => {
     logger.error(e);
-    Snackbar.show({ text: msg });
+    setSnack({ snackMsg: { success: msg } });
     setLoading(false);
   };
 
@@ -44,7 +45,9 @@ const ImportSyncFavButton = ({
       // error handling is in importPlayerContent. failure in there resets player data
       // theoretically this is always safe
       await restoreFromUint8Array(response);
-      Snackbar.show({ text: t('Sync.PersonalCloudDownloadSuccess') });
+      setSnack({
+        snackMsg: { success: t('Sync.PersonalCloudDownloadSuccess') },
+      });
     } else {
       errorHandling(
         new Error(String(t('Sync.PersonalCloudDownloadFail'))),
@@ -64,6 +67,7 @@ const ImportSyncFavButton = ({
 
 const ExportSyncFavButton = ({ cloudAddress, cloudID }: Props) => {
   const { t } = useTranslation();
+  const setSnack = useSnack(state => state.setSnack);
   const [loading, setLoading] = useState(false);
 
   const errorHandling = (
@@ -71,7 +75,7 @@ const ExportSyncFavButton = ({ cloudAddress, cloudID }: Props) => {
     msg = String(t('Sync.PersonalCloudUploadFailSnackbar'))
   ) => {
     logger.error(e);
-    Snackbar.show({ text: msg });
+    setSnack({ snackMsg: { success: msg } });
     setLoading(false);
   };
 
@@ -80,7 +84,7 @@ const ExportSyncFavButton = ({ cloudAddress, cloudID }: Props) => {
     const exportedDict = await exportPlayerContent();
     const response = await noxBackup(exportedDict, cloudAddress, cloudID);
     if (response.status === 200) {
-      Snackbar.show({ text: t('Sync.PersonalCloudUploadSuccess') });
+      setSnack({ snackMsg: { success: t('Sync.PersonalCloudUploadSuccess') } });
     } else {
       errorHandling(new Error(String(response.status)));
     }

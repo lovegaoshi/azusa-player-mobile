@@ -1,6 +1,5 @@
 import { useTranslation } from 'react-i18next';
 import { Linking, Platform } from 'react-native';
-import Snackbar from 'react-native-snackbar';
 // eslint-disable-next-line import/no-unresolved
 import { APPSTORE } from '@env';
 
@@ -9,6 +8,7 @@ import useAlert from '../components/dialogs/useAlert';
 import { Versions } from '../enums/Version';
 import logger from '@utils/Logger';
 import useInstallAPK from './useInstallAPK';
+import useSnack, { InfiniteDuration } from '../stores/useSnack';
 
 const regexVersion = (version: string) => {
   const regexMatch = /\d+\.\d+\.\d+/.exec(version),
@@ -18,6 +18,8 @@ const regexVersion = (version: string) => {
 
 export default () => {
   const playerSetting = useNoxSetting(state => state.playerSetting);
+  const setSnack = useSnack(state => state.setSnack);
+  const snackDismiss = useSnack(state => state.snackDismiss);
   const setPlayerSetting = useNoxSetting(state => state.setPlayerSetting);
   const { OneWayAlert, TwoWayAlert, ThreeWayAlert } = useAlert();
   const { RNFetchDownloadAPK } = useInstallAPK();
@@ -55,16 +57,16 @@ export default () => {
   ) => {
     if (APPSTORE) return;
     if (!auto) {
-      Snackbar.show({
-        text: t('VersionUpdate.UpdateCheckingSnackbar'),
-        duration: Snackbar.LENGTH_INDEFINITE,
+      setSnack({
+        snackMsg: { success: t('VersionUpdate.UpdateCheckingSnackbar') },
+        snackDuration: InfiniteDuration,
       });
     }
     const { noxCheckedVersion, devVersion, noxAPKUrl } = await getVersion();
-    Snackbar.dismiss();
+    await snackDismiss();
     if (!noxCheckedVersion) {
-      Snackbar.show({
-        text: t('VersionUpdate.UpdateCheckingFailedSnackbar'),
+      setSnack({
+        snackMsg: { success: t('VersionUpdate.UpdateCheckingFailedSnackbar') },
       });
       return;
     }

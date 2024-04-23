@@ -3,7 +3,6 @@ import { View, SafeAreaView, StyleSheet } from 'react-native';
 import { Text, Avatar, ActivityIndicator, Button } from 'react-native-paper';
 import { useTranslation } from 'react-i18next';
 import QRCode from 'react-native-qrcode-svg';
-import Snackbar from 'react-native-snackbar';
 import CookieManager from '@react-native-cookies/cookies';
 
 import { useNoxSetting } from '@stores/useApp';
@@ -11,6 +10,7 @@ import { logger } from '@utils/Logger';
 import GenericInputDialog from '../dialogs/GenericInputDialog';
 import BiliSelectFavButtton from './BiliSelectFavButtton';
 import useBiliLogin from './useBiliLoginApp';
+import useSnack from '@stores/useSnack';
 
 const domain = 'https://bilibili.com';
 
@@ -18,6 +18,7 @@ export default () => {
   const { t } = useTranslation();
   const playerStyle = useNoxSetting(state => state.playerStyle);
   const appRefresh = useNoxSetting(state => state.appRefresh);
+  const setSnack = useSnack(state => state.setSnack);
   const [inputCookieVisible, setInputCookieVisible] = React.useState(false);
   const {
     qrcode,
@@ -73,26 +74,21 @@ export default () => {
 
   const loginPage = () => {
     const generateBiliQRCode = async () => {
-      try {
-        Snackbar.show({
-          text: t('Login.BilibiliLoginQRGeneration'),
-          duration: Snackbar.LENGTH_INDEFINITE,
-        });
+      const processFunction = async () => {
         const qrCodeReq = await getQRLoginReq();
         setQrCode(qrCodeReq.url);
         setQrCodeKey(qrCodeReq.key);
         setQrCodeExpire(qrCodeReq.expire);
-        Snackbar.dismiss();
-        Snackbar.show({
-          text: t('Login.BilibiliLoginQRGenerated'),
-        });
-      } catch (error) {
-        Snackbar.dismiss();
-        Snackbar.show({
-          text: t('Login.BilibiliLoginQRGenerateFailed'),
-        });
-        logger.error(`[biliLogin] ${error}`);
-      }
+      };
+
+      setSnack({
+        snackMsg: {
+          processing: t('Login.BilibiliLoginQRGeneration'),
+          success: t('Login.BilibiliLoginQRGenerated'),
+          fail: t('Login.BilibiliLoginQRGenerateFailed'),
+        },
+        processFunction,
+      });
     };
 
     return (

@@ -1,6 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
 import { FlashList } from '@shopify/flash-list';
-import Snackbar from 'react-native-snackbar';
 import { useTranslation } from 'react-i18next';
 import { useDebounce } from 'use-debounce';
 import { useNetInfo } from '@react-native-community/netinfo';
@@ -9,15 +8,16 @@ import { activateKeepAwakeAsync, deactivateKeepAwake } from 'expo-keep-awake';
 import { useNoxSetting } from '@stores/useApp';
 import { PlaylistTypes, SearchRegex } from '@enums/Playlist';
 import usePlaylist from '@hooks/usePlaylist';
-import logger from '@utils/Logger';
 import noxCache, { noxCacheKey } from '@utils/Cache';
 import { reParseSearch as reParseSearchRaw } from '@utils/re';
 import { syncFavlist } from '@utils/Bilibili/bilifavOperate';
 import usePlayback from '@hooks/usePlayback';
 import useTPControls from '@hooks/useTPControls';
+import useSnack from '@stores/useSnack';
 
 export default (playlist: NoxMedia.Playlist) => {
   const { t } = useTranslation();
+  const setSnack = useSnack(state => state.setSnack);
   const netInfo = useNetInfo();
   const usedPlaylist = usePlaylist(playlist);
   const {
@@ -51,24 +51,20 @@ export default (playlist: NoxMedia.Playlist) => {
   const { preformFade } = useTPControls();
 
   const refreshPlaylist = async () => {
-    Snackbar.show({
-      text: t('PlaylistOperations.updating', { playlist }),
-      duration: Snackbar.LENGTH_INDEFINITE,
-    });
     progressEmitter(100);
     activateKeepAwakeAsync();
-    try {
-      await rssUpdate();
-    } catch (e) {
-      logger.error('[refreshPlaylist] failed');
-      logger.error(e);
-    }
-    Snackbar.dismiss();
-    Snackbar.show({
-      text: t('PlaylistOperations.updated', { playlist }),
+    setSnack({
+      snackMsg: {
+        processing: t('PlaylistOperations.updating', { playlist }),
+        success: t('PlaylistOperations.updated', { playlist }),
+        fail: '[refreshPlaylist] failed',
+      },
+      processFunction: rssUpdate,
+      callback: () => {
+        progressEmitter(0);
+        deactivateKeepAwake();
+      },
     });
-    progressEmitter(0);
-    deactivateKeepAwake();
   };
 
   const reParseSearch = (searchStr: string, rows: Array<NoxMedia.Song>) => {

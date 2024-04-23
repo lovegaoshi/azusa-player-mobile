@@ -2,13 +2,13 @@
 import * as React from 'react';
 import CookieManager from '@react-native-cookies/cookies';
 import { useTranslation } from 'react-i18next';
-import Snackbar from 'react-native-snackbar';
 
 import { logger } from '@utils/Logger';
 import bfetch from '@utils/BiliFetch';
 import { addCookie } from '@utils/ChromeStorage';
 import { getLoginStatus } from '@utils/Login';
 import { throttler } from '@utils/throttle';
+import useSnack from '@stores/useSnack';
 
 export interface QRCodeReq {
   url: string;
@@ -66,6 +66,7 @@ const loginQRVerification = async () => {
 
 const useBiliLogin = () => {
   const { t } = useTranslation();
+  const setSnack = useSnack(state => state.setSnack);
   const [qrcode, setQrCode] = React.useState<string>('');
   const [qrcodeKey, setQrCodeKey] = React.useState<string>('');
   const [qrcodeExpire, setQrCodeExpire] = React.useState<number>(-1);
@@ -163,8 +164,8 @@ const useBiliLogin = () => {
       // network error; abort qr login attempts
       clearQRLogin();
       logger.error(`[biliLogin] ${error}`);
-      Snackbar.show({
-        text: t('Login.BilibiliLoginProbeFailed'),
+      setSnack({
+        snackMsg: { success: t('Login.BilibiliLoginProbeFailed') },
       });
     }
   };
@@ -177,8 +178,8 @@ const useBiliLogin = () => {
       if (qrcodeExpire === 0) {
         clearInterval(timer);
         setQrCode('');
-        Snackbar.show({
-          text: t('Login.BilibiliLoginQRExpired'),
+        setSnack({
+          snackMsg: { success: t('Login.BilibiliLoginQRExpired') },
         });
       } else {
         probeQRLogin();

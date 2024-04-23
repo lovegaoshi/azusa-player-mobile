@@ -93,7 +93,6 @@
     "react-native-screens": "3.29.0",
     "react-native-shadow-2": "^7.0.8",
     "react-native-share-menu": "git+https://github.com/lovegaoshi/react-native-share-menu.git",
-    "react-native-snackbar": "2.7.1",
     "react-native-svg": "^15.1.0",
     "react-native-svga-player": "git+https://lovegaoshi@github.com/lovegaoshi/react-native-svga-player.git",
     "react-native-tab-view": "^3.5.2",

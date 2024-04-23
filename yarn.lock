@@ -2164,14 +2164,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@expo/json-file@npm:^8.2.37, @expo/json-file@npm:~8.3.0":
-  version: 8.3.1
-  resolution: "@expo/json-file@npm:8.3.1"
+"@expo/json-file@npm:^8.2.37, @expo/json-file@npm:^8.3.0, @expo/json-file@npm:~8.3.0":
+  version: 8.3.2
+  resolution: "@expo/json-file@npm:8.3.2"
   dependencies:
     "@babel/code-frame": "npm:~7.10.4"
     json5: "npm:^2.2.2"
     write-file-atomic: "npm:^2.3.0"
-  checksum: 10c0/59976538bb0a24751619560e6f7c3705381cf3f93459fd75254a83a7305972f264882c4f6039c6e6931f878c02c618b60870b4aab0df2d2595d477fed982342e
+  checksum: 10c0/e2e9ae5eec9c06a015a5ae98c9a1e465592913ec6b999cfd1fc14e6554fb1e3933f1a1d444fce592ebc351c1eaa2f7714e4196a543daac4918ca481005b1c701
   languageName: node
   linkType: hard
 
@@ -2206,21 +2206,21 @@ __metadata:
   linkType: hard
 
 "@expo/osascript@npm:^2.0.31":
-  version: 2.1.0
-  resolution: "@expo/osascript@npm:2.1.0"
+  version: 2.1.1
+  resolution: "@expo/osascript@npm:2.1.1"
   dependencies:
-    "@expo/spawn-async": "npm:^1.5.0"
+    "@expo/spawn-async": "npm:^1.7.2"
     exec-async: "npm:^2.2.0"
-  checksum: 10c0/c69fa898a984bf67a0dd48edb01f155b92d1878b5d4b5071eac32f6d28a753a12f5460aae2d483009f9bde6bbbd6681bfb0e058622a7d675244b4f4fdab7c0a6
+  checksum: 10c0/0f4180052862c25194df6f25d0eb800c54d8ee8fb7f55e5fe1cac23867b98d7d8d1d289c11194e7a1775f9a97306ebe36aaa7284e6d5c9cb415fce5d3797090f
   languageName: node
   linkType: hard
 
 "@expo/package-manager@npm:^1.1.1":
-  version: 1.4.2
-  resolution: "@expo/package-manager@npm:1.4.2"
+  version: 1.5.1
+  resolution: "@expo/package-manager@npm:1.5.1"
   dependencies:
-    "@expo/json-file": "npm:^8.2.37"
-    "@expo/spawn-async": "npm:^1.5.0"
+    "@expo/json-file": "npm:^8.3.0"
+    "@expo/spawn-async": "npm:^1.7.2"
     ansi-regex: "npm:^5.0.0"
     chalk: "npm:^4.0.0"
     find-up: "npm:^5.0.0"
@@ -2231,18 +2231,18 @@ __metadata:
     ora: "npm:^3.4.0"
     split: "npm:^1.0.1"
     sudo-prompt: "npm:9.1.1"
-  checksum: 10c0/17743457c17be93e497ece939772149ce5138709638afe4d38b59e357d98618360e59e573c07218ebbf8b88c193a1e647921089f759eb8b6884371ebfafcb665
+  checksum: 10c0/0e7176dfc797dd85848134666570f7f7d3c61974a63c9ec8ceb9dd0c3ab86a5d86b32aa960be7de73be6498b6163f938798b5a4ae0695a74e9775a962e3f4cb1
   languageName: node
   linkType: hard
 
 "@expo/plist@npm:^0.1.0":
-  version: 0.1.1
-  resolution: "@expo/plist@npm:0.1.1"
+  version: 0.1.2
+  resolution: "@expo/plist@npm:0.1.2"
   dependencies:
     "@xmldom/xmldom": "npm:~0.7.7"
     base64-js: "npm:^1.2.3"
     xmlbuilder: "npm:^14.0.0"
-  checksum: 10c0/e823669c4e3b28c72e42f27baf4ba4ed738f4be3a2a9bdd41563bd3f930d142e5fa7ca95ecfd6f61bbae9eeeb4ec263d722cb8fb4e801107aef0861210b69b56
+  checksum: 10c0/9f52ee73c8bba61b4b024d4a7d9208796291f0af6039a2cbfd2493fa63d57c10e6c1cf0cb6592f119bc0ae0efc665f4cc5e1550f3e007124289609494d1cb5a1
   languageName: node
   linkType: hard
 
@@ -5884,7 +5884,6 @@ __metadata:
     react-native-screens: "npm:3.29.0"
     react-native-shadow-2: "npm:^7.0.8"
     react-native-share-menu: "git+https://github.com/lovegaoshi/react-native-share-menu.git"
-    react-native-snackbar: "npm:2.7.1"
     react-native-svg: "npm:^15.1.0"
     react-native-svga-player: "git+https://lovegaoshi@github.com/lovegaoshi/react-native-svga-player.git"
     react-native-tab-view: "npm:^3.5.2"
@@ -6242,25 +6241,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"bplist-creator@npm:0.1.0":
-  version: 0.1.0
-  resolution: "bplist-creator@npm:0.1.0"
+"bplist-creator@npm:0.1.1":
+  version: 0.1.1
+  resolution: "bplist-creator@npm:0.1.1"
   dependencies:
     stream-buffers: "npm:2.2.x"
-  checksum: 10c0/86f5fe95f34abd369b381abf0f726e220ecebd60a3d932568ae94895ccf1989a87553e4aee9ab3cfb4f35e6f72319f52aa73028165eec82819ed39f15189d493
+  checksum: 10c0/427ec37263ce0e8c68a83f595fc9889a9cbf2e6fda2de18e1f8ef7f0c6ce68c0cdbb7c9c1f3bb3f2d217407af8cffbdf254bf0f71c99f2186175d07752f08a47
   languageName: node
   linkType: hard
 
-"bplist-parser@npm:0.3.1":
-  version: 0.3.1
-  resolution: "bplist-parser@npm:0.3.1"
-  dependencies:
-    big-integer: "npm:1.6.x"
-  checksum: 10c0/00940a60214e8f58246264d389db8817b7f7f968cd544ec4a5843e33f810c7a07294a92060fc507104a1a2921212c053fe8e941fb2129b9b4da5fbb12a08e95c
-  languageName: node
-  linkType: hard
-
-"bplist-parser@npm:^0.3.1":
+"bplist-parser@npm:0.3.2, bplist-parser@npm:^0.3.1":
   version: 0.3.2
   resolution: "bplist-parser@npm:0.3.2"
   dependencies:
@@ -14608,7 +14598,7 @@ __metadata:
   resolution: "react-native-background-timer@https://github.com/lovegaoshi/react-native-background-timer.git#commit=dce9c87de766027b51d39326d598477a74dfe91c"
   peerDependencies:
     react-native: ">=0.47.0"
-  checksum: 10c0/e5321a0bb6393e2f8d540a0f3f8769dfe48681ed0edeb4fc411085e93ebbbb071228f0b748de98716c4e8d7911fbdb0c40467fe10f8dd07c326c52d6e72a59fe
+  checksum: 10c0/43193c2557757e322adad03f873c785dbbc454166076b896a61964f683c25ef5792505332b17a6cc95262d0a22ee214e510e87418f951dbe35650f93578e587d
   languageName: node
   linkType: hard
 
@@ -14720,7 +14710,7 @@ __metadata:
   peerDependencies:
     react: "*"
     react-native: "*"
-  checksum: 10c0/46b543b38d016fa56c69b02ee99f21af4e7dfa5f25ed418daba85da880508beedbdc0a69d2e3dbe8aea9bfdf2642feddda2c209b9bdd53b80fac679a23d38347
+  checksum: 10c0/de5191be53e5dbed2e9d39825ada870254c3d5553951d9d74cc5fb8fbc281a9f2e526ecd8ecac7cf96ff89a459be0296a7ae3fa804c2de40e8c7b9401fa233ba
   languageName: node
   linkType: hard
 
@@ -14838,16 +14828,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-native-snackbar@npm:2.7.1":
-  version: 2.7.1
-  resolution: "react-native-snackbar@npm:2.7.1"
-  peerDependencies:
-    react: ">=16"
-    react-native: ">=0.60"
-  checksum: 10c0/e4511e73902ec0bc0ac5b6baa9efb5a8a3fff84db6f293ae91850b0b226f5754cead617b7c11bf2da5064e86288ee2df915191b506f02d53681e8eb212d2435e
-  languageName: node
-  linkType: hard
-
 "react-native-svg@npm:^15.1.0":
   version: 15.1.0
   resolution: "react-native-svg@npm:15.1.0"
@@ -14871,7 +14851,7 @@ __metadata:
   peerDependencies:
     react: ^16.8.1
     react-native: ">=0.60.0-rc.0 <1.0.x"
-  checksum: 10c0/6340fbfd45e74bb43c89e8c1576ea1722226e1d6d414604c23d3b812f3856a21e9eb826dba1b96dacb25c90cf4b6ae26a98b77c43c9c20251d96d2e9a145a4cc
+  checksum: 10c0/8dd82318450a98ab324eda827e15b7394952f313332795e70363a214d2be3e7559875915d31c55b0e4eaa4efe603f185e3099be7d443661a0e7a9ab9f8bdd6c4
   languageName: node
   linkType: hard
 
@@ -14908,7 +14888,7 @@ __metadata:
       optional: true
     shaka-player:
       optional: true
-  checksum: 10c0/6bc3ef1dd3955c66cba55fd66a01776f6011da654df21b733418d57636e75ca2f439ff8bb8ebff08a57ae519966f5bf336192192ab220edeb4c1809ae98bd15a
+  checksum: 10c0/50b4e14b7d6349d1e81eaeeb42d7c6d18350c28b22b539b8f1e11be87f6da7b8468fef9424da1505d7077ec4b2094f7d28021e1979e416ca9f904245467b2091
   languageName: node
   linkType: hard
 
@@ -16183,13 +16163,13 @@ __metadata:
   linkType: hard
 
 "simple-plist@npm:^1.1.0":
-  version: 1.3.1
-  resolution: "simple-plist@npm:1.3.1"
+  version: 1.4.0
+  resolution: "simple-plist@npm:1.4.0"
   dependencies:
-    bplist-creator: "npm:0.1.0"
-    bplist-parser: "npm:0.3.1"
+    bplist-creator: "npm:0.1.1"
+    bplist-parser: "npm:0.3.2"
     plist: "npm:^3.0.5"
-  checksum: 10c0/3d5adeb705815338b1f4615c52584d540b12575337a0e0688f0a2b19a6a4162769cd8a3a36e9eb2b0fc9e27d63dcba8b9088a13e93eabcb7cdec5fe90ec5b0a5
+  checksum: 10c0/226c283492d8518d715e4133d94bdbd15c0619561bcde583b4807b36cde106c0078c615b9b4e25c0e8758a4ae4e79ed5dd76e57cd528d8b7001ecab5ad35e343
   languageName: node
   linkType: hard
 
