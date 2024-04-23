@@ -5,7 +5,7 @@ import { Source } from '@enums/MediaFetch';
 import { biliApiLimiter } from './throttle';
 
 const API =
-  'https://api.bilibili.com/x/copyright-music-publicity/toplist/music_list?{list_id}=175&web_location=0.0';
+  'https://api.bilibili.com/x/copyright-music-publicity/toplist/music_list?list_id={list_id}&web_location=0.0';
 
 const topToSong = (data: any) =>
   SongTS({
