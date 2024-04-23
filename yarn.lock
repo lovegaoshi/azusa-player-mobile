@@ -2228,6 +2228,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@fastify/busboy@npm:^2.0.0":
+  version: 2.1.1
+  resolution: "@fastify/busboy@npm:2.1.1"
+  checksum: 10c0/6f8027a8cba7f8f7b736718b013f5a38c0476eea67034c94a0d3c375e2b114366ad4419e6a6fa7ffc2ef9c6d3e0435d76dd584a7a1cbac23962fda7650b579e3
+  languageName: node
+  linkType: hard
+
 "@gar/promisify@npm:^1.0.1":
   version: 1.1.3
   resolution: "@gar/promisify@npm:1.1.3"
@@ -4955,7 +4962,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"acorn@npm:^8.11.3, acorn@npm:^8.8.2, acorn@npm:^8.9.0":
+"acorn@npm:^8.11.3, acorn@npm:^8.8.0, acorn@npm:^8.8.2, acorn@npm:^8.9.0":
   version: 8.11.3
   resolution: "acorn@npm:8.11.3"
   bin:
@@ -5415,6 +5422,7 @@ __metadata:
   resolution: "azusa-player-mobile@workspace:."
   dependencies:
     "@babel/core": "npm:^7.24.4"
+    "@babel/plugin-syntax-import-attributes": "npm:^7.24.1"
     "@babel/preset-env": "npm:^7.24.4"
     "@babel/preset-typescript": "npm:^7.24.1"
     "@babel/runtime": "npm:^7.24.4"
@@ -5533,6 +5541,7 @@ __metadata:
     typescript: "npm:5.4.5"
     use-debounce: "npm:^10.0.0"
     uuid: "npm:^9.0.1"
+    youtubei.js: "npm:^9.3.0"
     ytdl-core: "git+https://lovegaoshi@github.com/lovegaoshi/node-ytdl-core.git"
     zustand: "npm:^4.5.2"
   languageName: unknown
@@ -11160,6 +11169,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"jintr@npm:^1.1.0":
+  version: 1.1.0
+  resolution: "jintr@npm:1.1.0"
+  dependencies:
+    acorn: "npm:^8.8.0"
+  checksum: 10c0/af233341ed7cc6374b64cb8a2c7f7434801e9814b8db6e116fe356985c2aa372538567c8f2d01d1b3754ddfb37da585dce2adbf63f335211cfab338ce939c698
+  languageName: node
+  linkType: hard
+
 "joi@npm:^17.2.1":
   version: 17.12.3
   resolution: "joi@npm:17.12.3"
@@ -16222,7 +16240,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tslib@npm:^2.0.1, tslib@npm:^2.1.0, tslib@npm:^2.4.0, tslib@npm:^2.6.2":
+"tslib@npm:^2.0.1, tslib@npm:^2.1.0, tslib@npm:^2.4.0, tslib@npm:^2.5.0, tslib@npm:^2.6.2":
   version: 2.6.2
   resolution: "tslib@npm:2.6.2"
   checksum: 10c0/e03a8a4271152c8b26604ed45535954c0a45296e32445b4b87f8a5abdb2421f40b59b4ca437c4346af0f28179780d604094eb64546bee2019d903d01c6c19bdb
@@ -16441,6 +16459,15 @@ __metadata:
   version: 5.26.5
   resolution: "undici-types@npm:5.26.5"
   checksum: 10c0/bb673d7876c2d411b6eb6c560e0c571eef4a01c1c19925175d16e3a30c4c428181fb8d7ae802a261f283e4166a0ac435e2f505743aa9e45d893f9a3df017b501
+  languageName: node
+  linkType: hard
+
+"undici@npm:^5.19.1":
+  version: 5.28.4
+  resolution: "undici@npm:5.28.4"
+  dependencies:
+    "@fastify/busboy": "npm:^2.0.0"
+  checksum: 10c0/08d0f2596553aa0a54ca6e8e9c7f45aef7d042c60918564e3a142d449eda165a80196f6ef19ea2ef2e6446959e293095d8e40af1236f0d67223b06afac5ecad7
   languageName: node
   linkType: hard
 
@@ -17190,6 +17217,17 @@ __metadata:
   version: 0.1.0
   resolution: "yocto-queue@npm:0.1.0"
   checksum: 10c0/dceb44c28578b31641e13695d200d34ec4ab3966a5729814d5445b194933c096b7ced71494ce53a0e8820685d1d010df8b2422e5bf2cdea7e469d97ffbea306f
+  languageName: node
+  linkType: hard
+
+"youtubei.js@npm:^9.3.0":
+  version: 9.3.0
+  resolution: "youtubei.js@npm:9.3.0"
+  dependencies:
+    jintr: "npm:^1.1.0"
+    tslib: "npm:^2.5.0"
+    undici: "npm:^5.19.1"
+  checksum: 10c0/29f7e896f38194ecba88b430e7837cd42f3c7d1ed83b6a7d0221462d7f85b51b7ef2e20f45a7a3a0cd535ee8489c5e82ad70b465d68ef107d196051405e34340
   languageName: node
   linkType: hard
 

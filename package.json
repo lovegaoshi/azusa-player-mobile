@@ -102,6 +102,7 @@
     "react-native-webview": "^13.8.6",
     "use-debounce": "^10.0.0",
     "uuid": "^9.0.1",
+    "youtubei.js": "^9.3.0",
     "ytdl-core": "git+https://lovegaoshi@github.com/lovegaoshi/node-ytdl-core.git",
     "zustand": "^4.5.2"
   },
@@ -110,6 +111,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.24.4",
+    "@babel/plugin-syntax-import-attributes": "^7.24.1",
     "@babel/preset-env": "^7.24.4",
     "@babel/preset-typescript": "^7.24.1",
     "@babel/runtime": "^7.24.4",
