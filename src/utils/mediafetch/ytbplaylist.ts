@@ -29,7 +29,7 @@ const musePlaylistItemToNoxSong = (val: any, data: any) => {
   }
 };
 
-const fetchInnerTunePlaylist = async (
+export const fetchInnerTunePlaylist = async (
   playlistId: string,
   favList: string[] = []
 ): Promise<NoxMedia.Song[]> => {

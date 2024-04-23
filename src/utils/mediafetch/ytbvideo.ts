@@ -17,7 +17,7 @@ import SongTS from '@objects/Song';
 import { logger } from '../Logger';
 import { Source } from '@enums/MediaFetch';
 
-export const CIDPREFIX = 'youtube-';
+export const CIDPREFIX = `${Source.ytbvideo}-`;
 
 const resolveIOSURL = (formats: ytdl.videoFormat[]) => {
   // iOS can't play OGG, but mp4a is fine.
@@ -269,6 +269,7 @@ export default {
   regexSearchMatch: /youtu(?:.*\/v\/|.*v=|\.be\/)([A-Za-z0-9_-]{11})/,
   regexFetch,
   regexResolveURLMatch: /^youtube-/,
+  regexResolveURLMatch2: /^ytbvideo-/,
   resolveURL,
   refreshSong,
   suggest,

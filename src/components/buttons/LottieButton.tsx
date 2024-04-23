@@ -1,10 +1,9 @@
 import React, { useRef } from 'react';
-import { Pressable } from 'react-native';
+import { Pressable, ViewStyle } from 'react-native';
 import LottieView, { AnimationObject } from 'lottie-react-native';
 
 import { useNoxSetting } from '@stores/useApp';
 import ShadowedElement from './ShadowedElement';
-import { ViewStyle } from 'react-native-windows';
 
 interface Props {
   src: AnimationObject;
