@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState } from 'react';
-import Snackbar from 'react-native-snackbar';
 import { useTranslation } from 'react-i18next';
 import { Alert } from 'react-native';
 import { strFromU8, decompressSync } from 'fflate';
@@ -14,6 +13,7 @@ import {
 } from '@utils/ChromeStorage';
 import useInitializeStore from '@stores/initializeStores';
 import { StorageKeys } from '@enums/Storage';
+import useSnack from '@stores/useSnack';
 
 /**
  * this hook will handle all sync back from file operations. it will
@@ -23,6 +23,7 @@ import { StorageKeys } from '@enums/Storage';
  */
 const useSync = () => {
   const { t } = useTranslation();
+  const setSnack = useSnack(state => state.setSnack);
   const { initializeStores } = useInitializeStore();
   const [syncCheckVisible, setSyncCheckVisible] = useState(false);
   const [noxExtensionContent, setNoxExtensionContent] = useState<string[]>([]);
@@ -79,7 +80,7 @@ const useSync = () => {
     await addImportedPlaylist(checkedPlaylists);
     await initializeStores(await initPlayerObject());
     setSyncCheckVisible(false);
-    Snackbar.show({ text: t('Sync.DropboxDownloadSuccess') });
+    setSnack({ snackMsg: { success: t('Sync.DropboxDownloadSuccess') } });
   };
 
   const isSyncNoxExtension = (parsedContent: any) => {
@@ -92,9 +93,7 @@ const useSync = () => {
       parsedContent = JSON.parse(strFromU8(decompressSync(content)));
     } catch (error) {
       logger.error('parsed content is not a valid compressed JSON.');
-      Snackbar.show({
-        text: t('Sync.fileNotValidJson'),
-      });
+      setSnack({ snackMsg: { success: t('Sync.fileNotValidJson') } });
       return;
     }
     try {
@@ -107,9 +106,7 @@ const useSync = () => {
       }
     } catch (error) {
       logger.error(error);
-      Snackbar.show({
-        text: t('Sync.DropboxDownloadFail'),
-      });
+      setSnack({ snackMsg: { success: t('Sync.DropboxDownloadFail') } });
     }
   };
 

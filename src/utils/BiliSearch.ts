@@ -24,6 +24,7 @@ import bililiveFetch from './mediafetch/bililive';
 import bilisubliveFetch from './mediafetch/bilisublive';
 import localFetch from '@utils/mediafetch/local';
 import b23tvFetch from './mediafetch/b23tv';
+import headRequestFetch from './mediafetch/headRequest';
 import { regexFetchProps } from './mediafetch/generic';
 import { MUSICFREE, searcher } from './mediafetch/musicfree';
 import { getMusicFreePlugin } from '@utils/ChromeStorage';
@@ -96,29 +97,35 @@ export const searchBiliURLs = async ({
       results.refresh = matchRegex.refresh;
       progressEmitter(0);
       return results;
-    } // bilisearchFetch
-    switch (defaultSearch) {
-      case SearchOptions.YOUTUBE:
-        results = await ytbsearchFetch.regexFetch({
-          url: input,
-          progressEmitter,
-          fastSearch,
-          cookiedSearch,
-        });
-        break;
-      case MUSICFREE.aggregated:
-        results.songList = await searcher[MUSICFREE.aggregated](
-          input,
-          await getMusicFreePlugin()
-        );
-        break;
-      default:
-        results = await bilisearchFetch.regexFetch({
-          url: input,
-          progressEmitter,
-          fastSearch,
-          cookiedSearch,
-        });
+    }
+    const headRequestResult = await headRequestFetch.regexFetch(input);
+    if (headRequestResult) {
+      results.songList = [headRequestResult];
+    } else {
+      // bilisearchFetch
+      switch (defaultSearch) {
+        case SearchOptions.YOUTUBE:
+          results = await ytbsearchFetch.regexFetch({
+            url: input,
+            progressEmitter,
+            fastSearch,
+            cookiedSearch,
+          });
+          break;
+        case MUSICFREE.aggregated:
+          results.songList = await searcher[MUSICFREE.aggregated](
+            input,
+            await getMusicFreePlugin()
+          );
+          break;
+        default:
+          results = await bilisearchFetch.regexFetch({
+            url: input,
+            progressEmitter,
+            fastSearch,
+            cookiedSearch,
+          });
+      }
     }
   } catch (err) {
     logger.warn(err);

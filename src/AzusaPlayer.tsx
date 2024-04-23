@@ -21,6 +21,7 @@ import {
 import merge from 'deepmerge';
 import { useTranslation } from 'react-i18next';
 
+import SnackBar from './components/commonui/Snackbar';
 import Player from './components/player/View';
 import Playlist from './components/playlist/View';
 import PlayerBottomPanel from './components/player/controls/PlayerProgressControls';
@@ -150,6 +151,7 @@ const AzusaPlayer = () => {
           <NoxBottomTab navigation={navigation} />
         </View>
       </NavigationContainer>
+      <SnackBar />
     </PaperProvider>
   );
 };

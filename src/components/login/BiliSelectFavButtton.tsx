@@ -60,7 +60,7 @@ export default () => {
       )}
       <GenericCheckDialog
         visible={visible}
-        title="Check Dialog"
+        title={t('Login.SyncBiliFavlist')}
         options={favLists}
         onSubmit={onSubmit}
         onClose={() => hideDialog()}

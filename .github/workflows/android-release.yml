@@ -39,6 +39,9 @@ jobs:
         with:
           node-version: '18'
 
+      - name: Setup Yarn
+        uses: threeal/setup-yarn-action@v2.0.0
+
       - name: 'Create env file'
         run: |
           echo "${{ secrets.ENV_FILE }}" > .env
@@ -85,7 +88,7 @@ jobs:
         with:
           timeout_minutes: 10
           max_attempts: 10
-          command: yarn
+          command: yarn install; yarn postinstall
 
       - name: clean generated builds
         run: rm -rf android/app/build/generated/
@@ -141,6 +144,9 @@ jobs:
         with:
           node-version: '18'
 
+      - name: Setup Yarn
+        uses: threeal/setup-yarn-action@v2.0.0
+
       - name: 'Create env file'
         run: |
           echo "${{ secrets.ENV_FILE }}" > .env
@@ -191,7 +197,7 @@ jobs:
         with:
           timeout_minutes: 10
           max_attempts: 10
-          command: yarn
+          command: yarn install; yarn postinstall
 
       - name: clean generated builds
         run: rm -rf android/app/build/generated/
@@ -243,6 +249,9 @@ jobs:
         with:
           node-version: '18'
 
+      - name: Setup Yarn
+        uses: threeal/setup-yarn-action@v2.0.0
+
       - name: 'Create env file'
         run: |
           echo "${{ secrets.ENV_FILE }}" > .env
@@ -268,7 +277,7 @@ jobs:
         with:
           timeout_minutes: 10
           max_attempts: 10
-          command: yarn
+          command: yarn install; yarn postinstall
 
       - name: Pod Install
         run: cd ios && rm Podfile.lock && pod install --repo-update

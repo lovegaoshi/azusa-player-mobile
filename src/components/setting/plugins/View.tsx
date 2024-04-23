@@ -1,53 +1,40 @@
 import * as React from 'react';
 import { View, StyleSheet } from 'react-native';
 import { useTranslation } from 'react-i18next';
-import Snackbar from 'react-native-snackbar';
 
 import { useNoxSetting } from '@stores/useApp';
 import { SettingListItem } from '../useRenderSetting';
 import { saveRegextractMapping } from '@utils/ChromeStorage';
 import { downloadR128GainDB } from './r128gain/Sync';
-import logger from '@utils/Logger';
-import { showSnackbar } from '@utils/Snackbar';
+import useSnack from '@stores/useSnack';
 import MusicFreeButton from './MusicFreeButton';
 
-interface SnackbarMsg {
-  updating: string;
-  updated: string;
-  updateFail: string;
-}
-
-const updateFromGithub = async (msg: SnackbarMsg) => {
-  try {
-    Snackbar.show({
-      text: msg.updating,
-      duration: Snackbar.LENGTH_INDEFINITE,
-    });
-    const json = await (
-      await fetch(
-        'https://raw.githubusercontent.com/lovegaoshi/azusa-player-mobile/master/src/utils/rejson.json'
-      )
-    ).json();
-    saveRegextractMapping(json);
-    Snackbar.show({
-      text: msg.updated,
-    });
-  } catch (e) {
-    logger.error(e);
-    Snackbar.show({
-      text: msg.updateFail,
-    });
-  }
+const updateFromGithub = async () => {
+  const json = await (
+    await fetch(
+      'https://raw.githubusercontent.com/lovegaoshi/azusa-player-mobile/master/src/utils/rejson.json'
+    )
+  ).json();
+  saveRegextractMapping(json);
 };
 
 const PluginSettings = () => {
   const { t } = useTranslation();
   const playerStyle = useNoxSetting(state => state.playerStyle);
-  const snarbarMsg = (name: string) => ({
-    updating: t(`PluginSettings.Updating${name}FromGithub`),
-    updated: t(`PluginSettings.Updated${name}FromGithub`),
-    updateFail: t(`PluginSettings.UpdateFail${name}FromGithub`),
-  });
+  const setSnack = useSnack(state => state.setSnack);
+  const updateWithSnack = (
+    name: string,
+    processFunction: () => Promise<void>
+  ) => {
+    setSnack({
+      snackMsg: {
+        processing: t(`PluginSettings.Updating${name}FromGithub`),
+        success: t(`PluginSettings.Updated${name}FromGithub`),
+        fail: t(`PluginSettings.UpdateFail${name}FromGithub`),
+      },
+      processFunction,
+    });
+  };
 
   return (
     <View
@@ -59,13 +46,13 @@ const PluginSettings = () => {
       <SettingListItem
         icon={'regex'}
         settingName="RegExp"
-        onPress={() => updateFromGithub(snarbarMsg('RegExp'))}
+        onPress={() => updateWithSnack('RegExp', updateFromGithub)}
         settingCategory="PluginSettings"
       />
       <SettingListItem
         icon={'cloud-sync'}
         settingName="R128Gain"
-        onPress={() => showSnackbar(snarbarMsg('R128Gain'), downloadR128GainDB)}
+        onPress={() => updateWithSnack('R128Gain', downloadR128GainDB)}
         settingCategory="PluginSettings"
       />
       <MusicFreeButton />

@@ -14,6 +14,9 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Setup Yarn
+        uses: threeal/setup-yarn-action@v2.0.0
+
       - name: Install dependencies
         uses: nick-fields/retry@v3
         with:

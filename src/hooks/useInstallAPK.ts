@@ -1,16 +1,16 @@
 import RNFetchBlob from 'react-native-blob-util';
 import { useTranslation } from 'react-i18next';
-import Snackbar from 'react-native-snackbar';
+
+import useSnack from '../stores/useSnack';
 
 const android = RNFetchBlob.android;
 
 export default () => {
   const { t } = useTranslation();
+  const setSnack = useSnack(state => state.setSnack);
 
   const RNFetchDownloadAPK = async (url: string) => {
-    Snackbar.show({
-      text: t('VersionUpdate.DownloadingAPK'),
-    });
+    setSnack({ snackMsg: { success: t('VersionUpdate.DownloadingAPK') } });
     await RNFetchBlob.config({
       addAndroidDownloads: {
         useDownloadManager: true, // <-- this is the only thing required
@@ -23,9 +23,7 @@ export default () => {
     })
       .fetch('GET', url)
       .then(res => {
-        Snackbar.show({
-          text: t('VersionUpdate.DownloadedAPK'),
-        });
+        setSnack({ snackMsg: { success: t('VersionUpdate.DownloadedAPK') } });
         android.actionViewIntent(
           res.path(),
           'application/vnd.android.package-archive'

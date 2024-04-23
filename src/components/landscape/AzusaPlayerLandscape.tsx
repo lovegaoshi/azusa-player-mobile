@@ -19,6 +19,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import LandscapePlayerPanel from './LandscapePlayerPanel';
 import LandscapeActions from './LandscapeActions';
 import LandscapePlaylistPanel from './LandscapePlaylistPanel';
+import SnackBar from '../commonui/Snackbar';
 
 const { LightTheme, DarkTheme } = adaptNavigationTheme({
   reactNavigationLight: NavigationDefaultTheme,
@@ -72,6 +73,7 @@ const AzusaPlayer = () => {
           <LandscapePlaylistPanel panelWidth={width / 2} />
         </View>
       </NavigationContainer>
+      <SnackBar />
     </PaperProvider>
   );
 };

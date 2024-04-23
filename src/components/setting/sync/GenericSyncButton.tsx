@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useState } from 'react';
-import Snackbar from 'react-native-snackbar';
 import { View, StyleSheet } from 'react-native';
 import { ActivityIndicator, IconButton } from 'react-native-paper';
 import { useTranslation } from 'react-i18next';
@@ -9,6 +8,7 @@ import { activateKeepAwakeAsync, deactivateKeepAwake } from 'expo-keep-awake';
 import { logger } from '@utils/Logger';
 import { exportPlayerContent } from '@utils/ChromeStorage';
 import { ImportProps, ExportProps, Props } from './GenericSyncProps';
+import useSnack from '@stores/useSnack';
 
 const ImportSyncFavButton = ({
   restoreFromUint8Array,
@@ -16,11 +16,12 @@ const ImportSyncFavButton = ({
   login,
 }: ImportProps) => {
   const { t } = useTranslation();
+  const setSnack = useSnack(state => state.setSnack);
   const [loading, setLoading] = useState(false);
 
   const errorHandling = (e: Error, msg = t('Sync.DropboxDownloadFail')) => {
     logger.error(e);
-    Snackbar.show({ text: msg });
+    setSnack({ snackMsg: { success: msg } });
     setLoading(false);
   };
 
@@ -29,7 +30,7 @@ const ImportSyncFavButton = ({
     const response = await noxRestore();
     if (response !== null) {
       await restoreFromUint8Array(response);
-      Snackbar.show({ text: t('Sync.DropboxDownloadSuccess') });
+      setSnack({ snackMsg: { success: t('Sync.DropboxDownloadSuccess') } });
     } else {
       errorHandling(
         new Error(String(t('Sync.DropboxDownloadFail'))),
@@ -61,6 +62,7 @@ const ImportSyncFavButton = ({
 
 const ExportSyncFavButton = ({ noxBackup, login }: ExportProps) => {
   const { t } = useTranslation();
+  const setSnack = useSnack(state => state.setSnack);
   const [loading, setLoading] = useState(false);
 
   const errorHandling = (
@@ -68,7 +70,7 @@ const ExportSyncFavButton = ({ noxBackup, login }: ExportProps) => {
     msg = String(t('Sync.DropboxUploadFailSnackbar'))
   ) => {
     logger.error(e);
-    Snackbar.show({ text: msg });
+    setSnack({ snackMsg: { success: msg } });
     setLoading(false);
   };
 
@@ -77,7 +79,7 @@ const ExportSyncFavButton = ({ noxBackup, login }: ExportProps) => {
     const exportedDict = await exportPlayerContent();
     const response = await noxBackup(exportedDict);
     if ([200, 201].includes(response.status)) {
-      Snackbar.show({ text: t('Sync.DropboxUploadSuccess') });
+      setSnack({ snackMsg: { success: t('Sync.DropboxUploadSuccess') } });
     } else {
       errorHandling(new Error(String(response.status)));
     }

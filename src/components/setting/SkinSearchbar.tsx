@@ -2,10 +2,10 @@
 import React, { useState } from 'react';
 import { Searchbar, ProgressBar } from 'react-native-paper';
 import { View, StyleSheet } from 'react-native';
-import Snackbar from 'react-native-snackbar';
 import { useTranslation } from 'react-i18next';
 
 import { useNoxSetting } from '@stores/useApp';
+import useSnack from '@stores/useSnack';
 
 interface props {
   onSearched: (val: any) => void;
@@ -14,6 +14,7 @@ const CustomSkinSearch = ({
   onSearched = (vals: any) => console.log(vals),
 }: props) => {
   const { t } = useTranslation();
+  const setSnack = useSnack(state => state.setSnack);
   const [searchVal, setSearchVal] = useState(
     'https://raw.githubusercontent.com/lovegaoshi/azusa-player-mobile/master/src/components/styles/steria.json'
   );
@@ -26,7 +27,9 @@ const CustomSkinSearch = ({
       const searchedResult = await (await fetch(val)).json();
       onSearched(searchedResult);
     } catch {
-      Snackbar.show({ text: t('CustomSkin.SearchFailMsg') });
+      setSnack({
+        snackMsg: { success: t('CustomSkin.SearchFailMsg') },
+      });
     } finally {
       progressEmitter(0);
     }
