@@ -25,6 +25,7 @@ import bilisubliveFetch from './mediafetch/bilisublive';
 import localFetch from '@utils/mediafetch/local';
 import b23tvFetch from './mediafetch/b23tv';
 import headRequestFetch from './mediafetch/headRequest';
+import biliFavColleFetch from './mediafetch/biliFavColle';
 import { regexFetchProps } from './mediafetch/generic';
 import { MUSICFREE, searcher } from './mediafetch/musicfree';
 import { getMusicFreePlugin } from '@utils/ChromeStorage';
@@ -141,6 +142,10 @@ interface ReExtraction<T> {
 }
 
 const reExtractions: ReExtraction<NoxNetwork.NoxRegexFetch>[] = [
+  {
+    match: biliFavColleFetch.regexSearchMatch,
+    fetch: biliFavColleFetch.regexFetch,
+  },
   {
     match: biliVideoSimilarFetch.regexSearchMatch,
     fetch: biliVideoSimilarFetch.regexFetch,
