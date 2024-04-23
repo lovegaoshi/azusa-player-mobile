@@ -18,7 +18,6 @@ const URL_BILICOLLE_INFO =
   'https://api.bilibili.com/x/space/fav/season/list?season_id={sid}&pn={pn}&ps=100';
 
 const fetchBiliColleList = async (
-  mid: string,
   sid: string,
   progressEmitter: (val: number) => void = () => undefined,
   favList: string[] = []
@@ -42,12 +41,7 @@ const regexFetch = async ({
   useBiliTag,
 }: regexFetchProps): Promise<NoxNetwork.NoxRegexFetch> => ({
   songList: await biliShazamOnSonglist(
-    await fetchBiliColleList(
-      reExtracted[1]!,
-      reExtracted[2]!,
-      progressEmitter,
-      favList
-    ),
+    await fetchBiliColleList(reExtracted[1]!, progressEmitter, favList),
     false,
     progressEmitter,
     useBiliTag || false
