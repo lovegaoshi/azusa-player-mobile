@@ -5506,7 +5506,7 @@ __metadata:
     prettier: "npm:^3.2.5"
     qs: "npm:^6.12.1"
     react: "npm:18.2.0"
-    react-i18next: "npm:^14.1.0"
+    react-i18next: "npm:^14.1.1"
     react-native: "npm:0.73.7"
     react-native-app-auth: "npm:^7.1.3"
     react-native-background-timer: "git+https://github.com/lovegaoshi/react-native-background-timer.git"
@@ -5518,16 +5518,16 @@ __metadata:
     react-native-gesture-handler: "npm:2.16.0"
     react-native-get-random-values: "npm:^1.11.0"
     react-native-lyric: "git+https://github.com/lovegaoshi/react-native-lyric.git#dev"
-    react-native-pager-view: "npm:^6.3.0"
+    react-native-pager-view: "npm:^6.3.1"
     react-native-paper: "npm:^5.12.3"
     react-native-qrcode-svg: "npm:^6.3.0"
     react-native-reanimated: "npm:^3.8.1"
-    react-native-safe-area-context: "npm:^4.9.0"
+    react-native-safe-area-context: "npm:^4.10.1"
     react-native-screens: "npm:3.29.0"
     react-native-shadow-2: "npm:^7.0.8"
     react-native-share-menu: "git+https://github.com/lovegaoshi/react-native-share-menu.git"
-    react-native-svg: "npm:^15.1.0"
-    react-native-svga-player: "git+https://lovegaoshi@github.com/lovegaoshi/react-native-svga-player.git"
+    react-native-svg: "npm:^15.2.0"
+    react-native-svga-player: "https://lovegaoshi@github.com/lovegaoshi/react-native-svga-player.git#commit=588c9a2819cb2fe14dd7204addaeadd4bf049333"
     react-native-tab-view: "npm:^3.5.2"
     react-native-text-ticker: "git+https://lovegaoshi@github.com/lovegaoshi/react-native-text-ticker.git"
     react-native-track-player: "git+https://lovegaoshi@github.com/lovegaoshi/react-native-track-player.git#APM"
@@ -13843,9 +13843,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-i18next@npm:^14.1.0":
-  version: 14.1.0
-  resolution: "react-i18next@npm:14.1.0"
+"react-i18next@npm:^14.1.1":
+  version: 14.1.1
+  resolution: "react-i18next@npm:14.1.1"
   dependencies:
     "@babel/runtime": "npm:^7.23.9"
     html-parse-stringify: "npm:^3.0.1"
@@ -13857,7 +13857,7 @@ __metadata:
       optional: true
     react-native:
       optional: true
-  checksum: 10c0/d3e2d1e5183068a7a23f2fefc432d61546baef0afef176929a1a7b33489e5b3a2a892745a4424327c4bd3ab02ee3a6a4e450b57c2598393032a1efdbe57f8841
+  checksum: 10c0/d6da148d5dd1635f57d7a85bdd5c6e1f1404982112358a5efa9f6f47d505a00e4650237d5fc94b4381dcb336c134d500268a7157e06e2b2f0293a2bcd7ec2812
   languageName: node
   linkType: hard
 
@@ -14015,13 +14015,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-native-pager-view@npm:^6.3.0":
-  version: 6.3.0
-  resolution: "react-native-pager-view@npm:6.3.0"
+"react-native-pager-view@npm:^6.3.1":
+  version: 6.3.1
+  resolution: "react-native-pager-view@npm:6.3.1"
   peerDependencies:
     react: "*"
     react-native: "*"
-  checksum: 10c0/4b159080e3771bf1c9aa600521f53fdd4a7082ac94c63e6985f778e00280f0a7c777c822f5fdb2ddf55f1630194290f1051b1d30b9a969528dfd522953fb5e74
+  checksum: 10c0/eecdf17d91545390222eaafb13e722bf9e53cf9835bd84e9dd4d5f73890cc8425cef7c38471f86959f0faafda8c3ce12ffcd9b39194070419b93dcc4ec60af15
   languageName: node
   linkType: hard
 
@@ -14075,13 +14075,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-native-safe-area-context@npm:^4.9.0":
-  version: 4.9.0
-  resolution: "react-native-safe-area-context@npm:4.9.0"
+"react-native-safe-area-context@npm:^4.10.1":
+  version: 4.10.1
+  resolution: "react-native-safe-area-context@npm:4.10.1"
   peerDependencies:
     react: "*"
     react-native: "*"
-  checksum: 10c0/27bb6b759d4d36f39e4a4a2d7e4d65f2e4e95175fc9ffeac63249680da54fd4cd0a4da064314d9ce579182200327967447da17cf8ea31badbaa4087de3302f42
+  checksum: 10c0/4d9210f68535d90200a03e18015053f1bd72d6cb562866716d7a206e64956bd0d5fb022788f1882144193c554866e04a0a68c90600ca8c982ab3ab546a68c198
   languageName: node
   linkType: hard
 
@@ -14117,22 +14117,22 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-native-svg@npm:^15.1.0":
-  version: 15.1.0
-  resolution: "react-native-svg@npm:15.1.0"
+"react-native-svg@npm:^15.2.0":
+  version: 15.2.0
+  resolution: "react-native-svg@npm:15.2.0"
   dependencies:
     css-select: "npm:^5.1.0"
     css-tree: "npm:^1.1.3"
   peerDependencies:
     react: "*"
     react-native: "*"
-  checksum: 10c0/7f94bf59fba7f9b7181b425afe367742172991e78303add5713d29dd972a6ba8a5cabd66bc340439c0067d5ac4c929af740446a513150de91d4a0c3457ed630d
+  checksum: 10c0/9b979dbf101ee3131c606c7960f1bc8c49b3f0acb42b394e9b89f33b853e20765d93844178ad545747e73b2ffd5654d6e486daf86987865983913c46d31bb2c8
   languageName: node
   linkType: hard
 
-"react-native-svga-player@git+https://lovegaoshi@github.com/lovegaoshi/react-native-svga-player.git":
+"react-native-svga-player@https://lovegaoshi@github.com/lovegaoshi/react-native-svga-player.git#commit=588c9a2819cb2fe14dd7204addaeadd4bf049333":
   version: 1.1.0
-  resolution: "react-native-svga-player@https://lovegaoshi@github.com/lovegaoshi/react-native-svga-player.git#commit=0f5e03b1acd0297340eaff467f143f3ddfc85b96"
+  resolution: "react-native-svga-player@https://lovegaoshi@github.com/lovegaoshi/react-native-svga-player.git#commit=588c9a2819cb2fe14dd7204addaeadd4bf049333"
   dependencies:
     "@types/react": "npm:^16.9.19"
     "@types/react-native": "npm:^0.61.15"
@@ -14140,7 +14140,7 @@ __metadata:
   peerDependencies:
     react: ^16.8.1
     react-native: ">=0.60.0-rc.0 <1.0.x"
-  checksum: 10c0/8dd82318450a98ab324eda827e15b7394952f313332795e70363a214d2be3e7559875915d31c55b0e4eaa4efe603f185e3099be7d443661a0e7a9ab9f8bdd6c4
+  checksum: 10c0/8330bc4505680983cfe45594dbb3aa8f8ee6e7bcef02e160c9240be13f3ee758afb52348b6d8d37ae21a270337f03284ea3aef356e030429998c7a55f4225c7f
   languageName: node
   linkType: hard
 
