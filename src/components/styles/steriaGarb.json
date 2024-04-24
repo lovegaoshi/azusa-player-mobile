@@ -2721,7 +2721,11 @@
     ],
     "backgroundImagesLandscape": [
       "https://article.biliimg.com/bfs/article/75411f4029f31ef369f2f2d187d0ee493493085134719196.jpg",
-      "https://article.biliimg.com/bfs/article/ba7b41f98883526710ae627bcfbb4e3a3493085134719196.jpg"
+      "https://article.biliimg.com/bfs/article/ba7b41f98883526710ae627bcfbb4e3a3493085134719196.jpg",
+      {
+        "type": "bvid",
+        "identifier": "BV17p421S7nH"
+      }
     ],
     "customColors": {
       "maskedBackgroundColor": "rgba(0, 0, 0, 0.30)",
