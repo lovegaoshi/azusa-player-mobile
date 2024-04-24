@@ -1477,6 +1477,9 @@
         "type": "biliNFTVideo",
         "identifier": "[\"100531\",0]"
       },
+      "https://i0.hdslb.com/bfs/new_dyn/a7cfdbfb362358fcae354e2a79580c4d314866683.jpg",
+      "https://i0.hdslb.com/bfs/new_dyn/198ba3fdaaf24991e96873cdc08ead5c314866683.png",
+      "https://i0.hdslb.com/bfs/new_dyn/c3ff0ea1460c6c0ed1051677e6f994a85705529.png",
       "https://album.biliimg.com/bfs/new_dyn/88a06b574008722507a486f0bad9a8171765608056.jpg",
       "https://i0.hdslb.com/bfs/new_dyn/02ba22f239ffd79ad27d3fe59d9498d6280766.jpg",
       "https://i0.hdslb.com/bfs/garb/open/7988dba60d2636ef492357946e4f8cc7fc256266.png",
@@ -1485,6 +1488,12 @@
       "https://i0.hdslb.com/bfs/garb/open/f65052988abfa011646222bd317a090ce451b76a.png",
       "https://i0.hdslb.com/bfs/garb/open/b5e0937b0f563c2c7ddce1aceb64bc205b1b3649.png",
       "https://i0.hdslb.com/bfs/garb/open/b4a3bc3301cf23bc7d3adebdba8e8b2f6ced3ad2.png"
+    ],
+    "backgroundImagesLandscape": [
+      {
+        "type": "bvid",
+        "identifier": "BV17p421S7nH"
+      }
     ],
     "customColors": {
       "maskedBackgroundColor": "rgba(0, 0, 0, 0.10)",
