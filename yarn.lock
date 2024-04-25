@@ -5118,6 +5118,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"apisauce@npm:^2.1.1":
+  version: 2.1.6
+  resolution: "apisauce@npm:2.1.6"
+  dependencies:
+    axios: "npm:^0.21.4"
+  checksum: 10c0/b4fbc478da3eb57d611346a70a7f35c0b9aff1e24472e1c069db38a32921a4022c7257310f84a41f580a1708013e3acd8d9c9f6b5319182ef0096d9a421481e2
+  languageName: node
+  linkType: hard
+
 "appdirsjs@npm:^1.2.4":
   version: 1.2.7
   resolution: "appdirsjs@npm:1.2.7"
@@ -5406,6 +5415,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"axios@npm:^0.21.4":
+  version: 0.21.4
+  resolution: "axios@npm:0.21.4"
+  dependencies:
+    follow-redirects: "npm:^1.14.0"
+  checksum: 10c0/fbcff55ec68f71f02d3773d467db2fcecdf04e749826c82c2427a232f9eba63242150a05f15af9ef15818352b814257541155de0281f8fb2b7e8a5b79f7f2142
+  languageName: node
+  linkType: hard
+
 "axios@npm:^1.6.8":
   version: 1.6.8
   resolution: "axios@npm:1.6.8"
@@ -5513,6 +5531,7 @@ __metadata:
     react-native-blob-jsi-helper: "npm:^0.3.1"
     react-native-blob-util: "npm:^0.19.9"
     react-native-clean-project: "npm:^4.0.3"
+    react-native-device-info: "npm:^10.13.2"
     react-native-dotenv: "npm:^3.4.11"
     react-native-draggable-flatlist: "npm:^4.0.1"
     react-native-gesture-handler: "npm:2.16.0"
@@ -5538,6 +5557,7 @@ __metadata:
     react-test-renderer: "npm:18.2.0"
     reactotron-react-native: "npm:^5.1.6"
     rimraf: "npm:^5.0.5"
+    sp-react-native-in-app-updates: "npm:^1.4.0"
     typescript: "npm:5.4.5"
     use-debounce: "npm:^10.0.0"
     uuid: "npm:^9.0.1"
@@ -9024,7 +9044,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"follow-redirects@npm:^1.15.6":
+"follow-redirects@npm:^1.14.0, follow-redirects@npm:^1.15.6":
   version: 1.15.6
   resolution: "follow-redirects@npm:1.15.6"
   peerDependenciesMeta:
@@ -13942,6 +13962,31 @@ __metadata:
   languageName: node
   linkType: hard
 
+"react-native-device-info@npm:10.3.0":
+  version: 10.3.0
+  resolution: "react-native-device-info@npm:10.3.0"
+  peerDependencies:
+    react-native: "*"
+  checksum: 10c0/7f10a0e50762e795a8263aafa9fe0822559e3bbf40d9f5aec6e71575739fa5460c8c4a90f18cf50de475f4f9b7d572a8140e985c2674354e15c80099b6ff379c
+  languageName: node
+  linkType: hard
+
+"react-native-device-info@npm:^0.9.3":
+  version: 0.9.9
+  resolution: "react-native-device-info@npm:0.9.9"
+  checksum: 10c0/3465cba4b13622fc5488d1d6563f9f55af57fa309fdd8c9de9968c67233181d53f08a9d4f60839c56bfa9e2fdf35de15d5d393663d83b14578c00441ecc24928
+  languageName: node
+  linkType: hard
+
+"react-native-device-info@npm:^10.13.2":
+  version: 10.13.2
+  resolution: "react-native-device-info@npm:10.13.2"
+  peerDependencies:
+    react-native: "*"
+  checksum: 10c0/84f399867d8483ec9b29c9055c5143351b7154d0fc83a5f1f764f931dfd7cd20b30b8e2a2f0b03216fb6ff6bb5705bbf807139b49ec429db4d7034d45d84ff5c
+  languageName: node
+  linkType: hard
+
 "react-native-dotenv@npm:^3.4.11":
   version: 3.4.11
   resolution: "react-native-dotenv@npm:3.4.11"
@@ -14114,6 +14159,16 @@ __metadata:
   version: 6.0.0
   resolution: "react-native-share-menu@https://github.com/lovegaoshi/react-native-share-menu.git#commit=de41a0e5aa574d9674d0677f17d1560dcf4cc04e"
   checksum: 10c0/6e31ca8f4088d0730e07df29cb89a96e93d02dd9824992a15d9ce69c7d20a66d059111aece94e8011cad2edd5d0b189604c630bdaa93c64be7e0ad131203a364
+  languageName: node
+  linkType: hard
+
+"react-native-siren@npm:0.0.5":
+  version: 0.0.5
+  resolution: "react-native-siren@npm:0.0.5"
+  dependencies:
+    apisauce: "npm:^2.1.1"
+    react-native-device-info: "npm:^0.9.3"
+  checksum: 10c0/2a240c3c58e1ca5394070f09d3c2aaacc389ece5a38753aa1a8c2e281ebf468409727e82e89f21b795d54dbc63c20a9e84fef4f17461954f5c2ce8aaafbea36b
   languageName: node
   linkType: hard
 
@@ -15081,6 +15136,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"semver@npm:7.2.1":
+  version: 7.2.1
+  resolution: "semver@npm:7.2.1"
+  bin:
+    semver: bin/semver.js
+  checksum: 10c0/db161579f627aee1f9b6193fee433e482994b1bcb8421aa346b098c44f9edb6ff6cbd948f89b2a125b1a2ec81a1d0b1b15bb680e50d1751e0d3f45b29a17f484
+  languageName: node
+  linkType: hard
+
 "semver@npm:7.3.2":
   version: 7.3.2
   resolution: "semver@npm:7.3.2"
@@ -15482,6 +15546,21 @@ __metadata:
   version: 0.7.4
   resolution: "source-map@npm:0.7.4"
   checksum: 10c0/dc0cf3768fe23c345ea8760487f8c97ef6fca8a73c83cd7c9bf2fde8bc2c34adb9c0824d6feb14bc4f9e37fb522e18af621543f1289038a66ac7586da29aa7dc
+  languageName: node
+  linkType: hard
+
+"sp-react-native-in-app-updates@npm:^1.4.0":
+  version: 1.4.0
+  resolution: "sp-react-native-in-app-updates@npm:1.4.0"
+  dependencies:
+    react-native-device-info: "npm:10.3.0"
+    react-native-siren: "npm:0.0.5"
+    semver: "npm:7.2.1"
+    underscore: "npm:1.12.1"
+  peerDependencies:
+    react: "*"
+    react-native: "*"
+  checksum: 10c0/dedf48e81367c31296f58b035408d599bb5f3db1d2b1f0a095a7c2516f2d54b98418ee39b7703e02347113aa50ad420a4aa5a80c482c78c16c98c8e68bbb19c9
   languageName: node
   linkType: hard
 
@@ -16452,6 +16531,13 @@ __metadata:
     has-symbols: "npm:^1.0.3"
     which-boxed-primitive: "npm:^1.0.2"
   checksum: 10c0/81ca2e81134167cc8f75fa79fbcc8a94379d6c61de67090986a2273850989dd3bae8440c163121b77434b68263e34787a675cbdcb34bb2f764c6b9c843a11b66
+  languageName: node
+  linkType: hard
+
+"underscore@npm:1.12.1":
+  version: 1.12.1
+  resolution: "underscore@npm:1.12.1"
+  checksum: 10c0/00f392357e363353ac485e7c156b749505087e31ff4fdad22e04ebd2f94a56fbc554cd41a6722e3895a818466cf298b1cae93ff6211d102d373a9b50db63bfd0
   languageName: node
   linkType: hard
 

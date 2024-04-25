@@ -12,6 +12,7 @@ import { songlistToTracklist } from '@utils/RNTPUtils';
 import useInitializeStore from '@stores/initializeStores';
 import { IntentData } from '@enums/Intent';
 import { useNoxSetting } from '@stores/useApp';
+import usePlayStore from './usePlayStore';
 
 const { NoxAndroidAutoModule } = NativeModules;
 
@@ -21,6 +22,7 @@ export default ({ intentData }: NoxComponent.AppProps) => {
   const { updateVersion, checkVersion } = useVersionCheck();
   const setIntentData = useNoxSetting(state => state.setIntentData);
   const { i18n } = useTranslation();
+  const { checkPlayStoreUpdates } = usePlayStore();
 
   useEffect(() => {
     let unmounted = false;
@@ -53,6 +55,7 @@ export default ({ intentData }: NoxComponent.AppProps) => {
       if (unmounted) return;
       setPlayerReady(true);
       if (unmounted) return;
+      checkPlayStoreUpdates();
       const currentQueue = getCurrentTPQueue();
       const findCurrentSong = currentQueue.find(
         val => val.id === currentPlayingID
