@@ -28,6 +28,7 @@ if (TRACKING) {
       /Failed to delete /,
       'Cannot convert undefined value to object',
       'no audio url',
+      'com.google.android.play.core.appupdate.internal.zzy',
     ],
   });
 }
