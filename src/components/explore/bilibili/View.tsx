@@ -56,6 +56,7 @@ export default () => {
         <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
       }
     >
+      <BiliSongsTabCard songs={biliRanking} title={t('BiliCategory.ranking')} />
       <Text style={{ fontSize: 20, paddingLeft: 5, paddingBottom: 10 }}>
         {t('BiliCategory.dynamic')}
       </Text>
@@ -70,7 +71,6 @@ export default () => {
         songs={biliMusicTop}
         title={t('BiliCategory.top')}
       />
-      <BiliSongsTabCard songs={biliRanking} title={t('BiliCategory.ranking')} />
     </ScrollView>
   );
 };

@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
 import { Menu, Checkbox, Text } from 'react-native-paper';
 import { useTranslation } from 'react-i18next';
+import { View, StyleSheet } from 'react-native';
 
 import Dialog from '@components/dialogs/GenericSelectDialog';
 import { SortOptions } from '@enums/Playlist';
-import { StyleSheet } from 'react-native-windows';
-import { View } from 'react-native';
 
 const ICON = 'sort';
 

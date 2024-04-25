@@ -28,6 +28,12 @@ module.exports = api => {
           },
         ],
         'react-native-reanimated/plugin',
+        [
+          '@babel/plugin-syntax-import-attributes',
+          {
+            deprecatedAssertSyntax: true,
+          },
+        ],
       ],
     };
   }

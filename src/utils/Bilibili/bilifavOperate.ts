@@ -120,7 +120,7 @@ export const syncFavlist = async (
   const uniqBVIDs = getPlaylistUniqBVIDs(favlist);
   await addToBiliFavlist(
     favid,
-    uniqBVIDs.filter(val => val.startsWith('BV')),
+    uniqBVIDs.filter(val => val.startsWith('BV')).reverse(),
     progressEmitter
   );
   return true;

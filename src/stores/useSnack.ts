@@ -27,7 +27,7 @@ export enum SnackType {
   Processing = 'processing',
 }
 
-export default create<NoxSnack>(set => ({
+export default create<NoxSnack>((set, get) => ({
   snackMsg: 'The quick brown fox jumps over the lazy dog.',
   snackVisible: false,
   snackType: SnackType.Success,
@@ -44,6 +44,10 @@ export default create<NoxSnack>(set => ({
     callback,
     processFunction,
   }) => {
+    if (get().snackVisible) {
+      set({ snackVisible: false });
+      await new Promise(resolve => setTimeout(resolve, 100));
+    }
     if (processFunction) {
       set({
         snackMsg: snackMsg.processing || 'processing...',

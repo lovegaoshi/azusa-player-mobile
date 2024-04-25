@@ -9,8 +9,8 @@ const API =
 
 const topToSong = (data: any) =>
   SongTS({
-    cid: `null-${data.mv_bvid}`,
-    bvid: data.mv_bvid,
+    cid: `null-${data.creation_bvid}`,
+    bvid: data.creation_bvid,
     name: data.creation_title,
     nameRaw: data.creation_title,
     singer: data.creation_nickname,
@@ -18,7 +18,7 @@ const topToSong = (data: any) =>
     cover: data.creation_cover,
     lyric: '',
     page: 1,
-    duration: data.creation_title,
+    duration: data.creation_duration,
     album: data.creation_title,
     source: Source.bilivideo,
   });

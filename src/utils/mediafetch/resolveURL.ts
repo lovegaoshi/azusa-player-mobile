@@ -37,6 +37,7 @@ export const fetchPlayUrlPromise = async (
     [steriatkFetch.regexResolveURLMatch, steriatkFetch.resolveURL],
     [biliaudioFetch.regexResolveURLMatch, biliaudioFetch.resolveURL],
     [ytbvideoFetch.regexResolveURLMatch, ytbvideoFetch.resolveURL],
+    [ytbvideoFetch.regexResolveURLMatch2, ytbvideoFetch.resolveURL],
     [bililiveFetch.regexResolveURLMatch, bililiveFetch.resolveURL],
     [biliBangumiFetch.regexResolveURLMatch, biliBangumiFetch.resolveURL],
     [localFetch.regexResolveURLMatch, localFetch.resolveURL],

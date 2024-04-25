@@ -8,6 +8,8 @@ const esModules = [
   'decode-uri-component',
   'libmuse',
   'lodash',
+  'youtubei',
+  'jintr',
 ].join('|');
 
 const config = {

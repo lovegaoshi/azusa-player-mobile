@@ -1,60 +1,41 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-import { get_playlist } from 'libmuse';
+import { get_channel } from 'libmuse';
+import { Innertube } from 'youtubei.js';
 
 import { regexFetchProps } from './generic';
-import { CIDPREFIX } from './ytbvideo';
-import SongTS from '@objects/Song';
-import { Source } from '@enums/MediaFetch';
+import { fetchInnerTunePlaylist } from './ytbplaylist';
+import { fetchAudioInfo } from './ytbvideo';
+import bfetch from '@utils/BiliFetch';
 
-const musePlaylistItemToNoxSong = (val: any, data: any) => {
-  try {
-    return SongTS({
-      cid: `${CIDPREFIX}-${val.videoId}`,
-      bvid: val.videoId,
-      name: val.title,
-      nameRaw: val.title,
-      singer: val.artists[0].name,
-      singerId: val.artists[0].id,
-      cover: val.thumbnails[0].url,
-      highresCover: val.thumbnails[val.thumbnails.length - 1].url,
-      lyric: '',
-      page: 1,
-      duration: val.duration_seconds,
-      album: data.title,
-      source: Source.ytbvideo,
-      metadataOnLoad: true,
-    });
-  } catch {
-    console.error(`[musePlaylistParse] fail: ${JSON.stringify(val)}`);
-  }
+const resolveYTChannelPlaylistId = async (channelUsername: string) => {
+  const res = await bfetch(`https://www.youtube.com/c/${channelUsername}`);
+  const text = await res.text();
+  return /meta property="og:url" content="https:\/\/www.youtube.com\/channel\/(.+)"><meta property="og\:image" content="h/.exec(
+    text
+  )?.[1];
 };
 
-const fetchInnerTunePlaylist = async (
-  playlistId: string,
-  favList: string[] = []
-): Promise<NoxMedia.Song[]> => {
-  const stopAfter = (val: any[]) => {
-    for (const song of val) {
-      const songID = song.videoId;
-      if (favList.includes(songID)) {
-        return true;
-      }
-    }
-    return false;
+export const fetchYTIChannel = async (channelName: string) => {
+  const channelId = await resolveYTChannelPlaylistId(channelName);
+  if (!channelId) return { songList: [] };
+  const yt = await Innertube.create();
+  console.log(await (await yt.getChannel(channelId)).getVideos());
+};
+
+export const fetchInnerTuneChannel = async (
+  channelName: string
+): Promise<NoxNetwork.NoxRegexFetch> => {
+  let songList: NoxMedia.Song[] = [];
+  const channelId = await resolveYTChannelPlaylistId(channelName);
+  if (!channelId) return { songList };
+  const channelResults = await get_channel(channelId);
+  const channelVideos = channelResults.videos?.results.map(v => v.videoId);
+  if (!channelVideos) return { songList };
+  songList = (
+    await Promise.all(channelVideos.map(v => fetchAudioInfo(v)))
+  ).flat();
+  return {
+    songList,
   };
-  const playlistData = await get_playlist(
-    playlistId,
-    // TODO: fix libmuse that limit=0 retrieves all
-    { limit: 999 },
-    stopAfter
-  );
-  return playlistData.tracks
-    .flatMap(val =>
-      val && val.videoId && !favList.includes(val.videoId)
-        ? musePlaylistItemToNoxSong(val, playlistData)
-        : []
-    )
-    .filter((val): val is NoxMedia.Song => val !== undefined);
 };
 
 const regexFetch = async ({
