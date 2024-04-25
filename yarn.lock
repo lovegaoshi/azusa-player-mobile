@@ -5513,6 +5513,7 @@ __metadata:
     he: "npm:^1.2.0"
     i18next: "npm:^23.11.2"
     jest: "npm:^29.7.0"
+    js-base64: "npm:^3.7.7"
     libmuse: "git+https://github.com/lovegaoshi/muse.git#apm-release"
     lottie-react-native: "npm:^6.7.2"
     lru-cache: "npm:7.14.0"
@@ -11215,6 +11216,13 @@ __metadata:
   version: 1.1.0
   resolution: "join-component@npm:1.1.0"
   checksum: 10c0/7319cb1ca6ffc514d82ac1b965c4e6cd6bf852adec1e7833bd8613e17f4965e78e2653c8de75a1fe51d9a2cae36af3298008df4079cfd903ef3ecbd231fe11c1
+  languageName: node
+  linkType: hard
+
+"js-base64@npm:^3.7.7":
+  version: 3.7.7
+  resolution: "js-base64@npm:3.7.7"
+  checksum: 10c0/3c905a7e78b601e4751b5e710edd0d6d045ce2d23eb84c9df03515371e1b291edc72808dc91e081cb9855aef6758292a2407006f4608ec3705373dd8baf2f80f
   languageName: node
   linkType: hard
 

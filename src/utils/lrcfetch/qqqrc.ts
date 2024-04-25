@@ -1,5 +1,5 @@
 // https://github.com/bingaha/kugou-lrc
-import { decode as atob, encode as btoa } from 'base-64';
+import { decode as atob, encode as btoa } from 'js-base64';
 
 import bfetch from '@utils/BiliFetch';
 import { biliApiLimiter } from '@utils/mediafetch/throttle';
