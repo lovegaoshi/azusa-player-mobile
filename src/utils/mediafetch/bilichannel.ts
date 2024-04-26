@@ -24,7 +24,7 @@ export const fetchBiliChannelList = async (
   favList: string[] = []
 ) => {
   logger.info('calling fetchBiliChannelList');
-  const mid = /.*space.bilibili\.com\/(\d+)\/video.*/.exec(url)![1];
+  const mid = /.*space.bilibili\.com\/(\d+)(\/search)?\/video.*/.exec(url)![1];
   let searchAPI = URL_BILICHANNEL_INFO.replace('{mid}', mid!);
   const urlObj = new URL(url);
   const URLParams = new URLSearchParams(urlObj.search);
