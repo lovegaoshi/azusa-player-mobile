@@ -40,15 +40,12 @@ export const LoadJSONRegExtractors = (json: NoxRegExt.JSONExtractor[]) => {
  * @returns parsed songname.
  */
 export const extractSongName = (name: string) => {
-  const nameReg = /《.*》/; // For single-list BVID, we need to extract name from title
+  const nameReg = /《([^《.]*)》/; // For single-list BVID, we need to extract name from title
   const res = nameReg.exec(name);
-  if (res) {
-    return res.length > 0 ? res[0].substring(1, res[0].length - 1) : '';
-  } // Remove the brackets
+  return res ? res[1] : name; // Remove the brackets
 
   // var nameReg = /[ `!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/ // Check if name is just one string, no special chars
   // if(!nameReg.test(name))
-  return name;
 };
 
 /**
