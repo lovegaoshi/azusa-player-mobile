@@ -42,7 +42,7 @@ const parsedGarbData = {
     ? garbdata.suit_items.loading[0]?.properties?.loading_url
     : undefined,
   headmp4: garbdata.suit_items.skin[0].properties.head_myself_mp4_bg,
-  thumbupSVGA: garbdata.suit_items.thumbup[0].properties.image_ani,
+  thumbupSVGA: garbdata.suit_items.thumbup?.[0]?.properties?.image_ani,
   themeIcon: garbdata.fan_user.avatar,
 };
 
