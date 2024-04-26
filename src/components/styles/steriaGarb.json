@@ -2783,5 +2783,96 @@
     "playerControlIconContained": "contained",
     "thumbupSVGA": "https://i0.hdslb.com/bfs/garb/5a8843a0a257553be57b9a62060ca733e911aa4d.bin",
     "loadingIcon": "https://i0.hdslb.com/bfs/baselabs/op/e049aa500b7debc201249faee4ef17c3c8b1bb3d4f5d8cd8bc618409cd124597.webp"
+  },
+  {
+    "metaData": {
+      "themeName": "浅川玉乃收藏集",
+      "themeDesc": "【浅川玉乃收藏集】是哔哩哔哩携手浅川玉乃定制打造的个人数字集卡，其中的每张数字卡片都将拥有独特编号，大家一起来体验虚拟与现实的完美碰撞吧！",
+      "themeAuthor": "NoxAutoGen",
+      "themeIcon": "https://i0.hdslb.com/bfs/garb/2294da203b0078dea08240a1b4c5341e449f02e6.png",
+      "darkTheme": true
+    },
+    "gifs": [],
+    "backgroundImages": [
+      {
+        "type": "biliNFTVideo",
+        "identifier": "[\"101733\",\"午夜邂逅\"]"
+      },
+      {
+        "type": "biliNFTVideo",
+        "identifier": "[\"101733\",\"猫影霓虹\"]"
+      },
+      {
+        "type": "biliNFTVideo",
+        "identifier": "[\"101733\",\"甜梦蜜语\"]"
+      },
+      {
+        "type": "biliNFTVideo",
+        "identifier": "[\"101733\",\"情迷意向\"]"
+      },
+      "https://i0.hdslb.com/bfs/garb/open/4058eb5466e585bd430b5eaf781c09cc991ff15d.png",
+      "https://i0.hdslb.com/bfs/garb/open/94349a8d07166a9f613718aa23590ef419adb9c5.png",
+      "https://i0.hdslb.com/bfs/garb/open/5e1d61b5212dcddaf1346eb09cab1e058a2479f9.png",
+      "https://i0.hdslb.com/bfs/garb/open/71865beed0bf004362a710560963daa6bedabeba.png",
+      "https://i0.hdslb.com/bfs/garb/open/1a438d93c7789cb17b9aa50c3562f5804581c5be.png",
+      "https://i0.hdslb.com/bfs/garb/open/df5097272cf2fa2274d4135b5016ceb3e7aba6e1.png",
+      {
+        "type": "biliNFTVideo",
+        "identifier": "[\"101733\",\"放松一夏\"]"
+      }
+    ],
+    "customColors": {
+      "maskedBackgroundColor": "rgba(0, 0, 0, 0.60)",
+      "playlistDrawerBackgroundColor": "green",
+      "playlistDrawerBackgroundColorTransparent": "rgba(0, 255, 0, 0.35)",
+      "progressThumbTintColor": "rgb(235, 235, 0)",
+      "progressMinimumTrackTintColor": "rgb(235, 235, 0)",
+      "progressMaximumTrackTintColor": "#FFFFFF",
+      "btnBackgroundColor": "rgb(72, 71, 58)",
+      "textInputSelectionColor": "green"
+    },
+    "colors": {
+      "primary": "rgb(255, 255, 0)",
+      "onPrimary": "rgb(50, 50, 0)",
+      "primaryContainer": "rgb(73, 73, 0)",
+      "onPrimaryContainer": "rgb(234, 234, 0)",
+      "secondary": "rgb(202, 200, 165)",
+      "onSecondary": "rgb(50, 50, 24)",
+      "secondaryContainer": "rgb(73, 72, 45)",
+      "onSecondaryContainer": "rgb(231, 228, 191)",
+      "tertiary": "rgb(164, 208, 189)",
+      "onTertiary": "rgb(11, 55, 42)",
+      "tertiaryContainer": "rgb(37, 78, 64)",
+      "onTertiaryContainer": "rgb(191, 236, 216)",
+      "error": "rgb(255, 180, 171)",
+      "onError": "rgb(105, 0, 5)",
+      "errorContainer": "rgb(147, 0, 10)",
+      "onErrorContainer": "rgb(255, 180, 171)",
+      "background": "rgba(0,0,0, 0.4)",
+      "onBackground": "rgb(230, 226, 217)",
+      "surface": "rgb(28, 28, 23)",
+      "onSurface": "rgba(235, 235, 0, 1)",
+      "text": "rgb(255, 255, 0)",
+      "surfaceVariant": "rgb(10, 10, 10)",
+      "onSurfaceVariant": "rgb(225, 225, 0)",
+      "outline": "rgb(147, 145, 130)",
+      "outlineVariant": "rgb(72, 71, 58)",
+      "shadow": "rgb(0, 0, 0)",
+      "scrim": "rgb(0, 0, 0)",
+      "inverseSurface": "rgb(230, 226, 217)",
+      "inverseOnSurface": "rgb(49, 49, 43)",
+      "inversePrimary": "rgb(98, 98, 0)",
+      "elevation": {
+        "level0": "transparent",
+        "level1": "rgb(53, 56, 57)",
+        "level2": "rgb(10, 10, 10)",
+        "level3": "rgb(10, 10, 10)",
+        "level4": "rgb(49, 49, 20)",
+        "level5": "rgb(53, 53, 20)"
+      },
+      "surfaceDisabled": "rgba(230, 226, 217, 0.12)",
+      "onSurfaceDisabled": "rgba(230, 226, 217, 0.38)",
+      "backdrop": "rgba(49, 49, 37, 0.4)"
+    }
   }
 ]
