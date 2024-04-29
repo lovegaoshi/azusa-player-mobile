@@ -103,7 +103,7 @@ jobs:
         run: cd android && chmod +x gradlew && ./gradlew assembleRelease
 
       - name: Release APK
-        uses: softprops/action-gh-release@v1
+        uses: softprops/action-gh-release@v2
         with:
           name: 'Release ${{env.COMMIT_TAG}}'
           tag_name: '${{env.COMMIT_TAG}}'
@@ -298,7 +298,7 @@ jobs:
           zip -r APM.ipa Payload/
 
       - name: Release IPA
-        uses: softprops/action-gh-release@v1
+        uses: softprops/action-gh-release@v2
         with:
           name: 'Release ${{env.COMMIT_TAG}}'
           tag_name: '${{env.COMMIT_TAG}}'
