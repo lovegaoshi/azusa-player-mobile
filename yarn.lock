@@ -5543,7 +5543,7 @@ __metadata:
     react-native-qrcode-svg: "npm:^6.3.0"
     react-native-reanimated: "npm:^3.8.1"
     react-native-safe-area-context: "npm:^4.10.1"
-    react-native-screens: "npm:3.29.0"
+    react-native-screens: "npm:3.31.1"
     react-native-shadow-2: "npm:^7.0.8"
     react-native-share-menu: "git+https://github.com/lovegaoshi/react-native-share-menu.git"
     react-native-svg: "npm:^15.2.0"
@@ -14138,16 +14138,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-native-screens@npm:3.29.0":
-  version: 3.29.0
-  resolution: "react-native-screens@npm:3.29.0"
+"react-native-screens@npm:3.31.1":
+  version: 3.31.1
+  resolution: "react-native-screens@npm:3.31.1"
   dependencies:
     react-freeze: "npm:^1.0.0"
     warn-once: "npm:^0.1.0"
   peerDependencies:
     react: "*"
     react-native: "*"
-  checksum: 10c0/90c32eb5452007f64c2f56412c671de98b4b89f09cf09cc7a7dca1cb23b1ac6de9bc726c67e774c7cb68dbd05bb329c053c1c2f071f534ad4e27d9d60be76eb0
+  checksum: 10c0/899a02751ecbc6231ce3c869268fb510e5b53428c788135ae46f4bbd768efe78bf74f17fec5becc4c4c1e81a5f224a907dc890ba2406181ff9e21830dda95dec
   languageName: node
   linkType: hard
 
