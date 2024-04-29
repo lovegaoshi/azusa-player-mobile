@@ -2,7 +2,6 @@ import { Dimensions, StyleSheet, View } from 'react-native';
 import {
   Canvas,
   Path,
-  Skia,
   useClock,
   LinearGradient,
   vec,
@@ -11,10 +10,7 @@ import {
   useDerivedValue as useComputedValue,
   useSharedValue,
 } from 'react-native-reanimated';
-import { line, curveBasis } from 'd3';
 import { colord } from 'colord';
-
-import { gaussian } from '@utils/Gaussian';
 
 const dimension = Dimensions.get('window');
 const width = dimension.width;
@@ -23,6 +19,66 @@ const frequency = 2;
 const initialAmplitude = 25;
 const initialVerticalOffset = 10;
 const samplingInterval = 5;
+
+interface Point {
+  x: number;
+  y: number;
+}
+
+interface CalculateWavePoints {
+  points?: number;
+  w: number;
+  step: number;
+  speed: number;
+  amplitude: number;
+  height: number;
+}
+const _calculateWavePoints = ({
+  points = 3,
+  w = width,
+  step,
+  speed,
+  amplitude,
+  height,
+}: CalculateWavePoints) => {
+  'worklet';
+  return [...Array(Math.max(points, 1) + 1)].map(i => {
+    'worklet';
+    const scale = 100;
+    const x = (i / points) * w;
+    const seed = (step + (i + (i % points))) * speed * scale;
+    const height = Math.sin(seed / scale) * amplitude;
+    const y = Math.sin(seed / scale) * height + height;
+    return { x, y };
+  });
+};
+
+const cubic = (a: Point, b: Point) => {
+  'worklet';
+  return ` C ${a.x} ${a.y} ${a.x} ${a.y} ${b.x} ${b.y}`;
+};
+
+const _buildPath = (points: Point[], w: number, h: number) => {
+  'worklet';
+  let svg = `M ${points[0].x} ${points[0].y}`;
+  const initial = {
+    x: (points[1].x - points[0].x) / 2,
+    y: points[1].y - points[0].y + points[0].y + (points[1].y - points[0].y),
+  };
+  svg += cubic(initial, points[1]);
+  let point = initial;
+  [...Array(points.length - 2)].forEach((v, i) => {
+    'worklet';
+    point = {
+      x: points[i + 1].x - point.x + points[i + 1].x,
+      y: points[i + 1].y - point.y + points[i + 1].y,
+    };
+    svg += cubic(point, points[i + 2]);
+  });
+  svg += ` L ${w} ${h}`;
+  svg += ` L 0 ${h} Z`;
+  return svg;
+};
 
 interface Props {
   playing?: boolean;
@@ -36,56 +92,32 @@ export default function WaveAnimation({
 }: Props) {
   const verticalOffset = useSharedValue(initialVerticalOffset);
   const amplitude = useSharedValue(initialAmplitude);
-  const clock = useClock();
+  const step = useSharedValue(0);
   const extrapolatedWidth = Math.max(width * progress * 0.9 - 3, 0);
   const parsedColor = colord(color);
 
-  const createWavePath = (phase = 20) => {
-    const points: [number, number][] =
-      extrapolatedWidth < samplingInterval
-        ? []
-        : Array.from(
-            { length: Math.floor(extrapolatedWidth / samplingInterval) },
-            (_, index) => {
-              index *= samplingInterval;
-              const angle = (1 - index / width) * (Math.PI * frequency) + phase;
-              return [
-                index,
-                amplitude.value *
-                  gaussian(index / extrapolatedWidth, 1.3) *
-                  (Math.sin(angle) - 1) +
-                  verticalOffset.value +
-                  17,
-              ];
-            }
-          );
-    const lineGenerator = line().curve(curveBasis);
-    const waveLine = lineGenerator(points);
-    const bottomLine = `L${extrapolatedWidth},${height} L${0}, ${height}`;
-    return waveLine
-      ? `${waveLine} ${bottomLine} Z`
-      : `L${0},${0} L${0}, ${0} L${0},${0} L${0}, ${0} Z`;
-  };
-
   const animatedPath = useComputedValue(() => {
-    const current = (clock.value / 500) % 255;
-    const start = Skia.Path.MakeFromSVGString(createWavePath(current));
-    const end = Skia.Path.MakeFromSVGString(createWavePath(Math.PI * current));
-    return start!.interpolate(end!, 0.5)!;
-  }, [clock, verticalOffset, progress]);
-
-  const animatedPath2 = useComputedValue(() => {
-    const current = (clock.value / 700) % 255;
-    const start = Skia.Path.MakeFromSVGString(createWavePath(current));
-    const end = Skia.Path.MakeFromSVGString(createWavePath(Math.PI * current));
-    return start!.interpolate(end!, 0.5)!;
-  }, [clock, verticalOffset, progress]);
+    'worklet';
+    return _buildPath(
+      _calculateWavePoints({
+        step: step.value,
+        w: extrapolatedWidth,
+        height,
+        speed: 5,
+        amplitude: amplitude.value,
+      }),
+      extrapolatedWidth,
+      height
+    );
+  }, [verticalOffset, progress]);
 
   const gradientStart = useComputedValue(() => {
+    'worklet';
     return vec(0, 0);
   }, [width]);
 
   const gradientEnd = useComputedValue(() => {
+    'worklet';
     return vec(width, 0);
   }, [width]);
 
@@ -94,11 +126,6 @@ export default function WaveAnimation({
   return (
     <View style={styles.container}>
       <Canvas style={styles.canvas}>
-        <Path
-          path={animatedPath2}
-          style={'fill'}
-          color={parsedColor.hue(20).toRgbString()}
-        ></Path>
         <Path path={animatedPath} style={'fill'} color={color}>
           {false && (
             <LinearGradient
