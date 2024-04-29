@@ -40,10 +40,12 @@ declare global {
       screenAlwaysWake: boolean;
       keepForeground: boolean;
       karaokeLyrics: boolean;
+      noWeebSkins: boolean;
 
       appID: string;
       language?: string;
       cacheSize: number;
+
       [key: string]: any;
     }
 
