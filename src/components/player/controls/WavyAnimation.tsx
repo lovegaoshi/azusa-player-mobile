@@ -15,10 +15,7 @@ import { colord } from 'colord';
 const dimension = Dimensions.get('window');
 const width = dimension.width;
 const height = 30;
-const frequency = 2;
-const initialAmplitude = 25;
 const initialVerticalOffset = 10;
-const samplingInterval = 5;
 
 interface Point {
   x: number;
@@ -29,26 +26,26 @@ interface CalculateWavePoints {
   points?: number;
   w: number;
   step: number;
-  speed: number;
-  amplitude: number;
-  height: number;
+  speed?: number;
+  amplitude?: number;
+  h?: number;
 }
 const _calculateWavePoints = ({
   points = 3,
   w = width,
+  h = height,
   step,
-  speed,
-  amplitude,
-  height,
+  speed = 0.15,
+  amplitude = 20,
 }: CalculateWavePoints) => {
   'worklet';
-  return [...Array(Math.max(points, 1) + 1)].map(i => {
+  return [...Array(Math.max(points, 1) + 1)].map((v, i) => {
     'worklet';
     const scale = 100;
     const x = (i / points) * w;
     const seed = (step + (i + (i % points))) * speed * scale;
     const height = Math.sin(seed / scale) * amplitude;
-    const y = Math.sin(seed / scale) * height + height;
+    const y = Math.sin(seed / scale) * height + h;
     return { x, y };
   });
 };
@@ -60,10 +57,10 @@ const cubic = (a: Point, b: Point) => {
 
 const _buildPath = (points: Point[], w: number, h: number) => {
   'worklet';
-  let svg = `M ${points[0].x} ${points[0].y}`;
+  let svg = `M ${points[0].x} ${h}`;
   const initial = {
     x: (points[1].x - points[0].x) / 2,
-    y: points[1].y - points[0].y + points[0].y + (points[1].y - points[0].y),
+    y: points[1].y * 2 - points[0].y,
   };
   svg += cubic(initial, points[1]);
   let point = initial;
@@ -91,20 +88,36 @@ export default function WaveAnimation({
   color = 'white',
 }: Props) {
   const verticalOffset = useSharedValue(initialVerticalOffset);
-  const amplitude = useSharedValue(initialAmplitude);
-  const step = useSharedValue(0);
   const extrapolatedWidth = Math.max(width * progress * 0.9 - 3, 0);
   const parsedColor = colord(color);
+  const clock = useClock();
 
   const animatedPath = useComputedValue(() => {
     'worklet';
     return _buildPath(
       _calculateWavePoints({
-        step: step.value,
+        points: 3,
+        step: clock.value / 2500,
         w: extrapolatedWidth,
-        height,
+        h: 15,
         speed: 5,
-        amplitude: amplitude.value,
+        amplitude: 5,
+      }),
+      extrapolatedWidth,
+      height
+    );
+  }, [verticalOffset, progress]);
+
+  const animatedPath2 = useComputedValue(() => {
+    'worklet';
+    return _buildPath(
+      _calculateWavePoints({
+        points: 3,
+        step: clock.value / 2500 + 0.5,
+        w: extrapolatedWidth,
+        h: 15,
+        speed: 5,
+        amplitude: 5,
       }),
       extrapolatedWidth,
       height
@@ -126,6 +139,19 @@ export default function WaveAnimation({
   return (
     <View style={styles.container}>
       <Canvas style={styles.canvas}>
+        <Path
+          path={animatedPath2}
+          style={'fill'}
+          color={parsedColor.hue(20).toRgbString()}
+        >
+          {false && (
+            <LinearGradient
+              start={gradientStart}
+              end={gradientEnd}
+              colors={['cyan', 'blue']}
+            />
+          )}
+        </Path>
         <Path path={animatedPath} style={'fill'} color={color}>
           {false && (
             <LinearGradient

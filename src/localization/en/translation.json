@@ -207,7 +207,7 @@
     "ColorSchemeName": "Select Color Scheme",
     "ColorSchemeDesc": "Current color scheme is {{ scheme }}",
     "wavyProgressBarName": "Wavy Progress Bar",
-    "wavyProgressBarDesc": "Show a wavy progress bar sorta like Samsung",
+    "wavyProgressBarDesc": "Show a wavy progress bar (huge battery drain)",
     "ColorSchemeLight": "light",
     "ColorSchemeDark": "dark",
     "ColorSchemeAdaptive": "adaptive",

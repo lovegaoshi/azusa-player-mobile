@@ -13,7 +13,7 @@ export default () => {
 
   return (
     <View style={styles.waveProgressContainer}>
-      {false && playerSetting.wavyProgressBar && (
+      {playerSetting.wavyProgressBar && (
         <WaveAnimation
           playing={playWhenReady}
           progress={position / duration}
