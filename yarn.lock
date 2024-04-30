@@ -3156,6 +3156,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@react-native-community/slider@npm:^4.5.0":
+  version: 4.5.2
+  resolution: "@react-native-community/slider@npm:4.5.2"
+  checksum: 10c0/0aeef9ce4ccb1e8995e49efbe244edf68b4a6274845d8d4fefa07cf7b1bd2d3d43c6a7dc1e8a300fe18ae768c350dcd99d3c2ee88a74f854341d85c24140f80f
+  languageName: node
+  linkType: hard
+
 "@react-native-cookies/cookies@npm:^6.2.1":
   version: 6.2.1
   resolution: "@react-native-cookies/cookies@npm:6.2.1"
@@ -5532,6 +5539,7 @@ __metadata:
     react-native-blob-jsi-helper: "npm:^0.3.1"
     react-native-blob-util: "npm:^0.19.9"
     react-native-clean-project: "npm:^4.0.3"
+    react-native-color-picker: "git+https://github.com/NewOldMax/react-native-color-picker.git"
     react-native-device-info: "npm:^10.13.2"
     react-native-dotenv: "npm:^3.4.11"
     react-native-draggable-flatlist: "npm:^4.0.1"
@@ -13683,7 +13691,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"prop-types@npm:15.8.1, prop-types@npm:^15.7.2, prop-types@npm:^15.8.0, prop-types@npm:^15.8.1":
+"prop-types@npm:15.8.1, prop-types@npm:^15.5.10, prop-types@npm:^15.7.2, prop-types@npm:^15.8.0, prop-types@npm:^15.8.1":
   version: 15.8.1
   resolution: "prop-types@npm:15.8.1"
   dependencies:
@@ -13967,6 +13975,17 @@ __metadata:
   bin:
     react-native-clean-project: source/index.js
   checksum: 10c0/9cc551c289f179dd68c0abd57d54fdbfc3cb6b6d0e9693fe4c0d6d7fc17a0ed1dfa007ada3d3a65e1eeab7fb042d714602046a07f1e2735ebae2f381def61980
+  languageName: node
+  linkType: hard
+
+"react-native-color-picker@git+https://github.com/NewOldMax/react-native-color-picker.git":
+  version: 0.6.0
+  resolution: "react-native-color-picker@https://github.com/NewOldMax/react-native-color-picker.git#commit=8def0de3abf2757d3a9d01c9b3d71a4b25e4402f"
+  dependencies:
+    "@react-native-community/slider": "npm:^4.5.0"
+    prop-types: "npm:^15.5.10"
+    tinycolor2: "npm:^1.4.1"
+  checksum: 10c0/2eb0b784c27160d3c98c2cb0ff06292f1498929f14d381218fc9cd1b3b28be8f8a8dc202425c7bd5bd6e389d1f7679b159dbc5307d28da510108147f0552b5cf
   languageName: node
   linkType: hard
 
@@ -16180,6 +16199,13 @@ __metadata:
   version: 2.3.8
   resolution: "through@npm:2.3.8"
   checksum: 10c0/4b09f3774099de0d4df26d95c5821a62faee32c7e96fb1f4ebd54a2d7c11c57fe88b0a0d49cf375de5fee5ae6bf4eb56dbbf29d07366864e2ee805349970d3cc
+  languageName: node
+  linkType: hard
+
+"tinycolor2@npm:^1.4.1":
+  version: 1.6.0
+  resolution: "tinycolor2@npm:1.6.0"
+  checksum: 10c0/9aa79a36ba2c2a87cb221453465cabacd04b9e35f9694373e846fdc78b1c768110f81e581ea41440106c0f24d9a023891d0887e8075885e790ac40eb0e74a5c1
   languageName: node
   linkType: hard
 
