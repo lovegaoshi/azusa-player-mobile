@@ -28,25 +28,34 @@ const steriaGarb = JSON.parse(
 const basicReq = await axios.get(
   `https://api.bilibili.com/x/vas/dlc_act/act/basic?act_id=${args.garbid}`
 );
-const listReq = await axios.get(
-  `https://api.bilibili.com/x/vas/dlc_act/act/item/list?act_id=${args.garbid}`
+const garbdata = basicReq.data.data;
+
+const garblistdata = await Promise.all(
+  garbdata.lottery_list.map(async list => {
+    const req = await axios.get(
+      `https://api.bilibili.com/x/vas/dlc_act/lottery_home_detail?act_id=${args.garbid}&lottery_id=${list.lottery_id}`
+    );
+    return req.data.data;
+  })
 );
 
-const garbdata = basicReq.data.data;
-const garblistdata = listReq.data.data;
 const parsedGarbData = {
   themeName: garbdata.act_title,
   themeDesc: garbdata.product_introduce,
   gifs: [],
   themeIcon: garbdata.act_y_img,
-  portraits: garblistdata.item_list.map(item =>
-    item.card_item.video_list
-      ? {
-          type: 'biliNFTVideo',
-          identifier: `["${args.garbid}","${item.card_item.card_name}"]`,
-        }
-      : item.card_item.card_img
-  ),
+  portraits: garblistdata
+    .map(item =>
+      item.item_list.map(list =>
+        list.card_info.video_list
+          ? {
+              type: 'biliNFTVideoNew',
+              identifier: `["${args.garbid}","${item.lottery_id}","${list.card_info.card_name}"]`,
+            }
+          : list.card_info.card_img
+      )
+    )
+    .flat(),
 };
 
 const emojiId = garbdata.collect_list?.filter(v =>
