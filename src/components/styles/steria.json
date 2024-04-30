@@ -1470,12 +1470,12 @@
         "identifier": "BV1jT41187Rr"
       },
       {
-        "type": "biliNFTVideo",
-        "identifier": "[\"100531\",1]"
+        "type": "biliNFTVideoNew",
+        "identifier": "[\"100531\",\"100532\",1]"
       },
       {
-        "type": "biliNFTVideo",
-        "identifier": "[\"100531\",0]"
+        "type": "biliNFTVideoNew",
+        "identifier": "[\"100531\",\"100532\",0]"
       },
       "https://i0.hdslb.com/bfs/new_dyn/a7cfdbfb362358fcae354e2a79580c4d314866683.jpg",
       "https://i0.hdslb.com/bfs/new_dyn/198ba3fdaaf24991e96873cdc08ead5c314866683.png",
@@ -1611,8 +1611,8 @@
       ],
       "backgroundImages": [
         {
-          "type": "biliNFTVideo",
-          "identifier": "[\"100531\",0]"
+          "type": "biliNFTVideoNew",
+          "identifier": "[\"100531\",\"100532\",0]"
         },
         {
           "type": "bvid",

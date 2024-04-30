@@ -85,21 +85,21 @@ export default {
     'https://i0.hdslb.com/bfs/garb/item/37fc8d2acf41b0fe7ec3b9732297d8e2832f21e4.png',
     'https://i0.hdslb.com/bfs/garb/item/589adb63eae72b89f2022b040c333a42125b7ae9.jpg',
     'https://i0.hdslb.com/bfs/baselabs/56f4e80511335e86863765622fb74cf3ff0cc3ee.png',
-    {
-      type: 'biliNFTVideo',
-      identifier: '["161","华美乐章·阿梓"]',
-    },
-    {
-      type: 'biliNFTVideo',
-      identifier: '["161","变速系列·阿梓"]',
-    },
-    {
-      type: 'biliNFTVideo',
-      identifier: '["161","春去夏来 阿梓"]',
-    },
     'https://i0.hdslb.com/bfs/baselabs/2b86c6b2a77f1569cd088eb72fb2d2eb6a007236.png',
     'https://i0.hdslb.com/bfs/baselabs/c0ccbe248d254542763317cde9d7b8b53f603395.png',
     'https://i0.hdslb.com/bfs/baselabs/023a645451d96c96b8a8591872ecaf8ef99f3c72.png',
+    {
+      type: 'biliNFTVideoNew',
+      identifier: '["161","228","华美乐章·阿梓"]',
+    },
+    {
+      type: 'biliNFTVideoNew',
+      identifier: '["161","235","变速系列·阿梓"]',
+    },
+    {
+      type: 'biliNFTVideoNew',
+      identifier: '["161","75","春去夏来 阿梓"]',
+    },
   ],
   backgroundImagesLandscape: [
     {

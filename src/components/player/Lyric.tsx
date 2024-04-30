@@ -209,7 +209,7 @@ export const LyricView = ({
     resolvedLrcOptions = lrcOptions,
     resolvedLyric?: NoxMedia.LyricDetail
   ) => {
-    console.debug(`lrcoptions: ${JSON.stringify(resolvedLrcOptions)}`);
+    // console.debug(`lrcoptions: ${JSON.stringify(resolvedLrcOptions)}`);
     if (resolvedLrcOptions.length === 0) setLrc(i18n.t('Lyric.notFound'));
     else {
       const resolvedLrc = resolvedLrcOptions[index!];

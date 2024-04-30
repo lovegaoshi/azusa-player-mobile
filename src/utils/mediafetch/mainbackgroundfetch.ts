@@ -1,12 +1,15 @@
 import { fetchVideoPlayUrl } from './bilivideo';
-import { biliNFTVideoFetch } from './biliNFT';
+import { biliNFTVideoFetch } from './biliNFTNew';
+import { biliNFTVideoFetch as biliNFTVideoFetchOld } from './biliNFT';
 import { biliGarbHeadVideoFetch } from './biliGarb';
 import { cacheWrapper } from '@utils/Cache';
+import logger from '../Logger';
 
 export enum RESOLVE_TYPE {
   bvid = 'bvid',
   video = 'video',
   biliNFTVideo = 'biliNFTVideo',
+  biliNFTVideoNew = 'biliNFTVideoNew',
   biliGarbHeadVideo = 'biliGarbHeadVideo',
   image = 'image',
 }
@@ -25,12 +28,27 @@ export default async (backgroundImage: string | NoxTheme.backgroundImage) => {
         ),
       };
     case RESOLVE_TYPE.biliNFTVideo: {
+      logger.warn(
+        `[backgroundFetch] ${RESOLVE_TYPE.biliNFTVideo} is no longer supported.`
+      );
       const [act_id, index] = JSON.parse(backgroundImage.identifier);
       return {
         type: RESOLVE_TYPE.video,
         identifier: await cacheWrapper(
-          `${RESOLVE_TYPE.biliNFTVideo}-${backgroundImage.identifier}`,
-          () => biliNFTVideoFetch({ act_id, index })
+          `${RESOLVE_TYPE.biliNFTVideoNew}-${backgroundImage.identifier}`,
+          () => biliNFTVideoFetchOld({ act_id, index })
+        ),
+      };
+    }
+    case RESOLVE_TYPE.biliNFTVideoNew: {
+      const [act_id, lottery_id, index] = JSON.parse(
+        backgroundImage.identifier
+      );
+      return {
+        type: RESOLVE_TYPE.video,
+        identifier: await cacheWrapper(
+          `${RESOLVE_TYPE.biliNFTVideoNew}-${backgroundImage.identifier}`,
+          () => biliNFTVideoFetch({ act_id, lottery_id, index })
         ),
       };
     }
