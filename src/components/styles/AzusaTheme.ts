@@ -74,32 +74,18 @@ export default {
     'https://i0.hdslb.com/bfs/emote/fd799f0831a93dbab82958181cdfe68ff3d5d8b8.png',
   ],
   backgroundImages: [
-    'https://i0.hdslb.com/bfs/garb/item/aabad1485d211701be33be155a3bba88231453ba.jpg',
-    'https://i0.hdslb.com/bfs/garb/item/fbdbf4068ea22d36ce223e83166b0b22f684d656.jpg',
-    'https://i0.hdslb.com/bfs/garb/item/70ca7e98464ea5678a328615a7581cf42fb4d1ea.jpg',
-    'https://i0.hdslb.com/bfs/garb/item/00aa213a3f4c3ccc5addd18c21e71ad9ba004bae.jpg',
-    'https://i0.hdslb.com/bfs/garb/item/ba3d3334062b43e16001ca61bab2bc4af404da27.jpg',
-    'https://i0.hdslb.com/bfs/garb/item/8cda150169756811847d07817b3ce0c0f0d52cc2.jpg',
-    'https://i0.hdslb.com/bfs/garb/item/2f5968ae6993f4cd190c4dd16adac61c8376e08e.jpg',
-    'https://i0.hdslb.com/bfs/garb/item/56549820b2458a440b0eaa97b27fd3fba3232375.jpg',
-    'https://i0.hdslb.com/bfs/garb/item/37fc8d2acf41b0fe7ec3b9732297d8e2832f21e4.png',
-    'https://i0.hdslb.com/bfs/garb/item/589adb63eae72b89f2022b040c333a42125b7ae9.jpg',
-    'https://i0.hdslb.com/bfs/baselabs/56f4e80511335e86863765622fb74cf3ff0cc3ee.png',
     {
-      type: 'biliNFTVideo',
-      identifier: '["161","华美乐章·阿梓"]',
+      type: 'biliNFTVideoNew',
+      identifier: '["161","228","华美乐章·阿梓"]',
     },
     {
-      type: 'biliNFTVideo',
-      identifier: '["161","变速系列·阿梓"]',
+      type: 'biliNFTVideoNew',
+      identifier: '["161","235","变速系列·阿梓"]',
     },
     {
-      type: 'biliNFTVideo',
-      identifier: '["161","春去夏来 阿梓"]',
+      type: 'biliNFTVideoNew',
+      identifier: '["161","75","春去夏来 阿梓"]',
     },
-    'https://i0.hdslb.com/bfs/baselabs/2b86c6b2a77f1569cd088eb72fb2d2eb6a007236.png',
-    'https://i0.hdslb.com/bfs/baselabs/c0ccbe248d254542763317cde9d7b8b53f603395.png',
-    'https://i0.hdslb.com/bfs/baselabs/023a645451d96c96b8a8591872ecaf8ef99f3c72.png',
   ],
   backgroundImagesLandscape: [
     {
