@@ -1611,8 +1611,8 @@
       ],
       "backgroundImages": [
         {
-          "type": "biliNFTVideo",
-          "identifier": "[\"100531\",0]"
+          "type": "biliNFTVideoNew",
+          "identifier": "[\"100531\",\"100532\",0]"
         },
         {
           "type": "bvid",
