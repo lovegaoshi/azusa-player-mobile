@@ -21,7 +21,7 @@
     "prepare": "yarn run compile",
     "pretest": "yarn run compile",
     "prettify": "prettier --write ./src",
-    "build": "yarn install && yarn compile && yarn postinstall",
+    "build": "yarn install && yarn postinstall && yarn compile",
     "ios:build": "yarn build && cd ios && rm Podfile.lock && pod install --repo-update && cd ..",
     "dep": "yarn upgrade-interactive",
     "release": "git switch master && git pull && python release_bump.py",
