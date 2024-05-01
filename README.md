@@ -90,10 +90,11 @@ ios开发需要XCode。安卓开发需要android studio。编译问题请看gith
 
 ```
 git clone https://github.com/lovegaoshi/azusa-player-mobile.git
-yarn build
 yarn
+yarn build
 cd ios && pod install && cd ..
 mv ios/sentry.properties.example ios/sentry.properties
+yarn start
 ```
 
 ### MF插件
