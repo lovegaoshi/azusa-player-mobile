@@ -57,7 +57,6 @@ export default ({
       <Dialog visible={visible} onDismiss={handleClose}>
         <Dialog.Content>
           <PortaledInput
-            handleSubmit={() => undefined}
             ref={nameRef}
             label={'RenameSongDialog.label'}
             defaultName={playlist.title}
@@ -65,7 +64,6 @@ export default ({
             selectTextOnFocus={false}
           />
           <PortaledInput
-            handleSubmit={() => undefined}
             ref={subRef}
             label={'PlaylistSettingsDialog.subscribeUrlLabel'}
             defaultName={playlist.subscribeUrl.join(';')}
@@ -73,7 +71,6 @@ export default ({
             selectTextOnFocus={false}
           />
           <PortaledInput
-            handleSubmit={() => undefined}
             ref={blacklistRef}
             label={'PlaylistSettingsDialog.blacklistedUrlLabel'}
             defaultName={playlist.blacklistedUrl.join(';')}

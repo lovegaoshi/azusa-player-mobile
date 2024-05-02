@@ -50,6 +50,12 @@ const MainView = ({ navigation }: NoxComponent.NavigationProps) => {
             settingCategory: 'AppearanceSettings',
           }}
         />
+        <RenderSetting
+          item={{
+            settingName: 'accentColor',
+            settingCategory: 'AppearanceSettings',
+          }}
+        />
         <SelectDarkModeButton />
         <NoWeebButton />
       </ScrollView>

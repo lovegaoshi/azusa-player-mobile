@@ -27,6 +27,19 @@ interface Props {
   networkCellular?: boolean;
 }
 
+const isItemSolid = (
+  item: NoxMedia.Song,
+  networkCellular = false,
+  dataSaver = false
+) => {
+  if (item.liveStatus === false) return false;
+  if (!networkCellular) return true;
+  if (dataSaver && !NoxCache.noxMediaCache?.peekCache(item)) {
+    return false;
+  }
+  return true;
+};
+
 const SongInfo = ({
   item,
   index,
@@ -72,15 +85,6 @@ const SongInfo = ({
   };
   const checked = selected[getSongIndex()];
 
-  const isItemSolid = () => {
-    if (item.liveStatus === false) return false;
-    if (!networkCellular) return true;
-    if (playerSetting.dataSaver && !NoxCache.noxMediaCache?.peekCache(item)) {
-      return false;
-    }
-    return true;
-  };
-
   return (
     <View
       style={[
@@ -89,7 +93,9 @@ const SongInfo = ({
           backgroundColor: currentPlaying
             ? playerStyle.customColors.playlistDrawerBackgroundColorTransparent
             : 'transparent',
-          opacity: isItemSolid() ? undefined : 0.5,
+          opacity: isItemSolid(item, networkCellular, playerSetting.dataSaver)
+            ? undefined
+            : 0.5,
         },
       ]}
     >
@@ -98,17 +104,17 @@ const SongInfo = ({
         onPress={checking ? toggleCheck : () => playSong(item)}
       >
         <View style={styles.row}>
-          <View style={{ flex: 5 }}>
+          <View style={styles.songDetails}>
             <View style={styles.row}>
               {checking && (
-                <View style={{ flex: 1 }}>
+                <View style={styles.checkBox}>
                   <Checkbox
                     status={checked ? 'checked' : 'unchecked'}
                     onPress={toggleCheck}
                   />
                 </View>
               )}
-              <View style={{ flex: 4.9 }}>
+              <View style={styles.songTitle}>
                 <Text variant="bodyLarge" numberOfLines={3}>{`${String(
                   index + 1
                   // ${' (' + item.source + ')' || ''}
@@ -159,6 +165,13 @@ const styles = StyleSheet.create({
   time: {
     top: 13,
   },
+  songTitle: {
+    flex: 4.9,
+  },
+  checkBox: {
+    flex: 1,
+  },
+  songDetails: { flex: 5 },
 });
 
 export default SongInfo;
