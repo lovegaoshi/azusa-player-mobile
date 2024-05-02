@@ -204,6 +204,8 @@
   "AppearanceSettings": {
     "noWeebSkinsName": "Weeb be Gone",
     "noWeebSkinsDesc": "Turn off weeb skins",
+    "accentColorName": "Use Accent Color",
+    "accentColorDesc": "Use accent color from song covers when not using weeb skins",
     "PrimaryColor": "Primary color",
     "SecondaryColor": "Secondary color",
     "ContrastColor": "Contrast color",

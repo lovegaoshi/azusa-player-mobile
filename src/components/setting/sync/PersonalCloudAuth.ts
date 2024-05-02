@@ -36,7 +36,7 @@ export const noxRestore = async (cloudAddress: string, cloudID?: string) => {
     // see https://github.com/facebook/react-native/commit/5b597b5ff94953accc635ed3090186baeecb3873
     // and https://stackoverflow.com/questions/76056351/error-filereader-readasarraybuffer-is-not-implemented
     const res = await axios.get(
-      `${await cloudAddress}download/${cloudID || (await getBiliUserKey())}`,
+      `${cloudAddress}download/${cloudID || (await getBiliUserKey())}`,
       {
         responseType: 'arraybuffer',
         maxContentLength: Infinity,

@@ -194,6 +194,8 @@
   "AppearanceSettings": {
     "noWeebSkinsName": "二次元收收味",
     "noWeebSkinsDesc": "二次元味儿太冲",
+    "accentColorName": "用专辑主题色",
+    "accentColorDesc": "二次元ssw时，用专辑的主题色",
     "PrimaryColor": "主题颜色",
     "SecondaryColor": "辅助颜色",
     "ContrastColor": "对比颜色",

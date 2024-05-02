@@ -1,38 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { View } from 'react-native';
-import { FastAverageColor } from 'fast-average-color';
 
-import useActiveTrack from '@hooks/useActiveTrack';
-import { useNoxSetting } from '@stores/useApp';
-
-const fac = new FastAverageColor();
+import useAccentColor from '@hooks/useAccentColor';
 
 export default ({ children }: { children: React.JSX.Element }) => {
-  const playerStyle = useNoxSetting(state => state.playerStyle);
-  const playerSetting = useNoxSetting(state => state.playerSetting);
-  const [backgroundColor, setBackgroundColor] = useState<string>(
-    playerStyle.colors.background
-  );
-  const { track } = useActiveTrack();
+  const { backgroundColor } = useAccentColor();
 
-  const getBackgroundColor = async () => {
-    try {
-      if (playerSetting.accentColor) {
-        const color = await fac.getColorAsync(track?.artwork, {
-          algorithm: 'dominant',
-        });
-        setBackgroundColor(color.hex);
-        return;
-      }
-    } catch (e) {
-      console.warn(e);
-    }
-    setBackgroundColor(playerStyle.colors.background);
-  };
-
-  useEffect(() => {
-    getBackgroundColor();
-  }, [track]);
-
-  return <View style={{ backgroundColor }}>{children}</View>;
+  return <View style={{ backgroundColor, flex: 1 }}>{children}</View>;
 };
