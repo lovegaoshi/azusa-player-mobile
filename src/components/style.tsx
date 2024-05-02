@@ -75,6 +75,53 @@ export const createStyle = (
   });
 };
 
+interface ReplaceStyleColor {
+  playerStyle: NoxTheme.Style;
+  primaryColor?: string;
+  secondaryColor?: string;
+  contrastColor?: string;
+  backgroundColor?: string;
+  noWeeb?: boolean;
+}
+export const replaceStyleColor = ({
+  playerStyle,
+  primaryColor = playerStyle.colors.primary,
+  secondaryColor = playerStyle.colors.secondary,
+  contrastColor = playerStyle.customColors.playlistDrawerBackgroundColor,
+  backgroundColor = playerStyle.colors.background,
+  noWeeb = false,
+}: ReplaceStyleColor) => {
+  const replacedStyle = {
+    ...playerStyle,
+    customColors: {
+      ...playerStyle.customColors,
+      playlistDrawerBackgroundColor: contrastColor,
+      textInputSelectionColor: contrastColor,
+      progressThumbTintColor: primaryColor,
+      progressMinimumTrackTintColor: primaryColor,
+    },
+    colors: {
+      ...playerStyle.colors,
+      primary: primaryColor,
+      secondary: secondaryColor,
+      background: backgroundColor,
+      onSurface: primaryColor,
+      onSurfaceVariant: primaryColor,
+      text: primaryColor,
+    },
+  };
+  return noWeeb
+    ? {
+        ...replacedStyle,
+        gifs: [],
+        backgroundImages: [],
+        backgroundImagesLandscape: [],
+        bkgrdImg: '',
+        bkgrdImgLandscape: '',
+      }
+    : replacedStyle;
+};
+
 export const styles = StyleSheet.create({
   flex: { flex: 1 },
   screenContainer: {

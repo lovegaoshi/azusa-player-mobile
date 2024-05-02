@@ -6,6 +6,7 @@ import { Text } from 'react-native-paper';
 import GenericDialog from '@components/dialogs/GenericDialog';
 import { useNoxSetting } from '@stores/useApp';
 import { SettingListItem } from '../useRenderSetting';
+import { replaceStyleColor } from '@components/style';
 
 export default () => {
   const { t } = useTranslation();
@@ -27,30 +28,16 @@ export default () => {
 
   const onSubmit = () => {
     setVisible(false);
-    setPlayerStyle({
-      ...playerStyle,
-      gifs: [],
-      backgroundImages: [],
-      backgroundImagesLandscape: [],
-      customColors: {
-        ...playerStyle.customColors,
-        playlistDrawerBackgroundColor: contrastColor,
-        textInputSelectionColor: contrastColor,
-        progressThumbTintColor: primaryColor,
-        progressMinimumTrackTintColor: primaryColor,
-      },
-      colors: {
-        ...playerStyle.colors,
-        primary: primaryColor,
-        secondary: secondaryColor,
-        background: backgroundColor,
-        onSurface: primaryColor,
-        onSurfaceVariant: primaryColor,
-        text: primaryColor,
-      },
-      bkgrdImg: '',
-      bkgrdImgLandscape: '',
-    });
+    setPlayerStyle(
+      replaceStyleColor({
+        playerStyle,
+        primaryColor,
+        secondaryColor,
+        contrastColor,
+        backgroundColor,
+        noWeeb: true,
+      })
+    );
   };
 
   return (

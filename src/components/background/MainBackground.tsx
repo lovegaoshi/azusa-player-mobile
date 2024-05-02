@@ -10,7 +10,7 @@ import { useIsLandscape } from '@hooks/useOrientation';
 import resolveBackgroundImage, {
   RESOLVE_TYPE,
 } from '@utils/mediafetch/mainbackgroundfetch';
-import AccentColorBackground from './AccentColorBackground';
+import EmptyBackground from './AccentColorBackground';
 
 const MainBackground = ({ children }: { children: React.JSX.Element }) => {
   const playerStyle = useNoxSetting(state => state.playerStyle);
@@ -84,7 +84,7 @@ const MainBackground = ({ children }: { children: React.JSX.Element }) => {
         </>
       );
     default:
-      return <AccentColorBackground>{children}</AccentColorBackground>;
+      return <EmptyBackground>{children}</EmptyBackground>;
   }
 };
 
