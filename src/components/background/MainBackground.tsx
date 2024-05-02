@@ -82,7 +82,11 @@ const MainBackground = ({ children }: { children: React.JSX.Element }) => {
         </>
       );
     default:
-      return <>{children}</>;
+      return (
+        <View style={{ backgroundColor: playerStyle.colors.background }}>
+          {children}
+        </View>
+      );
   }
 };
 

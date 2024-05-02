@@ -77,3 +77,4 @@ NoxExport.json
 *.pyc
 test.js
 sentry.properties
+.yarn/install-state.gz
