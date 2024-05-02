@@ -5,7 +5,7 @@ import { useNoxSetting } from '@stores/useApp';
 
 interface InputProps {
   defaultName: string;
-  handleSubmit: () => void;
+  handleSubmit?: () => void;
   label: string;
   autofocus?: boolean;
   selectTextOnFocus?: boolean;

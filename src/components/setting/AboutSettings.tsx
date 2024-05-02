@@ -1,5 +1,5 @@
-import { View, ScrollView } from 'react-native';
-import { Text } from 'react-native-paper';
+import { View, ScrollView, Linking } from 'react-native';
+import { Text, Button } from 'react-native-paper';
 import { useTranslation } from 'react-i18next';
 
 import { useNoxSetting } from '@stores/useApp';
@@ -46,6 +46,24 @@ export default () => {
         >
           {t('About.About1')}
         </Text>
+        <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
+          <Button
+            onPress={() =>
+              Linking.openURL(
+                'https://github.com/lovegaoshi/azusa-player-mobile/releases/latest'
+              )
+            }
+          >
+            {'Gayhub'}
+          </Button>
+          <Button
+            onPress={() =>
+              Linking.openURL('https://space.bilibili.com/3493085134719196')
+            }
+          >
+            {'Bilibili'}
+          </Button>
+        </View>
       </ScrollView>
     </View>
   );

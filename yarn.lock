@@ -5507,6 +5507,7 @@ __metadata:
     expo-image: "npm:1.10.6"
     expo-keep-awake: "npm:^12.8.2"
     expo-secure-store: "npm:~12.8.1"
+    fast-average-color: "npm:^9.4.0"
     fflate: "npm:^0.8.2"
     ffmpeg-kit-react-native: "npm:^6.0.2"
     gts: "npm:^5.3.0"
@@ -8691,6 +8692,13 @@ __metadata:
     snapdragon: "npm:^0.8.1"
     to-regex: "npm:^3.0.1"
   checksum: 10c0/e1a891342e2010d046143016c6c03d58455c2c96c30bf5570ea07929984ee7d48fad86b363aee08f7a8a638f5c3a66906429b21ecb19bc8e90df56a001cd282c
+  languageName: node
+  linkType: hard
+
+"fast-average-color@npm:^9.4.0":
+  version: 9.4.0
+  resolution: "fast-average-color@npm:9.4.0"
+  checksum: 10c0/9031181113356abe240c52f78e908607e3b47dc0121cec3077b3735823951e40f8d6e14eca50d9941e30bcea60e0ed52e36410a8ded0972a89253c3dbefc966d
   languageName: node
   linkType: hard
 

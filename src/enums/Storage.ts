@@ -69,7 +69,7 @@ export const DefaultSetting: NoxStorage.PlayerSettingDict = {
   biliEditAPI: false,
   keepForeground: false,
   karaokeLyrics: false,
-  noWeebSkins: false,
+  accentColor: false,
 
   appID: AppID,
   language: undefined,
