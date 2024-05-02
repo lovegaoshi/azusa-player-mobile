@@ -5,7 +5,8 @@ import { StyleSheet, View, ScrollView } from 'react-native';
 import SkinSettings from './SkinSettings';
 import { SettingListItem, RenderSetting } from '../useRenderSetting';
 import { useNoxSetting } from '@stores/useApp';
-import SelectDarkMode from './SelectDarkModeButton';
+import SelectDarkModeButton from './SelectDarkModeButton';
+import NoWeebButton from './NoWeebButton';
 
 enum VIEW {
   HOME = 'AppearanceHome',
@@ -49,12 +50,8 @@ const MainView = ({ navigation }: NoxComponent.NavigationProps) => {
             settingCategory: 'AppearanceSettings',
           }}
         />
-        <SelectDarkMode />
-        <SettingListItem
-          settingName="noWeebSkins"
-          onPress={() => console.log('pressed')}
-          settingCategory="GeneralSettings"
-        />
+        <SelectDarkModeButton />
+        <NoWeebButton />
       </ScrollView>
     </View>
   );

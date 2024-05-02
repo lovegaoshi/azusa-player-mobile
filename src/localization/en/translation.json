@@ -118,8 +118,6 @@
     "keepForegroundDesc": "enable to waste a LOT of battery",
     "karaokeLyricsName": "Karaoke Lyrics",
     "karaokeLyricsDesc": "Show karaoke style lyrics",
-    "noWeebSkinsName": "Weeb be Gone",
-    "noWeebSkinsDesc": "Turn off weeb skins",
     "biliEditAPIName": "use bilibili edit API",
     "biliEditAPIDesc": "use bilibili edit API when renaming songs",
     "screenAlwaysWakeName": "Lyric screen always on",
@@ -204,6 +202,12 @@
     "ABRepeatDesc": "Update ABRepeat rules from GitHub"
   },
   "AppearanceSettings": {
+    "noWeebSkinsName": "Weeb be Gone",
+    "noWeebSkinsDesc": "Turn off weeb skins",
+    "PrimaryColor": "Primary color",
+    "SecondaryColor": "Secondary color",
+    "ContrastColor": "Contrast color",
+    "BackgroundColor": "Background color",
     "ColorSchemeName": "Select Color Scheme",
     "ColorSchemeDesc": "Current color scheme is {{ scheme }}",
     "wavyProgressBarName": "Wavy Progress Bar",
