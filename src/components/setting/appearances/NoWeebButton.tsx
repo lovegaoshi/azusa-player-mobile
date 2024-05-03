@@ -2,6 +2,7 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { ScrollView, StyleSheet, View, TextInput } from 'react-native';
 import { Text } from 'react-native-paper';
+import { Image } from 'expo-image';
 
 import GenericDialog from '@components/dialogs/GenericDialog';
 import { useNoxSetting } from '@stores/useApp';
@@ -49,6 +50,14 @@ export default () => {
         title={t('AppearanceSettings.noWeebSkinsDesc')}
       >
         <ScrollView>
+          <View style={{ alignItems: 'center' }}>
+            <Image
+              style={{ width: 60, height: 60 }}
+              source={
+                'https://i2.hdslb.com/bfs/archive/7d83d7c95b11df26a700f445788877ef279c4b80.jpg@600w_600h_1c.png'
+              }
+            />
+          </View>
           <View style={styles.rowView}>
             <View
               style={[
