@@ -220,7 +220,8 @@ const SkinSettings = () => {
   const getThemeID = (skin: NoxTheme.Style) =>
     `${skin.metaData.themeName}.${skin.metaData.themeAuthor}`;
   const [checked, setChecked] = React.useState(getThemeID(playerStyle));
-  const scrollViewRef = React.useRef<FlatList | null>(null);
+  // TODO: fix type
+  const scrollViewRef = React.useRef<typeof FlatList>();
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const loadCustomSkin = async (skins: any) => {
@@ -240,6 +241,7 @@ const SkinSettings = () => {
       theme => getThemeID(theme) === checked
     );
     if (currentThemeIndex > -1) {
+      // @ts-expect-error
       scrollViewRef.current?.scrollToIndex({
         index: currentThemeIndex,
         viewOffset: 414,
@@ -267,10 +269,10 @@ const SkinSettings = () => {
         })}
         renderItem={({ item }) => (
           <SkinItem
-            skin={item}
+            skin={item as DisplayTheme}
             checked={checked}
             setChecked={setChecked}
-            key={getThemeID(item)}
+            key={getThemeID(item as DisplayTheme)}
           />
         )}
       />

@@ -6221,7 +6221,7 @@ __metadata:
     react-native-device-info: "npm:^10.13.2"
     react-native-dotenv: "npm:^3.4.11"
     react-native-draggable-flatlist: "npm:^4.0.1"
-    react-native-gesture-handler: "npm:2.16.0"
+    react-native-gesture-handler: "npm:2.16.1"
     react-native-get-random-values: "npm:^1.11.0"
     react-native-image-colors: "npm:^2.4.0"
     react-native-lyric: "git+https://github.com/lovegaoshi/react-native-lyric.git#dev"
@@ -15035,9 +15035,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-native-gesture-handler@npm:2.16.0":
-  version: 2.16.0
-  resolution: "react-native-gesture-handler@npm:2.16.0"
+"react-native-gesture-handler@npm:2.16.1":
+  version: 2.16.1
+  resolution: "react-native-gesture-handler@npm:2.16.1"
   dependencies:
     "@egjs/hammerjs": "npm:^2.0.17"
     hoist-non-react-statics: "npm:^3.3.0"
@@ -15047,7 +15047,7 @@ __metadata:
   peerDependencies:
     react: "*"
     react-native: "*"
-  checksum: 10c0/7cb16990e9b20a737b92f26444a058069f5fb011f6a621eeb755df77d66c92877a1eb5215b846af4f4d9a8a8b473ae362631bd96aa78ed971dd08c9c2ae75f2e
+  checksum: 10c0/fea9cc67b645ec77f26c61b10edf379adf3084d4280ea76c7986cf1b175c2957c53fa4b880d0a67232fd6cdc260057e3b97752ccb028c1d635b8db87a79bad27
   languageName: node
   linkType: hard
 
