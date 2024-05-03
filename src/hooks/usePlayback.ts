@@ -14,6 +14,7 @@ import { NoxRepeatMode } from '@enums/RepeatMode';
 import noxPlayingList, { setPlayingIndex } from '@stores/playingList';
 import noxCache, { noxCacheKey } from '@utils/Cache';
 import useDataSaver from './useDataSaver';
+import useSnack from '@stores/useSnack';
 
 const PLAYLIST_MEDIAID = 'playlist-';
 
@@ -48,6 +49,7 @@ const usePlayback = () => {
     state => state.setCurrentPlayingList
   );
   const { isDataSaving } = useDataSaver();
+  const setSnack = useSnack(state => state.setSnack);
 
   const playFromPlaylist = async ({
     playlist,
@@ -200,6 +202,8 @@ const usePlayback = () => {
         }
       }
     }
+    setSnack({ snackMsg: { success: t('AndroidAuto.PlayingShuffle') } });
+    shuffleAll();
   };
 
   const buildBrowseTree = () => {
