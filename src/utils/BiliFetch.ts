@@ -58,14 +58,14 @@ export const customReqHeader = (
   if (
     /bilibili/.exec(url) ||
     /bilivideo/.exec(url) ||
-    /akamaized.net/.exec(url)
+    /akamaized\.net/.exec(url)
   ) {
     reqHeader.referer = 'https://www.bilibili.com/';
-  } else if (/y.qq.com/.exec(url)) {
+  } else if (/y\.qq\.com/.exec(url)) {
     reqHeader.referer = 'https://y.qq.com/';
-  } else if (/u.qq.com/.exec(url)) {
+  } else if (/u\.qq\.com/.exec(url)) {
     reqHeader.referer = 'https://u.qq.com/';
-  } else if (/i.qq.com/.exec(url)) {
+  } else if (/i\.qq\.com/.exec(url)) {
     reqHeader.referer = 'https://i.qq.com/';
   }
   reqHeader['User-Agent'] = DEFAULT_UA;
