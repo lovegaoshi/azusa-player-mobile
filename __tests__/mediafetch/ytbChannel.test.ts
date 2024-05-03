@@ -1,15 +1,11 @@
 // GMHikaru
-import { fetchYTIChannel } from '../../src/utils/mediafetch/ytbchannel';
-import fetcher from '../../src/utils/mediafetch/bilivideo';
-test('bilivideo', async () => {
-  const result = await fetchYTIChannel('@MioriCelesta');
-  console.log(result);
-  return;
-  const content = await fetcher.regexFetch({
+import fetcher from '../../src/utils/mediafetch/ytbchannel';
+test('YT channel', async () => {
+  // HACK: due to yti limiatations this only gets up to 30 videos
+  const result = await fetcher.regexFetch({
     reExtracted: fetcher.regexSearchMatch.exec(
-      'https://www.bilibili.com/video/BV1KW4y1p7oT/?spm_id_from=333.999.0.0'
+      'https://www.youtube.com/c/@MioriCelesta'
     )!,
   });
-  // console.log(content);
-  expect(content?.songList[0]?.id).not.toBeNull();
+  expect(result.songList[0]?.id).not.toBeNull();
 });
