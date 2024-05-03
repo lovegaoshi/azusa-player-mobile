@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { View, ScrollView, RefreshControl } from 'react-native';
-import { Text } from 'react-native-paper';
+import { ActivityIndicator, Text } from 'react-native-paper';
 import { useTranslation } from 'react-i18next';
 
 import { fetchDynamic } from '@utils/mediafetch/biliDynamic';
@@ -44,7 +44,8 @@ export default () => {
   if (loading) {
     return (
       <View style={styles.flex}>
-        <Text style={{ fontSize: 50, color: 'white' }}>Loading...</Text>
+        <View style={{ height: 40 }} />
+        <ActivityIndicator size={100} />
       </View>
     );
   }

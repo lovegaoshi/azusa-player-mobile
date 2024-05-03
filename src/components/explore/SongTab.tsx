@@ -36,7 +36,7 @@ export const BiliSongCard = ({
   const scroll = useNoxSetting(state => state.incSongListScrollCounter);
   const { playAsSearchList } = usePlayback();
 
-  const fontColor = playerStyle.metaData.darkTheme ? 'white' : 'black';
+  const fontColor = playerStyle.colors.primary;
 
   return (
     <View
@@ -81,7 +81,10 @@ export const BiliSongCard = ({
                   {item.name}
                 </Text>
                 <Text
-                  style={{ color: 'grey', paddingLeft: 5 }}
+                  style={{
+                    color: playerStyle.colors.secondary,
+                    paddingLeft: 5,
+                  }}
                   variant="titleSmall"
                   numberOfLines={1}
                 >

@@ -3,7 +3,6 @@ import React, { useState } from 'react';
 import { View, StyleSheet } from 'react-native';
 import { ActivityIndicator, IconButton } from 'react-native-paper';
 import { useTranslation } from 'react-i18next';
-import { activateKeepAwakeAsync, deactivateKeepAwake } from 'expo-keep-awake';
 
 import { logger } from '@utils/Logger';
 import { exportPlayerContent } from '@utils/ChromeStorage';
