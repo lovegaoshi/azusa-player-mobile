@@ -46,5 +46,9 @@ export default (replaceStyle = false) => {
     getBackgroundColor();
   }, [track]);
 
+  useEffect(() => {
+    setBackgroundColor(playerStyle.colors.background);
+  }, [playerStyle]);
+
   return { backgroundColor };
 };

@@ -14,6 +14,7 @@ import PlaylistInfo from '../Info/PlaylistInfo';
 import PlaylistMenuButton from '../Menu/PlaylistMenuButton';
 import usePlaylist from '../usePlaylistRN';
 import SongListScrollbar from './SongListScrollbar';
+import keepAwake from '@utils/keepAwake';
 
 const PlaylistList = () => {
   const currentPlayingId = useNoxSetting(state => state.currentPlayingId);
@@ -128,7 +129,7 @@ const PlaylistList = () => {
           keyExtractor={(item, index) => `${item.id}.${index}`}
           estimatedItemSize={58}
           extraData={shouldReRender}
-          onRefresh={refreshPlaylist}
+          onRefresh={() => keepAwake(refreshPlaylist)}
           refreshing={refreshing}
           showsVerticalScrollIndicator={false}
           onLayout={({
