@@ -2,7 +2,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { Dimensions, View } from 'react-native';
 
 import { NoxRoutes } from '@enums/Routes';
-import DummySettings from '../setting/DummySettings';
+import Explore from '../explore/View';
 import LandscapeLyricView from './LandscapeLyric';
 import { SettingsLandscape as Settings } from '../setting/View';
 import Playlist from '../playlist/View';
@@ -42,7 +42,7 @@ export default ({ panelWidth }: Props) => {
         />
         <Stack.Screen
           name={NoxRoutes.Explore}
-          component={DummySettings}
+          component={Explore}
           options={{ headerShown: false }}
         />
         <Stack.Screen

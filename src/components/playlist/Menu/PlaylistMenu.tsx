@@ -7,6 +7,7 @@ import PlaylistSettingsButton from './PlaylistSettingsButton';
 import { PlaylistTypes } from '@enums/Playlist';
 import { CopiedPlaylistMenuItem } from '@components/buttons/CopiedPlaylistButton';
 import PlaylistSortButton from './PlaylistSortButton';
+import keepAwake from '@utils/keepAwake';
 
 enum Icons {
   SETTINGS = 'cog',
@@ -69,12 +70,12 @@ export default ({
       />
       <Menu.Item
         leadingIcon={Icons.BILISYNC}
-        onPress={() => playlistSync2Bilibili()}
+        onPress={() => keepAwake(playlistSync2Bilibili)}
         title={t('PlaylistOperations.bilisyncTitle')}
       />
       <Menu.Item
         leadingIcon={Icons.BILISHAZAM}
-        onPress={() => playlistBiliShazam()}
+        onPress={() => keepAwake(playlistBiliShazam)}
         title={t('PlaylistOperations.bilishazamTitle')}
       />
       <Menu.Item

@@ -3,12 +3,12 @@ import React, { useState } from 'react';
 import { View, StyleSheet } from 'react-native';
 import { ActivityIndicator, IconButton } from 'react-native-paper';
 import { useTranslation } from 'react-i18next';
-import { activateKeepAwakeAsync, deactivateKeepAwake } from 'expo-keep-awake';
 
 import { logger } from '@utils/Logger';
 import { exportPlayerContent } from '@utils/ChromeStorage';
 import { ImportProps, ExportProps, Props } from './GenericSyncProps';
 import useSnack from '@stores/useSnack';
+import keepAwake from '@utils/keepAwake';
 
 const ImportSyncFavButton = ({
   restoreFromUint8Array,
@@ -41,11 +41,9 @@ const ImportSyncFavButton = ({
     return response;
   };
 
-  const loginAndDownload = async () => {
+  const loginAndDownload = () => {
     setLoading(true);
-    activateKeepAwakeAsync();
-    await login(cloudDownload, errorHandling);
-    deactivateKeepAwake();
+    keepAwake(() => login(cloudDownload, errorHandling));
   };
 
   return loading ? (
@@ -87,11 +85,9 @@ const ExportSyncFavButton = ({ noxBackup, login }: ExportProps) => {
     return response;
   };
 
-  const loginAndUpload = async () => {
-    activateKeepAwakeAsync();
+  const loginAndUpload = () => {
     setLoading(true);
-    await login(cloudUpload, errorHandling);
-    deactivateKeepAwake();
+    keepAwake(() => login(cloudUpload, errorHandling));
   };
 
   return loading ? (
