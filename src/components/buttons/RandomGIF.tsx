@@ -56,7 +56,6 @@ export default function RandomGIFButton({
         style={{ width: iconsize, height: iconsize }}
         source={randomGIFURI}
         resizeMode={'contain'}
-        transition={{ effect: 'flip-from-top' }}
         // contentFit="contain"
       />
     </Pressable>

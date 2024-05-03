@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { ImageBackground, Dimensions, View, StyleSheet } from 'react-native';
 // import { Video, ResizeMode } from 'expo-av';
 import Video from 'react-native-video';
+
 import { useNoxSetting } from '@stores/useApp';
 import { customReqHeader } from '@utils/BiliFetch';
 import { logger } from '@utils/Logger';
@@ -9,6 +10,7 @@ import { useIsLandscape } from '@hooks/useOrientation';
 import resolveBackgroundImage, {
   RESOLVE_TYPE,
 } from '@utils/mediafetch/mainbackgroundfetch';
+import EmptyBackground from './AccentColorBackground';
 
 const MainBackground = ({ children }: { children: React.JSX.Element }) => {
   const playerStyle = useNoxSetting(state => state.playerStyle);
@@ -82,7 +84,7 @@ const MainBackground = ({ children }: { children: React.JSX.Element }) => {
         </>
       );
     default:
-      return <>{children}</>;
+      return <EmptyBackground>{children}</EmptyBackground>;
   }
 };
 

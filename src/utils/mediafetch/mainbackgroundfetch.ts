@@ -12,9 +12,11 @@ export enum RESOLVE_TYPE {
   biliNFTVideoNew = 'biliNFTVideoNew',
   biliGarbHeadVideo = 'biliGarbHeadVideo',
   image = 'image',
+  empty = 'empty',
 }
 
-export default async (backgroundImage: string | NoxTheme.backgroundImage) => {
+export default async (backgroundImage?: string | NoxTheme.backgroundImage) => {
+  if (!backgroundImage) return { type: RESOLVE_TYPE.empty, identifier: '' };
   if (typeof backgroundImage === 'string') {
     return { type: RESOLVE_TYPE.image, identifier: backgroundImage };
   }
