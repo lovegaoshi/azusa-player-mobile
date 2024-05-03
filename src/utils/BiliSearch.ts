@@ -18,7 +18,6 @@ import bilisearchFetch from '@utils/mediafetch/bilisearch';
 import bilichannelAudioFetch from './mediafetch/bilichannelAudio';
 import ytbvideoFetch from '@utils/mediafetch/ytbvideo';
 import ytbplaylistFetch from './mediafetch/ytbplaylist';
-import ytbchannelFetch from './mediafetch/ytbchannel';
 import ytbmixlistFetch from './mediafetch/ytbmixlist';
 import ytbsearchFetch from './mediafetch/ytbsearch';
 import bililiveFetch from './mediafetch/bililive';
@@ -143,10 +142,6 @@ interface ReExtraction<T> {
 }
 
 const reExtractions: ReExtraction<NoxNetwork.NoxRegexFetch>[] = [
-  {
-    match: ytbchannelFetch.regexSearchMatch,
-    fetch: ytbchannelFetch.regexFetch,
-  },
   {
     match: biliFavColleFetch.regexSearchMatch,
     fetch: biliFavColleFetch.regexFetch,
