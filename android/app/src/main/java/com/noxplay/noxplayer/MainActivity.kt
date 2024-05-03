@@ -23,6 +23,9 @@ class MainActivity : ReactActivity() {
             setShowWhenLocked(true)
             setTurnScreenOn(true)
         }
+        if ("trackplayer://service-bound" in intent.data.toString()) {
+            moveTaskToBack(true)
+        }
     }
 
     /**
@@ -41,7 +44,7 @@ class MainActivity : ReactActivity() {
               super.onCreate(savedInstanceState)
             }
 
-            override fun getLaunchOptions(): Bundle? {
+            override fun getLaunchOptions(): Bundle {
               val launchOptions = super.getLaunchOptions() ?: Bundle()
               launchOptions.putString("intentData", mActivity.intent.dataString)
               return launchOptions
