@@ -15,6 +15,7 @@ import noxPlayingList, { setPlayingIndex } from '@stores/playingList';
 import noxCache, { noxCacheKey } from '@utils/Cache';
 import useDataSaver from './useDataSaver';
 import useSnack from '@stores/useSnack';
+import { PlaylistTypes } from '@enums/Playlist';
 
 const PLAYLIST_MEDIAID = 'playlist-';
 
@@ -38,7 +39,6 @@ const dataSaverPlaylistWrapper = (datasave = true) => {
 const usePlayback = () => {
   const { t } = useTranslation();
   const currentPlayingList = useNoxSetting(state => state.currentPlayingList);
-  const playlistIds = useNoxSetting(state => state.playlistIds);
   const playlists = useNoxSetting(state => state.playlists);
   const currentPlayingId = useNoxSetting(state => state.currentPlayingId);
   const searchPlaylist = useNoxSetting(state => state.searchPlaylist);
@@ -82,7 +82,8 @@ const usePlayback = () => {
     if (currentPlayingId !== song.id) {
       await playSongUninterrupted(song);
     }
-    clearPlaylistUninterrupted();
+    // HACK: WHY?
+    clearPlaylistUninterrupted().then(TrackPlayer.play);
   };
 
   const playAsSearchList = async ({
@@ -101,11 +102,9 @@ const usePlayback = () => {
   };
 
   const shuffleAll = async () => {
-    console.log(playlistIds, playlists);
-    let allSongs = playlistIds.reduce(
-      (acc, curr) => acc.concat(playlists[curr].songList),
-      [] as NoxMedia.Song[]
-    );
+    let allSongs = Object.values(playlists)
+      .filter(playlist => playlist.type === PlaylistTypes.Typical)
+      .reduce((acc, curr) => acc.concat(curr.songList), [] as NoxMedia.Song[]);
     if (isDataSaving) {
       const cachedSongs = Array.from(noxCache.noxMediaCache.cache.keys());
       allSongs = allSongs.filter(song =>

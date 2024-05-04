@@ -34,13 +34,18 @@ class MainActivity : ReactActivity() {
   override fun onNewIntent(intent: Intent?) {
     super.onNewIntent(intent)
     if (intent !== null) {
-      val launchOptions = Bundle()
-      launchOptions.putString("intentData", intent.dataString)
-      launchOptions.putString("intentAction", intent.action)
-      launchOptions.putBundle("intentBundle", intent.extras)
-      this.reactInstanceManager.currentReactContext
-        ?.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter::class.java)
-        ?.emit("APMNewIntent", Arguments.fromBundle(launchOptions))
+        if (intent.action?.contains("android.media.action.MEDIA_PLAY_FROM_SEARCH") == true) {
+            this.reactInstanceManager.currentReactContext
+                ?.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter::class.java)
+                ?.emit("remote-play-search", Arguments.fromBundle(intent.extras))
+        }
+        val launchOptions = Bundle()
+        launchOptions.putString("intentData", intent.dataString)
+        launchOptions.putString("intentAction", intent.action)
+        launchOptions.putBundle("intentBundle", intent.extras)
+        this.reactInstanceManager.currentReactContext
+            ?.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter::class.java)
+            ?.emit("APMNewIntent", Arguments.fromBundle(launchOptions))
     }
   }
     /**

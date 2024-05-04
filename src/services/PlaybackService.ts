@@ -53,7 +53,7 @@ export async function PlaybackService() {
   DeviceEventEmitter.addListener('APMEnterPIP', (e: boolean) =>
     setState({ pipMode: e })
   );
-  DeviceEventEmitter.addListener('APMNewIntent', (e: boolean) =>
+  DeviceEventEmitter.addListener('APMNewIntent', (e: NoxComponent.AppProps) =>
     console.log('apm', e)
   );
 
