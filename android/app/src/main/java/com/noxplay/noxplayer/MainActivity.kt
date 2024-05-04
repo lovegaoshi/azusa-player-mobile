@@ -2,6 +2,7 @@ package com.noxplay.noxplayer
 
 import android.annotation.SuppressLint
 import android.app.PictureInPictureParams
+import android.content.Intent
 import android.content.res.Configuration
 import android.os.Build
 import android.os.Bundle
@@ -11,6 +12,7 @@ import com.facebook.react.ReactActivityDelegate
 import com.facebook.react.defaults.DefaultNewArchitectureEntryPoint.fabricEnabled
 import com.facebook.react.defaults.DefaultReactActivityDelegate
 import com.facebook.react.modules.core.DeviceEventManagerModule
+import com.facebook.react.bridge.Arguments
 import expo.modules.ReactActivityDelegateWrapper
 
 class MainActivity : ReactActivity() {
@@ -28,6 +30,19 @@ class MainActivity : ReactActivity() {
         }
     }
 
+  @SuppressLint("VisibleForTests")
+  override fun onNewIntent(intent: Intent?) {
+    super.onNewIntent(intent)
+    if (intent !== null) {
+      val launchOptions = Bundle()
+      launchOptions.putString("intentData", intent.dataString)
+      launchOptions.putString("intentAction", intent.action)
+      launchOptions.putBundle("intentBundle", intent.extras)
+      this.reactInstanceManager.currentReactContext
+        ?.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter::class.java)
+        ?.emit("APMNewIntent", Arguments.fromBundle(launchOptions))
+    }
+  }
     /**
      * Returns the name of the main component registered from JavaScript. This is used to schedule
      * rendering of the component.
@@ -47,6 +62,8 @@ class MainActivity : ReactActivity() {
             override fun getLaunchOptions(): Bundle {
               val launchOptions = super.getLaunchOptions() ?: Bundle()
               launchOptions.putString("intentData", mActivity.intent.dataString)
+              launchOptions.putString("intentAction", mActivity.intent.action)
+              launchOptions.putBundle("intentBundle", mActivity.intent.extras)
               return launchOptions
             }
         }

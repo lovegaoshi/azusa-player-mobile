@@ -9,6 +9,9 @@ declare global {
   namespace NoxComponent {
     interface AppProps {
       intentData?: IntentData;
+      intentAction: string;
+      intentBundle: null | any;
+      rootTag: number;
     }
     interface NavigationProps {
       navigation: DrawerNavigationProp<ParamListBase>;
