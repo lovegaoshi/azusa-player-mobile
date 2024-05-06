@@ -1,6 +1,6 @@
 {
   "name": "azusa-player-mobile",
-  "version": "2.15.1",
+  "version": "2.15.2",
   "private": true,
   "scripts": {
     "android": "react-native run-android",
