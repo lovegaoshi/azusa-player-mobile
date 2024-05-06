@@ -11,8 +11,11 @@
   </a>
   <a href="https://github.com/lovegaoshi/azusa-player-mobile/releases">
     <img alt="GitHub release (latest by date)" src="https://img.shields.io/github/v/release/lovegaoshi/azusa-player-mobile">
-  </a>
-  
+  </a>  
+</p>
+
+<p align="center"> 
+  <a href='https://play.google.com/store/apps/details?id=com.noxplay.noxplayer&pcampaignid=pcampaignidMKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1'><img alt='Get it on Google Play' src='https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png' width=170/></a>
 </p>
 
 <h3 align="center" style="color:purple">Azusa-Player-Mobile / 电梓播放器手机版</h3>
