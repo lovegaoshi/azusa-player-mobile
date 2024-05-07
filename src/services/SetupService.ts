@@ -1,4 +1,7 @@
-import TrackPlayer, { RepeatMode } from 'react-native-track-player';
+import TrackPlayer, {
+  RepeatMode,
+  IOSCategoryOptions,
+} from 'react-native-track-player';
 
 import { initRNTPOptions } from '../utils/RNTPUtils';
 import appStore from '@stores/appStore';
@@ -30,6 +33,11 @@ export const SetupService = async ({
   await setupPlayer({
     autoHandleInterruptions: noInterruption ? false : true,
     maxCacheSize: 1024 * 100,
+    iosCategoryOptions: [
+      IOSCategoryOptions.AllowAirPlay,
+      IOSCategoryOptions.AllowBluetooth,
+      IOSCategoryOptions.AllowBluetoothA2DP,
+    ],
   });
   const RNTPOptions = initRNTPOptions({ keepForeground });
   setState({ RNTPOptions });
