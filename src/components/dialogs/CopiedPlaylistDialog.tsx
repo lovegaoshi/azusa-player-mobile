@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Pressable, View, FlatList, StyleSheet } from 'react-native';
+import { Pressable, View, FlatList, StyleSheet, Platform } from 'react-native';
 import { Button, Dialog, Portal, Text, RadioButton } from 'react-native-paper';
 import { useTranslation } from 'react-i18next';
 
@@ -73,7 +73,7 @@ export default ({
         onDismiss={handleClose}
         style={[
           styles.dialog,
-          { height: `${10 + playlistList().length * 10}%` },
+          { height: Platform.OS === 'android' ? `${10 + playlistList().length * 10}%` : `${20 + playlistList().length * 10}%` },
         ]}
       >
         <Dialog.Title style={styles.dialogTitle}>
@@ -121,7 +121,7 @@ export default ({
 const styles = StyleSheet.create({
   dialog: {
     minHeight: '30%',
-    maxHeight: '50%',
+    maxHeight: Platform.OS === 'android' ? '50%' : '100%',
   },
   dialogTitle: {
     maxHeight: 100,
