@@ -5970,7 +5970,7 @@ __metadata:
     react-native-safe-area-context: "npm:^4.10.1"
     react-native-screens: "npm:3.31.1"
     react-native-shadow-2: "npm:^7.0.8"
-    react-native-share-menu: "git+https://github.com/lovegaoshi/react-native-share-menu.git"
+    react-native-share-menu: "git+https://github.com/Expensify/react-native-share-menu.git"
     react-native-svg: "npm:15.2.0"
     react-native-svga-player: "https://lovegaoshi@github.com/lovegaoshi/react-native-svga-player.git#commit=588c9a2819cb2fe14dd7204addaeadd4bf049333"
     react-native-tab-view: "npm:^3.5.2"
@@ -14810,10 +14810,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-native-share-menu@git+https://github.com/lovegaoshi/react-native-share-menu.git":
+"react-native-share-menu@git+https://github.com/Expensify/react-native-share-menu.git":
   version: 6.0.0
-  resolution: "react-native-share-menu@https://github.com/lovegaoshi/react-native-share-menu.git#commit=de41a0e5aa574d9674d0677f17d1560dcf4cc04e"
-  checksum: 10c0/6e31ca8f4088d0730e07df29cb89a96e93d02dd9824992a15d9ce69c7d20a66d059111aece94e8011cad2edd5d0b189604c630bdaa93c64be7e0ad131203a364
+  resolution: "react-native-share-menu@https://github.com/Expensify/react-native-share-menu.git#commit=cec3ac8f399c731898004761b93761a069c0d542"
+  checksum: 10c0/10050b9b08c3125c17acab4ee48ad6d93ae49dcc453fd9281df35ed3199440841aa0598289109d25d989fd9232df7b3ce156cc6967e35d2e13ad52f3c6082781
   languageName: node
   linkType: hard
 
