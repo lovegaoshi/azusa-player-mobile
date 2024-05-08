@@ -86,9 +86,9 @@ jobs:
           git submodule update --init --recursive
 
       - name: alias yarn.cmd to yarn
-        run: | 
-        alias yarn.cmd="yarn"
-        yarn install; yarn postinstall
+        run: |
+          alias yarn.cmd="yarn"
+          yarn install; yarn postinstall
 
       - name: Pod Install
         run: yarn ios:build
