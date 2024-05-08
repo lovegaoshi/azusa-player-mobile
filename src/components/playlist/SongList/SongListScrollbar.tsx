@@ -130,7 +130,7 @@ export default function CustomScrollView({
     return {
       opacity: withTiming(scrollIndicatorOpacity.value, scrollTimingAnimConfig),
       height: scrollIndicatorHeight.value,
-      top: scrollIndicatorFromTopPos.value,
+      top: scrollIndicatorFromTopPos.value || 0,
     };
   });
 

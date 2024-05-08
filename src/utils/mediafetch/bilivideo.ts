@@ -19,9 +19,9 @@ export enum FieldEnum {
 const URL_VIDEO_INFO =
   'https://api.bilibili.com/x/web-interface/view?bvid={bvid}';
 const URL_PLAY_URL =
-  'https://api.bilibili.com/x/player/playurl?cid={cid}&bvid={bvid}&qn=64&fnval=16&try_look=1';
+  'https://api.bilibili.com/x/player/playurl?cid={cid}&bvid={bvid}&qn=64&fnval=16&try_look=1&voice_balance=1';
 const URL_PLAY_URL_IOS =
-  'https://api.bilibili.com/x/player/playurl?cid={cid}&bvid={bvid}&qn=6&fnval=16&platform=html5';
+  'https://api.bilibili.com/x/player/playurl?cid={cid}&bvid={bvid}&qn=6&fnval=16&platform=html5&voice_balance=1';
 
 const fetchBVIDRaw = async (bvid: string): Promise<NoxMedia.Song[]> => {
   logger.info(
@@ -119,7 +119,7 @@ export const fetchVideoPlayUrlPromise = async ({
   cid,
   extractType = FieldEnum.AudioUrl,
   iOS = true,
-}: FetchPlayURL) => {
+}: FetchPlayURL): Promise<NoxNetwork.ParsedNoxMediaURL> => {
   logger.debug(
     `fethcVideoPlayURL: ${URL_PLAY_URL.replace('{bvid}', bvid).replace(
       '{cid}',
