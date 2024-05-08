@@ -47,7 +47,7 @@ jobs:
       contents: write
     steps:
       - name: setup XCode
-      - uses: maxim-lobanov/setup-xcode@v1
+        uses: maxim-lobanov/setup-xcode@v1
         with:
           xcode-version: '15.0.1'
 
