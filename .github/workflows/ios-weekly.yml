@@ -86,17 +86,12 @@ jobs:
           git submodule update --init --recursive
 
       - name: alias yarn.cmd to yarn
-        run: alias yarn.cmd="yarn"
-
-      - name: Install dependencies
-        uses: nick-fields/retry@v3
-        with:
-          timeout_minutes: 10
-          max_attempts: 10
-          command: yarn install; yarn postinstall
+        run: | 
+        alias yarn.cmd="yarn"
+        yarn install; yarn postinstall
 
       - name: Pod Install
-        run: cd ios && rm Podfile.lock && pod install --repo-update
+        run: yarn ios:build
 
       - name: python fixHTTP
         run: |

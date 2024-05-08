@@ -84,11 +84,7 @@ jobs:
           encodedString: ${{ secrets.SIGNED_KEY_BASE64 }}
 
       - name: Install dependencies
-        uses: nick-fields/retry@v3
-        with:
-          timeout_minutes: 10
-          max_attempts: 10
-          command: yarn install; yarn postinstall
+        run: yarn install; yarn postinstall
 
       - name: clean generated builds
         run: rm -rf android/app/build/generated/
@@ -193,11 +189,7 @@ jobs:
           encodedString: ${{ secrets.SIGNED_KEY_BASE64 }}
 
       - name: Install dependencies
-        uses: nick-fields/retry@v3
-        with:
-          timeout_minutes: 10
-          max_attempts: 10
-          command: yarn install; yarn postinstall
+        run: yarn install; yarn postinstall
 
       - name: clean generated builds
         run: rm -rf android/app/build/generated/
@@ -272,11 +264,7 @@ jobs:
           echo "Commit Tag: $COMMIT_TAG"
 
       - name: Install dependencies
-        uses: nick-fields/retry@v3
-        with:
-          timeout_minutes: 10
-          max_attempts: 10
-          command: yarn install; yarn postinstall
+        run: yarn install; yarn postinstall
 
       - name: Pod Install
         run: cd ios && rm Podfile.lock && pod install --repo-update

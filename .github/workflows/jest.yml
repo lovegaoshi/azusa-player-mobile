@@ -18,11 +18,7 @@ jobs:
         uses: threeal/setup-yarn-action@v2.0.0
 
       - name: Install dependencies
-        uses: nick-fields/retry@v3
-        with:
-          timeout_minutes: 10
-          max_attempts: 10
-          command: yarn
+        run: yarn install; yarn postinstall
 
       - name: run tests
         run: |
