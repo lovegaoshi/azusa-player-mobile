@@ -46,11 +46,6 @@ jobs:
     permissions:
       contents: write
     steps:
-      - name: setup XCode
-        uses: maxim-lobanov/setup-xcode@v1
-        with:
-          xcode-version: '15.0.1'
-
       - name: Checkout
         uses: actions/checkout@v4
 
