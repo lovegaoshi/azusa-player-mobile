@@ -13,16 +13,21 @@ import Playlists from './Playlists';
 import { BottomTabRouteIcons as RouteIcons } from '@enums/BottomTab';
 
 interface Props {
-  view: string;
+  view: NoxRoutes;
+  routeIcon?: RouteIcons;
   icon: string;
   text: string;
 }
-const RenderDrawerItem = ({ view, icon, text }: Props) => {
+const RenderDrawerItem = ({ view, icon, text, routeIcon }: Props) => {
   const navigation = useNavigation();
   const { t } = useTranslation();
+  const setRoute = useNoxSetting(state => state.setBottomTabRoute);
 
   return (
-    <TouchableRipple onPress={() => navigation.navigate(view as never)}>
+    <TouchableRipple onPress={() => {
+      navigation.navigate(view as never);
+      if (routeIcon) setRoute(routeIcon);
+    }}>
       <View style={styles.drawerItemContainer}>
         <IconButton icon={icon} size={32} />
         <View style={styles.drawerItemTextContainer}>
@@ -50,7 +55,6 @@ export default (props: any) => {
   const navigation = useNavigation();
   const playlistIds = useNoxSetting(state => state.playlistIds);
   const playerStyle = useNoxSetting(state => state.playerStyle);
-  const setRoute = useNoxSetting(state => state.setBottomTabRoute);
   // HACK: I know its bad! But somehow this hook isnt updating in its own
   // useEffects...
   const { buildBrowseTree } = useAAPlayback();
@@ -83,17 +87,20 @@ export default (props: any) => {
           icon={'home-outline'}
           view={NoxRoutes.PlayerHome}
           text={'appDrawer.homeScreenName'}
+          routeIcon={RouteIcons.music}
         />
       </BiliCard>
       <RenderDrawerItem
         icon={'compass'}
         view={NoxRoutes.Explore}
         text={'appDrawer.exploreScreenName'}
+        routeIcon={RouteIcons.explore}
       />
       <RenderDrawerItem
         icon={'cog'}
         view={NoxRoutes.Settings}
         text={'appDrawer.settingScreenName'}
+        routeIcon={RouteIcons.setting}
       />
       <Divider />
       <Playlists />

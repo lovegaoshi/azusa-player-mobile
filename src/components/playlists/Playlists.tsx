@@ -19,6 +19,7 @@ import ShuffleAllButton from '@components/playlists/ShuffleAllButton';
 import TimerButton from '@components/playlists/TimerButton';
 import PlaylistItem from '@components/playlists/PlaylistItem';
 import usePlaylistAA from '@hooks/usePlaylistAA';
+import { BottomTabRouteIcons as RouteIcons } from '@enums/BottomTab';
 
 export default () => {
   const navigation = useNavigation();
@@ -32,6 +33,7 @@ export default () => {
   const setCurrentPlaylist = useNoxSetting(state => state.setCurrentPlaylist);
   const setPlaylistIds = useNoxSetting(state => state.setPlaylistIds);
   const scroll = useNoxSetting(state => state.incSongListScrollCounter);
+  const setRoute = useNoxSetting(state => state.setBottomTabRoute);
   const { removePlaylist } = usePlaylistAA();
   const { TwoWayAlert } = useAlert();
   // HACK: I know its bad! But somehow this hook isnt updating in its own
@@ -54,6 +56,7 @@ export default () => {
     setCurrentPlaylist(playlists[playlistId]);
     scroll();
     navigation.navigate(NoxRoutes.Playlist as never);
+    setRoute(RouteIcons.music);
   };
 
   const SearchPlaylistAsNewButton = () => (
@@ -131,7 +134,7 @@ export default () => {
           {
             backgroundColor:
               currentPlaylist.id ===
-              playlists[StorageKeys.SEARCH_PLAYLIST_KEY]?.id
+                playlists[StorageKeys.SEARCH_PLAYLIST_KEY]?.id
                 ? playerStyle.customColors.playlistDrawerBackgroundColor
                 : undefined,
           },
@@ -142,7 +145,7 @@ export default () => {
           icon={SearchPlaylistAsNewButton()}
           leadColor={
             currentPlayingList.id ===
-            playlists[StorageKeys.SEARCH_PLAYLIST_KEY].id
+              playlists[StorageKeys.SEARCH_PLAYLIST_KEY].id
               ? playerStyle.colors.primary //customColors.playlistDrawerBackgroundColor
               : undefined
           }
