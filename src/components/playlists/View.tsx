@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect } from 'react';
 import { IconButton, Divider, Text, TouchableRipple } from 'react-native-paper';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useFocusEffect } from '@react-navigation/native';
 import { View, ImageBackground, StyleSheet, Linking } from 'react-native';
 import { useTranslation } from 'react-i18next';
 
@@ -10,6 +10,7 @@ import useAAPlayback from '@hooks/useAAPlayback';
 import { NoxRoutes } from '@enums/Routes';
 import { logger } from '@utils/Logger';
 import Playlists from './Playlists';
+import { BottomTabRouteIcons as RouteIcons } from '@enums/BottomTab';
 
 interface Props {
   view: string;
@@ -49,6 +50,7 @@ export default (props: any) => {
   const navigation = useNavigation();
   const playlistIds = useNoxSetting(state => state.playlistIds);
   const playerStyle = useNoxSetting(state => state.playerStyle);
+  const setRoute = useNoxSetting(state => state.setBottomTabRoute);
   // HACK: I know its bad! But somehow this hook isnt updating in its own
   // useEffects...
   const { buildBrowseTree } = useAAPlayback();

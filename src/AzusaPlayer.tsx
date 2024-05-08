@@ -129,10 +129,9 @@ const AzusaPlayer = () => {
             <Drawer.Screen
               name={NoxRoutes.Explore}
               options={{
-                drawerIcon: () => (
-                  <IconButton icon={ScreenIcons.ExploreScreen} />
-                ),
+                drawerIcon: () => <IconButton icon={ScreenIcons.ExploreScreen} />,
                 title: String(t('appDrawer.exploreScreenName')),
+                header: () => null,
               }}
               component={Explore}
             />
