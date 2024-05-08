@@ -1,4 +1,4 @@
-name: APM Manual AAB Release
+name: APM AAB Release
 on:
   workflow_dispatch:
 jobs:
