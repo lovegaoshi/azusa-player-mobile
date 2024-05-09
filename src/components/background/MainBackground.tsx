@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { ImageBackground, Dimensions, View, StyleSheet } from 'react-native';
-// import { Video, ResizeMode } from 'expo-av';
-import Video from 'react-native-video';
+import Video, { VideoRef } from 'react-native-video';
 
 import { useNoxSetting } from '@stores/useApp';
 import { customReqHeader } from '@utils/BiliFetch';
@@ -17,6 +16,7 @@ const MainBackground = ({ children }: { children: React.JSX.Element }) => {
   const isLandscape = useIsLandscape();
   const { width, height } = Dimensions.get('window');
   const [bkgrdImg, setBkgrdImg] = useState<NoxTheme.backgroundImage>();
+  const videoRef = React.useRef<VideoRef | null>(null);
   const bkgrdImgRaw =
     isLandscape && playerStyle.bkgrdImgLandscape
       ? playerStyle.bkgrdImgLandscape
@@ -45,6 +45,7 @@ const MainBackground = ({ children }: { children: React.JSX.Element }) => {
       return (
         <>
           <Video
+            ref={videoRef}
             source={{
               uri: bkgrdImg.identifier,
               headers: customReqHeader(bkgrdImg.identifier, {}),
@@ -56,20 +57,20 @@ const MainBackground = ({ children }: { children: React.JSX.Element }) => {
                 `with: ${bkgrdImg.identifier} + ${JSON.stringify(customReqHeader(bkgrdImg.identifier, {}))}`
               );
             }}
-            /**
-            isLooping
-            resizeMode={ResizeMode.COVER}
-            shouldPlay={true}
-            isMuted={true}
-             *
-             */
-            repeat
+            onEnd={() => {
+              // HACK: for a toA functioanlity we have 2 solutions. one is to
+              // do like this; the other is to keep in loop, but change src.
+              // ofc the latter is more smooth but meh I dont have two srcs prepared
+              if (!bkgrdImg.toA) return;
+              videoRef.current?.seek(bkgrdImg.toA);
+              videoRef.current?.resume();
+            }}
+            repeat={bkgrdImg.toA ? false : true}
             muted
             resizeMode="cover"
             disableFocus={true}
             preventsDisplaySleepDuringVideoPlayback={false}
             bufferConfig={{
-              // @ts-ignore
               cacheSizeMB: 200,
             }}
           />

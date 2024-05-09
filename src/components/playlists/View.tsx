@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect } from 'react';
 import { IconButton, Divider, Text, TouchableRipple } from 'react-native-paper';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useFocusEffect } from '@react-navigation/native';
 import { View, ImageBackground, StyleSheet, Linking } from 'react-native';
 import { useTranslation } from 'react-i18next';
 
@@ -10,18 +10,24 @@ import useAAPlayback from '@hooks/useAAPlayback';
 import { NoxRoutes } from '@enums/Routes';
 import { logger } from '@utils/Logger';
 import Playlists from './Playlists';
+import { BottomTabRouteIcons as RouteIcons } from '@enums/BottomTab';
 
 interface Props {
-  view: string;
+  view: NoxRoutes;
+  routeIcon?: RouteIcons;
   icon: string;
   text: string;
 }
-const RenderDrawerItem = ({ view, icon, text }: Props) => {
+const RenderDrawerItem = ({ view, icon, text, routeIcon }: Props) => {
   const navigation = useNavigation();
   const { t } = useTranslation();
+  const setRoute = useNoxSetting(state => state.setBottomTabRoute);
 
   return (
-    <TouchableRipple onPress={() => navigation.navigate(view as never)}>
+    <TouchableRipple onPress={() => {
+      navigation.navigate(view as never);
+      if (routeIcon) setRoute(routeIcon);
+    }}>
       <View style={styles.drawerItemContainer}>
         <IconButton icon={icon} size={32} />
         <View style={styles.drawerItemTextContainer}>
@@ -81,17 +87,20 @@ export default (props: any) => {
           icon={'home-outline'}
           view={NoxRoutes.PlayerHome}
           text={'appDrawer.homeScreenName'}
+          routeIcon={RouteIcons.music}
         />
       </BiliCard>
       <RenderDrawerItem
         icon={'compass'}
         view={NoxRoutes.Explore}
         text={'appDrawer.exploreScreenName'}
+        routeIcon={RouteIcons.explore}
       />
       <RenderDrawerItem
         icon={'cog'}
         view={NoxRoutes.Settings}
         text={'appDrawer.settingScreenName'}
+        routeIcon={RouteIcons.setting}
       />
       <Divider />
       <Playlists />

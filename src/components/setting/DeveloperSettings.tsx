@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { View, ScrollView } from 'react-native';
+import { View, ScrollView, Platform } from 'react-native';
 import { List } from 'react-native-paper';
 import { useTranslation } from 'react-i18next';
 // eslint-disable-next-line import/no-unresolved
@@ -169,7 +169,7 @@ const Home = ({ navigation }: NoxComponent.NavigationProps) => {
             <View>
               <RenderSetting item={developerSettings.noInterruption} />
               <RenderSetting item={developerSettings.prefetchTrack} />
-              <RenderSetting item={developerSettings.keepForeground} />
+              {Platform.OS === 'android' && <RenderSetting item={developerSettings.keepForeground} />}
               <RenderSetting item={developerSettings.karaokeLyrics} />
             </View>
           </GroupView>

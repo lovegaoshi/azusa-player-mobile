@@ -15,6 +15,15 @@ export enum RESOLVE_TYPE {
   empty = 'empty',
 }
 
+const BackgroundVideoWrapper = async (
+  identifier: string,
+  backgroundImage: NoxTheme.backgroundImage
+) => ({
+  type: RESOLVE_TYPE.video,
+  identifier,
+  toA: backgroundImage.toA,
+});
+
 export default async (backgroundImage?: string | NoxTheme.backgroundImage) => {
   if (!backgroundImage) return { type: RESOLVE_TYPE.empty, identifier: '' };
   if (typeof backgroundImage === 'string') {
@@ -22,49 +31,49 @@ export default async (backgroundImage?: string | NoxTheme.backgroundImage) => {
   }
   switch (backgroundImage.type) {
     case RESOLVE_TYPE.bvid:
-      return {
-        type: RESOLVE_TYPE.video,
-        identifier: await cacheWrapper(
+      return BackgroundVideoWrapper(
+        await cacheWrapper(
           `${RESOLVE_TYPE.bvid}-${backgroundImage.identifier}`,
           () => fetchVideoPlayUrl(backgroundImage.identifier)
         ),
-      };
+        backgroundImage
+      );
     case RESOLVE_TYPE.biliNFTVideo: {
       logger.warn(
         `[backgroundFetch] ${RESOLVE_TYPE.biliNFTVideo} is no longer supported.`
       );
       const [act_id, index] = JSON.parse(backgroundImage.identifier);
-      return {
-        type: RESOLVE_TYPE.video,
-        identifier: await cacheWrapper(
+      return BackgroundVideoWrapper(
+        await cacheWrapper(
           `${RESOLVE_TYPE.biliNFTVideoNew}-${backgroundImage.identifier}`,
           () => biliNFTVideoFetchOld({ act_id, index })
         ),
-      };
+        backgroundImage
+      );
     }
     case RESOLVE_TYPE.biliNFTVideoNew: {
       const [act_id, lottery_id, index] = JSON.parse(
         backgroundImage.identifier
       );
-      return {
-        type: RESOLVE_TYPE.video,
-        identifier: await cacheWrapper(
+      return BackgroundVideoWrapper(
+        await cacheWrapper(
           `${RESOLVE_TYPE.biliNFTVideoNew}-${backgroundImage.identifier}`,
           () => biliNFTVideoFetch({ act_id, lottery_id, index })
         ),
-      };
+        backgroundImage
+      );
     }
     case RESOLVE_TYPE.biliGarbHeadVideo:
-      return {
-        type: RESOLVE_TYPE.video,
-        identifier: await cacheWrapper(
+      return BackgroundVideoWrapper(
+        await cacheWrapper(
           `${RESOLVE_TYPE.biliGarbHeadVideo}-${backgroundImage.identifier}`,
           () =>
             biliGarbHeadVideoFetch({
               act_id: backgroundImage.identifier,
             })
         ),
-      };
+        backgroundImage
+      );
 
     default:
       return backgroundImage;

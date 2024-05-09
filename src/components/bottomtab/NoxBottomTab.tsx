@@ -6,6 +6,7 @@ import { getDrawerStatusFromState } from '@react-navigation/drawer';
 
 import { NoxRoutes } from '@enums/Routes';
 import { useNoxSetting } from '@stores/useApp';
+import { BottomTabRouteIcons as RouteIcons } from '@enums/BottomTab';
 
 interface IconProps {
   icon: string;
@@ -22,18 +23,12 @@ const BottomIconButton = ({ icon, onPress }: IconProps) => {
   );
 };
 
-enum RouteIcons {
-  playlist = 'playlist-music',
-  music = 'music-note',
-  explore = 'compass',
-  setting = 'cog',
-}
-
 const NoxAndroidBottomTab = ({ navigation }: NoxComponent.NavigationProps2) => {
   const navigationGlobal = useNavigation();
   const playerStyle = useNoxSetting(state => state.playerStyle);
   const gestureMode = useNoxSetting(state => state.gestureMode);
-  const [route, setRoute] = React.useState('music');
+  const route = useNoxSetting(state => state.bottomTabRoute);
+  const setRoute = useNoxSetting(state => state.setBottomTabRoute);
 
   const isDrawerOpen = () => {
     if (navigation === undefined) return false;

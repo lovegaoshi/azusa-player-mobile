@@ -110,16 +110,6 @@ const Settings = ({ navigation, headerBackVisible = true }: Props) => {
       <Stack.Screen
         name={VIEW.HOME}
         component={HomeSettings}
-        options={{
-          headerLeft: () => (
-            <IconButton
-              icon="menu"
-              size={40}
-              style={styles.menuButton}
-              onPress={() => navigation.openDrawer()}
-            />
-          ),
-        }}
       />
       <Stack.Screen
         name={VIEW.SPLASH_GALLARY}

@@ -24,8 +24,12 @@ import { setPlayingList, setPlayingIndex } from '@stores/playingList';
 import DummyLyricDetail from '../objects/LyricDetail';
 import { MUSICFREE } from '../utils/mediafetch/musicfree';
 import { IntentData } from '@enums/Intent';
+import { BottomTabRouteIcons } from '@enums/BottomTab';
 
 interface NoxSetting {
+  bottomTabRoute: BottomTabRouteIcons;
+  setBottomTabRoute: (val: BottomTabRouteIcons) => void;
+
   songListScrollCounter: number;
   incSongListScrollCounter: () => void;
 
@@ -133,6 +137,9 @@ interface NoxSetting {
  * as well as saving and loading states to/from asyncStorage.
  */
 export const useNoxSetting = create<NoxSetting>((set, get) => ({
+  bottomTabRoute: BottomTabRouteIcons.music,
+  setBottomTabRoute: val => set({ bottomTabRoute: val }),
+
   songListScrollCounter: 0,
   incSongListScrollCounter: () =>
     set(state => ({
