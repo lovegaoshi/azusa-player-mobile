@@ -25,6 +25,7 @@ declare global {
     export interface backgroundImage {
       type: RESOLVE_TYPE;
       identifier: string;
+      toA?: number;
     }
 
     export interface Style {
