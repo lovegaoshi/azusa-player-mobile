@@ -5978,7 +5978,7 @@ __metadata:
     react-native-track-player: "git+https://lovegaoshi@github.com/lovegaoshi/react-native-track-player.git#APM"
     react-native-url-polyfill: "npm:^2.0.0"
     react-native-vector-icons: "npm:^10.1.0"
-    react-native-video: "git+https://github.com/lovegaoshi/react-native-video.git#dev-android-cache"
+    react-native-video: "npm:^6.0.0-rc.1"
     react-native-webview: "npm:13.10.0"
     react-test-renderer: "npm:18.3.1"
     reactotron-react-native: "npm:^5.1.6"
@@ -14917,13 +14917,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-native-video@git+https://github.com/lovegaoshi/react-native-video.git#dev-android-cache":
-  version: 6.0.0-beta.8
-  resolution: "react-native-video@https://github.com/lovegaoshi/react-native-video.git#commit=230106de5e31e5457ed30c63d68ccffc4cdfd195"
+"react-native-video@npm:^6.0.0-rc.1":
+  version: 6.0.0-rc.1
+  resolution: "react-native-video@npm:6.0.0-rc.1"
   peerDependencies:
     react: "*"
     react-native: "*"
-  checksum: 10c0/8d11182880eb62c48af2f5ac6fbf9f886c0a9dc99d77a533e776c4a6c372254e655a5a3b13bebb4757df78e2cf8c58a23b57483a7e343a275f8052b75890dafb
+  checksum: 10c0/40a2770c14d69e662328dbdf28b045de03fcc68f89a1c97f0aae2c687267484b63d9fa2d7dfdf4c3e9e93495be7bf2630cd741429aee3f94c03cff381737cfee
   languageName: node
   linkType: hard
 

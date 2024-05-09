@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
 import { ImageBackground, Dimensions, View, StyleSheet } from 'react-native';
-// HACK: 6.0.0rc1 doesnt work
-// @ts-expect-error
 import Video, { VideoRef } from 'react-native-video';
 
 import { useNoxSetting } from '@stores/useApp';
@@ -73,7 +71,6 @@ const MainBackground = ({ children }: { children: React.JSX.Element }) => {
             disableFocus={true}
             preventsDisplaySleepDuringVideoPlayback={false}
             bufferConfig={{
-              // @ts-expect-error
               cacheSizeMB: 200,
             }}
           />
