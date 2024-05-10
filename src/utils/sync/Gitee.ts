@@ -3,8 +3,8 @@ import { fromByteArray, toByteArray } from 'base64-js';
 import bfetch from '@utils/BiliFetch';
 import { logger } from '@utils/Logger';
 
-const APM_REPO_NAME = 'APMCloudSync';
-const APM_FILE_NAME = 'APM.noxbackup';
+export const APM_REPO_NAME = 'APMCloudSync';
+export const APM_FILE_NAME = 'APM.noxbackup';
 
 const getUserName = async (token: string) => {
   const res = await bfetch(
