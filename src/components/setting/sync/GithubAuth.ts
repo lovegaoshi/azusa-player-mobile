@@ -26,6 +26,10 @@ const config = {
 
 let authToken = '';
 
+const githubAuthHeader = (token = authToken) => ({
+  Authorization: `Bearer ${token}`,
+});
+
 export const getAuth = async (
   callback = () => checkAuthentication().then(console.log),
   errorHandling = logger.error
@@ -41,28 +45,28 @@ export const getAuth = async (
 };
 
 export const getUserName = async (token = authToken) => {
-  const res = await bfetch(
-    `https://gitee.com/api/v5/user?access_token=${token}`
-  );
+  const res = await bfetch(`https://api.github.com/user`, {
+    headers: githubAuthHeader(token),
+  });
   const data = await res.json();
-  return data.name;
+  return data.login;
 };
 
 export const createAPMRepo = async (token = authToken) => {
-  return await bfetch('https://gitee.com/api/v5/user/repos', {
+  return await bfetch('https://api.github.com/user/repos', {
     method: 'POST',
     body: {
-      access_token: token,
       name: APM_REPO_NAME,
-      auto_init: true,
+      private: true,
     },
     headers: {
-      'Content-Type': 'application/x-www-form-urlencoded',
+      ...githubAuthHeader(token),
+      'Content-Type': 'application/json',
     },
   });
 };
 
-export const syncToGitee = async ({
+export const syncToGithub = async ({
   token = authToken,
   username,
   content,
@@ -74,58 +78,26 @@ export const syncToGitee = async ({
   if (username === undefined) {
     username = await getUserName(token);
   }
-  logger.debug(`[gitee] start syncing ${username}`);
+  logger.debug(`[github] start syncing ${username}`);
   await createAPMRepo();
-  logger.debug('[gitee] created repo');
-  const res = await bfetch(
-    `https://gitee.com/api/v5/repos/${username}/${APM_REPO_NAME}/contents/%2F?access_token=${token}`
-  );
-  const data = await res.json();
-  logger.debug(`[gitee] file fetched: ${data.sha}`);
-  if (res.status === 200) {
-    logger.debug('[gitee] updating backup file');
-    for (const repofile of data) {
-      if (repofile.name === APM_FILE_NAME) {
-        // do something
-        return await bfetch(
-          `https://gitee.com/api/v5/repos/${username}/${APM_REPO_NAME}/contents/${APM_FILE_NAME}`,
-          {
-            method: 'PUT',
-            body: {
-              access_token: token,
-              message: `noxbackup - ${new Date().getTime()}`,
-              content: fromByteArray(content),
-              sha: repofile.sha,
-            },
-            headers: {
-              'Content-Type': 'application/x-www-form-urlencoded',
-            },
-          }
-        );
-      }
-    }
-  }
-  logger.debug('[gitee] creating backup file');
+  logger.debug('[github] created repo');
+  logger.debug('[github] creating backup file');
   // file doesnt exist. create instaed.
   return await bfetch(
-    `https://gitee.com/api/v5/repos/${username}/${APM_REPO_NAME}/contents/${APM_FILE_NAME}`,
+    `https://api.github.com/repos/${username}/${APM_REPO_NAME}/contents/${APM_FILE_NAME}`,
     {
       method: 'POST',
       body: {
-        access_token: token,
         message: `noxbackup - ${new Date().getTime()}`,
         content: fromByteArray(content),
       },
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
-      },
+      headers: githubAuthHeader(token),
     }
   );
 };
-// https://gitee.com/api/v5/swagger#/getV5ReposOwnerRepoContents(Path)
 
 export const noxBackup = async (content: Uint8Array) => {
-  return await syncToGitee({ content });
+  return await syncToGithub({ content });
 };
 
 const checkAuthentication = async () => {
@@ -139,20 +111,20 @@ const checkAuthentication = async () => {
   }
 };
 
-export const loginGitee = async (
+export const loginGithub = async (
   callback: () => Promise<void> = async () => undefined,
   errorCallback = logger.error
 ) => {
   try {
     if (!(await checkAuthentication())) {
-      logger.debug('gitee token expired, need to log in');
+      logger.debug('Github token expired, need to log in');
       await getAuth(callback, errorCallback);
     } else {
       callback();
     }
     return true;
   } catch (e) {
-    logger.debug('gitee fail');
+    logger.debug('Github fail');
     errorCallback(e);
     return false;
   }
@@ -165,7 +137,7 @@ export const loginGitee = async (
  */
 const noxRestore = async () => {
   const res = await bfetch(
-    `https://gitee.com/api/v5/repos/${await getUserName()}/${APM_REPO_NAME}/contents/${APM_FILE_NAME}?access_token=${authToken}`
+    `https://api.github.com/repos/${await getUserName()}/${APM_REPO_NAME}/contents/${APM_FILE_NAME}`
   );
   const noxFile = (await res.json()).content;
   if (!noxFile) {
@@ -174,12 +146,10 @@ const noxRestore = async () => {
   return toByteArray(noxFile);
 };
 
-const GiteeSyncButton = ({ restoreFromUint8Array }: GenericProps) =>
+export default ({ restoreFromUint8Array }: GenericProps) =>
   GenericSyncButton({
     restoreFromUint8Array,
     noxBackup,
     noxRestore,
-    login: loginGitee,
+    login: loginGithub,
   });
-
-export default GiteeSyncButton;
