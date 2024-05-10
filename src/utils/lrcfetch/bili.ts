@@ -52,5 +52,5 @@ interface BiliSubEntry {
 
 export const biliSub2Lrc = (lrc: BiliSubEntry[]) =>
   lrc.reduce((arr, curr) => {
-    return `${arr} [${seconds2MMSS(curr.from)}.00]${curr.content}\n`;
+    return `${arr}[${seconds2MMSS(curr.from)}.00]${curr.content}\n`;
   }, '');

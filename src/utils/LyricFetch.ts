@@ -43,6 +43,8 @@ export const searchLyric = async (searchMID: string, source = LrcSource.QQ) => {
         return kugouLrcFetch.getLyric(searchMID);
       case LrcSource.QQQrc:
         return qqQrcFetch.getLyric(searchMID);
+      case LrcSource.BiliBili:
+        return BiliLrcFetch.getLyric(searchMID);
       case LrcSource.QQ:
       default:
         return qqLrcFetch.getLyric(searchMID);
