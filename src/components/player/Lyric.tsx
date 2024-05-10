@@ -187,9 +187,20 @@ export const LyricView = ({
         titleToFetch = reExtractSongName(titleToFetch, artist);
       else titleToFetch = reExtractSongName(track.title, artist);
       const options = await Promise.all([
-        searchLyricOptions(titleToFetch, LrcSource.QQQrc),
-        searchLyricOptions(titleToFetch),
-        searchLyricOptions(titleToFetch, LrcSource.Kugou),
+        searchLyricOptions({
+          searchKey: titleToFetch,
+          source: LrcSource.QQQrc,
+        }),
+        searchLyricOptions({ searchKey: titleToFetch, source: LrcSource.QQ }),
+        searchLyricOptions({
+          searchKey: titleToFetch,
+          source: LrcSource.BiliBili,
+          song: track.song,
+        }),
+        searchLyricOptions({
+          searchKey: titleToFetch,
+          source: LrcSource.Kugou,
+        }),
       ]);
       if (options[0].length !== 1) {
         options.push(options.shift()!);

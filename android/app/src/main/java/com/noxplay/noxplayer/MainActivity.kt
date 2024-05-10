@@ -51,7 +51,7 @@ class MainActivity : ReactActivity() {
           } catch (e: Exception) {
               Log.d("APM-intent", "failed to notify intent: $intent")
           }
-  }
+    }
   }
     /**
      * Returns the name of the main component registered from JavaScript. This is used to schedule
