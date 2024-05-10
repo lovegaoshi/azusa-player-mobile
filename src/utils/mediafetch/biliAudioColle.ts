@@ -3,7 +3,7 @@
 import { logger } from '../Logger';
 import { regexFetchProps } from './generic';
 import { fetchBiliPaginatedAPI } from './paginatedbili';
-import { getBiliCookie } from '@utils/Bilibili/biliCookies';
+import { cookieHeader } from '@utils/Bilibili/biliCookies';
 import { Source } from '@enums/MediaFetch';
 import SongTS from '@objects/Song';
 
@@ -93,15 +93,7 @@ const fetchBiliAudioColleList = async (
           source: Source.biliaudio,
         })
       ),
-    params: {
-      method: 'GET',
-      headers: {
-        cookie: `SESSDATA=${await getBiliCookie('SESSDATA')}`,
-      },
-      referrer: 'https://www.bilibili.com',
-      // HACK: setting to omit will use whatever cookie I set above.
-      credentials: 'omit',
-    },
+    params: await cookieHeader(),
   });
 };
 

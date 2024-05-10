@@ -26,3 +26,13 @@ export const BiliCookieHeader = async () => {
     credentials: 'omit',
   };
 };
+
+export const cookieHeader = async (): Promise<RequestInit> => ({
+  method: 'GET',
+  headers: {
+    cookie: `SESSDATA=${await getBiliCookie('SESSDATA')}`,
+  },
+  referrer: 'https://www.bilibili.com',
+  // HACK: setting to omit will use whatever cookie I set above.
+  credentials: 'omit',
+});
