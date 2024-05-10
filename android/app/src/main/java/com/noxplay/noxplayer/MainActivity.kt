@@ -31,28 +31,6 @@ class MainActivity : ReactActivity() {
         }
     }
 
-  @SuppressLint("VisibleForTests")
-  override fun onNewIntent(intent: Intent?) {
-      super.onNewIntent(intent)
-      if (intent !== null) {
-          try {
-              if (intent.action?.contains("android.media.action.MEDIA_PLAY_FROM_SEARCH") == true) {
-                  this.reactInstanceManager.currentReactContext
-                      ?.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter::class.java)
-                      ?.emit("remote-play-search", Arguments.fromBundle(intent.extras ?: Bundle()))
-              }
-              val launchOptions = Bundle()
-              launchOptions.putString("intentData", intent.dataString)
-              launchOptions.putString("intentAction", intent.action)
-              launchOptions.putBundle("intentBundle", intent.extras)
-              this.reactInstanceManager.currentReactContext
-                  ?.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter::class.java)
-                  ?.emit("APMNewIntent", Arguments.fromBundle(launchOptions))
-          } catch (e: Exception) {
-              Log.d("APM-intent", "failed to notify intent: $intent")
-          }
-  }
-  }
     /**
      * Returns the name of the main component registered from JavaScript. This is used to schedule
      * rendering of the component.
