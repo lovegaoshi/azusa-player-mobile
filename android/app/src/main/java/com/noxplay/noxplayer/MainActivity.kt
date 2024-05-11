@@ -50,8 +50,11 @@ class MainActivity : ReactActivity() {
             override fun getLaunchOptions(): Bundle {
               val launchOptions = super.getLaunchOptions() ?: Bundle()
               launchOptions.putString("intentData", mActivity.intent.dataString)
+              launchOptions.putString("intentAction", mActivity.intent.action)
+              launchOptions.putBundle("intentBundle", mActivity.intent.extras)
               return launchOptions
             }
+        }
 
     /**
      * Returns the instance of the [ReactActivityDelegate]. Here we use a util class [ ] which allows you to easily enable Fabric and Concurrent React
