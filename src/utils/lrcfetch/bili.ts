@@ -2,7 +2,7 @@ import { wbiQuery } from '@stores/wbi';
 import bfetch from '@utils/BiliFetch';
 import { LrcSource } from '@enums/LyricFetch';
 import logger from '../Logger';
-import { getBiliCookie } from '@utils/Bilibili/biliCookies';
+import { cookieHeader } from '@utils/Bilibili/biliCookies';
 import { seconds2MMSS } from '@utils/Utils';
 import { Source } from '@enums/MediaFetch';
 
@@ -14,15 +14,7 @@ const getBiliLyricOptions = async (
   if (song?.source !== Source.bilivideo) return [];
   const res = await wbiQuery(
     API.replace('{bvid}', song.bvid).replace('{cid}', song.id),
-    {
-      method: 'GET',
-      headers: {
-        cookie: `SESSDATA=${await getBiliCookie('SESSDATA')}`,
-      },
-      referrer: 'https://www.bilibili.com',
-      // HACK: setting to omit will use whatever cookie I set above.
-      credentials: 'omit',
-    }
+    await cookieHeader()
   );
   const json = await res.json();
   return json.data.subtitle.subtitles.map((subtitle: any) => ({

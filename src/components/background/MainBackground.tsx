@@ -57,22 +57,23 @@ const MainBackground = ({ children }: { children: React.JSX.Element }) => {
                 `with: ${bkgrdImg.identifier} + ${JSON.stringify(customReqHeader(bkgrdImg.identifier, {}))}`
               );
             }}
-            onEnd={() => {
-              // HACK: for a toA functioanlity we have 2 solutions. one is to
-              // do like this; the other is to keep in loop, but change src.
-              // ofc the latter is more smooth but meh I dont have two srcs prepared
-              if (!bkgrdImg.toA) return;
-              videoRef.current?.seek(bkgrdImg.toA);
-              videoRef.current?.resume();
-            }}
+            onEnd={
+              bkgrdImg.toA
+                ? () => {
+                    // HACK: for a toA functioanlity we have 2 solutions. one is to
+                    // do like this; the other is to keep in loop, but change src.
+                    // ofc the latter is more smooth but meh I dont have two srcs prepared
+                    videoRef.current?.seek(bkgrdImg.toA!);
+                    videoRef.current?.resume();
+                  }
+                : undefined
+            }
             repeat={bkgrdImg.toA ? false : true}
             muted
             resizeMode="cover"
             disableFocus={true}
             preventsDisplaySleepDuringVideoPlayback={false}
-            bufferConfig={{
-              cacheSizeMB: 200,
-            }}
+            bufferConfig={{ cacheSizeMB: 200 }}
           />
           <View
             style={[
