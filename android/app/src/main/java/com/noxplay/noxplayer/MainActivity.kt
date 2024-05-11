@@ -50,8 +50,7 @@ class MainActivity : ReactActivity() {
             override fun getLaunchOptions(): Bundle {
               val launchOptions = super.getLaunchOptions() ?: Bundle()
               launchOptions.putString("intentData", mActivity.intent.dataString)
-              launchOptions.putString("intentAction", mActivity.intent.action)
-              launchOptions.putBundle("intentBundle", mActivity.intent.extras)
+              
               return launchOptions
             }
         }
