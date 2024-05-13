@@ -3,4 +3,5 @@ export enum SyncOptions {
   DROPBOX = 'Dropbox',
   PERSONAL = '私有云',
   GITEE = 'Gitee',
+  GITHUB = 'Github',
 }

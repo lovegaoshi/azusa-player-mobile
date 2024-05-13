@@ -30,7 +30,7 @@ export const createAPMRepo = async (token: string) => {
   });
 };
 
-export const syncToGithub = async ({
+export const sync = async ({
   token,
   username,
   content,
@@ -61,7 +61,7 @@ export const syncToGithub = async ({
 };
 
 export const noxBackup = async (content: Uint8Array, token: string) => {
-  return await syncToGithub({ content, token });
+  return await sync({ content, token });
 };
 
 export const checkAuthentication = async (token = '') => {
