@@ -11,7 +11,7 @@ const config = {
   redirectUrl: 'com.noxplayer://oauthredirect',
   clientId: GITHUB_KEY,
   clientSecret: GITHUB_SECRET,
-  scopes: ['identity', 'repo'],
+  scopes: ['identity', 'repo', 'administration:write'],
   additionalHeaders: { Accept: 'application/json' },
   serviceConfiguration: {
     authorizationEndpoint: 'https://github.com/login/oauth/authorize',
