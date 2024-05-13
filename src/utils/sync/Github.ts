@@ -19,10 +19,10 @@ export const getUserName = async (token: string) => {
 export const createAPMRepo = async (token: string) => {
   return await bfetch('https://api.github.com/user/repos', {
     method: 'POST',
-    body: {
+    body: JSON.stringify({
       name: APM_REPO_NAME,
       private: true,
-    },
+    }),
     headers: {
       ...githubAuthHeader(token),
       'Content-Type': 'application/json',
@@ -30,7 +30,7 @@ export const createAPMRepo = async (token: string) => {
   });
 };
 
-export const syncToGithub = async ({
+export const sync = async ({
   token,
   username,
   content,
@@ -46,22 +46,28 @@ export const syncToGithub = async ({
   await createAPMRepo(token);
   logger.debug('[github] created repo');
   logger.debug('[github] creating backup file');
+  const fpath = `https://api.github.com/repos/${username}/${APM_REPO_NAME}/contents/${APM_FILE_NAME}`;
+  const probeFileRes = await bfetch(fpath, {
+    headers: githubAuthHeader(token),
+  });
+  const probeFile = await probeFileRes.json();
   // file doesnt exist. create instaed.
   return await bfetch(
     `https://api.github.com/repos/${username}/${APM_REPO_NAME}/contents/${APM_FILE_NAME}`,
     {
-      method: 'POST',
-      body: {
+      method: 'PUT',
+      body: JSON.stringify({
         message: `noxbackup - ${new Date().getTime()}`,
         content: fromByteArray(content),
-      },
+        sha: probeFile.sha,
+      }),
       headers: githubAuthHeader(token),
     }
   );
 };
 
 export const noxBackup = async (content: Uint8Array, token: string) => {
-  return await syncToGithub({ content, token });
+  return await sync({ content, token });
 };
 
 export const checkAuthentication = async (token = '') => {
