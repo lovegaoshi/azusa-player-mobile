@@ -89,9 +89,6 @@ export const getUniqObjects = <T>(
 
 /**
  * splits an array to chunks of given size.
- * @param arr
- * @param size
- * @returns
  */
 export const chunkArray = <T>(arr: Array<T>, size = 400): Array<T[]> => {
   return arr.reduce(

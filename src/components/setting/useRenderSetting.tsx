@@ -15,11 +15,6 @@ import { SettingEntry } from './SetttingEntries';
 
 /**
  * renders a generic clickable item.
- * @param icon icon string.
- * @param settingName subcategory in i18n.
- * @param onPress callback on pressed
- * @param settingCategory category in i18n.
- * @returns
  */
 interface SetttingListInterface {
   icon?: string | (() => React.JSX.Element);

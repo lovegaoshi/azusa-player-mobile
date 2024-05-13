@@ -68,8 +68,6 @@ export const noxRestore = async (
 /**
  * wraps up upload noxplayer setting. returns the response
  * if successful.
- * @param {Object} content
- * @returns
  */
 export const noxBackup = async (dbx: _Dropbox, content: Uint8Array) => {
   return await upload(dbx, content);

@@ -36,8 +36,6 @@ export const LoadJSONRegExtractors = (json: NoxRegExt.JSONExtractor[]) => {
 
 /**
  * use regex to extract songnames from a string. default to whatever in 《》
- * @param {string} name
- * @returns parsed songname.
  */
 export const extractSongName = (name: string) => {
   const nameReg = /《([^《》]*)》/; // For single-list BVID, we need to extract name from title
@@ -50,8 +48,6 @@ export const extractSongName = (name: string) => {
 
 /**
  * truncate the first left parenthesis and return the leftover string.
- * @param {string} filename
- * @returns  the extracted string
  */
 export const extractParenthesis = (filename: string) => {
   return extractWith(filename, [/(.+)[（(].+/]);
@@ -60,9 +56,6 @@ export const extractParenthesis = (filename: string) => {
 /**
  * return the first matched value of a string against an array of regex.
  * if nothing matches, the original string is returned.
- * @param {string} filename
- * @param {Array} reExpressions
- * @returns the extracted string
  */
 export const extractWith = (
   filename: string,

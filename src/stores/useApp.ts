@@ -116,10 +116,6 @@ interface NoxSetting {
    * updates a playlist with songs added and removed, and saves it. addSongs are added at the front.
    * manipulate val before this function to add songs in whatever order desired.
    * note this function does mutate playlist.
-   * @param val playlist
-   * @param addSongs songs to be added at the front.
-   * @param removeSongs songs to be deleted
-   * @returns
    */
   updatePlaylist: (
     val: NoxMedia.Playlist,

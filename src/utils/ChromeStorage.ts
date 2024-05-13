@@ -151,8 +151,6 @@ export const removeCookie = async (site: string) => {
  * a generic chunk splitter to store arrays that may exceed 2MB storage limits.
  * see known storage limits:
  * https://react-native-async-storage.github.io/async-storage/docs/limits
- * @param object
- * @param key
  */
 const saveChucked = async (
   key: string,
@@ -179,8 +177,6 @@ const loadChucked = async (keys: string[]) => {
 };
 /**
  * playlist can get quite large, my idea is to splice songlist into smaller lists then join them.
- * @param playlist
- * @returns
  */
 export const savePlaylist = async (
   playlist: NoxMedia.Playlist,

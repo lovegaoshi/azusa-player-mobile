@@ -20,7 +20,6 @@ interface AnalyticsResult {
  * # of songs with valid names vs just numbers
  * # of bvids / total
  * use mui-confirm with a provided content
- * @param {*} favList
  */
 const playlistAnalysis = (favList: { songList: Array<NoxMedia.Song> }) => {
   const results: AnalyticsResult = {

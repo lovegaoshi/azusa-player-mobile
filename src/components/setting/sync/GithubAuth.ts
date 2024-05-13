@@ -36,7 +36,7 @@ export const getAuth = async (
   }
 };
 
-export const loginGithub = async (
+export const login = async (
   callback: () => Promise<void> = async () => undefined,
   errorCallback = logger.error
 ) => {
@@ -60,5 +60,5 @@ export default ({ restoreFromUint8Array }: GenericProps) =>
     restoreFromUint8Array,
     noxBackup: v => noxBackup(v, authToken),
     noxRestore: () => noxRestore(authToken),
-    login: loginGithub,
+    login,
   });

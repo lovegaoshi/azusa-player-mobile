@@ -233,8 +233,6 @@ const useBiliLogin = () => {
 
   /**
    * this method converts input cookies into access_token and refresh_token via the APP way.
-   * @param SESSDATA
-   * @param bili_jct
    */
   const confirmWebQRCode = async (SESSDATA: string, bili_jct: string) => {
     const { key } = await getQRLoginReq();

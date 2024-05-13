@@ -45,12 +45,6 @@ export default async function BiliFetch(
     : throttler.schedule(() => fetch(url, params));
 }
 
-/**
- *
- * @param url
- * @param reqHeader
- * @returns
- */
 export const customReqHeader = (
   url: string,
   reqHeader: { [key: string]: any } = {}

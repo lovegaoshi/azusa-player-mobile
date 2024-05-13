@@ -41,9 +41,6 @@ const fetchVideoTagPromiseRaw = async ({ bvid, cid }: ids) => {
 
 /**
  * uses the bilibili tag API to acquire bilibili shazamed results to a list of videos.
- * @param {Array} songlist
- * @param {boolean} forced
- * @returns
  */
 export const biliShazamOnSonglist = (
   songlist: NoxMedia.Song[],
