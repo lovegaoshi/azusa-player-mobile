@@ -2236,5 +2236,89 @@
       "backdrop": "rgba(49, 49, 37, 0.4)"
     },
     "playerControlIconContained": "contained"
+  },
+  {
+    "metaData": {
+      "themeName": "2B播放器",
+      "themeDesc": "2b 好看",
+      "themeAuthor": "王胡桃w",
+      "themeIcon": "https://gd-hbimg.huaban.com/b484c02739b498847034700ed11fb0846ceb9c53144cb-8M5qts_fw658",
+      "darkTheme": true
+    },
+    "gifs": [
+      "https://img.166.net/reunionpub/1_20230824_18a26c6633a999999.png",
+      "https://img.166.net/reunionpub/1_20230824_18a26c6633a840712.png",
+      "https://img.166.net/reunionpub/1_20230824_18a26c6633a890746.png",
+      "https://img.166.net/reunionpub/1_20230824_18a26c6633a767463.png",
+      "https://img.166.net/reunionpub/1_20230824_18a26c6633a256197.png",
+      "https://img.166.net/reunionpub/1_20230824_18a26c6633a925908.png"
+    ],
+    "backgroundImages": [
+      {
+        "type": "bvid",
+        "identifier": "BV15N411f7HP"
+      }
+    ],
+    "backgroundImagesLandscape": [
+      {
+        "type": "bvid",
+        "identifier": "BV15e411u7T9"
+      },
+      "https://img.nga.178.com/attachments/mon_202309/22/-zue37Q18w-baydXmZ67.jpeg"
+    ],
+    "customColors": {
+      "maskedBackgroundColor": "rgba(0, 0, 0, 0.30)",
+      "playlistDrawerBackgroundColor": "rgba(255, 0, 0, 0.35)",
+      "playlistDrawerBackgroundColorTransparent": "rgba(255, 0, 0, 0.35)",
+      "progressThumbTintColor": "#f2003c",
+      "progressMinimumTrackTintColor": "#f2003c",
+      "progressMaximumTrackTintColor": "#FFFFFF",
+      "btnBackgroundColor": "rgb(72, 71, 58)",
+      "textInputSelectionColor": "lightgreen"
+    },
+    "colors": {
+      "primary": "rgb(233, 233, 233)",
+      "onPrimary": "rgb(50, 50, 0)",
+      "primaryContainer": "rgb(30, 30, 30)",
+      "onPrimaryContainer": "rgb(234, 234, 0)",
+      "secondary": "rgb(157, 157, 157)",
+      "onSecondary": "rgb(50, 50, 24)",
+      "secondaryContainer": "rgb(73, 72, 45)",
+      "onSecondaryContainer": "rgb(231, 228, 191)",
+      "tertiary": "rgb(164, 208, 189)",
+      "onTertiary": "rgb(11, 55, 42)",
+      "tertiaryContainer": "rgb(37, 78, 64)",
+      "onTertiaryContainer": "rgb(191, 236, 216)",
+      "error": "rgb(255, 180, 171)",
+      "onError": "rgb(105, 0, 5)",
+      "errorContainer": "rgb(147, 0, 10)",
+      "onErrorContainer": "rgb(255, 180, 171)",
+      "background": "rgba(0,0,0, 0.6)",
+      "onBackground": "rgb(230, 226, 217)",
+      "surface": "rgb(28, 28, 23)",
+      "onSurface": "rgb(233, 233, 233)",
+      "text": "rgb(233, 233, 233)",
+      "surfaceVariant": "rgb(10, 10, 10)",
+      "onSurfaceVariant": "#f2003c",
+      "outline": "rgb(147, 145, 130)",
+      "outlineVariant": "rgb(72, 71, 58)",
+      "shadow": "rgb(0, 0, 0)",
+      "scrim": "rgb(0, 0, 0)",
+      "inverseSurface": "rgb(230, 226, 217)",
+      "inverseOnSurface": "rgb(49, 49, 43)",
+      "inversePrimary": "rgb(98, 98, 0)",
+      "elevation": {
+        "level0": "transparent",
+        "level1": "rgb(53, 56, 57)",
+        "level2": "rgb(10, 10, 10)",
+        "level3": "rgb(10, 10, 10)",
+        "level4": "rgb(49, 49, 20)",
+        "level5": "rgb(53, 53, 20)"
+      },
+      "surfaceDisabled": "rgba(230, 226, 217, 0.12)",
+      "onSurfaceDisabled": "rgba(230, 226, 217, 0.38)",
+      "backdrop": "rgba(49, 49, 37, 0.4)"
+    },
+    "playerControlIconContained": "contained"
   }
 ]
