@@ -256,7 +256,7 @@ export const LyricView = ({
     ],
   };
 
-  if (!visible) return;
+  if (!visible) return null;
 
   return (
     <View style={styles.container}>
