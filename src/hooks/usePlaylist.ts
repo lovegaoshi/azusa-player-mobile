@@ -49,8 +49,6 @@ export interface UsePlaylist {
 
 /**
  * use hook for the paginated fav view. has rows.
- * @param playlist
- * @returns
  */
 const usePlaylist = (playlist: NoxMedia.Playlist): UsePlaylist => {
   const [rows, setRows] = useState<NoxMedia.Song[]>([]);
@@ -94,7 +92,6 @@ const usePlaylist = (playlist: NoxMedia.Playlist): UsePlaylist => {
    * forcefully search a string in the playlist.
    * setting the searchbar ref's value directly is bugged with
    * the visual update of textfield's label; otherwise works just fine.
-   * @param {string} searchedVal
    */
   const performSearch = (searchedVal: string) => {
     setTimeout(() => {
@@ -110,9 +107,6 @@ const usePlaylist = (playlist: NoxMedia.Playlist): UsePlaylist => {
   /**
    * get a given song item/index combo used in flashlist's accurate index,
    * as currentRows may be at a filtered view and the index will not be reliable.
-   * @param item
-   * @param index
-   * @returns
    */
   const getSongIndex = (item: NoxMedia.Song, index: number) => {
     return rows === playlist.songList

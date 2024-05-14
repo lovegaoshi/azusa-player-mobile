@@ -27,8 +27,6 @@ const getBiliUserKey = async () => (await getBiliUser()).uname;
 /**
  * wraps up find noxplayer setting and download in one function;
  * returns the JSON object of settting or null if not found.
- * @returns playerSetting object, or null
- * @param {string} cloudAddress web address for your personal cloud.
  */
 export const noxRestore = async (cloudAddress: string, cloudID?: string) => {
   try {
@@ -64,9 +62,6 @@ export const noxRestore = async (cloudAddress: string, cloudID?: string) => {
 /**
  * wraps up upload noxplayer setting. returns the response
  * if successful.
- * @param {Object} content
- * @param {string} cloudAddress web address for your personal cloud.
- * @returns
  */
 export const noxBackup = async (
   content: Uint8Array,

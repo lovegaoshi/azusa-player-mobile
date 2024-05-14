@@ -48,7 +48,6 @@ export const setPlayingIndex = (index = 0, songId?: string) => {
 
 /**
  * WARN: actually moves currentPlayingIndex
- * @param direction
  */
 export const playNextIndex = (direction = 1, set = true) => {
   const { currentPlayingIndex, playingList } = playlistStore.getState();

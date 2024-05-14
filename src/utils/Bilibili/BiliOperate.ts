@@ -101,7 +101,6 @@ export const sendBVTriple = async (bvid: string) => {
 
 /**
  * checks a video played count, for debug use.
- * @param {string} bvid
  */
 export const checkBiliVideoPlayed = (bvid: string) => {
   fetch(BILI_VIDEOINFO_API + bvid)

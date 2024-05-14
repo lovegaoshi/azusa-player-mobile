@@ -41,8 +41,6 @@ let dbx = new _Dropbox({
  * this method attempts to login dropbox. the accesstoken can be
  * further processed in the callback function as a part of the
  * returned url from chrome.identity.launchWebAuthFlow.
- * @param {function} callback function that process the returned url after oauth2.
- * @param {function} errorHandling
  */
 const getAuth = async (
   callback = () => checkAuthentication(dbx).then(console.log),
@@ -66,11 +64,8 @@ const getAuth = async (
  * again via getAuth. afterwards, the callback function is chained.
  * put noxRestore/noxBackup as callback in this function to ensure
  * user is logged in via dropbox before these operations.
- * @param {function} callback
- * @param {function} errorCallback
- * @returns
  */
-const loginDropbox = async (
+const login = async (
   callback: () => Promise<void> = async () => undefined,
   errorCallback = logger.error
 ) => {
@@ -93,7 +88,7 @@ const DropboxSyncButton = ({ restoreFromUint8Array }: GenericProps) =>
     restoreFromUint8Array,
     noxBackup: v => noxBackup(dbx, v),
     noxRestore: () => noxRestore(dbx, async v => getArrayBufferForBlob(v)),
-    login: loginDropbox,
+    login,
   });
 
 export default DropboxSyncButton;

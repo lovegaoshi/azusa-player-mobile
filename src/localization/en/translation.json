@@ -226,6 +226,7 @@
     "Local": "Local",
     "Dropbox": "Dropbox",
     "Gitee": "Gitee",
+    "Github": "Github",
     "PersonalCloud": "Personal Cloud",
     "ExportLocation": "Select Sync:",
     "DropboxUploadSuccess": "APM playlists synced to Dropbox!",

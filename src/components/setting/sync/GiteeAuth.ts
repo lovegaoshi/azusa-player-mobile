@@ -35,7 +35,7 @@ export const getAuth = async (
   }
 };
 
-const loginGitee = async (
+const login = async (
   callback: () => Promise<void> = async () => undefined,
   errorCallback = logger.error
 ) => {
@@ -59,7 +59,7 @@ const GiteeSyncButton = ({ restoreFromUint8Array }: GenericProps) =>
     restoreFromUint8Array,
     noxBackup: v => noxBackup(v, authToken),
     noxRestore: () => noxRestore(authToken),
-    login: loginGitee,
+    login,
   });
 
 export default GiteeSyncButton;

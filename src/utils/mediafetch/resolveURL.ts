@@ -21,11 +21,8 @@ type regResolve = NoxUtils.RegexMatchResolve<
 >;
 /**
  * a parent method that returns the media's stream url given an id.
- * @param {string} bvid media's id.
- * @param {string} cid optional in video; if not provided, bvid is used to fetch cid. note
- * some videos have episodes that this may not be accurate. in other formats (eg biliAudio)
+ * some videos have episodes that cid may not be accurate. in other formats (eg biliAudio)
  * its used as an identifier.
- * @returns promise that resolves the media stream url.
  */
 export const fetchPlayUrlPromise = async (
   v: NoxMedia.Song,

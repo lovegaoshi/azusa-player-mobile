@@ -164,11 +164,6 @@ export const fetchVideoPlayUrlPromise = async ({
   }
 };
 
-/**
- *
- * @param {string} bvid
- * @returns
- */
 export const fetchCID = async (bvid: string) => {
   // logger.log('Data.js Calling fetchCID:' + URL_BVID_TO_CID.replace("{bvid}", bvid))
   const res = await bfetch(
@@ -181,9 +176,6 @@ export const fetchCID = async (bvid: string) => {
 
 /**
  * Private Util to extract json, see https://github.com/SocialSisterYi/bilibili-API-collect
- * @param {Object} json
- * @param {string} field
- * @returns
  */
 const extractResponseJson = (json: any, field: string) => {
   const getBestBitrate = (data: any[]) =>

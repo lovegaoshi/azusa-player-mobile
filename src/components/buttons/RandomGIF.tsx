@@ -22,9 +22,6 @@ interface Props {
 }
 /**
  * returns a button that shows a random gif from the input array. when clicked, change the gif into another one.
- * @param {string[]} gifs a list of gifs.
- * @param {string} favList an identifier/signal that changes the gif.
- * @param {function} onClickCallback extra onclick function when button is clicked.
  */
 export default function RandomGIFButton({
   gifs,
