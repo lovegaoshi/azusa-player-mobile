@@ -1,7 +1,5 @@
 name: APM iOS dev Build
 on:
-  schedule:
-    - cron: '0 0 * * 1'
   workflow_dispatch:
 jobs:
   checkLastCommit:
@@ -46,11 +44,6 @@ jobs:
     permissions:
       contents: write
     steps:
-      - name: setup XCode
-        uses: maxim-lobanov/setup-xcode@v1
-        with:
-          xcode-version: '15.0.1'
-
       - name: Checkout
         uses: actions/checkout@v4
 

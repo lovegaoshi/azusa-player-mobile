@@ -1,4 +1,4 @@
-name: APM AAB Release
+name: APM Play Store Release
 on:
   workflow_dispatch:
 jobs:
