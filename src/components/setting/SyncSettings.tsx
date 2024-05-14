@@ -10,6 +10,7 @@ import { SyncOptions } from '@enums/Sync';
 import PersonalSyncButton from './sync/PersonalSyncButton';
 import DropboxSyncButton from './sync/DropboxAuth';
 import GiteeSyncButton from './sync/GiteeAuth';
+import GithubSyncButton from './sync/GithubAuth';
 import useSync from './sync/useSync';
 
 const EXPORT_OPTIONS_LIST = [
@@ -18,6 +19,7 @@ const EXPORT_OPTIONS_LIST = [
   SyncOptions.DROPBOX,
   SyncOptions.PERSONAL,
   SyncOptions.GITEE,
+  SyncOptions.GITHUB,
 ];
 
 interface SyncInterface {
@@ -38,6 +40,8 @@ const SyncButton = ({ location, restoreFromUint8Array }: SyncInterface) => {
       );
     case SyncOptions.GITEE:
       return <GiteeSyncButton restoreFromUint8Array={restoreFromUint8Array} />;
+    case SyncOptions.GITHUB:
+      return <GithubSyncButton restoreFromUint8Array={restoreFromUint8Array} />;
     default:
       return <></>;
   }
@@ -67,6 +71,8 @@ export default () => {
         return t('Sync.PersonalCloud');
       case SyncOptions.GITEE:
         return t('Sync.Gitee');
+      case SyncOptions.GITHUB:
+        return t('Sync.Github');
       default:
         return 'ERROR';
     }

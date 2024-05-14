@@ -1,4 +1,4 @@
-import { fromByteArray, toByteArray } from 'base64-js';
+import { fromByteArray } from 'base64-js';
 
 import bfetch from '@utils/BiliFetch';
 import { logger } from '@utils/Logger';
@@ -81,13 +81,22 @@ export const checkAuthentication = async (token = '') => {
   }
 };
 
-export const noxRestore = async (token: string) => {
+export const noxRestore = async (
+  token: string,
+  contentParse: (v: Blob) => Promise<ArrayBuffer>
+) => {
   const res = await bfetch(
-    `https://api.github.com/repos/${await getUserName(token)}/${APM_REPO_NAME}/contents/${APM_FILE_NAME}`
+    `https://api.github.com/repos/${await getUserName(token)}/${APM_REPO_NAME}/contents/${APM_FILE_NAME}`,
+    {
+      headers: {
+        ...githubAuthHeader(token),
+        Accept: 'application/vnd.github.raw+json',
+      },
+    }
   );
-  const noxFile = (await res.json()).content;
+  const noxFile = await res.blob();
   if (!noxFile) {
-    throw new Error('noxfile is not found on dropbox.');
+    throw new Error('noxfile is not found on github.');
   }
-  return toByteArray(noxFile);
+  return contentParse(noxFile);
 };

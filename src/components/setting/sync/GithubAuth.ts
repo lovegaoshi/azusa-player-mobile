@@ -1,4 +1,5 @@
 import { authorize } from 'react-native-app-auth';
+import { getArrayBufferForBlob } from 'react-native-blob-jsi-helper';
 
 // eslint-disable-next-line import/no-unresolved
 import { GITHUB_KEY, GITHUB_SECRET } from '@env';
@@ -59,6 +60,7 @@ export default ({ restoreFromUint8Array }: GenericProps) =>
   GenericSyncButton({
     restoreFromUint8Array,
     noxBackup: v => noxBackup(v, authToken),
-    noxRestore: () => noxRestore(authToken),
+    noxRestore: () =>
+      noxRestore(authToken, async v => getArrayBufferForBlob(v)),
     login,
   });
