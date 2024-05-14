@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next';
 
 import { fetchDynamic } from '@utils/mediafetch/biliDynamic';
 import { fetchRanking } from '@utils/mediafetch/biliRanking';
-import { fetchMusicTop } from '@utils/mediafetch/biliMusicTop';
+import { fetchCurrentMusicTop } from '@utils/mediafetch/biliMusicTop';
 import { styles } from '@components/style';
 import {
   BiliCatSongs,
@@ -26,7 +26,7 @@ export default () => {
     Promise.all([
       fetchRanking().then(setBiliRanking),
       fetchDynamic().then(setBiliDynamic),
-      fetchMusicTop().then(setBiliMusicTop),
+      fetchCurrentMusicTop().then(setBiliMusicTop),
     ]);
 
   const onRefresh = React.useCallback(() => {

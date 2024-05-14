@@ -4,6 +4,9 @@ import bfetch from '@utils/BiliFetch';
 import { Source } from '@enums/MediaFetch';
 import { biliApiLimiter } from './throttle';
 
+const LISTAPI =
+  'https://api.bilibili.com/x/copyright-music-publicity/toplist/all_period?list_type=1';
+
 const API =
   'https://api.bilibili.com/x/copyright-music-publicity/toplist/music_list?list_id={list_id}&web_location=0.0';
 
@@ -22,6 +25,24 @@ const topToSong = (data: any) =>
     album: data.creation_title,
     source: Source.bilivideo,
   });
+
+export const fetchCurrentMusicTop = async () => {
+  try {
+    const res = await bfetch(LISTAPI);
+    const json = await res.json();
+    const recentYear = Object.keys(json.data.list).reduce(
+      (acc, curr) => (acc > curr ? acc : curr),
+      '0'
+    );
+    const recentList = json.data.list[recentYear].reduce(
+      (acc: any, curr: any) => (acc.ID > curr.ID ? acc : curr),
+      json.data.list[recentYear][0]
+    );
+    return fetchMusicTop(recentList.ID);
+  } catch {
+    return [];
+  }
+};
 
 export const fetchMusicTop = async (
   listid = '175'

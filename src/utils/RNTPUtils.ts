@@ -173,7 +173,7 @@ export const resolveAndCache = async (song: NoxMedia.Song, dry = false) => {
   return resolvedUrl;
 };
 export const songlistToTracklist = async (
-  songList: Array<NoxMedia.Song>
+  songList: NoxMedia.Song[]
 ): Promise<Track[]> => {
   return Promise.all(
     songList.map(async song => {
