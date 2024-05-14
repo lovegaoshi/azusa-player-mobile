@@ -300,9 +300,9 @@ export const useNoxSetting = create<NoxSetting>((set, get) => ({
   initPlayer: async val => {
     const playingList =
       val.playlists[val.lastPlaylistId[0]] ||
-      val.lastPlaylistId[0] === val.favoriPlaylist.id
+      (val.lastPlaylistId[0] === val.favoriPlaylist.id
         ? val.favoriPlaylist
-        : dummyPlaylistList;
+        : dummyPlaylistList);
     const initializedPlayerSetting = val.settings;
     set({
       currentPlayingId: val.lastPlaylistId[1],
