@@ -8,8 +8,8 @@ import { savePlayMode } from '@utils/ChromeStorage';
 import logger from '@utils/Logger';
 
 interface NoxPlaylistStore {
-  playingList: Array<NoxMedia.Song>;
-  playingListShuffled: Array<NoxMedia.Song>;
+  playingList: NoxMedia.Song[];
+  playingListShuffled: NoxMedia.Song[];
   currentPlayingIndex: number;
   // TODO: depreciate useApp's currentPlayingId
   // watch out for the things needed to be added like
@@ -64,7 +64,7 @@ export const playNextIndex = (direction = 1, set = true) => {
 export const playNextSong = (direction = 1, set = true) =>
   getCurrentTPQueue()[playNextIndex(direction, set)];
 
-export const setPlayingList = (list: Array<NoxMedia.Song>) => {
+export const setPlayingList = (list: NoxMedia.Song[]) => {
   playlistStore.setState({
     playingList: list,
     playingListShuffled: [...list].sort(() => Math.random() - 0.5),

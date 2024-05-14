@@ -18,13 +18,13 @@ export interface FetcherProps {
   url: string;
   getMediaCount: (val: any) => number;
   getPageSize: (val: any) => number;
-  getItems: (val: any) => Array<any>;
+  getItems: (val: any) => any[];
   resolveBiliBVID?: (
     bvobjs: any[],
     progressEmitter: ProgressEmitter
   ) => Promise<NoxMedia.Song[]>;
   progressEmitter?: ProgressEmitter;
-  favList?: Array<any>;
+  favList?: any[];
   limiter?: Bottleneck;
   params?: any;
   jsonify?: (val: any) => any;

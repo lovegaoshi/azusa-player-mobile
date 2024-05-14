@@ -17,7 +17,7 @@ const Playlist = () => {
       ]}
     >
       <BiliSearchbar
-        onSearched={(songs: Array<NoxMedia.Song>) => console.log(songs)}
+        onSearched={(songs: NoxMedia.Song[]) => console.log(songs)}
       />
       <PlaylistList />
     </View>

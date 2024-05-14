@@ -15,7 +15,7 @@ const DialogTitle = ({ title }: { title: string | undefined }) => {
 
 interface Props<T> {
   visible: boolean;
-  options: Array<T>;
+  options: T[];
   renderOptionTitle?: (val: T) => string;
   title?: string;
   onClose?: (index?: boolean[]) => void;

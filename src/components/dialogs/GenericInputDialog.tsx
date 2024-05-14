@@ -7,7 +7,7 @@ import { useNoxSetting } from '@stores/useApp';
 
 interface Props {
   visible: boolean;
-  options: Array<string>;
+  options: string[];
   title?: string;
   onClose?: (input: { [key: string]: string }) => void;
   onSubmit?: (input: { [key: string]: string }) => void;

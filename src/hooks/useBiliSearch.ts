@@ -11,7 +11,7 @@ interface props {
   searchListTitle?: string;
 }
 export default ({
-  onSearched = (songs: Array<NoxMedia.Song>) => console.log(songs),
+  onSearched = (songs: NoxMedia.Song[]) => console.log(songs),
   searchListTitle = i18n.t('PlaylistOperations.searchListName'),
 }: props) => {
   const [searchVal, setSearchVal] = useState('');

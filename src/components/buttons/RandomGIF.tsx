@@ -15,7 +15,7 @@ const getRandomNumberExclude = (randRange: number, exclude = -1) => {
 };
 
 interface Props {
-  gifs: Array<string>;
+  gifs: string[];
   favList: string;
   onClickCallback?: () => void;
   iconsize?: number;

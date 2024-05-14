@@ -33,10 +33,10 @@ declare global {
       id: string;
       type: PlaylistTypes;
 
-      songList: Array<Song>;
+      songList: Song[];
 
-      subscribeUrl: Array<string>;
-      blacklistedUrl: Array<string>;
+      subscribeUrl: string[];
+      blacklistedUrl: string[];
       lastSubscribed: number;
 
       useBiliShazam: boolean;
@@ -53,7 +53,7 @@ declare global {
     }
 
     export interface SearchPlaylist extends Partial<Playlist> {
-      songList: Array<Song>;
+      songList: Song[];
     }
 
     export interface LyricDetail {

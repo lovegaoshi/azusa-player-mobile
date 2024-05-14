@@ -80,7 +80,7 @@ const usePlaylistCRUD = (mPlaylist?: NoxMedia.Playlist) => {
   const playlistCleanup = async (playlist = getPlaylist()) => {
     progressEmitter(100);
     const promises: Promise<void>[] = [];
-    const validBVIds: Array<string> = [];
+    const validBVIds: string[] = [];
     const uniqBVIds = getPlaylistUniqBVIDs(playlist);
     uniqBVIds.forEach(bvid =>
       promises.push(

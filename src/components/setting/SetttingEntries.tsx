@@ -1,5 +1,5 @@
 export interface SelectSettingEntry<T> {
-  options: Array<T>;
+  options: T[];
   renderOption: (option: T) => string;
   defaultIndex: number;
   onClose: (index?: number) => void;

@@ -10,9 +10,9 @@ interface AnalyticsResult {
   validShazamCount: number;
   invalidShazamCount: number;
   songOccurrence: SongOccurenceDict;
-  songsSorted: Array<[string, number]>;
+  songsSorted: [string, number][];
   songsUnique: Set<string>;
-  songTop10: Array<[string, number]>;
+  songTop10: [string, number][];
 }
 
 /**
@@ -21,7 +21,7 @@ interface AnalyticsResult {
  * # of bvids / total
  * use mui-confirm with a provided content
  */
-const playlistAnalysis = (favList: { songList: Array<NoxMedia.Song> }) => {
+const playlistAnalysis = (favList: { songList: NoxMedia.Song[] }) => {
   const results: AnalyticsResult = {
     bvid: new Set(),
     totalCount: 0,

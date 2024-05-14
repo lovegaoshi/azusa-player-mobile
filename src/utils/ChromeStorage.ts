@@ -154,7 +154,7 @@ export const removeCookie = async (site: string) => {
  */
 const saveChucked = async (
   key: string,
-  objects: Array<any>,
+  objects: any[],
   saveToStorage = true
 ) => {
   // splice into chunks
@@ -172,7 +172,7 @@ const saveChucked = async (
 const loadChucked = async (keys: string[]) => {
   const loadedArrays = (await Promise.all(
     keys.map(async (val: string) => await getItem(val))
-  )) as Array<any[]>;
+  )) as any[][];
   return loadedArrays.flat();
 };
 /**
@@ -216,7 +216,7 @@ export const getPlaylist = async (
   return dPlaylist;
 };
 
-export const savePlayerSkins = async (skins: Array<any>) =>
+export const savePlayerSkins = async (skins: any[]) =>
   saveChucked(StorageKeys.SKINSTORAGE, skins);
 
 export const getPlayerSkins = async () =>
@@ -250,7 +250,7 @@ export const getPlayerSkin = () => getItem(StorageKeys.SKIN);
 
 export const addPlaylist = (
   playlist: NoxMedia.Playlist,
-  playlistIds: Array<string>
+  playlistIds: string[]
 ) => {
   playlistIds.push(playlist.id);
   savePlaylist(playlist);
@@ -269,7 +269,7 @@ const delPlaylistRaw = (playlist: NoxMedia.Playlist) => {
 
 export const delPlaylist = (
   playlist: NoxMedia.Playlist,
-  playlistIds: Array<string>
+  playlistIds: string[]
 ) => {
   let playlistIds2 = [...playlistIds];
   playlistIds2.splice(playlistIds2.indexOf(playlist.id), 1);
@@ -402,7 +402,7 @@ export const addImportedPlaylist = async (playlists: any[]) => {
 
 const parseImportedPartial = (
   key: string,
-  parsedContent: Array<[string, string]>
+  parsedContent: [string, string][]
 ) => {
   return JSON.parse(
     parsedContent.filter((val: [string, string]) => val[0] === key)[0][1]
