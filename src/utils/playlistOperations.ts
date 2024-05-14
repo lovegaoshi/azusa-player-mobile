@@ -2,8 +2,8 @@ import { SortOptions } from '@enums/Playlist';
 
 export const updatePlaylistSongs = (
   playlist: NoxMedia.Playlist,
-  addSongs: Array<NoxMedia.Song> = [],
-  removeSongs: Array<NoxMedia.Song> = []
+  addSongs: NoxMedia.Song[] = [],
+  removeSongs: NoxMedia.Song[] = []
 ) => {
   const playlistSongsId = playlist.songList.map(v => v.id);
   const removeSongsId = removeSongs.map(v => v.id);

@@ -5,7 +5,7 @@ import logger from './Logger';
 
 interface Props {
   playlist: NoxMedia.Playlist;
-  subscribeUrls?: Array<string>;
+  subscribeUrls?: string[];
   updatePlaylist: (
     playlist: NoxMedia.Playlist,
     addSongs: NoxMedia.Song[],

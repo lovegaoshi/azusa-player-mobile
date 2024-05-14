@@ -67,11 +67,11 @@ export default (playlist: NoxMedia.Playlist) => {
     });
   };
 
-  const reParseSearch = (searchStr: string, rows: Array<NoxMedia.Song>) => {
+  const reParseSearch = (searchStr: string, rows: NoxMedia.Song[]) => {
     const extraReExtract = [
       {
         regex: SearchRegex.cachedMatch.regex,
-        process: (val: RegExpExecArray, someRows: Array<NoxMedia.Song>) => {
+        process: (val: RegExpExecArray, someRows: NoxMedia.Song[]) => {
           return val[1].startsWith('local')
             ? someRows.filter(row => row?.bvid?.startsWith?.('file://'))
             : someRows.filter(

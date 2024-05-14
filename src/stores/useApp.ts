@@ -66,8 +66,8 @@ interface NoxSetting {
   setSongMenuCoords: (val: NoxTheme.coordinates) => void;
   songMenuVisible: boolean;
   setSongMenuVisible: (val: boolean) => void;
-  songMenuSongIndexes: Array<number>;
-  setSongMenuSongIndexes: (val: Array<number>) => void;
+  songMenuSongIndexes: number[];
+  setSongMenuSongIndexes: (val: number[]) => void;
   // HACK: i'm out of my wits but heres what i got to force rerender playlist...
   playlistShouldReRender: boolean;
   togglePlaylistShouldReRender: () => void;
@@ -86,8 +86,8 @@ interface NoxSetting {
   currentPlayingList: NoxMedia.Playlist;
   setCurrentPlayingList: (val: NoxMedia.Playlist) => boolean;
   playlists: { [key: string]: NoxMedia.Playlist };
-  playlistIds: Array<string>;
-  setPlaylistIds: (val: Array<string>) => void;
+  playlistIds: string[];
+  setPlaylistIds: (val: string[]) => void;
 
   /**
    * this is the current Playlist selected in the playlist view. it probably should be a string
@@ -119,8 +119,8 @@ interface NoxSetting {
    */
   updatePlaylist: (
     val: NoxMedia.Playlist,
-    addSongs?: Array<NoxMedia.Song>,
-    removeSongs?: Array<NoxMedia.Song>
+    addSongs?: NoxMedia.Song[],
+    removeSongs?: NoxMedia.Song[]
   ) => NoxMedia.Playlist;
 
   initPlayer: (

@@ -42,7 +42,7 @@ export const randomNumber = (v: number) => {
   return Math.floor(Math.random() * v) >> 0;
 };
 
-export const randomChoice = <T>(list: Array<T>) => {
+export const randomChoice = <T>(list: T[]) => {
   return list[randomNumber(list.length)];
 };
 
@@ -74,7 +74,7 @@ export const rgb2Hex = (rgb: string) => {
 };
 
 export const getUniqObjects = <T>(
-  objects: Array<T>,
+  objects: T[],
   property: (object: T) => string
 ) => {
   const uniqKey = new Set();
@@ -90,18 +90,15 @@ export const getUniqObjects = <T>(
 /**
  * splits an array to chunks of given size.
  */
-export const chunkArray = <T>(arr: Array<T>, size = 400): Array<T[]> => {
-  return arr.reduce(
-    (chunks, item, index) => {
-      const chunkIndex = Math.floor(index / size);
-      if (!chunks[chunkIndex]) {
-        chunks[chunkIndex] = [];
-      }
-      chunks[chunkIndex].push(item);
-      return chunks;
-    },
-    [] as Array<T[]>
-  );
+export const chunkArray = <T>(arr: T[], size = 400): T[][] => {
+  return arr.reduce((chunks, item, index) => {
+    const chunkIndex = Math.floor(index / size);
+    if (!chunks[chunkIndex]) {
+      chunks[chunkIndex] = [];
+    }
+    chunks[chunkIndex].push(item);
+    return chunks;
+  }, [] as T[][]);
 };
 
 export const charLength = (str: string) => {

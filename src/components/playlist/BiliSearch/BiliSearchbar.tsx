@@ -30,7 +30,7 @@ interface props {
   onSearched: (val: any) => void;
 }
 export default ({
-  onSearched = (songs: Array<NoxMedia.Song>) => console.log(songs),
+  onSearched = (songs: NoxMedia.Song[]) => console.log(songs),
 }: props) => {
   const { t } = useTranslation();
   const searchOption = useNoxSetting(state => state.searchOption);

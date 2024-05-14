@@ -51,7 +51,7 @@ declare global {
 
     export interface PlayerStorageObject {
       settings: PlayerSettingDict;
-      playlistIds: Array<string>;
+      playlistIds: string[];
       playlists: { [key: string]: NoxMedia.Playlist };
       lastPlaylistId: [string, string];
       searchPlaylist: NoxMedia.Playlist;

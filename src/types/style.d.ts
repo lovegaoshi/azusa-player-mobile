@@ -31,7 +31,7 @@ declare global {
     export interface Style {
       metaData: metaData;
 
-      gifs: Array<string>;
+      gifs: string[];
       backgroundImages: Array<string | backgroundImage>;
       backgroundImagesLandscape?: Array<string | backgroundImage>;
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
