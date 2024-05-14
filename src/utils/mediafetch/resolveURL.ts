@@ -53,6 +53,7 @@ export const fetchPlayUrlPromise = async (
     }
     return fetchVideoPlayUrlPromise({ bvid, cid: cidStr, iOS });
   };
+
   if (v.source && Object.values(MUSICFREE).includes(v.source as MUSICFREE)) {
     const vsource = v.source as MUSICFREE;
     const result = await resolver[vsource](v);
@@ -69,7 +70,7 @@ export const fetchPlayUrlPromise = async (
     regexOperations: regexResolveURLsWrapped,
     fallback,
     regexMatching: song => song.id,
-  });
+  }).catch(() => ({ url: 'NULL' }));
 };
 
 export const refreshMetadata = async (
