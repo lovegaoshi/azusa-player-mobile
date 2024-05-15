@@ -138,6 +138,16 @@ export default (currentSong?: NoxMedia.Song) => {
     return true;
   };
 
+  const onLrcOffsetChange = (lyricOffset: number) => {
+    if (!currentSong?.id) return;
+    setCurrentTimeOffset(lyricOffset);
+    setLyricMapping({
+      songId: currentSong?.id,
+      lyricOffset,
+      lyric: lrc,
+    });
+  };
+
   return {
     getLrcFromLocal,
     hasLrcFromLocal,
@@ -146,6 +156,7 @@ export default (currentSong?: NoxMedia.Song) => {
     initTrackLrcLoad,
     fetchAndSetLyricOptions,
     loadLocalLrc,
+    onLrcOffsetChange,
 
     lrc,
     setLrc,
