@@ -65,7 +65,8 @@ export default (currentSong?: NoxMedia.Song) => {
   const fetchAndSetLyricOptions = async (
     adhocTitle?: string,
     lrcSources: LrcSource[] = [],
-    artist = currentSong?.singerId
+    artist = currentSong?.singerId,
+    optionReorder: (v: NoxNetwork.NoxFetchedLyric[][]) => void = () => undefined
   ) => {
     if (currentSong?.name === undefined) return [];
     try {
@@ -79,9 +80,7 @@ export default (currentSong?: NoxMedia.Song) => {
           })
         )
       );
-      if (options[0].length !== 1) {
-        options.push(options.shift()!);
-      }
+      optionReorder(options);
       const flattenedOptions = options.flat();
       setLrcOptions(flattenedOptions);
       return flattenedOptions;

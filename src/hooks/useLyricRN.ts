@@ -96,7 +96,10 @@ export default (currentSong?: NoxMedia.Song, artist = '') => {
     usedLyric.fetchAndSetLyricOptions(
       adhocTitle,
       [LrcSource.QQQrc, LrcSource.QQ, LrcSource.BiliBili, LrcSource.Kugou],
-      artist
+      artist,
+      options => {
+        options[0].length !== 1 && options.push(options.shift()!);
+      }
     );
 
   const addSubtractOffset = (isAdd: boolean) => {
