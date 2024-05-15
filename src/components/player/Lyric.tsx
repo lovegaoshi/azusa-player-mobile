@@ -1,6 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react';
-import i18n from 'i18next';
 import {
   Modal,
   View,
@@ -15,14 +14,8 @@ import { Lrc as Lyric, KaraokeMode } from 'react-native-lyric';
 import { Track, useProgress } from 'react-native-track-player';
 import { IconButton } from 'react-native-paper';
 
-import { searchLyricOptions, searchLyric } from '@utils/LyricFetch';
-import { reExtractSongName } from '@stores/appStore';
 import { useNoxSetting } from '@stores/useApp';
-import { logger } from '@utils/Logger';
-import { LrcSource } from '@enums/LyricFetch';
 import useLyric from '@hooks/useLyricRN';
-
-const LYRIC_OFFSET_INTERVAL = 0.5;
 
 interface ModalContainerProps {
   children: React.JSX.Element[];
@@ -79,59 +72,26 @@ export const LyricView = ({
   const playerStyle = useNoxSetting(state => state.playerStyle);
   const {
     hasLrcFromLocal,
-    updateLyricMapping,
     searchAndSetCurrentLyric,
-    loadLocalLrc,
     fetchAndSetLyricOptions,
+    addSubtractOffset,
+    initTrackLrcLoad,
     lrc,
-    setLrc,
-    lrcOption,
-    setLrcOption,
     lrcOptions,
     searchText,
     setSearchText,
     currentTimeOffset,
-    setCurrentTimeOffset,
   } = useLyric(track.song, artist);
 
   useEffect(() => {
     if (track === undefined || track.title === '') return;
-
-    (async () => {
-      logger.debug('[lrc] Initiating Lyric with new track...');
-      // HACK: UX is too bad if this is not always fetched
-      const lrcOptionPromise = fetchAndSetLyricOptions();
-      setCurrentTimeOffset(0);
-      setLrcOption(undefined);
-      setLrc(i18n.t('Lyric.loading'));
-      setSearchText(track.title || '');
-      // Initialize from storage if not new
-      const localLrcLoaded = await loadLocalLrc(lrcOptionPromise);
-      if (!localLrcLoaded) {
-        lrcOptionPromise.then(v => searchAndSetCurrentLyric(undefined, v));
-      }
-    })();
+    initTrackLrcLoad();
   }, [track]);
 
   useEffect(() => {
-    if (!hasLrcFromLocal(track?.song)) {
-      searchAndSetCurrentLyric();
-    }
+    if (hasLrcFromLocal(track?.song)) return;
+    searchAndSetCurrentLyric();
   }, [lrcOptions]);
-
-  const addSubtractOffset = (isAdd: boolean) => {
-    const newTimeOffset = isAdd
-      ? currentTimeOffset + LYRIC_OFFSET_INTERVAL
-      : currentTimeOffset - LYRIC_OFFSET_INTERVAL;
-    setCurrentTimeOffset(newTimeOffset);
-    updateLyricMapping({
-      resolvedLrc: lrcOption,
-      newLrcDetail: { lyricOffset: newTimeOffset },
-      lrc,
-      song: track.song,
-      currentTimeOffset: newTimeOffset,
-    });
-  };
 
   const LyricOptions = (key: string) => {
     setModalVisible(false);

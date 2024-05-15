@@ -3,6 +3,8 @@ import { readTxtFile, writeTxtFile } from '@utils/fs';
 import useLyric from './useLyric';
 import { LrcSource } from '@enums/LyricFetch';
 
+const LYRIC_OFFSET_INTERVAL = 0.5;
+
 export default (currentSong?: NoxMedia.Song, artist = '') => {
   const usedLyric = useLyric(currentSong);
 
@@ -97,11 +99,32 @@ export default (currentSong?: NoxMedia.Song, artist = '') => {
       artist
     );
 
+  const addSubtractOffset = (isAdd: boolean) => {
+    const newTimeOffset = isAdd
+      ? usedLyric.currentTimeOffset + LYRIC_OFFSET_INTERVAL
+      : usedLyric.currentTimeOffset - LYRIC_OFFSET_INTERVAL;
+    usedLyric.setCurrentTimeOffset(newTimeOffset);
+    updateLyricMapping({
+      resolvedLrc: usedLyric.lrcOption,
+      newLrcDetail: { lyricOffset: newTimeOffset },
+      lrc: usedLyric.lrc,
+      song: currentSong!,
+      currentTimeOffset: newTimeOffset,
+    });
+  };
+
+  const initTrackLrcLoad = () =>
+    usedLyric.initTrackLrcLoad(
+      fetchAndSetLyricOptions,
+      loadLocalLrc,
+      searchAndSetCurrentLyric
+    );
+
   return {
     ...usedLyric,
-    updateLyricMapping,
     searchAndSetCurrentLyric,
-    loadLocalLrc,
     fetchAndSetLyricOptions,
+    addSubtractOffset,
+    initTrackLrcLoad,
   };
 };
