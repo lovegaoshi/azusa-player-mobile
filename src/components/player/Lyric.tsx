@@ -72,19 +72,27 @@ export const LyricView = ({
   const { position } = useProgress(
     playerSetting.karaokeLyrics ? 50 : undefined
   );
-  const [lrc, setLrc] = useState(i18n.t('Lyric.loading'));
-  const [lrcOptions, setLrcOptions] = useState<NoxNetwork.NoxFetchedLyric[]>(
-    []
-  );
-  const [lrcOption, setLrcOption] = useState<NoxNetwork.NoxFetchedLyric>();
   const [modalVisible, setModalVisible] = useState(false);
   const [lyricSearchModalVisible, setLyricSearchModalVisible] = useState(false);
-  const [currentTimeOffset, setCurrentTimeOffset] = useState(0);
   const [offsetModalVisible, setOffsetModalVisible] = useState(false);
-  const [searchText, setSearchText] = useState('');
 
   const playerStyle = useNoxSetting(state => state.playerStyle);
-  const { getLrcFromLocal, hasLrcFromLocal, updateLyricMapping } = useLyric();
+  const {
+    getLrcFromLocal,
+    hasLrcFromLocal,
+    updateLyricMapping,
+    searchAndSetCurrentLyric,
+    lrc,
+    setLrc,
+    lrcOption,
+    setLrcOption,
+    lrcOptions,
+    setLrcOptions,
+    searchText,
+    setSearchText,
+    currentTimeOffset,
+    setCurrentTimeOffset,
+  } = useLyric(track.song);
 
   useEffect(() => {
     if (track === undefined || track.title === '') return;
@@ -177,30 +185,6 @@ export const LyricView = ({
       setLrcOptions([]);
     }
     return [];
-  };
-
-  const searchAndSetCurrentLyric = async (
-    index = 0,
-    resolvedLrcOptions = lrcOptions,
-    resolvedLyric?: NoxMedia.LyricDetail
-  ) => {
-    // console.debug(`lrcoptions: ${JSON.stringify(resolvedLrcOptions)}`);
-    if (resolvedLrcOptions.length === 0) setLrc(i18n.t('Lyric.notFound'));
-    else {
-      const resolvedLrc = resolvedLrcOptions[index!];
-      const lyric = resolvedLyric
-        ? await searchLyric(resolvedLyric.lyricKey, resolvedLyric.source)
-        : resolvedLrc.lrc ??
-          (await searchLyric(resolvedLrc.songMid, resolvedLrc.source));
-      setLrc(lyric);
-      setLrcOption(resolvedLrc);
-      updateLyricMapping({
-        resolvedLrc,
-        song: track.song,
-        currentTimeOffset,
-        lrc: lyric,
-      });
-    }
   };
 
   const LyricOptions = (key: string) => {

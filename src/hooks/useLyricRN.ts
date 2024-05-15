@@ -2,8 +2,8 @@ import { logger } from '@utils/Logger';
 import { readTxtFile, writeTxtFile } from '@utils/fs';
 import useLyric from './useLyric';
 
-export default () => {
-  const usedLyric = useLyric();
+export default (currentSong?: NoxMedia.Song) => {
+  const usedLyric = useLyric(currentSong);
 
   const updateLyricMapping = ({
     resolvedLrc,
@@ -54,5 +54,24 @@ export default () => {
     };
   };
 
-  return { ...usedLyric, updateLyricMapping, getLrcFromLocal };
+  const searchAndSetCurrentLyric = async (
+    index = 0,
+    resolvedLrcOptions = usedLyric.lrcOptions,
+    resolvedLyric?: NoxMedia.LyricDetail,
+    song = currentSong
+  ) =>
+    usedLyric.searchAndSetCurrentLyric(
+      updateLyricMapping,
+      index,
+      resolvedLrcOptions,
+      resolvedLyric,
+      song
+    );
+
+  return {
+    ...usedLyric,
+    updateLyricMapping,
+    getLrcFromLocal,
+    searchAndSetCurrentLyric,
+  };
 };
