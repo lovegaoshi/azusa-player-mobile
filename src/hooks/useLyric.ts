@@ -15,6 +15,11 @@ export interface UpdateLyricMapping {
   currentTimeOffset: number;
 }
 
+export interface FetchedLocalLrc {
+  lrcDetail: NoxMedia.LyricDetail;
+  localLrc?: string;
+}
+
 export default (currentSong?: NoxMedia.Song) => {
   const [lrc, setLrc] = useState(i18n.t('Lyric.loading'));
   const [lrcOptions, setLrcOptions] = useState<NoxNetwork.NoxFetchedLyric[]>(
@@ -115,6 +120,24 @@ export default (currentSong?: NoxMedia.Song) => {
     }
   };
 
+  const loadLocalLrc = async (
+    localLrcPromise: Promise<FetchedLocalLrc | undefined>,
+    fetchNewLrc: () => void
+  ) => {
+    const localLrcColle = await localLrcPromise;
+    if (localLrcColle === undefined) return false;
+    const lrcKey = localLrcColle.lrcDetail.lyricKey;
+    setLrcOption({ key: lrcKey, songMid: lrcKey, label: lrcKey });
+    setCurrentTimeOffset(localLrcColle.lrcDetail.lyricOffset);
+    if (localLrcColle.localLrc) {
+      setLrc(localLrcColle.localLrc);
+    } else {
+      logger.debug('[lrc] local lrc no longer exists, fetching new...');
+      fetchNewLrc();
+    }
+    return true;
+  };
+
   return {
     getLrcFromLocal,
     hasLrcFromLocal,
@@ -122,6 +145,7 @@ export default (currentSong?: NoxMedia.Song) => {
     searchAndSetCurrentLyric,
     initTrackLrcLoad,
     fetchAndSetLyricOptions,
+    loadLocalLrc,
 
     lrc,
     setLrc,

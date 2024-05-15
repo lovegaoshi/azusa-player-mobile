@@ -74,22 +74,14 @@ export default (currentSong?: NoxMedia.Song, artist = '') => {
   const loadLocalLrc = async (
     lyricPromise: Promise<NoxNetwork.NoxFetchedLyric[]>
   ) => {
-    const localLrcColle = await getLrcFromLocal(currentSong);
-    if (localLrcColle === undefined) return false;
-    const lrcKey = localLrcColle.lrcDetail.lyricKey;
-    usedLyric.setLrcOption({ key: lrcKey, songMid: lrcKey, label: lrcKey });
-    usedLyric.setCurrentTimeOffset(localLrcColle.lrcDetail.lyricOffset);
-    if (localLrcColle.localLrc) {
-      usedLyric.setLrc(localLrcColle.localLrc);
-    } else {
-      logger.debug('[lrc] local lrc no longer exists, fetching new...');
+    const localLrcColle = getLrcFromLocal(currentSong);
+    return usedLyric.loadLocalLrc(getLrcFromLocal(currentSong), async () =>
       searchAndSetCurrentLyric(
         undefined,
         await lyricPromise,
-        localLrcColle.lrcDetail
-      );
-    }
-    return true;
+        (await localLrcColle)?.lrcDetail
+      )
+    );
   };
 
   const fetchAndSetLyricOptions = (adhocTitle = currentSong?.name) =>
