@@ -3,7 +3,7 @@ import i18n from 'i18next';
 
 import { reExtractSongName } from '@stores/appStore';
 import { LrcSource } from '@enums/LyricFetch';
-import { searchLyricOptions, searchLyric } from '@utils/LyricFetch';
+import { searchLyricOptions, searchLyric } from '../utils/LyricFetch';
 import { useNoxSetting } from '@stores/useApp';
 import { logger } from '@utils/Logger';
 
