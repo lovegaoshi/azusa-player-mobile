@@ -1,6 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react';
-import i18n from 'i18next';
 import {
   Modal,
   View,
@@ -15,25 +14,13 @@ import { Lrc as Lyric, KaraokeMode } from 'react-native-lyric';
 import { Track, useProgress } from 'react-native-track-player';
 import { IconButton } from 'react-native-paper';
 
-import { searchLyricOptions, searchLyric } from '@utils/LyricFetch';
-import { reExtractSongName } from '@stores/appStore';
 import { useNoxSetting } from '@stores/useApp';
-import { logger } from '@utils/Logger';
-import { readTxtFile, writeTxtFile } from '@utils/fs';
-import { LrcSource } from '@enums/LyricFetch';
-
-const LYRIC_OFFSET_INTERVAL = 0.5;
+import useLyric from '@hooks/useLyricRN';
 
 interface ModalContainerProps {
   children: React.JSX.Element[];
   visible: boolean;
   onRequestClose: () => void;
-}
-
-interface LyricLineProps {
-  lrcLine: { millisecond: number; content: string };
-  index: number;
-  active: boolean;
 }
 
 export const ModalContainer: React.FC<ModalContainerProps> = ({
@@ -78,161 +65,33 @@ export const LyricView = ({
   const { position } = useProgress(
     playerSetting.karaokeLyrics ? 50 : undefined
   );
-  const [lrc, setLrc] = useState(i18n.t('Lyric.loading'));
-  const [lrcOptions, setLrcOptions] = useState<NoxNetwork.NoxFetchedLyric[]>(
-    []
-  );
-  const [lrcOption, setLrcOption] = useState<NoxNetwork.NoxFetchedLyric>();
   const [modalVisible, setModalVisible] = useState(false);
   const [lyricSearchModalVisible, setLyricSearchModalVisible] = useState(false);
-  const [currentTimeOffset, setCurrentTimeOffset] = useState(0);
   const [offsetModalVisible, setOffsetModalVisible] = useState(false);
-  const [searchText, setSearchText] = useState('');
 
   const playerStyle = useNoxSetting(state => state.playerStyle);
-  const lyricMapping = useNoxSetting(state => state.lyricMapping);
-  const setLyricMapping = useNoxSetting(state => state.setLyricMapping);
+  const {
+    hasLrcFromLocal,
+    searchAndSetCurrentLyric,
+    fetchAndSetLyricOptions,
+    addSubtractOffset,
+    initTrackLrcLoad,
+    lrc,
+    lrcOptions,
+    searchText,
+    setSearchText,
+    currentTimeOffset,
+  } = useLyric(track.song, artist);
 
   useEffect(() => {
     if (track === undefined || track.title === '') return;
-
-    const loadLocalLrc = async (
-      lyricPromise: Promise<NoxNetwork.NoxFetchedLyric[]>
-    ) => {
-      if (!hasLrcFromLocal()) return false;
-      logger.log('[lrc] Loading Lrc from localStorage...');
-      const lrcDetail = lyricMapping.get(track?.song.id);
-      if (lrcDetail === undefined) return false;
-      const lrcKey = lrcDetail?.lyricKey;
-      setLrcOption({ key: lrcKey, songMid: lrcKey, label: lrcKey });
-      setCurrentTimeOffset(lrcDetail!.lyricOffset);
-      if (lrcDetail.lyric.endsWith('.txt')) {
-        const readlrc = await readTxtFile(lrcDetail.lyric, 'lrc/');
-        if (readlrc) {
-          logger.debug('[lrc] read local lrc and loading...');
-          setLrc(readlrc);
-          return true;
-        }
-        logger.debug('[lrc] local lrc no longer exists, fetching new...');
-        searchAndSetCurrentLyric(0, await lyricPromise, lrcDetail);
-        return true;
-      }
-      logger.debug(
-        '[lrc] local lrc seems to be the content itself, loading that...'
-      );
-      setLrc(lrcDetail.lyric);
-      return true;
-    };
-    (async () => {
-      logger.log('[lrc] Initiating Lyric with new track...');
-      // HACK: UX is too bad if this is not always fetched
-      const lrcOptionPromise = fetchAndSetLyricOptions();
-      setCurrentTimeOffset(0);
-      setLrcOption(undefined);
-      setLrc(i18n.t('Lyric.loading'));
-      setSearchText(track.title || '');
-      // Initialize from storage if not new
-      const localLrcLoaded = await loadLocalLrc(lrcOptionPromise);
-      if (!localLrcLoaded) {
-        lrcOptionPromise.then(v => searchAndSetCurrentLyric(undefined, v));
-      }
-    })();
+    initTrackLrcLoad();
   }, [track]);
 
   useEffect(() => {
-    if (!hasLrcFromLocal()) {
-      searchAndSetCurrentLyric();
-    }
+    if (hasLrcFromLocal(track?.song)) return;
+    searchAndSetCurrentLyric();
   }, [lrcOptions]);
-
-  const hasLrcFromLocal = () => {
-    return lyricMapping.has(track?.song?.id);
-  };
-
-  const updateLyricMapping = ({
-    resolvedLrc = lrcOption,
-    newLrcDetail = {},
-  }: {
-    resolvedLrc?: NoxNetwork.NoxFetchedLyric;
-    newLrcDetail?: Partial<NoxMedia.LyricDetail>;
-  }) => {
-    if (resolvedLrc !== null && resolvedLrc !== undefined) {
-      const lrcpath = `${track.song.id}.txt`;
-      writeTxtFile(lrcpath, [newLrcDetail.lyric || lrc], 'lrc/');
-      const lyricDeatail: NoxMedia.LyricDetail = {
-        songId: track.song.id,
-        lyricKey: resolvedLrc.key,
-        lyricOffset: currentTimeOffset,
-        ...newLrcDetail,
-        lyric: lrcpath,
-        source: resolvedLrc.source,
-      };
-      setLyricMapping(lyricDeatail);
-    }
-  };
-
-  const addSubtractOffset = (isAdd: boolean) => {
-    const newTimeOffset = isAdd
-      ? currentTimeOffset + LYRIC_OFFSET_INTERVAL
-      : currentTimeOffset - LYRIC_OFFSET_INTERVAL;
-    setCurrentTimeOffset(newTimeOffset);
-    updateLyricMapping({ newLrcDetail: { lyricOffset: newTimeOffset } });
-  };
-
-  const fetchAndSetLyricOptions = async (adhocTitle?: string) => {
-    if (track.title === undefined) return [];
-    try {
-      let titleToFetch = adhocTitle === undefined ? track.title : adhocTitle;
-      if (adhocTitle !== undefined)
-        titleToFetch = reExtractSongName(titleToFetch, artist);
-      else titleToFetch = reExtractSongName(track.title, artist);
-      const options = await Promise.all([
-        searchLyricOptions({
-          searchKey: titleToFetch,
-          source: LrcSource.QQQrc,
-        }),
-        searchLyricOptions({ searchKey: titleToFetch, source: LrcSource.QQ }),
-        searchLyricOptions({
-          searchKey: titleToFetch,
-          source: LrcSource.BiliBili,
-          song: track.song,
-        }),
-        searchLyricOptions({
-          searchKey: titleToFetch,
-          source: LrcSource.Kugou,
-        }),
-      ]);
-      if (options[0].length !== 1) {
-        options.push(options.shift()!);
-      }
-      const flattenedOptions = options.flat();
-      setLrcOptions(flattenedOptions);
-      return flattenedOptions;
-    } catch (error) {
-      logger.error(`[lrc] Error fetching lyric options:${error}`);
-      setLrcOptions([]);
-    }
-    return [];
-  };
-
-  const searchAndSetCurrentLyric = async (
-    index = 0,
-    resolvedLrcOptions = lrcOptions,
-    resolvedLyric?: NoxMedia.LyricDetail
-  ) => {
-    // console.debug(`lrcoptions: ${JSON.stringify(resolvedLrcOptions)}`);
-    if (resolvedLrcOptions.length === 0) setLrc(i18n.t('Lyric.notFound'));
-    else {
-      const resolvedLrc = resolvedLrcOptions[index!];
-      const lyric = resolvedLyric
-        ? await searchLyric(resolvedLyric.lyricKey, resolvedLyric.source)
-        : resolvedLrc.lrc ??
-          (await searchLyric(resolvedLrc.songMid, resolvedLrc.source));
-      setLrc(lyric);
-      setLrcOption(resolvedLrc);
-      updateLyricMapping({ newLrcDetail: { lyric }, resolvedLrc });
-    }
-  };
 
   const LyricOptions = (key: string) => {
     setModalVisible(false);
