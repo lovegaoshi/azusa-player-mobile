@@ -78,45 +78,25 @@ export const LyricView = ({
 
   const playerStyle = useNoxSetting(state => state.playerStyle);
   const {
-    getLrcFromLocal,
     hasLrcFromLocal,
     updateLyricMapping,
     searchAndSetCurrentLyric,
+    loadLocalLrc,
+    fetchAndSetLyricOptions,
     lrc,
     setLrc,
     lrcOption,
     setLrcOption,
     lrcOptions,
-    setLrcOptions,
     searchText,
     setSearchText,
     currentTimeOffset,
     setCurrentTimeOffset,
-  } = useLyric(track.song);
+  } = useLyric(track.song, artist);
 
   useEffect(() => {
     if (track === undefined || track.title === '') return;
 
-    const loadLocalLrc = async (
-      lyricPromise: Promise<NoxNetwork.NoxFetchedLyric[]>
-    ) => {
-      const localLrcColle = await getLrcFromLocal(track?.song);
-      if (localLrcColle === undefined) return false;
-      const lrcKey = localLrcColle.lrcDetail.lyricKey;
-      setLrcOption({ key: lrcKey, songMid: lrcKey, label: lrcKey });
-      setCurrentTimeOffset(localLrcColle.lrcDetail.lyricOffset);
-      if (localLrcColle.localLrc) {
-        setLrc(localLrcColle.localLrc);
-      } else {
-        logger.debug('[lrc] local lrc no longer exists, fetching new...');
-        searchAndSetCurrentLyric(
-          0,
-          await lyricPromise,
-          localLrcColle.lrcDetail
-        );
-      }
-      return true;
-    };
     (async () => {
       logger.debug('[lrc] Initiating Lyric with new track...');
       // HACK: UX is too bad if this is not always fetched
@@ -151,40 +131,6 @@ export const LyricView = ({
       song: track.song,
       currentTimeOffset: newTimeOffset,
     });
-  };
-
-  const fetchAndSetLyricOptions = async (adhocTitle?: string) => {
-    if (track.title === undefined) return [];
-    try {
-      const titleToFetch = reExtractSongName(
-        adhocTitle === undefined ? track.title : adhocTitle,
-        artist
-      );
-      const options = await Promise.all(
-        [
-          LrcSource.QQQrc,
-          LrcSource.QQ,
-          LrcSource.BiliBili,
-          LrcSource.Kugou,
-        ].map(source =>
-          searchLyricOptions({
-            searchKey: titleToFetch,
-            source,
-            song: track.song,
-          })
-        )
-      );
-      if (options[0].length !== 1) {
-        options.push(options.shift()!);
-      }
-      const flattenedOptions = options.flat();
-      setLrcOptions(flattenedOptions);
-      return flattenedOptions;
-    } catch (error) {
-      logger.error(`[lrc] Error fetching lyric options:${error}`);
-      setLrcOptions([]);
-    }
-    return [];
   };
 
   const LyricOptions = (key: string) => {

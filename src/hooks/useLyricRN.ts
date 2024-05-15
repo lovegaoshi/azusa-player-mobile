@@ -1,8 +1,9 @@
 import { logger } from '@utils/Logger';
 import { readTxtFile, writeTxtFile } from '@utils/fs';
 import useLyric from './useLyric';
+import { LrcSource } from '@enums/LyricFetch';
 
-export default (currentSong?: NoxMedia.Song) => {
+export default (currentSong?: NoxMedia.Song, artist = '') => {
   const usedLyric = useLyric(currentSong);
 
   const updateLyricMapping = ({
@@ -54,7 +55,7 @@ export default (currentSong?: NoxMedia.Song) => {
     };
   };
 
-  const searchAndSetCurrentLyric = async (
+  const searchAndSetCurrentLyric = (
     index = 0,
     resolvedLrcOptions = usedLyric.lrcOptions,
     resolvedLyric?: NoxMedia.LyricDetail,
@@ -68,10 +69,39 @@ export default (currentSong?: NoxMedia.Song) => {
       song
     );
 
+  const loadLocalLrc = async (
+    lyricPromise: Promise<NoxNetwork.NoxFetchedLyric[]>
+  ) => {
+    const localLrcColle = await getLrcFromLocal(currentSong);
+    if (localLrcColle === undefined) return false;
+    const lrcKey = localLrcColle.lrcDetail.lyricKey;
+    usedLyric.setLrcOption({ key: lrcKey, songMid: lrcKey, label: lrcKey });
+    usedLyric.setCurrentTimeOffset(localLrcColle.lrcDetail.lyricOffset);
+    if (localLrcColle.localLrc) {
+      usedLyric.setLrc(localLrcColle.localLrc);
+    } else {
+      logger.debug('[lrc] local lrc no longer exists, fetching new...');
+      searchAndSetCurrentLyric(
+        undefined,
+        await lyricPromise,
+        localLrcColle.lrcDetail
+      );
+    }
+    return true;
+  };
+
+  const fetchAndSetLyricOptions = (adhocTitle = currentSong?.name) =>
+    usedLyric.fetchAndSetLyricOptions(
+      adhocTitle,
+      [LrcSource.QQQrc, LrcSource.QQ, LrcSource.BiliBili, LrcSource.Kugou],
+      artist
+    );
+
   return {
     ...usedLyric,
     updateLyricMapping,
-    getLrcFromLocal,
     searchAndSetCurrentLyric,
+    loadLocalLrc,
+    fetchAndSetLyricOptions,
   };
 };

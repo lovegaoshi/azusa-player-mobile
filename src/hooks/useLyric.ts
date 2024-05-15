@@ -1,6 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import i18n from 'i18next';
 
+import { reExtractSongName } from '@stores/appStore';
+import { LrcSource } from '@enums/LyricFetch';
 import { searchLyricOptions, searchLyric } from '@utils/LyricFetch';
 import { useNoxSetting } from '@stores/useApp';
 import { logger } from '@utils/Logger';
@@ -60,18 +62,73 @@ export default (currentSong?: NoxMedia.Song) => {
     }
   };
 
+  const fetchAndSetLyricOptions = async (
+    adhocTitle?: string,
+    lrcSources: LrcSource[] = [],
+    artist = currentSong?.singerId
+  ) => {
+    if (currentSong?.name === undefined) return [];
+    try {
+      const titleToFetch = reExtractSongName(adhocTitle || '', artist || 0);
+      const options = await Promise.all(
+        lrcSources.map(source =>
+          searchLyricOptions({
+            searchKey: titleToFetch,
+            source,
+            song: currentSong,
+          })
+        )
+      );
+      if (options[0].length !== 1) {
+        options.push(options.shift()!);
+      }
+      const flattenedOptions = options.flat();
+      setLrcOptions(flattenedOptions);
+      return flattenedOptions;
+    } catch (error) {
+      logger.error(`[lrc] Error fetching lyric options:${error}`);
+      setLrcOptions([]);
+    }
+    return [];
+  };
+
+  const initTrackLrcLoad = async (
+    fetchAndSetLyricOptions: () => Promise<NoxNetwork.NoxFetchedLyric[]>,
+    loadLocalLrc: (
+      lyricPromise: Promise<NoxNetwork.NoxFetchedLyric[]>
+    ) => Promise<boolean>,
+    searchAndSetCurrentLyric: (
+      index?: number,
+      resolvedLrcOptions?: NoxNetwork.NoxFetchedLyric[]
+    ) => unknown
+  ) => {
+    logger.debug('[lrc] Initiating Lyric with new track...');
+    // HACK: UX is too bad if this is not always fetched
+    const lrcOptionPromise = fetchAndSetLyricOptions();
+    setCurrentTimeOffset(0);
+    setLrcOption(undefined);
+    setLrc(i18n.t('Lyric.loading'));
+    setSearchText(currentSong?.name || '');
+    // if failed to init from local,
+    if (!(await loadLocalLrc(lrcOptionPromise))) {
+      // search from resolved lrc options
+      lrcOptionPromise.then(v => searchAndSetCurrentLyric(undefined, v));
+    }
+  };
+
   return {
     getLrcFromLocal,
     hasLrcFromLocal,
     setLyricMapping,
     searchAndSetCurrentLyric,
+    initTrackLrcLoad,
+    fetchAndSetLyricOptions,
 
     lrc,
     setLrc,
     lrcOption,
     setLrcOption,
     lrcOptions,
-    setLrcOptions,
     searchText,
     setSearchText,
     currentTimeOffset,
