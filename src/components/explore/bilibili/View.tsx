@@ -6,6 +6,8 @@ import { useTranslation } from 'react-i18next';
 import { fetchDynamic } from '@utils/mediafetch/biliDynamic';
 import { fetchRanking } from '@utils/mediafetch/biliRanking';
 import { fetchCurrentMusicTop } from '@utils/mediafetch/biliMusicTop';
+import { fetchMusicHot } from '@utils/mediafetch/biliMusicHot';
+import { fetchMusicNew } from '@utils/mediafetch/biliMusicNew';
 import { styles } from '@components/style';
 import {
   BiliCatSongs,
@@ -19,6 +21,8 @@ export default () => {
   const [biliDynamic, setBiliDynamic] = React.useState<BiliCatSongs>({});
   const [biliRanking, setBiliRanking] = React.useState<BiliCatSongs>({});
   const [biliMusicTop, setBiliMusicTop] = React.useState<NoxMedia.Song[]>([]);
+  const [biliMusicHot, setBiliMusicHot] = React.useState<NoxMedia.Song[]>([]);
+  const [biliMusicNew, setBiliMusicNew] = React.useState<NoxMedia.Song[]>([]);
   const [refreshing, setRefreshing] = React.useState(false);
   const [loading, setLoading] = React.useState(true);
 
@@ -27,6 +31,8 @@ export default () => {
       fetchRanking().then(setBiliRanking),
       fetchDynamic().then(setBiliDynamic),
       fetchCurrentMusicTop().then(setBiliMusicTop),
+      fetchMusicHot().then(setBiliMusicHot),
+      fetchMusicNew().then(setBiliMusicNew),
     ]);
 
   const onRefresh = React.useCallback(() => {
@@ -71,6 +77,14 @@ export default () => {
       <BiliSongsArrayTabCard
         songs={biliMusicTop}
         title={t('BiliCategory.top')}
+      />
+      <BiliSongsArrayTabCard
+        songs={biliMusicHot}
+        title={t('BiliCategory.hot')}
+      />
+      <BiliSongsArrayTabCard
+        songs={biliMusicNew}
+        title={t('BiliCategory.new')}
       />
     </ScrollView>
   );
