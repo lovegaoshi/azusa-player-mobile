@@ -14,6 +14,7 @@ import {
   savePlayerSkins,
   saveLyricMapping,
   saveDefaultSearch,
+  getPlaylistSongList,
 } from '@utils/ChromeStorage';
 import { DefaultSetting, StorageKeys, SearchOptions } from '@enums/Storage';
 import { setPlayerSetting as setPlayerSettingVanilla } from './playerSettingStore';
@@ -99,6 +100,7 @@ interface NoxSetting {
   setSearchPlaylist: (val: NoxMedia.Playlist) => void;
   favoritePlaylist: NoxMedia.Playlist;
   setFavoritePlaylist: (val: NoxMedia.Playlist) => void;
+  getPlaylistSonglist: (val: string) => Promise<NoxMedia.Song[]>;
 
   playerSetting: NoxStorage.PlayerSettingDict;
   setPlayerSetting: (val: Partial<NoxStorage.PlayerSettingDict>) => void;
@@ -121,7 +123,7 @@ interface NoxSetting {
     val: NoxMedia.Playlist,
     addSongs?: NoxMedia.Song[],
     removeSongs?: NoxMedia.Song[]
-  ) => NoxMedia.Playlist;
+  ) => Promise<NoxMedia.Playlist>;
 
   initPlayer: (
     val: NoxStorage.PlayerStorageObject
@@ -232,6 +234,12 @@ export const useNoxSetting = create<NoxSetting>((set, get) => ({
     saveFavPlaylist(val);
     set({ favoritePlaylist: val, playlists });
   },
+  getPlaylistSonglist: async v => {
+    if (get().playerSetting.memoryEfficiency) {
+      return getPlaylistSongList(v);
+    }
+    return get().playlists[v].songList || [];
+  },
 
   playerSetting: DefaultSetting,
   setPlayerSetting: val => {
@@ -263,9 +271,10 @@ export const useNoxSetting = create<NoxSetting>((set, get) => ({
     set({ playlists, playlistIds });
   },
 
-  updatePlaylist: (playlist, addSongs = [], removeSongs = []) => {
+  updatePlaylist: async (playlist, addSongs = [], removeSongs = []) => {
     let playlists = get().playlists;
     const currentPlaylist = get().currentPlaylist;
+    playlist.songList = await get().getPlaylistSonglist(playlist.id);
     updatePlaylistSongs(playlist, addSongs, removeSongs);
     playlists[playlist.id] = playlist;
     if (playlist.id === currentPlaylist.id) {

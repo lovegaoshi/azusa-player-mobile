@@ -64,6 +64,10 @@ const developerSettings: { [key: string]: SettingEntry } = {
     settingName: 'karaokeLyrics',
     settingCategory: 'GeneralSettings',
   },
+  chatGPTSongName: {
+    settingName: 'memoryEfficiency',
+    settingCategory: 'GeneralSettings',
+  },
   /**
   chatGPTSongName: {
     settingName: 'chatGPTResolveSongName',
@@ -169,7 +173,9 @@ const Home = ({ navigation }: NoxComponent.NavigationProps) => {
             <View>
               <RenderSetting item={developerSettings.noInterruption} />
               <RenderSetting item={developerSettings.prefetchTrack} />
-              {Platform.OS === 'android' && <RenderSetting item={developerSettings.keepForeground} />}
+              {Platform.OS === 'android' && (
+                <RenderSetting item={developerSettings.keepForeground} />
+              )}
               <RenderSetting item={developerSettings.karaokeLyrics} />
             </View>
           </GroupView>

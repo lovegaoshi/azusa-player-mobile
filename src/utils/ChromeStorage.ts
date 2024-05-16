@@ -197,8 +197,6 @@ export const savePlaylist = async (
 /**
  * note this method always return a playlist, if error occurs a dummy one is
  * returned.
- * @param key playlist ID.
- * @returns
  */
 export const getPlaylist = async (
   key: string,
@@ -215,6 +213,9 @@ export const getPlaylist = async (
   }
   return dPlaylist;
 };
+
+export const getPlaylistSongList = async (key: string) =>
+  (await getPlaylist(key)).songList;
 
 export const savePlayerSkins = async (skins: any[]) =>
   saveChucked(StorageKeys.SKINSTORAGE, skins);
