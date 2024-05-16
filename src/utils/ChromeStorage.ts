@@ -259,22 +259,17 @@ export const addPlaylist = (
   return playlistIds;
 };
 
-const delPlaylistRaw = (playlist: NoxMedia.Playlist) => {
-  removeItem(playlist.id);
-  [
-    ...Array(Math.ceil(playlist.songList.length / MAX_SONGLIST_SIZE)).keys(),
-  ].forEach(index => {
-    removeItem(`${playlist.id}.${index}`);
-  });
+const delPlaylistRaw = async (playlistId: string) => {
+  removeItem(playlistId);
+  (await AsyncStorage.getAllKeys())
+    .filter(k => k.startsWith(`${playlistId}.`))
+    .forEach(k => removeItem(k));
 };
 
-export const delPlaylist = (
-  playlist: NoxMedia.Playlist,
-  playlistIds: string[]
-) => {
+export const delPlaylist = (playlistId: string, playlistIds: string[]) => {
   let playlistIds2 = [...playlistIds];
-  playlistIds2.splice(playlistIds2.indexOf(playlist.id), 1);
-  delPlaylistRaw(playlist);
+  playlistIds2.splice(playlistIds2.indexOf(playlistId), 1);
+  delPlaylistRaw(playlistId);
   savePlaylistIds(playlistIds2);
   return playlistIds2;
 };
@@ -362,9 +357,7 @@ export const exportPlayerContent = async (content?: any) => {
 
 const clearPlaylists = async () => {
   const playlistIds = (await getItem(StorageKeys.MY_FAV_LIST_KEY)) || [];
-  for (const playlistId of playlistIds) {
-    delPlaylistRaw(await getPlaylist(playlistId));
-  }
+  playlistIds.forEach(delPlaylistRaw);
   savePlaylistIds([]);
 };
 

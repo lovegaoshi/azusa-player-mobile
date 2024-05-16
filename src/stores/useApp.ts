@@ -14,7 +14,7 @@ import {
   savePlayerSkins,
   saveLyricMapping,
   saveDefaultSearch,
-  getPlaylistSongList,
+  getPlaylist,
 } from '@utils/ChromeStorage';
 import { DefaultSetting, StorageKeys, SearchOptions } from '@enums/Storage';
 import { setPlayerSetting as setPlayerSettingVanilla } from './playerSettingStore';
@@ -237,10 +237,7 @@ export const useNoxSetting = create<NoxSetting>((set, get) => ({
   getPlaylist: async v => {
     const appState: NoxSetting = get();
     if (appState.playerSetting.memoryEfficiency) {
-      return {
-        ...appState.playlists[v],
-        songlist: await getPlaylistSongList(v),
-      };
+      return getPlaylist(v);
     }
     return appState.playlists[v];
   },
@@ -269,7 +266,7 @@ export const useNoxSetting = create<NoxSetting>((set, get) => ({
     if (currentPlaylist.id === playlistId) {
       set({ currentPlaylist: playlists[StorageKeys.SEARCH_PLAYLIST_KEY] });
     }
-    delPlaylist(playlists[playlistId], playlistIds);
+    delPlaylist(playlistId, playlistIds);
     delete playlists[playlistId];
     playlistIds = playlistIds.filter(v => v !== playlistId);
     set({ playlists, playlistIds });
@@ -285,7 +282,7 @@ export const useNoxSetting = create<NoxSetting>((set, get) => ({
       ? { ...playlist, songList: [] }
       : retrivedPlaylist;
     if (playlist.id === currentPlaylist.id) {
-      set({ currentPlaylist: playlist });
+      set({ currentPlaylist: retrivedPlaylist });
     }
     set({ playlists });
     savePlaylist(retrivedPlaylist);

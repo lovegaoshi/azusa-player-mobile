@@ -64,7 +64,7 @@ const developerSettings: { [key: string]: SettingEntry } = {
     settingName: 'karaokeLyrics',
     settingCategory: 'GeneralSettings',
   },
-  chatGPTSongName: {
+  memoryEfficiency: {
     settingName: 'memoryEfficiency',
     settingCategory: 'GeneralSettings',
   },
@@ -177,6 +177,7 @@ const Home = ({ navigation }: NoxComponent.NavigationProps) => {
                 <RenderSetting item={developerSettings.keepForeground} />
               )}
               <RenderSetting item={developerSettings.karaokeLyrics} />
+              <RenderSetting item={developerSettings.memoryEfficiency} />
             </View>
           </GroupView>
           <SettingListItem
