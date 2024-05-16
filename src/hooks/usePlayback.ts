@@ -40,6 +40,8 @@ const usePlayback = () => {
   const { t } = useTranslation();
   const currentPlayingList = useNoxSetting(state => state.currentPlayingList);
   const playlists = useNoxSetting(state => state.playlists);
+  const playlistIds = useNoxSetting(state => state.playlistIds);
+  const getPlaylist = useNoxSetting(state => state.getPlaylist);
   const currentPlayingId = useNoxSetting(state => state.currentPlayingId);
   const searchPlaylist = useNoxSetting(state => state.searchPlaylist);
   const setCurrentPlaylist = useNoxSetting(state => state.setCurrentPlaylist);
@@ -102,9 +104,15 @@ const usePlayback = () => {
   };
 
   const shuffleAll = async () => {
-    let allSongs = Object.values(playlists)
-      .filter(playlist => playlist.type === PlaylistTypes.Typical)
-      .reduce((acc, curr) => acc.concat(curr.songList), [] as NoxMedia.Song[]);
+    const allPlaylists = await Promise.all(
+      Object.values(playlists)
+        .filter(playlist => playlist.type === PlaylistTypes.Typical)
+        .map(p => getPlaylist(p.id))
+    );
+    let allSongs = allPlaylists.reduce(
+      (acc, curr) => acc.concat(curr.songList),
+      [] as NoxMedia.Song[]
+    );
     if (isDataSaving) {
       const cachedSongs = Array.from(noxCache.noxMediaCache.cache.keys());
       allSongs = allSongs.filter(song =>
@@ -117,7 +125,7 @@ const usePlayback = () => {
     });
   };
 
-  const playFromMediaId = (mediaId: string) => {
+  const playFromMediaId = async (mediaId: string) => {
     logger.info(`[playFromMediaId]: ${mediaId}`);
     if (mediaId.startsWith(PLAYLIST_MEDIAID)) {
       mediaId = mediaId.substring(PLAYLIST_MEDIAID.length);
@@ -127,7 +135,7 @@ const usePlayback = () => {
         return;
       }
       playFromPlaylist({
-        playlist: playlists[mediaId],
+        playlist: await getPlaylist(mediaId),
         playlistParser: dataSaverPlaylistWrapper(isDataSaving),
       });
     } else {
@@ -148,7 +156,8 @@ const usePlayback = () => {
           return;
         }
       }
-      for (const playlist of Object.values(playlists)) {
+      for (const playlistId of playlistIds) {
+        const playlist = await getPlaylist(playlistId);
         for (const song of playlist.songList) {
           if (song.bvid === songBVID && song.id === songCID) {
             playFromPlaylist({
@@ -164,14 +173,14 @@ const usePlayback = () => {
     }
   };
 
-  const playFromSearch = (query: string) => {
+  const playFromSearch = async (query: string) => {
     // first go through the current playlist and match the exact song name with query.
     // then go through the current playlist and match the loose song name with query.
     // then go through playlist names and match the exact playlist name with query.
     // then go through every playlist and match the loose song name with query.
     if (query === '') {
       playFromPlaylist({
-        playlist: playlists[randomChoice(Object.keys(playlists))],
+        playlist: await getPlaylist(randomChoice(playlistIds)),
       });
       return;
     }
@@ -189,11 +198,12 @@ const usePlayback = () => {
     }
     for (const playlist of Object.values(playlists)) {
       if (playlist.title.toLowerCase() === query) {
-        playFromPlaylist({ playlist });
+        playFromPlaylist({ playlist: await getPlaylist(playlist.id) });
         return;
       }
     }
-    for (const playlist of Object.values(playlists)) {
+    for (const playlistId of playlistIds) {
+      const playlist = await getPlaylist(playlistId);
       for (const song of playlist.songList) {
         if (song.name.toLowerCase().includes(query)) {
           playFromPlaylist({ playlist, song });

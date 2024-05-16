@@ -30,6 +30,7 @@ export default () => {
   const playerStyle = useNoxSetting(state => state.playerStyle);
   const playerSetting = useNoxSetting(state => state.playerSetting);
   const addPlaylistButtonRef = useRef<AddPlaylistButtonRef>(null);
+  const getPlaylist = useNoxSetting(state => state.getPlaylist);
   const setCurrentPlaylist = useNoxSetting(state => state.setCurrentPlaylist);
   const setPlaylistIds = useNoxSetting(state => state.setPlaylistIds);
   const scroll = useNoxSetting(state => state.incSongListScrollCounter);
@@ -52,8 +53,8 @@ export default () => {
     );
   };
 
-  const goToPlaylist = (playlistId: string) => {
-    setCurrentPlaylist(playlists[playlistId]);
+  const goToPlaylist = async (playlistId: string) => {
+    setCurrentPlaylist(await getPlaylist(playlistId));
     scroll();
     navigation.navigate(NoxRoutes.Playlist as never);
     setRoute(RouteIcons.music);
@@ -134,7 +135,7 @@ export default () => {
           {
             backgroundColor:
               currentPlaylist.id ===
-                playlists[StorageKeys.SEARCH_PLAYLIST_KEY]?.id
+              playlists[StorageKeys.SEARCH_PLAYLIST_KEY]?.id
                 ? playerStyle.customColors.playlistDrawerBackgroundColor
                 : undefined,
           },
@@ -145,7 +146,7 @@ export default () => {
           icon={SearchPlaylistAsNewButton()}
           leadColor={
             currentPlayingList.id ===
-              playlists[StorageKeys.SEARCH_PLAYLIST_KEY].id
+            playlists[StorageKeys.SEARCH_PLAYLIST_KEY].id
               ? playerStyle.colors.primary //customColors.playlistDrawerBackgroundColor
               : undefined
           }

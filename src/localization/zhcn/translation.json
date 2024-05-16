@@ -126,6 +126,8 @@
     "prefetchTrackDesc": "预加载下一首歌（仅在歌曲缓存开启时有用）",
     "chatGPTResolveSongNameName": "ChatGPT找歌",
     "chatGPTResolveSongNameDesc": "TODO：用chatGPT解析歌名",
+    "cmemoryEfficiencyName": "Memory Efficiency",
+    "memoryEfficiencyDesc": "async load songlists from playlists",
     "keepForegroundName": "费电",
     "keepForegroundDesc": "保持前台服务，贼拉费电",
     "karaokeLyricsName": "逐字歌词",
