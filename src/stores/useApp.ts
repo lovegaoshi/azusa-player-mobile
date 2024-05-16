@@ -100,7 +100,7 @@ interface NoxSetting {
   setSearchPlaylist: (val: NoxMedia.Playlist) => void;
   favoritePlaylist: NoxMedia.Playlist;
   setFavoritePlaylist: (val: NoxMedia.Playlist) => void;
-  getPlaylistSonglist: (val: string) => Promise<NoxMedia.Song[]>;
+  getPlaylist: (val: string) => Promise<NoxMedia.Playlist>;
 
   playerSetting: NoxStorage.PlayerSettingDict;
   setPlayerSetting: (val: Partial<NoxStorage.PlayerSettingDict>) => void;
@@ -234,11 +234,15 @@ export const useNoxSetting = create<NoxSetting>((set, get) => ({
     saveFavPlaylist(val);
     set({ favoritePlaylist: val, playlists });
   },
-  getPlaylistSonglist: async v => {
-    if (get().playerSetting.memoryEfficiency) {
-      return getPlaylistSongList(v);
+  getPlaylist: async v => {
+    const appState: NoxSetting = get();
+    if (appState.playerSetting.memoryEfficiency) {
+      return {
+        ...appState.playlists[v],
+        songlist: await getPlaylistSongList(v),
+      };
     }
-    return get().playlists[v].songList || [];
+    return appState.playlists[v];
   },
 
   playerSetting: DefaultSetting,
@@ -272,18 +276,21 @@ export const useNoxSetting = create<NoxSetting>((set, get) => ({
   },
 
   updatePlaylist: async (playlist, addSongs = [], removeSongs = []) => {
-    let playlists = get().playlists;
-    const currentPlaylist = get().currentPlaylist;
-    playlist.songList = await get().getPlaylistSonglist(playlist.id);
-    updatePlaylistSongs(playlist, addSongs, removeSongs);
-    playlists[playlist.id] = playlist;
+    const appState: NoxSetting = get();
+    let playlists = appState.playlists;
+    const currentPlaylist = appState.currentPlaylist;
+    const retrivedPlaylist = await appState.getPlaylist(playlist.id);
+    updatePlaylistSongs(retrivedPlaylist, addSongs, removeSongs);
+    playlists[playlist.id] = appState.playerSetting.memoryEfficiency
+      ? { ...playlist, songList: [] }
+      : retrivedPlaylist;
     if (playlist.id === currentPlaylist.id) {
       set({ currentPlaylist: playlist });
     }
     set({ playlists });
-    savePlaylist(playlist);
-    set({ playlistShouldReRender: !get().playlistShouldReRender });
-    return playlist;
+    savePlaylist(retrivedPlaylist);
+    set({ playlistShouldReRender: !appState.playlistShouldReRender });
+    return retrivedPlaylist;
   },
 
   lyricMapping: new Map<string, NoxMedia.LyricDetail>(),

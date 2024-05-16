@@ -44,7 +44,7 @@ export default ({
 }: Props) => {
   const { t } = useTranslation();
   const currentPlaylist = useNoxSetting(state => state.currentPlayingList);
-  const playlists = useNoxSetting(state => state.playlists);
+  const getPlaylist = useNoxSetting(state => state.getPlaylist);
   const updateTrack = useNoxSetting(state => state.updateTrack);
 
   const playlistCRUD = usePlaylistCRUD();
@@ -75,7 +75,7 @@ export default ({
   };
 
   const reloadSong = async () => {
-    const currentPlaylist2 = playlists[currentPlaylist.id];
+    const currentPlaylist2 = await getPlaylist(currentPlaylist.id);
     const metadata = await updateSongMetadata(
       songMenuSongIndexes[0],
       currentPlaylist2
