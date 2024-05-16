@@ -173,7 +173,7 @@
     "SplashSettingName": "Splashes",
     "SplashSettingDesc": "View APM's splash ads",
     "DeveloperOptionsName": "Developer Options",
-    "DeveloperOptionsDesc": "Experimental Options in pre-release versions of APM",
+    "DeveloperOptionsDesc": "Experimental Options in pre-release versions of APM; risk of losing data, dont touch, seriously",
     "LanguageOptionsName": "Change Language",
     "LanguageOptionsDesc": "Change app language",
     "LanguageOptionsTitle": "Change Language",
