@@ -264,7 +264,7 @@ export const addPlaylist = (
   return playlistIds;
 };
 
-const delPlaylistRaw = async (playlistId: string) => {
+const _delPlaylist = async (playlistId: string) => {
   removeItem(playlistId);
   (await AsyncStorage.getAllKeys())
     .filter(k => k.startsWith(`${playlistId}.`))
@@ -274,7 +274,7 @@ const delPlaylistRaw = async (playlistId: string) => {
 export const delPlaylist = (playlistId: string, playlistIds: string[]) => {
   let playlistIds2 = [...playlistIds];
   playlistIds2.splice(playlistIds2.indexOf(playlistId), 1);
-  delPlaylistRaw(playlistId);
+  _delPlaylist(playlistId);
   savePlaylistIds(playlistIds2);
   return playlistIds2;
 };
@@ -366,7 +366,7 @@ export const exportPlayerContent = async (content?: any) => {
 
 const clearPlaylists = async () => {
   const playlistIds = (await getItem(StorageKeys.MY_FAV_LIST_KEY)) || [];
-  playlistIds.forEach(delPlaylistRaw);
+  playlistIds.forEach(_delPlaylist);
   savePlaylistIds([]);
 };
 
