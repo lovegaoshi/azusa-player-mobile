@@ -193,20 +193,28 @@ export const savePlaylist = async (
     console.error(e);
   }
 };
+interface GetPlaylist {
+  key: string;
+  defaultPlaylist?: () => NoxMedia.Playlist;
+  hydrateSongList?: boolean;
+}
 
 /**
  * note this method always return a playlist, if error occurs a dummy one is
  * returned.
  */
-export const getPlaylist = async (
-  key: string,
-  defaultPlaylist: () => NoxMedia.Playlist = dummyPlaylist
-): Promise<NoxMedia.Playlist> => {
+export const getPlaylist = async ({
+  key,
+  defaultPlaylist = dummyPlaylist,
+  hydrateSongList = true,
+}: GetPlaylist): Promise<NoxMedia.Playlist> => {
   const dPlaylist = defaultPlaylist();
   try {
     const retrievedPlaylist = await getItem(key);
     if (retrievedPlaylist === null) return dPlaylist;
-    retrievedPlaylist.songList = await loadChucked(retrievedPlaylist.songList);
+    retrievedPlaylist.songList = hydrateSongList
+      ? await loadChucked(retrievedPlaylist.songList)
+      : [];
     return { ...dPlaylist, ...retrievedPlaylist };
   } catch (e) {
     console.error(e);
@@ -302,9 +310,10 @@ export const initPlayerObject = async (
       i18n.t('PlaylistOperations.searchListName'),
       PlaylistTypes.Search
     ),
-    favoriPlaylist: await getPlaylist(StorageKeys.FAVORITE_PLAYLIST_KEY, () =>
-      dummyPlaylist('Favorite', PlaylistTypes.Favorite)
-    ),
+    favoriPlaylist: await getPlaylist({
+      key: StorageKeys.FAVORITE_PLAYLIST_KEY,
+      defaultPlaylist: () => dummyPlaylist('Favorite', PlaylistTypes.Favorite),
+    }),
     playbackMode: await getItem(
       StorageKeys.PLAYMODE_KEY,
       NoxRepeatMode.Shuffle
@@ -333,7 +342,10 @@ export const initPlayerObject = async (
 
   await Promise.all(
     playerObject.playlistIds.map(async id => {
-      const retrievedPlaylist = await getPlaylist(id);
+      const retrievedPlaylist = await getPlaylist({
+        key: id,
+        hydrateSongList: playerObject.settings.memoryEfficiency,
+      });
       if (retrievedPlaylist) playerObject.playlists[id] = retrievedPlaylist;
     })
   );

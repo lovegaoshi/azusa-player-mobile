@@ -237,7 +237,7 @@ export const useNoxSetting = create<NoxSetting>((set, get) => ({
   getPlaylist: async v => {
     const appState: NoxSetting = get();
     if (appState.playerSetting.memoryEfficiency) {
-      return getPlaylist(v);
+      return getPlaylist({ key: v });
     }
     return appState.playlists[v];
   },
