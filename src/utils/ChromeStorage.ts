@@ -214,9 +214,6 @@ export const getPlaylist = async (
   return dPlaylist;
 };
 
-export const getPlaylistSongList = async (key: string) =>
-  (await getPlaylist(key)).songList;
-
 export const savePlayerSkins = async (skins: any[]) =>
   saveChucked(StorageKeys.SKINSTORAGE, skins);
 
