@@ -53,9 +53,15 @@ export default () => {
     );
   };
 
-  const goToPlaylist = async (playlistId: string) => {
-    setCurrentPlaylist(await getPlaylist(playlistId));
-    scroll();
+  const goToPlaylist = (playlistId: string) => {
+    if (currentPlayingList.id === playlistId) {
+      scroll();
+    } else {
+      getPlaylist(playlistId).then(p => {
+        setCurrentPlaylist(p);
+        scroll();
+      });
+    }
     navigation.navigate(NoxRoutes.Playlist as never);
     setRoute(RouteIcons.music);
   };

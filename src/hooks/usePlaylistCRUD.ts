@@ -8,7 +8,7 @@ import { fetchBiliBVIDs } from '../utils/mediafetch/bilivideo';
 import { biliShazamOnSonglist } from '../utils/mediafetch/bilishazam';
 import { syncFavlist } from '@utils/Bilibili/bilifavOperate';
 import { updateSubscribeFavList } from '../utils/BiliSubscribe';
-import { sortPlaylist as sortPlaylistR } from '../utils/playlistOperations';
+import { sortPlaylist as _sortPlaylist } from '../utils/playlistOperations';
 import { SortOptions } from '../enums/Playlist';
 
 const usePlaylistCRUD = (mPlaylist?: NoxMedia.Playlist) => {
@@ -207,6 +207,7 @@ const usePlaylistCRUD = (mPlaylist?: NoxMedia.Playlist) => {
       progressEmitter,
       updatePlaylist,
     });
+
   // TODO: i dont think this is how it works
   const reloadBVid = async (
     songs: NoxMedia.Song[],
@@ -241,7 +242,7 @@ const usePlaylistCRUD = (mPlaylist?: NoxMedia.Playlist) => {
     ascend = false,
     playlist: NoxMedia.Playlist | Promise<NoxMedia.Playlist> = getPlaylist()
   ) => {
-    updatePlaylist(sortPlaylistR(await playlist, sort, ascend));
+    updatePlaylist(_sortPlaylist(await playlist, sort, ascend));
   };
 
   return {
