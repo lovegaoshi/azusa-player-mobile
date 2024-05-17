@@ -321,11 +321,13 @@ export const useNoxSetting = create<NoxSetting>((set, get) => ({
   },
 
   initPlayer: async val => {
-    const playingList =
-      val.playlists[val.lastPlaylistId[0]] ||
-      (val.lastPlaylistId[0] === val.favoriPlaylist.id
-        ? val.favoriPlaylist
-        : dummyPlaylistList);
+    const playingList = await getPlaylist({
+      key: val.lastPlaylistId[0],
+      defaultPlaylist: () =>
+        val.lastPlaylistId[0] === val.favoriPlaylist.id
+          ? val.favoriPlaylist
+          : dummyPlaylistList,
+    });
     const initializedPlayerSetting = val.settings;
     set({
       currentPlayingId: val.lastPlaylistId[1],
