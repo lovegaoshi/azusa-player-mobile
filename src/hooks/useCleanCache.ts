@@ -1,22 +1,24 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { useNoxSetting } from '@stores/useApp';
 import NoxCache from '../utils/Cache';
 import { lsFiles, unlinkFiles } from '@utils/fs';
 
 const useCleanCache = () => {
-  const playlists = useNoxSetting(state => state.playlists);
+  const getPlaylist = useNoxSetting(state => state.getPlaylist);
   const playlistIds = useNoxSetting(state => state.playlistIds);
 
-  const getOrphanCache = () =>
-    NoxCache.noxMediaCache.getOrphanedCache(
-      playlistIds.reduce(
-        (acc, curr) => acc.concat(playlists[curr].songList),
+  const getOrphanCache = async () => {
+    const playlists = await Promise.all(playlistIds.map(v => getPlaylist(v)));
+    return NoxCache.noxMediaCache.getOrphanedCache(
+      playlists.reduce(
+        (acc, curr) => acc.concat(curr.songList),
         [] as NoxMedia.Song[]
       )
     );
+  };
 
-  const [orphanedCache, setOrphanCache] = useState(getOrphanCache());
+  const [orphanedCache, setOrphanCache] = useState<string[]>([]);
 
   const cleanOrphanedCache = async () => {
     const RNBlobTempFiles = await lsFiles();
@@ -26,8 +28,12 @@ const useCleanCache = () => {
       .filter(val => !cachedKeys.includes(val));
     unlinkFiles(abandonedFiles).catch();
     NoxCache.noxMediaCache.cleanOrphanedCache(orphanedCache);
-    setOrphanCache(getOrphanCache());
+    getOrphanCache().then(setOrphanCache);
   };
+
+  useEffect(() => {
+    getOrphanCache().then(setOrphanCache);
+  }, []);
 
   return { orphanedCache, cleanOrphanedCache };
 };

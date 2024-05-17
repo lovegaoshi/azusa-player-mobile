@@ -41,6 +41,7 @@ declare global {
       keepForeground: boolean;
       karaokeLyrics: boolean;
       accentColor: boolean;
+      memoryEfficiency: boolean;
 
       appID: string;
       language?: string;

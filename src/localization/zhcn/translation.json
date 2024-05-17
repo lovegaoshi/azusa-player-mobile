@@ -126,6 +126,8 @@
     "prefetchTrackDesc": "预加载下一首歌（仅在歌曲缓存开启时有用）",
     "chatGPTResolveSongNameName": "ChatGPT找歌",
     "chatGPTResolveSongNameDesc": "TODO：用chatGPT解析歌名",
+    "memoryEfficiencyName": "歌单不载入内存",
+    "memoryEfficiencyDesc": "可能节省内存；不重启会导致数据丢失！",
     "keepForegroundName": "费电",
     "keepForegroundDesc": "保持前台服务，贼拉费电",
     "karaokeLyricsName": "逐字歌词",
@@ -171,7 +173,7 @@
   },
   "Settings": {
     "PluginsSettingName": "插件",
-    "PluginsSettingDesc": "你好特殊！开启隐藏的功能",
+    "PluginsSettingDesc": "测试功能，可能导致数据丢失损坏，别说我没告诉你",
     "GeneralSettingName": "播放器设置",
     "GeneralSettingDesc": "一般的播放器设置",
     "AppearanceSettingName": "播放器外观",

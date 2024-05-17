@@ -14,6 +14,7 @@ import {
   savePlayerSkins,
   saveLyricMapping,
   saveDefaultSearch,
+  getPlaylist,
 } from '@utils/ChromeStorage';
 import { DefaultSetting, StorageKeys, SearchOptions } from '@enums/Storage';
 import { setPlayerSetting as setPlayerSettingVanilla } from './playerSettingStore';
@@ -99,6 +100,7 @@ interface NoxSetting {
   setSearchPlaylist: (val: NoxMedia.Playlist) => void;
   favoritePlaylist: NoxMedia.Playlist;
   setFavoritePlaylist: (val: NoxMedia.Playlist) => void;
+  getPlaylist: (val: string) => Promise<NoxMedia.Playlist>;
 
   playerSetting: NoxStorage.PlayerSettingDict;
   setPlayerSetting: (val: Partial<NoxStorage.PlayerSettingDict>) => void;
@@ -118,10 +120,10 @@ interface NoxSetting {
    * note this function does mutate playlist.
    */
   updatePlaylist: (
-    val: NoxMedia.Playlist,
+    playlist: NoxMedia.Playlist,
     addSongs?: NoxMedia.Song[],
     removeSongs?: NoxMedia.Song[]
-  ) => NoxMedia.Playlist;
+  ) => Promise<NoxMedia.Playlist>;
 
   initPlayer: (
     val: NoxStorage.PlayerStorageObject
@@ -232,6 +234,20 @@ export const useNoxSetting = create<NoxSetting>((set, get) => ({
     saveFavPlaylist(val);
     set({ favoritePlaylist: val, playlists });
   },
+  getPlaylist: async v => {
+    const appState: NoxSetting = get();
+    switch (v) {
+      case StorageKeys.SEARCH_PLAYLIST_KEY:
+        return appState.searchPlaylist;
+      case StorageKeys.FAVORITE_PLAYLIST_KEY:
+        return appState.favoritePlaylist;
+      default:
+        if (appState.playerSetting.memoryEfficiency) {
+          return getPlaylist({ key: v });
+        }
+        return appState.playlists[v];
+    }
+  },
 
   playerSetting: DefaultSetting,
   setPlayerSetting: val => {
@@ -257,24 +273,31 @@ export const useNoxSetting = create<NoxSetting>((set, get) => ({
     if (currentPlaylist.id === playlistId) {
       set({ currentPlaylist: playlists[StorageKeys.SEARCH_PLAYLIST_KEY] });
     }
-    delPlaylist(playlists[playlistId], playlistIds);
+    delPlaylist(playlistId, playlistIds);
     delete playlists[playlistId];
     playlistIds = playlistIds.filter(v => v !== playlistId);
     set({ playlists, playlistIds });
   },
 
-  updatePlaylist: (playlist, addSongs = [], removeSongs = []) => {
-    let playlists = get().playlists;
-    const currentPlaylist = get().currentPlaylist;
-    updatePlaylistSongs(playlist, addSongs, removeSongs);
-    playlists[playlist.id] = playlist;
+  updatePlaylist: async (playlist, addSongs = [], removeSongs = []) => {
+    const appState: NoxSetting = get();
+    let playlists = appState.playlists;
+    const currentPlaylist = appState.currentPlaylist;
+    const retrivedPlaylist = {
+      ...playlist,
+      songList: (await appState.getPlaylist(playlist.id)).songList,
+    };
+    updatePlaylistSongs(retrivedPlaylist, addSongs, removeSongs);
+    playlists[playlist.id] = appState.playerSetting.memoryEfficiency
+      ? { ...playlist, songList: [] }
+      : retrivedPlaylist;
     if (playlist.id === currentPlaylist.id) {
-      set({ currentPlaylist: playlist });
+      set({ currentPlaylist: retrivedPlaylist });
     }
     set({ playlists });
-    savePlaylist(playlist);
-    set({ playlistShouldReRender: !get().playlistShouldReRender });
-    return playlist;
+    savePlaylist(retrivedPlaylist);
+    set({ playlistShouldReRender: !appState.playlistShouldReRender });
+    return retrivedPlaylist;
   },
 
   lyricMapping: new Map<string, NoxMedia.LyricDetail>(),

@@ -193,22 +193,28 @@ export const savePlaylist = async (
     console.error(e);
   }
 };
+interface GetPlaylist {
+  key: string;
+  defaultPlaylist?: () => NoxMedia.Playlist;
+  hydrateSongList?: boolean;
+}
 
 /**
  * note this method always return a playlist, if error occurs a dummy one is
  * returned.
- * @param key playlist ID.
- * @returns
  */
-export const getPlaylist = async (
-  key: string,
-  defaultPlaylist: () => NoxMedia.Playlist = dummyPlaylist
-): Promise<NoxMedia.Playlist> => {
+export const getPlaylist = async ({
+  key,
+  defaultPlaylist = dummyPlaylist,
+  hydrateSongList = true,
+}: GetPlaylist): Promise<NoxMedia.Playlist> => {
   const dPlaylist = defaultPlaylist();
   try {
     const retrievedPlaylist = await getItem(key);
     if (retrievedPlaylist === null) return dPlaylist;
-    retrievedPlaylist.songList = await loadChucked(retrievedPlaylist.songList);
+    retrievedPlaylist.songList = hydrateSongList
+      ? await loadChucked(retrievedPlaylist.songList)
+      : [];
     return { ...dPlaylist, ...retrievedPlaylist };
   } catch (e) {
     console.error(e);
@@ -258,22 +264,17 @@ export const addPlaylist = (
   return playlistIds;
 };
 
-const delPlaylistRaw = (playlist: NoxMedia.Playlist) => {
-  removeItem(playlist.id);
-  [
-    ...Array(Math.ceil(playlist.songList.length / MAX_SONGLIST_SIZE)).keys(),
-  ].forEach(index => {
-    removeItem(`${playlist.id}.${index}`);
-  });
+const _delPlaylist = async (playlistId: string) => {
+  removeItem(playlistId);
+  (await AsyncStorage.getAllKeys())
+    .filter(k => k.startsWith(`${playlistId}.`))
+    .forEach(k => removeItem(k));
 };
 
-export const delPlaylist = (
-  playlist: NoxMedia.Playlist,
-  playlistIds: string[]
-) => {
+export const delPlaylist = (playlistId: string, playlistIds: string[]) => {
   let playlistIds2 = [...playlistIds];
-  playlistIds2.splice(playlistIds2.indexOf(playlist.id), 1);
-  delPlaylistRaw(playlist);
+  playlistIds2.splice(playlistIds2.indexOf(playlistId), 1);
+  _delPlaylist(playlistId);
   savePlaylistIds(playlistIds2);
   return playlistIds2;
 };
@@ -309,9 +310,10 @@ export const initPlayerObject = async (
       i18n.t('PlaylistOperations.searchListName'),
       PlaylistTypes.Search
     ),
-    favoriPlaylist: await getPlaylist(StorageKeys.FAVORITE_PLAYLIST_KEY, () =>
-      dummyPlaylist('Favorite', PlaylistTypes.Favorite)
-    ),
+    favoriPlaylist: await getPlaylist({
+      key: StorageKeys.FAVORITE_PLAYLIST_KEY,
+      defaultPlaylist: () => dummyPlaylist('Favorite', PlaylistTypes.Favorite),
+    }),
     playbackMode: await getItem(
       StorageKeys.PLAYMODE_KEY,
       NoxRepeatMode.Shuffle
@@ -340,7 +342,10 @@ export const initPlayerObject = async (
 
   await Promise.all(
     playerObject.playlistIds.map(async id => {
-      const retrievedPlaylist = await getPlaylist(id);
+      const retrievedPlaylist = await getPlaylist({
+        key: id,
+        hydrateSongList: playerObject.settings.memoryEfficiency,
+      });
       if (retrievedPlaylist) playerObject.playlists[id] = retrievedPlaylist;
     })
   );
@@ -361,9 +366,7 @@ export const exportPlayerContent = async (content?: any) => {
 
 const clearPlaylists = async () => {
   const playlistIds = (await getItem(StorageKeys.MY_FAV_LIST_KEY)) || [];
-  for (const playlistId of playlistIds) {
-    delPlaylistRaw(await getPlaylist(playlistId));
-  }
+  playlistIds.forEach(_delPlaylist);
   savePlaylistIds([]);
 };
 
