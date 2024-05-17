@@ -32,7 +32,8 @@ export interface UsePlaylist {
   getSongIndex: (item: NoxMedia.Song, index: number) => number;
   playSong: (
     song: NoxMedia.Song,
-    callback: (p: NoxMedia.Playlist, s: NoxMedia.Song) => void
+    callback: (p: NoxMedia.Playlist, s: NoxMedia.Song) => void,
+    isPlayingCallback: (p: NoxMedia.Playlist) => void
   ) => void;
   resetSelected: () => void;
   toggleSelected: (index: number) => void;
@@ -116,10 +117,11 @@ const usePlaylist = (playlist: NoxMedia.Playlist): UsePlaylist => {
 
   const playSong = (
     song: NoxMedia.Song,
-    callback: (p: NoxMedia.Playlist, s: NoxMedia.Song) => void
+    callback: (p: NoxMedia.Playlist, s: NoxMedia.Song) => void,
+    isPlayingCallback: (p: NoxMedia.Playlist) => void = () => undefined
   ) => {
     if (song.id === currentPlayingId && playlist.id === currentPlayingList.id)
-      return;
+      return isPlayingCallback(currentPlayingList);
     // HACK: more responsive, so the current song banner will show
     // immediately instead of watiting for fade to complete
     // REVIEW: playfromplaylist also checks currentPlayingId. how is that possible?

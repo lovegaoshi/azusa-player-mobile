@@ -14,6 +14,8 @@ import { syncFavlist } from '@utils/Bilibili/bilifavOperate';
 import usePlayback from '@hooks/usePlayback';
 import useTPControls from '@hooks/useTPControls';
 import useSnack from '@stores/useSnack';
+import { setPlayingList } from '@stores/playingList';
+import { clearPlaylistUninterrupted } from '@utils/RNTPUtils';
 
 export default (playlist: NoxMedia.Playlist) => {
   const { t } = useTranslation();
@@ -99,12 +101,8 @@ export default (playlist: NoxMedia.Playlist) => {
   };
 
   const playSong = async (song: NoxMedia.Song) => {
-    const playSongCallback = (p: NoxMedia.Playlist) => {
-      const callback = () =>
-        playFromPlaylist({
-          playlist: p,
-          song,
-        });
+    const playSongCallback = (playlist: NoxMedia.Playlist) => {
+      const callback = () => playFromPlaylist({ playlist, song });
       if (song.id === currentPlayingId) {
         callback();
         return;
@@ -114,7 +112,9 @@ export default (playlist: NoxMedia.Playlist) => {
       // on an event to emit) so we have to do conditionals outside of playFromPlaylist.
       preformFade(callback);
     };
-    usedPlaylist.playSong(song, playSongCallback);
+    usedPlaylist.playSong(song, playSongCallback, p =>
+      clearPlaylistUninterrupted().then(() => setPlayingList(p.songList))
+    );
   };
 
   const scrollTo = (toIndex = -1, reset = false) => {
