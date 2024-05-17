@@ -344,7 +344,7 @@ export const initPlayerObject = async (
     playerObject.playlistIds.map(async id => {
       const retrievedPlaylist = await getPlaylist({
         key: id,
-        hydrateSongList: playerObject.settings.memoryEfficiency,
+        hydrateSongList: !playerObject.settings.memoryEfficiency,
       });
       if (retrievedPlaylist) playerObject.playlists[id] = retrievedPlaylist;
     })
