@@ -115,7 +115,7 @@
     "chatGPTResolveSongNameName": "ChatGPT on Songs",
     "chatGPTResolveSongNameDesc": "TODO: Use chatGPT to resolve song names",
     "memoryEfficiencyName": "Memory Efficiency",
-    "memoryEfficiencyDesc": "async load songlists from playlists",
+    "memoryEfficiencyDesc": "async load songlists from playlists; NEED RESTART! will cause data loss",
     "keepForegroundName": "Keep Foreground Service",
     "keepForegroundDesc": "enable to waste a LOT of battery",
     "karaokeLyricsName": "Karaoke Lyrics",

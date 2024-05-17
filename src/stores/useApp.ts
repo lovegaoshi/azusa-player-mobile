@@ -120,7 +120,7 @@ interface NoxSetting {
    * note this function does mutate playlist.
    */
   updatePlaylist: (
-    val: NoxMedia.Playlist,
+    playlist: NoxMedia.Playlist,
     addSongs?: NoxMedia.Song[],
     removeSongs?: NoxMedia.Song[]
   ) => Promise<NoxMedia.Playlist>;
@@ -236,10 +236,17 @@ export const useNoxSetting = create<NoxSetting>((set, get) => ({
   },
   getPlaylist: async v => {
     const appState: NoxSetting = get();
-    if (appState.playerSetting.memoryEfficiency) {
-      return getPlaylist({ key: v });
+    switch (v) {
+      case StorageKeys.SEARCH_PLAYLIST_KEY:
+        return appState.searchPlaylist;
+      case StorageKeys.FAVORITE_PLAYLIST_KEY:
+        return appState.favoritePlaylist;
+      default:
+        if (appState.playerSetting.memoryEfficiency) {
+          return getPlaylist({ key: v });
+        }
+        return appState.playlists[v];
     }
-    return appState.playlists[v];
   },
 
   playerSetting: DefaultSetting,
@@ -276,7 +283,10 @@ export const useNoxSetting = create<NoxSetting>((set, get) => ({
     const appState: NoxSetting = get();
     let playlists = appState.playlists;
     const currentPlaylist = appState.currentPlaylist;
-    const retrivedPlaylist = await appState.getPlaylist(playlist.id);
+    const retrivedPlaylist = {
+      ...playlist,
+      songList: (await appState.getPlaylist(playlist.id)).songList,
+    };
     updatePlaylistSongs(retrivedPlaylist, addSongs, removeSongs);
     playlists[playlist.id] = appState.playerSetting.memoryEfficiency
       ? { ...playlist, songList: [] }
