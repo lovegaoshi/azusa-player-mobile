@@ -29,6 +29,7 @@ export default ({
   const playlistIds = useNoxSetting(state => state.playlistIds);
   const playlists = useNoxSetting(state => state.playlists);
   const updatePlaylist = useNoxSetting(state => state.updatePlaylist);
+  const getPlaylist = useNoxSetting(state => state.getPlaylist);
 
   const handleClose = () => {
     setPlaylistIndex('');
@@ -44,7 +45,7 @@ export default ({
       return;
     }
     const toList = playlists[playlistIndex];
-    updatePlaylist(toList, fromList.songList, []);
+    getPlaylist(toList.id).then(p => updatePlaylist(p, fromList.songList, []));
     onSubmit();
   };
 
@@ -73,7 +74,12 @@ export default ({
         onDismiss={handleClose}
         style={[
           styles.dialog,
-          { height: Platform.OS === 'android' ? `${10 + playlistList().length * 10}%` : `${20 + playlistList().length * 10}%` },
+          {
+            height:
+              Platform.OS === 'android'
+                ? `${10 + playlistList().length * 10}%`
+                : `${20 + playlistList().length * 10}%`,
+          },
         ]}
       >
         <Dialog.Title style={styles.dialogTitle}>

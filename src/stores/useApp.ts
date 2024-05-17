@@ -283,21 +283,17 @@ export const useNoxSetting = create<NoxSetting>((set, get) => ({
     const appState: NoxSetting = get();
     let playlists = appState.playlists;
     const currentPlaylist = appState.currentPlaylist;
-    const retrivedPlaylist = {
-      ...playlist,
-      songList: (await appState.getPlaylist(playlist.id)).songList,
-    };
-    updatePlaylistSongs(retrivedPlaylist, addSongs, removeSongs);
+    updatePlaylistSongs(playlist, addSongs, removeSongs);
     playlists[playlist.id] = appState.playerSetting.memoryEfficiency
       ? { ...playlist, songList: [] }
-      : retrivedPlaylist;
+      : playlist;
     if (playlist.id === currentPlaylist.id) {
-      set({ currentPlaylist: retrivedPlaylist });
+      set({ currentPlaylist: playlist });
     }
     set({ playlists });
-    savePlaylist(retrivedPlaylist);
+    savePlaylist(playlist);
     set({ playlistShouldReRender: !appState.playlistShouldReRender });
-    return retrivedPlaylist;
+    return playlist;
   },
 
   lyricMapping: new Map<string, NoxMedia.LyricDetail>(),
@@ -321,18 +317,19 @@ export const useNoxSetting = create<NoxSetting>((set, get) => ({
   },
 
   initPlayer: async val => {
-    const playingList =
-      val.playlists[val.lastPlaylistId[0]] ||
-      (val.lastPlaylistId[0] === val.favoriPlaylist.id
-        ? val.favoriPlaylist
-        : dummyPlaylistList);
+    const playingList = await getPlaylist({
+      key: val.lastPlaylistId[0],
+      defaultPlaylist: () =>
+        val.lastPlaylistId[0] === val.favoriPlaylist.id
+          ? val.favoriPlaylist
+          : val.searchPlaylist,
+    });
     const initializedPlayerSetting = val.settings;
     set({
       currentPlayingId: val.lastPlaylistId[1],
       currentABRepeat: getABRepeatRaw(val.lastPlaylistId[1]),
       currentPlayingList: playingList,
-      currentPlaylist:
-        val.playlists[val.lastPlaylistId[0]] || val.searchPlaylist,
+      currentPlaylist: playingList,
       searchPlaylist: val.searchPlaylist,
       favoritePlaylist: val.favoriPlaylist,
       playerSetting: initializedPlayerSetting,

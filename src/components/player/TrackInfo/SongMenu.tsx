@@ -88,7 +88,9 @@ export default ({
   };
 
   const removeSongs = async (banBVID = false) => {
-    playFromPlaylist({ playlist: playlistCRUD.removeSongs([song], banBVID) });
+    playFromPlaylist({
+      playlist: await playlistCRUD.removeSongs([song], banBVID),
+    });
     setSongMenuVisible(false);
   };
 
