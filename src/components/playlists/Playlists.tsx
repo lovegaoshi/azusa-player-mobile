@@ -54,7 +54,7 @@ export default () => {
   };
 
   const goToPlaylist = (playlistId: string) => {
-    if (currentPlayingList.id === playlistId) {
+    if (currentPlaylist.id === playlistId) {
       scroll();
     } else {
       getPlaylist(playlistId).then(p => {
