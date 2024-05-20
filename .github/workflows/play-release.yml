@@ -42,8 +42,10 @@ jobs:
         with:
           node-version: '18'
 
-      - name: Setup Yarn
-        uses: threeal/setup-yarn-action@v2.0.0
+      - uses: Wandalen/wretry.action@master
+        with:
+          action: threeal/setup-yarn-action@v2.0.0
+          attemp_limit: 10
 
       - name: 'Create env file'
         run: |
