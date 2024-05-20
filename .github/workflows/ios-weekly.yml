@@ -1,0 +1,112 @@
+name: APM iOS dev Build
+on:
+  workflow_dispatch:
+jobs:
+  checkLastCommit:
+    runs-on: ubuntu-latest
+    name: Check latest commit
+    outputs:
+      should_run: ${{ steps.should_run.outputs.should_run }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: print latest_commit
+        run: echo ${{ github.sha }}
+
+      - name: Get Last Commit Date
+        id: commit_date
+        run: |
+          LAST_COMMIT_DATE=$(git log -1 --format=%ct)
+          echo "LAST_COMMIT_DATE=${LAST_COMMIT_DATE}" >> $GITHUB_ENV
+
+      - name: Calculate Time Difference
+        id: time_diff
+        run: |
+          CURRENT_DATE=$(date +%s)
+          SECONDS_IN_WEEK=$((60*60*24*7))
+          TIME_DIFF=$((CURRENT_DATE - LAST_COMMIT_DATE))
+          echo "TIME_DIFF=${TIME_DIFF}" >> $GITHUB_ENV
+
+      - name: Check Last Commit
+        run: |
+          if [[ $TIME_DIFF -gt $((60*60*24*7)) ]]; then
+            echo "Last commit is older than a week."
+            echo "is_old_commit=true" >> $GITHUB_OUTPUT
+          else
+            echo "Last commit is within the past week."
+            echo "is_old_commit=false" >> $GITHUB_OUTPUT
+          fi
+
+  buildIPA:
+    runs-on: macos-14
+    name: build IPA
+    needs: checkLastCommit
+    if: ${{ needs.checkLastCommit.outputs.is_old_commit == false }}
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Get branch name
+        run: |
+          # Short name for current branch. For PRs, use target branch (base ref)
+          GIT_BRANCH=${GITHUB_BASE_REF:-${GITHUB_REF#refs/heads/}}
+          echo "GIT_BRANCH=$GIT_BRANCH" >> $GITHUB_ENV
+
+      - name: Get current date
+        id: date
+        run: echo "date=$(date +'%Y-%m-%d')" >> $GITHUB_OUTPUT
+
+      - name: set up JDK 18
+        uses: actions/setup-java@v4
+        with:
+          java-version: 18
+          distribution: temurin
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Setup Yarn
+        uses: threeal/setup-yarn-action@v2.0.0
+
+      - name: 'Create env file'
+        run: |
+          echo "${{ secrets.ENV_FILE }}" > .env
+          echo "APPSTORE=true" >> .env
+          echo "${{ secrets.SENTRY_PROPERTIES }}" > ./ios/sentry.properties
+          git submodule update --init --recursive
+
+      - name: alias yarn.cmd to yarn
+        run: alias yarn.cmd="yarn"
+
+      - name: Install dependencies
+        run: yarn install; yarn postinstall
+
+      - name: Pod Install
+        run: cd ios && rm Podfile.lock && pod install --repo-update
+
+      - name: python fixHTTP
+        run: |
+          python ./scripts/fixHTTP.py
+          python ./scripts/release_bump.py --dev
+
+      - name: build
+        run: cd ios && xcodebuild -scheme APM -workspace example.xcworkspace -configuration Release clean archive -archivePath "build/APM.xcarchive" CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO CODE_SIGNING_ALLOWED=NO
+
+      - name: archive to ipa
+        run: |
+          cd ios
+          mkdir build/Payload
+          mv build/APM.xcarchive/Products/Applications/AzusaPlayer.app build/Payload/AzusaPlayer.app
+          cd build
+          zip -r APM.ipa Payload/
+
+      - name: Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ env.GIT_BRANCH }}-build-${{ steps.date.outputs.date }}
+          files: ios/build/APM.ipa
+          prerelease: true
+          target_commitish: ${{ env.GIT_BRANCH }}
