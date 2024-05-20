@@ -2062,9 +2062,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@eslint/eslintrc@npm:^3.0.2":
-  version: 3.0.2
-  resolution: "@eslint/eslintrc@npm:3.0.2"
+"@eslint/eslintrc@npm:^3.1.0":
+  version: 3.1.0
+  resolution: "@eslint/eslintrc@npm:3.1.0"
   dependencies:
     ajv: "npm:^6.12.4"
     debug: "npm:^4.3.2"
@@ -2075,7 +2075,7 @@ __metadata:
     js-yaml: "npm:^4.1.0"
     minimatch: "npm:^3.1.2"
     strip-json-comments: "npm:^3.1.1"
-  checksum: 10c0/d8c92f06bdf8e2be9fcc0eeac4a9351745174adfcc72571ef3d179101cb55e19f15f6385c2a4f4945a3ba9245802d3371208e2e1e4f00f6bcf6b8711656af85a
+  checksum: 10c0/5b7332ed781edcfc98caa8dedbbb843abfb9bda2e86538529c843473f580e40c69eb894410eddc6702f487e9ee8f8cfa8df83213d43a8fdb549f23ce06699167
   languageName: node
   linkType: hard
 
@@ -2086,10 +2086,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@eslint/js@npm:9.2.0":
-  version: 9.2.0
-  resolution: "@eslint/js@npm:9.2.0"
-  checksum: 10c0/89632466d329d9dd68c6ec24290e407f0950ca8c4b7f3750b82457daa7f6233799ccbc956cd84231f9544efbefddd69833ee82658883ca673cfca9e4b8e0713a
+"@eslint/js@npm:9.3.0":
+  version: 9.3.0
+  resolution: "@eslint/js@npm:9.3.0"
+  checksum: 10c0/1550c68922eb17c3ce541d9ffbb687e656bc0d4e2fff2d9cb0a75101a9cdb6184b7af7378ccf46c6ca750b280d25d45cc5e7374a83a4ee89d404d3717502fd9d
   languageName: node
   linkType: hard
 
@@ -2570,10 +2570,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@humanwhocodes/retry@npm:^0.2.3":
-  version: 0.2.3
-  resolution: "@humanwhocodes/retry@npm:0.2.3"
-  checksum: 10c0/0913d89bb5cb1f0a049a6c068dee312d30920d5cce5a07588cd91fcb5453af52f2a9826d07d465066b92ad7bc0545e9f59384c414abe27745c79141c78a25099
+"@humanwhocodes/retry@npm:^0.3.0":
+  version: 0.3.0
+  resolution: "@humanwhocodes/retry@npm:0.3.0"
+  checksum: 10c0/7111ec4e098b1a428459b4e3be5a5d2a13b02905f805a2468f4fa628d072f0de2da26a27d04f65ea2846f73ba51f4204661709f05bfccff645e3cedef8781bb6
   languageName: node
   linkType: hard
 
@@ -5860,14 +5860,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"axios@npm:^1.6.8":
-  version: 1.6.8
-  resolution: "axios@npm:1.6.8"
+"axios@npm:^1.7.1":
+  version: 1.7.1
+  resolution: "axios@npm:1.7.1"
   dependencies:
     follow-redirects: "npm:^1.15.6"
     form-data: "npm:^4.0.0"
     proxy-from-env: "npm:^1.1.0"
-  checksum: 10c0/0f22da6f490335479a89878bc7d5a1419484fbb437b564a80c34888fc36759ae4f56ea28d55a191695e5ed327f0bad56e7ff60fb6770c14d1be6501505d47ab9
+  checksum: 10c0/554395472f18f4ddb43b4be2900473bc1a4d589464a8ab16f6954c53d9cace4317d5c9e009d5bb05f098d9565b2fa45f152a5d4cecb87536c8f0c370c25a7770
   languageName: node
   linkType: hard
 
@@ -5914,7 +5914,7 @@ __metadata:
     "@typescript-eslint/parser": "npm:^7.9.0"
     "@welldone-software/why-did-you-render": "npm:^8.0.1"
     argparse: "npm:^2.0.1"
-    axios: "npm:^1.6.8"
+    axios: "npm:^1.7.1"
     babel-jest: "npm:^29.7.0"
     babel-plugin-module-resolver: "npm:^5.0.2"
     babel-plugin-transform-remove-console: "npm:^6.9.4"
@@ -5930,7 +5930,7 @@ __metadata:
     dayjs: "npm:^1.11.11"
     deepmerge: "npm:^4.3.1"
     dropbox: "git+https://lovegaoshi@github.com/lovegaoshi/dropbox-sdk-js.git"
-    eslint: "npm:^9.2.0"
+    eslint: "npm:^9.3.0"
     eslint-config-prettier: "npm:^9.1.0"
     eslint-import-resolver-babel-module: "npm:^5.3.2"
     eslint-plugin-import: "npm:^2.29.1"
@@ -5991,7 +5991,7 @@ __metadata:
     react-native-track-player: "https://lovegaoshi@github.com/lovegaoshi/react-native-track-player.git#commit=826bd575a98b662750e043397ed9f8d5f05a6077"
     react-native-url-polyfill: "npm:^2.0.0"
     react-native-vector-icons: "npm:^10.1.0"
-    react-native-video: "npm:^6.0.0-rc.1"
+    react-native-video: "npm:^6.0.0"
     react-native-webview: "npm:13.10.2"
     react-test-renderer: "npm:18.3.1"
     reactotron-react-native: "npm:^5.1.7"
@@ -8662,17 +8662,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint@npm:^9.2.0":
-  version: 9.2.0
-  resolution: "eslint@npm:9.2.0"
+"eslint@npm:^9.3.0":
+  version: 9.3.0
+  resolution: "eslint@npm:9.3.0"
   dependencies:
     "@eslint-community/eslint-utils": "npm:^4.2.0"
     "@eslint-community/regexpp": "npm:^4.6.1"
-    "@eslint/eslintrc": "npm:^3.0.2"
-    "@eslint/js": "npm:9.2.0"
+    "@eslint/eslintrc": "npm:^3.1.0"
+    "@eslint/js": "npm:9.3.0"
     "@humanwhocodes/config-array": "npm:^0.13.0"
     "@humanwhocodes/module-importer": "npm:^1.0.1"
-    "@humanwhocodes/retry": "npm:^0.2.3"
+    "@humanwhocodes/retry": "npm:^0.3.0"
     "@nodelib/fs.walk": "npm:^1.2.8"
     ajv: "npm:^6.12.4"
     chalk: "npm:^4.0.0"
@@ -8702,7 +8702,7 @@ __metadata:
     text-table: "npm:^0.2.0"
   bin:
     eslint: bin/eslint.js
-  checksum: 10c0/eab3265100a359a486e40e1d9d4d3ecff936d2f4d952f4ab107d404e0684fffbe186ecd0fb41791af5bcb13570a27032ddf9a2e628927ed33473f64255b0037b
+  checksum: 10c0/d0cf1923408ce720f2fa0dde39094dbee6b03a71d5e6466402bbeb29c08a618713f7a1e8cfc4b4d50dbe3750ce68adf614a0e973dea6fa36ddc428dfb89d4cac
   languageName: node
   linkType: hard
 
@@ -14901,13 +14901,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-native-video@npm:^6.0.0-rc.1":
-  version: 6.0.0-rc.1
-  resolution: "react-native-video@npm:6.0.0-rc.1"
+"react-native-video@npm:^6.0.0":
+  version: 6.0.0
+  resolution: "react-native-video@npm:6.0.0"
   peerDependencies:
     react: "*"
     react-native: "*"
-  checksum: 10c0/40a2770c14d69e662328dbdf28b045de03fcc68f89a1c97f0aae2c687267484b63d9fa2d7dfdf4c3e9e93495be7bf2630cd741429aee3f94c03cff381737cfee
+  checksum: 10c0/ba19476d92285fee0dbc1469c0efa13649677915f726d0a7093d615e08f8a6c0122fa130c8d1fb6f412004d52e06afeda15ff2b6b6e8b0ed605f7c96ace934b0
   languageName: node
   linkType: hard
 
