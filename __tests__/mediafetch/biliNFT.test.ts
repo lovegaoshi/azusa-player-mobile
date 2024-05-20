@@ -1,4 +1,7 @@
-import { biliNFTVideoFetch } from '../../src/utils/mediafetch/biliNFTNew';
+import {
+  biliNFTVideoFetch,
+  biliNFTRedeemFetch,
+} from '../../src/utils/mediafetch/biliNFTNew';
 
 test('biliNFT', async () => {
   const content = await biliNFTVideoFetch({
@@ -15,4 +18,11 @@ test('biliNFT', async () => {
   });
   // console.log(content);
   expect(content2).not.toBeNull();
+  const content3 = await biliNFTRedeemFetch({
+    act_id: '101926',
+    lottery_id: '101927',
+    index: '小山重叠金明灭',
+  });
+  // console.log(content);
+  expect(content3).not.toBeNull();
 });
