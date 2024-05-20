@@ -47,10 +47,6 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - uses: maxim-lobanov/setup-xcode@v1
-        with:
-          xcode-version: '15.0.1'
-
       - name: Get branch name
         run: |
           # Short name for current branch. For PRs, use target branch (base ref)
@@ -70,12 +66,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '18'
-
-      - name: print xcode version
-        run: |
-          xcodebuild -version
-          sudo ln -s $(which node) /usr/local/bin/node
+          node-version: '20'
 
       - name: Setup Yarn
         uses: threeal/setup-yarn-action@v2.0.0
@@ -88,12 +79,13 @@ jobs:
           git submodule update --init --recursive
 
       - name: alias yarn.cmd to yarn
-        run: |
-          alias yarn.cmd="yarn"
-          yarn install; yarn postinstall
+        run: alias yarn.cmd="yarn"
+
+      - name: Install dependencies
+        run: yarn install; yarn postinstall
 
       - name: Pod Install
-        run: yarn ios:build
+        run: cd ios && rm Podfile.lock && pod install --repo-update
 
       - name: python fixHTTP
         run: |
