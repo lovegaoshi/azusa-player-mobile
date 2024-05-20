@@ -2897,6 +2897,10 @@
         "type": "biliNFTVideoNew",
         "identifier": "[\"101926\",\"101927\",\"春日告白\"]"
       },
+      {
+        "type": "biliNFTVideoRedeem",
+        "identifier": "[\"101926\",\"101927\",\"小山重叠金明灭\"]"
+      },
       "https://i0.hdslb.com/bfs/garb/open/46edbe247f931564c197a079d82885e1d6d6aaff.png",
       "https://i0.hdslb.com/bfs/garb/open/c1bb996797157edf17939cd55c164106c89b8a80.png",
       "https://i0.hdslb.com/bfs/garb/open/7fc191de79db3e04c459030becf305468a6333a2.png",

@@ -1,5 +1,5 @@
 import { fetchVideoPlayUrl } from './bilivideo';
-import { biliNFTVideoFetch } from './biliNFTNew';
+import { biliNFTVideoFetch, biliNFTRedeemFetch } from './biliNFTNew';
 import { biliNFTVideoFetch as biliNFTVideoFetchOld } from './biliNFT';
 import { biliGarbHeadVideoFetch } from './biliGarb';
 import { cacheWrapper } from '@utils/Cache';
@@ -10,6 +10,7 @@ export enum RESOLVE_TYPE {
   video = 'video',
   biliNFTVideo = 'biliNFTVideo',
   biliNFTVideoNew = 'biliNFTVideoNew',
+  biliNFTVideoRedeem = 'biliNFTVideoRedeem',
   biliGarbHeadVideo = 'biliGarbHeadVideo',
   image = 'image',
   empty = 'empty',
@@ -59,6 +60,18 @@ export default async (backgroundImage?: string | NoxTheme.backgroundImage) => {
         await cacheWrapper(
           `${RESOLVE_TYPE.biliNFTVideoNew}-${backgroundImage.identifier}`,
           () => biliNFTVideoFetch({ act_id, lottery_id, index })
+        ),
+        backgroundImage
+      );
+    }
+    case RESOLVE_TYPE.biliNFTVideoRedeem: {
+      const [act_id, lottery_id, index] = JSON.parse(
+        backgroundImage.identifier
+      );
+      return BackgroundVideoWrapper(
+        await cacheWrapper(
+          `${RESOLVE_TYPE.biliNFTVideoRedeem}-${backgroundImage.identifier}`,
+          () => biliNFTRedeemFetch({ act_id, lottery_id, index })
         ),
         backgroundImage
       );
