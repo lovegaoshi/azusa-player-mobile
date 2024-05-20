@@ -50,6 +50,9 @@ target 'azusa-player-mobile' do
     # only fails in command line!!! ok with xcode GUI!
     # https://github.com/facebook/react-native/issues/29709
     installer.pods_project.targets.each do |target|
+      target.build_configurations.each do |config|
+        config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '13.4'
+      end
       if target.name == "React-Core.common-AccessibilityResources"
         target.remove_from_project
       end
