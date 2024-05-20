@@ -6,9 +6,6 @@ require Pod::Executable.execute_command('node', ['-p',
     {paths: [process.argv[1]]},
   )', __dir__]).strip
 
-# use cocoapods CDN per https://blog.cocoapods.org/CocoaPods-1.7.2/
-source 'https://cdn.cocoapods.org/'
-
 platform :ios, '13.4'
 prepare_react_native_project!
 linkage = ENV['USE_FRAMEWORKS']
@@ -20,6 +17,16 @@ end
 target 'azusa-player-mobile' do
   # https://github.com/arthenica/ffmpeg-kit/tree/main/react-native#222-enabling-a-package-on-ios
   pod 'ffmpeg-kit-react-native', :subspecs => ['audio'], :podspec => '../node_modules/ffmpeg-kit-react-native/ffmpeg-kit-react-native.podspec'
+
+  use_expo_modules!
+
+  post_integrate do |installer|
+    begin
+      expo_patch_react_imports!(installer)
+    rescue => e
+      Pod::UI.warn e
+    end
+  end
 
   config = use_native_modules!
   # for svga-player
@@ -47,32 +54,5 @@ target 'azusa-player-mobile' do
       # :ccache_enabled => true
     )
 
-    # only fails in command line!!! ok with xcode GUI!
-    # https://github.com/facebook/react-native/issues/29709
-    installer.pods_project.targets.each do |target|
-      target.build_configurations.each do |config|
-        config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '13.4'
-      end
-      if target.name == "React-Core.common-AccessibilityResources"
-        target.remove_from_project
-      end
-      if target.name == "React-Core.common-RCTI18nStrings"
-        target.remove_from_project
-      end
-    end
-  end
-end
-
-# https://github.com/expo/expo/issues/15959
-# though also https://github.com/facebook/react-native/issues/35664
-# which is temp fixed by https://github.com/facebook/react-native/issues/35664#issuecomment-1590189067
-# RN 0.72 fixes this?
-use_expo_modules!
-
-post_integrate do |installer|
-  begin
-    expo_patch_react_imports!(installer)
-  rescue => e
-    Pod::UI.warn e
   end
 end
