@@ -119,7 +119,7 @@ export const fetchVideoPlayUrlPromise = async ({
   cid,
   extractType = FieldEnum.AudioUrl,
   iOS = true,
-}: FetchPlayURL): Promise<NoxNetwork.ParsedNoxMediaURL> => {
+}: FetchPlayURL) => {
   logger.debug(
     `fethcVideoPlayURL: ${URL_PLAY_URL.replace('{bvid}', bvid).replace(
       '{cid}',
