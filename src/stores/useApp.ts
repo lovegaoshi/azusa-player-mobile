@@ -198,9 +198,10 @@ export const useNoxSetting = create<NoxSetting>((set, get) => ({
 
   currentPlayingId: '',
   setCurrentPlayingId: val => {
-    set({ currentPlayingId: val });
-    savelastPlaylistId([get().currentPlayingList.id, val]);
-    set({ currentABRepeat: getABRepeatRaw(val) });
+    set(v => {
+      savelastPlaylistId([v.currentPlayingList.id, val]);
+      return { currentPlayingId: val, currentABRepeat: getABRepeatRaw(val) };
+    });
   },
   currentPlayingList: dummyPlaylistList,
   setCurrentPlayingList: val => {

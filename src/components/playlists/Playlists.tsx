@@ -54,6 +54,8 @@ export default () => {
   };
 
   const goToPlaylist = (playlistId: string) => {
+    navigation.navigate(NoxRoutes.Playlist as never);
+    setRoute(RouteIcons.music);
     if (currentPlaylist.id === playlistId) {
       scroll();
     } else {
@@ -62,8 +64,6 @@ export default () => {
         scroll();
       });
     }
-    navigation.navigate(NoxRoutes.Playlist as never);
-    setRoute(RouteIcons.music);
   };
 
   const SearchPlaylistAsNewButton = () => (
