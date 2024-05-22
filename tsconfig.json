@@ -3,18 +3,18 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "@/*": ["./src/*"],
       "*": ["./src/*"],
-      "@components/*": ["src/components/*"],
-      "@types/*": ["src/types/*"],
-      "@utils/*": ["src/utils/*"],
+      "@/*": ["./src/*"],
       "@assets/*": ["src/assets/*"],
+      "@components/*": ["src/components/*"],
       "@enums/*": ["src/enums/*"],
+      "@hooks/*": ["src/hooks/*"],
+      "@mfsdk/*": ["./MusicFreePlugins/dist/*"],
       "@objects/*": ["src/objects/*"],
       "@services/*": ["src/services/*"],
       "@stores/*": ["src/stores/*"],
-      "@hooks/*": ["src/hooks/*"],
-      "@mfsdk/*": ["./MusicFreePlugins/dist/*"]
+      "@types/*": ["src/types/*"],
+      "@utils/*": ["src/utils/*"]
     },
     "allowJs": true,
     "allowSyntheticDefaultImports": true,

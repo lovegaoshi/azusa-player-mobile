@@ -78,3 +78,6 @@ NoxExport.json
 test.js
 sentry.properties
 .yarn/install-state.gz
+
+
+.nx/cache
