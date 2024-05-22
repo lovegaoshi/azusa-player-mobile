@@ -56,4 +56,4 @@ const biliNFTRedeemFetch = async ({ act_id, lottery_id, index }: Props) =>
       )[0],
   });
 
-export { biliNFTFetch, biliNFTVideoFetch, biliNFTRedeemFetch };
+export { biliNFTVideoFetch, biliNFTRedeemFetch };
