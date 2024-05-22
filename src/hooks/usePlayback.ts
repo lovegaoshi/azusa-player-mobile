@@ -90,16 +90,20 @@ const usePlayback = () => {
 
   const playAsSearchList = async ({
     songs,
+    playlistSongs,
     title = String(t('PlaylistsDrawer.SearchListTitle')),
     song,
   }: PlayAsSearchList) => {
-    const newSearchPlaylist = {
+    const newPlayingPlaylist = {
       ...searchPlaylist,
       title,
       songList: songs,
     };
+    const newSearchPlaylist = playlistSongs
+      ? { ...newPlayingPlaylist, songList: playlistSongs }
+      : newPlayingPlaylist;
     setSearchPlaylist(newSearchPlaylist);
-    await playFromPlaylist({ playlist: newSearchPlaylist, song });
+    await playFromPlaylist({ playlist: newPlayingPlaylist, song });
     setCurrentPlaylist(newSearchPlaylist);
   };
 
@@ -109,18 +113,20 @@ const usePlayback = () => {
         .filter(playlist => playlist.type === PlaylistTypes.Typical)
         .map(p => getPlaylist(p.id))
     );
-    let allSongs = allPlaylists.reduce(
+    const allSongs = allPlaylists.reduce(
       (acc, curr) => acc.concat(curr.songList),
       [] as NoxMedia.Song[]
     );
+    let cachedSongs = allSongs;
     if (isDataSaving) {
-      const cachedSongs = Array.from(noxCache.noxMediaCache.cache.keys());
-      allSongs = allSongs.filter(song =>
-        cachedSongs.includes(noxCacheKey(song))
+      const cachedSongIds = Array.from(noxCache.noxMediaCache.cache.keys());
+      cachedSongs = allSongs.filter(song =>
+        cachedSongIds.includes(noxCacheKey(song))
       );
     }
     playAsSearchList({
-      songs: allSongs,
+      songs: cachedSongs,
+      playlistSongs: allSongs,
       title: String(t('PlaylistOperations.all')),
     });
   };
@@ -255,6 +261,7 @@ interface PlayFromPlaylist {
 
 interface PlayAsSearchList {
   songs: NoxMedia.Song[];
+  playlistSongs?: NoxMedia.Song[];
   title?: string;
   song?: NoxMedia.Song;
 }
