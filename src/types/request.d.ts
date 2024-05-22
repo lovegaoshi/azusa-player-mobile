@@ -1,4 +1,4 @@
-import { LrcSource } from '@/enums/LyricFetch';
+import { LrcSource } from '@enums/LyricFetch';
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 declare global {

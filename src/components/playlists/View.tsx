@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect } from 'react';
 import { IconButton, Divider, Text, TouchableRipple } from 'react-native-paper';
-import { useNavigation, useFocusEffect } from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
 import { View, ImageBackground, StyleSheet, Linking } from 'react-native';
 import { useTranslation } from 'react-i18next';
 

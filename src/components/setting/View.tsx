@@ -1,6 +1,5 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { View, StyleSheet, ScrollView } from 'react-native';
-import { IconButton } from 'react-native-paper';
 import { useTranslation } from 'react-i18next';
 
 import GeneralSettings from './GeneralSettings';
@@ -102,7 +101,7 @@ const HomeSettings = ({ navigation }: Props) => {
   );
 };
 
-const Settings = ({ navigation, headerBackVisible = true }: Props) => {
+const Settings = ({ headerBackVisible = true }: Props) => {
   const { t } = useTranslation();
 
   return (

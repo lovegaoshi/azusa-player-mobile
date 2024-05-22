@@ -2,7 +2,6 @@
 import { decode as atob, encode as btoa } from 'js-base64';
 
 import bfetch from '@utils/BiliFetch';
-import { biliApiLimiter } from '@utils/mediafetch/throttle';
 import { LrcSource } from '@enums/LyricFetch';
 import { logger } from '../Logger';
 import { decodeQrc } from './qrcdecoder';
@@ -98,7 +97,7 @@ const getQrcLyric = async (songMid: string) => {
   const res = await bfetch(SearchSongAPI, qrcPostParam);
   const json = await res.json();
   const data = json['music.musichallSong.PlayLyricInfo.GetPlayLyricInfo'].data;
-  if (data.qrc == 0) return atob(data.lyric);
+  if (data.qrc === 0) return atob(data.lyric);
   return decodeQrc(data.lyric);
 };
 
