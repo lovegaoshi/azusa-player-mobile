@@ -16,8 +16,8 @@ import { Source } from '@enums/MediaFetch';
 import SongTS from '@objects/Song';
 
 /**
- * 
- * 
+ *
+ *
  * https://www.bilibili.com/audio/music-service-c/web/song/similar?sid=3680653
 {
     "code": 0,

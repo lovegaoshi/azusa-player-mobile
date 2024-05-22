@@ -24,10 +24,12 @@ const RenderDrawerItem = ({ view, icon, text, routeIcon }: Props) => {
   const setRoute = useNoxSetting(state => state.setBottomTabRoute);
 
   return (
-    <TouchableRipple onPress={() => {
-      navigation.navigate(view as never);
-      if (routeIcon) setRoute(routeIcon);
-    }}>
+    <TouchableRipple
+      onPress={() => {
+        navigation.navigate(view as never);
+        if (routeIcon) setRoute(routeIcon);
+      }}
+    >
       <View style={styles.drawerItemContainer}>
         <IconButton icon={icon} size={32} />
         <View style={styles.drawerItemTextContainer}>

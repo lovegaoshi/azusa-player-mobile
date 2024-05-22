@@ -107,10 +107,7 @@ const Settings = ({ navigation, headerBackVisible = true }: Props) => {
 
   return (
     <Stack.Navigator screenOptions={{ headerBackVisible }}>
-      <Stack.Screen
-        name={VIEW.HOME}
-        component={HomeSettings}
-      />
+      <Stack.Screen name={VIEW.HOME} component={HomeSettings} />
       <Stack.Screen
         name={VIEW.SPLASH_GALLARY}
         component={SplashSettings}

@@ -44,7 +44,7 @@ const rankingToSong = (data: any) =>
   });
 
 export const fetchMusicNew = async (): Promise<NoxMedia.Song[]> => {
-  logger.info(`[biliRanking] calling fetchMusicNew`);
+  logger.info('[biliRanking] calling fetchMusicNew');
   try {
     const res = await biliApiLimiter.schedule(() => bfetch(API));
     const json = await res.json();
@@ -53,7 +53,7 @@ export const fetchMusicNew = async (): Promise<NoxMedia.Song[]> => {
       .filter((v: NoxMedia.Song) => v.bvid.length > 0);
   } catch (error: any) {
     logger.error(error.message);
-    logger.warn(`Some issue happened when fetchMusicNew`);
+    logger.warn('Some issue happened when fetchMusicNew');
     return [];
   }
 };

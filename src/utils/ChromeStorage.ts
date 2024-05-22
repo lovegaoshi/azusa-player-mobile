@@ -272,7 +272,7 @@ const _delPlaylist = async (playlistId: string) => {
 };
 
 export const delPlaylist = (playlistId: string, playlistIds: string[]) => {
-  let playlistIds2 = [...playlistIds];
+  const playlistIds2 = [...playlistIds];
   playlistIds2.splice(playlistIds2.indexOf(playlistId), 1);
   _delPlaylist(playlistId);
   savePlaylistIds(playlistIds2);

@@ -102,7 +102,7 @@ function randomSample(population, sampleSize) {
     throw new Error('Sample size exceeds population size');
   }
 
-  let shuffled = population.slice(0);
+  const shuffled = population.slice(0);
   let i = population.length;
   let temp, index;
 
