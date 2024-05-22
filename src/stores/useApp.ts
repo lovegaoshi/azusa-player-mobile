@@ -103,7 +103,9 @@ interface NoxSetting {
   getPlaylist: (val: string) => Promise<NoxMedia.Playlist>;
 
   playerSetting: NoxStorage.PlayerSettingDict;
-  setPlayerSetting: (val: Partial<NoxStorage.PlayerSettingDict>) => void;
+  setPlayerSetting: (
+    val: Partial<NoxStorage.PlayerSettingDict>
+  ) => Promise<void>;
 
   addPlaylist: (val: NoxMedia.Playlist) => void;
   removePlaylist: (val: string) => void;
@@ -254,8 +256,8 @@ export const useNoxSetting = create<NoxSetting>((set, get) => ({
   setPlayerSetting: val => {
     const newPlayerSetting = { ...get().playerSetting, ...val };
     set({ playerSetting: newPlayerSetting });
-    saveSettings(newPlayerSetting);
     setPlayerSettingVanilla(newPlayerSetting);
+    return saveSettings(newPlayerSetting);
   },
 
   addPlaylist: playlist => {

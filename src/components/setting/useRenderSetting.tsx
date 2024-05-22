@@ -64,6 +64,7 @@ const BooleanSetting = ({
   settingCategory,
   reRender = false,
   checkbox = false,
+  callback,
 }: SettingEntry) => {
   const { t } = useTranslation();
   const playerStyle = useNoxSetting(state => state.playerStyle);
@@ -75,12 +76,11 @@ const BooleanSetting = ({
   );
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const saveSettings = (toggled: { [key: string]: any }) => {
+  const saveSettings = (toggled: { [key: string]: any }) =>
     setPlayerSetting(toggled);
-  };
 
   const onToggle = () => {
-    saveSettings({ [settingName]: !playerSetting[settingName] });
+    saveSettings({ [settingName]: !playerSetting[settingName] }).then(callback);
     if (reRender) {
       togglePlaylistReRender();
     }

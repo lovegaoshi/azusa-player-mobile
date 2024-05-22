@@ -173,7 +173,7 @@
   },
   "Settings": {
     "PluginsSettingName": "插件",
-    "PluginsSettingDesc": "测试功能，可能导致数据丢失损坏，别说我没告诉你",
+    "PluginsSettingDesc": "有可能导致数据错误的插件",
     "GeneralSettingName": "播放器设置",
     "GeneralSettingDesc": "一般的播放器设置",
     "AppearanceSettingName": "播放器外观",

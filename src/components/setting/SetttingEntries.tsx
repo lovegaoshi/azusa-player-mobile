@@ -13,6 +13,7 @@ export interface SettingEntry {
   reRender?: boolean;
   settingType?: string;
   checkbox?: boolean;
+  callback?: () => void;
 }
 
 export const dummySelectSettingEntry: SelectSettingEntry<string> = {
