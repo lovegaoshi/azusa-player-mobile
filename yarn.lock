@@ -4335,9 +4335,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@shopify/react-native-skia@npm:1.2.3":
-  version: 1.2.3
-  resolution: "@shopify/react-native-skia@npm:1.2.3"
+"@shopify/react-native-skia@npm:1.3.0":
+  version: 1.3.0
+  resolution: "@shopify/react-native-skia@npm:1.3.0"
   dependencies:
     canvaskit-wasm: "npm:0.39.1"
     react-reconciler: "npm:0.27.0"
@@ -4352,7 +4352,7 @@ __metadata:
       optional: true
   bin:
     setup-skia-web: scripts/setup-canvaskit.js
-  checksum: 10c0/f9fe6af98e50d30771105a87cf8a82ab6159252837f7b503e36c19af155834e83c3b0fddb89d23a2037aa9a1a944436d47c8dfec3c599260be808b393a021c31
+  checksum: 10c0/f322d6636ecde4bda5d6fd4a1c195f41eabe334e1d80c95ae3efa1686c20c9d3f9f09ae7948de91fd7d75739ef3961f07a34df444f9cf076b76f631f55f9ea2c
   languageName: node
   linkType: hard
 
@@ -5860,14 +5860,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"axios@npm:^1.7.1":
-  version: 1.7.1
-  resolution: "axios@npm:1.7.1"
+"axios@npm:^1.7.2":
+  version: 1.7.2
+  resolution: "axios@npm:1.7.2"
   dependencies:
     follow-redirects: "npm:^1.15.6"
     form-data: "npm:^4.0.0"
     proxy-from-env: "npm:^1.1.0"
-  checksum: 10c0/554395472f18f4ddb43b4be2900473bc1a4d589464a8ab16f6954c53d9cace4317d5c9e009d5bb05f098d9565b2fa45f152a5d4cecb87536c8f0c370c25a7770
+  checksum: 10c0/cbd47ce380fe045313364e740bb03b936420b8b5558c7ea36a4563db1258c658f05e40feb5ddd41f6633fdd96d37ac2a76f884dad599c5b0224b4c451b3fa7ae
   languageName: node
   linkType: hard
 
@@ -5895,7 +5895,7 @@ __metadata:
     "@sentry/react-native": "npm:^5.22.2"
     "@sharcoux/slider": "npm:^7.2.1"
     "@shopify/flash-list": "npm:^1.6.4"
-    "@shopify/react-native-skia": "npm:1.2.3"
+    "@shopify/react-native-skia": "npm:1.3.0"
     "@tsconfig/react-native": "npm:^3.0.5"
     "@types/base-64": "npm:^1.0.2"
     "@types/d3": "npm:^7.4.3"
@@ -5914,7 +5914,7 @@ __metadata:
     "@typescript-eslint/parser": "npm:^7.10.0"
     "@welldone-software/why-did-you-render": "npm:^8.0.1"
     argparse: "npm:^2.0.1"
-    axios: "npm:^1.7.1"
+    axios: "npm:^1.7.2"
     babel-jest: "npm:^29.7.0"
     babel-plugin-module-resolver: "npm:^5.0.2"
     babel-plugin-transform-remove-console: "npm:^6.9.4"
@@ -5991,7 +5991,7 @@ __metadata:
     react-native-track-player: "https://lovegaoshi@github.com/lovegaoshi/react-native-track-player.git#commit=826bd575a98b662750e043397ed9f8d5f05a6077"
     react-native-url-polyfill: "npm:^2.0.0"
     react-native-vector-icons: "npm:^10.1.0"
-    react-native-video: "npm:^6.0.0"
+    react-native-video: "npm:^6.1.0"
     react-native-webview: "npm:13.10.2"
     react-test-renderer: "npm:18.3.1"
     reactotron-react-native: "npm:^5.1.7"
@@ -14901,13 +14901,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-native-video@npm:^6.0.0":
-  version: 6.0.0
-  resolution: "react-native-video@npm:6.0.0"
+"react-native-video@npm:^6.1.0":
+  version: 6.1.0
+  resolution: "react-native-video@npm:6.1.0"
   peerDependencies:
     react: "*"
     react-native: "*"
-  checksum: 10c0/ba19476d92285fee0dbc1469c0efa13649677915f726d0a7093d615e08f8a6c0122fa130c8d1fb6f412004d52e06afeda15ff2b6b6e8b0ed605f7c96ace934b0
+  checksum: 10c0/90fe8956d0248a6ac9d78e348d2fd0e4f02d9810daa5e60b7cc09beab1c8f12e1cf8747782934ac3d98ee451dcd483730027c5f27335d0a2b80a66f3068d70cb
   languageName: node
   linkType: hard
 
