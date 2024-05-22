@@ -12,7 +12,7 @@ import {
 } from '@utils/RNTPUtils';
 import { NoxRepeatMode } from '@enums/RepeatMode';
 import noxPlayingList, { setPlayingIndex } from '@stores/playingList';
-import noxCache, { noxCacheKey } from '@utils/Cache';
+import { dataSaverPlaylist, dataSaverSongs } from '@utils/Cache';
 import useDataSaver from './useDataSaver';
 import useSnack from '@stores/useSnack';
 import { PlaylistTypes } from '@enums/Playlist';
@@ -20,15 +20,6 @@ import { PlaylistTypes } from '@enums/Playlist';
 const PLAYLIST_MEDIAID = 'playlist-';
 
 const { getState } = noxPlayingList;
-
-const dataSaverPlaylist = (playlist: NoxMedia.Playlist) => {
-  const newSongList = playlist.songList.filter(
-    song => noxCache.noxMediaCache?.peekCache(song) !== undefined
-  );
-  return newSongList.length === 0
-    ? playlist
-    : { ...playlist, songList: newSongList };
-};
 
 const dataSaverPlaylistWrapper = (datasave = true) => {
   return datasave
@@ -117,13 +108,7 @@ const usePlayback = () => {
       (acc, curr) => acc.concat(curr.songList),
       [] as NoxMedia.Song[]
     );
-    let cachedSongs = allSongs;
-    if (isDataSaving) {
-      const cachedSongIds = Array.from(noxCache.noxMediaCache.cache.keys());
-      cachedSongs = allSongs.filter(song =>
-        cachedSongIds.includes(noxCacheKey(song))
-      );
-    }
+    const cachedSongs = isDataSaving ? dataSaverSongs(allSongs) : allSongs;
     playAsSearchList({
       songs: cachedSongs,
       playlistSongs: allSongs,
