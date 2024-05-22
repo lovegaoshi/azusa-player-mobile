@@ -4,7 +4,6 @@ import TrackPlayer from 'react-native-track-player';
 
 import { logger } from '../Logger';
 import { r128gain2Volume } from '../Utils';
-import { FFProbeMetadata } from './types';
 
 export const cacheAlbumArt = async (fpath: string) => {
   const tempArtPath = `${RNFetchBlob.fs.dirs.CacheDir}/tempCover.jpg`;
@@ -16,7 +15,7 @@ export const cacheAlbumArt = async (fpath: string) => {
 
 export const probeMetadata = async (
   fspath: string
-): Promise<FFProbeMetadata> => {
+): Promise<NoxMedia.FFProbeMetadata> => {
   const session = await FFprobeKit.execute(
     `-v quiet -print_format json -show_format '${fspath}'`
   );

@@ -1,5 +1,4 @@
 import SpInAppUpdates, {
-  NeedsUpdateResponse,
   IAUUpdateKind,
   StartUpdateOptions,
 } from 'sp-react-native-in-app-updates';
@@ -7,6 +6,7 @@ import { Platform } from 'react-native';
 
 // eslint-disable-next-line import/no-unresolved
 import { APPSTORE } from '@env';
+import logger from '@utils/Logger';
 
 export default () => {
   const inAppUpdates = new SpInAppUpdates(
@@ -28,7 +28,9 @@ export default () => {
         }
         inAppUpdates.startUpdate(updateOptions); // https://github.com/SudoPlz/sp-react-native-in-app-updates/blob/master/src/types.ts#L78
       }
-    } catch {}
+    } catch {
+      logger.error('[PlayStore] checkPlayStoreUpdates failed');
+    }
   };
 
   return { checkPlayStoreUpdates };

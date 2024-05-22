@@ -3,7 +3,6 @@ import { strFromU8, decompressSync } from 'fflate';
 import { decode as atob } from 'base-64';
 
 import bfetch from '@utils/BiliFetch';
-import { biliApiLimiter } from '@utils/mediafetch/throttle';
 import { LrcSource } from '@enums/LyricFetch';
 import { logger } from '../Logger';
 

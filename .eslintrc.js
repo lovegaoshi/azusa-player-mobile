@@ -37,4 +37,7 @@ module.exports = {
       'babel-module': {},
     },
   },
+  env: {
+    node: true,
+  },
 };

@@ -1,4 +1,5 @@
 import { get_channel } from 'libmuse';
+// eslint-disable-next-line import/no-unresolved
 import { Innertube } from 'youtubei.js';
 
 import { regexFetchProps } from './generic';

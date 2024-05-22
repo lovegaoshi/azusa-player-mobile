@@ -15,7 +15,7 @@ interface NoxSnack {
   snackDuration: number;
   snackType: SnackType;
   snackOnDismiss: () => void;
-  setSnack: ({}: SetSnack) => Promise<void>;
+  setSnack: (v: SetSnack) => Promise<void>;
   snackDismiss: () => Promise<void>;
 }
 

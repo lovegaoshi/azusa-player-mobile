@@ -74,7 +74,8 @@ export default ({ intentData }: NoxComponent.AppProps) => {
           await TrackPlayer.play();
           break;
         case IntentData.PlayAll:
-        // this hook cannot use usePlayback bc of rerendering.
+          // this hook cannot use usePlayback bc of rerendering..??
+          break;
         default:
           await TrackPlayer.pause();
       }
