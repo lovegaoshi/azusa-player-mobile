@@ -103,7 +103,9 @@ interface NoxSetting {
   getPlaylist: (val: string) => Promise<NoxMedia.Playlist>;
 
   playerSetting: NoxStorage.PlayerSettingDict;
-  setPlayerSetting: (val: Partial<NoxStorage.PlayerSettingDict>) => void;
+  setPlayerSetting: (
+    val: Partial<NoxStorage.PlayerSettingDict>
+  ) => Promise<void>;
 
   addPlaylist: (val: NoxMedia.Playlist) => void;
   removePlaylist: (val: string) => void;
@@ -205,11 +207,12 @@ export const useNoxSetting = create<NoxSetting>((set, get) => ({
   },
   currentPlayingList: dummyPlaylistList,
   setCurrentPlayingList: val => {
-    if (val.songList === get().currentPlayingList.songList) {
+    const { currentPlayingList, currentPlayingId } = get();
+    if (val.songList === currentPlayingList.songList) {
       return false;
     }
     set({ currentPlayingList: val });
-    savelastPlaylistId([val.id, String(get().currentPlayingId)]);
+    savelastPlaylistId([val.id, String(currentPlayingId)]);
     setPlayingList(val.songList);
     return true;
   },
@@ -236,17 +239,18 @@ export const useNoxSetting = create<NoxSetting>((set, get) => ({
     set({ favoritePlaylist: val, playlists });
   },
   getPlaylist: async v => {
-    const appState: NoxSetting = get();
+    const { searchPlaylist, favoritePlaylist, playlists, playerSetting } =
+      get();
     switch (v) {
       case StorageKeys.SEARCH_PLAYLIST_KEY:
-        return appState.searchPlaylist;
+        return searchPlaylist;
       case StorageKeys.FAVORITE_PLAYLIST_KEY:
-        return appState.favoritePlaylist;
+        return favoritePlaylist;
       default:
-        if (appState.playerSetting.memoryEfficiency) {
+        if (playerSetting.memoryEfficiency) {
           return getPlaylist({ key: v });
         }
-        return appState.playlists[v];
+        return playlists[v];
     }
   },
 
@@ -254,8 +258,8 @@ export const useNoxSetting = create<NoxSetting>((set, get) => ({
   setPlayerSetting: val => {
     const newPlayerSetting = { ...get().playerSetting, ...val };
     set({ playerSetting: newPlayerSetting });
-    saveSettings(newPlayerSetting);
     setPlayerSettingVanilla(newPlayerSetting);
+    return saveSettings(newPlayerSetting);
   },
 
   addPlaylist: playlist => {
@@ -268,9 +272,10 @@ export const useNoxSetting = create<NoxSetting>((set, get) => ({
     savePlaylistIds(playlistIds);
   },
   removePlaylist: playlistId => {
-    let playlistIds = get().playlistIds;
-    let playlists = get().playlists;
-    const currentPlaylist = get().currentPlaylist;
+    const appState = get();
+    let playlistIds = appState.playlistIds;
+    let playlists = appState.playlists;
+    const currentPlaylist = appState.currentPlaylist;
     if (currentPlaylist.id === playlistId) {
       set({ currentPlaylist: playlists[StorageKeys.SEARCH_PLAYLIST_KEY] });
     }
@@ -281,11 +286,14 @@ export const useNoxSetting = create<NoxSetting>((set, get) => ({
   },
 
   updatePlaylist: async (playlist, addSongs = [], removeSongs = []) => {
-    const appState: NoxSetting = get();
-    let playlists = appState.playlists;
-    const currentPlaylist = appState.currentPlaylist;
+    const {
+      playlists,
+      playerSetting,
+      currentPlaylist,
+      playlistShouldReRender,
+    } = get();
     updatePlaylistSongs(playlist, addSongs, removeSongs);
-    playlists[playlist.id] = appState.playerSetting.memoryEfficiency
+    playlists[playlist.id] = playerSetting.memoryEfficiency
       ? { ...playlist, songList: [] }
       : playlist;
     if (playlist.id === currentPlaylist.id) {
@@ -293,7 +301,7 @@ export const useNoxSetting = create<NoxSetting>((set, get) => ({
     }
     set({ playlists });
     savePlaylist(playlist);
-    set({ playlistShouldReRender: !appState.playlistShouldReRender });
+    set({ playlistShouldReRender: !playlistShouldReRender });
     return playlist;
   },
 
@@ -358,12 +366,13 @@ export const useNoxSetting = create<NoxSetting>((set, get) => ({
   },
 
   exportLegacy: () => {
+    const { playlistIds, playlists } = get();
     const exportedLegacy: {
       [key: string]: NoxMedia.Playlist | string[];
     } = {
-      MyFavList: get().playlistIds,
+      MyFavList: playlistIds,
     };
-    for (const [key, value] of Object.entries(get().playlists)) {
+    for (const [key, value] of Object.entries(playlists)) {
       exportedLegacy[key] = value;
     }
     return exportedLegacy;

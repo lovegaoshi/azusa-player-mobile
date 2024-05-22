@@ -219,4 +219,19 @@ export const cacheWrapper = (
   getURL: () => Promise<string>
 ) => cache.noxMediaCache.loadCacheFunction(identifier, getURL);
 
+const _dataSaverSongs = (v: NoxMedia.Song[]) =>
+  v.filter(song => cache.noxMediaCache?.peekCache(song) !== undefined);
+
+export const dataSaverSongs = (v: NoxMedia.Song[]) => {
+  const cachedSongIds = Array.from(cache.noxMediaCache.cache.keys());
+  return v.filter(song => cachedSongIds.includes(noxCacheKey(song)));
+};
+
+export const dataSaverPlaylist = (playlist: NoxMedia.Playlist) => {
+  const newSongList = _dataSaverSongs(playlist.songList);
+  return newSongList.length === 0
+    ? playlist
+    : { ...playlist, songList: newSongList };
+};
+
 export default cache;

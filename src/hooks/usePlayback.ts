@@ -12,7 +12,7 @@ import {
 } from '@utils/RNTPUtils';
 import { NoxRepeatMode } from '@enums/RepeatMode';
 import noxPlayingList, { setPlayingIndex } from '@stores/playingList';
-import noxCache, { noxCacheKey } from '@utils/Cache';
+import { dataSaverPlaylist, dataSaverSongs } from '@utils/Cache';
 import useDataSaver from './useDataSaver';
 import useSnack from '@stores/useSnack';
 import { PlaylistTypes } from '@enums/Playlist';
@@ -20,15 +20,6 @@ import { PlaylistTypes } from '@enums/Playlist';
 const PLAYLIST_MEDIAID = 'playlist-';
 
 const { getState } = noxPlayingList;
-
-const dataSaverPlaylist = (playlist: NoxMedia.Playlist) => {
-  const newSongList = playlist.songList.filter(
-    song => noxCache.noxMediaCache?.peekCache(song) !== undefined
-  );
-  return newSongList.length === 0
-    ? playlist
-    : { ...playlist, songList: newSongList };
-};
 
 const dataSaverPlaylistWrapper = (datasave = true) => {
   return datasave
@@ -90,16 +81,20 @@ const usePlayback = () => {
 
   const playAsSearchList = async ({
     songs,
+    playlistSongs,
     title = String(t('PlaylistsDrawer.SearchListTitle')),
     song,
   }: PlayAsSearchList) => {
-    const newSearchPlaylist = {
+    const newPlayingPlaylist = {
       ...searchPlaylist,
       title,
       songList: songs,
     };
+    const newSearchPlaylist = playlistSongs
+      ? { ...newPlayingPlaylist, songList: playlistSongs }
+      : newPlayingPlaylist;
     setSearchPlaylist(newSearchPlaylist);
-    await playFromPlaylist({ playlist: newSearchPlaylist, song });
+    await playFromPlaylist({ playlist: newPlayingPlaylist, song });
     setCurrentPlaylist(newSearchPlaylist);
   };
 
@@ -109,18 +104,14 @@ const usePlayback = () => {
         .filter(playlist => playlist.type === PlaylistTypes.Typical)
         .map(p => getPlaylist(p.id))
     );
-    let allSongs = allPlaylists.reduce(
+    const allSongs = allPlaylists.reduce(
       (acc, curr) => acc.concat(curr.songList),
       [] as NoxMedia.Song[]
     );
-    if (isDataSaving) {
-      const cachedSongs = Array.from(noxCache.noxMediaCache.cache.keys());
-      allSongs = allSongs.filter(song =>
-        cachedSongs.includes(noxCacheKey(song))
-      );
-    }
+    const cachedSongs = isDataSaving ? dataSaverSongs(allSongs) : allSongs;
     playAsSearchList({
-      songs: allSongs,
+      songs: cachedSongs,
+      playlistSongs: allSongs,
       title: String(t('PlaylistOperations.all')),
     });
   };
@@ -255,6 +246,7 @@ interface PlayFromPlaylist {
 
 interface PlayAsSearchList {
   songs: NoxMedia.Song[];
+  playlistSongs?: NoxMedia.Song[];
   title?: string;
   song?: NoxMedia.Song;
 }

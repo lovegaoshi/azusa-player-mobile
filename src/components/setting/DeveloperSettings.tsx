@@ -6,6 +6,7 @@ import { useTranslation } from 'react-i18next';
 import { APPSTORE } from '@env';
 import { useStore } from 'zustand';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import * as Sentry from '@sentry/react-native';
 
 import { useNoxSetting } from '@stores/useApp';
 import { logStore, LOGLEVEL } from '@utils/Logger';
@@ -67,6 +68,7 @@ const developerSettings: { [key: string]: SettingEntry } = {
   memoryEfficiency: {
     settingName: 'memoryEfficiency',
     settingCategory: 'GeneralSettings',
+    callback: Sentry.nativeCrash,
   },
   /**
   chatGPTSongName: {
