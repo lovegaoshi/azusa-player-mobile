@@ -1,6 +1,6 @@
 import { View, GestureResponderEvent, StyleSheet } from 'react-native';
 import { Menu, Searchbar } from 'react-native-paper';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useDebounce } from 'use-debounce';
 
 import { useNoxSetting } from '@stores/useApp';
@@ -26,6 +26,7 @@ export default ({
 }: Props) => {
   const [debouncedValue] = useDebounce(value, 500);
   const [showAutoComplete, setShowAutoComplete] = useState(false);
+  const pressed = useRef(false);
   const [data, setData] = useState<string[]>([]);
   const playerStyle = useNoxSetting(state => state.playerStyle);
   const [menuCoords, setMenuCoords] = useState<NoxTheme.coordinates>({
@@ -36,6 +37,10 @@ export default ({
   useEffect(() => {
     if (debouncedValue.length < 1) {
       setData([]);
+      return;
+    }
+    if (pressed.current) {
+      pressed.current = false;
       return;
     }
     resolveData?.(debouncedValue).then(setData);
@@ -77,6 +82,7 @@ export default ({
               onPress={() => {
                 setValue(datum);
                 setShowAutoComplete(false);
+                pressed.current = true;
               }}
               title={datum}
             />
