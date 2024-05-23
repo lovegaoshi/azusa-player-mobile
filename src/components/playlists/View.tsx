@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect } from 'react';
 import { IconButton, Divider, Text, TouchableRipple } from 'react-native-paper';
-import { useNavigation, useFocusEffect } from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
 import { View, ImageBackground, StyleSheet, Linking } from 'react-native';
 import { useTranslation } from 'react-i18next';
 
@@ -24,10 +24,12 @@ const RenderDrawerItem = ({ view, icon, text, routeIcon }: Props) => {
   const setRoute = useNoxSetting(state => state.setBottomTabRoute);
 
   return (
-    <TouchableRipple onPress={() => {
-      navigation.navigate(view as never);
-      if (routeIcon) setRoute(routeIcon);
-    }}>
+    <TouchableRipple
+      onPress={() => {
+        navigation.navigate(view as never);
+        if (routeIcon) setRoute(routeIcon);
+      }}
+    >
       <View style={styles.drawerItemContainer}>
         <IconButton icon={icon} size={32} />
         <View style={styles.drawerItemTextContainer}>

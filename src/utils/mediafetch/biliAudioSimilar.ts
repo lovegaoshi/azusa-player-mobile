@@ -16,8 +16,8 @@ import { Source } from '@enums/MediaFetch';
 import SongTS from '@objects/Song';
 
 /**
- * 
- * 
+ *
+ *
  * https://www.bilibili.com/audio/music-service-c/web/song/similar?sid=3680653
 {
     "code": 0,
@@ -60,11 +60,7 @@ import SongTS from '@objects/Song';
 const API =
   'https://www.bilibili.com/audio/music-service-c/web/song/similar?sid={sid}';
 
-const fetchBiliAudioSimilarList = async (
-  sid: string,
-  progressEmitter: (val: number) => void = () => undefined,
-  favList: string[] = []
-) => {
+const fetchBiliAudioSimilarList = async (sid: string) => {
   logger.info('calling fetchBiliAudioSimilarList');
   const res = await bfetch(API.replace('{sid}', sid));
   const json = await res.json();
@@ -88,14 +84,8 @@ const fetchBiliAudioSimilarList = async (
 
 const regexFetch = async ({
   reExtracted,
-  progressEmitter = () => undefined,
-  favList,
 }: regexFetchProps): Promise<NoxNetwork.NoxRegexFetch> => ({
-  songList: await fetchBiliAudioSimilarList(
-    reExtracted[1]!,
-    progressEmitter,
-    favList
-  ),
+  songList: await fetchBiliAudioSimilarList(reExtracted[1]!),
 });
 
 const resolveURL = () => undefined;

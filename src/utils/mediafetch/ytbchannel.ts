@@ -1,4 +1,5 @@
 import { get_channel } from 'libmuse';
+// eslint-disable-next-line import/no-unresolved
 import { Innertube } from 'youtubei.js';
 
 import { regexFetchProps } from './generic';
@@ -32,7 +33,7 @@ const innertune2NoxSong = (v: any, channel?: any) =>
 const resolveYTChannelPlaylistId = async (channelUsername: string) => {
   const res = await bfetch(`https://www.youtube.com/c/${channelUsername}`);
   const text = await res.text();
-  return /meta property="og:url" content="https:\/\/www.youtube.com\/channel\/(.+)"><meta property="og\:image" content="h/.exec(
+  return /meta property="og:url" content="https:\/\/www.youtube.com\/channel\/(.+)"><meta property="og:image" content="h/.exec(
     text
   )?.[1];
 };
@@ -85,6 +86,6 @@ const regexFetch = async ({
 
 export default {
   // https://www.youtube.com/c/MioriCelesta
-  regexSearchMatch: /youtube\.com\/c\/([^&\/]+)/,
+  regexSearchMatch: /youtube\.com\/c\/([^&/]+)/,
   regexFetch,
 };

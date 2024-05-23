@@ -38,4 +38,4 @@ const biliNFTVideoFetch = async ({ act_id, index }: Props) => {
   });
 };
 
-export { biliNFTFetch, biliNFTVideoFetch };
+export { biliNFTVideoFetch };

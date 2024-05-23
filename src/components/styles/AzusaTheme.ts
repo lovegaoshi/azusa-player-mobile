@@ -1,4 +1,3 @@
-// eslint-disable-next-line node/no-extraneous-import
 import { DefaultTheme } from 'react-native-paper';
 
 export default {

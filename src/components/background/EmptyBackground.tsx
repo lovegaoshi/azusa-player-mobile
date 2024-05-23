@@ -6,6 +6,7 @@ import useAccentColor from '@hooks/useAccentColor';
 
 export default ({ children }: { children: React.JSX.Element }) => {
   const playerStyle = useNoxSetting(state => state.playerStyle);
+  // eslint-disable-next-line no-empty-pattern
   const {} = useAccentColor(true);
 
   return (

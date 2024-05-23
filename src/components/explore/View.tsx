@@ -17,7 +17,7 @@ const exploreContent = (route: NoxRoutes) => {
 };
 
 export default () => {
-  const [currentRoute, setCurrentRoute] = React.useState(NoxRoutes.bilibili);
+  const [currentRoute] = React.useState(NoxRoutes.bilibili);
   const playerStyle = useNoxSetting(state => state.playerStyle);
 
   return (

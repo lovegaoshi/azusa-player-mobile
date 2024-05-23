@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 import useAlert from '@components/dialogs/useAlert';
 import { getItem, saveItem } from '@utils/ChromeStorage';
 import { StorageKeys } from '@enums/Storage';
+// eslint-disable-next-line import/no-unresolved
 import { APPSTORE } from '@env';
 
 const { NoxAndroidAutoModule } = NativeModules;

@@ -9,7 +9,7 @@ module.exports = {
     'plugin:react/recommended',
     'plugin:import/recommended',
     'plugin:import/typescript',
-    './node_modules/gts/',
+    // './node_modules/gts/',
   ],
   parserOptions: {
     ecmaVersion: 2017, // Allows for the parsing of modern ECMAScript features
@@ -18,6 +18,9 @@ module.exports = {
   plugins: ['prettier'],
   rules: {
     // Place to specify ESLint rules. Can be used to overwrite rules specified from the extended configs
+    // HACK: i'm too lazy to build bilibili data types so off it goes
+
+    '@typescript-eslint/no-explicit-any': 'off',
     '@typescript-eslint/consistent-type-definitions': 'error',
     'react/react-in-jsx-scope': 'off',
     'prettier/prettier': ['error', { endOfLine: 'auto' }],
@@ -33,5 +36,8 @@ module.exports = {
     'import/resolver': {
       'babel-module': {},
     },
+  },
+  env: {
+    node: true,
   },
 };

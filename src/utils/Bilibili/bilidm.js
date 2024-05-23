@@ -1,3 +1,5 @@
+import { encode as btoa } from 'js-base64';
+
 const { floor, random } = Math;
 
 function f114i(a, b, i) {
@@ -102,7 +104,7 @@ function randomSample(population, sampleSize) {
     throw new Error('Sample size exceeds population size');
   }
 
-  let shuffled = population.slice(0);
+  const shuffled = population.slice(0);
   let i = population.length;
   let temp, index;
 

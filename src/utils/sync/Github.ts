@@ -9,7 +9,7 @@ const githubAuthHeader = (token: string) => ({
 });
 
 export const getUserName = async (token: string) => {
-  const res = await bfetch(`https://api.github.com/user`, {
+  const res = await bfetch('https://api.github.com/user', {
     headers: githubAuthHeader(token),
   });
   const data = await res.json();

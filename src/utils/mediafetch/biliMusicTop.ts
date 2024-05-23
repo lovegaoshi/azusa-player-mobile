@@ -47,7 +47,7 @@ export const fetchCurrentMusicTop = async () => {
 export const fetchMusicTop = async (
   listid = '175'
 ): Promise<NoxMedia.Song[]> => {
-  logger.info(`[biliMusicTop] calling fetchMusicTop`);
+  logger.info('[biliMusicTop] calling fetchMusicTop');
   try {
     const res = await biliApiLimiter.schedule(() =>
       bfetch(API.replace('{list_id}', listid))
@@ -56,7 +56,7 @@ export const fetchMusicTop = async (
     return json.data.list.map(topToSong);
   } catch (error: any) {
     logger.error(error.message);
-    logger.warn(`[biliMusicTop] Some issue happened`);
+    logger.warn('[biliMusicTop] Some issue happened');
     return [];
   }
 };

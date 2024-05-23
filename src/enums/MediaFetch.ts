@@ -16,7 +16,7 @@ export enum BiliVolume {
 }
 
 // https://github.com/SocialSisterYi/bilibili-API-collect/blob/master/docs/video/video_zone.md#%E8%A7%86%E9%A2%91%E5%88%86%E5%8C%BA%E4%B8%80%E8%A7%88
-/** 
+/**
 音乐(主分区)	music	3		/v/music
 原创音乐	original	28	原创歌曲及纯音乐，包括改编、重编曲及remix	/v/music/original
 翻唱	cover	31	对曲目的人声再演绎视频	/v/music/cover

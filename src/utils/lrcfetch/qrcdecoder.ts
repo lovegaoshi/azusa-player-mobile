@@ -400,7 +400,7 @@ function des_key_setup(key: number[], schedule: number_0_6, mode: DES_MODE) {
 
     // Decryption subkeys are reverse order of encryption subkeys so
     // generate them in reverse if the key schedule is for decryption useage.
-    if (mode == 'decrypt') to_gen = 15 - i;
+    if (mode === 'decrypt') to_gen = 15 - i;
     /*(if mode == DES_ENCRYPT)*/ else to_gen = i;
     // Initialize the array
     for (j = 0; j < 6; ++j) schedule[to_gen][j] = 0;

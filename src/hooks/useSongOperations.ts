@@ -15,6 +15,7 @@ const useSongOperations = () => {
         break;
       case Source.bilivideo:
         setExternalSearchText(`bilibili.com/video/similarvideo/${song.bvid}`);
+        break;
       default:
         logger.warn(
           `[startRadio] ${song.bvid} deos not have a start radio handle.`

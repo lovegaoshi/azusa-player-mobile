@@ -97,8 +97,7 @@ const usePlaylist = (playlist: NoxMedia.Playlist): UsePlaylist => {
   const performSearch = (searchedVal: string) => {
     setTimeout(() => {
       if (searchBarRef.current) {
-        // TODO: fix type
-        // @ts-expect-error
+        // @ts-expect-error TODO: fix type
         searchBarRef.current.value = searchedVal;
       }
     }, 100);

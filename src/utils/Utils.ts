@@ -1,4 +1,4 @@
-export const i0hdslbHTTPResolve = (url: String) =>
+export const i0hdslbHTTPResolve = (url: string) =>
   url.replace('http://', 'https://');
 
 export const seconds2HHMMSS = (sec_num: number) => {

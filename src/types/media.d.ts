@@ -63,5 +63,9 @@ declare global {
       lyric: string;
       source?: LrcSource;
     }
+
+    export interface FFProbeMetadata {
+      duration: number;
+    }
   }
 }
