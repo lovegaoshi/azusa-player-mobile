@@ -5,7 +5,6 @@ import { useTranslation } from 'react-i18next';
 
 import { SetupService, AdditionalPlaybackService } from 'services';
 import { initPlayerObject } from '@utils/ChromeStorage';
-import { initCache } from '@utils/Cache';
 import { getCurrentTPQueue, initializePlaybackMode } from '@stores/playingList';
 import useVersionCheck from '@hooks/useVersionCheck';
 import { songlistToTracklist } from '@utils/RNTPUtils';
@@ -36,7 +35,6 @@ export default ({ intentData }: NoxComponent.AppProps) => {
       } = await initializeStores(
         await initPlayerObject(intentData === IntentData.SafeMode)
       );
-      initCache({ max: storedPlayerSetting.cacheSize });
       /**
        * this doesnt even seems necessary?
       for (const [key, value] of Object.entries(cookies)) {

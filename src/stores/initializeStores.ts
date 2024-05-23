@@ -4,7 +4,7 @@ import { fetch } from '@react-native-community/netinfo';
 
 import { initialize as initializeAppStore } from './appStore';
 import { initializeR128Gain } from '../utils/ffmpeg/r128Store';
-import { dataSaverPlaylist } from '../utils/Cache';
+import { dataSaverPlaylist, initCache } from '../utils/Cache';
 
 const { NoxAndroidAutoModule } = NativeModules;
 
@@ -35,7 +35,11 @@ const useInitializeStore = () => {
     await initializeAppStore();
     await initializeR128Gain();
     const results = await initPlayer(val);
-    if ((await fetch()) && results.storedPlayerSetting.dataSaver) {
+    initCache({ max: results.storedPlayerSetting.cacheSize });
+    if (
+      (await fetch()).type === 'cellular' &&
+      results.storedPlayerSetting.dataSaver
+    ) {
       setCurrentPlayingList(dataSaverPlaylist(results.currentPlayingList));
     }
     return results;
