@@ -60,6 +60,8 @@ declare global {
     export interface coordinates {
       x: number;
       y: number;
+      width?: number;
+      height?: number;
     }
 
     export interface AdaptiveStyle extends Style {

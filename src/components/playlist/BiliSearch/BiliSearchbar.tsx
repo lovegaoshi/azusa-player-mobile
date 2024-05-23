@@ -20,6 +20,7 @@ import { getMusicFreePlugin } from '@utils/ChromeStorage';
 import logger from '@utils/Logger';
 import { getIcon } from './Icons';
 import AutoComplete from '@components/commonui/AutoComplete';
+import BiliKwSuggest from '@utils/Bilibili/BiliKwSuggest';
 
 interface SharedItem {
   mimeType: string;
@@ -127,9 +128,9 @@ export default ({
           value={searchVal}
           setValue={setSearchVal}
           onSubmit={() => handleSearch(searchVal)}
-          style={styles.textInput}
           onIconPress={handleMenuPress}
           icon={getIcon(searchOption)}
+          resolveData={BiliKwSuggest}
         />
         <SearchMenu
           visible={dialogOpen}
@@ -161,9 +162,6 @@ const styles = StyleSheet.create({
   searchContainer: {
     flexDirection: 'row',
     width: '100%',
-  },
-  textInput: {
-    flex: 5,
   },
   progressBar: { backgroundColor: 'rgba(0, 0, 0, 0)' },
 });
