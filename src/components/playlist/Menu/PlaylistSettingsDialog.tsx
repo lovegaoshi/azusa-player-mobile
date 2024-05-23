@@ -7,7 +7,7 @@ import { useNoxSetting } from '@stores/useApp';
 import PortaledInput, {
   PortalInputRef,
 } from '@components/dialogs/PortaledInput';
-import usePlaylistSetting from './usePlaylistSetting';
+import usePlaylistSetting from '@hooks/usePlaylistSetting';
 
 interface Props {
   visible: boolean;

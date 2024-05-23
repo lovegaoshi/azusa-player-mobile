@@ -5,7 +5,7 @@
 import TrackPlayer from 'react-native-track-player';
 import BackgroundTimer from 'react-native-background-timer';
 
-import useTimer from './useTimer';
+import useTimer from '@hooks/useTimer';
 
 export default () => {
   const timer = useTimer({
