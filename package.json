@@ -101,7 +101,7 @@
     "react-native-track-player": "https://lovegaoshi@github.com/lovegaoshi/react-native-track-player.git#commit=826bd575a98b662750e043397ed9f8d5f05a6077",
     "react-native-url-polyfill": "^2.0.0",
     "react-native-vector-icons": "^10.1.0",
-    "react-native-video": "^6.1.0",
+    "react-native-video": "^6.1.1",
     "react-native-webview": "13.10.2",
     "sp-react-native-in-app-updates": "^1.4.0",
     "use-debounce": "^10.0.0",
