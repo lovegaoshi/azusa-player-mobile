@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useState, useEffect, useCallback } from 'react';
-import { ProgressBar, Searchbar } from 'react-native-paper';
+import { ProgressBar } from 'react-native-paper';
 import {
   View,
   StyleSheet,
@@ -19,6 +19,7 @@ import SearchMenu from './SearchMenu';
 import { getMusicFreePlugin } from '@utils/ChromeStorage';
 import logger from '@utils/Logger';
 import { getIcon } from './Icons';
+import AutoComplete from '@components/commonui/AutoComplete';
 
 interface SharedItem {
   mimeType: string;
@@ -56,8 +57,8 @@ export default ({
     searchListTitle: t('PlaylistOperations.searchListName'),
   });
 
-  const handleMenuPress = async (event: GestureResponderEvent) => {
-    setShowMusicFree((await getMusicFreePlugin()).length > 0);
+  const handleMenuPress = (event: GestureResponderEvent) => {
+    getMusicFreePlugin().then(v => setShowMusicFree(v.length > 0));
     setDialogOpen(true);
     setMenuCoords({
       x: event.nativeEvent.pageX,
@@ -121,14 +122,12 @@ export default ({
   return (
     <View style={styles.container}>
       <View style={styles.searchContainer}>
-        <Searchbar
+        <AutoComplete
           placeholder={String(t('BiliSearchBar.label'))}
           value={searchVal}
-          onChangeText={setSearchVal}
-          onSubmitEditing={() => handleSearch(searchVal)}
-          selectTextOnFocus
+          setValue={setSearchVal}
+          onSubmit={() => handleSearch(searchVal)}
           style={styles.textInput}
-          selectionColor={playerStyle.customColors.textInputSelectionColor}
           onIconPress={handleMenuPress}
           icon={getIcon(searchOption)}
         />
