@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { StyleSheet } from 'react-native';
-import NoxTheme from './styles/NoxTheme';
-import AzusaTheme from './styles/AzusaTheme';
+import NoxTheme from '../styles/NoxTheme';
+import AzusaTheme from '../styles/AzusaTheme';
 import { randomChoice } from '../utils/Utils';
 
 export const createStyle = (

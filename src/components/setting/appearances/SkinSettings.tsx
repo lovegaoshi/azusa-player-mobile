@@ -31,9 +31,9 @@ import {
 
 import SkinSearchbar from '../SkinSearchbar';
 import { useNoxSetting } from '@stores/useApp';
-import AzusaTheme from '@components/styles/AzusaTheme';
-import NoxTheme from '@components/styles/NoxTheme';
-import AdaptiveTheme from '@components/styles/AdaptiveTheme';
+import AzusaTheme from '@styles/AzusaTheme';
+import NoxTheme from '@styles/NoxTheme';
+import AdaptiveTheme from '@styles/AdaptiveTheme';
 import { getUniqObjects } from '@utils/Utils';
 
 interface DisplayTheme extends NoxTheme.Style {
