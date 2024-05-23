@@ -45,6 +45,14 @@ const GEN_SETTING_BOOLEAN: SettingEntry[] = [
     settingName: 'screenAlwaysWake',
     settingCategory: 'GeneralSettings',
   },
+  {
+    settingName: 'karaokeLyrics',
+    settingCategory: 'GeneralSettings',
+  },
+  {
+    settingName: 'useSuggestion',
+    settingCategory: 'GeneralSettings',
+  },
 ];
 
 export default () => {

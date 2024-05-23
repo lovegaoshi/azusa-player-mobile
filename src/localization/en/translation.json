@@ -114,6 +114,8 @@
     "prefetchTrackDesc": "Prefetch the next track (only works when cache is enabled)",
     "chatGPTResolveSongNameName": "ChatGPT on Songs",
     "chatGPTResolveSongNameDesc": "TODO: Use chatGPT to resolve song names",
+    "useSuggestionName": "BiliSuggestion",
+    "useSuggestionDesc": "Show suggestions when searching in the search bar",
     "memoryEfficiencyName": "Memory Efficiency",
     "memoryEfficiencyDesc": "async load songlists from playlists; NEED RESTART! will cause data loss",
     "keepForegroundName": "Keep Foreground Service",

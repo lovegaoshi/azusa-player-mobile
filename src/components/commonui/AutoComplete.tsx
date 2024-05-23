@@ -1,9 +1,4 @@
-import {
-  View,
-  GestureResponderEvent,
-  ViewStyle,
-  StyleSheet,
-} from 'react-native';
+import { View, GestureResponderEvent, StyleSheet } from 'react-native';
 import { Menu, Searchbar } from 'react-native-paper';
 import React, { useEffect, useState } from 'react';
 import { useDebounce } from 'use-debounce';

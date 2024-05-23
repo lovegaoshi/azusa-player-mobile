@@ -21,6 +21,7 @@ import logger from '@utils/Logger';
 import { getIcon } from './Icons';
 import AutoComplete from '@components/commonui/AutoComplete';
 import BiliKwSuggest from '@utils/Bilibili/BiliKwSuggest';
+import { SearchOptions } from '@enums/Storage';
 
 interface SharedItem {
   mimeType: string;
@@ -28,17 +29,26 @@ interface SharedItem {
   extraData: any;
 }
 
-interface props {
+const searchSuggest = (option: SearchOptions | string) => {
+  switch (option) {
+    case SearchOptions.BILIBILI:
+      return BiliKwSuggest;
+    default:
+      return;
+  }
+};
+
+interface Props {
   onSearched: (val: any) => void;
 }
 export default ({
   onSearched = (songs: NoxMedia.Song[]) => console.log(songs),
-}: props) => {
+}: Props) => {
   const { t } = useTranslation();
+  const playerSetting = useNoxSetting(state => state.playerSetting);
   const searchOption = useNoxSetting(state => state.searchOption);
   const searchProgress = useNoxSetting(state => state.searchBarProgress);
   const navigationGlobal = useNavigation();
-  const playerStyle = useNoxSetting(state => state.playerStyle);
   const externalSearchText = useNoxSetting(state => state.externalSearchText);
   const setExternalSearchText = useNoxSetting(
     state => state.setExternalSearchText
@@ -130,7 +140,9 @@ export default ({
           onSubmit={() => handleSearch(searchVal)}
           onIconPress={handleMenuPress}
           icon={getIcon(searchOption)}
-          resolveData={BiliKwSuggest}
+          resolveData={searchSuggest(
+            playerSetting.useSuggestion ? searchOption : ''
+          )}
         />
         <SearchMenu
           visible={dialogOpen}
