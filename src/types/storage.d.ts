@@ -42,6 +42,7 @@ declare global {
       karaokeLyrics: boolean;
       accentColor: boolean;
       memoryEfficiency: boolean;
+      useSuggestion: boolean;
 
       appID: string;
       language?: string;

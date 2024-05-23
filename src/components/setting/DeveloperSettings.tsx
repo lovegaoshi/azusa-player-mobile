@@ -61,10 +61,6 @@ const developerSettings: { [key: string]: SettingEntry } = {
     settingName: 'keepForeground',
     settingCategory: 'GeneralSettings',
   },
-  karaokeLyrics: {
-    settingName: 'karaokeLyrics',
-    settingCategory: 'GeneralSettings',
-  },
   memoryEfficiency: {
     settingName: 'memoryEfficiency',
     settingCategory: 'GeneralSettings',
@@ -178,7 +174,6 @@ const Home = ({ navigation }: NoxComponent.NavigationProps) => {
               {Platform.OS === 'android' && (
                 <RenderSetting item={developerSettings.keepForeground} />
               )}
-              <RenderSetting item={developerSettings.karaokeLyrics} />
               <RenderSetting item={developerSettings.memoryEfficiency} />
             </View>
           </GroupView>

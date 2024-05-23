@@ -6,7 +6,7 @@ import bfetch from '@utils/BiliFetch';
 const API =
   'https://api.bilibili.com/x/garb/v2/mall/suit/detail?from=&from_id=&item_id={act_id}';
 
-interface props {
+interface Props {
   act_id: string;
   resolver?: (json: any) => string;
 }
@@ -14,13 +14,13 @@ interface props {
 const biliGarbFetch = async ({
   act_id,
   resolver = (json: any) => json,
-}: props) => {
+}: Props) => {
   const res = await bfetch(API.replace('{act_id}', act_id));
   const json = await res.json();
   return resolver(json.data);
 };
 
-const biliGarbHeadVideoFetch = async ({ act_id }: props) => {
+const biliGarbHeadVideoFetch = async ({ act_id }: Props) => {
   return biliGarbFetch({
     act_id,
     resolver: (json: any) =>

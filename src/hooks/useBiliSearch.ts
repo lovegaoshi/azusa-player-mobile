@@ -6,14 +6,14 @@ import { searchBiliURLs } from '@utils/BiliSearch';
 import { useNoxSetting } from '../stores/useApp';
 import { getDefaultSearch } from '@utils/ChromeStorage';
 
-interface props {
+interface Props {
   onSearched?: (val: any) => void;
   searchListTitle?: string;
 }
 export default ({
   onSearched = (songs: NoxMedia.Song[]) => console.log(songs),
   searchListTitle = i18n.t('PlaylistOperations.searchListName'),
-}: props) => {
+}: Props) => {
   const [searchVal, setSearchVal] = useState('');
   const progressEmitter = useNoxSetting(
     state => state.searchBarProgressEmitter

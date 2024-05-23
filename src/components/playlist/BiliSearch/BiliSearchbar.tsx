@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useState, useEffect, useCallback } from 'react';
-import { ProgressBar, Searchbar } from 'react-native-paper';
+import { ProgressBar } from 'react-native-paper';
 import {
   View,
   StyleSheet,
@@ -19,6 +19,9 @@ import SearchMenu from './SearchMenu';
 import { getMusicFreePlugin } from '@utils/ChromeStorage';
 import logger from '@utils/Logger';
 import { getIcon } from './Icons';
+import AutoComplete from '@components/commonui/AutoComplete';
+import BiliKwSuggest from '@utils/Bilibili/BiliKwSuggest';
+import { SearchOptions } from '@enums/Storage';
 
 interface SharedItem {
   mimeType: string;
@@ -26,17 +29,26 @@ interface SharedItem {
   extraData: any;
 }
 
-interface props {
+const searchSuggest = (option: SearchOptions | string) => {
+  switch (option) {
+    case SearchOptions.BILIBILI:
+      return BiliKwSuggest;
+    default:
+      return;
+  }
+};
+
+interface Props {
   onSearched: (val: any) => void;
 }
 export default ({
   onSearched = (songs: NoxMedia.Song[]) => console.log(songs),
-}: props) => {
+}: Props) => {
   const { t } = useTranslation();
+  const playerSetting = useNoxSetting(state => state.playerSetting);
   const searchOption = useNoxSetting(state => state.searchOption);
   const searchProgress = useNoxSetting(state => state.searchBarProgress);
   const navigationGlobal = useNavigation();
-  const playerStyle = useNoxSetting(state => state.playerStyle);
   const externalSearchText = useNoxSetting(state => state.externalSearchText);
   const setExternalSearchText = useNoxSetting(
     state => state.setExternalSearchText
@@ -56,8 +68,8 @@ export default ({
     searchListTitle: t('PlaylistOperations.searchListName'),
   });
 
-  const handleMenuPress = async (event: GestureResponderEvent) => {
-    setShowMusicFree((await getMusicFreePlugin()).length > 0);
+  const handleMenuPress = (event: GestureResponderEvent) => {
+    getMusicFreePlugin().then(v => setShowMusicFree(v.length > 0));
     setDialogOpen(true);
     setMenuCoords({
       x: event.nativeEvent.pageX,
@@ -121,16 +133,16 @@ export default ({
   return (
     <View style={styles.container}>
       <View style={styles.searchContainer}>
-        <Searchbar
+        <AutoComplete
           placeholder={String(t('BiliSearchBar.label'))}
           value={searchVal}
-          onChangeText={setSearchVal}
-          onSubmitEditing={() => handleSearch(searchVal)}
-          selectTextOnFocus
-          style={styles.textInput}
-          selectionColor={playerStyle.customColors.textInputSelectionColor}
+          setValue={setSearchVal}
+          onSubmit={() => handleSearch(searchVal)}
           onIconPress={handleMenuPress}
           icon={getIcon(searchOption)}
+          resolveData={searchSuggest(
+            playerSetting.useSuggestion ? searchOption : ''
+          )}
         />
         <SearchMenu
           visible={dialogOpen}
@@ -162,9 +174,6 @@ const styles = StyleSheet.create({
   searchContainer: {
     flexDirection: 'row',
     width: '100%',
-  },
-  textInput: {
-    flex: 5,
   },
   progressBar: { backgroundColor: 'rgba(0, 0, 0, 0)' },
 });

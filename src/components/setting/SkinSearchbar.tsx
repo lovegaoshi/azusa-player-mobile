@@ -7,12 +7,12 @@ import { useTranslation } from 'react-i18next';
 import { useNoxSetting } from '@stores/useApp';
 import useSnack from '@stores/useSnack';
 
-interface props {
+interface Props {
   onSearched: (val: any) => void;
 }
 const CustomSkinSearch = ({
   onSearched = (vals: any) => console.log(vals),
-}: props) => {
+}: Props) => {
   const { t } = useTranslation();
   const setSnack = useSnack(state => state.setSnack);
   const [searchVal, setSearchVal] = useState(
