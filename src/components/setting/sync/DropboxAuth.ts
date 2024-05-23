@@ -9,7 +9,6 @@ import { getArrayBufferForBlob } from 'react-native-blob-jsi-helper';
 import { DROPBOX_KEY, DROPBOX_SECRET } from '@env';
 import { logger } from '@utils/Logger';
 import GenericSyncButton from './GenericSyncButton';
-import { GenericProps } from './GenericSyncProps';
 import {
   checkAuthentication,
   noxBackup,
@@ -83,7 +82,9 @@ const login = async (
   }
 };
 
-const DropboxSyncButton = ({ restoreFromUint8Array }: GenericProps) =>
+const DropboxSyncButton = ({
+  restoreFromUint8Array,
+}: NoxSyncComponent.GenericProps) =>
   GenericSyncButton({
     restoreFromUint8Array,
     noxBackup: v => noxBackup(dbx, v),

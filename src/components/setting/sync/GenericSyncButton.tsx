@@ -6,7 +6,6 @@ import { useTranslation } from 'react-i18next';
 
 import { logger } from '@utils/Logger';
 import { exportPlayerContent } from '@utils/ChromeStorage';
-import { ImportProps, ExportProps, Props } from './GenericSyncProps';
 import useSnack from '@stores/useSnack';
 import keepAwake from '@utils/keepAwake';
 
@@ -14,7 +13,7 @@ const ImportSyncFavButton = ({
   restoreFromUint8Array,
   noxRestore,
   login,
-}: ImportProps) => {
+}: NoxSyncComponent.ImportProps) => {
   const { t } = useTranslation();
   const setSnack = useSnack(state => state.setSnack);
   const [loading, setLoading] = useState(false);
@@ -58,7 +57,10 @@ const ImportSyncFavButton = ({
   );
 };
 
-const ExportSyncFavButton = ({ noxBackup, login }: ExportProps) => {
+const ExportSyncFavButton = ({
+  noxBackup,
+  login,
+}: NoxSyncComponent.ExportProps) => {
   const { t } = useTranslation();
   const setSnack = useSnack(state => state.setSnack);
   const [loading, setLoading] = useState(false);
@@ -107,7 +109,7 @@ export default ({
   login,
   noxBackup,
   noxRestore,
-}: Props) => {
+}: NoxSyncComponent.Props) => {
   return (
     <View style={styles.container}>
       <ImportSyncFavButton
