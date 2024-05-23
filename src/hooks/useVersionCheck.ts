@@ -1,14 +1,14 @@
-import { useTranslation } from 'react-i18next';
-import { Linking, Platform } from 'react-native';
+import { useTranslation } from "react-i18next";
+import { Linking, Platform } from "react-native";
 // eslint-disable-next-line import/no-unresolved
-import { APPSTORE } from '@env';
+import { APPSTORE } from "@env";
 
-import { useNoxSetting } from '@stores/useApp';
-import useAlert from '../components/dialogs/useAlert';
-import { Versions } from '../enums/Version';
-import logger from '@utils/Logger';
-import useInstallAPK from './useInstallAPK';
-import useSnack, { InfiniteDuration } from '../stores/useSnack';
+import { useNoxSetting } from "@stores/useApp";
+import useAlert from "../components/dialogs/useAlert";
+import { Versions } from "../enums/Version";
+import logger from "@utils/Logger";
+import useInstallAPK from "./useInstallAPK";
+import useSnack, { InfiniteDuration } from "../stores/useSnack";
 
 const regexVersion = (version: string) => {
   const regexMatch = /\d+\.\d+\.\d+/.exec(version),
@@ -17,10 +17,10 @@ const regexVersion = (version: string) => {
 };
 
 export default () => {
-  const playerSetting = useNoxSetting(state => state.playerSetting);
-  const setSnack = useSnack(state => state.setSnack);
-  const snackDismiss = useSnack(state => state.snackDismiss);
-  const setPlayerSetting = useNoxSetting(state => state.setPlayerSetting);
+  const playerSetting = useNoxSetting((state) => state.playerSetting);
+  const setSnack = useSnack((state) => state.setSnack);
+  const snackDismiss = useSnack((state) => state.snackDismiss);
+  const setPlayerSetting = useNoxSetting((state) => state.setPlayerSetting);
   const { OneWayAlert, TwoWayAlert, ThreeWayAlert } = useAlert();
   const { RNFetchDownloadAPK } = useInstallAPK();
   const { t } = useTranslation();
@@ -31,16 +31,16 @@ export default () => {
     let devVersion: string | undefined;
     try {
       const res = await fetch(
-        'https://api.github.com/repos/lovegaoshi/azusa-player-mobile/releases/latest'
+        "https://api.github.com/repos/lovegaoshi/azusa-player-mobile/releases/latest",
       );
       const json = await res.json();
       noxCheckedVersion = json.tag_name;
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       noxAPKUrl = json.assets.filter((f: any) =>
-        f.name.includes('arm64-v8a')
+        f.name.includes("arm64-v8a"),
       )[0].browser_download_url;
       const devres = await fetch(
-          'https://api.github.com/repos/lovegaoshi/azusa-player-mobile/releases'
+          "https://api.github.com/repos/lovegaoshi/azusa-player-mobile/releases",
         ),
         devjson = await devres.json();
       devVersion = devjson[0].tag_name;
@@ -53,12 +53,12 @@ export default () => {
 
   const checkVersion = async (
     auto = true,
-    currentPlayerSetting = playerSetting
+    currentPlayerSetting = playerSetting,
   ) => {
     if (APPSTORE) return;
     if (!auto) {
       setSnack({
-        snackMsg: { success: t('VersionUpdate.UpdateCheckingSnackbar') },
+        snackMsg: { success: t("VersionUpdate.UpdateCheckingSnackbar") },
         snackDuration: InfiniteDuration,
       });
     }
@@ -66,7 +66,7 @@ export default () => {
     await snackDismiss();
     if (!noxCheckedVersion) {
       setSnack({
-        snackMsg: { success: t('VersionUpdate.UpdateCheckingFailedSnackbar') },
+        snackMsg: { success: t("VersionUpdate.UpdateCheckingFailedSnackbar") },
       });
       return;
     }
@@ -77,48 +77,48 @@ export default () => {
       regexVersion(currentPlayerSetting.noxVersion)
     ) {
       OneWayAlert(
-        '',
+        "",
         String(
-          t('VersionUpdate.NoUpdates', {
+          t("VersionUpdate.NoUpdates", {
             currentVersion: currentPlayerSetting.noxVersion,
             devVersion,
-          })
-        )
+          }),
+        ),
       );
     } else {
       setPlayerSetting({ noxCheckedVersion });
-      if (Platform.OS === 'android') {
+      if (Platform.OS === "android") {
         ThreeWayAlert(
-          String(t('VersionUpdate.UpdateFoundTitle')),
+          String(t("VersionUpdate.UpdateFoundTitle")),
           String(
-            t('VersionUpdate.UpdateFoundContent', {
+            t("VersionUpdate.UpdateFoundContent", {
               noxCheckedVersion,
               currentVersion: currentPlayerSetting.noxVersion,
               devVersion,
-            })
+            }),
           ),
           () =>
             Linking.openURL(
-              'https://github.com/lovegaoshi/azusa-player-mobile/releases/latest'
+              "https://github.com/lovegaoshi/azusa-player-mobile/releases/latest",
             ),
-          String(t('VersionUpdate.DownloadAPK')),
-          () => RNFetchDownloadAPK(noxAPKUrl!)
+          String(t("VersionUpdate.DownloadAPK")),
+          () => RNFetchDownloadAPK(noxAPKUrl!),
         );
         return;
       }
       TwoWayAlert(
-        String(t('VersionUpdate.UpdateFoundTitle')),
+        String(t("VersionUpdate.UpdateFoundTitle")),
         String(
-          t('VersionUpdate.UpdateFoundContent', {
+          t("VersionUpdate.UpdateFoundContent", {
             noxCheckedVersion,
             currentVersion: currentPlayerSetting.noxVersion,
             devVersion,
-          })
+          }),
         ),
         () =>
           Linking.openURL(
-            'https://github.com/lovegaoshi/azusa-player-mobile/releases/latest'
-          )
+            "https://github.com/lovegaoshi/azusa-player-mobile/releases/latest",
+          ),
       );
     }
   };
@@ -132,10 +132,10 @@ export default () => {
         setPlayerSetting({ noxVersion: latest });
         console.debug(`version update to ${latest}d`);
         OneWayAlert(
-          String(t('VersionUpdate.UpdatedVersionAlertTitle')),
+          String(t("VersionUpdate.UpdatedVersionAlertTitle")),
           String(
-            t('VersionUpdate.UpdatedVersionAlertContent', { version: latest })
-          )
+            t("VersionUpdate.UpdatedVersionAlertContent", { version: latest }),
+          ),
         );
     }
   };

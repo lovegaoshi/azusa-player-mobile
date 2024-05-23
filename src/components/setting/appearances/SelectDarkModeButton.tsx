@@ -1,26 +1,26 @@
-import * as React from 'react';
-import { useTranslation } from 'react-i18next';
-import { Appearance, View, ColorSchemeName } from 'react-native';
+import * as React from "react";
+import { useTranslation } from "react-i18next";
+import { Appearance, View, ColorSchemeName } from "react-native";
 
-import { SettingListItem } from '../useRenderSetting';
-import GenericSelectDialog from '@components/dialogs/GenericSelectDialog';
+import { SettingListItem } from "../useRenderSetting";
+import GenericSelectDialog from "@components/dialogs/GenericSelectDialog";
 import {
   SelectSettingEntry,
   dummySelectSettingEntry,
-} from '../SetttingEntries';
-import { saveColorScheme, getColorScheme } from '@utils/ChromeStorage';
+} from "../SetttingEntries";
+import { saveColorScheme, getColorScheme } from "@utils/ChromeStorage";
 
 const ColorSchemei18n = (
   scheme: ColorSchemeName,
-  t: (val: string) => string
+  t: (val: string) => string,
 ) => {
   switch (scheme) {
-    case 'light':
-      return t('AppearanceSettings.ColorSchemeLight');
-    case 'dark':
-      return t('AppearanceSettings.ColorSchemeDark');
+    case "light":
+      return t("AppearanceSettings.ColorSchemeLight");
+    case "dark":
+      return t("AppearanceSettings.ColorSchemeDark");
     default:
-      return t('AppearanceSettings.ColorSchemeAdaptive');
+      return t("AppearanceSettings.ColorSchemeAdaptive");
   }
 };
 
@@ -34,7 +34,7 @@ export default () => {
 
   const selectColorScheme = async () => {
     setSelectVisible(true);
-    const options: ColorSchemeName[] = [null, 'light', 'dark'];
+    const options: ColorSchemeName[] = [null, "light", "dark"];
     const defaultIndex = options.indexOf((await getColorScheme()) || null);
     setCurrentSelectOption({
       options,
@@ -46,7 +46,7 @@ export default () => {
         Appearance.setColorScheme(options[index]);
         saveColorScheme(options[index]);
       },
-      title: t('AppearanceSettings.ColorSchemeName'),
+      title: t("AppearanceSettings.ColorSchemeName"),
     } as SelectSettingEntry<ColorSchemeName>);
   };
 
@@ -66,7 +66,7 @@ export default () => {
         onPress={selectColorScheme}
         settingCategory="AppearanceSettings"
         modifyDescription={() =>
-          t('AppearanceSettings.ColorSchemeDesc', {
+          t("AppearanceSettings.ColorSchemeDesc", {
             scheme: ColorSchemei18n(Appearance.getColorScheme(), t),
           })
         }

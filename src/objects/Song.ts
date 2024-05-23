@@ -1,13 +1,13 @@
-import { v4 as uuidv4 } from 'uuid';
-import he from 'he';
+import { v4 as uuidv4 } from "uuid";
+import he from "he";
 
-import { extractParenthesis } from '../utils/re';
-import { reExtractSongName } from '@stores/appStore';
-import { Source } from '@enums/MediaFetch';
-import { MUSICFREE } from '@utils/mediafetch/musicfree';
-import { i0hdslbHTTPResolve } from '@utils/Utils';
+import { extractParenthesis } from "../utils/re";
+import { reExtractSongName } from "@stores/appStore";
+import { Source } from "@enums/MediaFetch";
+import { MUSICFREE } from "@utils/mediafetch/musicfree";
+import { i0hdslbHTTPResolve } from "@utils/Utils";
 
-export const DEFAULT_NULL_URL = 'NULL';
+export const DEFAULT_NULL_URL = "NULL";
 export const NULL_TRACK = { url: DEFAULT_NULL_URL, urlRefreshTimeStamp: 0 };
 
 interface SongProps {
@@ -77,7 +77,7 @@ export default ({
 
 export const setSongBiliShazamed = (
   song: NoxMedia.Song,
-  val: string | null
+  val: string | null,
 ) => {
   if (!val) return { ...song, biliShazamedName: val } as NoxMedia.Song;
   const biliShazamedName = extractParenthesis(val);
@@ -100,16 +100,16 @@ export const removeSongBiliShazamed = (song: NoxMedia.Song): NoxMedia.Song => ({
 export const dummySong = (): NoxMedia.Song => {
   return {
     id: uuidv4(),
-    bvid: '0',
-    name: 'dummySong',
-    nameRaw: 'dummySong',
-    singer: 'dummyArtist',
+    bvid: "0",
+    name: "dummySong",
+    nameRaw: "dummySong",
+    singer: "dummyArtist",
     singerId: 0,
-    cover: '',
-    lyric: '',
+    cover: "",
+    lyric: "",
     lyricOffset: 0,
-    parsedName: 'dummySongParsed',
-    biliShazamedName: '',
+    parsedName: "dummySongParsed",
+    biliShazamedName: "",
     page: 0,
     duration: 0,
   };

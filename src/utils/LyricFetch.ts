@@ -1,11 +1,11 @@
-import i18n from 'i18next';
+import i18n from "i18next";
 
-import logger from './Logger';
-import kugouLrcFetch from './lrcfetch/kugou';
-import qqLrcFetch from './lrcfetch/qq';
-import qqQrcFetch from './lrcfetch/qqqrc';
-import BiliLrcFetch from './lrcfetch/bili';
-import { LrcSource } from '@enums/LyricFetch';
+import logger from "./Logger";
+import kugouLrcFetch from "./lrcfetch/kugou";
+import qqLrcFetch from "./lrcfetch/qq";
+import qqQrcFetch from "./lrcfetch/qqqrc";
+import BiliLrcFetch from "./lrcfetch/bili";
+import { LrcSource } from "@enums/LyricFetch";
 
 interface SearchLyricOptions {
   searchKey: string;
@@ -51,6 +51,6 @@ export const searchLyric = async (searchMID: string, source = LrcSource.QQ) => {
     }
   } catch (e) {
     logger.warn(`[lrcFetch] ${searchMID} & ${source}: ${e}`);
-    return i18n.t('Lyric.failedToFetch');
+    return i18n.t("Lyric.failedToFetch");
   }
 };

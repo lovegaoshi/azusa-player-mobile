@@ -1,21 +1,21 @@
-import { regexFetchProps } from './generic';
-import { biliApiLimiter } from './throttle';
+import { regexFetchProps } from "./generic";
+import { biliApiLimiter } from "./throttle";
 
-import { logger } from '../Logger';
-import bfetch from '@utils/BiliFetch';
-import { biliShazamOnSonglist } from './bilishazam';
-import { Source } from '@enums/MediaFetch';
-import SongTS from '@objects/Song';
+import { logger } from "../Logger";
+import bfetch from "@utils/BiliFetch";
+import { biliShazamOnSonglist } from "./bilishazam";
+import { Source } from "@enums/MediaFetch";
+import SongTS from "@objects/Song";
 
 const URL_VIDEO_INFO =
-  'https://api.bilibili.com/x/web-interface/view?aid={aid}';
+  "https://api.bilibili.com/x/web-interface/view?aid={aid}";
 
 const fetchAVIDRaw = async (aid: string): Promise<NoxMedia.Song[]> => {
   logger.info(
-    `calling fetchAVID of ${aid} of ${URL_VIDEO_INFO.replace('{aid}', aid)}`
+    `calling fetchAVID of ${aid} of ${URL_VIDEO_INFO.replace("{aid}", aid)}`,
   );
   try {
-    const res = await bfetch(URL_VIDEO_INFO.replace('{aid}', aid));
+    const res = await bfetch(URL_VIDEO_INFO.replace("{aid}", aid));
     const json = await res.json();
     const { data } = json;
     return data.pages.map((page: any, index: number) => {
@@ -28,7 +28,7 @@ const fetchAVIDRaw = async (aid: string): Promise<NoxMedia.Song[]> => {
         singer: data.owner.name,
         singerId: data.owner.mid,
         cover: data.pic,
-        lyric: '',
+        lyric: "",
         page: index + 1,
         duration: page.duration,
         album: data.title,
@@ -45,7 +45,7 @@ const fetchAVIDRaw = async (aid: string): Promise<NoxMedia.Song[]> => {
 
 export const fetchAVID = async (
   avid: string,
-  progressEmitter: () => void = () => undefined
+  progressEmitter: () => void = () => undefined,
 ) =>
   await biliApiLimiter.schedule(() => {
     progressEmitter();
@@ -55,11 +55,11 @@ export const fetchAVID = async (
 export const fetchBiliAVIDs = async (
   AVids: string[],
   progressEmitter: (val: number) => void = () => undefined,
-  useBiliTag = false
+  useBiliTag = false,
 ) => {
   const BVidLen = AVids.length;
   const BVidPromises = AVids.map((avid, index) =>
-    fetchAVID(avid, () => progressEmitter((100 * (index + 1)) / BVidLen))
+    fetchAVID(avid, () => progressEmitter((100 * (index + 1)) / BVidLen)),
   );
   const songs = (await Promise.all(BVidPromises)).flat();
   if (useBiliTag) {
@@ -75,7 +75,7 @@ const regexFetch = async ({
   songList: await fetchBiliAVIDs(
     [reExtracted[1]!],
     undefined,
-    useBiliTag || false
+    useBiliTag || false,
   ),
 });
 

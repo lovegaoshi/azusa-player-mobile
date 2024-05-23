@@ -1,12 +1,12 @@
-import * as React from 'react';
-import { Button, ActivityIndicator } from 'react-native-paper';
-import { useTranslation } from 'react-i18next';
+import * as React from "react";
+import { Button, ActivityIndicator } from "react-native-paper";
+import { useTranslation } from "react-i18next";
 
-import { getBiliFavlist, GETFAVLIST_RES } from '@utils/Bilibili/bilifavOperate';
-import GenericCheckDialog from '../dialogs/GenericCheckDialog';
-import bilifavlistFetch from '@utils/mediafetch/bilifavlist';
-import { dummyPlaylist } from '@objects/Playlist';
-import usePlaylistAA from '@hooks/usePlaylistAA';
+import { getBiliFavlist, GETFAVLIST_RES } from "@utils/Bilibili/bilifavOperate";
+import GenericCheckDialog from "../dialogs/GenericCheckDialog";
+import bilifavlistFetch from "@utils/mediafetch/bilifavlist";
+import { dummyPlaylist } from "@objects/Playlist";
+import usePlaylistAA from "@hooks/usePlaylistAA";
 
 export default () => {
   const { t } = useTranslation();
@@ -56,11 +56,11 @@ export default () => {
       {loading ? (
         <ActivityIndicator size={100} />
       ) : (
-        <Button onPress={onClick}>{t('Login.SyncBiliFavlist')}</Button>
+        <Button onPress={onClick}>{t("Login.SyncBiliFavlist")}</Button>
       )}
       <GenericCheckDialog
         visible={visible}
-        title={t('Login.SyncBiliFavlist')}
+        title={t("Login.SyncBiliFavlist")}
         options={favLists}
         onSubmit={onSubmit}
         onClose={() => hideDialog()}

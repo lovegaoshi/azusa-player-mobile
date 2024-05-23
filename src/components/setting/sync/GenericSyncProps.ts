@@ -5,7 +5,7 @@ export interface ImportProps {
   noxRestore: () => Promise<any>;
   login: (
     callback: () => any,
-    errorHandling: (e: Error) => void
+    errorHandling: (e: Error) => void,
   ) => Promise<boolean>;
 }
 
@@ -13,7 +13,7 @@ export interface ExportProps {
   noxBackup: (content: Uint8Array) => Promise<any>;
   login: (
     callback: () => any,
-    errorHandling: (e: Error) => void
+    errorHandling: (e: Error) => void,
   ) => Promise<boolean>;
 }
 
@@ -23,7 +23,7 @@ export interface Props {
   noxBackup: (content: Uint8Array) => Promise<any>;
   login: (
     callback: () => any,
-    errorHandling: (e: Error) => void
+    errorHandling: (e: Error) => void,
   ) => Promise<boolean>;
 }
 

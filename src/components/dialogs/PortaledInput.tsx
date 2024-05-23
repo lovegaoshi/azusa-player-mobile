@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
-import { TextInput } from 'react-native-paper';
-import { useTranslation } from 'react-i18next';
-import { useNoxSetting } from '@stores/useApp';
+import React, { useState } from "react";
+import { TextInput } from "react-native-paper";
+import { useTranslation } from "react-i18next";
+import { useNoxSetting } from "@stores/useApp";
 
 interface InputProps {
   defaultName: string;
@@ -25,15 +25,15 @@ export default React.forwardRef(
       autofocus = true,
       selectTextOnFocus = true,
     }: InputProps,
-    ref
+    ref,
   ) => {
     const { t } = useTranslation();
     const [name, setName] = useState(defaultName);
-    const playerStyle = useNoxSetting(state => state.playerStyle);
+    const playerStyle = useNoxSetting((state) => state.playerStyle);
     React.useImperativeHandle(
       ref,
-      () => ({ clearText: () => setName(''), name }),
-      [name]
+      () => ({ clearText: () => setName(""), name }),
+      [name],
     );
 
     return (
@@ -48,5 +48,5 @@ export default React.forwardRef(
         textColor={playerStyle.colors.text}
       />
     );
-  }
+  },
 );

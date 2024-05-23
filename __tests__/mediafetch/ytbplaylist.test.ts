@@ -1,8 +1,8 @@
-import fetcher from '../../src/utils/mediafetch/ytbplaylist';
-test('ytbplaylist', async () => {
+import fetcher from "../../src/utils/mediafetch/ytbplaylist";
+test("ytbplaylist", async () => {
   const content = await fetcher.regexFetch({
     reExtracted: fetcher.regexSearchMatch.exec(
-      'https://www.youtube.com/watch?v=nyvehUgBc3g&list=PLbpi6ZahtOH7lIn0YG_BhuzoKxQeJWsxY'
+      "https://www.youtube.com/watch?v=nyvehUgBc3g&list=PLbpi6ZahtOH7lIn0YG_BhuzoKxQeJWsxY",
     )!,
   });
   // console.log(content);

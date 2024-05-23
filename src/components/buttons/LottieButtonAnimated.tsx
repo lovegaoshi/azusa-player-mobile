@@ -1,9 +1,9 @@
-import React, { useRef } from 'react';
-import { Pressable, Animated, Easing, ViewStyle } from 'react-native';
-import LottieView, { AnimationObject } from 'lottie-react-native';
+import React, { useRef } from "react";
+import { Pressable, Animated, Easing, ViewStyle } from "react-native";
+import LottieView, { AnimationObject } from "lottie-react-native";
 
-import { useNoxSetting } from '@stores/useApp';
-import ShadowedElement from './ShadowedElement';
+import { useNoxSetting } from "@stores/useApp";
+import ShadowedElement from "./ShadowedElement";
 
 interface Props {
   src: AnimationObject;
@@ -32,10 +32,10 @@ const LottieButtonAnimated = ({
   lottieStyle,
   accessibilityLabel,
 }: Props) => {
-  const playerStyle = useNoxSetting(state => state.playerStyle);
+  const playerStyle = useNoxSetting((state) => state.playerStyle);
   const managedClicked = useRef(clicked);
   const animationProgress = useRef(
-    new Animated.Value(clicked ? clickedLottieProgress : 0)
+    new Animated.Value(clicked ? clickedLottieProgress : 0),
   );
 
   React.useEffect(() => {
@@ -88,7 +88,7 @@ const LottieButtonAnimated = ({
             marginTop: 8,
             ...lottieStyle,
           }}
-          colorFilters={strokes.map(keypath => ({
+          colorFilters={strokes.map((keypath) => ({
             keypath,
             color: playerStyle.colors.primary,
           }))}

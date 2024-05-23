@@ -1,18 +1,18 @@
 export enum Source {
-  biliaudio = 'biliaudio',
-  bilivideo = 'bilivideo',
-  steriatk = 'steriatk',
-  ytbvideo = 'ytbvideo',
-  biliBangumi = 'biliBangumi',
-  biliLive = 'bililive',
-  local = 'local',
-  rawhttp = 'rawhttp',
+  biliaudio = "biliaudio",
+  bilivideo = "bilivideo",
+  steriatk = "steriatk",
+  ytbvideo = "ytbvideo",
+  biliBangumi = "biliBangumi",
+  biliLive = "bililive",
+  local = "local",
+  rawhttp = "rawhttp",
 }
 
 export enum BiliVolume {
-  None = 'none',
-  Linear = 'linear',
-  Dynamic = 'dynamic',
+  None = "none",
+  Linear = "linear",
+  Dynamic = "dynamic",
 }
 
 // https://github.com/SocialSisterYi/bilibili-API-collect/blob/master/docs/video/video_zone.md#%E8%A7%86%E9%A2%91%E5%88%86%E5%8C%BA%E4%B8%80%E8%A7%88

@@ -1,7 +1,7 @@
-import React from 'react';
-import { useActiveTrack } from 'react-native-track-player';
+import React from "react";
+import { useActiveTrack } from "react-native-track-player";
 
-import AlbumArt from '../player/TrackInfo/AlbumArt';
+import AlbumArt from "../player/TrackInfo/AlbumArt";
 
 interface Props {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any

@@ -1,8 +1,8 @@
-import * as React from 'react';
-import Svg, { Path } from 'react-native-svg';
-import { Image } from 'expo-image';
-import { StyleSheet } from 'react-native';
-import { SearchOptions } from '@enums/Storage';
+import * as React from "react";
+import Svg, { Path } from "react-native-svg";
+import { Image } from "expo-image";
+import { StyleSheet } from "react-native";
+import { SearchOptions } from "@enums/Storage";
 
 const Icons = {
   BILIBILI: () => (
@@ -23,7 +23,7 @@ const Icons = {
   ),
   MUSICFREE: () => (
     <Image
-      source={require('@assets/icons/musicfree.png')}
+      source={require("@assets/icons/musicfree.png")}
       style={style.musicFreeIcon}
     />
   ),

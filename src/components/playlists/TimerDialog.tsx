@@ -1,15 +1,15 @@
-import React from 'react';
-import { View, StyleSheet } from 'react-native';
+import React from "react";
+import { View, StyleSheet } from "react-native";
 import {
   IconButton,
   Dialog,
   Portal,
   TextInput,
   Text,
-} from 'react-native-paper';
-import { useTranslation } from 'react-i18next';
-import useTimer from './useTimerRN';
-import { useNoxSetting } from '@stores/useApp';
+} from "react-native-paper";
+import { useTranslation } from "react-i18next";
+import useTimer from "./useTimerRN";
+import { useNoxSetting } from "@stores/useApp";
 
 interface Props {
   visible: boolean;
@@ -19,7 +19,7 @@ interface Props {
 
 const TimerDialog = ({ visible, onClose = () => undefined }: Props) => {
   const { t } = useTranslation();
-  const playerStyle = useNoxSetting(state => state.playerStyle);
+  const playerStyle = useNoxSetting((state) => state.playerStyle);
   const {
     minutes,
     seconds,
@@ -38,7 +38,7 @@ const TimerDialog = ({ visible, onClose = () => undefined }: Props) => {
   return (
     <Dialog visible={visible} onDismiss={handleClose} style={styles.dialog}>
       <Dialog.Title style={styles.dialogTitle}>
-        {t('SleepTimer.Title')}
+        {t("SleepTimer.Title")}
       </Dialog.Title>
       <Dialog.Content>
         <View style={styles.inputContainer}>
@@ -46,7 +46,7 @@ const TimerDialog = ({ visible, onClose = () => undefined }: Props) => {
             keyboardType="numeric"
             style={styles.input}
             value={String(minutes)}
-            onChangeText={text => setMinutes(parseInt(text) || 0)}
+            onChangeText={(text) => setMinutes(parseInt(text) || 0)}
             disabled={startTimer}
             textAlign="right"
             selectionColor={playerStyle.customColors.textInputSelectionColor}
@@ -57,7 +57,7 @@ const TimerDialog = ({ visible, onClose = () => undefined }: Props) => {
             keyboardType="numeric"
             style={styles.input2}
             value={String(seconds)}
-            onChangeText={text => setSeconds(parseInt(text) || 0)}
+            onChangeText={(text) => setSeconds(parseInt(text) || 0)}
             disabled={startTimer}
             selectionColor={playerStyle.customColors.textInputSelectionColor}
             textColor={playerStyle.colors.text}
@@ -65,7 +65,7 @@ const TimerDialog = ({ visible, onClose = () => undefined }: Props) => {
         </View>
         <View style={styles.buttonsContainer}>
           <IconButton
-            icon={startTimer ? 'pause' : 'play'}
+            icon={startTimer ? "pause" : "play"}
             onPress={() => {
               startTimer ? timerPause() : timerStart();
             }}
@@ -86,29 +86,29 @@ export default (anyprops: Props) => (
 
 const styles = StyleSheet.create({
   dialog: {
-    width: '60%',
+    width: "60%",
   },
   dialogTitle: {
-    textAlign: 'center',
+    textAlign: "center",
   },
   inputContainer: {
-    flexDirection: 'row',
+    flexDirection: "row",
   },
   input: {
     fontSize: 25,
     flex: 1,
-    textAlign: 'right',
+    textAlign: "right",
     marginRight: -10,
   },
   input2: { fontSize: 25, flex: 1, marginLeft: -17 },
   separator: {
     fontSize: 25,
-    textAlign: 'center',
+    textAlign: "center",
     paddingTop: 8,
   },
   buttonsContainer: {
-    flexDirection: 'row',
-    justifyContent: 'center',
+    flexDirection: "row",
+    justifyContent: "center",
     height: 40,
   },
 });

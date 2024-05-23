@@ -1,17 +1,17 @@
-import React from 'react';
-import { useTranslation } from 'react-i18next';
-import { View, Text, StyleSheet } from 'react-native';
+import React from "react";
+import { useTranslation } from "react-i18next";
+import { View, Text, StyleSheet } from "react-native";
 import {
   IconButton,
   List,
   Switch,
   TouchableRipple,
   Checkbox,
-} from 'react-native-paper';
-import { v4 as uuidv4 } from 'uuid';
+} from "react-native-paper";
+import { v4 as uuidv4 } from "uuid";
 
-import { useNoxSetting } from '@stores/useApp';
-import { SettingEntry } from './SetttingEntries';
+import { useNoxSetting } from "@stores/useApp";
+import { SettingEntry } from "./SetttingEntries";
 
 /**
  * renders a generic clickable item.
@@ -28,16 +28,16 @@ export const SettingListItem = ({
   icon,
   settingName,
   onPress,
-  settingCategory = 'DeveloperSettings',
+  settingCategory = "DeveloperSettings",
   modifyDescription = (val: string) => val,
 }: SetttingListInterface) => {
   const { t } = useTranslation();
-  const playerStyle = useNoxSetting(state => state.playerStyle);
+  const playerStyle = useNoxSetting((state) => state.playerStyle);
 
   const getIcon = () => {
-    if (typeof icon === 'string') {
+    if (typeof icon === "string") {
       return <IconButton icon={icon} size={40} />;
-    } else if (typeof icon === 'function') {
+    } else if (typeof icon === "function") {
       return icon();
     } else {
       return <></>;
@@ -49,7 +49,7 @@ export const SettingListItem = ({
       left={getIcon}
       title={String(t(`${settingCategory}.${settingName}Name`))}
       description={modifyDescription(
-        t(`${settingCategory}.${settingName}Desc`)
+        t(`${settingCategory}.${settingName}Desc`),
       )}
       onPress={onPress}
       titleStyle={{ color: playerStyle.colors.primary }}
@@ -67,12 +67,12 @@ const BooleanSetting = ({
   callback,
 }: SettingEntry) => {
   const { t } = useTranslation();
-  const playerStyle = useNoxSetting(state => state.playerStyle);
-  const playerSetting = useNoxSetting(state => state.playerSetting);
-  const setPlayerSetting = useNoxSetting(state => state.setPlayerSetting);
+  const playerStyle = useNoxSetting((state) => state.playerStyle);
+  const playerSetting = useNoxSetting((state) => state.playerSetting);
+  const setPlayerSetting = useNoxSetting((state) => state.setPlayerSetting);
 
   const togglePlaylistReRender = useNoxSetting(
-    state => state.togglePlaylistShouldReRender
+    (state) => state.togglePlaylistShouldReRender,
   );
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -107,7 +107,7 @@ const BooleanSetting = ({
         <View style={styles.switchContainer}>
           {checkbox ? (
             <Checkbox
-              status={playerSetting[settingName] ? 'checked' : 'unchecked'}
+              status={playerSetting[settingName] ? "checked" : "unchecked"}
               onPress={onToggle}
             />
           ) : (
@@ -142,7 +142,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
   },
   settingContainer: {
-    flexDirection: 'row',
+    flexDirection: "row",
     paddingVertical: 10,
   },
   settingTextContainer: {
@@ -158,6 +158,6 @@ const styles = StyleSheet.create({
   switchContainer: {
     flex: 1,
     paddingTop: 10,
-    alignItems: 'flex-end',
+    alignItems: "flex-end",
   },
 });

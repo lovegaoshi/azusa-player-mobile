@@ -1,24 +1,24 @@
-import * as React from 'react';
-import { View, SafeAreaView, StyleSheet } from 'react-native';
-import { Text, Avatar, ActivityIndicator, Button } from 'react-native-paper';
-import { useTranslation } from 'react-i18next';
-import QRCode from 'react-native-qrcode-svg';
-import CookieManager from '@react-native-cookies/cookies';
+import * as React from "react";
+import { View, SafeAreaView, StyleSheet } from "react-native";
+import { Text, Avatar, ActivityIndicator, Button } from "react-native-paper";
+import { useTranslation } from "react-i18next";
+import QRCode from "react-native-qrcode-svg";
+import CookieManager from "@react-native-cookies/cookies";
 
-import { useNoxSetting } from '@stores/useApp';
-import { logger } from '@utils/Logger';
-import GenericInputDialog from '../dialogs/GenericInputDialog';
-import BiliSelectFavButtton from './BiliSelectFavButtton';
-import useBiliLogin from './useBiliLoginApp';
-import useSnack from '@stores/useSnack';
+import { useNoxSetting } from "@stores/useApp";
+import { logger } from "@utils/Logger";
+import GenericInputDialog from "../dialogs/GenericInputDialog";
+import BiliSelectFavButtton from "./BiliSelectFavButtton";
+import useBiliLogin from "./useBiliLoginApp";
+import useSnack from "@stores/useSnack";
 
-const domain = 'https://bilibili.com';
+const domain = "https://bilibili.com";
 
 export default () => {
   const { t } = useTranslation();
-  const playerStyle = useNoxSetting(state => state.playerStyle);
-  const appRefresh = useNoxSetting(state => state.appRefresh);
-  const setSnack = useSnack(state => state.setSnack);
+  const playerStyle = useNoxSetting((state) => state.playerStyle);
+  const appRefresh = useNoxSetting((state) => state.appRefresh);
+  const setSnack = useSnack((state) => state.setSnack);
   const [inputCookieVisible, setInputCookieVisible] = React.useState(false);
   const {
     qrcode,
@@ -38,14 +38,14 @@ export default () => {
     try {
       if (input.SESSDATA.length > 0 && input.bili_jct.length > 0) {
         await CookieManager.set(domain, {
-          name: 'SESSDATA',
+          name: "SESSDATA",
           value: input.SESSDATA,
         });
         await CookieManager.set(domain, {
-          name: 'bili_jct',
+          name: "bili_jct",
           value: input.bili_jct,
         });
-        logger.debug('[setCookie] manually input cookie;');
+        logger.debug("[setCookie] manually input cookie;");
         clearQRLogin();
         getBiliLoginStatus();
         // https://github.com/biliup/biliup-rs/issues/75
@@ -56,11 +56,11 @@ export default () => {
         input.refresh_token.length > 0
       ) {
         await CookieManager.set(domain, {
-          name: 'access_key',
+          name: "access_key",
           value: input.access_token,
         });
         await CookieManager.set(domain, {
-          name: 'refresh_token',
+          name: "refresh_token",
           value: input.refresh_token,
         });
         loginQRVerification().then(() => getBiliLoginStatus());
@@ -83,9 +83,9 @@ export default () => {
 
       setSnack({
         snackMsg: {
-          processing: t('Login.BilibiliLoginQRGeneration'),
-          success: t('Login.BilibiliLoginQRGenerated'),
-          fail: t('Login.BilibiliLoginQRGenerateFailed'),
+          processing: t("Login.BilibiliLoginQRGeneration"),
+          success: t("Login.BilibiliLoginQRGenerated"),
+          fail: t("Login.BilibiliLoginQRGenerateFailed"),
         },
         processFunction,
       });
@@ -94,20 +94,20 @@ export default () => {
     return (
       <View style={styles.textContainerStyle}>
         <Text style={styles.notLoginTextStyle}>
-          {t('Login.BilibiliNotLoggedIn')}
+          {t("Login.BilibiliNotLoggedIn")}
         </Text>
         <Button mode="contained-tonal" onPress={generateBiliQRCode}>
-          {t('Login.BilibiliLoginButton')}
+          {t("Login.BilibiliLoginButton")}
         </Button>
         <View style={styles.inputButtonContainerStyle} />
         <Button
           mode="contained-tonal"
           onPress={() => setInputCookieVisible(true)}
         >
-          {t('Login.BilibiliCookieInputButton')}
+          {t("Login.BilibiliCookieInputButton")}
         </Button>
-        <Text>{t('Login.Disclaimer')}</Text>
-        {qrcode !== '' && (
+        <Text>{t("Login.Disclaimer")}</Text>
+        {qrcode !== "" && (
           <View style={styles.qrCodeContainerStyle}>
             <QRCode value={qrcode} size={300} />
           </View>
@@ -128,11 +128,11 @@ export default () => {
           <Avatar.Image source={{ uri: loginInfo.avatar }}></Avatar.Image>
           <View style={styles.avatarUsernameStyle}>
             <Text variant="headlineSmall">{loginInfo.name}</Text>
-            <Button onPress={logout}>{t('Login.Logout')}</Button>
+            <Button onPress={logout}>{t("Login.Logout")}</Button>
           </View>
         </View>
         <BiliSelectFavButtton />
-        <Text>{t('Login.Disclaimer')}</Text>
+        <Text>{t("Login.Disclaimer")}</Text>
       </View>
     );
   };
@@ -157,9 +157,9 @@ export default () => {
         loginPage()
       )}
       <GenericInputDialog
-        options={['SESSDATA', 'bili_jct', 'access_token', 'refresh_token']}
+        options={["SESSDATA", "bili_jct", "access_token", "refresh_token"]}
         visible={inputCookieVisible}
-        title={String(t('Login.BilibiliCookieInputDialogTitle'))}
+        title={String(t("Login.BilibiliCookieInputDialogTitle"))}
         onClose={() => setInputCookieVisible(false)}
         onSubmit={manualInputCookies}
       ></GenericInputDialog>
@@ -170,11 +170,11 @@ export default () => {
 const styles = StyleSheet.create({
   notLoginTextStyle: {
     paddingVertical: 20,
-    textAlign: 'center',
+    textAlign: "center",
   },
   textContainerStyle: {
-    alignContent: 'center',
-    alignItems: 'center',
+    alignContent: "center",
+    alignItems: "center",
   },
   inputButtonContainerStyle: {
     paddingVertical: 10,
@@ -182,13 +182,13 @@ const styles = StyleSheet.create({
   qrCodeContainerStyle: {
     paddingHorizontal: 20,
     paddingVertical: 20,
-    backgroundColor: 'white',
+    backgroundColor: "white",
   },
   loggedInContainerStyle: {
     paddingHorizontal: 5,
   },
   avatarContainerStyle: {
-    flexDirection: 'row',
+    flexDirection: "row",
     paddingLeft: 20,
     paddingVertical: 10,
   },

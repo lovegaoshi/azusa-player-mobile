@@ -1,11 +1,11 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { StyleSheet } from 'react-native';
-import NoxTheme from './styles/NoxTheme';
-import AzusaTheme from './styles/AzusaTheme';
-import { randomChoice } from '../utils/Utils';
+import { StyleSheet } from "react-native";
+import NoxTheme from "./styles/NoxTheme";
+import AzusaTheme from "./styles/AzusaTheme";
+import { randomChoice } from "../utils/Utils";
 
 export const createStyle = (
-  customStyle: NoxTheme.Style | NoxTheme.AdaptiveStyle = AzusaTheme
+  customStyle: NoxTheme.Style | NoxTheme.AdaptiveStyle = AzusaTheme,
 ) => {
   const refTheme = customStyle.metaData.darkTheme ? NoxTheme : AzusaTheme;
   return StyleSheet.create({
@@ -28,39 +28,39 @@ export const createStyle = (
 
     screenContainer: {
       flex: 1,
-      alignItems: 'center',
-      justifyContent: 'center',
+      alignItems: "center",
+      justifyContent: "center",
     },
     contentContainer: {
       flex: 6,
-      alignItems: 'center',
+      alignItems: "center",
     },
     playerTopBarContainer: {
-      width: '100%',
-      flexDirection: 'row',
+      width: "100%",
+      flexDirection: "row",
       // paddingHorizontal: 20,
-      justifyContent: 'flex-end',
+      justifyContent: "flex-end",
       top: 7,
     },
     topBarContainer: {
-      width: '100%',
-      flexDirection: 'row',
+      width: "100%",
+      flexDirection: "row",
       // paddingHorizontal: 20,
       paddingLeft: 10,
       paddingRight: 5,
-      justifyContent: 'flex-end',
+      justifyContent: "flex-end",
       top: 4,
     },
     actionRowContainer: {
-      flexDirection: 'column',
-      width: '100%',
-      alignItems: 'center',
+      flexDirection: "column",
+      width: "100%",
+      alignItems: "center",
       height: 148,
     },
     gifs: (customStyle.gifs || []) as any,
     bkgrdImg: randomChoice(customStyle.backgroundImages || []) as any,
     bkgrdImgLandscape: randomChoice(
-      customStyle.backgroundImagesLandscape || []
+      customStyle.backgroundImagesLandscape || [],
     ) as any,
     loadingIcon: customStyle.loadingIcon as any,
     progressThumbImage: customStyle.progressThumbImage as any,
@@ -116,8 +116,8 @@ export const replaceStyleColor = ({
         gifs: [],
         backgroundImages: [],
         backgroundImagesLandscape: [],
-        bkgrdImg: '',
-        bkgrdImgLandscape: '',
+        bkgrdImg: "",
+        bkgrdImgLandscape: "",
       }
     : replacedStyle;
 };
@@ -126,26 +126,26 @@ export const styles = StyleSheet.create({
   flex: { flex: 1 },
   screenContainer: {
     flex: 1,
-    backgroundColor: 'white',
-    alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: "white",
+    alignItems: "center",
+    justifyContent: "center",
   },
   contentContainer: {
     flex: 6,
-    alignItems: 'center',
+    alignItems: "center",
   },
   topBarContainer: {
-    width: '100%',
-    flexDirection: 'row',
+    width: "100%",
+    flexDirection: "row",
     // paddingHorizontal: 20,
-    justifyContent: 'flex-end',
+    justifyContent: "flex-end",
     top: 4,
   },
   actionRowContainer: {
-    flexDirection: 'column',
-    width: '100%',
-    alignItems: 'center',
+    flexDirection: "column",
+    width: "100%",
+    alignItems: "center",
     height: 148,
   },
-  rowView: { flexDirection: 'row' },
+  rowView: { flexDirection: "row" },
 });

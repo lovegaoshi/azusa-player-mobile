@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import Bottleneck from 'bottleneck';
-import bfetch from '@utils/BiliFetch';
-import { wbiQuery } from '@stores/wbi';
+import Bottleneck from "bottleneck";
+import bfetch from "@utils/BiliFetch";
+import { wbiQuery } from "@stores/wbi";
 
 /**
  * the purpose of this media fetch library is to
@@ -30,7 +30,7 @@ interface FetcherProps {
   getItems: (val: any) => any[];
   resolveBiliBVID: (
     bvobjs: any,
-    progressEmitter: ProgressEmitter
+    progressEmitter: ProgressEmitter,
   ) => Promise<NoxMedia.Song[]>;
   progressEmitter?: ProgressEmitter;
   favList?: any[];
@@ -57,17 +57,17 @@ export const fetchPaginatedAPI = async ({
   favList = [],
   limiter = pageAPILimiter,
   params = undefined,
-  jsonify = res => res.json(),
+  jsonify = (res) => res.json(),
   getBVID = (val: any) => val.bvid,
   getJSONData = (json: any) => json.data,
 }: FetcherProps) => {
-  const wbiAwareFetch = url.includes('/wbi/') ? wbiQuery : bfetch;
-  const res = await wbiAwareFetch(url.replace('{pn}', String(1)), params);
+  const wbiAwareFetch = url.includes("/wbi/") ? wbiQuery : bfetch;
+  const res = await wbiAwareFetch(url.replace("{pn}", String(1)), params);
   const data = getJSONData(await jsonify(res.clone()));
   const mediaCount = getMediaCount(data);
   const BVids: string[] = [];
   const pagesPromises: Promise<Response>[] = [
-    new Promise(resolve => resolve(res)),
+    new Promise((resolve) => resolve(res)),
   ];
   for (
     let page = 2, n = Math.ceil(mediaCount / getPageSize(data));
@@ -76,27 +76,27 @@ export const fetchPaginatedAPI = async ({
   ) {
     pagesPromises.push(
       limiter.schedule(() =>
-        wbiAwareFetch(url.replace('{pn}', String(page)), params)
-      )
+        wbiAwareFetch(url.replace("{pn}", String(page)), params),
+      ),
     );
   }
   const resolvedPromises = await Promise.all(pagesPromises);
   await Promise.all(
-    resolvedPromises.map(async pages => {
+    resolvedPromises.map(async (pages) => {
       return jsonify(pages)
         .then((parsedJson: any) => {
-          getItems(parsedJson).forEach(m => {
+          getItems(parsedJson).forEach((m) => {
             if (!favList.includes(getBVID(m))) BVids.push(m);
           });
         })
         .catch((err: any) => {
           console.error(err, pages);
         });
-    })
+    }),
   );
   // i dont know the smart way to do this out of the async loop, though luckily that O(2n) isnt that big of a deal
   return (await resolveBiliBVID(BVids, progressEmitter)).filter(
-    item => item !== undefined
+    (item) => item !== undefined,
   );
 };
 
@@ -115,11 +115,11 @@ export const fetchAwaitPaginatedAPI = async ({
   favList = [],
   limiter = pageAPILimiter,
   params = undefined,
-  jsonify = res => res.json(),
+  jsonify = (res) => res.json(),
   getBVID = (val: any) => val.bvid,
   getJSONData = (json: any) => json.data,
 }: FetcherProps) => {
-  const res = await bfetch(url.replace('{pn}', String(1)), params);
+  const res = await bfetch(url.replace("{pn}", String(1)), params);
   const data = getJSONData(await jsonify(res));
   const mediaCount = getMediaCount(data);
   const BVids: string[] = [];
@@ -131,7 +131,7 @@ export const fetchAwaitPaginatedAPI = async ({
     ) {
       try {
         const pageRes = (await limiter.schedule(() =>
-          bfetch(url.replace('{pn}', String(page)), params)
+          bfetch(url.replace("{pn}", String(page)), params),
         )) as Response;
         const parsedJson = await jsonify(pageRes);
         for (const m of getItems(parsedJson)) {
@@ -141,13 +141,13 @@ export const fetchAwaitPaginatedAPI = async ({
           BVids.push(m);
         }
       } catch (e) {
-        console.error('resolving page in fetchAwaitedPaginatedAPI', e);
+        console.error("resolving page in fetchAwaitedPaginatedAPI", e);
       }
     }
   };
   await resolvePage();
   // i dont know the smart way to do this out of the async loop, though luckily that O(2n) isnt that big of a deal
   return (await resolveBiliBVID(BVids, progressEmitter)).filter(
-    item => item !== undefined
+    (item) => item !== undefined,
   );
 };

@@ -1,4 +1,4 @@
-import i18n from 'i18next';
+import i18n from "i18next";
 
 interface SongOccurenceDict {
   [name: string]: number;
@@ -48,7 +48,7 @@ const playlistAnalysis = (favList: { songList: NoxMedia.Song[] }) => {
     }
   }
   results.songsSorted = Object.entries(results.songOccurrence).sort(
-    (a, b) => -(a[1] - b[1])
+    (a, b) => -(a[1] - b[1]),
   );
   results.songTop10 = results.songsSorted.slice(0, 10);
   return results;
@@ -58,30 +58,30 @@ const playlistAnalysis = (favList: { songList: NoxMedia.Song[] }) => {
 export default (playlist: NoxMedia.Playlist, topX = 5) => {
   const analytics = playlistAnalysis(playlist);
   return {
-    title: i18n.t('PlaylistAnalytics.title', { val: playlist.title }),
+    title: i18n.t("PlaylistAnalytics.title", { val: playlist.title }),
     content: [
-      i18n.t('PlaylistAnalytics.uniqCount', {
+      i18n.t("PlaylistAnalytics.uniqCount", {
         val: analytics.songsUnique.size,
       }),
-      i18n.t('PlaylistAnalytics.topX', {
+      i18n.t("PlaylistAnalytics.topX", {
         val: analytics.songTop10
           .slice(0, topX)
-          .map(val => `${val[0]} (${String(val[1])})`)
-          .join(', '),
+          .map((val) => `${val[0]} (${String(val[1])})`)
+          .join(", "),
       }),
-      i18n.t('PlaylistAnalytics.new', {
+      i18n.t("PlaylistAnalytics.new", {
         val: Array.from(analytics.songsUnique)
           .slice(topX * -1)
           .reverse()
-          .join(', '),
+          .join(", "),
       }),
-      i18n.t('PlaylistAnalytics.avg', {
+      i18n.t("PlaylistAnalytics.avg", {
         val1: String(analytics.bvid.size),
         val2: (analytics.totalCount / analytics.bvid.size).toFixed(1),
       }),
-      i18n.t('PlaylistAnalytics.shazamFailed', {
+      i18n.t("PlaylistAnalytics.shazamFailed", {
         val1: `${String(analytics.invalidShazamCount)}/${String(
-          analytics.totalCount
+          analytics.totalCount,
         )}`,
         val2: (
           (analytics.invalidShazamCount * 100) /

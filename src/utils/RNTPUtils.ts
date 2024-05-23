@@ -1,31 +1,31 @@
-import { Animated, Platform, AppState } from 'react-native';
+import { Animated, Platform, AppState } from "react-native";
 import TrackPlayer, {
   AppKilledPlaybackBehavior,
   Capability,
   UpdateOptions,
   Track,
-} from 'react-native-track-player';
+} from "react-native-track-player";
 
-import { logger } from './Logger';
+import { logger } from "./Logger";
 import appStore, {
   addDownloadPromise,
   resetResolvedURL,
-} from '@stores/appStore';
-import { getR128GainAsync } from './ffmpeg/r128RN';
+} from "@stores/appStore";
+import { getR128GainAsync } from "./ffmpeg/r128RN";
 import {
   cycleThroughPlaymode as cyclePlaymode,
   getPlaybackModeNotifIcon,
-} from '@stores/playingList';
-import { i0hdslbHTTPResolve } from '@utils/Utils';
-import { resolveUrl, parseSongR128gain } from '@utils/SongOperations';
-import NoxCache from './Cache';
-import { setTPR128Gain } from './ffmpeg/ffmpeg';
+} from "@stores/playingList";
+import { i0hdslbHTTPResolve } from "@utils/Utils";
+import { resolveUrl, parseSongR128gain } from "@utils/SongOperations";
+import NoxCache from "./Cache";
+import { setTPR128Gain } from "./ffmpeg/ffmpeg";
 
 const { getState, setState } = appStore;
 const animatedVolume = new Animated.Value(1);
-const NULL_TRACK = { url: 'NULL', urlRefreshTimeStamp: 0 };
+const NULL_TRACK = { url: "NULL", urlRefreshTimeStamp: 0 };
 
-animatedVolume.addListener(state => TrackPlayer.setVolume(state.value));
+animatedVolume.addListener((state) => TrackPlayer.setVolume(state.value));
 
 interface animatedVolumeChangeProps {
   val: number;
@@ -45,9 +45,9 @@ export const animatedVolumeChange = ({
   callback = () => undefined,
 }: animatedVolumeChangeProps) => {
   logger.debug(
-    `[FADING] animating volume from ${init} to ${val} in ${duration}; ${AppState.currentState}`
+    `[FADING] animating volume from ${init} to ${val} in ${duration}; ${AppState.currentState}`,
   );
-  if (AppState.currentState !== 'active') {
+  if (AppState.currentState !== "active") {
     // need to figure out a way to run Animated.timing in background. probably needs our own module
     duration = 0;
   }
@@ -108,13 +108,13 @@ export const initRNTPOptions = ({ keepForeground = false }: RNTPOptions) => {
     ],
     progressUpdateEventInterval: 1,
   };
-  if (Platform.OS === 'android') {
+  if (Platform.OS === "android") {
     options.capabilities = options.capabilities!.concat([
       Capability.JumpBackward,
       Capability.JumpForward,
     ]);
     options.notificationCapabilities = options.notificationCapabilities!.concat(
-      [Capability.JumpBackward, Capability.JumpForward]
+      [Capability.JumpBackward, Capability.JumpForward],
     );
     options.forwardJumpInterval = 1;
     options.backwardJumpInterval = 1;
@@ -141,7 +141,7 @@ export const fadePlay = async () => {
 
 export const cycleThroughPlaymode = () => {
   const rewindIcon = cyclePlaymode();
-  if (Platform.OS === 'android') {
+  if (Platform.OS === "android") {
     const newRNTPOptions = {
       ...getState().RNTPOptions,
       rewindIcon,
@@ -161,11 +161,11 @@ export const resolveAndCache = async (song: NoxMedia.Song, dry = false) => {
     downloadPromiseMap[song.id] ||
     addDownloadPromise(
       song,
-      NoxCache.noxMediaCache?.saveCacheMedia(song, resolvedUrl)
+      NoxCache.noxMediaCache?.saveCacheMedia(song, resolvedUrl),
     );
   previousDownloadProgress.then(() => {
     logger.debug(
-      `[cache] ${song.parsedName} completed. now clearing cache and set R128gain...`
+      `[cache] ${song.parsedName} completed. now clearing cache and set R128gain...`,
     );
     parseSongR128gain(song, fadeIntervalMs);
     resetResolvedURL(song);
@@ -173,10 +173,10 @@ export const resolveAndCache = async (song: NoxMedia.Song, dry = false) => {
   return resolvedUrl;
 };
 export const songlistToTracklist = async (
-  songList: NoxMedia.Song[]
+  songList: NoxMedia.Song[],
 ): Promise<Track[]> => {
   return Promise.all(
-    songList.map(async song => {
+    songList.map(async (song) => {
       const resolvedUrl = await resolveAndCache(song);
       return {
         ...NULL_TRACK,
@@ -190,7 +190,7 @@ export const songlistToTracklist = async (
         // TODO: add a throttler here
         ...resolvedUrl,
       };
-    })
+    }),
   );
 };
 

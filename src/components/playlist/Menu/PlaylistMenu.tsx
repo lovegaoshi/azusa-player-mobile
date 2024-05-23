@@ -1,25 +1,25 @@
-import * as React from 'react';
-import { Menu } from 'react-native-paper';
-import { useTranslation } from 'react-i18next';
+import * as React from "react";
+import { Menu } from "react-native-paper";
+import { useTranslation } from "react-i18next";
 
-import usePlaylist from './usePlaylistMenu';
-import PlaylistSettingsButton from './PlaylistSettingsButton';
-import { PlaylistTypes } from '@enums/Playlist';
-import { CopiedPlaylistMenuItem } from '@components/buttons/CopiedPlaylistButton';
-import PlaylistSortButton from './PlaylistSortButton';
-import keepAwake from '@utils/keepAwake';
+import usePlaylist from "./usePlaylistMenu";
+import PlaylistSettingsButton from "./PlaylistSettingsButton";
+import { PlaylistTypes } from "@enums/Playlist";
+import { CopiedPlaylistMenuItem } from "@components/buttons/CopiedPlaylistButton";
+import PlaylistSortButton from "./PlaylistSortButton";
+import keepAwake from "@utils/keepAwake";
 
 enum Icons {
-  SETTINGS = 'cog',
-  BILISHAZAM = 'magnify-plus',
-  REMOVE_BILISHAZAM = 'magnify-close',
-  ANALYTICS = 'google-analytics',
-  REMOVE_BROKEN = 'link-variant-remove',
-  RELOAD_BVIDS = 'reload',
-  CLEAR = 'notification-clear-all',
-  REMOVE = 'trash-can',
-  BILISYNC = 'sync',
-  SORT = 'sort',
+  SETTINGS = "cog",
+  BILISHAZAM = "magnify-plus",
+  REMOVE_BILISHAZAM = "magnify-close",
+  ANALYTICS = "google-analytics",
+  REMOVE_BROKEN = "link-variant-remove",
+  RELOAD_BVIDS = "reload",
+  CLEAR = "notification-clear-all",
+  REMOVE = "trash-can",
+  BILISYNC = "sync",
+  SORT = "sort",
 }
 
 interface Props {
@@ -71,40 +71,40 @@ export default ({
       <Menu.Item
         leadingIcon={Icons.BILISYNC}
         onPress={() => keepAwake(playlistSync2Bilibili)}
-        title={t('PlaylistOperations.bilisyncTitle')}
+        title={t("PlaylistOperations.bilisyncTitle")}
       />
       <Menu.Item
         leadingIcon={Icons.BILISHAZAM}
         onPress={() => keepAwake(playlistBiliShazam)}
-        title={t('PlaylistOperations.bilishazamTitle')}
+        title={t("PlaylistOperations.bilishazamTitle")}
       />
       <Menu.Item
         leadingIcon={Icons.ANALYTICS}
         onPress={() => playlistAnalyze()}
-        title={t('PlaylistOperations.analyticsTitle')}
+        title={t("PlaylistOperations.analyticsTitle")}
       />
       <Menu.Item
         leadingIcon={Icons.REMOVE_BROKEN}
         onPress={() => playlistCleanup()}
-        title={t('PlaylistOperations.removeBrokenTitle')}
+        title={t("PlaylistOperations.removeBrokenTitle")}
         disabled={limitedPlaylistFeatures}
       />
       <Menu.Item
         leadingIcon={Icons.RELOAD_BVIDS}
         onPress={() => confirmOnPlaylistReload()}
-        title={t('PlaylistOperations.reloadBVIDTitle')}
+        title={t("PlaylistOperations.reloadBVIDTitle")}
         disabled={limitedPlaylistFeatures}
       />
       <Menu.Item
         leadingIcon={Icons.CLEAR}
         onPress={() => confirmOnPlaylistClear()}
-        title={t('PlaylistOperations.clearPlaylistTitle')}
+        title={t("PlaylistOperations.clearPlaylistTitle")}
         disabled={limitedPlaylistFeatures}
       />
       <Menu.Item
         leadingIcon={Icons.REMOVE}
         onPress={() => confirmOnPlaylistDelete()}
-        title={t('PlaylistOperations.removePlaylistTitle')}
+        title={t("PlaylistOperations.removePlaylistTitle")}
         disabled={limitedPlaylistFeatures}
       />
     </Menu>

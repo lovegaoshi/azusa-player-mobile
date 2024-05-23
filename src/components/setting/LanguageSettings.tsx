@@ -1,27 +1,27 @@
-import * as React from 'react';
-import { View } from 'react-native';
-import { useTranslation } from 'react-i18next';
+import * as React from "react";
+import { View } from "react-native";
+import { useTranslation } from "react-i18next";
 
-import GenericSelectDialog from '../dialogs/GenericSelectDialog';
-import { SettingListItem } from './useRenderSetting';
-import { useNoxSetting } from '@stores/useApp';
+import GenericSelectDialog from "../dialogs/GenericSelectDialog";
+import { SettingListItem } from "./useRenderSetting";
+import { useNoxSetting } from "@stores/useApp";
 
 interface Props {
   icon: string;
 }
 
-const availableLanguages = ['zh_CN_#Hans', 'en'];
+const availableLanguages = ["zh_CN_#Hans", "en"];
 
 const availableLanguagesMap: { [key: string]: string } = {
-  'zh_CN_#Hans': '简体中文',
-  en: 'English',
+  "zh_CN_#Hans": "简体中文",
+  en: "English",
 };
 
 export default ({ icon }: Props) => {
   const { t, i18n } = useTranslation();
   const [visible, setVisible] = React.useState(false);
-  const language = useNoxSetting(state => state.playerSetting).language;
-  const setPlayerSetting = useNoxSetting(state => state.setPlayerSetting);
+  const language = useNoxSetting((state) => state.playerSetting).language;
+  const setPlayerSetting = useNoxSetting((state) => state.setPlayerSetting);
 
   const onSubmit = (val: number) => {
     setVisible(false);
@@ -40,11 +40,11 @@ export default ({ icon }: Props) => {
       <GenericSelectDialog
         visible={visible}
         options={availableLanguages}
-        title={String(t('Settings.LanguageOptionsTitle'))}
+        title={String(t("Settings.LanguageOptionsTitle"))}
         renderOptionTitle={(val: string) => availableLanguagesMap[val]}
         onClose={() => setVisible(false)}
         onSubmit={onSubmit}
-        defaultIndex={availableLanguages.indexOf(language || 'en')}
+        defaultIndex={availableLanguages.indexOf(language || "en")}
       ></GenericSelectDialog>
     </View>
   );

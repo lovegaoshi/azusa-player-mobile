@@ -1,9 +1,9 @@
-import React, { useState, useRef, useCallback, useEffect } from 'react';
+import React, { useState, useRef, useCallback, useEffect } from "react";
 
-import { reParseSearch } from '../utils/re';
-import { useNoxSetting } from '../stores/useApp';
-import usePlaylistCRUD from './usePlaylistCRUD';
-import { SortOptions } from '@enums/Playlist';
+import { reParseSearch } from "../utils/re";
+import { useNoxSetting } from "../stores/useApp";
+import usePlaylistCRUD from "./usePlaylistCRUD";
+import { SortOptions } from "@enums/Playlist";
 
 export interface UsePlaylist {
   playlist: NoxMedia.Playlist;
@@ -23,7 +23,7 @@ export interface UsePlaylist {
   performSearch: (searchedVal: string) => void;
   handleSearch: (searchedVal: string) => void;
   rssUpdate: (
-    subscribeUrls?: string[]
+    subscribeUrls?: string[],
   ) => Promise<NoxMedia.Playlist | undefined>;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   searchBarRef: React.MutableRefObject<any>;
@@ -33,7 +33,7 @@ export interface UsePlaylist {
   playSong: (
     song: NoxMedia.Song,
     callback: (p: NoxMedia.Playlist, s: NoxMedia.Song) => void,
-    isPlayingCallback: (p: NoxMedia.Playlist) => void
+    isPlayingCallback: (p: NoxMedia.Playlist) => void,
   ) => void;
   resetSelected: () => void;
   toggleSelected: (index: number) => void;
@@ -44,7 +44,7 @@ export interface UsePlaylist {
   sortPlaylist: (
     sort?: SortOptions,
     ascend?: boolean,
-    playlist?: NoxMedia.Playlist
+    playlist?: NoxMedia.Playlist,
   ) => void;
 }
 
@@ -57,21 +57,23 @@ const usePlaylist = (playlist: NoxMedia.Playlist): UsePlaylist => {
   const [selected, setSelected] = useState<boolean[]>([]);
   const [checking, setChecking] = useState(false);
   const [searching, setSearching] = useState(false);
-  const [searchText, setSearchText] = useState('');
+  const [searchText, setSearchText] = useState("");
   const [shouldReRender, setShouldReRender] = useState(false);
-  const playerSetting = useNoxSetting(state => state.playerSetting);
-  const currentPlayingList = useNoxSetting(state => state.currentPlayingList);
-  const currentPlayingId = useNoxSetting(state => state.currentPlayingId);
-  const setCurrentPlayingId = useNoxSetting(state => state.setCurrentPlayingId);
+  const playerSetting = useNoxSetting((state) => state.playerSetting);
+  const currentPlayingList = useNoxSetting((state) => state.currentPlayingList);
+  const currentPlayingId = useNoxSetting((state) => state.currentPlayingId);
+  const setCurrentPlayingId = useNoxSetting(
+    (state) => state.setCurrentPlayingId,
+  );
   const togglePlaylistInfoUpdate = useNoxSetting(
-    state => state.togglePlaylistInfoUpdate
+    (state) => state.togglePlaylistInfoUpdate,
   );
   const playlistCRUD = usePlaylistCRUD(playlist);
   const searchBarRef = useRef();
 
   const handleSearch = (searchedVal: string) => {
     setSearchText(searchedVal);
-    if (searchedVal === '') {
+    if (searchedVal === "") {
       setRows(playlist.songList);
       return;
     }
@@ -111,13 +113,13 @@ const usePlaylist = (playlist: NoxMedia.Playlist): UsePlaylist => {
   const getSongIndex = (item: NoxMedia.Song, index: number) => {
     return rows === playlist.songList
       ? index
-      : playlist.songList.findIndex(row => row.id === item.id);
+      : playlist.songList.findIndex((row) => row.id === item.id);
   };
 
   const playSong = (
     song: NoxMedia.Song,
     callback: (p: NoxMedia.Playlist, s: NoxMedia.Song) => void,
-    isPlayingCallback: (p: NoxMedia.Playlist) => void = () => undefined
+    isPlayingCallback: (p: NoxMedia.Playlist) => void = () => undefined,
   ) => {
     if (song.id === currentPlayingId && playlist.id === currentPlayingList.id)
       return isPlayingCallback(currentPlayingList);
@@ -148,8 +150,8 @@ const usePlaylist = (playlist: NoxMedia.Playlist): UsePlaylist => {
         Array(playlist.songList.length)
           .fill(false)
           .map((val, index) =>
-            selectedIndices.includes(index) ? checked : val
-          )
+            selectedIndices.includes(index) ? checked : val,
+          ),
       );
     };
 
@@ -159,10 +161,10 @@ const usePlaylist = (playlist: NoxMedia.Playlist): UsePlaylist => {
     } else {
       // TODO: there has to be a more elegant way
       // but alas it works!
-      const selectedIndices = rows.map(val => playlist.songList.indexOf(val));
+      const selectedIndices = rows.map((val) => playlist.songList.indexOf(val));
       mapCheckedIndices(selectedIndices, !selected[selectedIndices[0]]);
     }
-    setShouldReRender(val => !val);
+    setShouldReRender((val) => !val);
   };
 
   const searchAndEnableSearch = (val: string) => {
@@ -190,9 +192,9 @@ const usePlaylist = (playlist: NoxMedia.Playlist): UsePlaylist => {
             return index;
           }
         })
-        .filter(val => val !== undefined);
+        .filter((val) => val !== undefined);
       if (result.length > 0) {
-        return result.map(index => playlist.songList[index!]);
+        return result.map((index) => playlist.songList[index!]);
       }
     }
   };

@@ -1,9 +1,9 @@
-import fetcher from '../../src/utils/mediafetch/biliAudioSimilar';
+import fetcher from "../../src/utils/mediafetch/biliAudioSimilar";
 
-test('biliAudioSimilar', async () => {
+test("biliAudioSimilar", async () => {
   const content = await fetcher.regexFetch({
     reExtracted: fetcher.regexSearchMatch.exec(
-      'https://www.bilibili.com/audio/similarsongs/3680653'
+      "https://www.bilibili.com/audio/similarsongs/3680653",
     )!,
   });
   // console.log(content);

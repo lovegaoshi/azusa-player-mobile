@@ -1,41 +1,41 @@
-import { ArgumentParser } from 'argparse';
-import axios from 'axios';
-import fs from 'fs';
-import SteriaTheme from './SteriaTheme.js';
-import SteriaThemeDark from './SteriaThemeDark.js';
+import { ArgumentParser } from "argparse";
+import axios from "axios";
+import fs from "fs";
+import SteriaTheme from "./SteriaTheme.js";
+import SteriaThemeDark from "./SteriaThemeDark.js";
 
 const parser = new ArgumentParser({
-  description: 'Argparse example',
+  description: "Argparse example",
 });
 
-parser.add_argument('--garbid', { help: 'baz bar' });
-parser.add_argument('--lighttheme', { help: 'baz bar' });
+parser.add_argument("--garbid", { help: "baz bar" });
+parser.add_argument("--lighttheme", { help: "baz bar" });
 
 console.dir(parser.parse_args());
 
 const args = parser.parse_args();
 
 if (args.garbid === undefined) {
-  throw Error('garbid is not defined.');
+  throw Error("garbid is not defined.");
 }
 
 const steriaGarb = JSON.parse(
-  fs.readFileSync('./src/components/styles/steriaGarb.json', 'utf8')
+  fs.readFileSync("./src/components/styles/steriaGarb.json", "utf8"),
 );
 
 const req = await axios.get(
-  `https://api.bilibili.com/x/garb/v2/mall/suit/detail?from=&from_id=&item_id=${args.garbid}`
+  `https://api.bilibili.com/x/garb/v2/mall/suit/detail?from=&from_id=&item_id=${args.garbid}`,
 );
 const garbdata = req.data.data;
 const parsedGarbData = {
   themeName: garbdata.name,
   themeDesc: garbdata.properties.fan_recommend_desc,
   gifs: garbdata.suit_items.emoji_package[0].items.map(
-    val => val.properties.image
+    (val) => val.properties.image,
   ),
   portraits: Object.keys(garbdata.suit_items.space_bg[0].properties)
-    .filter(val => val.includes('_portrait'))
-    .map(val => garbdata.suit_items.space_bg[0].properties[val]),
+    .filter((val) => val.includes("_portrait"))
+    .map((val) => garbdata.suit_items.space_bg[0].properties[val]),
   loadingIcon: garbdata.suit_items.loading
     ? garbdata.suit_items.loading[0]?.properties?.loading_url
     : undefined,
@@ -48,14 +48,14 @@ const convertedGarbData = args.lighttheme ? SteriaTheme : SteriaThemeDark;
 
 convertedGarbData.metaData.themeName = parsedGarbData.themeName;
 convertedGarbData.metaData.themeDesc = parsedGarbData.themeDesc;
-convertedGarbData.metaData.themeAuthor = 'NoxAutoGen';
+convertedGarbData.metaData.themeAuthor = "NoxAutoGen";
 convertedGarbData.metaData.themeIcon = parsedGarbData.themeIcon;
 convertedGarbData.gifs = parsedGarbData.gifs;
 convertedGarbData.backgroundImages = parsedGarbData.headmp4
   ? [
       ...parsedGarbData.portraits,
       {
-        type: 'biliGarbHeadVideo',
+        type: "biliGarbHeadVideo",
         identifier: args.garbid,
       },
     ]
@@ -63,7 +63,7 @@ convertedGarbData.backgroundImages = parsedGarbData.headmp4
 convertedGarbData.thumbupSVGA = parsedGarbData.thumbupSVGA;
 convertedGarbData.loadingIcon = parsedGarbData.loadingIcon;
 fs.writeFile(
-  './src/components/styles/steriaGarb.json',
+  "./src/components/styles/steriaGarb.json",
   JSON.stringify([...steriaGarb, convertedGarbData], null, 2),
-  () => undefined
+  () => undefined,
 );

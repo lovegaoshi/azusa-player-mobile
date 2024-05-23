@@ -9,34 +9,34 @@
  * steps to refactor:
  * each site needs a fetch to parse regex extracted, a videoinfo fetcher and a song fetcher.
  */
-import { Source } from '@enums/MediaFetch';
-import { logger } from '../Logger';
-import { regexFetchProps } from './generic';
-import { fetchAwaitBiliPaginatedAPI } from './paginatedbili';
-import { awaitLimiter } from './throttle';
-import SongTS from '@objects/Song';
+import { Source } from "@enums/MediaFetch";
+import { logger } from "../Logger";
+import { regexFetchProps } from "./generic";
+import { fetchAwaitBiliPaginatedAPI } from "./paginatedbili";
+import { awaitLimiter } from "./throttle";
+import SongTS from "@objects/Song";
 
 // https://api.bilibili.com/audio/music-service/web/song/upper?uid=741520&pn=1&ps=70&order=1
 const URL_BILICHANNEL_AUDIO_INFO =
-  'https://api.bilibili.com/audio/music-service/web/song/upper?uid=741520&pn={pn}&ps=30&order=1';
+  "https://api.bilibili.com/audio/music-service/web/song/upper?uid=741520&pn={pn}&ps=30&order=1";
 const CIDPREFIX = `${Source.biliaudio}-`;
 
 export const fetchBiliChannelAudioList = async (
   mid: string,
   progressEmitter: (val: number) => void = () => undefined,
-  favList: string[] = []
+  favList: string[] = [],
 ) => {
-  logger.info('calling fetchBiliChannelList');
+  logger.info("calling fetchBiliChannelList");
   return fetchAwaitBiliPaginatedAPI({
-    url: URL_BILICHANNEL_AUDIO_INFO.replace('{mid}', mid),
-    getMediaCount: data => data.totalSize,
-    getPageSize: data => data.pageSize,
-    getItems: js => js.data.data,
+    url: URL_BILICHANNEL_AUDIO_INFO.replace("{mid}", mid),
+    getMediaCount: (data) => data.totalSize,
+    getPageSize: (data) => data.pageSize,
+    getItems: (js) => js.data.data,
     progressEmitter,
     favList,
     limiter: awaitLimiter,
-    resolveBiliBVID: async infos =>
-      infos.map(info =>
+    resolveBiliBVID: async (infos) =>
+      infos.map((info) =>
         SongTS({
           cid: `${CIDPREFIX}-${info.id}`,
           bvid: info.id,
@@ -45,12 +45,12 @@ export const fetchBiliChannelAudioList = async (
           singer: info.uname,
           singerId: info.uid,
           cover: info.cover,
-          lyric: '',
+          lyric: "",
           page: 1,
           duration: info.duration,
           album: info.title,
           source: Source.biliaudio,
-        })
+        }),
       ),
   });
 };
@@ -63,7 +63,7 @@ const regexFetch = async ({
   songList: await fetchBiliChannelAudioList(
     reExtracted[1]!,
     progressEmitter,
-    favList
+    favList,
   ),
 });
 

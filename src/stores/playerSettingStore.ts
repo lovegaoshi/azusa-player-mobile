@@ -1,8 +1,8 @@
 // vanilla store of zustand serving playbackServices.
-import { createStore } from 'zustand/vanilla';
+import { createStore } from "zustand/vanilla";
 
-import { DefaultSetting } from '@enums/Storage';
-import { saveSettings, getSettings } from '@utils/ChromeStorage';
+import { DefaultSetting } from "@enums/Storage";
+import { saveSettings, getSettings } from "@utils/ChromeStorage";
 
 interface AppStore {
   playerSetting: NoxStorage.PlayerSettingDict;
@@ -25,7 +25,7 @@ export const initializePlayerSetting = async () => {
 };
 
 export const setPlayerSetting = (
-  newSetting: Partial<NoxStorage.PlayerSettingDict>
+  newSetting: Partial<NoxStorage.PlayerSettingDict>,
 ) => {
   const currentSetting = playerSettingStore.getState();
   playerSettingStore.setState({

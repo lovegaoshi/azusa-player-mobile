@@ -1,5 +1,5 @@
-import React from 'react';
-import TrackPlayer, { Track, useActiveTrack } from 'react-native-track-player';
+import React from "react";
+import TrackPlayer, { Track, useActiveTrack } from "react-native-track-player";
 
 const useTrack = () => {
   const activeTrack = useActiveTrack();

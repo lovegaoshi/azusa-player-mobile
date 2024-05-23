@@ -1,14 +1,14 @@
 // TODO: migrate to GenericSyncButton
-import React, { useState } from 'react';
-import { View, StyleSheet } from 'react-native';
-import { ActivityIndicator, IconButton, TextInput } from 'react-native-paper';
-import { useTranslation } from 'react-i18next';
+import React, { useState } from "react";
+import { View, StyleSheet } from "react-native";
+import { ActivityIndicator, IconButton, TextInput } from "react-native-paper";
+import { useTranslation } from "react-i18next";
 
-import { noxBackup, noxRestore } from './PersonalCloudAuth';
-import { useNoxSetting } from '@stores/useApp';
-import { logger } from '@utils/Logger';
-import { exportPlayerContent } from '@utils/ChromeStorage';
-import useSnack from '@stores/useSnack';
+import { noxBackup, noxRestore } from "./PersonalCloudAuth";
+import { useNoxSetting } from "@stores/useApp";
+import { logger } from "@utils/Logger";
+import { exportPlayerContent } from "@utils/ChromeStorage";
+import useSnack from "@stores/useSnack";
 
 interface Props {
   cloudAddress: string;
@@ -26,12 +26,12 @@ const ImportSyncFavButton = ({
   restoreFromUint8Array,
 }: Props) => {
   const { t } = useTranslation();
-  const setSnack = useSnack(state => state.setSnack);
+  const setSnack = useSnack((state) => state.setSnack);
   const [loading, setLoading] = useState(false);
 
   const errorHandling = (
     e: Error,
-    msg = t('Sync.PersonalCloudDownloadFail')
+    msg = t("Sync.PersonalCloudDownloadFail"),
   ) => {
     logger.error(e);
     setSnack({ snackMsg: { success: msg } });
@@ -46,12 +46,12 @@ const ImportSyncFavButton = ({
       // theoretically this is always safe
       await restoreFromUint8Array(response);
       setSnack({
-        snackMsg: { success: t('Sync.PersonalCloudDownloadSuccess') },
+        snackMsg: { success: t("Sync.PersonalCloudDownloadSuccess") },
       });
     } else {
       errorHandling(
-        new Error(String(t('Sync.PersonalCloudDownloadFail'))),
-        String(t('Sync.PersonalCloudDownloadFail'))
+        new Error(String(t("Sync.PersonalCloudDownloadFail"))),
+        String(t("Sync.PersonalCloudDownloadFail")),
       );
     }
     setLoading(false);
@@ -67,12 +67,12 @@ const ImportSyncFavButton = ({
 
 const ExportSyncFavButton = ({ cloudAddress, cloudID }: Props) => {
   const { t } = useTranslation();
-  const setSnack = useSnack(state => state.setSnack);
+  const setSnack = useSnack((state) => state.setSnack);
   const [loading, setLoading] = useState(false);
 
   const errorHandling = (
     e: Error,
-    msg = String(t('Sync.PersonalCloudUploadFailSnackbar'))
+    msg = String(t("Sync.PersonalCloudUploadFailSnackbar")),
   ) => {
     logger.error(e);
     setSnack({ snackMsg: { success: msg } });
@@ -84,7 +84,7 @@ const ExportSyncFavButton = ({ cloudAddress, cloudID }: Props) => {
     const exportedDict = await exportPlayerContent();
     const response = await noxBackup(exportedDict, cloudAddress, cloudID);
     if (response.status === 200) {
-      setSnack({ snackMsg: { success: t('Sync.PersonalCloudUploadSuccess') } });
+      setSnack({ snackMsg: { success: t("Sync.PersonalCloudUploadSuccess") } });
     } else {
       errorHandling(new Error(String(response.status)));
     }
@@ -106,9 +106,9 @@ interface textProps {
 }
 
 const SetTextField = ({ settingKey, label, placeholder }: textProps) => {
-  const playerSetting = useNoxSetting(state => state.playerSetting);
-  const playerStyle = useNoxSetting(state => state.playerStyle);
-  const setPlayerSetting = useNoxSetting(state => state.setPlayerSetting);
+  const playerSetting = useNoxSetting((state) => state.playerSetting);
+  const playerStyle = useNoxSetting((state) => state.playerStyle);
+  const setPlayerSetting = useNoxSetting((state) => state.setPlayerSetting);
   const saveVal = (val: string) => setPlayerSetting({ [settingKey]: val });
 
   return (
@@ -119,25 +119,25 @@ const SetTextField = ({ settingKey, label, placeholder }: textProps) => {
       selectTextOnFocus
       selectionColor={playerStyle.customColors.textInputSelectionColor}
       textColor={playerStyle.colors.text}
-      onEndEditing={e => saveVal(e.nativeEvent.text)}
+      onEndEditing={(e) => saveVal(e.nativeEvent.text)}
     />
   );
 };
 
 export default ({ restoreFromUint8Array }: MainProps) => {
   const { t } = useTranslation();
-  const playerSetting = useNoxSetting(state => state.playerSetting);
+  const playerSetting = useNoxSetting((state) => state.playerSetting);
 
   const personalCloudIPTextField: textProps = {
-    settingKey: 'personalCloudIP',
-    label: t('Sync.personalCloudIPLabel'),
-    placeholder: t('Sync.personalCloudIPPlaceholder'),
+    settingKey: "personalCloudIP",
+    label: t("Sync.personalCloudIPLabel"),
+    placeholder: t("Sync.personalCloudIPPlaceholder"),
   };
 
   const personalCloudIDTextField: textProps = {
-    settingKey: 'personalCloudID',
-    label: t('Sync.personalCloudKeyLabel'),
-    placeholder: t('Sync.personalCloudKeyPlaceholder'),
+    settingKey: "personalCloudID",
+    label: t("Sync.personalCloudKeyLabel"),
+    placeholder: t("Sync.personalCloudKeyPlaceholder"),
   };
 
   return (
@@ -163,10 +163,10 @@ export default ({ restoreFromUint8Array }: MainProps) => {
 
 const styles = StyleSheet.create({
   container: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    alignContent: 'center',
-    justifyContent: 'center',
+    flexDirection: "row",
+    alignItems: "center",
+    alignContent: "center",
+    justifyContent: "center",
   },
   emptyPlaceholder: { width: 20 },
   activityIndicator: {

@@ -1,7 +1,7 @@
-import React from 'react';
-import { View, StyleSheet } from 'react-native';
-import { useNoxSetting } from '@stores/useApp';
-import { Text } from 'react-native-paper';
+import React from "react";
+import { View, StyleSheet } from "react-native";
+import { useNoxSetting } from "@stores/useApp";
+import { Text } from "react-native-paper";
 
 interface Props {
   title?: string;
@@ -9,7 +9,7 @@ interface Props {
 }
 
 export default (props: Props) => {
-  const playerStyle = useNoxSetting(state => state.playerStyle);
+  const playerStyle = useNoxSetting((state) => state.playerStyle);
 
   return (
     <View

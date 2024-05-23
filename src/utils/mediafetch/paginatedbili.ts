@@ -1,13 +1,13 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { wbiQuery } from '@stores/wbi';
-import { fetchBiliBVIDs } from './bilivideo';
+import { wbiQuery } from "@stores/wbi";
+import { fetchBiliBVIDs } from "./bilivideo";
 import {
   fetchPaginatedAPI,
   fetchAwaitPaginatedAPI,
   FetcherProps,
-} from './paginatedfetch';
-import { biliApiLimiter } from './throttle';
-import bfetch from '@utils/BiliFetch';
+} from "./paginatedfetch";
+import { biliApiLimiter } from "./throttle";
+import bfetch from "@utils/BiliFetch";
 
 export const fetchBiliPaginatedAPI = async ({
   url,
@@ -21,7 +21,7 @@ export const fetchBiliPaginatedAPI = async ({
   resolveBiliBVID = async (bvobjs, progressEmitter2) =>
     await fetchBiliBVIDs(
       bvobjs.map((obj: any) => obj.bvid),
-      progressEmitter2
+      progressEmitter2,
     ),
   startPage = 1,
 }: FetcherProps) =>
@@ -35,7 +35,7 @@ export const fetchBiliPaginatedAPI = async ({
     params,
     limiter,
     resolveBiliBVID,
-    fetcher: url.includes('/wbi/') ? wbiQuery : bfetch,
+    fetcher: url.includes("/wbi/") ? wbiQuery : bfetch,
     startPage,
   });
 
@@ -51,7 +51,7 @@ export const fetchAwaitBiliPaginatedAPI = async ({
   resolveBiliBVID = async (bvobjs, progressEmitter2) =>
     await fetchBiliBVIDs(
       bvobjs.map((obj: any) => obj.bvid),
-      progressEmitter2
+      progressEmitter2,
     ),
 }: FetcherProps) =>
   fetchAwaitPaginatedAPI({
@@ -64,5 +64,5 @@ export const fetchAwaitBiliPaginatedAPI = async ({
     params,
     limiter,
     resolveBiliBVID,
-    fetcher: url.includes('/wbi/') ? wbiQuery : bfetch,
+    fetcher: url.includes("/wbi/") ? wbiQuery : bfetch,
   });

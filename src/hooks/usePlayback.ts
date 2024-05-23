@@ -1,23 +1,23 @@
-import { Platform } from 'react-native';
-import TrackPlayer, { RepeatMode } from 'react-native-track-player';
-import { useTranslation } from 'react-i18next';
+import { Platform } from "react-native";
+import TrackPlayer, { RepeatMode } from "react-native-track-player";
+import { useTranslation } from "react-i18next";
 
-import { useNoxSetting } from '@stores/useApp';
-import { randomChoice } from '../utils/Utils';
-import logger from '../utils/Logger';
+import { useNoxSetting } from "@stores/useApp";
+import { randomChoice } from "../utils/Utils";
+import logger from "../utils/Logger";
 import {
   clearPlaylistUninterrupted,
   playSongUninterrupted,
   playSongInterrupted,
-} from '@utils/RNTPUtils';
-import { NoxRepeatMode } from '@enums/RepeatMode';
-import noxPlayingList, { setPlayingIndex } from '@stores/playingList';
-import { dataSaverPlaylist, dataSaverSongs } from '@utils/Cache';
-import useDataSaver from './useDataSaver';
-import useSnack from '@stores/useSnack';
-import { PlaylistTypes } from '@enums/Playlist';
+} from "@utils/RNTPUtils";
+import { NoxRepeatMode } from "@enums/RepeatMode";
+import noxPlayingList, { setPlayingIndex } from "@stores/playingList";
+import { dataSaverPlaylist, dataSaverSongs } from "@utils/Cache";
+import useDataSaver from "./useDataSaver";
+import useSnack from "@stores/useSnack";
+import { PlaylistTypes } from "@enums/Playlist";
 
-const PLAYLIST_MEDIAID = 'playlist-';
+const PLAYLIST_MEDIAID = "playlist-";
 
 const { getState } = noxPlayingList;
 
@@ -29,20 +29,22 @@ const dataSaverPlaylistWrapper = (datasave = true) => {
 
 const usePlayback = () => {
   const { t } = useTranslation();
-  const currentPlayingList = useNoxSetting(state => state.currentPlayingList);
-  const playlists = useNoxSetting(state => state.playlists);
-  const playlistIds = useNoxSetting(state => state.playlistIds);
-  const getPlaylist = useNoxSetting(state => state.getPlaylist);
-  const currentPlayingId = useNoxSetting(state => state.currentPlayingId);
-  const searchPlaylist = useNoxSetting(state => state.searchPlaylist);
-  const setCurrentPlaylist = useNoxSetting(state => state.setCurrentPlaylist);
-  const setSearchPlaylist = useNoxSetting(state => state.setSearchPlaylist);
-  const setCurrentPlayingId = useNoxSetting(state => state.setCurrentPlayingId);
+  const currentPlayingList = useNoxSetting((state) => state.currentPlayingList);
+  const playlists = useNoxSetting((state) => state.playlists);
+  const playlistIds = useNoxSetting((state) => state.playlistIds);
+  const getPlaylist = useNoxSetting((state) => state.getPlaylist);
+  const currentPlayingId = useNoxSetting((state) => state.currentPlayingId);
+  const searchPlaylist = useNoxSetting((state) => state.searchPlaylist);
+  const setCurrentPlaylist = useNoxSetting((state) => state.setCurrentPlaylist);
+  const setSearchPlaylist = useNoxSetting((state) => state.setSearchPlaylist);
+  const setCurrentPlayingId = useNoxSetting(
+    (state) => state.setCurrentPlayingId,
+  );
   const setCurrentPlayingList = useNoxSetting(
-    state => state.setCurrentPlayingList
+    (state) => state.setCurrentPlayingList,
   );
   const { isDataSaving } = useDataSaver();
-  const setSnack = useSnack(state => state.setSnack);
+  const setSnack = useSnack((state) => state.setSnack);
 
   const playFromPlaylist = async ({
     playlist,
@@ -82,7 +84,7 @@ const usePlayback = () => {
   const playAsSearchList = async ({
     songs,
     playlistSongs,
-    title = String(t('PlaylistsDrawer.SearchListTitle')),
+    title = String(t("PlaylistsDrawer.SearchListTitle")),
     song,
   }: PlayAsSearchList) => {
     const newPlayingPlaylist = {
@@ -101,18 +103,18 @@ const usePlayback = () => {
   const shuffleAll = async () => {
     const allPlaylists = await Promise.all(
       Object.values(playlists)
-        .filter(playlist => playlist.type === PlaylistTypes.Typical)
-        .map(p => getPlaylist(p.id))
+        .filter((playlist) => playlist.type === PlaylistTypes.Typical)
+        .map((p) => getPlaylist(p.id)),
     );
     const allSongs = allPlaylists.reduce(
       (acc, curr) => acc.concat(curr.songList),
-      [] as NoxMedia.Song[]
+      [] as NoxMedia.Song[],
     );
     const cachedSongs = isDataSaving ? dataSaverSongs(allSongs) : allSongs;
     playAsSearchList({
       songs: cachedSongs,
       playlistSongs: allSongs,
-      title: String(t('PlaylistOperations.all')),
+      title: String(t("PlaylistOperations.all")),
     });
   };
 
@@ -169,7 +171,7 @@ const usePlayback = () => {
     // then go through the current playlist and match the loose song name with query.
     // then go through playlist names and match the exact playlist name with query.
     // then go through every playlist and match the loose song name with query.
-    if (query === '') {
+    if (query === "") {
       playFromPlaylist({
         playlist: await getPlaylist(randomChoice(playlistIds)),
       });
@@ -202,25 +204,25 @@ const usePlayback = () => {
         }
       }
     }
-    setSnack({ snackMsg: { success: t('AndroidAuto.PlayingShuffle') } });
+    setSnack({ snackMsg: { success: t("AndroidAuto.PlayingShuffle") } });
     shuffleAll();
   };
 
   const buildBrowseTree = () => {
-    if (Platform.OS !== 'android') return;
+    if (Platform.OS !== "android") return;
     TrackPlayer.setBrowseTree({
-      '/': [
+      "/": [
         {
-          mediaId: 'PlaylistTab',
-          title: t('AndroidAuto.PlaylistTab'),
-          playable: '1',
+          mediaId: "PlaylistTab",
+          title: t("AndroidAuto.PlaylistTab"),
+          playable: "1",
         },
       ],
-      PlaylistTab: Object.keys(playlists).map(key => {
+      PlaylistTab: Object.keys(playlists).map((key) => {
         return {
           mediaId: `${PLAYLIST_MEDIAID}${key}`,
           title: playlists[key].title,
-          playable: '0',
+          playable: "0",
         };
       }),
     });

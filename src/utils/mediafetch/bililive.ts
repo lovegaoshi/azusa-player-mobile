@@ -1,10 +1,10 @@
-import { regexFetchProps } from './generic';
+import { regexFetchProps } from "./generic";
 
-import SongTS from '@objects/Song';
-import { logger } from '../Logger';
-import bfetch from '@utils/BiliFetch';
-import { biliApiLimiter } from './throttle';
-import { Source } from '@enums/MediaFetch';
+import SongTS from "@objects/Song";
+import { logger } from "../Logger";
+import bfetch from "@utils/BiliFetch";
+import { biliApiLimiter } from "./throttle";
+import { Source } from "@enums/MediaFetch";
 
 interface BiliLiveRoomInfo {
   room_id: string;
@@ -17,7 +17,7 @@ interface BiliLiveRoomInfo {
 //https://github.com/SocialSisterYi/bilibili-API-collect/blob/master/docs/live/info.md
 const getRoomInfo = async (roomID: string) => {
   const res = await bfetch(
-    `https://api.live.bilibili.com/room/v1/Room/get_info?room_id=${roomID}`
+    `https://api.live.bilibili.com/room/v1/Room/get_info?room_id=${roomID}`,
   );
   const json = await res.json();
   return json.data as BiliLiveRoomInfo;
@@ -31,12 +31,12 @@ interface LiverData {
 
 const getLiver = async (roomID: string) => {
   const res = await bfetch(
-    `https://api.live.bilibili.com/room/v1/Room/room_init?id=${roomID}`
+    `https://api.live.bilibili.com/room/v1/Room/room_init?id=${roomID}`,
   );
   const json = await res.json();
   const uid = json.data.uid;
   const uidRes = await bfetch(
-    `https://api.live.bilibili.com/live_user/v1/Master/info?uid=${uid}`
+    `https://api.live.bilibili.com/live_user/v1/Master/info?uid=${uid}`,
   );
   const uidJson = await uidRes.json();
   return uidJson.data.info as LiverData;
@@ -76,10 +76,10 @@ const regexFetch = async ({
 });
 
 const resolveURL = async (
-  song: NoxMedia.Song
+  song: NoxMedia.Song,
 ): Promise<NoxNetwork.ParsedNoxMediaURL> => {
   const req = await bfetch(
-    `https://api.live.bilibili.com/room/v1/Room/playUrl?cid=${song.bvid}&platform=web&quality=2`
+    `https://api.live.bilibili.com/room/v1/Room/playUrl?cid=${song.bvid}&platform=web&quality=2`,
   );
   const json = await req.json();
   const durl = json.data.durl;

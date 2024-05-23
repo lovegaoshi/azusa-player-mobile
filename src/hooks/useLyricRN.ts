@@ -1,11 +1,11 @@
-import { logger } from '@utils/Logger';
-import { readTxtFile, writeTxtFile } from '@utils/fs';
-import useLyric from './useLyric';
-import { LrcSource } from '@enums/LyricFetch';
+import { logger } from "@utils/Logger";
+import { readTxtFile, writeTxtFile } from "@utils/fs";
+import useLyric from "./useLyric";
+import { LrcSource } from "@enums/LyricFetch";
 
 const LYRIC_OFFSET_INTERVAL = 0.5;
 
-export default (currentSong?: NoxMedia.Song, artist = '') => {
+export default (currentSong?: NoxMedia.Song, artist = "") => {
   const usedLyric = useLyric(currentSong);
 
   const updateLyricMapping = ({
@@ -23,7 +23,7 @@ export default (currentSong?: NoxMedia.Song, artist = '') => {
   }) => {
     if (resolvedLrc) {
       const lrcpath = `${song.id}.txt`;
-      writeTxtFile(lrcpath, [newLrcDetail.lyric || lrc], 'lrc/');
+      writeTxtFile(lrcpath, [newLrcDetail.lyric || lrc], "lrc/");
       const lyricDeatail: NoxMedia.LyricDetail = {
         songId: song.id,
         lyricKey: resolvedLrc.key,
@@ -40,14 +40,14 @@ export default (currentSong?: NoxMedia.Song, artist = '') => {
     const lrcDetail = usedLyric.getLrcFromLocal(song);
     if (lrcDetail === undefined) return;
     let localLrc: string | undefined = undefined;
-    if (lrcDetail.lyric.endsWith('.txt')) {
-      localLrc = await readTxtFile(lrcDetail.lyric, 'lrc/');
+    if (lrcDetail.lyric.endsWith(".txt")) {
+      localLrc = await readTxtFile(lrcDetail.lyric, "lrc/");
       if (localLrc) {
-        logger.debug('[lrc] read local lrc and loading...');
+        logger.debug("[lrc] read local lrc and loading...");
       }
     } else {
       logger.debug(
-        '[lrc] local lrc seems to be the content itself, loading that...'
+        "[lrc] local lrc seems to be the content itself, loading that...",
       );
       localLrc = lrcDetail.lyric;
     }
@@ -61,26 +61,26 @@ export default (currentSong?: NoxMedia.Song, artist = '') => {
     index = 0,
     resolvedLrcOptions = usedLyric.lrcOptions,
     resolvedLyric?: NoxMedia.LyricDetail,
-    song = currentSong
+    song = currentSong,
   ) =>
     usedLyric.searchAndSetCurrentLyric(
       updateLyricMapping,
       index,
       resolvedLrcOptions,
       resolvedLyric,
-      song
+      song,
     );
 
   const loadLocalLrc = async (
-    lyricPromise: Promise<NoxNetwork.NoxFetchedLyric[]>
+    lyricPromise: Promise<NoxNetwork.NoxFetchedLyric[]>,
   ) => {
     const localLrcColle = getLrcFromLocal(currentSong);
     return usedLyric.loadLocalLrc(getLrcFromLocal(currentSong), async () =>
       searchAndSetCurrentLyric(
         undefined,
         await lyricPromise,
-        (await localLrcColle)?.lrcDetail
-      )
+        (await localLrcColle)?.lrcDetail,
+      ),
     );
   };
 
@@ -89,9 +89,9 @@ export default (currentSong?: NoxMedia.Song, artist = '') => {
       adhocTitle,
       [LrcSource.QQQrc, LrcSource.QQ, LrcSource.BiliBili, LrcSource.Kugou],
       artist,
-      options => {
+      (options) => {
         options[0].length !== 1 && options.push(options.shift()!);
-      }
+      },
     );
 
   const addSubtractOffset = (isAdd: boolean) => {
@@ -112,7 +112,7 @@ export default (currentSong?: NoxMedia.Song, artist = '') => {
     usedLyric.initTrackLrcLoad(
       fetchAndSetLyricOptions,
       loadLocalLrc,
-      searchAndSetCurrentLyric
+      searchAndSetCurrentLyric,
     );
 
   return {

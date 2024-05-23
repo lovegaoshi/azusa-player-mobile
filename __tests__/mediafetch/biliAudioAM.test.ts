@@ -1,9 +1,9 @@
-import fetcher from '../../src/utils/mediafetch/biliAudioAM';
+import fetcher from "../../src/utils/mediafetch/biliAudioAM";
 
-test('biliAudioAM', async () => {
+test("biliAudioAM", async () => {
   const content = await fetcher.regexFetch({
     reExtracted: fetcher.regexSearchMatch.exec(
-      'https://www.bilibili.com/audio/am10624'
+      "https://www.bilibili.com/audio/am10624",
     )!,
   });
   // console.log(content);

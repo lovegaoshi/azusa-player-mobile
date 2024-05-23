@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from 'react';
-import { Text, View, Image, Button } from 'react-native';
-import { ShareMenuReactView } from 'react-native-share-menu';
+import React, { useState, useEffect } from "react";
+import { Text, View, Image, Button } from "react-native";
+import { ShareMenuReactView } from "react-native-share-menu";
 
 const Share = () => {
-  const [sharedData, setSharedData] = useState('');
-  const [sharedMimeType, setSharedMimeType] = useState('');
+  const [sharedData, setSharedData] = useState("");
+  const [sharedMimeType, setSharedMimeType] = useState("");
 
   useEffect(() => {
     ShareMenuReactView.data().then(({ mimeType, data }) => {
@@ -31,7 +31,7 @@ const Share = () => {
       <Button
         title="Dismiss with Error"
         onPress={() => {
-          ShareMenuReactView.dismissExtension('Something went wrong!');
+          ShareMenuReactView.dismissExtension("Something went wrong!");
         }}
       />
       <Button
@@ -43,11 +43,11 @@ const Share = () => {
       <Button
         title="Continue In App With Extra Data"
         onPress={() => {
-          ShareMenuReactView.continueInApp({ hello: 'from the other side' });
+          ShareMenuReactView.continueInApp({ hello: "from the other side" });
         }}
       />
-      {sharedMimeType === 'text/plain' && <Text>{sharedData}</Text>}
-      {sharedMimeType.startsWith('image/') && (
+      {sharedMimeType === "text/plain" && <Text>{sharedData}</Text>}
+      {sharedMimeType.startsWith("image/") && (
         <Image source={{ uri: sharedData }} />
       )}
     </View>

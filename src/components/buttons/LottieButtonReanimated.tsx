@@ -1,13 +1,13 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import React, { useRef, useEffect } from 'react';
-import { Pressable, Animated, Easing } from 'react-native';
-import LottieView, { AnimationObject } from 'lottie-react-native';
+import React, { useRef, useEffect } from "react";
+import { Pressable, Animated, Easing } from "react-native";
+import LottieView, { AnimationObject } from "lottie-react-native";
 
-import { useNoxSetting } from '@stores/useApp';
-import ShadowedElement from './ShadowedElement';
+import { useNoxSetting } from "@stores/useApp";
+import ShadowedElement from "./ShadowedElement";
 
-const clickedStatesMap = Array.from(Array(10).keys()).map(curr =>
-  Array.from(Array(curr + 1).keys()).map(val => val / curr + 1)
+const clickedStatesMap = Array.from(Array(10).keys()).map((curr) =>
+  Array.from(Array(curr + 1).keys()).map((val) => val / curr + 1),
 );
 
 interface Props {
@@ -35,11 +35,11 @@ const LottieButtonAnimated = ({
   duration = 340,
   accessibilityLabel,
 }: Props) => {
-  const playerStyle = useNoxSetting(state => state.playerStyle);
+  const playerStyle = useNoxSetting((state) => state.playerStyle);
   const managedState = useRef(clickState);
   const managedProgress = useRef(Math.max(0, clickStates.indexOf(clickState)));
   const animationProgress = useRef(
-    new Animated.Value(clickedLottieProgress[managedProgress.current])
+    new Animated.Value(clickedLottieProgress[managedProgress.current]),
   );
 
   const onPressBtn = () => {
@@ -63,7 +63,7 @@ const LottieButtonAnimated = ({
   useEffect(() => {
     if (clickState === managedState.current) return;
     animationProgress.current.setValue(
-      clickedLottieProgress[managedProgress.current]
+      clickedLottieProgress[managedProgress.current],
     );
     managedState.current = clickState;
     managedProgress;
@@ -83,7 +83,7 @@ const LottieButtonAnimated = ({
           source={src}
           progress={animationProgress.current}
           style={{ width: size, height: size, marginLeft: 8, marginTop: 8 }}
-          colorFilters={strokes.map(keypath => ({
+          colorFilters={strokes.map((keypath) => ({
             keypath,
             color: playerStyle.colors.primary,
           }))}

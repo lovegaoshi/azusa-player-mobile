@@ -9,15 +9,15 @@
  * steps to refactor:
  * each site needs a fetch to parse regex extracted, a videoinfo fetcher and a song fetcher.
  */
-import { Platform, NativeModules } from 'react-native';
-import RNFetchBlob from 'react-native-blob-util';
+import { Platform, NativeModules } from "react-native";
+import RNFetchBlob from "react-native-blob-util";
 
-import { probeMetadata, cacheAlbumArt } from '@utils/ffmpeg/ffmpeg';
-import { Source } from '@enums/MediaFetch';
-import { regexFetchProps } from './generic';
-import SongTS from '@objects/Song';
-import logger from '../Logger';
-import { singleLimiter } from './throttle';
+import { probeMetadata, cacheAlbumArt } from "@utils/ffmpeg/ffmpeg";
+import { Source } from "@enums/MediaFetch";
+import { regexFetchProps } from "./generic";
+import SongTS from "@objects/Song";
+import logger from "../Logger";
+import { singleLimiter } from "./throttle";
 
 const { NoxAndroidAutoModule } = NativeModules;
 
@@ -25,13 +25,15 @@ const { NoxAndroidAutoModule } = NativeModules;
 const songFetch = async (
   fpath: string,
   favlist: string[],
-  progressEmitter: (val: number) => void = () => undefined
+  progressEmitter: (val: number) => void = () => undefined,
 ): Promise<NoxMedia.Song[]> => {
-  if (Platform.OS !== 'android') return [];
+  if (Platform.OS !== "android") return [];
   const mediaFiles: NoxUtils.NoxFileUtilMediaInfo[] =
     await NoxAndroidAutoModule.listMediaDir(fpath, true);
-  const uniqMediaFiles = mediaFiles.filter(v => !favlist.includes(v.realPath));
-  return uniqMediaFiles.map(v =>
+  const uniqMediaFiles = mediaFiles.filter(
+    (v) => !favlist.includes(v.realPath),
+  );
+  return uniqMediaFiles.map((v) =>
     SongTS({
       cid: `${Source.local}-${v.realPath}`,
       bvid: `file://${v.realPath}`,
@@ -39,13 +41,13 @@ const songFetch = async (
       nameRaw: v.title,
       singer: v.artist,
       singerId: v.artist,
-      cover: '',
-      lyric: '',
+      cover: "",
+      lyric: "",
       page: 0,
       duration: v.duration / 1000,
       album: v.album,
       source: Source.local,
-    })
+    }),
   );
   // TODO: no longer needs FFProbe
   return await Promise.all(
@@ -65,16 +67,16 @@ const songFetch = async (
         bvid: `file://${v.realPath}`,
         name: probedMetadata.tags?.title || v.fileName,
         nameRaw: probedMetadata.tags?.title || v.fileName,
-        singer: probedMetadata.tags?.artist || '',
-        singerId: probedMetadata.tags?.artist || '',
-        cover: '',
-        lyric: '',
+        singer: probedMetadata.tags?.artist || "",
+        singerId: probedMetadata.tags?.artist || "",
+        cover: "",
+        lyric: "",
         page: 0,
         duration: Number(probedMetadata.duration) || 0,
-        album: probedMetadata.tags?.album || '',
+        album: probedMetadata.tags?.album || "",
         source: Source.local,
       });
-    })
+    }),
   );
 };
 
@@ -89,10 +91,10 @@ const regexFetch = async ({
 const resolveURL = async (song: NoxMedia.Song) => ({ url: song.bvid });
 
 const resolveArtwork = async (song: NoxMedia.Song) => {
-  let artworkBase64 = '';
+  let artworkBase64 = "";
   try {
     const artworkURI = await cacheAlbumArt(song.bvid);
-    artworkBase64 = await RNFetchBlob.fs.readFile(artworkURI, 'base64');
+    artworkBase64 = await RNFetchBlob.fs.readFile(artworkURI, "base64");
   } catch (e) {
     logger.warn(`[localResolver] cannot resolve artwork of ${song.bvid}`);
   }

@@ -1,25 +1,25 @@
-import { logger } from '../Logger';
-import { fetchBiliPaginatedAPI } from './paginatedbili';
-import { timestampToSeconds } from '../Utils';
-import bfetch from '../BiliFetch';
-import { getBiliCookie } from '@utils/Bilibili/biliCookies';
-import SongTS from '@objects/Song';
-import { Source } from '@enums/MediaFetch';
+import { logger } from "../Logger";
+import { fetchBiliPaginatedAPI } from "./paginatedbili";
+import { timestampToSeconds } from "../Utils";
+import bfetch from "../BiliFetch";
+import { getBiliCookie } from "@utils/Bilibili/biliCookies";
+import SongTS from "@objects/Song";
+import { Source } from "@enums/MediaFetch";
 
 const URL_BILI_SEARCH =
-  'https://api.bilibili.com/x/web-interface/search/type?search_type=video&keyword={keyword}&page={pn}&tids=3';
+  "https://api.bilibili.com/x/web-interface/search/type?search_type=video&keyword={keyword}&page={pn}&tids=3";
 
 let cookie: string;
 
 const getCookie = async (cookiedSearch = false) => {
   // TODO: add refresh here?
   if (!cookie) {
-    const res = await bfetch('https://api.bilibili.com/x/frontend/finger/spi');
+    const res = await bfetch("https://api.bilibili.com/x/frontend/finger/spi");
     const json = await res.json();
     cookie = `buvid3=${json.data.b_3};buvid4=${json.data.b_4}`;
   }
   if (cookiedSearch) {
-    return `${cookie};SESSDATA=${await getBiliCookie('SESSDATA')}`;
+    return `${cookie};SESSDATA=${await getBiliCookie("SESSDATA")}`;
   }
   return cookie;
 };
@@ -34,8 +34,8 @@ const fastSearchResolveBVID = async (bvobjs: any[]) => {
       bvobjs.map(obj => fetchCID(obj.bvid))
     );
      */
-  return bvobjs.map(obj => {
-    const name = obj.title.replaceAll(/<[^<>]*em[^<>]*>/g, '');
+  return bvobjs.map((obj) => {
+    const name = obj.title.replaceAll(/<[^<>]*em[^<>]*>/g, "");
     return SongTS({
       cid: `null-${obj.bvid}`,
       bvid: obj.bvid,
@@ -44,7 +44,7 @@ const fastSearchResolveBVID = async (bvobjs: any[]) => {
       singer: obj.author,
       singerId: obj.mid,
       cover: `https:${obj.pic}`,
-      lyric: '',
+      lyric: "",
       page: 1,
       duration: timestampToSeconds(obj.duration),
       album: name,
@@ -58,30 +58,30 @@ export const fetchBiliSearchList = async (
   progressEmitter: (val: number) => void = () => undefined,
   fastSearch = false,
   cookiedSearch = false,
-  startPage = 1
+  startPage = 1,
 ): Promise<NoxMedia.Song[]> => {
   // this API needs a random buvid3 value, or a valid SESSDATA;
   // otherwise will return error 412. for users didnt login to bilibili,
   // setting a random buvid3 would enable this API.
   try {
     return await fetchBiliPaginatedAPI({
-      url: URL_BILI_SEARCH.replace('{keyword}', kword),
-      getMediaCount: data => Math.min(data.numResults, data.pagesize * 2),
-      getPageSize: data => data.pagesize,
-      getItems: js => js.data.result,
+      url: URL_BILI_SEARCH.replace("{keyword}", kword),
+      getMediaCount: (data) => Math.min(data.numResults, data.pagesize * 2),
+      getPageSize: (data) => data.pagesize,
+      getItems: (js) => js.data.result,
       progressEmitter,
       favList: [],
       params: {
-        method: 'GET',
+        method: "GET",
         headers: {
           cookie: await getCookie(cookiedSearch),
         },
-        referrer: 'https://www.bilibili.com',
+        referrer: "https://www.bilibili.com",
         // HACK: setting to omit will use whatever cookie I set above.
-        credentials: 'omit',
+        credentials: "omit",
       },
       resolveBiliBVID: fastSearch
-        ? async bvobjs => await fastSearchResolveBVID(bvobjs)
+        ? async (bvobjs) => await fastSearchResolveBVID(bvobjs)
         : undefined,
       startPage,
     });
@@ -108,9 +108,9 @@ const regexFetch = async ({
     url,
     progressEmitter,
     fastSearch,
-    cookiedSearch
+    cookiedSearch,
   ),
-  refresh: v => refresh({ v, fastSearch, cookiedSearch }),
+  refresh: (v) => refresh({ v, fastSearch, cookiedSearch }),
   refreshToken: [url, 3],
 });
 
@@ -128,7 +128,7 @@ const refresh = async ({ v, fastSearch, cookiedSearch }: RefreshProps) => {
       undefined,
       fastSearch,
       cookiedSearch,
-      startPage
+      startPage,
     );
     results.refreshToken = [url, startPage + 2];
   }

@@ -8,25 +8,25 @@
  * steps to refactor:
  * each site needs a fetch to parse regex extracted, a videoinfo fetcher and a song fetcher.
  */
-import { regexFetchProps } from './generic';
+import { regexFetchProps } from "./generic";
 
-import { logger } from '../Logger';
-import { bvFetch } from './bilivideo';
-import bfetch from '@utils/BiliFetch';
+import { logger } from "../Logger";
+import { bvFetch } from "./bilivideo";
+import bfetch from "@utils/BiliFetch";
 
 const URL_BILISERIES_INFO =
-  'https://api.bilibili.com/x/series/archives?mid={mid}&series_id={sid}&only_normal=true&sort=desc&pn={pn}&ps=30';
+  "https://api.bilibili.com/x/series/archives?mid={mid}&series_id={sid}&only_normal=true&sort=desc&pn={pn}&ps=30";
 
 const fetchBiliSeriesList = async (
   mid: string,
   sid: string,
-  favList: string[] = []
+  favList: string[] = [],
 ) => {
-  logger.info('calling fetchBiliSeriesList');
+  logger.info("calling fetchBiliSeriesList");
   const res = await bfetch(
-    URL_BILISERIES_INFO.replace('{mid}', mid)
-      .replace('{sid}', sid)
-      .replace('{pn}', '0')
+    URL_BILISERIES_INFO.replace("{mid}", mid)
+      .replace("{sid}", sid)
+      .replace("{pn}", "0"),
   );
   const json = await res.json();
   const { data } = json;
@@ -35,7 +35,7 @@ const fetchBiliSeriesList = async (
   data.archives.forEach((v: { bvid: string }) => {
     if (favList.includes(v.bvid)) {
       logger.debug(
-        `fetchBiliSeriesList: skipped duplicate bvid ${v.bvid} during rss feed update`
+        `fetchBiliSeriesList: skipped duplicate bvid ${v.bvid} during rss feed update`,
       );
     } else {
       BVids.push(v.bvid);

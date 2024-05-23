@@ -1,12 +1,12 @@
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { Dimensions, View } from 'react-native';
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { Dimensions, View } from "react-native";
 
-import { NoxRoutes } from '@enums/Routes';
-import Explore from '../explore/View';
-import LandscapeLyricView from './LandscapeLyric';
-import { SettingsLandscape as Settings } from '../setting/View';
-import Playlist from '../playlist/View';
-import Playlists from '../playlists/Playlists';
+import { NoxRoutes } from "@enums/Routes";
+import Explore from "../explore/View";
+import LandscapeLyricView from "./LandscapeLyric";
+import { SettingsLandscape as Settings } from "../setting/View";
+import Playlist from "../playlist/View";
+import Playlists from "../playlists/Playlists";
 
 const Stack = createNativeStackNavigator();
 
@@ -17,7 +17,7 @@ interface Props {
 export default ({ panelWidth }: Props) => {
   const panelStyle = {
     width: panelWidth,
-    height: Dimensions.get('window').height,
+    height: Dimensions.get("window").height,
   };
 
   const WrappedLyricView = () => <LandscapeLyricView panelStyle={panelStyle} />;

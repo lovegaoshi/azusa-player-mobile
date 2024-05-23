@@ -9,24 +9,24 @@
  * steps to refactor:
  * each site needs a fetch to parse regex extracted, a videoinfo fetcher and a song fetcher.
  */
-import { logger } from '../Logger';
-import { regexFetchProps } from './generic';
-import { biliShazamOnSonglist } from './bilishazam';
-import { fetchBiliPaginatedAPI } from './paginatedbili';
+import { logger } from "../Logger";
+import { regexFetchProps } from "./generic";
+import { biliShazamOnSonglist } from "./bilishazam";
+import { fetchBiliPaginatedAPI } from "./paginatedbili";
 
 const URL_BILICOLLE_INFO =
-  'https://api.bilibili.com/x/polymer/space/seasons_archives_list?mid={mid}&season_id={sid}&sort_reverse=true&page_num={pn}&page_size=100';
+  "https://api.bilibili.com/x/polymer/space/seasons_archives_list?mid={mid}&season_id={sid}&sort_reverse=true&page_num={pn}&page_size=100";
 
 const fetchBiliColleList = async (
   mid: string,
   sid: string,
   progressEmitter: (val: number) => void = () => undefined,
-  favList: string[] = []
+  favList: string[] = [],
 ) => {
-  logger.info('calling fetchBiliColleList');
+  logger.info("calling fetchBiliColleList");
 
   return await fetchBiliPaginatedAPI({
-    url: URL_BILICOLLE_INFO.replace('{mid}', mid).replace('{sid}', sid),
+    url: URL_BILICOLLE_INFO.replace("{mid}", mid).replace("{sid}", sid),
     getMediaCount: (data: any) => data.meta.total,
     getPageSize: (data: any) => data.page.page_size,
     getItems: (js: any) => js.data.archives,
@@ -46,11 +46,11 @@ const regexFetch = async ({
       reExtracted[1]!,
       reExtracted[2]!,
       progressEmitter,
-      favList
+      favList,
     ),
     false,
     progressEmitter,
-    useBiliTag || false
+    useBiliTag || false,
   ),
 });
 

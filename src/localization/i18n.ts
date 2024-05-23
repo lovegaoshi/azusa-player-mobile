@@ -1,15 +1,15 @@
 // src/localization/i18n.ts
-import i18n from 'i18next';
-import { initReactI18next } from 'react-i18next';
-import translationEN from './en/translation.json';
-import translationZHCN from './zhcn/translation.json';
-import { Settings, I18nManager, Platform } from 'react-native';
+import i18n from "i18next";
+import { initReactI18next } from "react-i18next";
+import translationEN from "./en/translation.json";
+import translationZHCN from "./zhcn/translation.json";
+import { Settings, I18nManager, Platform } from "react-native";
 
 function getLocale() {
-  let currentLocale = 'en';
+  let currentLocale = "en";
 
-  if (Platform.OS === 'ios') {
-    const settings = Settings.get('AppleLocale');
+  if (Platform.OS === "ios") {
+    const settings = Settings.get("AppleLocale");
     const locale = settings || settings?.[0];
     if (locale) currentLocale = locale;
   } else {
@@ -28,7 +28,7 @@ const deviceLanguage = getLocale();
  */
 
 export const resources = {
-  'zh_CN_#Hans': {
+  "zh_CN_#Hans": {
     translation: translationZHCN,
   },
   en: {
@@ -38,9 +38,9 @@ export const resources = {
 
 i18n.use(initReactI18next).init({
   resources,
-  compatibilityJSON: 'v3',
+  compatibilityJSON: "v3",
   lng: deviceLanguage,
-  fallbackLng: 'en',
+  fallbackLng: "en",
   interpolation: {
     escapeValue: false,
   },

@@ -1,39 +1,39 @@
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { View, StyleSheet, ScrollView } from 'react-native';
-import { useTranslation } from 'react-i18next';
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { View, StyleSheet, ScrollView } from "react-native";
+import { useTranslation } from "react-i18next";
 
-import GeneralSettings from './GeneralSettings';
-import AppearanceSettings from './appearances/View';
-import DeveloperSettings from './DeveloperSettings';
-import SyncSettings from './SyncSettings';
-import { useNoxSetting } from '@stores/useApp';
-import { SettingListItem } from './useRenderSetting';
-import LanguageSettings from './LanguageSettings';
-import AboutSettings from './AboutSettings';
-import SplashSettings from './SplashSettings';
-import Bilibili from '../login/Bilibili';
+import GeneralSettings from "./GeneralSettings";
+import AppearanceSettings from "./appearances/View";
+import DeveloperSettings from "./DeveloperSettings";
+import SyncSettings from "./SyncSettings";
+import { useNoxSetting } from "@stores/useApp";
+import { SettingListItem } from "./useRenderSetting";
+import LanguageSettings from "./LanguageSettings";
+import AboutSettings from "./AboutSettings";
+import SplashSettings from "./SplashSettings";
+import Bilibili from "../login/Bilibili";
 
 enum Icons {
-  HOME = 'cog',
-  SKIN = 'palette',
-  BACKUP = 'backup-restore',
-  INFO = 'information',
-  DEVELOPER = 'application-brackets',
-  LANGUAGE = 'translate',
-  LOGIN = 'login-variant',
-  SPLASH_GALLARY = 'view-gallery',
+  HOME = "cog",
+  SKIN = "palette",
+  BACKUP = "backup-restore",
+  INFO = "information",
+  DEVELOPER = "application-brackets",
+  LANGUAGE = "translate",
+  LOGIN = "login-variant",
+  SPLASH_GALLARY = "view-gallery",
 }
 
 enum VIEW {
-  HOME = 'Settings',
-  DUMMY = 'Features not implemented',
-  GENERAL = 'General',
-  SKIN = 'Skins',
-  DEVELOPER = 'Developer Options',
-  BACKUP = 'Sync',
-  LOGIN = 'Login',
-  INFO = 'About',
-  SPLASH_GALLARY = 'Splash Gallary',
+  HOME = "Settings",
+  DUMMY = "Features not implemented",
+  GENERAL = "General",
+  SKIN = "Skins",
+  DEVELOPER = "Developer Options",
+  BACKUP = "Sync",
+  LOGIN = "Login",
+  INFO = "About",
+  SPLASH_GALLARY = "Splash Gallary",
 }
 
 const Stack = createNativeStackNavigator();
@@ -43,7 +43,7 @@ interface Props extends NoxComponent.NavigationProps {
 }
 
 const HomeSettings = ({ navigation }: Props) => {
-  const playerStyle = useNoxSetting(state => state.playerStyle);
+  const playerStyle = useNoxSetting((state) => state.playerStyle);
 
   return (
     <View
@@ -110,37 +110,37 @@ const Settings = ({ headerBackVisible = true }: Props) => {
       <Stack.Screen
         name={VIEW.SPLASH_GALLARY}
         component={SplashSettings}
-        options={{ title: String(t('Settings.SplashSettingName')) }}
+        options={{ title: String(t("Settings.SplashSettingName")) }}
       />
       <Stack.Screen
         name={VIEW.INFO}
         component={AboutSettings}
-        options={{ title: String(t('Settings.InfoSettingName')) }}
+        options={{ title: String(t("Settings.InfoSettingName")) }}
       />
       <Stack.Screen
         name={VIEW.GENERAL}
         component={GeneralSettings}
-        options={{ title: String(t('Settings.GeneralSettingName')) }}
+        options={{ title: String(t("Settings.GeneralSettingName")) }}
       />
       <Stack.Screen
         name={VIEW.SKIN}
         component={AppearanceSettings}
-        options={{ title: String(t('Settings.AppearanceSettingName')) }}
+        options={{ title: String(t("Settings.AppearanceSettingName")) }}
       />
       <Stack.Screen
         name={VIEW.DEVELOPER}
         component={DeveloperSettings}
-        options={{ title: String(t('Settings.DeveloperOptionsName')) }}
+        options={{ title: String(t("Settings.DeveloperOptionsName")) }}
       />
       <Stack.Screen
         name={VIEW.BACKUP}
         component={SyncSettings}
-        options={{ title: String(t('Settings.BackupSettingName')) }}
+        options={{ title: String(t("Settings.BackupSettingName")) }}
       />
       <Stack.Screen
         name={VIEW.LOGIN}
         component={Bilibili}
-        options={{ title: String(t('appDrawer.LoginName')) }}
+        options={{ title: String(t("appDrawer.LoginName")) }}
       />
     </Stack.Navigator>
   );

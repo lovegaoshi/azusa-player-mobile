@@ -1,14 +1,14 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import * as React from 'react';
-import CookieManager from '@react-native-cookies/cookies';
-import { useTranslation } from 'react-i18next';
+import * as React from "react";
+import CookieManager from "@react-native-cookies/cookies";
+import { useTranslation } from "react-i18next";
 
-import { logger } from '@utils/Logger';
-import bfetch from '@utils/BiliFetch';
-import { addCookie } from '@utils/ChromeStorage';
-import { getLoginStatus } from '@utils/Login';
-import { throttler } from '@utils/throttle';
-import useSnack from '@stores/useSnack';
+import { logger } from "@utils/Logger";
+import bfetch from "@utils/BiliFetch";
+import { addCookie } from "@utils/ChromeStorage";
+import { getLoginStatus } from "@utils/Login";
+import { throttler } from "@utils/throttle";
+import useSnack from "@stores/useSnack";
 
 export interface QRCodeReq {
   url: string;
@@ -24,51 +24,51 @@ export interface LoginInfo {
 
 // https://github.com/SocialSisterYi/bilibili-API-collect/blob/master/docs/login/login_action/QR.md#%E7%94%B3%E8%AF%B7%E4%BA%8C%E7%BB%B4%E7%A0%81web%E7%AB%AF
 
-const domain = 'https://bilibili.com';
-const loginAPI = 'https://api.bilibili.com/x/web-interface/nav';
+const domain = "https://bilibili.com";
+const loginAPI = "https://api.bilibili.com/x/web-interface/nav";
 const getQRCodeAPI =
-  'https://passport.bilibili.com/x/passport-login/web/qrcode/generate';
+  "https://passport.bilibili.com/x/passport-login/web/qrcode/generate";
 //'https://passport.bilibili.com/qrcode/getLoginUrl';
 const probeQRCodeAPI =
-  'https://passport.bilibili.com/x/passport-login/web/qrcode/poll';
+  "https://passport.bilibili.com/x/passport-login/web/qrcode/poll";
 //'https://passport.bilibili.com/qrcode/getLoginInfo';
-const oauthKey = 'qrcode_key'; // 'oauthKey';
+const oauthKey = "qrcode_key"; // 'oauthKey';
 /**
  * TODO: doesnt work! oh no!
  */
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const loginQRVerification = async () => {
   const verificationURL =
-    'https://passport.bilibili.com/x/passport-login/web/sso/list?biliCSRF=';
-  const biliJct = (await CookieManager.get('https://www.bilibili.com'))[
-    'bili_jct'
+    "https://passport.bilibili.com/x/passport-login/web/sso/list?biliCSRF=";
+  const biliJct = (await CookieManager.get("https://www.bilibili.com"))[
+    "bili_jct"
   ]?.value;
   const res = await throttler.biliApiLimiter.schedule(async () =>
       bfetch(`${verificationURL}${biliJct}`, {
-        method: 'GET',
-        credentials: 'include',
+        method: "GET",
+        credentials: "include",
         headers: {},
-      })
+      }),
     ),
     json = await res.json();
   await Promise.all(
     json.data.sso.map((url: string) =>
       throttler.biliApiLimiter.schedule(async () =>
         bfetch(url, {
-          method: 'GET',
-          credentials: 'include',
+          method: "GET",
+          credentials: "include",
           headers: {},
-        })
-      )
-    )
+        }),
+      ),
+    ),
   );
 };
 
 const useBiliLogin = () => {
   const { t } = useTranslation();
-  const setSnack = useSnack(state => state.setSnack);
-  const [qrcode, setQrCode] = React.useState<string>('');
-  const [qrcodeKey, setQrCodeKey] = React.useState<string>('');
+  const setSnack = useSnack((state) => state.setSnack);
+  const [qrcode, setQrCode] = React.useState<string>("");
+  const [qrcodeKey, setQrCodeKey] = React.useState<string>("");
   const [qrcodeExpire, setQrCodeExpire] = React.useState<number>(-1);
   const [loginInfo, setLoginInfo] = React.useState<LoginInfo | null>(null);
   const [initialize, setInitialize] = React.useState<boolean>(true);
@@ -91,7 +91,7 @@ const useBiliLogin = () => {
   };
 
   const clearQRLogin = async () => {
-    setQrCode('');
+    setQrCode("");
     setQrCodeExpire(-1);
   };
 
@@ -110,7 +110,7 @@ const useBiliLogin = () => {
   const probeQRLogin = async () => {
     try {
       const response = await bfetch(
-        `${probeQRCodeAPI}?${oauthKey}=${qrcodeKey}`
+        `${probeQRCodeAPI}?${oauthKey}=${qrcodeKey}`,
       );
       /**
       const response = await bfetch(probeQRCodeAPI, {
@@ -126,17 +126,17 @@ const useBiliLogin = () => {
       const json = await response.json();
       logger.debug(
         `[biliLogin] probing QR code login of ${qrcodeKey}, ${JSON.stringify(
-          json
-        )}`
+          json,
+        )}`,
       );
       if (json.code === 0) {
         // json.status
-        const setCookie = response.headers.get('set-cookie');
+        const setCookie = response.headers.get("set-cookie");
         if (!setCookie) {
           logger.warn(
             `[biliLogin] no set-cookie header found; res: ${JSON.stringify(
-              json
-            )}`
+              json,
+            )}`,
           );
           return;
         }
@@ -153,7 +153,7 @@ const useBiliLogin = () => {
             await CookieManager.set(domain, { name: key, value });
           } catch {
             logger.warn(
-              `[biliLogin] ${key} and ${value} failed in saving cookie.`
+              `[biliLogin] ${key} and ${value} failed in saving cookie.`,
             );
           }
         }
@@ -165,7 +165,7 @@ const useBiliLogin = () => {
       clearQRLogin();
       logger.error(`[biliLogin] ${error}`);
       setSnack({
-        snackMsg: { success: t('Login.BilibiliLoginProbeFailed') },
+        snackMsg: { success: t("Login.BilibiliLoginProbeFailed") },
       });
     }
   };
@@ -174,12 +174,12 @@ const useBiliLogin = () => {
   React.useEffect(() => {
     if (qrcodeExpire < 0) return () => undefined;
     const timer = setInterval(() => {
-      setQrCodeExpire(val => val - 4);
+      setQrCodeExpire((val) => val - 4);
       if (qrcodeExpire === 0) {
         clearInterval(timer);
-        setQrCode('');
+        setQrCode("");
         setSnack({
-          snackMsg: { success: t('Login.BilibiliLoginQRExpired') },
+          snackMsg: { success: t("Login.BilibiliLoginQRExpired") },
         });
       } else {
         probeQRLogin();

@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef } from "react";
 import {
   StyleSheet,
   Text,
@@ -9,16 +9,16 @@ import {
   Easing,
   TextStyle,
   StyleProp,
-} from 'react-native';
-import type { Track } from 'react-native-track-player';
-import { Image } from 'expo-image';
-import MarqueeText from 'react-native-text-ticker';
-import { useFocusEffect } from '@react-navigation/native';
+} from "react-native";
+import type { Track } from "react-native-track-player";
+import { Image } from "expo-image";
+import MarqueeText from "react-native-text-ticker";
+import { useFocusEffect } from "@react-navigation/native";
 
-import { useNoxSetting } from '@stores/useApp';
-import NoxPlayingList from '@stores/playingList';
-import SongMenuButton from './SongMenuButton';
-import FavReloadButton from './FavReloadButton';
+import { useNoxSetting } from "@stores/useApp";
+import NoxPlayingList from "@stores/playingList";
+import SongMenuButton from "./SongMenuButton";
+import FavReloadButton from "./FavReloadButton";
 
 interface Props {
   track?: Track;
@@ -36,24 +36,24 @@ const TrackInfoTemplate: React.FC<Props> = ({
   children,
   containerStyle,
 }) => {
-  const playerSetting = useNoxSetting(state => state.playerSetting);
-  const playerStyle = useNoxSetting(state => state.playerStyle);
-  const currentPlayingList = useNoxSetting(state => state.currentPlayingList);
+  const playerSetting = useNoxSetting((state) => state.playerSetting);
+  const playerStyle = useNoxSetting((state) => state.playerStyle);
+  const currentPlayingList = useNoxSetting((state) => state.currentPlayingList);
   const coverStyle = {
-    width: windowWidth || '100%',
-    height: windowHeight || '100%',
+    width: windowWidth || "100%",
+    height: windowHeight || "100%",
   };
 
   const getTrackLocation = () => {
     return track?.song
       ? `#${
           currentPlayingList.songList.findIndex(
-            song => song.id === track.song.id
+            (song) => song.id === track.song.id,
           ) + 1
         } - ${NoxPlayingList.getState().currentPlayingIndex + 1}/${
           currentPlayingList.songList.length
         }`
-      : '';
+      : "";
   };
 
   const AlbumArt = () => (
@@ -70,7 +70,7 @@ const TrackInfoTemplate: React.FC<Props> = ({
                   uri: `${track?.artwork}`,
                 }
           }
-          transition={{ effect: 'flip-from-top' }}
+          transition={{ effect: "flip-from-top" }}
         />
       </Animated.View>
     </TouchableWithoutFeedback>
@@ -121,21 +121,21 @@ const SongTitle = (props: SongTitleProps) => {
   // if content fits there should be no visual difference (albeit did rerender);
   // if content doesnt fit I'd rather have this slight "flicker" than no marquee effects
   // TODO: why I cant force a rerender elsewise?
-  const space = renderCounter ? ' ' : '';
+  const space = renderCounter ? " " : "";
   useFocusEffect(
     React.useCallback(() => {
       if (resolveError.current > 0) {
-        setRenderCounter(v => !v);
+        setRenderCounter((v) => !v);
         resolveError.current = 0;
       }
       return () => undefined;
-    }, [])
+    }, []),
   );
 
   return (
     <MarqueeText
       duration={3000}
-      animationType={'bounce'}
+      animationType={"bounce"}
       bounceDelay={2000}
       style={props.style}
       easing={Easing.linear}
@@ -150,7 +150,7 @@ export default TrackInfoTemplate;
 
 const styles = StyleSheet.create({
   container: {
-    alignItems: 'center',
+    alignItems: "center",
   },
   artwork: {
     opacity: 1,
@@ -160,35 +160,35 @@ const styles = StyleSheet.create({
   },
   titleText: {
     fontSize: 18,
-    fontWeight: '600',
-    color: 'grey',
+    fontWeight: "600",
+    color: "grey",
     marginTop: 10,
     paddingHorizontal: 5,
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
   },
   artistText: {
     fontSize: 16,
-    fontWeight: '200',
+    fontWeight: "200",
   },
   infoContainer: {
-    flexDirection: 'row',
+    flexDirection: "row",
   },
   favoriteButtonContainer: {
     flex: 1,
     // justifyContent: 'center',
-    alignItems: 'center',
+    alignItems: "center",
     marginTop: -5,
   },
   artistInfoContainer: {
     flex: 4,
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
   },
   songMenuButtonContainer: {
     flex: 1,
     // justifyContent: 'center',
-    alignItems: 'center',
+    alignItems: "center",
     marginTop: -5,
   },
 });

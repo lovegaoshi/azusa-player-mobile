@@ -1,14 +1,14 @@
 // vanilla store of zustand serving playbackServices.
-import { createStore } from 'zustand/vanilla';
+import { createStore } from "zustand/vanilla";
 
-import { getR128GainMapping, saveR128GainMapping } from '@utils/ChromeStorage';
+import { getR128GainMapping, saveR128GainMapping } from "@utils/ChromeStorage";
 
 interface AppStore {
   r128gain: NoxStorage.R128Dict;
   setR128gain: (val: NoxStorage.R128Dict) => void;
 }
 
-const appStore = createStore<AppStore>(set => ({
+const appStore = createStore<AppStore>((set) => ({
   pipMode: false,
   r128gain: {},
   setR128gain: (val: NoxStorage.R128Dict) => {

@@ -1,34 +1,34 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Platform } from 'react-native';
+import { Platform } from "react-native";
 
-import { regexFetchProps } from './generic';
-import { biliApiLimiter } from './throttle';
-import { biliShazamOnSonglist } from './bilishazam';
-import SongTS from '@objects/Song';
-import { logger } from '../Logger';
-import bfetch from '@utils/BiliFetch';
-import { Source } from '@enums/MediaFetch';
+import { regexFetchProps } from "./generic";
+import { biliApiLimiter } from "./throttle";
+import { biliShazamOnSonglist } from "./bilishazam";
+import SongTS from "@objects/Song";
+import { logger } from "../Logger";
+import bfetch from "@utils/BiliFetch";
+import { Source } from "@enums/MediaFetch";
 
 export enum FieldEnum {
-  AudioUrl = 'AudioUrl',
-  VideoUrl = 'VideoUrl',
-  CID = 'CID',
-  AudioInfo = 'AudioInfo',
+  AudioUrl = "AudioUrl",
+  VideoUrl = "VideoUrl",
+  CID = "CID",
+  AudioInfo = "AudioInfo",
 }
 
 const URL_VIDEO_INFO =
-  'https://api.bilibili.com/x/web-interface/view?bvid={bvid}';
+  "https://api.bilibili.com/x/web-interface/view?bvid={bvid}";
 const URL_PLAY_URL =
-  'https://api.bilibili.com/x/player/playurl?cid={cid}&bvid={bvid}&qn=64&fnval=16&try_look=1&voice_balance=1';
+  "https://api.bilibili.com/x/player/playurl?cid={cid}&bvid={bvid}&qn=64&fnval=16&try_look=1&voice_balance=1";
 const URL_PLAY_URL_IOS =
-  'https://api.bilibili.com/x/player/playurl?cid={cid}&bvid={bvid}&qn=6&fnval=16&platform=html5&voice_balance=1';
+  "https://api.bilibili.com/x/player/playurl?cid={cid}&bvid={bvid}&qn=6&fnval=16&platform=html5&voice_balance=1";
 
 const fetchBVIDRaw = async (bvid: string): Promise<NoxMedia.Song[]> => {
   logger.info(
-    `calling fetchBVID of ${bvid} of ${URL_VIDEO_INFO.replace('{bvid}', bvid)}`
+    `calling fetchBVID of ${bvid} of ${URL_VIDEO_INFO.replace("{bvid}", bvid)}`,
   );
   try {
-    const res = await bfetch(URL_VIDEO_INFO.replace('{bvid}', bvid));
+    const res = await bfetch(URL_VIDEO_INFO.replace("{bvid}", bvid));
     const json = await res.json();
     const { data } = json;
     return data.pages.map((page: any, index: number) => {
@@ -41,7 +41,7 @@ const fetchBVIDRaw = async (bvid: string): Promise<NoxMedia.Song[]> => {
         singer: data.owner.name,
         singerId: data.owner.mid,
         cover: data.pic,
-        lyric: '',
+        lyric: "",
         page: index + 1,
         duration: page.duration,
         album: data.title,
@@ -57,7 +57,7 @@ const fetchBVIDRaw = async (bvid: string): Promise<NoxMedia.Song[]> => {
 
 export const fetchBVID = async (
   bvid: string,
-  progressEmitter: () => void = () => undefined
+  progressEmitter: () => void = () => undefined,
 ) =>
   await biliApiLimiter.schedule(() => {
     progressEmitter();
@@ -66,7 +66,7 @@ export const fetchBVID = async (
 
 export const BVIDtoAID = (bvid: string): Promise<string> =>
   biliApiLimiter.schedule(async () => {
-    const res = await bfetch(URL_VIDEO_INFO.replace('{bvid}', bvid));
+    const res = await bfetch(URL_VIDEO_INFO.replace("{bvid}", bvid));
     const json = await res.json();
     return String(json.data.aid);
   });
@@ -74,11 +74,11 @@ export const BVIDtoAID = (bvid: string): Promise<string> =>
 export const fetchBiliBVIDs = async (
   BVids: string[],
   progressEmitter: (val: number) => void = () => undefined,
-  useBiliTag = false
+  useBiliTag = false,
 ) => {
   const BVidLen = BVids.length;
   const BVidPromises = BVids.map((bvid, index) =>
-    fetchBVID(bvid, () => progressEmitter((100 * (index + 1)) / BVidLen))
+    fetchBVID(bvid, () => progressEmitter((100 * (index + 1)) / BVidLen)),
   );
   const songs = (await Promise.all(BVidPromises)).flat();
   return biliShazamOnSonglist(songs, false, progressEmitter, useBiliTag);
@@ -121,40 +121,40 @@ export const fetchVideoPlayUrlPromise = async ({
   iOS = true,
 }: FetchPlayURL): Promise<NoxNetwork.ParsedNoxMediaURL> => {
   logger.debug(
-    `fethcVideoPlayURL: ${URL_PLAY_URL.replace('{bvid}', bvid).replace(
-      '{cid}',
-      String(cid)
-    )} with ${extractType}`
+    `fethcVideoPlayURL: ${URL_PLAY_URL.replace("{bvid}", bvid).replace(
+      "{cid}",
+      String(cid),
+    )} with ${extractType}`,
   );
   try {
     // HACK:  this should be a breaking change that stringified cid
     // will never be not true.
-    if (!cid || cid.includes('null')) {
+    if (!cid || cid.includes("null")) {
       cid = await fetchCID(bvid);
       logger.debug(`[resolveURL] cid resolved to be: ${cid}`);
     }
     // iOS: resolve lowest res video?
-    if (iOS && Platform.OS === 'ios') {
+    if (iOS && Platform.OS === "ios") {
       const res = await bfetch(
-        URL_PLAY_URL_IOS.replace('{bvid}', bvid).replace('{cid}', String(cid)),
+        URL_PLAY_URL_IOS.replace("{bvid}", bvid).replace("{cid}", String(cid)),
         {
-          method: 'GET',
+          method: "GET",
           headers: {},
-          credentials: 'omit',
-        }
+          credentials: "omit",
+        },
       );
       const json = await res.json();
       logger.debug(`[iOS resolveURL] ${JSON.stringify(json.data)}`);
       return { url: json.data.durl[0].url as string };
     }
     const res = await bfetch(
-      URL_PLAY_URL.replace('{bvid}', bvid).replace('{cid}', String(cid)),
+      URL_PLAY_URL.replace("{bvid}", bvid).replace("{cid}", String(cid)),
       // to resolve >480p video sources
       {
-        method: 'GET',
+        method: "GET",
         headers: {},
-        credentials: extractType === FieldEnum.AudioUrl ? 'omit' : 'include',
-      }
+        credentials: extractType === FieldEnum.AudioUrl ? "omit" : "include",
+      },
     );
     const json = await res.json();
     return { url: extractResponseJson(json, extractType) as string };
@@ -167,7 +167,7 @@ export const fetchVideoPlayUrlPromise = async ({
 export const fetchCID = async (bvid: string) => {
   // logger.log('Data.js Calling fetchCID:' + URL_BVID_TO_CID.replace("{bvid}", bvid))
   const res = await bfetch(
-    `https://api.bilibili.com/x/player/pagelist?bvid=${bvid}&jsonp=jsonp`
+    `https://api.bilibili.com/x/player/pagelist?bvid=${bvid}&jsonp=jsonp`,
   );
   const json = await res.json();
   const cid = extractResponseJson(json, FieldEnum.CID);
@@ -201,7 +201,7 @@ const extractResponseJson = (json: any, field: string) => {
       return {};
     default:
       throw new Error(
-        `invalid field type: ${field} to parse JSON response from ${json}`
+        `invalid field type: ${field} to parse JSON response from ${json}`,
       );
   }
 };
@@ -212,7 +212,7 @@ const refreshSong = (song: NoxMedia.Song) => song;
 
 const export2URL = (song: NoxMedia.Song) =>
   `https://www.bilibili.com/video/${song.bvid}${
-    song.page ? `?p=${song.page}` : ''
+    song.page ? `?p=${song.page}` : ""
   }`;
 export default {
   regexSearchMatch: /(BV[^/?]+)/,

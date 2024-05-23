@@ -1,16 +1,16 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import * as React from 'react';
-import CookieManager from '@react-native-cookies/cookies';
-import { useTranslation } from 'react-i18next';
-import md5 from 'md5';
+import * as React from "react";
+import CookieManager from "@react-native-cookies/cookies";
+import { useTranslation } from "react-i18next";
+import md5 from "md5";
 
-import { logger } from '@utils/Logger';
-import useSnack from '@stores/useSnack';
-import bfetch, { parseBodyParams } from '@utils/BiliFetch';
-import { addCookie } from '@utils/ChromeStorage';
-import { getLoginStatus } from '@utils/Login';
-import { QRCodeReq, LoginInfo } from './useBiliLogin';
-import { throttler } from '@utils/throttle';
+import { logger } from "@utils/Logger";
+import useSnack from "@stores/useSnack";
+import bfetch, { parseBodyParams } from "@utils/BiliFetch";
+import { addCookie } from "@utils/ChromeStorage";
+import { getLoginStatus } from "@utils/Login";
+import { QRCodeReq, LoginInfo } from "./useBiliLogin";
+import { throttler } from "@utils/throttle";
 
 // https://github.com/SocialSisterYi/bilibili-API-collect/blob/master/docs/login/login_action/QR.md#web%E7%AB%AF%E6%89%AB%E7%A0%81%E7%99%BB%E5%BD%95-%E6%97%A7%E7%89%88
 /**
@@ -30,27 +30,27 @@ import { throttler } from '@utils/throttle';
     }
  */
 
-const domain = 'https://bilibili.com';
-const loginAPI = 'https://api.bilibili.com/x/web-interface/nav';
+const domain = "https://bilibili.com";
+const loginAPI = "https://api.bilibili.com/x/web-interface/nav";
 const getQRCodeAPI =
-  'https://passport.bilibili.com/x/passport-tv-login/qrcode/auth_code';
+  "https://passport.bilibili.com/x/passport-tv-login/qrcode/auth_code";
 const probeQRCodeAPI =
-  'https://passport.bilibili.com/x/passport-tv-login/qrcode/poll';
-const oauthKey = 'auth_code';
+  "https://passport.bilibili.com/x/passport-tv-login/qrcode/poll";
+const oauthKey = "auth_code";
 const verificationURL =
-  'https://passport.bilibili.com/x/passport-login/oauth2/refresh_token';
+  "https://passport.bilibili.com/x/passport-login/oauth2/refresh_token";
 
 const signBody = (body: any) => {
   return md5(`${parseBodyParams(body)}59b43e04ad6965f34319062b478f83dd`);
 };
 
 const getCookies = async () => {
-  const accessKey = (await CookieManager.get('https://www.bilibili.com'))[
-    'access_key'
+  const accessKey = (await CookieManager.get("https://www.bilibili.com"))[
+    "access_key"
   ]?.value;
 
-  const refreshToken = (await CookieManager.get('https://www.bilibili.com'))[
-    'refresh_token'
+  const refreshToken = (await CookieManager.get("https://www.bilibili.com"))[
+    "refresh_token"
   ]?.value;
   return { accessKey, refreshToken };
 };
@@ -60,43 +60,43 @@ const loginQRVerification = async () => {
   if (!accessKey || !refreshToken) return false;
   const qrBody = {
     access_key: accessKey,
-    actionKey: 'appkey',
-    appkey: '4409e2ce8ffd12b8',
+    actionKey: "appkey",
+    appkey: "4409e2ce8ffd12b8",
     refresh_token: refreshToken,
-    ts: '0',
+    ts: "0",
   };
   const res = await throttler.biliApiLimiter.schedule(async () =>
       bfetch(`${verificationURL}`, {
-        method: 'POST',
-        credentials: 'include',
+        method: "POST",
+        credentials: "include",
         headers: {
-          'Content-Type': 'application/x-www-form-urlencoded',
+          "Content-Type": "application/x-www-form-urlencoded",
         },
         body: {
           ...qrBody,
           sign: signBody(qrBody),
         },
-      })
+      }),
     ),
     json = await res.json();
   await CookieManager.set(domain, {
-    name: 'access_key',
+    name: "access_key",
     value: json.data.token_info.access_token,
   });
   await CookieManager.set(domain, {
-    name: 'refresh_token',
+    name: "refresh_token",
     value: json.data.token_info.refresh_token,
   });
   await CookieManager.set(domain, {
-    name: 'SESSDATA',
+    name: "SESSDATA",
     value: json.data.cookie_info.cookies.filter(
-      (val: any) => val.name === 'SESSDATA'
+      (val: any) => val.name === "SESSDATA",
     )[0].value,
   });
   await CookieManager.set(domain, {
-    name: 'bili_jct',
+    name: "bili_jct",
     value: json.data.cookie_info.cookies.filter(
-      (val: any) => val.name === 'bili_jct'
+      (val: any) => val.name === "bili_jct",
     )[0].value,
   });
   // logger.debug(`[biliLogin] ${JSON.stringify(json)}`);
@@ -104,9 +104,9 @@ const loginQRVerification = async () => {
 
 const useBiliLogin = () => {
   const { t } = useTranslation();
-  const setSnack = useSnack(state => state.setSnack);
-  const [qrcode, setQrCode] = React.useState<string>('');
-  const [qrcodeKey, setQrCodeKey] = React.useState<string>('');
+  const setSnack = useSnack((state) => state.setSnack);
+  const [qrcode, setQrCode] = React.useState<string>("");
+  const [qrcodeKey, setQrCodeKey] = React.useState<string>("");
   const [qrcodeExpire, setQrCodeExpire] = React.useState<number>(-1);
   const [loginInfo, setLoginInfo] = React.useState<LoginInfo | null>(null);
   const [initialize, setInitialize] = React.useState<boolean>(true);
@@ -129,20 +129,20 @@ const useBiliLogin = () => {
   };
 
   const clearQRLogin = async () => {
-    setQrCode('');
+    setQrCode("");
     setQrCodeExpire(-1);
   };
 
   const getQRLoginReq = async () => {
     const QRReqBody = {
-      appkey: '4409e2ce8ffd12b8',
-      local_id: '0',
+      appkey: "4409e2ce8ffd12b8",
+      local_id: "0",
       ts: 0, //Math.floor(Date.now() / 1000),
     };
     const response = await bfetch(getQRCodeAPI, {
-      method: 'POST',
+      method: "POST",
       headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
+        "Content-Type": "application/x-www-form-urlencoded",
       },
       body: {
         ...QRReqBody,
@@ -160,15 +160,15 @@ const useBiliLogin = () => {
   const probeQRLogin = async () => {
     try {
       const probeBody = {
-        appkey: '4409e2ce8ffd12b8',
+        appkey: "4409e2ce8ffd12b8",
         [oauthKey]: qrcodeKey,
-        local_id: '0',
+        local_id: "0",
         ts: 0,
       };
       const response = await bfetch(probeQRCodeAPI, {
-        method: 'POST',
+        method: "POST",
         headers: {
-          'Content-Type': 'application/x-www-form-urlencoded',
+          "Content-Type": "application/x-www-form-urlencoded",
         },
         body: {
           ...probeBody,
@@ -178,17 +178,17 @@ const useBiliLogin = () => {
       const json = await response.json();
       logger.debug(
         `[biliLogin] probing QR code login of ${qrcodeKey}, ${JSON.stringify(
-          json
-        )}`
+          json,
+        )}`,
       );
       if (json.code === 0) {
         // json.status
-        const setCookie = response.headers.get('set-cookie');
+        const setCookie = response.headers.get("set-cookie");
         if (!setCookie) {
           logger.warn(
             `[biliLogin] no set-cookie header found; res: ${JSON.stringify(
-              json
-            )}`
+              json,
+            )}`,
           );
         } else {
           addCookie(domain, setCookie);
@@ -205,17 +205,17 @@ const useBiliLogin = () => {
           } catch {
             logger.warn(
               `[biliLogin] ${JSON.stringify(
-                cookieEntry
-              )} failed in saving cookie.`
+                cookieEntry,
+              )} failed in saving cookie.`,
             );
           }
         }
         await CookieManager.set(domain, {
-          name: 'access_token',
+          name: "access_token",
           value: json.data.access_token,
         });
         await CookieManager.set(domain, {
-          name: 'refresh_token',
+          name: "refresh_token",
           value: json.data.refresh_token,
         });
         // logger.debug(`[biliLogin] ${await CookieManager.get(domain)}`);
@@ -226,7 +226,7 @@ const useBiliLogin = () => {
       clearQRLogin();
       logger.error(`[biliLogin] ${error}`);
       setSnack({
-        snackMsg: { success: t('Login.BilibiliLoginProbeFailed') },
+        snackMsg: { success: t("Login.BilibiliLoginProbeFailed") },
       });
     }
   };
@@ -238,22 +238,22 @@ const useBiliLogin = () => {
     const { key } = await getQRLoginReq();
 
     const res = await bfetch(
-      'https://passport.bilibili.com/x/passport-tv-login/h5/qrcode/confirm',
+      "https://passport.bilibili.com/x/passport-tv-login/h5/qrcode/confirm",
       {
-        method: 'POST',
-        credentials: 'include',
+        method: "POST",
+        credentials: "include",
         headers: {
-          'Content-Type': 'application/x-www-form-urlencoded',
+          "Content-Type": "application/x-www-form-urlencoded",
           Cookie: `SESSDATA=${SESSDATA}; bili_jct=${bili_jct}`,
-          'User-Agent':
-            'Mozilla/5.0 (X11; Linux x86_64; rv:38.0) Gecko/20100101 Firefox/38.0 Iceweasel/38.2.1 BiliApp',
+          "User-Agent":
+            "Mozilla/5.0 (X11; Linux x86_64; rv:38.0) Gecko/20100101 Firefox/38.0 Iceweasel/38.2.1 BiliApp",
         },
         body: {
           auth_code: key,
           csrf: bili_jct,
           scanning_type: 3,
         },
-      }
+      },
     );
     const json = await res.json();
     console.warn(json);
@@ -264,12 +264,12 @@ const useBiliLogin = () => {
   React.useEffect(() => {
     if (qrcodeExpire < 0) return () => undefined;
     const timer = setInterval(() => {
-      setQrCodeExpire(val => val - 4);
+      setQrCodeExpire((val) => val - 4);
       if (qrcodeExpire === 0) {
         clearInterval(timer);
-        setQrCode('');
+        setQrCode("");
         setSnack({
-          snackMsg: { success: t('Login.BilibiliLoginQRExpired') },
+          snackMsg: { success: t("Login.BilibiliLoginQRExpired") },
         });
       } else {
         probeQRLogin();

@@ -1,27 +1,27 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import Bottleneck from 'bottleneck';
+import Bottleneck from "bottleneck";
 
 export const DEFAULT_UA =
-  'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36 Edg/122.0.0.0';
+  "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36 Edg/122.0.0.0";
 
 export const parseBodyParams = (body: any) => {
   const formBody = [];
   for (const [key, value] of Object.entries(body)) {
     formBody.push(
-      `${encodeURIComponent(key)}=${encodeURIComponent(String(value))}`
+      `${encodeURIComponent(key)}=${encodeURIComponent(String(value))}`,
     );
   }
-  return formBody.join('&');
+  return formBody.join("&");
 };
 
 export default async function BiliFetch(
   url: string,
   paramsProp: NoxNetwork.RequestInit | RequestInit = {
-    method: 'GET',
+    method: "GET",
     headers: {},
-    credentials: 'omit',
+    credentials: "omit",
   },
-  throttler?: Bottleneck
+  throttler?: Bottleneck,
 ) {
   // BREAKING: does 2s timeout break stuff? does this work at all?
   const params = { timeout: 2000, ...paramsProp };
@@ -29,14 +29,14 @@ export default async function BiliFetch(
     params.headers = customReqHeader(url, params.headers);
   }
   params.headers = new Headers({
-    'User-Agent': DEFAULT_UA,
+    "User-Agent": DEFAULT_UA,
     ...params.headers,
   });
   // https://stackoverflow.com/questions/35325370/how-do-i-post-a-x-www-form-urlencoded-request-using-fetch
 
   if (
     params.body &&
-    params.headers.get('Content-Type') === 'application/x-www-form-urlencoded'
+    params.headers.get("Content-Type") === "application/x-www-form-urlencoded"
   ) {
     params.body = parseBodyParams(params.body);
   }
@@ -47,22 +47,22 @@ export default async function BiliFetch(
 
 export const customReqHeader = (
   url: string,
-  reqHeader: { [key: string]: any } = {}
+  reqHeader: { [key: string]: any } = {},
 ) => {
   if (
     /bilibili/.exec(url) ||
     /bilivideo/.exec(url) ||
     /akamaized\.net/.exec(url)
   ) {
-    reqHeader.referer = 'https://www.bilibili.com/';
+    reqHeader.referer = "https://www.bilibili.com/";
   } else if (/y\.qq\.com/.exec(url)) {
-    reqHeader.referer = 'https://y.qq.com/';
+    reqHeader.referer = "https://y.qq.com/";
   } else if (/u\.qq\.com/.exec(url)) {
-    reqHeader.referer = 'https://u.qq.com/';
+    reqHeader.referer = "https://u.qq.com/";
   } else if (/i\.qq\.com/.exec(url)) {
-    reqHeader.referer = 'https://i.qq.com/';
+    reqHeader.referer = "https://i.qq.com/";
   }
-  reqHeader['User-Agent'] = DEFAULT_UA;
+  reqHeader["User-Agent"] = DEFAULT_UA;
   return reqHeader;
 };
 

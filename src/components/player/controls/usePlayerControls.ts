@@ -1,19 +1,19 @@
-import React from 'react';
+import React from "react";
 import TrackPlayer, {
   useTrackPlayerEvents,
   Event,
   State,
-} from 'react-native-track-player';
+} from "react-native-track-player";
 
-import { useNoxSetting } from '@stores/useApp';
-import useTPControls from '@hooks/useTPControls';
-import { saveLastPlayDuration } from '@utils/ChromeStorage';
-import { logger } from '@utils/Logger';
-import appStore, { getABRepeatRaw, setCurrentPlaying } from '@stores/appStore';
-import noxPlayingList from '@stores/playingList';
-import { NoxRepeatMode } from '@enums/RepeatMode';
-import { fadePlay } from '@utils/RNTPUtils';
-import usePlaylistCRUD from '@hooks/usePlaylistCRUD';
+import { useNoxSetting } from "@stores/useApp";
+import useTPControls from "@hooks/useTPControls";
+import { saveLastPlayDuration } from "@utils/ChromeStorage";
+import { logger } from "@utils/Logger";
+import appStore, { getABRepeatRaw, setCurrentPlaying } from "@stores/appStore";
+import noxPlayingList from "@stores/playingList";
+import { NoxRepeatMode } from "@enums/RepeatMode";
+import { fadePlay } from "@utils/RNTPUtils";
+import usePlaylistCRUD from "@hooks/usePlaylistCRUD";
 
 const { getState } = noxPlayingList;
 const { fadeIntervalMs, fadeIntervalSec } = appStore.getState();
@@ -22,10 +22,12 @@ export default () => {
   const { performSkipToNext, performSkipToPrevious } = useTPControls();
   const [abRepeat, setABRepeat] = React.useState<[number, number]>([0, 1]);
   const [bRepeatDuration, setBRepeatDuration] = React.useState(9999);
-  const setCurrentPlayingId = useNoxSetting(state => state.setCurrentPlayingId);
+  const setCurrentPlayingId = useNoxSetting(
+    (state) => state.setCurrentPlayingId,
+  );
   const { updateCurrentSongMetadata } = usePlaylistCRUD();
 
-  useTrackPlayerEvents([Event.PlaybackActiveTrackChanged], event => {
+  useTrackPlayerEvents([Event.PlaybackActiveTrackChanged], (event) => {
     if (event.track && event.track.song) {
       setCurrentPlayingId(event.track.song.id);
     }
@@ -43,7 +45,7 @@ export default () => {
     performSkipToPrevious();
   });
 
-  useTrackPlayerEvents([Event.PlaybackProgressUpdated], event => {
+  useTrackPlayerEvents([Event.PlaybackProgressUpdated], (event) => {
     saveLastPlayDuration(event.position);
     if (
       fadeIntervalSec > 0 &&
@@ -53,7 +55,7 @@ export default () => {
     ) {
       if (getState().playmode !== NoxRepeatMode.RepeatTrack) {
         logger.debug(
-          `[FADEOUT] fading out....${event.position} / ${event.duration}`
+          `[FADEOUT] fading out....${event.position} / ${event.duration}`,
         );
         TrackPlayer.setAnimatedVolume({
           volume: 0,
@@ -71,8 +73,8 @@ export default () => {
     }
   });
 
-  useTrackPlayerEvents([Event.PlaybackState], async event => {
-    console.log('Event.PlaybackState', event);
+  useTrackPlayerEvents([Event.PlaybackState], async (event) => {
+    console.log("Event.PlaybackState", event);
     if (event.state === State.Playing) {
       fadePlay();
     }

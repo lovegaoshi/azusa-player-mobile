@@ -1,14 +1,14 @@
-import { FlashList } from '@shopify/flash-list';
-import { RefObject, useEffect, useRef } from 'react';
-import { View, StyleSheet, StyleProp, ViewStyle } from 'react-native';
-import { GestureDetector, Gesture } from 'react-native-gesture-handler';
+import { FlashList } from "@shopify/flash-list";
+import { RefObject, useEffect, useRef } from "react";
+import { View, StyleSheet, StyleProp, ViewStyle } from "react-native";
+import { GestureDetector, Gesture } from "react-native-gesture-handler";
 import Animated, {
   useSharedValue,
   withTiming,
   useAnimatedStyle,
   Easing,
   runOnJS,
-} from 'react-native-reanimated';
+} from "react-native-reanimated";
 
 const SCROLLBAR_HIDE_TIMEOUT = 3000;
 const SCROLLBAR_ANIM_TIME = 300;
@@ -58,7 +58,7 @@ export default function CustomScrollView({
   const calculateScrollBarIndicatorPosition = (maxScrollFromTop: number) => {
     const scrollPercentage = Math.min(
       Math.max(scrollPositionY / (contentViewHeight - scrollViewHeight), 0),
-      1
+      1,
     );
     return Math.ceil(maxScrollFromTop * scrollPercentage);
   };
@@ -122,7 +122,7 @@ export default function CustomScrollView({
     .onBegin(() => {
       runOnJS(setScrollPositionStart)();
     })
-    .onChange(e => {
+    .onChange((e) => {
       runOnJS(scrollByTranslationY)(e.translationY);
     });
 
@@ -148,9 +148,9 @@ export default function CustomScrollView({
 
 const styles = StyleSheet.create({
   indicatorStaticStyle: {
-    position: 'absolute',
+    position: "absolute",
     right: -19,
-    backgroundColor: 'rgba(200, 200, 200, 0.45)',
+    backgroundColor: "rgba(200, 200, 200, 0.45)",
     width: 25,
     borderRadius: 0,
     zIndex: 10,

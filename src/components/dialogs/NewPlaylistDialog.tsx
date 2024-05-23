@@ -1,11 +1,11 @@
-import React, { useRef } from 'react';
-import { Button, Dialog, Portal } from 'react-native-paper';
-import { StyleSheet } from 'react-native';
-import { useTranslation } from 'react-i18next';
+import React, { useRef } from "react";
+import { Button, Dialog, Portal } from "react-native-paper";
+import { StyleSheet } from "react-native";
+import { useTranslation } from "react-i18next";
 
-import { dummyPlaylist } from '@objects/Playlist';
-import usePlaylistAA from '@hooks/usePlaylistAA';
-import PortaledInput, { PortalInputRef } from './PortaledInput';
+import { dummyPlaylist } from "@objects/Playlist";
+import usePlaylistAA from "@hooks/usePlaylistAA";
+import PortaledInput, { PortalInputRef } from "./PortaledInput";
 
 interface Props {
   visible: boolean;
@@ -36,10 +36,10 @@ export default ({
       ? {
           ...fromList,
           id: dummyList.id,
-          title: inputRef.current?.name || '',
+          title: inputRef.current?.name || "",
           type: dummyList.type,
         }
-      : { ...dummyList, title: inputRef.current?.name || '' };
+      : { ...dummyList, title: inputRef.current?.name || "" };
     addPlaylist(newList);
     onSubmit();
   };
@@ -49,21 +49,21 @@ export default ({
       <Dialog visible={visible} onDismiss={handleClose} style={styles.dialog}>
         <Dialog.Title>
           {fromList
-            ? t('NewPlaylistDialog.title', { fromList })
-            : t('NewPlaylistDialog.titleNew')}
+            ? t("NewPlaylistDialog.title", { fromList })
+            : t("NewPlaylistDialog.titleNew")}
         </Dialog.Title>
         <Dialog.Content>
           <PortaledInput
             handleSubmit={handleSubmit}
             ref={inputRef}
-            label={'NewPlaylistDialog.label'}
-            defaultName={''}
+            label={"NewPlaylistDialog.label"}
+            defaultName={""}
             selectTextOnFocus={false}
           />
         </Dialog.Content>
         <Dialog.Actions>
-          <Button onPress={handleClose}>{t('Dialog.cancel')}</Button>
-          <Button onPress={handleSubmit}>{t('Dialog.ok')}</Button>
+          <Button onPress={handleClose}>{t("Dialog.cancel")}</Button>
+          <Button onPress={handleSubmit}>{t("Dialog.ok")}</Button>
         </Dialog.Actions>
       </Dialog>
     </Portal>
@@ -72,8 +72,8 @@ export default ({
 
 const styles = StyleSheet.create({
   dialog: {
-    position: 'absolute',
-    top: '20%',
+    position: "absolute",
+    top: "20%",
     left: 0,
     right: 0,
   },

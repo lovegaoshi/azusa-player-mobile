@@ -1,4 +1,4 @@
-import { logger } from '@utils/Logger';
+import { logger } from "@utils/Logger";
 
 /**
  * a simple personal cloud built with fastAPI. uses the current bili user
@@ -7,13 +7,13 @@ import { logger } from '@utils/Logger';
  */
 export default async () => {
   try {
-    const val = await fetch('https://api.bilibili.com/x/web-interface/nav');
+    const val = await fetch("https://api.bilibili.com/x/web-interface/nav");
     const res = await val.json();
     return res.data;
   } catch (e) {
     logger.error(
-      '[personalSync] failed to get bilibili login info. returning an empty dict instead.'
+      "[personalSync] failed to get bilibili login info. returning an empty dict instead.",
     );
-    return { uname: '' };
+    return { uname: "" };
   }
 };

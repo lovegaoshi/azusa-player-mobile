@@ -1,19 +1,19 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import axios from 'axios';
+import axios from "axios";
 
-import { regexFetchProps } from './generic';
-import SongTS from '@objects/Song';
-import { logger } from '../Logger';
-import { Source } from '@enums/MediaFetch';
-import { fetchBiliPaginatedAPI } from './paginatedbili';
+import { regexFetchProps } from "./generic";
+import SongTS from "@objects/Song";
+import { logger } from "../Logger";
+import { Source } from "@enums/MediaFetch";
+import { fetchBiliPaginatedAPI } from "./paginatedbili";
 
 // https://github.com/SocialSisterYi/bilibili-API-collect/blob/master/docs/live/info.md#%E6%89%B9%E9%87%8F%E6%9F%A5%E8%AF%A2%E7%9B%B4%E6%92%AD%E9%97%B4%E7%8A%B6%E6%80%81
 const getRoomInfos = async (uids: number[]) => {
   logger.info(`[biliLive] calling fetchVideoInfo of ${uids}`);
   const response = await axios.post(
-    'https://api.live.bilibili.com/room/v1/Room/get_status_info_by_uids',
+    "https://api.live.bilibili.com/room/v1/Room/get_status_info_by_uids",
     { uids },
-    { withCredentials: false }
+    { withCredentials: false },
   );
   const json = response.data;
   return Object.values(json.data)
@@ -43,7 +43,7 @@ const getRoomInfos = async (uids: number[]) => {
           isLive: true,
           liveStatus: roomInfo.live_status === 1,
           album: `b站直播间${roomInfo.room_id}`,
-        })
+        }),
       /*
     SongTS({
       cid: `${CIDPREFIX}-${roomInfo.room_id}`,
@@ -63,7 +63,7 @@ const getRoomInfos = async (uids: number[]) => {
 
 const getSubList = async (
   uid: string,
-  progressEmitter: (val: number) => void = () => undefined
+  progressEmitter: (val: number) => void = () => undefined,
 ) => {
   // https://api.bilibili.com/x/relation/followings?vmid=3493085134719196
   return fetchBiliPaginatedAPI({
@@ -76,7 +76,7 @@ const getSubList = async (
     getItems: (js: any) => js.data.list,
     progressEmitter,
     favList: [],
-    resolveBiliBVID: async bvobjs =>
+    resolveBiliBVID: async (bvobjs) =>
       await getRoomInfos(bvobjs.map((obj: any) => obj.mid)),
   });
 };

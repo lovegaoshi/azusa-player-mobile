@@ -1,12 +1,12 @@
-import React from 'react';
-import { StyleSheet, View, Platform } from 'react-native';
-import { IconButton } from 'react-native-paper';
-import { useNavigation } from '@react-navigation/native';
-import { getDrawerStatusFromState } from '@react-navigation/drawer';
+import React from "react";
+import { StyleSheet, View, Platform } from "react-native";
+import { IconButton } from "react-native-paper";
+import { useNavigation } from "@react-navigation/native";
+import { getDrawerStatusFromState } from "@react-navigation/drawer";
 
-import { NoxRoutes } from '@enums/Routes';
-import { useNoxSetting } from '@stores/useApp';
-import { BottomTabRouteIcons as RouteIcons } from '@enums/BottomTab';
+import { NoxRoutes } from "@enums/Routes";
+import { useNoxSetting } from "@stores/useApp";
+import { BottomTabRouteIcons as RouteIcons } from "@enums/BottomTab";
 
 interface IconProps {
   icon: string;
@@ -25,14 +25,14 @@ const BottomIconButton = ({ icon, onPress }: IconProps) => {
 
 const NoxAndroidBottomTab = ({ navigation }: NoxComponent.NavigationProps2) => {
   const navigationGlobal = useNavigation();
-  const playerStyle = useNoxSetting(state => state.playerStyle);
-  const gestureMode = useNoxSetting(state => state.gestureMode);
-  const route = useNoxSetting(state => state.bottomTabRoute);
-  const setRoute = useNoxSetting(state => state.setBottomTabRoute);
+  const playerStyle = useNoxSetting((state) => state.playerStyle);
+  const gestureMode = useNoxSetting((state) => state.gestureMode);
+  const route = useNoxSetting((state) => state.bottomTabRoute);
+  const setRoute = useNoxSetting((state) => state.setBottomTabRoute);
 
   const isDrawerOpen = () => {
     if (navigation === undefined) return false;
-    return getDrawerStatusFromState(navigation.getState()) === 'open';
+    return getDrawerStatusFromState(navigation.getState()) === "open";
   };
 
   const onDrawerPress = () => {
@@ -91,8 +91,8 @@ const NoxAndroidBottomTab = ({ navigation }: NoxComponent.NavigationProps2) => {
 
 const styles = StyleSheet.create({
   panel: {
-    flexDirection: 'row',
-    paddingBottom: Platform.OS === 'ios' ? 20 : 0,
+    flexDirection: "row",
+    paddingBottom: Platform.OS === "ios" ? 20 : 0,
   },
   iconButton: {
     flex: 1,

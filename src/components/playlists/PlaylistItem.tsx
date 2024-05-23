@@ -1,14 +1,14 @@
-import React, { ReactNode } from 'react';
-import { IconButton, Text } from 'react-native-paper';
-import { StyleSheet, View } from 'react-native';
+import React, { ReactNode } from "react";
+import { IconButton, Text } from "react-native-paper";
+import { StyleSheet, View } from "react-native";
 
-import { useNoxSetting } from '@stores/useApp';
+import { useNoxSetting } from "@stores/useApp";
 
 const DefaultIcon = (
   item: NoxMedia.Playlist,
-  deleteCallback: (id: string) => void
+  deleteCallback: (id: string) => void,
 ) => {
-  const playerStyle = useNoxSetting(state => state.playerStyle);
+  const playerStyle = useNoxSetting((state) => state.playerStyle);
 
   return (
     <IconButton
@@ -32,7 +32,7 @@ const PlaylistItem = ({
   confirmOnDelete = () => undefined,
   leadColor,
 }: PlaylistItemProps) => {
-  const currentPlayingList = useNoxSetting(state => state.currentPlayingList);
+  const currentPlayingList = useNoxSetting((state) => state.currentPlayingList);
 
   if (!item) return <></>;
   return (
@@ -44,7 +44,7 @@ const PlaylistItem = ({
           style={[
             {
               fontWeight:
-                currentPlayingList.id === item?.id ? 'bold' : undefined,
+                currentPlayingList.id === item?.id ? "bold" : undefined,
               paddingHorizontal: 10,
             },
           ]}
@@ -63,11 +63,11 @@ export default PlaylistItem;
 
 const styles = StyleSheet.create({
   playlistItemContainer: {
-    flexDirection: 'row',
+    flexDirection: "row",
   },
   playlistItemTextContainer: {
     flex: 4,
-    justifyContent: 'center',
+    justifyContent: "center",
   },
-  playlistItemIconContainer: { alignItems: 'flex-end' },
+  playlistItemIconContainer: { alignItems: "flex-end" },
 });

@@ -1,10 +1,10 @@
-import { logger } from '../Logger';
-import SongTS from '@objects/Song';
-import bfetch from '@utils/BiliFetch';
-import { Source, BiliMusicTid } from '@enums/MediaFetch';
-import { biliApiLimiter } from './throttle';
+import { logger } from "../Logger";
+import SongTS from "@objects/Song";
+import bfetch from "@utils/BiliFetch";
+import { Source, BiliMusicTid } from "@enums/MediaFetch";
+import { biliApiLimiter } from "./throttle";
 
-const API = 'https://api.bilibili.com/x/web-interface/ranking/v2?rid={rid}';
+const API = "https://api.bilibili.com/x/web-interface/ranking/v2?rid={rid}";
 
 const rankingToSong = (data: any) =>
   SongTS({
@@ -15,18 +15,18 @@ const rankingToSong = (data: any) =>
     singer: data.owner.name,
     singerId: data.owner.mid,
     cover: data.pic,
-    lyric: '',
+    lyric: "",
     page: 1,
     duration: data.duration,
     album: data.title,
     source: Source.bilivideo,
   });
 
-export const fetchRanking = async (rid = '3') => {
+export const fetchRanking = async (rid = "3") => {
   logger.info(`[biliRanking] calling fetchRanking of ${rid}`);
   try {
     const res = await biliApiLimiter.schedule(() =>
-      bfetch(API.replace('{rid}', rid))
+      bfetch(API.replace("{rid}", rid)),
     );
     const json = await res.json();
     const results = {} as { [key: number]: NoxMedia.Song[] };

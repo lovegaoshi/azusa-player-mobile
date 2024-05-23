@@ -1,17 +1,17 @@
-import { useEffect, useState } from 'react';
-import TrackPlayer from 'react-native-track-player';
-import { NativeModules, Platform } from 'react-native';
-import { useTranslation } from 'react-i18next';
+import { useEffect, useState } from "react";
+import TrackPlayer from "react-native-track-player";
+import { NativeModules, Platform } from "react-native";
+import { useTranslation } from "react-i18next";
 
-import { SetupService, AdditionalPlaybackService } from 'services';
-import { initPlayerObject } from '@utils/ChromeStorage';
-import { getCurrentTPQueue, initializePlaybackMode } from '@stores/playingList';
-import useVersionCheck from '@hooks/useVersionCheck';
-import { songlistToTracklist } from '@utils/RNTPUtils';
-import useInitializeStore from '@stores/initializeStores';
-import { IntentData } from '@enums/Intent';
-import { useNoxSetting } from '@stores/useApp';
-import usePlayStore from './usePlayStore';
+import { SetupService, AdditionalPlaybackService } from "services";
+import { initPlayerObject } from "@utils/ChromeStorage";
+import { getCurrentTPQueue, initializePlaybackMode } from "@stores/playingList";
+import useVersionCheck from "@hooks/useVersionCheck";
+import { songlistToTracklist } from "@utils/RNTPUtils";
+import useInitializeStore from "@stores/initializeStores";
+import { IntentData } from "@enums/Intent";
+import { useNoxSetting } from "@stores/useApp";
+import usePlayStore from "./usePlayStore";
 
 const { NoxAndroidAutoModule } = NativeModules;
 
@@ -19,7 +19,7 @@ export default ({ intentData }: NoxComponent.AppProps) => {
   const [playerReady, setPlayerReady] = useState<boolean>(false);
   const { initializeStores } = useInitializeStore();
   const { updateVersion, checkVersion } = useVersionCheck();
-  const setIntentData = useNoxSetting(state => state.setIntentData);
+  const setIntentData = useNoxSetting((state) => state.setIntentData);
   const { i18n } = useTranslation();
   const { checkPlayStoreUpdates } = usePlayStore();
 
@@ -33,7 +33,7 @@ export default ({ intentData }: NoxComponent.AppProps) => {
         lastPlayDuration,
         playbackMode,
       } = await initializeStores(
-        await initPlayerObject(intentData === IntentData.SafeMode)
+        await initPlayerObject(intentData === IntentData.SafeMode),
       );
       /**
        * this doesnt even seems necessary?
@@ -56,7 +56,7 @@ export default ({ intentData }: NoxComponent.AppProps) => {
       checkPlayStoreUpdates();
       const currentQueue = getCurrentTPQueue();
       const findCurrentSong = currentQueue.find(
-        val => val.id === currentPlayingID
+        (val) => val.id === currentPlayingID,
       );
       if (findCurrentSong) {
         await TrackPlayer.add(await songlistToTracklist([findCurrentSong]));
@@ -77,7 +77,7 @@ export default ({ intentData }: NoxComponent.AppProps) => {
         default:
           await TrackPlayer.pause();
       }
-      if (Platform.OS === 'android') {
+      if (Platform.OS === "android") {
         NoxAndroidAutoModule.disableShowWhenLocked();
       }
     })();

@@ -1,4 +1,4 @@
-import { activateKeepAwakeAsync, deactivateKeepAwake } from 'expo-keep-awake';
+import { activateKeepAwakeAsync, deactivateKeepAwake } from "expo-keep-awake";
 
 export default async (func: () => Promise<unknown>) => {
   activateKeepAwakeAsync();

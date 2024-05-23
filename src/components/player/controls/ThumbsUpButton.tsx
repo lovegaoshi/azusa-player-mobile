@@ -1,29 +1,29 @@
-import React from 'react';
-import { Linking, StyleSheet, View } from 'react-native';
-import { IconButton } from 'react-native-paper';
-import RNSvgaPlayer from 'react-native-svga-player';
+import React from "react";
+import { Linking, StyleSheet, View } from "react-native";
+import { IconButton } from "react-native-paper";
+import RNSvgaPlayer from "react-native-svga-player";
 
 import {
   checkBVLiked,
   sendBVLike,
   sendBVTriple,
-} from '@utils/Bilibili/BiliOperate';
-import { useNoxSetting } from '@stores/useApp';
-import { logger } from '@utils/Logger';
-import useActiveTrack from '@hooks/useActiveTrack';
+} from "@utils/Bilibili/BiliOperate";
+import { useNoxSetting } from "@stores/useApp";
+import { logger } from "@utils/Logger";
+import useActiveTrack from "@hooks/useActiveTrack";
 
 enum THUMBUPSTATUS {
-  notLoggedIn = 'web-cancel',
-  notThumbedUp = 'thumb-up-outline',
-  ThumbedUp = 'thumb-up',
+  notLoggedIn = "web-cancel",
+  notThumbedUp = "thumb-up-outline",
+  ThumbedUp = "thumb-up",
   // TODO: make this not stupid....
-  Tripled = 'star-face',
+  Tripled = "star-face",
 }
 
 // TODO: can be a util function
 const checkLiked = (song?: NoxMedia.Song) => {
   if (!song) return;
-  if (song.bvid?.startsWith?.('BV')) {
+  if (song.bvid?.startsWith?.("BV")) {
     // if (!Number.isNaN(Number(song.id))) {
     // legacy bilivideo where id is cid and bvid is bvid
     return checkBVLiked(song.bvid);
@@ -40,9 +40,9 @@ interface Props {
 }
 const ThumbsUpButton = ({ iconSize = 30 }: Props) => {
   const { track } = useActiveTrack();
-  const playerStyle = useNoxSetting(state => state.playerStyle);
+  const playerStyle = useNoxSetting((state) => state.playerStyle);
   const [status, setStatus] = React.useState<THUMBUPSTATUS>(
-    THUMBUPSTATUS.notLoggedIn
+    THUMBUPSTATUS.notLoggedIn,
   );
   const [svgaVisible, setSvgaVisible] = React.useState(false);
 
@@ -51,14 +51,14 @@ const ThumbsUpButton = ({ iconSize = 30 }: Props) => {
     setSvgaVisible(true);
     switch (status) {
       case THUMBUPSTATUS.notThumbedUp:
-        sendBVLike(track.song.bvid).then(res => {
+        sendBVLike(track.song.bvid).then((res) => {
           if (res.code === 0) setStatus(THUMBUPSTATUS.ThumbedUp);
         });
         break;
       case THUMBUPSTATUS.ThumbedUp:
         if (triple) {
           // TODO: use that starred lottie animation
-          sendBVTriple(track.song.bvid).then(res => {
+          sendBVTriple(track.song.bvid).then((res) => {
             if (res.code === 0) setStatus(THUMBUPSTATUS.Tripled);
           });
         }
@@ -95,7 +95,7 @@ const ThumbsUpButton = ({ iconSize = 30 }: Props) => {
         <RNSvgaPlayer
           style={[styles.svgaButton, { zIndex: playerStyle.thumbupZIndex }]}
           source={playerStyle.thumbupSVGA}
-          onPercentage={val => {
+          onPercentage={(val) => {
             if (val > 0.9) setSvgaVisible(false);
           }}
         />
@@ -123,7 +123,7 @@ const styles = StyleSheet.create({
   svgaButton: {
     width: 178,
     height: 178,
-    position: 'absolute',
+    position: "absolute",
     top: -110,
     left: -60,
   },

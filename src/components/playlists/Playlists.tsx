@@ -1,40 +1,40 @@
-import React, { useRef, useState } from 'react';
-import { IconButton, Text, TouchableRipple } from 'react-native-paper';
-import { useNavigation } from '@react-navigation/native';
-import { Pressable, View, StyleSheet } from 'react-native';
+import React, { useRef, useState } from "react";
+import { IconButton, Text, TouchableRipple } from "react-native-paper";
+import { useNavigation } from "@react-navigation/native";
+import { Pressable, View, StyleSheet } from "react-native";
 import DraggableFlatList, {
   ScaleDecorator,
   RenderItemParams,
-} from 'react-native-draggable-flatlist';
+} from "react-native-draggable-flatlist";
 
-import { useNoxSetting } from '@stores/useApp';
-import { NoxRoutes } from '@enums/Routes';
+import { useNoxSetting } from "@stores/useApp";
+import { NoxRoutes } from "@enums/Routes";
 import AddPlaylistButton, {
   AddPlaylistButtonRef,
-} from '../buttons/AddPlaylistButton';
-import { StorageKeys } from '@enums/Storage';
-import NewPlaylistDialog from '../dialogs/NewPlaylistDialog';
-import useAlert from '../dialogs/useAlert';
-import ShuffleAllButton from '@components/playlists/ShuffleAllButton';
-import TimerButton from '@components/playlists/TimerButton';
-import PlaylistItem from '@components/playlists/PlaylistItem';
-import usePlaylistAA from '@hooks/usePlaylistAA';
-import { BottomTabRouteIcons as RouteIcons } from '@enums/BottomTab';
+} from "../buttons/AddPlaylistButton";
+import { StorageKeys } from "@enums/Storage";
+import NewPlaylistDialog from "../dialogs/NewPlaylistDialog";
+import useAlert from "../dialogs/useAlert";
+import ShuffleAllButton from "@components/playlists/ShuffleAllButton";
+import TimerButton from "@components/playlists/TimerButton";
+import PlaylistItem from "@components/playlists/PlaylistItem";
+import usePlaylistAA from "@hooks/usePlaylistAA";
+import { BottomTabRouteIcons as RouteIcons } from "@enums/BottomTab";
 
 export default () => {
   const navigation = useNavigation();
-  const currentPlaylist = useNoxSetting(state => state.currentPlaylist);
-  const currentPlayingList = useNoxSetting(state => state.currentPlayingList);
-  const playlists = useNoxSetting(state => state.playlists);
-  const playlistIds = useNoxSetting(state => state.playlistIds);
-  const playerStyle = useNoxSetting(state => state.playerStyle);
-  const playerSetting = useNoxSetting(state => state.playerSetting);
+  const currentPlaylist = useNoxSetting((state) => state.currentPlaylist);
+  const currentPlayingList = useNoxSetting((state) => state.currentPlayingList);
+  const playlists = useNoxSetting((state) => state.playlists);
+  const playlistIds = useNoxSetting((state) => state.playlistIds);
+  const playerStyle = useNoxSetting((state) => state.playerStyle);
+  const playerSetting = useNoxSetting((state) => state.playerSetting);
   const addPlaylistButtonRef = useRef<AddPlaylistButtonRef>(null);
-  const getPlaylist = useNoxSetting(state => state.getPlaylist);
-  const setCurrentPlaylist = useNoxSetting(state => state.setCurrentPlaylist);
-  const setPlaylistIds = useNoxSetting(state => state.setPlaylistIds);
-  const scroll = useNoxSetting(state => state.incSongListScrollCounter);
-  const setRoute = useNoxSetting(state => state.setBottomTabRoute);
+  const getPlaylist = useNoxSetting((state) => state.getPlaylist);
+  const setCurrentPlaylist = useNoxSetting((state) => state.setCurrentPlaylist);
+  const setPlaylistIds = useNoxSetting((state) => state.setPlaylistIds);
+  const scroll = useNoxSetting((state) => state.incSongListScrollCounter);
+  const setRoute = useNoxSetting((state) => state.setBottomTabRoute);
   const { removePlaylist } = usePlaylistAA();
   const { TwoWayAlert } = useAlert();
   // HACK: I know its bad! But somehow this hook isnt updating in its own
@@ -49,7 +49,7 @@ export default () => {
     TwoWayAlert(
       `Delete ${playlists[playlistId].title}?`,
       `Are you sure to delete playlist ${playlists[playlistId].title}?`,
-      () => removePlaylist(playlistId)
+      () => removePlaylist(playlistId),
     );
   };
 
@@ -59,7 +59,7 @@ export default () => {
     if (currentPlaylist.id === playlistId) {
       scroll();
     } else {
-      getPlaylist(playlistId).then(p => {
+      getPlaylist(playlistId).then((p) => {
         setCurrentPlaylist(p);
         scroll();
       });
@@ -120,7 +120,7 @@ export default () => {
       >
         <View style={styles.addPlaylistButtonContent}>
           <IconButton
-            icon={'cards-heart'}
+            icon={"cards-heart"}
             onPress={() => goToPlaylist(StorageKeys.FAVORITE_PLAYLIST_KEY)}
           />
           <ShuffleAllButton />
@@ -129,7 +129,7 @@ export default () => {
           <View style={styles.addPlaylistButtonSpacer} />
           {false && (
             <IconButton
-              icon={'cog'}
+              icon={"cog"}
               onPress={() => navigation.navigate(NoxRoutes.Settings as never)}
             />
           )}
@@ -169,7 +169,7 @@ export default () => {
           style={[styles.draggableFlatList]}
           data={playlistIds}
           onDragEnd={({ data }) => setPlaylistIds(data)}
-          keyExtractor={item => item}
+          keyExtractor={(item) => item}
           renderItem={renderItem}
         />
       </View>
@@ -191,15 +191,15 @@ const styles = StyleSheet.create({
   },
   addPlaylistButtonContainer: {
     height: 50,
-    alignContent: 'center',
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignContent: "center",
+    alignItems: "center",
+    justifyContent: "center",
   },
   addPlaylistButtonContent: {
-    flexDirection: 'row',
-    alignContent: 'center',
-    alignItems: 'center',
-    justifyContent: 'center',
+    flexDirection: "row",
+    alignContent: "center",
+    alignItems: "center",
+    justifyContent: "center",
   },
   addPlaylistButtonSpacer: {
     width: 40,
@@ -210,8 +210,8 @@ const styles = StyleSheet.create({
     paddingBottom: 20,
   },
   bottomInfoText: {
-    textAlign: 'center',
+    textAlign: "center",
   },
-  drawerItemContainer: { flexDirection: 'row' },
-  drawerItemTextContainer: { justifyContent: 'center' },
+  drawerItemContainer: { flexDirection: "row" },
+  drawerItemTextContainer: { justifyContent: "center" },
 });

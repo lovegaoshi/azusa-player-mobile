@@ -8,21 +8,21 @@
  * steps to refactor:
  * each site needs a fetch to parse regex extracted, a videoinfo fetcher and a song fetcher.
  */
-import { regexFetchProps } from './generic';
+import { regexFetchProps } from "./generic";
 
-import SongTS from '@objects/Song';
-import { logger } from '../Logger';
-import bfetch from '@utils/BiliFetch';
-import { Source } from '@enums/MediaFetch';
+import SongTS from "@objects/Song";
+import { logger } from "../Logger";
+import bfetch from "@utils/BiliFetch";
+import { Source } from "@enums/MediaFetch";
 
-const API = 'https://api.bilibili.com/pgc/view/web/season?ep_id={ep}';
+const API = "https://api.bilibili.com/pgc/view/web/season?ep_id={ep}";
 const API_PLAY =
-  'https://api.bilibili.com/pgc/player/web/playurl?cid={cid}&ep_id={ep}';
+  "https://api.bilibili.com/pgc/player/web/playurl?cid={cid}&ep_id={ep}";
 const CIDPREFIX = `${Source.biliBangumi}-`;
 
 const fetchPlayUrlPromise = async (cid: string, epid: string) => {
   try {
-    const newAPI = API_PLAY.replace('{cid}', cid).replace('{ep}', epid);
+    const newAPI = API_PLAY.replace("{cid}", cid).replace("{ep}", epid);
     logger.debug(`fethcBangumiPlayURL: ${newAPI}`);
     const res = await bfetch(newAPI);
     const json = await res.json();
@@ -37,7 +37,7 @@ const regexFetch = async ({
   reExtracted,
 }: regexFetchProps): Promise<NoxNetwork.NoxRegexFetch> => {
   const epid = reExtracted[1]!;
-  const newAPI = API.replace('{ep}', epid);
+  const newAPI = API.replace("{ep}", epid);
   logger.debug(`fetchBangumiInfo: ${newAPI}`);
   const res = await bfetch(newAPI);
   const json = await res.json();
@@ -51,12 +51,12 @@ const regexFetch = async ({
         singer: json.result.season_title,
         singerId: json.result.season_id,
         cover: json.result.cover,
-        lyric: '',
+        lyric: "",
         page: 1,
         duration: ep.duration,
         album: ep.share_copy,
         source: Source.biliBangumi,
-      })
+      }),
     ),
   };
 };

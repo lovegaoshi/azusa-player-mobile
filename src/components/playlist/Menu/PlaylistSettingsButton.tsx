@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
-import { Menu } from 'react-native-paper';
-import { useTranslation } from 'react-i18next';
+import React, { useState } from "react";
+import { Menu } from "react-native-paper";
+import { useTranslation } from "react-i18next";
 
-import Dialog from './PlaylistSettingsDialog';
+import Dialog from "./PlaylistSettingsDialog";
 
-const ICON = 'pencil';
+const ICON = "pencil";
 
 interface Props {
   disabled?: boolean;
@@ -39,7 +39,7 @@ export default ({
         onPress={() => {
           setDialogOpen(true);
         }}
-        title={t('PlaylistOperations.playlistSettingsTitle')}
+        title={t("PlaylistOperations.playlistSettingsTitle")}
         disabled={disabled}
       />
       <Dialog

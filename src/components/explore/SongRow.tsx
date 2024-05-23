@@ -1,13 +1,13 @@
-import * as React from 'react';
-import { View, Dimensions, FlatList, TouchableOpacity } from 'react-native';
-import { Text } from 'react-native-paper';
-import { Image } from 'expo-image';
-import { useNavigation } from '@react-navigation/native';
+import * as React from "react";
+import { View, Dimensions, FlatList, TouchableOpacity } from "react-native";
+import { Text } from "react-native-paper";
+import { Image } from "expo-image";
+import { useNavigation } from "@react-navigation/native";
 
-import { useNoxSetting } from '@stores/useApp';
-import usePlayback from '@hooks/usePlayback';
-import { NoxRoutes } from '@enums/Routes';
-import { BiliSongCardProp } from './SongTab';
+import { useNoxSetting } from "@stores/useApp";
+import usePlayback from "@hooks/usePlayback";
+import { NoxRoutes } from "@enums/Routes";
+import { BiliSongCardProp } from "./SongTab";
 
 export const BiliSongRow = ({
   songs = [],
@@ -15,8 +15,8 @@ export const BiliSongRow = ({
   totalSongs,
 }: BiliSongCardProp) => {
   const navigationGlobal = useNavigation();
-  const playerStyle = useNoxSetting(state => state.playerStyle);
-  const scroll = useNoxSetting(state => state.incSongListScrollCounter);
+  const playerStyle = useNoxSetting((state) => state.playerStyle);
+  const scroll = useNoxSetting((state) => state.incSongListScrollCounter);
   const { playAsSearchList } = usePlayback();
 
   const fontColor = playerStyle.colors.primary;
@@ -24,7 +24,7 @@ export const BiliSongRow = ({
   return (
     <View
       style={{
-        width: Dimensions.get('window').width,
+        width: Dimensions.get("window").width,
         paddingLeft: 5,
         paddingBottom: 10,
       }}

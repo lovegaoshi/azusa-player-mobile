@@ -1,9 +1,9 @@
-import { FFmpegKit, FFprobeKit } from 'ffmpeg-kit-react-native';
-import RNFetchBlob from 'react-native-blob-util';
-import TrackPlayer from 'react-native-track-player';
+import { FFmpegKit, FFprobeKit } from "ffmpeg-kit-react-native";
+import RNFetchBlob from "react-native-blob-util";
+import TrackPlayer from "react-native-track-player";
 
-import { logger } from '../Logger';
-import { r128gain2Volume } from '../Utils';
+import { logger } from "../Logger";
+import { r128gain2Volume } from "../Utils";
 
 export const cacheAlbumArt = async (fpath: string) => {
   const tempArtPath = `${RNFetchBlob.fs.dirs.CacheDir}/tempCover.jpg`;
@@ -14,10 +14,10 @@ export const cacheAlbumArt = async (fpath: string) => {
 };
 
 export const probeMetadata = async (
-  fspath: string
+  fspath: string,
 ): Promise<NoxMedia.FFProbeMetadata> => {
   const session = await FFprobeKit.execute(
-    `-v quiet -print_format json -show_format '${fspath}'`
+    `-v quiet -print_format json -show_format '${fspath}'`,
   );
   const parsedMetadata = JSON.parse(await session.getOutput());
   logger.debug(parsedMetadata);
@@ -29,13 +29,13 @@ const parseReplayGainLog = (log: string) => {
   regex.exec(log);
   const match = regex.exec(log);
   if (!match) {
-    logger.error('[ffmpeg] no replaygain found!');
+    logger.error("[ffmpeg] no replaygain found!");
     logger.debug(`[ffmpeg] debug log:${log}`);
     return 0;
   }
   logger.debug(`[ffmpeg] r128gain resolved: ${match[1]} dB`);
-  if (match[1][0] === '+') {
-    logger.debug('[ffmpeg] r128gain of positive dB is not yet supported!');
+  if (match[1][0] === "+") {
+    logger.debug("[ffmpeg] r128gain of positive dB is not yet supported!");
   }
   return Number(match[1]);
 };
@@ -43,7 +43,7 @@ const parseReplayGainLog = (log: string) => {
 export const r128gain = async (fspath: string) => {
   logger.debug(`[ffmpeg] probing r128gain of ${fspath}`);
   const session = await FFmpegKit.execute(
-    `-i '${fspath}' -nostats -filter_complex replaygain -f null -`
+    `-i '${fspath}' -nostats -filter_complex replaygain -f null -`,
   );
   return parseReplayGainLog(await session.getOutput());
 };
@@ -64,10 +64,10 @@ export const setR128Gain = async (
   gain: number | string,
   song: NoxMedia.Song,
   fade = 0,
-  init = -1
+  init = -1,
 ) => {
   logger.debug(`[r128gain] set r128gain to ${gain} dB`);
-  if (typeof gain === 'string') {
+  if (typeof gain === "string") {
     gain = Number(gain);
     if (Number.isNaN(gain)) gain = 0;
   }

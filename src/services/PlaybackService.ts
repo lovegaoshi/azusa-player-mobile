@@ -2,46 +2,46 @@ import TrackPlayer, {
   Event,
   State,
   RepeatMode,
-} from 'react-native-track-player';
-import { DeviceEventEmitter, Platform } from 'react-native';
+} from "react-native-track-player";
+import { DeviceEventEmitter, Platform } from "react-native";
 
-import { NULL_TRACK } from '../objects/Song';
-import { parseSongR128gain } from '../utils/SongOperations';
-import { initBiliHeartbeat } from '../utils/Bilibili/BiliOperate';
-import { logger } from '../utils/Logger';
-import noxPlayingList, { getNextSong } from '../stores/playingList';
-import { NoxRepeatMode } from '../enums/RepeatMode';
-import playerSettingStore from '@stores/playerSettingStore';
-import appStore, { resetResolvedURL } from '@stores/appStore';
+import { NULL_TRACK } from "../objects/Song";
+import { parseSongR128gain } from "../utils/SongOperations";
+import { initBiliHeartbeat } from "../utils/Bilibili/BiliOperate";
+import { logger } from "../utils/Logger";
+import noxPlayingList, { getNextSong } from "../stores/playingList";
+import { NoxRepeatMode } from "../enums/RepeatMode";
+import playerSettingStore from "@stores/playerSettingStore";
+import appStore, { resetResolvedURL } from "@stores/appStore";
 import {
   fadePause,
   cycleThroughPlaymode,
   resolveAndCache,
-} from '@utils/RNTPUtils';
+} from "@utils/RNTPUtils";
 
 const { getState } = noxPlayingList;
 const { setState } = appStore;
 const getAppStoreState = appStore.getState;
 const getPlayerSetting = playerSettingStore.getState;
-let lastBiliHeartBeat: string[] = ['', ''];
+let lastBiliHeartBeat: string[] = ["", ""];
 const lastPlayedDuration: { val?: number } = { val: 0 };
 
 export async function AdditionalPlaybackService({
   noInterruption = false,
   lastPlayDuration,
 }: Partial<NoxStorage.PlayerSettingDict>) {
-  TrackPlayer.addEventListener(Event.RemoteDuck, async event => {
-    console.log('Event.RemoteDuck', event);
+  TrackPlayer.addEventListener(Event.RemoteDuck, async (event) => {
+    console.log("Event.RemoteDuck", event);
     if (noInterruption && event.paused) return;
     if (event.paused) return TrackPlayer.pause();
     if (event.permanent) return TrackPlayer.stop();
   });
 
   lastPlayedDuration.val = lastPlayDuration;
-  TrackPlayer.addEventListener(Event.PlaybackState, event => {
+  TrackPlayer.addEventListener(Event.PlaybackState, (event) => {
     if (lastPlayedDuration.val && event.state === State.Ready) {
       logger.debug(
-        `[Playback] initalized last played duration to ${lastPlayDuration}`
+        `[Playback] initalized last played duration to ${lastPlayDuration}`,
       );
       TrackPlayer.seekTo(lastPlayedDuration.val);
       lastPlayedDuration.val = undefined;
@@ -50,46 +50,46 @@ export async function AdditionalPlaybackService({
 }
 
 export async function PlaybackService() {
-  DeviceEventEmitter.addListener('APMEnterPIP', (e: boolean) =>
-    setState({ pipMode: e })
+  DeviceEventEmitter.addListener("APMEnterPIP", (e: boolean) =>
+    setState({ pipMode: e }),
   );
-  DeviceEventEmitter.addListener('APMNewIntent', (e: NoxComponent.AppProps) =>
-    console.log('apm', e)
+  DeviceEventEmitter.addListener("APMNewIntent", (e: NoxComponent.AppProps) =>
+    console.log("apm", e),
   );
 
   TrackPlayer.addEventListener(Event.RemotePause, () => {
-    console.log('Event.RemotePause');
+    console.log("Event.RemotePause");
     fadePause();
   });
 
   TrackPlayer.addEventListener(Event.RemotePlay, async () => {
-    console.log('Event.RemotePlay');
+    console.log("Event.RemotePlay");
     TrackPlayer.play();
   });
 
-  TrackPlayer.addEventListener(Event.RemoteJumpForward, async event => {
-    console.log('Event.RemoteJumpForward', event);
+  TrackPlayer.addEventListener(Event.RemoteJumpForward, async (event) => {
+    console.log("Event.RemoteJumpForward", event);
     // TrackPlayer.seekBy(event.interval);
   });
 
-  TrackPlayer.addEventListener(Event.RemoteJumpBackward, async event => {
-    console.log('Event.RemoteJumpBackward', event);
+  TrackPlayer.addEventListener(Event.RemoteJumpBackward, async (event) => {
+    console.log("Event.RemoteJumpBackward", event);
     cycleThroughPlaymode();
   });
 
-  TrackPlayer.addEventListener(Event.RemoteSeek, event => {
-    console.log('Event.RemoteSeek', event);
+  TrackPlayer.addEventListener(Event.RemoteSeek, (event) => {
+    console.log("Event.RemoteSeek", event);
     TrackPlayer.seekTo(event.position);
   });
 
-  TrackPlayer.addEventListener(Event.PlaybackQueueEnded, event => {
-    console.log('Event.PlaybackQueueEnded', event);
+  TrackPlayer.addEventListener(Event.PlaybackQueueEnded, (event) => {
+    console.log("Event.PlaybackQueueEnded", event);
   });
 
   TrackPlayer.addEventListener(
     Event.PlaybackActiveTrackChanged,
-    async event => {
-      console.log('Event.PlaybackActiveTrackChanged', event);
+    async (event) => {
+      console.log("Event.PlaybackActiveTrackChanged", event);
       const playerErrored =
         (await TrackPlayer.getPlaybackState()).state === State.Error;
       await TrackPlayer.setVolume(0);
@@ -109,7 +109,7 @@ export async function PlaybackService() {
           logger.debug(`[ResolveURL] prefetching ${nextSong.name}`);
           resolveAndCache(
             nextSong,
-            !(playerSetting.prefetchTrack && playerSetting.cacheSize > 2)
+            !(playerSetting.prefetchTrack && playerSetting.cacheSize > 2),
           );
         }
       }
@@ -152,23 +152,23 @@ export async function PlaybackService() {
             TrackPlayer.play();
           }
         } catch (e) {
-          console.error('resolveURL failed', event.track, e);
+          console.error("resolveURL failed", event.track, e);
         }
       }
       if (getState().playmode === NoxRepeatMode.RepeatTrack) {
         TrackPlayer.setRepeatMode(RepeatMode.Track);
       }
-    }
+    },
   );
 
-  TrackPlayer.addEventListener(Event.PlaybackPlayWhenReadyChanged, event => {
-    console.log('Event.PlaybackPlayWhenReadyChanged', event);
+  TrackPlayer.addEventListener(Event.PlaybackPlayWhenReadyChanged, (event) => {
+    console.log("Event.PlaybackPlayWhenReadyChanged", event);
   });
 
-  if (Platform.OS === 'android') {
-    TrackPlayer.addEventListener(Event.PlaybackAnimatedVolumeChanged, e => {
+  if (Platform.OS === "android") {
+    TrackPlayer.addEventListener(Event.PlaybackAnimatedVolumeChanged, (e) => {
       logger.debug(
-        `animated volume finished event triggered: ${JSON.stringify(e)}`
+        `animated volume finished event triggered: ${JSON.stringify(e)}`,
       );
       getAppStoreState().animatedVolumeChangedCallback();
       setState({ animatedVolumeChangedCallback: () => undefined });

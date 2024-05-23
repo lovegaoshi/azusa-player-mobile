@@ -1,10 +1,10 @@
-import { logger } from '../Logger';
-import { regexFetchProps } from './generic';
-import { bvFetch } from './bilivideo';
-import biliaudioFetch from './biliaudio';
+import { logger } from "../Logger";
+import { regexFetchProps } from "./generic";
+import { bvFetch } from "./bilivideo";
+import biliaudioFetch from "./biliaudio";
 
 const URL_FAV_LIST =
-  'https://api.bilibili.com/x/v3/fav/resource/ids?media_id={mid}';
+  "https://api.bilibili.com/x/v3/fav/resource/ids?media_id={mid}";
 
 interface BiliFavListData {
   id: number;
@@ -14,9 +14,9 @@ interface BiliFavListData {
 }
 
 const getFavList = async (mid: string) => {
-  logger.info('calling fetchFavList');
+  logger.info("calling fetchFavList");
 
-  const res = await fetch(URL_FAV_LIST.replace('{mid}', mid));
+  const res = await fetch(URL_FAV_LIST.replace("{mid}", mid));
   const json = await res.json();
   const data = json.data as BiliFavListData[];
   return data;
@@ -25,13 +25,13 @@ const getFavList = async (mid: string) => {
 export const getFavListBVID = async (
   mid: string,
   favList: string[] = [],
-  type = 2
+  type = 2,
 ) => {
   const data = await getFavList(mid);
   return data
-    .filter(val => val.type === type)
-    .map(val => val.bvid)
-    .filter(val => !favList.includes(val));
+    .filter((val) => val.type === type)
+    .map((val) => val.bvid)
+    .filter((val) => !favList.includes(val));
 };
 
 const regexFetch = async ({
@@ -43,14 +43,14 @@ const regexFetch = async ({
   // TODO: refactor this???
   const favFetched = await getFavList(reExtracted[1]!);
   const bvids = favFetched
-    .filter(val => val.type === 2)
-    .map(val => val.bvid)
-    .filter(val => !favList.includes(val));
+    .filter((val) => val.type === 2)
+    .map((val) => val.bvid)
+    .filter((val) => !favList.includes(val));
   // HACK: https://api.bilibili.com/x/v3/fav/resource/ids?media_id=2446762296
   const avids = favFetched
-    .filter(val => val.type === 12)
-    .map(val => String(val.id))
-    .filter(val => !favList.includes(val));
+    .filter((val) => val.type === 12)
+    .map((val) => String(val.id))
+    .filter((val) => !favList.includes(val));
 
   const BVfetched = await bvFetch({
     bvids,
@@ -60,14 +60,16 @@ const regexFetch = async ({
   });
 
   const AVfetched = await Promise.all(
-    avids.map(avid =>
+    avids.map((avid) =>
       biliaudioFetch.regexFetch({
         reExtracted: [0, Number(avid)] as unknown as RegExpExecArray,
-      })
-    )
+      }),
+    ),
   );
   return {
-    songList: BVfetched.songList.concat(AVfetched.map(v => v.songList).flat()),
+    songList: BVfetched.songList.concat(
+      AVfetched.map((v) => v.songList).flat(),
+    ),
   };
 };
 

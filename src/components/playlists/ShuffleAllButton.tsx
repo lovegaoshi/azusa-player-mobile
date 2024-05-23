@@ -1,8 +1,8 @@
-import React from 'react';
-import { IconButton } from 'react-native-paper';
-import { useNavigation } from '@react-navigation/native';
-import { NoxRoutes } from '@enums/Routes';
-import usePlayback from '@hooks/usePlayback';
+import React from "react";
+import { IconButton } from "react-native-paper";
+import { useNavigation } from "@react-navigation/native";
+import { NoxRoutes } from "@enums/Routes";
+import usePlayback from "@hooks/usePlayback";
 
 export default () => {
   const navigation = useNavigation();

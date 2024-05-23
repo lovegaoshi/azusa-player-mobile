@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
-import { Menu } from 'react-native-paper';
-import { useTranslation } from 'react-i18next';
+import React, { useState } from "react";
+import { Menu } from "react-native-paper";
+import { useTranslation } from "react-i18next";
 
-import Dialog from './RenameSongDialog';
-import { dummySongObj } from '@objects/Song';
+import Dialog from "./RenameSongDialog";
+import { dummySongObj } from "@objects/Song";
 
-const ICON = 'pencil';
+const ICON = "pencil";
 
 interface menuProps {
   getSongOnClick: () => NoxMedia.Song;
@@ -42,7 +42,7 @@ export default ({
           setDialogOpen(true);
           setSong(getSongOnClick());
         }}
-        title={t('SongOperations.songRenameTitle')}
+        title={t("SongOperations.songRenameTitle")}
         disabled={disabled}
       />
       <Dialog

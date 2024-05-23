@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
-import { View, FlatList, StyleSheet } from 'react-native';
-import { Button, Dialog, TextInput } from 'react-native-paper';
-import { useTranslation } from 'react-i18next';
-import { logger } from '@utils/Logger';
-import { useNoxSetting } from '@stores/useApp';
+import React, { useState } from "react";
+import { View, FlatList, StyleSheet } from "react-native";
+import { Button, Dialog, TextInput } from "react-native-paper";
+import { useTranslation } from "react-i18next";
+import { logger } from "@utils/Logger";
+import { useNoxSetting } from "@stores/useApp";
 
 interface Props {
   visible: boolean;
@@ -17,7 +17,7 @@ const DialogTitle = ({ title }: { title: string | undefined }) => {
   if (!title) return <View></View>;
   return (
     <Dialog.Title style={styles.dialogTitle}>
-      {title.length > 20 ? title.substring(0, 20) + '...' : title}
+      {title.length > 20 ? title.substring(0, 20) + "..." : title}
     </Dialog.Title>
   );
 };
@@ -32,7 +32,7 @@ export default ({
   onSubmit = logger.debug,
 }: Props) => {
   const { t } = useTranslation();
-  const playerStyle = useNoxSetting(state => state.playerStyle);
+  const playerStyle = useNoxSetting((state) => state.playerStyle);
   const [currentInput, setCurrentInput] = useState<{
     [key: string]: string;
   }>({});
@@ -48,9 +48,9 @@ export default ({
   React.useEffect(
     () =>
       setCurrentInput(
-        options.reduce((acc, curr) => ({ ...acc, [curr]: '' }), {})
+        options.reduce((acc, curr) => ({ ...acc, [curr]: "" }), {}),
       ),
-    [options]
+    [options],
   );
 
   return (
@@ -58,7 +58,7 @@ export default ({
       visible={visible}
       onDismiss={handleClose}
       style={{
-        minHeight: options.length > 4 ? '50%' : options.length * 60 + 180,
+        minHeight: options.length > 4 ? "50%" : options.length * 60 + 180,
       }}
     >
       <DialogTitle title={title} />
@@ -70,7 +70,7 @@ export default ({
             <TextInput
               label={item}
               value={currentInput[item]}
-              onChange={e =>
+              onChange={(e) =>
                 setCurrentInput({ ...currentInput, [item]: e.nativeEvent.text })
               }
               selectionColor={playerStyle.customColors.textInputSelectionColor}
@@ -80,8 +80,8 @@ export default ({
         />
       </Dialog.Content>
       <Dialog.Actions style={styles.dialogActions}>
-        <Button onPress={handleClose}>{t('Dialog.cancel')}</Button>
-        <Button onPress={handleSubmit}>{t('Dialog.ok')}</Button>
+        <Button onPress={handleClose}>{t("Dialog.cancel")}</Button>
+        <Button onPress={handleSubmit}>{t("Dialog.ok")}</Button>
       </Dialog.Actions>
     </Dialog>
   );
@@ -89,7 +89,7 @@ export default ({
 
 const styles = StyleSheet.create({
   dialogTitle: { maxHeight: 100 },
-  dialogContent: { flex: 1, minHeight: '20%' },
+  dialogContent: { flex: 1, minHeight: "20%" },
   flatList: { flex: 6 },
   dialogActions: { paddingBottom: 0 },
 });

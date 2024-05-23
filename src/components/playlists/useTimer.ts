@@ -2,9 +2,9 @@
  * this is the zustand version of timerContext in noxplayer. replace there to this.
  */
 
-import { create } from 'zustand';
+import { create } from "zustand";
 
-import logger from '@utils/Logger';
+import logger from "@utils/Logger";
 
 interface TimerStore {
   minutes: number;
@@ -28,13 +28,13 @@ const timerStore = create<TimerStore>((set, get) => ({
   startTimer: false,
   setStartTimer: (val: boolean) => set({ startTimer: val }),
   timerStart: () => {
-    set(state => ({
+    set((state) => ({
       startTimer: true,
       originalMMSS: [state.minutes, state.seconds],
     }));
   },
   timerEnd: () => {
-    set(state => ({
+    set((state) => ({
       startTimer: false,
       minutes: state.originalMMSS[0],
       seconds: state.originalMMSS[1],
@@ -63,19 +63,19 @@ interface Props {
 }
 
 export default ({
-  onTimerPause = () => logger.debug('[timer] paused'),
-  onTimerRestart = () => logger.debug('[timer] restarted'),
-  onTimerUp = () => logger.debug('[timer] up'),
+  onTimerPause = () => logger.debug("[timer] paused"),
+  onTimerRestart = () => logger.debug("[timer] restarted"),
+  onTimerUp = () => logger.debug("[timer] up"),
 }: Props) => {
-  const minutes = timerStore(state => state.minutes);
-  const setMinutes = timerStore(state => state.setMinutes);
-  const seconds = timerStore(state => state.seconds);
-  const setSeconds = timerStore(state => state.setSeconds);
-  const startTimer = timerStore(state => state.startTimer);
-  const setStartTimer = timerStore(state => state.setStartTimer);
-  const timerStartStore = timerStore(state => state.timerStart);
-  const timerEnd = timerStore(state => state.timerEnd);
-  const countdown = timerStore(state => state.countdown);
+  const minutes = timerStore((state) => state.minutes);
+  const setMinutes = timerStore((state) => state.setMinutes);
+  const seconds = timerStore((state) => state.seconds);
+  const setSeconds = timerStore((state) => state.setSeconds);
+  const startTimer = timerStore((state) => state.startTimer);
+  const setStartTimer = timerStore((state) => state.setStartTimer);
+  const timerStartStore = timerStore((state) => state.timerStart);
+  const timerEnd = timerStore((state) => state.timerEnd);
+  const countdown = timerStore((state) => state.countdown);
 
   const timerStart = () => {
     timerStartStore();

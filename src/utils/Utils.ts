@@ -1,9 +1,9 @@
 export const i0hdslbHTTPResolve = (url: string) =>
-  url.replace('http://', 'https://');
+  url.replace("http://", "https://");
 
 export const seconds2HHMMSS = (sec_num: number) => {
   sec_num = Math.floor(sec_num);
-  const padding = (num: number) => String(num).padStart(2, '0');
+  const padding = (num: number) => String(num).padStart(2, "0");
   const hours = Math.floor(sec_num / 3600);
   const minutes = Math.floor((sec_num - hours * 3600) / 60);
   const seconds = sec_num - hours * 3600 - minutes * 60;
@@ -12,7 +12,7 @@ export const seconds2HHMMSS = (sec_num: number) => {
 
 export const seconds2MMSS = (sec_num: number) => {
   sec_num = Math.floor(sec_num);
-  const padding = (num: number) => String(num).padStart(2, '0');
+  const padding = (num: number) => String(num).padStart(2, "0");
   const hours = Math.floor(sec_num / 3600);
   const minutes = Math.floor((sec_num - hours * 3600) / 60);
   const seconds = sec_num - hours * 3600 - minutes * 60;
@@ -23,7 +23,7 @@ export const seconds2MMSS = (sec_num: number) => {
 
 export const timestampToSeconds = (timestamp: string) => {
   try {
-    const timeArray = timestamp.split(':').map(parseFloat);
+    const timeArray = timestamp.split(":").map(parseFloat);
     switch (timeArray.length) {
       case 1:
         return timeArray[0];
@@ -52,13 +52,13 @@ export const rgb2rgba = (rgb: string, a = 1) => {
 };
 
 const rgbToHex = (r: number, g: number, b: number) =>
-  '#' +
+  "#" +
   [r, g, b]
-    .map(x => {
+    .map((x) => {
       const hex = x.toString(16);
-      return hex.length === 1 ? '0' + hex : hex;
+      return hex.length === 1 ? "0" + hex : hex;
     })
-    .join('');
+    .join("");
 
 export const rgb2Hex = (rgb: string) => {
   try {
@@ -66,7 +66,7 @@ export const rgb2Hex = (rgb: string) => {
     return rgbToHex(
       Number(extractedRGB[0][0]),
       Number(extractedRGB[1][0]),
-      Number(extractedRGB[2][0])
+      Number(extractedRGB[2][0]),
     );
   } catch {
     return rgb;
@@ -75,10 +75,10 @@ export const rgb2Hex = (rgb: string) => {
 
 export const getUniqObjects = <T>(
   objects: T[],
-  property: (object: T) => string
+  property: (object: T) => string,
 ) => {
   const uniqKey = new Set();
-  return objects.filter(object => {
+  return objects.filter((object) => {
     if (uniqKey.has(property(object))) {
       return false;
     }
@@ -102,11 +102,11 @@ export const chunkArray = <T>(arr: T[], size = 400): T[][] => {
 };
 
 export const charLength = (str: string) => {
-  return str.replace(/[\u0300-\u036f]/g, '').length;
+  return str.replace(/[\u0300-\u036f]/g, "").length;
 };
 
 export const timeout = (delay: number) => {
-  return new Promise(res => setTimeout(res, delay));
+  return new Promise((res) => setTimeout(res, delay));
 };
 
 interface regexMatchOperationsProps<K, T> {
@@ -148,9 +148,9 @@ export const r128gain2Volume = (gain: number) => {
 
 export const filterUndefined = <T, K>(
   myArray: T[],
-  myFunc: (val: T) => K | undefined
+  myFunc: (val: T) => K | undefined,
 ) =>
-  myArray.flatMap(v => {
+  myArray.flatMap((v) => {
     const val = myFunc(v);
     return val ? [val] : [];
   });

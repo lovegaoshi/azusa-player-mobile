@@ -1,12 +1,12 @@
-import { View, ScrollView, Linking } from 'react-native';
-import { Text, Button } from 'react-native-paper';
-import { useTranslation } from 'react-i18next';
+import { View, ScrollView, Linking } from "react-native";
+import { Text, Button } from "react-native-paper";
+import { useTranslation } from "react-i18next";
 
-import { useNoxSetting } from '@stores/useApp';
+import { useNoxSetting } from "@stores/useApp";
 
 export default () => {
   const { t } = useTranslation();
-  const playerStyle = useNoxSetting(state => state.playerStyle);
+  const playerStyle = useNoxSetting((state) => state.playerStyle);
 
   return (
     <View
@@ -16,7 +16,7 @@ export default () => {
       }}
     >
       <ScrollView>
-        <Text>{''}</Text>
+        <Text>{""}</Text>
         <Text
           style={{
             fontSize: 20,
@@ -24,9 +24,9 @@ export default () => {
             paddingHorizontal: 20,
           }}
         >
-          {t('About.Disclaimer1')}
+          {t("About.Disclaimer1")}
         </Text>
-        <Text>{''}</Text>
+        <Text>{""}</Text>
         <Text
           style={{
             fontSize: 20,
@@ -34,9 +34,9 @@ export default () => {
             paddingHorizontal: 20,
           }}
         >
-          {t('About.Disclaimer2')}
+          {t("About.Disclaimer2")}
         </Text>
-        <Text>{''}</Text>
+        <Text>{""}</Text>
         <Text
           style={{
             fontSize: 20,
@@ -44,24 +44,24 @@ export default () => {
             paddingHorizontal: 20,
           }}
         >
-          {t('About.About1')}
+          {t("About.About1")}
         </Text>
-        <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
+        <View style={{ flexDirection: "row", justifyContent: "center" }}>
           <Button
             onPress={() =>
               Linking.openURL(
-                'https://github.com/lovegaoshi/azusa-player-mobile/releases/latest'
+                "https://github.com/lovegaoshi/azusa-player-mobile/releases/latest",
               )
             }
           >
-            {'Gayhub'}
+            {"Gayhub"}
           </Button>
           <Button
             onPress={() =>
-              Linking.openURL('https://space.bilibili.com/3493085134719196')
+              Linking.openURL("https://space.bilibili.com/3493085134719196")
             }
           >
-            {'Bilibili'}
+            {"Bilibili"}
           </Button>
         </View>
       </ScrollView>

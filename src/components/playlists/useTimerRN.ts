@@ -2,10 +2,10 @@
  * this is the zustand version of timerContext in noxplayer. replace there to this.
  */
 
-import TrackPlayer from 'react-native-track-player';
-import BackgroundTimer from 'react-native-background-timer';
+import TrackPlayer from "react-native-track-player";
+import BackgroundTimer from "react-native-background-timer";
 
-import useTimer from './useTimer';
+import useTimer from "./useTimer";
 
 export default () => {
   const timer = useTimer({

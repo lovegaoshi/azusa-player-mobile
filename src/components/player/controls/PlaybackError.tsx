@@ -1,5 +1,5 @@
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React from "react";
+import { StyleSheet, Text, View } from "react-native";
 
 export const PlaybackError: React.FC<{ error?: string }> = ({ error }) => {
   return (
@@ -11,13 +11,13 @@ export const PlaybackError: React.FC<{ error?: string }> = ({ error }) => {
 
 const styles = StyleSheet.create({
   container: {
-    width: '100%',
-    position: 'absolute',
+    width: "100%",
+    position: "absolute",
   },
   text: {
-    color: 'red',
-    width: '100%',
-    textAlign: 'center',
+    color: "red",
+    width: "100%",
+    textAlign: "center",
     marginTop: -15,
   },
 });

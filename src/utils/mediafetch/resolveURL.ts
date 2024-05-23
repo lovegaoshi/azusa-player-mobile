@@ -1,19 +1,19 @@
-import steriatkFetch from './steriatk';
-import biliaudioFetch from './biliaudio';
-import ytbvideoFetch from '@utils/mediafetch/ytbvideo';
-import bililiveFetch from './bililive';
-import biliBangumiFetch from './biliBangumi';
-import localFetch from '@utils/mediafetch/local';
-import headRequestFetch from './headRequest';
-import { logger } from '../Logger';
-import { regexMatchOperations } from '../Utils';
-import { resolver, MUSICFREE } from './musicfree';
-import bilivideoFetch, { fetchVideoPlayUrlPromise } from './bilivideo';
+import steriatkFetch from "./steriatk";
+import biliaudioFetch from "./biliaudio";
+import ytbvideoFetch from "@utils/mediafetch/ytbvideo";
+import bililiveFetch from "./bililive";
+import biliBangumiFetch from "./biliBangumi";
+import localFetch from "@utils/mediafetch/local";
+import headRequestFetch from "./headRequest";
+import { logger } from "../Logger";
+import { regexMatchOperations } from "../Utils";
+import { resolver, MUSICFREE } from "./musicfree";
+import bilivideoFetch, { fetchVideoPlayUrlPromise } from "./bilivideo";
 
 // TODO: remove this, believe this is for legacy reasons?
 export const ENUMS = {
-  audioType: 'audio',
-  youtube: 'youtube.video',
+  audioType: "audio",
+  youtube: "youtube.video",
 };
 
 type regResolve = NoxUtils.RegexMatchResolve<
@@ -26,7 +26,7 @@ type regResolve = NoxUtils.RegexMatchResolve<
  */
 export const fetchPlayUrlPromise = async (
   v: NoxMedia.Song,
-  iOS = true
+  iOS = true,
 ): Promise<NoxNetwork.ParsedNoxMediaURL> => {
   const bvid = v.bvid;
   const cid = v.id;
@@ -40,7 +40,7 @@ export const fetchPlayUrlPromise = async (
     [localFetch.regexResolveURLMatch, localFetch.resolveURL],
     [headRequestFetch.regexResolveURLMatch, headRequestFetch.resolveURL],
   ];
-  const regexResolveURLsWrapped: regResolve = regexResolveURLs.map(entry => [
+  const regexResolveURLsWrapped: regResolve = regexResolveURLs.map((entry) => [
     entry[0],
     (song: NoxMedia.Song) => entry[1](song, iOS),
   ]);
@@ -69,12 +69,12 @@ export const fetchPlayUrlPromise = async (
     song: v,
     regexOperations: regexResolveURLsWrapped,
     fallback,
-    regexMatching: song => song.id,
-  }).catch(() => ({ url: 'NULL' }));
+    regexMatching: (song) => song.id,
+  }).catch(() => ({ url: "NULL" }));
 };
 
 export const refreshMetadata = async (
-  v: NoxMedia.Song
+  v: NoxMedia.Song,
 ): Promise<Partial<NoxMedia.Song>> => {
   const metadata = await fetchPlayUrlPromise(v);
   return {
@@ -94,7 +94,7 @@ export const songExport2URL = (v: NoxMedia.Song): string => {
     song: v,
     regexOperations,
     fallback: bilivideoFetch.export2URL,
-    regexMatching: song => song.id,
+    regexMatching: (song) => song.id,
   });
 };
 export const songResolveArtwork = (v: NoxMedia.Song) => {
@@ -105,7 +105,7 @@ export const songResolveArtwork = (v: NoxMedia.Song) => {
   return regexMatchOperations({
     song: v,
     regexOperations,
-    fallback: () => Promise.resolve(''),
-    regexMatching: song => song.id,
+    fallback: () => Promise.resolve(""),
+    regexMatching: (song) => song.id,
   });
 };

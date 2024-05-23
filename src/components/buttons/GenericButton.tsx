@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
-import { IconButton } from 'react-native-paper';
-import { StyleSheet } from 'react-native';
-import Dialog from '../dialogs/GenericDialog';
+import React, { useState } from "react";
+import { IconButton } from "react-native-paper";
+import { StyleSheet } from "react-native";
+import Dialog from "../dialogs/GenericDialog";
 
-const ICON = 'shuffle';
+const ICON = "shuffle";
 
 export default () => {
   const [dialogOpen, setDialogOpen] = useState(false);

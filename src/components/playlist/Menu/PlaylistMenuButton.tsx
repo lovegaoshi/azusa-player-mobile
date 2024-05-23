@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
-import { IconButton } from 'react-native-paper';
-import { GestureResponderEvent } from 'react-native';
+import React, { useState } from "react";
+import { IconButton } from "react-native-paper";
+import { GestureResponderEvent } from "react-native";
 
-import Dialog from './PlaylistMenu';
+import Dialog from "./PlaylistMenu";
 
-const ICON = 'dots-horizontal';
+const ICON = "dots-horizontal";
 
 interface Props {
   disabled?: boolean;
@@ -28,7 +28,7 @@ export default ({ disabled = false, playlist, songListUpdateHalt }: Props) => {
   };
 
   const toggleVisible = () => {
-    setDialogOpen(val => !val);
+    setDialogOpen((val) => !val);
   };
 
   return (

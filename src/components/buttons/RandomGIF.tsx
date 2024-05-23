@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react';
-import { Pressable } from 'react-native';
-import { Image } from 'expo-image';
-import { useTranslation } from 'react-i18next';
+import React, { useEffect, useState } from "react";
+import { Pressable } from "react-native";
+import { Image } from "expo-image";
+import { useTranslation } from "react-i18next";
 
 const getRandomNumberExclude = (randRange: number, exclude = -1) => {
   if (exclude > 0) {
@@ -30,7 +30,7 @@ export default function RandomGIFButton({
   iconsize = 72,
 }: Props) {
   const [randomGIFSrc, setRandomGIFSrc] = useState(-1);
-  const [randomGIFURI, setRandomGIFURI] = useState({ uri: 'dummyVal' });
+  const [randomGIFURI, setRandomGIFURI] = useState({ uri: "dummyVal" });
   const { t } = useTranslation();
 
   useEffect(() => {
@@ -47,12 +47,12 @@ export default function RandomGIFButton({
         setRandomGIFURI({ uri: gifs[newIndex] });
         onClickCallback();
       }}
-      accessibilityLabel={t('Accessibility.gif')}
+      accessibilityLabel={t("Accessibility.gif")}
     >
       <Image
         style={{ width: iconsize, height: iconsize }}
         source={randomGIFURI}
-        resizeMode={'contain'}
+        resizeMode={"contain"}
         // contentFit="contain"
       />
     </Pressable>

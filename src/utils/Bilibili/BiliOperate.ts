@@ -1,19 +1,19 @@
-import { getBiliJct } from '@utils/Bilibili/biliCookies';
-import bfetch from '@utils/BiliFetch';
-import { logger } from '@utils/Logger';
-import { throttler } from '../throttle';
-import { bv2av as BVIDtoAID } from '../bv2av';
+import { getBiliJct } from "@utils/Bilibili/biliCookies";
+import bfetch from "@utils/BiliFetch";
+import { logger } from "@utils/Logger";
+import { throttler } from "../throttle";
+import { bv2av as BVIDtoAID } from "../bv2av";
 
-const BILI_LIKE_API = 'https://api.bilibili.com/x/web-interface/archive/like';
+const BILI_LIKE_API = "https://api.bilibili.com/x/web-interface/archive/like";
 const BILI_RELATED_API =
-  'https://api.bilibili.com/x/web-interface/archive/related?bvid={bvid}';
+  "https://api.bilibili.com/x/web-interface/archive/related?bvid={bvid}";
 const BILI_TRIP_API =
-  'https://api.bilibili.com/x/web-interface/archive/like/triple';
+  "https://api.bilibili.com/x/web-interface/archive/like/triple";
 const BILI_VIDEOPLAY_API =
-  'https://api.bilibili.com/x/click-interface/click/web/h5';
+  "https://api.bilibili.com/x/click-interface/click/web/h5";
 const BILI_VIDEOINFO_API =
-  'https://api.bilibili.com/x/web-interface/view?bvid=';
-const BILI_FAV_API = 'https://api.bilibili.com/x/v3/fav/resource/deal';
+  "https://api.bilibili.com/x/web-interface/view?bvid=";
+const BILI_FAV_API = "https://api.bilibili.com/x/v3/fav/resource/deal";
 
 const { bilih5ApiLimiter } = throttler;
 
@@ -31,12 +31,12 @@ export const initBiliHeartbeat = async ({
   if (Number.isNaN(parseInt(cid, 10))) return;
   bilih5ApiLimiter.schedule(() =>
     bfetch(BILI_VIDEOPLAY_API, {
-      method: 'POST',
+      method: "POST",
       headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
+        "Content-Type": "application/x-www-form-urlencoded",
       },
       body: { bvid, cid },
-    })
+    }),
   );
 };
 
@@ -46,9 +46,9 @@ export const checkBVLiked = async (bvid: string) => {
     const res = await fetch(
       `https://api.bilibili.com/x/web-interface/archive/has/like?bvid=${bvid}`,
       {
-        credentials: 'include',
+        credentials: "include",
         referrer: `https://www.bilibili.com/video/${bvid}/`,
-      }
+      },
     );
     const json = await res.json();
     return json.data;
@@ -66,13 +66,13 @@ export const sendBVLike = async (bvid: string) => {
     const biliJct = await getBiliJct();
     if (!biliJct) return;
     const res = await bfetch(BILI_LIKE_API, {
-      method: 'POST',
+      method: "POST",
       headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
+        "Content-Type": "application/x-www-form-urlencoded",
       },
-      body: { bvid, like: '1', csrf: biliJct },
+      body: { bvid, like: "1", csrf: biliJct },
       referrer: `https://www.bilibili.com/video/${bvid}/`,
-      credentials: 'include',
+      credentials: "include",
     });
     return await res.json();
   } catch (error) {
@@ -85,13 +85,13 @@ export const sendBVTriple = async (bvid: string) => {
     const biliJct = await getBiliJct();
     if (!biliJct) return;
     const res = await bfetch(BILI_TRIP_API, {
-      method: 'POST',
+      method: "POST",
       headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
+        "Content-Type": "application/x-www-form-urlencoded",
       },
-      body: { bvid, like: '1', csrf: biliJct },
+      body: { bvid, like: "1", csrf: biliJct },
       referrer: `https://www.bilibili.com/video/${bvid}/`,
-      credentials: 'include',
+      credentials: "include",
     });
     return await res.json();
   } catch (error) {
@@ -104,32 +104,32 @@ export const sendBVTriple = async (bvid: string) => {
  */
 export const checkBiliVideoPlayed = (bvid: string) => {
   fetch(BILI_VIDEOINFO_API + bvid)
-    .then(res => res.json())
-    .then(json => logger.debug(`${bvid} view count:${json.data.stat.view}`))
+    .then((res) => res.json())
+    .then((json) => logger.debug(`${bvid} view count:${json.data.stat.view}`))
     .catch(logger.error);
 };
 
 export const sendBVFavorite = async (
   bvid: string,
   addfav: string[] = [],
-  removefav: string[] = []
+  removefav: string[] = [],
 ) => {
   try {
     const biliJct = await getBiliJct();
     if (!biliJct) return;
     const res = await bfetch(BILI_FAV_API, {
-      credentials: 'include',
-      method: 'POST',
+      credentials: "include",
+      method: "POST",
       headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
+        "Content-Type": "application/x-www-form-urlencoded",
       },
       referrer: `https://www.bilibili.com/video/${bvid}/`,
       body: {
         rid: BVIDtoAID(bvid as `BV1${string}`),
-        add_media_ids: addfav.join(','),
-        del_media_ids: removefav.join(','),
+        add_media_ids: addfav.join(","),
+        del_media_ids: removefav.join(","),
         csrf: biliJct,
-        type: '2',
+        type: "2",
       },
     });
     return await res.json();
@@ -140,7 +140,7 @@ export const sendBVFavorite = async (
 
 export const biliSuggest = async (bvid: string) => {
   logger.debug(`fetching biliSuggest wiht ${bvid}`);
-  const res = await bfetch(BILI_RELATED_API.replace('{bvid}', bvid)),
+  const res = await bfetch(BILI_RELATED_API.replace("{bvid}", bvid)),
     json = await res.json();
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   return json.data as any[];

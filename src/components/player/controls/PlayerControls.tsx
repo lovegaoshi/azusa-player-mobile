@@ -1,13 +1,13 @@
-import React from 'react';
-import { StyleSheet, View } from 'react-native';
-import { usePlaybackState } from 'react-native-track-player';
+import React from "react";
+import { StyleSheet, View } from "react-native";
+import { usePlaybackState } from "react-native-track-player";
 
-import { PlaybackError } from './PlaybackError';
-import { PlayPauseButton } from './PlayPauseButton';
-import ThumbsUpButton from './ThumbsUpButton';
-import PlayerModeButton from './PlayerModeButton';
-import usePlayerControls from './usePlayerControls';
-import LottieButton from '@components/buttons/LottieButton';
+import { PlaybackError } from "./PlaybackError";
+import { PlayPauseButton } from "./PlayPauseButton";
+import ThumbsUpButton from "./ThumbsUpButton";
+import PlayerModeButton from "./PlayerModeButton";
+import usePlayerControls from "./usePlayerControls";
+import LottieButton from "@components/buttons/LottieButton";
 
 export const PlayerControls: React.FC = () => {
   const { performSkipToNext, performSkipToPrevious } = usePlayerControls();
@@ -15,7 +15,7 @@ export const PlayerControls: React.FC = () => {
 
   return (
     <View style={styles.container}>
-      {'error' in playback ? (
+      {"error" in playback ? (
         <PlaybackError error={playback.error.message} />
       ) : (
         <></>
@@ -25,20 +25,20 @@ export const PlayerControls: React.FC = () => {
         <PlayerModeButton />
         <View style={styles.btnSpacer} />
         <LottieButton
-          src={require('@assets/lottie/skip-backwards.json')}
+          src={require("@assets/lottie/skip-backwards.json")}
           size={40}
           onPress={performSkipToPrevious}
-          strokes={['Line', 'Triange', 'Triange  2']}
+          strokes={["Line", "Triange", "Triange  2"]}
           style={{ backgroundColor: undefined }}
         />
         <View style={styles.btnSpacer} />
         <PlayPauseButton state={playback.state} />
         <View style={styles.btnSpacer} />
         <LottieButton
-          src={require('@assets/lottie/skip-forwards.json')}
+          src={require("@assets/lottie/skip-forwards.json")}
           size={40}
           onPress={performSkipToNext}
-          strokes={['Line', 'Triangle 1', 'Triangle 2']}
+          strokes={["Line", "Triangle 1", "Triangle 2"]}
           style={{ backgroundColor: undefined }}
         />
         <ThumbsUpButton />
@@ -49,14 +49,14 @@ export const PlayerControls: React.FC = () => {
 
 const styles = StyleSheet.create({
   container: {
-    width: '100%',
-    flexDirection: 'column',
+    width: "100%",
+    flexDirection: "column",
     paddingBottom: 20,
   },
   row: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
   },
   btnSpacer: { width: 8 },
 });

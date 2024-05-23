@@ -1,8 +1,8 @@
-import { View } from 'react-native';
-import { useActiveTrack } from 'react-native-track-player';
+import { View } from "react-native";
+import { useActiveTrack } from "react-native-track-player";
 
-import TrackInfoTemplate from '../player/TrackInfo/TrackInfoTemplate';
-import LandscapePlayerProgress from './LandscapePlayerProgress';
+import TrackInfoTemplate from "../player/TrackInfo/TrackInfoTemplate";
+import LandscapePlayerProgress from "./LandscapePlayerProgress";
 
 interface Props {
   panelWidth: number;
@@ -10,11 +10,11 @@ interface Props {
 export default ({ panelWidth }: Props) => {
   const track = useActiveTrack();
   return (
-    <View style={{ justifyContent: 'flex-end', width: panelWidth }}>
+    <View style={{ justifyContent: "flex-end", width: panelWidth }}>
       <TrackInfoTemplate
         track={track}
         windowWidth={panelWidth}
-        containerStyle={{ flex: 1, justifyContent: 'center' }}
+        containerStyle={{ flex: 1, justifyContent: "center" }}
       >
         <></>
       </TrackInfoTemplate>

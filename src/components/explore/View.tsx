@@ -1,12 +1,12 @@
-import * as React from 'react';
-import { View } from 'react-native';
+import * as React from "react";
+import { View } from "react-native";
 
-import { useNoxSetting } from '@stores/useApp';
-import BiliExplore from './bilibili/View';
-import { styles } from '../style';
+import { useNoxSetting } from "@stores/useApp";
+import BiliExplore from "./bilibili/View";
+import { styles } from "../style";
 
 enum NoxRoutes {
-  bilibili = 'bilibili',
+  bilibili = "bilibili",
 }
 
 const exploreContent = (route: NoxRoutes) => {
@@ -18,7 +18,7 @@ const exploreContent = (route: NoxRoutes) => {
 
 export default () => {
   const [currentRoute] = React.useState(NoxRoutes.bilibili);
-  const playerStyle = useNoxSetting(state => state.playerStyle);
+  const playerStyle = useNoxSetting((state) => state.playerStyle);
 
   return (
     <View

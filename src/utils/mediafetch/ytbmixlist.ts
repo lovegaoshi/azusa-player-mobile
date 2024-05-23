@@ -1,18 +1,18 @@
-import { regexFetchProps } from './generic';
-import { CIDPREFIX } from './ytbvideo';
-import SongTS from '@objects/Song';
-import { timestampToSeconds } from '../Utils';
-import { Source } from '@enums/MediaFetch';
+import { regexFetchProps } from "./generic";
+import { CIDPREFIX } from "./ytbvideo";
+import SongTS from "@objects/Song";
+import { timestampToSeconds } from "../Utils";
+import { Source } from "@enums/MediaFetch";
 
 const fetchYTPlaylist = async (
   playlistId: string,
   favList: string[],
-  mixlistId?: string
+  mixlistId?: string,
 ) => {
   const res = await fetch(
     `https://www.youtube.com/watch?v=${playlistId}&list=RD${
       mixlistId ?? playlistId
-    }`
+    }`,
   );
   const content = await res.text();
   // https://www.thepythoncode.com/code/get-youtube-data-python
@@ -39,10 +39,10 @@ const fetchYTPlaylist = async (
             val.playlistPanelVideoRenderer.thumbnail.thumbnails[
               val.playlistPanelVideoRenderer.thumbnail.thumbnails.length - 1
             ].url,
-          lyric: '',
+          lyric: "",
           page: index,
           duration: timestampToSeconds(
-            val.playlistPanelVideoRenderer.lengthText.simpleText
+            val.playlistPanelVideoRenderer.lengthText.simpleText,
           ),
           album:
             data.contents.twoColumnWatchNextResults.playlist.playlist.title,
@@ -52,7 +52,7 @@ const fetchYTPlaylist = async (
       ])
       .filter((val: NoxMedia.Song) => !favList.includes(val.bvid));
   return results
-    .filter(val => val !== undefined)
+    .filter((val) => val !== undefined)
     .reduce((acc, curr) => acc!.concat(curr!), [] as NoxMedia.Song[]);
 };
 const regexFetch = async ({
@@ -62,7 +62,7 @@ const regexFetch = async ({
   const songList = await fetchYTPlaylist(
     reExtracted[1],
     favList,
-    reExtracted[2]
+    reExtracted[2],
   );
   return {
     songList,
@@ -76,8 +76,8 @@ const refresh = async (v: NoxMedia.Playlist) => {
   if (v.refreshToken) {
     results.songList = await fetchYTPlaylist(
       v.refreshToken[0],
-      v.songList.map(s => s.bvid),
-      v.refreshToken[1]
+      v.songList.map((s) => s.bvid),
+      v.refreshToken[1],
     );
     results.refreshToken = [
       results.songList[results.songList.length - 1].bvid,
@@ -86,8 +86,8 @@ const refresh = async (v: NoxMedia.Playlist) => {
   } else {
     results.songList = await fetchYTPlaylist(
       v.songList[v.songList.length - 1].bvid,
-      v.songList.map(s => s.bvid),
-      v.songList[0].bvid
+      v.songList.map((s) => s.bvid),
+      v.songList[0].bvid,
     );
     results.refreshToken = [
       results.songList[results.songList.length - 1].bvid,

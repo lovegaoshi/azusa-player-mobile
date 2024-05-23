@@ -1,10 +1,10 @@
-import { logger } from '../Logger';
-import SongTS from '@objects/Song';
-import bfetch from '@utils/BiliFetch';
-import { Source } from '@enums/MediaFetch';
-import { biliApiLimiter } from './throttle';
+import { logger } from "../Logger";
+import SongTS from "@objects/Song";
+import bfetch from "@utils/BiliFetch";
+import { Source } from "@enums/MediaFetch";
+import { biliApiLimiter } from "./throttle";
 
-const API = 'https://api.bilibili.com/x/centralization/interface/new/music';
+const API = "https://api.bilibili.com/x/centralization/interface/new/music";
 
 /*
 {
@@ -36,7 +36,7 @@ const rankingToSong = (data: any) =>
     singer: data.author,
     singerId: data.id,
     cover: data.cover,
-    lyric: '',
+    lyric: "",
     page: 1,
     duration: 0,
     album: data.album,
@@ -44,7 +44,7 @@ const rankingToSong = (data: any) =>
   });
 
 export const fetchMusicNew = async (): Promise<NoxMedia.Song[]> => {
-  logger.info('[biliRanking] calling fetchMusicNew');
+  logger.info("[biliRanking] calling fetchMusicNew");
   try {
     const res = await biliApiLimiter.schedule(() => bfetch(API));
     const json = await res.json();
@@ -53,7 +53,7 @@ export const fetchMusicNew = async (): Promise<NoxMedia.Song[]> => {
       .filter((v: NoxMedia.Song) => v.bvid.length > 0);
   } catch (error: any) {
     logger.error(error.message);
-    logger.warn('Some issue happened when fetchMusicNew');
+    logger.warn("Some issue happened when fetchMusicNew");
     return [];
   }
 };

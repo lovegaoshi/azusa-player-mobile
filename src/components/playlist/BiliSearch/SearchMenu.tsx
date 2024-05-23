@@ -1,15 +1,15 @@
-import * as React from 'react';
-import { Menu } from 'react-native-paper';
-import * as DocumentPicker from 'expo-document-picker';
-import { Platform, NativeModules, PermissionsAndroid } from 'react-native';
-import { useTranslation } from 'react-i18next';
+import * as React from "react";
+import { Menu } from "react-native-paper";
+import * as DocumentPicker from "expo-document-picker";
+import { Platform, NativeModules, PermissionsAndroid } from "react-native";
+import { useTranslation } from "react-i18next";
 
-import { SearchOptions } from '@enums/Storage';
-import useAlert from '@components/dialogs/useAlert';
-import { MUSICFREE } from '@utils/mediafetch/musicfree';
-import Icons from './Icons';
-import { useNoxSetting } from '@stores/useApp';
-import { rgb2Hex } from '@utils/Utils';
+import { SearchOptions } from "@enums/Storage";
+import useAlert from "@components/dialogs/useAlert";
+import { MUSICFREE } from "@utils/mediafetch/musicfree";
+import Icons from "./Icons";
+import { useNoxSetting } from "@stores/useApp";
+import { rgb2Hex } from "@utils/Utils";
 
 const { NoxAndroidAutoModule } = NativeModules;
 
@@ -30,38 +30,38 @@ export default ({
 }: Props) => {
   const { t } = useTranslation();
   const { OneWayAlert } = useAlert();
-  const playerStyle = useNoxSetting(state => state.playerStyle);
-  const setSearchOption = useNoxSetting(state => state.setSearchOption);
+  const playerStyle = useNoxSetting((state) => state.playerStyle);
+  const setSearchOption = useNoxSetting((state) => state.setSearchOption);
   const setDefaultSearch = (defaultSearch: SearchOptions | MUSICFREE) => {
     toggleVisible();
     setSearchOption(defaultSearch);
   };
   const chooseLocalFolderAndroid = async () => {
     const androidPermission = await PermissionsAndroid.request(
-      PermissionsAndroid.PERMISSIONS.READ_MEDIA_AUDIO
+      PermissionsAndroid.PERMISSIONS.READ_MEDIA_AUDIO,
     );
     if (androidPermission !== PermissionsAndroid.RESULTS.GRANTED) {
-      OneWayAlert('dude', 'this aint gonna work without permissions');
+      OneWayAlert("dude", "this aint gonna work without permissions");
       return;
     }
     const selectedFile = (
       await DocumentPicker.getDocumentAsync({
         copyToCacheDirectory: false,
-        type: 'audio/*',
+        type: "audio/*",
       })
     ).assets;
     if (!selectedFile) return;
     const uri = selectedFile[0].uri;
     const parsedURI = decodeURIComponent(
-      uri.substring(uri.lastIndexOf('%3A') + 3)
+      uri.substring(uri.lastIndexOf("%3A") + 3),
     );
     if (Number.isNaN(Number.parseInt(parsedURI))) {
       setSearchVal(
-        `local://${parsedURI.substring(0, parsedURI.lastIndexOf('/'))}`
+        `local://${parsedURI.substring(0, parsedURI.lastIndexOf("/"))}`,
       );
     } else {
       const mediaFiles = await NoxAndroidAutoModule.listMediaFileByID(
-        uri.substring(uri.lastIndexOf('%3A') + 3)
+        uri.substring(uri.lastIndexOf("%3A") + 3),
       );
       setSearchVal(`local://${mediaFiles[0].relativePath}`);
     }
@@ -73,12 +73,12 @@ export default ({
       <Menu.Item
         leadingIcon={Icons.BILIBILI}
         onPress={() => setDefaultSearch(SearchOptions.BILIBILI)}
-        title={'Bilibili'}
+        title={"Bilibili"}
       />
       <Menu.Item
         leadingIcon={Icons.YOUTUBE}
         onPress={() => setDefaultSearch(SearchOptions.YOUTUBE)}
-        title={'Youtube'}
+        title={"Youtube"}
       />
       {showMusicFree && (
         <Menu.Item
@@ -87,11 +87,11 @@ export default ({
           title={`MusicFree.${MUSICFREE.aggregated}`}
         />
       )}
-      {Platform.OS === 'android' && (
+      {Platform.OS === "android" && (
         <Menu.Item
           leadingIcon={() => Icons.LOCAL(rgb2Hex(playerStyle.colors.primary))}
           onPress={chooseLocalFolderAndroid}
-          title={t('Menu.local')}
+          title={t("Menu.local")}
         />
       )}
     </Menu>

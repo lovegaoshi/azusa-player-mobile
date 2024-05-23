@@ -1,34 +1,34 @@
-import { logger } from './Logger';
+import { logger } from "./Logger";
 
-import { SearchOptions } from '@enums/Storage';
-import steriatkFetch from './mediafetch/steriatk';
-import biliVideoSimilarFetch from './mediafetch/biliVideoSimilar';
-import biliBangumiFetch from './mediafetch/biliBangumi';
-import biliAudioAMFetch from './mediafetch/biliAudioAM';
-import biliAudioColleFetch from './mediafetch/biliAudioColle';
-import biliAudioSimilarFetch from './mediafetch/biliAudioSimilar';
-import bilivideoFetch from './mediafetch/bilivideo';
-import biliavideoFetch from './mediafetch/biliavideo';
-import biliseriesFetch from './mediafetch/biliseries';
-import bilicolleFetch from './mediafetch/bilicolle';
-import bilifavlistFetch from './mediafetch/bilifavlist';
-import bilichannelFetch from './mediafetch/bilichannel';
-import biliaudioFetch from './mediafetch/biliaudio';
-import bilisearchFetch from '@utils/mediafetch/bilisearch';
-import bilichannelAudioFetch from './mediafetch/bilichannelAudio';
-import ytbvideoFetch from '@utils/mediafetch/ytbvideo';
-import ytbplaylistFetch from './mediafetch/ytbplaylist';
-import ytbmixlistFetch from './mediafetch/ytbmixlist';
-import ytbsearchFetch from './mediafetch/ytbsearch';
-import bililiveFetch from './mediafetch/bililive';
-import bilisubliveFetch from './mediafetch/bilisublive';
-import localFetch from '@utils/mediafetch/local';
-import b23tvFetch from './mediafetch/b23tv';
-import headRequestFetch from './mediafetch/headRequest';
-import biliFavColleFetch from './mediafetch/biliFavColle';
-import { regexFetchProps } from './mediafetch/generic';
-import { MUSICFREE, searcher } from './mediafetch/musicfree';
-import { getMusicFreePlugin } from '@utils/ChromeStorage';
+import { SearchOptions } from "@enums/Storage";
+import steriatkFetch from "./mediafetch/steriatk";
+import biliVideoSimilarFetch from "./mediafetch/biliVideoSimilar";
+import biliBangumiFetch from "./mediafetch/biliBangumi";
+import biliAudioAMFetch from "./mediafetch/biliAudioAM";
+import biliAudioColleFetch from "./mediafetch/biliAudioColle";
+import biliAudioSimilarFetch from "./mediafetch/biliAudioSimilar";
+import bilivideoFetch from "./mediafetch/bilivideo";
+import biliavideoFetch from "./mediafetch/biliavideo";
+import biliseriesFetch from "./mediafetch/biliseries";
+import bilicolleFetch from "./mediafetch/bilicolle";
+import bilifavlistFetch from "./mediafetch/bilifavlist";
+import bilichannelFetch from "./mediafetch/bilichannel";
+import biliaudioFetch from "./mediafetch/biliaudio";
+import bilisearchFetch from "@utils/mediafetch/bilisearch";
+import bilichannelAudioFetch from "./mediafetch/bilichannelAudio";
+import ytbvideoFetch from "@utils/mediafetch/ytbvideo";
+import ytbplaylistFetch from "./mediafetch/ytbplaylist";
+import ytbmixlistFetch from "./mediafetch/ytbmixlist";
+import ytbsearchFetch from "./mediafetch/ytbsearch";
+import bililiveFetch from "./mediafetch/bililive";
+import bilisubliveFetch from "./mediafetch/bilisublive";
+import localFetch from "@utils/mediafetch/local";
+import b23tvFetch from "./mediafetch/b23tv";
+import headRequestFetch from "./mediafetch/headRequest";
+import biliFavColleFetch from "./mediafetch/biliFavColle";
+import { regexFetchProps } from "./mediafetch/generic";
+import { MUSICFREE, searcher } from "./mediafetch/musicfree";
+import { getMusicFreePlugin } from "@utils/ChromeStorage";
 
 const reExtractionsShortURL: ReExtraction<string>[] = [
   {
@@ -52,7 +52,7 @@ interface Props {
 
 export const matchBiliURL = <T>(
   input: string,
-  extractions: ReExtraction<T>[]
+  extractions: ReExtraction<T>[],
 ) => {
   for (const reExtraction of extractions) {
     const reExtracted = reExtraction.match.exec(input);
@@ -116,7 +116,7 @@ export const searchBiliURLs = async ({
         case MUSICFREE.aggregated:
           results.songList = await searcher[MUSICFREE.aggregated](
             input,
-            await getMusicFreePlugin()
+            await getMusicFreePlugin(),
           );
           break;
         default:

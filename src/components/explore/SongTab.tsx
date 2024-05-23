@@ -1,20 +1,20 @@
-import * as React from 'react';
+import * as React from "react";
 import {
   View,
   ScrollView,
   Dimensions,
   FlatList,
   TouchableOpacity,
-} from 'react-native';
-import { Text } from 'react-native-paper';
-import { Image } from 'expo-image';
-import { useTranslation } from 'react-i18next';
-import { useNavigation } from '@react-navigation/native';
+} from "react-native";
+import { Text } from "react-native-paper";
+import { Image } from "expo-image";
+import { useTranslation } from "react-i18next";
+import { useNavigation } from "@react-navigation/native";
 
-import { chunkArray } from '@utils/Utils';
-import { useNoxSetting } from '@stores/useApp';
-import usePlayback from '@hooks/usePlayback';
-import { NoxRoutes } from '@enums/Routes';
+import { chunkArray } from "@utils/Utils";
+import { useNoxSetting } from "@stores/useApp";
+import usePlayback from "@hooks/usePlayback";
+import { NoxRoutes } from "@enums/Routes";
 
 export interface BiliCatSongs {
   [key: number]: NoxMedia.Song[];
@@ -32,8 +32,8 @@ export const BiliSongCard = ({
   totalSongs,
 }: BiliSongCardProp) => {
   const navigationGlobal = useNavigation();
-  const playerStyle = useNoxSetting(state => state.playerStyle);
-  const scroll = useNoxSetting(state => state.incSongListScrollCounter);
+  const playerStyle = useNoxSetting((state) => state.playerStyle);
+  const scroll = useNoxSetting((state) => state.incSongListScrollCounter);
   const { playAsSearchList } = usePlayback();
 
   const fontColor = playerStyle.colors.primary;
@@ -41,7 +41,7 @@ export const BiliSongCard = ({
   return (
     <View
       style={{
-        width: Dimensions.get('window').width * 0.8,
+        width: Dimensions.get("window").width * 0.8,
         height: 390,
         paddingRight: 10,
         paddingLeft: 5,
@@ -54,7 +54,7 @@ export const BiliSongCard = ({
         renderItem={({ item }) => (
           <View style={{ paddingVertical: 10 }}>
             <TouchableOpacity
-              style={{ height: 70, flexDirection: 'row' }}
+              style={{ height: 70, flexDirection: "row" }}
               onPress={() => {
                 navigationGlobal.navigate(NoxRoutes.Playlist as never);
                 playAsSearchList({
@@ -105,23 +105,23 @@ export const BiliSongCatsCard = ({ songs = {} }: { songs?: BiliCatSongs }) => {
   return (
     <View>
       <Text style={{ fontSize: 20, paddingLeft: 5, paddingBottom: 10 }}>
-        {t('BiliCategory.ranking')}
+        {t("BiliCategory.ranking")}
       </Text>
       <ScrollView
         horizontal
         disableIntervalMomentum
-        snapToInterval={Dimensions.get('window').width * 0.8}
+        snapToInterval={Dimensions.get("window").width * 0.8}
         showsVerticalScrollIndicator={false}
         showsHorizontalScrollIndicator={false}
       >
-        {Object.keys(songs).map(k => (
+        {Object.keys(songs).map((k) => (
           <BiliSongCard
             key={k}
             title={t(`BiliCategory.${k}`)}
             songs={songs[Number(k)]}
           />
         ))}
-        <View style={{ width: Dimensions.get('window').width * 0.2 }}></View>
+        <View style={{ width: Dimensions.get("window").width * 0.2 }}></View>
       </ScrollView>
     </View>
   );
@@ -144,14 +144,14 @@ export const BiliSongsArrayTabCard = ({
       <ScrollView
         horizontal
         disableIntervalMomentum
-        snapToInterval={Dimensions.get('window').width * 0.8}
+        snapToInterval={Dimensions.get("window").width * 0.8}
         showsVerticalScrollIndicator={false}
         showsHorizontalScrollIndicator={false}
       >
         {splicedSongs.map((k, i) => (
           <BiliSongCard key={`BiliRankTab${i}`} songs={k} totalSongs={songs} />
         ))}
-        <View style={{ width: Dimensions.get('window').width * 0.2 }}></View>
+        <View style={{ width: Dimensions.get("window").width * 0.2 }}></View>
       </ScrollView>
     </View>
   );
@@ -166,7 +166,7 @@ export const BiliSongsTabCard = ({
 }) => {
   const concatSongs = Object.values(songs).reduce(
     (acc, curr) => acc.concat(curr),
-    []
+    [],
   );
 
   return <BiliSongsArrayTabCard title={title} songs={concatSongs} />;

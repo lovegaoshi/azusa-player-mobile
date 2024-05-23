@@ -1,11 +1,11 @@
 // vanilla store of zustand serving playbackServices.
-import { createStore } from 'zustand/vanilla';
-import TrackPlayer, { RepeatMode } from 'react-native-track-player';
+import { createStore } from "zustand/vanilla";
+import TrackPlayer, { RepeatMode } from "react-native-track-player";
 
-import { clearPlaylistUninterrupted } from '@utils/RNTPUtils';
-import { NoxRepeatMode } from '../enums/RepeatMode';
-import { savePlayMode } from '@utils/ChromeStorage';
-import logger from '@utils/Logger';
+import { clearPlaylistUninterrupted } from "@utils/RNTPUtils";
+import { NoxRepeatMode } from "../enums/RepeatMode";
+import { savePlayMode } from "@utils/ChromeStorage";
+import logger from "@utils/Logger";
 
 interface NoxPlaylistStore {
   playingList: NoxMedia.Song[];
@@ -22,20 +22,20 @@ const playlistStore = createStore<NoxPlaylistStore>(() => ({
   playingList: [],
   playingListShuffled: [],
   currentPlayingIndex: -1,
-  currentPlayingId: '',
+  currentPlayingId: "",
   playmode: NoxRepeatMode.Shuffle,
 }));
 
 export const setPlayingIndex = (index = 0, songId?: string) => {
   const currentQueue = getCurrentTPQueue();
   if (songId) {
-    index = currentQueue.findIndex(v => v.id === songId);
+    index = currentQueue.findIndex((v) => v.id === songId);
   } else {
     try {
       songId = currentQueue[index].id;
     } catch {
       logger.warn(
-        `[setPlayingIndex] could not get index ${index} from current queue: ${JSON.stringify(currentQueue)} `
+        `[setPlayingIndex] could not get index ${index} from current queue: ${JSON.stringify(currentQueue)} `,
       );
       return;
     }
@@ -83,7 +83,7 @@ export const getCurrentTPQueue = (playmode?: NoxRepeatMode) => {
 export const getNextSong = (song: NoxMedia.Song) => {
   const songId = song.id;
   const queue = getCurrentTPQueue();
-  const index = queue.findIndex(val => val.id === songId) + 1;
+  const index = queue.findIndex((val) => val.id === songId) + 1;
   if (index === 0) {
     return;
   }
@@ -94,7 +94,7 @@ export const getNextSong = (song: NoxMedia.Song) => {
 };
 
 export const getPlaybackModeNotifIcon = (
-  state?: string
+  state?: string,
 ): [number, RepeatMode] => {
   let nextIcon = 2;
   if (!state) {

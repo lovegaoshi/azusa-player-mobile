@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from "react";
 import {
   Modal,
   View,
@@ -9,13 +9,13 @@ import {
   TouchableOpacity,
   Button,
   TextInput,
-} from 'react-native';
-import { Lrc as Lyric, KaraokeMode } from 'react-native-lyric';
-import { Track, useProgress } from 'react-native-track-player';
-import { IconButton } from 'react-native-paper';
+} from "react-native";
+import { Lrc as Lyric, KaraokeMode } from "react-native-lyric";
+import { Track, useProgress } from "react-native-track-player";
+import { IconButton } from "react-native-paper";
 
-import { useNoxSetting } from '@stores/useApp';
-import useLyric from '@hooks/useLyricRN';
+import { useNoxSetting } from "@stores/useApp";
+import useLyric from "@hooks/useLyricRN";
 
 interface ModalContainerProps {
   children: React.JSX.Element[];
@@ -61,15 +61,15 @@ export const LyricView = ({
   onPress = () => undefined,
   visible = true,
 }: LyricViewProps) => {
-  const playerSetting = useNoxSetting(state => state.playerSetting);
+  const playerSetting = useNoxSetting((state) => state.playerSetting);
   const { position } = useProgress(
-    playerSetting.karaokeLyrics ? 50 : undefined
+    playerSetting.karaokeLyrics ? 50 : undefined,
   );
   const [modalVisible, setModalVisible] = useState(false);
   const [lyricSearchModalVisible, setLyricSearchModalVisible] = useState(false);
   const [offsetModalVisible, setOffsetModalVisible] = useState(false);
 
-  const playerStyle = useNoxSetting(state => state.playerStyle);
+  const playerStyle = useNoxSetting((state) => state.playerStyle);
   const {
     hasLrcFromLocal,
     searchAndSetCurrentLyric,
@@ -84,7 +84,7 @@ export const LyricView = ({
   } = useLyric(track.song, artist);
 
   useEffect(() => {
-    if (track === undefined || track.title === '') return;
+    if (track === undefined || track.title === "") return;
     initTrackLrcLoad();
   }, [track]);
 
@@ -96,11 +96,11 @@ export const LyricView = ({
   const LyricOptions = (key: string) => {
     setModalVisible(false);
     switch (key) {
-      case 'LyricOptions': {
+      case "LyricOptions": {
         setLyricSearchModalVisible(true);
         break;
       }
-      case 'LyricOffset': {
+      case "LyricOffset": {
         setOffsetModalVisible(true);
         break;
       }
@@ -157,8 +157,8 @@ export const LyricView = ({
             <FlatList
               style={{ backgroundColor: playerStyle.colors.primaryContainer }}
               data={[
-                { key: 'LyricOptions', title: '更换歌词' },
-                { key: 'LyricOffset', title: '歌词时间调整' },
+                { key: "LyricOptions", title: "更换歌词" },
+                { key: "LyricOffset", title: "歌词时间调整" },
               ]}
               renderItem={({ item }) => (
                 <TouchableOpacity onPress={() => LyricOptions(item.key)}>
@@ -172,7 +172,7 @@ export const LyricView = ({
                   </Text>
                 </TouchableOpacity>
               )}
-              keyExtractor={item => item.key}
+              keyExtractor={(item) => item.key}
             />
           </ModalContainer>
 
@@ -201,7 +201,7 @@ export const LyricView = ({
               ]}
               value={searchText}
               onChangeText={setSearchText}
-              placeholder={track === undefined ? '' : track.title}
+              placeholder={track === undefined ? "" : track.title}
               onSubmitEditing={() => fetchAndSetLyricOptions(searchText)}
               selectionColor={playerStyle.customColors.textInputSelectionColor}
             />
@@ -222,7 +222,7 @@ export const LyricView = ({
                   </Text>
                 </TouchableOpacity>
               )}
-              keyExtractor={item => item.key}
+              keyExtractor={(item) => item.key}
             />
           </ModalContainer>
 
@@ -269,35 +269,35 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   optionsButton: {
-    position: 'absolute',
+    position: "absolute",
     top: 10,
     left: 10,
     zIndex: 1, // add this line
   },
   centeredView: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
     marginTop: 22,
   },
   modalBackground: {
     flex: 1,
-    justifyContent: 'flex-end',
-    backgroundColor: 'rgba(0, 0, 0, 0.1)',
+    justifyContent: "flex-end",
+    backgroundColor: "rgba(0, 0, 0, 0.1)",
   },
 
   modalView: {
-    backgroundColor: 'white',
+    backgroundColor: "white",
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,
-    maxHeight: '50%',
+    maxHeight: "50%",
   },
 
   modalHeader: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    backgroundColor: 'grey',
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    backgroundColor: "grey",
     padding: 10,
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,
@@ -305,45 +305,45 @@ const styles = StyleSheet.create({
 
   headerText: {
     fontSize: 20,
-    fontWeight: 'bold',
-    color: 'white',
+    fontWeight: "bold",
+    color: "white",
   },
 
   listItem: {
     padding: 10,
     fontSize: 16,
-    borderTopColor: 'grey',
+    borderTopColor: "grey",
   },
   searchBar: {
     height: 40,
     paddingLeft: 15,
-    backgroundColor: '#f0f0f0',
+    backgroundColor: "#f0f0f0",
     fontSize: 16,
-    color: '#333',
+    color: "#333",
   },
   offsetModalView: {
-    position: 'absolute',
+    position: "absolute",
     top: 30,
     right: 10,
-    width: '10%',
-    backgroundColor: 'rgba(255, 255, 255, 0.8)',
+    width: "10%",
+    backgroundColor: "rgba(255, 255, 255, 0.8)",
     borderRadius: 10,
-    alignItems: 'stretch',
-    justifyContent: 'center',
+    alignItems: "stretch",
+    justifyContent: "center",
   },
 
   lyricOffsetButton: {
-    backgroundColor: 'grey',
-    color: 'white',
+    backgroundColor: "grey",
+    color: "white",
     fontSize: 16,
-    fontWeight: 'bold',
-    textAlign: 'center',
+    fontWeight: "bold",
+    textAlign: "center",
     paddingVertical: 5,
   },
   lyricOffsetText: {
     fontSize: 12,
-    color: 'black',
-    textAlign: 'center',
+    color: "black",
+    textAlign: "center",
     paddingVertical: 5,
   },
 });

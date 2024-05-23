@@ -1,10 +1,10 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import bfetch from '@utils/BiliFetch';
+import bfetch from "@utils/BiliFetch";
 
 // see https://github.com/lovegaoshi/biliNFT
 
 const API =
-  'https://api.bilibili.com/x/garb/v2/mall/suit/detail?from=&from_id=&item_id={act_id}';
+  "https://api.bilibili.com/x/garb/v2/mall/suit/detail?from=&from_id=&item_id={act_id}";
 
 interface props {
   act_id: string;
@@ -15,7 +15,7 @@ const biliGarbFetch = async ({
   act_id,
   resolver = (json: any) => json,
 }: props) => {
-  const res = await bfetch(API.replace('{act_id}', act_id));
+  const res = await bfetch(API.replace("{act_id}", act_id));
   const json = await res.json();
   return resolver(json.data);
 };

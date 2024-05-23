@@ -1,13 +1,13 @@
-import React from 'react';
-import { StyleSheet } from 'react-native';
-import TrackPlayer, { useProgress } from 'react-native-track-player';
-import { Slider } from '@sharcoux/slider';
+import React from "react";
+import { StyleSheet } from "react-native";
+import TrackPlayer, { useProgress } from "react-native-track-player";
+import { Slider } from "@sharcoux/slider";
 
-import { useNoxSetting } from '@stores/useApp';
+import { useNoxSetting } from "@stores/useApp";
 
 export default () => {
   const { position, duration } = useProgress(200);
-  const playerStyle = useNoxSetting(state => state.playerStyle);
+  const playerStyle = useNoxSetting((state) => state.playerStyle);
 
   return (
     <Slider
@@ -35,7 +35,7 @@ export default () => {
       thumbSize={playerStyle.progressThumbImage ? 40 : undefined}
       thumbStyle={{
         backgroundColor: playerStyle.progressThumbImage
-          ? 'transparent'
+          ? "transparent"
           : playerStyle.colors.primary,
       }}
       maxTrackStyle={styles.transparent}
@@ -45,10 +45,10 @@ export default () => {
 
 const styles = StyleSheet.create({
   progressBar: {
-    width: '100%',
+    width: "100%",
     marginTop: 10,
-    flexDirection: 'row',
+    flexDirection: "row",
     zIndex: 2,
   },
-  transparent: { backgroundColor: 'transparent' },
+  transparent: { backgroundColor: "transparent" },
 });

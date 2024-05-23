@@ -1,8 +1,8 @@
-import * as React from 'react';
-import { Menu } from 'react-native-paper';
-import { useTranslation } from 'react-i18next';
+import * as React from "react";
+import { Menu } from "react-native-paper";
+import { useTranslation } from "react-i18next";
 
-import { SearchRegex } from '@enums/Playlist';
+import { SearchRegex } from "@enums/Playlist";
 
 interface Props {
   visible?: boolean;

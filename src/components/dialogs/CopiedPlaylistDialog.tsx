@@ -1,12 +1,12 @@
-import React, { useState } from 'react';
-import { Pressable, View, FlatList, StyleSheet, Platform } from 'react-native';
-import { Button, Dialog, Portal, Text, RadioButton } from 'react-native-paper';
-import { useTranslation } from 'react-i18next';
+import React, { useState } from "react";
+import { Pressable, View, FlatList, StyleSheet, Platform } from "react-native";
+import { Button, Dialog, Portal, Text, RadioButton } from "react-native-paper";
+import { useTranslation } from "react-i18next";
 
-import { useNoxSetting } from '@stores/useApp';
-import logger from '@utils/Logger';
-import noxPlayingList from '@stores/playingList';
-import { NoxRepeatMode } from '@enums/RepeatMode';
+import { useNoxSetting } from "@stores/useApp";
+import logger from "@utils/Logger";
+import noxPlayingList from "@stores/playingList";
+import { NoxRepeatMode } from "@enums/RepeatMode";
 
 const { getState } = noxPlayingList;
 
@@ -24,20 +24,20 @@ export default ({
   onSubmit = () => undefined,
 }: Props) => {
   const { t } = useTranslation();
-  const [playlistIndex, setPlaylistIndex] = useState('');
+  const [playlistIndex, setPlaylistIndex] = useState("");
   const playlistRef = React.useRef<FlatList<string[]>>(null);
-  const playlistIds = useNoxSetting(state => state.playlistIds);
-  const playlists = useNoxSetting(state => state.playlists);
-  const updatePlaylist = useNoxSetting(state => state.updatePlaylist);
-  const getPlaylist = useNoxSetting(state => state.getPlaylist);
+  const playlistIds = useNoxSetting((state) => state.playlistIds);
+  const playlists = useNoxSetting((state) => state.playlists);
+  const updatePlaylist = useNoxSetting((state) => state.updatePlaylist);
+  const getPlaylist = useNoxSetting((state) => state.getPlaylist);
 
   const handleClose = () => {
-    setPlaylistIndex('');
+    setPlaylistIndex("");
     onClose();
   };
 
   const handleSubmit = () => {
-    setPlaylistIndex('');
+    setPlaylistIndex("");
     logger.debug(`[SendTo] cmd received, sending to ${playlistIndex}`);
     if (!playlists[playlistIndex]) {
       logger.debug(`[SendTo] Sending to list ${playlistIndex} DNE`);
@@ -45,7 +45,9 @@ export default ({
       return;
     }
     const toList = playlists[playlistIndex];
-    getPlaylist(toList.id).then(p => updatePlaylist(p, fromList.songList, []));
+    getPlaylist(toList.id).then((p) =>
+      updatePlaylist(p, fromList.songList, []),
+    );
     onSubmit();
   };
 
@@ -53,8 +55,8 @@ export default ({
     const filteredPlaylists =
       getState().playmode === NoxRepeatMode.Suggest
         ? playlistIds
-        : playlistIds.filter(val => val !== fromList.id);
-    return filteredPlaylists.map(val => [val, playlists[val].title]);
+        : playlistIds.filter((val) => val !== fromList.id);
+    return filteredPlaylists.map((val) => [val, playlists[val].title]);
   };
 
   React.useEffect(() => {
@@ -76,17 +78,17 @@ export default ({
           styles.dialog,
           {
             height:
-              Platform.OS === 'android'
+              Platform.OS === "android"
                 ? `${10 + playlistList().length * 10}%`
                 : `${20 + playlistList().length * 10}%`,
           },
         ]}
       >
         <Dialog.Title style={styles.dialogTitle}>
-          {t('CopiedPlaylistDialog.title', {
+          {t("CopiedPlaylistDialog.title", {
             title:
               fromList.title.length > 20
-                ? fromList.title.substring(0, 20) + '...'
+                ? fromList.title.substring(0, 20) + "..."
                 : fromList.title,
           })}
         </Dialog.Title>
@@ -103,7 +105,7 @@ export default ({
                 <View style={styles.rowView}>
                   <RadioButton
                     value={item[0]}
-                    status={playlistIndex === item[0] ? 'checked' : 'unchecked'}
+                    status={playlistIndex === item[0] ? "checked" : "unchecked"}
                     onPress={() => setPlaylistIndex(item[0])}
                   />
                   <Text variant="titleLarge" style={styles.dialogText}>
@@ -112,11 +114,11 @@ export default ({
                 </View>
               </Pressable>
             )}
-            keyExtractor={item => item[0]}
+            keyExtractor={(item) => item[0]}
           />
           <Dialog.Actions style={styles.dialogAction}>
-            <Button onPress={handleClose}>{t('Dialog.cancel')}</Button>
-            <Button onPress={handleSubmit}>{t('Dialog.ok')}</Button>
+            <Button onPress={handleClose}>{t("Dialog.cancel")}</Button>
+            <Button onPress={handleSubmit}>{t("Dialog.ok")}</Button>
           </Dialog.Actions>
         </Dialog.Content>
       </Dialog>
@@ -126,15 +128,15 @@ export default ({
 
 const styles = StyleSheet.create({
   dialog: {
-    minHeight: '30%',
-    maxHeight: Platform.OS === 'android' ? '50%' : '100%',
+    minHeight: "30%",
+    maxHeight: Platform.OS === "android" ? "50%" : "100%",
   },
   dialogTitle: {
     maxHeight: 100,
   },
   dialogContent: {
     flex: 1,
-    justifyContent: 'flex-end',
+    justifyContent: "flex-end",
   },
   dialogList: {
     flex: 1,
@@ -150,6 +152,6 @@ const styles = StyleSheet.create({
     paddingBottom: 0,
   },
   rowView: {
-    flexDirection: 'row',
+    flexDirection: "row",
   },
 });

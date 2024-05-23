@@ -10,12 +10,12 @@
  * check out the fastAPI docker I set up to your router/NAS/VPS to get started.
  *
  */
-import axios from 'axios';
+import axios from "axios";
 // eslint-disable-next-line import/no-unresolved
-import { PERSONAL_CLOUD_SECRET } from '@env';
+import { PERSONAL_CLOUD_SECRET } from "@env";
 
-import getBiliUser from '@utils/Bilibili/BiliUser';
-import { logger } from '@utils/Logger';
+import getBiliUser from "@utils/Bilibili/BiliUser";
+import { logger } from "@utils/Logger";
 
 /**
  * a simple personal cloud built with fastAPI. uses the current bili user
@@ -36,10 +36,10 @@ export const noxRestore = async (cloudAddress: string, cloudID?: string) => {
     const res = await axios.get(
       `${cloudAddress}download/${cloudID || (await getBiliUserKey())}`,
       {
-        responseType: 'arraybuffer',
+        responseType: "arraybuffer",
         maxContentLength: Infinity,
         maxBodyLength: Infinity,
-      }
+      },
     );
     if (res.status === 200) {
       return new Uint8Array(await res.data);
@@ -66,22 +66,22 @@ export const noxRestore = async (cloudAddress: string, cloudID?: string) => {
 export const noxBackup = async (
   content: Uint8Array,
   cloudAddress: string,
-  cloudID?: string
+  cloudID?: string,
 ) => {
   try {
     logger.debug(`[personalSync] syncing to ${cloudAddress}`);
     return await fetch(`${cloudAddress}upload`, {
-      method: 'POST',
+      method: "POST",
       headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
+        Accept: "application/json",
+        "Content-Type": "application/json",
         userid: encodeURIComponent(cloudID || (await getBiliUserKey())),
-        'secret-key': PERSONAL_CLOUD_SECRET,
-        'Content-Encoding': 'gzip',
+        "secret-key": PERSONAL_CLOUD_SECRET,
+        "Content-Encoding": "gzip",
       },
       body: content,
     });
   } catch {
-    return { status: 'fetch failed.' };
+    return { status: "fetch failed." };
   }
 };

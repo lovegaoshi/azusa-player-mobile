@@ -1,13 +1,13 @@
-import React, { useRef } from 'react';
-import { View, StyleSheet } from 'react-native';
-import { Button, Dialog, Portal, Text, Switch } from 'react-native-paper';
-import { useTranslation } from 'react-i18next';
+import React, { useRef } from "react";
+import { View, StyleSheet } from "react-native";
+import { Button, Dialog, Portal, Text, Switch } from "react-native-paper";
+import { useTranslation } from "react-i18next";
 
-import { useNoxSetting } from '@stores/useApp';
+import { useNoxSetting } from "@stores/useApp";
 import PortaledInput, {
   PortalInputRef,
-} from '@components/dialogs/PortaledInput';
-import usePlaylistSetting from './usePlaylistSetting';
+} from "@components/dialogs/PortaledInput";
+import usePlaylistSetting from "./usePlaylistSetting";
 
 interface Props {
   visible: boolean;
@@ -23,7 +23,7 @@ export default ({
   playlist,
 }: Props) => {
   const { t } = useTranslation();
-  const playerStyle = useNoxSetting(state => state.playerStyle);
+  const playerStyle = useNoxSetting((state) => state.playerStyle);
   const nameRef = useRef<PortalInputRef>();
   const subRef = useRef<PortalInputRef>();
   const blacklistRef = useRef<PortalInputRef>();
@@ -43,10 +43,10 @@ export default ({
 
   const handleSubmit = () => {
     const newSetting = {
-      title: nameRef.current?.name || '',
-      subscribeUrl: Array.from(new Set(subRef.current?.name.split(';'))),
+      title: nameRef.current?.name || "",
+      subscribeUrl: Array.from(new Set(subRef.current?.name.split(";"))),
       blacklistedUrl: Array.from(
-        new Set(blacklistRef.current?.name.split(';'))
+        new Set(blacklistRef.current?.name.split(";")),
       ),
     };
     saveSetting(newSetting, onSubmit);
@@ -58,22 +58,22 @@ export default ({
         <Dialog.Content>
           <PortaledInput
             ref={nameRef}
-            label={'RenameSongDialog.label'}
+            label={"RenameSongDialog.label"}
             defaultName={playlist.title}
             autofocus={false}
             selectTextOnFocus={false}
           />
           <PortaledInput
             ref={subRef}
-            label={'PlaylistSettingsDialog.subscribeUrlLabel'}
-            defaultName={playlist.subscribeUrl.join(';')}
+            label={"PlaylistSettingsDialog.subscribeUrlLabel"}
+            defaultName={playlist.subscribeUrl.join(";")}
             autofocus={false}
             selectTextOnFocus={false}
           />
           <PortaledInput
             ref={blacklistRef}
-            label={'PlaylistSettingsDialog.blacklistedUrlLabel'}
-            defaultName={playlist.blacklistedUrl.join(';')}
+            label={"PlaylistSettingsDialog.blacklistedUrlLabel"}
+            defaultName={playlist.blacklistedUrl.join(";")}
             autofocus={false}
             selectTextOnFocus={false}
           />
@@ -84,7 +84,7 @@ export default ({
               color={playerStyle.colors.onSurfaceVariant}
             />
             <Text style={styles.switchText}>
-              {t('PlaylistSettingsDialog.useBiliShazamLabel')}
+              {t("PlaylistSettingsDialog.useBiliShazamLabel")}
             </Text>
           </View>
           <View style={styles.switchContainer}>
@@ -94,7 +94,7 @@ export default ({
               color={playerStyle.colors.onSurfaceVariant}
             />
             <Text style={styles.switchText}>
-              {t('PlaylistSettingsDialog.useBiliSyncLabel')}
+              {t("PlaylistSettingsDialog.useBiliSyncLabel")}
             </Text>
           </View>
           <View style={styles.switchContainer}>
@@ -104,14 +104,14 @@ export default ({
               color={playerStyle.colors.onSurfaceVariant}
             />
             <Text style={styles.switchText}>
-              {t('PlaylistSettingsDialog.useNewSongOverwriteLabel')}
+              {t("PlaylistSettingsDialog.useNewSongOverwriteLabel")}
             </Text>
           </View>
         </Dialog.Content>
 
         <Dialog.Actions>
-          <Button onPress={handleClose}>{t('Dialog.cancel')}</Button>
-          <Button onPress={handleSubmit}>{t('Dialog.ok')}</Button>
+          <Button onPress={handleClose}>{t("Dialog.cancel")}</Button>
+          <Button onPress={handleSubmit}>{t("Dialog.ok")}</Button>
         </Dialog.Actions>
       </Dialog>
     </Portal>
@@ -120,7 +120,7 @@ export default ({
 
 const styles = StyleSheet.create({
   switchContainer: {
-    flexDirection: 'row',
+    flexDirection: "row",
   },
   switchText: {
     fontSize: 18,

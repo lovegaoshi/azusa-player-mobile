@@ -1,6 +1,6 @@
 // https://github.com/blueset/project-lyricova/commit/0b2c04064ce3d22896851a93be5befa10a0f841f
 
-import { strFromU8, decompressSync } from 'fflate';
+import { strFromU8, decompressSync } from "fflate";
 
 /**
  * Translated from C source found in QQMusicDES.
@@ -8,7 +8,7 @@ import { strFromU8, decompressSync } from 'fflate';
  * @author Brad Conte <brad@bradconte.com>
  */
 
-type DES_MODE = 'encrypt' | 'decrypt';
+type DES_MODE = "encrypt" | "decrypt";
 
 function ofst<T>(arr: T[], offset: number) {
   return new Proxy(arr, {
@@ -400,7 +400,7 @@ function des_key_setup(key: number[], schedule: number_0_6, mode: DES_MODE) {
 
     // Decryption subkeys are reverse order of encryption subkeys so
     // generate them in reverse if the key schedule is for decryption useage.
-    if (mode === 'decrypt') to_gen = 15 - i;
+    if (mode === "decrypt") to_gen = 15 - i;
     /*(if mode == DES_ENCRYPT)*/ else to_gen = i;
     // Initialize the array
     for (j = 0; j < 6; ++j) schedule[to_gen][j] = 0;
@@ -408,7 +408,7 @@ function des_key_setup(key: number[], schedule: number_0_6, mode: DES_MODE) {
       schedule[to_gen][flr(j / 8)] |= BITNUMINTR(
         C,
         key_compression[j],
-        7 - (j % 8)
+        7 - (j % 8),
       );
       schedule[to_gen][flr(j / 8)] >>>= 0;
     }
@@ -416,7 +416,7 @@ function des_key_setup(key: number[], schedule: number_0_6, mode: DES_MODE) {
       schedule[to_gen][flr(j / 8)] |= BITNUMINTR(
         D,
         key_compression[j] - 27,
-        7 - (j % 8)
+        7 - (j % 8),
       );
       schedule[to_gen][flr(j / 8)] >>>= 0;
     }
@@ -444,7 +444,7 @@ function des_crypt(in_: number[], out: number[], key: number_0_6) {
 
 export function des(buff: number[], key: number[], len: number): number {
   const schedule: number_6[] = [...Array(16)].map(() => [0, 0, 0, 0, 0, 0]);
-  des_key_setup(key, schedule, 'encrypt');
+  des_key_setup(key, schedule, "encrypt");
   for (let i = 0; i < len; i += 8)
     des_crypt(ofst(buff, i), ofst(buff, i), schedule);
   return 0;
@@ -452,15 +452,15 @@ export function des(buff: number[], key: number[], len: number): number {
 
 export function Ddes(buff: number[], key: number[], len: number): number {
   const schedule: number_6[] = [...Array(16)].map(() => [0, 0, 0, 0, 0, 0]);
-  des_key_setup(key, schedule, 'decrypt');
+  des_key_setup(key, schedule, "decrypt");
   for (let i = 0; i < len; i += 8)
     des_crypt(ofst(buff, i), ofst(buff, i), schedule);
   return 0;
 }
 
-const k1 = [...'!@#)(NHLiuy*$%^&'].map(c => c.codePointAt(0) as number);
-const k2 = [...'123ZXC!@#)(*$%^&'].map(c => c.codePointAt(0) as number);
-const k3 = [...'!@#)(*$%^&abcDEF'].map(c => c.codePointAt(0) as number);
+const k1 = [..."!@#)(NHLiuy*$%^&"].map((c) => c.codePointAt(0) as number);
+const k2 = [..."123ZXC!@#)(*$%^&"].map((c) => c.codePointAt(0) as number);
+const k3 = [..."!@#)(*$%^&abcDEF"].map((c) => c.codePointAt(0) as number);
 
 function hexToByteArray(hexString: string): number[] {
   const result: number[] = [];

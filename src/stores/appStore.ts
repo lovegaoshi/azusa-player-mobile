@@ -1,16 +1,16 @@
 // vanilla store of zustand serving playbackServices.
-import { createStore } from 'zustand/vanilla';
-import { UpdateOptions } from 'react-native-track-player';
+import { createStore } from "zustand/vanilla";
+import { UpdateOptions } from "react-native-track-player";
 
 import {
   getABMapping,
   saveABMapping,
   getFadeInterval,
   getRegExtractMapping,
-} from '@utils/ChromeStorage';
-import { logger } from '@utils/Logger';
-import rejson from '../utils/rejson.json';
-import { LoadJSONRegExtractors } from '../utils/re';
+} from "@utils/ChromeStorage";
+import { logger } from "@utils/Logger";
+import rejson from "../utils/rejson.json";
+import { LoadJSONRegExtractors } from "../utils/re";
 
 interface AppStore {
   pipMode: boolean;
@@ -41,18 +41,18 @@ interface AppStore {
   animatedVolumeChangedCallback: () => void;
 }
 
-const appStore = createStore<AppStore>(set => ({
+const appStore = createStore<AppStore>((set) => ({
   pipMode: false,
   ABRepeat: {},
   setABRepeat: (val: NoxStorage.ABDict) => {
     set({ ABRepeat: val });
     saveABMapping(val);
   },
-  activeTrackPlayingId: '',
+  activeTrackPlayingId: "",
   setActiveTrackPlayingId: (val: string) => {
     set({ activeTrackPlayingId: val });
   },
-  currentPlayingId: '',
+  currentPlayingId: "",
   setCurrentPlayingId: (val: string) => {
     set({ currentPlayingId: val });
   },
@@ -88,7 +88,7 @@ export const initialize = async () => {
     reExtractSongName: LoadJSONRegExtractors(
       savedRegExt.length > 0
         ? savedRegExt
-        : (rejson as NoxRegExt.JSONExtractor[])
+        : (rejson as NoxRegExt.JSONExtractor[]),
     ),
   });
 };
@@ -120,7 +120,7 @@ export const getABRepeat = (song: NoxMedia.Song) => {
 
 export const addABRepeat = (
   song: NoxMedia.Song,
-  abrepeat: [number, number]
+  abrepeat: [number, number],
 ) => {
   saveABRepeat({ [song.id]: abrepeat });
 };
@@ -132,7 +132,7 @@ export const setCurrentPlaying = (song: NoxMedia.Song) => {
   }
   appStore.setState({ currentPlayingId: song.id });
   // HACK: skips ABRepeat of the first song set by app (which should be handled by resumePlayback)
-  return currentPlayingId === '';
+  return currentPlayingId === "";
 };
 
 export const setFetchProgress = (val: number) => {
@@ -141,7 +141,7 @@ export const setFetchProgress = (val: number) => {
 
 export const addDownloadProgress = async (
   song: NoxMedia.Song,
-  progress: number
+  progress: number,
 ) => {
   const currentAppStore = appStore.getState();
   const newDownloadProgressMap = {
@@ -158,7 +158,7 @@ export const addDownloadProgress = async (
 
 export const addDownloadPromise = async (
   song: NoxMedia.Song,
-  downloadPromise: Promise<string | void>
+  downloadPromise: Promise<string | void>,
 ) => {
   const newMap = {
     ...appStore.getState().downloadPromiseMap,
@@ -170,7 +170,7 @@ export const addDownloadPromise = async (
 
 export const cacheResolvedURL = async (
   song: NoxMedia.Song,
-  resolveURL: (song: NoxMedia.Song) => Promise<NoxNetwork.ResolvedNoxMediaURL>
+  resolveURL: (song: NoxMedia.Song) => Promise<NoxNetwork.ResolvedNoxMediaURL>,
 ) => {
   const cachedResolveURLMap = appStore.getState().cachedResolveURLMap;
   const cachedResolvedURL = cachedResolveURLMap[song.id];

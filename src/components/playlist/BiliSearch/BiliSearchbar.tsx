@@ -1,24 +1,24 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import React, { useState, useEffect, useCallback } from 'react';
-import { ProgressBar, Searchbar } from 'react-native-paper';
+import React, { useState, useEffect, useCallback } from "react";
+import { ProgressBar, Searchbar } from "react-native-paper";
 import {
   View,
   StyleSheet,
   GestureResponderEvent,
   Platform,
-} from 'react-native';
-import { useTranslation } from 'react-i18next';
-import ShareMenu, { ShareCallback } from 'react-native-share-menu';
-import { useNavigation } from '@react-navigation/native';
+} from "react-native";
+import { useTranslation } from "react-i18next";
+import ShareMenu, { ShareCallback } from "react-native-share-menu";
+import { useNavigation } from "@react-navigation/native";
 
-import { NoxRoutes } from '@enums/Routes';
-import { useNoxSetting } from '@stores/useApp';
-import usePlayback from '@hooks/usePlayback';
-import useBiliSearch from '@hooks/useBiliSearch';
-import SearchMenu from './SearchMenu';
-import { getMusicFreePlugin } from '@utils/ChromeStorage';
-import logger from '@utils/Logger';
-import { getIcon } from './Icons';
+import { NoxRoutes } from "@enums/Routes";
+import { useNoxSetting } from "@stores/useApp";
+import usePlayback from "@hooks/usePlayback";
+import useBiliSearch from "@hooks/useBiliSearch";
+import SearchMenu from "./SearchMenu";
+import { getMusicFreePlugin } from "@utils/ChromeStorage";
+import logger from "@utils/Logger";
+import { getIcon } from "./Icons";
 
 interface SharedItem {
   mimeType: string;
@@ -33,13 +33,13 @@ export default ({
   onSearched = (songs: NoxMedia.Song[]) => console.log(songs),
 }: props) => {
   const { t } = useTranslation();
-  const searchOption = useNoxSetting(state => state.searchOption);
-  const searchProgress = useNoxSetting(state => state.searchBarProgress);
+  const searchOption = useNoxSetting((state) => state.searchOption);
+  const searchProgress = useNoxSetting((state) => state.searchBarProgress);
   const navigationGlobal = useNavigation();
-  const playerStyle = useNoxSetting(state => state.playerStyle);
-  const externalSearchText = useNoxSetting(state => state.externalSearchText);
+  const playerStyle = useNoxSetting((state) => state.playerStyle);
+  const externalSearchText = useNoxSetting((state) => state.externalSearchText);
   const setExternalSearchText = useNoxSetting(
-    state => state.setExternalSearchText
+    (state) => state.setExternalSearchText,
   );
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [sharedData, setSharedData] = useState<any>(null);
@@ -53,7 +53,7 @@ export default ({
   const [showMusicFree, setShowMusicFree] = useState(false);
   const { searchVal, setSearchVal, handleSearch } = useBiliSearch({
     onSearched,
-    searchListTitle: t('PlaylistOperations.searchListName'),
+    searchListTitle: t("PlaylistOperations.searchListName"),
   });
 
   const handleMenuPress = async (event: GestureResponderEvent) => {
@@ -66,7 +66,7 @@ export default ({
   };
 
   const toggleVisible = () => {
-    setDialogOpen(val => !val);
+    setDialogOpen((val) => !val);
   };
 
   const handleExternalSearch = (data: string) => {
@@ -77,15 +77,15 @@ export default ({
   useEffect(() => {
     if (externalSearchText.length > 0) {
       logger.debug(
-        `[search] performing external serach: ${externalSearchText}`
+        `[search] performing external serach: ${externalSearchText}`,
       );
-      handleExternalSearch(externalSearchText).then(newSearchPlaylist =>
+      handleExternalSearch(externalSearchText).then((newSearchPlaylist) =>
         playFromPlaylist({
           playlist: newSearchPlaylist,
           song: newSearchPlaylist.songList[0],
-        })
+        }),
       );
-      setExternalSearchText('');
+      setExternalSearchText("");
     }
   }, [externalSearchText]);
 
@@ -103,14 +103,14 @@ export default ({
   }, []);
 
   useEffect(() => {
-    if (Platform.OS !== 'android') return;
+    if (Platform.OS !== "android") return;
     ShareMenu.getInitialShare(handleShare as ShareCallback);
   }, []);
 
   useEffect(() => {
-    if (Platform.OS !== 'android') return;
+    if (Platform.OS !== "android") return;
     const listener = ShareMenu.addNewShareListener(
-      handleShare as ShareCallback
+      handleShare as ShareCallback,
     );
 
     return () => {
@@ -122,7 +122,7 @@ export default ({
     <View style={styles.container}>
       <View style={styles.searchContainer}>
         <Searchbar
-          placeholder={String(t('BiliSearchBar.label'))}
+          placeholder={String(t("BiliSearchBar.label"))}
           value={searchVal}
           onChangeText={setSearchVal}
           onSubmitEditing={() => handleSearch(searchVal)}
@@ -137,7 +137,7 @@ export default ({
           toggleVisible={toggleVisible}
           menuCoords={menuCoords}
           showMusicFree={showMusicFree}
-          setSearchVal={v => {
+          setSearchVal={(v) => {
             setSearchVal(v);
             handleSearch(v);
           }}
@@ -154,17 +154,17 @@ export default ({
 
 const styles = StyleSheet.create({
   container: {
-    width: '100%',
+    width: "100%",
     height: 60,
     paddingHorizontal: 5,
     paddingTop: 10,
   },
   searchContainer: {
-    flexDirection: 'row',
-    width: '100%',
+    flexDirection: "row",
+    width: "100%",
   },
   textInput: {
     flex: 5,
   },
-  progressBar: { backgroundColor: 'rgba(0, 0, 0, 0)' },
+  progressBar: { backgroundColor: "rgba(0, 0, 0, 0)" },
 });

@@ -9,11 +9,11 @@
  * steps to refactor:
  * each site needs a fetch to parse regex extracted, a videoinfo fetcher and a song fetcher.
  */
-import { logger } from '../Logger';
-import { regexFetchProps } from './generic';
-import bfetch from '@utils/BiliFetch';
-import { Source } from '@enums/MediaFetch';
-import SongTS from '@objects/Song';
+import { logger } from "../Logger";
+import { regexFetchProps } from "./generic";
+import bfetch from "@utils/BiliFetch";
+import { Source } from "@enums/MediaFetch";
+import SongTS from "@objects/Song";
 
 /**
  *
@@ -58,11 +58,11 @@ import SongTS from '@objects/Song';
         },
  */
 const API =
-  'https://www.bilibili.com/audio/music-service-c/web/song/similar?sid={sid}';
+  "https://www.bilibili.com/audio/music-service-c/web/song/similar?sid={sid}";
 
 const fetchBiliAudioSimilarList = async (sid: string) => {
-  logger.info('calling fetchBiliAudioSimilarList');
-  const res = await bfetch(API.replace('{sid}', sid));
+  logger.info("calling fetchBiliAudioSimilarList");
+  const res = await bfetch(API.replace("{sid}", sid));
   const json = await res.json();
   return json.data.map((data: any) =>
     SongTS({
@@ -73,12 +73,12 @@ const fetchBiliAudioSimilarList = async (sid: string) => {
       singer: data.uname,
       singerId: data.uid,
       cover: data.cover,
-      lyric: '',
+      lyric: "",
       page: 1,
       duration: data.duration,
       album: data.title,
       source: Source.biliaudio,
-    })
+    }),
   );
 };
 

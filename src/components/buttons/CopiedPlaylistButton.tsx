@@ -1,12 +1,12 @@
-import React, { useState } from 'react';
-import { IconButton, Menu } from 'react-native-paper';
-import { useTranslation } from 'react-i18next';
-import { StyleSheet } from 'react-native';
+import React, { useState } from "react";
+import { IconButton, Menu } from "react-native-paper";
+import { useTranslation } from "react-i18next";
+import { StyleSheet } from "react-native";
 
-import Dialog from '../dialogs/CopiedPlaylistDialog';
-import { dummyPlaylistList } from '@objects/Playlist';
+import Dialog from "../dialogs/CopiedPlaylistDialog";
+import { dummyPlaylistList } from "@objects/Playlist";
 
-const ICON = 'playlist-plus';
+const ICON = "playlist-plus";
 
 export const CopiedPlaylistButton = ({
   fromList,
@@ -67,7 +67,7 @@ export const CopiedPlaylistMenuItem = ({
           setDialogOpen(true);
           setFromList(getFromListOnClick());
         }}
-        title={t('PlaylistOperations.playlistSendToTitle')}
+        title={t("PlaylistOperations.playlistSendToTitle")}
       />
       <Dialog
         visible={dialogOpen}

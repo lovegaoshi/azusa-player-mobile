@@ -1,9 +1,9 @@
-import React from 'react';
-import TrackPlayer from 'react-native-track-player';
+import React from "react";
+import TrackPlayer from "react-native-track-player";
 
-import GenericDialog from '@components/dialogs/GenericDialog';
-import showLog from './Log';
-import { useNoxSetting } from '@stores/useApp';
+import GenericDialog from "@components/dialogs/GenericDialog";
+import showLog from "./Log";
+import { useNoxSetting } from "@stores/useApp";
 
 export default () => {
   const [visible] = React.useState(false);

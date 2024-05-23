@@ -1,18 +1,18 @@
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from "react-i18next";
 
-import { useNoxSetting } from '@stores/useApp';
-import usePlaylistCRUD from '@hooks/usePlaylistCRUD';
-import useAlert from '@components/dialogs/useAlert';
-import usePlaylistAA from '@hooks/usePlaylistAA';
-import useSnack from '@stores/useSnack';
+import { useNoxSetting } from "@stores/useApp";
+import usePlaylistCRUD from "@hooks/usePlaylistCRUD";
+import useAlert from "@components/dialogs/useAlert";
+import usePlaylistAA from "@hooks/usePlaylistAA";
+import useSnack from "@stores/useSnack";
 
 interface Props {
   callback?: () => void;
 }
 export default ({ callback = () => {} }: Props) => {
   const { t } = useTranslation();
-  const setSnack = useSnack(state => state.setSnack);
-  const currentPlaylist = useNoxSetting(state => state.currentPlaylist);
+  const setSnack = useSnack((state) => state.setSnack);
+  const currentPlaylist = useNoxSetting((state) => state.currentPlaylist);
   const playlistCRUD = usePlaylistCRUD();
   const { removePlaylist } = usePlaylistAA();
   const { OneWayAlert, TwoWayAlert } = useAlert();
@@ -20,8 +20,8 @@ export default ({ callback = () => {} }: Props) => {
   const playlistSync2Bilibili = async (playlist = currentPlaylist) => {
     setSnack({
       snackMsg: {
-        processing: t('PlaylistOperations.bilisyncing', { playlist }),
-        success: t('PlaylistOperations.bilisynced', { playlist }),
+        processing: t("PlaylistOperations.bilisyncing", { playlist }),
+        success: t("PlaylistOperations.bilisynced", { playlist }),
       },
       processFunction: () => playlistCRUD.playlistSync2Bilibili(playlist),
     });
@@ -29,53 +29,53 @@ export default ({ callback = () => {} }: Props) => {
 
   const playlistAnalyze = (playlist = currentPlaylist) => {
     const analytics = playlistCRUD.playlistAnalyze(playlist, 5);
-    OneWayAlert(analytics.title, analytics.content.join('\n'), callback);
+    OneWayAlert(analytics.title, analytics.content.join("\n"), callback);
   };
 
   const confirmOnPlaylistClear = (playlist = currentPlaylist) => {
     TwoWayAlert(
-      t('PlaylistOperations.clearListTitle', { playlist }),
-      t('PlaylistOperations.clearListMsg', { playlist }),
+      t("PlaylistOperations.clearListTitle", { playlist }),
+      t("PlaylistOperations.clearListMsg", { playlist }),
       () => {
         playlistCRUD.playlistClear(playlist);
         callback();
-      }
+      },
     );
   };
 
   const confirmOnPlaylistDelete = (playlist = currentPlaylist) => {
     TwoWayAlert(
-      t('PlaylistOperations.deleteListTitle', { playlist }),
-      t('PlaylistOperations.deleteListMsg', { playlist }),
+      t("PlaylistOperations.deleteListTitle", { playlist }),
+      t("PlaylistOperations.deleteListMsg", { playlist }),
       () => {
         removePlaylist(playlist.id);
         callback();
-      }
+      },
     );
   };
 
   const confirmOnPlaylistReload = (playlist = currentPlaylist) => {
     TwoWayAlert(
-      t('PlaylistOperations.resetListTitle', { playlist }),
-      t('PlaylistOperations.resetListMsg', { playlist }),
+      t("PlaylistOperations.resetListTitle", { playlist }),
+      t("PlaylistOperations.resetListMsg", { playlist }),
       async () => {
         setSnack({
           snackMsg: {
-            processing: t('PlaylistOperations.reloading', { playlist }),
-            success: t('PlaylistOperations.reloaded', { playlist }),
+            processing: t("PlaylistOperations.reloading", { playlist }),
+            success: t("PlaylistOperations.reloaded", { playlist }),
           },
           processFunction: () => playlistCRUD.playlistReload(playlist),
           callback,
         });
-      }
+      },
     );
   };
 
   const playlistCleanup = async (playlist = currentPlaylist) => {
     setSnack({
       snackMsg: {
-        processing: t('PlaylistOperations.cleaning', { playlist }),
-        success: t('PlaylistOperations.cleaned', { playlist }),
+        processing: t("PlaylistOperations.cleaning", { playlist }),
+        success: t("PlaylistOperations.cleaned", { playlist }),
       },
       processFunction: () => playlistCRUD.playlistCleanup(playlist),
     });
@@ -84,8 +84,8 @@ export default ({ callback = () => {} }: Props) => {
   const playlistBiliShazam = async (playlist = currentPlaylist) => {
     setSnack({
       snackMsg: {
-        processing: t('PlaylistOperations.bilishazaming', { playlist }),
-        success: t('PlaylistOperations.bilishazamed', { playlist }),
+        processing: t("PlaylistOperations.bilishazaming", { playlist }),
+        success: t("PlaylistOperations.bilishazamed", { playlist }),
       },
       processFunction: () => playlistCRUD.playlistBiliShazam(playlist),
     });

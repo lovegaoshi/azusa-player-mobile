@@ -1,17 +1,17 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Platform } from 'react-native';
-import LRUCache from 'lru-cache';
-import RNFetchBlob from 'react-native-blob-util';
-import TrackPlayer from 'react-native-track-player';
+import { Platform } from "react-native";
+import LRUCache from "lru-cache";
+import RNFetchBlob from "react-native-blob-util";
+import TrackPlayer from "react-native-track-player";
 
-import { r128gain, setR128Gain, ffmpegToMP3 } from './ffmpeg/ffmpeg';
-import { addDownloadProgress, setFetchProgress } from '@stores/appStore';
-import { addR128Gain, getR128Gain } from '@utils/ffmpeg/r128Store';
-import playerSettingStore from '@stores/playerSettingStore';
-import { getCachedMediaMapping, saveCachedMediaMapping } from './ChromeStorage';
-import { logger } from './Logger';
-import { customReqHeader } from './BiliFetch';
-import { Source } from '@enums/MediaFetch';
+import { r128gain, setR128Gain, ffmpegToMP3 } from "./ffmpeg/ffmpeg";
+import { addDownloadProgress, setFetchProgress } from "@stores/appStore";
+import { addR128Gain, getR128Gain } from "@utils/ffmpeg/r128Store";
+import playerSettingStore from "@stores/playerSettingStore";
+import { getCachedMediaMapping, saveCachedMediaMapping } from "./ChromeStorage";
+import { logger } from "./Logger";
+import { customReqHeader } from "./BiliFetch";
+import { Source } from "@enums/MediaFetch";
 
 const { getState } = playerSettingStore;
 
@@ -32,11 +32,11 @@ class NoxMediaCache {
 
   constructor(
     options: optionsProps,
-    savedCache?: [string, LRUCache.Entry<string>][]
+    savedCache?: [string, LRUCache.Entry<string>][],
   ) {
     this.cache = new LRUCache<string, string>({
       max: options.max || 1,
-      dispose: async value => {
+      dispose: async (value) => {
         logger.debug(`[cache] ${value} is being purged as its not used.`);
         RNFetchBlob.fs.unlink(value).catch();
       },
@@ -57,11 +57,11 @@ class NoxMediaCache {
   saveCacheMedia = async (
     song: NoxMedia.Song,
     resolvedURL: any,
-    extension?: string
+    extension?: string,
   ) => {
     const parseR128Gain = async () => {
       if (getState().playerSetting.r128gain) {
-        logger.debug('[FFMPEG] now starting FFMPEG r128gain...');
+        logger.debug("[FFMPEG] now starting FFMPEG r128gain...");
         const previousGain = getR128Gain(song);
         if (previousGain === null) {
           const gain = await r128gain(res.path());
@@ -73,26 +73,26 @@ class NoxMediaCache {
       }
     };
     // HACK: local files also need r128gain
-    if (resolvedURL.url.startsWith('file://')) parseR128Gain();
+    if (resolvedURL.url.startsWith("file://")) parseR128Gain();
     if (this.cache.max < 2 || song.isLive) {
       setFetchProgress(0);
       return;
     }
-    if (!resolvedURL.url.startsWith('http')) {
+    if (!resolvedURL.url.startsWith("http")) {
       setFetchProgress(100);
       return;
     }
     logger.debug(`[Cache] fetching ${song.name} to cache...`);
     if (!extension) {
       const regexMatch = /.+\/{2}.+\/{1}.+(\.\w+)\?*.*/.exec(resolvedURL.url);
-      extension = regexMatch ? regexMatch[1] : 'm4a';
+      extension = regexMatch ? regexMatch[1] : "m4a";
     }
     // https://github.com/joltup/rn-fetch-blob#download-to-storage-directly
     const res = await RNFetchBlob.config({
       fileCache: true,
       appendExt: extension,
     })
-      .fetch('GET', resolvedURL.url, resolvedURL.headers)
+      .fetch("GET", resolvedURL.url, resolvedURL.headers)
       .progress((received, total) => {
         const progress = Math.floor((Number(received) * 100) / Number(total));
         addDownloadProgress(song, progress);
@@ -101,15 +101,15 @@ class NoxMediaCache {
     this.cache.set(noxCacheKey(song), res.path());
     addDownloadProgress(song, 100);
     await parseR128Gain();
-    if (Platform.OS === 'ios') {
+    if (Platform.OS === "ios") {
       const mp3Path = await ffmpegToMP3(res.path());
       this.cache.set(noxCacheKey(song), mp3Path);
       const playbackState = await TrackPlayer.getPlaybackState();
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-expect-error
-      if (playbackState.error?.code === 'ios_failed_to_load_resource') {
+      if (playbackState.error?.code === "ios_failed_to_load_resource") {
         logger.warn(
-          `iOS m4s playback error of ${song.parsedName}. loading cached mp3...`
+          `iOS m4s playback error of ${song.parsedName}. loading cached mp3...`,
         );
         const currentTrack = await TrackPlayer.getActiveTrack();
         await TrackPlayer.load({ ...currentTrack, url: mp3Path });
@@ -119,7 +119,7 @@ class NoxMediaCache {
     this.dumpCache();
   };
 
-  loadCacheObject = async (identifier: string, prefix = 'file://') => {
+  loadCacheObject = async (identifier: string, prefix = "file://") => {
     const cachedPath = this.cache.get(identifier);
     if (!cachedPath || !(await RNFetchBlob.fs.exists(cachedPath)))
       return undefined;
@@ -127,7 +127,7 @@ class NoxMediaCache {
     return `${prefix}${cachedPath}`;
   };
 
-  loadCacheMedia = (song: NoxMedia.Song, prefix = 'file://') => {
+  loadCacheMedia = (song: NoxMedia.Song, prefix = "file://") => {
     // HACK: return song.source if song is local.
     if (song.source === Source.local) {
       // return song.bvid;
@@ -137,7 +137,7 @@ class NoxMediaCache {
 
   loadCacheFunction = async (
     identifier: string,
-    getURL: () => Promise<string>
+    getURL: () => Promise<string>,
   ) => {
     logger.debug(`[NoxCache] looking up ${identifier} from cache...`);
     const cachedPath = await this.loadCacheObject(identifier);
@@ -149,12 +149,12 @@ class NoxMediaCache {
     RNFetchBlob.config({
       fileCache: true,
     })
-      .fetch('GET', resolvedURL, customReqHeader(resolvedURL))
+      .fetch("GET", resolvedURL, customReqHeader(resolvedURL))
       .progress((received, total) => {
         const progress = Math.floor((Number(received) * 100) / Number(total));
         logger.debug(`[NoxCache] ${identifier} caching progress: ${progress}%`);
       })
-      .then(res => {
+      .then((res) => {
         this.cache.set(identifier, res.path());
         this.dumpCache();
       })
@@ -168,14 +168,14 @@ class NoxMediaCache {
   };
 
   getOrphanedCache = (songList: NoxMedia.Song[]) => {
-    const songListKeys = songList.map(song => noxCacheKey(song));
+    const songListKeys = songList.map((song) => noxCacheKey(song));
     return Array.from(this.cache.keys()).filter(
-      key => !songListKeys.includes(key)
+      (key) => !songListKeys.includes(key),
     );
   };
 
   cleanOrphanedCache = (orphanedList: string[]) => {
-    orphanedList.forEach(val => {
+    orphanedList.forEach((val) => {
       const fspath = this.cache.get(val);
       if (fspath) RNFetchBlob.fs.unlink(fspath).catch();
       this.cache.delete(val);
@@ -194,7 +194,7 @@ class NoxMediaCache {
 const cache: NoxCaches = {
   noxMediaCache: new NoxMediaCache({
     max: 1,
-    dispose: async value => {
+    dispose: async (value) => {
       RNFetchBlob.fs.unlink(value).catch();
     },
     allowStale: false,
@@ -203,7 +203,7 @@ const cache: NoxCaches = {
 
 export const initCache = async (
   options: optionsProps,
-  savedCache?: [string, LRUCache.Entry<string>][]
+  savedCache?: [string, LRUCache.Entry<string>][],
 ) => {
   try {
     cache.noxMediaCache = new NoxMediaCache(options, savedCache);
@@ -216,15 +216,15 @@ export const initCache = async (
 
 export const cacheWrapper = (
   identifier: string,
-  getURL: () => Promise<string>
+  getURL: () => Promise<string>,
 ) => cache.noxMediaCache.loadCacheFunction(identifier, getURL);
 
 const _dataSaverSongs = (v: NoxMedia.Song[]) =>
-  v.filter(song => cache.noxMediaCache?.peekCache(song) !== undefined);
+  v.filter((song) => cache.noxMediaCache?.peekCache(song) !== undefined);
 
 export const dataSaverSongs = (v: NoxMedia.Song[]) => {
   const cachedSongIds = Array.from(cache.noxMediaCache.cache.keys());
-  return v.filter(song => cachedSongIds.includes(noxCacheKey(song)));
+  return v.filter((song) => cachedSongIds.includes(noxCacheKey(song)));
 };
 
 export const dataSaverPlaylist = (playlist: NoxMedia.Playlist) => {

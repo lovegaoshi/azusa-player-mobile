@@ -1,2 +1,2 @@
-const splashImages = [require('./steria.jpg')];
+const splashImages = [require("./steria.jpg")];
 export default splashImages;

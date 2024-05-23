@@ -1,15 +1,15 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import * as React from 'react';
+import * as React from "react";
 import {
   View,
   Animated,
   StyleSheet,
   PanResponder,
   Dimensions,
-} from 'react-native';
-import { Image } from 'expo-image';
+} from "react-native";
+import { Image } from "expo-image";
 
-import { localSplashes } from '../background/AppOpenSplash';
+import { localSplashes } from "../background/AppOpenSplash";
 
 export default () => {
   const [index, setIndex] = React.useState(0);
@@ -46,7 +46,7 @@ export default () => {
             duration: 200,
             useNativeDriver: true,
           }).start(() => {
-            console.log('splashes moved on right');
+            console.log("splashes moved on right");
             nextImage();
             position.setValue({ x: 0, y: 0 });
           });
@@ -56,7 +56,7 @@ export default () => {
             duration: 200,
             useNativeDriver: true,
           }).start(() => {
-            console.log('splashes moved on left');
+            console.log("splashes moved on left");
             nextImage();
             position.setValue({ x: 0, y: 0 });
           });
@@ -77,19 +77,19 @@ export default () => {
         // responder. Returns true by default. Is currently only supported on android.
         return true;
       },
-    })
+    }),
   ).current;
 
   const nextImage = () => {
-    console.log('splash to next', index);
-    setIndex(val => (val < localSplashes.length - 1 ? val + 1 : 0));
+    console.log("splash to next", index);
+    setIndex((val) => (val < localSplashes.length - 1 ? val + 1 : 0));
   };
 
   const isIndexEnd = (i: number) => {
     return index === localSplashes.length - 1 && i === 0;
   };
 
-  React.useEffect(() => console.log('splash', index), [index]);
+  React.useEffect(() => console.log("splash", index), [index]);
 
   return (
     <View style={styles.view}>
@@ -104,8 +104,8 @@ export default () => {
                   {
                     rotate: position.x.interpolate({
                       inputRange: [-WindowWidth / 2, 0, WindowWidth / 2],
-                      outputRange: ['-10deg', '0deg', '10deg'],
-                      extrapolate: 'clamp',
+                      outputRange: ["-10deg", "0deg", "10deg"],
+                      extrapolate: "clamp",
                     }),
                   },
                 ],
@@ -116,14 +116,14 @@ export default () => {
                     scale: position.x.interpolate({
                       inputRange: [-WindowWidth / 2, 0, WindowWidth / 2],
                       outputRange: [1, 0.8, 1],
-                      extrapolate: 'clamp',
+                      extrapolate: "clamp",
                     }),
                   },
                 ],
                 opacity: position.x.interpolate({
                   inputRange: [-WindowWidth / 2, 0, WindowWidth / 2],
                   outputRange: [1, 0, 1],
-                  extrapolate: 'clamp',
+                  extrapolate: "clamp",
                 }),
               },
               isIndexEnd(i) && {
@@ -141,7 +141,7 @@ export default () => {
                   : undefined
               }
               style={styles.splashCard}
-              resizeMode={'contain'}
+              resizeMode={"contain"}
             />
           </Animated.View>
         ))
@@ -150,22 +150,22 @@ export default () => {
   );
 };
 
-const WindowWidth = Dimensions.get('window').width;
+const WindowWidth = Dimensions.get("window").width;
 
 const styles = StyleSheet.create({
   view: {
     flex: 1,
-    height: Dimensions.get('window').height,
-    width: Dimensions.get('window').width,
+    height: Dimensions.get("window").height,
+    width: Dimensions.get("window").width,
   },
   expandObject: {
     flex: 1,
   },
   animatedView: {
     flex: 1,
-    height: Dimensions.get('window').height,
-    width: Dimensions.get('window').width,
-    position: 'absolute',
+    height: Dimensions.get("window").height,
+    width: Dimensions.get("window").width,
+    position: "absolute",
   },
   splashCard: {
     flex: 1,

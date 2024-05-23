@@ -1,23 +1,23 @@
-import React from 'react';
-import { useTranslation } from 'react-i18next';
-import { ScrollView, StyleSheet, View, TextInput } from 'react-native';
-import { Text } from 'react-native-paper';
-import { Image } from 'expo-image';
+import React from "react";
+import { useTranslation } from "react-i18next";
+import { ScrollView, StyleSheet, View, TextInput } from "react-native";
+import { Text } from "react-native-paper";
+import { Image } from "expo-image";
 
-import GenericDialog from '@components/dialogs/GenericDialog';
-import { useNoxSetting } from '@stores/useApp';
-import { SettingListItem } from '../useRenderSetting';
-import { replaceStyleColor } from '@components/style';
+import GenericDialog from "@components/dialogs/GenericDialog";
+import { useNoxSetting } from "@stores/useApp";
+import { SettingListItem } from "../useRenderSetting";
+import { replaceStyleColor } from "@components/style";
 
 export default () => {
   const { t } = useTranslation();
-  const playerStyle = useNoxSetting(state => state.playerStyle);
-  const setPlayerStyle = useNoxSetting(state => state.setPlayerStyle);
+  const playerStyle = useNoxSetting((state) => state.playerStyle);
+  const setPlayerStyle = useNoxSetting((state) => state.setPlayerStyle);
   const [visible, setVisible] = React.useState(false);
-  const [primaryColor, setPrimaryColor] = React.useState('');
-  const [secondaryColor, setSecondaryColor] = React.useState('');
-  const [contrastColor, setContrastColor] = React.useState('');
-  const [backgroundColor, setBackgroundColor] = React.useState('');
+  const [primaryColor, setPrimaryColor] = React.useState("");
+  const [secondaryColor, setSecondaryColor] = React.useState("");
+  const [contrastColor, setContrastColor] = React.useState("");
+  const [backgroundColor, setBackgroundColor] = React.useState("");
 
   React.useEffect(() => {
     if (!visible) return;
@@ -37,7 +37,7 @@ export default () => {
         contrastColor,
         backgroundColor,
         noWeeb: true,
-      })
+      }),
     );
   };
 
@@ -47,14 +47,14 @@ export default () => {
         visible={visible}
         onClose={() => setVisible(false)}
         onSubmit={onSubmit}
-        title={t('AppearanceSettings.noWeebSkinsDesc')}
+        title={t("AppearanceSettings.noWeebSkinsDesc")}
       >
         <ScrollView>
-          <View style={{ alignItems: 'center' }}>
+          <View style={{ alignItems: "center" }}>
             <Image
               style={{ width: 60, height: 60 }}
               source={
-                'https://i2.hdslb.com/bfs/archive/7d83d7c95b11df26a700f445788877ef279c4b80.jpg@600w_600h_1c.png'
+                "https://i2.hdslb.com/bfs/archive/7d83d7c95b11df26a700f445788877ef279c4b80.jpg@600w_600h_1c.png"
               }
             />
           </View>
@@ -68,7 +68,7 @@ export default () => {
               ]}
             />
             <View style={styles.colorBlockSpace} />
-            <Text>{t('AppearanceSettings.PrimaryColor')}</Text>
+            <Text>{t("AppearanceSettings.PrimaryColor")}</Text>
             <TextInput
               style={{ color: playerStyle.colors.primary }}
               value={primaryColor}
@@ -85,7 +85,7 @@ export default () => {
               ]}
             />
             <View style={styles.colorBlockSpace} />
-            <Text>{t('AppearanceSettings.SecondaryColor')}</Text>
+            <Text>{t("AppearanceSettings.SecondaryColor")}</Text>
             <TextInput
               style={{ color: playerStyle.colors.primary }}
               value={secondaryColor}
@@ -102,7 +102,7 @@ export default () => {
               ]}
             />
             <View style={styles.colorBlockSpace} />
-            <Text>{t('AppearanceSettings.ContrastColor')}</Text>
+            <Text>{t("AppearanceSettings.ContrastColor")}</Text>
             <TextInput
               style={{ color: playerStyle.colors.primary }}
               value={contrastColor}
@@ -119,7 +119,7 @@ export default () => {
               ]}
             />
             <View style={styles.colorBlockSpace} />
-            <Text>{t('AppearanceSettings.BackgroundColor')}</Text>
+            <Text>{t("AppearanceSettings.BackgroundColor")}</Text>
             <TextInput
               style={{ color: playerStyle.colors.primary }}
               value={backgroundColor}
@@ -139,14 +139,14 @@ export default () => {
 
 const styles = StyleSheet.create({
   rowView: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
   },
   colorBlock: {
     width: 20,
     height: 20,
     borderWidth: 1,
-    borderColor: 'white',
+    borderColor: "white",
   },
   colorBlockSpace: {
     width: 10,

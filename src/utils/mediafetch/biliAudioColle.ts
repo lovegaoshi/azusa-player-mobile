@@ -1,11 +1,11 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import { logger } from '../Logger';
-import { regexFetchProps } from './generic';
-import { fetchBiliPaginatedAPI } from './paginatedbili';
-import { cookieHeader } from '@utils/Bilibili/biliCookies';
-import { Source } from '@enums/MediaFetch';
-import SongTS from '@objects/Song';
+import { logger } from "../Logger";
+import { regexFetchProps } from "./generic";
+import { fetchBiliPaginatedAPI } from "./paginatedbili";
+import { cookieHeader } from "@utils/Bilibili/biliCookies";
+import { Source } from "@enums/MediaFetch";
+import SongTS from "@objects/Song";
 
 /**
  *
@@ -60,23 +60,23 @@ import SongTS from '@objects/Song';
 }
  */
 const API =
-  'https://www.bilibili.com/audio/music-service-c/web/song/of-coll?sid={sid}&pn={pn}&ps=100';
+  "https://www.bilibili.com/audio/music-service-c/web/song/of-coll?sid={sid}&pn={pn}&ps=100";
 
 const fetchBiliAudioColleList = async (
   sid: string,
   progressEmitter: (val: number) => void = () => undefined,
-  favList: string[] = []
+  favList: string[] = [],
 ) => {
-  logger.info('calling fetchBiliAudioColleList');
+  logger.info("calling fetchBiliAudioColleList");
 
   return await fetchBiliPaginatedAPI({
-    url: API.replace('{sid}', sid),
+    url: API.replace("{sid}", sid),
     getMediaCount: (data: any) => data.totalSize,
     getPageSize: (data: any) => data.pageSize,
     getItems: (js: any) => js.data.data,
     progressEmitter,
     favList,
-    resolveBiliBVID: async v =>
+    resolveBiliBVID: async (v) =>
       v.map((data: any) =>
         SongTS({
           cid: `${Source.biliaudio}-${data.id}`,
@@ -86,12 +86,12 @@ const fetchBiliAudioColleList = async (
           singer: data.uname,
           singerId: data.uid,
           cover: data.cover,
-          lyric: '',
+          lyric: "",
           page: 1,
           duration: data.duration,
           album: data.title,
           source: Source.biliaudio,
-        })
+        }),
       ),
     params: await cookieHeader(),
   });
@@ -105,7 +105,7 @@ const regexFetch = async ({
   songList: await fetchBiliAudioColleList(
     reExtracted[1]!,
     progressEmitter,
-    favList
+    favList,
   ),
 });
 

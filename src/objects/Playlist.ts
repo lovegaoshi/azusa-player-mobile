@@ -1,11 +1,11 @@
-import { v4 as uuidv4 } from 'uuid';
-import i18n from 'i18next';
+import { v4 as uuidv4 } from "uuid";
+import i18n from "i18next";
 
-import { PlaylistTypes } from '../enums/Playlist';
+import { PlaylistTypes } from "../enums/Playlist";
 
 export const dummyPlaylist = (
-  title = i18n.t('PlaylistOperations.searchListName'),
-  type = PlaylistTypes.Typical
+  title = i18n.t("PlaylistOperations.searchListName"),
+  type = PlaylistTypes.Typical,
 ): NoxMedia.Playlist => {
   return {
     songList: [],
@@ -27,7 +27,7 @@ export const getPlaylistUniqBVIDs = (playlist: NoxMedia.Playlist) => {
   return Array.from(
     playlist.songList.reduce(
       (accumulator, currentValue) => accumulator.add(currentValue.bvid),
-      new Set() as Set<string>
-    )
+      new Set() as Set<string>,
+    ),
   );
 };

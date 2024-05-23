@@ -1,6 +1,6 @@
-import { Shadow } from 'react-native-shadow-2';
-import { colord } from 'colord';
-import { View, ViewStyle } from 'react-native';
+import { Shadow } from "react-native-shadow-2";
+import { colord } from "colord";
+import { View, ViewStyle } from "react-native";
 
 interface Props {
   children: React.JSX.Element;

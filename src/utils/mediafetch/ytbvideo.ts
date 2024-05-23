@@ -1,5 +1,5 @@
-import ytdl from 'ytdl-core';
-import { Platform } from 'react-native';
+import ytdl from "ytdl-core";
+import { Platform } from "react-native";
 /**
  * refactor:
  * bilisearch workflow:
@@ -10,12 +10,12 @@ import { Platform } from 'react-native';
  * steps to refactor:
  * each site needs a fetch to parse regex extracted, a videoinfo fetcher and a song fetcher.
  */
-import { regexFetchProps } from './generic';
-import { biliApiLimiter } from './throttle';
+import { regexFetchProps } from "./generic";
+import { biliApiLimiter } from "./throttle";
 
-import SongTS from '@objects/Song';
-import { logger } from '../Logger';
-import { Source } from '@enums/MediaFetch';
+import SongTS from "@objects/Song";
+import { logger } from "../Logger";
+import { Source } from "@enums/MediaFetch";
 
 export const CIDPREFIX = `${Source.ytbvideo}-`;
 
@@ -25,17 +25,17 @@ const resolveIOSURL = (formats: ytdl.videoFormat[]) => {
   // this is observable in safari.
   // for now use the video + audio format that is fine.
   // maybe we can "fix" this via setDuration?
-  const filteredFormats = formats.filter(format =>
-    format.codecs.includes('mp4a')
+  const filteredFormats = formats.filter((format) =>
+    format.codecs.includes("mp4a"),
   );
   const combinedFormats = filteredFormats.filter(
-    format => format.hasVideo && format.hasAudio
+    (format) => format.hasVideo && format.hasAudio,
   );
   return ytdl.chooseFormat(
     combinedFormats.length === 0 ? filteredFormats : combinedFormats,
     {
-      quality: 'highestaudio',
-    }
+      quality: "highestaudio",
+    },
   ).url;
 };
 
@@ -43,13 +43,13 @@ const fetchYTBPlayUrlPromise = async (sid: string, iOS = true) => {
   try {
     logger.debug(`fetch YTB playURL promise:${sid}`);
     const ytdlInfo = await ytdl.getInfo(
-      `https://www.youtube.com/watch?v=${sid}`
+      `https://www.youtube.com/watch?v=${sid}`,
     );
     const videoDetails = ytdlInfo.videoDetails;
     const url =
-      Platform.OS === 'ios' && iOS
+      Platform.OS === "ios" && iOS
         ? resolveIOSURL(ytdlInfo.formats)
-        : ytdl.chooseFormat(ytdlInfo.formats, { quality: 'highestaudio' }).url;
+        : ytdl.chooseFormat(ytdlInfo.formats, { quality: "highestaudio" }).url;
     return {
       url,
       cover: videoDetails.thumbnails[videoDetails.thumbnails.length - 1].url,
@@ -161,7 +161,7 @@ const fetchAudioInfoRaw = async (sid: string) => {
     */
     const videoDetails = ytdlInfo.videoDetails;
     const validDurations = ytdlInfo.formats.filter(
-      format => format.approxDurationMs
+      (format) => format.approxDurationMs,
     );
     return [
       SongTS({
@@ -172,12 +172,12 @@ const fetchAudioInfoRaw = async (sid: string) => {
         singer: videoDetails.author.name,
         singerId: videoDetails.author.channel_url,
         cover: videoDetails.thumbnails[videoDetails.thumbnails.length - 1].url,
-        lyric: '',
+        lyric: "",
         page: 1,
         duration:
           validDurations.length > 0
             ? Math.floor(
-                Number.parseInt(validDurations[0].approxDurationMs!) / 1000
+                Number.parseInt(validDurations[0].approxDurationMs!) / 1000,
               )
             : 0,
         album: videoDetails.title,
@@ -194,7 +194,7 @@ const fetchAudioInfoRaw = async (sid: string) => {
 
 export const fetchAudioInfo = async (
   bvid: string,
-  progressEmitter: () => void = () => undefined
+  progressEmitter: () => void = () => undefined,
 ) =>
   await biliApiLimiter.schedule(() => {
     progressEmitter();
@@ -203,7 +203,7 @@ export const fetchAudioInfo = async (
 
 const suggest = async (song: NoxMedia.Song, filterMW = <T>(v: T[]) => v[0]) => {
   const ytdlInfo = await ytdl.getInfo(
-    `https://www.youtube.com/watch?v=${song.bvid}`
+    `https://www.youtube.com/watch?v=${song.bvid}`,
   );
   /*
   might be very useful for youtubeSuggest.
@@ -222,8 +222,8 @@ const suggest = async (song: NoxMedia.Song, filterMW = <T>(v: T[]) => v[0]) => {
   },
   */
   const relatedVideos = ytdlInfo.related_videos
-    .filter(song => song.id)
-    .map(suggestSong =>
+    .filter((song) => song.id)
+    .map((suggestSong) =>
       SongTS({
         cid: `${CIDPREFIX}-${suggestSong.id}`,
         bvid: suggestSong.id!,
@@ -238,13 +238,13 @@ const suggest = async (song: NoxMedia.Song, filterMW = <T>(v: T[]) => v[0]) => {
         // @ts-ignore
         singerId: String(suggestSong.author.channel_url),
         cover: suggestSong.thumbnails[0].url,
-        lyric: '',
+        lyric: "",
         page: 1,
         duration: Number(suggestSong.length_seconds),
         album: suggestSong.title,
         source: Source.ytbvideo,
         metadataOnLoad: true,
-      })
+      }),
     );
   return filterMW(relatedVideos); // or relatedVideos[0];
 };

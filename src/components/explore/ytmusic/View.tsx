@@ -1,10 +1,10 @@
-import * as React from 'react';
-import { BackHandler, SafeAreaView } from 'react-native';
-import { Button } from 'react-native-paper';
-import { WebView } from 'react-native-webview';
-import { useFocusEffect } from '@react-navigation/native';
+import * as React from "react";
+import { BackHandler, SafeAreaView } from "react-native";
+import { Button } from "react-native-paper";
+import { WebView } from "react-native-webview";
+import { useFocusEffect } from "@react-navigation/native";
 
-import useGoogleTVOauth from '@components/login/google/useGoogleTVOauth';
+import useGoogleTVOauth from "@components/login/google/useGoogleTVOauth";
 
 const Explore = () => {
   const [webView, setWebView] = React.useState(false);
@@ -21,12 +21,12 @@ const Explore = () => {
       };
 
       const subscription = BackHandler.addEventListener(
-        'hardwareBackPress',
-        onBackPress
+        "hardwareBackPress",
+        onBackPress,
       );
 
       return () => subscription.remove();
-    }, [webView])
+    }, [webView]),
   );
 
   return webView ? (

@@ -1,6 +1,6 @@
-import React from 'react';
-import { IconButton } from 'react-native-paper';
-import TimerDialog from './TimerDialog';
+import React from "react";
+import { IconButton } from "react-native-paper";
+import TimerDialog from "./TimerDialog";
 
 export default () => {
   const [timerVisible, setTimerVisible] = React.useState(false);

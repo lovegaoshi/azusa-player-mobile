@@ -1,8 +1,8 @@
-import React, { useImperativeHandle, useState } from 'react';
-import { IconButton } from 'react-native-paper';
-import Dialog from '../dialogs/NewPlaylistDialog';
+import React, { useImperativeHandle, useState } from "react";
+import { IconButton } from "react-native-paper";
+import Dialog from "../dialogs/NewPlaylistDialog";
 
-const ICON = 'plus-circle-outline';
+const ICON = "plus-circle-outline";
 
 interface Props {
   fromList?: NoxMedia.Playlist;
@@ -37,5 +37,5 @@ export default React.forwardRef(
         />
       </React.Fragment>
     );
-  }
+  },
 );

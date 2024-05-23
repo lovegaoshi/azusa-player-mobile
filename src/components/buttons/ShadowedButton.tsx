@@ -1,9 +1,9 @@
-import React from 'react';
-import { Icon } from 'react-native-paper';
+import React from "react";
+import { Icon } from "react-native-paper";
 
-import { useNoxSetting } from '@stores/useApp';
-import ShadowedElement from '@components/buttons/ShadowedElement';
-import { Pressable, ViewStyle } from 'react-native';
+import { useNoxSetting } from "@stores/useApp";
+import ShadowedElement from "@components/buttons/ShadowedElement";
+import { Pressable, ViewStyle } from "react-native";
 
 interface Props {
   iconSize?: number;
@@ -19,7 +19,7 @@ export default ({
   style,
   accessibilityLabel,
 }: Props) => {
-  const playerStyle = useNoxSetting(state => state.playerStyle);
+  const playerStyle = useNoxSetting((state) => state.playerStyle);
   const size = iconSize;
 
   return (

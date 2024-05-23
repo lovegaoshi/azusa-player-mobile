@@ -1,15 +1,15 @@
-import React from 'react';
-import { View, StyleSheet } from 'react-native';
-import { IconButton } from 'react-native-paper';
-import { useNavigation } from '@react-navigation/native';
-import { NoxRoutes } from '@enums/Routes';
-import { useNoxSetting } from '@stores/useApp';
-import RandomGIFButton from '../buttons/RandomGIF';
+import React from "react";
+import { View, StyleSheet } from "react-native";
+import { IconButton } from "react-native-paper";
+import { useNavigation } from "@react-navigation/native";
+import { NoxRoutes } from "@enums/Routes";
+import { useNoxSetting } from "@stores/useApp";
+import RandomGIFButton from "../buttons/RandomGIF";
 
 export default ({ navigation }: NoxComponent.NavigationProps) => {
   const navigationGlobal = useNavigation();
-  const playerStyle = useNoxSetting(state => state.playerStyle);
-  const currentPlayingId = useNoxSetting(state => state.currentPlayingId);
+  const playerStyle = useNoxSetting((state) => state.playerStyle);
+  const currentPlayingId = useNoxSetting((state) => state.currentPlayingId);
 
   return (
     <View style={[styles.containerStyle, playerStyle.playerTopBarContainer]}>
@@ -40,17 +40,17 @@ export default ({ navigation }: NoxComponent.NavigationProps) => {
 
 const styles = StyleSheet.create({
   iconButtonContainerStyle: {
-    alignContent: 'flex-start',
+    alignContent: "flex-start",
   },
   randomGifButtonContainerStyle: {
     flex: 4,
-    alignContent: 'center',
-    alignItems: 'center',
+    alignContent: "center",
+    alignItems: "center",
   },
   playlistIconButtonContainerStyle: {
-    alignContent: 'flex-end',
+    alignContent: "flex-end",
   },
   containerStyle: {
-    alignItems: 'center',
+    alignItems: "center",
   },
 });

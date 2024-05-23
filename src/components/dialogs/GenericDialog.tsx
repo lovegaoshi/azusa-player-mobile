@@ -1,6 +1,6 @@
-import React from 'react';
-import { Button, Dialog, Portal, Text } from 'react-native-paper';
-import { useTranslation } from 'react-i18next';
+import React from "react";
+import { Button, Dialog, Portal, Text } from "react-native-paper";
+import { useTranslation } from "react-i18next";
 
 interface Props {
   visible: boolean;
@@ -31,8 +31,8 @@ export default ({
         {title && <Dialog.Title>{title}</Dialog.Title>}
         <Dialog.Content>{children}</Dialog.Content>
         <Dialog.Actions>
-          <Button onPress={handleClose}>{t('Dialog.cancel')}</Button>
-          <Button onPress={handleSubmit}>{t('Dialog.ok')}</Button>
+          <Button onPress={handleClose}>{t("Dialog.cancel")}</Button>
+          <Button onPress={handleSubmit}>{t("Dialog.ok")}</Button>
         </Dialog.Actions>
       </Dialog>
     </Portal>

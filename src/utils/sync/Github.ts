@@ -1,15 +1,15 @@
-import { fromByteArray } from 'base64-js';
+import { fromByteArray } from "base64-js";
 
-import bfetch from '@utils/BiliFetch';
-import { logger } from '@utils/Logger';
-import { APM_FILE_NAME, APM_REPO_NAME } from './Gitee';
+import bfetch from "@utils/BiliFetch";
+import { logger } from "@utils/Logger";
+import { APM_FILE_NAME, APM_REPO_NAME } from "./Gitee";
 
 const githubAuthHeader = (token: string) => ({
   Authorization: `Bearer ${token}`,
 });
 
 export const getUserName = async (token: string) => {
-  const res = await bfetch('https://api.github.com/user', {
+  const res = await bfetch("https://api.github.com/user", {
     headers: githubAuthHeader(token),
   });
   const data = await res.json();
@@ -17,15 +17,15 @@ export const getUserName = async (token: string) => {
 };
 
 export const createAPMRepo = async (token: string) => {
-  return await bfetch('https://api.github.com/user/repos', {
-    method: 'POST',
+  return await bfetch("https://api.github.com/user/repos", {
+    method: "POST",
     body: JSON.stringify({
       name: APM_REPO_NAME,
       private: true,
     }),
     headers: {
       ...githubAuthHeader(token),
-      'Content-Type': 'application/json',
+      "Content-Type": "application/json",
     },
   });
 };
@@ -44,8 +44,8 @@ export const sync = async ({
   }
   logger.debug(`[github] start syncing ${username}`);
   await createAPMRepo(token);
-  logger.debug('[github] created repo');
-  logger.debug('[github] creating backup file');
+  logger.debug("[github] created repo");
+  logger.debug("[github] creating backup file");
   const fpath = `https://api.github.com/repos/${username}/${APM_REPO_NAME}/contents/${APM_FILE_NAME}`;
   const probeFileRes = await bfetch(fpath, {
     headers: githubAuthHeader(token),
@@ -55,14 +55,14 @@ export const sync = async ({
   return await bfetch(
     `https://api.github.com/repos/${username}/${APM_REPO_NAME}/contents/${APM_FILE_NAME}`,
     {
-      method: 'PUT',
+      method: "PUT",
       body: JSON.stringify({
         message: `noxbackup - ${new Date().getTime()}`,
         content: fromByteArray(content),
         sha: probeFile.sha,
       }),
       headers: githubAuthHeader(token),
-    }
+    },
   );
 };
 
@@ -70,7 +70,7 @@ export const noxBackup = async (content: Uint8Array, token: string) => {
   return await sync({ content, token });
 };
 
-export const checkAuthentication = async (token = '') => {
+export const checkAuthentication = async (token = "") => {
   try {
     if ((await getUserName(token)) === undefined) {
       return false;
@@ -83,20 +83,20 @@ export const checkAuthentication = async (token = '') => {
 
 export const noxRestore = async (
   token: string,
-  contentParse: (v: Blob) => Promise<ArrayBuffer>
+  contentParse: (v: Blob) => Promise<ArrayBuffer>,
 ) => {
   const res = await bfetch(
     `https://api.github.com/repos/${await getUserName(token)}/${APM_REPO_NAME}/contents/${APM_FILE_NAME}`,
     {
       headers: {
         ...githubAuthHeader(token),
-        Accept: 'application/vnd.github.raw+json',
+        Accept: "application/vnd.github.raw+json",
       },
-    }
+    },
   );
   const noxFile = await res.blob();
   if (!noxFile) {
-    throw new Error('noxfile is not found on github.');
+    throw new Error("noxfile is not found on github.");
   }
   return contentParse(noxFile);
 };

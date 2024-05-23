@@ -9,23 +9,23 @@
  * steps to refactor:
  * each site needs a fetch to parse regex extracted, a videoinfo fetcher and a song fetcher.
  */
-import { logger } from '../Logger';
-import { regexFetchProps } from './generic';
-import { biliShazamOnSonglist } from './bilishazam';
-import { fetchBiliPaginatedAPI } from './paginatedbili';
+import { logger } from "../Logger";
+import { regexFetchProps } from "./generic";
+import { biliShazamOnSonglist } from "./bilishazam";
+import { fetchBiliPaginatedAPI } from "./paginatedbili";
 
 const URL_BILICOLLE_INFO =
-  'https://api.bilibili.com/x/space/fav/season/list?season_id={sid}&pn={pn}&ps=100';
+  "https://api.bilibili.com/x/space/fav/season/list?season_id={sid}&pn={pn}&ps=100";
 
 const fetchBiliColleList = async (
   sid: string,
   progressEmitter: (val: number) => void = () => undefined,
-  favList: string[] = []
+  favList: string[] = [],
 ) => {
-  logger.info('calling fetchBiliColleList');
+  logger.info("calling fetchBiliColleList");
 
   return await fetchBiliPaginatedAPI({
-    url: URL_BILICOLLE_INFO.replace('{sid}', sid),
+    url: URL_BILICOLLE_INFO.replace("{sid}", sid),
     getMediaCount: (data: any) => data.info.media_count,
     getPageSize: () => 100,
     getItems: (js: any) => js.data.medias,
@@ -44,7 +44,7 @@ const regexFetch = async ({
     await fetchBiliColleList(reExtracted[1]!, progressEmitter, favList),
     false,
     progressEmitter,
-    useBiliTag || false
+    useBiliTag || false,
   ),
 });
 

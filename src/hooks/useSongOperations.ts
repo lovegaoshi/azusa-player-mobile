@@ -1,12 +1,12 @@
-import { useNoxSetting } from '@stores/useApp';
-import { logger } from '@utils/Logger';
-import { Source } from '@enums/MediaFetch';
+import { useNoxSetting } from "@stores/useApp";
+import { logger } from "@utils/Logger";
+import { Source } from "@enums/MediaFetch";
 
 const useSongOperations = () => {
   const setExternalSearchText = useNoxSetting(
-    state => state.setExternalSearchText
+    (state) => state.setExternalSearchText,
   );
-  const setSongMenuVisible = useNoxSetting(state => state.setSongMenuVisible);
+  const setSongMenuVisible = useNoxSetting((state) => state.setSongMenuVisible);
 
   const startRadio = (song: NoxMedia.Song) => {
     switch (song.source) {
@@ -18,7 +18,7 @@ const useSongOperations = () => {
         break;
       default:
         logger.warn(
-          `[startRadio] ${song.bvid} deos not have a start radio handle.`
+          `[startRadio] ${song.bvid} deos not have a start radio handle.`,
         );
     }
     setSongMenuVisible(false);

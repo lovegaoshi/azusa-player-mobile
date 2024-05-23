@@ -1,12 +1,12 @@
-import * as React from 'react';
-import { useTranslation } from 'react-i18next';
-import { Image } from 'expo-image';
+import * as React from "react";
+import { useTranslation } from "react-i18next";
+import { Image } from "expo-image";
 
-import GenericCheckDialog from '@components/dialogs/GenericCheckDialog';
-import { SettingListItem } from '../useRenderSetting';
-import { MUSICFREE } from '@utils/mediafetch/musicfree';
-import { getMusicFreePlugin, setMusicFreePlugin } from '@utils/ChromeStorage';
-import { StyleSheet } from 'react-native';
+import GenericCheckDialog from "@components/dialogs/GenericCheckDialog";
+import { SettingListItem } from "../useRenderSetting";
+import { MUSICFREE } from "@utils/mediafetch/musicfree";
+import { getMusicFreePlugin, setMusicFreePlugin } from "@utils/ChromeStorage";
+import { StyleSheet } from "react-native";
 
 export default () => {
   const { t } = useTranslation();
@@ -49,7 +49,7 @@ export default () => {
       <SettingListItem
         icon={() => (
           <Image
-            source={require('@assets/icons/musicfree.png')}
+            source={require("@assets/icons/musicfree.png")}
             style={style.musicFreeIcon}
           />
         )}
@@ -59,7 +59,7 @@ export default () => {
       />
       <GenericCheckDialog
         visible={visible}
-        title={String(t('PluginSettings.MusicFreeCheckTitle'))}
+        title={String(t("PluginSettings.MusicFreeCheckTitle"))}
         options={favLists}
         onSubmit={onSubmit}
         onClose={() => hideDialog()}

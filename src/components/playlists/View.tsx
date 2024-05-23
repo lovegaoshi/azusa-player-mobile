@@ -1,16 +1,16 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useEffect } from 'react';
-import { IconButton, Divider, Text, TouchableRipple } from 'react-native-paper';
-import { useNavigation } from '@react-navigation/native';
-import { View, ImageBackground, StyleSheet, Linking } from 'react-native';
-import { useTranslation } from 'react-i18next';
+import React, { useEffect } from "react";
+import { IconButton, Divider, Text, TouchableRipple } from "react-native-paper";
+import { useNavigation } from "@react-navigation/native";
+import { View, ImageBackground, StyleSheet, Linking } from "react-native";
+import { useTranslation } from "react-i18next";
 
-import { useNoxSetting } from '@stores/useApp';
-import useAAPlayback from '@hooks/useAAPlayback';
-import { NoxRoutes } from '@enums/Routes';
-import { logger } from '@utils/Logger';
-import Playlists from './Playlists';
-import { BottomTabRouteIcons as RouteIcons } from '@enums/BottomTab';
+import { useNoxSetting } from "@stores/useApp";
+import useAAPlayback from "@hooks/useAAPlayback";
+import { NoxRoutes } from "@enums/Routes";
+import { logger } from "@utils/Logger";
+import Playlists from "./Playlists";
+import { BottomTabRouteIcons as RouteIcons } from "@enums/BottomTab";
 
 interface Props {
   view: NoxRoutes;
@@ -21,7 +21,7 @@ interface Props {
 const RenderDrawerItem = ({ view, icon, text, routeIcon }: Props) => {
   const navigation = useNavigation();
   const { t } = useTranslation();
-  const setRoute = useNoxSetting(state => state.setBottomTabRoute);
+  const setRoute = useNoxSetting((state) => state.setBottomTabRoute);
 
   return (
     <TouchableRipple
@@ -55,8 +55,8 @@ const BiliCard = (props: any) => {
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export default (props: any) => {
   const navigation = useNavigation();
-  const playlistIds = useNoxSetting(state => state.playlistIds);
-  const playerStyle = useNoxSetting(state => state.playerStyle);
+  const playlistIds = useNoxSetting((state) => state.playlistIds);
+  const playerStyle = useNoxSetting((state) => state.playerStyle);
   // HACK: I know its bad! But somehow this hook isnt updating in its own
   // useEffects...
   const { buildBrowseTree } = useAAPlayback();
@@ -67,14 +67,14 @@ export default (props: any) => {
 
   useEffect(() => {
     function deepLinkHandler(data: { url: string }) {
-      if (data.url === 'trackplayer://notification.click') {
-        logger.debug('[Drawer] click from notification; navigate to home');
+      if (data.url === "trackplayer://notification.click") {
+        logger.debug("[Drawer] click from notification; navigate to home");
         navigation.navigate(NoxRoutes.PlayerHome as never);
       }
     }
 
     // This event will be fired when the app is already open and the notification is clicked
-    const subscription = Linking.addEventListener('url', deepLinkHandler);
+    const subscription = Linking.addEventListener("url", deepLinkHandler);
 
     return () => {
       subscription.remove();
@@ -86,22 +86,22 @@ export default (props: any) => {
       <View style={styles.topPadding} />
       <BiliCard backgroundURI={playerStyle.biliGarbCard}>
         <RenderDrawerItem
-          icon={'home-outline'}
+          icon={"home-outline"}
           view={NoxRoutes.PlayerHome}
-          text={'appDrawer.homeScreenName'}
+          text={"appDrawer.homeScreenName"}
           routeIcon={RouteIcons.music}
         />
       </BiliCard>
       <RenderDrawerItem
-        icon={'compass'}
+        icon={"compass"}
         view={NoxRoutes.Explore}
-        text={'appDrawer.exploreScreenName'}
+        text={"appDrawer.exploreScreenName"}
         routeIcon={RouteIcons.explore}
       />
       <RenderDrawerItem
-        icon={'cog'}
+        icon={"cog"}
         view={NoxRoutes.Settings}
-        text={'appDrawer.settingScreenName'}
+        text={"appDrawer.settingScreenName"}
         routeIcon={RouteIcons.setting}
       />
       <Divider />
@@ -119,8 +119,8 @@ const styles = StyleSheet.create({
     paddingBottom: 20,
   },
   bottomInfoText: {
-    textAlign: 'center',
+    textAlign: "center",
   },
-  drawerItemContainer: { flexDirection: 'row' },
-  drawerItemTextContainer: { justifyContent: 'center' },
+  drawerItemContainer: { flexDirection: "row" },
+  drawerItemTextContainer: { justifyContent: "center" },
 });

@@ -1,9 +1,9 @@
-import { useNoxSetting } from '@stores/useApp';
-import usePlayback from './usePlayback';
+import { useNoxSetting } from "@stores/useApp";
+import usePlayback from "./usePlayback";
 
 export default () => {
-  const addPlaylistStore = useNoxSetting(state => state.addPlaylist);
-  const removePlaylistStore = useNoxSetting(state => state.removePlaylist);
+  const addPlaylistStore = useNoxSetting((state) => state.addPlaylist);
+  const removePlaylistStore = useNoxSetting((state) => state.removePlaylist);
   const { buildBrowseTree } = usePlayback();
 
   const addPlaylist = (playlist: NoxMedia.Playlist) => {

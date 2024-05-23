@@ -1,46 +1,46 @@
-import * as React from 'react';
-import { View, ScrollView, Platform } from 'react-native';
-import { List } from 'react-native-paper';
-import { useTranslation } from 'react-i18next';
+import * as React from "react";
+import { View, ScrollView, Platform } from "react-native";
+import { List } from "react-native-paper";
+import { useTranslation } from "react-i18next";
 // eslint-disable-next-line import/no-unresolved
-import { APPSTORE } from '@env';
-import { useStore } from 'zustand';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import * as Sentry from '@sentry/react-native';
+import { APPSTORE } from "@env";
+import { useStore } from "zustand";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import * as Sentry from "@sentry/react-native";
 
-import { useNoxSetting } from '@stores/useApp';
-import { logStore, LOGLEVEL } from '@utils/Logger';
-import GenericSelectDialog from '../dialogs/GenericSelectDialog';
-import { SettingListItem, RenderSetting } from './useRenderSetting';
-import useVersionCheck from '@hooks/useVersionCheck';
+import { useNoxSetting } from "@stores/useApp";
+import { logStore, LOGLEVEL } from "@utils/Logger";
+import GenericSelectDialog from "../dialogs/GenericSelectDialog";
+import { SettingListItem, RenderSetting } from "./useRenderSetting";
+import useVersionCheck from "@hooks/useVersionCheck";
 import {
   SelectSettingEntry,
   SettingEntry,
   dummySelectSettingEntry,
-} from './SetttingEntries';
-import NoxCache from '@utils/Cache';
-import useCleanCache from '@hooks/useCleanCache';
-import appStore from '@stores/appStore';
-import { saveFadeInterval } from '@utils/ChromeStorage';
-import GroupView from '../background/GroupView';
-import PluginSettings from './plugins/View';
-import showLog from './debug/Log';
-import { showDebugLog } from './debug/DebugConsole';
+} from "./SetttingEntries";
+import NoxCache from "@utils/Cache";
+import useCleanCache from "@hooks/useCleanCache";
+import appStore from "@stores/appStore";
+import { saveFadeInterval } from "@utils/ChromeStorage";
+import GroupView from "../background/GroupView";
+import PluginSettings from "./plugins/View";
+import showLog from "./debug/Log";
+import { showDebugLog } from "./debug/DebugConsole";
 
 enum Icons {
-  setlog = 'console',
-  update = 'update',
-  showlog = 'bug',
-  cache = 'floppy',
-  clearcache = 'delete-sweep',
-  clearOrphanCache = 'delete-empty',
-  fade = 'shuffle-variant',
-  plugins = 'puzzle',
+  setlog = "console",
+  update = "update",
+  showlog = "bug",
+  cache = "floppy",
+  clearcache = "delete-sweep",
+  clearOrphanCache = "delete-empty",
+  fade = "shuffle-variant",
+  plugins = "puzzle",
 }
 
 enum VIEW {
-  HOME = 'Settings',
-  PLUGINS = 'Plugins',
+  HOME = "Settings",
+  PLUGINS = "Plugins",
 }
 
 const Stack = createNativeStackNavigator();
@@ -49,25 +49,25 @@ const FadeOptions = [0, 250, 500, 1000];
 
 const developerSettings: { [key: string]: SettingEntry } = {
   noInterruption: {
-    settingName: 'noInterruption',
-    settingCategory: 'DeveloperSettings',
+    settingName: "noInterruption",
+    settingCategory: "DeveloperSettings",
     checkbox: true,
   },
   prefetchTrack: {
-    settingName: 'prefetchTrack',
-    settingCategory: 'GeneralSettings',
+    settingName: "prefetchTrack",
+    settingCategory: "GeneralSettings",
   },
   keepForeground: {
-    settingName: 'keepForeground',
-    settingCategory: 'GeneralSettings',
+    settingName: "keepForeground",
+    settingCategory: "GeneralSettings",
   },
   karaokeLyrics: {
-    settingName: 'karaokeLyrics',
-    settingCategory: 'GeneralSettings',
+    settingName: "karaokeLyrics",
+    settingCategory: "GeneralSettings",
   },
   memoryEfficiency: {
-    settingName: 'memoryEfficiency',
-    settingCategory: 'GeneralSettings',
+    settingName: "memoryEfficiency",
+    settingCategory: "GeneralSettings",
     callback: Sentry.nativeCrash,
   },
   /**
@@ -81,26 +81,26 @@ const developerSettings: { [key: string]: SettingEntry } = {
 const { getState, setState } = logStore;
 
 const Home = ({ navigation }: NoxComponent.NavigationProps) => {
-  const playerSetting = useNoxSetting(state => state.playerSetting);
-  const setPlayerSetting = useNoxSetting(state => state.setPlayerSetting);
+  const playerSetting = useNoxSetting((state) => state.playerSetting);
+  const setPlayerSetting = useNoxSetting((state) => state.setPlayerSetting);
   const { t } = useTranslation();
   const [currentSelectOption, setCurrentSelectOption] = React.useState<
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     SelectSettingEntry<any>
   >(dummySelectSettingEntry);
   const [selectVisible, setSelectVisible] = React.useState(false);
-  const playerStyle = useNoxSetting(state => state.playerStyle);
+  const playerStyle = useNoxSetting((state) => state.playerStyle);
   const { checkVersion } = useVersionCheck();
   const { orphanedCache, cleanOrphanedCache } = useCleanCache();
-  const fadeIntervalMs = useStore(appStore, state => state.fadeIntervalMs);
+  const fadeIntervalMs = useStore(appStore, (state) => state.fadeIntervalMs);
 
   const logLevelString = [
-    t('DeveloperSettings.LogLevel0'),
-    t('DeveloperSettings.LogLevel1'),
-    t('DeveloperSettings.LogLevel2'),
-    t('DeveloperSettings.LogLevel3'),
-    t('DeveloperSettings.LogLevel4'),
-    t('DeveloperSettings.LogLevel5'),
+    t("DeveloperSettings.LogLevel0"),
+    t("DeveloperSettings.LogLevel1"),
+    t("DeveloperSettings.LogLevel2"),
+    t("DeveloperSettings.LogLevel3"),
+    t("DeveloperSettings.LogLevel4"),
+    t("DeveloperSettings.LogLevel5"),
   ];
 
   const selectLogLevel = () => {
@@ -121,7 +121,7 @@ const Home = ({ navigation }: NoxComponent.NavigationProps) => {
         setState({ logLevel: index });
         setSelectVisible(false);
       },
-      title: t('DeveloperSettings.LogLevel'),
+      title: t("DeveloperSettings.LogLevel"),
     } as SelectSettingEntry<number>);
   };
 
@@ -136,7 +136,7 @@ const Home = ({ navigation }: NoxComponent.NavigationProps) => {
         saveFadeInterval(FadeOptions[index]);
         setSelectVisible(false);
       },
-      title: t('DeveloperSettings.FadeTitle'),
+      title: t("DeveloperSettings.FadeTitle"),
     } as SelectSettingEntry<number>);
   };
 
@@ -158,7 +158,7 @@ const Home = ({ navigation }: NoxComponent.NavigationProps) => {
         setPlayerSetting({ cacheSize: options[index] });
         setSelectVisible(false);
       },
-      title: t('DeveloperSettings.CacheSizeName'),
+      title: t("DeveloperSettings.CacheSizeName"),
     } as SelectSettingEntry<number>);
   };
 
@@ -175,7 +175,7 @@ const Home = ({ navigation }: NoxComponent.NavigationProps) => {
             <View>
               <RenderSetting item={developerSettings.noInterruption} />
               <RenderSetting item={developerSettings.prefetchTrack} />
-              {Platform.OS === 'android' && (
+              {Platform.OS === "android" && (
                 <RenderSetting item={developerSettings.keepForeground} />
               )}
               <RenderSetting item={developerSettings.karaokeLyrics} />
@@ -213,7 +213,7 @@ const Home = ({ navigation }: NoxComponent.NavigationProps) => {
             settingName="LogLevel"
             onPress={selectLogLevel}
             settingCategory="DeveloperSettings"
-            modifyDescription={val =>
+            modifyDescription={(val) =>
               `${val}: ${logLevelString[getState().logLevel]}`
             }
           />
@@ -222,7 +222,7 @@ const Home = ({ navigation }: NoxComponent.NavigationProps) => {
             settingName="Fade"
             onPress={selectFade}
             settingCategory="DeveloperSettings"
-            modifyDescription={val => `${val}: ${fadeIntervalMs}ms`}
+            modifyDescription={(val) => `${val}: ${fadeIntervalMs}ms`}
           />
           <SettingListItem
             icon={Icons.cache}
@@ -230,7 +230,7 @@ const Home = ({ navigation }: NoxComponent.NavigationProps) => {
             onPress={selectCacheLevel}
             settingCategory="DeveloperSettings"
             modifyDescription={() =>
-              t('DeveloperSettings.CacheSizeDesc2', {
+              t("DeveloperSettings.CacheSizeDesc2", {
                 val: playerSetting.cacheSize,
               })
             }
@@ -241,7 +241,7 @@ const Home = ({ navigation }: NoxComponent.NavigationProps) => {
             onPress={NoxCache.noxMediaCache.clearCache}
             settingCategory="DeveloperSettings"
             modifyDescription={() =>
-              t('DeveloperSettings.ClearCacheDesc2', {
+              t("DeveloperSettings.ClearCacheDesc2", {
                 val: NoxCache.noxMediaCache.cacheSize() || 0,
               })
             }
@@ -252,7 +252,7 @@ const Home = ({ navigation }: NoxComponent.NavigationProps) => {
             onPress={cleanOrphanedCache}
             settingCategory="DeveloperSettings"
             modifyDescription={() =>
-              t('DeveloperSettings.ClearOrphanedCacheDesc2', {
+              t("DeveloperSettings.ClearOrphanedCacheDesc2", {
                 val: orphanedCache.length,
               })
             }

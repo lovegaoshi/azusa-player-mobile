@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import Bottleneck from 'bottleneck';
-import { biliApiLimiter } from './throttle';
-import bfetch from '@utils/BiliFetch';
+import Bottleneck from "bottleneck";
+import { biliApiLimiter } from "./throttle";
+import bfetch from "@utils/BiliFetch";
 
 /**
  * the purpose of this media fetch library is to
@@ -21,7 +21,7 @@ export interface FetcherProps {
   getItems: (val: any) => any[];
   resolveBiliBVID?: (
     bvobjs: any[],
-    progressEmitter: ProgressEmitter
+    progressEmitter: ProgressEmitter,
   ) => Promise<NoxMedia.Song[]>;
   progressEmitter?: ProgressEmitter;
   favList?: any[];
@@ -50,18 +50,18 @@ export const fetchPaginatedAPI = async ({
   favList = [],
   limiter = biliApiLimiter,
   params = undefined,
-  jsonify = res => res.json(),
+  jsonify = (res) => res.json(),
   getBVID = (val: any) => val.bvid,
   getJSONData = (json: any) => json.data,
   fetcher = bfetch,
   startPage = 1,
 }: FetcherProps) => {
-  const res = await fetcher(url.replace('{pn}', String(startPage)), params);
+  const res = await fetcher(url.replace("{pn}", String(startPage)), params);
   const data = getJSONData(await jsonify(res.clone()));
   const mediaCount = getMediaCount(data);
   const BVids: string[] = [];
   const pagesPromises: Promise<Response>[] = [
-    new Promise(resolve => {
+    new Promise((resolve) => {
       resolve(res);
     }),
   ];
@@ -71,15 +71,17 @@ export const fetchPaginatedAPI = async ({
     page++
   ) {
     pagesPromises.push(
-      limiter.schedule(() => fetcher(url.replace('{pn}', String(page)), params))
+      limiter.schedule(() =>
+        fetcher(url.replace("{pn}", String(page)), params),
+      ),
     );
   }
   const resolvedPromises = await Promise.all(pagesPromises);
   await Promise.all(
-    resolvedPromises.map(async pages => {
+    resolvedPromises.map(async (pages) => {
       return jsonify(pages)
         .then((parsedJson: any) => {
-          getItems(parsedJson).forEach(m => {
+          getItems(parsedJson).forEach((m) => {
             if (!favList.includes(getBVID(m)) && !BVids.includes(m))
               BVids.push(m);
           });
@@ -87,11 +89,11 @@ export const fetchPaginatedAPI = async ({
         .catch((err: any) => {
           console.error(err, pages);
         });
-    })
+    }),
   );
   // i dont know the smart way to do this out of the async loop, though luckily that O(2n) isnt that big of a deal
   const resolvedBiliBVID = await resolveBiliBVID(BVids, progressEmitter);
-  return resolvedBiliBVID.filter(item => item);
+  return resolvedBiliBVID.filter((item) => item);
 };
 
 /**
@@ -109,7 +111,7 @@ export const fetchAwaitPaginatedAPI = async ({
   favList = [],
   limiter = biliApiLimiter,
   params = undefined,
-  jsonify = res => res.json(),
+  jsonify = (res) => res.json(),
   getBVID = (val: any) => val.bvid,
   fetcher = bfetch,
   getJSONData = (json: any) => json.data,
@@ -125,7 +127,7 @@ export const fetchAwaitPaginatedAPI = async ({
     return true;
   };
   const res = await limiter.schedule(() =>
-    fetcher(url.replace('{pn}', String(1)), params)
+    fetcher(url.replace("{pn}", String(1)), params),
   );
   const json = await jsonify(res);
   const data = getJSONData(json);
@@ -139,7 +141,7 @@ export const fetchAwaitPaginatedAPI = async ({
       page++
     ) {
       const subRes = await limiter.schedule(() =>
-        fetcher(url.replace('{pn}', String(page)), params)
+        fetcher(url.replace("{pn}", String(page)), params),
       );
       const subJson = await subRes.json();
       if (!(await resolvePageJson(BVids, subJson))) {
@@ -148,5 +150,5 @@ export const fetchAwaitPaginatedAPI = async ({
     }
   }
   // i dont know the smart way to do this out of the async loop, though luckily that O(2n) isnt that big of a deal
-  return (await resolveBiliBVID(BVids, progressEmitter)).filter(item => item);
+  return (await resolveBiliBVID(BVids, progressEmitter)).filter((item) => item);
 };

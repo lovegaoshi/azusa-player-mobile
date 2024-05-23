@@ -1,15 +1,15 @@
-import { Dropbox as _Dropbox, files } from 'dropbox';
+import { Dropbox as _Dropbox, files } from "dropbox";
 
-import { logger } from '@utils/Logger';
+import { logger } from "@utils/Logger";
 
-const DEFAULT_FILE_NAME = 'nox.noxBackup';
+const DEFAULT_FILE_NAME = "nox.noxBackup";
 const DEFAULT_FILE_PATH = `/${DEFAULT_FILE_NAME}`;
 
 const find = async (dbx: _Dropbox, query = DEFAULT_FILE_NAME) => {
   const data = await dbx.filesSearchV2({
     query,
     options: {
-      order_by: { '.tag': 'last_modified_time' },
+      order_by: { ".tag": "last_modified_time" },
     },
   });
   try {
@@ -25,11 +25,11 @@ const find = async (dbx: _Dropbox, query = DEFAULT_FILE_NAME) => {
 const upload = async (
   dbx: _Dropbox,
   content: Uint8Array,
-  fpath = DEFAULT_FILE_PATH
+  fpath = DEFAULT_FILE_PATH,
 ) => {
   return await dbx.filesUpload({
     path: fpath,
-    mode: { '.tag': 'overwrite' },
+    mode: { ".tag": "overwrite" },
     contents: content,
   });
 };
@@ -37,7 +37,7 @@ const upload = async (
 const download = async (
   dbx: _Dropbox,
   contentParse: (v: Blob) => Promise<ArrayBuffer>,
-  fpath = DEFAULT_FILE_PATH
+  fpath = DEFAULT_FILE_PATH,
 ) => {
   if (fpath === null) {
     return null;
@@ -56,11 +56,11 @@ const download = async (
  */
 export const noxRestore = async (
   dbx: _Dropbox,
-  contentParse: (v: Blob) => Promise<ArrayBuffer>
+  contentParse: (v: Blob) => Promise<ArrayBuffer>,
 ) => {
   const noxFile = await find(dbx);
   if (!noxFile) {
-    throw new Error('noxfile is not found on dropbox.');
+    throw new Error("noxfile is not found on dropbox.");
   }
   return await download(dbx, contentParse, noxFile);
 };

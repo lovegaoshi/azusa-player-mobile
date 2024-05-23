@@ -1,14 +1,14 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import React, { useState } from 'react';
-import { View, StyleSheet } from 'react-native';
-import { ActivityIndicator, IconButton } from 'react-native-paper';
-import { useTranslation } from 'react-i18next';
+import React, { useState } from "react";
+import { View, StyleSheet } from "react-native";
+import { ActivityIndicator, IconButton } from "react-native-paper";
+import { useTranslation } from "react-i18next";
 
-import { logger } from '@utils/Logger';
-import { exportPlayerContent } from '@utils/ChromeStorage';
-import { ImportProps, ExportProps, Props } from './GenericSyncProps';
-import useSnack from '@stores/useSnack';
-import keepAwake from '@utils/keepAwake';
+import { logger } from "@utils/Logger";
+import { exportPlayerContent } from "@utils/ChromeStorage";
+import { ImportProps, ExportProps, Props } from "./GenericSyncProps";
+import useSnack from "@stores/useSnack";
+import keepAwake from "@utils/keepAwake";
 
 const ImportSyncFavButton = ({
   restoreFromUint8Array,
@@ -16,10 +16,10 @@ const ImportSyncFavButton = ({
   login,
 }: ImportProps) => {
   const { t } = useTranslation();
-  const setSnack = useSnack(state => state.setSnack);
+  const setSnack = useSnack((state) => state.setSnack);
   const [loading, setLoading] = useState(false);
 
-  const errorHandling = (e: Error, msg = t('Sync.DropboxDownloadFail')) => {
+  const errorHandling = (e: Error, msg = t("Sync.DropboxDownloadFail")) => {
     logger.error(e);
     setSnack({ snackMsg: { success: msg } });
     setLoading(false);
@@ -30,11 +30,11 @@ const ImportSyncFavButton = ({
     const response = await noxRestore();
     if (response !== null) {
       await restoreFromUint8Array(response);
-      setSnack({ snackMsg: { success: t('Sync.DropboxDownloadSuccess') } });
+      setSnack({ snackMsg: { success: t("Sync.DropboxDownloadSuccess") } });
     } else {
       errorHandling(
-        new Error(String(t('Sync.DropboxDownloadFail'))),
-        String(t('Sync.DropboxDownloadFail'))
+        new Error(String(t("Sync.DropboxDownloadFail"))),
+        String(t("Sync.DropboxDownloadFail")),
       );
     }
     setLoading(false);
@@ -60,12 +60,12 @@ const ImportSyncFavButton = ({
 
 const ExportSyncFavButton = ({ noxBackup, login }: ExportProps) => {
   const { t } = useTranslation();
-  const setSnack = useSnack(state => state.setSnack);
+  const setSnack = useSnack((state) => state.setSnack);
   const [loading, setLoading] = useState(false);
 
   const errorHandling = (
     e: Error,
-    msg = String(t('Sync.DropboxUploadFailSnackbar'))
+    msg = String(t("Sync.DropboxUploadFailSnackbar")),
   ) => {
     logger.error(e);
     setSnack({ snackMsg: { success: msg } });
@@ -77,7 +77,7 @@ const ExportSyncFavButton = ({ noxBackup, login }: ExportProps) => {
     const exportedDict = await exportPlayerContent();
     const response = await noxBackup(exportedDict);
     if ([200, 201].includes(response.status)) {
-      setSnack({ snackMsg: { success: t('Sync.DropboxUploadSuccess') } });
+      setSnack({ snackMsg: { success: t("Sync.DropboxUploadSuccess") } });
     } else {
       errorHandling(new Error(String(response.status)));
     }
@@ -123,9 +123,9 @@ export default ({
 
 const styles = StyleSheet.create({
   container: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
   },
   activityIndicator: {
     width: 78,

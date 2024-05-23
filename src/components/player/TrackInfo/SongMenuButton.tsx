@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react';
-import { GestureResponderEvent, View } from 'react-native';
-import { IconButton } from 'react-native-paper';
+import React, { useEffect, useState } from "react";
+import { GestureResponderEvent, View } from "react-native";
+import { IconButton } from "react-native-paper";
 
-import { useNoxSetting } from '@stores/useApp';
-import SongMenu from './SongMenu';
+import { useNoxSetting } from "@stores/useApp";
+import SongMenu from "./SongMenu";
 
 export default ({ track }: NoxComponent.TrackProps) => {
   const song = track?.song as NoxMedia.Song;
@@ -16,8 +16,8 @@ export default ({ track }: NoxComponent.TrackProps) => {
     x: 0,
     y: 0,
   });
-  const currentPlayingList = useNoxSetting(state => state.currentPlayingList);
-  const playerStyle = useNoxSetting(state => state.playerStyle);
+  const currentPlayingList = useNoxSetting((state) => state.currentPlayingList);
+  const playerStyle = useNoxSetting((state) => state.playerStyle);
 
   const handlePress = (event: GestureResponderEvent) => {
     setSongMenuVisible(true);
@@ -30,8 +30,8 @@ export default ({ track }: NoxComponent.TrackProps) => {
   useEffect(() => {
     setSongMenuSongIndex(
       currentPlayingList.songList.findIndex(
-        listSong => listSong.id === song?.id
-      )
+        (listSong) => listSong.id === song?.id,
+      ),
     );
   }, [song]);
 

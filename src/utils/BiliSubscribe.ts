@@ -1,7 +1,7 @@
-import { searchBiliURLs } from './BiliSearch';
-import { PlaylistTypes } from '../enums/Playlist';
-import { parseSongName } from '@stores/appStore';
-import logger from './Logger';
+import { searchBiliURLs } from "./BiliSearch";
+import { PlaylistTypes } from "../enums/Playlist";
+import { parseSongName } from "@stores/appStore";
+import logger from "./Logger";
 
 interface Props {
   playlist: NoxMedia.Playlist;
@@ -9,7 +9,7 @@ interface Props {
   updatePlaylist: (
     playlist: NoxMedia.Playlist,
     addSongs: NoxMedia.Song[],
-    removeSongs: NoxMedia.Song[]
+    removeSongs: NoxMedia.Song[],
   ) => void;
   progressEmitter?: (val: number) => void;
   overwriteOnRefresh?: () => boolean;
@@ -21,18 +21,18 @@ export const updateSubscribeFavList = async ({
   updatePlaylist,
   progressEmitter = () => undefined,
   overwriteOnRefresh = () =>
-    playlist.newSongOverwrite || playlist.title.includes('live'),
+    playlist.newSongOverwrite || playlist.title.includes("live"),
   callback = () => undefined,
 }: Props): Promise<NoxMedia.Playlist | undefined> => {
   let newPlaylist = { ...playlist, lastSubscribed: new Date().getTime() };
   if ([PlaylistTypes.Favorite].includes(playlist.type)) {
-    logger.warn('[biliSubscribe] incorrect playlist type for subscription');
+    logger.warn("[biliSubscribe] incorrect playlist type for subscription");
     return;
   }
   if (playlist.type === PlaylistTypes.Search) {
     if (!playlist.refresh) {
       // HACK: disabling error throwing at this point.
-      logger.debug('[biliSubscribe] nothing to subscribe');
+      logger.debug("[biliSubscribe] nothing to subscribe");
       return;
     }
     newPlaylist = { ...newPlaylist, ...(await playlist.refresh(newPlaylist)) };
@@ -42,11 +42,11 @@ export const updateSubscribeFavList = async ({
       subscribeUrls = newPlaylist.subscribeUrl;
     }
     if (subscribeUrls.length === 0 || subscribeUrls[0].length === 0) {
-      logger.debug('[biliSubscribe] nothing to subscribe');
+      logger.debug("[biliSubscribe] nothing to subscribe");
       return;
     }
     const favList = [
-      ...newPlaylist.songList.map(val => val.bvid),
+      ...newPlaylist.songList.map((val) => val.bvid),
       ...newPlaylist.blacklistedUrl,
     ];
     for (const subscribeUrl of subscribeUrls) {
@@ -63,18 +63,18 @@ export const updateSubscribeFavList = async ({
 
   const uniqueSongList = new Map<string, NoxMedia.Song>();
   if (overwriteOnRefresh()) {
-    newPlaylist.songList.forEach(song => {
+    newPlaylist.songList.forEach((song) => {
       if (!uniqueSongList.has(song.id)) {
         uniqueSongList.set(song.id, song);
       }
     });
   } else {
-    newPlaylist.songList.forEach(song => {
+    newPlaylist.songList.forEach((song) => {
       uniqueSongList.set(song.id, song);
     });
   }
-  newPlaylist.songList = [...uniqueSongList.values()].map(val =>
-    parseSongName(val)
+  newPlaylist.songList = [...uniqueSongList.values()].map((val) =>
+    parseSongName(val),
   );
   // This sounds like a performance disaster
   // as currentPlaylist will be changed,

@@ -1,30 +1,30 @@
-import { Dropbox as _Dropbox } from 'dropbox';
-import { authorize } from 'react-native-app-auth';
+import { Dropbox as _Dropbox } from "dropbox";
+import { authorize } from "react-native-app-auth";
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore: dropbox didnt have fileBlob in their sdk anywhere but UPGRADING.md
 // eslint-disable-next-line import/no-unresolved
-import { getArrayBufferForBlob } from 'react-native-blob-jsi-helper';
+import { getArrayBufferForBlob } from "react-native-blob-jsi-helper";
 
 // eslint-disable-next-line import/no-unresolved
-import { DROPBOX_KEY, DROPBOX_SECRET } from '@env';
-import { logger } from '@utils/Logger';
-import GenericSyncButton from './GenericSyncButton';
-import { GenericProps } from './GenericSyncProps';
+import { DROPBOX_KEY, DROPBOX_SECRET } from "@env";
+import { logger } from "@utils/Logger";
+import GenericSyncButton from "./GenericSyncButton";
+import { GenericProps } from "./GenericSyncProps";
 import {
   checkAuthentication,
   noxBackup,
   noxRestore,
-} from '@utils/sync/Dropbox';
+} from "@utils/sync/Dropbox";
 
 const config = {
   clientId: DROPBOX_KEY,
   clientSecret: DROPBOX_SECRET,
   // change this in android/app/build.gradle
-  redirectUrl: 'com.noxplayer://oauth',
+  redirectUrl: "com.noxplayer://oauth",
   scopes: [],
   serviceConfiguration: {
-    authorizationEndpoint: 'https://www.dropbox.com/oauth2/authorize',
-    tokenEndpoint: 'https://www.dropbox.com/oauth2/token',
+    authorizationEndpoint: "https://www.dropbox.com/oauth2/authorize",
+    tokenEndpoint: "https://www.dropbox.com/oauth2/token",
   },
 };
 
@@ -34,7 +34,7 @@ const config = {
  * set dbx to a new Drobox object with the correct accesstoken.
  */
 let dbx = new _Dropbox({
-  accessToken: '',
+  accessToken: "",
 });
 
 /**
@@ -44,7 +44,7 @@ let dbx = new _Dropbox({
  */
 const getAuth = async (
   callback = () => checkAuthentication(dbx).then(console.log),
-  errorHandling = logger.error
+  errorHandling = logger.error,
 ) => {
   const authState = await authorize(config);
   const dropboxUID = authState.tokenAdditionalParameters?.account_id;
@@ -54,7 +54,7 @@ const getAuth = async (
     });
     callback();
   } else {
-    errorHandling('no response url returned. auth aborted by user.');
+    errorHandling("no response url returned. auth aborted by user.");
   }
 };
 
@@ -67,11 +67,11 @@ const getAuth = async (
  */
 const login = async (
   callback: () => Promise<void> = async () => undefined,
-  errorCallback = logger.error
+  errorCallback = logger.error,
 ) => {
   try {
     if (!(await checkAuthentication(dbx))) {
-      logger.debug('dropbox token expired, need to log in');
+      logger.debug("dropbox token expired, need to log in");
       await getAuth(callback, errorCallback);
     } else {
       callback();
@@ -86,8 +86,8 @@ const login = async (
 const DropboxSyncButton = ({ restoreFromUint8Array }: GenericProps) =>
   GenericSyncButton({
     restoreFromUint8Array,
-    noxBackup: v => noxBackup(dbx, v),
-    noxRestore: () => noxRestore(dbx, async v => getArrayBufferForBlob(v)),
+    noxBackup: (v) => noxBackup(dbx, v),
+    noxRestore: () => noxRestore(dbx, async (v) => getArrayBufferForBlob(v)),
     login,
   });
 

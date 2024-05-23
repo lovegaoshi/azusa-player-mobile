@@ -1,25 +1,25 @@
-import { useState, useEffect, useRef } from 'react';
-import { FlashList } from '@shopify/flash-list';
-import { useTranslation } from 'react-i18next';
-import { useDebounce } from 'use-debounce';
-import { useNetInfo } from '@react-native-community/netinfo';
-import { activateKeepAwakeAsync, deactivateKeepAwake } from 'expo-keep-awake';
+import { useState, useEffect, useRef } from "react";
+import { FlashList } from "@shopify/flash-list";
+import { useTranslation } from "react-i18next";
+import { useDebounce } from "use-debounce";
+import { useNetInfo } from "@react-native-community/netinfo";
+import { activateKeepAwakeAsync, deactivateKeepAwake } from "expo-keep-awake";
 
-import { useNoxSetting } from '@stores/useApp';
-import { PlaylistTypes, SearchRegex } from '@enums/Playlist';
-import usePlaylist from '@hooks/usePlaylist';
-import noxCache, { noxCacheKey } from '@utils/Cache';
-import { reParseSearch as reParseSearchRaw } from '@utils/re';
-import { syncFavlist } from '@utils/Bilibili/bilifavOperate';
-import usePlayback from '@hooks/usePlayback';
-import useTPControls from '@hooks/useTPControls';
-import useSnack from '@stores/useSnack';
-import { setPlayingList } from '@stores/playingList';
-import { clearPlaylistUninterrupted } from '@utils/RNTPUtils';
+import { useNoxSetting } from "@stores/useApp";
+import { PlaylistTypes, SearchRegex } from "@enums/Playlist";
+import usePlaylist from "@hooks/usePlaylist";
+import noxCache, { noxCacheKey } from "@utils/Cache";
+import { reParseSearch as reParseSearchRaw } from "@utils/re";
+import { syncFavlist } from "@utils/Bilibili/bilifavOperate";
+import usePlayback from "@hooks/usePlayback";
+import useTPControls from "@hooks/useTPControls";
+import useSnack from "@stores/useSnack";
+import { setPlayingList } from "@stores/playingList";
+import { clearPlaylistUninterrupted } from "@utils/RNTPUtils";
 
 export default (playlist: NoxMedia.Playlist) => {
   const { t } = useTranslation();
-  const setSnack = useSnack(state => state.setSnack);
+  const setSnack = useSnack((state) => state.setSnack);
   const netInfo = useNetInfo();
   const usedPlaylist = usePlaylist(playlist);
   const {
@@ -37,16 +37,16 @@ export default (playlist: NoxMedia.Playlist) => {
   } = usedPlaylist;
   const [cachedSongs, setCachedSongs] = useState<string[]>([]);
   const [debouncedSearchText] = useDebounce(searchText, 500);
-  const playerSetting = useNoxSetting(state => state.playerSetting);
-  const currentPlayingId = useNoxSetting(state => state.currentPlayingId);
+  const playerSetting = useNoxSetting((state) => state.playerSetting);
+  const currentPlayingId = useNoxSetting((state) => state.currentPlayingId);
   const setPlaylistSearchAutoFocus = useNoxSetting(
-    state => state.setPlaylistSearchAutoFocus
+    (state) => state.setPlaylistSearchAutoFocus,
   );
   const playlistShouldReRender = useNoxSetting(
-    state => state.playlistShouldReRender
+    (state) => state.playlistShouldReRender,
   );
   const progressEmitter = useNoxSetting(
-    state => state.searchBarProgressEmitter
+    (state) => state.searchBarProgressEmitter,
   );
   const playlistRef = useRef<FlashList<NoxMedia.Song>>(null);
   const { playFromPlaylist } = usePlayback();
@@ -57,9 +57,9 @@ export default (playlist: NoxMedia.Playlist) => {
     activateKeepAwakeAsync();
     setSnack({
       snackMsg: {
-        processing: t('PlaylistOperations.updating', { playlist }),
-        success: t('PlaylistOperations.updated', { playlist }),
-        fail: '[refreshPlaylist] failed',
+        processing: t("PlaylistOperations.updating", { playlist }),
+        success: t("PlaylistOperations.updated", { playlist }),
+        fail: "[refreshPlaylist] failed",
       },
       processFunction: rssUpdate,
       callback: () => {
@@ -74,13 +74,13 @@ export default (playlist: NoxMedia.Playlist) => {
       {
         regex: SearchRegex.cachedMatch.regex,
         process: (val: RegExpExecArray, someRows: NoxMedia.Song[]) => {
-          return val[1].startsWith('local')
-            ? someRows.filter(row => row?.bvid?.startsWith?.('file://'))
+          return val[1].startsWith("local")
+            ? someRows.filter((row) => row?.bvid?.startsWith?.("file://"))
             : someRows.filter(
-                row =>
+                (row) =>
                   // HACK: cachedSongs also include local files
-                  row?.bvid?.startsWith?.('file://') ||
-                  cachedSongs.includes(noxCacheKey(row))
+                  row?.bvid?.startsWith?.("file://") ||
+                  cachedSongs.includes(noxCacheKey(row)),
               );
         },
       },
@@ -92,8 +92,8 @@ export default (playlist: NoxMedia.Playlist) => {
     });
   };
 
-  const handleSearch = (searchedVal = '') => {
-    if (searchedVal === '') {
+  const handleSearch = (searchedVal = "") => {
+    if (searchedVal === "") {
       setRows(playlist.songList);
       return;
     }
@@ -112,15 +112,15 @@ export default (playlist: NoxMedia.Playlist) => {
       // on an event to emit) so we have to do conditionals outside of playFromPlaylist.
       preformFade(callback);
     };
-    usedPlaylist.playSong(song, playSongCallback, p =>
-      clearPlaylistUninterrupted().then(() => setPlayingList(p.songList))
+    usedPlaylist.playSong(song, playSongCallback, (p) =>
+      clearPlaylistUninterrupted().then(() => setPlayingList(p.songList)),
     );
   };
 
   const scrollTo = (toIndex = -1, reset = false) => {
     let currentIndex =
       toIndex < 0
-        ? playlist.songList.findIndex(song => song.id === currentPlayingId)
+        ? playlist.songList.findIndex((song) => song.id === currentPlayingId)
         : toIndex;
     if (currentIndex === -1 && reset) currentIndex = 0;
     if (currentIndex > -1) {
@@ -158,7 +158,7 @@ export default (playlist: NoxMedia.Playlist) => {
         }
       });
     }
-    if (playerSetting.dataSaver && netInfo.type === 'cellular') {
+    if (playerSetting.dataSaver && netInfo.type === "cellular") {
       searchAndEnableSearch(SearchRegex.cachedMatch.text);
       handleSearch(SearchRegex.cachedMatch.text);
       setPlaylistSearchAutoFocus(false);
@@ -169,12 +169,12 @@ export default (playlist: NoxMedia.Playlist) => {
 
   useEffect(() => {
     if (!searching) {
-      setSearchText('');
+      setSearchText("");
     }
   }, [searching]);
 
   useEffect(() => {
-    setShouldReRender(val => !val);
+    setShouldReRender((val) => !val);
   }, [currentPlayingId, checking, playlistShouldReRender, netInfo.type]);
 
   return {

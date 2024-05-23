@@ -1,17 +1,17 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { Searchbar, Text } from 'react-native-paper';
+import React, { useEffect, useRef, useState } from "react";
+import { Searchbar, Text } from "react-native-paper";
 import {
   View,
   Pressable,
   StyleSheet,
   Animated,
   GestureResponderEvent,
-} from 'react-native';
-import { useTranslation } from 'react-i18next';
+} from "react-native";
+import { useTranslation } from "react-i18next";
 
-import SearchMenu from './PlaylistSearchMenu';
-import { useNoxSetting } from '@stores/useApp';
-import { seconds2HHMMSS } from '@utils/Utils';
+import SearchMenu from "./PlaylistSearchMenu";
+import { useNoxSetting } from "@stores/useApp";
+import { seconds2HHMMSS } from "@utils/Utils";
 
 interface UsePlaylist {
   searchText: string;
@@ -30,8 +30,8 @@ export default ({ usePlaylist, onPressed = () => undefined }: Props) => {
   const { searchText, setSearchText, searching, selected, checking } =
     usePlaylist;
   const { t } = useTranslation();
-  const currentPlaylist = useNoxSetting(state => state.currentPlaylist);
-  const playerStyle = useNoxSetting(state => state.playerStyle);
+  const currentPlaylist = useNoxSetting((state) => state.currentPlaylist);
+  const playerStyle = useNoxSetting((state) => state.playerStyle);
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const searchContainerRef = useRef<any>(null);
   const searchBarWidth = useRef(new Animated.Value(0)).current;
@@ -41,12 +41,12 @@ export default ({ usePlaylist, onPressed = () => undefined }: Props) => {
   const [searchVisible, setSearchVisible] = useState(searching);
   // TODO: a more elegant way to signal content update
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const playlistInfoUpdate = useNoxSetting(state => state.playlistInfoUpdate);
+  const playlistInfoUpdate = useNoxSetting((state) => state.playlistInfoUpdate);
   const playlistSearchAutoFocus: boolean = useNoxSetting(
-    state => state.playlistSearchAutoFocus
+    (state) => state.playlistSearchAutoFocus,
   );
   const setPlaylistSearchAutoFocus = useNoxSetting(
-    state => state.setPlaylistSearchAutoFocus
+    (state) => state.setPlaylistSearchAutoFocus,
   );
   const [dialogOpen, setDialogOpen] = useState(false);
   const [menuCoords, setMenuCoords] = useState<NoxTheme.coordinates>({
@@ -63,12 +63,12 @@ export default ({ usePlaylist, onPressed = () => undefined }: Props) => {
   };
 
   const toggleVisible = () => {
-    setDialogOpen(val => !val);
+    setDialogOpen((val) => !val);
   };
 
   const renderSongCount = () => {
     if (checking) {
-      const selectedLength = selected.filter(val => val === true).length;
+      const selectedLength = selected.filter((val) => val === true).length;
       if (selectedLength !== 0) {
         return selectedLength;
       }
@@ -78,13 +78,13 @@ export default ({ usePlaylist, onPressed = () => undefined }: Props) => {
 
   const renderSongDuration = () => {
     if (checking) {
-      const selectedLength = selected.filter(val => val === true).length;
+      const selectedLength = selected.filter((val) => val === true).length;
       if (selectedLength !== 0) {
         const selectedDuration = currentPlaylist.songList
           .filter((val, index) => selected[index])
           .reduce(
             (accumulator, currentValue) => accumulator + currentValue.duration,
-            0
+            0,
           );
         return seconds2HHMMSS(selectedDuration);
       }
@@ -92,13 +92,13 @@ export default ({ usePlaylist, onPressed = () => undefined }: Props) => {
     return seconds2HHMMSS(
       currentPlaylist.songList.reduce(
         (accumulator, currentValue) => accumulator + currentValue.duration,
-        0
-      )
+        0,
+      ),
     );
   };
 
   useEffect(() => {
-    setSearchText('');
+    setSearchText("");
   }, [currentPlaylist]);
 
   useEffect(() => {
@@ -165,7 +165,7 @@ export default ({ usePlaylist, onPressed = () => undefined }: Props) => {
           {
             width: searchBkgrdWidth.interpolate({
               inputRange: [0, 100],
-              outputRange: ['0%', '100%'],
+              outputRange: ["0%", "100%"],
             }),
           },
           { zIndex: 2 },
@@ -173,7 +173,7 @@ export default ({ usePlaylist, onPressed = () => undefined }: Props) => {
       >
         {searchVisible && (
           <Searchbar
-            placeholder={String(t('PlaylistSearchBar.label'))}
+            placeholder={String(t("PlaylistSearchBar.label"))}
             value={searchText}
             onChangeText={(val: string) => {
               setSearchText(val);
@@ -183,7 +183,7 @@ export default ({ usePlaylist, onPressed = () => undefined }: Props) => {
             ref={searchContainerRef}
             selectTextOnFocus
             selectionColor={playerStyle.customColors.textInputSelectionColor}
-            icon={searching ? 'format-list-checkbox' : () => undefined}
+            icon={searching ? "format-list-checkbox" : () => undefined}
             onIconPress={handleMenuPress}
           />
         )}
@@ -218,7 +218,7 @@ const styles = StyleSheet.create({
     marginTop: -6,
   },
   pressable: {
-    position: 'absolute',
+    position: "absolute",
     paddingLeft: 15,
     zIndex: -1,
   },

@@ -8,10 +8,10 @@
  * functional.
  */
 
-import { createStore } from 'zustand/vanilla';
-import md5 from 'md5';
-import bfetch from '@utils/BiliFetch';
-import { logger } from '@utils/Logger';
+import { createStore } from "zustand/vanilla";
+import md5 from "md5";
+import bfetch from "@utils/BiliFetch";
+import { logger } from "@utils/Logger";
 
 interface wbiStore {
   img_key: string;
@@ -19,8 +19,8 @@ interface wbiStore {
 }
 
 const wbiStore = createStore<wbiStore>(() => ({
-  img_key: '',
-  sub_key: '',
+  img_key: "",
+  sub_key: "",
 }));
 
 const mixinKeyEncTab = [
@@ -32,8 +32,8 @@ const mixinKeyEncTab = [
 
 // 对 imgKey 和 subKey 进行字符顺序打乱编码
 const getMixinKey = (orig: string) => {
-  let temp = '';
-  mixinKeyEncTab.forEach(n => {
+  let temp = "";
+  mixinKeyEncTab.forEach((n) => {
     temp += orig[n];
   });
   return temp.slice(0, 32);
@@ -50,32 +50,32 @@ export const encWbi = (params: { [key: string]: string }) => {
   // 按照 key 重排参数
   Object.keys(params)
     .sort()
-    .forEach(key => {
+    .forEach((key) => {
       query.push(
         encodeURIComponent(key) +
-          '=' +
+          "=" +
           // 过滤 value 中的 "!'()*" 字符
-          encodeURIComponent(('' + params[key]).replace(chr_filter, ''))
+          encodeURIComponent(("" + params[key]).replace(chr_filter, "")),
       );
     });
-  const joinedQuery = query.join('&');
+  const joinedQuery = query.join("&");
   const wbi_sign = md5(joinedQuery + mixin_key); // 计算 w_rid
-  return joinedQuery + '&w_rid=' + wbi_sign;
+  return joinedQuery + "&w_rid=" + wbi_sign;
 };
 
 // 获取最新的 img_key 和 sub_key
 export const getWbiKeys = async () => {
-  const resp = await bfetch('https://api.bilibili.com/x/web-interface/nav'),
+  const resp = await bfetch("https://api.bilibili.com/x/web-interface/nav"),
     json_content = await resp.json(),
     img_url = json_content.data.wbi_img.img_url,
     sub_url = json_content.data.wbi_img.sub_url;
   wbiStore.setState({
     img_key: img_url
-      .substring(img_url.lastIndexOf('/') + 1, img_url.length)
-      .split('.')[0],
+      .substring(img_url.lastIndexOf("/") + 1, img_url.length)
+      .split(".")[0],
     sub_key: sub_url
-      .substring(sub_url.lastIndexOf('/') + 1, sub_url.length)
-      .split('.')[0],
+      .substring(sub_url.lastIndexOf("/") + 1, sub_url.length)
+      .split(".")[0],
   });
 };
 
@@ -98,7 +98,7 @@ const wbiNeedRefresh = async (json: any) => {
 
 const wbiRefreshWrapper: any = async (
   queryFunc: () => Promise<Response>,
-  refreshed = false
+  refreshed = false,
 ) => {
   const res = await queryFunc();
   const json = await res.clone().json();
@@ -110,16 +110,16 @@ const wbiRefreshWrapper: any = async (
 
 export const wbiQuery = async (
   url: string,
-  fetchParams?: RequestInit | undefined
+  fetchParams?: RequestInit | undefined,
 ) => {
   const urlObj = new URL(url);
   const URLParams = new URLSearchParams(urlObj.search);
   const orlOrig = `${urlObj.origin}${urlObj.pathname}`;
   logger.debug(
-    `[wbiQuery] ${orlOrig}?${encWbi(Object.fromEntries(URLParams))}`
+    `[wbiQuery] ${orlOrig}?${encWbi(Object.fromEntries(URLParams))}`,
   );
   return wbiRefreshWrapper(() =>
-    bfetch(`${orlOrig}?${encWbi(Object.fromEntries(URLParams))}`, fetchParams)
+    bfetch(`${orlOrig}?${encWbi(Object.fromEntries(URLParams))}`, fetchParams),
   );
 };
 getWbiKeys();

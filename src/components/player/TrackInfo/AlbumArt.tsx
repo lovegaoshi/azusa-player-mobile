@@ -1,19 +1,19 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect } from "react";
 import {
   StyleSheet,
   View,
   Dimensions,
   Animated,
   TouchableWithoutFeedback,
-} from 'react-native';
-import type { Track } from 'react-native-track-player';
-import { Image } from 'expo-image';
-import { useFocusEffect } from '@react-navigation/native';
-import { activateKeepAwakeAsync, deactivateKeepAwake } from 'expo-keep-awake';
+} from "react-native";
+import type { Track } from "react-native-track-player";
+import { Image } from "expo-image";
+import { useFocusEffect } from "@react-navigation/native";
+import { activateKeepAwakeAsync, deactivateKeepAwake } from "expo-keep-awake";
 
-import { useNoxSetting } from '@stores/useApp';
-import { LyricView } from '../Lyric';
-import { songResolveArtwork } from '@utils/mediafetch/resolveURL';
+import { useNoxSetting } from "@stores/useApp";
+import { LyricView } from "../Lyric";
+import { songResolveArtwork } from "@utils/mediafetch/resolveURL";
 
 interface Props {
   track?: Track;
@@ -29,19 +29,19 @@ const AlbumArt: React.FC<Props> = ({
   albumArtStyle,
   lyricStyle,
 }) => {
-  const playerSetting = useNoxSetting(state => state.playerSetting);
+  const playerSetting = useNoxSetting((state) => state.playerSetting);
   const [isImageVisible, setIsImageVisible] = useState(true);
   const [isLrcVisible, setIsLrcVisible] = useState(false);
-  const [overwriteAlbumArt, setOverwriteAlbumArt] = useState('');
+  const [overwriteAlbumArt, setOverwriteAlbumArt] = useState("");
   const opacity = useRef(new Animated.Value(1)).current;
-  const dimension = Dimensions.get('window');
+  const dimension = Dimensions.get("window");
   const coverStyle = {
-    width: windowWidth || '100%',
-    height: windowHeight || '100%',
+    width: windowWidth || "100%",
+    height: windowHeight || "100%",
   };
 
   const onImagePress = () => {
-    console.log('TrackInfo: Image Clicked - ');
+    console.log("TrackInfo: Image Clicked - ");
     setIsLrcVisible(true);
     Animated.parallel([
       Animated.timing(opacity, {
@@ -50,13 +50,13 @@ const AlbumArt: React.FC<Props> = ({
         useNativeDriver: true,
       }),
     ]).start(() => {
-      console.log('TrackInfo: Setting imagevisible to Image', !isImageVisible);
+      console.log("TrackInfo: Setting imagevisible to Image", !isImageVisible);
       setIsImageVisible(false);
     });
   };
 
   const onLyricPress = () => {
-    console.log('TrackInfo: Lyric Clicked - ');
+    console.log("TrackInfo: Lyric Clicked - ");
     setIsImageVisible(true);
     setIsLrcVisible(false);
     Animated.parallel([
@@ -66,7 +66,7 @@ const AlbumArt: React.FC<Props> = ({
         useNativeDriver: true,
       }),
     ]).start(() => {
-      console.log('TrackInfo: Setting to Lyric', true);
+      console.log("TrackInfo: Setting to Lyric", true);
     });
   };
 
@@ -78,11 +78,11 @@ const AlbumArt: React.FC<Props> = ({
         return deactivateKeepAwake;
       }
       return () => undefined;
-    }, [isImageVisible, playerSetting.screenAlwaysWake])
+    }, [isImageVisible, playerSetting.screenAlwaysWake]),
   );
 
   useEffect(() => {
-    setOverwriteAlbumArt('');
+    setOverwriteAlbumArt("");
     if (!track?.artwork && track?.song) {
       songResolveArtwork(track?.song).then(setOverwriteAlbumArt);
     }
@@ -96,11 +96,11 @@ const AlbumArt: React.FC<Props> = ({
             styles.container,
             {
               opacity,
-              position: isImageVisible ? 'relative' : 'absolute',
+              position: isImageVisible ? "relative" : "absolute",
             },
             albumArtStyle,
           ]}
-          pointerEvents={isImageVisible ? 'auto' : 'none'}
+          pointerEvents={isImageVisible ? "auto" : "none"}
         >
           <Image
             // eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -113,7 +113,7 @@ const AlbumArt: React.FC<Props> = ({
                     uri: `${track?.artwork || overwriteAlbumArt}`,
                   }
             }
-            transition={{ effect: 'flip-from-top' }}
+            transition={{ effect: "flip-from-top" }}
           />
         </Animated.View>
       </TouchableWithoutFeedback>
@@ -122,13 +122,13 @@ const AlbumArt: React.FC<Props> = ({
           styles.lyric,
           {
             opacity: isImageVisible ? 0 : 1,
-            position: !isLrcVisible ? 'absolute' : 'relative',
+            position: !isLrcVisible ? "absolute" : "relative",
             width: dimension.width,
             height: dimension.height,
           },
           lyricStyle,
         ]}
-        pointerEvents={isImageVisible ? 'none' : 'auto'}
+        pointerEvents={isImageVisible ? "none" : "auto"}
       >
         {track && (
           <LyricView
@@ -148,7 +148,7 @@ export default AlbumArt;
 
 const styles = StyleSheet.create({
   container: {
-    alignItems: 'center',
+    alignItems: "center",
   },
   artwork: {
     opacity: 1,

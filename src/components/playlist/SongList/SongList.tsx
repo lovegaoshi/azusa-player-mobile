@@ -1,27 +1,27 @@
-import React, { useEffect, useState } from 'react';
-import { View, BackHandler, StyleSheet } from 'react-native';
-import { FlashList } from '@shopify/flash-list';
-import { IconButton } from 'react-native-paper';
-import { useNetInfo } from '@react-native-community/netinfo';
-import { useFocusEffect } from '@react-navigation/native';
+import React, { useEffect, useState } from "react";
+import { View, BackHandler, StyleSheet } from "react-native";
+import { FlashList } from "@shopify/flash-list";
+import { IconButton } from "react-native-paper";
+import { useNetInfo } from "@react-native-community/netinfo";
+import { useFocusEffect } from "@react-navigation/native";
 
-import { styles } from '@components/style';
-import SongInfo from './SongInfo';
-import SongBackground from './SongBackground';
-import { useNoxSetting } from '@stores/useApp';
-import SongMenu from './SongMenu';
-import PlaylistInfo from '../Info/PlaylistInfo';
-import PlaylistMenuButton from '../Menu/PlaylistMenuButton';
-import usePlaylist from '../usePlaylistRN';
-import SongListScrollbar from './SongListScrollbar';
-import keepAwake from '@utils/keepAwake';
+import { styles } from "@components/style";
+import SongInfo from "./SongInfo";
+import SongBackground from "./SongBackground";
+import { useNoxSetting } from "@stores/useApp";
+import SongMenu from "./SongMenu";
+import PlaylistInfo from "../Info/PlaylistInfo";
+import PlaylistMenuButton from "../Menu/PlaylistMenuButton";
+import usePlaylist from "../usePlaylistRN";
+import SongListScrollbar from "./SongListScrollbar";
+import keepAwake from "@utils/keepAwake";
 
 const PlaylistList = () => {
-  const currentPlayingId = useNoxSetting(state => state.currentPlayingId);
-  const playerStyle = useNoxSetting(state => state.playerStyle);
-  const currentPlaylist = useNoxSetting(state => state.currentPlaylist);
+  const currentPlayingId = useNoxSetting((state) => state.currentPlayingId);
+  const playerStyle = useNoxSetting((state) => state.playerStyle);
+  const currentPlaylist = useNoxSetting((state) => state.currentPlaylist);
   const songListScrollCounter = useNoxSetting(
-    state => state.songListScrollCounter
+    (state) => state.songListScrollCounter,
   );
   const usedPlaylist = usePlaylist(currentPlaylist);
   const {
@@ -51,12 +51,12 @@ const PlaylistList = () => {
   useFocusEffect(
     React.useCallback(() => {
       const subscription = BackHandler.addEventListener(
-        'hardwareBackPress',
-        onBackPress
+        "hardwareBackPress",
+        onBackPress,
       );
 
       return () => subscription.remove();
-    }, [checking, setChecking, searching, setSearching])
+    }, [checking, setChecking, searching, setSearching]),
   );
 
   return (
@@ -73,7 +73,7 @@ const PlaylistList = () => {
           )}
           <IconButton
             icon="select"
-            onPress={() => setChecking(val => !val)}
+            onPress={() => setChecking((val) => !val)}
             size={25}
             containerColor={
               checking
@@ -83,9 +83,9 @@ const PlaylistList = () => {
           />
           <IconButton
             icon="magnify"
-            onPress={() => setSearching(val => !val)}
+            onPress={() => setSearching((val) => !val)}
             size={25}
-            mode={searching ? 'contained' : undefined}
+            mode={searching ? "contained" : undefined}
             containerColor={
               searching
                 ? playerStyle.customColors.playlistDrawerBackgroundColor
@@ -121,7 +121,7 @@ const PlaylistList = () => {
                   toggleSelected(getSongIndex(item, index));
                   setChecking(true);
                 }}
-                networkCellular={netInfo.type === 'cellular'}
+                networkCellular={netInfo.type === "cellular"}
               />
             </SongBackground>
             // </Animated.View>
@@ -159,9 +159,9 @@ const PlaylistList = () => {
 };
 const stylesLocal = StyleSheet.create({
   container: {
-    flexDirection: 'row',
+    flexDirection: "row",
     bottom: 5,
-    justifyContent: 'flex-end',
+    justifyContent: "flex-end",
   },
   mainContainer: { flex: 1 },
   playlistContainer: {

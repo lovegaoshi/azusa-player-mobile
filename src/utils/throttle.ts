@@ -1,4 +1,4 @@
-import Bottleneck from 'bottleneck';
+import Bottleneck from "bottleneck";
 
 /**
  * limits to bilibili API call to 200ms/call using bottleneck.

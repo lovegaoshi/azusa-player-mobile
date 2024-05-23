@@ -1,9 +1,9 @@
-import React from 'react';
-import TrackPlayer from 'react-native-track-player';
+import React from "react";
+import TrackPlayer from "react-native-track-player";
 
-import LottieButton from '@components/buttons/LottieButton';
-import { resetResolvedURL } from '@stores/appStore';
-import { resolveAndCache } from '@utils/RNTPUtils';
+import LottieButton from "@components/buttons/LottieButton";
+import { resetResolvedURL } from "@stores/appStore";
+import { resolveAndCache } from "@utils/RNTPUtils";
 
 export default ({ track }: NoxComponent.TrackProps) => {
   const song = track?.song as NoxMedia.Song;
@@ -18,10 +18,10 @@ export default ({ track }: NoxComponent.TrackProps) => {
 
   return (
     <LottieButton
-      src={require('@assets/lottie/refresh.json')}
+      src={require("@assets/lottie/refresh.json")}
       size={30}
       onPress={onClick}
-      strokes={['Arrowhead', 'Line', 'Arrowhead 2', 'Line 2']}
+      strokes={["Arrowhead", "Line", "Arrowhead 2", "Line 2"]}
     />
   );
 };

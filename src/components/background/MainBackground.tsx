@@ -1,20 +1,20 @@
-import React, { useState } from 'react';
-import { ImageBackground, Dimensions, View, StyleSheet } from 'react-native';
-import Video, { VideoRef } from 'react-native-video';
+import React, { useState } from "react";
+import { ImageBackground, Dimensions, View, StyleSheet } from "react-native";
+import Video, { VideoRef } from "react-native-video";
 
-import { useNoxSetting } from '@stores/useApp';
-import { customReqHeader } from '@utils/BiliFetch';
-import { logger } from '@utils/Logger';
-import { useIsLandscape } from '@hooks/useOrientation';
+import { useNoxSetting } from "@stores/useApp";
+import { customReqHeader } from "@utils/BiliFetch";
+import { logger } from "@utils/Logger";
+import { useIsLandscape } from "@hooks/useOrientation";
 import resolveBackgroundImage, {
   RESOLVE_TYPE,
-} from '@utils/mediafetch/mainbackgroundfetch';
-import EmptyBackground from './AccentColorBackground';
+} from "@utils/mediafetch/mainbackgroundfetch";
+import EmptyBackground from "./AccentColorBackground";
 
 const MainBackground = ({ children }: { children: React.JSX.Element }) => {
-  const playerStyle = useNoxSetting(state => state.playerStyle);
+  const playerStyle = useNoxSetting((state) => state.playerStyle);
   const isLandscape = useIsLandscape();
-  const { width, height } = Dimensions.get('window');
+  const { width, height } = Dimensions.get("window");
   const [bkgrdImg, setBkgrdImg] = useState<NoxTheme.backgroundImage>();
   const videoRef = React.useRef<VideoRef | null>(null);
   const bkgrdImgRaw =
@@ -51,10 +51,10 @@ const MainBackground = ({ children }: { children: React.JSX.Element }) => {
               headers: customReqHeader(bkgrdImg.identifier, {}),
             }}
             style={[styles.videoStyle, { width, height }]}
-            onError={e => {
+            onError={(e) => {
               logger.error(JSON.stringify(e));
               logger.error(
-                `with: ${bkgrdImg.identifier} + ${JSON.stringify(customReqHeader(bkgrdImg.identifier, {}))}`
+                `with: ${bkgrdImg.identifier} + ${JSON.stringify(customReqHeader(bkgrdImg.identifier, {}))}`,
               );
             }}
             onEnd={
@@ -95,11 +95,11 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   videoStyle: {
-    position: 'absolute',
+    position: "absolute",
   },
   fullscreenStyle: {
-    width: '100%',
-    height: '100%',
+    width: "100%",
+    height: "100%",
   },
 });
 

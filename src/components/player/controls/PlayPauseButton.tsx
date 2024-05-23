@@ -1,27 +1,27 @@
-import React from 'react';
-import { StyleSheet } from 'react-native';
-import { Image } from 'expo-image';
-import { ActivityIndicator } from 'react-native-paper';
+import React from "react";
+import { StyleSheet } from "react-native";
+import { Image } from "expo-image";
+import { ActivityIndicator } from "react-native-paper";
 import TrackPlayer, {
   State,
   usePlayWhenReady,
-} from 'react-native-track-player';
+} from "react-native-track-player";
 
-import { useDebouncedValue } from 'hooks';
-import { useNoxSetting } from '@stores/useApp';
-import LottieButtonAnimated from '@components/buttons/LottieButtonAnimated';
-import { fadePause } from '@utils/RNTPUtils';
+import { useDebouncedValue } from "hooks";
+import { useNoxSetting } from "@stores/useApp";
+import LottieButtonAnimated from "@components/buttons/LottieButtonAnimated";
+import { fadePause } from "@utils/RNTPUtils";
 
 interface Props {
   state: State | undefined;
   iconSize?: number;
 }
 export const PlayPauseButton: React.FC<Props> = ({ state, iconSize = 50 }) => {
-  const playerStyle = useNoxSetting(state => state.playerStyle);
+  const playerStyle = useNoxSetting((state) => state.playerStyle);
   const playWhenReady = usePlayWhenReady();
   const isLoading = useDebouncedValue(
     state === State.Loading, // || state === State.Buffering
-    250
+    250,
   );
 
   const isErrored = state === State.Error;
@@ -42,11 +42,11 @@ export const PlayPauseButton: React.FC<Props> = ({ state, iconSize = 50 }) => {
   }
   return (
     <LottieButtonAnimated
-      src={require('@assets/lottie/PauseGoAndBack.json')}
+      src={require("@assets/lottie/PauseGoAndBack.json")}
       size={iconSize}
       onPress={showPause ? fadePause : () => TrackPlayer.play()}
       clicked={!showPause}
-      strokes={['Play', 'Play 2', 'Pause', 'Pause 3']}
+      strokes={["Play", "Play 2", "Pause", "Pause 3"]}
     />
   );
 };

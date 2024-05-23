@@ -1,22 +1,22 @@
-import * as React from 'react';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { StyleSheet, View, ScrollView } from 'react-native';
+import * as React from "react";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { StyleSheet, View, ScrollView } from "react-native";
 
-import SkinSettings from './SkinSettings';
-import { SettingListItem, RenderSetting } from '../useRenderSetting';
-import { useNoxSetting } from '@stores/useApp';
-import SelectDarkModeButton from './SelectDarkModeButton';
-import NoWeebButton from './NoWeebButton';
+import SkinSettings from "./SkinSettings";
+import { SettingListItem, RenderSetting } from "../useRenderSetting";
+import { useNoxSetting } from "@stores/useApp";
+import SelectDarkModeButton from "./SelectDarkModeButton";
+import NoWeebButton from "./NoWeebButton";
 
 enum VIEW {
-  HOME = 'AppearanceHome',
-  SKIN = 'SkinSetting',
+  HOME = "AppearanceHome",
+  SKIN = "SkinSetting",
 }
 
 const Stack = createNativeStackNavigator();
 
 const MainView = ({ navigation }: NoxComponent.NavigationProps) => {
-  const playerStyle = useNoxSetting(state => state.playerStyle);
+  const playerStyle = useNoxSetting((state) => state.playerStyle);
 
   return (
     <View
@@ -27,33 +27,33 @@ const MainView = ({ navigation }: NoxComponent.NavigationProps) => {
     >
       <ScrollView>
         <SettingListItem
-          icon={'palette-swatch-variant'}
+          icon={"palette-swatch-variant"}
           settingName="SkinSetting"
           onPress={() => navigation.navigate(VIEW.SKIN)}
           settingCategory="Settings"
         />
         <RenderSetting
           item={{
-            settingName: 'hideCoverInMobile',
-            settingCategory: 'AppearanceSettings',
+            settingName: "hideCoverInMobile",
+            settingCategory: "AppearanceSettings",
           }}
         />
         <RenderSetting
           item={{
-            settingName: 'trackCoverArtCard',
-            settingCategory: 'AppearanceSettings',
+            settingName: "trackCoverArtCard",
+            settingCategory: "AppearanceSettings",
           }}
         />
         <RenderSetting
           item={{
-            settingName: 'wavyProgressBar',
-            settingCategory: 'AppearanceSettings',
+            settingName: "wavyProgressBar",
+            settingCategory: "AppearanceSettings",
           }}
         />
         <RenderSetting
           item={{
-            settingName: 'accentColor',
-            settingCategory: 'AppearanceSettings',
+            settingName: "accentColor",
+            settingCategory: "AppearanceSettings",
           }}
         />
         <SelectDarkModeButton />

@@ -1,5 +1,5 @@
-import { logger } from '../utils/Logger';
-import { create } from 'zustand';
+import { logger } from "../utils/Logger";
+import { create } from "zustand";
 
 interface SetSnack {
   snackMsg: { processing?: string; success: string; fail?: string };
@@ -21,21 +21,21 @@ interface NoxSnack {
 
 export const InfiniteDuration = 99999999;
 export enum SnackType {
-  Success = 'success',
-  Fail = 'fail',
-  Warn = 'warn',
-  Processing = 'processing',
+  Success = "success",
+  Fail = "fail",
+  Warn = "warn",
+  Processing = "processing",
 }
 
 export default create<NoxSnack>((set, get) => ({
-  snackMsg: 'The quick brown fox jumps over the lazy dog.',
+  snackMsg: "The quick brown fox jumps over the lazy dog.",
   snackVisible: false,
   snackType: SnackType.Success,
   snackDuration: 3000,
   snackOnDismiss: () => set({ snackVisible: false }),
   snackDismiss: () => {
     set({ snackVisible: false });
-    return new Promise(resolve => setTimeout(resolve, 100));
+    return new Promise((resolve) => setTimeout(resolve, 100));
   },
   setSnack: async ({
     snackMsg,
@@ -46,11 +46,11 @@ export default create<NoxSnack>((set, get) => ({
   }) => {
     if (get().snackVisible) {
       set({ snackVisible: false });
-      await new Promise(resolve => setTimeout(resolve, 100));
+      await new Promise((resolve) => setTimeout(resolve, 100));
     }
     if (processFunction) {
       set({
-        snackMsg: snackMsg.processing || 'processing...',
+        snackMsg: snackMsg.processing || "processing...",
         snackVisible: true,
         snackDuration: InfiniteDuration,
         snackOnDismiss: () => void 0,
@@ -66,7 +66,7 @@ export default create<NoxSnack>((set, get) => ({
               snackDuration,
               snackOnDismiss: () => set({ snackVisible: false }),
             }),
-          100
+          100,
         );
       } catch (e) {
         logger.error(e);
@@ -74,12 +74,12 @@ export default create<NoxSnack>((set, get) => ({
         setTimeout(
           () =>
             set({
-              snackMsg: snackMsg.fail || 'failed...',
+              snackMsg: snackMsg.fail || "failed...",
               snackVisible: true,
               snackDuration,
               snackOnDismiss: () => set({ snackVisible: false }),
             }),
-          100
+          100,
         );
       }
       callback?.();

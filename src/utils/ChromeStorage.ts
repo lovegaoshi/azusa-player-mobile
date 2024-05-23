@@ -1,22 +1,22 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import { strToU8, compressSync } from 'fflate';
-import { v4 as uuidv4 } from 'uuid';
-import { Appearance, ColorSchemeName } from 'react-native';
-import i18n from 'i18next';
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { strToU8, compressSync } from "fflate";
+import { v4 as uuidv4 } from "uuid";
+import { Appearance, ColorSchemeName } from "react-native";
+import i18n from "i18next";
 
-import { dummyPlaylist, dummyPlaylistList } from '../objects/Playlist';
-import { NoxRepeatMode } from '../enums/RepeatMode';
-import { PlaylistTypes } from '../enums/Playlist';
-import AdaptiveTheme from '../components/styles/AdaptiveTheme';
-import { chunkArray, arrayToObject } from '../utils/Utils';
+import { dummyPlaylist, dummyPlaylistList } from "../objects/Playlist";
+import { NoxRepeatMode } from "../enums/RepeatMode";
+import { PlaylistTypes } from "../enums/Playlist";
+import AdaptiveTheme from "../components/styles/AdaptiveTheme";
+import { chunkArray, arrayToObject } from "../utils/Utils";
 import {
   StorageKeys,
   AppID,
   DefaultSetting,
   SearchOptions,
-} from '@enums/Storage';
-import { MUSICFREE } from './mediafetch/musicfree';
+} from "@enums/Storage";
+import { MUSICFREE } from "./mediafetch/musicfree";
 /**
  * noxplayer's storage handler.
  * ChromeStorage has quite a few changes from azusa player the chrome extension;
@@ -44,7 +44,7 @@ export const saveItem = async (key: string, value: any) => {
 
 export const getItem = async (
   key: string,
-  defaultVal: unknown = null
+  defaultVal: unknown = null,
 ): Promise<null | any> => {
   try {
     const retrievedStr = await AsyncStorage.getItem(key);
@@ -80,7 +80,7 @@ export const saveFadeInterval = async (val: number) =>
  */
 const getMapping = async (
   key: StorageKeys,
-  transform: (val: any) => any = arrayToObject
+  transform: (val: any) => any = arrayToObject,
 ) => {
   try {
     const result = await getItem(key);
@@ -155,7 +155,7 @@ export const removeCookie = async (site: string) => {
 const saveChucked = async (
   key: string,
   objects: any[],
-  saveToStorage = true
+  saveToStorage = true,
 ) => {
   // splice into chunks
   const chuckedObject = chunkArray(objects, MAX_SONGLIST_SIZE);
@@ -171,7 +171,7 @@ const saveChucked = async (
 
 const loadChucked = async (keys: string[]) => {
   const loadedArrays = (await Promise.all(
-    keys.map(async (val: string) => await getItem(val))
+    keys.map(async (val: string) => await getItem(val)),
   )) as any[][];
   return loadedArrays.flat();
 };
@@ -180,7 +180,7 @@ const loadChucked = async (keys: string[]) => {
  */
 export const savePlaylist = async (
   playlist: NoxMedia.Playlist,
-  overrideKey: string | null = null
+  overrideKey: string | null = null,
 ) => {
   try {
     const savingPlaylist = {
@@ -229,7 +229,7 @@ export const getPlayerSkins = async () =>
   await loadChucked(await getItem(StorageKeys.SKINSTORAGE, []));
 
 export const saveLyricMapping = async (
-  lyricMapping: Map<string, NoxMedia.LyricDetail>
+  lyricMapping: Map<string, NoxMedia.LyricDetail>,
 ) => saveChucked(StorageKeys.LYRIC_MAPPING, Array.from(lyricMapping.entries()));
 
 export const getLyricMapping = () =>
@@ -256,7 +256,7 @@ export const getPlayerSkin = () => getItem(StorageKeys.SKIN);
 
 export const addPlaylist = (
   playlist: NoxMedia.Playlist,
-  playlistIds: string[]
+  playlistIds: string[],
 ) => {
   playlistIds.push(playlist.id);
   savePlaylist(playlist);
@@ -267,8 +267,8 @@ export const addPlaylist = (
 const _delPlaylist = async (playlistId: string) => {
   removeItem(playlistId);
   (await AsyncStorage.getAllKeys())
-    .filter(k => k.startsWith(`${playlistId}.`))
-    .forEach(k => removeItem(k));
+    .filter((k) => k.startsWith(`${playlistId}.`))
+    .forEach((k) => removeItem(k));
 };
 
 export const delPlaylist = (playlistId: string, playlistIds: string[]) => {
@@ -292,7 +292,7 @@ export const saveLastPlayDuration = (val: number) =>
   saveItem(StorageKeys.LAST_PLAY_DURATION, val);
 
 export const initPlayerObject = async (
-  safeMode = false
+  safeMode = false,
 ): Promise<NoxStorage.PlayerStorageObject> => {
   const lyricMapping = (await getLyricMapping()) || {};
   const playerObject = {
@@ -303,20 +303,20 @@ export const initPlayerObject = async (
     playlistIds: (await getItem(StorageKeys.MY_FAV_LIST_KEY)) || [],
     playlists: {},
     lastPlaylistId: (await getItem(StorageKeys.LAST_PLAY_LIST)) || [
-      'NULL',
-      'NULL',
+      "NULL",
+      "NULL",
     ],
     searchPlaylist: dummyPlaylist(
-      i18n.t('PlaylistOperations.searchListName'),
-      PlaylistTypes.Search
+      i18n.t("PlaylistOperations.searchListName"),
+      PlaylistTypes.Search,
     ),
     favoriPlaylist: await getPlaylist({
       key: StorageKeys.FAVORITE_PLAYLIST_KEY,
-      defaultPlaylist: () => dummyPlaylist('Favorite', PlaylistTypes.Favorite),
+      defaultPlaylist: () => dummyPlaylist("Favorite", PlaylistTypes.Favorite),
     }),
     playbackMode: await getItem(
       StorageKeys.PLAYMODE_KEY,
-      NoxRepeatMode.Shuffle
+      NoxRepeatMode.Shuffle,
     ),
     skin: await getItem(StorageKeys.SKIN, AdaptiveTheme),
     skins: (await getPlayerSkins()) || [],
@@ -329,7 +329,7 @@ export const initPlayerObject = async (
 
   if (safeMode) {
     playerObject.settings = { ...DefaultSetting };
-    playerObject.lastPlaylistId = ['NULL', 'NULL'];
+    playerObject.lastPlaylistId = ["NULL", "NULL"];
     playerObject.playbackMode = NoxRepeatMode.Shuffle;
     playerObject.lastPlayDuration = 0;
     playerObject.defaultSearchOptions = undefined;
@@ -341,13 +341,13 @@ export const initPlayerObject = async (
     playerObject.favoriPlaylist;
 
   await Promise.all(
-    playerObject.playlistIds.map(async id => {
+    playerObject.playlistIds.map(async (id) => {
       const retrievedPlaylist = await getPlaylist({
         key: id,
         hydrateSongList: !playerObject.settings.memoryEfficiency,
       });
       if (retrievedPlaylist) playerObject.playlists[id] = retrievedPlaylist;
-    })
+    }),
   );
 
   return playerObject;
@@ -388,8 +388,8 @@ export const clearPlaylistNImport = async (parsedContent: any) => {
   await clearPlaylists();
   await saveImportedPlaylist(
     parsedContent[StorageKeys.MY_FAV_LIST_KEY].map(
-      (val: string) => parsedContent[val]
-    )
+      (val: string) => parsedContent[val],
+    ),
   );
   await savePlaylistIds(parsedContent[StorageKeys.MY_FAV_LIST_KEY]);
 };
@@ -398,24 +398,24 @@ export const addImportedPlaylist = async (playlists: any[]) => {
   await saveImportedPlaylist(playlists);
   await savePlaylistIds(
     (await getItem(StorageKeys.MY_FAV_LIST_KEY)).concat(
-      playlists.map(val => val.info.id)
-    )
+      playlists.map((val) => val.info.id),
+    ),
   );
 };
 
 const parseImportedPartial = (
   key: string,
-  parsedContent: [string, string][]
+  parsedContent: [string, string][],
 ) => {
   return JSON.parse(
-    parsedContent.filter((val: [string, string]) => val[0] === key)[0][1]
+    parsedContent.filter((val: [string, string]) => val[0] === key)[0][1],
   );
 };
 
 export const importPlayerContentRaw = async (parsedContent: any) => {
   const importedAppID = parseImportedPartial(
     StorageKeys.PLAYER_SETTING_KEY,
-    parsedContent
+    parsedContent,
   ).appID;
   if (importedAppID !== AppID) {
     throw new Error(`${importedAppID} is not valid appID`);

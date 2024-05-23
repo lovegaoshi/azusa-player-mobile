@@ -18,9 +18,9 @@ export interface SettingEntry {
 
 export const dummySelectSettingEntry: SelectSettingEntry<string> = {
   options: [],
-  renderOption: () => '',
+  renderOption: () => "",
   defaultIndex: 0,
   onClose: () => undefined,
   onSubmit: () => undefined,
-  title: 'Some Select',
+  title: "Some Select",
 };

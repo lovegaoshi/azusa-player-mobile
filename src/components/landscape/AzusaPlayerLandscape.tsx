@@ -1,25 +1,25 @@
-import React from 'react';
-import { Dimensions, View } from 'react-native';
+import React from "react";
+import { Dimensions, View } from "react-native";
 import {
   NavigationContainer,
   DarkTheme as NavigationDarkTheme,
   DefaultTheme as NavigationDefaultTheme,
-} from '@react-navigation/native';
+} from "@react-navigation/native";
 import {
   MD3DarkTheme,
   MD3LightTheme,
   adaptNavigationTheme,
   Provider as PaperProvider,
-} from 'react-native-paper';
-import merge from 'deepmerge';
+} from "react-native-paper";
+import merge from "deepmerge";
 
-import { useNoxSetting } from '@stores/useApp';
-import '../../localization/i18n';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import LandscapePlayerPanel from './LandscapePlayerPanel';
-import LandscapeActions from './LandscapeActions';
-import LandscapePlaylistPanel from './LandscapePlaylistPanel';
-import SnackBar from '../commonui/Snackbar';
+import { useNoxSetting } from "@stores/useApp";
+import "../../localization/i18n";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
+import LandscapePlayerPanel from "./LandscapePlayerPanel";
+import LandscapeActions from "./LandscapeActions";
+import LandscapePlaylistPanel from "./LandscapePlaylistPanel";
+import SnackBar from "../commonui/Snackbar";
 
 const { LightTheme, DarkTheme } = adaptNavigationTheme({
   reactNavigationLight: NavigationDefaultTheme,
@@ -30,12 +30,12 @@ const CombinedDefaultTheme = merge(MD3LightTheme, LightTheme);
 const CombinedDarkTheme = merge(MD3DarkTheme, DarkTheme);
 
 const AzusaPlayer = () => {
-  const playerStyle = useNoxSetting(state => state.playerStyle);
+  const playerStyle = useNoxSetting((state) => state.playerStyle);
   const defaultTheme = playerStyle.metaData.darkTheme
     ? CombinedDarkTheme
     : CombinedDefaultTheme;
   const insets = useSafeAreaInsets();
-  const { width, height } = Dimensions.get('window');
+  const { width, height } = Dimensions.get("window");
   const actionPanelWidth = Math.min(120, height / 5);
   const playerPanelWidth = width / 2 - actionPanelWidth;
 
@@ -65,7 +65,7 @@ const AzusaPlayer = () => {
             paddingTop: insets.top,
             paddingLeft: insets.left,
             paddingRight: insets.right,
-            flexDirection: 'row',
+            flexDirection: "row",
           }}
         >
           <LandscapeActions panelWidth={actionPanelWidth} />

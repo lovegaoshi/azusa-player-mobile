@@ -1,15 +1,15 @@
-import * as React from 'react';
+import * as React from "react";
 import {
   Checkbox,
   IconButton,
   Text,
   TouchableRipple,
-} from 'react-native-paper';
-import { View, GestureResponderEvent, StyleSheet } from 'react-native';
-import { useNoxSetting } from '@stores/useApp';
-import { seconds2MMSS } from '@utils/Utils';
-import { PlaylistTypes } from '@enums/Playlist';
-import NoxCache from '@utils/Cache';
+} from "react-native-paper";
+import { View, GestureResponderEvent, StyleSheet } from "react-native";
+import { useNoxSetting } from "@stores/useApp";
+import { seconds2MMSS } from "@utils/Utils";
+import { PlaylistTypes } from "@enums/Playlist";
+import NoxCache from "@utils/Cache";
 
 interface UsePlaylist {
   playSong: (song: NoxMedia.Song) => void;
@@ -30,7 +30,7 @@ interface Props {
 const isItemSolid = (
   item: NoxMedia.Song,
   networkCellular = false,
-  dataSaver = false
+  dataSaver = false,
 ) => {
   if (item.liveStatus === false) return false;
   if (!networkCellular) return true;
@@ -50,13 +50,13 @@ const SongInfo = ({
   networkCellular = false,
 }: Props) => {
   const { playSong, checking, selected } = usePlaylist;
-  const currentPlaylist = useNoxSetting(state => state.currentPlaylist);
-  const playerSetting = useNoxSetting(state => state.playerSetting);
-  const playerStyle = useNoxSetting(state => state.playerStyle);
-  const setSongMenuCoords = useNoxSetting(state => state.setSongMenuCoords);
-  const setSongMenuVisible = useNoxSetting(state => state.setSongMenuVisible);
+  const currentPlaylist = useNoxSetting((state) => state.currentPlaylist);
+  const playerSetting = useNoxSetting((state) => state.playerSetting);
+  const playerStyle = useNoxSetting((state) => state.playerStyle);
+  const setSongMenuCoords = useNoxSetting((state) => state.setSongMenuCoords);
+  const setSongMenuVisible = useNoxSetting((state) => state.setSongMenuVisible);
   const setSongMenuSongIndexes = useNoxSetting(
-    state => state.setSongMenuSongIndexes
+    (state) => state.setSongMenuSongIndexes,
   );
 
   const title =
@@ -67,13 +67,13 @@ const SongInfo = ({
   let artist = item.singer;
   artist =
     item.album && item.parsedName !== item.album
-      ? artist + ' - ' + item.album
+      ? artist + " - " + item.album
       : artist;
 
   const [, setChecked] = React.useState(false);
 
   const toggleCheck = () => {
-    setChecked(val => !val);
+    setChecked((val) => !val);
     onChecked();
   };
 
@@ -81,7 +81,7 @@ const SongInfo = ({
     // HACK: :index is no longer reliable because currentRow may filter view.
     // either make filtered view a global state, or do this every time.
     // which I dont think its terribly bad?
-    return currentPlaylist.songList.findIndex(song => song.id === id);
+    return currentPlaylist.songList.findIndex((song) => song.id === id);
   };
   const checked = selected[getSongIndex()];
 
@@ -92,7 +92,7 @@ const SongInfo = ({
         {
           backgroundColor: currentPlaying
             ? playerStyle.customColors.playlistDrawerBackgroundColorTransparent
-            : 'transparent',
+            : "transparent",
           opacity: isItemSolid(item, networkCellular, playerSetting.dataSaver)
             ? undefined
             : 0.5,
@@ -109,14 +109,14 @@ const SongInfo = ({
               {checking && (
                 <View style={styles.checkBox}>
                   <Checkbox
-                    status={checked ? 'checked' : 'unchecked'}
+                    status={checked ? "checked" : "unchecked"}
                     onPress={toggleCheck}
                   />
                 </View>
               )}
               <View style={styles.songTitle}>
                 <Text variant="bodyLarge" numberOfLines={3}>{`${String(
-                  index + 1
+                  index + 1,
                   // ${' (' + item.source + ')' || ''}
                 )}. ${title}`}</Text>
                 <Text
@@ -160,7 +160,7 @@ const styles = StyleSheet.create({
     paddingLeft: 10,
   },
   row: {
-    flexDirection: 'row',
+    flexDirection: "row",
   },
   time: {
     top: 13,

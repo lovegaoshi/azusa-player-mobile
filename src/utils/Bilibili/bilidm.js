@@ -1,4 +1,4 @@
-import { encode as btoa } from 'js-base64';
+import { encode as btoa } from "js-base64";
 
 const { floor, random } = Math;
 
@@ -17,7 +17,7 @@ function f514(a, b) {
   return [3 * a + 2 * b + t, 4 * a - 4 * b + 2 * t, t];
 }
 
-const eventTypes = ['mousemove', 'click'];
+const eventTypes = ["mousemove", "click"];
 
 /**
  * @param {Iterable<MouseEvent>} events 最近 50 次 `mousemove` 和 `click` 事件。
@@ -35,40 +35,40 @@ export function getDmImgList(events) {
         k: floor(random() * 67) + 60,
         type: eventTypes.indexOf(event.type),
       };
-    })
+    }),
   );
 }
 
 const tagNames = [
-  'span',
-  'div',
-  'p',
-  'a',
-  'img',
-  'input',
-  'button',
-  'ul',
-  'ol',
-  'li',
-  'h1',
-  'h2',
-  'h3',
-  'h4',
-  'h5',
-  'h6',
-  'form',
-  'textarea',
-  'select',
-  'option',
-  'table',
-  'tr',
-  'td',
-  'th',
-  'label',
-  'strong',
-  'em',
-  'section',
-  'article',
+  "span",
+  "div",
+  "p",
+  "a",
+  "img",
+  "input",
+  "button",
+  "ul",
+  "ol",
+  "li",
+  "h1",
+  "h2",
+  "h3",
+  "h4",
+  "h5",
+  "h6",
+  "form",
+  "textarea",
+  "select",
+  "option",
+  "table",
+  "tr",
+  "td",
+  "th",
+  "label",
+  "strong",
+  "em",
+  "section",
+  "article",
 ];
 
 /**
@@ -83,7 +83,7 @@ const tagNames = [
  */
 export function getDmImgInter(windowBounds, elements) {
   return JSON.stringify({
-    ds: Array.from(elements, element => {
+    ds: Array.from(elements, (element) => {
       const bounds = element.getBoundingClientRect();
       const [x1, y1, z1] = f114(bounds.y | 0, bounds.x | 0);
       const [x2, y2, z2] = f514(bounds.width | 0, bounds.height | 0);
@@ -101,7 +101,7 @@ export function getDmImgInter(windowBounds, elements) {
 
 function randomSample(population, sampleSize) {
   if (sampleSize > population.length) {
-    throw new Error('Sample size exceeds population size');
+    throw new Error("Sample size exceeds population size");
   }
 
   const shuffled = population.slice(0);
@@ -119,15 +119,15 @@ function randomSample(population, sampleSize) {
 }
 
 export const getDm = () => {
-  const dm_rand = 'ABCDEFGHIJK'.split('');
-  const dm_img_list = '[]';
-  const dm_img_str = randomSample(dm_rand, 2).join('');
-  const dm_cover_img_str = randomSample(dm_rand, 2).join('');
+  const dm_rand = "ABCDEFGHIJK".split("");
+  const dm_img_list = "[]";
+  const dm_img_str = randomSample(dm_rand, 2).join("");
+  const dm_cover_img_str = randomSample(dm_rand, 2).join("");
   const dm_img_inter = '{"ds":[],"wh":[0,0,0],"of":[0,0,0]}';
   return Object.entries({
     dm_img_list,
     dm_img_str,
     dm_cover_img_str,
     dm_img_inter,
-  }).reduce((arr, curr) => `${arr}&${curr[0]}=${curr[1]}`, '');
+  }).reduce((arr, curr) => `${arr}&${curr[0]}=${curr[1]}`, "");
 };

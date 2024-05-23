@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import bfetch from '@utils/BiliFetch';
-import { logger } from './Logger';
+import bfetch from "@utils/BiliFetch";
+import { logger } from "./Logger";
 
 export interface LoginInfo {
   name: string;
@@ -11,12 +11,12 @@ export interface LoginInfo {
 export const getLoginStatus = async (
   loginAPI: string,
   loginSuccess: (json: any) => boolean,
-  parseJSON: (json: any) => LoginInfo
+  parseJSON: (json: any) => LoginInfo,
 ) => {
   try {
     const response = await bfetch(loginAPI, {
-      method: 'GET',
-      credentials: 'include',
+      method: "GET",
+      credentials: "include",
       headers: {},
     });
     const json = await response.json();

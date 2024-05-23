@@ -1,19 +1,19 @@
-import React, { useState } from 'react';
-import { Menu, Checkbox, Text } from 'react-native-paper';
-import { useTranslation } from 'react-i18next';
-import { View, StyleSheet } from 'react-native';
+import React, { useState } from "react";
+import { Menu, Checkbox, Text } from "react-native-paper";
+import { useTranslation } from "react-i18next";
+import { View, StyleSheet } from "react-native";
 
-import Dialog from '@components/dialogs/GenericSelectDialog';
-import { SortOptions } from '@enums/Playlist';
+import Dialog from "@components/dialogs/GenericSelectDialog";
+import { SortOptions } from "@enums/Playlist";
 
-const ICON = 'sort';
+const ICON = "sort";
 
 interface Props {
   onCancel?: () => void;
   sortPlaylist: (
     sortOptions: SortOptions,
     ascending: boolean,
-    playlist: NoxMedia.Playlist
+    playlist: NoxMedia.Playlist,
   ) => void;
   playlist: NoxMedia.Playlist;
 }
@@ -46,24 +46,24 @@ export default ({
         onPress={() => {
           setDialogOpen(true);
         }}
-        title={t('PlaylistOperations.sortDiagTitle')}
+        title={t("PlaylistOperations.sortDiagTitle")}
       />
       <Dialog
-        options={sortOptions.map(val => val[0])}
+        options={sortOptions.map((val) => val[0])}
         visible={dialogOpen}
         onClose={handleClose}
         onSubmit={handleSubmit}
-        title={t('PlaylistOperations.sortDialogTitle', { playlist })}
-        renderOptionTitle={val => t(`PlaylistOperations.sort${val}`)}
-        defaultIndex={sortOptions.findIndex(val => val[1] === playlist.sort)}
+        title={t("PlaylistOperations.sortDialogTitle", { playlist })}
+        renderOptionTitle={(val) => t(`PlaylistOperations.sort${val}`)}
+        defaultIndex={sortOptions.findIndex((val) => val[1] === playlist.sort)}
       >
         <View style={style.rowAlignedView}>
           <Checkbox
-            status={ascending ? 'checked' : 'unchecked'}
-            onPress={() => setAscending(v => !v)}
+            status={ascending ? "checked" : "unchecked"}
+            onPress={() => setAscending((v) => !v)}
           />
           <Text variant="titleLarge" style={style.checkboxText}>
-            {t('PlaylistOperations.ascending')}
+            {t("PlaylistOperations.ascending")}
           </Text>
         </View>
       </Dialog>
@@ -73,7 +73,7 @@ export default ({
 
 const style = StyleSheet.create({
   rowAlignedView: {
-    flexDirection: 'row',
+    flexDirection: "row",
   },
   checkboxText: {
     paddingTop: 3,

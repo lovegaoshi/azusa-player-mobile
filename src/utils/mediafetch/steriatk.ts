@@ -8,16 +8,16 @@
  * steps to refactor:
  * each site needs a fetch to parse regex extracted, a videoinfo fetcher and a song fetcher.
  */
-import { Source } from '@enums/MediaFetch';
-import { regexFetchProps } from './generic';
-import { fetchAwaitPaginatedAPI } from './paginatedfetch';
-import SongTS from '@objects/Song';
+import { Source } from "@enums/MediaFetch";
+import { regexFetchProps } from "./generic";
+import { fetchAwaitPaginatedAPI } from "./paginatedfetch";
+import SongTS from "@objects/Song";
 
 const pagesize = 500;
 
 const VIDEOINFO_API = `https://steria.vplayer.tk/api/musics/{pn}?size=${pagesize}`;
 // https://steria.vplayer.tk/api/musics/1
-const CIDPREFIX = 'steriatk-';
+const CIDPREFIX = "steriatk-";
 
 const paginatedFetch = ({
   progressEmitter,
@@ -25,31 +25,31 @@ const paginatedFetch = ({
 }: Partial<regexFetchProps>) => {
   return fetchAwaitPaginatedAPI({
     url: VIDEOINFO_API,
-    getMediaCount: json => json.total,
+    getMediaCount: (json) => json.total,
     getPageSize: () => pagesize,
-    getItems: json => json.data,
-    resolveBiliBVID: async BVobjs =>
-      BVobjs.map(videoinfo =>
+    getItems: (json) => json.data,
+    resolveBiliBVID: async (BVobjs) =>
+      BVobjs.map((videoinfo) =>
         SongTS({
           cid: `${CIDPREFIX}${videoinfo.url}`,
           bvid: `${CIDPREFIX}${videoinfo.id}`,
           name: videoinfo.name,
           nameRaw: videoinfo.name,
           singer: videoinfo.artist,
-          singerId: 'steria.vplayer.tk',
+          singerId: "steria.vplayer.tk",
           cover:
-            'https://i2.hdslb.com/bfs/face/b70f6e62e4582d4fa5d48d86047e64eb57d7504e.jpg',
-          lyric: '',
+            "https://i2.hdslb.com/bfs/face/b70f6e62e4582d4fa5d48d86047e64eb57d7504e.jpg",
+          lyric: "",
           page: 0,
           duration: 0,
           album: videoinfo.name,
           source: Source.steriatk,
-        })
+        }),
       ),
     progressEmitter,
     favList,
-    getBVID: item => `${CIDPREFIX}${item.id}`,
-    getJSONData: val => val,
+    getBVID: (item) => `${CIDPREFIX}${item.id}`,
+    getJSONData: (val) => val,
   });
 };
 

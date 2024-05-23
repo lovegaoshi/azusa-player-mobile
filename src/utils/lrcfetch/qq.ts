@@ -1,39 +1,39 @@
-import he from 'he';
-import i18n from 'i18next';
+import he from "he";
+import i18n from "i18next";
 
-import bfetch from '@utils/BiliFetch';
-import { logger } from '../Logger';
-import { LrcSource } from '@enums/LyricFetch';
+import bfetch from "@utils/BiliFetch";
+import { logger } from "../Logger";
+import { LrcSource } from "@enums/LyricFetch";
 
 /**
  *  QQ LyricSearchAPI
  */
 
 const URL_QQ_LYRIC =
-  'https://i.y.qq.com/lyric/fcgi-bin/fcg_query_lyric_new.fcg?songmid={SongMid}&g_tk=5381&format=json&inCharset=utf8&outCharset=utf-8&nobase64=1';
+  "https://i.y.qq.com/lyric/fcgi-bin/fcg_query_lyric_new.fcg?songmid={SongMid}&g_tk=5381&format=json&inCharset=utf8&outCharset=utf-8&nobase64=1";
 
 const URL_QQ_SEARCH_POST = () => ({
-  src: 'https://u.y.qq.com/cgi-bin/musicu.fcg',
+  src: "https://u.y.qq.com/cgi-bin/musicu.fcg",
   params: {
-    method: 'POST',
+    method: "POST",
     headers: {
-      'Content-Type': 'application/json',
+      "Content-Type": "application/json",
     },
-    referrer: 'https://u.qq.com/',
+    referrer: "https://u.qq.com/",
     body: {
       comm: {
-        ct: '19',
-        cv: '1859',
-        uin: '0',
+        ct: "19",
+        cv: "1859",
+        uin: "0",
       },
       req: {
-        method: 'DoSearchForQQMusicDesktop',
-        module: 'music.search.SearchCgiService',
+        method: "DoSearchForQQMusicDesktop",
+        module: "music.search.SearchCgiService",
         param: {
           grp: 1,
           num_per_page: 10,
           page_num: 1,
-          query: '',
+          query: "",
           search_type: 0,
         },
       },
@@ -42,10 +42,10 @@ const URL_QQ_SEARCH_POST = () => ({
 });
 
 export const searchLyricOptions = async (
-  searchKey: string
+  searchKey: string,
 ): Promise<NoxNetwork.NoxFetchedLyric[]> => {
   if (!searchKey) {
-    throw new Error('Search key is required');
+    throw new Error("Search key is required");
   }
   logger.debug(`[qqlyric] calling searchLyricOptions: ${searchKey}`);
   const API = getQQSearchAPI(searchKey);
@@ -72,10 +72,10 @@ const getQQSearchAPI = (searchKey: string) => {
 
 export const searchLyric = async (searchMID: string) => {
   logger.debug(`[qqlyric] calling searchLyric: ${searchMID}`);
-  const res = await bfetch(URL_QQ_LYRIC.replace('{SongMid}', searchMID));
+  const res = await bfetch(URL_QQ_LYRIC.replace("{SongMid}", searchMID));
   const json = await res.json();
   if (!json.lyric) {
-    return i18n.t('Lyric.notFound');
+    return i18n.t("Lyric.notFound");
   }
 
   let finalLrc = json.lyric as string;

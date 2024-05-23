@@ -1,9 +1,9 @@
 export const dummyLyricDetail = (): NoxMedia.LyricDetail => {
   return {
-    songId: '',
-    lyricKey: '',
+    songId: "",
+    lyricKey: "",
     lyricOffset: 0,
-    lyric: '',
+    lyric: "",
   };
 };
 

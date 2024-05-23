@@ -1,21 +1,21 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import { logger } from '../Logger';
-import { regexFetchProps } from './generic';
-import bfetch from '@utils/BiliFetch';
-import { Source, BiliMusicTid } from '@enums/MediaFetch';
-import SongTS from '@objects/Song';
-import { fetchBVID } from './bilivideo';
+import { logger } from "../Logger";
+import { regexFetchProps } from "./generic";
+import bfetch from "@utils/BiliFetch";
+import { Source, BiliMusicTid } from "@enums/MediaFetch";
+import SongTS from "@objects/Song";
+import { fetchBVID } from "./bilivideo";
 
 /**
  * https://api.bilibili.com/x/web-interface/archive/related?bvid=BV1xx411c7m9
  */
 const API =
-  'https://api.bilibili.com/x/web-interface/archive/related?bvid={sid}';
+  "https://api.bilibili.com/x/web-interface/archive/related?bvid={sid}";
 
 const fetchBiliVideoSimilarList = async (bvid: string) => {
-  logger.info('calling fetchBiliVideoSimilarList');
-  const res = await bfetch(API.replace('{sid}', bvid));
+  logger.info("calling fetchBiliVideoSimilarList");
+  const res = await bfetch(API.replace("{sid}", bvid));
   const json = await res.json();
   return (await fetchBVID(bvid)).concat(
     json.data
@@ -30,13 +30,13 @@ const fetchBiliVideoSimilarList = async (bvid: string) => {
           singer: data.owner.name,
           singerId: data.owner.mid,
           cover: data.pic,
-          lyric: '',
+          lyric: "",
           page: 1,
           duration: data.duration,
           album: data.title,
           source: Source.bilivideo,
-        })
-      )
+        }),
+      ),
   );
 };
 

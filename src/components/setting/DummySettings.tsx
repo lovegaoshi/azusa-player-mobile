@@ -1,11 +1,11 @@
-import { View, StyleSheet } from 'react-native';
-import { Text } from 'react-native-paper';
-import { useTranslation } from 'react-i18next';
+import { View, StyleSheet } from "react-native";
+import { Text } from "react-native-paper";
+import { useTranslation } from "react-i18next";
 
-import { useNoxSetting } from '@stores/useApp';
+import { useNoxSetting } from "@stores/useApp";
 const DummySettings = () => {
   const { t } = useTranslation();
-  const playerStyle = useNoxSetting(state => state.playerStyle);
+  const playerStyle = useNoxSetting((state) => state.playerStyle);
 
   return (
     <View
@@ -20,7 +20,7 @@ const DummySettings = () => {
           { color: playerStyle.colors.primary },
         ]}
       >
-        {t('Settings.FeatureNotImplemented')}
+        {t("Settings.FeatureNotImplemented")}
       </Text>
     </View>
   );

@@ -1,19 +1,19 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { useState } from 'react';
-import { useTranslation } from 'react-i18next';
-import { Alert } from 'react-native';
-import { strFromU8, decompressSync } from 'fflate';
+import { useState } from "react";
+import { useTranslation } from "react-i18next";
+import { Alert } from "react-native";
+import { strFromU8, decompressSync } from "fflate";
 
-import { logger } from '@utils/Logger';
+import { logger } from "@utils/Logger";
 import {
   importPlayerContentRaw,
   initPlayerObject,
   clearPlaylistNImport,
   addImportedPlaylist,
-} from '@utils/ChromeStorage';
-import useInitializeStore from '@stores/initializeStores';
-import { StorageKeys } from '@enums/Storage';
-import useSnack from '@stores/useSnack';
+} from "@utils/ChromeStorage";
+import useInitializeStore from "@stores/initializeStores";
+import { StorageKeys } from "@enums/Storage";
+import useSnack from "@stores/useSnack";
 
 /**
  * this hook will handle all sync back from file operations. it will
@@ -23,7 +23,7 @@ import useSnack from '@stores/useSnack';
  */
 const useSync = () => {
   const { t } = useTranslation();
-  const setSnack = useSnack(state => state.setSnack);
+  const setSnack = useSnack((state) => state.setSnack);
   const { initializeStores } = useInitializeStore();
   const [syncCheckVisible, setSyncCheckVisible] = useState(false);
   const [noxExtensionContent, setNoxExtensionContent] = useState<string[]>([]);
@@ -32,18 +32,18 @@ const useSync = () => {
   const syncNoxExtension = async (parsedContent: any) => {
     return new Promise((resolve, reject) => {
       Alert.alert(
-        t('Sync.NoxExtensionImportTitle'),
-        String(t('Sync.NoxExtensionImportMsg')),
+        t("Sync.NoxExtensionImportTitle"),
+        String(t("Sync.NoxExtensionImportMsg")),
         [
           {
-            text: String(t('Sync.NoxExtensionCancel')),
+            text: String(t("Sync.NoxExtensionCancel")),
             onPress: () => {
-              reject('user said no');
+              reject("user said no");
             },
-            style: 'cancel',
+            style: "cancel",
           },
           {
-            text: String(t('Sync.NoxExtensionOverwrite')),
+            text: String(t("Sync.NoxExtensionOverwrite")),
             onPress: async () => {
               await clearPlaylistNImport(parsedContent);
               await initializeStores(await initPlayerObject());
@@ -51,20 +51,20 @@ const useSync = () => {
             },
           },
           {
-            text: String(t('Sync.NoxExtensionAppend')),
+            text: String(t("Sync.NoxExtensionAppend")),
             onPress: async () => {
               setSyncCheckVisible(true);
               setNoxExtensionContent(
                 parsedContent[StorageKeys.MY_FAV_LIST_KEY].map(
                   (val: any) =>
-                    parsedContent[val].title || parsedContent[val].info.title
-                )
+                    parsedContent[val].title || parsedContent[val].info.title,
+                ),
               );
               setCachedParsedContent(parsedContent);
               resolve(true);
             },
           },
-        ]
+        ],
       );
     });
   };
@@ -74,13 +74,13 @@ const useSync = () => {
       .map((val, index) =>
         val
           ? cachedParsedContent[cachedParsedContent.MyFavList[index]]
-          : undefined
+          : undefined,
       )
-      .filter(val => val);
+      .filter((val) => val);
     await addImportedPlaylist(checkedPlaylists);
     await initializeStores(await initPlayerObject());
     setSyncCheckVisible(false);
-    setSnack({ snackMsg: { success: t('Sync.DropboxDownloadSuccess') } });
+    setSnack({ snackMsg: { success: t("Sync.DropboxDownloadSuccess") } });
   };
 
   const isSyncNoxExtension = (parsedContent: any) => {
@@ -92,8 +92,8 @@ const useSync = () => {
     try {
       parsedContent = JSON.parse(strFromU8(decompressSync(content)));
     } catch (error) {
-      logger.error('parsed content is not a valid compressed JSON.');
-      setSnack({ snackMsg: { success: t('Sync.fileNotValidJson') } });
+      logger.error("parsed content is not a valid compressed JSON.");
+      setSnack({ snackMsg: { success: t("Sync.fileNotValidJson") } });
       return;
     }
     try {
@@ -106,7 +106,7 @@ const useSync = () => {
       }
     } catch (error) {
       logger.error(error);
-      setSnack({ snackMsg: { success: t('Sync.DropboxDownloadFail') } });
+      setSnack({ snackMsg: { success: t("Sync.DropboxDownloadFail") } });
     }
   };
 

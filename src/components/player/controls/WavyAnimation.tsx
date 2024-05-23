@@ -1,18 +1,18 @@
-import { Dimensions, StyleSheet, View } from 'react-native';
+import { Dimensions, StyleSheet, View } from "react-native";
 import {
   Canvas,
   Path,
   useClock,
   LinearGradient,
   vec,
-} from '@shopify/react-native-skia';
+} from "@shopify/react-native-skia";
 import {
   useDerivedValue as useComputedValue,
   useSharedValue,
-} from 'react-native-reanimated';
-import { colord } from 'colord';
+} from "react-native-reanimated";
+import { colord } from "colord";
 
-const dimension = Dimensions.get('window');
+const dimension = Dimensions.get("window");
 const width = dimension.width;
 const height = 30;
 const initialVerticalOffset = 10;
@@ -38,9 +38,9 @@ const _calculateWavePoints = ({
   speed = 0.15,
   amplitude = 20,
 }: CalculateWavePoints) => {
-  'worklet';
+  "worklet";
   return [...Array(Math.max(points, 1) + 1)].map((v, i) => {
-    'worklet';
+    "worklet";
     const scale = 100;
     const x = (i / points) * w;
     const seed = (step + (i + (i % points))) * speed * scale;
@@ -51,12 +51,12 @@ const _calculateWavePoints = ({
 };
 
 const cubic = (a: Point, b: Point) => {
-  'worklet';
+  "worklet";
   return ` C ${a.x} ${a.y} ${a.x} ${a.y} ${b.x} ${b.y}`;
 };
 
 const _buildPath = (points: Point[], w: number, h: number) => {
-  'worklet';
+  "worklet";
   let svg = `M ${points[0].x} ${h}`;
   const initial = {
     x: (points[1].x - points[0].x) / 2,
@@ -65,7 +65,7 @@ const _buildPath = (points: Point[], w: number, h: number) => {
   svg += cubic(initial, points[1]);
   let point = initial;
   [...Array(points.length - 2)].forEach((v, i) => {
-    'worklet';
+    "worklet";
     point = {
       x: points[i + 1].x - point.x + points[i + 1].x,
       y: points[i + 1].y - point.y + points[i + 1].y,
@@ -85,7 +85,7 @@ interface Props {
 export default function WaveAnimation({
   playing = false,
   progress = 0,
-  color = 'white',
+  color = "white",
 }: Props) {
   const verticalOffset = useSharedValue(initialVerticalOffset);
   const extrapolatedWidth = Math.max(width * progress * 0.9 - 3, 0);
@@ -93,7 +93,7 @@ export default function WaveAnimation({
   const clock = useClock();
 
   const animatedPath = useComputedValue(() => {
-    'worklet';
+    "worklet";
     return _buildPath(
       _calculateWavePoints({
         points: 3,
@@ -104,12 +104,12 @@ export default function WaveAnimation({
         amplitude: 5,
       }),
       extrapolatedWidth,
-      height
+      height,
     );
   }, [verticalOffset, progress]);
 
   const animatedPath2 = useComputedValue(() => {
-    'worklet';
+    "worklet";
     return _buildPath(
       _calculateWavePoints({
         points: 3,
@@ -120,17 +120,17 @@ export default function WaveAnimation({
         amplitude: 5,
       }),
       extrapolatedWidth,
-      height
+      height,
     );
   }, [verticalOffset, progress]);
 
   const gradientStart = useComputedValue(() => {
-    'worklet';
+    "worklet";
     return vec(0, 0);
   }, [width]);
 
   const gradientEnd = useComputedValue(() => {
-    'worklet';
+    "worklet";
     return vec(width, 0);
   }, [width]);
 
@@ -141,23 +141,23 @@ export default function WaveAnimation({
       <Canvas style={styles.canvas}>
         <Path
           path={animatedPath2}
-          style={'fill'}
+          style={"fill"}
           color={parsedColor.hue(20).toRgbString()}
         >
           {false && (
             <LinearGradient
               start={gradientStart}
               end={gradientEnd}
-              colors={['cyan', 'blue']}
+              colors={["cyan", "blue"]}
             />
           )}
         </Path>
-        <Path path={animatedPath} style={'fill'} color={color}>
+        <Path path={animatedPath} style={"fill"} color={color}>
           {false && (
             <LinearGradient
               start={gradientStart}
               end={gradientEnd}
-              colors={['cyan', 'blue']}
+              colors={["cyan", "blue"]}
             />
           )}
         </Path>

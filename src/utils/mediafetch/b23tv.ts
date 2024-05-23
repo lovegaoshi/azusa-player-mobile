@@ -1,5 +1,5 @@
-import { regexFetchProps } from './generic';
-import { logger } from '../Logger';
+import { regexFetchProps } from "./generic";
+import { logger } from "../Logger";
 
 const resolveB23TV = async (url: string) => {
   logger.debug(`[b23.tv] fetching ${url}`);
