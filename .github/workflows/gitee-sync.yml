@@ -1,8 +1,8 @@
-name: APM iOS dev Build
+name: APM Gitee Sync
 on:
   workflow_dispatch:
 jobs:
-  checkLastCommit:
+  GiteeSync:
     runs-on: ubuntu-latest
     name: Check latest commit
     outputs:
