@@ -17,7 +17,6 @@ module.exports = api => {
               tests: ['./tests/'],
               '@components': './src/components',
               '@utils': './src/utils',
-              '@styles': './src/styles',
               '@enums': './src/enums',
               '@objects': './src/objects',
               '@services': './src/services',
