@@ -1,0 +1,18 @@
+name: APM iOS dev Build
+on:
+  workflow_dispatch:
+jobs:
+  checkLastCommit:
+    runs-on: ubuntu-latest
+    name: Check latest commit
+    outputs:
+      should_run: ${{ steps.should_run.outputs.should_run }}
+    steps:
+      - name: Mirror the Github organization repos to Gitee.
+        uses: Yikun/hub-mirror-action@master
+        with:
+          src: github/lovegaoshi
+          dst: gitee/lovegaoshi
+          dst_key: ${{ secrets.GITEE_SSH_PRIVATE }}
+          dst_token: ${{ secrets.GITEE_TOKEN }}
+          static_list: 'azusa-player-mobile'
