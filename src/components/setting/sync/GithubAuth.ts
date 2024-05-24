@@ -5,7 +5,6 @@ import { getArrayBufferForBlob } from 'react-native-blob-jsi-helper';
 import { GITHUB_KEY, GITHUB_SECRET } from '@env';
 import { logger } from '@utils/Logger';
 import GenericSyncButton from './GenericSyncButton';
-import { GenericProps } from './GenericSyncProps';
 import { checkAuthentication, noxBackup, noxRestore } from '@utils/sync/Github';
 
 const config = {
@@ -56,7 +55,7 @@ export const login = async (
   }
 };
 
-export default ({ restoreFromUint8Array }: GenericProps) =>
+export default ({ restoreFromUint8Array }: NoxSyncComponent.GenericProps) =>
   GenericSyncButton({
     restoreFromUint8Array,
     noxBackup: v => noxBackup(v, authToken),

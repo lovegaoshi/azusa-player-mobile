@@ -16,7 +16,7 @@ export enum RESOLVE_TYPE {
   empty = 'empty',
 }
 
-const BackgroundVideoWrapper = async (
+const BackgroundVideoWrapper = (
   identifier: string,
   backgroundImage: NoxTheme.backgroundImage
 ) => ({

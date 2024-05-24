@@ -20,12 +20,11 @@ const biliGarbFetch = async ({
   return resolver(json.data);
 };
 
-const biliGarbHeadVideoFetch = async ({ act_id }: Props) => {
-  return biliGarbFetch({
+const biliGarbHeadVideoFetch = ({ act_id }: Props) =>
+  biliGarbFetch({
     act_id,
     resolver: (json: any) =>
       json.suit_items.skin[0].properties.head_myself_mp4_bg,
   });
-};
 
 export { biliGarbHeadVideoFetch };

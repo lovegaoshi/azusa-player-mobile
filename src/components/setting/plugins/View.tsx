@@ -10,11 +10,10 @@ import useSnack from '@stores/useSnack';
 import MusicFreeButton from './MusicFreeButton';
 
 const updateFromGithub = async () => {
-  const json = await (
-    await fetch(
+  const res = await fetch(
       'https://raw.githubusercontent.com/lovegaoshi/azusa-player-mobile/master/src/utils/rejson.json'
-    )
-  ).json();
+    ),
+    json = await res.json();
   saveRegextractMapping(json);
 };
 

@@ -90,9 +90,8 @@ const syncToGitee = async ({
 };
 // https://gitee.com/api/v5/swagger#/getV5ReposOwnerRepoContents(Path)
 
-export const noxBackup = async (content: Uint8Array, token: string) => {
-  return await syncToGitee({ content, token });
-};
+export const noxBackup = (content: Uint8Array, token: string) =>
+  syncToGitee({ content, token });
 
 export const checkAuthentication = async (token = '') => {
   try {

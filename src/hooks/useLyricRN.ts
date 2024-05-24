@@ -71,7 +71,7 @@ export default (currentSong?: NoxMedia.Song, artist = '') => {
       song
     );
 
-  const loadLocalLrc = async (
+  const loadLocalLrc = (
     lyricPromise: Promise<NoxNetwork.NoxFetchedLyric[]>
   ) => {
     const localLrcColle = getLrcFromLocal(currentSong);

@@ -17,7 +17,7 @@ export default ({ callback = () => {} }: Props) => {
   const { removePlaylist } = usePlaylistAA();
   const { OneWayAlert, TwoWayAlert } = useAlert();
 
-  const playlistSync2Bilibili = async (playlist = currentPlaylist) => {
+  const playlistSync2Bilibili = (playlist = currentPlaylist) =>
     setSnack({
       snackMsg: {
         processing: t('PlaylistOperations.bilisyncing', { playlist }),
@@ -25,7 +25,6 @@ export default ({ callback = () => {} }: Props) => {
       },
       processFunction: () => playlistCRUD.playlistSync2Bilibili(playlist),
     });
-  };
 
   const playlistAnalyze = (playlist = currentPlaylist) => {
     const analytics = playlistCRUD.playlistAnalyze(playlist, 5);
@@ -58,7 +57,7 @@ export default ({ callback = () => {} }: Props) => {
     TwoWayAlert(
       t('PlaylistOperations.resetListTitle', { playlist }),
       t('PlaylistOperations.resetListMsg', { playlist }),
-      async () => {
+      () =>
         setSnack({
           snackMsg: {
             processing: t('PlaylistOperations.reloading', { playlist }),
@@ -66,12 +65,11 @@ export default ({ callback = () => {} }: Props) => {
           },
           processFunction: () => playlistCRUD.playlistReload(playlist),
           callback,
-        });
-      }
+        })
     );
   };
 
-  const playlistCleanup = async (playlist = currentPlaylist) => {
+  const playlistCleanup = (playlist = currentPlaylist) =>
     setSnack({
       snackMsg: {
         processing: t('PlaylistOperations.cleaning', { playlist }),
@@ -79,9 +77,8 @@ export default ({ callback = () => {} }: Props) => {
       },
       processFunction: () => playlistCRUD.playlistCleanup(playlist),
     });
-  };
 
-  const playlistBiliShazam = async (playlist = currentPlaylist) => {
+  const playlistBiliShazam = (playlist = currentPlaylist) =>
     setSnack({
       snackMsg: {
         processing: t('PlaylistOperations.bilishazaming', { playlist }),
@@ -89,7 +86,7 @@ export default ({ callback = () => {} }: Props) => {
       },
       processFunction: () => playlistCRUD.playlistBiliShazam(playlist),
     });
-  };
+
   return {
     ...playlistCRUD,
     playlistSync2Bilibili,

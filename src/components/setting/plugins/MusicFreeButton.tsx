@@ -17,11 +17,11 @@ export default () => {
   const showDialog = () => setVisible(true);
   const hideDialog = () => setVisible(false);
 
-  const onClick = async () => {
+  const onClick = () => {
     showDialog();
   };
 
-  const onSubmit = async (indices: boolean[]) => {
+  const onSubmit = (indices: boolean[]) => {
     const selectedMusicFreePlugin = [];
     for (const [i, v] of indices.entries()) {
       if (v) {

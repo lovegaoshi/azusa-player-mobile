@@ -30,9 +30,9 @@ const checkLiked = (song?: NoxMedia.Song) => {
   }
 };
 
-const go2SongURL = async (song: NoxMedia.Song) => {
+const go2SongURL = (song: NoxMedia.Song) => {
   const url = `https://www.bilibili.com/video/${song.bvid}`;
-  await Linking.openURL(url);
+  return Linking.openURL(url);
 };
 
 interface Props {

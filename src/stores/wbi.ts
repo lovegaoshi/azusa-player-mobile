@@ -108,7 +108,7 @@ const wbiRefreshWrapper: any = async (
   return res;
 };
 
-export const wbiQuery = async (
+export const wbiQuery = (
   url: string,
   fetchParams?: RequestInit | undefined
 ) => {

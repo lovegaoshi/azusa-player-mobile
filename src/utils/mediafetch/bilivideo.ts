@@ -55,11 +55,11 @@ const fetchBVIDRaw = async (bvid: string): Promise<NoxMedia.Song[]> => {
   }
 };
 
-export const fetchBVID = async (
+export const fetchBVID = (
   bvid: string,
   progressEmitter: () => void = () => undefined
 ) =>
-  await biliApiLimiter.schedule(() => {
+  biliApiLimiter.schedule(() => {
     progressEmitter();
     return fetchBVIDRaw(bvid);
   });
@@ -111,9 +111,10 @@ interface FetchPlayURL {
   iOS?: boolean;
 }
 
-export const fetchVideoPlayUrl = async (bvid: string) =>
-  (await fetchVideoPlayUrlPromise({ bvid, extractType: FieldEnum.VideoUrl }))
-    .url;
+export const fetchVideoPlayUrl = (bvid: string) =>
+  fetchVideoPlayUrlPromise({ bvid, extractType: FieldEnum.VideoUrl }).then(
+    v => v.url
+  );
 export const fetchVideoPlayUrlPromise = async ({
   bvid,
   cid,

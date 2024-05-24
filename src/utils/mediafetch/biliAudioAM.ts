@@ -61,14 +61,14 @@ import SongTS from '@objects/Song';
 const API =
   'https://www.bilibili.com/audio/music-service-c/web/song/of-menu?sid={sid}&pn={pn}&ps=100';
 
-const fetchBiliAudioColleList = async (
+const fetchBiliAudioColleList = (
   sid: string,
   progressEmitter: (val: number) => void = () => undefined,
   favList: string[] = []
 ) => {
   logger.info('calling fetchBiliAudioAMList');
 
-  return await fetchBiliPaginatedAPI({
+  return fetchBiliPaginatedAPI({
     url: API.replace('{sid}', sid),
     getMediaCount: (data: any) => data.totalSize,
     getPageSize: (data: any) => data.pageSize,

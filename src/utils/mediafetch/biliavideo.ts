@@ -43,11 +43,11 @@ const fetchAVIDRaw = async (aid: string): Promise<NoxMedia.Song[]> => {
   }
 };
 
-export const fetchAVID = async (
+export const fetchAVID = (
   avid: string,
   progressEmitter: () => void = () => undefined
 ) =>
-  await biliApiLimiter.schedule(() => {
+  biliApiLimiter.schedule(() => {
     progressEmitter();
     return fetchAVIDRaw(avid);
   });
@@ -62,10 +62,9 @@ export const fetchBiliAVIDs = async (
     fetchAVID(avid, () => progressEmitter((100 * (index + 1)) / BVidLen))
   );
   const songs = (await Promise.all(BVidPromises)).flat();
-  if (useBiliTag) {
-    return biliShazamOnSonglist(songs, false, progressEmitter);
-  }
-  return songs;
+  return useBiliTag
+    ? biliShazamOnSonglist(songs, false, progressEmitter)
+    : songs;
 };
 
 const regexFetch = async ({

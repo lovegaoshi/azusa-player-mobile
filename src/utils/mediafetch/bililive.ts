@@ -17,9 +17,9 @@ interface BiliLiveRoomInfo {
 //https://github.com/SocialSisterYi/bilibili-API-collect/blob/master/docs/live/info.md
 const getRoomInfo = async (roomID: string) => {
   const res = await bfetch(
-    `https://api.live.bilibili.com/room/v1/Room/get_info?room_id=${roomID}`
-  );
-  const json = await res.json();
+      `https://api.live.bilibili.com/room/v1/Room/get_info?room_id=${roomID}`
+    ),
+    json = await res.json();
   return json.data as BiliLiveRoomInfo;
 };
 
@@ -66,7 +66,7 @@ const fetchVideoInfoRaw = async (aid: string) => {
   }
 };
 
-const fetchVideoInfo = async (aid: string) =>
+const fetchVideoInfo = (aid: string) =>
   biliApiLimiter.schedule(() => fetchVideoInfoRaw(aid));
 
 const regexFetch = async ({

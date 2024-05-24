@@ -17,7 +17,7 @@ import { fetchBiliPaginatedAPI } from './paginatedbili';
 const URL_BILICOLLE_INFO =
   'https://api.bilibili.com/x/polymer/space/seasons_archives_list?mid={mid}&season_id={sid}&sort_reverse=true&page_num={pn}&page_size=100';
 
-const fetchBiliColleList = async (
+const fetchBiliColleList = (
   mid: string,
   sid: string,
   progressEmitter: (val: number) => void = () => undefined,
@@ -25,7 +25,7 @@ const fetchBiliColleList = async (
 ) => {
   logger.info('calling fetchBiliColleList');
 
-  return await fetchBiliPaginatedAPI({
+  return fetchBiliPaginatedAPI({
     url: URL_BILICOLLE_INFO.replace('{mid}', mid).replace('{sid}', sid),
     getMediaCount: (data: any) => data.meta.total,
     getPageSize: (data: any) => data.page.page_size,

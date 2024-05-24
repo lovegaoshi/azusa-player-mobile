@@ -25,4 +25,36 @@ declare global {
     }
     type ViewStyleProp = StyleProp<ViewStyle>;
   }
+  namespace NoxSyncComponent {
+    interface ImportProps {
+      restoreFromUint8Array: (data: Uint8Array) => Promise<void>;
+      noxRestore: () => Promise<any>;
+      login: (
+        callback: () => any,
+        errorHandling: (e: Error) => void
+      ) => Promise<boolean>;
+    }
+
+    interface ExportProps {
+      noxBackup: (content: Uint8Array) => Promise<any>;
+      login: (
+        callback: () => any,
+        errorHandling: (e: Error) => void
+      ) => Promise<boolean>;
+    }
+
+    interface Props {
+      restoreFromUint8Array: (data: Uint8Array) => Promise<void>;
+      noxRestore: () => Promise<any>;
+      noxBackup: (content: Uint8Array) => Promise<any>;
+      login: (
+        callback: () => any,
+        errorHandling: (e: Error) => void
+      ) => Promise<boolean>;
+    }
+
+    interface GenericProps {
+      restoreFromUint8Array: (data: Uint8Array) => Promise<void>;
+    }
+  }
 }

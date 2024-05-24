@@ -29,8 +29,8 @@ const useSync = () => {
   const [noxExtensionContent, setNoxExtensionContent] = useState<string[]>([]);
   const [cachedParsedContent, setCachedParsedContent] = useState<any>(null);
 
-  const syncNoxExtension = async (parsedContent: any) => {
-    return new Promise((resolve, reject) => {
+  const syncNoxExtension = (parsedContent: any) =>
+    new Promise((resolve, reject) => {
       Alert.alert(
         t('Sync.NoxExtensionImportTitle'),
         String(t('Sync.NoxExtensionImportMsg')),
@@ -52,7 +52,7 @@ const useSync = () => {
           },
           {
             text: String(t('Sync.NoxExtensionAppend')),
-            onPress: async () => {
+            onPress: () => {
               setSyncCheckVisible(true);
               setNoxExtensionContent(
                 parsedContent[StorageKeys.MY_FAV_LIST_KEY].map(
@@ -67,7 +67,6 @@ const useSync = () => {
         ]
       );
     });
-  };
 
   const syncPartialNoxExtension = async (checkedPlaylistIndexes: boolean[]) => {
     const checkedPlaylists = checkedPlaylistIndexes

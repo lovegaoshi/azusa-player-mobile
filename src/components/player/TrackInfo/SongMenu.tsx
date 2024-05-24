@@ -66,7 +66,7 @@ export default ({
     };
   };
 
-  const renameSong = async (name: string) => {
+  const renameSong = (name: string) => {
     updateSongIndex(songMenuSongIndexes[0], {
       name,
       parsedName: name,
@@ -131,7 +131,7 @@ export default ({
       />
       <Menu.Item
         leadingIcon={Icons.R128GAIN}
-        onPress={async () =>
+        onPress={() =>
           Alert.alert(
             `R128Gain of ${song.parsedName}`,
             `${getR128Gain(song)} dB`,

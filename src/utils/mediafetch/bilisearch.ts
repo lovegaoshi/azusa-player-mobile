@@ -25,7 +25,7 @@ const getCookie = async (cookiedSearch = false) => {
 };
 
 export // eslint-disable-next-line @typescript-eslint/no-explicit-any
-const fastSearchResolveBVID = async (bvobjs: any[]) => {
+const fastSearchResolveBVID = (bvobjs: any[]) => {
   /**
      * cids should be resolved at this stage,
      * or on the fly using fetchCID. the latter saves
@@ -64,7 +64,7 @@ export const fetchBiliSearchList = async (
   // otherwise will return error 412. for users didnt login to bilibili,
   // setting a random buvid3 would enable this API.
   try {
-    return await fetchBiliPaginatedAPI({
+    return fetchBiliPaginatedAPI({
       url: URL_BILI_SEARCH.replace('{keyword}', kword),
       getMediaCount: data => Math.min(data.numResults, data.pagesize * 2),
       getPageSize: data => data.pagesize,
@@ -81,7 +81,7 @@ export const fetchBiliSearchList = async (
         credentials: 'omit',
       },
       resolveBiliBVID: fastSearch
-        ? async bvobjs => await fastSearchResolveBVID(bvobjs)
+        ? async bvobjs => fastSearchResolveBVID(bvobjs)
         : undefined,
       startPage,
     });

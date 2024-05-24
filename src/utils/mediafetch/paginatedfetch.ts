@@ -115,7 +115,7 @@ export const fetchAwaitPaginatedAPI = async ({
   getJSONData = (json: any) => json.data,
 }: FetcherProps) => {
   // helper function that returns true if more page resolving is needed.
-  const resolvePageJson = async (BVids: string[], json: any) => {
+  const resolvePageJson = (BVids: string[], json: any) => {
     for (const item of getItems(json)) {
       if (favList.includes(getBVID(item))) {
         return false;
@@ -132,7 +132,7 @@ export const fetchAwaitPaginatedAPI = async ({
   const mediaCount = getMediaCount(data);
   const BVids: any[] = [];
 
-  if (await resolvePageJson(BVids, json)) {
+  if (resolvePageJson(BVids, json)) {
     for (
       let page = 2, n = Math.ceil(mediaCount / getPageSize(data));
       page <= n;
@@ -142,7 +142,7 @@ export const fetchAwaitPaginatedAPI = async ({
         fetcher(url.replace('{pn}', String(page)), params)
       );
       const subJson = await subRes.json();
-      if (!(await resolvePageJson(BVids, subJson))) {
+      if (!resolvePageJson(BVids, subJson)) {
         break;
       }
     }

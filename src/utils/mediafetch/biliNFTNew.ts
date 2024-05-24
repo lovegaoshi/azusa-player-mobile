@@ -35,7 +35,7 @@ const biliNFTFetch = async ({
   return resolver(json.data.item_list[index]);
 };
 
-const biliNFTVideoFetch = async ({ act_id, lottery_id, index }: Props) =>
+const biliNFTVideoFetch = ({ act_id, lottery_id, index }: Props) =>
   biliNFTFetch({
     act_id,
     lottery_id,
@@ -43,7 +43,7 @@ const biliNFTVideoFetch = async ({ act_id, lottery_id, index }: Props) =>
     resolver: v => v.card_info.video_list[0],
   });
 
-const biliNFTRedeemFetch = async ({ act_id, lottery_id, index }: Props) =>
+const biliNFTRedeemFetch = ({ act_id, lottery_id, index }: Props) =>
   biliNFTFetch({
     act_id,
     lottery_id,

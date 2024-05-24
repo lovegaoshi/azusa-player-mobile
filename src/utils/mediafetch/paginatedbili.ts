@@ -9,7 +9,7 @@ import {
 import { biliApiLimiter } from './throttle';
 import bfetch from '@utils/BiliFetch';
 
-export const fetchBiliPaginatedAPI = async ({
+export const fetchBiliPaginatedAPI = ({
   url,
   getMediaCount,
   getPageSize,
@@ -18,8 +18,8 @@ export const fetchBiliPaginatedAPI = async ({
   favList = [],
   params = undefined,
   limiter = biliApiLimiter,
-  resolveBiliBVID = async (bvobjs, progressEmitter2) =>
-    await fetchBiliBVIDs(
+  resolveBiliBVID = (bvobjs, progressEmitter2) =>
+    fetchBiliBVIDs(
       bvobjs.map((obj: any) => obj.bvid),
       progressEmitter2
     ),
@@ -39,7 +39,7 @@ export const fetchBiliPaginatedAPI = async ({
     startPage,
   });
 
-export const fetchAwaitBiliPaginatedAPI = async ({
+export const fetchAwaitBiliPaginatedAPI = ({
   url,
   getMediaCount,
   getPageSize,
@@ -48,8 +48,8 @@ export const fetchAwaitBiliPaginatedAPI = async ({
   favList = [],
   params = undefined,
   limiter = biliApiLimiter,
-  resolveBiliBVID = async (bvobjs, progressEmitter2) =>
-    await fetchBiliBVIDs(
+  resolveBiliBVID = (bvobjs, progressEmitter2) =>
+    fetchBiliBVIDs(
       bvobjs.map((obj: any) => obj.bvid),
       progressEmitter2
     ),
