@@ -22,7 +22,7 @@ const find = async (dbx: _Dropbox, query = DEFAULT_FILE_NAME) => {
   }
 };
 
-const upload = async (
+export const noxBackup = async (
   dbx: _Dropbox,
   content: Uint8Array,
   fpath = DEFAULT_FILE_PATH
@@ -63,14 +63,6 @@ export const noxRestore = async (
     throw new Error('noxfile is not found on dropbox.');
   }
   return await download(dbx, contentParse, noxFile);
-};
-
-/**
- * wraps up upload noxplayer setting. returns the response
- * if successful.
- */
-export const noxBackup = async (dbx: _Dropbox, content: Uint8Array) => {
-  return await upload(dbx, content);
 };
 
 export const checkAuthentication = async (dbx: _Dropbox) => {

@@ -24,7 +24,8 @@ const CustomSkinSearch = ({
   const handleSearch = async (val = searchVal) => {
     progressEmitter(1);
     try {
-      const searchedResult = await (await fetch(val)).json();
+      const res = await fetch(val);
+      const searchedResult = await res.json();
       onSearched(searchedResult);
     } catch {
       setSnack({

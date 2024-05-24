@@ -39,7 +39,8 @@ const resolveIOSURL = (formats: ytdl.videoFormat[]) => {
   ).url;
 };
 
-const fetchYTBPlayUrlPromise = async (sid: string, iOS = true) => {
+const resolveURL = async (song: NoxMedia.Song, iOS = true) => {
+  const sid = song.bvid;
   try {
     logger.debug(`fetch YTB playURL promise:${sid}`);
     const ytdlInfo = await ytdl.getInfo(
@@ -192,11 +193,11 @@ const fetchAudioInfoRaw = async (sid: string) => {
   }
 };
 
-export const fetchAudioInfo = async (
+export const fetchAudioInfo = (
   bvid: string,
   progressEmitter: () => void = () => undefined
 ) =>
-  await biliApiLimiter.schedule(() => {
+  biliApiLimiter.schedule(() => {
     progressEmitter();
     return fetchAudioInfoRaw(bvid);
   });
@@ -254,10 +255,6 @@ const regexFetch = async ({
 }: regexFetchProps): Promise<NoxNetwork.NoxRegexFetch> => {
   const audioInfo = await fetchAudioInfo(reExtracted[1]!);
   return { songList: audioInfo || [] };
-};
-
-const resolveURL = async (song: NoxMedia.Song, iOS = true) => {
-  return await fetchYTBPlayUrlPromise(song.bvid, iOS);
 };
 
 const refreshSong = (song: NoxMedia.Song) => song;

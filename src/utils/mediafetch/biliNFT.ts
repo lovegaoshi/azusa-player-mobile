@@ -30,12 +30,11 @@ const biliNFTFetch = async ({
   return resolver(json.data.item_list[index].card_item);
 };
 
-const biliNFTVideoFetch = async ({ act_id, index }: Props) => {
-  return biliNFTFetch({
+const biliNFTVideoFetch = ({ act_id, index }: Props) =>
+  biliNFTFetch({
     act_id,
     index,
     resolver: (json: any) => json.video_list[0],
   });
-};
 
 export { biliNFTVideoFetch };

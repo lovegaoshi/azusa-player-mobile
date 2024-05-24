@@ -103,7 +103,7 @@ export const parseSongName = (song: NoxMedia.Song): NoxMedia.Song => {
   };
 };
 
-export const saveABRepeat = async (val: NoxStorage.ABDict) => {
+export const saveABRepeat = (val: NoxStorage.ABDict) => {
   const newR128gain = { ...appStore.getState().ABRepeat, ...val };
   appStore.setState({ ABRepeat: newR128gain });
   saveABMapping(newR128gain);
@@ -139,10 +139,7 @@ export const setFetchProgress = (val: number) => {
   appStore.setState({ fetchProgress: val });
 };
 
-export const addDownloadProgress = async (
-  song: NoxMedia.Song,
-  progress: number
-) => {
+export const addDownloadProgress = (song: NoxMedia.Song, progress: number) => {
   const currentAppStore = appStore.getState();
   const newDownloadProgressMap = {
     ...currentAppStore.downloadProgressMap,
@@ -156,7 +153,7 @@ export const addDownloadProgress = async (
   });
 };
 
-export const addDownloadPromise = async (
+export const addDownloadPromise = (
   song: NoxMedia.Song,
   downloadPromise: Promise<string | void>
 ) => {

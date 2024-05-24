@@ -14,7 +14,7 @@ interface ids {
   bvid: string;
   cid: string;
 }
-const fetchVideoTagPromise = async ({ bvid, cid }: ids) => {
+const fetchVideoTagPromise = ({ bvid, cid }: ids) => {
   return biliTagApiLimiter.schedule(() =>
     fetchVideoTagPromiseRaw({ bvid, cid })
   );

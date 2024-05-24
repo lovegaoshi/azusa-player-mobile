@@ -2,7 +2,7 @@ import RNFetchBlob from 'react-native-blob-util';
 
 const fsdirs = RNFetchBlob.fs.dirs;
 
-export const writeTxtFile = async (
+export const writeTxtFile = (
   filename: string,
   content: string[],
   subfolder = ''
@@ -23,7 +23,7 @@ export const writeTxtFile = async (
     .catch(console.error);
 };
 
-export const readTxtFile = async (filename: string, subfolder = '') => {
+export const readTxtFile = (filename: string, subfolder = '') => {
   try {
     return RNFetchBlob.fs
       .readFile(`${fsdirs.DocumentDir}/${subfolder}${filename}`, 'utf8')

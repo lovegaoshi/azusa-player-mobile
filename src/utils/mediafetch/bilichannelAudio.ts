@@ -21,7 +21,7 @@ const URL_BILICHANNEL_AUDIO_INFO =
   'https://api.bilibili.com/audio/music-service/web/song/upper?uid=741520&pn={pn}&ps=30&order=1';
 const CIDPREFIX = `${Source.biliaudio}-`;
 
-export const fetchBiliChannelAudioList = async (
+export const fetchBiliChannelAudioList = (
   mid: string,
   progressEmitter: (val: number) => void = () => undefined,
   favList: string[] = []

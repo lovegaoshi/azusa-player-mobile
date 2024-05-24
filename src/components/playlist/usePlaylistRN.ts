@@ -52,10 +52,10 @@ export default (playlist: NoxMedia.Playlist) => {
   const { playFromPlaylist } = usePlayback();
   const { preformFade } = useTPControls();
 
-  const refreshPlaylist = async () => {
+  const refreshPlaylist = () => {
     progressEmitter(100);
     activateKeepAwakeAsync();
-    setSnack({
+    return setSnack({
       snackMsg: {
         processing: t('PlaylistOperations.updating', { playlist }),
         success: t('PlaylistOperations.updated', { playlist }),
@@ -100,7 +100,7 @@ export default (playlist: NoxMedia.Playlist) => {
     setRows(reParseSearch(searchedVal, playlist.songList));
   };
 
-  const playSong = async (song: NoxMedia.Song) => {
+  const playSong = (song: NoxMedia.Song) => {
     const playSongCallback = (playlist: NoxMedia.Playlist) => {
       const callback = () => playFromPlaylist({ playlist, song });
       if (song.id === currentPlayingId) {

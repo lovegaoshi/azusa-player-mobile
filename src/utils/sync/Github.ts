@@ -16,8 +16,8 @@ export const getUserName = async (token: string) => {
   return data.login;
 };
 
-export const createAPMRepo = async (token: string) => {
-  return await bfetch('https://api.github.com/user/repos', {
+export const createAPMRepo = (token: string) =>
+  bfetch('https://api.github.com/user/repos', {
     method: 'POST',
     body: JSON.stringify({
       name: APM_REPO_NAME,
@@ -28,7 +28,6 @@ export const createAPMRepo = async (token: string) => {
       'Content-Type': 'application/json',
     },
   });
-};
 
 export const sync = async ({
   token,
@@ -66,9 +65,8 @@ export const sync = async ({
   );
 };
 
-export const noxBackup = async (content: Uint8Array, token: string) => {
-  return await sync({ content, token });
-};
+export const noxBackup = (content: Uint8Array, token: string) =>
+  sync({ content, token });
 
 export const checkAuthentication = async (token = '') => {
   try {

@@ -17,14 +17,14 @@ import { fetchBiliPaginatedAPI } from './paginatedbili';
 const URL_BILICOLLE_INFO =
   'https://api.bilibili.com/x/space/fav/season/list?season_id={sid}&pn={pn}&ps=100';
 
-const fetchBiliColleList = async (
+const fetchBiliColleList = (
   sid: string,
   progressEmitter: (val: number) => void = () => undefined,
   favList: string[] = []
 ) => {
   logger.info('calling fetchBiliColleList');
 
-  return await fetchBiliPaginatedAPI({
+  return fetchBiliPaginatedAPI({
     url: URL_BILICOLLE_INFO.replace('{sid}', sid),
     getMediaCount: (data: any) => data.info.media_count,
     getPageSize: () => 100,

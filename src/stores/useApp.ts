@@ -125,7 +125,7 @@ interface NoxSetting {
     playlist: NoxMedia.Playlist,
     addSongs?: NoxMedia.Song[],
     removeSongs?: NoxMedia.Song[]
-  ) => Promise<NoxMedia.Playlist>;
+  ) => NoxMedia.Playlist;
 
   initPlayer: (
     val: NoxStorage.PlayerStorageObject
@@ -174,9 +174,8 @@ export const useNoxSetting = create<NoxSetting>((set, get) => ({
   setCurrentABRepeat: val => set({ currentABRepeat: val }),
 
   playerStyle: createStyle(),
-  setPlayerStyle: (val, save = true) => {
-    savePlayerStyle(val, save).then(playerStyle => set({ playerStyle }));
-  },
+  setPlayerStyle: (val, save = true) =>
+    set({ playerStyle: savePlayerStyle(val, save) }),
   playerStyles: [],
   setPlayerStyles: val => {
     set({ playerStyles: val });
@@ -285,7 +284,7 @@ export const useNoxSetting = create<NoxSetting>((set, get) => ({
     set({ playlists, playlistIds });
   },
 
-  updatePlaylist: async (playlist, addSongs = [], removeSongs = []) => {
+  updatePlaylist: (playlist, addSongs = [], removeSongs = []) => {
     const {
       playlists,
       playerSetting,

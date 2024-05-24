@@ -223,7 +223,7 @@ const SkinSettings = () => {
   const scrollViewRef = React.useRef<FlatList | null>(null);
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const loadCustomSkin = async (skins: any) => {
+  const loadCustomSkin = (skins: any) => {
     // skins MUST BE an array of objects
     if (!Array.isArray(skins)) {
       throw new Error('requested skin URL is not an array. aborting.');

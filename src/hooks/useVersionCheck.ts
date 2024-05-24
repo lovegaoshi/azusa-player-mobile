@@ -123,7 +123,7 @@ export default () => {
     }
   };
 
-  const updateVersion = async (currentPlayerSetting = playerSetting) => {
+  const updateVersion = (currentPlayerSetting = playerSetting) => {
     const latest = Versions.Latest;
     switch (currentPlayerSetting.noxVersion) {
       case latest:

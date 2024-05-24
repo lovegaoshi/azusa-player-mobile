@@ -18,7 +18,7 @@ import { biliShazamOnSonglist } from './bilishazam';
 const URL_BILICHANNEL_INFO =
   'https://api.bilibili.com/x/space/wbi/arc/search?mid={mid}&pn={pn}&jsonp=jsonp&ps=50';
 
-export const fetchBiliChannelList = async (
+export const fetchBiliChannelList = (
   url: string,
   progressEmitter: (val: number) => void = () => undefined,
   favList: string[] = []

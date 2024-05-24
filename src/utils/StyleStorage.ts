@@ -3,7 +3,7 @@ import { Appearance } from 'react-native';
 import { savePlayerSkin } from './ChromeStorage';
 import { createStyle } from '../components/style';
 
-export const savePlayerStyle = async (
+export const savePlayerStyle = (
   val: NoxTheme.Style | NoxTheme.AdaptiveStyle,
   save = true
 ) => {
