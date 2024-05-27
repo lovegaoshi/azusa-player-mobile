@@ -1708,6 +1708,17 @@
       "darkTheme": false
     },
     "gifs": [
+      "https://i0.hdslb.com/bfs/garb/fe8d3fbba4eaa6d0aac0921588ae84db9d18b0d4.png",
+      "https://i0.hdslb.com/bfs/garb/5e8493e76c9e04c43d2436997c98a7bb5ad915f0.png",
+      "https://i0.hdslb.com/bfs/garb/392cb80ca58cbca945bcccab23896af4e523a7f8.png",
+      "https://i0.hdslb.com/bfs/garb/23e1cd0b6b49cde6fc72a01cd082b97cd26e5ac8.png",
+      "https://i0.hdslb.com/bfs/garb/69e7dc3b697978a155ca5db38f265932225e6225.png",
+      "https://i0.hdslb.com/bfs/garb/254569f7751ba264bb1de0145dceaaa2b93f743f.png",
+      "https://i0.hdslb.com/bfs/garb/3381e8024f4f959081f59448bfdd19c5a9b4fa5c.png",
+      "https://i0.hdslb.com/bfs/garb/895b9f44073a1675fc6c2a3c4c1a67ede22887ad.png",
+      "https://i0.hdslb.com/bfs/garb/287bad940b67c6ba5adc3d59bbdf5dac2c6f7f61.png",
+      "https://i0.hdslb.com/bfs/garb/55582314e2b146696e7a6cc917aa3a99e110cd22.png",
+      "https://i0.hdslb.com/bfs/garb/a0628a2c7003b3bfe9fa9e0e70907177ee305529.png",
       "https://i0.hdslb.com/bfs/new_dyn/4395e02d7275820047d98b1be4779f852273426.gif",
       "https://i0.hdslb.com/bfs/new_dyn/ca10bb1d98bab16591ef1fbb36c507302273426.gif",
       "https://i0.hdslb.com/bfs/new_dyn/9e1e8ce55d852f23fc6b9677d78fc6072273426.gif",
@@ -1767,7 +1778,19 @@
       "https://i0.hdslb.com/bfs/garb/54a7d01058c843df9f4fadde99df42a8fb446f60.jpg",
       "https://i0.hdslb.com/bfs/garb/1167eb2420f0480ab506f5d7d9bc18271800e57f.jpg",
       "https://i0.hdslb.com/bfs/garb/54b09bc72cf1537c0ba0f11eb9bc13091b01aad1.jpg",
-      "https://i0.hdslb.com/bfs/garb/95874aff3686bee1b0c942658bade9543f8c6302.jpg"
+      "https://i0.hdslb.com/bfs/garb/95874aff3686bee1b0c942658bade9543f8c6302.jpg",
+      {
+        "type": "biliNFTVideoNew",
+        "identifier": "[\"102034\",\"102035\",\"星之降临-露米\"]"
+      },
+      {
+        "type": "biliNFTVideoNew",
+        "identifier": "[\"102034\",\"102035\",\"吉光片羽\"]"
+      },
+      "https://i0.hdslb.com/bfs/garb/open/143a0cf9a3bf595e29b18dab5a5ae6af285b11c2.png",
+      "https://i0.hdslb.com/bfs/garb/open/79c2a723bed0c98abd68c0d85cb0c6d7ab7b57d8.png",
+      "https://i0.hdslb.com/bfs/garb/open/934c09a9131e0b6a7fcb8484d4fb6857c4162d5f.png",
+      "https://i0.hdslb.com/bfs/garb/open/7d3f061ff5c225edcc0e6fc6a4b7c6a9cc64cf9c.png"
     ],
     "backgroundImagesLandscape": [
       {
