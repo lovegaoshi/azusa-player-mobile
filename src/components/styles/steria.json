@@ -1302,17 +1302,17 @@
       "https://i0.hdslb.com/bfs/garb/7fc48881ec85a91ab451162d14749a50ebaff767.jpg",
       "https://i0.hdslb.com/bfs/new_dyn/8f22c393e49af2f90de7219b0bce6f0b13692113.png",
       {
-        "type": "biliNFTVideo",
-        "identifier": "[\"101287\",\"海的誓约\"]"
+        "type": "biliNFTVideoNew",
+        "identifier": "[\"101287\",\"101288\",\"海的誓约\"]"
       },
       {
-        "type": "biliNFTVideo",
-        "identifier": "[\"101287\",\"海的回响\"]"
+        "type": "biliNFTVideoNew",
+        "identifier": "[\"101287\",\"101288\",\"海的回响\"]"
       },
       "https://i0.hdslb.com/bfs/garb/open/53564f764a2d12471f984c3eab6b0d1465d49c00.png",
       {
-        "type": "biliNFTVideo",
-        "identifier": "[\"101287\",\"圣诞礼物\"]"
+        "type": "biliNFTVideoNew",
+        "identifier": "[\"101287\",\"101288\",\"圣诞礼物\"]"
       },
       "https://i0.hdslb.com/bfs/garb/open/b9d26c2883ce77b588196a2adad83cb0709ff90e.jpg",
       "https://i0.hdslb.com/bfs/garb/open/2d778a7bc969d75c0bd708eee1ac4aefa35f2789.jpg",
@@ -1321,8 +1321,8 @@
       "https://i0.hdslb.com/bfs/garb/open/0f3051a12f530992e648a2ec2af8d4a29de5d01b.png",
       "https://i0.hdslb.com/bfs/garb/open/9d7e7201542540a9535c7fc9f44147c6ee8f80c0.jpg",
       {
-        "type": "biliNFTVideo",
-        "identifier": "[\"101287\",\"kirakira\"]"
+        "type": "biliNFTVideoNew",
+        "identifier": "[\"101287\",\"101288\",\"kirakira\"]"
       }
     ],
     "backgroundImagesLandscape": [
