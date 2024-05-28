@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Platform } from 'react-native';
 
-import { regexFetchProps } from './generic';
 import { biliApiLimiter } from './throttle';
 import { biliShazamOnSonglist } from './bilishazam';
 import SongTS from '@objects/Song';
@@ -84,7 +83,7 @@ export const fetchBiliBVIDs = async (
   return biliShazamOnSonglist(songs, false, progressEmitter, useBiliTag);
 };
 
-interface BVRegFetchProps extends regexFetchProps {
+interface BVRegFetchProps extends NoxNetwork.RegexFetchProps {
   bvids: string[];
 }
 
@@ -96,7 +95,7 @@ export const bvFetch = async ({
   songList: await fetchBiliBVIDs(bvids, progressEmitter, useBiliTag),
 });
 
-const regexFetch = ({ reExtracted, useBiliTag }: regexFetchProps) =>
+const regexFetch = ({ reExtracted, useBiliTag }: NoxNetwork.RegexFetchProps) =>
   bvFetch({
     reExtracted,
     useBiliTag,

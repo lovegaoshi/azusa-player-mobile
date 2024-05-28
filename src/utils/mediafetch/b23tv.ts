@@ -1,4 +1,3 @@
-import { regexFetchProps } from './generic';
 import { logger } from '../Logger';
 
 const resolveB23TV = async (url: string) => {
@@ -7,7 +6,7 @@ const resolveB23TV = async (url: string) => {
   return res.url;
 };
 
-const regexFetch = ({ reExtracted }: regexFetchProps) =>
+const regexFetch = ({ reExtracted }: NoxNetwork.RegexFetchProps) =>
   resolveB23TV(reExtracted[1]!);
 
 export default {

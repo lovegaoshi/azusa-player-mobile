@@ -1,5 +1,4 @@
 import { logger } from '../Logger';
-import { regexFetchProps } from './generic';
 import { bvFetch } from './bilivideo';
 import biliaudioFetch from './biliaudio';
 
@@ -39,7 +38,7 @@ const regexFetch = async ({
   progressEmitter = () => undefined,
   favList = [],
   useBiliTag,
-}: regexFetchProps) => {
+}: NoxNetwork.RegexFetchProps) => {
   // TODO: refactor this???
   const favFetched = await getFavList(reExtracted[1]!);
   const bvids = favFetched

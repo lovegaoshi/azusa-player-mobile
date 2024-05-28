@@ -82,6 +82,10 @@ class NoxAndroidAutoModule(reactContext: ReactApplicationContext) :
     return results
   }
 
+  @ReactMethod fun getUri(uri: String, callback: Promise) {
+    callback.resolve(Uri.parse(uri).toString())
+  }
+
   @ReactMethod fun listMediaDir(relativeDir: String, subdir: Boolean, callback: Promise) {
     callback.resolve(_listMediaDir(relativeDir, subdir))
   }

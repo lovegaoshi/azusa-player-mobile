@@ -11,7 +11,6 @@
  */
 import { Source } from '@enums/MediaFetch';
 import { logger } from '../Logger';
-import { regexFetchProps } from './generic';
 import { fetchAwaitBiliPaginatedAPI } from './paginatedbili';
 import { awaitLimiter } from './throttle';
 import SongTS from '@objects/Song';
@@ -59,7 +58,7 @@ const regexFetch = async ({
   reExtracted,
   progressEmitter = () => undefined,
   favList,
-}: regexFetchProps): Promise<NoxNetwork.NoxRegexFetch> => ({
+}: NoxNetwork.RegexFetchProps): Promise<NoxNetwork.NoxRegexFetch> => ({
   songList: await fetchBiliChannelAudioList(
     reExtracted[1]!,
     progressEmitter,

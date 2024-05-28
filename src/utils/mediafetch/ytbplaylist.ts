@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { get_playlist } from 'libmuse';
 
-import { regexFetchProps } from './generic';
 import { fetchAudioInfo, CIDPREFIX } from './ytbvideo';
 import SongTS from '@objects/Song';
 import { logger } from '../Logger';
@@ -132,7 +131,7 @@ const fetchYTPlaylist = async (
 const regexFetch = async ({
   reExtracted,
   favList = [],
-}: regexFetchProps): Promise<NoxNetwork.NoxRegexFetch> => {
+}: NoxNetwork.RegexFetchProps): Promise<NoxNetwork.NoxRegexFetch> => {
   const results = await fetchInnerTunePlaylist(
     // fetchYTPlaylist(
     reExtracted[1],

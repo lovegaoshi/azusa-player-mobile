@@ -12,12 +12,10 @@
 import { Platform, NativeModules } from 'react-native';
 import RNFetchBlob from 'react-native-blob-util';
 
-import { probeMetadata, cacheAlbumArt } from '@utils/ffmpeg/ffmpeg';
+import { cacheAlbumArt } from '@utils/ffmpeg/ffmpeg';
 import { Source } from '@enums/MediaFetch';
-import { regexFetchProps } from './generic';
 import SongTS from '@objects/Song';
 import logger from '../Logger';
-import { singleLimiter } from './throttle';
 
 const { NoxAndroidAutoModule } = NativeModules;
 
@@ -47,42 +45,13 @@ const songFetch = async (
       source: Source.local,
     })
   );
-  // TODO: no longer needs FFProbe
-  return await Promise.all(
-    uniqMediaFiles.map(async (v, index) => {
-      let probedMetadata: any = {};
-      try {
-        probedMetadata = await singleLimiter.schedule(() => {
-          progressEmitter((100 * (index + 1)) / uniqMediaFiles.length);
-          return probeMetadata(v.realPath);
-        });
-      } catch (e) {
-        logger.warn(e);
-        logger.warn(v);
-      }
-      return SongTS({
-        cid: `${Source.local}-${v.realPath}`,
-        bvid: `file://${v.realPath}`,
-        name: probedMetadata.tags?.title || v.fileName,
-        nameRaw: probedMetadata.tags?.title || v.fileName,
-        singer: probedMetadata.tags?.artist || '',
-        singerId: probedMetadata.tags?.artist || '',
-        cover: '',
-        lyric: '',
-        page: 0,
-        duration: Number(probedMetadata.duration) || 0,
-        album: probedMetadata.tags?.album || '',
-        source: Source.local,
-      });
-    })
-  );
 };
 
 const regexFetch = async ({
   reExtracted,
   favList = [],
   progressEmitter,
-}: regexFetchProps): Promise<NoxNetwork.NoxRegexFetch> => ({
+}: NoxNetwork.RegexFetchProps): Promise<NoxNetwork.NoxRegexFetch> => ({
   songList: await songFetch(reExtracted[1]!, favList, progressEmitter),
 });
 
@@ -92,6 +61,7 @@ const resolveArtwork = async (song: NoxMedia.Song) => {
   let artworkBase64 = '';
   try {
     const artworkURI = await cacheAlbumArt(song.bvid);
+    NoxAndroidAutoModule.getUri(artworkURI).then(console.debug);
     artworkBase64 = await RNFetchBlob.fs.readFile(artworkURI, 'base64');
   } catch (e) {
     logger.warn(`[localResolver] cannot resolve artwork of ${song.bvid}`);

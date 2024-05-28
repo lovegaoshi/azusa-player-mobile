@@ -1,5 +1,3 @@
-import { regexFetchProps } from './generic';
-
 import SongTS from '@objects/Song';
 import { logger } from '../Logger';
 import bfetch from '@utils/BiliFetch';
@@ -71,7 +69,7 @@ const fetchVideoInfo = (aid: string) =>
 
 const regexFetch = async ({
   reExtracted,
-}: regexFetchProps): Promise<NoxNetwork.NoxRegexFetch> => ({
+}: NoxNetwork.RegexFetchProps): Promise<NoxNetwork.NoxRegexFetch> => ({
   songList: [await fetchVideoInfo(reExtracted[1]!)],
 });
 

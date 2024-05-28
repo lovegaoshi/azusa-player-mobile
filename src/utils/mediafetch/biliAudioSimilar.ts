@@ -10,7 +10,6 @@
  * each site needs a fetch to parse regex extracted, a videoinfo fetcher and a song fetcher.
  */
 import { logger } from '../Logger';
-import { regexFetchProps } from './generic';
 import bfetch from '@utils/BiliFetch';
 import { Source } from '@enums/MediaFetch';
 import SongTS from '@objects/Song';
@@ -84,7 +83,7 @@ const fetchBiliAudioSimilarList = async (sid: string) => {
 
 const regexFetch = async ({
   reExtracted,
-}: regexFetchProps): Promise<NoxNetwork.NoxRegexFetch> => ({
+}: NoxNetwork.RegexFetchProps): Promise<NoxNetwork.NoxRegexFetch> => ({
   songList: await fetchBiliAudioSimilarList(reExtracted[1]!),
 });
 

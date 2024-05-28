@@ -3,6 +3,14 @@ import { LrcSource } from '@enums/LyricFetch';
 /* eslint-disable @typescript-eslint/no-explicit-any */
 declare global {
   declare namespace NoxNetwork {
+    export interface RegexFetchProps {
+      reExtracted: RegExpExecArray;
+      progressEmitter?: (val: number) => void;
+      favList?: string[];
+      useBiliTag?: boolean;
+      fastSearch?: boolean;
+    }
+
     export interface RequestInit {
       method: string;
       headers: any;

@@ -10,7 +10,6 @@ import { Platform } from 'react-native';
  * steps to refactor:
  * each site needs a fetch to parse regex extracted, a videoinfo fetcher and a song fetcher.
  */
-import { regexFetchProps } from './generic';
 import { biliApiLimiter } from './throttle';
 
 import SongTS from '@objects/Song';
@@ -252,7 +251,7 @@ const suggest = async (song: NoxMedia.Song, filterMW = <T>(v: T[]) => v[0]) => {
 
 const regexFetch = async ({
   reExtracted,
-}: regexFetchProps): Promise<NoxNetwork.NoxRegexFetch> => {
+}: NoxNetwork.RegexFetchProps): Promise<NoxNetwork.NoxRegexFetch> => {
   const audioInfo = await fetchAudioInfo(reExtracted[1]!);
   return { songList: audioInfo || [] };
 };

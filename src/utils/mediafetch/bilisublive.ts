@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import axios from 'axios';
 
-import { regexFetchProps } from './generic';
 import SongTS from '@objects/Song';
 import { logger } from '../Logger';
 import { Source } from '@enums/MediaFetch';
@@ -87,7 +86,7 @@ const getSubList = ({ uid, progressEmitter }: Props) => {
 const regexFetch = async ({
   reExtracted,
   progressEmitter = () => undefined,
-}: regexFetchProps): Promise<NoxNetwork.NoxRegexFetch> => ({
+}: NoxNetwork.RegexFetchProps): Promise<NoxNetwork.NoxRegexFetch> => ({
   songList: await getSubList({ uid: reExtracted[1]!, progressEmitter }),
 });
 

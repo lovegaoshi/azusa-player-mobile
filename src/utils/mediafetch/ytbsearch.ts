@@ -48,7 +48,7 @@ const fetchInnerTuneSearch = async (
   );
 };
 
-interface regexFetchProps {
+interface RegexFetchProps {
   url: string;
   progressEmitter: (val: number) => void;
   fastSearch?: boolean;
@@ -57,7 +57,7 @@ interface regexFetchProps {
 
 const regexFetch = async ({
   url,
-}: regexFetchProps): Promise<NoxNetwork.NoxRegexFetch> => {
+}: RegexFetchProps): Promise<NoxNetwork.NoxRegexFetch> => {
   return { songList: await fetchInnerTuneSearch(url) };
 };
 

@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { ProgressBar } from 'react-native-paper';
 import {
   View,
@@ -67,6 +67,7 @@ export default ({
     onSearched,
     searchListTitle: t('PlaylistOperations.searchListName'),
   });
+  const pressed = useRef(false);
 
   const handleMenuPress = (event: GestureResponderEvent) => {
     getMusicFreePlugin().then(v => setShowMusicFree(v.length > 0));
@@ -114,6 +115,11 @@ export default ({
     handleExternalSearch(data);
   }, []);
 
+  const performSearch = () => {
+    pressed.current = true;
+    () => handleSearch(searchVal);
+  };
+
   useEffect(() => {
     if (Platform.OS !== 'android') return;
     ShareMenu.getInitialShare(handleShare as ShareCallback);
@@ -134,10 +140,11 @@ export default ({
     <View style={styles.container}>
       <View style={styles.searchContainer}>
         <AutoComplete
+          pressed={pressed}
           placeholder={String(t('BiliSearchBar.label'))}
           value={searchVal}
           setValue={setSearchVal}
-          onSubmit={() => handleSearch(searchVal)}
+          onSubmit={performSearch}
           onIconPress={handleMenuPress}
           icon={getIcon(searchOption)}
           resolveData={searchSuggest(

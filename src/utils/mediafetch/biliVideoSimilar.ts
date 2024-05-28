@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 import { logger } from '../Logger';
-import { regexFetchProps } from './generic';
 import bfetch from '@utils/BiliFetch';
 import { Source, BiliMusicTid } from '@enums/MediaFetch';
 import SongTS from '@objects/Song';
@@ -42,7 +41,7 @@ const fetchBiliVideoSimilarList = async (bvid: string) => {
 
 const regexFetch = async ({
   reExtracted,
-}: regexFetchProps): Promise<NoxNetwork.NoxRegexFetch> => ({
+}: NoxNetwork.RegexFetchProps): Promise<NoxNetwork.NoxRegexFetch> => ({
   songList: await fetchBiliVideoSimilarList(reExtracted[1]!),
 });
 

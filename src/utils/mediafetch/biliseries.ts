@@ -8,7 +8,6 @@
  * steps to refactor:
  * each site needs a fetch to parse regex extracted, a videoinfo fetcher and a song fetcher.
  */
-import { regexFetchProps } from './generic';
 
 import { logger } from '../Logger';
 import { bvFetch } from './bilivideo';
@@ -49,7 +48,7 @@ const regexFetch = async ({
   progressEmitter = () => undefined,
   favList,
   useBiliTag,
-}: regexFetchProps) =>
+}: NoxNetwork.RegexFetchProps) =>
   bvFetch({
     bvids: await fetchBiliSeriesList(reExtracted[1]!, reExtracted[2]!, favList),
     useBiliTag: useBiliTag || false,

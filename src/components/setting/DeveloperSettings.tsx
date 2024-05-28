@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { View, ScrollView, Platform } from 'react-native';
 import { List } from 'react-native-paper';
+import i18n from 'i18next';
 import { useTranslation } from 'react-i18next';
 // eslint-disable-next-line import/no-unresolved
 import { APPSTORE } from '@env';
@@ -47,6 +48,15 @@ const Stack = createNativeStackNavigator();
 
 const FadeOptions = [0, 250, 500, 1000];
 
+const logLevelString = [
+  i18n.t('DeveloperSettings.LogLevel0'),
+  i18n.t('DeveloperSettings.LogLevel1'),
+  i18n.t('DeveloperSettings.LogLevel2'),
+  i18n.t('DeveloperSettings.LogLevel3'),
+  i18n.t('DeveloperSettings.LogLevel4'),
+  i18n.t('DeveloperSettings.LogLevel5'),
+];
+
 const developerSettings: { [key: string]: SettingEntry } = {
   noInterruption: {
     settingName: 'noInterruption',
@@ -89,15 +99,6 @@ const Home = ({ navigation }: NoxComponent.NavigationProps) => {
   const { checkVersion } = useVersionCheck();
   const { orphanedCache, cleanOrphanedCache } = useCleanCache();
   const fadeIntervalMs = useStore(appStore, state => state.fadeIntervalMs);
-
-  const logLevelString = [
-    t('DeveloperSettings.LogLevel0'),
-    t('DeveloperSettings.LogLevel1'),
-    t('DeveloperSettings.LogLevel2'),
-    t('DeveloperSettings.LogLevel3'),
-    t('DeveloperSettings.LogLevel4'),
-    t('DeveloperSettings.LogLevel5'),
-  ];
 
   const selectLogLevel = () => {
     setSelectVisible(true);

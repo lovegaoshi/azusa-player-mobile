@@ -8,7 +8,6 @@
  * steps to refactor:
  * each site needs a fetch to parse regex extracted, a videoinfo fetcher and a song fetcher.
  */
-import { regexFetchProps } from './generic';
 
 import SongTS from '@objects/Song';
 import { logger } from '../Logger';
@@ -66,7 +65,7 @@ export const baFetch = async (auids: string[]) => {
 
 const regexFetch = async ({
   reExtracted,
-}: regexFetchProps): Promise<NoxNetwork.NoxRegexFetch> => ({
+}: NoxNetwork.RegexFetchProps): Promise<NoxNetwork.NoxRegexFetch> => ({
   songList: await baFetch([reExtracted[1]!]),
 });
 

@@ -29,6 +29,7 @@ if (TRACKING) {
       'Cannot convert undefined value to object',
       'no audio url',
       'com.google.android.play.core.appupdate.internal.zzy',
+      'TEST - Sentry Client Crash',
     ],
   });
 }
