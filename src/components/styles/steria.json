@@ -1787,6 +1787,10 @@
         "type": "biliNFTVideoNew",
         "identifier": "[\"102034\",\"102035\",\"吉光片羽\"]"
       },
+      {
+        "type": "biliGarbHeadVideo",
+        "identifier": "108052801"
+      },
       "https://i0.hdslb.com/bfs/garb/open/143a0cf9a3bf595e29b18dab5a5ae6af285b11c2.png",
       "https://i0.hdslb.com/bfs/garb/open/79c2a723bed0c98abd68c0d85cb0c6d7ab7b57d8.png",
       "https://i0.hdslb.com/bfs/garb/open/934c09a9131e0b6a7fcb8484d4fb6857c4162d5f.png",
@@ -1849,7 +1853,9 @@
       "surfaceDisabled": "rgba(32, 26, 27, 0.12)",
       "onSurfaceDisabled": "rgba(32, 26, 27, 0.38)",
       "backdrop": "rgba(58, 45, 47, 0.4)"
-    }
+    },
+    "thumbupSVGA": "https://i0.hdslb.com/bfs/garb/c99fad05e8678ce240ef4963beee803d9fe172a0.bin",
+    "loadingIcon": "https://i0.hdslb.com/bfs/baselabs/op/56e0ad935d46ca2225c1fac0e69185d39d95ba3eb730d9be3ee9d8342270bb3f.webp"
   },
   {
     "metaData": {
