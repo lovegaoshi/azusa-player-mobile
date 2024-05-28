@@ -8,6 +8,7 @@ declare global {
       progressEmitter?: (val: number) => void;
       favList?: string[];
       useBiliTag?: boolean;
+      fastSearch?: boolean;
     }
 
     export interface RequestInit {

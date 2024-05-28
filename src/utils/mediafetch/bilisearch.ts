@@ -1,8 +1,8 @@
 import { logger } from '../Logger';
 import { fetchBiliPaginatedAPI } from './paginatedbili';
-import { timestampToSeconds } from '../Utils';
 import bfetch from '../BiliFetch';
 import { getBiliCookie } from '@utils/Bilibili/biliCookies';
+import { timestampToSeconds } from '../Utils';
 import SongTS from '@objects/Song';
 import { Source } from '@enums/MediaFetch';
 
@@ -24,9 +24,7 @@ const getCookie = async (cookiedSearch = false) => {
   return cookie;
 };
 
-export // eslint-disable-next-line @typescript-eslint/no-explicit-any
-const fastSearchResolveBVID = (bvobjs: any[]) => {
-  /**
+/**
      * cids should be resolved at this stage,
      * or on the fly using fetchCID. the latter saves
      * search time but now song.id loses identification.
@@ -34,7 +32,8 @@ const fastSearchResolveBVID = (bvobjs: any[]) => {
       bvobjs.map(obj => fetchCID(obj.bvid))
     );
      */
-  return bvobjs.map(obj => {
+const fastSearchResolveBVID = (bvobjs: any[]) =>
+  bvobjs.map(obj => {
     const name = obj.title.replaceAll(/<[^<>]*em[^<>]*>/g, '');
     return SongTS({
       cid: `null-${obj.bvid}`,
@@ -51,7 +50,6 @@ const fastSearchResolveBVID = (bvobjs: any[]) => {
       source: Source.bilivideo,
     });
   });
-};
 
 export const fetchBiliSearchList = async (
   kword: string,
