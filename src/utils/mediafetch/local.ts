@@ -22,8 +22,7 @@ const { NoxAndroidAutoModule } = NativeModules;
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const songFetch = async (
   fpath: string,
-  favlist: string[],
-  progressEmitter: (val: number) => void = () => undefined
+  favlist: string[]
 ): Promise<NoxMedia.Song[]> => {
   if (Platform.OS !== 'android') return [];
   const mediaFiles: NoxUtils.NoxFileUtilMediaInfo[] =
@@ -50,9 +49,8 @@ const songFetch = async (
 const regexFetch = async ({
   reExtracted,
   favList = [],
-  progressEmitter,
 }: NoxNetwork.RegexFetchProps): Promise<NoxNetwork.NoxRegexFetch> => ({
-  songList: await songFetch(reExtracted[1]!, favList, progressEmitter),
+  songList: await songFetch(reExtracted[1]!, favList),
 });
 
 const resolveURL = async (song: NoxMedia.Song) => {
