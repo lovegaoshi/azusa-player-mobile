@@ -6,6 +6,7 @@ import playerSettingStore from '@stores/playerSettingStore';
 import { cacheResolvedURL } from '@stores/appStore';
 import { addR128Gain, getR128Gain } from '@utils/ffmpeg/r128Store';
 import { r128gain, setR128Gain } from '@utils/ffmpeg/ffmpeg';
+import { Source } from '@enums/MediaFetch';
 
 export const DEFAULT_NULL_URL = 'NULL';
 export const NULL_TRACK = { url: DEFAULT_NULL_URL, urlRefreshTimeStamp: 0 };
@@ -48,7 +49,9 @@ export const resolveUrl = async (song: NoxMedia.Song, iOS = true) => {
   const updateMetadata = async () => {
     try {
       const { playerSetting } = getState();
-      return playerSetting.updateLoadedTrack
+      // HACK: local source will always be refetched,
+      // as its album art needs to be cached to a file on disk
+      return song.source === Source.local || playerSetting.updateLoadedTrack
         ? await fetchPlayUrlPromise(song)
         : {};
     } catch (e) {
