@@ -4,14 +4,17 @@ import TrackPlayer from 'react-native-track-player';
 
 import { logger } from '../Logger';
 import { r128gain2Volume } from '../Utils';
+import { singleLimiter } from '../mediafetch/throttle';
 
-export const cacheAlbumArt = async (fpath: string) => {
-  const tempArtPath = `${RNFetchBlob.fs.dirs.CacheDir}/tempCover.jpg`;
-  RNFetchBlob.fs.unlink(tempArtPath).catch();
-  // HACK: exoplayer handles embedded art but I also need this for the UI...
-  await FFmpegKit.execute(`-i '${fpath}' -an -vcodec copy ${tempArtPath}`);
-  return tempArtPath;
-};
+const tempArtPath = `${RNFetchBlob.fs.dirs.CacheDir}/tempCover{bool}.jpg`;
+
+export const cacheAlbumArt = async (fpath: string) =>
+  singleLimiter.schedule(async () => {
+    RNFetchBlob.fs.unlink(tempArtPath).catch();
+    // HACK: exoplayer handles embedded art but I also need this for the UI...
+    await FFmpegKit.execute(`-i '${fpath}' -an -vcodec copy ${tempArtPath}`);
+    return (await RNFetchBlob.fs.exists(tempArtPath)) ? tempArtPath : undefined;
+  });
 
 export const probeMetadata = async (
   fspath: string
