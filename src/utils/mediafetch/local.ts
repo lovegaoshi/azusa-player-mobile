@@ -12,11 +12,10 @@
 import { Platform, NativeModules } from 'react-native';
 import RNFetchBlob from 'react-native-blob-util';
 
-import { probeMetadata, cacheAlbumArt } from '@utils/ffmpeg/ffmpeg';
+import { cacheAlbumArt } from '@utils/ffmpeg/ffmpeg';
 import { Source } from '@enums/MediaFetch';
 import SongTS from '@objects/Song';
 import logger from '../Logger';
-import { singleLimiter } from './throttle';
 
 const { NoxAndroidAutoModule } = NativeModules;
 
@@ -62,6 +61,7 @@ const resolveArtwork = async (song: NoxMedia.Song) => {
   let artworkBase64 = '';
   try {
     const artworkURI = await cacheAlbumArt(song.bvid);
+    NoxAndroidAutoModule.getUri(artworkURI).then(console.debug);
     artworkBase64 = await RNFetchBlob.fs.readFile(artworkURI, 'base64');
   } catch (e) {
     logger.warn(`[localResolver] cannot resolve artwork of ${song.bvid}`);
