@@ -45,14 +45,23 @@ export const parseSongR128gain = async (
   return { playerSetting, cachedR128gain, cachedUrl };
 };
 
-export const resolveUrl = async (song: NoxMedia.Song, iOS = true) => {
+interface ResolveUrl {
+  song: NoxMedia.Song;
+  iOS?: boolean;
+  prefetch?: boolean;
+}
+export const resolveUrl = async ({
+  song,
+  iOS = true,
+  prefetch = false,
+}: ResolveUrl) => {
   const updateMetadata = async () => {
     try {
       const { playerSetting } = getState();
       // HACK: local source will always be refetched,
       // as its album art needs to be cached to a file on disk
       return song.source === Source.local || playerSetting.updateLoadedTrack
-        ? await fetchPlayUrlPromise(song)
+        ? await fetchPlayUrlPromise({ song })
         : {};
     } catch (e) {
       logger.warn('failed to resolve updated MetaData');
@@ -76,7 +85,7 @@ export const resolveUrl = async (song: NoxMedia.Song, iOS = true) => {
           ...(await updateMetadata()),
           url: cachedUrl,
         }
-      : await fetchPlayUrlPromise(song, iOS);
+      : await fetchPlayUrlPromise({ song, iOS, prefetch });
     logger.debug(
       `[SongResolveURL] ${song.parsedName} is resolved to ${url.url}`
     );

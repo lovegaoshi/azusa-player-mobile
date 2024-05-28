@@ -151,8 +151,19 @@ export const cycleThroughPlaymode = () => {
   }
 };
 
-export const resolveAndCache = async (song: NoxMedia.Song, dry = false) => {
-  const resolvedUrl = await resolveUrl(song);
+interface ResolveAndCache {
+  song: NoxMedia.Song;
+  dry?: boolean;
+  resolver?: (
+    v: NoxUtils.SongProcessor
+  ) => Promise<NoxNetwork.ParsedNoxMediaURL>;
+}
+export const resolveAndCache = async ({
+  song,
+  dry = false,
+  resolver = resolveUrl,
+}: ResolveAndCache) => {
+  const resolvedUrl = await resolver({ song });
   logger.debug(`[resolver] resolved ${song.bvid} to ${resolvedUrl.url}`);
   // a dry run doesnt cache to disk, but does resolve to the cached map.
   if (dry) return resolvedUrl;
@@ -177,7 +188,7 @@ export const songlistToTracklist = async (
 ): Promise<Track[]> => {
   return Promise.all(
     songList.map(async song => {
-      const resolvedUrl = await resolveAndCache(song);
+      const resolvedUrl = await resolveAndCache({ song });
       return {
         ...NULL_TRACK,
         title: song.parsedName,

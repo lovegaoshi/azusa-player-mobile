@@ -121,8 +121,9 @@ export const regexMatchOperations = <K, T>({
   fallback,
   regexMatching,
 }: regexMatchOperationsProps<K, T>) => {
+  const regexMatch = regexMatching(song);
   for (const reExtraction of regexOperations) {
-    const reExtracted = reExtraction[0].exec(regexMatching(song));
+    const reExtracted = reExtraction[0].exec(regexMatch);
     if (reExtracted !== null) {
       return reExtraction[1](song);
     }

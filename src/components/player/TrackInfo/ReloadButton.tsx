@@ -12,7 +12,7 @@ export default ({ track }: NoxComponent.TrackProps) => {
     if (!song) return;
     resetResolvedURL(song);
     const currentTrack = await TrackPlayer.getActiveTrack();
-    const updatedMetadata = await resolveAndCache(song);
+    const updatedMetadata = await resolveAndCache({ song });
     await TrackPlayer.load({ ...currentTrack, ...updatedMetadata });
   };
 

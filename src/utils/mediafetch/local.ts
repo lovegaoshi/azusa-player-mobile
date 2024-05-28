@@ -12,7 +12,7 @@
 import { Platform, NativeModules } from 'react-native';
 import RNFetchBlob from 'react-native-blob-util';
 
-import { cacheAlbumArt } from '@utils/ffmpeg/ffmpeg';
+import { cacheAlbumArt, base64AlbumArt } from '@utils/ffmpeg/ffmpeg';
 import { Source } from '@enums/MediaFetch';
 import SongTS from '@objects/Song';
 import logger from '../Logger';
@@ -53,6 +53,8 @@ const regexFetch = async ({
   songList: await songFetch(reExtracted[1]!, favList),
 });
 
+const resolveURLPrefetch = async (song: NoxMedia.Song) => ({ url: song.bvid });
+
 const resolveURL = async (song: NoxMedia.Song) => {
   let cover: string | undefined = undefined;
   if (Platform.OS === 'android') {
@@ -62,20 +64,18 @@ const resolveURL = async (song: NoxMedia.Song) => {
       cover = await NoxAndroidAutoModule.getUri(artworkUri);
     }
   }
-  return { url: song.bvid, cover };
+  return { ...resolveURLPrefetch(song), cover };
 };
 
 const resolveArtwork = async (song: NoxMedia.Song) => {
-  let artworkBase64 = '';
   try {
     const artworkUri = await cacheAlbumArt(song.bvid);
     if (artworkUri) {
-      artworkBase64 = await RNFetchBlob.fs.readFile(artworkUri, 'base64');
+      return base64AlbumArt(artworkUri);
     }
   } catch (e) {
     logger.warn(`[localResolver] cannot resolve artwork of ${song.bvid}`);
   }
-  return `data:image/png;base64,${artworkBase64}`;
 };
 
 const refreshSong = (song: NoxMedia.Song) => song;
@@ -87,4 +87,5 @@ export default {
   resolveURL,
   refreshSong,
   resolveArtwork,
+  resolveURLPrefetch,
 };

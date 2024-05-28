@@ -8,6 +8,12 @@ import { singleLimiter } from '../mediafetch/throttle';
 
 const tempArtPath = `${RNFetchBlob.fs.dirs.CacheDir}/tempCover{bool}.jpg`;
 
+export const base64AlbumArt = (path = tempArtPath) =>
+  RNFetchBlob.fs
+    .readFile(tempArtPath, 'base64')
+    .then(v => `data:image/png;base64,${v}`)
+    .catch(() => undefined);
+
 export const cacheAlbumArt = async (fpath: string) =>
   singleLimiter.schedule(async () => {
     RNFetchBlob.fs.unlink(tempArtPath).catch();

@@ -1,4 +1,10 @@
 declare namespace NoxUtils {
+  interface SongProcessor {
+    song: NoxMedia.Song;
+    iOS?: boolean;
+    prefetch?: boolean;
+  }
+
   export type RegexMatchResolve<T> = Array<
     [RegExp, (song: NoxMedia.Song, iOS?: boolean) => T]
   >;

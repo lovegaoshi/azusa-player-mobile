@@ -19,28 +19,46 @@ export const ENUMS = {
 type regResolve = NoxUtils.RegexMatchResolve<
   Promise<NoxNetwork.ParsedNoxMediaURL>
 >;
+
+const _regexResolveURLs: regResolve = [
+  [steriatkFetch.regexResolveURLMatch, steriatkFetch.resolveURL],
+  [biliaudioFetch.regexResolveURLMatch, biliaudioFetch.resolveURL],
+  [ytbvideoFetch.regexResolveURLMatch, ytbvideoFetch.resolveURL],
+  [ytbvideoFetch.regexResolveURLMatch2, ytbvideoFetch.resolveURL],
+  [bililiveFetch.regexResolveURLMatch, bililiveFetch.resolveURL],
+  [biliBangumiFetch.regexResolveURLMatch, biliBangumiFetch.resolveURL],
+  [headRequestFetch.regexResolveURLMatch, headRequestFetch.resolveURL],
+];
+
+const RegexResolveURLs: regResolve = [
+  ..._regexResolveURLs,
+  [localFetch.regexResolveURLMatch, localFetch.resolveURL],
+];
+
+const PRegexResolveURLs: regResolve = [
+  ..._regexResolveURLs,
+  [localFetch.regexResolveURLMatch, localFetch.resolveURLPrefetch],
+];
+
+interface FetchPlayUrl {
+  song: NoxMedia.Song;
+  iOS?: boolean;
+  prefetch?: boolean;
+}
 /**
  * a parent method that returns the media's stream url given an id.
  * some videos have episodes that cid may not be accurate. in other formats (eg biliAudio)
  * its used as an identifier.
  */
-export const fetchPlayUrlPromise = async (
-  v: NoxMedia.Song,
-  iOS = true
-): Promise<NoxNetwork.ParsedNoxMediaURL> => {
-  const bvid = v.bvid;
-  const cid = v.id;
-  const regexResolveURLs: regResolve = [
-    [steriatkFetch.regexResolveURLMatch, steriatkFetch.resolveURL],
-    [biliaudioFetch.regexResolveURLMatch, biliaudioFetch.resolveURL],
-    [ytbvideoFetch.regexResolveURLMatch, ytbvideoFetch.resolveURL],
-    [ytbvideoFetch.regexResolveURLMatch2, ytbvideoFetch.resolveURL],
-    [bililiveFetch.regexResolveURLMatch, bililiveFetch.resolveURL],
-    [biliBangumiFetch.regexResolveURLMatch, biliBangumiFetch.resolveURL],
-    [localFetch.regexResolveURLMatch, localFetch.resolveURL],
-    [headRequestFetch.regexResolveURLMatch, headRequestFetch.resolveURL],
-  ];
-  const regexResolveURLsWrapped: regResolve = regexResolveURLs.map(entry => [
+export const fetchPlayUrlPromise = async ({
+  song,
+  iOS = true,
+  prefetch = false,
+}: FetchPlayUrl): Promise<NoxNetwork.ParsedNoxMediaURL> => {
+  const bvid = song.bvid;
+  const cid = song.id;
+  const resolveUrlArray = prefetch ? PRegexResolveURLs : RegexResolveURLs;
+  const regexResolveURLsWrapped: regResolve = resolveUrlArray.map(entry => [
     entry[0],
     (song: NoxMedia.Song) => entry[1](song, iOS),
   ]);
@@ -49,24 +67,27 @@ export const fetchPlayUrlPromise = async (
   const fallback = () => {
     const cidStr = String(cid);
     if (cidStr.startsWith(ENUMS.audioType)) {
-      return biliaudioFetch.resolveURL(v);
+      return biliaudioFetch.resolveURL(song);
     }
     return fetchVideoPlayUrlPromise({ bvid, cid: cidStr, iOS });
   };
 
-  if (v.source && Object.values(MUSICFREE).includes(v.source as MUSICFREE)) {
-    const vsource = v.source as MUSICFREE;
-    const result = await resolver[vsource](v);
-    console.warn(result, v);
+  if (
+    song.source &&
+    Object.values(MUSICFREE).includes(song.source as MUSICFREE)
+  ) {
+    const vsource = song.source as MUSICFREE;
+    const result = await resolver[vsource](song);
+    console.warn(result, song);
     if (!result || result.url.length === 0) {
-      logger.error(JSON.stringify(v));
+      logger.error(JSON.stringify(song));
       throw new Error(`[resolveURL] ${bvid}, ${cid} failed.`);
     }
     return result;
   }
 
   return regexMatchOperations({
-    song: v,
+    song,
     regexOperations: regexResolveURLsWrapped,
     fallback,
     regexMatching: song => song.id,
@@ -74,38 +95,41 @@ export const fetchPlayUrlPromise = async (
 };
 
 export const refreshMetadata = async (
-  v: NoxMedia.Song
+  song: NoxMedia.Song
 ): Promise<Partial<NoxMedia.Song>> => {
-  const metadata = await fetchPlayUrlPromise(v);
+  const metadata = await fetchPlayUrlPromise({ song });
   return {
     ...(metadata.cover && { cover: metadata.cover }),
     metadataOnLoad: false,
   };
 };
 
-export const songExport2URL = (v: NoxMedia.Song): string => {
-  const regexOperations: NoxUtils.RegexMatchResolve<string> = [
-    [biliaudioFetch.regexResolveURLMatch, biliaudioFetch.export2URL],
-    [ytbvideoFetch.regexResolveURLMatch, ytbvideoFetch.export2URL],
-    [biliBangumiFetch.regexResolveURLMatch, biliBangumiFetch.export2URL],
-  ];
+const regexExportURLs: NoxUtils.RegexMatchResolve<string> = [
+  [biliaudioFetch.regexResolveURLMatch, biliaudioFetch.export2URL],
+  [ytbvideoFetch.regexResolveURLMatch, ytbvideoFetch.export2URL],
+  [biliBangumiFetch.regexResolveURLMatch, biliBangumiFetch.export2URL],
+];
 
+export const songExport2URL = (v: NoxMedia.Song): string => {
   return regexMatchOperations({
     song: v,
-    regexOperations,
+    regexOperations: regexExportURLs,
     fallback: bilivideoFetch.export2URL,
     regexMatching: song => song.id,
   });
 };
-export const songResolveArtwork = (v: NoxMedia.Song) => {
-  const regexOperations: NoxUtils.RegexMatchResolve<Promise<string>> = [
-    [localFetch.regexResolveURLMatch, localFetch.resolveArtwork],
-  ];
+
+const regexResolveArtworks: NoxUtils.RegexMatchResolve<
+  Promise<string | undefined>
+> = [[localFetch.regexResolveURLMatch, localFetch.resolveArtwork]];
+
+export const songResolveArtwork = (v?: NoxMedia.Song) => {
+  if (!v) return;
 
   return regexMatchOperations({
     song: v,
-    regexOperations,
-    fallback: () => Promise.resolve(''),
+    regexOperations: regexResolveArtworks,
+    fallback: async () => undefined,
     regexMatching: song => song.id,
   });
 };

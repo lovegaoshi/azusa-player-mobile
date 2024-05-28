@@ -32,7 +32,7 @@ const AlbumArt: React.FC<Props> = ({
   const playerSetting = useNoxSetting(state => state.playerSetting);
   const [isImageVisible, setIsImageVisible] = useState(true);
   const [isLrcVisible, setIsLrcVisible] = useState(false);
-  const [overwriteAlbumArt, setOverwriteAlbumArt] = useState('');
+  const [overwriteAlbumArt, setOverwriteAlbumArt] = useState<string>();
   const opacity = useRef(new Animated.Value(1)).current;
   const dimension = Dimensions.get('window');
   const coverStyle = {
@@ -82,10 +82,7 @@ const AlbumArt: React.FC<Props> = ({
   );
 
   useEffect(() => {
-    setOverwriteAlbumArt('');
-    if (!track?.artwork && track?.song) {
-      songResolveArtwork(track?.song).then(setOverwriteAlbumArt);
-    }
+    songResolveArtwork(track?.song)?.then(setOverwriteAlbumArt);
   }, [track]);
 
   return (
@@ -110,7 +107,7 @@ const AlbumArt: React.FC<Props> = ({
               playerSetting.hideCoverInMobile
                 ? 0
                 : {
-                    uri: `${track?.artwork || overwriteAlbumArt}`,
+                    uri: `${overwriteAlbumArt || track?.artwork}`,
                   }
             }
             transition={{ effect: 'flip-from-top' }}
