@@ -9,7 +9,6 @@
  * each site needs a fetch to parse regex extracted, a videoinfo fetcher and a song fetcher.
  */
 import { Source } from '@enums/MediaFetch';
-import { regexFetchProps } from './generic';
 import { fetchAwaitPaginatedAPI } from './paginatedfetch';
 import SongTS from '@objects/Song';
 
@@ -22,7 +21,7 @@ const CIDPREFIX = 'steriatk-';
 const paginatedFetch = ({
   progressEmitter,
   favList = [],
-}: Partial<regexFetchProps>) => {
+}: Partial<NoxNetwork.RegexFetchProps>) => {
   return fetchAwaitPaginatedAPI({
     url: VIDEOINFO_API,
     getMediaCount: json => json.total,
@@ -56,7 +55,7 @@ const paginatedFetch = ({
 const regexFetch = async ({
   progressEmitter,
   favList,
-}: Partial<regexFetchProps>): Promise<NoxNetwork.NoxRegexFetch> => ({
+}: Partial<NoxNetwork.RegexFetchProps>): Promise<NoxNetwork.NoxRegexFetch> => ({
   songList: await paginatedFetch({ progressEmitter, favList }),
 });
 

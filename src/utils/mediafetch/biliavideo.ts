@@ -1,4 +1,3 @@
-import { regexFetchProps } from './generic';
 import { biliApiLimiter } from './throttle';
 
 import { logger } from '../Logger';
@@ -70,7 +69,7 @@ export const fetchBiliAVIDs = async (
 const regexFetch = async ({
   reExtracted,
   useBiliTag,
-}: regexFetchProps): Promise<NoxNetwork.NoxRegexFetch> => ({
+}: NoxNetwork.RegexFetchProps): Promise<NoxNetwork.NoxRegexFetch> => ({
   songList: await fetchBiliAVIDs(
     [reExtracted[1]!],
     undefined,

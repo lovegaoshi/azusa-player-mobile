@@ -26,7 +26,6 @@ import localFetch from '@utils/mediafetch/local';
 import b23tvFetch from './mediafetch/b23tv';
 import headRequestFetch from './mediafetch/headRequest';
 import biliFavColleFetch from './mediafetch/biliFavColle';
-import { regexFetchProps } from './mediafetch/generic';
 import { MUSICFREE, searcher } from './mediafetch/musicfree';
 import { getMusicFreePlugin } from '@utils/ChromeStorage';
 
@@ -137,7 +136,7 @@ export const searchBiliURLs = async ({
 
 interface ReExtraction<T> {
   match: RegExp;
-  fetch: (v: regexFetchProps) => Promise<T>;
+  fetch: (v: NoxNetwork.RegexFetchProps) => Promise<T>;
   refresh?: (v: NoxMedia.Playlist) => Promise<NoxMedia.SearchPlaylist>;
 }
 

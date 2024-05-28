@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 import { logger } from '../Logger';
-import { regexFetchProps } from './generic';
 import { fetchBiliPaginatedAPI } from './paginatedbili';
 import { cookieHeader } from '@utils/Bilibili/biliCookies';
 import { Source } from '@enums/MediaFetch';
@@ -101,7 +100,7 @@ const regexFetch = async ({
   reExtracted,
   progressEmitter = () => undefined,
   favList,
-}: regexFetchProps): Promise<NoxNetwork.NoxRegexFetch> => ({
+}: NoxNetwork.RegexFetchProps): Promise<NoxNetwork.NoxRegexFetch> => ({
   songList: await fetchBiliAudioColleList(
     reExtracted[1]!,
     progressEmitter,

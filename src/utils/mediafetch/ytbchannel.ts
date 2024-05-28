@@ -2,7 +2,6 @@ import { get_channel } from 'libmuse';
 // eslint-disable-next-line import/no-unresolved
 import { Innertube } from 'youtubei.js';
 
-import { regexFetchProps } from './generic';
 import { fetchAudioInfo } from './ytbvideo';
 import bfetch from '@utils/BiliFetch';
 import SongTS from '@objects/Song';
@@ -74,7 +73,7 @@ export const fetchMuseChannel = async (
 const regexFetch = async ({
   reExtracted,
   favList = [],
-}: regexFetchProps): Promise<NoxNetwork.NoxRegexFetch> => {
+}: NoxNetwork.RegexFetchProps): Promise<NoxNetwork.NoxRegexFetch> => {
   const songList = await fetchYTIChannel(
     // fetchYTPlaylist(
     reExtracted[1],

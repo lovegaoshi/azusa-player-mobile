@@ -14,7 +14,6 @@ import RNFetchBlob from 'react-native-blob-util';
 
 import { probeMetadata, cacheAlbumArt } from '@utils/ffmpeg/ffmpeg';
 import { Source } from '@enums/MediaFetch';
-import { regexFetchProps } from './generic';
 import SongTS from '@objects/Song';
 import logger from '../Logger';
 import { singleLimiter } from './throttle';
@@ -82,7 +81,7 @@ const regexFetch = async ({
   reExtracted,
   favList = [],
   progressEmitter,
-}: regexFetchProps): Promise<NoxNetwork.NoxRegexFetch> => ({
+}: NoxNetwork.RegexFetchProps): Promise<NoxNetwork.NoxRegexFetch> => ({
   songList: await songFetch(reExtracted[1]!, favList, progressEmitter),
 });
 

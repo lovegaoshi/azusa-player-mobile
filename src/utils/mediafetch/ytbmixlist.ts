@@ -1,4 +1,3 @@
-import { regexFetchProps } from './generic';
 import { CIDPREFIX } from './ytbvideo';
 import SongTS from '@objects/Song';
 import { timestampToSeconds } from '../Utils';
@@ -58,7 +57,7 @@ const fetchYTPlaylist = async (
 const regexFetch = async ({
   reExtracted,
   favList = [],
-}: regexFetchProps): Promise<NoxNetwork.NoxRegexFetch> => {
+}: NoxNetwork.RegexFetchProps): Promise<NoxNetwork.NoxRegexFetch> => {
   const songList = await fetchYTPlaylist(
     reExtracted[1],
     favList,

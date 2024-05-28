@@ -91,7 +91,7 @@ export const fetchBiliSearchList = async (
   return [];
 };
 
-interface regexFetchProps {
+interface RegexFetchProps {
   url: string;
   progressEmitter: (val: number) => void;
   fastSearch: boolean;
@@ -103,7 +103,7 @@ const regexFetch = async ({
   progressEmitter = () => undefined,
   fastSearch,
   cookiedSearch = false,
-}: regexFetchProps): Promise<NoxNetwork.NoxRegexFetch> => ({
+}: RegexFetchProps): Promise<NoxNetwork.NoxRegexFetch> => ({
   songList: await fetchBiliSearchList(
     url,
     progressEmitter,

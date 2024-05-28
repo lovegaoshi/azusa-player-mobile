@@ -9,7 +9,6 @@
  * each site needs a fetch to parse regex extracted, a videoinfo fetcher and a song fetcher.
  */
 import { logger } from '../Logger';
-import { regexFetchProps } from './generic';
 import { fetchAwaitBiliPaginatedAPI } from './paginatedbili';
 import { awaitLimiter } from './throttle';
 import { getDm } from '../Bilibili/bilidm';
@@ -52,7 +51,7 @@ const regexFetch = async ({
   progressEmitter = () => undefined,
   favList,
   useBiliTag,
-}: regexFetchProps): Promise<NoxNetwork.NoxRegexFetch> => ({
+}: NoxNetwork.RegexFetchProps): Promise<NoxNetwork.NoxRegexFetch> => ({
   songList: await biliShazamOnSonglist(
     await fetchBiliChannelList(reExtracted.input, progressEmitter, favList),
     false,
