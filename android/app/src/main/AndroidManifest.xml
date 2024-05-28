@@ -22,6 +22,15 @@
         android:theme="@style/AppTheme">
         <profileable android:shell="true"
           tools:targetApi="q" />
+        <provider
+          android:name="androidx.core.content.FileProvider"
+          android:authorities="com.noxplay.noxplayer.provider"
+          android:exported="false"
+          android:grantUriPermissions="true">
+          <meta-data
+            android:name="android.support.FILE_PROVIDER_PATHS"
+            android:resource="@xml/provider_paths" />
+        </provider>
         <activity
             android:name="com.noxplay.noxplayer.MainActivity"
             android:supportsPictureInPicture="true"
