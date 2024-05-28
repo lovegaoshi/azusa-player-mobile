@@ -11,6 +11,7 @@ import android.provider.MediaStore
 import android.provider.Settings
 import android.util.Log
 import android.view.WindowManager
+import androidx.core.content.FileProvider
 import com.facebook.react.bridge.Arguments
 import com.facebook.react.bridge.Promise
 import com.facebook.react.bridge.ReactApplicationContext
@@ -18,6 +19,7 @@ import com.facebook.react.bridge.ReactContextBaseJavaModule
 import com.facebook.react.bridge.ReactMethod
 import com.facebook.react.bridge.WritableArray
 import com.facebook.react.bridge.WritableNativeArray
+import java.io.File
 
 
 class NoxAndroidAutoModule(reactContext: ReactApplicationContext) :
@@ -83,7 +85,8 @@ class NoxAndroidAutoModule(reactContext: ReactApplicationContext) :
   }
 
   @ReactMethod fun getUri(uri: String, callback: Promise) {
-    callback.resolve(Uri.parse(uri).toString())
+    callback.resolve(FileProvider.getUriForFile(reactApplicationContext,
+      "${BuildConfig.APPLICATION_ID}.provider", File(uri)).toString())
   }
 
   @ReactMethod fun listMediaDir(relativeDir: String, subdir: Boolean, callback: Promise) {

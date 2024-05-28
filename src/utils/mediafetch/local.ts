@@ -55,14 +55,21 @@ const regexFetch = async ({
   songList: await songFetch(reExtracted[1]!, favList, progressEmitter),
 });
 
-const resolveURL = async (song: NoxMedia.Song) => ({ url: song.bvid });
+const resolveURL = async (song: NoxMedia.Song) => {
+  let cover: string | undefined = undefined;
+  if (Platform.OS === 'android') {
+    const artworkUri = await cacheAlbumArt(song.bvid);
+    cover = await NoxAndroidAutoModule.getUri(artworkUri);
+  }
+  return { url: song.bvid, cover };
+};
 
 const resolveArtwork = async (song: NoxMedia.Song) => {
+  if (Platform.OS === 'android') return '';
   let artworkBase64 = '';
   try {
-    const artworkURI = await cacheAlbumArt(song.bvid);
-    NoxAndroidAutoModule.getUri(artworkURI).then(console.debug);
-    artworkBase64 = await RNFetchBlob.fs.readFile(artworkURI, 'base64');
+    const artworkUri = await cacheAlbumArt(song.bvid);
+    artworkBase64 = await RNFetchBlob.fs.readFile(artworkUri, 'base64');
   } catch (e) {
     logger.warn(`[localResolver] cannot resolve artwork of ${song.bvid}`);
   }
