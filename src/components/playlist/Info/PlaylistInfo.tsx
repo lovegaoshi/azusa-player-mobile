@@ -41,7 +41,7 @@ export default ({ usePlaylist, onPressed = () => undefined }: Props) => {
   const [searchVisible, setSearchVisible] = useState(searching);
   // TODO: a more elegant way to signal content update
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const playlistInfoUpdate = useNoxSetting(state => state.playlistInfoUpdate);
+  const _playlistInfoUpdate = useNoxSetting(state => state.playlistInfoUpdate);
   const playlistSearchAutoFocus: boolean = useNoxSetting(
     state => state.playlistSearchAutoFocus
   );

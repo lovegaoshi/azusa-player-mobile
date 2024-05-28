@@ -46,35 +46,6 @@ const songFetch = async (
       source: Source.local,
     })
   );
-  // TODO: no longer needs FFProbe
-  return await Promise.all(
-    uniqMediaFiles.map(async (v, index) => {
-      let probedMetadata: any = {};
-      try {
-        probedMetadata = await singleLimiter.schedule(() => {
-          progressEmitter((100 * (index + 1)) / uniqMediaFiles.length);
-          return probeMetadata(v.realPath);
-        });
-      } catch (e) {
-        logger.warn(e);
-        logger.warn(v);
-      }
-      return SongTS({
-        cid: `${Source.local}-${v.realPath}`,
-        bvid: `file://${v.realPath}`,
-        name: probedMetadata.tags?.title || v.fileName,
-        nameRaw: probedMetadata.tags?.title || v.fileName,
-        singer: probedMetadata.tags?.artist || '',
-        singerId: probedMetadata.tags?.artist || '',
-        cover: '',
-        lyric: '',
-        page: 0,
-        duration: Number(probedMetadata.duration) || 0,
-        album: probedMetadata.tags?.album || '',
-        source: Source.local,
-      });
-    })
-  );
 };
 
 const regexFetch = async ({

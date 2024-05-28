@@ -1,5 +1,7 @@
 import React, { useImperativeHandle, useState } from 'react';
 import { IconButton } from 'react-native-paper';
+import { ViewStyle } from 'react-native';
+
 import Dialog from '../dialogs/NewPlaylistDialog';
 
 const ICON = 'plus-circle-outline';
@@ -7,8 +9,7 @@ const ICON = 'plus-circle-outline';
 interface Props {
   fromList?: NoxMedia.Playlist;
   icon?: string;
-  // TODO: really object?
-  style?: object;
+  style?: ViewStyle;
 }
 
 export interface AddPlaylistButtonRef {

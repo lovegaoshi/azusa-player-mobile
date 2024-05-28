@@ -29,12 +29,6 @@ import biliFavColleFetch from './mediafetch/biliFavColle';
 import { MUSICFREE, searcher } from './mediafetch/musicfree';
 import { getMusicFreePlugin } from '@utils/ChromeStorage';
 
-const reExtractionsShortURL: ReExtraction<string>[] = [
-  {
-    match: b23tvFetch.regexSearchMatch,
-    fetch: b23tvFetch.regexFetch,
-  },
-];
 /**
  * assign the proper extractor based on the provided url. uses regex.
  * @returns
@@ -55,13 +49,12 @@ export const matchBiliURL = <T>(
 ) => {
   for (const reExtraction of extractions) {
     const reExtracted = reExtraction.match.exec(input);
-    if (reExtracted !== null) {
-      return {
-        regexFetch: reExtraction.fetch,
-        reExtracted,
-        refresh: reExtraction.refresh,
-      };
-    }
+    if (reExtracted == null) continue;
+    return {
+      regexFetch: reExtraction.fetch,
+      reExtracted,
+      refresh: reExtraction.refresh,
+    };
   }
   return null;
 };
@@ -139,6 +132,13 @@ interface ReExtraction<T> {
   fetch: (v: NoxNetwork.RegexFetchProps) => Promise<T>;
   refresh?: (v: NoxMedia.Playlist) => Promise<NoxMedia.SearchPlaylist>;
 }
+
+const reExtractionsShortURL: ReExtraction<string>[] = [
+  {
+    match: b23tvFetch.regexSearchMatch,
+    fetch: b23tvFetch.regexFetch,
+  },
+];
 
 const reExtractions: ReExtraction<NoxNetwork.NoxRegexFetch>[] = [
   {
