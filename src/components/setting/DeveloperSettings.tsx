@@ -130,7 +130,7 @@ const Home = ({ navigation }: NoxComponent.NavigationProps) => {
       defaultIndex: 0,
       onClose: () => setSelectVisible(false),
       onSubmit: (index: number) => {
-        saveFadeInterval(FadeOptions[index]);
+        saveFadeInterval(FadeOptions[index]).then(Sentry.nativeCrash);
         setSelectVisible(false);
       },
       title: t('DeveloperSettings.FadeTitle'),
@@ -152,7 +152,9 @@ const Home = ({ navigation }: NoxComponent.NavigationProps) => {
       defaultIndex: defaultIndex > -1 ? defaultIndex : 0,
       onClose: () => setSelectVisible(false),
       onSubmit: (index: number) => {
-        setPlayerSetting({ cacheSize: options[index] });
+        setPlayerSetting({ cacheSize: options[index] }).then(
+          Sentry.nativeCrash
+        );
         setSelectVisible(false);
       },
       title: t('DeveloperSettings.CacheSizeName'),
