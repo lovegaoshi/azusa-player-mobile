@@ -1,6 +1,6 @@
 import { View, GestureResponderEvent, StyleSheet } from 'react-native';
 import { Menu, Searchbar } from 'react-native-paper';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDebounce } from 'use-debounce';
 
 import { useNoxSetting } from '@stores/useApp';
@@ -8,6 +8,7 @@ import { useNoxSetting } from '@stores/useApp';
 interface Props {
   placeholder: string;
   value: string;
+  pressed: React.MutableRefObject<boolean>;
   setValue: (v: string) => void;
   onSubmit: (v: string) => void;
   onIconPress: (e: GestureResponderEvent) => void;
@@ -23,16 +24,21 @@ export default ({
   onIconPress,
   icon,
   resolveData,
+  pressed,
 }: Props) => {
-  const [debouncedValue] = useDebounce(value, 500);
+  const [debouncedValue] = useDebounce(value, 250);
   const [showAutoComplete, setShowAutoComplete] = useState(false);
-  const pressed = useRef(false);
   const [data, setData] = useState<string[]>([]);
   const playerStyle = useNoxSetting(state => state.playerStyle);
   const [menuCoords, setMenuCoords] = useState<NoxTheme.coordinates>({
     x: 0,
     y: 0,
   });
+
+  const onFocus = () => {
+    pressed.current = false;
+    () => setShowAutoComplete(true);
+  };
 
   useEffect(() => {
     if (debouncedValue.length < 1) {
@@ -68,11 +74,11 @@ export default ({
         onIconPress={onIconPress}
         icon={icon}
         onBlur={() => setShowAutoComplete(false)}
-        onFocus={() => setShowAutoComplete(true)}
+        onFocus={onFocus}
       />
       {resolveData && (
         <Menu
-          visible={showAutoComplete}
+          visible={!pressed.current && showAutoComplete}
           onDismiss={() => setShowAutoComplete(false)}
           anchor={menuCoords}
         >
