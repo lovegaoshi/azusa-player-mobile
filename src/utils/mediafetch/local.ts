@@ -53,6 +53,8 @@ const regexFetch = async ({
   songList: await songFetch(reExtracted[1]!, favList),
 });
 
+const resolveURLPrefetch = async (song: NoxMedia.Song) => ({ url: song.bvid });
+
 const resolveURL = async (song: NoxMedia.Song) => {
   let cover: string | undefined = undefined;
   if (Platform.OS === 'android') {
@@ -62,7 +64,7 @@ const resolveURL = async (song: NoxMedia.Song) => {
       cover = await NoxAndroidAutoModule.getUri(artworkUri);
     }
   }
-  return { url: song.bvid, cover };
+  return { ...resolveURLPrefetch(song), cover };
 };
 
 const resolveArtwork = async (song: NoxMedia.Song) => {
@@ -85,4 +87,5 @@ export default {
   resolveURL,
   refreshSong,
   resolveArtwork,
+  resolveURLPrefetch,
 };

@@ -6,7 +6,7 @@ import TrackPlayer, {
 import { DeviceEventEmitter, Platform } from 'react-native';
 
 import { NULL_TRACK } from '../objects/Song';
-import { parseSongR128gain } from '../utils/SongOperations';
+import { parseSongR128gain, resolveUrl } from '../utils/SongOperations';
 import { initBiliHeartbeat } from '../utils/Bilibili/BiliOperate';
 import { logger } from '../utils/Logger';
 import noxPlayingList, { getNextSong } from '../stores/playingList';
@@ -107,10 +107,11 @@ export async function PlaybackService() {
         const nextSong = getNextSong(event.track.song);
         if (nextSong) {
           logger.debug(`[ResolveURL] prefetching ${nextSong.name}`);
-          resolveAndCache(
-            nextSong,
-            !(playerSetting.prefetchTrack && playerSetting.cacheSize > 2)
-          );
+          resolveAndCache({
+            song: nextSong,
+            dry: !(playerSetting.prefetchTrack && playerSetting.cacheSize > 2),
+            resolver: ({ song }) => resolveUrl({ song, prefetch: true }),
+          });
         }
       }
       // r128gain support:
@@ -145,7 +146,7 @@ export async function PlaybackService() {
       ) {
         try {
           const song = event.track.song as NoxMedia.Song;
-          const updatedMetadata = await resolveAndCache(song);
+          const updatedMetadata = await resolveAndCache({ song });
           const currentTrack = await TrackPlayer.getActiveTrack();
           await TrackPlayer.load({ ...currentTrack, ...updatedMetadata });
           if (playerErrored) {
