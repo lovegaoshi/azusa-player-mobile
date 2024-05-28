@@ -57,17 +57,21 @@ const resolveURL = async (song: NoxMedia.Song) => {
   let cover: string | undefined = undefined;
   if (Platform.OS === 'android') {
     const artworkUri = await cacheAlbumArt(song.bvid);
-    cover = await NoxAndroidAutoModule.getUri(artworkUri);
+    console.log('[APMlocal]', artworkUri, song);
+    if (artworkUri) {
+      cover = await NoxAndroidAutoModule.getUri(artworkUri);
+    }
   }
   return { url: song.bvid, cover };
 };
 
 const resolveArtwork = async (song: NoxMedia.Song) => {
-  if (Platform.OS === 'android') return '';
   let artworkBase64 = '';
   try {
     const artworkUri = await cacheAlbumArt(song.bvid);
-    artworkBase64 = await RNFetchBlob.fs.readFile(artworkUri, 'base64');
+    if (artworkUri) {
+      artworkBase64 = await RNFetchBlob.fs.readFile(artworkUri, 'base64');
+    }
   } catch (e) {
     logger.warn(`[localResolver] cannot resolve artwork of ${song.bvid}`);
   }
