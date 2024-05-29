@@ -7,11 +7,6 @@ import { useTranslation } from 'react-i18next';
 import { useNoxSetting } from '@stores/useApp';
 import useSnack from '@stores/useSnack';
 
-const GiteeSteriaJson =
-  'https://gitee.com/lovegaoshi/azusa-player-mobile/raw/master/src/components/styles/steria.json';
-const GithubSteriaJson =
-  'https://raw.githubusercontent.com/lovegaoshi/azusa-player-mobile/master/src/components/styles/steria.json';
-
 interface Props {
   onSearched: (val: any) => void;
 }

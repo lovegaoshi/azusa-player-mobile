@@ -6,11 +6,11 @@ import { logger } from '../Logger';
 import { r128gain2Volume } from '../Utils';
 import { singleLimiter } from '../mediafetch/throttle';
 
-const tempArtPath = `${RNFetchBlob.fs.dirs.CacheDir}/tempCover{bool}.jpg`;
+const tempArtPath = `${RNFetchBlob.fs.dirs.CacheDir}/tempCover.jpg`;
 
 export const base64AlbumArt = (path = tempArtPath) =>
   RNFetchBlob.fs
-    .readFile(tempArtPath, 'base64')
+    .readFile(path, 'base64')
     .then(v => `data:image/png;base64,${v}`)
     .catch(() => undefined);
 
