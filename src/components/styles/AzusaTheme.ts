@@ -93,7 +93,7 @@ export default {
     },
     {
       type: 'biliNFTVideoNew',
-      identifier: '["161","235","变速系列·阿梓"]',
+      identifier: '["161","228","变速系列·阿梓"]',
     },
     {
       type: 'biliNFTVideoNew',
