@@ -42,7 +42,7 @@ export default ({
     );
     if (androidPermission !== PermissionsAndroid.RESULTS.GRANTED) {
       OneWayAlert('dude', 'this aint gonna work without permissions');
-      // return;
+      return;
     }
     const selectedFile = (
       await DocumentPicker.getDocumentAsync({
