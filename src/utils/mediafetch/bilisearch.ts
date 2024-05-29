@@ -32,7 +32,7 @@ const getCookie = async (cookiedSearch = false) => {
       bvobjs.map(obj => fetchCID(obj.bvid))
     );
      */
-const fastSearchResolveBVID = (bvobjs: any[]) =>
+export const fastSearchResolveBVID = (bvobjs: any[]) =>
   bvobjs.map(obj => {
     const name = obj.title.replaceAll(/<[^<>]*em[^<>]*>/g, '');
     return SongTS({
