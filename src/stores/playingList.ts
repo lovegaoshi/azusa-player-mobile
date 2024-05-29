@@ -61,7 +61,10 @@ export const playNextIndex = (direction = 1, set = true) => {
   return newIndex;
 };
 
-export const playNextSong = (direction = 1, set = true) =>
+export const playNextSong = (
+  direction = 1,
+  set = true
+): NoxMedia.Song | undefined =>
   getCurrentTPQueue()[playNextIndex(direction, set)];
 
 export const setPlayingList = (list: NoxMedia.Song[]) => {
