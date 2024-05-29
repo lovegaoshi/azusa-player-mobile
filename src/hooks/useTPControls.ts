@@ -82,8 +82,9 @@ export default () => {
   const prepareSkipToNext = async () => {
     const nextSong = playNextSong();
     if (
+      nextSong &&
       (await TrackPlayer.getActiveTrackIndex()) ===
-      (await TrackPlayer.getQueue()).length - 1
+        (await TrackPlayer.getQueue()).length - 1
     ) {
       try {
         await skipToBiliSuggest();
@@ -96,7 +97,7 @@ export default () => {
 
   const prepareSkipToPrevious = async () => {
     const nextSong = playNextSong(-1);
-    if ((await TrackPlayer.getActiveTrackIndex()) === 0) {
+    if (nextSong && (await TrackPlayer.getActiveTrackIndex()) === 0) {
       try {
         await skipToBiliSuggest(false);
       } catch {
