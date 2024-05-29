@@ -24,3 +24,8 @@ jobs:
         run: |
           git submodule update --init --recursive
           yarn test --runInBand
+
+      - name: lint & prettier
+        run: |
+          yarn ci:lint
+          yarn ci:format

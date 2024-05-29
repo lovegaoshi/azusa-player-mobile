@@ -787,6 +787,26 @@
       "darkTheme": true
     },
     "gifs": [
+      "https://i0.hdslb.com/bfs/garb/1de7869770f458f370ca988c1523335dd9ac9feb.png",
+      "https://i0.hdslb.com/bfs/garb/179dbd35114653dc544d59cf34787a08d487c927.png",
+      "https://i0.hdslb.com/bfs/garb/1aead106d2502961da49cb579671298c1e9589ba.png",
+      "https://i0.hdslb.com/bfs/garb/a37d02105ec547e65b01a6332f8ece1b8cc6040d.png",
+      "https://i0.hdslb.com/bfs/garb/86d59d35838f04320c60fb21ca76930ab9371231.png",
+      "https://i0.hdslb.com/bfs/garb/94d61d1d7d0f314ca3d8428663848f551e7bd18f.png",
+      "https://i0.hdslb.com/bfs/garb/c64d2c9f41c658cfe60b12fd1769696f2c14a8cf.png",
+      "https://i0.hdslb.com/bfs/garb/c6a08247a8a9109b53a8477e5bcb0d7748bff4cc.png",
+      "https://i0.hdslb.com/bfs/garb/7dd2e2b684561eab14f7dc38f17e223d7b301643.png",
+      "https://i0.hdslb.com/bfs/garb/7216138f847977e58607877065528da638d6edc2.png",
+      "https://i0.hdslb.com/bfs/garb/27f51c75891942290a185418bccad7a168dd0864.png",
+      "https://i0.hdslb.com/bfs/garb/d3db31066041668480471db114daa5890a85b9f6.png",
+      "https://i0.hdslb.com/bfs/garb/12b5f31b76bc1dc16f7b099034c47ce7f787e0ed.png",
+      "https://i0.hdslb.com/bfs/garb/110d6950649e8182979daac2d7f861fc550cc2a0.png",
+      "https://i0.hdslb.com/bfs/garb/bea239f77139594d0fb9299f10025e7931a11a17.png",
+      "https://i0.hdslb.com/bfs/garb/2424c0c9df2021619877457b5ac67fbcaade7553.png",
+      "https://i0.hdslb.com/bfs/garb/a4c340caeebaa0e80f8e63bb38ddc74c96931e09.png",
+      "https://i0.hdslb.com/bfs/garb/515906fd052a2ad3e88e0f22fefbcd5ad0712e6a.png",
+      "https://i0.hdslb.com/bfs/garb/679977d56de3082e052689035d363273019d0ac0.png",
+      "https://i0.hdslb.com/bfs/garb/fdfd701b76fbd5cceec150253103a05c8e8b145e.png",
       "https://i0.hdslb.com/bfs/garb/2dcdd8d6b07907eab66ca12eccf36a5f142b1a18.png",
       "https://i0.hdslb.com/bfs/garb/361b8f691b0e1f68e45dc0feca00ed0198922026.png",
       "https://i0.hdslb.com/bfs/garb/c81fc9e666f1878a5f5c9e8e36ae9a36b4160129.png",
@@ -1282,17 +1302,17 @@
       "https://i0.hdslb.com/bfs/garb/7fc48881ec85a91ab451162d14749a50ebaff767.jpg",
       "https://i0.hdslb.com/bfs/new_dyn/8f22c393e49af2f90de7219b0bce6f0b13692113.png",
       {
-        "type": "biliNFTVideo",
-        "identifier": "[\"101287\",\"海的誓约\"]"
+        "type": "biliNFTVideoNew",
+        "identifier": "[\"101287\",\"101288\",\"海的誓约\"]"
       },
       {
-        "type": "biliNFTVideo",
-        "identifier": "[\"101287\",\"海的回响\"]"
+        "type": "biliNFTVideoNew",
+        "identifier": "[\"101287\",\"101288\",\"海的回响\"]"
       },
       "https://i0.hdslb.com/bfs/garb/open/53564f764a2d12471f984c3eab6b0d1465d49c00.png",
       {
-        "type": "biliNFTVideo",
-        "identifier": "[\"101287\",\"圣诞礼物\"]"
+        "type": "biliNFTVideoNew",
+        "identifier": "[\"101287\",\"101288\",\"圣诞礼物\"]"
       },
       "https://i0.hdslb.com/bfs/garb/open/b9d26c2883ce77b588196a2adad83cb0709ff90e.jpg",
       "https://i0.hdslb.com/bfs/garb/open/2d778a7bc969d75c0bd708eee1ac4aefa35f2789.jpg",
@@ -1301,8 +1321,8 @@
       "https://i0.hdslb.com/bfs/garb/open/0f3051a12f530992e648a2ec2af8d4a29de5d01b.png",
       "https://i0.hdslb.com/bfs/garb/open/9d7e7201542540a9535c7fc9f44147c6ee8f80c0.jpg",
       {
-        "type": "biliNFTVideo",
-        "identifier": "[\"101287\",\"kirakira\"]"
+        "type": "biliNFTVideoNew",
+        "identifier": "[\"101287\",\"101288\",\"kirakira\"]"
       }
     ],
     "backgroundImagesLandscape": [
@@ -1478,6 +1498,7 @@
         "type": "biliNFTVideoNew",
         "identifier": "[\"100531\",\"100532\",0]"
       },
+      "https://i0.hdslb.com/bfs/new_dyn/49692c2468f2e8844462f9612970c6e6227931587.png",
       "https://i0.hdslb.com/bfs/new_dyn/cf5917c1654e667a18a7e8e08295864d5133370.png",
       "https://i0.hdslb.com/bfs/new_dyn/a7cfdbfb362358fcae354e2a79580c4d314866683.jpg",
       "https://i0.hdslb.com/bfs/new_dyn/198ba3fdaaf24991e96873cdc08ead5c314866683.png",
@@ -1687,6 +1708,17 @@
       "darkTheme": false
     },
     "gifs": [
+      "https://i0.hdslb.com/bfs/garb/fe8d3fbba4eaa6d0aac0921588ae84db9d18b0d4.png",
+      "https://i0.hdslb.com/bfs/garb/5e8493e76c9e04c43d2436997c98a7bb5ad915f0.png",
+      "https://i0.hdslb.com/bfs/garb/392cb80ca58cbca945bcccab23896af4e523a7f8.png",
+      "https://i0.hdslb.com/bfs/garb/23e1cd0b6b49cde6fc72a01cd082b97cd26e5ac8.png",
+      "https://i0.hdslb.com/bfs/garb/69e7dc3b697978a155ca5db38f265932225e6225.png",
+      "https://i0.hdslb.com/bfs/garb/254569f7751ba264bb1de0145dceaaa2b93f743f.png",
+      "https://i0.hdslb.com/bfs/garb/3381e8024f4f959081f59448bfdd19c5a9b4fa5c.png",
+      "https://i0.hdslb.com/bfs/garb/895b9f44073a1675fc6c2a3c4c1a67ede22887ad.png",
+      "https://i0.hdslb.com/bfs/garb/287bad940b67c6ba5adc3d59bbdf5dac2c6f7f61.png",
+      "https://i0.hdslb.com/bfs/garb/55582314e2b146696e7a6cc917aa3a99e110cd22.png",
+      "https://i0.hdslb.com/bfs/garb/a0628a2c7003b3bfe9fa9e0e70907177ee305529.png",
       "https://i0.hdslb.com/bfs/new_dyn/4395e02d7275820047d98b1be4779f852273426.gif",
       "https://i0.hdslb.com/bfs/new_dyn/ca10bb1d98bab16591ef1fbb36c507302273426.gif",
       "https://i0.hdslb.com/bfs/new_dyn/9e1e8ce55d852f23fc6b9677d78fc6072273426.gif",
@@ -1746,7 +1778,23 @@
       "https://i0.hdslb.com/bfs/garb/54a7d01058c843df9f4fadde99df42a8fb446f60.jpg",
       "https://i0.hdslb.com/bfs/garb/1167eb2420f0480ab506f5d7d9bc18271800e57f.jpg",
       "https://i0.hdslb.com/bfs/garb/54b09bc72cf1537c0ba0f11eb9bc13091b01aad1.jpg",
-      "https://i0.hdslb.com/bfs/garb/95874aff3686bee1b0c942658bade9543f8c6302.jpg"
+      "https://i0.hdslb.com/bfs/garb/95874aff3686bee1b0c942658bade9543f8c6302.jpg",
+      {
+        "type": "biliNFTVideoNew",
+        "identifier": "[\"102034\",\"102035\",\"星之降临-露米\"]"
+      },
+      {
+        "type": "biliNFTVideoNew",
+        "identifier": "[\"102034\",\"102035\",\"吉光片羽\"]"
+      },
+      {
+        "type": "biliGarbHeadVideo",
+        "identifier": "108052801"
+      },
+      "https://i0.hdslb.com/bfs/garb/open/143a0cf9a3bf595e29b18dab5a5ae6af285b11c2.png",
+      "https://i0.hdslb.com/bfs/garb/open/79c2a723bed0c98abd68c0d85cb0c6d7ab7b57d8.png",
+      "https://i0.hdslb.com/bfs/garb/open/934c09a9131e0b6a7fcb8484d4fb6857c4162d5f.png",
+      "https://i0.hdslb.com/bfs/garb/open/7d3f061ff5c225edcc0e6fc6a4b7c6a9cc64cf9c.png"
     ],
     "backgroundImagesLandscape": [
       {
@@ -1805,7 +1853,9 @@
       "surfaceDisabled": "rgba(32, 26, 27, 0.12)",
       "onSurfaceDisabled": "rgba(32, 26, 27, 0.38)",
       "backdrop": "rgba(58, 45, 47, 0.4)"
-    }
+    },
+    "thumbupSVGA": "https://i0.hdslb.com/bfs/garb/c99fad05e8678ce240ef4963beee803d9fe172a0.bin",
+    "loadingIcon": "https://i0.hdslb.com/bfs/baselabs/op/56e0ad935d46ca2225c1fac0e69185d39d95ba3eb730d9be3ee9d8342270bb3f.webp"
   },
   {
     "metaData": {

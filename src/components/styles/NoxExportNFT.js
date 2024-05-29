@@ -56,7 +56,7 @@ const parsedGarbData = {
     .flat(),
 };
 
-const emojiId = garbdata.collect_list?.filter(v =>
+const emojiId = garblistdata[0].collect_list?.collect_chain?.filter(v =>
   v.redeem_item_name.includes('表情包')
 )[0]?.redeem_item_id;
 

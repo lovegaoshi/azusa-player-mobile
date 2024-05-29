@@ -1,5 +1,7 @@
 name: APM iOS dev Build
 on:
+  schedule:
+    - cron: '0 0 * * 1'
   workflow_dispatch:
 jobs:
   checkLastCommit:
