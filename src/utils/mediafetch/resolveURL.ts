@@ -20,7 +20,7 @@ type regResolve = NoxUtils.RegexMatchResolve<
   Promise<NoxNetwork.ParsedNoxMediaURL>
 >;
 
-const _regexResolveURLs: regResolve = [
+const regexResolveURLs: regResolve = [
   [steriatkFetch.regexResolveURLMatch, steriatkFetch.resolveURL],
   [biliaudioFetch.regexResolveURLMatch, biliaudioFetch.resolveURL],
   [ytbvideoFetch.regexResolveURLMatch, ytbvideoFetch.resolveURL],
@@ -28,15 +28,6 @@ const _regexResolveURLs: regResolve = [
   [bililiveFetch.regexResolveURLMatch, bililiveFetch.resolveURL],
   [biliBangumiFetch.regexResolveURLMatch, biliBangumiFetch.resolveURL],
   [headRequestFetch.regexResolveURLMatch, headRequestFetch.resolveURL],
-];
-
-const RegexResolveURLs: regResolve = [
-  ..._regexResolveURLs,
-  [localFetch.regexResolveURLMatch, localFetch.resolveURL],
-];
-
-const PRegexResolveURLs: regResolve = [
-  ..._regexResolveURLs,
   [localFetch.regexResolveURLMatch, localFetch.resolveURLPrefetch],
 ];
 
@@ -53,11 +44,10 @@ interface FetchPlayUrl {
 export const fetchPlayUrlPromise = async ({
   song,
   iOS = true,
-  prefetch = false,
 }: FetchPlayUrl): Promise<NoxNetwork.ParsedNoxMediaURL> => {
   const bvid = song.bvid;
   const cid = song.id;
-  const resolveUrlArray = prefetch ? PRegexResolveURLs : RegexResolveURLs;
+  const resolveUrlArray = regexResolveURLs;
   const regexResolveURLsWrapped: regResolve = resolveUrlArray.map(entry => [
     entry[0],
     (song: NoxMedia.Song) => entry[1](song, iOS),

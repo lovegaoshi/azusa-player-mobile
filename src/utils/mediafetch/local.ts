@@ -64,7 +64,7 @@ const resolveURL = async (song: NoxMedia.Song) => {
       cover = await NoxAndroidAutoModule.getUri(artworkUri);
     }
   }
-  return { ...resolveURLPrefetch(song), cover };
+  return { ...(await resolveURLPrefetch(song)), cover };
 };
 
 const resolveArtwork = async (song: NoxMedia.Song) => {
