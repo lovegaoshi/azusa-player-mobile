@@ -10,7 +10,6 @@
  * each site needs a fetch to parse regex extracted, a videoinfo fetcher and a song fetcher.
  */
 import { Platform, NativeModules } from 'react-native';
-import RNFetchBlob from 'react-native-blob-util';
 
 import { cacheAlbumArt, base64AlbumArt } from '@utils/ffmpeg/ffmpeg';
 import { Source } from '@enums/MediaFetch';
