@@ -138,7 +138,11 @@ class NoxAndroidAutoModule(reactContext: ReactApplicationContext) :
   @ReactMethod fun getDrawOverAppsPermission(callback: Promise) {
     val context = reactApplicationContext
     val activity = context.currentActivity
-    callback.resolve(Settings.canDrawOverlays(activity))
+    try {
+      callback.resolve(Settings.canDrawOverlays(activity))
+    } catch (e: Exception) {
+      callback.resolve(false)
+    }
   }
 
   @ReactMethod fun askDrawOverAppsPermission() {
