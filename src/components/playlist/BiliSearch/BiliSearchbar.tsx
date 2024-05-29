@@ -117,7 +117,7 @@ export default ({
 
   const performSearch = () => {
     pressed.current = true;
-    () => handleSearch(searchVal);
+    handleSearch(searchVal);
   };
 
   useEffect(() => {
