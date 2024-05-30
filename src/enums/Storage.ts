@@ -70,7 +70,7 @@ export const DefaultSetting: NoxStorage.PlayerSettingDict = {
   keepForeground: false,
   karaokeLyrics: false,
   accentColor: false,
-  memoryEfficiency: false,
+  memoryEfficiency: true,
   useSuggestion: false,
 
   appID: AppID,
