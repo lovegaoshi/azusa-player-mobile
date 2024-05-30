@@ -1,5 +1,6 @@
 package com.noxplay.noxplayer
 
+import android.annotation.SuppressLint
 import android.app.ActivityManager
 import android.app.ApplicationExitInfo
 import android.content.ContentUris
@@ -9,9 +10,10 @@ import android.net.Uri
 import android.os.Build
 import android.provider.MediaStore
 import android.provider.Settings
-import android.util.Log
 import android.view.WindowManager
 import androidx.core.content.FileProvider
+import com.doublesymmetry.kotlinaudio.utils.bitmapCoverDir
+import com.doublesymmetry.kotlinaudio.utils.bitmapCoverFileName
 import com.facebook.react.bridge.Arguments
 import com.facebook.react.bridge.Promise
 import com.facebook.react.bridge.ReactApplicationContext
@@ -19,6 +21,7 @@ import com.facebook.react.bridge.ReactContextBaseJavaModule
 import com.facebook.react.bridge.ReactMethod
 import com.facebook.react.bridge.WritableArray
 import com.facebook.react.bridge.WritableNativeArray
+import timber.log.Timber
 import java.io.File
 
 
@@ -26,7 +29,7 @@ class NoxAndroidAutoModule(reactContext: ReactApplicationContext) :
   ReactContextBaseJavaModule(reactContext) {
   override fun getName() = "NoxAndroidAutoModule"
 
-  private fun _listMediaDir(relativeDir: String, subdir: Boolean, selection: String? = null): WritableArray {
+  private fun listMediaDirNative(relativeDir: String, subdir: Boolean, selection: String? = null): WritableArray {
     val results: WritableArray = WritableNativeArray()
     try {
       val query = reactApplicationContext.contentResolver.query(
@@ -79,7 +82,7 @@ class NoxAndroidAutoModule(reactContext: ReactApplicationContext) :
         }
       }
     } catch (e: Exception) {
-      Log.e("NoxFileUtil", e.toString())
+      Timber.tag("NoxFileUtil").e(e.toString())
     }
     return results
   }
@@ -90,16 +93,16 @@ class NoxAndroidAutoModule(reactContext: ReactApplicationContext) :
   }
 
   @ReactMethod fun listMediaDir(relativeDir: String, subdir: Boolean, callback: Promise) {
-    callback.resolve(_listMediaDir(relativeDir, subdir))
+    callback.resolve(listMediaDirNative(relativeDir, subdir))
   }
 
   @ReactMethod fun listMediaFileByFName(filename: String, callback: Promise) {
-    callback.resolve(_listMediaDir("", true,
+    callback.resolve(listMediaDirNative("", true,
       "${MediaStore.Audio.Media.DISPLAY_NAME} IN ('$filename')"))
   }
 
   @ReactMethod fun listMediaFileByID(id: String, callback: Promise) {
-    callback.resolve(_listMediaDir("", true,
+    callback.resolve(listMediaDirNative("", true,
       "${MediaStore.Audio.Media._ID} = $id"))
   }
   @ReactMethod fun getLastExitReason(callback: Promise) {
@@ -171,5 +174,29 @@ class NoxAndroidAutoModule(reactContext: ReactApplicationContext) :
     callback.resolve(
       Settings.Secure.getInt(context.contentResolver, "navigation_mode", 0) == 2
     )
+  }
+
+  @SuppressLint("Range")
+  private fun getAPMCacheUriNative(contentUri: Uri = MediaStore.Images.Media.EXTERNAL_CONTENT_URI): Uri? {
+    val contentResolver = reactApplicationContext.contentResolver
+    val selection = "${MediaStore.MediaColumns.RELATIVE_PATH}=?"
+    val selectionArgs = arrayOf(bitmapCoverDir)
+    val cursor = contentResolver.query(contentUri, null, selection,selectionArgs,null)
+    if (cursor != null && cursor.count > 0) {
+      while (cursor.moveToNext()) {
+        val filename = cursor.getString(cursor.getColumnIndex(MediaStore.MediaColumns.DISPLAY_NAME))
+        if (filename == bitmapCoverFileName) {
+          val id = cursor.getLong(cursor.getColumnIndex(MediaStore.MediaColumns._ID))
+          cursor.close()
+          return ContentUris.withAppendedId(contentUri, id)
+        }
+      }
+      cursor.close()
+    }
+    return null
+  }
+
+  @ReactMethod fun getAPMCacheUri(callback: Promise) {
+    callback.resolve(getAPMCacheUriNative().toString())
   }
 }
