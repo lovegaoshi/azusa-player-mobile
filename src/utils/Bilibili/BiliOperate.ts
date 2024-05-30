@@ -2,7 +2,7 @@ import { getBiliJct } from '@utils/Bilibili/biliCookies';
 import bfetch from '@utils/BiliFetch';
 import { logger } from '@utils/Logger';
 import { throttler } from '../throttle';
-import { bv2av as BVIDtoAID } from '../bv2av';
+import { bv2av as BVIDtoAID } from './bv2av';
 
 const BILI_LIKE_API = 'https://api.bilibili.com/x/web-interface/archive/like';
 const BILI_RELATED_API =
