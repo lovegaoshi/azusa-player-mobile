@@ -197,6 +197,6 @@ class NoxAndroidAutoModule(reactContext: ReactApplicationContext) :
   }
 
   @ReactMethod fun getAPMCacheUri(callback: Promise) {
-    callback.resolve(getAPMCacheUriNative())
+    callback.resolve(getAPMCacheUriNative().toString())
   }
 }
