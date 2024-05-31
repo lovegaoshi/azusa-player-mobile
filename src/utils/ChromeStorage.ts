@@ -125,7 +125,7 @@ export const saveCachedMediaMapping = (val: any[]) =>
   saveItem(StorageKeys.CACHED_MEDIA_MAPPING, val);
 
 export const getColorScheme = async () => {
-  const colorScheme = (await getItem(StorageKeys.COLORTHEME)) || null;
+  const colorScheme = await getItem(StorageKeys.COLORTHEME, null);
   Appearance.setColorScheme(colorScheme);
   return colorScheme;
 };
@@ -143,7 +143,7 @@ export const addCookie = async (site: string, setHeader: string) => {
 };
 
 export const removeCookie = async (site: string) => {
-  const cookies = (await getItem(StorageKeys.COOKIES)) || {};
+  const cookies = await getItem(StorageKeys.COOKIES, {});
   cookies[site] = [];
   saveItem(StorageKeys.COOKIES, cookies);
 };
@@ -189,7 +189,7 @@ export const savePlaylist = async (
       songList: await saveChucked(playlist.id, playlist.songList, false),
     };
     // save chunks
-    saveItem(overrideKey || playlist.id || uuidv4(), savingPlaylist);
+    saveItem(overrideKey ?? playlist.id ?? uuidv4(), savingPlaylist);
   } catch (e) {
     console.error(e);
   }
@@ -299,14 +299,11 @@ export const initPlayerObject = async (
   const playerObject = {
     settings: {
       ...DefaultSetting,
-      ...((await getItem(StorageKeys.PLAYER_SETTING_KEY)) || {}),
+      ...(await getItem(StorageKeys.PLAYER_SETTING_KEY, {})),
     },
-    playlistIds: (await getItem(StorageKeys.MY_FAV_LIST_KEY)) || [],
+    playlistIds: await getItem(StorageKeys.MY_FAV_LIST_KEY, []),
     playlists: {},
-    lastPlaylistId: (await getItem(StorageKeys.LAST_PLAY_LIST)) || [
-      'NULL',
-      'NULL',
-    ],
+    lastPlaylistId: await getItem(StorageKeys.LAST_PLAY_LIST, ['NULL', 'NULL']),
     searchPlaylist: dummyPlaylist(
       i18n.t('PlaylistOperations.searchListName'),
       PlaylistTypes.Search
@@ -366,7 +363,7 @@ export const exportPlayerContent = async (content?: any) => {
 };
 
 const clearPlaylists = async () => {
-  const playlistIds = (await getItem(StorageKeys.MY_FAV_LIST_KEY)) || [];
+  const playlistIds = await getItem(StorageKeys.MY_FAV_LIST_KEY, []);
   playlistIds.forEach(_delPlaylist);
   savePlaylistIds([]);
 };

@@ -25,7 +25,7 @@ export default async function BiliFetch(
 ) {
   // BREAKING: does 2s timeout break stuff? does this work at all?
   const params = { timeout: 2000, ...paramsProp };
-  if (!params.headers || Object.entries(params.headers).length === 0) {
+  if (!params.headers ?? Object.entries(params.headers).length === 0) {
     params.headers = customReqHeader(url, params.headers);
   }
   params.headers = new Headers({

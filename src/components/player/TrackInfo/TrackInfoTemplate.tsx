@@ -40,8 +40,8 @@ const TrackInfoTemplate: React.FC<Props> = ({
   const playerStyle = useNoxSetting(state => state.playerStyle);
   const currentPlayingList = useNoxSetting(state => state.currentPlayingList);
   const coverStyle = {
-    width: windowWidth || '100%',
-    height: windowHeight || '100%',
+    width: windowWidth ?? '100%',
+    height: windowHeight ?? '100%',
   };
 
   const getTrackLocation = () => {
@@ -91,7 +91,7 @@ const TrackInfoTemplate: React.FC<Props> = ({
 
   return (
     <View style={[styles.container, containerStyle, { width: windowWidth }]}>
-      {children || <AlbumArt />}
+      {children ?? <AlbumArt />}
       <SongTitle style={textStyle} text={track?.title} />
       <View style={styles.infoContainer}>
         <View style={styles.favoriteButtonContainer}>

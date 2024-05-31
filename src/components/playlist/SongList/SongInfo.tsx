@@ -117,7 +117,6 @@ const SongInfo = ({
               <View style={styles.songTitle}>
                 <Text variant="bodyLarge" numberOfLines={3}>{`${String(
                   index + 1
-                  // ${' (' + item.source + ')' || ''}
                 )}. ${title}`}</Text>
                 <Text
                   variant="bodySmall"

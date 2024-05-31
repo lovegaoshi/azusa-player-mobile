@@ -93,7 +93,7 @@ export async function PlaybackService() {
       const playerErrored =
         (await TrackPlayer.getPlaybackState()).state === State.Error;
       await TrackPlayer.setVolume(0);
-      if (!event.track || !event.track.song) return;
+      if (event.track?.song === undefined) return;
       if (playerErrored) {
         resetResolvedURL(event.track.song);
       }

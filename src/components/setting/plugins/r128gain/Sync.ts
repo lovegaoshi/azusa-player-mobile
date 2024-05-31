@@ -63,7 +63,7 @@ export const downloadR128GainDB = async () => {
   });
   const parsedABRepeat = json.reduce((acc, curr) => {
     try {
-      const numberedABRepeat = JSON.parse(curr.abrepeat || '') as [
+      const numberedABRepeat = JSON.parse(curr.abrepeat ?? '') as [
         number,
         number,
       ];

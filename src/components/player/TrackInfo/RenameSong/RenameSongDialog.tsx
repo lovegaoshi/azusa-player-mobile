@@ -25,7 +25,7 @@ export default ({
     onClose();
   };
   const handleSubmit = () => {
-    onSubmit(inputRef.current?.name || '');
+    onSubmit(inputRef.current?.name ?? '');
   };
 
   return (

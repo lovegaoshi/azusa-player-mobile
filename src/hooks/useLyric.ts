@@ -22,12 +22,12 @@ export default (currentSong?: NoxMedia.Song) => {
   const setLyricMapping = useNoxSetting(state => state.setLyricMapping);
 
   const hasLrcFromLocal = (song = currentSong) => {
-    return lyricMapping.has(song?.id || '');
+    return lyricMapping.has(song?.id ?? '');
   };
 
   const getLrcFromLocal = (song = currentSong) => {
     logger.log('[lrc] Loading Lrc from localStorage...');
-    return lyricMapping.get(song?.id || '');
+    return lyricMapping.get(song?.id ?? '');
   };
 
   const searchAndSetCurrentLyric = async ({
@@ -65,7 +65,7 @@ export default (currentSong?: NoxMedia.Song) => {
   ) => {
     if (currentSong?.name === undefined) return [];
     try {
-      const titleToFetch = reExtractSongName(adhocTitle || '', artist || 0);
+      const titleToFetch = reExtractSongName(adhocTitle ?? '', artist ?? 0);
       const options = await Promise.all(
         lrcSources.map(source =>
           searchLyricOptions({
@@ -99,7 +99,7 @@ export default (currentSong?: NoxMedia.Song) => {
     setCurrentTimeOffset(0);
     setLrcOption(undefined);
     setLrc(i18n.t('Lyric.loading'));
-    setSearchText(currentSong?.name || '');
+    setSearchText(currentSong?.name ?? '');
     // if failed to init from local,
     if (!(await loadLocalLrc(lrcOptionPromise))) {
       // search from resolved lrc options

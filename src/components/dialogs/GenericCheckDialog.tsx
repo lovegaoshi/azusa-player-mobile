@@ -49,7 +49,7 @@ export default ({
   const toggleIndex = (index: number) =>
     setCurrentIndex(currentIndex.map((val, i) => (i === index ? !val : val)));
   React.useEffect(
-    () => setCurrentIndex(selectedIndices || Array(options.length).fill(false)),
+    () => setCurrentIndex(selectedIndices ?? Array(options.length).fill(false)),
     [options, selectedIndices]
   );
 

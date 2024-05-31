@@ -44,7 +44,7 @@ export default ({ icon }: Props) => {
         renderOptionTitle={(val: string) => availableLanguagesMap[val]}
         onClose={() => setVisible(false)}
         onSubmit={onSubmit}
-        defaultIndex={availableLanguages.indexOf(language || 'en')}
+        defaultIndex={availableLanguages.indexOf(language ?? 'en')}
       ></GenericSelectDialog>
     </View>
   );

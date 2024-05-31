@@ -39,7 +39,7 @@ export default (playlist: NoxMedia.Playlist) => {
     setTitle(playlist.title);
     setUseBiliShazam(playlist.useBiliShazam);
     setUseBiliSync(playlist.biliSync);
-    setUseNewSongOverwrite(playlist.newSongOverwrite || false);
+    setUseNewSongOverwrite(playlist.newSongOverwrite ?? false);
   };
 
   useEffect(loadSetting, [playlist]);

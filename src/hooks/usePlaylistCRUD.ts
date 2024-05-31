@@ -22,7 +22,7 @@ const usePlaylistCRUD = (mPlaylist?: NoxMedia.Playlist) => {
   );
 
   const getPlaylist = () =>
-    _getPlaylist(mPlaylist?.id || currentPlayingId || '');
+    _getPlaylist(mPlaylist?.id ?? currentPlayingId ?? '');
 
   const updateSong = async (
     song: NoxMedia.Song,
@@ -138,7 +138,7 @@ const usePlaylistCRUD = (mPlaylist?: NoxMedia.Playlist) => {
     const newSongList = await fetchBiliBVIDs(
       getPlaylistUniqBVIDs(playlist),
       progressEmitter,
-      playlist.useBiliShazam || false
+      playlist.useBiliShazam ?? false
     );
     updatePlaylist(
       {
@@ -222,7 +222,7 @@ const usePlaylistCRUD = (mPlaylist?: NoxMedia.Playlist) => {
     const newSongList = await fetchBiliBVIDs(
       getPlaylistUniqBVIDs(playlist),
       progressEmitter,
-      playlist.useBiliShazam || false
+      playlist.useBiliShazam ?? false
     );
     updatePlaylist(newPlaylist, newSongList);
   };
