@@ -91,10 +91,7 @@ export default (currentSong?: NoxMedia.Song) => {
     loadLocalLrc: (
       lyricPromise: Promise<NoxLyric.NoxFetchedLyric[]>
     ) => Promise<boolean>,
-    searchAndSetCurrentLyric: (
-      index?: number,
-      resolvedLrcOptions?: NoxLyric.NoxFetchedLyric[]
-    ) => unknown
+    searchAndSetCurrentLyric: (p: NoxLyric.SearchLyricL) => unknown
   ) => {
     logger.debug('[lrc] Initiating Lyric with new track...');
     // HACK: UX is too bad if this is not always fetched
@@ -106,7 +103,9 @@ export default (currentSong?: NoxMedia.Song) => {
     // if failed to init from local,
     if (!(await loadLocalLrc(lrcOptionPromise))) {
       // search from resolved lrc options
-      lrcOptionPromise.then(v => searchAndSetCurrentLyric(undefined, v));
+      lrcOptionPromise.then(v =>
+        searchAndSetCurrentLyric({ resolvedLrcOptions: v })
+      );
     }
   };
 

@@ -57,12 +57,12 @@ export default (currentSong?: NoxMedia.Song, artist = '') => {
     };
   };
 
-  const searchAndSetCurrentLyric = (
+  const searchAndSetCurrentLyric = ({
     index = 0,
     resolvedLrcOptions = usedLyric.lrcOptions,
-    resolvedLyric?: NoxMedia.LyricDetail,
-    song = currentSong
-  ) =>
+    resolvedLyric,
+    song = currentSong,
+  }: NoxLyric.SearchLyricL) =>
     usedLyric.searchAndSetCurrentLyric({
       updateLyricMapping,
       index,
@@ -74,11 +74,10 @@ export default (currentSong?: NoxMedia.Song, artist = '') => {
   const loadLocalLrc = (lyricPromise: Promise<NoxLyric.NoxFetchedLyric[]>) => {
     const localLrcColle = getLrcFromLocal(currentSong);
     return usedLyric.loadLocalLrc(getLrcFromLocal(currentSong), async () =>
-      searchAndSetCurrentLyric(
-        undefined,
-        await lyricPromise,
-        (await localLrcColle)?.lrcDetail
-      )
+      searchAndSetCurrentLyric({
+        resolvedLrcOptions: await lyricPromise,
+        resolvedLyric: (await localLrcColle)?.lrcDetail,
+      })
     );
   };
 
