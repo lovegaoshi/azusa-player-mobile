@@ -17,13 +17,13 @@ declare namespace NoxMediaInfo {
       name: string;
       face: string;
     };
-    pages: Array<{
+    pages: {
       cid: number;
       page: number;
       part: string;
       duration: number;
       [key: string]: any;
-    }>;
+    }[];
     duration: number;
     [key: string]: any;
   }

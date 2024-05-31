@@ -4,17 +4,14 @@ import ytbvideoFetch from '@utils/mediafetch/ytbvideo';
 import bililiveFetch from './bililive';
 import biliBangumiFetch from './biliBangumi';
 import localFetch from '@utils/mediafetch/local';
+import { resolver, MUSICFREE } from '@utils/mediafetch/musicfree';
 import headRequestFetch from './headRequest';
 import { logger } from '../Logger';
 import { regexMatchOperations } from '../Utils';
-import { resolver, MUSICFREE } from './musicfree';
 import bilivideoFetch, { fetchVideoPlayUrlPromise } from './bilivideo';
+import { NULL_TRACK } from '@objects/Song';
 
-// TODO: remove this, believe this is for legacy reasons?
-export const ENUMS = {
-  audioType: 'audio',
-  youtube: 'youtube.video',
-};
+const MUSICFREESources: NoxMedia.SongSource[] = Object.values(MUSICFREE);
 
 type regResolve = NoxUtils.RegexMatchResolve<
   Promise<NoxNetwork.ParsedNoxMediaURL>
@@ -54,18 +51,10 @@ export const fetchPlayUrlPromise = async ({
   ]);
   logger.debug(`[resolveURL] ${bvid}, ${cid} }`);
 
-  const fallback = () => {
-    const cidStr = String(cid);
-    if (cidStr.startsWith(ENUMS.audioType)) {
-      return biliaudioFetch.resolveURL(song);
-    }
-    return fetchVideoPlayUrlPromise({ bvid, cid: cidStr, iOS });
-  };
+  const fallback = () =>
+    fetchVideoPlayUrlPromise({ bvid, cid: String(cid), iOS });
 
-  if (
-    song.source &&
-    Object.values(MUSICFREE).includes(song.source as MUSICFREE)
-  ) {
+  if (song.source && MUSICFREESources.includes(song.source)) {
     const vsource = song.source as MUSICFREE;
     const result = await resolver[vsource](song);
     console.warn(result, song);
@@ -81,7 +70,7 @@ export const fetchPlayUrlPromise = async ({
     regexOperations: regexResolveURLsWrapped,
     fallback,
     regexMatching: song => song.id,
-  }).catch(() => ({ url: 'NULL' }));
+  }).catch(() => NULL_TRACK);
 };
 
 export const refreshMetadata = async (

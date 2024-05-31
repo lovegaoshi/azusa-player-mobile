@@ -77,7 +77,7 @@ const resolveArtwork = async (song: NoxMedia.Song) => {
       return base64AlbumArt(artworkUri);
     }
   } catch (e) {
-    logger.warn(`[localResolver] cannot resolve artwork of ${song.bvid}`);
+    logger.warn(`[localResolver] cannot resolve artwork of ${song.bvid}: ${e}`);
   }
 };
 

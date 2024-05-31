@@ -1,5 +1,6 @@
 // vanilla store of zustand serving playbackServices.
 import { createStore } from 'zustand/vanilla';
+// @ts-ignore HACK: for noxplayer's compatibility
 import { UpdateOptions } from 'react-native-track-player';
 
 import {
@@ -25,7 +26,7 @@ interface AppStore {
   currentPlayingId: string;
   setCurrentPlayingId: (val: string) => void;
   fetchProgress: number;
-  setFetchProgress: (val: number) => void;
+  setFetchProgress: NoxUtils.ProgressEmitter;
   downloadProgressMap: NoxStorage.R128Dict;
   setDownloadProgressMap: (val: NoxStorage.R128Dict) => void;
   downloadPromiseMap: NoxStorage.DownloadDict;

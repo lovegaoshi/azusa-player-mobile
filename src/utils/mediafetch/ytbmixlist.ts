@@ -1,4 +1,4 @@
-import { CIDPREFIX } from './ytbvideo';
+import { CIDPREFIX } from '@utils/mediafetch/ytbvideo';
 import SongTS from '@objects/Song';
 import { timestampToSeconds } from '../Utils';
 import { Source } from '@enums/MediaFetch';

@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { search } from 'libmuse';
 
-import { CIDPREFIX } from './ytbvideo';
+import { CIDPREFIX } from '@utils/mediafetch/ytbvideo';
 import SongTS from '@objects/Song';
 import { Source } from '@enums/MediaFetch';
 
@@ -50,7 +50,7 @@ const fetchInnerTuneSearch = async (
 
 interface RegexFetchProps {
   url: string;
-  progressEmitter: (val: number) => void;
+  progressEmitter: NoxUtils.ProgressEmitter;
   fastSearch?: boolean;
   cookiedSearch?: boolean;
 }

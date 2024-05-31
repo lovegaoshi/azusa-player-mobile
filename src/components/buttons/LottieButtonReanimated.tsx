@@ -66,7 +66,6 @@ const LottieButtonAnimated = ({
       clickedLottieProgress[managedProgress.current]
     );
     managedState.current = clickState;
-    managedProgress;
   }, [clickState]);
 
   return (

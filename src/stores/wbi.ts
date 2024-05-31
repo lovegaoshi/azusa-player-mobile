@@ -13,12 +13,12 @@ import md5 from 'md5';
 import bfetch from '@utils/BiliFetch';
 import { logger } from '@utils/Logger';
 
-interface wbiStore {
+interface WbiStore {
   img_key: string;
   sub_key: string;
 }
 
-const wbiStore = createStore<wbiStore>(() => ({
+const wbiStore = createStore<WbiStore>(() => ({
   img_key: '',
   sub_key: '',
 }));

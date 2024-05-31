@@ -5,6 +5,8 @@ import { LrcSource } from '@enums/LyricFetch';
 
 declare global {
   namespace NoxMedia {
+    type SongSource = Source | MUSICFREE;
+
     export interface Song {
       id: string;
       bvid: string;
@@ -21,7 +23,7 @@ declare global {
       duration: number;
       album?: string;
       addedDate?: number;
-      source?: Source | MUSICFREE;
+      source?: SongSource;
       isLive?: boolean;
       liveStatus?: boolean;
       metadataOnLoad?: boolean;

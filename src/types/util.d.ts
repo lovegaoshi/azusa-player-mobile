@@ -1,16 +1,20 @@
 declare namespace NoxUtils {
+  type ProgressEmitter = (v: number) => void;
+
   interface SongProcessor {
     song: NoxMedia.Song;
     iOS?: boolean;
     prefetch?: boolean;
   }
 
-  export type RegexMatchResolve<T> = Array<
-    [RegExp, (song: NoxMedia.Song, iOS?: boolean) => T]
-  >;
-  export type RegexMatchSuggest<T> = Array<
-    [RegExp, (song: NoxMedia.Song, filterMW?: <K>(v: K[]) => K) => Promise<T>]
-  >;
+  export type RegexMatchResolve<T> = [
+    RegExp,
+    (song: NoxMedia.Song, iOS?: boolean) => T,
+  ][];
+  export type RegexMatchSuggest<T> = [
+    RegExp,
+    (song: NoxMedia.Song, filterMW?: <K>(v: K[]) => K) => Promise<T>,
+  ][];
   /*
   D  {"duration":"348061","artist":"Mr. Scruff","bitrate":"192000",
   "realPath":"/storage/emulated/0/Download/Kalimba.mp3",

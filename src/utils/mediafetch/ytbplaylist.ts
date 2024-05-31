@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { get_playlist } from 'libmuse';
 
-import { fetchAudioInfo, CIDPREFIX } from './ytbvideo';
+import { fetchAudioInfo, CIDPREFIX } from '@utils/mediafetch/ytbvideo';
 import SongTS from '@objects/Song';
 import { logger } from '../Logger';
 import { Source } from '@enums/MediaFetch';
@@ -89,7 +89,7 @@ const fastYTPlaylistSongResolve = (val: any, data: any) => {
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const fetchYTPlaylist = async (
   playlistId: string,
-  progressEmitter: (val: number) => void,
+  progressEmitter: NoxUtils.ProgressEmitter,
   favList: string[]
 ): Promise<NoxMedia.Song[]> => {
   const res = await fetch(

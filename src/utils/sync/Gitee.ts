@@ -18,6 +18,7 @@ const createAPMRepo = async (token: string) => {
   return await bfetch('https://gitee.com/api/v5/user/repos', {
     method: 'POST',
     body: {
+      // @ts-ignore HACK: for noxplayer's compatibility
       access_token: token,
       name: APM_REPO_NAME,
       auto_init: true,
@@ -58,6 +59,7 @@ const syncToGitee = async ({
           {
             method: 'PUT',
             body: {
+              // @ts-ignore HACK: for noxplayer's compatibility
               access_token: token,
               message: `noxbackup - ${new Date().getTime()}`,
               content: fromByteArray(content),
@@ -78,6 +80,7 @@ const syncToGitee = async ({
     {
       method: 'POST',
       body: {
+        // @ts-ignore HACK: for noxplayer's compatibility
         access_token: token,
         message: `noxbackup - ${new Date().getTime()}`,
         content: fromByteArray(content),
@@ -100,6 +103,7 @@ export const checkAuthentication = async (token = '') => {
     }
     return true;
   } catch (e) {
+    logger.warn(`[sync] gitee auth failed:${e}`);
     return false;
   }
 };

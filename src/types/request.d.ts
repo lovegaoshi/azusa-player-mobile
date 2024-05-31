@@ -42,10 +42,17 @@ declare global {
   declare namespace NoxNetwork {
     export interface RegexFetchProps {
       reExtracted: RegExpExecArray;
-      progressEmitter?: (val: number) => void;
+      progressEmitter?: NoxUtils.ProgressEmitter;
       favList?: string[];
       useBiliTag?: boolean;
       fastSearch?: boolean;
+    }
+
+    interface BiliSearchFetchProps {
+      url: string;
+      progressEmitter: NoxUtils.ProgressEmitter;
+      fastSearch: boolean;
+      cookiedSearch?: boolean;
     }
 
     export interface RequestInit {

@@ -11,7 +11,7 @@ interface Props {
     addSongs: NoxMedia.Song[],
     removeSongs: NoxMedia.Song[]
   ) => void;
-  progressEmitter?: (val: number) => void;
+  progressEmitter?: NoxUtils.ProgressEmitter;
   overwriteOnRefresh?: () => boolean;
   callback?: (newPlaylist: NoxMedia.Playlist) => void;
 }

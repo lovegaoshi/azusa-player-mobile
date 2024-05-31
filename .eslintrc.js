@@ -9,6 +9,7 @@ module.exports = {
     'plugin:react/recommended',
     'plugin:import/recommended',
     'plugin:import/typescript',
+    'expo',
     // './node_modules/gts/',
   ],
   parserOptions: {
@@ -28,6 +29,9 @@ module.exports = {
     'react-hooks/exhaustive-deps': 'off',
     'import/no-named-as-default': 'off',
     'import/no-named-as-default-member': 'off',
+    // HACK: this is purely for noxplayer ts compatibility.
+    // do NOT use ts-ignore for anything else
+    '@typescript-eslint/ban-ts-comment': 'off',
   },
   settings: {
     react: { version: 'detect' },

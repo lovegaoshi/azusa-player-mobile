@@ -20,10 +20,10 @@ import { i0hdslbHTTPResolve } from '@utils/Utils';
 import { resolveUrl, parseSongR128gain } from '@utils/SongOperations';
 import NoxCache from './Cache';
 import { setTPR128Gain } from './ffmpeg/ffmpeg';
+import { NULL_TRACK } from '@objects/Song';
 
 const { getState, setState } = appStore;
 const animatedVolume = new Animated.Value(1);
-const NULL_TRACK = { url: 'NULL', urlRefreshTimeStamp: 0 };
 
 animatedVolume.addListener(state => TrackPlayer.setVolume(state.value));
 
