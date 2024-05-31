@@ -7,14 +7,6 @@ import { searchLyricOptions, searchLyric } from '../utils/LyricFetch';
 import { useNoxSetting } from '@stores/useApp';
 import { logger } from '@utils/Logger';
 
-export interface UpdateLyricMapping {
-  resolvedLrc?: NoxNetwork.NoxFetchedLyric;
-  newLrcDetail?: Partial<NoxMedia.LyricDetail>;
-  lrc: string;
-  song: NoxMedia.Song;
-  currentTimeOffset: number;
-}
-
 export interface FetchedLocalLrc {
   lrcDetail: NoxMedia.LyricDetail;
   localLrc?: string;
@@ -22,10 +14,8 @@ export interface FetchedLocalLrc {
 
 export default (currentSong?: NoxMedia.Song) => {
   const [lrc, setLrc] = useState(i18n.t('Lyric.loading'));
-  const [lrcOptions, setLrcOptions] = useState<NoxNetwork.NoxFetchedLyric[]>(
-    []
-  );
-  const [lrcOption, setLrcOption] = useState<NoxNetwork.NoxFetchedLyric>();
+  const [lrcOptions, setLrcOptions] = useState<NoxLyric.NoxFetchedLyric[]>([]);
+  const [lrcOption, setLrcOption] = useState<NoxLyric.NoxFetchedLyric>();
   const [searchText, setSearchText] = useState('');
   const [currentTimeOffset, setCurrentTimeOffset] = useState(0);
   const lyricMapping = useNoxSetting(state => state.lyricMapping);
@@ -40,13 +30,13 @@ export default (currentSong?: NoxMedia.Song) => {
     return lyricMapping.get(song?.id || '');
   };
 
-  const searchAndSetCurrentLyric = async (
-    updateLyricMapping: (props: UpdateLyricMapping) => void,
+  const searchAndSetCurrentLyric = async ({
+    updateLyricMapping,
     index = 0,
     resolvedLrcOptions = lrcOptions,
-    resolvedLyric?: NoxMedia.LyricDetail,
-    song = currentSong
-  ) => {
+    resolvedLyric,
+    song = currentSong,
+  }: NoxLyric.SearchLyric) => {
     // console.debug(`lrcoptions: ${JSON.stringify(resolvedLrcOptions)}`);
     if (resolvedLrcOptions.length === 0 || !song)
       setLrc(i18n.t('Lyric.notFound'));
@@ -71,7 +61,7 @@ export default (currentSong?: NoxMedia.Song) => {
     adhocTitle?: string,
     lrcSources: LrcSource[] = [],
     artist = currentSong?.singerId,
-    optionReorder: (v: NoxNetwork.NoxFetchedLyric[][]) => void = () => undefined
+    optionReorder: (v: NoxLyric.NoxFetchedLyric[][]) => void = () => undefined
   ) => {
     if (currentSong?.name === undefined) return [];
     try {
@@ -97,13 +87,13 @@ export default (currentSong?: NoxMedia.Song) => {
   };
 
   const initTrackLrcLoad = async (
-    fetchAndSetLyricOptions: () => Promise<NoxNetwork.NoxFetchedLyric[]>,
+    fetchAndSetLyricOptions: () => Promise<NoxLyric.NoxFetchedLyric[]>,
     loadLocalLrc: (
-      lyricPromise: Promise<NoxNetwork.NoxFetchedLyric[]>
+      lyricPromise: Promise<NoxLyric.NoxFetchedLyric[]>
     ) => Promise<boolean>,
     searchAndSetCurrentLyric: (
       index?: number,
-      resolvedLrcOptions?: NoxNetwork.NoxFetchedLyric[]
+      resolvedLrcOptions?: NoxLyric.NoxFetchedLyric[]
     ) => unknown
   ) => {
     logger.debug('[lrc] Initiating Lyric with new track...');

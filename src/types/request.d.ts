@@ -2,6 +2,40 @@ import { LrcSource } from '@enums/LyricFetch';
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 declare global {
+  declare namespace NoxLyric {
+    interface UpdateLyricMapping {
+      resolvedLrc?: NoxFetchedLyric;
+      newLrcDetail?: Partial<NoxMedia.LyricDetail>;
+      lrc: string;
+      song: NoxMedia.Song;
+      currentTimeOffset: number;
+    }
+
+    interface SearchLyric {
+      updateLyricMapping: (props: UpdateLyricMapping) => void;
+      index?: number;
+      resolvedLrcOptions?: NoxFetchedLyric[];
+      resolvedLyric?: NoxMedia.LyricDetail;
+      song?: NoxMedia.Song;
+    }
+
+    interface NoxFetchedLyric {
+      key: string;
+      songMid: string;
+      label: string;
+      source?: LrcSource;
+      lrc?: string;
+    }
+
+    interface UpdateLyricMapping {
+      resolvedLrc?: NoxLyric.NoxFetchedLyric;
+      newLrcDetail?: Partial<NoxMedia.LyricDetail>;
+      lrc: string;
+      song: NoxMedia.Song;
+      currentTimeOffset: number;
+    }
+  }
+
   declare namespace NoxNetwork {
     export interface RegexFetchProps {
       reExtracted: RegExpExecArray;
@@ -42,14 +76,6 @@ declare global {
       };
       userAgent: string;
       urlRefreshTimeStamp: number;
-    }
-
-    export interface NoxFetchedLyric {
-      key: string;
-      songMid: string;
-      label: string;
-      source?: LrcSource;
-      lrc?: string;
     }
 
     export interface NoxRegexFetch {

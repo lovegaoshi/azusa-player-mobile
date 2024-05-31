@@ -17,7 +17,7 @@ export const searchLyricOptions = async ({
   searchKey,
   source = LrcSource.QQ,
   song,
-}: SearchLyricOptions): Promise<NoxNetwork.NoxFetchedLyric[]> => {
+}: SearchLyricOptions): Promise<NoxLyric.NoxFetchedLyric[]> => {
   try {
     switch (source) {
       case LrcSource.Kugou:

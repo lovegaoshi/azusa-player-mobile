@@ -15,7 +15,7 @@ export default (currentSong?: NoxMedia.Song, artist = '') => {
     song,
     currentTimeOffset,
   }: {
-    resolvedLrc?: NoxNetwork.NoxFetchedLyric;
+    resolvedLrc?: NoxLyric.NoxFetchedLyric;
     newLrcDetail?: Partial<NoxMedia.LyricDetail>;
     lrc: string;
     song: NoxMedia.Song;
@@ -63,17 +63,15 @@ export default (currentSong?: NoxMedia.Song, artist = '') => {
     resolvedLyric?: NoxMedia.LyricDetail,
     song = currentSong
   ) =>
-    usedLyric.searchAndSetCurrentLyric(
+    usedLyric.searchAndSetCurrentLyric({
       updateLyricMapping,
       index,
       resolvedLrcOptions,
       resolvedLyric,
-      song
-    );
+      song,
+    });
 
-  const loadLocalLrc = (
-    lyricPromise: Promise<NoxNetwork.NoxFetchedLyric[]>
-  ) => {
+  const loadLocalLrc = (lyricPromise: Promise<NoxLyric.NoxFetchedLyric[]>) => {
     const localLrcColle = getLrcFromLocal(currentSong);
     return usedLyric.loadLocalLrc(getLrcFromLocal(currentSong), async () =>
       searchAndSetCurrentLyric(

@@ -58,7 +58,7 @@ const searchPost = (kw: string): any => {
 
 const getQrcLyricOptions = async (
   kw: string
-): Promise<NoxNetwork.NoxFetchedLyric[]> => {
+): Promise<NoxLyric.NoxFetchedLyric[]> => {
   logger.debug(`[qrc] calling getQrcLyricOptions: ${kw}`);
   const res = await bfetch(SearchSongAPI, searchPost(kw));
   const json = await res.json();
