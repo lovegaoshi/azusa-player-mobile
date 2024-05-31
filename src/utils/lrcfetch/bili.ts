@@ -10,7 +10,7 @@ const API = 'https://api.bilibili.com/x/player/wbi/v2?bvid={bvid}&cid={cid}';
 
 const getBiliLyricOptions = async (
   song?: NoxMedia.Song
-): Promise<NoxNetwork.NoxFetchedLyric[]> => {
+): Promise<NoxLyric.NoxFetchedLyric[]> => {
   if (song?.source !== Source.bilivideo) return [];
   const res = await wbiQuery(
     API.replace('{bvid}', song.bvid).replace('{cid}', song.id),

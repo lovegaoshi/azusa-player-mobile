@@ -29,7 +29,7 @@ const kugouDecrypt = (content: string) => {
 
 const getKugouLyricOptions = async (
   kw: string
-): Promise<NoxNetwork.NoxFetchedLyric[]> => {
+): Promise<NoxLyric.NoxFetchedLyric[]> => {
   logger.debug(`[kugou] calling getKugouLyricOptions: ${kw}`);
   const res = await bfetch(SearchSongAPI.replace('{kw}', kw));
   const bodytxt = await res.text();
