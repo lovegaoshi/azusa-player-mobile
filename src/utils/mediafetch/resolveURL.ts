@@ -9,6 +9,7 @@ import { logger } from '../Logger';
 import { regexMatchOperations } from '../Utils';
 import { resolver, MUSICFREE } from './musicfree';
 import bilivideoFetch, { fetchVideoPlayUrlPromise } from './bilivideo';
+import { NULL_TRACK } from '@objects/Song';
 
 // TODO: remove this, believe this is for legacy reasons?
 export const ENUMS = {
@@ -81,7 +82,7 @@ export const fetchPlayUrlPromise = async ({
     regexOperations: regexResolveURLsWrapped,
     fallback,
     regexMatching: song => song.id,
-  }).catch(() => ({ url: 'NULL' }));
+  }).catch(() => NULL_TRACK);
 };
 
 export const refreshMetadata = async (
