@@ -32,8 +32,8 @@ declare global {
       metaData: metaData;
 
       gifs: string[];
-      backgroundImages: Array<string | backgroundImage>;
-      backgroundImagesLandscape?: Array<string | backgroundImage>;
+      backgroundImages: (string | backgroundImage)[];
+      backgroundImagesLandscape?: (string | backgroundImage)[];
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       colors: any;
       customColors: customColors;

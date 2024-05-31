@@ -155,6 +155,7 @@ const usePlaylist = (playlist: NoxMedia.Playlist): UsePlaylist => {
 
     if (selected.length === 0) return;
     if (rows === playlist.songList) {
+      // eslint-disable-next-line no-unused-expressions
       selected[0] ? resetSelected() : resetSelected(true);
     } else {
       // TODO: there has to be a more elegant way

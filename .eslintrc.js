@@ -9,6 +9,7 @@ module.exports = {
     'plugin:react/recommended',
     'plugin:import/recommended',
     'plugin:import/typescript',
+    'expo',
     // './node_modules/gts/',
   ],
   parserOptions: {

@@ -89,7 +89,7 @@ const getMapping = async (
       ? transform(await loadChucked(result))
       : result;
   } catch (e) {
-    console.error(`failed to resolve mapping resources for ${key}.`);
+    console.error(`failed to resolve mapping resources for ${key}: ${e}`);
     return transform([]);
   }
 };
@@ -137,6 +137,7 @@ export const saveColorScheme = (val: ColorSchemeName) =>
 // TODO: security risk. move this to an encrypted storage.
 export const addCookie = async (site: string, setHeader: string) => {
   return;
+  // eslint-disable-next-line no-unreachable
   const cookies = (await getItem(StorageKeys.COOKIES)) || {};
   saveItem(StorageKeys.COOKIES, { ...cookies, [site]: setHeader });
 };

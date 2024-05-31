@@ -17,7 +17,7 @@ const find = async (dbx: _Dropbox, query = DEFAULT_FILE_NAME) => {
       .metadata as files.MetadataV2Metadata;
     return fileMetadata.metadata.path_display;
   } catch (e) {
-    logger.warn(`no ${query} found.`);
+    logger.warn(`no ${query} found: ${e}`);
     return null;
   }
 };
@@ -70,6 +70,7 @@ export const checkAuthentication = async (dbx: _Dropbox) => {
     await dbx.usersGetCurrentAccount();
     return true;
   } catch (e) {
+    logger.warn(`[sync] auth failed:${e}`);
     return false;
   }
 };

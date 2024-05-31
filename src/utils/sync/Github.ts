@@ -75,6 +75,7 @@ export const checkAuthentication = async (token = '') => {
     }
     return true;
   } catch (e) {
+    logger.warn(`[sync] github auth failed:${e}`);
     return false;
   }
 };

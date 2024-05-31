@@ -111,7 +111,7 @@ export const timeout = (delay: number) => {
 
 interface regexMatchOperationsProps<K, T> {
   song: K;
-  regexOperations: Array<[RegExp, (song: K) => T]>;
+  regexOperations: [RegExp, (song: K) => T][];
   fallback: (song: K) => T;
   regexMatching: (song: K) => string;
 }

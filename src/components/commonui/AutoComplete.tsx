@@ -37,7 +37,7 @@ export default ({
 
   const onFocus = () => {
     pressed.current = false;
-    () => setShowAutoComplete(true);
+    setShowAutoComplete(true);
   };
 
   useEffect(() => {
