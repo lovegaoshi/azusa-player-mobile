@@ -1,5 +1,5 @@
 import bfetch from '../../src/utils/BiliFetch';
-import { bv2av } from '../../src/utils/bv2av';
+import { bv2av } from '../../src/utils/Bilibili/bv2av';
 const API =
   'https://api.bilibili.com/x/centralization/interface/music/comprehensive/web/rank?pn=1&ps=100';
 
