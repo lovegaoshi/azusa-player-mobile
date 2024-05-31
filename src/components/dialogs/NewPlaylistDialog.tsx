@@ -36,10 +36,10 @@ export default ({
       ? {
           ...fromList,
           id: dummyList.id,
-          title: inputRef.current?.name || '',
+          title: inputRef.current?.name ?? '',
           type: dummyList.type,
         }
-      : { ...dummyList, title: inputRef.current?.name || '' };
+      : { ...dummyList, title: inputRef.current?.name ?? '' };
     addPlaylist(newList);
     onSubmit();
   };

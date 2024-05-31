@@ -38,9 +38,7 @@ export const updateSubscribeFavList = async ({
     newPlaylist = { ...newPlaylist, ...(await playlist.refresh(newPlaylist)) };
     newPlaylist.songList = newPlaylist.songList.concat(playlist.songList);
   } else {
-    if (subscribeUrls === undefined) {
-      subscribeUrls = newPlaylist.subscribeUrl;
-    }
+    subscribeUrls = subscribeUrls ?? playlist.subscribeUrl;
     if (subscribeUrls.length === 0 || subscribeUrls[0].length === 0) {
       logger.debug('[biliSubscribe] nothing to subscribe');
       return;

@@ -36,8 +36,8 @@ const AlbumArt: React.FC<Props> = ({
   const opacity = useRef(new Animated.Value(1)).current;
   const dimension = Dimensions.get('window');
   const coverStyle = {
-    width: windowWidth || '100%',
-    height: windowHeight || '100%',
+    width: windowWidth ?? '100%',
+    height: windowHeight ?? '100%',
   };
 
   const onImagePress = () => {
@@ -107,7 +107,7 @@ const AlbumArt: React.FC<Props> = ({
               playerSetting.hideCoverInMobile
                 ? 0
                 : {
-                    uri: `${overwriteAlbumArt || track?.artwork}`,
+                    uri: `${overwriteAlbumArt ?? track?.artwork}`,
                   }
             }
             transition={{ effect: 'flip-from-top' }}

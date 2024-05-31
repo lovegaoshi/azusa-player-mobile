@@ -356,7 +356,7 @@ export const useNoxSetting = create<NoxSetting>((set, get) => ({
       playlists: val.playlists,
       currentPlayingList: playingList,
       currentPlayingID: val.lastPlaylistId[1],
-      storedPlayerSetting: val.settings || DefaultSetting,
+      storedPlayerSetting: val.settings ?? DefaultSetting,
       cookies: val.cookies,
       language: val.settings.language,
       lastPlayDuration: val.lastPlayDuration,

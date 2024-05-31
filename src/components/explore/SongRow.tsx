@@ -44,7 +44,7 @@ export const BiliSongRow = ({
               onPress={() => {
                 navigationGlobal.navigate(NoxRoutes.Playlist as never);
                 playAsSearchList({
-                  songs: totalSongs || songs,
+                  songs: totalSongs ?? songs,
                   song: item,
                 }).then(() => setTimeout(scroll, 500));
               }}

@@ -23,7 +23,7 @@ export default (currentSong?: NoxMedia.Song, artist = '') => {
   }) => {
     if (resolvedLrc) {
       const lrcpath = `${song.id}.txt`;
-      writeTxtFile(lrcpath, [newLrcDetail.lyric || lrc], 'lrc/');
+      writeTxtFile(lrcpath, [newLrcDetail.lyric ?? lrc], 'lrc/');
       const lyricDeatail: NoxMedia.LyricDetail = {
         songId: song.id,
         lyricKey: resolvedLrc.key,

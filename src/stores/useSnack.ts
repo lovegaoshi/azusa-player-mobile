@@ -50,7 +50,7 @@ export default create<NoxSnack>((set, get) => ({
     }
     if (processFunction) {
       set({
-        snackMsg: snackMsg.processing || 'processing...',
+        snackMsg: snackMsg.processing ?? 'processing...',
         snackVisible: true,
         snackDuration: InfiniteDuration,
         snackOnDismiss: () => void 0,
@@ -74,7 +74,7 @@ export default create<NoxSnack>((set, get) => ({
         setTimeout(
           () =>
             set({
-              snackMsg: snackMsg.fail || 'failed...',
+              snackMsg: snackMsg.fail ?? 'failed...',
               snackVisible: true,
               snackDuration,
               snackOnDismiss: () => set({ snackVisible: false }),

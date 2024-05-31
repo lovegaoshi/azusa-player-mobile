@@ -72,7 +72,7 @@ const ThumbsUpButton = ({ iconSize = 30 }: Props) => {
 
   React.useEffect(() => {
     const setLikedStatus = async () => {
-      if (!track || !track.song) {
+      if (track?.song === undefined) {
         setStatus(THUMBUPSTATUS.notLoggedIn);
         return;
       }

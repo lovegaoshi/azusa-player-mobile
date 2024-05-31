@@ -43,7 +43,7 @@ export default ({
 
   const handleSubmit = () => {
     const newSetting = {
-      title: nameRef.current?.name || '',
+      title: nameRef.current?.name ?? '',
       subscribeUrl: Array.from(new Set(subRef.current?.name.split(';'))),
       blacklistedUrl: Array.from(
         new Set(blacklistRef.current?.name.split(';'))

@@ -43,7 +43,7 @@ const IMusicToNoxMedia = (val: IMusic.IMusicItem, source: MUSICFREE) => {
     // HACK: so NoxMedia.Song can be shoved into getMediaSource
     ...val,
     id: `${source}-${String(val.id)}`,
-    bvid: String(val.bvid || val.id),
+    bvid: String(val.bvid ?? val.id),
     name: val.title,
     nameRaw: val.title,
     singer: val.artist,

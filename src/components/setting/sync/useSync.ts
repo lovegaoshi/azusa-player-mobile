@@ -57,7 +57,7 @@ const useSync = () => {
               setNoxExtensionContent(
                 parsedContent[StorageKeys.MY_FAV_LIST_KEY].map(
                   (val: any) =>
-                    parsedContent[val].title || parsedContent[val].info.title
+                    parsedContent[val].title ?? parsedContent[val].info.title
                 )
               );
               setCachedParsedContent(parsedContent);

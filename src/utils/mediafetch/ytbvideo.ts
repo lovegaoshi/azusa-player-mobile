@@ -253,7 +253,7 @@ const regexFetch = async ({
   reExtracted,
 }: NoxNetwork.RegexFetchProps): Promise<NoxNetwork.NoxRegexFetch> => {
   const audioInfo = await fetchAudioInfo(reExtracted[1]!);
-  return { songList: audioInfo || [] };
+  return { songList: audioInfo ?? [] };
 };
 
 const refreshSong = (song: NoxMedia.Song) => song;

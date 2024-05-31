@@ -30,10 +30,10 @@ const NoxAndroidBottomTab = ({ navigation }: NoxComponent.NavigationProps2) => {
   const route = useNoxSetting(state => state.bottomTabRoute);
   const setRoute = useNoxSetting(state => state.setBottomTabRoute);
 
-  const isDrawerOpen = () => {
-    if (navigation === undefined) return false;
-    return getDrawerStatusFromState(navigation.getState()) === 'open';
-  };
+  const isDrawerOpen = () =>
+    navigation === undefined
+      ? false
+      : getDrawerStatusFromState(navigation.getState()) === 'open';
 
   const onDrawerPress = () => {
     if (navigation === undefined) return;
