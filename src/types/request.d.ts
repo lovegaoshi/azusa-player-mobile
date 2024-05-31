@@ -11,12 +11,15 @@ declare global {
       currentTimeOffset: number;
     }
 
-    interface SearchLyric {
-      updateLyricMapping: (props: UpdateLyricMapping) => void;
+    interface SearchLyricL {
       index?: number;
       resolvedLrcOptions?: NoxFetchedLyric[];
       resolvedLyric?: NoxMedia.LyricDetail;
       song?: NoxMedia.Song;
+    }
+
+    interface SearchLyric extends SearchLyricL {
+      updateLyricMapping: (props: UpdateLyricMapping) => void;
     }
 
     interface NoxFetchedLyric {
