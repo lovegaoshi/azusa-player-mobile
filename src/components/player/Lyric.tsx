@@ -90,7 +90,7 @@ export const LyricView = ({
 
   useEffect(() => {
     if (hasLrcFromLocal(track?.song)) return;
-    searchAndSetCurrentLyric();
+    searchAndSetCurrentLyric({});
   }, [lrcOptions]);
 
   const LyricOptions = (key: string) => {
@@ -210,7 +210,7 @@ export const LyricView = ({
               data={lrcOptions}
               renderItem={({ item, index }) => (
                 <TouchableOpacity
-                  onPress={() => searchAndSetCurrentLyric(index)}
+                  onPress={() => searchAndSetCurrentLyric({ index })}
                 >
                   <Text
                     style={[

@@ -12,7 +12,7 @@ export default async () => {
     return res.data;
   } catch (e) {
     logger.error(
-      '[personalSync] failed to get bilibili login info. returning an empty dict instead.'
+      `[personalSync] failed to get bilibili login info. returning an empty dict instead.: ${e}`
     );
     return { uname: '' };
   }

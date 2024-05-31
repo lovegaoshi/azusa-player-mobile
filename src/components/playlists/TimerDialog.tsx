@@ -67,6 +67,7 @@ const TimerDialog = ({ visible, onClose = () => undefined }: Props) => {
           <IconButton
             icon={startTimer ? 'pause' : 'play'}
             onPress={() => {
+              // eslint-disable-next-line no-unused-expressions
               startTimer ? timerPause() : timerStart();
             }}
             size={30}

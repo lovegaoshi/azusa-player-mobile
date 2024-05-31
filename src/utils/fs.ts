@@ -1,4 +1,5 @@
 import RNFetchBlob from 'react-native-blob-util';
+import logger from './Logger';
 
 const fsdirs = RNFetchBlob.fs.dirs;
 
@@ -29,6 +30,7 @@ export const readTxtFile = (filename: string, subfolder = '') => {
       .readFile(`${fsdirs.DocumentDir}/${subfolder}${filename}`, 'utf8')
       .catch(() => undefined);
   } catch (e) {
+    logger.warn(`[fs] readTxtFile error: ${e}`);
     return undefined;
   }
 };

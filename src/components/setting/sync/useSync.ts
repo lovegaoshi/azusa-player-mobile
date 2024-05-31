@@ -90,8 +90,8 @@ const useSync = () => {
     let parsedContent;
     try {
       parsedContent = JSON.parse(strFromU8(decompressSync(content)));
-    } catch (error) {
-      logger.error('parsed content is not a valid compressed JSON.');
+    } catch (e) {
+      logger.error(`parsed content is not a valid compressed JSON: ${e}`);
       setSnack({ snackMsg: { success: t('Sync.fileNotValidJson') } });
       return;
     }

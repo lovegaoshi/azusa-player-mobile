@@ -100,6 +100,7 @@ export const checkAuthentication = async (token = '') => {
     }
     return true;
   } catch (e) {
+    logger.warn(`[sync] gitee auth failed:${e}`);
     return false;
   }
 };
