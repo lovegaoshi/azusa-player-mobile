@@ -38,9 +38,7 @@ export const sync = async ({
   content: Uint8Array;
   username?: string;
 }) => {
-  if (username === undefined) {
-    username = await getUserName(token);
-  }
+  username = username ?? (await getUserName(token));
   logger.debug(`[github] start syncing ${username}`);
   await createAPMRepo(token);
   logger.debug('[github] created repo');

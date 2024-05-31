@@ -201,7 +201,7 @@ export const LyricView = ({
               ]}
               value={searchText}
               onChangeText={setSearchText}
-              placeholder={track === undefined ? '' : track.title}
+              placeholder={track?.title ?? ''}
               onSubmitEditing={() => fetchAndSetLyricOptions(searchText)}
               selectionColor={playerStyle.customColors.textInputSelectionColor}
             />

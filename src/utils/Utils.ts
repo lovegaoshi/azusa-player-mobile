@@ -159,8 +159,6 @@ export const filterUndefined = <T, K>(
 export const reorder = <T>(list: T[], startIndex: number, endIndex: number) => {
   const result = Array.from(list);
   const [removed] = result.splice(startIndex, 1);
-  if (removed === undefined) return result;
-  result.splice(endIndex, 0, removed);
-
+  if (removed !== undefined) result.splice(endIndex, 0, removed);
   return result;
 };
