@@ -1,5 +1,8 @@
-import { logger } from './Logger';
-
+import bilisearchFetch from '@utils/mediafetch/bilisearch';
+import ytbvideoFetch from '@utils/mediafetch/ytbvideo';
+import localFetch from '@utils/mediafetch/local';
+import { MUSICFREE, searcher } from '@utils/mediafetch/musicfree';
+import { getMusicFreePlugin } from '@utils/ChromeStorage';
 import { SearchOptions } from '@enums/Storage';
 import steriatkFetch from './mediafetch/steriatk';
 import biliVideoSimilarFetch from './mediafetch/biliVideoSimilar';
@@ -14,20 +17,16 @@ import bilicolleFetch from './mediafetch/bilicolle';
 import bilifavlistFetch from './mediafetch/bilifavlist';
 import bilichannelFetch from './mediafetch/bilichannel';
 import biliaudioFetch from './mediafetch/biliaudio';
-import bilisearchFetch from '@utils/mediafetch/bilisearch';
 import bilichannelAudioFetch from './mediafetch/bilichannelAudio';
-import ytbvideoFetch from '@utils/mediafetch/ytbvideo';
 import ytbplaylistFetch from './mediafetch/ytbplaylist';
 import ytbmixlistFetch from './mediafetch/ytbmixlist';
 import ytbsearchFetch from './mediafetch/ytbsearch';
 import bililiveFetch from './mediafetch/bililive';
 import bilisubliveFetch from './mediafetch/bilisublive';
-import localFetch from '@utils/mediafetch/local';
 import b23tvFetch from './mediafetch/b23tv';
 import headRequestFetch from './mediafetch/headRequest';
 import biliFavColleFetch from './mediafetch/biliFavColle';
-import { MUSICFREE, searcher } from './mediafetch/musicfree';
-import { getMusicFreePlugin } from '@utils/ChromeStorage';
+import { logger } from './Logger';
 
 /**
  * assign the proper extractor based on the provided url. uses regex.

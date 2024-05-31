@@ -62,7 +62,7 @@ const API =
 
 const fetchBiliAudioColleList = (
   sid: string,
-  progressEmitter: (val: number) => void = () => undefined,
+  progressEmitter: NoxUtils.ProgressEmitter = () => undefined,
   favList: string[] = []
 ) => {
   logger.info('calling fetchBiliAudioAMList');

@@ -49,6 +49,7 @@ export const searchLyricOptions = async (
   }
   logger.debug(`[qqlyric] calling searchLyricOptions: ${searchKey}`);
   const API = getQQSearchAPI(searchKey);
+  // @ts-ignore HACK: for noxplayer's bfetch compatibility
   const res = await bfetch(API.src, API.params);
   const json = await res.json();
   const data = json.req.data.body.song.list;

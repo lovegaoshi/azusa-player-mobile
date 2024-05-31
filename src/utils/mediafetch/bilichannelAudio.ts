@@ -22,7 +22,7 @@ const CIDPREFIX = `${Source.biliaudio}-`;
 
 export const fetchBiliChannelAudioList = (
   mid: string,
-  progressEmitter: (val: number) => void = () => undefined,
+  progressEmitter: NoxUtils.ProgressEmitter = () => undefined,
   favList: string[] = []
 ) => {
   logger.info('calling fetchBiliChannelList');

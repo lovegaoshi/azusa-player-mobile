@@ -69,7 +69,7 @@ const getOrInsertBiliFavlist = async (
 export const addToBiliFavlist = async (
   favlistid: string,
   bvids: string[],
-  progressEmitter: (val: number) => void = () => undefined
+  progressEmitter: NoxUtils.ProgressEmitter = () => undefined
 ) => {
   const sendBVLikeEmitter = async (
     bvid: string,
@@ -109,7 +109,7 @@ export const addToBiliFavlist = async (
 
 export const syncFavlist = async (
   favlist: NoxMedia.Playlist,
-  progressEmitter: (val: number) => void = () => undefined
+  progressEmitter: NoxUtils.ProgressEmitter = () => undefined
 ) => {
   const user = await getBiliUser();
   if (!user.mid) return false;

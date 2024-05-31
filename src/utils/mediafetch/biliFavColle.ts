@@ -18,7 +18,7 @@ const URL_BILICOLLE_INFO =
 
 const fetchBiliColleList = (
   sid: string,
-  progressEmitter: (val: number) => void = () => undefined,
+  progressEmitter: NoxUtils.ProgressEmitter = () => undefined,
   favList: string[] = []
 ) => {
   logger.info('calling fetchBiliColleList');

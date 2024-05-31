@@ -1,4 +1,6 @@
 declare namespace NoxUtils {
+  type ProgressEmitter = (v: number) => void;
+
   interface SongProcessor {
     song: NoxMedia.Song;
     iOS?: boolean;

@@ -41,7 +41,7 @@ const fastSearchResolveBVID = (bvobjs: any[]) =>
 
 export const fetchBiliChannelList = (
   url: string,
-  progressEmitter: (val: number) => void = () => undefined,
+  progressEmitter: NoxUtils.ProgressEmitter = () => undefined,
   favList: string[] = [],
   fastSearch = false
 ) => {

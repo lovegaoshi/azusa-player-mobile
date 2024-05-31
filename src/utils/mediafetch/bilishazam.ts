@@ -45,7 +45,7 @@ const fetchVideoTagPromiseRaw = async ({ bvid, cid }: ids) => {
 export const biliShazamOnSonglist = (
   songlist: NoxMedia.Song[],
   forced = false,
-  progressEmitter: (val: number) => void = () => undefined,
+  progressEmitter: NoxUtils.ProgressEmitter = () => undefined,
   biliShazam = false
 ) => {
   if (!biliShazam) return songlist;

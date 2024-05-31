@@ -2,7 +2,7 @@ import { get_channel } from 'libmuse';
 // eslint-disable-next-line import/no-unresolved
 import { Innertube } from 'youtubei.js';
 
-import { fetchAudioInfo } from './ytbvideo';
+import { fetchAudioInfo } from '@utils/mediafetch/ytbvideo';
 import bfetch from '@utils/BiliFetch';
 import SongTS from '@objects/Song';
 import { Source } from '@enums/MediaFetch';

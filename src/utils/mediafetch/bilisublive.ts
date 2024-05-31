@@ -49,7 +49,7 @@ const getRoomInfos = async (uids: number[]) => {
 
 interface Props {
   uid: string;
-  progressEmitter?: (val: number) => void;
+  progressEmitter?: NoxUtils.ProgressEmitter;
 }
 
 // needs cookie auth

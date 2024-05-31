@@ -53,7 +53,7 @@ export const fetchAVID = (
 
 export const fetchBiliAVIDs = async (
   AVids: string[],
-  progressEmitter: (val: number) => void = () => undefined,
+  progressEmitter: NoxUtils.ProgressEmitter = () => undefined,
   useBiliTag = false
 ) => {
   const BVidLen = AVids.length;

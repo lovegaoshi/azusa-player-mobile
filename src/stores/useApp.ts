@@ -23,7 +23,7 @@ import { createStyle } from '@components/style';
 import { getABRepeatRaw } from './appStore';
 import { setPlayingList, setPlayingIndex } from '@stores/playingList';
 import DummyLyricDetail from '../objects/LyricDetail';
-import { MUSICFREE } from '../utils/mediafetch/musicfree';
+import { MUSICFREE } from '@utils/mediafetch/musicfree';
 import { IntentData } from '@enums/Intent';
 import { BottomTabRouteIcons } from '@enums/BottomTab';
 

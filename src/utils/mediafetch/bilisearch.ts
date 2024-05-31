@@ -53,7 +53,7 @@ export const fastSearchResolveBVID = (bvobjs: any[]) =>
 
 export const fetchBiliSearchList = async (
   kword: string,
-  progressEmitter: (val: number) => void = () => undefined,
+  progressEmitter: NoxUtils.ProgressEmitter = () => undefined,
   fastSearch = false,
   cookiedSearch = false,
   startPage = 1
@@ -89,19 +89,12 @@ export const fetchBiliSearchList = async (
   return [];
 };
 
-interface RegexFetchProps {
-  url: string;
-  progressEmitter: (val: number) => void;
-  fastSearch: boolean;
-  cookiedSearch?: boolean;
-}
-
 const regexFetch = async ({
   url,
   progressEmitter = () => undefined,
   fastSearch,
   cookiedSearch = false,
-}: RegexFetchProps): Promise<NoxNetwork.NoxRegexFetch> => ({
+}: NoxNetwork.BiliSearchFetchProps): Promise<NoxNetwork.NoxRegexFetch> => ({
   songList: await fetchBiliSearchList(
     url,
     progressEmitter,

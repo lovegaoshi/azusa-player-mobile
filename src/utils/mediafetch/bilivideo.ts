@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+// @ts-ignore HACK: for noxplayer's bfetch compatibility. too lazy to refactor
 import { Platform } from 'react-native';
 
 import { biliApiLimiter } from './throttle';
@@ -72,7 +73,7 @@ export const BVIDtoAID = (bvid: string): Promise<string> =>
 
 export const fetchBiliBVIDs = async (
   BVids: string[],
-  progressEmitter: (val: number) => void = () => undefined,
+  progressEmitter: NoxUtils.ProgressEmitter = () => undefined,
   useBiliTag = false
 ) => {
   const BVidLen = BVids.length;
