@@ -87,6 +87,7 @@ export default ({
               key={i}
               onPress={() => {
                 setValue(datum);
+                onSubmit(datum);
                 setShowAutoComplete(false);
                 pressed.current = true;
               }}
