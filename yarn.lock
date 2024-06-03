@@ -4139,7 +4139,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:*, @types/node@npm:^20.12.13":
+"@types/node@npm:*":
   version: 20.12.13
   resolution: "@types/node@npm:20.12.13"
   dependencies:
@@ -4168,6 +4168,15 @@ __metadata:
   dependencies:
     undici-types: "npm:~5.26.4"
   checksum: 10c0/bfebae8389220c0188492c82eaf328f4ba15e6e9b4abee33d6bf36d3b13f188c2f53eb695d427feb882fff09834f467405e2ed9be6aeb6ad4705509822d2ea08
+  languageName: node
+  linkType: hard
+
+"@types/node@npm:^20.14.0":
+  version: 20.14.0
+  resolution: "@types/node@npm:20.14.0"
+  dependencies:
+    undici-types: "npm:~5.26.4"
+  checksum: 10c0/29ccc7592e9ca6b81d00f3a6673241d08e9042d801b10adfd9ebcbbf326208e0a0133a8d146158db18d02a68b85d9ce1fd94e6e1e5be0da263129bf6e42eb22d
   languageName: node
   linkType: hard
 
@@ -5165,7 +5174,7 @@ __metadata:
     "@types/he": "npm:^1.2.3"
     "@types/jest": "npm:^29.5.12"
     "@types/md5": "npm:^2.3.5"
-    "@types/node": "npm:^20.12.13"
+    "@types/node": "npm:^20.14.0"
     "@types/react": "npm:~18.3.3"
     "@types/react-native": "npm:^0.73.0"
     "@types/react-native-background-timer": "npm:^2.0.2"
@@ -5222,7 +5231,7 @@ __metadata:
     metro-react-native-babel-preset: "npm:0.77.0"
     patch-package: "npm:^8.0.0"
     postinstall-postinstall: "npm:^2.1.0"
-    prettier: "npm:^3.2.5"
+    prettier: "npm:^3.3.0"
     qs: "npm:^6.12.1"
     react: "npm:18.3.1"
     react-i18next: "npm:^14.1.2"
@@ -5242,7 +5251,7 @@ __metadata:
     react-native-pager-view: "npm:6.3.1"
     react-native-paper: "npm:^5.12.3"
     react-native-qrcode-svg: "npm:^6.3.1"
-    react-native-reanimated: "npm:3.11.0"
+    react-native-reanimated: "npm:3.12.0"
     react-native-safe-area-context: "npm:^4.10.3"
     react-native-screens: "npm:3.31.1"
     react-native-shadow-2: "npm:^7.1.0"
@@ -13345,12 +13354,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"prettier@npm:^3.2.5":
-  version: 3.2.5
-  resolution: "prettier@npm:3.2.5"
+"prettier@npm:^3.3.0":
+  version: 3.3.0
+  resolution: "prettier@npm:3.3.0"
   bin:
     prettier: bin/prettier.cjs
-  checksum: 10c0/ea327f37a7d46f2324a34ad35292af2ad4c4c3c3355da07313339d7e554320f66f65f91e856add8530157a733c6c4a897dc41b577056be5c24c40f739f5ee8c6
+  checksum: 10c0/d033c356320aa2e468bf29c931b094ac730d2f4defd5eb2989d8589313dec901d2fc866e3788f3d161e420b142ea4ec3dda535dbe0169ef4d0026397a68ba9cf
   languageName: node
   linkType: hard
 
@@ -13885,9 +13894,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-native-reanimated@npm:3.11.0":
-  version: 3.11.0
-  resolution: "react-native-reanimated@npm:3.11.0"
+"react-native-reanimated@npm:3.12.0":
+  version: 3.12.0
+  resolution: "react-native-reanimated@npm:3.12.0"
   dependencies:
     "@babel/plugin-transform-arrow-functions": "npm:^7.0.0-0"
     "@babel/plugin-transform-nullish-coalescing-operator": "npm:^7.0.0-0"
@@ -13901,7 +13910,7 @@ __metadata:
     "@babel/core": ^7.0.0-0
     react: "*"
     react-native: "*"
-  checksum: 10c0/e41047ae2bf1abe760a6ed1b24300c4064028230800898405b7b414a9d4bcc5aabbc250ddeffa945f103d7629e1cb50e031956fcd197f1ccd18da5059a4203b1
+  checksum: 10c0/1fe87dace1989e8bd21450898b5b89f8dbfd8c417e3ae1f0260367f1b5c67c5292bf47090623124712d8c25f378cb37bdb6a12dcf89e013d90ce465cf784bd39
   languageName: node
   linkType: hard
 
