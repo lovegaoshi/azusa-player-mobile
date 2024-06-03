@@ -10,7 +10,7 @@ interface Props {
   title?: string;
 }
 
-export default ({
+const GenericDialog = ({
   visible,
   children = <Text variant="bodyMedium">This is simple dialog</Text>,
   onClose = () => undefined,
@@ -26,15 +26,21 @@ export default ({
   };
 
   return (
+    <Dialog visible={visible} onDismiss={handleClose}>
+      {title && <Dialog.Title>{title}</Dialog.Title>}
+      <Dialog.Content>{children}</Dialog.Content>
+      <Dialog.Actions>
+        <Button onPress={handleClose}>{t('Dialog.cancel')}</Button>
+        <Button onPress={handleSubmit}>{t('Dialog.ok')}</Button>
+      </Dialog.Actions>
+    </Dialog>
+  );
+};
+
+export default (p: Props) => {
+  return (
     <Portal>
-      <Dialog visible={visible} onDismiss={handleClose}>
-        {title && <Dialog.Title>{title}</Dialog.Title>}
-        <Dialog.Content>{children}</Dialog.Content>
-        <Dialog.Actions>
-          <Button onPress={handleClose}>{t('Dialog.cancel')}</Button>
-          <Button onPress={handleSubmit}>{t('Dialog.ok')}</Button>
-        </Dialog.Actions>
-      </Dialog>
+      <GenericDialog {...p} />
     </Portal>
   );
 };
