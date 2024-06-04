@@ -12,7 +12,7 @@ import {
 } from './ytbvideo.muse';
 import {
   resolveURL as resolveURLYtbi,
-  // fetchAudioInfo as fetchAudioInfoYtbi,
+  fetchAudioInfo as fetchAudioInfoYtbi,
 } from './ytbvideo.ytbi';
 
 const resolveURL = (song: NoxMedia.Song, iOS = true) =>
@@ -23,7 +23,9 @@ const resolveURL = (song: NoxMedia.Song, iOS = true) =>
 export const fetchAudioInfo = (bvid: string, progressEmitter?: () => void) =>
   biliApiLimiter.schedule(() => {
     progressEmitter?.();
-    return fetchAudioInfoNode(bvid).catch(() => fetchAudioInfoMuse(bvid));
+    return fetchAudioInfoNode(bvid).catch(() =>
+      fetchAudioInfoYtbi(bvid).catch(() => fetchAudioInfoMuse(bvid))
+    );
   });
 
 const regexFetch = async ({
