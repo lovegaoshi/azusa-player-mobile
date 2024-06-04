@@ -12,10 +12,8 @@ import {
 } from './ytbvideo.muse';
 import {
   resolveURL as resolveURLYtbi,
-  fetchAudioInfo as fetchAudioInfoYtbi,
+  // fetchAudioInfo as fetchAudioInfoYtbi,
 } from './ytbvideo.ytbi';
-
-export const CIDPREFIX = `${Source.ytbvideo}-`;
 
 const resolveURL = (song: NoxMedia.Song, iOS = true) =>
   resolveURLNode(song, iOS).catch(() =>
