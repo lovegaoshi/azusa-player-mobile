@@ -34,10 +34,10 @@ const fetchInnerTuneSearch = async (
   const searchData = await Promise.all([
     search(searchVal, {
       filter: 'songs',
-    }),
+    }).catch(() => ({ categories: [{ results: [] }] })),
     search(searchVal, {
       filter: 'videos',
-    }),
+    }).catch(() => ({ categories: [{ results: [] }] })),
   ]);
   return searchData.flatMap(searchList =>
     searchList.categories[0].results.flatMap((val: any) =>

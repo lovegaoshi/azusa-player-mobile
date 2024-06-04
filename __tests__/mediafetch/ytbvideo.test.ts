@@ -1,8 +1,17 @@
 import { get_song } from 'libmuse';
 import ytdl from 'ytdl-core';
+// import fetcher from '../../src/utils/mediafetch/ytbvideo';
+
+/*
+test('ytbressolve', async () => {
+  const content = await fetcher.resolveURL({ bvid: 'VtXTFi8edyE' });
+  expect(content?.url).not.toBeNull();
+}, 22222);
+*/
 
 test('test libmuse', async () => {
   const content = await get_song('VtXTFi8edyE');
+  //console.log(content);
   expect(content).not.toBeNull();
 }, 220000);
 

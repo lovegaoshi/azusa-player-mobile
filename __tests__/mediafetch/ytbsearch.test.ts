@@ -1,7 +1,7 @@
 import fetcher from '../../src/utils/mediafetch/ytbsearch';
 test('ytbsearch', async () => {
   const content = await fetcher.regexFetch({
-    url: 'lady gaga',
+    url: "don't wake up",
     progressEmitter: () => {},
   });
   // console.log(content);
