@@ -10,11 +10,17 @@ import {
   resolveURL as resolveURLMuse,
   fetchAudioInfo as fetchAudioInfoMuse,
 } from './ytbvideo.muse';
+import {
+  resolveURL as resolveURLYtbi,
+  fetchAudioInfo as fetchAudioInfoYtbi,
+} from './ytbvideo.ytbi';
 
 export const CIDPREFIX = `${Source.ytbvideo}-`;
 
 const resolveURL = (song: NoxMedia.Song, iOS = true) =>
-  resolveURLNode(song, iOS).catch(() => resolveURLMuse(song));
+  resolveURLNode(song, iOS).catch(() =>
+    resolveURLYtbi(song).catch(() => resolveURLMuse(song))
+  );
 
 export const fetchAudioInfo = (bvid: string, progressEmitter?: () => void) =>
   biliApiLimiter.schedule(() => {
