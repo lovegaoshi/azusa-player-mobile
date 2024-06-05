@@ -1,4 +1,3 @@
-import { CIDPREFIX } from '@utils/mediafetch/ytbvideo';
 import SongTS from '@objects/Song';
 import { timestampToSeconds } from '../Utils';
 import { Source } from '@enums/MediaFetch';
@@ -26,7 +25,7 @@ const fetchYTPlaylist = async (
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       .map((val: any, index: number) => [
         SongTS({
-          cid: `${CIDPREFIX}-${val.playlistPanelVideoRenderer.videoId}`,
+          cid: `${Source.ytbvideo}-${val.playlistPanelVideoRenderer.videoId}`,
           bvid: val.playlistPanelVideoRenderer.videoId,
           name: val.playlistPanelVideoRenderer.title.simpleText,
           nameRaw: val.playlistPanelVideoRenderer.title.simpleText,

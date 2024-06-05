@@ -1,6 +1,5 @@
 import { biliApiLimiter } from './throttle';
 
-import { Source } from '@enums/MediaFetch';
 import {
   resolveURL as resolveURLNode,
   fetchAudioInfo as fetchAudioInfoNode,
@@ -10,8 +9,6 @@ import {
   resolveURL as resolveURLMuse,
   fetchAudioInfo as fetchAudioInfoMuse,
 } from './ytbvideo.muse';
-
-export const CIDPREFIX = `${Source.ytbvideo}-`;
 
 const resolveURL = (song: NoxMedia.Song, iOS = true) =>
   resolveURLNode(song, iOS).catch(() => resolveURLMuse(song));

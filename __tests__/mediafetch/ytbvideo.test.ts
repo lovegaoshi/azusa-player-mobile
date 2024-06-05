@@ -1,27 +1,24 @@
-import { get_song } from 'libmuse';
-import ytdl from 'ytdl-core';
 // import fetcher from '../../src/utils/mediafetch/ytbvideo';
+import { resolveURL as resolveURLNode } from '../../src/utils/mediafetch/ytbvideo.node';
+import { resolveURL as resolveURLMuse } from '../../src/utils/mediafetch/ytbvideo.muse';
+import { resolveURL as resolveURLYtbi } from '../../src/utils/mediafetch/ytbvideo.ytbi';
 
-/*
-test('ytbressolve', async () => {
-  const content = await fetcher.resolveURL({ bvid: 'VtXTFi8edyE' });
-  expect(content?.url).not.toBeNull();
-}, 22222);
-*/
+const dummySong = { bvid: 'VtXTFi8edyE' };
+
+test('test ytbi', async () => {
+  const content = await resolveURLYtbi(dummySong);
+  //console.log(content);
+  expect(content).not.toBeNull();
+}, 220000);
 
 test('test libmuse', async () => {
-  const content = await get_song('VtXTFi8edyE');
+  const content = await resolveURLMuse(dummySong);
   //console.log(content);
   expect(content).not.toBeNull();
 }, 220000);
 
 test('test ytdl-core', async () => {
-  const ytdlInfo = await ytdl.getInfo(
-    `https://www.youtube.com/watch?v=VtXTFi8edyE`
-  );
-  const formats = ytdlInfo.formats.filter(format =>
-    format.codecs.includes('mp4a')
-  );
-  const content = ytdl.chooseFormat(formats, { quality: 'highestaudio' });
+  const content = await resolveURLNode(dummySong);
+  console.log(content);
   expect(content).not.toBeNull();
 }, 220000);

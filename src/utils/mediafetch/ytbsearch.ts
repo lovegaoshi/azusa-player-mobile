@@ -1,14 +1,13 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { search } from 'libmuse';
 
-import { CIDPREFIX } from '@utils/mediafetch/ytbvideo';
 import SongTS from '@objects/Song';
 import { Source } from '@enums/MediaFetch';
 
 const musePlaylistItemToNoxSong = (val: any, data: any) => {
   try {
     return SongTS({
-      cid: `${CIDPREFIX}-${val.videoId}`,
+      cid: `${Source.ytbvideo}-${val.videoId}`,
       bvid: val.videoId,
       name: val.title,
       nameRaw: val.title,

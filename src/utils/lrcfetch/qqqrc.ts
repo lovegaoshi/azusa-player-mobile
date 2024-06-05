@@ -97,7 +97,12 @@ const getQrcLyric = async (songMid: string) => {
   const res = await bfetch(SearchSongAPI, qrcPostParam);
   const json = await res.json();
   const data = json['music.musichallSong.PlayLyricInfo.GetPlayLyricInfo'].data;
-  if (data.qrc === 0) return atob(data.lyric);
+  try {
+    if (data.qrc === 0) return atob(data.lyric);
+  } catch (e) {
+    logger.warn(`[qrc] failed to decode qrc: ${e}, ${songMid}`);
+    return '';
+  }
   return decodeQrc(data.lyric);
 };
 

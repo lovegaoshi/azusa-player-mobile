@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { get_playlist } from 'libmuse';
 
-import { fetchAudioInfo, CIDPREFIX } from '@utils/mediafetch/ytbvideo';
+import { fetchAudioInfo } from '@utils/mediafetch/ytbvideo';
 import SongTS from '@objects/Song';
 import { logger } from '../Logger';
 import { Source } from '@enums/MediaFetch';
@@ -9,7 +9,7 @@ import { Source } from '@enums/MediaFetch';
 const musePlaylistItemToNoxSong = (val: any, data: any) => {
   try {
     return SongTS({
-      cid: `${CIDPREFIX}-${val.videoId}`,
+      cid: `${Source.ytbvideo}-${val.videoId}`,
       bvid: val.videoId,
       name: val.title,
       nameRaw: val.title,
@@ -59,7 +59,7 @@ export const fetchInnerTunePlaylist = async (
 const fastYTPlaylistSongResolve = (val: any, data: any) => {
   try {
     return SongTS({
-      cid: `${CIDPREFIX}-${val.playlistVideoRenderer.videoId}`,
+      cid: `${Source.ytbvideo}-${val.playlistVideoRenderer.videoId}`,
       bvid: val.playlistVideoRenderer.videoId,
       name: val.playlistVideoRenderer.title.runs[0].text,
       nameRaw: val.playlistVideoRenderer.title.runs[0].text,
