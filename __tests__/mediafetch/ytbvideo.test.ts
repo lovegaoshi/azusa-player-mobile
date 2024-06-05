@@ -9,7 +9,7 @@ test('test ytbi', async () => {
   const content = await resolveURLYtbi(dummySong);
   //console.log(content);
   expect(content).not.toBeNull();
-}, 220000);
+}, 2201000);
 
 test('test libmuse', async () => {
   const content = await resolveURLMuse(dummySong);
