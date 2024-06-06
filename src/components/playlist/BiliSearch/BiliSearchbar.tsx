@@ -113,6 +113,7 @@ export default ({
     setSharedMimeType(mimeType);
     // You can receive extra data from your custom Share View
     handleExternalSearch(data);
+    setSearchVal(data);
   }, []);
 
   const performSearch = () => {
