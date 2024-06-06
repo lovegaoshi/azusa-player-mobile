@@ -77,7 +77,7 @@ const resolveURL = async (
   song: NoxMedia.Song
 ): Promise<NoxNetwork.ParsedNoxMediaURL> => {
   const req = await bfetch(
-    `https://api.live.bilibili.com/room/v1/Room/playUrl?cid=${song.bvid}&platform=web&quality=2`
+    `https://api.live.bilibili.com/room/v1/Room/playUrl?cid=${song.bvid}&platform=h5&quality=2`
   );
   const json = await req.json();
   const durl = json.data.durl;
