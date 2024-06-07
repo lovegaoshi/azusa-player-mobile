@@ -1,4 +1,3 @@
-import { Platform } from 'react-native';
 import TrackPlayer, { RepeatMode } from 'react-native-track-player';
 import { useTranslation } from 'react-i18next';
 
@@ -15,9 +14,7 @@ import noxPlayingList, { setPlayingIndex } from '@stores/playingList';
 import { dataSaverPlaylist, dataSaverSongs } from '@utils/Cache';
 import useDataSaver from './useDataSaver';
 import useSnack from '@stores/useSnack';
-import { PlaylistTypes } from '@enums/Playlist';
-
-const PLAYLIST_MEDIAID = 'playlist-';
+import { PLAYLIST_MEDIAID, PlaylistTypes } from '@enums/Playlist';
 
 const { getState } = noxPlayingList;
 
@@ -206,28 +203,7 @@ const usePlayback = () => {
     shuffleAll();
   };
 
-  const buildBrowseTree = () => {
-    if (Platform.OS !== 'android') return;
-    TrackPlayer.setBrowseTree({
-      '/': [
-        {
-          mediaId: 'PlaylistTab',
-          title: t('AndroidAuto.PlaylistTab'),
-          playable: '1',
-        },
-      ],
-      PlaylistTab: Object.keys(playlists).map(key => {
-        return {
-          mediaId: `${PLAYLIST_MEDIAID}${key}`,
-          title: playlists[key].title,
-          playable: '0',
-        };
-      }),
-    });
-  };
-
   return {
-    buildBrowseTree,
     playFromMediaId,
     playFromSearch,
     playFromPlaylist,

@@ -9,7 +9,7 @@ import AzusaPlayer from './AzusaPlayer';
 import AzusaPlayerLandscape from './components/landscape/AzusaPlayerLandscape';
 import AppOpenSplash from './components/background/AppOpenSplash';
 import useSetupPlayer from './hooks/useSetupPlayer';
-import useAndroidAuto from './hooks/useAndroidAuto';
+import useAndroidAuto from './hooks/useAndroidAutoPermission';
 import { useIsLandscape } from './hooks/useOrientation';
 import appStore from '@stores/appStore';
 import PIPLyricView from './components/player/PIPLyric';

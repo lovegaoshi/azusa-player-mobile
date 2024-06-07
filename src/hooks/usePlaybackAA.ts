@@ -1,13 +1,42 @@
 import { Platform } from 'react-native';
 import { useEffect } from 'react';
 import TrackPlayer, { Event } from 'react-native-track-player';
+import { useTranslation } from 'react-i18next';
+import { PLAYLIST_MEDIAID } from '@enums/Playlist';
+
 import usePlayback from './usePlayback';
 import { useNoxSetting } from '@stores/useApp';
 import { IntentData } from '@enums/Intent';
 
-const useAAPlayback = () => {
-  const { buildBrowseTree, playFromMediaId, playFromSearch, shuffleAll } =
-    usePlayback();
+export const useAndroidAuto = () => {
+  const { t } = useTranslation();
+  const playlists = useNoxSetting(state => state.playlists);
+
+  const buildBrowseTree = () => {
+    if (Platform.OS !== 'android') return;
+    TrackPlayer.setBrowseTree({
+      '/': [
+        {
+          mediaId: 'PlaylistTab',
+          title: t('AndroidAuto.PlaylistTab'),
+          playable: '1',
+        },
+      ],
+      PlaylistTab: Object.keys(playlists).map(key => {
+        return {
+          mediaId: `${PLAYLIST_MEDIAID}${key}`,
+          title: playlists[key].title,
+          playable: '0',
+        };
+      }),
+    });
+  };
+  return { buildBrowseTree };
+};
+
+export default () => {
+  const { playFromMediaId, playFromSearch, shuffleAll } = usePlayback();
+  const { buildBrowseTree } = useAndroidAuto();
   const intentData = useNoxSetting(state => state.intentData);
   const setIntentData = useNoxSetting(state => state.setIntentData);
 
@@ -44,5 +73,3 @@ const useAAPlayback = () => {
   // two birds in one stone.
   return { buildBrowseTree };
 };
-
-export default useAAPlayback;
