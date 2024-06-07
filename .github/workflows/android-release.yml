@@ -272,6 +272,7 @@ jobs:
       - name: python fixHTTP
         run: |
           python ./scripts/fixHTTP.py
+          python ./scripts/fixiOSBuild.py
 
       - name: build
         run: cd ios && xcodebuild -scheme APM -workspace example.xcworkspace -configuration Release clean archive -archivePath "build/APM.xcarchive" CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO CODE_SIGNING_ALLOWED=NO

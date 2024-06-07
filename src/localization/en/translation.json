@@ -297,6 +297,8 @@
   },
   "AndroidAuto": {
     "PlaylistTab": "Playlists",
+    "NowPlayingTab": "Now Playing",
+    "GoToNowPlayingTab": "go to now playing",
     "Permission": "Hi! APM is technically limited that only by enabling the \"display over other apps\" permission ensures properly functionalities on Android Auto. For the best experience please press OK and enable it if you intend to use APM with a car.",
     "PlayingShuffle": "No match! Shuffling instead..."
   },

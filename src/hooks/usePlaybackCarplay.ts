@@ -10,6 +10,7 @@ import { useTranslation } from 'react-i18next';
 
 import { PLAYLIST_MEDIAID } from '@enums/Playlist';
 import usePlayback from './usePlayback';
+import { cycleThroughPlaymodeIOS as cyclePlaymode } from '@stores/playingList';
 
 enum Templates {
   Playlist = 'playlistTemplate',
@@ -25,6 +26,10 @@ export default () => {
    */
   const buildBrowseTree = () => {
     if (!carPlayConnected) return;
+    const nowPlayingSection = {
+      header: t('AndroidAuto.NowPlayingTab'),
+      items: [{ text: t('AndroidAuto.GoToNowPlayingTab') }],
+    };
     const playlistSection = {
       header: t('AndroidAuto.PlaylistTab'),
       items: playlistIds.map(v => ({
@@ -34,36 +39,39 @@ export default () => {
     };
     const playlistTemplate = new ListTemplate({
       id: Templates.Playlist,
-      sections: [playlistSection],
+      sections: [nowPlayingSection, playlistSection],
       title: 'List Template',
-      onItemSelect: async item =>
-        playFromMediaId(`${PLAYLIST_MEDIAID}${playlistIds[item.index]}`).then(
-          makeNowPlayingTemplate
-        ),
+      tabTitle: 'APM',
+      onItemSelect: async item => {
+        if (item.index === 0) {
+          return pushNowPlayingTemplate();
+        }
+        playFromMediaId(
+          `${PLAYLIST_MEDIAID}${playlistIds[item.index - 1]}`
+        ).then(() => pushNowPlayingTemplate());
+      },
     });
     const tabBarTemplate = new TabBarTemplate({
+      title: 'APM',
+      tabTitle: 'APM',
       templates: [playlistTemplate],
       onTemplateSelect: () => {},
     });
     CarPlay.setRootTemplate(tabBarTemplate);
   };
 
-  const makeNowPlayingTemplate = () => {
+  const makeNowPlayingTemplate = (playback = 'shuffle') => {
     if (!carPlayConnected) return;
-    const template = new NowPlayingTemplate({
+    return new NowPlayingTemplate({
       buttons: [
         {
-          id: 'foo',
-          type: 'more',
+          id: 'favorite',
+          type: 'add-to-library',
         },
         {
-          id: 'demo',
-          type: 'playback',
-        },
-        {
-          id: 'baz',
-          type: 'image',
-          image: { uri: 'https://rntp.dev/example/Longing.jpeg' },
+          id: 'change-playmode',
+          // @ts-expect-error
+          type: playback,
         },
       ],
       albumArtistButtonEnabled: true,
@@ -73,11 +81,20 @@ export default () => {
         console.log('up next was pressed');
       },
       onButtonPressed(e) {
-        console.log(e);
+        switch (e.id) {
+          case 'favorite':
+            return;
+          case 'change-playmode':
+            makeNowPlayingTemplate(cyclePlaymode());
+        }
       },
     });
-    CarPlay.enableNowPlaying(true);
+  };
+
+  const pushNowPlayingTemplate = (template = makeNowPlayingTemplate()) => {
+    if (!template) return;
     CarPlay.pushTemplate(template);
+    CarPlay.enableNowPlaying(true);
   };
 
   useEffect(() => {
