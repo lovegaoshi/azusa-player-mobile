@@ -49,7 +49,7 @@ export const sync = async ({
   });
   const probeFile = await probeFileRes.json();
   // file doesnt exist. create instaed.
-  return await bfetch(
+  return bfetch(
     `https://api.github.com/repos/${username}/${APM_REPO_NAME}/contents/${APM_FILE_NAME}`,
     {
       method: 'PUT',

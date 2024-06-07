@@ -4,7 +4,7 @@ import { StyleSheet } from 'react-native';
 import { useTranslation } from 'react-i18next';
 
 import { dummyPlaylist } from '@objects/Playlist';
-import usePlaylistAA from '@hooks/usePlaylistAA';
+import usePlaylistBrowseTree from '@hooks/usePlaylistBrowseTree';
 import PortaledInput, { PortalInputRef } from './PortaledInput';
 
 interface Props {
@@ -21,7 +21,7 @@ export default ({
   onSubmit = () => undefined,
 }: Props) => {
   const { t } = useTranslation();
-  const { addPlaylist } = usePlaylistAA();
+  const { addPlaylist } = usePlaylistBrowseTree();
   const inputRef = useRef<PortalInputRef>();
 
   const handleClose = () => {

@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { useNoxSetting } from '@stores/useApp';
 import usePlaylistCRUD from '@hooks/usePlaylistCRUD';
 import useAlert from '@components/dialogs/useAlert';
-import usePlaylistAA from '@hooks/usePlaylistAA';
+import usePlaylistBrowseTree from '@hooks/usePlaylistBrowseTree';
 import useSnack from '@stores/useSnack';
 
 interface Props {
@@ -14,7 +14,7 @@ export default ({ callback = () => {} }: Props) => {
   const setSnack = useSnack(state => state.setSnack);
   const currentPlaylist = useNoxSetting(state => state.currentPlaylist);
   const playlistCRUD = usePlaylistCRUD();
-  const { removePlaylist } = usePlaylistAA();
+  const { removePlaylist } = usePlaylistBrowseTree();
   const { OneWayAlert, TwoWayAlert } = useAlert();
 
   const playlistSync2Bilibili = (playlist = currentPlaylist) =>

@@ -8,12 +8,13 @@
 
 /* Begin PBXBuildFile section */
 		00E356F31AD99517003FC87E /* exampleTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* exampleTests.m */; };
-		13B07FBC1A68108700A75B9A /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.mm */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
-		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		1DC9992F80AADAB3B7E446F2 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = D052852ACECAF1F25AC8717E /* PrivacyInfo.xcprivacy */; };
+		364DDFCA2C1346D80074A504 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 364DDFC92C1346D80074A504 /* AppDelegate.swift */; };
+		364DDFCC2C1347090074A504 /* CarSceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 364DDFCB2C1347090074A504 /* CarSceneDelegate.swift */; };
+		364DDFCE2C1347200074A504 /* PhoneSceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 364DDFCD2C1347200074A504 /* PhoneSceneDelegate.swift */; };
+		364DDFD12C13515C0074A504 /* Entitlements.plist in Resources */ = {isa = PBXBuildFile; fileRef = 364DDFD02C13515B0074A504 /* Entitlements.plist */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
-		9B521D0C26610C0700EF0C3A /* dummy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B521D0B26610C0700EF0C3A /* dummy.swift */; };
 		A7ED8C5E3242B7A11910AC34 /* libPods-azusa-player-mobile.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 13EEFF6BBEF989EDAD5FC4B7 /* libPods-azusa-player-mobile.a */; };
 		AA9F058A2AB48946005FA2C6 /* libavfilter.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA9F05892AB48946005FA2C6 /* libavfilter.xcframework */; };
 		AA9F058E2AB489B1005FA2C6 /* libavutil.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA9F058D2AB489B1005FA2C6 /* libavutil.xcframework */; };
@@ -37,15 +38,17 @@
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00E356F21AD99517003FC87E /* exampleTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = exampleTests.m; sourceTree = "<group>"; };
 		13B07F961A680F5B00A75B9A /* AzusaPlayer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AzusaPlayer.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = example/AppDelegate.h; sourceTree = "<group>"; };
-		13B07FB01A68108700A75B9A /* AppDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = AppDelegate.mm; path = example/AppDelegate.mm; sourceTree = "<group>"; };
 		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = example/Images.xcassets; sourceTree = "<group>"; };
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = example/Info.plist; sourceTree = "<group>"; };
-		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = example/main.m; sourceTree = "<group>"; };
 		13EEFF6BBEF989EDAD5FC4B7 /* libPods-azusa-player-mobile.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-azusa-player-mobile.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1BED8643AF15A76097355103 /* ExpoModulesProvider.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ExpoModulesProvider.swift; path = "Pods/Target Support Files/Pods-azusa-player-mobile-APMTests/ExpoModulesProvider.swift"; sourceTree = "<group>"; };
 		269A6C2B650C46BC21877CBC /* Pods-azusa-player-mobile-APMTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-azusa-player-mobile-APMTests.debug.xcconfig"; path = "Target Support Files/Pods-azusa-player-mobile-APMTests/Pods-azusa-player-mobile-APMTests.debug.xcconfig"; sourceTree = "<group>"; };
 		2C2F9802D9A70707E1CB329F /* Pods-example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-example.release.xcconfig"; path = "Target Support Files/Pods-example/Pods-example.release.xcconfig"; sourceTree = "<group>"; };
+		364DDFC92C1346D80074A504 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		364DDFCB2C1347090074A504 /* CarSceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarSceneDelegate.swift; sourceTree = "<group>"; };
+		364DDFCD2C1347200074A504 /* PhoneSceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneSceneDelegate.swift; sourceTree = "<group>"; };
+		364DDFCF2C1351230074A504 /* azusa-player-mobile.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "azusa-player-mobile.entitlements"; sourceTree = "<group>"; };
+		364DDFD02C13515B0074A504 /* Entitlements.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Entitlements.plist; sourceTree = "<group>"; };
 		3E446D4365C1A108616D8ADA /* Pods-azusa-player-mobile.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-azusa-player-mobile.release.xcconfig"; path = "Target Support Files/Pods-azusa-player-mobile/Pods-azusa-player-mobile.release.xcconfig"; sourceTree = "<group>"; };
 		629CB7CB958060A0F3604281 /* ExpoModulesProvider.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ExpoModulesProvider.swift; path = "Pods/Target Support Files/Pods-azusa-player-mobile/ExpoModulesProvider.swift"; sourceTree = "<group>"; };
 		7CA01EA30DD1126F19B1D56B /* Pods-azusa-player-mobile-exampleTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-azusa-player-mobile-exampleTests.debug.xcconfig"; path = "Target Support Files/Pods-azusa-player-mobile-exampleTests/Pods-azusa-player-mobile-exampleTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -55,12 +58,11 @@
 		9ACBB5246153355184C73F02 /* Pods-azusa-player-mobile-APMTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-azusa-player-mobile-APMTests.release.xcconfig"; path = "Target Support Files/Pods-azusa-player-mobile-APMTests/Pods-azusa-player-mobile-APMTests.release.xcconfig"; sourceTree = "<group>"; };
 		9B521D0626604D3800EF0C3A /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		9B521D0A26610C0600EF0C3A /* example-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "example-Bridging-Header.h"; sourceTree = "<group>"; };
-		9B521D0B26610C0700EF0C3A /* dummy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dummy.swift; sourceTree = "<group>"; };
 		9E1BC3386E26E34AEF891FF5 /* Pods-azusa-player-mobile.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-azusa-player-mobile.debug.xcconfig"; path = "Target Support Files/Pods-azusa-player-mobile/Pods-azusa-player-mobile.debug.xcconfig"; sourceTree = "<group>"; };
 		AA9F05892AB48946005FA2C6 /* libavfilter.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = libavfilter.xcframework; path = "Pods/ffmpeg-kit-ios-audio/libavfilter.xcframework"; sourceTree = "<group>"; };
 		AA9F058D2AB489B1005FA2C6 /* libavutil.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = libavutil.xcframework; path = "Pods/ffmpeg-kit-ios-audio/libavutil.xcframework"; sourceTree = "<group>"; };
 		C6A6377EE893F59DCD177B16 /* Pods-example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-example.debug.xcconfig"; path = "Target Support Files/Pods-example/Pods-example.debug.xcconfig"; sourceTree = "<group>"; };
-		D052852ACECAF1F25AC8717E /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; includeInIndex = 1; name = PrivacyInfo.xcprivacy; path = example/PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
+		D052852ACECAF1F25AC8717E /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xml; name = PrivacyInfo.xcprivacy; path = example/PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		DDFCE76F143B5D90F2157D05 /* Pods-example-exampleTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-example-exampleTests.release.xcconfig"; path = "Target Support Files/Pods-example-exampleTests/Pods-example-exampleTests.release.xcconfig"; sourceTree = "<group>"; };
 		E050A9D69F20B323551604B0 /* Pods-example-exampleTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-example-exampleTests.debug.xcconfig"; path = "Target Support Files/Pods-example-exampleTests/Pods-example-exampleTests.debug.xcconfig"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
@@ -108,14 +110,13 @@
 		13B07FAE1A68108700A75B9A /* APM */ = {
 			isa = PBXGroup;
 			children = (
-				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
-				13B07FB01A68108700A75B9A /* AppDelegate.mm */,
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
 				13B07FB61A68108700A75B9A /* Info.plist */,
 				81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */,
-				13B07FB71A68108700A75B9A /* main.m */,
-				9B521D0B26610C0700EF0C3A /* dummy.swift */,
 				9B521D0A26610C0600EF0C3A /* example-Bridging-Header.h */,
+				364DDFC92C1346D80074A504 /* AppDelegate.swift */,
+				364DDFCB2C1347090074A504 /* CarSceneDelegate.swift */,
+				364DDFCD2C1347200074A504 /* PhoneSceneDelegate.swift */,
 			);
 			name = APM;
 			sourceTree = "<group>";
@@ -168,6 +169,8 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				364DDFD02C13515B0074A504 /* Entitlements.plist */,
+				364DDFCF2C1351230074A504 /* azusa-player-mobile.entitlements */,
 				13B07FAE1A68108700A75B9A /* APM */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				00E356EF1AD99517003FC87E /* exampleTests */,
@@ -306,6 +309,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				364DDFD12C13515C0074A504 /* Entitlements.plist in Resources */,
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				1DC9992F80AADAB3B7E446F2 /* PrivacyInfo.xcprivacy in Resources */,
@@ -530,9 +534,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				13B07FBC1A68108700A75B9A /* AppDelegate.mm in Sources */,
-				9B521D0C26610C0700EF0C3A /* dummy.swift in Sources */,
-				13B07FC11A68108700A75B9A /* main.m in Sources */,
+				364DDFCE2C1347200074A504 /* PhoneSceneDelegate.swift in Sources */,
+				364DDFCC2C1347090074A504 /* CarSceneDelegate.swift in Sources */,
+				364DDFCA2C1346D80074A504 /* AppDelegate.swift in Sources */,
 				BDB3121DF2250E03AB81F873 /* ExpoModulesProvider.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -612,6 +616,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = "azusa-player-mobile.entitlements";
 				CURRENT_PROJECT_VERSION = 220;
 				DEVELOPMENT_TEAM = 7U2TUNKNQX;
 				ENABLE_BITCODE = NO;
@@ -645,6 +650,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = "azusa-player-mobile.entitlements";
 				CURRENT_PROJECT_VERSION = 220;
 				DEVELOPMENT_TEAM = 7U2TUNKNQX;
 				INFOPLIST_FILE = example/Info.plist;
@@ -737,11 +743,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_CFLAGS = "$(inherited)";
 				OTHER_CPLUSPLUSFLAGS = "$(inherited)";
-				OTHER_LDFLAGS = (
-					"$(inherited)",
-					"-Wl",
-					"-ld_classic",
-				);
+				OTHER_LDFLAGS = "$(inherited)";
 				REACT_NATIVE_PATH = "${PODS_ROOT}/../../node_modules/react-native";
 				SDKROOT = iphoneos;
 				SWIFT_VERSION = 4.0;
@@ -812,11 +814,7 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				OTHER_CFLAGS = "$(inherited)";
 				OTHER_CPLUSPLUSFLAGS = "$(inherited)";
-				OTHER_LDFLAGS = (
-					"$(inherited)",
-					"-Wl",
-					"-ld_classic",
-				);
+				OTHER_LDFLAGS = "$(inherited)";
 				REACT_NATIVE_PATH = "${PODS_ROOT}/../../node_modules/react-native";
 				SDKROOT = iphoneos;
 				SWIFT_VERSION = 4.0;
