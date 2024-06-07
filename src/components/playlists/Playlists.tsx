@@ -141,7 +141,7 @@ export default () => {
           {
             backgroundColor:
               currentPlaylist.id ===
-                playlists[StorageKeys.SEARCH_PLAYLIST_KEY]?.id
+              playlists[StorageKeys.SEARCH_PLAYLIST_KEY]?.id
                 ? playerStyle.customColors.playlistDrawerBackgroundColor
                 : undefined,
           },
@@ -152,7 +152,7 @@ export default () => {
           icon={SearchPlaylistAsNewButton()}
           leadColor={
             currentPlayingList.id ===
-              playlists[StorageKeys.SEARCH_PLAYLIST_KEY].id
+            playlists[StorageKeys.SEARCH_PLAYLIST_KEY].id
               ? playerStyle.colors.primary //customColors.playlistDrawerBackgroundColor
               : undefined
           }

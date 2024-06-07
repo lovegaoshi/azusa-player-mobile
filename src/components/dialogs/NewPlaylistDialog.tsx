@@ -34,11 +34,11 @@ export default ({
     const dummyList = dummyPlaylist();
     const newList = fromList
       ? {
-        ...fromList,
-        id: dummyList.id,
-        title: inputRef.current?.name ?? '',
-        type: dummyList.type,
-      }
+          ...fromList,
+          id: dummyList.id,
+          title: inputRef.current?.name ?? '',
+          type: dummyList.type,
+        }
       : { ...dummyList, title: inputRef.current?.name ?? '' };
     addPlaylist(newList);
     onSubmit();

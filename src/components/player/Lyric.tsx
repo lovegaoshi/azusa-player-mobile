@@ -285,7 +285,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'flex-end',
     backgroundColor: 'rgba(0, 0, 0, 0.1)',
-    paddingBottom: Platform.OS === 'ios' ? 20 : 0
+    paddingBottom: Platform.OS === 'ios' ? 20 : 0,
   },
 
   modalView: {
