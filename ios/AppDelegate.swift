@@ -14,20 +14,20 @@ class AppDelegate: EXAppDelegateWrapper, RNAppAuthAuthorizationFlowManager {
         return authorizationFlowManagerDelegate?.resumeExternalUserAgentFlow(with: url) ?? false
     }
 
-  var rootView: UIView?;
-  var concurrentRootEnabled = true;
+  var rootView: UIView?
+  var concurrentRootEnabled = true
 
   static var shared: AppDelegate { return UIApplication.shared.delegate as! AppDelegate }
 
   override func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
     self.moduleName = "azusa-player-mobile"
-    let app = super.application(application, didFinishLaunchingWithOptions: launchOptions);
+    let app = super.application(application, didFinishLaunchingWithOptions: launchOptions)
     self.rootView = self.createRootView(
       with: self.bridge!,
       moduleName: self.moduleName!,
       initProps: self.prepareInitialProps()
-    );
-    return app;
+    )
+    return app
   }
 
   override func application(_ application: UIApplication, configurationForConnecting connectingSceneSession: UISceneSession, options: UIScene.ConnectionOptions) -> UISceneConfiguration {
@@ -48,7 +48,7 @@ class AppDelegate: EXAppDelegateWrapper, RNAppAuthAuthorizationFlowManager {
   
   override func bundleURL() -> URL? {
   #if true // DEBUG <--- problem?
-    return RCTBundleURLProvider.sharedSettings().jsBundleURL(forBundleRoot: "index");
+    return RCTBundleURLProvider.sharedSettings().jsBundleURL(forBundleRoot: "index")
   #else
     return Bundle.main.url(forResource:"main", withExtension:"jsbundle")
   #endif
