@@ -37,6 +37,11 @@
                BlueprintName = "APMTests"
                ReferencedContainer = "container:APM.xcodeproj">
             </BuildableReference>
+            <SkippedTests>
+               <Test
+                  Identifier = "exampleTests">
+               </Test>
+            </SkippedTests>
          </TestableReference>
       </Testables>
    </TestAction>
