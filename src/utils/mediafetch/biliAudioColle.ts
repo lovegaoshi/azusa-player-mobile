@@ -68,7 +68,7 @@ const fetchBiliAudioColleList = async (
 ) => {
   logger.info('calling fetchBiliAudioColleList');
 
-  return await fetchBiliPaginatedAPI({
+  return fetchBiliPaginatedAPI({
     url: API.replace('{sid}', sid),
     getMediaCount: (data: any) => data.totalSize,
     getPageSize: (data: any) => data.pageSize,

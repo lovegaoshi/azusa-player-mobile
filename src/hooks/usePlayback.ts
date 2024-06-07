@@ -56,8 +56,7 @@ const usePlayback = () => {
       if (playlist.songList.length === 0) {
         // no song exists.
         logger.warn(`[Playback] ${playlist.id} is empty.`);
-        await TrackPlayer.reset();
-        return;
+        return TrackPlayer.reset();
       } else {
         song = randomChoice(playlist.songList);
       }
@@ -67,13 +66,13 @@ const usePlayback = () => {
     // TODO: fix this
     setCurrentPlayingId(song.id);
     if (interruption) {
-      return await playSongInterrupted(song);
+      return playSongInterrupted(song);
     }
     if (currentPlayingId !== song.id) {
       await playSongUninterrupted(song);
     }
     // HACK: WHY?
-    clearPlaylistUninterrupted().then(TrackPlayer.play);
+    return clearPlaylistUninterrupted().then(TrackPlayer.play);
   };
 
   const playAsSearchList = async ({
@@ -122,7 +121,7 @@ const usePlayback = () => {
         logger.warn(`[Playback] ${mediaId} doesnt exist.`);
         return;
       }
-      playFromPlaylist({
+      return playFromPlaylist({
         playlist: await getPlaylist(mediaId),
         playlistParser: dataSaverPlaylistWrapper(isDataSaving),
       });
@@ -136,24 +135,22 @@ const usePlayback = () => {
       const [, songBVID, songCID] = regexMatch;
       for (const song of currentPlayingList.songList) {
         if (song.bvid === songBVID && song.id === songCID) {
-          playFromPlaylist({
+          return playFromPlaylist({
             playlist: currentPlayingList,
             song,
             playlistParser: dataSaverPlaylistWrapper(isDataSaving),
           });
-          return;
         }
       }
       for (const playlistId of playlistIds) {
         const playlist = await getPlaylist(playlistId);
         for (const song of playlist.songList) {
           if (song.bvid === songBVID && song.id === songCID) {
-            playFromPlaylist({
+            return playFromPlaylist({
               playlist,
               song,
               playlistParser: dataSaverPlaylistWrapper(isDataSaving),
             });
-            return;
           }
         }
       }
