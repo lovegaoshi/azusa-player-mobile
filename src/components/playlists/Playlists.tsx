@@ -18,7 +18,7 @@ import useAlert from '../dialogs/useAlert';
 import ShuffleAllButton from '@components/playlists/ShuffleAllButton';
 import TimerButton from '@components/playlists/TimerButton';
 import PlaylistItem from '@components/playlists/PlaylistItem';
-import usePlaylistBrowseTree from '@/hooks/usePlaylistBrowseTree';
+import usePlaylistBrowseTree from '@hooks/usePlaylistBrowseTree';
 import { BottomTabRouteIcons as RouteIcons } from '@enums/BottomTab';
 
 export default () => {
@@ -141,7 +141,7 @@ export default () => {
           {
             backgroundColor:
               currentPlaylist.id ===
-              playlists[StorageKeys.SEARCH_PLAYLIST_KEY]?.id
+                playlists[StorageKeys.SEARCH_PLAYLIST_KEY]?.id
                 ? playerStyle.customColors.playlistDrawerBackgroundColor
                 : undefined,
           },
@@ -152,7 +152,7 @@ export default () => {
           icon={SearchPlaylistAsNewButton()}
           leadColor={
             currentPlayingList.id ===
-            playlists[StorageKeys.SEARCH_PLAYLIST_KEY].id
+              playlists[StorageKeys.SEARCH_PLAYLIST_KEY].id
               ? playerStyle.colors.primary //customColors.playlistDrawerBackgroundColor
               : undefined
           }

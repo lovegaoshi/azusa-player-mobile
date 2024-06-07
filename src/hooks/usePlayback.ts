@@ -209,6 +209,8 @@ const usePlayback = () => {
     playFromPlaylist,
     shuffleAll,
     playAsSearchList,
+    playlists,
+    playlistIds,
   };
 };
 export default usePlayback;

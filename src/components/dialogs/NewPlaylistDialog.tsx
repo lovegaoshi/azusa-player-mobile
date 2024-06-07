@@ -4,7 +4,7 @@ import { StyleSheet } from 'react-native';
 import { useTranslation } from 'react-i18next';
 
 import { dummyPlaylist } from '@objects/Playlist';
-import usePlaylistBrowseTree from '@/hooks/usePlaylistBrowseTree';
+import usePlaylistBrowseTree from '@hooks/usePlaylistBrowseTree';
 import PortaledInput, { PortalInputRef } from './PortaledInput';
 
 interface Props {
@@ -34,11 +34,11 @@ export default ({
     const dummyList = dummyPlaylist();
     const newList = fromList
       ? {
-          ...fromList,
-          id: dummyList.id,
-          title: inputRef.current?.name ?? '',
-          type: dummyList.type,
-        }
+        ...fromList,
+        id: dummyList.id,
+        title: inputRef.current?.name ?? '',
+        type: dummyList.type,
+      }
       : { ...dummyList, title: inputRef.current?.name ?? '' };
     addPlaylist(newList);
     onSubmit();

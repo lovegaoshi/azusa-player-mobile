@@ -6,7 +6,7 @@ import { getBiliFavlist, GETFAVLIST_RES } from '@utils/Bilibili/bilifavOperate';
 import GenericCheckDialog from '../dialogs/GenericCheckDialog';
 import bilifavlistFetch from '@utils/mediafetch/bilifavlist';
 import { dummyPlaylist } from '@objects/Playlist';
-import usePlaylistBrowseTree from '@/hooks/usePlaylistBrowseTree';
+import usePlaylistBrowseTree from '@hooks/usePlaylistBrowseTree';
 
 export default () => {
   const { t } = useTranslation();

@@ -15,7 +15,6 @@
 		364DDFCE2C1347200074A504 /* PhoneSceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 364DDFCD2C1347200074A504 /* PhoneSceneDelegate.swift */; };
 		364DDFD12C13515C0074A504 /* Entitlements.plist in Resources */ = {isa = PBXBuildFile; fileRef = 364DDFD02C13515B0074A504 /* Entitlements.plist */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
-		9B521D0C26610C0700EF0C3A /* dummy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B521D0B26610C0700EF0C3A /* dummy.swift */; };
 		A7ED8C5E3242B7A11910AC34 /* libPods-azusa-player-mobile.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 13EEFF6BBEF989EDAD5FC4B7 /* libPods-azusa-player-mobile.a */; };
 		AA9F058A2AB48946005FA2C6 /* libavfilter.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA9F05892AB48946005FA2C6 /* libavfilter.xcframework */; };
 		AA9F058E2AB489B1005FA2C6 /* libavutil.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA9F058D2AB489B1005FA2C6 /* libavutil.xcframework */; };
@@ -59,7 +58,6 @@
 		9ACBB5246153355184C73F02 /* Pods-azusa-player-mobile-APMTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-azusa-player-mobile-APMTests.release.xcconfig"; path = "Target Support Files/Pods-azusa-player-mobile-APMTests/Pods-azusa-player-mobile-APMTests.release.xcconfig"; sourceTree = "<group>"; };
 		9B521D0626604D3800EF0C3A /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		9B521D0A26610C0600EF0C3A /* example-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "example-Bridging-Header.h"; sourceTree = "<group>"; };
-		9B521D0B26610C0700EF0C3A /* dummy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dummy.swift; sourceTree = "<group>"; };
 		9E1BC3386E26E34AEF891FF5 /* Pods-azusa-player-mobile.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-azusa-player-mobile.debug.xcconfig"; path = "Target Support Files/Pods-azusa-player-mobile/Pods-azusa-player-mobile.debug.xcconfig"; sourceTree = "<group>"; };
 		AA9F05892AB48946005FA2C6 /* libavfilter.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = libavfilter.xcframework; path = "Pods/ffmpeg-kit-ios-audio/libavfilter.xcframework"; sourceTree = "<group>"; };
 		AA9F058D2AB489B1005FA2C6 /* libavutil.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = libavutil.xcframework; path = "Pods/ffmpeg-kit-ios-audio/libavutil.xcframework"; sourceTree = "<group>"; };
@@ -115,7 +113,6 @@
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
 				13B07FB61A68108700A75B9A /* Info.plist */,
 				81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */,
-				9B521D0B26610C0700EF0C3A /* dummy.swift */,
 				9B521D0A26610C0600EF0C3A /* example-Bridging-Header.h */,
 				364DDFC92C1346D80074A504 /* AppDelegate.swift */,
 				364DDFCB2C1347090074A504 /* CarSceneDelegate.swift */,
@@ -539,7 +536,6 @@
 			files = (
 				364DDFCE2C1347200074A504 /* PhoneSceneDelegate.swift in Sources */,
 				364DDFCC2C1347090074A504 /* CarSceneDelegate.swift in Sources */,
-				9B521D0C26610C0700EF0C3A /* dummy.swift in Sources */,
 				364DDFCA2C1346D80074A504 /* AppDelegate.swift in Sources */,
 				BDB3121DF2250E03AB81F873 /* ExpoModulesProvider.swift in Sources */,
 			);

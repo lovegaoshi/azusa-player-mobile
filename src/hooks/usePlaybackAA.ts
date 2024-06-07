@@ -7,6 +7,7 @@ import { PLAYLIST_MEDIAID } from '@enums/Playlist';
 import usePlayback from './usePlayback';
 import { useNoxSetting } from '@stores/useApp';
 import { IntentData } from '@enums/Intent';
+import usePlaybackCarplay from './usePlaybackCarplay';
 
 export const useAndroidAuto = () => {
   const { t } = useTranslation();
@@ -34,7 +35,7 @@ export const useAndroidAuto = () => {
   return { buildBrowseTree };
 };
 
-export default () => {
+const useAndroidAutoListener = () => {
   const { playFromMediaId, playFromSearch, shuffleAll } = usePlayback();
   const { buildBrowseTree } = useAndroidAuto();
   const intentData = useNoxSetting(state => state.intentData);
@@ -72,4 +73,15 @@ export default () => {
   // so might as well pass this off from AAPlaybackListener to register the listeners and use buildBrowseTree
   // two birds in one stone.
   return { buildBrowseTree };
+};
+
+export default () => {
+  switch (Platform.OS) {
+    case 'android':
+      return useAndroidAutoListener();
+    case 'ios':
+      return usePlaybackCarplay();
+    default:
+      throw new Error('unsupported platform');
+  }
 };

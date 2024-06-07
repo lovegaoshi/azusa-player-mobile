@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { useNoxSetting } from '@stores/useApp';
 import usePlaylistCRUD from '@hooks/usePlaylistCRUD';
 import useAlert from '@components/dialogs/useAlert';
-import usePlaylistBrowseTree from '@/hooks/usePlaylistBrowseTree';
+import usePlaylistBrowseTree from '@hooks/usePlaylistBrowseTree';
 import useSnack from '@stores/useSnack';
 
 interface Props {

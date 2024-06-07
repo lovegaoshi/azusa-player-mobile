@@ -1046,7 +1046,7 @@ PODS:
     - React-Core
   - react-native-blob-util (0.19.9):
     - React-Core
-  - react-native-carplay (2.4.0-beta.2):
+  - react-native-carplay (2.3.0):
     - React
   - react-native-cookies (6.2.1):
     - React-Core
@@ -1891,7 +1891,7 @@ SPEC CHECKSUMS:
   react-native-background-timer: 17ea5e06803401a379ebf1f20505b793ac44d0fe
   react-native-blob-jsi-helper: 13c10135af4614dbc0712afba5960784cd44f043
   react-native-blob-util: 18b510205c080a453574a7d2344d64673d0ad9af
-  react-native-carplay: 6ea89d662dad1fcc0a29302c5a37868acb6a7dad
+  react-native-carplay: c0327ae947e4a12c7d66315d54254fdf87a982ec
   react-native-cookies: f54fcded06bb0cda05c11d86788020b43528a26c
   react-native-get-random-values: 21325b2244dfa6b58878f51f9aa42821e7ba3d06
   react-native-netinfo: 076df4f9b07f6670acf4ce9a75aac8d34c2e2ccc

@@ -6,7 +6,7 @@ import { View, ImageBackground, StyleSheet, Linking } from 'react-native';
 import { useTranslation } from 'react-i18next';
 
 import { useNoxSetting } from '@stores/useApp';
-import usePlaybackAA from '@/hooks/usePlaybackAA';
+import usePlaybackAA from '@hooks/usePlaybackAA';
 import { NoxRoutes } from '@enums/Routes';
 import { logger } from '@utils/Logger';
 import Playlists from './Playlists';
