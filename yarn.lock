@@ -5726,6 +5726,7 @@ __metadata:
     react-native-background-timer: "git+https://github.com/lovegaoshi/react-native-background-timer.git"
     react-native-blob-jsi-helper: "npm:^0.3.1"
     react-native-blob-util: "npm:^0.19.9"
+    react-native-carplay: "npm:2.3.0"
     react-native-clean-project: "npm:^4.0.3"
     react-native-device-info: "npm:^11.1.0"
     react-native-dotenv: "npm:^3.4.11"
@@ -14220,6 +14221,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"react-native-carplay@npm:2.3.0":
+  version: 2.3.0
+  resolution: "react-native-carplay@npm:2.3.0"
+  dependencies:
+    traverse: "npm:^0.6.6"
+  checksum: 10c0/c62143e2fd1700f7e502062e0138d1bcf8da756fe1879c62cc271835c00fad6340e1709705c82425b015afcf0a9ccf4cf8098f82f103a0c4e396204dc7893e6b
+  languageName: node
+  linkType: hard
+
 "react-native-clean-project@npm:^4.0.3":
   version: 4.0.3
   resolution: "react-native-clean-project@npm:4.0.3"
@@ -16563,7 +16573,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"traverse@npm:~0.6.6":
+"traverse@npm:^0.6.6, traverse@npm:~0.6.6":
   version: 0.6.9
   resolution: "traverse@npm:0.6.9"
   dependencies:

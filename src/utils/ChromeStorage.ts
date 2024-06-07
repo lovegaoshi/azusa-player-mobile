@@ -422,6 +422,6 @@ export const importPlayerContentRaw = async (parsedContent: any) => {
     await clearStorage();
     await AsyncStorage.multiSet(parsedContent);
     await saveCachedMediaMapping(oldCache);
-    return await initPlayerObject();
+    return initPlayerObject();
   }
 };

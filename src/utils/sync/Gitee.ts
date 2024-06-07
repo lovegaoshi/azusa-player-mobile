@@ -14,8 +14,8 @@ const getUserName = async (token: string) => {
   return data.name;
 };
 
-const createAPMRepo = async (token: string) => {
-  return await bfetch('https://gitee.com/api/v5/user/repos', {
+const createAPMRepo = (token: string) =>
+  bfetch('https://gitee.com/api/v5/user/repos', {
     method: 'POST',
     body: {
       // @ts-ignore HACK: for noxplayer's compatibility
@@ -27,7 +27,6 @@ const createAPMRepo = async (token: string) => {
       'Content-Type': 'application/x-www-form-urlencoded',
     },
   });
-};
 
 const syncToGitee = async ({
   token,
@@ -52,7 +51,7 @@ const syncToGitee = async ({
     for (const repofile of data) {
       if (repofile.name === APM_FILE_NAME) {
         // do something
-        return await bfetch(
+        return bfetch(
           `https://gitee.com/api/v5/repos/${username}/${APM_REPO_NAME}/contents/${APM_FILE_NAME}`,
           {
             method: 'PUT',
@@ -73,7 +72,7 @@ const syncToGitee = async ({
   }
   logger.debug('[gitee] creating backup file');
   // file doesnt exist. create instaed.
-  return await bfetch(
+  return bfetch(
     `https://gitee.com/api/v5/repos/${username}/${APM_REPO_NAME}/contents/${APM_FILE_NAME}`,
     {
       method: 'POST',

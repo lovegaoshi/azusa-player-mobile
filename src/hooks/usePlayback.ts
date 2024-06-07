@@ -1,4 +1,3 @@
-import { Platform } from 'react-native';
 import TrackPlayer, { RepeatMode } from 'react-native-track-player';
 import { useTranslation } from 'react-i18next';
 
@@ -15,9 +14,7 @@ import noxPlayingList, { setPlayingIndex } from '@stores/playingList';
 import { dataSaverPlaylist, dataSaverSongs } from '@utils/Cache';
 import useDataSaver from './useDataSaver';
 import useSnack from '@stores/useSnack';
-import { PlaylistTypes } from '@enums/Playlist';
-
-const PLAYLIST_MEDIAID = 'playlist-';
+import { PLAYLIST_MEDIAID, PlaylistTypes } from '@enums/Playlist';
 
 const { getState } = noxPlayingList;
 
@@ -59,8 +56,7 @@ const usePlayback = () => {
       if (playlist.songList.length === 0) {
         // no song exists.
         logger.warn(`[Playback] ${playlist.id} is empty.`);
-        await TrackPlayer.reset();
-        return;
+        return TrackPlayer.reset();
       } else {
         song = randomChoice(playlist.songList);
       }
@@ -70,13 +66,13 @@ const usePlayback = () => {
     // TODO: fix this
     setCurrentPlayingId(song.id);
     if (interruption) {
-      return await playSongInterrupted(song);
+      return playSongInterrupted(song);
     }
     if (currentPlayingId !== song.id) {
       await playSongUninterrupted(song);
     }
     // HACK: WHY?
-    clearPlaylistUninterrupted().then(TrackPlayer.play);
+    return clearPlaylistUninterrupted().then(TrackPlayer.play);
   };
 
   const playAsSearchList = async ({
@@ -125,7 +121,7 @@ const usePlayback = () => {
         logger.warn(`[Playback] ${mediaId} doesnt exist.`);
         return;
       }
-      playFromPlaylist({
+      return playFromPlaylist({
         playlist: await getPlaylist(mediaId),
         playlistParser: dataSaverPlaylistWrapper(isDataSaving),
       });
@@ -139,24 +135,22 @@ const usePlayback = () => {
       const [, songBVID, songCID] = regexMatch;
       for (const song of currentPlayingList.songList) {
         if (song.bvid === songBVID && song.id === songCID) {
-          playFromPlaylist({
+          return playFromPlaylist({
             playlist: currentPlayingList,
             song,
             playlistParser: dataSaverPlaylistWrapper(isDataSaving),
           });
-          return;
         }
       }
       for (const playlistId of playlistIds) {
         const playlist = await getPlaylist(playlistId);
         for (const song of playlist.songList) {
           if (song.bvid === songBVID && song.id === songCID) {
-            playFromPlaylist({
+            return playFromPlaylist({
               playlist,
               song,
               playlistParser: dataSaverPlaylistWrapper(isDataSaving),
             });
-            return;
           }
         }
       }
@@ -206,33 +200,14 @@ const usePlayback = () => {
     shuffleAll();
   };
 
-  const buildBrowseTree = () => {
-    if (Platform.OS !== 'android') return;
-    TrackPlayer.setBrowseTree({
-      '/': [
-        {
-          mediaId: 'PlaylistTab',
-          title: t('AndroidAuto.PlaylistTab'),
-          playable: '1',
-        },
-      ],
-      PlaylistTab: Object.keys(playlists).map(key => {
-        return {
-          mediaId: `${PLAYLIST_MEDIAID}${key}`,
-          title: playlists[key].title,
-          playable: '0',
-        };
-      }),
-    });
-  };
-
   return {
-    buildBrowseTree,
     playFromMediaId,
     playFromSearch,
     playFromPlaylist,
     shuffleAll,
     playAsSearchList,
+    playlists,
+    playlistIds,
   };
 };
 export default usePlayback;

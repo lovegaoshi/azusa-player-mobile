@@ -6,7 +6,7 @@ import { View, ImageBackground, StyleSheet, Linking } from 'react-native';
 import { useTranslation } from 'react-i18next';
 
 import { useNoxSetting } from '@stores/useApp';
-import useAAPlayback from '@hooks/useAAPlayback';
+import usePlaybackAA from '@hooks/usePlaybackAA';
 import { NoxRoutes } from '@enums/Routes';
 import { logger } from '@utils/Logger';
 import Playlists from './Playlists';
@@ -59,7 +59,7 @@ export default (props: any) => {
   const playerStyle = useNoxSetting(state => state.playerStyle);
   // HACK: I know its bad! But somehow this hook isnt updating in its own
   // useEffects...
-  const { buildBrowseTree } = useAAPlayback();
+  const { buildBrowseTree } = usePlaybackAA();
 
   useEffect(() => {
     buildBrowseTree();

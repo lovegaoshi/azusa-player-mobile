@@ -22,17 +22,16 @@ const find = async (dbx: _Dropbox, query = DEFAULT_FILE_NAME) => {
   }
 };
 
-export const noxBackup = async (
+export const noxBackup = (
   dbx: _Dropbox,
   content: Uint8Array,
   fpath = DEFAULT_FILE_PATH
-) => {
-  return await dbx.filesUpload({
+) =>
+  dbx.filesUpload({
     path: fpath,
     mode: { '.tag': 'overwrite' },
     contents: content,
   });
-};
 
 const download = async (
   dbx: _Dropbox,
@@ -62,7 +61,7 @@ export const noxRestore = async (
   if (!noxFile) {
     throw new Error('noxfile is not found on dropbox.');
   }
-  return await download(dbx, contentParse, noxFile);
+  return download(dbx, contentParse, noxFile);
 };
 
 export const checkAuthentication = async (dbx: _Dropbox) => {

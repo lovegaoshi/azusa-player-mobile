@@ -164,4 +164,19 @@ export const cycleThroughPlaymode = () => {
   }
 };
 
+/**
+ * determines the next playback mode and cycle to the next mode.
+ * iOS carplay only has 'shuffle' | 'add-to-library' | 'more' | 'playback' | 'repeat';
+ */
+export const cycleThroughPlaymodeIOS = () => {
+  switch (playlistStore.getState().playmode) {
+    case NoxRepeatMode.Shuffle:
+      initializePlaybackMode(NoxRepeatMode.Repeat);
+      return 'repeat';
+    default:
+      initializePlaybackMode(NoxRepeatMode.Shuffle);
+      return 'shuffle';
+  }
+};
+
 export default playlistStore;
