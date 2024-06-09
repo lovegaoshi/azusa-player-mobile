@@ -7,6 +7,7 @@ import { getDrawerStatusFromState } from '@react-navigation/drawer';
 import { NoxRoutes } from '@enums/Routes';
 import { useNoxSetting } from '@stores/useApp';
 import { BottomTabRouteIcons as RouteIcons } from '@enums/BottomTab';
+import { useIsLandscape } from '@hooks/useOrientation';
 
 interface IconProps {
   icon: string;
@@ -29,6 +30,7 @@ const NoxAndroidBottomTab = ({ navigation }: NoxComponent.NavigationProps2) => {
   const gestureMode = useNoxSetting(state => state.gestureMode);
   const route = useNoxSetting(state => state.bottomTabRoute);
   const setRoute = useNoxSetting(state => state.setBottomTabRoute);
+  const isLandscape = useIsLandscape();
 
   const isDrawerOpen = () =>
     navigation === undefined
@@ -55,6 +57,7 @@ const NoxAndroidBottomTab = ({ navigation }: NoxComponent.NavigationProps2) => {
           style={[
             styles.panel,
             { backgroundColor: playerStyle.colors.background },
+            isLandscape ? { paddingBottom: 0 } : {},
           ]}
         >
           <BottomIconButton

@@ -107,10 +107,9 @@ const AlbumArt: React.FC<Props> = ({
               playerSetting.hideCoverInMobile
                 ? 0
                 : {
-                    uri: `${overwriteAlbumArt ?? track?.artwork}`,
-                  }
+                  uri: `${overwriteAlbumArt ?? track?.artwork}`,
+                }
             }
-            transition={{ effect: 'flip-from-top' }}
           />
         </Animated.View>
       </TouchableWithoutFeedback>
