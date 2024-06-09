@@ -73,16 +73,19 @@ const regexFetch = async ({
   songList: [await fetchVideoInfo(reExtracted[1]!)],
 });
 
-const resolveURL = async (
-  song: NoxMedia.Song
+export const _resolveURL = async (
+  song: NoxMedia.Song,
+  platform: 'h5' | 'web' = 'web'
 ): Promise<NoxNetwork.ParsedNoxMediaURL> => {
   const req = await bfetch(
-    `https://api.live.bilibili.com/room/v1/Room/playUrl?cid=${song.bvid}&platform=h5&quality=2`
+    `https://api.live.bilibili.com/room/v1/Room/playUrl?cid=${song.bvid}&platform=${platform}&quality=2`
   );
   const json = await req.json();
   const durl = json.data.durl;
   return { url: durl[durl.length - 1].url };
 };
+
+const resolveURL = (song: NoxMedia.Song) => _resolveURL(song);
 
 const refreshSong = async (song: NoxMedia.Song) => {
   try {
