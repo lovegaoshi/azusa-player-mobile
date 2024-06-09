@@ -206,7 +206,10 @@ export const useNoxSetting = create<NoxSetting>((set, get) => ({
   },
   currentPlayingList: dummyPlaylistList,
   setCurrentPlayingList: val => {
-    const { currentPlayingId } = get();
+    const { currentPlayingList, currentPlayingId } = get();
+    if (val.songList === currentPlayingList.songList) {
+      return false;
+    }
     set({ currentPlayingList: val });
     savelastPlaylistId([val.id, String(currentPlayingId)]);
     setPlayingList(val.songList);
