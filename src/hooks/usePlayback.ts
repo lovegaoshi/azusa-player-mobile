@@ -15,6 +15,7 @@ import { dataSaverPlaylist, dataSaverSongs } from '@utils/Cache';
 import useDataSaver from './useDataSaver';
 import useSnack from '@stores/useSnack';
 import { PLAYLIST_MEDIAID, PlaylistTypes } from '@enums/Playlist';
+import { fetchCurrentMusicTop } from '@utils/mediafetch/biliMusicTop';
 
 const { getState } = noxPlayingList;
 
@@ -164,6 +165,14 @@ const usePlayback = () => {
     // then go through playlist names and match the exact playlist name with query.
     // then go through every playlist and match the loose song name with query.
     if (query === '') {
+      if (playlistIds.length === 0) {
+        if (searchPlaylist.songList.length > 0) {
+          playFromPlaylist({ playlist: searchPlaylist });
+          return;
+        }
+        playAsSearchList({ songs: await fetchCurrentMusicTop() });
+        return;
+      }
       playFromPlaylist({
         playlist: await getPlaylist(randomChoice(playlistIds)),
       });
