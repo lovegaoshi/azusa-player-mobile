@@ -14,12 +14,12 @@ import {
   noxBackup,
   noxRestore,
 } from '@utils/sync/Dropbox';
+import { RedirectURL } from '../Enum';
 
 const config = {
   clientId: DROPBOX_KEY,
   clientSecret: DROPBOX_SECRET,
-  // change this in android/app/build.gradle
-  redirectUrl: 'com.noxplayer://oauth',
+  redirectUrl: RedirectURL,
   scopes: [],
   serviceConfiguration: {
     authorizationEndpoint: 'https://www.dropbox.com/oauth2/authorize',

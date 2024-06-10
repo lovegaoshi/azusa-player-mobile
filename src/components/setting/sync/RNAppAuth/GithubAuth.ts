@@ -1,20 +1,23 @@
 import { authorize } from 'react-native-app-auth';
+import { getArrayBufferForBlob } from 'react-native-blob-jsi-helper';
 
 // eslint-disable-next-line import/no-unresolved
-import { GITEE_KEY, GITEE_SECRET } from '@env';
+import { GITHUB_KEY, GITHUB_SECRET } from '@env';
 import { logger } from '@utils/Logger';
 import GenericSyncButton from './GenericSyncButton';
-import { checkAuthentication, noxBackup, noxRestore } from '@utils/sync/Gitee';
+import { checkAuthentication, noxBackup, noxRestore } from '@utils/sync/Github';
+import { RedirectURL } from '../Enum';
 
 const config = {
-  redirectUrl: 'com.noxplayer://oauthredirect',
-  clientId: GITEE_KEY,
-  clientSecret: GITEE_SECRET,
-  scopes: ['projects', 'user_info'],
+  redirectUrl: RedirectURL,
+  clientId: GITHUB_KEY,
+  clientSecret: GITHUB_SECRET,
+  scopes: ['identity', 'repo', 'administration:write'],
   additionalHeaders: { Accept: 'application/json' },
   serviceConfiguration: {
-    authorizationEndpoint: 'https://gitee.com/oauth/authorize',
-    tokenEndpoint: 'https://gitee.com/oauth/token',
+    authorizationEndpoint: 'https://github.com/login/oauth/authorize',
+    tokenEndpoint: 'https://github.com/login/oauth/access_token',
+    revocationEndpoint: `https://github.com/settings/connections/applications/${GITHUB_KEY}`,
   },
 };
 
@@ -26,7 +29,7 @@ export const getAuth = async (
 ) => {
   const authState = await authorize(config);
   if (authState.accessToken) {
-    logger.debug('gitee login successful');
+    logger.debug('github login successful');
     authToken = authState.accessToken;
     callback();
   } else {
@@ -34,33 +37,30 @@ export const getAuth = async (
   }
 };
 
-const login = async (
+export const login = async (
   callback: () => Promise<void> = async () => undefined,
   errorCallback = logger.error
 ) => {
   try {
-    if (!(await checkAuthentication())) {
-      logger.debug('gitee token expired, need to log in');
+    if (!(await checkAuthentication(authToken))) {
+      logger.debug('Github token expired, need to log in');
       await getAuth(callback, errorCallback);
     } else {
       callback();
     }
     return true;
   } catch (e) {
-    logger.debug('gitee fail');
+    logger.debug('Github fail');
     errorCallback(e);
     return false;
   }
 };
 
-const GiteeSyncButton = ({
-  restoreFromUint8Array,
-}: NoxSyncComponent.GenericProps) =>
+export default ({ restoreFromUint8Array }: NoxSyncComponent.GenericProps) =>
   GenericSyncButton({
     restoreFromUint8Array,
     noxBackup: v => noxBackup(v, authToken),
-    noxRestore: () => noxRestore(authToken),
+    noxRestore: () =>
+      noxRestore(authToken, async v => getArrayBufferForBlob(v)),
     login,
   });
-
-export default GiteeSyncButton;

@@ -53,6 +53,17 @@ declare global {
       ) => Promise<boolean>;
     }
 
+    interface ExpoProps {
+      restoreFromUint8Array: (data: Uint8Array) => Promise<void>;
+      noxRestore: () => Promise<any>;
+      noxBackup: (content: Uint8Array) => Promise<any>;
+      useLogin: () => {
+        login: (
+          callback: () => any,
+          errorHandling: (e: Error) => void
+        ) => Promise<boolean>;
+      };
+    }
     interface GenericProps {
       restoreFromUint8Array: (data: Uint8Array) => Promise<void>;
     }
