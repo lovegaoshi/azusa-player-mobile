@@ -1,5 +1,5 @@
 import { Dropbox as _Dropbox } from 'dropbox';
-import { authorize } from 'react-native-app-auth';
+import { loadAsync, exchangeCodeAsync } from 'expo-auth-session';
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore: dropbox didnt have fileBlob in their sdk anywhere but UPGRADING.md
 // eslint-disable-next-line import/no-unresolved
@@ -46,11 +46,22 @@ const getAuth = async (
   callback = () => checkAuthentication(dbx).then(console.log),
   errorHandling = logger.error
 ) => {
-  const authState = await authorize(config);
-  const dropboxUID = authState.tokenAdditionalParameters?.account_id;
-  if (dropboxUID) {
+  const authReq = await loadAsync(config, config.serviceConfiguration);
+  const authState = await authReq.promptAsync(config.serviceConfiguration);
+  if (authState.type !== 'success') {
+    errorHandling(authState);
+    return;
+  }
+  const accessTokenState = await exchangeCodeAsync(
+    { code: authState.params.code, ...config },
+    config.serviceConfiguration
+  );
+  console.log(
+    `${JSON.stringify(accessTokenState)}, ${JSON.stringify(authState)}`
+  );
+  if (accessTokenState.accessToken) {
     dbx = new _Dropbox({
-      accessToken: authState.accessToken, //dropboxUID,
+      accessToken: accessTokenState.accessToken, //dropboxUID,
     });
     callback();
   } else {

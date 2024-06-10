@@ -1,5 +1,5 @@
-import { authorize } from 'react-native-app-auth';
 import { getArrayBufferForBlob } from 'react-native-blob-jsi-helper';
+import { loadAsync, exchangeCodeAsync } from 'expo-auth-session';
 
 // eslint-disable-next-line import/no-unresolved
 import { GITHUB_KEY, GITHUB_SECRET } from '@env';
@@ -28,10 +28,19 @@ export const getAuth = async (
   callback = () => checkAuthentication(authToken).then(console.log),
   errorHandling = logger.error
 ) => {
-  const authState = await authorize(config);
-  if (authState.accessToken) {
+  const authReq = await loadAsync(config, config.serviceConfiguration);
+  const authState = await authReq.promptAsync(config.serviceConfiguration);
+  if (authState.type !== 'success') {
+    errorHandling(authState);
+    return;
+  }
+  const accessTokenState = await exchangeCodeAsync(
+    { code: authState.params.code, ...config },
+    config.serviceConfiguration
+  );
+  if (accessTokenState.accessToken) {
     logger.debug('github login successful');
-    authToken = authState.accessToken;
+    authToken = accessTokenState.accessToken;
     callback();
   } else {
     errorHandling('no response url returned. auth aborted by user.');
