@@ -1,10 +1,9 @@
-import { loadAsync, exchangeCodeAsync } from 'expo-auth-session';
 // eslint-disable-next-line import/no-unresolved
 import { GITEE_KEY, GITEE_SECRET } from '@env';
 import { logger } from '@utils/Logger';
 import GenericSyncButton from './GenericSyncButton';
 import { checkAuthentication, noxBackup, noxRestore } from '@utils/sync/Gitee';
-import { RedirectUrl } from './Enums';
+import authorize, { RedirectUrl } from './ExpoAuth';
 
 const config = {
   redirectUrl: RedirectUrl,
@@ -25,19 +24,10 @@ export const getAuth = async (
   callback = () => checkAuthentication(authToken).then(console.log),
   errorHandling = logger.error
 ) => {
-  const authReq = await loadAsync(config, config.serviceConfiguration);
-  const authState = await authReq.promptAsync(config.serviceConfiguration);
-  if (authState.type !== 'success') {
-    errorHandling(authState);
-    return;
-  }
-  const accessTokenState = await exchangeCodeAsync(
-    { code: authState.params.code, ...config },
-    config.serviceConfiguration
-  );
-  if (accessTokenState.accessToken) {
+  const accessToken = await authorize(config);
+  if (accessToken) {
     logger.debug('gitee login successful');
-    authToken = accessTokenState.accessToken;
+    authToken = accessToken;
     callback();
   } else {
     errorHandling('no response url returned. auth aborted by user.');

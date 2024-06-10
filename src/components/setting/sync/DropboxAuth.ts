@@ -1,10 +1,8 @@
 import { Dropbox as _Dropbox } from 'dropbox';
-import { loadAsync, exchangeCodeAsync } from 'expo-auth-session';
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore: dropbox didnt have fileBlob in their sdk anywhere but UPGRADING.md
 // eslint-disable-next-line import/no-unresolved
 import { getArrayBufferForBlob } from 'react-native-blob-jsi-helper';
-import { RedirectUrl } from './Enums';
 
 // eslint-disable-next-line import/no-unresolved
 import { DROPBOX_KEY, DROPBOX_SECRET } from '@env';
@@ -15,6 +13,7 @@ import {
   noxBackup,
   noxRestore,
 } from '@utils/sync/Dropbox';
+import authorize, { RedirectUrl } from './ExpoAuth';
 
 const config = {
   clientId: DROPBOX_KEY,
@@ -46,22 +45,10 @@ const getAuth = async (
   callback = () => checkAuthentication(dbx).then(console.log),
   errorHandling = logger.error
 ) => {
-  const authReq = await loadAsync(config, config.serviceConfiguration);
-  const authState = await authReq.promptAsync(config.serviceConfiguration);
-  if (authState.type !== 'success') {
-    errorHandling(authState);
-    return;
-  }
-  const accessTokenState = await exchangeCodeAsync(
-    { code: authState.params.code, ...config },
-    config.serviceConfiguration
-  );
-  console.log(
-    `${JSON.stringify(accessTokenState)}, ${JSON.stringify(authState)}`
-  );
-  if (accessTokenState.accessToken) {
+  const accessToken = await authorize(config);
+  if (accessToken) {
     dbx = new _Dropbox({
-      accessToken: accessTokenState.accessToken, //dropboxUID,
+      accessToken: accessToken, //dropboxUID,
     });
     callback();
   } else {
