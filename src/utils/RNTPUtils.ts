@@ -211,7 +211,13 @@ export const clearPlaylistUninterrupted = async () => {
   if (currentTrackIndex === undefined) return;
   const removeTrackIndices = [...Array(currentQueue.length).keys()];
   removeTrackIndices.splice(currentTrackIndex, 1);
-  await TrackPlayer.remove(removeTrackIndices);
+  try {
+    await TrackPlayer.remove(removeTrackIndices);
+  } catch (e) {
+    logger.warn(
+      `[RNTPUtils] claer Playlist failed as: ${e} with ${removeTrackIndices}; queue is ${currentQueue.length}`
+    );
+  }
 };
 
 export const playSongUninterrupted = async (song: NoxMedia.Song) => {
