@@ -123,26 +123,6 @@ export default ({
   );
 };
 
-export const ExpoSyncButton = ({
-  restoreFromUint8Array,
-  useLogin,
-  noxBackup,
-  noxRestore,
-}: NoxSyncComponent.ExpoProps) => {
-  const { login } = useLogin();
-  return (
-    <View style={styles.container}>
-      <ImportSyncFavButton
-        restoreFromUint8Array={restoreFromUint8Array}
-        login={login}
-        noxRestore={noxRestore}
-      />
-      <View style={styles.spacing}></View>
-      <ExportSyncFavButton login={login} noxBackup={noxBackup} />
-    </View>
-  );
-};
-
 const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',

@@ -8,9 +8,9 @@ import GenericSelectDialog from '../dialogs/GenericSelectDialog';
 import GenericCheckDialog from '../dialogs/GenericCheckDialog';
 import { SyncOptions } from '@enums/Sync';
 import PersonalSyncButton from './sync/PersonalSyncButton';
-import DropboxSyncButton from './sync/RNAppAuth/DropboxAuth';
-import GiteeSyncButton from './sync/RNAppAuth/GiteeAuth';
-import GithubSyncButton from './sync/RNAppAuth/GithubAuth';
+import DropboxSyncButton from './sync/DropboxAuth';
+import GiteeSyncButton from './sync/GiteeAuth';
+import GithubSyncButton from './sync/GithubAuth';
 import useSync from './sync/useSync';
 
 const EXPORT_OPTIONS_LIST = [

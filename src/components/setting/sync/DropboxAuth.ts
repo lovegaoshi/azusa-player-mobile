@@ -4,6 +4,7 @@ import { authorize } from 'react-native-app-auth';
 // @ts-ignore: dropbox didnt have fileBlob in their sdk anywhere but UPGRADING.md
 // eslint-disable-next-line import/no-unresolved
 import { getArrayBufferForBlob } from 'react-native-blob-jsi-helper';
+import { RedirectUrl } from './Enums';
 
 // eslint-disable-next-line import/no-unresolved
 import { DROPBOX_KEY, DROPBOX_SECRET } from '@env';
@@ -14,12 +15,12 @@ import {
   noxBackup,
   noxRestore,
 } from '@utils/sync/Dropbox';
-import { RedirectURL } from '../Enum';
 
 const config = {
   clientId: DROPBOX_KEY,
   clientSecret: DROPBOX_SECRET,
-  redirectUrl: RedirectURL,
+  redirectUrl: RedirectUrl,
+  redirectUri: RedirectUrl,
   scopes: [],
   serviceConfiguration: {
     authorizationEndpoint: 'https://www.dropbox.com/oauth2/authorize',
