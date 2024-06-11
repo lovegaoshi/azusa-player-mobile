@@ -184,7 +184,9 @@ const extractResponseJson = (json: any, field: string) => {
   switch (field) {
     case FieldEnum.AudioUrl:
       if (!json.data)
-        throw Error(`[extractResponseJson] no audio url from ${json}`);
+        throw Error(
+          `[extractResponseJson] no audio url from ${JSON.stringify(json)}`
+        );
       if (json.data.flac?.audio) {
         return getBestBitrate(json.data.dash.flac.audio).baseUrl;
       } else if (json.data.dolby?.audio) {

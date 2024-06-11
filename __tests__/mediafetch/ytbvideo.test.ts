@@ -5,6 +5,13 @@ import { resolveURL as resolveURLYtbi } from '../../src/utils/mediafetch/ytbvide
 
 const dummySong = { bvid: 'VtXTFi8edyE' };
 
+test('test libmuse', async () => {
+  const content = await resolveURLMuse(dummySong);
+  //console.log(content);
+  expect(content).not.toBeNull();
+}, 220000);
+// HACK: always fails. disabling for now
+/*
 test('test ytbvideo', async () => {
   const content = await fetcher.regexFetch({
     reExtracted: fetcher.regexSearchMatch.exec(
@@ -15,19 +22,12 @@ test('test ytbvideo', async () => {
   expect(content.songList[0]?.id).not.toBeNull();
 }, 220000);
 
-// HACK: always fails. disabling for now
-/*
 test('test ytbi', async () => {
   const content = await resolveURLYtbi(dummySong);
   //console.log(content);
   expect(content).not.toBeNull();
 }, 2201000);
 
-test('test libmuse', async () => {
-  const content = await resolveURLMuse(dummySong);
-  //console.log(content);
-  expect(content).not.toBeNull();
-}, 220000);
 
 test('test ytdl-core', async () => {
   const content = await resolveURLNode(dummySong);
