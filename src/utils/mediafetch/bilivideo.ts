@@ -107,11 +107,13 @@ interface FetchPlayURL {
   cid?: string;
   extractType?: string;
   // enable iOS HLS fix.
+  // iOS does not play some DASH formats, so we resort to whatever html5 can play -
+  // 360p mp4.
   iOS?: boolean;
 }
 
-export const fetchVideoPlayUrl = (bvid: string) =>
-  fetchVideoPlayUrlPromise({ bvid, extractType: FieldEnum.VideoUrl }).then(
+export const fetchVideoPlayUrl = (bvid: string, iOS = false) =>
+  fetchVideoPlayUrlPromise({ bvid, extractType: FieldEnum.VideoUrl, iOS }).then(
     v => v.url
   );
 export const fetchVideoPlayUrlPromise = async ({
