@@ -118,7 +118,7 @@ export default () => {
 
   useEffect(() => {
     buildBrowseTree();
-  }, [carPlayConnected]);
+  }, [carPlayConnected, playlistIds]);
 
   return { carPlayConnected, buildBrowseTree };
 };
