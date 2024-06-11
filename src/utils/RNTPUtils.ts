@@ -156,7 +156,7 @@ interface ResolveAndCache {
   dry?: boolean;
   resolver?: (
     v: NoxUtils.SongProcessor
-  ) => Promise<NoxNetwork.ParsedNoxMediaURL>;
+  ) => Promise<NoxNetwork.ResolvedNoxMediaURL>;
 }
 export const resolveAndCache = async ({
   song,

@@ -25,6 +25,7 @@ const getAppStoreState = appStore.getState;
 const getPlayerSetting = playerSettingStore.getState;
 let lastBiliHeartBeat: string[] = ['', ''];
 const lastPlayedDuration: { val?: number } = { val: 0 };
+const isIOS = Platform.OS === 'ios';
 
 export async function AdditionalPlaybackService({
   noInterruption = false,
@@ -110,7 +111,8 @@ export async function PlaybackService() {
           resolveAndCache({
             song: nextSong,
             dry: !(playerSetting.prefetchTrack && playerSetting.cacheSize > 2),
-            resolver: ({ song }) => resolveUrl({ song, prefetch: true }),
+            resolver: ({ song }) =>
+              resolveUrl({ song, prefetch: true, iOS: isIOS }),
           });
         }
       }

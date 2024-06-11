@@ -1,6 +1,4 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-// @ts-ignore HACK: for noxplayer's bfetch compatibility. too lazy to refactor
-import { Platform } from 'react-native';
 
 import { biliApiLimiter } from './throttle';
 import { biliShazamOnSonglist } from './bilishazam';
@@ -135,7 +133,7 @@ export const fetchVideoPlayUrlPromise = async ({
       logger.debug(`[resolveURL] cid resolved to be: ${cid}`);
     }
     // iOS: resolve lowest res video?
-    if (iOS && Platform.OS === 'ios') {
+    if (iOS) {
       const res = await bfetch(
         URL_PLAY_URL_IOS.replace('{bvid}', bvid).replace('{cid}', String(cid)),
         {

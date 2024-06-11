@@ -56,7 +56,7 @@ class NoxMediaCache {
 
   saveCacheMedia = async (
     song: NoxMedia.Song,
-    resolvedURL: any,
+    resolvedURL: NoxNetwork.ResolvedNoxMediaURL,
     extension?: string
   ) => {
     const parseR128Gain = async () => {

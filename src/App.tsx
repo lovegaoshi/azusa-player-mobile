@@ -47,6 +47,7 @@ const useSplash = (duration = 1000) => {
 
 export default function App(appProps: NoxComponent.AppProps) {
   const isSplashReady = useSplash(__DEV__ || appProps.intentData ? 1 : 2500);
+  const [isSplashAnimReady, setIsSplashReady] = React.useState(false);
   const { checkDrawOverAppsPermission } = useAndroidAuto();
   const isPlayerReady = useSetupPlayer(appProps);
   const isLandscape = useIsLandscape();
@@ -70,10 +71,10 @@ export default function App(appProps: NoxComponent.AppProps) {
     };
   }, []);
 
-  if (!isPlayerReady || !isSplashReady) {
+  if (!(isPlayerReady && isSplashReady && isSplashAnimReady)) {
     return (
       <SafeAreaView style={styles.screenContainer}>
-        <AppOpenSplash />
+        <AppOpenSplash setIsSplashReady={setIsSplashReady} />
       </SafeAreaView>
     );
   }
