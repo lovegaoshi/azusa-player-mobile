@@ -11,16 +11,18 @@ enum SplashType {
   Tanaka = 'tanaka',
 }
 
-const localSplashes: [SplashType, () => any][] = [
+type SplashArray = [SplashType, () => any][];
+
+export const imageSplashes: SplashArray = [
   [SplashType.Image, () => require('@assets/splash/steria2.jpg')],
   [SplashType.Image, () => require('@assets/splash/abu-10k-subs.gif')],
   [SplashType.Image, () => require('@assets/splash/nox-3d.png')],
-  [SplashType.Tanaka, () => require('@assets/splash/nox-3d.png')],
 ];
 
-export const imageSplashes = localSplashes.filter(
-  ([t]) => t === SplashType.Image
-);
+const localSplashes: SplashArray = [
+  ...imageSplashes,
+  [SplashType.Tanaka, () => require('@assets/splash/nox-3d.png')],
+];
 
 const randomSplash = randomChoice(localSplashes);
 
