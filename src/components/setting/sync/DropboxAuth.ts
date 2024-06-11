@@ -1,5 +1,4 @@
 import { Dropbox as _Dropbox } from 'dropbox';
-import { authorize } from 'react-native-app-auth';
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore: dropbox didnt have fileBlob in their sdk anywhere but UPGRADING.md
 // eslint-disable-next-line import/no-unresolved
@@ -14,12 +13,13 @@ import {
   noxBackup,
   noxRestore,
 } from '@utils/sync/Dropbox';
+import authorize, { RedirectUrl } from './ExpoAuth';
 
 const config = {
   clientId: DROPBOX_KEY,
   clientSecret: DROPBOX_SECRET,
-  // change this in android/app/build.gradle
-  redirectUrl: 'com.noxplayer://oauth',
+  redirectUrl: RedirectUrl,
+  redirectUri: RedirectUrl,
   scopes: [],
   serviceConfiguration: {
     authorizationEndpoint: 'https://www.dropbox.com/oauth2/authorize',
@@ -45,11 +45,10 @@ const getAuth = async (
   callback = () => checkAuthentication(dbx).then(console.log),
   errorHandling = logger.error
 ) => {
-  const authState = await authorize(config);
-  const dropboxUID = authState.tokenAdditionalParameters?.account_id;
-  if (dropboxUID) {
+  const accessToken = await authorize(config);
+  if (accessToken) {
     dbx = new _Dropbox({
-      accessToken: authState.accessToken, //dropboxUID,
+      accessToken: accessToken, //dropboxUID,
     });
     callback();
   } else {

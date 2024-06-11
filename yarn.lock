@@ -6395,7 +6395,9 @@ __metadata:
     eslint-plugin-react: "npm:^7.34.2"
     eslint-plugin-react-hooks: "npm:^4.6.2"
     expo: "npm:^51.0.11"
+    expo-auth-session: "npm:~5.5.2"
     expo-clipboard: "npm:~6.0.3"
+    expo-crypto: "npm:~13.0.2"
     expo-document-picker: "npm:~12.0.1"
     expo-image: "npm:~1.12.11"
     expo-keep-awake: "npm:13.0.2"
@@ -6456,8 +6458,8 @@ __metadata:
     sp-react-native-in-app-updates: "npm:^1.4.0"
     typescript: "npm:~5.4.5"
     use-debounce: "npm:^10.0.1"
-    uuid: "npm:^9.0.1"
-    youtubei.js: "npm:^9.4.0"
+    uuid: "npm:^10.0.0"
+    youtubei.js: "npm:^10.0.0"
     ytdl-core: "https://lovegaoshi@github.com/lovegaoshi/node-ytdl-core.git#commit=4f9bc342593c4c1389ba331d0281310ca42fc273"
     zustand: "npm:^4.5.2"
   languageName: unknown
@@ -6668,7 +6670,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"base64-js@npm:^1.2.3, base64-js@npm:^1.3.1, base64-js@npm:^1.5.1":
+"base64-js@npm:^1.2.3, base64-js@npm:^1.3.0, base64-js@npm:^1.3.1, base64-js@npm:^1.5.1":
   version: 1.5.1
   resolution: "base64-js@npm:1.5.1"
   checksum: 10c0/f23823513b63173a001030fae4f2dabe283b99a9d324ade3ad3d148e218134676f1ee8568c877cd79ec1c53158dcf2d2ba527a97c606618928ba99dd930102bf
@@ -9344,6 +9346,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"expo-application@npm:~5.9.0":
+  version: 5.9.1
+  resolution: "expo-application@npm:5.9.1"
+  peerDependencies:
+    expo: "*"
+  checksum: 10c0/3768c1d241edfe4dfa355dd09ba3f1155e6ad5e12d180c46e3cad6fba81dcf8ebb4d73f9c4490cbb93c195505f694b0967b0285167706da548aa13f10b08a2f1
+  languageName: node
+  linkType: hard
+
 "expo-asset@npm:~10.0.8":
   version: 10.0.8
   resolution: "expo-asset@npm:10.0.8"
@@ -9355,6 +9366,20 @@ __metadata:
   peerDependencies:
     expo: "*"
   checksum: 10c0/697eff26687bbd1fcded5edc056a9aeabb04a76537ecbdc73567ef6c237eaa473220f5f08f69c9743b7af4f92d827eaeb76cb5f429b7cc88341ede38faf91ae4
+  languageName: node
+  linkType: hard
+
+"expo-auth-session@npm:~5.5.2":
+  version: 5.5.2
+  resolution: "expo-auth-session@npm:5.5.2"
+  dependencies:
+    expo-application: "npm:~5.9.0"
+    expo-constants: "npm:~16.0.0"
+    expo-crypto: "npm:~13.0.0"
+    expo-linking: "npm:~6.3.0"
+    expo-web-browser: "npm:~13.0.0"
+    invariant: "npm:^2.2.4"
+  checksum: 10c0/d6cd84ccd50a804b5667902857b5f03a61bb1a8afe9a50d8483d3be9892cfce06980fa6c6ea14c7353f40590a1c3ed4eb91853592e3e8d41d9af394c3cdf4cf7
   languageName: node
   linkType: hard
 
@@ -9375,6 +9400,17 @@ __metadata:
   peerDependencies:
     expo: "*"
   checksum: 10c0/2746d85b2bd92cd5fadfd56b5369f57847416363f0da2007f1c7e978dbff807925275977fda071eb2e7602f01f63952ea25be7b04d684697e0de5c892e056414
+  languageName: node
+  linkType: hard
+
+"expo-crypto@npm:~13.0.0, expo-crypto@npm:~13.0.2":
+  version: 13.0.2
+  resolution: "expo-crypto@npm:13.0.2"
+  dependencies:
+    base64-js: "npm:^1.3.0"
+  peerDependencies:
+    expo: "*"
+  checksum: 10c0/dcdb1f205358a4d9897d40a764438fc9e335324815cdc2e0d3ffbc30e5c1efbd231614cf939407f6ff10184f88f0ffa3acce274f7d910e704b3460a1cbd4822c
   languageName: node
   linkType: hard
 
@@ -9427,6 +9463,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"expo-linking@npm:~6.3.0":
+  version: 6.3.1
+  resolution: "expo-linking@npm:6.3.1"
+  dependencies:
+    expo-constants: "npm:~16.0.0"
+    invariant: "npm:^2.2.4"
+  checksum: 10c0/a6550cacc3117dde92fe9758c3b97089dae8ce2d90a2d6dd4441571991c4c7e139beb9d5648f04eef2fccc52f00f1631f36717bcd070c62413c013a30ae7aa97
+  languageName: node
+  linkType: hard
+
 "expo-modules-autolinking@npm:1.11.1":
   version: 1.11.1
   resolution: "expo-modules-autolinking@npm:1.11.1"
@@ -9457,6 +9503,15 @@ __metadata:
   peerDependencies:
     expo: "*"
   checksum: 10c0/e74bebb7c9a35c22031805b1eee37f93c88efb0b247b70afb781fc272ca3ba65b0fe86b3abc45ea60350d223e6a9f76f2007b4a9da5f1dd98f43d9e8adc13816
+  languageName: node
+  linkType: hard
+
+"expo-web-browser@npm:~13.0.0":
+  version: 13.0.3
+  resolution: "expo-web-browser@npm:13.0.3"
+  peerDependencies:
+    expo: "*"
+  checksum: 10c0/b1c28a80c90c2bec8a3b95330d5c7c3d22235492189dab4f27f747c33f492c87c1ced7b19963c8ed8655621ef1d4b3bcd10753aea96b89cb744835ee3319f51c
   languageName: node
   linkType: hard
 
@@ -17797,6 +17852,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"uuid@npm:^10.0.0":
+  version: 10.0.0
+  resolution: "uuid@npm:10.0.0"
+  bin:
+    uuid: dist/bin/uuid
+  checksum: 10c0/eab18c27fe4ab9fb9709a5d5f40119b45f2ec8314f8d4cf12ce27e4c6f4ffa4a6321dc7db6c515068fa373c075b49691ba969f0010bf37f44c37ca40cd6bf7fe
+  languageName: node
+  linkType: hard
+
 "uuid@npm:^7.0.3":
   version: 7.0.3
   resolution: "uuid@npm:7.0.3"
@@ -17812,15 +17876,6 @@ __metadata:
   bin:
     uuid: dist/bin/uuid
   checksum: 10c0/bcbb807a917d374a49f475fae2e87fdca7da5e5530820ef53f65ba1d12131bd81a92ecf259cc7ce317cbe0f289e7d79fdfebcef9bfa3087c8c8a2fa304c9be54
-  languageName: node
-  linkType: hard
-
-"uuid@npm:^9.0.1":
-  version: 9.0.1
-  resolution: "uuid@npm:9.0.1"
-  bin:
-    uuid: dist/bin/uuid
-  checksum: 10c0/1607dd32ac7fc22f2d8f77051e6a64845c9bce5cd3dd8aa0070c074ec73e666a1f63c7b4e0f4bf2bc8b9d59dc85a15e17807446d9d2b17c8485fbc2147b27f9b
   languageName: node
   linkType: hard
 
@@ -18355,14 +18410,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"youtubei.js@npm:^9.4.0":
-  version: 9.4.0
-  resolution: "youtubei.js@npm:9.4.0"
+"youtubei.js@npm:^10.0.0":
+  version: 10.0.0
+  resolution: "youtubei.js@npm:10.0.0"
   dependencies:
     jintr: "npm:^1.1.0"
     tslib: "npm:^2.5.0"
     undici: "npm:^5.19.1"
-  checksum: 10c0/9cb97e1a89e4e903e0d1c90e99ed4685e90a0ce4cb432e261c9172b7459da318301047c63877b12d53d14c0d1a40da722b7dfe1229c4e333a8cc679af4e2cea1
+  checksum: 10c0/6bb2edc7dff35adcbd93a4b9b3142ed6514f6c1e3389cf5b8f922fbe65d8d680eeaceb92e1ee74b0be864ec9d54dc35c66f68e8d351151b8fc086cba3b39958a
   languageName: node
   linkType: hard
 

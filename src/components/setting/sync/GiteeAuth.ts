@@ -1,13 +1,13 @@
-import { authorize } from 'react-native-app-auth';
-
 // eslint-disable-next-line import/no-unresolved
 import { GITEE_KEY, GITEE_SECRET } from '@env';
 import { logger } from '@utils/Logger';
 import GenericSyncButton from './GenericSyncButton';
 import { checkAuthentication, noxBackup, noxRestore } from '@utils/sync/Gitee';
+import authorize, { RedirectUrl } from './ExpoAuth';
 
 const config = {
-  redirectUrl: 'com.noxplayer://oauthredirect',
+  redirectUrl: RedirectUrl,
+  redirectUri: RedirectUrl,
   clientId: GITEE_KEY,
   clientSecret: GITEE_SECRET,
   scopes: ['projects', 'user_info'],
@@ -24,10 +24,10 @@ export const getAuth = async (
   callback = () => checkAuthentication(authToken).then(console.log),
   errorHandling = logger.error
 ) => {
-  const authState = await authorize(config);
-  if (authState.accessToken) {
+  const accessToken = await authorize(config);
+  if (accessToken) {
     logger.debug('gitee login successful');
-    authToken = authState.accessToken;
+    authToken = accessToken;
     callback();
   } else {
     errorHandling('no response url returned. auth aborted by user.');
