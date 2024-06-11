@@ -40,14 +40,14 @@ export const searchLyric = async (searchMID: string, source = LrcSource.QQ) => {
   try {
     switch (source) {
       case LrcSource.Kugou:
-        return kugouLrcFetch.getLyric(searchMID);
+        return await kugouLrcFetch.getLyric(searchMID);
       case LrcSource.QQQrc:
-        return qqQrcFetch.getLyric(searchMID);
+        return await qqQrcFetch.getLyric(searchMID);
       case LrcSource.BiliBili:
-        return BiliLrcFetch.getLyric(searchMID);
+        return await BiliLrcFetch.getLyric(searchMID);
       case LrcSource.QQ:
       default:
-        return qqLrcFetch.getLyric(searchMID);
+        return await qqLrcFetch.getLyric(searchMID);
     }
   } catch (e) {
     logger.warn(`[lrcFetch] ${searchMID} & ${source}: ${e}`);

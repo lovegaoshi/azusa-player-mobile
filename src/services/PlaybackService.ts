@@ -17,6 +17,7 @@ import {
   fadePause,
   cycleThroughPlaymode,
   resolveAndCache,
+  isIOS,
 } from '@utils/RNTPUtils';
 
 const { getState } = noxPlayingList;
@@ -110,7 +111,8 @@ export async function PlaybackService() {
           resolveAndCache({
             song: nextSong,
             dry: !(playerSetting.prefetchTrack && playerSetting.cacheSize > 2),
-            resolver: ({ song }) => resolveUrl({ song, prefetch: true }),
+            resolver: ({ song }) =>
+              resolveUrl({ song, prefetch: true, iOS: isIOS }),
           });
         }
       }

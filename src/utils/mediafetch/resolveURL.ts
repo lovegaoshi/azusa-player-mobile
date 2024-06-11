@@ -40,7 +40,7 @@ interface FetchPlayUrl {
  */
 export const fetchPlayUrlPromise = async ({
   song,
-  iOS = true,
+  iOS = false,
 }: FetchPlayUrl): Promise<NoxNetwork.ParsedNoxMediaURL> => {
   const bvid = song.bvid;
   const cid = song.id;

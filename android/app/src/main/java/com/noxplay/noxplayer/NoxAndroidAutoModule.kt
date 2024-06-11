@@ -142,7 +142,8 @@ class NoxAndroidAutoModule(reactContext: ReactApplicationContext) :
     val context = reactApplicationContext
     val activity = context.currentActivity
     try {
-      callback.resolve(Settings.canDrawOverlays(activity))
+      val canDraw = Settings.canDrawOverlays(activity)
+      callback.resolve(canDraw)
     } catch (e: Exception) {
       callback.resolve(false)
     }

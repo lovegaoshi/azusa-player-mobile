@@ -26,6 +26,7 @@ export enum StorageKeys {
   REGEXTRACT_MAPPING = 'RegexExtract',
   MUSICFREE_PLUGIN = 'MusicFreePlugin',
   AA_PERMISSION = 'AndroidAutoPermission',
+  TANAKA_AMAZING_COMMODITIES = 'TanakaAmazingCommodities',
 }
 
 export enum SearchOptions {

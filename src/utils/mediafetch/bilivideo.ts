@@ -1,6 +1,4 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-// @ts-ignore HACK: for noxplayer's bfetch compatibility. too lazy to refactor
-import { Platform } from 'react-native';
 
 import { biliApiLimiter } from './throttle';
 import { biliShazamOnSonglist } from './bilishazam';
@@ -8,6 +6,7 @@ import SongTS from '@objects/Song';
 import { logger } from '../Logger';
 import bfetch from '@utils/BiliFetch';
 import { Source } from '@enums/MediaFetch';
+import { wbiQuery } from '@stores/wbi';
 
 export enum FieldEnum {
   AudioUrl = 'AudioUrl',
@@ -19,9 +18,9 @@ export enum FieldEnum {
 const URL_VIDEO_INFO =
   'https://api.bilibili.com/x/web-interface/view?bvid={bvid}';
 const URL_PLAY_URL =
-  'https://api.bilibili.com/x/player/playurl?cid={cid}&bvid={bvid}&qn=64&fnval=16&try_look=1&voice_balance=1';
+  'https://api.bilibili.com/x/player/wbi/playurl?cid={cid}&bvid={bvid}&qn=64&fnval=16&try_look=1&voice_balance=1';
 const URL_PLAY_URL_IOS =
-  'https://api.bilibili.com/x/player/playurl?cid={cid}&bvid={bvid}&qn=6&fnval=16&platform=html5&voice_balance=1';
+  'https://api.bilibili.com/x/player/wbi/playurl?cid={cid}&bvid={bvid}&qn=6&fnval=16&platform=html5&voice_balance=1';
 
 const fetchBVIDRaw = async (bvid: string): Promise<NoxMedia.Song[]> => {
   logger.info(
@@ -119,7 +118,7 @@ export const fetchVideoPlayUrlPromise = async ({
   bvid,
   cid,
   extractType = FieldEnum.AudioUrl,
-  iOS = true,
+  iOS = false,
 }: FetchPlayURL): Promise<NoxNetwork.ParsedNoxMediaURL> => {
   logger.debug(
     `fethcVideoPlayURL: ${URL_PLAY_URL.replace('{bvid}', bvid).replace(
@@ -135,8 +134,8 @@ export const fetchVideoPlayUrlPromise = async ({
       logger.debug(`[resolveURL] cid resolved to be: ${cid}`);
     }
     // iOS: resolve lowest res video?
-    if (iOS && Platform.OS === 'ios') {
-      const res = await bfetch(
+    if (iOS) {
+      const res = await wbiQuery(
         URL_PLAY_URL_IOS.replace('{bvid}', bvid).replace('{cid}', String(cid)),
         {
           method: 'GET',
@@ -148,7 +147,7 @@ export const fetchVideoPlayUrlPromise = async ({
       logger.debug(`[iOS resolveURL] ${JSON.stringify(json.data)}`);
       return { url: json.data.durl[0].url as string };
     }
-    const res = await bfetch(
+    const res = await wbiQuery(
       URL_PLAY_URL.replace('{bvid}', bvid).replace('{cid}', String(cid)),
       // to resolve >480p video sources
       {
@@ -185,7 +184,9 @@ const extractResponseJson = (json: any, field: string) => {
   switch (field) {
     case FieldEnum.AudioUrl:
       if (!json.data)
-        throw Error(`[extractResponseJson] no audio url from ${json}`);
+        throw Error(
+          `[extractResponseJson] no audio url from ${JSON.stringify(json)}`
+        );
       if (json.data.flac?.audio) {
         return getBestBitrate(json.data.dash.flac.audio).baseUrl;
       } else if (json.data.dolby?.audio) {

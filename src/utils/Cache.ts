@@ -14,6 +14,7 @@ import { customReqHeader } from './BiliFetch';
 import { Source } from '@enums/MediaFetch';
 
 const { getState } = playerSettingStore;
+const isIOS = Platform.OS === 'ios';
 
 interface optionsProps {
   max?: number;
@@ -56,7 +57,7 @@ class NoxMediaCache {
 
   saveCacheMedia = async (
     song: NoxMedia.Song,
-    resolvedURL: any,
+    resolvedURL: NoxNetwork.ResolvedNoxMediaURL,
     extension?: string
   ) => {
     const parseR128Gain = async () => {
@@ -101,7 +102,7 @@ class NoxMediaCache {
     this.cache.set(noxCacheKey(song), res.path());
     addDownloadProgress(song, 100);
     await parseR128Gain();
-    if (Platform.OS === 'ios') {
+    if (isIOS) {
       const mp3Path = await ffmpegToMP3(res.path());
       this.cache.set(noxCacheKey(song), mp3Path);
       const playbackState = await TrackPlayer.getPlaybackState();

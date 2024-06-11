@@ -24,6 +24,8 @@ const resolveIOSURL = (formats: ytdl.videoFormat[]) => {
   ).url;
 };
 
+const isIOS = Platform.OS === 'ios';
+
 export const resolveURL = async (song: NoxMedia.Song, iOS = true) => {
   const sid = song.bvid;
   try {
@@ -33,7 +35,7 @@ export const resolveURL = async (song: NoxMedia.Song, iOS = true) => {
     );
     const videoDetails = ytdlInfo.videoDetails;
     const url =
-      Platform.OS === 'ios' && iOS
+      isIOS && iOS
         ? resolveIOSURL(ytdlInfo.formats)
         : ytdl.chooseFormat(ytdlInfo.formats, { quality: 'highestaudio' }).url;
     return {

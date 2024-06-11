@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 import { Image } from 'expo-image';
 
-import { localSplashes } from '../background/AppOpenSplash';
+import { imageSplashes } from '../background/AppOpenSplash';
 
 export default () => {
   const [index, setIndex] = React.useState(0);
@@ -82,18 +82,18 @@ export default () => {
 
   const nextImage = () => {
     console.log('splash to next', index);
-    setIndex(val => (val < localSplashes.length - 1 ? val + 1 : 0));
+    setIndex(val => (val < imageSplashes.length - 1 ? val + 1 : 0));
   };
 
   const isIndexEnd = (i: number) => {
-    return index === localSplashes.length - 1 && i === 0;
+    return index === imageSplashes.length - 1 && i === 0;
   };
 
   React.useEffect(() => console.log('splash', index), [index]);
 
   return (
     <View style={styles.view}>
-      {localSplashes
+      {imageSplashes
         .map((splash, i) => (
           <Animated.View
             style={[
@@ -137,7 +137,7 @@ export default () => {
               // source={i < index || i > index + 1 ? undefined : splash()}
               source={
                 (i >= index && i < index + 2) || isIndexEnd(i)
-                  ? splash()
+                  ? splash[1]()
                   : undefined
               }
               style={styles.splashCard}

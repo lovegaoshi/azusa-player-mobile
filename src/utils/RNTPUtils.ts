@@ -24,6 +24,7 @@ import { NULL_TRACK } from '@objects/Song';
 
 const { getState, setState } = appStore;
 const animatedVolume = new Animated.Value(1);
+export const isIOS = Platform.OS === 'ios';
 
 animatedVolume.addListener(state => TrackPlayer.setVolume(state.value));
 
@@ -156,14 +157,14 @@ interface ResolveAndCache {
   dry?: boolean;
   resolver?: (
     v: NoxUtils.SongProcessor
-  ) => Promise<NoxNetwork.ParsedNoxMediaURL>;
+  ) => Promise<NoxNetwork.ResolvedNoxMediaURL>;
 }
 export const resolveAndCache = async ({
   song,
   dry = false,
   resolver = resolveUrl,
 }: ResolveAndCache) => {
-  const resolvedUrl = await resolver({ song });
+  const resolvedUrl = await resolver({ song, iOS: isIOS });
   logger.debug(`[resolver] resolved ${song.bvid} to ${resolvedUrl.url}`);
   // a dry run doesnt cache to disk, but does resolve to the cached map.
   if (dry) return resolvedUrl;

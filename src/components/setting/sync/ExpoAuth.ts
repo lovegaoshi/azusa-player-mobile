@@ -35,5 +35,4 @@ const rnAppAuth = async (config: Config) => {
   return authState.accessToken;
 };
 
-export default (config: Config) =>
-  Platform.OS === 'ios' ? expoAuth(config) : rnAppAuth(config);
+export default Platform.OS === 'ios' ? expoAuth : rnAppAuth;
