@@ -39,8 +39,8 @@
 - b站登录互动，点赞，三连，增加b站视频播放量
 - 多语言
 - 歌曲缓存
-- Android Auto支持
-- ffmpeg powered 音量均衡
+- Android Auto, CarPlay支持
+- ffmpeg处理音量均衡
 - AB 重复
 - 逐字歌词
 - **切片 man 不易，没有各位切片 man 也不会有这个项目的意义，请大家溜歌同时点右下方的点赞按钮点赞和三连 👍**
