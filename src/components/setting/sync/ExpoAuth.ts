@@ -1,5 +1,6 @@
+import { Platform } from 'react-native';
 import { loadAsync, exchangeCodeAsync } from 'expo-auth-session';
-
+import { authorize } from 'react-native-app-auth';
 interface Config {
   redirectUrl: string;
   redirectUri: string;
@@ -16,7 +17,7 @@ interface Config {
 
 export const RedirectUrl = 'com.noxplayer://oauthredirect';
 
-export default async (config: Config) => {
+const expoAuth = async (config: Config) => {
   const authReq = await loadAsync(config, config.serviceConfiguration);
   const authState = await authReq.promptAsync(config.serviceConfiguration);
   if (authState.type !== 'success') {
@@ -28,3 +29,11 @@ export default async (config: Config) => {
   );
   return accessTokenState.accessToken;
 };
+
+const rnAppAuth = async (config: Config) => {
+  const authState = await authorize(config);
+  return authState.accessToken;
+};
+
+export default (config: Config) =>
+  Platform.OS === 'ios' ? expoAuth(config) : rnAppAuth(config);
