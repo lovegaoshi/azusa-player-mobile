@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { View, ScrollView, Platform } from 'react-native';
+import { View, ScrollView, Platform, Alert } from 'react-native';
 import { List } from 'react-native-paper';
 import { useTranslation } from 'react-i18next';
 import { useStore } from 'zustand';
@@ -26,6 +26,7 @@ import GroupView from '../background/GroupView';
 import PluginSettings from './plugins/View';
 import showLog from './debug/Log';
 import { showDebugLog } from './debug/DebugConsole';
+import { getTanaka, deleteTanaka } from '@hooks/useTanakaAmazingCommodities';
 
 enum Icons {
   setlog = 'console',
@@ -36,6 +37,7 @@ enum Icons {
   clearOrphanCache = 'delete-empty',
   fade = 'shuffle-variant',
   plugins = 'puzzle',
+  Tanaka = 'emoticon-devil',
 }
 
 enum VIEW {
@@ -204,6 +206,25 @@ const Home = ({ navigation }: NoxComponent.NavigationProps) => {
             icon={Icons.showlog}
             settingName="Log"
             onPress={() => showLog()}
+            settingCategory="DeveloperSettings"
+          />
+          <SettingListItem
+            icon={Icons.Tanaka}
+            settingName="Tanaka"
+            onPress={async () =>
+              Alert.alert(
+                t('DeveloperSettings.Tanaka'),
+                await getTanaka(),
+                [
+                  {
+                    text: t('Dialog.nullify'),
+                    onPress: deleteTanaka,
+                  },
+                  { text: t('Dialog.ok') },
+                ],
+                { cancelable: true }
+              )
+            }
             settingCategory="DeveloperSettings"
           />
           <SettingListItem
