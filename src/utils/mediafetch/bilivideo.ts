@@ -6,6 +6,7 @@ import SongTS from '@objects/Song';
 import { logger } from '../Logger';
 import bfetch from '@utils/BiliFetch';
 import { Source } from '@enums/MediaFetch';
+import { wbiQuery } from '@stores/wbi';
 
 export enum FieldEnum {
   AudioUrl = 'AudioUrl',
@@ -17,9 +18,9 @@ export enum FieldEnum {
 const URL_VIDEO_INFO =
   'https://api.bilibili.com/x/web-interface/view?bvid={bvid}';
 const URL_PLAY_URL =
-  'https://api.bilibili.com/x/player/playurl?cid={cid}&bvid={bvid}&qn=64&fnval=16&try_look=1&voice_balance=1';
+  'https://api.bilibili.com/x/player/wbi/playurl?cid={cid}&bvid={bvid}&qn=64&fnval=16&try_look=1&voice_balance=1';
 const URL_PLAY_URL_IOS =
-  'https://api.bilibili.com/x/player/playurl?cid={cid}&bvid={bvid}&qn=6&fnval=16&platform=html5&voice_balance=1';
+  'https://api.bilibili.com/x/player/wbi/playurl?cid={cid}&bvid={bvid}&qn=6&fnval=16&platform=html5&voice_balance=1';
 
 const fetchBVIDRaw = async (bvid: string): Promise<NoxMedia.Song[]> => {
   logger.info(
@@ -134,7 +135,7 @@ export const fetchVideoPlayUrlPromise = async ({
     }
     // iOS: resolve lowest res video?
     if (iOS) {
-      const res = await bfetch(
+      const res = await wbiQuery(
         URL_PLAY_URL_IOS.replace('{bvid}', bvid).replace('{cid}', String(cid)),
         {
           method: 'GET',
@@ -146,7 +147,7 @@ export const fetchVideoPlayUrlPromise = async ({
       logger.debug(`[iOS resolveURL] ${JSON.stringify(json.data)}`);
       return { url: json.data.durl[0].url as string };
     }
-    const res = await bfetch(
+    const res = await wbiQuery(
       URL_PLAY_URL.replace('{bvid}', bvid).replace('{cid}', String(cid)),
       // to resolve >480p video sources
       {

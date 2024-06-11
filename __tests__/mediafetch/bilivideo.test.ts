@@ -1,4 +1,6 @@
-import fetcher from '../../src/utils/mediafetch/bilivideo';
+import fetcher, {
+  fetchVideoPlayUrlPromise,
+} from '../../src/utils/mediafetch/bilivideo';
 test('bilivideo', async () => {
   const content = await fetcher.regexFetch({
     reExtracted: fetcher.regexSearchMatch.exec(
@@ -7,4 +9,9 @@ test('bilivideo', async () => {
   });
   // console.log(content);
   expect(content?.songList[0]?.id).not.toBeNull();
+
+  const playurl = await fetchVideoPlayUrlPromise({ bvid: 'BV1KW4y1p7oT' });
+  // console.log(playurl);
+
+  expect(playurl.url).not.toBeNull();
 });
