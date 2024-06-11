@@ -1,9 +1,9 @@
 import { Dimensions, Pressable, StyleSheet, View } from 'react-native';
 import { Image } from 'expo-image';
+import Video from 'react-native-video';
 
 import { randomChoice } from '@utils/Utils';
 import useTanakaAmazingCommodities from '@hooks/useTanakaAmazingCommodities';
-import Video from 'react-native-video';
 
 enum SplashType {
   Image = 'image',
@@ -22,7 +22,7 @@ export const imageSplashes = localSplashes.filter(
   ([t]) => t === SplashType.Image
 );
 
-const randomSplashes = randomChoice(localSplashes);
+const randomSplash = randomChoice(localSplashes);
 
 const fullScreenStyle = {
   flex: 1,
@@ -64,7 +64,7 @@ interface Props {
 }
 const AppOpenSplash = ({ setIsSplashReady }: Props) => {
   const { tanaka, initialized } = useTanakaAmazingCommodities();
-  switch (randomSplashes[0]) {
+  switch (randomSplash[0]) {
     case SplashType.Tanaka:
       if (!initialized) {
         return <View />;
@@ -76,10 +76,17 @@ const AppOpenSplash = ({ setIsSplashReady }: Props) => {
           />
         );
       }
+    // @eslint-disable-next-line no-fallthrough
     case SplashType.Image:
     default:
       setTimeout(() => setIsSplashReady(true), 1);
-      return <Image source={randomSplashes[1]()} style={styles.fullscreen} />;
+      return (
+        <Image
+          source={randomSplash[1]()}
+          style={styles.fullscreen}
+          resizeMode={'contain'}
+        />
+      );
   }
 };
 

@@ -24,6 +24,7 @@ import { NULL_TRACK } from '@objects/Song';
 
 const { getState, setState } = appStore;
 const animatedVolume = new Animated.Value(1);
+export const isIOS = Platform.OS === 'ios';
 
 animatedVolume.addListener(state => TrackPlayer.setVolume(state.value));
 
@@ -163,7 +164,7 @@ export const resolveAndCache = async ({
   dry = false,
   resolver = resolveUrl,
 }: ResolveAndCache) => {
-  const resolvedUrl = await resolver({ song });
+  const resolvedUrl = await resolver({ song, iOS: isIOS });
   logger.debug(`[resolver] resolved ${song.bvid} to ${resolvedUrl.url}`);
   // a dry run doesnt cache to disk, but does resolve to the cached map.
   if (dry) return resolvedUrl;

@@ -27,11 +27,9 @@ export default () => {
       fileCache: true,
     })
       .fetch('GET', resolvedURL, customReqHeader(resolvedURL))
-      .then(res => {
-        const resolvedPath = res.path();
-        setTanaka(resolvedPath);
-        saveItem(StorageKeys.TANAKA_AMAZING_COMMODITIES, resolvedPath);
-      });
+      .then(res =>
+        saveItem(StorageKeys.TANAKA_AMAZING_COMMODITIES, res.path())
+      );
   };
 
   useEffect(() => {

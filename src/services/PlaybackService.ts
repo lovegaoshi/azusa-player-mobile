@@ -17,6 +17,7 @@ import {
   fadePause,
   cycleThroughPlaymode,
   resolveAndCache,
+  isIOS,
 } from '@utils/RNTPUtils';
 
 const { getState } = noxPlayingList;
@@ -25,7 +26,6 @@ const getAppStoreState = appStore.getState;
 const getPlayerSetting = playerSettingStore.getState;
 let lastBiliHeartBeat: string[] = ['', ''];
 const lastPlayedDuration: { val?: number } = { val: 0 };
-const isIOS = Platform.OS === 'ios';
 
 export async function AdditionalPlaybackService({
   noInterruption = false,
