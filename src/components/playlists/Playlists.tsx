@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useState } from 'react';
 import { IconButton, Text, TouchableRipple } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
 import { Pressable, View, StyleSheet } from 'react-native';
@@ -9,9 +9,7 @@ import DraggableFlatList, {
 
 import { useNoxSetting } from '@stores/useApp';
 import { NoxRoutes } from '@enums/Routes';
-import AddPlaylistButton, {
-  AddPlaylistButtonRef,
-} from '../buttons/AddPlaylistButton';
+import AddPlaylistButton from '../buttons/AddPlaylistButton';
 import { StorageKeys } from '@enums/Storage';
 import NewPlaylistDialog from '../dialogs/NewPlaylistDialog';
 import useAlert from '../dialogs/useAlert';
@@ -22,6 +20,7 @@ import usePlaylistBrowseTree from '@hooks/usePlaylistBrowseTree';
 import { BottomTabRouteIcons as RouteIcons } from '@enums/BottomTab';
 
 export default () => {
+  const [dialogOpen, setDialogOpen] = useState(false);
   const navigation = useNavigation();
   const currentPlaylist = useNoxSetting(state => state.currentPlaylist);
   const currentPlayingList = useNoxSetting(state => state.currentPlayingList);
@@ -29,7 +28,6 @@ export default () => {
   const playlistIds = useNoxSetting(state => state.playlistIds);
   const playerStyle = useNoxSetting(state => state.playerStyle);
   const playerSetting = useNoxSetting(state => state.playerSetting);
-  const addPlaylistButtonRef = useRef<AddPlaylistButtonRef>(null);
   const getPlaylist = useNoxSetting(state => state.getPlaylist);
   const setCurrentPlaylist = useNoxSetting(state => state.setCurrentPlaylist);
   const setPlaylistIds = useNoxSetting(state => state.setPlaylistIds);
@@ -111,12 +109,7 @@ export default () => {
     <View style={styles.flexContainer}>
       <TouchableRipple
         style={styles.addPlaylistButtonContainer}
-        onPress={
-          // HACK: tooo lazy to lift this state up...
-          addPlaylistButtonRef.current
-            ? () => addPlaylistButtonRef.current!.setOpen()
-            : () => undefined
-        }
+        onPress={() => setDialogOpen(true)}
       >
         <View style={styles.addPlaylistButtonContent}>
           <IconButton
@@ -124,7 +117,7 @@ export default () => {
             onPress={() => goToPlaylist(StorageKeys.FAVORITE_PLAYLIST_KEY)}
           />
           <ShuffleAllButton />
-          <AddPlaylistButton ref={addPlaylistButtonRef} />
+          <AddPlaylistButton open={dialogOpen} setOpen={setDialogOpen} />
           <TimerButton />
           <View style={styles.addPlaylistButtonSpacer} />
           {false && (

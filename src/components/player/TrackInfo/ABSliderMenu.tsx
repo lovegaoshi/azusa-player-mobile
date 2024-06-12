@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, useImperativeHandle } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Menu } from 'react-native-paper';
 import { useTranslation } from 'react-i18next';
 import { useProgress } from 'react-native-track-player';
@@ -11,21 +11,19 @@ import { seconds2MMSS as formatSeconds } from '@utils/Utils';
 import { addABRepeat } from '@stores/appStore';
 
 interface Props {
-  song: NoxMedia.Song;
   closeMenu?: () => void;
+  song: NoxMedia.Song;
 }
 
-interface ABSRef {
+interface SliderProps {
   range: [number, number];
+  setRange: (range: [number, number]) => void;
 }
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-const ABSlider = React.forwardRef<ABSRef, Props>(({ song }: Props, ref) => {
+const ABSlider = ({ range, setRange }: SliderProps) => {
   const { duration } = useProgress();
   const playerStyle = useNoxSetting(state => state.playerStyle);
   const currentABRepeat = useNoxSetting(state => state.currentABRepeat);
-  const [range, setRange] = useState<[number, number]>([0, 1]);
-  useImperativeHandle(ref, () => ({ range }), [range]);
 
   useEffect(() => setRange(currentABRepeat), [currentABRepeat]);
 
@@ -54,13 +52,13 @@ const ABSlider = React.forwardRef<ABSRef, Props>(({ song }: Props, ref) => {
       />
     </View>
   );
-});
+};
 
 const ABSliderMenu = ({ song, closeMenu }: Props) => {
   const { t } = useTranslation();
   const [dialogVisible, setDialogVisible] = useState(false);
   const setCurrentABRepeat = useNoxSetting(state => state.setCurrentABRepeat);
-  const ABSSliderRef = useRef<ABSRef>(null);
+  const [range, setRange] = useState<[number, number]>([0, 1]);
 
   const toggleDialogVisible = () => {
     if (closeMenu) closeMenu();
@@ -69,10 +67,8 @@ const ABSliderMenu = ({ song, closeMenu }: Props) => {
 
   const onSubmit = () => {
     toggleDialogVisible();
-    if (ABSSliderRef.current) {
-      setCurrentABRepeat(ABSSliderRef.current.range);
-      addABRepeat(song, ABSSliderRef.current.range);
-    }
+    setCurrentABRepeat(range);
+    addABRepeat(song, range);
   };
 
   return (
@@ -88,7 +84,7 @@ const ABSliderMenu = ({ song, closeMenu }: Props) => {
         onClose={toggleDialogVisible}
         onSubmit={onSubmit}
       >
-        <ABSlider song={song} ref={ABSSliderRef} />
+        <ABSlider range={range} setRange={setRange} />
       </GenericDialog>
     </>
   );

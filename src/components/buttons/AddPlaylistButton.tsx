@@ -1,4 +1,4 @@
-import React, { useImperativeHandle, useState } from 'react';
+import React from 'react';
 import { IconButton } from 'react-native-paper';
 import { ViewStyle } from 'react-native';
 
@@ -10,33 +10,26 @@ interface Props {
   fromList?: NoxMedia.Playlist;
   icon?: string;
   style?: ViewStyle;
+  open: boolean;
+  setOpen: (v: boolean) => void;
 }
 
-export interface AddPlaylistButtonRef {
-  setOpen: () => void;
-}
-
-export default React.forwardRef(
-  ({ fromList, icon = ICON, style = {} }: Props, ref) => {
-    const [dialogOpen, setDialogOpen] = useState(false);
-    useImperativeHandle(ref, () => ({ setOpen: () => setDialogOpen(true) }), [
-      dialogOpen,
-    ]);
-
-    return (
-      <React.Fragment>
-        <IconButton
-          icon={icon}
-          onPress={() => setDialogOpen(true)}
-          style={style}
-        />
-        <Dialog
-          visible={dialogOpen}
-          fromList={fromList}
-          onClose={() => setDialogOpen(false)}
-          onSubmit={() => setDialogOpen(false)}
-        />
-      </React.Fragment>
-    );
-  }
-);
+export default ({
+  fromList,
+  icon = ICON,
+  style = {},
+  open,
+  setOpen,
+}: Props) => {
+  return (
+    <React.Fragment>
+      <IconButton icon={icon} onPress={() => setOpen(true)} style={style} />
+      <Dialog
+        visible={open}
+        fromList={fromList}
+        onClose={() => setOpen(false)}
+        onSubmit={() => setOpen(false)}
+      />
+    </React.Fragment>
+  );
+};
