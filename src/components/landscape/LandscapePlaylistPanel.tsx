@@ -1,5 +1,5 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { Dimensions, View } from 'react-native';
+import { Dimensions, View, ViewStyle } from 'react-native';
 
 import { NoxRoutes } from '@enums/Routes';
 import Explore from '../explore/View';
@@ -9,6 +9,10 @@ import Playlist from '../playlist/View';
 import Playlists from '../playlists/Playlists';
 
 const Stack = createNativeStackNavigator();
+
+const WrappedLyricView = ({ panelStyle }: { panelStyle: ViewStyle }) => (
+  <LandscapeLyricView panelStyle={panelStyle} />
+);
 
 interface Props {
   panelWidth: number;
@@ -20,14 +24,12 @@ export default ({ panelWidth }: Props) => {
     height: Dimensions.get('window').height,
   };
 
-  const WrappedLyricView = () => <LandscapeLyricView panelStyle={panelStyle} />;
-
   return (
     <View style={panelStyle}>
       <Stack.Navigator>
         <Stack.Screen
           name={NoxRoutes.Lyrics}
-          component={WrappedLyricView}
+          component={() => <WrappedLyricView panelStyle={panelStyle} />}
           options={{ headerShown: false }}
         />
         <Stack.Screen

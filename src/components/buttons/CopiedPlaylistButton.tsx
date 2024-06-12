@@ -34,7 +34,7 @@ export const CopiedPlaylistButton = ({
   );
 };
 
-interface menuProps {
+interface MenuProps {
   getFromListOnClick: () => NoxMedia.Playlist;
   onSubmit?: () => void;
   onCancel?: () => void;
@@ -43,7 +43,7 @@ export const CopiedPlaylistMenuItem = ({
   getFromListOnClick,
   onSubmit = () => undefined,
   onCancel = () => undefined,
-}: menuProps) => {
+}: MenuProps) => {
   const { t } = useTranslation();
   const [dialogOpen, setDialogOpen] = useState(false);
   const [fromList, setFromList] =

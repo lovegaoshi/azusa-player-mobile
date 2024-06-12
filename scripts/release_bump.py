@@ -19,6 +19,7 @@ VersionUpdateDict = {
     3: VersionUpdate.PATCH
 }
 
+VersionPath = Path('./src/enums/Version.ts')
 
 def autoincrease_version(current_version=get_version(), inc=VersionUpdate.PATCH, append=''):
     rematch = re.compile(r'(\d+)\.(\d+)\.(\d+)').match(current_version)
@@ -54,18 +55,18 @@ if __name__ == '__main__':
     args = parser.parse_args()
     version = get_version()
     if args.dev:
-        fix_content(Path('./src/enums/Version.ts'), lambda line: line.replace(
+        fix_content(VersionPath, lambda line: line.replace(
             version, f'{datetime.now().strftime("%Y.%m.%d")}{args.devstr}'
         ))
     elif args.devstr != '-dev':
-        fix_content(Path('./src/enums/Version.ts'), lambda line: line.replace(
+        fix_content(VersionPath, lambda line: line.replace(
             version, f'{version}{args.devstr}'
         ))
     else:
         subprocess.call(['git', 'switch', 'master'])
         new_version = autoincrease_version(
             current_version=version, inc=VersionUpdateDict[args.inc])
-        fix_content(Path('./src/enums/Version.ts'), lambda line: line.replace(
+        fix_content(VersionPath, lambda line: line.replace(
             version, new_version
         ))
         subprocess.call(['git', 'commit', '-am', f'release: {new_version}'])

@@ -8,6 +8,13 @@ import { MUSICFREE } from '@utils/mediafetch/musicfree';
 import { getMusicFreePlugin, setMusicFreePlugin } from '@utils/ChromeStorage';
 import { StyleSheet } from 'react-native';
 
+const MusicFreeIcon = () => (
+  <Image
+    source={require('@assets/icons/musicfree.png')}
+    style={style.musicFreeIcon}
+  />
+);
+
 export default () => {
   const { t } = useTranslation();
   const [visible, setVisible] = React.useState(false);
@@ -47,12 +54,7 @@ export default () => {
   return (
     <>
       <SettingListItem
-        icon={() => (
-          <Image
-            source={require('@assets/icons/musicfree.png')}
-            style={style.musicFreeIcon}
-          />
-        )}
+        icon={MusicFreeIcon}
         settingName="MusicFree"
         onPress={onClick}
         settingCategory="PluginSettings"

@@ -7,7 +7,7 @@ import { dummySongObj } from '@objects/Song';
 
 const ICON = 'pencil';
 
-interface menuProps {
+interface MenuProps {
   getSongOnClick: () => NoxMedia.Song;
   disabled?: boolean;
   onSubmit?: (rename: string) => void;
@@ -19,7 +19,7 @@ export default ({
   disabled = false,
   onSubmit = (rename: string) => console.log(rename),
   onCancel = () => undefined,
-}: menuProps) => {
+}: MenuProps) => {
   const { t } = useTranslation();
   const [dialogOpen, setDialogOpen] = useState(false);
   const [song, setSong] = useState(dummySongObj);

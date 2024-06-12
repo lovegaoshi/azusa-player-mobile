@@ -44,6 +44,10 @@ const CombinedDefaultTheme = merge(MD3LightTheme, LightTheme);
 const CombinedDarkTheme = merge(MD3DarkTheme, DarkTheme);
 const PlayerStyle = { backgroundColor: 'transparent' };
 
+const HomeIcon = () => <IconButton icon={ScreenIcons.HomeScreen} />;
+const ExploreIcon = () => <IconButton icon={ScreenIcons.ExploreScreen} />;
+const SettingIcon = () => <IconButton icon={ScreenIcons.SettingScreen} />;
+
 interface Props extends NoxComponent.NavigationProps {
   setNavigation?: (val: DrawerNavigationProp<ParamListBase>) => void;
 }
@@ -120,7 +124,7 @@ const AzusaPlayer = () => {
             <Drawer.Screen
               name={NoxRoutes.PlayerHome}
               options={{
-                drawerIcon: () => <IconButton icon={ScreenIcons.HomeScreen} />,
+                drawerIcon: HomeIcon,
                 title: String(t('appDrawer.homeScreenName')),
                 header: () => null,
               }}
@@ -129,9 +133,7 @@ const AzusaPlayer = () => {
             <Drawer.Screen
               name={NoxRoutes.Explore}
               options={{
-                drawerIcon: () => (
-                  <IconButton icon={ScreenIcons.ExploreScreen} />
-                ),
+                drawerIcon: ExploreIcon,
                 title: String(t('appDrawer.exploreScreenName')),
                 header: () => null,
               }}
@@ -140,9 +142,7 @@ const AzusaPlayer = () => {
             <Drawer.Screen
               name={NoxRoutes.Settings}
               options={{
-                drawerIcon: () => (
-                  <IconButton icon={ScreenIcons.SettingScreen} />
-                ),
+                drawerIcon: SettingIcon,
                 title: String(t('appDrawer.settingScreenName')),
                 header: () => null,
               }}
