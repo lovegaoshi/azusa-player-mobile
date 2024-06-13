@@ -11,7 +11,7 @@ PODS:
     - ExpoModulesCore
   - EXConstants (16.0.1):
     - ExpoModulesCore
-  - Expo (51.0.11):
+  - Expo (51.0.13):
     - ExpoModulesCore
   - ExpoAsset (10.0.8):
     - ExpoModulesCore
@@ -1856,7 +1856,7 @@ SPEC CHECKSUMS:
   DoubleConversion: 76ab83afb40bddeeee456813d9c04f67f78771b5
   EXApplication: c08200c34daca7af7fd76ac4b9d606077410e8ad
   EXConstants: 9a008dbf262550884e6280dea95b81b51f65ea6f
-  Expo: 8af2fbdfe35b232c2361cc9b9f09a5719ceb4635
+  Expo: 5fb0613e7cfc806c500400eabb96b1a75473be1b
   ExpoAsset: 100b840e5dc1e1619df2d7c76441d33fb84a3202
   ExpoClipboard: 23d203f5d4843699fbc45be1cc4fe1fbd811a6fa
   ExpoCrypto: 156078f266bf28f80ecf5e2a9c3a0d6ffce07a1c

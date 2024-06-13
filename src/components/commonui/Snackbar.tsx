@@ -5,6 +5,8 @@ import { Snackbar, Portal, ActivityIndicator } from 'react-native-paper';
 import useSnack, { InfiniteDuration } from '@stores/useSnack';
 import { useNoxSetting } from '@stores/useApp';
 
+const Loading = () => <ActivityIndicator />;
+
 export default function SnackBar() {
   const { snackMsg, snackDuration, snackVisible, snackOnDismiss } = useSnack();
   const playerStyle = useNoxSetting(state => state.playerStyle);
@@ -17,9 +19,7 @@ export default function SnackBar() {
         visible={snackVisible}
         onDismiss={snackOnDismiss}
         duration={snackDuration}
-        icon={
-          persisting ? () => <ActivityIndicator></ActivityIndicator> : undefined
-        }
+        icon={persisting ? Loading : undefined}
         onIconPress={persisting ? () => undefined : undefined}
       >
         {snackMsg}

@@ -19,6 +19,24 @@ import PlaylistItem from '@components/playlists/PlaylistItem';
 import usePlaylistBrowseTree from '@hooks/usePlaylistBrowseTree';
 import { BottomTabRouteIcons as RouteIcons } from '@enums/BottomTab';
 
+interface NewButtonProps {
+  setNewPlaylistDialogOpen: (v: boolean) => void;
+}
+const SearchPlaylistAsNewButton = ({
+  setNewPlaylistDialogOpen,
+}: NewButtonProps) => {
+  const playerStyle = useNoxSetting(state => state.playerStyle);
+  return (
+    <Pressable onPress={() => setNewPlaylistDialogOpen(true)}>
+      <IconButton
+        icon="new-box"
+        size={25}
+        iconColor={playerStyle.colors.primary}
+      />
+    </Pressable>
+  );
+};
+
 export default () => {
   const [dialogOpen, setDialogOpen] = useState(false);
   const navigation = useNavigation();
@@ -63,16 +81,6 @@ export default () => {
       });
     }
   };
-
-  const SearchPlaylistAsNewButton = () => (
-    <Pressable onPress={() => setNewPlaylistDialogOpen(true)}>
-      <IconButton
-        icon="new-box"
-        size={25}
-        iconColor={playerStyle.colors.primary}
-      />
-    </Pressable>
-  );
 
   const renderItem = ({ item, drag, isActive }: RenderItemParams<string>) => {
     const playlist = playlists[item];
@@ -142,7 +150,11 @@ export default () => {
       >
         <PlaylistItem
           item={playlists[StorageKeys.SEARCH_PLAYLIST_KEY]}
-          icon={SearchPlaylistAsNewButton()}
+          icon={
+            <SearchPlaylistAsNewButton
+              setNewPlaylistDialogOpen={setNewPlaylistDialogOpen}
+            />
+          }
           leadColor={
             currentPlayingList.id ===
             playlists[StorageKeys.SEARCH_PLAYLIST_KEY].id

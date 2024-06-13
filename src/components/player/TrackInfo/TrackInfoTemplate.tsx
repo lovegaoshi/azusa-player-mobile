@@ -28,35 +28,19 @@ interface Props {
   children?: React.JSX.Element;
   containerStyle?: ViewStyle;
 }
-const TrackInfoTemplate: React.FC<Props> = ({
+const AlbumArt = ({
   track,
   windowWidth,
   windowHeight,
   onImagePress = () => undefined,
-  children,
-  containerStyle,
-}) => {
+}: Props) => {
   const playerSetting = useNoxSetting(state => state.playerSetting);
-  const playerStyle = useNoxSetting(state => state.playerStyle);
-  const currentPlayingList = useNoxSetting(state => state.currentPlayingList);
   const coverStyle = {
     width: windowWidth ?? '100%',
     height: windowHeight ?? '100%',
   };
 
-  const getTrackLocation = () => {
-    return track?.song
-      ? `#${
-          currentPlayingList.songList.findIndex(
-            song => song.id === track.song.id
-          ) + 1
-        } - ${NoxPlayingList.getState().currentPlayingIndex + 1}/${
-          currentPlayingList.songList.length
-        }`
-      : '';
-  };
-
-  const AlbumArt = () => (
+  return (
     <TouchableWithoutFeedback onPress={onImagePress}>
       <Animated.View style={styles.container}>
         <Image
@@ -75,6 +59,24 @@ const TrackInfoTemplate: React.FC<Props> = ({
       </Animated.View>
     </TouchableWithoutFeedback>
   );
+};
+
+const TrackInfoTemplate: React.FC<Props> = props => {
+  const { track, windowWidth, children, containerStyle } = props;
+  const playerStyle = useNoxSetting(state => state.playerStyle);
+  const currentPlayingList = useNoxSetting(state => state.currentPlayingList);
+
+  const getTrackLocation = () => {
+    return track?.song
+      ? `#${
+          currentPlayingList.songList.findIndex(
+            song => song.id === track.song.id
+          ) + 1
+        } - ${NoxPlayingList.getState().currentPlayingIndex + 1}/${
+          currentPlayingList.songList.length
+        }`
+      : '';
+  };
 
   const textStyle = [
     styles.titleText,
@@ -91,7 +93,7 @@ const TrackInfoTemplate: React.FC<Props> = ({
 
   return (
     <View style={[styles.container, containerStyle, { width: windowWidth }]}>
-      {children ?? <AlbumArt />}
+      {children ?? <AlbumArt {...props} />}
       <SongTitle style={textStyle} text={track?.title} />
       <View style={styles.infoContainer}>
         <View style={styles.favoriteButtonContainer}>

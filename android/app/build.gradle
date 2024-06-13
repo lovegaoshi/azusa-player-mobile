@@ -127,6 +127,11 @@ android {
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
         }
     }
+
+    buildFeatures {
+        buildConfig = true
+    }
+
     compileOptions {
       sourceCompatibility JavaVersion.VERSION_17
       targetCompatibility JavaVersion.VERSION_17
@@ -158,7 +163,7 @@ dependencies {
     } else {
         implementation jscFlavor
     }
-    implementation "androidx.core:core-ktx:1.13.0"
+    implementation "androidx.core:core-ktx:1.13.1"
     implementation 'androidx.core:core-google-shortcuts:1.1.0'
 }
 
