@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import SecureStore from 'expo-secure-store';
+import * as SecureStore from 'expo-secure-store';
 
 import { chunkArray, arrayToObject } from '../utils/Utils';
 import { StorageKeys } from '@enums/Storage';
