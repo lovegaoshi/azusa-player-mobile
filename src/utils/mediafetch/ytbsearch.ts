@@ -40,9 +40,7 @@ const fetchInnerTuneSearch = async (
   ]);
   return searchData.flatMap(searchList =>
     searchList.categories[0].results.flatMap((val: any) =>
-      val && val.videoId
-        ? musePlaylistItemToNoxSong(val, { title: val.title })
-        : []
+      val?.videoId ? musePlaylistItemToNoxSong(val, { title: val.title }) : []
     )
   );
 };

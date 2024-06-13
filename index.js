@@ -4,7 +4,6 @@ import { AppRegistry } from 'react-native';
 import TrackPlayer from 'react-native-track-player';
 import 'react-native-gesture-handler';
 import 'react-native-url-polyfill/auto';
-// import codePush from 'react-native-code-push';
 
 import App from './src/App';
 import { PlaybackService } from './src/services';

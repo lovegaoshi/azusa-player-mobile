@@ -43,7 +43,7 @@ const parseReplayGainLog = (log: string) => {
     return 0;
   }
   logger.debug(`[ffmpeg] r128gain resolved: ${match[1]} dB`);
-  if (match[1][0] === '+') {
+  if (match[1].startsWith('+')) {
     logger.debug('[ffmpeg] r128gain of positive dB is not yet supported!');
   }
   return Number(match[1]);

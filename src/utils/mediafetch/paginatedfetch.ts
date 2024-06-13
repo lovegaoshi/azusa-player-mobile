@@ -60,11 +60,7 @@ export const fetchPaginatedAPI = async ({
   const data = getJSONData(await jsonify(res.clone()));
   const mediaCount = getMediaCount(data);
   const BVids: string[] = [];
-  const pagesPromises: Promise<Response>[] = [
-    new Promise(resolve => {
-      resolve(res);
-    }),
-  ];
+  const pagesPromises: Promise<Response>[] = [];
   for (
     let page = startPage + 1, n = Math.ceil(mediaCount / getPageSize(data));
     page <= n;

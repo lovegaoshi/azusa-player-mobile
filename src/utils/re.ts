@@ -60,7 +60,7 @@ export const extractParenthesis = (filename: string) => {
 export const extractWith = (filename: string, reExpressions: RegExp[] = []) => {
   for (const regex of reExpressions) {
     const extracted = regex.exec(filename);
-    if (extracted !== null && extracted[1]) {
+    if (extracted?.[1]) {
       return extracted[1];
     }
   }

@@ -49,7 +49,7 @@ export const fetchInnerTunePlaylist = async (
   );
   return playlistData.tracks
     .flatMap(val =>
-      val && val.videoId && !favList.includes(val.videoId)
+      val?.videoId && !favList.includes(val.videoId)
         ? musePlaylistItemToNoxSong(val, playlistData)
         : []
     )

@@ -29,7 +29,7 @@ export default () => {
   const track = useActiveTrack();
 
   useTrackPlayerEvents([Event.PlaybackActiveTrackChanged], event => {
-    if (event.track && event.track.song) {
+    if (event.track?.song) {
       setCurrentPlayingId(event.track.song.id);
     }
   });
