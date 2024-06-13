@@ -7,6 +7,12 @@
     <img alt="GitHub release (latest by date)" src="https://github.com/lovegaoshi/azusa-player-mobile/actions/workflows/android-weekly.yml/badge.svg?branch=master">
   </a>
   <a href="https://github.com/lovegaoshi/azusa-player-mobile/releases">
+    <img alt="GitHub release (latest by date)" src="https://github.com/lovegaoshi/azusa-player-mobile/actions/workflows/ios-weekly.yml/badge.svg?branch=master">
+  </a>
+</p>
+  
+<p align="center">
+  <a href="https://github.com/lovegaoshi/azusa-player-mobile/releases">
     <img alt="GitHub all releases" src="https://img.shields.io/github/downloads/lovegaoshi/azusa-player-mobile/total">
   </a>
   <a href="https://github.com/lovegaoshi/azusa-player-mobile/releases">
