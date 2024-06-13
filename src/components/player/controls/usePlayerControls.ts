@@ -44,10 +44,17 @@ export default () => {
 
   useTrackPlayerEvents([Event.MetadataCommonReceived], event => {
     console.log('Event.MetadataCommonReceived', event.metadata);
-    if (!track?.song?.metadataOnReceived || !event.metadata) return;
-    const newMetadata: Partial<NoxMedia.Song> = {};
+    if (
+      !track?.song?.metadataOnReceived ||
+      Object.keys(event.metadata).length === 0
+    )
+      return;
+    const newMetadata: Partial<NoxMedia.Song> = { metadataOnReceived: false };
     if (event.metadata.artist) newMetadata.singer = event.metadata.artist;
-    if (event.metadata.title) newMetadata.name = event.metadata.title;
+    if (event.metadata.title) {
+      newMetadata.name = event.metadata.title;
+      newMetadata.parsedName = event.metadata.title;
+    }
     if (event.metadata.albumTitle)
       newMetadata.album = event.metadata.albumTitle;
     // @ts-expect-error
