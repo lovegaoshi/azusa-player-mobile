@@ -16,7 +16,7 @@ import { Source } from '@enums/MediaFetch';
 const { getState } = playerSettingStore;
 const isIOS = Platform.OS === 'ios';
 
-interface optionsProps {
+interface OptionsProps {
   max?: number;
   [key: string]: any;
 }
@@ -32,7 +32,7 @@ class NoxMediaCache {
   cache: LRUCache<string, string>;
 
   constructor(
-    options: optionsProps,
+    options: OptionsProps,
     savedCache?: [string, LRUCache.Entry<string>][]
   ) {
     this.cache = new LRUCache<string, string>({
@@ -203,7 +203,7 @@ const cache: NoxCaches = {
 };
 
 export const initCache = async (
-  options: optionsProps,
+  options: OptionsProps,
   savedCache?: [string, LRUCache.Entry<string>][]
 ) => {
   try {

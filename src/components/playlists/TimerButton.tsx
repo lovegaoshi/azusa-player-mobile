@@ -10,11 +10,7 @@ export default () => {
   return (
     <React.Fragment>
       <IconButton icon="timer-outline" onPress={() => setTimerVisible(true)} />
-      <TimerDialog
-        visible={timerVisible}
-        onClose={onDismiss}
-        onSubmit={onDismiss}
-      />
+      <TimerDialog visible={timerVisible} onClose={onDismiss} />
     </React.Fragment>
   );
 };

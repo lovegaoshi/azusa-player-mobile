@@ -49,7 +49,7 @@ const regexFetch = async ({
   reExtracted,
   favList = [],
 }: NoxNetwork.RegexFetchProps): Promise<NoxNetwork.NoxRegexFetch> => ({
-  songList: await songFetch(reExtracted[1]!, favList),
+  songList: await songFetch(reExtracted[1], favList),
 });
 
 const resolveURLPrefetch = async (song: NoxMedia.Song) => ({ url: song.bvid });

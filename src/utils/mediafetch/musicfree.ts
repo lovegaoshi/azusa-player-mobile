@@ -166,7 +166,7 @@ const resolverWrapper = (
   resolver(
     {
       ...v,
-      id: v.id.substring((v.source?.length || -1) + 1),
+      id: v.id.substring((v.source?.length ?? -1) + 1),
     } as unknown as IMusic.IMusicItem,
     quality
   );

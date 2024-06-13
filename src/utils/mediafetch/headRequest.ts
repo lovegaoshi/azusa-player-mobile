@@ -29,7 +29,6 @@ const headFetch = async (url: string): Promise<NoxMedia.Song | undefined> => {
   } catch (e) {
     console.warn(e);
   }
-  return;
 };
 
 const resolveURL = async (song: NoxMedia.Song) => ({ url: song.bvid });

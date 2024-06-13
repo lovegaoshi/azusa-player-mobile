@@ -10,12 +10,12 @@ export enum LOGLEVEL {
   NONE = 5,
 }
 
-export interface log {
+interface Log {
   level: string;
   msg: any;
 }
 
-export const logStore = createStore<{ logs: log[]; logLevel: number }>(() => ({
+export const logStore = createStore<{ logs: Log[]; logLevel: number }>(() => ({
   logs: [],
   logLevel: LOGLEVEL.ERROR,
 }));

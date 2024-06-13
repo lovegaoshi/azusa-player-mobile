@@ -68,7 +68,7 @@ const MainBackground = ({ children }: { children: React.JSX.Element }) => {
                   }
                 : undefined
             }
-            repeat={bkgrdImg.toA ? false : true}
+            repeat={bkgrdImg.toA !== undefined}
             muted
             resizeMode="cover"
             disableFocus={true}

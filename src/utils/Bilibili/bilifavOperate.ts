@@ -12,7 +12,7 @@ const BILI_CREFAVLIST_API = 'https://api.bilibili.com/x/v3/fav/folder/add';
 
 // https://api.bilibili.com/x/v3/fav/folder/created/list-all?up_mid=3493085134719196
 // not sure what fid means...
-export interface GETFAVLIST_RES {
+export interface GetFavlistRes {
   id: number;
   title: string;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -28,7 +28,7 @@ export const getBiliFavlist = async (
   if (!user.mid) return [];
   const res = await fetch(BILI_GETFAVLIST_API.replace('{mid}', user.mid));
   const json = await res.json();
-  const favlists = json.data.list as GETFAVLIST_RES[];
+  const favlists = json.data.list as GetFavlistRes[];
   return matchingTitle
     ? favlists.filter(val => val.title === matchingTitle)
     : favlists;
@@ -61,7 +61,7 @@ const getOrInsertBiliFavlist = async (
 ) => {
   const getResult = await getBiliFavlist(usermid, matchingTitle);
   if (getResult.length > 0) {
-    return getResult[0]!.id;
+    return getResult[0].id;
   }
   return createBiliFavlist(matchingTitle);
 };

@@ -42,8 +42,8 @@ const regexFetch = async ({
 }: NoxNetwork.RegexFetchProps): Promise<NoxNetwork.NoxRegexFetch> => ({
   songList: await biliShazamOnSonglist(
     await fetchBiliColleList(
-      reExtracted[1]!,
-      reExtracted[2]!,
+      reExtracted[1],
+      reExtracted[2],
       progressEmitter,
       favList
     ),

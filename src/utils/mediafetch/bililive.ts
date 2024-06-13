@@ -70,7 +70,7 @@ const fetchVideoInfo = (aid: string) =>
 const regexFetch = async ({
   reExtracted,
 }: NoxNetwork.RegexFetchProps): Promise<NoxNetwork.NoxRegexFetch> => ({
-  songList: [await fetchVideoInfo(reExtracted[1]!)],
+  songList: [await fetchVideoInfo(reExtracted[1])],
 });
 
 export const _resolveURL = async (

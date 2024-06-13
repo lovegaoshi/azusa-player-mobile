@@ -10,17 +10,17 @@ import { logger } from '../Logger';
 const URL_VIDEO_TAGS =
   'https://api.bilibili.com/x/web-interface/view/detail/tag?bvid={bvid}&cid={cid}';
 
-interface ids {
+interface Ids {
   bvid: string;
   cid: string;
 }
-const fetchVideoTagPromise = ({ bvid, cid }: ids) => {
+const fetchVideoTagPromise = ({ bvid, cid }: Ids) => {
   return biliTagApiLimiter.schedule(() =>
     fetchVideoTagPromiseRaw({ bvid, cid })
   );
 };
 
-const fetchVideoTagPromiseRaw = async ({ bvid, cid }: ids) => {
+const fetchVideoTagPromiseRaw = async ({ bvid, cid }: Ids) => {
   const req = await bfetch(
     URL_VIDEO_TAGS.replace('{bvid}', bvid).replace('{cid}', cid)
   );

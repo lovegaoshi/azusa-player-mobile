@@ -22,7 +22,7 @@ export const fetchAudioInfo = (bvid: string, progressEmitter?: () => void) =>
 const regexFetch = async ({
   reExtracted,
 }: NoxNetwork.RegexFetchProps): Promise<NoxNetwork.NoxRegexFetch> => {
-  const audioInfo = await fetchAudioInfo(reExtracted[1]!);
+  const audioInfo = await fetchAudioInfo(reExtracted[1]);
   return { songList: audioInfo ?? [] };
 };
 

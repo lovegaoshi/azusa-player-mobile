@@ -87,7 +87,7 @@ const regexFetch = async ({
   reExtracted,
   progressEmitter = () => undefined,
 }: NoxNetwork.RegexFetchProps): Promise<NoxNetwork.NoxRegexFetch> => ({
-  songList: await getSubList({ uid: reExtracted[1]!, progressEmitter }),
+  songList: await getSubList({ uid: reExtracted[1], progressEmitter }),
 });
 
 export default {

@@ -51,7 +51,7 @@ const fetchYTPlaylist = async (
       .filter((val: NoxMedia.Song) => !favList.includes(val.bvid));
   return results
     .filter(val => val !== undefined)
-    .reduce((acc, curr) => acc!.concat(curr!), [] as NoxMedia.Song[]);
+    .reduce((acc, curr) => acc.concat(curr), [] as NoxMedia.Song[]);
 };
 const regexFetch = async ({
   reExtracted,

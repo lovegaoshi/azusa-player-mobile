@@ -12,16 +12,16 @@ export const createStyle = (
     metaData: {
       ...refTheme.metaData,
       // HACK: sure its bad but works.
-      ...((customStyle.metaData || {}) as any),
+      ...((customStyle.metaData ?? {}) as any),
     },
     colors: {
       ...refTheme.colors,
-      ...((customStyle.colors || refTheme.colors) as any),
+      ...(customStyle.colors ?? refTheme.colors),
     },
 
     customColors: {
       ...refTheme.customColors,
-      ...((customStyle.customColors || {}) as any),
+      ...((customStyle.customColors ?? {}) as any),
     },
 
     playerControlIconContained: customStyle.playerControlIconContained as any,

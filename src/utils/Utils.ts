@@ -109,7 +109,7 @@ export const timeout = (delay: number) => {
   return new Promise(res => setTimeout(res, delay));
 };
 
-interface regexMatchOperationsProps<K, T> {
+interface RegexMatchOperationsProps<K, T> {
   song: K;
   regexOperations: [RegExp, (song: K) => T][];
   fallback: (song: K) => T;
@@ -120,7 +120,7 @@ export const regexMatchOperations = <K, T>({
   regexOperations,
   fallback,
   regexMatching,
-}: regexMatchOperationsProps<K, T>) => {
+}: RegexMatchOperationsProps<K, T>) => {
   const regexMatch = regexMatching(song);
   for (const reExtraction of regexOperations) {
     const reExtracted = reExtraction[0].exec(regexMatch);
@@ -131,14 +131,14 @@ export const regexMatchOperations = <K, T>({
   return fallback(song);
 };
 
-interface anyDict {
+interface AnyDict {
   [key: string]: never;
 }
 export const arrayToObject = (val: [string, never][]) =>
   val.reduce((acc, curr) => {
     acc[curr[0]] = curr[1];
     return acc;
-  }, {} as anyDict);
+  }, {} as AnyDict);
 
 export const r128gain2Volume = (gain: number) => {
   if (gain > 0) {

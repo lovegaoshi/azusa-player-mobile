@@ -101,7 +101,7 @@ export const downloadR128GainDB = async () => {
         itemid: key,
       };
     }
-    newR128GainDB[key].r128gain = value === null ? undefined : value;
+    newR128GainDB[key].r128gain = value ?? undefined;
   });
   Object.entries(currentABRepeat).forEach(([key, value]) => {
     if (oldABgainKeys.includes(key)) return;

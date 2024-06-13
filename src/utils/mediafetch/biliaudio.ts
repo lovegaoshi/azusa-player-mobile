@@ -66,7 +66,7 @@ export const baFetch = async (auids: string[]) => {
 const regexFetch = async ({
   reExtracted,
 }: NoxNetwork.RegexFetchProps): Promise<NoxNetwork.NoxRegexFetch> => ({
-  songList: await baFetch([reExtracted[1]!]),
+  songList: await baFetch([reExtracted[1]]),
 });
 
 const resolveURL = async (song: NoxMedia.Song) => {

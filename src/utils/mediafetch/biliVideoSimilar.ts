@@ -42,7 +42,7 @@ const fetchBiliVideoSimilarList = async (bvid: string) => {
 const regexFetch = async ({
   reExtracted,
 }: NoxNetwork.RegexFetchProps): Promise<NoxNetwork.NoxRegexFetch> => ({
-  songList: await fetchBiliVideoSimilarList(reExtracted[1]!),
+  songList: await fetchBiliVideoSimilarList(reExtracted[1]),
 });
 
 export default {

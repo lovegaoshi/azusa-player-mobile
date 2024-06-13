@@ -99,7 +99,7 @@ const regexFetch = ({ reExtracted, useBiliTag }: NoxNetwork.RegexFetchProps) =>
   bvFetch({
     reExtracted,
     useBiliTag,
-    bvids: [reExtracted[1]!],
+    bvids: [reExtracted[1]],
   });
 
 interface FetchPlayURL {
