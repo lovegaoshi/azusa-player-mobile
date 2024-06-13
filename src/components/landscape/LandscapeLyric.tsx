@@ -7,10 +7,10 @@ interface Props {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   panelStyle?: any;
 }
-const LandscapeLyricView = ({ panelStyle }: Props) => {
+const LandscapeLyricView = React.memo(({ panelStyle }: Props) => {
   const track = useActiveTrack();
 
   return track ? <AlbumArt track={track} lyricStyle={panelStyle} /> : <></>;
-};
+});
 
 export default LandscapeLyricView;
