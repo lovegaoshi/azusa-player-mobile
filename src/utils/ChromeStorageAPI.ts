@@ -25,8 +25,6 @@ export const saveItem = async (
   setFunc: (k: string, v: string) => Promise<void> = AsyncStorage.setItem
 ) => {
   try {
-    // only enable this for serious debugging:P
-    // console.log('saving %s %s into Map', key, value);
     await setFunc(key, JSON.stringify(value));
   } catch (e) {
     console.error(e);

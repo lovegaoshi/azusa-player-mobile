@@ -51,7 +51,7 @@ export default () => {
         flex: 1,
       }}
     >
-      <View style={styles.contentContainer}>
+      <View style={styles.alignCenter}>
         <IconButton
           icon="plus-circle-outline"
           size={45}
@@ -68,7 +68,7 @@ export default () => {
         renderItem={({ item, index }) => (
           <View style={styles.rowView}>
             <TouchableRipple
-              style={styles.contentContainer}
+              style={[styles.contentContainer, styles.alignMiddle]}
               onPress={() => {
                 setCurrentCred(credList[index]);
                 setCredDialogOpen(true);

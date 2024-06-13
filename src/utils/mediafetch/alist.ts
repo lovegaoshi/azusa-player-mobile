@@ -63,7 +63,6 @@ const fetchAlistMediaContent = async (
       })
     ),
     json = await res.json();
-  console.log(json.data.content);
   for (const item of json.data.content) {
     if (item.is_dir) {
       if (!fastSearch) {
