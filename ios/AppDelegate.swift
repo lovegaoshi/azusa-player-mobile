@@ -43,15 +43,15 @@ class AppDelegate: EXAppDelegateWrapper, RNAppAuthAuthorizationFlowManager {
   }
 
   override func sourceURL(for bridge: RCTBridge) -> URL? {
-    return bundleURL()
+    #if DEBUG
+      return bundleURL()
+    #else
+      return Bundle.main.url(forResource:"main", withExtension:"jsbundle")
+    #endif
   }
   
   override func bundleURL() -> URL? {
-  #if true // DEBUG <--- problem?
     return RCTBundleURLProvider.sharedSettings().jsBundleURL(forBundleRoot: "index")
-  #else
-    return Bundle.main.url(forResource:"main", withExtension:"jsbundle")
-  #endif
   }
 
   // not exposed from RCTAppDelegate, recreating.
