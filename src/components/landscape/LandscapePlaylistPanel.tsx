@@ -23,10 +23,9 @@ export default ({ panelWidth }: Props) => {
   return (
     <View style={panelStyle}>
       <Stack.Navigator>
-        <Stack.Screen
-          name={NoxRoutes.Lyrics}
-          options={{ headerShown: false }}
-        >{() => <LandscapeLyricView panelStyle={panelStyle} />}</Stack.Screen>
+        <Stack.Screen name={NoxRoutes.Lyrics} options={{ headerShown: false }}>
+          {() => <LandscapeLyricView panelStyle={panelStyle} />}
+        </Stack.Screen>
         <Stack.Screen
           name={NoxRoutes.Playlist}
           component={Playlist}
