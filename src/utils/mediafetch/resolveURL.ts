@@ -4,6 +4,7 @@ import ytbvideoFetch from '@utils/mediafetch/ytbvideo';
 import bililiveFetch from './bililive';
 import biliBangumiFetch from './biliBangumi';
 import localFetch from '@utils/mediafetch/local';
+import alistFetch from './alist';
 import { resolver, MUSICFREE } from '@utils/mediafetch/musicfree';
 import headRequestFetch from './headRequest';
 import { logger } from '../Logger';
@@ -26,6 +27,7 @@ const regexResolveURLs: regResolve = [
   [biliBangumiFetch.regexResolveURLMatch, biliBangumiFetch.resolveURL],
   [headRequestFetch.regexResolveURLMatch, headRequestFetch.resolveURL],
   [localFetch.regexResolveURLMatch, localFetch.resolveURLPrefetch],
+  [alistFetch.regexResolveURLMatch, alistFetch.resolveURL],
 ];
 
 interface FetchPlayUrl {

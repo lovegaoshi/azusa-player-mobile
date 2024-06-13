@@ -7,6 +7,7 @@ export enum Source {
   biliLive = 'bililive',
   local = 'local',
   rawhttp = 'rawhttp',
+  alist = 'alist',
 }
 
 export enum BiliVolume {
@@ -30,3 +31,5 @@ MV	mv	193	为音乐作品配合拍摄或制作的音乐录影带（Music Video�
 电音(已下线)	electronic	194	以电子合成器、音乐软体等产生的电子声响制作的音乐	/v/music/electronic
 */
 export const BiliMusicTid = [28, 31, 59, 193]; // , 29
+
+export const AcceptableExtensions = ['mp3', 'flac', 'm4a', 'mp4', 'm3u8'];

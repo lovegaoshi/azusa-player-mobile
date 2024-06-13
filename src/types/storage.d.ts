@@ -68,6 +68,7 @@ declare global {
       lastPlayDuration: number;
       colorScheme: ColorSchemeName;
       defaultSearchOptions?: SearchOptions;
+      AListCred: AListCred[];
     }
 
     export interface initializedResults {
@@ -92,5 +93,7 @@ declare global {
     export interface DownloadDict {
       [key: string]: Promise<void | string>;
     }
+
+    type AListCred = [string, string];
   }
 }

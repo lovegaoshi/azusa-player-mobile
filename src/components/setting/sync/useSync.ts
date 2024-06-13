@@ -33,17 +33,17 @@ const useSync = () => {
     new Promise((resolve, reject) => {
       Alert.alert(
         t('Sync.NoxExtensionImportTitle'),
-        String(t('Sync.NoxExtensionImportMsg')),
+        t('Sync.NoxExtensionImportMsg'),
         [
           {
-            text: String(t('Sync.NoxExtensionCancel')),
+            text: t('Sync.NoxExtensionCancel'),
             onPress: () => {
               reject('user said no');
             },
             style: 'cancel',
           },
           {
-            text: String(t('Sync.NoxExtensionOverwrite')),
+            text: t('Sync.NoxExtensionOverwrite'),
             onPress: async () => {
               await clearPlaylistNImport(parsedContent);
               await initializeStores(await initPlayerObject());
@@ -51,7 +51,7 @@ const useSync = () => {
             },
           },
           {
-            text: String(t('Sync.NoxExtensionAppend')),
+            text: t('Sync.NoxExtensionAppend'),
             onPress: () => {
               setSyncCheckVisible(true);
               setNoxExtensionContent(

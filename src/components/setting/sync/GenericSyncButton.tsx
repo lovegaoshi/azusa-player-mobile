@@ -32,8 +32,8 @@ const ImportSyncFavButton = ({
       setSnack({ snackMsg: { success: t('Sync.DropboxDownloadSuccess') } });
     } else {
       errorHandling(
-        new Error(String(t('Sync.DropboxDownloadFail'))),
-        String(t('Sync.DropboxDownloadFail'))
+        new Error(t('Sync.DropboxDownloadFail')),
+        t('Sync.DropboxDownloadFail')
       );
     }
     setLoading(false);
@@ -67,7 +67,7 @@ const ExportSyncFavButton = ({
 
   const errorHandling = (
     e: Error,
-    msg = String(t('Sync.DropboxUploadFailSnackbar'))
+    msg = t('Sync.DropboxUploadFailSnackbar')
   ) => {
     logger.error(e);
     setSnack({ snackMsg: { success: msg } });

@@ -27,7 +27,7 @@ export default ({
             setSearchCategory(SearchRegex[entry]?.text);
             toggleVisible();
           }}
-          title={String(t(`PlaylistRegex.${entry}`))}
+          title={t(`PlaylistRegex.${entry}`)}
           key={index}
         />
       ))}

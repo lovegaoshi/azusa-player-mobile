@@ -27,11 +27,13 @@ export enum StorageKeys {
   MUSICFREE_PLUGIN = 'MusicFreePlugin',
   AA_PERMISSION = 'AndroidAutoPermission',
   TANAKA_AMAZING_COMMODITIES = 'TanakaAmazingCommodities',
+  ALIST_CRED = 'AlistCred',
 }
 
 export enum SearchOptions {
   BILIBILI = 'bilibili',
   YOUTUBE = 'youtube',
+  ALIST = 'alist',
 }
 
 export const AppID = 'NoxPlayerMobile';
@@ -73,6 +75,7 @@ export const DefaultSetting: NoxStorage.PlayerSettingDict = {
   accentColor: false,
   memoryEfficiency: false,
   useSuggestion: false,
+  enableBili: false,
 
   appID: AppID,
   language: undefined,

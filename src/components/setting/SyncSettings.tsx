@@ -111,7 +111,7 @@ export default () => {
       <GenericSelectDialog
         visible={selectVisible}
         options={currentSelectOption.options}
-        title={String(t('Sync.ExportLocation'))}
+        title={t('Sync.ExportLocation')}
         renderOptionTitle={currentSelectOption.renderOption}
         defaultIndex={currentSelectOption.defaultIndex}
         onClose={currentSelectOption.onClose}
@@ -119,7 +119,7 @@ export default () => {
       />
       <GenericCheckDialog
         visible={syncCheckVisible}
-        title={String(t('Sync.SyncCheck'))}
+        title={t('Sync.SyncCheck')}
         options={noxExtensionContent}
         onClose={() => setSyncCheckVisible(false)}
         onSubmit={syncPartialNoxExtension}

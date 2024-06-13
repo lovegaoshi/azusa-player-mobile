@@ -10,6 +10,7 @@ import { MUSICFREE } from '@utils/mediafetch/musicfree';
 import Icons from './Icons';
 import { useNoxSetting } from '@stores/useApp';
 import { rgb2Hex } from '@utils/Utils';
+import { isAndroid } from '@utils/RNUtils';
 
 const { NoxAndroidAutoModule } = NativeModules;
 
@@ -80,6 +81,11 @@ export default ({
         onPress={() => setDefaultSearch(SearchOptions.YOUTUBE)}
         title={'Youtube'}
       />
+      <Menu.Item
+        leadingIcon={'google-cloud'}
+        onPress={() => setDefaultSearch(SearchOptions.ALIST)}
+        title={'AList'}
+      />
       {showMusicFree && (
         <Menu.Item
           leadingIcon={Icons.MUSICFREE}
@@ -87,7 +93,7 @@ export default ({
           title={`MusicFree.${MUSICFREE.aggregated}`}
         />
       )}
-      {Platform.OS === 'android' && (
+      {isAndroid && (
         <Menu.Item
           leadingIcon={() => Icons.LOCAL(rgb2Hex(playerStyle.colors.primary))}
           onPress={chooseLocalFolderAndroid}

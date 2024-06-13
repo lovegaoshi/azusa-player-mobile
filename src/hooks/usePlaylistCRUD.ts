@@ -22,7 +22,7 @@ const usePlaylistCRUD = (mPlaylist?: NoxMedia.Playlist) => {
   );
 
   const getPlaylist = () =>
-    _getPlaylist(mPlaylist?.id ?? currentPlayingId ?? '');
+    _getPlaylist(mPlaylist?.id ?? currentPlaylist?.id ?? '');
 
   const updateSong = async (
     song: NoxMedia.Song,
@@ -65,8 +65,26 @@ const usePlaylistCRUD = (mPlaylist?: NoxMedia.Playlist) => {
     return metadata;
   };
 
-  const updateCurrentSongMetadata = async (
-    override = false,
+  const updateCurrentSongMetadataReceived = async ({
+    playlist = getPlaylist(),
+    metadata = {},
+  }: {
+    playlist?: NoxMedia.Playlist | Promise<NoxMedia.Playlist>;
+    metadata?: Partial<NoxMedia.Song>;
+  }) => {
+    playlist = await playlist;
+    const index = playlist.songList.findIndex(
+      song => song.id === currentPlayingId
+    );
+    logger.debug(
+      `[updateSongMetadataReceived] @ ${index}/${playlist.title}: ${JSON.stringify(metadata)} `
+    );
+    if (index < 0) return;
+    updateSongIndex(index, metadata, playlist);
+    return metadata;
+  };
+
+  const getCurrentSong = async (
     playlist: NoxMedia.Playlist | Promise<NoxMedia.Playlist> = getPlaylist()
   ) => {
     playlist = await playlist;
@@ -74,12 +92,23 @@ const usePlaylistCRUD = (mPlaylist?: NoxMedia.Playlist) => {
     const index = playlist.songList.findIndex(
       song => song.id === currentPlayingId
     );
-    const song = playlist.songList[index];
+    return {
+      song: playlist.songList[index],
+      index,
+      playlist,
+    };
+  };
+
+  const updateCurrentSongMetadata = async (
+    override = false,
+    playlist: NoxMedia.Playlist | Promise<NoxMedia.Playlist> = getPlaylist()
+  ) => {
+    const result = await getCurrentSong(playlist);
+    if (result === undefined) return;
+    const { index, song } = result;
     if (!override && !song?.metadataOnLoad) return;
     logger.debug(`[metadata] attempting to udpate ${song.name} metadata:`);
-    const metadata = await refreshMetadata(song);
-    updateSongIndex(index, metadata, playlist);
-    return metadata;
+    return updateSongMetadata(index, result.playlist);
   };
 
   const playlistCleanup = async (
@@ -250,6 +279,7 @@ const usePlaylistCRUD = (mPlaylist?: NoxMedia.Playlist) => {
     updateSongIndex,
     updateSongMetadata,
     updateCurrentSongMetadata,
+    updateCurrentSongMetadataReceived,
     playlistAnalyze,
     playlistCleanup,
     playlistBiliShazam,

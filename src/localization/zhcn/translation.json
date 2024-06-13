@@ -190,6 +190,8 @@
     "SplashSettingDesc": "观赏管人播放器的开屏广告",
     "DeveloperOptionsName": "开发者选项",
     "DeveloperOptionsDesc": "正在测试的功能",
+    "AListOptionsName": "AList",
+    "AListOptionsDesc": "Set up AList creds",
     "LoginName": "B站登录",
     "LoginDesc": "二维码或填入cookie登录b站",
     "LanguageOptionsTitle": "选择语言",

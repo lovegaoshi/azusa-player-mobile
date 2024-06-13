@@ -125,7 +125,7 @@ const AzusaPlayer = () => {
               name={NoxRoutes.PlayerHome}
               options={{
                 drawerIcon: HomeIcon,
-                title: String(t('appDrawer.homeScreenName')),
+                title: t('appDrawer.homeScreenName'),
                 header: () => null,
               }}
               component={NoxPlayerWrapper}
@@ -134,7 +134,7 @@ const AzusaPlayer = () => {
               name={NoxRoutes.Explore}
               options={{
                 drawerIcon: ExploreIcon,
-                title: String(t('appDrawer.exploreScreenName')),
+                title: t('appDrawer.exploreScreenName'),
                 header: () => null,
               }}
               component={Explore}
@@ -143,7 +143,7 @@ const AzusaPlayer = () => {
               name={NoxRoutes.Settings}
               options={{
                 drawerIcon: SettingIcon,
-                title: String(t('appDrawer.settingScreenName')),
+                title: t('appDrawer.settingScreenName'),
                 header: () => null,
               }}
               component={Settings}

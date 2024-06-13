@@ -3,6 +3,7 @@ import TrackPlayer, {
   useTrackPlayerEvents,
   Event,
   State,
+  useActiveTrack,
 } from 'react-native-track-player';
 
 import { useNoxSetting } from '@stores/useApp';
@@ -23,7 +24,9 @@ export default () => {
   const [abRepeat, setABRepeat] = React.useState<[number, number]>([0, 1]);
   const [bRepeatDuration, setBRepeatDuration] = React.useState(9999);
   const setCurrentPlayingId = useNoxSetting(state => state.setCurrentPlayingId);
-  const { updateCurrentSongMetadata } = usePlaylistCRUD();
+  const { updateCurrentSongMetadata, updateCurrentSongMetadataReceived } =
+    usePlaylistCRUD();
+  const track = useActiveTrack();
 
   useTrackPlayerEvents([Event.PlaybackActiveTrackChanged], event => {
     if (event.track && event.track.song) {
@@ -37,6 +40,23 @@ export default () => {
 
   useTrackPlayerEvents([Event.RemoteNext], () => {
     performSkipToNext();
+  });
+
+  useTrackPlayerEvents([Event.MetadataCommonReceived], event => {
+    console.log('Event.MetadataCommonReceived', event.metadata);
+    if (!track?.song?.metadataOnReceived || !event.metadata) return;
+    const newMetadata: Partial<NoxMedia.Song> = {};
+    if (event.metadata.artist) newMetadata.singer = event.metadata.artist;
+    if (event.metadata.title) newMetadata.name = event.metadata.title;
+    if (event.metadata.albumTitle)
+      newMetadata.album = event.metadata.albumTitle;
+    // @ts-expect-error
+    if (event.metadata.albumName)
+      // @ts-expect-error
+      newMetadata.album = event.metadata.albumName;
+    if (event.metadata.artworkUri)
+      newMetadata.cover = event.metadata.artworkUri;
+    updateCurrentSongMetadataReceived({ metadata: newMetadata });
   });
 
   useTrackPlayerEvents([Event.RemotePrevious], () => {

@@ -26,6 +26,7 @@ import bilisubliveFetch from './mediafetch/bilisublive';
 import b23tvFetch from './mediafetch/b23tv';
 import headRequestFetch from './mediafetch/headRequest';
 import biliFavColleFetch from './mediafetch/biliFavColle';
+import alistFetch from './mediafetch/alist';
 import { logger } from './Logger';
 
 /**
@@ -40,6 +41,7 @@ interface Props {
   fastSearch?: boolean;
   cookiedSearch?: boolean;
   defaultSearch?: SearchOptions | MUSICFREE;
+  genericSearch?: boolean;
 }
 
 export const matchBiliURL = <T>(
@@ -66,6 +68,7 @@ export const searchBiliURLs = async ({
   fastSearch = true,
   cookiedSearch = false,
   defaultSearch = SearchOptions.BILIBILI,
+  genericSearch = true,
 }: Props) => {
   let results: NoxMedia.SearchPlaylist = {
     songList: [],
@@ -90,12 +93,22 @@ export const searchBiliURLs = async ({
       progressEmitter(0);
       return results;
     }
+    if (!genericSearch) {
+      return results;
+    }
     const headRequestResult = await headRequestFetch.regexFetch(input);
     if (headRequestResult) {
       results.songList = [headRequestResult];
     } else {
       // bilisearchFetch
       switch (defaultSearch) {
+        case SearchOptions.ALIST:
+          results = await alistFetch.regexFetch({
+            url: input,
+            progressEmitter,
+            fastSearch,
+            cookiedSearch,
+          });
         case SearchOptions.YOUTUBE:
           results = await ytbsearchFetch.regexFetch({
             url: input,

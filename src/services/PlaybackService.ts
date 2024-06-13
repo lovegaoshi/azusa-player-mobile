@@ -78,6 +78,10 @@ export async function PlaybackService() {
     cycleThroughPlaymode();
   });
 
+  TrackPlayer.addEventListener(Event.MetadataCommonReceived, async event => {
+    console.log('Event.MetadataCommonReceived', event);
+  });
+
   TrackPlayer.addEventListener(Event.RemoteSeek, event => {
     console.log('Event.RemoteSeek', event);
     TrackPlayer.seekTo(event.position);

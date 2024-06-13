@@ -178,12 +178,20 @@
     "SplashSettingDesc": "View APM's splash ads",
     "DeveloperOptionsName": "Developer Options",
     "DeveloperOptionsDesc": "Experimental Options in pre-release versions of APM; risk of losing data, dont touch, seriously",
+    "AListOptionsName": "AList",
+    "AListOptionsDesc": "Set up AList creds",
     "LanguageOptionsName": "Change Language",
     "LanguageOptionsDesc": "Change app language",
     "LanguageOptionsTitle": "Change Language",
     "LoginName": "Bilibili Login",
     "LoginDesc": "login to bilibili",
     "FeatureNotImplemented": "Feature not implemented"
+  },
+  "AList": {
+    "Name": "Alist",
+    "Add": "Add Alist Creds",
+    "Site": "Site",
+    "Password": "Password"
   },
   "PluginSettings": {
     "UpdatingRegExpFromGithub": "Update RegExp rules from Github...",

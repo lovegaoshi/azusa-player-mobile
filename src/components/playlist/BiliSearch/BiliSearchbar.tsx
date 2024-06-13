@@ -142,7 +142,7 @@ export default ({
       <View style={styles.searchContainer}>
         <AutoComplete
           pressed={pressed}
-          placeholder={String(t('BiliSearchBar.label'))}
+          placeholder={t('BiliSearchBar.label')}
           value={searchVal}
           setValue={setSearchVal}
           onSubmit={performSearch}

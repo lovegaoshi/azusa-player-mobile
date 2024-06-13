@@ -61,7 +61,7 @@ export default () => {
       />
       <GenericCheckDialog
         visible={visible}
-        title={String(t('PluginSettings.MusicFreeCheckTitle'))}
+        title={t('PluginSettings.MusicFreeCheckTitle')}
         options={favLists}
         onSubmit={onSubmit}
         onClose={() => hideDialog()}

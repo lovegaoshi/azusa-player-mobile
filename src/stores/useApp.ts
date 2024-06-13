@@ -238,14 +238,22 @@ export const useNoxSetting = create<NoxSetting>((set, get) => ({
     set({ favoritePlaylist: val, playlists });
   },
   getPlaylist: async v => {
-    const { searchPlaylist, favoritePlaylist, playlists, playerSetting } =
-      get();
+    const {
+      searchPlaylist,
+      favoritePlaylist,
+      playlists,
+      playerSetting,
+      currentPlaylist,
+    } = get();
     switch (v) {
       case StorageKeys.SEARCH_PLAYLIST_KEY:
         return searchPlaylist;
       case StorageKeys.FAVORITE_PLAYLIST_KEY:
         return favoritePlaylist;
       default:
+        if (currentPlaylist.id === v) {
+          return currentPlaylist;
+        }
         if (playerSetting.memoryEfficiency) {
           return getPlaylist({ key: v });
         }
@@ -343,7 +351,7 @@ export const useNoxSetting = create<NoxSetting>((set, get) => ({
       playerSetting: initializedPlayerSetting,
       playlists: val.playlists,
       playlistIds: val.playlistIds,
-      playerStyle: await savePlayerStyle(val.skin, false),
+      playerStyle: savePlayerStyle(val.skin, false),
       playerStyles: val.skins,
       lyricMapping: val.lyricMapping,
       searchOption: val.defaultSearchOptions,

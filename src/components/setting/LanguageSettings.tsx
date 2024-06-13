@@ -40,7 +40,7 @@ export default ({ icon }: Props) => {
       <GenericSelectDialog
         visible={visible}
         options={availableLanguages}
-        title={String(t('Settings.LanguageOptionsTitle'))}
+        title={t('Settings.LanguageOptionsTitle')}
         renderOptionTitle={(val: string) => availableLanguagesMap[val]}
         onClose={() => setVisible(false)}
         onSubmit={onSubmit}

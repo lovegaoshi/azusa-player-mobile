@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 
 import GeneralSettings from './GeneralSettings';
 import AppearanceSettings from './appearances/View';
+import AListSettings from './alist/View';
 import DeveloperSettings from './DeveloperSettings';
 import SyncSettings from './SyncSettings';
 import { useNoxSetting } from '@stores/useApp';
@@ -22,6 +23,7 @@ enum Icons {
   LANGUAGE = 'translate',
   LOGIN = 'login-variant',
   SPLASH_GALLARY = 'view-gallery',
+  ALIST = 'google-cloud',
 }
 
 enum VIEW {
@@ -34,6 +36,7 @@ enum VIEW {
   LOGIN = 'Login',
   INFO = 'About',
   SPLASH_GALLARY = 'Splash Gallary',
+  ALIST = 'Alist',
 }
 
 const Stack = createNativeStackNavigator();
@@ -79,6 +82,12 @@ const HomeSettings = ({ navigation }: Props) => {
         />
         <LanguageSettings icon={Icons.LANGUAGE} />
         <SettingListItem
+          icon={Icons.ALIST}
+          settingName="AListOptions"
+          onPress={() => navigation.navigate(VIEW.ALIST)}
+          settingCategory="Settings"
+        />
+        <SettingListItem
           icon={Icons.DEVELOPER}
           settingName="DeveloperOptions"
           onPress={() => navigation.navigate(VIEW.DEVELOPER)}
@@ -110,37 +119,42 @@ const Settings = ({ headerBackVisible = true }: Props) => {
       <Stack.Screen
         name={VIEW.SPLASH_GALLARY}
         component={SplashSettings}
-        options={{ title: String(t('Settings.SplashSettingName')) }}
+        options={{ title: t('Settings.SplashSettingName') }}
       />
       <Stack.Screen
         name={VIEW.INFO}
         component={AboutSettings}
-        options={{ title: String(t('Settings.InfoSettingName')) }}
+        options={{ title: t('Settings.InfoSettingName') }}
       />
       <Stack.Screen
         name={VIEW.GENERAL}
         component={GeneralSettings}
-        options={{ title: String(t('Settings.GeneralSettingName')) }}
+        options={{ title: t('Settings.GeneralSettingName') }}
       />
       <Stack.Screen
         name={VIEW.SKIN}
         component={AppearanceSettings}
-        options={{ title: String(t('Settings.AppearanceSettingName')) }}
+        options={{ title: t('Settings.AppearanceSettingName') }}
       />
       <Stack.Screen
         name={VIEW.DEVELOPER}
         component={DeveloperSettings}
-        options={{ title: String(t('Settings.DeveloperOptionsName')) }}
+        options={{ title: t('Settings.DeveloperOptionsName') }}
+      />
+      <Stack.Screen
+        name={VIEW.ALIST}
+        component={AListSettings}
+        options={{ title: t('Settings.AListOptionsName') }}
       />
       <Stack.Screen
         name={VIEW.BACKUP}
         component={SyncSettings}
-        options={{ title: String(t('Settings.BackupSettingName')) }}
+        options={{ title: t('Settings.BackupSettingName') }}
       />
       <Stack.Screen
         name={VIEW.LOGIN}
         component={Bilibili}
-        options={{ title: String(t('appDrawer.LoginName')) }}
+        options={{ title: t('appDrawer.LoginName') }}
       />
     </Stack.Navigator>
   );

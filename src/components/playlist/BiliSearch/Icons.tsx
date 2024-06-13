@@ -2,6 +2,8 @@ import * as React from 'react';
 import Svg, { Path } from 'react-native-svg';
 import { Image } from 'expo-image';
 import { StyleSheet } from 'react-native';
+import { Icon } from 'react-native-paper';
+
 import { SearchOptions } from '@enums/Storage';
 
 const Icons = {
@@ -43,6 +45,8 @@ export const getIcon = (icon: string) => {
       return Icons.BILIBILI;
     case SearchOptions.YOUTUBE:
       return Icons.YOUTUBE;
+    case SearchOptions.ALIST:
+      return () => <Icon source={'google-cloud'} size={24} />;
     default:
       return Icons.MUSICFREE;
   }

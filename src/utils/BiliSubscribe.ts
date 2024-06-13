@@ -54,6 +54,7 @@ export const updateSubscribeFavList = async ({
           favList,
           useBiliTag: newPlaylist.useBiliShazam,
           progressEmitter,
+          genericSearch: false,
         })
       ).songList.concat(newPlaylist.songList);
     }

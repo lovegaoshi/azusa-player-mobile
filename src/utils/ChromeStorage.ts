@@ -5,11 +5,18 @@ import { v4 as uuidv4 } from 'uuid';
 import { Appearance, ColorSchemeName } from 'react-native';
 import i18n from 'i18next';
 
-import { dummyPlaylist, dummyPlaylistList } from '../objects/Playlist';
-import { NoxRepeatMode } from '../enums/RepeatMode';
-import { PlaylistTypes } from '../enums/Playlist';
+import {
+  saveItem,
+  getItem,
+  removeItem,
+  getMapping,
+  saveChucked,
+  loadChucked,
+} from '@utils/ChromeStorageAPI';
+import { dummyPlaylist, dummyPlaylistList } from '@objects/Playlist';
+import { NoxRepeatMode } from '@enums/RepeatMode';
+import { PlaylistTypes } from '@enums/Playlist';
 import AdaptiveTheme from '../components/styles/AdaptiveTheme';
-import { chunkArray, arrayToObject } from '../utils/Utils';
 import {
   StorageKeys,
   AppID,
@@ -17,53 +24,9 @@ import {
   SearchOptions,
 } from '@enums/Storage';
 import { MUSICFREE } from './mediafetch/musicfree';
-/**
- * noxplayer's storage handler.
- * ChromeStorage has quite a few changes from azusa player the chrome extension;
- * mainly to abandon the storageCtxMgr context and use zustand instead.
- * if i'm getting rid of storageCtxMgr there is
- * no point migrating noxplayer storage.js.
- *
- * I will try to make noxplayer's settings compatible but some fields eg. Song.duration
- * are missing.
- */
+import { getAlistCred } from './alist/storage';
 
-// see known storage limits:
-// https://react-native-async-storage.github.io/async-storage/docs/limits
-const MAX_SONGLIST_SIZE = 400;
-
-export const saveItem = async (key: string, value: any) => {
-  try {
-    // only enable this for serious debugging:P
-    // console.log('saving %s %s into Map', key, value);
-    await AsyncStorage.setItem(key, JSON.stringify(value));
-  } catch (e) {
-    console.error(e);
-  }
-};
-
-export const getItem = async (
-  key: string,
-  defaultVal: unknown = null
-): Promise<null | any> => {
-  try {
-    const retrievedStr = await AsyncStorage.getItem(key);
-    return retrievedStr === null ? defaultVal : JSON.parse(retrievedStr);
-  } catch (e) {
-    console.error(e);
-  }
-  return defaultVal;
-};
-
-export const removeItem = async (key: string) => {
-  try {
-    await AsyncStorage.removeItem(key);
-  } catch (e) {
-    console.warn(e);
-  }
-};
-
-export const setMusicFreePlugin = (val: MUSICFREE[]) =>
+export const setMusicFreePlugin = (val: MUSICFREE[]): Promise<void> =>
   saveItem(StorageKeys.MUSICFREE_PLUGIN, val);
 
 export const getMusicFreePlugin = (): Promise<MUSICFREE[]> =>
@@ -73,26 +36,6 @@ export const getFadeInterval = async () =>
   Number(await getItem(StorageKeys.FADE_INTERVAL)) || 0;
 export const saveFadeInterval = async (val: number) =>
   await saveItem(StorageKeys.FADE_INTERVAL, val);
-
-/**
- * a save helper function for mapping types ({string: val}).
- * @returns the mapping object
- */
-const getMapping = async (
-  key: StorageKeys,
-  transform: (val: any) => any = arrayToObject
-) => {
-  try {
-    const result = await getItem(key);
-    if (result === null) return transform([]);
-    return Array.isArray(result)
-      ? transform(await loadChucked(result))
-      : result;
-  } catch (e) {
-    console.error(`failed to resolve mapping resources for ${key}: ${e}`);
-    return transform([]);
-  }
-};
 
 export const getRegExtractMapping = (): Promise<NoxRegExt.JSONExtractor[]> =>
   getItem(StorageKeys.REGEXTRACT_MAPPING, []);
@@ -148,34 +91,6 @@ export const removeCookie = async (site: string) => {
   saveItem(StorageKeys.COOKIES, cookies);
 };
 
-/**
- * a generic chunk splitter to store arrays that may exceed 2MB storage limits.
- * see known storage limits:
- * https://react-native-async-storage.github.io/async-storage/docs/limits
- */
-const saveChucked = async (
-  key: string,
-  objects: any[],
-  saveToStorage = true
-) => {
-  // splice into chunks
-  const chuckedObject = chunkArray(objects, MAX_SONGLIST_SIZE);
-  const chuckedIndices = chuckedObject.map((val, index) => `${key}.${index}`);
-  chuckedObject.forEach((list, index) => saveItem(chuckedIndices[index], list));
-  if (saveToStorage) {
-    saveItem(key, chuckedIndices);
-    return [];
-  } else {
-    return chuckedIndices;
-  }
-};
-
-const loadChucked = async (keys: string[]) => {
-  const loadedArrays = (await Promise.all(
-    keys.map(async (val: string) => await getItem(val))
-  )) as any[][];
-  return loadedArrays.flat();
-};
 /**
  * playlist can get quite large, my idea is to splice songlist into smaller lists then join them.
  */
@@ -292,9 +207,7 @@ export const savePlayMode = (val: string) =>
 export const saveLastPlayDuration = (val: number) =>
   saveItem(StorageKeys.LAST_PLAY_DURATION, val);
 
-export const initPlayerObject = async (
-  safeMode = false
-): Promise<NoxStorage.PlayerStorageObject> => {
+export const initPlayerObject = async (safeMode = false) => {
   const lyricMapping = (await getLyricMapping()) || {};
   const playerObject = {
     settings: {
@@ -323,6 +236,7 @@ export const initPlayerObject = async (
     lastPlayDuration: await getItem(StorageKeys.LAST_PLAY_DURATION, 0),
     colorScheme: await getColorScheme(),
     defaultSearchOptions: await getDefaultSearch(),
+    AListCred: await getAlistCred(),
   } as NoxStorage.PlayerStorageObject;
 
   if (safeMode) {
