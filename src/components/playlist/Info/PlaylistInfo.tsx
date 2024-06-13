@@ -173,7 +173,7 @@ export default ({ usePlaylist, onPressed = () => undefined }: Props) => {
       >
         {searchVisible && (
           <Searchbar
-            placeholder={String(t('PlaylistSearchBar.label'))}
+            placeholder={t('PlaylistSearchBar.label')}
             value={searchText}
             onChangeText={(val: string) => {
               setSearchText(val);

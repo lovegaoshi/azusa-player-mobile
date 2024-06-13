@@ -80,7 +80,7 @@ const ABSliderMenu = ({ song, closeMenu }: Props) => {
       />
       <GenericDialog
         visible={dialogVisible}
-        title={String(t('SongOperations.abrepeat'))}
+        title={t('SongOperations.abrepeat')}
         onClose={toggleDialogVisible}
         onSubmit={onSubmit}
       >

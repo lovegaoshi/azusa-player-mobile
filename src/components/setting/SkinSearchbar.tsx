@@ -40,7 +40,7 @@ const CustomSkinSearch = ({
     <View style={styles.container}>
       <View style={styles.row}>
         <Searchbar
-          placeholder={String(t('CustomSkin.SearchBarLabel'))}
+          placeholder={t('CustomSkin.SearchBarLabel')}
           value={searchVal}
           onChangeText={setSearchVal}
           onSubmitEditing={() => handleSearch(searchVal)}

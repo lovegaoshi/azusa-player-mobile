@@ -30,6 +30,7 @@ interface SongProps {
   isLive?: boolean;
   liveStatus?: boolean;
   metadataOnLoad?: boolean;
+  metadataOnReceived?: boolean;
 }
 
 export default ({
@@ -50,6 +51,7 @@ export default ({
   isLive,
   liveStatus,
   metadataOnLoad,
+  metadataOnReceived,
 }: SongProps): NoxMedia.Song => {
   name = he.decode(name);
   return {
@@ -72,6 +74,7 @@ export default ({
     isLive,
     liveStatus,
     metadataOnLoad,
+    metadataOnReceived,
   };
 };
 

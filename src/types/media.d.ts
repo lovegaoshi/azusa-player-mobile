@@ -27,6 +27,7 @@ declare global {
       isLive?: boolean;
       liveStatus?: boolean;
       metadataOnLoad?: boolean;
+      metadataOnReceived?: boolean;
       order?: number;
     }
 

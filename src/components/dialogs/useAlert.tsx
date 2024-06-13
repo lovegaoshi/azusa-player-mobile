@@ -13,7 +13,7 @@ export default () => {
   ) =>
     Alert.alert(title, message, [
       {
-        text: String(t('Dialog.cancel')),
+        text: t('Dialog.cancel'),
         onPress: () => undefined,
         style: 'cancel',
       },
@@ -22,7 +22,7 @@ export default () => {
         onPress: onPartial,
       },
       {
-        text: String(t('Dialog.ok')),
+        text: t('Dialog.ok'),
         onPress: onSubmit,
       },
     ]);
@@ -30,12 +30,12 @@ export default () => {
   const TwoWayAlert = (title: string, message: string, onSubmit: () => void) =>
     Alert.alert(title, message, [
       {
-        text: String(t('Dialog.cancel')),
+        text: t('Dialog.cancel'),
         onPress: () => undefined,
         style: 'cancel',
       },
       {
-        text: String(t('Dialog.ok')),
+        text: t('Dialog.ok'),
         onPress: onSubmit,
       },
     ]);
@@ -45,15 +45,10 @@ export default () => {
     // eslint-disable-next-line @typescript-eslint/no-empty-function
     onPress = () => {}
   ) =>
-    Alert.alert(
-      title,
-      message,
-      [{ text: String(t('Dialog.ok')), onPress: onPress }],
-      {
-        cancelable: true,
-        onDismiss: onPress,
-      }
-    );
+    Alert.alert(title, message, [{ text: t('Dialog.ok'), onPress: onPress }], {
+      cancelable: true,
+      onDismiss: onPress,
+    });
 
   return {
     OneWayAlert,

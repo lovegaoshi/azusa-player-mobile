@@ -9,6 +9,7 @@ interface InputProps {
   selectTextOnFocus?: boolean;
   text: string;
   setText: (text: string) => void;
+  secureTextEntry?: boolean;
 }
 
 export default ({
@@ -18,6 +19,7 @@ export default ({
   selectTextOnFocus = true,
   text,
   setText,
+  secureTextEntry,
 }: InputProps) => {
   const playerStyle = useNoxSetting(state => state.playerStyle);
 
@@ -31,6 +33,7 @@ export default ({
       selectionColor={playerStyle.customColors.textInputSelectionColor}
       autoFocus={autofocus}
       textColor={playerStyle.colors.text}
+      secureTextEntry={secureTextEntry}
     />
   );
 };

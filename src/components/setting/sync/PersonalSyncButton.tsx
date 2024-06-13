@@ -50,8 +50,8 @@ const ImportSyncFavButton = ({
       });
     } else {
       errorHandling(
-        new Error(String(t('Sync.PersonalCloudDownloadFail'))),
-        String(t('Sync.PersonalCloudDownloadFail'))
+        new Error(t('Sync.PersonalCloudDownloadFail')),
+        t('Sync.PersonalCloudDownloadFail')
       );
     }
     setLoading(false);
@@ -72,7 +72,7 @@ const ExportSyncFavButton = ({ cloudAddress, cloudID }: Props) => {
 
   const errorHandling = (
     e: Error,
-    msg = String(t('Sync.PersonalCloudUploadFailSnackbar'))
+    msg = t('Sync.PersonalCloudUploadFailSnackbar')
   ) => {
     logger.error(e);
     setSnack({ snackMsg: { success: msg } });

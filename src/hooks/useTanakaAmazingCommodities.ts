@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { getItem, saveItem } from '@utils/ChromeStorage';
+import { getItem, saveItem } from '@utils/ChromeStorageAPI';
 import RNFetchBlob from 'react-native-blob-util';
 
 import { fetchVideoPlayUrl } from '../utils/mediafetch/bilivideo';

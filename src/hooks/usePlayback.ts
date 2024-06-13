@@ -79,7 +79,7 @@ const usePlayback = () => {
   const playAsSearchList = async ({
     songs,
     playlistSongs,
-    title = String(t('PlaylistsDrawer.SearchListTitle')),
+    title = t('PlaylistsDrawer.SearchListTitle'),
     song,
   }: PlayAsSearchList) => {
     const newPlayingPlaylist = {
@@ -109,7 +109,7 @@ const usePlayback = () => {
     playAsSearchList({
       songs: cachedSongs,
       playlistSongs: allSongs,
-      title: String(t('PlaylistOperations.all')),
+      title: t('PlaylistOperations.all'),
     });
   };
 

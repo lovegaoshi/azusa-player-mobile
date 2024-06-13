@@ -159,7 +159,7 @@ export default () => {
       <GenericInputDialog
         options={['SESSDATA', 'bili_jct', 'access_token', 'refresh_token']}
         visible={inputCookieVisible}
-        title={String(t('Login.BilibiliCookieInputDialogTitle'))}
+        title={t('Login.BilibiliCookieInputDialogTitle')}
         onClose={() => setInputCookieVisible(false)}
         onSubmit={manualInputCookies}
       ></GenericInputDialog>

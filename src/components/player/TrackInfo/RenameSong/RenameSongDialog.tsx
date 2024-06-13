@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Button, Dialog, Portal } from 'react-native-paper';
 import { useTranslation } from 'react-i18next';
 import NoxInput from '@components/dialogs/NoxInput';
@@ -25,6 +25,10 @@ const SongDialog = ({
   const handleSubmit = () => {
     onSubmit(text);
   };
+
+  useEffect(() => {
+    setText(song.name);
+  }, [song]);
 
   return (
     <Dialog visible={visible} onDismiss={handleClose}>

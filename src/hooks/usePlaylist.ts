@@ -45,7 +45,7 @@ export interface UsePlaylist {
     sort?: SortOptions,
     ascend?: boolean,
     playlist?: NoxMedia.Playlist
-  ) => void;
+  ) => Promise<void>;
 }
 
 /**

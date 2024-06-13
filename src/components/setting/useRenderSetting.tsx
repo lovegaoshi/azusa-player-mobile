@@ -47,7 +47,7 @@ export const SettingListItem = ({
   return (
     <List.Item
       left={getIcon}
-      title={String(t(`${settingCategory}.${settingName}Name`))}
+      title={t(`${settingCategory}.${settingName}Name`)}
       description={modifyDescription(
         t(`${settingCategory}.${settingName}Desc`)
       )}

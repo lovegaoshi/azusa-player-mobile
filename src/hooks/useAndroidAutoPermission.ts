@@ -2,7 +2,7 @@ import { Platform, NativeModules } from 'react-native';
 import { useTranslation } from 'react-i18next';
 
 import useAlert from '@components/dialogs/useAlert';
-import { getItem, saveItem } from '@utils/ChromeStorage';
+import { getItem, saveItem } from '@utils/ChromeStorageAPI';
 import { StorageKeys } from '@enums/Storage';
 // eslint-disable-next-line import/no-unresolved
 import { APPSTORE } from '@env';

@@ -89,7 +89,7 @@ export default () => {
       setPlayerSetting({ noxCheckedVersion });
       if (Platform.OS === 'android') {
         ThreeWayAlert(
-          String(t('VersionUpdate.UpdateFoundTitle')),
+          t('VersionUpdate.UpdateFoundTitle'),
           String(
             t('VersionUpdate.UpdateFoundContent', {
               noxCheckedVersion,
@@ -101,13 +101,13 @@ export default () => {
             Linking.openURL(
               'https://github.com/lovegaoshi/azusa-player-mobile/releases/latest'
             ),
-          String(t('VersionUpdate.DownloadAPK')),
+          t('VersionUpdate.DownloadAPK'),
           () => RNFetchDownloadAPK(noxAPKUrl!)
         );
         return;
       }
       TwoWayAlert(
-        String(t('VersionUpdate.UpdateFoundTitle')),
+        t('VersionUpdate.UpdateFoundTitle'),
         String(
           t('VersionUpdate.UpdateFoundContent', {
             noxCheckedVersion,
@@ -132,7 +132,7 @@ export default () => {
         setPlayerSetting({ noxVersion: latest });
         console.debug(`version update to ${latest}d`);
         OneWayAlert(
-          String(t('VersionUpdate.UpdatedVersionAlertTitle')),
+          t('VersionUpdate.UpdatedVersionAlertTitle'),
           String(
             t('VersionUpdate.UpdatedVersionAlertContent', { version: latest })
           )
