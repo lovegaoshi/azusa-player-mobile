@@ -23,7 +23,7 @@ def bump_version():
         for line in f:
             find_version_code = re.search(r'(.+versionCode )(\d+)', line)
             find_version_name = re.search(r'(.+versionName )".+"', line)
-            if not '//' in line and find_version_code:
+            if '//' not in line and find_version_code:
                 build_gradle.append(
                     f"{find_version_code.group(1)}{int(find_version_code.group(2)) + 1}\n")
             elif find_version_name:
@@ -42,7 +42,7 @@ def bump_version():
                 r'(.+CURRENT_PROJECT_VERSION = )(\d+);', line)
             find_version_name = re.search(
                 r'(.+MARKETING_VERSION = ).+;', line)
-            if not '//' in line and find_version_code:
+            if '//' not in line and find_version_code:
                 build_gradle.append(
                     f"{find_version_code.group(1)}{int(find_version_code.group(2)) + 1};\n")
             elif find_version_name:

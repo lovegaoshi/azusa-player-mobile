@@ -31,7 +31,6 @@ interface Props {
   setSongMenuVisible: (val: boolean) => void;
   songMenuSongIndexes: [number];
   menuCoords?: NoxTheme.coordinates;
-  handleSearch?: (val: string) => void;
 }
 
 // TODO: refactro this into tracklist's songmenu

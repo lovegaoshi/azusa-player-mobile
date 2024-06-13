@@ -15,7 +15,7 @@ export default () => {
   const [credList, setCredList] = useState<NoxStorage.AListCred[]>([]);
   const [currentCred, setCurrentCred] = useState<NoxStorage.AListCred>();
   const [credDialogOpen, setCredDialogOpen] = useState(false);
-  const [rerender, toggleRerender] = useState(false);
+  const [rerender, setRerender] = useState(false);
   const playerStyle = useNoxSetting(state => state.playerStyle);
 
   const addCred = (cred: NoxStorage.AListCred) => {
@@ -35,7 +35,7 @@ export default () => {
     const newList = credList;
     newList.splice(index, 1);
     // HACK: WTF is this even needed???
-    toggleRerender(v => !v);
+    setRerender(v => !v);
     removeAlistCredAt(index);
     setCredList(newList);
   };
