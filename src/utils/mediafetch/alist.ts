@@ -1,10 +1,9 @@
 import { getAlistCred } from '../alist/storage';
-import { AcceptableExtensions } from '@enums/MediaFetch';
 import { logger } from '../Logger';
 import { humanishApiLimiter } from './throttle';
 import bfetch from '@utils/BiliFetch';
 import SongTS, { DEFAULT_NULL_URL } from '@objects/Song';
-import { Source } from '@enums/MediaFetch';
+import { Source, AcceptableExtensions } from '@enums/MediaFetch';
 
 const matchAlistCred = async (site: string) => {
   const credList = await getAlistCred();

@@ -1,4 +1,4 @@
-import { View, FlatList, StyleSheet } from 'react-native';
+import { View, FlatList } from 'react-native';
 import { useEffect, useState } from 'react';
 import { IconButton, Text, TouchableRipple } from 'react-native-paper';
 
@@ -9,6 +9,7 @@ import {
 } from '@utils/alist/storage';
 import { useNoxSetting } from '@stores/useApp';
 import CredDialog from './CredDialog';
+import { styles } from '@components/style';
 
 export default () => {
   const [credList, setCredList] = useState<NoxStorage.AListCred[]>([]);
@@ -50,7 +51,7 @@ export default () => {
         flex: 1,
       }}
     >
-      <View style={{ alignItems: 'center' }}>
+      <View style={styles.contentContainer}>
         <IconButton
           icon="plus-circle-outline"
           size={45}
@@ -65,9 +66,9 @@ export default () => {
         data={credList}
         extraData={rerender}
         renderItem={({ item, index }) => (
-          <View style={{ flexDirection: 'row', paddingVertical: 5 }}>
+          <View style={styles.rowView}>
             <TouchableRipple
-              style={{ flex: 1, justifyContent: 'center' }}
+              style={styles.contentContainer}
               onPress={() => {
                 setCurrentCred(credList[index]);
                 setCredDialogOpen(true);
@@ -75,7 +76,7 @@ export default () => {
             >
               <Text variant="displaySmall">{item[0]}</Text>
             </TouchableRipple>
-            <View style={{ justifyContent: 'center' }}>
+            <View style={styles.alignMiddle}>
               <IconButton
                 icon={'delete'}
                 iconColor={playerStyle.colors.primary}

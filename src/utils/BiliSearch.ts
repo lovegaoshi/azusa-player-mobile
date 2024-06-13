@@ -109,6 +109,7 @@ export const searchBiliURLs = async ({
             fastSearch,
             cookiedSearch,
           });
+          break;
         case SearchOptions.YOUTUBE:
           results = await ytbsearchFetch.regexFetch({
             url: input,

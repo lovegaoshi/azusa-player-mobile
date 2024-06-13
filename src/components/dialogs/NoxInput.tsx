@@ -1,7 +1,6 @@
 import React from 'react';
 import { TextInput } from 'react-native-paper';
 import { useNoxSetting } from '@stores/useApp';
-import { RenderProps } from 'react-native-paper/lib/typescript/components/TextInput/types';
 
 interface InputProps {
   handleSubmit?: () => void;

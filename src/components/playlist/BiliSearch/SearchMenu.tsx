@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Menu } from 'react-native-paper';
 import * as DocumentPicker from 'expo-document-picker';
-import { Platform, NativeModules, PermissionsAndroid } from 'react-native';
+import { NativeModules, PermissionsAndroid } from 'react-native';
 import { useTranslation } from 'react-i18next';
 
 import { SearchOptions } from '@enums/Storage';

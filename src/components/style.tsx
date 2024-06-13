@@ -148,4 +148,5 @@ export const styles = StyleSheet.create({
     height: 148,
   },
   rowView: { flexDirection: 'row' },
+  alignMiddle: { justifyContent: 'center' },
 });

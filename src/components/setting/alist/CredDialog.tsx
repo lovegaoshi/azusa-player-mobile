@@ -1,6 +1,4 @@
 import React, { useEffect } from 'react';
-import { TextInput } from 'react-native-paper';
-import { StyleSheet } from 'react-native';
 import { useTranslation } from 'react-i18next';
 
 import GenericDialog from '@components/dialogs/GenericDialog';
@@ -57,12 +55,3 @@ export default ({
     </GenericDialog>
   );
 };
-
-const styles = StyleSheet.create({
-  dialog: {
-    position: 'absolute',
-    top: '20%',
-    left: 0,
-    right: 0,
-  },
-});
