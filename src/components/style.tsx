@@ -149,4 +149,5 @@ export const styles = StyleSheet.create({
   },
   rowView: { flexDirection: 'row' },
   alignMiddle: { justifyContent: 'center' },
+  alignCenter: { alignItems: 'center' },
 });

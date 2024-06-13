@@ -58,7 +58,6 @@ const resolveURL = async (song: NoxMedia.Song) => {
   let cover: string | undefined = undefined;
   if (Platform.OS === 'android') {
     const artworkUri = await cacheAlbumArt(song.bvid);
-    console.log('[APMlocal]', artworkUri, song);
     if (artworkUri) {
       cover = await NoxAndroidAutoModule.getUri(artworkUri);
     }
