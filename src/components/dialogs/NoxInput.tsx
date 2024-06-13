@@ -10,7 +10,7 @@ interface InputProps {
   selectTextOnFocus?: boolean;
   text: string;
   setText: (text: string) => void;
-  render?: (p: RenderProps) => React.ReactNode;
+  secureTextEntry?: boolean;
 }
 
 export default ({
@@ -20,13 +20,12 @@ export default ({
   selectTextOnFocus = true,
   text,
   setText,
-  render,
+  secureTextEntry,
 }: InputProps) => {
   const playerStyle = useNoxSetting(state => state.playerStyle);
 
   return (
     <TextInput
-      render={render}
       label={label}
       value={text}
       onChangeText={(val: string) => setText(val)}
@@ -35,6 +34,7 @@ export default ({
       selectionColor={playerStyle.customColors.textInputSelectionColor}
       autoFocus={autofocus}
       textColor={playerStyle.colors.text}
+      secureTextEntry={secureTextEntry}
     />
   );
 };
