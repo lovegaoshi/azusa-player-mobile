@@ -3,19 +3,19 @@
 <p align="center"><a href="https://github.com/kenmingwang/azusa-player"><img width="200" src="https://github.com/kenmingwang/azusa-player/blob/master/public/img/logo2-01.png?raw=true"></a></p>
 
 <p align="center">
-  <a href="https://github.com/lovegaoshi/azusa-player-mobile/releases">
+  <a href="https://github.com/lovegaoshi/azusa-player-mobile/releases/latest">
     <img alt="GitHub release (latest by date)" src="https://github.com/lovegaoshi/azusa-player-mobile/actions/workflows/android-weekly.yml/badge.svg?branch=master">
   </a>
-  <a href="https://github.com/lovegaoshi/azusa-player-mobile/releases">
+  <a href="https://github.com/lovegaoshi/azusa-player-mobile/releases/latest">
     <img alt="GitHub release (latest by date)" src="https://github.com/lovegaoshi/azusa-player-mobile/actions/workflows/ios-weekly.yml/badge.svg?branch=master">
   </a>
 </p>
   
 <p align="center">
-  <a href="https://github.com/lovegaoshi/azusa-player-mobile/releases">
+  <a href="https://github.com/lovegaoshi/azusa-player-mobile/releases/latest">
     <img alt="GitHub all releases" src="https://img.shields.io/github/downloads/lovegaoshi/azusa-player-mobile/total">
   </a>
-  <a href="https://github.com/lovegaoshi/azusa-player-mobile/releases">
+  <a href="https://github.com/lovegaoshi/azusa-player-mobile/releases/latest">
     <img alt="GitHub release (latest by date)" src="https://img.shields.io/github/v/release/lovegaoshi/azusa-player-mobile">
   </a>  
 </p>
