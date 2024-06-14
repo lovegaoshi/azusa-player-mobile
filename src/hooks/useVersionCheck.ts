@@ -130,7 +130,7 @@ export default () => {
         return;
       default:
         setPlayerSetting({ noxVersion: latest });
-        console.debug(`version update to ${latest}d`);
+        logger.debug(`version update to ${latest}d`);
         OneWayAlert(
           t('VersionUpdate.UpdatedVersionAlertTitle'),
           String(
