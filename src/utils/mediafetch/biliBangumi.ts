@@ -35,7 +35,7 @@ const fetchPlayUrlPromise = async (cid: string, epid: string) => {
 const regexFetch = async ({
   reExtracted,
 }: NoxNetwork.RegexFetchProps): Promise<NoxNetwork.NoxRegexFetch> => {
-  const epid = reExtracted[1]!;
+  const epid = reExtracted[1];
   const newAPI = API.replace('{ep}', epid);
   logger.debug(`fetchBangumiInfo: ${newAPI}`);
   const res = await bfetch(newAPI);

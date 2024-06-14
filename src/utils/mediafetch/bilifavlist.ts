@@ -40,7 +40,7 @@ const regexFetch = async ({
   useBiliTag,
 }: NoxNetwork.RegexFetchProps) => {
   // TODO: refactor this???
-  const favFetched = await getFavList(reExtracted[1]!);
+  const favFetched = await getFavList(reExtracted[1]);
   const bvids = favFetched
     .filter(val => val.type === 2)
     .map(val => val.bvid)

@@ -99,13 +99,13 @@ const ExportSyncFavButton = ({ cloudAddress, cloudID }: Props) => {
   );
 };
 
-interface textProps {
+interface TextProps {
   settingKey: string;
   label: string;
   placeholder: string;
 }
 
-const SetTextField = ({ settingKey, label, placeholder }: textProps) => {
+const SetTextField = ({ settingKey, label, placeholder }: TextProps) => {
   const playerSetting = useNoxSetting(state => state.playerSetting);
   const playerStyle = useNoxSetting(state => state.playerStyle);
   const setPlayerSetting = useNoxSetting(state => state.setPlayerSetting);
@@ -128,13 +128,13 @@ export default ({ restoreFromUint8Array }: MainProps) => {
   const { t } = useTranslation();
   const playerSetting = useNoxSetting(state => state.playerSetting);
 
-  const personalCloudIPTextField: textProps = {
+  const personalCloudIPTextField: TextProps = {
     settingKey: 'personalCloudIP',
     label: t('Sync.personalCloudIPLabel'),
     placeholder: t('Sync.personalCloudIPPlaceholder'),
   };
 
-  const personalCloudIDTextField: textProps = {
+  const personalCloudIDTextField: TextProps = {
     settingKey: 'personalCloudID',
     label: t('Sync.personalCloudKeyLabel'),
     placeholder: t('Sync.personalCloudKeyPlaceholder'),

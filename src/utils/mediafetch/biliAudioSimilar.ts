@@ -84,7 +84,7 @@ const fetchBiliAudioSimilarList = async (sid: string) => {
 const regexFetch = async ({
   reExtracted,
 }: NoxNetwork.RegexFetchProps): Promise<NoxNetwork.NoxRegexFetch> => ({
-  songList: await fetchBiliAudioSimilarList(reExtracted[1]!),
+  songList: await fetchBiliAudioSimilarList(reExtracted[1]),
 });
 
 const resolveURL = () => undefined;

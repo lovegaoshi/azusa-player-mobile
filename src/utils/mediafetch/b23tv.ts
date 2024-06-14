@@ -7,7 +7,7 @@ const resolveB23TV = async (url: string) => {
 };
 
 const regexFetch = ({ reExtracted }: NoxNetwork.RegexFetchProps) =>
-  resolveB23TV(reExtracted[1]!);
+  resolveB23TV(reExtracted[1]);
 
 export default {
   regexSearchMatch: /b23.tv\/(.+)/,

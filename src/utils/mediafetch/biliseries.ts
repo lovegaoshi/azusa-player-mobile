@@ -50,7 +50,7 @@ const regexFetch = async ({
   useBiliTag,
 }: NoxNetwork.RegexFetchProps) =>
   bvFetch({
-    bvids: await fetchBiliSeriesList(reExtracted[1]!, reExtracted[2]!, favList),
+    bvids: await fetchBiliSeriesList(reExtracted[1], reExtracted[2], favList),
     useBiliTag: useBiliTag || false,
     progressEmitter,
     reExtracted: [] as unknown as RegExpExecArray,

@@ -53,7 +53,7 @@ const PlaylistItem = ({
         </Text>
       </View>
       <View style={styles.playlistItemIconContainer}>
-        {icon ? icon : DefaultIcon(item, () => confirmOnDelete(item.id))}
+        {icon ?? DefaultIcon(item, () => confirmOnDelete(item.id))}
       </View>
     </View>
   );

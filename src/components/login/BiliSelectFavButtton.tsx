@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Button, ActivityIndicator } from 'react-native-paper';
 import { useTranslation } from 'react-i18next';
 
-import { getBiliFavlist, GETFAVLIST_RES } from '@utils/Bilibili/bilifavOperate';
+import { getBiliFavlist, GetFavlistRes } from '@utils/Bilibili/bilifavOperate';
 import GenericCheckDialog from '../dialogs/GenericCheckDialog';
 import bilifavlistFetch from '@utils/mediafetch/bilifavlist';
 import { dummyPlaylist } from '@objects/Playlist';
@@ -12,7 +12,7 @@ export default () => {
   const { t } = useTranslation();
   const { addPlaylist } = usePlaylistBrowseTree();
   const [visible, setVisible] = React.useState(false);
-  const [favLists, setFavLists] = React.useState<GETFAVLIST_RES[]>([]);
+  const [favLists, setFavLists] = React.useState<GetFavlistRes[]>([]);
   const [loading, setLoading] = React.useState(false);
 
   const showDialog = () => setVisible(true);

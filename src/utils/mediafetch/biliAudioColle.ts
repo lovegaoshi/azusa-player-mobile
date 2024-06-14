@@ -102,7 +102,7 @@ const regexFetch = async ({
   favList,
 }: NoxNetwork.RegexFetchProps): Promise<NoxNetwork.NoxRegexFetch> => ({
   songList: await fetchBiliAudioColleList(
-    reExtracted[1]!,
+    reExtracted[1],
     progressEmitter,
     favList
   ),

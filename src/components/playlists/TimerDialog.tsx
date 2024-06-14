@@ -14,7 +14,6 @@ import { useNoxSetting } from '@stores/useApp';
 interface Props {
   visible: boolean;
   onClose?: () => void;
-  onSubmit?: () => void;
 }
 
 const TimerDialog = ({ visible, onClose = () => undefined }: Props) => {

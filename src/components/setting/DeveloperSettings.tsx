@@ -209,25 +209,6 @@ const Home = ({ navigation }: NoxComponent.NavigationProps) => {
             settingCategory="DeveloperSettings"
           />
           <SettingListItem
-            icon={Icons.Tanaka}
-            settingName="Tanaka"
-            onPress={async () =>
-              Alert.alert(
-                t('DeveloperSettings.Tanaka'),
-                await getTanaka(),
-                [
-                  {
-                    text: t('Dialog.nullify'),
-                    onPress: deleteTanaka,
-                  },
-                  { text: t('Dialog.ok') },
-                ],
-                { cancelable: true }
-              )
-            }
-            settingCategory="DeveloperSettings"
-          />
-          <SettingListItem
             icon={Icons.setlog}
             settingName="LogLevel"
             onPress={selectLogLevel}
@@ -275,6 +256,25 @@ const Home = ({ navigation }: NoxComponent.NavigationProps) => {
                 val: orphanedCache.length,
               })
             }
+          />
+          <SettingListItem
+            icon={Icons.Tanaka}
+            settingName="Tanaka"
+            onPress={async () =>
+              Alert.alert(
+                t('DeveloperSettings.Tanaka'),
+                await getTanaka(),
+                [
+                  {
+                    text: t('Dialog.nullify'),
+                    onPress: deleteTanaka,
+                  },
+                  { text: t('Dialog.ok') },
+                ],
+                { cancelable: true }
+              )
+            }
+            settingCategory="DeveloperSettings"
           />
         </List.Section>
       </ScrollView>

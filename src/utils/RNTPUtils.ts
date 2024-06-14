@@ -28,7 +28,7 @@ export const isIOS = Platform.OS === 'ios';
 
 animatedVolume.addListener(state => TrackPlayer.setVolume(state.value));
 
-interface animatedVolumeChangeProps {
+interface AnimatedVolumeChangeProps {
   val: number;
   duration?: number;
   init?: number;
@@ -44,7 +44,7 @@ export const animatedVolumeChange = ({
   duration = 0,
   init = -1,
   callback = () => undefined,
-}: animatedVolumeChangeProps) => {
+}: AnimatedVolumeChangeProps) => {
   logger.debug(
     `[FADING] animating volume from ${init} to ${val} in ${duration}; ${AppState.currentState}`
   );
