@@ -64,11 +64,13 @@ const BuiltInThemes: DisplayTheme[] = [
   },
 ];
 
+const noGesture = Platform.OS === 'ios' || __DEV__;
+
 const GestureWrapper = (props: {
   children: React.JSX.Element;
   gesture: PanGesture;
 }) => {
-  if (Platform.OS === 'ios' || __DEV__) return props.children;
+  if (noGesture) return props.children;
   return (
     <GestureDetector gesture={props.gesture}>{props.children}</GestureDetector>
   );
