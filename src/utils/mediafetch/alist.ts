@@ -31,7 +31,7 @@ const AListToNoxMedia = (item: any, pathname: string, hostname: string) =>
 
 const getCred = async (hostname: string) => {
   const cred = await matchAlistCred(hostname);
-  if (!cred) {
+  if (cred === null) {
     logger.warn(`[alist] Cred not found for ${hostname}`);
   }
   return cred;
@@ -44,15 +44,17 @@ const fetchAlistMediaContent = async (
   result: NoxMedia.Song[] = []
 ) => {
   const { hostname, pathname } = new URL(url);
+  const paddedPath = pathname.endsWith('/') ? pathname : `${pathname}/`;
   const cred = await getCred(hostname);
-  if (!cred) return result;
+  if (cred === null) return result;
   const payload = {
     page: 1,
     password: cred,
-    path: pathname,
+    path: paddedPath,
     per_page: 999999,
     refresh: false,
   };
+  console.log(hostname, payload);
   const res = await singleLimiter.schedule(() =>
       bfetch(`https://${hostname}/api/fs/list`, {
         method: 'POST',
@@ -78,7 +80,7 @@ const fetchAlistMediaContent = async (
       }
     } else {
       if (AcceptableExtensions.includes(item.name.split('.').pop())) {
-        result.push(AListToNoxMedia(item, pathname, hostname));
+        result.push(AListToNoxMedia(item, paddedPath, hostname));
       }
     }
   }
@@ -87,7 +89,7 @@ const fetchAlistMediaContent = async (
 
 const resolveURL = async (song: NoxMedia.Song) => {
   const cred = await getCred(String(song.singerId));
-  if (cred) {
+  if (cred !== null) {
     try {
       const payload = {
         password: cred,
