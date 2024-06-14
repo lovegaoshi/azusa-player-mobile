@@ -68,7 +68,7 @@ const GestureWrapper = (props: {
   children: React.JSX.Element;
   gesture: PanGesture;
 }) => {
-  if (Platform.OS === 'ios') return props.children;
+  if (Platform.OS === 'ios' || __DEV__) return props.children;
   return (
     <GestureDetector gesture={props.gesture}>{props.children}</GestureDetector>
   );
