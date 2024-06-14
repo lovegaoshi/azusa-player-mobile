@@ -68,15 +68,10 @@ const GestureWrapper = (props: {
   children: React.JSX.Element;
   gesture: PanGesture;
 }) => {
-  if (Platform.OS === 'ios') {
-    return props.children;
-  } else {
-    return (
-      <GestureDetector gesture={props.gesture}>
-        {props.children}
-      </GestureDetector>
-    );
-  }
+  if (Platform.OS === 'ios') return props.children;
+  return (
+    <GestureDetector gesture={props.gesture}>{props.children}</GestureDetector>
+  );
 };
 
 const SkinItem = ({ skin, checked, setChecked }: SkinItemProps) => {
