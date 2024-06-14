@@ -1,6 +1,6 @@
 import { getAlistCred } from '../alist/storage';
 import { logger } from '../Logger';
-import { humanishApiLimiter } from './throttle';
+import { humanishApiLimiter, singleLimiter } from './throttle';
 import bfetch from '@utils/BiliFetch';
 import SongTS, { DEFAULT_NULL_URL } from '@objects/Song';
 import { Source, AcceptableExtensions } from '@enums/MediaFetch';
@@ -53,7 +53,7 @@ const fetchAlistMediaContent = async (
     per_page: 999999,
     refresh: false,
   };
-  const res = await humanishApiLimiter.schedule(() =>
+  const res = await singleLimiter.schedule(() =>
       bfetch(`https://${hostname}/api/fs/list`, {
         method: 'POST',
         headers: {
@@ -63,6 +63,10 @@ const fetchAlistMediaContent = async (
       })
     ),
     json = await res.json();
+  if (!json.data) {
+    logger.error(`[alist] failed to fetch ${url}: ${json.message}`);
+    return result;
+  }
   for (const item of json.data.content) {
     if (item.is_dir) {
       if (!fastSearch) {

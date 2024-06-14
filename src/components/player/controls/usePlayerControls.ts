@@ -27,6 +27,7 @@ export default () => {
   const { updateCurrentSongMetadata, updateCurrentSongMetadataReceived } =
     usePlaylistCRUD();
   const track = useActiveTrack();
+  const updateTrack = useNoxSetting(state => state.updateTrack);
 
   useTrackPlayerEvents([Event.PlaybackActiveTrackChanged], event => {
     if (event.track?.song) {
@@ -42,7 +43,7 @@ export default () => {
     performSkipToNext();
   });
 
-  useTrackPlayerEvents([Event.MetadataCommonReceived], event => {
+  useTrackPlayerEvents([Event.MetadataCommonReceived], async event => {
     console.log('Event.MetadataCommonReceived', event.metadata);
     if (
       !track?.song?.metadataOnReceived ||
@@ -63,6 +64,8 @@ export default () => {
       newMetadata.album = event.metadata.albumName;
     if (event.metadata.artworkUri)
       newMetadata.cover = event.metadata.artworkUri;
+    newMetadata.duration = (await TrackPlayer.getProgress()).duration;
+    updateTrack(event.metadata);
     updateCurrentSongMetadataReceived({ metadata: newMetadata });
   });
 

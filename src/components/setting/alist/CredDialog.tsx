@@ -35,11 +35,12 @@ export default ({
   return (
     <GenericDialog
       visible={visible}
-      title={t('AList.AddCred')}
+      title={t('AList.Add')}
       onClose={onClose}
       onSubmit={handleSubmit}
     >
       <NoxInput
+        autofocus={true}
         label={t('AList.Site')}
         selectTextOnFocus={false}
         text={text}
@@ -51,6 +52,7 @@ export default ({
         text={pwd}
         setText={setPwd}
         secureTextEntry={true}
+        autofocus={false}
       />
     </GenericDialog>
   );

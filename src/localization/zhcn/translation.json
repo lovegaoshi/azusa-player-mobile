@@ -164,6 +164,8 @@
     "ClearOrphanedCacheName": "清除失效的缓存",
     "ClearOrphanedCacheDesc": "删除所有缓存的歌曲",
     "ClearOrphanedCacheDesc2": "删除所有失效缓存的{{val}}首歌",
+    "TanakaName": "田中电视购物",
+    "TanakaDesc": "大家的～欲、望、之、友～",
     "DebugLogName": "显示TP日志",
     "DebugLogDesc": "显示TP的日志",
     "LogLevel0": "调试",
@@ -191,11 +193,17 @@
     "DeveloperOptionsName": "开发者选项",
     "DeveloperOptionsDesc": "正在测试的功能",
     "AListOptionsName": "AList",
-    "AListOptionsDesc": "Set up AList creds",
+    "AListOptionsDesc": "AList密钥设置",
     "LoginName": "B站登录",
     "LoginDesc": "二维码或填入cookie登录b站",
     "LanguageOptionsTitle": "选择语言",
     "FeatureNotImplemented": "功能孩妹实现"
+  },
+  "AList": {
+    "Name": "Alist",
+    "Add": "添加AList站点密钥",
+    "Site": "站点",
+    "Password": "密钥"
   },
   "AppearanceSettings": {
     "noWeebSkinsName": "二次元收收味",
