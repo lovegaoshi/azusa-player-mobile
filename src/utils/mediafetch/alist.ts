@@ -33,6 +33,7 @@ const getCred = async (hostname: string) => {
   const cred = await matchAlistCred(hostname);
   if (cred === null) {
     logger.warn(`[alist] Cred not found for ${hostname}`);
+    return '';
   }
   return cred;
 };
@@ -44,7 +45,9 @@ const fetchAlistMediaContent = async (
   result: NoxMedia.Song[] = []
 ) => {
   const { hostname, pathname } = new URL(url);
-  const paddedPath = pathname.endsWith('/') ? pathname : `${pathname}/`;
+  const paddedPath = decodeURI(
+    `https://1.t/${pathname.endsWith('/') ? pathname : `${pathname}/`}`
+  ).substring(12);
   const cred = await getCred(hostname);
   if (cred === null) return result;
   const payload = {
@@ -54,7 +57,6 @@ const fetchAlistMediaContent = async (
     per_page: 999999,
     refresh: false,
   };
-  console.log(hostname, payload);
   const res = await singleLimiter.schedule(() =>
       bfetch(`https://${hostname}/api/fs/list`, {
         method: 'POST',

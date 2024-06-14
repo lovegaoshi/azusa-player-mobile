@@ -37,7 +37,6 @@ export default (currentSong?: NoxMedia.Song) => {
     resolvedLyric,
     song = currentSong,
   }: NoxLyric.SearchLyric) => {
-    // console.debug(`lrcoptions: ${JSON.stringify(resolvedLrcOptions)}`);
     if (resolvedLrcOptions.length === 0 || !song)
       setLrc(i18n.t('Lyric.notFound'));
     else {
