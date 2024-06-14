@@ -37,7 +37,7 @@
 - 本质上是个 b 站第三方**音频在线播放器**，是插件版[电梓播放器](https://github.com/kenmingwang/azusa-player) 和[电闹播放器](https://github.com/lovegaoshi/azusa-player)的忠实移植；对标油管音乐，去除歌单推荐功能~2024年不会还有人用b站推荐听歌吧~，交互仿造AIMP，复古简约。
 - 功能会在插件版[电闹播放器](https://github.com/lovegaoshi/azusa-player)同步更新
 - 目的是想让视频**轻量化**为音频，方便溜歌/歌单分类/下载等
-- 播放b站，油管，steria.tk，musicFree插件，本地歌
+- 播放b站，油管，musicFree插件，本地歌（android），AList
 - 歌单订阅更新
 - 歌名提取与歌词搜索
 - 换皮和自制皮肤
