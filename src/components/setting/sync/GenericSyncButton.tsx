@@ -5,7 +5,7 @@ import { ActivityIndicator, IconButton } from 'react-native-paper';
 import { useTranslation } from 'react-i18next';
 
 import { logger } from '@utils/Logger';
-import { exportPlayerContent } from '@utils/ChromeStorage';
+import { exportPlayerContent } from '@utils/ChromeStorageAPI';
 import useSnack from '@stores/useSnack';
 import keepAwake from '@utils/keepAwake';
 

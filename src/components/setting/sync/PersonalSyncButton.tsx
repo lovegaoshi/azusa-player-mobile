@@ -7,7 +7,7 @@ import { useTranslation } from 'react-i18next';
 import { noxBackup, noxRestore } from './PersonalCloudAuth';
 import { useNoxSetting } from '@stores/useApp';
 import { logger } from '@utils/Logger';
-import { exportPlayerContent } from '@utils/ChromeStorage';
+import { exportPlayerContent } from '@utils/ChromeStorageAPI';
 import useSnack from '@stores/useSnack';
 
 interface Props {
