@@ -81,3 +81,5 @@ export const DefaultSetting: NoxStorage.PlayerSettingDict = {
   language: undefined,
   cacheSize: 1,
 };
+
+export const OverrideSetting: Partial<NoxStorage.PlayerSettingDict> = {};

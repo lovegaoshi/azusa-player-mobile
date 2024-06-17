@@ -11,12 +11,18 @@ import {
   delPlaylist as _delPlaylist,
   importPlayerContentRaw as _importPlayerContentRaw,
   getColorScheme,
+  getPlaylistSongList,
 } from '@utils/ChromeStorageAPI';
 import { dummyPlaylist, dummyPlaylistList } from '@objects/Playlist';
 import { NoxRepeatMode } from '@enums/RepeatMode';
 import { PlaylistTypes } from '@enums/Playlist';
 import AdaptiveTheme from '../components/styles/AdaptiveTheme';
-import { StorageKeys, DefaultSetting, SearchOptions } from '@enums/Storage';
+import {
+  StorageKeys,
+  DefaultSetting,
+  SearchOptions,
+  OverrideSetting,
+} from '@enums/Storage';
 import { MUSICFREE } from './mediafetch/musicfree';
 import { getAlistCred } from './alist/storage';
 
@@ -93,13 +99,15 @@ export const getPlaylist = async ({
   hydrateSongList = true,
 }: GetPlaylist): Promise<NoxMedia.Playlist> => {
   const dPlaylist = defaultPlaylist();
+  const retrievedPlaylist = await getItem(key);
   try {
-    const retrievedPlaylist = await getItem(key);
-    if (retrievedPlaylist === null) return dPlaylist;
-    retrievedPlaylist.songList = hydrateSongList
-      ? await loadChucked(retrievedPlaylist.songList)
-      : [];
-    return { ...dPlaylist, ...retrievedPlaylist };
+    return {
+      ...dPlaylist,
+      ...retrievedPlaylist,
+      songList: hydrateSongList
+        ? await getPlaylistSongList(retrievedPlaylist)
+        : [],
+    };
   } catch (e) {
     console.error(e);
   }
@@ -138,16 +146,6 @@ export const savePlayerSkin = (val: NoxTheme.Style | NoxTheme.AdaptiveStyle) =>
 
 export const getPlayerSkin = () => getItem(StorageKeys.SKIN);
 
-export const addPlaylist = (
-  playlist: NoxMedia.Playlist,
-  playlistIds: string[]
-) => {
-  playlistIds.push(playlist.id);
-  savePlaylist(playlist);
-  savePlaylistIds(playlistIds);
-  return playlistIds;
-};
-
 export const delPlaylist = (playlistId: string, playlistIds: string[]) => {
   const playlistIds2 = [...playlistIds];
   playlistIds2.splice(playlistIds2.indexOf(playlistId), 1);
@@ -174,6 +172,7 @@ export const initPlayerObject = async (safeMode = false) => {
     settings: {
       ...DefaultSetting,
       ...(await getItem(StorageKeys.PLAYER_SETTING_KEY, {})),
+      ...OverrideSetting,
     },
     playlistIds: await getItem(StorageKeys.MY_FAV_LIST_KEY, []),
     playlists: {},
@@ -228,8 +227,8 @@ export const initPlayerObject = async (safeMode = false) => {
 
 const clearPlaylists = async () => {
   const playlistIds = await getItem(StorageKeys.MY_FAV_LIST_KEY, []);
-  playlistIds.forEach(_delPlaylist);
   savePlaylistIds([]);
+  return playlistIds.map(_delPlaylist);
 };
 
 const saveImportedPlaylist = async (playlists: any[]) => {

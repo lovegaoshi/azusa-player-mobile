@@ -182,3 +182,10 @@ export const getColorScheme = async () => {
 
 export const saveColorScheme = (val: ColorSchemeName) =>
   saveItem(StorageKeys.COLORTHEME, val);
+
+export const getPlaylistSongList = async (
+  playlist?: NoxMedia.Playlist
+): Promise<NoxMedia.Song[]> =>
+  !playlist?.songList
+    ? []
+    : loadChucked(playlist.songList as unknown as string[]);
