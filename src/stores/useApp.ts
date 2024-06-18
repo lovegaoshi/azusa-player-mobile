@@ -16,7 +16,8 @@ import {
   saveDefaultSearch,
   getPlaylist,
 } from '@utils/ChromeStorage';
-import { DefaultSetting, StorageKeys, SearchOptions } from '@enums/Storage';
+import { StorageKeys, SearchOptions } from '@enums/Storage';
+import { DefaultSetting } from '@objects/Storage';
 import { setPlayerSetting as setPlayerSettingVanilla } from './playerSettingStore';
 import { savePlayerStyle } from '@utils/StyleStorage';
 import { createStyle } from '@components/style';

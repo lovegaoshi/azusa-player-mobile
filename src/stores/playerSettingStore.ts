@@ -1,7 +1,7 @@
 // vanilla store of zustand serving playbackServices.
 import { createStore } from 'zustand/vanilla';
 
-import { DefaultSetting } from '@enums/Storage';
+import { DefaultSetting } from '@objects/Storage';
 import { saveSettings, getSettings } from '@utils/ChromeStorage';
 
 interface AppStore {

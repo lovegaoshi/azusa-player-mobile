@@ -18,12 +18,8 @@ import {
 import { dummyPlaylist, dummyPlaylistList } from '@objects/Playlist';
 import { NoxRepeatMode } from '@enums/RepeatMode';
 import { PlaylistTypes } from '@enums/Playlist';
-import {
-  StorageKeys,
-  DefaultSetting,
-  SearchOptions,
-  OverrideSetting,
-} from '@enums/Storage';
+import { StorageKeys, SearchOptions } from '@enums/Storage';
+import { DefaultSetting, OverrideSetting } from '@objects/Storage';
 import { MUSICFREE } from '@utils/mediafetch/musicfree';
 import { getAlistCred } from './alist/storage';
 import { timeFunction } from './Utils';
