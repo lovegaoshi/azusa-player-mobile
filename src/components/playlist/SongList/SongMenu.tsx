@@ -56,7 +56,7 @@ export default ({ usePlaylist, prepareForLayoutAnimationRender }: Props) => {
   const selectedSongs = () => {
     return (
       getSelectedSongs() ||
-      songMenuSongIndexes.map(index => currentPlaylist.songList[index!])
+      songMenuSongIndexes.map(index => currentPlaylist.songList[index])
     );
   };
 

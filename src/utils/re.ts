@@ -74,12 +74,12 @@ export const getName = (song: NoxMedia.Song, parsed = false) => {
   return song.name;
 };
 
-interface reExtract {
+interface ReExtract {
   regex: RegExp;
   process: (val: RegExpExecArray, someRows: NoxMedia.Song[]) => NoxMedia.Song[];
 }
 
-const reExtractionsDefault: reExtract[] = [
+const reExtractionsDefault: ReExtract[] = [
   {
     regex: SearchRegex.absoluteMatch.regex,
     process: (val: RegExpExecArray, someRows: NoxMedia.Song[]) =>
@@ -107,14 +107,14 @@ const reExtractionsDefault: reExtract[] = [
   },
 ];
 
-interface reParseSearchProps {
+interface ReParseSearchProps {
   searchStr: string;
   rows: NoxMedia.Song[];
   defaultExtract?: (
     someRows: NoxMedia.Song[],
     searchstr: string
   ) => NoxMedia.Song[];
-  extraReExtract?: reExtract[];
+  extraReExtract?: ReExtract[];
 }
 export const reParseSearch = ({
   searchStr,
@@ -127,7 +127,7 @@ export const reParseSearch = ({
         row.album?.includes(searchstr)
     ),
   extraReExtract = [],
-}: reParseSearchProps) => {
+}: ReParseSearchProps) => {
   const reExtractions = [...reExtractionsDefault, ...extraReExtract];
   let defaultExtraction = true;
   for (const searchSubStr of searchStr.split('|')) {
