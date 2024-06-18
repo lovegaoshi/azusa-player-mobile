@@ -189,3 +189,5 @@ export const getPlaylistSongList = async (
   !playlist?.songList
     ? []
     : loadChucked(playlist.songList as unknown as string[]);
+
+export const getRegExtractMapping = async () => undefined;

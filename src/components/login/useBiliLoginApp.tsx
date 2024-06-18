@@ -111,7 +111,7 @@ export interface BiliLogin {
   setQrCodeExpire: React.Dispatch<React.SetStateAction<number>>;
   setLoginInfo: React.Dispatch<React.SetStateAction<LoginInfo | null>>;
   clearQRLogin: () => void;
-  getBiliLoginStatus: () => void;
+  getBiliLoginStatus: () => Promise<void>;
   getQRLoginReq: () => Promise<QRCodeReq>;
   loginQRVerification: () => Promise<boolean>;
   confirmWebQRCode: (SESSDATA: string, bili_jct: string) => Promise<void>;
@@ -143,7 +143,7 @@ const useBiliLogin = (): BiliLogin => {
     setInitialize(false);
   };
 
-  const clearQRLogin = async () => {
+  const clearQRLogin = () => {
     setQrCode('');
     setQrCodeExpire(-1);
   };

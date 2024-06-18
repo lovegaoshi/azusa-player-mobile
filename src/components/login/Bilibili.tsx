@@ -103,7 +103,6 @@ export default () => {
   const { t } = useTranslation();
   const playerStyle = useNoxSetting(state => state.playerStyle);
   const appRefresh = useNoxSetting(state => state.appRefresh);
-  const setSnack = useSnack(state => state.setSnack);
   const [inputCookieVisible, setInputCookieVisible] = React.useState(false);
   const biliLogin = useBiliLogin();
   const {

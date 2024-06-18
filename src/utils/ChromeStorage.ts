@@ -12,6 +12,7 @@ import {
   importPlayerContentRaw as _importPlayerContentRaw,
   getColorScheme,
   getPlaylistSongList,
+  getRegExtractMapping as _getRegExtractMapping,
 } from '@utils/ChromeStorageAPI';
 import { dummyPlaylist, dummyPlaylistList } from '@objects/Playlist';
 import { NoxRepeatMode } from '@enums/RepeatMode';
@@ -25,6 +26,8 @@ import {
 } from '@enums/Storage';
 import { MUSICFREE } from './mediafetch/musicfree';
 import { getAlistCred } from './alist/storage';
+import { timeFunction } from './Utils';
+import { logger } from '@utils/Logger';
 
 export const setMusicFreePlugin = (val: MUSICFREE[]): Promise<void> =>
   saveItem(StorageKeys.MUSICFREE_PLUGIN, val);
@@ -38,8 +41,10 @@ export const getFadeInterval = async () =>
 export const saveFadeInterval = async (val: number) =>
   await saveItem(StorageKeys.FADE_INTERVAL, val);
 
-export const getRegExtractMapping = (): Promise<NoxRegExt.JSONExtractor[]> =>
-  getItem(StorageKeys.REGEXTRACT_MAPPING, []);
+export const getRegExtractMapping = async (): Promise<
+  NoxRegExt.JSONExtractor[]
+> =>
+  (await getRegExtractMapping()) ?? getItem(StorageKeys.REGEXTRACT_MAPPING, []);
 
 export const saveRegextractMapping = (val: NoxRegExt.JSONExtractor[]) =>
   saveItem(StorageKeys.REGEXTRACT_MAPPING, val);
@@ -212,15 +217,18 @@ export const initPlayerObject = async (safeMode = false) => {
   playerObject.playlists[StorageKeys.FAVORITE_PLAYLIST_KEY] =
     playerObject.favoriPlaylist;
 
-  await Promise.all(
-    playerObject.playlistIds.map(async id => {
-      const retrievedPlaylist = await getPlaylist({
-        key: id,
-        hydrateSongList: !playerObject.settings.memoryEfficiency,
-      });
-      if (retrievedPlaylist) playerObject.playlists[id] = retrievedPlaylist;
-    })
-  );
+  const loadPlaylistTime = await timeFunction(async () => {
+    await Promise.all(
+      playerObject.playlistIds.map(async id => {
+        const retrievedPlaylist = await getPlaylist({
+          key: id,
+          hydrateSongList: !playerObject.settings.memoryEfficiency,
+        });
+        if (retrievedPlaylist) playerObject.playlists[id] = retrievedPlaylist;
+      })
+    );
+  });
+  logger.debug(`[perf] loading playlists took ${loadPlaylistTime} ms`);
 
   return playerObject;
 };
