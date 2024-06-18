@@ -208,7 +208,7 @@ jobs:
           packageName: com.noxplay.noxplayer
           releaseFiles: android/app/build/outputs/bundle/release/app-release.aab
           track: internal
-          changesNotSentForReview: true
+          #changesNotSentForReview: true
 
   buildIPA:
     runs-on: macos-14
