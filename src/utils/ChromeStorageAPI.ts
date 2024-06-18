@@ -6,7 +6,9 @@ import { v4 as uuidv4 } from 'uuid';
 import { strToU8, compressSync } from 'fflate';
 
 import { chunkArray, arrayToObject } from '../utils/Utils';
-import { StorageKeys, AppID } from '@enums/Storage';
+import { StorageKeys } from '@enums/Storage';
+import { AppID } from '@objects/Storage';
+import AdaptiveTheme from '../components/styles/AdaptiveTheme';
 /**
  * noxplayer's storage handler.
  * ChromeStorage has quite a few changes from azusa player the chrome extension;
@@ -189,3 +191,7 @@ export const getPlaylistSongList = async (
   !playlist?.songList
     ? []
     : loadChucked(playlist.songList as unknown as string[]);
+
+export const getRegExtractMapping = async () => undefined;
+
+export const getDefaultTheme = () => AdaptiveTheme;

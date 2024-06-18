@@ -162,3 +162,9 @@ export const reorder = <T>(list: T[], startIndex: number, endIndex: number) => {
   if (removed !== undefined) result.splice(endIndex, 0, removed);
   return result;
 };
+
+export const timeFunction = async (fn: () => Promise<void>) => {
+  const start = Date.now();
+  await fn();
+  return Date.now() - start;
+};

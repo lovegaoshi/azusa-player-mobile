@@ -12,19 +12,18 @@ import {
   importPlayerContentRaw as _importPlayerContentRaw,
   getColorScheme,
   getPlaylistSongList,
+  getRegExtractMapping as _getRegExtractMapping,
+  getDefaultTheme,
 } from '@utils/ChromeStorageAPI';
 import { dummyPlaylist, dummyPlaylistList } from '@objects/Playlist';
 import { NoxRepeatMode } from '@enums/RepeatMode';
 import { PlaylistTypes } from '@enums/Playlist';
-import AdaptiveTheme from '../components/styles/AdaptiveTheme';
-import {
-  StorageKeys,
-  DefaultSetting,
-  SearchOptions,
-  OverrideSetting,
-} from '@enums/Storage';
-import { MUSICFREE } from './mediafetch/musicfree';
+import { StorageKeys, SearchOptions } from '@enums/Storage';
+import { DefaultSetting, OverrideSetting } from '@objects/Storage';
+import { MUSICFREE } from '@utils/mediafetch/musicfree';
 import { getAlistCred } from './alist/storage';
+import { timeFunction } from './Utils';
+import { logger } from '@utils/Logger';
 
 export const setMusicFreePlugin = (val: MUSICFREE[]): Promise<void> =>
   saveItem(StorageKeys.MUSICFREE_PLUGIN, val);
@@ -38,7 +37,10 @@ export const getFadeInterval = async () =>
 export const saveFadeInterval = async (val: number) =>
   await saveItem(StorageKeys.FADE_INTERVAL, val);
 
-export const getRegExtractMapping = (): Promise<NoxRegExt.JSONExtractor[]> =>
+export const getRegExtractMapping = async (): Promise<
+  NoxRegExt.JSONExtractor[]
+> =>
+  (await _getRegExtractMapping()) ??
   getItem(StorageKeys.REGEXTRACT_MAPPING, []);
 
 export const saveRegextractMapping = (val: NoxRegExt.JSONExtractor[]) =>
@@ -189,7 +191,7 @@ export const initPlayerObject = async (safeMode = false) => {
       StorageKeys.PLAYMODE_KEY,
       NoxRepeatMode.Shuffle
     ),
-    skin: await getItem(StorageKeys.SKIN, AdaptiveTheme),
+    skin: await getItem(StorageKeys.SKIN, getDefaultTheme()),
     skins: (await getPlayerSkins()) || [],
     cookies: await getItem(StorageKeys.COOKIES, {}),
     lyricMapping,
@@ -212,20 +214,23 @@ export const initPlayerObject = async (safeMode = false) => {
   playerObject.playlists[StorageKeys.FAVORITE_PLAYLIST_KEY] =
     playerObject.favoriPlaylist;
 
-  await Promise.all(
-    playerObject.playlistIds.map(async id => {
-      const retrievedPlaylist = await getPlaylist({
-        key: id,
-        hydrateSongList: !playerObject.settings.memoryEfficiency,
-      });
-      if (retrievedPlaylist) playerObject.playlists[id] = retrievedPlaylist;
-    })
-  );
+  const loadPlaylistTime = await timeFunction(async () => {
+    await Promise.all(
+      playerObject.playlistIds.map(async id => {
+        const retrievedPlaylist = await getPlaylist({
+          key: id,
+          hydrateSongList: !playerObject.settings.memoryEfficiency,
+        });
+        if (retrievedPlaylist) playerObject.playlists[id] = retrievedPlaylist;
+      })
+    );
+  });
+  logger.debug(`[perf] loading playlists took ${loadPlaylistTime} ms`);
 
   return playerObject;
 };
 
-const clearPlaylists = async () => {
+export const clearPlaylists = async () => {
   const playlistIds = await getItem(StorageKeys.MY_FAV_LIST_KEY, []);
   savePlaylistIds([]);
   return playlistIds.map(_delPlaylist);

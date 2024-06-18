@@ -45,6 +45,12 @@ const useSplash = (duration = 1000) => {
   return isReady;
 };
 
+const APM = ({ PIP, isLandscape }: { PIP: boolean; isLandscape: boolean }) => {
+  if (PIP) return <PIPLyricView />;
+  if (isLandscape) return <AzusaPlayerLandscape />;
+  return <AzusaPlayer />;
+};
+
 export default function App(appProps: NoxComponent.AppProps) {
   const isSplashReady = useSplash(__DEV__ || appProps.intentData ? 1 : 2500);
   const [isSplashAnimReady, setIsSplashReady] = React.useState(false);
@@ -83,13 +89,7 @@ export default function App(appProps: NoxComponent.AppProps) {
     <GestureHandlerRootView style={styles.gestureContainer}>
       <MainBackground>
         <SafeAreaProvider>
-          {PIPMode ? (
-            <PIPLyricView />
-          ) : isLandscape ? (
-            <AzusaPlayerLandscape />
-          ) : (
-            <AzusaPlayer />
-          )}
+          <APM PIP={PIPMode} isLandscape={isLandscape} />
         </SafeAreaProvider>
       </MainBackground>
     </GestureHandlerRootView>
