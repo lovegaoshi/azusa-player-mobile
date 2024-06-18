@@ -234,7 +234,7 @@ export const initPlayerObject = async (safeMode = false) => {
   return playerObject;
 };
 
-const clearPlaylists = async () => {
+export const clearPlaylists = async () => {
   const playlistIds = await getItem(StorageKeys.MY_FAV_LIST_KEY, []);
   savePlaylistIds([]);
   return playlistIds.map(_delPlaylist);
