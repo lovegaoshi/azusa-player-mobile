@@ -44,7 +44,8 @@ export const saveFadeInterval = async (val: number) =>
 export const getRegExtractMapping = async (): Promise<
   NoxRegExt.JSONExtractor[]
 > =>
-  (await getRegExtractMapping()) ?? getItem(StorageKeys.REGEXTRACT_MAPPING, []);
+  (await _getRegExtractMapping()) ??
+  getItem(StorageKeys.REGEXTRACT_MAPPING, []);
 
 export const saveRegextractMapping = (val: NoxRegExt.JSONExtractor[]) =>
   saveItem(StorageKeys.REGEXTRACT_MAPPING, val);
