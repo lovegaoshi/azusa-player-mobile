@@ -4,10 +4,10 @@ import { create } from 'zustand';
 
 import { dummyPlaylist, dummyPlaylistList } from '../objects/Playlist';
 import { updatePlaylistSongs } from '../utils/playlistOperations';
+import { savePlaylist } from '@utils/ChromeStorageAPI';
 import {
   delPlaylist,
   saveFavPlaylist,
-  savePlaylist,
   savePlaylistIds,
   saveSettings,
   savelastPlaylistId,

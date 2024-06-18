@@ -6,6 +6,7 @@ import { useTranslation } from 'react-i18next';
 
 import { useNoxSetting } from '@stores/useApp';
 import useSnack from '@stores/useSnack';
+import logger from '@utils/Logger';
 
 interface Props {
   onSearched: (val: any) => void;
@@ -27,7 +28,8 @@ const CustomSkinSearch = ({
       const res = await fetch(val);
       const searchedResult = await res.json();
       onSearched(searchedResult);
-    } catch {
+    } catch (e) {
+      logger.warn(`[SkinSearchbar] failed to search ${e}`);
       setSnack({
         snackMsg: { success: t('CustomSkin.SearchFailMsg') },
       });

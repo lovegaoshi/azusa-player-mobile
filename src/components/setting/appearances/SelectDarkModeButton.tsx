@@ -8,7 +8,7 @@ import {
   SelectSettingEntry,
   dummySelectSettingEntry,
 } from '../SetttingEntries';
-import { saveColorScheme, getColorScheme } from '@utils/ChromeStorage';
+import { saveColorScheme, getColorScheme } from '@utils/ChromeStorageAPI';
 
 const ColorSchemei18n = (
   scheme: ColorSchemeName,

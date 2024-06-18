@@ -1,9 +1,12 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { Appearance, ColorSchemeName } from 'react-native';
 import * as SecureStore from 'expo-secure-store';
+import { v4 as uuidv4 } from 'uuid';
+import { strToU8, compressSync } from 'fflate';
 
 import { chunkArray, arrayToObject } from '../utils/Utils';
-import { StorageKeys } from '@enums/Storage';
+import { StorageKeys, AppID } from '@enums/Storage';
 /**
  * noxplayer's storage handler.
  * ChromeStorage has quite a few changes from azusa player the chrome extension;
@@ -107,3 +110,82 @@ export const saveSecure = (key: string, value: unknown) =>
 
 export const getSecure = (key: string, defaultVal: unknown = null) =>
   getItem(key, defaultVal, SecureStore.getItemAsync);
+
+/**
+ * playlist can get quite large, my idea is to splice songlist into smaller lists then join them.
+ */
+export const savePlaylist = async (
+  playlist: NoxMedia.Playlist,
+  overrideKey: string | null = null
+) => {
+  try {
+    const savingPlaylist = {
+      ...playlist,
+      songList: await saveChucked(playlist.id, playlist.songList, false),
+    };
+    // save chunks
+    saveItem(overrideKey ?? playlist.id ?? uuidv4(), savingPlaylist);
+  } catch (e) {
+    console.error(e);
+  }
+};
+
+export const delPlaylist = async (playlistId: string) => {
+  removeItem(playlistId);
+  (await AsyncStorage.getAllKeys())
+    .filter(k => k.startsWith(`${playlistId}.`))
+    .forEach(k => removeItem(k));
+};
+
+const clearStorage = () => AsyncStorage.clear();
+
+export const exportPlayerContent = async (content?: any) => {
+  if (!content) {
+    const allKeys = await AsyncStorage.getAllKeys();
+    content = await AsyncStorage.multiGet(allKeys);
+  }
+  return compressSync(strToU8(JSON.stringify(content)));
+};
+
+const parseImportedPartial = (
+  key: string,
+  parsedContent: [string, string][]
+) => {
+  return JSON.parse(
+    parsedContent.filter((val: [string, string]) => val[0] === key)[0][1]
+  );
+};
+
+export const importPlayerContentRaw = async (
+  parsedContent: any,
+  getContent: () => Promise<any>
+) => {
+  const importedAppID = parseImportedPartial(
+    StorageKeys.PLAYER_SETTING_KEY,
+    parsedContent
+  ).appID;
+  if (importedAppID !== AppID) {
+    throw new Error(`${importedAppID} is not valid appID`);
+  } else {
+    const content = await getContent();
+    await clearStorage();
+    await AsyncStorage.multiSet(parsedContent);
+    return content;
+  }
+};
+
+export const getColorScheme = async () => {
+  const colorScheme = await getItem(StorageKeys.COLORTHEME, null);
+  Appearance.setColorScheme(colorScheme);
+  return colorScheme;
+};
+
+export const saveColorScheme = (val: ColorSchemeName) =>
+  saveItem(StorageKeys.COLORTHEME, val);
+
+export const getPlaylistSongList = async (
+  playlist?: NoxMedia.Playlist
+): Promise<NoxMedia.Song[]> =>
+  !playlist?.songList
+    ? []
+    : loadChucked(playlist.songList as unknown as string[]);

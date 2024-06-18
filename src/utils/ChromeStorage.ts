@@ -1,17 +1,17 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import { strToU8, compressSync } from 'fflate';
-import { v4 as uuidv4 } from 'uuid';
-import { Appearance, ColorSchemeName } from 'react-native';
 import i18n from 'i18next';
 
 import {
   saveItem,
   getItem,
-  removeItem,
   getMapping,
   saveChucked,
   loadChucked,
+  savePlaylist,
+  delPlaylist as _delPlaylist,
+  importPlayerContentRaw as _importPlayerContentRaw,
+  getColorScheme,
+  getPlaylistSongList,
 } from '@utils/ChromeStorageAPI';
 import { dummyPlaylist, dummyPlaylistList } from '@objects/Playlist';
 import { NoxRepeatMode } from '@enums/RepeatMode';
@@ -19,9 +19,9 @@ import { PlaylistTypes } from '@enums/Playlist';
 import AdaptiveTheme from '../components/styles/AdaptiveTheme';
 import {
   StorageKeys,
-  AppID,
   DefaultSetting,
   SearchOptions,
+  OverrideSetting,
 } from '@enums/Storage';
 import { MUSICFREE } from './mediafetch/musicfree';
 import { getAlistCred } from './alist/storage';
@@ -34,6 +34,7 @@ export const getMusicFreePlugin = (): Promise<MUSICFREE[]> =>
 
 export const getFadeInterval = async () =>
   Number(await getItem(StorageKeys.FADE_INTERVAL)) || 0;
+
 export const saveFadeInterval = async (val: number) =>
   await saveItem(StorageKeys.FADE_INTERVAL, val);
 
@@ -67,15 +68,6 @@ export const getCachedMediaMapping = () =>
 export const saveCachedMediaMapping = (val: any[]) =>
   saveItem(StorageKeys.CACHED_MEDIA_MAPPING, val);
 
-export const getColorScheme = async () => {
-  const colorScheme = await getItem(StorageKeys.COLORTHEME, null);
-  Appearance.setColorScheme(colorScheme);
-  return colorScheme;
-};
-
-export const saveColorScheme = (val: ColorSchemeName) =>
-  saveItem(StorageKeys.COLORTHEME, val);
-
 // we keep the set-cookie header for noxplayer's remove personal search option
 // TODO: security risk. move this to an encrypted storage.
 export const addCookie = async (site: string, setHeader: string) => {
@@ -91,24 +83,6 @@ export const removeCookie = async (site: string) => {
   saveItem(StorageKeys.COOKIES, cookies);
 };
 
-/**
- * playlist can get quite large, my idea is to splice songlist into smaller lists then join them.
- */
-export const savePlaylist = async (
-  playlist: NoxMedia.Playlist,
-  overrideKey: string | null = null
-) => {
-  try {
-    const savingPlaylist = {
-      ...playlist,
-      songList: await saveChucked(playlist.id, playlist.songList, false),
-    };
-    // save chunks
-    saveItem(overrideKey ?? playlist.id ?? uuidv4(), savingPlaylist);
-  } catch (e) {
-    console.error(e);
-  }
-};
 interface GetPlaylist {
   key: string;
   defaultPlaylist?: () => NoxMedia.Playlist;
@@ -125,13 +99,15 @@ export const getPlaylist = async ({
   hydrateSongList = true,
 }: GetPlaylist): Promise<NoxMedia.Playlist> => {
   const dPlaylist = defaultPlaylist();
+  const retrievedPlaylist = await getItem(key);
   try {
-    const retrievedPlaylist = await getItem(key);
-    if (retrievedPlaylist === null) return dPlaylist;
-    retrievedPlaylist.songList = hydrateSongList
-      ? await loadChucked(retrievedPlaylist.songList)
-      : [];
-    return { ...dPlaylist, ...retrievedPlaylist };
+    return {
+      ...dPlaylist,
+      ...retrievedPlaylist,
+      songList: hydrateSongList
+        ? await getPlaylistSongList(retrievedPlaylist)
+        : [],
+    };
   } catch (e) {
     console.error(e);
   }
@@ -170,23 +146,6 @@ export const savePlayerSkin = (val: NoxTheme.Style | NoxTheme.AdaptiveStyle) =>
 
 export const getPlayerSkin = () => getItem(StorageKeys.SKIN);
 
-export const addPlaylist = (
-  playlist: NoxMedia.Playlist,
-  playlistIds: string[]
-) => {
-  playlistIds.push(playlist.id);
-  savePlaylist(playlist);
-  savePlaylistIds(playlistIds);
-  return playlistIds;
-};
-
-const _delPlaylist = async (playlistId: string) => {
-  removeItem(playlistId);
-  (await AsyncStorage.getAllKeys())
-    .filter(k => k.startsWith(`${playlistId}.`))
-    .forEach(k => removeItem(k));
-};
-
 export const delPlaylist = (playlistId: string, playlistIds: string[]) => {
   const playlistIds2 = [...playlistIds];
   playlistIds2.splice(playlistIds2.indexOf(playlistId), 1);
@@ -213,6 +172,7 @@ export const initPlayerObject = async (safeMode = false) => {
     settings: {
       ...DefaultSetting,
       ...(await getItem(StorageKeys.PLAYER_SETTING_KEY, {})),
+      ...OverrideSetting,
     },
     playlistIds: await getItem(StorageKeys.MY_FAV_LIST_KEY, []),
     playlists: {},
@@ -265,21 +225,10 @@ export const initPlayerObject = async (safeMode = false) => {
   return playerObject;
 };
 
-export const clearStorage = () => AsyncStorage.clear();
-
-// gzip
-export const exportPlayerContent = async (content?: any) => {
-  if (!content) {
-    const allKeys = await AsyncStorage.getAllKeys();
-    content = await AsyncStorage.multiGet(allKeys);
-  }
-  return compressSync(strToU8(JSON.stringify(content)));
-};
-
 const clearPlaylists = async () => {
   const playlistIds = await getItem(StorageKeys.MY_FAV_LIST_KEY, []);
-  playlistIds.forEach(_delPlaylist);
   savePlaylistIds([]);
+  return playlistIds.map(_delPlaylist);
 };
 
 const saveImportedPlaylist = async (playlists: any[]) => {
@@ -315,27 +264,11 @@ export const addImportedPlaylist = async (playlists: any[]) => {
   );
 };
 
-const parseImportedPartial = (
-  key: string,
-  parsedContent: [string, string][]
-) => {
-  return JSON.parse(
-    parsedContent.filter((val: [string, string]) => val[0] === key)[0][1]
-  );
-};
-
 export const importPlayerContentRaw = async (parsedContent: any) => {
-  const importedAppID = parseImportedPartial(
-    StorageKeys.PLAYER_SETTING_KEY,
-    parsedContent
-  ).appID;
-  if (importedAppID !== AppID) {
-    throw new Error(`${importedAppID} is not valid appID`);
-  } else {
-    const oldCache = await getCachedMediaMapping();
-    await clearStorage();
-    await AsyncStorage.multiSet(parsedContent);
-    await saveCachedMediaMapping(oldCache);
-    return initPlayerObject();
-  }
+  const oldCache = await _importPlayerContentRaw(
+    parsedContent,
+    getCachedMediaMapping
+  );
+  await saveCachedMediaMapping(oldCache);
+  return initPlayerObject();
 };
