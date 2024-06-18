@@ -45,15 +45,14 @@ const fetchAlistMediaContent = async (
   result: NoxMedia.Song[] = []
 ) => {
   const { hostname, pathname } = new URL(url);
-  const paddedPath = decodeURI(
-    `https://1.t/${pathname.endsWith('/') ? pathname : `${pathname}/`}`
-  ).substring(12);
+  const paddedPath = pathname.endsWith('/') ? pathname : `${pathname}/`;
+  const parsedPath = decodeURI(`https://1.t/${paddedPath}`).substring(12);
   const cred = await getCred(hostname);
   if (cred === null) return result;
   const payload = {
     page: 1,
     password: cred,
-    path: paddedPath,
+    path: parsedPath,
     per_page: 999999,
     refresh: false,
   };
@@ -82,7 +81,7 @@ const fetchAlistMediaContent = async (
       }
     } else {
       if (AcceptableExtensions.includes(item.name.split('.').pop())) {
-        result.push(AListToNoxMedia(item, paddedPath, hostname));
+        result.push(AListToNoxMedia(item, parsedPath, hostname));
       }
     }
   }

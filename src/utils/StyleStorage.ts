@@ -7,11 +7,8 @@ export const savePlayerStyle = (
   val: NoxTheme.Style | NoxTheme.AdaptiveStyle,
   save = true
 ) => {
-  const createFromStyle = val.isAdaptive
-    ? Appearance.getColorScheme() === 'dark'
-      ? val.darkTheme
-      : val
-    : val;
+  const isDark = val.isAdaptive && Appearance.getColorScheme() === 'dark';
+  const createFromStyle = isDark ? val.darkTheme : val;
   const createdStyle = createStyle(createFromStyle);
   if (save) savePlayerSkin(val);
   return createdStyle;

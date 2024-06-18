@@ -99,10 +99,25 @@ const loginQRVerification = async () => {
       (val: any) => val.name === 'bili_jct'
     )[0].value,
   });
-  // logger.debug(`[biliLogin] ${JSON.stringify(json)}`);
+  return true;
 };
 
-const useBiliLogin = () => {
+export interface BiliLogin {
+  qrcode: string;
+  loginInfo: LoginInfo | null;
+  initialize: boolean;
+  setQrCode: React.Dispatch<React.SetStateAction<string>>;
+  setQrCodeKey: React.Dispatch<React.SetStateAction<string>>;
+  setQrCodeExpire: React.Dispatch<React.SetStateAction<number>>;
+  setLoginInfo: React.Dispatch<React.SetStateAction<LoginInfo | null>>;
+  clearQRLogin: () => void;
+  getBiliLoginStatus: () => void;
+  getQRLoginReq: () => Promise<QRCodeReq>;
+  loginQRVerification: () => Promise<boolean>;
+  confirmWebQRCode: (SESSDATA: string, bili_jct: string) => Promise<void>;
+}
+
+const useBiliLogin = (): BiliLogin => {
   const { t } = useTranslation();
   const setSnack = useSnack(state => state.setSnack);
   const [qrcode, setQrCode] = React.useState<string>('');
@@ -218,7 +233,6 @@ const useBiliLogin = () => {
           name: 'refresh_token',
           value: json.data.refresh_token,
         });
-        // logger.debug(`[biliLogin] ${await CookieManager.get(domain)}`);
         clearQRLogin();
       }
     } catch (error) {

@@ -9,10 +9,95 @@ import { useNoxSetting } from '@stores/useApp';
 import { logger } from '@utils/Logger';
 import GenericInputDialog from '../dialogs/GenericInputDialog';
 import BiliSelectFavButtton from './BiliSelectFavButtton';
-import useBiliLogin from './useBiliLoginApp';
+import useBiliLogin, { BiliLogin } from './useBiliLoginApp';
 import useSnack from '@stores/useSnack';
 
 const domain = 'https://bilibili.com';
+
+interface LoginPageProps {
+  biliLogin: BiliLogin;
+}
+
+interface LogginginPageProps extends LoginPageProps {
+  setInputCookieVisible: React.Dispatch<React.SetStateAction<boolean>>;
+}
+const LoggedInPage = ({ biliLogin }: LoginPageProps) => {
+  const { t } = useTranslation();
+  const { loginInfo, setLoginInfo } = biliLogin;
+
+  const logout = () => {
+    setLoginInfo(null);
+    CookieManager.clearAll();
+  };
+
+  if (!loginInfo) return <></>;
+
+  return (
+    <View style={styles.loggedInContainerStyle}>
+      <View style={styles.avatarContainerStyle}>
+        <Avatar.Image source={{ uri: loginInfo.avatar }}></Avatar.Image>
+        <View style={styles.avatarUsernameStyle}>
+          <Text variant="headlineSmall">{loginInfo.name}</Text>
+          <Button onPress={logout}>{t('Login.Logout')}</Button>
+        </View>
+      </View>
+      <BiliSelectFavButtton />
+      <Text>{t('Login.Disclaimer')}</Text>
+    </View>
+  );
+};
+
+const LoginPage = ({
+  biliLogin,
+  setInputCookieVisible,
+}: LogginginPageProps) => {
+  const { t } = useTranslation();
+  const setSnack = useSnack(state => state.setSnack);
+  const { qrcode, setQrCode, setQrCodeKey, setQrCodeExpire, getQRLoginReq } =
+    biliLogin;
+
+  const generateBiliQRCode = async () => {
+    const processFunction = async () => {
+      const qrCodeReq = await getQRLoginReq();
+      setQrCode(qrCodeReq.url);
+      setQrCodeKey(qrCodeReq.key);
+      setQrCodeExpire(qrCodeReq.expire);
+    };
+
+    setSnack({
+      snackMsg: {
+        processing: t('Login.BilibiliLoginQRGeneration'),
+        success: t('Login.BilibiliLoginQRGenerated'),
+        fail: t('Login.BilibiliLoginQRGenerateFailed'),
+      },
+      processFunction,
+    });
+  };
+
+  return (
+    <View style={styles.textContainerStyle}>
+      <Text style={styles.notLoginTextStyle}>
+        {t('Login.BilibiliNotLoggedIn')}
+      </Text>
+      <Button mode="contained-tonal" onPress={generateBiliQRCode}>
+        {t('Login.BilibiliLoginButton')}
+      </Button>
+      <View style={styles.inputButtonContainerStyle} />
+      <Button
+        mode="contained-tonal"
+        onPress={() => setInputCookieVisible(true)}
+      >
+        {t('Login.BilibiliCookieInputButton')}
+      </Button>
+      <Text>{t('Login.Disclaimer')}</Text>
+      {qrcode !== '' && (
+        <View style={styles.qrCodeContainerStyle}>
+          <QRCode value={qrcode} size={300} />
+        </View>
+      )}
+    </View>
+  );
+};
 
 export default () => {
   const { t } = useTranslation();
@@ -20,19 +105,14 @@ export default () => {
   const appRefresh = useNoxSetting(state => state.appRefresh);
   const setSnack = useSnack(state => state.setSnack);
   const [inputCookieVisible, setInputCookieVisible] = React.useState(false);
+  const biliLogin = useBiliLogin();
   const {
-    qrcode,
     loginInfo,
     initialize,
-    setQrCode,
-    setQrCodeKey,
-    setQrCodeExpire,
-    setLoginInfo,
     clearQRLogin,
     getBiliLoginStatus,
-    getQRLoginReq,
     loginQRVerification,
-  } = useBiliLogin();
+  } = biliLogin;
 
   const manualInputCookies = async (input: { [key: string]: string }) => {
     try {
@@ -72,71 +152,6 @@ export default () => {
     }
   };
 
-  const loginPage = () => {
-    const generateBiliQRCode = async () => {
-      const processFunction = async () => {
-        const qrCodeReq = await getQRLoginReq();
-        setQrCode(qrCodeReq.url);
-        setQrCodeKey(qrCodeReq.key);
-        setQrCodeExpire(qrCodeReq.expire);
-      };
-
-      setSnack({
-        snackMsg: {
-          processing: t('Login.BilibiliLoginQRGeneration'),
-          success: t('Login.BilibiliLoginQRGenerated'),
-          fail: t('Login.BilibiliLoginQRGenerateFailed'),
-        },
-        processFunction,
-      });
-    };
-
-    return (
-      <View style={styles.textContainerStyle}>
-        <Text style={styles.notLoginTextStyle}>
-          {t('Login.BilibiliNotLoggedIn')}
-        </Text>
-        <Button mode="contained-tonal" onPress={generateBiliQRCode}>
-          {t('Login.BilibiliLoginButton')}
-        </Button>
-        <View style={styles.inputButtonContainerStyle} />
-        <Button
-          mode="contained-tonal"
-          onPress={() => setInputCookieVisible(true)}
-        >
-          {t('Login.BilibiliCookieInputButton')}
-        </Button>
-        <Text>{t('Login.Disclaimer')}</Text>
-        {qrcode !== '' && (
-          <View style={styles.qrCodeContainerStyle}>
-            <QRCode value={qrcode} size={300} />
-          </View>
-        )}
-      </View>
-    );
-  };
-
-  const loggedInPage = () => {
-    if (!loginInfo) return <></>;
-    const logout = () => {
-      setLoginInfo(null);
-      CookieManager.clearAll();
-    };
-    return (
-      <View style={styles.loggedInContainerStyle}>
-        <View style={styles.avatarContainerStyle}>
-          <Avatar.Image source={{ uri: loginInfo.avatar }}></Avatar.Image>
-          <View style={styles.avatarUsernameStyle}>
-            <Text variant="headlineSmall">{loginInfo.name}</Text>
-            <Button onPress={logout}>{t('Login.Logout')}</Button>
-          </View>
-        </View>
-        <BiliSelectFavButtton />
-        <Text>{t('Login.Disclaimer')}</Text>
-      </View>
-    );
-  };
-
   React.useEffect(() => {
     if (appRefresh) return;
     loginQRVerification();
@@ -152,9 +167,12 @@ export default () => {
       {initialize ? (
         <ActivityIndicator size={100} />
       ) : loginInfo ? (
-        loggedInPage()
+        <LoggedInPage biliLogin={biliLogin} />
       ) : (
-        loginPage()
+        <LoginPage
+          biliLogin={biliLogin}
+          setInputCookieVisible={setInputCookieVisible}
+        />
       )}
       <GenericInputDialog
         options={['SESSDATA', 'bili_jct', 'access_token', 'refresh_token']}
