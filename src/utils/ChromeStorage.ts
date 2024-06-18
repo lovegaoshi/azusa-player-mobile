@@ -13,18 +13,18 @@ import {
   getColorScheme,
   getPlaylistSongList,
   getRegExtractMapping as _getRegExtractMapping,
+  getDefaultTheme,
 } from '@utils/ChromeStorageAPI';
 import { dummyPlaylist, dummyPlaylistList } from '@objects/Playlist';
 import { NoxRepeatMode } from '@enums/RepeatMode';
 import { PlaylistTypes } from '@enums/Playlist';
-import AdaptiveTheme from '../components/styles/AdaptiveTheme';
 import {
   StorageKeys,
   DefaultSetting,
   SearchOptions,
   OverrideSetting,
 } from '@enums/Storage';
-import { MUSICFREE } from './mediafetch/musicfree';
+import { MUSICFREE } from '@utils/mediafetch/musicfree';
 import { getAlistCred } from './alist/storage';
 import { timeFunction } from './Utils';
 import { logger } from '@utils/Logger';
@@ -195,7 +195,7 @@ export const initPlayerObject = async (safeMode = false) => {
       StorageKeys.PLAYMODE_KEY,
       NoxRepeatMode.Shuffle
     ),
-    skin: await getItem(StorageKeys.SKIN, AdaptiveTheme),
+    skin: await getItem(StorageKeys.SKIN, getDefaultTheme()),
     skins: (await getPlayerSkins()) || [],
     cookies: await getItem(StorageKeys.COOKIES, {}),
     lyricMapping,
