@@ -23,7 +23,6 @@ import { DefaultSetting, OverrideSetting } from '@objects/Storage';
 import { MUSICFREE } from '@utils/mediafetch/musicfree';
 import { getAlistCred } from './alist/storage';
 import { timeFunction } from './Utils';
-import { logger } from '@utils/Logger';
 
 export const setMusicFreePlugin = (val: MUSICFREE[]): Promise<void> =>
   saveItem(StorageKeys.MUSICFREE_PLUGIN, val);
@@ -214,7 +213,7 @@ export const initPlayerObject = async (safeMode = false) => {
   playerObject.playlists[StorageKeys.FAVORITE_PLAYLIST_KEY] =
     playerObject.favoriPlaylist;
 
-  const loadPlaylistTime = await timeFunction(async () => {
+  await timeFunction(async () => {
     await Promise.all(
       playerObject.playlistIds.map(async id => {
         const retrievedPlaylist = await getPlaylist({
@@ -224,8 +223,7 @@ export const initPlayerObject = async (safeMode = false) => {
         if (retrievedPlaylist) playerObject.playlists[id] = retrievedPlaylist;
       })
     );
-  });
-  logger.debug(`[perf] loading playlists took ${loadPlaylistTime} ms`);
+  }, 'loading playlists');
 
   return playerObject;
 };

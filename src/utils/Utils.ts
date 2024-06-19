@@ -1,3 +1,5 @@
+import { logger } from '@utils/Logger';
+
 export const i0hdslbHTTPResolve = (url: string) =>
   url.replace('http://', 'https://');
 
@@ -163,8 +165,13 @@ export const reorder = <T>(list: T[], startIndex: number, endIndex: number) => {
   return result;
 };
 
-export const timeFunction = async (fn: () => Promise<void>) => {
+export const timeFunction = async <T>(fn: () => Promise<T>, log?: string) => {
   const start = Date.now();
-  await fn();
-  return Date.now() - start;
+  const result = await fn();
+  const time = Date.now() - start;
+  if (log) logger.debug(`[perf] ${log} took ${time}ms`);
+  return {
+    result,
+    time,
+  };
 };
