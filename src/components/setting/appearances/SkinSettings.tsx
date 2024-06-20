@@ -64,7 +64,8 @@ const BuiltInThemes: DisplayTheme[] = [
   },
 ];
 
-const noGesture = Platform.OS === 'ios' || __DEV__;
+// is this buggy? Platform.OS === 'ios' || __DEV__;
+const noGesture = Platform.OS !== 'windows';
 
 const GestureWrapper = (props: {
   children: React.JSX.Element;
