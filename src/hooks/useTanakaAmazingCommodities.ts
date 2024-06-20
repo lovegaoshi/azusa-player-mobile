@@ -1,14 +1,19 @@
 import { useEffect, useState } from 'react';
-import { getItem, saveItem } from '@utils/ChromeStorageAPI';
 import RNFetchBlob from 'react-native-blob-util';
 
+import { getItem, saveItem } from '@utils/ChromeStorageAPI';
 import { fetchVideoPlayUrl } from '../utils/mediafetch/bilivideo';
 import { customReqHeader } from '@utils/BiliFetch';
 import { StorageKeys } from '@enums/Storage';
+import { getFileSize } from '../utils/RNUtils';
 
 const TanakaSrc = 'BV1cK42187AE'; //'https://www.bilibili.com/video/BV1cK42187AE/';
 
-export const getTanaka = () => getItem(StorageKeys.TANAKA_AMAZING_COMMODITIES);
+const getTanaka = () => getItem(StorageKeys.TANAKA_AMAZING_COMMODITIES);
+export const getTakanaDesc = async () => {
+  const tanakaPath = await getTanaka();
+  return `${tanakaPath}\n${(await getFileSize(tanakaPath)).size / 1000} KiB`;
+};
 export const deleteTanaka = () => getTanaka().then(RNFetchBlob.fs.unlink);
 
 export default () => {

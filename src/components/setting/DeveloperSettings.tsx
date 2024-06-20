@@ -26,7 +26,10 @@ import GroupView from '../background/GroupView';
 import PluginSettings from './plugins/View';
 import showLog from './debug/Log';
 import { showDebugLog } from './debug/DebugConsole';
-import { getTanaka, deleteTanaka } from '@hooks/useTanakaAmazingCommodities';
+import {
+  getTakanaDesc,
+  deleteTanaka,
+} from '@hooks/useTanakaAmazingCommodities';
 
 enum Icons {
   setlog = 'console',
@@ -262,8 +265,8 @@ const Home = ({ navigation }: NoxComponent.NavigationProps) => {
             settingName="Tanaka"
             onPress={async () =>
               Alert.alert(
-                t('DeveloperSettings.Tanaka'),
-                await getTanaka(),
+                t('DeveloperSettings.TanakaName'),
+                await getTakanaDesc(),
                 [
                   {
                     text: t('Dialog.nullify'),
