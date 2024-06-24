@@ -40,7 +40,7 @@ export default (currentSong?: NoxMedia.Song) => {
     if (resolvedLrcOptions.length === 0 || !song)
       setLrc(i18n.t('Lyric.notFound'));
     else {
-      const resolvedLrc = resolvedLrcOptions[index!];
+      const resolvedLrc = resolvedLrcOptions[index];
       const lyric = resolvedLyric
         ? await searchLyric(resolvedLyric.lyricKey, resolvedLyric.source)
         : resolvedLrc.lrc ??

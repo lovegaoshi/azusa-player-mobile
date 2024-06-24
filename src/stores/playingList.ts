@@ -111,7 +111,6 @@ export const getPlaybackModeNotifIcon = (
   let TPRepeatMode = RepeatMode.Off;
   switch (state) {
     case NoxRepeatMode.Repeat:
-      nextIcon = 2;
       break;
     case NoxRepeatMode.RepeatTrack:
       nextIcon = 3;
