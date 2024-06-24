@@ -12,9 +12,11 @@ import { SettingListItem } from './useRenderSetting';
 import LanguageSettings from './LanguageSettings';
 import AboutSettings from './AboutSettings';
 import SplashSettings from './SplashSettings';
+import DownloadSettings from './DownloadSettings';
 import Bilibili from '../login/Bilibili';
+import { isAndroid } from '@utils/RNUtils';
 
-enum Icons {
+enum NoxView {
   HOME = 'cog',
   SKIN = 'palette',
   BACKUP = 'backup-restore',
@@ -24,19 +26,10 @@ enum Icons {
   LOGIN = 'login-variant',
   SPLASH_GALLARY = 'view-gallery',
   ALIST = 'google-cloud',
-}
+  DOWNLOAD = 'file-download',
 
-enum VIEW {
-  HOME = 'Settings',
   DUMMY = 'Features not implemented',
   GENERAL = 'General',
-  SKIN = 'Skins',
-  DEVELOPER = 'Developer Options',
-  BACKUP = 'Sync',
-  LOGIN = 'Login',
-  INFO = 'About',
-  SPLASH_GALLARY = 'Splash Gallary',
-  ALIST = 'Alist',
 }
 
 const Stack = createNativeStackNavigator();
@@ -57,52 +50,60 @@ const HomeSettings = ({ navigation }: Props) => {
     >
       <ScrollView>
         <SettingListItem
-          icon={Icons.HOME}
+          icon={NoxView.HOME}
           settingName="GeneralSetting"
-          onPress={() => navigation.navigate(VIEW.GENERAL)}
+          onPress={() => navigation.navigate(NoxView.GENERAL)}
           settingCategory="Settings"
         />
         <SettingListItem
-          icon={Icons.SKIN}
+          icon={NoxView.SKIN}
           settingName="AppearanceSetting"
-          onPress={() => navigation.navigate(VIEW.SKIN)}
+          onPress={() => navigation.navigate(NoxView.SKIN)}
           settingCategory="Settings"
         />
         <SettingListItem
-          icon={Icons.LOGIN}
+          icon={NoxView.LOGIN}
           settingName="Login"
-          onPress={() => navigation.navigate(VIEW.LOGIN)}
+          onPress={() => navigation.navigate(NoxView.LOGIN)}
           settingCategory="Settings"
         />
         <SettingListItem
-          icon={Icons.BACKUP}
+          icon={NoxView.BACKUP}
           settingName="BackupSetting"
-          onPress={() => navigation.navigate(VIEW.BACKUP)}
+          onPress={() => navigation.navigate(NoxView.BACKUP)}
           settingCategory="Settings"
         />
-        <LanguageSettings icon={Icons.LANGUAGE} />
+        <LanguageSettings icon={NoxView.LANGUAGE} />
         <SettingListItem
-          icon={Icons.ALIST}
+          icon={NoxView.ALIST}
           settingName="AListOptions"
-          onPress={() => navigation.navigate(VIEW.ALIST)}
+          onPress={() => navigation.navigate(NoxView.ALIST)}
           settingCategory="Settings"
         />
+        {isAndroid && (
+          <SettingListItem
+            icon={NoxView.DOWNLOAD}
+            settingName="DownloadOptions"
+            onPress={() => navigation.navigate(NoxView.DOWNLOAD)}
+            settingCategory="Settings"
+          />
+        )}
         <SettingListItem
-          icon={Icons.DEVELOPER}
+          icon={NoxView.DEVELOPER}
           settingName="DeveloperOptions"
-          onPress={() => navigation.navigate(VIEW.DEVELOPER)}
+          onPress={() => navigation.navigate(NoxView.DEVELOPER)}
           settingCategory="Settings"
         />
         <SettingListItem
-          icon={Icons.SPLASH_GALLARY}
+          icon={NoxView.SPLASH_GALLARY}
           settingName="SplashSetting"
-          onPress={() => navigation.navigate(VIEW.SPLASH_GALLARY)}
+          onPress={() => navigation.navigate(NoxView.SPLASH_GALLARY)}
           settingCategory="Settings"
         />
         <SettingListItem
-          icon={Icons.INFO}
+          icon={NoxView.INFO}
           settingName="InfoSetting"
-          onPress={() => navigation.navigate(VIEW.INFO)}
+          onPress={() => navigation.navigate(NoxView.INFO)}
           settingCategory="Settings"
         />
       </ScrollView>
@@ -115,44 +116,51 @@ const Settings = ({ headerBackVisible = true }: Props) => {
 
   return (
     <Stack.Navigator screenOptions={{ headerBackVisible }}>
-      <Stack.Screen name={VIEW.HOME} component={HomeSettings} />
+      <Stack.Screen name={NoxView.HOME} component={HomeSettings} />
       <Stack.Screen
-        name={VIEW.SPLASH_GALLARY}
+        name={NoxView.SPLASH_GALLARY}
         component={SplashSettings}
         options={{ title: t('Settings.SplashSettingName') }}
       />
       <Stack.Screen
-        name={VIEW.INFO}
+        name={NoxView.INFO}
         component={AboutSettings}
         options={{ title: t('Settings.InfoSettingName') }}
       />
       <Stack.Screen
-        name={VIEW.GENERAL}
+        name={NoxView.GENERAL}
         component={GeneralSettings}
         options={{ title: t('Settings.GeneralSettingName') }}
       />
       <Stack.Screen
-        name={VIEW.SKIN}
+        name={NoxView.SKIN}
         component={AppearanceSettings}
         options={{ title: t('Settings.AppearanceSettingName') }}
       />
       <Stack.Screen
-        name={VIEW.DEVELOPER}
+        name={NoxView.DEVELOPER}
         component={DeveloperSettings}
         options={{ title: t('Settings.DeveloperOptionsName') }}
       />
       <Stack.Screen
-        name={VIEW.ALIST}
+        name={NoxView.ALIST}
         component={AListSettings}
         options={{ title: t('Settings.AListOptionsName') }}
       />
+      {isAndroid && (
+        <Stack.Screen
+          name={NoxView.DOWNLOAD}
+          component={DownloadSettings}
+          options={{ title: t('Settings.DownloadOptionsName') }}
+        />
+      )}
       <Stack.Screen
-        name={VIEW.BACKUP}
+        name={NoxView.BACKUP}
         component={SyncSettings}
         options={{ title: t('Settings.BackupSettingName') }}
       />
       <Stack.Screen
-        name={VIEW.LOGIN}
+        name={NoxView.LOGIN}
         component={Bilibili}
         options={{ title: t('appDrawer.LoginName') }}
       />

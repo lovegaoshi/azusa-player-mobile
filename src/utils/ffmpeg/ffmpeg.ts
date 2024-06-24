@@ -6,6 +6,8 @@ import { logger } from '../Logger';
 import { r128gain2Volume } from '../Utils';
 import { singleLimiter } from '../mediafetch/throttle';
 
+export const ffmpegToMp3 = ({}: NoxFFMpeg.ToMp3) => {};
+
 const tempArtPath = `${RNFetchBlob.fs.dirs.CacheDir}/tempCover.jpg`;
 
 export const base64AlbumArt = (path = tempArtPath) =>

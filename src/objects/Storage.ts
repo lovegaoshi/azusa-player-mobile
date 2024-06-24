@@ -46,6 +46,11 @@ export const DefaultSetting: NoxStorage.PlayerSettingDict = {
   appID: AppID,
   language: undefined,
   cacheSize: 1,
+
+  downloadLocation: undefined,
+  downloadToMp3: true,
+  downloadID3V2: true,
+  downloadEmbedAlbumCover: true,
 };
 
 export const OverrideSetting: Partial<NoxStorage.PlayerSettingDict> = {};

@@ -1,7 +1,5 @@
 import * as React from 'react';
 import { Menu } from 'react-native-paper';
-import * as DocumentPicker from 'expo-document-picker';
-import { NativeModules, PermissionsAndroid } from 'react-native';
 import { useTranslation } from 'react-i18next';
 
 import { SearchOptions } from '@enums/Storage';
@@ -10,9 +8,11 @@ import { MUSICFREE } from '@utils/mediafetch/musicfree';
 import Icons from './Icons';
 import { useNoxSetting } from '@stores/useApp';
 import { rgb2Hex } from '@utils/Utils';
-import { isAndroid } from '@utils/RNUtils';
-
-const { NoxAndroidAutoModule } = NativeModules;
+import {
+  isAndroid,
+  chooseLocalMediaFolderAndroid,
+  FilePickerResult,
+} from '@utils/RNUtils';
 
 interface Props {
   visible?: boolean;
@@ -38,33 +38,13 @@ export default ({
     setSearchOption(defaultSearch);
   };
   const chooseLocalFolderAndroid = async () => {
-    const androidPermission = await PermissionsAndroid.request(
-      PermissionsAndroid.PERMISSIONS.READ_MEDIA_AUDIO
-    );
-    if (androidPermission !== PermissionsAndroid.RESULTS.GRANTED) {
-      OneWayAlert('dude', 'this aint gonna work without permissions');
-      return;
-    }
-    const selectedFile = (
-      await DocumentPicker.getDocumentAsync({
-        copyToCacheDirectory: false,
-        type: 'audio/*',
-      })
-    ).assets;
-    if (!selectedFile) return;
-    const uri = selectedFile[0].uri;
-    const parsedURI = decodeURIComponent(
-      uri.substring(uri.lastIndexOf('%3A') + 3)
-    );
-    if (Number.isNaN(Number.parseInt(parsedURI))) {
-      setSearchVal(
-        `local://${parsedURI.substring(0, parsedURI.lastIndexOf('/'))}`
-      );
-    } else {
-      const mediaFiles = await NoxAndroidAutoModule.listMediaFileByID(
-        uri.substring(uri.lastIndexOf('%3A') + 3)
-      );
-      setSearchVal(`local://${mediaFiles[0].relativePath}`);
+    const location = await chooseLocalMediaFolderAndroid();
+    switch (location.reason) {
+      case FilePickerResult.NoPermission:
+        OneWayAlert('dude', 'this aint gonna work without permissions');
+        break;
+      case FilePickerResult.Success:
+        setSearchVal(`local://${location.relativePath}`);
     }
     toggleVisible();
   };

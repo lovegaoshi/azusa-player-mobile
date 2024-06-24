@@ -182,6 +182,8 @@
     "DeveloperOptionsDesc": "Experimental Options in pre-release versions of APM",
     "AListOptionsName": "AList",
     "AListOptionsDesc": "Set up AList creds",
+    "DownloadOptionsName": "Download",
+    "DownloadOptionsDesc": "APM Download",
     "LanguageOptionsName": "Change Language",
     "LanguageOptionsDesc": "Change app language",
     "LanguageOptionsTitle": "Change Language",

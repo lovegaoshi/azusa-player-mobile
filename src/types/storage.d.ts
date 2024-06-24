@@ -48,6 +48,11 @@ declare global {
       language?: string;
       cacheSize: number;
 
+      downloadLocation?: string;
+      downloadToMp3: boolean;
+      downloadID3V2: boolean;
+      downloadEmbedAlbumCover: boolean;
+
       [key: string]: any;
     }
 
