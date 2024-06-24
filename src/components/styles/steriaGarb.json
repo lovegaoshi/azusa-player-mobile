@@ -51,6 +51,10 @@
     ],
     "backgroundImages": [
       {
+        "type": "biliNFTVideoRedeem",
+        "identifier": "[\"102499\",\"102500\",\"典藏卡·她根本不会喝酒\"]"
+      },
+      {
         "type": "biliNFTVideoNew",
         "identifier": "[\"102499\",\"102500\",\"“大”就是浪漫\"]"
       },
