@@ -14,7 +14,7 @@ import AboutSettings from './AboutSettings';
 import SplashSettings from './SplashSettings';
 import DownloadSettings from './DownloadSettings';
 import Bilibili from '../login/Bilibili';
-import { isAndroid } from '@utils/RNUtils';
+import { isAndroid, isIOS } from '@utils/RNUtils';
 
 enum NoxView {
   HOME = 'cog',
@@ -80,7 +80,7 @@ const HomeSettings = ({ navigation }: Props) => {
           onPress={() => navigation.navigate(NoxView.ALIST)}
           settingCategory="Settings"
         />
-        {isAndroid && (
+        {isAndroid && isIOS && (
           <SettingListItem
             icon={NoxView.DOWNLOAD}
             settingName="DownloadOptions"

@@ -16,6 +16,17 @@ export const getTakanaDesc = async () => {
 };
 export const deleteTanaka = () => getTanaka().then(RNFetchBlob.fs.unlink);
 
+const DisabledTanaka = 'notanaka';
+export const disableTanaka = () => {
+  deleteTanaka();
+  saveItem(StorageKeys.TANAKA_AMAZING_COMMODITIES, DisabledTanaka);
+};
+
+export const enableTanaka = async () => {
+  if ((await getTanaka()) !== DisabledTanaka) return;
+  saveItem(StorageKeys.TANAKA_AMAZING_COMMODITIES, TanakaSrc);
+};
+
 export default () => {
   const [tanaka, setTanaka] = useState<string | undefined>();
   const [initialized, setInitialized] = useState(false);
@@ -24,12 +35,12 @@ export default () => {
     const tanakaPath = (await getItem(
       StorageKeys.TANAKA_AMAZING_COMMODITIES
     )) as string | null;
+    setInitialized(true);
     if (tanakaPath && (await RNFetchBlob.fs.exists(tanakaPath))) {
       setTanaka(tanakaPath);
-      setInitialized(true);
       return;
     }
-    setInitialized(true);
+    if (tanakaPath === DisabledTanaka) return;
     const resolvedURL = await fetchVideoPlayUrl(TanakaSrc, true);
     RNFetchBlob.config({
       fileCache: true,

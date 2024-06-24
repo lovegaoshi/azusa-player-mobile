@@ -28,7 +28,8 @@ import showLog from './debug/Log';
 import { showDebugLog } from './debug/DebugConsole';
 import {
   getTakanaDesc,
-  deleteTanaka,
+  disableTanaka,
+  enableTanaka,
 } from '@hooks/useTanakaAmazingCommodities';
 
 enum Icons {
@@ -268,11 +269,8 @@ const Home = ({ navigation }: NoxComponent.NavigationProps) => {
                 t('DeveloperSettings.TanakaName'),
                 await getTakanaDesc(),
                 [
-                  {
-                    text: t('Dialog.nullify'),
-                    onPress: deleteTanaka,
-                  },
-                  { text: t('Dialog.ok') },
+                  { text: t('Dialog.nullify'), onPress: disableTanaka },
+                  { text: t('Dialog.ok'), onPress: enableTanaka },
                 ],
                 { cancelable: true }
               )

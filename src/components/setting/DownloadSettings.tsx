@@ -57,7 +57,7 @@ export default () => {
         }
       />
       {BooleanSettings.map(item => (
-        <RenderSetting item={item} />
+        <RenderSetting item={item} key={item.settingName} />
       ))}
     </View>
   );
