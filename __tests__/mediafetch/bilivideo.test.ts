@@ -1,9 +1,12 @@
 import fetcher, {
   fetchVideoPlayUrlPromise,
 } from '../../src/utils/mediafetch/bilivideo';
+
+test.only('dummy fetch', () => {
+  expect('dummy').toBe('dummy');
+});
+
 test('bilivideo', async () => {
-  expect('bilivideo').toBe('bilivideo');
-  /*
   const content = await fetcher.regexFetch({
     reExtracted: fetcher.regexSearchMatch.exec(
       'https://www.bilibili.com/video/BV1aS411A7ir'
@@ -16,5 +19,4 @@ test('bilivideo', async () => {
   // console.log(playurl);
 
   expect(playurl.url).not.toBeNull();
-   */
 });

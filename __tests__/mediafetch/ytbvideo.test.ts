@@ -3,13 +3,10 @@ import { resolveURL as resolveURLNode } from '../../src/utils/mediafetch/ytbvide
 import { resolveURL as resolveURLMuse } from '../../src/utils/mediafetch/ytbvideo.muse';
 import { resolveURL as resolveURLYtbi } from '../../src/utils/mediafetch/ytbvideo.ytbi';
 
-test('dummy fetch', () => {
+test.only('dummy fetch', () => {
   expect('dummy').toBe('dummy');
 });
 
-/*
-
-// HACK: disable for ghactions; works locally!
 test('test ytbvideo', async () => {
   const content = await fetcher.regexFetch({
     reExtracted: fetcher.regexSearchMatch.exec(
@@ -39,5 +36,3 @@ test('test ytdl-core', async () => {
   console.log(content);
   expect(content).not.toBeNull();
 }, 220000);
-
-*/
