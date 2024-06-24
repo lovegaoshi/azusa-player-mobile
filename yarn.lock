@@ -5256,12 +5256,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:^20.14.6":
-  version: 20.14.6
-  resolution: "@types/node@npm:20.14.6"
+"@types/node@npm:^20.14.8":
+  version: 20.14.8
+  resolution: "@types/node@npm:20.14.8"
   dependencies:
     undici-types: "npm:~5.26.4"
-  checksum: 10c0/22640f0eb2a955872e4529a93be1b719f67b527b80fdab51419756d20e21b5ce0f4ccbee9a3e2ff20e5def647f77baf77b4b0434ff8896791c102165ec0c3e48
+  checksum: 10c0/06d4643fa3b179b41fe19f9c75c240278ca1f7a313b3b837bc36ea119499c7ad77f06bbe72694ac04aa91ec77fe747baa09b889f4c435450c1724a26bd55f160
   languageName: node
   linkType: hard
 
@@ -5362,10 +5362,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/uuid@npm:^9.0.8":
-  version: 9.0.8
-  resolution: "@types/uuid@npm:9.0.8"
-  checksum: 10c0/b411b93054cb1d4361919579ef3508a1f12bf15b5fdd97337d3d351bece6c921b52b6daeef89b62340fd73fd60da407878432a1af777f40648cbe53a01723489
+"@types/uuid@npm:^10.0.0":
+  version: 10.0.0
+  resolution: "@types/uuid@npm:10.0.0"
+  checksum: 10c0/9a1404bf287164481cb9b97f6bb638f78f955be57c40c6513b7655160beb29df6f84c915aaf4089a1559c216557dc4d2f79b48d978742d3ae10b937420ddac60
   languageName: node
   linkType: hard
 
@@ -6390,13 +6390,13 @@ __metadata:
     "@types/he": "npm:^1.2.3"
     "@types/jest": "npm:^29.5.12"
     "@types/md5": "npm:^2.3.5"
-    "@types/node": "npm:^20.14.6"
+    "@types/node": "npm:^20.14.8"
     "@types/react": "npm:~18.3.3"
     "@types/react-native": "npm:^0.73.0"
     "@types/react-native-background-timer": "npm:^2.0.2"
     "@types/react-native-share-menu": "npm:^5.0.5"
     "@types/react-test-renderer": "npm:^18.3.0"
-    "@types/uuid": "npm:^9.0.8"
+    "@types/uuid": "npm:^10.0.0"
     "@typescript-eslint/eslint-plugin": "npm:^7.13.1"
     "@typescript-eslint/parser": "npm:^7.13.1"
     "@welldone-software/why-did-you-render": "npm:^8.0.3"
@@ -6464,7 +6464,7 @@ __metadata:
     react-native-device-info: "npm:^11.1.0"
     react-native-dotenv: "npm:^3.4.11"
     react-native-draggable-flatlist: "npm:^4.0.1"
-    react-native-gesture-handler: "npm:2.17.0"
+    react-native-gesture-handler: "npm:2.17.1"
     react-native-get-random-values: "npm:^1.11.0"
     react-native-image-colors: "npm:^2.4.0"
     react-native-lyric: "git+https://github.com/lovegaoshi/react-native-lyric.git#dev"
@@ -6483,13 +6483,13 @@ __metadata:
     react-native-track-player: "https://github.com/lovegaoshi/react-native-track-player.git#commit=6f634594f24aa1974b2c8cdc6848b8b349cccdf0"
     react-native-url-polyfill: "npm:^2.0.0"
     react-native-vector-icons: "npm:^10.1.0"
-    react-native-video: "npm:^6.2.0"
-    react-native-webview: "npm:13.10.3"
+    react-native-video: "npm:^6.3.0"
+    react-native-webview: "npm:13.10.4"
     react-test-renderer: "npm:18.3.1"
     reactotron-react-native: "npm:^5.1.7"
     rimraf: "npm:^5.0.7"
     sp-react-native-in-app-updates: "npm:^1.4.0"
-    typescript: "npm:~5.4.5"
+    typescript: "npm:~5.5.2"
     use-debounce: "npm:^10.0.1"
     uuid: "npm:^10.0.0"
     youtubei.js: "npm:^10.0.0"
@@ -15120,9 +15120,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-native-gesture-handler@npm:2.17.0":
-  version: 2.17.0
-  resolution: "react-native-gesture-handler@npm:2.17.0"
+"react-native-gesture-handler@npm:2.17.1":
+  version: 2.17.1
+  resolution: "react-native-gesture-handler@npm:2.17.1"
   dependencies:
     "@egjs/hammerjs": "npm:^2.0.17"
     hoist-non-react-statics: "npm:^3.3.0"
@@ -15131,7 +15131,7 @@ __metadata:
   peerDependencies:
     react: "*"
     react-native: "*"
-  checksum: 10c0/b53510fe97f05f79231027be99bb7ca68fd1669f5cf797289ed751d9fa7736e67e67a6c06bfc9efdf339fdc554ab079361ae07c2bf3db85044b6aba81c0d1afc
+  checksum: 10c0/01ea97f347df2505c58be8551c62e9fd0bae7814346a41f3367ec0b4836877fd8b9b710619f8bc10c6cdbb0e2670dd6c131124d27aabc4745383aab690dae6b3
   languageName: node
   linkType: hard
 
@@ -15373,26 +15373,26 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-native-video@npm:^6.2.0":
-  version: 6.2.0
-  resolution: "react-native-video@npm:6.2.0"
+"react-native-video@npm:^6.3.0":
+  version: 6.3.0
+  resolution: "react-native-video@npm:6.3.0"
   peerDependencies:
     react: "*"
     react-native: "*"
-  checksum: 10c0/fac02a1570dc5e488bbf4f091224d37cf699da922a5d119a9f273b0c0221ee2a4a8ac99946f8d27b88bfa57013de9ea1fcea7b75d738099a2b8b519b7c535098
+  checksum: 10c0/262ca5434531ff4c2641fec33ddab8efbf5b062a79ad3bd3c76b94484e91ab5c4e433b2674bc043fd8387023c496c5669278b3499ac285e2765d708c6493544a
   languageName: node
   linkType: hard
 
-"react-native-webview@npm:13.10.3":
-  version: 13.10.3
-  resolution: "react-native-webview@npm:13.10.3"
+"react-native-webview@npm:13.10.4":
+  version: 13.10.4
+  resolution: "react-native-webview@npm:13.10.4"
   dependencies:
     escape-string-regexp: "npm:2.0.0"
     invariant: "npm:2.2.4"
   peerDependencies:
     react: "*"
     react-native: "*"
-  checksum: 10c0/ec151b9ad4fd69fe940f33a6b7c59f0e5b894ca8aac1fbcb2ca2269ddc95b511a60cc1d87acc33d22f6f336f9e5751421e6abd159b3fe00965159cf2a8f2a620
+  checksum: 10c0/5abaffa6323e07a51c9edfa09565646a5f604a9c14043591860b45a358ac4c96f3aa80dedcfa09cb033c0a2a26e4a06f51b55aa6cb8185c41468d3221a0478eb
   languageName: node
   linkType: hard
 
@@ -17636,13 +17636,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript@npm:~5.4.5":
-  version: 5.4.5
-  resolution: "typescript@npm:5.4.5"
+"typescript@npm:~5.5.2":
+  version: 5.5.2
+  resolution: "typescript@npm:5.5.2"
   bin:
     tsc: bin/tsc
     tsserver: bin/tsserver
-  checksum: 10c0/2954022ada340fd3d6a9e2b8e534f65d57c92d5f3989a263754a78aba549f7e6529acc1921913560a4b816c46dce7df4a4d29f9f11a3dc0d4213bb76d043251e
+  checksum: 10c0/8ca39b27b5f9bd7f32db795045933ab5247897660627251e8254180b792a395bf061ea7231947d5d7ffa5cb4cc771970fd4ef543275f9b559f08c9325cccfce3
   languageName: node
   linkType: hard
 
@@ -17656,13 +17656,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript@patch:typescript@npm%3A~5.4.5#optional!builtin<compat/typescript>":
-  version: 5.4.5
-  resolution: "typescript@patch:typescript@npm%3A5.4.5#optional!builtin<compat/typescript>::version=5.4.5&hash=5adc0c"
+"typescript@patch:typescript@npm%3A~5.5.2#optional!builtin<compat/typescript>":
+  version: 5.5.2
+  resolution: "typescript@patch:typescript@npm%3A5.5.2#optional!builtin<compat/typescript>::version=5.5.2&hash=b45daf"
   bin:
     tsc: bin/tsc
     tsserver: bin/tsserver
-  checksum: 10c0/db2ad2a16ca829f50427eeb1da155e7a45e598eec7b086d8b4e8ba44e5a235f758e606d681c66992230d3fc3b8995865e5fd0b22a2c95486d0b3200f83072ec9
+  checksum: 10c0/6721ac8933a70c252d7b640b345792e103d881811ff660355617c1836526dbb71c2044e2e77a8823fb3570b469f33276875a4cab6d3c4de4ae7d7ee1c3074ae4
   languageName: node
   linkType: hard
 

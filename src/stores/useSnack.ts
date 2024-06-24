@@ -1,5 +1,6 @@
 import { logger } from '../utils/Logger';
 import { create } from 'zustand';
+import { timeout } from '../utils/Utils';
 
 interface SetSnack {
   snackMsg: { processing?: string; success: string; fail?: string };
@@ -35,7 +36,7 @@ export default create<NoxSnack>((set, get) => ({
   snackOnDismiss: () => set({ snackVisible: false }),
   snackDismiss: () => {
     set({ snackVisible: false });
-    return new Promise(resolve => setTimeout(resolve, 100));
+    return timeout(100);
   },
   setSnack: async ({
     snackMsg,
@@ -46,7 +47,7 @@ export default create<NoxSnack>((set, get) => ({
   }) => {
     if (get().snackVisible) {
       set({ snackVisible: false });
-      await new Promise(resolve => setTimeout(resolve, 100));
+      await timeout(100);
     }
     if (processFunction) {
       set({

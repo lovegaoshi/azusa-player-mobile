@@ -107,8 +107,11 @@ export const charLength = (str: string) => {
   return str.replace(/[\u0300-\u036f]/g, '').length;
 };
 
-export const timeout = (delay: number) => {
-  return new Promise(res => setTimeout(res, delay));
+export const timeout = (
+  delay: number,
+  func: () => any = () => {}
+): Promise<void> => {
+  return new Promise(res => setTimeout(() => res(func()), delay));
 };
 
 interface RegexMatchOperationsProps<K, T> {
