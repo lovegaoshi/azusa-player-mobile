@@ -8,6 +8,26 @@
       "darkTheme": true
     },
     "gifs": [
+      "https://i0.hdslb.com/bfs/garb/043dabc3735658fac54ef42c266008da8614a038.png",
+      "https://i0.hdslb.com/bfs/garb/9ff1d88a3ccaea0f095e3cb94ee61bdb35127b2b.png",
+      "https://i0.hdslb.com/bfs/garb/5fdaea236f17f8f62a7deded044e8e6c8db0d1b6.png",
+      "https://i0.hdslb.com/bfs/garb/acae021ceee280c83859d91fc50c408e2f906f1d.png",
+      "https://i0.hdslb.com/bfs/garb/4eb3dc33222a9bcef19dc433d936356f962dc79e.png",
+      "https://i0.hdslb.com/bfs/garb/0a1615a9c6c11a8c19883235b1ba371479d3d08d.png",
+      "https://i0.hdslb.com/bfs/garb/12698c8651826a7c48255287d27ff56fe97eea94.png",
+      "https://i0.hdslb.com/bfs/garb/6c4813f90557ebe97b2a285a2b968755ad662bd1.png",
+      "https://i0.hdslb.com/bfs/garb/d7476dbab4984e2ebcb7d1fa39be2f8544a98f30.png",
+      "https://i0.hdslb.com/bfs/garb/90816d0d1f0593448281882b854caa75999cb8c3.png",
+      "https://i0.hdslb.com/bfs/garb/a913183f60ccb5782399fb1d15661c0134696b0f.png",
+      "https://i0.hdslb.com/bfs/garb/db80dfa24339e74efeffe1fb1854bd631e1d5973.png",
+      "https://i0.hdslb.com/bfs/garb/9eaffee32abb91b413e83e215f04e7f9c65a0b36.png",
+      "https://i0.hdslb.com/bfs/garb/9f70b4500f96dde858060b4c975ed0a8fa6801ce.png",
+      "https://i0.hdslb.com/bfs/garb/41933217c7d02716f678815eb79be0fb039382cf.png",
+      "https://i0.hdslb.com/bfs/garb/0001313a4863c8b7d14c132bdb0b70e9c0091076.png",
+      "https://i0.hdslb.com/bfs/garb/b842a6c96d5ee3127a25485ab87ab68ccaf41fe0.png",
+      "https://i0.hdslb.com/bfs/garb/b076aaa0ef2b6dcfe53ad7e234c9dfb30c22e94a.png",
+      "https://i0.hdslb.com/bfs/garb/98097efd09029f335323da7a1766980b024e1a5b.png",
+      "https://i0.hdslb.com/bfs/garb/cb35d10e9361da0b3876eb41985a51935c26635f.png",
       "https://i0.hdslb.com/bfs/emote/5d044705522d7eab985c9417110de5d79f026203.png",
       "https://i0.hdslb.com/bfs/emote/37f6eb3131009a873848f4eac026c63e67821ff5.png",
       "https://i0.hdslb.com/bfs/emote/2be085f3362b72b6315b52e24d2e7cccd2211237.png",
@@ -30,6 +50,24 @@
       "https://i0.hdslb.com/bfs/emote/1bfe7a731d5e378156ed42179de0bd37a949ea83.png"
     ],
     "backgroundImages": [
+      {
+        "type": "biliNFTVideoRedeem",
+        "identifier": "[\"102499\",\"102500\",\"典藏卡·她根本不会喝酒\"]"
+      },
+      {
+        "type": "biliNFTVideoNew",
+        "identifier": "[\"102499\",\"102500\",\"“大”就是浪漫\"]"
+      },
+      {
+        "type": "biliNFTVideoNew",
+        "identifier": "[\"102499\",\"102500\",\"给你一针！\"]"
+      },
+      "https://i0.hdslb.com/bfs/garb/open/2d3e8d5a47dd8f890c13edb0e45117a1954c1215.png",
+      "https://i0.hdslb.com/bfs/garb/open/181f3ab635377a0236377cca125b0c25ae8813de.png",
+      "https://i0.hdslb.com/bfs/garb/open/b80fde7247917dcb3d507b840f7c27b1b6123425.png",
+      "https://i0.hdslb.com/bfs/garb/open/c32a52bd370e566ac6f3a6ec14a0f138fd9b73fd.png",
+      "https://i0.hdslb.com/bfs/garb/open/ce131de69ac859424f7e91a4e5920bb50336cf94.png",
+      "https://i0.hdslb.com/bfs/garb/open/604ed7caf37e692892c63b853552b8960979e386.png",
       "https://i0.hdslb.com/bfs/garb/item/aed7a022b072983bab380df955a251ba4ce2c072.jpg",
       "https://i0.hdslb.com/bfs/garb/item/7a8980432388ba2396a5f95b59e7db85e2b08bbc.jpg",
       "https://i0.hdslb.com/bfs/garb/item/ea5d55b864784ae66f35f071ba0d71b0ce8663d2.jpg",
