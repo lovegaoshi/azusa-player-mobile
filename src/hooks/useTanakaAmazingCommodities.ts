@@ -5,7 +5,7 @@ import { getItem, saveItem } from '@utils/ChromeStorageAPI';
 import { fetchVideoPlayUrl } from '../utils/mediafetch/bilivideo';
 import { customReqHeader } from '@utils/BiliFetch';
 import { StorageKeys } from '@enums/Storage';
-import { getFileSize } from '../utils/RNUtils';
+import { getFileSize, validateFile } from '../utils/RNUtils';
 
 const TanakaSrc = 'BV1cK42187AE'; //'https://www.bilibili.com/video/BV1cK42187AE/';
 
@@ -35,8 +35,8 @@ export default () => {
     const tanakaPath = (await getItem(
       StorageKeys.TANAKA_AMAZING_COMMODITIES
     )) as string | null;
-    if (tanakaPath && (await RNFetchBlob.fs.exists(tanakaPath))) {
-      setTanaka(tanakaPath);
+    if (await validateFile(tanakaPath)) {
+      setTanaka(tanakaPath!);
       setInitialized(true);
       return;
     }

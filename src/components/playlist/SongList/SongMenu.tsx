@@ -150,9 +150,15 @@ export default ({ usePlaylist, prepareForLayoutAnimationRender }: Props) => {
       {isAndroid && downloadLocation && (
         <Menu.Item
           leadingIcon={Icons.DOWNLOAD}
-          onPress={() => {
-            const songs = selectedSongs();
-            copyCacheToDir({ songs, fsdir: downloadLocation });
+          onPress={async () => {
+            for (const song of selectedSongs()) {
+              const newPath = await copyCacheToDir({
+                song,
+                fsdir: downloadLocation,
+              });
+              if (!newPath) continue;
+              await playlistCRUD.updateSong(song, { localPath: newPath });
+            }
             closeMenu();
           }}
           disabled={checking}

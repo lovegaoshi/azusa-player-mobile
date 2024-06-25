@@ -12,6 +12,7 @@ import { getCachedMediaMapping, saveCachedMediaMapping } from './ChromeStorage';
 import { logger } from './Logger';
 import { customReqHeader } from './BiliFetch';
 import { Source } from '@enums/MediaFetch';
+import { validateFile } from './RNUtils';
 
 const { getState } = playerSettingStore;
 const isIOS = Platform.OS === 'ios';
@@ -124,17 +125,17 @@ class NoxMediaCache {
 
   loadCacheObject = async (identifier: string, prefix = 'file://') => {
     const cachedPath = this.cache.get(identifier);
-    if (!cachedPath || !(await RNFetchBlob.fs.exists(cachedPath)))
-      return undefined;
+    if (!(await validateFile(cachedPath))) return undefined;
     // no RNFetchBlob.fs.readStream?
     return `${prefix}${cachedPath}`;
   };
 
-  loadCacheMedia = (song: NoxMedia.Song, prefix = 'file://') => {
+  loadCacheMedia = async (song: NoxMedia.Song, prefix = 'file://') => {
     // HACK: return song.source if song is local.
     if (song.source === Source.local) {
       // return song.bvid;
     }
+    if (await validateFile(song.localPath)) return `${prefix}${song.localPath}`;
     return this.loadCacheObject(noxCacheKey(song), prefix);
   };
 

@@ -89,3 +89,7 @@ export const chooseLocalMediaFolderAndroid = async (realPath = false) => {
     realPath: getFolderPath(mediaFiles[0].realPath),
   };
 };
+
+export const validateFile = async (fpath?: string | null) => {
+  return fpath && (await RNFetchBlob.fs.exists(fpath)) ? true : false;
+};
