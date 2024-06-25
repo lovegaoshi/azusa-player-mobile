@@ -17,7 +17,7 @@ export const imageSplashes: SplashArray = [
   [SplashType.Image, () => require('@assets/splash/steria2.jpg')],
   [SplashType.Image, () => require('@assets/splash/abu-10k-subs.gif')],
   [SplashType.Image, () => require('@assets/splash/nox-3d.png')],
-  [SplashType.Image, () => require('@assets/splash/nox-3d-2024.png')],
+  [SplashType.Image, () => require('@assets/splash/nox-3d-2024.jpg')],
 ];
 
 const localSplashes: SplashArray = [
@@ -51,7 +51,7 @@ const TanakaAmazingCommodities = ({ url, onEnd }: TanakaProps) => (
       source={{
         uri: url,
       }}
-      volume={0.8}
+      volume={0.7}
       style={styles.tanaka}
       onEnd={onEnd}
       repeat={false}
