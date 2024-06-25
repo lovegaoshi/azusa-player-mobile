@@ -21,6 +21,7 @@ VersionUpdateDict = {
 
 VersionPath = Path('./src/enums/Version.ts')
 
+
 def autoincrease_version(current_version=get_version(), inc=VersionUpdate.PATCH, append=''):
     rematch = re.compile(r'(\d+)\.(\d+)\.(\d+)').match(current_version)
     logging.debug(f'increase version release from {current_version}')
@@ -64,6 +65,7 @@ if __name__ == '__main__':
         ))
     else:
         subprocess.call(['git', 'switch', 'master'])
+        subprocess.call(['git', 'pull'])
         new_version = autoincrease_version(
             current_version=version, inc=VersionUpdateDict[args.inc])
         fix_content(VersionPath, lambda line: line.replace(
