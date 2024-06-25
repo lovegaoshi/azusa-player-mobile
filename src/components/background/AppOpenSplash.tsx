@@ -50,6 +50,7 @@ const TanakaAmazingCommodities = ({ url, onEnd }: TanakaProps) => (
       source={{
         uri: url,
       }}
+      volume={0.8}
       style={styles.tanaka}
       onEnd={onEnd}
       repeat={false}
@@ -68,9 +69,8 @@ const AppOpenSplash = ({ setIsSplashReady }: Props) => {
   const { tanaka, initialized } = useTanakaAmazingCommodities();
   switch (randomSplash[0]) {
     case SplashType.Tanaka:
-      if (!initialized) {
-        return <View />;
-      } else if (tanaka) {
+      if (!initialized) return <View />;
+      if (tanaka) {
         return (
           <TanakaAmazingCommodities
             url={tanaka}
