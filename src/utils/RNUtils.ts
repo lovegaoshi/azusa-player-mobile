@@ -54,23 +54,38 @@ const chooseLocalFileAndroid = async (
   };
 };
 
-export const chooseLocalMediaFolderAndroid = async () => {
+const getMediaRealPath = async (uri: string, parsedURI: string) => {
+  const mediaFiles = await NoxAndroidAutoModule.listMediaFileByFName(
+    uri.substring(uri.lastIndexOf('%2F') + 3),
+    parsedURI.substring(0, parsedURI.lastIndexOf('/'))
+  );
+  return mediaFiles[0].realPath;
+};
+
+const getFolderPath = (path: string) =>
+  path.substring(0, path.lastIndexOf('/'));
+
+export const chooseLocalMediaFolderAndroid = async (realPath = false) => {
   const location = await chooseLocalFileAndroid();
   if (location.reason !== FilePickerResult.Success) return location;
   if (Number.isNaN(Number.parseInt(location.parsedURI))) {
     return {
       reason: FilePickerResult.Success,
-      relativePath: location.parsedURI.substring(
-        0,
-        location.parsedURI.lastIndexOf('/')
-      ),
+      relativePath: getFolderPath(location.parsedURI),
+      realPath: realPath
+        ? getFolderPath(
+            await getMediaRealPath(location.uri, location.parsedURI)
+          )
+        : undefined,
     };
   }
   const mediaFiles = await NoxAndroidAutoModule.listMediaFileByID(
-    location.uri.substring(location.uri.lastIndexOf('%3A') + 3)
+    location.uri.substring(location.uri.lastIndexOf('%3A') + 3),
+    ''
   );
   return {
     reason: FilePickerResult.Success,
     relativePath: mediaFiles[0].relativePath,
+    realPath: getFolderPath(mediaFiles[0].realPath),
   };
 };

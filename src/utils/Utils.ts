@@ -178,3 +178,9 @@ export const timeFunction = async <T>(fn: () => Promise<T>, log?: string) => {
     time,
   };
 };
+
+export const getExt = (url: string) => {
+  const splitUrl = url.split('.');
+  if (splitUrl.length > 1) return splitUrl.pop() as string;
+  return '';
+};

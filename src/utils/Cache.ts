@@ -81,7 +81,7 @@ class NoxMediaCache {
     }
     if (!resolvedURL.url.startsWith('http')) {
       setFetchProgress(100);
-      return;
+      return resolvedURL.url;
     }
     logger.debug(`[Cache] fetching ${song.name} to cache...`);
     if (!extension) {

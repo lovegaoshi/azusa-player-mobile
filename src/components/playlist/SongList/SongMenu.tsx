@@ -10,6 +10,8 @@ import useSongOperations from '@hooks/useSongOperations';
 import { SearchRegex } from '@enums/Playlist';
 import { Source } from '@enums/MediaFetch';
 import useBiliSearch from '@hooks/useBiliSearch';
+import { copyCacheToDir } from '@utils/Download';
+import { isAndroid } from '@utils/RNUtils';
 
 enum Icons {
   SEND_TO = 'playlist-plus',
@@ -21,6 +23,7 @@ enum Icons {
   REMOVE_AND_BAN_BVID = 'delete-forever',
   DETAIL = 'information-outline',
   RADIO = 'radio-tower',
+  DOWNLOAD = 'file-download',
 }
 
 interface UsePlaylist {
@@ -44,6 +47,7 @@ export default ({ usePlaylist, prepareForLayoutAnimationRender }: Props) => {
   const menuCoord = useNoxSetting(state => state.songMenuCoords);
   const songMenuSongIndexes = useNoxSetting(state => state.songMenuSongIndexes);
   const currentPlaylist = useNoxSetting(state => state.currentPlaylist);
+  const { downloadLocation } = useNoxSetting(state => state.playerSetting);
   const playlistCRUD = usePlaylistCRUD(currentPlaylist);
   const setPlaylistSearchAutoFocus = useNoxSetting(
     state => state.setPlaylistSearchAutoFocus
@@ -141,6 +145,18 @@ export default ({ usePlaylist, prepareForLayoutAnimationRender }: Props) => {
           }}
           disabled={checking}
           title={t('SongOperations.BVIDSearchTitle')}
+        />
+      )}
+      {isAndroid && downloadLocation && (
+        <Menu.Item
+          leadingIcon={Icons.DOWNLOAD}
+          onPress={() => {
+            const songs = selectedSongs();
+            copyCacheToDir({ songs, fsdir: downloadLocation });
+            closeMenu();
+          }}
+          disabled={checking}
+          title={t('SongOperations.songDownloadTitle')}
         />
       )}
       <Menu.Item

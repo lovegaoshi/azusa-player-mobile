@@ -31,11 +31,11 @@ export default () => {
   const setPlayerSetting = useNoxSetting(state => state.setPlayerSetting);
 
   const chooseDownloadFolder = async () => {
-    const result = await chooseLocalMediaFolderAndroid();
+    const result = await chooseLocalMediaFolderAndroid(true);
     setPlayerSetting({
       downloadLocation:
         result.reason === FilePickerResult.Success
-          ? result.relativePath
+          ? result.realPath
           : undefined,
     });
   };
