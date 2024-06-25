@@ -149,7 +149,11 @@ export const BiliSongsArrayTabCard = ({
         showsHorizontalScrollIndicator={false}
       >
         {splicedSongs.map((k, i) => (
-          <BiliSongCard key={`BiliRankTab${i}`} songs={k} totalSongs={songs} />
+          <BiliSongCard
+            key={`BiliRankTab${k[0].id}`}
+            songs={k}
+            totalSongs={songs}
+          />
         ))}
         <View style={{ width: Dimensions.get('window').width * 0.2 }}></View>
       </ScrollView>

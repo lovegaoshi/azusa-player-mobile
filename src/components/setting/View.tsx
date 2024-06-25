@@ -116,7 +116,11 @@ const Settings = ({ headerBackVisible = true }: Props) => {
 
   return (
     <Stack.Navigator screenOptions={{ headerBackVisible }}>
-      <Stack.Screen name={NoxView.HOME} component={HomeSettings} />
+      <Stack.Screen
+        name={NoxView.HOME}
+        component={HomeSettings}
+        options={{ title: t('Settings.HomeSettingName') }}
+      />
       <Stack.Screen
         name={NoxView.SPLASH_GALLARY}
         component={SplashSettings}

@@ -45,7 +45,10 @@ declare global {
       progressEmitter?: NoxUtils.ProgressEmitter;
       favList?: string[];
       useBiliTag?: boolean;
+      // skip bvid resolve in search
       fastSearch?: boolean;
+      // skip bvid resolve in ALL operations
+      ultraSearch?: boolean;
     }
 
     interface BiliSearchFetchProps {

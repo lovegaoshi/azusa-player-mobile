@@ -31,6 +31,7 @@ interface AppStore {
   setDownloadProgressMap: (val: NoxStorage.R128Dict) => void;
   downloadPromiseMap: NoxStorage.DownloadDict;
   setDownloadPromiseMap: (val: NoxStorage.DownloadDict) => void;
+  downloadQueue: NoxStorage.DownloadPromise[];
   fadeIntervalMs: number;
   fadeIntervalSec: number;
   RNTPOptions?: UpdateOptions;
@@ -43,6 +44,7 @@ interface AppStore {
 }
 
 const appStore = createStore<AppStore>(set => ({
+  downloadQueue: [],
   pipMode: false,
   ABRepeat: {},
   setABRepeat: (val: NoxStorage.ABDict) => {

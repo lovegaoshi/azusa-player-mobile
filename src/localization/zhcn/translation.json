@@ -176,6 +176,7 @@
     "LogLevel5": "关闭"
   },
   "Settings": {
+    "HomeSettingName": "设置",
     "PluginsSettingName": "插件",
     "PluginsSettingDesc": "有可能导致数据错误的插件",
     "GeneralSettingName": "播放器设置",

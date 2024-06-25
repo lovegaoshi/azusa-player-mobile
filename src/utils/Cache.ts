@@ -99,12 +99,13 @@ class NoxMediaCache {
         addDownloadProgress(song, progress);
         logger.debug(`${song.parsedName} caching progress: ${progress}%`);
       });
-    this.cache.set(noxCacheKey(song), res.path());
+    let finalPath = res.path();
+    this.cache.set(noxCacheKey(song), finalPath);
     addDownloadProgress(song, 100);
     await parseR128Gain();
     if (isIOS) {
-      const mp3Path = await ffmpegToMP3(res.path());
-      this.cache.set(noxCacheKey(song), mp3Path);
+      finalPath = await ffmpegToMP3(res.path());
+      this.cache.set(noxCacheKey(song), finalPath);
       const playbackState = await TrackPlayer.getPlaybackState();
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-expect-error
@@ -113,11 +114,12 @@ class NoxMediaCache {
           `iOS m4s playback error of ${song.parsedName}. loading cached mp3...`
         );
         const currentTrack = await TrackPlayer.getActiveTrack();
-        await TrackPlayer.load({ ...currentTrack, url: mp3Path });
+        await TrackPlayer.load({ ...currentTrack, url: finalPath });
         TrackPlayer.play();
       }
     }
     this.dumpCache();
+    return finalPath;
   };
 
   loadCacheObject = async (identifier: string, prefix = 'file://') => {
