@@ -35,11 +35,12 @@ export default () => {
     const tanakaPath = (await getItem(
       StorageKeys.TANAKA_AMAZING_COMMODITIES
     )) as string | null;
-    setInitialized(true);
     if (tanakaPath && (await RNFetchBlob.fs.exists(tanakaPath))) {
       setTanaka(tanakaPath);
+      setInitialized(true);
       return;
     }
+    setInitialized(true);
     if (tanakaPath === DisabledTanaka) return;
     const resolvedURL = await fetchVideoPlayUrl(TanakaSrc, true);
     RNFetchBlob.config({
