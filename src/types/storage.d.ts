@@ -99,6 +99,12 @@ declare global {
       [key: string]: Promise<void | string>;
     }
 
+    interface DownloadPromise {
+      song: NoxMedia.Song;
+      promise: Promise<void>;
+      progress: number;
+    }
+
     type AListCred = [string, string];
   }
 }

@@ -96,8 +96,8 @@ class NoxAndroidAutoModule(reactContext: ReactApplicationContext) :
     callback.resolve(listMediaDirNative(relativeDir, subdir))
   }
 
-  @ReactMethod fun listMediaFileByFName(filename: String, callback: Promise) {
-    callback.resolve(listMediaDirNative("", true,
+  @ReactMethod fun listMediaFileByFName(filename: String, relDir: String, callback: Promise) {
+    callback.resolve(listMediaDirNative(relDir, true,
       "${MediaStore.Audio.Media.DISPLAY_NAME} IN ('$filename')"))
   }
 

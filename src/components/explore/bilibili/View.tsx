@@ -69,7 +69,7 @@ export default () => {
       </Text>
       {Object.keys(biliDynamic).map((k, i) => (
         <BiliSongRow
-          key={`BiliDynamicRow${i}`}
+          key={`BiliDynamicRow${k}`}
           songs={biliDynamic[Number(k)]}
           title={t(`BiliCategory.${k}`)}
         />

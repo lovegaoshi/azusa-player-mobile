@@ -159,7 +159,8 @@ interface ResolveAndCache {
     v: NoxUtils.SongProcessor
   ) => Promise<NoxNetwork.ResolvedNoxMediaURL>;
 }
-export const resolveAndCache = async ({
+
+const _resolveAndCache = async ({
   song,
   dry = false,
   resolver = resolveUrl,
@@ -167,7 +168,7 @@ export const resolveAndCache = async ({
   const resolvedUrl = await resolver({ song, iOS: isIOS });
   logger.debug(`[resolver] resolved ${song.bvid} to ${resolvedUrl.url}`);
   // a dry run doesnt cache to disk, but does resolve to the cached map.
-  if (dry) return resolvedUrl;
+  if (dry) return { resolvedUrl };
   const { downloadPromiseMap, fadeIntervalMs } = getState();
   const previousDownloadProgress =
     downloadPromiseMap[song.id] ||
@@ -182,8 +183,22 @@ export const resolveAndCache = async ({
     parseSongR128gain(song, fadeIntervalMs);
     resetResolvedURL(song);
   });
+  return {
+    resolvedUrl,
+    downloadPromise: previousDownloadProgress,
+  };
+};
+
+export const resolveAndCache = async (p: ResolveAndCache) => {
+  const { resolvedUrl } = await _resolveAndCache(p);
   return resolvedUrl;
 };
+
+export const resolveCachedPath = async (p: ResolveAndCache) => {
+  const { downloadPromise } = await _resolveAndCache(p);
+  return downloadPromise;
+};
+
 export const songlistToTracklist = async (
   songList: NoxMedia.Song[]
 ): Promise<Track[]> => {

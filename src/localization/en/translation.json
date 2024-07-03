@@ -164,6 +164,7 @@
     "LogLevel5": "OFF"
   },
   "Settings": {
+    "HomeSettingName": "Settings",
     "GeneralSettingName": "General Settings",
     "GeneralSettingDesc": "General APM settings",
     "PluginsSettingName": "Plugins",

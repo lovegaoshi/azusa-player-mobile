@@ -4,6 +4,7 @@ import { humanishApiLimiter, singleLimiter } from './throttle';
 import bfetch from '@utils/BiliFetch';
 import SongTS, { DEFAULT_NULL_URL } from '@objects/Song';
 import { Source, AcceptableExtensions } from '@enums/MediaFetch';
+import { getExt } from '../Utils';
 
 const matchAlistCred = async (site: string) => {
   const credList = await getAlistCred();
@@ -79,10 +80,8 @@ const fetchAlistMediaContent = async (
           result
         );
       }
-    } else {
-      if (AcceptableExtensions.includes(item.name.split('.').pop())) {
-        result.push(AListToNoxMedia(item, parsedPath, hostname));
-      }
+    } else if (AcceptableExtensions.includes(getExt(item.name))) {
+      result.push(AListToNoxMedia(item, parsedPath, hostname));
     }
   }
   return result;

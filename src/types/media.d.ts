@@ -29,6 +29,7 @@ declare global {
       metadataOnLoad?: boolean;
       metadataOnReceived?: boolean;
       order?: number;
+      localPath?: string;
     }
 
     export interface Playlist {

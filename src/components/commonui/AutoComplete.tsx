@@ -82,9 +82,9 @@ export default ({
           onDismiss={() => setShowAutoComplete(false)}
           anchor={menuCoords}
         >
-          {data.map((datum, i) => (
+          {data.map(datum => (
             <Menu.Item
-              key={i}
+              key={datum}
               onPress={() => {
                 setValue(datum);
                 onSubmit(datum);

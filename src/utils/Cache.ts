@@ -12,6 +12,7 @@ import { getCachedMediaMapping, saveCachedMediaMapping } from './ChromeStorage';
 import { logger } from './Logger';
 import { customReqHeader } from './BiliFetch';
 import { Source } from '@enums/MediaFetch';
+import { validateFile } from './RNUtils';
 
 const { getState } = playerSettingStore;
 const isIOS = Platform.OS === 'ios';
@@ -81,7 +82,7 @@ class NoxMediaCache {
     }
     if (!resolvedURL.url.startsWith('http')) {
       setFetchProgress(100);
-      return;
+      return resolvedURL.url;
     }
     logger.debug(`[Cache] fetching ${song.name} to cache...`);
     if (!extension) {
@@ -99,12 +100,13 @@ class NoxMediaCache {
         addDownloadProgress(song, progress);
         logger.debug(`${song.parsedName} caching progress: ${progress}%`);
       });
-    this.cache.set(noxCacheKey(song), res.path());
+    let finalPath = res.path();
+    this.cache.set(noxCacheKey(song), finalPath);
     addDownloadProgress(song, 100);
     await parseR128Gain();
     if (isIOS) {
-      const mp3Path = await ffmpegToMP3(res.path());
-      this.cache.set(noxCacheKey(song), mp3Path);
+      finalPath = await ffmpegToMP3(res.path());
+      this.cache.set(noxCacheKey(song), finalPath);
       const playbackState = await TrackPlayer.getPlaybackState();
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-expect-error
@@ -113,26 +115,27 @@ class NoxMediaCache {
           `iOS m4s playback error of ${song.parsedName}. loading cached mp3...`
         );
         const currentTrack = await TrackPlayer.getActiveTrack();
-        await TrackPlayer.load({ ...currentTrack, url: mp3Path });
+        await TrackPlayer.load({ ...currentTrack, url: finalPath });
         TrackPlayer.play();
       }
     }
     this.dumpCache();
+    return finalPath;
   };
 
   loadCacheObject = async (identifier: string, prefix = 'file://') => {
     const cachedPath = this.cache.get(identifier);
-    if (!cachedPath || !(await RNFetchBlob.fs.exists(cachedPath)))
-      return undefined;
+    if (!(await validateFile(cachedPath))) return undefined;
     // no RNFetchBlob.fs.readStream?
     return `${prefix}${cachedPath}`;
   };
 
-  loadCacheMedia = (song: NoxMedia.Song, prefix = 'file://') => {
+  loadCacheMedia = async (song: NoxMedia.Song, prefix = 'file://') => {
     // HACK: return song.source if song is local.
     if (song.source === Source.local) {
       // return song.bvid;
     }
+    if (await validateFile(song.localPath)) return `${prefix}${song.localPath}`;
     return this.loadCacheObject(noxCacheKey(song), prefix);
   };
 

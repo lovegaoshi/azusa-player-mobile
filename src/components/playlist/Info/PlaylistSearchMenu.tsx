@@ -28,7 +28,7 @@ export default ({
             toggleVisible();
           }}
           title={t(`PlaylistRegex.${entry}`)}
-          key={index}
+          key={entry}
         />
       ))}
     </Menu>

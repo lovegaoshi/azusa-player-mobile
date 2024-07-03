@@ -54,14 +54,14 @@
     "dayjs": "^1.11.11",
     "deepmerge": "^4.3.1",
     "dropbox": "git+https://lovegaoshi@github.com/lovegaoshi/dropbox-sdk-js.git",
-    "expo": "^51.0.15",
+    "expo": "^51.0.16",
     "expo-auth-session": "~5.5.2",
     "expo-clipboard": "~6.0.3",
     "expo-crypto": "~13.0.2",
     "expo-document-picker": "~12.0.2",
     "expo-image": "~1.12.12",
     "expo-keep-awake": "13.0.2",
-    "expo-secure-store": "~13.0.1",
+    "expo-secure-store": "~13.0.2",
     "fflate": "^0.8.2",
     "ffmpeg-kit-react-native": "^6.0.2",
     "he": "^1.2.0",
@@ -82,7 +82,7 @@
     "react-native-background-timer": "git+https://github.com/lovegaoshi/react-native-background-timer.git",
     "react-native-blob-jsi-helper": "^0.3.1",
     "react-native-blob-util": "^0.19.9",
-    "react-native-carplay": "2.3.0",
+    "react-native-carplay": "2.4.1-beta.0",
     "react-native-device-info": "^11.1.0",
     "react-native-draggable-flatlist": "^4.0.1",
     "react-native-gesture-handler": "2.17.1",
@@ -111,7 +111,7 @@
     "uuid": "^10.0.0",
     "youtubei.js": "^10.0.0",
     "ytdl-core": "https://lovegaoshi@github.com/lovegaoshi/node-ytdl-core.git#commit=4f9bc342593c4c1389ba331d0281310ca42fc273",
-    "zustand": "^4.5.2"
+    "zustand": "^4.5.4"
   },
   "resolutions": {
     "metro": "^0.80.9"
@@ -130,7 +130,7 @@
     "@types/he": "^1.2.3",
     "@types/jest": "^29.5.12",
     "@types/md5": "^2.3.5",
-    "@types/node": "^20.14.8",
+    "@types/node": "^20.14.9",
     "@types/react": "~18.3.3",
     "@types/react-native": "^0.73.0",
     "@types/react-native-background-timer": "^2.0.2",
