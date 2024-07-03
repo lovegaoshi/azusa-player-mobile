@@ -21,7 +21,8 @@ export interface FetcherProps {
   getItems: (val: any) => any[];
   resolveBiliBVID?: (
     bvobjs: any[],
-    progressEmitter: ProgressEmitter
+    progressEmitter: ProgressEmitter,
+    rawData?: any
   ) => Promise<NoxMedia.Song[]> | NoxMedia.Song[];
   progressEmitter?: ProgressEmitter;
   favList?: any[];
@@ -86,7 +87,7 @@ export const fetchPaginatedAPI = async ({
     })
   );
   // i dont know the smart way to do this out of the async loop, though luckily that O(2n) isnt that big of a deal
-  const resolvedBiliBVID = await resolveBiliBVID(BVids, progressEmitter);
+  const resolvedBiliBVID = await resolveBiliBVID(BVids, progressEmitter, data);
   return resolvedBiliBVID.filter(item => item);
 };
 
