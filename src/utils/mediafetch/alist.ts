@@ -80,10 +80,8 @@ const fetchAlistMediaContent = async (
           result
         );
       }
-    } else {
-      if (AcceptableExtensions.includes(getExt(item.name))) {
-        result.push(AListToNoxMedia(item, parsedPath, hostname));
-      }
+    } else if (AcceptableExtensions.includes(getExt(item.name))) {
+      result.push(AListToNoxMedia(item, parsedPath, hostname));
     }
   }
   return result;

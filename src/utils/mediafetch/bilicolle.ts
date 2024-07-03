@@ -11,7 +11,7 @@
  */
 import SongTS from '@objects/Song';
 import { Source } from '@enums/MediaFetch';
-import { i0hdslbHTTPResolve, timestampToSeconds } from '../Utils';
+import { i0hdslbHTTPResolve } from '../Utils';
 import { logger } from '@utils/Logger';
 import { biliShazamOnSonglist } from './bilishazam';
 import { fetchBiliPaginatedAPI } from './paginatedbili';
