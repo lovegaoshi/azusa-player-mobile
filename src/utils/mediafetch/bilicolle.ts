@@ -15,13 +15,22 @@ import { i0hdslbHTTPResolve, timestampToSeconds } from '../Utils';
 import { logger } from '@utils/Logger';
 import { biliShazamOnSonglist } from './bilishazam';
 import { fetchBiliPaginatedAPI } from './paginatedbili';
+import { getBiliUser } from './biliuser';
 
 const URL_BILICOLLE_INFO =
   'https://api.bilibili.com/x/polymer/space/seasons_archives_list?mid={mid}&season_id={sid}&sort_reverse=false&page_num={pn}&page_size=100';
 
+const processMetadata = async (metadata: any) => {
+  const userMetadata = await getBiliUser(metadata.meta.mid);
+  return {
+    ...metadata,
+    uname: userMetadata.name,
+  };
+};
+
 /**
- * its absolutely safe to not resolve bvids individually, as bilicolle will never include videos w multiple episodes.
- * although biliup name is not returned, only collection name is. whelp its a good sacrifice.
+ * its absolutely safe to not resolve bvids individually, as bilicolle
+ * will never include videos w multiple episodes.
  * {
     "aid": 1805043280,
     "bvid": "BV1kb421q7x8",
@@ -45,12 +54,12 @@ const resolveBiliBVID = (objs: any[], _: any, rawData: any) =>
       bvid: obj.bvid,
       name: obj.title,
       nameRaw: obj.title,
-      singer: rawData.meta.name,
+      singer: rawData.uname,
       singerId: rawData.meta.mid,
       cover: i0hdslbHTTPResolve(obj.pic),
       lyric: '',
       page: 1,
-      duration: timestampToSeconds(obj.duration),
+      duration: obj.duration,
       album: obj.title,
       source: Source.bilivideo,
     })
@@ -72,6 +81,7 @@ const fetchBiliColleList = (
     progressEmitter,
     favList,
     resolveBiliBVID,
+    processMetadata,
   });
 };
 

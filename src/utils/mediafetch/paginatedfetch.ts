@@ -33,6 +33,7 @@ export interface FetcherProps {
   getJSONData?: (json: any) => any;
   fetcher?: (url: string, params?: any) => Promise<Response>;
   startPage?: number;
+  processMetadata?: (obj: any) => Promise<any>;
 }
 
 /**
@@ -56,6 +57,7 @@ export const fetchPaginatedAPI = async ({
   getJSONData = (json: any) => json.data,
   fetcher = bfetch,
   startPage = 1,
+  processMetadata = (v: any) => v,
 }: FetcherProps) => {
   const res = await fetcher(url.replace('{pn}', String(startPage)), params);
   const data = getJSONData(await jsonify(res.clone()));
@@ -87,7 +89,11 @@ export const fetchPaginatedAPI = async ({
     })
   );
   // i dont know the smart way to do this out of the async loop, though luckily that O(2n) isnt that big of a deal
-  const resolvedBiliBVID = await resolveBiliBVID(BVids, progressEmitter, data);
+  const resolvedBiliBVID = await resolveBiliBVID(
+    BVids,
+    progressEmitter,
+    await processMetadata(data)
+  );
   return resolvedBiliBVID.filter(item => item);
 };
 

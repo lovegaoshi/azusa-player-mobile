@@ -24,6 +24,7 @@ export const fetchBiliPaginatedAPI = ({
       progressEmitter2
     ),
   startPage = 1,
+  processMetadata,
 }: FetcherProps) =>
   fetchPaginatedAPI({
     url,
@@ -37,6 +38,7 @@ export const fetchBiliPaginatedAPI = ({
     resolveBiliBVID,
     fetcher: url.includes('/wbi/') ? wbiQuery : bfetch,
     startPage,
+    processMetadata,
   });
 
 export const fetchAwaitBiliPaginatedAPI = ({
