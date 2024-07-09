@@ -1,0 +1,15 @@
+<h3>功能</h3>
+<ul>
+<li>播放b站，油管，musicFree插件，本地歌，AList</li>
+<li>歌单订阅更新</li>
+<li>歌名提取与歌词搜索</li>
+<li>换皮和自制皮肤</li>
+<li>歌单云备份、与插件版电闹播放器伪互通</li>
+<li>b站登录互动，点赞，三连，增加b站视频播放量</li>
+<li>多语言</li>
+<li>歌曲缓存</li>
+<li>Android Auto, CarPlay支持</li>
+<li>ffmpeg处理音量均衡</li>
+<li>AB 重复</li>
+<li>逐字歌词</li>
+</ul>
