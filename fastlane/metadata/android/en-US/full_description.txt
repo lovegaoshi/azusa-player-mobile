@@ -1,0 +1,15 @@
+<h3>Features</h3>
+<ul>
+<li>Play music from Bilibili, YouTube, MusicFree plugin, local files, and AList</li>
+<li>Playlist subscription</li>
+<li>Extract song name and search lyric</li>
+<li>Change theme and custom theme</li>
+<li>Playlist cloud backup and sync with Azusa Player extension</li>
+<li>Login on Bilibili and interact with video</li>
+<li>Multilingual</li>
+<li>Cache songs</li>
+<li>Support Android Auto, CarPlay</li>
+<li>Volume equalization with FFmpeg</li>
+<li>AB loop playback</li>
+<li>Word-by-word lyrics</li>
+</ul>
