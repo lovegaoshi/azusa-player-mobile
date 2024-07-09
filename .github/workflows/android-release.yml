@@ -167,9 +167,12 @@ jobs:
           git config --global user.email 106490582+lovegaoshi@users.noreply.github.com
           git config --global user.name lovegaoshi
           git commit -m "build: release version bump" -a
+          git tag $COMMIT_TAG-fdroid
 
       - name: Push changes to master
         uses: ad-m/github-push-action@master
+        with:
+          tags: true
 
       - name: Add Build Sign Keys
         run: |
