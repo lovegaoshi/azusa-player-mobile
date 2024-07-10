@@ -28,6 +28,7 @@ export default () => {
     usePlaylistCRUD();
   const track = useActiveTrack();
   const updateTrack = useNoxSetting(state => state.updateTrack);
+  const loadingTracker = React.useRef(false);
 
   useTrackPlayerEvents([Event.PlaybackActiveTrackChanged], event => {
     if (event.track?.song) {
@@ -103,15 +104,21 @@ export default () => {
 
   useTrackPlayerEvents([Event.PlaybackState], async event => {
     console.log('Event.PlaybackState', event);
-    if (event.state === State.Playing) {
-      fadePlay();
+    switch (event.state) {
+      case State.Playing:
+        fadePlay();
+        break;
+      case State.Loading:
+        loadingTracker.current = true;
+        break;
     }
     if (event.state !== State.Ready) return;
     updateCurrentSongMetadata();
     const song = (await TrackPlayer.getActiveTrack())?.song as NoxMedia.Song;
     const newABRepeat = getABRepeatRaw(song.id);
     setABRepeat(newABRepeat);
-    if (setCurrentPlaying(song)) return;
+    if (setCurrentPlaying(song) && !loadingTracker.current) return;
+    loadingTracker.current = false;
     const trackDuration = (await TrackPlayer.getProgress()).duration;
     setBRepeatDuration(newABRepeat[1] * trackDuration);
     if (newABRepeat[0] === 0) return;
