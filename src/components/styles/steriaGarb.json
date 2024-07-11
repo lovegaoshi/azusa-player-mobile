@@ -2161,9 +2161,60 @@
       "https://i0.hdslb.com/bfs/garb/f7b6e81f060f388c6f507cc7a028479ffd8d14cd.png",
       "https://i0.hdslb.com/bfs/garb/211489a8fae02ec0a7422b7411d7e8b7dce45230.png",
       "https://i0.hdslb.com/bfs/garb/babdd985ad9304e43ba11195a6adaf0fa54af0f3.png",
-      "https://i0.hdslb.com/bfs/garb/fbe50417adb0b9828679eacd7bb845707b59771d.png"
+      "https://i0.hdslb.com/bfs/garb/fbe50417adb0b9828679eacd7bb845707b59771d.png",
+      "https://i0.hdslb.com/bfs/garb/935362fcde78a1f9874cbe72a5b6ac916700b0a9.png",
+      "https://i0.hdslb.com/bfs/garb/82eb3361bca7605e88dcb5bc9ef7e75356f1eba8.png",
+      "https://i0.hdslb.com/bfs/garb/c89d869fc88fe327447b6c66c7a721bb33313687.png",
+      "https://i0.hdslb.com/bfs/garb/979855fb700c1c1366b3d9b671e63fcebdadfa92.png",
+      "https://i0.hdslb.com/bfs/garb/cd6b523c4456391fa8915531c42cc424042e4361.png",
+      "https://i0.hdslb.com/bfs/garb/d3ef20f6ea6953c5cbe4a06a6bac68e4ca58bd0a.png",
+      "https://i0.hdslb.com/bfs/garb/bb9d19dcd3b4a951b3d5d652ba2b976ee45d93ab.png",
+      "https://i0.hdslb.com/bfs/garb/aa12a8a6b85b5da4ccf04d6db9a5706d9c4d63f3.png",
+      "https://i0.hdslb.com/bfs/garb/0fc3dbf0abfd40d1264f99abf399eb5e640333a6.png",
+      "https://i0.hdslb.com/bfs/garb/18638004b306f4be36a643f218874faec2905492.png",
+      "https://i0.hdslb.com/bfs/garb/3decbbd36d920b10ae66ca0fa9c5bea19661a168.png",
+      "https://i0.hdslb.com/bfs/garb/06581cc9961fade8428c7758a14c6699b1e3ba9e.png",
+      "https://i0.hdslb.com/bfs/garb/55485e80619ed83dc1a62beb9c8f070123e23fd2.png",
+      "https://i0.hdslb.com/bfs/garb/f7df33cdfc6277bb21d04edc4582652960b1d089.png",
+      "https://i0.hdslb.com/bfs/garb/a251a727cf6bafd277b4485ac4e0feee4cf66028.png",
+      "https://i0.hdslb.com/bfs/garb/a3bcf71670bd32ae513ec98fbd6afed3cfadfacc.png",
+      "https://i0.hdslb.com/bfs/garb/c74a40ff0ae674225158a5b4338f6bbc0d8f558e.png",
+      "https://i0.hdslb.com/bfs/garb/eba12f1689640dcaea8cd4466852a1a70a15dfca.png",
+      "https://i0.hdslb.com/bfs/garb/9f4bbc463770e3d2d98896f1a1b151c582c3f01a.png",
+      "https://i0.hdslb.com/bfs/garb/105af3bcd7ae25fde869305c1198e830c42c1049.png"
     ],
     "backgroundImages": [
+      {
+        "type": "biliNFTVideoNew",
+        "identifier": "[\"102546\",\"102547\",\"碧波荡漾\"]"
+      },
+      {
+        "type": "biliNFTVideoNew",
+        "identifier": "[\"102546\",\"102547\",\"暧昧清晨\"]"
+      },
+      {
+        "type": "biliNFTVideoNew",
+        "identifier": "[\"102546\",\"102547\",\"虹色蜜露\"]"
+      },
+      {
+        "type": "biliNFTVideoNew",
+        "identifier": "[\"102546\",\"102547\",\"海滩初日\"]"
+      },
+      "https://i0.hdslb.com/bfs/garb/open/a4ed008ef65b7e12e100cdc2d56e4a7c25ef4dae.png",
+      "https://i0.hdslb.com/bfs/garb/open/06e1891cfa1d4b6c8f75570be5ad48ff50439ef1.png",
+      "https://i0.hdslb.com/bfs/garb/open/56eaa5fe4b48101617180f3097c83a2b9656746b.png",
+      "https://i0.hdslb.com/bfs/garb/open/2f401bff3dfaecbdb0f119da88b2e0059f2e50f1.png",
+      "https://i0.hdslb.com/bfs/garb/open/438c67ac731eef356aa8f8eca15ba5d72e43856e.png",
+      "https://i0.hdslb.com/bfs/garb/open/4852f50330f3fc1e51a2a928560508f026ebd348.png",
+      "https://i0.hdslb.com/bfs/garb/open/abed26f78db5e2445979ea7c0e4ced77ed40f27c.png",
+      {
+        "type": "biliNFTVideoNew",
+        "identifier": "[\"102546\",\"102547\",\"海岛探险\"]"
+      },
+      {
+        "type": "biliNFTVideoNew",
+        "identifier": "[\"102546\",\"102547\",\"超心动日记\"]"
+      },
       {
         "type": "biliNFTVideoNew",
         "identifier": "[\"101353\",\"101354\",\"花语午后\"]"
