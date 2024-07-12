@@ -55,11 +55,6 @@ export default {
     'https://i0.hdslb.com/bfs/new_dyn/57f60fe337b6837651ba8aeb1cb8de6e2463723.gif',
     'https://i0.hdslb.com/bfs/new_dyn/8b7fdcad316206213e747457394b5e872463723.gif',
     'https://i0.hdslb.com/bfs/new_dyn/1137fd25a7a787b77a66892f6a2c0c4f2463723.gif',
-    '',
-    '',
-    '',
-    '',
-    '',
   ],
   backgroundImages: [
     'https://i0.hdslb.com/bfs/archive/ccd3865b526497243b781a3b64d44567c3b1d092.jpg',

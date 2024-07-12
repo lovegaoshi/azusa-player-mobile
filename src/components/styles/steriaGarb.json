@@ -2422,5 +2422,151 @@
       "onSurfaceDisabled": "rgba(230, 226, 217, 0.38)",
       "backdrop": "rgba(49, 49, 37, 0.4)"
     }
+  },
+  {
+    "metaData": {
+      "themeName": "幻想社夏日收藏集",
+      "themeDesc": "      幻想社Fantas1A是以歌势为主的虚拟主播社团，日常通过直播、视频、线下活动等多种方式活跃在bilibili等平台，为用户提供丰富的文化娱乐内容的同时陪伴着粉丝们共同成长~\n    \n    【幻想社夏日收藏集】是幻想社Fantas1A首个夏日泳装主题收藏集，每张数字卡片都拥有独特编号，期待大家来解锁哦！",
+      "themeAuthor": "NoxAutoGen",
+      "themeIcon": "https://i0.hdslb.com/bfs/garb/f01749106a137c0fe1ac833cd70b50137304182f.png",
+      "darkTheme": true
+    },
+    "gifs": [
+      "https://i0.hdslb.com/bfs/garb/89f312ba550bf3e12f7175aa0fcb7e2ab0ab8f56.png",
+      "https://i0.hdslb.com/bfs/garb/1be296dcf89444afe9f2d07f4beb1ec95499c6e5.png",
+      "https://i0.hdslb.com/bfs/garb/449c1a30c5d74b3d775810d9535dcb53c5914f5a.png",
+      "https://i0.hdslb.com/bfs/garb/834553e2494ad60f737fcd07801c10070bc98f1a.png",
+      "https://i0.hdslb.com/bfs/garb/8d86ecf95826abbdec036a6dfa64251037fd7af0.png",
+      "https://i0.hdslb.com/bfs/garb/22f047c9ad05d63a53003be1ed77651b8bd730c1.png",
+      "https://i0.hdslb.com/bfs/garb/6430e75cedaf4f1dcc0957b434023669bd267ad1.png",
+      "https://i0.hdslb.com/bfs/garb/2afa9e73efe72a43742c460f7e8774b2e2e0649d.png",
+      "https://i0.hdslb.com/bfs/garb/a14929b6cb51afb9e7d9977435149e73a01fb40f.png",
+      "https://i0.hdslb.com/bfs/garb/6abea3541c5517b305f2a8170224964dd1db7b6c.png",
+      "https://i0.hdslb.com/bfs/garb/fa9c6a565b9a5056ff9ed8c967cd43775ded2f78.png",
+      "https://i0.hdslb.com/bfs/garb/ac5bd54f245f94bb46a8b99ad2e48ea616ae2699.png",
+      "https://i0.hdslb.com/bfs/garb/a347c5fcc4c225c4093bd200c0a47a7a6987162c.png",
+      "https://i0.hdslb.com/bfs/garb/2bc8fd8add9731e7e91a5893d6e36dc073dcdd89.png",
+      "https://i0.hdslb.com/bfs/garb/27b6429c04721a15ee3c13aba706ba694ad1ee85.png",
+      "https://i0.hdslb.com/bfs/garb/d1c40592041e656ccfbd0f4a823751164ee53e0c.png",
+      "https://i0.hdslb.com/bfs/garb/a43871709d5fa544dd1bcf6074e8e04bb5a65406.png",
+      "https://i0.hdslb.com/bfs/garb/55cdfe6ef2eb281d5e8ffa8680f1b8950d224463.png",
+      "https://i0.hdslb.com/bfs/garb/af5eee776f20bd9e4bd8de0637c0044d56799e45.png",
+      "https://i0.hdslb.com/bfs/garb/e5f8fa78b6ed5d9a488311c5c1394c2e41df8062.png"
+    ],
+    "backgroundImages": [
+      {
+        "type": "biliNFTVideoNew",
+        "identifier": "[\"102593\",\"102594\",\"夏日魅惑-星粥Kayuu\"]"
+      },
+      {
+        "type": "biliNFTVideoNew",
+        "identifier": "[\"102593\",\"102594\",\"度假邀约-尤菲黎娅\"]"
+      },
+      {
+        "type": "biliNFTVideoNew",
+        "identifier": "[\"102593\",\"102594\",\"海螺邀曲-卡米莉娅\"]"
+      },
+      {
+        "type": "biliNFTVideoNew",
+        "identifier": "[\"102593\",\"102594\",\"冲浪一夏-笔子Penz\"]"
+      },
+      {
+        "type": "biliNFTVideoNew",
+        "identifier": "[\"102593\",\"102594\",\"沙岸嬉戏-小咪吃肉\"]"
+      },
+      {
+        "type": "biliNFTVideoNew",
+        "identifier": "[\"102593\",\"102594\",\"海滨派对-忒希Tethys\"]"
+      },
+      {
+        "type": "biliNFTVideoNew",
+        "identifier": "[\"102593\",\"102594\",\"夏日学园-星粥Kayuu\"]"
+      },
+      {
+        "type": "biliNFTVideoNew",
+        "identifier": "[\"102593\",\"102594\",\"夏日学园-尤菲黎娅\"]"
+      },
+      {
+        "type": "biliNFTVideoNew",
+        "identifier": "[\"102593\",\"102594\",\"夏日学园-卡米莉娅\"]"
+      },
+      {
+        "type": "biliNFTVideoNew",
+        "identifier": "[\"102593\",\"102594\",\"夏日学园-笔子Penz\"]"
+      },
+      {
+        "type": "biliNFTVideoNew",
+        "identifier": "[\"102593\",\"102594\",\"夏日学园-小咪吃肉\"]"
+      },
+      {
+        "type": "biliNFTVideoNew",
+        "identifier": "[\"102593\",\"102594\",\"夏日学园-忒希Tethys\"]"
+      },
+      "https://i0.hdslb.com/bfs/garb/open/062edee3418f1ed53b68f48be6284b4035b5c7cc.png",
+      "https://i0.hdslb.com/bfs/garb/open/004ed234ec0b6d316e442cb10569beb0fb2d9601.png",
+      "https://i0.hdslb.com/bfs/garb/open/ae94a1062a3bdfea0fe6a5e330061524d531ca7d.png",
+      "https://i0.hdslb.com/bfs/garb/open/c7aa3787482656a53fb1336f22511e0224b26fd2.png",
+      "https://i0.hdslb.com/bfs/garb/open/7044f3e719d903571a7e9692d200dd6a9da85af5.png",
+      "https://i0.hdslb.com/bfs/garb/open/71696e797fc70985f5133b44bd32909eb13bf96f.png",
+      "https://i0.hdslb.com/bfs/garb/open/17e0916a55c610ffe60eb00b652ada99a10d5419.png",
+      "https://i0.hdslb.com/bfs/garb/open/9b8de625175158106310ec06ea453382fd4dca0a.png",
+      "https://i0.hdslb.com/bfs/garb/open/722e6f0441bd88cd06dc75178cbbbeef2b9a3cde.png",
+      "https://i0.hdslb.com/bfs/garb/open/71143963113182b6717b146d9b3be90541959fa3.png",
+      "https://i0.hdslb.com/bfs/garb/open/9ad3c02d0dc5635076c6ede738cbe96040af04c8.png",
+      "https://i0.hdslb.com/bfs/garb/open/fe15db5bd175d4686c6326b45a4e18d5f60f5298.png"
+    ],
+    "customColors": {
+      "maskedBackgroundColor": "rgba(0, 0, 0, 0.60)",
+      "playlistDrawerBackgroundColor": "green",
+      "playlistDrawerBackgroundColorTransparent": "rgba(0, 255, 0, 0.35)",
+      "progressThumbTintColor": "rgb(235, 235, 0)",
+      "progressMinimumTrackTintColor": "rgb(235, 235, 0)",
+      "progressMaximumTrackTintColor": "#FFFFFF",
+      "btnBackgroundColor": "rgb(72, 71, 58)",
+      "textInputSelectionColor": "green"
+    },
+    "colors": {
+      "primary": "rgb(255, 255, 0)",
+      "onPrimary": "rgb(50, 50, 0)",
+      "primaryContainer": "rgb(73, 73, 0)",
+      "onPrimaryContainer": "rgb(234, 234, 0)",
+      "secondary": "rgb(202, 200, 165)",
+      "onSecondary": "rgb(50, 50, 24)",
+      "secondaryContainer": "rgb(73, 72, 45)",
+      "onSecondaryContainer": "rgb(231, 228, 191)",
+      "tertiary": "rgb(164, 208, 189)",
+      "onTertiary": "rgb(11, 55, 42)",
+      "tertiaryContainer": "rgb(37, 78, 64)",
+      "onTertiaryContainer": "rgb(191, 236, 216)",
+      "error": "rgb(255, 180, 171)",
+      "onError": "rgb(105, 0, 5)",
+      "errorContainer": "rgb(147, 0, 10)",
+      "onErrorContainer": "rgb(255, 180, 171)",
+      "background": "rgba(0,0,0, 0.4)",
+      "onBackground": "rgb(230, 226, 217)",
+      "surface": "rgb(28, 28, 23)",
+      "onSurface": "rgba(235, 235, 0, 1)",
+      "text": "rgb(255, 255, 0)",
+      "surfaceVariant": "rgb(10, 10, 10)",
+      "onSurfaceVariant": "rgb(225, 225, 0)",
+      "outline": "rgb(147, 145, 130)",
+      "outlineVariant": "rgb(72, 71, 58)",
+      "shadow": "rgb(0, 0, 0)",
+      "scrim": "rgb(0, 0, 0)",
+      "inverseSurface": "rgb(230, 226, 217)",
+      "inverseOnSurface": "rgb(49, 49, 43)",
+      "inversePrimary": "rgb(98, 98, 0)",
+      "elevation": {
+        "level0": "transparent",
+        "level1": "rgb(53, 56, 57)",
+        "level2": "rgb(10, 10, 10)",
+        "level3": "rgb(10, 10, 10)",
+        "level4": "rgb(49, 49, 20)",
+        "level5": "rgb(53, 53, 20)"
+      },
+      "surfaceDisabled": "rgba(230, 226, 217, 0.12)",
+      "onSurfaceDisabled": "rgba(230, 226, 217, 0.38)",
+      "backdrop": "rgba(49, 49, 37, 0.4)"
+    }
   }
 ]
