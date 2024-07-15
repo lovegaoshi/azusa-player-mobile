@@ -116,9 +116,9 @@ export default ({
     setSearchVal(data);
   }, []);
 
-  const performSearch = () => {
+  const performSearch = (v?: string) => {
     pressed.current = true;
-    handleSearch(searchVal);
+    handleSearch(v ?? searchVal);
   };
 
   useEffect(() => {
