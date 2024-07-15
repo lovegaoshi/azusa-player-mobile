@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { ImageBackground, Dimensions, View, StyleSheet } from 'react-native';
-import Video, { VideoRef } from 'react-native-video';
+import Video, { VideoRef, ResizeMode } from 'react-native-video';
 
 import { useNoxSetting } from '@stores/useApp';
 import { customReqHeader } from '@utils/BiliFetch';
@@ -70,7 +70,7 @@ const MainBackground = ({ children }: { children: React.JSX.Element }) => {
             }
             repeat={bkgrdImg.toA ? false : true}
             muted
-            resizeMode="cover"
+            resizeMode={ResizeMode.COVER}
             disableFocus={true}
             preventsDisplaySleepDuringVideoPlayback={false}
             bufferConfig={{ cacheSizeMB: 200 }}
