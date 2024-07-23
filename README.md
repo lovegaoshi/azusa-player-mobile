@@ -13,7 +13,7 @@
   
 <p align="center">
   <a href="https://github.com/lovegaoshi/azusa-player-mobile/releases/latest">
-    <img alt="GitHub all releases" src="https://img.shields.io/github/downloads/lovegaoshi/azusa-player-mobile/total">
+    <img alt="GitHub all releases" src="https://img.shields.io/github/downloads/lovegaoshi/azusa-player-mobile/latest/total">
   </a>
   <a href="https://github.com/lovegaoshi/azusa-player-mobile/releases/latest">
     <img alt="GitHub release (latest by date)" src="https://img.shields.io/github/v/release/lovegaoshi/azusa-player-mobile">
