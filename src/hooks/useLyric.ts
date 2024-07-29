@@ -43,8 +43,8 @@ export default (currentSong?: NoxMedia.Song) => {
       const resolvedLrc = resolvedLrcOptions[index];
       const lyric = resolvedLyric
         ? await searchLyric(resolvedLyric.lyricKey, resolvedLyric.source)
-        : resolvedLrc.lrc ??
-          (await searchLyric(resolvedLrc.songMid, resolvedLrc.source));
+        : (resolvedLrc.lrc ??
+          (await searchLyric(resolvedLrc.songMid, resolvedLrc.source)));
       setLrc(lyric);
       setLrcOption(resolvedLrc);
       updateLyricMapping({
