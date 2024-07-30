@@ -12,6 +12,7 @@ import { Source } from '@enums/MediaFetch';
 import useBiliSearch from '@hooks/useBiliSearch';
 import { copyCacheToDir } from '@utils/Download';
 import { isAndroid } from '@utils/RNUtils';
+import useSnack from '@stores/useSnack';
 
 enum Icons {
   SEND_TO = 'playlist-plus',
@@ -42,6 +43,7 @@ export default ({ usePlaylist, prepareForLayoutAnimationRender }: Props) => {
   const { checking, resetSelected, searchAndEnableSearch, getSelectedSongs } =
     usePlaylist;
   const { t } = useTranslation();
+  const setSnack = useSnack(state => state.setSnack);
   const songMenuVisible = useNoxSetting(state => state.songMenuVisible);
   const setSongMenuVisible = useNoxSetting(state => state.setSongMenuVisible);
   const menuCoord = useNoxSetting(state => state.songMenuCoords);
@@ -147,19 +149,31 @@ export default ({ usePlaylist, prepareForLayoutAnimationRender }: Props) => {
           title={t('SongOperations.BVIDSearchTitle')}
         />
       )}
-      {isAndroid && downloadLocation && (
+      {isAndroid && (
         <Menu.Item
           leadingIcon={Icons.DOWNLOAD}
           onPress={async () => {
-            for (const song of selectedSongs()) {
+            const downloadSong = async (song: NoxMedia.Song) => {
               const newPath = await copyCacheToDir({
                 song,
                 fsdir: downloadLocation,
               });
-              if (!newPath) continue;
-              await playlistCRUD.updateSong(song, { localPath: newPath });
-            }
+              if (!newPath) return;
+              await playlistCRUD.updateSong(song, {
+                localPath: newPath,
+              });
+            };
             closeMenu();
+            for (const song of selectedSongs()) {
+              await setSnack({
+                snackMsg: {
+                  processing: t('Download.downloading', { song }),
+                  success: t('Download.downloaded', { song }),
+                  fail: t('Download.downloadFailed', { song }),
+                },
+                processFunction: () => downloadSong(song),
+              });
+            }
           }}
           disabled={checking}
           title={t('SongOperations.songDownloadTitle')}

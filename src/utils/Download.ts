@@ -6,9 +6,12 @@ import { getExt } from './Utils';
 
 interface CopyCacheToDir {
   song: NoxMedia.Song;
-  fsdir: string;
+  fsdir?: string;
 }
-export const copyCacheToDir = async ({ song, fsdir }: CopyCacheToDir) => {
+export const copyCacheToDir = async ({
+  song,
+  fsdir = 'APM',
+}: CopyCacheToDir) => {
   const filePath = await resolveCachedPath({ song });
   if (filePath === undefined) {
     logger.warn(
@@ -18,22 +21,15 @@ export const copyCacheToDir = async ({ song, fsdir }: CopyCacheToDir) => {
     return;
   }
   try {
-    RNFetchBlob.MediaCollection.copyToMediaStore(
+    return await RNFetchBlob.MediaCollection.copyToMediaStore(
       {
         name: `${song.parsedName}.mp3`,
-        parentFolder: 'APM',
+        parentFolder: fsdir,
         mimeType: 'audio/mp3',
       },
       'Audio',
       filePath
     );
-    logger.debug(`[Download] cp to dir ${fsdir} is not supported.`);
-    RNFetchBlob.fs.mkdir(`${RNFetchBlob.fs.dirs.MusicDir}/APM`);
-    const dest = `${RNFetchBlob.fs.dirs.MusicDir}/APM\
-/${song.parsedName}-${song.singer} [${song.id}].${getExt(filePath)}`;
-    await RNFetchBlob.fs.cp(filePath, dest);
-    RNFetchBlob.fs.scanFile([{ path: dest }]);
-    return dest;
   } catch (e) {
     logger.warn(
       `[Download] ${song.parsedName} failed to copy to music dir: ${e}`
