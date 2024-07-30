@@ -18,6 +18,15 @@ export const copyCacheToDir = async ({ song, fsdir }: CopyCacheToDir) => {
     return;
   }
   try {
+    RNFetchBlob.MediaCollection.copyToMediaStore(
+      {
+        name: `${song.parsedName}.mp3`,
+        parentFolder: 'APM',
+        mimeType: 'audio/mp3',
+      },
+      'Audio',
+      filePath
+    );
     logger.debug(`[Download] cp to dir ${fsdir} is not supported.`);
     RNFetchBlob.fs.mkdir(`${RNFetchBlob.fs.dirs.MusicDir}/APM`);
     const dest = `${RNFetchBlob.fs.dirs.MusicDir}/APM\
