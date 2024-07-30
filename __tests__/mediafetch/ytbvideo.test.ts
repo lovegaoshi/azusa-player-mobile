@@ -7,6 +7,8 @@ test.only('dummy fetch', () => {
   expect('dummy').toBe('dummy');
 });
 
+// HACK: ghactions cant connect to ytbi
+
 test('test ytbvideo', async () => {
   const content = await fetcher.regexFetch({
     reExtracted: fetcher.regexSearchMatch.exec(
