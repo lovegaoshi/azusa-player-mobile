@@ -2568,5 +2568,131 @@
       "onSurfaceDisabled": "rgba(230, 226, 217, 0.38)",
       "backdrop": "rgba(49, 49, 37, 0.4)"
     }
+  },
+  {
+    "metaData": {
+      "themeName": "東雪蓮音乐收藏集",
+      "themeDesc": "【一蓮托生】是虚拟主播東雪蓮推出的数字收藏集，由多名创作者精心制作，包含精美动态卡面、原创音乐，另有专属勋章、头像框等你解锁～",
+      "themeAuthor": "NoxAutoGen",
+      "themeIcon": "https://i0.hdslb.com/bfs/garb/84f30f189779808e8edf4a1db6d4453a44857b9c.jpg",
+      "darkTheme": true
+    },
+    "gifs": [
+      "https://i0.hdslb.com/bfs/garb/dc897d53861bc20f6832a3d4ad99ea7d64abb3dc.png",
+      "https://i0.hdslb.com/bfs/garb/ccb61fb0f5d80a5e3ca501d2b0a7cece770b6cd1.png",
+      "https://i0.hdslb.com/bfs/garb/6af4cd2c3abf23e8f63c8c7ac33843d48b901d72.png",
+      "https://i0.hdslb.com/bfs/garb/104692681e7c927cfff46d279bad4d5fdf4933f9.png",
+      "https://i0.hdslb.com/bfs/garb/ab01c0120ed245f60e7e5d260bb64b8a1e5d826f.png",
+      "https://i0.hdslb.com/bfs/garb/043e70f92a2d87694a4709c3395b7428e7aab0e7.png",
+      "https://i0.hdslb.com/bfs/garb/5df7411c2e8c2532dd4dec421d0b2403f4155561.png",
+      "https://i0.hdslb.com/bfs/garb/512878801e6d987e6d74792743700854eec55ad3.png",
+      "https://i0.hdslb.com/bfs/garb/b95f35b83a369fb0a8b777ad95067f2add509625.png",
+      "https://i0.hdslb.com/bfs/garb/ac8ba0e45b5cef290b3a4770d7656c9424f823fa.png",
+      "https://i0.hdslb.com/bfs/garb/7400adaf415bd2937f2b699b3f3d05f7ff9e028b.png",
+      "https://i0.hdslb.com/bfs/garb/ca80276f937a98c1c6e41a3f3cacd1705305dcff.png",
+      "https://i0.hdslb.com/bfs/garb/39cc1f51ae6e098c692d681c96a050691b68ed9a.png",
+      "https://i0.hdslb.com/bfs/garb/9ed588508b1da0a114833000e74a3be7676e7510.png",
+      "https://i0.hdslb.com/bfs/garb/259056daf4a6a76d07eec6d6454d23966b6e7b6e.png",
+      "https://i0.hdslb.com/bfs/garb/57213254e5202d626c00b0227a6b52d634665749.png",
+      "https://i0.hdslb.com/bfs/garb/25884988f8617fe51c63a2c5e5ccabe200149cff.png",
+      "https://i0.hdslb.com/bfs/garb/288537e6a066872c77b79d1e3f3705a97087e3bf.png",
+      "https://i0.hdslb.com/bfs/garb/76f73a4d2fc3f42a2129c15d822f79878488d9af.png",
+      "https://i0.hdslb.com/bfs/garb/178f49f24c6585d221881561fbcffa7d14ce8040.png"
+    ],
+    "backgroundImages": [
+      {
+        "type": "biliNFTVideoNew",
+        "identifier": "[\"103031\",\"103032\",\"JUST LOVE\"]"
+      },
+      {
+        "type": "biliNFTVideoNew",
+        "identifier": "[\"103031\",\"103032\",\"KEEP OUT\"]"
+      },
+      {
+        "type": "biliNFTVideoNew",
+        "identifier": "[\"103031\",\"103032\",\"sski\"]"
+      },
+      {
+        "type": "biliNFTVideoNew",
+        "identifier": "[\"103031\",\"103032\",\"砂時計の魔法\"]"
+      },
+      {
+        "type": "biliNFTVideoNew",
+        "identifier": "[\"103031\",\"103032\",\"fill up\"]"
+      },
+      {
+        "type": "biliNFTVideoNew",
+        "identifier": "[\"103031\",\"103032\",\"tuyu\"]"
+      },
+      "https://i0.hdslb.com/bfs/garb/open/cbcd64a85b974447162d80efba611c75b7bc92f9.png",
+      "https://i0.hdslb.com/bfs/garb/open/f5170c6e93393ca17c3ce7f701a7d452c09489b8.png",
+      "https://i0.hdslb.com/bfs/garb/open/018728e5f34401f7a19260be8aebba6cd8bd7fd6.png",
+      "https://i0.hdslb.com/bfs/garb/open/d7b17281dd15db790402ecc114a29f606da0adac.png",
+      "https://i0.hdslb.com/bfs/garb/open/06e370835a1f8ab81b37b2903a18ce5768fe1dfb.png",
+      "https://i0.hdslb.com/bfs/garb/open/242b85ec0353601c244f06758157fe802edc9d96.png",
+      {
+        "type": "biliNFTVideoNew",
+        "identifier": "[\"103031\",\"103032\",\"莲的认可\"]"
+      },
+      {
+        "type": "biliNFTVideoNew",
+        "identifier": "[\"103031\",\"103032\",\"莲的尊重\"]"
+      },
+      "https://i0.hdslb.com/bfs/garb/open/8af7651fbf4624ecdf16f90dfa56ac1362287c2e.png",
+      "https://i0.hdslb.com/bfs/garb/open/5d7b63759a1720e5e5bc97e2f917d7a52b70ab3e.png"
+    ],
+    "customColors": {
+      "maskedBackgroundColor": "rgba(0, 0, 0, 0.60)",
+      "playlistDrawerBackgroundColor": "green",
+      "playlistDrawerBackgroundColorTransparent": "rgba(0, 255, 0, 0.35)",
+      "progressThumbTintColor": "rgb(235, 235, 0)",
+      "progressMinimumTrackTintColor": "rgb(235, 235, 0)",
+      "progressMaximumTrackTintColor": "#FFFFFF",
+      "btnBackgroundColor": "rgb(72, 71, 58)",
+      "textInputSelectionColor": "green"
+    },
+    "colors": {
+      "primary": "rgb(255, 255, 0)",
+      "onPrimary": "rgb(50, 50, 0)",
+      "primaryContainer": "rgb(73, 73, 0)",
+      "onPrimaryContainer": "rgb(234, 234, 0)",
+      "secondary": "rgb(202, 200, 165)",
+      "onSecondary": "rgb(50, 50, 24)",
+      "secondaryContainer": "rgb(73, 72, 45)",
+      "onSecondaryContainer": "rgb(231, 228, 191)",
+      "tertiary": "rgb(164, 208, 189)",
+      "onTertiary": "rgb(11, 55, 42)",
+      "tertiaryContainer": "rgb(37, 78, 64)",
+      "onTertiaryContainer": "rgb(191, 236, 216)",
+      "error": "rgb(255, 180, 171)",
+      "onError": "rgb(105, 0, 5)",
+      "errorContainer": "rgb(147, 0, 10)",
+      "onErrorContainer": "rgb(255, 180, 171)",
+      "background": "rgba(0,0,0, 0.4)",
+      "onBackground": "rgb(230, 226, 217)",
+      "surface": "rgb(28, 28, 23)",
+      "onSurface": "rgba(235, 235, 0, 1)",
+      "text": "rgb(255, 255, 0)",
+      "surfaceVariant": "rgb(10, 10, 10)",
+      "onSurfaceVariant": "rgb(225, 225, 0)",
+      "outline": "rgb(147, 145, 130)",
+      "outlineVariant": "rgb(72, 71, 58)",
+      "shadow": "rgb(0, 0, 0)",
+      "scrim": "rgb(0, 0, 0)",
+      "inverseSurface": "rgb(230, 226, 217)",
+      "inverseOnSurface": "rgb(49, 49, 43)",
+      "inversePrimary": "rgb(98, 98, 0)",
+      "elevation": {
+        "level0": "transparent",
+        "level1": "rgb(53, 56, 57)",
+        "level2": "rgb(10, 10, 10)",
+        "level3": "rgb(10, 10, 10)",
+        "level4": "rgb(49, 49, 20)",
+        "level5": "rgb(53, 53, 20)"
+      },
+      "surfaceDisabled": "rgba(230, 226, 217, 0.12)",
+      "onSurfaceDisabled": "rgba(230, 226, 217, 0.38)",
+      "backdrop": "rgba(49, 49, 37, 0.4)"
+    }
   }
 ]
