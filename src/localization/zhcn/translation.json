@@ -93,7 +93,13 @@
     "sortPreviousOrder": "之前的顺序",
     "searchListName": "搜索歌单"
   },
+  "Download": {
+    "downloading": "正在缓存 {{song.parsedName}}...",
+    "downloaded": "{{song.parsedName}} 缓存到了音乐/APM文件夹！",
+    "downloadFailed": "{{song.parsedName}} 缓存失败"
+  },
   "SongOperations": {
+    "songDownloadTitle": "下载",
     "songSendToTitle": "送往...",
     "songRenameTitle": "改名...",
     "songSearchInPlaylistTitle": "在歌单内搜索",

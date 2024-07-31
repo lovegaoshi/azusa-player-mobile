@@ -3,6 +3,7 @@ import RNFetchBlob from 'react-native-blob-util';
 import * as DocumentPicker from 'expo-document-picker';
 
 export const isAndroid = Platform.OS === 'android';
+export const isAndroid10 = isAndroid && Number(Platform.Version) >= 29;
 export const isIOS = Platform.OS === 'ios';
 const { NoxAndroidAutoModule } = NativeModules;
 
