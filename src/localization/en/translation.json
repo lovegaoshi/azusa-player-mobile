@@ -81,7 +81,13 @@
     "sortPreviousOrder": "previous",
     "searchListName": "Search"
   },
+  "Download": {
+    "downloading": "now downloading {{song.parsedName}}...",
+    "downloaded": "{{song.parsedName}} is downloaded to Music/APM",
+    "downloadFailed": "{{song.parsedName}} download failed"
+  },
   "SongOperations": {
+    "songDownloadTitle": "Download",
     "songSendToTitle": "Send to...",
     "songRenameTitle": "Rename...",
     "songSearchInPlaylistTitle": "Search in Playlist",

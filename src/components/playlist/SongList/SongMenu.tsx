@@ -11,7 +11,7 @@ import { SearchRegex } from '@enums/Playlist';
 import { Source } from '@enums/MediaFetch';
 import useBiliSearch from '@hooks/useBiliSearch';
 import { copyCacheToDir } from '@utils/Download';
-import { isAndroid } from '@utils/RNUtils';
+import { isAndroid10 } from '@utils/RNUtils';
 import useSnack from '@stores/useSnack';
 
 enum Icons {
@@ -149,7 +149,7 @@ export default ({ usePlaylist, prepareForLayoutAnimationRender }: Props) => {
           title={t('SongOperations.BVIDSearchTitle')}
         />
       )}
-      {isAndroid && (
+      {isAndroid10 && (
         <Menu.Item
           leadingIcon={Icons.DOWNLOAD}
           onPress={async () => {
