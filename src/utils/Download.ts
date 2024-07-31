@@ -2,7 +2,7 @@ import RNFetchBlob from 'react-native-blob-util';
 
 import { resolveCachedPath } from './RNTPUtils';
 import { logger } from './Logger';
-import { getExt } from './Utils';
+import { ffmpegToMP3 } from './ffmpeg/ffmpeg';
 
 interface CopyCacheToDir {
   song: NoxMedia.Song;
@@ -12,8 +12,8 @@ export const copyCacheToDir = async ({
   song,
   fsdir = 'APM',
 }: CopyCacheToDir) => {
-  const filePath = await resolveCachedPath({ song });
-  if (filePath === undefined) {
+  const resolvedPath = await resolveCachedPath({ song });
+  if (resolvedPath === undefined) {
     logger.warn(
       `[Download] ${song.bvid} failed to download. \
         check for cache settings or network connection.`
@@ -21,7 +21,12 @@ export const copyCacheToDir = async ({
     return;
   }
   try {
-    return await RNFetchBlob.MediaCollection.copyToMediaStore(
+    const filePath = await ffmpegToMP3({
+      fspath: resolvedPath,
+      song,
+      unlink: false,
+    });
+    const result = await RNFetchBlob.MediaCollection.copyToMediaStore(
       {
         name: `${song.parsedName}.mp3`,
         parentFolder: fsdir,
@@ -30,6 +35,8 @@ export const copyCacheToDir = async ({
       'Audio',
       filePath
     );
+    RNFetchBlob.fs.unlink(filePath).catch();
+    return result;
   } catch (e) {
     logger.warn(
       `[Download] ${song.parsedName} failed to copy to music dir: ${e}`

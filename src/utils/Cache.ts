@@ -86,7 +86,7 @@ class NoxMediaCache {
     }
     logger.debug(`[Cache] fetching ${song.name} to cache...`);
     if (!extension) {
-      const regexMatch = /.+\/{2}.+\/{1}.+(\.\w+)\?*.*/.exec(resolvedURL.url);
+      const regexMatch = /.+\/{2}.+\/{1}.+\.(\w+)\?*.*/.exec(resolvedURL.url);
       extension = regexMatch ? regexMatch[1] : 'm4a';
     }
     // https://github.com/joltup/rn-fetch-blob#download-to-storage-directly
@@ -105,7 +105,7 @@ class NoxMediaCache {
     addDownloadProgress(song, 100);
     await parseR128Gain();
     if (isIOS) {
-      finalPath = await ffmpegToMP3(res.path());
+      finalPath = await ffmpegToMP3({ fspath: res.path() });
       this.cache.set(noxCacheKey(song), finalPath);
       const playbackState = await TrackPlayer.getPlaybackState();
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -135,8 +135,9 @@ class NoxMediaCache {
     if (song.source === Source.local) {
       // return song.bvid;
     }
-    if (await validateFile(song.localPath)) return `${prefix}${song.localPath}`;
-    return this.loadCacheObject(noxCacheKey(song), prefix);
+    if (await validateFile(song.localPath)) return `${song.localPath}`;
+    const cachedUri = await this.loadCacheObject(noxCacheKey(song), prefix);
+    return (await validateFile(cachedUri)) ? cachedUri : undefined;
   };
 
   loadCacheFunction = async (

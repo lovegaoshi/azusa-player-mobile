@@ -3,7 +3,7 @@ import RNFetchBlob from 'react-native-blob-util';
 import TrackPlayer from 'react-native-track-player';
 
 import { logger } from '../Logger';
-import { r128gain2Volume } from '../Utils';
+import { r128gain2Volume, getExt } from '../Utils';
 import { singleLimiter } from '../mediafetch/throttle';
 import { validateFile } from '../RNUtils';
 
@@ -58,9 +58,43 @@ export const r128gain = async (fspath: string) => {
   return parseReplayGainLog(await session.getOutput());
 };
 
-export const ffmpegToMP3 = async (fspath: string) => {
-  await FFmpegKit.execute(`-i '${fspath}' -vn -ab 256k ${fspath}.mp3`);
-  RNFetchBlob.fs.unlink(fspath).catch();
+interface FFMpeg2MP3 {
+  fspath: string;
+  song?: NoxMedia.Song;
+  unlink?: boolean;
+}
+export const ffmpegToMP3 = async ({
+  fspath,
+  song,
+  unlink = true,
+}: FFMpeg2MP3) => {
+  if (song) {
+    const coverArt = (
+      await RNFetchBlob.config({
+        fileCache: true,
+        appendExt: getExt(song.cover) ?? 'jpg',
+      })
+        .fetch('GET', song.cover)
+        .catch(e => console.warn(e))
+    )?.path();
+    const command = `-i '${fspath}' -vn -ab 256k -id3v2_version 3 -metadata title='${song.name}' -metadata artist='${song.singer}' -metadata album='${song.album ?? ''}' ${fspath}.mp3`;
+    logger.debug(`[ffmpeg] ffmpeg to mp3 command: ${command}`);
+    await FFmpegKit.execute(command);
+    if (coverArt) {
+      logger.debug(`[ffmpeg] additionally inserting cover art...`);
+      await FFmpegKit.execute(
+        `-i '${fspath}.mp3' -i '${coverArt}' -map 0:a -map 1:0 -c copy ${fspath}.2.mp3`
+      );
+      RNFetchBlob.fs.unlink(`${fspath}.mp3`).catch();
+      RNFetchBlob.fs.unlink(coverArt).catch();
+      return `${fspath}.2.mp3`;
+    }
+  } else {
+    await FFmpegKit.execute(`-i '${fspath}' -vn -ab 256k ${fspath}.mp3`);
+  }
+  if (unlink) {
+    RNFetchBlob.fs.unlink(fspath).catch();
+  }
   return `${fspath}.mp3`;
 };
 
