@@ -35,6 +35,7 @@ import AzusaTheme from '@components/styles/AzusaTheme';
 import NoxTheme from '@components/styles/NoxTheme';
 import AdaptiveTheme from '@components/styles/AdaptiveTheme';
 import { getUniqObjects } from '@utils/Utils';
+import GenericSelectDialog from '../../dialogs/GenericSelectDialog';
 
 interface DisplayTheme extends NoxTheme.Style {
   builtin: boolean;
@@ -43,7 +44,8 @@ interface DisplayTheme extends NoxTheme.Style {
 interface SkinItemProps {
   skin: DisplayTheme;
   checked: string;
-  setChecked: (val: string) => void;
+  onHold: () => void;
+  selectTheme: () => void;
 }
 
 const BuiltInThemes: DisplayTheme[] = [
@@ -77,9 +79,8 @@ const GestureWrapper = (props: {
   );
 };
 
-const SkinItem = ({ skin, checked, setChecked }: SkinItemProps) => {
+const SkinItem = ({ skin, checked, onHold, selectTheme }: SkinItemProps) => {
   const playerStyle = useNoxSetting(state => state.playerStyle);
-  const setPlayerStyle = useNoxSetting(state => state.setPlayerStyle);
   const playerStyles = useNoxSetting(state => state.playerStyles);
   const setPlayerStyles = useNoxSetting(state => state.setPlayerStyles);
   const getThemeID = (skin: NoxTheme.Style) =>
@@ -135,11 +136,6 @@ const SkinItem = ({ skin, checked, setChecked }: SkinItemProps) => {
       isPressed.value = false;
     });
 
-  const selectTheme = () => {
-    setChecked(themeID);
-    setPlayerStyle(skin);
-  };
-
   React.useEffect(() => {
     mounted.current = true;
   }, []);
@@ -152,7 +148,7 @@ const SkinItem = ({ skin, checked, setChecked }: SkinItemProps) => {
           exiting={LightSpeedOutRight}
           style={animatedStyles}
         >
-          <TouchableRipple onPress={selectTheme}>
+          <TouchableRipple onPress={selectTheme} onLongPress={onHold}>
             <View style={styles.skinItemContainer}>
               <View style={styles.skinItemLeftContainer}>
                 <Image
@@ -211,14 +207,21 @@ const SkinItem = ({ skin, checked, setChecked }: SkinItemProps) => {
 };
 
 const SkinSettings = () => {
+  const [selectSkin, setSelectSkin] = React.useState<NoxTheme.Style>();
   const playerStyle = useNoxSetting(state => state.playerStyle);
   const playerStyles = useNoxSetting(state => state.playerStyles);
+  const setPlayerStyle = useNoxSetting(state => state.setPlayerStyle);
   const setPlayerStyles = useNoxSetting(state => state.setPlayerStyles);
   const allThemes = BuiltInThemes.concat(playerStyles);
   const getThemeID = (skin: NoxTheme.Style) =>
     `${skin.metaData.themeName}.${skin.metaData.themeAuthor}`;
   const [checked, setChecked] = React.useState(getThemeID(playerStyle));
   const scrollViewRef = React.useRef<FlatList | null>(null);
+
+  const selectTheme = (theme: NoxTheme.Style) => {
+    setChecked(getThemeID(theme));
+    setPlayerStyle(theme);
+  };
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const loadCustomSkin = (skins: any) => {
@@ -267,10 +270,26 @@ const SkinSettings = () => {
           <SkinItem
             skin={item as DisplayTheme}
             checked={checked}
-            setChecked={setChecked}
             key={getThemeID(item as DisplayTheme)}
+            onHold={() => setSelectSkin(item)}
+            selectTheme={() => selectTheme(item)}
           />
         )}
+      />
+      <GenericSelectDialog
+        visible={selectSkin !== undefined}
+        options={selectSkin?.backgroundImages ?? []}
+        renderOptionTitle={v => JSON.stringify(v)}
+        title={selectSkin?.metaData.themeName}
+        defaultIndex={0}
+        onClose={() => setSelectSkin(undefined)}
+        onSubmit={v => {
+          selectTheme({
+            ...selectSkin!,
+            backgroundImages: [selectSkin?.backgroundImages[v] ?? ''],
+          });
+          setSelectSkin(undefined);
+        }}
       />
     </SafeAreaView>
   );
