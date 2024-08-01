@@ -1,5 +1,6 @@
 import ytdl from 'ytdl-core';
 import { Platform } from 'react-native';
+
 import { logger } from '../Logger';
 import SongTS from '@objects/Song';
 import { Source } from '@enums/MediaFetch';
@@ -29,7 +30,7 @@ const isIOS = Platform.OS === 'ios';
 export const resolveURL = async (song: NoxMedia.Song, iOS = true) => {
   const sid = song.bvid;
   try {
-    logger.debug(`fetch YTB playURL promise:${sid}`);
+    logger.debug(`[ytb.node] fetch YTB playURL promise:${sid}`);
     const ytdlInfo = await ytdl.getInfo(
       `https://www.youtube.com/watch?v=${sid}`
     );
