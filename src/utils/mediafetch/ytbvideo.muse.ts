@@ -1,8 +1,11 @@
 import { get_song } from 'libmuse';
+
 import SongTS from '@objects/Song';
 import { Source } from '@enums/MediaFetch';
+import { logger } from '@utils/Logger';
 
 export const resolveURL = async (song: NoxMedia.Song) => {
+  logger.debug(`[ytb.muse] fetch YTB playURL promise:${song.bvid}`);
   const extractedVideoInfo = await get_song(song.bvid);
   let maxAudioQualityStream = { bitrate: 0, url: '' };
   const formats =

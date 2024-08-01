@@ -1,8 +1,11 @@
-import SongTS from '@objects/Song';
-import { Source } from '@enums/MediaFetch';
 import { Innertube } from 'youtubei.js';
 
+import SongTS from '@objects/Song';
+import { Source } from '@enums/MediaFetch';
+import { logger } from '@utils/Logger';
+
 export const resolveURL = async (song: NoxMedia.Song) => {
+  logger.debug(`[ytb.ytbi] fetch YTB playURL promise:${song.bvid}`);
   const yt = await Innertube.create();
   const extractedVideoInfo = await yt.getInfo(song.bvid);
   const maxAudioQualityStream = extractedVideoInfo.chooseFormat({

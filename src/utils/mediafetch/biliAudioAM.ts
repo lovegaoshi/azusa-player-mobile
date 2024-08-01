@@ -24,7 +24,7 @@ import SongTS from '@objects/Song';
                 "uname": "诺莺Nox",
                 "author": "诺莺Nox",
                 "title": "【诺莺Nox】Hope in the Dark (Arrange Ver.)",
-                "cover": "http://i0.hdslb.com/bfs/music/571d3749650f64be6a32ac544d3c022e86ddbb7c.jpg",
+                "cover": "https://i0.hdslb.com/bfs/music/571d3749650f64be6a32ac544d3c022e86ddbb7c.jpg",
                 "intro": "DA DA DA BI DA DO\n原唱：Luxiem （BV1Zr4y1D7CE）\n翻唱：每天脑袋里有1000个想法的诺莺Nox\n改编/混音：师父师父我的好师父CZT\n曲绘：画风超级好康的失眠岛\nPV：百忙之中救我命的神仙零玖",
                 "lyric": "",
                 "crtype": 1,

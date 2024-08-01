@@ -2,7 +2,7 @@
 declare namespace NoxMediaInfo {
   /**
    * this interface serves
-   * http://api.bilibili.com/x/web-interface/view?bvid=BV1bv4y1p7K4
+   * https://api.bilibili.com/x/web-interface/view?bvid=BV1bv4y1p7K4
    */
   export interface VideoInfoJsonData {
     bvid: string;
