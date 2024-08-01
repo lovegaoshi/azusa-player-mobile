@@ -8,16 +8,16 @@ export default {
   },
 
   gifs: [
-    'http://i0.hdslb.com/bfs/live/e8073adeb52036d0d563c848c4b55b8449bc4b85.png',
-    'http://i0.hdslb.com/bfs/live/f2a7a0916015a741a192ae85ee593a39c6dd04a7.png',
-    'http://i0.hdslb.com/bfs/live/0a691aec40c738918014b27acfefa3b295b8a458.png',
-    'http://i0.hdslb.com/bfs/live/cdb1f3adeee987c1fe5303ca90443932edb23d30.png',
-    'http://i0.hdslb.com/bfs/live/c9450e570d7abcf5a920b65e18b9624b75c9d4fb.png',
-    'http://i0.hdslb.com/bfs/live/021761abdfe8dc417e5267b74877bebd43dcfd58.png',
-    'http://i0.hdslb.com/bfs/live/e0ae55eb80c6b7c01eeb042a26a3bd2938ed679a.png',
-    'http://i0.hdslb.com/bfs/live/bea985bcf662dc4d85c9f78633c57398b7c3d223.png',
-    'http://i0.hdslb.com/bfs/live/5b29c4c15e6b97da2df564899f84906fc800590b.png',
-    'http://i0.hdslb.com/bfs/live/a9fa62db7b7233dac30d3abd851b992710bc1649.png',
+    'https://i0.hdslb.com/bfs/live/e8073adeb52036d0d563c848c4b55b8449bc4b85.png',
+    'https://i0.hdslb.com/bfs/live/f2a7a0916015a741a192ae85ee593a39c6dd04a7.png',
+    'https://i0.hdslb.com/bfs/live/0a691aec40c738918014b27acfefa3b295b8a458.png',
+    'https://i0.hdslb.com/bfs/live/cdb1f3adeee987c1fe5303ca90443932edb23d30.png',
+    'https://i0.hdslb.com/bfs/live/c9450e570d7abcf5a920b65e18b9624b75c9d4fb.png',
+    'https://i0.hdslb.com/bfs/live/021761abdfe8dc417e5267b74877bebd43dcfd58.png',
+    'https://i0.hdslb.com/bfs/live/e0ae55eb80c6b7c01eeb042a26a3bd2938ed679a.png',
+    'https://i0.hdslb.com/bfs/live/bea985bcf662dc4d85c9f78633c57398b7c3d223.png',
+    'https://i0.hdslb.com/bfs/live/5b29c4c15e6b97da2df564899f84906fc800590b.png',
+    'https://i0.hdslb.com/bfs/live/a9fa62db7b7233dac30d3abd851b992710bc1649.png',
   ],
   backgroundImages: [
     {

@@ -37,7 +37,7 @@ const processMetadata = async (metadata: any) => {
     "ctime": 1716672875,
     "duration": 253,
     "interactive_video": false,
-    "pic": "http://i0.hdslb.com/bfs/archive/15d7148c3dd0464aabcc4de9391647ac07f596ef.jpg",
+    "pic": "https://i0.hdslb.com/bfs/archive/15d7148c3dd0464aabcc4de9391647ac07f596ef.jpg",
     "pubdate": 1716696000,
     "stat": {
         "view": 103326
