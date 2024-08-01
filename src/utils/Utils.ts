@@ -48,6 +48,19 @@ export const randomChoice = <T>(list: T[]) => {
   return list[randomNumber(list.length)];
 };
 
+export const WeightedChoice = <T>(list: [T, number][]) => {
+  const sum = list.reduce((a, b) => a + b[1], 0);
+  const random = Math.random() * sum;
+  let current = 0;
+  for (let i = 0; i < list.length; i++) {
+    current += list[i][1];
+    if (current >= random) {
+      return list[i][0];
+    }
+  }
+  return list[0][0];
+};
+
 export const rgb2rgba = (rgb: string, a = 1) => {
   const extractedRGB = [...rgb.matchAll(/(\d+)/g)];
   return `rgba(${extractedRGB[0][0]}, ${extractedRGB[1][0]}, ${extractedRGB[2][0]}, ${a})`;

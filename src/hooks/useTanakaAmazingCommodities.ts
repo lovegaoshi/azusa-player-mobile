@@ -6,8 +6,12 @@ import { fetchVideoPlayUrl } from '../utils/mediafetch/bilivideo';
 import { customReqHeader } from '@utils/BiliFetch';
 import { StorageKeys } from '@enums/Storage';
 import { getFileSize, validateFile } from '../utils/RNUtils';
+import { WeightedChoice } from '../utils/Utils';
 
-const TanakaSrc = 'BV1cK42187AE'; //'https://www.bilibili.com/video/BV1cK42187AE/';
+const TanakaSrc = WeightedChoice([
+  ['BV1cK42187AE', 99],
+  ['BV1kf421q7jK', 1],
+]);
 
 const getTanaka = () => getItem(StorageKeys.TANAKA_AMAZING_COMMODITIES);
 export const getTakanaDesc = async () => {
