@@ -129,20 +129,15 @@ export const reParseSearch = ({
   extraReExtract = [],
 }: ReParseSearchProps) => {
   const reExtractions = [...reExtractionsDefault, ...extraReExtract];
-  let defaultExtraction = true;
+  let extractedRows: NoxUtils.Nullable<NoxMedia.Song[]> = null;
   for (const searchSubStr of searchStr.split('|')) {
     for (const reExtraction of reExtractions) {
       const extracted = reExtraction.regex.exec(searchSubStr);
       if (extracted !== null) {
-        rows = reExtraction.process(extracted, rows);
-        defaultExtraction = false;
+        extractedRows = reExtraction.process(extracted, rows);
         break;
       }
     }
   }
-  // if none matches, treat as a generic search, check if any field contains the search string
-  if (defaultExtraction) {
-    rows = defaultExtract(rows, searchStr);
-  }
-  return rows;
+  return extractedRows ?? defaultExtract(rows, searchStr);
 };
