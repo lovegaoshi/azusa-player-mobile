@@ -18,7 +18,7 @@ const operations2RegExtractor = (operations: NoxRegExt.Operation[]) => {
   return (val: string) => extractors.reduce((acc, curr) => curr(acc), val);
 };
 
-export const LoadJSONRegExtractors = (json: NoxRegExt.JSONExtractor[]) => {
+export const loadJSONRegExtractors = (json: NoxRegExt.JSONExtractor[]) => {
   const extractors: [string[], (val: string) => string][] = json.map(val => [
     val.uploaders,
     operations2RegExtractor(val.operations),

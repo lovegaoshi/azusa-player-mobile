@@ -11,7 +11,7 @@ import {
 } from '@utils/ChromeStorage';
 import { logger } from '@utils/Logger';
 import rejson from '../utils/rejson.json';
-import { LoadJSONRegExtractors } from '../utils/re';
+import { loadJSONRegExtractors } from '../utils/re';
 
 interface AppStore {
   pipMode: boolean;
@@ -88,7 +88,7 @@ export const initialize = async () => {
     ABRepeat: await getABMapping(),
     fadeIntervalMs: fadeInterval,
     fadeIntervalSec: fadeInterval / 1000,
-    reExtractSongName: LoadJSONRegExtractors(
+    reExtractSongName: loadJSONRegExtractors(
       savedRegExt.length > 0
         ? savedRegExt
         : (rejson as NoxRegExt.JSONExtractor[])
