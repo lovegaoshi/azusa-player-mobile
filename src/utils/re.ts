@@ -76,34 +76,34 @@ export const getName = (song: NoxMedia.Song, parsed = false) => {
 
 interface ReExtract {
   regex: RegExp;
-  process: (val: RegExpExecArray, someRows: NoxMedia.Song[]) => NoxMedia.Song[];
+  process: (val: RegExpExecArray, rows: NoxMedia.Song[]) => NoxMedia.Song[];
 }
 
 const reExtractionsDefault: ReExtract[] = [
   {
     regex: SearchRegex.absoluteMatch.regex,
-    process: (val: RegExpExecArray, someRows: NoxMedia.Song[]) =>
-      someRows.filter(row => row.parsedName === val[1]),
+    process: (val: RegExpExecArray, rows: NoxMedia.Song[]) =>
+      rows.filter(row => row.parsedName === val[1]),
   },
   {
     regex: SearchRegex.artistMatch.regex,
-    process: (val: RegExpExecArray, someRows: NoxMedia.Song[]) =>
-      someRows.filter(row => row.singer.includes(val[1])),
+    process: (val: RegExpExecArray, rows: NoxMedia.Song[]) =>
+      rows.filter(row => row.singer.includes(val[1])),
   },
   {
     regex: SearchRegex.albumMatch.regex,
-    process: (val: RegExpExecArray, someRows: NoxMedia.Song[]) =>
-      someRows.filter(row => row.album?.includes(val[1])),
+    process: (val: RegExpExecArray, rows: NoxMedia.Song[]) =>
+      rows.filter(row => row.album?.includes(val[1])),
   },
   {
     regex: SearchRegex.durationLessMatch.regex,
-    process: (val: RegExpExecArray, someRows: NoxMedia.Song[]) =>
-      someRows.filter(row => row.duration < Number(val[1])),
+    process: (val: RegExpExecArray, rows: NoxMedia.Song[]) =>
+      rows.filter(row => row.duration < Number(val[1])),
   },
   {
     regex: SearchRegex.durationMoreMatch.regex,
-    process: (val: RegExpExecArray, someRows: NoxMedia.Song[]) =>
-      someRows.filter(row => row.duration > Number(val[1])),
+    process: (val: RegExpExecArray, rows: NoxMedia.Song[]) =>
+      rows.filter(row => row.duration > Number(val[1])),
   },
 ];
 
@@ -111,7 +111,7 @@ interface ReParseSearchProps {
   searchStr: string;
   rows: NoxMedia.Song[];
   defaultExtract?: (
-    someRows: NoxMedia.Song[],
+    rows: NoxMedia.Song[],
     searchstr: string
   ) => NoxMedia.Song[];
   extraReExtract?: ReExtract[];
@@ -119,8 +119,8 @@ interface ReParseSearchProps {
 export const reParseSearch = ({
   searchStr,
   rows,
-  defaultExtract = (someRows: NoxMedia.Song[], searchstr: string) =>
-    someRows.filter(
+  defaultExtract = (rows: NoxMedia.Song[], searchstr: string) =>
+    rows.filter(
       row =>
         row.name.toLowerCase().includes(searchstr.toLowerCase()) ||
         row.singer.includes(searchstr) ||
