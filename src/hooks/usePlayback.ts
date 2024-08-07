@@ -66,6 +66,9 @@ const usePlayback = () => {
     // HACK: track?.song? is somehow updated already here
     // TODO: fix this
     setCurrentPlayingId(song.id);
+    logger.debug(
+      `[playFromPlaylist]: ${currentPlayingId} vs ${song.id} from ${playlist.id}`
+    );
     if (interruption) {
       return playSongInterrupted(song);
     }

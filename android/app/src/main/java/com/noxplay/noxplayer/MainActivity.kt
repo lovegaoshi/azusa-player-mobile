@@ -6,7 +6,6 @@ import android.content.Intent
 import android.content.res.Configuration
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import android.util.Rational
 import com.facebook.react.ReactActivity
 import com.facebook.react.ReactActivityDelegate
@@ -15,6 +14,7 @@ import com.facebook.react.defaults.DefaultReactActivityDelegate
 import com.facebook.react.modules.core.DeviceEventManagerModule
 import com.facebook.react.bridge.Arguments
 import expo.modules.ReactActivityDelegateWrapper
+import timber.log.Timber
 
 class MainActivity : ReactActivity() {
     /**
@@ -49,7 +49,7 @@ class MainActivity : ReactActivity() {
                   ?.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter::class.java)
                   ?.emit("APMNewIntent", Arguments.fromBundle(launchOptions))
           } catch (e: Exception) {
-              Log.d("APM-intent", "failed to notify intent: $intent")
+            Timber.tag("APM-intent").d("failed to notify intent: $intent")
           }
     }
   }
