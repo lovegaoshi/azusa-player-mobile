@@ -2694,5 +2694,117 @@
       "onSurfaceDisabled": "rgba(230, 226, 217, 0.38)",
       "backdrop": "rgba(49, 49, 37, 0.4)"
     }
+  },
+  {
+    "metaData": {
+      "themeName": "瑞娅Rhea收藏集",
+      "themeDesc": "【瑞娅Rhea收藏集】是由VirtuaReal与旗下虚拟UP主瑞娅_Rhea共同打造的个人数字收藏集，时空魔法与你一同闪耀~其中每张数字卡片都将拥有独特编号，更有惊喜语音等着大家！",
+      "themeAuthor": "NoxAutoGen",
+      "themeIcon": "https://i0.hdslb.com/bfs/garb/253519e761bec64a64ae6b9d1103e361aab6d1e7.png",
+      "darkTheme": true
+    },
+    "gifs": [
+      "https://i0.hdslb.com/bfs/garb/9fbe90694c95016720a5e036b2c9235919cdaa26.png",
+      "https://i0.hdslb.com/bfs/garb/f89c42e252355da1fd5c23463e3c3185a14cfeb2.png",
+      "https://i0.hdslb.com/bfs/garb/bcb2515b675c4e50e545a5340285fe761720f508.png",
+      "https://i0.hdslb.com/bfs/garb/3adcd80a1526d67da06ca3bed1706343b8c57c9d.png",
+      "https://i0.hdslb.com/bfs/garb/d77848b54c28bd97a96396d5c408d005dd1d6506.png",
+      "https://i0.hdslb.com/bfs/garb/61eb98305f39ce7da5964e9ec90449a8fe4e33cc.png",
+      "https://i0.hdslb.com/bfs/garb/610e0a48be8ca246071aff905397ded2af4d6bd3.png",
+      "https://i0.hdslb.com/bfs/garb/cf960b6a5a34d719b080d67002fa1f49c842d030.png",
+      "https://i0.hdslb.com/bfs/garb/e25e21d0e9a36c14e55615befba1034e2aeb6858.png",
+      "https://i0.hdslb.com/bfs/garb/e0584fd543cee58a2be50dbbf0bd656742cb216f.png",
+      "https://i0.hdslb.com/bfs/garb/7f128974855e30e170ff57866a9d35e06b1c4180.png",
+      "https://i0.hdslb.com/bfs/garb/3c81b187e855e14ac58a4d7d7debae0aae38fdc8.png",
+      "https://i0.hdslb.com/bfs/garb/677a5d5eb6cf32101d7374ba9a593a3cf56047db.png",
+      "https://i0.hdslb.com/bfs/garb/fa8ac89cb6a75844e648b1fe100b7f6ffb5b0850.png",
+      "https://i0.hdslb.com/bfs/garb/40cd8326ec0c342eb217bd8ba03b3d91a3c97d8c.png",
+      "https://i0.hdslb.com/bfs/garb/cf4252e8feca75ac9e70c74f3f4db12fd52e23ee.png",
+      "https://i0.hdslb.com/bfs/garb/4e72a6c6158fcb49a7612ad0e5036fc332738394.png",
+      "https://i0.hdslb.com/bfs/garb/1888cbd7292d400541d116e14835760302f52332.png",
+      "https://i0.hdslb.com/bfs/garb/af26ebbe2204832756fd92d9a37009a8ceb297f4.png",
+      "https://i0.hdslb.com/bfs/garb/fc9b8238e359f0da9ff8fa96de4ed4c159c373d3.png"
+    ],
+    "backgroundImages": [
+      {
+        "type": "biliNFTVideoNew",
+        "identifier": "[\"103177\",\"103178\",\"为什么囚住我？\"]"
+      },
+      {
+        "type": "biliNFTVideoNew",
+        "identifier": "[\"103177\",\"103178\",\"好热，可以帮我涂吗\"]"
+      },
+      {
+        "type": "biliNFTVideoNew",
+        "identifier": "[\"103177\",\"103178\",\"我的回合，抽卡！\"]"
+      },
+      {
+        "type": "biliNFTVideoNew",
+        "identifier": "[\"103177\",\"103178\",\"花间少女\"]"
+      },
+      "https://i0.hdslb.com/bfs/garb/open/d3b9e7e00ad08a7380f7a54ee86556b55431f57a.png",
+      "https://i0.hdslb.com/bfs/garb/open/11d0e45c6879487ac5dc8498ec2eac3dc40fe1ef.png",
+      "https://i0.hdslb.com/bfs/garb/open/5d873257ca3d185a073bebd6fdd884a8496e90e8.png",
+      "https://i0.hdslb.com/bfs/garb/open/99b335761011306d4fc53d0d42f2df0191b90ad0.png",
+      "https://i0.hdslb.com/bfs/garb/open/6136f19da80981a1dc416d36fc37a67e3b6b77dd.png",
+      "https://i0.hdslb.com/bfs/garb/open/53682612db9badc26cda35597616ee2a78bd7770.png",
+      {
+        "type": "biliNFTVideoNew",
+        "identifier": "[\"103177\",\"103178\",\"她根本不爱喝奶茶！\"]"
+      }
+    ],
+    "customColors": {
+      "maskedBackgroundColor": "rgba(0, 0, 0, 0.60)",
+      "playlistDrawerBackgroundColor": "green",
+      "playlistDrawerBackgroundColorTransparent": "rgba(0, 255, 0, 0.35)",
+      "progressThumbTintColor": "rgb(235, 235, 0)",
+      "progressMinimumTrackTintColor": "rgb(235, 235, 0)",
+      "progressMaximumTrackTintColor": "#FFFFFF",
+      "btnBackgroundColor": "rgb(72, 71, 58)",
+      "textInputSelectionColor": "green"
+    },
+    "colors": {
+      "primary": "rgb(255, 255, 0)",
+      "onPrimary": "rgb(50, 50, 0)",
+      "primaryContainer": "rgb(73, 73, 0)",
+      "onPrimaryContainer": "rgb(234, 234, 0)",
+      "secondary": "rgb(202, 200, 165)",
+      "onSecondary": "rgb(50, 50, 24)",
+      "secondaryContainer": "rgb(73, 72, 45)",
+      "onSecondaryContainer": "rgb(231, 228, 191)",
+      "tertiary": "rgb(164, 208, 189)",
+      "onTertiary": "rgb(11, 55, 42)",
+      "tertiaryContainer": "rgb(37, 78, 64)",
+      "onTertiaryContainer": "rgb(191, 236, 216)",
+      "error": "rgb(255, 180, 171)",
+      "onError": "rgb(105, 0, 5)",
+      "errorContainer": "rgb(147, 0, 10)",
+      "onErrorContainer": "rgb(255, 180, 171)",
+      "background": "rgba(0,0,0, 0.4)",
+      "onBackground": "rgb(230, 226, 217)",
+      "surface": "rgb(28, 28, 23)",
+      "onSurface": "rgba(235, 235, 0, 1)",
+      "text": "rgb(255, 255, 0)",
+      "surfaceVariant": "rgb(10, 10, 10)",
+      "onSurfaceVariant": "rgb(225, 225, 0)",
+      "outline": "rgb(147, 145, 130)",
+      "outlineVariant": "rgb(72, 71, 58)",
+      "shadow": "rgb(0, 0, 0)",
+      "scrim": "rgb(0, 0, 0)",
+      "inverseSurface": "rgb(230, 226, 217)",
+      "inverseOnSurface": "rgb(49, 49, 43)",
+      "inversePrimary": "rgb(98, 98, 0)",
+      "elevation": {
+        "level0": "transparent",
+        "level1": "rgb(53, 56, 57)",
+        "level2": "rgb(10, 10, 10)",
+        "level3": "rgb(10, 10, 10)",
+        "level4": "rgb(49, 49, 20)",
+        "level5": "rgb(53, 53, 20)"
+      },
+      "surfaceDisabled": "rgba(230, 226, 217, 0.12)",
+      "onSurfaceDisabled": "rgba(230, 226, 217, 0.38)",
+      "backdrop": "rgba(49, 49, 37, 0.4)"
+    }
   }
 ]
