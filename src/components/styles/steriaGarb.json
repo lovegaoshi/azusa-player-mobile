@@ -567,6 +567,10 @@
       "darkTheme": false
     },
     "gifs": [
+      "https://i0.hdslb.com/bfs/garb/61a76c7c670394dcdbe1f0164b731845f4584c92.png",
+      "https://i0.hdslb.com/bfs/garb/99ed0b0835a0f1241d3522a1fa0ebd5003d5adcc.png",
+      "https://i0.hdslb.com/bfs/garb/f9d3a3d00fe2678b3d5fcf907d426a314f76f45c.png",
+      "https://i0.hdslb.com/bfs/garb/69ce0d41de4dff9067f27b1057eaad0549f78d52.png",
       "https://i0.hdslb.com/bfs/garb/5b116195621e8d7e6c074b956c84decaf23a9804.png",
       "https://i0.hdslb.com/bfs/garb/2d8520e9c94215c6a51852a1e0b57c85a1dd99b4.png",
       "https://i0.hdslb.com/bfs/garb/b995c0b95915c221859cf085b159cb7b4ea18e38.png",
@@ -619,6 +623,17 @@
       "https://i0.hdslb.com/bfs/garb/d2d50a1822d3a526b32330cd75420e67a9a5b51e.png"
     ],
     "backgroundImages": [
+      {
+        "type": "biliNFTVideoNew",
+        "identifier": "[\"103205\",\"103206\",\"疏影暗香-桃几OvO\"]"
+      },
+      {
+        "type": "biliNFTVideoNew",
+        "identifier": "[\"103205\",\"103206\",\"撩动心弦-桃几OvO\"]"
+      },
+      "https://i0.hdslb.com/bfs/garb/open/1e867fa11a87ee857d7f648dec441399fcf87e35.png",
+      "https://i0.hdslb.com/bfs/garb/open/43f59d400916974446e588a87dd3b0fed1b072b8.png",
+      "https://i0.hdslb.com/bfs/garb/open/d96d1617aa4dd4b17e6385d47f079ed19557370c.png",
       "https://i0.hdslb.com/bfs/garb/7229348899d32902cb000baf7e6d38ab83e9f0f3.jpg",
       "https://i0.hdslb.com/bfs/garb/4f79e110a394796e1d354f08e4a5f22cf134f58d.jpg",
       "https://i0.hdslb.com/bfs/garb/1d3e28d335cd23b786985e413ad4a8dcff001d1d.jpg",
