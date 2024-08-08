@@ -3,13 +3,16 @@ import { Appearance } from 'react-native';
 import { savePlayerSkin } from './ChromeStorage';
 import { createStyle } from '../components/style';
 
+export const getStyle = (v: NoxTheme.Style | NoxTheme.AdaptiveStyle) => {
+  const isDark = v.isAdaptive && Appearance.getColorScheme() === 'dark';
+  return (isDark ? (v.darkTheme ?? v) : v) as unknown as NoxTheme.Style;
+};
+
 export const savePlayerStyle = (
-  val: NoxTheme.Style | NoxTheme.AdaptiveStyle,
+  v: NoxTheme.Style | NoxTheme.AdaptiveStyle,
   save = true
 ) => {
-  const isDark = val.isAdaptive && Appearance.getColorScheme() === 'dark';
-  const createFromStyle = isDark ? val.darkTheme : val;
-  const createdStyle = createStyle(createFromStyle);
-  if (save) savePlayerSkin(val);
+  const createdStyle = createStyle(getStyle(v));
+  if (save) savePlayerSkin(v);
   return createdStyle;
 };
