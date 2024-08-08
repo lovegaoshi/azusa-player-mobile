@@ -7,6 +7,10 @@
       "themeIcon": "https://i2.hdslb.com/bfs/face/b70f6e62e4582d4fa5d48d86047e64eb57d7504e.jpg"
     },
     "gifs": [
+      "https://i0.hdslb.com/bfs/garb/dbbe2d3ff2e1e141217f1f2205556663de6433c2.png",
+      "https://i0.hdslb.com/bfs/garb/17f3092b5e1115f6f109aea82ba1fa0858c7bcb1.png",
+      "https://i0.hdslb.com/bfs/garb/1064ac428bebf3e23e859cb85a5624e8affb77c9.png",
+      "https://i0.hdslb.com/bfs/garb/28d627196e300eae9ae1dac0d5fe07be188d0e67.png",
       "https://i1.hdslb.com/bfs/new_dyn/203843cea2fc7d67a33665ad348fb7742249596.jpg",
       "https://i1.hdslb.com/bfs/new_dyn/ea756221f57367d591c5f07f459c1d721422341.jpg",
       "https://album.biliimg.com/bfs/new_dyn/498d1dbe8067ae22f4a7a8e640c415242249596.jpg",
@@ -93,6 +97,7 @@
       "https://i0.hdslb.com/bfs/garb/1f40dfcfcda241fb95c6ffa78d1d34906a5d8e2c.png"
     ],
     "backgroundImages": [
+      "https://i0.hdslb.com/bfs/garb/open/15122533f57c27d99c8b7e712e23195ce99b1b0d.png",
       "https://i0.hdslb.com/bfs/garb/7134a842036eadc4810fd80d58f79abcf78191fd.jpg",
       "https://i0.hdslb.com/bfs/garb/f8d3c3ae3330751f7d3fc670f5f5d0f55832002d.jpg",
       "https://i0.hdslb.com/bfs/garb/df6742224df2a4964f6b6e28e79229946e38ecbb.jpg",
@@ -101,6 +106,15 @@
       "https://koistatic.terrach.net/dbs-art/2022/08/20220824144703485.jpg",
       "https://i0.hdslb.com/bfs/new_dyn/031ff0792193d1c21fa0b27cfe5b3d20437441656.jpg",
       "https://i0.hdslb.com/bfs/garb/64c2de845cb21693d0321086de29bc5f576dc127.jpg",
+      "https://i0.hdslb.com/bfs/garb/open/168febd5b6df07eeed04758f2811588d64c2eb27.png",
+      {
+        "type": "biliNFTVideoNew",
+        "identifier": "[\"103205\",\"103206\",\"不渝之誓\"]"
+      },
+      {
+        "type": "biliNFTVideoNew",
+        "identifier": "[\"103205\",\"103206\",\"海边夏日-薇Steria\"]"
+      },
       {
         "type": "bvid",
         "identifier": "BV1Da411M7ti"
@@ -182,6 +196,10 @@
         "darkTheme": true
       },
       "gifs": [
+        "https://i0.hdslb.com/bfs/garb/dbbe2d3ff2e1e141217f1f2205556663de6433c2.png",
+        "https://i0.hdslb.com/bfs/garb/17f3092b5e1115f6f109aea82ba1fa0858c7bcb1.png",
+        "https://i0.hdslb.com/bfs/garb/1064ac428bebf3e23e859cb85a5624e8affb77c9.png",
+        "https://i0.hdslb.com/bfs/garb/28d627196e300eae9ae1dac0d5fe07be188d0e67.png",
         "https://i1.hdslb.com/bfs/new_dyn/203843cea2fc7d67a33665ad348fb7742249596.jpg",
         "https://i1.hdslb.com/bfs/new_dyn/ea756221f57367d591c5f07f459c1d721422341.jpg",
         "https://album.biliimg.com/bfs/new_dyn/498d1dbe8067ae22f4a7a8e640c415242249596.jpg",
@@ -268,6 +286,11 @@
         "https://i0.hdslb.com/bfs/garb/1f40dfcfcda241fb95c6ffa78d1d34906a5d8e2c.png"
       ],
       "backgroundImages": [
+        {
+          "type": "biliNFTVideoNew",
+          "identifier": "[\"103205\",\"103206\",\"金鱼花火-薇Steria\"]"
+        },
+        "https://i0.hdslb.com/bfs/garb/open/2006a525415c5610f3cc28dcacbb8ba133791b0e.png",
         "https://i0.hdslb.com/bfs/new_dyn/93f08924ab9d98b8d6649989f81b59a9355610.png",
         "https://i0.hdslb.com/bfs/new_dyn/344ceb5ad5145571272b5f7f31797924355610.png",
         "https://i0.hdslb.com/bfs/garb/93d3d6b5070cfdb4c6754f1d54cf3526e750d832.jpg",
@@ -1435,6 +1458,10 @@
       "themeIcon": "https://i2.hdslb.com/bfs/face/8f71e7aa2bc3c40621d23bed712710e04d6b8f75.jpg"
     },
     "gifs": [
+      "https://i0.hdslb.com/bfs/garb/8cab5991354940bd03f82c3f22969d9440f914af.png",
+      "https://i0.hdslb.com/bfs/garb/5cb31f8f301ad3de6d380159104d24cb7b1fcf81.png",
+      "https://i0.hdslb.com/bfs/garb/d63221936fd14fc1682905a6b250a4b5d303fa8e.png",
+      "https://i0.hdslb.com/bfs/garb/fbd7f6a02b54571030788de4736b83823f969055.png",
       "https://i0.hdslb.com/bfs/new_dyn/89eff7a028a744423548cc1624663aec5082218.gif",
       "https://album.biliimg.com/bfs/new_dyn/02194b634c76f2465055f124d1e75d27314866683.jpg",
       "https://i0.hdslb.com/bfs/garb/67c84e29e52e271ada7332bed38ef4aa178480b9.png",
@@ -1499,6 +1526,11 @@
         "type": "biliNFTVideoNew",
         "identifier": "[\"100531\",\"100532\",0]"
       },
+      {
+        "type": "biliNFTVideoNew",
+        "identifier": "[\"103205\",\"103206\",\"归途回忆--菫時-\"]"
+      },
+      "https://i0.hdslb.com/bfs/garb/open/8b904caca6de8166e4fecee6723137fbc9d637e7.png",
       "https://i0.hdslb.com/bfs/new_dyn/49692c2468f2e8844462f9612970c6e6227931587.png",
       "https://i0.hdslb.com/bfs/new_dyn/cf5917c1654e667a18a7e8e08295864d5133370.png",
       "https://i0.hdslb.com/bfs/new_dyn/a7cfdbfb362358fcae354e2a79580c4d314866683.jpg",
@@ -1584,6 +1616,10 @@
         "darkTheme": true
       },
       "gifs": [
+        "https://i0.hdslb.com/bfs/garb/8cab5991354940bd03f82c3f22969d9440f914af.png",
+        "https://i0.hdslb.com/bfs/garb/5cb31f8f301ad3de6d380159104d24cb7b1fcf81.png",
+        "https://i0.hdslb.com/bfs/garb/d63221936fd14fc1682905a6b250a4b5d303fa8e.png",
+        "https://i0.hdslb.com/bfs/garb/fbd7f6a02b54571030788de4736b83823f969055.png",
         "https://i0.hdslb.com/bfs/new_dyn/89eff7a028a744423548cc1624663aec5082218.gif",
         "https://album.biliimg.com/bfs/new_dyn/02194b634c76f2465055f124d1e75d27314866683.jpg",
         "https://i0.hdslb.com/bfs/garb/67c84e29e52e271ada7332bed38ef4aa178480b9.png",
@@ -1636,6 +1672,10 @@
         "https://article.biliimg.com/bfs/article/c126e69dfd58cb66a1b77d7e04648a57e33ac7db.gif"
       ],
       "backgroundImages": [
+        {
+          "type": "biliNFTVideoNew",
+          "identifier": "[\"103205\",\"103206\",\"羽落之音--菫時-\"]"
+        },
         {
           "type": "biliNFTVideoNew",
           "identifier": "[\"100531\",\"100532\",0]"
