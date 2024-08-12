@@ -1,22 +1,22 @@
 import { biliApiLimiter } from './throttle';
 
+import { suggest as suggestNode } from './ytbvideo.node';
 import {
-  resolveURL as resolveURLNode,
-  fetchAudioInfo as fetchAudioInfoNode,
-  suggest as suggestNode,
-} from './ytbvideo.node';
+  resolveURL as resolveURLYtbi,
+  fetchAudioInfo as fetchAudioInfoYtbi,
+} from './ytbvideo.ytbi';
 import {
   resolveURL as resolveURLMuse,
   fetchAudioInfo as fetchAudioInfoMuse,
 } from './ytbvideo.muse';
 
-const resolveURL = (song: NoxMedia.Song, iOS = true) =>
-  resolveURLMuse(song).catch(() => resolveURLNode(song, iOS));
+const resolveURL = (song: NoxMedia.Song) =>
+  resolveURLYtbi(song).catch(() => resolveURLMuse(song));
 
 export const fetchAudioInfo = (bvid: string, progressEmitter?: () => void) =>
   biliApiLimiter.schedule(() => {
     progressEmitter?.();
-    return fetchAudioInfoNode(bvid).catch(() => fetchAudioInfoMuse(bvid));
+    return fetchAudioInfoYtbi(bvid).catch(() => fetchAudioInfoMuse(bvid));
   });
 
 const regexFetch = async ({

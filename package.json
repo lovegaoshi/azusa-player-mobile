@@ -54,6 +54,7 @@
     "dayjs": "^1.11.12",
     "deepmerge": "^4.3.1",
     "dropbox": "git+https://lovegaoshi@github.com/lovegaoshi/dropbox-sdk-js.git",
+    "event-target-polyfill": "^0.0.4",
     "expo": "^51.0.24",
     "expo-auth-session": "~5.5.2",
     "expo-clipboard": "~6.0.3",
@@ -107,8 +108,10 @@
     "react-native-video": "^6.4.3",
     "react-native-webview": "13.10.5",
     "sp-react-native-in-app-updates": "^1.4.0",
+    "text-encoding-polyfill": "^0.6.7",
     "use-debounce": "^10.0.2",
     "uuid": "^10.0.0",
+    "web-streams-polyfill": "^4.0.0",
     "youtubei.js": "^10.3.0",
     "ytdl-core": "https://lovegaoshi@github.com/lovegaoshi/node-ytdl-core.git#commit=04425b36337705124202ed193703aea67fa26e97",
     "zustand": "^4.5.4"
@@ -119,6 +122,7 @@
   "devDependencies": {
     "@babel/core": "^7.25.2",
     "@babel/plugin-syntax-import-attributes": "^7.24.7",
+    "@babel/plugin-transform-export-namespace-from": "^7.24.7",
     "@babel/plugin-transform-private-methods": "^7.24.7",
     "@babel/preset-env": "^7.25.3",
     "@babel/preset-typescript": "^7.24.7",

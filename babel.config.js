@@ -28,6 +28,7 @@ module.exports = api => {
           },
         ],
         'react-native-reanimated/plugin',
+        '@babel/plugin-transform-export-namespace-from',
         [
           '@babel/plugin-syntax-import-attributes',
           {
