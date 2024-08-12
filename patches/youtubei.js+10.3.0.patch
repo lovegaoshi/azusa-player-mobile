@@ -1,0 +1,8 @@
+diff --git a/node_modules/youtubei.js/index.js b/node_modules/youtubei.js/index.js
+new file mode 100644
+index 0000000..02925cf
+--- /dev/null
++++ b/node_modules/youtubei.js/index.js
+@@ -0,0 +1 @@
++export * from './bundle/react-native'
+\ No newline at end of file

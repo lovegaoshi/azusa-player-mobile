@@ -1,26 +1,25 @@
-import { Innertube } from 'youtubei.js';
-
 import SongTS from '@objects/Song';
 import { Source } from '@enums/MediaFetch';
 import { logger } from '@utils/Logger';
+import ytClient from '@utils/mediafetch/ytbi';
 
 export const resolveURL = async (song: NoxMedia.Song) => {
-  logger.debug(`[ytb.ytbi] fetch YTB playURL promise:${song.bvid}`);
-  const yt = await Innertube.create();
-  const extractedVideoInfo = await yt.getInfo(song.bvid);
+  logger.debug(`[ytbi.js] fetch YTB playURL promise:${song.bvid}`);
+  const yt = await ytClient;
+  const extractedVideoInfo = await yt.getBasicInfo(song.bvid, 'iOS');
   const maxAudioQualityStream = extractedVideoInfo.chooseFormat({
     quality: 'best',
     type: 'audio',
   });
   return {
-    url: maxAudioQualityStream.decipher(yt.session.player),
+    url: maxAudioQualityStream.decipher(yt.actions.session.player),
     loudness: maxAudioQualityStream.loudness_db,
   };
 };
 
 export const fetchAudioInfo = async (sid: string) => {
-  const yt = await Innertube.create();
-  const videoInfo = (await yt.getBasicInfo(sid)).basic_info;
+  const yt = await ytClient;
+  const videoInfo = (await yt.getBasicInfo(sid, 'iOS')).basic_info;
   return [
     SongTS({
       cid: `${Source.ytbvideo}-${sid}`,

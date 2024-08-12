@@ -6879,6 +6879,7 @@ __metadata:
   dependencies:
     "@babel/core": "npm:^7.25.2"
     "@babel/plugin-syntax-import-attributes": "npm:^7.24.7"
+    "@babel/plugin-transform-export-namespace-from": "npm:^7.24.7"
     "@babel/plugin-transform-private-methods": "npm:^7.24.7"
     "@babel/preset-env": "npm:^7.25.3"
     "@babel/preset-typescript": "npm:^7.24.7"
@@ -6941,6 +6942,7 @@ __metadata:
     eslint-plugin-prettier: "npm:^5.2.1"
     eslint-plugin-react: "npm:^7.35.0"
     eslint-plugin-react-hooks: "npm:^4.6.2"
+    event-target-polyfill: "npm:^0.0.4"
     expo: "npm:^51.0.24"
     expo-auth-session: "npm:~5.5.2"
     expo-clipboard: "npm:~6.0.3"
@@ -7003,9 +7005,11 @@ __metadata:
     reactotron-react-native: "npm:^5.1.7"
     rimraf: "npm:^6.0.1"
     sp-react-native-in-app-updates: "npm:^1.4.0"
+    text-encoding-polyfill: "npm:^0.6.7"
     typescript: "npm:~5.5.4"
     use-debounce: "npm:^10.0.2"
     uuid: "npm:^10.0.0"
+    web-streams-polyfill: "npm:^4.0.0"
     youtubei.js: "npm:^10.3.0"
     ytdl-core: "https://lovegaoshi@github.com/lovegaoshi/node-ytdl-core.git#commit=04425b36337705124202ed193703aea67fa26e97"
     zustand: "npm:^4.5.4"
@@ -9895,6 +9899,13 @@ __metadata:
   version: 1.8.1
   resolution: "etag@npm:1.8.1"
   checksum: 10c0/12be11ef62fb9817314d790089a0a49fae4e1b50594135dcb8076312b7d7e470884b5100d249b28c18581b7fd52f8b485689ffae22a11ed9ec17377a33a08f84
+  languageName: node
+  linkType: hard
+
+"event-target-polyfill@npm:^0.0.4":
+  version: 0.0.4
+  resolution: "event-target-polyfill@npm:0.0.4"
+  checksum: 10c0/7052b838df6509e8290f110daf94604dd05828834db4ad6fe4a12abc693da1a3274100cfd4ff3e47a941d5aa3fb7cdb8164d85402b93d85340bb3adc596d8732
   languageName: node
   linkType: hard
 
@@ -17955,6 +17966,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"text-encoding-polyfill@npm:^0.6.7":
+  version: 0.6.7
+  resolution: "text-encoding-polyfill@npm:0.6.7"
+  checksum: 10c0/5486a2320e2384b0153d2835a8e6e3a643ff28fcd05c2e9fa5d69c7879a2b8fdb7faa44708792a9205f074f10606ee3b6470c8f3f4da1be90a014b79057008d0
+  languageName: node
+  linkType: hard
+
 "text-table@npm:^0.2.0":
   version: 0.2.0
   resolution: "text-table@npm:0.2.0"
@@ -18768,6 +18786,13 @@ __metadata:
   dependencies:
     defaults: "npm:^1.0.3"
   checksum: 10c0/5b61ca583a95e2dd85d7078400190efd452e05751a64accb8c06ce4db65d7e0b0cde9917d705e826a2e05cc2548f61efde115ffa374c3e436d04be45c889e5b4
+  languageName: node
+  linkType: hard
+
+"web-streams-polyfill@npm:^4.0.0":
+  version: 4.0.0
+  resolution: "web-streams-polyfill@npm:4.0.0"
+  checksum: 10c0/c570cea10db4c88eb630e1ddc2b3390eaf215527ab1229258ac6d1eb6ed3bb095312d4ce5c35090b590c051e1a94043b11d00fe4188413c67112bdf61e554b87
   languageName: node
   linkType: hard
 
