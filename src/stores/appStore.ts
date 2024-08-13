@@ -12,6 +12,7 @@ import {
 import { logger } from '@utils/Logger';
 import rejson from '../utils/rejson.json';
 import { loadJSONRegExtractors } from '../utils/re';
+import noxCache from '@utils/Cache';
 
 interface AppStore {
   pipMode: boolean;
@@ -190,6 +191,7 @@ export const cacheResolvedURL = async (
 
 export const resetResolvedURL = (song?: NoxMedia.Song) => {
   if (song) {
+    noxCache.noxMediaCache.deleteSongCache(song);
     const cachedResolveURLMap = appStore.getState().cachedResolveURLMap;
     appStore.setState({
       cachedResolveURLMap: { ...cachedResolveURLMap, [song.id]: undefined },
