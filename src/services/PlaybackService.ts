@@ -100,7 +100,7 @@ export async function PlaybackService() {
       await TrackPlayer.setVolume(0);
       if (event.track?.song === undefined) return;
       if (playerErrored) {
-        resetResolvedURL(event.track.song);
+        resetResolvedURL(event.track.song, true);
       }
       setState({ activeTrackPlayingId: event.track.song.id });
       // prefetch song only when there is no next item in queue!

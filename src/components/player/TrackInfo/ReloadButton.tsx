@@ -10,7 +10,7 @@ export default ({ track }: NoxComponent.TrackProps) => {
 
   const onClick = async () => {
     if (!song) return;
-    resetResolvedURL(song);
+    resetResolvedURL(song, true);
     const currentTrack = await TrackPlayer.getActiveTrack();
     const updatedMetadata = await resolveAndCache({ song });
     await TrackPlayer.load({ ...currentTrack, ...updatedMetadata });

@@ -189,9 +189,9 @@ export const cacheResolvedURL = async (
   return cachedResolvedURL;
 };
 
-export const resetResolvedURL = (song?: NoxMedia.Song) => {
+export const resetResolvedURL = (song?: NoxMedia.Song, deleteCache = false) => {
   if (song) {
-    noxCache.noxMediaCache.deleteSongCache(song);
+    deleteCache && noxCache.noxMediaCache.deleteSongCache(song);
     const cachedResolveURLMap = appStore.getState().cachedResolveURLMap;
     appStore.setState({
       cachedResolveURLMap: { ...cachedResolveURLMap, [song.id]: undefined },
