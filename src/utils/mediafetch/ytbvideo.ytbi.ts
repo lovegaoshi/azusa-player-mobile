@@ -2,8 +2,9 @@ import SongTS from '@objects/Song';
 import { Source } from '@enums/MediaFetch';
 import { logger } from '@utils/Logger';
 import ytClient from '@utils/mediafetch/ytbi';
+import { isIOS } from '../RNUtils';
 
-export const resolveURL = async (song: NoxMedia.Song) => {
+export const resolveURL = async (song: NoxMedia.Song, iOS = false) => {
   logger.debug(`[ytbi.js] fetch YTB playURL promise:${song.bvid}`);
   const yt = await ytClient;
   const extractedVideoInfo = await yt.getBasicInfo(song.bvid, 'iOS');
@@ -12,7 +13,10 @@ export const resolveURL = async (song: NoxMedia.Song) => {
     type: 'audio',
   });
   return {
-    url: maxAudioQualityStream.decipher(yt.actions.session.player),
+    url:
+      iOS && isIOS && extractedVideoInfo.streaming_data?.hls_manifest_url
+        ? extractedVideoInfo.streaming_data?.hls_manifest_url
+        : maxAudioQualityStream.decipher(yt.actions.session.player),
     loudness: maxAudioQualityStream.loudness_db,
   };
 };
