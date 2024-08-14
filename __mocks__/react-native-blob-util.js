@@ -1,3 +1,7 @@
 module.exports = {
-  fs: {},
+  fs: {
+    dirs: {
+      CacheDir: '/tmp',
+    },
+  },
 };
