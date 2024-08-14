@@ -110,7 +110,7 @@
     "abrepeatTitle": "{{song.parsedName}} A-B重复",
     "songRemoveTitle": "删除歌曲",
     "songRemoveNBanTitle": "删除并拉黑",
-    "reloadSong": "Reload",
+    "reloadSong": "重载",
     "selectedSongs": "选择的歌"
   },
   "GeneralSettings": {
@@ -201,9 +201,13 @@
     "DeveloperOptionsDesc": "正在测试的功能",
     "AListOptionsName": "AList",
     "AListOptionsDesc": "AList密钥设置",
+    "DownloadOptionsName": "下载",
+    "DownloadOptionsDesc": "APM 下载",
+    "LanguageOptionsName": "更改语言",
+    "LanguageOptionsDesc": "更改 app 语言",
+    "LanguageOptionsTitle": "更改语言",
     "LoginName": "B站登录",
     "LoginDesc": "二维码或填入cookie登录b站",
-    "LanguageOptionsTitle": "选择语言",
     "FeatureNotImplemented": "功能孩妹实现"
   },
   "AList": {
@@ -211,6 +215,26 @@
     "Add": "添加AList站点密钥",
     "Site": "站点",
     "Password": "密钥"
+  },
+  "PluginSettings": {
+    "UpdatingRegExpFromGithub": "从 Github 更新 RegExp 规则...",
+    "UpdatedRegExpFromGithub": "从 Github 更新 RegExp 规则成功！",
+    "UpdateFailRegExpFromGithub": "从 Github 更新 RegExp 规则失败。",
+    "UpdatingR128GainFromGithub": "从 GitHub 更新 R128Gain 规则...",
+    "UpdatedR128GainFromGithub": "从 GitHub 更新 R128Gain 规则成功！",
+    "UpdateFailR128GainFromGithub": "从 GitHub 更新 R128Gain 规则 失败。",
+    "UpdatingABRepeatFromGithub": "从 GitHub 更新 ABRepeat 规则...",
+    "UpdatedABRepeatFromGithub": "从 GitHub 更新 ABRepeat 规则成功！",
+    "UpdateFailABRepeatFromGithub": "从 GitHub 更新 ABRepeat 规则失败。",
+    "RegExpName": "更新 RegExp",
+    "RegExpDesc": "从 Github 更新 RegExp 规则",
+    "MusicFreeName": "MusicFree 插件",
+    "MusicFreeDesc": "启用 MusicFree 插件",
+    "MusicFreeCheckTitle": "MusicFree 插件",
+    "R128GainName": "更新 R18Gain",
+    "R128GainDesc": "从 GitHub 更新 R18Gain 规则",
+    "ABRepeatName": "更新 ABRepeat",
+    "ABRepeatDesc": "从 GitHub 更新 ABRepeat 规则"
   },
   "AppearanceSettings": {
     "noWeebSkinsName": "二次元收收味",
@@ -236,6 +260,8 @@
   "Sync": {
     "Local": "本地",
     "Dropbox": "Dropbox",
+    "Gitee": "Gitee",
+    "Github": "Github",
     "PersonalCloud": "私有云",
     "ExportLocation": "选择同步方式：",
     "DropboxUploadSuccess": "歌单上传到Dropbox成功！",
@@ -279,6 +305,9 @@
     "Logout": "登出"
   },
   "VersionUpdate": {
+    "DownloadAPK": "更新",
+    "DownloadingAPK": "正在下载最新 APM armv8 APK...",
+    "DownloadedAPK": "更新 APM",
     "NoUpdates": "管人播放器已经是最新版本。\n当前版本：{{currentVersion}}\n开发版本：{{devVersion}}",
     "UpdateCheckingSnackbar": "联网检查更新...",
     "UpdateCheckingFailedSnackbar": "联网github检查更新失败",
@@ -301,8 +330,9 @@
     "PlaylistTab": "播放列表",
     "NowPlayingTab": "正在播放",
     "GoToNowPlayingTab": "转到现在播放",
-    "Permission": "嗨害嗨！APM 在技术上受到限制，只能启用“绘制其他应用程序”权限才能在 Android Auto 上正常运行。为获得最佳体验，如果您打算与汽车一起使用，请按 OK 和启用该权限。"
-  },
+    "Permission": "嗨害嗨！APM 在技术上受到限制，只能启用“绘制其他应用程序”权限才能在 Android Auto 上正常运行。为获得最佳体验，如果您打算与汽车一起使用，请按 OK 和启用该权限。",
+    "PlayingShuffle": "不匹配！改为洗牌..."
+},
   "PlaylistRegex": {
     "absoluteMatch": "绝对匹配",
     "artistMatch": "搜索歌手",
@@ -310,6 +340,9 @@
     "cachedMatch": "已缓存",
     "durationLessMatch": "长度小于",
     "durationMoreMatch": "长度大于"
+  },
+  "Accessibility": {
+    "gif": "GIF"
   },
   "Menu": {
     "local": "本地"
