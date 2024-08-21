@@ -1,0 +1,22 @@
+diff --git a/node_modules/react-native-carplay/android/src/main/java/org/birkir/carplay/CarPlaySession.kt b/node_modules/react-native-carplay/android/src/main/java/org/birkir/carplay/CarPlaySession.kt
+index 2235853..151b882 100644
+--- a/node_modules/react-native-carplay/android/src/main/java/org/birkir/carplay/CarPlaySession.kt
++++ b/node_modules/react-native-carplay/android/src/main/java/org/birkir/carplay/CarPlaySession.kt
+@@ -77,7 +77,7 @@ class CarPlaySession(private val reactInstanceManager: ReactInstanceManager) : S
+       }
+ 
+       catalystInstance.getJSModule(AppRegistry::class.java)
+-        .runApplication(jsAppModuleName, appParams)
++        ?.runApplication(jsAppModuleName, appParams)
+ 
+       val timingModule = reactContext.getNativeModule(
+         TimingModule::class.java
+@@ -85,7 +85,7 @@ class CarPlaySession(private val reactInstanceManager: ReactInstanceManager) : S
+       val carModule = reactInstanceManager
+         .currentReactContext?.getNativeModule(CarPlayModule::class.java)
+       carModule!!.setCarContext(carContext, screen)
+-      timingModule!!.onHostResume()
++      // timingModule!!.onHostResume()
+ 
+     } catch (e: Exception) {
+       e.printStackTrace()

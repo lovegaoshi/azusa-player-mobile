@@ -11,12 +11,16 @@ apply from: "../../node_modules/react-native-vector-icons/fonts.gradle"
  */
 react {
     /* Folders */
-    //   The root of your project, i.e. where "package.json" lives. Default is '..'
-    // root = file("../")
-    //   The folder where the react-native NPM package is. Default is ../node_modules/react-native
-    // reactNativeDir = file("../node_modules/react-native")
-    //   The cli.js file which is the React Native CLI entrypoint. Default is ../node_modules/react-native/cli.js
-    // cliFile = file("../node_modules/react-native/cli.js")
+
+    //   The root of your project, i.e. where "package.json" lives. Default is '../..'
+    // root = file("../../")
+    //   The folder where the react-native NPM package is. Default is ../../node_modules/react-native
+    // reactNativeDir = file("../../node_modules/react-native")
+    //   The folder where the react-native Codegen package is. Default is ../../node_modules/@react-native/codegen
+    // codegenDir = file("../../node_modules/@react-native/codegen")
+    //   The cli.js file which is the React Native CLI entrypoint. Default is ../../node_modules/react-native/cli.js
+    // cliFile = file("../../node_modules/react-native/cli.js")
+
     /* Variants */
     //   The list of variants to that are debuggable. For those we're going to
     //   skip the bundling of the JS bundle and the assets. By default is just 'debug'.
@@ -47,6 +51,9 @@ react {
     //
     //   The list of flags to pass to the Hermes compiler. By default is "-O", "-output-source-map"
     // hermesFlags = ["-O", "-output-source-map"]
+
+    /* Autolinking */
+    autolinkLibrariesWithApp()
 }
 
 def enableSeparateBuildPerCPUArchitecture = true
@@ -165,11 +172,11 @@ android {
 dependencies {
 
     // For animated GIF support
-    implementation 'com.facebook.fresco:animated-gif:3.1.3'
+    implementation 'com.facebook.fresco:animated-gif:3.2.0'
 
     // For WebP support, including animated WebP
-    implementation 'com.facebook.fresco:animated-webp:3.1.3'
-    implementation 'com.facebook.fresco:webpsupport:3.1.3'
+    implementation 'com.facebook.fresco:animated-webp:3.2.0'
+    implementation 'com.facebook.fresco:webpsupport:3.2.0'
 
     implementation 'com.android.support:appcompat-v7:28.0.0'
     implementation 'com.android.support:support-annotations:28.0.0'
@@ -186,5 +193,3 @@ dependencies {
     implementation "androidx.core:core-ktx:1.13.1"
     implementation 'androidx.core:core-google-shortcuts:1.1.0'
 }
-
-apply from: file("../../node_modules/@react-native-community/cli-platform-android/native_modules.gradle"); applyNativeModulesAppBuildGradle(project)

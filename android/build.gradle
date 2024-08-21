@@ -12,7 +12,7 @@ buildscript {
         ndkVersion = "26.1.10909125"
 
         ffmpegKitPackage = "audio"
-        kotlinVersion = "1.9.20"
+        kotlinVersion = "1.9.24"
     }
     repositories {
         mavenLocal()
@@ -20,7 +20,7 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath('com.android.tools.build:gradle:8.5.1')
+        classpath('com.android.tools.build:gradle:8.5.2')
         classpath("com.facebook.react:react-native-gradle-plugin")
         classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion")
     }
