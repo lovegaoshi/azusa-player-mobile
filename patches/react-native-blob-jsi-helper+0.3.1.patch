@@ -21,3 +21,16 @@ index 57945ae..95fe72a 100644
    compileOptions {
      sourceCompatibility JavaVersion.VERSION_1_8
      targetCompatibility JavaVersion.VERSION_1_8
+diff --git a/node_modules/react-native-blob-jsi-helper/react-native-blob-jsi-helper.podspec b/node_modules/react-native-blob-jsi-helper/react-native-blob-jsi-helper.podspec
+index 53ec31f..9ebd8f0 100644
+--- a/node_modules/react-native-blob-jsi-helper/react-native-blob-jsi-helper.podspec
++++ b/node_modules/react-native-blob-jsi-helper/react-native-blob-jsi-helper.podspec
+@@ -17,4 +17,8 @@ Pod::Spec.new do |s|
+ 
+   s.dependency "React-Core"
+   s.dependency "React"
++  
++  s.pod_target_xcconfig = {
++    "CLANG_CXX_LANGUAGE_STANDARD" => "c++17",
++  }
+ end
