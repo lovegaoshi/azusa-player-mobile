@@ -7,7 +7,7 @@ import { isIOS } from '../RNUtils';
 export const resolveURL = async (song: NoxMedia.Song, iOS = false) => {
   logger.debug(`[ytbi.js] fetch YTB playURL promise:${song.bvid}`);
   const yt = await ytClient;
-  const extractedVideoInfo = await yt.getBasicInfo(song.bvid, 'iOS');
+  const extractedVideoInfo = await yt.getBasicInfo(song.bvid, 'IOS');
   const maxAudioQualityStream = extractedVideoInfo.chooseFormat({
     quality: 'best',
     type: 'audio',
@@ -23,7 +23,7 @@ export const resolveURL = async (song: NoxMedia.Song, iOS = false) => {
 
 export const fetchAudioInfo = async (sid: string) => {
   const yt = await ytClient;
-  const videoInfo = (await yt.getBasicInfo(sid, 'iOS')).basic_info;
+  const videoInfo = (await yt.getBasicInfo(sid, 'IOS')).basic_info;
   return [
     SongTS({
       cid: `${Source.ytbvideo}-${sid}`,
