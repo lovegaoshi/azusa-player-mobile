@@ -122,7 +122,7 @@ const usePlaylistCRUD = (mPlaylist?: NoxMedia.Playlist) => {
     uniqBVIds.forEach(bvid =>
       promises.push(
         fetchBiliBVIDs([bvid]).then(val => {
-          if (val) validBVIds.push(bvid);
+          if (val.length > 0) validBVIds.push(bvid);
         })
       )
     );
