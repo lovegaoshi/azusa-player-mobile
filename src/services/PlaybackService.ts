@@ -30,6 +30,7 @@ const lastPlayedDuration: { val?: number } = { val: 0 };
 export async function AdditionalPlaybackService({
   noInterruption = false,
   lastPlayDuration,
+  currentPlayingID,
 }: Partial<NoxStorage.PlayerSettingDict>) {
   TrackPlayer.addEventListener(Event.RemoteDuck, async event => {
     console.log('Event.RemoteDuck', event);
@@ -39,12 +40,14 @@ export async function AdditionalPlaybackService({
   });
 
   lastPlayedDuration.val = lastPlayDuration;
-  TrackPlayer.addEventListener(Event.PlaybackState, event => {
+  TrackPlayer.addEventListener(Event.PlaybackState, async event => {
     if (lastPlayedDuration.val && event.state === State.Ready) {
-      logger.debug(
-        `[Playback] initalized last played duration to ${lastPlayDuration}`
-      );
-      TrackPlayer.seekTo(lastPlayedDuration.val);
+      if ((await TrackPlayer.getActiveTrack())?.song?.id === currentPlayingID) {
+        logger.debug(
+          `[Playback] initalized last played duration to ${lastPlayDuration}`
+        );
+        TrackPlayer.seekTo(lastPlayedDuration.val);
+      }
       lastPlayedDuration.val = undefined;
     }
   });
