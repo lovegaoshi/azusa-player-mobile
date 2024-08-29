@@ -45,6 +45,7 @@ export default ({ intentData }: NoxComponent.AppProps) => {
         noInterruption: storedPlayerSetting.noInterruption,
         keepForeground: storedPlayerSetting.keepForeground,
         lastPlayDuration,
+        currentPlayingID,
       };
       await SetupService(serviceOptions);
       initializePlaybackMode(playbackMode);
