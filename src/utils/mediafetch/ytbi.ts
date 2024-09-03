@@ -53,3 +53,8 @@ export const ytClientWeb: Promise<Innertube> = Innertube.create({
   enable_session_cache: false,
   generate_session_locally: false,
 });
+
+export const awaitYtbiSetup = async () => {
+  await ytClient;
+  await ytClientWeb;
+};

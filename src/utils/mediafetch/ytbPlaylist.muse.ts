@@ -28,7 +28,7 @@ const musePlaylistItemToNoxSong = (val: any, data: any) => {
   }
 };
 
-export const fetchInnerTunePlaylist = async (
+export const fetchYtmPlaylist = async (
   playlistId: string,
   favList: string[] = []
 ): Promise<NoxMedia.Song[]> => {
@@ -126,22 +126,4 @@ const fetchYTPlaylist = async (
       )
     ).reduce((acc, curr) => acc!.concat(curr), []);
   }
-};
-
-const regexFetch = async ({
-  reExtracted,
-  favList = [],
-}: NoxNetwork.RegexFetchProps): Promise<NoxNetwork.NoxRegexFetch> => {
-  const results = await fetchInnerTunePlaylist(
-    // fetchYTPlaylist(
-    reExtracted[1],
-    // progressEmitter,
-    favList
-  );
-  return { songList: results.filter(val => val !== undefined) };
-};
-
-export default {
-  regexSearchMatch: /youtu.*list=([^&]+)/,
-  regexFetch,
 };
