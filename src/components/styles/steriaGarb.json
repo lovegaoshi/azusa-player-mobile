@@ -2924,5 +2924,117 @@
       "onSurfaceDisabled": "rgba(230, 226, 217, 0.38)",
       "backdrop": "rgba(49, 49, 37, 0.4)"
     }
+  },
+  {
+    "metaData": {
+      "themeName": "随一Suiii收藏集",
+      "themeDesc": "【随一Suiii收藏集】是虚拟主播随一Suiii定制打造的个人数字集卡，其中的每张数字卡片都将拥有独特编号，期待大家一起来解锁动态卡面、专属勋章和头像框吧！",
+      "themeAuthor": "NoxAutoGen",
+      "themeIcon": "https://i0.hdslb.com/bfs/garb/6aa9d7a1670b4b06bff44d2e155f62f16867cf21.png",
+      "darkTheme": true
+    },
+    "gifs": [
+      "https://i0.hdslb.com/bfs/garb/39b135ec78ecc726b249887088a198963c758f69.png",
+      "https://i0.hdslb.com/bfs/garb/2d78245d1c5198308de532ee55f1efe290409816.png",
+      "https://i0.hdslb.com/bfs/garb/f9d866c4f5f1866ef9d6ca8bfff8569e00c9f5fa.png",
+      "https://i0.hdslb.com/bfs/garb/8d82704fbb2009e779664f6db3e4bb6e506c3d2f.png",
+      "https://i0.hdslb.com/bfs/garb/b2a150a1090d75fe733f2130b323368cc7540f89.png",
+      "https://i0.hdslb.com/bfs/garb/3f3d36f1dc85a54cc6dc5d4e08a54631f6dc6038.png",
+      "https://i0.hdslb.com/bfs/garb/3fdca50a8dc4606a3a853375c07f24e928144699.png",
+      "https://i0.hdslb.com/bfs/garb/0a1b4a9889b8e2da167401d61c676b8bdd0aa04f.png",
+      "https://i0.hdslb.com/bfs/garb/075165c41f2303038f39dda5fa5d9b4d3180c1c2.png",
+      "https://i0.hdslb.com/bfs/garb/fc4aec4f0b97a60b696d4891ee53cc6ecf47c986.png",
+      "https://i0.hdslb.com/bfs/garb/17d85cbe00ea0c40270372621039313cc82a5780.png",
+      "https://i0.hdslb.com/bfs/garb/31622b2aa80ae5df681bfdc00e4d5a5321aa7208.png",
+      "https://i0.hdslb.com/bfs/garb/c790e027ad158e5cdf633aedd6b7c4602f459030.png",
+      "https://i0.hdslb.com/bfs/garb/c9edb4efb36a705de213eea7236cef14a3097bfc.png",
+      "https://i0.hdslb.com/bfs/garb/ae3e7b8cf67ac23318ca5d2e08123a25ef363760.png",
+      "https://i0.hdslb.com/bfs/garb/1e1ea8e17e5b265472fc1316bbf056b3c82509f6.png",
+      "https://i0.hdslb.com/bfs/garb/3fe7cf086d5e9161a5c5fa0bd46aa59f9a12392a.png",
+      "https://i0.hdslb.com/bfs/garb/31fd3bde2447b65497123c0d93ce9288e12c42b0.png",
+      "https://i0.hdslb.com/bfs/garb/562f4df9cddf562a427f27bc84cff9b056886915.png",
+      "https://i0.hdslb.com/bfs/garb/620725631aa494df9978dbab3a6307782bcc65e0.png"
+    ],
+    "backgroundImages": [
+      {
+        "type": "biliNFTVideoNew",
+        "identifier": "[\"103549\",\"103554\",\"双生.铃\"]"
+      },
+      {
+        "type": "biliNFTVideoNew",
+        "identifier": "[\"103549\",\"103554\",\"封印.解\"]"
+      },
+      {
+        "type": "biliNFTVideoNew",
+        "identifier": "[\"103549\",\"103554\",\"夜幽\"]"
+      },
+      {
+        "type": "biliNFTVideoNew",
+        "identifier": "[\"103549\",\"103554\",\"余温\"]"
+      },
+      "https://i0.hdslb.com/bfs/garb/open/adb3bb173e77778030678b123679d3eb2047ccbf.png",
+      "https://i0.hdslb.com/bfs/garb/open/6fee1cd1e2efb8cb4807cf71df9be1ae859164cd.png",
+      "https://i0.hdslb.com/bfs/garb/open/97ff63ca6524eab478cc0d5895ba2f4552e75f1f.png",
+      "https://i0.hdslb.com/bfs/garb/open/acbe9b3c81436724307f9beef1cbcff518e6e6b0.png",
+      "https://i0.hdslb.com/bfs/garb/open/cd154d17f5fc5b82589f29154cbaec8da8be785c.png",
+      {
+        "type": "biliNFTVideoNew",
+        "identifier": "[\"103549\",\"103554\",\"夏暇\"]"
+      },
+      "https://i0.hdslb.com/bfs/garb/open/ae7beef4f79b73ff2e26477088163a4101b7875d.png"
+    ],
+    "customColors": {
+      "maskedBackgroundColor": "rgba(0, 0, 0, 0.60)",
+      "playlistDrawerBackgroundColor": "green",
+      "playlistDrawerBackgroundColorTransparent": "rgba(0, 255, 0, 0.35)",
+      "progressThumbTintColor": "rgb(235, 235, 0)",
+      "progressMinimumTrackTintColor": "rgb(235, 235, 0)",
+      "progressMaximumTrackTintColor": "#FFFFFF",
+      "btnBackgroundColor": "rgb(72, 71, 58)",
+      "textInputSelectionColor": "green"
+    },
+    "colors": {
+      "primary": "rgb(255, 255, 0)",
+      "onPrimary": "rgb(50, 50, 0)",
+      "primaryContainer": "rgb(73, 73, 0)",
+      "onPrimaryContainer": "rgb(234, 234, 0)",
+      "secondary": "rgb(202, 200, 165)",
+      "onSecondary": "rgb(50, 50, 24)",
+      "secondaryContainer": "rgb(73, 72, 45)",
+      "onSecondaryContainer": "rgb(231, 228, 191)",
+      "tertiary": "rgb(164, 208, 189)",
+      "onTertiary": "rgb(11, 55, 42)",
+      "tertiaryContainer": "rgb(37, 78, 64)",
+      "onTertiaryContainer": "rgb(191, 236, 216)",
+      "error": "rgb(255, 180, 171)",
+      "onError": "rgb(105, 0, 5)",
+      "errorContainer": "rgb(147, 0, 10)",
+      "onErrorContainer": "rgb(255, 180, 171)",
+      "background": "rgba(0,0,0, 0.4)",
+      "onBackground": "rgb(230, 226, 217)",
+      "surface": "rgb(28, 28, 23)",
+      "onSurface": "rgba(235, 235, 0, 1)",
+      "text": "rgb(255, 255, 0)",
+      "surfaceVariant": "rgb(10, 10, 10)",
+      "onSurfaceVariant": "rgb(225, 225, 0)",
+      "outline": "rgb(147, 145, 130)",
+      "outlineVariant": "rgb(72, 71, 58)",
+      "shadow": "rgb(0, 0, 0)",
+      "scrim": "rgb(0, 0, 0)",
+      "inverseSurface": "rgb(230, 226, 217)",
+      "inverseOnSurface": "rgb(49, 49, 43)",
+      "inversePrimary": "rgb(98, 98, 0)",
+      "elevation": {
+        "level0": "transparent",
+        "level1": "rgb(53, 56, 57)",
+        "level2": "rgb(10, 10, 10)",
+        "level3": "rgb(10, 10, 10)",
+        "level4": "rgb(49, 49, 20)",
+        "level5": "rgb(53, 53, 20)"
+      },
+      "surfaceDisabled": "rgba(230, 226, 217, 0.12)",
+      "onSurfaceDisabled": "rgba(230, 226, 217, 0.38)",
+      "backdrop": "rgba(49, 49, 37, 0.4)"
+    }
   }
 ]
