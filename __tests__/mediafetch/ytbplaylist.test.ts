@@ -1,4 +1,4 @@
-import fetcher from '../../src/utils/mediafetch/ytbplaylist';
+import fetcher from '../../src/utils/mediafetch/ytbplaylist.muse';
 test('ytbplaylist', async () => {
   const content = await fetcher.regexFetch({
     reExtracted: fetcher.regexSearchMatch.exec(

@@ -47,3 +47,9 @@ const ytClient: Promise<Innertube> = Innertube.create({
 });
 
 export default ytClient;
+
+export const ytClientWeb: Promise<Innertube> = Innertube.create({
+  retrieve_player: true,
+  enable_session_cache: false,
+  generate_session_locally: false,
+});
