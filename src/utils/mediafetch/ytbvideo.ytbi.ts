@@ -2,7 +2,7 @@ import SongTS from '@objects/Song';
 import { Source } from '@enums/MediaFetch';
 import { logger } from '@utils/Logger';
 import ytClient from '@utils/mediafetch/ytbi';
-import { isIOS } from '../RNUtils';
+import { isIOS } from '@utils/RNUtils';
 
 export const resolveURL = async (song: NoxMedia.Song, iOS = false) => {
   logger.debug(`[ytbi.js] fetch YTB playURL promise:${song.bvid}`);
