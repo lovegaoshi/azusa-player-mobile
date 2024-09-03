@@ -78,3 +78,4 @@ NoxExport.json
 test.js
 sentry.properties
 .yarn/install-state.gz
+test.mjs

@@ -1,4 +1,5 @@
 import RNFetchBlob from 'react-native-blob-util';
+import { PermissionsAndroid } from 'react-native';
 
 import { resolveCachedPath } from './RNTPUtils';
 import { logger } from './Logger';
@@ -21,6 +22,7 @@ export const copyCacheToDir = async ({
     return;
   }
   try {
+    PermissionsAndroid.request(PermissionsAndroid.PERMISSIONS.READ_MEDIA_AUDIO);
     const filePath = await ffmpegToMP3({
       fspath: resolvedPath,
       song,

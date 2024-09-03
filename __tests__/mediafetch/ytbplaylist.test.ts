@@ -1,10 +1,11 @@
-import fetcher from '../../src/utils/mediafetch/ytbplaylist';
+import fetcher from '../../src/utils/mediafetch/ytbPlaylist';
+
 test('ytbplaylist', async () => {
   const content = await fetcher.regexFetch({
     reExtracted: fetcher.regexSearchMatch.exec(
-      'https://www.youtube.com/watch?v=nyvehUgBc3g&list=PLbpi6ZahtOH7lIn0YG_BhuzoKxQeJWsxY'
+      'https://www.youtube.com/playlist?list=PLv4y5OVUmyFjx4uf_sQunpq8nlQiar_iQ'
     )!,
   });
-  // console.log(content);
+  console.log(content?.songList.length);
   expect(content?.songList[0]?.id).not.toBeNull();
 }, 30000);

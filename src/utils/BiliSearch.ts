@@ -18,7 +18,7 @@ import bilifavlistFetch from './mediafetch/bilifavlist';
 import bilichannelFetch from './mediafetch/bilichannel';
 import biliaudioFetch from './mediafetch/biliaudio';
 import bilichannelAudioFetch from './mediafetch/bilichannelAudio';
-import ytbplaylistFetch from './mediafetch/ytbplaylist';
+import ytbplaylistFetch from './mediafetch/ytbPlaylist';
 import ytbmixlistFetch from './mediafetch/ytbmixlist';
 import ytbsearchFetch from './mediafetch/ytbsearch';
 import bililiveFetch from './mediafetch/bililive';
