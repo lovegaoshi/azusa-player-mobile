@@ -5937,12 +5937,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:^22.5.2":
-  version: 22.5.2
-  resolution: "@types/node@npm:22.5.2"
+"@types/node@npm:^22.5.4":
+  version: 22.5.4
+  resolution: "@types/node@npm:22.5.4"
   dependencies:
     undici-types: "npm:~6.19.2"
-  checksum: 10c0/624a7fd76229eacc6c158eb3b9afd55b811d7f01976c5f92c630d5b9d47047cc218928c343988484a165ac400e5eb6fe70ea300fc7242deeb0e920c7724290f6
+  checksum: 10c0/b445daa7eecd761ad4d778b882d6ff7bcc3b4baad2086ea9804db7c5d4a4ab0298b00d7f5315fc640a73b5a1d52bbf9628e09c9fec0cf44dbf9b4df674a8717d
   languageName: node
   linkType: hard
 
@@ -7083,7 +7083,7 @@ __metadata:
     "@types/he": "npm:^1.2.3"
     "@types/jest": "npm:^29.5.12"
     "@types/md5": "npm:^2.3.5"
-    "@types/node": "npm:^22.5.2"
+    "@types/node": "npm:^22.5.4"
     "@types/react": "npm:~18.3.5"
     "@types/react-native": "npm:^0.73.0"
     "@types/react-native-background-timer": "npm:^2.0.2"
@@ -7118,7 +7118,7 @@ __metadata:
     eslint-plugin-import: "npm:^2.30.0"
     eslint-plugin-node: "npm:^11.1.0"
     eslint-plugin-prettier: "npm:^5.2.1"
-    eslint-plugin-react: "npm:^7.35.1"
+    eslint-plugin-react: "npm:^7.35.2"
     eslint-plugin-react-hooks: "npm:^4.6.2"
     event-target-polyfill: "npm:^0.0.4"
     expo: "npm:^51.0.32"
@@ -7140,7 +7140,7 @@ __metadata:
     lottie-react-native: "npm:6.7.2"
     lru-cache: "npm:7.14.0"
     md5: "npm:^2.3.0"
-    metro: "npm:^0.80.10"
+    metro: "npm:^0.80.11"
     metro-react-native-babel-preset: "npm:0.77.0"
     patch-package: "npm:^8.0.0"
     postinstall-postinstall: "npm:^2.1.0"
@@ -7177,7 +7177,7 @@ __metadata:
     react-native-track-player: "https://github.com/lovegaoshi/react-native-track-player.git#commit=6665ae0d260acdce719110bcf817fb9d9b22443d"
     react-native-url-polyfill: "npm:^2.0.0"
     react-native-vector-icons: "npm:^10.1.0"
-    react-native-video: "npm:^6.4.5"
+    react-native-video: "npm:^6.5.0"
     react-native-webview: "npm:13.12.1"
     react-test-renderer: "npm:18.3.1"
     reactotron-react-native: "npm:^5.1.8"
@@ -10064,9 +10064,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-plugin-react@npm:^7.35.1":
-  version: 7.35.1
-  resolution: "eslint-plugin-react@npm:7.35.1"
+"eslint-plugin-react@npm:^7.35.2":
+  version: 7.35.2
+  resolution: "eslint-plugin-react@npm:7.35.2"
   dependencies:
     array-includes: "npm:^3.1.8"
     array.prototype.findlast: "npm:^1.2.5"
@@ -10088,7 +10088,7 @@ __metadata:
     string.prototype.repeat: "npm:^1.0.0"
   peerDependencies:
     eslint: ^3 || ^4 || ^5 || ^6 || ^7 || ^8 || ^9.7
-  checksum: 10c0/faaa2108543675951949685208d105d9c3efa0ac8f4d950851b8f20e065b8bf87fdd7e78abae9b0382090bc22e61c00709388f35bdab2a8b1d283f985d310ed7
+  checksum: 10c0/5f891f5a77e902a0ca8d10b23d0b800e90a09400187febe5986c5078d6277baa4b974d6acdbba25baae065dbcf12eb9241b5f5782527d0780314c2ee5006a8af
   languageName: node
   linkType: hard
 
@@ -16494,13 +16494,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-native-video@npm:^6.4.5":
-  version: 6.4.5
-  resolution: "react-native-video@npm:6.4.5"
+"react-native-video@npm:^6.5.0":
+  version: 6.5.0
+  resolution: "react-native-video@npm:6.5.0"
   peerDependencies:
     react: "*"
     react-native: "*"
-  checksum: 10c0/13d5d000beeb56475f8be807a20a08b54ca70f5bf140c2d8fbee4a556934178b7dc276c74a7fd0ba4258b76c2180731964a06473bf5615ce0bff0910bb76aa3d
+  checksum: 10c0/55906a7f1eb01001ddb8eff7848c72ad3cf75e893d2b48926e5ff48c2a3e2ef91a0c31ecb1d9889198d2036921feb300f98c12ea162d28c8f8d25e606b6022cf
   languageName: node
   linkType: hard
 

@@ -5,16 +5,20 @@ const regexFetch = async ({
   reExtracted,
   favList = [],
 }: NoxNetwork.RegexFetchProps): Promise<NoxNetwork.NoxRegexFetch> => {
-  const results = await fetchYtmPlaylist(
-    // fetchYTPlaylist(
-    reExtracted[1],
-    // progressEmitter,
-    favList
-  );
-  if (results.length === 0) {
+  try {
+    const results = await fetchYtmPlaylist(
+      // fetchYTPlaylist(
+      reExtracted[1],
+      // progressEmitter,
+      favList
+    );
+    if (results.length === 0) {
+      throw new Error(`ytm failed to resolve ${reExtracted[1]}`);
+    }
+    return { songList: results };
+  } catch (e) {
     return { songList: await fetchYtbiPlaylist(reExtracted[1], favList) };
   }
-  return { songList: results };
 };
 
 export default {
