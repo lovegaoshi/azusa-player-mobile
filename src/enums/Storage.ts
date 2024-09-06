@@ -29,5 +29,6 @@ export enum StorageKeys {
 export enum SearchOptions {
   BILIBILI = 'bilibili',
   YOUTUBE = 'youtube',
+  YOUTUBEM = 'yt music',
   ALIST = 'alist',
 }
