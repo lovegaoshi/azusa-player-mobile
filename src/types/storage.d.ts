@@ -43,6 +43,7 @@ declare global {
       accentColor: boolean;
       memoryEfficiency: boolean;
       useSuggestion: boolean;
+      noRepeat: boolean;
 
       appID: string;
       language?: string;

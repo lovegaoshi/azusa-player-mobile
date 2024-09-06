@@ -122,6 +122,8 @@
     "chatGPTResolveSongNameDesc": "TODO: Use chatGPT to resolve song names",
     "useSuggestionName": "BiliSuggestion",
     "useSuggestionDesc": "Show suggestions when searching in the search bar",
+    "noRepeatName": "Disable queue",
+    "noRepeatDesc": "disable queue (auto next)",
     "memoryEfficiencyName": "Memory Efficiency",
     "memoryEfficiencyDesc": "async load songlists from playlists; NEED RESTART! will cause data loss",
     "keepForegroundName": "Keep Foreground Service",

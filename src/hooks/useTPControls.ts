@@ -10,6 +10,7 @@ import { NoxRepeatMode } from '@enums/RepeatMode';
 import { songlistToTracklist } from '@utils/RNTPUtils';
 import appStore from '@stores/appStore';
 import ytbvideoFetch from '@utils/mediafetch/ytbvideo';
+import logger from '@utils/Logger';
 
 const setAppStore = appStore.setState;
 const regexResolveURLs: NoxUtils.RegexMatchSuggest<NoxMedia.Song> = [
@@ -120,7 +121,13 @@ export default () => {
     }
   };
 
-  const performSkipToNext = () => {
+  const performSkipToNext = (auto = false) => {
+    if (auto && playerSetting.noRepeat) {
+      logger.debug(
+        '[autoRepeat] stopping playback as autoRepeat is set to off'
+      );
+      return;
+    }
     const preparePromise = prepareSkipToNext();
     const callback = () =>
       preparePromise.then(async () => {

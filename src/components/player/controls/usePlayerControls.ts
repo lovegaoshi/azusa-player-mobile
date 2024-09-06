@@ -37,7 +37,7 @@ export default () => {
   });
 
   useTrackPlayerEvents([Event.PlaybackQueueEnded], () => {
-    performSkipToNext();
+    performSkipToNext(true);
   });
 
   useTrackPlayerEvents([Event.RemoteNext], () => {
