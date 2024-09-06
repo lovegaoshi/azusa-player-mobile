@@ -5,28 +5,7 @@ import { fetchAudioInfo } from '@utils/mediafetch/ytbvideo';
 import SongTS from '@objects/Song';
 import { logger } from '../Logger';
 import { Source } from '@enums/MediaFetch';
-
-const musePlaylistItemToNoxSong = (val: any, data: any) => {
-  try {
-    return SongTS({
-      cid: `${Source.ytbvideo}-${val.videoId}`,
-      bvid: val.videoId,
-      name: val.title,
-      nameRaw: val.title,
-      singer: val.artists[0].name,
-      singerId: val.artists[0].id,
-      cover: val.thumbnails[val.thumbnails.length - 1].url,
-      lyric: '',
-      page: 1,
-      duration: val.duration_seconds,
-      album: data.title,
-      source: Source.ytbvideo,
-      metadataOnLoad: true,
-    });
-  } catch {
-    console.error(`[musePlaylistParse] fail: ${JSON.stringify(val)}`);
-  }
-};
+import { musePlaylistItemToNoxSong } from './ytbSearch.muse';
 
 export const fetchYtmPlaylist = async (
   playlistId: string,

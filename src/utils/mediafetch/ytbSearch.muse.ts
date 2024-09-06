@@ -5,7 +5,7 @@ import SongTS from '@objects/Song';
 import { Source } from '@enums/MediaFetch';
 import { logger } from '@utils/Logger';
 
-const musePlaylistItemToNoxSong = (val: any, data: any) => {
+export const musePlaylistItemToNoxSong = (val: any, data: any) => {
   try {
     return SongTS({
       cid: `${Source.ytbvideo}-${val.videoId}`,
