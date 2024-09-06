@@ -7,5 +7,5 @@ test('ytbplaylist', async () => {
     )!,
   });
   console.log(content?.songList.length);
-  expect(content?.songList[0]?.id).not.toBeNull();
+  expect(content?.songList[0]?.id).not.toBeUndefined();
 }, 30000);

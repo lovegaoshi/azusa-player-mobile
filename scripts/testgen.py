@@ -8,7 +8,7 @@ test('biliChannel', async () => {
     ),
   });
   // console.log(content);
-  expect(content?.songList[0]?.id).not.toBeNull();
+  expect(content?.songList[0]?.id).not.toBeUndefined();
 });
 '''
 import os
@@ -26,6 +26,6 @@ for mediafetch in glob.glob('./src/utils/mediafetch/*.ts'):
         f.write('    ),\n')
         f.write('  });\n')
         f.write('  // console.log(content);\n')
-        f.write('  expect(content?.songList[0]?.id).not.toBeNull();\n')
+        f.write('  expect(content?.songList[0]?.id).not.toBeUndefined();\n')
         f.write('});\n')
     

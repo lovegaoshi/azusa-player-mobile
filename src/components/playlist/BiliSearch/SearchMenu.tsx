@@ -57,6 +57,11 @@ export default ({
         title={'Bilibili'}
       />
       <Menu.Item
+        leadingIcon={Icons.YOUTUBEM}
+        onPress={() => setDefaultSearch(SearchOptions.YOUTUBEM)}
+        title={'YT Music'}
+      />
+      <Menu.Item
         leadingIcon={Icons.YOUTUBE}
         onPress={() => setDefaultSearch(SearchOptions.YOUTUBE)}
         title={'Youtube'}

@@ -21,7 +21,9 @@ import biliAudioFetch from './mediafetch/biliaudio';
 import biliChannelAudioFetch from './mediafetch/bilichannelAudio';
 import ytbPlaylistFetch from './mediafetch/ytbPlaylist';
 import ytbMixlistFetch from './mediafetch/ytbmixlist';
-import ytbSearchFetch from './mediafetch/ytbsearch';
+import ytbChannelFetch from './mediafetch/ytbChannel';
+import { fetchInnerTuneSearch } from './mediafetch/ytbSearch.muse';
+import { fetchYtbiSearch } from './mediafetch/ytbSearch.ytbi';
 import biliLiveFetch from './mediafetch/bililive';
 import biliSubliveFetch from './mediafetch/bilisublive';
 import b23tvFetch from './mediafetch/b23tv';
@@ -112,12 +114,10 @@ export const searchBiliURLs = async ({
           });
           break;
         case SearchOptions.YOUTUBE:
-          results = await ytbSearchFetch.regexFetch({
-            url: input,
-            progressEmitter,
-            fastSearch,
-            cookiedSearch,
-          });
+          results = { songList: await fetchYtbiSearch(input) };
+          break;
+        case SearchOptions.YOUTUBEM:
+          results = { songList: await fetchInnerTuneSearch(input) };
           break;
         case MUSICFREE.aggregated:
           results.songList = await searcher[MUSICFREE.aggregated](
@@ -155,6 +155,10 @@ const reExtractionsShortURL: ReExtraction<string>[] = [
 ];
 
 const reExtractions: ReExtraction<NoxNetwork.NoxRegexFetch>[] = [
+  {
+    match: ytbChannelFetch.regexSearchMatch,
+    fetch: ytbChannelFetch.regexFetch,
+  },
   {
     match: biliFavColleFetch.regexSearchMatch,
     fetch: biliFavColleFetch.regexFetch,
