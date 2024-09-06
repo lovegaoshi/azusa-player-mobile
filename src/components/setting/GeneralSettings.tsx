@@ -53,6 +53,10 @@ const GEN_SETTING_BOOLEAN: SettingEntry[] = [
     settingName: 'useSuggestion',
     settingCategory: 'GeneralSettings',
   },
+  {
+    settingName: 'noRepeat',
+    settingCategory: 'GeneralSettings',
+  },
 ];
 
 export default () => {

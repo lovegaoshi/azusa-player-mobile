@@ -42,6 +42,7 @@ export const DefaultSetting: NoxStorage.PlayerSettingDict = {
   memoryEfficiency: false,
   useSuggestion: false,
   enableBili: false,
+  noRepeat: false,
 
   appID: AppID,
   language: undefined,

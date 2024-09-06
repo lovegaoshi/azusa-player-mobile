@@ -16,7 +16,7 @@ const regexFetch = async ({
       throw new Error(`ytm failed to resolve ${reExtracted[1]}`);
     }
     return { songList: results };
-  } catch (e) {
+  } catch {
     return { songList: await fetchYtbiPlaylist(reExtracted[1], favList) };
   }
 };

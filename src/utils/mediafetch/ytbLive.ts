@@ -5,7 +5,7 @@ const regexFetch = async ({
   reExtracted,
 }: NoxNetwork.RegexFetchProps): Promise<NoxNetwork.NoxRegexFetch> => {
   const audioInfo = await ytbVideoFetch.regexFetch({ reExtracted });
-  if (audioInfo.songList.length == 0) {
+  if (audioInfo.songList.length === 0) {
     logger.warn(
       `[ytblive] fetch failed on ${reExtracted[0]} assuming its a video`
       // TODO: resolve streaming url here

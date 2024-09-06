@@ -46,10 +46,14 @@ export const setPlayingIndex = (index = 0, songId?: string) => {
   });
 };
 
+interface PlayNextIndex {
+  direction: number;
+  set: boolean;
+}
 /**
  * WARN: actually moves currentPlayingIndex
  */
-export const playNextIndex = (direction = 1, set = true) => {
+const playNextIndex = ({ direction = 1, set = true }: PlayNextIndex) => {
   const { currentPlayingIndex, playingList } = playlistStore.getState();
   let newIndex = currentPlayingIndex + direction;
   if (newIndex < 0) {
@@ -65,7 +69,7 @@ export const playNextSong = (
   direction = 1,
   set = true
 ): NoxMedia.Song | undefined =>
-  getCurrentTPQueue()[playNextIndex(direction, set)];
+  getCurrentTPQueue()[playNextIndex({ direction, set })];
 
 export const setPlayingList = (list: NoxMedia.Song[]) => {
   playlistStore.setState({
