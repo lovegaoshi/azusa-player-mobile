@@ -6,5 +6,5 @@ test('bilifavlist', async () => {
     )!,
   });
   // console.log(content);
-  expect(content?.songList[0]?.id).not.toBeNull();
+  expect(content?.songList[0]?.id).not.toBeUndefined();
 });

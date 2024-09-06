@@ -13,10 +13,10 @@ test('bilivideo', async () => {
     )!,
   });
   // console.log(content);
-  expect(content?.songList[0]?.id).not.toBeNull();
+  expect(content?.songList[0]?.id).not.toBeUndefined();
 
   const playurl = await fetchVideoPlayUrlPromise({ bvid: 'BV1aS411A7ir' });
   // console.log(playurl);
 
-  expect(playurl.url).not.toBeNull();
+  expect(playurl.url).not.toBeUndefined();
 });
