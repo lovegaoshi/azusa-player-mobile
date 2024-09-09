@@ -67,13 +67,13 @@
     "fflate": "^0.8.2",
     "ffmpeg-kit-react-native": "^6.0.2",
     "he": "^1.2.0",
-    "i18next": "^23.14.0",
+    "i18next": "^23.15.0",
     "js-base64": "^3.7.7",
     "libmuse": "https://github.com/lovegaoshi/muse.git#commit=9771b28a8da32df84ca09b5b0226dff530c4c7bc",
     "lottie-react-native": "6.7.2",
     "lru-cache": "7.14.0",
     "md5": "^2.3.0",
-    "metro": "^0.80.11",
+    "metro": "^0.80.12",
     "patch-package": "^8.0.0",
     "postinstall-postinstall": "^2.1.0",
     "qs": "^6.13.0",
@@ -107,7 +107,7 @@
     "react-native-url-polyfill": "^2.0.0",
     "react-native-vector-icons": "^10.1.0",
     "react-native-video": "^6.5.0",
-    "react-native-webview": "13.12.1",
+    "react-native-webview": "13.12.2",
     "sp-react-native-in-app-updates": "^1.4.0",
     "text-encoding-polyfill": "^0.6.7",
     "use-debounce": "^10.0.3",
@@ -169,7 +169,7 @@
     "react-test-renderer": "18.3.1",
     "reactotron-react-native": "^5.1.8",
     "rimraf": "^6.0.1",
-    "typescript": "~5.5.4"
+    "typescript": "~5.6.2"
   },
   "engines": {
     "node": ">=18.0.0"
