@@ -3,4 +3,5 @@ export enum LrcSource {
   QQQrc = 'qqqrc',
   Kugou = 'kugou',
   BiliBili = 'bilibili',
+  LrcLib = 'lrclib',
 }
