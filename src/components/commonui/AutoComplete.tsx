@@ -1,7 +1,8 @@
 import { View, GestureResponderEvent, StyleSheet } from 'react-native';
 import { Menu, Searchbar } from 'react-native-paper';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { useDebounce } from 'use-debounce';
+import { v4 as uuidv4 } from 'uuid';
 
 import { useNoxSetting } from '@stores/useApp';
 
@@ -26,6 +27,7 @@ export default ({
   resolveData,
   pressed,
 }: Props) => {
+  const autoCompleteId = useRef('');
   const [debouncedValue] = useDebounce(value, 250);
   const [showAutoComplete, setShowAutoComplete] = useState(false);
   const [data, setData] = useState<string[]>([]);
@@ -49,7 +51,14 @@ export default ({
       pressed.current = false;
       return;
     }
-    resolveData?.(debouncedValue).then(setData);
+    const newId = uuidv4();
+    autoCompleteId.current = newId;
+    resolveData?.(debouncedValue).then(data => {
+      if (autoCompleteId.current !== newId) {
+        return;
+      }
+      setData(data);
+    });
     setShowAutoComplete(true);
   }, [debouncedValue]);
 
