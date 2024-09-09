@@ -8,7 +8,7 @@ import { Source } from '@enums/MediaFetch';
 
 const API = 'https://api.bilibili.com/x/player/wbi/v2?bvid={bvid}&cid={cid}';
 
-const getBiliLyricOptions = async (
+const getLrcOptions = async (
   song?: NoxMedia.Song
 ): Promise<NoxLyric.NoxFetchedLyric[]> => {
   if (song?.source !== Source.bilivideo || song.id.startsWith('null-'))
@@ -26,7 +26,7 @@ const getBiliLyricOptions = async (
   }));
 };
 
-const getBiliLyric = async (songMid: string) => {
+const getLyric = async (songMid: string) => {
   logger.debug(`[Lrc] calling getBiliLyric: ${songMid}`);
   const res = await bfetch(`https:${songMid}`);
   const json = await res.json();
@@ -34,9 +34,10 @@ const getBiliLyric = async (songMid: string) => {
 };
 
 export default {
-  getLrcOptions: getBiliLyricOptions,
-  getLyric: getBiliLyric,
+  getLrcOptions,
+  getLyric,
 };
+
 interface BiliSubEntry {
   from: number;
   to: number;
