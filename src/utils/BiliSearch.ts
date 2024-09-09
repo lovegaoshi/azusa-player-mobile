@@ -1,6 +1,5 @@
 import biliSearchFetch from '@utils/mediafetch/bilisearch';
 import ytbVideoFetch from '@utils/mediafetch/ytbvideo';
-import ytbLiveFetch from '@utils/mediafetch/ytbLive';
 import localFetch from '@utils/mediafetch/local';
 import { MUSICFREE, searcher } from '@utils/mediafetch/musicfree';
 import { getMusicFreePlugin } from '@utils/ChromeStorage';
@@ -21,6 +20,7 @@ import biliAudioFetch from './mediafetch/biliaudio';
 import biliChannelAudioFetch from './mediafetch/bilichannelAudio';
 import ytbPlaylistFetch from './mediafetch/ytbPlaylist';
 import ytbMixlistFetch from './mediafetch/ytbmixlist';
+import ytbLiveFetch from './mediafetch/ytbLive';
 import ytbChannelFetch from './mediafetch/ytbChannel';
 import { fetchInnerTuneSearch } from './mediafetch/ytbSearch.muse';
 import { fetchYtbiSearch } from './mediafetch/ytbSearch.ytbi';
