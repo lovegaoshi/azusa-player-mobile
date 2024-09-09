@@ -2,10 +2,12 @@ package com.noxplay.noxplayer
 
 import android.annotation.SuppressLint
 import android.app.PictureInPictureParams
+import android.content.ComponentCallbacks2
 import android.content.Intent
 import android.content.res.Configuration
 import android.os.Build
 import android.os.Bundle
+import android.os.Debug
 import android.util.Rational
 import com.facebook.react.ReactActivity
 import com.facebook.react.ReactActivityDelegate
@@ -16,7 +18,7 @@ import com.facebook.react.bridge.Arguments
 import expo.modules.ReactActivityDelegateWrapper
 import timber.log.Timber
 
-class MainActivity : ReactActivity() {
+class MainActivity : ReactActivity(), ComponentCallbacks2 {
     /**
      * for react navigation;
      */
@@ -127,4 +129,24 @@ class MainActivity : ReactActivity() {
         }
         super.onPictureInPictureModeChanged(isInPictureInPictureMode, newConfig)
     }
+
+  private fun logAPMRAM() {
+    val nativeHeapSize = Debug.getNativeHeapSize()
+    val nativeHeapFreeSize = Debug.getNativeHeapFreeSize()
+    val usedMemInBytes = nativeHeapSize - nativeHeapFreeSize
+    val usedMemInPercentage = usedMemInBytes * 100 / nativeHeapSize
+    Timber.tag("APMRAM").d("APM RAM usage: $usedMemInBytes/1000/1000 ($usedMemInPercentage)")
+  }
+
+  override fun onTrimMemory(level: Int) {
+    Timber.tag("APMRAMTrim").d("trim memory level $level emitted.")
+    logAPMRAM()
+    super.onTrimMemory(level)
+  }
+
+  override fun onLowMemory() {
+    Timber.tag("APMRAMLow").d("low system memory emitted.")
+    logAPMRAM()
+    super.onLowMemory()
+  }
 }
