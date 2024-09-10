@@ -1471,9 +1471,9 @@
     "isAdaptive": true,
     "darkTheme": {
       "metaData": {
-        "themeName": "莱妮娅_Rynia收藏集",
-        "themeDesc": "【莱妮娅_Rynia收藏集】是哔哩哔哩携手莱妮娅_Rynia收藏集定制打造的个人数字集卡，其中的每张数字卡片都将拥有独特编号，隐藏卡更有精美动态和专属语音，期待大家一起来解锁莱妮娅_Rynia的绝美画面！",
-        "themeAuthor": "NoxAutoGen",
+        "themeName": "天马播放器",
+        "themeDesc": "你是压轴哦 好好看22605289哦",
+        "themeAuthor": "天马的冰淇淋小推车",
         "themeIcon": "https://i0.hdslb.com/bfs/garb/200868f0e68925ebc09d1ddd8e82c26019957c1b.jpg",
         "darkTheme": true
       },
@@ -2157,6 +2157,26 @@
       "darkTheme": true
     },
     "gifs": [
+      "https://i0.hdslb.com/bfs/garb/48e66993f39885cb5eac95948fc6294be0baec60.png",
+      "https://i0.hdslb.com/bfs/garb/623e97a7bfd34e684c0d8c7b7b1b1dfb3d90e238.png",
+      "https://i0.hdslb.com/bfs/garb/ea12ba962dec8736ffed9e08780ec7e1ca417333.png",
+      "https://i0.hdslb.com/bfs/garb/b13f09a889bd5cd4e2223424caca6b24fb2977e0.png",
+      "https://i0.hdslb.com/bfs/garb/72855387e6e9fccc80d0d8b7ea19c238b4059b7a.png",
+      "https://i0.hdslb.com/bfs/garb/bea07642d16ad2bcd28d70bf87860e1e1a406b7e.png",
+      "https://i0.hdslb.com/bfs/garb/fbce9c15d01aedd7b6d2867ca448c64d620454b3.png",
+      "https://i0.hdslb.com/bfs/garb/235121a2bc0429cc27a658e14e5ae5af2cf54bfa.png",
+      "https://i0.hdslb.com/bfs/garb/406d535182a5ff0c490bd2192fc0372a5dd465d9.png",
+      "https://i0.hdslb.com/bfs/garb/c6eb24614907665bffb2f97eb625679bc891c0fb.png",
+      "https://i0.hdslb.com/bfs/garb/d254ce16b9e473b3890632bfff0af1723d605e88.png",
+      "https://i0.hdslb.com/bfs/garb/85ddad4ff2e5c25b0f2394d241215967f07831ce.png",
+      "https://i0.hdslb.com/bfs/garb/ce1a771f439833ecffa0b3e688817a0eb5294ccf.png",
+      "https://i0.hdslb.com/bfs/garb/e765851407f3e30469a3e4e83cb1598ea33d0c81.png",
+      "https://i0.hdslb.com/bfs/garb/a81ff49d0f407d6b4f0743589d888838af770c7b.png",
+      "https://i0.hdslb.com/bfs/garb/b1c01408dfd3186d378b2daaba810235959140e4.png",
+      "https://i0.hdslb.com/bfs/garb/7b9490c5ffeb21e3d92375a6f417e5436d698934.png",
+      "https://i0.hdslb.com/bfs/garb/9e8f3d6f37eac99c8cb98f62f5058fc6061c7b65.png",
+      "https://i0.hdslb.com/bfs/garb/2676e08d007910353eedaca824a3aa844aae2ec1.png",
+      "https://i0.hdslb.com/bfs/garb/0d859857a30045cc94d60e4a772b78b50b251e0b.png",
       "https://i0.hdslb.com/bfs/garb/c5ad7077cf80760f048208d8bd5ce61dafd2f255.png",
       "https://i0.hdslb.com/bfs/garb/fe94ad7c2587d4f522c0828318adaf251f7c2c5c.png",
       "https://i0.hdslb.com/bfs/garb/aee34967fff5c4ff25ee460dbd53400c6ff7ffbf.png",
@@ -2219,6 +2239,23 @@
       "https://album.biliimg.com/bfs/new_dyn/3fafaa7692851cfd869771bde3c0add7402110060.jpg"
     ],
     "backgroundImages": [
+      {
+        "type": "biliNFTVideoNew",
+        "identifier": "[\"103689\",\"103692\",\"荷塘萦梦\"]"
+      },
+      {
+        "type": "biliNFTVideoNew",
+        "identifier": "[\"103689\",\"103692\",\"海岸绮色\"]"
+      },
+      {
+        "type": "biliNFTVideoNew",
+        "identifier": "[\"103689\",\"103692\",\"庭院小憩\"]"
+      },
+      "https://i0.hdslb.com/bfs/garb/open/42916ed1e1b9752949f442dff2b9242cac842162.jpg",
+      "https://i0.hdslb.com/bfs/garb/open/d64d983d055c001fec5d5c3762e1b743c9380719.jpg",
+      "https://i0.hdslb.com/bfs/garb/open/fbedb10d266fa67bcd0b482420a420b0fd84de6a.jpg",
+      "https://i0.hdslb.com/bfs/garb/open/7180d8dc0974079cc0b931e3e0a137a4675d89cc.jpg",
+      "https://i0.hdslb.com/bfs/garb/open/0b8bab57173e64ebd5a03a60b35d327eaa0aee44.jpg",
       {
         "type": "bvid",
         "identifier": "BV1nY411r7um"
