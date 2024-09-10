@@ -56,7 +56,7 @@ const searchPost = (kw: string): any => {
   };
 };
 
-const getQrcLyricOptions = async (
+const getLrcOptions = async (
   kw: string
 ): Promise<NoxLyric.NoxFetchedLyric[]> => {
   logger.debug(`[qrc] calling getQrcLyricOptions: ${kw}`);
@@ -86,7 +86,7 @@ const getQrcLyricOptions = async (
   }));
 };
 
-const getQrcLyric = async (songMid: string) => {
+const getLyric = async (songMid: string) => {
   logger.debug(`[qrc] calling getQrcLyric: ${songMid}`);
   const qrcPostParam = searchPost('');
   const parsedBody = JSON.parse(qrcPostParam.body);
@@ -107,6 +107,6 @@ const getQrcLyric = async (songMid: string) => {
 };
 
 export default {
-  getLrcOptions: getQrcLyricOptions,
-  getLyric: getQrcLyric,
+  getLrcOptions,
+  getLyric,
 };

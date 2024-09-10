@@ -41,7 +41,7 @@ const URL_QQ_SEARCH_POST = () => ({
   },
 });
 
-export const searchLyricOptions = async (
+const getLrcOptions = async (
   searchKey: string
 ): Promise<NoxLyric.NoxFetchedLyric[]> => {
   if (!searchKey) {
@@ -71,7 +71,7 @@ const getQQSearchAPI = (searchKey: string) => {
   return API;
 };
 
-export const searchLyric = async (searchMID: string) => {
+const getLyric = async (searchMID: string) => {
   logger.debug(`[qqlyric] calling searchLyric: ${searchMID}`);
   const res = await bfetch(URL_QQ_LYRIC.replace('{SongMid}', searchMID));
   const json = await res.json();
@@ -91,6 +91,6 @@ export const searchLyric = async (searchMID: string) => {
 };
 
 export default {
-  getLrcOptions: searchLyricOptions,
-  getLyric: searchLyric,
+  getLrcOptions,
+  getLyric,
 };

@@ -27,7 +27,7 @@ const kugouDecrypt = (content: string) => {
   return strFromU8(decompressSync(decryptedContent));
 };
 
-const getKugouLyricOptions = async (
+const getLrcOptions = async (
   kw: string
 ): Promise<NoxLyric.NoxFetchedLyric[]> => {
   logger.debug(`[kugou] calling getKugouLyricOptions: ${kw}`);
@@ -42,7 +42,7 @@ const getKugouLyricOptions = async (
   }));
 };
 
-const getKugouLyric = async (songMid: string) => {
+const getLyric = async (songMid: string) => {
   logger.debug(`[kugou] calling getKugouLyric: ${songMid}`);
   const res = await bfetch(AccessKeyAPI.replace('{hash}', songMid));
   const json = await res.json();
@@ -55,6 +55,6 @@ const getKugouLyric = async (songMid: string) => {
 };
 
 export default {
-  getLrcOptions: getKugouLyricOptions,
-  getLyric: getKugouLyric,
+  getLrcOptions,
+  getLyric,
 };

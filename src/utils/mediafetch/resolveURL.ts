@@ -9,7 +9,9 @@ import { resolver, MUSICFREE } from '@utils/mediafetch/musicfree';
 import headRequestFetch from './headRequest';
 import { logger } from '../Logger';
 import { regexMatchOperations } from '../Utils';
-import bilivideoFetch, { fetchVideoPlayUrlPromise } from './bilivideo';
+import bilivideoFetch, {
+  fetchVideoPlayUrlPromise as fetchBiliUrlPromise,
+} from './bilivideo';
 import { NULL_TRACK } from '@objects/Song';
 
 const MUSICFREESources: NoxMedia.SongSource[] = Object.values(MUSICFREE);
@@ -53,8 +55,7 @@ export const fetchPlayUrlPromise = async ({
   ]);
   logger.debug(`[resolveURL] ${bvid}, ${cid} }`);
 
-  const fallback = () =>
-    fetchVideoPlayUrlPromise({ bvid, cid: String(cid), iOS });
+  const fallback = () => fetchBiliUrlPromise({ bvid, cid: String(cid), iOS });
 
   if (song.source && MUSICFREESources.includes(song.source)) {
     const vsource = song.source as MUSICFREE;

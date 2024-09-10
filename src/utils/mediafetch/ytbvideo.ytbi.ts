@@ -12,11 +12,13 @@ export const resolveURL = async (song: NoxMedia.Song, iOS = false) => {
     quality: 'best',
     type: 'audio',
   });
+  const thumbnails = extractedVideoInfo.basic_info.thumbnail;
   return {
     url:
       iOS && isIOS && extractedVideoInfo.streaming_data?.hls_manifest_url
         ? extractedVideoInfo.streaming_data?.hls_manifest_url
         : maxAudioQualityStream.decipher(yt.actions.session.player),
+    cover: thumbnails ? thumbnails[thumbnails.length - 1]!.url : '',
     loudness: maxAudioQualityStream.loudness_db,
   };
 };
