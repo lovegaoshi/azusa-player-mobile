@@ -39,21 +39,14 @@ global.CustomEvent = CustomEvent as any;
 
 // === END === Making Youtube.js work
 
-let ytClient: Promise<Innertube>;
+const ytClient: Promise<Innertube> = Innertube.create({
+  retrieve_player: false,
+  enable_session_cache: false,
+  generate_session_locally: false,
+  client_type: ClientType.IOS,
+});
 
-export const resetYtClient = (retrievePlayer = false) => {
-  ytClient = Innertube.create({
-    retrieve_player: retrievePlayer,
-    enable_session_cache: false,
-    generate_session_locally: false,
-    client_type: ClientType.IOS,
-  });
-  return ytClient;
-};
-
-resetYtClient();
-
-export default () => ytClient;
+export default ytClient;
 
 export const ytClientWeb: Promise<Innertube> = Innertube.create({
   retrieve_player: false,
