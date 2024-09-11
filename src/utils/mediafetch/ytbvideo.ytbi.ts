@@ -1,7 +1,7 @@
 import SongTS from '@objects/Song';
 import { Source } from '@enums/MediaFetch';
 import { logger } from '@utils/Logger';
-import ytClient from '@utils/mediafetch/ytbi';
+import ytClient, { ytClientWeb } from '@utils/mediafetch/ytbi';
 import { isIOS } from '@utils/RNUtils';
 import { Thumbnail } from 'youtubei.js/dist/src/parser/misc';
 
@@ -30,8 +30,8 @@ export const resolveURL = async (song: NoxMedia.Song, iOS = false) => {
 };
 
 export const fetchAudioInfo = async (sid: string) => {
-  const yt = await ytClient;
-  const videoInfo = (await yt.getBasicInfo(sid, 'IOS')).basic_info;
+  const yt = await ytClientWeb;
+  const videoInfo = (await yt.getBasicInfo(sid)).basic_info;
   return [
     SongTS({
       cid: `${Source.ytbvideo}-${sid}`,
