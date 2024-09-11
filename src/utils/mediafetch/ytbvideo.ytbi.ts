@@ -3,6 +3,12 @@ import { Source } from '@enums/MediaFetch';
 import { logger } from '@utils/Logger';
 import ytClient from '@utils/mediafetch/ytbi';
 import { isIOS } from '@utils/RNUtils';
+import { Thumbnail } from 'youtubei.js/dist/src/parser/misc';
+
+const getHiResThumbnail = (thumbnails?: Thumbnail[]) => {
+  if (!thumbnails) return '';
+  return thumbnails.sort((a, b) => b.width - a.width)[0]!.url;
+};
 
 export const resolveURL = async (song: NoxMedia.Song, iOS = false) => {
   logger.debug(`[ytbi.js] fetch YTB playURL promise:${song.bvid}`);
@@ -18,7 +24,7 @@ export const resolveURL = async (song: NoxMedia.Song, iOS = false) => {
       iOS && isIOS && extractedVideoInfo.streaming_data?.hls_manifest_url
         ? extractedVideoInfo.streaming_data?.hls_manifest_url
         : maxAudioQualityStream.decipher(yt.actions.session.player),
-    cover: thumbnails ? thumbnails[thumbnails.length - 1]!.url : '',
+    cover: getHiResThumbnail(thumbnails),
     loudness: maxAudioQualityStream.loudness_db,
   };
 };
