@@ -40,9 +40,7 @@ export const fetchAudioInfo = async (sid: string) => {
       nameRaw: videoInfo.title!,
       singer: videoInfo.author!,
       singerId: videoInfo.channel_id!,
-      cover: videoInfo.thumbnail
-        ? videoInfo.thumbnail[videoInfo.thumbnail.length - 1]!.url
-        : '',
+      cover: getHiResThumbnail(videoInfo.thumbnail),
       lyric: '',
       page: 1,
       duration: videoInfo.duration,
