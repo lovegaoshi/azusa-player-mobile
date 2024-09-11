@@ -17,7 +17,6 @@ export const ytbiVideoToNoxSong = (val: Video) => {
     lyric: '',
     page: 1,
     duration: val.duration.seconds,
-    album: 'ytbSearch',
     source: Source.ytbvideo,
     metadataOnLoad: true,
   });

@@ -1,6 +1,6 @@
 import steriatkFetch from './steriatk';
 import biliaudioFetch from './biliaudio';
-import ytbvideoFetch from '@utils/mediafetch/ytbvideo';
+import ytbvideoFetch, { fetchAudioInfo } from '@utils/mediafetch/ytbvideo';
 import bililiveFetch from './bililive';
 import biliBangumiFetch from './biliBangumi';
 import localFetch from '@utils/mediafetch/local';
@@ -16,11 +16,11 @@ import { NULL_TRACK } from '@objects/Song';
 
 const MUSICFREESources: NoxMedia.SongSource[] = Object.values(MUSICFREE);
 
-type regResolve = NoxUtils.RegexMatchResolve<
+type RegResolve = NoxUtils.RegexMatchResolve<
   Promise<NoxNetwork.ParsedNoxMediaURL>
 >;
 
-const regexResolveURLs: regResolve = [
+const regexResolveURLs: RegResolve = [
   [steriatkFetch.regexResolveURLMatch, steriatkFetch.resolveURL],
   [biliaudioFetch.regexResolveURLMatch, biliaudioFetch.resolveURL],
   [ytbvideoFetch.regexResolveURLMatch, ytbvideoFetch.resolveURL],
@@ -30,6 +30,19 @@ const regexResolveURLs: regResolve = [
   [headRequestFetch.regexResolveURLMatch, headRequestFetch.resolveURL],
   [localFetch.regexResolveURLMatch, localFetch.resolveURLPrefetch],
   [alistFetch.regexResolveURLMatch, alistFetch.resolveURL],
+];
+
+const regexRefreshMetadata: NoxUtils.RegexMatchResolve<
+  Promise<Partial<NoxMedia.Song>>
+> = [
+  [
+    ytbvideoFetch.regexResolveURLMatch,
+    async s => (await fetchAudioInfo(s.bvid))[0],
+  ],
+  [
+    ytbvideoFetch.regexResolveURLMatch2,
+    async s => (await fetchAudioInfo(s.bvid))[0],
+  ],
 ];
 
 interface FetchPlayUrl {
@@ -49,7 +62,7 @@ export const fetchPlayUrlPromise = async ({
   const bvid = song.bvid;
   const cid = song.id;
   const resolveUrlArray = regexResolveURLs;
-  const regexResolveURLsWrapped: regResolve = resolveUrlArray.map(entry => [
+  const regexResolveURLsWrapped: RegResolve = resolveUrlArray.map(entry => [
     entry[0],
     (song: NoxMedia.Song) => entry[1](song, iOS),
   ]);
@@ -79,9 +92,18 @@ export const fetchPlayUrlPromise = async ({
 export const refreshMetadata = async (
   song: NoxMedia.Song
 ): Promise<Partial<NoxMedia.Song>> => {
-  const metadata = await fetchPlayUrlPromise({ song });
+  logger.debug(`[refreshMetadata] ${song.id}`);
+  const metadata = await regexMatchOperations({
+    song,
+    regexOperations: regexRefreshMetadata,
+    regexMatching: song => song.id,
+    fallback: async (): Promise<Partial<NoxMedia.Song>> => {
+      logger.warn(`[refreshMetadata] ${song.id} did not match regex`);
+      return {};
+    },
+  });
   return {
-    ...(metadata.cover && { cover: metadata.cover }),
+    ...metadata,
     metadataOnLoad: false,
   };
 };

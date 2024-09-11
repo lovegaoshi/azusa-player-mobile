@@ -12,7 +12,6 @@ import useInitializeStore from '@stores/initializeStores';
 import { IntentData } from '@enums/Intent';
 import { useNoxSetting } from '@stores/useApp';
 import usePlayStore from './usePlayStore';
-import { awaitYtbiSetup } from '../utils/mediafetch/ytbi';
 
 const { NoxAndroidAutoModule } = NativeModules;
 
@@ -25,7 +24,6 @@ export default ({ intentData }: NoxComponent.AppProps) => {
   const { checkPlayStoreUpdates } = usePlayStore();
 
   useEffect(() => {
-    awaitYtbiSetup();
     let unmounted = false;
     (async () => {
       const {
