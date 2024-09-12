@@ -17,12 +17,13 @@ const getLrcOptions = async (
     key: info.id,
     songMid: info.id,
     source: LrcSource.LrcLib,
-    label: `[${LrcSource.LrcLib}] ${info.name}`,
+    label: `[${LrcSource.LrcLib}] ${info.name} - ${info.artistName}`,
     lrc: info.syncedLyrics ?? info.plainLyrics,
   }));
 };
 
 const getLyric = async (songMid: string) => {
+  logger.debug(`[lrclib] calling getLrc: ${songMid}`);
   const res = await bfetch(getLrcAPI.replace('${kw}', songMid));
   const json = await res.json();
   return json.syncedLyrics;
