@@ -5,6 +5,7 @@ import kugouLrcFetch from './lrcfetch/kugou';
 import qqLrcFetch from './lrcfetch/qq';
 import qqQrcFetch from './lrcfetch/qqqrc';
 import BiliLrcFetch from './lrcfetch/bili';
+import LrcLibFetch from './lrcfetch/lrclib';
 import { LrcSource } from '@enums/LyricFetch';
 
 interface SearchLyricOptions {
@@ -26,6 +27,8 @@ export const searchLyricOptions = async ({
         return await qqQrcFetch.getLrcOptions(searchKey);
       case LrcSource.BiliBili:
         return await BiliLrcFetch.getLrcOptions(song);
+      case LrcSource.LrcLib:
+        return await LrcLibFetch.getLrcOptions(searchKey);
       case LrcSource.QQ:
       default:
         return await qqLrcFetch.getLrcOptions(searchKey);

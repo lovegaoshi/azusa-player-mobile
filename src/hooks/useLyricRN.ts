@@ -84,7 +84,13 @@ export default (currentSong?: NoxMedia.Song, artist = '') => {
   const fetchAndSetLyricOptions = (adhocTitle = currentSong?.name) =>
     usedLyric.fetchAndSetLyricOptions(
       adhocTitle,
-      [LrcSource.QQQrc, LrcSource.QQ, LrcSource.BiliBili, LrcSource.Kugou],
+      [
+        LrcSource.QQQrc,
+        LrcSource.QQ,
+        LrcSource.BiliBili,
+        LrcSource.Kugou,
+        LrcSource.LrcLib,
+      ],
       artist,
       options => {
         options[0].length !== 1 && options.push(options.shift()!);

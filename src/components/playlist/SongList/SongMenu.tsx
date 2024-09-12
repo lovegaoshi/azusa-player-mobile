@@ -149,7 +149,7 @@ export default ({ usePlaylist, prepareForLayoutAnimationRender }: Props) => {
           title={t('SongOperations.BVIDSearchTitle')}
         />
       )}
-      {isAndroid10 && (
+      {isAndroid10 && selectedSongs()[0]?.source !== Source.local && (
         <Menu.Item
           leadingIcon={Icons.DOWNLOAD}
           onPress={async () => {
