@@ -22,7 +22,9 @@ export const resolveURL = async (song: NoxMedia.Song) => {
   }
   return {
     ...maxAudioQualityStream,
-    loudness: extractedVideoInfo.playerConfig.audioConfig.loudnessDb,
+    // HACK: ytm loudness is off by 7. they are normalized against different stuff
+    // HACK: still not matching ffmpeg's number..?
+    loudness: extractedVideoInfo.playerConfig.audioConfig.loudnessDb + 7,
     perceivedLoudness:
       extractedVideoInfo.playerConfig.audioConfig.perceptualLoudnessDb,
   };
