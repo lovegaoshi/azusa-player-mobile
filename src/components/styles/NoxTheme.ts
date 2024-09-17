@@ -9,6 +9,15 @@ export default {
   },
 
   gifs: [
+    'https://i1.hdslb.com/bfs/new_dyn/705cfa8cf81ab08b8dd7e92f2fb506c225818366.png',
+    'https://i1.hdslb.com/bfs/new_dyn/ad6b3bdd85b3fd04a01e7234ea2a108525818366.png',
+    'https://i1.hdslb.com/bfs/new_dyn/4910d70346edc5186412f2498a76b53125818366.png',
+    'https://i1.hdslb.com/bfs/new_dyn/addf19ca9162a1afac7d0d5dcd92dfdc25818366.png',
+    'https://i1.hdslb.com/bfs/new_dyn/65b142edbaf3f03b50713c838602d1e125818366.png',
+    'https://i1.hdslb.com/bfs/new_dyn/99784d12649db9fdf5510cc90e1e54ab25818366.png',
+    'https://i1.hdslb.com/bfs/new_dyn/d1570a278d192edb8babe271a0859d3625818366.png',
+    'https://i1.hdslb.com/bfs/new_dyn/7eb638c0f798bba2d07db0a9ad2826f025818366.png',
+    'https://i1.hdslb.com/bfs/new_dyn/1aa2e4fc875a1e5ada181bfe3bc1df5025818366.png',
     'https://i0.hdslb.com/bfs/garb/8d47d54e44efcfd3e54ea804b03da64c19d1eee8.png',
     'https://i0.hdslb.com/bfs/garb/08ac2d7f8e9e4ada2f35723ba25b621a6db8d434.png',
     'https://i0.hdslb.com/bfs/garb/0bbf27a60a7a0efb1496630ca2808b6a59c2b3b5.png',
@@ -57,6 +66,8 @@ export default {
     'https://i0.hdslb.com/bfs/new_dyn/1137fd25a7a787b77a66892f6a2c0c4f2463723.gif',
   ],
   backgroundImages: [
+    'https://i0.hdslb.com/bfs/new_dyn/4e22fd68d54a16daf89bbde0fe34954d1282193558.png',
+    'https://i1.hdslb.com/bfs/new_dyn/7d958a11865f325c8dab39e953a855d1203110.jpg',
     'https://i0.hdslb.com/bfs/archive/ccd3865b526497243b781a3b64d44567c3b1d092.jpg',
     'https://i0.hdslb.com/bfs/new_dyn/780e4f19f69672d0099c45e573c915853521276.jpg',
     'https://i0.hdslb.com/bfs/new_dyn/2325a96b0d32e59f59a326f2398b5902529249.png',
