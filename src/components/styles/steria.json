@@ -7,6 +7,9 @@
       "themeIcon": "https://i2.hdslb.com/bfs/face/b70f6e62e4582d4fa5d48d86047e64eb57d7504e.jpg"
     },
     "gifs": [
+      "https://i0.hdslb.com/bfs/new_dyn/a0cc5da47136159892d52a172382c62d2249596.jpg",
+      "https://i0.hdslb.com/bfs/new_dyn/10359b353aa163b6a4232473a55990831112031857.gif",
+      "https://i0.hdslb.com/bfs/new_dyn/c5601f03a49b4e9d1127e1b70f9c3bc23546606146161263.png",
       "https://i0.hdslb.com/bfs/garb/dbbe2d3ff2e1e141217f1f2205556663de6433c2.png",
       "https://i0.hdslb.com/bfs/garb/17f3092b5e1115f6f109aea82ba1fa0858c7bcb1.png",
       "https://i0.hdslb.com/bfs/garb/1064ac428bebf3e23e859cb85a5624e8affb77c9.png",
@@ -196,6 +199,9 @@
         "darkTheme": true
       },
       "gifs": [
+        "https://i0.hdslb.com/bfs/new_dyn/a0cc5da47136159892d52a172382c62d2249596.jpg",
+        "https://i0.hdslb.com/bfs/new_dyn/10359b353aa163b6a4232473a55990831112031857.gif",
+        "https://i0.hdslb.com/bfs/new_dyn/c5601f03a49b4e9d1127e1b70f9c3bc23546606146161263.png",
         "https://i0.hdslb.com/bfs/garb/dbbe2d3ff2e1e141217f1f2205556663de6433c2.png",
         "https://i0.hdslb.com/bfs/garb/17f3092b5e1115f6f109aea82ba1fa0858c7bcb1.png",
         "https://i0.hdslb.com/bfs/garb/1064ac428bebf3e23e859cb85a5624e8affb77c9.png",
@@ -286,6 +292,7 @@
         "https://i0.hdslb.com/bfs/garb/1f40dfcfcda241fb95c6ffa78d1d34906a5d8e2c.png"
       ],
       "backgroundImages": [
+        "https://i0.hdslb.com/bfs/new_dyn/20065dee06a3485304d0ea8960ddb2d23546606146161263.png",
         {
           "type": "biliNFTVideoNew",
           "identifier": "[\"103205\",\"103206\",\"金鱼花火-薇Steria\"]"
