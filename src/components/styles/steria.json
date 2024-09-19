@@ -2060,6 +2060,31 @@
       "darkTheme": false
     },
     "gifs": [
+      "https://i0.hdslb.com/bfs/garb/a2e055ff8346a860c7d553822350754acf0a697c.png",
+      "https://i0.hdslb.com/bfs/garb/91a5ba043c741e1345797ffbc187e53e12cb72fa.png",
+      "https://i0.hdslb.com/bfs/garb/c64d69cc8b9e0b69eede17cac6a4dc2a75042cfe.png",
+      "https://i0.hdslb.com/bfs/garb/5abf2d7febd1f407c4ad5934b4d2b3ea0e1a880f.png",
+      "https://i0.hdslb.com/bfs/garb/77fac63375fac751ebc644e809d1b2699aa37a84.png",
+      "https://i0.hdslb.com/bfs/garb/f86df6cde806898f1ca455d997253cee0b48a8a0.png",
+      "https://i0.hdslb.com/bfs/garb/e27eb7506f2abec0bf13774fb2b1f73bd07a22cc.png",
+      "https://i0.hdslb.com/bfs/garb/51c00688b99ea5d2c6849ed0982641cc8ba57e88.png",
+      "https://i0.hdslb.com/bfs/garb/54d244dad733bcabba8b2b4c35262c18ff292501.png",
+      "https://i0.hdslb.com/bfs/garb/1618e513f28fe288a1d51a528f71a13f65914e27.png",
+      "https://i0.hdslb.com/bfs/garb/5c26dd822c51840d6a6a4ab6400a56fbf094e8bf.png",
+      "https://i0.hdslb.com/bfs/garb/933030e9bcc8357ac4f15f551cef50aeb5019da1.png",
+      "https://i0.hdslb.com/bfs/garb/61b129d37de7e4f86cf5d8dcbfaa2d21a661704d.png",
+      "https://i0.hdslb.com/bfs/garb/1d318052ace344300adac4f589179c46508501b9.png",
+      "https://i0.hdslb.com/bfs/garb/1f40a97735991f263ba68be6f2cabb4e36ec9076.png",
+      "https://i0.hdslb.com/bfs/garb/6cbee71a2e5e042c44241b56dfe27c06f9fe2638.png",
+      "https://i0.hdslb.com/bfs/garb/f1538caa3f76b238c1992d99fdfee82a78a689eb.png",
+      "https://i0.hdslb.com/bfs/garb/cdbb18d58f516d9090632fc3d354ae964f210d8c.png",
+      "https://i0.hdslb.com/bfs/garb/d84ce69b8dd2639b44a267572aeb6fa40c4d5b9f.png",
+      "https://i0.hdslb.com/bfs/garb/ff1c813a844acd2e25ad0066158b830a138fd9ae.png",
+      "https://i0.hdslb.com/bfs/garb/473eee9fe1325c4d005c4e2184fd411638138578.png",
+      "https://i0.hdslb.com/bfs/garb/65eb947cd69ffce8283e1a86f157e652a7fe17f9.png",
+      "https://i0.hdslb.com/bfs/garb/27c032b8a2ee44d9d65824acaa984b863bb47412.png",
+      "https://i0.hdslb.com/bfs/garb/076e0f676a731e91455cc7da6ff4e6ed3d04310d.png",
+      "https://i0.hdslb.com/bfs/garb/38ed11add54ce372ce7687fc6ae6ceabfe206cbf.png",
       "https://i0.hdslb.com/bfs/live/cc92052775aeb054f13a232332b2b365c13caf25.png",
       "https://i0.hdslb.com/bfs/live/fa416485b1da20d5ceb183958cf321bff53c25d8.png",
       "https://i0.hdslb.com/bfs/live/e39e38364c301cf552cdc7f931defaf6ccf87668.png",
@@ -2097,6 +2122,19 @@
       "https://i0.hdslb.com/bfs/new_dyn/bcfb0864fd23e2abded663fa9daa91a11846208014.jpg"
     ],
     "backgroundImages": [
+      "https://i0.hdslb.com/bfs/garb/bc87dfe442a18a8cfbeee5089b9d3817162e4980.jpg",
+      "https://i0.hdslb.com/bfs/garb/c734f29a22ba13809bd59ae7a1a32e047fd978b6.jpg",
+      "https://i0.hdslb.com/bfs/garb/69afef5d98293c03e552a03d303e4ca2e52cd2e0.jpg",
+      "https://i0.hdslb.com/bfs/garb/10012d312fc67724242f78d8600ca119026cf891.jpg",
+      "https://i0.hdslb.com/bfs/garb/61663d13978255585def8308f1e17ebb13de0d62.jpg",
+      "https://i0.hdslb.com/bfs/garb/4e312d583d97918483cb961d60e1c3b3f4e10096.jpg",
+      "https://i0.hdslb.com/bfs/garb/8564cad815fbebe86e3d0aeef3229dc1c1fedcab.jpg",
+      "https://i0.hdslb.com/bfs/garb/7f3c137e607edbb2474484a93880a21718b64fe4.jpg",
+      "https://i0.hdslb.com/bfs/garb/60f5ff5b4fd63a34820d77cc95d89e957bce2423.jpg",
+      {
+        "type": "biliGarbHeadVideo",
+        "identifier": "225768101"
+      },
       {
         "type": "bvid",
         "identifier": "BV1gc411A7zR"
@@ -2153,7 +2191,9 @@
       "surfaceDisabled": "rgba(32, 26, 27, 0.12)",
       "onSurfaceDisabled": "rgba(32, 26, 27, 0.38)",
       "backdrop": "rgba(58, 45, 47, 0.4)"
-    }
+    },
+    "thumbupSVGA": "https://i0.hdslb.com/bfs/garb/c222859668b8b89bcd169a77f1ad4d569c7bf95c.bin",
+    "loadingIcon": "https://i0.hdslb.com/bfs/baselabs/op/c0afbc68fe7af33e101583851308fa25627259e098a4b581808615a50c20e2dd.webp"
   },
   {
     "metaData": {
