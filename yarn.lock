@@ -2932,6 +2932,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@bufbuild/protobuf@npm:^2.0.0":
+  version: 2.1.0
+  resolution: "@bufbuild/protobuf@npm:2.1.0"
+  checksum: 10c0/d2e3b84ea1da284b6085ac2adb9bc7e51ef5d275587991fc67b431262a7b56876ea7a197d9b9b689f50b4c16ebb1225b870352c672224066f92e671258c417e1
+  languageName: node
+  linkType: hard
+
 "@callstack/react-theme-provider@npm:^3.0.9":
   version: 3.0.9
   resolution: "@callstack/react-theme-provider@npm:3.0.9"
@@ -3388,10 +3395,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@expo/vector-icons@npm:^14.0.0":
-  version: 14.0.0
-  resolution: "@expo/vector-icons@npm:14.0.0"
-  checksum: 10c0/450dfeac4f102d4f16f99fac61eb9a1c997874faca7e64d015541d98927f8d0f534914b6b9e12d50ad7c32209379dbc3781e3645de839f97a8ef135a8f20268e
+"@expo/vector-icons@npm:^14.0.3":
+  version: 14.0.3
+  resolution: "@expo/vector-icons@npm:14.0.3"
+  dependencies:
+    prop-types: "npm:^15.8.1"
+  checksum: 10c0/220b3729eca07f7a5a5dc9d11b3f496e255393e15a18a6f05e54288a28d2f976d76ce5f30b1b62ddc64e5ed1e258b70590d48f10715202bb90257ee3d7be518b
   languageName: node
   linkType: hard
 
@@ -4423,12 +4432,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@react-native-community/netinfo@npm:^11.4.0":
-  version: 11.4.0
-  resolution: "@react-native-community/netinfo@npm:11.4.0"
+"@react-native-community/netinfo@npm:^11.4.1":
+  version: 11.4.1
+  resolution: "@react-native-community/netinfo@npm:11.4.1"
   peerDependencies:
     react-native: ">=0.59"
-  checksum: 10c0/a98c977348fe5d2564cd2744f871972a5db1945cd5163e36909e39619f246a6a3e12c7ee6652e211495aeae1803dedff1f3f2662ba9f6879898db10ec74cfd5a
+  checksum: 10c0/118ba6d495bd14c2dab3d228a0c1857620a293ae8592d170d70eaf88a6ac6a4e35c7f84527975a9054e36891a9694aacc8ec053326b5f05961459ed08a70dd35
   languageName: node
   linkType: hard
 
@@ -5262,9 +5271,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@sentry/react-native@npm:^5.32.0":
-  version: 5.32.0
-  resolution: "@sentry/react-native@npm:5.32.0"
+"@sentry/react-native@npm:^5.33.1":
+  version: 5.33.1
+  resolution: "@sentry/react-native@npm:5.33.1"
   dependencies:
     "@sentry/babel-plugin-component-annotate": "npm:2.20.1"
     "@sentry/browser": "npm:7.119.0"
@@ -5284,7 +5293,7 @@ __metadata:
       optional: true
   bin:
     sentry-expo-upload-sourcemaps: scripts/expo-upload-sourcemaps.js
-  checksum: 10c0/6900607c18e39945634e7b427c30d9f21fa21bf5a7dbb00105ad3ec830b5aff83668149720bdececba00ace8598c54b2846197bbefa555be3a2ee3825426d25c
+  checksum: 10c0/deed78692dfb0d6bfc21cf7a95fcaa14abc821191ad23f651b209b695428360a5cedd6a83875fb1ae2094a28113fcd7ccb502541f5bd09a653a20e70737ac13c
   languageName: node
   linkType: hard
 
@@ -5986,13 +5995,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react@npm:~18.3.6":
-  version: 18.3.6
-  resolution: "@types/react@npm:18.3.6"
+"@types/react@npm:~18.3.8":
+  version: 18.3.8
+  resolution: "@types/react@npm:18.3.8"
   dependencies:
     "@types/prop-types": "npm:*"
     csstype: "npm:^3.0.2"
-  checksum: 10c0/e347787a496f2006fe61358316e040c22548a1669559277b72dad39e2f1f713080115be9fe6c30f9d1d28a54054b96cf6c06471be6967a3605e31f5b84a6cec7
+  checksum: 10c0/367312c9fe276639ecb142265e090a4dd04bb39f8d718cbab546de3f1ddcfddeff415e1147d0fc40f734badaa7420b7b109d511bd4304b2c4c9c36164612fdf8
   languageName: node
   linkType: hard
 
@@ -7027,7 +7036,7 @@ __metadata:
     "@babel/runtime": "npm:^7.25.6"
     "@react-native-async-storage/async-storage": "npm:^2.0.0"
     "@react-native-community/eslint-config": "npm:^3.2.0"
-    "@react-native-community/netinfo": "npm:^11.4.0"
+    "@react-native-community/netinfo": "npm:^11.4.1"
     "@react-native-cookies/cookies": "npm:^6.2.1"
     "@react-native-masked-view/masked-view": "npm:^0.3.1"
     "@react-native/babel-preset": "npm:^0.75.3"
@@ -7037,7 +7046,7 @@ __metadata:
     "@react-navigation/material-top-tabs": "npm:^6.6.14"
     "@react-navigation/native": "npm:^6.1.18"
     "@react-navigation/native-stack": "npm:^6.11.0"
-    "@sentry/react-native": "npm:^5.32.0"
+    "@sentry/react-native": "npm:^5.33.1"
     "@sharcoux/slider": "npm:^7.2.1"
     "@shopify/flash-list": "npm:^1.7.1"
     "@shopify/react-native-skia": "npm:1.3.13"
@@ -7048,7 +7057,7 @@ __metadata:
     "@types/jest": "npm:^29.5.13"
     "@types/md5": "npm:^2.3.5"
     "@types/node": "npm:^22.5.5"
-    "@types/react": "npm:~18.3.6"
+    "@types/react": "npm:~18.3.8"
     "@types/react-native": "npm:^0.73.0"
     "@types/react-native-background-timer": "npm:^2.0.2"
     "@types/react-native-share-menu": "npm:^5.0.5"
@@ -7085,7 +7094,7 @@ __metadata:
     eslint-plugin-react: "npm:^7.36.1"
     eslint-plugin-react-hooks: "npm:^4.6.2"
     event-target-polyfill: "npm:^0.0.4"
-    expo: "npm:^51.0.32"
+    expo: "npm:^51.0.33"
     expo-auth-session: "npm:~5.5.2"
     expo-clipboard: "npm:~6.0.3"
     expo-crypto: "npm:~13.0.2"
@@ -7101,7 +7110,7 @@ __metadata:
     jest: "npm:^29.7.0"
     js-base64: "npm:^3.7.7"
     libmuse: "https://github.com/lovegaoshi/muse.git#commit=9771b28a8da32df84ca09b5b0226dff530c4c7bc"
-    lottie-react-native: "npm:6.7.2"
+    lottie-react-native: "npm:7.0.0"
     lru-cache: "npm:7.14.0"
     md5: "npm:^2.3.0"
     metro: "npm:^0.80.12"
@@ -7119,7 +7128,7 @@ __metadata:
     react-native-blob-util: "npm:^0.19.11"
     react-native-carplay: "npm:2.4.1-beta.0"
     react-native-clean-project: "npm:^4.0.3"
-    react-native-device-info: "npm:^11.1.0"
+    react-native-device-info: "npm:^13.0.0"
     react-native-dotenv: "npm:^3.4.11"
     react-native-draggable-flatlist: "npm:^4.0.1"
     react-native-gesture-handler: "npm:2.19.0"
@@ -7129,19 +7138,19 @@ __metadata:
     react-native-pager-view: "npm:6.4.1"
     react-native-paper: "npm:^5.12.5"
     react-native-qrcode-svg: "npm:^6.3.2"
-    react-native-reanimated: "npm:3.15.2"
+    react-native-reanimated: "npm:3.15.3"
     react-native-safe-area-context: "npm:^4.11.0"
     react-native-screens: "npm:3.34.0"
     react-native-shadow-2: "npm:^7.1.0"
     react-native-share-menu: "git+https://github.com/Expensify/react-native-share-menu.git"
-    react-native-svg: "npm:15.6.0"
+    react-native-svg: "npm:15.7.1"
     react-native-svga-player: "https://lovegaoshi@github.com/lovegaoshi/react-native-svga-player.git#commit=f8c6303fddb528a1a94d2ab4696c9318c0002cfd"
     react-native-tab-view: "npm:^3.5.2"
     react-native-text-ticker: "https://lovegaoshi@github.com/lovegaoshi/react-native-text-ticker.git#commit=2e7306a4b8d3014b852629a0afe675a35b3de1b1"
     react-native-track-player: "https://github.com/lovegaoshi/react-native-track-player.git#commit=6665ae0d260acdce719110bcf817fb9d9b22443d"
     react-native-url-polyfill: "npm:^2.0.0"
     react-native-vector-icons: "npm:^10.2.0"
-    react-native-video: "npm:^6.5.0"
+    react-native-video: "npm:^6.6.2"
     react-native-webview: "npm:13.12.2"
     react-test-renderer: "npm:18.3.1"
     reactotron-react-native: "npm:^5.1.8"
@@ -7152,7 +7161,7 @@ __metadata:
     use-debounce: "npm:^10.0.3"
     uuid: "npm:^10.0.0"
     web-streams-polyfill: "npm:^4.0.0"
-    youtubei.js: "npm:^10.4.0"
+    youtubei.js: "npm:^10.5.0"
     ytdl-core: "https://lovegaoshi@github.com/lovegaoshi/node-ytdl-core.git#commit=04425b36337705124202ed193703aea67fa26e97"
     zustand: "npm:^5.0.0-rc.2"
   languageName: unknown
@@ -10561,16 +10570,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"expo@npm:^51.0.32":
-  version: 51.0.32
-  resolution: "expo@npm:51.0.32"
+"expo@npm:^51.0.33":
+  version: 51.0.33
+  resolution: "expo@npm:51.0.33"
   dependencies:
     "@babel/runtime": "npm:^7.20.0"
     "@expo/cli": "npm:0.18.29"
     "@expo/config": "npm:9.0.3"
     "@expo/config-plugins": "npm:8.0.8"
     "@expo/metro-config": "npm:0.18.11"
-    "@expo/vector-icons": "npm:^14.0.0"
+    "@expo/vector-icons": "npm:^14.0.3"
     babel-preset-expo: "npm:~11.0.14"
     expo-asset: "npm:~10.0.10"
     expo-file-system: "npm:~17.0.1"
@@ -10582,7 +10591,7 @@ __metadata:
     whatwg-url-without-unicode: "npm:8.0.0-3"
   bin:
     expo: bin/cli
-  checksum: 10c0/8a5ba07402451e027b58a8e64a7051b91d45776f1b3397bfd71a1f2a9d7752a0e50d5343baf53b985f497de3e735f5494322b9f4a68c832c7a034b2d81748409
+  checksum: 10c0/af041b4e52eb02a17e341cbb31b39cf7a829b6bb790557e52b6af62c0ea3e60fa07bd40d386d27351358315ee6ec7d89bb67c2e52756b2e29c79e9cacb165f0f
   languageName: node
   linkType: hard
 
@@ -13831,9 +13840,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"lottie-react-native@npm:6.7.2":
-  version: 6.7.2
-  resolution: "lottie-react-native@npm:6.7.2"
+"lottie-react-native@npm:7.0.0":
+  version: 7.0.0
+  resolution: "lottie-react-native@npm:7.0.0"
   peerDependencies:
     "@dotlottie/react-player": ^1.6.1
     "@lottiefiles/react-lottie-player": ^3.5.3
@@ -13847,7 +13856,7 @@ __metadata:
       optional: true
     react-native-windows:
       optional: true
-  checksum: 10c0/a98ffa572b1f47edabec7e652926358bfe72b6ebce85ad91a52046859e097320f86b201c8848aec644673e8975b28ef8445abf42fac52812a38f9273f9bb4a5b
+  checksum: 10c0/f3f5562d231bae8aa66a69af857b1664f913b6d404a2fb4c98722cd036d1121be9cb3f96e5ab8ec0d16b8d2a2ec067f43261d60b7dd96f4e117cf36c728db621
   languageName: node
   linkType: hard
 
@@ -16216,12 +16225,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-native-device-info@npm:^11.1.0":
-  version: 11.1.0
-  resolution: "react-native-device-info@npm:11.1.0"
+"react-native-device-info@npm:^13.0.0":
+  version: 13.0.0
+  resolution: "react-native-device-info@npm:13.0.0"
   peerDependencies:
     react-native: "*"
-  checksum: 10c0/424eb512a35264699d0f1c2f9dce2b0ca10247fbe263af37eda5563d9eb5fb333ea513c90aa58444b67d7364ac03d9a0d9cf913a0054e78ec0f2dfff22033ab0
+  checksum: 10c0/4ca9fa36c2f578c993cbf2c5bb22f30d0b05e5d1fd74b6d0f65b6a922ef0ce0f3be7d2816f9a860c7a4b2da6e16474fb80c8ed56428dec391d811c23b2287f89
   languageName: node
   linkType: hard
 
@@ -16351,9 +16360,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-native-reanimated@npm:3.15.2":
-  version: 3.15.2
-  resolution: "react-native-reanimated@npm:3.15.2"
+"react-native-reanimated@npm:3.15.3":
+  version: 3.15.3
+  resolution: "react-native-reanimated@npm:3.15.3"
   dependencies:
     "@babel/plugin-transform-arrow-functions": "npm:^7.0.0-0"
     "@babel/plugin-transform-class-properties": "npm:^7.0.0-0"
@@ -16370,7 +16379,7 @@ __metadata:
     "@babel/core": ^7.0.0-0
     react: "*"
     react-native: "*"
-  checksum: 10c0/8e7912c5d47ebd91b1837d697d2a74e392593a7b3bf5e9369459df0d8c19664aaa949a14e81d487765ff375b6d0dadf6c30c415a1d30fa48646cd8f654dbf9da
+  checksum: 10c0/613a0439ee441e144360af56fe04bb4515844c4517d41496f9adf6478e186a73f7815656a1d54a917e1d02789497bd3c55943632b9ce98e0b9bbf8b613e268a7
   languageName: node
   linkType: hard
 
@@ -16426,9 +16435,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-native-svg@npm:15.6.0":
-  version: 15.6.0
-  resolution: "react-native-svg@npm:15.6.0"
+"react-native-svg@npm:15.7.1":
+  version: 15.7.1
+  resolution: "react-native-svg@npm:15.7.1"
   dependencies:
     css-select: "npm:^5.1.0"
     css-tree: "npm:^1.1.3"
@@ -16436,7 +16445,7 @@ __metadata:
   peerDependencies:
     react: "*"
     react-native: "*"
-  checksum: 10c0/213b6ee33651bb7d2dd17a51c62981264fc519283dc14493361e7816005e2a7b5f2784af11076129bd7402ae2dc0104478f5bd8f894d55f8d4c82c65060bbac6
+  checksum: 10c0/4aea3fa70d59c0275fda521851b82662ca895bf37649b93bf81bddce20260335d126079d189d1470c430c6f0adf2f105d3be66e372a4fe9d387f82ee7d97d47f
   languageName: node
   linkType: hard
 
@@ -16517,13 +16526,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-native-video@npm:^6.5.0":
-  version: 6.5.0
-  resolution: "react-native-video@npm:6.5.0"
+"react-native-video@npm:^6.6.2":
+  version: 6.6.2
+  resolution: "react-native-video@npm:6.6.2"
   peerDependencies:
     react: "*"
     react-native: "*"
-  checksum: 10c0/55906a7f1eb01001ddb8eff7848c72ad3cf75e893d2b48926e5ff48c2a3e2ef91a0c31ecb1d9889198d2036921feb300f98c12ea162d28c8f8d25e606b6022cf
+  checksum: 10c0/d7c01f5b4cf8fa5d8e863c5a1425f71c137e09ad72a575decf0eed9df6765b0ed21921f39bf5eebac29c60030d1d5dc0c9097b834c94804a25b79de6b24f1582
   languageName: node
   linkType: hard
 
@@ -19714,14 +19723,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"youtubei.js@npm:^10.4.0":
-  version: 10.4.0
-  resolution: "youtubei.js@npm:10.4.0"
+"youtubei.js@npm:^10.5.0":
+  version: 10.5.0
+  resolution: "youtubei.js@npm:10.5.0"
   dependencies:
+    "@bufbuild/protobuf": "npm:^2.0.0"
     jintr: "npm:^2.1.1"
     tslib: "npm:^2.5.0"
     undici: "npm:^5.19.1"
-  checksum: 10c0/bf9ac81dfa5e06c4a3d7d8e323b76bea9ec3aebfce185921e299961536165ebd13672c6db259a99cae3e7909f640ca7454068c11b21137409012e66c4eaafa09
+  checksum: 10c0/4449c236d336e0e436364caf7791b175876cf8433583e666a4ae8e122490faffd9abb0346ee3c9946019098ab369384322fe309d38a27bdb6c28a50de69bb11a
   languageName: node
   linkType: hard
 
