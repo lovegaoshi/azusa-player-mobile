@@ -1,8 +1,9 @@
 import React, { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import GenericDialog from '@components/dialogs/GenericDialog';
+import { GenericDialog } from '@components/dialogs/GenericDialog';
 import NoxInput from '@components/dialogs/NoxInput';
+import { Portal } from 'react-native-paper';
 
 interface Props {
   visible: boolean;
@@ -11,7 +12,7 @@ interface Props {
   onSubmit?: (v: NoxStorage.AListCred) => void;
 }
 
-export default ({
+const CredDialog = ({
   visible,
   cred,
   onClose = () => undefined,
@@ -46,14 +47,14 @@ export default ({
         text={text}
         setText={setText}
       />
-      <NoxInput
-        label={t('AList.Password')}
-        selectTextOnFocus={false}
-        text={pwd}
-        setText={setPwd}
-        secureTextEntry={true}
-        autofocus={false}
-      />
     </GenericDialog>
+  );
+};
+
+export default (p: Props) => {
+  return (
+    <Portal>
+      <CredDialog {...p} />
+    </Portal>
   );
 };

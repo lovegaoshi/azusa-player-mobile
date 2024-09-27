@@ -10,7 +10,7 @@ interface Props {
   title?: string;
 }
 
-const GenericDialog = ({
+export const GenericDialog = ({
   visible,
   children = <Text variant="bodyMedium">This is simple dialog</Text>,
   onClose = () => undefined,

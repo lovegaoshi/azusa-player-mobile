@@ -1,8 +1,11 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { StyleSheet } from 'react-native';
+import { colord } from 'colord';
+
 import NoxTheme from './styles/NoxTheme';
 import AzusaTheme from './styles/AzusaTheme';
-import { randomChoice } from '../utils/Utils';
+import { randomChoice } from '@utils/Utils';
+import logger from '@utils/Logger';
 
 export const createStyle = (
   customStyle: NoxTheme.Style | NoxTheme.AdaptiveStyle = AzusaTheme
@@ -91,6 +94,17 @@ export const replaceStyleColor = ({
   backgroundColor = playerStyle.colors.background,
   noWeeb = false,
 }: ReplaceStyleColor) => {
+  if (
+    !(
+      colord(primaryColor).isValid() &&
+      colord(secondaryColor).isValid() &&
+      colord(contrastColor).isValid() &&
+      colord(backgroundColor).isValid()
+    )
+  ) {
+    logger.error('[color converter] color invalid');
+    return playerStyle;
+  }
   const replacedStyle = {
     ...playerStyle,
     customColors: {
