@@ -78,6 +78,9 @@ export const createStyle = (
   });
 };
 
+const validateColors = (colors: string[]) =>
+  colors.every(color => colord(color).isValid());
+
 interface ReplaceStyleColor {
   playerStyle: NoxTheme.Style;
   primaryColor?: string;
@@ -86,6 +89,7 @@ interface ReplaceStyleColor {
   backgroundColor?: string;
   noWeeb?: boolean;
 }
+
 export const replaceStyleColor = ({
   playerStyle,
   primaryColor = playerStyle.colors.primary,
@@ -95,12 +99,12 @@ export const replaceStyleColor = ({
   noWeeb = false,
 }: ReplaceStyleColor) => {
   if (
-    !(
-      colord(primaryColor).isValid() &&
-      colord(secondaryColor).isValid() &&
-      colord(contrastColor).isValid() &&
-      colord(backgroundColor).isValid()
-    )
+    !validateColors([
+      primaryColor,
+      secondaryColor,
+      contrastColor,
+      backgroundColor,
+    ])
   ) {
     logger.error('[color converter] color invalid');
     return playerStyle;
