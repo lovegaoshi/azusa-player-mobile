@@ -40,16 +40,14 @@ class MainActivity : ReactActivity(), ComponentCallbacks2 {
           try {
               if (intent.action?.contains("android.media.action.MEDIA_PLAY_FROM_SEARCH") == true) {
                   this.reactInstanceManager.currentReactContext
-                      ?.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter::class.java)
-                      ?.emit("remote-play-search", Arguments.fromBundle(intent.extras ?: Bundle()))
+                      ?.emitDeviceEvent("remote-play-search", Arguments.fromBundle(intent.extras ?: Bundle()))
               }
               val launchOptions = Bundle()
               launchOptions.putString("intentData", intent.dataString)
               launchOptions.putString("intentAction", intent.action)
               launchOptions.putBundle("intentBundle", intent.extras ?: Bundle())
               this.reactInstanceManager.currentReactContext
-                  ?.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter::class.java)
-                  ?.emit("APMNewIntent", Arguments.fromBundle(launchOptions))
+                  ?.emitDeviceEvent("APMNewIntent", Arguments.fromBundle(launchOptions))
           } catch (e: Exception) {
             Timber.tag("APM-intent").d("failed to notify intent: $intent")
           }
@@ -117,15 +115,13 @@ class MainActivity : ReactActivity(), ComponentCallbacks2 {
         if (isInPictureInPictureMode) {
             // Hide the full-screen UI (controls, etc.) while in PiP mode.
             this.reactInstanceManager.currentReactContext
-                ?.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter::class.java)
-                ?.emit("APMEnterPIP", true)
+                ?.emitDeviceEvent("APMEnterPIP", true)
             // HACK: a really stupid way to continue RN UI rendering
             onResume()
         } else {
             // Restore the full-screen UI.
             reactInstanceManager.currentReactContext
-                ?.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter::class.java)
-                ?.emit("APMEnterPIP", false)
+                ?.emitDeviceEvent("APMEnterPIP", false)
         }
         super.onPictureInPictureModeChanged(isInPictureInPictureMode, newConfig)
     }
