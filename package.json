@@ -175,5 +175,5 @@
     "node": ">=18.0.0"
   },
   "isSwift": true,
-  "packageManager": "yarn@4.4.1"
+  "packageManager": "yarn@4.5.0"
 }
