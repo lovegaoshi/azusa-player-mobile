@@ -5396,9 +5396,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@shopify/react-native-skia@npm:1.4.1":
-  version: 1.4.1
-  resolution: "@shopify/react-native-skia@npm:1.4.1"
+"@shopify/react-native-skia@npm:1.4.2":
+  version: 1.4.2
+  resolution: "@shopify/react-native-skia@npm:1.4.2"
   dependencies:
     canvaskit-wasm: "npm:0.39.1"
     react-reconciler: "npm:0.27.0"
@@ -5413,7 +5413,7 @@ __metadata:
       optional: true
   bin:
     setup-skia-web: ./scripts/setup-canvaskit.js
-  checksum: 10c0/9425a423e2518325b680f8b133306f3f90bdfcf8137d995352418d2bc39210700ad9054cc71bce9fe5df2f27ecb5bc731a7d565bd669fbb5a1c0a0ce6800cd13
+  checksum: 10c0/0c1efdef9aec6f23c794a7dc03248e9617beec5ccb257bda5424f6039d75b160e69d05fefe4c7cc0488703ce35da0c14878c300f8faae3490b7fb3df928e25ad
   languageName: node
   linkType: hard
 
@@ -7079,7 +7079,7 @@ __metadata:
     "@sentry/react-native": "npm:^5.33.1"
     "@sharcoux/slider": "npm:^7.2.1"
     "@shopify/flash-list": "npm:^1.7.1"
-    "@shopify/react-native-skia": "npm:1.4.1"
+    "@shopify/react-native-skia": "npm:1.4.2"
     "@tsconfig/react-native": "npm:^3.0.5"
     "@types/base-64": "npm:^1.0.2"
     "@types/d3": "npm:^7.4.3"
@@ -7168,7 +7168,7 @@ __metadata:
     react-native-pager-view: "npm:6.4.1"
     react-native-paper: "npm:^5.12.5"
     react-native-qrcode-svg: "npm:^6.3.2"
-    react-native-reanimated: "npm:3.15.3"
+    react-native-reanimated: "npm:3.15.4"
     react-native-safe-area-context: "npm:^4.11.0"
     react-native-screens: "npm:3.34.0"
     react-native-shadow-2: "npm:^7.1.0"
@@ -16390,9 +16390,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-native-reanimated@npm:3.15.3":
-  version: 3.15.3
-  resolution: "react-native-reanimated@npm:3.15.3"
+"react-native-reanimated@npm:3.15.4":
+  version: 3.15.4
+  resolution: "react-native-reanimated@npm:3.15.4"
   dependencies:
     "@babel/plugin-transform-arrow-functions": "npm:^7.0.0-0"
     "@babel/plugin-transform-class-properties": "npm:^7.0.0-0"
@@ -16409,7 +16409,7 @@ __metadata:
     "@babel/core": ^7.0.0-0
     react: "*"
     react-native: "*"
-  checksum: 10c0/613a0439ee441e144360af56fe04bb4515844c4517d41496f9adf6478e186a73f7815656a1d54a917e1d02789497bd3c55943632b9ce98e0b9bbf8b613e268a7
+  checksum: 10c0/542ec85a061481e89b5eedd1c842dfe9d00717eeb37c4e03dfa7abbd166093d84d0ef5375137e5ec21d2936fca37b6e538528810342473b83f031efda1e9bb03
   languageName: node
   linkType: hard
 
