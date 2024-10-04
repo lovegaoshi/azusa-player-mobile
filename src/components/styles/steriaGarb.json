@@ -2970,5 +2970,105 @@
       "onSurfaceDisabled": "rgba(230, 226, 217, 0.38)",
       "backdrop": "rgba(49, 49, 37, 0.4)"
     }
+  },
+  {
+    "metaData": {
+      "themeName": "夜色恋歌·雾氧Uo收藏集",
+      "themeDesc": "本收藏集含8张精美卡面，以及可爱的表情包，绝美的个性主题，还有更多实体礼物等待您的解锁！",
+      "themeAuthor": "NoxAutoGen",
+      "themeIcon": "https://i0.hdslb.com/bfs/garb/407f401fd74ecf2114dcebf0d34f886d1029ea54.jpg",
+      "darkTheme": true
+    },
+    "gifs": [
+      "https://i0.hdslb.com/bfs/garb/234b9ce0def8a8e497db753df801fa240add1ce8.png",
+      "https://i0.hdslb.com/bfs/garb/a96bf9e413966448694e41c301defe5c4d509ca7.png",
+      "https://i0.hdslb.com/bfs/garb/099c7a8cadf0e7f920e0c8fe87e17bbe0bf07934.png",
+      "https://i0.hdslb.com/bfs/garb/fdfb307fb0ca48c4f65e7a5d1ee2647627cdd09a.png",
+      "https://i0.hdslb.com/bfs/garb/267c948f89d64e434d5de0efabadc5266be6332f.png",
+      "https://i0.hdslb.com/bfs/garb/eac79c0425bd11878d415172d3ac82987e69ffcf.png",
+      "https://i0.hdslb.com/bfs/garb/4a8ab196bc2fd3abd2a5f44c3255c03ac10fd091.png",
+      "https://i0.hdslb.com/bfs/garb/43e6c991e5a7c138d5c0f208d20ec6540a9b5684.png",
+      "https://i0.hdslb.com/bfs/garb/fcd9ac43dc56321b55f2cb1d78258080070ab818.png",
+      "https://i0.hdslb.com/bfs/garb/9798731097b4dfc06c891f2531f3199d49b60e1c.png",
+      "https://i0.hdslb.com/bfs/garb/059a51585f3967e727071f7fcca42a175348bbdd.png",
+      "https://i0.hdslb.com/bfs/garb/97df1fb7e8a11f432a72ada575ef55ee752a665d.png",
+      "https://i0.hdslb.com/bfs/garb/b872ccb64802cf0938e03857b5faa280dbf6a991.png",
+      "https://i0.hdslb.com/bfs/garb/83ce7ce4b940c9d9c53d2d53abf51278b85e331e.png",
+      "https://i0.hdslb.com/bfs/garb/387f2d5178c72dbc3194709237a639cb1c7e9537.png",
+      "https://i0.hdslb.com/bfs/garb/0182dfa6df830447f3e0550f64ba25095b7c2f26.png",
+      "https://i0.hdslb.com/bfs/garb/29464d7e0f7fae64f8917a059c0e5bcc1b7feb3f.png",
+      "https://i0.hdslb.com/bfs/garb/56c7c303f78760aa90f669972d03fa077f19d685.png",
+      "https://i0.hdslb.com/bfs/garb/3a755e289bc2af51171bd111ac1d7e2817b55fba.png",
+      "https://i0.hdslb.com/bfs/garb/9ae503980c084e90ef82c67cafbac247cde57abd.png"
+    ],
+    "backgroundImages": [
+      {
+        "type": "biliNFTVideoNew",
+        "identifier": "[\"104051\",\"104052\",\"画中仙\"]"
+      },
+      {
+        "type": "biliNFTVideoNew",
+        "identifier": "[\"104051\",\"104052\",\"月下之舞\"]"
+      },
+      "https://i0.hdslb.com/bfs/garb/open/53b9846d2ee3611d334c0741f22d839167cf0dc9.jpg",
+      "https://i0.hdslb.com/bfs/garb/open/ccd5aae65ec25a58ad3fb39983f03bafac952d83.png",
+      "https://i0.hdslb.com/bfs/garb/open/7bd26e0b4612c10eb7eebc7cd131e4ffd5927f8f.png",
+      "https://i0.hdslb.com/bfs/garb/open/d6aeabff8f8c47a55cdc78c48cb356b19b705f48.jpg",
+      "https://i0.hdslb.com/bfs/garb/open/0902e7372acd0168e6412955a09354c532700548.jpg",
+      "https://i0.hdslb.com/bfs/garb/open/f9737f85eb835e950388f1c9e78ff7c9a9522e4a.jpg"
+    ],
+    "customColors": {
+      "maskedBackgroundColor": "rgba(0, 0, 0, 0.60)",
+      "playlistDrawerBackgroundColor": "green",
+      "playlistDrawerBackgroundColorTransparent": "rgba(0, 255, 0, 0.35)",
+      "progressThumbTintColor": "rgb(235, 235, 0)",
+      "progressMinimumTrackTintColor": "rgb(235, 235, 0)",
+      "progressMaximumTrackTintColor": "#FFFFFF",
+      "btnBackgroundColor": "rgb(72, 71, 58)",
+      "textInputSelectionColor": "green"
+    },
+    "colors": {
+      "primary": "rgb(255, 255, 0)",
+      "onPrimary": "rgb(50, 50, 0)",
+      "primaryContainer": "rgb(73, 73, 0)",
+      "onPrimaryContainer": "rgb(234, 234, 0)",
+      "secondary": "rgb(202, 200, 165)",
+      "onSecondary": "rgb(50, 50, 24)",
+      "secondaryContainer": "rgb(73, 72, 45)",
+      "onSecondaryContainer": "rgb(231, 228, 191)",
+      "tertiary": "rgb(164, 208, 189)",
+      "onTertiary": "rgb(11, 55, 42)",
+      "tertiaryContainer": "rgb(37, 78, 64)",
+      "onTertiaryContainer": "rgb(191, 236, 216)",
+      "error": "rgb(255, 180, 171)",
+      "onError": "rgb(105, 0, 5)",
+      "errorContainer": "rgb(147, 0, 10)",
+      "onErrorContainer": "rgb(255, 180, 171)",
+      "background": "rgba(0,0,0, 0.4)",
+      "onBackground": "rgb(230, 226, 217)",
+      "surface": "rgb(28, 28, 23)",
+      "onSurface": "rgba(235, 235, 0, 1)",
+      "text": "rgb(255, 255, 0)",
+      "surfaceVariant": "rgb(10, 10, 10)",
+      "onSurfaceVariant": "rgb(225, 225, 0)",
+      "outline": "rgb(147, 145, 130)",
+      "outlineVariant": "rgb(72, 71, 58)",
+      "shadow": "rgb(0, 0, 0)",
+      "scrim": "rgb(0, 0, 0)",
+      "inverseSurface": "rgb(230, 226, 217)",
+      "inverseOnSurface": "rgb(49, 49, 43)",
+      "inversePrimary": "rgb(98, 98, 0)",
+      "elevation": {
+        "level0": "transparent",
+        "level1": "rgb(53, 56, 57)",
+        "level2": "rgb(10, 10, 10)",
+        "level3": "rgb(10, 10, 10)",
+        "level4": "rgb(49, 49, 20)",
+        "level5": "rgb(53, 53, 20)"
+      },
+      "surfaceDisabled": "rgba(230, 226, 217, 0.12)",
+      "onSurfaceDisabled": "rgba(230, 226, 217, 0.38)",
+      "backdrop": "rgba(49, 49, 37, 0.4)"
+    }
   }
 ]
