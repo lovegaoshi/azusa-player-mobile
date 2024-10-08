@@ -76,8 +76,9 @@ export async function PlaybackService() {
     // TrackPlayer.seekBy(event.interval);
   });
 
-  TrackPlayer.addEventListener(Event.RemoteJumpBackward, async event => {
-    console.log('Event.RemoteJumpBackward', event);
+  TrackPlayer.addEventListener(Event.RemoteCustomAction, async event => {
+    console.log('Event.RemoteCustomPlaymode', event);
+    if (event.customAction !== 'customPlaymode') return;
     cycleThroughPlaymode();
   });
 

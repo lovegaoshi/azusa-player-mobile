@@ -36,16 +36,23 @@ export default ({ track }: NoxComponent.TrackProps) => {
 
   const setHeart = (heart = false) => {
     if (Platform.OS === 'android') {
+      const oldOptions = getAppStoreState().RNTPOptions;
       const newRNTPOptions = {
-        ...getAppStoreState().RNTPOptions,
-        forwardIcon: heart ? 1 : 0,
+        ...oldOptions,
+        customActions: oldOptions?.customActions
+          ? {
+              ...oldOptions!.customActions!,
+              customFavorite: heart ? 1 : 0,
+            }
+          : undefined,
       };
       TrackPlayer.updateOptions(newRNTPOptions);
       setRNTPOptions(newRNTPOptions);
     }
   };
 
-  useTrackPlayerEvents([Event.RemoteJumpForward], () => {
+  useTrackPlayerEvents([Event.RemoteCustomAction], e => {
+    if (e.customAction !== 'customFavorite') return;
     logger.log('[Event.RemoteJumpForward] button pressed.');
     onClick();
   });
