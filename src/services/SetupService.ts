@@ -32,7 +32,7 @@ export const SetupService = async ({
 }: Partial<NoxStorage.PlayerSettingDict>) => {
   await setupPlayer({
     autoHandleInterruptions: noInterruption ? false : true,
-    maxCacheSize: 1024 * 100,
+    maxCacheSize: 0,
     iosCategoryOptions: [
       IOSCategoryOptions.AllowAirPlay,
       IOSCategoryOptions.AllowBluetooth,

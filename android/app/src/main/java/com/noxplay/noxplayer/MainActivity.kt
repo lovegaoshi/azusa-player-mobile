@@ -34,24 +34,22 @@ class MainActivity : ReactActivity(), ComponentCallbacks2 {
     }
 
   @SuppressLint("VisibleForTests")
-  override fun onNewIntent(intent: Intent?) {
+  override fun onNewIntent(intent: Intent) {
       super.onNewIntent(intent)
-      if (intent !== null) {
-          try {
-              if (intent.action?.contains("android.media.action.MEDIA_PLAY_FROM_SEARCH") == true) {
-                  this.reactInstanceManager.currentReactContext
-                      ?.emitDeviceEvent("remote-play-search", Arguments.fromBundle(intent.extras ?: Bundle()))
-              }
-              val launchOptions = Bundle()
-              launchOptions.putString("intentData", intent.dataString)
-              launchOptions.putString("intentAction", intent.action)
-              launchOptions.putBundle("intentBundle", intent.extras ?: Bundle())
+      try {
+          if (intent.action?.contains("android.media.action.MEDIA_PLAY_FROM_SEARCH") == true) {
               this.reactInstanceManager.currentReactContext
-                  ?.emitDeviceEvent("APMNewIntent", Arguments.fromBundle(launchOptions))
-          } catch (e: Exception) {
-            Timber.tag("APM-intent").d("failed to notify intent: $intent")
+                  ?.emitDeviceEvent("remote-play-search", Arguments.fromBundle(intent.extras ?: Bundle()))
           }
-    }
+          val launchOptions = Bundle()
+          launchOptions.putString("intentData", intent.dataString)
+          launchOptions.putString("intentAction", intent.action)
+          launchOptions.putBundle("intentBundle", intent.extras ?: Bundle())
+          this.reactInstanceManager.currentReactContext
+              ?.emitDeviceEvent("APMNewIntent", Arguments.fromBundle(launchOptions))
+      } catch (e: Exception) {
+        Timber.tag("APM-intent").d("failed to notify intent: $intent")
+      }
   }
     /**
      * Returns the name of the main component registered from JavaScript. This is used to schedule
