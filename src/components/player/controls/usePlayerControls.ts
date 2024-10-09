@@ -23,7 +23,6 @@ export default () => {
   const { performSkipToNext, performSkipToPrevious } = useTPControls();
   const [abRepeat, setABRepeat] = React.useState<[number, number]>([0, 1]);
   const [bRepeatDuration, setBRepeatDuration] = React.useState(9999);
-  const setCurrentPlayingId = useNoxSetting(state => state.setCurrentPlayingId);
   const { updateCurrentSongMetadata, updateCurrentSongMetadataReceived } =
     usePlaylistCRUD();
   const track = useActiveTrack();

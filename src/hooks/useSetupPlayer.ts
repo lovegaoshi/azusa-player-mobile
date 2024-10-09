@@ -18,7 +18,6 @@ const initializePlayer = async (safeMode = false) => {
   const {
     currentPlayingID,
     storedPlayerSetting,
-    language,
     lastPlayDuration,
     playbackMode,
   } = await initializeStores({ val: await initPlayerObject(safeMode) });
