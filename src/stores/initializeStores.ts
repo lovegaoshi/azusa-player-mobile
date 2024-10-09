@@ -1,6 +1,7 @@
 import { NativeModules, Platform } from 'react-native';
 import { useNoxSetting } from './useApp';
 import { fetch } from '@react-native-community/netinfo';
+import i18next from 'i18next';
 
 import { initialize as initializeAppStore } from './appStore';
 import { initializeR128Gain } from '../utils/ffmpeg/r128Store';
@@ -10,13 +11,13 @@ const { NoxAndroidAutoModule } = NativeModules;
 
 interface InitializeStores {
   val: NoxStorage.PlayerStorageObject;
-  setGestureMode: (val: boolean) => void;
-  initPlayer: (
+  setGestureMode?: (val: boolean) => void;
+  initPlayer?: (
     val: NoxStorage.PlayerStorageObject
   ) => Promise<NoxStorage.initializedResults>;
-  setCurrentPlayingList: (val: NoxMedia.Playlist) => boolean;
+  setCurrentPlayingList?: (val: NoxMedia.Playlist) => boolean;
 }
-const initializeStores = async ({
+export const initializeStores = async ({
   val,
   setGestureMode = useNoxSetting.getState().setGestureMode,
   initPlayer = useNoxSetting.getState().initPlayer,
@@ -48,6 +49,7 @@ const initializeStores = async ({
   ) {
     setCurrentPlayingList(dataSaverPlaylist(results.currentPlayingList));
   }
+  i18next.changeLanguage(results.language);
   return results;
 };
 
