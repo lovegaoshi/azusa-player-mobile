@@ -30,20 +30,6 @@ export default () => {
   const updateTrack = useNoxSetting(state => state.updateTrack);
   const loadingTracker = React.useRef(false);
 
-  useTrackPlayerEvents([Event.PlaybackActiveTrackChanged], event => {
-    if (event.track?.song) {
-      setCurrentPlayingId(event.track.song.id);
-    }
-  });
-
-  useTrackPlayerEvents([Event.PlaybackQueueEnded], () => {
-    performSkipToNext(true);
-  });
-
-  useTrackPlayerEvents([Event.RemoteNext], () => {
-    performSkipToNext();
-  });
-
   useTrackPlayerEvents([Event.MetadataCommonReceived], async event => {
     console.log('Event.MetadataCommonReceived', event.metadata);
     if (
@@ -68,10 +54,6 @@ export default () => {
     newMetadata.duration = (await TrackPlayer.getProgress()).duration;
     updateTrack(event.metadata);
     updateCurrentSongMetadataReceived({ metadata: newMetadata });
-  });
-
-  useTrackPlayerEvents([Event.RemotePrevious], () => {
-    performSkipToPrevious();
   });
 
   useTrackPlayerEvents([Event.PlaybackProgressUpdated], event => {

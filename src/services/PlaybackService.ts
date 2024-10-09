@@ -19,6 +19,8 @@ import {
   resolveAndCache,
   isIOS,
 } from '@utils/RNTPUtils';
+import { performSkipToNext, performSkipToPrevious } from '@hooks/useTPControls';
+import { useNoxSetting } from '@stores/useApp';
 
 const { getState } = noxPlayingList;
 const { setState } = appStore;
@@ -32,6 +34,18 @@ export async function AdditionalPlaybackService({
   lastPlayDuration,
   currentPlayingID,
 }: Partial<NoxStorage.PlayerSettingDict>) {
+  TrackPlayer.addEventListener(Event.PlaybackQueueEnded, async () =>
+    performSkipToNext(true)
+  );
+
+  TrackPlayer.addEventListener(Event.RemoteNext, async () =>
+    performSkipToNext()
+  );
+
+  TrackPlayer.addEventListener(Event.RemotePrevious, async () =>
+    performSkipToPrevious()
+  );
+
   TrackPlayer.addEventListener(Event.RemoteDuck, async event => {
     console.log('Event.RemoteDuck', event);
     if (noInterruption && event.paused) return;
@@ -103,6 +117,7 @@ export async function PlaybackService() {
         (await TrackPlayer.getPlaybackState()).state === State.Error;
       await TrackPlayer.setVolume(0);
       if (event.track?.song === undefined) return;
+      useNoxSetting.getState().setCurrentPlayingId(event.track.song.id);
       if (playerErrored) {
         resetResolvedURL(event.track.song, true);
       }

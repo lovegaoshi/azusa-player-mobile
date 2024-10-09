@@ -53,7 +53,7 @@ export default ({ track }: NoxComponent.TrackProps) => {
 
   useTrackPlayerEvents([Event.RemoteCustomAction], e => {
     if (e.customAction !== 'customFavorite') return;
-    logger.log('[Event.RemoteJumpForward] button pressed.');
+    logger.log('[Event.CustomAction] fav button pressed.');
     onClick();
   });
 
