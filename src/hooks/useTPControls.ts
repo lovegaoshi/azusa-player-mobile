@@ -19,139 +19,168 @@ const regexResolveURLs: NoxUtils.RegexMatchSuggest<NoxMedia.Song> = [
 // 130,音乐综合 29,音乐现场 59,演奏 31,翻唱 193,MV 30,VOCALOID·UTAU 194,电音 28,原创音乐
 const musicTids = [130, 29, 59, 31, 193, 30, 194, 28];
 
+const getBiliSuggest = async (skipLongVideo = true) => {
+  const currentSong = (await TrackPlayer.getActiveTrack())?.song;
+  if (!currentSong) throw new Error('[PlaySuggest] currenSong is not valid!');
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const filterMW = (v: any[]) => {
+    let list = v;
+    if (skipLongVideo) {
+      list = v.filter(song => song.duration < 600);
+      if (list.length === 0) {
+        list = v;
+      }
+    }
+    return randomChoice(list);
+  };
+
+  const fallback = async () => {
+    if (!currentSong.bvid.startsWith('BV')) {
+      throw new Error('not a bvid; bilisuggest fails');
+    }
+    const biliSuggested = (await biliSuggest(currentSong.bvid)).filter(val =>
+      musicTids.includes(val.tid)
+    );
+    return (
+      await biliavideo.regexFetch({
+        reExtracted: [
+          '',
+          filterMW(biliSuggested).aid,
+          // HACK: sure sure regexpexecarray
+        ] as unknown as RegExpExecArray,
+      })
+    ).songList[0];
+  };
+
+  return regexMatchOperations({
+    song: currentSong,
+    regexOperations: regexResolveURLs.map(resolver => [
+      resolver[0],
+      (song: NoxMedia.Song) => resolver[1](song, filterMW),
+    ]),
+    fallback,
+    regexMatching: song => song.id,
+  });
+};
+
+const skipToBiliSuggest = async (
+  next = true,
+  skipLongVideo = useNoxSetting.getState().playerSetting.suggestedSkipLongVideo
+) => {
+  if (noxPlayingList.getState().playmode !== NoxRepeatMode.Suggest) {
+    throw new Error('playmode is not bilisuggest.');
+  }
+  const suggestedSong = [await getBiliSuggest(skipLongVideo)];
+  if (next) {
+    await TrackPlayer.add(await songlistToTracklist(suggestedSong));
+    return;
+  }
+  await TrackPlayer.add(await songlistToTracklist(suggestedSong), 0);
+};
+
+const prepareSkipToNext = async (mSkipToBiliSuggest = skipToBiliSuggest) => {
+  const nextSong = playNextSong();
+  if (
+    nextSong &&
+    (await TrackPlayer.getActiveTrackIndex()) ===
+      (await TrackPlayer.getQueue()).length - 1
+  ) {
+    try {
+      await mSkipToBiliSuggest();
+    } catch {
+      // TODO: this will just grow infinitely. WTF was i thinking?
+      await TrackPlayer.add(await songlistToTracklist([nextSong]));
+    }
+  }
+};
+
+const prepareSkipToPrevious = async (
+  mSkipToBiliSuggest = skipToBiliSuggest
+) => {
+  const nextSong = playNextSong(-1);
+  if (nextSong && (await TrackPlayer.getActiveTrackIndex()) === 0) {
+    try {
+      await mSkipToBiliSuggest(false);
+    } catch {
+      await TrackPlayer.add(await songlistToTracklist([nextSong]), 0);
+    }
+  }
+};
+
+export const performFade = async (
+  callback: () => void,
+  fadeIntervalMs = appStore.getState().fadeIntervalMs
+) => {
+  const isPlaying = await TrackPlayer.getPlaybackState();
+  if (isPlaying.state === State.Playing) {
+    TrackPlayer.setAnimatedVolume({
+      volume: 0,
+      duration: fadeIntervalMs,
+      callback,
+    });
+    setAppStore({ animatedVolumeChangedCallback: callback });
+  } else {
+    callback();
+  }
+};
+
+export const performSkipToNext = (
+  auto = false,
+  noRepeat = useNoxSetting.getState().playerSetting.noRepeat,
+  preparePromise = prepareSkipToNext,
+  mPerformFade = performFade
+) => {
+  if (auto && noRepeat) {
+    logger.debug('[autoRepeat] stopping playback as autoRepeat is set to off');
+    return;
+  }
+  const callback = () =>
+    preparePromise().then(async () => {
+      const queueLen = (await TrackPlayer.getQueue()).length;
+      await TrackPlayer.skip(queueLen - 1);
+      //await TrackPlayer.skipToNext();
+      TrackPlayer.play();
+    });
+  mPerformFade(callback);
+};
+
+export const performSkipToPrevious = (
+  preparePromise = prepareSkipToPrevious,
+  mPerformFade = performFade
+) => {
+  const callback = () =>
+    preparePromise().then(async () => {
+      await TrackPlayer.skipToPrevious();
+      TrackPlayer.play();
+    });
+  mPerformFade(callback);
+};
+
 export default () => {
   const playerSetting = useNoxSetting(state => state.playerSetting);
   const fadeIntervalMs = useStore(appStore, state => state.fadeIntervalMs);
 
-  const getBiliSuggest = async () => {
-    const currentSong = (await TrackPlayer.getActiveTrack())?.song;
-    if (!currentSong) throw new Error('[PlaySuggest] currenSong is not valid!');
+  const mSkipToBiliSuggest = (next = true) =>
+    skipToBiliSuggest(next, playerSetting.suggestedSkipLongVideo);
 
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const filterMW = (v: any[]) => {
-      let list = v;
-      if (playerSetting.suggestedSkipLongVideo) {
-        list = v.filter(song => song.duration < 600);
-        if (list.length === 0) {
-          list = v;
-        }
-      }
-      return randomChoice(list);
-    };
-
-    const fallback = async () => {
-      if (!currentSong.bvid.startsWith('BV')) {
-        throw new Error('not a bvid; bilisuggest fails');
-      }
-      const biliSuggested = (await biliSuggest(currentSong.bvid)).filter(val =>
-        musicTids.includes(val.tid)
-      );
-      return (
-        await biliavideo.regexFetch({
-          reExtracted: [
-            '',
-            filterMW(biliSuggested).aid,
-            // HACK: sure sure regexpexecarray
-          ] as unknown as RegExpExecArray,
-        })
-      ).songList[0];
-    };
-
-    return regexMatchOperations({
-      song: currentSong,
-      regexOperations: regexResolveURLs.map(resolver => [
-        resolver[0],
-        (song: NoxMedia.Song) => resolver[1](song, filterMW),
-      ]),
-      fallback,
-      regexMatching: song => song.id,
-    });
-  };
-
-  const skipToBiliSuggest = async (next = true) => {
-    if (noxPlayingList.getState().playmode !== NoxRepeatMode.Suggest) {
-      throw new Error('playmode is not bilisuggest.');
-    }
-    const suggestedSong = [await getBiliSuggest()];
-    if (next) {
-      await TrackPlayer.add(await songlistToTracklist(suggestedSong));
-      return;
-    }
-    await TrackPlayer.add(await songlistToTracklist(suggestedSong), 0);
-  };
-
-  const prepareSkipToNext = async () => {
-    const nextSong = playNextSong();
-    if (
-      nextSong &&
-      (await TrackPlayer.getActiveTrackIndex()) ===
-        (await TrackPlayer.getQueue()).length - 1
-    ) {
-      try {
-        await skipToBiliSuggest();
-      } catch {
-        // TODO: this will just grow infinitely. WTF was i thinking?
-        await TrackPlayer.add(await songlistToTracklist([nextSong]));
-      }
-    }
-  };
-
-  const prepareSkipToPrevious = async () => {
-    const nextSong = playNextSong(-1);
-    if (nextSong && (await TrackPlayer.getActiveTrackIndex()) === 0) {
-      try {
-        await skipToBiliSuggest(false);
-      } catch {
-        await TrackPlayer.add(await songlistToTracklist([nextSong]), 0);
-      }
-    }
-  };
-
-  const preformFade = async (callback: () => void) => {
-    const isPlaying = await TrackPlayer.getPlaybackState();
-    if (isPlaying.state === State.Playing) {
-      TrackPlayer.setAnimatedVolume({
-        volume: 0,
-        duration: fadeIntervalMs,
-        callback,
-      });
-      setAppStore({ animatedVolumeChangedCallback: callback });
-    } else {
-      callback();
-    }
-  };
-
-  const performSkipToNext = (auto = false) => {
-    if (auto && playerSetting.noRepeat) {
-      logger.debug(
-        '[autoRepeat] stopping playback as autoRepeat is set to off'
-      );
-      return;
-    }
-    const preparePromise = prepareSkipToNext();
-    const callback = () =>
-      preparePromise.then(async () => {
-        const queueLen = (await TrackPlayer.getQueue()).length;
-        await TrackPlayer.skip(queueLen - 1);
-        //await TrackPlayer.skipToNext();
-        TrackPlayer.play();
-      });
-    preformFade(callback);
-  };
-
-  const performSkipToPrevious = () => {
-    const preparePromise = prepareSkipToPrevious();
-    const callback = () =>
-      preparePromise.then(async () => {
-        await TrackPlayer.skipToPrevious();
-        TrackPlayer.play();
-      });
-    preformFade(callback);
-  };
+  const mPerformFade = (callback: () => void) =>
+    performFade(callback, fadeIntervalMs);
 
   return {
-    preformFade,
-    performSkipToNext,
-    performSkipToPrevious,
+    performFade: (callback: () => void) =>
+      performFade(callback, fadeIntervalMs),
+    performSkipToNext: (auto = false) =>
+      performSkipToNext(
+        auto,
+        playerSetting.noRepeat,
+        () => prepareSkipToNext(mSkipToBiliSuggest),
+        mPerformFade
+      ),
+    performSkipToPrevious: () =>
+      performSkipToPrevious(
+        () => prepareSkipToPrevious(mSkipToBiliSuggest),
+        mPerformFade
+      ),
   };
 };
