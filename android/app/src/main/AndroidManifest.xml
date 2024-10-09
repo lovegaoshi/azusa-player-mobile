@@ -23,6 +23,14 @@
         android:supportsRtl="true">
         <profileable android:shell="true"
           tools:targetApi="q" />
+
+        <receiver android:name="androidx.media.session.MediaButtonReceiver"
+          android:exported="true">
+          <intent-filter>
+            <action android:name="android.intent.action.MEDIA_BUTTON" />
+          </intent-filter>
+        </receiver>
+
         <provider
           android:name="androidx.core.content.FileProvider"
           android:authorities="com.noxplay.noxplayer.provider"
@@ -32,6 +40,7 @@
             android:name="android.support.FILE_PROVIDER_PATHS"
             android:resource="@xml/provider_paths" />
         </provider>
+
         <activity
             android:name="com.noxplay.noxplayer.MainActivity"
             android:supportsPictureInPicture="true"
@@ -57,6 +66,7 @@
             <meta-data android:name="android.app.shortcuts"
               android:resource="@xml/shortcuts" />
         </activity>
+
         <activity
             android:name="net.openid.appauth.RedirectUriReceiverActivity"
             tools:node="replace"
@@ -69,6 +79,7 @@
                 <data android:scheme="com.googleusercontent.apps.369249578889-cvr47cn786i0scicobhlljidu1b32572"/>
             </intent-filter>
         </activity>
+
         <meta-data android:name="com.google.android.gms.car.application"
             android:resource="@xml/automotive_app_desc"/>
     </application>
