@@ -14,7 +14,7 @@ export const parseBodyParams = (body: any) => {
   return formBody.join('&');
 };
 
-export default async function BiliFetch(
+export default async function biliFetch(
   url: string,
   paramsProp: NoxNetwork.RequestInit | RequestInit = {
     method: 'GET',

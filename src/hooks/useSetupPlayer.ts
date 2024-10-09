@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import TrackPlayer from 'react-native-track-player';
 import { NativeModules, Platform } from 'react-native';
 
-import { SetupService, AdditionalPlaybackService } from 'services';
+import { SetupService, additionalPlaybackService } from 'services';
 import { initPlayerObject } from '@utils/ChromeStorage';
 import { getCurrentTPQueue, initializePlaybackMode } from '@stores/playingList';
 import useVersionCheck from '@hooks/useVersionCheck';
@@ -39,7 +39,7 @@ const initializePlayer = async (safeMode = false) => {
       (await TrackPlayer.add(await songlistToTracklist([currentQueue[0]])));
     serviceOptions.lastPlayDuration = 0;
   }
-  await AdditionalPlaybackService(serviceOptions);
+  await additionalPlaybackService(serviceOptions);
   return storedPlayerSetting;
 };
 

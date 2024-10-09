@@ -30,7 +30,7 @@ const getPlayerSetting = playerSettingStore.getState;
 let lastBiliHeartBeat: string[] = ['', ''];
 const lastPlayedDuration: { val?: number } = { val: 0 };
 
-export async function AdditionalPlaybackService({
+export async function additionalPlaybackService({
   noInterruption = false,
   lastPlayDuration,
   currentPlayingID,

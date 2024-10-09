@@ -6,9 +6,9 @@ import { fetchVideoPlayUrl } from '../utils/mediafetch/bilivideo';
 import { customReqHeader } from '@utils/BiliFetch';
 import { StorageKeys } from '@enums/Storage';
 import { getFileSize, validateFile } from '../utils/RNUtils';
-import { WeightedChoice } from '../utils/Utils';
+import { weightedChoice } from '../utils/Utils';
 
-const TanakaSrc = WeightedChoice([
+const TanakaSrc = weightedChoice([
   ['BV1cK42187AE', 99],
   ['BV1kf421q7jK', 1],
 ]);

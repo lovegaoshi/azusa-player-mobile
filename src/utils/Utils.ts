@@ -48,7 +48,7 @@ export const randomChoice = <T>(list: T[]) => {
   return list[randomNumber(list.length)];
 };
 
-export const WeightedChoice = <T>(list: [T, number][]) => {
+export const weightedChoice = <T>(list: [T, number][]) => {
   const sum = list.reduce((a, b) => a + b[1], 0);
   const random = Math.random() * sum;
   let current = 0;
