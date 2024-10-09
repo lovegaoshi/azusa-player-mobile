@@ -12,8 +12,8 @@ import android.provider.MediaStore
 import android.provider.Settings
 import android.view.WindowManager
 import androidx.core.content.FileProvider
-import com.doublesymmetry.kotlinaudio.utils.bitmapCoverDir
-import com.doublesymmetry.kotlinaudio.utils.bitmapCoverFileName
+import com.lovegaoshi.kotlinaudio.utils.bitmapCoverDir
+import com.lovegaoshi.kotlinaudio.utils.bitmapCoverFileName
 import com.facebook.react.bridge.Arguments
 import com.facebook.react.bridge.Promise
 import com.facebook.react.bridge.ReactApplicationContext

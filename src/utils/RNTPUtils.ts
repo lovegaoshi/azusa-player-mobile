@@ -86,8 +86,6 @@ export const initRNTPOptions = ({ keepForeground = false }: RNTPOptions) => {
         AppKilledPlaybackBehavior.StopPlaybackAndRemoveNotification,
       stopForegroundGracePeriod: keepForeground ? 99999999 : 5,
     },
-    // This flag is now deprecated. Please use the above to define playback mode.
-    // stoppingAppPausesPlayback: true,
     capabilities: [
       Capability.Play,
       Capability.Pause,
@@ -110,24 +108,11 @@ export const initRNTPOptions = ({ keepForeground = false }: RNTPOptions) => {
     progressUpdateEventInterval: 1,
   };
   if (Platform.OS === 'android') {
-    options.capabilities = options.capabilities!.concat([
-      Capability.JumpBackward,
-      Capability.JumpForward,
-    ]);
-    options.notificationCapabilities = options.notificationCapabilities!.concat(
-      [Capability.JumpBackward, Capability.JumpForward]
-    );
-    options.forwardJumpInterval = 1;
-    options.backwardJumpInterval = 1;
-    options.rewindIcon = getPlaybackModeNotifIcon()[0];
-    options.forwardIcon = 0;
-    /**
     options.customActions = {
-      customActionsList: ['customForward', 'customBackward'],
-      customForward: getPlaybackModeNotifIcon()[0],
-      customBackward: getPlaybackModeNotifIcon()[0],
+      customActionsList: ['customPlaymode', 'customFavorite'],
+      customPlaymode: getPlaybackModeNotifIcon()[0],
+      customFavorite: 0,
     };
-    */
   }
   return options;
 };
@@ -141,11 +126,17 @@ export const fadePlay = async () => {
 };
 
 export const cycleThroughPlaymode = () => {
-  const rewindIcon = cyclePlaymode();
+  const customPlaymode = cyclePlaymode();
   if (Platform.OS === 'android') {
+    const oldOptions = getState().RNTPOptions;
     const newRNTPOptions = {
-      ...getState().RNTPOptions,
-      rewindIcon,
+      ...oldOptions,
+      customActions: oldOptions?.customActions
+        ? {
+            ...oldOptions!.customActions!,
+            customPlaymode: customPlaymode ?? 0,
+          }
+        : undefined,
     };
     TrackPlayer.updateOptions(newRNTPOptions);
     setState({ RNTPOptions: newRNTPOptions });

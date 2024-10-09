@@ -40,7 +40,7 @@ class NoxMediaCache {
       max: options.max ?? 1,
       dispose: async value => {
         logger.debug(`[cache] ${value} is being purged as its not used.`);
-        RNFetchBlob.fs.unlink(value).catch();
+        RNFetchBlob.fs.unlink(value).catch(() => this.cache.delete(value));
       },
       allowStale: false,
     });
