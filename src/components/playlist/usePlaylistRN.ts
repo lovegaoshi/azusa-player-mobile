@@ -50,7 +50,7 @@ export default (playlist: NoxMedia.Playlist) => {
   );
   const playlistRef = useRef<FlashList<NoxMedia.Song>>(null);
   const { playFromPlaylist } = usePlayback();
-  const { preformFade } = useTPControls();
+  const { performFade } = useTPControls();
 
   const refreshPlaylist = () => {
     progressEmitter(100);
@@ -110,7 +110,7 @@ export default (playlist: NoxMedia.Playlist) => {
       // REVIEW: ideally playFromPlaylist should accept an async function to wait
       // for it, but performFade is not exactly functional on android (it replies
       // on an event to emit) so we have to do conditionals outside of playFromPlaylist.
-      preformFade(callback);
+      performFade(callback);
     };
     usedPlaylist.playSong(song, playSongCallback, p =>
       clearPlaylistUninterrupted().then(() => setPlayingList(p.songList))
