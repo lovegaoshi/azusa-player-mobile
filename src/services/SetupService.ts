@@ -13,7 +13,7 @@ const setupPlayer = async (
 ) => {
   const setup = async () => {
     try {
-      await TrackPlayer.setupPlayer(options);
+      await TrackPlayer.setupPlayer(options, true);
     } catch (error) {
       return (error as Error & { code?: string }).code;
     }
