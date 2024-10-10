@@ -11,16 +11,19 @@ import { initializeStores } from '@stores/initializeStores';
 import { IntentData } from '@enums/Intent';
 import { useNoxSetting } from '@stores/useApp';
 import usePlayStore from './usePlayStore';
+import { buildBrowseTree } from './usePlaybackAA';
 
 const { NoxAndroidAutoModule } = NativeModules;
 
 const initializePlayer = async (safeMode = false) => {
   const {
+    playlists,
     currentPlayingID,
     storedPlayerSetting,
     lastPlayDuration,
     playbackMode,
   } = await initializeStores({ val: await initPlayerObject(safeMode) });
+  buildBrowseTree(playlists);
   const serviceOptions = {
     noInterruption: storedPlayerSetting.noInterruption,
     keepForeground: storedPlayerSetting.keepForeground,

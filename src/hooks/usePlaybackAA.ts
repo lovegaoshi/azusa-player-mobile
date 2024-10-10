@@ -2,37 +2,44 @@ import { Platform } from 'react-native';
 import { useEffect } from 'react';
 import TrackPlayer, { Event } from 'react-native-track-player';
 import { useTranslation } from 'react-i18next';
-import { PLAYLIST_MEDIAID } from '@enums/Playlist';
+import i18n from 'i18next';
 
+import { PLAYLIST_MEDIAID } from '@enums/Playlist';
 import usePlayback from './usePlayback';
 import { useNoxSetting } from '@stores/useApp';
 import { IntentData } from '@enums/Intent';
 import usePlaybackCarplay from './usePlaybackCarplay';
 
+export const buildBrowseTree = (
+  playlists: {
+    [key: string]: NoxMedia.Playlist;
+  },
+  t = i18n.t
+) => {
+  if (Platform.OS !== 'android') return;
+  TrackPlayer.setBrowseTree({
+    '/': [
+      {
+        mediaId: 'PlaylistTab',
+        title: t('AndroidAuto.PlaylistTab'),
+        playable: '1',
+      },
+    ],
+    PlaylistTab: Object.keys(playlists).map(key => {
+      return {
+        mediaId: `${PLAYLIST_MEDIAID}${key}`,
+        title: playlists[key].title,
+        playable: '0',
+      };
+    }),
+  });
+};
+
 export const useAndroidAuto = () => {
   const { t } = useTranslation();
   const playlists = useNoxSetting(state => state.playlists);
 
-  const buildBrowseTree = () => {
-    if (Platform.OS !== 'android') return;
-    TrackPlayer.setBrowseTree({
-      '/': [
-        {
-          mediaId: 'PlaylistTab',
-          title: t('AndroidAuto.PlaylistTab'),
-          playable: '1',
-        },
-      ],
-      PlaylistTab: Object.keys(playlists).map(key => {
-        return {
-          mediaId: `${PLAYLIST_MEDIAID}${key}`,
-          title: playlists[key].title,
-          playable: '0',
-        };
-      }),
-    });
-  };
-  return { buildBrowseTree };
+  return { buildBrowseTree: () => buildBrowseTree(playlists, t) };
 };
 
 const useAndroidAutoListener = () => {
