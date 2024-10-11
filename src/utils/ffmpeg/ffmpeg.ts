@@ -13,7 +13,7 @@ export const base64AlbumArt = (path = tempArtPath) =>
   RNFetchBlob.fs
     .readFile(path, 'base64')
     .then(v => `data:image/png;base64,${v}`)
-    .catch(() => undefined);
+    .catch(logger.error);
 
 export const cacheAlbumArt = async (fpath: string) =>
   singleLimiter.schedule(async () => {

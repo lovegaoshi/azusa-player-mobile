@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import TrackPlayer from 'react-native-track-player';
 import { NativeModules, Platform } from 'react-native';
 
-import { SetupService, AdditionalPlaybackService } from 'services';
+import { SetupService, additionalPlaybackService } from 'services';
 import { initPlayerObject } from '@utils/ChromeStorage';
 import { getCurrentTPQueue, initializePlaybackMode } from '@stores/playingList';
 import useVersionCheck from '@hooks/useVersionCheck';
@@ -11,16 +11,19 @@ import { initializeStores } from '@stores/initializeStores';
 import { IntentData } from '@enums/Intent';
 import { useNoxSetting } from '@stores/useApp';
 import usePlayStore from './usePlayStore';
+import { buildBrowseTree } from './usePlaybackAA';
 
 const { NoxAndroidAutoModule } = NativeModules;
 
 const initializePlayer = async (safeMode = false) => {
   const {
+    playlists,
     currentPlayingID,
     storedPlayerSetting,
     lastPlayDuration,
     playbackMode,
   } = await initializeStores({ val: await initPlayerObject(safeMode) });
+  buildBrowseTree(playlists);
   const serviceOptions = {
     noInterruption: storedPlayerSetting.noInterruption,
     keepForeground: storedPlayerSetting.keepForeground,
@@ -39,7 +42,7 @@ const initializePlayer = async (safeMode = false) => {
       (await TrackPlayer.add(await songlistToTracklist([currentQueue[0]])));
     serviceOptions.lastPlayDuration = 0;
   }
-  await AdditionalPlaybackService(serviceOptions);
+  await additionalPlaybackService(serviceOptions);
   return storedPlayerSetting;
 };
 
