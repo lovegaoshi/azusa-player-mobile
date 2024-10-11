@@ -23,7 +23,6 @@ const initializePlayer = async (safeMode = false) => {
     lastPlayDuration,
     playbackMode,
   } = await initializeStores({ val: await initPlayerObject(safeMode) });
-  buildBrowseTree(playlists);
   const serviceOptions = {
     noInterruption: storedPlayerSetting.noInterruption,
     keepForeground: storedPlayerSetting.keepForeground,
@@ -31,6 +30,7 @@ const initializePlayer = async (safeMode = false) => {
     currentPlayingID,
   };
   await SetupService(serviceOptions);
+  buildBrowseTree(playlists);
   initializePlaybackMode(playbackMode);
 
   const currentQueue = getCurrentTPQueue();
