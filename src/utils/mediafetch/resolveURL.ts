@@ -123,9 +123,8 @@ export const songExport2URL = (v: NoxMedia.Song): string => {
   });
 };
 
-const regexResolveArtworks: NoxUtils.RegexMatchResolve<
-  Promise<string | undefined>
-> = [[localFetch.regexResolveURLMatch, localFetch.resolveArtwork]];
+const regexResolveArtworks: NoxUtils.RegexMatchResolve<Promise<string | void>> =
+  [[localFetch.regexResolveURLMatch, localFetch.resolveArtwork]];
 
 export const songResolveArtwork = (v?: NoxMedia.Song) => {
   if (!v) return;

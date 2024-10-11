@@ -35,7 +35,7 @@ const songFetch = async (
       nameRaw: v.title,
       singer: v.artist,
       singerId: v.artist,
-      cover: '',
+      cover: `file://${v.realPath}`,
       lyric: '',
       page: 0,
       duration: v.duration / 1000,
@@ -67,10 +67,6 @@ const resolveURL = async (song: NoxMedia.Song) => {
 
 const resolveArtwork = async (song: NoxMedia.Song) => {
   try {
-    if (Platform.OS === 'android') {
-      const APMCacheUri = await NoxAndroidAutoModule.getAPMCacheUri();
-      if (APMCacheUri !== null) return APMCacheUri;
-    }
     const artworkUri = await cacheAlbumArt(song.bvid);
     if (artworkUri) {
       return base64AlbumArt(artworkUri);
