@@ -7297,7 +7297,7 @@ __metadata:
     eslint-plugin-node: "npm:^11.1.0"
     eslint-plugin-prettier: "npm:^5.2.1"
     eslint-plugin-react: "npm:^7.37.1"
-    eslint-plugin-react-hooks: "npm:^4.6.2"
+    eslint-plugin-react-hooks: "npm:^5.0.0"
     event-target-polyfill: "npm:^0.0.4"
     expo: "npm:^51.0.37"
     expo-auth-session: "npm:~5.5.2"
@@ -7333,7 +7333,7 @@ __metadata:
     react-native-blob-util: "npm:^0.19.11"
     react-native-carplay: "npm:2.4.1-beta.0"
     react-native-clean-project: "npm:^4.0.3"
-    react-native-device-info: "npm:^13.0.0"
+    react-native-device-info: "npm:^13.1.0"
     react-native-dotenv: "npm:^3.4.11"
     react-native-draggable-flatlist: "npm:^4.0.1"
     react-native-gesture-handler: "npm:2.20.0"
@@ -7343,7 +7343,7 @@ __metadata:
     react-native-pager-view: "npm:6.4.1"
     react-native-paper: "npm:^5.12.5"
     react-native-qrcode-svg: "npm:^6.3.2"
-    react-native-reanimated: "npm:3.15.4"
+    react-native-reanimated: "npm:3.15.5"
     react-native-safe-area-context: "npm:^4.11.0"
     react-native-screens: "npm:3.34.0"
     react-native-shadow-2: "npm:^7.1.0"
@@ -10215,12 +10215,21 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-plugin-react-hooks@npm:^4.6.0, eslint-plugin-react-hooks@npm:^4.6.2":
+"eslint-plugin-react-hooks@npm:^4.6.0":
   version: 4.6.2
   resolution: "eslint-plugin-react-hooks@npm:4.6.2"
   peerDependencies:
     eslint: ^3.0.0 || ^4.0.0 || ^5.0.0 || ^6.0.0 || ^7.0.0 || ^8.0.0-0
   checksum: 10c0/4844e58c929bc05157fb70ba1e462e34f1f4abcbc8dd5bbe5b04513d33e2699effb8bca668297976ceea8e7ebee4e8fc29b9af9d131bcef52886feaa2308b2cc
+  languageName: node
+  linkType: hard
+
+"eslint-plugin-react-hooks@npm:^5.0.0":
+  version: 5.0.0
+  resolution: "eslint-plugin-react-hooks@npm:5.0.0"
+  peerDependencies:
+    eslint: ^3.0.0 || ^4.0.0 || ^5.0.0 || ^6.0.0 || ^7.0.0 || ^8.0.0-0 || ^9.0.0
+  checksum: 10c0/bcb74b421f32e4203a7100405b57aab85526be4461e5a1da01bc537969a30012d2ee209a2c2a6cac543833a27188ce1e6ad71e4628d0bb4a2e5365cad86c5002
   languageName: node
   linkType: hard
 
@@ -16585,12 +16594,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-native-device-info@npm:^13.0.0":
-  version: 13.0.0
-  resolution: "react-native-device-info@npm:13.0.0"
+"react-native-device-info@npm:^13.1.0":
+  version: 13.1.0
+  resolution: "react-native-device-info@npm:13.1.0"
   peerDependencies:
     react-native: "*"
-  checksum: 10c0/4ca9fa36c2f578c993cbf2c5bb22f30d0b05e5d1fd74b6d0f65b6a922ef0ce0f3be7d2816f9a860c7a4b2da6e16474fb80c8ed56428dec391d811c23b2287f89
+  checksum: 10c0/feea85858f3002a75782753382053c448511fbaa3a26d6f68e071ee903c1c73dfd8d6575cbf9fd48595080f40692c5d42c9e89bf3a8767d52f17c4ca024f1cd0
   languageName: node
   linkType: hard
 
@@ -16720,9 +16729,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-native-reanimated@npm:3.15.4":
-  version: 3.15.4
-  resolution: "react-native-reanimated@npm:3.15.4"
+"react-native-reanimated@npm:3.15.5":
+  version: 3.15.5
+  resolution: "react-native-reanimated@npm:3.15.5"
   dependencies:
     "@babel/plugin-transform-arrow-functions": "npm:^7.0.0-0"
     "@babel/plugin-transform-class-properties": "npm:^7.0.0-0"
@@ -16739,7 +16748,7 @@ __metadata:
     "@babel/core": ^7.0.0-0
     react: "*"
     react-native: "*"
-  checksum: 10c0/542ec85a061481e89b5eedd1c842dfe9d00717eeb37c4e03dfa7abbd166093d84d0ef5375137e5ec21d2936fca37b6e538528810342473b83f031efda1e9bb03
+  checksum: 10c0/20eebe3e252afbc5bcb3496e974227c3da04e498b8133d74e421be1c9588c37bf8156f5f28fe42a230f1b1e4ac672372a5b032e409abbab9a9e6aab1920643b1
   languageName: node
   linkType: hard
 
