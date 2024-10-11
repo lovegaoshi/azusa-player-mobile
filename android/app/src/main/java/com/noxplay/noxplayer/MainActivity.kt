@@ -1,19 +1,22 @@
 package com.noxplay.noxplayer
 
 import android.annotation.SuppressLint
+import android.app.AlarmManager
+import android.app.PendingIntent
 import android.app.PictureInPictureParams
 import android.content.ComponentCallbacks2
+import android.content.Context
 import android.content.Intent
 import android.content.res.Configuration
 import android.os.Build
 import android.os.Bundle
 import android.os.Debug
+import android.os.SystemClock
 import android.util.Rational
 import com.facebook.react.ReactActivity
 import com.facebook.react.ReactActivityDelegate
 import com.facebook.react.defaults.DefaultNewArchitectureEntryPoint.fabricEnabled
 import com.facebook.react.defaults.DefaultReactActivityDelegate
-import com.facebook.react.modules.core.DeviceEventManagerModule
 import com.facebook.react.bridge.Arguments
 import expo.modules.ReactActivityDelegateWrapper
 import timber.log.Timber
@@ -33,24 +36,24 @@ class MainActivity : ReactActivity(), ComponentCallbacks2 {
         }
     }
 
-  @SuppressLint("VisibleForTests")
-  override fun onNewIntent(intent: Intent) {
-      super.onNewIntent(intent)
-      try {
-          if (intent.action?.contains("android.media.action.MEDIA_PLAY_FROM_SEARCH") == true) {
-              this.reactInstanceManager.currentReactContext
-                  ?.emitDeviceEvent("remote-play-search", Arguments.fromBundle(intent.extras ?: Bundle()))
-          }
-          val launchOptions = Bundle()
-          launchOptions.putString("intentData", intent.dataString)
-          launchOptions.putString("intentAction", intent.action)
-          launchOptions.putBundle("intentBundle", intent.extras ?: Bundle())
-          this.reactInstanceManager.currentReactContext
-              ?.emitDeviceEvent("APMNewIntent", Arguments.fromBundle(launchOptions))
-      } catch (e: Exception) {
-        Timber.tag("APM-intent").d("failed to notify intent: $intent")
-      }
-  }
+    @SuppressLint("VisibleForTests")
+    override fun onNewIntent(intent: Intent) {
+        super.onNewIntent(intent)
+        try {
+            if (intent.action?.contains("android.media.action.MEDIA_PLAY_FROM_SEARCH") == true) {
+                this.reactInstanceManager.currentReactContext
+                    ?.emitDeviceEvent("remote-play-search", Arguments.fromBundle(intent.extras ?: Bundle()))
+            }
+            val launchOptions = Bundle()
+            launchOptions.putString("intentData", intent.dataString)
+            launchOptions.putString("intentAction", intent.action)
+            launchOptions.putBundle("intentBundle", intent.extras ?: Bundle())
+            this.reactInstanceManager.currentReactContext
+                ?.emitDeviceEvent("APMNewIntent", Arguments.fromBundle(launchOptions))
+        } catch (e: Exception) {
+            Timber.tag("APM-intent").d("failed to notify intent: $intent")
+        }
+    }
     /**
      * Returns the name of the main component registered from JavaScript. This is used to schedule
      * rendering of the component.
@@ -61,20 +64,20 @@ class MainActivity : ReactActivity(), ComponentCallbacks2 {
 
     class APMReactActivityDelegate(activity: ReactActivity, componentName: String):
         DefaultReactActivityDelegate(activity, componentName, fabricEnabled) {
-            private val mActivity = activity
+        private val mActivity = activity
 
-            override fun onCreate(savedInstanceState: Bundle?) {
-              super.onCreate(savedInstanceState)
-            }
-
-            override fun getLaunchOptions(): Bundle {
-              val launchOptions = super.getLaunchOptions() ?: Bundle()
-              launchOptions.putString("intentData", mActivity.intent.dataString)
-              launchOptions.putString("intentAction", mActivity.intent.action ?: "")
-              // launchOptions.putBundle("intentBundle", mActivity.intent.extras ?: Bundle())
-              return launchOptions
-            }
+        override fun onCreate(savedInstanceState: Bundle?) {
+            super.onCreate(savedInstanceState)
         }
+
+        override fun getLaunchOptions(): Bundle {
+            val launchOptions = super.getLaunchOptions() ?: Bundle()
+            launchOptions.putString("intentData", mActivity.intent.dataString)
+            launchOptions.putString("intentAction", mActivity.intent.action ?: "")
+            // launchOptions.putBundle("intentBundle", mActivity.intent.extras ?: Bundle())
+            return launchOptions
+        }
+    }
 
     /**
      * Returns the instance of the [ReactActivityDelegate]. Here we use a util class [ ] which allows you to easily enable Fabric and Concurrent React
@@ -83,9 +86,9 @@ class MainActivity : ReactActivity(), ComponentCallbacks2 {
     override fun createReactActivityDelegate(): ReactActivityDelegate {
         return ReactActivityDelegateWrapper(
             this, BuildConfig.IS_NEW_ARCHITECTURE_ENABLED, APMReactActivityDelegate(
-            this,
-                   mainComponentName,  // If you opted-in for the New Architecture, we enable the Fabric Renderer.
-                )
+                this,
+                mainComponentName,  // If you opted-in for the New Architecture, we enable the Fabric Renderer.
+            )
         )
     }
 
@@ -124,23 +127,36 @@ class MainActivity : ReactActivity(), ComponentCallbacks2 {
         super.onPictureInPictureModeChanged(isInPictureInPictureMode, newConfig)
     }
 
-  private fun logAPMRAM() {
-    val nativeHeapSize = Debug.getNativeHeapSize()
-    val nativeHeapFreeSize = Debug.getNativeHeapFreeSize()
-    val usedMemInBytes = nativeHeapSize - nativeHeapFreeSize
-    val usedMemInPercentage = usedMemInBytes * 100 / nativeHeapSize
-    Timber.tag("APMRAM").d("APM RAM usage: $usedMemInBytes/1000/1000 ($usedMemInPercentage)")
-  }
+    private fun logAPMRAM() {
+        val nativeHeapSize = Debug.getNativeHeapSize()
+        val nativeHeapFreeSize = Debug.getNativeHeapFreeSize()
+        val usedMemInBytes = nativeHeapSize - nativeHeapFreeSize
+        val usedMemInPercentage = usedMemInBytes * 100 / nativeHeapSize
+        Timber.tag("APMRAM").d("APM RAM usage: $usedMemInBytes/1000/1000 ($usedMemInPercentage)")
+    }
 
-  override fun onTrimMemory(level: Int) {
-    Timber.tag("APMRAMTrim").d("trim memory level $level emitted.")
-    logAPMRAM()
-    super.onTrimMemory(level)
-  }
+    override fun onTrimMemory(level: Int) {
+        Timber.tag("APMRAMTrim").d("trim memory level $level emitted.")
+        logAPMRAM()
+        super.onTrimMemory(level)
+    }
 
-  override fun onLowMemory() {
-    Timber.tag("APMRAMLow").d("low system memory emitted.")
-    logAPMRAM()
-    super.onLowMemory()
-  }
+    override fun onLowMemory() {
+        Timber.tag("APMRAMLow").d("low system memory emitted.")
+        logAPMRAM()
+        super.onLowMemory()
+    }
+
+    override fun onDestroy() {
+        // https://stackoverflow.com/questions/5764099/how-to-update-a-widget-if-the-related-service-gets-killed
+        val am = getSystemService(Context.ALARM_SERVICE) as AlarmManager
+        val intent = Intent(this, APMWidget::class.java)
+        intent.setAction(WIDGET_CLEAR)
+        am.set(
+            AlarmManager.ELAPSED_REALTIME,
+            SystemClock.elapsedRealtime(),
+            PendingIntent.getBroadcast(this, 5424, intent, PendingIntent.FLAG_IMMUTABLE)
+        )
+        super.onDestroy()
+    }
 }

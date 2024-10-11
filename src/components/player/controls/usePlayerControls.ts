@@ -13,7 +13,6 @@ import { logger } from '@utils/Logger';
 import appStore, { getABRepeatRaw, setCurrentPlaying } from '@stores/appStore';
 import noxPlayingList from '@stores/playingList';
 import { NoxRepeatMode } from '@enums/RepeatMode';
-import { fadePlay } from '@utils/RNTPUtils';
 import usePlaylistCRUD from '@hooks/usePlaylistCRUD';
 
 const { getState } = noxPlayingList;
@@ -86,9 +85,6 @@ export default () => {
   useTrackPlayerEvents([Event.PlaybackState], async event => {
     console.log('Event.PlaybackState', event);
     switch (event.state) {
-      case State.Playing:
-        fadePlay();
-        break;
       case State.Loading:
         loadingTracker.current = true;
         break;

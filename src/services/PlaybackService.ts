@@ -3,7 +3,7 @@ import TrackPlayer, {
   State,
   RepeatMode,
 } from 'react-native-track-player';
-import { DeviceEventEmitter, Platform } from 'react-native';
+import { DeviceEventEmitter, Platform, NativeModules } from 'react-native';
 
 import { NULL_TRACK } from '../objects/Song';
 import { parseSongR128gain, resolveUrl } from '../utils/SongOperations';
@@ -18,11 +18,13 @@ import {
   cycleThroughPlaymode,
   resolveAndCache,
   isIOS,
+  fadePlay,
 } from '@utils/RNTPUtils';
 import { performSkipToNext, performSkipToPrevious } from '@hooks/useTPControls';
 import { useNoxSetting } from '@stores/useApp';
 import { appStartupInit } from '@hooks/useSetupPlayer';
 
+const { APMWidgetModule } = NativeModules;
 const { getState } = noxPlayingList;
 const { setState } = appStore;
 const getAppStoreState = appStore.getState;
@@ -35,6 +37,14 @@ export async function additionalPlaybackService({
   lastPlayDuration,
   currentPlayingID,
 }: Partial<NoxStorage.PlayerSettingDict>) {
+  TrackPlayer.addEventListener(Event.RemotePlayPause, async () => {
+    if ((await TrackPlayer.getPlaybackState()).state === State.Playing) {
+      fadePause();
+    } else {
+      TrackPlayer.play();
+    }
+  });
+
   TrackPlayer.addEventListener(Event.PlaybackQueueEnded, async () =>
     performSkipToNext(true)
   );
@@ -56,6 +66,8 @@ export async function additionalPlaybackService({
 
   lastPlayedDuration.val = lastPlayDuration;
   TrackPlayer.addEventListener(Event.PlaybackState, async event => {
+    APMWidgetModule?.updateWidget();
+    if (event.state === State.Playing) fadePlay();
     if (lastPlayedDuration.val && event.state === State.Ready) {
       if ((await TrackPlayer.getActiveTrack())?.song?.id === currentPlayingID) {
         logger.debug(
@@ -101,6 +113,7 @@ export async function PlaybackService() {
     Event.PlaybackActiveTrackChanged,
     async event => {
       console.log('Event.PlaybackActiveTrackChanged', event);
+      APMWidgetModule?.updateWidget();
       const playerErrored =
         (await TrackPlayer.getPlaybackState()).state === State.Error;
       await TrackPlayer.setVolume(0);

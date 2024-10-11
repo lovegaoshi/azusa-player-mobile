@@ -3,5 +3,10 @@
     <string name="resume">Resume</string>
     <string name="play_all">Play All</string>
     <string name="safe_mode">Safe Mode</string>
-    <string moduleConfig="true" name="CodePushDeploymentKey" translatable="false">lQswnrvwmZ4nr7VybQTCvJhsk0LsmOo7BD7hk</string>
+    <string name="CodePushDeploymentKey" moduleConfig="true" translatable="false">lQswnrvwmZ4nr7VybQTCvJhsk0LsmOo7BD7hk</string>
+    <string name="add_widget">Add widget</string>
+    <string name="app_widget_description">APM music control widget</string>
+    <string name="album_art">album art</string>
+    <string name="songname">Song name</string>
+    <string name="artist">Artist</string>
 </resources>
