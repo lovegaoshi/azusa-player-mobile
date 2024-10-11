@@ -7367,7 +7367,7 @@ __metadata:
     uuid: "npm:^10.0.0"
     web-streams-polyfill: "npm:^4.0.0"
     youtubei.js: "npm:^10.5.0"
-    ytdl-core: "https://lovegaoshi@github.com/lovegaoshi/node-ytdl-core.git#commit=04425b36337705124202ed193703aea67fa26e97"
+    ytdl-core: "https://lovegaoshi@github.com/lovegaoshi/rn-ytdl-core.git#commit=04425b36337705124202ed193703aea67fa26e97"
     zustand: "npm:^5.0.0-rc.2"
   languageName: unknown
   linkType: soft
@@ -20158,9 +20158,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ytdl-core@https://lovegaoshi@github.com/lovegaoshi/node-ytdl-core.git#commit=04425b36337705124202ed193703aea67fa26e97":
+"ytdl-core@https://lovegaoshi@github.com/lovegaoshi/rn-ytdl-core.git#commit=04425b36337705124202ed193703aea67fa26e97":
   version: 0.0.0-development
-  resolution: "ytdl-core@https://lovegaoshi@github.com/lovegaoshi/node-ytdl-core.git#commit=04425b36337705124202ed193703aea67fa26e97"
+  resolution: "ytdl-core@https://lovegaoshi@github.com/lovegaoshi/rn-ytdl-core.git#commit=04425b36337705124202ed193703aea67fa26e97"
   dependencies:
     query-string: "npm:^8.1.0"
   checksum: 10c0/898134f7fb6ed506e8b986aec91ab42333421f6628ea95205cb60fba18c8483a21cf4e1a3aac52152cc3631e696a3ffa1ed79fddd3c70594da14959cf3671c05

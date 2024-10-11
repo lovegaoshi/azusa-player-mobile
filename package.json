@@ -114,7 +114,7 @@
     "uuid": "^10.0.0",
     "web-streams-polyfill": "^4.0.0",
     "youtubei.js": "^10.5.0",
-    "ytdl-core": "https://lovegaoshi@github.com/lovegaoshi/node-ytdl-core.git#commit=1a69dda4058682d1f10dd37803d6b920533735e5",
+    "ytdl-core": "https://lovegaoshi@github.com/lovegaoshi/rn-ytdl-core.git#commit=04425b36337705124202ed193703aea67fa26e97",
     "zustand": "^5.0.0-rc.2"
   },
   "resolutions": {
