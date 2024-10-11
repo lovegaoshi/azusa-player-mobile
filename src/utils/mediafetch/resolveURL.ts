@@ -12,6 +12,7 @@ import { regexMatchOperations } from '../Utils';
 import bilivideoFetch, {
   fetchVideoPlayUrlPromise as fetchBiliUrlPromise,
 } from './bilivideo';
+import acfunFetch from './acfunvideo';
 import { NULL_TRACK } from '@objects/Song';
 
 const MUSICFREESources: NoxMedia.SongSource[] = Object.values(MUSICFREE);
@@ -21,6 +22,7 @@ type RegResolve = NoxUtils.RegexMatchResolve<
 >;
 
 const regexResolveURLs: RegResolve = [
+  [acfunFetch.regexResolveURLMatch, acfunFetch.resolveURL],
   [steriatkFetch.regexResolveURLMatch, steriatkFetch.resolveURL],
   [biliaudioFetch.regexResolveURLMatch, biliaudioFetch.resolveURL],
   [ytbvideoFetch.regexResolveURLMatch, ytbvideoFetch.resolveURL],
