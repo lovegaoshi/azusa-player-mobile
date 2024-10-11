@@ -16,7 +16,7 @@ class NoxPackage : ReactPackage {
     override fun createNativeModules(
         reactContext: ReactApplicationContext
     ): MutableList<NativeModule> = listOf(
-        NoxAndroidAutoModule(reactContext),
+        NoxModule(reactContext),
         APMWidgetModule(reactContext)
     ).toMutableList()
 }

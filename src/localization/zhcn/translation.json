@@ -332,7 +332,6 @@
     "PlaylistTab": "播放列表",
     "NowPlayingTab": "正在播放",
     "GoToNowPlayingTab": "转到现在播放",
-    "Permission": "嗨害嗨！APM 在技术上受到限制，只能启用“绘制其他应用程序”权限才能在 Android Auto 上正常运行。为获得最佳体验，如果您打算与汽车一起使用，请按 OK 和启用该权限。",
     "PlayingShuffle": "不匹配！改为洗牌..."
   },
   "PlaylistRegex": {

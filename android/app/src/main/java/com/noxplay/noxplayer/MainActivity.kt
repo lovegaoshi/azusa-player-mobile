@@ -27,10 +27,6 @@ class MainActivity : ReactActivity(), ComponentCallbacks2 {
      */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(null)
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O_MR1) {
-            setShowWhenLocked(true)
-            setTurnScreenOn(true)
-        }
         if ("trackplayer://service-bound" in intent.data.toString()) {
             moveTaskToBack(true)
         }

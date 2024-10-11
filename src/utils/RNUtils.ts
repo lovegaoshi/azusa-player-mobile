@@ -5,7 +5,7 @@ import * as DocumentPicker from 'expo-document-picker';
 export const isAndroid = Platform.OS === 'android';
 export const isAndroid10 = isAndroid && Number(Platform.Version) >= 29;
 export const isIOS = Platform.OS === 'ios';
-const { NoxAndroidAutoModule } = NativeModules;
+const { NoxModule } = NativeModules;
 
 export const getFileSize = async (fpath: string) => {
   try {
@@ -56,7 +56,7 @@ const chooseLocalFileAndroid = async (
 };
 
 const getMediaRealPath = async (uri: string, parsedURI: string) => {
-  const mediaFiles = await NoxAndroidAutoModule.listMediaFileByFName(
+  const mediaFiles = await NoxModule.listMediaFileByFName(
     uri.substring(uri.lastIndexOf('%2F') + 3),
     parsedURI.substring(0, parsedURI.lastIndexOf('/'))
   );
@@ -80,7 +80,7 @@ export const chooseLocalMediaFolderAndroid = async (realPath = false) => {
         : undefined,
     };
   }
-  const mediaFiles = await NoxAndroidAutoModule.listMediaFileByID(
+  const mediaFiles = await NoxModule.listMediaFileByID(
     location.uri.substring(location.uri.lastIndexOf('%3A') + 3),
     ''
   );

@@ -1,19 +1,14 @@
 package com.noxplay.noxplayer
 
-import android.annotation.SuppressLint
 import android.app.ActivityManager
 import android.app.ApplicationExitInfo
 import android.content.ContentUris
 import android.content.Context
-import android.content.Intent
 import android.net.Uri
 import android.os.Build
 import android.provider.MediaStore
 import android.provider.Settings
-import android.view.WindowManager
 import androidx.core.content.FileProvider
-import com.lovegaoshi.kotlinaudio.utils.bitmapCoverDir
-import com.lovegaoshi.kotlinaudio.utils.bitmapCoverFileName
 import com.facebook.react.bridge.Arguments
 import com.facebook.react.bridge.Promise
 import com.facebook.react.bridge.ReactApplicationContext
@@ -25,9 +20,9 @@ import timber.log.Timber
 import java.io.File
 
 
-class NoxAndroidAutoModule(reactContext: ReactApplicationContext) :
+class NoxModule(reactContext: ReactApplicationContext) :
     ReactContextBaseJavaModule(reactContext) {
-    override fun getName() = "NoxAndroidAutoModule"
+    override fun getName() = "NoxModule"
 
     private fun listMediaDirNative(relativeDir: String, subdir: Boolean, selection: String? = null): WritableArray {
         val results: WritableArray = WritableNativeArray()
@@ -131,73 +126,10 @@ class NoxAndroidAutoModule(reactContext: ReactApplicationContext) :
         }
     }
 
-    @ReactMethod fun disableShowWhenLocked() {
-        val activity = reactApplicationContext.currentActivity
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O_MR1) {
-            activity?.setShowWhenLocked(false)
-            activity?.setTurnScreenOn(false)
-        }
-    }
-    @ReactMethod fun getDrawOverAppsPermission(callback: Promise) {
-        val context = reactApplicationContext
-        val activity = context.currentActivity
-        try {
-            val canDraw = Settings.canDrawOverlays(activity)
-            callback.resolve(canDraw)
-        } catch (e: Exception) {
-            callback.resolve(false)
-        }
-    }
-
-    @ReactMethod fun askDrawOverAppsPermission() {
-        val context = reactApplicationContext
-        val intent = Intent(
-            Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
-            Uri.parse("package:com.noxplay.noxplayer")
-        )
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-        context.startActivity(intent)
-    }
-
-    @ReactMethod fun keepScreenOn(screenOn: Boolean = true) {
-        val context = reactApplicationContext
-        val activity = context.currentActivity
-        val window = activity?.window
-        if (screenOn) {
-            window?.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
-        } else {
-            window?.clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
-        }
-    }
-
     @ReactMethod fun isGestureNavigationMode(callback: Promise) {
         val context = reactApplicationContext
         callback.resolve(
             Settings.Secure.getInt(context.contentResolver, "navigation_mode", 0) == 2
         )
-    }
-
-    @SuppressLint("Range")
-    private fun getAPMCacheUriNative(contentUri: Uri = MediaStore.Images.Media.EXTERNAL_CONTENT_URI): Uri? {
-        val contentResolver = reactApplicationContext.contentResolver
-        val selection = "${MediaStore.MediaColumns.RELATIVE_PATH}=?"
-        val selectionArgs = arrayOf(bitmapCoverDir)
-        val cursor = contentResolver.query(contentUri, null, selection,selectionArgs,null)
-        if (cursor != null && cursor.count > 0) {
-            while (cursor.moveToNext()) {
-                val filename = cursor.getString(cursor.getColumnIndex(MediaStore.MediaColumns.DISPLAY_NAME))
-                if (filename == bitmapCoverFileName) {
-                    val id = cursor.getLong(cursor.getColumnIndex(MediaStore.MediaColumns._ID))
-                    cursor.close()
-                    return ContentUris.withAppendedId(contentUri, id)
-                }
-            }
-            cursor.close()
-        }
-        return null
-    }
-
-    @ReactMethod fun getAPMCacheUri(callback: Promise) {
-        callback.resolve(getAPMCacheUriNative().toString())
     }
 }
