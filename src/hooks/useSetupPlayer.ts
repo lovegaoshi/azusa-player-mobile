@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import TrackPlayer from 'react-native-track-player';
-import { NativeModules, Platform } from 'react-native';
 
 import { SetupService, additionalPlaybackService } from 'services';
 import { initPlayerObject } from '@utils/ChromeStorage';
@@ -12,8 +11,6 @@ import { IntentData } from '@enums/Intent';
 import { useNoxSetting } from '@stores/useApp';
 import usePlayStore from './usePlayStore';
 import { buildBrowseTree } from './usePlaybackAA';
-
-const { NoxAndroidAutoModule } = NativeModules;
 
 const initializePlayer = async (safeMode = false) => {
   const {
@@ -78,9 +75,6 @@ export default ({ intentData }: NoxComponent.AppProps) => {
           break;
         default:
           await TrackPlayer.pause();
-      }
-      if (Platform.OS === 'android') {
-        NoxAndroidAutoModule.disableShowWhenLocked();
       }
     })();
     return () => {

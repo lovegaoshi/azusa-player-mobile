@@ -16,7 +16,7 @@ import { Source } from '@enums/MediaFetch';
 import SongTS from '@objects/Song';
 import logger from '../Logger';
 
-const { NoxAndroidAutoModule } = NativeModules;
+const { NoxModule } = NativeModules;
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const songFetch = async (
@@ -25,7 +25,7 @@ const songFetch = async (
 ): Promise<NoxMedia.Song[]> => {
   if (Platform.OS !== 'android') return [];
   const mediaFiles: NoxUtils.NoxFileUtilMediaInfo[] =
-    await NoxAndroidAutoModule.listMediaDir(fpath, true);
+    await NoxModule.listMediaDir(fpath, true);
   const uniqMediaFiles = mediaFiles.filter(v => !favlist.includes(v.realPath));
   return uniqMediaFiles.map(v =>
     SongTS({
@@ -59,7 +59,7 @@ const resolveURL = async (song: NoxMedia.Song) => {
   if (Platform.OS === 'android') {
     const artworkUri = await cacheAlbumArt(song.bvid);
     if (artworkUri) {
-      cover = await NoxAndroidAutoModule.getUri(artworkUri);
+      cover = await NoxModule.getUri(artworkUri);
     }
   }
   return { ...(await resolveURLPrefetch(song)), cover };

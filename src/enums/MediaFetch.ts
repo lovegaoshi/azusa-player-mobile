@@ -8,6 +8,7 @@ export enum Source {
   local = 'local',
   rawhttp = 'rawhttp',
   alist = 'alist',
+  acfun = 'acfun',
 }
 
 export enum BiliVolume {

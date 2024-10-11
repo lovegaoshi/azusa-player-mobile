@@ -4,6 +4,7 @@ import TrackPlayer, {
   Capability,
   UpdateOptions,
   Track,
+  TrackType,
 } from 'react-native-track-player';
 
 import { logger } from './Logger';
@@ -196,6 +197,9 @@ export const songlistToTracklist = async (
   return Promise.all(
     songList.map(async song => {
       const resolvedUrl = await resolveAndCache({ song });
+      const type = resolvedUrl.url.includes('.m3u8')
+        ? TrackType.HLS
+        : TrackType.Default;
       return {
         ...NULL_TRACK,
         title: song.parsedName,
@@ -205,6 +209,7 @@ export const songlistToTracklist = async (
         duration: song.duration,
         song: song,
         isLiveStream: song.isLive,
+        type,
         // TODO: add a throttler here
         ...resolvedUrl,
       };

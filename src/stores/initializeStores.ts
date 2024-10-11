@@ -7,7 +7,7 @@ import { initialize as initializeAppStore } from './appStore';
 import { initializeR128Gain } from '../utils/ffmpeg/r128Store';
 import { dataSaverPlaylist, initCache } from '../utils/Cache';
 
-const { NoxAndroidAutoModule } = NativeModules;
+const { NoxModule } = NativeModules;
 
 interface InitializeStores {
   val: NoxStorage.PlayerStorageObject;
@@ -26,14 +26,14 @@ export const initializeStores = async ({
   switch (Platform.OS) {
     case 'android':
       try {
-        if (!(await NoxAndroidAutoModule.getLastExitReason())) {
+        if (!(await NoxModule.getLastExitReason())) {
           val.lastPlaylistId = ['DUMMY', 'DUMMY'];
         }
       } catch {
         // TODO: do something?
       }
-      NoxAndroidAutoModule.isGestureNavigationMode().then(
-        (gestureMode: boolean) => setGestureMode(gestureMode)
+      NoxModule.isGestureNavigationMode().then((gestureMode: boolean) =>
+        setGestureMode(gestureMode)
       );
       break;
     default:

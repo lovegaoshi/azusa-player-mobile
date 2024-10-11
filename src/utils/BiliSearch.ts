@@ -30,6 +30,7 @@ import b23tvFetch from './mediafetch/b23tv';
 import headRequestFetch from './mediafetch/headRequest';
 import biliFavColleFetch from './mediafetch/biliFavColle';
 import alistFetch from './mediafetch/alist';
+import acfunFetch from './mediafetch/acfunvideo';
 import { logger } from './Logger';
 
 /**
@@ -155,6 +156,7 @@ const reExtractionsShortURL: ReExtraction<string>[] = [
 ];
 
 const reExtractions: ReExtraction<NoxNetwork.NoxRegexFetch>[] = [
+  { match: acfunFetch.regexSearchMatch, fetch: acfunFetch.regexFetch },
   {
     match: ytbChannelFetch.regexSearchMatch,
     fetch: ytbChannelFetch.regexFetch,

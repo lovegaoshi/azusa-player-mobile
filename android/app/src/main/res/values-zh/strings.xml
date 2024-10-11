@@ -3,4 +3,9 @@
     <string name="resume">继续播放</string>
     <string name="play_all">全部播放</string>
     <string name="safe_mode">安全模式</string>
+    <string name="add_widget">添加小部件</string>
+    <string name="app_widget_description">APM 音乐控制小部件</string>
+    <string name="album_art">专辑封面</string>
+    <string name="songname">歌曲名称</string>
+    <string name="artist">艺术家</string>
 </resources>
