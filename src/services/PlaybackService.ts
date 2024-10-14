@@ -23,6 +23,7 @@ import {
 import { performSkipToNext, performSkipToPrevious } from '@hooks/useTPControls';
 import { useNoxSetting } from '@stores/useApp';
 import { appStartupInit } from '@hooks/useSetupPlayer';
+import { playFromMediaId, playFromSearch } from '@hooks/usePlayback.migrate';
 
 const { APMWidgetModule } = NativeModules;
 const { getState } = noxPlayingList;
@@ -37,6 +38,10 @@ export async function additionalPlaybackService({
   lastPlayDuration,
   currentPlayingID,
 }: Partial<NoxStorage.PlayerSettingDict>) {
+  TrackPlayer.addEventListener(Event.RemotePlayId, e => playFromMediaId(e.id));
+  TrackPlayer.addEventListener(Event.RemotePlaySearch, e =>
+    playFromSearch(e.query.toLowerCase())
+  );
   TrackPlayer.addEventListener(Event.RemotePlayPause, async () => {
     if ((await TrackPlayer.getPlaybackState()).state === State.Playing) {
       fadePause();

@@ -43,24 +43,12 @@ export const useAndroidAuto = () => {
 };
 
 const useAndroidAutoListener = () => {
-  const { playFromMediaId, playFromSearch, shuffleAll } = usePlayback();
+  const { shuffleAll } = usePlayback();
   const { buildBrowseTree } = useAndroidAuto();
   const intentData = useNoxSetting(state => state.intentData);
   const setIntentData = useNoxSetting(state => state.setIntentData);
 
   useEffect(() => {
-    if (Platform.OS !== 'android') return () => null;
-    const listener = TrackPlayer.addEventListener(Event.RemotePlayId, e =>
-      playFromMediaId(e.id)
-    );
-    const listener2 = TrackPlayer.addEventListener(Event.RemotePlaySearch, e =>
-      playFromSearch(e.query.toLowerCase())
-    );
-    const listener3 = TrackPlayer.addEventListener(Event.RemoteSkip, event => {
-      console.log('Event.RemoteSkip', event);
-      TrackPlayer.skip(event.index).then(() => TrackPlayer.play());
-    });
-
     // HACK: for some reason I decided to register AA related listeners here.
     // I need the intent shuffleall handling somewhere it only runs once, which
     // is here... but this looks BAD.
@@ -68,12 +56,6 @@ const useAndroidAutoListener = () => {
       shuffleAll();
       setIntentData();
     }
-
-    return () => {
-      listener.remove();
-      listener2.remove();
-      listener3.remove();
-    };
   }, []);
 
   // HACK: this looks very stupid but AAPlaybackListener needs buildBrowseTree, PlayFromMediaID, etc.
