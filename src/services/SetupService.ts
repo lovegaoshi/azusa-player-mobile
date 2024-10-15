@@ -29,9 +29,11 @@ const setupPlayer = async (
 export const SetupService = async ({
   noInterruption = false,
   audioOffload,
+  skipSilence = false,
 }: Partial<NoxStorage.PlayerSettingDict>) => {
   await setupPlayer({
     autoHandleInterruptions: noInterruption ? false : true,
+    androidSkipSilence: skipSilence,
     maxCacheSize: 0,
     iosCategoryOptions: [
       IOSCategoryOptions.AllowAirPlay,

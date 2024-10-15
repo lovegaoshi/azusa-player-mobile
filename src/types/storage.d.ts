@@ -45,6 +45,7 @@ declare global {
       useSuggestion: boolean;
       noRepeat: boolean;
       audioOffload?: boolean;
+      skipSilence: boolean;
 
       appID: string;
       language?: string;

@@ -67,6 +67,10 @@ const developerSettings: { [key: string]: SettingEntry } = {
     settingName: 'audioOffload',
     settingCategory: 'GeneralSettings',
   },
+  skipSilence: {
+    settingName: 'skipSilence',
+    settingCategory: 'GeneralSettings',
+  },
   memoryEfficiency: {
     settingName: 'memoryEfficiency',
     settingCategory: 'GeneralSettings',
@@ -181,7 +185,10 @@ const Home = ({ navigation }: NoxComponent.NavigationProps) => {
               <RenderSetting item={developerSettings.noInterruption} />
               <RenderSetting item={developerSettings.prefetchTrack} />
               {Platform.OS === 'android' && (
-                <RenderSetting item={developerSettings.audioOffload} />
+                <>
+                  <RenderSetting item={developerSettings.audioOffload} />
+                  <RenderSetting item={developerSettings.skipSilence} />
+                </>
               )}
               <RenderSetting item={developerSettings.memoryEfficiency} />
             </View>
