@@ -10,10 +10,11 @@ import android.graphics.Bitmap
 import android.media.ThumbnailUtils
 import android.net.Uri
 import android.widget.RemoteViews
+import androidx.annotation.OptIn
+import androidx.media3.common.util.UnstableApi
 import com.doublesymmetry.trackplayer.model.Track
 import com.doublesymmetry.trackplayer.module.MusicEvents
 import com.doublesymmetry.trackplayer.service.MusicService
-import com.facebook.imagepipeline.request.ImageRequest
 import com.lovegaoshi.kotlinaudio.models.AudioPlayerState
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
@@ -131,10 +132,20 @@ class APMWidget : AppWidgetProvider() {
         return ThumbnailUtils.extractThumbnail(bitmap, dimension, dimension)
     }
 
+    @OptIn(UnstableApi::class)
     private fun setBackground(context: Context?, uri: Uri?) {
         if (!bindService(context)) return
         scope.launch {
-            val bitmap = binder.service.getCurrentBitmap()
+            val widgetManager = AppWidgetManager.getInstance(context)
+            val ids = widgetManager.getAppWidgetIds(ComponentName(context!!, APMWidget::class.java))
+            val views = RemoteViews(context.packageName, R.layout.a_p_m_widget)
+            if (uri == null) {
+                views.setImageViewBitmap(R.id.widgetBackground, null)
+            } else {
+                val bitmap = binder.service.getBitmapLoader().loadBitmap(uri).await()
+                views.setImageViewBitmap(R.id.widgetBackground, bitmap)
+            }
+            ids.forEach { id -> widgetManager.updateAppWidget(id, views) }
         }
     }
 

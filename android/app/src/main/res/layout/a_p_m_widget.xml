@@ -1,10 +1,17 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     style="@style/Widget.Azusaplayermobile.AppWidget.Container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/APMWidget"
     android:theme="@style/AppTheme.AppWidgetContainer"
     android:background="?attr/colorSurface">
+
+    <ImageView
+        android:id="@+id/widgetBackground"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -96,4 +103,5 @@
         </LinearLayout>
 
     </LinearLayout>
+
 </RelativeLayout>
