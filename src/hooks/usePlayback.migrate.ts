@@ -61,8 +61,6 @@ export const _playFromPlaylist = async ({
     }
   }
   setPlayingIndex(0, song.id);
-  // HACK: track?.song? is somehow updated already here
-  // TODO: fix this
   setCurrentPlayingId(song.id);
   logger.debug(
     `[playFromPlaylist]: ${currentPlayingId} vs ${song.id} from ${playlist.id}`
@@ -253,9 +251,9 @@ interface PlayFromSearch {
   setCurrentPlaylist: (playlist: NoxMedia.Playlist) => void;
   currentPlayingList: NoxMedia.Playlist;
   playlists: { [key: string]: NoxMedia.Playlist };
-  playFromPlaylistF?: (args: PlayFromPlaylist) => void;
-  shuffleAllF?: () => void;
-  playAsSearchListF?: (args: PlayAsSearchList) => void;
+  playFromPlaylistF?: (args: PlayFromPlaylist) => Promise<void>;
+  shuffleAllF?: () => Promise<void>;
+  playAsSearchListF?: (args: PlayAsSearchList) => Promise<void>;
 }
 export const _playFromSearch = async ({
   query,

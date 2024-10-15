@@ -1,6 +1,6 @@
 import { Platform } from 'react-native';
 import { useEffect } from 'react';
-import TrackPlayer, { Event } from 'react-native-track-player';
+import TrackPlayer from 'react-native-track-player';
 import { useTranslation } from 'react-i18next';
 import i18n from 'i18next';
 
