@@ -85,25 +85,12 @@ export const initRNTPOptions = ({ keepForeground = false }: RNTPOptions) => {
     android: {
       appKilledPlaybackBehavior:
         AppKilledPlaybackBehavior.StopPlaybackAndRemoveNotification,
-      stopForegroundGracePeriod: keepForeground ? 99999999 : 5,
     },
     capabilities: [
       Capability.Play,
       Capability.Pause,
       Capability.SkipToNext,
       Capability.SkipToPrevious,
-      Capability.SeekTo,
-    ],
-    compactCapabilities: [
-      Capability.Play,
-      Capability.SkipToPrevious,
-      Capability.SkipToNext,
-      Capability.SeekTo,
-    ],
-    notificationCapabilities: [
-      Capability.Play,
-      Capability.SkipToPrevious,
-      Capability.SkipToNext,
       Capability.SeekTo,
     ],
     progressUpdateEventInterval: 1,
@@ -210,6 +197,7 @@ export const songlistToTracklist = async (
         song: song,
         isLiveStream: song.isLive,
         type,
+        mediaId: song.id,
         // TODO: add a throttler here
         ...resolvedUrl,
       };

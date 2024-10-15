@@ -128,7 +128,7 @@ class MainActivity : ReactActivity(), ComponentCallbacks2 {
         val nativeHeapFreeSize = Debug.getNativeHeapFreeSize()
         val usedMemInBytes = nativeHeapSize - nativeHeapFreeSize
         val usedMemInPercentage = usedMemInBytes * 100 / nativeHeapSize
-        Timber.tag("APMRAM").d("APM RAM usage: $usedMemInBytes/1000/1000 ($usedMemInPercentage)")
+        Timber.tag("APMRAM").d("APM RAM usage: ${usedMemInBytes/1000/1000}MB ($usedMemInPercentage)")
     }
 
     override fun onTrimMemory(level: Int) {
