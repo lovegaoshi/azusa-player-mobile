@@ -71,7 +71,7 @@ export const animatedVolumeChange = ({
 };
 
 interface RNTPOptions {
-  keepForeground?: boolean;
+  audioOffload?: boolean;
 }
 /**
  * see export function useSetupPlayer.
@@ -80,11 +80,12 @@ interface RNTPOptions {
  * playlistStore.playmode is already set
  * this should return the correct icon for playback mode.
  */
-export const initRNTPOptions = ({ keepForeground = false }: RNTPOptions) => {
+export const initRNTPOptions = ({ audioOffload }: RNTPOptions) => {
   const options: UpdateOptions = {
     android: {
       appKilledPlaybackBehavior:
         AppKilledPlaybackBehavior.StopPlaybackAndRemoveNotification,
+      audioOffload,
     },
     capabilities: [
       Capability.Play,

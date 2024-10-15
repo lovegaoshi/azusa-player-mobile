@@ -128,6 +128,8 @@
     "memoryEfficiencyDesc": "async load songlists from playlists; NEED RESTART! will cause data loss",
     "keepForegroundName": "Keep Foreground Service",
     "keepForegroundDesc": "enable to waste a LOT of battery",
+    "audioOffloadName": "Audio Offload",
+    "audioOffloadDesc": "enable audio offload to a dedicated processsor (may save battery)",
     "karaokeLyricsName": "Karaoke Lyrics",
     "karaokeLyricsDesc": "Show karaoke style lyrics",
     "biliEditAPIName": "use bilibili edit API",

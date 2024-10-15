@@ -44,6 +44,7 @@ declare global {
       memoryEfficiency: boolean;
       useSuggestion: boolean;
       noRepeat: boolean;
+      audioOffload?: boolean;
 
       appID: string;
       language?: string;

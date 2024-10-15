@@ -28,7 +28,7 @@ const setupPlayer = async (
 
 export const SetupService = async ({
   noInterruption = false,
-  keepForeground = false,
+  audioOffload,
 }: Partial<NoxStorage.PlayerSettingDict>) => {
   await setupPlayer({
     autoHandleInterruptions: noInterruption ? false : true,
@@ -39,7 +39,7 @@ export const SetupService = async ({
       IOSCategoryOptions.AllowBluetoothA2DP,
     ],
   });
-  const RNTPOptions = initRNTPOptions({ keepForeground });
+  const RNTPOptions = initRNTPOptions({ audioOffload });
   setState({ RNTPOptions });
   await TrackPlayer.updateOptions(RNTPOptions);
   await TrackPlayer.setRepeatMode(RepeatMode.Off);
