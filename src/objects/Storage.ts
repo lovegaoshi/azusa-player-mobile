@@ -43,6 +43,7 @@ export const DefaultSetting: NoxStorage.PlayerSettingDict = {
   useSuggestion: false,
   enableBili: false,
   noRepeat: false,
+  audioOffload: undefined,
 
   appID: AppID,
   language: undefined,

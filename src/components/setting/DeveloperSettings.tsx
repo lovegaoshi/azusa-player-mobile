@@ -63,8 +63,8 @@ const developerSettings: { [key: string]: SettingEntry } = {
     settingName: 'prefetchTrack',
     settingCategory: 'GeneralSettings',
   },
-  keepForeground: {
-    settingName: 'keepForeground',
+  audioOffload: {
+    settingName: 'audioOffload',
     settingCategory: 'GeneralSettings',
   },
   memoryEfficiency: {
@@ -181,7 +181,7 @@ const Home = ({ navigation }: NoxComponent.NavigationProps) => {
               <RenderSetting item={developerSettings.noInterruption} />
               <RenderSetting item={developerSettings.prefetchTrack} />
               {Platform.OS === 'android' && (
-                <RenderSetting item={developerSettings.keepForeground} />
+                <RenderSetting item={developerSettings.audioOffload} />
               )}
               <RenderSetting item={developerSettings.memoryEfficiency} />
             </View>

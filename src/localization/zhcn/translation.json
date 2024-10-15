@@ -140,6 +140,8 @@
     "memoryEfficiencyDesc": "可能节省内存；不重启会导致数据丢失！",
     "keepForegroundName": "费电",
     "keepForegroundDesc": "保持前台服务，贼拉费电",
+    "audioOffloadName": "音频独占",
+    "audioOffloadDesc": "启用音频独占模式，节省电量",
     "karaokeLyricsName": "逐字歌词",
     "karaokeLyricsDesc": "使用逐字歌词",
     "biliEditAPIName": "使用b站修改投稿API",
