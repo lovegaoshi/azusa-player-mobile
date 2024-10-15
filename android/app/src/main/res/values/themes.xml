@@ -10,7 +10,7 @@
         <item name="appWidgetInnerRadius">8dp</item>
     </style>
 
-    <style name="AppTheme.AppWidgetContainer" parent="AppTheme.AppWidgetContainerParent">
+    <style name="AppTheme.AppWidgetContainer" parent="Theme.Material3.DynamicColors.DayNight">
         <!-- Apply padding to avoid the content of the widget colliding with the rounded corners -->
         <item name="appWidgetPadding">16dp</item>
     </style>

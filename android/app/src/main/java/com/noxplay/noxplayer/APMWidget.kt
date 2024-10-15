@@ -7,12 +7,15 @@ import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
-import android.util.Log
 import android.widget.RemoteViews
 import com.doublesymmetry.trackplayer.model.Track
 import com.doublesymmetry.trackplayer.module.MusicEvents
 import com.doublesymmetry.trackplayer.service.MusicService
 import com.lovegaoshi.kotlinaudio.models.AudioPlayerState
+import kotlinx.coroutines.MainScope
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.guava.await
+import timber.log.Timber
 
 /**
  * Implementation of App Widget functionality.
@@ -21,13 +24,12 @@ class APMWidget : AppWidgetProvider() {
 
     private lateinit var binder: MusicService.MusicBinder
     private var currentTrack: Track? = null
+    private val scope = MainScope()
 
     private fun bindService (context: Context?): Boolean {
         if (!::binder.isInitialized || !binder.isBinderAlive) {
             if (context == null) return false
-            Log.d("APM", "widget attempt to connect to MusicService...")
             val mBinder = peekService(context, Intent(context, MusicService::class.java)) ?: return false
-            Log.d("APM", "widget attempt to cast to MusicService...")
             binder = mBinder as MusicService.MusicBinder
             if (!binder.isBinderAlive) return false
         }
@@ -98,23 +100,24 @@ class APMWidget : AppWidgetProvider() {
         appWidgetManager: AppWidgetManager,
         appWidgetIds: IntArray
     ) {
-        // Construct the RemoteViews object
-        val views = RemoteViews(context.packageName, R.layout.a_p_m_widget)
-        if (!bindService(context)) {
-            updateTrack(views, null, null)
-        } else {
-            initWidget(views, context)
-            updatePlayPause(views)
-            val track = binder.service.currentTrack
-            if (track != currentTrack) {
-                currentTrack = track
-                val bitmap = if (binder.service.currentBitmap.size == 1) binder.service.currentBitmap[0] else null
-                updateTrack(views, currentTrack, bitmap)
+        scope.launch {
+            // Construct the RemoteViews object
+            val views = RemoteViews(context.packageName, R.layout.a_p_m_widget)
+            if (!bindService(context)) {
+                updateTrack(views, null, null)
+            } else {
+                initWidget(views, context)
+                updatePlayPause(views)
+                val track = binder.service.currentTrack
+                if (track != currentTrack) {
+                    currentTrack = track
+                    updateTrack(views, currentTrack, bitmap = binder.service.getCurrentBitmap()?.await())
+                }
             }
-        }
-        // Instruct the widget manager to update the widget
-        for (appWidgetId in appWidgetIds) {
-            appWidgetManager.updateAppWidget(appWidgetId, views)
+            // Instruct the widget manager to update the widget
+            for (appWidgetId in appWidgetIds) {
+                appWidgetManager.updateAppWidget(appWidgetId, views)
+            }
         }
     }
 
@@ -136,7 +139,7 @@ class APMWidget : AppWidgetProvider() {
                 else -> {}
             }
         } catch (e: Exception) {
-            Log.w("APM", "widget action ${intent?.action} failed by $e")
+            Timber.tag("APM").w("widget action " + intent?.action + " failed by " + e)
 
         }
         super.onReceive(context, intent)
