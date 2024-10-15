@@ -58,6 +58,7 @@ const usePlayback = () => {
       playlists,
       getPlaylist,
       isDataSaving,
+      t,
     });
 
   const playFromMediaId = async (mediaId: string) =>

@@ -210,11 +210,13 @@ interface ShuffleAll {
   playlists: { [key: string]: NoxMedia.Playlist };
   getPlaylist: (key: string) => Promise<NoxMedia.Playlist>;
   isDataSaving: boolean;
+  t?: (v: string) => string;
 }
 export const _shuffleAll = async ({
   playlists,
   getPlaylist,
   isDataSaving,
+  t = i18n.t,
 }: ShuffleAll) => {
   const allPlaylists = await Promise.all(
     Object.values(playlists)
@@ -229,7 +231,7 @@ export const _shuffleAll = async ({
   playAsSearchList({
     songs: cachedSongs,
     playlistSongs: allSongs,
-    title: i18n.t('PlaylistOperations.all'),
+    title: t('PlaylistOperations.all'),
   });
 };
 
