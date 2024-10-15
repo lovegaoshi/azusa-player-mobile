@@ -5300,66 +5300,66 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@sentry/cli-darwin@npm:2.36.6":
-  version: 2.36.6
-  resolution: "@sentry/cli-darwin@npm:2.36.6"
+"@sentry/cli-darwin@npm:2.37.0":
+  version: 2.37.0
+  resolution: "@sentry/cli-darwin@npm:2.37.0"
   conditions: os=darwin
   languageName: node
   linkType: hard
 
-"@sentry/cli-linux-arm64@npm:2.36.6":
-  version: 2.36.6
-  resolution: "@sentry/cli-linux-arm64@npm:2.36.6"
+"@sentry/cli-linux-arm64@npm:2.37.0":
+  version: 2.37.0
+  resolution: "@sentry/cli-linux-arm64@npm:2.37.0"
   conditions: (os=linux | os=freebsd) & cpu=arm64
   languageName: node
   linkType: hard
 
-"@sentry/cli-linux-arm@npm:2.36.6":
-  version: 2.36.6
-  resolution: "@sentry/cli-linux-arm@npm:2.36.6"
+"@sentry/cli-linux-arm@npm:2.37.0":
+  version: 2.37.0
+  resolution: "@sentry/cli-linux-arm@npm:2.37.0"
   conditions: (os=linux | os=freebsd) & cpu=arm
   languageName: node
   linkType: hard
 
-"@sentry/cli-linux-i686@npm:2.36.6":
-  version: 2.36.6
-  resolution: "@sentry/cli-linux-i686@npm:2.36.6"
+"@sentry/cli-linux-i686@npm:2.37.0":
+  version: 2.37.0
+  resolution: "@sentry/cli-linux-i686@npm:2.37.0"
   conditions: (os=linux | os=freebsd) & (cpu=x86 | cpu=ia32)
   languageName: node
   linkType: hard
 
-"@sentry/cli-linux-x64@npm:2.36.6":
-  version: 2.36.6
-  resolution: "@sentry/cli-linux-x64@npm:2.36.6"
+"@sentry/cli-linux-x64@npm:2.37.0":
+  version: 2.37.0
+  resolution: "@sentry/cli-linux-x64@npm:2.37.0"
   conditions: (os=linux | os=freebsd) & cpu=x64
   languageName: node
   linkType: hard
 
-"@sentry/cli-win32-i686@npm:2.36.6":
-  version: 2.36.6
-  resolution: "@sentry/cli-win32-i686@npm:2.36.6"
+"@sentry/cli-win32-i686@npm:2.37.0":
+  version: 2.37.0
+  resolution: "@sentry/cli-win32-i686@npm:2.37.0"
   conditions: os=win32 & (cpu=x86 | cpu=ia32)
   languageName: node
   linkType: hard
 
-"@sentry/cli-win32-x64@npm:2.36.6":
-  version: 2.36.6
-  resolution: "@sentry/cli-win32-x64@npm:2.36.6"
+"@sentry/cli-win32-x64@npm:2.37.0":
+  version: 2.37.0
+  resolution: "@sentry/cli-win32-x64@npm:2.37.0"
   conditions: os=win32 & cpu=x64
   languageName: node
   linkType: hard
 
-"@sentry/cli@npm:2.36.6":
-  version: 2.36.6
-  resolution: "@sentry/cli@npm:2.36.6"
+"@sentry/cli@npm:2.37.0":
+  version: 2.37.0
+  resolution: "@sentry/cli@npm:2.37.0"
   dependencies:
-    "@sentry/cli-darwin": "npm:2.36.6"
-    "@sentry/cli-linux-arm": "npm:2.36.6"
-    "@sentry/cli-linux-arm64": "npm:2.36.6"
-    "@sentry/cli-linux-i686": "npm:2.36.6"
-    "@sentry/cli-linux-x64": "npm:2.36.6"
-    "@sentry/cli-win32-i686": "npm:2.36.6"
-    "@sentry/cli-win32-x64": "npm:2.36.6"
+    "@sentry/cli-darwin": "npm:2.37.0"
+    "@sentry/cli-linux-arm": "npm:2.37.0"
+    "@sentry/cli-linux-arm64": "npm:2.37.0"
+    "@sentry/cli-linux-i686": "npm:2.37.0"
+    "@sentry/cli-linux-x64": "npm:2.37.0"
+    "@sentry/cli-win32-i686": "npm:2.37.0"
+    "@sentry/cli-win32-x64": "npm:2.37.0"
     https-proxy-agent: "npm:^5.0.0"
     node-fetch: "npm:^2.6.7"
     progress: "npm:^2.0.3"
@@ -5382,7 +5382,7 @@ __metadata:
       optional: true
   bin:
     sentry-cli: bin/sentry-cli
-  checksum: 10c0/6760fde5996817c3b91109255ce9631c0481b520c80682d2a68c4433d767c0a75d514e9c47bdc7e64963c22c50e3094c3943b6d1ae13810f27befe8e41aeabed
+  checksum: 10c0/a6e5e3510b7b6a5b3414a2b2bee3bd9c3066b05f70ff20ff65df1d7fb384458182d12a8a0f0319af02e8dbaf6f5e5d23da394eb6bdb8b9face3909699d0f9495
   languageName: node
   linkType: hard
 
@@ -5441,13 +5441,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@sentry/react-native@npm:^5.33.2":
-  version: 5.33.2
-  resolution: "@sentry/react-native@npm:5.33.2"
+"@sentry/react-native@npm:^5.34.0":
+  version: 5.34.0
+  resolution: "@sentry/react-native@npm:5.34.0"
   dependencies:
     "@sentry/babel-plugin-component-annotate": "npm:2.20.1"
     "@sentry/browser": "npm:7.119.1"
-    "@sentry/cli": "npm:2.36.6"
+    "@sentry/cli": "npm:2.37.0"
     "@sentry/core": "npm:7.119.1"
     "@sentry/hub": "npm:7.119.0"
     "@sentry/integrations": "npm:7.119.0"
@@ -5463,7 +5463,7 @@ __metadata:
       optional: true
   bin:
     sentry-expo-upload-sourcemaps: scripts/expo-upload-sourcemaps.js
-  checksum: 10c0/a42939010cf2cd8af92bac8d6f8d7c5086b942386507e197bf2e1ad71598cf44a195dee87db1bcc0f185fdb1c559b547686cf63ad751aef32bbd30f87468a842
+  checksum: 10c0/e52a02d916372274726a8f8dc6ac0212bb940ba6abacea3be35c5c85a322dfacd144f8b13bc4fd3084e13ed1c2f2b2c06376af777fd335ffac9c102cabea8e87
   languageName: node
   linkType: hard
 
@@ -7251,7 +7251,7 @@ __metadata:
     "@react-navigation/material-top-tabs": "npm:^6.6.14"
     "@react-navigation/native": "npm:^6.1.18"
     "@react-navigation/native-stack": "npm:^6.11.0"
-    "@sentry/react-native": "npm:^5.33.2"
+    "@sentry/react-native": "npm:^5.34.0"
     "@sharcoux/slider": "npm:^7.2.1"
     "@shopify/flash-list": "npm:^1.7.1"
     "@shopify/react-native-skia": "npm:1.4.2"
@@ -7352,7 +7352,7 @@ __metadata:
     react-native-svga-player: "https://lovegaoshi@github.com/lovegaoshi/react-native-svga-player.git#commit=f8c6303fddb528a1a94d2ab4696c9318c0002cfd"
     react-native-tab-view: "npm:^3.5.2"
     react-native-text-ticker: "https://lovegaoshi@github.com/lovegaoshi/react-native-text-ticker.git#commit=2e7306a4b8d3014b852629a0afe675a35b3de1b1"
-    react-native-track-player: "https://github.com/lovegaoshi/react-native-track-player.git#commit=b19df23d941917f67c603d6304befb059a82159a"
+    react-native-track-player: "https://github.com/lovegaoshi/react-native-track-player.git#commit=a4d3bccb35bdf1dcc311f80bdd7f94fa55fe9f0a"
     react-native-url-polyfill: "npm:^2.0.0"
     react-native-vector-icons: "npm:^10.2.0"
     react-native-video: "npm:^6.6.4"
@@ -16852,9 +16852,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-native-track-player@https://github.com/lovegaoshi/react-native-track-player.git#commit=b19df23d941917f67c603d6304befb059a82159a":
+"react-native-track-player@https://github.com/lovegaoshi/react-native-track-player.git#commit=a4d3bccb35bdf1dcc311f80bdd7f94fa55fe9f0a":
   version: 4.1.1
-  resolution: "react-native-track-player@https://github.com/lovegaoshi/react-native-track-player.git#commit=b19df23d941917f67c603d6304befb059a82159a"
+  resolution: "react-native-track-player@https://github.com/lovegaoshi/react-native-track-player.git#commit=a4d3bccb35bdf1dcc311f80bdd7f94fa55fe9f0a"
   peerDependencies:
     react: ">=16.8.6"
     react-native: ">=0.60.0-rc.2"
@@ -16865,7 +16865,7 @@ __metadata:
       optional: true
     shaka-player:
       optional: true
-  checksum: 10c0/7c4e1541751ac51e6c3e52b69e28664c35c4ce5674a110977f81b9ef8637849d2cc5d7c4ff80a61fc9be7be236f284490f55528940c962d980bd508f4af3a4f0
+  checksum: 10c0/9efa84aecfbd8f7772792e127b97dd45fef7d3e57323934cfd1fe44c06cfe97cd6d0ba4c0a021ff959859c19ee6fbcd79705075b137a20a8e071cbd38278d0b1
   languageName: node
   linkType: hard
 
