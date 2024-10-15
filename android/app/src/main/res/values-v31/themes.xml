@@ -4,7 +4,7 @@
     Having themes.xml for v31 variant because @android:dimen/system_app_widget_background_radius
      and @android:dimen/system_app_widget_internal_padding requires API level 31
     -->
-    <style name="AppTheme.AppWidgetContainerParent" parent="@android:style/Theme.DeviceDefault.DayNight">
+    <style name="AppTheme.AppWidgetContainerParent" parent="Theme.Material3.DynamicColors.DayNight">
         <item name="appWidgetRadius">@android:dimen/system_app_widget_background_radius</item>
         <item name="appWidgetInnerRadius">@android:dimen/system_app_widget_inner_radius</item>
     </style>

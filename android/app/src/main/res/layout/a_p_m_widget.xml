@@ -1,14 +1,16 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     style="@style/Widget.Azusaplayermobile.AppWidget.Container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/APMWidget"
-    android:theme="@style/AppTheme.AppWidgetContainer">
+    android:theme="@style/AppTheme.AppWidgetContainer"
+    android:background="?attr/colorSurface"
+    tools:targetApi="q">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#000000"
         android:orientation="horizontal">
 
         <ImageView
@@ -31,15 +33,21 @@
                 android:orientation="vertical">
 
                 <TextView
+                    android:paddingStart="20dp"
+                    android:paddingEnd="20dp"
                     android:id="@+id/songName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:textColor="?attr/colorOnSurface"
                     android:text="@string/songname" />
 
                 <TextView
+                    android:paddingStart="20dp"
+                    android:paddingEnd="20dp"
                     android:id="@+id/artistName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:textColor="?attr/colorOnSurface"
                     android:text="@string/artist" />
             </LinearLayout>
 
@@ -55,7 +63,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:background="#00FFFFFF"
+                    android:drawableTint="?attr/colorPrimary"
                     android:drawableStart="@drawable/media3_icon_previous" />
 
                 <Button
@@ -65,7 +73,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:background="#00FFFFFF"
+                    android:drawableTint="?attr/colorPrimary"
                     android:drawableStart="@drawable/media3_icon_play" />
 
                 <Button
@@ -75,7 +83,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:background="#00FFFFFF"
+                    android:drawableTint="?attr/colorPrimary"
                     android:drawableStart="@drawable/media3_icon_next" />
 
                 <Button
@@ -84,8 +92,7 @@
                     style="?android:attr/buttonBarButtonStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:background="#00FFFFFF" />
+                    android:layout_weight="1"/>
             </LinearLayout>
 
         </LinearLayout>
