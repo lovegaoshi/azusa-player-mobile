@@ -1,10 +1,12 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     style="@style/Widget.Azusaplayermobile.AppWidget.Container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@android:id/background"
+    android:id="@+id/APMWidget"
     android:theme="@style/AppTheme.AppWidgetContainer"
-    android:background="?attr/colorSurface">
+    android:background="?attr/colorSurface"
+    tools:targetApi="q">
 
     <LinearLayout
         android:layout_width="match_parent"

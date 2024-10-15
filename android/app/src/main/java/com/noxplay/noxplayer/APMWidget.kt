@@ -58,7 +58,7 @@ class APMWidget : AppWidgetProvider() {
                 Intent(context, APMWidget::class.java).setAction(MusicEvents.BUTTON_SKIP_NEXT),
                 PendingIntent.FLAG_IMMUTABLE))
         views.setOnClickPendingIntent(
-            android.R.id.background, PendingIntent.getBroadcast(
+            R.id.APMWidget, PendingIntent.getBroadcast(
                 context, 0,
                 Intent(context, APMWidget::class.java).setAction(WIDGET_CLICK),
                 PendingIntent.FLAG_IMMUTABLE))
