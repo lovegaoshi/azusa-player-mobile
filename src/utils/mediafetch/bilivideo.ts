@@ -196,7 +196,9 @@ const extractResponseJson = (json: any, field: string) => {
       }
       if (json.data.dash) return getBestBitrate(json.data.dash.audio).baseUrl;
       if (json.data.durl) return json.data.durl[0].url;
-      throw Error(`[extractResponseJson] no audio url from ${json}`);
+      throw Error(
+        `[extractResponseJson] no audio url from ${JSON.stringify(json)}`
+      );
     case FieldEnum.VideoUrl:
       return json.data.dash.video[0].baseUrl;
     case FieldEnum.CID:
