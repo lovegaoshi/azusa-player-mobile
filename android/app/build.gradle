@@ -96,6 +96,7 @@ android {
         manifestPlaceholders = [
             appAuthRedirectScheme: 'com.noxplayer'
         ]
+        vectorDrawables.useSupportLibrary = true
     }
     splits {
         abi {

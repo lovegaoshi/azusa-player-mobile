@@ -7,7 +7,11 @@ import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
+import android.media.ThumbnailUtils
+import android.net.Uri
 import android.widget.RemoteViews
+import androidx.annotation.OptIn
+import androidx.media3.common.util.UnstableApi
 import com.doublesymmetry.trackplayer.model.Track
 import com.doublesymmetry.trackplayer.module.MusicEvents
 import com.doublesymmetry.trackplayer.service.MusicService
@@ -111,7 +115,8 @@ class APMWidget : AppWidgetProvider() {
                 val track = binder.service.currentTrack
                 if (track != currentTrack) {
                     currentTrack = track
-                    updateTrack(views, currentTrack, bitmap = binder.service.getCurrentBitmap()?.await())
+                    val bitmap  = binder.service.getCurrentBitmap()?.await()
+                    updateTrack(views, currentTrack, cropBitmap(bitmap))
                 }
             }
             // Instruct the widget manager to update the widget
@@ -121,10 +126,34 @@ class APMWidget : AppWidgetProvider() {
         }
     }
 
+    private fun cropBitmap(bitmap: Bitmap?): Bitmap? {
+        if (bitmap == null) return null
+        val dimension = bitmap.width.coerceAtMost(bitmap.height)
+        return ThumbnailUtils.extractThumbnail(bitmap, dimension, dimension)
+    }
+
+    @OptIn(UnstableApi::class)
+    private fun setBackground(context: Context?, uri: Uri?) {
+        if (!bindService(context)) return
+        scope.launch {
+            val widgetManager = AppWidgetManager.getInstance(context)
+            val ids = widgetManager.getAppWidgetIds(ComponentName(context!!, APMWidget::class.java))
+            val views = RemoteViews(context.packageName, R.layout.a_p_m_widget)
+            if (uri == null) {
+                views.setImageViewBitmap(R.id.widgetBackground, null)
+            } else {
+                val bitmap = binder.service.getBitmapLoader().loadBitmap(uri).await()
+                views.setImageViewBitmap(R.id.widgetBackground, bitmap)
+            }
+            ids.forEach { id -> widgetManager.updateAppWidget(id, views) }
+        }
+    }
+
     override fun onReceive(context: Context?, intent: Intent?) {
         try {
             when (intent?.action) {
-                "clear-widget" -> clearWidgetContent(context)
+                WIDGET_SET_BKGD -> setBackground(context, intent.data)
+                WIDGET_CLEAR -> clearWidgetContent(context)
                 WIDGET_CLICK -> {
                     if (!bindService(context)) {
                         Intent(context, MainActivity::class.java).apply {
@@ -156,3 +185,4 @@ class APMWidget : AppWidgetProvider() {
 
 const val WIDGET_CLICK = "widget-click"
 const val WIDGET_CLEAR = "clear-widget"
+const val WIDGET_SET_BKGD = "widget-set-bkgd"
