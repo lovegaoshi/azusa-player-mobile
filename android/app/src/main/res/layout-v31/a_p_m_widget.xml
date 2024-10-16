@@ -24,6 +24,7 @@
             android:layout_height="match_parent"
             android:contentDescription="@string/album_art"
             android:background="@drawable/round_corners"
+            android:clipToOutline="true"
             android:src="@drawable/example_appwidget_preview"/>
 
         <LinearLayout

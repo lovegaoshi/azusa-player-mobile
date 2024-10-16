@@ -23,7 +23,7 @@ class APMWidgetModule (private val reactContext: ReactApplicationContext) :
         reactContext.sendBroadcast(intent)
     }
 
-    @ReactMethod fun setWidgetBackground(uri: String) {
+    @ReactMethod fun setWidgetBackground(uri: String?) {
         val intent = Intent(reactContext, APMWidget::class.java)
         intent.setAction(WIDGET_SET_BKGD)
         intent.data = Uri.parse(uri)
