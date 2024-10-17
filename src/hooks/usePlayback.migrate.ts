@@ -275,12 +275,19 @@ export const _playFromSearch = async ({
   if (query === '') {
     if (playlistIds.length === 0) {
       if (searchPlaylist.songList.length > 0) {
+        logger.debug(
+          '[playFromSearch] since no playlist present, playing from search list'
+        );
         playFromPlaylistF({ playlist: searchPlaylist });
         return;
       }
+      logger.debug(
+        '[playFromSearch] since no playlist present, playing from bili suggest'
+      );
       playAsSearchListF({ songs: await fetchCurrentMusicTop() });
       return;
     }
+    logger.debug('[playFromSearch] play from a random playlist');
     playFromPlaylistF({
       playlist: await getPlaylist(randomChoice(playlistIds)),
     });
@@ -288,18 +295,21 @@ export const _playFromSearch = async ({
   }
   for (const song of currentPlayingList.songList) {
     if (song.name.toLowerCase() === query) {
+      logger.debug('[playFromSearch] matched song; playing');
       playFromPlaylistF({ playlist: currentPlayingList, song });
       return;
     }
   }
   for (const song of currentPlayingList.songList) {
     if (song.name.toLowerCase().includes(query)) {
+      logger.debug('[playFromSearch] fuzzy matched song; playing');
       playFromPlaylistF({ playlist: currentPlayingList, song });
       return;
     }
   }
   for (const playlist of Object.values(playlists)) {
     if (playlist.title.toLowerCase() === query) {
+      logger.debug('[playFromSearch] matched playlist; playing');
       playFromPlaylistF({ playlist: await getPlaylist(playlist.id) });
       return;
     }
@@ -308,11 +318,13 @@ export const _playFromSearch = async ({
     const playlist = await getPlaylist(playlistId);
     for (const song of playlist.songList) {
       if (song.name.toLowerCase().includes(query)) {
+        logger.debug('[playFromSearch] fuzzy matched playlist; playing');
         playFromPlaylistF({ playlist, song });
         return;
       }
     }
   }
+  logger.debug('[playFromSearch] nothing matched; shuffling all');
   shuffleAllF();
   return true;
 };
