@@ -2035,7 +2035,59 @@
       "https://i0.hdslb.com/bfs/garb/open/2d11c23ea7a5ce406c81a40f40d567bbb6399ad1.png",
       "https://i0.hdslb.com/bfs/garb/open/64ce1b42d4a1d12f75645b79df003956e3b94a37.png",
       "https://i0.hdslb.com/bfs/garb/open/8a197c34f3edb6b68729dabf8c738a223f599dde.png",
-      "https://i0.hdslb.com/bfs/garb/open/e6b534bbd52671b4544314f4dce5ce1556ccc805.png"
+      "https://i0.hdslb.com/bfs/garb/open/e6b534bbd52671b4544314f4dce5ce1556ccc805.png",
+      {
+        "type": "biliNFTVideoNew",
+        "identifier": "[\"100858\",\"102305\",\"幻夏恋歌\"]"
+      },
+      {
+        "type": "biliNFTVideoNew",
+        "identifier": "[\"100858\",\"102305\",\"心锁羁绊\"]"
+      },
+      {
+        "type": "biliNFTVideoNew",
+        "identifier": "[\"100858\",\"102305\",\"海边羞窘\"]"
+      },
+      {
+        "type": "biliNFTVideoNew",
+        "identifier": "[\"100858\",\"102305\",\"欢悦戏球\"]"
+      },
+      {
+        "type": "biliNFTVideoNew",
+        "identifier": "[\"100858\",\"102305\",\"不可描述\"]"
+      },
+      {
+        "type": "biliNFTVideoNew",
+        "identifier": "[\"100858\",\"102305\",\"柔韧海韵\"]"
+      },
+      {
+        "type": "biliNFTVideoNew",
+        "identifier": "[\"100858\",\"102305\",\"沙滩影记 \"]"
+      },
+      {
+        "type": "biliNFTVideoNew",
+        "identifier": "[\"100858\",\"102305\",\"雪糕泡泡\"]"
+      },
+      {
+        "type": "biliNFTVideoNew",
+        "identifier": "[\"100858\",\"102305\",\"心语告白\"]"
+      },
+      {
+        "type": "biliNFTVideoNew",
+        "identifier": "[\"100858\",\"102305\",\"海底少女\"]"
+      },
+      {
+        "type": "biliNFTVideoNew",
+        "identifier": "[\"100858\",\"102305\",\"璀璨梦舞\"]"
+      },
+      {
+        "type": "biliNFTVideoNew",
+        "identifier": "[\"100858\",\"102305\",\"特别授业\"]"
+      },
+      {
+        "type": "biliNFTVideoNew",
+        "identifier": "[\"100858\",\"102305\",\"窥见羞怯\"]"
+      }
     ],
     "customColors": {
       "maskedBackgroundColor": "rgba(0, 0, 0, 0.60)",
