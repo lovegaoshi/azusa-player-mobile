@@ -22,6 +22,7 @@ export default ({ icon }: Props) => {
   const [visible, setVisible] = React.useState(false);
   const language = useNoxSetting(state => state.playerSetting).language;
   const setPlayerSetting = useNoxSetting(state => state.setPlayerSetting);
+  const setShawarmaVoice = useNoxSetting(state => state.setShawarmaVoice);
 
   const onSubmit = (val: number) => {
     setVisible(false);
@@ -45,7 +46,12 @@ export default ({ icon }: Props) => {
         onClose={() => setVisible(false)}
         onSubmit={onSubmit}
         defaultIndex={availableLanguages.indexOf(language ?? 'en')}
-      ></GenericSelectDialog>
+        onPress={(val: number) =>
+          setShawarmaVoice(
+            'https://www.learningcontainer.com/wp-content/uploads/2020/02/Kalimba.mp3'
+          )
+        }
+      />
     </View>
   );
 };

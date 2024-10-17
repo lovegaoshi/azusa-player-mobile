@@ -9,6 +9,7 @@ import usePlayback from './usePlayback';
 import { useNoxSetting } from '@stores/useApp';
 import { IntentData } from '@enums/Intent';
 import usePlaybackCarplay from './usePlaybackCarplay';
+import { isAndroid } from '@utils/RNUtils';
 
 export const buildBrowseTree = (
   playlists: {
@@ -16,7 +17,7 @@ export const buildBrowseTree = (
   },
   t = i18n.t
 ) => {
-  if (Platform.OS !== 'android') return;
+  if (!isAndroid) return;
   TrackPlayer.setBrowseTree({
     '/': [
       {

@@ -9,12 +9,13 @@
  * steps to refactor:
  * each site needs a fetch to parse regex extracted, a videoinfo fetcher and a song fetcher.
  */
-import { Platform, NativeModules } from 'react-native';
+import { NativeModules } from 'react-native';
 
 import { cacheAlbumArt, base64AlbumArt } from '@utils/ffmpeg/ffmpeg';
 import { Source } from '@enums/MediaFetch';
 import SongTS from '@objects/Song';
 import logger from '../Logger';
+import { isAndroid } from '@utils/RNUtils';
 
 const { NoxModule } = NativeModules;
 
@@ -23,7 +24,7 @@ const songFetch = async (
   fpath: string,
   favlist: string[]
 ): Promise<NoxMedia.Song[]> => {
-  if (Platform.OS !== 'android') return [];
+  if (!isAndroid) return [];
   const mediaFiles: NoxUtils.NoxFileUtilMediaInfo[] =
     await NoxModule.listMediaDir(fpath, true);
   const uniqMediaFiles = mediaFiles.filter(v => !favlist.includes(v.realPath));
@@ -56,7 +57,7 @@ const resolveURLPrefetch = async (song: NoxMedia.Song) => ({ url: song.bvid });
 
 const resolveURL = async (song: NoxMedia.Song) => {
   let cover: string | undefined = undefined;
-  if (Platform.OS === 'android') {
+  if (isAndroid) {
     const artworkUri = await cacheAlbumArt(song.bvid);
     if (artworkUri) {
       cover = await NoxModule.getUri(artworkUri);

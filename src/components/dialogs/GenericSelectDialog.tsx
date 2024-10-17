@@ -22,6 +22,7 @@ interface Props<T> {
   onClose?: (index?: number) => void;
   onSubmit?: (index: number) => void;
   children?: React.ReactNode;
+  onPress?: (index: number) => void;
 }
 
 /**
@@ -35,6 +36,7 @@ export default function GenericSelectDialog<T>({
   defaultIndex = 0,
   onClose = () => undefined,
   onSubmit = () => undefined,
+  onPress = () => undefined,
   children,
 }: Props<T>) {
   const { t } = useTranslation();
@@ -72,7 +74,10 @@ export default function GenericSelectDialog<T>({
             data={options}
             renderItem={({ item, index }) => (
               <Pressable
-                onPress={() => setCurrentIndex(index)}
+                onPress={() => {
+                  setCurrentIndex(index);
+                  onPress(index);
+                }}
                 style={styles.dialogItem}
                 key={index}
               >

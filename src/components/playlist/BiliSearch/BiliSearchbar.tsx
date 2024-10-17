@@ -1,12 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { ProgressBar } from 'react-native-paper';
-import {
-  View,
-  StyleSheet,
-  GestureResponderEvent,
-  Platform,
-} from 'react-native';
+import { View, StyleSheet, GestureResponderEvent } from 'react-native';
 import { useTranslation } from 'react-i18next';
 import ShareMenu, { ShareCallback } from 'react-native-share-menu';
 import { useNavigation } from '@react-navigation/native';
@@ -22,6 +17,7 @@ import { getIcon } from './Icons';
 import AutoComplete from '@components/commonui/AutoComplete';
 import BiliKwSuggest from '@utils/Bilibili/BiliKwSuggest';
 import { SearchOptions } from '@enums/Storage';
+import { isAndroid } from '@utils/RNUtils';
 
 interface SharedItem {
   mimeType: string;
@@ -122,12 +118,12 @@ export default ({
   };
 
   useEffect(() => {
-    if (Platform.OS !== 'android') return;
+    if (!isAndroid) return;
     ShareMenu.getInitialShare(handleShare as ShareCallback);
   }, []);
 
   useEffect(() => {
-    if (Platform.OS !== 'android') return;
+    if (!isAndroid) return;
     const listener = ShareMenu.addNewShareListener(
       handleShare as ShareCallback
     );

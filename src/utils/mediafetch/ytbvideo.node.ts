@@ -1,9 +1,9 @@
 import ytdl from 'ytdl-core';
-import { Platform } from 'react-native';
 
 import { logger } from '../Logger';
 import SongTS from '@objects/Song';
 import { Source } from '@enums/MediaFetch';
+import { isIOS } from '@utils/RNUtils';
 
 const resolveIOSURL = (formats: ytdl.videoFormat[]) => {
   // iOS can't play OGG, but mp4a is fine.
@@ -24,8 +24,6 @@ const resolveIOSURL = (formats: ytdl.videoFormat[]) => {
     }
   ).url;
 };
-
-const isIOS = Platform.OS === 'ios';
 
 export const resolveURL = async (song: NoxMedia.Song, iOS = true) => {
   const sid = song.bvid;

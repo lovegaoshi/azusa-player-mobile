@@ -41,7 +41,7 @@ export const SetupService = async ({
       IOSCategoryOptions.AllowBluetoothA2DP,
     ],
   });
-  const RNTPOptions = initRNTPOptions({ audioOffload });
+  const RNTPOptions = initRNTPOptions({ audioOffload, skipSilence });
   setState({ RNTPOptions });
   await TrackPlayer.updateOptions(RNTPOptions);
   await TrackPlayer.setRepeatMode(RepeatMode.Off);

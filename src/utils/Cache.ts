@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Platform } from 'react-native';
 import LRUCache from 'lru-cache';
 import RNFetchBlob from 'react-native-blob-util';
 import TrackPlayer from 'react-native-track-player';
@@ -12,10 +11,9 @@ import { getCachedMediaMapping, saveCachedMediaMapping } from './ChromeStorage';
 import { logger } from './Logger';
 import { customReqHeader } from './BiliFetch';
 import { Source } from '@enums/MediaFetch';
-import { validateFile } from './RNUtils';
+import { validateFile, isIOS } from './RNUtils';
 
 const { getState } = playerSettingStore;
-const isIOS = Platform.OS === 'ios';
 
 interface OptionsProps {
   max?: number;

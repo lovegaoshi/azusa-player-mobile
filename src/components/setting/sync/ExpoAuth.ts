@@ -1,6 +1,7 @@
-import { Platform } from 'react-native';
 import { loadAsync, exchangeCodeAsync } from 'expo-auth-session';
 import { authorize } from 'react-native-app-auth';
+import { isIOS } from '@utils/RNUtils';
+
 interface Config {
   redirectUrl: string;
   redirectUri: string;
@@ -35,4 +36,4 @@ const rnAppAuth = async (config: Config) => {
   return authState.accessToken;
 };
 
-export default Platform.OS === 'ios' ? expoAuth : rnAppAuth;
+export default isIOS ? expoAuth : rnAppAuth;

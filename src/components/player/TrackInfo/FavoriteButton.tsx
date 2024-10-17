@@ -9,7 +9,6 @@ import { useNoxSetting } from '@stores/useApp';
 import { updatePlaylistSongs } from '@utils/playlistOperations';
 import LottieButtonAnimated from '@components/buttons/LottieButtonAnimated';
 import appStore from '@stores/appStore';
-import { Platform } from 'react-native';
 import logger from '@utils/Logger';
 import { isAndroid } from '@utils/RNUtils';
 
@@ -36,15 +35,15 @@ export default ({ track }: NoxComponent.TrackProps) => {
   };
 
   const setHeart = (heart = false) => {
-    if (Platform.OS === 'android') {
+    if (isAndroid) {
       const oldOptions = getAppStoreState().RNTPOptions;
       const newRNTPOptions = {
         ...oldOptions,
         customActions: oldOptions?.customActions
           ? {
-            ...oldOptions!.customActions!,
-            customFavorite: heart ? 1 : 0,
-          }
+              ...oldOptions!.customActions!,
+              customFavorite: heart ? 1 : 0,
+            }
           : undefined,
       };
       TrackPlayer.updateOptions(newRNTPOptions);
@@ -52,13 +51,11 @@ export default ({ track }: NoxComponent.TrackProps) => {
     }
   };
 
-  if (isAndroid) {
-    useTrackPlayerEvents([Event.RemoteCustomAction], e => {
-      if (e.customAction !== 'customFavorite') return;
-      logger.log('[Event.CustomAction] fav button pressed.');
-      onClick();
-    });
-  }
+  useTrackPlayerEvents(isAndroid ? [Event.RemoteCustomAction] : [], e => {
+    if (e.customAction !== 'customFavorite') return;
+    logger.log('[Event.CustomAction] fav button pressed.');
+    onClick();
+  });
 
   useEffect(() => {
     const liked =

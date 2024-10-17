@@ -17,14 +17,13 @@ import {
   fadePause,
   cycleThroughPlaymode,
   resolveAndCache,
-  isIOS,
   fadePlay,
 } from '@utils/RNTPUtils';
 import { performSkipToNext, performSkipToPrevious } from '@hooks/useTPControls';
 import { useNoxSetting } from '@stores/useApp';
 import { appStartupInit } from '@hooks/useSetupPlayer';
 import { playFromMediaId, playFromSearch } from '@hooks/usePlayback.migrate';
-import { isAndroid } from '@utils/RNUtils';
+import { isAndroid, isIOS } from '@utils/RNUtils';
 
 const { APMWidgetModule } = NativeModules;
 const { getState } = noxPlayingList;
