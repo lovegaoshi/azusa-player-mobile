@@ -3,7 +3,7 @@ import fetcher from '../../src/utils/mediafetch/ytbPlaylist';
 test('ytbplaylist', async () => {
   const content = await fetcher.regexFetch({
     reExtracted: fetcher.regexSearchMatch.exec(
-      'https://www.youtube.com/playlist?list=PLv4y5OVUmyFjx4uf_sQunpq8nlQiar_iQ'
+      'https://www.youtube.com/playlist?list=PL-mVqujjjwGjZu3wli3iOh0FBdSU6tsNO'
     )!,
   });
   console.log(content?.songList.length);
