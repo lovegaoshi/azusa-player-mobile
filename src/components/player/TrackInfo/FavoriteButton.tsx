@@ -11,6 +11,7 @@ import LottieButtonAnimated from '@components/buttons/LottieButtonAnimated';
 import appStore from '@stores/appStore';
 import { Platform } from 'react-native';
 import logger from '@utils/Logger';
+import { isAndroid } from '@utils/RNUtils';
 
 const getAppStoreState = appStore.getState;
 
@@ -41,9 +42,9 @@ export default ({ track }: NoxComponent.TrackProps) => {
         ...oldOptions,
         customActions: oldOptions?.customActions
           ? {
-              ...oldOptions!.customActions!,
-              customFavorite: heart ? 1 : 0,
-            }
+            ...oldOptions!.customActions!,
+            customFavorite: heart ? 1 : 0,
+          }
           : undefined,
       };
       TrackPlayer.updateOptions(newRNTPOptions);
@@ -51,11 +52,13 @@ export default ({ track }: NoxComponent.TrackProps) => {
     }
   };
 
-  useTrackPlayerEvents([Event.RemoteCustomAction], e => {
-    if (e.customAction !== 'customFavorite') return;
-    logger.log('[Event.CustomAction] fav button pressed.');
-    onClick();
-  });
+  if (isAndroid) {
+    useTrackPlayerEvents([Event.RemoteCustomAction], e => {
+      if (e.customAction !== 'customFavorite') return;
+      logger.log('[Event.CustomAction] fav button pressed.');
+      onClick();
+    });
+  }
 
   useEffect(() => {
     const liked =
