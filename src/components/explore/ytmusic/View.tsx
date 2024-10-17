@@ -54,9 +54,12 @@ const Explore = () => {
   ) : (
     <SafeAreaView>
       <Button
-        onPress={() => {
-          CookieManager.get('https://youtube.com').then(v =>
-            Object.values(v).forEach(cookie => `${cookie.name}=${cookie.value}`)
+        onPress={async () => {
+          const cookies = await CookieManager.get('https://youtube.com').then(
+            v =>
+              Object.values(v)
+                .map(cookie => `${cookie.name}=${cookie.value}`)
+                .join('; ')
           );
         }}
       >

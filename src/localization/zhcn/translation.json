@@ -142,6 +142,8 @@
     "keepForegroundDesc": "保持前台服务，贼拉费电",
     "audioOffloadName": "音频独占",
     "audioOffloadDesc": "启用音频独占模式，节省电量",
+    "parseEmbeddedArtworkName": "解析嵌入艺术",
+    "parseEmbeddedArtworkDesc": "解析嵌入艺术（仅在android auto）",
     "skipSilenceName": "跳过静音",
     "skipSilenceDesc": "跳过静音片段（exoplayer特性）",
     "karaokeLyricsName": "逐字歌词",

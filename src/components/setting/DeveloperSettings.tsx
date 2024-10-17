@@ -68,6 +68,10 @@ const developerSettings: { [key: string]: SettingEntry } = {
     settingName: 'audioOffload',
     settingCategory: 'GeneralSettings',
   },
+  parseEmbeddedArtwork: {
+    settingName: 'parseEmbeddedArtwork',
+    settingCategory: 'GeneralSettings',
+  },
   skipSilence: {
     settingName: 'skipSilence',
     settingCategory: 'GeneralSettings',
@@ -189,6 +193,9 @@ const Home = ({ navigation }: NoxComponent.NavigationProps) => {
                 <>
                   <RenderSetting item={developerSettings.audioOffload} />
                   <RenderSetting item={developerSettings.skipSilence} />
+                  <RenderSetting
+                    item={developerSettings.parseEmbeddedArtwork}
+                  />
                 </>
               )}
               <RenderSetting item={developerSettings.memoryEfficiency} />
