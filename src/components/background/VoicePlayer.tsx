@@ -14,9 +14,6 @@ export default () => {
       disableFocus={true}
       preventsDisplaySleepDuringVideoPlayback={false}
       bufferConfig={{ cacheSizeMB: 200 }}
-      onLoadStart={() => {
-        console.log('video onLoadStart');
-      }}
     />
   );
 };

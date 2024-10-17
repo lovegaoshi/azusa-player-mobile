@@ -29,7 +29,14 @@ export default ({ icon }: Props) => {
     const toLang = availableLanguages[val];
     setPlayerSetting({ language: toLang });
     i18n.changeLanguage(toLang);
+    setShawarmaVoice(undefined);
   };
+
+  const onClose = () => {
+    setVisible(false);
+    setShawarmaVoice(undefined);
+  };
+
   return (
     <View>
       <SettingListItem
@@ -43,7 +50,7 @@ export default ({ icon }: Props) => {
         options={availableLanguages}
         title={t('Settings.LanguageOptionsTitle')}
         renderOptionTitle={(val: string) => availableLanguagesMap[val]}
-        onClose={() => setVisible(false)}
+        onClose={onClose}
         onSubmit={onSubmit}
         defaultIndex={availableLanguages.indexOf(language ?? 'en')}
         onPress={(val: number) =>
