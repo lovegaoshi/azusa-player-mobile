@@ -130,6 +130,8 @@
     "keepForegroundDesc": "enable to waste a LOT of battery",
     "audioOffloadName": "Audio Offload",
     "audioOffloadDesc": "enable audio offload to a dedicated processsor (may save battery)",
+    "parseEmbeddedArtworkName": "Parse Embedded Artwork",
+    "parseEmbeddedArtworkDesc": "Parse embedded artwork 1 additional time for android auto.",
     "skipSilenceName": "Skip Silence",
     "skipSilenceDesc": "skip segments with no audio (exoplayer feature)",
     "karaokeLyricsName": "Karaoke Lyrics",

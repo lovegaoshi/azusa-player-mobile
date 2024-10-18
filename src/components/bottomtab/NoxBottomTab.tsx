@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View, Platform } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import { IconButton } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
 import { getDrawerStatusFromState } from '@react-navigation/drawer';
@@ -8,6 +8,7 @@ import { NoxRoutes } from '@enums/Routes';
 import { useNoxSetting } from '@stores/useApp';
 import { BottomTabRouteIcons as RouteIcons } from '@enums/BottomTab';
 import { useIsLandscape } from '@hooks/useOrientation';
+import { isIOS } from '@utils/RNUtils';
 
 interface IconProps {
   icon: string;
@@ -95,7 +96,7 @@ const NoxAndroidBottomTab = ({ navigation }: NoxComponent.NavigationProps2) => {
 const styles = StyleSheet.create({
   panel: {
     flexDirection: 'row',
-    paddingBottom: Platform.OS === 'ios' ? 20 : 0,
+    paddingBottom: isIOS ? 20 : 0,
   },
   iconButton: {
     flex: 1,

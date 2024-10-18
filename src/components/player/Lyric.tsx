@@ -9,7 +9,6 @@ import {
   TouchableOpacity,
   Button,
   TextInput,
-  Platform,
 } from 'react-native';
 import { Lrc as Lyric, KaraokeMode } from 'react-native-lyric';
 import { Track, useProgress } from 'react-native-track-player';
@@ -17,6 +16,7 @@ import { IconButton } from 'react-native-paper';
 
 import { useNoxSetting } from '@stores/useApp';
 import useLyric from '@hooks/useLyricRN';
+import { isIOS } from '@utils/RNUtils';
 
 interface ModalContainerProps {
   children: React.JSX.Element[];
@@ -285,7 +285,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'flex-end',
     backgroundColor: 'rgba(0, 0, 0, 0.1)',
-    paddingBottom: Platform.OS === 'ios' ? 20 : 0,
+    paddingBottom: isIOS ? 20 : 0,
   },
 
   modalView: {

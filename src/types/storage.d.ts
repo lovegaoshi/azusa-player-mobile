@@ -46,6 +46,7 @@ declare global {
       noRepeat: boolean;
       audioOffload?: boolean;
       skipSilence: boolean;
+      parseEmbeddedArtwork: boolean;
 
       appID: string;
       language?: string;

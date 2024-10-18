@@ -29,6 +29,8 @@ import { IntentData } from '@enums/Intent';
 import { BottomTabRouteIcons } from '@enums/BottomTab';
 
 interface NoxSetting {
+  shawarmaVoice: string | undefined;
+  setShawarmaVoice: (val: string | undefined) => void;
   bottomTabRoute: BottomTabRouteIcons;
   setBottomTabRoute: (val: BottomTabRouteIcons) => void;
 
@@ -138,6 +140,9 @@ interface NoxSetting {
  * as well as saving and loading states to/from asyncStorage.
  */
 export const useNoxSetting = create<NoxSetting>((set, get) => ({
+  shawarmaVoice: undefined,
+  setShawarmaVoice: v => set({ shawarmaVoice: v }),
+
   bottomTabRoute: BottomTabRouteIcons.music,
   setBottomTabRoute: val => set({ bottomTabRoute: val }),
 

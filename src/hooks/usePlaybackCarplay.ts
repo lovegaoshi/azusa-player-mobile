@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import { Platform } from 'react-native';
 import {
   CarPlay,
   NowPlayingTemplate,
@@ -11,6 +10,7 @@ import { useTranslation } from 'react-i18next';
 import { PLAYLIST_MEDIAID } from '@enums/Playlist';
 import usePlayback from './usePlayback';
 import { cycleThroughPlaymodeIOS as cyclePlaymode } from '@stores/playingList';
+import { isIOS } from '@utils/RNUtils';
 
 enum Templates {
   Playlist = 'playlistTemplate',
@@ -98,7 +98,7 @@ export default () => {
   };
 
   useEffect(() => {
-    if (Platform.OS !== 'ios') return;
+    if (!isIOS) return;
     function onConnect() {
       setCarPlayConnected(true);
     }

@@ -1,5 +1,5 @@
 import { useTranslation } from 'react-i18next';
-import { Linking, Platform } from 'react-native';
+import { Linking } from 'react-native';
 // eslint-disable-next-line import/no-unresolved
 import { APPSTORE } from '@env';
 
@@ -9,6 +9,7 @@ import { Versions } from '../enums/Version';
 import logger from '@utils/Logger';
 import useInstallAPK from './useInstallAPK';
 import useSnack, { InfiniteDuration } from '../stores/useSnack';
+import { isAndroid } from '@utils/RNUtils';
 
 const regexVersion = (version: string) => {
   const regexMatch = /\d+\.\d+\.\d+/.exec(version),
@@ -87,7 +88,7 @@ export default () => {
       );
     } else {
       setPlayerSetting({ noxCheckedVersion });
-      if (Platform.OS === 'android') {
+      if (isAndroid) {
         ThreeWayAlert(
           t('VersionUpdate.UpdateFoundTitle'),
           String(

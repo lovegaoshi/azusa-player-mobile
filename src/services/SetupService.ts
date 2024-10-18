@@ -28,12 +28,14 @@ const setupPlayer = async (
 
 export const SetupService = async ({
   noInterruption = false,
-  audioOffload,
+  audioOffload = true,
   skipSilence = false,
+  parseEmbeddedArtwork = false,
 }: Partial<NoxStorage.PlayerSettingDict>) => {
   await setupPlayer({
     autoHandleInterruptions: noInterruption ? false : true,
     androidSkipSilence: skipSilence,
+    androidParseEmbeddedArtwork: parseEmbeddedArtwork,
     maxCacheSize: 0,
     iosCategoryOptions: [
       IOSCategoryOptions.AllowAirPlay,
@@ -41,7 +43,7 @@ export const SetupService = async ({
       IOSCategoryOptions.AllowBluetoothA2DP,
     ],
   });
-  const RNTPOptions = initRNTPOptions({ audioOffload });
+  const RNTPOptions = initRNTPOptions({ audioOffload, skipSilence });
   setState({ RNTPOptions });
   await TrackPlayer.updateOptions(RNTPOptions);
   await TrackPlayer.setRepeatMode(RepeatMode.Off);

@@ -1,4 +1,4 @@
-import { Animated, Platform, AppState } from 'react-native';
+import { Animated, AppState } from 'react-native';
 import TrackPlayer, {
   AppKilledPlaybackBehavior,
   Capability,
@@ -22,10 +22,10 @@ import { resolveUrl, parseSongR128gain } from '@utils/SongOperations';
 import NoxCache from './Cache';
 import { setTPR128Gain } from './ffmpeg/ffmpeg';
 import { NULL_TRACK } from '@objects/Song';
+import { isAndroid, isIOS } from './RNUtils';
 
 const { getState, setState } = appStore;
 const animatedVolume = new Animated.Value(1);
-export const isIOS = Platform.OS === 'ios';
 
 animatedVolume.addListener(state => TrackPlayer.setVolume(state.value));
 
@@ -72,6 +72,7 @@ export const animatedVolumeChange = ({
 
 interface RNTPOptions {
   audioOffload?: boolean;
+  skipSilence?: boolean;
 }
 /**
  * see export function useSetupPlayer.
@@ -80,12 +81,13 @@ interface RNTPOptions {
  * playlistStore.playmode is already set
  * this should return the correct icon for playback mode.
  */
-export const initRNTPOptions = ({ audioOffload }: RNTPOptions) => {
+export const initRNTPOptions = ({ audioOffload, skipSilence }: RNTPOptions) => {
   const options: UpdateOptions = {
     android: {
       appKilledPlaybackBehavior:
         AppKilledPlaybackBehavior.StopPlaybackAndRemoveNotification,
       audioOffload,
+      androidSkipSilence: skipSilence,
     },
     capabilities: [
       Capability.Play,
@@ -96,7 +98,7 @@ export const initRNTPOptions = ({ audioOffload }: RNTPOptions) => {
     ],
     progressUpdateEventInterval: 1,
   };
-  if (Platform.OS === 'android') {
+  if (isAndroid) {
     options.customActions = {
       customActionsList: ['customPlaymode', 'customFavorite'],
       customPlaymode: getPlaybackModeNotifIcon()[0],
@@ -116,7 +118,7 @@ export const fadePlay = async () => {
 
 export const cycleThroughPlaymode = () => {
   const customPlaymode = cyclePlaymode();
-  if (Platform.OS === 'android') {
+  if (isAndroid) {
     const oldOptions = getState().RNTPOptions;
     const newRNTPOptions = {
       ...oldOptions,

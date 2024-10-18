@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { View, ScrollView, Platform, Alert } from 'react-native';
+import { View, ScrollView, Alert } from 'react-native';
 import { List } from 'react-native-paper';
 import { useTranslation } from 'react-i18next';
 import { useStore } from 'zustand';
@@ -31,6 +31,7 @@ import {
   disableTanaka,
   enableTanaka,
 } from '@hooks/useTanakaAmazingCommodities';
+import { isAndroid } from '@utils/RNUtils';
 
 enum Icons {
   setlog = 'console',
@@ -65,6 +66,10 @@ const developerSettings: { [key: string]: SettingEntry } = {
   },
   audioOffload: {
     settingName: 'audioOffload',
+    settingCategory: 'GeneralSettings',
+  },
+  parseEmbeddedArtwork: {
+    settingName: 'parseEmbeddedArtwork',
     settingCategory: 'GeneralSettings',
   },
   skipSilence: {
@@ -184,10 +189,13 @@ const Home = ({ navigation }: NoxComponent.NavigationProps) => {
             <View>
               <RenderSetting item={developerSettings.noInterruption} />
               <RenderSetting item={developerSettings.prefetchTrack} />
-              {Platform.OS === 'android' && (
+              {isAndroid && (
                 <>
                   <RenderSetting item={developerSettings.audioOffload} />
                   <RenderSetting item={developerSettings.skipSilence} />
+                  <RenderSetting
+                    item={developerSettings.parseEmbeddedArtwork}
+                  />
                 </>
               )}
               <RenderSetting item={developerSettings.memoryEfficiency} />

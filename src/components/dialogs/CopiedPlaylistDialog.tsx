@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Pressable, View, FlatList, StyleSheet, Platform } from 'react-native';
+import { Pressable, View, FlatList, StyleSheet } from 'react-native';
 import { Button, Dialog, Portal, Text, RadioButton } from 'react-native-paper';
 import { useTranslation } from 'react-i18next';
 
@@ -7,6 +7,7 @@ import { useNoxSetting } from '@stores/useApp';
 import logger from '@utils/Logger';
 import noxPlayingList from '@stores/playingList';
 import { NoxRepeatMode } from '@enums/RepeatMode';
+import { isAndroid } from '@utils/RNUtils';
 
 const { getState } = noxPlayingList;
 
@@ -75,10 +76,9 @@ export default ({
         style={[
           styles.dialog,
           {
-            height:
-              Platform.OS === 'android'
-                ? `${10 + playlistList().length * 10}%`
-                : `${20 + playlistList().length * 10}%`,
+            height: isAndroid
+              ? `${10 + playlistList().length * 10}%`
+              : `${20 + playlistList().length * 10}%`,
           },
         ]}
       >
@@ -127,7 +127,7 @@ export default ({
 const styles = StyleSheet.create({
   dialog: {
     minHeight: '30%',
-    maxHeight: Platform.OS === 'android' ? '50%' : '100%',
+    maxHeight: isAndroid ? '50%' : '100%',
   },
   dialogTitle: {
     maxHeight: 100,

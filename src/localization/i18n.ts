@@ -3,12 +3,14 @@ import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
 import translationEN from './en/translation.json';
 import translationZHCN from './zhcn/translation.json';
-import { Settings, I18nManager, Platform } from 'react-native';
+import { Settings, I18nManager } from 'react-native';
+
+import { isIOS } from '@utils/RNUtils';
 
 function getLocale() {
   let currentLocale = 'en';
 
-  if (Platform.OS === 'ios') {
+  if (isIOS) {
     const settings = Settings.get('AppleLocale');
     const locale = settings || settings?.[0];
     if (locale) currentLocale = locale;

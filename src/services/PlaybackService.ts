@@ -3,7 +3,7 @@ import TrackPlayer, {
   State,
   RepeatMode,
 } from 'react-native-track-player';
-import { DeviceEventEmitter, Platform, NativeModules } from 'react-native';
+import { DeviceEventEmitter, NativeModules } from 'react-native';
 
 import { NULL_TRACK } from '../objects/Song';
 import { parseSongR128gain, resolveUrl } from '../utils/SongOperations';
@@ -17,13 +17,13 @@ import {
   fadePause,
   cycleThroughPlaymode,
   resolveAndCache,
-  isIOS,
   fadePlay,
 } from '@utils/RNTPUtils';
 import { performSkipToNext, performSkipToPrevious } from '@hooks/useTPControls';
 import { useNoxSetting } from '@stores/useApp';
 import { appStartupInit } from '@hooks/useSetupPlayer';
 import { playFromMediaId, playFromSearch } from '@hooks/usePlayback.migrate';
+import { isAndroid, isIOS } from '@utils/RNUtils';
 
 const { APMWidgetModule } = NativeModules;
 const { getState } = noxPlayingList;
@@ -38,18 +38,21 @@ export async function additionalPlaybackService({
   lastPlayDuration,
   currentPlayingID,
 }: Partial<NoxStorage.PlayerSettingDict>) {
-  TrackPlayer.addEventListener(Event.RemotePlayId, e => playFromMediaId(e.id));
-  TrackPlayer.addEventListener(Event.RemotePlaySearch, e =>
-    playFromSearch(e.query.toLowerCase())
-  );
-  TrackPlayer.addEventListener(Event.RemotePlayPause, async () => {
-    if ((await TrackPlayer.getPlaybackState()).state === State.Playing) {
-      fadePause();
-    } else {
-      TrackPlayer.play();
-    }
-  });
-
+  if (isAndroid) {
+    TrackPlayer.addEventListener(Event.RemotePlayId, e =>
+      playFromMediaId(e.id)
+    );
+    TrackPlayer.addEventListener(Event.RemotePlaySearch, e =>
+      playFromSearch(e.query.toLowerCase())
+    );
+    TrackPlayer.addEventListener(Event.RemotePlayPause, async () => {
+      if ((await TrackPlayer.getPlaybackState()).state === State.Playing) {
+        fadePause();
+      } else {
+        TrackPlayer.play();
+      }
+    });
+  }
   TrackPlayer.addEventListener(Event.PlaybackQueueEnded, async () =>
     performSkipToNext(true)
   );
@@ -101,12 +104,6 @@ export async function PlaybackService() {
   TrackPlayer.addEventListener(Event.RemotePlay, async () => {
     console.log('Event.RemotePlay');
     TrackPlayer.play();
-  });
-
-  TrackPlayer.addEventListener(Event.RemoteCustomAction, async event => {
-    console.log('Event.RemoteCustomPlaymode', event);
-    if (event.customAction !== 'customPlaymode') return;
-    cycleThroughPlaymode();
   });
 
   TrackPlayer.addEventListener(Event.RemoteSeek, event => {
@@ -197,7 +194,13 @@ export async function PlaybackService() {
     console.log('Event.PlaybackPlayWhenReadyChanged', event);
   });
 
-  if (Platform.OS === 'android') {
+  if (isAndroid) {
+    TrackPlayer.addEventListener(Event.RemoteCustomAction, async event => {
+      console.log('Event.RemoteCustomPlaymode', event);
+      if (event.customAction !== 'customPlaymode') return;
+      cycleThroughPlaymode();
+    });
+
     TrackPlayer.addEventListener(Event.PlaybackAnimatedVolumeChanged, e => {
       logger.debug(
         `animated volume finished event triggered: ${JSON.stringify(e)}`
