@@ -13,7 +13,6 @@ export default () => {
       style={styles.videoStyle}
       disableFocus={true}
       preventsDisplaySleepDuringVideoPlayback={false}
-      bufferConfig={{ cacheSizeMB: 200 }}
     />
   );
 };
