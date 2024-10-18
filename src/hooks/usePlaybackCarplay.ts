@@ -98,7 +98,7 @@ export default () => {
   };
 
   useEffect(() => {
-    if (isIOS) return;
+    if (!isIOS) return;
     function onConnect() {
       setCarPlayConnected(true);
     }
