@@ -5,6 +5,7 @@ import { useTranslation } from 'react-i18next';
 import GenericSelectDialog from '../dialogs/GenericSelectDialog';
 import { SettingListItem } from './useRenderSetting';
 import { useNoxSetting } from '@stores/useApp';
+import { shawarma } from '@assets/voice/shawarma';
 
 interface Props {
   icon: string;
@@ -54,9 +55,8 @@ export default ({ icon }: Props) => {
         onSubmit={onSubmit}
         defaultIndex={availableLanguages.indexOf(language ?? 'en')}
         onPress={(val: number) =>
-          setShawarmaVoice(
-            'https://www.learningcontainer.com/wp-content/uploads/2020/02/Kalimba.mp3'
-          )
+          // @ts-expect-error
+          setShawarmaVoice(shawarma[availableLanguages[val]])
         }
       />
     </View>
