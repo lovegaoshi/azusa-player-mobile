@@ -24,10 +24,10 @@ export const cacheAlbumArt = async (fpath: string) =>
   });
 
 export const probeMetadata = async (
-  fspath: string
+  fspath: string,
 ): Promise<NoxMedia.FFProbeMetadata> => {
   const session = await FFprobeKit.execute(
-    `-v quiet -print_format json -show_format '${fspath}'`
+    `-v quiet -print_format json -show_format '${fspath}'`,
   );
   const parsedMetadata = JSON.parse(await session.getOutput());
   logger.debug(parsedMetadata);
@@ -53,7 +53,7 @@ const parseReplayGainLog = (log: string) => {
 export const r128gain = async (fspath: string) => {
   logger.debug(`[ffmpeg] probing r128gain of ${fspath}`);
   const session = await FFmpegKit.execute(
-    `-i '${fspath}' -nostats -filter_complex replaygain -f null -`
+    `-i '${fspath}' -nostats -filter_complex replaygain -f null -`,
   );
   return parseReplayGainLog(await session.getOutput());
 };
@@ -83,7 +83,7 @@ export const ffmpegToMP3 = async ({
     if (coverArt) {
       logger.debug(`[ffmpeg] additionally inserting cover art...`);
       await FFmpegKit.execute(
-        `-i '${fspath}.mp3' -i '${coverArt}' -map 0:a -map 1:0 -c copy ${fspath}.2.mp3`
+        `-i '${fspath}.mp3' -i '${coverArt}' -map 0:a -map 1:0 -c copy ${fspath}.2.mp3`,
       );
       RNFetchBlob.fs.unlink(`${fspath}.mp3`).catch();
       RNFetchBlob.fs.unlink(coverArt).catch();
@@ -108,7 +108,7 @@ export const setR128Gain = async (
   gain: number | string,
   song: NoxMedia.Song,
   fade = 0,
-  init = -1
+  init = -1,
 ) => {
   logger.debug(`[r128gain] set r128gain to ${gain} dB`);
   if (typeof gain === 'string') {

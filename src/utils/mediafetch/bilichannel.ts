@@ -43,7 +43,7 @@ export const fetchBiliChannelList = (
   url: string,
   progressEmitter: NoxUtils.ProgressEmitter = () => undefined,
   favList: string[] = [],
-  fastSearch = false
+  fastSearch = false,
 ) => {
   logger.info('calling fetchBiliChannelList');
   const mid = /space.bilibili\.com\/(\d+)(\/search)?\/video/.exec(url)![1];
@@ -82,11 +82,11 @@ const regexFetch = async ({
       reExtracted.input,
       progressEmitter,
       favList,
-      fastSearch
+      fastSearch,
     ),
     false,
     progressEmitter,
-    useBiliTag || false
+    useBiliTag || false,
   ),
 });
 

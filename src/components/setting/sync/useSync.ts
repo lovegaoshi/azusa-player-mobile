@@ -57,14 +57,14 @@ const useSync = () => {
               setNoxExtensionContent(
                 parsedContent[StorageKeys.MY_FAV_LIST_KEY].map(
                   (val: any) =>
-                    parsedContent[val].title ?? parsedContent[val].info.title
-                )
+                    parsedContent[val].title ?? parsedContent[val].info.title,
+                ),
               );
               setCachedParsedContent(parsedContent);
               resolve(true);
             },
           },
-        ]
+        ],
       );
     });
 
@@ -73,7 +73,7 @@ const useSync = () => {
       .map((val, index) =>
         val
           ? cachedParsedContent[cachedParsedContent.MyFavList[index]]
-          : undefined
+          : undefined,
       )
       .filter(val => val);
     await addImportedPlaylist(checkedPlaylists);

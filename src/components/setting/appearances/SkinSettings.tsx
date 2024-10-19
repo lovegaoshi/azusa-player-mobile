@@ -232,14 +232,14 @@ const SkinSettings = () => {
     }
     const uniqueSkins = getUniqObjects(
       skins.filter(skin => skin.metaData).concat(playerStyles),
-      getThemeID
+      getThemeID,
     );
     setPlayerStyles(uniqueSkins);
   };
 
   React.useEffect(() => {
     const currentThemeIndex = allThemes.findIndex(
-      theme => getThemeID(theme) === checked
+      theme => getThemeID(theme) === checked,
     );
     if (currentThemeIndex > -1) {
       scrollViewRef.current?.scrollToIndex({

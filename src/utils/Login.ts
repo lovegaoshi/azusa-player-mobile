@@ -11,7 +11,7 @@ export interface LoginInfo {
 export const getLoginStatus = async (
   loginAPI: string,
   loginSuccess: (json: any) => boolean,
-  parseJSON: (json: any) => LoginInfo
+  parseJSON: (json: any) => LoginInfo,
 ) => {
   try {
     const response = await bfetch(loginAPI, {

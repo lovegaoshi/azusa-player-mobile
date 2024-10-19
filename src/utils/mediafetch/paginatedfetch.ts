@@ -22,7 +22,7 @@ export interface FetcherProps {
   resolveBiliBVID?: (
     bvobjs: any[],
     progressEmitter: ProgressEmitter,
-    rawData?: any
+    rawData?: any,
   ) => Promise<NoxMedia.Song[]> | NoxMedia.Song[];
   progressEmitter?: ProgressEmitter;
   favList?: any[];
@@ -70,7 +70,9 @@ export const fetchPaginatedAPI = async ({
     page++
   ) {
     pagesPromises.push(
-      limiter.schedule(() => fetcher(url.replace('{pn}', String(page)), params))
+      limiter.schedule(() =>
+        fetcher(url.replace('{pn}', String(page)), params),
+      ),
     );
   }
   const resolvedPromises = await Promise.all(pagesPromises);
@@ -86,13 +88,13 @@ export const fetchPaginatedAPI = async ({
         .catch((err: any) => {
           console.error(err, pages);
         });
-    })
+    }),
   );
   // i dont know the smart way to do this out of the async loop, though luckily that O(2n) isnt that big of a deal
   const resolvedBiliBVID = await resolveBiliBVID(
     BVids,
     progressEmitter,
-    await processMetadata(data)
+    await processMetadata(data),
   );
   return resolvedBiliBVID.filter(item => item);
 };
@@ -128,7 +130,7 @@ export const fetchAwaitPaginatedAPI = async ({
     return true;
   };
   const res = await limiter.schedule(() =>
-    fetcher(url.replace('{pn}', String(1)), params)
+    fetcher(url.replace('{pn}', String(1)), params),
   );
   const json = await jsonify(res);
   const data = getJSONData(json);
@@ -142,7 +144,7 @@ export const fetchAwaitPaginatedAPI = async ({
       page++
     ) {
       const subRes = await limiter.schedule(() =>
-        fetcher(url.replace('{pn}', String(page)), params)
+        fetcher(url.replace('{pn}', String(page)), params),
       );
       const subJson = await subRes.json();
       if (!resolvePageJson(BVids, subJson)) {

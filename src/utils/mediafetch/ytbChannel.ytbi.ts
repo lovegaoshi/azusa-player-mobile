@@ -12,7 +12,7 @@ const searchYtbChannel = async (channel: string) => {
 
 const fetchYtbiChannelVideos = async (
   channelID: string,
-  favList: string[] = []
+  favList: string[] = [],
 ) => {
   const yt = await ytClientWeb;
   const channel = await yt.getChannel(channelID);

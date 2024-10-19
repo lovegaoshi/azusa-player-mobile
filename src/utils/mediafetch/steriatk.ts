@@ -43,7 +43,7 @@ const paginatedFetch = ({
           duration: 0,
           album: videoinfo.name,
           source: Source.steriatk,
-        })
+        }),
       ),
     progressEmitter,
     favList,

@@ -5,12 +5,12 @@ import { Source } from '@enums/MediaFetch';
 const fetchYTPlaylist = async (
   playlistId: string,
   favList: string[],
-  mixlistId?: string
+  mixlistId?: string,
 ) => {
   const res = await fetch(
     `https://www.youtube.com/watch?v=${playlistId}&list=RD${
       mixlistId ?? playlistId
-    }`
+    }`,
   );
   const content = await res.text();
   // https://www.thepythoncode.com/code/get-youtube-data-python
@@ -40,7 +40,7 @@ const fetchYTPlaylist = async (
           lyric: '',
           page: index,
           duration: timestampToSeconds(
-            val.playlistPanelVideoRenderer.lengthText.simpleText
+            val.playlistPanelVideoRenderer.lengthText.simpleText,
           ),
           album:
             data.contents.twoColumnWatchNextResults.playlist.playlist.title,
@@ -60,7 +60,7 @@ const regexFetch = async ({
   const songList = await fetchYTPlaylist(
     reExtracted[1],
     favList,
-    reExtracted[2]
+    reExtracted[2],
   );
   return {
     songList,
@@ -75,7 +75,7 @@ const refresh = async (v: NoxMedia.Playlist) => {
     results.songList = await fetchYTPlaylist(
       v.refreshToken[0],
       v.songList.map(s => s.bvid),
-      v.refreshToken[1]
+      v.refreshToken[1],
     );
     results.refreshToken = [
       results.songList[results.songList.length - 1].bvid,
@@ -85,7 +85,7 @@ const refresh = async (v: NoxMedia.Playlist) => {
     results.songList = await fetchYTPlaylist(
       v.songList[v.songList.length - 1].bvid,
       v.songList.map(s => s.bvid),
-      v.songList[0].bvid
+      v.songList[0].bvid,
     );
     results.refreshToken = [
       results.songList[results.songList.length - 1].bvid,

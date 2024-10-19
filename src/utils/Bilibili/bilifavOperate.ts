@@ -22,7 +22,7 @@ export interface GetFavlistRes {
 // if len === 0 then create!
 export const getBiliFavlist = async (
   usermid?: string,
-  matchingTitle?: string
+  matchingTitle?: string,
 ) => {
   const user = usermid ? { mid: usermid } : await getBiliUser();
   if (!user.mid) return [];
@@ -57,7 +57,7 @@ export const createBiliFavlist = async (title: string) => {
 
 const getOrInsertBiliFavlist = async (
   matchingTitle: string,
-  usermid?: string
+  usermid?: string,
 ) => {
   const getResult = await getBiliFavlist(usermid, matchingTitle);
   if (getResult.length > 0) {
@@ -69,13 +69,13 @@ const getOrInsertBiliFavlist = async (
 export const addToBiliFavlist = async (
   favlistid: string,
   bvids: string[],
-  progressEmitter: NoxUtils.ProgressEmitter = () => undefined
+  progressEmitter: NoxUtils.ProgressEmitter = () => undefined,
 ) => {
   const sendBVLikeEmitter = async (
     bvid: string,
     like: string[],
     unlike: string[],
-    progressEmitterFn: () => void
+    progressEmitterFn: () => void,
   ) => {
     await sendBVFavorite(bvid, like, unlike);
     progressEmitterFn();
@@ -88,10 +88,10 @@ export const addToBiliFavlist = async (
       .map((val, i, arr) =>
         humanishApiLimiter.schedule(() =>
           sendBVLikeEmitter(val, [], [favlistid], () =>
-            progressEmitter((i * 100) / arr.length)
-          )
-        )
-      )
+            progressEmitter((i * 100) / arr.length),
+          ),
+        ),
+      ),
   );
   // like
   await Promise.all(
@@ -100,28 +100,28 @@ export const addToBiliFavlist = async (
       .map((val, i, arr) =>
         humanishApiLimiter.schedule(() =>
           sendBVLikeEmitter(val, [favlistid], [], () =>
-            progressEmitter((i * 100) / arr.length)
-          )
-        )
-      )
+            progressEmitter((i * 100) / arr.length),
+          ),
+        ),
+      ),
   );
 };
 
 export const syncFavlist = async (
   favlist: NoxMedia.Playlist,
-  progressEmitter: NoxUtils.ProgressEmitter = () => undefined
+  progressEmitter: NoxUtils.ProgressEmitter = () => undefined,
 ) => {
   const user = await getBiliUser();
   if (!user.mid) return false;
   const favid = await getOrInsertBiliFavlist(
     favlist.title.slice(0, 19),
-    user.mid
+    user.mid,
   );
   const uniqBVIDs = getPlaylistUniqBVIDs(favlist);
   await addToBiliFavlist(
     favid,
     uniqBVIDs.filter(val => val.startsWith('BV')).reverse(),
-    progressEmitter
+    progressEmitter,
   );
   return true;
 };

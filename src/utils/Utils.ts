@@ -81,7 +81,7 @@ export const rgb2Hex = (rgb: string) => {
     return rgbToHex(
       Number(extractedRGB[0][0]),
       Number(extractedRGB[1][0]),
-      Number(extractedRGB[2][0])
+      Number(extractedRGB[2][0]),
     );
   } catch {
     return rgb;
@@ -90,7 +90,7 @@ export const rgb2Hex = (rgb: string) => {
 
 export const getUniqObjects = <T>(
   objects: T[],
-  property: (object: T) => string
+  property: (object: T) => string,
 ) => {
   const uniqKey = new Set();
   return objects.filter(object => {
@@ -122,7 +122,7 @@ export const charLength = (str: string) => {
 
 export const timeout = (
   delay: number,
-  func: () => any = () => {}
+  func: () => any = () => {},
 ): Promise<void> => {
   return new Promise(res => setTimeout(() => res(func()), delay));
 };
@@ -167,7 +167,7 @@ export const r128gain2Volume = (gain: number) => {
 
 export const filterUndefined = <T, K>(
   myArray: T[],
-  myFunc: (val: T) => K | undefined
+  myFunc: (val: T) => K | undefined,
 ) =>
   myArray.flatMap(v => {
     const val = myFunc(v);

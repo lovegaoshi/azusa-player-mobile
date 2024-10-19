@@ -82,7 +82,7 @@ export default () => {
     options: EXPORT_OPTIONS_LIST,
     renderOption,
     defaultIndex: EXPORT_OPTIONS_LIST.indexOf(
-      playerSetting.settingExportLocation
+      playerSetting.settingExportLocation,
     ),
     onClose: () => setSelectVisible(false),
     onSubmit: (index: number) => {

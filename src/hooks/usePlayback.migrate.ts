@@ -63,7 +63,7 @@ export const _playFromPlaylist = async ({
   setPlayingIndex(0, song.id);
   setCurrentPlayingId(song.id);
   logger.debug(
-    `[playFromPlaylist]: ${currentPlayingId} vs ${song.id} from ${playlist.id}`
+    `[playFromPlaylist]: ${currentPlayingId} vs ${song.id} from ${playlist.id}`,
   );
   if (interruption) {
     return playSongInterrupted(song);
@@ -148,7 +148,7 @@ export const _playFromMediaId = async ({
 
 export const playFromMediaId = async (
   mediaId: string,
-  isDataSaving = false
+  isDataSaving = false,
 ) => {
   const appState = useNoxSetting.getState();
   return _playFromMediaId({
@@ -221,11 +221,11 @@ export const _shuffleAll = async ({
   const allPlaylists = await Promise.all(
     Object.values(playlists)
       .filter(playlist => playlist.type === PlaylistTypes.Typical)
-      .map(p => getPlaylist(p.id))
+      .map(p => getPlaylist(p.id)),
   );
   const allSongs = allPlaylists.reduce(
     (acc, curr) => acc.concat(curr.songList),
-    [] as NoxMedia.Song[]
+    [] as NoxMedia.Song[],
   );
   const cachedSongs = isDataSaving ? dataSaverSongs(allSongs) : allSongs;
   playAsSearchList({
@@ -276,13 +276,13 @@ export const _playFromSearch = async ({
     if (playlistIds.length === 0) {
       if (searchPlaylist.songList.length > 0) {
         logger.debug(
-          '[playFromSearch] since no playlist present, playing from search list'
+          '[playFromSearch] since no playlist present, playing from search list',
         );
         playFromPlaylistF({ playlist: searchPlaylist });
         return;
       }
       logger.debug(
-        '[playFromSearch] since no playlist present, playing from bili suggest'
+        '[playFromSearch] since no playlist present, playing from bili suggest',
       );
       playAsSearchListF({ songs: await fetchCurrentMusicTop() });
       return;

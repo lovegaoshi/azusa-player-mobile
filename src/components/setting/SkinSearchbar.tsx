@@ -17,7 +17,7 @@ const CustomSkinSearch = ({
   const { t } = useTranslation();
   const setSnack = useSnack(state => state.setSnack);
   const [searchVal, setSearchVal] = useState(
-    'https://raw.githubusercontent.com/lovegaoshi/azusa-player-mobile/master/src/components/styles/steria.json'
+    'https://raw.githubusercontent.com/lovegaoshi/azusa-player-mobile/master/src/components/styles/steria.json',
   );
   const [searchProgress, progressEmitter] = useState(0);
   const playerStyle = useNoxSetting(state => state.playerStyle);

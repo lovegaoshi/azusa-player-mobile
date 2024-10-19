@@ -13,8 +13,8 @@ const useCleanCache = () => {
     return NoxCache.noxMediaCache.getOrphanedCache(
       playlists.reduce(
         (acc, curr) => acc.concat(curr.songList),
-        [] as NoxMedia.Song[]
-      )
+        [] as NoxMedia.Song[],
+      ),
     );
   };
 

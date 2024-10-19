@@ -36,7 +36,7 @@ export const initBiliHeartbeat = async ({
         'Content-Type': 'application/x-www-form-urlencoded',
       },
       body: { bvid, cid },
-    })
+    }),
   );
 };
 
@@ -48,7 +48,7 @@ export const checkBVLiked = async (bvid: string) => {
       {
         credentials: 'include',
         referrer: `https://www.bilibili.com/video/${bvid}/`,
-      }
+      },
     );
     const json = await res.json();
     return json.data;
@@ -112,7 +112,7 @@ export const checkBiliVideoPlayed = (bvid: string) => {
 export const sendBVFavorite = async (
   bvid: string,
   addfav: string[] = [],
-  removefav: string[] = []
+  removefav: string[] = [],
 ) => {
   try {
     const biliJct = await getBiliJct();

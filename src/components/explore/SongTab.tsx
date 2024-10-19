@@ -170,7 +170,7 @@ export const BiliSongsTabCard = ({
 }) => {
   const concatSongs = Object.values(songs).reduce(
     (acc, curr) => acc.concat(curr),
-    []
+    [],
   );
 
   return <BiliSongsArrayTabCard title={title} songs={concatSongs} />;

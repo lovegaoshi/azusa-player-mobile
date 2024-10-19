@@ -48,9 +48,9 @@ export default ({
   React.useEffect(
     () =>
       setCurrentInput(
-        options.reduce((acc, curr) => ({ ...acc, [curr]: '' }), {})
+        options.reduce((acc, curr) => ({ ...acc, [curr]: '' }), {}),
       ),
-    [options]
+    [options],
   );
 
   return (

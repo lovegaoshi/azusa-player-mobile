@@ -9,7 +9,7 @@ export default () => {
     message: string,
     onSubmit: () => void,
     partialTitle: string,
-    onPartial: () => void
+    onPartial: () => void,
   ) =>
     Alert.alert(title, message, [
       {
@@ -43,7 +43,7 @@ export default () => {
     title: string,
     message: string,
     // eslint-disable-next-line @typescript-eslint/no-empty-function
-    onPress = () => {}
+    onPress = () => {},
   ) =>
     Alert.alert(title, message, [{ text: t('Dialog.ok'), onPress: onPress }], {
       cancelable: true,

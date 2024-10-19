@@ -26,7 +26,7 @@ export const fetchRanking = async (rid = '3') => {
   logger.info(`[biliRanking] calling fetchRanking of ${rid}`);
   try {
     const res = await biliApiLimiter.schedule(() =>
-      bfetch(API.replace('{rid}', rid))
+      bfetch(API.replace('{rid}', rid)),
     );
     const json = await res.json();
     const results = {} as { [key: number]: NoxMedia.Song[] };

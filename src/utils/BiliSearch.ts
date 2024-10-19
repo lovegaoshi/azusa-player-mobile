@@ -50,7 +50,7 @@ interface Props {
 
 export const matchBiliURL = <T>(
   input: string,
-  extractions: ReExtraction<T>[]
+  extractions: ReExtraction<T>[],
 ) => {
   for (const reExtraction of extractions) {
     const reExtracted = reExtraction.match.exec(input);
@@ -123,7 +123,7 @@ export const searchBiliURLs = async ({
         case MUSICFREE.aggregated:
           results.songList = await searcher[MUSICFREE.aggregated](
             input,
-            await getMusicFreePlugin()
+            await getMusicFreePlugin(),
           );
           break;
         default:

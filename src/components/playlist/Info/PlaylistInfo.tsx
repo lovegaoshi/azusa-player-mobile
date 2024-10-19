@@ -43,10 +43,10 @@ export default ({ usePlaylist, onPressed = () => undefined }: Props) => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const _playlistInfoUpdate = useNoxSetting(state => state.playlistInfoUpdate);
   const playlistSearchAutoFocus: boolean = useNoxSetting(
-    state => state.playlistSearchAutoFocus
+    state => state.playlistSearchAutoFocus,
   );
   const setPlaylistSearchAutoFocus = useNoxSetting(
-    state => state.setPlaylistSearchAutoFocus
+    state => state.setPlaylistSearchAutoFocus,
   );
   const [dialogOpen, setDialogOpen] = useState(false);
   const [menuCoords, setMenuCoords] = useState<NoxTheme.coordinates>({
@@ -84,7 +84,7 @@ export default ({ usePlaylist, onPressed = () => undefined }: Props) => {
           .filter((val, index) => selected[index])
           .reduce(
             (accumulator, currentValue) => accumulator + currentValue.duration,
-            0
+            0,
           );
         return seconds2HHMMSS(selectedDuration);
       }
@@ -92,8 +92,8 @@ export default ({ usePlaylist, onPressed = () => undefined }: Props) => {
     return seconds2HHMMSS(
       currentPlaylist.songList.reduce(
         (accumulator, currentValue) => accumulator + currentValue.duration,
-        0
-      )
+        0,
+      ),
     );
   };
 

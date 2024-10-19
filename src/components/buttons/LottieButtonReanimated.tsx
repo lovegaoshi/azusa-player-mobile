@@ -7,7 +7,7 @@ import { useNoxSetting } from '@stores/useApp';
 import ShadowedElement from './ShadowedElement';
 
 const clickedStatesMap = Array.from(Array(10).keys()).map(curr =>
-  Array.from(Array(curr + 1).keys()).map(val => val / curr + 1)
+  Array.from(Array(curr + 1).keys()).map(val => val / curr + 1),
 );
 
 interface Props {
@@ -39,7 +39,7 @@ const LottieButtonAnimated = ({
   const managedState = useRef(clickState);
   const managedProgress = useRef(Math.max(0, clickStates.indexOf(clickState)));
   const animationProgress = useRef(
-    new Animated.Value(clickedLottieProgress[managedProgress.current])
+    new Animated.Value(clickedLottieProgress[managedProgress.current]),
   );
 
   const onPressBtn = () => {
@@ -63,7 +63,7 @@ const LottieButtonAnimated = ({
   useEffect(() => {
     if (clickState === managedState.current) return;
     animationProgress.current.setValue(
-      clickedLottieProgress[managedProgress.current]
+      clickedLottieProgress[managedProgress.current],
     );
     managedState.current = clickState;
   }, [clickState]);

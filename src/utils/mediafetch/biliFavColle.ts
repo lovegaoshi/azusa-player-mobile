@@ -19,7 +19,7 @@ const URL_BILICOLLE_INFO =
 const fetchBiliColleList = (
   sid: string,
   progressEmitter: NoxUtils.ProgressEmitter = () => undefined,
-  favList: string[] = []
+  favList: string[] = [],
 ) => {
   logger.info('calling fetchBiliColleList');
 
@@ -43,7 +43,7 @@ const regexFetch = async ({
     await fetchBiliColleList(reExtracted[1], progressEmitter, favList),
     false,
     progressEmitter,
-    useBiliTag || false
+    useBiliTag || false,
   ),
 });
 

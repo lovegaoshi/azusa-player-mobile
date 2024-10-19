@@ -38,7 +38,7 @@ export default ({ callback = () => {} }: Props) => {
       () => {
         playlistCRUD.playlistClear(playlist);
         callback();
-      }
+      },
     );
   };
 
@@ -49,7 +49,7 @@ export default ({ callback = () => {} }: Props) => {
       () => {
         removePlaylist(playlist.id);
         callback();
-      }
+      },
     );
   };
 
@@ -65,7 +65,7 @@ export default ({ callback = () => {} }: Props) => {
           },
           processFunction: () => playlistCRUD.playlistReload(playlist),
           callback,
-        })
+        }),
     );
   };
 

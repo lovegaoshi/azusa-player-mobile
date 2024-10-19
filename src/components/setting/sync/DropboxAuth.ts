@@ -43,7 +43,7 @@ let dbx = new _Dropbox({
  */
 const getAuth = async (
   callback = () => checkAuthentication(dbx).then(console.log),
-  errorHandling = logger.error
+  errorHandling = logger.error,
 ) => {
   const accessToken = await authorize(config);
   if (accessToken) {
@@ -65,7 +65,7 @@ const getAuth = async (
  */
 const login = async (
   callback: () => Promise<void> = async () => undefined,
-  errorCallback = logger.error
+  errorCallback = logger.error,
 ) => {
   try {
     if (!(await checkAuthentication(dbx))) {

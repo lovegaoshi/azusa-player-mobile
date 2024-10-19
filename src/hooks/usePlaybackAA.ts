@@ -15,7 +15,7 @@ export const buildBrowseTree = (
   playlists: {
     [key: string]: NoxMedia.Playlist;
   },
-  t = i18n.t
+  t = i18n.t,
 ) => {
   if (!isAndroid) return;
   TrackPlayer.setBrowseTree({

@@ -35,7 +35,7 @@ const LottieButtonAnimated = ({
   const playerStyle = useNoxSetting(state => state.playerStyle);
   const managedClicked = useRef(clicked);
   const animationProgress = useRef(
-    new Animated.Value(clicked ? clickedLottieProgress : 0)
+    new Animated.Value(clicked ? clickedLottieProgress : 0),
   );
 
   React.useEffect(() => {

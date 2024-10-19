@@ -9,7 +9,7 @@ import { musePlaylistItemToNoxSong } from './ytbSearch.muse';
 
 export const fetchYtmPlaylist = async (
   playlistId: string,
-  favList: string[] = []
+  favList: string[] = [],
 ): Promise<NoxMedia.Song[]> => {
   const stopAfter = (val: any[]) => {
     for (const song of val) {
@@ -24,13 +24,13 @@ export const fetchYtmPlaylist = async (
     playlistId,
     // TODO: fix libmuse that limit=0 retrieves all
     { limit: 999 },
-    stopAfter
+    stopAfter,
   );
   return playlistData.tracks
     .flatMap(val =>
       val?.videoId && !favList.includes(val.videoId)
         ? musePlaylistItemToNoxSong(val, playlistData)
-        : []
+        : [],
     )
     .filter((val): val is NoxMedia.Song => val !== undefined);
 };
@@ -59,7 +59,7 @@ const fastYTPlaylistSongResolve = (val: any, data: any) => {
     });
   } catch (e) {
     logger.error(
-      `[fastYTPlaylistSongResolve] failed ${e} of ${JSON.stringify(val)}`
+      `[fastYTPlaylistSongResolve] failed ${e} of ${JSON.stringify(val)}`,
     );
     return undefined;
   }
@@ -69,10 +69,10 @@ const fastYTPlaylistSongResolve = (val: any, data: any) => {
 const fetchYTPlaylist = async (
   playlistId: string,
   progressEmitter: NoxUtils.ProgressEmitter,
-  favList: string[]
+  favList: string[],
 ): Promise<NoxMedia.Song[]> => {
   const res = await fetch(
-    `https://www.youtube.com/playlist?list=${playlistId}`
+    `https://www.youtube.com/playlist?list=${playlistId}`,
   );
   const content = await res.text();
   // https://www.thepythoncode.com/code/get-youtube-data-python
@@ -85,7 +85,7 @@ const fetchYTPlaylist = async (
     return data.contents.twoColumnBrowseResultsRenderer.tabs[0].tabRenderer.content.sectionListRenderer.contents[0].itemSectionRenderer.contents[0].playlistVideoListRenderer.contents
       .map((val: any) => fastYTPlaylistSongResolve(val, data))
       .filter(
-        (val: NoxMedia.Song | undefined) => val && !favList.includes(val?.bvid)
+        (val: NoxMedia.Song | undefined) => val && !favList.includes(val?.bvid),
       );
   } catch (e) {
     logger.error(`[YTPlaylist] fast resolve failed: ${e}`);
@@ -99,9 +99,9 @@ const fetchYTPlaylist = async (
           .filter(val => !favList.includes(val))
           .map((val, index, arr) =>
             fetchAudioInfo(val, () =>
-              progressEmitter((index * 100) / arr.length)
-            )
-          )
+              progressEmitter((index * 100) / arr.length),
+            ),
+          ),
       )
     ).reduce((acc, curr) => acc!.concat(curr), []);
   }

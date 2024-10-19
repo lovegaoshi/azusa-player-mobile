@@ -8,7 +8,7 @@ export const parseBodyParams = (body: any) => {
   const formBody = [];
   for (const [key, value] of Object.entries(body)) {
     formBody.push(
-      `${encodeURIComponent(key)}=${encodeURIComponent(String(value))}`
+      `${encodeURIComponent(key)}=${encodeURIComponent(String(value))}`,
     );
   }
   return formBody.join('&');
@@ -21,7 +21,7 @@ export default async function biliFetch(
     headers: {},
     credentials: 'omit',
   },
-  throttler?: Bottleneck
+  throttler?: Bottleneck,
 ) {
   // BREAKING: does 2s timeout break stuff? does this work at all?
   const params = { timeout: 2000, ...paramsProp };
@@ -47,7 +47,7 @@ export default async function biliFetch(
 
 export const customReqHeader = (
   url: string,
-  reqHeader: { [key: string]: any } = {}
+  reqHeader: { [key: string]: any } = {},
 ) => {
   if (
     /bilibili/.exec(url) ||

@@ -3,7 +3,7 @@ import { SortOptions } from '@enums/Playlist';
 export const updatePlaylistSongs = (
   playlist: NoxMedia.Playlist,
   addSongs: NoxMedia.Song[] = [],
-  removeSongs: NoxMedia.Song[] = []
+  removeSongs: NoxMedia.Song[] = [],
 ) => {
   const playlistSongsId = playlist.songList.map(v => v.id);
   const removeSongsId = removeSongs.map(v => v.id);
@@ -18,7 +18,7 @@ export const updatePlaylistSongs = (
 export const sortPlaylist = (
   playlist: NoxMedia.Playlist,
   sort: SortOptions = SortOptions.PreviousOrder,
-  ascend = false
+  ascend = false,
 ): NoxMedia.Playlist => {
   playlist.sort = sort;
   if (SortOptions.PreviousOrder === sort) {
@@ -53,7 +53,7 @@ export const sortPlaylist = (
   // for any other sorting methods, first re-apply order to all songs
   const songListLength = playlist.songList.length;
   playlist.songList.forEach(
-    (song, index) => (song.order = songListLength - index)
+    (song, index) => (song.order = songListLength - index),
   );
   switch (sort) {
     case SortOptions.Title:
@@ -62,7 +62,7 @@ export const sortPlaylist = (
         songList: playlist.songList.sort((a, b) =>
           ascend
             ? a.parsedName.localeCompare(b.parsedName)
-            : b.parsedName.localeCompare(a.parsedName)
+            : b.parsedName.localeCompare(a.parsedName),
         ),
       };
     case SortOptions.Artist:
@@ -71,7 +71,7 @@ export const sortPlaylist = (
         songList: playlist.songList.sort((a, b) =>
           ascend
             ? a.singer.localeCompare(b.singer)
-            : b.singer.localeCompare(a.singer)
+            : b.singer.localeCompare(a.singer),
         ),
       };
     case SortOptions.Album:
@@ -80,7 +80,7 @@ export const sortPlaylist = (
         songList: playlist.songList.sort((a, b) =>
           ascend
             ? (a.album ?? '').localeCompare(b.album ?? '')
-            : (b.album ?? '').localeCompare(a.album ?? '')
+            : (b.album ?? '').localeCompare(a.album ?? ''),
         ),
       };
     default:

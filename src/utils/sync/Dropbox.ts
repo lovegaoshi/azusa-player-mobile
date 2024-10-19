@@ -25,7 +25,7 @@ const find = async (dbx: _Dropbox, query = DEFAULT_FILE_NAME) => {
 export const noxBackup = (
   dbx: _Dropbox,
   content: Uint8Array,
-  fpath = DEFAULT_FILE_PATH
+  fpath = DEFAULT_FILE_PATH,
 ) =>
   dbx.filesUpload({
     path: fpath,
@@ -36,7 +36,7 @@ export const noxBackup = (
 const download = async (
   dbx: _Dropbox,
   contentParse: (v: Blob) => Promise<ArrayBuffer>,
-  fpath = DEFAULT_FILE_PATH
+  fpath = DEFAULT_FILE_PATH,
 ) => {
   if (fpath === null) {
     return null;
@@ -55,7 +55,7 @@ const download = async (
  */
 export const noxRestore = async (
   dbx: _Dropbox,
-  contentParse: (v: Blob) => Promise<ArrayBuffer>
+  contentParse: (v: Blob) => Promise<ArrayBuffer>,
 ) => {
   const noxFile = await find(dbx);
   if (!noxFile) {

@@ -23,7 +23,7 @@ export interface UsePlaylist {
   performSearch: (searchedVal: string) => void;
   handleSearch: (searchedVal: string) => void;
   rssUpdate: (
-    subscribeUrls?: string[]
+    subscribeUrls?: string[],
   ) => Promise<NoxMedia.Playlist | undefined>;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   searchBarRef: React.MutableRefObject<any>;
@@ -33,7 +33,7 @@ export interface UsePlaylist {
   playSong: (
     song: NoxMedia.Song,
     callback: (p: NoxMedia.Playlist, s: NoxMedia.Song) => void,
-    isPlayingCallback: (p: NoxMedia.Playlist) => void
+    isPlayingCallback: (p: NoxMedia.Playlist) => void,
   ) => void;
   resetSelected: () => void;
   toggleSelected: (index: number) => void;
@@ -44,7 +44,7 @@ export interface UsePlaylist {
   sortPlaylist: (
     sort?: SortOptions,
     ascend?: boolean,
-    playlist?: NoxMedia.Playlist
+    playlist?: NoxMedia.Playlist,
   ) => Promise<void>;
 }
 
@@ -64,7 +64,7 @@ const usePlaylist = (playlist: NoxMedia.Playlist): UsePlaylist => {
   const currentPlayingId = useNoxSetting(state => state.currentPlayingId);
   const setCurrentPlayingId = useNoxSetting(state => state.setCurrentPlayingId);
   const togglePlaylistInfoUpdate = useNoxSetting(
-    state => state.togglePlaylistInfoUpdate
+    state => state.togglePlaylistInfoUpdate,
   );
   const playlistCRUD = usePlaylistCRUD(playlist);
   const searchBarRef = useRef();
@@ -117,7 +117,7 @@ const usePlaylist = (playlist: NoxMedia.Playlist): UsePlaylist => {
   const playSong = (
     song: NoxMedia.Song,
     callback: (p: NoxMedia.Playlist, s: NoxMedia.Song) => void,
-    isPlayingCallback: (p: NoxMedia.Playlist) => void = () => undefined
+    isPlayingCallback: (p: NoxMedia.Playlist) => void = () => undefined,
   ) => {
     if (song.id === currentPlayingId && playlist.id === currentPlayingList.id)
       return isPlayingCallback(currentPlayingList);
@@ -148,8 +148,8 @@ const usePlaylist = (playlist: NoxMedia.Playlist): UsePlaylist => {
         Array(playlist.songList.length)
           .fill(false)
           .map((val, index) =>
-            selectedIndices.includes(index) ? checked : val
-          )
+            selectedIndices.includes(index) ? checked : val,
+          ),
       );
     };
 

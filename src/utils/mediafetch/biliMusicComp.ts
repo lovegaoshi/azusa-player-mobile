@@ -57,7 +57,7 @@ export const fetchMusicComp = async (pn = 1): Promise<NoxMedia.Song[]> => {
   logger.info('[biliRanking] calling fetchMusicNew');
   try {
     const res = await biliApiLimiter.schedule(() =>
-      bfetch(API.replace('{pn}', String(pn)))
+      bfetch(API.replace('{pn}', String(pn))),
     );
     const json = await res.json();
     return json.data.list

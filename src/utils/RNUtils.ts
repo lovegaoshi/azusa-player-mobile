@@ -32,10 +32,10 @@ interface FilePickerFail {
 }
 
 const chooseLocalFileAndroid = async (
-  type = 'audio/*'
+  type = 'audio/*',
 ): Promise<FilePickerSuccess | FilePickerFail> => {
   const androidPermission = await PermissionsAndroid.request(
-    PermissionsAndroid.PERMISSIONS.READ_MEDIA_AUDIO
+    PermissionsAndroid.PERMISSIONS.READ_MEDIA_AUDIO,
   );
   if (androidPermission !== PermissionsAndroid.RESULTS.GRANTED) {
     return { reason: FilePickerResult.NoPermission };
@@ -58,7 +58,7 @@ const chooseLocalFileAndroid = async (
 const getMediaRealPath = async (uri: string, parsedURI: string) => {
   const mediaFiles = await NoxModule.listMediaFileByFName(
     uri.substring(uri.lastIndexOf('%2F') + 3),
-    parsedURI.substring(0, parsedURI.lastIndexOf('/'))
+    parsedURI.substring(0, parsedURI.lastIndexOf('/')),
   );
   return mediaFiles[0].realPath;
 };
@@ -75,14 +75,14 @@ export const chooseLocalMediaFolderAndroid = async (realPath = false) => {
       relativePath: getFolderPath(location.parsedURI),
       realPath: realPath
         ? getFolderPath(
-            await getMediaRealPath(location.uri, location.parsedURI)
+            await getMediaRealPath(location.uri, location.parsedURI),
           )
         : undefined,
     };
   }
   const mediaFiles = await NoxModule.listMediaFileByID(
     location.uri.substring(location.uri.lastIndexOf('%3A') + 3),
-    ''
+    '',
   );
   return {
     reason: FilePickerResult.Success,

@@ -32,11 +32,11 @@ export const fetchCurrentMusicTop = async () => {
     const json = await res.json();
     const recentYear = Object.keys(json.data.list).reduce(
       (acc, curr) => (acc > curr ? acc : curr),
-      '0'
+      '0',
     );
     const recentList = json.data.list[recentYear].reduce(
       (acc: any, curr: any) => (acc.ID > curr.ID ? acc : curr),
-      json.data.list[recentYear][0]
+      json.data.list[recentYear][0],
     );
     return fetchMusicTop(recentList.ID);
   } catch {
@@ -45,12 +45,12 @@ export const fetchCurrentMusicTop = async () => {
 };
 
 export const fetchMusicTop = async (
-  listid = '175'
+  listid = '175',
 ): Promise<NoxMedia.Song[]> => {
   logger.info('[biliMusicTop] calling fetchMusicTop');
   try {
     const res = await biliApiLimiter.schedule(() =>
-      bfetch(API.replace('{list_id}', listid))
+      bfetch(API.replace('{list_id}', listid)),
     );
     const json = await res.json();
     return json.data.list.map(topToSong);

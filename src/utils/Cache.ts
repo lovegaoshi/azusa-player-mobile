@@ -32,7 +32,7 @@ class NoxMediaCache {
 
   constructor(
     options: OptionsProps,
-    savedCache?: [string, LRUCache.Entry<string>][]
+    savedCache?: [string, LRUCache.Entry<string>][],
   ) {
     this.cache = new LRUCache<string, string>({
       max: options.max ?? 1,
@@ -57,7 +57,7 @@ class NoxMediaCache {
   saveCacheMedia = async (
     song: NoxMedia.Song,
     resolvedURL: NoxNetwork.ResolvedNoxMediaURL,
-    extension?: string
+    extension?: string,
   ) => {
     const parseR128Gain = async () => {
       if (getState().playerSetting.r128gain) {
@@ -110,7 +110,7 @@ class NoxMediaCache {
       // @ts-expect-error
       if (playbackState.error?.code === 'ios_failed_to_load_resource') {
         logger.warn(
-          `iOS m4s playback error of ${song.parsedName}. loading cached mp3...`
+          `iOS m4s playback error of ${song.parsedName}. loading cached mp3...`,
         );
         const currentTrack = await TrackPlayer.getActiveTrack();
         await TrackPlayer.load({ ...currentTrack, url: finalPath });
@@ -140,7 +140,7 @@ class NoxMediaCache {
 
   loadCacheFunction = async (
     identifier: string,
-    getURL: () => Promise<string>
+    getURL: () => Promise<string>,
   ) => {
     logger.debug(`[NoxCache] looking up ${identifier} from cache...`);
     const cachedPath = await this.loadCacheObject(identifier);
@@ -183,7 +183,7 @@ class NoxMediaCache {
   getOrphanedCache = (songList: NoxMedia.Song[]) => {
     const songListKeys = songList.map(song => noxCacheKey(song));
     return Array.from(this.cache.keys()).filter(
-      key => !songListKeys.includes(key)
+      key => !songListKeys.includes(key),
     );
   };
 
@@ -213,7 +213,7 @@ const cache: NoxCaches = {
 
 export const initCache = async (
   options: OptionsProps,
-  savedCache?: [string, LRUCache.Entry<string>][]
+  savedCache?: [string, LRUCache.Entry<string>][],
 ) => {
   try {
     cache.noxMediaCache = new NoxMediaCache(options, savedCache);
@@ -226,7 +226,7 @@ export const initCache = async (
 
 export const cacheWrapper = (
   identifier: string,
-  getURL: () => Promise<string>
+  getURL: () => Promise<string>,
 ) => cache.noxMediaCache.loadCacheFunction(identifier, getURL);
 
 const _dataSaverSongs = (v: NoxMedia.Song[]) =>

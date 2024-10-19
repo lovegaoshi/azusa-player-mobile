@@ -80,7 +80,7 @@ export default ({
 
 export const setSongBiliShazamed = (
   song: NoxMedia.Song,
-  val: string | null
+  val: string | null,
 ) => {
   if (!val) return { ...song, biliShazamedName: val } as NoxMedia.Song;
   const biliShazamedName = extractParenthesis(val);

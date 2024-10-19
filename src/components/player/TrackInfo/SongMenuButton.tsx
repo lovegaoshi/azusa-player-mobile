@@ -30,8 +30,8 @@ export default ({ track }: NoxComponent.TrackProps) => {
   useEffect(() => {
     setSongMenuSongIndex(
       currentPlayingList.songList.findIndex(
-        listSong => listSong.id === song?.id
-      )
+        listSong => listSong.id === song?.id,
+      ),
     );
   }, [song]);
 

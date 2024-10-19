@@ -78,7 +78,7 @@ const AlbumArt: React.FC<Props> = ({
         return deactivateKeepAwake;
       }
       return () => undefined;
-    }, [isImageVisible, playerSetting.screenAlwaysWake])
+    }, [isImageVisible, playerSetting.screenAlwaysWake]),
   );
 
   useEffect(() => {

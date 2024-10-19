@@ -11,6 +11,6 @@ export default (logs = getLog()) => {
       { text: 'Copy', onPress: () => Clipboard.setStringAsync(logs) },
       { text: 'OK', onPress: () => undefined },
     ],
-    { cancelable: true }
+    { cancelable: true },
   );
 };

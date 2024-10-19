@@ -8,7 +8,7 @@ export const APM_FILE_NAME = 'APM.noxbackup';
 
 const getUserName = async (token: string) => {
   const res = await bfetch(
-    `https://gitee.com/api/v5/user?access_token=${token}`
+    `https://gitee.com/api/v5/user?access_token=${token}`,
   );
   const data = await res.json();
   return data.name;
@@ -42,7 +42,7 @@ const syncToGitee = async ({
   await createAPMRepo(token);
   logger.debug('[gitee] created repo');
   const res = await bfetch(
-    `https://gitee.com/api/v5/repos/${username}/${APM_REPO_NAME}/contents/%2F?access_token=${token}`
+    `https://gitee.com/api/v5/repos/${username}/${APM_REPO_NAME}/contents/%2F?access_token=${token}`,
   );
   const data = await res.json();
   logger.debug(`[gitee] file fetched: ${data.sha}`);
@@ -65,7 +65,7 @@ const syncToGitee = async ({
             headers: {
               'Content-Type': 'application/x-www-form-urlencoded',
             },
-          }
+          },
         );
       }
     }
@@ -85,7 +85,7 @@ const syncToGitee = async ({
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded',
       },
-    }
+    },
   );
 };
 // https://gitee.com/api/v5/swagger#/getV5ReposOwnerRepoContents(Path)
@@ -113,8 +113,8 @@ export const checkAuthentication = async (token = '') => {
 export const noxRestore = async (token: string) => {
   const res = await bfetch(
     `https://gitee.com/api/v5/repos/${await getUserName(
-      token
-    )}/${APM_REPO_NAME}/contents/${APM_FILE_NAME}?access_token=${token}`
+      token,
+    )}/${APM_REPO_NAME}/contents/${APM_FILE_NAME}?access_token=${token}`,
   );
   const noxFile = (await res.json()).content;
   if (!noxFile) {

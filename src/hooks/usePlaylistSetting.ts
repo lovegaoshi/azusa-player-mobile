@@ -17,7 +17,7 @@ export default (playlist: NoxMedia.Playlist) => {
 
   const saveSetting = (
     setting: Partial<NoxMedia.Playlist> = {},
-    callback: (val: NoxMedia.Playlist) => void = () => undefined
+    callback: (val: NoxMedia.Playlist) => void = () => undefined,
   ) => {
     const updatedPlaylist = {
       ...playlist,

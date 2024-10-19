@@ -24,7 +24,7 @@ const URL_PLAY_URL_IOS =
 
 const fetchBVIDRaw = async (bvid: string): Promise<NoxMedia.Song[]> => {
   logger.info(
-    `calling fetchBVID of ${bvid} of ${URL_VIDEO_INFO.replace('{bvid}', bvid)}`
+    `calling fetchBVID of ${bvid} of ${URL_VIDEO_INFO.replace('{bvid}', bvid)}`,
   );
   try {
     const res = await bfetch(URL_VIDEO_INFO.replace('{bvid}', bvid));
@@ -56,7 +56,7 @@ const fetchBVIDRaw = async (bvid: string): Promise<NoxMedia.Song[]> => {
 
 export const fetchBVID = (
   bvid: string,
-  progressEmitter: () => void = () => undefined
+  progressEmitter: () => void = () => undefined,
 ) =>
   biliApiLimiter.schedule(() => {
     progressEmitter();
@@ -73,11 +73,11 @@ export const BVIDtoAID = (bvid: string): Promise<string> =>
 export const fetchBiliBVIDs = async (
   BVids: string[],
   progressEmitter: NoxUtils.ProgressEmitter = () => undefined,
-  useBiliTag = false
+  useBiliTag = false,
 ) => {
   const BVidLen = BVids.length;
   const BVidPromises = BVids.map((bvid, index) =>
-    fetchBVID(bvid, () => progressEmitter((100 * (index + 1)) / BVidLen))
+    fetchBVID(bvid, () => progressEmitter((100 * (index + 1)) / BVidLen)),
   );
   const songs = (await Promise.all(BVidPromises)).flat();
   return biliShazamOnSonglist(songs, false, progressEmitter, useBiliTag);
@@ -114,7 +114,7 @@ interface FetchPlayURL {
 
 export const fetchVideoPlayUrl = (bvid: string, iOS = false) =>
   fetchVideoPlayUrlPromise({ bvid, extractType: FieldEnum.VideoUrl, iOS }).then(
-    v => v.url
+    v => v.url,
   );
 export const fetchVideoPlayUrlPromise = async ({
   bvid,
@@ -125,8 +125,8 @@ export const fetchVideoPlayUrlPromise = async ({
   logger.debug(
     `fethcVideoPlayURL: ${URL_PLAY_URL.replace('{bvid}', bvid).replace(
       '{cid}',
-      String(cid)
-    )} with ${extractType}`
+      String(cid),
+    )} with ${extractType}`,
   );
   try {
     // HACK:  this should be a breaking change that stringified cid
@@ -143,7 +143,7 @@ export const fetchVideoPlayUrlPromise = async ({
           method: 'GET',
           headers: {},
           credentials: 'omit',
-        }
+        },
       );
       const json = await res.json();
       logger.debug(`[iOS resolveURL] ${JSON.stringify(json.data)}`);
@@ -156,7 +156,7 @@ export const fetchVideoPlayUrlPromise = async ({
         method: 'GET',
         headers: {},
         credentials: extractType === FieldEnum.AudioUrl ? 'omit' : 'include',
-      }
+      },
     );
     const json = await res.json();
     return { url: extractResponseJson(json, extractType) as string };
@@ -169,7 +169,7 @@ export const fetchVideoPlayUrlPromise = async ({
 export const fetchCID = async (bvid: string) => {
   // logger.log('Data.js Calling fetchCID:' + URL_BVID_TO_CID.replace("{bvid}", bvid))
   const res = await bfetch(
-    `https://api.bilibili.com/x/player/pagelist?bvid=${bvid}&jsonp=jsonp`
+    `https://api.bilibili.com/x/player/pagelist?bvid=${bvid}&jsonp=jsonp`,
   );
   const json = await res.json();
   const cid = extractResponseJson(json, FieldEnum.CID);
@@ -187,7 +187,7 @@ const extractResponseJson = (json: any, field: string) => {
     case FieldEnum.AudioUrl:
       if (!json.data)
         throw Error(
-          `[extractResponseJson] no audio url from ${JSON.stringify(json)}`
+          `[extractResponseJson] no audio url from ${JSON.stringify(json)}`,
         );
       if (json.data.flac?.audio) {
         return getBestBitrate(json.data.dash.flac.audio).baseUrl;
@@ -197,7 +197,7 @@ const extractResponseJson = (json: any, field: string) => {
       if (json.data.dash) return getBestBitrate(json.data.dash.audio).baseUrl;
       if (json.data.durl) return json.data.durl[0].url;
       throw Error(
-        `[extractResponseJson] no audio url from ${JSON.stringify(json)}`
+        `[extractResponseJson] no audio url from ${JSON.stringify(json)}`,
       );
     case FieldEnum.VideoUrl:
       return json.data.dash.video[0].baseUrl;
@@ -207,7 +207,7 @@ const extractResponseJson = (json: any, field: string) => {
       return {};
     default:
       throw new Error(
-        `invalid field type: ${field} to parse JSON response from ${json}`
+        `invalid field type: ${field} to parse JSON response from ${json}`,
       );
   }
 };

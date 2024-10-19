@@ -38,11 +38,11 @@ const Explore = () => {
 
       const subscription = BackHandler.addEventListener(
         'hardwareBackPress',
-        onBackPress
+        onBackPress,
       );
 
       return () => subscription.remove();
-    }, [webView])
+    }, [webView]),
   );
 
   return webView ? (
@@ -59,7 +59,7 @@ const Explore = () => {
             v =>
               Object.values(v)
                 .map(cookie => `${cookie.name}=${cookie.value}`)
-                .join('; ')
+                .join('; '),
           );
         }}
       >

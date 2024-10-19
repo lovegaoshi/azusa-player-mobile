@@ -67,7 +67,7 @@ export default create<NoxSnack>((set, get) => ({
               snackDuration,
               snackOnDismiss: () => set({ snackVisible: false }),
             }),
-          100
+          100,
         );
       } catch (e) {
         logger.error(e);
@@ -80,7 +80,7 @@ export default create<NoxSnack>((set, get) => ({
               snackDuration,
               snackOnDismiss: () => set({ snackVisible: false }),
             }),
-          100
+          100,
         );
       }
       callback?.();

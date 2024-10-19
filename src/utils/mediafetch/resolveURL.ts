@@ -92,7 +92,7 @@ export const fetchPlayUrlPromise = async ({
 };
 
 export const refreshMetadata = async (
-  song: NoxMedia.Song
+  song: NoxMedia.Song,
 ): Promise<Partial<NoxMedia.Song>> => {
   logger.debug(`[refreshMetadata] ${song.id}`);
   const metadata = await regexMatchOperations({

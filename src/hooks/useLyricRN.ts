@@ -47,7 +47,7 @@ export default (currentSong?: NoxMedia.Song, artist = '') => {
       }
     } else {
       logger.debug(
-        '[lrc] local lrc seems to be the content itself, loading that...'
+        '[lrc] local lrc seems to be the content itself, loading that...',
       );
       localLrc = lrcDetail.lyric;
     }
@@ -77,7 +77,7 @@ export default (currentSong?: NoxMedia.Song, artist = '') => {
       searchAndSetCurrentLyric({
         resolvedLrcOptions: await lyricPromise,
         resolvedLyric: (await localLrcColle)?.lrcDetail,
-      })
+      }),
     );
   };
 
@@ -94,7 +94,7 @@ export default (currentSong?: NoxMedia.Song, artist = '') => {
       artist,
       options => {
         options[0].length !== 1 && options.push(options.shift()!);
-      }
+      },
     );
 
   const addSubtractOffset = (isAdd: boolean) => {
@@ -115,7 +115,7 @@ export default (currentSong?: NoxMedia.Song, artist = '') => {
     usedLyric.initTrackLrcLoad(
       fetchAndSetLyricOptions,
       loadLocalLrc,
-      searchAndSetCurrentLyric
+      searchAndSetCurrentLyric,
     );
 
   return {

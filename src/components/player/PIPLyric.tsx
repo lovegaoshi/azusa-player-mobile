@@ -8,7 +8,7 @@ import usePlayerControls from '@components/player/controls/usePlayerControls';
 
 const PIPLyricView = () => {
   const [currentTrack, setCurrentTrack] = useState<Track | undefined>(
-    undefined
+    undefined,
   );
   const currentPlayingId = useNoxSetting(state => state.currentPlayingId);
   const { height } = useWindowDimensions();

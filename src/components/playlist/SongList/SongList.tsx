@@ -21,7 +21,7 @@ const PlaylistList = () => {
   const playerStyle = useNoxSetting(state => state.playerStyle);
   const currentPlaylist = useNoxSetting(state => state.currentPlaylist);
   const songListScrollCounter = useNoxSetting(
-    state => state.songListScrollCounter
+    state => state.songListScrollCounter,
   );
   const usedPlaylist = usePlaylist(currentPlaylist);
   const {
@@ -52,11 +52,11 @@ const PlaylistList = () => {
     React.useCallback(() => {
       const subscription = BackHandler.addEventListener(
         'hardwareBackPress',
-        onBackPress
+        onBackPress,
       );
 
       return () => subscription.remove();
-    }, [checking, setChecking, searching, setSearching])
+    }, [checking, setChecking, searching, setSearching]),
   );
 
   return (

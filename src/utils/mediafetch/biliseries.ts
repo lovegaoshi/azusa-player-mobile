@@ -19,13 +19,13 @@ const URL_BILISERIES_INFO =
 const fetchBiliSeriesList = async (
   mid: string,
   sid: string,
-  favList: string[] = []
+  favList: string[] = [],
 ) => {
   logger.info('calling fetchBiliSeriesList');
   const res = await bfetch(
     URL_BILISERIES_INFO.replace('{mid}', mid)
       .replace('{sid}', sid)
-      .replace('{pn}', '0')
+      .replace('{pn}', '0'),
   );
   const json = await res.json();
   const { data } = json;
@@ -34,7 +34,7 @@ const fetchBiliSeriesList = async (
   data.archives.forEach((v: { bvid: string }) => {
     if (favList.includes(v.bvid)) {
       logger.debug(
-        `fetchBiliSeriesList: skipped duplicate bvid ${v.bvid} during rss feed update`
+        `fetchBiliSeriesList: skipped duplicate bvid ${v.bvid} during rss feed update`,
       );
     } else {
       BVids.push(v.bvid);

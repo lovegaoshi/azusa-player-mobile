@@ -64,7 +64,7 @@ export default () => {
     ) {
       if (getState().playmode !== NoxRepeatMode.RepeatTrack) {
         logger.debug(
-          `[FADEOUT] fading out....${event.position} / ${event.duration}`
+          `[FADEOUT] fading out....${event.position} / ${event.duration}`,
         );
         TrackPlayer.setAnimatedVolume({
           volume: 0,

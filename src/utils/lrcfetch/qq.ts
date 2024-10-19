@@ -42,7 +42,7 @@ const URL_QQ_SEARCH_POST = () => ({
 });
 
 const getLrcOptions = async (
-  searchKey: string
+  searchKey: string,
 ): Promise<NoxLyric.NoxFetchedLyric[]> => {
   if (!searchKey) {
     throw new Error('Search key is required');

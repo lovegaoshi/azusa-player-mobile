@@ -27,7 +27,7 @@ export const fetchDynamic = async (rid = '3', page = 1) => {
   logger.info(`[biliDynamic] calling fetchDynamic of ${rid}`);
   try {
     const res = await biliApiLimiter.schedule(() =>
-      bfetch(API.replace('{rid}', rid).replace('{pn}', page.toString()))
+      bfetch(API.replace('{rid}', rid).replace('{pn}', page.toString())),
     );
     const json = await res.json();
     const results = {} as { [key: number]: NoxMedia.Song[] };

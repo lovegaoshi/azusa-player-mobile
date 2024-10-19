@@ -107,7 +107,7 @@ interface NoxSetting {
 
   playerSetting: NoxStorage.PlayerSettingDict;
   setPlayerSetting: (
-    val: Partial<NoxStorage.PlayerSettingDict>
+    val: Partial<NoxStorage.PlayerSettingDict>,
   ) => Promise<void>;
 
   addPlaylist: (val: NoxMedia.Playlist) => void;
@@ -127,11 +127,11 @@ interface NoxSetting {
   updatePlaylist: (
     playlist: NoxMedia.Playlist,
     addSongs?: NoxMedia.Song[],
-    removeSongs?: NoxMedia.Song[]
+    removeSongs?: NoxMedia.Song[],
   ) => NoxMedia.Playlist;
 
   initPlayer: (
-    val: NoxStorage.PlayerStorageObject
+    val: NoxStorage.PlayerStorageObject,
   ) => Promise<NoxStorage.initializedResults>;
 }
 

@@ -13,7 +13,7 @@ interface InitializeStores {
   val: NoxStorage.PlayerStorageObject;
   setGestureMode?: (val: boolean) => void;
   initPlayer?: (
-    val: NoxStorage.PlayerStorageObject
+    val: NoxStorage.PlayerStorageObject,
   ) => Promise<NoxStorage.initializedResults>;
   setCurrentPlayingList?: (val: NoxMedia.Playlist) => boolean;
 }
@@ -33,7 +33,7 @@ export const initializeStores = async ({
         // TODO: do something?
       }
       NoxModule.isGestureNavigationMode().then((gestureMode: boolean) =>
-        setGestureMode(gestureMode)
+        setGestureMode(gestureMode),
       );
       break;
     default:
@@ -57,7 +57,7 @@ const useInitializeStore = () => {
   const setGestureMode = useNoxSetting(state => state.setGestureMode);
   const initPlayer = useNoxSetting(state => state.initPlayer);
   const setCurrentPlayingList = useNoxSetting(
-    state => state.setCurrentPlayingList
+    state => state.setCurrentPlayingList,
   );
 
   return {

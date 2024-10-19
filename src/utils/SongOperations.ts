@@ -15,7 +15,7 @@ const { getState } = playerSettingStore;
 export const parseSongR128gain = async (
   song: NoxMedia.Song,
   fade = 0,
-  init = -1
+  init = -1,
 ) => {
   const { playerSetting } = getState();
   const cachedR128gain = getR128Gain(song);
@@ -38,7 +38,7 @@ export const parseSongR128gain = async (
     setR128Gain(gain, song, fade, init);
   } else {
     logger.debug(
-      '[FFMPEG] waiting for r128gain to be parsed. priming to no gain.'
+      '[FFMPEG] waiting for r128gain to be parsed. priming to no gain.',
     );
     setR128Gain(0, song, 0, init);
   }
@@ -74,11 +74,11 @@ export const resolveUrl = async ({
   logger.debug(`[SongResolveURL] start resolving ${song.name}`);
   const cachedUrl = await NoxCache.noxMediaCache?.loadCacheMedia(song);
   logger.debug(
-    `[SongResolveURL] cache ${cachedUrl ? 'found' : 'missed'}, ${song.id}`
+    `[SongResolveURL] cache ${cachedUrl ? 'found' : 'missed'}, ${song.id}`,
   );
 
   const cacheWrapper = async (
-    song: NoxMedia.Song
+    song: NoxMedia.Song,
   ): Promise<NoxNetwork.ResolvedNoxMediaURL> => {
     const url = cachedUrl
       ? {
@@ -87,11 +87,11 @@ export const resolveUrl = async ({
         }
       : await fetchPlayUrlPromise({ song, iOS, prefetch });
     logger.debug(
-      `[SongResolveURL] ${song.parsedName} is resolved to ${url.url}`
+      `[SongResolveURL] ${song.parsedName} is resolved to ${url.url}`,
     );
     if (url.loudness) {
       logger.debug(
-        `[SongResolveURL] ${song.parsedName} contains loudness ${url.loudness} and ${url.perceivedLoudness}`
+        `[SongResolveURL] ${song.parsedName} contains loudness ${url.loudness} and ${url.perceivedLoudness}`,
       );
       addR128Gain(song, -url.loudness);
     }

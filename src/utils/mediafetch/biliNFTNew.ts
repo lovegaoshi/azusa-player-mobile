@@ -22,11 +22,11 @@ const biliNFTFetch = async ({
   filter = (json: any) =>
     json.item_list.filter(
       (item: { card_info: { card_name: string } }) =>
-        item.card_info.card_name === index
+        item.card_info.card_name === index,
     )[0],
 }: Props) => {
   const res = await bfetch(
-    API.replace('{act_id}', act_id).replace('{lottery_id}', lottery_id)
+    API.replace('{act_id}', act_id).replace('{lottery_id}', lottery_id),
   );
   const json = await res.json();
   if (typeof index === 'string') {
@@ -52,7 +52,7 @@ const biliNFTRedeemFetch = ({ act_id, lottery_id, index }: Props) =>
       v.card_item.card_type_info.content.animation.animation_video_urls[0],
     filter: v =>
       v.collect_list.collect_infos.filter(
-        (item: any) => item.redeem_item_name === index
+        (item: any) => item.redeem_item_name === index,
       )[0],
   });
 

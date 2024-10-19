@@ -92,7 +92,7 @@ export const initialize = async () => {
     reExtractSongName: loadJSONRegExtractors(
       savedRegExt.length > 0
         ? savedRegExt
-        : (rejson as NoxRegExt.JSONExtractor[])
+        : (rejson as NoxRegExt.JSONExtractor[]),
     ),
   });
 };
@@ -124,7 +124,7 @@ export const getABRepeat = (song: NoxMedia.Song) => {
 
 export const addABRepeat = (
   song: NoxMedia.Song,
-  abrepeat: [number, number]
+  abrepeat: [number, number],
 ) => {
   saveABRepeat({ [song.id]: abrepeat });
 };
@@ -159,7 +159,7 @@ export const addDownloadProgress = (song: NoxMedia.Song, progress: number) => {
 
 export const addDownloadPromise = (
   song: NoxMedia.Song,
-  downloadPromise: Promise<string | void>
+  downloadPromise: Promise<string | void>,
 ) => {
   const newMap = {
     ...appStore.getState().downloadPromiseMap,
@@ -171,7 +171,7 @@ export const addDownloadPromise = (
 
 export const cacheResolvedURL = async (
   song: NoxMedia.Song,
-  resolveURL: (song: NoxMedia.Song) => Promise<NoxNetwork.ResolvedNoxMediaURL>
+  resolveURL: (song: NoxMedia.Song) => Promise<NoxNetwork.ResolvedNoxMediaURL>,
 ) => {
   const cachedResolveURLMap = appStore.getState().cachedResolveURLMap;
   const cachedResolvedURL = cachedResolveURLMap[song.id];

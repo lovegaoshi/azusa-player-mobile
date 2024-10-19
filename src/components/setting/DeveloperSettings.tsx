@@ -168,7 +168,7 @@ const Home = ({ navigation }: NoxComponent.NavigationProps) => {
       onClose: () => setSelectVisible(false),
       onSubmit: (index: number) => {
         setPlayerSetting({ cacheSize: options[index] }).then(
-          Sentry.nativeCrash
+          Sentry.nativeCrash,
         );
         setSelectVisible(false);
       },
@@ -287,7 +287,7 @@ const Home = ({ navigation }: NoxComponent.NavigationProps) => {
                   { text: t('Dialog.nullify'), onPress: disableTanaka },
                   { text: t('Dialog.ok'), onPress: enableTanaka },
                 ],
-                { cancelable: true }
+                { cancelable: true },
               )
             }
             settingCategory="DeveloperSettings"

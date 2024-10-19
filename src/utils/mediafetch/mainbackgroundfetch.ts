@@ -18,7 +18,7 @@ export enum RESOLVE_TYPE {
 
 const BackgroundVideoWrapper = (
   identifier: string,
-  backgroundImage: NoxTheme.backgroundImage
+  backgroundImage: NoxTheme.backgroundImage,
 ) => ({
   type: RESOLVE_TYPE.video,
   identifier,
@@ -41,45 +41,45 @@ export default async (backgroundImage?: string | NoxTheme.backgroundImage) => {
         return BackgroundVideoWrapper(
           await cacheWrapper(
             `${RESOLVE_TYPE.bvid}-${backgroundImage.identifier}`,
-            () => fetchVideoPlayUrl(backgroundImage.identifier)
+            () => fetchVideoPlayUrl(backgroundImage.identifier),
           ),
-          backgroundImage
+          backgroundImage,
         );
       case RESOLVE_TYPE.biliNFTVideo: {
         logger.warn(
-          `[backgroundFetch] ${RESOLVE_TYPE.biliNFTVideo} is no longer supported.`
+          `[backgroundFetch] ${RESOLVE_TYPE.biliNFTVideo} is no longer supported.`,
         );
         const [act_id, index] = JSON.parse(backgroundImage.identifier);
         return BackgroundVideoWrapper(
           await cacheWrapper(
             `${RESOLVE_TYPE.biliNFTVideoNew}-${backgroundImage.identifier}`,
-            () => biliNFTVideoFetchOld({ act_id, index })
+            () => biliNFTVideoFetchOld({ act_id, index }),
           ),
-          backgroundImage
+          backgroundImage,
         );
       }
       case RESOLVE_TYPE.biliNFTVideoNew: {
         const [act_id, lottery_id, index] = JSON.parse(
-          backgroundImage.identifier
+          backgroundImage.identifier,
         );
         return BackgroundVideoWrapper(
           await cacheWrapper(
             `${RESOLVE_TYPE.biliNFTVideoNew}-${backgroundImage.identifier}`,
-            () => biliNFTVideoFetch({ act_id, lottery_id, index })
+            () => biliNFTVideoFetch({ act_id, lottery_id, index }),
           ),
-          backgroundImage
+          backgroundImage,
         );
       }
       case RESOLVE_TYPE.biliNFTVideoRedeem: {
         const [act_id, lottery_id, index] = JSON.parse(
-          backgroundImage.identifier
+          backgroundImage.identifier,
         );
         return BackgroundVideoWrapper(
           await cacheWrapper(
             `${RESOLVE_TYPE.biliNFTVideoRedeem}-${backgroundImage.identifier}`,
-            () => biliNFTRedeemFetch({ act_id, lottery_id, index })
+            () => biliNFTRedeemFetch({ act_id, lottery_id, index }),
           ),
-          backgroundImage
+          backgroundImage,
         );
       }
       case RESOLVE_TYPE.biliGarbHeadVideo:
@@ -89,9 +89,9 @@ export default async (backgroundImage?: string | NoxTheme.backgroundImage) => {
             () =>
               biliGarbHeadVideoFetch({
                 act_id: backgroundImage.identifier,
-              })
+              }),
           ),
-          backgroundImage
+          backgroundImage,
         );
 
       default:
@@ -99,7 +99,7 @@ export default async (backgroundImage?: string | NoxTheme.backgroundImage) => {
     }
   } catch (e) {
     logger.error(
-      `[mainbackground] resolving ${backgroundImage} failed with ${e}`
+      `[mainbackground] resolving ${backgroundImage} failed with ${e}`,
     );
     return defaultBackgroundImage;
   }

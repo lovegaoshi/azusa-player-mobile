@@ -21,7 +21,7 @@ export const fetchBiliPaginatedAPI = ({
   resolveBiliBVID = (bvobjs, progressEmitter2) =>
     fetchBiliBVIDs(
       bvobjs.map((obj: any) => obj.bvid),
-      progressEmitter2
+      progressEmitter2,
     ),
   startPage = 1,
   processMetadata,
@@ -53,7 +53,7 @@ export const fetchAwaitBiliPaginatedAPI = ({
   resolveBiliBVID = (bvobjs, progressEmitter2) =>
     fetchBiliBVIDs(
       bvobjs.map((obj: any) => obj.bvid),
-      progressEmitter2
+      progressEmitter2,
     ),
 }: FetcherProps) =>
   fetchAwaitPaginatedAPI({

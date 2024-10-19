@@ -60,7 +60,7 @@ export default (currentSong?: NoxMedia.Song) => {
     adhocTitle?: string,
     lrcSources: LrcSource[] = [],
     artist = currentSong?.singerId,
-    optionReorder: (v: NoxLyric.NoxFetchedLyric[][]) => void = () => undefined
+    optionReorder: (v: NoxLyric.NoxFetchedLyric[][]) => void = () => undefined,
   ) => {
     if (currentSong?.name === undefined) return [];
     try {
@@ -71,8 +71,8 @@ export default (currentSong?: NoxMedia.Song) => {
             searchKey: titleToFetch,
             source,
             song: currentSong,
-          })
-        )
+          }),
+        ),
       );
       optionReorder(options);
       const flattenedOptions = options.flat();
@@ -88,9 +88,9 @@ export default (currentSong?: NoxMedia.Song) => {
   const initTrackLrcLoad = async (
     fetchAndSetLyricOptions: () => Promise<NoxLyric.NoxFetchedLyric[]>,
     loadLocalLrc: (
-      lyricPromise: Promise<NoxLyric.NoxFetchedLyric[]>
+      lyricPromise: Promise<NoxLyric.NoxFetchedLyric[]>,
     ) => Promise<boolean>,
-    searchAndSetCurrentLyric: (p: NoxLyric.SearchLyricL) => unknown
+    searchAndSetCurrentLyric: (p: NoxLyric.SearchLyricL) => unknown,
   ) => {
     logger.debug('[lrc] Initiating Lyric with new track...');
     // HACK: UX is too bad if this is not always fetched
@@ -103,14 +103,14 @@ export default (currentSong?: NoxMedia.Song) => {
     if (!(await loadLocalLrc(lrcOptionPromise))) {
       // search from resolved lrc options
       lrcOptionPromise.then(v =>
-        searchAndSetCurrentLyric({ resolvedLrcOptions: v })
+        searchAndSetCurrentLyric({ resolvedLrcOptions: v }),
       );
     }
   };
 
   const loadLocalLrc = async (
     localLrcPromise: Promise<FetchedLocalLrc | undefined>,
-    fetchNewLrc: () => void
+    fetchNewLrc: () => void,
   ) => {
     const localLrcColle = await localLrcPromise;
     if (localLrcColle === undefined) return false;

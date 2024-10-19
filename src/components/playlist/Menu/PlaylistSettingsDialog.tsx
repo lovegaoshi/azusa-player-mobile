@@ -25,7 +25,7 @@ const PlaylistDialog = ({
   const [name, setName] = React.useState(playlist.title);
   const [sub, setSub] = React.useState(playlist.subscribeUrl.join(';'));
   const [blacklist, setBlacklist] = React.useState(
-    playlist.blacklistedUrl.join(';')
+    playlist.blacklistedUrl.join(';'),
   );
   const {
     useBiliShazam,

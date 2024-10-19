@@ -8,7 +8,7 @@ import { randomChoice } from '@utils/Utils';
 import logger from '@utils/Logger';
 
 export const createStyle = (
-  customStyle: NoxTheme.Style | NoxTheme.AdaptiveStyle = AzusaTheme
+  customStyle: NoxTheme.Style | NoxTheme.AdaptiveStyle = AzusaTheme,
 ) => {
   const refTheme = customStyle.metaData.darkTheme ? NoxTheme : AzusaTheme;
   return StyleSheet.create({
@@ -63,7 +63,7 @@ export const createStyle = (
     gifs: (customStyle.gifs || []) as any,
     bkgrdImg: randomChoice(customStyle.backgroundImages || []) as any,
     bkgrdImgLandscape: randomChoice(
-      customStyle.backgroundImagesLandscape || []
+      customStyle.backgroundImagesLandscape || [],
     ) as any,
     loadingIcon: customStyle.loadingIcon as any,
     progressThumbImage: customStyle.progressThumbImage as any,

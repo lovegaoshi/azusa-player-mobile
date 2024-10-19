@@ -12,7 +12,7 @@ import { saveColorScheme, getColorScheme } from '@utils/ChromeStorageAPI';
 
 const ColorSchemei18n = (
   scheme: ColorSchemeName,
-  t: (val: string) => string
+  t: (val: string) => string,
 ) => {
   switch (scheme) {
     case 'light':

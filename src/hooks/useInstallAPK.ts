@@ -26,7 +26,7 @@ export default () => {
         setSnack({ snackMsg: { success: t('VersionUpdate.DownloadedAPK') } });
         android.actionViewIntent(
           res.path(),
-          'application/vnd.android.package-archive'
+          'application/vnd.android.package-archive',
         );
       })
       .catch();

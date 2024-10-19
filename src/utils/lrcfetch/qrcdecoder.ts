@@ -408,7 +408,7 @@ function des_key_setup(key: number[], schedule: number_0_6, mode: DES_MODE) {
       schedule[to_gen][flr(j / 8)] |= BITNUMINTR(
         C,
         key_compression[j],
-        7 - (j % 8)
+        7 - (j % 8),
       );
       schedule[to_gen][flr(j / 8)] >>>= 0;
     }
@@ -416,7 +416,7 @@ function des_key_setup(key: number[], schedule: number_0_6, mode: DES_MODE) {
       schedule[to_gen][flr(j / 8)] |= BITNUMINTR(
         D,
         key_compression[j] - 27,
-        7 - (j % 8)
+        7 - (j % 8),
       );
       schedule[to_gen][flr(j / 8)] >>>= 0;
     }

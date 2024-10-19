@@ -55,7 +55,7 @@ const regexFetch = async ({
         duration: ep.duration,
         album: ep.share_copy,
         source: Source.biliBangumi,
-      })
+      }),
     ),
   };
 };

@@ -19,7 +19,7 @@ export default ({ track }: NoxComponent.TrackProps) => {
   const favoritePlaylist = useNoxSetting(state => state.favoritePlaylist);
   const setFavoritePlaylist = useNoxSetting(state => state.setFavoritePlaylist);
   const [liked, setLiked] = useState(
-    favoritePlaylist.songList.filter(val => val.id === song?.id).length > 0
+    favoritePlaylist.songList.filter(val => val.id === song?.id).length > 0,
   );
   const setRNTPOptions = useStore(appStore, state => state.setRNTPOptions);
 

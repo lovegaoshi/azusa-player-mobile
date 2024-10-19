@@ -22,13 +22,13 @@ const kugouDecrypt = (content: string) => {
   const slicedContent = content.slice(4);
   const decryptedContent = Uint8Array.from(
     slicedContent,
-    (c, i) => c.charCodeAt(0) ^ encrypt_key[i % encrypt_key.length]
+    (c, i) => c.charCodeAt(0) ^ encrypt_key[i % encrypt_key.length],
   );
   return strFromU8(decompressSync(decryptedContent));
 };
 
 const getLrcOptions = async (
-  kw: string
+  kw: string,
 ): Promise<NoxLyric.NoxFetchedLyric[]> => {
   logger.debug(`[kugou] calling getKugouLyricOptions: ${kw}`);
   const res = await bfetch(SearchSongAPI.replace('{kw}', kw));
@@ -48,7 +48,7 @@ const getLyric = async (songMid: string) => {
   const json = await res.json();
   const { accesskey, id } = json.candidates[0];
   const res2 = await bfetch(
-    LyricAPI.replace('{id}', id).replace('{accessKey}', accesskey)
+    LyricAPI.replace('{id}', id).replace('{accessKey}', accesskey),
   );
   const { content } = await res2.json();
   return kugouDecrypt(atob(content));
