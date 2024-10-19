@@ -42,7 +42,7 @@ const ThumbsUpButton = ({ iconSize = 30 }: Props) => {
   const { track } = useActiveTrack();
   const playerStyle = useNoxSetting(state => state.playerStyle);
   const [status, setStatus] = React.useState<THUMBUPSTATUS>(
-    THUMBUPSTATUS.notLoggedIn
+    THUMBUPSTATUS.notLoggedIn,
   );
   const [svgaVisible, setSvgaVisible] = React.useState(false);
 

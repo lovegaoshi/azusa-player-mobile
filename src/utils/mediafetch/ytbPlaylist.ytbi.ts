@@ -29,7 +29,7 @@ const ytbiPlaylistItemToNoxSong = (val: PlaylistVideo, data: Playlist) => {
 
 export const fetchYtbiPlaylist = async (
   playlistId: string,
-  favList: string[] = []
+  favList: string[] = [],
 ): Promise<NoxMedia.Song[]> => {
   const yt = await ytClientWeb;
   const playlistData = await yt.getPlaylist(playlistId);
@@ -38,7 +38,7 @@ export const fetchYtbiPlaylist = async (
     .map(val =>
       !favList.includes(val.id)
         ? ytbiPlaylistItemToNoxSong(val, playlistData)
-        : []
+        : [],
     )
     .filter((val): val is NoxMedia.Song => val !== undefined);
 };

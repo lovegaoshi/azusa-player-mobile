@@ -39,7 +39,7 @@ export const noxRestore = async (cloudAddress: string, cloudID?: string) => {
         responseType: 'arraybuffer',
         maxContentLength: Infinity,
         maxBodyLength: Infinity,
-      }
+      },
     );
     if (res.status === 200) {
       return new Uint8Array(await res.data);
@@ -66,7 +66,7 @@ export const noxRestore = async (cloudAddress: string, cloudID?: string) => {
 export const noxBackup = async (
   content: Uint8Array,
   cloudAddress: string,
-  cloudID?: string
+  cloudID?: string,
 ) => {
   try {
     logger.debug(`[personalSync] syncing to ${cloudAddress}`);

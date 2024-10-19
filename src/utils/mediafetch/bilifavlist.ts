@@ -24,7 +24,7 @@ const getFavList = async (mid: string) => {
 export const getFavListBVID = async (
   mid: string,
   favList: string[] = [],
-  type = 2
+  type = 2,
 ) => {
   const data = await getFavList(mid);
   return data
@@ -62,8 +62,8 @@ const regexFetch = async ({
     avids.map(avid =>
       biliaudioFetch.regexFetch({
         reExtracted: [0, Number(avid)] as unknown as RegExpExecArray,
-      })
-    )
+      }),
+    ),
   );
   return {
     songList: BVfetched.songList.concat(AVfetched.map(v => v.songList).flat()),

@@ -6,7 +6,7 @@ const fsdirs = RNFetchBlob.fs.dirs;
 export const writeTxtFile = (
   filename: string,
   content: string[],
-  subfolder = ''
+  subfolder = '',
 ) => {
   RNFetchBlob.fs
     .writeStream(
@@ -14,7 +14,7 @@ export const writeTxtFile = (
       // encoding, should be one of `base64`, `utf8`, `ascii`
       'utf8',
       // should data append to existing content ?
-      false
+      false,
     )
     .then(stream => Promise.all(content.map(val => stream.write(val))))
     // Use array destructuring to get the stream object from the first item of the array we get from Promise.all()
@@ -37,7 +37,7 @@ export const readTxtFile = (filename: string, subfolder = '') => {
 
 export const lsFiles = async (
   dirpath = `${fsdirs.DocumentDir}`,
-  prefix = 'ReactNativeBlobUtilTmp_'
+  prefix = 'ReactNativeBlobUtilTmp_',
 ) => {
   const list = await RNFetchBlob.fs.ls(dirpath);
   return {

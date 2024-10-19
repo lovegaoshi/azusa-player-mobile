@@ -48,7 +48,7 @@ const playlistAnalysis = (favList: { songList: NoxMedia.Song[] }) => {
     }
   }
   results.songsSorted = Object.entries(results.songOccurrence).sort(
-    (a, b) => -(a[1] - b[1])
+    (a, b) => -(a[1] - b[1]),
   );
   results.songTop10 = results.songsSorted.slice(0, 10);
   return results;
@@ -81,7 +81,7 @@ export default (playlist: NoxMedia.Playlist, topX = 5) => {
       }),
       i18n.t('PlaylistAnalytics.shazamFailed', {
         val1: `${String(analytics.invalidShazamCount)}/${String(
-          analytics.totalCount
+          analytics.totalCount,
         )}`,
         val2: (
           (analytics.invalidShazamCount * 100) /

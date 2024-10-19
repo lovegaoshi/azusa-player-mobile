@@ -29,7 +29,7 @@ export const musePlaylistItemToNoxSong = (val: any, data: any) => {
 };
 
 export const fetchInnerTuneSearch = async (
-  searchVal: string
+  searchVal: string,
 ): Promise<NoxMedia.Song[]> => {
   try {
     const searchData = await Promise.all([
@@ -42,8 +42,10 @@ export const fetchInnerTuneSearch = async (
     ]);
     return searchData.flatMap(searchList =>
       searchList.categories[0].results.flatMap((val: any) =>
-        val?.videoId ? musePlaylistItemToNoxSong(val, { title: val.title }) : []
-      )
+        val?.videoId
+          ? musePlaylistItemToNoxSong(val, { title: val.title })
+          : [],
+      ),
     );
   } catch {
     logger.error(`[muse ytm Search] search ${searchVal} failed!`);

@@ -40,7 +40,7 @@ const getBiliSuggest = async (skipLongVideo = true) => {
       throw new Error('not a bvid; bilisuggest fails');
     }
     const biliSuggested = (await biliSuggest(currentSong.bvid)).filter(val =>
-      musicTids.includes(val.tid)
+      musicTids.includes(val.tid),
     );
     return (
       await biliavideo.regexFetch({
@@ -66,7 +66,7 @@ const getBiliSuggest = async (skipLongVideo = true) => {
 
 const skipToBiliSuggest = async (
   next = true,
-  skipLongVideo = useNoxSetting.getState().playerSetting.suggestedSkipLongVideo
+  skipLongVideo = useNoxSetting.getState().playerSetting.suggestedSkipLongVideo,
 ) => {
   if (noxPlayingList.getState().playmode !== NoxRepeatMode.Suggest) {
     throw new Error('playmode is not bilisuggest.');
@@ -96,7 +96,7 @@ const prepareSkipToNext = async (mSkipToBiliSuggest = skipToBiliSuggest) => {
 };
 
 const prepareSkipToPrevious = async (
-  mSkipToBiliSuggest = skipToBiliSuggest
+  mSkipToBiliSuggest = skipToBiliSuggest,
 ) => {
   const nextSong = playNextSong(-1);
   if (nextSong && (await TrackPlayer.getActiveTrackIndex()) === 0) {
@@ -110,7 +110,7 @@ const prepareSkipToPrevious = async (
 
 export const performFade = async (
   callback: () => void,
-  fadeIntervalMs = appStore.getState().fadeIntervalMs
+  fadeIntervalMs = appStore.getState().fadeIntervalMs,
 ) => {
   const isPlaying = await TrackPlayer.getPlaybackState();
   if (isPlaying.state === State.Playing) {
@@ -129,7 +129,7 @@ export const performSkipToNext = (
   auto = false,
   noRepeat = useNoxSetting.getState().playerSetting.noRepeat,
   preparePromise = prepareSkipToNext,
-  mPerformFade = performFade
+  mPerformFade = performFade,
 ) => {
   if (auto && noRepeat) {
     logger.debug('[autoRepeat] stopping playback as autoRepeat is set to off');
@@ -147,7 +147,7 @@ export const performSkipToNext = (
 
 export const performSkipToPrevious = (
   preparePromise = prepareSkipToPrevious,
-  mPerformFade = performFade
+  mPerformFade = performFade,
 ) => {
   const callback = () =>
     preparePromise().then(async () => {
@@ -175,12 +175,12 @@ export default () => {
         auto,
         playerSetting.noRepeat,
         () => prepareSkipToNext(mSkipToBiliSuggest),
-        mPerformFade
+        mPerformFade,
       ),
     performSkipToPrevious: () =>
       performSkipToPrevious(
         () => prepareSkipToPrevious(mSkipToBiliSuggest),
-        mPerformFade
+        mPerformFade,
       ),
   };
 };

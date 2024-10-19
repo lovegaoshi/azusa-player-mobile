@@ -10,7 +10,7 @@ import { isAndroid } from '@utils/RNUtils';
 
 export default () => {
   const inAppUpdates = new SpInAppUpdates(
-    false // isDebug
+    false, // isDebug
   );
 
   const checkPlayStoreUpdates = async () => {

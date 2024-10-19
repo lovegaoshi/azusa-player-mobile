@@ -12,16 +12,16 @@ const resolveIOSURL = (formats: ytdl.videoFormat[]) => {
   // for now use the video + audio format that is fine.
   // maybe we can "fix" this via setDuration?
   const filteredFormats = formats.filter(format =>
-    format.codecs.includes('mp4a')
+    format.codecs.includes('mp4a'),
   );
   const combinedFormats = filteredFormats.filter(
-    format => format.hasVideo && format.hasAudio
+    format => format.hasVideo && format.hasAudio,
   );
   return ytdl.chooseFormat(
     combinedFormats.length === 0 ? filteredFormats : combinedFormats,
     {
       quality: 'highestaudio',
-    }
+    },
   ).url;
 };
 
@@ -30,7 +30,7 @@ export const resolveURL = async (song: NoxMedia.Song, iOS = true) => {
   try {
     logger.debug(`[ytb.node] fetch YTB playURL promise:${sid}`);
     const ytdlInfo = await ytdl.getInfo(
-      `https://www.youtube.com/watch?v=${sid}`
+      `https://www.youtube.com/watch?v=${sid}`,
     );
     const videoDetails = ytdlInfo.videoDetails;
     const url =
@@ -148,7 +148,7 @@ export const fetchAudioInfo = async (sid: string) => {
     */
     const videoDetails = ytdlInfo.videoDetails;
     const validDurations = ytdlInfo.formats.filter(
-      format => format.approxDurationMs
+      format => format.approxDurationMs,
     );
     return [
       SongTS({
@@ -164,7 +164,7 @@ export const fetchAudioInfo = async (sid: string) => {
         duration:
           validDurations.length > 0
             ? Math.floor(
-                Number.parseInt(validDurations[0].approxDurationMs!) / 1000
+                Number.parseInt(validDurations[0].approxDurationMs!) / 1000,
               )
             : 0,
         album: videoDetails.title,
@@ -181,10 +181,10 @@ export const fetchAudioInfo = async (sid: string) => {
 
 export const suggest = async (
   song: NoxMedia.Song,
-  filterMW = <T>(v: T[]) => v[0]
+  filterMW = <T>(v: T[]) => v[0],
 ) => {
   const ytdlInfo = await ytdl.getInfo(
-    `https://www.youtube.com/watch?v=${song.bvid}`
+    `https://www.youtube.com/watch?v=${song.bvid}`,
   );
   /*
   might be very useful for youtubeSuggest.
@@ -225,7 +225,7 @@ export const suggest = async (
         album: suggestSong.title,
         source: Source.ytbvideo,
         metadataOnLoad: true,
-      })
+      }),
     );
   return filterMW(relatedVideos); // or relatedVideos[0];
 };

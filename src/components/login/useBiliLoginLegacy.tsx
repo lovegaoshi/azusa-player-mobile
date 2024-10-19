@@ -75,8 +75,8 @@ const useBiliLogin = () => {
       const json = await response.json();
       logger.debug(
         `[biliLogin] probing QR code login of ${qrcodeKey}, ${JSON.stringify(
-          json
-        )}`
+          json,
+        )}`,
       );
       if (json.code === 0) {
         // json.status
@@ -84,8 +84,8 @@ const useBiliLogin = () => {
         if (!setCookie) {
           logger.warn(
             `[biliLogin] no set-cookie header found; res: ${JSON.stringify(
-              json
-            )}`
+              json,
+            )}`,
           );
           return;
         }
@@ -102,7 +102,7 @@ const useBiliLogin = () => {
             await CookieManager.set(domain, { name: key, value });
           } catch {
             logger.warn(
-              `[biliLogin] ${key} and ${value} failed in saving cookie.`
+              `[biliLogin] ${key} and ${value} failed in saving cookie.`,
             );
           }
         }

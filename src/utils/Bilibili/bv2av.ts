@@ -26,7 +26,7 @@ export function bv2av(bvid: `BV1${string}`) {
   bvidArr.splice(0, 3);
   const tmp = bvidArr.reduce(
     (pre, bvidChar) => pre * BASE + BigInt(data.indexOf(bvidChar)),
-    0n
+    0n,
   );
   return Number((tmp & MASK_CODE) ^ XOR_CODE);
 }

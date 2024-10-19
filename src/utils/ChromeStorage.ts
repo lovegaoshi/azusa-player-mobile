@@ -122,7 +122,7 @@ export const getPlayerSkins = async () =>
   await loadChucked(await getItem(StorageKeys.SKINSTORAGE, []));
 
 export const saveLyricMapping = async (
-  lyricMapping: Map<string, NoxMedia.LyricDetail>
+  lyricMapping: Map<string, NoxMedia.LyricDetail>,
 ) => saveChucked(StorageKeys.LYRIC_MAPPING, Array.from(lyricMapping.entries()));
 
 export const getLyricMapping = () =>
@@ -180,7 +180,7 @@ export const initPlayerObject = async (safeMode = false) => {
     lastPlaylistId: await getItem(StorageKeys.LAST_PLAY_LIST, ['NULL', 'NULL']),
     searchPlaylist: dummyPlaylist(
       i18n.t('PlaylistOperations.searchListName'),
-      PlaylistTypes.Search
+      PlaylistTypes.Search,
     ),
     favoriPlaylist: await getPlaylist({
       key: StorageKeys.FAVORITE_PLAYLIST_KEY,
@@ -188,7 +188,7 @@ export const initPlayerObject = async (safeMode = false) => {
     }),
     playbackMode: await getItem(
       StorageKeys.PLAYMODE_KEY,
-      NoxRepeatMode.Shuffle
+      NoxRepeatMode.Shuffle,
     ),
     skin: await getItem(StorageKeys.SKIN, getDefaultTheme()),
     skins: (await getPlayerSkins()) || [],
@@ -221,7 +221,7 @@ export const initPlayerObject = async (safeMode = false) => {
           hydrateSongList: !playerObject.settings.memoryEfficiency,
         });
         if (retrievedPlaylist) playerObject.playlists[id] = retrievedPlaylist;
-      })
+      }),
     );
   }, 'loading playlists');
 
@@ -252,8 +252,8 @@ export const clearPlaylistNImport = async (parsedContent: any) => {
   await clearPlaylists();
   await saveImportedPlaylist(
     parsedContent[StorageKeys.MY_FAV_LIST_KEY].map(
-      (val: string) => parsedContent[val]
-    )
+      (val: string) => parsedContent[val],
+    ),
   );
   await savePlaylistIds(parsedContent[StorageKeys.MY_FAV_LIST_KEY]);
 };
@@ -262,15 +262,15 @@ export const addImportedPlaylist = async (playlists: any[]) => {
   await saveImportedPlaylist(playlists);
   await savePlaylistIds(
     (await getItem(StorageKeys.MY_FAV_LIST_KEY)).concat(
-      playlists.map(val => val.info.id)
-    )
+      playlists.map(val => val.info.id),
+    ),
   );
 };
 
 export const importPlayerContentRaw = async (parsedContent: any) => {
   const oldCache = await _importPlayerContentRaw(
     parsedContent,
-    getCachedMediaMapping
+    getCachedMediaMapping,
   );
   await saveCachedMediaMapping(oldCache);
   return initPlayerObject();

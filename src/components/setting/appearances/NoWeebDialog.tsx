@@ -41,7 +41,7 @@ const NoWeebDialog = ({ visible, setVisible }: Props) => {
         contrastColor,
         backgroundColor,
         noWeeb: true,
-      })
+      }),
     );
   };
 

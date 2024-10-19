@@ -62,14 +62,14 @@ const resolveBiliBVID = (objs: any[], _: any, rawData: any) =>
       duration: obj.duration,
       album: obj.title,
       source: Source.bilivideo,
-    })
+    }),
   );
 
 const fetchBiliColleList = (
   mid: string,
   sid: string,
   progressEmitter: NoxUtils.ProgressEmitter = () => undefined,
-  favList: string[] = []
+  favList: string[] = [],
 ) => {
   logger.info('calling fetchBiliColleList');
 
@@ -96,11 +96,11 @@ const regexFetch = async ({
       reExtracted[1],
       reExtracted[2],
       progressEmitter,
-      favList
+      favList,
     ),
     false,
     progressEmitter,
-    useBiliTag || false
+    useBiliTag || false,
   ),
 });
 

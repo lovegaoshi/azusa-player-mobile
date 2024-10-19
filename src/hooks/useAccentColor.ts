@@ -12,7 +12,7 @@ export default (replaceStyle = false) => {
   const setPlayerStyle = useNoxSetting(state => state.setPlayerStyle);
   const playerSetting = useNoxSetting(state => state.playerSetting);
   const [backgroundColor, setBackgroundColor] = useState<string>(
-    playerStyle.colors.background
+    playerStyle.colors.background,
   );
   const { track } = useActiveTrack();
 
@@ -32,7 +32,7 @@ export default (replaceStyle = false) => {
               primaryColor: resolvedColor,
               secondaryColor: parsedColor.lighten(0.2).toRgbString(),
               contrastColor: parsedColor.invert().toRgbString(),
-            })
+            }),
           );
         }
       }

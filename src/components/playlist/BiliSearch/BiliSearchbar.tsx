@@ -47,7 +47,7 @@ export default ({
   const navigationGlobal = useNavigation();
   const externalSearchText = useNoxSetting(state => state.externalSearchText);
   const setExternalSearchText = useNoxSetting(
-    state => state.setExternalSearchText
+    state => state.setExternalSearchText,
   );
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [sharedData, setSharedData] = useState<any>(null);
@@ -86,13 +86,13 @@ export default ({
   useEffect(() => {
     if (externalSearchText.length > 0) {
       logger.debug(
-        `[search] performing external serach: ${externalSearchText}`
+        `[search] performing external serach: ${externalSearchText}`,
       );
       handleExternalSearch(externalSearchText).then(newSearchPlaylist =>
         playFromPlaylist({
           playlist: newSearchPlaylist,
           song: newSearchPlaylist.songList[0],
-        })
+        }),
       );
       setExternalSearchText('');
     }
@@ -125,7 +125,7 @@ export default ({
   useEffect(() => {
     if (!isAndroid) return;
     const listener = ShareMenu.addNewShareListener(
-      handleShare as ShareCallback
+      handleShare as ShareCallback,
     );
 
     return () => {
@@ -145,7 +145,7 @@ export default ({
           onIconPress={handleMenuPress}
           icon={getIcon(searchOption)}
           resolveData={searchSuggest(
-            playerSetting.useSuggestion ? searchOption : ''
+            playerSetting.useSuggestion ? searchOption : '',
           )}
         />
         <SearchMenu

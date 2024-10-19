@@ -9,7 +9,7 @@ const headFetch = async (url: string): Promise<NoxMedia.Song | undefined> => {
     if (res.headers.get('content-type')?.startsWith('audio')) {
       const urlObj = new URL(url);
       const fn = urlObj.pathname.substring(
-        urlObj.pathname.lastIndexOf('/') + 1
+        urlObj.pathname.lastIndexOf('/') + 1,
       );
       return SongTS({
         cid: `${Source.rawhttp}-${url}`,

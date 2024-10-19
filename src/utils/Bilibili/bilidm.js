@@ -35,7 +35,7 @@ export function getDmImgList(events) {
         k: floor(random() * 67) + 60,
         type: eventTypes.indexOf(event.type),
       };
-    })
+    }),
   );
 }
 

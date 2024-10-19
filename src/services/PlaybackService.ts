@@ -40,10 +40,10 @@ export async function additionalPlaybackService({
 }: Partial<NoxStorage.PlayerSettingDict>) {
   if (isAndroid) {
     TrackPlayer.addEventListener(Event.RemotePlayId, e =>
-      playFromMediaId(e.id)
+      playFromMediaId(e.id),
     );
     TrackPlayer.addEventListener(Event.RemotePlaySearch, e =>
-      playFromSearch(e.query.toLowerCase())
+      playFromSearch(e.query.toLowerCase()),
     );
     TrackPlayer.addEventListener(Event.RemotePlayPause, async () => {
       if ((await TrackPlayer.getPlaybackState()).state === State.Playing) {
@@ -54,15 +54,15 @@ export async function additionalPlaybackService({
     });
   }
   TrackPlayer.addEventListener(Event.PlaybackQueueEnded, async () =>
-    performSkipToNext(true)
+    performSkipToNext(true),
   );
 
   TrackPlayer.addEventListener(Event.RemoteNext, async () =>
-    performSkipToNext()
+    performSkipToNext(),
   );
 
   TrackPlayer.addEventListener(Event.RemotePrevious, async () =>
-    performSkipToPrevious()
+    performSkipToPrevious(),
   );
 
   TrackPlayer.addEventListener(Event.RemoteDuck, async event => {
@@ -79,7 +79,7 @@ export async function additionalPlaybackService({
     if (lastPlayedDuration.val && event.state === State.Ready) {
       if ((await TrackPlayer.getActiveTrack())?.song?.id === currentPlayingID) {
         logger.debug(
-          `[Playback] initalized last played duration to ${lastPlayDuration}`
+          `[Playback] initalized last played duration to ${lastPlayDuration}`,
         );
         TrackPlayer.seekTo(lastPlayedDuration.val);
       }
@@ -90,10 +90,10 @@ export async function additionalPlaybackService({
 
 export async function PlaybackService() {
   DeviceEventEmitter.addListener('APMEnterPIP', (e: boolean) =>
-    setState({ pipMode: e })
+    setState({ pipMode: e }),
   );
   DeviceEventEmitter.addListener('APMNewIntent', (e: NoxComponent.AppProps) =>
-    console.log('apm', e)
+    console.log('apm', e),
   );
 
   TrackPlayer.addEventListener(Event.RemotePause, () => {
@@ -187,7 +187,7 @@ export async function PlaybackService() {
       if (getState().playmode === NoxRepeatMode.RepeatTrack) {
         TrackPlayer.setRepeatMode(RepeatMode.Track);
       }
-    }
+    },
   );
 
   TrackPlayer.addEventListener(Event.PlaybackPlayWhenReadyChanged, event => {
@@ -203,7 +203,7 @@ export async function PlaybackService() {
 
     TrackPlayer.addEventListener(Event.PlaybackAnimatedVolumeChanged, e => {
       logger.debug(
-        `animated volume finished event triggered: ${JSON.stringify(e)}`
+        `animated volume finished event triggered: ${JSON.stringify(e)}`,
       );
       getAppStoreState().animatedVolumeChangedCallback();
       setState({ animatedVolumeChangedCallback: () => undefined });

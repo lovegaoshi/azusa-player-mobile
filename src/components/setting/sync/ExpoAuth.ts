@@ -26,7 +26,7 @@ const expoAuth = async (config: Config) => {
   }
   const accessTokenState = await exchangeCodeAsync(
     { code: authState.params.code, ...config },
-    config.serviceConfiguration
+    config.serviceConfiguration,
   );
   return accessTokenState.accessToken;
 };

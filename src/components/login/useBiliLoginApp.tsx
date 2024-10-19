@@ -76,7 +76,7 @@ const loginQRVerification = async () => {
           ...qrBody,
           sign: signBody(qrBody),
         },
-      })
+      }),
     ),
     json = await res.json();
   await CookieManager.set(domain, {
@@ -90,13 +90,13 @@ const loginQRVerification = async () => {
   await CookieManager.set(domain, {
     name: 'SESSDATA',
     value: json.data.cookie_info.cookies.filter(
-      (val: any) => val.name === 'SESSDATA'
+      (val: any) => val.name === 'SESSDATA',
     )[0].value,
   });
   await CookieManager.set(domain, {
     name: 'bili_jct',
     value: json.data.cookie_info.cookies.filter(
-      (val: any) => val.name === 'bili_jct'
+      (val: any) => val.name === 'bili_jct',
     )[0].value,
   });
   return true;
@@ -193,8 +193,8 @@ const useBiliLogin = (): BiliLogin => {
       const json = await response.json();
       logger.debug(
         `[biliLogin] probing QR code login of ${qrcodeKey}, ${JSON.stringify(
-          json
-        )}`
+          json,
+        )}`,
       );
       if (json.code === 0) {
         // json.status
@@ -202,8 +202,8 @@ const useBiliLogin = (): BiliLogin => {
         if (!setCookie) {
           logger.warn(
             `[biliLogin] no set-cookie header found; res: ${JSON.stringify(
-              json
-            )}`
+              json,
+            )}`,
           );
         } else {
           addCookie(domain, setCookie);
@@ -220,8 +220,8 @@ const useBiliLogin = (): BiliLogin => {
           } catch {
             logger.warn(
               `[biliLogin] ${JSON.stringify(
-                cookieEntry
-              )} failed in saving cookie.`
+                cookieEntry,
+              )} failed in saving cookie.`,
             );
           }
         }
@@ -267,7 +267,7 @@ const useBiliLogin = (): BiliLogin => {
           csrf: bili_jct,
           scanning_type: 3,
         },
-      }
+      },
     );
     const json = await res.json();
     console.warn(json);

@@ -11,7 +11,7 @@ import MusicFreeButton from './MusicFreeButton';
 
 const updateFromGithub = async () => {
   const res = await fetch(
-      'https://raw.githubusercontent.com/lovegaoshi/azusa-player-mobile/master/src/utils/rejson.json'
+      'https://raw.githubusercontent.com/lovegaoshi/azusa-player-mobile/master/src/utils/rejson.json',
     ),
     json = await res.json();
   saveRegextractMapping(json);
@@ -23,7 +23,7 @@ const PluginSettings = () => {
   const setSnack = useSnack(state => state.setSnack);
   const updateWithSnack = (
     name: string,
-    processFunction: () => Promise<void>
+    processFunction: () => Promise<void>,
   ) => {
     setSnack({
       snackMsg: {

@@ -40,13 +40,13 @@ export default (playlist: NoxMedia.Playlist) => {
   const playerSetting = useNoxSetting(state => state.playerSetting);
   const currentPlayingId = useNoxSetting(state => state.currentPlayingId);
   const setPlaylistSearchAutoFocus = useNoxSetting(
-    state => state.setPlaylistSearchAutoFocus
+    state => state.setPlaylistSearchAutoFocus,
   );
   const playlistShouldReRender = useNoxSetting(
-    state => state.playlistShouldReRender
+    state => state.playlistShouldReRender,
   );
   const progressEmitter = useNoxSetting(
-    state => state.searchBarProgressEmitter
+    state => state.searchBarProgressEmitter,
   );
   const playlistRef = useRef<FlashList<NoxMedia.Song>>(null);
   const { playFromPlaylist } = usePlayback();
@@ -80,7 +80,7 @@ export default (playlist: NoxMedia.Playlist) => {
                 row =>
                   // HACK: cachedSongs also include local files
                   row?.bvid?.startsWith?.('file://') ||
-                  cachedSongs.includes(noxCacheKey(row))
+                  cachedSongs.includes(noxCacheKey(row)),
               );
         },
       },
@@ -113,7 +113,7 @@ export default (playlist: NoxMedia.Playlist) => {
       performFade(callback);
     };
     usedPlaylist.playSong(song, playSongCallback, p =>
-      clearPlaylistUninterrupted().then(() => setPlayingList(p.songList))
+      clearPlaylistUninterrupted().then(() => setPlayingList(p.songList)),
     );
   };
 

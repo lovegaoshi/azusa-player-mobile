@@ -50,7 +50,7 @@ export default () => {
           <Button
             onPress={() =>
               Linking.openURL(
-                'https://github.com/lovegaoshi/azusa-player-mobile/releases/latest'
+                'https://github.com/lovegaoshi/azusa-player-mobile/releases/latest',
               )
             }
           >

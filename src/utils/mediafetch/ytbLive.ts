@@ -7,7 +7,7 @@ const regexFetch = async ({
   const audioInfo = await ytbVideoFetch.regexFetch({ reExtracted });
   if (audioInfo.songList.length === 0) {
     logger.warn(
-      `[ytblive] fetch failed on ${reExtracted[0]} assuming its a video`
+      `[ytblive] fetch failed on ${reExtracted[0]} assuming its a video`,
       // TODO: resolve streaming url here
     );
   }

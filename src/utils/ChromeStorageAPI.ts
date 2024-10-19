@@ -27,7 +27,7 @@ const MAX_SONGLIST_SIZE = 400;
 export const saveItem = async (
   key: string,
   value: unknown,
-  setFunc: (k: string, v: string) => Promise<void> = AsyncStorage.setItem
+  setFunc: (k: string, v: string) => Promise<void> = AsyncStorage.setItem,
 ) => {
   try {
     await setFunc(key, JSON.stringify(value));
@@ -39,7 +39,7 @@ export const saveItem = async (
 export const getItem = async (
   key: string,
   defaultVal: unknown = null,
-  getFunc: (k: string) => Promise<any> = AsyncStorage.getItem
+  getFunc: (k: string) => Promise<any> = AsyncStorage.getItem,
 ): Promise<null | any> => {
   try {
     const retrievedStr = await getFunc(key);
@@ -64,7 +64,7 @@ export const removeItem = async (key: string) => {
  */
 export const getMapping = async (
   key: StorageKeys,
-  transform: (val: any) => any = arrayToObject
+  transform: (val: any) => any = arrayToObject,
 ) => {
   try {
     const result = await getItem(key);
@@ -86,7 +86,7 @@ export const getMapping = async (
 export const saveChucked = async (
   key: string,
   objects: any[],
-  saveToStorage = true
+  saveToStorage = true,
 ) => {
   // splice into chunks
   const chuckedObject = chunkArray(objects, MAX_SONGLIST_SIZE);
@@ -102,7 +102,7 @@ export const saveChucked = async (
 
 export const loadChucked = async (keys: string[]) => {
   const loadedArrays = (await Promise.all(
-    keys.map(async (val: string) => await getItem(val))
+    keys.map(async (val: string) => await getItem(val)),
   )) as any[][];
   return loadedArrays.flat();
 };
@@ -118,7 +118,7 @@ export const getSecure = (key: string, defaultVal: unknown = null) =>
  */
 export const savePlaylist = async (
   playlist: NoxMedia.Playlist,
-  overrideKey: string | null = null
+  overrideKey: string | null = null,
 ) => {
   try {
     const savingPlaylist = {
@@ -151,20 +151,20 @@ export const exportPlayerContent = async (content?: any) => {
 
 const parseImportedPartial = (
   key: string,
-  parsedContent: [string, string][]
+  parsedContent: [string, string][],
 ) => {
   return JSON.parse(
-    parsedContent.filter((val: [string, string]) => val[0] === key)[0][1]
+    parsedContent.filter((val: [string, string]) => val[0] === key)[0][1],
   );
 };
 
 export const importPlayerContentRaw = async (
   parsedContent: any,
-  getContent: () => Promise<any>
+  getContent: () => Promise<any>,
 ) => {
   const importedAppID = parseImportedPartial(
     StorageKeys.PLAYER_SETTING_KEY,
-    parsedContent
+    parsedContent,
   ).appID;
   if (importedAppID !== AppID) {
     throw new Error(`${importedAppID} is not valid appID`);
@@ -186,7 +186,7 @@ export const saveColorScheme = (val: ColorSchemeName) =>
   saveItem(StorageKeys.COLORTHEME, val);
 
 export const getPlaylistSongList = async (
-  playlist?: NoxMedia.Playlist
+  playlist?: NoxMedia.Playlist,
 ): Promise<NoxMedia.Song[]> =>
   !playlist?.songList
     ? []

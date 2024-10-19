@@ -35,7 +35,7 @@ export const setPlayingIndex = (index = 0, songId?: string) => {
       songId = currentQueue[index].id;
     } catch {
       logger.warn(
-        `[setPlayingIndex] could not get index ${index} from current queue: ${JSON.stringify(currentQueue)} `
+        `[setPlayingIndex] could not get index ${index} from current queue: ${JSON.stringify(currentQueue)} `,
       );
       return;
     }
@@ -67,7 +67,7 @@ const playNextIndex = ({ direction = 1, set = true }: PlayNextIndex) => {
 
 export const playNextSong = (
   direction = 1,
-  set = true
+  set = true,
 ): NoxMedia.Song | undefined =>
   getCurrentTPQueue()[playNextIndex({ direction, set })];
 
@@ -101,7 +101,7 @@ export const getNextSong = (song: NoxMedia.Song) => {
 };
 
 export const getPlaybackModeNotifIcon = (
-  state?: string
+  state?: string,
 ): [number, RepeatMode] => {
   let nextIcon = 2;
   if (!state) {

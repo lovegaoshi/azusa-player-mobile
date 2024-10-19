@@ -25,7 +25,7 @@ export const initializePlayerSetting = async () => {
 };
 
 export const setPlayerSetting = (
-  newSetting: Partial<NoxStorage.PlayerSettingDict>
+  newSetting: Partial<NoxStorage.PlayerSettingDict>,
 ) => {
   const currentSetting = playerSettingStore.getState();
   playerSettingStore.setState({

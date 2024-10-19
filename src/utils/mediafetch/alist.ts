@@ -43,7 +43,7 @@ const getCred = async (hostname: string) => {
 const fetchAlistMediaContent = async (
   url: string,
   fastSearch = true,
-  result: NoxMedia.Song[] = []
+  result: NoxMedia.Song[] = [],
 ) => {
   const { hostname, pathname } = new URL(url);
   const paddedPath = pathname.endsWith('/') ? pathname : `${pathname}/`;
@@ -64,7 +64,7 @@ const fetchAlistMediaContent = async (
           'Content-Type': 'application/x-www-form-urlencoded',
         },
         body: payload,
-      })
+      }),
     ),
     json = await res.json();
   if (!json.data) {
@@ -77,7 +77,7 @@ const fetchAlistMediaContent = async (
         result = await fetchAlistMediaContent(
           `${url}/${item.name}`,
           fastSearch,
-          result
+          result,
         );
       }
     } else if (AcceptableExtensions.includes(getExt(item.name) ?? '')) {
@@ -102,7 +102,7 @@ const resolveURL = async (song: NoxMedia.Song) => {
               'Content-Type': 'application/x-www-form-urlencoded',
             },
             body: payload,
-          })
+          }),
         ),
         json = await res.json();
       return { url: json.data.raw_url };

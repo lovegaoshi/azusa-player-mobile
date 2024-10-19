@@ -52,7 +52,7 @@ export default ({ usePlaylist, prepareForLayoutAnimationRender }: Props) => {
   const { downloadLocation } = useNoxSetting(state => state.playerSetting);
   const playlistCRUD = usePlaylistCRUD(currentPlaylist);
   const setPlaylistSearchAutoFocus = useNoxSetting(
-    state => state.setPlaylistSearchAutoFocus
+    state => state.setPlaylistSearchAutoFocus,
   );
   const { startRadio, radioAvailable } = useSongOperations();
   const { setSearchVal, handleSearch } = useBiliSearch({});
@@ -85,7 +85,7 @@ export default ({ usePlaylist, prepareForLayoutAnimationRender }: Props) => {
         name,
         parsedName: name,
       },
-      currentPlaylist
+      currentPlaylist,
     );
 
   const removeSongs = (banBVID = false) => {
@@ -128,7 +128,7 @@ export default ({ usePlaylist, prepareForLayoutAnimationRender }: Props) => {
           searchAndEnableSearch(
             `${SearchRegex.absoluteMatch.text}${
               currentPlaylist.songList[songMenuSongIndexes[0]].parsedName
-            }`
+            }`,
           );
           closeMenu();
           setPlaylistSearchAutoFocus(false);

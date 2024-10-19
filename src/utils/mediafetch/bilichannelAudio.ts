@@ -23,7 +23,7 @@ const CIDPREFIX = `${Source.biliaudio}-`;
 export const fetchBiliChannelAudioList = (
   mid: string,
   progressEmitter: NoxUtils.ProgressEmitter = () => undefined,
-  favList: string[] = []
+  favList: string[] = [],
 ) => {
   logger.info('calling fetchBiliChannelList');
   return fetchAwaitBiliPaginatedAPI({
@@ -49,7 +49,7 @@ export const fetchBiliChannelAudioList = (
           duration: info.duration,
           album: info.title,
           source: Source.biliaudio,
-        })
+        }),
       ),
   });
 };
@@ -62,7 +62,7 @@ const regexFetch = async ({
   songList: await fetchBiliChannelAudioList(
     reExtracted[1],
     progressEmitter,
-    favList
+    favList,
   ),
 });
 

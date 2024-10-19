@@ -23,8 +23,8 @@ const biliNFTFetch = async ({
     return resolver(
       json.data.item_list.filter(
         (item: { card_item: { card_name: string } }) =>
-          item.card_item.card_name === index
-      )[0].card_item
+          item.card_item.card_name === index,
+      )[0].card_item,
     );
   }
   return resolver(json.data.item_list[index].card_item);

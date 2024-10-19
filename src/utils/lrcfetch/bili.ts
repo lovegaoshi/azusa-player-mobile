@@ -9,13 +9,13 @@ import { Source } from '@enums/MediaFetch';
 const API = 'https://api.bilibili.com/x/player/wbi/v2?bvid={bvid}&cid={cid}';
 
 const getLrcOptions = async (
-  song?: NoxMedia.Song
+  song?: NoxMedia.Song,
 ): Promise<NoxLyric.NoxFetchedLyric[]> => {
   if (song?.source !== Source.bilivideo || song.id.startsWith('null-'))
     return [];
   const res = await wbiQuery(
     API.replace('{bvid}', song.bvid).replace('{cid}', song.id),
-    await cookieHeader()
+    await cookieHeader(),
   );
   const json = await res.json();
   return json.data.subtitle.subtitles.map((subtitle: any) => ({

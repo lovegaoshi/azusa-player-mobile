@@ -11,7 +11,7 @@ const URL_VIDEO_INFO =
 
 const fetchAVIDRaw = async (aid: string): Promise<NoxMedia.Song[]> => {
   logger.info(
-    `calling fetchAVID of ${aid} of ${URL_VIDEO_INFO.replace('{aid}', aid)}`
+    `calling fetchAVID of ${aid} of ${URL_VIDEO_INFO.replace('{aid}', aid)}`,
   );
   try {
     const res = await bfetch(URL_VIDEO_INFO.replace('{aid}', aid));
@@ -44,7 +44,7 @@ const fetchAVIDRaw = async (aid: string): Promise<NoxMedia.Song[]> => {
 
 export const fetchAVID = (
   avid: string,
-  progressEmitter: () => void = () => undefined
+  progressEmitter: () => void = () => undefined,
 ) =>
   biliApiLimiter.schedule(() => {
     progressEmitter();
@@ -54,11 +54,11 @@ export const fetchAVID = (
 export const fetchBiliAVIDs = async (
   AVids: string[],
   progressEmitter: NoxUtils.ProgressEmitter = () => undefined,
-  useBiliTag = false
+  useBiliTag = false,
 ) => {
   const BVidLen = AVids.length;
   const BVidPromises = AVids.map((avid, index) =>
-    fetchAVID(avid, () => progressEmitter((100 * (index + 1)) / BVidLen))
+    fetchAVID(avid, () => progressEmitter((100 * (index + 1)) / BVidLen)),
   );
   const songs = (await Promise.all(BVidPromises)).flat();
   return useBiliTag
@@ -73,7 +73,7 @@ const regexFetch = async ({
   songList: await fetchBiliAVIDs(
     [reExtracted[1]],
     undefined,
-    useBiliTag || false
+    useBiliTag || false,
   ),
 });
 

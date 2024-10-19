@@ -22,7 +22,7 @@ let authToken = '';
 
 export const getAuth = async (
   callback = () => checkAuthentication(authToken).then(console.log),
-  errorHandling = logger.error
+  errorHandling = logger.error,
 ) => {
   const accessToken = await authorize(config);
   if (accessToken) {
@@ -36,7 +36,7 @@ export const getAuth = async (
 
 const login = async (
   callback: () => Promise<void> = async () => undefined,
-  errorCallback = logger.error
+  errorCallback = logger.error,
 ) => {
   try {
     if (!(await checkAuthentication())) {

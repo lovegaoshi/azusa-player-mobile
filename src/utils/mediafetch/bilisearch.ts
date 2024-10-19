@@ -56,7 +56,7 @@ export const fetchBiliSearchList = async (
   progressEmitter: NoxUtils.ProgressEmitter = () => undefined,
   fastSearch = false,
   cookiedSearch = false,
-  startPage = 1
+  startPage = 1,
 ): Promise<NoxMedia.Song[]> => {
   // this API needs a random buvid3 value, or a valid SESSDATA;
   // otherwise will return error 412. for users didnt login to bilibili,
@@ -99,7 +99,7 @@ const regexFetch = async ({
     url,
     progressEmitter,
     fastSearch,
-    cookiedSearch
+    cookiedSearch,
   ),
   refresh: v => refresh({ v, fastSearch, cookiedSearch }),
   refreshToken: [url, 3],
@@ -119,7 +119,7 @@ const refresh = async ({ v, fastSearch, cookiedSearch }: RefreshProps) => {
       undefined,
       fastSearch,
       cookiedSearch,
-      startPage
+      startPage,
     );
     results.refreshToken = [url, startPage + 2];
   }

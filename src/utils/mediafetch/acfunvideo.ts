@@ -17,7 +17,7 @@ const resolveACFun = async (acid: string) => {
       v.children[0]?.data?.includes?.('window.videoInfo')
         ? // @ts-expect-error
           v.children[0].data
-        : null
+        : null,
     )
     .filter(x => !!x)[0] as string;
   if (extractedScript === undefined) {
@@ -25,7 +25,7 @@ const resolveACFun = async (acid: string) => {
   }
   let jsonScript = extractedScript.substring(
     extractedScript.indexOf('{'),
-    extractedScript.lastIndexOf('window.videoResource')
+    extractedScript.lastIndexOf('window.videoResource'),
   );
   jsonScript = jsonScript.substring(0, jsonScript.lastIndexOf(';'));
   return JSON.parse(jsonScript);
@@ -35,7 +35,7 @@ export const resolveURL = async (v: NoxMedia.Song) => {
   const json = await resolveACFun(v.bvid);
   const kson = JSON.parse(json.currentVideoInfo.ksPlayJson);
   const adaptFormats = kson.adaptationSet[0].representation.sort(
-    (a: any, b: any) => a.avgBitrate - b.avgBitrate
+    (a: any, b: any) => a.avgBitrate - b.avgBitrate,
   );
   return { url: adaptFormats[0].url };
 };

@@ -54,7 +54,7 @@ const MainBackground = ({ children }: { children: React.JSX.Element }) => {
             onError={e => {
               logger.error(JSON.stringify(e));
               logger.error(
-                `with: ${bkgrdImg.identifier} + ${JSON.stringify(customReqHeader(bkgrdImg.identifier, {}))}`
+                `with: ${bkgrdImg.identifier} + ${JSON.stringify(customReqHeader(bkgrdImg.identifier, {}))}`,
               );
             }}
             onEnd={

@@ -59,7 +59,7 @@ export const sync = async ({
         sha: probeFile.sha,
       }),
       headers: githubAuthHeader(token),
-    }
+    },
   );
 };
 
@@ -80,7 +80,7 @@ export const checkAuthentication = async (token = '') => {
 
 export const noxRestore = async (
   token: string,
-  contentParse: (v: Blob) => Promise<ArrayBuffer>
+  contentParse: (v: Blob) => Promise<ArrayBuffer>,
 ) => {
   const res = await bfetch(
     `https://api.github.com/repos/${await getUserName(token)}/${APM_REPO_NAME}/contents/${APM_FILE_NAME}`,
@@ -89,7 +89,7 @@ export const noxRestore = async (
         ...githubAuthHeader(token),
         Accept: 'application/vnd.github.raw+json',
       },
-    }
+    },
   );
   const noxFile = await res.blob();
   if (!noxFile) {

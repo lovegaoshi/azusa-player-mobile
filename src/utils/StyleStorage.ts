@@ -10,7 +10,7 @@ export const getStyle = (v: NoxTheme.Style | NoxTheme.AdaptiveStyle) => {
 
 export const savePlayerStyle = (
   v: NoxTheme.Style | NoxTheme.AdaptiveStyle,
-  save = true
+  save = true,
 ) => {
   const createdStyle = createStyle(getStyle(v));
   if (save) savePlayerSkin(v);

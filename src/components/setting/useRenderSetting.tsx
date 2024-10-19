@@ -49,7 +49,7 @@ export const SettingListItem = ({
       left={getIcon}
       title={t(`${settingCategory}.${settingName}Name`)}
       description={modifyDescription(
-        t(`${settingCategory}.${settingName}Desc`)
+        t(`${settingCategory}.${settingName}Desc`),
       )}
       onPress={onPress}
       titleStyle={{ color: playerStyle.colors.primary }}
@@ -72,7 +72,7 @@ const BooleanSetting = ({
   const setPlayerSetting = useNoxSetting(state => state.setPlayerSetting);
 
   const togglePlaylistReRender = useNoxSetting(
-    state => state.togglePlaylistShouldReRender
+    state => state.togglePlaylistShouldReRender,
   );
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any

@@ -24,7 +24,7 @@ const usePlayback = () => {
   const setSearchPlaylist = useNoxSetting(state => state.setSearchPlaylist);
   const setCurrentPlayingId = useNoxSetting(state => state.setCurrentPlayingId);
   const setCurrentPlayingList = useNoxSetting(
-    state => state.setCurrentPlayingList
+    state => state.setCurrentPlayingList,
   );
   const { isDataSaving } = useDataSaver();
   const setSnack = useSnack(state => state.setSnack);

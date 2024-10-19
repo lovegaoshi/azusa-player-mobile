@@ -104,7 +104,7 @@ export default function WaveAnimation({
         amplitude: 5,
       }),
       extrapolatedWidth,
-      height
+      height,
     );
   }, [verticalOffset, progress]);
 
@@ -120,7 +120,7 @@ export default function WaveAnimation({
         amplitude: 5,
       }),
       extrapolatedWidth,
-      height
+      height,
     );
   }, [verticalOffset, progress]);
 

@@ -6,7 +6,7 @@ import { useNoxSetting } from '@stores/useApp';
 
 const DefaultIcon = (
   item: NoxMedia.Playlist,
-  deleteCallback: (id: string) => void
+  deleteCallback: (id: string) => void,
 ) => {
   const playerStyle = useNoxSetting(state => state.playerStyle);
 

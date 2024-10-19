@@ -24,7 +24,7 @@ const CIDPREFIX = `${Source.biliaudio}-`;
 const fetchPlayUrlPromise = async (sid: string) => {
   try {
     logger.debug(
-      `fethcAudioPlayURL:${URL_AUDIO_PLAY_URL.replace('{sid}', sid)}`
+      `fethcAudioPlayURL:${URL_AUDIO_PLAY_URL.replace('{sid}', sid)}`,
     );
     const res = await bfetch(URL_AUDIO_PLAY_URL.replace('{sid}', sid));
     const json = await res.json();
@@ -58,8 +58,8 @@ export const baFetch = async (auids: string[]) => {
           album: data.title,
           source: Source.biliaudio,
         });
-      })
-    )
+      }),
+    ),
   );
 };
 

@@ -8,7 +8,7 @@ const SearchSongAPI = 'https://lrclib.net/api/search?track_name=${kw}';
 const getLrcAPI = 'https://lrclib.net/api/get/${kw}';
 
 const getLrcOptions = async (
-  kw: string
+  kw: string,
 ): Promise<NoxLyric.NoxFetchedLyric[]> => {
   logger.debug(`[lrclib] calling getLyricOptions: ${kw}`);
   const res = await bfetch(SearchSongAPI.replace('{kw}', kw));

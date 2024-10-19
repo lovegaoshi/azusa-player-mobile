@@ -55,7 +55,7 @@ export const encWbi = (params: { [key: string]: string }) => {
         encodeURIComponent(key) +
           '=' +
           // 过滤 value 中的 "!'()*" 字符
-          encodeURIComponent(('' + params[key]).replace(chr_filter, ''))
+          encodeURIComponent(('' + params[key]).replace(chr_filter, '')),
       );
     });
   const joinedQuery = query.join('&');
@@ -98,7 +98,7 @@ const wbiNeedRefresh = async (json: any) => {
 
 const wbiRefreshWrapper: any = async (
   queryFunc: () => Promise<Response>,
-  refreshed = false
+  refreshed = false,
 ) => {
   const res = await queryFunc();
   const json = await res.clone().json();
@@ -110,16 +110,16 @@ const wbiRefreshWrapper: any = async (
 
 export const wbiQuery = (
   url: string,
-  fetchParams?: RequestInit | undefined
+  fetchParams?: RequestInit | undefined,
 ) => {
   const urlObj = new URL(url);
   const URLParams = new URLSearchParams(urlObj.search);
   const orlOrig = `${urlObj.origin}${urlObj.pathname}`;
   logger.debug(
-    `[wbiQuery] ${orlOrig}?${encWbi(Object.fromEntries(URLParams))}`
+    `[wbiQuery] ${orlOrig}?${encWbi(Object.fromEntries(URLParams))}`,
   );
   return wbiRefreshWrapper(() =>
-    bfetch(`${orlOrig}?${encWbi(Object.fromEntries(URLParams))}`, fetchParams)
+    bfetch(`${orlOrig}?${encWbi(Object.fromEntries(URLParams))}`, fetchParams),
   );
 };
 getWbiKeys();

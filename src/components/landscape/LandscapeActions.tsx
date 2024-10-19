@@ -22,7 +22,7 @@ export default ({ panelWidth = 110 }: Props) => {
     navigationGlobal.navigate(
       navigationGlobal.getState()?.routes?.at(-1)?.name === NoxRoutes.Playlist
         ? (NoxRoutes.PlaylistsDrawer as never)
-        : (NoxRoutes.Playlist as never)
+        : (NoxRoutes.Playlist as never),
     );
   };
 

@@ -16,7 +16,7 @@ export default ({
 }: Props) => {
   const [searchVal, setSearchVal] = useState('');
   const progressEmitter = useNoxSetting(
-    state => state.searchBarProgressEmitter
+    state => state.searchBarProgressEmitter,
   );
   const searchPlaylist = useNoxSetting(state => state.searchPlaylist);
   const setSearchPlaylist = useNoxSetting(state => state.setSearchPlaylist);

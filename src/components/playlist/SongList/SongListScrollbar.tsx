@@ -58,7 +58,7 @@ export default function CustomScrollView({
   const calculateScrollBarIndicatorPosition = (maxScrollFromTop: number) => {
     const scrollPercentage = Math.min(
       Math.max(scrollPositionY / (contentViewHeight - scrollViewHeight), 0),
-      1
+      1,
     );
     return Math.ceil(maxScrollFromTop * scrollPercentage);
   };

@@ -47,7 +47,7 @@ export default () => {
           return pushNowPlayingTemplate();
         }
         playFromMediaId(
-          `${PLAYLIST_MEDIAID}${playlistIds[item.index - 1]}`
+          `${PLAYLIST_MEDIAID}${playlistIds[item.index - 1]}`,
         ).then(() => pushNowPlayingTemplate());
       },
     });

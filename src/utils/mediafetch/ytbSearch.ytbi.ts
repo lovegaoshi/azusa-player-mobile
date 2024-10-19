@@ -24,7 +24,7 @@ export const ytbiVideoToNoxSong = (val: Video) => {
 
 export const fetchYtbiSearch = async (
   searchVal: string,
-  favList: string[] = []
+  favList: string[] = [],
 ): Promise<NoxMedia.Song[]> => {
   try {
     const yt = await ytClientWeb;

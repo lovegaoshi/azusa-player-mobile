@@ -34,8 +34,8 @@ const fetchBiliVideoSimilarList = async (bvid: string) => {
           duration: data.duration,
           album: data.title,
           source: Source.bilivideo,
-        })
-      )
+        }),
+      ),
   );
 };
 

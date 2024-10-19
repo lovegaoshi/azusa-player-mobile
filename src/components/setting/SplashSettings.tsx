@@ -77,7 +77,7 @@ export default () => {
         // responder. Returns true by default. Is currently only supported on android.
         return true;
       },
-    })
+    }),
   ).current;
 
   const nextImage = () => {

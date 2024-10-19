@@ -70,7 +70,7 @@ const TrackInfoTemplate: React.FC<Props> = props => {
     return track?.song
       ? `#${
           currentPlayingList.songList.findIndex(
-            song => song.id === track.song.id
+            song => song.id === track.song.id,
           ) + 1
         } - ${NoxPlayingList.getState().currentPlayingIndex + 1}/${
           currentPlayingList.songList.length
@@ -131,7 +131,7 @@ const SongTitle = (props: SongTitleProps) => {
         resolveError.current = 0;
       }
       return () => undefined;
-    }, [])
+    }, []),
   );
 
   return (

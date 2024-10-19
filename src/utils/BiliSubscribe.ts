@@ -9,7 +9,7 @@ interface Props {
   updatePlaylist: (
     playlist: NoxMedia.Playlist,
     addSongs: NoxMedia.Song[],
-    removeSongs: NoxMedia.Song[]
+    removeSongs: NoxMedia.Song[],
   ) => void;
   progressEmitter?: NoxUtils.ProgressEmitter;
   overwriteOnRefresh?: () => boolean;
@@ -73,7 +73,7 @@ export const updateSubscribeFavList = async ({
     });
   }
   newPlaylist.songList = [...uniqueSongList.values()].map(val =>
-    parseSongName(val)
+    parseSongName(val),
   );
   // This sounds like a performance disaster
   // as currentPlaylist will be changed,

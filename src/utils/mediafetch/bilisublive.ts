@@ -14,7 +14,7 @@ const getRoomInfos = async (uids: number[]) => {
   const response = await axios.post(
     'https://api.live.bilibili.com/room/v1/Room/get_status_info_by_uids',
     { uids },
-    { withCredentials: false }
+    { withCredentials: false },
   );
   const json = response.data;
   return Object.values(json.data)
@@ -43,7 +43,7 @@ const getRoomInfos = async (uids: number[]) => {
         isLive: true,
         liveStatus: roomInfo.live_status === 1,
         album: `b站直播间${roomInfo.room_id}`,
-      })
+      }),
     );
 };
 
@@ -56,7 +56,7 @@ interface Props {
 export const _getSubList = async ({ uid }: Props) => {
   // https://api.vc.bilibili.com/dynamic_mix/v1/dynamic_mix/at_list?uid=3493085134719196
   const res = await bfetch(
-    `https://api.vc.bilibili.com/dynamic_mix/v1/dynamic_mix/at_list?uid=${uid}`
+    `https://api.vc.bilibili.com/dynamic_mix/v1/dynamic_mix/at_list?uid=${uid}`,
   );
   const json = await res.json();
   const subUids = json.data.groups
@@ -78,7 +78,7 @@ const getSubList = ({ uid, progressEmitter }: Props) => {
     favList: [],
     resolveBiliBVID: bvobjs =>
       biliApiLimiter.schedule(() =>
-        getRoomInfos(bvobjs.map((obj: any) => obj.mid))
+        getRoomInfos(bvobjs.map((obj: any) => obj.mid)),
       ),
   });
 };

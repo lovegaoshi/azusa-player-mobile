@@ -13,7 +13,7 @@ interface Props {
   sortPlaylist: (
     sortOptions: SortOptions,
     ascending: boolean,
-    playlist: NoxMedia.Playlist
+    playlist: NoxMedia.Playlist,
   ) => void;
   playlist: NoxMedia.Playlist;
 }

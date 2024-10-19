@@ -21,8 +21,8 @@ const innertune2NoxSong = (v: any, channel?: any) =>
     page: 1,
     duration: timestampToSeconds(
       v.thumbnail_overlays.filter(
-        (overlay: any) => overlay.type === 'ThumbnailOverlayTimeStatus'
-      )[0]?.text
+        (overlay: any) => overlay.type === 'ThumbnailOverlayTimeStatus',
+      )[0]?.text,
     ),
     album: v.title.text,
     source: Source.ytbvideo,
@@ -33,20 +33,20 @@ const resolveYTChannelPlaylistId = async (channelUsername: string) => {
   const res = await bfetch(`https://www.youtube.com/c/${channelUsername}`);
   const text = await res.text();
   return /meta property="og:url" content="https:\/\/www.youtube.com\/channel\/(.+)"><meta property="og:image" content="h/.exec(
-    text
+    text,
   )?.[1];
 };
 
 export const fetchYTIChannel = async (
   channelName: string,
-  favList: string[] = []
+  favList: string[] = [],
 ) => {
   const channelId = await resolveYTChannelPlaylistId(channelName);
   if (!channelId) return [];
   const yt = await Innertube.create();
   const channel = await yt.getChannel(channelId);
   const videos = (await channel.getVideos()).videos.filter(
-    v => v.type === 'Video'
+    v => v.type === 'Video',
   );
   console.log((await channel.getVideos()).videos.length);
   return videos
@@ -55,7 +55,7 @@ export const fetchYTIChannel = async (
 };
 
 export const fetchMuseChannel = async (
-  channelName: string
+  channelName: string,
 ): Promise<NoxNetwork.NoxRegexFetch> => {
   let songList: NoxMedia.Song[] = [];
   const channelId = await resolveYTChannelPlaylistId(channelName);
@@ -79,7 +79,7 @@ const regexFetch = async ({
     // fetchYTPlaylist(
     reExtracted[1],
     // progressEmitter,
-    favList
+    favList,
   );
   return { songList };
 };

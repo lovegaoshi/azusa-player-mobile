@@ -10,7 +10,7 @@ const regexFetch = async ({
       // fetchYTPlaylist(
       reExtracted[1],
       // progressEmitter,
-      favList
+      favList,
     );
     if (results.length === 0) {
       throw new Error(`ytm failed to resolve ${reExtracted[1]}`);

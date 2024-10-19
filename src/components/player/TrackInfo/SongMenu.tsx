@@ -77,7 +77,7 @@ export default ({
     const currentPlaylist2 = await getPlaylist(currentPlaylist.id);
     const metadata = await updateSongMetadata(
       songMenuSongIndexes[0],
-      currentPlaylist2
+      currentPlaylist2,
     );
     updateTrack({
       title: metadata.name,
@@ -139,7 +139,7 @@ export default ({
               { text: t('Dialog.zero'), onPress: () => setR128Gain(0) },
               { text: t('Dialog.ok'), onPress: closeMenu },
             ],
-            { cancelable: true }
+            { cancelable: true },
           )
         }
         title={t('SongOperations.songR128gain')}

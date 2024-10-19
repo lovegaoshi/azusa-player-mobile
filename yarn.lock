@@ -4260,12 +4260,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:^22.7.6":
-  version: 22.7.6
-  resolution: "@types/node@npm:22.7.6"
+"@types/node@npm:^22.7.7":
+  version: 22.7.7
+  resolution: "@types/node@npm:22.7.7"
   dependencies:
     undici-types: "npm:~6.19.2"
-  checksum: 10c0/d4406a63afce981c363fb1d1954aaf1759ad2d487c0833ebf667565ea4e45ff217d6fab4b5343badbdeccdf9d2e4a0841d633e0c929ceabcb33c288663dd0c73
+  checksum: 10c0/07268a1e990ad9d9b1865092881317ea679a46eb6706d83a8874eec75fdddae6cfd6452e4e68b651561183e2a8f8548276f3155744bc402c2545978c19b70d65
   languageName: node
   linkType: hard
 
@@ -5262,7 +5262,7 @@ __metadata:
     "@types/he": "npm:^1.2.3"
     "@types/jest": "npm:^29.5.13"
     "@types/md5": "npm:^2.3.5"
-    "@types/node": "npm:^22.7.6"
+    "@types/node": "npm:^22.7.7"
     "@types/react": "npm:~18.3.11"
     "@types/react-native": "npm:^0.73.0"
     "@types/react-native-background-timer": "npm:^2.0.2"
@@ -5356,7 +5356,7 @@ __metadata:
     react-native-track-player: "https://github.com/lovegaoshi/react-native-track-player.git#commit=687f52247e891e3abfb313648620647f8661bdd1"
     react-native-url-polyfill: "npm:^2.0.0"
     react-native-vector-icons: "npm:^10.2.0"
-    react-native-video: "npm:^6.6.4"
+    react-native-video: "npm:^6.7.0"
     react-native-webview: "npm:13.12.3"
     react-test-renderer: "npm:18.3.1"
     reactotron-react-native: "npm:^5.1.9"
@@ -14365,13 +14365,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-native-video@npm:^6.6.4":
-  version: 6.6.4
-  resolution: "react-native-video@npm:6.6.4"
+"react-native-video@npm:^6.7.0":
+  version: 6.7.0
+  resolution: "react-native-video@npm:6.7.0"
   peerDependencies:
     react: "*"
     react-native: "*"
-  checksum: 10c0/13bcf38fdef064c1e6c9b661e05e9e093bc56a33fb070c51ef9d2b2b9cacf5b5d96562cb46095b0eaf714d5f7d19d1868face9eb85b15d2c56c08764cda96ff9
+  checksum: 10c0/797de9a88490327eb215ce6846c8dd9c69ba12a7cf2eb6337abb1f5491146fad20a1a6a9ecab18dcef582159209add47d95714f29dee093170ff6bda78c6b38f
   languageName: node
   linkType: hard
 

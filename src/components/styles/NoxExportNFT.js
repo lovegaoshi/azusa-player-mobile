@@ -20,21 +20,21 @@ if (args.garbid === undefined) {
 }
 
 const steriaGarb = JSON.parse(
-  fs.readFileSync('./src/components/styles/steriaGarb.json', 'utf8')
+  fs.readFileSync('./src/components/styles/steriaGarb.json', 'utf8'),
 );
 
 const basicReq = await axios.get(
-  `https://api.bilibili.com/x/vas/dlc_act/act/basic?act_id=${args.garbid}`
+  `https://api.bilibili.com/x/vas/dlc_act/act/basic?act_id=${args.garbid}`,
 );
 const garbdata = basicReq.data.data;
 
 const garblistdata = await Promise.all(
   garbdata.lottery_list.map(async list => {
     const req = await axios.get(
-      `https://api.bilibili.com/x/vas/dlc_act/lottery_home_detail?act_id=${args.garbid}&lottery_id=${list.lottery_id}`
+      `https://api.bilibili.com/x/vas/dlc_act/lottery_home_detail?act_id=${args.garbid}&lottery_id=${list.lottery_id}`,
     );
     return req.data.data;
-  })
+  }),
 );
 
 const parsedGarbData = {
@@ -50,14 +50,14 @@ const parsedGarbData = {
               type: 'biliNFTVideoNew',
               identifier: `["${args.garbid}","${item.lottery_id}","${list.card_info.card_name}"]`,
             }
-          : list.card_info.card_img
-      )
+          : list.card_info.card_img,
+      ),
     )
     .flat(),
 };
 
 const emojiId = garblistdata[0].collect_list?.collect_chain?.filter(v =>
-  v.redeem_item_name.includes('表情包')
+  v.redeem_item_name.includes('表情包'),
 )[0]?.redeem_item_id;
 
 if (emojiId) {
@@ -66,7 +66,7 @@ if (emojiId) {
   ).data.id;
   parsedGarbData.gifs = (
     await axios.get(
-      `https://api.bilibili.com/x/emote/package?business=reply&ids=${realEmojiId}`
+      `https://api.bilibili.com/x/emote/package?business=reply&ids=${realEmojiId}`,
     )
   ).data.data.packages[0].emote.map(v => v.url);
 }
@@ -83,5 +83,5 @@ convertedGarbData.backgroundImages = parsedGarbData.portraits;
 fs.writeFile(
   './src/components/styles/steriaGarb.json',
   JSON.stringify([...steriaGarb, convertedGarbData], null, 2),
-  () => undefined
+  () => undefined,
 );

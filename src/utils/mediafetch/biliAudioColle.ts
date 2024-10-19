@@ -64,7 +64,7 @@ const API =
 const fetchBiliAudioColleList = async (
   sid: string,
   progressEmitter: NoxUtils.ProgressEmitter = () => undefined,
-  favList: string[] = []
+  favList: string[] = [],
 ) => {
   logger.info('calling fetchBiliAudioColleList');
 
@@ -90,7 +90,7 @@ const fetchBiliAudioColleList = async (
           duration: data.duration,
           album: data.title,
           source: Source.biliaudio,
-        })
+        }),
       ),
     params: await cookieHeader(),
   });
@@ -104,7 +104,7 @@ const regexFetch = async ({
   songList: await fetchBiliAudioColleList(
     reExtracted[1],
     progressEmitter,
-    favList
+    favList,
   ),
 });
 

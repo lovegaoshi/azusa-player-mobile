@@ -22,7 +22,7 @@ const { NoxModule } = NativeModules;
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const songFetch = async (
   fpath: string,
-  favlist: string[]
+  favlist: string[],
 ): Promise<NoxMedia.Song[]> => {
   if (!isAndroid) return [];
   const mediaFiles: NoxUtils.NoxFileUtilMediaInfo[] =
@@ -42,7 +42,7 @@ const songFetch = async (
       duration: v.duration / 1000,
       album: v.album,
       source: Source.local,
-    })
+    }),
   );
 };
 

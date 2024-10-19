@@ -31,7 +31,7 @@ declare global {
       noxRestore: () => Promise<any>;
       login: (
         callback: () => any,
-        errorHandling: (e: Error) => void
+        errorHandling: (e: Error) => void,
       ) => Promise<boolean>;
     }
 
@@ -39,7 +39,7 @@ declare global {
       noxBackup: (content: Uint8Array) => Promise<any>;
       login: (
         callback: () => any,
-        errorHandling: (e: Error) => void
+        errorHandling: (e: Error) => void,
       ) => Promise<boolean>;
     }
 
@@ -49,7 +49,7 @@ declare global {
       noxBackup: (content: Uint8Array) => Promise<any>;
       login: (
         callback: () => any,
-        errorHandling: (e: Error) => void
+        errorHandling: (e: Error) => void,
       ) => Promise<boolean>;
     }
 

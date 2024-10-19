@@ -4,7 +4,7 @@ import { Source } from '@enums/MediaFetch';
 
 const useSongOperations = () => {
   const setExternalSearchText = useNoxSetting(
-    state => state.setExternalSearchText
+    state => state.setExternalSearchText,
   );
   const setSongMenuVisible = useNoxSetting(state => state.setSongMenuVisible);
 
@@ -18,7 +18,7 @@ const useSongOperations = () => {
         break;
       default:
         logger.warn(
-          `[startRadio] ${song.bvid} deos not have a start radio handle.`
+          `[startRadio] ${song.bvid} deos not have a start radio handle.`,
         );
     }
     setSongMenuVisible(false);

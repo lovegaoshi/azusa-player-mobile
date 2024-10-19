@@ -112,7 +112,7 @@ interface ReParseSearchProps {
   rows: NoxMedia.Song[];
   defaultExtract?: (
     rows: NoxMedia.Song[],
-    searchstr: string
+    searchstr: string,
   ) => NoxMedia.Song[];
   extraReExtract?: ReExtract[];
 }
@@ -124,7 +124,7 @@ export const reParseSearch = ({
       row =>
         row.name.toLowerCase().includes(searchstr.toLowerCase()) ||
         row.singer.includes(searchstr) ||
-        row.album?.includes(searchstr)
+        row.album?.includes(searchstr),
     ),
   extraReExtract = [],
 }: ReParseSearchProps) => {

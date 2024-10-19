@@ -77,7 +77,7 @@ const fetchBiliAudioSimilarList = async (sid: string) => {
       duration: data.duration,
       album: data.title,
       source: Source.biliaudio,
-    })
+    }),
   );
 };
 

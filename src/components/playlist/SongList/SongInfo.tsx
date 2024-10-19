@@ -30,7 +30,7 @@ interface Props {
 const isItemSolid = (
   item: NoxMedia.Song,
   networkCellular = false,
-  dataSaver = false
+  dataSaver = false,
 ) => {
   if (item.liveStatus !== undefined) return item.liveStatus;
   if (!networkCellular) return true;
@@ -56,7 +56,7 @@ const SongInfo = ({
   const setSongMenuCoords = useNoxSetting(state => state.setSongMenuCoords);
   const setSongMenuVisible = useNoxSetting(state => state.setSongMenuVisible);
   const setSongMenuSongIndexes = useNoxSetting(
-    state => state.setSongMenuSongIndexes
+    state => state.setSongMenuSongIndexes,
   );
 
   const title =
@@ -116,7 +116,7 @@ const SongInfo = ({
               )}
               <View style={styles.songTitle}>
                 <Text variant="bodyLarge" numberOfLines={3}>{`${String(
-                  index + 1
+                  index + 1,
                 )}. ${title}`}</Text>
                 <Text
                   variant="bodySmall"

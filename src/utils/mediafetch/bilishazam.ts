@@ -16,13 +16,13 @@ interface Ids {
 }
 const fetchVideoTagPromise = ({ bvid, cid }: Ids) => {
   return biliTagApiLimiter.schedule(() =>
-    fetchVideoTagPromiseRaw({ bvid, cid })
+    fetchVideoTagPromiseRaw({ bvid, cid }),
   );
 };
 
 const fetchVideoTagPromiseRaw = async ({ bvid, cid }: Ids) => {
   const req = await bfetch(
-    URL_VIDEO_TAGS.replace('{bvid}', bvid).replace('{cid}', cid)
+    URL_VIDEO_TAGS.replace('{bvid}', bvid).replace('{cid}', cid),
   );
   const json = await req.json();
   try {
@@ -33,7 +33,7 @@ const fetchVideoTagPromiseRaw = async ({ bvid, cid }: Ids) => {
   } catch (e) {
     logger.error(e);
     logger.warn(
-      `fetching videoTag for ${bvid}, ${cid} failed. if ${cid} is a special tag its expected.`
+      `fetching videoTag for ${bvid}, ${cid} failed. if ${cid} is a special tag its expected.`,
     );
     return null;
   }
@@ -46,7 +46,7 @@ export const biliShazamOnSonglist = (
   songlist: NoxMedia.Song[],
   forced = false,
   progressEmitter: NoxUtils.ProgressEmitter = () => undefined,
-  biliShazam = false
+  biliShazam = false,
 ) => {
   if (!biliShazam) return songlist;
   const newSongList = songlist.map((song, index) => {
@@ -57,7 +57,7 @@ export const biliShazamOnSonglist = (
           .then(val => {
             progressEmitter((index / songlist.length) * 100);
             resolve(setSongBiliShazamed(song, val));
-          })
+          }),
       );
     }
     return song;

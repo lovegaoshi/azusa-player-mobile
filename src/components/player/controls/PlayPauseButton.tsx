@@ -21,7 +21,7 @@ export const PlayPauseButton: React.FC<Props> = ({ state, iconSize = 50 }) => {
   const playWhenReady = usePlayWhenReady();
   const isLoading = useDebouncedValue(
     state === State.Loading, // || state === State.Buffering
-    250
+    250,
   );
 
   const isErrored = state === State.Error;

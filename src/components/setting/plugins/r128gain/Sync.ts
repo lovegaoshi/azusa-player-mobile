@@ -25,12 +25,12 @@ export const downloadGZippedR128GainDB = async () => {
       responseType: 'arraybuffer',
       maxContentLength: Infinity,
       maxBodyLength: Infinity,
-    }
+    },
   );
   if (res.status === 200) {
     const content = new Uint8Array(await res.data);
     return JSON.parse(
-      strFromU8(decompressSync(decompressSync(content)))
+      strFromU8(decompressSync(decompressSync(content))),
     ) as R128GainDB[];
   }
   throw new Error('rules.gzip is not resolved as a Uint8Array:(');
@@ -38,7 +38,7 @@ export const downloadGZippedR128GainDB = async () => {
 
 export const downloadUncompressedR128GainDB = async () => {
   const res = await fetch(
-    'https://raw.githubusercontent.com/lovegaoshi/APM-r128gain/main/rules.json'
+    'https://raw.githubusercontent.com/lovegaoshi/APM-r128gain/main/rules.json',
   );
   const json = (await res.json()) as R128GainDB[];
   return json;
@@ -114,7 +114,7 @@ export const downloadR128GainDB = async () => {
   });
   const uploadR128Dict = Array.from(Object.values(newR128GainDB));
   logger.debug(
-    `[R128Sync] now uploading ${uploadR128Dict.length} entries back to noxPlay`
+    `[R128Sync] now uploading ${uploadR128Dict.length} entries back to noxPlay`,
   );
   const uploadRes = await fetch(RGAIN_URL, {
     method: 'POST',

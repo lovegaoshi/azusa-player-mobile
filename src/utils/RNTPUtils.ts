@@ -47,7 +47,7 @@ export const animatedVolumeChange = ({
   callback = () => undefined,
 }: AnimatedVolumeChangeProps) => {
   logger.debug(
-    `[FADING] animating volume from ${init} to ${val} in ${duration}; ${AppState.currentState}`
+    `[FADING] animating volume from ${init} to ${val} in ${duration}; ${AppState.currentState}`,
   );
   if (AppState.currentState !== 'active') {
     // need to figure out a way to run Animated.timing in background. probably needs our own module
@@ -138,7 +138,7 @@ interface ResolveAndCache {
   song: NoxMedia.Song;
   dry?: boolean;
   resolver?: (
-    v: NoxUtils.SongProcessor
+    v: NoxUtils.SongProcessor,
   ) => Promise<NoxNetwork.ResolvedNoxMediaURL>;
 }
 
@@ -156,11 +156,11 @@ const _resolveAndCache = async ({
     downloadPromiseMap[song.id] ||
     addDownloadPromise(
       song,
-      NoxCache.noxMediaCache?.saveCacheMedia(song, resolvedUrl)
+      NoxCache.noxMediaCache?.saveCacheMedia(song, resolvedUrl),
     );
   previousDownloadProgress.then(() => {
     logger.debug(
-      `[cache] ${song.parsedName} completed. now clearing cache and set R128gain...`
+      `[cache] ${song.parsedName} completed. now clearing cache and set R128gain...`,
     );
     parseSongR128gain(song, fadeIntervalMs);
     resetResolvedURL(song);
@@ -182,7 +182,7 @@ export const resolveCachedPath = async (p: ResolveAndCache) => {
 };
 
 export const songlistToTracklist = async (
-  songList: NoxMedia.Song[]
+  songList: NoxMedia.Song[],
 ): Promise<Track[]> => {
   return Promise.all(
     songList.map(async song => {
@@ -204,7 +204,7 @@ export const songlistToTracklist = async (
         // TODO: add a throttler here
         ...resolvedUrl,
       };
-    })
+    }),
   );
 };
 
@@ -218,7 +218,7 @@ export const clearPlaylistUninterrupted = async () => {
     await TrackPlayer.remove(removeTrackIndices);
   } catch (e) {
     logger.warn(
-      `[RNTPUtils] claer Playlist failed as: ${e} with ${removeTrackIndices}; queue is ${currentQueue.length}`
+      `[RNTPUtils] claer Playlist failed as: ${e} with ${removeTrackIndices}; queue is ${currentQueue.length}`,
     );
   }
 };

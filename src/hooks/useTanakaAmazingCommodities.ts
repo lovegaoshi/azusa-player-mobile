@@ -37,7 +37,7 @@ export default () => {
 
   const init = async () => {
     const tanakaPath = (await getItem(
-      StorageKeys.TANAKA_AMAZING_COMMODITIES
+      StorageKeys.TANAKA_AMAZING_COMMODITIES,
     )) as string | null;
     if (await validateFile(tanakaPath)) {
       setTanaka(tanakaPath!);
@@ -52,7 +52,7 @@ export default () => {
     })
       .fetch('GET', resolvedURL, customReqHeader(resolvedURL))
       .then(res =>
-        saveItem(StorageKeys.TANAKA_AMAZING_COMMODITIES, res.path())
+        saveItem(StorageKeys.TANAKA_AMAZING_COMMODITIES, res.path()),
       );
   };
 

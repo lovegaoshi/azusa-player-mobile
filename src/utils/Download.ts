@@ -17,7 +17,7 @@ export const copyCacheToDir = async ({
   if (resolvedPath === undefined) {
     logger.warn(
       `[Download] ${song.bvid} failed to download. \
-        check for cache settings or network connection.`
+        check for cache settings or network connection.`,
     );
     return;
   }
@@ -35,13 +35,13 @@ export const copyCacheToDir = async ({
         mimeType: 'audio/mp3',
       },
       'Audio',
-      filePath
+      filePath,
     );
     RNFetchBlob.fs.unlink(filePath).catch();
     return result;
   } catch (e) {
     logger.warn(
-      `[Download] ${song.parsedName} failed to copy to music dir: ${e}`
+      `[Download] ${song.parsedName} failed to copy to music dir: ${e}`,
     );
   }
 };

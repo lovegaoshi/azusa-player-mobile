@@ -32,16 +32,16 @@ export default () => {
     let devVersion: string | undefined;
     try {
       const res = await fetch(
-        'https://api.github.com/repos/lovegaoshi/azusa-player-mobile/releases/latest'
+        'https://api.github.com/repos/lovegaoshi/azusa-player-mobile/releases/latest',
       );
       const json = await res.json();
       noxCheckedVersion = json.tag_name;
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       noxAPKUrl = json.assets.filter((f: any) =>
-        f.name.includes('arm64-v8a')
+        f.name.includes('arm64-v8a'),
       )[0].browser_download_url;
       const devres = await fetch(
-          'https://api.github.com/repos/lovegaoshi/azusa-player-mobile/releases'
+          'https://api.github.com/repos/lovegaoshi/azusa-player-mobile/releases',
         ),
         devjson = await devres.json();
       devVersion = devjson[0].tag_name;
@@ -54,7 +54,7 @@ export default () => {
 
   const checkVersion = async (
     auto = true,
-    currentPlayerSetting = playerSetting
+    currentPlayerSetting = playerSetting,
   ) => {
     if (APPSTORE) return;
     if (!auto) {
@@ -83,8 +83,8 @@ export default () => {
           t('VersionUpdate.NoUpdates', {
             currentVersion: currentPlayerSetting.noxVersion,
             devVersion,
-          })
-        )
+          }),
+        ),
       );
     } else {
       setPlayerSetting({ noxCheckedVersion });
@@ -96,14 +96,14 @@ export default () => {
               noxCheckedVersion,
               currentVersion: currentPlayerSetting.noxVersion,
               devVersion,
-            })
+            }),
           ),
           () =>
             Linking.openURL(
-              'https://github.com/lovegaoshi/azusa-player-mobile/releases/latest'
+              'https://github.com/lovegaoshi/azusa-player-mobile/releases/latest',
             ),
           t('VersionUpdate.DownloadAPK'),
-          () => RNFetchDownloadAPK(noxAPKUrl!)
+          () => RNFetchDownloadAPK(noxAPKUrl!),
         );
         return;
       }
@@ -114,12 +114,12 @@ export default () => {
             noxCheckedVersion,
             currentVersion: currentPlayerSetting.noxVersion,
             devVersion,
-          })
+          }),
         ),
         () =>
           Linking.openURL(
-            'https://github.com/lovegaoshi/azusa-player-mobile/releases/latest'
-          )
+            'https://github.com/lovegaoshi/azusa-player-mobile/releases/latest',
+          ),
       );
     }
   };
@@ -135,8 +135,8 @@ export default () => {
         OneWayAlert(
           t('VersionUpdate.UpdatedVersionAlertTitle'),
           String(
-            t('VersionUpdate.UpdatedVersionAlertContent', { version: latest })
-          )
+            t('VersionUpdate.UpdatedVersionAlertContent', { version: latest }),
+          ),
         );
     }
   };
