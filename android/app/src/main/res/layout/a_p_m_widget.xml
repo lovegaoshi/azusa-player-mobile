@@ -24,7 +24,6 @@
             android:id="@+id/albumArt"
             android:layout_width="80dp"
             android:layout_height="match_parent"
-            android:background="@drawable/round_corners"
             android:contentDescription="@string/album_art"
             android:src="@mipmap/ic_launcher_foreground" />
 

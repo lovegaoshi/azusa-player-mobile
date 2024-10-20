@@ -11,6 +11,8 @@ import android.media.ThumbnailUtils
 import android.net.Uri
 import android.widget.RemoteViews
 import androidx.annotation.OptIn
+import androidx.core.graphics.drawable.RoundedBitmapDrawableFactory
+import androidx.core.graphics.drawable.toBitmapOrNull
 import androidx.media3.common.util.UnstableApi
 import com.doublesymmetry.trackplayer.model.Track
 import com.doublesymmetry.trackplayer.module.MusicEvents
@@ -116,7 +118,10 @@ class APMWidget : AppWidgetProvider() {
                 if (track != currentTrack) {
                     currentTrack = track
                     val bitmap  = binder.service.getCurrentBitmap()?.await()
-                    updateTrack(views, currentTrack, cropBitmap(bitmap))
+                    val croppedBitmap = cropBitmap(bitmap)
+                    val dr = RoundedBitmapDrawableFactory.create(context.resources, croppedBitmap)
+                    dr.cornerRadius = 100f
+                    updateTrack(views, currentTrack, dr.toBitmapOrNull())
                 }
             }
             // Instruct the widget manager to update the widget
