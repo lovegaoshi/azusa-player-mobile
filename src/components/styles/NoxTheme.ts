@@ -9,6 +9,8 @@ export default {
   },
 
   gifs: [
+    'https://i0.hdslb.com/bfs/new_dyn/660db3d9243d94770f676d7d842b70d01363140950.gif',
+    'https://i0.hdslb.com/bfs/new_dyn/e56e8630033c018a94406e15f75e717f1363140950.gif',
     'https://i1.hdslb.com/bfs/new_dyn/705cfa8cf81ab08b8dd7e92f2fb506c225818366.png',
     'https://i1.hdslb.com/bfs/new_dyn/ad6b3bdd85b3fd04a01e7234ea2a108525818366.png',
     'https://i1.hdslb.com/bfs/new_dyn/4910d70346edc5186412f2498a76b53125818366.png',
