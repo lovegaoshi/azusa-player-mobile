@@ -47,6 +47,7 @@ declare global {
       audioOffload?: boolean;
       skipSilence: boolean;
       parseEmbeddedArtwork: boolean;
+      crossfade: number;
 
       appID: string;
       language?: string;

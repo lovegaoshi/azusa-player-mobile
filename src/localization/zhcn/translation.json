@@ -144,6 +144,8 @@
     "audioOffloadDesc": "启用音频独占模式，节省电量",
     "parseEmbeddedArtworkName": "解析嵌入专辑封面",
     "parseEmbeddedArtworkDesc": "二次解析专辑封面（仅适用于android auto，会拖慢性能）",
+    "crossfadeName": "Crossfade",
+    "crossfadeDesc": "enable crossfading.",
     "skipSilenceName": "跳过静音",
     "skipSilenceDesc": "跳过静音片段（exoplayer特性，不适用于音乐）",
     "karaokeLyricsName": "逐字歌词",

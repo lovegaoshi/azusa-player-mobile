@@ -31,8 +31,10 @@ export const SetupService = async ({
   audioOffload = true,
   skipSilence = false,
   parseEmbeddedArtwork = false,
+  crossfade = 0,
 }: Partial<NoxStorage.PlayerSettingDict>) => {
   await setupPlayer({
+    crossfade: crossfade !== 0,
     autoHandleInterruptions: noInterruption ? false : true,
     androidSkipSilence: skipSilence,
     androidParseEmbeddedArtwork: parseEmbeddedArtwork,

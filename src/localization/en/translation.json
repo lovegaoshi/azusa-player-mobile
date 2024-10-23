@@ -132,6 +132,8 @@
     "audioOffloadDesc": "enable audio offload to a dedicated processsor (may save battery)",
     "parseEmbeddedArtworkName": "Parse Embedded Artwork",
     "parseEmbeddedArtworkDesc": "Parse embedded artwork 1 additional time for android auto (will slow local playback otherwise!!).",
+    "crossfadeName": "Crossfade",
+    "crossfadeDesc": "enable crossfading.",
     "skipSilenceName": "Skip Silence",
     "skipSilenceDesc": "skip segments with no audio (exoplayer feature)",
     "karaokeLyricsName": "Karaoke Lyrics",
