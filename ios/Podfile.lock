@@ -1414,7 +1414,7 @@ PODS:
   - react-native-track-player (4.1.1):
     - React-Core
     - SwiftAudioEx (= 1.1.0)
-  - react-native-video (6.6.4):
+  - react-native-video (6.7.0):
     - DoubleConversion
     - glog
     - hermes-engine
@@ -1427,7 +1427,7 @@ PODS:
     - React-featureflags
     - React-graphics
     - React-ImageManager
-    - react-native-video/Video (= 6.6.4)
+    - react-native-video/Video (= 6.7.0)
     - React-NativeModulesApple
     - React-RCTFabric
     - React-rendererdebug
@@ -1436,7 +1436,7 @@ PODS:
     - ReactCommon/turbomodule/bridging
     - ReactCommon/turbomodule/core
     - Yoga
-  - react-native-video/Video (6.6.4):
+  - react-native-video/Video (6.7.0):
     - DoubleConversion
     - glog
     - hermes-engine
@@ -1765,7 +1765,7 @@ PODS:
     - ReactCommon/turbomodule/bridging
     - ReactCommon/turbomodule/core
     - Yoga
-  - RNGestureHandler (2.20.0):
+  - RNGestureHandler (2.20.2):
     - DoubleConversion
     - glog
     - hermes-engine
@@ -1786,7 +1786,7 @@ PODS:
     - ReactCommon/turbomodule/bridging
     - ReactCommon/turbomodule/core
     - Yoga
-  - RNReanimated (3.16.0):
+  - RNReanimated (3.16.1):
     - DoubleConversion
     - glog
     - hermes-engine
@@ -1806,10 +1806,10 @@ PODS:
     - ReactCodegen
     - ReactCommon/turbomodule/bridging
     - ReactCommon/turbomodule/core
-    - RNReanimated/reanimated (= 3.16.0)
-    - RNReanimated/worklets (= 3.16.0)
+    - RNReanimated/reanimated (= 3.16.1)
+    - RNReanimated/worklets (= 3.16.1)
     - Yoga
-  - RNReanimated/reanimated (3.16.0):
+  - RNReanimated/reanimated (3.16.1):
     - DoubleConversion
     - glog
     - hermes-engine
@@ -1829,30 +1829,9 @@ PODS:
     - ReactCodegen
     - ReactCommon/turbomodule/bridging
     - ReactCommon/turbomodule/core
-    - RNReanimated/reanimated/apple (= 3.16.0)
+    - RNReanimated/reanimated/apple (= 3.16.1)
     - Yoga
-  - RNReanimated/reanimated/apple (3.16.0):
-    - DoubleConversion
-    - glog
-    - hermes-engine
-    - RCT-Folly (= 2024.01.01.00)
-    - RCTRequired
-    - RCTTypeSafety
-    - React-Core
-    - React-debug
-    - React-Fabric
-    - React-featureflags
-    - React-graphics
-    - React-ImageManager
-    - React-NativeModulesApple
-    - React-RCTFabric
-    - React-rendererdebug
-    - React-utils
-    - ReactCodegen
-    - ReactCommon/turbomodule/bridging
-    - ReactCommon/turbomodule/core
-    - Yoga
-  - RNReanimated/worklets (3.16.0):
+  - RNReanimated/reanimated/apple (3.16.1):
     - DoubleConversion
     - glog
     - hermes-engine
@@ -1873,7 +1852,28 @@ PODS:
     - ReactCommon/turbomodule/bridging
     - ReactCommon/turbomodule/core
     - Yoga
-  - RNScreens (3.34.0):
+  - RNReanimated/worklets (3.16.1):
+    - DoubleConversion
+    - glog
+    - hermes-engine
+    - RCT-Folly (= 2024.01.01.00)
+    - RCTRequired
+    - RCTTypeSafety
+    - React-Core
+    - React-debug
+    - React-Fabric
+    - React-featureflags
+    - React-graphics
+    - React-ImageManager
+    - React-NativeModulesApple
+    - React-RCTFabric
+    - React-rendererdebug
+    - React-utils
+    - ReactCodegen
+    - ReactCommon/turbomodule/bridging
+    - ReactCommon/turbomodule/core
+    - Yoga
+  - RNScreens (3.34.1):
     - DoubleConversion
     - glog
     - hermes-engine
@@ -1895,7 +1895,7 @@ PODS:
     - ReactCommon/turbomodule/bridging
     - ReactCommon/turbomodule/core
     - Yoga
-  - RNSentry (6.0.0):
+  - RNSentry (6.1.0):
     - DoubleConversion
     - glog
     - hermes-engine
@@ -1916,7 +1916,7 @@ PODS:
     - ReactCodegen
     - ReactCommon/turbomodule/bridging
     - ReactCommon/turbomodule/core
-    - Sentry/HybridSDK (= 8.37.0)
+    - Sentry/HybridSDK (= 8.38.0)
     - Yoga
   - RNShareMenu (6.0.0):
     - React
@@ -1954,7 +1954,7 @@ PODS:
   - SDWebImageWebPCoder (0.14.6):
     - libwebp (~> 1.0)
     - SDWebImage/Core (~> 5.17)
-  - Sentry/HybridSDK (8.37.0)
+  - Sentry/HybridSDK (8.38.0)
   - SocketRocket (0.7.0)
   - SSZipArchive (2.4.3)
   - SVGAPlayer (2.5.7):
@@ -2383,7 +2383,7 @@ SPEC CHECKSUMS:
   react-native-skia: 8f41b3bbde6d3b4eff1983cb82038f3af7de7eca
   react-native-svga-player: f1c7faf0864b22437b9b7cc7d7aa202d56f3906c
   react-native-track-player: 82ef1756ffeea61140fea17519ecd6d64ec3cf3e
-  react-native-video: 155a792d16b64f1fb68b1795d805808f34e60488
+  react-native-video: 9aec95eecb1c523b67e71a44032935f77f926276
   react-native-webview: 926d2665cf3196e39c4449a72d136d0a53b9df8a
   React-nativeconfig: 8c83d992b9cc7d75b5abe262069eaeea4349f794
   React-NativeModulesApple: 9f7920224a3b0c7d04d77990067ded14cee3c614
@@ -2415,10 +2415,10 @@ SPEC CHECKSUMS:
   RNCMaskedView: 090213d32d8b3bb83a4dcb7d12c18f0152591906
   RNDeviceInfo: e13b7d68878fba693c9fbb13ca4d56ad57d95917
   RNFlashList: 115dd44377580761bff386a0caebf165424cf16f
-  RNGestureHandler: 6dfe7692a191ee224748964127114edf057a1475
-  RNReanimated: f6a10979b3701f8029c71dbfe35d0ff4328dce4c
-  RNScreens: 19719a9c326e925498ac3b2d35c4e50fe87afc06
-  RNSentry: a7660b72556d6574867d488e60c4b4b0be7422d8
+  RNGestureHandler: 511250b190a284388f9dd0d2e56c1df76f14cfb8
+  RNReanimated: f42a5044d121d68e91680caacb0293f4274228eb
+  RNScreens: 00e01e05e3cf66bd701148c2531965437e9583e4
+  RNSentry: 4580b02d92932a15deb7adfd582feff799c7d289
   RNShareMenu: cb9dac548c8bf147d06f0bf07296ad51ea9f5fc3
   RNSVG: 8b1a777d54096b8c2a0fd38fc9d5a454332bbb4d
   RNVectorIcons: 6382277afab3c54658e9d555ee0faa7a37827136
@@ -2426,7 +2426,7 @@ SPEC CHECKSUMS:
   SDWebImageAVIFCoder: 00310d246aab3232ce77f1d8f0076f8c4b021d90
   SDWebImageSVGCoder: 15a300a97ec1c8ac958f009c02220ac0402e936c
   SDWebImageWebPCoder: e38c0a70396191361d60c092933e22c20d5b1380
-  Sentry: ee060c09b2f7ec1240e95c766ab44c04c7bdb052
+  Sentry: 205813e7e758b53df157cedb8c55b31a14300645
   SocketRocket: abac6f5de4d4d62d24e11868d7a2f427e0ef940d
   SSZipArchive: fe6a26b2a54d5a0890f2567b5cc6de5caa600aef
   SVGAPlayer: 318b85a78b61292d6ae9dfcd651f3f0d1cdadd86

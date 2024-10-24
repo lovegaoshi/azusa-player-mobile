@@ -15,6 +15,7 @@ import noxPlayingList from '@stores/playingList';
 import { NoxRepeatMode } from '@enums/RepeatMode';
 import usePlaylistCRUD from '@hooks/usePlaylistCRUD';
 import { getR128Gain } from '@utils/ffmpeg/r128Store';
+import { isAndroid } from '@utils/RNUtils';
 
 const { getState } = noxPlayingList;
 const { fadeIntervalMs, fadeIntervalSec } = appStore.getState();
@@ -32,7 +33,7 @@ export default () => {
   const crossfadeId = useNoxSetting(state => state.crossfadeId);
   const setCrossfadeId = useNoxSetting(state => state.setCrossfadeId);
   const crossfadeInterval = useNoxSetting(
-    state => state.playerSetting,
+    state => state.playerSetting
   ).crossfade;
   const loadingTracker = React.useRef(false);
 
@@ -84,19 +85,20 @@ export default () => {
       if (
         // crossfade req: position is at crossfade interval,
         // crossfade song prepared, not in crossfading
+        isAndroid &&
         crossfadeInterval > 0 &&
         event.position > trueDuration - crossfadeInterval &&
         crossfadeId === currentSongId &&
         crossfadingId !== currentSongId
       ) {
         logger.debug(
-          `[crossfade] crossfading: ${event.position}, ${trueDuration}, ${crossfadeInterval}`,
+          `[crossfade] crossfading: ${event.position}, ${trueDuration}, ${crossfadeInterval}`
         );
         setCrossfadingId(currentSongId);
         return TrackPlayer.crossFade(
           crossfadeInterval * 1000,
           20,
-          getR128Gain(track?.song) ?? 1,
+          getR128Gain(track?.song) ?? 1
         );
       }
       if (
@@ -106,7 +108,7 @@ export default () => {
         crossfadeId !== currentSongId
       ) {
         logger.debug(
-          `[FADEOUT] fading out....${event.position} / ${event.duration}`,
+          `[FADEOUT] fading out....${event.position} / ${event.duration}`
         );
         TrackPlayer.setAnimatedVolume({
           volume: 0,
