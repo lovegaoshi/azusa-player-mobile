@@ -53,6 +53,7 @@ enum VIEW {
 const Stack = createNativeStackNavigator();
 
 const FadeOptions = [0, 250, 500, 1000];
+const CrossFadeOptions = [0, 2500, 5000, 7500, 12000];
 
 const developerSettings: { [key: string]: SettingEntry } = {
   noInterruption: {
@@ -152,6 +153,23 @@ const Home = ({ navigation }: NoxComponent.NavigationProps) => {
     } as SelectSettingEntry<number>);
   };
 
+  const selectCrossFade = () => {
+    setSelectVisible(true);
+    setCurrentSelectOption({
+      options: CrossFadeOptions,
+      renderOption: (option: number) => String(option),
+      defaultIndex: 0,
+      onClose: () => setSelectVisible(false),
+      onSubmit: (index: number) => {
+        setPlayerSetting({ crossFadeInterval: CrossFadeOptions[index] }).then(
+          Sentry.nativeCrash,
+        );
+        setSelectVisible(false);
+      },
+      title: t('DeveloperSettings.crossfadeTitle'),
+    } as SelectSettingEntry<number>);
+  };
+
   const selectCacheLevel = () => {
     setSelectVisible(true);
     const options = [
@@ -243,6 +261,15 @@ const Home = ({ navigation }: NoxComponent.NavigationProps) => {
             settingCategory="DeveloperSettings"
             modifyDescription={val => `${val}: ${fadeIntervalMs}ms`}
           />
+          {isAndroid && (
+            <SettingListItem
+              icon={Icons.fade}
+              settingName="crossfade"
+              onPress={selectCrossFade}
+              settingCategory="DeveloperSettings"
+              modifyDescription={val => `${val}: ${playerSetting.crossfade}ms`}
+            />
+          )}
           <SettingListItem
             icon={Icons.cache}
             settingName="CacheSize"

@@ -26,6 +26,7 @@ const initializePlayer = async (safeMode = false) => {
     lastPlayDuration,
     currentPlayingID,
     parseEmbeddedArtwork: storedPlayerSetting.parseEmbeddedArtwork,
+    crossfade: storedPlayerSetting.crossfade,
   };
   await SetupService(serviceOptions);
   buildBrowseTree(playlists);
