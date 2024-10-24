@@ -6,6 +6,7 @@ import GenericSelectDialog from '../dialogs/GenericSelectDialog';
 import { SettingListItem } from './useRenderSetting';
 import { useNoxSetting } from '@stores/useApp';
 import { shawarma } from '@assets/voice/shawarma';
+import VoicePlayer from '../background/VoicePlayer';
 
 interface Props {
   icon: string;
@@ -21,9 +22,9 @@ const availableLanguagesMap: { [key: string]: string } = {
 export default ({ icon }: Props) => {
   const { t, i18n } = useTranslation();
   const [visible, setVisible] = React.useState(false);
+  const [shawarmaVoice, setShawarmaVoice] = React.useState<string>();
   const language = useNoxSetting(state => state.playerSetting).language;
   const setPlayerSetting = useNoxSetting(state => state.setPlayerSetting);
-  const setShawarmaVoice = useNoxSetting(state => state.setShawarmaVoice);
 
   const onSubmit = (val: number) => {
     setVisible(false);
@@ -40,6 +41,7 @@ export default ({ icon }: Props) => {
 
   return (
     <View>
+      <VoicePlayer uri={shawarmaVoice} />
       <SettingListItem
         icon={icon}
         settingName="LanguageOptions"

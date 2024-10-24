@@ -2,14 +2,10 @@ import React from 'react';
 import { StyleSheet } from 'react-native';
 import Video from 'react-native-video';
 
-import { useNoxSetting } from '@stores/useApp';
-
-export default () => {
-  const shawarmaVoice = useNoxSetting(state => state.shawarmaVoice);
-
+export default ({ uri }: { uri: string | NodeRequire | undefined }) => {
   return (
     <Video
-      source={{ uri: shawarmaVoice }}
+      source={{ uri }}
       style={styles.videoStyle}
       disableFocus={true}
       preventsDisplaySleepDuringVideoPlayback={false}

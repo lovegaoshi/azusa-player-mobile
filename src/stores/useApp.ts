@@ -32,8 +32,6 @@ interface NoxSetting {
   crossfadeId: string;
   setCrossfadeId: (val: string) => void;
 
-  shawarmaVoice: string | undefined;
-  setShawarmaVoice: (val: string | undefined) => void;
   bottomTabRoute: BottomTabRouteIcons;
   setBottomTabRoute: (val: BottomTabRouteIcons) => void;
 
@@ -145,9 +143,6 @@ interface NoxSetting {
 export const useNoxSetting = create<NoxSetting>((set, get) => ({
   crossfadeId: '',
   setCrossfadeId: v => set({ crossfadeId: v }),
-
-  shawarmaVoice: undefined,
-  setShawarmaVoice: v => set({ shawarmaVoice: v }),
 
   bottomTabRoute: BottomTabRouteIcons.music,
   setBottomTabRoute: val => set({ bottomTabRoute: val }),

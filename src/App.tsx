@@ -14,7 +14,6 @@ import appStore from '@stores/appStore';
 import PIPLyricView from './components/player/PIPLyric';
 import MainBackground from './components/background/MainBackground';
 import useTheme from './hooks/useTheme';
-import VoicePlayer from './components/background/VoicePlayer';
 // eslint-disable-next-line import/no-unresolved
 import { TRACKING } from '@env';
 
@@ -90,7 +89,6 @@ export default function App(appProps: NoxComponent.AppProps) {
           <APM PIP={PIPMode} isLandscape={isLandscape} />
         </SafeAreaProvider>
       </MainBackground>
-      <VoicePlayer />
     </GestureHandlerRootView>
   );
 }
