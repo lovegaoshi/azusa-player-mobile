@@ -170,6 +170,7 @@ export default () => {
   return {
     performFade: (callback: () => void) =>
       performFade(callback, fadeIntervalMs),
+    prepareSkipToNext: () => prepareSkipToNext(mSkipToBiliSuggest),
     performSkipToNext: (auto = false) =>
       performSkipToNext(
         auto,
