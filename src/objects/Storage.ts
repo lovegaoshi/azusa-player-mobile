@@ -46,6 +46,7 @@ export const DefaultSetting: NoxStorage.PlayerSettingDict = {
   audioOffload: true,
   parseEmbeddedArtwork: false,
   skipSilence: false,
+  crossfade: 0,
 
   appID: AppID,
   language: undefined,
