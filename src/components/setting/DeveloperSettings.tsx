@@ -40,7 +40,8 @@ enum Icons {
   cache = 'floppy',
   clearcache = 'delete-sweep',
   clearOrphanCache = 'delete-empty',
-  fade = 'shuffle-variant',
+  crossfade = 'shuffle-variant',
+  fade = 'cosine-wave',
   plugins = 'puzzle',
   Tanaka = 'emoticon-devil',
 }
@@ -263,7 +264,7 @@ const Home = ({ navigation }: NoxComponent.NavigationProps) => {
           />
           {isAndroid && (
             <SettingListItem
-              icon={Icons.fade}
+              icon={Icons.crossfade}
               settingName="crossfade"
               onPress={selectCrossFade}
               settingCategory="DeveloperSettings"
