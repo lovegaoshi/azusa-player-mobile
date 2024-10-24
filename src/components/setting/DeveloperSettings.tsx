@@ -161,7 +161,7 @@ const Home = ({ navigation }: NoxComponent.NavigationProps) => {
       defaultIndex: 0,
       onClose: () => setSelectVisible(false),
       onSubmit: (index: number) => {
-        setPlayerSetting({ crossFadeInterval: CrossFadeOptions[index] }).then(
+        setPlayerSetting({ crossfade: CrossFadeOptions[index] / 1000 }).then(
           Sentry.nativeCrash,
         );
         setSelectVisible(false);
@@ -267,7 +267,9 @@ const Home = ({ navigation }: NoxComponent.NavigationProps) => {
               settingName="crossfade"
               onPress={selectCrossFade}
               settingCategory="DeveloperSettings"
-              modifyDescription={val => `${val}: ${playerSetting.crossfade}ms`}
+              modifyDescription={v =>
+                `${v}: ${playerSetting.crossfade * 1000}ms`
+              }
             />
           )}
           <SettingListItem

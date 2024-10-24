@@ -14,6 +14,7 @@ import appStore, { getABRepeatRaw, setCurrentPlaying } from '@stores/appStore';
 import noxPlayingList from '@stores/playingList';
 import { NoxRepeatMode } from '@enums/RepeatMode';
 import usePlaylistCRUD from '@hooks/usePlaylistCRUD';
+import { getR128Gain } from '@utils/ffmpeg/r128Store';
 
 const { getState } = noxPlayingList;
 const { fadeIntervalMs, fadeIntervalSec } = appStore.getState();
@@ -80,11 +81,17 @@ export default () => {
       const trueDuration = Math.min(bRepeatDuration, event.duration);
       if (
         crossfadeInterval > 0 &&
-        trueDuration - event.position < crossfadeInterval &&
+        event.position > trueDuration - crossfadeInterval &&
         crossfadeId === (track?.song?.id ?? '')
       ) {
-        logger.debug('[crossfade] crossfading');
-        return TrackPlayer.crossFade();
+        logger.debug(
+          `[crossfade] crossfading: ${event.position}, ${trueDuration}, ${crossfadeInterval}`,
+        );
+        return TrackPlayer.crossFade(
+          crossfadeInterval * 1000,
+          20,
+          getR128Gain(track?.song) ?? 1,
+        );
       }
       if (
         fadeIntervalSec > 0 &&
