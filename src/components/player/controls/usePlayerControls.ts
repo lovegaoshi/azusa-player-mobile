@@ -24,6 +24,7 @@ export default () => {
     useTPControls();
   const [abRepeat, setABRepeat] = React.useState<[number, number]>([0, 1]);
   const [bRepeatDuration, setBRepeatDuration] = React.useState(9999);
+  const [crossfadingId, setCrossfadingId] = React.useState('');
   const { updateCurrentSongMetadata, updateCurrentSongMetadataReceived } =
     usePlaylistCRUD();
   const track = useActiveTrack();
@@ -64,11 +65,12 @@ export default () => {
   useTrackPlayerEvents([Event.PlaybackProgressUpdated], async event => {
     const playmode = getState().playmode;
     saveLastPlayDuration(event.position);
+    const currentSongId = track?.song?.id ?? '';
     // prepare for cross fading if enabled, playback is > 50% done and crossfade preparation isnt done
     if (
       crossfadeInterval > 0 &&
       event.position > event.duration * 0.5 &&
-      crossfadeId !== (track?.song?.id ?? '')
+      crossfadeId !== currentSongId
     ) {
       logger.debug('[crossfade] preparing crossfade');
       await prepareSkipToNext();
@@ -80,13 +82,17 @@ export default () => {
     if (event.duration > 0 && playmode !== NoxRepeatMode.RepeatTrack) {
       const trueDuration = Math.min(bRepeatDuration, event.duration);
       if (
+        // crossfade req: position is at crossfade interval,
+        // crossfade song prepared, not in crossfading
         crossfadeInterval > 0 &&
         event.position > trueDuration - crossfadeInterval &&
-        crossfadeId === (track?.song?.id ?? '')
+        crossfadeId === currentSongId &&
+        crossfadingId !== currentSongId
       ) {
         logger.debug(
           `[crossfade] crossfading: ${event.position}, ${trueDuration}, ${crossfadeInterval}`,
         );
+        setCrossfadingId(currentSongId);
         return TrackPlayer.crossFade(
           crossfadeInterval * 1000,
           20,
@@ -94,8 +100,10 @@ export default () => {
         );
       }
       if (
+        // fade req: position is at fade interval, not in crossfading
         fadeIntervalSec > 0 &&
-        event.position > trueDuration - fadeIntervalSec
+        event.position > trueDuration - fadeIntervalSec &&
+        crossfadeId !== currentSongId
       ) {
         logger.debug(
           `[FADEOUT] fading out....${event.position} / ${event.duration}`,
