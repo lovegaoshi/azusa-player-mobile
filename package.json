@@ -40,7 +40,7 @@
     "@react-navigation/native": "^6.1.18",
     "@react-navigation/native-stack": "^6.11.0",
     "@sentry/react-native": "^6.1.0",
-    "@sharcoux/slider": "^8.0.1",
+    "@sharcoux/slider": "7.2.1",
     "@shopify/flash-list": "^1.7.1",
     "@shopify/react-native-skia": "1.5.0",
     "axios": "^1.7.7",
