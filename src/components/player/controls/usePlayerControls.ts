@@ -10,7 +10,11 @@ import { useNoxSetting } from '@stores/useApp';
 import useTPControls from '@hooks/useTPControls';
 import { saveLastPlayDuration } from '@utils/ChromeStorage';
 import { logger } from '@utils/Logger';
-import appStore, { getABRepeatRaw, setCurrentPlaying } from '@stores/appStore';
+import appStore, {
+  getABRepeatRaw,
+  setCurrentPlaying,
+  setCrossfaded,
+} from '@stores/appStore';
 import noxPlayingList from '@stores/playingList';
 import { NoxRepeatMode } from '@enums/RepeatMode';
 import usePlaylistCRUD from '@hooks/usePlaylistCRUD';
@@ -33,7 +37,7 @@ export default () => {
   const crossfadeId = useNoxSetting(state => state.crossfadeId);
   const setCrossfadeId = useNoxSetting(state => state.setCrossfadeId);
   const crossfadeInterval = useNoxSetting(
-    state => state.playerSetting
+    state => state.playerSetting,
   ).crossfade;
   const loadingTracker = React.useRef(false);
 
@@ -92,13 +96,14 @@ export default () => {
         crossfadingId !== currentSongId
       ) {
         logger.debug(
-          `[crossfade] crossfading: ${event.position}, ${trueDuration}, ${crossfadeInterval}`
+          `[crossfade] crossfading: ${event.position}, ${trueDuration}, ${crossfadeInterval}`,
         );
         setCrossfadingId(currentSongId);
+        setCrossfaded(true);
         return TrackPlayer.crossFade(
           crossfadeInterval * 1000,
           20,
-          getR128Gain(track?.song) ?? 1
+          getR128Gain(track?.song) ?? 1,
         );
       }
       if (
@@ -108,7 +113,7 @@ export default () => {
         crossfadeId !== currentSongId
       ) {
         logger.debug(
-          `[FADEOUT] fading out....${event.position} / ${event.duration}`
+          `[FADEOUT] fading out....${event.position} / ${event.duration}`,
         );
         TrackPlayer.setAnimatedVolume({
           volume: 0,
