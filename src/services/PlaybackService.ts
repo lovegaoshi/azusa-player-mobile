@@ -118,6 +118,7 @@ export async function PlaybackService() {
       APMWidgetModule?.updateWidget();
       const playerErrored =
         (await TrackPlayer.getPlaybackState()).state === State.Error;
+      await TrackPlayer.setVolume(0);
       if (event.track?.song === undefined) return;
       useNoxSetting.getState().setCurrentPlayingId(event.track.song.id);
       if (playerErrored) {
@@ -149,9 +150,13 @@ export async function PlaybackService() {
         if (mAppState.crossfaded) {
           // use crossfade fading instead
           setCrossfaded(false);
+          await parseSongR128gain(
+            event.track.song,
+            useNoxSetting.getState().playerSetting.crossfade * 1000,
+            0,
+          );
         } else {
           // this is when song is first played.
-          await TrackPlayer.setVolume(0);
           const fadeIntervalMs = mAppState.fadeIntervalMs;
           logger.debug(`[FADEIN] fading in of ${fadeIntervalMs}...`);
           await parseSongR128gain(event.track.song, fadeIntervalMs, 0);
