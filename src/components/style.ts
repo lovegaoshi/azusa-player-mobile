@@ -136,6 +136,12 @@ export const replaceStyleColor = ({
         backgroundImagesLandscape: [],
         bkgrdImg: '',
         bkgrdImgLandscape: '',
+        loadingIcon: undefined,
+        progressThumbImage: undefined,
+        progressThumbImageLeftDrag: undefined,
+        progressThumbImageRightDrag: undefined,
+        biliGarbCard: undefined,
+        thumbupSVGA: undefined,
       }
     : replacedStyle;
 };

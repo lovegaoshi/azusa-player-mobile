@@ -7,6 +7,7 @@ import { SettingListItem, RenderSetting } from '../useRenderSetting';
 import { useNoxSetting } from '@stores/useApp';
 import SelectDarkModeButton from './SelectDarkModeButton';
 import NoWeebButton from './NoWeebButton';
+import SelectPhotoButton from './SelectPhotoButton';
 
 enum VIEW {
   HOME = 'AppearanceHome',
@@ -58,6 +59,7 @@ const MainView = ({ navigation }: NoxComponent.NavigationProps) => {
         />
         <SelectDarkModeButton />
         <NoWeebButton />
+        <SelectPhotoButton />
       </ScrollView>
     </View>
   );

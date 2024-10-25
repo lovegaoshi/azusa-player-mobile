@@ -164,8 +164,23 @@ class APMWidget : AppWidgetProvider() {
                         Intent(context, MainActivity::class.java).apply {
                             addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
                         }.also {i -> context?.startActivity(i)}
-                        return
+                    } else {
+                        val prevClick = context
+                            ?.getSharedPreferences("APM", Context.MODE_PRIVATE)
+                            ?.getLong(WIDGET_CLICK_COUNT, 0) ?: 0
+                        val currentTime = System.currentTimeMillis()
+                        if ((currentTime - prevClick) < 1000) {
+                            Intent(context, MainActivity::class.java).apply {
+                                addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                            }.also {i -> context?.startActivity(i)}
+                        } else {
+                            context
+                                ?.getSharedPreferences("APM", Context.MODE_PRIVATE)
+                                ?.edit()?.putLong(WIDGET_CLICK_COUNT, System.currentTimeMillis())
+                                ?.apply()
+                        }
                     }
+                    return
                 }
                 MusicEvents.BUTTON_SKIP_PREVIOUS -> emit(context, MusicEvents.BUTTON_SKIP_PREVIOUS)
                 MusicEvents.BUTTON_SKIP_NEXT -> emit(context, MusicEvents.BUTTON_SKIP_NEXT)
@@ -188,6 +203,7 @@ class APMWidget : AppWidgetProvider() {
     }
 }
 
+const val WIDGET_CLICK_COUNT = "APMWidgetClick"
 const val WIDGET_CLICK = "widget-click"
 const val WIDGET_CLEAR = "clear-widget"
 const val WIDGET_SET_BKGD = "widget-set-bkgd"

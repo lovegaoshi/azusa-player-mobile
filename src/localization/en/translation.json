@@ -236,6 +236,8 @@
     "ABRepeatDesc": "Update ABRepeat rules from GitHub"
   },
   "AppearanceSettings": {
+    "selectPhotoName": "Select Photo",
+    "selectPhotoDesc": "Turn off weeb skins",
     "noWeebSkinsName": "Weeb be Gone",
     "noWeebSkinsDesc": "Turn off weeb skins",
     "accentColorName": "Use Accent Color",
