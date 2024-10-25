@@ -142,6 +142,7 @@ export default () => {
     updateCurrentSongMetadata();
     const song = (await TrackPlayer.getActiveTrack())?.song as NoxMedia.Song;
     const newABRepeat = getABRepeatRaw(song.id);
+    logger.debug(`[SongReady] logging ABRepeat as ${newABRepeat}`);
     setABRepeat(newABRepeat);
     if (setCurrentPlaying(song) && !loadingTracker.current) return;
     loadingTracker.current = false;
