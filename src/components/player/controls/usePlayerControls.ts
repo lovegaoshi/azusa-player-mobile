@@ -10,11 +10,16 @@ import { useNoxSetting } from '@stores/useApp';
 import useTPControls from '@hooks/useTPControls';
 import { saveLastPlayDuration } from '@utils/ChromeStorage';
 import { logger } from '@utils/Logger';
-import appStore, { getABRepeatRaw, setCurrentPlaying } from '@stores/appStore';
+import appStore, {
+  getABRepeatRaw,
+  setCurrentPlaying,
+  setCrossfaded,
+} from '@stores/appStore';
 import noxPlayingList from '@stores/playingList';
 import { NoxRepeatMode } from '@enums/RepeatMode';
 import usePlaylistCRUD from '@hooks/usePlaylistCRUD';
 import { getR128Gain } from '@utils/ffmpeg/r128Store';
+import { isAndroid } from '@utils/RNUtils';
 
 const { getState } = noxPlayingList;
 const { fadeIntervalMs, fadeIntervalSec } = appStore.getState();
@@ -84,6 +89,7 @@ export default () => {
       if (
         // crossfade req: position is at crossfade interval,
         // crossfade song prepared, not in crossfading
+        isAndroid &&
         crossfadeInterval > 0 &&
         event.position > trueDuration - crossfadeInterval &&
         crossfadeId === currentSongId &&
@@ -93,6 +99,7 @@ export default () => {
           `[crossfade] crossfading: ${event.position}, ${trueDuration}, ${crossfadeInterval}`,
         );
         setCrossfadingId(currentSongId);
+        setCrossfaded(true);
         return TrackPlayer.crossFade(
           crossfadeInterval * 1000,
           20,

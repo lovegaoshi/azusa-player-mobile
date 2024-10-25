@@ -12,7 +12,7 @@ import { logger } from '../utils/Logger';
 import noxPlayingList, { getNextSong } from '../stores/playingList';
 import { NoxRepeatMode } from '../enums/RepeatMode';
 import playerSettingStore from '@stores/playerSettingStore';
-import appStore, { resetResolvedURL } from '@stores/appStore';
+import appStore, { resetResolvedURL, setCrossfaded } from '@stores/appStore';
 import {
   fadePause,
   cycleThroughPlaymode,
@@ -146,10 +146,16 @@ export async function PlaybackService() {
       // this is here to load existing R128Gain values or resolve new gain values from cached files only.
       // another setR128Gain is in Cache.saveCacheMedia where the file is fetched, which is never a scenario here
       if (event.track.url !== NULL_TRACK.url) {
-        // this is when song is first played.
-        const fadeIntervalMs = getAppStoreState().fadeIntervalMs;
-        logger.debug(`[FADEIN] fading in of ${fadeIntervalMs}...`);
-        await parseSongR128gain(event.track.song, fadeIntervalMs, 0);
+        const mAppState = getAppStoreState();
+        if (mAppState.crossfaded) {
+          // use crossfade fading instead
+          setCrossfaded(false);
+        } else {
+          // this is when song is first played.
+          const fadeIntervalMs = mAppState.fadeIntervalMs;
+          logger.debug(`[FADEIN] fading in of ${fadeIntervalMs}...`);
+          await parseSongR128gain(event.track.song, fadeIntervalMs, 0);
+        }
       }
       const heartBeatReq = [event.track.song.bvid, event.track.song.id];
       // HACK: what if cid needs to be resolved on the fly?

@@ -15,6 +15,7 @@ import { loadJSONRegExtractors } from '../utils/re';
 import noxCache from '@utils/Cache';
 
 interface AppStore {
+  crossfaded: boolean;
   pipMode: boolean;
   ABRepeat: NoxStorage.ABDict;
   setABRepeat: (val: NoxStorage.ABDict) => void;
@@ -45,6 +46,7 @@ interface AppStore {
 }
 
 const appStore = createStore<AppStore>(set => ({
+  crossfaded: false,
   downloadQueue: [],
   pipMode: false,
   ABRepeat: {},
@@ -95,6 +97,10 @@ export const initialize = async () => {
         : (rejson as NoxRegExt.JSONExtractor[]),
     ),
   });
+};
+
+export const setCrossfaded = (crossfaded = true) => {
+  appStore.setState({ crossfaded });
 };
 
 export const reExtractSongName = (name: string, uploader: string | number) =>
