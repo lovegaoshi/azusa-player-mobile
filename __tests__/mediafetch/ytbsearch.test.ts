@@ -1,9 +1,6 @@
-import fetcher from '../../src/utils/mediafetch/ytbsearch';
+import { fetchYtbiSearch } from '../../src/utils/mediafetch/ytbSearch.ytbi';
 test('ytbsearch', async () => {
-  const content = await fetcher.regexFetch({
-    url: "don't wake up",
-    progressEmitter: () => {},
-  });
-  // console.log(content);
-  expect(content?.songList[0]?.id).not.toBeUndefined();
+  const content = await fetchYtbiSearch('maroon 5');
+  console.log(content.songs.length);
+  expect(content.songs[0]?.id).not.toBeUndefined();
 });

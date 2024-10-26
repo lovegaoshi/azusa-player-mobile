@@ -23,7 +23,10 @@ import ytbMixlistFetch from './mediafetch/ytbmixlist';
 import ytbLiveFetch from './mediafetch/ytbLive';
 import ytbChannelFetch from './mediafetch/ytbChannel';
 import { fetchInnerTuneSearch } from './mediafetch/ytbSearch.muse';
-import { fetchYtbiSearch } from './mediafetch/ytbSearch.ytbi';
+import {
+  fetchYtbiSearch,
+  ytbiSearchRefresh,
+} from './mediafetch/ytbSearch.ytbi';
 import biliLiveFetch from './mediafetch/bililive';
 import biliSubliveFetch from './mediafetch/bilisublive';
 import b23tvFetch from './mediafetch/b23tv';
@@ -115,7 +118,13 @@ export const searchBiliURLs = async ({
           });
           break;
         case SearchOptions.YOUTUBE:
-          results = { songList: await fetchYtbiSearch(input) };
+          // eslint-disable-next-line no-case-declarations
+          const searchResult = await fetchYtbiSearch(input);
+          results = {
+            refreshToken: searchResult.playlistData,
+            songList: searchResult.songs,
+            refresh: ytbiSearchRefresh,
+          };
           break;
         case SearchOptions.YOUTUBEM:
           results = { songList: await fetchInnerTuneSearch(input) };

@@ -1,12 +1,13 @@
 import { Video } from 'youtubei.js/dist/src/parser/nodes';
+import Search from 'youtubei.js/dist/src/parser/youtube/Search';
 
 import SongTS from '@objects/Song';
 import { Source } from '@enums/MediaFetch';
 import { ytClientWeb } from '@utils/mediafetch/ytbi';
 import { logger } from '@utils/Logger';
 
-export const ytbiVideoToNoxSong = (val: Video) => {
-  return SongTS({
+export const ytbiVideoToNoxSong = (val: Video) =>
+  SongTS({
     cid: `${Source.ytbvideo}-${val.id}`,
     bvid: val.id,
     name: val.title.text ?? 'N/A',
@@ -20,23 +21,72 @@ export const ytbiVideoToNoxSong = (val: Video) => {
     source: Source.ytbvideo,
     metadataOnLoad: true,
   });
+
+interface SearchResult {
+  songs: NoxMedia.Song[];
+  playlistData?: Search;
+}
+
+interface GetSearch {
+  songs: NoxMedia.Song[];
+  favList?: string[];
+  playlistData?: Search;
+  page?: number;
+}
+
+const getSearch = async ({
+  songs,
+  favList = [],
+  playlistData,
+  page = 0,
+}: GetSearch): Promise<SearchResult> => {
+  if (page === 0 || playlistData === undefined) {
+    return { songs, playlistData };
+  }
+  const videos = playlistData.videos as Video[];
+  const parsedSongs = videos
+    .filter(v => v.type === 'Video')
+    .map(val => (!favList.includes(val.id) ? ytbiVideoToNoxSong(val) : []))
+    .filter((val): val is NoxMedia.Song => val !== undefined);
+  const joinedSongs = songs.concat(parsedSongs);
+  return getSearch({
+    songs: joinedSongs,
+    favList,
+    playlistData: await playlistData.getContinuation(),
+    page: page - 1,
+  });
+};
+
+export const ytbiSearchRefresh = async (
+  v: NoxMedia.Playlist,
+): Promise<NoxMedia.Playlist> => {
+  const result = await getSearch({
+    songs: v.songList,
+    playlistData: v.refreshToken,
+    page: 1,
+  });
+  return {
+    ...v,
+    songList: result.songs,
+    refreshToken: result.playlistData,
+  };
 };
 
 export const fetchYtbiSearch = async (
   searchVal: string,
   favList: string[] = [],
-): Promise<NoxMedia.Song[]> => {
+): Promise<SearchResult> => {
   try {
     const yt = await ytClientWeb;
-    const playlistData = await yt.search(searchVal);
-    const videos = playlistData.videos as Video[];
-    return videos
-      .filter(v => v.type === 'Video')
-      .map(val => (!favList.includes(val.id) ? ytbiVideoToNoxSong(val) : []))
-      .filter((val): val is NoxMedia.Song => val !== undefined);
+    return getSearch({
+      songs: [],
+      favList,
+      playlistData: await yt.search(searchVal, { type: 'video' }),
+      page: 2,
+    });
   } catch (e) {
     logger.error(`[Ytbi.js Search] search ${searchVal} failed!`);
     console.error(e);
-    return [];
+    return { songs: [] };
   }
 };
