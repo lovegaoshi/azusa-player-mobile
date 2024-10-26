@@ -84,7 +84,13 @@ export default () => {
 
     // if fade or crossfade should be triggered
     if (event.duration > 0 && playmode !== NoxRepeatMode.RepeatTrack) {
-      const trueDuration = Math.min(bRepeatDuration, event.duration);
+      let trueDuration = Math.min(bRepeatDuration, event.duration);
+      if (trueDuration === 0) {
+        logger.warn(
+          `[crossfade] true duration is 0?! reset to ${event.duration} instead. ${bRepeatDuration}, ${abRepeat}.`,
+        );
+        trueDuration = event.duration;
+      }
       if (
         // crossfade req: position is at crossfade interval,
         // crossfade song prepared, not in crossfading
