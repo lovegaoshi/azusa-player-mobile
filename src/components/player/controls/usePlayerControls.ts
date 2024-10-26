@@ -42,7 +42,6 @@ export default () => {
   const loadingTracker = React.useRef(false);
 
   useTrackPlayerEvents([Event.MetadataCommonReceived], async event => {
-    console.log('Event.MetadataCommonReceived', event.metadata);
     if (
       !track?.song?.metadataOnReceived ||
       Object.keys(event.metadata).length === 0
@@ -132,7 +131,6 @@ export default () => {
   });
 
   useTrackPlayerEvents([Event.PlaybackState], async event => {
-    console.log('Event.PlaybackState', event);
     switch (event.state) {
       case State.Loading:
         loadingTracker.current = true;

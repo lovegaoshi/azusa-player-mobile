@@ -27,18 +27,32 @@ const ytbiPlaylistItemToNoxSong = (val: PlaylistVideo, data: Playlist) => {
   }
 };
 
+const getYtbSong = async (
+  playlistData: Playlist,
+  songs: NoxMedia.Song[],
+  favList: string[],
+) => {
+  const videos = playlistData.videos as PlaylistVideo[];
+  for (const video of videos) {
+    if (!favList.includes(video.id)) {
+      const song = ytbiPlaylistItemToNoxSong(video, playlistData);
+      if (song) {
+        songs.push(song);
+      }
+    } else {
+      return songs;
+    }
+  }
+  if (playlistData.has_continuation) {
+    return getYtbSong(await playlistData.getContinuation(), songs, favList);
+  }
+  return songs;
+};
+
 export const fetchYtbiPlaylist = async (
   playlistId: string,
   favList: string[] = [],
 ): Promise<NoxMedia.Song[]> => {
   const yt = await ytClientWeb;
-  const playlistData = await yt.getPlaylist(playlistId);
-  const videos = playlistData.videos as PlaylistVideo[];
-  return videos
-    .map(val =>
-      !favList.includes(val.id)
-        ? ytbiPlaylistItemToNoxSong(val, playlistData)
-        : [],
-    )
-    .filter((val): val is NoxMedia.Song => val !== undefined);
+  return getYtbSong(await yt.getPlaylist(playlistId), [], favList);
 };
