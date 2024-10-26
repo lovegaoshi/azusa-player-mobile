@@ -115,7 +115,7 @@
   },
   "GeneralSettings": {
     "selectPhotoName": "选择照片",
-    "selectPhotoDesc": "选择照片",
+    "selectPhotoDesc": "选择照片为背景",
     "autoRSSUpdateName": "自动更新歌单订阅",
     "autoRSSUpdateDesc": "每天打开歌单时自动更新歌单的订阅",
     "parseSongNameName": "提取歌名",

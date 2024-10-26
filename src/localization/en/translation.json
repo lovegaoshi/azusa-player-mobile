@@ -237,7 +237,7 @@
   },
   "AppearanceSettings": {
     "selectPhotoName": "Select Photo",
-    "selectPhotoDesc": "Turn off weeb skins",
+    "selectPhotoDesc": "Select local photo as background",
     "noWeebSkinsName": "Weeb be Gone",
     "noWeebSkinsDesc": "Turn off weeb skins",
     "accentColorName": "Use Accent Color",

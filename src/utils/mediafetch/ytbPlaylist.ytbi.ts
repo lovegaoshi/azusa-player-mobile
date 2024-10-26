@@ -4,6 +4,7 @@ import { Playlist } from 'youtubei.js/dist/src/parser/youtube';
 import SongTS from '@objects/Song';
 import { Source } from '@enums/MediaFetch';
 import { ytClientWeb } from '@utils/mediafetch/ytbi';
+import { play } from 'react-native-track-player/lib/src/trackPlayer';
 
 const ytbiPlaylistItemToNoxSong = (val: PlaylistVideo, data: Playlist) => {
   try {
@@ -32,13 +33,20 @@ export const fetchYtbiPlaylist = async (
   favList: string[] = [],
 ): Promise<NoxMedia.Song[]> => {
   const yt = await ytClientWeb;
-  const playlistData = await yt.getPlaylist(playlistId);
-  const videos = playlistData.videos as PlaylistVideo[];
-  return videos
-    .map(val =>
-      !favList.includes(val.id)
-        ? ytbiPlaylistItemToNoxSong(val, playlistData)
-        : [],
-    )
-    .filter((val): val is NoxMedia.Song => val !== undefined);
+  const playlistDatas = [await yt.getPlaylist(playlistId)];
+  while (playlistDatas[playlistDatas.length - 1].has_continuation) {
+    playlistDatas.push(
+      await playlistDatas[playlistDatas.length - 1].getContinuation(),
+    );
+  }
+  return playlistDatas.flatMap(playlistData => {
+    const videos = playlistData.videos as PlaylistVideo[];
+    return videos
+      .map(val =>
+        !favList.includes(val.id)
+          ? ytbiPlaylistItemToNoxSong(val, playlistData)
+          : [],
+      )
+      .filter((val): val is NoxMedia.Song => val !== undefined);
+  });
 };
