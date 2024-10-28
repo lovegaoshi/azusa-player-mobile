@@ -24,7 +24,7 @@ export const resolveURL = async (song: NoxMedia.Song, iOS = false) => {
       iOS && isIOS && extractedVideoInfo.streaming_data?.hls_manifest_url
         ? extractedVideoInfo.streaming_data?.hls_manifest_url
         : maxAudioQualityStream.decipher(yt.actions.session.player),
-    cover: getHiResThumbnail(thumbnails),
+    // cover: getHiResThumbnail(thumbnails),
     loudness: maxAudioQualityStream.loudness_db,
   };
 };
