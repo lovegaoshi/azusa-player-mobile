@@ -1,18 +1,14 @@
 import fetcher from '../../src/utils/mediafetch/ytbvideo';
-import { resolveURL as resolveURLNode } from '../../src/utils/mediafetch/ytbvideo.node';
 import { resolveURL as resolveURLMuse } from '../../src/utils/mediafetch/ytbvideo.muse';
-import { resolveURL as resolveURLYtbi } from '../../src/utils/mediafetch/ytbvideo.ytbi';
-
-test.only('dummy fetch', () => {
-  expect('dummy').toBe('dummy');
-});
-
-// HACK: ghactions cant connect to ytbi
+import {
+  resolveURL as resolveURLYtbi,
+  suggest,
+} from '../../src/utils/mediafetch/ytbvideo.ytbi';
 
 test('test ytbvideo', async () => {
   const content = await fetcher.regexFetch({
     reExtracted: fetcher.regexSearchMatch.exec(
-      'https://www.youtube.com/watch?v=VtXTFi8edyE'
+      'https://www.youtube.com/watch?v=VtXTFi8edyE',
     ),
   });
   //console.log(content);
@@ -32,9 +28,3 @@ test('test ytbi', async () => {
   //console.log(content);
   expect(content).not.toBeNull();
 }, 2201000);
-
-test('test ytdl-core', async () => {
-  const content = await resolveURLNode(dummySong);
-  console.log(content);
-  expect(content).not.toBeNull();
-}, 220000);
