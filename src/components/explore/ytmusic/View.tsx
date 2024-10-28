@@ -1,6 +1,6 @@
 import { View, ScrollView } from 'react-native';
 import { Button } from 'react-native-paper';
-import { Mood, get_playlist, get_mood_playlists } from 'libmuse';
+import { Mood } from 'libmuse';
 import { useState } from 'react';
 
 import { styles } from '@components/style';

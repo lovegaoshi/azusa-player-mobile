@@ -13,7 +13,7 @@ const useYTMExplore = () => {
   const refreshHome = async (params?: string) => {
     const homedata = await get_home({ params });
     setHomedata(homedata);
-    console.log(homedata);
+    console.log(homedata.results);
     return homedata;
   };
 

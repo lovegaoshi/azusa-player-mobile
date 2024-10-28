@@ -55,11 +55,11 @@ const Icons = {
 export const getIcon = (icon: string) => {
   switch (icon) {
     case SearchOptions.BILIBILI:
-      return Icons.BILIBILI;
+      return () => Icons.BILIBILI();
     case SearchOptions.YOUTUBE:
-      return Icons.YOUTUBE;
+      return () => Icons.YOUTUBE();
     case SearchOptions.YOUTUBEM:
-      return Icons.YOUTUBEM;
+      return () => Icons.YOUTUBEM();
     case SearchOptions.ALIST:
       return () => <Icon source={'google-cloud'} size={24} />;
     default:

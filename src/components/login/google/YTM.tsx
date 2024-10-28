@@ -45,6 +45,7 @@ const Login = ({ refresh }: LoginProps) => {
           auth
             .load_token_with_code(loginCodes!.deviceCode, loginCodes!.interval)
             .then(t => saveItem(StorageKeys.YTMTOKEN, t).then(refresh));
+          saveItem(StorageKeys.YTMCOOKIES, cookies.join('; '));
           return true;
         }
         return false;

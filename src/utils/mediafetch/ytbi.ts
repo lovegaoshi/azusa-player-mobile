@@ -5,8 +5,10 @@ import 'text-encoding-polyfill';
 import 'react-native-url-polyfill/auto';
 import { decode, encode } from 'base-64';
 import { Innertube, ClientType } from 'youtubei.js';
+import { getSecure as getItem } from '@utils/ChromeStorageAPI';
 
 import MMKV from '../fakeMMKV';
+import { StorageKeys } from '@enums/Storage';
 
 if (!global.btoa) {
   global.btoa = encode;
@@ -39,12 +41,15 @@ global.CustomEvent = CustomEvent as any;
 
 // === END === Making Youtube.js work
 
-const ytClient = Innertube.create({
-  retrieve_player: true,
-  enable_session_cache: false,
-  generate_session_locally: false,
-  client_type: ClientType.IOS,
-});
+const ytClient = getItem(StorageKeys.YTMCOOKIES, undefined).then(cookie =>
+  Innertube.create({
+    retrieve_player: true,
+    enable_session_cache: false,
+    generate_session_locally: false,
+    client_type: ClientType.IOS,
+    cookie,
+  }),
+);
 
 export default ytClient;
 

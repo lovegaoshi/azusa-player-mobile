@@ -26,6 +26,7 @@ export enum StorageKeys {
   ALIST_CRED = 'AlistCred',
 
   YTMTOKEN = 'YTMToken',
+  YTMCOOKIES = 'YTMCookies',
 }
 
 export enum SearchOptions {
