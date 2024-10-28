@@ -7,7 +7,7 @@ import CookieManager from '@react-native-cookies/cookies';
 
 import { useNoxSetting } from '@stores/useApp';
 import { logger } from '@utils/Logger';
-import GenericInputDialog from '../dialogs/GenericInputDialog';
+import GenericInputDialog from '../../dialogs/GenericInputDialog';
 import BiliSelectFavButtton from './BiliSelectFavButtton';
 import useBiliLogin, { BiliLogin } from './useBiliLoginApp';
 import useSnack from '@stores/useSnack';

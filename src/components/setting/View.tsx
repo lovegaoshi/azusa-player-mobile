@@ -13,7 +13,7 @@ import LanguageSettings from './LanguageSettings';
 import AboutSettings from './AboutSettings';
 import SplashSettings from './SplashSettings';
 import DownloadSettings from './DownloadSettings';
-import Bilibili from '../login/Bilibili';
+import Login from '../login/View';
 import { isAndroid, isIOS } from '@utils/RNUtils';
 
 enum NoxView {
@@ -165,7 +165,7 @@ const Settings = ({ headerBackVisible = true }: Props) => {
       />
       <Stack.Screen
         name={NoxView.LOGIN}
-        component={Bilibili}
+        component={Login}
         options={{ title: t('appDrawer.LoginName') }}
       />
     </Stack.Navigator>
