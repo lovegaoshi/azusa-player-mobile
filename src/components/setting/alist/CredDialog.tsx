@@ -47,6 +47,13 @@ const CredDialog = ({
         text={text}
         setText={setText}
       />
+      <NoxInput
+        autofocus={false}
+        label={t('AList.Password')}
+        selectTextOnFocus={false}
+        text={pwd}
+        setText={setPwd}
+      />
     </GenericDialog>
   );
 };
