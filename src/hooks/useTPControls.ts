@@ -15,6 +15,7 @@ import logger from '@utils/Logger';
 const setAppStore = appStore.setState;
 const regexResolveURLs: NoxUtils.RegexMatchSuggest<NoxMedia.Song> = [
   [ytbvideoFetch.regexResolveURLMatch, ytbvideoFetch.suggest],
+  [ytbvideoFetch.regexResolveURLMatch2, ytbvideoFetch.suggest],
 ];
 // 130,音乐综合 29,音乐现场 59,演奏 31,翻唱 193,MV 30,VOCALOID·UTAU 194,电音 28,原创音乐
 const musicTids = [130, 29, 59, 31, 193, 30, 194, 28];

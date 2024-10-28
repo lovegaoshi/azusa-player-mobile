@@ -5089,12 +5089,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:^22.8.0":
-  version: 22.8.0
-  resolution: "@types/node@npm:22.8.0"
+"@types/node@npm:^22.8.1":
+  version: 22.8.1
+  resolution: "@types/node@npm:22.8.1"
   dependencies:
     undici-types: "npm:~6.19.8"
-  checksum: 10c0/21eb10cee768d32e965d095415a4c6a7752f26bfcc34a8c1d7ab3989a6ab13a51761cc245909570d59c6bdacbdfd055d307dc6b201ac04305c57e65c1e7bf5be
+  checksum: 10c0/83550fdf72a7db5b55eceac3f4fb038844eaee20202bdd2297a8248370cfa08317bda1605b781a8043eda4f173b75e73632e652fc85509eb14dfef78fa17337f
   languageName: node
   linkType: hard
 
@@ -6101,7 +6101,7 @@ __metadata:
     "@types/he": "npm:^1.2.3"
     "@types/jest": "npm:^29.5.14"
     "@types/md5": "npm:^2.3.5"
-    "@types/node": "npm:^22.8.0"
+    "@types/node": "npm:^22.8.1"
     "@types/react": "npm:~18.3.12"
     "@types/react-native": "npm:^0.73.0"
     "@types/react-native-background-timer": "npm:^2.0.2"
@@ -6174,7 +6174,7 @@ __metadata:
     react-native-blob-util: "npm:^0.19.11"
     react-native-carplay: "npm:2.4.1-beta.0"
     react-native-clean-project: "npm:^4.0.3"
-    react-native-device-info: "npm:^13.2.0"
+    react-native-device-info: "npm:^14.0.0"
     react-native-dotenv: "npm:^3.4.11"
     react-native-draggable-flatlist: "npm:^4.0.1"
     react-native-gesture-handler: "npm:2.20.2"
@@ -6185,9 +6185,9 @@ __metadata:
     react-native-paper: "npm:^5.12.5"
     react-native-qrcode-svg: "npm:^6.3.12"
     react-native-reanimated: "npm:3.16.1"
-    react-native-safe-area-context: "npm:^4.11.1"
+    react-native-safe-area-context: "npm:^4.12.0"
     react-native-screens: "npm:3.35.0"
-    react-native-shadow-2: "npm:^7.1.0"
+    react-native-shadow-2: "npm:^7.1.1"
     react-native-share-menu: "git+https://github.com/Expensify/react-native-share-menu.git"
     react-native-svg: "npm:15.8.0"
     react-native-svga-player: "https://lovegaoshi@github.com/lovegaoshi/react-native-svga-player.git#commit=f8c6303fddb528a1a94d2ab4696c9318c0002cfd"
@@ -6205,10 +6205,9 @@ __metadata:
     text-encoding-polyfill: "npm:^0.6.7"
     typescript: "npm:~5.6.3"
     use-debounce: "npm:^10.0.4"
-    uuid: "npm:^10.0.0"
+    uuid: "npm:^11.0.1"
     web-streams-polyfill: "npm:^4.0.0"
     youtubei.js: "npm:^10.5.0"
-    ytdl-core: "https://lovegaoshi@github.com/lovegaoshi/rn-ytdl-core.git#commit=04425b36337705124202ed193703aea67fa26e97"
     zustand: "npm:^5.0.0"
   languageName: unknown
   linkType: soft
@@ -7922,13 +7921,6 @@ __metadata:
   version: 0.2.2
   resolution: "decode-uri-component@npm:0.2.2"
   checksum: 10c0/1f4fa54eb740414a816b3f6c24818fbfcabd74ac478391e9f4e2282c994127db02010ce804f3d08e38255493cfe68608b3f5c8e09fd6efc4ae46c807691f7a31
-  languageName: node
-  linkType: hard
-
-"decode-uri-component@npm:^0.4.1":
-  version: 0.4.1
-  resolution: "decode-uri-component@npm:0.4.1"
-  checksum: 10c0/a180bbdb5398ec8270d236a3ac07cb988bbf6097428481780b85840f088951dc0318a8d8f9d56796e1a322b55b29859cea29982f22f9b03af0bc60974c54e591
   languageName: node
   linkType: hard
 
@@ -9706,13 +9698,6 @@ __metadata:
   version: 1.1.0
   resolution: "filter-obj@npm:1.1.0"
   checksum: 10c0/071e0886b2b50238ca5026c5bbf58c26a7c1a1f720773b8c7813d16ba93d0200de977af14ac143c5ac18f666b2cfc83073f3a5fe6a4e996c49e0863d5500fccf
-  languageName: node
-  linkType: hard
-
-"filter-obj@npm:^5.1.0":
-  version: 5.1.0
-  resolution: "filter-obj@npm:5.1.0"
-  checksum: 10c0/716e8ad2bc352e206556b3e5695b3cdff8aab80c53ea4b00c96315bbf467b987df3640575100aef8b84e812cf5ea4251db4cd672bbe33b1e78afea88400c67dd
   languageName: node
   linkType: hard
 
@@ -14838,17 +14823,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"query-string@npm:^8.1.0":
-  version: 8.2.0
-  resolution: "query-string@npm:8.2.0"
-  dependencies:
-    decode-uri-component: "npm:^0.4.1"
-    filter-obj: "npm:^5.1.0"
-    split-on-first: "npm:^3.0.0"
-  checksum: 10c0/ad78256d5464ec80a4c5723c5f134ec4aa341fcc71e1458d2b4d4663aa441c0b0bbe7dcdda60e7f09e81969fd725fb7d6f9ba4e77fd621e11ce4c3ecfb9cdec0
-  languageName: node
-  linkType: hard
-
 "queue-microtask@npm:^1.2.2":
   version: 1.2.3
   resolution: "queue-microtask@npm:1.2.3"
@@ -15053,12 +15027,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-native-device-info@npm:^13.2.0":
-  version: 13.2.0
-  resolution: "react-native-device-info@npm:13.2.0"
+"react-native-device-info@npm:^14.0.0":
+  version: 14.0.0
+  resolution: "react-native-device-info@npm:14.0.0"
   peerDependencies:
     react-native: "*"
-  checksum: 10c0/7b9b230ce8b2ddcbcf7b9bc5917dee289731d00640dc793287de4377716dd9df4089db368be3e36897ffdfa6951b5b89872ccfb487e10402515a4e87098d4e79
+  checksum: 10c0/ede87521d4a59062ece6d481801ea97637a15b8d1175e8aa716152aa75fb87e2517aafb25e4cebff9f716e4ac029d0bb98f44805aacdce6343f51f30bdaa597a
   languageName: node
   linkType: hard
 
@@ -15211,13 +15185,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-native-safe-area-context@npm:^4.11.1":
-  version: 4.11.1
-  resolution: "react-native-safe-area-context@npm:4.11.1"
+"react-native-safe-area-context@npm:^4.12.0":
+  version: 4.12.0
+  resolution: "react-native-safe-area-context@npm:4.12.0"
   peerDependencies:
     react: "*"
     react-native: "*"
-  checksum: 10c0/58c5d19075134dc1b7b0aa53727d25b7d7399b05c7cfdc4af86bf038e08c5d04f2231b2d480cf811cc5140093388d7ed2d35d5514e8c2c184a432326361b9e36
+  checksum: 10c0/122e7e24de39371b107fcac7ecd6b62d41301a46c945c7a6b3a07c8b65d4cb9ebf58bf163bfecfd430b1bd8fdf61d4f319dac1812edd7986c00b7d2cc16da24c
   languageName: node
   linkType: hard
 
@@ -15234,15 +15208,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-native-shadow-2@npm:^7.1.0":
-  version: 7.1.0
-  resolution: "react-native-shadow-2@npm:7.1.0"
+"react-native-shadow-2@npm:^7.1.1":
+  version: 7.1.1
+  resolution: "react-native-shadow-2@npm:7.1.1"
   dependencies:
     colord: "npm:2.9.2"
   peerDependencies:
     react-native: "*"
     react-native-svg: ">=12.1.0"
-  checksum: 10c0/4f9e1069d1d56c12dacff77a89b8b020a07b85b706f3d94d9a4a1ac0f75665ba38eefc4daa8adf16652f5c1274dcb1bb9ec44f9fb4ff5059a936cb060b9a73c9
+  checksum: 10c0/279dc8da38528939e8067bf2e724840ea9a5bf490a1abb27bf58b03d01f9bc20622fbffe3e937550a076609c267961bbfbd1bc26b1218074ac2d34b73fc5b651
   languageName: node
   linkType: hard
 
@@ -16647,13 +16621,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"split-on-first@npm:^3.0.0":
-  version: 3.0.0
-  resolution: "split-on-first@npm:3.0.0"
-  checksum: 10c0/a1262eae12b68de235e1a08e011bf5b42c42621985ddf807e6221fb1e2b3304824913ae7019f18436b96b8fab8aef5f1ad80dedd2385317fdc51b521c3882cd0
-  languageName: node
-  linkType: hard
-
 "split-string@npm:^3.0.1, split-string@npm:^3.0.2":
   version: 3.1.0
   resolution: "split-string@npm:3.1.0"
@@ -17892,12 +17859,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"uuid@npm:^10.0.0":
-  version: 10.0.0
-  resolution: "uuid@npm:10.0.0"
+"uuid@npm:^11.0.1":
+  version: 11.0.1
+  resolution: "uuid@npm:11.0.1"
   bin:
-    uuid: dist/bin/uuid
-  checksum: 10c0/eab18c27fe4ab9fb9709a5d5f40119b45f2ec8314f8d4cf12ce27e4c6f4ffa4a6321dc7db6c515068fa373c075b49691ba969f0010bf37f44c37ca40cd6bf7fe
+    uuid: dist/esm/bin/uuid
+  checksum: 10c0/cd5a1d7eccfd6da80382ec88cfa28b68dce2c1c1402228b813fc0065ab8b29d20594cffeb67d850bc166ade677a6c35741072bd9dd0cc7d565c1fe8eca14ef22
   languageName: node
   linkType: hard
 
@@ -18473,15 +18440,6 @@ __metadata:
     tslib: "npm:^2.5.0"
     undici: "npm:^5.19.1"
   checksum: 10c0/4449c236d336e0e436364caf7791b175876cf8433583e666a4ae8e122490faffd9abb0346ee3c9946019098ab369384322fe309d38a27bdb6c28a50de69bb11a
-  languageName: node
-  linkType: hard
-
-"ytdl-core@https://lovegaoshi@github.com/lovegaoshi/rn-ytdl-core.git#commit=04425b36337705124202ed193703aea67fa26e97":
-  version: 0.0.0-development
-  resolution: "ytdl-core@https://lovegaoshi@github.com/lovegaoshi/rn-ytdl-core.git#commit=04425b36337705124202ed193703aea67fa26e97"
-  dependencies:
-    query-string: "npm:^8.1.0"
-  checksum: 10c0/898134f7fb6ed506e8b986aec91ab42333421f6628ea95205cb60fba18c8483a21cf4e1a3aac52152cc3631e696a3ffa1ed79fddd3c70594da14959cf3671c05
   languageName: node
   linkType: hard
 

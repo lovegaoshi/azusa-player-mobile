@@ -1,5 +1,4 @@
 const esModules = [
-  'ytdl-core',
   'query-string',
   'split-on-first',
   'filter-obj',

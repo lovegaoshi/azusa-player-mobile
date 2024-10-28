@@ -1,9 +1,9 @@
 import { biliApiLimiter } from './throttle';
 
-import { suggest as suggestNode } from './ytbvideo.node';
 import {
   resolveURL as resolveURLYtbi,
   fetchAudioInfo as fetchAudioInfoYtbi,
+  suggest as suggestYtbi,
 } from './ytbvideo.ytbi';
 import {
   resolveURL as resolveURLMuse,
@@ -40,6 +40,6 @@ export default {
   regexResolveURLMatch2: /^ytbvideo-/,
   resolveURL,
   refreshSong,
-  suggest: suggestNode,
+  suggest: suggestYtbi,
   export2URL,
 };

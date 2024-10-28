@@ -12,8 +12,15 @@ interface Props {
   setWebView: (val: boolean) => void;
 }
 
+interface LoginCode {
+  userCode: string;
+  deviceCode: string;
+  userUrl: string;
+  expiresIn: number;
+  interval: number;
+}
 const useGoogleTVOauth = ({ setWebView }: Props) => {
-  const [loginCodes, setLoginCodes] = useState({});
+  const [loginCodes, setLoginCodes] = useState<LoginCode>();
   const [userURL, setUserURL] = useState('');
   //www.google.com/device?user_code=LNQJ-HZCV
 

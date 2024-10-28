@@ -4,15 +4,19 @@ import { Button } from 'react-native-paper';
 import { WebView } from 'react-native-webview';
 import { useFocusEffect } from '@react-navigation/native';
 import CookieManager from '@react-native-cookies/cookies';
+import { get_option } from 'libmuse';
 
 import useGoogleTVOauth from '@components/login/google/useGoogleTVOauth';
 
 const jsCode = 'window.ReactNativeWebView.postMessage(document.cookie)';
+const auth = get_option('auth');
 
 const Explore = () => {
   const [webView, setWebView] = React.useState(false);
   const [cookies, setCookies] = React.useState<string[]>([]);
-  const { userURL, getNewLoginCode } = useGoogleTVOauth({ setWebView });
+  const { userURL, loginCodes, getNewLoginCode } = useGoogleTVOauth({
+    setWebView,
+  });
 
   const onMessage = (event: any) => {
     const { data } = event.nativeEvent;
@@ -31,6 +35,10 @@ const Explore = () => {
               value,
             });
           });
+          auth.load_token_with_code(
+            loginCodes!.deviceCode,
+            loginCodes!.interval,
+          );
           return true;
         }
         return false;
