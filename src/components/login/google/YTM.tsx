@@ -1,17 +1,24 @@
 import * as React from 'react';
-import { BackHandler, SafeAreaView } from 'react-native';
-import { Button } from 'react-native-paper';
+import { BackHandler, SafeAreaView, StyleSheet, View } from 'react-native';
+import { Button, Avatar, Text, ActivityIndicator } from 'react-native-paper';
 import { WebView } from 'react-native-webview';
 import { useFocusEffect } from '@react-navigation/native';
 import CookieManager from '@react-native-cookies/cookies';
-import { get_option } from 'libmuse';
+import { get_option, get_current_user } from 'libmuse';
+import { useTranslation } from 'react-i18next';
 
 import useGoogleTVOauth from '@components/login/google/useGoogleTVOauth';
+import { saveSecure as saveItem } from '@utils/ChromeStorageAPI';
+import { StorageKeys } from '@enums/Storage';
+import { useYTMLogin, User } from './useYTMLogin';
 
 const jsCode = 'window.ReactNativeWebView.postMessage(document.cookie)';
 const auth = get_option('auth');
 
-const Explore = () => {
+interface LoginProps {
+  refresh: () => void;
+}
+const Login = ({ refresh }: LoginProps) => {
   const [webView, setWebView] = React.useState(false);
   const [cookies, setCookies] = React.useState<string[]>([]);
   const { userURL, loginCodes, getNewLoginCode } = useGoogleTVOauth({
@@ -35,10 +42,9 @@ const Explore = () => {
               value,
             });
           });
-          auth.load_token_with_code(
-            loginCodes!.deviceCode,
-            loginCodes!.interval,
-          );
+          auth
+            .load_token_with_code(loginCodes!.deviceCode, loginCodes!.interval)
+            .then(t => saveItem(StorageKeys.YTMTOKEN, t).then(refresh));
           return true;
         }
         return false;
@@ -63,12 +69,7 @@ const Explore = () => {
     <SafeAreaView>
       <Button
         onPress={async () => {
-          const cookies = await CookieManager.get('https://youtube.com').then(
-            v =>
-              Object.values(v)
-                .map(cookie => `${cookie.name}=${cookie.value}`)
-                .join('; '),
-          );
+          console.log(await get_current_user());
         }}
       >
         Check
@@ -78,4 +79,73 @@ const Explore = () => {
   );
 };
 
+interface LoginPageProps {
+  user?: User;
+  logout: () => void;
+}
+const LoggedInPage = ({ user, logout }: LoginPageProps) => {
+  const { t } = useTranslation();
+
+  if (!user) return <></>;
+
+  const { handle, name, thumbnails } = user;
+
+  return (
+    <View style={styles.loggedInContainerStyle}>
+      <View style={styles.avatarContainerStyle}>
+        <Avatar.Image source={{ uri: thumbnails[0].url }} size={150} />
+        <View style={styles.avatarUsernameStyle}>
+          <Text variant="headlineSmall">{`${name}`}</Text>
+          <Text variant="headlineSmall">{`${handle}`}</Text>
+          <Button onPress={logout}>{t('Login.Logout')}</Button>
+        </View>
+      </View>
+      <Text>{t('Login.Disclaimer')}</Text>
+    </View>
+  );
+};
+
+const Explore = () => {
+  const { user, clear, initialized, refresh } = useYTMLogin();
+  if (!initialized) {
+    return <ActivityIndicator size={100} />;
+  }
+  return user ? (
+    <LoggedInPage
+      user={user}
+      logout={() => {
+        saveItem(StorageKeys.YTMTOKEN, null);
+        auth.token = null;
+        clear();
+      }}
+    />
+  ) : (
+    <Login refresh={refresh} />
+  );
+};
+
 export default Explore;
+
+/**
+          const cookies = await CookieManager.get('https://youtube.com').then(
+            v =>
+              Object.values(v)
+                .map(cookie => `${cookie.name}=${cookie.value}`)
+                .join('; '),
+          );
+
+ */
+
+const styles = StyleSheet.create({
+  loggedInContainerStyle: {
+    paddingHorizontal: 5,
+  },
+  avatarContainerStyle: {
+    flexDirection: 'row',
+    paddingLeft: 20,
+    paddingVertical: 10,
+  },
+  avatarUsernameStyle: {
+    paddingLeft: 10,
+  },
+});

@@ -24,6 +24,8 @@ export enum StorageKeys {
   AA_PERMISSION = 'AndroidAutoPermission',
   TANAKA_AMAZING_COMMODITIES = 'TanakaAmazingCommodities',
   ALIST_CRED = 'AlistCred',
+
+  YTMTOKEN = 'YTMToken',
 }
 
 export enum SearchOptions {

@@ -35,7 +35,7 @@ const LoggedInPage = ({ biliLogin }: LoginPageProps) => {
   return (
     <View style={styles.loggedInContainerStyle}>
       <View style={styles.avatarContainerStyle}>
-        <Avatar.Image source={{ uri: loginInfo.avatar }}></Avatar.Image>
+        <Avatar.Image source={{ uri: loginInfo.avatar }} />
         <View style={styles.avatarUsernameStyle}>
           <Text variant="headlineSmall">{loginInfo.name}</Text>
           <Button onPress={logout}>{t('Login.Logout')}</Button>
