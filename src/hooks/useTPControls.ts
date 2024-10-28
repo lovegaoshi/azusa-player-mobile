@@ -89,8 +89,7 @@ const prepareSkipToNext = async (mSkipToBiliSuggest = skipToBiliSuggest) => {
   ) {
     try {
       await mSkipToBiliSuggest();
-    } catch (e) {
-      console.warn('playsuggest', e);
+    } catch {
       // TODO: this will just grow infinitely. WTF was i thinking?
       await TrackPlayer.add(await songlistToTracklist([nextSong]));
     }
