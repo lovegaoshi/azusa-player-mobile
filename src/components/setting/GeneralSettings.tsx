@@ -57,6 +57,10 @@ const GEN_SETTING_BOOLEAN: SettingEntry[] = [
     settingName: 'noRepeat',
     settingCategory: 'GeneralSettings',
   },
+  {
+    settingName: 'preferYTMSuggest',
+    settingCategory: 'GeneralSettings',
+  },
 ];
 
 export default () => {
