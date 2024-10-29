@@ -17,10 +17,24 @@ const regexResolveURLs: NoxUtils.RegexMatchSuggest<NoxMedia.Song> = [
   [ytbvideoFetch.regexResolveURLMatch, ytbvideoFetch.suggest],
   [ytbvideoFetch.regexResolveURLMatch2, ytbvideoFetch.suggest],
 ];
+const regexResolveURLsYTM: NoxUtils.RegexMatchSuggest<NoxMedia.Song> = [
+  [ytbvideoFetch.regexResolveURLMatch, ytbvideoFetch.suggestYTM],
+  [ytbvideoFetch.regexResolveURLMatch2, ytbvideoFetch.suggestYTM],
+];
 // 130,音乐综合 29,音乐现场 59,演奏 31,翻唱 193,MV 30,VOCALOID·UTAU 194,电音 28,原创音乐
 const musicTids = [130, 29, 59, 31, 193, 30, 194, 28];
 
-const getBiliSuggest = async (skipLongVideo = true) => {
+interface GetBiliSuggest {
+  skipLongVideo?: boolean;
+  preferYTM?: boolean;
+}
+const getBiliSuggest = async ({
+  skipLongVideo = true,
+  preferYTM = true,
+}: GetBiliSuggest) => {
+  const finalRegexResolveURLs = preferYTM
+    ? regexResolveURLsYTM
+    : regexResolveURLs;
   const currentSong = (await TrackPlayer.getActiveTrack())?.song;
   if (!currentSong) throw new Error('[PlaySuggest] currenSong is not valid!');
 
@@ -56,7 +70,7 @@ const getBiliSuggest = async (skipLongVideo = true) => {
 
   return regexMatchOperations({
     song: currentSong,
-    regexOperations: regexResolveURLs.map(resolver => [
+    regexOperations: finalRegexResolveURLs.map(resolver => [
       resolver[0],
       (song: NoxMedia.Song) => resolver[1](song, filterMW),
     ]),
@@ -67,12 +81,17 @@ const getBiliSuggest = async (skipLongVideo = true) => {
 
 const skipToBiliSuggest = async (
   next = true,
-  skipLongVideo = useNoxSetting.getState().playerSetting.suggestedSkipLongVideo,
+  playlistSetting = useNoxSetting.getState().playerSetting,
 ) => {
   if (noxPlayingList.getState().playmode !== NoxRepeatMode.Suggest) {
     throw new Error('playmode is not bilisuggest.');
   }
-  const suggestedSong = [await getBiliSuggest(skipLongVideo)];
+  const suggestedSong = [
+    await getBiliSuggest({
+      skipLongVideo: playlistSetting.suggestedSkipLongVideo,
+      preferYTM: playlistSetting.preferYTMSuggest,
+    }),
+  ];
   if (next) {
     await TrackPlayer.add(await songlistToTracklist(suggestedSong));
     return;
@@ -163,7 +182,7 @@ export default () => {
   const fadeIntervalMs = useStore(appStore, state => state.fadeIntervalMs);
 
   const mSkipToBiliSuggest = (next = true) =>
-    skipToBiliSuggest(next, playerSetting.suggestedSkipLongVideo);
+    skipToBiliSuggest(next, playerSetting);
 
   const mPerformFade = (callback: () => void) =>
     performFade(callback, fadeIntervalMs);

@@ -4,6 +4,7 @@ import {
   resolveURL as resolveURLYtbi,
   fetchAudioInfo as fetchAudioInfoYtbi,
   suggest as suggestYtbi,
+  suggestYTM,
 } from './ytbvideo.ytbi';
 import {
   resolveURL as resolveURLMuse,
@@ -41,5 +42,6 @@ export default {
   resolveURL,
   refreshSong,
   suggest: suggestYtbi,
+  suggestYTM,
   export2URL,
 };

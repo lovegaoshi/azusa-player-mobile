@@ -3,7 +3,7 @@ import { Button, ActivityIndicator } from 'react-native-paper';
 import { useTranslation } from 'react-i18next';
 
 import { getBiliFavlist, GetFavlistRes } from '@utils/Bilibili/bilifavOperate';
-import GenericCheckDialog from '../dialogs/GenericCheckDialog';
+import GenericCheckDialog from '../../dialogs/GenericCheckDialog';
 import bilifavlistFetch from '@utils/mediafetch/bilifavlist';
 import { dummyPlaylist } from '@objects/Playlist';
 import usePlaylistBrowseTree from '@hooks/usePlaylistBrowseTree';

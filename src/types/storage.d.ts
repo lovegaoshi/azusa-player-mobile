@@ -48,6 +48,7 @@ declare global {
       skipSilence: boolean;
       parseEmbeddedArtwork: boolean;
       crossfade: number;
+      preferYTMSuggest: boolean;
 
       appID: string;
       language?: string;

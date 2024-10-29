@@ -1,81 +1,43 @@
-import * as React from 'react';
-import { BackHandler, SafeAreaView } from 'react-native';
+import { View, ScrollView } from 'react-native';
 import { Button } from 'react-native-paper';
-import { WebView } from 'react-native-webview';
-import { useFocusEffect } from '@react-navigation/native';
-import CookieManager from '@react-native-cookies/cookies';
-import { get_option } from 'libmuse';
+import { useEffect, useState } from 'react';
 
-import useGoogleTVOauth from '@components/login/google/useGoogleTVOauth';
+import { styles } from '@components/style';
+import { UseYTMExplore } from './useYTMExplore';
 
-const jsCode = 'window.ReactNativeWebView.postMessage(document.cookie)';
-const auth = get_option('auth');
+interface Props {
+  useYTMExplore: UseYTMExplore;
+}
+export default ({ useYTMExplore }: Props) => {
+  const [activeMood, setActiveMood] = useState('');
+  const { moods, refreshHome, initialize } = useYTMExplore;
 
-const Explore = () => {
-  const [webView, setWebView] = React.useState(false);
-  const [cookies, setCookies] = React.useState<string[]>([]);
-  const { userURL, loginCodes, getNewLoginCode } = useGoogleTVOauth({
-    setWebView,
-  });
-
-  const onMessage = (event: any) => {
-    const { data } = event.nativeEvent;
-    setCookies(data?.split(';'));
+  const onClickMood = (mood: string) => {
+    const newMood = mood === activeMood ? '' : mood;
+    setActiveMood(newMood);
+    refreshHome(newMood);
   };
 
-  useFocusEffect(
-    React.useCallback(() => {
-      const onBackPress = () => {
-        if (webView) {
-          setWebView(false);
-          cookies.forEach(cookie => {
-            const [name, value] = cookie.split('=');
-            CookieManager.set('https://youtube.com', {
-              name,
-              value,
-            });
-          });
-          auth.load_token_with_code(
-            loginCodes!.deviceCode,
-            loginCodes!.interval,
-          );
-          return true;
-        }
-        return false;
-      };
+  useEffect(() => {
+    initialize();
+  }, []);
 
-      const subscription = BackHandler.addEventListener(
-        'hardwareBackPress',
-        onBackPress,
-      );
-
-      return () => subscription.remove();
-    }, [webView]),
-  );
-
-  return webView ? (
-    <WebView
-      source={{ uri: userURL }}
-      injectedJavaScript={jsCode}
-      onMessage={onMessage}
-    />
-  ) : (
-    <SafeAreaView>
-      <Button
-        onPress={async () => {
-          const cookies = await CookieManager.get('https://youtube.com').then(
-            v =>
-              Object.values(v)
-                .map(cookie => `${cookie.name}=${cookie.value}`)
-                .join('; '),
-          );
-        }}
-      >
-        Check
-      </Button>
-      <Button onPress={getNewLoginCode}>Login</Button>
-    </SafeAreaView>
+  return (
+    <View>
+      <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+        {moods.map(mood => (
+          <View style={styles.rowView} key={mood.params}>
+            <Button
+              key={mood.name}
+              mode={mood.params === activeMood ? 'contained' : 'outlined'}
+              onPress={() => onClickMood(mood.params)}
+            >
+              {mood.name}
+            </Button>
+            <View style={{ width: 15 }} />
+          </View>
+        ))}
+      </ScrollView>
+    </View>
   );
 };
-
-export default Explore;

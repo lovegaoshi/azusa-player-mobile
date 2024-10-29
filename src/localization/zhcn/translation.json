@@ -134,6 +134,8 @@
     "prefetchTrackDesc": "预加载下一首歌（仅在歌曲缓存开启时有用）",
     "chatGPTResolveSongNameName": "ChatGPT找歌",
     "chatGPTResolveSongNameDesc": "TODO：用chatGPT解析歌名",
+    "preferYTMSuggestName": "优先使用YTM搜索",
+    "preferYTMSuggestDesc": "优先使用YTM搜索,而不是yt相关视频",
     "useSuggestionName": "b站搜索联想",
     "useSuggestionDesc": "搜索时向b站提交联想词请求",
     "noRepeatName": "歌单不重复",

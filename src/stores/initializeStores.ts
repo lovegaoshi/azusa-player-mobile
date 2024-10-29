@@ -2,11 +2,15 @@ import { NativeModules, Platform } from 'react-native';
 import { useNoxSetting } from './useApp';
 import { fetch } from '@react-native-community/netinfo';
 import i18next from 'i18next';
+import { get_option } from 'libmuse';
 
 import { initialize as initializeAppStore } from './appStore';
 import { initializeR128Gain } from '../utils/ffmpeg/r128Store';
 import { dataSaverPlaylist, initCache } from '../utils/Cache';
+import { getSecure as getItem } from '@utils/ChromeStorageAPI';
+import { StorageKeys } from '@enums/Storage';
 
+const auth = get_option('auth');
 const { NoxModule } = NativeModules;
 
 interface InitializeStores {
@@ -39,6 +43,7 @@ export const initializeStores = async ({
     default:
       break;
   }
+  await getItem(StorageKeys.YTMTOKEN).then(k => (auth.token = k));
   await initializeAppStore();
   await initializeR128Gain();
   const results = await initPlayer(val);
