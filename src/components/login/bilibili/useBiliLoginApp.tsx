@@ -115,6 +115,7 @@ export interface BiliLogin {
   getQRLoginReq: () => Promise<QRCodeReq>;
   loginQRVerification: () => Promise<boolean>;
   confirmWebQRCode: (SESSDATA: string, bili_jct: string) => Promise<void>;
+  init: () => void;
 }
 
 const useBiliLogin = (): BiliLogin => {
@@ -141,6 +142,12 @@ const useBiliLogin = (): BiliLogin => {
       setLoginInfo(res);
     }
     setInitialize(false);
+  };
+
+  const init = () => {
+    if (initialize) {
+      getBiliLoginStatus();
+    }
   };
 
   const clearQRLogin = () => {
@@ -295,10 +302,6 @@ const useBiliLogin = (): BiliLogin => {
     };
   });
 
-  React.useEffect(() => {
-    getBiliLoginStatus();
-  }, []);
-
   return {
     qrcode,
     loginInfo,
@@ -312,6 +315,7 @@ const useBiliLogin = (): BiliLogin => {
     getQRLoginReq,
     loginQRVerification,
     confirmWebQRCode,
+    init,
   };
 };
 

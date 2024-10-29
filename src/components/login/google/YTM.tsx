@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import { BackHandler, SafeAreaView, StyleSheet, View } from 'react-native';
 import { Button, Avatar, Text, ActivityIndicator } from 'react-native-paper';
 import { WebView } from 'react-native-webview';
@@ -10,7 +10,7 @@ import { useTranslation } from 'react-i18next';
 import useGoogleTVOauth from '@components/login/google/useGoogleTVOauth';
 import { saveSecure as saveItem } from '@utils/ChromeStorageAPI';
 import { StorageKeys } from '@enums/Storage';
-import { useYTMLogin, User } from './useYTMLogin';
+import { User, UseYTMLogin } from './useYTMLogin';
 
 const jsCode = 'window.ReactNativeWebView.postMessage(document.cookie)';
 const auth = get_option('auth');
@@ -19,8 +19,8 @@ interface LoginProps {
   refresh: () => void;
 }
 const Login = ({ refresh }: LoginProps) => {
-  const [webView, setWebView] = React.useState(false);
-  const [cookies, setCookies] = React.useState<string[]>([]);
+  const [webView, setWebView] = useState(false);
+  const [cookies, setCookies] = useState<string[]>([]);
   const { userURL, loginCodes, getNewLoginCode } = useGoogleTVOauth({
     setWebView,
   });
@@ -31,7 +31,7 @@ const Login = ({ refresh }: LoginProps) => {
   };
 
   useFocusEffect(
-    React.useCallback(() => {
+    useCallback(() => {
       const onBackPress = () => {
         if (webView) {
           setWebView(false);
@@ -106,8 +106,16 @@ const LoggedInPage = ({ user, logout }: LoginPageProps) => {
   );
 };
 
-const Explore = () => {
-  const { user, clear, initialized, refresh } = useYTMLogin();
+interface Props {
+  ytmLogin: UseYTMLogin;
+}
+const Explore = ({ ytmLogin }: Props) => {
+  const { user, clear, initialized, refresh, init } = ytmLogin;
+
+  useEffect(() => {
+    init();
+  }, []);
+
   if (!initialized) {
     return <ActivityIndicator size={100} />;
   }

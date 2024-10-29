@@ -9,15 +9,15 @@ import YTMExplore from './ytmusic/View';
 import SiteSelector from '../login/SiteSelector';
 import { Site } from '@enums/Network';
 
-const TestComponent = () => {
-  const ytmExplore = useYTMExplore();
-  return <YTMExplore useYTMExplore={ytmExplore} />;
-};
-
-const LoginComponent = (p: { loginSite: Site }) => {
+const LoginComponent = ({ loginSite }: { loginSite: Site }) => {
   const biliExplore = useBiliExplore();
   const ytmExplore = useYTMExplore();
-  return <BiliExplore useBiliExplore={biliExplore} />;
+  switch (loginSite) {
+    case Site.YTM:
+      return <YTMExplore useYTMExplore={ytmExplore} />;
+    default:
+      return <BiliExplore useBiliExplore={biliExplore} />;
+  }
 };
 
 export default () => {
