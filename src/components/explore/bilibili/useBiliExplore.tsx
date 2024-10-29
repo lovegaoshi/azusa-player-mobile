@@ -45,7 +45,6 @@ export default () => {
   }, []);
 
   const init = () => {
-    console.log('explore', loading);
     if (!loading) return;
     initData().then(() => setLoading(false));
   };

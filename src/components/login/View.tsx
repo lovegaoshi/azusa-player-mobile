@@ -3,7 +3,8 @@ import YTM from './google/YTM';
 import { Site } from '@enums/Network';
 import SiteSelector from './SiteSelector';
 import { useYTMLogin } from './google/useYTMLogin';
-import useBiliLogin, { BiliLogin } from './bilibili/useBiliLoginApp';
+import useBiliLogin from './bilibili/useBiliLoginApp';
+import { useAPM } from '@stores/usePersistStore';
 
 const LoginPage = ({ loginSite }: { loginSite: Site }) => {
   const ytmLogin = useYTMLogin();
@@ -17,4 +18,14 @@ const LoginPage = ({ loginSite }: { loginSite: Site }) => {
   }
 };
 
-export default () => <SiteSelector LoginComponent={LoginPage} />;
+export default () => {
+  const { loginPage, setLoginPage } = useAPM();
+
+  return (
+    <SiteSelector
+      LoginComponent={LoginPage}
+      defaultSite={loginPage}
+      onSiteChange={setLoginPage}
+    />
+  );
+};

@@ -9,6 +9,7 @@ import { initializeR128Gain } from '../utils/ffmpeg/r128Store';
 import { dataSaverPlaylist, initCache } from '../utils/Cache';
 import { getSecure as getItem } from '@utils/ChromeStorageAPI';
 import { StorageKeys } from '@enums/Storage';
+import { useAPM } from './usePersistStore';
 
 const auth = get_option('auth');
 const { NoxModule } = NativeModules;
@@ -46,6 +47,7 @@ export const initializeStores = async ({
   await getItem(StorageKeys.YTMTOKEN).then(k => (auth.token = k));
   await initializeAppStore();
   await initializeR128Gain();
+  await useAPM.persist.rehydrate();
   const results = await initPlayer(val);
   initCache({ max: results.storedPlayerSetting.cacheSize });
   if (

@@ -10,15 +10,19 @@ interface Props {
   iconSize?: number;
   iconTabStyle?: ViewStyle;
   containerStyle?: ViewStyle;
+  onSiteChange?: (site: Site) => void;
+  defaultSite?: Site;
 }
 
 export default ({
+  defaultSite = Site.Bilibili,
   LoginComponent,
   iconSize = 80,
   iconTabStyle = styles.iconTab,
   containerStyle = styles.container,
+  onSiteChange,
 }: Props) => {
-  const [loginSite, setLoginSite] = useState<Site>(Site.Bilibili);
+  const [loginSite, setLoginSite] = useState<Site>(defaultSite);
   const opacityValue = (v: Site, toSite = loginSite) =>
     toSite === v ? 1 : 0.2;
 
@@ -38,6 +42,7 @@ export default ({
 
   const setLoginSiteAnimated = (v: Site) => {
     setLoginSite(v);
+    onSiteChange?.(v);
     Animated.parallel(
       Sites.map(site =>
         Animated.timing(getAnimatedOpacityRef(site), {
