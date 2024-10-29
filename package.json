@@ -112,9 +112,9 @@
     "sp-react-native-in-app-updates": "^1.4.0",
     "text-encoding-polyfill": "^0.6.7",
     "use-debounce": "^10.0.4",
-    "uuid": "^11.0.1",
+    "uuid": "^11.0.2",
     "web-streams-polyfill": "^4.0.0",
-    "youtubei.js": "^10.5.0",
+    "youtubei.js": "^11.0.1",
     "zustand": "^5.0.0"
   },
   "resolutions": {
@@ -135,7 +135,7 @@
     "@types/he": "^1.2.3",
     "@types/jest": "^29.5.14",
     "@types/md5": "^2.3.5",
-    "@types/node": "^22.8.1",
+    "@types/node": "^22.8.4",
     "@types/react": "~18.3.12",
     "@types/react-native": "^0.73.0",
     "@types/react-native-background-timer": "^2.0.2",
