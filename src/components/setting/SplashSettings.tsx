@@ -141,7 +141,7 @@ export default () => {
                   : undefined
               }
               style={styles.splashCard}
-              resizeMode={'contain'}
+              contentFit={'contain'}
             />
           </Animated.View>
         ))
