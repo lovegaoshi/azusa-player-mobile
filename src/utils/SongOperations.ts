@@ -2,7 +2,7 @@ import { fetchPlayUrlPromise } from '../utils/mediafetch/resolveURL';
 import { customReqHeader, DEFAULT_UA } from '../utils/BiliFetch';
 import { logger } from '../utils/Logger';
 import NoxCache from '../utils/Cache';
-import playerSettingStore from '@stores/playerSettingStore';
+import { useNoxSetting } from '@stores/useApp';
 import { cacheResolvedURL } from '@stores/appStore';
 import { addR128Gain, getR128Gain } from '@utils/ffmpeg/r128Store';
 import { r128gain, setR128Gain } from '@utils/ffmpeg/ffmpeg';
@@ -10,14 +10,13 @@ import { Source } from '@enums/MediaFetch';
 
 export const DEFAULT_NULL_URL = 'NULL';
 export const NULL_TRACK = { url: DEFAULT_NULL_URL, urlRefreshTimeStamp: 0 };
-const { getState } = playerSettingStore;
 
 export const parseSongR128gain = async (
   song: NoxMedia.Song,
   fade = 0,
   init = -1,
 ) => {
-  const { playerSetting } = getState();
+  const { playerSetting } = useNoxSetting.getState();
   const cachedR128gain = getR128Gain(song);
   // HACK: hard code local file logic
   const cachedUrl = song.bvid?.startsWith?.('file://')
@@ -57,7 +56,7 @@ export const resolveUrl = async ({
 }: ResolveUrl) => {
   const updateMetadata = async () => {
     try {
-      const { playerSetting } = getState();
+      const { playerSetting } = useNoxSetting.getState();
       // HACK: local source will always be refetched,
       // as its album art needs to be cached to a file on disk
       return song.source === Source.local || playerSetting.updateLoadedTrack
