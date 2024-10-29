@@ -3,7 +3,7 @@ import { useRef, useState } from 'react';
 import { IconButton } from 'react-native-paper';
 
 import Icons from '../playlist/BiliSearch/Icons';
-import { Site, Sites } from './enum';
+import { Site, Sites } from '@enums/Network';
 
 interface Props {
   LoginComponent: (p: { loginSite: Site }) => JSX.Element;

@@ -7,13 +7,11 @@ import useYTMExplore from './ytmusic/useYTMExplore';
 import BiliExplore from './bilibili/View';
 import YTMExplore from './ytmusic/View';
 import SiteSelector from '../login/SiteSelector';
-import { Site } from '../login/enum';
+import { Site } from '@enums/Network';
 
 const TestComponent = () => {
   const ytmExplore = useYTMExplore();
-  return (
-    <YTMExplore moods={ytmExplore.moods} processMood={ytmExplore.refreshHome} />
-  );
+  return <YTMExplore useYTMExplore={ytmExplore} />;
 };
 
 const LoginComponent = (p: { loginSite: Site }) => {

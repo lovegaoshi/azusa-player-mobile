@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { useEffect } from 'react';
 import {
   View,
   ScrollView,
@@ -29,7 +29,10 @@ export default ({ style, useBiliExplore }: Props) => {
     biliMusicTop,
     biliMusicHot,
     biliMusicNew,
+    init,
   } = useBiliExplore;
+
+  useEffect(() => init, []);
 
   if (loading) {
     return (

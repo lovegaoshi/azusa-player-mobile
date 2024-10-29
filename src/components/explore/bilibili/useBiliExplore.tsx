@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { useState, useCallback } from 'react';
 
 import { fetchDynamic } from '@utils/mediafetch/biliDynamic';
 import { fetchRanking } from '@utils/mediafetch/biliRanking';
@@ -16,16 +16,17 @@ export interface UseBiliExplore {
   refreshing: boolean;
   loading: boolean;
   onRefresh: () => void;
+  init: () => void;
 }
 
 export default () => {
-  const [biliDynamic, setBiliDynamic] = React.useState<BiliCatSongs>({});
-  const [biliRanking, setBiliRanking] = React.useState<BiliCatSongs>({});
-  const [biliMusicTop, setBiliMusicTop] = React.useState<NoxMedia.Song[]>([]);
-  const [biliMusicHot, setBiliMusicHot] = React.useState<NoxMedia.Song[]>([]);
-  const [biliMusicNew, setBiliMusicNew] = React.useState<NoxMedia.Song[]>([]);
-  const [refreshing, setRefreshing] = React.useState(false);
-  const [loading, setLoading] = React.useState(true);
+  const [biliDynamic, setBiliDynamic] = useState<BiliCatSongs>({});
+  const [biliRanking, setBiliRanking] = useState<BiliCatSongs>({});
+  const [biliMusicTop, setBiliMusicTop] = useState<NoxMedia.Song[]>([]);
+  const [biliMusicHot, setBiliMusicHot] = useState<NoxMedia.Song[]>([]);
+  const [biliMusicNew, setBiliMusicNew] = useState<NoxMedia.Song[]>([]);
+  const [refreshing, setRefreshing] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   const initData = async () =>
     Promise.all([
@@ -36,17 +37,17 @@ export default () => {
       fetchMusicNew().then(setBiliMusicNew),
     ]);
 
-  const onRefresh = React.useCallback(() => {
+  const onRefresh = useCallback(() => {
     setRefreshing(true);
     fetchDynamic()
       .then(setBiliDynamic)
       .then(() => setRefreshing(false));
   }, []);
 
-  React.useEffect(() => {
+  const init = () => {
     if (!loading) return;
     initData().then(() => setLoading(false));
-  }, []);
+  };
 
   return {
     loading,
@@ -57,5 +58,6 @@ export default () => {
     biliMusicTop,
     biliMusicHot,
     biliMusicNew,
+    init,
   };
 };

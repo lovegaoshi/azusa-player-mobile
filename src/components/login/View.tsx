@@ -1,6 +1,6 @@
 import Bilibili from './bilibili/Bilibili';
 import YTM from './google/YTM';
-import { Site } from './enum';
+import { Site } from '@enums/Network';
 import SiteSelector from './SiteSelector';
 
 const LoginPage = ({ loginSite }: { loginSite: Site }) => {
