@@ -5027,6 +5027,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/lodash@npm:^4":
+  version: 4.17.12
+  resolution: "@types/lodash@npm:4.17.12"
+  checksum: 10c0/106008f628ea3c74ed7ee7842dee79e230c84e3721ac38c293700031adb5bd130113048c22f476dbde0d0c119506b0fc447d4bd62eca922682d11e00e1377967
+  languageName: node
+  linkType: hard
+
 "@types/lodash@npm:^4.14.53":
   version: 4.17.10
   resolution: "@types/lodash@npm:4.17.10"
@@ -6100,6 +6107,7 @@ __metadata:
     "@types/d3": "npm:^7.4.3"
     "@types/he": "npm:^1.2.3"
     "@types/jest": "npm:^29.5.14"
+    "@types/lodash": "npm:^4"
     "@types/md5": "npm:^2.3.5"
     "@types/node": "npm:^22.8.4"
     "@types/react": "npm:~18.3.12"
@@ -6156,6 +6164,7 @@ __metadata:
     jest: "npm:^29.7.0"
     js-base64: "npm:^3.7.7"
     libmuse: "https://github.com/lovegaoshi/muse.git#commit=0bffe2319baf825037bece6869d360d6d307eb72"
+    lodash: "npm:^4.17.21"
     lottie-react-native: "npm:7.0.0"
     lru-cache: "npm:7.14.0"
     md5: "npm:^2.3.0"

@@ -1,16 +1,60 @@
 import { View, ScrollView } from 'react-native';
-import { Button } from 'react-native-paper';
+import { ActivityIndicator, Button } from 'react-native-paper';
 import { useEffect, useState } from 'react';
+import _ from 'lodash';
+import { get_playlist, MixedContent, get_album, MixedItem } from 'libmuse';
 
 import { styles } from '@components/style';
 import { UseYTMExplore } from './useYTMExplore';
+import { YTSongRow } from '../SongRow';
+import { fetchYtmPlaylist } from '@utils/mediafetch/ytbPlaylist.muse';
+
+interface ContentProps {
+  content: MixedContent;
+  key?: string;
+}
+
+const YTFlatSongTransform = (v: any) =>
+  v.map((i: any) => ({
+    cover: '',
+    name: i.title,
+    getPlaylist: () => fetchYtmPlaylist(i),
+  }));
+
+const YTPlaylistTransform = (v: any[]) =>
+  v.map(i => ({
+    cover: _.last(i?.thumbnails as any[])?.url,
+    name: i?.title,
+    singer: i.description,
+    getPlaylist: async () => {
+      return { songs: await fetchYtmPlaylist(i?.playlistId) };
+    },
+  }));
+
+const YTMixedContent = ({ content, key }: ContentProps) => {
+  if (!_.isArray(content.contents)) {
+    return <></>;
+  }
+  switch (content.contents[0]?.type) {
+    case 'playlist':
+      return (
+        <YTSongRow
+          songs={YTPlaylistTransform(content.contents)}
+          title={content.title!}
+        />
+      );
+    default:
+      console.log('not supported!', content);
+      return <></>;
+  }
+};
 
 interface Props {
   useYTMExplore: UseYTMExplore;
 }
 export default ({ useYTMExplore }: Props) => {
   const [activeMood, setActiveMood] = useState('');
-  const { moods, refreshHome, initialize } = useYTMExplore;
+  const { moods, refreshHome, initialize, contents } = useYTMExplore;
 
   const onClickMood = (mood: string) => {
     const newMood = mood === activeMood ? '' : mood;
@@ -37,6 +81,18 @@ export default ({ useYTMExplore }: Props) => {
             <View style={{ width: 15 }} />
           </View>
         ))}
+      </ScrollView>
+      <View style={{ height: 10 }} />
+      <ScrollView>
+        {contents ? (
+          contents.map(content => (
+            <YTMixedContent content={content} key={content.browseId!!} />
+          ))
+        ) : (
+          <View style={styles.alignMiddle}>
+            <ActivityIndicator size={100} />
+          </View>
+        )}
       </ScrollView>
     </View>
   );

@@ -1,7 +1,6 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import { IconButton } from 'react-native-paper';
-import { useNavigation } from '@react-navigation/native';
 import { getDrawerStatusFromState } from '@react-navigation/drawer';
 
 import { NoxRoutes } from '@enums/Routes';
@@ -9,6 +8,7 @@ import { useNoxSetting } from '@stores/useApp';
 import { BottomTabRouteIcons as RouteIcons } from '@enums/BottomTab';
 import { useIsLandscape } from '@hooks/useOrientation';
 import { isIOS } from '@utils/RNUtils';
+import useNavigation from '@hooks/useNavigation';
 
 interface IconProps {
   icon: string;
@@ -67,24 +67,15 @@ const NoxAndroidBottomTab = ({ navigation }: NoxComponent.NavigationProps2) => {
           />
           <BottomIconButton
             icon={renderIcon(RouteIcons.music)}
-            onPress={() => {
-              navigationGlobal.navigate(NoxRoutes.PlayerHome as never);
-              setRoute(RouteIcons.music);
-            }}
+            onPress={() => navigationGlobal.navigate(NoxRoutes.PlayerHome)}
           />
           <BottomIconButton
             icon={renderIcon(RouteIcons.explore)}
-            onPress={() => {
-              navigationGlobal.navigate(NoxRoutes.Explore as never);
-              setRoute(RouteIcons.explore);
-            }}
+            onPress={() => navigationGlobal.navigate(NoxRoutes.Explore)}
           />
           <BottomIconButton
             icon={renderIcon(RouteIcons.setting)}
-            onPress={() => {
-              navigationGlobal.navigate(NoxRoutes.Settings as never);
-              setRoute(RouteIcons.setting);
-            }}
+            onPress={() => navigationGlobal.navigate(NoxRoutes.Settings)}
           />
         </View>
       </View>

@@ -9,12 +9,12 @@ import {
 import { Text } from 'react-native-paper';
 import { Image } from 'expo-image';
 import { useTranslation } from 'react-i18next';
-import { useNavigation } from '@react-navigation/native';
 
 import { chunkArray } from '@utils/Utils';
 import { useNoxSetting } from '@stores/useApp';
 import usePlayback from '@hooks/usePlayback';
 import { NoxRoutes } from '@enums/Routes';
+import useNavigation from '@hooks/useNavigation';
 
 export interface BiliCatSongs {
   [key: number]: NoxMedia.Song[];
@@ -56,7 +56,7 @@ export const BiliSongCard = ({
             <TouchableOpacity
               style={{ height: 70, flexDirection: 'row' }}
               onPress={() => {
-                navigationGlobal.navigate(NoxRoutes.Playlist as never);
+                navigationGlobal.navigate(NoxRoutes.Playlist);
                 playAsSearchList({
                   songs: totalSongs ?? songs,
                   song: item,

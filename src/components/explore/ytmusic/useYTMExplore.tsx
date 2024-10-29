@@ -1,8 +1,8 @@
 import { useState } from 'react';
-import { get_home, Home, Mood } from 'libmuse';
+import { get_home, Home, Mood, get_playlist } from 'libmuse';
 
 export interface UseYTMExplore {
-  content?: Home['results'];
+  contents?: Home['results'];
   moods: Mood[];
   continuation?: Home['continuation'];
   refreshHome: (params?: string) => Promise<Home>;
@@ -27,12 +27,11 @@ const useYTMExplore = () => {
   const refreshHome = async (params?: string) => {
     const homedata = await get_home({ params });
     setHomedata(homedata);
-    console.log(homedata.results);
     return homedata;
   };
 
   return {
-    content: homedata?.results,
+    contents: homedata?.results,
     moods,
     continuation: homedata?.continuation,
     refreshHome,
