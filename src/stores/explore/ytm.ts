@@ -15,7 +15,11 @@ export const useYTMExplore = create<YTMExplore>((set, get) => ({
   moods: [],
   loading: true,
   initialize: async () => {
-    const homedata = await get().refreshHome();
+    const { refreshHome, loading } = get();
+    if (!loading) {
+      return;
+    }
+    const homedata = await refreshHome();
     set({
       homedata,
       moods: homedata.moods,
