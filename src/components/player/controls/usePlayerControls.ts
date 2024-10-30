@@ -144,10 +144,7 @@ export default () => {
     }
     if (event.state !== State.Ready) return;
     updateCurrentSongMetadata();
-  });
-
-  useTrackPlayerEvents([Event.PlaybackActiveTrackChanged], async event => {
-    const song = event.track?.song as NoxMedia.Song;
+    const song = (await TrackPlayer.getActiveTrack())?.song as NoxMedia.Song;
     const newABRepeat = getABRepeatRaw(song.id);
     logger.debug(`[SongReady] logging ABRepeat as ${newABRepeat}`);
     setABRepeat(newABRepeat);
