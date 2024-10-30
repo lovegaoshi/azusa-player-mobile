@@ -175,17 +175,20 @@ export async function PlaybackService() {
         });
         lastBiliHeartBeat = heartBeatReq;
       }
-      // to resolve bilibili media stream URLs on the fly, TrackPlayer.load is used to
-      // replace the current track's url. its not documented? >:/
       if (
         event.index !== undefined &&
         new Date().getTime() - event.track.urlRefreshTimeStamp > 3600000
       ) {
         try {
+          logger.debug(`[ResolveURL] re-resolving track ${event.track?.title}`);
           const song = event.track.song as NoxMedia.Song;
           const updatedMetadata = await resolveAndCache({ song });
           const currentTrack = await TrackPlayer.getActiveTrack();
-          await TrackPlayer.load({ ...currentTrack, ...updatedMetadata });
+          await TrackPlayer.load({
+            ...currentTrack,
+            ...updatedMetadata,
+            urlRefreshTimeStamp: new Date().getTime(),
+          });
           if (playerErrored) {
             TrackPlayer.play();
           }
