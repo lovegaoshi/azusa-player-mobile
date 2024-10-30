@@ -150,7 +150,7 @@ export const BiliSongsArrayTabCard = ({
       >
         {splicedSongs.map((k, i) => (
           <BiliSongCard
-            key={`BiliRankTab${k[0].id}`}
+            key={`BiliRankTab${k[0].id ?? i}`}
             songs={k}
             totalSongs={songs}
           />
