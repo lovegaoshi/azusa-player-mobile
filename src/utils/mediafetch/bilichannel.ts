@@ -12,6 +12,7 @@ import { logger } from '../Logger';
 import { fetchAwaitBiliPaginatedAPI } from './paginatedbili';
 import { awaitLimiter } from './throttle';
 import { getDm } from '../Bilibili/bilidm';
+import { getWebid } from '../Bilibili/biliWebid';
 import { biliShazamOnSonglist } from './bilishazam';
 import { timestampToSeconds } from '../Utils';
 import SongTS from '@objects/Song';
@@ -39,7 +40,7 @@ const fastSearchResolveBVID = (bvobjs: any[]) =>
     });
   });
 
-export const fetchBiliChannelList = (
+export const fetchBiliChannelList = async (
   url: string,
   progressEmitter: NoxUtils.ProgressEmitter = () => undefined,
   favList: string[] = [],
@@ -59,7 +60,7 @@ export const fetchBiliChannelList = (
     searchAPI += `&keyword=${kwVal}`;
   }
   return fetchAwaitBiliPaginatedAPI({
-    url: searchAPI + getDm(),
+    url: `${searchAPI}${getDm()}${await getWebid(mid)}`,
     getMediaCount: data => data.page.count,
     getPageSize: data => data.page.ps,
     getItems: js => js.data.list.vlist,
