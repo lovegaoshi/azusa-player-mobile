@@ -79,3 +79,4 @@ test.js
 sentry.properties
 .yarn/install-state.gz
 test.mjs
+.vscode/settings.json

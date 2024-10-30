@@ -2,7 +2,14 @@ import { View, ScrollView } from 'react-native';
 import { ActivityIndicator, Button } from 'react-native-paper';
 import { useEffect, useState } from 'react';
 import _ from 'lodash';
-import { get_playlist, MixedContent, get_album, MixedItem } from 'libmuse';
+import {
+  get_playlist,
+  MixedContent,
+  get_album,
+  MixedItem,
+  ParsedPlaylist,
+  ParsedAlbum,
+} from 'libmuse';
 
 import { styles } from '@components/style';
 import { UseYTMExplore } from './useYTMExplore';
@@ -21,13 +28,23 @@ const YTFlatSongTransform = (v: any) =>
     getPlaylist: () => fetchYtmPlaylist(i),
   }));
 
-const YTPlaylistTransform = (v: any[]) =>
+const YTPlaylistTransform = (v: ParsedPlaylist[]) =>
   v.map(i => ({
-    cover: _.last(i?.thumbnails as any[])?.url,
+    cover: _.last(i?.thumbnails)?.url!,
     name: i?.title,
-    singer: i.description,
+    singer: i.description!,
     getPlaylist: async () => {
       return { songs: await fetchYtmPlaylist(i?.playlistId) };
+    },
+  }));
+
+const YTAlbumTransform = (v: ParsedAlbum[]) =>
+  v.map(i => ({
+    cover: _.last(i?.thumbnails)?.url!,
+    name: i?.title,
+    singer: i.album_type!,
+    getPlaylist: async () => {
+      return { songs: await fetchYtmPlaylist(i?.audioPlaylistId) };
     },
   }));
 
@@ -39,10 +56,18 @@ const YTMixedContent = ({ content, key }: ContentProps) => {
     case 'playlist':
       return (
         <YTSongRow
-          songs={YTPlaylistTransform(content.contents)}
+          songs={YTPlaylistTransform(content.contents as ParsedPlaylist[])}
           title={content.title!}
         />
       );
+    case 'album':
+      return (
+        <YTSongRow
+          songs={YTAlbumTransform(content.contents as ParsedAlbum[])}
+          title={content.title!}
+        />
+      );
+    case 'flat-song':
     default:
       console.log('not supported!', content);
       return <></>;
