@@ -24,7 +24,8 @@ import { setTPR128Gain } from './ffmpeg/ffmpeg';
 import { NULL_TRACK } from '@objects/Song';
 import { isAndroid, isIOS } from './RNUtils';
 
-const { getState, setState } = appStore;
+// TODO: this is now a circular dependency. fix it
+const { getState, setState } = appStore ?? {};
 const animatedVolume = new Animated.Value(1);
 
 animatedVolume.addListener(state => TrackPlayer.setVolume(state.value));
