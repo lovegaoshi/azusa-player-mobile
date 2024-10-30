@@ -17,7 +17,7 @@ const getHiResThumbnail = (thumbnails?: Thumbnail[]) => {
 
 export const resolveURL = async (song: NoxMedia.Song, iOS = false) => {
   logger.debug(`[ytbi.js] fetch YTB playURL promise:${song.bvid}`);
-  const yt = await ytClient;
+  const yt = await ytClient();
   const extractedVideoInfo = await yt.getBasicInfo(song.bvid, 'IOS');
   const maxAudioQualityStream = extractedVideoInfo.chooseFormat({
     quality: 'best',
@@ -38,6 +38,7 @@ export const suggestYTM = async (
   song: NoxMedia.Song,
   filterMW = <T>(v: T[]) => v[0],
 ) => {
+  console.log('ytm suggest2');
   const yt = await ytClientWeb;
   const videoInfo = await yt.music.getUpNext(song.bvid);
   const relatedVideos = videoInfo.contents as PlaylistPanelVideo[];
@@ -65,6 +66,7 @@ export const suggest = async (
   song: NoxMedia.Song,
   filterMW = <T>(v: T[]) => v[0],
 ) => {
+  console.log('ytm suggest');
   const yt = await ytClientWeb;
   const videoInfo = await yt.getInfo(song.bvid);
   try {
