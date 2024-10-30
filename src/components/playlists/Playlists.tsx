@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { IconButton, Text, TouchableRipple } from 'react-native-paper';
-import { useNavigation } from '@react-navigation/native';
 import { Pressable, View, StyleSheet } from 'react-native';
 import DraggableFlatList, {
   ScaleDecorator,
@@ -17,7 +16,7 @@ import ShuffleAllButton from '@components/playlists/ShuffleAllButton';
 import TimerButton from '@components/playlists/TimerButton';
 import PlaylistItem from '@components/playlists/PlaylistItem';
 import usePlaylistBrowseTree from '@hooks/usePlaylistBrowseTree';
-import { BottomTabRouteIcons as RouteIcons } from '@enums/BottomTab';
+import useNavigation from '@hooks/useNavigation';
 
 interface NewButtonProps {
   setNewPlaylistDialogOpen: (v: boolean) => void;
@@ -50,7 +49,6 @@ export default () => {
   const setCurrentPlaylist = useNoxSetting(state => state.setCurrentPlaylist);
   const setPlaylistIds = useNoxSetting(state => state.setPlaylistIds);
   const scroll = useNoxSetting(state => state.incSongListScrollCounter);
-  const setRoute = useNoxSetting(state => state.setBottomTabRoute);
   const { removePlaylist } = usePlaylistBrowseTree();
   const { TwoWayAlert } = useAlert();
   // HACK: I know its bad! But somehow this hook isnt updating in its own
@@ -70,8 +68,7 @@ export default () => {
   };
 
   const goToPlaylist = (playlistId: string) => {
-    navigation.navigate(NoxRoutes.Playlist as never);
-    setRoute(RouteIcons.music);
+    navigation.navigate(NoxRoutes.Playlist);
     if (currentPlaylist.id === playlistId) {
       scroll();
     } else {
@@ -131,7 +128,7 @@ export default () => {
           {false && (
             <IconButton
               icon={'cog'}
-              onPress={() => navigation.navigate(NoxRoutes.Settings as never)}
+              onPress={() => navigation.navigate(NoxRoutes.Settings)}
             />
           )}
         </View>

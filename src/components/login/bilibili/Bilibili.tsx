@@ -99,18 +99,22 @@ const LoginPage = ({
   );
 };
 
-export default () => {
+interface Props {
+  biliLogin: BiliLogin;
+}
+
+export default ({ biliLogin }: Props) => {
   const { t } = useTranslation();
   const playerStyle = useNoxSetting(state => state.playerStyle);
   const appRefresh = useNoxSetting(state => state.appRefresh);
   const [inputCookieVisible, setInputCookieVisible] = React.useState(false);
-  const biliLogin = useBiliLogin();
   const {
     loginInfo,
     initialize,
     clearQRLogin,
     getBiliLoginStatus,
     loginQRVerification,
+    init,
   } = biliLogin;
 
   const manualInputCookies = async (input: { [key: string]: string }) => {
@@ -152,6 +156,7 @@ export default () => {
   };
 
   React.useEffect(() => {
+    init();
     if (appRefresh) return;
     loginQRVerification();
   }, []);

@@ -87,7 +87,7 @@ const AppOpenSplash = ({ setIsSplashReady }: Props) => {
         <Image
           source={randomSplash[1]()}
           style={styles.fullscreen}
-          resizeMode={'contain'}
+          contentFit={'contain'}
         />
       );
   }

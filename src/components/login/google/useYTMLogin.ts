@@ -11,6 +11,15 @@ export interface User {
     width: number;
   }[];
 }
+
+export interface UseYTMLogin {
+  user: User | undefined;
+  clear: () => void;
+  refresh: () => void;
+  initialized: boolean;
+  init: () => void;
+}
+
 export const useYTMLogin = () => {
   const [user, setUser] = useState<User>();
   const [initialized, setInit] = useState(false);
@@ -20,9 +29,11 @@ export const useYTMLogin = () => {
       .then(setUser)
       .finally(() => setInit(true));
 
-  useEffect(() => {
-    refresh();
-  }, []);
+  const init = () => {
+    if (!initialized) {
+      refresh();
+    }
+  };
 
-  return { user, clear: () => setUser(undefined), refresh, initialized };
+  return { user, clear: () => setUser(undefined), refresh, initialized, init };
 };

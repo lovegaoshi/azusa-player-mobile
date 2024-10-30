@@ -4,7 +4,6 @@ import { ProgressBar } from 'react-native-paper';
 import { View, StyleSheet, GestureResponderEvent } from 'react-native';
 import { useTranslation } from 'react-i18next';
 import ShareMenu, { ShareCallback } from 'react-native-share-menu';
-import { useNavigation } from '@react-navigation/native';
 
 import { NoxRoutes } from '@enums/Routes';
 import { useNoxSetting } from '@stores/useApp';
@@ -18,6 +17,7 @@ import AutoComplete from '@components/commonui/AutoComplete';
 import BiliKwSuggest from '@utils/Bilibili/BiliKwSuggest';
 import { SearchOptions } from '@enums/Storage';
 import { isAndroid } from '@utils/RNUtils';
+import useNavigation from '@hooks/useNavigation';
 
 interface SharedItem {
   mimeType: string;
@@ -79,7 +79,7 @@ export default ({
   };
 
   const handleExternalSearch = (data: string) => {
-    navigationGlobal.navigate(NoxRoutes.Playlist as never);
+    navigationGlobal.navigate(NoxRoutes.Playlist);
     return handleSearch(data);
   };
 

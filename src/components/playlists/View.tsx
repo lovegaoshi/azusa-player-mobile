@@ -1,7 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect } from 'react';
 import { IconButton, Divider, Text, TouchableRipple } from 'react-native-paper';
-import { useNavigation } from '@react-navigation/native';
 import { View, ImageBackground, StyleSheet, Linking } from 'react-native';
 import { useTranslation } from 'react-i18next';
 
@@ -11,6 +10,7 @@ import { NoxRoutes } from '@enums/Routes';
 import { logger } from '@utils/Logger';
 import Playlists from './Playlists';
 import { BottomTabRouteIcons as RouteIcons } from '@enums/BottomTab';
+import useNavigation from '@hooks/useNavigation';
 
 interface Props {
   view: NoxRoutes;
@@ -21,14 +21,10 @@ interface Props {
 const RenderDrawerItem = ({ view, icon, text, routeIcon }: Props) => {
   const navigation = useNavigation();
   const { t } = useTranslation();
-  const setRoute = useNoxSetting(state => state.setBottomTabRoute);
 
   return (
     <TouchableRipple
-      onPress={() => {
-        navigation.navigate(view as never);
-        if (routeIcon) setRoute(routeIcon);
-      }}
+      onPress={() => navigation.navigate(view, routeIcon !== undefined)}
     >
       <View style={styles.drawerItemContainer}>
         <IconButton icon={icon} size={32} />
@@ -69,7 +65,7 @@ export default (props: any) => {
     function deepLinkHandler(data: { url: string }) {
       if (data.url === 'trackplayer://notification.click') {
         logger.debug('[Drawer] click from notification; navigate to home');
-        navigation.navigate(NoxRoutes.PlayerHome as never);
+        navigation.navigate(NoxRoutes.PlayerHome);
       }
     }
 

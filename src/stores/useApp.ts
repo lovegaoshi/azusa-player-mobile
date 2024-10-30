@@ -18,7 +18,6 @@ import {
 } from '@utils/ChromeStorage';
 import { StorageKeys, SearchOptions } from '@enums/Storage';
 import { DefaultSetting } from '@objects/Storage';
-import { setPlayerSetting as setPlayerSettingVanilla } from './playerSettingStore';
 import { savePlayerStyle } from '@utils/StyleStorage';
 import { createStyle } from '@components/style';
 import { getABRepeatRaw } from './appStore';
@@ -272,7 +271,6 @@ export const useNoxSetting = create<NoxSetting>((set, get) => ({
   setPlayerSetting: val => {
     const newPlayerSetting = { ...get().playerSetting, ...val };
     set({ playerSetting: newPlayerSetting });
-    setPlayerSettingVanilla(newPlayerSetting);
     return saveSettings(newPlayerSetting);
   },
 
@@ -363,7 +361,6 @@ export const useNoxSetting = create<NoxSetting>((set, get) => ({
       lyricMapping: val.lyricMapping,
       searchOption: val.defaultSearchOptions,
     });
-    setPlayerSettingVanilla(initializedPlayerSetting);
     setPlayingList(playingList.songList);
     setPlayingIndex(0, val.lastPlaylistId[1]);
 

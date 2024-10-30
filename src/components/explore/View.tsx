@@ -8,20 +8,22 @@ import BiliExplore from './bilibili/View';
 import YTMExplore from './ytmusic/View';
 import SiteSelector from '../login/SiteSelector';
 import { Site } from '@enums/Network';
+import { useAPM } from '@stores/usePersistStore';
 
-const TestComponent = () => {
-  const ytmExplore = useYTMExplore();
-  return <YTMExplore useYTMExplore={ytmExplore} />;
-};
-
-const LoginComponent = (p: { loginSite: Site }) => {
+const LoginComponent = ({ loginSite }: { loginSite: Site }) => {
   const biliExplore = useBiliExplore();
   const ytmExplore = useYTMExplore();
-  return <BiliExplore useBiliExplore={biliExplore} />;
+  switch (loginSite) {
+    case Site.YTM:
+      return <YTMExplore useYTMExplore={ytmExplore} />;
+    default:
+      return <BiliExplore useBiliExplore={biliExplore} />;
+  }
 };
 
 export default () => {
   const playerStyle = useNoxSetting(state => state.playerStyle);
+  const { explorePage, setExplorePage } = useAPM();
 
   return (
     <SiteSelector
@@ -32,6 +34,8 @@ export default () => {
       iconSize={30}
       iconTabStyle={styles.iconTab}
       LoginComponent={LoginComponent}
+      defaultSite={explorePage}
+      onSiteChange={setExplorePage}
     />
   );
 };

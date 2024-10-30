@@ -1,10 +1,11 @@
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
 import { IconButton } from 'react-native-paper';
-import { useNavigation } from '@react-navigation/native';
+
 import { NoxRoutes } from '@enums/Routes';
 import { useNoxSetting } from '@stores/useApp';
 import RandomGIFButton from '../buttons/RandomGIF';
+import useNavigation from '@hooks/useNavigation';
 
 export default ({ navigation }: NoxComponent.NavigationProps) => {
   const navigationGlobal = useNavigation();
@@ -30,7 +31,7 @@ export default ({ navigation }: NoxComponent.NavigationProps) => {
       <View style={styles.playlistIconButtonContainerStyle}>
         <IconButton
           icon="playlist-music"
-          onPress={() => navigationGlobal.navigate(NoxRoutes.Playlist as never)}
+          onPress={() => navigationGlobal.navigate(NoxRoutes.Playlist)}
           size={40}
         />
       </View>

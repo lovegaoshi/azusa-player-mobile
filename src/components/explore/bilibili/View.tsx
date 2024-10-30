@@ -32,7 +32,9 @@ export default ({ style, useBiliExplore }: Props) => {
     init,
   } = useBiliExplore;
 
-  useEffect(() => init, []);
+  useEffect(() => {
+    init();
+  }, []);
 
   if (loading) {
     return (
