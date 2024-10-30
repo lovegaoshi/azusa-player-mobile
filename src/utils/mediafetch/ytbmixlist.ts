@@ -1,3 +1,5 @@
+import _ from 'lodash';
+
 import SongTS from '@objects/Song';
 import { timestampToSeconds } from '../Utils';
 import { Source } from '@enums/MediaFetch';
@@ -33,10 +35,9 @@ const fetchYTPlaylist = async (
           singerId:
             val.playlistPanelVideoRenderer.shortBylineText.runs[0]
               .navigationEndpoint.browseEndpoint.browseId,
-          cover:
-            val.playlistPanelVideoRenderer.thumbnail.thumbnails[
-              val.playlistPanelVideoRenderer.thumbnail.thumbnails.length - 1
-            ].url,
+          cover: _.last(
+            val.playlistPanelVideoRenderer.thumbnail.thumbnails as any[],
+          ).url,
           lyric: '',
           page: index,
           duration: timestampToSeconds(
@@ -65,7 +66,7 @@ const regexFetch = async ({
   return {
     songList,
     refresh,
-    refreshToken: [songList[songList.length - 1].bvid, songList[0].bvid],
+    refreshToken: [_.last(songList)!.bvid, songList[0].bvid],
   };
 };
 
@@ -77,20 +78,14 @@ const refresh = async (v: NoxMedia.Playlist) => {
       v.songList.map(s => s.bvid),
       v.refreshToken[1],
     );
-    results.refreshToken = [
-      results.songList[results.songList.length - 1].bvid,
-      v.refreshToken[1],
-    ];
+    results.refreshToken = [_.last(results.songList)!.bvid, v.refreshToken[1]];
   } else {
     results.songList = await fetchYTPlaylist(
-      v.songList[v.songList.length - 1].bvid,
+      _.last(v.songList)!.bvid,
       v.songList.map(s => s.bvid),
       v.songList[0].bvid,
     );
-    results.refreshToken = [
-      results.songList[results.songList.length - 1].bvid,
-      v.songList[0].bvid,
-    ];
+    results.refreshToken = [_.last(results.songList)!.bvid, v.songList[0].bvid];
   }
   return results;
 };

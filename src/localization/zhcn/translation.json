@@ -252,6 +252,8 @@
     "ABRepeatDesc": "从 GitHub 更新 ABRepeat 规则"
   },
   "AppearanceSettings": {
+    "selectPhotoName": "选择照片",
+    "selectPhotoDesc": "选择本地照片作为背景",
     "noWeebSkinsName": "二次元收收味",
     "noWeebSkinsDesc": "二次元味儿太冲",
     "accentColorName": "用专辑主题色",

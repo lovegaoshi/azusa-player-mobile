@@ -21,7 +21,7 @@ const useYTMExplore = () => {
     }
     const homedata = await refreshHome();
     setMoods(homedata.moods);
-    setLoading(true);
+    setLoading(false);
   };
 
   const refreshHome = async (params?: string) => {

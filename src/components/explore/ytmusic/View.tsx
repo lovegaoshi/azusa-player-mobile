@@ -2,49 +2,120 @@ import { View, ScrollView } from 'react-native';
 import { ActivityIndicator, Button } from 'react-native-paper';
 import { useEffect, useState } from 'react';
 import _ from 'lodash';
-import { get_playlist, MixedContent, get_album, MixedItem } from 'libmuse';
+import {
+  MixedContent,
+  ParsedPlaylist,
+  ParsedAlbum,
+  FlatSong,
+  ParsedVideo,
+} from 'libmuse';
 
 import { styles } from '@components/style';
 import { UseYTMExplore } from './useYTMExplore';
 import { YTSongRow } from '../SongRow';
 import { fetchYtmPlaylist } from '@utils/mediafetch/ytbPlaylist.muse';
+import { BiliSongsArrayTabCard } from '../SongTab';
+import SongTS from '@objects/Song';
+import { Source } from '@enums/MediaFetch';
 
 interface ContentProps {
   content: MixedContent;
   key?: string;
 }
 
-const YTFlatSongTransform = (v: any) =>
-  v.map((i: any) => ({
-    cover: '',
-    name: i.title,
-    getPlaylist: () => fetchYtmPlaylist(i),
-  }));
-
-const YTPlaylistTransform = (v: any[]) =>
+const YTPlaylistTransform = (v: ParsedPlaylist[]) =>
   v.map(i => ({
-    cover: _.last(i?.thumbnails as any[])?.url,
+    cover: _.last(i?.thumbnails)?.url!,
     name: i?.title,
-    singer: i.description,
+    singer: i.description!,
     getPlaylist: async () => {
       return { songs: await fetchYtmPlaylist(i?.playlistId) };
     },
   }));
 
+const YTAlbumTransform = (v: ParsedAlbum[]) =>
+  v.map(i => ({
+    cover: _.last(i?.thumbnails)?.url!,
+    name: i?.title,
+    singer: i.album_type!,
+    getPlaylist: async () => {
+      return { songs: await fetchYtmPlaylist(i?.audioPlaylistId) };
+    },
+  }));
+
+const YTMFlatSongTransform = (v: FlatSong[]) =>
+  v.map(i =>
+    SongTS({
+      cid: `${Source.ytbvideo}-${i.videoId}`,
+      bvid: i.videoId!,
+      name: i.title,
+      nameRaw: i.title,
+      singer: i.artists?.[0].name ?? '',
+      singerId: i.artists?.[0].id ?? '',
+      cover: _.last(i.thumbnails)!.url,
+      lyric: '',
+      page: 1,
+      duration: 0,
+      album: i.album?.name ?? i.title,
+      source: Source.ytbvideo,
+      metadataOnLoad: true,
+    }),
+  );
+
+const YTMInlineVideoTransform = (v: ParsedVideo[]) =>
+  v.map(i =>
+    SongTS({
+      cid: `${Source.ytbvideo}-${i.videoId}`,
+      bvid: i.videoId!,
+      name: i.title,
+      nameRaw: i.title,
+      singer: i.artists?.[0].name ?? '',
+      singerId: i.artists?.[0].id ?? '',
+      cover: _.last(i.thumbnails)!.url,
+      lyric: '',
+      page: 1,
+      duration: 0,
+      source: Source.ytbvideo,
+      metadataOnLoad: true,
+    }),
+  );
+
 const YTMixedContent = ({ content, key }: ContentProps) => {
   if (!_.isArray(content.contents)) {
     return <></>;
   }
-  switch (content.contents[0]?.type) {
+  const filteredContent = content.contents.filter(v => v);
+  switch (filteredContent[0]?.type) {
     case 'playlist':
       return (
         <YTSongRow
-          songs={YTPlaylistTransform(content.contents)}
+          songs={YTPlaylistTransform(filteredContent as ParsedPlaylist[])}
+          title={content.title!}
+        />
+      );
+    case 'album':
+      return (
+        <YTSongRow
+          songs={YTAlbumTransform(filteredContent as ParsedAlbum[])}
+          title={content.title!}
+        />
+      );
+    case 'flat-song':
+      return (
+        <BiliSongsArrayTabCard
+          songs={YTMFlatSongTransform(filteredContent as FlatSong[])}
+          title={content.title!}
+        />
+      );
+    case 'inline-video':
+      return (
+        <BiliSongsArrayTabCard
+          songs={YTMInlineVideoTransform(filteredContent as ParsedVideo[])}
           title={content.title!}
         />
       );
     default:
-      console.log('not supported!', content);
+      console.log('not supported!', filteredContent[0]?.type, content);
       return <></>;
   }
 };
@@ -67,8 +138,12 @@ export default ({ useYTMExplore }: Props) => {
   }, []);
 
   return (
-    <View>
-      <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+    <View style={{ flex: 1 }}>
+      <ScrollView
+        horizontal
+        showsHorizontalScrollIndicator={false}
+        style={{ flex: 0, flexGrow: 0 }}
+      >
         {moods.map(mood => (
           <View style={styles.rowView} key={mood.params}>
             <Button
@@ -83,10 +158,10 @@ export default ({ useYTMExplore }: Props) => {
         ))}
       </ScrollView>
       <View style={{ height: 10 }} />
-      <ScrollView>
+      <ScrollView style={{ flex: 1 }}>
         {contents ? (
           contents.map(content => (
-            <YTMixedContent content={content} key={content.browseId!!} />
+            <YTMixedContent content={content} key={content.browseId!} />
           ))
         ) : (
           <View style={styles.alignMiddle}>
