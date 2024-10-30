@@ -116,7 +116,7 @@
     "uuid": "^11.0.2",
     "web-streams-polyfill": "^4.0.0",
     "youtubei.js": "^11.0.1",
-    "zustand": "^5.0.0"
+    "zustand": "^5.0.1"
   },
   "resolutions": {
     "metro": "^0.81.0"
@@ -135,7 +135,7 @@
     "@types/d3": "^7.4.3",
     "@types/he": "^1.2.3",
     "@types/jest": "^29.5.14",
-    "@types/lodash": "^4",
+    "@types/lodash": "^4.17.13",
     "@types/md5": "^2.3.5",
     "@types/node": "^22.8.4",
     "@types/react": "~18.3.12",
