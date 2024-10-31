@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import i18n from 'i18next';
 
-import { reExtractSongName } from '@stores/appStore';
+import { reExtractSongName } from '@stores/regexStore';
 import { LrcSource } from '@enums/LyricFetch';
 import { searchLyricOptions, searchLyric } from '../utils/LyricFetch';
 import { useNoxSetting } from '@stores/useApp';

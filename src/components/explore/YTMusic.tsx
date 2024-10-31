@@ -25,7 +25,7 @@ interface ContentProps {
 
 const YTPlaylistTransform = (v: ParsedPlaylist[]) =>
   v.map(i => ({
-    cover: _.last(i?.thumbnails)?.url!,
+    cover: _.last(i.thumbnails)!.url,
     name: i?.title,
     singer: i.description!,
     getPlaylist: async () => {
@@ -35,11 +35,13 @@ const YTPlaylistTransform = (v: ParsedPlaylist[]) =>
 
 const YTAlbumTransform = (v: ParsedAlbum[]) =>
   v.map(i => ({
-    cover: _.last(i?.thumbnails)?.url!,
-    name: i?.title,
+    cover: _.last(i.thumbnails)!.url,
+    name: i.title,
     singer: i.album_type!,
     getPlaylist: async () => {
-      return { songs: await fetchYtmPlaylist(i?.audioPlaylistId) };
+      // TODO: this is broken in react-native but passes in test. but why?
+      const songs = await fetchYtmPlaylist(i.audioPlaylistId);
+      return { songs };
     },
   }));
 
@@ -80,7 +82,7 @@ const YTMInlineVideoTransform = (v: ParsedVideo[]) =>
     }),
   );
 
-const YTMixedContent = ({ content, key }: ContentProps) => {
+const YTMixedContent = ({ content }: ContentProps) => {
   if (!_.isArray(content.contents)) {
     return <></>;
   }

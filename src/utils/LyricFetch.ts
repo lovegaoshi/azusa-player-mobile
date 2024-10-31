@@ -34,7 +34,7 @@ export const searchLyricOptions = async ({
         return await qqLrcFetch.getLrcOptions(searchKey);
     }
   } catch (e) {
-    logger.warn(`[lrcOptionFetch] ${searchKey} & ${source}: ${e}`);
+    logger.debug(`[lrcOptionFetch] ${searchKey} & ${source}: ${e}`);
     return [];
   }
 };

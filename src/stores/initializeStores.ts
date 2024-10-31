@@ -5,6 +5,7 @@ import i18next from 'i18next';
 import { get_option } from 'libmuse';
 
 import { initialize as initializeAppStore } from './appStore';
+import { initialize as initializeRegexStore } from './regexStore';
 import { initializeR128Gain } from '../utils/ffmpeg/r128Store';
 import { dataSaverPlaylist, initCache } from '../utils/Cache';
 import { getSecure as getItem } from '@utils/ChromeStorageAPI';
@@ -46,6 +47,7 @@ export const initializeStores = async ({
   }
   await getItem(StorageKeys.YTMTOKEN).then(k => (auth.token = k));
   await initializeAppStore();
+  await initializeRegexStore();
   await initializeR128Gain();
   await useAPM.persist.rehydrate();
   const results = await initPlayer(val);

@@ -2,7 +2,7 @@ import { v4 as uuidv4 } from 'uuid';
 import he from 'he';
 
 import { extractParenthesis } from '../utils/re';
-import { reExtractSongName } from '@stores/appStore';
+import { reExtractSongName } from '@stores/regexStore';
 import { Source } from '@enums/MediaFetch';
 import { MUSICFREE } from '@utils/mediafetch/musicfree';
 import { i0hdslbHTTPResolve } from '@utils/Utils';

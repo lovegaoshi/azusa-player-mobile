@@ -95,24 +95,20 @@ export async function PlaybackService() {
   );
 
   TrackPlayer.addEventListener(Event.RemotePause, () => {
-    console.log('Event.RemotePause');
     fadePause();
   });
 
   TrackPlayer.addEventListener(Event.RemotePlay, async () => {
-    console.log('Event.RemotePlay');
     TrackPlayer.play();
   });
 
   TrackPlayer.addEventListener(Event.RemoteSeek, event => {
-    console.log('Event.RemoteSeek', event);
     TrackPlayer.seekTo(event.position);
   });
 
   TrackPlayer.addEventListener(
     Event.PlaybackActiveTrackChanged,
     async event => {
-      console.log('Event.PlaybackActiveTrackChanged', event);
       APMWidgetModule?.updateWidget();
       const playerErrored =
         (await TrackPlayer.getPlaybackState()).state === State.Error;
@@ -202,13 +198,8 @@ export async function PlaybackService() {
     },
   );
 
-  TrackPlayer.addEventListener(Event.PlaybackPlayWhenReadyChanged, event => {
-    console.log('Event.PlaybackPlayWhenReadyChanged', event);
-  });
-
   if (isAndroid) {
     TrackPlayer.addEventListener(Event.RemoteCustomAction, async event => {
-      console.log('Event.RemoteCustomPlaymode', event);
       if (event.customAction !== 'customPlaymode') return;
       cycleThroughPlaymode();
     });

@@ -137,7 +137,6 @@ export default () => {
   });
 
   useTrackPlayerEvents([Event.PlaybackState], async event => {
-    console.log('[abrepeat] active track changed', event.state);
     switch (event.state) {
       case State.Loading:
         loadingTracker.current = true;
@@ -167,7 +166,6 @@ export default () => {
 
   useTrackPlayerEvents([Event.PlaybackActiveTrackChanged], async event => {
     const song = event.track?.song as NoxMedia.Song;
-    console.log('[abrepeat] active track changed', song);
     const newABRepeat = getABRepeatRaw(song.id);
     logger.debug(`[SongReady] logging ABRepeat as ${newABRepeat}`);
     setABRepeat(newABRepeat);
@@ -177,7 +175,6 @@ export default () => {
     setBRepeatDuration(newABRepeat[1] * trackDuration);
     if (newABRepeat[0] === 0) return;
     TrackPlayer.seekTo(trackDuration * newABRepeat[0]);
-    console.log('[abrepeat] initialized');
   });
 
   return {
