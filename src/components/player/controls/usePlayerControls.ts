@@ -67,7 +67,7 @@ export default () => {
   });
 
   useTrackPlayerEvents([Event.PlaybackProgressUpdated], async event => {
-    const playmode = getState().playmode;
+    const { playmode } = getState();
     saveLastPlayDuration(event.position);
     const currentSongId = track?.song?.id ?? '';
     // prepare for cross fading if enabled, playback is > 50% done and crossfade preparation isnt done
@@ -137,6 +137,7 @@ export default () => {
   });
 
   useTrackPlayerEvents([Event.PlaybackState], async event => {
+    console.log('[abrepeat] active track changed', event.state);
     switch (event.state) {
       case State.Loading:
         loadingTracker.current = true;
@@ -144,10 +145,20 @@ export default () => {
     }
     if (event.state !== State.Ready) return;
     updateCurrentSongMetadata();
+    const { playmode, currentPlayingId } = getState();
+    if (!loadingTracker.current || playmode !== NoxRepeatMode.RepeatTrack) {
+      return;
+    }
+    const newABRepeat = getABRepeatRaw(currentPlayingId);
+    if (newABRepeat[0] === 0) return;
+    loadingTracker.current = false;
+    const trackDuration = (await TrackPlayer.getProgress()).duration;
+    TrackPlayer.seekTo(trackDuration * newABRepeat[0]);
   });
 
   useTrackPlayerEvents([Event.PlaybackActiveTrackChanged], async event => {
     const song = event.track?.song as NoxMedia.Song;
+    console.log('[abrepeat] active track changed', song);
     const newABRepeat = getABRepeatRaw(song.id);
     logger.debug(`[SongReady] logging ABRepeat as ${newABRepeat}`);
     setABRepeat(newABRepeat);
@@ -157,6 +168,7 @@ export default () => {
     setBRepeatDuration(newABRepeat[1] * trackDuration);
     if (newABRepeat[0] === 0) return;
     TrackPlayer.seekTo(trackDuration * newABRepeat[0]);
+    console.log('[abrepeat] initialized');
   });
 
   return {
