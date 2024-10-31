@@ -11,6 +11,7 @@ import useGoogleTVOauth from '@components/login/google/useGoogleTVOauth';
 import { saveSecure as saveItem } from '@utils/ChromeStorageAPI';
 import { StorageKeys } from '@enums/Storage';
 import { User, UseYTMLogin } from './useYTMLogin';
+import { museStore } from '@utils/muse';
 
 const jsCode = 'window.ReactNativeWebView.postMessage(document.cookie)';
 const auth = get_option('auth');
@@ -44,7 +45,10 @@ const Login = ({ refresh }: LoginProps) => {
           });
           auth
             .load_token_with_code(loginCodes!.deviceCode, loginCodes!.interval)
-            .then(t => saveItem(StorageKeys.YTMTOKEN, t).then(refresh));
+            .then(t => {
+              museStore.set('token', t);
+              refresh();
+            });
           saveItem(StorageKeys.YTMCOOKIES, cookies.join('; '));
           return true;
         }
@@ -124,6 +128,7 @@ const Explore = ({ ytmLogin }: Props) => {
       user={user}
       logout={() => {
         saveItem(StorageKeys.YTMTOKEN, null);
+        museStore.set('token', null);
         auth.token = null;
         clear();
       }}
