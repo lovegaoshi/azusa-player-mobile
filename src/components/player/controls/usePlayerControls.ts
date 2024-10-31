@@ -144,7 +144,16 @@ export default () => {
         break;
     }
     if (event.state !== State.Ready) return;
-    updateCurrentSongMetadata();
+    updateCurrentSongMetadata().then(v => {
+      if (v) {
+        updateTrack({
+          ...v,
+          artwork: v.cover,
+          title: v.name,
+          artist: v.singer,
+        });
+      }
+    });
     const { playmode, currentPlayingId } = getState();
     if (!loadingTracker.current || playmode !== NoxRepeatMode.RepeatTrack) {
       return;
