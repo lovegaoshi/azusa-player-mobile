@@ -7,10 +7,6 @@ import {
 
 const MUSE_KEY = 'museStore';
 class MyStore extends MemoryStore {
-  get<T>(k: string): T | null {
-    console.log(this.map, k);
-    return super.get(k);
-  }
   set(key: string, value: unknown) {
     super.set(key, value);
     setItem(MUSE_KEY, JSON.stringify(Object.fromEntries(this.map)));

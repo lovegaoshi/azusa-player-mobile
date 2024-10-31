@@ -12,6 +12,7 @@ import { saveSecure as saveItem } from '@utils/ChromeStorageAPI';
 import { StorageKeys } from '@enums/Storage';
 import { User, UseYTMLogin } from './useYTMLogin';
 import { museStore } from '@utils/muse';
+import useCollapsible from '../useCollapsible';
 
 const jsCode = 'window.ReactNativeWebView.postMessage(document.cookie)';
 const auth = get_option('auth');
@@ -20,8 +21,13 @@ interface LoginProps {
   refresh: () => void;
 }
 const Login = ({ refresh }: LoginProps) => {
-  const [webView, setWebView] = useState(false);
+  const [webView, _setWebView] = useState(false);
   const [cookies, setCookies] = useState<string[]>([]);
+  const toggleCollapse = useCollapsible(state => state.toggleCollapse);
+  const setWebView = (val: boolean) => {
+    _setWebView(val);
+    toggleCollapse(val);
+  };
   const { userURL, loginCodes, getNewLoginCode } = useGoogleTVOauth({
     setWebView,
   });
