@@ -133,7 +133,7 @@ const Explore = ({ ytmLogin }: Props) => {
     <LoggedInPage
       user={user}
       logout={() => {
-        saveItem(StorageKeys.YTMTOKEN, null);
+        saveItem(StorageKeys.YTMCOOKIES, null);
         museStore.set('token', null);
         auth.token = null;
         clear();
