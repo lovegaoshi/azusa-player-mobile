@@ -1,5 +1,5 @@
 import { get_current_user } from 'libmuse';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 export interface User {
   channel_id: string;

@@ -151,10 +151,13 @@ const styles = StyleSheet.create({
   },
   avatarContainerStyle: {
     flexDirection: 'row',
-    paddingLeft: 20,
+    paddingLeft: 10,
     paddingVertical: 10,
+    flex: 0,
+    flexGrow: 0,
   },
   avatarUsernameStyle: {
     paddingLeft: 10,
+    flex: 1,
   },
 });

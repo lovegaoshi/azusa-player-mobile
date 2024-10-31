@@ -11,10 +11,10 @@ import {
 } from 'libmuse';
 
 import { styles } from '@components/style';
-import { UseYTMExplore } from './useYTMExplore';
-import { YTSongRow } from '../SongRow';
+import useYTMExplore from '@stores/explore/ytm';
+import { YTSongRow } from './SongRow';
 import { fetchYtmPlaylist } from '@utils/mediafetch/ytbPlaylist.muse';
-import { BiliSongsArrayTabCard } from '../SongTab';
+import { BiliSongsArrayTabCard } from './SongTab';
 import SongTS from '@objects/Song';
 import { Source } from '@enums/MediaFetch';
 
@@ -120,12 +120,12 @@ const YTMixedContent = ({ content, key }: ContentProps) => {
   }
 };
 
-interface Props {
-  useYTMExplore: UseYTMExplore;
-}
-export default ({ useYTMExplore }: Props) => {
+export default () => {
   const [activeMood, setActiveMood] = useState('');
-  const { moods, refreshHome, initialize, contents } = useYTMExplore;
+  const moods = useYTMExplore(state => state.moods);
+  const refreshHome = useYTMExplore(state => state.refreshHome);
+  const initialize = useYTMExplore(state => state.initialize);
+  const contents = useYTMExplore(state => state.homedata)?.results;
 
   const onClickMood = (mood: string) => {
     const newMood = mood === activeMood ? '' : mood;

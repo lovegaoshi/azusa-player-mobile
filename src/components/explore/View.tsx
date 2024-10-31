@@ -2,22 +2,18 @@ import * as React from 'react';
 import { StyleSheet } from 'react-native';
 
 import { useNoxSetting } from '@stores/useApp';
-import useBiliExplore from './bilibili/useBiliExplore';
-import useYTMExplore from './ytmusic/useYTMExplore';
-import BiliExplore from './bilibili/View';
-import YTMExplore from './ytmusic/View';
+import BiliExplore from './Bilibili';
+import YTMExplore from './YTMusic';
 import SiteSelector from '../login/SiteSelector';
 import { Site } from '@enums/Network';
 import { useAPM } from '@stores/usePersistStore';
 
 const LoginComponent = ({ loginSite }: { loginSite: Site }) => {
-  const biliExplore = useBiliExplore();
-  const ytmExplore = useYTMExplore();
   switch (loginSite) {
     case Site.YTM:
-      return <YTMExplore useYTMExplore={ytmExplore} />;
+      return <YTMExplore />;
     default:
-      return <BiliExplore useBiliExplore={biliExplore} />;
+      return <BiliExplore />;
   }
 };
 

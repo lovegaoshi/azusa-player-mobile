@@ -10,27 +10,24 @@ import { ActivityIndicator, Text } from 'react-native-paper';
 import { useTranslation } from 'react-i18next';
 
 import { styles } from '@components/style';
-import { BiliSongsTabCard, BiliSongsArrayTabCard } from '../SongTab';
-import { BiliSongRow } from '../SongRow';
-import { UseBiliExplore } from './useBiliExplore';
+import { BiliSongsTabCard, BiliSongsArrayTabCard } from './SongTab';
+import { BiliSongRow } from './SongRow';
+import useBiliExplore from '@stores/explore/bilibili';
 
 interface Props {
-  useBiliExplore: UseBiliExplore;
   style?: ViewStyle;
 }
-export default ({ style, useBiliExplore }: Props) => {
+export default ({ style }: Props) => {
   const { t } = useTranslation();
-  const {
-    loading,
-    refreshing,
-    onRefresh,
-    biliDynamic,
-    biliRanking,
-    biliMusicTop,
-    biliMusicHot,
-    biliMusicNew,
-    init,
-  } = useBiliExplore;
+  const loading = useBiliExplore(state => state.loading);
+  const refreshing = useBiliExplore(state => state.refreshing);
+  const onRefresh = useBiliExplore(state => state.onRefresh);
+  const biliDynamic = useBiliExplore(state => state.biliDynamic);
+  const biliRanking = useBiliExplore(state => state.biliRanking);
+  const biliMusicTop = useBiliExplore(state => state.biliMusicTop);
+  const biliMusicHot = useBiliExplore(state => state.biliMusicHot);
+  const biliMusicNew = useBiliExplore(state => state.biliMusicNew);
+  const init = useBiliExplore(state => state.init);
 
   useEffect(() => {
     init();
