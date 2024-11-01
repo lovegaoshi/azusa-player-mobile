@@ -120,7 +120,7 @@ const SongInfo = ({
                 )}. ${title}`}</Text>
                 <Text
                   variant="bodySmall"
-                  style={{ color: playerStyle.colors.secondary }}
+                  style={{ color: playerStyle.colors.onSurfaceVariant }}
                   numberOfLines={1}
                 >
                   {artist}

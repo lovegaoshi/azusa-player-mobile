@@ -117,7 +117,6 @@ export default {
   colors: {
     text: 'rgb(103, 80, 164)',
     background: 'rgba(255, 255, 255, 0.4)',
-    onSurfaceVariant: 'rgb(103, 80, 164)', // '#9400d3', // 'rgb(202, 199, 182)',
   },
   playerControlIconContained: undefined,
   loadingIcon:

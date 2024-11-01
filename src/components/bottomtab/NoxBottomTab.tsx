@@ -17,6 +17,7 @@ interface IconProps {
 const BottomIconButton = ({ icon, onPress }: IconProps) => {
   return (
     <IconButton
+      mode={icon.includes('outline') ? undefined : 'contained'}
       icon={icon}
       style={styles.iconButton}
       size={40}
@@ -53,14 +54,14 @@ const NoxAndroidBottomTab = ({ navigation }: NoxComponent.NavigationProps2) => {
 
   if (gestureMode) {
     return (
-      <View style={{ backgroundColor: playerStyle.colors.background }}>
-        <View
-          style={[
-            styles.panel,
-            { backgroundColor: playerStyle.colors.background },
-            isLandscape ? { paddingBottom: 0 } : {},
-          ]}
-        >
+      <View
+        style={{
+          backgroundColor:
+            playerStyle.colors.elevation?.level3 ??
+            playerStyle.colors.background,
+        }}
+      >
+        <View style={[styles.panel, isLandscape ? { paddingBottom: 0 } : {}]}>
           <BottomIconButton
             icon={renderIcon(RouteIcons.playlist)}
             onPress={onDrawerPress}
