@@ -57,7 +57,7 @@ const NoxAndroidBottomTab = ({ navigation }: NoxComponent.NavigationProps2) => {
       <View
         style={{
           backgroundColor:
-            playerStyle.colors.elevation?.level3 ??
+            playerStyle.colors.elevation?.level5 ??
             playerStyle.colors.background,
         }}
       >

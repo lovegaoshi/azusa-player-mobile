@@ -3,6 +3,7 @@ import { IconButton } from 'react-native-paper';
 import { GestureResponderEvent } from 'react-native';
 
 import Dialog from './PlaylistMenu';
+import { useNoxSetting } from '@stores/useApp';
 
 const ICON = 'dots-horizontal';
 
@@ -13,6 +14,7 @@ interface Props {
 }
 
 export default ({ disabled = false, playlist, songListUpdateHalt }: Props) => {
+  const playerStyle = useNoxSetting(state => state.playerStyle);
   const [dialogOpen, setDialogOpen] = useState(false);
   const [menuCoords, setMenuCoords] = useState<NoxTheme.coordinates>({
     x: 0,
@@ -38,6 +40,7 @@ export default ({ disabled = false, playlist, songListUpdateHalt }: Props) => {
         onPress={handlePress}
         size={25}
         disabled={disabled}
+        iconColor={playerStyle.colors.primary}
       />
       <Dialog
         visible={dialogOpen}

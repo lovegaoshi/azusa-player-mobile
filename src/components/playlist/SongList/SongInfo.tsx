@@ -91,7 +91,7 @@ const SongInfo = ({
         styles.container,
         {
           backgroundColor: currentPlaying
-            ? playerStyle.customColors.playlistDrawerBackgroundColorTransparent
+            ? 'rgba(103, 80, 164, 0.35)'
             : 'transparent',
           opacity: isItemSolid(item, networkCellular, playerSetting.dataSaver)
             ? undefined
