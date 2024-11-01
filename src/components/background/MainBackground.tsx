@@ -26,7 +26,6 @@ const MainBackground = ({ children }: { children: React.JSX.Element }) => {
     resolveBackgroundImage(bkgrdImgRaw).then(setBkgrdImg);
   }, [bkgrdImgRaw]);
 
-  return <EmptyBackground>{children}</EmptyBackground>;
   switch (bkgrdImg?.type) {
     case RESOLVE_TYPE.image:
       return (

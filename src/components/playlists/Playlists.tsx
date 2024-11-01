@@ -91,7 +91,8 @@ export default () => {
             {
               backgroundColor:
                 currentPlaylist.id === item
-                  ? playerStyle.customColors.playlistDrawerBackgroundColor
+                  ? (playerStyle.colors.primaryContainer ??
+                    playerStyle.customColors.playlistDrawerBackgroundColor)
                   : undefined,
             },
           ]}
@@ -101,7 +102,7 @@ export default () => {
             confirmOnDelete={confirmOnDelete}
             leadColor={
               currentPlayingList.id === item
-                ? playerStyle.colors.primary //customColors.playlistDrawerBackgroundColor
+                ? playerStyle.colors.primary
                 : undefined
             }
           />

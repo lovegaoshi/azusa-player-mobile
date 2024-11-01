@@ -21,13 +21,18 @@ interface Props {
 const RenderDrawerItem = ({ view, icon, text, routeIcon }: Props) => {
   const navigation = useNavigation();
   const { t } = useTranslation();
+  const playerStyle = useNoxSetting(state => state.playerStyle);
 
   return (
     <TouchableRipple
       onPress={() => navigation.navigate(view, routeIcon !== undefined)}
     >
       <View style={styles.drawerItemContainer}>
-        <IconButton icon={icon} size={32} />
+        <IconButton
+          icon={icon}
+          size={32}
+          iconColor={playerStyle.colors.primary}
+        />
         <View style={styles.drawerItemTextContainer}>
           <Text variant="titleLarge">{t(text)}</Text>
         </View>
