@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { Menu } from 'react-native-paper';
+import { Text, Menu } from 'react-native-paper';
 import { useTranslation } from 'react-i18next';
 import { useProgress } from 'react-native-track-player';
 import { RangeSlider } from '@sharcoux/slider';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 
 import { useNoxSetting } from '@stores/useApp';
 import GenericDialog from '@components/dialogs/GenericDialog';
@@ -41,14 +41,10 @@ const ABSlider = ({ range, setRange }: SliderProps) => {
       <View style={styles.labelSpacer} />
       <RangeSlider
         range={currentABRepeat}
-        thumbTintColor={
-          playerStyle.progressThumbImage
-            ? undefined
-            : playerStyle.customColors.progressThumbTintColor
-        }
+        thumbTintColor={playerStyle.colors.tertiary}
         onValueChange={setRange}
-        outboundColor={playerStyle.customColors.progressMaximumTrackTintColor}
-        inboundColor={playerStyle.customColors.progressMinimumTrackTintColor}
+        outboundColor={playerStyle.colors.secondaryContainer}
+        inboundColor={playerStyle.colors.primary}
       />
     </View>
   );
@@ -116,10 +112,9 @@ const styles = StyleSheet.create({
     paddingHorizontal: 15,
   },
   labelSpacer: {
-    height: 30,
+    height: 10,
   },
   labelText: {
-    color: 'white',
     fontVariant: ['tabular-nums'],
   },
 });

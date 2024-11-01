@@ -36,7 +36,13 @@ export const SettingListItem = ({
 
   const getIcon = () => {
     if (typeof icon === 'string') {
-      return <IconButton icon={icon} size={40} />;
+      return (
+        <IconButton
+          iconColor={playerStyle.colors.primary}
+          icon={icon}
+          size={40}
+        />
+      );
     } else if (typeof icon === 'function') {
       return icon();
     } else {
@@ -52,8 +58,6 @@ export const SettingListItem = ({
         t(`${settingCategory}.${settingName}Desc`),
       )}
       onPress={onPress}
-      titleStyle={{ color: playerStyle.colors.primary }}
-      descriptionStyle={{ color: playerStyle.colors.secondary }}
       style={styles.listItem}
     />
   );
@@ -91,14 +95,17 @@ const BooleanSetting = ({
       <View style={styles.settingContainer}>
         <View style={styles.settingTextContainer}>
           <Text
-            style={[styles.settingText, { color: playerStyle.colors.primary }]}
+            style={[
+              styles.settingText,
+              { color: playerStyle.colors.onSurface },
+            ]}
           >
             {t(`${settingCategory}.${settingName}Name`)}
           </Text>
           <Text
             style={[
               styles.settingDescription,
-              { color: playerStyle.colors.secondary },
+              { color: playerStyle.colors.onSurfaceVariant },
             ]}
           >
             {t(`${settingCategory}.${settingName}Desc`)}
@@ -114,7 +121,6 @@ const BooleanSetting = ({
             <Switch
               value={playerSetting[settingName]}
               onValueChange={onToggle}
-              color={playerStyle.colors.onSurfaceVariant}
             />
           )}
         </View>

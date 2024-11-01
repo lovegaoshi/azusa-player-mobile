@@ -115,7 +115,6 @@ export default {
     playerControlIconBkgrdColor: '#dcd0ff',
   },
   colors: {
-    text: 'rgb(103, 80, 164)',
     background: 'rgba(255, 255, 255, 0.4)',
   },
   playerControlIconContained: undefined,
