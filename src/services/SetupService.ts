@@ -37,7 +37,6 @@ export const SetupService = async ({
     crossfade: crossfade !== 0,
     autoHandleInterruptions: noInterruption ? false : true,
     androidSkipSilence: skipSilence,
-    androidParseEmbeddedArtwork: parseEmbeddedArtwork,
     maxCacheSize: 0,
     iosCategoryOptions: [
       IOSCategoryOptions.AllowAirPlay,
@@ -45,7 +44,11 @@ export const SetupService = async ({
       IOSCategoryOptions.AllowBluetoothA2DP,
     ],
   });
-  const RNTPOptions = initRNTPOptions({ audioOffload, skipSilence });
+  const RNTPOptions = initRNTPOptions({
+    audioOffload,
+    androidSkipSilence: skipSilence,
+    androidParseEmbeddedArtwork: parseEmbeddedArtwork,
+  });
   setState({ RNTPOptions });
   await TrackPlayer.updateOptions(RNTPOptions);
   await TrackPlayer.setRepeatMode(RepeatMode.Off);
