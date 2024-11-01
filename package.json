@@ -28,6 +28,7 @@
     "postinstall": "patch-package"
   },
   "dependencies": {
+    "@material/material-color-utilities": "^0.3.0",
     "@react-native-async-storage/async-storage": "^2.0.0",
     "@react-native-community/netinfo": "^11.4.1",
     "@react-native-cookies/cookies": "^6.2.1",
@@ -72,7 +73,7 @@
     "js-base64": "^3.7.7",
     "libmuse": "https://github.com/lovegaoshi/muse.git#commit=0bffe2319baf825037bece6869d360d6d307eb72",
     "lodash": "^4.17.21",
-    "lottie-react-native": "7.0.0",
+    "lottie-react-native": "7.1.0",
     "lru-cache": "7.14.0",
     "md5": "^2.3.0",
     "metro": "^0.81.0",
@@ -97,7 +98,7 @@
     "react-native-paper": "^5.12.5",
     "react-native-qrcode-svg": "^6.3.12",
     "react-native-reanimated": "3.16.1",
-    "react-native-safe-area-context": "^4.13.1",
+    "react-native-safe-area-context": "^4.14.0",
     "react-native-screens": "3.35.0",
     "react-native-shadow-2": "^7.1.1",
     "react-native-share-menu": "git+https://github.com/Expensify/react-native-share-menu.git",

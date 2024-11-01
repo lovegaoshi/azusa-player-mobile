@@ -3526,6 +3526,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@material/material-color-utilities@npm:^0.3.0":
+  version: 0.3.0
+  resolution: "@material/material-color-utilities@npm:0.3.0"
+  checksum: 10c0/3bef025428b893f2acc9e9e2bd186363a60b7c0836fe43c78222e29fe67dc579618e844f0661a20657ed9f7fd8b94fd43a2961892894d0b6a2ba5264ce2673f8
+  languageName: node
+  linkType: hard
+
 "@nicolo-ribaudo/eslint-scope-5-internals@npm:5.1.1-v1":
   version: 5.1.1-v1
   resolution: "@nicolo-ribaudo/eslint-scope-5-internals@npm:5.1.1-v1"
@@ -6099,6 +6106,7 @@ __metadata:
     "@babel/preset-env": "npm:^7.26.0"
     "@babel/preset-typescript": "npm:^7.26.0"
     "@babel/runtime": "npm:^7.26.0"
+    "@material/material-color-utilities": "npm:^0.3.0"
     "@react-native-async-storage/async-storage": "npm:^2.0.0"
     "@react-native-community/eslint-config": "npm:^3.2.0"
     "@react-native-community/netinfo": "npm:^11.4.1"
@@ -6178,7 +6186,7 @@ __metadata:
     js-base64: "npm:^3.7.7"
     libmuse: "https://github.com/lovegaoshi/muse.git#commit=0bffe2319baf825037bece6869d360d6d307eb72"
     lodash: "npm:^4.17.21"
-    lottie-react-native: "npm:7.0.0"
+    lottie-react-native: "npm:7.1.0"
     lru-cache: "npm:7.14.0"
     md5: "npm:^2.3.0"
     metro: "npm:^0.81.0"
@@ -6207,7 +6215,7 @@ __metadata:
     react-native-paper: "npm:^5.12.5"
     react-native-qrcode-svg: "npm:^6.3.12"
     react-native-reanimated: "npm:3.16.1"
-    react-native-safe-area-context: "npm:^4.13.1"
+    react-native-safe-area-context: "npm:^4.14.0"
     react-native-screens: "npm:3.35.0"
     react-native-shadow-2: "npm:^7.1.1"
     react-native-share-menu: "git+https://github.com/Expensify/react-native-share-menu.git"
@@ -12648,23 +12656,20 @@ __metadata:
   languageName: node
   linkType: hard
 
-"lottie-react-native@npm:7.0.0":
-  version: 7.0.0
-  resolution: "lottie-react-native@npm:7.0.0"
+"lottie-react-native@npm:7.1.0":
+  version: 7.1.0
+  resolution: "lottie-react-native@npm:7.1.0"
   peerDependencies:
-    "@dotlottie/react-player": ^1.6.1
-    "@lottiefiles/react-lottie-player": ^3.5.3
+    "@lottiefiles/dotlottie-react": ^0.6.5
     react: "*"
     react-native: ">=0.46"
     react-native-windows: ">=0.63.x"
   peerDependenciesMeta:
-    "@dotlottie/react-player":
-      optional: true
-    "@lottiefiles/react-lottie-player":
+    "@lottiefiles/dotlottie-react":
       optional: true
     react-native-windows:
       optional: true
-  checksum: 10c0/f3f5562d231bae8aa66a69af857b1664f913b6d404a2fb4c98722cd036d1121be9cb3f96e5ab8ec0d16b8d2a2ec067f43261d60b7dd96f4e117cf36c728db621
+  checksum: 10c0/0e224d5ebaaa71fe4313cfa0ac3fab25e0779b0fcbb58dd490821e73426dcd59af1a990a6b52b25e6d9dc18e1a129279bfdc44809112bc21c6b3c59ad443097d
   languageName: node
   linkType: hard
 
@@ -15266,13 +15271,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-native-safe-area-context@npm:^4.13.1":
-  version: 4.13.1
-  resolution: "react-native-safe-area-context@npm:4.13.1"
+"react-native-safe-area-context@npm:^4.14.0":
+  version: 4.14.0
+  resolution: "react-native-safe-area-context@npm:4.14.0"
   peerDependencies:
     react: "*"
     react-native: "*"
-  checksum: 10c0/2f2023cfd4fa15dbbce08de94d8a85af808d71bbf47e4c9e11853d0b95167360e166a585089f1bcc4f56f422485584120cf9660fea3a275c1f5c5dda804fa99b
+  checksum: 10c0/70d71c5ec301fe811a1b3ca78555fdf3e845731177bc2ef72fb5e5d01fa97e9e14259114fe8c5366d91eceb57272887e19323d9355453353b82b2452c716a624
   languageName: node
   linkType: hard
 
