@@ -451,7 +451,7 @@
       "textInputSelectionColor": "green"
     },
     "colors": {
-      "primary": "rgb(255, 255, 0)",
+      "primary": "#fcf75e",
       "onPrimary": "rgb(50, 50, 0)",
       "primaryContainer": "rgb(73, 73, 0)",
       "onPrimaryContainer": "rgb(234, 234, 0)",
@@ -471,7 +471,7 @@
       "onBackground": "rgb(230, 226, 217)",
       "surface": "rgb(28, 28, 23)",
       "onSurface": "rgba(235, 235, 0, 1)",
-      "text": "rgb(255, 255, 0)",
+      "text": "#fcf75e",
       "surfaceVariant": "rgb(10, 10, 10)",
       "onSurfaceVariant": "rgb(202, 200, 165)",
       "outline": "rgb(147, 145, 130)",
@@ -1594,7 +1594,7 @@
         "textInputSelectionColor": "green"
       },
       "colors": {
-        "primary": "rgb(255, 255, 0)",
+        "primary": "#fcf75e",
         "onPrimary": "rgb(50, 50, 0)",
         "primaryContainer": "rgb(73, 73, 0)",
         "onPrimaryContainer": "rgb(234, 234, 0)",
@@ -1614,7 +1614,7 @@
         "onBackground": "rgb(230, 226, 217)",
         "surface": "rgb(28, 28, 23)",
         "onSurface": "rgba(235, 235, 0, 1)",
-        "text": "rgb(255, 255, 0)",
+        "text": "#fcf75e",
         "surfaceVariant": "rgb(10, 10, 10)",
         "onSurfaceVariant": "rgb(225, 225, 0)",
         "outline": "rgb(147, 145, 130)",
