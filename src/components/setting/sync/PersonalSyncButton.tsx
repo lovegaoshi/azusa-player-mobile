@@ -118,7 +118,6 @@ const SetTextField = ({ settingKey, label, placeholder }: TextProps) => {
       placeholder={placeholder}
       selectTextOnFocus
       selectionColor={playerStyle.customColors.textInputSelectionColor}
-      textColor={playerStyle.colors.text}
       onEndEditing={e => saveVal(e.nativeEvent.text)}
     />
   );

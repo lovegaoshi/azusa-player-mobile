@@ -20,12 +20,8 @@ export default () => {
           ? undefined
           : playerStyle.customColors.progressThumbTintColor
       }
-      minimumTrackTintColor={
-        playerStyle.customColors.progressMinimumTrackTintColor
-      }
-      maximumTrackTintColor={
-        playerStyle.customColors.progressMaximumTrackTintColor
-      }
+      minimumTrackTintColor={playerStyle.colors.primary}
+      maximumTrackTintColor={playerStyle.colors.secondaryContainer}
       onSlidingComplete={TrackPlayer.seekTo}
       thumbImage={
         playerStyle.progressThumbImage

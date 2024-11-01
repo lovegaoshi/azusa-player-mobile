@@ -130,14 +130,14 @@ export const setFetchProgress = (val: number) => {
 };
 
 export const addDownloadProgress = (song: NoxMedia.Song, progress: number) => {
-  const currentAppStore = appStore.getState();
+  const { downloadProgressMap, activeTrackPlayingId } = appStore.getState();
   const newDownloadProgressMap = {
-    ...currentAppStore.downloadProgressMap,
+    ...downloadProgressMap,
     [song.id]: progress,
   };
   appStore.setState({
     downloadProgressMap: newDownloadProgressMap,
-    ...(currentAppStore.activeTrackPlayingId === song.id && {
+    ...(activeTrackPlayingId === song.id && {
       fetchProgress: progress,
     }),
   });

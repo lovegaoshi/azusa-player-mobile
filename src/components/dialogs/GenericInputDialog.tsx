@@ -73,8 +73,6 @@ export default ({
               onChange={e =>
                 setCurrentInput({ ...currentInput, [item]: e.nativeEvent.text })
               }
-              selectionColor={playerStyle.customColors.textInputSelectionColor}
-              textColor={playerStyle.colors.text}
             />
           )}
         />

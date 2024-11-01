@@ -73,9 +73,9 @@ const NoWeebDialog = ({ visible, setVisible }: Props) => {
           <View style={styles.colorBlockSpace} />
           <Text>{t('AppearanceSettings.PrimaryColor')}</Text>
           <NoxInput
+            style={styles.marginTop}
             autofocus={false}
             selectTextOnFocus={false}
-            style={{ color: playerStyle.colors.primary }}
             text={primaryColor}
             setText={setPrimaryColor}
             reactNative={true}
@@ -93,9 +93,9 @@ const NoWeebDialog = ({ visible, setVisible }: Props) => {
           <View style={styles.colorBlockSpace} />
           <Text>{t('AppearanceSettings.SecondaryColor')}</Text>
           <NoxInput
+            style={styles.marginTop}
             autofocus={false}
             selectTextOnFocus={false}
-            style={{ color: playerStyle.colors.primary }}
             text={secondaryColor}
             setText={setSecondaryColor}
             reactNative={true}
@@ -113,9 +113,9 @@ const NoWeebDialog = ({ visible, setVisible }: Props) => {
           <View style={styles.colorBlockSpace} />
           <Text>{t('AppearanceSettings.ContrastColor')}</Text>
           <NoxInput
+            style={styles.marginTop}
             autofocus={false}
             selectTextOnFocus={false}
-            style={{ color: playerStyle.colors.primary }}
             text={contrastColor}
             setText={setContrastColor}
             reactNative={true}
@@ -133,9 +133,9 @@ const NoWeebDialog = ({ visible, setVisible }: Props) => {
           <View style={styles.colorBlockSpace} />
           <Text>{t('AppearanceSettings.BackgroundColor')}</Text>
           <NoxInput
+            style={styles.marginTop}
             autofocus={false}
             selectTextOnFocus={false}
-            style={{ color: playerStyle.colors.primary }}
             text={backgroundColor}
             setText={setBackgroundColor}
             reactNative={true}
@@ -147,6 +147,7 @@ const NoWeebDialog = ({ visible, setVisible }: Props) => {
 };
 
 const styles = StyleSheet.create({
+  marginTop: { marginTop: 1 },
   rowView: {
     flexDirection: 'row',
     alignItems: 'center',

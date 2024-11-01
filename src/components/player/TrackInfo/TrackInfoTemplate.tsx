@@ -81,16 +81,16 @@ const TrackInfoTemplate: React.FC<Props> = props => {
   const textStyle = [
     styles.titleText,
     {
-      color: playerStyle.colors.primary,
+      color: playerStyle.colors.onSurface,
     },
   ];
   const textSubStyle = [
     styles.artistText,
     {
-      color: playerStyle.colors.secondary,
+      color: playerStyle.colors.onSurfaceVariant,
     },
   ];
-
+  console.log(playerStyle.colors.onSurfaceVariant);
   return (
     <View style={[styles.container, containerStyle, { width: windowWidth }]}>
       {children ?? <AlbumArt {...props} />}

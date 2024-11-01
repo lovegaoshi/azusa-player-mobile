@@ -19,6 +19,7 @@ export default ({ navigation }: NoxComponent.NavigationProps) => {
           icon="menu"
           onPress={() => navigation.openDrawer()}
           size={40}
+          iconColor={playerStyle.colors.primary}
         />
       </View>
 
@@ -33,6 +34,7 @@ export default ({ navigation }: NoxComponent.NavigationProps) => {
           icon="playlist-music"
           onPress={() => navigationGlobal.navigate(NoxRoutes.Playlist)}
           size={40}
+          iconColor={playerStyle.colors.primary}
         />
       </View>
     </View>

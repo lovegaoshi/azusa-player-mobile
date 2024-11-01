@@ -49,7 +49,6 @@ const TimerDialog = ({ visible, onClose = () => undefined }: Props) => {
             disabled={startTimer}
             textAlign="right"
             selectionColor={playerStyle.customColors.textInputSelectionColor}
-            textColor={playerStyle.colors.text}
           />
           <Text style={styles.separator}>：</Text>
           <TextInput
@@ -59,7 +58,6 @@ const TimerDialog = ({ visible, onClose = () => undefined }: Props) => {
             onChangeText={text => setSeconds(parseInt(text) || 0)}
             disabled={startTimer}
             selectionColor={playerStyle.customColors.textInputSelectionColor}
-            textColor={playerStyle.colors.text}
           />
         </View>
         <View style={styles.buttonsContainer}>

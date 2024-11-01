@@ -41,7 +41,7 @@ export default ({
       selectTextOnFocus={selectTextOnFocus}
       selectionColor={playerStyle.customColors.textInputSelectionColor}
       autoFocus={autofocus}
-      textColor={playerStyle.colors.text}
+      textColor={playerStyle.colors.onSurfaceVariant}
       secureTextEntry={secureTextEntry}
     />
   );
