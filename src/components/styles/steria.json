@@ -166,7 +166,7 @@
       "surface": "rgb(255, 251, 255)",
       "onSurface": "#ff1493",
       "surfaceVariant": "rgb(243, 221, 224)",
-      "onSurfaceVariant": "#ff1493",
+      "onSurfaceVariant": "#ff62b7",
       "outline": "rgb(132, 115, 117)",
       "outlineVariant": "rgb(214, 194, 196)",
       "shadow": "rgba(0, 0, 0)",
@@ -473,7 +473,7 @@
       "onSurface": "rgba(235, 235, 0, 1)",
       "text": "rgb(255, 255, 0)",
       "surfaceVariant": "rgb(10, 10, 10)",
-      "onSurfaceVariant": "rgb(225, 225, 0)",
+      "onSurfaceVariant": "rgb(202, 200, 165)",
       "outline": "rgb(147, 145, 130)",
       "outlineVariant": "rgb(72, 71, 58)",
       "shadow": "rgb(0, 0, 0)",
@@ -598,7 +598,7 @@
       "onSurface": "rgb(233, 233, 233)",
       "text": "rgb(233, 233, 233)",
       "surfaceVariant": "rgb(10, 10, 10)",
-      "onSurfaceVariant": "#f2003c",
+      "onSurfaceVariant": "rgb(157, 157, 157)",
       "outline": "rgb(147, 145, 130)",
       "outlineVariant": "rgb(72, 71, 58)",
       "shadow": "rgb(0, 0, 0)",
@@ -700,7 +700,7 @@
       "onSurface": "rgb(233, 233, 233)",
       "text": "rgb(233, 233, 233)",
       "surfaceVariant": "rgb(10, 10, 10)",
-      "onSurfaceVariant": "#f2003c",
+      "onSurfaceVariant": "rgb(157, 157, 157)",
       "outline": "rgb(147, 145, 130)",
       "outlineVariant": "rgb(72, 71, 58)",
       "shadow": "rgb(0, 0, 0)",
@@ -742,7 +742,12 @@
       "https://i0.hdslb.com/bfs/live/7296da1a361114792a1ea435b9ed958393866a58.png",
       "https://i0.hdslb.com/bfs/live/ed07c7fb8b6d8cf800c47449dd453d7041aa2f0c.png"
     ],
-    "backgroundImages": [{ "type": "bvid", "identifier": "BV1rh4y1b7wU" }],
+    "backgroundImages": [
+      {
+        "type": "bvid",
+        "identifier": "BV1rh4y1b7wU"
+      }
+    ],
     "backgroundImagesLandscape": [
       {
         "type": "bvid",
@@ -787,7 +792,7 @@
       "onSurface": "rgb(233, 233, 233)",
       "text": "rgb(233, 233, 233)",
       "surfaceVariant": "rgb(10, 10, 10)",
-      "onSurfaceVariant": "#f2003c",
+      "onSurfaceVariant": "rgb(157, 157, 157)",
       "outline": "rgb(147, 145, 130)",
       "outlineVariant": "rgb(72, 71, 58)",
       "shadow": "rgb(0, 0, 0)",
@@ -921,7 +926,7 @@
       "onSurface": "#00BFFF",
       "text": "#00BFFF",
       "surfaceVariant": "rgb(10, 10, 10)",
-      "onSurfaceVariant": "#00BFFF",
+      "onSurfaceVariant": "#97D5EA",
       "outline": "rgb(147, 145, 130)",
       "outlineVariant": "rgb(72, 71, 58)",
       "shadow": "rgb(0, 0, 0)",
@@ -1028,7 +1033,7 @@
       "onSurface": "#90ee90",
       "text": "#90ee90",
       "surfaceVariant": "rgb(10, 10, 10)",
-      "onSurfaceVariant": "#90ee90",
+      "onSurfaceVariant": "#5C985C",
       "outline": "rgb(147, 145, 130)",
       "outlineVariant": "rgb(72, 71, 58)",
       "shadow": "rgb(0, 0, 0)",
@@ -1183,7 +1188,7 @@
       "surface": "rgb(255, 251, 255)",
       "onSurface": "#ff1493",
       "surfaceVariant": "rgb(243, 221, 224)",
-      "onSurfaceVariant": "#ff1493",
+      "onSurfaceVariant": "#cc3366",
       "outline": "rgb(132, 115, 117)",
       "outlineVariant": "rgb(214, 194, 196)",
       "shadow": "rgba(0, 0, 0)",
@@ -1204,7 +1209,6 @@
       "backdrop": "rgba(58, 45, 47, 0.4)"
     }
   },
-
   {
     "metaData": {
       "themeName": "guraaaaaa",
@@ -1239,7 +1243,6 @@
       "https://walfiegif.files.wordpress.com/2023/07/out-transparent-7.gif",
       "https://walfiegif.files.wordpress.com/2023/07/out-transparent-3.gif"
     ],
-
     "backgroundImages": [
       {
         "type": "video",
@@ -1283,7 +1286,7 @@
       "surface": "rgb(255, 251, 255)",
       "onSurface": "#1e90ff",
       "surfaceVariant": "rgba(255, 251, 255, 0.2)",
-      "onSurfaceVariant": "#1e90ff",
+      "onSurfaceVariant": "#00aaff",
       "outline": "rgb(132, 115, 117)",
       "outlineVariant": "rgb(214, 194, 196)",
       "shadow": "rgba(0, 0, 0)",
@@ -1428,7 +1431,7 @@
       "surface": "rgb(255, 251, 255)",
       "onSurface": "#ff1493",
       "surfaceVariant": "rgb(243, 221, 224)",
-      "onSurfaceVariant": "#ff1493",
+      "onSurfaceVariant": "#cc3366",
       "outline": "rgb(132, 115, 117)",
       "outlineVariant": "rgb(214, 194, 196)",
       "shadow": "rgba(0, 0, 0)",
@@ -1635,7 +1638,6 @@
       }
     }
   },
-
   {
     "metaData": {
       "themeName": "杠杠播放器",
@@ -1771,7 +1773,7 @@
       "onSurface": "#00BFFF",
       "text": "#00BFFF",
       "surfaceVariant": "rgb(10, 10, 10)",
-      "onSurfaceVariant": "#00BFFF",
+      "onSurfaceVariant": "#97D5EA",
       "outline": "rgb(147, 145, 130)",
       "outlineVariant": "rgb(72, 71, 58)",
       "shadow": "rgb(0, 0, 0)",
@@ -2062,7 +2064,7 @@
       "surface": "rgb(255, 251, 255)",
       "onSurface": "#ff1493",
       "surfaceVariant": "rgb(243, 221, 224)",
-      "onSurfaceVariant": "#ff1493",
+      "onSurfaceVariant": "#cc3366",
       "outline": "rgb(132, 115, 117)",
       "outlineVariant": "rgb(214, 194, 196)",
       "shadow": "rgba(0, 0, 0)",
@@ -2206,7 +2208,7 @@
       "surface": "rgb(255, 251, 255)",
       "onSurface": "#ff1493",
       "surfaceVariant": "rgb(243, 221, 224)",
-      "onSurfaceVariant": "#ff1493",
+      "onSurfaceVariant": "#cc3366",
       "outline": "rgb(132, 115, 117)",
       "outlineVariant": "rgb(214, 194, 196)",
       "shadow": "rgba(0, 0, 0)",
@@ -2391,7 +2393,7 @@
       "onSurface": "#00BFFF",
       "text": "#00BFFF",
       "surfaceVariant": "rgb(10, 10, 10)",
-      "onSurfaceVariant": "#00BFFF",
+      "onSurfaceVariant": "#97D5EA",
       "outline": "rgb(147, 145, 130)",
       "outlineVariant": "rgb(72, 71, 58)",
       "shadow": "rgb(0, 0, 0)",
@@ -2501,7 +2503,7 @@
       "onSurface": "#00BFFF",
       "text": "#00BFFF",
       "surfaceVariant": "rgb(10, 10, 10)",
-      "onSurfaceVariant": "#00BFFF",
+      "onSurfaceVariant": "#97D5EA",
       "outline": "rgb(147, 145, 130)",
       "outlineVariant": "rgb(72, 71, 58)",
       "shadow": "rgb(0, 0, 0)",
@@ -2536,7 +2538,7 @@
       {
         "type": "bvid",
         "identifier": "BV1Uy421q78b",
-        "toA": 2.0
+        "toA": 2
       }
     ],
     "customColors": {
@@ -2572,7 +2574,7 @@
       "onSurface": "#00BFFF",
       "text": "#00BFFF",
       "surfaceVariant": "rgb(10, 10, 10)",
-      "onSurfaceVariant": "#00BFFF",
+      "onSurfaceVariant": "#97D5EA",
       "outline": "rgb(147, 145, 130)",
       "outlineVariant": "rgb(72, 71, 58)",
       "shadow": "rgb(0, 0, 0)",
@@ -2656,7 +2658,7 @@
       "onSurface": "rgb(233, 233, 233)",
       "text": "rgb(233, 233, 233)",
       "surfaceVariant": "rgb(10, 10, 10)",
-      "onSurfaceVariant": "#f2003c",
+      "onSurfaceVariant": "rgb(157, 157, 157)",
       "outline": "rgb(147, 145, 130)",
       "outlineVariant": "rgb(72, 71, 58)",
       "shadow": "rgb(0, 0, 0)",
