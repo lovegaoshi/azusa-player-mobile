@@ -124,7 +124,7 @@ export const replaceStyleColor = ({
       secondary: secondaryColor,
       background: backgroundColor,
       onSurface: primaryColor,
-      onSurfaceVariant: primaryColor,
+      onSurfaceVariant: secondaryColor,
       text: primaryColor,
     },
   };

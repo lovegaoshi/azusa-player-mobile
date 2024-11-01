@@ -121,6 +121,7 @@ export default () => {
           <IconButton
             icon={'cards-heart'}
             onPress={() => goToPlaylist(StorageKeys.FAVORITE_PLAYLIST_KEY)}
+            iconColor={playerStyle.colors.primary}
           />
           <ShuffleAllButton />
           <AddPlaylistButton open={dialogOpen} setOpen={setDialogOpen} />
@@ -141,7 +142,8 @@ export default () => {
             backgroundColor:
               currentPlaylist.id ===
               playlists[StorageKeys.SEARCH_PLAYLIST_KEY]?.id
-                ? playerStyle.customColors.playlistDrawerBackgroundColor
+                ? (playerStyle.colors.primaryContainer ??
+                  playerStyle.customColors.playlistDrawerBackgroundColor)
                 : undefined,
           },
         ]}
@@ -156,7 +158,7 @@ export default () => {
           leadColor={
             currentPlayingList.id ===
             playlists[StorageKeys.SEARCH_PLAYLIST_KEY].id
-              ? playerStyle.colors.primary //customColors.playlistDrawerBackgroundColor
+              ? playerStyle.colors.primary
               : undefined
           }
         />

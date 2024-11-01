@@ -3,6 +3,7 @@ import { IconButton } from 'react-native-paper';
 import { ViewStyle } from 'react-native';
 
 import Dialog from '../dialogs/NewPlaylistDialog';
+import { useNoxSetting } from '@stores/useApp';
 
 const ICON = 'plus-circle-outline';
 
@@ -21,9 +22,16 @@ export default ({
   open,
   setOpen,
 }: Props) => {
+  const playerStyle = useNoxSetting(state => state.playerStyle);
+
   return (
     <React.Fragment>
-      <IconButton icon={icon} onPress={() => setOpen(true)} style={style} />
+      <IconButton
+        icon={icon}
+        onPress={() => setOpen(true)}
+        style={style}
+        iconColor={playerStyle.colors.primary}
+      />
       <Dialog
         visible={open}
         fromList={fromList}
