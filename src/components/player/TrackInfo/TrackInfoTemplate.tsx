@@ -90,7 +90,6 @@ const TrackInfoTemplate: React.FC<Props> = props => {
       color: playerStyle.colors.onSurfaceVariant,
     },
   ];
-  console.log(playerStyle.colors.onSurfaceVariant);
   return (
     <View style={[styles.container, containerStyle, { width: windowWidth }]}>
       {children ?? <AlbumArt {...props} />}
