@@ -76,7 +76,9 @@ export default () => {
       event.position > event.duration * 0.5 &&
       crossfadeId !== currentSongId
     ) {
-      logger.debug('[crossfade] preparing crossfade');
+      logger.debug(
+        `[crossfade] preparing crossfade at ${event.position}/${event.duration}`,
+      );
       await prepareSkipToNext();
       setCrossfadeId(track?.song?.id ?? '');
       return TrackPlayer.crossFadePrepare();
