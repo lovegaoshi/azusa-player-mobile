@@ -26,6 +26,7 @@ export const initializeStores = async ({
   initPlayer = useNoxSetting.getState().initPlayer,
   setCurrentPlayingList = useNoxSetting.getState().setCurrentPlayingList,
 }: InitializeStores) => {
+  NoxModule?.loadRN();
   switch (Platform.OS) {
     case 'android':
       try {

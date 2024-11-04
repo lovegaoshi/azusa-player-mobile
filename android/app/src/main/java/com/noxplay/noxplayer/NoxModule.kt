@@ -100,6 +100,13 @@ class NoxModule(reactContext: ReactApplicationContext) :
         callback.resolve(listMediaDirNative("", true,
             "${MediaStore.Audio.Media._ID} = $id"))
     }
+
+    @ReactMethod fun loadRN(callback: Promise) {
+        val activity = reactApplicationContext.currentActivity as MainActivity?
+        activity?.loadedRN = true
+        callback.resolve(null)
+    }
+
     @ReactMethod fun getLastExitReason(callback: Promise) {
         try {
             val activity = reactApplicationContext.currentActivity
