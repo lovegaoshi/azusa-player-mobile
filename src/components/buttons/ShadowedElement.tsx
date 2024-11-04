@@ -15,7 +15,7 @@ const ShadowedElement = ({ children, style, distance = 8 }: Props) => {
     const shadowColor = color.alpha(color.alpha() * 0.75).toRgbString();
     if (isAndroid) {
       return (
-        <View style={{ boxShadow: `0 0 0 8px ${shadowColor}` }}>
+        <View style={{ boxShadow: `0 0 0 ${distance}px ${shadowColor}` }}>
           {children}
         </View>
       );
