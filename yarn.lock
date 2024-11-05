@@ -3221,6 +3221,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@react-native/gradle-plugin@patch:@react-native/gradle-plugin@npm%3A0.76.1#~/.yarn/patches/@react-native-gradle-plugin-npm-0.76.1-f19c439d00.patch":
+  version: 0.76.1
+  resolution: "@react-native/gradle-plugin@patch:@react-native/gradle-plugin@npm%3A0.76.1#~/.yarn/patches/@react-native-gradle-plugin-npm-0.76.1-f19c439d00.patch::version=0.76.1&hash=7825fa"
+  checksum: 10c0/5b870b5c2654252b2d2cbf90d9245824a60342f0e3342f2703300ded6e8496ee6712f205a503033f2ef1878432e034d7c0dab538e1b9fb37d36b9b9cbd068ae8
+  languageName: node
+  linkType: hard
+
 "@react-native/js-polyfills@npm:0.76.1":
   version: 0.76.1
   resolution: "@react-native/js-polyfills@npm:0.76.1"
@@ -5167,7 +5174,7 @@ __metadata:
     "@react-native-cookies/cookies": "npm:^6.2.1"
     "@react-native-masked-view/masked-view": "npm:^0.3.2"
     "@react-native/babel-preset": "npm:^0.76.1"
-    "@react-native/gradle-plugin": "npm:0.76.1"
+    "@react-native/gradle-plugin": "patch:@react-native/gradle-plugin@npm%3A0.76.1#~/.yarn/patches/@react-native-gradle-plugin-npm-0.76.1-f19c439d00.patch"
     "@react-native/metro-config": "npm:^0.76.1"
     "@react-native/typescript-config": "npm:0.76.1"
     "@react-navigation/drawer": "npm:^6.7.2"
