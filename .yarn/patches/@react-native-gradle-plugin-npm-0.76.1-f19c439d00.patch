@@ -1,0 +1,11 @@
+diff --git a/gradle/libs.versions.toml b/gradle/libs.versions.toml
+index 05a07e86f7b45ceb558dc761d32c5d2305c9a69f..e0c719783bd0f2c1dc57f39bdd40e10aa21e681b 100644
+--- a/gradle/libs.versions.toml
++++ b/gradle/libs.versions.toml
+@@ -1,5 +1,5 @@
+ [versions]
+-agp = "8.6.0"
++agp = "8.7.2"
+ gson = "2.8.9"
+ guava = "31.0.1-jre"
+ javapoet = "1.13.0"
