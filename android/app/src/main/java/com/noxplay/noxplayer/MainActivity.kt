@@ -17,7 +17,6 @@ import com.facebook.infer.annotation.Assertions
 import com.facebook.react.ReactActivity
 import com.facebook.react.ReactActivityDelegate
 import com.facebook.react.ReactApplication
-import com.facebook.react.ReactHost
 import com.facebook.react.bridge.Arguments
 import com.facebook.react.bridge.ReactContext
 import com.facebook.react.defaults.DefaultNewArchitectureEntryPoint.bridgelessEnabled
@@ -157,6 +156,7 @@ class MainActivity : ReactActivity(), ComponentCallbacks2 {
         super.onDestroy()
     }
 
+    @SuppressLint("VisibleForTests")
     fun getReactContext(): ReactContext? {
 
         if (bridgelessEnabled) {
