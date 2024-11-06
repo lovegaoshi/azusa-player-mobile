@@ -7,11 +7,8 @@ import {
   getABMapping,
   saveABMapping,
   getFadeInterval,
-  getRegExtractMapping,
 } from '@utils/ChromeStorage';
 import { logger } from '@utils/Logger';
-import rejson from '../utils/rejson.json';
-import { loadJSONRegExtractors } from '../utils/re';
 import noxCache from '@utils/Cache';
 
 interface AppStore {
@@ -38,7 +35,6 @@ interface AppStore {
   fadeIntervalSec: number;
   RNTPOptions?: UpdateOptions;
   setRNTPOptions: (val: UpdateOptions) => void;
-  reExtractSongName: (name: string, uploader: string | number) => string;
   cachedResolveURLMap: {
     [key: string]: NoxNetwork.ResolvedNoxMediaURL | undefined;
   };
@@ -86,31 +82,15 @@ const appStore = createStore<AppStore>(set => ({
 
 export const initialize = async () => {
   const fadeInterval = await getFadeInterval();
-  const savedRegExt = await getRegExtractMapping();
   appStore.setState({
     ABRepeat: await getABMapping(),
     fadeIntervalMs: fadeInterval,
     fadeIntervalSec: fadeInterval / 1000,
-    reExtractSongName: loadJSONRegExtractors(
-      savedRegExt.length > 0
-        ? savedRegExt
-        : (rejson as NoxRegExt.JSONExtractor[]),
-    ),
   });
 };
 
 export const setCrossfaded = (crossfaded = true) => {
   appStore.setState({ crossfaded });
-};
-
-export const reExtractSongName = (name: string, uploader: string | number) =>
-  appStore.getState().reExtractSongName(name, uploader);
-
-export const parseSongName = (song: NoxMedia.Song): NoxMedia.Song => {
-  return {
-    ...song,
-    parsedName: reExtractSongName(song.name, song.singerId),
-  };
 };
 
 export const saveABRepeat = (val: NoxStorage.ABDict) => {
@@ -150,14 +130,14 @@ export const setFetchProgress = (val: number) => {
 };
 
 export const addDownloadProgress = (song: NoxMedia.Song, progress: number) => {
-  const currentAppStore = appStore.getState();
+  const { downloadProgressMap, activeTrackPlayingId } = appStore.getState();
   const newDownloadProgressMap = {
-    ...currentAppStore.downloadProgressMap,
+    ...downloadProgressMap,
     [song.id]: progress,
   };
   appStore.setState({
     downloadProgressMap: newDownloadProgressMap,
-    ...(currentAppStore.activeTrackPlayingId === song.id && {
+    ...(activeTrackPlayingId === song.id && {
       fetchProgress: progress,
     }),
   });

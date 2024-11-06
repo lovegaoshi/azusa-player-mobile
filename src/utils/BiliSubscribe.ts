@@ -1,6 +1,6 @@
 import { searchBiliURLs } from './BiliSearch';
 import { PlaylistTypes } from '../enums/Playlist';
-import { parseSongName } from '@stores/appStore';
+import { parseSongName } from '@stores/regexStore';
 import logger from './Logger';
 
 interface Props {

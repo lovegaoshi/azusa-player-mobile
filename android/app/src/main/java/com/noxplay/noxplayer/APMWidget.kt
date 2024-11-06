@@ -9,6 +9,7 @@ import android.content.Intent
 import android.graphics.Bitmap
 import android.media.ThumbnailUtils
 import android.net.Uri
+import android.os.Build
 import android.widget.RemoteViews
 import androidx.annotation.OptIn
 import androidx.core.graphics.drawable.RoundedBitmapDrawableFactory
@@ -42,8 +43,20 @@ class APMWidget : AppWidgetProvider() {
         return true
     }
 
+    private fun bindOrStartService(context: Context?): Boolean {
+        val res = bindService(context)
+        if (!res) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                context?.startForegroundService(Intent(context, MusicService::class.java))
+            } else {
+                context?.startService(Intent(context, MusicService::class.java))
+            }
+        }
+        return res
+    }
+
     private fun emit(context: Context?, e: String) {
-        if (!bindService(context)) return
+        if (!bindOrStartService(context)) return
         binder.service.emit(e)
     }
 
@@ -78,7 +91,11 @@ class APMWidget : AppWidgetProvider() {
         }
         views.setTextViewText(R.id.songName, track?.title ?: "")
         views.setTextViewText(R.id.artistName, track?.artist ?: "")
-        views.setImageViewBitmap(R.id.albumArt, bitmap)
+        if (bitmap == null) {
+            views.setImageViewResource(R.id.albumArt, R.mipmap.ic_launcher_foreground)
+        } else {
+            views.setImageViewBitmap(R.id.albumArt, bitmap)
+        }
         return views
     }
 
@@ -160,11 +177,7 @@ class APMWidget : AppWidgetProvider() {
                 WIDGET_SET_BKGD -> setBackground(context, intent.data)
                 WIDGET_CLEAR -> clearWidgetContent(context)
                 WIDGET_CLICK -> {
-                    if (!bindService(context)) {
-                        Intent(context, MainActivity::class.java).apply {
-                            addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-                        }.also {i -> context?.startActivity(i)}
-                    } else {
+                    if (bindService(context)) {
                         val prevClick = context
                             ?.getSharedPreferences("APM", Context.MODE_PRIVATE)
                             ?.getLong(WIDGET_CLICK_COUNT, 0) ?: 0

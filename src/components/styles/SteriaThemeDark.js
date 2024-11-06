@@ -49,7 +49,7 @@ export default {
     textInputSelectionColor: 'green',
   },
   colors: {
-    primary: 'rgb(255, 255, 0)',
+    primary: '#fcf75e',
     onPrimary: 'rgb(50, 50, 0)',
     primaryContainer: 'rgb(73, 73, 0)',
     onPrimaryContainer: 'rgb(234, 234, 0)',
@@ -72,7 +72,7 @@ export default {
     // font color
     onSurface: 'rgba(235, 235, 0, 1)', // 'rgb(230, 226, 217)',
     // navigation text color. should be primary.
-    text: 'rgb(255, 255, 0)',
+    text: '#fcf75e',
     // blackground of inputs
     surfaceVariant: 'rgb(10, 10, 10)',
     // icon color

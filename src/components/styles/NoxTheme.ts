@@ -105,9 +105,9 @@ export default {
   },
 
   colors: {
-    primary: 'rgb(255, 255, 0)',
+    primary: '#fcf75e',
     onPrimary: 'rgb(50, 50, 0)',
-    primaryContainer: 'rgb(73, 73, 0)',
+    primaryContainer: 'green',
     onPrimaryContainer: 'rgb(234, 234, 0)',
     secondary: 'rgb(202, 200, 165)',
     onSecondary: 'rgb(50, 50, 24)',
@@ -117,23 +117,19 @@ export default {
     onTertiary: 'rgb(11, 55, 42)',
     tertiaryContainer: 'rgb(37, 78, 64)',
     onTertiaryContainer: 'rgb(191, 236, 216)',
-    error: 'rgb(255, 180, 171)',
-    onError: 'rgb(105, 0, 5)',
-    errorContainer: 'rgb(147, 0, 10)',
-    onErrorContainer: 'rgb(255, 180, 171)',
+    error: '#E69490',
+    onError: '#4C100D',
+    errorContainer: '#661511',
+    onErrorContainer: '#E6ACA9',
     // IMPORTANT! use some transparency value if you are specifying a background image.
     background: 'rgba(0,0,0, 0.4)',
-    onBackground: 'rgb(230, 226, 217)',
-    surface: 'rgb(28, 28, 23)',
-    // font color
-    onSurface: 'rgba(235, 235, 0, 1)', // 'rgb(230, 226, 217)',
-    // navigation text color. should be primary.
-    text: 'rgb(255, 255, 0)',
+    onBackground: '#e6e6e2',
+    surface: '#333330',
+    onSurface: '#fcf75e',
+    surfaceVariant: '#666652',
+    onSurfaceVariant: 'rgb(202, 200, 165)',
+    outline: '#b3b39c',
     // blackground of inputs
-    surfaceVariant: 'rgb(10, 10, 10)',
-    // icon color
-    onSurfaceVariant: 'rgb(225, 225, 0)', // 'rgb(202, 199, 182)',
-    outline: 'rgb(147, 145, 130)',
     outlineVariant: 'rgb(72, 71, 58)',
     shadow: 'rgb(0, 0, 0)',
     scrim: 'rgb(0, 0, 0)',

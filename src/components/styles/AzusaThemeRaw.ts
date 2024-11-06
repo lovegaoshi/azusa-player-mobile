@@ -107,7 +107,7 @@ export default {
   customColors: {
     maskedBackgroundColor: 'rgba(255, 255, 255, 0.5)',
     playlistDrawerBackgroundColor: '#dcd0ff',
-    playlistDrawerBackgroundColorTransparent: '#dcd0ff',
+    playlistDrawerBackgroundColorTransparent: 'rgba(234, 221, 255, 0.35)',
     progressThumbTintColor: '#a76bcf',
     progressMinimumTrackTintColor: '#df73ff',
     progressMaximumTrackTintColor: '#bf94e4',
@@ -115,9 +115,7 @@ export default {
     playerControlIconBkgrdColor: '#dcd0ff',
   },
   colors: {
-    text: 'rgb(103, 80, 164)',
     background: 'rgba(255, 255, 255, 0.4)',
-    onSurfaceVariant: 'rgb(103, 80, 164)', // '#9400d3', // 'rgb(202, 199, 182)',
   },
   playerControlIconContained: undefined,
   loadingIcon:

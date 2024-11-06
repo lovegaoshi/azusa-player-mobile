@@ -11,6 +11,8 @@ import useGoogleTVOauth from '@components/login/google/useGoogleTVOauth';
 import { saveSecure as saveItem } from '@utils/ChromeStorageAPI';
 import { StorageKeys } from '@enums/Storage';
 import { User, UseYTMLogin } from './useYTMLogin';
+import { museStore } from '@utils/muse';
+import useCollapsible from '../useCollapsible';
 
 const jsCode = 'window.ReactNativeWebView.postMessage(document.cookie)';
 const auth = get_option('auth');
@@ -19,8 +21,13 @@ interface LoginProps {
   refresh: () => void;
 }
 const Login = ({ refresh }: LoginProps) => {
-  const [webView, setWebView] = useState(false);
+  const [webView, _setWebView] = useState(false);
   const [cookies, setCookies] = useState<string[]>([]);
+  const toggleCollapse = useCollapsible(state => state.toggleCollapse);
+  const setWebView = (val: boolean) => {
+    _setWebView(val);
+    toggleCollapse(val);
+  };
   const { userURL, loginCodes, getNewLoginCode } = useGoogleTVOauth({
     setWebView,
   });
@@ -44,7 +51,10 @@ const Login = ({ refresh }: LoginProps) => {
           });
           auth
             .load_token_with_code(loginCodes!.deviceCode, loginCodes!.interval)
-            .then(t => saveItem(StorageKeys.YTMTOKEN, t).then(refresh));
+            .then(t => {
+              museStore.set('token', t);
+              refresh();
+            });
           saveItem(StorageKeys.YTMCOOKIES, cookies.join('; '));
           return true;
         }
@@ -123,7 +133,8 @@ const Explore = ({ ytmLogin }: Props) => {
     <LoggedInPage
       user={user}
       logout={() => {
-        saveItem(StorageKeys.YTMTOKEN, null);
+        saveItem(StorageKeys.YTMCOOKIES, null);
+        museStore.set('token', null);
         auth.token = null;
         clear();
       }}

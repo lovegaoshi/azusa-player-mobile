@@ -2,16 +2,14 @@ import { NativeModules, Platform } from 'react-native';
 import { useNoxSetting } from './useApp';
 import { fetch } from '@react-native-community/netinfo';
 import i18next from 'i18next';
-import { get_option } from 'libmuse';
 
 import { initialize as initializeAppStore } from './appStore';
+import { initialize as initializeRegexStore } from './regexStore';
 import { initializeR128Gain } from '../utils/ffmpeg/r128Store';
 import { dataSaverPlaylist, initCache } from '../utils/Cache';
-import { getSecure as getItem } from '@utils/ChromeStorageAPI';
-import { StorageKeys } from '@enums/Storage';
+import { initialize as initializeMuse } from '@utils/muse';
 import { useAPM } from './usePersistStore';
 
-const auth = get_option('auth');
 const { NoxModule } = NativeModules;
 
 interface InitializeStores {
@@ -28,6 +26,7 @@ export const initializeStores = async ({
   initPlayer = useNoxSetting.getState().initPlayer,
   setCurrentPlayingList = useNoxSetting.getState().setCurrentPlayingList,
 }: InitializeStores) => {
+  NoxModule?.loadRN();
   switch (Platform.OS) {
     case 'android':
       try {
@@ -44,8 +43,9 @@ export const initializeStores = async ({
     default:
       break;
   }
-  await getItem(StorageKeys.YTMTOKEN).then(k => (auth.token = k));
+  await initializeMuse();
   await initializeAppStore();
+  await initializeRegexStore();
   await initializeR128Gain();
   await useAPM.persist.rehydrate();
   const results = await initPlayer(val);

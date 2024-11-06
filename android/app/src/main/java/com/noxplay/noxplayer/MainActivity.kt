@@ -13,6 +13,8 @@ import android.os.Bundle
 import android.os.Debug
 import android.os.SystemClock
 import android.util.Rational
+import android.view.View
+import android.view.ViewTreeObserver
 import com.facebook.react.ReactActivity
 import com.facebook.react.ReactActivityDelegate
 import com.facebook.react.defaults.DefaultNewArchitectureEntryPoint.fabricEnabled
@@ -21,15 +23,34 @@ import com.facebook.react.bridge.Arguments
 import expo.modules.ReactActivityDelegateWrapper
 import timber.log.Timber
 
-class MainActivity : ReactActivity(), ComponentCallbacks2 {
+interface NoxActivity {
+    var loadedRN: Boolean
+}
+
+class MainActivity(override var loadedRN: Boolean = false) :
+    ReactActivity(), ComponentCallbacks2, NoxActivity {
     /**
      * for react navigation;
      */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(null)
-        if ("trackplayer://service-bound" in intent.data.toString()) {
-            moveTaskToBack(true)
-        }
+
+        val content: View = findViewById(android.R.id.content)
+        content.viewTreeObserver.addOnPreDrawListener(
+            object : ViewTreeObserver.OnPreDrawListener {
+                override fun onPreDraw(): Boolean {
+                    // Check whether the initial data is ready.
+                    return if (loadedRN) {
+                        // The content is ready. Start drawing.
+                        content.viewTreeObserver.removeOnPreDrawListener(this)
+                        true
+                    } else {
+                        // The content isn't ready. Suspend.
+                        false
+                    }
+                }
+            }
+        )
     }
 
     @SuppressLint("VisibleForTests")
@@ -155,4 +176,5 @@ class MainActivity : ReactActivity(), ComponentCallbacks2 {
         )
         super.onDestroy()
     }
+
 }

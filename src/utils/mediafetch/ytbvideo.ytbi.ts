@@ -38,7 +38,6 @@ export const suggestYTM = async (
   song: NoxMedia.Song,
   filterMW = <T>(v: T[]) => v[0],
 ) => {
-  console.log('ytm suggest2');
   const yt = await ytClientWeb;
   const videoInfo = await yt.music.getUpNext(song.bvid);
   const relatedVideos = videoInfo.contents as PlaylistPanelVideo[];
@@ -66,7 +65,6 @@ export const suggest = async (
   song: NoxMedia.Song,
   filterMW = <T>(v: T[]) => v[0],
 ) => {
-  console.log('ytm suggest');
   const yt = await ytClientWeb;
   const videoInfo = await yt.getInfo(song.bvid);
   try {

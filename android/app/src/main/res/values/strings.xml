@@ -9,4 +9,5 @@
     <string name="album_art">album art</string>
     <string name="songname">Song name</string>
     <string name="artist">Artist</string>
+    <string name="apmicon">APMIcon</string>
 </resources>

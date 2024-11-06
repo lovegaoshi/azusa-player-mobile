@@ -46,7 +46,6 @@ export default () => {
             duration: 200,
             useNativeDriver: true,
           }).start(() => {
-            console.log('splashes moved on right');
             nextImage();
             position.setValue({ x: 0, y: 0 });
           });
@@ -56,7 +55,6 @@ export default () => {
             duration: 200,
             useNativeDriver: true,
           }).start(() => {
-            console.log('splashes moved on left');
             nextImage();
             position.setValue({ x: 0, y: 0 });
           });
@@ -81,15 +79,12 @@ export default () => {
   ).current;
 
   const nextImage = () => {
-    console.log('splash to next', index);
     setIndex(val => (val < imageSplashes.length - 1 ? val + 1 : 0));
   };
 
   const isIndexEnd = (i: number) => {
     return index === imageSplashes.length - 1 && i === 0;
   };
-
-  React.useEffect(() => console.log('splash', index), [index]);
 
   return (
     <View style={styles.view}>

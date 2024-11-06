@@ -1,3 +1,5 @@
+import type { MD3Colors } from 'react-native-paper';
+
 import { RESOLVE_TYPE } from '../utils/mediafetch/mainbackgroundfetch';
 
 declare global {
@@ -34,8 +36,7 @@ declare global {
       gifs: string[];
       backgroundImages: (string | backgroundImage)[];
       backgroundImagesLandscape?: (string | backgroundImage)[];
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      colors: any;
+      colors: MD3Colors;
       customColors: customColors;
       // https://callstack.github.io/react-native-paper/docs/components/IconButton/
       // Type: 'outlined' | 'contained' | 'contained-tonal'

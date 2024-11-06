@@ -48,7 +48,6 @@ export const fetchYTIChannel = async (
   const videos = (await channel.getVideos()).videos.filter(
     v => v.type === 'Video',
   );
-  console.log((await channel.getVideos()).videos.length);
   return videos
     .map(v => innertune2NoxSong(v, channel))
     .filter(v => !favList.includes(v.bvid));

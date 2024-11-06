@@ -4,6 +4,8 @@ import { IconButton } from 'react-native-paper';
 
 import Icons from '../playlist/BiliSearch/Icons';
 import { Site, Sites } from '@enums/Network';
+import useCollapsible from './useCollapsible';
+import { Collapsible } from '@components/commonui/Collapsible';
 
 interface Props {
   LoginComponent: (p: { loginSite: Site }) => JSX.Element;
@@ -23,6 +25,7 @@ export default ({
   onSiteChange,
 }: Props) => {
   const [loginSite, setLoginSite] = useState<Site>(defaultSite);
+  const collapsed = useCollapsible(state => state.collapse);
   const opacityValue = (v: Site, toSite = loginSite) =>
     toSite === v ? 1 : 0.2;
 
@@ -57,20 +60,22 @@ export default ({
 
   return (
     <View style={containerStyle}>
-      <View style={iconTabStyle}>
-        <IconButton
-          style={{ opacity: bilibiliOpacity }}
-          icon={() => Icons.BILIBILI(iconSize)}
-          size={iconSize}
-          onPress={() => setLoginSiteAnimated(Site.Bilibili)}
-        />
-        <IconButton
-          style={{ opacity: ytmOpacity }}
-          icon={() => Icons.YOUTUBEM(iconSize)}
-          size={iconSize}
-          onPress={() => setLoginSiteAnimated(Site.YTM)}
-        />
-      </View>
+      <Collapsible collapsed={collapsed}>
+        <View style={iconTabStyle}>
+          <IconButton
+            style={{ opacity: bilibiliOpacity }}
+            icon={() => Icons.BILIBILI(iconSize)}
+            size={iconSize}
+            onPress={() => setLoginSiteAnimated(Site.Bilibili)}
+          />
+          <IconButton
+            style={{ opacity: ytmOpacity }}
+            icon={() => Icons.YOUTUBEM(iconSize)}
+            size={iconSize}
+            onPress={() => setLoginSiteAnimated(Site.YTM)}
+          />
+        </View>
+      </Collapsible>
       <LoginComponent loginSite={loginSite} />
     </View>
   );
