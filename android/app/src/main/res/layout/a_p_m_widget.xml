@@ -43,7 +43,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="horizontal">
-
                     <TextView
                         android:id="@+id/songName"
                         android:layout_width="match_parent"
@@ -60,8 +59,14 @@
                         android:layout_width="40dp"
                         android:layout_height="20dp"
                         android:layout_weight="1"
+                        android:contentDescription="@string/apmicon"
                         android:scaleType="fitXY"
-                        app:srcCompat="@mipmap/ic_launcher_foreground" />
+                        android:src="@drawable/media3_notification_small_icon"
+                        android:tint="#000000"
+                        app:srcCompat="@drawable/media3_notification_small_icon"
+                        app:tint="#000000"
+                        tools:ignore="UseAppTint" />
+
                 </LinearLayout>
 
                 <TextView
