@@ -5295,7 +5295,7 @@ __metadata:
     react-native-svg: "npm:15.8.0"
     react-native-svga-player: "https://lovegaoshi@github.com/lovegaoshi/react-native-svga-player.git#commit=f8c6303fddb528a1a94d2ab4696c9318c0002cfd"
     react-native-tab-view: "npm:^3.5.2"
-    react-native-text-ticker: "https://lovegaoshi@github.com/lovegaoshi/react-native-text-ticker.git#commit=2e7306a4b8d3014b852629a0afe675a35b3de1b1"
+    react-native-text-ticker: "https://lovegaoshi@github.com/lovegaoshi/react-native-text-ticker.git#commit=b9eb454b18bb621a769ce4b57b4603a81501b477"
     react-native-track-player: "https://github.com/lovegaoshi/react-native-track-player.git#commit=71b594e474661ba0567d99ca98d165456282045b"
     react-native-url-polyfill: "npm:^2.0.0"
     react-native-vector-icons: "npm:^10.2.0"
@@ -14208,10 +14208,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-native-text-ticker@https://lovegaoshi@github.com/lovegaoshi/react-native-text-ticker.git#commit=2e7306a4b8d3014b852629a0afe675a35b3de1b1":
+"react-native-text-ticker@https://lovegaoshi@github.com/lovegaoshi/react-native-text-ticker.git#commit=b9eb454b18bb621a769ce4b57b4603a81501b477":
   version: 1.14.0
-  resolution: "react-native-text-ticker@https://lovegaoshi@github.com/lovegaoshi/react-native-text-ticker.git#commit=2e7306a4b8d3014b852629a0afe675a35b3de1b1"
-  checksum: 10c0/f32fde7d4097afe54a978ae0c6a7760308922d16b6e710908dd9b748ec5930b074800d482acad87abe2eed0240aceee4895dc9e9dfa7d1b4c41a8d991608537f
+  resolution: "react-native-text-ticker@https://lovegaoshi@github.com/lovegaoshi/react-native-text-ticker.git#commit=b9eb454b18bb621a769ce4b57b4603a81501b477"
+  checksum: 10c0/a0b3145faefe7dc641329ab77eb370e69887773bda86af3fe01717a7749c5bfcd8e60e61947b0e0a566ebcbd003332fa569fb86db5b161519a1a144c7ad01e6d
   languageName: node
   linkType: hard
 
