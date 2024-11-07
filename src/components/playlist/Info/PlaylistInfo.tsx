@@ -181,7 +181,8 @@ export default ({ usePlaylist, onPressed = () => undefined }: Props) => {
             style={styles.textInput}
             inputStyle={styles.searchInput}
             ref={searchContainerRef}
-            selectTextOnFocus
+            // HACK: breaks on newarch
+            //selectTextOnFocus
             selectionColor={playerStyle.customColors.textInputSelectionColor}
             icon={searching ? 'format-list-checkbox' : () => undefined}
             onIconPress={handleMenuPress}
@@ -220,6 +221,6 @@ const styles = StyleSheet.create({
   pressable: {
     position: 'absolute',
     paddingLeft: 15,
-    zIndex: -1,
+    zIndex: 1,
   },
 });
