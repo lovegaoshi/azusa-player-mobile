@@ -1,0 +1,46 @@
+diff --git a/node_modules/whatwg-fetch/dist/fetch.umd.js b/node_modules/whatwg-fetch/dist/fetch.umd.js
+index 7a0d852..2410a98 100644
+--- a/node_modules/whatwg-fetch/dist/fetch.umd.js
++++ b/node_modules/whatwg-fetch/dist/fetch.umd.js
+@@ -543,7 +543,7 @@
+         xhr.abort();
+       }
+ 
+-      xhr.onload = function() {
++      xhr.onload = async function() {
+         var options = {
+           statusText: xhr.statusText,
+           headers: parseHeaders(xhr.getAllResponseHeaders() || '')
+@@ -557,27 +557,19 @@
+         }
+         options.url = 'responseURL' in xhr ? xhr.responseURL : options.headers.get('X-Request-URL');
+         var body = 'response' in xhr ? xhr.response : xhr.responseText;
+-        setTimeout(function() {
+-          resolve(new Response(body, options));
+-        }, 0);
++        resolve(new Response(body, options));
+       };
+ 
+-      xhr.onerror = function() {
+-        setTimeout(function() {
+-          reject(new TypeError('Network request failed'));
+-        }, 0);
++      xhr.onerror = async function() {
++        reject(new TypeError('Network request failed'));
+       };
+ 
+-      xhr.ontimeout = function() {
+-        setTimeout(function() {
++      xhr.ontimeout = async function() {
+           reject(new TypeError('Network request timed out'));
+-        }, 0);
+       };
+ 
+-      xhr.onabort = function() {
+-        setTimeout(function() {
++      xhr.onabort = async function() {
+           reject(new exports.DOMException('Aborted', 'AbortError'));
+-        }, 0);
+       };
+ 
+       function fixUrl(url) {

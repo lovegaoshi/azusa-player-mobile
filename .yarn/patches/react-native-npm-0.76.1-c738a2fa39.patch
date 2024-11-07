@@ -1,0 +1,29 @@
+diff --git a/ReactAndroid/src/main/java/com/facebook/react/modules/core/JavaTimerManager.kt b/ReactAndroid/src/main/java/com/facebook/react/modules/core/JavaTimerManager.kt
+index ecce67478dd9d01567b9ad9cd598a3234d5a52a3..a5154a1f39a7cb559f433788e8e5bd2bff673aa4 100644
+--- a/ReactAndroid/src/main/java/com/facebook/react/modules/core/JavaTimerManager.kt
++++ b/ReactAndroid/src/main/java/com/facebook/react/modules/core/JavaTimerManager.kt
+@@ -18,6 +18,7 @@ import com.facebook.react.bridge.WritableArray
+ import com.facebook.react.common.SystemClock.currentTimeMillis
+ import com.facebook.react.common.SystemClock.nanoTime
+ import com.facebook.react.common.SystemClock.uptimeMillis
++import com.facebook.react.defaults.DefaultNewArchitectureEntryPoint
+ import com.facebook.react.devsupport.interfaces.DevSupportManager
+ import com.facebook.react.jstasks.HeadlessJsTaskContext
+ import com.facebook.react.jstasks.HeadlessJsTaskEventListener
+@@ -131,8 +132,14 @@ public open class JavaTimerManager(
+   }
+ 
+   private fun clearFrameCallback() {
+-    val headlessJsTaskContext = HeadlessJsTaskContext.getInstance(reactApplicationContext)
+-    if (frameCallbackPosted && isPaused.get() && !headlessJsTaskContext.hasActiveTasks()) {
++    if (!DefaultNewArchitectureEntryPoint.bridgelessEnabled) {
++        val headlessJsTaskContext = HeadlessJsTaskContext.getInstance(reactApplicationContext)
++        if (headlessJsTaskContext.hasActiveTasks()) {
++            return
++        }
++    }
++    
++    if (frameCallbackPosted && isPaused.get()) {
+       reactChoreographer.removeFrameCallback(
+           ReactChoreographer.CallbackType.TIMERS_EVENTS, timerFrameCallback)
+       frameCallbackPosted = false

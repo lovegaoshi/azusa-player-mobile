@@ -1,0 +1,13 @@
+diff --git a/node_modules/@sharcoux/slider/dist/components/Thumb.js b/node_modules/@sharcoux/slider/dist/components/Thumb.js
+index 2aeee80..d7309c8 100644
+--- a/node_modules/@sharcoux/slider/dist/components/Thumb.js
++++ b/node_modules/@sharcoux/slider/dist/components/Thumb.js
+@@ -109,7 +109,7 @@ const Thumb = ({ color = 'darkcyan', CustomThumb, size = 15, thumbRadius = 0, st
+     });
+     const accessibilityValues = react_1.default.useMemo(() => ({ min: minimumValue, max: maximumValue, now: value }), [minimumValue, maximumValue, value]);
+     return react_1.default.createElement(RN.View, { style: containerStyle },
+-        react_1.default.createElement(RN.View, { accessibilityActions: accessibility, onAccessibilityAction: accessibilityActions, focusable: true, accessible: true, accessibilityValue: accessibilityValues, accessibilityRole: 'adjustable', accessibilityLabel: thumb, 
++        react_1.default.createElement(RN.View, { accessibilityActions: accessibility, onAccessibilityAction: accessibilityActions, focusable: true, accessible: true, accessibilityRole: 'adjustable', accessibilityLabel: thumb, 
+             // This is for web
+             // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+             // @ts-ignore

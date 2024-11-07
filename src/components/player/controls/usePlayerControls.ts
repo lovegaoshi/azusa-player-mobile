@@ -76,7 +76,9 @@ export default () => {
       event.position > event.duration * 0.5 &&
       crossfadeId !== currentSongId
     ) {
-      logger.debug('[crossfade] preparing crossfade');
+      logger.debug(
+        `[crossfade] preparing crossfade at ${event.position}/${event.duration}`,
+      );
       await prepareSkipToNext();
       setCrossfadeId(track?.song?.id ?? '');
       return TrackPlayer.crossFadePrepare();
@@ -89,6 +91,7 @@ export default () => {
         logger.warn(
           `[crossfade] true duration is 0?! reset to ${event.duration} instead. ${bRepeatDuration}, ${abRepeat}.`,
         );
+        setBRepeatDuration(event.duration * abRepeat[1]);
         trueDuration = event.duration;
       }
       if (

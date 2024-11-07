@@ -13,13 +13,17 @@ import android.os.Bundle
 import android.os.Debug
 import android.os.SystemClock
 import android.util.Rational
+import com.facebook.infer.annotation.Assertions
 import android.view.View
 import android.view.ViewTreeObserver
 import com.facebook.react.ReactActivity
 import com.facebook.react.ReactActivityDelegate
+import com.facebook.react.ReactApplication
+import com.facebook.react.bridge.Arguments
+import com.facebook.react.bridge.ReactContext
+import com.facebook.react.defaults.DefaultNewArchitectureEntryPoint.bridgelessEnabled
 import com.facebook.react.defaults.DefaultNewArchitectureEntryPoint.fabricEnabled
 import com.facebook.react.defaults.DefaultReactActivityDelegate
-import com.facebook.react.bridge.Arguments
 import expo.modules.ReactActivityDelegateWrapper
 import timber.log.Timber
 
@@ -58,15 +62,13 @@ class MainActivity(override var loadedRN: Boolean = false) :
         super.onNewIntent(intent)
         try {
             if (intent.action?.contains("android.media.action.MEDIA_PLAY_FROM_SEARCH") == true) {
-                this.reactInstanceManager.currentReactContext
-                    ?.emitDeviceEvent("remote-play-search", Arguments.fromBundle(intent.extras ?: Bundle()))
+                getReactContext()?.emitDeviceEvent("remote-play-search", Arguments.fromBundle(intent.extras ?: Bundle()))
             }
             val launchOptions = Bundle()
             launchOptions.putString("intentData", intent.dataString)
             launchOptions.putString("intentAction", intent.action)
             launchOptions.putBundle("intentBundle", intent.extras ?: Bundle())
-            this.reactInstanceManager.currentReactContext
-                ?.emitDeviceEvent("APMNewIntent", Arguments.fromBundle(launchOptions))
+            getReactContext()?.emitDeviceEvent("APMNewIntent", Arguments.fromBundle(launchOptions))
         } catch (e: Exception) {
             Timber.tag("APM-intent").d("failed to notify intent: $intent")
         }
@@ -132,14 +134,12 @@ class MainActivity(override var loadedRN: Boolean = false) :
         }
         if (isInPictureInPictureMode) {
             // Hide the full-screen UI (controls, etc.) while in PiP mode.
-            this.reactInstanceManager.currentReactContext
-                ?.emitDeviceEvent("APMEnterPIP", true)
+            getReactContext()?.emitDeviceEvent("APMEnterPIP", true)
             // HACK: a really stupid way to continue RN UI rendering
             onResume()
         } else {
             // Restore the full-screen UI.
-            reactInstanceManager.currentReactContext
-                ?.emitDeviceEvent("APMEnterPIP", false)
+            getReactContext()?.emitDeviceEvent("APMEnterPIP", false)
         }
         super.onPictureInPictureModeChanged(isInPictureInPictureMode, newConfig)
     }
@@ -177,4 +177,15 @@ class MainActivity(override var loadedRN: Boolean = false) :
         super.onDestroy()
     }
 
+    @SuppressLint("VisibleForTests")
+    fun getReactContext(): ReactContext? {
+
+        if (bridgelessEnabled) {
+            val reactApplication = this.application as ReactApplication
+            val reactHost = reactApplication.reactHost
+            Assertions.assertNotNull(reactHost, "React host is null in newArchitecture")
+            return reactHost?.currentReactContext
+        }
+        return reactInstanceManager.currentReactContext
+    }
 }
