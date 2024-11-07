@@ -5,6 +5,7 @@ import TrackPlayer, {
   UpdateOptions,
   Track,
   TrackType,
+  AndroidOptions,
 } from 'react-native-track-player';
 
 import { logger } from './Logger';
@@ -70,10 +71,6 @@ export const animatedVolumeChange = ({
   }).start(() => callback());
 };
 
-interface RNTPOptions {
-  audioOffload?: boolean;
-  skipSilence?: boolean;
-}
 /**
  * see export function useSetupPlayer.
  * wait SetupService(serviceOptions) is called after await initPlayer(await initPlayerObject())
@@ -81,13 +78,12 @@ interface RNTPOptions {
  * playlistStore.playmode is already set
  * this should return the correct icon for playback mode.
  */
-export const initRNTPOptions = ({ audioOffload, skipSilence }: RNTPOptions) => {
+export const initRNTPOptions = (p: Partial<AndroidOptions>) => {
   const options: UpdateOptions = {
     android: {
+      ...p,
       appKilledPlaybackBehavior:
         AppKilledPlaybackBehavior.StopPlaybackAndRemoveNotification,
-      audioOffload,
-      androidSkipSilence: skipSilence,
     },
     capabilities: [
       Capability.Play,

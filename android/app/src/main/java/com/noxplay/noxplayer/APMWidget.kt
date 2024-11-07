@@ -177,7 +177,11 @@ class APMWidget : AppWidgetProvider() {
                 WIDGET_SET_BKGD -> setBackground(context, intent.data)
                 WIDGET_CLEAR -> clearWidgetContent(context)
                 WIDGET_CLICK -> {
-                    if (bindService(context)) {
+                    if (!bindService(context)) {
+                        Intent(context, MainActivity::class.java).apply {
+                            addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                        }.also {i -> context?.startActivity(i)}
+                    } else {
                         val prevClick = context
                             ?.getSharedPreferences("APM", Context.MODE_PRIVATE)
                             ?.getLong(WIDGET_CLICK_COUNT, 0) ?: 0

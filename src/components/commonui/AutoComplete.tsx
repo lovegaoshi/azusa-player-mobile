@@ -77,7 +77,8 @@ export default ({
         value={value}
         onChangeText={setValue}
         onSubmitEditing={() => onSubmit(value)}
-        selectTextOnFocus
+        // HACK: with new arch this selects all when entering the first char
+        // selectTextOnFocus
         style={styles.input}
         selectionColor={playerStyle.customColors.textInputSelectionColor}
         onIconPress={onIconPress}

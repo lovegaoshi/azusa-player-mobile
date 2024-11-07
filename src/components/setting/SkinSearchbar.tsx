@@ -50,6 +50,7 @@ const CustomSkinSearch = ({
           style={styles.textInput}
           selectionColor={playerStyle.customColors.textInputSelectionColor}
           onIconPress={() => handleSearch(searchVal)}
+          numberOfLines={1}
         />
       </View>
       <ProgressBar

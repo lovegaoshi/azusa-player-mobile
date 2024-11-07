@@ -1,4 +1,7 @@
 {
   "name": "azusa-player-mobile",
-  "displayName": "APM"
+  "displayName": "APM",
+  "plugins": [
+    "expo-secure-store"
+  ]
 }

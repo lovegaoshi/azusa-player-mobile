@@ -57,7 +57,7 @@ const NoxPlayer = ({ navigation, setNavigation = () => undefined }: Props) => {
   useEffect(() => setNavigation(navigation), []);
 
   return (
-    <View style={{ flex: 1, justifyContent: 'flex-end' }}>
+    <View style={{ flex: 1, justifyContent: 'flex-end' }} collapsable={false}>
       <Tab.Navigator style={PlayerStyle}>
         <Tab.Screen
           name={NoxRoutes.PlayerCover}
