@@ -29,6 +29,8 @@ if (TRACKING) {
       'no audio url',
       'com.google.android.play.core.appupdate.internal.zzy',
       'TEST - Sentry Client Crash',
+      // its ok to not track muse error i think
+      /MuseError/,
     ],
   });
 }
