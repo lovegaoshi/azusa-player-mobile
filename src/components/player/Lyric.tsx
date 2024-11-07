@@ -129,7 +129,7 @@ export const LyricView = ({
         noScrollThrottle={noScrollThrottle}
         onPress={onPress}
         karaokeOnColor={playerStyle.colors.primary}
-        karaokeOffColor={playerStyle.colors.secondary}
+        karaokeOffColor={playerStyle.colors.onSurface}
         karaokeMode={
           playerSetting.karaokeLyrics ? KaraokeMode.OnlyRealKaraoke : undefined
         }
