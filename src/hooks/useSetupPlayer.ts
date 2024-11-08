@@ -11,6 +11,9 @@ import { IntentData } from '@enums/Intent';
 import { useNoxSetting } from '@stores/useApp';
 import usePlayStore from './usePlayStore';
 import { buildBrowseTree } from './usePlaybackAA';
+import { NativeModules } from 'react-native';
+
+const { NoxModule } = NativeModules;
 
 const initializePlayer = async (safeMode = false) => {
   const {
@@ -54,6 +57,9 @@ export default ({ intentData }: NoxComponent.AppProps) => {
   const { checkPlayStoreUpdates } = usePlayStore();
 
   useEffect(() => {
+    // TODO: if non VIP, call NoxModule?.loadRN() to start loading while displaying
+    // splash screen; else, stuff loading in the native splashsceren
+    NoxModule?.loadRN();
     let unmounted = false;
     (async () => {
       await appStartupInit;
@@ -75,13 +81,21 @@ export default ({ intentData }: NoxComponent.AppProps) => {
         case IntentData.PlayAll:
           // this hook cannot use usePlayback bc of rerendering..??
           break;
-        default:
+        case undefined:
           await TrackPlayer.pause();
+        default:
+        // await TrackPlayer.pause();
       }
     })();
     return () => {
       unmounted = true;
     };
   }, []);
+
+  useEffect(() => {
+    // HACK: fix when starting via notification clicks, loadRN is not set yet
+    playerReady && NoxModule?.loadRN();
+  }, [playerReady]);
+
   return playerReady;
 };

@@ -37,8 +37,16 @@ class APMWidget : AppWidgetProvider() {
         if (!::binder.isInitialized || !binder.isBinderAlive) {
             if (context == null) return false
             val mBinder = peekService(context, Intent(context, MusicService::class.java)) ?: return false
-            binder = mBinder as MusicService.MusicBinder
-            if (!binder.isBinderAlive) return false
+            try {
+                binder = mBinder as MusicService.MusicBinder
+                if (!binder.isBinderAlive) return false
+            } catch (e: Exception) {
+                // HACK: likely this is bound by another binder. for example
+                // android.service.media.MediaBrowserService$ServiceBinder.
+                // TODO: display some error message here?
+                Timber.tag("APM-widget").e(e)
+                return false
+            }
         }
         return true
     }
@@ -46,6 +54,7 @@ class APMWidget : AppWidgetProvider() {
     private fun bindOrStartService(context: Context?): Boolean {
         val res = bindService(context)
         if (!res) {
+            // TODO: show a spinner?
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                 context?.startForegroundService(Intent(context, MusicService::class.java))
             } else {
