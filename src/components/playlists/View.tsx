@@ -83,7 +83,7 @@ export default (props: any) => {
   }, []);
 
   return (
-    <View {...props} style={{ flex: 1 }}>
+    <View {...props} style={styles.flex}>
       <View style={styles.topPadding} />
       <BiliCard backgroundURI={playerStyle.biliGarbCard}>
         <RenderDrawerItem
@@ -112,6 +112,7 @@ export default (props: any) => {
 };
 
 const styles = StyleSheet.create({
+  flex: { flex: 1 },
   topPadding: {
     height: 10,
   },

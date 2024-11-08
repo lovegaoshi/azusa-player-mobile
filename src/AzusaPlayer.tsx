@@ -82,6 +82,9 @@ const AzusaPlayer = () => {
   const defaultTheme = playerStyle.metaData.darkTheme
     ? CombinedDarkTheme
     : CombinedDefaultTheme;
+  const defaultNavTheme = playerStyle.metaData.darkTheme
+    ? NavigationDarkTheme
+    : NavigationDefaultTheme;
   const insets = useSafeAreaInsets();
   const [navigation, setNavigation] =
     React.useState<DrawerNavigationProp<ParamListBase>>();
@@ -106,6 +109,7 @@ const AzusaPlayer = () => {
             // at MainBackground level instaed of here.
             background: undefined,
           },
+          fonts: defaultNavTheme.fonts,
         }}
       >
         <View
@@ -120,6 +124,11 @@ const AzusaPlayer = () => {
           <Drawer.Navigator
             initialRouteName={NoxRoutes.PlayerHome}
             drawerContent={PlaylistDrawer}
+            drawerStyle={{
+              width: '70%',
+              borderTopRightRadius: 0,
+              borderBottomRightRadius: 0,
+            }}
           >
             <Drawer.Screen
               name={NoxRoutes.PlayerHome}
