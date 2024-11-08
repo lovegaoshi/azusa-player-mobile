@@ -146,7 +146,7 @@ class APMWidget : AppWidgetProvider() {
                     val bitmap  = binder.service.getCurrentBitmap()?.await()
                     val croppedBitmap = cropBitmap(bitmap)
                     val dr = RoundedBitmapDrawableFactory.create(context.resources, croppedBitmap)
-                    dr.cornerRadius = 100f
+                    dr.cornerRadius = 10f
                     updateTrack(views, currentTrack, dr.toBitmapOrNull())
                 }
             }
@@ -160,7 +160,9 @@ class APMWidget : AppWidgetProvider() {
     private fun cropBitmap(bitmap: Bitmap?): Bitmap? {
         if (bitmap == null) return null
         val dimension = bitmap.width.coerceAtMost(bitmap.height)
-        return ThumbnailUtils.extractThumbnail(bitmap, dimension, dimension)
+        val cropped = ThumbnailUtils.extractThumbnail(bitmap, dimension, dimension)
+        // bitmap.recycle()
+        return Bitmap.createScaledBitmap(cropped, 120, 120, false)
     }
 
     @OptIn(UnstableApi::class)
