@@ -124,6 +124,7 @@ const AzusaPlayer = () => {
           <Drawer.Navigator
             initialRouteName={NoxRoutes.PlayerHome}
             drawerContent={PlaylistDrawer}
+            //@ts-expect-error patch bug
             drawerStyle={{
               width: '70%',
               borderTopRightRadius: 0,
