@@ -22,5 +22,5 @@ export default () => {
     }
   };
 
-  return { navigate };
+  return { navigate, getState: navigationGlobal.getState };
 };

@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react';
 import { Linking, StyleSheet, View } from 'react-native';
 import { IconButton } from 'react-native-paper';
-import { useNavigation } from '@react-navigation/native';
 
 import { ScreenIcons } from '@enums/Icons';
 import RandomGIFButton from '../buttons/RandomGIF';
+import useNavigation from '@hooks/useNavigation';
 import { useNoxSetting } from '@stores/useApp';
 import { NoxRoutes } from '@enums/Routes';
 import { logger } from '@utils/Logger';
@@ -19,18 +19,19 @@ export default ({ panelWidth = 110 }: Props) => {
   const iconSize = panelWidth - 30;
 
   const onPlaylistPress = () => {
-    navigationGlobal.navigate(
-      navigationGlobal.getState()?.routes?.at(-1)?.name === NoxRoutes.Playlist
-        ? (NoxRoutes.PlaylistsDrawer as never)
-        : (NoxRoutes.Playlist as never),
-    );
+    navigationGlobal.navigate({
+      route:
+        navigationGlobal.getState()?.routes?.at(-1)?.name === NoxRoutes.Playlist
+          ? NoxRoutes.PlaylistsDrawer
+          : NoxRoutes.Playlist,
+    });
   };
 
   useEffect(() => {
     function deepLinkHandler(data: { url: string }) {
       if (data.url === 'trackplayer://notification.click') {
         logger.debug('[Drawer] click from notification; navigate to home');
-        navigationGlobal.navigate(NoxRoutes.PlayerHome as never);
+        navigationGlobal.navigate({ route: NoxRoutes.PlayerHome });
       }
     }
     // This event will be fired when the app is already open and the notification is clicked
