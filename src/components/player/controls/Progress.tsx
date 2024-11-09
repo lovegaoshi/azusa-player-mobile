@@ -37,8 +37,11 @@ export const Progress: React.FC<{ live?: boolean }> = ({ live }) => {
         <ProgressBarAPM />
         <ProgressBar
           progress={fetchProgress / 100}
-          color={playerStyle.colors.secondaryContainer}
-          style={styles.progressBarDouble}
+          color={playerStyle.colors.secondary}
+          style={[
+            styles.progressBarDouble,
+            { backgroundColor: playerStyle.colors.secondaryContainer },
+          ]}
         />
       </View>
       <View style={[styles.labelContainer, { paddingHorizontal: 10 }]}>
