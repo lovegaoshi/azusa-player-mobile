@@ -12,7 +12,7 @@ export default () => {
   const { shuffleAll } = usePlayback();
   const onPressed = async () => {
     await shuffleAll();
-    navigation.navigate(NoxRoutes.PlayerHome);
+    navigation.navigate({ route: NoxRoutes.PlayerHome });
   };
 
   return (

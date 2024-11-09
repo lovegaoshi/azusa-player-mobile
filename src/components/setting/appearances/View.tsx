@@ -16,7 +16,7 @@ enum VIEW {
 
 const Stack = createNativeStackNavigator();
 
-const MainView = ({ navigation }: NoxComponent.NavigationProps) => {
+const MainView = ({ navigation }: NoxComponent.StackNavigationProps) => {
   const playerStyle = useNoxSetting(state => state.playerStyle);
 
   return (
@@ -30,7 +30,7 @@ const MainView = ({ navigation }: NoxComponent.NavigationProps) => {
         <SettingListItem
           icon={'palette-swatch-variant'}
           settingName="SkinSetting"
-          onPress={() => navigation.navigate(VIEW.SKIN)}
+          onPress={() => navigation.popTo(VIEW.SKIN)}
           settingCategory="Settings"
         />
         <RenderSetting

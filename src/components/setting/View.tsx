@@ -34,7 +34,7 @@ enum NoxView {
 
 const Stack = createNativeStackNavigator();
 
-interface Props extends NoxComponent.NavigationProps {
+interface Props extends NoxComponent.StackNavigationProps {
   headerBackVisible?: boolean;
 }
 
@@ -52,58 +52,58 @@ const HomeSettings = ({ navigation }: Props) => {
         <SettingListItem
           icon={NoxView.HOME}
           settingName="GeneralSetting"
-          onPress={() => navigation.navigate(NoxView.GENERAL)}
+          onPress={() => navigation.popTo(NoxView.GENERAL)}
           settingCategory="Settings"
         />
         <SettingListItem
           icon={NoxView.SKIN}
           settingName="AppearanceSetting"
-          onPress={() => navigation.navigate(NoxView.SKIN)}
+          onPress={() => navigation.popTo(NoxView.SKIN)}
           settingCategory="Settings"
         />
         <SettingListItem
           icon={NoxView.LOGIN}
           settingName="Login"
-          onPress={() => navigation.navigate(NoxView.LOGIN)}
+          onPress={() => navigation.popTo(NoxView.LOGIN)}
           settingCategory="Settings"
         />
         <SettingListItem
           icon={NoxView.BACKUP}
           settingName="BackupSetting"
-          onPress={() => navigation.navigate(NoxView.BACKUP)}
+          onPress={() => navigation.popTo(NoxView.BACKUP)}
           settingCategory="Settings"
         />
         <LanguageSettings icon={NoxView.LANGUAGE} />
         <SettingListItem
           icon={NoxView.ALIST}
           settingName="AListOptions"
-          onPress={() => navigation.navigate(NoxView.ALIST)}
+          onPress={() => navigation.popTo(NoxView.ALIST)}
           settingCategory="Settings"
         />
         {isAndroid && isIOS && (
           <SettingListItem
             icon={NoxView.DOWNLOAD}
             settingName="DownloadOptions"
-            onPress={() => navigation.navigate(NoxView.DOWNLOAD)}
+            onPress={() => navigation.popTo(NoxView.DOWNLOAD)}
             settingCategory="Settings"
           />
         )}
         <SettingListItem
           icon={NoxView.DEVELOPER}
           settingName="DeveloperOptions"
-          onPress={() => navigation.navigate(NoxView.DEVELOPER)}
+          onPress={() => navigation.popTo(NoxView.DEVELOPER)}
           settingCategory="Settings"
         />
         <SettingListItem
           icon={NoxView.SPLASH_GALLARY}
           settingName="SplashSetting"
-          onPress={() => navigation.navigate(NoxView.SPLASH_GALLARY)}
+          onPress={() => navigation.popTo(NoxView.SPLASH_GALLARY)}
           settingCategory="Settings"
         />
         <SettingListItem
           icon={NoxView.INFO}
           settingName="InfoSetting"
-          onPress={() => navigation.navigate(NoxView.INFO)}
+          onPress={() => navigation.popTo(NoxView.INFO)}
           settingCategory="Settings"
         />
       </ScrollView>

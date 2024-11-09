@@ -15,9 +15,9 @@ export const IconMap: IconMapType = {
   [NoxRoutes.PlayerHome]: BottomTabRouteIcons.music,
   [NoxRoutes.Settings]: BottomTabRouteIcons.setting,
   [NoxRoutes.Explore]: BottomTabRouteIcons.explore,
-  [NoxRoutes.Playlist]: BottomTabRouteIcons.playlist,
-  [NoxRoutes.PlayerCover]: BottomTabRouteIcons.playlist,
+  [NoxRoutes.Playlist]: BottomTabRouteIcons.music,
+  [NoxRoutes.PlayerCover]: BottomTabRouteIcons.music,
   [NoxRoutes.UserLogin]: BottomTabRouteIcons.music,
   [NoxRoutes.PlaylistsDrawer]: BottomTabRouteIcons.playlist,
-  [NoxRoutes.Lyrics]: BottomTabRouteIcons.playlist,
+  [NoxRoutes.Lyrics]: BottomTabRouteIcons.music,
 };

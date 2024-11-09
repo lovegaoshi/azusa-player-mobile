@@ -1,6 +1,7 @@
 import { StyleProp, ViewStyle } from 'react-native';
 import { ParamListBase } from '@react-navigation/native';
 import { DrawerNavigationProp } from '@react-navigation/drawer';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { Track } from 'react-native-track-player';
 
 import { IntentData } from '@enums/Intent';
@@ -16,6 +17,11 @@ declare global {
     interface NavigationProps {
       navigation: DrawerNavigationProp<ParamListBase>;
     }
+
+    interface StackNavigationProps {
+      navigation: NativeStackNavigationProp<ParamListBase>;
+    }
+
     interface NavigationProps2 {
       navigation?: DrawerNavigationProp<ParamListBase>;
     }

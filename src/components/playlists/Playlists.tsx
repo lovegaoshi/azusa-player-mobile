@@ -68,7 +68,8 @@ export default () => {
   };
 
   const goToPlaylist = (playlistId: string) => {
-    navigation.navigate(NoxRoutes.Playlist);
+    navigation.navigate({ route: NoxRoutes.PlayerHome });
+    navigation.navigate({ route: NoxRoutes.Playlist });
     if (currentPlaylist.id === playlistId) {
       scroll();
     } else {
@@ -130,7 +131,7 @@ export default () => {
           {false && (
             <IconButton
               icon={'cog'}
-              onPress={() => navigation.navigate(NoxRoutes.Settings)}
+              onPress={() => navigation.navigate({ route: NoxRoutes.Settings })}
             />
           )}
         </View>
