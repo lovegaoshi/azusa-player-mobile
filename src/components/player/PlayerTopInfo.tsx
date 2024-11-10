@@ -33,7 +33,10 @@ export default ({ navigation }: NoxComponent.NavigationProps) => {
         <IconButton
           icon="playlist-music"
           onPress={() =>
-            navigationGlobal.navigate({ route: NoxRoutes.Playlist })
+            navigationGlobal.navigate({
+              route: NoxRoutes.PlayerHome,
+              options: { screen: NoxRoutes.Playlist },
+            })
           }
           size={40}
           iconColor={playerStyle.colors.primary}

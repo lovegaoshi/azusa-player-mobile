@@ -79,7 +79,10 @@ export default ({
   };
 
   const handleExternalSearch = (data: string) => {
-    navigationGlobal.navigate({ route: NoxRoutes.Playlist });
+    navigationGlobal.navigate({
+      route: NoxRoutes.PlayerHome,
+      options: { screen: NoxRoutes.Playlist },
+    });
     return handleSearch(data);
   };
 

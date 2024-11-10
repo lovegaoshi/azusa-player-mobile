@@ -68,8 +68,10 @@ export default () => {
   };
 
   const goToPlaylist = (playlistId: string) => {
-    navigation.navigate({ route: NoxRoutes.PlayerHome });
-    navigation.navigate({ route: NoxRoutes.Playlist });
+    navigation.navigate({
+      route: NoxRoutes.PlayerHome,
+      options: { screen: NoxRoutes.Playlist },
+    });
     if (currentPlaylist.id === playlistId) {
       scroll();
     } else {
