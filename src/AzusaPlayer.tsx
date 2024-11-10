@@ -126,7 +126,6 @@ const AzusaPlayer = () => {
             drawerContent={PlaylistDrawer}
             //@ts-expect-error patch bug
             drawerStyle={{
-              width: '70%',
               borderTopRightRadius: 0,
               borderBottomRightRadius: 0,
             }}
