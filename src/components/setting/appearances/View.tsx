@@ -30,7 +30,7 @@ const MainView = ({ navigation }: NoxComponent.StackNavigationProps) => {
         <SettingListItem
           icon={'palette-swatch-variant'}
           settingName="SkinSetting"
-          onPress={() => navigation.popTo(VIEW.SKIN)}
+          onPress={() => navigation.navigate(VIEW.SKIN)}
           settingCategory="Settings"
         />
         <RenderSetting

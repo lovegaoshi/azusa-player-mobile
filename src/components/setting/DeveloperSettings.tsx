@@ -223,7 +223,7 @@ const Home = ({ navigation }: NoxComponent.StackNavigationProps) => {
           <SettingListItem
             icon={Icons.plugins}
             settingName="PluginsSetting"
-            onPress={() => navigation.popTo(VIEW.PLUGINS)}
+            onPress={() => navigation.navigate(VIEW.PLUGINS)}
             settingCategory="Settings"
           />
           {!APPSTORE && (

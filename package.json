@@ -40,7 +40,7 @@
     "@react-native/gradle-plugin": "patch:@react-native/gradle-plugin@npm%3A0.76.1#~/.yarn/patches/@react-native-gradle-plugin-npm-0.76.1-f19c439d00.patch",
     "@react-native/metro-config": "^0.76.1",
     "@react-native/typescript-config": "0.76.1",
-    "@react-navigation/drawer": "^7.0.0",
+    "@react-navigation/drawer": "^7.0.1",
     "@react-navigation/material-top-tabs": "^7.0.1",
     "@react-navigation/native": "^7.0.0",
     "@react-navigation/native-stack": "^7.0.0",
