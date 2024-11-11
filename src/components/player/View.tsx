@@ -14,12 +14,14 @@ export default ({ navigation }: NoxComponent.NavigationProps) => {
   useEffect(() => setUpdateTrack(updateTrack), []);
 
   return (
-    <SafeAreaView style={playerStyle.screenContainer}>
-      <StatusBar barStyle={'light-content'} />
-      <View style={playerStyle.contentContainer}>
-        <PlayerTopInfo navigation={navigation} />
-        <TrackInfo track={track} />
-      </View>
-    </SafeAreaView>
+    <View style={{ flex: 1 }} collapsable={false}>
+      <SafeAreaView style={playerStyle.screenContainer}>
+        <StatusBar barStyle={'light-content'} />
+        <View style={playerStyle.contentContainer}>
+          <PlayerTopInfo navigation={navigation} />
+          <TrackInfo track={track} />
+        </View>
+      </SafeAreaView>
+    </View>
   );
 };

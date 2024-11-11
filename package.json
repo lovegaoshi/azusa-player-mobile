@@ -100,6 +100,7 @@
     "react-native-lyric": "https://lovegaoshi@github.com/lovegaoshi/react-native-lyric.git#commit=27fefddea5c12e4225b617e5e09c2d5797a9e8fe",
     "react-native-pager-view": "6.5.0",
     "react-native-paper": "^5.12.5",
+    "react-native-purchases": "^8.2.6",
     "react-native-qrcode-svg": "^6.3.12",
     "react-native-reanimated": "3.16.1",
     "react-native-safe-area-context": "^4.14.0",

@@ -3424,6 +3424,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@revenuecat/purchases-typescript-internal@npm:13.8.0":
+  version: 13.8.0
+  resolution: "@revenuecat/purchases-typescript-internal@npm:13.8.0"
+  checksum: 10c0/d7adfb1bb11f08a3df0d3a4b9e6045775865969badac300cd6467f4f798814d68365abab8502e4fb84df5b7339e18a5a83f13277786f56b8b720bb18c2e01222
+  languageName: node
+  linkType: hard
+
 "@rtsao/scc@npm:^1.1.0":
   version: 1.1.0
   resolution: "@rtsao/scc@npm:1.1.0"
@@ -5297,6 +5304,7 @@ __metadata:
     react-native-lyric: "https://lovegaoshi@github.com/lovegaoshi/react-native-lyric.git#commit=27fefddea5c12e4225b617e5e09c2d5797a9e8fe"
     react-native-pager-view: "npm:6.5.0"
     react-native-paper: "npm:^5.12.5"
+    react-native-purchases: "npm:^8.2.6"
     react-native-qrcode-svg: "npm:^6.3.12"
     react-native-reanimated: "npm:3.16.1"
     react-native-safe-area-context: "npm:^4.14.0"
@@ -14100,6 +14108,18 @@ __metadata:
     react-native-safe-area-context: "*"
     react-native-vector-icons: "*"
   checksum: 10c0/feeeedae6fcd9684be04a8a9e9f568776d1680efa190cf0594d72fd91724985bbef2847e06e474ee6221dd1e236701e69c28f1e47f41cc0be8c99656ecf3f58c
+  languageName: node
+  linkType: hard
+
+"react-native-purchases@npm:^8.2.6":
+  version: 8.2.6
+  resolution: "react-native-purchases@npm:8.2.6"
+  dependencies:
+    "@revenuecat/purchases-typescript-internal": "npm:13.8.0"
+  peerDependencies:
+    react: ">= 16.6.3"
+    react-native: "*"
+  checksum: 10c0/df5950120507297905751a347d262d759504877eff5804923b34b8bf35d33ab6eafc0696641dbfd1dd651599c11258f377dc4aea48a295f61df0bfe581990b22
   languageName: node
   linkType: hard
 
