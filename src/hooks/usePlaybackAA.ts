@@ -4,7 +4,7 @@ import TrackPlayer from 'react-native-track-player';
 import { useTranslation } from 'react-i18next';
 import i18n from 'i18next';
 
-import { PLAYLIST_MEDIAID } from '@enums/Playlist';
+import { PlaylistMediaID } from '@enums/Playlist';
 import usePlayback from './usePlayback';
 import { useNoxSetting } from '@stores/useApp';
 import { IntentData } from '@enums/Intent';
@@ -28,7 +28,7 @@ export const buildBrowseTree = (
     ],
     PlaylistTab: Object.keys(playlists).map(key => {
       return {
-        mediaId: `${PLAYLIST_MEDIAID}${key}`,
+        mediaId: `${PlaylistMediaID}${key}`,
         title: playlists[key].title,
         playable: '0',
       };

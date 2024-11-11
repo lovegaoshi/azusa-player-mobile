@@ -7,7 +7,7 @@ import {
 } from 'react-native-carplay';
 import { useTranslation } from 'react-i18next';
 
-import { PLAYLIST_MEDIAID } from '@enums/Playlist';
+import { PlaylistMediaID } from '@enums/Playlist';
 import usePlayback from './usePlayback';
 import { cycleThroughPlaymodeIOS as cyclePlaymode } from '@stores/playingList';
 import { isIOS } from '@utils/RNUtils';
@@ -47,7 +47,7 @@ export default () => {
           return pushNowPlayingTemplate();
         }
         playFromMediaId(
-          `${PLAYLIST_MEDIAID}${playlistIds[item.index - 1]}`,
+          `${PlaylistMediaID}${playlistIds[item.index - 1]}`,
         ).then(() => pushNowPlayingTemplate());
       },
     });
