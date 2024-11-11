@@ -50,16 +50,16 @@ const initializePlayer = async (safeMode = false) => {
 
 export const appStartupInit = initializePlayer();
 
-export default ({ intentData }: NoxComponent.AppProps) => {
+export default ({ intentData, vip }: NoxComponent.SetupPlayerProps) => {
   const [playerReady, setPlayerReady] = useState<boolean>(false);
   const { updateVersion, checkVersion } = useVersionCheck();
   const setIntentData = useNoxSetting(state => state.setIntentData);
   const { checkPlayStoreUpdates } = usePlayStore();
 
   useEffect(() => {
-    // TODO: if non VIP, call NoxModule?.loadRN() to start loading while displaying
-    // splash screen; else, stuff loading in the native splashsceren
-    NoxModule?.loadRN();
+    if (!vip) {
+      NoxModule?.loadRN();
+    }
     let unmounted = false;
     (async () => {
       await appStartupInit;

@@ -3,5 +3,6 @@
   "editor.formatOnSave": true,
   "search.exclude": {
     "MusicFreePlugins": true
-  }
+  },
+  "editor.tabSize": 2
 }
