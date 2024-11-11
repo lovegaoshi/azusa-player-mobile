@@ -73,7 +73,7 @@ const PlaylistList = () => {
               icon="select-all"
               onPress={toggleSelectedAll}
               size={25}
-              iconColor={playerStyle.colors.primary}
+              //iconColor={playerStyle.colors.primary}
             />
           )}
           <IconButton
@@ -81,7 +81,7 @@ const PlaylistList = () => {
             onPress={() => setChecking(val => !val)}
             size={25}
             containerColor={checking ? btnContainColor : undefined}
-            iconColor={playerStyle.colors.primary}
+            //iconColor={playerStyle.colors.primary}
           />
           <IconButton
             icon="magnify"
@@ -89,7 +89,7 @@ const PlaylistList = () => {
             size={25}
             mode={searching ? 'contained' : undefined}
             containerColor={searching ? btnContainColor : undefined}
-            iconColor={playerStyle.colors.primary}
+            //iconColor={playerStyle.colors.primary}
           />
           <PlaylistMenuButton
             disabled={checking}

@@ -94,8 +94,9 @@ export default () => {
             {
               backgroundColor:
                 currentPlaylist.id === item
-                  ? (playerStyle.colors.primaryContainer ??
-                    playerStyle.customColors.playlistDrawerBackgroundColor)
+                  ? // this is a special high contrast color than primaryContainer.
+                    (playerStyle.colors.playlistDrawerBackgroundColor ??
+                    playerStyle.customColors.primaryContainer)
                   : undefined,
             },
           ]}
