@@ -3,7 +3,7 @@ import { View } from 'react-native';
 
 import { styles } from '../style';
 import BiliSearchbar from './BiliSearch/BiliSearchbar';
-import PlaylistList from './SongList/SongList';
+import SongList from './SongList/SongList';
 import { useNoxSetting } from '@stores/useApp';
 
 const Playlist = () => {
@@ -19,7 +19,7 @@ const Playlist = () => {
       <BiliSearchbar
         onSearched={(songs: NoxMedia.Song[]) => console.log(songs)}
       />
-      <PlaylistList />
+      <SongList />
     </View>
   );
 };
