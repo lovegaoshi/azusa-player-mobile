@@ -34,7 +34,7 @@ enum NoxView {
 
 const Stack = createNativeStackNavigator();
 
-interface Props extends NoxComponent.NavigationProps {
+interface Props extends NoxComponent.StackNavigationProps {
   headerBackVisible?: boolean;
 }
 

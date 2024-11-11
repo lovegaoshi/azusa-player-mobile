@@ -93,7 +93,7 @@ const developerSettings: { [key: string]: SettingEntry } = {
 
 const { getState, setState } = logStore;
 
-const Home = ({ navigation }: NoxComponent.NavigationProps) => {
+const Home = ({ navigation }: NoxComponent.StackNavigationProps) => {
   const playerSetting = useNoxSetting(state => state.playerSetting);
   const setPlayerSetting = useNoxSetting(state => state.setPlayerSetting);
   const { t } = useTranslation();

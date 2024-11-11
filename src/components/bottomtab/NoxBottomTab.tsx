@@ -27,7 +27,7 @@ const BottomIconButton = ({ icon, onPress }: IconProps) => {
 };
 
 const NoxAndroidBottomTab = ({ navigation }: NoxComponent.NavigationProps2) => {
-  const navigationGlobal = useNavigation();
+  const navigationG = useNavigation();
   const playerStyle = useNoxSetting(state => state.playerStyle);
   const gestureMode = useNoxSetting(state => state.gestureMode);
   const route = useNoxSetting(state => state.bottomTabRoute);
@@ -68,15 +68,17 @@ const NoxAndroidBottomTab = ({ navigation }: NoxComponent.NavigationProps2) => {
           />
           <BottomIconButton
             icon={renderIcon(RouteIcons.music)}
-            onPress={() => navigationGlobal.navigate(NoxRoutes.PlayerHome)}
+            onPress={() =>
+              navigationG.navigate({ route: NoxRoutes.PlayerHome })
+            }
           />
           <BottomIconButton
             icon={renderIcon(RouteIcons.explore)}
-            onPress={() => navigationGlobal.navigate(NoxRoutes.Explore)}
+            onPress={() => navigationG.navigate({ route: NoxRoutes.Explore })}
           />
           <BottomIconButton
             icon={renderIcon(RouteIcons.setting)}
-            onPress={() => navigationGlobal.navigate(NoxRoutes.Settings)}
+            onPress={() => navigationG.navigate({ route: NoxRoutes.Settings })}
           />
         </View>
       </View>

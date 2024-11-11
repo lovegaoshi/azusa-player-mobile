@@ -1,22 +1,22 @@
 diff --git a/node_modules/react-native-screens/android/src/main/java/com/swmansion/rnscreens/Screen.kt b/node_modules/react-native-screens/android/src/main/java/com/swmansion/rnscreens/Screen.kt
-index fb4260f..b8d2cd7 100644
+index a2259e3..373798e 100644
 --- a/node_modules/react-native-screens/android/src/main/java/com/swmansion/rnscreens/Screen.kt
 +++ b/node_modules/react-native-screens/android/src/main/java/com/swmansion/rnscreens/Screen.kt
-@@ -388,4 +388,9 @@ class Screen(
-         NAVIGATION_BAR_TRANSLUCENT,
-         NAVIGATION_BAR_HIDDEN,
+@@ -509,5 +509,9 @@ class Screen(
+          * This value describes value in sheet detents array that will be treated as `fitToContents` option.
+          */
+         const val SHEET_FIT_TO_CONTENTS = -1.0
++
++         fun isSystemAnimation(stackAnimation: StackAnimation): Boolean {
++             return stackAnimation === StackAnimation.DEFAULT || stackAnimation === StackAnimation.FADE || stackAnimation === StackAnimation.NONE
++         }
      }
-+  companion object {
-+      fun isSystemAnimation(stackAnimation: StackAnimation): Boolean {
-+           return stackAnimation === StackAnimation.DEFAULT || stackAnimation === StackAnimation.FADE || stackAnimation === StackAnimation.NONE
-+      }
-+  }
  }
 diff --git a/node_modules/react-native-screens/android/src/main/java/com/swmansion/rnscreens/ScreenFragment.kt b/node_modules/react-native-screens/android/src/main/java/com/swmansion/rnscreens/ScreenFragment.kt
-index cf260fb..972591c 100644
+index 5d34509..afc53f6 100644
 --- a/node_modules/react-native-screens/android/src/main/java/com/swmansion/rnscreens/ScreenFragment.kt
 +++ b/node_modules/react-native-screens/android/src/main/java/com/swmansion/rnscreens/ScreenFragment.kt
-@@ -293,7 +293,7 @@ open class ScreenFragment :
+@@ -300,7 +300,7 @@ open class ScreenFragment :
              // onViewAnimationStart/End is triggered from View#onAnimationStart/End method of the fragment's root
              // view. We override an appropriate method of the StackFragment's
              // root view in order to achieve this.
@@ -26,7 +26,7 @@ index cf260fb..972591c 100644
                  // however we want the one being dismissed first to match iOS. It also makes more sense from
                  // a navigation point of view to have the disappear event first.
 diff --git a/node_modules/react-native-screens/android/src/main/java/com/swmansion/rnscreens/ScreenStack.kt b/node_modules/react-native-screens/android/src/main/java/com/swmansion/rnscreens/ScreenStack.kt
-index 4b520d1..0ed8126 100644
+index 75453fa..be1b819 100644
 --- a/node_modules/react-native-screens/android/src/main/java/com/swmansion/rnscreens/ScreenStack.kt
 +++ b/node_modules/react-native-screens/android/src/main/java/com/swmansion/rnscreens/ScreenStack.kt
 @@ -4,6 +4,7 @@ import android.content.Context
@@ -37,112 +37,137 @@ index 4b520d1..0ed8126 100644
  import com.facebook.react.bridge.ReactContext
  import com.facebook.react.uimanager.UIManagerHelper
  import com.swmansion.rnscreens.Screen.StackAnimation
-@@ -141,10 +142,10 @@ class ScreenStack(
+@@ -148,23 +149,9 @@ class ScreenStack(
              if (stackAnimation != null) {
                  if (shouldUseOpenAnimation) {
                      when (stackAnimation) {
--                        StackAnimation.DEFAULT -> it.setCustomAnimations(R.anim.rns_default_enter_in, R.anim.rns_default_enter_out)
--                        StackAnimation.NONE -> it.setCustomAnimations(R.anim.rns_no_animation_20, R.anim.rns_no_animation_20)
--                        StackAnimation.FADE -> it.setCustomAnimations(R.anim.rns_fade_in, R.anim.rns_fade_out)
--                        StackAnimation.SLIDE_FROM_RIGHT ->
-+                      StackAnimation.DEFAULT -> it.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
-+                      StackAnimation.NONE -> it.setTransition(FragmentTransaction.TRANSIT_NONE)
-+                      StackAnimation.FADE -> it.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
-+                      StackAnimation.SLIDE_FROM_RIGHT ->
+-                        StackAnimation.DEFAULT ->
+-                            it.setCustomAnimations(
+-                                R.anim.rns_default_enter_in,
+-                                R.anim.rns_default_enter_out,
+-                            )
+-
+-                        StackAnimation.NONE ->
+-                            it.setCustomAnimations(
+-                                R.anim.rns_no_animation_20,
+-                                R.anim.rns_no_animation_20,
+-                            )
+-
+-                        StackAnimation.FADE ->
+-                            it.setCustomAnimations(
+-                                R.anim.rns_fade_in,
+-                                R.anim.rns_fade_out,
+-                            )
++                        StackAnimation.DEFAULT -> it.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
++                        StackAnimation.NONE -> it.setTransition(FragmentTransaction.TRANSIT_NONE)
++                        StackAnimation.FADE -> it.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+ 
+                         StackAnimation.SLIDE_FROM_RIGHT ->
                              it.setCustomAnimations(
-                                 R.anim.rns_slide_in_from_right,
-                                 R.anim.rns_slide_out_to_left,
-@@ -164,9 +165,9 @@ class ScreenStack(
+@@ -195,23 +182,9 @@ class ScreenStack(
                      }
                  } else {
                      when (stackAnimation) {
--                        StackAnimation.DEFAULT -> it.setCustomAnimations(R.anim.rns_default_exit_in, R.anim.rns_default_exit_out)
--                        StackAnimation.NONE -> it.setCustomAnimations(R.anim.rns_no_animation_20, R.anim.rns_no_animation_20)
--                        StackAnimation.FADE -> it.setCustomAnimations(R.anim.rns_fade_in, R.anim.rns_fade_out)
+-                        StackAnimation.DEFAULT ->
+-                            it.setCustomAnimations(
+-                                R.anim.rns_default_exit_in,
+-                                R.anim.rns_default_exit_out,
+-                            )
+-
+-                        StackAnimation.NONE ->
+-                            it.setCustomAnimations(
+-                                R.anim.rns_no_animation_20,
+-                                R.anim.rns_no_animation_20,
+-                            )
+-
+-                        StackAnimation.FADE ->
+-                            it.setCustomAnimations(
+-                                R.anim.rns_fade_in,
+-                                R.anim.rns_fade_out,
+-                            )
 +                        StackAnimation.DEFAULT -> it.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE)
 +                        StackAnimation.NONE -> it.setTransition(FragmentTransaction.TRANSIT_NONE)
 +                        StackAnimation.FADE -> it.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+ 
                          StackAnimation.SLIDE_FROM_RIGHT ->
                              it.setCustomAnimations(
-                                 R.anim.rns_slide_in_from_left,
 diff --git a/node_modules/react-native-screens/android/src/main/java/com/swmansion/rnscreens/ScreenStackFragment.kt b/node_modules/react-native-screens/android/src/main/java/com/swmansion/rnscreens/ScreenStackFragment.kt
-index dc7f6ba..b99e2bc 100644
+index b11a19f..fb5bf0a 100644
 --- a/node_modules/react-native-screens/android/src/main/java/com/swmansion/rnscreens/ScreenStackFragment.kt
 +++ b/node_modules/react-native-screens/android/src/main/java/com/swmansion/rnscreens/ScreenStackFragment.kt
-@@ -1,5 +1,9 @@
+@@ -1,5 +1,10 @@
  package com.swmansion.rnscreens
  
 +import android.animation.Animator
 +import android.animation.AnimatorInflater
 +import android.animation.AnimatorListenerAdapter
 +import android.animation.AnimatorSet
++import androidx.fragment.app.FragmentTransaction
  import android.annotation.SuppressLint
  import android.content.Context
  import android.graphics.Color
-@@ -12,6 +16,9 @@ import android.view.View
- import android.view.ViewGroup
- import android.view.animation.Animation
- import android.view.animation.AnimationSet
-+import androidx.fragment.R
-+import androidx.fragment.app.FragmentTransaction
-+import com.facebook.react.bridge.UiThreadUtil
- import android.view.animation.Transformation
- import android.widget.LinearLayout
- import androidx.appcompat.widget.Toolbar
-@@ -92,6 +99,53 @@ class ScreenStackFragment :
+@@ -133,6 +138,52 @@ class ScreenStackFragment :
+         super.onViewAnimationEnd()
          notifyViewAppearTransitionEnd()
      }
- 
 +    // Similarly to ScreensCoordinatorLayout, this method listens only for the phases of default Android
 +    // transitions (default/none/fade), since `ScreensCoordinatorLayout#startAnimation` is being
 +    // called only for custom animations.
 +    override fun onCreateAnimator(transit: Int, enter: Boolean, nextAnim: Int): Animator? {
-+      val listener = object : AnimatorListenerAdapter() {
-+        override fun onAnimationStart(animation: Animator) {
-+          onViewAnimationStart()
-+          super.onAnimationStart(animation)
++        val listener = object : AnimatorListenerAdapter() {
++            override fun onAnimationStart(animation: Animator) {
++                onViewAnimationStart()
++                super.onAnimationStart(animation)
++            }
++
++            override fun onAnimationEnd(animation: Animator) {
++                onViewAnimationEnd()
++                super.onAnimationEnd(animation)
++            }
 +        }
 +
-+        override fun onAnimationEnd(animation: Animator) {
-+          onViewAnimationEnd()
-+          super.onAnimationEnd(animation)
++        // If there's custom animation set, use default onCreateAnimator implementation, as event
++        // handling will be handled by ScreensCoordinatorLayout.
++        if (!Screen.isSystemAnimation(screen.stackAnimation)) {
++            return super.onCreateAnimator(transit, enter, nextAnim)
 +        }
-+      }
 +
-+      // If there's custom animation set, use default onCreateAnimator implementation, as event
-+      // handling will be handled by ScreensCoordinatorLayout.
-+      if (!Screen.isSystemAnimation(screen.stackAnimation)) {
-+        return super.onCreateAnimator(transit, enter, nextAnim)
-+      }
-+
-+      // When fragment is being removed or there's no transition selected, we simply
-+      // return AnimatorSet without any animation.
-+      if (isRemoving || transit == FragmentTransaction.TRANSIT_NONE) {
-+        return AnimatorSet().apply {
-+          addListener(listener)
++        // When fragment is being removed or there's no transition selected, we simply
++        // return AnimatorSet without any animation.
++        if (isRemoving || transit == FragmentTransaction.TRANSIT_NONE) {
++            return AnimatorSet().apply {
++                addListener(listener)
++            }
 +        }
-+      }
 +
-+      var selectedNextAnim = nextAnim
-+      if (nextAnim == 0) {
-+        selectedNextAnim = when (transit) {
-+          FragmentTransaction.TRANSIT_FRAGMENT_OPEN -> if (enter) R.animator.fragment_open_enter else R.animator.fragment_open_exit
-+          FragmentTransaction.TRANSIT_FRAGMENT_CLOSE -> if (enter) R.animator.fragment_close_enter else R.animator.fragment_close_exit
-+          FragmentTransaction.TRANSIT_FRAGMENT_FADE -> if (enter) R.animator.fragment_fade_enter else R.animator.fragment_fade_exit
-+          else -> 0
++        var selectedNextAnim = nextAnim
++        if (nextAnim == 0) {
++            selectedNextAnim = when (transit) {
++                FragmentTransaction.TRANSIT_FRAGMENT_OPEN -> if (enter) R.animator.fragment_open_enter else R.animator.fragment_open_exit
++                FragmentTransaction.TRANSIT_FRAGMENT_CLOSE -> if (enter) R.animator.fragment_close_enter else R.animator.fragment_close_exit
++                FragmentTransaction.TRANSIT_FRAGMENT_FADE -> if (enter) R.animator.fragment_fade_enter else R.animator.fragment_fade_exit
++                else -> 0
++            }
 +        }
-+      }
 +
-+      val animator = AnimatorInflater.loadAnimator(context, selectedNextAnim).apply {
-+        addListener(listener)
-+      }
++        val animator = AnimatorInflater.loadAnimator(context, selectedNextAnim).apply {
++            addListener(listener)
++        }
 +
-+      return animator
++        return animator
 +    }
-+
+     
      private fun notifyViewAppearTransitionEnd() {
          val screenStack = view?.parent
-         if (screenStack is ScreenStack) {
+@@ -645,7 +696,7 @@ class ScreenStackFragment :
+ // //            top – The Y coordinate of the top of the rectangle i
+ // //            right – The X coordinate of the right side of the rectangle
+ // //            bottom – The Y coordinate of the bottom of the rectangle
+-//            return Rect(screen.x.toInt(), -screen.y.toInt(), screen.x.toInt() + screen.width, screen.y.toInt() + screen.height)
++//            return Rect(screen.x.toInt(), -screen.y.toInt(), screen.x.toInt()  screen.width, screen.y.toInt()  screen.height)
+ //        }
+ 
+         // We set pointer events to BOX_NONE, because we don't want the ScreensCoordinatorLayout
 diff --git a/node_modules/react-native-screens/android/src/main/res/base/anim/rns_default_enter_in.xml b/node_modules/react-native-screens/android/src/main/res/base/anim/rns_default_enter_in.xml
 deleted file mode 100644
 index 4398c7e..0000000

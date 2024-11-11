@@ -56,7 +56,10 @@ export const BiliSongCard = ({
             <TouchableOpacity
               style={{ height: 70, flexDirection: 'row' }}
               onPress={() => {
-                navigationGlobal.navigate(NoxRoutes.Playlist);
+                navigationGlobal.navigate({
+                  route: NoxRoutes.PlayerHome,
+                  options: { screen: NoxRoutes.Playlist },
+                });
                 playAsSearchList({
                   songs: totalSongs ?? songs,
                   song: item,

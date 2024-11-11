@@ -25,7 +25,9 @@ const RenderDrawerItem = ({ view, icon, text, routeIcon }: Props) => {
 
   return (
     <TouchableRipple
-      onPress={() => navigation.navigate(view, routeIcon !== undefined)}
+      onPress={() =>
+        navigation.navigate({ route: view, setIcon: routeIcon !== undefined })
+      }
     >
       <View style={styles.drawerItemContainer}>
         <IconButton
@@ -70,7 +72,7 @@ export default (props: any) => {
     function deepLinkHandler(data: { url: string }) {
       if (data.url === 'trackplayer://notification.click') {
         logger.debug('[Drawer] click from notification; navigate to home');
-        navigation.navigate(NoxRoutes.PlayerHome);
+        navigation.navigate({ route: NoxRoutes.PlayerHome });
       }
     }
 
@@ -83,7 +85,7 @@ export default (props: any) => {
   }, []);
 
   return (
-    <View {...props} style={{ flex: 1 }}>
+    <View {...props} style={styles.flex}>
       <View style={styles.topPadding} />
       <BiliCard backgroundURI={playerStyle.biliGarbCard}>
         <RenderDrawerItem
@@ -112,6 +114,7 @@ export default (props: any) => {
 };
 
 const styles = StyleSheet.create({
+  flex: { flex: 1 },
   topPadding: {
     height: 10,
   },

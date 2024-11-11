@@ -16,7 +16,7 @@ enum VIEW {
 
 const Stack = createNativeStackNavigator();
 
-const MainView = ({ navigation }: NoxComponent.NavigationProps) => {
+const MainView = ({ navigation }: NoxComponent.StackNavigationProps) => {
   const playerStyle = useNoxSetting(state => state.playerStyle);
 
   return (

@@ -42,7 +42,10 @@ export const BiliSongRow = ({
           <View style={{ paddingHorizontal: 5, flex: 1 }}>
             <TouchableOpacity
               onPress={() => {
-                navigationGlobal.navigate(NoxRoutes.Playlist);
+                navigationGlobal.navigate({
+                  route: NoxRoutes.PlayerHome,
+                  options: { screen: NoxRoutes.Playlist },
+                });
                 playAsSearchList({
                   songs: totalSongs ?? songs,
                   song: item,
@@ -127,7 +130,10 @@ export const YTSongRow = ({ songs = [], title }: YTSongRowProp) => {
           <View style={{ paddingHorizontal: 5, flex: 1 }}>
             <TouchableOpacity
               onPress={async () => {
-                navigationGlobal.navigate(NoxRoutes.Playlist);
+                navigationGlobal.navigate({
+                  route: NoxRoutes.PlayerHome,
+                  options: { screen: NoxRoutes.Playlist },
+                });
                 const playlist = await item.getPlaylist();
                 playAsSearchList({
                   songs: playlist.songs,
