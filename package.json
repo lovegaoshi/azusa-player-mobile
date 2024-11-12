@@ -109,7 +109,6 @@
     "react-native-share-menu": "git+https://github.com/Expensify/react-native-share-menu.git",
     "react-native-svg": "15.8.0",
     "react-native-svga-player": "https://lovegaoshi@github.com/lovegaoshi/react-native-svga-player.git#commit=f8c6303fddb528a1a94d2ab4696c9318c0002cfd",
-    "react-native-tab-view": "^4.0.1",
     "react-native-text-ticker": "https://lovegaoshi@github.com/lovegaoshi/react-native-text-ticker.git#commit=b9eb454b18bb621a769ce4b57b4603a81501b477",
     "react-native-track-player": "https://github.com/lovegaoshi/react-native-track-player.git#commit=6142378143e43cf28b74940195b1def6e0ec795d",
     "react-native-url-polyfill": "^2.0.0",
