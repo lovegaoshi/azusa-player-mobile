@@ -13,7 +13,7 @@ import {
 import { NoxRepeatMode } from '@enums/RepeatMode';
 import noxPlayingList, { setPlayingIndex } from '@stores/playingList';
 import { dataSaverPlaylist, dataSaverSongs } from '@utils/Cache';
-import { PLAYLIST_MEDIAID, PlaylistTypes } from '@enums/Playlist';
+import { PlaylistMediaID, PlaylistTypes } from '@enums/Playlist';
 import { fetchCurrentMusicTop } from '@utils/mediafetch/biliMusicTop';
 
 const { getState } = noxPlayingList;
@@ -102,8 +102,8 @@ export const _playFromMediaId = async ({
   playlistIds,
 }: PlayFromMediaID) => {
   logger.info(`[playFromMediaId]: ${mediaId}`);
-  if (mediaId.startsWith(PLAYLIST_MEDIAID)) {
-    mediaId = mediaId.substring(PLAYLIST_MEDIAID.length);
+  if (mediaId.startsWith(PlaylistMediaID)) {
+    mediaId = mediaId.substring(PlaylistMediaID.length);
     // play a playlist.
     if (playlists[mediaId] === undefined) {
       logger.warn(`[Playback] ${mediaId} doesnt exist.`);

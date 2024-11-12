@@ -14,6 +14,9 @@ declare global {
       intentBundle: null | any;
       rootTag: number;
     }
+    interface SetupPlayerProps extends AppProps {
+      vip?: boolean;
+    }
     interface NavigationProps {
       navigation: DrawerNavigationProp<ParamListBase>;
     }

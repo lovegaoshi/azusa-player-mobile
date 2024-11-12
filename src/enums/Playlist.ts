@@ -21,4 +21,4 @@ export enum SortOptions {
   PreviousOrder = 'PREVIOUS_ORDER',
 }
 
-export const PLAYLIST_MEDIAID = 'playlist-';
+export const PlaylistMediaID = 'playlist-';
