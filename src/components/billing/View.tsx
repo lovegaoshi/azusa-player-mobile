@@ -2,6 +2,7 @@ import { View } from 'react-native';
 import React, { useState } from 'react';
 import { Text, Button, ActivityIndicator } from 'react-native-paper';
 import { useTranslation } from 'react-i18next';
+import { Image } from 'expo-image';
 import Purchases from 'react-native-purchases';
 
 import useVIP, { checkGuardVIP } from '@hooks/useVIP';
@@ -56,6 +57,12 @@ const PurchaseVIPScreen = () => {
   const { t } = useTranslation();
   return (
     <View style={mStyle.container}>
+      <Image
+        style={mStyle.azusaBeg}
+        source={{
+          uri: 'https://img.nga.178.com/attachments/mon_202201/31/-zue37Q2p-ixpkXsZ7tT3cS9y-af.gif',
+        }}
+      />
       <Text>{t('Billing.PremiumFeaturesIntro')}</Text>
       <View style={styles.alignMiddle}>
         <LoadingIconWrapper Child={BiliVIP} />
@@ -71,6 +78,12 @@ const VIPScreen = () => {
 
   return (
     <View style={mStyle.container}>
+      <Image
+        style={mStyle.azusaMock}
+        source={{
+          uri: 'https://img.nga.178.com/attachments/mon_202202/01/-zue37Q2p-6rfwK2dT1kShs-b4.jpg',
+        }}
+      />
       <Text style={styles.centerText}>{t('Billing.thankU')}</Text>
       <Text style={styles.centerText}>{t('Billing.godBlessU')}</Text>
       <Text style={styles.centerText}>{t('Billing.urVeryVeryGorgeous')}</Text>
@@ -89,4 +102,17 @@ export default () => {
 
 const mStyle = StyleSheet.create({
   container: { flex: 1, paddingHorizontal: 10, paddingTop: 10 },
+  text: {
+    fontSize: 20,
+  },
+  azusaBeg: {
+    width: '100%',
+    height: '40%',
+    alignSelf: 'center',
+  },
+  azusaMock: {
+    width: '100%',
+    height: '30%',
+    alignSelf: 'center',
+  },
 });

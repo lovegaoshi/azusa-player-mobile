@@ -1,4 +1,4 @@
-import { View, ScrollView, Linking } from 'react-native';
+import { View, ScrollView, Linking, StyleSheet } from 'react-native';
 import { Text, Button } from 'react-native-paper';
 import { useTranslation } from 'react-i18next';
 
@@ -17,36 +17,12 @@ export default () => {
     >
       <ScrollView>
         <Text>{''}</Text>
-        <Text
-          style={{
-            fontSize: 20,
-            color: playerStyle.colors.primary,
-            paddingHorizontal: 20,
-          }}
-        >
-          {t('About.Disclaimer1')}
-        </Text>
+        <Text style={styles.text}>{t('About.Disclaimer1')}</Text>
         <Text>{''}</Text>
-        <Text
-          style={{
-            fontSize: 20,
-            color: playerStyle.colors.primary,
-            paddingHorizontal: 20,
-          }}
-        >
-          {t('About.Disclaimer2')}
-        </Text>
+        <Text style={styles.text}>{t('About.Disclaimer2')}</Text>
         <Text>{''}</Text>
-        <Text
-          style={{
-            fontSize: 20,
-            color: playerStyle.colors.primary,
-            paddingHorizontal: 20,
-          }}
-        >
-          {t('About.About1')}
-        </Text>
-        <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
+        <Text style={styles.text}>{t('About.About1')}</Text>
+        <View style={styles.centeredRowContainer}>
           <Button
             onPress={() =>
               Linking.openURL(
@@ -68,3 +44,11 @@ export default () => {
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  text: {
+    fontSize: 20,
+    paddingHorizontal: 20,
+  },
+  centeredRowContainer: { flexDirection: 'row', justifyContent: 'center' },
+});
