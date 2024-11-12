@@ -1,10 +1,20 @@
 {
   "_comment": "src/localization/en/translation.json",
+  "Billing": {
+    "PremiumFeaturesIntro": "Thank you for considering supporting APM with real money. All funds will go towards buying a copy of Buldur's Gate 3. In return, APM will hide the app start splash ad.",
+    "NoxAuth": "Authenticate through Bilibili",
+    "RevenueCat": "Purchase via RevenueCat",
+    "NoxFans": "Bilibili users that are currently \"guards\" to Azusa and Nox will be granted premium access for free. Please click the Bilibili Auth button above to authenticate.",
+    "thankU": "Thank you!",
+    "godBlessU": "God bless you!",
+    "urVeryVeryGorgeous": "You are very very gorgeous."
+  },
   "appDrawer": {
     "homeScreenName": "Home",
     "exploreScreenName": "Discover",
     "settingScreenName": "Settings",
-    "LoginName": "User Login"
+    "LoginName": "User Login",
+    "PremiumName": "Premium Content"
   },
   "Dialog": {
     "ok": "Done",
@@ -200,6 +210,8 @@
     "SplashSettingDesc": "View APM's splash ads",
     "DeveloperOptionsName": "Developer Options",
     "DeveloperOptionsDesc": "Experimental Options in pre-release versions of APM",
+    "PremiumSettingName": "Premium APM",
+    "PremiumSettingDesc": "Buy Premium features",
     "AListOptionsName": "AList",
     "AListOptionsDesc": "Set up AList creds",
     "DownloadOptionsName": "Download",

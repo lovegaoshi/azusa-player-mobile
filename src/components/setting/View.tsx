@@ -13,7 +13,8 @@ import LanguageSettings from './LanguageSettings';
 import AboutSettings from './AboutSettings';
 import SplashSettings from './SplashSettings';
 import DownloadSettings from './DownloadSettings';
-import Login from '../login/View';
+import LoginSettings from '../login/View';
+import PremiumSettings from '../billing/View';
 import { isAndroid, isIOS } from '@utils/RNUtils';
 
 enum NoxView {
@@ -27,6 +28,7 @@ enum NoxView {
   SPLASH_GALLARY = 'view-gallery',
   ALIST = 'google-cloud',
   DOWNLOAD = 'file-download',
+  PREMIUM = 'cash',
 
   DUMMY = 'Features not implemented',
   GENERAL = 'General',
@@ -92,6 +94,12 @@ const HomeSettings = ({ navigation }: Props) => {
           icon={NoxView.DEVELOPER}
           settingName="DeveloperOptions"
           onPress={() => navigation.navigate(NoxView.DEVELOPER)}
+          settingCategory="Settings"
+        />
+        <SettingListItem
+          icon={NoxView.PREMIUM}
+          settingName="PremiumSetting"
+          onPress={() => navigation.navigate(NoxView.PREMIUM)}
           settingCategory="Settings"
         />
         <SettingListItem
@@ -165,8 +173,13 @@ const Settings = ({ headerBackVisible = true }: Props) => {
       />
       <Stack.Screen
         name={NoxView.LOGIN}
-        component={Login}
+        component={LoginSettings}
         options={{ title: t('appDrawer.LoginName') }}
+      />
+      <Stack.Screen
+        name={NoxView.PREMIUM}
+        component={PremiumSettings}
+        options={{ title: t('appDrawer.PremiumName') }}
       />
     </Stack.Navigator>
   );

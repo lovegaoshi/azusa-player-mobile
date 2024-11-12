@@ -1,29 +1,53 @@
 import * as SecureStore from 'expo-secure-store';
 import { useEffect, useState } from 'react';
 import Purchases from 'react-native-purchases';
+import { create } from 'zustand';
 
 import { isAndroid } from '@utils/RNUtils';
+import { getHasGuard } from '@utils/Bilibili/BiliUser';
 // eslint-disable-next-line import/no-unresolved
 import { APPSTORE } from '@env';
 
 const VIPKey = 'APMVIP';
 
-export const purchaseVIP = () => {
+export const checkGuardVIP = async () => {
+  if (await getHasGuard([529249, 7706705])) {
+    return purchaseVIP();
+  }
+};
+
+export const checkVIP = async () => {
+  const customer = await Purchases.getCustomerInfo();
+  if (
+    customer.entitlements.active.vip ||
+    (await getHasGuard([529249, 7706705]))
+  ) {
+    return purchaseVIP();
+  }
+  return loseVIP();
+};
+
+const purchaseVIP = () => {
   SecureStore.setItemAsync(VIPKey, '1');
+  useVIP.setState({ VIP: true });
 };
 
-export const loseVIP = () => {
+const loseVIP = () => {
   SecureStore.deleteItemAsync(VIPKey);
+  useVIP.setState({ VIP: false });
 };
 
-const useVIP = () => {
-  const [vip, setVip] = useState(SecureStore.getItem(VIPKey) !== null);
+interface VIPStore {
+  VIP: boolean;
+}
+const useVIP = create<VIPStore>((set, get) => ({
+  VIP: SecureStore.getItem(VIPKey) !== null,
+}));
 
-  return { vip };
-};
+export default useVIP;
 
 export const useSetupVIP = () => {
-  const { vip } = useVIP();
+  const vip = useVIP(state => state.VIP);
 
   const init = async () => {
     if (!APPSTORE) {
@@ -32,11 +56,7 @@ export const useSetupVIP = () => {
     if (isAndroid) {
       Purchases.configure({ apiKey: 'goog_XXAuAgmqFMypeJIGHTlyRZNdoGh' });
     }
-    try {
-      console.log('purhcase', await Purchases.getCustomerInfo());
-    } catch (e) {
-      console.error(e);
-    }
+    checkVIP();
   };
 
   useEffect(() => {
@@ -44,5 +64,3 @@ export const useSetupVIP = () => {
   }, []);
   return { vip };
 };
-
-export default useVIP;
