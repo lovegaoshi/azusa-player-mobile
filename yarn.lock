@@ -3253,7 +3253,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@react-native/gradle-plugin@npm:0.76.1":
+"@react-native/gradle-plugin@npm:0.76.1, @react-native/gradle-plugin@npm:^0.76.1":
   version: 0.76.1
   resolution: "@react-native/gradle-plugin@npm:0.76.1"
   checksum: 10c0/7056ff70ff42d9575eb35fd63ce7accb42caffb08839bcf32abd5a83e3016be9e8b56a115e927b45302c94e3ad88e928283354577fc77547b13c0c84183e016b
@@ -5229,7 +5229,7 @@ __metadata:
     "@react-native-cookies/cookies": "npm:^6.2.1"
     "@react-native-masked-view/masked-view": "npm:^0.3.2"
     "@react-native/babel-preset": "npm:^0.76.1"
-    "@react-native/gradle-plugin": "patch:@react-native/gradle-plugin@npm%3A0.76.1#~/.yarn/patches/@react-native-gradle-plugin-npm-0.76.1-f19c439d00.patch"
+    "@react-native/gradle-plugin": "npm:^0.76.1"
     "@react-native/metro-config": "npm:^0.76.1"
     "@react-native/typescript-config": "npm:0.76.1"
     "@react-navigation/drawer": "npm:^7.0.1"
@@ -5314,7 +5314,7 @@ __metadata:
     qs: "npm:^6.13.0"
     react: "npm:18.3.1"
     react-i18next: "npm:^15.1.1"
-    react-native: "patch:react-native@npm%3A0.76.1#~/.yarn/patches/react-native-npm-0.76.1-c738a2fa39.patch"
+    react-native: "npm:^0.76.1"
     react-native-app-auth: "npm:^8.0.0"
     react-native-background-timer: "git+https://github.com/lovegaoshi/react-native-background-timer.git"
     react-native-blob-jsi-helper: "npm:^0.3.1"
@@ -14371,7 +14371,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-native@npm:0.76.1":
+"react-native@npm:0.76.1, react-native@npm:^0.76.1":
   version: 0.76.1
   resolution: "react-native@npm:0.76.1"
   dependencies:
