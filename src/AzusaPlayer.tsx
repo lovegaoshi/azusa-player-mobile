@@ -53,7 +53,6 @@ interface Props extends NoxComponent.NavigationProps {
 }
 const NoxPlayer = ({ navigation, setNavigation = () => undefined }: Props) => {
   const Tab = createMaterialTopTabNavigator();
-
   useEffect(() => setNavigation(navigation), []);
 
   return (

@@ -95,8 +95,8 @@ export default () => {
               backgroundColor:
                 currentPlaylist.id === item
                   ? // this is a special high contrast color than primaryContainer.
-                    (playerStyle.colors.playlistDrawerBackgroundColor ??
-                    playerStyle.customColors.primaryContainer)
+                  (playerStyle.customColors.playlistDrawerBackgroundColor ??
+                    playerStyle.colors.primaryContainer)
                   : undefined,
             },
           ]}
@@ -145,7 +145,7 @@ export default () => {
           {
             backgroundColor:
               currentPlaylist.id ===
-              playlists[StorageKeys.SEARCH_PLAYLIST_KEY]?.id
+                playlists[StorageKeys.SEARCH_PLAYLIST_KEY]?.id
                 ? (playerStyle.colors.primaryContainer ??
                   playerStyle.customColors.playlistDrawerBackgroundColor)
                 : undefined,
@@ -161,7 +161,7 @@ export default () => {
           }
           leadColor={
             currentPlayingList.id ===
-            playlists[StorageKeys.SEARCH_PLAYLIST_KEY].id
+              playlists[StorageKeys.SEARCH_PLAYLIST_KEY].id
               ? playerStyle.colors.primary
               : undefined
           }
