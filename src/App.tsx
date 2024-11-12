@@ -16,7 +16,7 @@ import MainBackground from './components/background/MainBackground';
 import useTheme from './hooks/useTheme';
 // eslint-disable-next-line import/no-unresolved
 import { TRACKING } from '@env';
-import useVIP from './hooks/useVIP';
+import { useSetupVIP } from './hooks/useVIP';
 
 if (TRACKING) {
   Sentry.init({
@@ -52,7 +52,7 @@ const APM = ({ PIP, isLandscape }: { PIP: boolean; isLandscape: boolean }) => {
 };
 
 export default function App(appProps: NoxComponent.AppProps) {
-  const { vip } = useVIP();
+  const { vip } = useSetupVIP();
   const isSplashReady = useSplash(
     __DEV__ || appProps.intentData || vip ? 1 : 2500,
   );

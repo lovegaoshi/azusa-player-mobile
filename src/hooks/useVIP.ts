@@ -1,5 +1,10 @@
 import * as SecureStore from 'expo-secure-store';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import Purchases from 'react-native-purchases';
+
+import { isAndroid } from '@utils/RNUtils';
+// eslint-disable-next-line import/no-unresolved
+import { APPSTORE } from '@env';
 
 const VIPKey = 'APMVIP';
 
@@ -14,6 +19,29 @@ export const loseVIP = () => {
 const useVIP = () => {
   const [vip, setVip] = useState(SecureStore.getItem(VIPKey) !== null);
 
+  return { vip };
+};
+
+export const useSetupVIP = () => {
+  const { vip } = useVIP();
+
+  const init = async () => {
+    if (!APPSTORE) {
+      return;
+    }
+    if (isAndroid) {
+      Purchases.configure({ apiKey: 'goog_XXAuAgmqFMypeJIGHTlyRZNdoGh' });
+    }
+    try {
+      console.log('purhcase', await Purchases.getCustomerInfo());
+    } catch (e) {
+      console.error(e);
+    }
+  };
+
+  useEffect(() => {
+    init();
+  }, []);
   return { vip };
 };
 
