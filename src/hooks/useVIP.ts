@@ -9,26 +9,32 @@ import { getHasGuard } from '@utils/Bilibili/BiliUser';
 import { APPSTORE } from '@env';
 
 const VIPKey = 'APMVIP';
+enum VIPType {
+  Bilibili = 'Bilibili',
+  RevenueCat = 'RevenueCat',
+}
 
 export const checkGuardVIP = async () => {
   if (await getHasGuard([529249, 7706705])) {
     return purchaseVIP();
   }
-};
-
-export const checkVIP = async () => {
-  const customer = await Purchases.getCustomerInfo();
-  if (
-    customer.entitlements.active.vip ||
-    (await getHasGuard([529249, 7706705]))
-  ) {
-    return purchaseVIP();
-  }
   return loseVIP();
 };
 
-const purchaseVIP = () => {
-  SecureStore.setItemAsync(VIPKey, '1');
+export const checkVIP = async () => {
+  const vipStatus = SecureStore.getItem(VIPKey);
+  switch (vipStatus) {
+    // BILI VIP will be rechecked every time
+    case VIPType.Bilibili:
+      return checkGuardVIP();
+    // revenueCat is a one-time purchase
+    default:
+      return;
+  }
+};
+
+const purchaseVIP = (type = VIPType.RevenueCat) => {
+  SecureStore.setItemAsync(VIPKey, type);
   useVIP.setState({ VIP: true });
 };
 
