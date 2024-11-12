@@ -12,14 +12,3 @@ index 2b6be5a..aa099b7 100644
        } else {
          pagerRef.current?.setPageWithoutAnimation(index);
          position.setValue(index);
-@@ -115,8 +116,10 @@ function PagerViewAdapter({
-       }),
-       onPageSelected: e => {
-         const index = e.nativeEvent.position;
-+        setTimeout(() => {        
-         indexRef.current = index;
-         onIndexChange(index);
-+}, 100)
-       },
-       onPageScrollStateChanged: onPageScrollStateChanged,
-       scrollEnabled: swipeEnabled,
