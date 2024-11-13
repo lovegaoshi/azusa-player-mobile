@@ -46,7 +46,7 @@ const loseVIP = () => {
 interface VIPStore {
   VIP: boolean;
 }
-const useVIP = create<VIPStore>((set, get) => ({
+const useVIP = create<VIPStore>(() => ({
   VIP: SecureStore.getItem(VIPKey) !== null,
 }));
 
