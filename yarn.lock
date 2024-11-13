@@ -1783,9 +1783,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@expo/cli@npm:0.21.0":
-  version: 0.21.0
-  resolution: "@expo/cli@npm:0.21.0"
+"@expo/cli@npm:0.21.1":
+  version: 0.21.1
+  resolution: "@expo/cli@npm:0.21.1"
   dependencies:
     "@0no-co/graphql.web": "npm:^1.0.8"
     "@babel/runtime": "npm:^7.20.0"
@@ -1860,7 +1860,7 @@ __metadata:
     ws: "npm:^8.12.1"
   bin:
     expo-internal: build/bin/cli
-  checksum: 10c0/2d5d1653befad468915671b1554473bc25ebc5f636c2614541e5278b46e87119a69b54db56d436b1630e84f46cf47d4e84aa2ffcbe4a1bc2e390e2b53375e179
+  checksum: 10c0/2e4269ef24d39203763484ac724afb8355dddfe65e2f2dc3fd31e9dd73f6eac773ea89207c67ba7e12b0d63a5732a771dd3e715a2ddd472adf5d18b13b87bf5f
   languageName: node
   linkType: hard
 
@@ -2056,9 +2056,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@expo/metro-config@npm:0.19.1":
-  version: 0.19.1
-  resolution: "@expo/metro-config@npm:0.19.1"
+"@expo/metro-config@npm:0.19.2":
+  version: 0.19.2
+  resolution: "@expo/metro-config@npm:0.19.2"
   dependencies:
     "@babel/core": "npm:^7.20.0"
     "@babel/generator": "npm:^7.20.5"
@@ -2078,7 +2078,7 @@ __metadata:
     minimatch: "npm:^3.0.4"
     postcss: "npm:~8.4.32"
     resolve-from: "npm:^5.0.0"
-  checksum: 10c0/b0e062f19b2b366af4c461d2d9f61740643e32e391ae6e8c4568ae7b5b831174d2232d2119b14eff4f62b215e0f2690983a4d1634c0134797d4344f48d471c41
+  checksum: 10c0/9ff5da6bd33aed0c6cf7564ea42aaa17a9d8b6f00cf52ede0a4bdf4bf0dc47dad53e94b9beb43b2f10f221178d7317d9f972b56c5a1659722596637b495a957c
   languageName: node
   linkType: hard
 
@@ -5278,7 +5278,7 @@ __metadata:
     eslint-plugin-react: "npm:^7.37.2"
     eslint-plugin-react-hooks: "npm:^5.0.0"
     event-target-polyfill: "npm:^0.0.4"
-    expo: "npm:^52.0.3"
+    expo: "npm:^52.0.4"
     expo-auth-session: "npm:~6.0.0"
     expo-clipboard: "npm:~7.0.0"
     expo-crypto: "npm:~14.0.1"
@@ -5330,7 +5330,7 @@ __metadata:
     react-native-screens: "npm:4.0.0"
     react-native-shadow-2: "npm:^7.1.1"
     react-native-share-menu: "git+https://github.com/Expensify/react-native-share-menu.git"
-    react-native-svg: "npm:15.8.0"
+    react-native-svg: "npm:15.9.0"
     react-native-svga-player: "https://lovegaoshi@github.com/lovegaoshi/react-native-svga-player.git#commit=f8c6303fddb528a1a94d2ab4696c9318c0002cfd"
     react-native-text-ticker: "https://lovegaoshi@github.com/lovegaoshi/react-native-text-ticker.git#commit=b9eb454b18bb621a769ce4b57b4603a81501b477"
     react-native-track-player: "https://github.com/lovegaoshi/react-native-track-player.git#commit=6142378143e43cf28b74940195b1def6e0ec795d"
@@ -8476,9 +8476,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"expo-modules-autolinking@npm:2.0.0":
-  version: 2.0.0
-  resolution: "expo-modules-autolinking@npm:2.0.0"
+"expo-modules-autolinking@npm:2.0.1":
+  version: 2.0.1
+  resolution: "expo-modules-autolinking@npm:2.0.1"
   dependencies:
     "@expo/spawn-async": "npm:^1.7.2"
     chalk: "npm:^4.1.0"
@@ -8490,7 +8490,7 @@ __metadata:
     resolve-from: "npm:^5.0.0"
   bin:
     expo-modules-autolinking: bin/expo-modules-autolinking.js
-  checksum: 10c0/5bd114c080f08013839a40c86abfc1e46c594678da3955f1310d2732675e2105b5f727fa890ae9704e35936f3ea2db2e16d0d6c1e826211c9585b4be5209891b
+  checksum: 10c0/c9a376677688d3de4fec52fa47c04212cb0303a058020bdb7d05b910e4520d910b06d40889bc1c91500968dea087cca8d21ec9dd207b9232ca2ef7fa25774173
   languageName: node
   linkType: hard
 
@@ -8522,16 +8522,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"expo@npm:^52.0.3":
-  version: 52.0.3
-  resolution: "expo@npm:52.0.3"
+"expo@npm:^52.0.4":
+  version: 52.0.4
+  resolution: "expo@npm:52.0.4"
   dependencies:
     "@babel/runtime": "npm:^7.20.0"
-    "@expo/cli": "npm:0.21.0"
+    "@expo/cli": "npm:0.21.1"
     "@expo/config": "npm:10.0.3"
     "@expo/config-plugins": "npm:9.0.9"
     "@expo/fingerprint": "npm:0.11.2"
-    "@expo/metro-config": "npm:0.19.1"
+    "@expo/metro-config": "npm:0.19.2"
     "@expo/vector-icons": "npm:^14.0.0"
     babel-preset-expo: "npm:~12.0.0"
     expo-asset: "npm:~11.0.1"
@@ -8539,7 +8539,7 @@ __metadata:
     expo-file-system: "npm:~18.0.2"
     expo-font: "npm:~13.0.1"
     expo-keep-awake: "npm:~14.0.1"
-    expo-modules-autolinking: "npm:2.0.0"
+    expo-modules-autolinking: "npm:2.0.1"
     expo-modules-core: "npm:2.0.1"
     fbemitter: "npm:^3.0.0"
     web-streams-polyfill: "npm:^3.3.2"
@@ -8559,7 +8559,7 @@ __metadata:
       optional: true
   bin:
     expo: bin/cli
-  checksum: 10c0/5f338389650d58483482655c240ce91d84ce767658aed31d24f8b32064eb947f68065035a75fe5828822c756540dca02affc93e1753dc2a759c2997f9d9e528d
+  checksum: 10c0/bd587f584f4facc7941f8b20cafcc6b3b57c0bef0080dff740243e05ed68fe971a41d72f257527bedc7a2de13602c481ca8e2e58022b57a46a94e0a51708d3ea
   languageName: node
   linkType: hard
 
@@ -14231,9 +14231,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-native-svg@npm:15.8.0":
-  version: 15.8.0
-  resolution: "react-native-svg@npm:15.8.0"
+"react-native-svg@npm:15.9.0":
+  version: 15.9.0
+  resolution: "react-native-svg@npm:15.9.0"
   dependencies:
     css-select: "npm:^5.1.0"
     css-tree: "npm:^1.1.3"
@@ -14241,7 +14241,7 @@ __metadata:
   peerDependencies:
     react: "*"
     react-native: "*"
-  checksum: 10c0/03d2cb19c799da6ba41dea0dc414338d01a55549ea4e4a370315c8ec34e1c6de430a62b538f099423060edc8bea6df134f765bde862770059404617c3c296af8
+  checksum: 10c0/b255528644756aa1bd9193746a25b2d48d501b9620d7b9291816235fe263ac909e535e6e3485c6039cadc040c83209f48e5cc522b93aef8c23839b6f8576c9b2
   languageName: node
   linkType: hard
 
