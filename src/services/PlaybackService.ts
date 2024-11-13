@@ -28,8 +28,22 @@ const { APMWidgetModule } = NativeModules;
 const { getState } = noxPlayingList;
 const { setState } = appStore;
 const getAppStoreState = appStore.getState;
-let lastBiliHeartBeat: string[] = ['', ''];
+const lastBiliHeartBeat: string[] = ['', ''];
 const lastPlayedDuration: { val?: number } = { val: 0 };
+const refetchThrottleGuard: [string, number] = ['null', 0];
+
+const refreshThrottle = (
+  song: NoxMedia.Song,
+  timestamp: number,
+  currTime = new Date().getTime(),
+) => {
+  if (song.id === refetchThrottleGuard[0] && currTime - timestamp < 10000) {
+    return false;
+  }
+  refetchThrottleGuard[0] = song.id;
+  refetchThrottleGuard[1] = currTime;
+  return true;
+};
 
 export async function additionalPlaybackService({
   noInterruption = false,
@@ -169,11 +183,18 @@ export async function PlaybackService() {
           bvid: event.track.song.bvid,
           cid: event.track.song.id,
         });
-        lastBiliHeartBeat = heartBeatReq;
+        lastBiliHeartBeat[0] = heartBeatReq[0];
+        lastBiliHeartBeat[1] = heartBeatReq[1];
       }
+      const currTime = new Date().getTime();
       if (
         event.index !== undefined &&
-        new Date().getTime() - event.track.urlRefreshTimeStamp > 3600000
+        currTime - event.track.urlRefreshTimeStamp > 3600000 &&
+        refreshThrottle(
+          event.track.song,
+          event.track.urlRefreshTimeStamp,
+          currTime,
+        )
       ) {
         try {
           logger.debug(`[ResolveURL] re-resolving track ${event.track?.title}`);
@@ -183,7 +204,7 @@ export async function PlaybackService() {
           await TrackPlayer.load({
             ...currentTrack,
             ...updatedMetadata,
-            urlRefreshTimeStamp: new Date().getTime(),
+            urlRefreshTimeStamp: currTime,
           });
           if (playerErrored) {
             TrackPlayer.play();

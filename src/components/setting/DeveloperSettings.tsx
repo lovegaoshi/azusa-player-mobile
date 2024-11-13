@@ -32,7 +32,6 @@ import {
   enableTanaka,
 } from '@hooks/useTanakaAmazingCommodities';
 import { isAndroid } from '@utils/RNUtils';
-import { purchaseVIP } from '@hooks/useVIP';
 
 enum Icons {
   setlog = 'console',
@@ -45,7 +44,6 @@ enum Icons {
   fade = 'cosine-wave',
   plugins = 'puzzle',
   Tanaka = 'emoticon-devil',
-  VIP = 'cash',
 }
 
 enum VIEW {
@@ -322,12 +320,6 @@ const Home = ({ navigation }: NoxComponent.StackNavigationProps) => {
                 { cancelable: true },
               )
             }
-            settingCategory="DeveloperSettings"
-          />
-          <SettingListItem
-            icon={Icons.VIP}
-            settingName="VIP"
-            onPress={purchaseVIP}
             settingCategory="DeveloperSettings"
           />
         </List.Section>

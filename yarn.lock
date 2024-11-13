@@ -1783,9 +1783,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@expo/cli@npm:0.20.6":
-  version: 0.20.6
-  resolution: "@expo/cli@npm:0.20.6"
+"@expo/cli@npm:0.21.1":
+  version: 0.21.1
+  resolution: "@expo/cli@npm:0.21.1"
   dependencies:
     "@0no-co/graphql.web": "npm:^1.0.8"
     "@babel/runtime": "npm:^7.20.0"
@@ -1860,7 +1860,7 @@ __metadata:
     ws: "npm:^8.12.1"
   bin:
     expo-internal: build/bin/cli
-  checksum: 10c0/45823b513b627bf1253acd32ef979e2364f1f26f374638534b08ec97369e46f51100b8c0bc5d6a6f7556cd65176f5f6e1914838743955262e8808268a8aa2870
+  checksum: 10c0/2e4269ef24d39203763484ac724afb8355dddfe65e2f2dc3fd31e9dd73f6eac773ea89207c67ba7e12b0d63a5732a771dd3e715a2ddd472adf5d18b13b87bf5f
   languageName: node
   linkType: hard
 
@@ -1874,9 +1874,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@expo/config-plugins@npm:9.0.8":
-  version: 9.0.8
-  resolution: "@expo/config-plugins@npm:9.0.8"
+"@expo/config-plugins@npm:9.0.9":
+  version: 9.0.9
+  resolution: "@expo/config-plugins@npm:9.0.9"
   dependencies:
     "@expo/config-types": "npm:^52.0.0"
     "@expo/json-file": "npm:~9.0.0"
@@ -1892,7 +1892,7 @@ __metadata:
     slugify: "npm:^1.6.6"
     xcode: "npm:^3.0.1"
     xml2js: "npm:0.6.0"
-  checksum: 10c0/b0ed70b973f64c7bf8c15a3c4997a4c07538f6da3d96d33ae7b40df11670555e64d20baf5ebed591e31fd4565c51d098ff91d9e386ef400018f34e3c6b21733c
+  checksum: 10c0/ca38b671327ab5d0a58466a96bfc8f64d71890687c5d0a46515553b9a451e6bd81f6eedba783a1d81d8c0542bd49c031d53797d234ad1283ec9e67517da8b5c7
   languageName: node
   linkType: hard
 
@@ -2056,7 +2056,33 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@expo/metro-config@npm:0.19.0, @expo/metro-config@npm:~0.19.0":
+"@expo/metro-config@npm:0.19.2":
+  version: 0.19.2
+  resolution: "@expo/metro-config@npm:0.19.2"
+  dependencies:
+    "@babel/core": "npm:^7.20.0"
+    "@babel/generator": "npm:^7.20.5"
+    "@babel/parser": "npm:^7.20.0"
+    "@babel/types": "npm:^7.20.0"
+    "@expo/config": "npm:~10.0.0"
+    "@expo/env": "npm:~0.4.0"
+    "@expo/json-file": "npm:~9.0.0"
+    "@expo/spawn-async": "npm:^1.7.2"
+    chalk: "npm:^4.1.0"
+    debug: "npm:^4.3.2"
+    fs-extra: "npm:^9.1.0"
+    getenv: "npm:^1.0.0"
+    glob: "npm:^10.4.2"
+    jsc-safe-url: "npm:^0.2.4"
+    lightningcss: "npm:~1.27.0"
+    minimatch: "npm:^3.0.4"
+    postcss: "npm:~8.4.32"
+    resolve-from: "npm:^5.0.0"
+  checksum: 10c0/9ff5da6bd33aed0c6cf7564ea42aaa17a9d8b6f00cf52ede0a4bdf4bf0dc47dad53e94b9beb43b2f10f221178d7317d9f972b56c5a1659722596637b495a957c
+  languageName: node
+  linkType: hard
+
+"@expo/metro-config@npm:~0.19.0":
   version: 0.19.0
   resolution: "@expo/metro-config@npm:0.19.0"
   dependencies:
@@ -3227,17 +3253,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@react-native/gradle-plugin@npm:0.76.1":
+"@react-native/gradle-plugin@npm:0.76.1, @react-native/gradle-plugin@npm:^0.76.1":
   version: 0.76.1
   resolution: "@react-native/gradle-plugin@npm:0.76.1"
   checksum: 10c0/7056ff70ff42d9575eb35fd63ce7accb42caffb08839bcf32abd5a83e3016be9e8b56a115e927b45302c94e3ad88e928283354577fc77547b13c0c84183e016b
-  languageName: node
-  linkType: hard
-
-"@react-native/gradle-plugin@patch:@react-native/gradle-plugin@npm%3A0.76.1#~/.yarn/patches/@react-native-gradle-plugin-npm-0.76.1-f19c439d00.patch":
-  version: 0.76.1
-  resolution: "@react-native/gradle-plugin@patch:@react-native/gradle-plugin@npm%3A0.76.1#~/.yarn/patches/@react-native-gradle-plugin-npm-0.76.1-f19c439d00.patch::version=0.76.1&hash=7825fa"
-  checksum: 10c0/5b870b5c2654252b2d2cbf90d9245824a60342f0e3342f2703300ded6e8496ee6712f205a503033f2ef1878432e034d7c0dab538e1b9fb37d36b9b9cbd068ae8
   languageName: node
   linkType: hard
 
@@ -3667,9 +3686,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@sharcoux/slider@npm:8.0.4":
-  version: 8.0.4
-  resolution: "@sharcoux/slider@npm:8.0.4"
+"@sharcoux/slider@npm:8.0.5":
+  version: 8.0.5
+  resolution: "@sharcoux/slider@npm:8.0.5"
   dependencies:
     react-dom: "npm:>=16.13.1"
     react-native-web: "npm:>=0.13.4"
@@ -3681,7 +3700,7 @@ __metadata:
       optional: true
     react-native-web:
       optional: true
-  checksum: 10c0/1bad0604a2c636b28c6400828ed6b7d85094a8e387a42244735fa28f45e7adbe47d63860f1039f3441e82f4b609cce5a523e5d73a4443d4a9a22d40b7409377e
+  checksum: 10c0/f40cb0c90b87d3fea0420b7ccef4b3f26ba89e66028c7a5c07507ccdc35738f4b4261673fd12b44c8d7c9cb573b5ff222ec32f5e1e8e768f717227081bc81430
   languageName: node
   linkType: hard
 
@@ -5203,7 +5222,7 @@ __metadata:
     "@react-native-cookies/cookies": "npm:^6.2.1"
     "@react-native-masked-view/masked-view": "npm:^0.3.2"
     "@react-native/babel-preset": "npm:^0.76.1"
-    "@react-native/gradle-plugin": "patch:@react-native/gradle-plugin@npm%3A0.76.1#~/.yarn/patches/@react-native-gradle-plugin-npm-0.76.1-f19c439d00.patch"
+    "@react-native/gradle-plugin": "npm:^0.76.1"
     "@react-native/metro-config": "npm:^0.76.1"
     "@react-native/typescript-config": "npm:0.76.1"
     "@react-navigation/drawer": "npm:^7.0.1"
@@ -5211,7 +5230,7 @@ __metadata:
     "@react-navigation/native": "npm:^7.0.0"
     "@react-navigation/native-stack": "npm:^7.0.0"
     "@sentry/react-native": "npm:^6.1.0"
-    "@sharcoux/slider": "npm:8.0.4"
+    "@sharcoux/slider": "npm:8.0.5"
     "@shopify/flash-list": "npm:^1.7.2"
     "@shopify/react-native-skia": "npm:1.5.3"
     "@tsconfig/react-native": "npm:^3.0.5"
@@ -5259,7 +5278,7 @@ __metadata:
     eslint-plugin-react: "npm:^7.37.2"
     eslint-plugin-react-hooks: "npm:^5.0.0"
     event-target-polyfill: "npm:^0.0.4"
-    expo: "npm:^52.0.2"
+    expo: "npm:^52.0.4"
     expo-auth-session: "npm:~6.0.0"
     expo-clipboard: "npm:~7.0.0"
     expo-crypto: "npm:~14.0.1"
@@ -5288,7 +5307,7 @@ __metadata:
     qs: "npm:^6.13.0"
     react: "npm:18.3.1"
     react-i18next: "npm:^15.1.1"
-    react-native: "patch:react-native@npm%3A0.76.1#~/.yarn/patches/react-native-npm-0.76.1-c738a2fa39.patch"
+    react-native: "npm:^0.76.1"
     react-native-app-auth: "npm:^8.0.0"
     react-native-background-timer: "git+https://github.com/lovegaoshi/react-native-background-timer.git"
     react-native-blob-jsi-helper: "npm:^0.3.1"
@@ -5311,7 +5330,7 @@ __metadata:
     react-native-screens: "npm:4.0.0"
     react-native-shadow-2: "npm:^7.1.1"
     react-native-share-menu: "git+https://github.com/Expensify/react-native-share-menu.git"
-    react-native-svg: "npm:15.8.0"
+    react-native-svg: "npm:15.9.0"
     react-native-svga-player: "https://lovegaoshi@github.com/lovegaoshi/react-native-svga-player.git#commit=f8c6303fddb528a1a94d2ab4696c9318c0002cfd"
     react-native-text-ticker: "https://lovegaoshi@github.com/lovegaoshi/react-native-text-ticker.git#commit=b9eb454b18bb621a769ce4b57b4603a81501b477"
     react-native-track-player: "https://github.com/lovegaoshi/react-native-track-player.git#commit=6142378143e43cf28b74940195b1def6e0ec795d"
@@ -8457,9 +8476,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"expo-modules-autolinking@npm:2.0.0":
-  version: 2.0.0
-  resolution: "expo-modules-autolinking@npm:2.0.0"
+"expo-modules-autolinking@npm:2.0.1":
+  version: 2.0.1
+  resolution: "expo-modules-autolinking@npm:2.0.1"
   dependencies:
     "@expo/spawn-async": "npm:^1.7.2"
     chalk: "npm:^4.1.0"
@@ -8471,16 +8490,16 @@ __metadata:
     resolve-from: "npm:^5.0.0"
   bin:
     expo-modules-autolinking: bin/expo-modules-autolinking.js
-  checksum: 10c0/5bd114c080f08013839a40c86abfc1e46c594678da3955f1310d2732675e2105b5f727fa890ae9704e35936f3ea2db2e16d0d6c1e826211c9585b4be5209891b
+  checksum: 10c0/c9a376677688d3de4fec52fa47c04212cb0303a058020bdb7d05b910e4520d910b06d40889bc1c91500968dea087cca8d21ec9dd207b9232ca2ef7fa25774173
   languageName: node
   linkType: hard
 
-"expo-modules-core@npm:2.0.0":
-  version: 2.0.0
-  resolution: "expo-modules-core@npm:2.0.0"
+"expo-modules-core@npm:2.0.1":
+  version: 2.0.1
+  resolution: "expo-modules-core@npm:2.0.1"
   dependencies:
     invariant: "npm:^2.2.4"
-  checksum: 10c0/be4f96a4f76293e3ae7365da2d91bf0e7b7156ced70602105826113a67c867dfe506cce6c6e826072417e9a54da215a921cf6ea716f315a96b5d435676b97ad7
+  checksum: 10c0/3e18165d01e6e396957b0e128bc619aef81b7997c725283a17e049c6fdff554ac134701692f392d2ef9e089fcdfc9ebaffcbd6607a2107cc512b9882a33c3faa
   languageName: node
   linkType: hard
 
@@ -8503,16 +8522,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"expo@npm:^52.0.2":
-  version: 52.0.2
-  resolution: "expo@npm:52.0.2"
+"expo@npm:^52.0.4":
+  version: 52.0.4
+  resolution: "expo@npm:52.0.4"
   dependencies:
     "@babel/runtime": "npm:^7.20.0"
-    "@expo/cli": "npm:0.20.6"
+    "@expo/cli": "npm:0.21.1"
     "@expo/config": "npm:10.0.3"
-    "@expo/config-plugins": "npm:9.0.8"
+    "@expo/config-plugins": "npm:9.0.9"
     "@expo/fingerprint": "npm:0.11.2"
-    "@expo/metro-config": "npm:0.19.0"
+    "@expo/metro-config": "npm:0.19.2"
     "@expo/vector-icons": "npm:^14.0.0"
     babel-preset-expo: "npm:~12.0.0"
     expo-asset: "npm:~11.0.1"
@@ -8520,8 +8539,8 @@ __metadata:
     expo-file-system: "npm:~18.0.2"
     expo-font: "npm:~13.0.1"
     expo-keep-awake: "npm:~14.0.1"
-    expo-modules-autolinking: "npm:2.0.0"
-    expo-modules-core: "npm:2.0.0"
+    expo-modules-autolinking: "npm:2.0.1"
+    expo-modules-core: "npm:2.0.1"
     fbemitter: "npm:^3.0.0"
     web-streams-polyfill: "npm:^3.3.2"
     whatwg-url-without-unicode: "npm:8.0.0-3"
@@ -8540,7 +8559,7 @@ __metadata:
       optional: true
   bin:
     expo: bin/cli
-  checksum: 10c0/e468a0ee9f2afe496c34416cfcc448be582b2cf5ecb1f6cfc65bde7efe31cbccc2fe05ab4efd65080e7f2d411801d06da692f4eccefd243cd75d31705d3d1bb4
+  checksum: 10c0/bd587f584f4facc7941f8b20cafcc6b3b57c0bef0080dff740243e05ed68fe971a41d72f257527bedc7a2de13602c481ca8e2e58022b57a46a94e0a51708d3ea
   languageName: node
   linkType: hard
 
@@ -14212,9 +14231,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-native-svg@npm:15.8.0":
-  version: 15.8.0
-  resolution: "react-native-svg@npm:15.8.0"
+"react-native-svg@npm:15.9.0":
+  version: 15.9.0
+  resolution: "react-native-svg@npm:15.9.0"
   dependencies:
     css-select: "npm:^5.1.0"
     css-tree: "npm:^1.1.3"
@@ -14222,7 +14241,7 @@ __metadata:
   peerDependencies:
     react: "*"
     react-native: "*"
-  checksum: 10c0/03d2cb19c799da6ba41dea0dc414338d01a55549ea4e4a370315c8ec34e1c6de430a62b538f099423060edc8bea6df134f765bde862770059404617c3c296af8
+  checksum: 10c0/b255528644756aa1bd9193746a25b2d48d501b9620d7b9291816235fe263ac909e535e6e3485c6039cadc040c83209f48e5cc522b93aef8c23839b6f8576c9b2
   languageName: node
   linkType: hard
 
@@ -14345,7 +14364,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-native@npm:0.76.1":
+"react-native@npm:*, react-native@npm:^0.76.1":
   version: 0.76.1
   resolution: "react-native@npm:0.76.1"
   dependencies:
@@ -14396,60 +14415,6 @@ __metadata:
   bin:
     react-native: cli.js
   checksum: 10c0/cee6d34890dfce2e84dd8dbc530b0915ea3fa38e648eb829983c30cf9a6efb6123a61394b3c48e93c3fa031b063c04bb5790863a6e5a00c643c84923dd356532
-  languageName: node
-  linkType: hard
-
-"react-native@patch:react-native@npm%3A0.76.1#~/.yarn/patches/react-native-npm-0.76.1-c738a2fa39.patch":
-  version: 0.76.1
-  resolution: "react-native@patch:react-native@npm%3A0.76.1#~/.yarn/patches/react-native-npm-0.76.1-c738a2fa39.patch::version=0.76.1&hash=df269a"
-  dependencies:
-    "@jest/create-cache-key-function": "npm:^29.6.3"
-    "@react-native/assets-registry": "npm:0.76.1"
-    "@react-native/codegen": "npm:0.76.1"
-    "@react-native/community-cli-plugin": "npm:0.76.1"
-    "@react-native/gradle-plugin": "npm:0.76.1"
-    "@react-native/js-polyfills": "npm:0.76.1"
-    "@react-native/normalize-colors": "npm:0.76.1"
-    "@react-native/virtualized-lists": "npm:0.76.1"
-    abort-controller: "npm:^3.0.0"
-    anser: "npm:^1.4.9"
-    ansi-regex: "npm:^5.0.0"
-    babel-jest: "npm:^29.7.0"
-    babel-plugin-syntax-hermes-parser: "npm:^0.23.1"
-    base64-js: "npm:^1.5.1"
-    chalk: "npm:^4.0.0"
-    commander: "npm:^12.0.0"
-    event-target-shim: "npm:^5.0.1"
-    flow-enums-runtime: "npm:^0.0.6"
-    glob: "npm:^7.1.1"
-    invariant: "npm:^2.2.4"
-    jest-environment-node: "npm:^29.6.3"
-    jsc-android: "npm:^250231.0.0"
-    memoize-one: "npm:^5.0.0"
-    metro-runtime: "npm:^0.81.0"
-    metro-source-map: "npm:^0.81.0"
-    mkdirp: "npm:^0.5.1"
-    nullthrows: "npm:^1.1.1"
-    pretty-format: "npm:^29.7.0"
-    promise: "npm:^8.3.0"
-    react-devtools-core: "npm:^5.3.1"
-    react-refresh: "npm:^0.14.0"
-    regenerator-runtime: "npm:^0.13.2"
-    scheduler: "npm:0.24.0-canary-efb381bbf-20230505"
-    semver: "npm:^7.1.3"
-    stacktrace-parser: "npm:^0.1.10"
-    whatwg-fetch: "npm:^3.0.0"
-    ws: "npm:^6.2.3"
-    yargs: "npm:^17.6.2"
-  peerDependencies:
-    "@types/react": ^18.2.6
-    react: ^18.2.0
-  peerDependenciesMeta:
-    "@types/react":
-      optional: true
-  bin:
-    react-native: cli.js
-  checksum: 10c0/1bc604586060450c02f434e2e9ea055e378640790c83d43a821b6c98d3638e951a88aabe82257a4eeaf21920cc7ec6958bd600e5d26554d5d6fd7eeab44af275
   languageName: node
   linkType: hard
 

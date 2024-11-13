@@ -30,10 +30,17 @@ const getUserGuard = async () => {
 
 // simple function that filters is user has guard > 0.
 export const getHasGuard = async (hasGuard: number[] = []) => {
-  const guards = await getUserGuard();
-  return guards.filter(
-    (guard: any) => guard.guard_level > 0 && hasGuard.includes(guard.target_id),
-  );
+  try {
+    const guards = await getUserGuard();
+    return (
+      guards.filter(
+        (guard: any) =>
+          guard.guard_level > 0 && hasGuard.includes(guard.target_id),
+      ).length > 0
+    );
+  } catch {
+    return false;
+  }
 };
 
 export default getUser;

@@ -37,7 +37,7 @@
     "@react-native-cookies/cookies": "^6.2.1",
     "@react-native-masked-view/masked-view": "^0.3.2",
     "@react-native/babel-preset": "^0.76.1",
-    "@react-native/gradle-plugin": "patch:@react-native/gradle-plugin@npm%3A0.76.1#~/.yarn/patches/@react-native-gradle-plugin-npm-0.76.1-f19c439d00.patch",
+    "@react-native/gradle-plugin": "^0.76.1",
     "@react-native/metro-config": "^0.76.1",
     "@react-native/typescript-config": "0.76.1",
     "@react-navigation/drawer": "^7.0.1",
@@ -45,7 +45,7 @@
     "@react-navigation/native": "^7.0.0",
     "@react-navigation/native-stack": "^7.0.0",
     "@sentry/react-native": "^6.1.0",
-    "@sharcoux/slider": "8.0.4",
+    "@sharcoux/slider": "8.0.5",
     "@shopify/flash-list": "^1.7.2",
     "@shopify/react-native-skia": "1.5.3",
     "axios": "^1.7.7",
@@ -61,7 +61,7 @@
     "deepmerge": "^4.3.1",
     "dropbox": "git+https://lovegaoshi@github.com/lovegaoshi/dropbox-sdk-js.git",
     "event-target-polyfill": "^0.0.4",
-    "expo": "^52.0.2",
+    "expo": "^52.0.4",
     "expo-auth-session": "~6.0.0",
     "expo-clipboard": "~7.0.0",
     "expo-crypto": "~14.0.1",
@@ -86,7 +86,7 @@
     "qs": "^6.13.0",
     "react": "18.3.1",
     "react-i18next": "^15.1.1",
-    "react-native": "patch:react-native@npm%3A0.76.1#~/.yarn/patches/react-native-npm-0.76.1-c738a2fa39.patch",
+    "react-native": "^0.76.1",
     "react-native-app-auth": "^8.0.0",
     "react-native-background-timer": "git+https://github.com/lovegaoshi/react-native-background-timer.git",
     "react-native-blob-jsi-helper": "^0.3.1",
@@ -107,7 +107,7 @@
     "react-native-screens": "4.0.0",
     "react-native-shadow-2": "^7.1.1",
     "react-native-share-menu": "git+https://github.com/Expensify/react-native-share-menu.git",
-    "react-native-svg": "15.8.0",
+    "react-native-svg": "15.9.0",
     "react-native-svga-player": "https://lovegaoshi@github.com/lovegaoshi/react-native-svga-player.git#commit=f8c6303fddb528a1a94d2ab4696c9318c0002cfd",
     "react-native-text-ticker": "https://lovegaoshi@github.com/lovegaoshi/react-native-text-ticker.git#commit=b9eb454b18bb621a769ce4b57b4603a81501b477",
     "react-native-track-player": "https://github.com/lovegaoshi/react-native-track-player.git#commit=6142378143e43cf28b74940195b1def6e0ec795d",
@@ -124,9 +124,7 @@
     "zustand": "^5.0.1"
   },
   "resolutions": {
-    "metro": "^0.81.0",
-    "react-native@npm:*": "patch:react-native@npm%3A0.76.1#~/.yarn/patches/react-native-npm-0.76.1-c738a2fa39.patch",
-    "@react-native/gradle-plugin@npm:0.76.1": "patch:@react-native/gradle-plugin@npm%3A0.76.1#~/.yarn/patches/@react-native-gradle-plugin-npm-0.76.1-f19c439d00.patch"
+    "metro": "^0.81.0"
   },
   "devDependencies": {
     "@babel/core": "^7.26.0",
