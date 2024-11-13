@@ -10,8 +10,10 @@ import Animated, {
   withTiming,
 } from 'react-native-reanimated';
 
-const ScreenHeight = Dimensions.get('window').height;
-const MinPlayerHeight = 50;
+import { ScreenHeight } from '@utils/RNUtils';
+import MiniControls from './MiniControls';
+import { MinPlayerHeight } from './Constants';
+
 const SnapToRatio = 0.15;
 
 // snapshot: snapping the miniplayer to top or bottom
@@ -51,9 +53,9 @@ export default () => {
   });
   return (
     <GestureDetector gesture={scrollDragGesture}>
-      <Animated.View
-        style={[{ backgroundColor: 'red', width: '100%' }, miniplayerStyle]}
-      ></Animated.View>
+      <Animated.View style={[{ width: '100%' }, miniplayerStyle]}>
+        <MiniControls miniplayerHeight={miniplayerHeight} />
+      </Animated.View>
     </GestureDetector>
   );
 };
