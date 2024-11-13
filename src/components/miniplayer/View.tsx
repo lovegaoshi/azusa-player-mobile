@@ -11,25 +11,38 @@ import Animated, {
 } from 'react-native-reanimated';
 
 const ScreenHeight = Dimensions.get('window').height;
+const MinPlayerHeight = 50;
+const SnapToRatio = 0.15;
 
-// snapshot: draggable "miniplayer" that changes height on drag
+// snapshot: snapping the miniplayer to top or bottom
 export default () => {
-  const miniplayerHeight = useSharedValue(50);
+  const miniplayerHeight = useSharedValue(MinPlayerHeight);
   const initHeight = useSharedValue(0);
 
-  const calcPlayerHeight = (translationY: number) => {
+  const dragPlayerHeight = (translationY: number) => {
     'worklet';
     const newHeight = initHeight.value - translationY;
-    return Math.max(50, Math.min(newHeight, ScreenHeight));
+    miniplayerHeight.value = Math.max(
+      MinPlayerHeight,
+      Math.min(newHeight, ScreenHeight),
+    );
+  };
+
+  const snapPlayerHeight = (translationY: number) => {
+    'worklet';
+    if (translationY > ScreenHeight * SnapToRatio) {
+      return (miniplayerHeight.value = withTiming(MinPlayerHeight));
+    }
+    if (translationY < -ScreenHeight * SnapToRatio) {
+      return (miniplayerHeight.value = withTiming(ScreenHeight));
+    }
+    return (miniplayerHeight.value = withTiming(initHeight.value));
   };
 
   const scrollDragGesture = Gesture.Pan()
-    .onStart(e => {
-      console.log('start', e);
-      initHeight.value = miniplayerHeight.value;
-    })
-    .onChange(e => (miniplayerHeight.value = calcPlayerHeight(e.translationY)))
-    .onEnd(e => console.log('end', e.translationY));
+    .onStart(e => (initHeight.value = miniplayerHeight.value))
+    .onChange(e => dragPlayerHeight(e.translationY))
+    .onEnd(e => snapPlayerHeight(e.translationY));
 
   const miniplayerStyle = useAnimatedStyle(() => {
     return {
