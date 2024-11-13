@@ -26,7 +26,13 @@ const IconSize = 30;
 const iconContainerStyle = { width: IconSize + 16, height: IconSize + 16 };
 const DoublePlayerHeight = MinPlayerHeight * 1.2;
 
-export default ({ miniplayerHeight }: NoxComponent.MiniplayerProps) => {
+interface Props extends NoxComponent.MiniplayerProps {
+  opacity: SharedValue<number>;
+  onPress: () => void;
+  expand: () => void;
+}
+
+export default ({ miniplayerHeight, opacity, onPress, expand }: Props) => {
   const { track } = useActiveTrack();
   const { screenAlwaysWake, hideCoverInMobile } = useNoxSetting(
     state => state.playerSetting,
@@ -54,8 +60,19 @@ export default ({ miniplayerHeight }: NoxComponent.MiniplayerProps) => {
       height: artworkWidth.value,
       bottom: -artworkBottom.value,
       left: artworkLeft.value,
+      opacity: opacity.value,
+      zIndex: opacity.value > 0 ? 1 : 0,
     };
   });
+
+  const onImagePress = () => {
+    if (miniplayerHeight.value === MinPlayerHeight) {
+      return expand();
+    }
+    if (artworkWidth.value === width) {
+      return onPress();
+    }
+  };
 
   useEffect(() => {
     songResolveArtwork(track?.song)?.then(setOverwriteAlbumArt);
@@ -70,16 +87,18 @@ export default ({ miniplayerHeight }: NoxComponent.MiniplayerProps) => {
         artworkStyle,
       ]}
     >
-      <Image
-        style={styles.flex}
-        source={
-          hideCoverInMobile
-            ? 0
-            : {
-                uri: `${overwriteAlbumArt ?? track?.artwork}`,
-              }
-        }
-      />
+      <TouchableWithoutFeedback onPress={onImagePress}>
+        <Image
+          style={styles.flex}
+          source={
+            hideCoverInMobile
+              ? 0
+              : {
+                  uri: `${overwriteAlbumArt ?? track?.artwork}`,
+                }
+          }
+        />
+      </TouchableWithoutFeedback>
     </Animated.View>
   );
 };

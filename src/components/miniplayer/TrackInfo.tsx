@@ -1,68 +1,16 @@
 import React, { useRef } from 'react';
-import {
-  StyleSheet,
-  Text,
-  View,
-  Animated,
-  TouchableWithoutFeedback,
-  ViewStyle,
-  Easing,
-  TextStyle,
-  StyleProp,
-} from 'react-native';
-import type { Track } from 'react-native-track-player';
-import { Image } from 'expo-image';
-import MarqueeText from 'react-native-text-ticker';
-import { useFocusEffect } from '@react-navigation/native';
+import { Dimensions, StyleSheet, Text, View } from 'react-native';
 
 import { useNoxSetting } from '@stores/useApp';
 import NoxPlayingList from '@stores/playingList';
-import SongMenuButton from './SongMenuButton';
-import FavReloadButton from './FavReloadButton';
+import SongMenuButton from '@components/player/TrackInfo/SongMenuButton';
+import FavReloadButton from '@components/player/TrackInfo/FavReloadButton';
+import useActiveTrack from '@hooks/useActiveTrack';
+import { SongTitle } from '@components/player/TrackInfo/TrackInfoTemplate';
 
-interface Props {
-  track?: Track;
-  windowWidth?: number;
-  windowHeight?: number;
-  onImagePress?: () => void;
-  children?: React.JSX.Element;
-  containerStyle?: ViewStyle;
-}
-const AlbumArt = ({
-  track,
-  windowWidth,
-  windowHeight,
-  onImagePress = () => undefined,
-}: Props) => {
-  const playerSetting = useNoxSetting(state => state.playerSetting);
-  const coverStyle = {
-    width: windowWidth ?? '100%',
-    height: windowHeight ?? '100%',
-  };
-
-  return (
-    <TouchableWithoutFeedback onPress={onImagePress}>
-      <Animated.View style={styles.container}>
-        <Image
-          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-          // @ts-expect-error
-          style={[styles.artwork, coverStyle]}
-          source={
-            playerSetting.hideCoverInMobile
-              ? 0
-              : {
-                  uri: `${track?.artwork}`,
-                }
-          }
-          transition={{ effect: 'flip-from-top' }}
-        />
-      </Animated.View>
-    </TouchableWithoutFeedback>
-  );
-};
-
-const TrackInfoTemplate: React.FC<Props> = props => {
-  const { track, windowWidth, children, containerStyle } = props;
+export default ({ miniplayerHeight }: NoxComponent.MiniplayerProps) => {
+  const { track } = useActiveTrack();
+  const { width } = Dimensions.get('window');
   const playerStyle = useNoxSetting(state => state.playerStyle);
   const currentPlayingList = useNoxSetting(state => state.currentPlayingList);
 
@@ -91,8 +39,7 @@ const TrackInfoTemplate: React.FC<Props> = props => {
     },
   ];
   return (
-    <View style={[styles.container, containerStyle, { width: windowWidth }]}>
-      {children ?? <AlbumArt {...props} />}
+    <View style={[styles.container, { width: '100%', top: width + 28 }]}>
       <SongTitle style={textStyle} text={track?.title} />
       <View style={styles.infoContainer}>
         <View style={styles.favoriteButtonContainer}>
@@ -110,29 +57,6 @@ const TrackInfoTemplate: React.FC<Props> = props => {
     </View>
   );
 };
-
-interface SongTitleProps {
-  style: StyleProp<TextStyle>;
-  text?: string;
-}
-export const SongTitle = (props: SongTitleProps) => {
-  const resolveError = useRef(0);
-
-  return (
-    <MarqueeText
-      duration={3000}
-      animationType={'bounce'}
-      bounceDelay={2000}
-      style={props.style}
-      easing={Easing.linear}
-      onWidthResolveError={() => resolveError.current++}
-    >
-      {`${props.text}`}
-    </MarqueeText>
-  );
-};
-
-export default TrackInfoTemplate;
 
 const styles = StyleSheet.create({
   container: {

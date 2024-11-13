@@ -48,7 +48,7 @@ export default ({ miniplayerHeight, collapse }: Props) => {
     >
       <View style={styles.iconButtonContainerStyle}>
         <IconButton
-          icon="menu"
+          icon="arrow-collapse"
           size={40}
           iconColor={playerStyle.colors.primary}
           onPress={collapse}
