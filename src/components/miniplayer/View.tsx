@@ -10,7 +10,6 @@ import Animated, {
   withTiming,
 } from 'react-native-reanimated';
 
-import { ScreenHeight } from '@utils/RNUtils';
 import MiniControls from './MiniControls';
 import { MinPlayerHeight } from './Constants';
 
@@ -18,6 +17,8 @@ const SnapToRatio = 0.15;
 
 // snapshot: snapping the miniplayer to top or bottom
 export default () => {
+  const PlayerHeight = Dimensions.get('window').height - MinPlayerHeight;
+
   const miniplayerHeight = useSharedValue(MinPlayerHeight);
   const initHeight = useSharedValue(0);
 
@@ -26,17 +27,17 @@ export default () => {
     const newHeight = initHeight.value - translationY;
     miniplayerHeight.value = Math.max(
       MinPlayerHeight,
-      Math.min(newHeight, ScreenHeight),
+      Math.min(newHeight, PlayerHeight),
     );
   };
 
   const snapPlayerHeight = (translationY: number) => {
     'worklet';
-    if (translationY > ScreenHeight * SnapToRatio) {
+    if (translationY > PlayerHeight * SnapToRatio) {
       return (miniplayerHeight.value = withTiming(MinPlayerHeight));
     }
-    if (translationY < -ScreenHeight * SnapToRatio) {
-      return (miniplayerHeight.value = withTiming(ScreenHeight));
+    if (translationY < -PlayerHeight * SnapToRatio) {
+      return (miniplayerHeight.value = withTiming(PlayerHeight));
     }
     return (miniplayerHeight.value = withTiming(initHeight.value));
   };

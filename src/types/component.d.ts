@@ -8,6 +8,9 @@ import { IntentData } from '@enums/Intent';
 
 declare global {
   namespace NoxComponent {
+    interface MiniplayerProps {
+      miniplayerHeight: SharedValue<number>;
+    }
     interface AppProps {
       intentData?: IntentData;
       intentAction: string;

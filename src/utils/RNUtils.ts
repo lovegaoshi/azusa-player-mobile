@@ -12,7 +12,7 @@ export const isAndroid10 = isAndroid && Number(Platform.Version) >= 29;
 export const isIOS = Platform.OS === 'ios';
 const { NoxModule } = NativeModules;
 
-export const ScreenHeight = Dimensions.get('window').height;
+export const ScreenDimension = Dimensions.get('window');
 
 export const getFileSize = async (fpath: string) => {
   try {

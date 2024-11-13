@@ -1,1 +1,1 @@
-export const MinPlayerHeight = 50;
+export const MinPlayerHeight = 75;

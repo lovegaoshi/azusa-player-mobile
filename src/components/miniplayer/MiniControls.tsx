@@ -5,7 +5,7 @@ import {
 } from 'react-native-track-player';
 import { useDebouncedValue } from 'hooks';
 import { ActivityIndicator, IconButton, Text } from 'react-native-paper';
-import { View } from 'react-native';
+import { Dimensions, View } from 'react-native';
 import Animated, {
   SharedValue,
   useAnimatedStyle,
@@ -15,14 +15,13 @@ import Animated, {
 import { fadePause, fadePlay } from '@utils/RNTPUtils';
 import useTPControls from '@hooks/useTPControls';
 import { styles } from '../style';
-import { ScreenHeight } from '@utils/RNUtils';
 import useActiveTrack from '@hooks/useActiveTrack';
 import { MinPlayerHeight } from './Constants';
 import { useNoxSetting } from '@stores/useApp';
+import TrackAlbumArt from './Artwork';
 
 const IconSize = 30;
 const iconContainerStyle = { width: IconSize + 16, height: IconSize + 16 };
-const HalfScreenHeight = ScreenHeight * 0.5;
 const DoublePlayerHeight = MinPlayerHeight * 1.2;
 
 const TrackInfo = () => {
@@ -30,7 +29,7 @@ const TrackInfo = () => {
   const playerStyle = useNoxSetting(state => state.playerStyle);
 
   return (
-    <View style={styles.centeredFlex}>
+    <View style={[styles.centeredFlex, { paddingLeft: MinPlayerHeight }]}>
       <Text style={{ color: playerStyle.onSurface }}>{track?.title}</Text>
       <Text style={{ color: playerStyle.onSurfaceVariant }}>
         {track?.artist}
@@ -39,8 +38,11 @@ const TrackInfo = () => {
   );
 };
 
-const PlayerControls = ({ miniplayerHeight }: Props) => {
+const PlayerControls = ({ miniplayerHeight }: NoxComponent.MiniplayerProps) => {
   const { performSkipToNext, performSkipToPrevious } = useTPControls();
+  const PlayerHeight = Dimensions.get('window').height - MinPlayerHeight;
+  const HalfScreenHeight = PlayerHeight * 0.5;
+
   const miniControlOpacity = useDerivedValue(() => {
     if (miniplayerHeight.value > HalfScreenHeight) {
       return 0;
@@ -97,13 +99,10 @@ const PlayPauseButton = () => {
   return <IconButton icon="play" size={IconSize} onPress={fadePlay} />;
 };
 
-interface Props {
-  miniplayerHeight: SharedValue<number>;
-}
-
-export default ({ miniplayerHeight }: Props) => {
+export default ({ miniplayerHeight }: NoxComponent.MiniplayerProps) => {
   return (
-    <View style={styles.rowView}>
+    <View style={[styles.rowView, { paddingTop: 5 }]}>
+      <TrackAlbumArt miniplayerHeight={miniplayerHeight} />
       <PlayerControls miniplayerHeight={miniplayerHeight} />
     </View>
   );
