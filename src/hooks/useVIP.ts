@@ -33,7 +33,7 @@ export const checkVIP = async () => {
   }
 };
 
-const purchaseVIP = (type = VIPType.RevenueCat) => {
+export const purchaseVIP = (type = VIPType.RevenueCat) => {
   SecureStore.setItemAsync(VIPKey, type);
   useVIP.setState({ VIP: true });
 };
