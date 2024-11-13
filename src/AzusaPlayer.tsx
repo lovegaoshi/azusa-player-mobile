@@ -34,6 +34,7 @@ import './localization/i18n';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { ScreenIcons } from '@enums/Icons';
 import NoxBottomTab from './components/bottomtab/NoxBottomTab';
+import NoxMiniPlayer from './components/miniplayer/View';
 
 const { LightTheme, DarkTheme } = adaptNavigationTheme({
   reactNavigationLight: NavigationDefaultTheme,
@@ -157,6 +158,7 @@ const AzusaPlayer = () => {
               component={Settings}
             />
           </Drawer.Navigator>
+          <NoxMiniPlayer />
           <NoxBottomTab navigation={navigation} />
         </View>
       </NavigationContainer>
