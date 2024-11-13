@@ -12,10 +12,12 @@ import Animated, {
 
 import MiniControls from './MiniControls';
 import { MinPlayerHeight } from './Constants';
+import TrackAlbumArt from './Artwork';
+import PlayerTopInfo from './PlayerTopInfo';
+import { styles } from '../style';
 
 const SnapToRatio = 0.15;
 
-// snapshot: snapping the miniplayer to top or bottom
 export default () => {
   const PlayerHeight = Dimensions.get('window').height - MinPlayerHeight;
 
@@ -31,15 +33,26 @@ export default () => {
     );
   };
 
+  const expand = () => {
+    'worklet';
+    miniplayerHeight.value = withTiming(PlayerHeight, { duration: 500 });
+  };
+  const collapse = () => {
+    'worklet';
+    miniplayerHeight.value = withTiming(MinPlayerHeight, { duration: 500 });
+  };
+
   const snapPlayerHeight = (translationY: number) => {
     'worklet';
     if (translationY > PlayerHeight * SnapToRatio) {
-      return (miniplayerHeight.value = withTiming(MinPlayerHeight));
+      return collapse();
     }
     if (translationY < -PlayerHeight * SnapToRatio) {
-      return (miniplayerHeight.value = withTiming(PlayerHeight));
+      return expand();
     }
-    return (miniplayerHeight.value = withTiming(initHeight.value));
+    return (miniplayerHeight.value = withTiming(initHeight.value, {
+      duration: 500,
+    }));
   };
 
   const scrollDragGesture = Gesture.Pan()
@@ -54,8 +67,17 @@ export default () => {
   });
   return (
     <GestureDetector gesture={scrollDragGesture}>
-      <Animated.View style={[{ width: '100%' }, miniplayerStyle]}>
-        <MiniControls miniplayerHeight={miniplayerHeight} />
+      <Animated.View
+        style={[{ width: '100%', paddingTop: 5 }, miniplayerStyle]}
+      >
+        <View style={[styles.rowView, { paddingTop: 5 }]}>
+          <PlayerTopInfo
+            miniplayerHeight={miniplayerHeight}
+            collapse={collapse}
+          />
+          <TrackAlbumArt miniplayerHeight={miniplayerHeight} />
+          <MiniControls miniplayerHeight={miniplayerHeight} />
+        </View>
       </Animated.View>
     </GestureDetector>
   );

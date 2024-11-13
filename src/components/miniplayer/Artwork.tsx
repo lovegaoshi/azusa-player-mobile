@@ -39,8 +39,8 @@ export default ({ miniplayerHeight }: NoxComponent.MiniplayerProps) => {
   });
   const artworkBottom = useDerivedValue(() => {
     const val = miniplayerHeight.value - MinPlayerHeight;
-    const overflowBottom = Math.max(0, miniplayerHeight.value - 25 - width);
-    return val - overflowBottom;
+    const overflowBottom = Math.max(0, miniplayerHeight.value - 100 - width);
+    return Math.min(val - overflowBottom);
   });
   const artworkLeft = useDerivedValue(() => {
     const val = 5 + MinPlayerHeight - miniplayerHeight.value;

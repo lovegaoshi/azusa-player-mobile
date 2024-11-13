@@ -1,4 +1,4 @@
-import {
+import TrackPlayer, {
   usePlaybackState,
   State,
   usePlayWhenReady,
@@ -12,13 +12,12 @@ import Animated, {
   useDerivedValue,
 } from 'react-native-reanimated';
 
-import { fadePause, fadePlay } from '@utils/RNTPUtils';
+import { fadePause } from '@utils/RNTPUtils';
 import useTPControls from '@hooks/useTPControls';
 import { styles } from '../style';
 import useActiveTrack from '@hooks/useActiveTrack';
 import { MinPlayerHeight } from './Constants';
 import { useNoxSetting } from '@stores/useApp';
-import TrackAlbumArt from './Artwork';
 
 const IconSize = 30;
 const iconContainerStyle = { width: IconSize + 16, height: IconSize + 16 };
@@ -38,7 +37,7 @@ const TrackInfo = () => {
   );
 };
 
-const PlayerControls = ({ miniplayerHeight }: NoxComponent.MiniplayerProps) => {
+export default ({ miniplayerHeight }: NoxComponent.MiniplayerProps) => {
   const { performSkipToNext, performSkipToPrevious } = useTPControls();
   const PlayerHeight = Dimensions.get('window').height - MinPlayerHeight;
   const HalfScreenHeight = PlayerHeight * 0.5;
@@ -96,14 +95,5 @@ const PlayPauseButton = () => {
   if (showPause) {
     return <IconButton icon="pause" size={IconSize} onPress={fadePause} />;
   }
-  return <IconButton icon="play" size={IconSize} onPress={fadePlay} />;
-};
-
-export default ({ miniplayerHeight }: NoxComponent.MiniplayerProps) => {
-  return (
-    <View style={[styles.rowView, { paddingTop: 5 }]}>
-      <TrackAlbumArt miniplayerHeight={miniplayerHeight} />
-      <PlayerControls miniplayerHeight={miniplayerHeight} />
-    </View>
-  );
+  return <IconButton icon="play" size={IconSize} onPress={TrackPlayer.play} />;
 };
