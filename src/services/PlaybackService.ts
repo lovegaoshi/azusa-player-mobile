@@ -102,6 +102,7 @@ export async function additionalPlaybackService({
             urlRefreshTimeStamp: currTime,
           });
           TrackPlayer.play();
+          refetchThrottleGuard = currTime;
         } catch (e) {
           console.error('resolveURL failed', track, e);
         }
