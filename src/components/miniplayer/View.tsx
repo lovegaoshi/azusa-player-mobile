@@ -24,7 +24,7 @@ const SnapToRatio = 0.15;
 export default () => {
   const [lrcVisible, setLrcVisible] = React.useState(false);
   const { width, height } = Dimensions.get('window');
-  const miniplayerHeight = useSharedValue(MinPlayerHeight);
+  const miniplayerHeight = useSharedValue(height);
   const artworkOpacity = useSharedValue(1);
   const initHeight = useSharedValue(0);
 

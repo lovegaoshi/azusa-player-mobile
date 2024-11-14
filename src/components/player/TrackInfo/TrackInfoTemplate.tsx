@@ -13,7 +13,6 @@ import {
 import type { Track } from 'react-native-track-player';
 import { Image } from 'expo-image';
 import MarqueeText from 'react-native-text-ticker';
-import { useFocusEffect } from '@react-navigation/native';
 
 import { useNoxSetting } from '@stores/useApp';
 import NoxPlayingList from '@stores/playingList';
