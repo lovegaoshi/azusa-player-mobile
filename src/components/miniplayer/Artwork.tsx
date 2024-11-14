@@ -1,11 +1,4 @@
-import {
-  usePlaybackState,
-  State,
-  usePlayWhenReady,
-} from 'react-native-track-player';
-import { useDebouncedValue } from 'hooks';
-import { ActivityIndicator, IconButton, Text } from 'react-native-paper';
-import { View, TouchableWithoutFeedback, Dimensions } from 'react-native';
+import { TouchableWithoutFeedback, Dimensions } from 'react-native';
 import Animated, {
   SharedValue,
   useAnimatedStyle,
@@ -14,17 +7,11 @@ import Animated, {
 import { Image } from 'expo-image';
 import { useEffect, useState } from 'react';
 
-import { fadePause, fadePlay } from '@utils/RNTPUtils';
-import useTPControls from '@hooks/useTPControls';
 import { styles } from '../style';
 import useActiveTrack from '@hooks/useActiveTrack';
 import { MinPlayerHeight } from './Constants';
 import { useNoxSetting } from '@stores/useApp';
 import { songResolveArtwork } from '@utils/mediafetch/resolveURL';
-
-const IconSize = 30;
-const iconContainerStyle = { width: IconSize + 16, height: IconSize + 16 };
-const DoublePlayerHeight = MinPlayerHeight * 1.2;
 
 interface Props extends NoxComponent.MiniplayerProps {
   opacity: SharedValue<number>;
@@ -34,17 +21,15 @@ interface Props extends NoxComponent.MiniplayerProps {
 
 export default ({ miniplayerHeight, opacity, onPress, expand }: Props) => {
   const { track } = useActiveTrack();
-  const { screenAlwaysWake, hideCoverInMobile } = useNoxSetting(
-    state => state.playerSetting,
-  );
+  const { hideCoverInMobile } = useNoxSetting(state => state.playerSetting);
   const [overwriteAlbumArt, setOverwriteAlbumArt] = useState<string | void>();
-  const { width, height } = Dimensions.get('window');
+  const { width } = Dimensions.get('window');
 
   const artworkWidth = useDerivedValue(() => {
     return Math.min(miniplayerHeight.value - 25, width);
   });
   const artworkBottom = useDerivedValue(() => {
-    const val = miniplayerHeight.value - MinPlayerHeight;
+    const val = miniplayerHeight.value - MinPlayerHeight - 5;
     const overflowBottom = Math.max(0, miniplayerHeight.value - 100 - width);
     return Math.min(val - overflowBottom);
   });
@@ -54,7 +39,7 @@ export default ({ miniplayerHeight, opacity, onPress, expand }: Props) => {
     return val;
   });
 
-  const artworkStyle = useAnimatedStyle(() => {
+  const animatedStyle = useAnimatedStyle(() => {
     return {
       width: artworkWidth.value,
       height: artworkWidth.value,
@@ -84,7 +69,7 @@ export default ({ miniplayerHeight, opacity, onPress, expand }: Props) => {
         {
           position: 'absolute',
         },
-        artworkStyle,
+        animatedStyle,
       ]}
     >
       <TouchableWithoutFeedback onPress={onImagePress}>

@@ -8,6 +8,10 @@ import { IntentData } from '@enums/Intent';
 
 declare global {
   namespace NoxComponent {
+    interface OpacityProps {
+      opacity: SharedValue<number>;
+      style?: StyleProp<ViewStyle>;
+    }
     interface MiniplayerProps {
       miniplayerHeight: SharedValue<number>;
     }

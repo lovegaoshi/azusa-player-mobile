@@ -17,12 +17,15 @@ import TrackAlbumArt from './Artwork';
 import PlayerTopInfo from './PlayerTopInfo';
 import { styles } from '../style';
 import TrackInfo from './TrackInfo';
+import { isAndroid15 } from '@utils/RNUtils';
+import PlayerControls from '../player/controls/PlayerProgressControls';
 
 const SnapToRatio = 0.15;
 
 export default () => {
   const { width, height } = Dimensions.get('window');
-  const PlayerHeight = height - MinPlayerHeight;
+
+  const PlayerHeight = isAndroid15 ? height - MinPlayerHeight : height;
 
   const miniplayerHeight = useSharedValue(MinPlayerHeight);
   const artworkOpacity = useSharedValue(1);
@@ -85,16 +88,14 @@ export default () => {
     .onChange(e => dragPlayerHeight(e.translationY))
     .onEnd(e => snapPlayerHeight(e.translationY));
 
-  const miniplayerStyle = useAnimatedStyle(() => {
+  const animatedStyle = useAnimatedStyle(() => {
     return {
       height: miniplayerHeight.value,
     };
   });
   return (
     <GestureDetector gesture={scrollDragGesture}>
-      <Animated.View
-        style={[{ width: '100%', paddingTop: 5 }, miniplayerStyle]}
-      >
+      <Animated.View style={[{ width: '100%', paddingTop: 5 }, animatedStyle]}>
         <View style={[styles.rowView, { paddingTop: 5 }]}>
           <PlayerTopInfo opacity={opacityVisible} collapse={collapse} />
           <TrackAlbumArt
@@ -103,9 +104,17 @@ export default () => {
             onPress={onArtworkPress}
             expand={expand}
           />
-          <MiniControls miniplayerHeight={miniplayerHeight} />
+          <MiniControls miniplayerHeight={miniplayerHeight} expand={expand} />
         </View>
-        <TrackInfo opacity={opacityVisible} />
+        <TrackInfo
+          opacity={opacityVisible}
+          artworkOpacity={artworkOpacity}
+          style={{ width: '100%', top: width + 28 }}
+        />
+        <PlayerControls
+          opacity={opacityVisible}
+          style={{ width: '100%', top: width + 28 }}
+        />
       </Animated.View>
     </GestureDetector>
   );

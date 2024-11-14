@@ -1,9 +1,8 @@
-import React, { useRef } from 'react';
-import { Dimensions, StyleSheet, Text, View } from 'react-native';
+import React from 'react';
+import { StyleSheet, Text, View } from 'react-native';
 import Animated, {
   SharedValue,
   useAnimatedStyle,
-  useDerivedValue,
 } from 'react-native-reanimated';
 
 import { useNoxSetting } from '@stores/useApp';
@@ -13,12 +12,12 @@ import FavReloadButton from '@components/player/TrackInfo/FavReloadButton';
 import useActiveTrack from '@hooks/useActiveTrack';
 import { SongTitle } from '@components/player/TrackInfo/TrackInfoTemplate';
 
-interface Props {
-  opacity: SharedValue<number>;
+interface Props extends NoxComponent.OpacityProps {
+  artworkOpacity: SharedValue<number>;
 }
-export default ({ opacity }: Props) => {
+
+export default ({ opacity, style, artworkOpacity }: Props) => {
   const { track } = useActiveTrack();
-  const { width } = Dimensions.get('window');
   const playerStyle = useNoxSetting(state => state.playerStyle);
   const currentPlayingList = useNoxSetting(state => state.currentPlayingList);
 
@@ -47,31 +46,31 @@ export default ({ opacity }: Props) => {
     },
   ];
 
-  const infoStyle = useAnimatedStyle(() => {
-    return {
-      opacity: opacity.value,
-      zIndex: opacity.value > 0 ? 1 : 0,
-    };
-  });
+  const animatedStyle = useAnimatedStyle(() => ({
+    opacity: opacity.value,
+  }));
 
+  const animatedOpacityStyle = useAnimatedStyle(() => ({
+    opacity: artworkOpacity.value,
+  }));
   return (
-    <Animated.View
-      style={[styles.container, { width: '100%', top: width + 28 }, infoStyle]}
-    >
-      <SongTitle style={textStyle} text={track?.title} />
-      <View style={styles.infoContainer}>
-        <View style={styles.favoriteButtonContainer}>
-          <FavReloadButton track={track} />
+    <Animated.View style={[styles.container, animatedOpacityStyle]}>
+      <Animated.View style={[styles.container, style, animatedStyle]}>
+        <SongTitle style={textStyle} text={track?.title} />
+        <View style={styles.infoContainer}>
+          <View style={styles.favoriteButtonContainer}>
+            <FavReloadButton track={track} />
+          </View>
+          <View style={styles.artistInfoContainer}>
+            <Text style={textSubStyle}>{track?.artist}</Text>
+            <Text style={textSubStyle}>{currentPlayingList.title}</Text>
+            <Text style={textSubStyle}>{getTrackLocation()}</Text>
+          </View>
+          <View style={styles.songMenuButtonContainer}>
+            <SongMenuButton track={track} />
+          </View>
         </View>
-        <View style={styles.artistInfoContainer}>
-          <Text style={textSubStyle}>{track?.artist}</Text>
-          <Text style={textSubStyle}>{currentPlayingList.title}</Text>
-          <Text style={textSubStyle}>{getTrackLocation()}</Text>
-        </View>
-        <View style={styles.songMenuButtonContainer}>
-          <SongMenuButton track={track} />
-        </View>
-      </View>
+      </Animated.View>
     </Animated.View>
   );
 };

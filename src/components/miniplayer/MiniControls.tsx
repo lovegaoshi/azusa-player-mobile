@@ -5,9 +5,8 @@ import TrackPlayer, {
 } from 'react-native-track-player';
 import { useDebouncedValue } from 'hooks';
 import { ActivityIndicator, IconButton, Text } from 'react-native-paper';
-import { Dimensions, View } from 'react-native';
+import { Dimensions, TouchableWithoutFeedback, View } from 'react-native';
 import Animated, {
-  SharedValue,
   useAnimatedStyle,
   useDerivedValue,
 } from 'react-native-reanimated';
@@ -37,7 +36,10 @@ const TrackInfo = () => {
   );
 };
 
-export default ({ miniplayerHeight }: NoxComponent.MiniplayerProps) => {
+interface Props extends NoxComponent.MiniplayerProps {
+  expand: () => void;
+}
+export default ({ miniplayerHeight, expand }: Props) => {
   const { performSkipToNext, performSkipToPrevious } = useTPControls();
   const PlayerHeight = Dimensions.get('window').height - MinPlayerHeight;
   const HalfScreenHeight = PlayerHeight * 0.5;
@@ -52,15 +54,17 @@ export default ({ miniplayerHeight }: NoxComponent.MiniplayerProps) => {
     return 1 - (miniplayerHeight.value - DoublePlayerHeight) / HalfScreenHeight;
   });
 
-  const controlStyle = useAnimatedStyle(() => {
+  const animatedStyle = useAnimatedStyle(() => {
     return {
       opacity: miniControlOpacity.value,
     };
   });
 
   return (
-    <Animated.View style={[styles.rowView, styles.flex, controlStyle]}>
-      <TrackInfo />
+    <Animated.View style={[styles.rowView, styles.flex, animatedStyle]}>
+      <TouchableWithoutFeedback onPress={expand}>
+        <TrackInfo />
+      </TouchableWithoutFeedback>
       <IconButton
         icon="skip-previous"
         size={IconSize}

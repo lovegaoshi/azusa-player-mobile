@@ -1,23 +1,22 @@
-import { View } from 'react-native';
 import { useActiveTrack } from 'react-native-track-player';
+import Animated, { useAnimatedStyle } from 'react-native-reanimated';
+
 import { Progress } from './Progress';
 import { PlayerControls } from './PlayerControls';
-import { useNoxSetting } from '@stores/useApp';
 import { styles } from '@components/style';
 
-export default () => {
+export default ({ opacity, style }: NoxComponent.OpacityProps) => {
   const track = useActiveTrack();
-  const playerStyle = useNoxSetting(state => state.playerStyle);
 
+  const animatedStyle = useAnimatedStyle(() => {
+    return {
+      opacity: opacity.value,
+    };
+  });
   return (
-    <View
-      style={[
-        styles.actionRowContainer,
-        { backgroundColor: playerStyle.colors.background },
-      ]}
-    >
+    <Animated.View style={[styles.actionRowContainer, animatedStyle, style]}>
       <Progress live={track?.isLiveStream} />
       <PlayerControls />
-    </View>
+    </Animated.View>
   );
 };

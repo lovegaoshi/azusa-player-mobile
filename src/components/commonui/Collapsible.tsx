@@ -46,7 +46,7 @@ export const Collapsible = ({
   const [showTheKids, setShowTheKids] = useState(true);
   const initialHeight = collapsedHeight ?? 0;
 
-  const bodyHeight = useAnimatedStyle(() => ({
+  const animatedStyle = useAnimatedStyle(() => ({
     height: interpolate(
       sharedValue.value,
       [initialHeight ?? 0, 1],
@@ -95,7 +95,7 @@ export const Collapsible = ({
   }, [collapsed, toggleCollapsed]);
 
   return (
-    <Animated.View style={[{ overflow: 'hidden' }, bodyHeight]}>
+    <Animated.View style={[{ overflow: 'hidden' }, animatedStyle]}>
       <View
         style={[{ position: 'absolute', [pinTo]: 0, left: 0, right: 0 }, style]}
         onLayout={handleLayout}

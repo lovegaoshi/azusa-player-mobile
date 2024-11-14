@@ -1,18 +1,12 @@
 import React from 'react';
-import { View, StyleSheet, Dimensions } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import { IconButton } from 'react-native-paper';
-import Animated, {
-  SharedValue,
-  useAnimatedStyle,
-  useDerivedValue,
-} from 'react-native-reanimated';
+import Animated, { useAnimatedStyle } from 'react-native-reanimated';
 
 import { useNoxSetting } from '@stores/useApp';
 import RandomGIFButton from '../buttons/RandomGIF';
-import { MinPlayerHeight } from './Constants';
 
-interface Props {
-  opacity: SharedValue<number>;
+interface Props extends NoxComponent.OpacityProps {
   collapse: () => void;
 }
 
@@ -20,7 +14,7 @@ export default ({ opacity, collapse }: Props) => {
   const playerStyle = useNoxSetting(state => state.playerStyle);
   const currentPlayingId = useNoxSetting(state => state.currentPlayingId);
 
-  const infoStyle = useAnimatedStyle(() => {
+  const animatedStyle = useAnimatedStyle(() => {
     return {
       opacity: opacity.value,
       zIndex: opacity.value > 0 ? 1 : 0,
@@ -33,7 +27,7 @@ export default ({ opacity, collapse }: Props) => {
         styles.containerStyle,
         playerStyle.playerTopBarContainer,
         { position: 'absolute' },
-        infoStyle,
+        animatedStyle,
       ]}
     >
       <View style={styles.iconButtonContainerStyle}>

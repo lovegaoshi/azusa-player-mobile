@@ -90,7 +90,7 @@ const SkinItem = ({ skin, checked, onHold, selectTheme }: SkinItemProps) => {
   const mounted = React.useRef(false);
   const isPressed = useSharedValue(false);
   const offset = useSharedValue({ x: 0, y: 0 });
-  const animatedStyles = useAnimatedStyle(() => ({
+  const animatedStyle = useAnimatedStyle(() => ({
     transform: [
       { translateX: offset.value.x },
       { translateY: offset.value.y },
@@ -147,7 +147,7 @@ const SkinItem = ({ skin, checked, onHold, selectTheme }: SkinItemProps) => {
         <Animated.View
           entering={mounted.current ? LightSpeedInLeft : undefined}
           exiting={LightSpeedOutRight}
-          style={animatedStyles}
+          style={animatedStyle}
         >
           <TouchableRipple onPress={selectTheme} onLongPress={onHold}>
             <View style={styles.skinItemContainer}>
