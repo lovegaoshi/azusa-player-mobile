@@ -1,5 +1,5 @@
 import * as SecureStore from 'expo-secure-store';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import Purchases from 'react-native-purchases';
 import { create } from 'zustand';
 

@@ -1,7 +1,6 @@
 import {
   argbFromHex,
   themeFromSourceColor,
-  applyTheme,
   hexFromArgb,
 } from '@material/material-color-utilities';
 

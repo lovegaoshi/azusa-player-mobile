@@ -1,9 +1,4 @@
-import {
-  Platform,
-  PermissionsAndroid,
-  NativeModules,
-  Dimensions,
-} from 'react-native';
+import { Platform, PermissionsAndroid, NativeModules } from 'react-native';
 import RNFetchBlob from 'react-native-blob-util';
 import * as DocumentPicker from 'expo-document-picker';
 

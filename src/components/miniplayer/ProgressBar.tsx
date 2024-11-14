@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View } from 'react-native';
+import { StyleSheet } from 'react-native';
 import { runOnJS, useAnimatedReaction } from 'react-native-reanimated';
 
 import { SimpleProgressBar } from '../player/controls/ProgressBar';
@@ -11,10 +11,7 @@ export default ({ miniplayerHeight }: NoxComponent.MiniplayerProps) => {
   useAnimatedReaction(
     () => miniplayerHeight.value,
     curr => {
-      if (curr === MinPlayerHeight) {
-        return runOnJS(setVisible)(true);
-      }
-      runOnJS(setVisible)(false);
+      runOnJS(setVisible)(curr === MinPlayerHeight);
     },
   );
 
@@ -23,8 +20,14 @@ export default ({ miniplayerHeight }: NoxComponent.MiniplayerProps) => {
   }
 
   return (
-    <View style={{ marginTop: -15 }}>
-      <SimpleProgressBar thumbSize={0} trackHeight={2} />
-    </View>
+    <SimpleProgressBar
+      thumbSize={0}
+      trackHeight={2}
+      style={styles.progressBar}
+    />
   );
 };
+
+const styles = StyleSheet.create({
+  progressBar: { transform: [{ translateY: -15 }] },
+});

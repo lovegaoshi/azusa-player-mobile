@@ -83,6 +83,7 @@ export default ({ intentData, vip }: NoxComponent.SetupPlayerProps) => {
           break;
         case undefined:
           await TrackPlayer.pause();
+          break;
         default:
         // await TrackPlayer.pause();
       }

@@ -9,6 +9,7 @@ import {
   TouchableOpacity,
   Button,
   TextInput,
+  ViewStyle,
 } from 'react-native';
 import { Lrc as Lyric, KaraokeMode } from 'react-native-lyric';
 import { Track, useProgress } from 'react-native-track-player';
@@ -17,7 +18,6 @@ import { IconButton } from 'react-native-paper';
 import { useNoxSetting } from '@stores/useApp';
 import useLyric from '@hooks/useLyricRN';
 import { isIOS } from '@utils/RNUtils';
-import { ViewStyle } from 'react-native';
 
 interface ModalContainerProps {
   children: React.JSX.Element[];

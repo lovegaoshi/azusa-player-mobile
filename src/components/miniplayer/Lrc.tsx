@@ -22,7 +22,8 @@ export default ({ visible, onPress, opacity }: Props) => {
     opacity: opacity.value,
     zIndex: visible ? 1 : -1,
     position: 'absolute',
-    bottom: 300,
+    bottom: dimension.width - 75,
+    width: '100%',
   }));
 
   useFocusEffect(

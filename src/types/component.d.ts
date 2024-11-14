@@ -4,6 +4,8 @@ import { DrawerNavigationProp } from '@react-navigation/drawer';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { Track } from 'react-native-track-player';
 
+import { SharedValue } from 'react-native-reanimated';
+
 import { IntentData } from '@enums/Intent';
 
 declare global {

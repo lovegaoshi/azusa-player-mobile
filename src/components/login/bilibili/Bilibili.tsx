@@ -9,7 +9,7 @@ import { useNoxSetting } from '@stores/useApp';
 import { logger } from '@utils/Logger';
 import GenericInputDialog from '../../dialogs/GenericInputDialog';
 import BiliSelectFavButtton from './BiliSelectFavButtton';
-import useBiliLogin, { BiliLogin } from './useBiliLoginApp';
+import { BiliLogin } from './useBiliLoginApp';
 import useSnack from '@stores/useSnack';
 
 const domain = 'https://bilibili.com';

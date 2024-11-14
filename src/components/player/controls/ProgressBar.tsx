@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, ViewStyle } from 'react-native';
 import TrackPlayer, { useProgress } from 'react-native-track-player';
 import { Slider } from '@sharcoux/slider';
 
@@ -9,11 +9,13 @@ interface Props {
   thumbSize?: number;
   progressThumbImage?: string;
   trackHeight?: number;
+  style?: ViewStyle;
 }
 export const SimpleProgressBar = ({
   thumbSize,
   progressThumbImage,
   trackHeight,
+  style,
 }: Props) => {
   const { position, duration } = useProgress(200);
   const playerStyle = useNoxSetting(state => state.playerStyle);
@@ -21,7 +23,7 @@ export const SimpleProgressBar = ({
   return (
     <Slider
       trackHeight={trackHeight}
-      style={styles.progressBar}
+      style={[styles.progressBar, style]}
       value={position}
       minimumValue={0}
       maximumValue={duration}
