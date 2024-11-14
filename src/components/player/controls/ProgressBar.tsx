@@ -5,37 +5,50 @@ import { Slider } from '@sharcoux/slider';
 
 import { useNoxSetting } from '@stores/useApp';
 
-export default () => {
+interface Props {
+  thumbSize?: number;
+  progressThumbImage?: string;
+  trackHeight?: number;
+}
+export const SimpleProgressBar = ({
+  thumbSize,
+  progressThumbImage,
+  trackHeight,
+}: Props) => {
   const { position, duration } = useProgress(200);
   const playerStyle = useNoxSetting(state => state.playerStyle);
 
   return (
     <Slider
+      trackHeight={trackHeight}
       style={styles.progressBar}
       value={position}
       minimumValue={0}
       maximumValue={duration}
       thumbTintColor={
-        playerStyle.progressThumbImage
+        progressThumbImage
           ? undefined
           : playerStyle.customColors.progressThumbTintColor
       }
       minimumTrackTintColor={playerStyle.colors.primary}
       maximumTrackTintColor={playerStyle.colors.secondaryContainer}
       onSlidingComplete={TrackPlayer.seekTo}
-      thumbImage={
-        playerStyle.progressThumbImage
-          ? { uri: playerStyle.progressThumbImage }
-          : undefined
-      }
-      thumbSize={playerStyle.progressThumbImage ? 40 : undefined}
+      thumbImage={progressThumbImage ? { uri: progressThumbImage } : undefined}
+      thumbSize={thumbSize ?? (progressThumbImage ? 40 : undefined)}
       thumbStyle={{
-        backgroundColor: playerStyle.progressThumbImage
+        backgroundColor: progressThumbImage
           ? 'transparent'
           : playerStyle.colors.primary,
       }}
       maxTrackStyle={styles.transparent}
     />
+  );
+};
+
+export default () => {
+  const playerStyle = useNoxSetting(state => state.playerStyle);
+  return (
+    <SimpleProgressBar progressThumbImage={playerStyle.progressThumbImage} />
   );
 };
 

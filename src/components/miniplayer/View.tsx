@@ -17,6 +17,7 @@ import { styles } from '../style';
 import TrackInfo from './TrackInfo';
 import PlayerControls from '../player/controls/PlayerProgressControls';
 import Lrc from './Lrc';
+import ProgressBar from './ProgressBar';
 
 const SnapToRatio = 0.15;
 
@@ -109,6 +110,7 @@ export default () => {
           />
           <MiniControls miniplayerHeight={miniplayerHeight} expand={expand} />
         </View>
+        <ProgressBar miniplayerHeight={miniplayerHeight} />
         <Lrc
           visible={lrcVisible}
           opacity={lrcOpacity}
