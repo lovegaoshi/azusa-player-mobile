@@ -9,6 +9,7 @@ import {
   TouchableOpacity,
   Button,
   TextInput,
+  ViewStyle,
 } from 'react-native';
 import { Lrc as Lyric, KaraokeMode } from 'react-native-lyric';
 import { Track, useProgress } from 'react-native-track-player';
@@ -51,6 +52,7 @@ interface LyricViewProps {
   noScrollThrottle?: boolean;
   onPress?: () => void;
   visible?: boolean;
+  style?: ViewStyle;
 }
 
 export const LyricView = ({
@@ -61,6 +63,7 @@ export const LyricView = ({
   noScrollThrottle = true,
   onPress = () => undefined,
   visible = true,
+  style = styles.container,
 }: LyricViewProps) => {
   const playerSetting = useNoxSetting(state => state.playerSetting);
   const { position } = useProgress(
@@ -119,7 +122,7 @@ export const LyricView = ({
   if (!visible) return null;
 
   return (
-    <View style={styles.container}>
+    <View style={style}>
       <Lyric
         style={{ marginTop: 30, height: 500 }}
         lrc={lrc}

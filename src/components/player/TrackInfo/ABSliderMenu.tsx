@@ -45,6 +45,7 @@ const ABSlider = ({ range, setRange }: SliderProps) => {
         onValueChange={setRange}
         outboundColor={playerStyle.colors.secondaryContainer}
         inboundColor={playerStyle.colors.primary}
+        maximumValue={1}
       />
     </View>
   );

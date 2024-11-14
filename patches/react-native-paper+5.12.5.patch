@@ -1,3 +1,20 @@
+diff --git a/node_modules/react-native-paper/src/components/Modal.tsx b/node_modules/react-native-paper/src/components/Modal.tsx
+index 313ecee..a1db8ce 100644
+--- a/node_modules/react-native-paper/src/components/Modal.tsx
++++ b/node_modules/react-native-paper/src/components/Modal.tsx
+@@ -156,11 +156,7 @@ function Modal({
+         onDismissCallback();
+       }
+ 
+-      if (visibleRef.current) {
+-        showModal();
+-      } else {
+-        setRendered(false);
+-      }
++      setRendered(false);
+     });
+   }, [onDismissCallback, opacity, scale, showModal, visible]);
+ 
 diff --git a/node_modules/react-native-paper/src/components/ProgressBar.tsx b/node_modules/react-native-paper/src/components/ProgressBar.tsx
 index dcdaf48..50ad810 100644
 --- a/node_modules/react-native-paper/src/components/ProgressBar.tsx

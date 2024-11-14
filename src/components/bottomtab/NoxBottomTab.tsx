@@ -52,39 +52,36 @@ const NoxAndroidBottomTab = ({ navigation }: NoxComponent.NavigationProps2) => {
   const renderIcon = (icon: RouteIcons) =>
     route === icon ? icon : `${icon}-outline`;
 
-  if (gestureMode) {
-    return (
-      <View
-        style={{
-          backgroundColor:
-            playerStyle.colors.elevation?.level5 ??
-            playerStyle.colors.background,
-        }}
-      >
-        <View style={[styles.panel, isLandscape ? { paddingBottom: 0 } : {}]}>
-          <BottomIconButton
-            icon={renderIcon(RouteIcons.playlist)}
-            onPress={onDrawerPress}
-          />
-          <BottomIconButton
-            icon={renderIcon(RouteIcons.music)}
-            onPress={() =>
-              navigationG.navigate({ route: NoxRoutes.PlayerHome })
-            }
-          />
-          <BottomIconButton
-            icon={renderIcon(RouteIcons.explore)}
-            onPress={() => navigationG.navigate({ route: NoxRoutes.Explore })}
-          />
-          <BottomIconButton
-            icon={renderIcon(RouteIcons.setting)}
-            onPress={() => navigationG.navigate({ route: NoxRoutes.Settings })}
-          />
-        </View>
-      </View>
-    );
+  if (!gestureMode) {
+    return <></>;
   }
-  return <></>;
+  return (
+    <View
+      style={{
+        backgroundColor:
+          playerStyle.colors.elevation?.level5 ?? playerStyle.colors.background,
+      }}
+    >
+      <View style={[styles.panel, isLandscape ? { paddingBottom: 0 } : {}]}>
+        <BottomIconButton
+          icon={renderIcon(RouteIcons.playlist)}
+          onPress={onDrawerPress}
+        />
+        <BottomIconButton
+          icon={renderIcon(RouteIcons.music)}
+          onPress={() => navigationG.navigate({ route: NoxRoutes.PlayerHome })}
+        />
+        <BottomIconButton
+          icon={renderIcon(RouteIcons.explore)}
+          onPress={() => navigationG.navigate({ route: NoxRoutes.Explore })}
+        />
+        <BottomIconButton
+          icon={renderIcon(RouteIcons.setting)}
+          onPress={() => navigationG.navigate({ route: NoxRoutes.Settings })}
+        />
+      </View>
+    </View>
+  );
 };
 
 const styles = StyleSheet.create({

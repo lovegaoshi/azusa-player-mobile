@@ -1,25 +1,57 @@
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
 import { IconButton } from 'react-native-paper';
+import Animated, { useAnimatedStyle } from 'react-native-reanimated';
 
-import { NoxRoutes } from '@enums/Routes';
 import { useNoxSetting } from '@stores/useApp';
 import RandomGIFButton from '../buttons/RandomGIF';
 import useNavigation from '@hooks/useNavigation';
+import { NoxRoutes } from '@enums/Routes';
 
-export default ({ navigation }: NoxComponent.NavigationProps) => {
-  const navigationGlobal = useNavigation();
+interface Props extends NoxComponent.OpacityProps {
+  collapse: () => void;
+}
+
+export default ({ opacity, collapse }: Props) => {
   const playerStyle = useNoxSetting(state => state.playerStyle);
   const currentPlayingId = useNoxSetting(state => state.currentPlayingId);
+  const navigation = useNavigation();
+  const scroll = useNoxSetting(state => state.incSongListScrollCounter);
+  const getPlaylist = useNoxSetting(state => state.getPlaylist);
+  const setCurrentPlaylist = useNoxSetting(state => state.setCurrentPlaylist);
+  const currentPlayingList = useNoxSetting(state => state.currentPlayingList);
+
+  const onPressPlaylist = async () => {
+    setCurrentPlaylist(await getPlaylist(currentPlayingList.id));
+    navigation.navigate({
+      route: NoxRoutes.PlayerHome,
+    });
+    scroll();
+    collapse();
+  };
+
+  const animatedStyle = useAnimatedStyle(() => {
+    return {
+      opacity: opacity.value,
+      zIndex: opacity.value > 0 ? 1 : 0,
+    };
+  });
 
   return (
-    <View style={[styles.containerStyle, playerStyle.playerTopBarContainer]}>
+    <Animated.View
+      style={[
+        styles.containerStyle,
+        playerStyle.playerTopBarContainer,
+        { position: 'absolute' },
+        animatedStyle,
+      ]}
+    >
       <View style={styles.iconButtonContainerStyle}>
         <IconButton
-          icon="menu"
-          onPress={() => navigation.openDrawer()}
+          icon="arrow-collapse"
           size={40}
           iconColor={playerStyle.colors.primary}
+          onPress={collapse}
         />
       </View>
 
@@ -32,17 +64,12 @@ export default ({ navigation }: NoxComponent.NavigationProps) => {
       <View style={styles.playlistIconButtonContainerStyle}>
         <IconButton
           icon="playlist-music"
-          onPress={() =>
-            navigationGlobal.navigate({
-              route: NoxRoutes.PlayerHome,
-              options: { screen: NoxRoutes.Playlist },
-            })
-          }
           size={40}
           iconColor={playerStyle.colors.primary}
+          onPress={onPressPlaylist}
         />
       </View>
-    </View>
+    </Animated.View>
   );
 };
 

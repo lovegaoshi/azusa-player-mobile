@@ -3,7 +3,6 @@ import { View, FlatList, StyleSheet } from 'react-native';
 import { Button, Dialog, TextInput } from 'react-native-paper';
 import { useTranslation } from 'react-i18next';
 import { logger } from '@utils/Logger';
-import { useNoxSetting } from '@stores/useApp';
 
 interface Props {
   visible: boolean;
@@ -32,7 +31,6 @@ export default ({
   onSubmit = logger.debug,
 }: Props) => {
   const { t } = useTranslation();
-  const playerStyle = useNoxSetting(state => state.playerStyle);
   const [currentInput, setCurrentInput] = useState<{
     [key: string]: string;
   }>({});

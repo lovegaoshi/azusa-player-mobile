@@ -64,7 +64,7 @@ export default ({ panelWidth = 110 }: Props) => {
       <IconButton
         icon={ScreenIcons.HomeScreen}
         size={iconSize}
-        onPress={() => navigation.navigate(NoxRoutes.Lyrics as never)}
+        onPress={() => navigation.navigate({ route: NoxRoutes.Lyrics })}
       />
       <IconButton
         icon={ScreenIcons.PlaylistScreen}
@@ -74,12 +74,12 @@ export default ({ panelWidth = 110 }: Props) => {
       <IconButton
         icon={ScreenIcons.ExploreScreen}
         size={iconSize}
-        onPress={() => navigation.navigate(NoxRoutes.Explore as never)}
+        onPress={() => navigation.navigate({ route: NoxRoutes.Explore })}
       />
       <IconButton
         icon={ScreenIcons.SettingScreen}
         size={iconSize}
-        onPress={() => navigation.navigate(NoxRoutes.Settings as never)}
+        onPress={() => navigation.navigate({ route: NoxRoutes.Settings })}
       />
     </View>
   );

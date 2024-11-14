@@ -148,6 +148,10 @@ export const replaceStyleColor = ({
 
 export const styles = StyleSheet.create({
   flex: { flex: 1 },
+  centeredFlex: {
+    justifyContent: 'center',
+    flex: 1,
+  },
   centerText: { textAlign: 'center' },
   screenContainer: {
     flex: 1,
