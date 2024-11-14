@@ -166,6 +166,7 @@ const styles = StyleSheet.create({
   },
   songTitle: {
     flex: 4.9,
+    paddingRight: 5,
   },
   checkBox: {
     flex: 1,
