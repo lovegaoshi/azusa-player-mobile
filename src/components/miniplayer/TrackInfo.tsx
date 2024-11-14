@@ -1,5 +1,10 @@
 import React, { useRef } from 'react';
 import { Dimensions, StyleSheet, Text, View } from 'react-native';
+import Animated, {
+  SharedValue,
+  useAnimatedStyle,
+  useDerivedValue,
+} from 'react-native-reanimated';
 
 import { useNoxSetting } from '@stores/useApp';
 import NoxPlayingList from '@stores/playingList';
@@ -8,7 +13,10 @@ import FavReloadButton from '@components/player/TrackInfo/FavReloadButton';
 import useActiveTrack from '@hooks/useActiveTrack';
 import { SongTitle } from '@components/player/TrackInfo/TrackInfoTemplate';
 
-export default ({ miniplayerHeight }: NoxComponent.MiniplayerProps) => {
+interface Props {
+  opacity: SharedValue<number>;
+}
+export default ({ opacity }: Props) => {
   const { track } = useActiveTrack();
   const { width } = Dimensions.get('window');
   const playerStyle = useNoxSetting(state => state.playerStyle);
@@ -38,8 +46,18 @@ export default ({ miniplayerHeight }: NoxComponent.MiniplayerProps) => {
       color: playerStyle.colors.onSurfaceVariant,
     },
   ];
+
+  const infoStyle = useAnimatedStyle(() => {
+    return {
+      opacity: opacity.value,
+      zIndex: opacity.value > 0 ? 1 : 0,
+    };
+  });
+
   return (
-    <View style={[styles.container, { width: '100%', top: width + 28 }]}>
+    <Animated.View
+      style={[styles.container, { width: '100%', top: width + 28 }, infoStyle]}
+    >
       <SongTitle style={textStyle} text={track?.title} />
       <View style={styles.infoContainer}>
         <View style={styles.favoriteButtonContainer}>
@@ -54,7 +72,7 @@ export default ({ miniplayerHeight }: NoxComponent.MiniplayerProps) => {
           <SongMenuButton track={track} />
         </View>
       </View>
-    </View>
+    </Animated.View>
   );
 };
 

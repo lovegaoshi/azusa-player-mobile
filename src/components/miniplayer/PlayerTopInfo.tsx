@@ -11,24 +11,14 @@ import { useNoxSetting } from '@stores/useApp';
 import RandomGIFButton from '../buttons/RandomGIF';
 import { MinPlayerHeight } from './Constants';
 
-interface Props extends NoxComponent.MiniplayerProps {
+interface Props {
+  opacity: SharedValue<number>;
   collapse: () => void;
 }
 
-export default ({ miniplayerHeight, collapse }: Props) => {
+export default ({ opacity, collapse }: Props) => {
   const playerStyle = useNoxSetting(state => state.playerStyle);
   const currentPlayingId = useNoxSetting(state => state.currentPlayingId);
-  const { width, height } = Dimensions.get('window');
-
-  const opacity = useDerivedValue(() => {
-    if (miniplayerHeight.value > width) {
-      return Math.min(
-        1,
-        ((miniplayerHeight.value - width) / (height - width)) * 2,
-      );
-    }
-    return 0;
-  });
 
   const infoStyle = useAnimatedStyle(() => {
     return {

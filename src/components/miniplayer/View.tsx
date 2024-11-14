@@ -6,6 +6,7 @@ import Animated, {
   interpolate,
   runOnJS,
   useAnimatedStyle,
+  useDerivedValue,
   useSharedValue,
   withTiming,
 } from 'react-native-reanimated';
@@ -20,11 +21,22 @@ import TrackInfo from './TrackInfo';
 const SnapToRatio = 0.15;
 
 export default () => {
-  const PlayerHeight = Dimensions.get('window').height - MinPlayerHeight;
+  const { width, height } = Dimensions.get('window');
+  const PlayerHeight = height - MinPlayerHeight;
 
   const miniplayerHeight = useSharedValue(MinPlayerHeight);
   const artworkOpacity = useSharedValue(1);
   const initHeight = useSharedValue(0);
+
+  const opacityVisible = useDerivedValue(() => {
+    if (miniplayerHeight.value > width) {
+      return Math.min(
+        1,
+        ((miniplayerHeight.value - width) / (height - width)) * 2,
+      );
+    }
+    return 0;
+  });
 
   const dragPlayerHeight = (translationY: number) => {
     'worklet';
@@ -84,10 +96,7 @@ export default () => {
         style={[{ width: '100%', paddingTop: 5 }, miniplayerStyle]}
       >
         <View style={[styles.rowView, { paddingTop: 5 }]}>
-          <PlayerTopInfo
-            miniplayerHeight={miniplayerHeight}
-            collapse={collapse}
-          />
+          <PlayerTopInfo opacity={opacityVisible} collapse={collapse} />
           <TrackAlbumArt
             miniplayerHeight={miniplayerHeight}
             opacity={artworkOpacity}
@@ -96,7 +105,7 @@ export default () => {
           />
           <MiniControls miniplayerHeight={miniplayerHeight} />
         </View>
-        <TrackInfo miniplayerHeight={miniplayerHeight} />
+        <TrackInfo opacity={opacityVisible} />
       </Animated.View>
     </GestureDetector>
   );
