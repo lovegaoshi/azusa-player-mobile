@@ -34,7 +34,6 @@ export const Collapsible = ({
   children,
   style,
   collapsedHeight,
-  testID,
   pinTo = 'top',
   renderChildrenCollapsed = true,
 }: CollapsibleProps) => {

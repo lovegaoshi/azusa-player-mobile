@@ -86,7 +86,7 @@ export default () => {
   };
 
   const scrollDragGesture = Gesture.Pan()
-    .onStart(e => (initHeight.value = miniplayerHeight.value))
+    .onStart(() => (initHeight.value = miniplayerHeight.value))
     .onChange(e => dragPlayerHeight(e.translationY))
     .onEnd(e => snapPlayerHeight(e.translationY));
 
