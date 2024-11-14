@@ -19,7 +19,10 @@ import { MinPlayerHeight } from './Constants';
 import { useNoxSetting } from '@stores/useApp';
 
 const IconSize = 30;
-const iconContainerStyle = { width: IconSize + 16, height: IconSize + 16 };
+const iconContainerStyle = {
+  width: IconSize + 28,
+  height: IconSize + 28,
+};
 const DoublePlayerHeight = MinPlayerHeight * 1.2;
 
 const TrackInfo = () => {
@@ -42,6 +45,7 @@ interface Props extends NoxComponent.MiniplayerProps {
 export default ({ miniplayerHeight, expand }: Props) => {
   const { performSkipToNext, performSkipToPrevious } = useTPControls();
   const PlayerHeight = Dimensions.get('window').height - MinPlayerHeight;
+  const playerStyle = useNoxSetting(state => state.playerStyle);
   const HalfScreenHeight = PlayerHeight * 0.5;
 
   const miniControlOpacity = useDerivedValue(() => {
@@ -61,26 +65,29 @@ export default ({ miniplayerHeight, expand }: Props) => {
   });
 
   return (
-    <Animated.View style={[styles.rowView, styles.flex, animatedStyle]}>
-      <TouchableWithoutFeedback onPress={expand}>
+    <TouchableWithoutFeedback onPress={expand}>
+      <Animated.View style={[styles.rowView, styles.flex, animatedStyle]}>
         <TrackInfo />
-      </TouchableWithoutFeedback>
-      <IconButton
-        icon="skip-previous"
-        size={IconSize}
-        onPress={performSkipToPrevious}
-      />
-      <PlayPauseButton />
-      <IconButton
-        icon="skip-next"
-        size={IconSize}
-        onPress={() => performSkipToNext()}
-      />
-    </Animated.View>
+        <IconButton
+          iconColor={playerStyle.colors.primary}
+          icon="skip-previous"
+          size={IconSize}
+          onPress={performSkipToPrevious}
+        />
+        <PlayPauseButton />
+        <IconButton
+          iconColor={playerStyle.colors.primary}
+          icon="skip-next"
+          size={IconSize}
+          onPress={() => performSkipToNext()}
+        />
+      </Animated.View>
+    </TouchableWithoutFeedback>
   );
 };
 
 const PlayPauseButton = () => {
+  const playerStyle = useNoxSetting(state => state.playerStyle);
   const playback = usePlaybackState();
   const playWhenReady = usePlayWhenReady();
   const isLoading = useDebouncedValue(
@@ -93,11 +100,25 @@ const PlayPauseButton = () => {
   const showBuffering = isErrored || (playWhenReady && isLoading);
 
   if (showBuffering) {
-    return <ActivityIndicator size={IconSize - 5} style={iconContainerStyle} />;
+    return <ActivityIndicator size={IconSize - 8} style={iconContainerStyle} />;
   }
 
   if (showPause) {
-    return <IconButton icon="pause" size={IconSize} onPress={fadePause} />;
+    return (
+      <IconButton
+        iconColor={playerStyle.colors.primary}
+        icon="pause"
+        size={IconSize}
+        onPress={fadePause}
+      />
+    );
   }
-  return <IconButton icon="play" size={IconSize} onPress={TrackPlayer.play} />;
+  return (
+    <IconButton
+      iconColor={playerStyle.colors.primary}
+      icon="play"
+      size={IconSize}
+      onPress={TrackPlayer.play}
+    />
+  );
 };

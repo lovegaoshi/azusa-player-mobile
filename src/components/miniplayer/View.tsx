@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View, Dimensions } from 'react-native';
+import { View, Dimensions } from 'react-native';
 import { GestureDetector, Gesture } from 'react-native-gesture-handler';
 import Animated, {
   runOnJS,
@@ -15,7 +15,6 @@ import TrackAlbumArt from './Artwork';
 import PlayerTopInfo from './PlayerTopInfo';
 import { styles } from '../style';
 import TrackInfo from './TrackInfo';
-import { isAndroid15 } from '@utils/RNUtils';
 import PlayerControls from '../player/controls/PlayerProgressControls';
 import Lrc from './Lrc';
 
@@ -24,7 +23,6 @@ const SnapToRatio = 0.15;
 export default () => {
   const [lrcVisible, setLrcVisible] = React.useState(false);
   const { width, height } = Dimensions.get('window');
-  const PlayerHeight = isAndroid15 ? height - MinPlayerHeight : height;
   const miniplayerHeight = useSharedValue(MinPlayerHeight);
   const artworkOpacity = useSharedValue(1);
   const initHeight = useSharedValue(0);
@@ -46,40 +44,39 @@ export default () => {
     const newHeight = initHeight.value - translationY;
     miniplayerHeight.value = Math.max(
       MinPlayerHeight,
-      Math.min(newHeight, PlayerHeight),
+      Math.min(newHeight, height),
     );
   };
 
   const expand = () => {
     'worklet';
-    miniplayerHeight.value = withTiming(PlayerHeight, { duration: 500 });
+    miniplayerHeight.value = withTiming(height, { duration: 500 });
     artworkOpacity.value = withTiming(1);
   };
   const collapse = () => {
     'worklet';
     miniplayerHeight.value = withTiming(MinPlayerHeight, { duration: 500 });
     artworkOpacity.value = withTiming(1);
+    runOnJS(setLrcVisible)(false);
   };
   const onArtworkPress = () => {
     if (artworkOpacity.value === 1) {
-      setLrcVisible(true);
-      return (artworkOpacity.value = withTiming(0, { duration: 100 }));
+      return (artworkOpacity.value = withTiming(0, { duration: 100 }, () => {
+        runOnJS(setLrcVisible)(true);
+      }));
     }
     if (artworkOpacity.value === 0) {
-      return (artworkOpacity.value = withTiming(
-        1,
-        { duration: 100 },
-        finished => runOnJS(() => finished && setLrcVisible(false)),
-      ));
+      setLrcVisible(false);
+      return (artworkOpacity.value = withTiming(1, { duration: 100 }));
     }
   };
 
   const snapPlayerHeight = (translationY: number) => {
     'worklet';
-    if (translationY > PlayerHeight * SnapToRatio) {
+    if (translationY > height * SnapToRatio) {
       return collapse();
     }
-    if (translationY < -PlayerHeight * SnapToRatio) {
+    if (translationY < -height * SnapToRatio) {
       return expand();
     }
     return (miniplayerHeight.value = withTiming(initHeight.value, {
@@ -98,7 +95,9 @@ export default () => {
     };
   });
   return (
-    <GestureDetector gesture={scrollDragGesture}>
+    <GestureDetector
+      gesture={lrcVisible ? Gesture.Manual() : scrollDragGesture}
+    >
       <Animated.View style={[{ width: '100%', paddingTop: 5 }, animatedStyle]}>
         <View style={[styles.rowView, { paddingTop: 5 }]}>
           <PlayerTopInfo opacity={opacityVisible} collapse={collapse} />
@@ -110,7 +109,11 @@ export default () => {
           />
           <MiniControls miniplayerHeight={miniplayerHeight} expand={expand} />
         </View>
-        <Lrc visible={lrcVisible} opacity={lrcOpacity} onPress={() => void 0} />
+        <Lrc
+          visible={lrcVisible}
+          opacity={lrcOpacity}
+          onPress={onArtworkPress}
+        />
         <TrackInfo
           opacity={opacityVisible}
           artworkOpacity={artworkOpacity}

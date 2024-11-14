@@ -1,4 +1,5 @@
 import Animated, { useAnimatedStyle } from 'react-native-reanimated';
+import { Dimensions } from 'react-native';
 
 import useActiveTrack from '@hooks/useActiveTrack';
 import { LyricView } from '../player/Lyric';
@@ -10,14 +11,17 @@ interface Props extends NoxComponent.OpacityProps {
 
 export default ({ visible, onPress, opacity }: Props) => {
   const { track } = useActiveTrack();
+  const dimension = Dimensions.get('window');
 
   const animatedStyle = useAnimatedStyle(() => ({
     opacity: opacity.value,
-    zIndex: 1,
+    zIndex: visible ? 1 : -1,
+    position: 'absolute',
+    bottom: 300,
   }));
 
   if (!visible || !track) {
-    return;
+    return <></>;
   }
   return (
     <Animated.View style={animatedStyle}>
@@ -25,7 +29,8 @@ export default ({ visible, onPress, opacity }: Props) => {
         track={track}
         artist="n/a"
         onPress={onPress}
-        height={500 + 100}
+        height={dimension.height / 2}
+        style={{}}
       />
     </Animated.View>
   );
