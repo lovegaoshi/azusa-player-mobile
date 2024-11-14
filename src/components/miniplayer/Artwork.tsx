@@ -46,7 +46,7 @@ export default ({ miniplayerHeight, opacity, onPress, expand }: Props) => {
       bottom: -artworkBottom.value,
       left: artworkLeft.value,
       opacity: opacity.value,
-      zIndex: opacity.value > 0 ? 1 : 0,
+      zIndex: opacity.value > 0 ? 1 : -1,
     };
   });
 

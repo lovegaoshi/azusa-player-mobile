@@ -2,8 +2,6 @@ import React from 'react';
 import { StyleSheet, View, Dimensions } from 'react-native';
 import { GestureDetector, Gesture } from 'react-native-gesture-handler';
 import Animated, {
-  Easing,
-  interpolate,
   runOnJS,
   useAnimatedStyle,
   useDerivedValue,
@@ -19,14 +17,14 @@ import { styles } from '../style';
 import TrackInfo from './TrackInfo';
 import { isAndroid15 } from '@utils/RNUtils';
 import PlayerControls from '../player/controls/PlayerProgressControls';
+import Lrc from './Lrc';
 
 const SnapToRatio = 0.15;
 
 export default () => {
+  const [lrcVisible, setLrcVisible] = React.useState(false);
   const { width, height } = Dimensions.get('window');
-
   const PlayerHeight = isAndroid15 ? height - MinPlayerHeight : height;
-
   const miniplayerHeight = useSharedValue(MinPlayerHeight);
   const artworkOpacity = useSharedValue(1);
   const initHeight = useSharedValue(0);
@@ -40,6 +38,8 @@ export default () => {
     }
     return 0;
   });
+
+  const lrcOpacity = useDerivedValue(() => 1 - artworkOpacity.value);
 
   const dragPlayerHeight = (translationY: number) => {
     'worklet';
@@ -61,12 +61,16 @@ export default () => {
     artworkOpacity.value = withTiming(1);
   };
   const onArtworkPress = () => {
-    'worklet';
     if (artworkOpacity.value === 1) {
+      setLrcVisible(true);
       return (artworkOpacity.value = withTiming(0, { duration: 100 }));
     }
     if (artworkOpacity.value === 0) {
-      return (artworkOpacity.value = withTiming(1, { duration: 100 }));
+      return (artworkOpacity.value = withTiming(
+        1,
+        { duration: 100 },
+        finished => runOnJS(() => finished && setLrcVisible(false)),
+      ));
     }
   };
 
@@ -106,6 +110,7 @@ export default () => {
           />
           <MiniControls miniplayerHeight={miniplayerHeight} expand={expand} />
         </View>
+        <Lrc visible={lrcVisible} opacity={lrcOpacity} onPress={() => void 0} />
         <TrackInfo
           opacity={opacityVisible}
           artworkOpacity={artworkOpacity}
