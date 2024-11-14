@@ -100,6 +100,13 @@ const AzusaPlayer = () => {
           <Drawer.Navigator
             initialRouteName={NoxRoutes.PlayerHome}
             drawerContent={PlaylistDrawer}
+            // HACK: this is the way but why still no working? queen?
+            screenOptions={{
+              drawerStyle: {
+                borderTopRightRadius: 0,
+                borderBottomRightRadius: 0,
+              },
+            }}
             //@ts-expect-error patch bug
             drawerStyle={{
               borderTopRightRadius: 0,
