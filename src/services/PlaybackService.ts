@@ -30,20 +30,7 @@ const { setState } = appStore;
 const getAppStoreState = appStore.getState;
 const lastBiliHeartBeat: string[] = ['', ''];
 const lastPlayedDuration: { val?: number } = { val: 0 };
-const refetchThrottleGuard: [string, number] = ['null', 0];
-
-const refreshThrottle = (
-  song: NoxMedia.Song,
-  timestamp: number,
-  currTime = new Date().getTime(),
-) => {
-  if (song.id === refetchThrottleGuard[0] && currTime - timestamp < 10000) {
-    return false;
-  }
-  refetchThrottleGuard[0] = song.id;
-  refetchThrottleGuard[1] = currTime;
-  return true;
-};
+let refetchThrottleGuard = 0;
 
 export async function additionalPlaybackService({
   noInterruption = false,
@@ -96,6 +83,29 @@ export async function additionalPlaybackService({
         TrackPlayer.seekTo(lastPlayedDuration.val);
       }
       lastPlayedDuration.val = undefined;
+    }
+    if (event.state === State.Error) {
+      const currTime = new Date().getTime();
+      const track = await TrackPlayer.getActiveTrack();
+      if (
+        currTime - track?.urlRefreshTimeStamp > 3600000 &&
+        track?.urlRefreshTimeStamp - refetchThrottleGuard > 10000
+      ) {
+        try {
+          logger.debug(`[ResolveURL] re-resolving track ${track?.title}`);
+          const song = track?.song as NoxMedia.Song;
+          const updatedMetadata = await resolveAndCache({ song });
+          const currentTrack = await TrackPlayer.getActiveTrack();
+          await TrackPlayer.load({
+            ...currentTrack,
+            ...updatedMetadata,
+            urlRefreshTimeStamp: currTime,
+          });
+          TrackPlayer.play();
+        } catch (e) {
+          console.error('resolveURL failed', track, e);
+        }
+      }
     }
   });
 }
@@ -185,33 +195,6 @@ export async function PlaybackService() {
         });
         lastBiliHeartBeat[0] = heartBeatReq[0];
         lastBiliHeartBeat[1] = heartBeatReq[1];
-      }
-      const currTime = new Date().getTime();
-      if (
-        event.index !== undefined &&
-        currTime - event.track.urlRefreshTimeStamp > 3600000 &&
-        refreshThrottle(
-          event.track.song,
-          event.track.urlRefreshTimeStamp,
-          currTime,
-        )
-      ) {
-        try {
-          logger.debug(`[ResolveURL] re-resolving track ${event.track?.title}`);
-          const song = event.track.song as NoxMedia.Song;
-          const updatedMetadata = await resolveAndCache({ song });
-          const currentTrack = await TrackPlayer.getActiveTrack();
-          await TrackPlayer.load({
-            ...currentTrack,
-            ...updatedMetadata,
-            urlRefreshTimeStamp: currTime,
-          });
-          if (playerErrored) {
-            TrackPlayer.play();
-          }
-        } catch (e) {
-          console.error('resolveURL failed', event.track, e);
-        }
       }
       if (getState().playmode === NoxRepeatMode.RepeatTrack) {
         TrackPlayer.setRepeatMode(RepeatMode.Track);
