@@ -61,13 +61,13 @@ export const ytbiSearchRefresh = async (
   v: NoxMedia.Playlist,
 ): Promise<NoxMedia.Playlist> => {
   const result = await getSearch({
-    songs: v.songList,
+    songs: [],
     playlistData: v.refreshToken,
     page: 1,
   });
   return {
     ...v,
-    songList: result.songs,
+    songList: result.songs.concat(v.songList),
     refreshToken: result.playlistData,
   };
 };
