@@ -84,7 +84,7 @@ export default ({ miniplayerHeight, opacity, onPress, expand }: Props) => {
         ]}
         source={
           hideCoverInMobile
-            ? 0
+            ? undefined
             : {
                 uri: `${overwriteAlbumArt ?? track?.artwork}`,
               }
