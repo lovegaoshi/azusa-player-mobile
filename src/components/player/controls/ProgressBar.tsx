@@ -10,18 +10,21 @@ interface Props {
   progressThumbImage?: string;
   trackHeight?: number;
   style?: ViewStyle;
+  trackStyle?: ViewStyle;
 }
 export const SimpleProgressBar = ({
   thumbSize,
   progressThumbImage,
   trackHeight,
   style,
+  trackStyle,
 }: Props) => {
   const { position, duration } = useProgress(200);
   const playerStyle = useNoxSetting(state => state.playerStyle);
 
   return (
     <Slider
+      trackStyle={trackStyle}
       trackHeight={trackHeight}
       style={[styles.progressBar, style]}
       value={position}

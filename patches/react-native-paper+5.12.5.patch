@@ -1,11 +1,12 @@
 diff --git a/node_modules/react-native-paper/src/components/Modal.tsx b/node_modules/react-native-paper/src/components/Modal.tsx
-index 313ecee..a1db8ce 100644
+index 313ecee..5ff54dd 100644
 --- a/node_modules/react-native-paper/src/components/Modal.tsx
 +++ b/node_modules/react-native-paper/src/components/Modal.tsx
-@@ -156,11 +156,7 @@ function Modal({
+@@ -155,12 +155,7 @@ function Modal({
+       if (visible) {
          onDismissCallback();
        }
- 
+-
 -      if (visibleRef.current) {
 -        showModal();
 -      } else {

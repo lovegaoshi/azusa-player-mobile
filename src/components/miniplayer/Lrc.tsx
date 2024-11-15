@@ -22,7 +22,7 @@ export default ({ visible, onPress, opacity }: Props) => {
     opacity: opacity.value,
     zIndex: visible ? 1 : -1,
     position: 'absolute',
-    bottom: dimension.width - 75,
+    bottom: dimension.height - dimension.width - 200,
     width: '100%',
   }));
 
@@ -45,7 +45,7 @@ export default ({ visible, onPress, opacity }: Props) => {
         track={track}
         artist="n/a"
         onPress={onPress}
-        height={dimension.height / 2}
+        height={dimension.width + 100}
         style={{}}
       />
     </Animated.View>

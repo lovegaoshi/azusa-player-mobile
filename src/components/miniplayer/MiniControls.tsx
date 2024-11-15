@@ -31,8 +31,13 @@ const TrackInfo = () => {
 
   return (
     <View style={[styles.centeredFlex, { paddingLeft: MinPlayerHeight }]}>
-      <Text style={{ color: playerStyle.onSurface }}>{track?.title}</Text>
-      <Text style={{ color: playerStyle.onSurfaceVariant }}>
+      <Text numberOfLines={2} style={{ color: playerStyle.colors.onSurface }}>
+        {track?.title}
+      </Text>
+      <Text
+        numberOfLines={1}
+        style={{ color: playerStyle.colors.onSurfaceVariant }}
+      >
         {track?.artist}
       </Text>
     </View>
@@ -55,7 +60,10 @@ export default ({ miniplayerHeight, expand }: Props) => {
     if (miniplayerHeight.value < DoublePlayerHeight) {
       return 1;
     }
-    return 1 - (miniplayerHeight.value - DoublePlayerHeight) / HalfScreenHeight;
+    return (
+      (HalfScreenHeight + DoublePlayerHeight - miniplayerHeight.value) /
+      HalfScreenHeight
+    );
   });
 
   const animatedStyle = useAnimatedStyle(() => {
