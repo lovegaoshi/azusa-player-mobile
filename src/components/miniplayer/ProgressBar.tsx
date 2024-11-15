@@ -24,10 +24,12 @@ export default ({ miniplayerHeight }: NoxComponent.MiniplayerProps) => {
       thumbSize={0}
       trackHeight={2}
       style={styles.progressBar}
+      trackStyle={styles.track}
     />
   );
 };
 
 const styles = StyleSheet.create({
   progressBar: { transform: [{ translateY: -15 }] },
+  track: { borderRadius: 0 },
 });

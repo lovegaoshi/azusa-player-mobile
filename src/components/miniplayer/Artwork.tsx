@@ -30,7 +30,7 @@ export default ({ miniplayerHeight, opacity, onPress, expand }: Props) => {
   });
   const artworkBottom = useDerivedValue(() => {
     const val = miniplayerHeight.value - MinPlayerHeight - 5;
-    const overflowBottom = Math.max(0, miniplayerHeight.value - 90 - width);
+    const overflowBottom = Math.max(0, miniplayerHeight.value - 100 - width);
     return Math.min(val - overflowBottom);
   });
   const artworkLeft = useDerivedValue(() => {

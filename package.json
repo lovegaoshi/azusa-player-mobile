@@ -60,7 +60,7 @@
     "deepmerge": "^4.3.1",
     "dropbox": "git+https://lovegaoshi@github.com/lovegaoshi/dropbox-sdk-js.git",
     "event-target-polyfill": "^0.0.4",
-    "expo": "^52.0.6",
+    "expo": "^52.0.7",
     "expo-auth-session": "~6.0.0",
     "expo-clipboard": "~7.0.0",
     "expo-crypto": "~14.0.1",

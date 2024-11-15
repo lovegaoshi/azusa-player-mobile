@@ -32,6 +32,12 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { ScreenIcons } from '@enums/Icons';
 import NoxBottomTab from './components/bottomtab/NoxBottomTab';
 import NoxMiniPlayer from './components/miniplayer/View';
+import { BottomTabRouteIcons } from './enums/BottomTab';
+
+const SlidingDrawerRoutes = [
+  BottomTabRouteIcons.setting,
+  BottomTabRouteIcons.music,
+];
 
 const { LightTheme, DarkTheme } = adaptNavigationTheme({
   reactNavigationLight: NavigationDefaultTheme,
@@ -53,6 +59,7 @@ const AzusaPlayer = () => {
   const { t } = useTranslation();
   const Drawer = createDrawerNavigator();
   const playerStyle = useNoxSetting(state => state.playerStyle);
+  const route = useNoxSetting(state => state.bottomTabRoute);
   const defaultTheme = playerStyle.metaData.darkTheme
     ? CombinedDarkTheme
     : CombinedDefaultTheme;
@@ -100,17 +107,15 @@ const AzusaPlayer = () => {
           <Drawer.Navigator
             initialRouteName={NoxRoutes.PlayerHome}
             drawerContent={PlaylistDrawer}
-            // HACK: this is the way but why still no working? queen?
             screenOptions={{
+              swipeEdgeWidth: SlidingDrawerRoutes.includes(route)
+                ? 800
+                : undefined,
+              drawerType: 'slide',
               drawerStyle: {
                 borderTopRightRadius: 0,
                 borderBottomRightRadius: 0,
               },
-            }}
-            //@ts-expect-error patch bug
-            drawerStyle={{
-              borderTopRightRadius: 0,
-              borderBottomRightRadius: 0,
             }}
           >
             <Drawer.Screen
