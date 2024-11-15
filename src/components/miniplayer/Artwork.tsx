@@ -4,7 +4,6 @@ import Animated, {
   useAnimatedStyle,
   useDerivedValue,
 } from 'react-native-reanimated';
-import { Image } from 'expo-image';
 import { useEffect, useState } from 'react';
 
 import { styles } from '../style';
@@ -47,6 +46,7 @@ export default ({ miniplayerHeight, opacity, onPress, expand }: Props) => {
       left: artworkLeft.value,
       opacity: opacity.value,
       zIndex: opacity.value > 0 ? 1 : -1,
+      position: 'absolute',
     };
   });
 
@@ -64,26 +64,17 @@ export default ({ miniplayerHeight, opacity, onPress, expand }: Props) => {
   }, [track]);
 
   return (
-    <Animated.View
-      style={[
-        {
-          position: 'absolute',
-        },
-        animatedStyle,
-      ]}
-    >
-      <TouchableWithoutFeedback onPress={onImagePress}>
-        <Image
-          style={styles.flex}
-          source={
-            hideCoverInMobile
-              ? 0
-              : {
-                  uri: `${overwriteAlbumArt ?? track?.artwork}`,
-                }
-          }
-        />
-      </TouchableWithoutFeedback>
-    </Animated.View>
+    <TouchableWithoutFeedback onPress={onImagePress}>
+      <Animated.Image
+        style={[styles.flex, animatedStyle]}
+        source={
+          hideCoverInMobile
+            ? 0
+            : {
+                uri: `${overwriteAlbumArt ?? track?.artwork}`,
+              }
+        }
+      />
+    </TouchableWithoutFeedback>
   );
 };
