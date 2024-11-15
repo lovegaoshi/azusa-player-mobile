@@ -5,12 +5,15 @@ import Animated, {
   useDerivedValue,
 } from 'react-native-reanimated';
 import { useEffect, useState } from 'react';
+import { Image } from 'expo-image';
 
 import { styles } from '../style';
 import useActiveTrack from '@hooks/useActiveTrack';
 import { MinPlayerHeight } from './Constants';
 import { useNoxSetting } from '@stores/useApp';
 import { songResolveArtwork } from '@utils/mediafetch/resolveURL';
+
+const AnimatedExpoImage = Animated.createAnimatedComponent(Image);
 
 interface Props extends NoxComponent.MiniplayerProps {
   opacity: SharedValue<number>;
@@ -73,7 +76,7 @@ export default ({ miniplayerHeight, opacity, onPress, expand }: Props) => {
 
   return (
     <TouchableWithoutFeedback onPress={onImagePress}>
-      <Animated.Image
+      <AnimatedExpoImage
         style={[
           styles.flex,
           {
