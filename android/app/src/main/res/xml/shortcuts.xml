@@ -14,7 +14,7 @@
   <shortcut
     android:shortcutId="play_all"
     android:enabled="true"
-    android:icon="@drawable/media3_icon_shuffle_on"
+    android:icon="@drawable/media3_icon_circular_play"
     android:shortcutShortLabel="@string/play_all"
     android:shortcutLongLabel="@string/play_all">
     <intent

@@ -27,26 +27,33 @@ export default ({ miniplayerHeight, opacity, onPress, expand }: Props) => {
   const artworkWidth = useDerivedValue(() => {
     return Math.min(miniplayerHeight.value - 25, width);
   });
-  const artworkBottom = useDerivedValue(() => {
-    const val = miniplayerHeight.value - MinPlayerHeight - 5;
-    const overflowBottom = Math.max(0, miniplayerHeight.value - 100 - width);
-    return Math.min(val - overflowBottom);
+  const artworkScale = useDerivedValue(() => {
+    return artworkWidth.value / width;
   });
-  const artworkLeft = useDerivedValue(() => {
-    const val = 5 + MinPlayerHeight - miniplayerHeight.value;
-    if (val < 0) return 0;
-    return val;
+  const expandDiff = useDerivedValue(
+    () => miniplayerHeight.value - MinPlayerHeight,
+  );
+
+  const artworkTranslateY = useDerivedValue(() => {
+    return Math.min(100, 165 + MinPlayerHeight - width + expandDiff.value / 2);
+  });
+  const artworkTranslateX = useDerivedValue(() => {
+    if (expandDiff.value < 6) {
+      return 5 - expandDiff.value + (artworkWidth.value - width) / 2;
+    }
+    return (artworkWidth.value - width) / 2;
   });
 
   const animatedStyle = useAnimatedStyle(() => {
     return {
-      width: artworkWidth.value,
-      height: artworkWidth.value,
-      bottom: -artworkBottom.value,
-      left: artworkLeft.value,
+      transform: [
+        { translateX: artworkTranslateX.value },
+        { translateY: artworkTranslateY.value },
+        { scaleX: artworkScale.value },
+        { scaleY: artworkScale.value },
+      ],
       opacity: opacity.value,
       zIndex: opacity.value > 0 ? 1 : -1,
-      position: 'absolute',
     };
   });
 
@@ -54,7 +61,7 @@ export default ({ miniplayerHeight, opacity, onPress, expand }: Props) => {
     if (miniplayerHeight.value === MinPlayerHeight) {
       return expand();
     }
-    if (artworkWidth.value === width) {
+    if (artworkScale.value === 1) {
       return onPress();
     }
   };
@@ -66,7 +73,15 @@ export default ({ miniplayerHeight, opacity, onPress, expand }: Props) => {
   return (
     <TouchableWithoutFeedback onPress={onImagePress}>
       <Animated.Image
-        style={[styles.flex, animatedStyle]}
+        style={[
+          styles.flex,
+          {
+            width,
+            height: width,
+            position: 'absolute',
+          },
+          animatedStyle,
+        ]}
         source={
           hideCoverInMobile
             ? 0
