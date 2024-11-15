@@ -85,10 +85,16 @@ export default () => {
     }));
   };
 
-  const scrollDragGesture = Gesture.Pan()
-    .onStart(() => (initHeight.value = miniplayerHeight.value))
-    .onChange(e => dragPlayerHeight(e.translationY))
-    .onEnd(e => snapPlayerHeight(e.translationY));
+  const scrollDragGesture = React.useMemo(
+    () =>
+      Gesture.Pan()
+        .onStart(() => (initHeight.value = miniplayerHeight.value))
+        .onChange(e => dragPlayerHeight(e.translationY))
+        .onEnd(e => snapPlayerHeight(e.translationY)),
+    [],
+  );
+
+  const disabledGesture = React.useMemo(() => Gesture.Manual(), []);
 
   const animatedStyle = useAnimatedStyle(() => {
     return {
@@ -96,9 +102,7 @@ export default () => {
     };
   });
   return (
-    <GestureDetector
-      gesture={lrcVisible ? Gesture.Manual() : scrollDragGesture}
-    >
+    <GestureDetector gesture={lrcVisible ? disabledGesture : scrollDragGesture}>
       <Animated.View style={[{ width: '100%', paddingTop: 5 }, animatedStyle]}>
         <View style={[styles.rowView, { paddingTop: 5 }]}>
           <PlayerTopInfo opacity={opacityVisible} collapse={collapse} />
