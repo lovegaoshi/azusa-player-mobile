@@ -34,10 +34,7 @@ import NoxBottomTab from './components/bottomtab/NoxBottomTab';
 import NoxMiniPlayer from './components/miniplayer/View';
 import { BottomTabRouteIcons } from './enums/BottomTab';
 
-const SlidingDrawerRoutes = [
-  BottomTabRouteIcons.setting,
-  BottomTabRouteIcons.music,
-];
+const SlidingDrawerRoutes = [BottomTabRouteIcons.music];
 
 const { LightTheme, DarkTheme } = adaptNavigationTheme({
   reactNavigationLight: NavigationDefaultTheme,
