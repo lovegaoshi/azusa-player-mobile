@@ -1,4 +1,4 @@
-import { TouchableWithoutFeedback, Dimensions } from 'react-native';
+import { TouchableWithoutFeedback, Dimensions, View } from 'react-native';
 import Animated, {
   SharedValue,
   useAnimatedStyle,
@@ -25,17 +25,22 @@ export default ({ miniplayerHeight, opacity, onPress, expand }: Props) => {
   const { track } = useActiveTrack();
   const { hideCoverInMobile } = useNoxSetting(state => state.playerSetting);
   const [overwriteAlbumArt, setOverwriteAlbumArt] = useState<string | void>();
-  const { width } = Dimensions.get('window');
+  const { width, height } = Dimensions.get('window');
+
+  const imgURI = hideCoverInMobile
+    ? ''
+    : `${overwriteAlbumArt ?? track?.artwork}`;
   // HACK: restrict to 720 to ensure scaleY fluidity
-  const img = useImage(
-    hideCoverInMobile ? '' : `${overwriteAlbumArt ?? track?.artwork}`,
-    {
-      maxHeight: 720,
-      maxWidth: 720,
-      onError: () =>
-        logger.warn(`[artwork] failed to load ${track?.mediaId} artwork`),
-    },
-  );
+  const img = useImage(imgURI, {
+    maxHeight: 360,
+    maxWidth: 360,
+    onError: () =>
+      logger.warn(`[artwork] failed to load ${track?.mediaId} artwork`),
+  });
+
+  const highResOpacity = useDerivedValue(() => {
+    return miniplayerHeight.value === height ? 1 : 0;
+  });
 
   const artworkWidth = useDerivedValue(() => {
     return Math.min(miniplayerHeight.value - 25, width);
@@ -71,6 +76,12 @@ export default ({ miniplayerHeight, opacity, onPress, expand }: Props) => {
     };
   });
 
+  const animatedHighResStyle = useAnimatedStyle(() => {
+    return {
+      opacity: highResOpacity.value,
+    };
+  });
+
   const onImagePress = () => {
     if (miniplayerHeight.value === MinPlayerHeight) {
       return expand();
@@ -86,17 +97,32 @@ export default ({ miniplayerHeight, opacity, onPress, expand }: Props) => {
 
   return (
     <TouchableWithoutFeedback onPress={onImagePress}>
-      <AnimatedExpoImage
-        style={[
-          {
-            width,
-            height: width,
-            position: 'absolute',
-          },
-          animatedStyle,
-        ]}
-        source={img}
-      />
+      <View>
+        <AnimatedExpoImage
+          style={[
+            {
+              width,
+              height: width,
+              position: 'absolute',
+            },
+            animatedStyle,
+          ]}
+          source={img}
+        />
+        <AnimatedExpoImage
+          style={[
+            {
+              width,
+              height: width,
+              position: 'absolute',
+              transform: [{ translateY: 100 }],
+              zIndex: 1,
+            },
+            animatedHighResStyle,
+          ]}
+          source={{ uri: imgURI }}
+        />
+      </View>
     </TouchableWithoutFeedback>
   );
 };
