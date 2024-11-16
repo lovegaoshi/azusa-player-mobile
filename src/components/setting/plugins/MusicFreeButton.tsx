@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { Image } from 'expo-image';
 
 import GenericCheckDialog from '@components/dialogs/GenericCheckDialog';
-import { SettingListItem } from '../useRenderSetting';
+import SettingListItem from '../helpers/SettingListItem';
 import { MUSICFREE } from '@utils/mediafetch/musicfree';
 import { getMusicFreePlugin, setMusicFreePlugin } from '@utils/ChromeStorage';
 import { StyleSheet } from 'react-native';

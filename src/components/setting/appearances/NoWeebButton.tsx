@@ -1,7 +1,7 @@
 import React from 'react';
 import { View } from 'react-native';
 
-import { SettingListItem } from '../useRenderSetting';
+import SettingListItem from '../helpers/SettingListItem';
 import NoWeebDialog from './NoWeebDialog';
 
 export default () => {

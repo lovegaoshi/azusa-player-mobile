@@ -1,67 +1,10 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { View, Text, StyleSheet } from 'react-native';
-import {
-  IconButton,
-  List,
-  Switch,
-  TouchableRipple,
-  Checkbox,
-} from 'react-native-paper';
-import { v4 as uuidv4 } from 'uuid';
+import { Switch, TouchableRipple, Checkbox } from 'react-native-paper';
 
 import { useNoxSetting } from '@stores/useApp';
-import { SettingEntry } from './SetttingEntries';
-
-/**
- * renders a generic clickable item.
- */
-interface SetttingListInterface {
-  icon?: string | (() => React.JSX.Element);
-  settingName: string;
-  onPress: () => void;
-  settingCategory?: string;
-  modifyDescription?: (val: string) => string;
-}
-
-export const SettingListItem = ({
-  icon,
-  settingName,
-  onPress,
-  settingCategory = 'DeveloperSettings',
-  modifyDescription = (val: string) => val,
-}: SetttingListInterface) => {
-  const { t } = useTranslation();
-  const playerStyle = useNoxSetting(state => state.playerStyle);
-
-  const getIcon = () => {
-    if (typeof icon === 'string') {
-      return (
-        <IconButton
-          iconColor={playerStyle.colors.primary}
-          icon={icon}
-          size={40}
-        />
-      );
-    } else if (typeof icon === 'function') {
-      return icon();
-    } else {
-      return <></>;
-    }
-  };
-
-  return (
-    <List.Item
-      left={getIcon}
-      title={t(`${settingCategory}.${settingName}Name`)}
-      description={modifyDescription(
-        t(`${settingCategory}.${settingName}Desc`),
-      )}
-      onPress={onPress}
-      style={styles.listItem}
-    />
-  );
-};
+import { SettingEntry } from './SettingEntry';
 
 const BooleanSetting = ({
   settingName,
@@ -129,21 +72,9 @@ const BooleanSetting = ({
   );
 };
 
-interface Props {
-  item: SettingEntry;
-}
-
-export const RenderSetting = ({ item }: Props) => {
-  switch (item.settingType) {
-    default:
-      return <BooleanSetting {...item} key={uuidv4()} />;
-  }
-};
+export default BooleanSetting;
 
 const styles = StyleSheet.create({
-  listItem: {
-    paddingVertical: 0,
-  },
   touchableRipple: {
     paddingHorizontal: 10,
   },

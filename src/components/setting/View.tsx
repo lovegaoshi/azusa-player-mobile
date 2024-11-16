@@ -8,7 +8,7 @@ import AListSettings from './alist/View';
 import DeveloperSettings from './DeveloperSettings';
 import SyncSettings from './SyncSettings';
 import { useNoxSetting } from '@stores/useApp';
-import { SettingListItem } from './useRenderSetting';
+import SettingListItem from './helpers/SettingListItem';
 import LanguageSettings from './LanguageSettings';
 import AboutSettings from './AboutSettings';
 import SplashSettings from './SplashSettings';

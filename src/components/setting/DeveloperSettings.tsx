@@ -11,13 +11,14 @@ import { APPSTORE } from '@env';
 import { useNoxSetting } from '@stores/useApp';
 import { logStore, LOGLEVEL } from '@utils/Logger';
 import GenericSelectDialog from '../dialogs/GenericSelectDialog';
-import { SettingListItem, RenderSetting } from './useRenderSetting';
+import { RenderSetting } from './helpers/RenderSetting';
+import SettingListItem from './helpers/SettingListItem';
 import useVersionCheck from '@hooks/useVersionCheck';
 import {
   SelectSettingEntry,
   SettingEntry,
   dummySelectSettingEntry,
-} from './SetttingEntries';
+} from './helpers/SettingEntry';
 import NoxCache from '@utils/Cache';
 import useCleanCache from '@hooks/useCleanCache';
 import appStore from '@stores/appStore';
@@ -55,6 +56,7 @@ const Stack = createNativeStackNavigator();
 
 const FadeOptions = [0, 250, 500, 1000];
 const CrossFadeOptions = [0, 2500, 5000, 7500, 12000];
+const ArtworkResOptions = [0, 240, 360, 720, 1080];
 
 const developerSettings: { [key: string]: SettingEntry } = {
   noInterruption: {
