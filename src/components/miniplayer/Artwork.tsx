@@ -5,13 +5,13 @@ import Animated, {
   useDerivedValue,
 } from 'react-native-reanimated';
 import { useEffect, useState } from 'react';
-import { Image } from 'expo-image';
+import { Image, useImage } from 'expo-image';
 
-import { styles } from '../style';
 import useActiveTrack from '@hooks/useActiveTrack';
 import { MinPlayerHeight } from './Constants';
 import { useNoxSetting } from '@stores/useApp';
 import { songResolveArtwork } from '@utils/mediafetch/resolveURL';
+import logger from '@utils/Logger';
 
 const AnimatedExpoImage = Animated.createAnimatedComponent(Image);
 
@@ -26,6 +26,16 @@ export default ({ miniplayerHeight, opacity, onPress, expand }: Props) => {
   const { hideCoverInMobile } = useNoxSetting(state => state.playerSetting);
   const [overwriteAlbumArt, setOverwriteAlbumArt] = useState<string | void>();
   const { width } = Dimensions.get('window');
+  // HACK: restrict to 720 to ensure scaleY fluidity
+  const img = useImage(
+    hideCoverInMobile ? '' : `${overwriteAlbumArt ?? track?.artwork}`,
+    {
+      maxHeight: 720,
+      maxWidth: 720,
+      onError: () =>
+        logger.warn(`[artwork] failed to load ${track?.mediaId} artwork`),
+    },
+  );
 
   const artworkWidth = useDerivedValue(() => {
     return Math.min(miniplayerHeight.value - 25, width);
@@ -85,13 +95,7 @@ export default ({ miniplayerHeight, opacity, onPress, expand }: Props) => {
           },
           animatedStyle,
         ]}
-        source={
-          hideCoverInMobile
-            ? undefined
-            : {
-                uri: `${overwriteAlbumArt ?? track?.artwork}`,
-              }
-        }
+        source={img}
       />
     </TouchableWithoutFeedback>
   );
