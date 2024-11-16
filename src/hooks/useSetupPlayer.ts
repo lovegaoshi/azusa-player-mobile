@@ -74,18 +74,22 @@ export default ({ intentData, vip }: NoxComponent.SetupPlayerProps) => {
       if (unmounted) return;
       checkPlayStoreUpdates();
       setIntentData(intentData);
-      switch (intentData) {
-        case IntentData.Resume:
-          await TrackPlayer.play();
-          break;
-        case IntentData.PlayAll:
-          // this hook cannot use usePlayback bc of rerendering..??
-          break;
-        case undefined:
-          await TrackPlayer.pause();
-          break;
-        default:
-        // await TrackPlayer.pause();
+      if (!(await TrackPlayer.validateOnStartCommandIntent())) {
+        TrackPlayer.play();
+      } else {
+        switch (intentData) {
+          case IntentData.Resume:
+            await TrackPlayer.play();
+            break;
+          case IntentData.PlayAll:
+            // this hook cannot use usePlayback bc of rerendering..??
+            break;
+          case undefined:
+            await TrackPlayer.pause();
+            break;
+          default:
+          // await TrackPlayer.pause();
+        }
       }
     })();
     return () => {
