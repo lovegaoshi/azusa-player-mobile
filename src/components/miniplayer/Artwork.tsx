@@ -23,28 +23,31 @@ interface Props extends NoxComponent.MiniplayerProps {
 
 export default ({ miniplayerHeight, opacity, onPress, expand }: Props) => {
   const { track } = useActiveTrack();
-  const { hideCoverInMobile } = useNoxSetting(state => state.playerSetting);
+  const { hideCoverInMobile, artworkRes } = useNoxSetting(
+    state => state.playerSetting,
+  );
   const [overwriteAlbumArt, setOverwriteAlbumArt] = useState<string | void>();
-  const { width, height } = Dimensions.get('window');
+  const { width } = Dimensions.get('window');
 
   const imgURI = hideCoverInMobile
     ? ''
     : `${overwriteAlbumArt ?? track?.artwork}`;
   // HACK: restrict to 720 to ensure scaleY fluidity
   const img = useImage(imgURI, {
-    maxHeight: 360,
-    maxWidth: 360,
+    maxHeight: artworkRes === 0 ? undefined : artworkRes,
+    maxWidth: artworkRes === 0 ? undefined : artworkRes,
     onError: () =>
       logger.warn(`[artwork] failed to load ${track?.mediaId} artwork`),
-  });
-
-  const highResOpacity = useDerivedValue(() => {
-    return miniplayerHeight.value === height ? 1 : 0;
   });
 
   const artworkWidth = useDerivedValue(() => {
     return Math.min(miniplayerHeight.value - 25, width);
   });
+
+  const highResOpacity = useDerivedValue(() => {
+    return artworkWidth.value === width ? 1 : 0;
+  });
+
   const artworkScale = useDerivedValue(() => {
     return artworkWidth.value / width;
   });
@@ -53,6 +56,9 @@ export default ({ miniplayerHeight, opacity, onPress, expand }: Props) => {
   );
 
   const artworkTranslateY = useDerivedValue(() => {
+    return Math.min(100, 35 + (expandDiff.value - width) / 2);
+  });
+  const highResArtworkTranslateY = useDerivedValue(() => {
     return Math.min(100, 35 + (expandDiff.value - width) / 2);
   });
   const artworkTranslateX = useDerivedValue(() => {
@@ -79,6 +85,7 @@ export default ({ miniplayerHeight, opacity, onPress, expand }: Props) => {
   const animatedHighResStyle = useAnimatedStyle(() => {
     return {
       opacity: highResOpacity.value,
+      transform: [{ translateY: highResArtworkTranslateY.value }],
     };
   });
 
@@ -109,19 +116,20 @@ export default ({ miniplayerHeight, opacity, onPress, expand }: Props) => {
           ]}
           source={img}
         />
-        <AnimatedExpoImage
-          style={[
-            {
-              width,
-              height: width,
-              position: 'absolute',
-              transform: [{ translateY: 100 }],
-              zIndex: 1,
-            },
-            animatedHighResStyle,
-          ]}
-          source={{ uri: imgURI }}
-        />
+        {artworkRes !== 0 && (
+          <AnimatedExpoImage
+            style={[
+              {
+                width,
+                height: width,
+                position: 'absolute',
+                zIndex: 1,
+              },
+              animatedHighResStyle,
+            ]}
+            source={{ uri: imgURI }}
+          />
+        )}
       </View>
     </TouchableWithoutFeedback>
   );

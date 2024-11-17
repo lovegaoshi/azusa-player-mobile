@@ -33,6 +33,7 @@ import {
   enableTanaka,
 } from '@hooks/useTanakaAmazingCommodities';
 import { isAndroid } from '@utils/RNUtils';
+import SelectSetting from './helpers/SelectSetting';
 
 enum Icons {
   setlog = 'console',
@@ -45,6 +46,7 @@ enum Icons {
   fade = 'cosine-wave',
   plugins = 'puzzle',
   Tanaka = 'emoticon-devil',
+  ArtworkRes = 'quality-high',
 }
 
 enum VIEW {
@@ -56,7 +58,7 @@ const Stack = createNativeStackNavigator();
 
 const FadeOptions = [0, 250, 500, 1000];
 const CrossFadeOptions = [0, 2500, 5000, 7500, 12000];
-const ArtworkResOptions = [0, 240, 360, 720, 1080];
+const ArtworkResOptions = [0, 240, 360, 480, 720, 1080];
 
 const developerSettings: { [key: string]: SettingEntry } = {
   noInterruption: {
@@ -275,6 +277,16 @@ const Home = ({ navigation }: NoxComponent.StackNavigationProps) => {
               }
             />
           )}
+          <SelectSetting
+            setSelectVisible={setSelectVisible}
+            setCurrentSelectOption={setCurrentSelectOption}
+            options={ArtworkResOptions}
+            renderOption={(option: number) => `${option}p`}
+            settingKey="artworkRes"
+            icon={Icons.ArtworkRes}
+            settingCategory="DeveloperSettings"
+            modifyDescription={v => `${v}: ${playerSetting.artworkRes}p`}
+          />
           <SettingListItem
             icon={Icons.cache}
             settingName="CacheSize"

@@ -16,7 +16,6 @@ interface Props<T> {
   callback?: () => void;
   renderOption?: (i: T) => string;
   onClose?: () => void;
-  onSubmit?: (i: number) => void;
   settingKey: string;
   icon: string;
   settingCategory: string;
@@ -31,7 +30,6 @@ const SelectSetting = ({
   defaultIndex,
   onClose,
   callback,
-  onSubmit,
   settingKey,
   icon,
   settingCategory,
