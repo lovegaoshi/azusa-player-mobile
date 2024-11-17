@@ -74,8 +74,7 @@ export default ({ miniplayerHeight, opacity, onPress, expand }: Props) => {
       transform: [
         { translateX: artworkTranslateX.value },
         { translateY: artworkTranslateY.value },
-        { scaleX: artworkScale.value },
-        { scaleY: artworkScale.value },
+        { scale: artworkScale.value },
       ],
       opacity: opacity.value,
       zIndex: opacity.value > 0 ? 1 : -1,
@@ -115,6 +114,7 @@ export default ({ miniplayerHeight, opacity, onPress, expand }: Props) => {
             animatedStyle,
           ]}
           source={img}
+          allowDownscaling={false}
         />
         {artworkRes !== 0 && (
           <AnimatedExpoImage
