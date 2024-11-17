@@ -37,7 +37,7 @@ const PlaylistItem = ({
   if (!item) return <></>;
   return (
     <View style={styles.playlistItemContainer}>
-      <View style={{ backgroundColor: leadColor, width: 15 }}></View>
+      <View style={{ backgroundColor: leadColor, width: 15 }} />
       <View style={styles.playlistItemTextContainer}>
         <Text
           variant="bodyLarge"

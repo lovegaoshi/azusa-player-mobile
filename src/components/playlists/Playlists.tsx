@@ -1,10 +1,7 @@
 import React, { useState } from 'react';
 import { IconButton, Text, TouchableRipple } from 'react-native-paper';
 import { Pressable, View, StyleSheet } from 'react-native';
-import DraggableFlatList, {
-  ScaleDecorator,
-  RenderItemParams,
-} from 'react-native-draggable-flatlist';
+import FlashDragList from 'react-native-flashdrag-list';
 
 import { useNoxSetting } from '@stores/useApp';
 import { NoxRoutes } from '@enums/Routes';
@@ -82,36 +79,44 @@ export default () => {
     }
   };
 
-  const renderItem = ({ item, drag, isActive }: RenderItemParams<string>) => {
+  const renderItem = (
+    item: string,
+    index: number,
+    active: boolean,
+    beginDrag: () => any,
+  ) => {
     const playlist = playlists[item];
     return (
-      <ScaleDecorator>
-        <TouchableRipple
-          onLongPress={drag}
-          disabled={isActive}
-          onPress={() => goToPlaylist(item)}
-          style={[
-            {
-              backgroundColor:
-                currentPlaylist.id === item
-                  ? // this is a special high contrast color than primaryContainer.
-                    (playerStyle.customColors.playlistDrawerBackgroundColor ??
-                    playerStyle.colors.primaryContainer)
-                  : undefined,
-            },
-          ]}
-        >
-          <PlaylistItem
-            item={playlist}
-            confirmOnDelete={confirmOnDelete}
-            leadColor={
-              currentPlayingList.id === item
-                ? playerStyle.colors.primary
-                : undefined
-            }
-          />
-        </TouchableRipple>
-      </ScaleDecorator>
+      <TouchableRipple
+        key={index}
+        onPress={() => goToPlaylist(item)}
+        onLongPress={beginDrag}
+        onResponderStart={e => {
+          if (e.nativeEvent.locationX < 20) {
+            beginDrag();
+          }
+        }}
+        style={[
+          {
+            backgroundColor:
+              currentPlaylist.id === item
+                ? // this is a special high contrast color than primaryContainer.
+                  (playerStyle.customColors.playlistDrawerBackgroundColor ??
+                  playerStyle.colors.primaryContainer)
+                : undefined,
+          },
+        ]}
+      >
+        <PlaylistItem
+          item={playlist}
+          confirmOnDelete={confirmOnDelete}
+          leadColor={
+            currentPlayingList.id === item
+              ? playerStyle.colors.primary
+              : undefined
+          }
+        />
+      </TouchableRipple>
     );
   };
 
@@ -175,12 +180,16 @@ export default () => {
         onSubmit={() => setNewPlaylistDialogOpen(false)}
       />
       <View style={{ flex: 1 }}>
-        <DraggableFlatList
-          style={[styles.draggableFlatList]}
+        <FlashDragList
           data={playlistIds}
-          onDragEnd={({ data }) => setPlaylistIds(data)}
-          keyExtractor={item => item}
           renderItem={renderItem}
+          itemsSize={50}
+          onSort={(fromIndex, toIndex) => {
+            const copy = [...playlistIds];
+            const removed = copy.splice(fromIndex, 1);
+            copy.splice(toIndex, 0, removed[0]!);
+            setPlaylistIds(copy);
+          }}
         />
       </View>
       <View style={styles.bottomInfo}>
@@ -215,7 +224,6 @@ const styles = StyleSheet.create({
     width: 40,
     height: 40,
   },
-  draggableFlatList: {},
   bottomInfo: {
     paddingBottom: 20,
   },

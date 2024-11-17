@@ -1,9 +1,8 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { StyleSheet } from 'react-native';
 
 import { useNoxSetting } from '@stores/useApp';
-import { SelectSettingEntry, SettingEntry } from './SettingEntry';
+import { SelectSettingEntry } from './SettingEntry';
 import SettingListItem from './SettingListItem';
 
 interface Props<T> {

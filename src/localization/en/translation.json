@@ -168,7 +168,7 @@
     "crossfadeName": "Crossfade",
     "crossfadeDesc": "enable crossfading (need restart).",
     "artworkResName": "Artwork Resolution",
-    "artworkResDesc": "rescale artwork resolution during scaling to increase proformance",
+    "artworkResDesc": "rescale artwork resolution during scaling (why? i dont know)",
     "crossfadeTitle": "Set Fade In/out (ms)",
     "VersionCheckName": "Check Version",
     "VersionCheckDesc": "Check latest version released on github.",

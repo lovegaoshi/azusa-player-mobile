@@ -3,6 +3,7 @@ import React, { useEffect } from 'react';
 import { IconButton, Divider, Text, TouchableRipple } from 'react-native-paper';
 import { View, ImageBackground, StyleSheet, Linking } from 'react-native';
 import { useTranslation } from 'react-i18next';
+import { DrawerContentComponentProps } from '@react-navigation/drawer';
 
 import { useNoxSetting } from '@stores/useApp';
 import usePlaybackAA from '@hooks/usePlaybackAA';
@@ -55,11 +56,11 @@ const BiliCard = (props: any) => {
   return <>{props.children}</>;
 };
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export default (props: any) => {
+export default (props: DrawerContentComponentProps) => {
   const navigation = useNavigation();
   const playlistIds = useNoxSetting(state => state.playlistIds);
   const playerStyle = useNoxSetting(state => state.playerStyle);
+
   // HACK: I know its bad! But somehow this hook isnt updating in its own
   // useEffects...
   const { buildBrowseTree } = usePlaybackAA();

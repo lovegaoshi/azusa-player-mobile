@@ -92,7 +92,7 @@
     "react-native-blob-util": "^0.19.11",
     "react-native-carplay": "2.4.1-beta.0",
     "react-native-device-info": "^14.0.0",
-    "react-native-draggable-flatlist": "^4.0.1",
+    "react-native-flashdrag-list": "^0.2.4",
     "react-native-gesture-handler": "2.21.0",
     "react-native-get-random-values": "^1.11.0",
     "react-native-image-colors": "^2.4.0",
