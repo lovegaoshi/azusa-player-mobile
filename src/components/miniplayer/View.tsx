@@ -104,7 +104,7 @@ export default () => {
   return (
     <GestureDetector gesture={lrcVisible ? disabledGesture : scrollDragGesture}>
       <Animated.View style={[{ width: '100%', paddingTop: 5 }, animatedStyle]}>
-        <View style={[styles.rowView, { paddingTop: 5 }]}>
+        <View style={styles.rowView}>
           <PlayerTopInfo opacity={opacityVisible} collapse={collapse} />
           <TrackAlbumArt
             miniplayerHeight={miniplayerHeight}

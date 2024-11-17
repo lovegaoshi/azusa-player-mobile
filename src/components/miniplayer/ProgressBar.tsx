@@ -30,6 +30,6 @@ export default ({ miniplayerHeight }: NoxComponent.MiniplayerProps) => {
 };
 
 const styles = StyleSheet.create({
-  progressBar: { transform: [{ translateY: -15 }] },
+  progressBar: { transform: [{ translateY: -10 }] },
   track: { borderRadius: 0 },
 });

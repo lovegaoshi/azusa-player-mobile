@@ -41,7 +41,7 @@ export default ({ miniplayerHeight, opacity, onPress, expand }: Props) => {
   });
 
   const artworkWidth = useDerivedValue(() => {
-    return Math.min(miniplayerHeight.value - 25, width);
+    return Math.min(miniplayerHeight.value - 15, width);
   });
 
   const highResOpacity = useDerivedValue(() => {
@@ -56,10 +56,10 @@ export default ({ miniplayerHeight, opacity, onPress, expand }: Props) => {
   );
 
   const artworkTranslateY = useDerivedValue(() => {
-    return Math.min(100, 35 + (expandDiff.value - width) / 2);
+    return Math.min(95, 30 + (expandDiff.value - width) / 2);
   });
   const highResArtworkTranslateY = useDerivedValue(() => {
-    return Math.min(100, 35 + (expandDiff.value - width) / 2);
+    return Math.min(95, 30 + (expandDiff.value - width) / 2);
   });
   const artworkTranslateX = useDerivedValue(() => {
     const halfTranslation = (artworkWidth.value - width) / 2;
@@ -114,7 +114,6 @@ export default ({ miniplayerHeight, opacity, onPress, expand }: Props) => {
             animatedStyle,
           ]}
           source={img}
-          allowDownscaling={false}
         />
         {artworkRes !== 0 && (
           <AnimatedExpoImage
