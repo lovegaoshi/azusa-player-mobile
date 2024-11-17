@@ -54,7 +54,7 @@ export default ({ miniplayerHeight, expand }: Props) => {
   const HalfScreenHeight = PlayerHeight * 0.5;
 
   const miniControlOpacity = useDerivedValue(() => {
-    if (miniplayerHeight.value > HalfScreenHeight) {
+    if (miniplayerHeight.value > HalfScreenHeight + miniplayerHeight.value) {
       return 0;
     }
     if (miniplayerHeight.value < DoublePlayerHeight) {

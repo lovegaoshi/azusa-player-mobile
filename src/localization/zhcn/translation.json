@@ -180,7 +180,7 @@
     "FadeDesc": "淡入淡出区间（需重启）",
     "FadeTitle": "设置淡入淡出 (毫秒)",
     "artworkResName": "专辑封面分辨率",
-    "artworkResDesc": "降低专辑封面分辨率以提升性能",
+    "artworkResDesc": "降低专辑封面分辨率(？？？)",
     "crossfadeName": "交叉渐变",
     "crossfadeDesc": "交叉渐变区间（需重启）",
     "crossfadeTitle": "设置交叉渐变 (毫秒)",
