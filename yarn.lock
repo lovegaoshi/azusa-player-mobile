@@ -1622,7 +1622,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/preset-typescript@npm:^7.13.0, @babel/preset-typescript@npm:^7.16.7, @babel/preset-typescript@npm:^7.17.12, @babel/preset-typescript@npm:^7.23.0, @babel/preset-typescript@npm:^7.26.0":
+"@babel/preset-typescript@npm:^7.13.0, @babel/preset-typescript@npm:^7.16.7, @babel/preset-typescript@npm:^7.23.0, @babel/preset-typescript@npm:^7.26.0":
   version: 7.26.0
   resolution: "@babel/preset-typescript@npm:7.26.0"
   dependencies:
@@ -5604,7 +5604,7 @@ __metadata:
     react-native-clean-project: "npm:^4.0.3"
     react-native-device-info: "npm:^14.0.0"
     react-native-dotenv: "npm:^3.4.11"
-    react-native-draggable-flatlist: "npm:^4.0.1"
+    react-native-flashdrag-list: "npm:^0.2.4"
     react-native-gesture-handler: "npm:2.21.0"
     react-native-get-random-values: "npm:^1.11.0"
     react-native-image-colors: "npm:^2.4.0"
@@ -14344,19 +14344,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-native-draggable-flatlist@npm:^4.0.1":
-  version: 4.0.1
-  resolution: "react-native-draggable-flatlist@npm:4.0.1"
-  dependencies:
-    "@babel/preset-typescript": "npm:^7.17.12"
-  peerDependencies:
-    react-native: ">=0.64.0"
-    react-native-gesture-handler: ">=2.0.0"
-    react-native-reanimated: ">=2.8.0"
-  checksum: 10c0/914e4c1df1a0fed11da474499b78f6144644ab1e45cf22b8d6c3098f12f732d3f15ad26e932114016a80d99a39e9c16cb37357ea707333065dee9d2067639c0b
-  languageName: node
-  linkType: hard
-
 "react-native-drawer-layout@npm:^4.0.1":
   version: 4.0.1
   resolution: "react-native-drawer-layout@npm:4.0.1"
@@ -14368,6 +14355,19 @@ __metadata:
     react-native-gesture-handler: ">= 2.0.0"
     react-native-reanimated: ">= 2.0.0"
   checksum: 10c0/21d413c4f21c2dda1172825cdf03502a23e95b542558bc5798980c1fafe649159bf8410812a3c28cd2f087e13586a56d064e08b557bd2dc699b9e5887e6f39d3
+  languageName: node
+  linkType: hard
+
+"react-native-flashdrag-list@npm:^0.2.4":
+  version: 0.2.4
+  resolution: "react-native-flashdrag-list@npm:0.2.4"
+  peerDependencies:
+    "@shopify/flash-list": "*"
+    react: "*"
+    react-native: "*"
+    react-native-gesture-handler: "*"
+    react-native-reanimated: "*"
+  checksum: 10c0/5a0304cebaec90a56b5e9a3c2cbe7c296cfc055fef44cfda169427c43976ce67fc1ee6ae5bba4c7a1b880c9148f407822b35286c349fd2dbd7a752fe97ea5c14
   languageName: node
   linkType: hard
 
