@@ -6,7 +6,7 @@ import { create } from 'zustand';
 import { isAndroid } from '@utils/RNUtils';
 import { getHasGuard } from '@utils/Bilibili/BiliUser';
 // eslint-disable-next-line import/no-unresolved
-import { APPSTORE } from '@env';
+import { APPSTORE, REVENUECAT_GOOGLE, REVENUECAT_STRIPE } from '@env';
 
 const VIPKey = 'APMVIP';
 enum VIPType {
@@ -52,16 +52,20 @@ const useVIP = create<VIPStore>(() => ({
 
 export default useVIP;
 
+const revenueCatAPI = () => {
+  if (APPSTORE) {
+    if (isAndroid) {
+      return REVENUECAT_GOOGLE;
+    }
+  }
+  return REVENUECAT_STRIPE;
+};
+
 export const useSetupVIP = () => {
   const vip = useVIP(state => state.VIP);
 
   const init = async () => {
-    if (!APPSTORE) {
-      return;
-    }
-    if (isAndroid) {
-      Purchases.configure({ apiKey: 'goog_XXAuAgmqFMypeJIGHTlyRZNdoGh' });
-    }
+    Purchases.configure({ apiKey: revenueCatAPI() });
     checkVIP();
   };
 
