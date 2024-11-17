@@ -3,7 +3,7 @@ import { View } from 'react-native';
 import { useTranslation } from 'react-i18next';
 
 import GenericSelectDialog from '../dialogs/GenericSelectDialog';
-import { SettingListItem } from './useRenderSetting';
+import SettingListItem from './helpers/SettingListItem';
 import { useNoxSetting } from '@stores/useApp';
 import { shawarma } from '@assets/voice/shawarma';
 import VoicePlayer from '../background/VoicePlayer';

@@ -1,7 +1,7 @@
 import React from 'react';
 import * as ImagePicker from 'expo-image-picker';
 
-import { SettingListItem } from '../useRenderSetting';
+import SettingListItem from '../helpers/SettingListItem';
 import { useNoxSetting } from '@stores/useApp';
 
 export default () => {

@@ -1,4 +1,4 @@
-import { TouchableWithoutFeedback, Dimensions } from 'react-native';
+import { TouchableWithoutFeedback, Dimensions, View } from 'react-native';
 import Animated, {
   SharedValue,
   useAnimatedStyle,
@@ -23,23 +23,31 @@ interface Props extends NoxComponent.MiniplayerProps {
 
 export default ({ miniplayerHeight, opacity, onPress, expand }: Props) => {
   const { track } = useActiveTrack();
-  const { hideCoverInMobile } = useNoxSetting(state => state.playerSetting);
+  const { hideCoverInMobile, artworkRes } = useNoxSetting(
+    state => state.playerSetting,
+  );
   const [overwriteAlbumArt, setOverwriteAlbumArt] = useState<string | void>();
   const { width } = Dimensions.get('window');
+
+  const imgURI = hideCoverInMobile
+    ? ''
+    : `${overwriteAlbumArt ?? track?.artwork}`;
   // HACK: restrict to 720 to ensure scaleY fluidity
-  const img = useImage(
-    hideCoverInMobile ? '' : `${overwriteAlbumArt ?? track?.artwork}`,
-    {
-      maxHeight: 720,
-      maxWidth: 720,
-      onError: () =>
-        logger.warn(`[artwork] failed to load ${track?.mediaId} artwork`),
-    },
-  );
+  const img = useImage(imgURI, {
+    maxHeight: artworkRes === 0 ? undefined : artworkRes,
+    maxWidth: artworkRes === 0 ? undefined : artworkRes,
+    onError: () =>
+      logger.warn(`[artwork] failed to load ${track?.mediaId} artwork`),
+  });
 
   const artworkWidth = useDerivedValue(() => {
     return Math.min(miniplayerHeight.value - 25, width);
   });
+
+  const highResOpacity = useDerivedValue(() => {
+    return artworkWidth.value === width ? 1 : 0;
+  });
+
   const artworkScale = useDerivedValue(() => {
     return artworkWidth.value / width;
   });
@@ -48,6 +56,9 @@ export default ({ miniplayerHeight, opacity, onPress, expand }: Props) => {
   );
 
   const artworkTranslateY = useDerivedValue(() => {
+    return Math.min(100, 35 + (expandDiff.value - width) / 2);
+  });
+  const highResArtworkTranslateY = useDerivedValue(() => {
     return Math.min(100, 35 + (expandDiff.value - width) / 2);
   });
   const artworkTranslateX = useDerivedValue(() => {
@@ -71,6 +82,13 @@ export default ({ miniplayerHeight, opacity, onPress, expand }: Props) => {
     };
   });
 
+  const animatedHighResStyle = useAnimatedStyle(() => {
+    return {
+      opacity: highResOpacity.value,
+      transform: [{ translateY: highResArtworkTranslateY.value }],
+    };
+  });
+
   const onImagePress = () => {
     if (miniplayerHeight.value === MinPlayerHeight) {
       return expand();
@@ -86,17 +104,33 @@ export default ({ miniplayerHeight, opacity, onPress, expand }: Props) => {
 
   return (
     <TouchableWithoutFeedback onPress={onImagePress}>
-      <AnimatedExpoImage
-        style={[
-          {
-            width,
-            height: width,
-            position: 'absolute',
-          },
-          animatedStyle,
-        ]}
-        source={img}
-      />
+      <View>
+        <AnimatedExpoImage
+          style={[
+            {
+              width,
+              height: width,
+              position: 'absolute',
+            },
+            animatedStyle,
+          ]}
+          source={img}
+        />
+        {artworkRes !== 0 && (
+          <AnimatedExpoImage
+            style={[
+              {
+                width,
+                height: width,
+                position: 'absolute',
+                zIndex: 1,
+              },
+              animatedHighResStyle,
+            ]}
+            source={{ uri: imgURI }}
+          />
+        )}
+      </View>
     </TouchableWithoutFeedback>
   );
 };

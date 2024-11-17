@@ -2,8 +2,9 @@ import { View, StyleSheet } from 'react-native';
 import { useTranslation } from 'react-i18next';
 
 import { useNoxSetting } from '@stores/useApp';
-import { RenderSetting, SettingListItem } from './useRenderSetting';
-import { SettingEntry } from './SetttingEntries';
+import { RenderSetting } from './helpers/RenderSetting';
+import SettingListItem from './helpers/SettingListItem';
+import { SettingEntry } from './helpers/SettingEntry';
 import {
   chooseLocalMediaFolderAndroid,
   FilePickerResult,

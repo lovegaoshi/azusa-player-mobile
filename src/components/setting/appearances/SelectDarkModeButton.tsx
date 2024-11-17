@@ -2,12 +2,12 @@ import * as React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Appearance, View, ColorSchemeName } from 'react-native';
 
-import { SettingListItem } from '../useRenderSetting';
+import SettingListItem from '../helpers/SettingListItem';
 import GenericSelectDialog from '@components/dialogs/GenericSelectDialog';
 import {
   SelectSettingEntry,
   dummySelectSettingEntry,
-} from '../SetttingEntries';
+} from '../helpers/SettingEntry';
 import { saveColorScheme, getColorScheme } from '@utils/ChromeStorageAPI';
 
 const ColorSchemei18n = (

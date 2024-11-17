@@ -49,6 +49,7 @@ declare global {
       parseEmbeddedArtwork: boolean;
       crossfade: number;
       preferYTMSuggest: boolean;
+      artworkRes: number;
 
       appID: string;
       language?: string;

@@ -39,7 +39,7 @@ module.exports = api => {
     };
   }
   return {
-    presets: ['module:metro-react-native-babel-preset'],
+    presets: ['babel-preset-expo'],
     plugins: [
       [
         'module-resolver',

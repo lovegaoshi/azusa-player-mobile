@@ -3,7 +3,8 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { StyleSheet, View, ScrollView } from 'react-native';
 
 import SkinSettings from './SkinSettings';
-import { SettingListItem, RenderSetting } from '../useRenderSetting';
+import { RenderSetting } from '../helpers/RenderSetting';
+import SettingListItem from '../helpers/SettingListItem';
 import { useNoxSetting } from '@stores/useApp';
 import SelectDarkModeButton from './SelectDarkModeButton';
 import NoWeebButton from './NoWeebButton';
