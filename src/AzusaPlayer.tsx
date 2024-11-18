@@ -32,9 +32,6 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { ScreenIcons } from '@enums/Icons';
 import NoxBottomTab from './components/bottomtab/NoxBottomTab';
 import NoxMiniPlayer from './components/miniplayer/View';
-import { BottomTabRouteIcons } from './enums/BottomTab';
-
-const SlidingDrawerRoutes = [BottomTabRouteIcons.music];
 
 const { LightTheme, DarkTheme } = adaptNavigationTheme({
   reactNavigationLight: NavigationDefaultTheme,
@@ -56,7 +53,6 @@ const AzusaPlayer = () => {
   const { t } = useTranslation();
   const Drawer = createDrawerNavigator();
   const playerStyle = useNoxSetting(state => state.playerStyle);
-  const route = useNoxSetting(state => state.bottomTabRoute);
   const defaultTheme = playerStyle.metaData.darkTheme
     ? CombinedDarkTheme
     : CombinedDefaultTheme;
