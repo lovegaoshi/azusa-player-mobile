@@ -103,7 +103,13 @@ export default ({ miniplayerHeight, opacity, onPress, expand }: Props) => {
 
   return (
     <TouchableWithoutFeedback onPress={onImagePress}>
-      <View>
+      <View
+        style={{
+          width,
+          height: width,
+          position: 'absolute',
+        }}
+      >
         <AnimatedExpoImage
           style={[
             {
