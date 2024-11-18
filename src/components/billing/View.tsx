@@ -3,11 +3,9 @@ import React, { useState } from 'react';
 import { Text, Button, ActivityIndicator } from 'react-native-paper';
 import { useTranslation } from 'react-i18next';
 import { Image } from 'expo-image';
-import Purchases from 'react-native-purchases';
 
 import useVIP, { checkGuardVIP, purchaseVIP } from '@hooks/useVIP';
 import { styles } from '../style';
-import logger from '@utils/Logger';
 
 interface LoadingChildrenProps {
   setLoading: React.Dispatch<React.SetStateAction<boolean>>;
@@ -40,24 +38,7 @@ const RevenueCatVIP = ({ setLoading }: LoadingChildrenProps) => {
   const { t } = useTranslation();
   const checkRevenueCatVIP = async () => {
     setLoading(true);
-    try {
-      const offerings = await Purchases.getOfferings();
-      if (
-        offerings.current !== null &&
-        offerings.current.availablePackages.length !== 0
-      ) {
-        const { customerInfo } = await Purchases.purchasePackage(
-          offerings.current.availablePackages[0],
-        );
-        if (
-          typeof customerInfo.entitlements.active['apm-pro'] !== 'undefined'
-        ) {
-          purchaseVIP();
-        }
-      }
-    } catch (e) {
-      logger.error(JSON.stringify(e));
-    }
+    purchaseVIP();
     setLoading(false);
   };
 
