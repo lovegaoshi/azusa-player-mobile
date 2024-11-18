@@ -2,11 +2,17 @@ import * as SecureStore from 'expo-secure-store';
 import { useEffect } from 'react';
 import Purchases from 'react-native-purchases';
 import { create } from 'zustand';
+import { initStripe } from '@stripe/stripe-react-native';
 
 import { isAndroid } from '@utils/RNUtils';
 import { getHasGuard } from '@utils/Bilibili/BiliUser';
-// eslint-disable-next-line import/no-unresolved
-import { APPSTORE, REVENUECAT_GOOGLE, REVENUECAT_STRIPE } from '@env';
+import {
+  APPSTORE,
+  REVENUECAT_GOOGLE,
+  REVENUECAT_STRIPE,
+  STRIPE_API_KEY,
+  // eslint-disable-next-line import/no-unresolved
+} from '@env';
 
 const VIPKey = 'APMVIP';
 enum VIPType {
@@ -65,7 +71,13 @@ export const useSetupVIP = () => {
   const vip = useVIP(state => state.VIP);
 
   const init = async () => {
+    console.log(revenueCatAPI());
     Purchases.configure({ apiKey: revenueCatAPI() });
+    if (!APPSTORE) {
+      initStripe({
+        publishableKey: STRIPE_API_KEY,
+      });
+    }
     checkVIP();
   };
 

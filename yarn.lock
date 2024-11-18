@@ -3960,6 +3960,20 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@stripe/stripe-react-native@npm:^0.39.0":
+  version: 0.39.0
+  resolution: "@stripe/stripe-react-native@npm:0.39.0"
+  peerDependencies:
+    expo: ">=46.0.9"
+    react: "*"
+    react-native: "*"
+  peerDependenciesMeta:
+    expo:
+      optional: true
+  checksum: 10c0/ab1efe510363c295d62a8b2ac99df2e22bc4d995bc76a414bb784fa053e7c0a75060aa7e00bb21c6b8863e487947fc4c286f4bbb049d92fd50fa450754d28ad9
+  languageName: node
+  linkType: hard
+
 "@tokenizer/token@npm:^0.3.0":
   version: 0.3.0
   resolution: "@tokenizer/token@npm:0.3.0"
@@ -5521,6 +5535,7 @@ __metadata:
     "@sharcoux/slider": "npm:8.0.5"
     "@shopify/flash-list": "npm:^1.7.2"
     "@shopify/react-native-skia": "npm:1.5.3"
+    "@stripe/stripe-react-native": "npm:^0.39.0"
     "@tsconfig/react-native": "npm:^3.0.5"
     "@types/base-64": "npm:^1.0.2"
     "@types/d3": "npm:^7.4.3"

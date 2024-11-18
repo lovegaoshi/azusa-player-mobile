@@ -47,6 +47,7 @@
     "@sharcoux/slider": "8.0.5",
     "@shopify/flash-list": "^1.7.2",
     "@shopify/react-native-skia": "1.5.3",
+    "@stripe/stripe-react-native": "^0.39.0",
     "axios": "^1.7.7",
     "base-64": "^1.0.0",
     "base64-js": "^1.5.1",
