@@ -5,7 +5,7 @@ import { logger } from '@utils/Logger';
  * as "authentication." returns the currently logged in bilibili username.
  * @returns dict.
  */
-const getUser = async () => {
+export const getUser = async () => {
   try {
     const val = await fetch('https://api.bilibili.com/x/web-interface/nav');
     const res = await val.json();

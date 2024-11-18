@@ -51,12 +51,12 @@ export default () => {
 
   const expand = () => {
     'worklet';
-    miniplayerHeight.value = withTiming(height, { duration: 500 });
+    miniplayerHeight.value = withTiming(height, { duration: 250 });
     artworkOpacity.value = withTiming(1);
   };
   const collapse = () => {
     'worklet';
-    miniplayerHeight.value = withTiming(MinPlayerHeight, { duration: 500 });
+    miniplayerHeight.value = withTiming(MinPlayerHeight, { duration: 250 });
     artworkOpacity.value = withTiming(1);
     runOnJS(setLrcVisible)(false);
   };
@@ -81,7 +81,7 @@ export default () => {
       return expand();
     }
     return (miniplayerHeight.value = withTiming(initHeight.value, {
-      duration: 500,
+      duration: 250,
     }));
   };
 
@@ -103,7 +103,7 @@ export default () => {
   });
   return (
     <GestureDetector gesture={lrcVisible ? disabledGesture : scrollDragGesture}>
-      <Animated.View style={[{ width: '100%', paddingTop: 5 }, animatedStyle]}>
+      <Animated.View style={[{ width: '100%', paddingTop: 3 }, animatedStyle]}>
         <View style={styles.rowView}>
           <PlayerTopInfo opacity={opacityVisible} collapse={collapse} />
           <TrackAlbumArt

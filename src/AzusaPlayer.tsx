@@ -105,9 +105,6 @@ const AzusaPlayer = () => {
             initialRouteName={NoxRoutes.PlayerHome}
             drawerContent={PlaylistDrawer}
             screenOptions={{
-              swipeEdgeWidth: SlidingDrawerRoutes.includes(route)
-                ? 800
-                : undefined,
               drawerType: 'slide',
               drawerStyle: {
                 borderTopRightRadius: 0,

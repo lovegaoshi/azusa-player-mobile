@@ -11,6 +11,7 @@ interface Props {
   trackHeight?: number;
   style?: ViewStyle;
   trackStyle?: ViewStyle;
+  enabled?: boolean;
 }
 export const SimpleProgressBar = ({
   thumbSize,
@@ -18,6 +19,7 @@ export const SimpleProgressBar = ({
   trackHeight,
   style,
   trackStyle,
+  enabled = true,
 }: Props) => {
   const { position, duration } = useProgress(200);
   const playerStyle = useNoxSetting(state => state.playerStyle);
@@ -35,6 +37,7 @@ export const SimpleProgressBar = ({
           ? undefined
           : playerStyle.customColors.progressThumbTintColor
       }
+      enabled={enabled}
       minimumTrackTintColor={playerStyle.colors.primary}
       maximumTrackTintColor={playerStyle.colors.secondaryContainer}
       onSlidingComplete={TrackPlayer.seekTo}
