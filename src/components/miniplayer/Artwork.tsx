@@ -1,19 +1,20 @@
-import { TouchableWithoutFeedback, Dimensions, View } from 'react-native';
+import { TouchableWithoutFeedback, Dimensions } from 'react-native';
 import Animated, {
   SharedValue,
   useAnimatedStyle,
   useDerivedValue,
 } from 'react-native-reanimated';
 import { useEffect, useState } from 'react';
-import { Image, useImage } from 'expo-image';
+import { useImage } from 'expo-image';
 
 import useActiveTrack from '@hooks/useActiveTrack';
 import { MinPlayerHeight } from './Constants';
 import { useNoxSetting } from '@stores/useApp';
 import { songResolveArtwork } from '@utils/mediafetch/resolveURL';
 import logger from '@utils/Logger';
-
-const AnimatedExpoImage = Animated.createAnimatedComponent(Image);
+import HorizontalCarousel from '@components/commonui/HorizontalCarousel';
+import { performSkipToNext, performSkipToPrevious } from '@hooks/useTPControls';
+import { playNextSong } from '@stores/playingList';
 
 interface Props extends NoxComponent.MiniplayerProps {
   opacity: SharedValue<number>;
@@ -23,6 +24,9 @@ interface Props extends NoxComponent.MiniplayerProps {
 
 export default ({ miniplayerHeight, opacity, onPress, expand }: Props) => {
   const { track } = useActiveTrack();
+  const [trackCarousel, setTrackCarousel] = useState<[string | undefined][]>(
+    [],
+  );
   const { hideCoverInMobile, artworkRes } = useNoxSetting(
     state => state.playerSetting,
   );
@@ -44,10 +48,6 @@ export default ({ miniplayerHeight, opacity, onPress, expand }: Props) => {
     return Math.min(miniplayerHeight.value - 15, width);
   });
 
-  const highResOpacity = useDerivedValue(() => {
-    return artworkWidth.value === width ? 1 : 0;
-  });
-
   const artworkScale = useDerivedValue(() => {
     return artworkWidth.value / width;
   });
@@ -56,9 +56,6 @@ export default ({ miniplayerHeight, opacity, onPress, expand }: Props) => {
   );
 
   const artworkTranslateY = useDerivedValue(() => {
-    return Math.min(95, 30 + (expandDiff.value - width) / 2);
-  });
-  const highResArtworkTranslateY = useDerivedValue(() => {
     return Math.min(95, 30 + (expandDiff.value - width) / 2);
   });
   const artworkTranslateX = useDerivedValue(() => {
@@ -81,13 +78,6 @@ export default ({ miniplayerHeight, opacity, onPress, expand }: Props) => {
     };
   });
 
-  const animatedHighResStyle = useAnimatedStyle(() => {
-    return {
-      opacity: highResOpacity.value,
-      transform: [{ translateY: highResArtworkTranslateY.value }],
-    };
-  });
-
   const onImagePress = () => {
     if (miniplayerHeight.value === MinPlayerHeight) {
       return expand();
@@ -99,43 +89,36 @@ export default ({ miniplayerHeight, opacity, onPress, expand }: Props) => {
 
   useEffect(() => {
     songResolveArtwork(track?.song)?.then(setOverwriteAlbumArt);
+    setTrackCarousel([
+      playNextSong(-1, false)?.cover,
+      track?.song.cover,
+      playNextSong(1, false)?.cover,
+    ]);
   }, [track]);
 
   return (
     <TouchableWithoutFeedback onPress={onImagePress}>
-      <View
-        style={{
-          width,
-          height: width,
-          position: 'absolute',
-        }}
+      <Animated.View
+        style={[
+          {
+            width,
+            height: width,
+            position: 'absolute',
+            overflow: 'hidden',
+          },
+          animatedStyle,
+        ]}
       >
-        <AnimatedExpoImage
-          style={[
-            {
-              width,
-              height: width,
-              position: 'absolute',
-            },
-            animatedStyle,
-          ]}
-          source={img}
+        <HorizontalCarousel
+          images={trackCarousel}
+          imgStyle={{ width, height: width }}
+          paddingVertical={150}
+          callback={i =>
+            i === -1 ? performSkipToNext() : performSkipToPrevious()
+          }
+          active={track !== undefined}
         />
-        {artworkRes !== 0 && (
-          <AnimatedExpoImage
-            style={[
-              {
-                width,
-                height: width,
-                position: 'absolute',
-                zIndex: 1,
-              },
-              animatedHighResStyle,
-            ]}
-            source={{ uri: imgURI }}
-          />
-        )}
-      </View>
+      </Animated.View>
     </TouchableWithoutFeedback>
   );
 };
