@@ -3616,6 +3616,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@revenuecat/purchases-js@npm:^0.12.1":
+  version: 0.12.1
+  resolution: "@revenuecat/purchases-js@npm:0.12.1"
+  dependencies:
+    "@stripe/stripe-js": "npm:^4.9.0"
+    http-status-codes: "npm:^2.3.0"
+  checksum: 10c0/8cb0e1e593a9409516c70e3ce0668a9546a02590ebd64b41ae451edfc83295fe243b3b4a0b2a19a47ee623e1995b247cc1bb5b600220b9ab060488b8d8835bbe
+  languageName: node
+  linkType: hard
+
 "@revenuecat/purchases-typescript-internal@npm:13.9.0":
   version: 13.9.0
   resolution: "@revenuecat/purchases-typescript-internal@npm:13.9.0"
@@ -3957,6 +3967,13 @@ __metadata:
   dependencies:
     "@sinonjs/commons": "npm:^3.0.0"
   checksum: 10c0/2e2fb6cc57f227912814085b7b01fede050cd4746ea8d49a1e44d5a0e56a804663b0340ae2f11af7559ea9bf4d087a11f2f646197a660ea3cb04e19efc04aa63
+  languageName: node
+  linkType: hard
+
+"@stripe/stripe-js@npm:^4.9.0":
+  version: 4.10.0
+  resolution: "@stripe/stripe-js@npm:4.10.0"
+  checksum: 10c0/d437c367b753b53158fe9070885424821787f627d74a1f3b526feb51614be3e26d042b8dc6827ee59e8288a94e08dd852f6011106ea28d082066b1de89aa4ba1
   languageName: node
   linkType: hard
 
@@ -5531,6 +5548,7 @@ __metadata:
     "@react-navigation/drawer": "npm:^7.0.3"
     "@react-navigation/native": "npm:^7.0.2"
     "@react-navigation/native-stack": "npm:^7.0.2"
+    "@revenuecat/purchases-js": "npm:^0.12.1"
     "@sentry/react-native": "npm:^6.1.0"
     "@sharcoux/slider": "npm:8.0.5"
     "@shopify/flash-list": "npm:^1.7.2"
@@ -10069,6 +10087,13 @@ __metadata:
     agent-base: "npm:^7.1.0"
     debug: "npm:^4.3.4"
   checksum: 10c0/4207b06a4580fb85dd6dff521f0abf6db517489e70863dca1a0291daa7f2d3d2d6015a57bd702af068ea5cf9f1f6ff72314f5f5b4228d299c0904135d2aef921
+  languageName: node
+  linkType: hard
+
+"http-status-codes@npm:^2.3.0":
+  version: 2.3.0
+  resolution: "http-status-codes@npm:2.3.0"
+  checksum: 10c0/c2412188929e8eed6623eef468c62d0c3c082919c03e9b74fd79cfd060d11783dba44603e38a3cee52d26563fe32005913eaf6120aa8ba907da1238f3eaad5fe
   languageName: node
   linkType: hard
 
