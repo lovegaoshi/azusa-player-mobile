@@ -5,14 +5,16 @@ import Animated, {
   useDerivedValue,
 } from 'react-native-reanimated';
 import { useEffect, useState } from 'react';
-import { Image, useImage } from 'expo-image';
+import { useImage } from 'expo-image';
 
 import useActiveTrack from '@hooks/useActiveTrack';
 import { MinPlayerHeight } from './Constants';
 import { useNoxSetting } from '@stores/useApp';
 import { songResolveArtwork } from '@utils/mediafetch/resolveURL';
 import logger from '@utils/Logger';
-import { styles } from '../style';
+import HorizontalCarousel from '@components/commonui/HorizontalCarousel';
+import { performSkipToNext, performSkipToPrevious } from '@hooks/useTPControls';
+import { playNextSong } from '@stores/playingList';
 
 interface Props extends NoxComponent.MiniplayerProps {
   opacity: SharedValue<number>;
@@ -22,6 +24,9 @@ interface Props extends NoxComponent.MiniplayerProps {
 
 export default ({ miniplayerHeight, opacity, onPress, expand }: Props) => {
   const { track } = useActiveTrack();
+  const [trackCarousel, setTrackCarousel] = useState<[string | undefined][]>(
+    [],
+  );
   const { hideCoverInMobile, artworkRes } = useNoxSetting(
     state => state.playerSetting,
   );
@@ -84,6 +89,11 @@ export default ({ miniplayerHeight, opacity, onPress, expand }: Props) => {
 
   useEffect(() => {
     songResolveArtwork(track?.song)?.then(setOverwriteAlbumArt);
+    setTrackCarousel([
+      playNextSong(-1, false)?.cover,
+      track?.song.cover,
+      playNextSong(1, false)?.cover,
+    ]);
   }, [track]);
 
   return (
@@ -99,7 +109,15 @@ export default ({ miniplayerHeight, opacity, onPress, expand }: Props) => {
           animatedStyle,
         ]}
       >
-        <Image style={styles.flex} source={img} />
+        <HorizontalCarousel
+          images={trackCarousel}
+          imgStyle={{ width, height: width }}
+          paddingVertical={150}
+          callback={i =>
+            i === -1 ? performSkipToNext() : performSkipToPrevious()
+          }
+          active={track !== undefined}
+        />
       </Animated.View>
     </TouchableWithoutFeedback>
   );

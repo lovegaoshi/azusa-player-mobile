@@ -48,6 +48,18 @@ export default ({
   // this number is contrained to 0, 1, 2
   const carouselIndex = useSharedValue(1);
 
+  // priming the carousel src index that the active carousel always take src=1;
+  // left to it is 0; right to it is 2. so i can keep resetting images while in order
+  const getSrcIndex = (index = 1) => {
+    if (index === carouselIndex.value) {
+      return 1;
+    }
+    if (index === incIndex(carouselIndex.value, 3)) {
+      return 2;
+    }
+    return 0;
+  };
+
   const imgWidth = (imgStyle?.width as number) + paddingVertical;
   const defaultGetImgSource = (i: number, arr = images) => arr[i];
   const resolveImgSource = getImgSource ?? defaultGetImgSource;
@@ -126,15 +138,15 @@ export default ({
       <View>
         <AnimatedExpoImage
           style={[imgStyle, carousel1Style]}
-          source={{ uri: resolveImgSource(0, images) }}
+          source={{ uri: resolveImgSource(getSrcIndex(0), images) }}
         />
         <AnimatedExpoImage
           style={[imgStyle, carousel2Style]}
-          source={{ uri: resolveImgSource(1, images) }}
+          source={{ uri: resolveImgSource(getSrcIndex(1), images) }}
         />
         <AnimatedExpoImage
           style={[imgStyle, carousel3Style]}
-          source={{ uri: resolveImgSource(2, images) }}
+          source={{ uri: resolveImgSource(getSrcIndex(2), images) }}
         />
       </View>
     </GestureDetector>
