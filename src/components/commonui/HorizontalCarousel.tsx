@@ -30,6 +30,7 @@ interface Props {
   imgStyle?: ViewStyle;
   paddingVertical?: number;
   callback?: (direction: number, prevIndex: number) => void;
+  active?: boolean;
 }
 
 /**
@@ -42,6 +43,7 @@ export default ({
   imgStyle,
   paddingVertical = 0,
   callback = () => undefined,
+  active = true,
 }: Props) => {
   // this number is contrained to 0, 1, 2
   const carouselIndex = useSharedValue(1);
@@ -80,6 +82,7 @@ export default ({
   const scrollDragGesture = useMemo(
     () =>
       Gesture.Pan()
+        .enabled(active)
         // swipe left and right
         .activeOffsetX([-5, 5])
         .failOffsetY([-5, 5])
@@ -87,7 +90,7 @@ export default ({
           activeCarouselTX.value = e.translationX;
         })
         .onEnd(snapToCarousel),
-    [],
+    [active],
   );
 
   const carousel1Style = useAnimatedStyle(() => ({
