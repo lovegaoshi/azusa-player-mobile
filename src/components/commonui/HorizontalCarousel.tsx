@@ -1,0 +1,139 @@
+import { View, ViewStyle } from 'react-native';
+import Animated, {
+  runOnJS,
+  useAnimatedStyle,
+  useSharedValue,
+  withTiming,
+} from 'react-native-reanimated';
+import { useMemo } from 'react';
+import { Image } from 'expo-image';
+import { GestureDetector, Gesture } from 'react-native-gesture-handler';
+import _ from 'lodash';
+
+const AnimatedExpoImage = Animated.createAnimatedComponent(Image);
+
+const incIndex = (index: number, len: number, next = true) => {
+  'worklet';
+  const nextIndex = index + (next ? 1 : -1);
+  if (nextIndex >= len) {
+    return 0;
+  }
+  if (nextIndex < 0) {
+    return len - 1;
+  }
+  return nextIndex;
+};
+
+interface Props {
+  images: any[];
+  getImgSource?: (i: number, arr: any[]) => string;
+  imgStyle?: ViewStyle;
+  paddingVertical?: number;
+  callback?: (direction: number, prevIndex: number) => void;
+}
+
+/**
+ * carousel is made up by 3 animated.View;
+ * carouselIndex tracks which one is active
+ */
+export default ({
+  images,
+  getImgSource,
+  imgStyle,
+  paddingVertical = 0,
+  callback = () => undefined,
+}: Props) => {
+  // this number is contrained to 0, 1, 2
+  const carouselIndex = useSharedValue(1);
+
+  const imgWidth = (imgStyle?.width as number) + paddingVertical;
+  const defaultGetImgSource = (i: number, arr = images) => arr[i];
+  const resolveImgSource = getImgSource ?? defaultGetImgSource;
+  const activeCarouselX = useSharedValue(0);
+  const activeCarouselTX = useSharedValue(0);
+  const carouselXs = useSharedValue([-imgWidth, 0, imgWidth]);
+
+  const snapToCarousel = () => {
+    'worklet';
+    if (Math.abs(activeCarouselTX.value) > imgWidth * 0.2) {
+      const direction = Math.sign(activeCarouselTX.value);
+      const prevIndex = incIndex(carouselIndex.value, 3, direction === 1);
+      carouselIndex.value = incIndex(carouselIndex.value, 3, direction === -1);
+      activeCarouselTX.value = withTiming(
+        imgWidth * direction,
+        { duration: 100 },
+        () => {
+          activeCarouselX.value += activeCarouselTX.value;
+          activeCarouselTX.value = 0;
+          carouselXs.modify(v => {
+            v[prevIndex] = v[carouselIndex.value] - imgWidth * direction;
+            return v;
+          });
+          runOnJS(callback)(direction, prevIndex);
+        },
+      );
+      return;
+    }
+    activeCarouselTX.value = withTiming(0, { duration: 100 });
+  };
+
+  const scrollDragGesture = useMemo(
+    () =>
+      Gesture.Pan()
+        // swipe left and right
+        .activeOffsetX([-5, 5])
+        .failOffsetY([-5, 5])
+        .onChange(e => {
+          activeCarouselTX.value = e.translationX;
+        })
+        .onEnd(snapToCarousel),
+    [],
+  );
+
+  const carousel1Style = useAnimatedStyle(() => ({
+    transform: [
+      {
+        translateX:
+          activeCarouselX.value + activeCarouselTX.value + carouselXs.value[0],
+      },
+    ],
+    position: 'absolute',
+  }));
+  const carousel2Style = useAnimatedStyle(() => ({
+    transform: [
+      {
+        translateX:
+          activeCarouselX.value + activeCarouselTX.value + carouselXs.value[1],
+      },
+    ],
+    position: 'absolute',
+  }));
+  const carousel3Style = useAnimatedStyle(() => ({
+    transform: [
+      {
+        translateX:
+          activeCarouselX.value + activeCarouselTX.value + carouselXs.value[2],
+      },
+    ],
+    position: 'absolute',
+  }));
+
+  return (
+    <GestureDetector gesture={scrollDragGesture}>
+      <View>
+        <AnimatedExpoImage
+          style={[imgStyle, carousel1Style]}
+          source={{ uri: resolveImgSource(0, images) }}
+        />
+        <AnimatedExpoImage
+          style={[imgStyle, carousel2Style]}
+          source={{ uri: resolveImgSource(1, images) }}
+        />
+        <AnimatedExpoImage
+          style={[imgStyle, carousel3Style]}
+          source={{ uri: resolveImgSource(2, images) }}
+        />
+      </View>
+    </GestureDetector>
+  );
+};
