@@ -101,7 +101,7 @@ export default () => {
             backgroundColor:
               currentPlaylist.id === item
                 ? // this is a special high contrast color than primaryContainer.
-                  (playerStyle.customColors.playlistDrawerBackgroundColor ??
+                (playerStyle.customColors.playlistDrawerBackgroundColor ??
                   playerStyle.colors.primaryContainer)
                 : undefined,
           },
@@ -150,9 +150,9 @@ export default () => {
           {
             backgroundColor:
               currentPlaylist.id ===
-              playlists[StorageKeys.SEARCH_PLAYLIST_KEY]?.id
+                playlists[StorageKeys.SEARCH_PLAYLIST_KEY]?.id
                 ? // this is a special high contrast color than primaryContainer.
-                  (playerStyle.customColors.playlistDrawerBackgroundColor ??
+                (playerStyle.customColors.playlistDrawerBackgroundColor ??
                   playerStyle.colors.primaryContainer)
                 : undefined,
           },
@@ -167,7 +167,7 @@ export default () => {
           }
           leadColor={
             currentPlayingList.id ===
-            playlists[StorageKeys.SEARCH_PLAYLIST_KEY].id
+              playlists[StorageKeys.SEARCH_PLAYLIST_KEY].id
               ? playerStyle.colors.primary
               : undefined
           }
@@ -190,6 +190,7 @@ export default () => {
             copy.splice(toIndex, 0, removed[0]!);
             setPlaylistIds(copy);
           }}
+          extraData={[currentPlaylist.id, currentPlayingList.id]}
         />
       </View>
       <View style={styles.bottomInfo}>

@@ -1,5 +1,5 @@
 diff --git a/node_modules/react-native-flashdrag-list/src/FlashDragList.tsx b/node_modules/react-native-flashdrag-list/src/FlashDragList.tsx
-index 5dc1689..0c42b1f 100644
+index 5dc1689..12ea7b8 100644
 --- a/node_modules/react-native-flashdrag-list/src/FlashDragList.tsx
 +++ b/node_modules/react-native-flashdrag-list/src/FlashDragList.tsx
 @@ -21,6 +21,7 @@ import Animated, {
@@ -10,7 +10,7 @@ index 5dc1689..0c42b1f 100644
  } from 'react-native-reanimated';
  import ItemWrapper from './ItemWrapper';
  
-@@ -81,35 +82,32 @@ const FlashDragList: FunctionComponent<Props> = (props) => {
+@@ -81,39 +82,36 @@ const FlashDragList: FunctionComponent<Props> = (props) => {
    const panScroll = useSharedValue(0);
    const panOffset = useSharedValue(0);
  
@@ -65,12 +65,17 @@ index 5dc1689..0c42b1f 100644
 +    fromIndexRef.current = fromIndex;
 +    toIndexRef.current = toIndex;
 +    zoomOnActive.value = withTiming(1);
-+    if(changed) {
++    if (changed) {
 +      setCallOnSort(true);
 +    }
    };
-   
+ 
    useEffect(() => {
+-    if(!callOnSort || fromIndexRef.current < 0 || toIndexRef.current < 0)
++    if (!callOnSort || fromIndexRef.current < 0 || toIndexRef.current < 0)
+       return
+     avoidDataUpdate.current = false;
+     props.onSort?.(fromIndexRef.current, toIndexRef.current);
 @@ -124,6 +122,7 @@ const FlashDragList: FunctionComponent<Props> = (props) => {
      activeIndex.value = index;
      setActiveIndexState(index);
@@ -79,8 +84,14 @@ index 5dc1689..0c42b1f 100644
    }, []);
  
    useEffect(() => {
-@@ -139,7 +138,7 @@ const FlashDragList: FunctionComponent<Props> = (props) => {
-                 autoScrollAcc.value,
+@@ -135,11 +134,11 @@ const FlashDragList: FunctionComponent<Props> = (props) => {
+             offset:
+               scroll.value +
+               autoScrollSpeed.value *
+-                (props.autoScrollSpeed ?? 1) *
+-                autoScrollAcc.value,
++              (props.autoScrollSpeed ?? 1) *
++              autoScrollAcc.value,
              animated: false,
            });
 -          autoScrollAcc.value = Math.min(6, autoScrollAcc.value + 0.01);
@@ -96,14 +107,34 @@ index 5dc1689..0c42b1f 100644
      .onTouchesMove((_evt, stateManager) => {
        if (!isIOS) return;
        if (active || activeIndexState >= 0 || activeIndex.value >= 0)
-@@ -240,6 +240,7 @@ const FlashDragList: FunctionComponent<Props> = (props) => {
+@@ -213,8 +213,9 @@ const FlashDragList: FunctionComponent<Props> = (props) => {
+   const extraData = useMemo(
+     () => ({
+       active,
++      ...Object.assign({}, extraData)
+     }),
+-    [active]
++    [active, ...props.extraData]
+   );
+ 
+   const renderItem = ({ item, index }: any) => {
+@@ -240,6 +241,7 @@ const FlashDragList: FunctionComponent<Props> = (props) => {
          {
            translateY: panAbs.value - itemsSize / 2,
          },
-+        {scale: zoomOnActive.value}
++        { scale: zoomOnActive.value }
        ],
      };
    }, [itemsSize]);
+@@ -291,7 +293,7 @@ const FlashDragList: FunctionComponent<Props> = (props) => {
+               data[Math.max(0, activeIndexState)],
+               Math.max(0, activeIndexState),
+               true,
+-              () => {}
++              () => { }
+             )}
+           </Animated.View>
+         )}
 diff --git a/node_modules/react-native-flashdrag-list/src/ItemWrapper.tsx b/node_modules/react-native-flashdrag-list/src/ItemWrapper.tsx
 index ceede04..ae4d9ef 100644
 --- a/node_modules/react-native-flashdrag-list/src/ItemWrapper.tsx

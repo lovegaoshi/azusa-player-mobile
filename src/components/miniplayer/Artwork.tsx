@@ -112,7 +112,7 @@ export default ({ miniplayerHeight, opacity, onPress, expand }: Props) => {
         <HorizontalCarousel
           images={trackCarousel}
           imgStyle={{ width, height: width }}
-          paddingVertical={150}
+          paddingVertical={100}
           callback={i =>
             i === -1 ? performSkipToNext() : performSkipToPrevious()
           }
