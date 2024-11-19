@@ -1,4 +1,4 @@
-import { View, ViewStyle } from 'react-native';
+import { View, ImageStyle } from 'react-native';
 import Animated, {
   runOnJS,
   useAnimatedStyle,
@@ -27,7 +27,7 @@ const incIndex = (index: number, len: number, next = true) => {
 interface Props {
   images: any[];
   getImgSource?: (i: number, arr: any[]) => string;
-  imgStyle?: ViewStyle;
+  imgStyle?: ImageStyle;
   paddingVertical?: number;
   callback?: (direction: number, prevIndex: number) => void;
   active?: boolean;
