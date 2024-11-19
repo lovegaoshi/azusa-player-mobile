@@ -24,9 +24,7 @@ interface Props extends NoxComponent.MiniplayerProps {
 
 export default ({ miniplayerHeight, opacity, onPress, expand }: Props) => {
   const { track } = useActiveTrack();
-  const [trackCarousel, setTrackCarousel] = useState<[string | undefined][]>(
-    [],
-  );
+  const [trackCarousel, setTrackCarousel] = useState<any[]>([]);
   const { hideCoverInMobile, artworkRes } = useNoxSetting(
     state => state.playerSetting,
   );
@@ -87,13 +85,16 @@ export default ({ miniplayerHeight, opacity, onPress, expand }: Props) => {
     }
   };
 
+  const refreshImageCarousel = () =>
+    setTrackCarousel([
+      { uri: playNextSong(-1, false)?.cover },
+      { uri: track?.song?.cover },
+      { uri: playNextSong(1, false)?.cover },
+    ]);
+
   useEffect(() => {
     songResolveArtwork(track?.song)?.then(setOverwriteAlbumArt);
-    setTrackCarousel([
-      playNextSong(-1, false)?.cover,
-      track?.song.cover,
-      playNextSong(1, false)?.cover,
-    ]);
+    refreshImageCarousel();
   }, [track]);
 
   return (
@@ -117,6 +118,7 @@ export default ({ miniplayerHeight, opacity, onPress, expand }: Props) => {
             i === -1 ? performSkipToNext() : performSkipToPrevious()
           }
           active={track !== undefined}
+          mainImg={img}
         />
       </Animated.View>
     </TouchableWithoutFeedback>
