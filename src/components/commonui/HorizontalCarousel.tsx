@@ -5,10 +5,9 @@ import Animated, {
   useSharedValue,
   withTiming,
 } from 'react-native-reanimated';
-import { useMemo } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { Image } from 'expo-image';
 import { GestureDetector, Gesture } from 'react-native-gesture-handler';
-import _ from 'lodash';
 
 const AnimatedExpoImage = Animated.createAnimatedComponent(Image);
 
@@ -31,7 +30,6 @@ interface Props {
   paddingVertical?: number;
   callback?: (direction: number, prevIndex: number) => void;
   active?: boolean;
-  mainImg?: any;
 }
 
 /**
@@ -45,22 +43,10 @@ export default ({
   paddingVertical = 0,
   callback = () => undefined,
   active = true,
-  mainImg,
 }: Props) => {
   // this number is contrained to 0, 1, 2
   const carouselIndex = useSharedValue(1);
-
-  // priming the carousel src index that the active carousel always take src=1;
-  // left to it is 0; right to it is 2. so i can keep resetting images while in order
-  const getSrcIndex = (index = 1) => {
-    if (index === carouselIndex.value) {
-      return 1;
-    }
-    if (index === incIndex(carouselIndex.value, 3)) {
-      return 2;
-    }
-    return 0;
-  };
+  const [mImages, setMImages] = useState(images);
 
   const imgWidth = (imgStyle?.width as number) + paddingVertical;
   const defaultGetImgSource = (i: number, arr = images) => arr[i];
@@ -92,9 +78,6 @@ export default ({
     }
     activeCarouselTX.value = withTiming(0, { duration: 100 });
   };
-
-  const getMainImg = (i: number) =>
-    i === carouselIndex.value ? mainImg : undefined;
 
   const scrollDragGesture = useMemo(
     () =>
@@ -138,20 +121,28 @@ export default ({
     position: 'absolute',
   }));
 
+  useEffect(() => {
+    const newImages = [];
+    newImages[carouselIndex.value] = images[1];
+    newImages[incIndex(carouselIndex.value, 3)] = images[2];
+    newImages[incIndex(carouselIndex.value, 3, false)] = images[0];
+    setMImages(newImages);
+  }, [images]);
+
   return (
     <GestureDetector gesture={scrollDragGesture}>
       <View>
         <AnimatedExpoImage
           style={[imgStyle, carousel1Style]}
-          source={getMainImg(0) ?? resolveImgSource(getSrcIndex(0), images)}
+          source={resolveImgSource(0, mImages)}
         />
         <AnimatedExpoImage
           style={[imgStyle, carousel2Style]}
-          source={getMainImg(1) ?? resolveImgSource(getSrcIndex(1), images)}
+          source={resolveImgSource(1, mImages)}
         />
         <AnimatedExpoImage
           style={[imgStyle, carousel3Style]}
-          source={getMainImg(2) ?? resolveImgSource(getSrcIndex(2), images)}
+          source={resolveImgSource(2, mImages)}
         />
       </View>
     </GestureDetector>

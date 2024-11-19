@@ -94,8 +94,9 @@ export default ({ miniplayerHeight, opacity, onPress, expand }: Props) => {
 
   useEffect(() => {
     songResolveArtwork(track?.song)?.then(setOverwriteAlbumArt);
-    refreshImageCarousel();
   }, [track]);
+
+  useEffect(() => refreshImageCarousel(), [img]);
 
   return (
     <TouchableWithoutFeedback onPress={onImagePress}>
@@ -118,7 +119,6 @@ export default ({ miniplayerHeight, opacity, onPress, expand }: Props) => {
             i === -1 ? performSkipToNext() : performSkipToPrevious()
           }
           active={track !== undefined}
-          mainImg={img}
         />
       </Animated.View>
     </TouchableWithoutFeedback>
