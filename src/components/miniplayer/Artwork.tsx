@@ -88,7 +88,7 @@ export default ({ miniplayerHeight, opacity, onPress, expand }: Props) => {
   const refreshImageCarousel = () =>
     setTrackCarousel([
       { uri: playNextSong(-1, false)?.cover },
-      { uri: track?.song?.cover },
+      img,
       { uri: playNextSong(1, false)?.cover },
     ]);
 

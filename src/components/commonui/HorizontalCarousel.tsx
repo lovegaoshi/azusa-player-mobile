@@ -30,6 +30,7 @@ interface Props {
   paddingVertical?: number;
   callback?: (direction: number, prevIndex: number) => void;
   active?: boolean;
+  throttle?: boolean;
 }
 
 /**
@@ -43,10 +44,12 @@ export default ({
   paddingVertical = 0,
   callback = () => undefined,
   active = true,
+  throttle = true,
 }: Props) => {
   // this number is contrained to 0, 1, 2
   const carouselIndex = useSharedValue(1);
   const [mImages, setMImages] = useState(images);
+  const [throttling, setThrottling] = useState(false);
 
   const imgWidth = (imgStyle?.width as number) + paddingVertical;
   const defaultGetImgSource = (i: number, arr = images) => arr[i];
@@ -54,6 +57,12 @@ export default ({
   const activeCarouselX = useSharedValue(0);
   const activeCarouselTX = useSharedValue(0);
   const carouselXs = useSharedValue([-imgWidth, 0, imgWidth]);
+
+  const toggleThrottle = (to = true) => {
+    if (throttle) {
+      setThrottling(to);
+    }
+  };
 
   const snapToCarousel = () => {
     'worklet';
@@ -72,6 +81,7 @@ export default ({
             return v;
           });
           runOnJS(callback)(direction, prevIndex);
+          runOnJS(toggleThrottle)(true);
         },
       );
       return;
@@ -82,7 +92,7 @@ export default ({
   const scrollDragGesture = useMemo(
     () =>
       Gesture.Pan()
-        .enabled(active)
+        .enabled(active && !throttling)
         // swipe left and right
         .activeOffsetX([-5, 5])
         .failOffsetY([-5, 5])
@@ -127,6 +137,8 @@ export default ({
     newImages[incIndex(carouselIndex.value, 3)] = images[2];
     newImages[incIndex(carouselIndex.value, 3, false)] = images[0];
     setMImages(newImages);
+    toggleThrottle(false);
+    console.log('APM', newImages);
   }, [images]);
 
   return (
