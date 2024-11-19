@@ -50,6 +50,7 @@ declare global {
       crossfade: number;
       preferYTMSuggest: boolean;
       artworkRes: number;
+      artworkCarousel: boolean;
 
       appID: string;
       language?: string;

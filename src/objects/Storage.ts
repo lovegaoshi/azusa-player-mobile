@@ -49,6 +49,7 @@ export const DefaultSetting: NoxStorage.PlayerSettingDict = {
   crossfade: 0,
   preferYTMSuggest: true,
   artworkRes: 0,
+  artworkCarousel: false,
 
   appID: AppID,
   language: undefined,

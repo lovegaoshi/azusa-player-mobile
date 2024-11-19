@@ -130,6 +130,8 @@
     "prefetchTrackDesc": "Prefetch the next track (only works when cache is enabled)",
     "chatGPTResolveSongNameName": "ChatGPT on Songs",
     "chatGPTResolveSongNameDesc": "TODO: Use chatGPT to resolve song names",
+    "artworkCarouselName": "artwork carousel",
+    "artworkCarouselDesc": "enable artwork carousel (swipe to skip; bugs)",
     "preferYTMSuggestName": "Prefers YTM suggest",
     "preferYTMSuggestDesc": "prefers YTM suggest instead of related videos",
     "useSuggestionName": "BiliSuggestion",
