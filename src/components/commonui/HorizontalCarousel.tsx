@@ -31,6 +31,7 @@ interface Props {
   paddingVertical?: number;
   callback?: (direction: number, prevIndex: number) => void;
   active?: boolean;
+  mainImg?: any;
 }
 
 /**
@@ -44,6 +45,7 @@ export default ({
   paddingVertical = 0,
   callback = () => undefined,
   active = true,
+  mainImg,
 }: Props) => {
   // this number is contrained to 0, 1, 2
   const carouselIndex = useSharedValue(1);
@@ -90,6 +92,9 @@ export default ({
     }
     activeCarouselTX.value = withTiming(0, { duration: 100 });
   };
+
+  const getMainImg = (i: number) =>
+    i === carouselIndex.value ? mainImg : undefined;
 
   const scrollDragGesture = useMemo(
     () =>
@@ -138,15 +143,15 @@ export default ({
       <View>
         <AnimatedExpoImage
           style={[imgStyle, carousel1Style]}
-          source={{ uri: resolveImgSource(getSrcIndex(0), images) }}
+          source={getMainImg(0) ?? resolveImgSource(getSrcIndex(0), images)}
         />
         <AnimatedExpoImage
           style={[imgStyle, carousel2Style]}
-          source={{ uri: resolveImgSource(getSrcIndex(1), images) }}
+          source={getMainImg(1) ?? resolveImgSource(getSrcIndex(1), images)}
         />
         <AnimatedExpoImage
           style={[imgStyle, carousel3Style]}
-          source={{ uri: resolveImgSource(getSrcIndex(2), images) }}
+          source={getMainImg(2) ?? resolveImgSource(getSrcIndex(2), images)}
         />
       </View>
     </GestureDetector>
