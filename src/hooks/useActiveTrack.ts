@@ -1,6 +1,9 @@
-import React from 'react';
 import { create } from 'zustand';
-import TrackPlayer, { Track, useActiveTrack } from 'react-native-track-player';
+import TrackPlayer, {
+  Track,
+  useTrackPlayerEvents,
+  Event,
+} from 'react-native-track-player';
 
 interface TrackStore {
   track: Track | undefined;
@@ -22,13 +25,16 @@ export const useTrackStore = create<TrackStore>((set, get) => ({
 }));
 
 const useTrack = () => {
-  const activeTrack = useActiveTrack();
-  const track = useTrackStore(s => s.track);
   const setTrack = useTrackStore(s => s.setTrack);
 
-  React.useEffect(() => setTrack(activeTrack), [activeTrack]);
+  useTrackPlayerEvents(
+    [Event.PlaybackActiveTrackChanged],
+    async ({ track }) => {
+      setTrack(track ?? undefined);
+    },
+  );
 
-  return { track };
+  return {};
 };
 
 export default useTrack;
