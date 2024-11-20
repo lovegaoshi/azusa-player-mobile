@@ -14,7 +14,7 @@ import Animated, {
 import { fadePause } from '@utils/RNTPUtils';
 import useTPControls from '@hooks/useTPControls';
 import { styles } from '../style';
-import useActiveTrack from '@hooks/useActiveTrack';
+import { useTrackStore } from '@hooks/useActiveTrack';
 import { MinPlayerHeight } from './Constants';
 import { useNoxSetting } from '@stores/useApp';
 
@@ -26,7 +26,7 @@ const iconContainerStyle = {
 const DoublePlayerHeight = MinPlayerHeight * 1.2;
 
 const TrackInfo = () => {
-  const { track } = useActiveTrack();
+  const track = useTrackStore(s => s.track);
   const playerStyle = useNoxSetting(state => state.playerStyle);
 
   return (

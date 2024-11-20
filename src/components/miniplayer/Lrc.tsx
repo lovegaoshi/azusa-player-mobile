@@ -4,7 +4,7 @@ import { useFocusEffect } from '@react-navigation/native';
 import { activateKeepAwakeAsync, deactivateKeepAwake } from 'expo-keep-awake';
 import { useCallback } from 'react';
 
-import useActiveTrack from '@hooks/useActiveTrack';
+import { useTrackStore } from '@hooks/useActiveTrack';
 import { LyricView } from '../player/Lyric';
 import { useNoxSetting } from '@stores/useApp';
 
@@ -14,7 +14,7 @@ interface Props extends NoxComponent.OpacityProps {
 }
 
 export default ({ visible, onPress, opacity }: Props) => {
-  const { track } = useActiveTrack();
+  const track = useTrackStore(s => s.track);
   const dimension = Dimensions.get('window');
   const { screenAlwaysWake } = useNoxSetting(state => state.playerSetting);
 

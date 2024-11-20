@@ -45,9 +45,6 @@ interface NoxSetting {
 
   gestureMode: boolean;
   setGestureMode: (val: boolean) => void;
-  // TODO: fix type
-  updateTrack: (metadata: any) => void;
-  setUpdateTrack: (val: () => void) => void;
   appRefresh: boolean;
   setAppRefresh: () => void;
   playlistSearchAutoFocus: boolean;
@@ -162,9 +159,6 @@ export const useNoxSetting = create<NoxSetting>((set, get) => ({
 
   gestureMode: true,
   setGestureMode: val => set({ gestureMode: val }),
-
-  updateTrack: () => undefined,
-  setUpdateTrack: updateTrack => set({ updateTrack }),
 
   appRefresh: false,
   setAppRefresh: () => set({ appRefresh: true }),

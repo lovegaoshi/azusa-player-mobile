@@ -7,7 +7,7 @@ import Animated, {
 import { useEffect, useState } from 'react';
 import { Image, useImage } from 'expo-image';
 
-import useActiveTrack from '@hooks/useActiveTrack';
+import { useTrackStore } from '@hooks/useActiveTrack';
 import { MinPlayerHeight } from './Constants';
 import { useNoxSetting } from '@stores/useApp';
 import { songResolveArtwork } from '@utils/mediafetch/resolveURL';
@@ -24,7 +24,7 @@ interface Props extends NoxComponent.MiniplayerProps {
 }
 
 export default ({ miniplayerHeight, opacity, onPress, expand }: Props) => {
-  const { track } = useActiveTrack();
+  const track = useTrackStore(s => s.track);
   const [trackCarousel, setTrackCarousel] = useState<any[]>([]);
   const { hideCoverInMobile, artworkRes, artworkCarousel } = useNoxSetting(
     state => state.playerSetting,

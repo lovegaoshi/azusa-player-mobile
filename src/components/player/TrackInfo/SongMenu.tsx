@@ -11,6 +11,7 @@ import useSongOperations from '@hooks/useSongOperations';
 import { addR128Gain, getR128Gain } from '@utils/ffmpeg/r128Store';
 import ABSliderMenu from './ABSliderMenu';
 import usePlayback from '@hooks/usePlayback';
+import { useTrackStore } from '@hooks/useActiveTrack';
 
 enum Icons {
   SEND_TO = 'playlist-plus',
@@ -44,7 +45,7 @@ export default ({
   const { t } = useTranslation();
   const currentPlaylist = useNoxSetting(state => state.currentPlayingList);
   const getPlaylist = useNoxSetting(state => state.getPlaylist);
-  const updateTrack = useNoxSetting(state => state.updateTrack);
+  const updateTrack = useTrackStore(state => state.updateTrack);
 
   const playlistCRUD = usePlaylistCRUD();
   const { updateSongIndex, updateSongMetadata } = playlistCRUD;

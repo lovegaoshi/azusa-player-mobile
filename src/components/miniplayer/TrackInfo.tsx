@@ -9,7 +9,7 @@ import { useNoxSetting } from '@stores/useApp';
 import NoxPlayingList from '@stores/playingList';
 import SongMenuButton from '@components/player/TrackInfo/SongMenuButton';
 import FavReloadButton from '@components/player/TrackInfo/FavReloadButton';
-import useActiveTrack from '@hooks/useActiveTrack';
+import { useTrackStore } from '@hooks/useActiveTrack';
 import { SongTitle } from '@components/player/TrackInfo/TrackInfoTemplate';
 
 interface Props extends NoxComponent.OpacityProps {
@@ -17,7 +17,7 @@ interface Props extends NoxComponent.OpacityProps {
 }
 
 export default ({ opacity, style, artworkOpacity }: Props) => {
-  const { track } = useActiveTrack();
+  const track = useTrackStore(s => s.track);
   const playerStyle = useNoxSetting(state => state.playerStyle);
   const currentPlayingList = useNoxSetting(state => state.currentPlayingList);
 
