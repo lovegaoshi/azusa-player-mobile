@@ -1,13 +1,16 @@
 {
   "_comment": "src/localization/en/translation.json",
   "Billing": {
-    "PremiumFeaturesIntro": "感谢你对中国管人事业的支持。您赞助的每一分钱将用于购买《博德之门3》。在返回时，APM将隐藏启动广告。",
+    "PremiumFeaturesIntro": "感谢你对中国管人事业的支持。您赞助的每一分钱将用于购买《博德之门3》。APM PRO将隐藏启动广告。",
     "NoxAuth": "b站认证",
-    "RevenueCat": "RevenueCat购买",
+    "RevenueCat": "APP内购（RevenueCat）",
     "NoxFans": "暗精灵和小孩梓当月舰长尊享APM VIP服务。点击上方b站认证即可。",
     "thankU": "又要到饭了兄弟们!",
     "godBlessU": "太破费了太破费了，好久没有收到这么贵重的礼物了",
-    "urVeryVeryGorgeous": "最后祝您身体健康万事如意，股票upup"
+    "urVeryVeryGorgeous": "最后祝您身体健康万事如意，股票upup",
+    "StripePurchase": "stripe购买 ",
+    "StripePurchaseNote": "!!请在biliID下填入{{biliMid}}!!\n购买完成后请重启APM",
+    "BiliUserNotLoggedIn": "你必须登录b站才能购买高级功能."
   },
   "BiliCategory": {
     "top": "b站全站音乐榜",

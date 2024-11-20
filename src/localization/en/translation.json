@@ -3,11 +3,14 @@
   "Billing": {
     "PremiumFeaturesIntro": "Thank you for considering supporting APM with real money. All funds will go towards buying a copy of Buldur's Gate 3. In return, APM will hide the app start splash ad.",
     "NoxAuth": "Authenticate through Bilibili",
-    "RevenueCat": "Purchase via RevenueCat",
+    "RevenueCat": "Purchase via Appstore(RevenueCat)",
     "NoxFans": "Bilibili users that are currently \"guards\" to Azusa and Nox will be granted premium access for free. Please click the Bilibili Auth button above to authenticate.",
     "thankU": "Thank you!",
     "godBlessU": "God bless you!",
-    "urVeryVeryGorgeous": "You are very very gorgeous."
+    "urVeryVeryGorgeous": "You are very very gorgeous.",
+    "StripePurchase": "Purchase via Stripe",
+    "StripePurchaseNote": "!!Please use {{biliMid}} as biliuserID in the purchase page!! \nAnd please restart APM after purchase.",
+    "BiliUserNotLoggedIn": "You must login via bilibili to purchase premium access."
   },
   "appDrawer": {
     "homeScreenName": "Home",

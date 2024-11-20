@@ -6,6 +6,7 @@ import { Image } from 'expo-image';
 
 import useVIP, { checkGuardVIP, purchaseVIP } from '@hooks/useVIP';
 import { styles } from '../style';
+// eslint-disable-next-line import/no-unresolved
 import { APPSTORE } from '@env';
 import getUser from '@utils/Bilibili/BiliUser';
 
@@ -53,7 +54,8 @@ const RevenueCatVIP = ({ setLoading }: LoadingChildrenProps) => {
     setLoading(false);
   };
 
-  const goToStripePay = () => Linking.openURL('https://stripe.com');
+  const goToStripePay = () =>
+    Linking.openURL('https://buy.stripe.com/3cs17p4Lj6KZ9B64gg');
 
   if (APPSTORE) {
     return (
@@ -62,12 +64,18 @@ const RevenueCatVIP = ({ setLoading }: LoadingChildrenProps) => {
   }
   if (biliMid) {
     return (
-      <Button onPress={goToStripePay}>
-        {t('Billing.StripePurchase', { biliMid })}
-      </Button>
+      <View>
+        <Button onPress={goToStripePay}>{t('Billing.StripePurchase')}</Button>
+        <Text>{t('Billing.StripePurchaseNote', { biliMid })}</Text>
+      </View>
     );
   }
-  return <Text>{t('Billing.BiliUserNotLoggedIn')}</Text>;
+  return (
+    <View>
+      <Button disabled>{t('Billing.StripePurchase')}</Button>
+      <Text>{t('Billing.BiliUserNotLoggedIn')}</Text>
+    </View>
+  );
 };
 
 const PurchaseVIPScreen = () => {
@@ -83,8 +91,8 @@ const PurchaseVIPScreen = () => {
       />
       <Text>{t('Billing.PremiumFeaturesIntro')}</Text>
       <View style={styles.alignMiddle}>
-        <LoadingIconWrapper Child={BiliVIP} />
         <LoadingIconWrapper Child={RevenueCatVIP} />
+        <LoadingIconWrapper Child={BiliVIP} />
       </View>
       <Text>{t('Billing.NoxFans')}</Text>
     </View>

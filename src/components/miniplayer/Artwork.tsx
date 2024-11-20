@@ -121,7 +121,10 @@ export default ({ miniplayerHeight, opacity, onPress, expand }: Props) => {
               i === -1 ? performSkipToNext() : performSkipToPrevious()
             }
             active={track !== undefined}
-          />) : (<Image style={styles.flex} source={img} />)}
+          />
+        ) : (
+          <Image style={styles.flex} source={img} />
+        )}
       </Animated.View>
     </TouchableWithoutFeedback>
   );
