@@ -56,8 +56,7 @@ export default ({ intentData, vip }: NoxComponent.SetupPlayerProps) => {
   const { updateVersion, checkVersion } = useVersionCheck();
   const setIntentData = useNoxSetting(state => state.setIntentData);
   const { checkPlayStoreUpdates } = usePlayStore();
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const _activeTrack = useActiveTrack();
+  const {} = useActiveTrack();
 
   useEffect(() => {
     if (!vip) {
