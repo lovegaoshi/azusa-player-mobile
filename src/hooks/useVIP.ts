@@ -35,11 +35,11 @@ const initRevenueCatWeb = async (userid?: string) => {
 const getVIPStatus = async () => {
   if (APPSTORE) {
     const customerInfo = await Purchases.getCustomerInfo();
-    return customerInfo.entitlements.active['apm-pro'] === undefined;
+    return customerInfo.entitlements.active[VIPId] === undefined;
   }
   await initRevenueCatWeb();
   const customerInfo = await PurchasesWeb.getSharedInstance().getCustomerInfo();
-  return customerInfo.entitlements.active['apm-pro'] === undefined;
+  return customerInfo.entitlements.active[VIPId] === undefined;
 };
 
 export const purchaseVIP = async () => {
@@ -57,7 +57,7 @@ export const purchaseVIP = async () => {
         const { customerInfo } = await Purchases.purchasePackage(
           offerings.current.availablePackages[0],
         );
-        APMActive = customerInfo.entitlements.active['apm-pro'] !== undefined;
+        APMActive = customerInfo.entitlements.active[VIPId] !== undefined;
       }
     } else {
       const offerings = await PurchasesWeb.getSharedInstance().getOfferings();
@@ -70,7 +70,7 @@ export const purchaseVIP = async () => {
           await PurchasesWeb.getSharedInstance().purchase({
             rcPackage: offerings.current.availablePackages[0],
           });
-        APMActive = customerInfo.entitlements.active['apm-pro'] !== undefined;
+        APMActive = customerInfo.entitlements.active[VIPId] !== undefined;
       }
     }
   } catch (e) {

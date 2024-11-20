@@ -22,6 +22,8 @@ const clearCookies = () => {
   saveItem(StorageKeys.YTMCOOKIES, null);
 };
 
+const checkYTM = async () => console.log(await get_current_user());
+
 interface LoginProps {
   refresh: () => void;
 }
@@ -84,15 +86,7 @@ const Login = ({ refresh }: LoginProps) => {
     />
   ) : (
     <SafeAreaView>
-      {__DEV__ && (
-        <Button
-          onPress={async () => {
-            console.log(await get_current_user());
-          }}
-        >
-          {t('Login.Check')}
-        </Button>
-      )}
+      {__DEV__ && <Button onPress={checkYTM}>{t('Login.Check')}</Button>}
       <Button onPress={getNewLoginCode}>{t('Login.Login')}</Button>
       <Button onPress={clearCookies}>{t('Login.Clear')}</Button>
     </SafeAreaView>
