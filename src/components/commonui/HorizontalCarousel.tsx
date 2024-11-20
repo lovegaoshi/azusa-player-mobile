@@ -138,7 +138,6 @@ export default ({
     newImages[incIndex(carouselIndex.value, 3, false)] = images[0];
     setMImages(newImages);
     toggleThrottle(false);
-    console.log('APM', newImages);
   }, [images]);
 
   return (

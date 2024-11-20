@@ -35,7 +35,6 @@ export default ({ miniplayerHeight, opacity, onPress, expand }: Props) => {
   const imgURI = hideCoverInMobile
     ? ''
     : `${overwriteAlbumArt ?? track?.artwork}`;
-  // HACK: restrict to 720 to ensure scaleY fluidity
   const img = useImage(imgURI, {
     maxHeight: artworkRes === 0 ? undefined : artworkRes,
     maxWidth: artworkRes === 0 ? undefined : artworkRes,
