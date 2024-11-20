@@ -17,10 +17,18 @@ import useCollapsible from '../useCollapsible';
 const jsCode = 'window.ReactNativeWebView.postMessage(document.cookie)';
 const auth = get_option('auth');
 
+const clearCookies = () => {
+  museStore.delete('token');
+  saveItem(StorageKeys.YTMCOOKIES, null);
+};
+
+const checkYTM = async () => console.log(await get_current_user());
+
 interface LoginProps {
   refresh: () => void;
 }
 const Login = ({ refresh }: LoginProps) => {
+  const { t } = useTranslation();
   const [webView, _setWebView] = useState(false);
   const [cookies, setCookies] = useState<string[]>([]);
   const toggleCollapse = useCollapsible(state => state.toggleCollapse);
@@ -78,14 +86,9 @@ const Login = ({ refresh }: LoginProps) => {
     />
   ) : (
     <SafeAreaView>
-      <Button
-        onPress={async () => {
-          console.log(await get_current_user());
-        }}
-      >
-        Check
-      </Button>
-      <Button onPress={getNewLoginCode}>Login</Button>
+      {__DEV__ && <Button onPress={checkYTM}>{t('Login.Check')}</Button>}
+      <Button onPress={getNewLoginCode}>{t('Login.Login')}</Button>
+      <Button onPress={clearCookies}>{t('Login.Clear')}</Button>
     </SafeAreaView>
   );
 };

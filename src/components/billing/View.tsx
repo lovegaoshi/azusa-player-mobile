@@ -1,11 +1,14 @@
-import { View, StyleSheet } from 'react-native';
-import React, { useState } from 'react';
+import { View, StyleSheet, Linking } from 'react-native';
+import React, { useEffect, useState } from 'react';
 import { Text, Button, ActivityIndicator } from 'react-native-paper';
 import { useTranslation } from 'react-i18next';
 import { Image } from 'expo-image';
 
 import useVIP, { checkGuardVIP, purchaseVIP } from '@hooks/useVIP';
 import { styles } from '../style';
+// eslint-disable-next-line import/no-unresolved
+import { APPSTORE } from '@env';
+import getUser from '@utils/Bilibili/BiliUser';
 
 interface LoadingChildrenProps {
   setLoading: React.Dispatch<React.SetStateAction<boolean>>;
@@ -36,19 +39,48 @@ const BiliVIP = ({ setLoading }: LoadingChildrenProps) => {
 
 const RevenueCatVIP = ({ setLoading }: LoadingChildrenProps) => {
   const { t } = useTranslation();
+  const [biliMid, setBiliMid] = useState<number>();
+
+  useEffect(() => {
+    if (APPSTORE) {
+      return;
+    }
+    getUser().then(u => setBiliMid(u.mid));
+  }, []);
+
   const checkRevenueCatVIP = async () => {
     setLoading(true);
     purchaseVIP();
     setLoading(false);
   };
 
+  const goToStripePay = () =>
+    Linking.openURL('https://buy.stripe.com/3cs17p4Lj6KZ9B64gg');
+
+  if (APPSTORE) {
+    return (
+      <Button onPress={checkRevenueCatVIP}>{t('Billing.RevenueCat')}</Button>
+    );
+  }
+  if (biliMid) {
+    return (
+      <View>
+        <Button onPress={goToStripePay}>{t('Billing.StripePurchase')}</Button>
+        <Text>{t('Billing.StripePurchaseNote', { biliMid })}</Text>
+      </View>
+    );
+  }
   return (
-    <Button onPress={checkRevenueCatVIP}>{t('Billing.RevenueCat')}</Button>
+    <View>
+      <Button disabled>{t('Billing.StripePurchase')}</Button>
+      <Text>{t('Billing.BiliUserNotLoggedIn')}</Text>
+    </View>
   );
 };
 
 const PurchaseVIPScreen = () => {
   const { t } = useTranslation();
+
   return (
     <View style={mStyle.container}>
       <Image
@@ -59,8 +91,8 @@ const PurchaseVIPScreen = () => {
       />
       <Text>{t('Billing.PremiumFeaturesIntro')}</Text>
       <View style={styles.alignMiddle}>
-        <LoadingIconWrapper Child={BiliVIP} />
         <LoadingIconWrapper Child={RevenueCatVIP} />
+        <LoadingIconWrapper Child={BiliVIP} />
       </View>
       <Text>{t('Billing.NoxFans')}</Text>
     </View>

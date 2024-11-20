@@ -5,7 +5,7 @@ import Animated, {
   useDerivedValue,
 } from 'react-native-reanimated';
 import { useEffect, useState } from 'react';
-import { useImage } from 'expo-image';
+import { Image, useImage } from 'expo-image';
 
 import useActiveTrack from '@hooks/useActiveTrack';
 import { MinPlayerHeight } from './Constants';
@@ -15,6 +15,7 @@ import logger from '@utils/Logger';
 import HorizontalCarousel from '@components/commonui/HorizontalCarousel';
 import { performSkipToNext, performSkipToPrevious } from '@hooks/useTPControls';
 import { playNextSong } from '@stores/playingList';
+import { styles } from '../style';
 
 interface Props extends NoxComponent.MiniplayerProps {
   opacity: SharedValue<number>;
@@ -25,7 +26,7 @@ interface Props extends NoxComponent.MiniplayerProps {
 export default ({ miniplayerHeight, opacity, onPress, expand }: Props) => {
   const { track } = useActiveTrack();
   const [trackCarousel, setTrackCarousel] = useState<any[]>([]);
-  const { hideCoverInMobile, artworkRes } = useNoxSetting(
+  const { hideCoverInMobile, artworkRes, artworkCarousel } = useNoxSetting(
     state => state.playerSetting,
   );
   const [overwriteAlbumArt, setOverwriteAlbumArt] = useState<string | void>();
@@ -111,15 +112,19 @@ export default ({ miniplayerHeight, opacity, onPress, expand }: Props) => {
           animatedStyle,
         ]}
       >
-        <HorizontalCarousel
-          images={trackCarousel}
-          imgStyle={{ width, height: width }}
-          paddingVertical={100}
-          callback={i =>
-            i === -1 ? performSkipToNext() : performSkipToPrevious()
-          }
-          active={track !== undefined}
-        />
+        {artworkCarousel ? (
+          <HorizontalCarousel
+            images={trackCarousel}
+            imgStyle={{ width, height: width }}
+            paddingVertical={100}
+            callback={i =>
+              i === -1 ? performSkipToNext() : performSkipToPrevious()
+            }
+            active={track !== undefined}
+          />
+        ) : (
+          <Image style={styles.flex} source={img} />
+        )}
       </Animated.View>
     </TouchableWithoutFeedback>
   );

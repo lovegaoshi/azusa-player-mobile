@@ -87,6 +87,10 @@ const developerSettings: { [key: string]: SettingEntry } = {
     settingCategory: 'GeneralSettings',
     callback: Sentry.nativeCrash,
   },
+  artworkCarousel: {
+    settingName: 'artworkCarousel',
+    settingCategory: 'GeneralSettings',
+  },
   /**
   chatGPTSongName: {
     settingName: 'chatGPTResolveSongName',
@@ -221,6 +225,7 @@ const Home = ({ navigation }: NoxComponent.StackNavigationProps) => {
                   />
                 </>
               )}
+              <RenderSetting item={developerSettings.artworkCarousel} />
               <RenderSetting item={developerSettings.memoryEfficiency} />
             </View>
           </GroupView>

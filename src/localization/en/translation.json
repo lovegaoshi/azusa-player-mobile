@@ -3,11 +3,14 @@
   "Billing": {
     "PremiumFeaturesIntro": "Thank you for considering supporting APM with real money. All funds will go towards buying a copy of Buldur's Gate 3. In return, APM will hide the app start splash ad.",
     "NoxAuth": "Authenticate through Bilibili",
-    "RevenueCat": "Purchase via RevenueCat",
+    "RevenueCat": "Purchase via Appstore(RevenueCat)",
     "NoxFans": "Bilibili users that are currently \"guards\" to Azusa and Nox will be granted premium access for free. Please click the Bilibili Auth button above to authenticate.",
     "thankU": "Thank you!",
     "godBlessU": "God bless you!",
-    "urVeryVeryGorgeous": "You are very very gorgeous."
+    "urVeryVeryGorgeous": "You are very very gorgeous.",
+    "StripePurchase": "Purchase via Stripe",
+    "StripePurchaseNote": "!!Please use {{biliMid}} as biliuserID in the purchase page!! \nAnd please restart APM after purchase.",
+    "BiliUserNotLoggedIn": "You must login via bilibili to purchase premium access."
   },
   "appDrawer": {
     "homeScreenName": "Home",
@@ -130,6 +133,8 @@
     "prefetchTrackDesc": "Prefetch the next track (only works when cache is enabled)",
     "chatGPTResolveSongNameName": "ChatGPT on Songs",
     "chatGPTResolveSongNameDesc": "TODO: Use chatGPT to resolve song names",
+    "artworkCarouselName": "artwork carousel",
+    "artworkCarouselDesc": "enable artwork carousel (swipe to skip; bugs)",
     "preferYTMSuggestName": "Prefers YTM suggest",
     "preferYTMSuggestDesc": "prefers YTM suggest instead of related videos",
     "useSuggestionName": "BiliSuggestion",
@@ -319,7 +324,10 @@
     "BilibiliLoginProbeFailed": "Checking QR code login status failed. Please check network.",
     "Disclaimer": "Using bilibili cookies in this app may BAN your account/IP due to API abuse. At the very least use a spare account.",
     "SyncBiliFavlist": "Sync from bilibili favorites",
-    "Logout": "LOGOUT"
+    "Logout": "LOGOUT",
+    "Clear": "Clear (emergency)",
+    "Login": "Login",
+    "Check": "Check"
   },
   "VersionUpdate": {
     "DownloadAPK": "Update",

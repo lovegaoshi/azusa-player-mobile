@@ -3,14 +3,12 @@ import { useEffect } from 'react';
 import Purchases from 'react-native-purchases';
 import { create } from 'zustand';
 import { Purchases as PurchasesWeb } from '@revenuecat/purchases-js';
-import i18n from 'i18next';
 
 import { isAndroid } from '@utils/RNUtils';
 import { getUser, getHasGuard } from '@utils/Bilibili/BiliUser';
 // eslint-disable-next-line import/no-unresolved
 import { APPSTORE, REVENUECAT_GOOGLE, REVENUECAT_STRIPE } from '@env';
 import logger from '@utils/Logger';
-import { setSnackMsg } from '@stores/useSnack';
 
 const VIPKey = 'APMVIP';
 const VIPId = 'apm-pro';
@@ -26,8 +24,8 @@ const initRevenueCatWeb = async (userid?: string) => {
   }
   const mUserid = userid ?? (await getUser()).mid;
   if (mUserid === undefined) {
-    logger.error('[initRevenueCatWeb] mid is undefined');
-    setSnackMsg(i18n.t('Billing.MustLoginBilibili'));
+    // logger.error('[initRevenueCatWeb] mid is undefined');
+    // setSnackMsg(i18n.t('Billing.MustLoginBilibili'));
     throw new Error('[initRevenueCatWeb] mid is undefined');
   }
   isRevenueCatInitialized = true;
@@ -37,11 +35,11 @@ const initRevenueCatWeb = async (userid?: string) => {
 const getVIPStatus = async () => {
   if (APPSTORE) {
     const customerInfo = await Purchases.getCustomerInfo();
-    return customerInfo.entitlements.active['apm-pro'] === undefined;
+    return customerInfo.entitlements.active[VIPId] === undefined;
   }
   await initRevenueCatWeb();
   const customerInfo = await PurchasesWeb.getSharedInstance().getCustomerInfo();
-  return customerInfo.entitlements.active['apm-pro'] === undefined;
+  return customerInfo.entitlements.active[VIPId] === undefined;
 };
 
 export const purchaseVIP = async () => {
@@ -59,7 +57,7 @@ export const purchaseVIP = async () => {
         const { customerInfo } = await Purchases.purchasePackage(
           offerings.current.availablePackages[0],
         );
-        APMActive = customerInfo.entitlements.active['apm-pro'] !== undefined;
+        APMActive = customerInfo.entitlements.active[VIPId] !== undefined;
       }
     } else {
       const offerings = await PurchasesWeb.getSharedInstance().getOfferings();
@@ -72,7 +70,7 @@ export const purchaseVIP = async () => {
           await PurchasesWeb.getSharedInstance().purchase({
             rcPackage: offerings.current.availablePackages[0],
           });
-        APMActive = customerInfo.entitlements.active['apm-pro'] !== undefined;
+        APMActive = customerInfo.entitlements.active[VIPId] !== undefined;
       }
     }
   } catch (e) {
