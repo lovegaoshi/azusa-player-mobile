@@ -338,7 +338,10 @@
     "BilibiliLoginProbeFailed": "检查二维码失败，请检查网络",
     "Disclaimer": "由于电梓播放器第三方的身份，使用b站账号cookie有可能导致被风控封号。虽然王胡桃本人以身试法自用cookie，但请最起码开小号使用b站功能",
     "SyncBiliFavlist": "自b站收藏夹同步",
-    "Logout": "登出"
+    "Logout": "登出",
+    "Clear": "清除缓存（紧急）",
+    "Login": "登入",
+    "Check": "检查登陆"
   },
   "VersionUpdate": {
     "DownloadAPK": "更新",
