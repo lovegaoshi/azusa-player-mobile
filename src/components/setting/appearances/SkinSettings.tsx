@@ -23,11 +23,11 @@ import Animated, {
   runOnJS,
 } from 'react-native-reanimated';
 import {
-  FlatList,
   GestureDetector,
   Gesture,
   PanGesture,
 } from 'react-native-gesture-handler';
+import { FlashList } from '@shopify/flash-list';
 
 import SkinSearchbar from '../SkinSearchbar';
 import { useNoxSetting } from '@stores/useApp';
@@ -217,7 +217,7 @@ const SkinSettings = () => {
   const getThemeID = (skin: NoxTheme.Style) =>
     `${skin.metaData.themeName}.${skin.metaData.themeAuthor}`;
   const [checked, setChecked] = React.useState(getThemeID(playerStyle));
-  const scrollViewRef = React.useRef<FlatList | null>(null);
+  const scrollViewRef = React.useRef<FlashList<any> | null>(null);
 
   const selectTheme = (theme: NoxTheme.Style) => {
     setChecked(getThemeID(theme));
@@ -258,15 +258,9 @@ const SkinSettings = () => {
       ]}
     >
       <SkinSearchbar onSearched={loadCustomSkin} />
-      <FlatList
+      <FlashList
         ref={scrollViewRef}
         data={allThemes}
-        onScrollToIndexFailed={e => console.error(e)}
-        getItemLayout={(data, index) => ({
-          length: 107,
-          offset: 107 * index,
-          index,
-        })}
         renderItem={({ item }) => (
           <SkinItem
             skin={item as DisplayTheme}

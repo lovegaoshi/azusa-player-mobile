@@ -1,6 +1,10 @@
 import { get_current_user } from 'libmuse';
 import { useState } from 'react';
 
+import { museStore } from '@utils/muse';
+
+const clearMuseCookies = () => museStore.reset();
+
 export interface User {
   channel_id: string;
   handle: string | null;
@@ -26,7 +30,13 @@ export const useYTMLogin = () => {
 
   const refresh = () =>
     get_current_user()
-      .then(setUser)
+      .then(user => {
+        if (user) {
+          return setUser(user);
+        }
+        clearMuseCookies();
+      })
+      .catch(clearMuseCookies)
       .finally(() => setInit(true));
 
   const init = () => {
