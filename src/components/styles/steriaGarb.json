@@ -3351,5 +3351,109 @@
       "onSurfaceDisabled": "rgba(230, 226, 217, 0.38)",
       "backdrop": "rgba(49, 49, 37, 0.4)"
     }
+  },
+  {
+    "metaData": {
+      "themeName": "艾露露-金风玉露",
+      "themeDesc": "【艾露露Ailurus金风玉露收藏集】是哔哩哔哩携手艾露露Ailurus定制打造的个人数字集卡，其中的每张数字卡片都将拥有独特编号，期待大家一起来解锁艾露露新衣的绝美画面！\n",
+      "themeAuthor": "NoxAutoGen",
+      "themeIcon": "https://i0.hdslb.com/bfs/garb/a8f1576ff278c4f4421929b4e81d6309560ad0f0.jpg",
+      "darkTheme": true
+    },
+    "gifs": [
+      "https://i0.hdslb.com/bfs/garb/96e7325f38b0ea2565be67f0e4908ba892c59afa.png",
+      "https://i0.hdslb.com/bfs/garb/ce9040fddd345488be893fdf8040c4b6e3ee0fb1.png",
+      "https://i0.hdslb.com/bfs/garb/7ae0d753a7e6fd868c670bf0460967a183af131e.png",
+      "https://i0.hdslb.com/bfs/garb/b6dc141cdf005173ce1b98b4863ff8fe87722011.png",
+      "https://i0.hdslb.com/bfs/garb/ef7486667cbccb0104075770c8ab075f588a4ab6.png",
+      "https://i0.hdslb.com/bfs/garb/6bd4a5b86a9f49065e28213a755a5c3be6913744.png",
+      "https://i0.hdslb.com/bfs/garb/12da29dd1e7d36be202d03b624349c2ef2789316.png",
+      "https://i0.hdslb.com/bfs/garb/5833f8d84f0c1677870e2f69405a00a1fa343f24.png",
+      "https://i0.hdslb.com/bfs/garb/ba7306fce1baab30eecdd34538c642c68b46bf62.png",
+      "https://i0.hdslb.com/bfs/garb/e161947dc7f5ba8e137c372fdc118f5bf90802e7.png",
+      "https://i0.hdslb.com/bfs/garb/25c7de90f19b6faf84defa8af995fb500c7b154a.png",
+      "https://i0.hdslb.com/bfs/garb/23b9e502ce37cdee935d26ab60db3825d8ab35b6.png",
+      "https://i0.hdslb.com/bfs/garb/5e2a8ce58c07f28980f33b8f4b04db0b1896ea01.png",
+      "https://i0.hdslb.com/bfs/garb/1a913b0f8bb0214da21c6210d8507b7eb97dc652.png",
+      "https://i0.hdslb.com/bfs/garb/cc12f1c544d81f33a1e645b73021c39a808b508e.png",
+      "https://i0.hdslb.com/bfs/garb/7979c797a69ebe640e3ec2e009e39e83344c631d.png",
+      "https://i0.hdslb.com/bfs/garb/099f574fd56d733d338653a4dd5e390c697a3c9c.png",
+      "https://i0.hdslb.com/bfs/garb/43f05e0812cbedf8f77c0d0d423c3169b3d80659.png",
+      "https://i0.hdslb.com/bfs/garb/2b425256ae99b0ba301138bb1fb7b2fec78f1a36.png",
+      "https://i0.hdslb.com/bfs/garb/b41fcb225d3de394419150933ef3497bdad073d9.png"
+    ],
+    "backgroundImages": [
+      {
+        "type": "biliNFTVideoNew",
+        "identifier": "[\"104678\",\"104679\",\"特别礼物\"]"
+      },
+      {
+        "type": "biliNFTVideoNew",
+        "identifier": "[\"104678\",\"104679\",\"出水芙蓉\"]"
+      },
+      {
+        "type": "biliNFTVideoNew",
+        "identifier": "[\"104678\",\"104679\",\"给你听听\"]"
+      },
+      "https://i0.hdslb.com/bfs/garb/open/18a78a0729b6162e0735e903bbf03c4ca8ec8836.png",
+      "https://i0.hdslb.com/bfs/garb/open/353c3f738315af02622efe7b5a4965c363beeed4.png",
+      "https://i0.hdslb.com/bfs/garb/open/c54fca4bcb107fd2afec60506561ced3fa7510ae.png",
+      "https://i0.hdslb.com/bfs/garb/open/a459240267b37adcd4f22fed10c6eb9126f9e7a7.png",
+      "https://i0.hdslb.com/bfs/garb/open/884f79936b03571781b1969fbd1e1086b87dd839.png",
+      "https://i0.hdslb.com/bfs/garb/open/93446346d12c93e70666484b4654173a82ad2d79.png"
+    ],
+    "customColors": {
+      "maskedBackgroundColor": "rgba(0, 0, 0, 0.60)",
+      "playlistDrawerBackgroundColor": "green",
+      "playlistDrawerBackgroundColorTransparent": "rgba(0, 255, 0, 0.35)",
+      "progressThumbTintColor": "rgb(235, 235, 0)",
+      "progressMinimumTrackTintColor": "rgb(235, 235, 0)",
+      "progressMaximumTrackTintColor": "#FFFFFF",
+      "btnBackgroundColor": "rgb(72, 71, 58)",
+      "textInputSelectionColor": "green"
+    },
+    "colors": {
+      "primary": "#fcf75e",
+      "onPrimary": "rgb(50, 50, 0)",
+      "primaryContainer": "rgb(73, 73, 0)",
+      "onPrimaryContainer": "rgb(234, 234, 0)",
+      "secondary": "rgb(202, 200, 165)",
+      "onSecondary": "rgb(50, 50, 24)",
+      "secondaryContainer": "rgb(73, 72, 45)",
+      "onSecondaryContainer": "rgb(231, 228, 191)",
+      "tertiary": "rgb(164, 208, 189)",
+      "onTertiary": "rgb(11, 55, 42)",
+      "tertiaryContainer": "rgb(37, 78, 64)",
+      "onTertiaryContainer": "rgb(191, 236, 216)",
+      "error": "rgb(255, 180, 171)",
+      "onError": "rgb(105, 0, 5)",
+      "errorContainer": "rgb(147, 0, 10)",
+      "onErrorContainer": "rgb(255, 180, 171)",
+      "background": "rgba(0,0,0, 0.4)",
+      "onBackground": "rgb(230, 226, 217)",
+      "surface": "rgb(28, 28, 23)",
+      "onSurface": "rgba(235, 235, 0, 1)",
+      "text": "#fcf75e",
+      "surfaceVariant": "rgb(10, 10, 10)",
+      "onSurfaceVariant": "rgb(225, 225, 0)",
+      "outline": "rgb(147, 145, 130)",
+      "outlineVariant": "rgb(72, 71, 58)",
+      "shadow": "rgb(0, 0, 0)",
+      "scrim": "rgb(0, 0, 0)",
+      "inverseSurface": "rgb(230, 226, 217)",
+      "inverseOnSurface": "rgb(49, 49, 43)",
+      "inversePrimary": "rgb(98, 98, 0)",
+      "elevation": {
+        "level0": "transparent",
+        "level1": "rgb(53, 56, 57)",
+        "level2": "rgb(10, 10, 10)",
+        "level3": "rgb(10, 10, 10)",
+        "level4": "rgb(49, 49, 20)",
+        "level5": "rgb(53, 53, 20)"
+      },
+      "surfaceDisabled": "rgba(230, 226, 217, 0.12)",
+      "onSurfaceDisabled": "rgba(230, 226, 217, 0.38)",
+      "backdrop": "rgba(49, 49, 37, 0.4)"
+    }
   }
 ]
