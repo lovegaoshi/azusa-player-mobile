@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { getColors } from 'react-native-image-colors';
 import { colord } from 'colord';
 
-import useActiveTrack from './useActiveTrack';
+import { useTrackStore } from './useActiveTrack';
 import { useNoxSetting } from '@stores/useApp';
 import { replaceStyleColor } from '@components/style';
 import logger from '@utils/Logger';
@@ -14,7 +14,7 @@ export default (replaceStyle = false) => {
   const [backgroundColor, setBackgroundColor] = useState<string>(
     playerStyle.colors.background,
   );
-  const { track } = useActiveTrack();
+  const track = useTrackStore(s => s.track);
 
   const getBackgroundColor = async () => {
     if (!playerSetting.accentColor) return;

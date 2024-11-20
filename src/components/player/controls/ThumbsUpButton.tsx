@@ -10,7 +10,7 @@ import {
 } from '@utils/Bilibili/BiliOperate';
 import { useNoxSetting } from '@stores/useApp';
 import { logger } from '@utils/Logger';
-import useActiveTrack from '@hooks/useActiveTrack';
+import { useTrackStore } from '@hooks/useActiveTrack';
 
 enum THUMBUPSTATUS {
   notLoggedIn = 'web-cancel',
@@ -39,7 +39,7 @@ interface Props {
   iconSize?: number;
 }
 const ThumbsUpButton = ({ iconSize = 30 }: Props) => {
-  const { track } = useActiveTrack();
+  const track = useTrackStore(s => s.track);
   const playerStyle = useNoxSetting(state => state.playerStyle);
   const [status, setStatus] = React.useState<THUMBUPSTATUS>(
     THUMBUPSTATUS.notLoggedIn,

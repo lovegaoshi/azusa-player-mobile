@@ -3,7 +3,6 @@ import TrackPlayer, {
   useTrackPlayerEvents,
   Event,
   State,
-  useActiveTrack,
 } from 'react-native-track-player';
 
 import { useNoxSetting } from '@stores/useApp';
@@ -20,6 +19,7 @@ import { NoxRepeatMode } from '@enums/RepeatMode';
 import usePlaylistCRUD from '@hooks/usePlaylistCRUD';
 import { getR128Gain } from '@utils/ffmpeg/r128Store';
 import { isAndroid } from '@utils/RNUtils';
+import { useTrackStore } from '@hooks/useActiveTrack';
 
 const { getState } = noxPlayingList;
 const { fadeIntervalMs, fadeIntervalSec } = appStore.getState();
@@ -32,8 +32,8 @@ export default () => {
   const [crossfadingId, setCrossfadingId] = React.useState('');
   const { updateCurrentSongMetadata, updateCurrentSongMetadataReceived } =
     usePlaylistCRUD();
-  const track = useActiveTrack();
-  const updateTrack = useNoxSetting(state => state.updateTrack);
+  const track = useTrackStore(state => state.track);
+  const updateTrack = useTrackStore(state => state.updateTrack);
   const crossfadeId = useNoxSetting(state => state.crossfadeId);
   const setCrossfadeId = useNoxSetting(state => state.setCrossfadeId);
   const crossfadeInterval = useNoxSetting(
