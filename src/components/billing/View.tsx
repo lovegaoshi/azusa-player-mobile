@@ -1,11 +1,13 @@
-import { View, StyleSheet } from 'react-native';
-import React, { useState } from 'react';
+import { View, StyleSheet, Linking } from 'react-native';
+import React, { useEffect, useState } from 'react';
 import { Text, Button, ActivityIndicator } from 'react-native-paper';
 import { useTranslation } from 'react-i18next';
 import { Image } from 'expo-image';
 
 import useVIP, { checkGuardVIP, purchaseVIP } from '@hooks/useVIP';
 import { styles } from '../style';
+import { APPSTORE } from '@env';
+import getUser from '@utils/Bilibili/BiliUser';
 
 interface LoadingChildrenProps {
   setLoading: React.Dispatch<React.SetStateAction<boolean>>;
@@ -36,19 +38,41 @@ const BiliVIP = ({ setLoading }: LoadingChildrenProps) => {
 
 const RevenueCatVIP = ({ setLoading }: LoadingChildrenProps) => {
   const { t } = useTranslation();
+  const [biliMid, setBiliMid] = useState<number>();
+
+  useEffect(() => {
+    if (APPSTORE) {
+      return;
+    }
+    getUser().then(u => setBiliMid(u.mid));
+  }, []);
+
   const checkRevenueCatVIP = async () => {
     setLoading(true);
     purchaseVIP();
     setLoading(false);
   };
 
-  return (
-    <Button onPress={checkRevenueCatVIP}>{t('Billing.RevenueCat')}</Button>
-  );
+  const goToStripePay = () => Linking.openURL('https://stripe.com');
+
+  if (APPSTORE) {
+    return (
+      <Button onPress={checkRevenueCatVIP}>{t('Billing.RevenueCat')}</Button>
+    );
+  }
+  if (biliMid) {
+    return (
+      <Button onPress={goToStripePay}>
+        {t('Billing.StripePurchase', { biliMid })}
+      </Button>
+    );
+  }
+  return <Text>{t('Billing.BiliUserNotLoggedIn')}</Text>;
 };
 
 const PurchaseVIPScreen = () => {
   const { t } = useTranslation();
+
   return (
     <View style={mStyle.container}>
       <Image

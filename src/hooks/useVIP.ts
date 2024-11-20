@@ -3,14 +3,12 @@ import { useEffect } from 'react';
 import Purchases from 'react-native-purchases';
 import { create } from 'zustand';
 import { Purchases as PurchasesWeb } from '@revenuecat/purchases-js';
-import i18n from 'i18next';
 
 import { isAndroid } from '@utils/RNUtils';
 import { getUser, getHasGuard } from '@utils/Bilibili/BiliUser';
 // eslint-disable-next-line import/no-unresolved
 import { APPSTORE, REVENUECAT_GOOGLE, REVENUECAT_STRIPE } from '@env';
 import logger from '@utils/Logger';
-import { setSnackMsg } from '@stores/useSnack';
 
 const VIPKey = 'APMVIP';
 const VIPId = 'apm-pro';
@@ -26,8 +24,8 @@ const initRevenueCatWeb = async (userid?: string) => {
   }
   const mUserid = userid ?? (await getUser()).mid;
   if (mUserid === undefined) {
-    logger.error('[initRevenueCatWeb] mid is undefined');
-    setSnackMsg(i18n.t('Billing.MustLoginBilibili'));
+    // logger.error('[initRevenueCatWeb] mid is undefined');
+    // setSnackMsg(i18n.t('Billing.MustLoginBilibili'));
     throw new Error('[initRevenueCatWeb] mid is undefined');
   }
   isRevenueCatInitialized = true;
