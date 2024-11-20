@@ -19,6 +19,11 @@ class MyStore extends MemoryStore {
       this.map = new Map();
     }
   }
+
+  reset() {
+    this.map = new Map();
+    setItem(MUSE_KEY, null);
+  }
 }
 
 export const museStore = new MyStore();

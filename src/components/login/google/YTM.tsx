@@ -18,7 +18,7 @@ const jsCode = 'window.ReactNativeWebView.postMessage(document.cookie)';
 const auth = get_option('auth');
 
 const clearCookies = () => {
-  museStore.delete('token');
+  museStore.reset();
   saveItem(StorageKeys.YTMCOOKIES, null);
 };
 

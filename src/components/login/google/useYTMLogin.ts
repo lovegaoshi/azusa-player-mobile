@@ -3,7 +3,7 @@ import { useState } from 'react';
 
 import { museStore } from '@utils/muse';
 
-const clearMuseCookies = () => museStore.delete('token');
+const clearMuseCookies = () => museStore.reset();
 
 export interface User {
   channel_id: string;
