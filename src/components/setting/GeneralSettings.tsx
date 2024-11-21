@@ -61,6 +61,10 @@ const GEN_SETTING_BOOLEAN: SettingEntry[] = [
     settingName: 'preferYTMSuggest',
     settingCategory: 'GeneralSettings',
   },
+  {
+    settingName: 'pausePlaybackOnMute',
+    settingCategory: 'GeneralSettings',
+  },
 ];
 
 export default () => {

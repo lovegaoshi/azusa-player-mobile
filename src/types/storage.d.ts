@@ -51,6 +51,7 @@ declare global {
       preferYTMSuggest: boolean;
       artworkRes: number;
       artworkCarousel: boolean;
+      pausePlaybackOnMute: boolean;
 
       appID: string;
       language?: string;

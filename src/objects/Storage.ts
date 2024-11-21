@@ -50,6 +50,7 @@ export const DefaultSetting: NoxStorage.PlayerSettingDict = {
   preferYTMSuggest: true,
   artworkRes: 0,
   artworkCarousel: false,
+  pausePlaybackOnMute: false,
 
   appID: AppID,
   language: undefined,
