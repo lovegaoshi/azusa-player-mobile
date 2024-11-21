@@ -124,10 +124,14 @@ export default (playlist: NoxMedia.Playlist) => {
         : toIndex;
     if (currentIndex === -1 && reset) currentIndex = 0;
     if (currentIndex > -1) {
-      playlistRef.current?.scrollToIndex({
-        index: currentIndex,
-        viewPosition: 0.5,
-      });
+      setTimeout(() => {
+        playlistRef.current?.scrollToIndex({
+          index: currentIndex,
+          viewPosition:
+            // @ts-expect-error flashlist
+            playlistRef.current.rlvRef._layout.height < 100 ? -5 : 0.5,
+        });
+      }, 10);
     }
   };
 
