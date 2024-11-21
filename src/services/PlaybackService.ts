@@ -112,6 +112,13 @@ export async function additionalPlaybackService({
 }
 
 export async function PlaybackService() {
+  DeviceEventEmitter.addListener(
+    'APMVolume',
+    (e: { volume: number }) =>
+      e.volume === 0 &&
+      useNoxSetting.getState().playerSetting.pausePlaybackOnMute &&
+      TrackPlayer.pause(),
+  );
   DeviceEventEmitter.addListener('APMEnterPIP', (e: boolean) =>
     setState({ pipMode: e }),
   );

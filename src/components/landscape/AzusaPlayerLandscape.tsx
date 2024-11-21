@@ -42,7 +42,6 @@ const AzusaPlayer = () => {
   const actionPanelWidth = Math.max(50, Math.min(120, height / 5));
   const playerPanelWidth = Math.max(50, width / 2 - actionPanelWidth);
 
-  console.log(actionPanelWidth, playerPanelWidth);
   return (
     <PaperProvider
       theme={{

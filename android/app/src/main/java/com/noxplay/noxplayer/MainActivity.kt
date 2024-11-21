@@ -7,6 +7,7 @@ import android.app.PictureInPictureParams
 import android.content.ComponentCallbacks2
 import android.content.Context
 import android.content.Intent
+import android.content.IntentFilter
 import android.content.res.Configuration
 import android.os.Build
 import android.os.Bundle
@@ -33,11 +34,19 @@ interface NoxActivity {
 
 class MainActivity(override var loadedRN: Boolean = false) :
     ReactActivity(), ComponentCallbacks2, NoxActivity {
+
+
+    fun emit (tag: String, data: Bundle) {
+        getReactContext()?.emitDeviceEvent(tag, Arguments.fromBundle(data))
+    }
+    private lateinit var volumeListener: APMVolumeListener
     /**
      * for react navigation;
      */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(null)
+        volumeListener = APMVolumeListener(::emit)
+        registerReceiver(volumeListener, IntentFilter("android.media.VOLUME_CHANGED_ACTION"))
 
         val content: View = findViewById(android.R.id.content)
         content.viewTreeObserver.addOnPreDrawListener(
@@ -165,6 +174,7 @@ class MainActivity(override var loadedRN: Boolean = false) :
     }
 
     override fun onDestroy() {
+        unregisterReceiver(volumeListener)
         // https://stackoverflow.com/questions/5764099/how-to-update-a-widget-if-the-related-service-gets-killed
         val am = getSystemService(Context.ALARM_SERVICE) as AlarmManager
         val intent = Intent(this, APMWidget::class.java)
