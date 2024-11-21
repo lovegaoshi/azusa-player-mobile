@@ -20,9 +20,7 @@ const PlaylistList = () => {
   const currentPlayingId = useNoxSetting(state => state.currentPlayingId);
   const playerStyle = useNoxSetting(state => state.playerStyle);
   const currentPlaylist = useNoxSetting(state => state.currentPlaylist);
-  const songListScrollCounter = useNoxSetting(
-    state => state.songListScrollCounter,
-  );
+  const songListScrollCounter = useNoxSetting(s => s.songListScrollCounter);
   const usedPlaylist = usePlaylist(currentPlaylist);
   const {
     refreshPlaylist,

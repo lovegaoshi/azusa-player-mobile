@@ -91,11 +91,6 @@ export default () => {
         key={index}
         onPress={() => goToPlaylist(item)}
         onLongPress={beginDrag}
-        onResponderStart={e => {
-          if (e.nativeEvent.locationX < 20) {
-            beginDrag();
-          }
-        }}
         style={[
           {
             backgroundColor:
