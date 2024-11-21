@@ -56,7 +56,7 @@ export default function App(appProps: NoxComponent.AppProps) {
   const isSplashReady = useSplash(
     __DEV__ || appProps.intentData || vip ? 1 : 2500,
   );
-  const [isSplashAnimReady, setIsSplashReady] = React.useState(false);
+  const [isSplashAnimReady, setIsSplashAnimReady] = React.useState(vip);
   const isPlayerReady = useSetupPlayer({ ...appProps, vip });
   const isLandscape = useIsLandscape();
   const PIPMode = useStore(appStore, state => state.pipMode);
@@ -81,7 +81,7 @@ export default function App(appProps: NoxComponent.AppProps) {
   if (!(isPlayerReady && isSplashReady && isSplashAnimReady)) {
     return (
       <SafeAreaView style={styles.screenContainer}>
-        <AppOpenSplash setIsSplashReady={setIsSplashReady} />
+        <AppOpenSplash setIsSplashReady={setIsSplashAnimReady} />
       </SafeAreaView>
     );
   }
