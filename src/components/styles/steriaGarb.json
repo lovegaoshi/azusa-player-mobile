@@ -3455,5 +3455,107 @@
       "onSurfaceDisabled": "rgba(230, 226, 217, 0.38)",
       "backdrop": "rgba(49, 49, 37, 0.4)"
     }
+  },
+  {
+    "metaData": {
+      "themeName": "汐尔sier·光之翼",
+      "themeAuthor": "NoxAutoGen",
+      "themeIcon": "https://i0.hdslb.com/bfs/face/8ee4c412dadd4a1dbd1a1917d002390c75988506.jpg",
+      "darkTheme": true
+    },
+    "gifs": [
+      "https://i0.hdslb.com/bfs/garb/c76a3119b8886e10df38b8eac1470e75b072bff4.png",
+      "https://i0.hdslb.com/bfs/garb/bbc8940dd86b22526dbfeecb314ada210f64ae26.png",
+      "https://i0.hdslb.com/bfs/garb/edf3bd28409a2e62b4fd99d9d1894885afe332f0.png",
+      "https://i0.hdslb.com/bfs/garb/c599bb658e25337b40fef5c2f82b7591cfa3eea7.png",
+      "https://i0.hdslb.com/bfs/garb/eb4eadf5156db873a77945d7328a4f26e9cb0a1b.png",
+      "https://i0.hdslb.com/bfs/garb/f1c44225d686a5c470253c00cf9236719106c2c2.png",
+      "https://i0.hdslb.com/bfs/garb/7ff7b9ae8208805f67574ed747c780f26b1f03ef.png",
+      "https://i0.hdslb.com/bfs/garb/50c3a5c14979d986cf2a018499f395c5b2a73132.png",
+      "https://i0.hdslb.com/bfs/garb/173e9c6cf778f9fdfef8f0587097bed4a00e3cd1.png",
+      "https://i0.hdslb.com/bfs/garb/3fcbe49d7ce3d3ccdbaee9a988b4001699e6c873.png",
+      "https://i0.hdslb.com/bfs/garb/bd9214b6a3e1b8689283f4c4902d08176546e148.png",
+      "https://i0.hdslb.com/bfs/garb/3f3e49ffb0eac1454599ba9c1ffd04ae5da49302.png",
+      "https://i0.hdslb.com/bfs/garb/bb81087f6be2e78dc81b2c64f58ccb811504b252.png",
+      "https://i0.hdslb.com/bfs/garb/1e00a4175da8baccf1667f23d72e9fd61e723455.png",
+      "https://i0.hdslb.com/bfs/garb/4476f25b5eace9616a37f15447354b77516bbc17.png",
+      "https://i0.hdslb.com/bfs/garb/2b39a1d3d243a14211bdcd8df6688f840faf0878.png",
+      "https://i0.hdslb.com/bfs/garb/e60038f51d110a645350c240b6dabfc4f64be2b8.png",
+      "https://i0.hdslb.com/bfs/garb/b7e97e733eadc7c1453e6f371766fd7ba32a798f.png",
+      "https://i0.hdslb.com/bfs/garb/ddcae9f90b188816bd6a3a4ead9cf30ef5d7c7fd.png",
+      "https://i0.hdslb.com/bfs/garb/cb2b40185ee886000511526c90178bca66355c7b.png",
+      "https://i0.hdslb.com/bfs/garb/2d3280e34484a9b128ad2e27b14cebffbb0c97b6.png",
+      "https://i0.hdslb.com/bfs/garb/7f51deffa9ce64ccb305a57ce36c0ebac1a490d3.png",
+      "https://i0.hdslb.com/bfs/garb/8296478d1094b638433537eca05116c1a752bc7b.png",
+      "https://i0.hdslb.com/bfs/garb/2f640a6a91ba651491b9a4674ccad70071fd465c.png",
+      "https://i0.hdslb.com/bfs/garb/92e3569a934f3f3aa98226cc37364817869a0e9c.png"
+    ],
+    "backgroundImages": [
+      "https://i0.hdslb.com/bfs/garb/3bae5fb9d0b8a0dce9006a850303c84eabaaaf2a.png",
+      "https://i0.hdslb.com/bfs/garb/0ae4f39c3db94932445b824240fe6cfda4ad24ff.jpg",
+      "https://i0.hdslb.com/bfs/garb/a86bd2bd60a3de3b973e4426417f1910d8122d57.png",
+      "https://i0.hdslb.com/bfs/garb/72b39cbbfd9d02664bc78d5fb771c58748d5fc56.png",
+      "https://i0.hdslb.com/bfs/garb/f18d53131f21892c5afd22e11ac5e324bfba5be9.png",
+      "https://i0.hdslb.com/bfs/garb/34af5affd44399e01488d215df907c8ebd8089b5.png",
+      {
+        "type": "biliGarbHeadVideo",
+        "identifier": "226250001"
+      }
+    ],
+    "customColors": {
+      "maskedBackgroundColor": "rgba(0, 0, 0, 0.60)",
+      "playlistDrawerBackgroundColor": "green",
+      "playlistDrawerBackgroundColorTransparent": "rgba(0, 255, 0, 0.35)",
+      "progressThumbTintColor": "rgb(235, 235, 0)",
+      "progressMinimumTrackTintColor": "rgb(235, 235, 0)",
+      "progressMaximumTrackTintColor": "#FFFFFF",
+      "btnBackgroundColor": "rgb(72, 71, 58)",
+      "textInputSelectionColor": "green"
+    },
+    "colors": {
+      "primary": "#fcf75e",
+      "onPrimary": "rgb(50, 50, 0)",
+      "primaryContainer": "rgb(73, 73, 0)",
+      "onPrimaryContainer": "rgb(234, 234, 0)",
+      "secondary": "rgb(202, 200, 165)",
+      "onSecondary": "rgb(50, 50, 24)",
+      "secondaryContainer": "rgb(73, 72, 45)",
+      "onSecondaryContainer": "rgb(231, 228, 191)",
+      "tertiary": "rgb(164, 208, 189)",
+      "onTertiary": "rgb(11, 55, 42)",
+      "tertiaryContainer": "rgb(37, 78, 64)",
+      "onTertiaryContainer": "rgb(191, 236, 216)",
+      "error": "rgb(255, 180, 171)",
+      "onError": "rgb(105, 0, 5)",
+      "errorContainer": "rgb(147, 0, 10)",
+      "onErrorContainer": "rgb(255, 180, 171)",
+      "background": "rgba(0,0,0, 0.4)",
+      "onBackground": "rgb(230, 226, 217)",
+      "surface": "rgb(28, 28, 23)",
+      "onSurface": "rgba(235, 235, 0, 1)",
+      "text": "#fcf75e",
+      "surfaceVariant": "rgb(10, 10, 10)",
+      "onSurfaceVariant": "rgb(225, 225, 0)",
+      "outline": "rgb(147, 145, 130)",
+      "outlineVariant": "rgb(72, 71, 58)",
+      "shadow": "rgb(0, 0, 0)",
+      "scrim": "rgb(0, 0, 0)",
+      "inverseSurface": "rgb(230, 226, 217)",
+      "inverseOnSurface": "rgb(49, 49, 43)",
+      "inversePrimary": "rgb(98, 98, 0)",
+      "elevation": {
+        "level0": "transparent",
+        "level1": "rgb(53, 56, 57)",
+        "level2": "rgb(10, 10, 10)",
+        "level3": "rgb(10, 10, 10)",
+        "level4": "rgb(49, 49, 20)",
+        "level5": "rgb(53, 53, 20)"
+      },
+      "surfaceDisabled": "rgba(230, 226, 217, 0.12)",
+      "onSurfaceDisabled": "rgba(230, 226, 217, 0.38)",
+      "backdrop": "rgba(49, 49, 37, 0.4)"
+    },
+    "thumbupSVGA": "https://i0.hdslb.com/bfs/garb/4f9b40449b9d2464f65bc2f46079042a35ff3bb7.bin",
+    "loadingIcon": "https://i0.hdslb.com/bfs/baselabs/op/ee4ac8061787b981898fa2574beb24dfe4f43cffdc7e35c6335da1ed23eee6b5.webp"
   }
 ]
