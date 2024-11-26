@@ -2,7 +2,7 @@
   <shortcut
     android:shortcutId="resume"
     android:enabled="true"
-    android:icon="@drawable/media3_icon_circular_play"
+    android:icon="@mipmap/shortcut_play"
     android:shortcutShortLabel="@string/resume"
     android:shortcutLongLabel="@string/resume">
     <intent
@@ -14,7 +14,7 @@
   <shortcut
     android:shortcutId="play_all"
     android:enabled="true"
-    android:icon="@drawable/media3_icon_shuffle_on"
+    android:icon="@mipmap/shortcut_shuffle_on"
     android:shortcutShortLabel="@string/play_all"
     android:shortcutLongLabel="@string/play_all">
     <intent
