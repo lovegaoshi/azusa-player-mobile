@@ -14,10 +14,9 @@ import { useNoxSetting } from '@stores/useApp';
 import AzusaTheme from '@components/styles/AzusaTheme';
 import NoxTheme from '@components/styles/NoxTheme';
 import AdaptiveTheme from '@components/styles/AdaptiveTheme';
-import { getUniqObjects } from '@utils/Utils';
+import { getUniqObjects, execWhenTrue } from '@utils/Utils';
 import GenericSelectDialog from '../../dialogs/GenericSelectDialog';
 import { getStyle } from '@utils/StyleStorage';
-
 interface DisplayTheme extends NoxTheme.Style {
   builtin: boolean;
 }
@@ -159,10 +158,15 @@ const SkinSettings = () => {
       theme => getThemeID(theme) === checked,
     );
     if (currentThemeIndex > -1) {
-      scrollViewRef.current?.scrollToIndex({
-        index: currentThemeIndex,
-        viewOffset: 414,
-        animated: false,
+      execWhenTrue({
+        executeFn: () =>
+          scrollViewRef.current?.scrollToIndex({
+            index: currentThemeIndex,
+            viewPosition: 0.5,
+            animated: false,
+          }),
+        // @ts-expect-error detect if flashlist is rendered
+        loopCheck: () => scrollViewRef.current.rlvRef._layout.height > 0,
       });
     }
   }, []);
