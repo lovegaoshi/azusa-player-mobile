@@ -1,7 +1,12 @@
 // TODO: migrate to GenericSyncButton
 import React, { useState } from 'react';
 import { View, StyleSheet } from 'react-native';
-import { ActivityIndicator, IconButton, TextInput } from 'react-native-paper';
+import {
+  ActivityIndicator,
+  IconButton,
+  Text,
+  TextInput,
+} from 'react-native-paper';
 import { useTranslation } from 'react-i18next';
 
 import { noxBackup, noxRestore } from './PersonalCloudAuth';
@@ -156,11 +161,17 @@ export default ({ restoreFromUint8Array }: MainProps) => {
           restoreFromUint8Array={restoreFromUint8Array}
         />
       </View>
+      <View style={styles.keySuggestion}>
+        <Text>{t('Sync.PersonalCloudKeySuggestion')}</Text>
+      </View>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
+  keySuggestion: {
+    paddingHorizontal: 10,
+  },
   container: {
     flexDirection: 'row',
     alignItems: 'center',
