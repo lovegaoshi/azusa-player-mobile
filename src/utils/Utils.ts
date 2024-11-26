@@ -196,3 +196,22 @@ export const getExt = (url: string) => {
   const splitUrl = url.split('.');
   if (splitUrl.length > 1) return splitUrl.pop() as string;
 };
+
+interface ExecWhenTrue {
+  loopCheck: () => Promise<boolean>;
+  executeFn: () => void;
+  wait?: number;
+}
+export const execWhenTrue = async ({
+  loopCheck,
+  executeFn,
+  wait = 50,
+}: ExecWhenTrue) => {
+  while (true) {
+    if (await loopCheck()) {
+      executeFn();
+      return;
+    }
+    await timeout(wait);
+  }
+};

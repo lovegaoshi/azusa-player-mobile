@@ -92,6 +92,7 @@ export async function additionalPlaybackService({
         track?.urlRefreshTimeStamp - refetchThrottleGuard > 10000
       ) {
         try {
+          const currentProgress = await TrackPlayer.getProgress();
           logger.debug(`[ResolveURL] re-resolving track ${track?.title}`);
           const song = track?.song as NoxMedia.Song;
           const updatedMetadata = await resolveAndCache({ song });
@@ -101,6 +102,7 @@ export async function additionalPlaybackService({
             ...updatedMetadata,
             urlRefreshTimeStamp: currTime,
           });
+          await TrackPlayer.seekTo(currentProgress.position);
           TrackPlayer.play();
           refetchThrottleGuard = currTime;
         } catch (e) {

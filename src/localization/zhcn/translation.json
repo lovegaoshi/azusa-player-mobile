@@ -314,6 +314,7 @@
     "PersonalCloudDownloadSuccess": "歌单同步自PersonalCloud成功！",
     "PersonalCloudDownloadFail": "云端歌单不存在",
     "PersonalCloudDownloadFailSnackbar": "歌单同步到PersonalCloud失败，错误记录在控制台里",
+    "PersonalCloudKeySuggestion": "如果你使用了 NoxPlayer 的扩展，请使用你的**哔哩哔哩用户名**作为 key",
     "personalCloudIPPlaceholder": "末尾带/",
     "personalCloudIPLabel": "私有云地址",
     "personalCloudKeyPlaceholder": "",

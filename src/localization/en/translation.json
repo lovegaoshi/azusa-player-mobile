@@ -301,6 +301,7 @@
     "PersonalCloudDownloadFail": "云端歌单不存在",
     "PersonalCloudDownloadFailSnackbar": "歌单同步到PersonalCloud失败，错误记录在控制台里",
     "personalCloudIPPlaceholder": "end with forward slash /",
+    "PersonalCloudKeySuggestion": "If you're syncing with NoxPlayer the extension, please use your BILIBILI USER NAME as key",
     "personalCloudIPLabel": "Private cloud IP address",
     "personalCloudKeyPlaceholder": "",
     "personalCloudKeyLabel": "Private cloud key",
