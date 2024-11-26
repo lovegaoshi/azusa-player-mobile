@@ -15,7 +15,7 @@ const DialogTitle = ({ title }: { title: string | undefined }) => {
 
 interface Props<T> {
   visible: boolean;
-  options: T[];
+  options?: T[];
   renderOptionTitle?: (val: T) => string;
   title?: string;
   defaultIndex?: number;
@@ -30,7 +30,7 @@ interface Props<T> {
  */
 export default function GenericSelectDialog<T>({
   visible,
-  options,
+  options = [],
   renderOptionTitle = val => String(val),
   title = undefined,
   defaultIndex = 0,

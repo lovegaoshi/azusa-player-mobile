@@ -1,13 +1,12 @@
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
-import { Appearance, View, ColorSchemeName } from 'react-native';
+import { Appearance, ColorSchemeName } from 'react-native';
 
 import SettingListItem from '../helpers/SettingListItem';
-import GenericSelectDialog from '@components/dialogs/GenericSelectDialog';
-import {
-  SelectSettingEntry,
-  dummySelectSettingEntry,
-} from '../helpers/SettingEntry';
+import { SelectSettingEntry } from '../helpers/SettingEntry';
+import SelectDialogWrapper, {
+  SelectDialogChildren,
+} from '../SelectDialogWrapper';
 import { saveColorScheme, getColorScheme } from '@utils/ChromeStorageAPI';
 
 const ColorSchemei18n = (
@@ -24,13 +23,11 @@ const ColorSchemei18n = (
   }
 };
 
-export default () => {
+const Button = ({
+  setCurrentSelectOption,
+  setSelectVisible,
+}: SelectDialogChildren<any>) => {
   const { t } = useTranslation();
-  const [currentSelectOption, setCurrentSelectOption] = React.useState<
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    SelectSettingEntry<any>
-  >(dummySelectSettingEntry);
-  const [selectVisible, setSelectVisible] = React.useState(false);
 
   const selectColorScheme = async () => {
     setSelectVisible(true);
@@ -51,26 +48,17 @@ export default () => {
   };
 
   return (
-    <View>
-      <GenericSelectDialog
-        visible={selectVisible}
-        options={currentSelectOption.options}
-        renderOptionTitle={currentSelectOption.renderOption}
-        title={currentSelectOption.title}
-        defaultIndex={currentSelectOption.defaultIndex}
-        onClose={currentSelectOption.onClose}
-        onSubmit={currentSelectOption.onSubmit}
-      />
-      <SettingListItem
-        settingName="ColorScheme"
-        onPress={selectColorScheme}
-        settingCategory="AppearanceSettings"
-        modifyDescription={() =>
-          t('AppearanceSettings.ColorSchemeDesc', {
-            scheme: ColorSchemei18n(Appearance.getColorScheme(), t),
-          })
-        }
-      />
-    </View>
+    <SettingListItem
+      settingName="ColorScheme"
+      onPress={selectColorScheme}
+      settingCategory="AppearanceSettings"
+      modifyDescription={() =>
+        t('AppearanceSettings.ColorSchemeDesc', {
+          scheme: ColorSchemei18n(Appearance.getColorScheme(), t),
+        })
+      }
+    />
   );
 };
+
+export default () => <SelectDialogWrapper Children={Button} />;

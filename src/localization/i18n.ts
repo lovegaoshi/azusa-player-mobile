@@ -40,7 +40,7 @@ export const resources = {
 
 i18n.use(initReactI18next).init({
   resources,
-  compatibilityJSON: 'v3',
+  compatibilityJSON: 'v4',
   lng: deviceLanguage,
   fallbackLng: 'en',
   interpolation: {

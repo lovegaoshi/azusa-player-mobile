@@ -15,12 +15,3 @@ export interface SettingEntry {
   checkbox?: boolean;
   callback?: () => void;
 }
-
-export const dummySelectSettingEntry: SelectSettingEntry<string> = {
-  options: [],
-  renderOption: () => '',
-  defaultIndex: 0,
-  onClose: () => undefined,
-  onSubmit: () => undefined,
-  title: 'Some Select',
-};
