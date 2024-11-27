@@ -72,7 +72,13 @@ const useSync = () => {
     const checkedPlaylists = checkedPlaylistIndexes
       .map((val, index) =>
         val
-          ? cachedParsedContent[cachedParsedContent.MyFavList[index]]
+          ? {
+              ...cachedParsedContent[cachedParsedContent.MyFavList[index]],
+              songList:
+                cachedParsedContent[
+                  `${cachedParsedContent.MyFavList[index]}-songList`
+                ],
+            }
           : undefined,
       )
       .filter(val => val);

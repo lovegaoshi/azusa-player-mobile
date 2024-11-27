@@ -6,6 +6,7 @@ import {
   LinearGradient,
   vec,
 } from '@shopify/react-native-skia';
+import React from 'react';
 import {
   useDerivedValue as useComputedValue,
   useSharedValue,

@@ -1,6 +1,6 @@
 import { View, ScrollView } from 'react-native';
 import { ActivityIndicator, Button } from 'react-native-paper';
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import _ from 'lodash';
 import {
   MixedContent,
