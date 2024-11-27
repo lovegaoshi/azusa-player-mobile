@@ -4,23 +4,36 @@ sidebar_position: 1
 
 # Developing APM
 
-APM is written in react-native. To develop, download and install:
+APM is written in react-native. With some react or web dev experience you can start in no time. To develop, download and install if you havent already:
 
-npm (node 18+)
+```
+npm (node 22)
 
-yarn (yarn v1)
+yarn (yarn v4)`
 
 xcode/android studio
 
 git
+```
 
-then run the following command:
+Then run the following:
 
-## Build via Github Actions
+```
+git clone https://github.com/lovegaoshi/azusa-player-mobile.git
+yarn build
+yarn
+```
 
-android-release.yml monitors pushes with tags v{x.y.z} and automatically build and release.
-android-weekly runs weekly or manually to publish a release. For nightly or publishing a dev version, this is it.
+For iOS development, run
 
-## Versioning
+`cd ios && pod install && cd ..`
 
-versions are located in `Version.ts` and `build.gradle`. APM automatically updates storage to the app's version, and uses this version number to compare for new updates. [Semantic versioning](https://semver.org/) is recommended.
+and follow iOS compilation instructions [here](https://github.com/lovegaoshi/azusa-player-mobile/issues/34).
+
+# Compile, Versioning and Release
+
+APM has an automatic android compile action in `android-weekly.yml` that builds and releases on manual trigger, weekly on main, and push from dev as a pre-release package.
+
+APM uses semantic versioning.
+
+When releasing, edit the app version in `version.ts` and `androidManifest.xml`, then push to main with a `v{x}.{y}.{z}` tag. `android-release.yml` will release as the latest package.
