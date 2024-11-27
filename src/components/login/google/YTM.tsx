@@ -1,4 +1,4 @@
-import { useEffect, useState, useCallback } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { BackHandler, SafeAreaView, StyleSheet, View } from 'react-native';
 import { Button, Avatar, Text, ActivityIndicator } from 'react-native-paper';
 import { WebView } from 'react-native-webview';

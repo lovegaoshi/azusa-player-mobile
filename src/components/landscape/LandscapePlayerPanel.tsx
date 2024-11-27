@@ -1,5 +1,6 @@
 import { View } from 'react-native';
 import { useActiveTrack } from 'react-native-track-player';
+import React from 'react';
 
 import TrackInfoTemplate from '../player/TrackInfo/TrackInfoTemplate';
 import LandscapePlayerProgress from './LandscapePlayerProgress';

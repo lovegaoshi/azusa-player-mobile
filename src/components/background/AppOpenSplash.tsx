@@ -1,3 +1,4 @@
+import React from 'react';
 import { Dimensions, Pressable, StyleSheet, View } from 'react-native';
 import { Image } from 'expo-image';
 import Video from 'react-native-video';

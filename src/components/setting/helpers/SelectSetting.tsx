@@ -8,7 +8,7 @@ import SettingListItem from './SettingListItem';
 interface Props<T> {
   setSelectVisible: React.Dispatch<React.SetStateAction<boolean>>;
   setCurrentSelectOption: React.Dispatch<
-    React.SetStateAction<SelectSettingEntry<T>>
+    React.SetStateAction<SelectSettingEntry<T> | undefined>
   >;
   options: T[];
   defaultIndex?: number;

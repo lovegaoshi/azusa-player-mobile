@@ -2,7 +2,7 @@ import Animated, { useAnimatedStyle } from 'react-native-reanimated';
 import { Dimensions } from 'react-native';
 import { useFocusEffect } from '@react-navigation/native';
 import { activateKeepAwakeAsync, deactivateKeepAwake } from 'expo-keep-awake';
-import { useCallback } from 'react';
+import React, { useCallback } from 'react';
 
 import { useTrackStore } from '@hooks/useActiveTrack';
 import { LyricView } from '../player/Lyric';
