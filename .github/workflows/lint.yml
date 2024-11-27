@@ -1,0 +1,26 @@
+name: APM Lint
+on:
+  pull_request:
+    branches:
+      - master
+  workflow_dispatch:
+
+jobs:
+  jest:
+    runs-on: ubuntu-latest
+    name: APM tests
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Yarn
+        uses: threeal/setup-yarn-action@v2.0.0
+
+      - name: Install dependencies
+        run: yarn install; yarn postinstall
+
+      - name: lint & prettier
+        run: |
+          yarn ci:lint
+          yarn ci:format
