@@ -122,7 +122,10 @@ export default () => {
         title={t('Sync.SyncCheck')}
         options={noxExtensionContent}
         onClose={() => setSyncCheckVisible(false)}
-        onSubmit={syncPartialNoxExtension}
+        onSubmit={i => {
+          syncPartialNoxExtension(i);
+          setSyncCheckVisible(false);
+        }}
       />
     </View>
   );
