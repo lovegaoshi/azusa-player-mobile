@@ -80,7 +80,7 @@ export const checkAuthentication = async (token = '') => {
 
 export const noxRestore = async (
   token: string,
-  contentParse: (v: Blob) => Promise<ArrayBuffer>,
+  contentParse: (v: Blob) => Promise<Uint8Array>,
 ) => {
   const res = await bfetch(
     `https://api.github.com/repos/${await getUserName(token)}/${APM_REPO_NAME}/contents/${APM_FILE_NAME}`,

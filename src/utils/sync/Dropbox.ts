@@ -35,7 +35,7 @@ export const noxBackup = (
 
 const download = async (
   dbx: _Dropbox,
-  contentParse: (v: Blob) => Promise<ArrayBuffer>,
+  contentParse: (v: Blob) => Promise<Uint8Array>,
   fpath = DEFAULT_FILE_PATH,
 ) => {
   if (fpath === null) {
@@ -43,7 +43,7 @@ const download = async (
   }
   const downloadedFile = await dbx.filesDownload({ path: fpath });
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  // @ts-ignore: dropbox didnt have fileBlob in their sdk anywhere but UPGRADING.md
+  // @ts-expect-error: dropbox didnt have fileBlob in their sdk anywhere but UPGRADING.md
   const blob = await contentParse(downloadedFile.result.fileBlob);
   return new Uint8Array(blob);
 };
@@ -55,7 +55,7 @@ const download = async (
  */
 export const noxRestore = async (
   dbx: _Dropbox,
-  contentParse: (v: Blob) => Promise<ArrayBuffer>,
+  contentParse: (v: Blob) => Promise<Uint8Array>,
 ) => {
   const noxFile = await find(dbx);
   if (!noxFile) {

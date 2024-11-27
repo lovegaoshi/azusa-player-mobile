@@ -207,11 +207,8 @@ export const execWhenTrue = async ({
   executeFn,
   wait = 50,
 }: ExecWhenTrue) => {
-  while (true) {
-    if (await loopCheck()) {
-      executeFn();
-      return;
-    }
+  while (!(await loopCheck())) {
     await timeout(wait);
   }
+  executeFn();
 };
