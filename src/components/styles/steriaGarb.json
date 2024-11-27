@@ -3853,5 +3853,141 @@
       "onSurfaceDisabled": "rgba(230, 226, 217, 0.38)",
       "backdrop": "rgba(49, 49, 37, 0.4)"
     }
+  },
+  {
+    "metaData": {
+      "themeName": "噗噗夏露露收藏集",
+      "themeDesc": "【噗噗露露收藏集】是bilibili携手夏露露Ruru定制打造的个人数字集卡,其中每张数字卡片都将拥有独特编号，各式各样的风格让大家眼前一亮，期待大家一起解锁夏露露Ruru的不同风格！",
+      "themeAuthor": "NoxAutoGen",
+      "themeIcon": "https://i0.hdslb.com/bfs/garb/d716ed21f87872a72c12ac37df7c3624274fa4c3.jpg",
+      "darkTheme": true
+    },
+    "gifs": [
+      "https://i0.hdslb.com/bfs/garb/59474f25bf375915b12912fe33b6fe7c9dae201b.png",
+      "https://i0.hdslb.com/bfs/garb/bde2286bf80cffe902f93de3a32af1e29e22ad9e.png",
+      "https://i0.hdslb.com/bfs/garb/9fc0f514c6413c16b243e245c78facfb9f0b7b9a.png",
+      "https://i0.hdslb.com/bfs/garb/8fc12303d35a510971495141452b79f4f6ee90d3.png",
+      "https://i0.hdslb.com/bfs/garb/aee79db26bbed9936cdd0ad0aa916eb6b644a199.png",
+      "https://i0.hdslb.com/bfs/garb/ad99177cff9dcde73b7a13c30d6a4ed12ebfcb1c.png",
+      "https://i0.hdslb.com/bfs/garb/61e5c9b39e14e911404b7496c7613eab470b5dc7.png",
+      "https://i0.hdslb.com/bfs/garb/35ec4042ebe5cd216630cbf00188cba9fcd5ae21.png",
+      "https://i0.hdslb.com/bfs/garb/7ddb974be3b1e0870bd1fc66fa92c1fc2f46350e.png",
+      "https://i0.hdslb.com/bfs/garb/7c790d816ee717c07a972d0bd31ef6d3abb20701.png",
+      "https://i0.hdslb.com/bfs/garb/a18745fa4dc984cd61e2023e429888a2855e9d37.png",
+      "https://i0.hdslb.com/bfs/garb/a3aeaf3a741e56778b907aca18e13559bc45a5b3.png",
+      "https://i0.hdslb.com/bfs/garb/8df762c4954da3e6183ef54aa90baa51506f4c8e.png",
+      "https://i0.hdslb.com/bfs/garb/8497f1f567150e3eb63667cdc85ab2b96234877c.png",
+      "https://i0.hdslb.com/bfs/garb/9f585dcbdfc6bc9bc179ba3fadbd493542a3baa7.png",
+      "https://i0.hdslb.com/bfs/garb/79fa19a6b0d44acd38f06d437a9c8626808e482c.png",
+      "https://i0.hdslb.com/bfs/garb/9b9fbc450918fea05e023c519428a78d92dcbdf0.png",
+      "https://i0.hdslb.com/bfs/garb/38e485dc185b5f2c46e8913ece3fef65cd237bdc.png",
+      "https://i0.hdslb.com/bfs/garb/43434a9a99f33d72c682a7313d29b3bae2ca6f1b.png",
+      "https://i0.hdslb.com/bfs/garb/313c5a6bb13cdcb04aa8f3cff43e7b9d0f1c1086.png"
+    ],
+    "backgroundImages": [
+      {
+        "type": "biliNFTVideoNew",
+        "identifier": "[\"104598\",\"104599\",\"恶魔修女\"]"
+      },
+      {
+        "type": "biliNFTVideoNew",
+        "identifier": "[\"104598\",\"104599\",\"粉色回忆\"]"
+      },
+      {
+        "type": "biliNFTVideoNew",
+        "identifier": "[\"104598\",\"104599\",\"惩罚游戏\"]"
+      },
+      {
+        "type": "biliNFTVideoNew",
+        "identifier": "[\"104598\",\"104599\",\"你的礼物\"]"
+      },
+      {
+        "type": "biliNFTVideoNew",
+        "identifier": "[\"104598\",\"104599\",\"垫大欺客\"]"
+      },
+      {
+        "type": "biliNFTVideoNew",
+        "identifier": "[\"104598\",\"104599\",\"梦见露露\"]"
+      },
+      "https://i0.hdslb.com/bfs/garb/open/f515ddcb7010cafc53140e50013180f1aa77bba5.png",
+      "https://i0.hdslb.com/bfs/garb/open/e950162887a6f7c6ddcee38a719edec1376c03b8.png",
+      "https://i0.hdslb.com/bfs/garb/open/0e3537a8f2cd80f67148ddcb00c2d57259520ec1.png",
+      "https://i0.hdslb.com/bfs/garb/open/4e0cfc84d23c2f4335c9572d7e01b5262f760d43.png",
+      "https://i0.hdslb.com/bfs/garb/open/f32b96ceff35d41f76d32cce9f36f75f63be5640.png",
+      {
+        "type": "biliNFTVideoNew",
+        "identifier": "[\"104598\",\"104599\",\"上学去咯\"]"
+      },
+      {
+        "type": "biliNFTVideoNew",
+        "identifier": "[\"104598\",\"104599\",\"一起游泳\"]"
+      },
+      {
+        "type": "biliNFTVideoNew",
+        "identifier": "[\"104598\",\"104599\",\"可爱露露\"]"
+      },
+      {
+        "type": "biliNFTVideoNew",
+        "identifier": "[\"104598\",\"104599\",\"厨神露露\"]"
+      },
+      "https://i0.hdslb.com/bfs/garb/open/2ffcf7f4e89d2fc36e519aa6bc09915c720832e8.png",
+      "https://i0.hdslb.com/bfs/garb/open/75e76b657fb181ceb4dd6f4fd4e1805c81c44c2d.png",
+      "https://i0.hdslb.com/bfs/garb/open/b867373b3a6c25d223cf1fb88309f8d4dc803151.png",
+      "https://i0.hdslb.com/bfs/garb/open/39b8dadd0949dfaa9520354afaf58d0003615f3f.png",
+      "https://i0.hdslb.com/bfs/garb/open/ddaffc84eeb0952e518f54ce7b7bdf9314b1598d.png"
+    ],
+    "customColors": {
+      "maskedBackgroundColor": "rgba(0, 0, 0, 0.60)",
+      "playlistDrawerBackgroundColor": "green",
+      "playlistDrawerBackgroundColorTransparent": "rgba(0, 255, 0, 0.35)",
+      "progressThumbTintColor": "rgb(235, 235, 0)",
+      "progressMinimumTrackTintColor": "rgb(235, 235, 0)",
+      "progressMaximumTrackTintColor": "#FFFFFF",
+      "btnBackgroundColor": "rgb(72, 71, 58)",
+      "textInputSelectionColor": "green"
+    },
+    "colors": {
+      "primary": "#fcf75e",
+      "onPrimary": "rgb(50, 50, 0)",
+      "primaryContainer": "rgb(73, 73, 0)",
+      "onPrimaryContainer": "rgb(234, 234, 0)",
+      "secondary": "rgb(202, 200, 165)",
+      "onSecondary": "rgb(50, 50, 24)",
+      "secondaryContainer": "rgb(73, 72, 45)",
+      "onSecondaryContainer": "rgb(231, 228, 191)",
+      "tertiary": "rgb(164, 208, 189)",
+      "onTertiary": "rgb(11, 55, 42)",
+      "tertiaryContainer": "rgb(37, 78, 64)",
+      "onTertiaryContainer": "rgb(191, 236, 216)",
+      "error": "rgb(255, 180, 171)",
+      "onError": "rgb(105, 0, 5)",
+      "errorContainer": "rgb(147, 0, 10)",
+      "onErrorContainer": "rgb(255, 180, 171)",
+      "background": "rgba(0,0,0, 0.4)",
+      "onBackground": "rgb(230, 226, 217)",
+      "surface": "rgb(28, 28, 23)",
+      "onSurface": "rgba(235, 235, 0, 1)",
+      "text": "#fcf75e",
+      "surfaceVariant": "rgb(10, 10, 10)",
+      "onSurfaceVariant": "rgb(225, 225, 0)",
+      "outline": "rgb(147, 145, 130)",
+      "outlineVariant": "rgb(72, 71, 58)",
+      "shadow": "rgb(0, 0, 0)",
+      "scrim": "rgb(0, 0, 0)",
+      "inverseSurface": "rgb(230, 226, 217)",
+      "inverseOnSurface": "rgb(49, 49, 43)",
+      "inversePrimary": "rgb(98, 98, 0)",
+      "elevation": {
+        "level0": "transparent",
+        "level1": "rgb(53, 56, 57)",
+        "level2": "rgb(10, 10, 10)",
+        "level3": "rgb(10, 10, 10)",
+        "level4": "rgb(49, 49, 20)",
+        "level5": "rgb(53, 53, 20)"
+      },
+      "surfaceDisabled": "rgba(230, 226, 217, 0.12)",
+      "onSurfaceDisabled": "rgba(230, 226, 217, 0.38)",
+      "backdrop": "rgba(49, 49, 37, 0.4)"
+    }
   }
 ]
