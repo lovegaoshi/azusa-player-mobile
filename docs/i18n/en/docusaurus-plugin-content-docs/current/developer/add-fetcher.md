@@ -44,7 +44,7 @@ Because one BVID may have multiple sub videos, each `VideoInfo` is extracted by 
 
 There are two common functions written for `paginatedFetch` in `paginatedfetch.ts`, `fetchPaginatedAPI` and `fetchAwaitPaginatedAPI`. `fetchAwaitPaginatedAPI` stops the first time a duplicate is found in `favList`, while `fetchPaginatedAPI` resolves all pages regardless. Both have the same props, where:
 
-`url,` the API url. this must have a {pn} to be replaced by a page number, starting from 1.
+`url,` the API url. this must have a `pn` to be replaced by a page number, starting from 1.
 
 `getMediaCount,` the total number of songs to be fetched from the API. this can be a hardcoded number to limit the total number of fetched songs, or more commonly a field from the response.
 

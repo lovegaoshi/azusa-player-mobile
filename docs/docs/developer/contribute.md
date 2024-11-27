@@ -6,13 +6,15 @@ sidebar_position: 1
 
 APM is written in react-native. With some react or web dev experience you can start in no time. To develop, download and install if you havent already:
 
-`npm (node 18+)`
+```
+npm (node 22)
 
-`yarn (yarn v1.22)`
+yarn (yarn v4)`
 
-`xcode/android studio`
+xcode/android studio
 
-`git`
+git
+```
 
 Then run the following:
 
@@ -34,4 +36,4 @@ APM has an automatic android compile action in `android-weekly.yml` that builds 
 
 APM uses semantic versioning.
 
-When releasing, edit the app version in `version.ts` and `androidManifest.xml`, then push to main with a v{x}.{y}.{z} tag. `android-release.yml` will release as the latest package.
+When releasing, edit the app version in `version.ts` and `androidManifest.xml`, then push to main with a `v{x}.{y}.{z}` tag. `android-release.yml` will release as the latest package.
