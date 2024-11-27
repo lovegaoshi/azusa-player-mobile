@@ -4,9 +4,9 @@ sidebar_position: 1
 
 # APM Pro
 
-![azusa-please](pathname://https://img.nga.178.com/attachments/mon_202201/31/-zue37Q2p-ixpkXsZ7tT3cS9y-af.gif)
+![azusa-please](../../../../../docs/store/images/azusa-please.gif)
 
-Thank you for your interest supporting APM's development and maintenance with real money. With a low price of $2.99, your support will be the most meaningful to me as APM's developer and maintainer.
+Thank you for your interest supporting APM's development and maintenance with real money. For a low price of $2.99, your support will be the most meaningful to me as APM's developer and maintainer.
 
 To give back to your support, APM will no longer display the 3 seconds opening splash ad with its pro feature. However if you would still like to view these splash ads, you may do so under settings - splash ad.
 

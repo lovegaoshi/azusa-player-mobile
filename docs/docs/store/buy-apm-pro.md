@@ -4,7 +4,7 @@ sidebar_position: 1
 
 # APM 高级版本
 
-![azusa-please](pathname://https://img.nga.178.com/attachments/mon_202201/31/-zue37Q2p-ixpkXsZ7tT3cS9y-af.gif)
+![azusa-please](./images/azusa-please.gif)
 
 感谢您有兴趣用真钱支持APM的开发与维护。您的$2.99会对APM的开发给予莫大的鼓励。
 
