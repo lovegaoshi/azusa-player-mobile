@@ -72,9 +72,9 @@ parsedGarbData.portraits = parsedGarbData.portraits.concat(redeemPortraits);
 const emojiIds = garblistdata
   .map(
     garb =>
-      garb.collect_list?.collect_infos?.filter(v =>
-        v.redeem_item_name.includes('表情包'),
-      )[0]?.redeem_item_id,
+      (garb.collect_list?.collect_infos ?? [])
+        .concat(garb.collect_list?.collect_chain ?? [])
+        .filter(v => v?.redeem_item_name.includes('表情包'))[0]?.redeem_item_id,
   )
   .filter(v => v);
 

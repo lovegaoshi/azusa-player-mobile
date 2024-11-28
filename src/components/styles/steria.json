@@ -629,6 +629,26 @@
       "darkTheme": true
     },
     "gifs": [
+      "https://i0.hdslb.com/bfs/garb/6597a6fea0e432a3143e6c1de74bb789093a3c2a.png",
+      "https://i0.hdslb.com/bfs/garb/bb380f36e7dd8118a70c9dea5ea8ac7ecca78d5e.png",
+      "https://i0.hdslb.com/bfs/garb/8a893658b531ef4aae7a45c9efe9084b1c880a41.png",
+      "https://i0.hdslb.com/bfs/garb/d6af09209c8eb025b8aad1ae8f41c55492a1cd4c.png",
+      "https://i0.hdslb.com/bfs/garb/1064d6158a31ba2292aa20e660c70ba13f5288c0.png",
+      "https://i0.hdslb.com/bfs/garb/b635b1c62c659cacb9f21df7624987e85210670b.png",
+      "https://i0.hdslb.com/bfs/garb/366246a077faba55ad246671b135596dde783caa.png",
+      "https://i0.hdslb.com/bfs/garb/c18daf6995778df730d27cd92a87cdb550b29508.png",
+      "https://i0.hdslb.com/bfs/garb/2011c1e33afce208002b45216bbed808a85fe80b.png",
+      "https://i0.hdslb.com/bfs/garb/5d4927f847d9c631d20b5bacebd09e314d0c1d19.png",
+      "https://i0.hdslb.com/bfs/garb/6352c7d8e126755fa7e5fb5990a06dfc9708d7ab.png",
+      "https://i0.hdslb.com/bfs/garb/ee374a54cfe5737270a016158529c0a75c6f9f66.png",
+      "https://i0.hdslb.com/bfs/garb/57d414aca98c5609a1ff4bf19faa835cc319cd36.png",
+      "https://i0.hdslb.com/bfs/garb/7c874f8f5fe447826f36cce464a19c62f82c1412.png",
+      "https://i0.hdslb.com/bfs/garb/a4f044cf6b844b8f5669f387907d77e2c7b18abc.png",
+      "https://i0.hdslb.com/bfs/garb/9fca66e54480fe63eec98247ff5218b9a792ee54.png",
+      "https://i0.hdslb.com/bfs/garb/005afcf2e0470447a6742a34031f68383a05f19b.png",
+      "https://i0.hdslb.com/bfs/garb/76c3499a78e7d30896032ef9d8c159545e411d61.png",
+      "https://i0.hdslb.com/bfs/garb/77fefd7f87529627e6135d1b294a5b6d7c14899e.png",
+      "https://i0.hdslb.com/bfs/garb/9518610cb6097651b6437214322cdddbcae390dc.png",
       "https://i0.hdslb.com/bfs/garb/item/f26e50aa169a95c08caf0550d637045247911719.png",
       "https://i0.hdslb.com/bfs/garb/item/2cd93e68680a661740158bf926aaf05bb43ca131.png",
       "https://i0.hdslb.com/bfs/garb/item/6dda219acdb584b0791200c30a651f60b1d29fc7.png",
@@ -656,6 +676,27 @@
       "https://i0.hdslb.com/bfs/garb/item/42b5c3b8f41e804c3e045df69d9d0a4a8f2c399c.png"
     ],
     "backgroundImages": [
+      {
+        "type": "biliNFTVideoNew",
+        "identifier": "[\"104732\",\"104733\",\"色欲-呢喃之夜\"]"
+      },
+      {
+        "type": "biliNFTVideoNew",
+        "identifier": "[\"104732\",\"104733\",\"嫉妒-那喀索斯之镜\"]"
+      },
+      {
+        "type": "biliNFTVideoNew",
+        "identifier": "[\"104732\",\"104733\",\"贪婪-无餍之渊\"]"
+      },
+      "https://i0.hdslb.com/bfs/garb/open/a48e63c97b9e02870af3c9a7e4c750c9df0d49fa.png",
+      "https://i0.hdslb.com/bfs/garb/open/6b46463ff4cf5423de2610711a7ccb4623b5198a.png",
+      "https://i0.hdslb.com/bfs/garb/open/22aac16122e4fc6e1267339f98ca1d291b300ac9.png",
+      "https://i0.hdslb.com/bfs/garb/open/2ec89f63a9bb420ab822c773422bf8633dae590d.png",
+      "https://i0.hdslb.com/bfs/garb/open/a50839b3a0b285f86d155c76e1af1de2474214f5.png",
+      {
+        "type": "biliNFTVideoRedeem",
+        "identifier": "[\"104732\",\"104733\",\"伊底之镜典藏卡\"]"
+      },
       "https://i0.hdslb.com/bfs/garb/item/17f365d114f3a2749f3dde71b5f555fd4474ca9c.jpg",
       "https://i0.hdslb.com/bfs/garb/item/02257d22c49f8071394257131fdeae76e8b1dcf5.jpg",
       "https://i0.hdslb.com/bfs/garb/item/db50d5af88010eb3e7f68eb1b741544756d2395a.jpg",
