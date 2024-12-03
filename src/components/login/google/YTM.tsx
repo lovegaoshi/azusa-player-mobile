@@ -7,7 +7,6 @@ import CookieManager from '@react-native-cookies/cookies';
 import { get_option, get_current_user } from 'libmuse';
 import { useTranslation } from 'react-i18next';
 
-import useGoogleTVOauth from '@components/login/google/useGoogleTVOauth';
 import { saveSecure as saveItem } from '@utils/ChromeStorageAPI';
 import { StorageKeys } from '@enums/Storage';
 import { User, UseYTMLogin } from './useYTMLogin';
@@ -24,10 +23,7 @@ const clearCookies = () => {
 
 const checkYTM = async () => console.log(await get_current_user());
 
-interface LoginProps {
-  refresh: () => void;
-}
-const Login = ({ refresh }: LoginProps) => {
+const Login = () => {
   const { t } = useTranslation();
   const [webView, _setWebView] = useState(false);
   const [cookies, setCookies] = useState<string[]>([]);
@@ -36,9 +32,6 @@ const Login = ({ refresh }: LoginProps) => {
     _setWebView(val);
     toggleCollapse(val);
   };
-  const { userURL, loginCodes, getNewLoginCode } = useGoogleTVOauth({
-    setWebView,
-  });
 
   const onMessage = (event: any) => {
     const { data } = event.nativeEvent;
@@ -57,12 +50,6 @@ const Login = ({ refresh }: LoginProps) => {
               value,
             });
           });
-          auth
-            .load_token_with_code(loginCodes!.deviceCode, loginCodes!.interval)
-            .then(t => {
-              museStore.set('token', t);
-              refresh();
-            });
           saveItem(StorageKeys.YTMCOOKIES, cookies.join('; '));
           return true;
         }
@@ -80,14 +67,16 @@ const Login = ({ refresh }: LoginProps) => {
 
   return webView ? (
     <WebView
-      source={{ uri: userURL }}
+      source={{
+        uri: 'https://accounts.google.com/ServiceLogin?service=youtube&uilel=3&passive=true&continue=https%3A%2F%2Fwww.youtube.com%2Fsignin%3Faction_handle_signin%3Dtrue%26app%3Ddesktop%26hl%3Den%26next%3Dhttps%253A%252F%252Fwww.youtube.com%252F&hl=en&ec=65620',
+      }}
       injectedJavaScript={jsCode}
       onMessage={onMessage}
     />
   ) : (
     <SafeAreaView>
       {__DEV__ && <Button onPress={checkYTM}>{t('Login.Check')}</Button>}
-      <Button onPress={getNewLoginCode}>{t('Login.Login')}</Button>
+      <Button onPress={() => setWebView(true)}>{t('Login.Login')}</Button>
       <Button onPress={clearCookies}>{t('Login.Clear')}</Button>
     </SafeAreaView>
   );
@@ -123,7 +112,7 @@ interface Props {
   ytmLogin: UseYTMLogin;
 }
 const Explore = ({ ytmLogin }: Props) => {
-  const { user, clear, initialized, refresh, init } = ytmLogin;
+  const { user, clear, initialized, init } = ytmLogin;
 
   useEffect(() => {
     init();
@@ -143,7 +132,7 @@ const Explore = ({ ytmLogin }: Props) => {
       }}
     />
   ) : (
-    <Login refresh={refresh} />
+    <Login />
   );
 };
 
