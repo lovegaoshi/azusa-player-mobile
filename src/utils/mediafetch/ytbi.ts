@@ -7,6 +7,7 @@ import { decode, encode } from 'base-64';
 import { Innertube, ClientType } from 'youtubei.js';
 import { getSecure as getItem } from '@utils/ChromeStorageAPI';
 
+import { timeFunction } from '../Utils';
 import MMKV from '../fakeMMKV';
 import { StorageKeys } from '@enums/Storage';
 import logger from '../Logger';
@@ -44,12 +45,8 @@ global.CustomEvent = CustomEvent as any;
 
 let ytClient: undefined | Innertube;
 
-export default async () => {
-  if (ytClient !== undefined) {
-    return ytClient;
-  }
-  logger.debug('[ytbi.js] ytClient is initializing. takes time...');
-  ytClient = await getItem(StorageKeys.YTMCOOKIES, undefined).then(cookie =>
+const createYtClient = () =>
+  getItem(StorageKeys.YTMCOOKIES, undefined).then(cookie =>
     Innertube.create({
       retrieve_player: true,
       enable_session_cache: false,
@@ -58,6 +55,13 @@ export default async () => {
       cookie,
     }),
   );
+
+export default async () => {
+  if (ytClient !== undefined) {
+    return ytClient;
+  }
+  logger.debug('[ytbi.js] ytClient is initializing. takes time...');
+  ytClient = (await timeFunction(createYtClient, 'ytClient init')).result;
   return ytClient!;
 };
 
