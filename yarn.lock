@@ -2050,9 +2050,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@expo/fingerprint@npm:0.11.2":
-  version: 0.11.2
-  resolution: "@expo/fingerprint@npm:0.11.2"
+"@expo/fingerprint@npm:0.11.3":
+  version: 0.11.3
+  resolution: "@expo/fingerprint@npm:0.11.3"
   dependencies:
     "@expo/spawn-async": "npm:^1.7.2"
     arg: "npm:^5.0.2"
@@ -2066,7 +2066,7 @@ __metadata:
     semver: "npm:^7.6.0"
   bin:
     fingerprint: bin/cli.js
-  checksum: 10c0/9f7ffd00819ed9bb2d88a6b31a1728fc67fd8c404b2ed1e75f4bfcdd4ae9a653d1dc28c26f264b7e6f46203160634b6c3ea8d127c7a5c249fc24f87d72b27253
+  checksum: 10c0/a628f8f70ff654f18a2519c2c160f02f566f22682832f847609d192d2fa941116c123dd47f342a0c5fe5462b5446f0e199ea35606546b1b5ba01877e9804ea86
   languageName: node
   linkType: hard
 
@@ -5611,14 +5611,14 @@ __metadata:
     eslint-config-expo: "npm:^8.0.1"
     eslint-config-prettier: "npm:^9.1.0"
     eslint-import-resolver-babel-module: "npm:^5.3.2"
-    eslint-import-resolver-typescript: "npm:^3.6.3"
+    eslint-import-resolver-typescript: "npm:^3.7.0"
     eslint-plugin-import: "npm:^2.31.0"
     eslint-plugin-node: "npm:^11.1.0"
     eslint-plugin-prettier: "npm:^5.2.1"
     eslint-plugin-react: "npm:^7.37.2"
     eslint-plugin-react-hooks: "npm:^5.0.0"
     event-target-polyfill: "npm:^0.0.4"
-    expo: "npm:^52.0.12"
+    expo: "npm:^52.0.14"
     expo-auth-session: "npm:~6.0.1"
     expo-clipboard: "npm:~7.0.0"
     expo-crypto: "npm:~14.0.1"
@@ -5631,7 +5631,7 @@ __metadata:
     ffmpeg-kit-react-native: "npm:^6.0.2"
     gts: "npm:^6.0.2"
     he: "npm:^1.2.0"
-    i18next: "npm:^24.0.2"
+    i18next: "npm:^24.0.5"
     jest: "npm:^29.7.0"
     js-base64: "npm:^3.7.7"
     libmuse: "https://github.com/lovegaoshi/muse.git#commit=0bffe2319baf825037bece6869d360d6d307eb72"
@@ -5661,7 +5661,7 @@ __metadata:
     react-native-get-random-values: "npm:^1.11.0"
     react-native-image-colors: "npm:^2.4.0"
     react-native-lyric: "https://lovegaoshi@github.com/lovegaoshi/react-native-lyric.git#commit=6f20e83948c29b0d46833ab9173cd81f99d0ab48"
-    react-native-pager-view: "npm:6.6.0"
+    react-native-pager-view: "npm:6.6.1"
     react-native-paper: "npm:^5.12.5"
     react-native-purchases: "npm:^8.3.0"
     react-native-qrcode-svg: "npm:^6.3.12"
@@ -5670,14 +5670,14 @@ __metadata:
     react-native-screens: "npm:4.3.0"
     react-native-shadow-2: "npm:^7.1.1"
     react-native-share-menu: "git+https://github.com/Expensify/react-native-share-menu.git"
-    react-native-svg: "npm:15.9.0"
+    react-native-svg: "npm:15.10.0"
     react-native-svga-player: "https://lovegaoshi@github.com/lovegaoshi/react-native-svga-player.git#commit=f8c6303fddb528a1a94d2ab4696c9318c0002cfd"
     react-native-text-ticker: "https://lovegaoshi@github.com/lovegaoshi/react-native-text-ticker.git#commit=b9eb454b18bb621a769ce4b57b4603a81501b477"
-    react-native-track-player: "https://github.com/lovegaoshi/react-native-track-player.git#commit=f13783422b9736dde0f7d33c32e3560c6950c520"
+    react-native-track-player: "https://github.com/lovegaoshi/react-native-track-player.git#commit=71b08733e6f680db10613036c450509c855917ea"
     react-native-url-polyfill: "npm:^2.0.0"
     react-native-vector-icons: "npm:^10.2.0"
     react-native-video: "npm:^6.8.2"
-    react-native-webview: "npm:13.12.4"
+    react-native-webview: "npm:13.12.5"
     react-test-renderer: "npm:18.3.1"
     reactotron-react-native: "npm:^5.1.10"
     rimraf: "npm:^6.0.1"
@@ -7357,7 +7357,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"debug@npm:4, debug@npm:^4.1.0, debug@npm:^4.1.1, debug@npm:^4.3.1, debug@npm:^4.3.2, debug@npm:^4.3.4, debug@npm:^4.3.5":
+"debug@npm:4, debug@npm:^4.1.0, debug@npm:^4.1.1, debug@npm:^4.3.1, debug@npm:^4.3.2, debug@npm:^4.3.4, debug@npm:^4.3.5, debug@npm:^4.3.7":
   version: 4.3.7
   resolution: "debug@npm:4.3.7"
   dependencies:
@@ -8118,6 +8118,31 @@ __metadata:
   languageName: node
   linkType: hard
 
+"eslint-import-resolver-typescript@npm:^3.7.0":
+  version: 3.7.0
+  resolution: "eslint-import-resolver-typescript@npm:3.7.0"
+  dependencies:
+    "@nolyfill/is-core-module": "npm:1.0.39"
+    debug: "npm:^4.3.7"
+    enhanced-resolve: "npm:^5.15.0"
+    fast-glob: "npm:^3.3.2"
+    get-tsconfig: "npm:^4.7.5"
+    is-bun-module: "npm:^1.0.2"
+    is-glob: "npm:^4.0.3"
+    stable-hash: "npm:^0.0.4"
+  peerDependencies:
+    eslint: "*"
+    eslint-plugin-import: "*"
+    eslint-plugin-import-x: "*"
+  peerDependenciesMeta:
+    eslint-plugin-import:
+      optional: true
+    eslint-plugin-import-x:
+      optional: true
+  checksum: 10c0/b1dec542a31486b3b5730f71f08a8ee2ac4915dbc4aa1493fd15bc8fcadcb029772ab39a425824c235045b3a7e629290a339d4a7e7f3dd32b24e715106352d40
+  languageName: node
+  linkType: hard
+
 "eslint-module-utils@npm:^2.12.0, eslint-module-utils@npm:^2.8.1":
   version: 2.12.0
   resolution: "eslint-module-utils@npm:2.12.0"
@@ -8840,9 +8865,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"expo-modules-autolinking@npm:2.0.2":
-  version: 2.0.2
-  resolution: "expo-modules-autolinking@npm:2.0.2"
+"expo-modules-autolinking@npm:2.0.3":
+  version: 2.0.3
+  resolution: "expo-modules-autolinking@npm:2.0.3"
   dependencies:
     "@expo/spawn-async": "npm:^1.7.2"
     chalk: "npm:^4.1.0"
@@ -8854,16 +8879,16 @@ __metadata:
     resolve-from: "npm:^5.0.0"
   bin:
     expo-modules-autolinking: bin/expo-modules-autolinking.js
-  checksum: 10c0/c9ecfa269f719ff9fe161d4f01d4f04fdcfeccb3131beaf96a374c9e8635e94f6ac73c80b1ce6644f01c916b5bd766fdaa83a41d12f189e6f950411b048e583e
+  checksum: 10c0/0fb941842d44105fc8ba9df12f77474705c8a36d4207a4a51ffda077de1bd43f6d91d572cad280f10a620eef82bf7582660c664210ee431e74268858d1554540
   languageName: node
   linkType: hard
 
-"expo-modules-core@npm:2.1.0":
-  version: 2.1.0
-  resolution: "expo-modules-core@npm:2.1.0"
+"expo-modules-core@npm:2.1.1":
+  version: 2.1.1
+  resolution: "expo-modules-core@npm:2.1.1"
   dependencies:
     invariant: "npm:^2.2.4"
-  checksum: 10c0/32338bea12903d113a5cf95496f0bbbe990374817ed621acf803339e7dfef8d8d42736c6ddeb0b5b83a2a675fe5b7712c747813b09acf27b5d443d2bc9def2dc
+  checksum: 10c0/b454fed6da873f20bebbe71ea3095e193aef4ba6f8040784e623052ed2ecfcfb6b85b7f2810ff7a47e7cb17acbad4ff21b200886684c01d53437524792b77451
   languageName: node
   linkType: hard
 
@@ -8886,15 +8911,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"expo@npm:^52.0.12":
-  version: 52.0.12
-  resolution: "expo@npm:52.0.12"
+"expo@npm:^52.0.14":
+  version: 52.0.14
+  resolution: "expo@npm:52.0.14"
   dependencies:
     "@babel/runtime": "npm:^7.20.0"
     "@expo/cli": "npm:0.22.0"
     "@expo/config": "npm:~10.0.5"
     "@expo/config-plugins": "npm:~9.0.11"
-    "@expo/fingerprint": "npm:0.11.2"
+    "@expo/fingerprint": "npm:0.11.3"
     "@expo/metro-config": "npm:0.19.5"
     "@expo/vector-icons": "npm:^14.0.0"
     babel-preset-expo: "npm:~12.0.3"
@@ -8903,8 +8928,8 @@ __metadata:
     expo-file-system: "npm:~18.0.4"
     expo-font: "npm:~13.0.1"
     expo-keep-awake: "npm:~14.0.1"
-    expo-modules-autolinking: "npm:2.0.2"
-    expo-modules-core: "npm:2.1.0"
+    expo-modules-autolinking: "npm:2.0.3"
+    expo-modules-core: "npm:2.1.1"
     fbemitter: "npm:^3.0.0"
     web-streams-polyfill: "npm:^3.3.2"
     whatwg-url-without-unicode: "npm:8.0.0-3"
@@ -8923,7 +8948,7 @@ __metadata:
       optional: true
   bin:
     expo: bin/cli
-  checksum: 10c0/5c19254e4fec3769359626ad677c41d4ef33a6be7717f4802e3b58f1d487e5deaa977a95ffd8a1de21bf00cdbb43959fdc3aad328ea7b78c337bf6a413cbae94
+  checksum: 10c0/97acc249159d2a346f7682ff9c8f9c0a07206367631f69120ab609a119c6c1fdbab3cc55061c10ced82cbc37a5e8b395ea879d90562c298ce3c3edc84b087050
   languageName: node
   linkType: hard
 
@@ -10143,9 +10168,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"i18next@npm:^24.0.2":
-  version: 24.0.2
-  resolution: "i18next@npm:24.0.2"
+"i18next@npm:^24.0.5":
+  version: 24.0.5
+  resolution: "i18next@npm:24.0.5"
   dependencies:
     "@babel/runtime": "npm:^7.23.2"
   peerDependencies:
@@ -10153,7 +10178,7 @@ __metadata:
   peerDependenciesMeta:
     typescript:
       optional: true
-  checksum: 10c0/6bd2d9a8566026e1a8f97e6d797c323007ad816bf6e90f13cf0114d67908a845b88a5b9701d3d0dabffd38785a6ac145ea9d54265d8ef0f872931c7fa9579e16
+  checksum: 10c0/3bcaf95c2f9a9025bbbc0efaea24f29197c6cc9465ad9fc565974d06d34e38bb7646bf79eab0a2906815cbb91b2cbf73bbf4f20aecf4fec7591def464b92796b
   languageName: node
   linkType: hard
 
@@ -14496,13 +14521,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-native-pager-view@npm:6.6.0":
-  version: 6.6.0
-  resolution: "react-native-pager-view@npm:6.6.0"
+"react-native-pager-view@npm:6.6.1":
+  version: 6.6.1
+  resolution: "react-native-pager-view@npm:6.6.1"
   peerDependencies:
     react: "*"
     react-native: "*"
-  checksum: 10c0/3d54a94fb15d1f2b84f0163ddb331255454e4e40040bc09871f2decb10847dc54d82e18252b920328e0969d21dfea89a42cf3226c00008e1b0bd06660c83d621
+  checksum: 10c0/31dfc7aea625b749e182073a5416b6cd7501289a38effd0631cfa9f938b51dee7bb2f57d66a31a407f2bb15742b90a9520bfeb59d9881e8fbb0681a73ddcd89f
   languageName: node
   linkType: hard
 
@@ -14624,9 +14649,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-native-svg@npm:15.9.0":
-  version: 15.9.0
-  resolution: "react-native-svg@npm:15.9.0"
+"react-native-svg@npm:15.10.0":
+  version: 15.10.0
+  resolution: "react-native-svg@npm:15.10.0"
   dependencies:
     css-select: "npm:^5.1.0"
     css-tree: "npm:^1.1.3"
@@ -14634,7 +14659,7 @@ __metadata:
   peerDependencies:
     react: "*"
     react-native: "*"
-  checksum: 10c0/b255528644756aa1bd9193746a25b2d48d501b9620d7b9291816235fe263ac909e535e6e3485c6039cadc040c83209f48e5cc522b93aef8c23839b6f8576c9b2
+  checksum: 10c0/06e8d522678c22d4e7aa11c8fe8ab5b6115800294c8c77027a7dccb76de3953376a2a7b98ace70fdc529c8fd5aa8a59d65a3764c9a40de16ee6a419f0b7ed690
   languageName: node
   linkType: hard
 
@@ -14659,9 +14684,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-native-track-player@https://github.com/lovegaoshi/react-native-track-player.git#commit=f13783422b9736dde0f7d33c32e3560c6950c520":
+"react-native-track-player@https://github.com/lovegaoshi/react-native-track-player.git#commit=71b08733e6f680db10613036c450509c855917ea":
   version: 4.1.1
-  resolution: "react-native-track-player@https://github.com/lovegaoshi/react-native-track-player.git#commit=f13783422b9736dde0f7d33c32e3560c6950c520"
+  resolution: "react-native-track-player@https://github.com/lovegaoshi/react-native-track-player.git#commit=71b08733e6f680db10613036c450509c855917ea"
   peerDependencies:
     react: ">=16.8.6"
     react-native: ">=0.60.0-rc.2"
@@ -14672,7 +14697,7 @@ __metadata:
       optional: true
     shaka-player:
       optional: true
-  checksum: 10c0/bb74faa8ba35a84aa7655f1793f93eb3241c0509b7b27d102b68bc903a6a02cccbab7ffdd104085d04d542898afcad52e3a546d09dfb14d2076481ce4c656e9c
+  checksum: 10c0/31275fba1d96dcc7f0bcdba7858ce4bd593e165cbaddfdc5ac221fb30b9cf0b5e97b63c1a8cb3a0cb76f595d006ddcead041c62299adfe7f69c0b6aace0870c7
   languageName: node
   linkType: hard
 
@@ -14731,16 +14756,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-native-webview@npm:13.12.4":
-  version: 13.12.4
-  resolution: "react-native-webview@npm:13.12.4"
+"react-native-webview@npm:13.12.5":
+  version: 13.12.5
+  resolution: "react-native-webview@npm:13.12.5"
   dependencies:
     escape-string-regexp: "npm:^4.0.0"
     invariant: "npm:2.2.4"
   peerDependencies:
     react: "*"
     react-native: "*"
-  checksum: 10c0/f38b77137a162c8006269806293f15b3446ad9c7c809dcf35713c5de183907b953595573c5373976fbffa2456a877d7a3190fef1619ed2f383255e0405162441
+  checksum: 10c0/c738e622fa29837e0715e0632c8b8dafd3086bcef115353b0fab23d94169a789cefa7f7980206278612927f2fe236488eebf34795a6aa49a812a179e36c85d2c
   languageName: node
   linkType: hard
 
@@ -16108,6 +16133,13 @@ __metadata:
   dependencies:
     minipass: "npm:^7.0.3"
   checksum: 10c0/e5a1e23a4057a86a97971465418f22ea89bd439ac36ade88812dd920e4e61873e8abd6a9b72a03a67ef50faa00a2daf1ab745c5a15b46d03e0544a0296354227
+  languageName: node
+  linkType: hard
+
+"stable-hash@npm:^0.0.4":
+  version: 0.0.4
+  resolution: "stable-hash@npm:0.0.4"
+  checksum: 10c0/53d010d2a1b014fb60d398c095f43912c353b7b44774e55222bb26fd428bc75b73d7bdfcae509ce927c23ca9c5aff2dc1bc82f191d30e57a879550bc2952bdb0
   languageName: node
   linkType: hard
 
