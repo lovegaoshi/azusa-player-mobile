@@ -2,6 +2,7 @@ import { setSongBiliShazamed } from '@objects/Song';
 import bfetch from '@utils/BiliFetch';
 import { biliTagApiLimiter } from './throttle';
 import { logger } from '../Logger';
+import { extractSongName } from '../re';
 
 /**
  *  API that gets the tag of a video. sometimes bilibili identifies the BGM used.
@@ -27,7 +28,8 @@ const fetchVideoTagPromiseRaw = async ({ bvid, cid }: Ids) => {
   const json = await req.json();
   try {
     if (json.data[0].tag_type === 'bgm') {
-      return json.data[0].tag_name;
+      // its like this now?? 发现《Kiss Me More》
+      return extractSongName(json.data[0].tag_name);
     }
     return null;
   } catch (e) {
