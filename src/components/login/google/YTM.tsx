@@ -4,31 +4,24 @@ import { Button, Avatar, Text, ActivityIndicator } from 'react-native-paper';
 import { WebView } from 'react-native-webview';
 import { useFocusEffect } from '@react-navigation/native';
 import CookieManager from '@react-native-cookies/cookies';
-import { get_option, get_current_user } from 'libmuse';
+import { get_current_user } from 'libmuse';
 import { useTranslation } from 'react-i18next';
-import crypto from 'expo-crypto';
 
 import { saveSecure as saveItem } from '@utils/ChromeStorageAPI';
 import { StorageKeys } from '@enums/Storage';
 import { User, UseYTMLogin } from './useYTMLogin';
-import { museStore } from '@utils/muse';
 import useCollapsible from '../useCollapsible';
-import { getSecure as getItem } from '@utils/ChromeStorageAPI';
+import { initMuse } from '@utils/muse';
 
 const jsCode = 'window.ReactNativeWebView.postMessage(document.cookie)';
-const auth = get_option('auth');
 
 const clearCookies = () => {
-  museStore.reset();
   saveItem(StorageKeys.YTMCOOKIES, null);
 };
 
 const checkYTM = async () => {
-  const cookies = await getItem(StorageKeys.YTMCOOKIES);
-  console.log(cookies);
-  console.log(
-    await crypto.digestStringAsync(crypto.CryptoDigestAlgorithm.SHA1, ''),
-  );
+  await initMuse();
+  get_current_user().then(console.log).catch(console.log);
 };
 
 const Login = () => {
@@ -43,7 +36,7 @@ const Login = () => {
 
   const onMessage = (event: any) => {
     const { data } = event.nativeEvent;
-    setCookies(data?.split(';'));
+    setCookies(data?.split('; '));
   };
 
   useFocusEffect(
@@ -133,9 +126,7 @@ const Explore = ({ ytmLogin }: Props) => {
     <LoggedInPage
       user={user}
       logout={() => {
-        saveItem(StorageKeys.YTMCOOKIES, null);
-        museStore.set('token', null);
-        auth.token = null;
+        saveItem(StorageKeys.YTMCOOKIES, null).then(initMuse);
         clear();
       }}
     />
