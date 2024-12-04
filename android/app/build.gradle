@@ -88,7 +88,7 @@ android {
     namespace "com.noxplay.noxplayer"
     defaultConfig {
         compileSdk rootProject.ext.compileSdkVersion
-        applicationId "com.noxplay.noxplayer"
+        applicationId "com.noxplay.noxplayer.new"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 289
