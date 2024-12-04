@@ -12,11 +12,13 @@ import { StorageKeys } from '@enums/Storage';
 import { User, UseYTMLogin } from './useYTMLogin';
 import useCollapsible from '../useCollapsible';
 import { initMuse } from '@utils/muse';
+import logger from '@utils/Logger';
 
 const jsCode = 'window.ReactNativeWebView.postMessage(document.cookie)';
 
 const clearCookies = () => {
   saveItem(StorageKeys.YTMCOOKIES, null);
+  initMuse();
 };
 
 const checkYTM = async () => {
@@ -24,7 +26,7 @@ const checkYTM = async () => {
   get_current_user().then(console.log).catch(console.log);
 };
 
-const Login = () => {
+const Login = ({ refresh }: { refresh: () => void }) => {
   const { t } = useTranslation();
   const [webView, _setWebView] = useState(false);
   const [cookies, setCookies] = useState<string[]>([]);
@@ -51,7 +53,13 @@ const Login = () => {
               value,
             });
           });
-          saveItem(StorageKeys.YTMCOOKIES, cookies.join('; '));
+          if (cookies.length === 0) {
+            logger.error('[YTM] failed to login, as cookie length is 0.');
+            return;
+          }
+          saveItem(StorageKeys.YTMCOOKIES, cookies.join('; '))
+            .then(() => initMuse().then(refresh))
+            .catch(logger.error);
           return true;
         }
         return false;
@@ -113,7 +121,7 @@ interface Props {
   ytmLogin: UseYTMLogin;
 }
 const Explore = ({ ytmLogin }: Props) => {
-  const { user, clear, initialized, init } = ytmLogin;
+  const { user, clear, initialized, init, refresh } = ytmLogin;
 
   useEffect(() => {
     init();
@@ -131,7 +139,7 @@ const Explore = ({ ytmLogin }: Props) => {
       }}
     />
   ) : (
-    <Login />
+    <Login refresh={refresh} />
   );
 };
 
