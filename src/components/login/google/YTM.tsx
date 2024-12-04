@@ -126,7 +126,7 @@ const Explore = ({ ytmLogin }: Props) => {
     <LoggedInPage
       user={user}
       logout={() => {
-        saveItem(StorageKeys.YTMCOOKIES, null).then(initMuse);
+        saveItem(StorageKeys.YTMCOOKIES, null).then(() => initMuse());
         clear();
       }}
     />
