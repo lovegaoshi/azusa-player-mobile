@@ -6,12 +6,14 @@ import { useFocusEffect } from '@react-navigation/native';
 import CookieManager from '@react-native-cookies/cookies';
 import { get_option, get_current_user } from 'libmuse';
 import { useTranslation } from 'react-i18next';
+import crypto from 'expo-crypto';
 
 import { saveSecure as saveItem } from '@utils/ChromeStorageAPI';
 import { StorageKeys } from '@enums/Storage';
 import { User, UseYTMLogin } from './useYTMLogin';
 import { museStore } from '@utils/muse';
 import useCollapsible from '../useCollapsible';
+import { getSecure as getItem } from '@utils/ChromeStorageAPI';
 
 const jsCode = 'window.ReactNativeWebView.postMessage(document.cookie)';
 const auth = get_option('auth');
@@ -21,7 +23,13 @@ const clearCookies = () => {
   saveItem(StorageKeys.YTMCOOKIES, null);
 };
 
-const checkYTM = async () => console.log(await get_current_user());
+const checkYTM = async () => {
+  const cookies = await getItem(StorageKeys.YTMCOOKIES);
+  console.log(cookies);
+  console.log(
+    await crypto.digestStringAsync(crypto.CryptoDigestAlgorithm.SHA1, ''),
+  );
+};
 
 const Login = () => {
   const { t } = useTranslation();
