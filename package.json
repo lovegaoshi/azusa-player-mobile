@@ -66,7 +66,7 @@
     "expo-clipboard": "~7.0.0",
     "expo-crypto": "~14.0.1",
     "expo-document-picker": "~13.0.1",
-    "expo-image": "~2.0.3",
+    "expo-image": "2.0.2",
     "expo-image-picker": "~16.0.3",
     "expo-keep-awake": "~14.0.1",
     "expo-secure-store": "~14.0.0",
