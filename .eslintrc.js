@@ -19,8 +19,13 @@ module.exports = {
   plugins: ['prettier'],
   rules: {
     // Place to specify ESLint rules. Can be used to overwrite rules specified from the extended configs
+    '@typescript-eslint/no-unused-expressions': [
+      'error',
+      { allowShortCircuit: true, allowTernary: true },
+    ],
+    // RN does require to load local src
+    '@typescript-eslint/no-require-imports': 'off',
     // HACK: i'm too lazy to build bilibili data types so off it goes
-
     '@typescript-eslint/no-explicit-any': 'off',
     '@typescript-eslint/consistent-type-definitions': 'error',
     'react/react-in-jsx-scope': 'off',
