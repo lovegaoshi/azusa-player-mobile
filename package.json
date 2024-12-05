@@ -74,6 +74,7 @@
     "ffmpeg-kit-react-native": "^6.0.2",
     "he": "^1.2.0",
     "i18next": "23.16.8",
+    "intl-pluralrules": "^2.0.1",
     "js-base64": "^3.7.7",
     "libmuse": "https://github.com/lovegaoshi/muse.git#commit=0bffe2319baf825037bece6869d360d6d307eb72",
     "lodash": "^4.17.21",
