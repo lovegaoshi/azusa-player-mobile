@@ -46,13 +46,13 @@ global.CustomEvent = CustomEvent as any;
 let ytClient: undefined | Innertube;
 
 const createYtClient = () =>
-  getItem(StorageKeys.YTMCOOKIES, undefined).then(cookie =>
+  getItem(StorageKeys.YTMCOOKIES, undefined).then(() =>
     Innertube.create({
       retrieve_player: true,
       enable_session_cache: false,
       generate_session_locally: false,
       client_type: ClientType.IOS,
-      cookie,
+      //cookie,
     }),
   );
 
