@@ -41,25 +41,36 @@ const Login = ({ refresh }: { refresh: () => void }) => {
     setCookies(data?.split('; '));
   };
 
+  const closeWebView = () => {
+    setWebView(false);
+    cookies.forEach(cookie => {
+      const [name, value] = cookie.split('=');
+      CookieManager.set('https://youtube.com', {
+        name,
+        value,
+      });
+    });
+    if (cookies.length === 0) {
+      logger.error('[YTM] failed to login, as cookie length is 0.');
+    }
+    saveItem(StorageKeys.YTMCOOKIES, cookies.join('; '))
+      .then(() => initMuse().then(refresh))
+      .catch(logger.error);
+  };
+
+  const checkWebView = () => {
+    console.log(cookies);
+    if (cookies.length === 0) {
+      return logger.error('[YTM] failed to login, as cookie length is 0.');
+    }
+    closeWebView();
+  };
+
   useFocusEffect(
     useCallback(() => {
       const onBackPress = () => {
         if (webView) {
-          setWebView(false);
-          cookies.forEach(cookie => {
-            const [name, value] = cookie.split('=');
-            CookieManager.set('https://youtube.com', {
-              name,
-              value,
-            });
-          });
-          if (cookies.length === 0) {
-            logger.error('[YTM] failed to login, as cookie length is 0.');
-            return;
-          }
-          saveItem(StorageKeys.YTMCOOKIES, cookies.join('; '))
-            .then(() => initMuse().then(refresh))
-            .catch(logger.error);
+          closeWebView();
           return true;
         }
         return false;
@@ -75,13 +86,16 @@ const Login = ({ refresh }: { refresh: () => void }) => {
   );
 
   return webView ? (
-    <WebView
-      source={{
-        uri: 'https://accounts.google.com/ServiceLogin?service=youtube&uilel=3&passive=true&continue=https%3A%2F%2Fwww.youtube.com%2Fsignin%3Faction_handle_signin%3Dtrue%26app%3Ddesktop%26hl%3Den%26next%3Dhttps%253A%252F%252Fwww.youtube.com%252F&hl=en&ec=65620',
-      }}
-      injectedJavaScript={jsCode}
-      onMessage={onMessage}
-    />
+    <View>
+      <Button onPress={checkWebView}>{t('Login.Check')}</Button>
+      <WebView
+        source={{
+          uri: 'https://accounts.google.com/ServiceLogin?service=youtube&uilel=3&passive=true&continue=https%3A%2F%2Fwww.youtube.com%2Fsignin%3Faction_handle_signin%3Dtrue%26app%3Ddesktop%26hl%3Den%26next%3Dhttps%253A%252F%252Fwww.youtube.com%252F&hl=en&ec=65620',
+        }}
+        injectedJavaScript={jsCode}
+        onMessage={onMessage}
+      />
+    </View>
   ) : (
     <SafeAreaView>
       {__DEV__ && <Button onPress={checkYTM}>{t('Login.Check')}</Button>}
