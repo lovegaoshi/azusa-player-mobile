@@ -5633,7 +5633,7 @@ __metadata:
     expo-clipboard: "npm:~7.0.0"
     expo-crypto: "npm:~14.0.1"
     expo-document-picker: "npm:~13.0.1"
-    expo-image: "npm:~2.0.3"
+    expo-image: "npm:2.0.2"
     expo-image-picker: "npm:~16.0.3"
     expo-keep-awake: "npm:~14.0.1"
     expo-secure-store: "npm:~14.0.0"
@@ -8837,9 +8837,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"expo-image@npm:~2.0.3":
-  version: 2.0.3
-  resolution: "expo-image@npm:2.0.3"
+"expo-image@npm:2.0.2":
+  version: 2.0.2
+  resolution: "expo-image@npm:2.0.2"
   peerDependencies:
     expo: "*"
     react: "*"
@@ -8848,7 +8848,7 @@ __metadata:
   peerDependenciesMeta:
     react-native-web:
       optional: true
-  checksum: 10c0/adceac4fbc29e375ed28fab00340db2fa290a0ab149ee296ddc700aadc75ceb9db657abd7a2fea17c1cd0dbd3a07c691df82b61dc684dbccf198ca95d5160a0a
+  checksum: 10c0/d37c43316600b20291c1b5ec2c0b0f0a280e1cfc87ab8d0b4bff520dc9957f2d73e5be7371a1ce4915fe6189a49687e54a8b96395cfae89e67b60f9ab18fb096
   languageName: node
   linkType: hard
 
