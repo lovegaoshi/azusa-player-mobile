@@ -13,6 +13,7 @@ import { User, UseYTMLogin } from './useYTMLogin';
 import useCollapsible from '../useCollapsible';
 import { initMuse } from '@utils/muse';
 import logger from '@utils/Logger';
+import { styles as stylesG } from '@components/style';
 
 const jsCode = 'window.ReactNativeWebView.postMessage(document.cookie)';
 
@@ -86,15 +87,16 @@ const Login = ({ refresh }: { refresh: () => void }) => {
   );
 
   return webView ? (
-    <View>
-      <Button onPress={checkWebView}>{t('Login.Check')}</Button>
+    <View style={stylesG.flex}>
       <WebView
+        style={stylesG.flex}
         source={{
           uri: 'https://accounts.google.com/ServiceLogin?service=youtube&uilel=3&passive=true&continue=https%3A%2F%2Fwww.youtube.com%2Fsignin%3Faction_handle_signin%3Dtrue%26app%3Ddesktop%26hl%3Den%26next%3Dhttps%253A%252F%252Fwww.youtube.com%252F&hl=en&ec=65620',
         }}
         injectedJavaScript={jsCode}
         onMessage={onMessage}
       />
+      <Button onPress={checkWebView}>{t('Login.Check')}</Button>
     </View>
   ) : (
     <SafeAreaView>
