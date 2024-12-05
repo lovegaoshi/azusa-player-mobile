@@ -12,11 +12,14 @@ import { StorageKeys } from '@enums/Storage';
 import { User, UseYTMLogin } from './useYTMLogin';
 import useCollapsible from '../useCollapsible';
 import { initMuse } from '@utils/muse';
+import logger from '@utils/Logger';
+import { styles as stylesG } from '@components/style';
 
 const jsCode = 'window.ReactNativeWebView.postMessage(document.cookie)';
 
 const clearCookies = () => {
   saveItem(StorageKeys.YTMCOOKIES, null);
+  initMuse();
 };
 
 const checkYTM = async () => {
@@ -24,7 +27,7 @@ const checkYTM = async () => {
   get_current_user().then(console.log).catch(console.log);
 };
 
-const Login = () => {
+const Login = ({ refresh }: { refresh: () => void }) => {
   const { t } = useTranslation();
   const [webView, _setWebView] = useState(false);
   const [cookies, setCookies] = useState<string[]>([]);
@@ -39,19 +42,36 @@ const Login = () => {
     setCookies(data?.split('; '));
   };
 
+  const closeWebView = () => {
+    setWebView(false);
+    cookies.forEach(cookie => {
+      const [name, value] = cookie.split('=');
+      CookieManager.set('https://youtube.com', {
+        name,
+        value,
+      });
+    });
+    if (cookies.length === 0) {
+      logger.error('[YTM] failed to login, as cookie length is 0.');
+    }
+    saveItem(StorageKeys.YTMCOOKIES, cookies.join('; '))
+      .then(() => initMuse().then(refresh))
+      .catch(logger.error);
+  };
+
+  const checkWebView = () => {
+    console.log(cookies);
+    if (cookies.length === 0) {
+      return logger.error('[YTM] failed to login, as cookie length is 0.');
+    }
+    closeWebView();
+  };
+
   useFocusEffect(
     useCallback(() => {
       const onBackPress = () => {
         if (webView) {
-          setWebView(false);
-          cookies.forEach(cookie => {
-            const [name, value] = cookie.split('=');
-            CookieManager.set('https://youtube.com', {
-              name,
-              value,
-            });
-          });
-          saveItem(StorageKeys.YTMCOOKIES, cookies.join('; '));
+          closeWebView();
           return true;
         }
         return false;
@@ -67,13 +87,17 @@ const Login = () => {
   );
 
   return webView ? (
-    <WebView
-      source={{
-        uri: 'https://accounts.google.com/ServiceLogin?service=youtube&uilel=3&passive=true&continue=https%3A%2F%2Fwww.youtube.com%2Fsignin%3Faction_handle_signin%3Dtrue%26app%3Ddesktop%26hl%3Den%26next%3Dhttps%253A%252F%252Fwww.youtube.com%252F&hl=en&ec=65620',
-      }}
-      injectedJavaScript={jsCode}
-      onMessage={onMessage}
-    />
+    <View style={stylesG.flex}>
+      <WebView
+        style={stylesG.flex}
+        source={{
+          uri: 'https://accounts.google.com/ServiceLogin?service=youtube&uilel=3&passive=true&continue=https%3A%2F%2Fwww.youtube.com%2Fsignin%3Faction_handle_signin%3Dtrue%26app%3Ddesktop%26hl%3Den%26next%3Dhttps%253A%252F%252Fwww.youtube.com%252F&hl=en&ec=65620',
+        }}
+        injectedJavaScript={jsCode}
+        onMessage={onMessage}
+      />
+      <Button onPress={checkWebView}>{t('Login.Check')}</Button>
+    </View>
   ) : (
     <SafeAreaView>
       {__DEV__ && <Button onPress={checkYTM}>{t('Login.Check')}</Button>}
@@ -113,7 +137,7 @@ interface Props {
   ytmLogin: UseYTMLogin;
 }
 const Explore = ({ ytmLogin }: Props) => {
-  const { user, clear, initialized, init } = ytmLogin;
+  const { user, clear, initialized, init, refresh } = ytmLogin;
 
   useEffect(() => {
     init();
@@ -131,7 +155,7 @@ const Explore = ({ ytmLogin }: Props) => {
       }}
     />
   ) : (
-    <Login />
+    <Login refresh={refresh} />
   );
 };
 

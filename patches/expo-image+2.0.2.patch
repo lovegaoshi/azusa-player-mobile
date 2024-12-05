@@ -1,0 +1,47 @@
+diff --git a/node_modules/expo-image/android/src/main/java/expo/modules/image/ImageLoadTask.kt b/node_modules/expo-image/android/src/main/java/expo/modules/image/ImageLoadTask.kt
+index 46e0bf6..5c75d5d
+--- a/node_modules/expo-image/android/src/main/java/expo/modules/image/ImageLoadTask.kt
++++ b/node_modules/expo-image/android/src/main/java/expo/modules/image/ImageLoadTask.kt
+@@ -17,26 +18,26 @@ open class ImageLoadTask(private val appContext: AppContext, private val source:
+   private var task: Job? = null
+ 
+   suspend fun load(promise: Promise) {
+-    return coroutineScope {
+-      val deferred = async {
+-        val context = this@ImageLoadTask.appContext.reactContext ?: throw Exceptions.ReactContextLost()
+-        withContext(Dispatchers.IO) {
+-          Glide
+-            .with(context)
+-            .asDrawable()
+-            .load(source.uri)
+-            .centerInside()
+-            .submit(options.maxWidth, options.maxHeight)
+-            .get()
++    try {
++      coroutineScope {
++        val deferred = async {
++          val context = this@ImageLoadTask.appContext.reactContext ?: throw Exceptions.ReactContextLost()
++          withContext(Dispatchers.IO) {
++            Glide
++              .with(context)
++              .asDrawable()
++              .load(source.uri)
++              .centerInside()
++              .submit(options.maxWidth, options.maxHeight)
++              .get()
++          }
+         }
+-      }
+-      task = deferred
+-      try {
++        task = deferred
+         val bitmap: Drawable = deferred.await()
+         promise.resolve(Image(bitmap))
+-      } catch (e: Exception) {
+-        promise.reject(ImageLoadFailed(e))
+       }
++    } catch (e: Exception) {
++      promise.reject(ImageLoadFailed(e))
+     }
+   }
+ }
