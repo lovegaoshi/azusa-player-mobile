@@ -35,7 +35,7 @@ const initRevenueCatWeb = async (userid?: string) => {
 const getVIPStatus = async () => {
   if (APPSTORE) {
     const customerInfo = await Purchases.getCustomerInfo();
-    return customerInfo.entitlements.active[VIPId] === undefined;
+    return customerInfo.entitlements.active[VIPId] !== undefined;
   }
   await initRevenueCatWeb();
   const customerInfo = await PurchasesWeb.getSharedInstance().getCustomerInfo();
