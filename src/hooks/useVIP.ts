@@ -39,7 +39,7 @@ const getVIPStatus = async () => {
   }
   await initRevenueCatWeb();
   const customerInfo = await PurchasesWeb.getSharedInstance().getCustomerInfo();
-  return customerInfo.entitlements.active[VIPId] === undefined;
+  return customerInfo.entitlements.active[VIPId] !== undefined;
 };
 
 export const purchaseVIP = async () => {
