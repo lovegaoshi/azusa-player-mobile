@@ -5,6 +5,7 @@ on:
   push:
     branches:
       - 'dev'
+      - 'dev-newarch'
   workflow_dispatch:
 jobs:
   checkLastCommit:

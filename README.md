@@ -22,6 +22,7 @@
 
 <p align="center"> 
   <a href='https://play.google.com/store/apps/details?id=com.noxplay.noxplayer&pcampaignid=pcampaignidMKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1'><img alt='Get it on Google Play' src='https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png' height="80"/></a>
+  <a href='https://play.google.com/apps/internaltest/4701326682273400640'><img alt='加入内测计划' src='https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png' height="80"/></a>
 <a href="https://f-droid.org/packages/com.noxplay.noxplayer">
     <img src="https://fdroid.gitlab.io/artwork/badge/get-it-on-zh-cn.png"
     alt="下载应用，请到 F-Droid"
@@ -54,6 +55,7 @@
 - ffmpeg处理音量均衡
 - AB 重复
 - 逐字歌词
+- 交叉混合
 - **切片 man 不易，没有各位切片 man 也不会有这个项目的意义，请大家溜歌同时点右下方的点赞按钮点赞和三连 👍**
 - 自用为主要目的，不感兴趣的 feature 大概不会做，有问题可以[b 站私信](https://message.bilibili.com/#/whisper/mid1989881)
 

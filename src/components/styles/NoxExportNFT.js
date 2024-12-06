@@ -56,20 +56,42 @@ const parsedGarbData = {
     .flat(),
 };
 
-const emojiId = garblistdata[0].collect_list?.collect_chain?.filter(v =>
-  v.redeem_item_name.includes('表情包'),
-)[0]?.redeem_item_id;
+const redeemPortraits = garblistdata
+  .map(garb =>
+    garb.collect_list?.collect_infos
+      ?.filter(v => v.redeem_item_name.includes('典藏卡'))
+      .map(v => ({
+        type: 'biliNFTVideoRedeem',
+        identifier: `["${args.garbid}","${garb.lottery_id}","${v.redeem_item_name}"]`,
+      })),
+  )
+  .flat();
 
-if (emojiId) {
-  const realEmojiId = (
-    await axios.get(`https://bili-nft.vercel.app/get-emote/?mid=${emojiId}`)
-  ).data.id;
-  parsedGarbData.gifs = (
-    await axios.get(
-      `https://api.bilibili.com/x/emote/package?business=reply&ids=${realEmojiId}`,
-    )
-  ).data.data.packages[0].emote.map(v => v.url);
-}
+parsedGarbData.portraits = parsedGarbData.portraits.concat(redeemPortraits);
+
+const emojiIds = garblistdata
+  .map(
+    garb =>
+      (garb.collect_list?.collect_infos ?? [])
+        .concat(garb.collect_list?.collect_chain ?? [])
+        .filter(v => v?.redeem_item_name.includes('表情包'))[0]?.redeem_item_id,
+  )
+  .filter(v => v);
+
+parsedGarbData.gifs = (
+  await Promise.all(
+    emojiIds.map(async emojiId => {
+      const realEmojiId = (
+        await axios.get(`https://bili-nft.vercel.app/get-emote/?mid=${emojiId}`)
+      ).data.id;
+      return (
+        await axios.get(
+          `https://api.bilibili.com/x/emote/package?business=reply&ids=${realEmojiId}`,
+        )
+      ).data.data.packages[0].emote.map(v => v.url);
+    }),
+  )
+).flat();
 
 const convertedGarbData = args.lighttheme ? SteriaTheme : SteriaThemeDark;
 
