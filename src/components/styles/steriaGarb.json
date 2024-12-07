@@ -51,6 +51,16 @@
     ],
     "backgroundImages": [
       {
+        "type": "biliNFTVideoNew",
+        "identifier": "[\"104925\",\"104926\",\"雪绘·温度正好\"]"
+      },
+      "https://i0.hdslb.com/bfs/garb/open/2f644a9f946c8fd02762d32071411973353d6c61.png",
+      "https://i0.hdslb.com/bfs/garb/open/37721793796cb368c77218227fd8ac939ad908fe.png",
+      {
+        "type": "biliNFTVideoNew",
+        "identifier": "[\"104925\",\"104926\",\"雪绘·至尊舞步\"]"
+      },
+      {
         "type": "biliNFTVideoRedeem",
         "identifier": "[\"102499\",\"102500\",\"典藏卡·她根本不会喝酒\"]"
       },
@@ -773,6 +783,16 @@
       "darkTheme": true
     },
     "gifs": [
+      "https://i0.hdslb.com/bfs/emote/ecb4142b45c98f3f9938a45baf7b5a56017328af.png",
+      "https://i0.hdslb.com/bfs/emote/c15eff7ae3425cb2cf8b9fd666b19ee98b5c3bf3.png",
+      "https://i0.hdslb.com/bfs/emote/3080aace976d89c5c1078e191b88707b68f12d19.png",
+      "https://i0.hdslb.com/bfs/emote/9f4b4d7a2aeb54c0f96ae3aeca14c6eeccb67b29.png",
+      "https://i0.hdslb.com/bfs/emote/eb26d93836328afb13a51b979867280622d22b33.png",
+      "https://i0.hdslb.com/bfs/emote/f1419f226d508099a85e748223be9570dac312fc.png",
+      "https://i0.hdslb.com/bfs/emote/64553ef047ef8433ea57a9d86000e902f8d23171.png",
+      "https://i0.hdslb.com/bfs/emote/9ae6980c25442b896c41a0078fa4d935961ad469.png",
+      "https://i0.hdslb.com/bfs/emote/1f3328f60e24aed74e49a92c8bf9d21bc58a84e4.png",
+      "https://i0.hdslb.com/bfs/emote/1ccb28e4d8b775feaeac26a3e80dadbad1b21e05.png",
       "https://i0.hdslb.com/bfs/emote/f81cb93d102f72ca052738b614f3a85347143f8a.png",
       "https://i0.hdslb.com/bfs/emote/d97a803ea9fa877eb8a530a54c9c430d02967c7f.png",
       "https://i0.hdslb.com/bfs/emote/26445166c4da8d6bcab7cb418be78b83266f58c4.png",
@@ -790,6 +810,18 @@
       "https://i0.hdslb.com/bfs/emote/f1ccb0de6086bb5a74ae43224e33321cbf32ce02.png"
     ],
     "backgroundImages": [
+      {
+        "type": "biliNFTVideoNew",
+        "identifier": "[\"104925\",\"104926\",\"七海·心动鲨鱼\"]"
+      },
+      {
+        "type": "biliNFTVideoNew",
+        "identifier": "[\"104925\",\"104926\",\"七海·冰淇淋in温泉\"]"
+      },
+      "https://i0.hdslb.com/bfs/garb/open/6631f5119708ac76220f70518575dfeca4c47bba.png",
+      "https://i0.hdslb.com/bfs/garb/open/c4983101818dc62fc8497195137df98923e74494.png",
+      "https://i0.hdslb.com/bfs/garb/item/1686efd9b9784f87528cab79bf935aa3b7be0147.jpg",
+      "https://i0.hdslb.com/bfs/garb/item/d1b448af333d2e6b5e520eb52de32d17c148eef9.jpg",
       "https://i0.hdslb.com/bfs/garb/item/82414ff7ec36363ca02ca5e1722f5fbbc0377b6c.jpg",
       "https://i0.hdslb.com/bfs/garb/item/42cc92478529db41c0f8088d926b5bfb13767093.jpg",
       "https://i0.hdslb.com/bfs/garb/item/e0e7de6dff50bfacc72c094e38e135799d6aafc9.jpg"
@@ -849,85 +881,6 @@
     },
     "thumbupSVGA": "https://i0.hdslb.com/bfs/garb/item/3dbe2bb1bf0e2655c9f512cae5183cfbbafa1dca.bin",
     "loadingIcon": "https://i0.hdslb.com/bfs/garb/item/9ce487869c42da478257a3c86ea507bb80e57837.webp"
-  },
-  {
-    "metaData": {
-      "themeName": "七海Nana7mi VR",
-      "themeDesc": "鲨鲨王国的17岁女高中生，最喜欢鲨鱼。虽然总说要征服七海，但是胆子很小。",
-      "themeAuthor": "NoxAutoGen",
-      "themeIcon": "https://i2.hdslb.com/bfs/face/df2c098ba7fa83a7b2f793189e8016430c33d570.jpg",
-      "darkTheme": true
-    },
-    "gifs": [
-      "https://i0.hdslb.com/bfs/emote/ecb4142b45c98f3f9938a45baf7b5a56017328af.png",
-      "https://i0.hdslb.com/bfs/emote/c15eff7ae3425cb2cf8b9fd666b19ee98b5c3bf3.png",
-      "https://i0.hdslb.com/bfs/emote/3080aace976d89c5c1078e191b88707b68f12d19.png",
-      "https://i0.hdslb.com/bfs/emote/9f4b4d7a2aeb54c0f96ae3aeca14c6eeccb67b29.png",
-      "https://i0.hdslb.com/bfs/emote/eb26d93836328afb13a51b979867280622d22b33.png",
-      "https://i0.hdslb.com/bfs/emote/f1419f226d508099a85e748223be9570dac312fc.png",
-      "https://i0.hdslb.com/bfs/emote/64553ef047ef8433ea57a9d86000e902f8d23171.png",
-      "https://i0.hdslb.com/bfs/emote/9ae6980c25442b896c41a0078fa4d935961ad469.png",
-      "https://i0.hdslb.com/bfs/emote/1f3328f60e24aed74e49a92c8bf9d21bc58a84e4.png",
-      "https://i0.hdslb.com/bfs/emote/1ccb28e4d8b775feaeac26a3e80dadbad1b21e05.png"
-    ],
-    "backgroundImages": [
-      "https://i0.hdslb.com/bfs/garb/item/1686efd9b9784f87528cab79bf935aa3b7be0147.jpg",
-      "https://i0.hdslb.com/bfs/garb/item/d1b448af333d2e6b5e520eb52de32d17c148eef9.jpg"
-    ],
-    "customColors": {
-      "maskedBackgroundColor": "rgba(0, 0, 0, 0.60)",
-      "playlistDrawerBackgroundColor": "green",
-      "playlistDrawerBackgroundColorTransparent": "rgba(0, 255, 0, 0.35)",
-      "progressThumbTintColor": "rgb(235, 235, 0)",
-      "progressMinimumTrackTintColor": "rgb(235, 235, 0)",
-      "progressMaximumTrackTintColor": "#FFFFFF",
-      "btnBackgroundColor": "rgb(72, 71, 58)",
-      "textInputSelectionColor": "green"
-    },
-    "colors": {
-      "primary": "#fcf75e",
-      "onPrimary": "rgb(50, 50, 0)",
-      "primaryContainer": "rgb(73, 73, 0)",
-      "onPrimaryContainer": "rgb(234, 234, 0)",
-      "secondary": "rgb(202, 200, 165)",
-      "onSecondary": "rgb(50, 50, 24)",
-      "secondaryContainer": "rgb(73, 72, 45)",
-      "onSecondaryContainer": "rgb(231, 228, 191)",
-      "tertiary": "rgb(164, 208, 189)",
-      "onTertiary": "rgb(11, 55, 42)",
-      "tertiaryContainer": "rgb(37, 78, 64)",
-      "onTertiaryContainer": "rgb(191, 236, 216)",
-      "error": "rgb(255, 180, 171)",
-      "onError": "rgb(105, 0, 5)",
-      "errorContainer": "rgb(147, 0, 10)",
-      "onErrorContainer": "rgb(255, 180, 171)",
-      "background": "rgba(0,0,0, 0.4)",
-      "onBackground": "rgb(230, 226, 217)",
-      "surface": "rgb(28, 28, 23)",
-      "onSurface": "rgba(235, 235, 0, 1)",
-      "text": "#fcf75e",
-      "surfaceVariant": "rgb(10, 10, 10)",
-      "onSurfaceVariant": "rgb(202, 200, 165)",
-      "outline": "rgb(147, 145, 130)",
-      "outlineVariant": "rgb(72, 71, 58)",
-      "shadow": "rgb(0, 0, 0)",
-      "scrim": "rgb(0, 0, 0)",
-      "inverseSurface": "rgb(230, 226, 217)",
-      "inverseOnSurface": "rgb(49, 49, 43)",
-      "inversePrimary": "rgb(98, 98, 0)",
-      "elevation": {
-        "level0": "transparent",
-        "level1": "rgb(53, 56, 57)",
-        "level2": "rgb(10, 10, 10)",
-        "level3": "rgb(10, 10, 10)",
-        "level4": "rgb(49, 49, 20)",
-        "level5": "rgb(53, 53, 20)"
-      },
-      "surfaceDisabled": "rgba(230, 226, 217, 0.12)",
-      "onSurfaceDisabled": "rgba(230, 226, 217, 0.38)",
-      "backdrop": "rgba(49, 49, 37, 0.4)"
-    },
-    "thumbupSVGA": "https://i0.hdslb.com/bfs/garb/item/09e58b7d8c1acb98875f48b600ca71f6c118f410.bin"
   },
   {
     "metaData": {
@@ -2966,6 +2919,16 @@
       "https://i0.hdslb.com/bfs/garb/fc9b8238e359f0da9ff8fa96de4ed4c159c373d3.png"
     ],
     "backgroundImages": [
+      {
+        "type": "biliNFTVideoNew",
+        "identifier": "[\"104925\",\"104926\",\"瑞娅·魔法定格\"]"
+      },
+      {
+        "type": "biliNFTVideoNew",
+        "identifier": "[\"104925\",\"104926\",\"瑞娅·在你手中滑落\"]"
+      },
+      "https://i0.hdslb.com/bfs/garb/open/5cab3742002487f761f5c3bc2d309898f2e81035.png",
+      "https://i0.hdslb.com/bfs/garb/open/731bd2b6572a66a9b4daf28f38f5b08a71262c06.png",
       {
         "type": "biliNFTVideoNew",
         "identifier": "[\"103177\",\"103178\",\"为什么囚住我？\"]"
