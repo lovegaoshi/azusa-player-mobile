@@ -65,6 +65,10 @@ const GEN_SETTING_BOOLEAN: SettingEntry[] = [
     settingName: 'pausePlaybackOnMute',
     settingCategory: 'GeneralSettings',
   },
+  {
+    settingName: 'noBiliR128Gain',
+    settingCategory: 'GeneralSettings',
+  },
 ];
 
 export default () => {
