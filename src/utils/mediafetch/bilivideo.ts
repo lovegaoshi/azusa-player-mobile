@@ -161,7 +161,7 @@ export const fetchVideoPlayUrlPromise = async ({
     const json = await res.json();
     return {
       url: extractResponseJson(json, extractType) as string,
-      loudness: json.data?.volume?.measured_i,
+      loudness: -json.data?.volume?.measured_i,
     };
   } catch (e) {
     logger.error(`[resolveURL] error: ${e} of bvid:${bvid}, cid:${cid}`);
