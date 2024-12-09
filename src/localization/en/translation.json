@@ -133,6 +133,8 @@
     "prefetchTrackDesc": "Prefetch the next track (only works when cache is enabled)",
     "chatGPTResolveSongNameName": "ChatGPT on Songs",
     "chatGPTResolveSongNameDesc": "TODO: Use chatGPT to resolve song names",
+    "noBiliR128GainName": "Disable BiliR128Gain",
+    "noBiliR128GainDesc": "Disable Bili R128gain, use ffmpeg instead",
     "pausePlaybackOnMuteName": "Pause Playback on Mute",
     "pausePlaybackOnMuteDesc": "Android only. Pause playback when volume becomes 0",
     "artworkCarouselName": "artwork carousel",

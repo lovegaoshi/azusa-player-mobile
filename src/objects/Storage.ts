@@ -51,6 +51,7 @@ export const DefaultSetting: NoxStorage.PlayerSettingDict = {
   artworkRes: 0,
   artworkCarousel: false,
   pausePlaybackOnMute: false,
+  noBiliR128Gain: false,
 
   appID: AppID,
   language: undefined,

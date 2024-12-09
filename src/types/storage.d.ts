@@ -52,6 +52,7 @@ declare global {
       artworkRes: number;
       artworkCarousel: boolean;
       pausePlaybackOnMute: boolean;
+      noBiliR128Gain: boolean;
 
       appID: string;
       language?: string;
