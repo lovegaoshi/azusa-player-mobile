@@ -14,7 +14,7 @@ class APMWidgetModule (private val reactContext: ReactApplicationContext) :
 
     @ReactMethod fun updateWidget() {
         val intent = Intent(reactContext, APMWidget::class.java)
-        intent.setAction("android.appwidget.action.APPWIDGET_UPDATE")
+        intent.action = "android.appwidget.action.APPWIDGET_UPDATE"
         val widgetManager = AppWidgetManager.getInstance(reactContext)
         val ids = widgetManager.getAppWidgetIds(ComponentName(reactContext, APMWidget::class.java))
         intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, ids)
@@ -23,7 +23,7 @@ class APMWidgetModule (private val reactContext: ReactApplicationContext) :
 
     @ReactMethod fun setWidgetBackground(uri: String?) {
         val intent = Intent(reactContext, APMWidget::class.java)
-        intent.setAction(WIDGET_SET_BKGD)
+        intent.action = WIDGET_SET_BKGD
         intent.data = Uri.parse(uri)
         val widgetManager = AppWidgetManager.getInstance(reactContext)
         val ids = widgetManager.getAppWidgetIds(ComponentName(reactContext, APMWidget::class.java))
