@@ -3,7 +3,6 @@ import React, { useEffect } from 'react';
 import { IconButton, Divider, Text, TouchableRipple } from 'react-native-paper';
 import { View, ImageBackground, StyleSheet, Linking } from 'react-native';
 import { useTranslation } from 'react-i18next';
-import { DrawerContentComponentProps } from '@react-navigation/drawer';
 
 import { useNoxSetting } from '@stores/useApp';
 import usePlaybackAA from '@hooks/usePlaybackAA';
@@ -56,7 +55,7 @@ const BiliCard = (props: any) => {
   return <>{props.children}</>;
 };
 
-export default (props: DrawerContentComponentProps) => {
+export default () => {
   const navigation = useNavigation();
   const playlistIds = useNoxSetting(state => state.playlistIds);
   const playerStyle = useNoxSetting(state => state.playerStyle);
@@ -86,7 +85,7 @@ export default (props: DrawerContentComponentProps) => {
   }, []);
 
   return (
-    <View {...props} style={styles.flex}>
+    <View style={styles.flex}>
       <View style={styles.topPadding} />
       <BiliCard backgroundURI={playerStyle.biliGarbCard}>
         <RenderDrawerItem
