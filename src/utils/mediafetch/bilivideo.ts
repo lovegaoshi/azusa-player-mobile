@@ -110,6 +110,7 @@ interface FetchPlayURL {
   // iOS does not play some DASH formats, so we resort to whatever html5 can play -
   // 360p mp4.
   iOS?: boolean;
+  noBiliR128Gain?: boolean;
 }
 
 export const fetchVideoPlayUrl = (bvid: string, iOS = false) =>
@@ -121,6 +122,7 @@ export const fetchVideoPlayUrlPromise = async ({
   cid,
   extractType = FieldEnum.AudioUrl,
   iOS = false,
+  noBiliR128Gain = false,
 }: FetchPlayURL): Promise<NoxNetwork.ParsedNoxMediaURL> => {
   logger.debug(
     `fethcVideoPlayURL: ${URL_PLAY_URL.replace('{bvid}', bvid).replace(
@@ -159,7 +161,10 @@ export const fetchVideoPlayUrlPromise = async ({
       },
     );
     const json = await res.json();
-    return { url: extractResponseJson(json, extractType) as string };
+    return {
+      url: extractResponseJson(json, extractType) as string,
+      loudness: noBiliR128Gain ? undefined : -json.data?.volume?.measured_i,
+    };
   } catch (e) {
     logger.error(`[resolveURL] error: ${e} of bvid:${bvid}, cid:${cid}`);
     throw e;

@@ -51,6 +51,7 @@ interface FetchPlayUrl {
   song: NoxMedia.Song;
   iOS?: boolean;
   prefetch?: boolean;
+  noBiliR128Gain?: boolean;
 }
 /**
  * a parent method that returns the media's stream url given an id.
@@ -60,6 +61,7 @@ interface FetchPlayUrl {
 export const fetchPlayUrlPromise = async ({
   song,
   iOS = false,
+  noBiliR128Gain = false,
 }: FetchPlayUrl): Promise<NoxNetwork.ParsedNoxMediaURL> => {
   const bvid = song.bvid;
   const cid = song.id;
@@ -70,7 +72,8 @@ export const fetchPlayUrlPromise = async ({
   ]);
   logger.debug(`[resolveURL] ${bvid}, ${cid} }`);
 
-  const fallback = () => fetchBiliUrlPromise({ bvid, cid: String(cid), iOS });
+  const fallback = () =>
+    fetchBiliUrlPromise({ bvid, cid: String(cid), iOS, noBiliR128Gain });
 
   if (song.source && MUSICFREESources.includes(song.source)) {
     const vsource = song.source as MUSICFREE;

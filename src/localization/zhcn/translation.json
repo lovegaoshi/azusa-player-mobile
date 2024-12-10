@@ -147,6 +147,8 @@
     "prefetchTrackDesc": "预加载下一首歌（仅在歌曲缓存开启时有用）",
     "chatGPTResolveSongNameName": "ChatGPT找歌",
     "chatGPTResolveSongNameDesc": "TODO：用chatGPT解析歌名",
+    "noBiliR128GainName": "Disable BiliR128Gain",
+    "noBiliR128GainDesc": "Disable Bili R128gain, use ffmpeg instead",
     "pausePlaybackOnMuteName": "静音时暂停播放",
     "pausePlaybackOnMuteDesc": "在Android上静音时暂停播放",
     "artworkCarouselName": "artwork carousel",

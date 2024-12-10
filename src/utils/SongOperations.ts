@@ -79,12 +79,18 @@ export const resolveUrl = async ({
   const cacheWrapper = async (
     song: NoxMedia.Song,
   ): Promise<NoxNetwork.ResolvedNoxMediaURL> => {
+    const { playerSetting } = useNoxSetting.getState();
     const url = cachedUrl
       ? {
           ...(await updateMetadata()),
           url: cachedUrl,
         }
-      : await fetchPlayUrlPromise({ song, iOS, prefetch });
+      : await fetchPlayUrlPromise({
+          song,
+          iOS,
+          prefetch,
+          noBiliR128Gain: playerSetting.noBiliR128Gain,
+        });
     logger.debug(
       `[SongResolveURL] ${song.parsedName} is resolved to ${url.url}`,
     );
