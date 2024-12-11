@@ -25,16 +25,11 @@ import { setPlayingList, setPlayingIndex } from '@stores/playingList';
 import DummyLyricDetail from '../objects/LyricDetail';
 import { MUSICFREE } from '@utils/mediafetch/musicfree';
 import { IntentData } from '@enums/Intent';
-import { BottomTabRouteIcons } from '@enums/BottomTab';
+import createBottomTab, { BottomTabStore } from './useBottomTab';
 
-interface NoxSetting {
+interface NoxSetting extends BottomTabStore {
   crossfadeId: string;
   setCrossfadeId: (val: string) => void;
-
-  bottomTabRoute: BottomTabRouteIcons;
-  bottomTabRouteP: BottomTabRouteIcons;
-  setBottomTabRoute: (val: BottomTabRouteIcons) => void;
-  toggleBottomTabDrawer: () => void;
 
   songListScrollCounter: number;
   incSongListScrollCounter: () => void;
@@ -141,22 +136,11 @@ interface NoxSetting {
  * store manager of noxplayer. exposes state setter and getter functions,
  * as well as saving and loading states to/from asyncStorage.
  */
-export const useNoxSetting = create<NoxSetting>((set, get) => ({
+export const useNoxSetting = create<NoxSetting>((set, get, storeApi) => ({
   crossfadeId: '',
   setCrossfadeId: v => set({ crossfadeId: v }),
 
-  bottomTabRoute: BottomTabRouteIcons.music,
-  bottomTabRouteP: BottomTabRouteIcons.music,
-  setBottomTabRoute: val =>
-    set({ bottomTabRoute: val, bottomTabRouteP: get().bottomTabRoute }),
-  toggleBottomTabDrawer: () => {
-    const { bottomTabRoute, bottomTabRouteP, setBottomTabRoute } = get();
-    setBottomTabRoute(
-      bottomTabRoute === BottomTabRouteIcons.playlist
-        ? bottomTabRouteP
-        : BottomTabRouteIcons.playlist,
-    );
-  },
+  ...createBottomTab(set, get, storeApi),
 
   songListScrollCounter: 0,
   incSongListScrollCounter: () =>
