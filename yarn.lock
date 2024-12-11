@@ -3580,13 +3580,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@react-navigation/drawer@npm:^7.0.19":
-  version: 7.0.19
-  resolution: "@react-navigation/drawer@npm:7.0.19"
+"@react-navigation/drawer@npm:^7.0.20":
+  version: 7.0.20
+  resolution: "@react-navigation/drawer@npm:7.0.20"
   dependencies:
     "@react-navigation/elements": "npm:^2.2.4"
     color: "npm:^4.2.3"
-    react-native-drawer-layout: "npm:^4.0.4"
+    react-native-drawer-layout: "npm:^4.1.0"
     use-latest-callback: "npm:^0.2.1"
   peerDependencies:
     "@react-navigation/native": ^7.0.13
@@ -3596,7 +3596,7 @@ __metadata:
     react-native-reanimated: ">= 2.0.0"
     react-native-safe-area-context: ">= 4.0.0"
     react-native-screens: ">= 4.0.0"
-  checksum: 10c0/ecf2d22f5a24f1e7d42314afd218e6f54351956036d6d2e0138af9f176f97f4da0ca492b246a765be11e76b59d66becc8d56d39d562968ee37a7a3da0ba6e524
+  checksum: 10c0/57f9ec8aa31045054c855944d191490cb648d0aa31b0866fa3ecd39d3a02c8b963782b86778b6cd923b1847560faff80ca1fcfe5f7eb1c483460ebc93a8e29fc
   languageName: node
   linkType: hard
 
@@ -3935,9 +3935,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@shopify/react-native-skia@npm:1.7.1":
-  version: 1.7.1
-  resolution: "@shopify/react-native-skia@npm:1.7.1"
+"@shopify/react-native-skia@npm:1.7.2":
+  version: 1.7.2
+  resolution: "@shopify/react-native-skia@npm:1.7.2"
   dependencies:
     canvaskit-wasm: "npm:0.39.1"
     react-reconciler: "npm:0.27.0"
@@ -3952,7 +3952,7 @@ __metadata:
       optional: true
   bin:
     setup-skia-web: ./scripts/setup-canvaskit.js
-  checksum: 10c0/a3d5f88048cf3a08ccd5ecdc556d66524364d79f14d4992a79a63eff5577200bba578865c07d7b05bcbb48556d60e63fceaab7eea98e15d048e483859dae6b6c
+  checksum: 10c0/04ec135a1853214e4236f770072901e7519afceb95c64ddc56bb98bcaf94a9a92f6e3c7056f175e978be6a4160c2cd402a96faf85c901c1ecf154b24ff69a8b5
   languageName: node
   linkType: hard
 
@@ -4470,12 +4470,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:^22.10.1":
-  version: 22.10.1
-  resolution: "@types/node@npm:22.10.1"
+"@types/node@npm:^22.10.2":
+  version: 22.10.2
+  resolution: "@types/node@npm:22.10.2"
   dependencies:
     undici-types: "npm:~6.20.0"
-  checksum: 10c0/0fbb6d29fa35d807f0223a4db709c598ac08d66820240a2cd6a8a69b8f0bc921d65b339d850a666b43b4e779f967e6ed6cf6f0fca3575e08241e6b900364c234
+  checksum: 10c0/2c7b71a040f1ef5320938eca8ebc946e6905caa9bbf3d5665d9b3774a8d15ea9fab1582b849a6d28c7fc80756a62c5666bc66b69f42f4d5dafd1ccb193cdb4ac
   languageName: node
   linkType: hard
 
@@ -4555,13 +4555,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react@npm:~18.3.14":
-  version: 18.3.14
-  resolution: "@types/react@npm:18.3.14"
+"@types/react@npm:~18.3.16":
+  version: 18.3.16
+  resolution: "@types/react@npm:18.3.16"
   dependencies:
     "@types/prop-types": "npm:*"
     csstype: "npm:^3.0.2"
-  checksum: 10c0/d925fbfcf084238b93d1a0b5406d4cf9aeb37c4a1191559aa4ee107c2e55cc15327989140f03eddda4d471f5b935d4673fd74a86f451860edea18eae48ca44f8
+  checksum: 10c0/9113d3003865eda07be0fb596f5bd8d7784b8900675090c56e75bdee45499f0b0de2481cbbeb5980c3b4ad18f234a49f39c9e62fd7b89a4e8530c74789f739bd
   languageName: node
   linkType: hard
 
@@ -5562,14 +5562,14 @@ __metadata:
     "@react-native/gradle-plugin": "npm:^0.76.5"
     "@react-native/metro-config": "npm:^0.76.5"
     "@react-native/typescript-config": "npm:0.76.5"
-    "@react-navigation/drawer": "npm:^7.0.19"
+    "@react-navigation/drawer": "npm:^7.0.20"
     "@react-navigation/native": "npm:^7.0.13"
     "@react-navigation/native-stack": "npm:^7.1.14"
     "@revenuecat/purchases-js": "npm:^0.13.1"
     "@sentry/react-native": "npm:^6.4.0"
     "@sharcoux/slider": "npm:8.0.6"
     "@shopify/flash-list": "npm:^1.7.2"
-    "@shopify/react-native-skia": "npm:1.7.1"
+    "@shopify/react-native-skia": "npm:1.7.2"
     "@tsconfig/react-native": "npm:^3.0.5"
     "@types/base-64": "npm:^1.0.2"
     "@types/d3": "npm:^7.4.3"
@@ -5577,8 +5577,8 @@ __metadata:
     "@types/jest": "npm:^29.5.14"
     "@types/lodash": "npm:^4.17.13"
     "@types/md5": "npm:^2.3.5"
-    "@types/node": "npm:^22.10.1"
-    "@types/react": "npm:~18.3.14"
+    "@types/node": "npm:^22.10.2"
+    "@types/react": "npm:~18.3.16"
     "@types/react-native": "npm:^0.73.0"
     "@types/react-native-background-timer": "npm:^2.0.2"
     "@types/react-native-share-menu": "npm:^5.0.5"
@@ -5620,7 +5620,7 @@ __metadata:
     expo-clipboard: "npm:~7.0.0"
     expo-crypto: "npm:~14.0.1"
     expo-document-picker: "npm:~13.0.1"
-    expo-image: "npm:2.0.2"
+    expo-image: "npm:2.0.3"
     expo-image-picker: "npm:~16.0.3"
     expo-keep-awake: "npm:~14.0.1"
     expo-secure-store: "npm:~14.0.0"
@@ -8832,9 +8832,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"expo-image@npm:2.0.2":
-  version: 2.0.2
-  resolution: "expo-image@npm:2.0.2"
+"expo-image@npm:2.0.3":
+  version: 2.0.3
+  resolution: "expo-image@npm:2.0.3"
   peerDependencies:
     expo: "*"
     react: "*"
@@ -8843,7 +8843,7 @@ __metadata:
   peerDependenciesMeta:
     react-native-web:
       optional: true
-  checksum: 10c0/d37c43316600b20291c1b5ec2c0b0f0a280e1cfc87ab8d0b4bff520dc9957f2d73e5be7371a1ce4915fe6189a49687e54a8b96395cfae89e67b60f9ab18fb096
+  checksum: 10c0/adceac4fbc29e375ed28fab00340db2fa290a0ab149ee296ddc700aadc75ceb9db657abd7a2fea17c1cd0dbd3a07c691df82b61dc684dbccf198ca95d5160a0a
   languageName: node
   linkType: hard
 
@@ -14451,9 +14451,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-native-drawer-layout@npm:^4.0.4":
-  version: 4.0.4
-  resolution: "react-native-drawer-layout@npm:4.0.4"
+"react-native-drawer-layout@npm:^4.1.0":
+  version: 4.1.0
+  resolution: "react-native-drawer-layout@npm:4.1.0"
   dependencies:
     use-latest-callback: "npm:^0.2.1"
   peerDependencies:
@@ -14461,7 +14461,7 @@ __metadata:
     react-native: "*"
     react-native-gesture-handler: ">= 2.0.0"
     react-native-reanimated: ">= 2.0.0"
-  checksum: 10c0/7a8b540ccb7d496548222a63f569e578fbe737ad3d143a1b4f22ecdfd2fa25c415ab1f7948999bd6ac795b4b4ba52eeabc44b9edaaaaab84258196525f5afb01
+  checksum: 10c0/b7e28b1ea83d4e4ba050ed5a01237f4d7955146db4d9782e8b705fb8390f8b43ceea7531387d8e9c679ea1a8c8f3d514abd69dae2c20d30dcc76ab8b920420f1
   languageName: node
   linkType: hard
 

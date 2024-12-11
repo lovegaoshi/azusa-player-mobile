@@ -221,7 +221,7 @@ const styles = StyleSheet.create({
     height: 40,
   },
   bottomInfo: {
-    paddingBottom: 20,
+    paddingBottom: 10,
   },
   bottomInfoText: {
     textAlign: 'center',

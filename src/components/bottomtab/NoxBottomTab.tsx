@@ -31,7 +31,7 @@ const NoxAndroidBottomTab = ({ navigation }: NoxComponent.NavigationProps2) => {
   const playerStyle = useNoxSetting(state => state.playerStyle);
   const gestureMode = useNoxSetting(state => state.gestureMode);
   const route = useNoxSetting(state => state.bottomTabRoute);
-  const setRoute = useNoxSetting(state => state.setBottomTabRoute);
+  const toggleDrawer = useNoxSetting(state => state.toggleBottomTabDrawer);
   const isLandscape = useIsLandscape();
 
   const isDrawerOpen = () =>
@@ -41,7 +41,7 @@ const NoxAndroidBottomTab = ({ navigation }: NoxComponent.NavigationProps2) => {
 
   const onDrawerPress = () => {
     if (navigation === undefined) return;
-    setRoute(RouteIcons.playlist);
+    toggleDrawer();
     if (isDrawerOpen()) {
       navigation.closeDrawer();
       return;
