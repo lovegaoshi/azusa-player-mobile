@@ -9,14 +9,14 @@ export interface BottomTabStore {
   toggleBottomTabDrawer: () => void;
 }
 
-const bottomTabStore: StateCreator<BottomTabStore, [], [], BottomTabStore> = (
+const store: StateCreator<BottomTabStore, [], [], BottomTabStore> = (
   set,
   get,
 ) => ({
   bottomTabRoute: BottomTabRouteIcons.music,
   bottomTabRouteP: BottomTabRouteIcons.music,
   setBottomTabRoute: val =>
-    set({ bottomTabRoute: val, bottomTabRouteP: get().bottomTabRoute }),
+    set(s => ({ bottomTabRoute: val, bottomTabRouteP: s.bottomTabRoute })),
   toggleBottomTabDrawer: () => {
     const { bottomTabRoute, bottomTabRouteP, setBottomTabRoute } = get();
     setBottomTabRoute(
@@ -27,4 +27,4 @@ const bottomTabStore: StateCreator<BottomTabStore, [], [], BottomTabStore> = (
   },
 });
 
-export default bottomTabStore;
+export default store;

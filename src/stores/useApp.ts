@@ -11,64 +11,25 @@ import {
   savePlaylistIds,
   saveSettings,
   savelastPlaylistId,
-  savePlayerSkins,
   saveLyricMapping,
-  saveDefaultSearch,
   getPlaylist,
 } from '@utils/ChromeStorage';
-import { StorageKeys, SearchOptions } from '@enums/Storage';
+import { StorageKeys } from '@enums/Storage';
 import { DefaultSetting } from '@objects/Storage';
 import { savePlayerStyle } from '@utils/StyleStorage';
-import { createStyle } from '@components/style';
 import { getABRepeatRaw } from './appStore';
 import { setPlayingList, setPlayingIndex } from '@stores/playingList';
 import DummyLyricDetail from '../objects/LyricDetail';
-import { MUSICFREE } from '@utils/mediafetch/musicfree';
-import { IntentData } from '@enums/Intent';
 import createBottomTab, { BottomTabStore } from './useBottomTab';
+import createAPMUI, { APMUIStore } from './useAPMUI';
+import createUI, { UIStore } from './useUI';
 
-interface NoxSetting extends BottomTabStore {
+interface NoxSetting extends BottomTabStore, APMUIStore, UIStore {
   crossfadeId: string;
   setCrossfadeId: (val: string) => void;
 
-  songListScrollCounter: number;
-  incSongListScrollCounter: () => void;
-
-  intentData?: IntentData;
-  setIntentData: (val?: IntentData) => void;
-
-  searchOption: SearchOptions | MUSICFREE;
-  setSearchOption: (val: SearchOptions | MUSICFREE) => void;
-
-  gestureMode: boolean;
-  setGestureMode: (val: boolean) => void;
-  appRefresh: boolean;
-  setAppRefresh: () => void;
-  playlistSearchAutoFocus: boolean;
-  setPlaylistSearchAutoFocus: (val: boolean) => void;
-  playlistInfoUpdate: boolean;
-  togglePlaylistInfoUpdate: () => void;
-
   currentABRepeat: [number, number];
   setCurrentABRepeat: (val: [number, number]) => void;
-
-  playerStyle: any;
-  setPlayerStyle: (style: any, save?: boolean) => void;
-  playerStyles: any[];
-  setPlayerStyles: (val: any[]) => void;
-
-  searchBarProgress: number;
-  searchBarProgressEmitter: (val: number) => undefined;
-
-  songMenuCoords: NoxTheme.coordinates;
-  setSongMenuCoords: (val: NoxTheme.coordinates) => void;
-  songMenuVisible: boolean;
-  setSongMenuVisible: (val: boolean) => void;
-  songMenuSongIndexes: number[];
-  setSongMenuSongIndexes: (val: number[]) => void;
-  // HACK: i'm out of my wits but heres what i got to force rerender playlist...
-  playlistShouldReRender: boolean;
-  togglePlaylistShouldReRender: () => void;
 
   /**
    * currentPlayingId is the current playing song's id/cid. used to highlight
@@ -137,64 +98,15 @@ interface NoxSetting extends BottomTabStore {
  * as well as saving and loading states to/from asyncStorage.
  */
 export const useNoxSetting = create<NoxSetting>((set, get, storeApi) => ({
+  ...createBottomTab(set, get, storeApi),
+  ...createAPMUI(set, get, storeApi),
+  ...createUI(set, get, storeApi),
+
   crossfadeId: '',
   setCrossfadeId: v => set({ crossfadeId: v }),
 
-  ...createBottomTab(set, get, storeApi),
-
-  songListScrollCounter: 0,
-  incSongListScrollCounter: () =>
-    set(state => ({
-      songListScrollCounter: state.songListScrollCounter + 1,
-    })),
-
-  setIntentData: intentData => set({ intentData }),
-
-  searchOption: SearchOptions.BILIBILI,
-  setSearchOption: v => {
-    set({ searchOption: v });
-    saveDefaultSearch(v);
-  },
-
-  gestureMode: true,
-  setGestureMode: val => set({ gestureMode: val }),
-
-  appRefresh: false,
-  setAppRefresh: () => set({ appRefresh: true }),
-  playlistSearchAutoFocus: true,
-  setPlaylistSearchAutoFocus: val => set({ playlistSearchAutoFocus: val }),
-  playlistInfoUpdate: true,
-  togglePlaylistInfoUpdate: () =>
-    set(state => ({
-      playlistInfoUpdate: !state.playlistInfoUpdate,
-    })),
-
   currentABRepeat: [0, 1],
   setCurrentABRepeat: val => set({ currentABRepeat: val }),
-
-  playerStyle: createStyle(),
-  setPlayerStyle: (val, save = true) =>
-    set({ playerStyle: savePlayerStyle(val, save) }),
-  playerStyles: [],
-  setPlayerStyles: val => {
-    set({ playerStyles: val });
-    savePlayerSkins(val);
-  },
-
-  searchBarProgress: 0,
-  searchBarProgressEmitter: val => {
-    set({ searchBarProgress: val / 100 });
-    return undefined;
-  },
-  songMenuCoords: { x: 0, y: 0 },
-  setSongMenuCoords: val => set({ songMenuCoords: val }),
-  songMenuVisible: false,
-  setSongMenuVisible: val => set({ songMenuVisible: val }),
-  songMenuSongIndexes: [],
-  setSongMenuSongIndexes: val => set({ songMenuSongIndexes: val }),
-  playlistShouldReRender: false,
-  togglePlaylistShouldReRender: () =>
-    set(state => ({ playlistShouldReRender: !state.playlistShouldReRender })),
 
   currentPlayingId: '',
   setCurrentPlayingId: val => {
