@@ -73,7 +73,7 @@ export default ({ usePlaylist, onPressed = () => undefined }: Props) => {
         return selectedLength;
       }
     }
-    return currentPlaylist.songList.length;
+    return currentPlaylist?.songList?.length ?? 0;
   };
 
   const renderSongDuration = () => {
@@ -90,10 +90,10 @@ export default ({ usePlaylist, onPressed = () => undefined }: Props) => {
       }
     }
     return seconds2HHMMSS(
-      currentPlaylist.songList.reduce(
+      currentPlaylist?.songList?.reduce(
         (accumulator, currentValue) => accumulator + currentValue.duration,
         0,
-      ),
+      ) ?? 0,
     );
   };
 
@@ -192,7 +192,7 @@ export default ({ usePlaylist, onPressed = () => undefined }: Props) => {
 
       <Animated.View style={[styles.pressable, { opacity }]}>
         <Pressable onPress={onPressed}>
-          <Text variant="titleMedium">{currentPlaylist.title}</Text>
+          <Text variant="titleMedium">{currentPlaylist?.title}</Text>
           <Text variant="labelMedium">{`${renderSongCount()} / ${renderSongDuration()}`}</Text>
         </Pressable>
       </Animated.View>

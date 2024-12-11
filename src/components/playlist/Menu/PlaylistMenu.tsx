@@ -48,7 +48,7 @@ export default ({
     playlistBiliShazam,
     sortPlaylist,
   } = usePlaylist({ callback: toggleVisible });
-  const limitedPlaylistFeatures = playlist.type !== PlaylistTypes.Typical;
+  const limitedPlaylistFeatures = playlist?.type !== PlaylistTypes.Typical;
 
   return (
     <Menu visible={visible} onDismiss={toggleVisible} anchor={menuCoords}>

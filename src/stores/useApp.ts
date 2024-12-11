@@ -100,7 +100,10 @@ interface NoxSetting {
   setSearchPlaylist: (val: NoxMedia.Playlist) => void;
   favoritePlaylist: NoxMedia.Playlist;
   setFavoritePlaylist: (val: NoxMedia.Playlist) => void;
-  getPlaylist: (val: string) => Promise<NoxMedia.Playlist>;
+  getPlaylist: (
+    val: string,
+    dVal?: NoxMedia.Playlist,
+  ) => Promise<NoxMedia.Playlist>;
 
   playerSetting: NoxStorage.PlayerSettingDict;
   setPlayerSetting: (
@@ -237,7 +240,7 @@ export const useNoxSetting = create<NoxSetting>((set, get) => ({
     saveFavPlaylist(val);
     set({ favoritePlaylist: val, playlists });
   },
-  getPlaylist: async v => {
+  getPlaylist: async (v, d) => {
     const {
       searchPlaylist,
       favoritePlaylist,
@@ -245,20 +248,23 @@ export const useNoxSetting = create<NoxSetting>((set, get) => ({
       playerSetting,
       currentPlaylist,
     } = get();
-    switch (v) {
-      case StorageKeys.SEARCH_PLAYLIST_KEY:
-        return searchPlaylist;
-      case StorageKeys.FAVORITE_PLAYLIST_KEY:
-        return favoritePlaylist;
-      default:
-        if (currentPlaylist.id === v) {
-          return currentPlaylist;
-        }
-        if (playerSetting.memoryEfficiency) {
-          return getPlaylist({ key: v });
-        }
-        return playlists[v];
-    }
+    const _getPlaylist = () => {
+      switch (v) {
+        case StorageKeys.SEARCH_PLAYLIST_KEY:
+          return searchPlaylist;
+        case StorageKeys.FAVORITE_PLAYLIST_KEY:
+          return favoritePlaylist;
+        default:
+          if (currentPlaylist.id === v) {
+            return currentPlaylist;
+          }
+          if (playerSetting.memoryEfficiency) {
+            return getPlaylist({ key: v });
+          }
+          return playlists[v];
+      }
+    };
+    return _getPlaylist() ?? d ?? searchPlaylist;
   },
 
   playerSetting: DefaultSetting,
