@@ -7,6 +7,7 @@ import Animated, {
   useDerivedValue,
   useSharedValue,
   withTiming,
+  Easing,
 } from 'react-native-reanimated';
 
 import MiniControls from './MiniControls';
@@ -29,10 +30,11 @@ export default () => {
   const initHeight = useSharedValue(0);
 
   const opacityVisible = useDerivedValue(() => {
-    if (miniplayerHeight.value > width) {
+    const opacityLevel = width + 50;
+    if (miniplayerHeight.value > opacityLevel) {
       return Math.min(
         1,
-        ((miniplayerHeight.value - width) / (height - width)) * 2,
+        ((miniplayerHeight.value - opacityLevel) / (height - width)) * 2,
       );
     }
     return 0;
@@ -51,12 +53,18 @@ export default () => {
 
   const expand = () => {
     'worklet';
-    miniplayerHeight.value = withTiming(height, { duration: 250 });
+    miniplayerHeight.value = withTiming(height, {
+      duration: 250,
+      easing: Easing.inOut(Easing.ease),
+    });
     artworkOpacity.value = withTiming(1);
   };
   const collapse = () => {
     'worklet';
-    miniplayerHeight.value = withTiming(MinPlayerHeight, { duration: 250 });
+    miniplayerHeight.value = withTiming(MinPlayerHeight, {
+      duration: 250,
+      easing: Easing.inOut(Easing.ease),
+    });
     artworkOpacity.value = withTiming(1);
     runOnJS(setLrcVisible)(false);
   };

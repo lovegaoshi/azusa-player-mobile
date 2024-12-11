@@ -80,7 +80,14 @@ export default ({
       )}
       {isAndroid && (
         <Menu.Item
-          leadingIcon={() => Icons.LOCAL(rgb2Hex(playerStyle.colors.primary))}
+          leadingIcon={() =>
+            Icons.LOCAL(
+              rgb2Hex(
+                playerStyle.colors.onSurfaceVariant ??
+                  playerStyle.colors.primary,
+              ),
+            )
+          }
           onPress={chooseLocalFolderAndroid}
           title={t('Menu.local')}
         />
