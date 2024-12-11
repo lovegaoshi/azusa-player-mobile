@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { View, Dimensions } from 'react-native';
 import { GestureDetector, Gesture } from 'react-native-gesture-handler';
 import Animated, {
@@ -24,7 +24,7 @@ const SnapToRatio = 0.15;
 export default () => {
   const [lrcVisible, setLrcVisible] = React.useState(false);
   const { width, height } = Dimensions.get('window');
-  const miniplayerHeight = useSharedValue(height);
+  const miniplayerHeight = useSharedValue(MinPlayerHeight);
   const artworkOpacity = useSharedValue(1);
   const initHeight = useSharedValue(0);
 
@@ -101,6 +101,9 @@ export default () => {
       height: miniplayerHeight.value,
     };
   });
+
+  useEffect(() => expand(), []);
+
   return (
     <GestureDetector gesture={lrcVisible ? disabledGesture : scrollDragGesture}>
       <Animated.View style={[{ width: '100%', paddingTop: 3 }, animatedStyle]}>
