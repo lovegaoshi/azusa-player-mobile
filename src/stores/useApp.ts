@@ -32,7 +32,9 @@ interface NoxSetting {
   setCrossfadeId: (val: string) => void;
 
   bottomTabRoute: BottomTabRouteIcons;
+  bottomTabRouteP: BottomTabRouteIcons;
   setBottomTabRoute: (val: BottomTabRouteIcons) => void;
+  toggleBottomTabDrawer: () => void;
 
   songListScrollCounter: number;
   incSongListScrollCounter: () => void;
@@ -144,7 +146,17 @@ export const useNoxSetting = create<NoxSetting>((set, get) => ({
   setCrossfadeId: v => set({ crossfadeId: v }),
 
   bottomTabRoute: BottomTabRouteIcons.music,
-  setBottomTabRoute: val => set({ bottomTabRoute: val }),
+  bottomTabRouteP: BottomTabRouteIcons.music,
+  setBottomTabRoute: val =>
+    set({ bottomTabRoute: val, bottomTabRouteP: get().bottomTabRoute }),
+  toggleBottomTabDrawer: () => {
+    const { bottomTabRoute, bottomTabRouteP, setBottomTabRoute } = get();
+    setBottomTabRoute(
+      bottomTabRoute === BottomTabRouteIcons.playlist
+        ? bottomTabRouteP
+        : BottomTabRouteIcons.playlist,
+    );
+  },
 
   songListScrollCounter: 0,
   incSongListScrollCounter: () =>
