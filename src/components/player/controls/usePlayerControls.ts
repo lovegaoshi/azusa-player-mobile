@@ -135,6 +135,9 @@ export default () => {
         TrackPlayer.seekTo(abRepeat[0] * event.duration);
         return;
       }
+      logger.debug(
+        `[ABRepeat] duration ${event.duration} > ${bRepeatDuration}.`,
+      );
       performSkipToNext();
     }
   });
@@ -177,6 +180,7 @@ export default () => {
     const trackDuration = (await TrackPlayer.getProgress()).duration;
     setBRepeatDuration(newABRepeat[1] * trackDuration);
     if (newABRepeat[0] === 0) return;
+    logger.debug(`[ABRepeat] starting at ${trackDuration}, ${newABRepeat[0]}`);
     TrackPlayer.seekTo(trackDuration * newABRepeat[0]);
   });
 
