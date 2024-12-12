@@ -6,9 +6,6 @@ import { SearchOptions } from '@enums/Storage';
 import { saveDefaultSearch } from '@utils/ChromeStorage';
 
 export interface APMUIStore {
-  miniPlayerShrunked: boolean;
-  MiniPlayerShrunk: () => void;
-
   appRefresh: boolean;
   setAppRefresh: () => void;
 
@@ -36,9 +33,6 @@ export interface APMUIStore {
 }
 
 const store: StateCreator<APMUIStore, [], [], APMUIStore> = set => ({
-  miniPlayerShrunked: false,
-  MiniPlayerShrunk: () => set({ miniPlayerShrunked: true }),
-
   appRefresh: false,
   setAppRefresh: () => set({ appRefresh: true }),
 

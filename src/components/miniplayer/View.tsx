@@ -19,15 +19,13 @@ import TrackInfo from './TrackInfo';
 import PlayerControls from '../player/controls/PlayerProgressControls';
 import Lrc from './Lrc';
 import ProgressBar from './ProgressBar';
-import { useNoxSetting } from '@stores/useApp';
 
 const SnapToRatio = 0.15;
 
 export default () => {
   const [lrcVisible, setLrcVisible] = React.useState(false);
-  const miniplayerShrunk = useNoxSetting(state => state.MiniPlayerShrunk);
   const { width, height } = Dimensions.get('window');
-  const miniplayerHeight = useSharedValue(height);
+  const miniplayerHeight = useSharedValue(MinPlayerHeight);
   const artworkOpacity = useSharedValue(1);
   const initHeight = useSharedValue(0);
 
@@ -69,7 +67,6 @@ export default () => {
     });
     artworkOpacity.value = withTiming(1);
     runOnJS(setLrcVisible)(false);
-    runOnJS(miniplayerShrunk)();
   };
   const onArtworkPress = () => {
     if (artworkOpacity.value === 1) {
@@ -112,6 +109,12 @@ export default () => {
       height: miniplayerHeight.value,
     };
   });
+
+  useEffect(() => {
+    setTimeout(() => {
+      miniplayerHeight.value = height;
+    }, 1);
+  }, []);
 
   return (
     <GestureDetector gesture={lrcVisible ? disabledGesture : scrollDragGesture}>
