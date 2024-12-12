@@ -199,7 +199,7 @@ export const getExt = (url: string) => {
 
 interface ExecWhenTrue {
   loopCheck: () => Promise<boolean>;
-  executeFn: () => void;
+  executeFn: () => unknown;
   wait?: number;
   loopGuard?: number;
   funcName?: string;
@@ -223,4 +223,7 @@ export const execWhenTrue = async ({
     }
   }
   executeFn();
+  logger.debug(
+    `[ExecWhenTrue] function ${funcName} executed after ${loops} try.`,
+  );
 };
