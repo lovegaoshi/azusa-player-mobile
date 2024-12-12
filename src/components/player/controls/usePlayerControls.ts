@@ -20,6 +20,7 @@ import usePlaylistCRUD from '@hooks/usePlaylistCRUD';
 import { getR128Gain } from '@utils/ffmpeg/r128Store';
 import { isAndroid } from '@utils/RNUtils';
 import { useTrackStore } from '@hooks/useActiveTrack';
+import { execWhenTrue } from '@utils/Utils';
 
 const { getState } = noxPlayingList;
 const { fadeIntervalMs, fadeIntervalSec } = appStore.getState();
@@ -177,11 +178,18 @@ export default () => {
     setABRepeat(newABRepeat);
     if (setCurrentPlaying(song) && !loadingTracker.current) return;
     loadingTracker.current = false;
-    const trackDuration = (await TrackPlayer.getProgress()).duration;
-    setBRepeatDuration(newABRepeat[1] * trackDuration);
-    if (newABRepeat[0] === 0) return;
-    logger.debug(`[ABRepeat] starting at ${trackDuration}, ${newABRepeat[0]}`);
-    TrackPlayer.seekTo(trackDuration * newABRepeat[0]);
+    execWhenTrue({
+      loopCheck: async () => (await TrackPlayer.getProgress()).duration !== 0,
+      executeFn: async () => {
+        const trackDuration = (await TrackPlayer.getProgress()).duration;
+        setBRepeatDuration(newABRepeat[1] * trackDuration);
+        if (newABRepeat[0] === 0) return;
+        logger.debug(
+          `[ABRepeat] starting at ${trackDuration}, ${newABRepeat[0]}`,
+        );
+        TrackPlayer.seekTo(trackDuration * newABRepeat[0]);
+      },
+    });
   });
 
   return {
