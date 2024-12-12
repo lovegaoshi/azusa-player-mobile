@@ -188,6 +188,7 @@ export default () => {
           `[ABRepeat] starting at ${trackDuration}, ${newABRepeat[0]}`,
         );
         TrackPlayer.seekTo(trackDuration * newABRepeat[0]);
+        return;
       },
     });
   });
