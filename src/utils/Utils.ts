@@ -201,14 +201,26 @@ interface ExecWhenTrue {
   loopCheck: () => Promise<boolean>;
   executeFn: () => void;
   wait?: number;
+  loopGuard?: number;
+  funcName?: string;
 }
 export const execWhenTrue = async ({
   loopCheck,
   executeFn,
   wait = 50,
+  loopGuard = 100,
+  funcName = '',
 }: ExecWhenTrue) => {
+  let loops = 0;
   while (!(await loopCheck())) {
     await timeout(wait);
+    loops += 1;
+    if (loops > loopGuard) {
+      logger.error(
+        `[ExecWhenTrue] function ${funcName} exceeded maxStack ${loopGuard}`,
+      );
+      return;
+    }
   }
   executeFn();
 };
