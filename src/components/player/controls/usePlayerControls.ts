@@ -187,8 +187,7 @@ export default () => {
         logger.debug(
           `[ABRepeat] starting at ${trackDuration}, ${newABRepeat[0]}`,
         );
-        TrackPlayer.seekTo(trackDuration * newABRepeat[0]);
-        return;
+        await TrackPlayer.seekTo(trackDuration * newABRepeat[0]);
       },
     });
   });
