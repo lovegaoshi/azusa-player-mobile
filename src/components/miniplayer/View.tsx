@@ -111,7 +111,9 @@ export default () => {
   });
 
   useEffect(() => {
-    miniplayerHeight.value = height;
+    setTimeout(() => {
+      miniplayerHeight.value = height;
+    }, 1);
   }, []);
 
   return (
