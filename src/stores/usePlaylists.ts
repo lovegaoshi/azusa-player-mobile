@@ -77,21 +77,20 @@ const store: StateCreator<PlaylistsStore, [], [], PlaylistsStore> = (
   setCurrentPlaylist: val => set({ currentPlaylist: val }),
   searchPlaylist: dummyPlaylist(),
   setSearchPlaylist: val => {
-    const playlists = get().playlists;
+    const { playlists } = get();
     playlists[StorageKeys.SEARCH_PLAYLIST_KEY] = val;
     set({ searchPlaylist: val, playlists });
   },
   favoritePlaylist: dummyPlaylist(),
   setFavoritePlaylist: val => {
-    const playlists = get().playlists;
+    const { playlists } = get();
     playlists[StorageKeys.FAVORITE_PLAYLIST_KEY] = val;
     saveFavPlaylist(val);
     set({ favoritePlaylist: val, playlists });
   },
 
   addPlaylist: playlist => {
-    const playlistIds = Array.from(get().playlistIds);
-    const playlists = get().playlists;
+    const { playlistIds, playlists } = get();
     playlistIds.push(playlist.id);
     playlists[playlist.id] = playlist;
     set({ playlists, playlistIds });
@@ -99,17 +98,13 @@ const store: StateCreator<PlaylistsStore, [], [], PlaylistsStore> = (
     savePlaylistIds(playlistIds);
   },
   removePlaylist: playlistId => {
-    const appState = get();
-    let playlistIds = appState.playlistIds;
-    const playlists = appState.playlists;
-    const currentPlaylist = appState.currentPlaylist;
+    const { playlistIds, playlists, currentPlaylist } = get();
     if (currentPlaylist.id === playlistId) {
       set({ currentPlaylist: playlists[StorageKeys.SEARCH_PLAYLIST_KEY] });
     }
     delPlaylist(playlistId, playlistIds);
     delete playlists[playlistId];
-    playlistIds = playlistIds.filter(v => v !== playlistId);
-    set({ playlists, playlistIds });
+    set({ playlists, playlistIds: playlistIds.filter(v => v !== playlistId) });
   },
 });
 
