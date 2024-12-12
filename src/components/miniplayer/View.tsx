@@ -110,11 +110,7 @@ export default () => {
     };
   });
 
-  useEffect(() => {
-    setTimeout(() => {
-      miniplayerHeight.value = height;
-    }, 1);
-  }, []);
+  useEffect(expand, []);
 
   return (
     <GestureDetector gesture={lrcVisible ? disabledGesture : scrollDragGesture}>
