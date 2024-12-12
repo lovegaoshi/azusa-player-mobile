@@ -60,7 +60,6 @@ export default () => {
   const [layoutHeight, setLayoutHeight] = useState(0);
   const playlistIds = useNoxSetting(state => state.playlistIds);
   const playerStyle = useNoxSetting(state => state.playerStyle);
-  const miniPlayerShrunked = useNoxSetting(state => state.miniPlayerShrunked);
 
   // HACK: I know its bad! But somehow this hook isnt updating in its own
   // useEffects...
@@ -90,9 +89,7 @@ export default () => {
     <View
       style={layoutHeight === 0 ? styles.flex : { height: layoutHeight }}
       onLayout={e =>
-        miniPlayerShrunked &&
-        layoutHeight === 0 &&
-        setLayoutHeight(e.nativeEvent.layout.height)
+        layoutHeight === 0 && setLayoutHeight(e.nativeEvent.layout.height)
       }
     >
       <View style={styles.topPadding} />
