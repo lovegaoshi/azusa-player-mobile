@@ -77,21 +77,21 @@ const store: StateCreator<PlaylistsStore, [], [], PlaylistsStore> = (
   setCurrentPlaylist: val => set({ currentPlaylist: val }),
   searchPlaylist: dummyPlaylist(),
   setSearchPlaylist: val => {
-    let playlists = get().playlists;
+    const playlists = get().playlists;
     playlists[StorageKeys.SEARCH_PLAYLIST_KEY] = val;
     set({ searchPlaylist: val, playlists });
   },
   favoritePlaylist: dummyPlaylist(),
   setFavoritePlaylist: val => {
-    let playlists = get().playlists;
+    const playlists = get().playlists;
     playlists[StorageKeys.FAVORITE_PLAYLIST_KEY] = val;
     saveFavPlaylist(val);
     set({ favoritePlaylist: val, playlists });
   },
 
   addPlaylist: playlist => {
-    let playlistIds = Array.from(get().playlistIds);
-    let playlists = get().playlists;
+    const playlistIds = Array.from(get().playlistIds);
+    const playlists = get().playlists;
     playlistIds.push(playlist.id);
     playlists[playlist.id] = playlist;
     set({ playlists, playlistIds });
@@ -101,7 +101,7 @@ const store: StateCreator<PlaylistsStore, [], [], PlaylistsStore> = (
   removePlaylist: playlistId => {
     const appState = get();
     let playlistIds = appState.playlistIds;
-    let playlists = appState.playlists;
+    const playlists = appState.playlists;
     const currentPlaylist = appState.currentPlaylist;
     if (currentPlaylist.id === playlistId) {
       set({ currentPlaylist: playlists[StorageKeys.SEARCH_PLAYLIST_KEY] });
