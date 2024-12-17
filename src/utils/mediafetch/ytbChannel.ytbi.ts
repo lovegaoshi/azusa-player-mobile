@@ -21,7 +21,7 @@ const getYtbSong = async (
   playlistData: Channel | ChannelListContinuation,
   songs: NoxMedia.Song[],
   favList: string[],
-) => {
+): Promise<NoxMedia.Song[]> => {
   const videos = playlistData.videos as Video[];
   for (const video of videos) {
     if (!favList.includes(video.id)) {
@@ -56,6 +56,7 @@ const regexFetch = async ({
 };
 export default {
   // https://www.youtube.com/c/MioriCelesta
-  regexSearchMatch: /youtube\.com\/c\/([^&/]+)/,
+  regexSearchMatch: /youtube\.com\/c\/([^&\/]+)/,
+  regexSearchMatch2: /youtube\.com\/(@[^&\/]+)/,
   regexFetch,
 };
