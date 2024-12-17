@@ -46,9 +46,6 @@ export default async (backgroundImage?: string | NoxTheme.backgroundImage) => {
           backgroundImage,
         );
       case RESOLVE_TYPE.biliNFTVideo: {
-        logger.warn(
-          `[backgroundFetch] ${RESOLVE_TYPE.biliNFTVideo} is no longer supported.`,
-        );
         const [act_id, index] = JSON.parse(backgroundImage.identifier);
         return BackgroundVideoWrapper(
           await cacheWrapper(
