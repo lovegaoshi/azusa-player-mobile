@@ -95,7 +95,7 @@ declare global {
       songList: NoxMedia.Song[];
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       refreshToken?: any;
-      refresh?: (v: Playlist) => Promise<SearchPlaylist>;
+      refresh?: (v: NoxMedia.Playlist) => Promise<NoxMedia.SearchPlaylist>;
     }
   }
 }
