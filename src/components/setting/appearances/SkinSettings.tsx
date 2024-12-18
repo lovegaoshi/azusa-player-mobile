@@ -9,7 +9,7 @@ import {
 } from 'react-native-paper';
 import { FlashList } from '@shopify/flash-list';
 
-import SkinSearchbar from '../SkinSearchbar';
+import SkinSearchbar from './SkinSearchbar';
 import { useNoxSetting } from '@stores/useApp';
 import AzusaTheme from '@components/styles/AzusaTheme';
 import NoxTheme from '@components/styles/NoxTheme';
