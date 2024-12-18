@@ -23,7 +23,7 @@ export default (currentSong?: NoxMedia.Song, artist = '') => {
   }) => {
     if (resolvedLrc) {
       const lrcpath = `${song.id}.txt`;
-      writeTxtFile(lrcpath, [newLrcDetail.lyric ?? lrc], 'lrc/');
+      writeTxtFile(lrcpath, [newLrcDetail.lyric ?? lrc], 'lrc');
       const lyricDeatail: NoxMedia.LyricDetail = {
         songId: song.id,
         lyricKey: resolvedLrc.key,
@@ -41,7 +41,7 @@ export default (currentSong?: NoxMedia.Song, artist = '') => {
     if (lrcDetail === undefined) return;
     let localLrc: string | undefined = undefined;
     if (lrcDetail.lyric.endsWith('.txt')) {
-      localLrc = await readTxtFile(lrcDetail.lyric, 'lrc/');
+      localLrc = await readTxtFile(lrcDetail.lyric, 'lrc');
       if (localLrc) {
         logger.debug('[lrc] read local lrc and loading...');
       }

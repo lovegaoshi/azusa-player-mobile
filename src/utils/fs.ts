@@ -10,7 +10,7 @@ export const writeTxtFile = (
 ) => {
   RNFetchBlob.fs
     .writeStream(
-      `${fsdirs.DocumentDir}/${subfolder}${filename}`,
+      `${fsdirs.DocumentDir}/${subfolder}/${filename}`,
       // encoding, should be one of `base64`, `utf8`, `ascii`
       'utf8',
       // should data append to existing content ?
@@ -24,16 +24,15 @@ export const writeTxtFile = (
     .catch(console.error);
 };
 
-export const readTxtFile = (filename: string, subfolder = '') => {
-  try {
-    return RNFetchBlob.fs
-      .readFile(`${fsdirs.DocumentDir}/${subfolder}${filename}`, 'utf8')
-      .catch(() => undefined);
-  } catch (e) {
-    logger.warn(`[fs] readTxtFile error: ${e}`);
-    return undefined;
-  }
-};
+export const rmTxtFile = (filename: string, subfolder = '') =>
+  RNFetchBlob.fs
+    .unlink(`${fsdirs.DocumentDir}/${subfolder}/${filename}`)
+    .catch(e => logger.warn(`[fs] rmTxtFile error: ${e}`));
+
+export const readTxtFile = (filename: string, subfolder = '') =>
+  RNFetchBlob.fs
+    .readFile(`${fsdirs.DocumentDir}/${subfolder}/${filename}`, 'utf8')
+    .catch(e => logger.warn(`[fs] readTxtFile error: ${e}`));
 
 export const lsFiles = async (
   dirpath = `${fsdirs.DocumentDir}`,

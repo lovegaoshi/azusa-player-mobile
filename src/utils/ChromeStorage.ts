@@ -24,7 +24,7 @@ import { MUSICFREE } from '@utils/mediafetch/musicfree';
 import { getAlistCred } from './alist/storage';
 import { timeFunction } from './Utils';
 
-export const setMusicFreePlugin = (val: MUSICFREE[]): Promise<void> =>
+export const setMusicFreePlugin = (val: MUSICFREE[]) =>
   saveItem(StorageKeys.MUSICFREE_PLUGIN, val);
 
 export const getMusicFreePlugin = (): Promise<MUSICFREE[]> =>

@@ -10,7 +10,8 @@ import { URL } from 'react-native-url-polyfill';
 
 const Qualities = ['super', 'high', 'standard', 'low'];
 
-interface MFsdk {
+export interface MFsdk {
+  path: string;
   platform: string;
   version: string;
   author: string;
@@ -119,7 +120,7 @@ const _console = {
   error: _consoleBind.bind(null, 'error'),
 };
 
-export const loadEvalPlugin = (plugin: string): MFsdk => {
+export const loadEvalPlugin = (plugin: string, path = 'MEMORY'): MFsdk => {
   const env = {
     getUserVariables: () => ({}),
     os: 'android',
@@ -149,6 +150,7 @@ export const loadEvalPlugin = (plugin: string): MFsdk => {
   }
   return {
     ..._instance,
+    path,
     regexFetch: searchWrapper(_instance.search, _instance),
     resolveURL: resolveURLWrapper(_instance.getMediaSource, _instance),
   };

@@ -19,12 +19,15 @@ import createBottomTab, { BottomTabStore } from './useBottomTab';
 import createAPMUI, { APMUIStore } from './useAPMUI';
 import createUI, { UIStore } from './useUI';
 import createPlaylists, { PlaylistsStore } from './usePlaylists';
+import createMFsdk, { MFsdkStore } from './useMFsdk';
+import { initMFsdk } from '@utils/mfsdk';
 
 interface NoxSetting
   extends BottomTabStore,
     APMUIStore,
     UIStore,
-    PlaylistsStore {
+    PlaylistsStore,
+    MFsdkStore {
   crossfadeId: string;
   setCrossfadeId: (val: string) => void;
 
@@ -71,6 +74,7 @@ export const useNoxSetting = create<NoxSetting>((set, get, storeApi) => ({
   ...createAPMUI(set, get, storeApi),
   ...createUI(set, get, storeApi),
   ...createPlaylists(set, get, storeApi),
+  ...createMFsdk(set, get, storeApi),
 
   crossfadeId: '',
   setCrossfadeId: v => set({ crossfadeId: v }),
@@ -162,6 +166,7 @@ export const useNoxSetting = create<NoxSetting>((set, get, storeApi) => ({
     });
     const initializedPlayerSetting = val.settings;
     set({
+      MFsdks: await initMFsdk(),
       currentPlayingId: val.lastPlaylistId[1],
       currentABRepeat: getABRepeatRaw(val.lastPlaylistId[1]),
       currentPlayingList: playingList,

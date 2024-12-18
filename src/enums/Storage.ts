@@ -24,6 +24,7 @@ export enum StorageKeys {
   AA_PERMISSION = 'AndroidAutoPermission',
   TANAKA_AMAZING_COMMODITIES = 'TanakaAmazingCommodities',
   ALIST_CRED = 'AlistCred',
+  MFSDK_PATHS = 'MusicFreePaths',
 
   YTMTOKEN = 'YTMToken',
   YTMCOOKIES = 'YTMCookies',
