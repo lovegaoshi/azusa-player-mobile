@@ -3,7 +3,7 @@ import { View, StyleSheet } from 'react-native';
 import { useTranslation } from 'react-i18next';
 
 import { useNoxSetting } from '@stores/useApp';
-import SettingListItem from '../helpers/SettingListItem';
+import SettingListItem from '../../helpers/SettingListItem';
 import { saveRegextractMapping } from '@utils/ChromeStorage';
 import { downloadR128GainDB } from './r128gain/Sync';
 import useSnack from '@stores/useSnack';

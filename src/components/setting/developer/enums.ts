@@ -1,6 +1,7 @@
 export enum Route {
   HOME = 'Settings',
   PLUGINS = 'Plugins',
+  MUSICFREE = 'MusicFree',
 }
 
 export enum Icons {
