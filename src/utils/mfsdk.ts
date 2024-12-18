@@ -20,7 +20,7 @@ export const rmMFsdks = async (paths: string[]) => {
 
 export const addMFsdks = async (paths: string[]) => {
   const mfsdkPaths = await getMFsdk();
-  saveItem(StorageKeys.MFSDK_PATHS, [...mfsdkPaths, ...paths]);
+  saveItem(StorageKeys.MFSDK_PATHS, [...new Set([...mfsdkPaths, ...paths])]);
 };
 
 export const initMFsdk = async () => {
@@ -47,8 +47,9 @@ export const fetchMFsdk = async (url: string) => {
     const sdkLocalPath = `${loadedSDK.platform}.${loadedSDK.version}.js`;
     loadedSDK.path = sdkLocalPath;
     writeTxtFile(sdkLocalPath, [text], mfsdkSubFolder);
+    return [loadedSDK];
   } catch {
     logger.warn(`[mfsdk] failed to fetch and parse ${url}`);
   }
-  return;
+  return [];
 };

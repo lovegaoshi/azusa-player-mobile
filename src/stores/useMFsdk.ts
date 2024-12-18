@@ -8,23 +8,26 @@ export interface MFsdkStore {
   MFsdks: MFsdk[];
   setMFsdks: (mf: MFsdk[]) => void;
   addMFsdks: (mf: MFsdk[]) => void;
-  removeMFsdk: (mf: MFsdk) => void;
+  rmMFsdks: (mf: MFsdk[]) => void;
 }
 
 const store: StateCreator<MFsdkStore, [], [], MFsdkStore> = (set, get) => ({
   MFsdks: [],
   setMFsdks: mf => set({ MFsdks: mf }),
   addMFsdks: mf => {
+    if (mf.length === 0) return;
     addMFsdks(mf.map(v => v.path));
     set(s => ({
       MFsdks: getUniqObjects([...mf, ...s.MFsdks], sdk => sdk.srcUrl),
     }));
   },
-  removeMFsdk: mf => {
+  rmMFsdks: mf => {
+    if (mf.length === 0) return;
     const { MFsdks } = get();
-    rmMFsdks(MFsdks.filter(v => v.srcUrl === mf.srcUrl).map(v => v.path));
+    const rmUrls = mf.map(v => v.srcUrl);
+    rmMFsdks(MFsdks.filter(v => rmUrls.includes(v.srcUrl)).map(v => v.path));
     set(s => ({
-      MFsdks: s.MFsdks.filter(v => v.srcUrl !== mf.srcUrl),
+      MFsdks: s.MFsdks.filter(v => !rmUrls.includes(v.srcUrl)),
     }));
   },
 });
