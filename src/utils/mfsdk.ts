@@ -2,7 +2,7 @@ import { saveItem, getItem } from '@utils/ChromeStorageAPI';
 import { StorageKeys } from '@enums/Storage';
 import { readTxtFile, rmTxtFile, writeTxtFile } from '@utils/fs';
 import logger from './Logger';
-import { loadEvalPlugin } from './mediafetch/evalsdk';
+import { loadEvalPlugin, MFsdk } from './mediafetch/evalsdk';
 import bFetch from './BiliFetch';
 
 const mfsdkSubFolder = 'mfsdk';
@@ -39,17 +39,22 @@ export const initMFsdk = async () => {
   return mfsdks.filter(v => v !== undefined);
 };
 
-export const fetchMFsdk = async (url: string) => {
+export const fetchMFsdk = async (url: string): Promise<MFsdk[]> => {
   try {
     const res = await bFetch(url);
     const text = await res.text();
+    try {
+      const json = JSON.parse(text) as { plugins: { url: string }[] };
+      const sdks = await Promise.all(json.plugins.map(p => fetchMFsdk(p.url)));
+      return sdks.flat();
+    } catch {}
     const loadedSDK = loadEvalPlugin(text, url);
     const sdkLocalPath = `${loadedSDK.platform}.${loadedSDK.version}.js`;
     loadedSDK.path = sdkLocalPath;
     writeTxtFile(sdkLocalPath, [text], mfsdkSubFolder);
     return [loadedSDK];
-  } catch {
-    logger.warn(`[mfsdk] failed to fetch and parse ${url}`);
+  } catch (e) {
+    logger.warn(`[mfsdk] failed to fetch and parse ${url}: ${e}`);
   }
   return [];
 };
