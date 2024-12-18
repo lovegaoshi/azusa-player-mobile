@@ -1,7 +1,7 @@
 import { logger } from '../Logger';
 import { fetchBiliPaginatedAPI } from './paginatedbili';
 import bfetch from '../BiliFetch';
-import { getBiliCookie } from '@utils/Bilibili/biliCookies';
+import { getBiliCookie, BILICOOKIES } from '@utils/Bilibili/biliCookies';
 import { timestampToSeconds } from '../Utils';
 import SongTS from '@objects/Song';
 import { Source } from '@enums/MediaFetch';
@@ -19,7 +19,7 @@ const getCookie = async (cookiedSearch = false) => {
     cookie = `buvid3=${json.data.b_3};buvid4=${json.data.b_4}`;
   }
   if (cookiedSearch) {
-    return `${cookie};SESSDATA=${await getBiliCookie('SESSDATA')}`;
+    return `${cookie};SESSDATA=${await getBiliCookie(BILICOOKIES.SESSDATA)}`;
   }
   return cookie;
 };

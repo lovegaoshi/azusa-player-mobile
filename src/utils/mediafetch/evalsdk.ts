@@ -97,7 +97,7 @@ const packages: Record<string, any> = {
 };
 
 const _require = (packageName: string) => {
-  let pkg = packages[packageName];
+  const pkg = packages[packageName];
   pkg.default = pkg;
   return pkg;
 };
