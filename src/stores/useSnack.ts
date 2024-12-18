@@ -2,7 +2,7 @@ import { logger } from '../utils/Logger';
 import { create } from 'zustand';
 import { timeout } from '../utils/Utils';
 
-interface SetSnack {
+export interface SetSnack {
   snackMsg: { processing?: string; success: string; fail?: string };
   snackDuration?: number;
   onDismiss?: () => void;

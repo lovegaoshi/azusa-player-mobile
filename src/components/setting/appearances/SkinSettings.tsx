@@ -14,7 +14,7 @@ import { useNoxSetting } from '@stores/useApp';
 import AzusaTheme from '@components/styles/AzusaTheme';
 import NoxTheme from '@components/styles/NoxTheme';
 import AdaptiveTheme from '@components/styles/AdaptiveTheme';
-import { getUniqObjects, execWhenTrue } from '@utils/Utils';
+import { execWhenTrue } from '@utils/Utils';
 import GenericSelectDialog from '../../dialogs/GenericSelectDialog';
 import { getStyle } from '@utils/StyleStorage';
 interface DisplayTheme extends NoxTheme.Style {
@@ -121,15 +121,15 @@ const SkinItem = ({
   );
 };
 
+const getThemeID = (skin: NoxTheme.Style) =>
+  `${skin.metaData.themeName}.${skin.metaData.themeAuthor}`;
+
 const SkinSettings = () => {
   const [selectSkin, setSelectSkin] = React.useState<NoxTheme.Style>();
   const playerStyle = useNoxSetting(state => state.playerStyle);
   const playerStyles = useNoxSetting(state => state.playerStyles);
   const setPlayerStyle = useNoxSetting(state => state.setPlayerStyle);
-  const setPlayerStyles = useNoxSetting(state => state.setPlayerStyles);
   const allThemes = BuiltInThemes.concat(playerStyles);
-  const getThemeID = (skin: NoxTheme.Style) =>
-    `${skin.metaData.themeName}.${skin.metaData.themeAuthor}`;
   const [checked, setChecked] = React.useState(getThemeID(playerStyle));
   const scrollViewRef = React.useRef<FlashList<DisplayTheme> | null>(null);
 
@@ -138,19 +138,6 @@ const SkinSettings = () => {
     setPlayerStyle(theme);
     scrollViewRef.current?.prepareForLayoutAnimationRender();
     LayoutAnimation.configureNext(LayoutAnimation.Presets.linear);
-  };
-
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const loadCustomSkin = (skins: any) => {
-    // skins MUST BE an array of objects
-    if (!Array.isArray(skins)) {
-      throw new Error('requested skin URL is not an array. aborting.');
-    }
-    const uniqueSkins = getUniqObjects(
-      skins.filter(skin => skin.metaData).concat(playerStyles),
-      getThemeID,
-    );
-    setPlayerStyles(uniqueSkins);
   };
 
   React.useEffect(() => {
@@ -178,7 +165,7 @@ const SkinSettings = () => {
         { backgroundColor: playerStyle.customColors.maskedBackgroundColor },
       ]}
     >
-      <SkinSearchbar onSearched={loadCustomSkin} />
+      <SkinSearchbar getThemeID={getThemeID} />
       <FlashList
         ref={scrollViewRef}
         data={allThemes}
