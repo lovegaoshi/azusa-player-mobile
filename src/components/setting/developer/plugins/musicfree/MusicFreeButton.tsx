@@ -2,8 +2,8 @@ import * as React from 'react';
 import { Image } from 'expo-image';
 import { StyleSheet } from 'react-native';
 
-import SettingListItem from '../../helpers/SettingListItem';
-import { Route } from '../enums';
+import SettingListItem from '@components/setting/helpers/SettingListItem';
+import { Route } from '@components/setting/developer/enums';
 import useNavigation from '@hooks/useNavigation';
 
 const MusicFreeIcon = () => (

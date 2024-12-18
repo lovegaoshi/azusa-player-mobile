@@ -6,11 +6,7 @@ import logger from '@utils/Logger';
 import SearchBar from '@components/commonui/SearchBar';
 import { getUniqObjects } from '@utils/Utils';
 
-interface Props {
-  getThemeID: (skin: NoxTheme.Style) => string;
-}
-
-export default ({ getThemeID }: Props) => {
+export default () => {
   const { t } = useTranslation();
   const playerStyles = useNoxSetting(state => state.playerStyles);
   const setPlayerStyles = useNoxSetting(state => state.setPlayerStyles);
@@ -21,7 +17,7 @@ export default ({ getThemeID }: Props) => {
     }
     const uniqueSkins = getUniqObjects(
       skins.filter(skin => skin.metaData).concat(playerStyles),
-      getThemeID,
+      () => '',
     );
     setPlayerStyles(uniqueSkins);
   };

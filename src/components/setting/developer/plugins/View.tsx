@@ -7,7 +7,7 @@ import SettingListItem from '../../helpers/SettingListItem';
 import { saveRegextractMapping } from '@utils/ChromeStorage';
 import { downloadR128GainDB } from './r128gain/Sync';
 import useSnack from '@stores/useSnack';
-import MusicFreeButton from './MusicFreeButton';
+import MusicFreeButton from './musicfree/MusicFreeButton';
 
 const updateFromGithub = async () => {
   const res = await fetch(

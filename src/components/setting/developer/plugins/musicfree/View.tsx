@@ -10,11 +10,12 @@ import {
 import { FlashList } from '@shopify/flash-list';
 
 import { styles } from '@components/style';
+import Searchbar from './Searchbar';
 
 const MFSettings = () => {
   return (
     <SafeAreaView style={styles.flex}>
-      <Text>MFSettings</Text>
+      <Searchbar />
     </SafeAreaView>
   );
 };
