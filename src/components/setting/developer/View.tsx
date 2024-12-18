@@ -6,6 +6,7 @@ import { useNoxSetting } from '@stores/useApp';
 import SelectDialogWrapper from '../SelectDialogWrapper';
 import { Route } from './enums';
 import { Home } from './DeveloperSettings';
+import MFSettings from './plugins/musicfree/View';
 
 const Stack = createNativeStackNavigator();
 
@@ -33,6 +34,11 @@ export default () => {
       <Stack.Screen
         name={Route.PLUGINS}
         component={PluginSettings}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name={Route.MUSICFREE}
+        component={MFSettings}
         options={{ headerShown: false }}
       />
     </Stack.Navigator>
