@@ -2,47 +2,43 @@
 import React, { useState } from 'react';
 import { Searchbar, ProgressBar } from 'react-native-paper';
 import { View, StyleSheet } from 'react-native';
-import { useTranslation } from 'react-i18next';
 
 import { useNoxSetting } from '@stores/useApp';
-import useSnack from '@stores/useSnack';
-import logger from '@utils/Logger';
+import useSnack, { SetSnack } from '@stores/useSnack';
+
+interface OnSearchProps {
+  v: string;
+  progressEmitter: (v: number) => void;
+  setSnack: (v: SetSnack) => unknown;
+}
 
 interface Props {
-  onSearched: (val: any) => void;
+  defaultSearchText?: string;
+  onSearch: (p: OnSearchProps) => Promise<unknown>;
+  placeholder?: string;
 }
-const CustomSkinSearch = ({
-  onSearched = (vals: any) => console.log(vals),
+
+export default ({
+  onSearch = async v => console.log(v),
+  defaultSearchText = '',
+  placeholder,
 }: Props) => {
-  const { t } = useTranslation();
   const setSnack = useSnack(state => state.setSnack);
-  const [searchVal, setSearchVal] = useState(
-    'https://raw.githubusercontent.com/lovegaoshi/azusa-player-mobile/master/src/components/styles/steria.json',
-  );
+  const [searchVal, setSearchVal] = useState(defaultSearchText);
   const [searchProgress, progressEmitter] = useState(0);
   const playerStyle = useNoxSetting(state => state.playerStyle);
 
-  const handleSearch = async (val = searchVal) => {
+  const handleSearch = async (v = searchVal) => {
     progressEmitter(1);
-    try {
-      const res = await fetch(val);
-      const searchedResult = await res.json();
-      onSearched(searchedResult);
-    } catch (e) {
-      logger.warn(`[SkinSearchbar] failed to search ${e}`);
-      setSnack({
-        snackMsg: { success: t('CustomSkin.SearchFailMsg') },
-      });
-    } finally {
-      progressEmitter(0);
-    }
+    await onSearch({ v, progressEmitter, setSnack });
+    progressEmitter(0);
   };
 
   return (
     <View style={styles.container}>
       <View style={styles.row}>
         <Searchbar
-          placeholder={t('CustomSkin.SearchBarLabel')}
+          placeholder={placeholder}
           value={searchVal}
           onChangeText={setSearchVal}
           onSubmitEditing={() => handleSearch(searchVal)}
@@ -77,5 +73,3 @@ const styles = StyleSheet.create({
   },
   progressBar: { backgroundColor: 'rgba(0, 0, 0, 0)' },
 });
-
-export default CustomSkinSearch;

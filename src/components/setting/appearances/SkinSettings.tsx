@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Image } from 'expo-image';
-import { View, SafeAreaView, StyleSheet, LayoutAnimation } from 'react-native';
+import { View, SafeAreaView, LayoutAnimation } from 'react-native';
 import {
   Text,
   IconButton,
@@ -9,14 +9,16 @@ import {
 } from 'react-native-paper';
 import { FlashList } from '@shopify/flash-list';
 
-import SkinSearchbar from '../SkinSearchbar';
+import SkinSearchbar from './SkinSearchbar';
 import { useNoxSetting } from '@stores/useApp';
 import AzusaTheme from '@components/styles/AzusaTheme';
 import NoxTheme from '@components/styles/NoxTheme';
 import AdaptiveTheme from '@components/styles/AdaptiveTheme';
-import { getUniqObjects, execWhenTrue } from '@utils/Utils';
+import { execWhenTrue } from '@utils/Utils';
 import GenericSelectDialog from '../../dialogs/GenericSelectDialog';
 import { getStyle } from '@utils/StyleStorage';
+import { ItemSelectStyles as styles } from '@components/style';
+
 interface DisplayTheme extends NoxTheme.Style {
   builtin: boolean;
 }
@@ -121,36 +123,23 @@ const SkinItem = ({
   );
 };
 
+const getThemeID = (skin: NoxTheme.Style) =>
+  `${skin.metaData.themeName}.${skin.metaData.themeAuthor}`;
+
 const SkinSettings = () => {
   const [selectSkin, setSelectSkin] = React.useState<NoxTheme.Style>();
   const playerStyle = useNoxSetting(state => state.playerStyle);
   const playerStyles = useNoxSetting(state => state.playerStyles);
   const setPlayerStyle = useNoxSetting(state => state.setPlayerStyle);
-  const setPlayerStyles = useNoxSetting(state => state.setPlayerStyles);
   const allThemes = BuiltInThemes.concat(playerStyles);
-  const getThemeID = (skin: NoxTheme.Style) =>
-    `${skin.metaData.themeName}.${skin.metaData.themeAuthor}`;
   const [checked, setChecked] = React.useState(getThemeID(playerStyle));
-  const scrollViewRef = React.useRef<FlashList<DisplayTheme> | null>(null);
+  const scrollViewRef = React.useRef<FlashList<DisplayTheme>>(null);
 
   const selectTheme = (theme: NoxTheme.Style) => {
     setChecked(getThemeID(theme));
     setPlayerStyle(theme);
     scrollViewRef.current?.prepareForLayoutAnimationRender();
     LayoutAnimation.configureNext(LayoutAnimation.Presets.linear);
-  };
-
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const loadCustomSkin = (skins: any) => {
-    // skins MUST BE an array of objects
-    if (!Array.isArray(skins)) {
-      throw new Error('requested skin URL is not an array. aborting.');
-    }
-    const uniqueSkins = getUniqObjects(
-      skins.filter(skin => skin.metaData).concat(playerStyles),
-      getThemeID,
-    );
-    setPlayerStyles(uniqueSkins);
   };
 
   React.useEffect(() => {
@@ -178,7 +167,7 @@ const SkinSettings = () => {
         { backgroundColor: playerStyle.customColors.maskedBackgroundColor },
       ]}
     >
-      <SkinSearchbar onSearched={loadCustomSkin} />
+      <SkinSearchbar getThemeID={getThemeID} />
       <FlashList
         ref={scrollViewRef}
         data={allThemes}
@@ -192,6 +181,7 @@ const SkinSettings = () => {
             listRef={scrollViewRef}
           />
         )}
+        estimatedItemSize={107}
       />
       <GenericSelectDialog
         visible={selectSkin !== undefined}
@@ -211,46 +201,5 @@ const SkinSettings = () => {
     </SafeAreaView>
   );
 };
-
-const styles = StyleSheet.create({
-  safeAreaView: {
-    flex: 1,
-  },
-  skinItemContainer: {
-    flexDirection: 'row',
-  },
-  skinItemLeftContainer: {
-    flexDirection: 'row',
-    paddingVertical: 5,
-    flex: 5,
-    paddingLeft: 5,
-  },
-  skinItemImage: {
-    width: 72,
-    height: 72,
-    borderRadius: 40,
-  },
-  skinItemTextContainer: {
-    paddingLeft: 5,
-  },
-  lightbulbContainer: {
-    flexDirection: 'row',
-  },
-  lightbulbIcon: {
-    marginHorizontal: 0,
-    marginVertical: 0,
-    marginLeft: -8,
-    marginTop: -8,
-  },
-  skinItemRightContainer: {
-    alignContent: 'flex-end',
-  },
-  deleteButton: {
-    marginLeft: -3,
-  },
-  skinTitleText: {
-    maxWidth: '100%',
-  },
-});
 
 export default SkinSettings;

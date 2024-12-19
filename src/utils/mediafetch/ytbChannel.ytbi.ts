@@ -56,7 +56,7 @@ const regexFetch = async ({
 };
 export default {
   // https://www.youtube.com/c/MioriCelesta
-  regexSearchMatch: /youtube\.com\/c\/([^&\/]+)/,
-  regexSearchMatch2: /youtube\.com\/(@[^&\/]+)/,
+  regexSearchMatch: /youtube\.com\/c\/([^&/]+)/,
+  regexSearchMatch2: /youtube\.com\/(@[^&/]+)/,
   regexFetch,
 };

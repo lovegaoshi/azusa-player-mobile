@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next';
 import GeneralSettings from './GeneralSettings';
 import AppearanceSettings from './appearances/View';
 import AListSettings from './alist/View';
-import DeveloperSettings from './DeveloperSettings';
+import DeveloperSettings from './developer/View';
 import SyncSettings from './SyncSettings';
 import { useNoxSetting } from '@stores/useApp';
 import SettingListItem from './helpers/SettingListItem';

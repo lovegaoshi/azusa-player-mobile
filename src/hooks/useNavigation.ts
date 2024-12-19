@@ -22,5 +22,8 @@ export default () => {
     }
   };
 
-  return { navigate, getState: navigationGlobal.getState };
+  const navigate2 = (route: unknown) =>
+    navigationGlobal.navigate(route as never);
+
+  return { navigate, navigate2, getState: navigationGlobal.getState };
 };

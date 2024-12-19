@@ -1,11 +1,10 @@
 import { SortOptions, PlaylistTypes } from '@enums/Playlist';
 import { Source } from '@enums/MediaFetch';
-import { MUSICFREE } from '@utils/mediafetch/musicfree';
 import { LrcSource } from '@enums/LyricFetch';
 
 declare global {
   namespace NoxMedia {
-    type SongSource = Source | MUSICFREE;
+    type SongSource = Source;
 
     export interface Song {
       id: string;

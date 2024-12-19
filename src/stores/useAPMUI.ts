@@ -1,7 +1,6 @@
 import { StateCreator } from 'zustand';
 
 import { IntentData } from '@enums/Intent';
-import { MUSICFREE } from '@utils/mediafetch/musicfree';
 import { SearchOptions } from '@enums/Storage';
 import { saveDefaultSearch } from '@utils/ChromeStorage';
 
@@ -14,8 +13,8 @@ export interface APMUIStore {
 
   intentData?: IntentData;
   setIntentData: (val?: IntentData) => void;
-  searchOption: SearchOptions | MUSICFREE;
-  setSearchOption: (val: SearchOptions | MUSICFREE) => void;
+  searchOption: SearchOptions;
+  setSearchOption: (val: SearchOptions) => void;
   gestureMode: boolean;
   setGestureMode: (val: boolean) => void;
 

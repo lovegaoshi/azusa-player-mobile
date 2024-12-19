@@ -3,56 +3,32 @@ import { View, ScrollView, Alert } from 'react-native';
 import { List } from 'react-native-paper';
 import { useTranslation } from 'react-i18next';
 import { useStore } from 'zustand';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import * as Sentry from '@sentry/react-native';
 
 // eslint-disable-next-line import/no-unresolved
 import { APPSTORE } from '@env';
 import { useNoxSetting } from '@stores/useApp';
 import { logStore, LOGLEVEL } from '@utils/Logger';
-import { RenderSetting } from './helpers/RenderSetting';
-import SettingListItem from './helpers/SettingListItem';
+import { RenderSetting } from '../helpers/RenderSetting';
+import SettingListItem from '../helpers/SettingListItem';
 import useVersionCheck from '@hooks/useVersionCheck';
-import { SelectSettingEntry, SettingEntry } from './helpers/SettingEntry';
+import { SelectSettingEntry, SettingEntry } from '../helpers/SettingEntry';
 import NoxCache from '@utils/Cache';
 import useCleanCache from '@hooks/useCleanCache';
 import appStore from '@stores/appStore';
 import { saveFadeInterval } from '@utils/ChromeStorage';
-import GroupView from '../background/GroupView';
-import PluginSettings from './plugins/View';
-import showLog from './debug/Log';
-import { showDebugLog } from './debug/DebugConsole';
+import GroupView from '../../background/GroupView';
+import showLog from '../debug/Log';
+import { showDebugLog } from '../debug/DebugConsole';
 import {
   getTakanaDesc,
   disableTanaka,
   enableTanaka,
 } from '@hooks/useTanakaAmazingCommodities';
 import { isAndroid } from '@utils/RNUtils';
-import SelectSetting from './helpers/SelectSetting';
-import SelectDialogWrapper, {
-  SelectDialogChildren,
-} from './SelectDialogWrapper';
-
-enum Icons {
-  setlog = 'console',
-  update = 'update',
-  showlog = 'bug',
-  cache = 'floppy',
-  clearcache = 'delete-sweep',
-  clearOrphanCache = 'delete-empty',
-  crossfade = 'shuffle-variant',
-  fade = 'cosine-wave',
-  plugins = 'puzzle',
-  Tanaka = 'emoticon-devil',
-  ArtworkRes = 'quality-high',
-}
-
-enum VIEW {
-  HOME = 'Settings',
-  PLUGINS = 'Plugins',
-}
-
-const Stack = createNativeStackNavigator();
+import SelectSetting from '../helpers/SelectSetting';
+import { SelectDialogChildren } from '../SelectDialogWrapper';
+import { Route, Icons } from './enums';
 
 const FadeOptions = [0, 250, 500, 1000];
 const CrossFadeOptions = [0, 2500, 5000, 7500, 12000];
@@ -103,7 +79,7 @@ interface HomeProps
   extends NoxComponent.StackNavigationProps,
     SelectDialogChildren<any> {}
 
-const Home = ({
+export const Home = ({
   navigation,
   setCurrentSelectOption,
   setSelectVisible,
@@ -224,7 +200,7 @@ const Home = ({
         <SettingListItem
           icon={Icons.plugins}
           settingName="PluginsSetting"
-          onPress={() => navigation.navigate(VIEW.PLUGINS)}
+          onPress={() => navigation.navigate(Route.PLUGINS)}
           settingCategory="Settings"
         />
         {!APPSTORE && (
@@ -335,35 +311,3 @@ const Home = ({
     </ScrollView>
   );
 };
-
-const HomeWrapper = ({ navigation }: NoxComponent.StackNavigationProps) => {
-  const playerStyle = useNoxSetting(state => state.playerStyle);
-  return (
-    <SelectDialogWrapper
-      viewStyle={{
-        backgroundColor: playerStyle.customColors.maskedBackgroundColor,
-        flex: 1,
-      }}
-      Children={p => Home({ ...p, navigation })}
-    />
-  );
-};
-
-const DevSettingsView = () => {
-  return (
-    <Stack.Navigator>
-      <Stack.Screen
-        name={VIEW.HOME}
-        component={HomeWrapper}
-        options={{ headerShown: false }}
-      />
-      <Stack.Screen
-        name={VIEW.PLUGINS}
-        component={PluginSettings}
-        options={{ headerShown: false }}
-      />
-    </Stack.Navigator>
-  );
-};
-
-export default DevSettingsView;

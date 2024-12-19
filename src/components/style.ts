@@ -180,3 +180,45 @@ export const styles = StyleSheet.create({
   alignMiddle: { justifyContent: 'center' },
   alignCenter: { alignItems: 'center' },
 });
+
+export const ItemSelectStyles = StyleSheet.create({
+  safeAreaView: {
+    flex: 1,
+  },
+  skinItemContainer: {
+    flexDirection: 'row',
+  },
+  skinItemLeftContainer: {
+    flexDirection: 'row',
+    paddingVertical: 5,
+    flex: 5,
+    paddingLeft: 5,
+  },
+  skinItemImage: {
+    width: 72,
+    height: 72,
+    borderRadius: 40,
+  },
+  skinItemTextContainer: {
+    paddingLeft: 5,
+  },
+  lightbulbContainer: {
+    flexDirection: 'row',
+  },
+  lightbulbIcon: {
+    marginHorizontal: 0,
+    marginVertical: 0,
+    marginLeft: -8,
+    marginTop: -8,
+  },
+  skinItemRightContainer: {
+    flexDirection: 'row',
+    alignContent: 'flex-end',
+  },
+  deleteButton: {
+    marginLeft: -3,
+  },
+  skinTitleText: {
+    maxWidth: '100%',
+  },
+});
