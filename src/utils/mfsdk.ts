@@ -47,7 +47,9 @@ export const fetchMFsdk = async (url: string): Promise<MFsdk[]> => {
       const json = JSON.parse(text) as { plugins: { url: string }[] };
       const sdks = await Promise.all(json.plugins.map(p => fetchMFsdk(p.url)));
       return sdks.flat();
-    } catch {}
+    } catch {
+      // do nothing
+    }
     const loadedSDK = loadEvalPlugin(text, url);
     const sdkLocalPath = `${loadedSDK.platform}.${loadedSDK.version}.js`;
     loadedSDK.path = sdkLocalPath;

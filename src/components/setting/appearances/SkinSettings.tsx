@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Image } from 'expo-image';
-import { View, SafeAreaView, StyleSheet, LayoutAnimation } from 'react-native';
+import { View, SafeAreaView, LayoutAnimation } from 'react-native';
 import {
   Text,
   IconButton,
@@ -17,6 +17,8 @@ import AdaptiveTheme from '@components/styles/AdaptiveTheme';
 import { execWhenTrue } from '@utils/Utils';
 import GenericSelectDialog from '../../dialogs/GenericSelectDialog';
 import { getStyle } from '@utils/StyleStorage';
+import { ItemSelectStyles as styles } from '@components/style';
+
 interface DisplayTheme extends NoxTheme.Style {
   builtin: boolean;
 }
@@ -131,7 +133,7 @@ const SkinSettings = () => {
   const setPlayerStyle = useNoxSetting(state => state.setPlayerStyle);
   const allThemes = BuiltInThemes.concat(playerStyles);
   const [checked, setChecked] = React.useState(getThemeID(playerStyle));
-  const scrollViewRef = React.useRef<FlashList<DisplayTheme> | null>(null);
+  const scrollViewRef = React.useRef<FlashList<DisplayTheme>>(null);
 
   const selectTheme = (theme: NoxTheme.Style) => {
     setChecked(getThemeID(theme));
@@ -179,6 +181,7 @@ const SkinSettings = () => {
             listRef={scrollViewRef}
           />
         )}
+        estimatedItemSize={107}
       />
       <GenericSelectDialog
         visible={selectSkin !== undefined}
@@ -198,46 +201,5 @@ const SkinSettings = () => {
     </SafeAreaView>
   );
 };
-
-const styles = StyleSheet.create({
-  safeAreaView: {
-    flex: 1,
-  },
-  skinItemContainer: {
-    flexDirection: 'row',
-  },
-  skinItemLeftContainer: {
-    flexDirection: 'row',
-    paddingVertical: 5,
-    flex: 5,
-    paddingLeft: 5,
-  },
-  skinItemImage: {
-    width: 72,
-    height: 72,
-    borderRadius: 40,
-  },
-  skinItemTextContainer: {
-    paddingLeft: 5,
-  },
-  lightbulbContainer: {
-    flexDirection: 'row',
-  },
-  lightbulbIcon: {
-    marginHorizontal: 0,
-    marginVertical: 0,
-    marginLeft: -8,
-    marginTop: -8,
-  },
-  skinItemRightContainer: {
-    alignContent: 'flex-end',
-  },
-  deleteButton: {
-    marginLeft: -3,
-  },
-  skinTitleText: {
-    maxWidth: '100%',
-  },
-});
 
 export default SkinSettings;
