@@ -4,7 +4,6 @@ import { useTranslation } from 'react-i18next';
 
 import { SearchOptions } from '@enums/Storage';
 import useAlert from '@components/dialogs/useAlert';
-import { MUSICFREE } from '@utils/mediafetch/musicfree';
 import Icons from './Icons';
 import { useNoxSetting } from '@stores/useApp';
 import { rgb2Hex } from '@utils/Utils';
@@ -33,7 +32,7 @@ export default ({
   const { OneWayAlert } = useAlert();
   const playerStyle = useNoxSetting(state => state.playerStyle);
   const setSearchOption = useNoxSetting(state => state.setSearchOption);
-  const setDefaultSearch = (defaultSearch: SearchOptions | MUSICFREE) => {
+  const setDefaultSearch = (defaultSearch: SearchOptions) => {
     toggleVisible();
     setSearchOption(defaultSearch);
   };
@@ -74,8 +73,8 @@ export default ({
       {showMusicFree && (
         <Menu.Item
           leadingIcon={Icons.MUSICFREE}
-          onPress={() => setDefaultSearch(MUSICFREE.aggregated)}
-          title={`MusicFree.${MUSICFREE.aggregated}`}
+          onPress={() => setDefaultSearch(SearchOptions.MUSICFREE)}
+          title={`MusicFree.${SearchOptions.MUSICFREE}`}
         />
       )}
       {isAndroid && (

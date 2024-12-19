@@ -10,7 +10,6 @@ import { useNoxSetting } from '@stores/useApp';
 import usePlayback from '@hooks/usePlayback';
 import useBiliSearch from '@hooks/useBiliSearch';
 import SearchMenu from './SearchMenu';
-import { getMusicFreePlugin } from '@utils/ChromeStorage';
 import logger from '@utils/Logger';
 import { getIcon } from './Icons';
 import AutoComplete from '@components/commonui/AutoComplete';
@@ -44,6 +43,7 @@ export default ({
   const playerSetting = useNoxSetting(state => state.playerSetting);
   const searchOption = useNoxSetting(state => state.searchOption);
   const searchProgress = useNoxSetting(state => state.searchBarProgress);
+  const mfsdks = useNoxSetting(state => state.MFsdks);
   const navigationGlobal = useNavigation();
   const externalSearchText = useNoxSetting(state => state.externalSearchText);
   const setExternalSearchText = useNoxSetting(
@@ -66,7 +66,7 @@ export default ({
   const pressed = useRef(false);
 
   const handleMenuPress = (event: GestureResponderEvent) => {
-    getMusicFreePlugin().then(v => setShowMusicFree(v.length > 0));
+    setShowMusicFree(mfsdks.length > 0);
     setDialogOpen(true);
     setMenuCoords({
       x: event.nativeEvent.pageX,

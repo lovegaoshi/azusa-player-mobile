@@ -20,15 +20,8 @@ import { NoxRepeatMode } from '@enums/RepeatMode';
 import { PlaylistTypes } from '@enums/Playlist';
 import { StorageKeys, SearchOptions } from '@enums/Storage';
 import { DefaultSetting, OverrideSetting } from '@objects/Storage';
-import { MUSICFREE } from '@utils/mediafetch/musicfree';
 import { getAlistCred } from './alist/storage';
 import { timeFunction } from './Utils';
-
-export const setMusicFreePlugin = (val: MUSICFREE[]) =>
-  saveItem(StorageKeys.MUSICFREE_PLUGIN, val);
-
-export const getMusicFreePlugin = (): Promise<MUSICFREE[]> =>
-  getItem(StorageKeys.MUSICFREE_PLUGIN, []);
 
 export const getFadeInterval = async () =>
   Number(await getItem(StorageKeys.FADE_INTERVAL)) || 0;
@@ -60,7 +53,7 @@ export const saveABMapping = async (val: NoxStorage.ABDict) =>
 export const getDefaultSearch = (): Promise<SearchOptions> =>
   getItem(StorageKeys.DEFAULT_SEARCH, SearchOptions.BILIBILI);
 
-export const saveDefaultSearch = (val: SearchOptions | MUSICFREE) =>
+export const saveDefaultSearch = (val: SearchOptions) =>
   saveItem(StorageKeys.DEFAULT_SEARCH, val);
 
 export const getCachedMediaMapping = () =>

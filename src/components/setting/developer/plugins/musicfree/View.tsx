@@ -17,7 +17,7 @@ interface ItemProps {
 const RenderItem = ({ sdk, listRef }: ItemProps) => {
   const playerStyle = useNoxSetting(state => state.playerStyle);
   const rmMFsdks = useNoxSetting(state => state.rmMFsdks);
-  const addMFsdks = useNoxSetting(state => state.addMFsdks);
+  const replaceMFsdks = useNoxSetting(state => state.replaceMFsdks);
 
   const deleteTheme = async () => {
     rmMFsdks([sdk]);
@@ -51,7 +51,7 @@ const RenderItem = ({ sdk, listRef }: ItemProps) => {
         <IconButton
           icon="sync"
           style={styles.deleteButton}
-          onPress={() => fetchMFsdk(sdk.srcUrl).then(addMFsdks)}
+          onPress={() => fetchMFsdk(sdk.srcUrl).then(replaceMFsdks)}
         />
         <IconButton
           icon="trash-can"

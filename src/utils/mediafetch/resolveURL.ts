@@ -5,7 +5,6 @@ import bililiveFetch from './bililive';
 import biliBangumiFetch from './biliBangumi';
 import localFetch from '@utils/mediafetch/local';
 import alistFetch from './alist';
-import { resolver, MUSICFREE } from '@utils/mediafetch/musicfree';
 import headRequestFetch from './headRequest';
 import { logger } from '../Logger';
 import { regexMatchOperations } from '../Utils';
@@ -14,8 +13,7 @@ import bilivideoFetch, {
 } from './bilivideo';
 import acfunFetch from './acfunvideo';
 import { NULL_TRACK } from '@objects/Song';
-
-const MUSICFREESources: NoxMedia.SongSource[] = Object.values(MUSICFREE);
+import { useNoxSetting } from '@stores/useApp';
 
 type RegResolve = NoxUtils.RegexMatchResolve<
   Promise<NoxNetwork.ParsedNoxMediaURL>
@@ -72,19 +70,15 @@ export const fetchPlayUrlPromise = async ({
   ]);
   logger.debug(`[resolveURL] ${bvid}, ${cid} }`);
 
-  const fallback = () =>
-    fetchBiliUrlPromise({ bvid, cid: String(cid), iOS, noBiliR128Gain });
-
-  if (song.source && MUSICFREESources.includes(song.source)) {
-    const vsource = song.source as MUSICFREE;
-    const result = await resolver[vsource](song);
-    console.warn(result, song);
-    if (!result || result.url.length === 0) {
-      logger.error(JSON.stringify(song));
-      throw new Error(`[resolveURL] ${bvid}, ${cid} failed.`);
+  const fallback = () => {
+    const mfsdks = useNoxSetting.getState().MFsdks;
+    for (const mfsdk of mfsdks) {
+      if (mfsdk.platform === song.source) {
+        return mfsdk.resolveURL(song);
+      }
     }
-    return result;
-  }
+    return fetchBiliUrlPromise({ bvid, cid: String(cid), iOS, noBiliR128Gain });
+  };
 
   return regexMatchOperations({
     song,

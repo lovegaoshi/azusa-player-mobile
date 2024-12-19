@@ -1,8 +1,6 @@
 import biliSearchFetch from '@utils/mediafetch/bilisearch';
 import ytbVideoFetch from '@utils/mediafetch/ytbvideo';
 import localFetch from '@utils/mediafetch/local';
-import { MUSICFREE, searcher } from '@utils/mediafetch/musicfree';
-import { getMusicFreePlugin } from '@utils/ChromeStorage';
 import { SearchOptions } from '@enums/Storage';
 import steriatkFetch from './mediafetch/steriatk';
 import biliVideoSimilarFetch from './mediafetch/biliVideoSimilar';
@@ -35,6 +33,7 @@ import biliFavColleFetch from './mediafetch/biliFavColle';
 import alistFetch from './mediafetch/alist';
 import acfunFetch from './mediafetch/acfunvideo';
 import { logger } from './Logger';
+import { useNoxSetting } from '@stores/useApp';
 
 /**
  * assign the proper extractor based on the provided url. uses regex.
@@ -47,7 +46,7 @@ interface Props {
   useBiliTag?: boolean;
   fastSearch?: boolean;
   cookiedSearch?: boolean;
-  defaultSearch?: SearchOptions | MUSICFREE;
+  defaultSearch?: SearchOptions;
   genericSearch?: boolean;
 }
 
@@ -129,12 +128,15 @@ export const searchBiliURLs = async ({
         case SearchOptions.YOUTUBEM:
           results = { songList: await fetchInnerTuneSearch(input) };
           break;
-        case MUSICFREE.aggregated:
-          results.songList = await searcher[MUSICFREE.aggregated](
-            input,
-            await getMusicFreePlugin(),
+        case SearchOptions.MUSICFREE: {
+          const songLists = await Promise.all(
+            useNoxSetting
+              .getState()
+              .MFsdks.map(sdk => sdk.regexFetch({ url: input })),
           );
+          results.songList = songLists.map(v => v.songList).flat();
           break;
+        }
         default:
           results = await biliSearchFetch.regexFetch({
             url: input,

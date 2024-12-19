@@ -9,11 +9,18 @@ export interface MFsdkStore {
   setMFsdks: (mf: MFsdk[]) => void;
   addMFsdks: (mf: MFsdk[]) => void;
   rmMFsdks: (mf: MFsdk[]) => void;
+  replaceMFsdks: (mf: MFsdk[]) => void;
 }
 
 const store: StateCreator<MFsdkStore, [], [], MFsdkStore> = (set, get) => ({
   MFsdks: [],
   setMFsdks: mf => set({ MFsdks: mf }),
+  replaceMFsdks: mf => {
+    if (mf.length === 0) return;
+    set(s => ({
+      MFsdks: s.MFsdks.map(sdk => mf.find(v => v.srcUrl === sdk.srcUrl) ?? sdk),
+    }));
+  },
   addMFsdks: mf => {
     if (mf.length === 0) return;
     addMFsdks(mf.map(v => v.path));

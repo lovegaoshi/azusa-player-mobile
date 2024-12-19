@@ -20,7 +20,6 @@ export enum StorageKeys {
   FADE_INTERVAL = 'fadeInterval',
   COLORTHEME = 'ColorTheme',
   REGEXTRACT_MAPPING = 'RegexExtract',
-  MUSICFREE_PLUGIN = 'MusicFreePlugin',
   AA_PERMISSION = 'AndroidAutoPermission',
   TANAKA_AMAZING_COMMODITIES = 'TanakaAmazingCommodities',
   ALIST_CRED = 'AlistCred',
@@ -35,4 +34,5 @@ export enum SearchOptions {
   YOUTUBE = 'youtube',
   YOUTUBEM = 'yt music',
   ALIST = 'alist',
+  MUSICFREE = 'musicfree',
 }

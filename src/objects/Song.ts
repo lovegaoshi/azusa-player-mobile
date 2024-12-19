@@ -4,7 +4,6 @@ import he from 'he';
 import { extractParenthesis } from '../utils/re';
 import { reExtractSongName } from '@stores/regexStore';
 import { Source } from '@enums/MediaFetch';
-import { MUSICFREE } from '@utils/mediafetch/musicfree';
 import { i0hdslbHTTPResolve } from '@utils/Utils';
 
 export const DEFAULT_NULL_URL = 'NULL';
@@ -26,7 +25,7 @@ interface SongProps {
   duration?: number;
   album?: string;
   addedDate?: number;
-  source?: Source | MUSICFREE;
+  source?: Source;
   isLive?: boolean;
   liveStatus?: boolean;
   metadataOnLoad?: boolean;

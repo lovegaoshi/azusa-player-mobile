@@ -7,6 +7,7 @@ import * as cheerio from 'cheerio';
 import CookieManager from '@react-native-cookies/cookies';
 import he from 'he';
 import { URL } from 'react-native-url-polyfill';
+import logger from '../Logger';
 
 const Qualities = ['super', 'high', 'standard', 'low'];
 
@@ -17,9 +18,7 @@ export interface MFsdk {
   author: string;
   srcUrl: string;
   supportedSearchType: string[];
-  regexFetch: (
-    v: NoxNetwork.BiliSearchFetchProps,
-  ) => Promise<NoxNetwork.NoxRegexFetch>;
+  regexFetch: (v: { url: string }) => Promise<NoxNetwork.NoxRegexFetch>;
   resolveURL: (v: NoxMedia.Song) => Promise<NoxNetwork.ParsedNoxMediaURL>;
   /*
   search: [AsyncFunction: search],
@@ -46,25 +45,29 @@ const IMusicToNoxMedia = (val: IMusic.IMusicItem, source: string) => {
     singer: val.artist,
     singerId: val.id,
     cover:
-      val.artwork ||
+      val.artwork ??
       'https://i2.hdslb.com/bfs/face/b70f6e62e4582d4fa5d48d86047e64eb57d7504e.jpg',
     lyric: val.lrc,
     parsedName: val.title,
     source,
-    duration: val.duration | 0,
+    duration: val.duration ?? 0,
   } as NoxMedia.Song;
 };
 
 const searchWrapper =
   (search: (s: string, p: number, t: string) => any, sdk: MFsdk) =>
-  async (
-    v: NoxNetwork.BiliSearchFetchProps,
-  ): Promise<NoxNetwork.NoxRegexFetch> => {
-    const results = await search(v.url, 1, 'music');
-    const songList = results.data.map((iMusic: any) =>
-      IMusicToNoxMedia(iMusic, sdk.platform),
-    );
-    return { songList };
+  async (v: { url: string }): Promise<NoxNetwork.NoxRegexFetch> => {
+    try {
+      logger.debug(`[mfsdk][${sdk.platform}] searching ${v.url}`);
+      const results = await search(v.url, 1, 'music');
+      const songList = results.data.map((iMusic: any) =>
+        IMusicToNoxMedia(iMusic, sdk.platform),
+      );
+      return { songList };
+    } catch {
+      logger.debug(`[mfsdk][${sdk.platform}] failed to search.`);
+      return { songList: [] };
+    }
   };
 
 const resolveURLWrapper =
@@ -76,6 +79,9 @@ const resolveURLWrapper =
     for (const quality of qualities) {
       const res = await resolveURL(v, quality);
       if (res) {
+        logger.debug(
+          `[mfsdk][${sdk.platform}] resolved ${v.name} with quality ${quality}`,
+        );
         return res;
       }
     }
