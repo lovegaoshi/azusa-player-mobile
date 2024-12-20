@@ -3711,10 +3711,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@revenuecat/purchases-js@npm:^0.15.0":
-  version: 0.15.0
-  resolution: "@revenuecat/purchases-js@npm:0.15.0"
-  checksum: 10c0/c4d8ec9817da9af6357ee2bb98d69e0648885a1b8913d1e8a6e4fabe8e89f4cdcbd9870f66a986fceaae0066f1089040e1820dfdb657c0e8180d1fd446c71a05
+"@revenuecat/purchases-js@npm:^0.15.1":
+  version: 0.15.1
+  resolution: "@revenuecat/purchases-js@npm:0.15.1"
+  checksum: 10c0/c9d58fd7c6f5bde7f2ba0dfca68fbfe356599a13323feb1028b58077559befbe12234b4c75d40d482aa27da90b21c69d1b7ee244df5c17a39c51cbb601c6129f
   languageName: node
   linkType: hard
 
@@ -4621,13 +4621,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react@npm:~18.3.17":
-  version: 18.3.17
-  resolution: "@types/react@npm:18.3.17"
+"@types/react@npm:~18.3.18":
+  version: 18.3.18
+  resolution: "@types/react@npm:18.3.18"
   dependencies:
     "@types/prop-types": "npm:*"
     csstype: "npm:^3.0.2"
-  checksum: 10c0/475191e9cd0ab5bef35cc1868295d6526cd78b25c1bb816f0747a1e92261688305f81c0e29aff52e6ea70397f133e34c399dc936cb5072f1acf465d9daacc0da
+  checksum: 10c0/8fb2b00672072135d0858dc9db07873ea107cc238b6228aaa2a9afd1ef7a64a7074078250db38afbeb19064be8ea6af5eac32d404efdd5f45e093cc4829d87f8
   languageName: node
   linkType: hard
 
@@ -5631,7 +5631,7 @@ __metadata:
     "@react-navigation/drawer": "npm:^7.1.1"
     "@react-navigation/native": "npm:^7.0.14"
     "@react-navigation/native-stack": "npm:^7.2.0"
-    "@revenuecat/purchases-js": "npm:^0.15.0"
+    "@revenuecat/purchases-js": "npm:^0.15.1"
     "@sentry/react-native": "npm:^6.4.0"
     "@sharcoux/slider": "npm:8.0.6"
     "@shopify/flash-list": "npm:^1.7.2"
@@ -5646,7 +5646,7 @@ __metadata:
     "@types/md5": "npm:^2.3.5"
     "@types/node": "npm:^22.10.2"
     "@types/qs": "npm:^6.9.17"
-    "@types/react": "npm:~18.3.17"
+    "@types/react": "npm:~18.3.18"
     "@types/react-native": "npm:^0.73.0"
     "@types/react-native-background-timer": "npm:^2.0.2"
     "@types/react-native-share-menu": "npm:^5.0.5"
@@ -5683,7 +5683,7 @@ __metadata:
     eslint-plugin-react: "npm:^7.37.2"
     eslint-plugin-react-hooks: "npm:^5.1.0"
     event-target-polyfill: "npm:^0.0.4"
-    expo: "npm:^52.0.20"
+    expo: "npm:^52.0.21"
     expo-auth-session: "npm:~6.0.1"
     expo-clipboard: "npm:~7.0.0"
     expo-crypto: "npm:~14.0.1"
@@ -5731,9 +5731,9 @@ __metadata:
     react-native-paper: "npm:^5.12.5"
     react-native-purchases: "npm:^8.4.2"
     react-native-qrcode-svg: "npm:^6.3.12"
-    react-native-reanimated: "npm:3.16.5"
+    react-native-reanimated: "npm:3.16.6"
     react-native-safe-area-context: "npm:^5.0.0"
-    react-native-screens: "npm:4.3.0"
+    react-native-screens: "npm:4.4.0"
     react-native-shadow-2: "npm:^7.1.1"
     react-native-share-menu: "git+https://github.com/Expensify/react-native-share-menu.git"
     react-native-svg: "npm:15.10.1"
@@ -8984,9 +8984,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"expo@npm:^52.0.20":
-  version: 52.0.20
-  resolution: "expo@npm:52.0.20"
+"expo@npm:^52.0.21":
+  version: 52.0.21
+  resolution: "expo@npm:52.0.21"
   dependencies:
     "@babel/runtime": "npm:^7.20.0"
     "@expo/cli": "npm:0.22.7"
@@ -9021,7 +9021,7 @@ __metadata:
       optional: true
   bin:
     expo: bin/cli
-  checksum: 10c0/9352f8a57b43c7e877d648281250f5af7b49cc50b02b4a9e73284e88528b7b939ba56cc199e33ecc209d55b7b39e9966de8724107398fdf93b23903d8a76bd98
+  checksum: 10c0/51414e477935a5f1543e64653ef11e929641e52bc144d7490915865061e7a76fc62f4df27d4404d13fa2b76cf2cebd08280eb3eee1951f8cc3cadaadac9d028b
   languageName: node
   linkType: hard
 
@@ -14658,9 +14658,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-native-reanimated@npm:3.16.5":
-  version: 3.16.5
-  resolution: "react-native-reanimated@npm:3.16.5"
+"react-native-reanimated@npm:3.16.6":
+  version: 3.16.6
+  resolution: "react-native-reanimated@npm:3.16.6"
   dependencies:
     "@babel/plugin-transform-arrow-functions": "npm:^7.0.0-0"
     "@babel/plugin-transform-class-properties": "npm:^7.0.0-0"
@@ -14677,7 +14677,7 @@ __metadata:
     "@babel/core": ^7.0.0-0
     react: "*"
     react-native: "*"
-  checksum: 10c0/33c909a741bbe33fcc31e28105ba9f3c6c47a0f487310c08cd65ec7d188292013a44da75226b08f59ec5a93ae8f0baee77cbecb2f411ef61e5d341d2dede46dc
+  checksum: 10c0/42c8fb6cfdc5128afcd20d5e9e0bdd2ab56f0e5c5f1907c9d43322c0fadbf97cdfb27e120b9f649f4a7205d69411ed4a5b63602e864a89d4dcf849f915051f4d
   languageName: node
   linkType: hard
 
@@ -14691,16 +14691,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-native-screens@npm:4.3.0":
-  version: 4.3.0
-  resolution: "react-native-screens@npm:4.3.0"
+"react-native-screens@npm:4.4.0":
+  version: 4.4.0
+  resolution: "react-native-screens@npm:4.4.0"
   dependencies:
     react-freeze: "npm:^1.0.0"
     warn-once: "npm:^0.1.0"
   peerDependencies:
     react: "*"
     react-native: "*"
-  checksum: 10c0/ff7847c95382e9c224940256100205d95a9d2ab698668701544c132a589761bac4fb1db2d30440997c67c89bcf41a0c77063a59ebb1ff1d39c548d60022bd813
+  checksum: 10c0/63eff2f7761109ed05b0656c28bf34c83d5d7ebbcd92931202a250cab0e54109c764fac3471db7ae52f5c6c782bfca5caf5d8f1dc9a4a27a4b9889aeec7a4dcc
   languageName: node
   linkType: hard
 
