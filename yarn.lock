@@ -5700,7 +5700,7 @@ __metadata:
     intl-pluralrules: "npm:^2.0.1"
     jest: "npm:^29.7.0"
     js-base64: "npm:^3.7.7"
-    libmuse: "https://github.com/lovegaoshi/muse.git#commit=0bffe2319baf825037bece6869d360d6d307eb72"
+    libmuse: "https://github.com/lovegaoshi/muse.git#commit=1e3076ede9069888d5c7e5024ab14dd95c966310"
     lodash: "npm:^4.17.21"
     lottie-react-native: "npm:7.1.0"
     lru-cache: "npm:7.18.3"
@@ -11819,9 +11819,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"jsonpath-plus@npm:10.0.0":
-  version: 10.0.0
-  resolution: "jsonpath-plus@npm:10.0.0"
+"jsonpath-plus@npm:10.1.0":
+  version: 10.1.0
+  resolution: "jsonpath-plus@npm:10.1.0"
   dependencies:
     "@jsep-plugin/assignment": "npm:^1.2.1"
     "@jsep-plugin/regex": "npm:^1.0.3"
@@ -11829,7 +11829,7 @@ __metadata:
   bin:
     jsonpath: bin/jsonpath-cli.js
     jsonpath-plus: bin/jsonpath-cli.js
-  checksum: 10c0/0bd0ad79397f319c8543f090a944ea08c933c13d69ad5213f202f738ef4abd46de57c917844a83e2e89643cadbfc2e327a402c01eaf50bd1870882d50a4a8b95
+  checksum: 10c0/1ff0743f9113f7750b598563c7886e1b07c19f112c4a8d976165e6799ff9774279985d1f4a147e87eacc0b94eb27dbd6e3ab5cf0728d4ba947f00757bc6aebb4
   languageName: node
   linkType: hard
 
@@ -11912,13 +11912,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"libmuse@https://github.com/lovegaoshi/muse.git#commit=0bffe2319baf825037bece6869d360d6d307eb72":
+"libmuse@https://github.com/lovegaoshi/muse.git#commit=1e3076ede9069888d5c7e5024ab14dd95c966310":
   version: 0.0.1
-  resolution: "libmuse@https://github.com/lovegaoshi/muse.git#commit=0bffe2319baf825037bece6869d360d6d307eb72"
+  resolution: "libmuse@https://github.com/lovegaoshi/muse.git#commit=1e3076ede9069888d5c7e5024ab14dd95c966310"
   dependencies:
-    jsonpath-plus: "npm:10.0.0"
+    jsonpath-plus: "npm:10.1.0"
     lodash-es: "npm:4.17.21"
-  checksum: 10c0/af58b6a4543c27b66d156cad2bd3c88cf10fb98c1166419e817aa07fd63dd167ba0a39cb09fb5b59da6645fa6827101d25b2a0f85054e2d776abbe5ec4837213
+  checksum: 10c0/d3b93dca48e46249eabc94a5b0f72998a8999304c9397acb54b7f9964b2fd77ef827b94b50643b1f00c10e2693e2b0b3c3ac0e7c00dae3eda93a0cd4de302e34
   languageName: node
   linkType: hard
 

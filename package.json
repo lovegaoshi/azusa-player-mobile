@@ -76,7 +76,7 @@
     "i18next": "23.16.8",
     "intl-pluralrules": "^2.0.1",
     "js-base64": "^3.7.7",
-    "libmuse": "https://github.com/lovegaoshi/muse.git#commit=0bffe2319baf825037bece6869d360d6d307eb72",
+    "libmuse": "https://github.com/lovegaoshi/muse.git#commit=1e3076ede9069888d5c7e5024ab14dd95c966310",
     "lodash": "^4.17.21",
     "lottie-react-native": "7.1.0",
     "lru-cache": "7.18.3",
