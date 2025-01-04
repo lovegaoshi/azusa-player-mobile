@@ -16,6 +16,7 @@ import useTPControls from '@hooks/useTPControls';
 import useSnack from '@stores/useSnack';
 import { setPlayingList } from '@stores/playingList';
 import { clearPlaylistUninterrupted } from '@utils/RNTPUtils';
+import { execWhenTrue } from '@utils/Utils';
 
 export default (playlist: NoxMedia.Playlist) => {
   const { t } = useTranslation();
@@ -124,14 +125,16 @@ export default (playlist: NoxMedia.Playlist) => {
         : toIndex;
     if (currentIndex === -1 && reset) currentIndex = 0;
     if (currentIndex > -1) {
-      setTimeout(() => {
-        playlistRef.current?.scrollToIndex({
-          index: currentIndex,
-          viewPosition:
-            // @ts-expect-error flashlist
-            playlistRef.current.rlvRef._layout.height < 100 ? -5 : 0.5,
-        });
-      }, 10);
+      execWhenTrue({
+        executeFn: () =>
+          playlistRef.current?.scrollToIndex({
+            index: currentIndex,
+            viewPosition: -4,
+            animated: false,
+          }),
+        // @ts-expect-error detect if flashlist is rendered
+        loopCheck: () => playlistRef.current.rlvRef._layout.height > 0,
+      });
     }
   };
 

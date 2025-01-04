@@ -35,9 +35,7 @@ export const initializeStores = async ({
       } catch {
         // TODO: do something?
       }
-      NoxModule.isGestureNavigationMode().then((gestureMode: boolean) =>
-        setGestureMode(gestureMode),
-      );
+      setGestureMode(await NoxModule.isGestureNavigationMode());
       break;
     default:
       break;

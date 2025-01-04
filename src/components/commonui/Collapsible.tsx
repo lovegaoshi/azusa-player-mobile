@@ -83,7 +83,6 @@ export const Collapsible = ({
       if (bodySectionHeight !== null) {
         return;
       }
-
       setBodySectionHeight(event.nativeEvent.layout.height);
     },
     [bodySectionHeight],

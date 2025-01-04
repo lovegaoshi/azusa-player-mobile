@@ -9,6 +9,7 @@ export default {
   },
 
   gifs: [
+    'https://article.biliimg.com/bfs/article/e6bcc54910d18658631211ba6d7034403493085134719196.gif',
     'https://i0.hdslb.com/bfs/new_dyn/660db3d9243d94770f676d7d842b70d01363140950.gif',
     'https://i0.hdslb.com/bfs/new_dyn/e56e8630033c018a94406e15f75e717f1363140950.gif',
     'https://i1.hdslb.com/bfs/new_dyn/705cfa8cf81ab08b8dd7e92f2fb506c225818366.png',

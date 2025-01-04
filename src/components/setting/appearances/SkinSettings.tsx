@@ -62,6 +62,7 @@ const SkinItem = ({
   const getThemeID = (skin: NoxTheme.Style) =>
     `${skin.metaData.themeName}.${skin.metaData.themeAuthor}`;
   const themeID = getThemeID(skin);
+  const isSelected = checked === themeID;
 
   const deleteTheme = () => {
     setPlayerStyles(playerStyles.filter(pSkin => pSkin !== skin));
@@ -71,7 +72,12 @@ const SkinItem = ({
 
   return (
     <TouchableRipple onPress={selectTheme} onLongPress={onHold}>
-      <View style={styles.skinItemContainer}>
+      <View
+        style={[
+          styles.skinItemContainer,
+          isSelected ? { backgroundColor: playerStyle.colors.background } : {},
+        ]}
+      >
         <View style={styles.skinItemLeftContainer}>
           <Image
             source={{ uri: skin.metaData.themeIcon }}
@@ -106,11 +112,13 @@ const SkinItem = ({
           </View>
         </View>
         <View style={styles.skinItemRightContainer}>
-          <RadioButton
-            value={themeID}
-            status={checked === themeID ? 'checked' : 'unchecked'}
-            onPress={selectTheme}
-          />
+          <View style={styles.radioButton}>
+            <RadioButton
+              value={themeID}
+              status={isSelected ? 'checked' : 'unchecked'}
+              onPress={selectTheme}
+            />
+          </View>
           <IconButton
             icon="trash-can"
             style={styles.deleteButton}
@@ -151,7 +159,7 @@ const SkinSettings = () => {
         executeFn: () =>
           scrollViewRef.current?.scrollToIndex({
             index: currentThemeIndex,
-            viewPosition: 0.5,
+            viewPosition: 1,
             animated: false,
           }),
         // @ts-expect-error detect if flashlist is rendered

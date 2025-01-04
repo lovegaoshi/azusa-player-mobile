@@ -17,7 +17,8 @@ interface Props {
 export default ({ panelWidth }: Props) => {
   const panelStyle = {
     width: panelWidth,
-    height: Dimensions.get('window').height,
+    // HACK: WHY?
+    height: Dimensions.get('window').height - 25,
   };
 
   return (
