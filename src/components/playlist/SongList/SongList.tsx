@@ -44,7 +44,10 @@ const PlaylistList = () => {
   const [contentViewHeight, setContentViewHeight] = useState(0);
   const [scrollPositionY, setScrollPositionY] = useState(0);
 
-  useEffect(() => scrollTo(-1, true), [songListScrollCounter]);
+  useEffect(
+    () => scrollTo({ toIndex: -1, reset: true }),
+    [songListScrollCounter],
+  );
 
   useFocusEffect(
     React.useCallback(() => {
@@ -64,7 +67,10 @@ const PlaylistList = () => {
   return (
     <View style={stylesLocal.mainContainer}>
       <View style={[styles.topBarContainer, { top: 10 }]}>
-        <PlaylistInfo onPressed={() => scrollTo()} usePlaylist={usedPlaylist} />
+        <PlaylistInfo
+          onPressed={() => scrollTo({ viewPosition: 0.5 })}
+          usePlaylist={usedPlaylist}
+        />
         <View style={stylesLocal.container}>
           {checking && (
             <IconButton

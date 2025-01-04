@@ -18,6 +18,12 @@ import { setPlayingList } from '@stores/playingList';
 import { clearPlaylistUninterrupted } from '@utils/RNTPUtils';
 import { execWhenTrue } from '@utils/Utils';
 
+interface ScrollTo {
+  toIndex?: number;
+  reset?: boolean;
+  viewPosition?: number; // toIndex = -1, reset = false, viewPosition = -4
+}
+
 export default (playlist: NoxMedia.Playlist) => {
   const { t } = useTranslation();
   const setSnack = useSnack(state => state.setSnack);
@@ -118,7 +124,11 @@ export default (playlist: NoxMedia.Playlist) => {
     );
   };
 
-  const scrollTo = (toIndex = -1, reset = false) => {
+  const scrollTo = ({
+    toIndex = -1,
+    reset = false,
+    viewPosition = -4,
+  }: ScrollTo) => {
     let currentIndex =
       toIndex < 0
         ? playlist.songList.findIndex(song => song.id === currentPlayingId)
@@ -129,7 +139,7 @@ export default (playlist: NoxMedia.Playlist) => {
         executeFn: () =>
           playlistRef.current?.scrollToIndex({
             index: currentIndex,
-            viewPosition: -4,
+            viewPosition: viewPosition,
             animated: false,
           }),
         // @ts-expect-error detect if flashlist is rendered
