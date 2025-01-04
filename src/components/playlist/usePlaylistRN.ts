@@ -133,7 +133,7 @@ export default (playlist: NoxMedia.Playlist) => {
             animated: false,
           }),
         // @ts-expect-error detect if flashlist is rendered
-        loopCheck: () => playlistRef.current.rlvRef._layout.height > 0,
+        loopCheck: () => playlistRef?.current?.rlvRef._layout.height > 0,
       });
     }
   };
