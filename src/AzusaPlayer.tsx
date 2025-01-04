@@ -19,6 +19,7 @@ import {
 } from 'react-native-paper';
 import merge from 'deepmerge';
 import { useTranslation } from 'react-i18next';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import SnackBar from './components/commonui/Snackbar';
 import Playlist from './components/playlist/View';
@@ -28,7 +29,6 @@ import { NoxRoutes } from './enums/Routes';
 import Settings from './components/setting/View';
 import Explore from './components/explore/View';
 import './localization/i18n';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { ScreenIcons } from '@enums/Icons';
 import NoxBottomTab from './components/bottomtab/NoxBottomTab';
 import NoxMiniPlayer from './components/miniplayer/View';
