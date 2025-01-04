@@ -219,6 +219,9 @@ export const ItemSelectStyles = StyleSheet.create({
     marginLeft: -3,
   },
   skinTitleText: {
-    maxWidth: '100%',
+    maxWidth: '90%',
+  },
+  radioButton: {
+    paddingTop: 7,
   },
 });

@@ -19,7 +19,7 @@ interface Props {
 export default ({
   defaultSite = Site.Bilibili,
   LoginComponent,
-  iconSize = 80,
+  iconSize = 40,
   iconTabStyle = styles.iconTab,
   containerStyle = styles.container,
   onSiteChange,
@@ -86,7 +86,6 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   iconTab: {
-    paddingTop: 20,
     flexDirection: 'row',
     justifyContent: 'center',
   },

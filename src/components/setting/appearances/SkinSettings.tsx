@@ -106,11 +106,13 @@ const SkinItem = ({
           </View>
         </View>
         <View style={styles.skinItemRightContainer}>
-          <RadioButton
-            value={themeID}
-            status={checked === themeID ? 'checked' : 'unchecked'}
-            onPress={selectTheme}
-          />
+          <View style={styles.radioButton}>
+            <RadioButton
+              value={themeID}
+              status={checked === themeID ? 'checked' : 'unchecked'}
+              onPress={selectTheme}
+            />
+          </View>
           <IconButton
             icon="trash-can"
             style={styles.deleteButton}

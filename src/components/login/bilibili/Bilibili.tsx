@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { View, SafeAreaView, StyleSheet } from 'react-native';
+import { View, SafeAreaView, StyleSheet, ScrollView } from 'react-native';
 import { Text, Avatar, ActivityIndicator, Button } from 'react-native-paper';
 import { useTranslation } from 'react-i18next';
 import QRCode from 'react-native-qrcode-svg';
@@ -75,7 +75,7 @@ const LoginPage = ({
   };
 
   return (
-    <View style={styles.textContainerStyle}>
+    <ScrollView contentContainerStyle={styles.textContainerStyle}>
       <Text style={styles.notLoginTextStyle}>
         {t('Login.BilibiliNotLoggedIn')}
       </Text>
@@ -95,7 +95,8 @@ const LoginPage = ({
           <QRCode value={qrcode} size={300} />
         </View>
       )}
-    </View>
+      <View style={styles.paddingBottomStyle} />
+    </ScrollView>
   );
 };
 
@@ -190,6 +191,7 @@ export default ({ biliLogin }: Props) => {
 };
 
 const styles = StyleSheet.create({
+  paddingBottomStyle: { paddingBottom: 10 },
   notLoginTextStyle: {
     paddingVertical: 20,
     textAlign: 'center',
