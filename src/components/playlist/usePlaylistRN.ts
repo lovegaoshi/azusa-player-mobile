@@ -127,13 +127,14 @@ export default (playlist: NoxMedia.Playlist) => {
   const scrollTo = ({
     toIndex = -1,
     reset = false,
-    viewPosition = -4,
+    viewPosition = 0.5,
   }: ScrollTo) => {
     let currentIndex =
       toIndex < 0
         ? playlist.songList.findIndex(song => song.id === currentPlayingId)
         : toIndex;
     if (currentIndex === -1 && reset) currentIndex = 0;
+    let layoutHeightCheck = 0;
     if (currentIndex > -1) {
       execWhenTrue({
         executeFn: () =>
@@ -142,8 +143,18 @@ export default (playlist: NoxMedia.Playlist) => {
             viewPosition: viewPosition,
             animated: false,
           }),
-        // @ts-expect-error detect if flashlist is rendered
-        loopCheck: () => playlistRef?.current?.rlvRef._layout.height > 0,
+        loopCheck: async () => {
+          // @ts-expect-error detect if flashlist is rendered
+          const layoutHeight = playlistRef?.current?.rlvRef._layout.height;
+          if (layoutHeight < 1.1) {
+            return false;
+          }
+          if (layoutHeightCheck !== layoutHeight) {
+            layoutHeightCheck = layoutHeight;
+            return false;
+          }
+          return true;
+        },
       });
     }
   };
