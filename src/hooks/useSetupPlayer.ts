@@ -12,7 +12,7 @@ import { useNoxSetting } from '@stores/useApp';
 import usePlayStore from './usePlayStore';
 import { buildBrowseTree } from './usePlaybackAA';
 import { NativeModules } from 'react-native';
-import useActiveTrack from './useActiveTrack';
+import useActiveTrack, { useTrackStore } from './useActiveTrack';
 
 const { NoxModule } = NativeModules;
 
@@ -58,6 +58,7 @@ export default ({ intentData, vip }: NoxComponent.SetupPlayerProps) => {
   const { checkPlayStoreUpdates } = usePlayStore();
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const _activeTrack = useActiveTrack();
+  const setTrack = useTrackStore(state => state.setTrack);
 
   useEffect(() => {
     if (!vip) {
@@ -77,6 +78,7 @@ export default ({ intentData, vip }: NoxComponent.SetupPlayerProps) => {
       if (unmounted) return;
       checkPlayStoreUpdates();
       setIntentData(intentData);
+      setTrack(await TrackPlayer.getActiveTrack());
       if (!(await TrackPlayer.validateOnStartCommandIntent())) {
         TrackPlayer.play();
       } else {
