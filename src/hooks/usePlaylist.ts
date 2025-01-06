@@ -119,15 +119,19 @@ const usePlaylist = (playlist: NoxMedia.Playlist): UsePlaylist => {
     callback: (p: NoxMedia.Playlist, s: NoxMedia.Song) => void,
     isPlayingCallback: (p: NoxMedia.Playlist) => void = () => undefined,
   ) => {
-    if (song.id === currentPlayingId && playlist.id === currentPlayingList.id)
-      return isPlayingCallback(currentPlayingList);
+    const queuedSongList = playerSetting.keepSearchedSongListWhenPlaying
+      ? rows
+      : playlist.songList;
+    if (song.id === currentPlayingId && playlist.id === currentPlayingList.id) {
+      return isPlayingCallback({
+        ...currentPlayingList,
+        songList: queuedSongList,
+      });
+    }
     // HACK: more responsive, so the current song banner will show
     // immediately instead of watiting for fade to complete
     // REVIEW: playfromplaylist also checks currentPlayingId. how is that possible?
     setCurrentPlayingId(song.id);
-    const queuedSongList = playerSetting.keepSearchedSongListWhenPlaying
-      ? rows
-      : playlist.songList;
     return callback({ ...playlist, songList: queuedSongList }, song);
   };
 
