@@ -137,6 +137,7 @@ export default (playlist: NoxMedia.Playlist) => {
     let layoutHeightCheck = 0;
     if (currentIndex > -1) {
       execWhenTrue({
+        funcName: 'playlist index priming',
         executeFn: () =>
           playlistRef.current?.scrollToIndex({
             index: currentIndex,
