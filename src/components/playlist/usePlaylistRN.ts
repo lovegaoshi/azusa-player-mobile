@@ -14,7 +14,6 @@ import { syncFavlist } from '@utils/Bilibili/bilifavOperate';
 import usePlayback from '@hooks/usePlayback';
 import useTPControls from '@hooks/useTPControls';
 import useSnack from '@stores/useSnack';
-import { setPlayingList } from '@stores/playingList';
 import { clearPlaylistUninterrupted } from '@utils/RNTPUtils';
 import { execWhenTrue } from '@utils/Utils';
 
@@ -51,6 +50,9 @@ export default (playlist: NoxMedia.Playlist) => {
   );
   const playlistShouldReRender = useNoxSetting(
     state => state.playlistShouldReRender,
+  );
+  const setCurrentPlayingList = useNoxSetting(
+    state => state.setCurrentPlayingList,
   );
   const progressEmitter = useNoxSetting(
     state => state.searchBarProgressEmitter,
@@ -120,7 +122,7 @@ export default (playlist: NoxMedia.Playlist) => {
       performFade(callback);
     };
     usedPlaylist.playSong(song, playSongCallback, p =>
-      clearPlaylistUninterrupted().then(() => setPlayingList(p.songList)),
+      clearPlaylistUninterrupted().then(() => setCurrentPlayingList(p)),
     );
   };
 
@@ -137,6 +139,7 @@ export default (playlist: NoxMedia.Playlist) => {
     let layoutHeightCheck = 0;
     if (currentIndex > -1) {
       execWhenTrue({
+        funcName: 'playlist index priming',
         executeFn: () =>
           playlistRef.current?.scrollToIndex({
             index: currentIndex,

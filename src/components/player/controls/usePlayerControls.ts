@@ -189,6 +189,7 @@ export default () => {
         );
         TrackPlayer.seekTo(trackDuration * newABRepeat[0]);
       },
+      funcName: 'ABRepeat A seek',
     });
   });
 
