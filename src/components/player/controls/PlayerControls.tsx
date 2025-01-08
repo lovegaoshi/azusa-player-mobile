@@ -32,7 +32,7 @@ export const PlayerControls: React.FC = () => {
           style={{ backgroundColor: undefined }}
         />
         <View style={styles.btnSpacer} />
-        <PlayPauseButton state={playback.state} />
+        <PlayPauseButton />
         <View style={styles.btnSpacer} />
         <LottieButton
           src={require('@assets/lottie/skip-forwards.json')}
