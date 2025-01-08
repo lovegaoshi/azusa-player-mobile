@@ -57,13 +57,9 @@ const ABSliderMenu = ({ song, closeMenu }: Props) => {
   const setCurrentABRepeat = useNoxSetting(state => state.setCurrentABRepeat);
   const [range, setRange] = useState<[number, number]>([0, 1]);
 
-  const toggleDialogVisible = () => {
+  const onSubmit = () => {
     if (closeMenu) closeMenu();
     setDialogVisible(val => !val);
-  };
-
-  const onSubmit = () => {
-    toggleDialogVisible();
     setCurrentABRepeat(range);
     addABRepeat(song, range);
   };
@@ -78,7 +74,7 @@ const ABSliderMenu = ({ song, closeMenu }: Props) => {
       <GenericDialog
         visible={dialogVisible}
         title={t('SongOperations.abrepeat')}
-        onClose={toggleDialogVisible}
+        onClose={() => setDialogVisible(val => !val)}
         onSubmit={onSubmit}
       >
         <ABSlider range={range} setRange={setRange} />

@@ -1,9 +1,4 @@
-import TrackPlayer, {
-  usePlaybackState,
-  State,
-  usePlayWhenReady,
-} from 'react-native-track-player';
-import { useDebouncedValue } from 'hooks';
+import TrackPlayer from 'react-native-track-player';
 import { ActivityIndicator, IconButton, Text } from 'react-native-paper';
 import { Dimensions, TouchableWithoutFeedback, View } from 'react-native';
 import Animated, {
@@ -13,6 +8,7 @@ import Animated, {
 
 import { fadePause } from '@utils/RNTPUtils';
 import useTPControls from '@hooks/useTPControls';
+import usePlaybackState from '@hooks/usePlaybackState';
 import { styles } from '../style';
 import { useTrackStore } from '@hooks/useActiveTrack';
 import { MinPlayerHeight } from './Constants';
@@ -96,37 +92,17 @@ export default ({ miniplayerHeight, expand }: Props) => {
 
 const PlayPauseButton = () => {
   const playerStyle = useNoxSetting(state => state.playerStyle);
-  const playback = usePlaybackState();
-  const playWhenReady = usePlayWhenReady();
-  const isLoading = useDebouncedValue(
-    playback.state === State.Loading, // || state === State.Buffering
-    250,
-  );
-  const isErrored = playback.state === State.Error;
-  const isEnded = playback.state === State.Ended;
-  const showPause = playWhenReady && !(isErrored || isEnded);
-  const showBuffering = isErrored || (playWhenReady && isLoading);
+  const { showPause, showBuffering } = usePlaybackState();
 
   if (showBuffering) {
     return <ActivityIndicator size={IconSize - 8} style={iconContainerStyle} />;
   }
-
-  if (showPause) {
-    return (
-      <IconButton
-        iconColor={playerStyle.colors.primary}
-        icon="pause"
-        size={IconSize}
-        onPress={fadePause}
-      />
-    );
-  }
   return (
     <IconButton
       iconColor={playerStyle.colors.primary}
-      icon="play"
+      icon={showPause ? 'pause' : 'play'}
       size={IconSize}
-      onPress={TrackPlayer.play}
+      onPress={showPause ? fadePause : TrackPlayer.play}
     />
   );
 };

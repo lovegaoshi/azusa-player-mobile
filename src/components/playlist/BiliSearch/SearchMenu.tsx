@@ -74,7 +74,7 @@ export default ({
         <Menu.Item
           leadingIcon={Icons.MUSICFREE}
           onPress={() => setDefaultSearch(SearchOptions.MUSICFREE)}
-          title={`MusicFree.${SearchOptions.MUSICFREE}`}
+          title={'MusicFree'}
         />
       )}
       {isAndroid && (
