@@ -219,7 +219,7 @@ export const ItemSelectStyles = StyleSheet.create({
     marginLeft: -3,
   },
   skinTitleText: {
-    maxWidth: '90%',
+    maxWidth: '98%',
   },
   radioButton: {
     paddingTop: 7,

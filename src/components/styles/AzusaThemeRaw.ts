@@ -116,6 +116,7 @@ export default {
   },
   colors: {
     background: 'rgba(255, 255, 255, 0.4)',
+    karaokeOn: 'rgba(103, 80, 164, 1)',
   },
   playerControlIconContained: undefined,
   loadingIcon:
