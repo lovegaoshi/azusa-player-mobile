@@ -17,7 +17,10 @@ import AdaptiveTheme from '@components/styles/AdaptiveTheme';
 import { execWhenTrue } from '@utils/Utils';
 import GenericSelectDialog from '../../dialogs/GenericSelectDialog';
 import { getStyle } from '@utils/StyleStorage';
-import { ItemSelectStyles as styles } from '@components/style';
+import {
+  ItemSelectStyles as styles,
+  styles as stylesG,
+} from '@components/style';
 
 interface DisplayTheme extends NoxTheme.Style {
   builtin: boolean;
@@ -79,22 +82,23 @@ const SkinItem = ({
         ]}
       >
         <View style={styles.skinItemLeftContainer}>
-          <Image
-            source={{ uri: skin.metaData.themeIcon }}
-            style={styles.skinItemImage}
-          />
+          <View style={stylesG.alignMiddle}>
+            <Image
+              source={{ uri: skin.metaData.themeIcon }}
+              style={styles.skinItemImage}
+            />
+          </View>
           <View style={styles.skinItemTextContainer}>
             <Text
               variant={'titleMedium'}
-              style={styles.skinTitleText}
-              numberOfLines={1}
+              numberOfLines={2}
               ellipsizeMode="tail"
             >{`${skin.metaData.themeName} by ${skin.metaData.themeAuthor}`}</Text>
             <Text
               variant={'labelLarge'}
               style={{
                 color: playerStyle.colors.secondary,
-                maxWidth: '90%',
+                maxWidth: '95%',
               }}
               numberOfLines={2}
             >
