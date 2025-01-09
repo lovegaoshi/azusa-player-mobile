@@ -320,8 +320,8 @@
         "textInputSelectionColor": "rgb(73, 0, 73)"
       },
       "colors": {
-        "text": "#ff76c0",
-        "primary": "#ff76c0",
+        "text": "#ff5db4",
+        "primary": "#ff5db4",
         "onPrimary": "#ffecf6",
         "primaryContainer": "rgb(73, 73, 0)",
         "onPrimaryContainer": "rgb(234, 234, 0)",
@@ -340,9 +340,9 @@
         "background": "rgba(0,0,0, 0.4)",
         "onBackground": "rgb(230, 226, 217)",
         "surface": "rgb(28, 28, 23)",
-        "onSurface": "#ff76c0",
+        "onSurface": "#ff5db4",
         "surfaceVariant": "rgb(10, 10, 10)",
-        "onSurfaceVariant": "#ff76c0",
+        "onSurfaceVariant": "#ffa9d7",
         "outline": "rgb(147, 145, 130)",
         "outlineVariant": "rgb(72, 71, 58)",
         "shadow": "rgb(0, 0, 0)",
