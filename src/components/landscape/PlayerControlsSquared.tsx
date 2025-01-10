@@ -44,7 +44,7 @@ const PlayerControls: React.FC<Props> = ({
           strokes={['Line', 'Triange', 'Triange  2']}
         />
         <View style={styles.btnSpacer} />
-        <PlayPauseButton state={playback.state} iconSize={iconSize} />
+        <PlayPauseButton iconSize={iconSize} />
         <View style={styles.btnSpacer} />
         <LottieButton
           src={require('@assets/lottie/skip-forwards.json')}

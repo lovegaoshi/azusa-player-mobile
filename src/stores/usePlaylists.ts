@@ -91,11 +91,13 @@ const store: StateCreator<PlaylistsStore, [], [], PlaylistsStore> = (
 
   addPlaylist: playlist => {
     const { playlistIds, playlists } = get();
-    playlistIds.push(playlist.id);
-    playlists[playlist.id] = playlist;
-    set({ playlists, playlistIds });
+    const newPlaylistIds = playlistIds.concat(playlist.id);
+    set({
+      playlists: { ...playlists, [playlist.id]: playlist },
+      playlistIds: newPlaylistIds,
+    });
     savePlaylist(playlist);
-    savePlaylistIds(playlistIds);
+    savePlaylistIds(newPlaylistIds);
   },
   removePlaylist: playlistId => {
     const { playlistIds, playlists, currentPlaylist } = get();
@@ -103,8 +105,11 @@ const store: StateCreator<PlaylistsStore, [], [], PlaylistsStore> = (
       set({ currentPlaylist: playlists[StorageKeys.SEARCH_PLAYLIST_KEY] });
     }
     delPlaylist(playlistId, playlistIds);
-    delete playlists[playlistId];
-    set({ playlists, playlistIds: playlistIds.filter(v => v !== playlistId) });
+    const { [playlistId]: _, ...newPlaylist } = playlists;
+    set({
+      playlists: newPlaylist,
+      playlistIds: playlistIds.filter(v => v !== playlistId),
+    });
   },
 });
 
