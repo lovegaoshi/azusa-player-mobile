@@ -49,6 +49,7 @@ export default ({
   const setExternalSearchText = useNoxSetting(
     state => state.setExternalSearchText,
   );
+  const miniPlayerCollapse = useNoxSetting(state => state.collapse);
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [sharedData, setSharedData] = useState<any>(null);
   const [, setSharedMimeType] = useState<string | null>(null);
@@ -83,6 +84,7 @@ export default ({
       route: NoxRoutes.PlayerHome,
       options: { screen: NoxRoutes.Playlist },
     });
+    miniPlayerCollapse();
     return handleSearch(data);
   };
 
