@@ -13,7 +13,7 @@ interface InputProps {
   text: string;
   setText: (text: string) => void;
   secureTextEntry?: boolean;
-  style?: TextStyle;
+  style?: TextStyle | TextStyle[];
   reactNative?: boolean;
   numberOfLines?: number;
 }

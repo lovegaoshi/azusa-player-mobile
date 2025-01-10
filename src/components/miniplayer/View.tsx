@@ -19,6 +19,7 @@ import TrackInfo from './TrackInfo';
 import PlayerControls from '../player/controls/PlayerProgressControls';
 import Lrc from './Lrc';
 import ProgressBar from './ProgressBar';
+import { useNoxSetting } from '@stores/useApp';
 
 const SnapToRatio = 0.15;
 
@@ -110,7 +111,10 @@ export default () => {
     };
   });
 
-  useEffect(expand, []);
+  useEffect(() => {
+    expand();
+    useNoxSetting.setState({ collapse, expand });
+  }, []);
 
   return (
     <GestureDetector gesture={lrcVisible ? disabledGesture : scrollDragGesture}>

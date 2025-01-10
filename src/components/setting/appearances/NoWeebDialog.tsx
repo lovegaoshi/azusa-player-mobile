@@ -73,7 +73,7 @@ const NoWeebDialog = ({ visible, setVisible }: Props) => {
           <View style={styles.colorBlockSpace} />
           <Text>{t('AppearanceSettings.PrimaryColor')}</Text>
           <NoxInput
-            style={styles.marginTop}
+            style={[styles.marginTop, { color: playerStyle.colors.onSurface }]}
             autofocus={false}
             selectTextOnFocus={false}
             text={primaryColor}
@@ -93,7 +93,7 @@ const NoWeebDialog = ({ visible, setVisible }: Props) => {
           <View style={styles.colorBlockSpace} />
           <Text>{t('AppearanceSettings.SecondaryColor')}</Text>
           <NoxInput
-            style={styles.marginTop}
+            style={[styles.marginTop, { color: playerStyle.colors.onSurface }]}
             autofocus={false}
             selectTextOnFocus={false}
             text={secondaryColor}
@@ -113,7 +113,7 @@ const NoWeebDialog = ({ visible, setVisible }: Props) => {
           <View style={styles.colorBlockSpace} />
           <Text>{t('AppearanceSettings.ContrastColor')}</Text>
           <NoxInput
-            style={styles.marginTop}
+            style={[styles.marginTop, { color: playerStyle.colors.onSurface }]}
             autofocus={false}
             selectTextOnFocus={false}
             text={contrastColor}
@@ -133,7 +133,7 @@ const NoWeebDialog = ({ visible, setVisible }: Props) => {
           <View style={styles.colorBlockSpace} />
           <Text>{t('AppearanceSettings.BackgroundColor')}</Text>
           <NoxInput
-            style={styles.marginTop}
+            style={[styles.marginTop, { color: playerStyle.colors.onSurface }]}
             autofocus={false}
             selectTextOnFocus={false}
             text={backgroundColor}
