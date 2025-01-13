@@ -4,6 +4,7 @@ import { StyleSheet } from 'react-native';
 import { useNoxSetting } from '@stores/useApp';
 import BiliExplore from './Bilibili';
 import YTMExplore from './YTMusic';
+import YTMChartExplore from './YTMChart';
 import SiteSelector from '../login/SiteSelector';
 import { Site } from '@enums/Network';
 import { useAPM } from '@stores/usePersistStore';
@@ -12,6 +13,8 @@ const LoginComponent = ({ loginSite }: { loginSite: Site }) => {
   switch (loginSite) {
     case Site.YTM:
       return <YTMExplore />;
+    case Site.YTMChart:
+      return <YTMChartExplore />;
     default:
       return <BiliExplore />;
   }

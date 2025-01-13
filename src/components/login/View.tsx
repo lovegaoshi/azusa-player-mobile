@@ -10,11 +10,14 @@ const LoginPage = ({ loginSite }: { loginSite: Site }) => {
   const ytmLogin = useYTMLogin();
   const biliLogin = useBiliLogin();
 
+  console.log(loginSite);
   switch (loginSite) {
     case Site.Bilibili:
       return <Bilibili biliLogin={biliLogin} />;
     case Site.YTM:
       return <YTM ytmLogin={ytmLogin} />;
+    default:
+      return <Bilibili biliLogin={biliLogin} />;
   }
 };
 

@@ -1,5 +1,12 @@
 {
   "_comment": "src/localization/en/translation.json",
+  "YTMusic": {
+    "ChartVideo": "视频排行",
+    "ChartTrending": "最热",
+    "ChartArtist": "艺术家排行",
+    "ChartGenres": "流派排行",
+    "ChartSongs": "歌曲排行"
+  },
   "Billing": {
     "PremiumFeaturesIntro": "感谢你对中国管人事业的支持。您赞助的每一分钱将用于购买《博德之门3》。APM PRO将隐藏启动广告。",
     "NoxAuth": "b站认证",
