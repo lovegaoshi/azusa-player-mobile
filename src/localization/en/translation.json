@@ -1,5 +1,12 @@
 {
   "_comment": "src/localization/en/translation.json",
+  "YTMusic": {
+    "ChartVideo": "Videos",
+    "ChartTrending": "Trending",
+    "ChartArtist": "Artists",
+    "ChartGenres": "Genres",
+    "ChartSongs": "Songs"
+  },
   "Billing": {
     "PremiumFeaturesIntro": "Thank you for considering supporting APM with real money. All funds will go towards buying a copy of Buldur's Gate 3. In return, APM will hide the app start splash ad.",
     "NoxAuth": "Authenticate through Bilibili",

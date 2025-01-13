@@ -34,10 +34,12 @@ export const YTMixedContent = ({ content }: ContentProps) => {
   const filteredContent = content.contents.filter(v => v);
   switch (filteredContent[0]?.type) {
     case 'artist':
+      // HACK: doesnt work!
       <YTSongRow
         songs={YTArtistTransform(filteredContent as RelatedArtist[])}
         title={content.title!}
       />;
+      return <></>;
     case 'playlist':
       return (
         <YTSongRow
@@ -60,6 +62,13 @@ export const YTMixedContent = ({ content }: ContentProps) => {
         />
       );
     case 'inline-video':
+      return (
+        <BiliSongsArrayTabCard
+          songs={YTMInlineVideoTransform(filteredContent as ParsedVideo[])}
+          title={content.title!}
+        />
+      );
+    case 'video':
       return (
         <BiliSongsArrayTabCard
           songs={YTMInlineVideoTransform(filteredContent as ParsedVideo[])}

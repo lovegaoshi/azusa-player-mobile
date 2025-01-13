@@ -28,7 +28,7 @@ export const YTArtistTransform = (v: RelatedArtist[]) =>
   v.map(i => ({
     cover: _.last(i.thumbnails)!.url,
     name: i?.name,
-    singer: `${i.name} - ${i.subscribers}`,
+    singer: i.subscribers ?? '',
     getPlaylist: async () => {
       return {
         songs: await fetchYtmPlaylist(i.radioId ?? i.shuffleId ?? i.browseId),
