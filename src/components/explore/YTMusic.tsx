@@ -8,6 +8,7 @@ import {
   ParsedAlbum,
   FlatSong,
   ParsedVideo,
+  RelatedArtist,
 } from 'libmuse';
 
 import { styles } from '@components/style';
@@ -16,6 +17,7 @@ import useYTMExplore, {
   YTAlbumTransform,
   YTMFlatSongTransform,
   YTMInlineVideoTransform,
+  YTArtistTransform,
 } from '@stores/explore/ytm';
 import { YTSongRow } from './SongRow';
 import { BiliSongsArrayTabCard } from './SongTab';
@@ -25,12 +27,17 @@ interface ContentProps {
   key?: string;
 }
 
-const YTMixedContent = ({ content }: ContentProps) => {
+export const YTMixedContent = ({ content }: ContentProps) => {
   if (!_.isArray(content.contents)) {
     return <></>;
   }
   const filteredContent = content.contents.filter(v => v);
   switch (filteredContent[0]?.type) {
+    case 'artist':
+      <YTSongRow
+        songs={YTArtistTransform(filteredContent as RelatedArtist[])}
+        title={content.title!}
+      />;
     case 'playlist':
       return (
         <YTSongRow

@@ -6,6 +6,7 @@ import {
   ParsedAlbum,
   FlatSong,
   ParsedVideo,
+  RelatedArtist,
 } from 'libmuse';
 import { create } from 'zustand';
 import _ from 'lodash';
@@ -22,6 +23,18 @@ interface YTMExplore {
   loading: boolean;
   initialize: () => Promise<void>;
 }
+
+export const YTArtistTransform = (v: RelatedArtist[]) =>
+  v.map(i => ({
+    cover: _.last(i.thumbnails)!.url,
+    name: i?.name,
+    singer: `${i.name} - ${i.subscribers}`,
+    getPlaylist: async () => {
+      return {
+        songs: await fetchYtmPlaylist(i.radioId ?? i.shuffleId ?? i.browseId),
+      };
+    },
+  }));
 
 export const YTPlaylistTransform = (v: ParsedPlaylist[]) =>
   v.map(i => ({

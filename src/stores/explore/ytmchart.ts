@@ -1,36 +1,49 @@
-import { get_home, Home, Mood } from 'libmuse';
+import {
+  get_charts,
+  ParsedPlaylist,
+  ParsedSong,
+  ParsedVideo,
+  Ranked,
+  RelatedArtist,
+} from 'libmuse';
 import { create } from 'zustand';
+import _ from 'lodash';
 
-interface YTMExplore {
-  homedata?: Home;
-  moods: Mood[];
-  continuation?: Home['continuation'];
-  refreshHome: (params?: string) => Promise<Home>;
+interface YTMChartExplore {
+  songs: (Ranked<ParsedSong> | Ranked<ParsedVideo>)[];
+  videos: Ranked<ParsedVideo>[];
+  genres: ParsedPlaylist[];
+  trending: (Ranked<ParsedSong> | Ranked<ParsedVideo>)[];
+  artists: Ranked<RelatedArtist>[];
+
+  refreshHome: (params?: string) => Promise<void>;
   loading: boolean;
   initialize: () => Promise<void>;
 }
 
-export const useYTMExplore = create<YTMExplore>((set, get) => ({
-  moods: [],
+export default create<YTMChartExplore>((set, get) => ({
+  songs: [],
+  videos: [],
+  genres: [],
+  trending: [],
+  artists: [],
   loading: true,
   initialize: async () => {
     const { refreshHome, loading } = get();
     if (!loading) {
       return;
     }
-    const homedata = await refreshHome();
+    refreshHome();
+  },
+  refreshHome: async (country?: string) => {
+    const homedata = (await get_charts(country)).results;
     set({
-      homedata,
-      moods: homedata.moods,
-      continuation: homedata.continuation,
+      songs: homedata.songs?.results ?? [],
+      videos: homedata.videos?.results ?? [],
+      genres: homedata.genres?.results ?? [],
+      trending: homedata.trending?.results ?? [],
+      artists: homedata.artists?.results ?? [],
       loading: false,
     });
   },
-  refreshHome: async (params?: string) => {
-    const homedata = await get_home({ params });
-    set({ homedata, continuation: homedata.continuation });
-    return homedata;
-  },
 }));
-
-export default useYTMExplore;
