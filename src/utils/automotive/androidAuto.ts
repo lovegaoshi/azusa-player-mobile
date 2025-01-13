@@ -1,4 +1,3 @@
-import TrackPlayer from 'react-native-track-player';
 import i18n from 'i18next';
 
 import { PlaylistMediaID, YTMChartMediaID } from '@enums/Playlist';
@@ -6,6 +5,7 @@ import { isAndroid } from '@utils/RNUtils';
 import logger from '../Logger';
 import { fetchYtmPlaylist } from '@utils/mediafetch/ytbPlaylist.muse';
 import { dummyPlaylistList } from '@objects/Playlist';
+import useNoxMobile from '@stores/useMobile';
 
 export const buildBrowseTree = (
   playlists: {
@@ -14,7 +14,7 @@ export const buildBrowseTree = (
   t = i18n.t,
 ) => {
   if (!isAndroid) return;
-  TrackPlayer.setBrowseTree({
+  useNoxMobile.getState().updateBrowseTree({
     '/': [
       {
         mediaId: 'PlaylistTab',
