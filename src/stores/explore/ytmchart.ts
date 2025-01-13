@@ -7,7 +7,6 @@ import {
   RelatedArtist,
 } from 'libmuse';
 import { create } from 'zustand';
-import _ from 'lodash';
 
 interface YTMChartExplore {
   songs: (Ranked<ParsedSong> | Ranked<ParsedVideo>)[];

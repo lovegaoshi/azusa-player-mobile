@@ -1,7 +1,6 @@
 import { View, ScrollView, RefreshControl } from 'react-native';
 import { ActivityIndicator } from 'react-native-paper';
 import React, { useCallback, useEffect, useState } from 'react';
-import _ from 'lodash';
 import { useTranslation } from 'react-i18next';
 
 import { styles } from '@components/style';
