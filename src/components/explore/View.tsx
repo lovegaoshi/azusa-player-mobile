@@ -12,6 +12,8 @@ const LoginComponent = ({ loginSite }: { loginSite: Site }) => {
   switch (loginSite) {
     case Site.YTM:
       return <YTMExplore />;
+    case Site.YTMChart:
+      return <></>;
     default:
       return <BiliExplore />;
   }

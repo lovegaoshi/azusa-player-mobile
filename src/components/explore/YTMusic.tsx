@@ -11,76 +11,19 @@ import {
 } from 'libmuse';
 
 import { styles } from '@components/style';
-import useYTMExplore from '@stores/explore/ytm';
+import useYTMExplore, {
+  YTPlaylistTransform,
+  YTAlbumTransform,
+  YTMFlatSongTransform,
+  YTMInlineVideoTransform,
+} from '@stores/explore/ytm';
 import { YTSongRow } from './SongRow';
-import { fetchYtmPlaylist } from '@utils/mediafetch/ytbPlaylist.muse';
 import { BiliSongsArrayTabCard } from './SongTab';
-import SongTS from '@objects/Song';
-import { Source } from '@enums/MediaFetch';
 
 interface ContentProps {
   content: MixedContent;
   key?: string;
 }
-
-const YTPlaylistTransform = (v: ParsedPlaylist[]) =>
-  v.map(i => ({
-    cover: _.last(i.thumbnails)!.url,
-    name: i?.title,
-    singer: i.description!,
-    getPlaylist: async () => {
-      return { songs: await fetchYtmPlaylist(i?.playlistId) };
-    },
-  }));
-
-const YTAlbumTransform = (v: ParsedAlbum[]) =>
-  v.map(i => ({
-    cover: _.last(i.thumbnails)!.url,
-    name: i.title,
-    singer: i.album_type!,
-    getPlaylist: async () => {
-      // TODO: this is broken in react-native but passes in test. but why?
-      const songs = await fetchYtmPlaylist(i.audioPlaylistId);
-      return { songs };
-    },
-  }));
-
-const YTMFlatSongTransform = (v: FlatSong[]) =>
-  v.map(i =>
-    SongTS({
-      cid: `${Source.ytbvideo}-${i.videoId}`,
-      bvid: i.videoId!,
-      name: i.title,
-      nameRaw: i.title,
-      singer: i.artists?.[0].name ?? '',
-      singerId: i.artists?.[0].id ?? '',
-      cover: _.last(i.thumbnails)!.url,
-      lyric: '',
-      page: 1,
-      duration: 0,
-      album: i.album?.name ?? i.title,
-      source: Source.ytbvideo,
-      metadataOnLoad: true,
-    }),
-  );
-
-const YTMInlineVideoTransform = (v: ParsedVideo[]) =>
-  v.map(i =>
-    SongTS({
-      cid: `${Source.ytbvideo}-${i.videoId}`,
-      bvid: i.videoId!,
-      name: i.title,
-      nameRaw: i.title,
-      singer: i.artists?.[0].name ?? '',
-      singerId: i.artists?.[0].id ?? '',
-      cover: _.last(i.thumbnails)!.url,
-      lyric: '',
-      page: 1,
-      duration: 0,
-      source: Source.ytbvideo,
-      metadataOnLoad: true,
-    }),
-  );
 
 const YTMixedContent = ({ content }: ContentProps) => {
   if (!_.isArray(content.contents)) {

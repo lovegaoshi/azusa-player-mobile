@@ -33,6 +33,9 @@ export default ({
     new Animated.Value(opacityValue(Site.Bilibili)),
   ).current;
   const ytmOpacity = useRef(new Animated.Value(opacityValue(Site.YTM))).current;
+  const ytmChartOpacity = useRef(
+    new Animated.Value(opacityValue(Site.YTMChart)),
+  ).current;
 
   const getAnimatedOpacityRef = (site: Site) => {
     switch (site) {
@@ -40,6 +43,8 @@ export default ({
         return bilibiliOpacity;
       case Site.YTM:
         return ytmOpacity;
+      case Site.YTMChart:
+        return ytmChartOpacity;
     }
   };
 
@@ -73,6 +78,12 @@ export default ({
             icon={() => Icons.YOUTUBEM(iconSize)}
             size={iconSize}
             onPress={() => setLoginSiteAnimated(Site.YTM)}
+          />
+          <IconButton
+            style={{ opacity: ytmChartOpacity }}
+            icon={'chart-line'}
+            size={iconSize}
+            onPress={() => setLoginSiteAnimated(Site.YTMChart)}
           />
         </View>
       </Collapsible>
