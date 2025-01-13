@@ -10,7 +10,7 @@ import { initializeStores } from '@stores/initializeStores';
 import { IntentData } from '@enums/Intent';
 import { useNoxSetting } from '@stores/useApp';
 import usePlayStore from './usePlayStore';
-import { buildBrowseTree } from './usePlaybackAA';
+import { buildBrowseTree } from '@utils/automotive/androidAuto';
 import { NativeModules } from 'react-native';
 import useActiveTrack, { useTrackStore } from './useActiveTrack';
 

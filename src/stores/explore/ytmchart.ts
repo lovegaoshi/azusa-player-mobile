@@ -17,7 +17,7 @@ interface YTMChartExplore {
 
   refreshHome: (params?: string) => Promise<void>;
   loading: boolean;
-  initialize: () => Promise<void>;
+  initialize: () => Promise<ParsedPlaylist[]>;
 }
 
 export default create<YTMChartExplore>((set, get) => ({
@@ -29,10 +29,10 @@ export default create<YTMChartExplore>((set, get) => ({
   loading: true,
   initialize: async () => {
     const { refreshHome, loading } = get();
-    if (!loading) {
-      return;
+    if (loading) {
+      await refreshHome();
     }
-    refreshHome();
+    return get().genres;
   },
   refreshHome: async (country?: string) => {
     const homedata = (await get_charts(country)).results;
