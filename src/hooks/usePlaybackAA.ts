@@ -1,40 +1,12 @@
 import { Platform } from 'react-native';
 import { useEffect } from 'react';
-import TrackPlayer from 'react-native-track-player';
 import { useTranslation } from 'react-i18next';
-import i18n from 'i18next';
 
-import { PlaylistMediaID } from '@enums/Playlist';
 import usePlayback from './usePlayback';
 import { useNoxSetting } from '@stores/useApp';
 import { IntentData } from '@enums/Intent';
 import usePlaybackCarplay from './usePlaybackCarplay';
-import { isAndroid } from '@utils/RNUtils';
-
-export const buildBrowseTree = (
-  playlists: {
-    [key: string]: NoxMedia.Playlist;
-  },
-  t = i18n.t,
-) => {
-  if (!isAndroid) return;
-  TrackPlayer.setBrowseTree({
-    '/': [
-      {
-        mediaId: 'PlaylistTab',
-        title: t('AndroidAuto.PlaylistTab'),
-        playable: '1',
-      },
-    ],
-    PlaylistTab: Object.keys(playlists).map(key => {
-      return {
-        mediaId: `${PlaylistMediaID}${key}`,
-        title: playlists[key].title,
-        playable: '0',
-      };
-    }),
-  });
-};
+import { buildBrowseTree } from '@utils/automotive/androidAuto';
 
 export const useAndroidAuto = () => {
   const { t } = useTranslation();

@@ -183,9 +183,7 @@ export const resetResolvedURL = (song?: NoxMedia.Song, deleteCache = false) => {
       cachedResolveURLMap: { ...cachedResolveURLMap, [song.id]: undefined },
     });
   } else {
-    appStore.setState({
-      cachedResolveURLMap: {},
-    });
+    appStore.setState({ cachedResolveURLMap: {} });
   }
 };
 

@@ -13,8 +13,12 @@ import {
 import { NoxRepeatMode } from '@enums/RepeatMode';
 import noxPlayingList, { setPlayingIndex } from '@stores/playingList';
 import { dataSaverPlaylist, dataSaverSongs } from '@utils/Cache';
-import { PlaylistMediaID, PlaylistTypes } from '@enums/Playlist';
+import { PlaylistTypes } from '@enums/Playlist';
 import { fetchCurrentMusicTop } from '@utils/mediafetch/biliMusicTop';
+import {
+  parseFromMediaId,
+  PlayFromMediaID,
+} from '@utils/automotive/androidAuto';
 
 const { getState } = noxPlayingList;
 
@@ -85,65 +89,40 @@ const playFromPlaylist = async (args: PlayFromPlaylist) => {
   });
 };
 
-export interface PlayFromMediaID {
-  mediaId: string;
-  playlists: { [key: string]: NoxMedia.Playlist };
-  currentPlayingList: NoxMedia.Playlist;
-  getPlaylist: (key: string) => Promise<NoxMedia.Playlist>;
-  isDataSaving: boolean;
-  playlistIds: string[];
-}
-export const _playFromMediaId = async ({
-  mediaId,
-  playlists,
-  currentPlayingList,
-  getPlaylist,
-  isDataSaving,
-  playlistIds,
-}: PlayFromMediaID) => {
+export const _playFromMediaId = async (p: PlayFromMediaID) => {
+  const { mediaId, currentPlayingList, getPlaylist, playlistIds } = p;
   logger.info(`[playFromMediaId]: ${mediaId}`);
-  if (mediaId.startsWith(PlaylistMediaID)) {
-    mediaId = mediaId.substring(PlaylistMediaID.length);
-    // play a playlist.
-    if (playlists[mediaId] === undefined) {
-      logger.warn(`[Playback] ${mediaId} doesnt exist.`);
-      return;
+  const parsedPlaylist = await parseFromMediaId(p);
+  if (parsedPlaylist !== undefined) {
+    return playFromPlaylist({ playlist: parsedPlaylist });
+  }
+  // mediaId should follow the format of ${NoxMedia.Song.bvid}|${NoxMedia.Song.id}
+  const regexMatch = /([^|]+)\|([^|]+)/.exec(mediaId);
+  if (regexMatch === null) {
+    logger.warn(`[playFromMediaId]: ${mediaId} is not valid.`);
+    return;
+  }
+  const [, songBVID, songCID] = regexMatch;
+  for (const song of currentPlayingList.songList) {
+    if (song.bvid === songBVID && song.id === songCID) {
+      return playFromPlaylist({
+        playlist: currentPlayingList,
+        song,
+      });
     }
-    return playFromPlaylist({
-      playlist: await getPlaylist(mediaId),
-      playlistParser: dataSaverPlaylistWrapper(isDataSaving),
-    });
-  } else {
-    // mediaId should follow the format of ${NoxMedia.Song.bvid}|${NoxMedia.Song.id}
-    const regexMatch = /([^|]+)\|([^|]+)/.exec(mediaId);
-    if (regexMatch === null) {
-      logger.warn(`[playFromMediaId]: ${mediaId} is not valid.`);
-      return;
-    }
-    const [, songBVID, songCID] = regexMatch;
-    for (const song of currentPlayingList.songList) {
+  }
+  for (const playlistId of playlistIds) {
+    const playlist = await getPlaylist(playlistId);
+    for (const song of playlist.songList) {
       if (song.bvid === songBVID && song.id === songCID) {
         return playFromPlaylist({
-          playlist: currentPlayingList,
+          playlist,
           song,
-          playlistParser: dataSaverPlaylistWrapper(isDataSaving),
         });
       }
     }
-    for (const playlistId of playlistIds) {
-      const playlist = await getPlaylist(playlistId);
-      for (const song of playlist.songList) {
-        if (song.bvid === songBVID && song.id === songCID) {
-          return playFromPlaylist({
-            playlist,
-            song,
-            playlistParser: dataSaverPlaylistWrapper(isDataSaving),
-          });
-        }
-      }
-    }
-    logger.warn(`[playFromMediaId]: ${mediaId} does not exist.`);
   }
+  logger.warn(`[playFromMediaId]: ${mediaId} does not exist.`);
 };
 
 export const playFromMediaId = async (

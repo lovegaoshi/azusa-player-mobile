@@ -1,4 +1,4 @@
-import { useNoxSetting } from '@stores/useApp';
+import useNoxMobile from '@stores/useMobile';
 import { useNavigation } from '@react-navigation/native';
 
 import { NoxRoutes } from '@enums/Routes';
@@ -12,7 +12,7 @@ interface NavigateProps {
 
 export default () => {
   const navigationGlobal = useNavigation();
-  const setRoute = useNoxSetting(state => state.setBottomTabRoute);
+  const setRoute = useNoxMobile(state => state.setBottomTabRoute);
 
   const navigate = ({ route, setIcon = true, options }: NavigateProps) => {
     // @ts-expect-error nav v7 hasnt fixed this type yet

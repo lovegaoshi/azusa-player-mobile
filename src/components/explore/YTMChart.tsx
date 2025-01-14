@@ -1,7 +1,6 @@
-import { View, ScrollView } from 'react-native';
+import { View, ScrollView, RefreshControl } from 'react-native';
 import { ActivityIndicator } from 'react-native-paper';
-import React, { useEffect } from 'react';
-import _ from 'lodash';
+import React, { useCallback, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { styles } from '@components/style';
@@ -11,6 +10,7 @@ import { toMixedContent } from './Utils';
 
 export default () => {
   const { t } = useTranslation();
+  const [refreshing, setRefreshing] = useState(false);
   const refreshHome = useYTMChartExplore(state => state.refreshHome);
   const initialize = useYTMChartExplore(state => state.initialize);
   const loading = useYTMChartExplore(state => state.loading);
@@ -20,6 +20,11 @@ export default () => {
   const videos = useYTMChartExplore(state => state.videos);
   const trending = useYTMChartExplore(state => state.trending);
 
+  const onRefresh = useCallback(() => {
+    setRefreshing(true);
+    refreshHome().finally(() => setRefreshing(false));
+  }, []);
+
   useEffect(() => {
     initialize();
   }, []);
@@ -27,7 +32,12 @@ export default () => {
   return (
     <View style={{ flex: 1 }}>
       <View style={{ height: 10 }} />
-      <ScrollView style={{ flex: 1 }}>
+      <ScrollView
+        style={{ flex: 1 }}
+        refreshControl={
+          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+        }
+      >
         {loading ? (
           <View style={styles.alignMiddle}>
             <ActivityIndicator size={100} />

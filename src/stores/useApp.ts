@@ -15,19 +15,13 @@ import { savePlayerStyle } from '@utils/StyleStorage';
 import { getABRepeatRaw } from './appStore';
 import { setPlayingList, setPlayingIndex } from '@stores/playingList';
 import DummyLyricDetail from '../objects/LyricDetail';
-import createBottomTab, { BottomTabStore } from './useBottomTab';
 import createAPMUI, { APMUIStore } from './useAPMUI';
 import createUI, { UIStore } from './useUI';
 import createPlaylists, { PlaylistsStore } from './usePlaylists';
 import createMFsdk, { MFsdkStore } from './useMFsdk';
 import { initMFsdk } from '@utils/mfsdk';
 
-interface NoxSetting
-  extends BottomTabStore,
-    APMUIStore,
-    UIStore,
-    PlaylistsStore,
-    MFsdkStore {
+interface NoxSetting extends APMUIStore, UIStore, PlaylistsStore, MFsdkStore {
   crossfadeId: string;
   setCrossfadeId: (val: string) => void;
 
@@ -70,7 +64,6 @@ interface NoxSetting
  * as well as saving and loading states to/from asyncStorage.
  */
 export const useNoxSetting = create<NoxSetting>((set, get, storeApi) => ({
-  ...createBottomTab(set, get, storeApi),
   ...createAPMUI(set, get, storeApi),
   ...createUI(set, get, storeApi),
   ...createPlaylists(set, get, storeApi),
@@ -209,3 +202,5 @@ export const useNoxSetting = create<NoxSetting>((set, get, storeApi) => ({
     return exportedLegacy;
   },
 }));
+
+export default useNoxSetting;

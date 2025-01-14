@@ -22,3 +22,5 @@ export enum SortOptions {
 }
 
 export const PlaylistMediaID = 'playlist-';
+
+export const YTMChartMediaID = 'ytmchart-';
