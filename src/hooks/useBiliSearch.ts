@@ -22,7 +22,6 @@ export default ({
   const setSearchPlaylist = useNoxSetting(state => state.setSearchPlaylist);
   const setCurrentPlaylist = useNoxSetting(state => state.setCurrentPlaylist);
   const playerSetting = useNoxSetting(state => state.playerSetting);
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
 
   const handleSearch = async (val = searchVal) => {
     progressEmitter(100);
