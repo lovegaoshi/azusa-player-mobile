@@ -8,6 +8,7 @@ import YTMChartExplore from './YTMChart';
 import SiteSelector from '../login/SiteSelector';
 import { Site } from '@enums/Network';
 import { useAPM } from '@stores/usePersistStore';
+import FlexView from '@components/commonui/FlexViewNewArch';
 
 const LoginComponent = ({ loginSite }: { loginSite: Site }) => {
   switch (loginSite) {
@@ -25,17 +26,19 @@ export default () => {
   const { explorePage, setExplorePage } = useAPM();
 
   return (
-    <SiteSelector
-      containerStyle={{
-        backgroundColor: playerStyle.customColors.maskedBackgroundColor,
-        flex: 1,
-      }}
-      iconSize={30}
-      iconTabStyle={styles.iconTab}
-      LoginComponent={LoginComponent}
-      defaultSite={explorePage}
-      onSiteChange={setExplorePage}
-    />
+    <FlexView>
+      <SiteSelector
+        containerStyle={{
+          backgroundColor: playerStyle.customColors.maskedBackgroundColor,
+          flex: 1,
+        }}
+        iconSize={30}
+        iconTabStyle={styles.iconTab}
+        LoginComponent={LoginComponent}
+        defaultSite={explorePage}
+        onSiteChange={setExplorePage}
+      />
+    </FlexView>
   );
 };
 

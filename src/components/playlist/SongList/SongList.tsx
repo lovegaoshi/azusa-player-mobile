@@ -41,7 +41,6 @@ const PlaylistList = () => {
   } = usedPlaylist;
   const netInfo = useNetInfo();
   const [scrollViewHeight, setScrollViewHeight] = useState(0);
-  const [initHeight, setInitHeight] = useState(0);
   const [contentViewHeight, setContentViewHeight] = useState(0);
   const [scrollPositionY, setScrollPositionY] = useState(0);
 
@@ -66,12 +65,7 @@ const PlaylistList = () => {
     playerStyle.customColors.playlistDrawerBackgroundColor;
 
   return (
-    <View
-      style={initHeight === 0 ? styles.flex : { height: initHeight }}
-      onLayout={e =>
-        initHeight === 0 && setInitHeight(e.nativeEvent.layout.height)
-      }
-    >
+    <View style={styles.flex}>
       <View style={[styles.topBarContainer, { top: 10 }]}>
         <PlaylistInfo
           onPressed={() => scrollTo({ viewPosition: 0.5 })}
