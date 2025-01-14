@@ -16,6 +16,7 @@ import DownloadSettings from './DownloadSettings';
 import LoginSettings from '../login/View';
 import PremiumSettings from '../billing/View';
 import { isAndroid, isIOS } from '@utils/RNUtils';
+import FlexView from '@components/commonui/FlexViewNewArch';
 
 enum NoxView {
   HOME = 'cog',
@@ -123,65 +124,67 @@ const Settings = ({ headerBackVisible = true }: Props) => {
   const { t } = useTranslation();
 
   return (
-    <Stack.Navigator screenOptions={{ headerBackVisible }}>
-      <Stack.Screen
-        name={NoxView.HOME}
-        component={HomeSettings}
-        options={{ title: t('Settings.HomeSettingName') }}
-      />
-      <Stack.Screen
-        name={NoxView.SPLASH_GALLARY}
-        component={SplashSettings}
-        options={{ title: t('Settings.SplashSettingName') }}
-      />
-      <Stack.Screen
-        name={NoxView.INFO}
-        component={AboutSettings}
-        options={{ title: t('Settings.InfoSettingName') }}
-      />
-      <Stack.Screen
-        name={NoxView.GENERAL}
-        component={GeneralSettings}
-        options={{ title: t('Settings.GeneralSettingName') }}
-      />
-      <Stack.Screen
-        name={NoxView.SKIN}
-        component={AppearanceSettings}
-        options={{ title: t('Settings.AppearanceSettingName') }}
-      />
-      <Stack.Screen
-        name={NoxView.DEVELOPER}
-        component={DeveloperSettings}
-        options={{ title: t('Settings.DeveloperOptionsName') }}
-      />
-      <Stack.Screen
-        name={NoxView.ALIST}
-        component={AListSettings}
-        options={{ title: t('Settings.AListOptionsName') }}
-      />
-      {isAndroid && (
+    <FlexView>
+      <Stack.Navigator screenOptions={{ headerBackVisible }}>
         <Stack.Screen
-          name={NoxView.DOWNLOAD}
-          component={DownloadSettings}
-          options={{ title: t('Settings.DownloadOptionsName') }}
+          name={NoxView.HOME}
+          component={HomeSettings}
+          options={{ title: t('Settings.HomeSettingName') }}
         />
-      )}
-      <Stack.Screen
-        name={NoxView.BACKUP}
-        component={SyncSettings}
-        options={{ title: t('Settings.BackupSettingName') }}
-      />
-      <Stack.Screen
-        name={NoxView.LOGIN}
-        component={LoginSettings}
-        options={{ title: t('appDrawer.LoginName') }}
-      />
-      <Stack.Screen
-        name={NoxView.PREMIUM}
-        component={PremiumSettings}
-        options={{ title: t('appDrawer.PremiumName') }}
-      />
-    </Stack.Navigator>
+        <Stack.Screen
+          name={NoxView.SPLASH_GALLARY}
+          component={SplashSettings}
+          options={{ title: t('Settings.SplashSettingName') }}
+        />
+        <Stack.Screen
+          name={NoxView.INFO}
+          component={AboutSettings}
+          options={{ title: t('Settings.InfoSettingName') }}
+        />
+        <Stack.Screen
+          name={NoxView.GENERAL}
+          component={GeneralSettings}
+          options={{ title: t('Settings.GeneralSettingName') }}
+        />
+        <Stack.Screen
+          name={NoxView.SKIN}
+          component={AppearanceSettings}
+          options={{ title: t('Settings.AppearanceSettingName') }}
+        />
+        <Stack.Screen
+          name={NoxView.DEVELOPER}
+          component={DeveloperSettings}
+          options={{ title: t('Settings.DeveloperOptionsName') }}
+        />
+        <Stack.Screen
+          name={NoxView.ALIST}
+          component={AListSettings}
+          options={{ title: t('Settings.AListOptionsName') }}
+        />
+        {isAndroid && (
+          <Stack.Screen
+            name={NoxView.DOWNLOAD}
+            component={DownloadSettings}
+            options={{ title: t('Settings.DownloadOptionsName') }}
+          />
+        )}
+        <Stack.Screen
+          name={NoxView.BACKUP}
+          component={SyncSettings}
+          options={{ title: t('Settings.BackupSettingName') }}
+        />
+        <Stack.Screen
+          name={NoxView.LOGIN}
+          component={LoginSettings}
+          options={{ title: t('appDrawer.LoginName') }}
+        />
+        <Stack.Screen
+          name={NoxView.PREMIUM}
+          component={PremiumSettings}
+          options={{ title: t('appDrawer.PremiumName') }}
+        />
+      </Stack.Navigator>
+    </FlexView>
   );
 };
 
