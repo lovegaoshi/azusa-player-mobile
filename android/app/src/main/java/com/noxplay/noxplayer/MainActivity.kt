@@ -32,7 +32,7 @@ interface NoxActivity {
     var loadedRN: Boolean
 }
 
-class MainActivity(override var loadedRN: Boolean = false) :
+class MainActivity(override var loadedRN: Boolean = true) :
     ReactActivity(), ComponentCallbacks2, NoxActivity {
 
 
