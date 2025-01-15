@@ -1,7 +1,7 @@
 {
   "_comment": "src/localization/en/translation.json",
   "YTMusic": {
-    "ChartVideo": "Videos",
+    "ChartVideo": "MV",
     "ChartTrending": "Trending",
     "ChartArtist": "Artists",
     "ChartGenres": "Genres",
@@ -18,6 +18,20 @@
     "StripePurchase": "Purchase via Stripe",
     "StripePurchaseNote": "!!Please use {{biliMid}} as biliuserID in the purchase page!! \nAnd please restart APM after purchase.",
     "BiliUserNotLoggedIn": "You must login via bilibili to purchase premium access."
+  },
+  "BiliCategory": {
+    "top": "Top Songs",
+    "ranking": "Ranking",
+    "dynamic": "Feed",
+    "hot": "Hot Songs",
+    "new": "New Songs",
+    "3": "Music",
+    "28": "Original Score",
+    "31": "Covers",
+    "30": "Vocaloid",
+    "59": "Instrumental",
+    "193": "MV",
+    "29": "Live"
   },
   "appDrawer": {
     "homeScreenName": "Home",
