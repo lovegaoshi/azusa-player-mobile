@@ -2,7 +2,6 @@ import biliSearchFetch from '@utils/mediafetch/bilisearch';
 import ytbVideoFetch from '@utils/mediafetch/ytbvideo';
 import localFetch from '@utils/mediafetch/local';
 import { SearchOptions } from '@enums/Storage';
-import steriatkFetch from './mediafetch/steriatk';
 import biliVideoSimilarFetch from './mediafetch/biliVideoSimilar';
 import biliBangumiFetch from './mediafetch/biliBangumi';
 import biliAudioAMFetch from './mediafetch/biliAudioAM';
@@ -226,8 +225,6 @@ const reExtractions: ReExtraction<NoxNetwork.NoxRegexFetch>[] = [
     match: biliFavlistFetch.regexSearchMatch2,
     fetch: biliFavlistFetch.regexFetch,
   },
-  { match: steriatkFetch.regexSearchMatch, fetch: steriatkFetch.regexFetch },
-  { match: steriatkFetch.regexSearchMatch2, fetch: steriatkFetch.regexFetch },
   {
     match: ytbMixlistFetch.regexSearchMatch,
     fetch: ytbMixlistFetch.regexFetch,

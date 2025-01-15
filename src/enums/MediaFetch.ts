@@ -1,7 +1,6 @@
 export enum Source {
   biliaudio = 'biliaudio',
   bilivideo = 'bilivideo',
-  steriatk = 'steriatk',
   ytbvideo = 'ytbvideo',
   biliBangumi = 'biliBangumi',
   biliLive = 'bililive',
