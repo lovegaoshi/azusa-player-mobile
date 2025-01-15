@@ -2,8 +2,7 @@ import { StyleSheet, View, Animated, ViewStyle } from 'react-native';
 import { useRef, useState } from 'react';
 import { IconButton } from 'react-native-paper';
 
-import Icons from '../playlist/BiliSearch/Icons';
-import { Site, Sites } from '@enums/Network';
+import { Site, Sites, SiteIcon } from '@enums/Network';
 import useCollapsible from './useCollapsible';
 import { Collapsible } from '@components/commonui/Collapsible';
 
@@ -14,6 +13,7 @@ interface Props {
   containerStyle?: ViewStyle;
   onSiteChange?: (site: Site) => void;
   defaultSite?: Site;
+  sites?: Site[];
 }
 
 export default ({
@@ -23,6 +23,7 @@ export default ({
   iconTabStyle = styles.iconTab,
   containerStyle = styles.container,
   onSiteChange,
+  sites = Sites,
 }: Props) => {
   const [loginSite, setLoginSite] = useState<Site>(defaultSite);
   const collapsed = useCollapsible(state => state.collapse);
@@ -52,7 +53,7 @@ export default ({
     setLoginSite(v);
     onSiteChange?.(v);
     Animated.parallel(
-      Sites.map(site =>
+      sites.map(site =>
         Animated.timing(getAnimatedOpacityRef(site), {
           toValue: opacityValue(site, v),
           duration: 200,
@@ -67,24 +68,14 @@ export default ({
     <View style={containerStyle}>
       <Collapsible collapsed={collapsed}>
         <View style={iconTabStyle}>
-          <IconButton
-            style={{ opacity: bilibiliOpacity }}
-            icon={() => Icons.BILIBILI(iconSize)}
-            size={iconSize}
-            onPress={() => setLoginSiteAnimated(Site.Bilibili)}
-          />
-          <IconButton
-            style={{ opacity: ytmOpacity }}
-            icon={() => Icons.YOUTUBEM(iconSize)}
-            size={iconSize}
-            onPress={() => setLoginSiteAnimated(Site.YTM)}
-          />
-          <IconButton
-            style={{ opacity: ytmChartOpacity }}
-            icon={'chart-line'}
-            size={iconSize}
-            onPress={() => setLoginSiteAnimated(Site.YTMChart)}
-          />
+          {sites.map(site => (
+            <IconButton
+              style={{ opacity: getAnimatedOpacityRef(site) }}
+              icon={SiteIcon(site, iconSize)}
+              size={iconSize}
+              onPress={() => setLoginSiteAnimated(site)}
+            />
+          ))}
         </View>
       </Collapsible>
       <LoginComponent loginSite={loginSite} />
