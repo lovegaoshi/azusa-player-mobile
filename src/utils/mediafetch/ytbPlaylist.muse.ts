@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { get_playlist } from 'libmuse';
+import { get_playlist_tracks_only } from 'libmuse';
 import _ from 'lodash';
 
 import { fetchAudioInfo } from '@utils/mediafetch/ytbvideo';
@@ -21,14 +21,14 @@ export const fetchYtmPlaylist = async (
     }
     return false;
   };
-  const playlistData = await get_playlist(
+  const playlistData = await get_playlist_tracks_only(
     playlistId,
     // TODO: fix libmuse that limit=0 retrieves all
     { limit: 999 },
     stopAfter,
   );
-  return playlistData.tracks
-    .flatMap(val =>
+  return playlistData
+    .tracks!.flatMap(val =>
       val?.videoId && !favList.includes(val.videoId)
         ? musePlaylistItemToNoxSong(val, playlistData)
         : [],
