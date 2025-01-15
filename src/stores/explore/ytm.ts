@@ -51,11 +51,9 @@ export const YTAlbumTransform = (v: ParsedAlbum[]) =>
     cover: _.last(i.thumbnails)!.url,
     name: i.title,
     singer: i.album_type!,
-    getPlaylist: async () => {
-      // TODO: this is broken in react-native but passes in test. but why?
-      const songs = await fetchYtmPlaylist(i.audioPlaylistId);
-      return { songs };
-    },
+    getPlaylist: async () => ({
+      songs: await fetchYtmPlaylist(i.audioPlaylistId),
+    }),
   }));
 
 export const YTMFlatSongTransform = (v: FlatSong[]) =>

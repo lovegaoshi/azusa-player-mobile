@@ -1,6 +1,6 @@
 import Bilibili from './bilibili/Bilibili';
 import YTM from './google/YTM';
-import { Site } from '@enums/Network';
+import { Site, LoginSites } from '@enums/Network';
 import SiteSelector from './SiteSelector';
 import { useYTMLogin } from './google/useYTMLogin';
 import useBiliLogin from './bilibili/useBiliLoginApp';
@@ -29,6 +29,7 @@ export default () => {
       LoginComponent={LoginPage}
       defaultSite={loginPage}
       onSiteChange={setLoginPage}
+      sites={LoginSites}
     />
   );
 };

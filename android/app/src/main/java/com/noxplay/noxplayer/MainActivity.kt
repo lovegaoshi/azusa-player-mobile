@@ -178,7 +178,7 @@ class MainActivity(override var loadedRN: Boolean = false) :
         // https://stackoverflow.com/questions/5764099/how-to-update-a-widget-if-the-related-service-gets-killed
         val am = getSystemService(Context.ALARM_SERVICE) as AlarmManager
         val intent = Intent(this, APMWidget::class.java)
-        intent.setAction(WIDGET_CLEAR)
+        intent.action = WIDGET_CLEAR
         am.set(
             AlarmManager.ELAPSED_REALTIME,
             SystemClock.elapsedRealtime(),
