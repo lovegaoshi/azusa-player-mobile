@@ -111,7 +111,9 @@ export default () => {
           <View style={styles.rowView} key={mood.params}>
             <Button
               key={mood.name}
-              mode={mood.params === activeMood ? 'contained' : 'outlined'}
+              mode={
+                mood.params === activeMood ? 'contained' : 'contained-tonal'
+              }
               onPress={() => onClickMood(mood.params)}
             >
               {mood.name}
