@@ -64,7 +64,8 @@ declare global {
       downloadID3V2: boolean;
       downloadEmbedAlbumCover: boolean;
 
-      sponsorBlock: Category[] | undefined;
+      sponsorBlockCat: Category[];
+      sponsorBlockEnabled: boolean;
 
       [key: string]: any;
     }

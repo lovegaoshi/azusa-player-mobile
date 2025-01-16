@@ -20,7 +20,9 @@ const HomeWrapper = ({ navigation }: NoxComponent.StackNavigationProps) => {
         flex: 1,
       }}
     >
-      <SelectDialogWrapper Children={p => Home({ ...p, navigation })} />
+      <SelectDialogWrapper
+        Children={p => <Home {...p} navigation={navigation} />}
+      />
     </View>
   );
 };

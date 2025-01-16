@@ -15,6 +15,7 @@ import SplashSettings from './SplashSettings';
 import DownloadSettings from './DownloadSettings';
 import LoginSettings from '../login/View';
 import PremiumSettings from '../billing/View';
+import SponsorBlockSettings from './SponsorBlockSettings';
 import { isAndroid, isIOS } from '@utils/RNUtils';
 import FlexView from '@components/commonui/FlexViewNewArch';
 
@@ -30,6 +31,7 @@ enum NoxView {
   ALIST = 'google-cloud',
   DOWNLOAD = 'file-download',
   PREMIUM = 'cash',
+  SPONSORBLOCK = 'google-ads',
 
   DUMMY = 'Features not implemented',
   GENERAL = 'General',
@@ -81,6 +83,12 @@ const HomeSettings = ({ navigation }: Props) => {
           icon={NoxView.ALIST}
           settingName="AListOptions"
           onPress={() => navigation.navigate(NoxView.ALIST)}
+          settingCategory="Settings"
+        />
+        <SettingListItem
+          icon={NoxView.SPONSORBLOCK}
+          settingName="SponsorBlockOptions"
+          onPress={() => navigation.navigate(NoxView.SPONSORBLOCK)}
           settingCategory="Settings"
         />
         {isAndroid && isIOS && (
@@ -160,6 +168,11 @@ const Settings = ({ headerBackVisible = true }: Props) => {
           name={NoxView.ALIST}
           component={AListSettings}
           options={{ title: t('Settings.AListOptionsName') }}
+        />
+        <Stack.Screen
+          name={NoxView.SPONSORBLOCK}
+          component={SponsorBlockSettings}
+          options={{ title: t('Settings.SponsorBlockOptionsName') }}
         />
         {isAndroid && (
           <Stack.Screen
