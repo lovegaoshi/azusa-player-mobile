@@ -60,6 +60,8 @@ export const DefaultSetting: NoxStorage.PlayerSettingDict = {
   downloadToMp3: true,
   downloadID3V2: true,
   downloadEmbedAlbumCover: true,
+
+  sponsorBlock: undefined,
 };
 
 export const OverrideSetting: Partial<NoxStorage.PlayerSettingDict> = {};
