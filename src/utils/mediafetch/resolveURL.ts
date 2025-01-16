@@ -1,4 +1,3 @@
-import steriatkFetch from './steriatk';
 import biliaudioFetch from './biliaudio';
 import ytbvideoFetch, { fetchAudioInfo } from '@utils/mediafetch/ytbvideo';
 import bililiveFetch from './bililive';
@@ -21,7 +20,6 @@ type RegResolve = NoxUtils.RegexMatchResolve<
 
 const regexResolveURLs: RegResolve = [
   [acfunFetch.regexResolveURLMatch, acfunFetch.resolveURL],
-  [steriatkFetch.regexResolveURLMatch, steriatkFetch.resolveURL],
   [biliaudioFetch.regexResolveURLMatch, biliaudioFetch.resolveURL],
   [ytbvideoFetch.regexResolveURLMatch, ytbvideoFetch.resolveURL],
   [ytbvideoFetch.regexResolveURLMatch2, ytbvideoFetch.resolveURL],

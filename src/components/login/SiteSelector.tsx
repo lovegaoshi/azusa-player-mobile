@@ -70,6 +70,7 @@ export default ({
         <View style={iconTabStyle}>
           {sites.map(site => (
             <IconButton
+              key={site}
               style={{ opacity: getAnimatedOpacityRef(site) }}
               icon={SiteIcon(site, iconSize)}
               size={iconSize}
