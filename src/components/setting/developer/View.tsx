@@ -5,7 +5,6 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import PluginSettings from './plugins/View';
 import { useNoxSetting } from '@stores/useApp';
 import SelectDialogWrapper from '../SelectDialogWrapper';
-import { SelectCheckDialog } from '../CheckDialogWrapper';
 import { Route } from './enums';
 import { Home } from './DeveloperSettings';
 import MFSettings from './plugins/musicfree/View';
@@ -14,7 +13,6 @@ const Stack = createNativeStackNavigator();
 
 const HomeWrapper = ({ navigation }: NoxComponent.StackNavigationProps) => {
   const playerStyle = useNoxSetting(state => state.playerStyle);
-
   return (
     <View
       style={{
@@ -22,14 +20,7 @@ const HomeWrapper = ({ navigation }: NoxComponent.StackNavigationProps) => {
         flex: 1,
       }}
     >
-      <SelectDialogWrapper
-        Children={p => (
-          <SelectCheckDialog
-            {...p}
-            Children={pp => Home({ ...pp, navigation })}
-          />
-        )}
-      />
+      <SelectDialogWrapper Children={p => Home({ ...p, navigation })} />
     </View>
   );
 };
