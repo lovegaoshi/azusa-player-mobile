@@ -1,8 +1,9 @@
 import * as React from 'react';
-import { View, ViewStyle } from 'react-native';
+import { View } from 'react-native';
 
 import GenericSelectDialog from '../dialogs/GenericSelectDialog';
 import { SelectSettingEntry } from './helpers/SettingEntry';
+import { styles } from '@components/style';
 
 export interface SelectDialogChildren<T> {
   setCurrentSelectOption: React.Dispatch<
@@ -12,16 +13,15 @@ export interface SelectDialogChildren<T> {
 }
 
 interface Props<T> {
-  viewStyle?: ViewStyle;
   Children: (p: SelectDialogChildren<T>) => React.JSX.Element;
 }
-export default function SelectDialog<T>({ Children, viewStyle }: Props<T>) {
+export default function SelectDialog<T>({ Children }: Props<T>) {
   const [currentSelectOption, setCurrentSelectOption] =
     React.useState<SelectSettingEntry<T>>();
   const [selectVisible, setSelectVisible] = React.useState(false);
 
   return (
-    <View style={viewStyle}>
+    <View style={styles.flex}>
       <Children
         setCurrentSelectOption={setCurrentSelectOption}
         setSelectVisible={setSelectVisible}
