@@ -5,13 +5,16 @@ import { useNoxSetting } from '@stores/useApp';
 import { SelectSettingEntry } from './SettingEntry';
 import SettingListItem from './SettingListItem';
 
+interface SelectProps<T> extends Props<T> {
+  defaultIndex?: number;
+}
+
 interface Props<T> {
-  setSelectVisible: React.Dispatch<React.SetStateAction<boolean>>;
-  setCurrentSelectOption: React.Dispatch<
+  setVisible: React.Dispatch<React.SetStateAction<boolean>>;
+  setCurrentOption: React.Dispatch<
     React.SetStateAction<SelectSettingEntry<T> | undefined>
   >;
   options: T[];
-  defaultIndex?: number;
   callback?: () => void;
   renderOption?: (i: T) => string;
   onClose?: () => void;
@@ -22,8 +25,8 @@ interface Props<T> {
 }
 
 const SelectSetting = ({
-  setSelectVisible,
-  setCurrentSelectOption,
+  setVisible,
+  setCurrentOption,
   options,
   renderOption,
   defaultIndex,
@@ -33,21 +36,21 @@ const SelectSetting = ({
   icon,
   settingCategory,
   modifyDescription,
-}: Props<any>) => {
+}: SelectProps<any>) => {
   const { t } = useTranslation();
   const playerSetting = useNoxSetting(state => state.playerSetting);
   const setPlayerSetting = useNoxSetting(state => state.setPlayerSetting);
 
   const onPress = () => {
-    setSelectVisible(true);
-    setCurrentSelectOption({
+    setVisible(true);
+    setCurrentOption({
       options,
       renderOption: renderOption ?? (i => String(i)),
       defaultIndex: defaultIndex ?? options.indexOf(playerSetting[settingKey]),
-      onClose: onClose ?? (() => setSelectVisible(false)),
+      onClose: onClose ?? (() => setVisible(false)),
       onSubmit: (index: number) => {
         setPlayerSetting({ [settingKey]: options[index] }).then(callback);
-        setSelectVisible(false);
+        setVisible(false);
       },
       title: t(`${settingCategory}.${settingKey}Title`),
     } as SelectSettingEntry<unknown>);

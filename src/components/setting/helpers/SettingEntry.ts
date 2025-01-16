@@ -1,18 +1,18 @@
-export interface SelectSettingEntry<T> {
+interface BaseSettingEntry<T> {
   options: T[];
   renderOption: (option: T) => string;
-  defaultIndex: number;
-  onClose: (index?: number) => void;
-  onSubmit: (index: number) => void;
   title: string;
 }
 
-export interface CheckSettingEntry<T> {
-  options: T[];
-  renderOption: (option: T) => string;
+export interface SelectSettingEntry<T> extends BaseSettingEntry<T> {
+  defaultIndex: number;
+  onClose: (index?: number) => void;
+  onSubmit: (index: number) => void;
+}
+
+export interface CheckSettingEntry<T> extends BaseSettingEntry<T> {
   onClose: (index?: boolean[]) => void;
   onSubmit: (index: boolean[]) => void;
-  title: string;
 }
 
 export interface SettingEntry {
