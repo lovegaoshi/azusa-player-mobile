@@ -28,6 +28,7 @@ import {
 import { isAndroid } from '@utils/RNUtils';
 import SelectSetting from '../helpers/SelectSetting';
 import { SelectDialogChildren } from '../SelectDialogWrapper';
+import { CheckDialogChildren } from '../CheckDialogWrapper';
 import { Route, Icons } from './enums';
 
 const FadeOptions = [0, 250, 500, 1000];
@@ -77,7 +78,8 @@ const { getState, setState } = logStore;
 
 interface HomeProps
   extends NoxComponent.StackNavigationProps,
-    SelectDialogChildren<any> {}
+    SelectDialogChildren<any>,
+    CheckDialogChildren<any> {}
 
 export const Home = ({
   navigation,

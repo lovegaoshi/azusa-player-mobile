@@ -15,7 +15,7 @@ const DialogTitle = ({ title }: { title: string | undefined }) => {
 
 interface Props<T> {
   visible: boolean;
-  options: T[];
+  options?: T[];
   renderOptionTitle?: (val: T) => string;
   title?: string;
   onClose?: (index?: boolean[]) => void;
@@ -28,7 +28,7 @@ interface Props<T> {
  */
 export default ({
   visible,
-  options,
+  options = [],
   renderOptionTitle = val => String(val),
   title = undefined,
   onClose = () => undefined,
@@ -48,8 +48,11 @@ export default ({
 
   const toggleIndex = (index: number) =>
     setCurrentIndex(currentIndex.map((val, i) => (i === index ? !val : val)));
+
   React.useEffect(
-    () => setCurrentIndex(selectedIndices ?? Array(options.length).fill(false)),
+    () =>
+      selectedIndices &&
+      setCurrentIndex(selectedIndices ?? Array(options.length).fill(false)),
     [options, selectedIndices],
   );
 

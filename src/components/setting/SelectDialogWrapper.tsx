@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { View } from 'react-native';
 
-import GenericSelectDialog from '../dialogs/GenericSelectDialog';
+import Dialog from '../dialogs/GenericSelectDialog';
 import { SelectSettingEntry } from './helpers/SettingEntry';
 import { styles } from '@components/style';
 
@@ -26,7 +26,7 @@ export default function SelectDialog<T>({ Children }: Props<T>) {
         setCurrentSelectOption={setCurrentSelectOption}
         setSelectVisible={setSelectVisible}
       />
-      <GenericSelectDialog
+      <Dialog
         visible={selectVisible}
         options={currentSelectOption?.options}
         renderOptionTitle={currentSelectOption?.renderOption}

@@ -7,6 +7,14 @@ export interface SelectSettingEntry<T> {
   title: string;
 }
 
+export interface CheckSettingEntry<T> {
+  options: T[];
+  renderOption: (option: T) => string;
+  onClose: (index?: boolean[]) => void;
+  onSubmit: (index: boolean[]) => void;
+  title: string;
+}
+
 export interface SettingEntry {
   settingName: string;
   settingCategory: string;
