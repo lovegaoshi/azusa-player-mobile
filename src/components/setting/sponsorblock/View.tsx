@@ -1,8 +1,8 @@
 import { View } from 'react-native';
 
 import useNoxSetting from '@stores/useApp';
-import { RenderSetting } from './helpers/RenderSetting';
-import CheckDialogWrapper, { CheckDialogChildren } from './CheckDialogWrapper';
+import { RenderSetting } from '../helpers/RenderSetting';
+import CheckDialogWrapper, { CheckDialogChildren } from '../CheckDialogWrapper';
 
 interface Props extends CheckDialogChildren<any> {}
 

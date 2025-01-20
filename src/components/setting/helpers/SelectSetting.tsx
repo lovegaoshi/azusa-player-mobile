@@ -5,16 +5,13 @@ import { useNoxSetting } from '@stores/useApp';
 import { SelectSettingEntry } from './SettingEntry';
 import SettingListItem from './SettingListItem';
 
-interface SelectProps<T> extends Props<T> {
-  defaultIndex?: number;
-}
-
-interface Props<T> {
+interface SelectProps<T> {
   setVisible: React.Dispatch<React.SetStateAction<boolean>>;
   setCurrentOption: React.Dispatch<
     React.SetStateAction<SelectSettingEntry<T> | undefined>
   >;
   options: T[];
+  defaultIndex?: number;
   callback?: () => void;
   renderOption?: (i: T) => string;
   onClose?: () => void;

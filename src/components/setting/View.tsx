@@ -15,7 +15,7 @@ import SplashSettings from './SplashSettings';
 import DownloadSettings from './DownloadSettings';
 import LoginSettings from '../login/View';
 import PremiumSettings from '../billing/View';
-import SponsorBlockSettings from './SponsorBlockSettings';
+import SponsorBlockSettings from './sponsorblock/View';
 import { isAndroid, isIOS } from '@utils/RNUtils';
 import FlexView from '@components/commonui/FlexViewNewArch';
 
