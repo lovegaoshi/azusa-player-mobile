@@ -18,6 +18,7 @@ jobs:
 
       - name: commit
         run: |
+          git config pull.rebase false
           git pull origin dev
           git config --global user.email 106490582+lovegaoshi@users.noreply.github.com
           git config --global user.name lovegaoshi
