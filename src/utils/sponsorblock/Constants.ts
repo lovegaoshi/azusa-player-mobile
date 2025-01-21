@@ -24,6 +24,19 @@ export enum Category {
   PoiHighlight = 'poi_highlight',
 }
 
+export const CategoryList = [
+  Category.Sponsor,
+  Category.Selfpromo,
+  Category.ExclusiveAccess,
+  Category.Interaction,
+  Category.Intro,
+  Category.Outro,
+  Category.Preview,
+  Category.Filler,
+  Category.MusicOfftopic,
+  Category.PoiHighlight,
+];
+
 // I only care about skip. only will implement skip.
 export enum ActionType {
   Skip = 'skip',

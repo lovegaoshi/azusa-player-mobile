@@ -4,26 +4,33 @@ import { useTranslation } from 'react-i18next';
 import GenericCheckDialog from '../../dialogs/GenericCheckDialog';
 import SettingListItem from '../helpers/SettingListItem';
 import useNoxSetting from '@stores/useApp';
-import { Category } from '@utils/sponsorblock/Constants';
+import { Category, CategoryList } from '@utils/sponsorblock/Constants';
 
 export default () => {
   const { t } = useTranslation();
   const sponsorBlockCat = useNoxSetting(
     state => state.playerSetting,
   ).sponsorBlockCat;
+  const setPlayerSetting = useNoxSetting(state => state.setPlayerSetting);
   const [visible, setVisible] = React.useState(false);
-  const [favLists, setFavLists] = React.useState<Category[]>([]);
+  const [favLists, setFavLists] = React.useState<boolean[]>([]);
 
   const showDialog = () => setVisible(true);
   const hideDialog = () => setVisible(false);
 
   const onClick = async () => {
-    setFavLists(sponsorBlockCat);
+    setFavLists(CategoryList.map(v => sponsorBlockCat.includes(v)));
     showDialog();
   };
 
   const onSubmit = async (indices: boolean[]) => {
-    console.log(indices);
+    setPlayerSetting({
+      sponsorBlockCat: indices.reduce(
+        (accumulator, currentValue, index) =>
+          currentValue ? [...accumulator, CategoryList[index]] : accumulator,
+        [] as Category[],
+      ),
+    });
     hideDialog();
   };
 
@@ -37,12 +44,11 @@ export default () => {
       />
       <GenericCheckDialog
         visible={visible}
-        title={t('Login.SyncBiliFavlist')}
-        options={favLists}
+        title={t('DeveloperSettings.sponsorBlockCategory')}
+        options={CategoryList}
         onSubmit={onSubmit}
         onClose={() => hideDialog()}
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        renderOptionTitle={(val: any) => val.title}
+        selectedIndices={favLists}
       />
     </>
   );

@@ -62,7 +62,8 @@ export default ({
         visible={visible}
         onDismiss={handleClose}
         style={{
-          minHeight: options.length > 5 ? '50%' : options.length * 55 + 110,
+          minHeight:
+            options.length > 5 ? '50%' : Math.max(options.length, 2) * 55 + 110,
         }}
       >
         <DialogTitle title={title} />
