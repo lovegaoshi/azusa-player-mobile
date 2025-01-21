@@ -18,7 +18,13 @@ jobs:
       - run: |
           git config --global user.email 106490582+lovegaoshi@users.noreply.github.com
           git config --global user.name lovegaoshi
-          git config pull.rebase true
-          git pull origin dev --allow-unrelated-histories
-          git commit -m "chore: dev sync" -a
-          git push
+
+      - name: Get Recent Commit Tag
+        id: get_commit_tag
+        run: |
+          COMMIT_TAG=$(git describe --tags --abbrev=0)
+          echo "COMMIT_TAG=${COMMIT_TAG}" >> $GITHUB_ENV
+
+      - name: Display Commit Tag
+        run: |
+          echo "Commit Tag: $COMMIT_TAG"
