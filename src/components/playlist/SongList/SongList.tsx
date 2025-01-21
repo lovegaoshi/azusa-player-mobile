@@ -16,7 +16,7 @@ import usePlaylist from '../usePlaylistRN';
 import SongListScrollbar from './SongListScrollbar';
 import keepAwake from '@utils/keepAwake';
 
-const PlaylistList = () => {
+export default () => {
   const currentPlayingId = useNoxSetting(state => state.currentPlayingId);
   const playerStyle = useNoxSetting(state => state.playerStyle);
   const currentPlaylist = useNoxSetting(state => state.currentPlaylist);
@@ -173,5 +173,3 @@ const stylesLocal = StyleSheet.create({
   songInfoBackgroundImg: { opacity: 0.5 },
   songInfoBackgroundBanner: { flex: 1 },
 });
-
-export default PlaylistList;
