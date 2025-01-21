@@ -15,17 +15,10 @@ jobs:
         uses: actions/checkout@v4
         with:
           ref: dev-newarch
-
-      - name: commit
-        run: |
+      - run: |
           git config --global user.email 106490582+lovegaoshi@users.noreply.github.com
           git config --global user.name lovegaoshi
           git config pull.rebase false
           git pull origin dev --allow-unrelated-histories
           git commit -m "chore: dev sync" -a
-
-      - name: Push changes to dev-newarch
-        uses: ad-m/github-push-action@master
-        with:
-          tags: true
-          branch: dev-newarch
+          git push
