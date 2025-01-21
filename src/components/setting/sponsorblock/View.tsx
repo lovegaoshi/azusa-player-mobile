@@ -3,17 +3,21 @@ import { View } from 'react-native';
 import useNoxSetting from '@stores/useApp';
 import { RenderSetting } from '../helpers/RenderSetting';
 import CheckDialogWrapper, { CheckDialogChildren } from '../CheckDialogWrapper';
+import SBCategoryButton from './SBCategoryButton';
 
 interface Props extends CheckDialogChildren<any> {}
 
 const Home = ({ setCurrentCheckOption, setCheckVisible }: Props) => {
   return (
-    <RenderSetting
-      item={{
-        settingName: 'sponsorBlockEnabled',
-        settingCategory: 'DeveloperSettings',
-      }}
-    />
+    <View>
+      <RenderSetting
+        item={{
+          settingName: 'sponsorBlockEnabled',
+          settingCategory: 'DeveloperSettings',
+        }}
+      />
+      <SBCategoryButton />
+    </View>
   );
 };
 

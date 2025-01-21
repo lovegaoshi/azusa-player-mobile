@@ -92,8 +92,8 @@ export default () => {
         logger.warn(
           `[crossfade] true duration is 0?! reset to ${event.duration} instead. ${bRepeatDuration}, ${abRepeat}.`,
         );
-        setBRepeatDuration(event.duration * abRepeat[1]);
-        trueDuration = event.duration;
+        trueDuration = event.duration * abRepeat[1];
+        setBRepeatDuration(trueDuration);
       }
       if (
         // crossfade req: position is at crossfade interval,
