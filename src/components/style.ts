@@ -60,16 +60,16 @@ export const createStyle = (
       alignItems: 'center',
       height: 148,
     },
-    gifs: (customStyle.gifs || []) as any,
-    bkgrdImg: randomChoice(customStyle.backgroundImages || []) as any,
+    gifs: (customStyle.gifs ?? []) as any,
+    bkgrdImg: randomChoice(customStyle.backgroundImages ?? []) as any,
     bkgrdImgLandscape: randomChoice(
-      customStyle.backgroundImagesLandscape || [],
+      customStyle.backgroundImagesLandscape ?? [],
     ) as any,
     loadingIcon: customStyle.loadingIcon as any,
     progressThumbImage: customStyle.progressThumbImage as any,
-    progressThumbImageLeftDrag: (customStyle.progressThumbImageLeftDrag ||
+    progressThumbImageLeftDrag: (customStyle.progressThumbImageLeftDrag ??
       customStyle.progressThumbImage) as any,
-    progressThumbImageRightDrag: (customStyle.progressThumbImageRightDrag ||
+    progressThumbImageRightDrag: (customStyle.progressThumbImageRightDrag ??
       customStyle.progressThumbImage) as any,
     biliGarbCard: customStyle.biliGarbCard as any,
     thumbupSVGA: customStyle.thumbupSVGA as any,
