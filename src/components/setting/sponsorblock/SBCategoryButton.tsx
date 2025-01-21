@@ -38,17 +38,18 @@ export default () => {
     <>
       <SettingListItem
         icon={'google-ads'}
-        settingName={'sponsorBlockCategory'}
+        settingName={'SponsorBlockCategory'}
         onPress={onClick}
-        settingCategory={'DeveloperSettings'}
+        settingCategory={'SponsorBlock'}
       />
       <GenericCheckDialog
         visible={visible}
-        title={t('DeveloperSettings.sponsorBlockCategory')}
+        title={t('SponsorBlock.SponsorBlockCategoryTitle')}
         options={CategoryList}
         onSubmit={onSubmit}
         onClose={() => hideDialog()}
         selectedIndices={favLists}
+        renderOptionTitle={v => t(`SponsorBlock.${v}`)}
       />
     </>
   );

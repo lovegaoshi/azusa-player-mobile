@@ -89,7 +89,7 @@ const HomeSettings = ({ navigation }: Props) => {
           icon={NoxView.SPONSORBLOCK}
           settingName="SponsorBlockOptions"
           onPress={() => navigation.navigate(NoxView.SPONSORBLOCK)}
-          settingCategory="Settings"
+          settingCategory="SponsorBlock"
         />
         {isAndroid && isIOS && (
           <SettingListItem
