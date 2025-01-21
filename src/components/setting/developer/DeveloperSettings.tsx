@@ -249,8 +249,8 @@ export const Home = ({
           />
         )}
         <SelectSetting
-          setSelectVisible={setSelectVisible}
-          setCurrentSelectOption={setCurrentSelectOption}
+          setVisible={setSelectVisible}
+          setCurrentOption={setCurrentSelectOption}
           options={ArtworkResOptions}
           renderOption={(option: number) => `${option}p`}
           settingKey="artworkRes"

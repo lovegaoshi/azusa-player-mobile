@@ -21,6 +21,7 @@ import { getR128Gain } from '@utils/ffmpeg/r128Store';
 import { isAndroid } from '@utils/RNUtils';
 import { useTrackStore } from '@hooks/useActiveTrack';
 import { execWhenTrue } from '@utils/Utils';
+import useSponsorBlock from './useSponsorBlock';
 
 const { getState } = noxPlayingList;
 const { fadeIntervalMs, fadeIntervalSec } = appStore.getState();
@@ -37,10 +38,9 @@ export default () => {
   const updateTrack = useTrackStore(state => state.updateTrack);
   const crossfadeId = useNoxSetting(state => state.crossfadeId);
   const setCrossfadeId = useNoxSetting(state => state.setCrossfadeId);
-  const crossfadeInterval = useNoxSetting(
-    state => state.playerSetting,
-  ).crossfade;
+  const { crossfade } = useNoxSetting(state => state.playerSetting);
   const loadingTracker = React.useRef(false);
+  const { initSponsorBlock, checkSponsorBlock } = useSponsorBlock();
 
   useTrackPlayerEvents([Event.MetadataCommonReceived], async event => {
     if (
@@ -71,9 +71,13 @@ export default () => {
     const { playmode } = getState();
     saveLastPlayDuration(event.position);
     const currentSongId = track?.song?.id ?? '';
+    const sbSkip = checkSponsorBlock(event.position);
+    if (sbSkip) {
+      return TrackPlayer.seekTo(sbSkip);
+    }
     // prepare for cross fading if enabled, playback is > 50% done and crossfade preparation isnt done
     if (
-      crossfadeInterval > 0 &&
+      crossfade > 0 &&
       event.position > event.duration * 0.5 &&
       crossfadeId !== currentSongId
     ) {
@@ -92,25 +96,25 @@ export default () => {
         logger.warn(
           `[crossfade] true duration is 0?! reset to ${event.duration} instead. ${bRepeatDuration}, ${abRepeat}.`,
         );
-        setBRepeatDuration(event.duration * abRepeat[1]);
-        trueDuration = event.duration;
+        trueDuration = event.duration * abRepeat[1];
+        setBRepeatDuration(trueDuration);
       }
       if (
         // crossfade req: position is at crossfade interval,
         // crossfade song prepared, not in crossfading
         isAndroid &&
-        crossfadeInterval > 0 &&
-        event.position > trueDuration - crossfadeInterval &&
+        crossfade > 0 &&
+        event.position > trueDuration - crossfade &&
         crossfadeId === currentSongId &&
         crossfadingId !== currentSongId
       ) {
         logger.debug(
-          `[crossfade] crossfading: ${event.position}, ${trueDuration}, ${crossfadeInterval}`,
+          `[crossfade] crossfading: ${event.position}, ${trueDuration}, ${crossfade}`,
         );
         setCrossfadingId(currentSongId);
         setCrossfaded(true);
         return TrackPlayer.crossFade(
-          crossfadeInterval * 1000,
+          crossfade * 1000,
           20,
           getR128Gain(track?.song) ?? 1,
         );
@@ -173,6 +177,7 @@ export default () => {
 
   useTrackPlayerEvents([Event.PlaybackActiveTrackChanged], async event => {
     const song = event.track?.song as NoxMedia.Song;
+    initSponsorBlock(song);
     const newABRepeat = getABRepeatRaw(song.id);
     logger.debug(`[SongReady] logging ABRepeat as ${newABRepeat}`);
     setABRepeat(newABRepeat);

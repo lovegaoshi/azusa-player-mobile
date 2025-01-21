@@ -1,5 +1,25 @@
 {
   "_comment": "src/localization/en/translation.json",
+  "SponsorBlock": {
+    "SponsorBlockOptionsName": "SponsorBlock",
+    "SponsorBlockOptionsDesc": "Enable SponsorBlock",
+    "SponsorBlockEnabledName": "SponsorBlock",
+    "SponsorBlockEnabledDesc": "Enable SponsorBlock",
+    "SponsorBlockCategoryName": "SponsorBlock Category",
+    "SponsorBlockCategoryDesc": "Select SponsorBlock Category",
+    "SponsorBlockCategoryTitle": "Enable SB for...",
+    "sponsor": "Sponsor",
+    "selfpromo": "Selfpromo",
+    "exclusive_access": "Exclusive Access",
+    "interaction": "Interaction",
+    "intro": "Intro",
+    "outro": "Outro",
+    "preview": "Preview",
+    "filter": "Filter",
+    "music_offtopic": "Music Offtopic",
+    "poi_highlight": "POI Highlight",
+    "SkipMsg": "[SponsorBlock] Skipping {{category}}..."
+  },
   "YTMusic": {
     "ChartVideo": "MV",
     "ChartTrending": "Trending",

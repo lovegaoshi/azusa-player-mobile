@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { View } from 'react-native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import PluginSettings from './plugins/View';
@@ -13,13 +14,16 @@ const Stack = createNativeStackNavigator();
 const HomeWrapper = ({ navigation }: NoxComponent.StackNavigationProps) => {
   const playerStyle = useNoxSetting(state => state.playerStyle);
   return (
-    <SelectDialogWrapper
-      viewStyle={{
+    <View
+      style={{
         backgroundColor: playerStyle.customColors.maskedBackgroundColor,
         flex: 1,
       }}
-      Children={p => Home({ ...p, navigation })}
-    />
+    >
+      <SelectDialogWrapper
+        Children={p => <Home {...p} navigation={navigation} />}
+      />
+    </View>
   );
 };
 

@@ -157,7 +157,9 @@ export const performSkipToNext = (
   }
   const callback = () =>
     preparePromise().then(async () => {
-      await TrackPlayer.skipToNext();
+      // await TrackPlayer.skipToNext();
+      const queueLen = (await TrackPlayer.getQueue()).length;
+      await TrackPlayer.skip(queueLen - 1);
       TrackPlayer.play();
     });
   mPerformFade(callback);

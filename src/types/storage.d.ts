@@ -4,6 +4,7 @@ import { ColorSchemeName } from 'react-native';
 import { SyncOptions } from '../enums/Sync';
 import { NoxRepeatMode } from '../enums/RepeatMode';
 import { SearchOptions } from '../enums/Storage';
+import { Category } from '@utils/sponsorblock/Constants';
 
 declare global {
   namespace NoxStorage {
@@ -62,6 +63,9 @@ declare global {
       downloadToMp3: boolean;
       downloadID3V2: boolean;
       downloadEmbedAlbumCover: boolean;
+
+      sponsorBlockCat: Category[];
+      sponsorBlockEnabled: boolean;
 
       [key: string]: any;
     }
