@@ -1,0 +1,24 @@
+name: APM Android dev Build
+on:
+  push:
+    branches:
+      - 'dev'
+  workflow_dispatch:
+jobs:
+  sync:
+    name: sync
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: commit
+        run: git pull origin dev
+
+      - name: Push changes to dev-newarch
+        uses: ad-m/github-push-action@master
+        with:
+          tags: true
+          branch: dev-newarch
