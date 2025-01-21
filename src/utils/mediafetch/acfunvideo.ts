@@ -75,7 +75,7 @@ const export2URL = (song: NoxMedia.Song) =>
   `https://www.youtube.com/watch?v=${song.bvid}`;
 
 export default {
-  regexSearchMatch: /acfun\.cn\/v\/(ac[0-9]+)/,
+  regexSearchMatch: /acfun\.cn\/v\/(ac\d+)/,
   regexFetch,
   regexResolveURLMatch: /^acfun-/,
   resolveURL,

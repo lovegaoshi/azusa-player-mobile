@@ -71,13 +71,15 @@ export default () => {
   };
   const onArtworkPress = () => {
     if (artworkOpacity.value === 1) {
-      return (artworkOpacity.value = withTiming(0, { duration: 100 }, () => {
+      artworkOpacity.value = withTiming(0, { duration: 100 }, () => {
         runOnJS(setLrcVisible)(true);
-      }));
+      });
+      return;
     }
     if (artworkOpacity.value === 0) {
       setLrcVisible(false);
-      return (artworkOpacity.value = withTiming(1, { duration: 100 }));
+      artworkOpacity.value = withTiming(1, { duration: 100 });
+      return;
     }
   };
 
@@ -89,9 +91,10 @@ export default () => {
     if (translationY < -height * SnapToRatio) {
       return expand();
     }
-    return (miniplayerHeight.value = withTiming(initHeight.value, {
+    miniplayerHeight.value = withTiming(initHeight.value, {
       duration: 250,
-    }));
+    });
+    return;
   };
 
   const scrollDragGesture = React.useMemo(

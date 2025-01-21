@@ -12,7 +12,7 @@ export default () => {
   const { sponsorBlockEnabled, sponsorBlockCat } = useNoxSetting(
     state => state.playerSetting,
   );
-  const [sponsorblock, setSponsorBlock] = useState<SponsorBlockBili[]>([]);
+  const [sponsorBlock, setSponsorBlock] = useState<SponsorBlockBili[]>([]);
 
   const initSponsorBlock = (song: NoxMedia.Song) => {
     if (sponsorBlockEnabled) {
@@ -21,7 +21,7 @@ export default () => {
   };
 
   const checkSponsorBlock = (position: number) => {
-    for (const sb of sponsorblock) {
+    for (const sb of sponsorBlock) {
       if (
         sponsorBlockCat.includes(sb.category) &&
         sb.actionType === ActionType.Skip &&
