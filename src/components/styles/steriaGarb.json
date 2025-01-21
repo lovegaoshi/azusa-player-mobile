@@ -4038,5 +4038,111 @@
       "onSurfaceDisabled": "rgba(230, 226, 217, 0.38)",
       "backdrop": "rgba(49, 49, 37, 0.4)"
     }
+  },
+  {
+    "metaData": {
+      "themeName": "笙歌OvO收藏集",
+      "themeDesc": "【笙歌OvO收藏集】是哔哩哔哩携手psplive旗下虚拟UP主\t帅比笙歌超可爱OvO定制打造的个人数字集卡，其中的每张数字卡片都将拥有独特编号，期待大家一起来解锁她的绝美画面！",
+      "themeAuthor": "NoxAutoGen",
+      "themeIcon": "https://i0.hdslb.com/bfs/garb/e5203d23405f88f19993899929c7263790d58125.jpg",
+      "darkTheme": true
+    },
+    "gifs": [
+      "https://i0.hdslb.com/bfs/garb/4cd424805314cb6a24fd1aa67e870e2eb9502764.png",
+      "https://i0.hdslb.com/bfs/garb/7620269f0f55e78076514502e826c648bb227e43.png",
+      "https://i0.hdslb.com/bfs/garb/4ce1f5eec5ac9469ee9df59d8f5849620df831e7.png",
+      "https://i0.hdslb.com/bfs/garb/b804b80fbb38379e730dd1b6aeb99862812f9d2c.png",
+      "https://i0.hdslb.com/bfs/garb/6f3181d6e5644e733f876179c69cc267f25edded.png",
+      "https://i0.hdslb.com/bfs/garb/d9a96d8e74a5c46b0822be7aa77514fa7de1b676.png",
+      "https://i0.hdslb.com/bfs/garb/0859d2786f1697699bf8296ae14b8a089e7ccaed.png",
+      "https://i0.hdslb.com/bfs/garb/a2a57f74673481d4cb36dab63cb6171d95ea1814.png",
+      "https://i0.hdslb.com/bfs/garb/9cfce4b3a7f9d0e64e3acf1b9fcb3ca0318a106d.png",
+      "https://i0.hdslb.com/bfs/garb/28313d72a1070432d30beb8e40ce0598502a3ad3.png",
+      "https://i0.hdslb.com/bfs/garb/29d2995b7a63bffeae941e51edab95a39719efb0.png",
+      "https://i0.hdslb.com/bfs/garb/f2216df0d7f6280a5173c959973cb797167c4531.png",
+      "https://i0.hdslb.com/bfs/garb/ffd287118b0824df469c4628e292e0279818f92f.png",
+      "https://i0.hdslb.com/bfs/garb/229e58845566b35b44ffad92883765b20a2c4541.png",
+      "https://i0.hdslb.com/bfs/garb/045de2053d6fd46af440dd9e82d679dc03b6df2b.png",
+      "https://i0.hdslb.com/bfs/garb/e553c75099cce2c2f85907075a46b18d5f8f0968.png",
+      "https://i0.hdslb.com/bfs/garb/a107bbfdee9fda80540465f505741808cf0d53e0.png",
+      "https://i0.hdslb.com/bfs/garb/0cf3c4db0b9726de62924f7b928e6f7814c9c4ad.png",
+      "https://i0.hdslb.com/bfs/garb/6a9c8499b406cd5c2c9de5cf9bee5150056dc8d7.png",
+      "https://i0.hdslb.com/bfs/garb/e3bdee21a8fc15dd6cc8a98679419f849f35df49.png"
+    ],
+    "backgroundImages": [
+      {
+        "type": "biliNFTVideoNew",
+        "identifier": "[\"105577\",\"105618\",\"彩阳清梦\"]"
+      },
+      {
+        "type": "biliNFTVideoNew",
+        "identifier": "[\"105577\",\"105618\",\"碧海金娇\"]"
+      },
+      {
+        "type": "biliNFTVideoNew",
+        "identifier": "[\"105577\",\"105618\",\"脚滑的塔\"]"
+      },
+      "https://i0.hdslb.com/bfs/garb/open/17656bc71b37675854696e2154ab193e5f124f04.png",
+      "https://i0.hdslb.com/bfs/garb/open/0f5b7f460cf11af8cea10c454b5f96675934e58e.png",
+      "https://i0.hdslb.com/bfs/garb/open/ee7cbfb1a0c25627dde89bcd53698129e13a80d2.png",
+      {
+        "type": "biliNFTVideoNew",
+        "identifier": "[\"105577\",\"105618\",\"小塔姑娘\"]"
+      },
+      "https://i0.hdslb.com/bfs/garb/open/bff37fb5e1a0387ffeef1e26b5ed165fd4e56119.png"
+    ],
+    "customColors": {
+      "maskedBackgroundColor": "rgba(0, 0, 0, 0.60)",
+      "playlistDrawerBackgroundColor": "green",
+      "playlistDrawerBackgroundColorTransparent": "rgba(0, 255, 0, 0.35)",
+      "progressThumbTintColor": "rgb(235, 235, 0)",
+      "progressMinimumTrackTintColor": "rgb(235, 235, 0)",
+      "progressMaximumTrackTintColor": "#FFFFFF",
+      "btnBackgroundColor": "rgb(72, 71, 58)",
+      "textInputSelectionColor": "green"
+    },
+    "colors": {
+      "primary": "#fcf75e",
+      "onPrimary": "rgb(50, 50, 0)",
+      "primaryContainer": "rgb(73, 73, 0)",
+      "onPrimaryContainer": "rgb(234, 234, 0)",
+      "secondary": "rgb(202, 200, 165)",
+      "onSecondary": "rgb(50, 50, 24)",
+      "secondaryContainer": "rgb(73, 72, 45)",
+      "onSecondaryContainer": "rgb(231, 228, 191)",
+      "tertiary": "rgb(164, 208, 189)",
+      "onTertiary": "rgb(11, 55, 42)",
+      "tertiaryContainer": "rgb(37, 78, 64)",
+      "onTertiaryContainer": "rgb(191, 236, 216)",
+      "error": "rgb(255, 180, 171)",
+      "onError": "rgb(105, 0, 5)",
+      "errorContainer": "rgb(147, 0, 10)",
+      "onErrorContainer": "rgb(255, 180, 171)",
+      "background": "rgba(0,0,0, 0.4)",
+      "onBackground": "rgb(230, 226, 217)",
+      "surface": "rgb(28, 28, 23)",
+      "onSurface": "rgba(235, 235, 0, 1)",
+      "text": "#fcf75e",
+      "surfaceVariant": "rgb(10, 10, 10)",
+      "onSurfaceVariant": "rgb(225, 225, 0)",
+      "outline": "rgb(147, 145, 130)",
+      "outlineVariant": "rgb(72, 71, 58)",
+      "shadow": "rgb(0, 0, 0)",
+      "scrim": "rgb(0, 0, 0)",
+      "inverseSurface": "rgb(230, 226, 217)",
+      "inverseOnSurface": "rgb(49, 49, 43)",
+      "inversePrimary": "rgb(98, 98, 0)",
+      "elevation": {
+        "level0": "transparent",
+        "level1": "rgb(53, 56, 57)",
+        "level2": "rgb(10, 10, 10)",
+        "level3": "rgb(10, 10, 10)",
+        "level4": "rgb(49, 49, 20)",
+        "level5": "rgb(53, 53, 20)"
+      },
+      "surfaceDisabled": "rgba(230, 226, 217, 0.12)",
+      "onSurfaceDisabled": "rgba(230, 226, 217, 0.38)",
+      "backdrop": "rgba(49, 49, 37, 0.4)"
+    }
   }
 ]
