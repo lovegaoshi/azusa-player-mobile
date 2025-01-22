@@ -222,7 +222,7 @@ jobs:
       - name: gradle build
         run: |
           cd android && chmod +x gradlew && ./gradlew assembleRelease
-          mv android/app/build/outputs/apk/release/app-arm64-v8a-release.apk android/app/build/outputs/apk/release/app-newarch-arm64-v8a-release.apk
+          mv app/build/outputs/apk/release/app-arm64-v8a-release.apk app/build/outputs/apk/release/app-newarch-arm64-v8a-release.apk
 
       - name: Release
         uses: softprops/action-gh-release@v2
