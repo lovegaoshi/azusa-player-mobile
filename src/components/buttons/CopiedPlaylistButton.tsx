@@ -1,38 +1,11 @@
 import React, { useState } from 'react';
-import { IconButton, Menu } from 'react-native-paper';
+import { Menu } from 'react-native-paper';
 import { useTranslation } from 'react-i18next';
-import { StyleSheet } from 'react-native';
 
 import Dialog from '../dialogs/CopiedPlaylistDialog';
 import { dummyPlaylistList } from '@objects/Playlist';
 
 const ICON = 'playlist-plus';
-
-export const CopiedPlaylistButton = ({
-  fromList,
-}: {
-  fromList: NoxMedia.Playlist;
-}) => {
-  const [dialogOpen, setDialogOpen] = useState(false);
-
-  return (
-    <React.Fragment>
-      <IconButton
-        icon={ICON}
-        onPress={() => setDialogOpen(true)}
-        mode="contained"
-        size={30}
-        style={styles.btnStyle}
-      />
-      <Dialog
-        visible={dialogOpen}
-        fromList={fromList}
-        onClose={() => setDialogOpen(false)}
-        onSubmit={() => setDialogOpen(false)}
-      />
-    </React.Fragment>
-  );
-};
 
 interface MenuProps {
   getFromListOnClick: () => NoxMedia.Playlist;
@@ -78,7 +51,3 @@ export const CopiedPlaylistMenuItem = ({
     </React.Fragment>
   );
 };
-
-const styles = StyleSheet.create({
-  btnStyle: { top: 10 },
-});
