@@ -172,7 +172,7 @@ const Settings = ({ headerBackVisible = true }: Props) => {
         <Stack.Screen
           name={NoxView.SPONSORBLOCK}
           component={SponsorBlockSettings}
-          options={{ title: t('Settings.SponsorBlockOptionsName') }}
+          options={{ title: t('SponsorBlock.SponsorBlockOptionsName') }}
         />
         {isAndroid && (
           <Stack.Screen
