@@ -92,5 +92,6 @@ const regexFetch = async ({
 
 export default {
   regexSearchMatch: /space\.bilibili\.com\/(\d+)\/fans\/follow/,
+  regexSearchMatch2: /space\.bilibili\.com\/(\d+)\/relation\/follow/,
   regexFetch,
 };

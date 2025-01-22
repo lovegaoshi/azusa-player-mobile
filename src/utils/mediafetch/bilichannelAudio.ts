@@ -69,7 +69,7 @@ const regexFetch = async ({
 const resolveURL = () => undefined;
 
 export default {
-  regexSearchMatch: /space.bilibili\.com\/(\d+)\/audio/,
+  regexSearchMatch: /space.bilibili\.com\/(\d+)(\/upload)?\/audio/,
   regexFetch,
   regexResolveURLMatch: /^null-/,
   resolveURL,
