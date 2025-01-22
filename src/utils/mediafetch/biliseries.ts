@@ -61,6 +61,8 @@ const resolveURL = () => undefined;
 export default {
   regexSearchMatch:
     /space.bilibili\.com\/(\d+)\/channel\/seriesdetail\?sid=(\d+)/,
+  //https://space.bilibili.com/3493283607088082/lists/4107910?type=series
+  regexSearchMatch2: /space.bilibili\.com\/(\d+)\/lists\/(\d+)\?type=series/,
   regexFetch,
   regexResolveURLMatch: /^null-/,
   resolveURL,
