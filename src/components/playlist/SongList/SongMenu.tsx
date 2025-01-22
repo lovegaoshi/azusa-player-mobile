@@ -175,7 +175,6 @@ export default ({ usePlaylist, prepareForLayoutAnimationRender }: Props) => {
               });
             }
           }}
-          disabled={checking}
           title={t('SongOperations.songDownloadTitle')}
         />
       )}
