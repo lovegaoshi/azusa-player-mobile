@@ -85,7 +85,7 @@ export default ({
         <Dialog.Title style={styles.dialogTitle}>
           {t('CopiedPlaylistDialog.title', {
             title:
-              fromList.title.length > 20
+              fromList.title?.length > 20
                 ? fromList.title.substring(0, 20) + '...'
                 : fromList.title,
           })}
