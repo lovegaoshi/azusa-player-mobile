@@ -207,7 +207,12 @@ const reExtractions: ReExtraction<NoxNetwork.NoxRegexFetch>[] = [
     match: biliSeriesFetch.regexSearchMatch,
     fetch: biliSeriesFetch.regexFetch,
   },
+  {
+    match: biliSeriesFetch.regexSearchMatch2,
+    fetch: biliSeriesFetch.regexFetch,
+  },
   { match: biliColleFetch.regexSearchMatch, fetch: biliColleFetch.regexFetch },
+  { match: biliColleFetch.regexSearchMatch2, fetch: biliColleFetch.regexFetch },
   {
     match: biliChannelFetch.regexSearchMatch,
     fetch: biliChannelFetch.regexFetch,
