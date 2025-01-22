@@ -10,7 +10,7 @@ import useSongOperations from '@hooks/useSongOperations';
 import { SearchRegex } from '@enums/Playlist';
 import { Source } from '@enums/MediaFetch';
 import useBiliSearch from '@hooks/useBiliSearch';
-import { copyCacheToDir } from '@utils/Download';
+import { copyCacheToDir } from '@utils/download/download';
 import { isAndroid10 } from '@utils/RNUtils';
 import useSnack from '@stores/useSnack';
 
@@ -175,7 +175,6 @@ export default ({ usePlaylist, prepareForLayoutAnimationRender }: Props) => {
               });
             }
           }}
-          disabled={checking}
           title={t('SongOperations.songDownloadTitle')}
         />
       )}

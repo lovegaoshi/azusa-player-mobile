@@ -2740,6 +2740,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@notifee/react-native@npm:^9.1.8":
+  version: 9.1.8
+  resolution: "@notifee/react-native@npm:9.1.8"
+  peerDependencies:
+    react-native: "*"
+  checksum: 10c0/a41adf0975e826fafa166d79854b12d6b405181a0e1adc2a8dd251d9a480482148a8104fedc882e1aee7a48573ff46ac8c999ebf83d42b410f05de387c040ec1
+  languageName: node
+  linkType: hard
+
 "@npmcli/agent@npm:^2.0.0":
   version: 2.2.2
   resolution: "@npmcli/agent@npm:2.2.2"
@@ -5560,6 +5569,7 @@ __metadata:
     "@babel/preset-typescript": "npm:^7.26.0"
     "@babel/runtime": "npm:^7.26.0"
     "@material/material-color-utilities": "npm:^0.3.0"
+    "@notifee/react-native": "npm:^9.1.8"
     "@react-native-async-storage/async-storage": "npm:^2.1.0"
     "@react-native-community/cli": "npm:16.0.2"
     "@react-native-community/cli-platform-android": "npm:15.1.3"
