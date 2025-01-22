@@ -12,6 +12,7 @@ import { logger } from './Logger';
 import { customReqHeader } from './BiliFetch';
 import { Source } from '@enums/MediaFetch';
 import { validateFile, isIOS } from './RNUtils';
+import { displayDLProgress } from './download/notification';
 
 interface OptionsProps {
   max?: number;
@@ -20,6 +21,13 @@ interface OptionsProps {
 
 interface NoxCaches {
   noxMediaCache: NoxMediaCache;
+}
+
+interface SaveCacheMedia {
+  song: NoxMedia.Song;
+  resolvedURL: NoxNetwork.ResolvedNoxMediaURL;
+  extension?: string;
+  notify?: boolean;
 }
 
 export const noxCacheKey = (song: NoxMedia.Song) => `${song.bvid}|${song.id}`;
@@ -52,11 +60,12 @@ class NoxMediaCache {
     saveCachedMediaMapping(this.cache.dump());
   };
 
-  saveCacheMedia = async (
-    song: NoxMedia.Song,
-    resolvedURL: NoxNetwork.ResolvedNoxMediaURL,
-    extension?: string,
-  ) => {
+  saveCacheMedia = async ({
+    song,
+    resolvedURL,
+    extension,
+    notify = false,
+  }: SaveCacheMedia) => {
     const parseR128Gain = async () => {
       if (useNoxSetting.getState().playerSetting.r128gain) {
         logger.debug('[FFMPEG] now starting FFMPEG r128gain...');
@@ -94,6 +103,9 @@ class NoxMediaCache {
       .progress((received, total) => {
         const progress = Math.floor((Number(received) * 100) / Number(total));
         addDownloadProgress(song, progress);
+        if (notify) {
+          displayDLProgress(song, progress);
+        }
         logger.debug(`${song.parsedName} caching progress: ${progress}%`);
       });
     let finalPath = res.path();

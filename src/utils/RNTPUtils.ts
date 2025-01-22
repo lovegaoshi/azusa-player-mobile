@@ -133,6 +133,7 @@ export const cycleThroughPlaymode = () => {
 interface ResolveAndCache {
   song: NoxMedia.Song;
   dry?: boolean;
+  notify?: boolean;
   resolver?: (
     v: NoxUtils.SongProcessor,
   ) => Promise<NoxNetwork.ResolvedNoxMediaURL>;
@@ -142,6 +143,7 @@ const _resolveAndCache = async ({
   song,
   dry = false,
   resolver = resolveUrl,
+  notify = false,
 }: ResolveAndCache) => {
   const resolvedUrl = await resolver({ song, iOS: isIOS });
   logger.debug(`[resolver] resolved ${song.bvid} to ${resolvedUrl.url}`);
@@ -152,7 +154,11 @@ const _resolveAndCache = async ({
     downloadPromiseMap[song.id] ||
     addDownloadPromise(
       song,
-      NoxCache.noxMediaCache?.saveCacheMedia(song, resolvedUrl),
+      NoxCache.noxMediaCache?.saveCacheMedia({
+        song,
+        resolvedURL: resolvedUrl,
+        notify,
+      }),
     );
   previousDownloadProgress.then(() => {
     logger.debug(

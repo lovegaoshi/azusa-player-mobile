@@ -136,6 +136,10 @@
     "searchListName": "搜索歌单"
   },
   "Download": {
+    "downloadingNotifTitle": "APM正在下载...",
+    "downloadingNotif": "正在下载<{{song.parsedName}}>... ({{progress}}%)",
+    "downloadingNotifCompleteTitle": "下载完成！",
+    "downloadingNotifComplete": "{{song.parsedName}} 下载完成！",
     "downloading": "正在缓存 {{song.parsedName}}...",
     "downloaded": "{{song.parsedName}} 缓存到了音乐/APM文件夹！",
     "downloadFailed": "{{song.parsedName}} 缓存失败"

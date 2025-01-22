@@ -29,6 +29,7 @@
   },
   "dependencies": {
     "@material/material-color-utilities": "^0.3.0",
+    "@notifee/react-native": "^9.1.8",
     "@react-native-async-storage/async-storage": "^2.1.0",
     "@react-native-community/cli": "16.0.2",
     "@react-native-community/cli-platform-android": "15.1.3",

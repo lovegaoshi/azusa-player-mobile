@@ -136,6 +136,10 @@
     "searchListName": "Search"
   },
   "Download": {
+    "downloadingNotifTitle": "Downloading...",
+    "downloadingNotif": "now downloading {{song.parsedName}}... ({{progress}}%)",
+    "downloadingNotifCompleteTitle": "Downloading Complete",
+    "downloadingNotifComplete": "{{song.parsedName}} is downloaded!",
     "downloading": "now downloading {{song.parsedName}}...",
     "downloaded": "{{song.parsedName}} is downloaded to Music/APM",
     "downloadFailed": "{{song.parsedName}} download failed"
