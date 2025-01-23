@@ -4445,12 +4445,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:^22.10.9":
-  version: 22.10.9
-  resolution: "@types/node@npm:22.10.9"
+"@types/node@npm:^22.10.10":
+  version: 22.10.10
+  resolution: "@types/node@npm:22.10.10"
   dependencies:
     undici-types: "npm:~6.20.0"
-  checksum: 10c0/ed2d7b2cf20ce520e04711eab48e9cd7d6a835d2859fbdc5d9a8c5e00a97c1f872a409f789783c473062b29beaf1cddf4b1c7ad03ae3fe433b072b7cf9fff741
+  checksum: 10c0/3425772d4513cd5dbdd87c00acda088113c03a97445f84f6a89744c60a66990b56c9d3a7213d09d57b6b944ae8ff45f985565e0c1846726112588e33a22dd12b
   languageName: node
   linkType: hard
 
@@ -5598,7 +5598,7 @@ __metadata:
     "@types/jest": "npm:^29.5.14"
     "@types/lodash": "npm:^4.17.14"
     "@types/md5": "npm:^2.3.5"
-    "@types/node": "npm:^22.10.9"
+    "@types/node": "npm:^22.10.10"
     "@types/qs": "npm:^6.9.18"
     "@types/react": "npm:~18.3.18"
     "@types/react-native": "npm:^0.73.0"
@@ -5647,7 +5647,7 @@ __metadata:
     expo-keep-awake: "npm:~14.0.2"
     expo-secure-store: "npm:~14.0.1"
     fflate: "npm:^0.8.2"
-    ffmpeg-kit-react-native: "https://gitpkg.vercel.app/lovegaoshi/ffmpeg-kit/react-native?main"
+    ffmpeg-kit-react-native: "https://gitpkg.vercel.app/lovegaoshi/ffmpeg-kit/react-native?331c094acae2ce0492795dd5904d03617b9baef9"
     gts: "npm:^6.0.2"
     he: "npm:^1.2.0"
     i18next: "npm:23.16.8"
@@ -9380,13 +9380,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ffmpeg-kit-react-native@https://gitpkg.vercel.app/lovegaoshi/ffmpeg-kit/react-native?main":
+"ffmpeg-kit-react-native@https://gitpkg.vercel.app/lovegaoshi/ffmpeg-kit/react-native?331c094acae2ce0492795dd5904d03617b9baef9":
   version: 6.0.2
-  resolution: "ffmpeg-kit-react-native@https://gitpkg.vercel.app/lovegaoshi/ffmpeg-kit/react-native?main"
+  resolution: "ffmpeg-kit-react-native@https://gitpkg.vercel.app/lovegaoshi/ffmpeg-kit/react-native?331c094acae2ce0492795dd5904d03617b9baef9"
   peerDependencies:
     react: "*"
     react-native: "*"
-  checksum: 10c0/8413c394e3768ce04744ae9881aaa5d0d82d14f1c2c5f84390d0250fbe65191de42fadcd25099aaec01a36bd03966ff8c5de1d5fc17f957ff8afdbb2bac8dcd9
+  checksum: 10c0/831eaa299257ed6a62c93bcbc6a51ccfa4a93aeb3ab0392c8738668873c25ce195b39a606ce6fd42f1824a298a8c9ad800e5b462f78e4a97571fe20596f8ab34
   languageName: node
   linkType: hard
 

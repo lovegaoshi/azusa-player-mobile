@@ -29,13 +29,10 @@ const saveR128Gain = (val: NoxStorage.R128Dict) => {
   saveR128GainMapping(newR128gain);
 };
 
-export const getR128Gain = (song: NoxMedia.Song) => {
-  const { r128gain } = appStore.getState();
-  return r128gain[song.id];
-};
+export const getR128Gain = (song: NoxMedia.Song) =>
+  appStore.getState().r128gain[song.id];
 
-export const addR128Gain = (song: NoxMedia.Song, gain: number | null) => {
+export const addR128Gain = (song: NoxMedia.Song, gain: number | null) =>
   saveR128Gain({ [song.id]: gain });
-};
 
 export default appStore;
