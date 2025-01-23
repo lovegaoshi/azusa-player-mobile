@@ -3634,10 +3634,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@revenuecat/purchases-typescript-internal@npm:13.14.0":
-  version: 13.14.0
-  resolution: "@revenuecat/purchases-typescript-internal@npm:13.14.0"
-  checksum: 10c0/dfb09a4c3bbb2f89203e0d971500b5ccdd5f407d558144c060382bfb11ffd18e5ad3fccb48dac17b7b341f858e7c7fc677005e8de803136843ab4333c5495d6b
+"@revenuecat/purchases-typescript-internal@npm:13.15.2":
+  version: 13.15.2
+  resolution: "@revenuecat/purchases-typescript-internal@npm:13.15.2"
+  checksum: 10c0/3ba1d8ec240d18a0f3de22a297a4380dbf2219d9742523a1b9c3eeaf9b32786d9c205656b12fd02f09b02acc491ddfdad0d8c46334f03452a6316d2dbd6882b5
   languageName: node
   linkType: hard
 
@@ -4445,12 +4445,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:^22.10.7":
-  version: 22.10.7
-  resolution: "@types/node@npm:22.10.7"
+"@types/node@npm:^22.10.9":
+  version: 22.10.9
+  resolution: "@types/node@npm:22.10.9"
   dependencies:
     undici-types: "npm:~6.20.0"
-  checksum: 10c0/c941b4689dfc4044b64a5f601306cbcb0c7210be853ba378a5dd44137898c45accedd796ee002ad9407024cac7ecaf5049304951cb1d80ce3d7cebbbae56f20e
+  checksum: 10c0/ed2d7b2cf20ce520e04711eab48e9cd7d6a835d2859fbdc5d9a8c5e00a97c1f872a409f789783c473062b29beaf1cddf4b1c7ad03ae3fe433b072b7cf9fff741
   languageName: node
   linkType: hard
 
@@ -5598,7 +5598,7 @@ __metadata:
     "@types/jest": "npm:^29.5.14"
     "@types/lodash": "npm:^4.17.14"
     "@types/md5": "npm:^2.3.5"
-    "@types/node": "npm:^22.10.7"
+    "@types/node": "npm:^22.10.9"
     "@types/qs": "npm:^6.9.18"
     "@types/react": "npm:~18.3.18"
     "@types/react-native": "npm:^0.73.0"
@@ -5677,13 +5677,13 @@ __metadata:
     react-native-device-info: "npm:^14.0.2"
     react-native-dotenv: "npm:^3.4.11"
     react-native-flashdrag-list: "npm:^0.2.4"
-    react-native-gesture-handler: "npm:2.22.0"
+    react-native-gesture-handler: "npm:2.22.1"
     react-native-get-random-values: "npm:^1.11.0"
     react-native-image-colors: "npm:^2.4.0"
     react-native-lyric: "https://lovegaoshi@github.com/lovegaoshi/react-native-lyric.git#commit=6f20e83948c29b0d46833ab9173cd81f99d0ab48"
     react-native-pager-view: "npm:6.7.0"
     react-native-paper: "npm:^5.13.1"
-    react-native-purchases: "npm:^8.5.0"
+    react-native-purchases: "npm:^8.5.1"
     react-native-qrcode-svg: "npm:^6.3.14"
     react-native-reanimated: "npm:3.16.7"
     react-native-safe-area-context: "npm:^5.1.0"
@@ -5696,7 +5696,7 @@ __metadata:
     react-native-track-player: "https://github.com/lovegaoshi/react-native-track-player.git#commit=21184ac50c006646398217ac60bfc399856efe93"
     react-native-url-polyfill: "npm:^2.0.0"
     react-native-vector-icons: "npm:^10.2.0"
-    react-native-video: "npm:^6.9.1"
+    react-native-video: "npm:^6.10.0"
     react-native-webview: "npm:13.13.1"
     react-test-renderer: "npm:18.3.1"
     reactotron-react-native: "npm:^5.1.12"
@@ -14991,9 +14991,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-native-gesture-handler@npm:2.22.0":
-  version: 2.22.0
-  resolution: "react-native-gesture-handler@npm:2.22.0"
+"react-native-gesture-handler@npm:2.22.1":
+  version: 2.22.1
+  resolution: "react-native-gesture-handler@npm:2.22.1"
   dependencies:
     "@egjs/hammerjs": "npm:^2.0.17"
     hoist-non-react-statics: "npm:^3.3.0"
@@ -15001,7 +15001,7 @@ __metadata:
   peerDependencies:
     react: "*"
     react-native: "*"
-  checksum: 10c0/2a696261c1724f1fc10ebee6d5c187e6a8386754b87277eb7d81b2ef8a0d19245b0a41e80c86d0444a48d858fb08affb1fa7deecde8e3e965a6b356d353961b8
+  checksum: 10c0/f4e1e08a25f4555491d6d2d9428c8f9cda343c6508f2e0f8d212698e5d5dc370cecadf08774243c6502b2c46e85a0d70f7bd426626d3ae27e180950a41415e2f
   languageName: node
   linkType: hard
 
@@ -15066,15 +15066,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-native-purchases@npm:^8.5.0":
-  version: 8.5.0
-  resolution: "react-native-purchases@npm:8.5.0"
+"react-native-purchases@npm:^8.5.1":
+  version: 8.5.1
+  resolution: "react-native-purchases@npm:8.5.1"
   dependencies:
-    "@revenuecat/purchases-typescript-internal": "npm:13.14.0"
+    "@revenuecat/purchases-typescript-internal": "npm:13.15.2"
   peerDependencies:
     react: ">= 16.6.3"
     react-native: "*"
-  checksum: 10c0/5990a577a57688da5dfb002eec88411f26a531c27c356b48cdb0b367993da48d0e23a28e83d820af1ee660a9dcccd3cbe8fc9c72cf08af063aa561f954802897
+  checksum: 10c0/43cbbfe79b186b0c3a1617021b85937d0064c507fce1e92798e8280c753915599471619cccfd294e9b0f731e1e8594bbfdfab81574dd0b21559f42b67c7db630
   languageName: node
   linkType: hard
 
@@ -15246,13 +15246,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-native-video@npm:^6.9.1":
-  version: 6.9.1
-  resolution: "react-native-video@npm:6.9.1"
+"react-native-video@npm:^6.10.0":
+  version: 6.10.0
+  resolution: "react-native-video@npm:6.10.0"
   peerDependencies:
     react: "*"
     react-native: "*"
-  checksum: 10c0/94c46ee8d4e1d5202815660f1fa486c250ec0197456eabcabc03854b70c6e128166ab4268235e29fae553e1752018adb7c19bb2e130f58c9655442145209ba59
+  checksum: 10c0/aa0a7ff82c9c40fdb3ca55333ed1edc1ac941318bf161c3246f43752ad59b0d7991164cb64fb9a4cf1b752b76e8af271765d417b149ded1ef98ea4d2aae650c6
   languageName: node
   linkType: hard
 
