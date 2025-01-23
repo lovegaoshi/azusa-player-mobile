@@ -29,6 +29,9 @@ export const initMFsdk = async () => {
     mfsdkPaths.map(async p => {
       try {
         const sdkContent = await readTxtFile(p, mfsdkSubFolder);
+        if (sdkContent === undefined) {
+          throw Error(`[mfsdk] ${p} cannot be read! corrupted/DNE`);
+        }
         return loadEvalPlugin(sdkContent, p);
       } catch (e) {
         logger.warn(`[mfsdk] failed to load mfsdks from init: ${e}`);

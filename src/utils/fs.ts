@@ -29,7 +29,10 @@ export const rmTxtFile = (filename: string, subfolder = '') =>
     .unlink(`${fsdirs.DocumentDir}/${subfolder}/${filename}`)
     .catch(e => logger.warn(`[fs] rmTxtFile error: ${e}`));
 
-export const readTxtFile = (filename: string, subfolder = '') =>
+export const readTxtFile = (
+  filename: string,
+  subfolder = '',
+): Promise<string | undefined> =>
   RNFetchBlob.fs
     .readFile(`${fsdirs.DocumentDir}/${subfolder}/${filename}`, 'utf8')
     .catch(e => logger.warn(`[fs] readTxtFile error: ${e}`));
