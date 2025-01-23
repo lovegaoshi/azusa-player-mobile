@@ -85,6 +85,12 @@ export default ({
         icon={icon}
         onBlur={() => setShowAutoComplete(false)}
         onFocus={onFocus}
+        theme={{
+          colors: {
+            onSurfaceVariant: playerStyle.colors.onSurface,
+            onSurface: playerStyle.colors.onSurfaceVariant,
+          },
+        }}
       />
       {resolveData && (
         <Menu
