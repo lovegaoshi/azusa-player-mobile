@@ -108,7 +108,7 @@ export default {
   colors: {
     primary: '#fcf75e',
     onPrimary: 'rgb(50, 50, 0)',
-    primaryContainer: 'green',
+    primaryContainer: 'rgb(30, 30, 30)',
     onPrimaryContainer: 'rgb(234, 234, 0)',
     secondary: 'rgb(202, 200, 165)',
     onSecondary: 'rgb(50, 50, 24)',

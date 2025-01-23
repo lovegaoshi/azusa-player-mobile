@@ -47,6 +47,12 @@ export default ({
           selectionColor={playerStyle.customColors.textInputSelectionColor}
           onIconPress={() => handleSearch(searchVal)}
           numberOfLines={1}
+          theme={{
+            colors: {
+              onSurfaceVariant: playerStyle.colors.onSurface,
+              onSurface: playerStyle.colors.onSurfaceVariant,
+            },
+          }}
         />
       </View>
       <ProgressBar
