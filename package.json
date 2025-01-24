@@ -72,7 +72,7 @@
     "expo-keep-awake": "~14.0.2",
     "expo-secure-store": "~14.0.1",
     "fflate": "^0.8.2",
-    "ffmpeg-kit-react-native": "https://gitpkg.vercel.app/lovegaoshi/ffmpeg-kit/react-native?5e440832f1641c5209c561e434f166ef83593465",
+    "ffmpeg-kit-react-native": "https://gitpkg.vercel.app/lovegaoshi/ffmpeg-kit/react-native?4a0122d6dc3fb13237870dfea2533992f19c324a",
     "he": "^1.2.0",
     "i18next": "23.16.8",
     "intl-pluralrules": "^2.0.1",
