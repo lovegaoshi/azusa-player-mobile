@@ -37,7 +37,7 @@
             tools:targetApi="q" />
         <provider
             android:name="androidx.core.content.FileProvider"
-            android:authorities="com.noxplay.noxplayer.ff.provider"
+            android:authorities="com.noxplay.noxplayer.provider"
             android:exported="false"
             android:grantUriPermissions="true">
             <meta-data
