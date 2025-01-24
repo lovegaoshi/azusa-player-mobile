@@ -16,10 +16,7 @@ const PIPLyricView = () => {
   const _ = usePlayerControls();
 
   React.useEffect(() => {
-    const setLikedStatus = async () => {
-      setCurrentTrack(await TrackPlayer.getActiveTrack());
-    };
-    setLikedStatus();
+    TrackPlayer.getActiveTrack().then(setCurrentTrack);
   }, [currentPlayingId]);
 
   return currentTrack ? (

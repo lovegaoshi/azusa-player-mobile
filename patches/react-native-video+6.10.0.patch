@@ -1,0 +1,14 @@
+diff --git a/node_modules/react-native-video/android/src/main/java/com/brentvatne/exoplayer/ReactExoplayerView.java b/node_modules/react-native-video/android/src/main/java/com/brentvatne/exoplayer/ReactExoplayerView.java
+index cc72993..f8caf2b 100644
+--- a/node_modules/react-native-video/android/src/main/java/com/brentvatne/exoplayer/ReactExoplayerView.java
++++ b/node_modules/react-native-video/android/src/main/java/com/brentvatne/exoplayer/ReactExoplayerView.java
+@@ -351,9 +351,6 @@ public class ReactExoplayerView extends FrameLayout implements
+                 LayoutParams.MATCH_PARENT,
+                 LayoutParams.MATCH_PARENT);
+         exoPlayerView = new ExoPlayerView(getContext());
+-        exoPlayerView.addOnLayoutChangeListener( (View v, int l, int t, int r, int b, int ol, int ot, int or, int ob) ->
+-                PictureInPictureUtil.applySourceRectHint(themedReactContext, pictureInPictureParamsBuilder, exoPlayerView)
+-        );
+         exoPlayerView.setLayoutParams(layoutParams);
+         addView(exoPlayerView, 0, layoutParams);
+ 

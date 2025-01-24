@@ -45,10 +45,12 @@ const MainBackground = ({ children }: { children: React.JSX.Element }) => {
       return (
         <>
           <Video
+            enterPictureInPictureOnLeave={false}
             ref={videoRef}
             source={{
               uri: bkgrdImg.identifier,
               headers: customReqHeader(bkgrdImg.identifier, {}),
+              bufferConfig: { cacheSizeMB: 200 },
             }}
             style={[styles.videoStyle, { width, height }]}
             onError={e => {
@@ -73,7 +75,6 @@ const MainBackground = ({ children }: { children: React.JSX.Element }) => {
             resizeMode={ResizeMode.COVER}
             disableFocus={true}
             preventsDisplaySleepDuringVideoPlayback={false}
-            bufferConfig={{ cacheSizeMB: 200 }}
           />
           <View
             style={[
