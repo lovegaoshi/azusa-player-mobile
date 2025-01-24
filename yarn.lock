@@ -5647,7 +5647,7 @@ __metadata:
     expo-keep-awake: "npm:~14.0.2"
     expo-secure-store: "npm:~14.0.1"
     fflate: "npm:^0.8.2"
-    ffmpeg-kit-react-native: "https://gitpkg.vercel.app/lovegaoshi/ffmpeg-kit/react-native?5e440832f1641c5209c561e434f166ef83593465"
+    ffmpeg-kit-react-native: "https://gitpkg.vercel.app/lovegaoshi/ffmpeg-kit/react-native?4a0122d6dc3fb13237870dfea2533992f19c324a"
     gts: "npm:^6.0.2"
     he: "npm:^1.2.0"
     i18next: "npm:23.16.8"
@@ -9380,13 +9380,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ffmpeg-kit-react-native@https://gitpkg.vercel.app/lovegaoshi/ffmpeg-kit/react-native?5e440832f1641c5209c561e434f166ef83593465":
+"ffmpeg-kit-react-native@https://gitpkg.vercel.app/lovegaoshi/ffmpeg-kit/react-native?4a0122d6dc3fb13237870dfea2533992f19c324a":
   version: 6.0.2
-  resolution: "ffmpeg-kit-react-native@https://gitpkg.vercel.app/lovegaoshi/ffmpeg-kit/react-native?5e440832f1641c5209c561e434f166ef83593465"
+  resolution: "ffmpeg-kit-react-native@https://gitpkg.vercel.app/lovegaoshi/ffmpeg-kit/react-native?4a0122d6dc3fb13237870dfea2533992f19c324a"
   peerDependencies:
     react: "*"
     react-native: "*"
-  checksum: 10c0/0442fe0f91ee945e26a87ccf2d0a7fedb0ffcf1d72112dc16d309b75e17aa22f63b1125c07657a59d062e266f8f6f3ba2568548140bf0f807f64f31851b880f4
+  checksum: 10c0/25633e49d0a3bd33cfd0963d7ff2d5418f1ba7b9be50f70137fd398038532c6ac002f15cf389af4fb38e73ed7845a011d22bf1ea8272fe6e7a791c3c13d21820
   languageName: node
   linkType: hard
 
