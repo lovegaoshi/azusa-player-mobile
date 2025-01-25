@@ -4144,5 +4144,379 @@
       "onSurfaceDisabled": "rgba(230, 226, 217, 0.38)",
       "backdrop": "rgba(49, 49, 37, 0.4)"
     }
+  },
+  {
+    "metaData": {
+      "themeName": "机智大灯灯收藏集",
+      "themeDesc": "机智大灯灯全套衣服新年收藏集",
+      "themeAuthor": "NoxAutoGen",
+      "themeIcon": "https://i0.hdslb.com/bfs/garb/3fb15f35a8ab98ef88097d5058197567ebd636c6.jpg",
+      "darkTheme": true
+    },
+    "gifs": [
+      "https://i0.hdslb.com/bfs/garb/94dcd4eb2c1bd7c9629a978192cbce17cba1a9e3.png",
+      "https://i0.hdslb.com/bfs/garb/9c243d9674b38b259a57194b1a567c3b6721ad0a.png",
+      "https://i0.hdslb.com/bfs/garb/a0c49246f5eff9f022e1380b3719ead14ad86a20.png",
+      "https://i0.hdslb.com/bfs/garb/d2d60cd31002caf86cf00d1384dd1d7af2969079.png",
+      "https://i0.hdslb.com/bfs/garb/a19087ab2fe23a7403f870ccb723ce32ee3cdd71.png",
+      "https://i0.hdslb.com/bfs/garb/e9c551f5dc1aadc9d1f474a9440b6a142d3855ee.png",
+      "https://i0.hdslb.com/bfs/garb/db158dff584fdefebd6608a183a5c40aab2c294e.png",
+      "https://i0.hdslb.com/bfs/garb/0e1843c4c1eaa44f1a400a3a0d76f973950bbfe4.png",
+      "https://i0.hdslb.com/bfs/garb/fb7192042f55431bf81e0afb02d995e2f4e9e2ea.png",
+      "https://i0.hdslb.com/bfs/garb/b941fb100f73facad45f2a4b4ba4bbed08602e3e.png",
+      "https://i0.hdslb.com/bfs/garb/15e7eb148d1f177902b69c97e7d235248bcb66cf.png",
+      "https://i0.hdslb.com/bfs/garb/c05891806ce41708ff33753314c8fbec44153fbe.png",
+      "https://i0.hdslb.com/bfs/garb/f02aae26353f67cf97a215279a4859383bc1d734.png",
+      "https://i0.hdslb.com/bfs/garb/751a49d4c5263f8296b1a2203d7dc7644ca80547.png",
+      "https://i0.hdslb.com/bfs/garb/9a8430a6b1d868ae4a1b215fde35f013b08340e2.png",
+      "https://i0.hdslb.com/bfs/garb/7d683a004940e462c4513c5e2fdeaddbb01b9efe.png",
+      "https://i0.hdslb.com/bfs/garb/4322fa507127fe659441a6fe1194bdd991de48ec.png",
+      "https://i0.hdslb.com/bfs/garb/46159b06f094052e87935f65d17a4a5dac6da4af.png",
+      "https://i0.hdslb.com/bfs/garb/ae5f28bd86719197f65de93397bb72dd9eea11c2.png",
+      "https://i0.hdslb.com/bfs/garb/bdbacb8e35926fccea31804e8127e7d5f63c7362.png"
+    ],
+    "backgroundImages": [
+      {
+        "type": "biliNFTVideoNew",
+        "identifier": "[\"105436\",\"105437\",\"好运连连\"]"
+      },
+      {
+        "type": "biliNFTVideoNew",
+        "identifier": "[\"105436\",\"105437\",\"财源滚滚\"]"
+      },
+      {
+        "type": "biliNFTVideoNew",
+        "identifier": "[\"105436\",\"105437\",\"苹安喜乐\"]"
+      },
+      {
+        "type": "biliNFTVideoNew",
+        "identifier": "[\"105436\",\"105437\",\"逢考必过\"]"
+      },
+      {
+        "type": "biliNFTVideoNew",
+        "identifier": "[\"105436\",\"105437\",\"厄运退散\"]"
+      },
+      {
+        "type": "biliNFTVideoNew",
+        "identifier": "[\"105436\",\"105437\",\"双向奔赴\"]"
+      },
+      {
+        "type": "biliNFTVideoNew",
+        "identifier": "[\"105436\",\"105437\",\"躺赢之神\"]"
+      },
+      {
+        "type": "biliNFTVideoNew",
+        "identifier": "[\"105436\",\"105437\",\"蒸蒸日上\"]"
+      },
+      "https://i0.hdslb.com/bfs/garb/open/994820b8de3854943c973ce2e2068029b125f634.jpg",
+      "https://i0.hdslb.com/bfs/garb/open/82a4172feb829b6f6ec936dd167d152b66082063.jpg",
+      "https://i0.hdslb.com/bfs/garb/open/ce6d3060b79c1d394cf7802e03658dcc137a7e1b.jpg"
+    ],
+    "customColors": {
+      "maskedBackgroundColor": "rgba(0, 0, 0, 0.60)",
+      "playlistDrawerBackgroundColor": "green",
+      "playlistDrawerBackgroundColorTransparent": "rgba(0, 255, 0, 0.35)",
+      "progressThumbTintColor": "rgb(235, 235, 0)",
+      "progressMinimumTrackTintColor": "rgb(235, 235, 0)",
+      "progressMaximumTrackTintColor": "#FFFFFF",
+      "btnBackgroundColor": "rgb(72, 71, 58)",
+      "textInputSelectionColor": "green"
+    },
+    "colors": {
+      "primary": "#fcf75e",
+      "onPrimary": "rgb(50, 50, 0)",
+      "primaryContainer": "rgb(73, 73, 0)",
+      "onPrimaryContainer": "rgb(234, 234, 0)",
+      "secondary": "rgb(202, 200, 165)",
+      "onSecondary": "rgb(50, 50, 24)",
+      "secondaryContainer": "rgb(73, 72, 45)",
+      "onSecondaryContainer": "rgb(231, 228, 191)",
+      "tertiary": "rgb(164, 208, 189)",
+      "onTertiary": "rgb(11, 55, 42)",
+      "tertiaryContainer": "rgb(37, 78, 64)",
+      "onTertiaryContainer": "rgb(191, 236, 216)",
+      "error": "rgb(255, 180, 171)",
+      "onError": "rgb(105, 0, 5)",
+      "errorContainer": "rgb(147, 0, 10)",
+      "onErrorContainer": "rgb(255, 180, 171)",
+      "background": "rgba(0,0,0, 0.4)",
+      "onBackground": "rgb(230, 226, 217)",
+      "surface": "rgb(28, 28, 23)",
+      "onSurface": "rgba(235, 235, 0, 1)",
+      "text": "#fcf75e",
+      "surfaceVariant": "rgb(10, 10, 10)",
+      "onSurfaceVariant": "rgb(225, 225, 0)",
+      "outline": "rgb(147, 145, 130)",
+      "outlineVariant": "rgb(72, 71, 58)",
+      "shadow": "rgb(0, 0, 0)",
+      "scrim": "rgb(0, 0, 0)",
+      "inverseSurface": "rgb(230, 226, 217)",
+      "inverseOnSurface": "rgb(49, 49, 43)",
+      "inversePrimary": "rgb(98, 98, 0)",
+      "elevation": {
+        "level0": "transparent",
+        "level1": "rgb(53, 56, 57)",
+        "level2": "rgb(10, 10, 10)",
+        "level3": "rgb(10, 10, 10)",
+        "level4": "rgb(49, 49, 20)",
+        "level5": "rgb(53, 53, 20)"
+      },
+      "surfaceDisabled": "rgba(230, 226, 217, 0.12)",
+      "onSurfaceDisabled": "rgba(230, 226, 217, 0.38)",
+      "backdrop": "rgba(49, 49, 37, 0.4)"
+    }
+  },
+  {
+    "metaData": {
+      "themeName": "蔷薇之花于黑夜绽放",
+      "themeDesc": "虚拟UP主折原露露最新收藏集“蔷薇之花于黑夜绽放”，收录14张精美插图，快来看看吧。",
+      "themeAuthor": "NoxAutoGen",
+      "themeIcon": "https://i0.hdslb.com/bfs/garb/81e6d96b978c291766075b3be24c9daa6ebc07c4.png",
+      "darkTheme": true
+    },
+    "gifs": [
+      "https://i0.hdslb.com/bfs/garb/811aff2fd39b87be2fd603fb2b75e17fad5d15b8.png",
+      "https://i0.hdslb.com/bfs/garb/effc8067cce46879848257a6253f7fb88ead295b.png",
+      "https://i0.hdslb.com/bfs/garb/254cfd06adb19e01ae6411c07a7628f6990a15eb.png",
+      "https://i0.hdslb.com/bfs/garb/4757c4e08c0f909bb5ca60e854f9de5cf25be1a3.png",
+      "https://i0.hdslb.com/bfs/garb/0566ec548454d5ff71913c2cbd3af89fa007aad1.png",
+      "https://i0.hdslb.com/bfs/garb/9922a5118bb7f04cd165b497f1f7dd3c04de3094.png",
+      "https://i0.hdslb.com/bfs/garb/c7d0c28bcca2eb8ef2c0af07e9c0b31121798901.png",
+      "https://i0.hdslb.com/bfs/garb/96befc9e491c4abd722a219333035f92261c635b.png",
+      "https://i0.hdslb.com/bfs/garb/a91c2644cfb83aa0d32ba00d7073af1ab8660796.png",
+      "https://i0.hdslb.com/bfs/garb/747a541347a67ef8eba51342ba018d98a8d09526.png",
+      "https://i0.hdslb.com/bfs/garb/0eb379186625a664b00aba927949d9d7fab6e6bc.png",
+      "https://i0.hdslb.com/bfs/garb/6af8c666d686878f0c0a3ac948030ecbcf4b6c54.png",
+      "https://i0.hdslb.com/bfs/garb/6375d0d16e843c2907c891fad4f96ca1ad7e8334.png",
+      "https://i0.hdslb.com/bfs/garb/fb54f70ae6e59879a2636b29d3cb73a05fdf4305.png",
+      "https://i0.hdslb.com/bfs/garb/6542fe98d4ccc2ea0bd0efcd906ad811c0e81893.png",
+      "https://i0.hdslb.com/bfs/garb/24ec2144f3162ecee5f1415095e9907cb8dc8c5d.png",
+      "https://i0.hdslb.com/bfs/garb/274e50282dc8f5d69506d78c28047ca4c0e49e10.png",
+      "https://i0.hdslb.com/bfs/garb/df15dc12266135befb5489f303974616f360fd40.png",
+      "https://i0.hdslb.com/bfs/garb/940c71d7888386e992cdbb5a2328b205b25c212e.png",
+      "https://i0.hdslb.com/bfs/garb/23040b6f8101b320026fe9acb4dc4a7589a9b403.png",
+      "https://i0.hdslb.com/bfs/garb/d24a815938e211ebafd6bcbd6031b89c4d95a41a.png",
+      "https://i0.hdslb.com/bfs/garb/9c6d8b11bb677fdddfcefd51e187021a8c7fc232.png",
+      "https://i0.hdslb.com/bfs/garb/74aaeb26c84cbc71d896c257549b05db46e06049.png",
+      "https://i0.hdslb.com/bfs/garb/deaf76c15899835534fd73891560d71afc7a2e11.png",
+      "https://i0.hdslb.com/bfs/garb/7c615380e81d89f4a3139fe0a37b40d6866cbe54.png"
+    ],
+    "backgroundImages": [
+      {
+        "type": "biliNFTVideoNew",
+        "identifier": "[\"105541\",\"105542\",\"蔷薇于黑夜中绽放\"]"
+      },
+      {
+        "type": "biliNFTVideoNew",
+        "identifier": "[\"105541\",\"105542\",\"朝朝辞幕\"]"
+      },
+      {
+        "type": "biliNFTVideoNew",
+        "identifier": "[\"105541\",\"105542\",\"抓住你了0\"]"
+      },
+      {
+        "type": "biliNFTVideoNew",
+        "identifier": "[\"105541\",\"105542\",\"岁岁年年\"]"
+      },
+      "https://i0.hdslb.com/bfs/garb/open/cefbe706b4b7e5850f628b137999b0f6127f2d8b.png",
+      {
+        "type": "biliNFTVideoNew",
+        "identifier": "[\"105541\",\"105542\",\"时光缝隙\"]"
+      },
+      {
+        "type": "biliNFTVideoNew",
+        "identifier": "[\"105541\",\"105542\",\"呢喃梦语\"]"
+      },
+      "https://i0.hdslb.com/bfs/garb/open/9a7e20d7d33f9245f2cdce687604f3b349bf71ea.png",
+      "https://i0.hdslb.com/bfs/garb/open/5f2d83364cc3885fa918bfb06c3fc8a1597c608c.png",
+      "https://i0.hdslb.com/bfs/garb/open/03293eecd606ee7024728702b780b5cecc38ac4f.png",
+      "https://i0.hdslb.com/bfs/garb/open/d9ec0ae3ae72ef805a6f378cb2a14a9b7059503d.png",
+      "https://i0.hdslb.com/bfs/garb/open/932629150e3a1fa4bede46361741bac900f8a3c5.png",
+      "https://i0.hdslb.com/bfs/garb/open/ec71abc791a1e04dc8ea200126a8a861d84d30ec.png",
+      "https://i0.hdslb.com/bfs/garb/open/758698f1773d1226f53c5d103f33bdad4e964dc1.png"
+    ],
+    "customColors": {
+      "maskedBackgroundColor": "rgba(0, 0, 0, 0.60)",
+      "playlistDrawerBackgroundColor": "green",
+      "playlistDrawerBackgroundColorTransparent": "rgba(0, 255, 0, 0.35)",
+      "progressThumbTintColor": "rgb(235, 235, 0)",
+      "progressMinimumTrackTintColor": "rgb(235, 235, 0)",
+      "progressMaximumTrackTintColor": "#FFFFFF",
+      "btnBackgroundColor": "rgb(72, 71, 58)",
+      "textInputSelectionColor": "green"
+    },
+    "colors": {
+      "primary": "#fcf75e",
+      "onPrimary": "rgb(50, 50, 0)",
+      "primaryContainer": "rgb(73, 73, 0)",
+      "onPrimaryContainer": "rgb(234, 234, 0)",
+      "secondary": "rgb(202, 200, 165)",
+      "onSecondary": "rgb(50, 50, 24)",
+      "secondaryContainer": "rgb(73, 72, 45)",
+      "onSecondaryContainer": "rgb(231, 228, 191)",
+      "tertiary": "rgb(164, 208, 189)",
+      "onTertiary": "rgb(11, 55, 42)",
+      "tertiaryContainer": "rgb(37, 78, 64)",
+      "onTertiaryContainer": "rgb(191, 236, 216)",
+      "error": "rgb(255, 180, 171)",
+      "onError": "rgb(105, 0, 5)",
+      "errorContainer": "rgb(147, 0, 10)",
+      "onErrorContainer": "rgb(255, 180, 171)",
+      "background": "rgba(0,0,0, 0.4)",
+      "onBackground": "rgb(230, 226, 217)",
+      "surface": "rgb(28, 28, 23)",
+      "onSurface": "rgba(235, 235, 0, 1)",
+      "text": "#fcf75e",
+      "surfaceVariant": "rgb(10, 10, 10)",
+      "onSurfaceVariant": "rgb(225, 225, 0)",
+      "outline": "rgb(147, 145, 130)",
+      "outlineVariant": "rgb(72, 71, 58)",
+      "shadow": "rgb(0, 0, 0)",
+      "scrim": "rgb(0, 0, 0)",
+      "inverseSurface": "rgb(230, 226, 217)",
+      "inverseOnSurface": "rgb(49, 49, 43)",
+      "inversePrimary": "rgb(98, 98, 0)",
+      "elevation": {
+        "level0": "transparent",
+        "level1": "rgb(53, 56, 57)",
+        "level2": "rgb(10, 10, 10)",
+        "level3": "rgb(10, 10, 10)",
+        "level4": "rgb(49, 49, 20)",
+        "level5": "rgb(53, 53, 20)"
+      },
+      "surfaceDisabled": "rgba(230, 226, 217, 0.12)",
+      "onSurfaceDisabled": "rgba(230, 226, 217, 0.38)",
+      "backdrop": "rgba(49, 49, 37, 0.4)"
+    }
+  },
+  {
+    "metaData": {
+      "themeName": "小只芋·电子萌猫",
+      "themeDesc": "【小只芋·电子萌猫】是哔哩哔哩携手小只芋定制打造的个人数字收藏集，其中每张数字卡片都将拥有独特编号，期待大家一起解锁不同卡片！小只芋是个人势vup，平时通过直播、视频等方式活跃在bilibili平台，陪伴芋友们一起度过愉快时光。",
+      "themeAuthor": "NoxAutoGen",
+      "themeIcon": "https://i0.hdslb.com/bfs/garb/5f81324c3779143ea320b1d4f8d7c266f7407b19.png",
+      "darkTheme": true
+    },
+    "gifs": [
+      "https://i0.hdslb.com/bfs/garb/e0365f30015103af0f25e0715620a8c9053ad4fb.png",
+      "https://i0.hdslb.com/bfs/garb/70e8b642b04705c35396131782af51d267198828.png",
+      "https://i0.hdslb.com/bfs/garb/943a0db7cf303126e54432751c9dafa4526b4592.png",
+      "https://i0.hdslb.com/bfs/garb/1d8e25be463ea998492023d3c6d00fd8c3f8fbc6.png",
+      "https://i0.hdslb.com/bfs/garb/c18bd55ef4f886148661e8e984094c3acb7a43af.png",
+      "https://i0.hdslb.com/bfs/garb/8887a688093b365f4cc576008d99c9809dc2f4df.png",
+      "https://i0.hdslb.com/bfs/garb/65f3d189894df976b048d78d7bda56bdaaceac3e.png",
+      "https://i0.hdslb.com/bfs/garb/54f37b13f540b818134b090354ff88ca0b62faed.png",
+      "https://i0.hdslb.com/bfs/garb/ae2c9f7c9f281e1978a7d35e3ae8ca3bf6033bd0.png",
+      "https://i0.hdslb.com/bfs/garb/480fc13700122a673e21069aca4b0d97739c1a15.png",
+      "https://i0.hdslb.com/bfs/garb/c9974869180cd2d5aeda59acf1f99ea475a64052.png",
+      "https://i0.hdslb.com/bfs/garb/eafb115ff943a2cf7efc7403613107ed5c600e77.png",
+      "https://i0.hdslb.com/bfs/garb/2a109018ae5847ef17db0965974d87c38d652993.png",
+      "https://i0.hdslb.com/bfs/garb/930cffc8602cdabd6e970c9dc8fbceaa318867fe.png",
+      "https://i0.hdslb.com/bfs/garb/a04dd251e2b4e9fab6b8050b2705bee5dde4e92a.png",
+      "https://i0.hdslb.com/bfs/garb/25e7b239a63e9f8a67dae0b122853e7ac3ad9f37.png",
+      "https://i0.hdslb.com/bfs/garb/57c8cd63a21e62e6714baf4450acb644ae8f8352.png",
+      "https://i0.hdslb.com/bfs/garb/359728f421ca6b89728d7264ddabcaed10a8294d.png",
+      "https://i0.hdslb.com/bfs/garb/31f50dafcdf3b0c676f4ead6edb48396a8655a30.png",
+      "https://i0.hdslb.com/bfs/garb/b44d889bc52f65e790d5c9841f3f5a3dd7afd545.png"
+    ],
+    "backgroundImages": [
+      {
+        "type": "biliNFTVideoNew",
+        "identifier": "[\"105543\",\"105544\",\"小猫依人\"]"
+      },
+      {
+        "type": "biliNFTVideoNew",
+        "identifier": "[\"105543\",\"105544\",\"如梦初醒\"]"
+      },
+      {
+        "type": "biliNFTVideoNew",
+        "identifier": "[\"105543\",\"105544\",\"新春华旦\"]"
+      },
+      {
+        "type": "biliNFTVideoNew",
+        "identifier": "[\"105543\",\"105544\",\"午后暖阳\"]"
+      },
+      {
+        "type": "biliNFTVideoNew",
+        "identifier": "[\"105543\",\"105544\",\"忙里偷闲\"]"
+      },
+      {
+        "type": "biliNFTVideoNew",
+        "identifier": "[\"105543\",\"105544\",\"可爱印象\"]"
+      },
+      {
+        "type": "biliNFTVideoNew",
+        "identifier": "[\"105543\",\"105544\",\"校园日志\"]"
+      },
+      {
+        "type": "biliNFTVideoNew",
+        "identifier": "[\"105543\",\"105544\",\"一晌贪欢\"]"
+      },
+      {
+        "type": "biliNFTVideoNew",
+        "identifier": "[\"105543\",\"105544\",\"流风抱玉\"]"
+      },
+      {
+        "type": "biliNFTVideoNew",
+        "identifier": "[\"105543\",\"105544\",\"温泉之旅\"]"
+      },
+      {
+        "type": "biliNFTVideoRedeem",
+        "identifier": "[\"105543\",\"105544\",\"典藏卡·领域展开\"]"
+      }
+    ],
+    "customColors": {
+      "maskedBackgroundColor": "rgba(0, 0, 0, 0.60)",
+      "playlistDrawerBackgroundColor": "green",
+      "playlistDrawerBackgroundColorTransparent": "rgba(0, 255, 0, 0.35)",
+      "progressThumbTintColor": "rgb(235, 235, 0)",
+      "progressMinimumTrackTintColor": "rgb(235, 235, 0)",
+      "progressMaximumTrackTintColor": "#FFFFFF",
+      "btnBackgroundColor": "rgb(72, 71, 58)",
+      "textInputSelectionColor": "green"
+    },
+    "colors": {
+      "primary": "#fcf75e",
+      "onPrimary": "rgb(50, 50, 0)",
+      "primaryContainer": "rgb(73, 73, 0)",
+      "onPrimaryContainer": "rgb(234, 234, 0)",
+      "secondary": "rgb(202, 200, 165)",
+      "onSecondary": "rgb(50, 50, 24)",
+      "secondaryContainer": "rgb(73, 72, 45)",
+      "onSecondaryContainer": "rgb(231, 228, 191)",
+      "tertiary": "rgb(164, 208, 189)",
+      "onTertiary": "rgb(11, 55, 42)",
+      "tertiaryContainer": "rgb(37, 78, 64)",
+      "onTertiaryContainer": "rgb(191, 236, 216)",
+      "error": "rgb(255, 180, 171)",
+      "onError": "rgb(105, 0, 5)",
+      "errorContainer": "rgb(147, 0, 10)",
+      "onErrorContainer": "rgb(255, 180, 171)",
+      "background": "rgba(0,0,0, 0.4)",
+      "onBackground": "rgb(230, 226, 217)",
+      "surface": "rgb(28, 28, 23)",
+      "onSurface": "rgba(235, 235, 0, 1)",
+      "text": "#fcf75e",
+      "surfaceVariant": "rgb(10, 10, 10)",
+      "onSurfaceVariant": "rgb(225, 225, 0)",
+      "outline": "rgb(147, 145, 130)",
+      "outlineVariant": "rgb(72, 71, 58)",
+      "shadow": "rgb(0, 0, 0)",
+      "scrim": "rgb(0, 0, 0)",
+      "inverseSurface": "rgb(230, 226, 217)",
+      "inverseOnSurface": "rgb(49, 49, 43)",
+      "inversePrimary": "rgb(98, 98, 0)",
+      "elevation": {
+        "level0": "transparent",
+        "level1": "rgb(53, 56, 57)",
+        "level2": "rgb(10, 10, 10)",
+        "level3": "rgb(10, 10, 10)",
+        "level4": "rgb(49, 49, 20)",
+        "level5": "rgb(53, 53, 20)"
+      },
+      "surfaceDisabled": "rgba(230, 226, 217, 0.12)",
+      "onSurfaceDisabled": "rgba(230, 226, 217, 0.38)",
+      "backdrop": "rgba(49, 49, 37, 0.4)"
+    }
   }
 ]
