@@ -102,7 +102,7 @@ export const saveChucked = async (
 
 export const loadChucked = async (keys: string[]) => {
   const loadedArrays = (await Promise.all(
-    keys.map(async (val: string) => await getItem(val)),
+    keys.map(async (val: string) => await getItem(val, [])),
   )) as any[][];
   return loadedArrays.flat();
 };

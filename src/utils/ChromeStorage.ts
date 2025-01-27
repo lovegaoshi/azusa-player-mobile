@@ -98,6 +98,7 @@ export const getPlaylist = async ({
     return {
       ...dPlaylist,
       ...retrievedPlaylist,
+      id: key,
       songList: hydrateSongList
         ? await getPlaylistSongList(retrievedPlaylist)
         : [],
@@ -223,7 +224,7 @@ export const initPlayerObject = async (safeMode = false) => {
 
 export const clearPlaylists = async () => {
   const playlistIds = await getItem(StorageKeys.MY_FAV_LIST_KEY, []);
-  savePlaylistIds([]);
+  await savePlaylistIds([]);
   return playlistIds.map(_delPlaylist);
 };
 
