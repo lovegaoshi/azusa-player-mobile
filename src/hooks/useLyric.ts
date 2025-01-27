@@ -121,6 +121,9 @@ export default (currentSong?: NoxMedia.Song) => {
       setLrc(localLrcColle.localLrc);
     } else {
       logger.debug('[lrc] local lrc no longer exists, fetching new...');
+      logger.debug(
+        `[lrc] old lrc key: ${localLrcColle.lrcDetail.source} - ${localLrcColle.lrcDetail.lyricKey}`,
+      );
       fetchNewLrc();
     }
     return true;
