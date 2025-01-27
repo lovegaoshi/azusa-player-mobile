@@ -91,9 +91,11 @@ export const saveChucked = async (
   // splice into chunks
   const chuckedObject = chunkArray(objects, MAX_SONGLIST_SIZE);
   const chuckedIndices = chuckedObject.map((val, index) => `${key}.${index}`);
-  chuckedObject.forEach((list, index) => saveItem(chuckedIndices[index], list));
+  await Promise.all(
+    chuckedObject.map((list, index) => saveItem(chuckedIndices[index], list)),
+  );
   if (saveToStorage) {
-    saveItem(key, chuckedIndices);
+    await saveItem(key, chuckedIndices);
     return [];
   } else {
     return chuckedIndices;
@@ -126,7 +128,7 @@ export const savePlaylist = async (
       songList: await saveChucked(playlist.id, playlist.songList, false),
     };
     // save chunks
-    saveItem(overrideKey ?? playlist.id ?? uuidv4(), savingPlaylist);
+    await saveItem(overrideKey ?? playlist.id ?? uuidv4(), savingPlaylist);
   } catch (e) {
     console.error(e);
   }
@@ -134,9 +136,9 @@ export const savePlaylist = async (
 
 export const delPlaylist = async (playlistId: string) => {
   removeItem(playlistId);
-  (await AsyncStorage.getAllKeys())
-    .filter(k => k.startsWith(`${playlistId}.`))
-    .forEach(k => removeItem(k));
+  const allkeys = await AsyncStorage.getAllKeys();
+  const playlistKeys = allkeys.filter(k => k.startsWith(`${playlistId}.`));
+  return Promise.all(playlistKeys.map(k => removeItem(k)));
 };
 
 const clearStorage = () => AsyncStorage.clear();
