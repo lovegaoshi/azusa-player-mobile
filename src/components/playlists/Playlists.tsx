@@ -48,6 +48,7 @@ export default () => {
   const scroll = useNoxSetting(state => state.incSongListScrollCounter);
   const { removePlaylist } = usePlaylistBrowseTree();
   const { TwoWayAlert } = useAlert();
+
   // HACK: I know its bad! But somehow this hook isnt updating in its own
   // useEffects...
 
@@ -58,8 +59,8 @@ export default () => {
 
   const confirmOnDelete = (playlistId: string) => {
     TwoWayAlert(
-      `Delete ${playlists[playlistId].title}?`,
-      `Are you sure to delete playlist ${playlists[playlistId].title}?`,
+      `Delete ${playlists[playlistId]?.title ?? playlistId}?`,
+      `Are you sure to delete playlist ${playlists[playlistId]?.title ?? playlistId}?`,
       () => removePlaylist(playlistId),
     );
   };

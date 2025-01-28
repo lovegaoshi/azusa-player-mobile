@@ -10,7 +10,7 @@ export const DefaultSetting: NoxStorage.PlayerSettingDict = {
   defaultVolume: 1,
 
   autoRSSUpdate: true,
-  skin: '诺莺nox',
+  skin: '诺莺Nox',
   parseSongName: true,
   keepSearchedSongListWhenPlaying: false,
   settingExportLocation: SyncOptions.DROPBOX,
@@ -60,6 +60,7 @@ export const DefaultSetting: NoxStorage.PlayerSettingDict = {
   downloadToMp3: true,
   downloadID3V2: true,
   downloadEmbedAlbumCover: true,
+  alwaysShowBottomTab: false,
 
   sponsorBlockCat: [],
   sponsorBlockEnabled: false,

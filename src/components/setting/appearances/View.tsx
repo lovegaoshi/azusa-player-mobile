@@ -61,6 +61,12 @@ const MainView = ({ navigation }: NoxComponent.StackNavigationProps) => {
         <SelectDarkModeButton />
         <NoWeebButton />
         <SelectPhotoButton />
+        <RenderSetting
+          item={{
+            settingName: 'alwaysShowBottomTab',
+            settingCategory: 'AppearanceSettings',
+          }}
+        />
       </ScrollView>
     </View>
   );

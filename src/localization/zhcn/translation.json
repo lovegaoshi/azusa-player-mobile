@@ -314,6 +314,8 @@
     "noWeebSkinsDesc": "二次元味儿太冲",
     "accentColorName": "用专辑主题色",
     "accentColorDesc": "二次元ssw时，用专辑的主题色",
+    "alwaysShowBottomTabName": "显示底部标签",
+    "alwaysShowBottomTabDesc": "始终显示底部标签",
     "PrimaryColor": "主题颜色",
     "SecondaryColor": "辅助颜色",
     "ContrastColor": "对比颜色",
@@ -355,11 +357,11 @@
     "personalCloudKeyPlaceholder": "",
     "personalCloudKeyLabel": "私有云key",
     "fileNotValidJson": "备份文件格式不正确.",
-    "NoxExtensionImportTitle": "电闹播放器格式检测到",
+    "NoxExtensionImportTitle": "检测到电闹播放器的格式",
     "NoxExtensionImportMsg": "你想如何从电闹播放器备份文件导入歌单?",
-    "Sync.NoxExtensionOverwrite": "全部覆盖",
-    "Sync.NoxExtensionAppend": "选择加入",
-    "Sync.NoxExtensionCancel": "算了"
+    "NoxExtensionOverwrite": "全部覆盖",
+    "NoxExtensionAppend": "选择加入",
+    "NoxExtensionCancel": "算了"
   },
   "SleepTimer": {
     "Title": "定时停止播放"

@@ -66,6 +66,7 @@ declare global {
 
       sponsorBlockCat: Category[];
       sponsorBlockEnabled: boolean;
+      alwaysShowBottomTab: boolean;
 
       [key: string]: any;
     }
