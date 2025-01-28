@@ -318,6 +318,8 @@
     "BackgroundColor": "Background color:",
     "ColorSchemeName": "Select Color Scheme",
     "ColorSchemeDesc": "Current color scheme is {{ scheme }}",
+    "alwaysShowBottomTabName": "Show Bottom Tab",
+    "alwaysShowBottomTabDesc": "Always show bottom tab, regardless of gesture mode",
     "wavyProgressBarName": "Wavy Progress Bar",
     "wavyProgressBarDesc": "Show a wavy progress bar (huge battery drain)",
     "ColorSchemeLight": "light",

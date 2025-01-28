@@ -60,6 +60,7 @@ export const DefaultSetting: NoxStorage.PlayerSettingDict = {
   downloadToMp3: true,
   downloadID3V2: true,
   downloadEmbedAlbumCover: true,
+  alwaysShowBottomTab: false,
 
   sponsorBlockCat: [],
   sponsorBlockEnabled: false,
