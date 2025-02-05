@@ -1,0 +1,12 @@
+diff --git a/node_modules/react-native-gesture-handler/android/src/main/java/com/swmansion/gesturehandler/core/NativeViewGestureHandler.kt b/node_modules/react-native-gesture-handler/android/src/main/java/com/swmansion/gesturehandler/core/NativeViewGestureHandler.kt
+index 1abcdc8..927a3f6 100644
+--- a/node_modules/react-native-gesture-handler/android/src/main/java/com/swmansion/gesturehandler/core/NativeViewGestureHandler.kt
++++ b/node_modules/react-native-gesture-handler/android/src/main/java/com/swmansion/gesturehandler/core/NativeViewGestureHandler.kt
+@@ -313,6 +313,6 @@ class NativeViewGestureHandler : GestureHandler<NativeViewGestureHandler>() {
+     // inside a `<View />` component in JS). In such cases, calling `onTouchEvent` wouldn't work as those are
+     // ignored by the wrapper view. Instead `dispatchTouchEvent` can be used, which causes the view to dispatch
+     // the event to its children.
+-    override fun sendTouchEvent(view: View?, event: MotionEvent) = view?.dispatchTouchEvent(event)
++    override fun sendTouchEvent(view: View?, event: MotionEvent) = view?.onTouchEvent(event)
+   }
+ }

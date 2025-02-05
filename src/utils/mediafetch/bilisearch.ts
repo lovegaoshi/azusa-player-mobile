@@ -2,7 +2,7 @@ import { logger } from '../Logger';
 import { fetchBiliPaginatedAPI } from './paginatedbili';
 import bfetch from '../BiliFetch';
 import { getBiliCookie, BILICOOKIES } from '@utils/Bilibili/biliCookies';
-import { timestampToSeconds } from '../Utils';
+import { timestampToSeconds, getUniqObjects } from '../Utils';
 import SongTS from '@objects/Song';
 import { Source } from '@enums/MediaFetch';
 
@@ -62,7 +62,7 @@ export const fetchBiliSearchList = async (
   // otherwise will return error 412. for users didnt login to bilibili,
   // setting a random buvid3 would enable this API.
   try {
-    return fetchBiliPaginatedAPI({
+    const results = await fetchBiliPaginatedAPI({
       url: URL_BILI_SEARCH.replace('{keyword}', kword),
       getMediaCount: data => Math.min(data.numResults, data.pagesize * 2),
       getPageSize: data => data.pagesize,
@@ -83,6 +83,7 @@ export const fetchBiliSearchList = async (
         : undefined,
       startPage,
     });
+    return getUniqObjects(results, v => v.bvid);
   } catch (e) {
     logger.error(e);
   }
