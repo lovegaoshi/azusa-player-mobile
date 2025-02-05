@@ -2,6 +2,7 @@
   "name": "azusa-player-mobile",
   "displayName": "APM",
   "plugins": [
-    "expo-secure-store"
+    "expo-secure-store",
+    "expo-sqlite"
   ]
 }

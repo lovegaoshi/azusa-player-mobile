@@ -71,6 +71,7 @@
     "expo-image-picker": "~16.0.5",
     "expo-keep-awake": "~14.0.2",
     "expo-secure-store": "~14.0.1",
+    "expo-sqlite": "~15.1.2",
     "fflate": "^0.8.2",
     "ffmpeg-kit-react-native": "https://gitpkg.vercel.app/lovegaoshi/ffmpeg-kit/react-native?4a0122d6dc3fb13237870dfea2533992f19c324a",
     "he": "^1.2.0",

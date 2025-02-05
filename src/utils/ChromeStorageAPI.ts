@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import AsyncStorage from 'expo-sqlite/kv-store';
 import { Appearance, ColorSchemeName } from 'react-native';
 import * as SecureStore from 'expo-secure-store';
 import { v4 as uuidv4 } from 'uuid';
@@ -27,7 +27,9 @@ const MAX_SONGLIST_SIZE = 400;
 export const saveItem = async (
   key: string,
   value: unknown,
-  setFunc: (k: string, v: string) => Promise<void> = AsyncStorage.setItem,
+  setFunc: (k: string, v: string) => Promise<void> = AsyncStorage.setItem.bind(
+    AsyncStorage,
+  ),
 ) => {
   try {
     await setFunc(key, JSON.stringify(value));
@@ -39,7 +41,9 @@ export const saveItem = async (
 export const getItem = async (
   key: string,
   defaultVal: unknown = null,
-  getFunc: (k: string) => Promise<any> = AsyncStorage.getItem,
+  getFunc: (k: string) => Promise<any> = AsyncStorage.getItem.bind(
+    AsyncStorage,
+  ),
 ): Promise<null | any> => {
   try {
     const retrievedStr = await getFunc(key);
@@ -52,7 +56,7 @@ export const getItem = async (
 
 export const removeItem = async (key: string) => {
   try {
-    await AsyncStorage.removeItem(key);
+    await AsyncStorage.removeItem.bind(AsyncStorage)(key);
   } catch (e) {
     console.warn(e);
   }
@@ -136,17 +140,17 @@ export const savePlaylist = async (
 
 export const delPlaylist = async (playlistId: string) => {
   removeItem(playlistId);
-  const allkeys = await AsyncStorage.getAllKeys();
+  const allkeys = await AsyncStorage.getAllKeys.bind(AsyncStorage)();
   const playlistKeys = allkeys.filter(k => k.startsWith(`${playlistId}.`));
   return Promise.all(playlistKeys.map(k => removeItem(k)));
 };
 
-const clearStorage = () => AsyncStorage.clear();
+const clearStorage = () => AsyncStorage.clear.bind(AsyncStorage)();
 
 export const exportPlayerContent = async (content?: any) => {
   if (!content) {
-    const allKeys = await AsyncStorage.getAllKeys();
-    content = await AsyncStorage.multiGet(allKeys);
+    const allKeys = await AsyncStorage.getAllKeys.bind(AsyncStorage)();
+    content = await AsyncStorage.multiGet.bind(AsyncStorage)(allKeys);
   }
   return compressSync(strToU8(JSON.stringify(content)));
 };
@@ -173,7 +177,7 @@ export const importPlayerContentRaw = async (
   } else {
     const content = await getContent();
     await clearStorage();
-    await AsyncStorage.multiSet(parsedContent);
+    await AsyncStorage.multiSet.bind(AsyncStorage)(parsedContent);
     return content;
   }
 };
