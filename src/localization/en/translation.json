@@ -3,8 +3,8 @@
   "SponsorBlock": {
     "SponsorBlockOptionsName": "SponsorBlock",
     "SponsorBlockOptionsDesc": "Enable SponsorBlock",
-    "SponsorBlockEnabledName": "SponsorBlock",
-    "SponsorBlockEnabledDesc": "Enable SponsorBlock",
+    "sponsorBlockEnabledName": "SponsorBlock",
+    "sponsorBlockEnabledDesc": "Enable SponsorBlock",
     "SponsorBlockCategoryName": "SponsorBlock Category",
     "SponsorBlockCategoryDesc": "Select SponsorBlock Category",
     "SponsorBlockCategoryTitle": "Enable SB for...",

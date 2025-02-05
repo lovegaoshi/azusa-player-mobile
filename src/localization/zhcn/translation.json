@@ -3,8 +3,8 @@
   "SponsorBlock": {
     "SponsorBlockOptionsName": "跳过恰饭",
     "SponsorBlockOptionsDesc": "启用SponsorBlock",
-    "SponsorBlockEnabledName": "跳过恰饭",
-    "SponsorBlockEnabledDesc": "启用SponsorBlock",
+    "sponsorBlockEnabledName": "跳过恰饭",
+    "sponsorBlockEnabledDesc": "启用SponsorBlock",
     "SponsorBlockCategoryName": "跳过恰饭种类",
     "SponsorBlockCategoryDesc": "选择跳过SponsorBlock的种类",
     "SponsorBlockCategoryTitle": "跳过这些恰饭片段",

@@ -16,7 +16,7 @@ export default () => {
       <View>
         <RenderSetting
           item={{
-            settingName: 'SponsorBlockEnabled',
+            settingName: 'sponsorBlockEnabled',
             settingCategory: 'SponsorBlock',
           }}
         />
