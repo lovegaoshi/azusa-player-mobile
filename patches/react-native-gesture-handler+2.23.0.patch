@@ -1,63 +1,12 @@
 diff --git a/node_modules/react-native-gesture-handler/android/src/main/java/com/swmansion/gesturehandler/core/NativeViewGestureHandler.kt b/node_modules/react-native-gesture-handler/android/src/main/java/com/swmansion/gesturehandler/core/NativeViewGestureHandler.kt
-index 1abcdc8..16ed350 100644
+index 1abcdc8..927a3f6 100644
 --- a/node_modules/react-native-gesture-handler/android/src/main/java/com/swmansion/gesturehandler/core/NativeViewGestureHandler.kt
 +++ b/node_modules/react-native-gesture-handler/android/src/main/java/com/swmansion/gesturehandler/core/NativeViewGestureHandler.kt
-@@ -11,7 +11,6 @@ import com.facebook.react.views.scroll.ReactScrollView
- import com.facebook.react.views.swiperefresh.ReactSwipeRefreshLayout
- import com.facebook.react.views.text.ReactTextView
- import com.facebook.react.views.textinput.ReactEditText
--import com.facebook.react.views.view.ReactViewGroup
- import com.swmansion.gesturehandler.react.RNGestureHandlerButtonViewManager
- import com.swmansion.gesturehandler.react.isScreenReaderOn
- 
-@@ -88,7 +87,6 @@ class NativeViewGestureHandler : GestureHandler<NativeViewGestureHandler>() {
-       is ReactScrollView -> this.hook = ScrollViewHook()
-       is ReactHorizontalScrollView -> this.hook = ScrollViewHook()
-       is ReactTextView -> this.hook = TextViewHook()
--      is ReactViewGroup -> this.hook = ReactViewGroupHook()
-     }
+@@ -313,6 +313,6 @@ class NativeViewGestureHandler : GestureHandler<NativeViewGestureHandler>() {
+     // inside a `<View />` component in JS). In such cases, calling `onTouchEvent` wouldn't work as those are
+     // ignored by the wrapper view. Instead `dispatchTouchEvent` can be used, which causes the view to dispatch
+     // the event to its children.
+-    override fun sendTouchEvent(view: View?, event: MotionEvent) = view?.dispatchTouchEvent(event)
++    override fun sendTouchEvent(view: View?, event: MotionEvent) = view?.onTouchEvent(event)
    }
- 
-@@ -109,8 +107,7 @@ class NativeViewGestureHandler : GestureHandler<NativeViewGestureHandler>() {
-       if (state == STATE_UNDETERMINED && !hook.canBegin(event)) {
-         cancel()
-       } else {
--        hook.sendTouchEvent(view, event)
--
-+        view.onTouchEvent(event)
-         if ((state == STATE_UNDETERMINED || state == STATE_BEGAN) && hook.canActivate(view)) {
-           activate()
-         }
-@@ -127,12 +124,12 @@ class NativeViewGestureHandler : GestureHandler<NativeViewGestureHandler>() {
-       when {
-         shouldActivateOnStart -> {
-           tryIntercept(view, event)
--          hook.sendTouchEvent(view, event)
-+          view.onTouchEvent(event)
-           activate()
-         }
- 
-         tryIntercept(view, event) -> {
--          hook.sendTouchEvent(view, event)
-+          view.onTouchEvent(event)
-           activate()
-         }
- 
-@@ -147,7 +144,7 @@ class NativeViewGestureHandler : GestureHandler<NativeViewGestureHandler>() {
-         }
-       }
-     } else if (state == STATE_ACTIVE) {
--      hook.sendTouchEvent(view, event)
-+      view.onTouchEvent(event)
-     }
-   }
- 
-@@ -156,7 +153,7 @@ class NativeViewGestureHandler : GestureHandler<NativeViewGestureHandler>() {
-     val event = MotionEvent.obtain(time, time, MotionEvent.ACTION_CANCEL, 0f, 0f, 0).apply {
-       action = MotionEvent.ACTION_CANCEL
-     }
--    hook.sendTouchEvent(view, event)
-+    view!!.onTouchEvent(event)
-     event.recycle()
-   }
- 
+ }
