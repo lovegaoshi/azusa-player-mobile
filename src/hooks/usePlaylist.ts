@@ -67,7 +67,7 @@ const usePlaylist = (playlist: NoxMedia.Playlist): UsePlaylist => {
     state => state.togglePlaylistInfoUpdate,
   );
   const playlistCRUD = usePlaylistCRUD(playlist);
-  const searchBarRef = useRef();
+  const searchBarRef = useRef(undefined);
 
   const handleSearch = (searchedVal: string) => {
     setSearchText(searchedVal);

@@ -4034,9 +4034,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@shopify/react-native-skia@npm:1.11.3":
-  version: 1.11.3
-  resolution: "@shopify/react-native-skia@npm:1.11.3"
+"@shopify/react-native-skia@npm:1.11.4":
+  version: 1.11.4
+  resolution: "@shopify/react-native-skia@npm:1.11.4"
   dependencies:
     canvaskit-wasm: "npm:0.39.1"
     react-reconciler: "npm:0.27.0"
@@ -4051,7 +4051,7 @@ __metadata:
       optional: true
   bin:
     setup-skia-web: ./scripts/setup-canvaskit.js
-  checksum: 10c0/191f1b5b00ff4ba123d62f567d65569cddd4ee0d94a4fcdd6f1c2f8c023ab43d83d077efc0cea955864eee84848a417f85c24d40c8716a56431c56f973d365c7
+  checksum: 10c0/6a5c47d479b4ccba830c88a7bd71fafb38cbd79fd44bfec37e149f74ba0a466874a8b5993b5aec5a0d984c593912e6d4ff1c8eb0d187a2ac12570423012a154a
   languageName: node
   linkType: hard
 
@@ -5727,7 +5727,7 @@ __metadata:
     "@sentry/react-native": "npm:^6.6.0"
     "@sharcoux/slider": "npm:8.0.6"
     "@shopify/flash-list": "npm:^1.7.3"
-    "@shopify/react-native-skia": "npm:1.11.3"
+    "@shopify/react-native-skia": "npm:1.11.4"
     "@tsconfig/react-native": "npm:^3.0.5"
     "@types/base-64": "npm:^1.0.2"
     "@types/crypto-js": "npm:^4.2.2"
@@ -5815,7 +5815,7 @@ __metadata:
     react-native-device-info: "npm:^14.0.4"
     react-native-dotenv: "npm:^3.4.11"
     react-native-flashdrag-list: "npm:^0.2.4"
-    react-native-gesture-handler: "npm:2.22.1"
+    react-native-gesture-handler: "npm:2.23.0"
     react-native-get-random-values: "npm:^1.11.0"
     react-native-image-colors: "npm:^2.4.0"
     react-native-lyric: "https://lovegaoshi@github.com/lovegaoshi/react-native-lyric.git#commit=6f20e83948c29b0d46833ab9173cd81f99d0ab48"
@@ -15129,9 +15129,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-native-gesture-handler@npm:2.22.1":
-  version: 2.22.1
-  resolution: "react-native-gesture-handler@npm:2.22.1"
+"react-native-gesture-handler@npm:2.23.0":
+  version: 2.23.0
+  resolution: "react-native-gesture-handler@npm:2.23.0"
   dependencies:
     "@egjs/hammerjs": "npm:^2.0.17"
     hoist-non-react-statics: "npm:^3.3.0"
@@ -15139,7 +15139,7 @@ __metadata:
   peerDependencies:
     react: "*"
     react-native: "*"
-  checksum: 10c0/f4e1e08a25f4555491d6d2d9428c8f9cda343c6508f2e0f8d212698e5d5dc370cecadf08774243c6502b2c46e85a0d70f7bd426626d3ae27e180950a41415e2f
+  checksum: 10c0/b4bfa9f71990fb5f75225b63878f668a9c6cee29cea6636482b64708432fb46b8c969c570022728fb130bf4e6ce306719dae200d1cb4050fdd2690e34b7b2a78
   languageName: node
   linkType: hard
 
