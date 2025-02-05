@@ -16,7 +16,7 @@ interface Props extends NoxComponent.OpacityProps {
 export default ({ visible, onPress, opacity }: Props) => {
   const track = useTrackStore(s => s.track);
   const dimension = Dimensions.get('window');
-  const { screenAlwaysWake } = useNoxSetting(state => state.playerSetting);
+  const playerSetting = useNoxSetting(state => state.playerSetting);
 
   const animatedStyle = useAnimatedStyle(() => ({
     opacity: opacity.value,
@@ -28,13 +28,13 @@ export default ({ visible, onPress, opacity }: Props) => {
 
   useFocusEffect(
     useCallback(() => {
-      if (screenAlwaysWake && visible) {
+      if (playerSetting.screenAlwaysWake && visible) {
         console.log(`screen mount?, ${visible}`);
         activateKeepAwakeAsync();
         return deactivateKeepAwake;
       }
       return () => undefined;
-    }, [visible, screenAlwaysWake]),
+    }, [visible, playerSetting.screenAlwaysWake]),
   );
   if (!visible || !track) {
     return <></>;

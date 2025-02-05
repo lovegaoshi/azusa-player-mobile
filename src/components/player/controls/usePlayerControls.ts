@@ -38,7 +38,7 @@ export default () => {
   const updateTrack = useTrackStore(state => state.updateTrack);
   const crossfadeId = useNoxSetting(state => state.crossfadeId);
   const setCrossfadeId = useNoxSetting(state => state.setCrossfadeId);
-  const { crossfade } = useNoxSetting(state => state.playerSetting);
+  const playerSetting = useNoxSetting(state => state.playerSetting);
   const loadingTracker = React.useRef(false);
   const { initSponsorBlock, checkSponsorBlock } = useSponsorBlock();
 
@@ -77,7 +77,7 @@ export default () => {
     }
     // prepare for cross fading if enabled, playback is > 50% done and crossfade preparation isnt done
     if (
-      crossfade > 0 &&
+      playerSetting.crossfade > 0 &&
       event.position > event.duration * 0.5 &&
       crossfadeId !== currentSongId
     ) {
@@ -103,18 +103,18 @@ export default () => {
         // crossfade req: position is at crossfade interval,
         // crossfade song prepared, not in crossfading
         isAndroid &&
-        crossfade > 0 &&
-        event.position > trueDuration - crossfade &&
+        playerSetting.crossfade > 0 &&
+        event.position > trueDuration - playerSetting.crossfade &&
         crossfadeId === currentSongId &&
         crossfadingId !== currentSongId
       ) {
         logger.debug(
-          `[crossfade] crossfading: ${event.position}, ${trueDuration}, ${crossfade}`,
+          `[crossfade] crossfading: ${event.position}, ${trueDuration}, ${playerSetting.crossfade}`,
         );
         setCrossfadingId(currentSongId);
         setCrossfaded(true);
         return TrackPlayer.crossFade(
-          crossfade * 1000,
+          playerSetting.crossfade * 1000,
           20,
           getR128Gain(track?.song) ?? 1,
         );

@@ -26,18 +26,18 @@ interface Props extends NoxComponent.MiniplayerProps {
 export default ({ miniplayerHeight, opacity, onPress, expand }: Props) => {
   const track = useTrackStore(s => s.track);
   const [trackCarousel, setTrackCarousel] = useState<any[]>([]);
-  const { hideCoverInMobile, artworkRes, artworkCarousel } = useNoxSetting(
-    state => state.playerSetting,
-  );
+  const playerSetting = useNoxSetting(state => state.playerSetting);
   const [overwriteAlbumArt, setOverwriteAlbumArt] = useState<string | void>();
   const { width } = Dimensions.get('window');
 
-  const imgURI = hideCoverInMobile
+  const imgURI = playerSetting.hideCoverInMobile
     ? ''
     : `${overwriteAlbumArt ?? track?.artwork}`;
   const img = useImage(imgURI, {
-    maxHeight: artworkRes === 0 ? undefined : artworkRes,
-    maxWidth: artworkRes === 0 ? undefined : artworkRes,
+    maxHeight:
+      playerSetting.artworkRes === 0 ? undefined : playerSetting.artworkRes,
+    maxWidth:
+      playerSetting.artworkRes === 0 ? undefined : playerSetting.artworkRes,
     onError: () =>
       logger.warn(`[artwork] failed to load ${track?.mediaId} artwork`),
   });
@@ -111,7 +111,7 @@ export default ({ miniplayerHeight, opacity, onPress, expand }: Props) => {
           animatedStyle,
         ]}
       >
-        {artworkCarousel ? (
+        {playerSetting.artworkCarousel ? (
           <HorizontalCarousel
             images={trackCarousel}
             imgStyle={{ width, height: width }}
@@ -122,7 +122,9 @@ export default ({ miniplayerHeight, opacity, onPress, expand }: Props) => {
             active={track !== undefined}
           />
         ) : (
-          <Image style={styles.flex} source={img} />
+          !playerSetting.hideCoverInMobile && (
+            <Image style={styles.flex} source={img} />
+          )
         )}
       </Animated.View>
     </TouchableWithoutFeedback>
