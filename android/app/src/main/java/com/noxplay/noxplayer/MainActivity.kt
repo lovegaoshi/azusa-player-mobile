@@ -52,6 +52,7 @@ class MainActivity(override var loadedRN: Boolean = false) :
         content.viewTreeObserver.addOnPreDrawListener(
             object : ViewTreeObserver.OnPreDrawListener {
                 override fun onPreDraw(): Boolean {
+                    return true
                     // Check whether the initial data is ready.
                     return if (loadedRN) {
                         // The content is ready. Start drawing.
