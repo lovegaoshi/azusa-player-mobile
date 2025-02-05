@@ -83,7 +83,7 @@ export const fetchBiliSearchList = async (
         : undefined,
       startPage,
     });
-    return getUniqObjects(results, v => v.bvid);
+    return getUniqObjects(results, v => `${v.bvid}-${v.id}`);
   } catch (e) {
     logger.error(e);
   }
