@@ -5784,6 +5784,7 @@ __metadata:
     expo-image-picker: "npm:~16.0.5"
     expo-keep-awake: "npm:~14.0.2"
     expo-secure-store: "npm:~14.0.1"
+    expo-sqlite: "npm:~15.1.2"
     fflate: "npm:^0.8.2"
     ffmpeg-kit-react-native: "https://gitpkg.vercel.app/lovegaoshi/ffmpeg-kit/react-native?4a0122d6dc3fb13237870dfea2533992f19c324a"
     gts: "npm:^6.0.2"
@@ -9273,6 +9274,17 @@ __metadata:
   peerDependencies:
     expo: "*"
   checksum: 10c0/c2ad36f7ae8aea5b95ebc117f302974de6ad403f0b98b259f9dfcadc441f5c40c2170472e4e95832ad6cf8bcd37614dfb3757a4de1f7631ea9493c61cb7b2ab3
+  languageName: node
+  linkType: hard
+
+"expo-sqlite@npm:~15.1.2":
+  version: 15.1.2
+  resolution: "expo-sqlite@npm:15.1.2"
+  peerDependencies:
+    expo: "*"
+    react: "*"
+    react-native: "*"
+  checksum: 10c0/35987cd9b74cbc90e014318b3deaa05014be9587bd5884f83b2392d354e4ad04a70860f520893aa9a16f28e014263bb67be2dcb72f0f97c54cec4c7f063aa7b7
   languageName: node
   linkType: hard
 

@@ -29,6 +29,7 @@ import { isAndroid } from '@utils/RNUtils';
 import SelectSetting from '../helpers/SelectSetting';
 import { SelectDialogChildren } from '../SelectDialogWrapper';
 import { Route, Icons } from './enums';
+import sqlMigrate from '@utils/sqlMigrate';
 
 const FadeOptions = [0, 250, 500, 1000];
 const CrossFadeOptions = [0, 2500, 5000, 7500, 12000];
@@ -305,6 +306,12 @@ export const Home = ({
               { cancelable: true },
             )
           }
+          settingCategory="DeveloperSettings"
+        />
+        <SettingListItem
+          icon={Icons.clearOrphanCache}
+          settingName="SQLMigrate"
+          onPress={() => sqlMigrate(true)}
           settingCategory="DeveloperSettings"
         />
       </List.Section>
