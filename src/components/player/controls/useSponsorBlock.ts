@@ -9,13 +9,11 @@ import { getSponsorBlock } from '@utils/sponsorblock/parser';
 export default () => {
   const setSnack = useSnack(state => state.setSnack);
   const { t } = useTranslation();
-  const { sponsorBlockEnabled, sponsorBlockCat } = useNoxSetting(
-    state => state.playerSetting,
-  );
+  const playerSetting = useNoxSetting(state => state.playerSetting);
   const [sponsorBlock, setSponsorBlock] = useState<SponsorBlockBili[]>([]);
 
   const initSponsorBlock = (song: NoxMedia.Song) => {
-    if (sponsorBlockEnabled) {
+    if (playerSetting.sponsorBlockEnabled) {
       getSponsorBlock(song).then(setSponsorBlock);
     }
   };
@@ -23,7 +21,7 @@ export default () => {
   const checkSponsorBlock = (position: number) => {
     for (const sb of sponsorBlock) {
       if (
-        sponsorBlockCat.includes(sb.category) &&
+        playerSetting.sponsorBlockCat.includes(sb.category) &&
         sb.actionType === ActionType.Skip &&
         position > sb.segment[0] &&
         position < sb.segment[1]

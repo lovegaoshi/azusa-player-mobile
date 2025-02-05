@@ -49,7 +49,7 @@ export default ({ usePlaylist, prepareForLayoutAnimationRender }: Props) => {
   const menuCoord = useNoxSetting(state => state.songMenuCoords);
   const songMenuSongIndexes = useNoxSetting(state => state.songMenuSongIndexes);
   const currentPlaylist = useNoxSetting(state => state.currentPlaylist);
-  const { downloadLocation } = useNoxSetting(state => state.playerSetting);
+  const playerSetting = useNoxSetting(state => state.playerSetting);
   const playlistCRUD = usePlaylistCRUD(currentPlaylist);
   const setPlaylistSearchAutoFocus = useNoxSetting(
     state => state.setPlaylistSearchAutoFocus,
@@ -156,7 +156,7 @@ export default ({ usePlaylist, prepareForLayoutAnimationRender }: Props) => {
             const downloadSong = async (song: NoxMedia.Song) => {
               const newPath = await copyCacheToDir({
                 song,
-                fsdir: downloadLocation,
+                fsdir: playerSetting.downloadLocation,
               });
               if (!newPath) return;
               await playlistCRUD.updateSong(song, {
