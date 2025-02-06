@@ -311,7 +311,7 @@ export const Home = ({
         <SettingListItem
           icon={Icons.clearOrphanCache}
           settingName="SQLMigrate"
-          onPress={() => sqlMigrate(true)}
+          onPress={sqlMigrate}
           settingCategory="DeveloperSettings"
         />
       </List.Section>

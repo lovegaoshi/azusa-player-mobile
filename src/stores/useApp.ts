@@ -104,7 +104,10 @@ export const useNoxSetting = create<NoxSetting>((set, get, storeApi) => ({
 
   playerSetting: DefaultSetting,
   setPlayerSetting: val => {
-    const newPlayerSetting = { ...get().playerSetting, ...val };
+    const newPlayerSetting = {
+      ...get().playerSetting,
+      ...val,
+    } as NoxStorage.PlayerSettingDict;
     set({ playerSetting: newPlayerSetting });
     return saveSettings(newPlayerSetting);
   },
