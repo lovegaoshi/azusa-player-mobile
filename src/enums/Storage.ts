@@ -27,6 +27,7 @@ export enum StorageKeys {
 
   YTMTOKEN = 'YTMToken',
   YTMCOOKIES = 'YTMCookies',
+  EXPO_SQL_MIGRATION = 'ExpoSqlMigration',
 }
 
 export enum SearchOptions {
