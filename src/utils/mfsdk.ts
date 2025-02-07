@@ -4,6 +4,7 @@ import { readTxtFile, rmTxtFile, writeTxtFile } from '@utils/fs';
 import logger from './Logger';
 import { loadEvalPlugin, MFsdk } from './mediafetch/evalsdk';
 import bFetch from './BiliFetch';
+import { filterUndefined } from './Utils';
 
 const mfsdkSubFolder = 'mfsdk';
 
@@ -39,7 +40,7 @@ export const initMFsdk = async () => {
       }
     }),
   );
-  return mfsdks.filter(v => v !== undefined);
+  return filterUndefined(mfsdks, v => v);
 };
 
 export const fetchMFsdk = async (url: string): Promise<MFsdk[]> => {
