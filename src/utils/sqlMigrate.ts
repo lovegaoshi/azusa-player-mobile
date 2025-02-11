@@ -1,17 +1,14 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import AsyncStorage2 from 'expo-sqlite/kv-store';
 
-import { StorageKeys } from '@enums/Storage';
-import { getItem, saveItem } from './ChromeStorageAPI';
-
 export default async () => {
-  if (await getItem(StorageKeys.EXPO_SQL_MIGRATION, false)) {
+  const allKeys = await AsyncStorage.getAllKeys();
+  if (allKeys.length === 0) {
     return;
   }
-  const allKeys = await AsyncStorage.getAllKeys();
   const content = await AsyncStorage.multiGet(allKeys);
+  await AsyncStorage2.clear();
   // @ts-expect-error
-  AsyncStorage2.multiSet.bind(AsyncStorage2)(content);
-  AsyncStorage.clear();
-  saveItem(StorageKeys.EXPO_SQL_MIGRATION, true);
+  await AsyncStorage2.multiSet.bind(AsyncStorage2)(content);
+  await AsyncStorage.clear();
 };
