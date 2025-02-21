@@ -47,9 +47,6 @@ const initializePlayer = async (safeMode = false) => {
     serviceOptions.lastPlayDuration = 0;
   }
   await additionalPlaybackService(serviceOptions);
-  if (await TrackPlayer.validateOnStartCommandIntent()) {
-    await TrackPlayer.play();
-  }
   return storedPlayerSetting;
 };
 
