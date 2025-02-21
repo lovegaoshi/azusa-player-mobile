@@ -17,7 +17,7 @@ end
 target 'azusa-player-mobile' do
   # https://github.com/arthenica/ffmpeg-kit/tree/main/react-native#222-enabling-a-package-on-ios
   pod 'ffmpeg-kit-react-native', :subspecs => ['audio'], :podspec => '../node_modules/ffmpeg-kit-react-native/ffmpeg-kit-react-native.podspec'
-
+  pod 'ffmpeg-kit-ios-audio', :podspec => '../ffmpeg-kit-ios-audio.podspec'
   use_expo_modules!
 
   post_integrate do |installer|
