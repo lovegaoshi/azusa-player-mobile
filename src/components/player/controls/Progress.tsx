@@ -11,7 +11,7 @@ import { seconds2MMSS as formatSeconds } from '@utils/Utils';
 import appStore from '@stores/appStore';
 
 export const Progress: React.FC<{ live?: boolean }> = ({ live }) => {
-  const { position, duration } = useProgress();
+  const { position, duration } = useProgress(1000, false);
   const playerStyle = useNoxSetting(state => state.playerStyle);
   const fetchProgress = useStore(appStore, state => state.fetchProgress);
 

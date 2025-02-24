@@ -21,7 +21,7 @@ interface SliderProps {
 }
 
 const ABSlider = ({ range, setRange }: SliderProps) => {
-  const { duration } = useProgress();
+  const { duration } = useProgress(1000, false);
   const playerStyle = useNoxSetting(state => state.playerStyle);
   const currentABRepeat = useNoxSetting(state => state.currentABRepeat);
 

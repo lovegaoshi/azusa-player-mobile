@@ -7,7 +7,7 @@ import { useNoxSetting } from '@stores/useApp';
 
 export default () => {
   const playWhenReady = usePlayWhenReady();
-  const { position, duration } = useProgress();
+  const { position, duration } = useProgress(1000, false);
   const playerSetting = useNoxSetting(state => state.playerSetting);
   const playerStyle = useNoxSetting(state => state.playerStyle);
 
