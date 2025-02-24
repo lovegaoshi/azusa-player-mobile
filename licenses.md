@@ -2,15 +2,13 @@ Licenses of used dependencies:
 
 [Azusa-player](https://github.com/kenmingwang/azusa-player): MIT
 
-[@react-native-async-storage/async-storage](https://github.com/react-native-async-storage/async-storage): MIT
+[@react-native-community/slider](https://github.com/callstack/react-native-slider): MIT
 
-[@react-native-community/slider](https://github.com/callstack/react-native-slider): MIT 
-
-[@react-native-cookies/cookies](https://github.com/react-native-cookies/cookies): MIT 
+[@react-native-cookies/cookies](https://github.com/react-native-cookies/cookies): MIT
 
 [@react-navigation/drawer](https://github.com/react-navigation/react-navigation): [MIT](https://github.com/react-navigation/react-navigation/blob/main/packages/native/LICENSE)
 
-[@react-navigation/material-top-tabs](https://github.com/react-navigation/react-navigation): [MIT](https://github.com/react-navigation/react-navigation/blob/main/packages/native/LICENSE) 
+[@react-navigation/material-top-tabs](https://github.com/react-navigation/react-navigation): [MIT](https://github.com/react-navigation/react-navigation/blob/main/packages/native/LICENSE)
 
 [@react-navigation/native](https://github.com/react-navigation/native): MIT License
 
@@ -46,7 +44,7 @@ Licenses of used dependencies:
 
 [react-native-blob-jsi-helper](https://github.com/mrousavy/react-native-blob-jsi-helper): MIT License
 
-[react-native-countdown-circle-timer](https://github.com/vydimitrov/react-countdown-circle-timer): MIT 
+[react-native-countdown-circle-timer](https://github.com/vydimitrov/react-countdown-circle-timer): MIT
 
 [react-native-draggable-flatlist](https://github.com/computerjazz/react-native-draggable-flatlist): MIT License
 
@@ -89,4 +87,3 @@ Licenses of used dependencies:
 [use-debounce](https://github.com/xnimorz/use-debounce): MIT License
 
 [zustand](https://github.com/pmndrs/zustand): MIT License
-

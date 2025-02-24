@@ -12,6 +12,7 @@ interface Props {
   style?: ViewStyle;
   trackStyle?: ViewStyle;
   enabled?: boolean;
+  progressInterval?: number;
 }
 export const SimpleProgressBar = ({
   thumbSize,
@@ -20,8 +21,9 @@ export const SimpleProgressBar = ({
   style,
   trackStyle,
   enabled = true,
+  progressInterval = 200,
 }: Props) => {
-  const { position, duration } = useProgress(200);
+  const { position, duration } = useProgress(progressInterval, false);
   const playerStyle = useNoxSetting(state => state.playerStyle);
 
   return (

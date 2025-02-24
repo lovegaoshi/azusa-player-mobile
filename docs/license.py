@@ -1,4 +1,4 @@
-packages = '''@react-native-async-storage/async-storage
+packages = '''
 @react-native-community/slider
 @react-native-cookies/cookies
 @react-navigation/drawer
