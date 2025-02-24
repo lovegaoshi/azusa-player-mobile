@@ -13,7 +13,6 @@ import usePlayStore from './usePlayStore';
 import { buildBrowseTree } from '@utils/automotive/androidAuto';
 import { NativeModules } from 'react-native';
 import useActiveTrack, { useTrackStore } from './useActiveTrack';
-import sqlMigrate from '@utils/sqlMigrate';
 
 const { NoxModule } = NativeModules;
 
@@ -66,7 +65,6 @@ export default ({ intentData, vip }: NoxComponent.SetupPlayerProps) => {
       NoxModule?.loadRN();
     }
     let unmounted = false;
-    sqlMigrate();
     (async () => {
       await appStartupInit;
       const storedPlayerSetting =

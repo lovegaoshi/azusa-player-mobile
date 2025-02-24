@@ -21,7 +21,6 @@ import AdaptiveTheme from '../components/styles/AdaptiveTheme';
  */
 
 // see known storage limits:
-// https://react-native-async-storage.github.io/async-storage/docs/limits
 const MAX_SONGLIST_SIZE = 400;
 
 export const saveItem = async (
@@ -84,8 +83,6 @@ export const getMapping = async (
 
 /**
  * a generic chunk splitter to store arrays that may exceed 2MB storage limits.
- * see known storage limits:
- * https://react-native-async-storage.github.io/async-storage/docs/limits
  */
 export const saveChucked = async (
   key: string,
