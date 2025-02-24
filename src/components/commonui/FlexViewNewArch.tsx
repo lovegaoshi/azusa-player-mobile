@@ -6,6 +6,12 @@ import { styles } from '@components/style';
  * a view of flex:1 for new arch, resolves resizing issues
  */
 export default ({ children }: { children: React.JSX.Element }) => {
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-expect-error
+  if (global?.nativeFabricUIManager === undefined) {
+    return <View style={styles.flex}>{children}</View>;
+  }
+
   const [initHeight, setInitHeight] = useState(0);
 
   return (
