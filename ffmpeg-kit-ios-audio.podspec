@@ -21,9 +21,7 @@ Pod::Spec.new do |s|
 TODO: Add long description of the pod here.
                        DESC
 
-  s.homepage         = 'https://github.com/87147383/ffmpeg-kit-ios-audio'
   # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
-  s.author           = { '87147383' => '87147383+swan343@users.noreply.github.com' }
   s.source           = { :http => 'https://github.com/lovegaoshi/ffmpeg-kit/releases/download/v6.0.2-binary/ffmpeg-kit-audio-6.0-ios-xcframework.zip' }
   # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
   

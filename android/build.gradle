@@ -9,10 +9,10 @@ buildscript {
         targetSdkVersion = 34
         
         // We use NDK 23 which has both M1 support and is the side-by-side NDK version from AGP.
-        ndkVersion = "26.1.10909125"
+        ndkVersion = "27.1.12297006"
 
         ffmpegKitPackage = "audio"
-        kotlinVersion = "1.9.24"
+        kotlinVersion = "2.0.21"
     }
     repositories {
         mavenLocal()
