@@ -19,15 +19,15 @@ import createAPMUI, { APMUIStore } from './useAPMUI';
 import createUI, { UIStore } from './useUI';
 import createPlaylists, { PlaylistsStore } from './usePlaylists';
 import createMFsdk, { MFsdkStore } from './useMFsdk';
+import createAPMPlayback, { APMPlaybackStore } from './useAPMPlayback';
 import { initMFsdk } from '@utils/mfsdk';
 
-interface NoxSetting extends APMUIStore, UIStore, PlaylistsStore, MFsdkStore {
-  crossfadeId: string;
-  setCrossfadeId: (val: string) => void;
-
-  currentABRepeat: [number, number];
-  setCurrentABRepeat: (val: [number, number]) => void;
-
+interface NoxSetting
+  extends APMUIStore,
+    UIStore,
+    PlaylistsStore,
+    MFsdkStore,
+    APMPlaybackStore {
   getPlaylist: (
     val: string,
     dVal?: NoxMedia.Playlist,
@@ -68,12 +68,7 @@ export const useNoxSetting = create<NoxSetting>((set, get, storeApi) => ({
   ...createUI(set, get, storeApi),
   ...createPlaylists(set, get, storeApi),
   ...createMFsdk(set, get, storeApi),
-
-  crossfadeId: '',
-  setCrossfadeId: v => set({ crossfadeId: v }),
-
-  currentABRepeat: [0, 1],
-  setCurrentABRepeat: val => set({ currentABRepeat: val }),
+  ...createAPMPlayback(set, get, storeApi),
 
   getPlaylist: async (v, d) => {
     const {
