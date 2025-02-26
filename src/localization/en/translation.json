@@ -426,7 +426,10 @@
   "Lyric": {
     "loading": "Loading lyric...",
     "failedToFetch": "lrc failed to fetch",
-    "notFound": "[00:00.000] Lyric was not found"
+    "notFound": "[00:00.000] Lyric was not found",
+    "options": "Lyric Options",
+    "changeLyric": "Change Source",
+    "offset": "Adjust Offset"
   },
   "PlaylistAnalytics": {
     "title": "Playlist Analytics of {{val}}",

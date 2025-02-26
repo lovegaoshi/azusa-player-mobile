@@ -428,7 +428,10 @@
   "Lyric": {
     "loading": "正在加载...",
     "failedToFetch": "歌词加载失败,请手动搜索",
-    "notFound": "[00:00.000] 无法找到歌词,请手动搜索"
+    "notFound": "[00:00.000] 无法找到歌词,请手动搜索",
+    "options": "更多",
+    "changeLyric": "更换歌词",
+    "offset": "歌词时间调整"
   },
   "PlaylistAnalytics": {
     "title": "歌单 {{val}} 的统计信息",
