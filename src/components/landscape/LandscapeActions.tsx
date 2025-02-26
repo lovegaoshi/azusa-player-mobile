@@ -15,6 +15,7 @@ interface Props {
 export default ({ panelWidth = 110 }: Props) => {
   const playerStyle = useNoxSetting(state => state.playerStyle);
   const currentPlayingId = useNoxSetting(state => state.currentPlayingId);
+  const expand = useNoxSetting(state => state.expand);
   const navigation = useNavigation();
   const iconSize = panelWidth - 30;
 
@@ -32,6 +33,7 @@ export default ({ panelWidth = 110 }: Props) => {
       if (data.url === 'trackplayer://notification.click') {
         logger.debug('[Drawer] click from notification; navigate to home');
         navigation.navigate({ route: NoxRoutes.PlayerHome });
+        expand();
       }
     }
     // This event will be fired when the app is already open and the notification is clicked
