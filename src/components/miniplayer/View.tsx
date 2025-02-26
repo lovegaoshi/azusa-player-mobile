@@ -119,6 +119,10 @@ export default () => {
     expand();
   }, [expandCounter]);
 
+  useEffect(() => {
+    useNoxSetting.setState({ collapse, expand });
+  }, []);
+
   return (
     <GestureDetector gesture={lrcVisible ? disabledGesture : scrollDragGesture}>
       <Animated.View style={[{ width: '100%', paddingTop: 3 }, animatedStyle]}>
