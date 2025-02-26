@@ -106,7 +106,7 @@
     "react-native-qrcode-svg": "^6.3.15",
     "react-native-reanimated": "3.16.7",
     "react-native-safe-area-context": "^5.2.0",
-    "react-native-screens": "4.6.0",
+    "react-native-screens": "4.9.1",
     "react-native-shadow-2": "^7.1.1",
     "react-native-share-menu": "git+https://github.com/Expensify/react-native-share-menu.git",
     "react-native-svg": "15.11.2",

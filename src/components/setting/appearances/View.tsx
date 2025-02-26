@@ -9,6 +9,7 @@ import { useNoxSetting } from '@stores/useApp';
 import SelectDarkModeButton from './SelectDarkModeButton';
 import NoWeebButton from './NoWeebButton';
 import SelectPhotoButton from './SelectPhotoButton';
+import DefaultScreenOption from '@enums/ScreenOption';
 
 enum VIEW {
   HOME = 'AppearanceHome',
@@ -78,12 +79,12 @@ const AppearanceSetting = () => {
       <Stack.Screen
         name={VIEW.HOME}
         component={MainView}
-        options={{ headerShown: false }}
+        options={{ headerShown: false, ...DefaultScreenOption }}
       />
       <Stack.Screen
         name={VIEW.SKIN}
         component={SkinSettings}
-        options={{ headerShown: false }}
+        options={{ headerShown: false, ...DefaultScreenOption }}
       />
     </Stack.Navigator>
   );

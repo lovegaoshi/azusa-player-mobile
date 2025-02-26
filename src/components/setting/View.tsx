@@ -18,6 +18,7 @@ import PremiumSettings from '../billing/View';
 import SponsorBlockSettings from './sponsorblock/View';
 import { isAndroid, isIOS } from '@utils/RNUtils';
 import FlexView from '@components/commonui/FlexViewNewArch';
+import DefaultScreenOption from '@enums/ScreenOption';
 
 enum NoxView {
   HOME = 'cog',
@@ -137,64 +138,97 @@ const Settings = ({ headerBackVisible = true }: Props) => {
         <Stack.Screen
           name={NoxView.HOME}
           component={HomeSettings}
-          options={{ title: t('Settings.HomeSettingName') }}
+          options={{
+            title: t('Settings.HomeSettingName'),
+            ...DefaultScreenOption,
+          }}
         />
         <Stack.Screen
           name={NoxView.SPLASH_GALLARY}
           component={SplashSettings}
-          options={{ title: t('Settings.SplashSettingName') }}
+          options={{
+            title: t('Settings.SplashSettingName'),
+            ...DefaultScreenOption,
+          }}
         />
         <Stack.Screen
           name={NoxView.INFO}
           component={AboutSettings}
-          options={{ title: t('Settings.InfoSettingName') }}
+          options={{
+            title: t('Settings.InfoSettingName'),
+            ...DefaultScreenOption,
+          }}
         />
         <Stack.Screen
           name={NoxView.GENERAL}
           component={GeneralSettings}
-          options={{ title: t('Settings.GeneralSettingName') }}
+          options={{
+            title: t('Settings.GeneralSettingName'),
+            ...DefaultScreenOption,
+          }}
         />
         <Stack.Screen
           name={NoxView.SKIN}
           component={AppearanceSettings}
-          options={{ title: t('Settings.AppearanceSettingName') }}
+          options={{
+            title: t('Settings.AppearanceSettingName'),
+            ...DefaultScreenOption,
+          }}
         />
         <Stack.Screen
           name={NoxView.DEVELOPER}
           component={DeveloperSettings}
-          options={{ title: t('Settings.DeveloperOptionsName') }}
+          options={{
+            title: t('Settings.DeveloperOptionsName'),
+            ...DefaultScreenOption,
+          }}
         />
         <Stack.Screen
           name={NoxView.ALIST}
           component={AListSettings}
-          options={{ title: t('Settings.AListOptionsName') }}
+          options={{
+            title: t('Settings.AListOptionsName'),
+            ...DefaultScreenOption,
+          }}
         />
         <Stack.Screen
           name={NoxView.SPONSORBLOCK}
           component={SponsorBlockSettings}
-          options={{ title: t('SponsorBlock.SponsorBlockOptionsName') }}
+          options={{
+            title: t('SponsorBlock.SponsorBlockOptionsName'),
+            ...DefaultScreenOption,
+          }}
         />
         {isAndroid && (
           <Stack.Screen
             name={NoxView.DOWNLOAD}
             component={DownloadSettings}
-            options={{ title: t('Settings.DownloadOptionsName') }}
+            options={{
+              title: t('Settings.DownloadOptionsName'),
+              ...DefaultScreenOption,
+            }}
           />
         )}
         <Stack.Screen
           name={NoxView.BACKUP}
           component={SyncSettings}
-          options={{ title: t('Settings.BackupSettingName') }}
+          options={{
+            title: t('Settings.BackupSettingName'),
+            ...DefaultScreenOption,
+          }}
         />
         <Stack.Screen
           name={NoxView.LOGIN}
           component={LoginSettings}
-          options={{ title: t('appDrawer.LoginName') }}
+          options={{ title: t('appDrawer.LoginName'), ...DefaultScreenOption }}
         />
         <Stack.Screen
           name={NoxView.PREMIUM}
           component={PremiumSettings}
-          options={{ title: t('appDrawer.PremiumName') }}
+          options={{
+            title: t('appDrawer.PremiumName'),
+            ...DefaultScreenOption,
+          }}
         />
       </Stack.Navigator>
     </FlexView>
