@@ -1,6 +1,5 @@
 import { Platform } from 'react-native';
 import { useEffect } from 'react';
-import { useTranslation } from 'react-i18next';
 
 import usePlayback from './usePlayback';
 import { useNoxSetting } from '@stores/useApp';
@@ -9,10 +8,9 @@ import usePlaybackCarplay from './usePlaybackCarplay';
 import { buildBrowseTree } from '@utils/automotive/androidAuto';
 
 export const useAndroidAuto = () => {
-  const { t } = useTranslation();
   const playlists = useNoxSetting(state => state.playlists);
 
-  return { buildBrowseTree: () => buildBrowseTree(playlists, t) };
+  return { buildBrowseTree: () => buildBrowseTree(playlists) };
 };
 
 const useAndroidAutoListener = () => {
