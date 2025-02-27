@@ -29,9 +29,14 @@ const { fadeIntervalMs, fadeIntervalSec } = appStore.getState();
 export default () => {
   const { performSkipToNext, performSkipToPrevious, prepareSkipToNext } =
     useTPControls();
-  const [abRepeat, setABRepeat] = React.useState<[number, number]>([0, 1]);
-  const [bRepeatDuration, setBRepeatDuration] = React.useState(9999);
-  const [crossfadingId, setCrossfadingId] = React.useState('');
+
+  const abRepeat = useNoxSetting(state => state.abRepeat);
+  const setABRepeat = useNoxSetting(state => state.setABRepeat);
+  const bRepeatDuration = useNoxSetting(state => state.bRepeatDuration);
+  const setBRepeatDuration = useNoxSetting(state => state.setBRepeatDuration);
+  const crossfadingId = useNoxSetting(state => state.crossfadingId);
+  const setCrossfadingId = useNoxSetting(state => state.setCrossfadingId);
+
   const { updateCurrentSongMetadata, updateCurrentSongMetadataReceived } =
     usePlaylistCRUD();
   const track = useTrackStore(state => state.track);
@@ -86,19 +91,13 @@ export default () => {
       );
       await prepareSkipToNext();
       setCrossfadeId(track?.song?.id ?? '');
+      setBRepeatDuration(event.duration * abRepeat[1]);
       return TrackPlayer.crossFadePrepare();
     }
 
     // if fade or crossfade should be triggered
     if (event.duration > 0 && playmode !== NoxRepeatMode.RepeatTrack) {
-      let trueDuration = Math.min(bRepeatDuration, event.duration);
-      if (trueDuration === 0) {
-        logger.warn(
-          `[crossfade] true duration is 0?! reset to ${event.duration} instead. ${bRepeatDuration}, ${abRepeat}.`,
-        );
-        trueDuration = event.duration * abRepeat[1];
-        setBRepeatDuration(trueDuration);
-      }
+      const trueDuration = Math.min(bRepeatDuration, event.duration);
       if (
         // crossfade req: position is at crossfade interval,
         // crossfade song prepared, not in crossfading

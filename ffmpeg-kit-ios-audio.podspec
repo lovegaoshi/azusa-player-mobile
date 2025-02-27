@@ -22,6 +22,8 @@ TODO: Add long description of the pod here.
                        DESC
 
   # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
+  s.author           = { 'lovegaoshi' => 'love@gao.shi' }
+  s.homepage         = 'https://google.com'
   s.source           = { :http => 'https://github.com/lovegaoshi/ffmpeg-kit/releases/download/v6.0.2-binary/ffmpeg-kit-audio-6.0-ios-xcframework.zip' }
   # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
   

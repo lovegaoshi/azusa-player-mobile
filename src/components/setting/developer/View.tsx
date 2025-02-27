@@ -8,6 +8,7 @@ import SelectDialogWrapper from '../SelectDialogWrapper';
 import { Route } from './enums';
 import { Home } from './DeveloperSettings';
 import MFSettings from './plugins/musicfree/View';
+import DefaultScreenOption from '@enums/ScreenOption';
 
 const Stack = createNativeStackNavigator();
 
@@ -33,17 +34,17 @@ export default () => {
       <Stack.Screen
         name={Route.HOME}
         component={HomeWrapper}
-        options={{ headerShown: false }}
+        options={{ headerShown: false, ...DefaultScreenOption }}
       />
       <Stack.Screen
         name={Route.PLUGINS}
         component={PluginSettings}
-        options={{ headerShown: false }}
+        options={{ headerShown: false, ...DefaultScreenOption }}
       />
       <Stack.Screen
         name={Route.MUSICFREE}
         component={MFSettings}
-        options={{ headerShown: false }}
+        options={{ headerShown: false, ...DefaultScreenOption }}
       />
     </Stack.Navigator>
   );

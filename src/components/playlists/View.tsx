@@ -60,6 +60,7 @@ export default () => {
   const [layoutHeight, setLayoutHeight] = useState(0);
   const playlistIds = useNoxSetting(state => state.playlistIds);
   const playerStyle = useNoxSetting(state => state.playerStyle);
+  const toggleExpand = useNoxSetting(state => state.toggleExpand);
 
   // HACK: I know its bad! But somehow this hook isnt updating in its own
   // useEffects...
@@ -74,6 +75,7 @@ export default () => {
       if (data.url === 'trackplayer://notification.click') {
         logger.debug('[Drawer] click from notification; navigate to home');
         navigation.navigate({ route: NoxRoutes.PlayerHome });
+        toggleExpand();
       }
     }
 

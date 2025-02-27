@@ -14,6 +14,7 @@ import {
 import { Lrc as Lyric, KaraokeMode } from 'react-native-lyric';
 import { Track, useProgress } from 'react-native-track-player';
 import { IconButton } from 'react-native-paper';
+import { useTranslation } from 'react-i18next';
 
 import { useNoxSetting } from '@stores/useApp';
 import useLyric from '@hooks/useLyricRN';
@@ -72,6 +73,7 @@ export const LyricView = ({
   const [modalVisible, setModalVisible] = useState(false);
   const [lyricSearchModalVisible, setLyricSearchModalVisible] = useState(false);
   const [offsetModalVisible, setOffsetModalVisible] = useState(false);
+  const { t } = useTranslation();
 
   const playerStyle = useNoxSetting(state => state.playerStyle);
   const {
@@ -154,7 +156,9 @@ export const LyricView = ({
             onRequestClose={() => setModalVisible(false)}
           >
             <View style={customizedStyles.modelContainer}>
-              <Text style={customizedStyles.headerText}>更多</Text>
+              <Text style={customizedStyles.headerText}>
+                {t('Lyric.options')}
+              </Text>
               <TouchableOpacity onPress={() => setModalVisible(false)}>
                 <IconButton
                   iconColor={playerStyle.colors.primary}
@@ -165,8 +169,8 @@ export const LyricView = ({
             <FlatList
               style={{ backgroundColor: playerStyle.colors.primaryContainer }}
               data={[
-                { key: 'LyricOptions', title: '更换歌词' },
-                { key: 'LyricOffset', title: '歌词时间调整' },
+                { key: 'LyricOptions', title: t('Lyric.changeLyric') },
+                { key: 'LyricOffset', title: t('Lyric.offset') },
               ]}
               renderItem={({ item }) => (
                 <TouchableOpacity onPress={() => LyricOptions(item.key)}>

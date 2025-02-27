@@ -29,6 +29,7 @@ export default () => {
   const miniplayerHeight = useSharedValue(MinPlayerHeight);
   const artworkOpacity = useSharedValue(1);
   const initHeight = useSharedValue(0);
+  const expandCounter = useNoxSetting(state => state.expandCounter);
 
   const opacityVisible = useDerivedValue(() => {
     const opacityLevel = width + 50;
@@ -116,6 +117,9 @@ export default () => {
 
   useEffect(() => {
     expand();
+  }, [expandCounter]);
+
+  useEffect(() => {
     useNoxSetting.setState({ collapse, expand });
   }, []);
 

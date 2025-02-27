@@ -29,8 +29,11 @@ export interface APMUIStore {
   setSongMenuVisible: (val: boolean) => void;
   songMenuSongIndexes: number[];
   setSongMenuSongIndexes: (val: number[]) => void;
+
   collapse: () => void;
   expand: () => void;
+  expandCounter: number;
+  toggleExpand: () => void;
 }
 
 const store: StateCreator<APMUIStore, [], [], APMUIStore> = set => ({
@@ -68,8 +71,12 @@ const store: StateCreator<APMUIStore, [], [], APMUIStore> = set => ({
   setSongMenuVisible: val => set({ songMenuVisible: val }),
   songMenuSongIndexes: [],
   setSongMenuSongIndexes: val => set({ songMenuSongIndexes: val }),
+
   collapse: () => void 0,
   expand: () => void 0,
+  expandCounter: 0,
+  toggleExpand: () =>
+    set(state => ({ expandCounter: state.expandCounter + 1 })),
 });
 
 export default store;

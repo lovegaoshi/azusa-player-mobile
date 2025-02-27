@@ -42,7 +42,7 @@ const _calculateWavePoints = ({
   'worklet';
   return [...Array(Math.max(points, 1) + 1)].map((v, i) => {
     'worklet';
-    const scale = 100;
+    const scale = 1;
     const x = (i / points) * w;
     const seed = (step + (i + (i % points))) * speed * scale;
     const height = Math.sin(seed / scale) * amplitude;
@@ -60,12 +60,12 @@ const _buildPath = (points: Point[], w: number, h: number) => {
   'worklet';
   let svg = `M ${points[0].x} ${h}`;
   const initial = {
-    x: (points[1].x - points[0].x) / 2,
+    x: (points[1].x - points[0].x) / 4,
     y: points[1].y * 2 - points[0].y,
   };
   svg += cubic(initial, points[1]);
   let point = initial;
-  [...Array(points.length - 2)].forEach((v, i) => {
+  [...Array(points.length - 3)].forEach((v, i) => {
     'worklet';
     point = {
       x: points[i + 1].x - point.x + points[i + 1].x,
@@ -73,8 +73,8 @@ const _buildPath = (points: Point[], w: number, h: number) => {
     };
     svg += cubic(point, points[i + 2]);
   });
-  svg += ` L ${w} ${h}`;
-  svg += ` L 0 ${h} Z`;
+  // makes the bezier curve fit to the last point
+  svg += cubic(points[points.length - 1], { x: w - 10, y: h + 10 }); //` C ${w} ${h}`;
   return svg;
 };
 
@@ -97,10 +97,10 @@ export default function WaveAnimation({
     'worklet';
     return _buildPath(
       _calculateWavePoints({
-        points: 3,
-        step: clock.value / 2500,
+        points: 4,
+        step: clock.value / 3500,
         w: extrapolatedWidth,
-        h: 15,
+        h: 18,
         speed: 5,
         amplitude: 5,
       }),
@@ -114,9 +114,9 @@ export default function WaveAnimation({
     return _buildPath(
       _calculateWavePoints({
         points: 3,
-        step: clock.value / 2500 + 0.5,
+        step: clock.value / 3500 + 0.5,
         w: extrapolatedWidth,
-        h: 15,
+        h: 18,
         speed: 5,
         amplitude: 5,
       }),

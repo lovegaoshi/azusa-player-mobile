@@ -5,6 +5,7 @@ import TrackPlayer, {
 
 import { initRNTPOptions } from '../utils/RNTPUtils';
 import appStore from '@stores/appStore';
+import { initAA } from '@stores/useAndroidAuto';
 
 const { setState } = appStore;
 
@@ -52,4 +53,5 @@ export const SetupService = async ({
   setState({ RNTPOptions });
   await TrackPlayer.updateOptions(RNTPOptions);
   await TrackPlayer.setRepeatMode(RepeatMode.Off);
+  initAA();
 };
