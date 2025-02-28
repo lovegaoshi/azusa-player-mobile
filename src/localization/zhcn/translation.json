@@ -51,6 +51,9 @@
     "30": "Vocaloid",
     "59": "演奏",
     "193": "MV",
+    "22": "鬼畜调教",
+    "26": "音MAD",
+    "126": "人力VOCALOID",
     "29": "音乐现场"
   },
   "appDrawer": {
@@ -66,9 +69,7 @@
     "zero": "清零",
     "nullify": "重置"
   },
-  "CopiedPlaylistDialog": {
-    "title": "将 {{title}} 送往..."
-  },
+  "CopiedPlaylistDialog": { "title": "将 {{title}} 送往..." },
   "NewPlaylistDialog": {
     "title": "将歌单 {{fromList.title}} 新建为...",
     "titleNew": "创建新歌单...",
@@ -90,12 +91,8 @@
     "SearchListTitle": "搜索歌单",
     "SearchListTitleNA": "错误错误错误错误"
   },
-  "BiliSearchBar": {
-    "label": "b站URL"
-  },
-  "PlaylistSearchBar": {
-    "label": "歌单内搜"
-  },
+  "BiliSearchBar": { "label": "b站URL" },
+  "PlaylistSearchBar": { "label": "歌单内搜" },
   "PlaylistOperations": {
     "updating": "正在更新歌单 {{playlist.title}} 的订阅...",
     "updated": "歌单 {{playlist.title}} 更新完成",
@@ -363,9 +360,7 @@
     "NoxExtensionAppend": "选择加入",
     "NoxExtensionCancel": "算了"
   },
-  "SleepTimer": {
-    "Title": "定时停止播放"
-  },
+  "SleepTimer": { "Title": "定时停止播放" },
   "Login": {
     "BilibiliNotLoggedIn": "用户未登录",
     "BilibiliLoginButton": "扫码登录",
@@ -419,12 +414,8 @@
     "durationLessMatch": "长度小于",
     "durationMoreMatch": "长度大于"
   },
-  "Accessibility": {
-    "gif": "GIF"
-  },
-  "Menu": {
-    "local": "本地"
-  },
+  "Accessibility": { "gif": "GIF" },
+  "Menu": { "local": "本地" },
   "Lyric": {
     "loading": "正在加载...",
     "failedToFetch": "歌词加载失败,请手动搜索",

@@ -1,4 +1,4 @@
-import { fetchRanking } from '../../src/utils/mediafetch/biliRanking';
+import fetchRanking from '../../src/utils/mediafetch/biliRanking';
 test('biliRank', async () => {
   const content = await fetchRanking();
   // console.log(content);

@@ -22,14 +22,17 @@ const rankingToSong = (data: any) =>
     source: Source.bilivideo,
   });
 
-export const fetchRanking = async (rid = '3') => {
+interface BiliRanking {
+  [key: number]: NoxMedia.Song[];
+}
+
+export const fetchRanking = async (rid = '3', results: BiliRanking = {}) => {
   logger.info(`[biliRanking] calling fetchRanking of ${rid}`);
   try {
     const res = await biliApiLimiter.schedule(() =>
       bfetch(API.replace('{rid}', rid)),
     );
     const json = await res.json();
-    const results = {} as { [key: number]: NoxMedia.Song[] };
     json.data.list.forEach((v: any) => {
       if (!BiliMusicTid.includes(v.tid)) return;
       if (results[v.tid]) {
@@ -38,10 +41,17 @@ export const fetchRanking = async (rid = '3') => {
         results[v.tid] = [rankingToSong(v)];
       }
     });
-    return results;
   } catch (error: any) {
     logger.error(error.message);
     logger.warn(`Some issue happened when fetching ${rid}`);
-    return {};
   }
+  return results;
+};
+
+export default async () => {
+  const res: BiliRanking = {};
+  for (const rid of [3, 119]) {
+    await fetchRanking(String(rid), res);
+  }
+  return res;
 };
