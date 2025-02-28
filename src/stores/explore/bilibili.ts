@@ -1,7 +1,7 @@
 import { create } from 'zustand';
 
 import { fetchDynamic } from '@utils/mediafetch/biliDynamic';
-import { fetchRanking } from '@utils/mediafetch/biliRanking';
+import fetchRanking from '@utils/mediafetch/biliRanking';
 import { fetchCurrentMusicTop } from '@utils/mediafetch/biliMusicTop';
 import { fetchMusicHot } from '@utils/mediafetch/biliMusicHot';
 import { fetchMusicNew } from '@utils/mediafetch/biliMusicNew';

@@ -51,6 +51,9 @@
     "30": "Vocaloid",
     "59": "Instrumental",
     "193": "MV",
+    "22": "Guide",
+    "26": "MAD",
+    "126": "Manual Vocaloid",
     "29": "Live"
   },
   "appDrawer": {
@@ -66,9 +69,7 @@
     "zero": "Zero",
     "nullify": "Nullify"
   },
-  "CopiedPlaylistDialog": {
-    "title": "Send {{title}} to..."
-  },
+  "CopiedPlaylistDialog": { "title": "Send {{title}} to..." },
   "NewPlaylistDialog": {
     "title": "Create {{fromList.title}} as New Playlist...",
     "titleNew": "Create New Playlist...",
@@ -90,12 +91,8 @@
     "SearchListTitle": "Search",
     "SearchListTitleNA": "MISSINGNO."
   },
-  "BiliSearchBar": {
-    "label": "Bilibili URL"
-  },
-  "PlaylistSearchBar": {
-    "label": "Search"
-  },
+  "BiliSearchBar": { "label": "Bilibili URL" },
+  "PlaylistSearchBar": { "label": "Search" },
   "PlaylistOperations": {
     "updating": "Now updating {{playlist.title}}'s subscriptions...",
     "updated": "Playlist {{playlist.title}} updated",
@@ -361,9 +358,7 @@
     "NoxExtensionAppend": "Append",
     "NoxExtensionCancel": "Cancel"
   },
-  "SleepTimer": {
-    "Title": "Sleep Timer"
-  },
+  "SleepTimer": { "Title": "Sleep Timer" },
   "Login": {
     "BilibiliNotLoggedIn": "User not logged in\n",
     "BilibiliLoginButton": "QR log in",
@@ -417,12 +412,8 @@
     "durationLessMatch": "Duration <",
     "durationMoreMatch": "Duration >"
   },
-  "Accessibility": {
-    "gif": "GIF"
-  },
-  "Menu": {
-    "local": "Local"
-  },
+  "Accessibility": { "gif": "GIF" },
+  "Menu": { "local": "Local" },
   "Lyric": {
     "loading": "Loading lyric...",
     "failedToFetch": "lrc failed to fetch",
