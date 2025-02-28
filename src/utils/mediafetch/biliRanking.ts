@@ -41,12 +41,11 @@ export const fetchRanking = async (rid = '3', results: BiliRanking = {}) => {
         results[v.tid] = [rankingToSong(v)];
       }
     });
-    return results;
   } catch (error: any) {
     logger.error(error.message);
     logger.warn(`Some issue happened when fetching ${rid}`);
-    return {};
   }
+  return results;
 };
 
 export default async () => {
