@@ -68,7 +68,7 @@ export default ({
 
   const handleMenuPress = (event: GestureResponderEvent) => {
     setShowMusicFree(mfsdks.length > 0);
-    setDialogOpen(true);
+    toggleVisible();
     setMenuCoords({
       x: event.nativeEvent.pageX,
       y: event.nativeEvent.pageY,
