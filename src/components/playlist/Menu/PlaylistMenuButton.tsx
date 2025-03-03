@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import { IconButton } from 'react-native-paper';
 import { GestureResponderEvent } from 'react-native';
 
-import Dialog from './PlaylistMenu';
+import Menu from './PlaylistMenu';
+import logger from '@utils/Logger';
 
 const ICON = 'dots-horizontal';
 
@@ -13,14 +14,14 @@ interface Props {
 }
 
 export default ({ disabled = false, playlist, songListUpdateHalt }: Props) => {
-  const [dialogOpen, setDialogOpen] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
   const [menuCoords, setMenuCoords] = useState<NoxTheme.coordinates>({
     x: 0,
     y: 0,
   });
 
   const handlePress = (event: GestureResponderEvent) => {
-    setDialogOpen(true);
+    toggleVisible();
     setMenuCoords({
       x: event.nativeEvent.pageX,
       y: event.nativeEvent.pageY,
@@ -28,7 +29,7 @@ export default ({ disabled = false, playlist, songListUpdateHalt }: Props) => {
   };
 
   const toggleVisible = () => {
-    setDialogOpen(val => !val);
+    setMenuOpen(val => !val);
   };
 
   return (
@@ -40,8 +41,8 @@ export default ({ disabled = false, playlist, songListUpdateHalt }: Props) => {
         disabled={disabled}
         //iconColor={playerStyle.colors.primary}
       />
-      <Dialog
-        visible={dialogOpen}
+      <Menu
+        visible={menuOpen}
         toggleVisible={toggleVisible}
         menuCoords={menuCoords}
         playlist={playlist}
