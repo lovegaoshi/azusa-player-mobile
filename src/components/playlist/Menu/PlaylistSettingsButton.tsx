@@ -36,9 +36,7 @@ export default ({
     <React.Fragment>
       <Menu.Item
         leadingIcon={ICON}
-        onPress={() => {
-          setDialogOpen(true);
-        }}
+        onPress={() => setDialogOpen(true)}
         title={t('PlaylistOperations.playlistSettingsTitle')}
         disabled={disabled}
       />

@@ -55,7 +55,7 @@ export default ({ usePlaylist, onPressed = () => undefined }: Props) => {
   });
 
   const handleMenuPress = (event: GestureResponderEvent) => {
-    setDialogOpen(true);
+    toggleVisible();
     setMenuCoords({
       x: event.nativeEvent.pageX,
       y: event.nativeEvent.pageY,

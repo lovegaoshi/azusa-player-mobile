@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { IconButton, Divider, Text, TouchableRipple } from 'react-native-paper';
 import { View, ImageBackground, StyleSheet, Linking } from 'react-native';
 import { useTranslation } from 'react-i18next';
@@ -11,6 +11,7 @@ import { logger } from '@utils/Logger';
 import Playlists from './Playlists';
 import { BottomTabRouteIcons as RouteIcons } from '@enums/BottomTab';
 import useNavigation from '@hooks/useNavigation';
+import FlexView from '../commonui/FlexViewNewArch';
 
 interface Props {
   view: NoxRoutes;
@@ -57,7 +58,6 @@ const BiliCard = (props: any) => {
 
 export default () => {
   const navigation = useNavigation();
-  const [layoutHeight, setLayoutHeight] = useState(0);
   const playlistIds = useNoxSetting(state => state.playlistIds);
   const playerStyle = useNoxSetting(state => state.playerStyle);
   const toggleExpand = useNoxSetting(state => state.toggleExpand);
@@ -88,36 +88,33 @@ export default () => {
   }, []);
 
   return (
-    <View
-      style={layoutHeight === 0 ? styles.flex : { height: layoutHeight }}
-      onLayout={e =>
-        layoutHeight === 0 && setLayoutHeight(e.nativeEvent.layout.height)
-      }
-    >
-      <View style={styles.topPadding} />
-      <BiliCard backgroundURI={playerStyle.biliGarbCard}>
+    <FlexView>
+      <>
+        <View style={styles.topPadding} />
+        <BiliCard backgroundURI={playerStyle.biliGarbCard}>
+          <RenderDrawerItem
+            icon={'home-outline'}
+            view={NoxRoutes.PlayerHome}
+            text={'appDrawer.homeScreenName'}
+            routeIcon={RouteIcons.music}
+          />
+        </BiliCard>
         <RenderDrawerItem
-          icon={'home-outline'}
-          view={NoxRoutes.PlayerHome}
-          text={'appDrawer.homeScreenName'}
-          routeIcon={RouteIcons.music}
+          icon={'compass'}
+          view={NoxRoutes.Explore}
+          text={'appDrawer.exploreScreenName'}
+          routeIcon={RouteIcons.explore}
         />
-      </BiliCard>
-      <RenderDrawerItem
-        icon={'compass'}
-        view={NoxRoutes.Explore}
-        text={'appDrawer.exploreScreenName'}
-        routeIcon={RouteIcons.explore}
-      />
-      <RenderDrawerItem
-        icon={'cog'}
-        view={NoxRoutes.Settings}
-        text={'appDrawer.settingScreenName'}
-        routeIcon={RouteIcons.setting}
-      />
-      <Divider />
-      <Playlists />
-    </View>
+        <RenderDrawerItem
+          icon={'cog'}
+          view={NoxRoutes.Settings}
+          text={'appDrawer.settingScreenName'}
+          routeIcon={RouteIcons.setting}
+        />
+        <Divider />
+        <Playlists />
+      </>
+    </FlexView>
   );
 };
 
