@@ -30,7 +30,6 @@ export default ({ disabled = false, playlist, songListUpdateHalt }: Props) => {
 
   const toggleVisible = () => {
     setMenuOpen(val => !val);
-    logger.debug('[playlistMenu] toggled visible');
   };
 
   return (
