@@ -16,7 +16,14 @@ const defaultBrowseTree: AndroidAutoBrowseTree = {
       title: i18n.t('AndroidAuto.PlaylistTab'),
       playable: '1',
     },
+    {
+      mediaId: 'CurrentPlaylist',
+      title: 'Current',
+      playable: '1',
+    },
   ],
+  PlaylistTab: [],
+  CurrentPlaylist: [],
 };
 
 export const initAA = () => TrackPlayer.setBrowseTree(defaultBrowseTree);
