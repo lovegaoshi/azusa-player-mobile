@@ -3,7 +3,6 @@ import { IconButton } from 'react-native-paper';
 import { GestureResponderEvent } from 'react-native';
 
 import Menu from './PlaylistMenu';
-import logger from '@utils/Logger';
 
 const ICON = 'dots-horizontal';
 

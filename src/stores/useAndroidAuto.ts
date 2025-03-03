@@ -1,5 +1,6 @@
 import { StateCreator } from 'zustand';
-import i18n from 'i18next';
+// HACK: fix i18n!!!
+// import i18n from 'i18next';
 import TrackPlayer, { AndroidAutoBrowseTree } from 'react-native-track-player';
 
 // zustand store slice template.
@@ -13,7 +14,7 @@ const defaultBrowseTree: AndroidAutoBrowseTree = {
   '/': [
     {
       mediaId: 'PlaylistTab',
-      title: i18n.t('AndroidAuto.PlaylistTab'),
+      title: 'Playlists',
       playable: '1',
     },
     {
@@ -23,7 +24,6 @@ const defaultBrowseTree: AndroidAutoBrowseTree = {
     },
   ],
   PlaylistTab: [],
-  CurrentPlaylist: [],
 };
 
 export const initAA = () => TrackPlayer.setBrowseTree(defaultBrowseTree);
