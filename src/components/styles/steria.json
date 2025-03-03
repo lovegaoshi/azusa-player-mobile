@@ -769,6 +769,26 @@
       "darkTheme": true
     },
     "gifs": [
+      "https://i0.hdslb.com/bfs/garb/d255bbb200205b523a6ece34e440daf9f78b0a27.png",
+      "https://i0.hdslb.com/bfs/garb/818e2cd7b0d6147a9da4594dd4290e18c0e33327.png",
+      "https://i0.hdslb.com/bfs/garb/ad19da8731c8688a9403ffb3134e90d658781790.png",
+      "https://i0.hdslb.com/bfs/garb/26c9e03787185f96885cee78adb49db5a061d5d2.png",
+      "https://i0.hdslb.com/bfs/garb/f5a0b35be0c698b9603969f367d6c1ecfc07c7cd.png",
+      "https://i0.hdslb.com/bfs/garb/37873d1586b51be11123c4baee41d571c1235b24.png",
+      "https://i0.hdslb.com/bfs/garb/019e751282036b037bc1067f794bb6fc30be41f0.png",
+      "https://i0.hdslb.com/bfs/garb/705590e8f564101a713dd5cdfa31293ec661f624.png",
+      "https://i0.hdslb.com/bfs/garb/32e5394549191884ff6f091ab69399b202f7c956.png",
+      "https://i0.hdslb.com/bfs/garb/da3d7de4dc9a36c827a7653d2fd8dad4830880d8.png",
+      "https://i0.hdslb.com/bfs/garb/255b244b3105f7ab4bfcedd92116bfa682df922f.png",
+      "https://i0.hdslb.com/bfs/garb/2ac8d7be1aa36916a117ec091e72f70f7576d378.png",
+      "https://i0.hdslb.com/bfs/garb/b55b04aa948666ea4aa1fafcb7179fcf2266c09c.png",
+      "https://i0.hdslb.com/bfs/garb/debc44a125eff7c62c5e2f2737eee5ef224de876.png",
+      "https://i0.hdslb.com/bfs/garb/84473897f3e5988ed694dfe9a876ed125bac5ae2.png",
+      "https://i0.hdslb.com/bfs/garb/c715779666ecb2327192e674c592d35b22e8f5c2.png",
+      "https://i0.hdslb.com/bfs/garb/39fede78cb45eb891d7db00ea5f4935a319a235b.png",
+      "https://i0.hdslb.com/bfs/garb/1ca07606668f6411050280048bb9d7e55eaf2c73.png",
+      "https://i0.hdslb.com/bfs/garb/9ce5a0328c74dd11db69b6c2aa233c91e52c0556.png",
+      "https://i0.hdslb.com/bfs/garb/b72a618ba8a1b3ba208548066d638cd6fe171eeb.png",
       "https://i0.hdslb.com/bfs/live/66ec3ed6855202f34996ae18c3a91a844addfd1a.png",
       "https://i0.hdslb.com/bfs/live/c296d6bab5113aa21ab9b0ecb16a37db02f14eff.png",
       "https://i0.hdslb.com/bfs/live/d86caeabb395d8cb457608bbbe68936031eee285.png",
@@ -781,6 +801,24 @@
       "https://i0.hdslb.com/bfs/live/ed07c7fb8b6d8cf800c47449dd453d7041aa2f0c.png"
     ],
     "backgroundImages": [
+      {
+        "type": "biliNFTVideoNew",
+        "identifier": "[\"106488\",\"106489\",\"幽旎夜景\"]"
+      },
+      {
+        "type": "biliNFTVideoNew",
+        "identifier": "[\"106488\",\"106489\",\"异域幽情\"]"
+      },
+      "https://i0.hdslb.com/bfs/garb/open/744d8d67aa3385dc8a155da689e710fe5d28af4a.png",
+      "https://i0.hdslb.com/bfs/garb/item/ff30b47af8f3b4cdc8c71d8a5e5f8a177ce67fdd.jpg",
+      "https://i0.hdslb.com/bfs/garb/open/05e7716bcc7b14b6a8ab55454dc060c7e5608822.png",
+      "https://i0.hdslb.com/bfs/garb/open/4f3bb1259fb92e7875be115229d0e492d93b6277.png",
+      "https://i0.hdslb.com/bfs/garb/open/98283edeb852a88211fc14ffd8d92b9c79c13091.png",
+      "https://i0.hdslb.com/bfs/garb/open/6d26b14f272c3358e21ef345c1127a6748e28895.png",
+      {
+        "type": "biliNFTVideoRedeem",
+        "identifier": "[\"106488\",\"106489\",\"典藏卡-幻音霓虹\"]"
+      },
       {
         "type": "bvid",
         "identifier": "BV1rh4y1b7wU"
