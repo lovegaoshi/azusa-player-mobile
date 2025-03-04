@@ -100,7 +100,7 @@ export default ({
           activeCarouselTX.value = e.translationX;
         })
         .onEnd(snapToCarousel),
-    [active],
+    [active, throttling],
   );
 
   const carousel1Style = useAnimatedStyle(() => ({
