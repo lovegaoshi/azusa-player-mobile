@@ -22,8 +22,7 @@ export default ({ children, noFlex }: Props) => {
     <View
       style={initHeight === 0 ? styles.flex : { height: initHeight }}
       onLayout={e =>
-        initHeight < e.nativeEvent.layout.height &&
-        setInitHeight(e.nativeEvent.layout.height)
+        initHeight === 0 && setInitHeight(e.nativeEvent.layout.height)
       }
     >
       {children}
