@@ -22,7 +22,7 @@ const rankingToSong = (data: any) =>
     source: Source.bilivideo,
   });
 
-interface BiliRanking {
+export interface BiliRanking {
   [key: number]: NoxMedia.Song[];
 }
 
@@ -48,9 +48,9 @@ export const fetchRanking = async (rid = '3', results: BiliRanking = {}) => {
   return results;
 };
 
-export default async () => {
+export default async (rids = [3, 119]) => {
   const res: BiliRanking = {};
-  for (const rid of [3, 119]) {
+  for (const rid of rids) {
     await fetchRanking(String(rid), res);
   }
   return res;
