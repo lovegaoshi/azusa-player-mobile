@@ -13,6 +13,7 @@ import { styles } from '@components/style';
 import { BiliSongsTabCard, BiliSongsArrayTabCard } from './SongTab';
 import { BiliSongRow } from './SongRow';
 import useBiliExplore from '@stores/explore/bilibili';
+import { BiliMusicTid } from '@enums/MediaFetch';
 
 interface Props {
   style?: ViewStyle;
@@ -51,7 +52,7 @@ export default ({ style }: Props) => {
     >
       <BiliSongsTabCard songs={biliRanking} title={t('BiliCategory.ranking')} />
       <Text style={mStyles.dynamicHeader}>{t('BiliCategory.dynamic')}</Text>
-      {Object.keys(biliDynamic).map((k, i) => (
+      {BiliMusicTid.filter(v => biliDynamic[v]).map(k => (
         <BiliSongRow
           key={`BiliDynamicRow${k}`}
           songs={biliDynamic[Number(k)]}

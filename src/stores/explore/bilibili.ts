@@ -1,7 +1,7 @@
 import { create } from 'zustand';
 
-import { fetchDynamic } from '@utils/mediafetch/biliDynamic';
-import fetchRanking from '@utils/mediafetch/biliRanking';
+import fetchDynamic from '@utils/mediafetch/biliDynamic';
+import { fetchRanking } from '@utils/mediafetch/biliRanking';
 import { fetchCurrentMusicTop } from '@utils/mediafetch/biliMusicTop';
 import { fetchMusicHot } from '@utils/mediafetch/biliMusicHot';
 import { fetchMusicNew } from '@utils/mediafetch/biliMusicNew';
@@ -29,7 +29,7 @@ export default create<BiliExplore>((set, get) => ({
   loading: true,
   onRefresh: async () => {
     set({ refreshing: true });
-    set({ biliDynamic: await fetchDynamic(), refreshing: false });
+    set({ biliDynamic: await fetchDynamic({}), refreshing: false });
   },
   init: async () => {
     if (!get().loading) {
@@ -38,7 +38,7 @@ export default create<BiliExplore>((set, get) => ({
     set({
       loading: false,
       biliRanking: await fetchRanking(),
-      biliDynamic: await fetchDynamic(),
+      biliDynamic: await fetchDynamic({}),
       biliMusicTop: await fetchCurrentMusicTop(),
       biliMusicHot: await fetchMusicHot(),
       biliMusicNew: await fetchMusicNew(),

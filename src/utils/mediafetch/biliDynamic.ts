@@ -3,6 +3,7 @@ import SongTS from '@objects/Song';
 import bfetch from '@utils/BiliFetch';
 import { BiliMusicTid, Source } from '@enums/MediaFetch';
 import { biliApiLimiter } from './throttle';
+import { BiliRanking } from './biliRanking';
 
 const API =
   'https://api.bilibili.com/x/web-interface/dynamic/region?rid={rid}&ps=50&pn={pn}';
@@ -23,14 +24,17 @@ const dynamicToSong = (data: any) =>
     source: Source.bilivideo,
   });
 
-export const fetchDynamic = async (rid = '3', page = 1) => {
+export const fetchDynamic = async (
+  rid = '3',
+  page = 1,
+  results: BiliRanking = {},
+) => {
   logger.info(`[biliDynamic] calling fetchDynamic of ${rid}`);
   try {
     const res = await biliApiLimiter.schedule(() =>
       bfetch(API.replace('{rid}', rid).replace('{pn}', page.toString())),
     );
     const json = await res.json();
-    const results = {} as { [key: number]: NoxMedia.Song[] };
     json.data.archives.forEach((v: any) => {
       if (!BiliMusicTid.includes(v.tid)) return;
       if (results[v.tid]) {
@@ -45,4 +49,17 @@ export const fetchDynamic = async (rid = '3', page = 1) => {
     logger.warn(`Some issue happened when fetching ${rid}`);
     return {};
   }
+};
+
+interface Dynamic {
+  rids?: number[];
+  page?: number;
+}
+
+export default async ({ rids = [3, 199], page = 1 }: Dynamic) => {
+  const res: BiliRanking = {};
+  for (const rid of rids) {
+    await fetchDynamic(String(rid), page, res);
+  }
+  return res;
 };

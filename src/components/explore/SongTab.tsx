@@ -17,6 +17,7 @@ import usePlayback from '@hooks/usePlayback';
 import { NoxRoutes } from '@enums/Routes';
 import useNavigation from '@hooks/useNavigation';
 import { styles } from '../style';
+import { BiliMusicTid } from '@enums/MediaFetch';
 
 export interface BiliCatSongs {
   [key: number]: NoxMedia.Song[];
@@ -159,9 +160,9 @@ export const BiliSongsTabCard = ({
   songs?: BiliCatSongs;
   title: string;
 }) => {
-  const concatSongs = Object.values(songs).reduce(
-    (acc, curr) => acc.concat(curr),
-    [],
+  const concatSongs = BiliMusicTid.reduce(
+    (acc, curr) => acc.concat(songs[curr] ?? []),
+    [] as NoxMedia.Song[],
   );
 
   return <BiliSongsArrayTabCard title={title} songs={concatSongs} />;
