@@ -4293,9 +4293,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@shopify/react-native-skia@npm:1.11.9":
-  version: 1.11.9
-  resolution: "@shopify/react-native-skia@npm:1.11.9"
+"@shopify/react-native-skia@npm:1.11.11":
+  version: 1.11.11
+  resolution: "@shopify/react-native-skia@npm:1.11.11"
   dependencies:
     canvaskit-wasm: "npm:0.39.1"
     react-reconciler: "npm:0.27.0"
@@ -4310,7 +4310,7 @@ __metadata:
       optional: true
   bin:
     setup-skia-web: ./scripts/setup-canvaskit.js
-  checksum: 10c0/ac5879686ed08727aef8512c95ed69766af495c5414cd74b866646b716ce0626dd92c6a5bfb34aaccecd94ee9a4f9ccce680ecbf5c20637115410213279d68ac
+  checksum: 10c0/363e0302a656e47b7afeeee811b014a9ac8e677709ce2140308a2825d6eab73fecfc165f2ce6a33760cc3ff30843b6de1bfcb703b3905b3bda711e57f3833f94
   languageName: node
   linkType: hard
 
@@ -4842,12 +4842,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:^22.13.8":
-  version: 22.13.8
-  resolution: "@types/node@npm:22.13.8"
+"@types/node@npm:^22.13.9":
+  version: 22.13.9
+  resolution: "@types/node@npm:22.13.9"
   dependencies:
     undici-types: "npm:~6.20.0"
-  checksum: 10c0/bfc92b734a9dce6ac5daee0a52feccdf5dcb3804d895e4bc5384e2f4644612b8801725cd03c8c3c0888fb5eeb16b875877ac44b77641e0196dc1a837b1c2a366
+  checksum: 10c0/eb6acd04169a076631dcaab712128d492cd17a1b3f10daae4a377f3d439c860c3cd3e32f4ef221671f56183b976ac7c4089f4193457314a88675ead4663438a4
   languageName: node
   linkType: hard
 
@@ -5994,7 +5994,7 @@ __metadata:
     "@sentry/react-native": "npm:^6.9.0"
     "@sharcoux/slider": "npm:8.0.6"
     "@shopify/flash-list": "npm:^1.7.3"
-    "@shopify/react-native-skia": "npm:1.11.9"
+    "@shopify/react-native-skia": "npm:1.11.11"
     "@tsconfig/react-native": "npm:^3.0.5"
     "@types/base-64": "npm:^1.0.2"
     "@types/crypto-js": "npm:^4.2.2"
@@ -6003,7 +6003,7 @@ __metadata:
     "@types/jest": "npm:^29.5.14"
     "@types/lodash": "npm:^4.17.16"
     "@types/md5": "npm:^2.3.5"
-    "@types/node": "npm:^22.13.8"
+    "@types/node": "npm:^22.13.9"
     "@types/qs": "npm:^6.9.18"
     "@types/react": "npm:~18.3.18"
     "@types/react-native": "npm:^0.73.0"
@@ -6091,7 +6091,7 @@ __metadata:
     react-native-purchases: "npm:^8.7.0"
     react-native-qrcode-svg: "npm:^6.3.15"
     react-native-reanimated: "npm:3.17.1"
-    react-native-safe-area-context: "npm:^5.2.0"
+    react-native-safe-area-context: "npm:^5.3.0"
     react-native-screens: "npm:4.9.1"
     react-native-shadow-2: "npm:^7.1.1"
     react-native-share-menu: "git+https://github.com/Expensify/react-native-share-menu.git"
@@ -15821,13 +15821,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-native-safe-area-context@npm:^5.2.0":
-  version: 5.2.0
-  resolution: "react-native-safe-area-context@npm:5.2.0"
+"react-native-safe-area-context@npm:^5.3.0":
+  version: 5.3.0
+  resolution: "react-native-safe-area-context@npm:5.3.0"
   peerDependencies:
     react: "*"
     react-native: "*"
-  checksum: 10c0/4b8587cf01070a434b56c1453e5666ea2fbf8a15b2316f407ae361e83650a087a0236ab4bcd6aba421028457df59c18f51384d82862c77558da44987ba8dd5f1
+  checksum: 10c0/3732f85444342f58f17709ecbbcfe754a0ebda1030765e8df0ce80413e95fcb34ee7d5e83b4627fbf383c13eeb50554c244aff3d908734eab67807aa6ca23bb6
   languageName: node
   linkType: hard
 
