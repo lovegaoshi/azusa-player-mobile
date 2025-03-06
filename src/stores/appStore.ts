@@ -121,8 +121,7 @@ export const setCurrentPlaying = (song: NoxMedia.Song) => {
     return true;
   }
   appStore.setState({ currentPlayingId: song.id });
-  // HACK: skips ABRepeat of the first song set by app (which should be handled by resumePlayback)
-  return currentPlayingId === '';
+  return false;
 };
 
 export const setFetchProgress = (val: number) => {
