@@ -20,7 +20,7 @@ import usePlaylistCRUD from '@hooks/usePlaylistCRUD';
 import { getR128Gain } from '@utils/ffmpeg/r128Store';
 import { isAndroid } from '@utils/RNUtils';
 import { useTrackStore } from '@hooks/useActiveTrack';
-import { execWhenTrue } from '@utils/Utils';
+import { execWhenTrue, r128gain2Volume } from '@utils/Utils';
 import useSponsorBlock from './useSponsorBlock';
 import { getNextSong } from '@utils/RNTPUtils';
 
@@ -118,7 +118,7 @@ export default () => {
         return TrackPlayer.crossFade(
           playerSetting.crossfade * 1000,
           20,
-          r128gain ?? 1,
+          r128gain2Volume(r128gain ?? 0),
         );
       }
       if (
