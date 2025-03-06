@@ -237,3 +237,21 @@ export const playSongInterrupted = async (song: NoxMedia.Song) => {
   await TrackPlayer.add(await songlistToTracklist([song]));
   TrackPlayer.play();
 };
+
+export const getNextSong = async (next = true) => {
+  const currentQueue = await TrackPlayer.getQueue();
+  const currentTrackIndex = await TrackPlayer.getActiveTrackIndex();
+  let nextIndex = currentTrackIndex ?? 0;
+  if (next) {
+    nextIndex += 1;
+    if (nextIndex >= currentQueue.length) {
+      nextIndex = 0;
+    }
+  } else {
+    nextIndex -= -1;
+    if (nextIndex < 0) {
+      nextIndex = currentQueue.length - 1;
+    }
+  }
+  return currentQueue[nextIndex]!.song as NoxMedia.Song;
+};

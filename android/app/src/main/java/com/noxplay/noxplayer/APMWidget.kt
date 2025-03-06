@@ -23,6 +23,7 @@ import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.guava.await
 import timber.log.Timber
+import androidx.core.graphics.scale
 
 /**
  * Implementation of App Widget functionality.
@@ -162,7 +163,7 @@ class APMWidget : AppWidgetProvider() {
         val dimension = bitmap.width.coerceAtMost(bitmap.height)
         val cropped = ThumbnailUtils.extractThumbnail(bitmap, dimension, dimension)
         // bitmap.recycle()
-        return Bitmap.createScaledBitmap(cropped, 120, 120, false)
+        return cropped.scale(120, 120, false)
     }
 
     @OptIn(UnstableApi::class)

@@ -22,6 +22,7 @@ import { isAndroid } from '@utils/RNUtils';
 import { useTrackStore } from '@hooks/useActiveTrack';
 import { execWhenTrue } from '@utils/Utils';
 import useSponsorBlock from './useSponsorBlock';
+import { getNextSong } from '@utils/RNTPUtils';
 
 const { getState } = noxPlayingList;
 const { fadeIntervalMs, fadeIntervalSec } = appStore.getState();
@@ -107,15 +108,17 @@ export default () => {
         crossfadeId === currentSongId &&
         crossfadingId !== currentSongId
       ) {
+        const nextSong = await getNextSong();
+        const r128gain = getR128Gain(nextSong);
         logger.debug(
-          `[crossfade] crossfading: ${event.position}, ${trueDuration}, ${playerSetting.crossfade}`,
+          `[crossfade] crossfading: ${event.position}, ${trueDuration}, ${playerSetting.crossfade} to ${nextSong.name} @ ${r128gain}`,
         );
         setCrossfadingId(currentSongId);
         setCrossfaded(true);
         return TrackPlayer.crossFade(
           playerSetting.crossfade * 1000,
           20,
-          getR128Gain(track?.song) ?? 1,
+          r128gain ?? 1,
         );
       }
       if (
