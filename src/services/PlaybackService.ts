@@ -178,11 +178,6 @@ export async function PlaybackService() {
         if (mAppState.crossfaded) {
           // use crossfade fading instead
           setCrossfaded(false);
-          await parseSongR128gain(
-            event.track.song,
-            useNoxSetting.getState().playerSetting.crossfade * 1000,
-            0,
-          );
         } else {
           // this is when song is first played.
           const fadeIntervalMs = mAppState.fadeIntervalMs;

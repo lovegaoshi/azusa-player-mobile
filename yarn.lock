@@ -4031,10 +4031,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@revenuecat/purchases-typescript-internal@npm:13.21.0":
-  version: 13.21.0
-  resolution: "@revenuecat/purchases-typescript-internal@npm:13.21.0"
-  checksum: 10c0/af3e4e44f557f9570738c97de9aa1db07e16fd8e28198b7f1a474970fce589813bbc6d2b207045b77dd17a002059336043041a0fa6f11cd938f00eec13d7eb11
+"@revenuecat/purchases-typescript-internal@npm:13.22.0":
+  version: 13.22.0
+  resolution: "@revenuecat/purchases-typescript-internal@npm:13.22.0"
+  checksum: 10c0/b93a9815a6eb098d767319c56b8bf3ae8f44306de1076f737f5a0f931959b6692e6f8ee007f3b207ae4fdedcfbdd79c46812e5bc75d86959e4049194c6724cb6
   languageName: node
   linkType: hard
 
@@ -5952,14 +5952,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"axios@npm:^1.8.1":
-  version: 1.8.1
-  resolution: "axios@npm:1.8.1"
+"axios@npm:^1.8.2":
+  version: 1.8.2
+  resolution: "axios@npm:1.8.2"
   dependencies:
     follow-redirects: "npm:^1.15.6"
     form-data: "npm:^4.0.0"
     proxy-from-env: "npm:^1.1.0"
-  checksum: 10c0/b2e1d5a61264502deee4b50f0a6df0aa3b174c546ccf68c0dff714a2b8863232e0bd8cb5b84f853303e97f242a98260f9bb9beabeafe451ad5af538e9eb7ac22
+  checksum: 10c0/d8c2969e4642dc6d39555ac58effe06c051ba7aac2bd40cad7a9011c019fb2f16ee011c5a6906cb25b8a4f87258c359314eb981f852e60ad445ecaeb793c7aa2
   languageName: node
   linkType: hard
 
@@ -6015,7 +6015,7 @@ __metadata:
     "@typescript-eslint/parser": "npm:^8.26.0"
     "@welldone-software/why-did-you-render": "npm:^10.0.1"
     argparse: "npm:^2.0.1"
-    axios: "npm:^1.8.1"
+    axios: "npm:^1.8.2"
     babel-plugin-module-resolver: "npm:^5.0.2"
     babel-plugin-transform-remove-console: "npm:^6.9.4"
     base-64: "npm:^1.0.0"
@@ -6088,7 +6088,7 @@ __metadata:
     react-native-lyric: "https://lovegaoshi@github.com/lovegaoshi/react-native-lyric.git#commit=6f20e83948c29b0d46833ab9173cd81f99d0ab48"
     react-native-pager-view: "npm:6.7.0"
     react-native-paper: "npm:^5.13.1"
-    react-native-purchases: "npm:^8.7.0"
+    react-native-purchases: "npm:^8.8.0"
     react-native-qrcode-svg: "npm:^6.3.15"
     react-native-reanimated: "npm:3.17.1"
     react-native-safe-area-context: "npm:^5.3.0"
@@ -6098,7 +6098,7 @@ __metadata:
     react-native-svg: "npm:15.11.2"
     react-native-svga-player: "https://lovegaoshi@github.com/lovegaoshi/react-native-svga-player.git#commit=f8c6303fddb528a1a94d2ab4696c9318c0002cfd"
     react-native-text-ticker: "https://lovegaoshi@github.com/lovegaoshi/react-native-text-ticker.git#commit=78a79c9a5f3b70e15d6de6db14d0516a56ae5d40"
-    react-native-track-player: "https://github.com/lovegaoshi/react-native-track-player.git#commit=079debcdc28d1c020d36fd55e35440a9d0f38460"
+    react-native-track-player: "https://github.com/lovegaoshi/react-native-track-player.git#commit=365a2757e21dadb0b07419cacb842029c5e34944"
     react-native-url-polyfill: "npm:^2.0.0"
     react-native-vector-icons: "npm:^10.2.0"
     react-native-video: "npm:^6.10.2"
@@ -15770,15 +15770,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-native-purchases@npm:^8.7.0":
-  version: 8.7.0
-  resolution: "react-native-purchases@npm:8.7.0"
+"react-native-purchases@npm:^8.8.0":
+  version: 8.8.0
+  resolution: "react-native-purchases@npm:8.8.0"
   dependencies:
-    "@revenuecat/purchases-typescript-internal": "npm:13.21.0"
+    "@revenuecat/purchases-typescript-internal": "npm:13.22.0"
   peerDependencies:
     react: ">= 16.6.3"
     react-native: "*"
-  checksum: 10c0/15b1bb3ff098d36368c8509a8283c92a4a45f506c539f72610c9264dbe994f198e82d045b56b51de20e0e4c31cc489f08693e2c03c688def19144df2df2e2378
+  checksum: 10c0/8f815bd08eb52ed0ae6c4024fe48e4915600258556a54140efbae8a373a0fa08c91bb4f849947e74f3f668df7b01a56719d3de65a9def649233fe6a99676d108
   languageName: node
   linkType: hard
 
@@ -15908,9 +15908,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-native-track-player@https://github.com/lovegaoshi/react-native-track-player.git#commit=079debcdc28d1c020d36fd55e35440a9d0f38460":
+"react-native-track-player@https://github.com/lovegaoshi/react-native-track-player.git#commit=365a2757e21dadb0b07419cacb842029c5e34944":
   version: 4.1.1
-  resolution: "react-native-track-player@https://github.com/lovegaoshi/react-native-track-player.git#commit=079debcdc28d1c020d36fd55e35440a9d0f38460"
+  resolution: "react-native-track-player@https://github.com/lovegaoshi/react-native-track-player.git#commit=365a2757e21dadb0b07419cacb842029c5e34944"
   peerDependencies:
     react: ">=16.8.6"
     react-native: ">=0.60.0-rc.2"
@@ -15921,7 +15921,7 @@ __metadata:
       optional: true
     shaka-player:
       optional: true
-  checksum: 10c0/121a09a63c09a84bf67d23d65627b53bb8001fff8e36af2ec2462b5761431d2fb0ae9cb08dfd4e9b8d89c86e6b15ea6a5029ad0b1142826eb09312fdf7cd181f
+  checksum: 10c0/3a5e9ae7b98ec4472bdbfb62268b544e44b6746b90178693e874fdfe55d1f43874825b2ab3b56c1a1bb52d92567c05c74a696982de7431110d957c7b7147390f
   languageName: node
   linkType: hard
 
