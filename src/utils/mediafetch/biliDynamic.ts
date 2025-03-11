@@ -56,7 +56,7 @@ interface Dynamic {
   page?: number;
 }
 
-export default async ({ rids = [3, 199], page = 1 }: Dynamic) => {
+export default async ({ rids = [3, 119], page = 1 }: Dynamic) => {
   const res: BiliRanking = {};
   for (const rid of rids) {
     await fetchDynamic(String(rid), page, res);
