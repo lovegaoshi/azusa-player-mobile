@@ -43,7 +43,7 @@
     "@react-navigation/drawer": "^7.1.2",
     "@react-navigation/native": "^7.0.15",
     "@react-navigation/native-stack": "^7.2.1",
-    "@revenuecat/purchases-js": "^0.18.2",
+    "@revenuecat/purchases-js": "^1.0.0",
     "@sentry/react-native": "^6.9.0",
     "@sharcoux/slider": "8.0.6",
     "@shopify/flash-list": "^1.7.3",
@@ -82,7 +82,7 @@
     "lottie-react-native": "7.2.2",
     "lru-cache": "7.18.3",
     "md5": "^2.3.0",
-    "metro": "^0.81.3",
+    "metro": "^0.82.0",
     "patch-package": "^8.0.0",
     "postinstall-postinstall": "^2.1.0",
     "qs": "^6.14.0",
@@ -116,7 +116,7 @@
     "react-native-url-polyfill": "^2.0.0",
     "react-native-vector-icons": "^10.2.0",
     "react-native-video": "^6.10.2",
-    "react-native-webview": "13.13.2",
+    "react-native-webview": "13.13.4",
     "sp-react-native-in-app-updates": "^1.4.0",
     "text-encoding-polyfill": "^0.6.7",
     "use-debounce": "^10.0.4",
@@ -126,7 +126,7 @@
     "zustand": "^5.0.3"
   },
   "resolutions": {
-    "metro": "^0.81.3"
+    "metro": "^0.82.0"
   },
   "devDependencies": {
     "@babel/core": "^7.26.9",
@@ -164,7 +164,7 @@
     "eslint-config-expo": "^8.0.1",
     "eslint-config-prettier": "^9.1.0",
     "eslint-import-resolver-babel-module": "^5.3.2",
-    "eslint-import-resolver-typescript": "^3.8.3",
+    "eslint-import-resolver-typescript": "^3.8.4",
     "eslint-plugin-import": "^2.31.0",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-prettier": "^5.2.3",
