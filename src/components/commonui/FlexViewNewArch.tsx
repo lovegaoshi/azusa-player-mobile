@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { View } from 'react-native';
 import { styles } from '@components/style';
 
@@ -17,13 +17,21 @@ export default ({ children, noFlex }: Props) => {
   }
 
   const [initHeight, setInitHeight] = useState(0);
+  const largestHeight = useRef(-1);
 
   return (
     <View
       style={initHeight === 0 ? styles.flex : { height: initHeight }}
-      onLayout={e =>
-        initHeight === 0 && setInitHeight(e.nativeEvent.layout.height)
-      }
+      onLayout={e => {
+        if (initHeight > 0 || e.nativeEvent.layout.height === 0) {
+          return;
+        }
+        if (largestHeight.current < e.nativeEvent.layout.height) {
+          largestHeight.current = e.nativeEvent.layout.height;
+          return;
+        }
+        setInitHeight(largestHeight.current);
+      }}
     >
       {children}
     </View>
