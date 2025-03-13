@@ -84,7 +84,7 @@ export default function CustomScrollView({
     scrollIndicatorFromTopPos.value = scrollBarIndicatorPosition;
     resetHideTimeout(SCROLLBAR_HIDE_TIMEOUT);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [scrollViewHeight, contentViewHeight, scrollPositionY]);
+  }, [contentViewHeight, scrollPositionY]); // scrollViewHeight
 
   useEffect(() => {
     scrollTimeoutId.current = createScrollHideTimeout(SCROLLBAR_HIDE_TIMEOUT);
