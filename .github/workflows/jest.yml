@@ -18,7 +18,7 @@ jobs:
         uses: threeal/setup-yarn-action@v2.0.0
 
       - name: Install dependencies
-        run: yarn build
+        run: yarn install; yarn build
 
       - name: lint & prettier
         run: |

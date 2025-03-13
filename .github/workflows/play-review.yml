@@ -89,7 +89,7 @@ jobs:
           encodedString: ${{ secrets.SIGNED_KEY_BASE64 }}
 
       - name: Install dependencies
-        run: yarn build
+        run: yarn install; yarn build
 
       - name: clean generated builds
         run: rm -rf android/app/build/generated/

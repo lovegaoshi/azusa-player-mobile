@@ -85,7 +85,7 @@ jobs:
         run: alias yarn.cmd="yarn"
 
       - name: Install dependencies
-        run: yarn build
+        run: yarn install; yarn build
 
       - name: Pod Install
         run: cd ios && rm Podfile.lock && pod install --repo-update
