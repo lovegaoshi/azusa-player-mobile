@@ -100,7 +100,7 @@ jobs:
           encodedString: ${{ secrets.SIGNED_KEY_BASE64 }}
 
       - name: Install dependencies
-        run: yarn install; yarn postinstall
+        run: yarn build
 
       - name: clean generated builds
         run: rm -rf android/app/build/generated/
@@ -224,7 +224,7 @@ jobs:
           encodedString: ${{ secrets.SIGNED_KEY_BASE64 }}
 
       - name: Install dependencies
-        run: yarn install; yarn postinstall
+        run: yarn build
 
       - name: clean generated builds
         run: rm -rf android/app/build/generated/
@@ -299,7 +299,7 @@ jobs:
           echo "Commit Tag: $COMMIT_TAG"
 
       - name: Install dependencies
-        run: yarn install; yarn postinstall
+        run: yarn build
 
       - name: Pod Install
         run: cd ios && rm Podfile.lock && pod install --repo-update
