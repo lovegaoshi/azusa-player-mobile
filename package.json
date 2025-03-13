@@ -160,6 +160,7 @@
     "babel-plugin-module-resolver": "^5.0.2",
     "babel-plugin-transform-remove-console": "^6.9.4",
     "cpx": "^1.5.0",
+    "esbuild": "^0.25.1",
     "eslint": "8.57.1",
     "eslint-config-expo": "^8.0.1",
     "eslint-config-prettier": "^9.1.0",
