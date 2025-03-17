@@ -2013,6 +2013,34 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@emnapi/core@npm:^1.3.1":
+  version: 1.3.1
+  resolution: "@emnapi/core@npm:1.3.1"
+  dependencies:
+    "@emnapi/wasi-threads": "npm:1.0.1"
+    tslib: "npm:^2.4.0"
+  checksum: 10c0/d3be1044ad704e2c486641bc18908523490f28c7d38bd12d9c1d4ce37d39dae6c4aecd2f2eaf44c6e3bd90eaf04e0591acc440b1b038cdf43cce078a355a0ea0
+  languageName: node
+  linkType: hard
+
+"@emnapi/runtime@npm:^1.3.1":
+  version: 1.3.1
+  resolution: "@emnapi/runtime@npm:1.3.1"
+  dependencies:
+    tslib: "npm:^2.4.0"
+  checksum: 10c0/060ffede50f1b619c15083312b80a9e62a5b0c87aa8c1b54854c49766c9d69f8d1d3d87bd963a647071263a320db41b25eaa50b74d6a80dcc763c23dbeaafd6c
+  languageName: node
+  linkType: hard
+
+"@emnapi/wasi-threads@npm:1.0.1":
+  version: 1.0.1
+  resolution: "@emnapi/wasi-threads@npm:1.0.1"
+  dependencies:
+    tslib: "npm:^2.4.0"
+  checksum: 10c0/1e0c8036b8d53e9b07cc9acf021705ef6c86ab6b13e1acda7fffaf541a2d3565072afb92597419173ced9ea14f6bf32fce149106e669b5902b825e8b499e5c6c
+  languageName: node
+  linkType: hard
+
 "@esbuild/aix-ppc64@npm:0.25.1":
   version: 0.25.1
   resolution: "@esbuild/aix-ppc64@npm:0.25.1"
@@ -2239,9 +2267,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@expo/cli@npm:0.22.19":
-  version: 0.22.19
-  resolution: "@expo/cli@npm:0.22.19"
+"@expo/cli@npm:0.22.20":
+  version: 0.22.20
+  resolution: "@expo/cli@npm:0.22.20"
   dependencies:
     "@0no-co/graphql.web": "npm:^1.0.8"
     "@babel/runtime": "npm:^7.20.0"
@@ -2317,7 +2345,7 @@ __metadata:
     ws: "npm:^8.12.1"
   bin:
     expo-internal: build/bin/cli
-  checksum: 10c0/0ddfaa595cd28b381284cd46ad14d7ba0f8fac39fe30d31dcba556654806626486e14d34d669c7a6d6cd085243a670cd25f8977a5b846fa2cb446b6c66277959
+  checksum: 10c0/4667be419bb937f788682e54d065f4489e4d13b70b115d2ee391f45516be81336d2075188a0dd4c16a460ea7dbd1c20bc6045c871fd6545d6ba5666f9359c281
   languageName: node
   linkType: hard
 
@@ -3293,6 +3321,17 @@ __metadata:
   version: 0.3.0
   resolution: "@material/material-color-utilities@npm:0.3.0"
   checksum: 10c0/3bef025428b893f2acc9e9e2bd186363a60b7c0836fe43c78222e29fe67dc579618e844f0661a20657ed9f7fd8b94fd43a2961892894d0b6a2ba5264ce2673f8
+  languageName: node
+  linkType: hard
+
+"@napi-rs/wasm-runtime@npm:^0.2.7":
+  version: 0.2.7
+  resolution: "@napi-rs/wasm-runtime@npm:0.2.7"
+  dependencies:
+    "@emnapi/core": "npm:^1.3.1"
+    "@emnapi/runtime": "npm:^1.3.1"
+    "@tybys/wasm-util": "npm:^0.9.0"
+  checksum: 10c0/04a5edd79144bfa4e821a373fb6d4939f10c578c5f3633b5e67a57d0f5e36a593f595834d26654ea757bba7cd80b6c42d0d1405d6a8460c5d774e8cd5c9548a4
   languageName: node
   linkType: hard
 
@@ -4331,17 +4370,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@revenuecat/purchases-js@npm:^1.0.2":
-  version: 1.0.2
-  resolution: "@revenuecat/purchases-js@npm:1.0.2"
-  checksum: 10c0/d61f283e9efb6edffc45c4ea86e797c92ae375b87c5d3018018feb9fb43623003ad799649fd77d1653c0f4a694b98336e29c44c28dfab86add73c6c0b2918301
+"@revenuecat/purchases-js@npm:^1.0.5":
+  version: 1.0.5
+  resolution: "@revenuecat/purchases-js@npm:1.0.5"
+  checksum: 10c0/691c6a2d39c9b625747aacc86cbdc3950bdcf88a52f0d7a3b4694feb192943e20fdbe96993598c74c90bfad8fd0839f1c75a76994a7911b6dcb4c0b92890d224
   languageName: node
   linkType: hard
 
-"@revenuecat/purchases-typescript-internal@npm:13.22.0":
-  version: 13.22.0
-  resolution: "@revenuecat/purchases-typescript-internal@npm:13.22.0"
-  checksum: 10c0/b93a9815a6eb098d767319c56b8bf3ae8f44306de1076f737f5a0f931959b6692e6f8ee007f3b207ae4fdedcfbdd79c46812e5bc75d86959e4049194c6724cb6
+"@revenuecat/purchases-typescript-internal@npm:13.25.0":
+  version: 13.25.0
+  resolution: "@revenuecat/purchases-typescript-internal@npm:13.25.0"
+  checksum: 10c0/4262f8834a9ad83e51f6662194a0ea549b5140befc5cda77e5c7969450bcc7822519fb26918f25f4a2cd3dc12d2c13a491c85a736bacebef9a0ab49771a6eca8
   languageName: node
   linkType: hard
 
@@ -4586,29 +4625,29 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@shopify/flash-list@npm:^1.7.3":
-  version: 1.7.3
-  resolution: "@shopify/flash-list@npm:1.7.3"
+"@shopify/flash-list@npm:^1.7.5":
+  version: 1.7.5
+  resolution: "@shopify/flash-list@npm:1.7.5"
   dependencies:
-    recyclerlistview: "npm:4.2.1"
+    recyclerlistview: "npm:4.2.2"
     tslib: "npm:2.8.1"
   peerDependencies:
     "@babel/runtime": "*"
     react: "*"
     react-native: "*"
-  checksum: 10c0/84aa7c87f39114c98374072609ea61eec3aecee3c8dc55220f114949897b25ff6b6bc1edf14161b0feead6e6c7f3845d6b0af0d8f300df319f45e3c5f4be3e15
+  checksum: 10c0/10ea5405be4beb7985d141770eda485c5693cbae28537f47c81480e2c30a31cf82e34208365a16e1849b88a3ec0e80fd05239573dd5adf07203929214efeeeb4
   languageName: node
   linkType: hard
 
-"@shopify/react-native-skia@npm:1.11.11":
-  version: 1.11.11
-  resolution: "@shopify/react-native-skia@npm:1.11.11"
+"@shopify/react-native-skia@npm:1.11.18":
+  version: 1.11.18
+  resolution: "@shopify/react-native-skia@npm:1.11.18"
   dependencies:
     canvaskit-wasm: "npm:0.39.1"
     react-reconciler: "npm:0.27.0"
   peerDependencies:
-    react: ">=18.0"
-    react-native: ">=0.64"
+    react: ">=18.0 <19.0.0"
+    react-native: ">=0.64 <0.78.0"
     react-native-reanimated: ">=2.0.0"
   peerDependenciesMeta:
     react-native:
@@ -4616,8 +4655,8 @@ __metadata:
     react-native-reanimated:
       optional: true
   bin:
-    setup-skia-web: ./scripts/setup-canvaskit.js
-  checksum: 10c0/363e0302a656e47b7afeeee811b014a9ac8e677709ce2140308a2825d6eab73fecfc165f2ce6a33760cc3ff30843b6de1bfcb703b3905b3bda711e57f3833f94
+    setup-skia-web: scripts/setup-canvaskit.js
+  checksum: 10c0/de01379ecf9bd98954874174f12f091163a6c7024e99245fce39f8309c4eb87025f30e3022d10a9b940749c0a77ae4145d157b328b63f4f5ec558305da1248f4
   languageName: node
   linkType: hard
 
@@ -4680,6 +4719,15 @@ __metadata:
   version: 3.0.5
   resolution: "@tsconfig/react-native@npm:3.0.5"
   checksum: 10c0/a82a69b11c1427859ccc70be42b6c348f5829b9066e45c1d281270fc29bfb70949fdbc236d55282f533468ecc621e5ce6df181928094686271ffea3584c0e8e6
+  languageName: node
+  linkType: hard
+
+"@tybys/wasm-util@npm:^0.9.0":
+  version: 0.9.0
+  resolution: "@tybys/wasm-util@npm:0.9.0"
+  dependencies:
+    tslib: "npm:^2.4.0"
+  checksum: 10c0/f9fde5c554455019f33af6c8215f1a1435028803dc2a2825b077d812bed4209a1a64444a4ca0ce2ea7e1175c8d88e2f9173a36a33c199e8a5c671aa31de8242d
   languageName: node
   linkType: hard
 
@@ -5660,6 +5708,85 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@unrs/rspack-resolver-binding-darwin-arm64@npm:1.1.2":
+  version: 1.1.2
+  resolution: "@unrs/rspack-resolver-binding-darwin-arm64@npm:1.1.2"
+  conditions: os=darwin & cpu=arm64
+  languageName: node
+  linkType: hard
+
+"@unrs/rspack-resolver-binding-darwin-x64@npm:1.1.2":
+  version: 1.1.2
+  resolution: "@unrs/rspack-resolver-binding-darwin-x64@npm:1.1.2"
+  conditions: os=darwin & cpu=x64
+  languageName: node
+  linkType: hard
+
+"@unrs/rspack-resolver-binding-freebsd-x64@npm:1.1.2":
+  version: 1.1.2
+  resolution: "@unrs/rspack-resolver-binding-freebsd-x64@npm:1.1.2"
+  conditions: os=freebsd & cpu=x64
+  languageName: node
+  linkType: hard
+
+"@unrs/rspack-resolver-binding-linux-arm-gnueabihf@npm:1.1.2":
+  version: 1.1.2
+  resolution: "@unrs/rspack-resolver-binding-linux-arm-gnueabihf@npm:1.1.2"
+  conditions: os=linux & cpu=arm
+  languageName: node
+  linkType: hard
+
+"@unrs/rspack-resolver-binding-linux-arm64-gnu@npm:1.1.2":
+  version: 1.1.2
+  resolution: "@unrs/rspack-resolver-binding-linux-arm64-gnu@npm:1.1.2"
+  conditions: os=linux & cpu=arm64 & libc=glibc
+  languageName: node
+  linkType: hard
+
+"@unrs/rspack-resolver-binding-linux-arm64-musl@npm:1.1.2":
+  version: 1.1.2
+  resolution: "@unrs/rspack-resolver-binding-linux-arm64-musl@npm:1.1.2"
+  conditions: os=linux & cpu=arm64 & libc=musl
+  languageName: node
+  linkType: hard
+
+"@unrs/rspack-resolver-binding-linux-x64-gnu@npm:1.1.2":
+  version: 1.1.2
+  resolution: "@unrs/rspack-resolver-binding-linux-x64-gnu@npm:1.1.2"
+  conditions: os=linux & cpu=x64 & libc=glibc
+  languageName: node
+  linkType: hard
+
+"@unrs/rspack-resolver-binding-linux-x64-musl@npm:1.1.2":
+  version: 1.1.2
+  resolution: "@unrs/rspack-resolver-binding-linux-x64-musl@npm:1.1.2"
+  conditions: os=linux & cpu=x64 & libc=musl
+  languageName: node
+  linkType: hard
+
+"@unrs/rspack-resolver-binding-wasm32-wasi@npm:1.1.2":
+  version: 1.1.2
+  resolution: "@unrs/rspack-resolver-binding-wasm32-wasi@npm:1.1.2"
+  dependencies:
+    "@napi-rs/wasm-runtime": "npm:^0.2.7"
+  conditions: cpu=wasm32
+  languageName: node
+  linkType: hard
+
+"@unrs/rspack-resolver-binding-win32-arm64-msvc@npm:1.1.2":
+  version: 1.1.2
+  resolution: "@unrs/rspack-resolver-binding-win32-arm64-msvc@npm:1.1.2"
+  conditions: os=win32 & cpu=arm64
+  languageName: node
+  linkType: hard
+
+"@unrs/rspack-resolver-binding-win32-x64-msvc@npm:1.1.2":
+  version: 1.1.2
+  resolution: "@unrs/rspack-resolver-binding-win32-x64-msvc@npm:1.1.2"
+  conditions: os=win32 & cpu=x64
+  languageName: node
+  linkType: hard
+
 "@urql/core@npm:^5.0.0, @urql/core@npm:^5.0.6":
   version: 5.0.8
   resolution: "@urql/core@npm:5.0.8"
@@ -6297,11 +6424,11 @@ __metadata:
     "@react-navigation/drawer": "npm:^7.1.2"
     "@react-navigation/native": "npm:^7.0.15"
     "@react-navigation/native-stack": "npm:^7.2.1"
-    "@revenuecat/purchases-js": "npm:^1.0.2"
+    "@revenuecat/purchases-js": "npm:^1.0.5"
     "@sentry/react-native": "npm:^6.9.1"
     "@sharcoux/slider": "npm:8.0.6"
-    "@shopify/flash-list": "npm:^1.7.3"
-    "@shopify/react-native-skia": "npm:1.11.11"
+    "@shopify/flash-list": "npm:^1.7.5"
+    "@shopify/react-native-skia": "npm:1.11.18"
     "@tsconfig/react-native": "npm:^3.0.5"
     "@types/base-64": "npm:^1.0.2"
     "@types/crypto-js": "npm:^4.2.2"
@@ -6342,14 +6469,14 @@ __metadata:
     eslint-config-expo: "npm:^8.0.1"
     eslint-config-prettier: "npm:^9.1.0"
     eslint-import-resolver-babel-module: "npm:^5.3.2"
-    eslint-import-resolver-typescript: "npm:^3.8.5"
+    eslint-import-resolver-typescript: "npm:^3.9.1"
     eslint-plugin-import: "npm:^2.31.0"
     eslint-plugin-node: "npm:^11.1.0"
     eslint-plugin-prettier: "npm:^5.2.3"
     eslint-plugin-react: "npm:^7.37.4"
     eslint-plugin-react-hooks: "npm:^5.2.0"
     event-target-polyfill: "npm:^0.0.4"
-    expo: "npm:^52.0.38"
+    expo: "npm:^52.0.39"
     expo-auth-session: "npm:~6.0.3"
     expo-clipboard: "npm:~7.0.1"
     expo-crypto: "npm:~14.0.2"
@@ -6381,7 +6508,7 @@ __metadata:
     react: "npm:18.3.1"
     react-i18next: "npm:^15.4.1"
     react-native: "npm:^0.77.1"
-    react-native-app-auth: "npm:^8.0.1"
+    react-native-app-auth: "npm:^8.0.2"
     react-native-background-timer: "git+https://github.com/lovegaoshi/react-native-background-timer.git"
     react-native-blob-jsi-helper: "npm:^0.3.1"
     react-native-blob-util: "npm:^0.21.2"
@@ -6396,7 +6523,7 @@ __metadata:
     react-native-lyric: "https://lovegaoshi@github.com/lovegaoshi/react-native-lyric.git#commit=6f20e83948c29b0d46833ab9173cd81f99d0ab48"
     react-native-pager-view: "npm:6.7.0"
     react-native-paper: "npm:^5.13.1"
-    react-native-purchases: "npm:^8.8.0"
+    react-native-purchases: "npm:^8.8.1"
     react-native-qrcode-svg: "npm:^6.3.15"
     react-native-reanimated: "npm:3.17.1"
     react-native-safe-area-context: "npm:^5.3.0"
@@ -8197,7 +8324,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"debug@npm:4, debug@npm:^4.1.0, debug@npm:^4.1.1, debug@npm:^4.3.1, debug@npm:^4.3.2, debug@npm:^4.3.4, debug@npm:^4.3.5, debug@npm:^4.3.7":
+"debug@npm:4, debug@npm:^4.1.0, debug@npm:^4.1.1, debug@npm:^4.3.1, debug@npm:^4.3.2, debug@npm:^4.3.4, debug@npm:^4.3.5":
   version: 4.3.7
   resolution: "debug@npm:4.3.7"
   dependencies:
@@ -9237,16 +9364,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-import-resolver-typescript@npm:^3.8.5":
-  version: 3.8.5
-  resolution: "eslint-import-resolver-typescript@npm:3.8.5"
+"eslint-import-resolver-typescript@npm:^3.9.1":
+  version: 3.9.1
+  resolution: "eslint-import-resolver-typescript@npm:3.9.1"
   dependencies:
     "@nolyfill/is-core-module": "npm:1.0.39"
-    debug: "npm:^4.3.7"
-    enhanced-resolve: "npm:^5.15.0"
+    debug: "npm:^4.4.0"
     get-tsconfig: "npm:^4.10.0"
-    is-bun-module: "npm:^1.0.2"
-    stable-hash: "npm:^0.0.4"
+    is-bun-module: "npm:^1.3.0"
+    rspack-resolver: "npm:^1.1.0"
+    stable-hash: "npm:^0.0.5"
     tinyglobby: "npm:^0.2.12"
   peerDependencies:
     eslint: "*"
@@ -9257,7 +9384,7 @@ __metadata:
       optional: true
     eslint-plugin-import-x:
       optional: true
-  checksum: 10c0/787fcd1ee314f8adb206ae72da0f35e4d6dd0d561509305e99316b1cc94aabf57a3cd22627f83fd0a723fad4e7701ae5f80324b450c3adb83c4f48ca4661c178
+  checksum: 10c0/6bcc5d74719dc51e20602c5b3a30ca5682dd6db4a5828697cf1485b19dd3aef4dff7cb1f434da48df26a35d9c362e834d4ea1adc1218d77dfd84cf6ce65f4662
   languageName: node
   linkType: hard
 
@@ -10108,12 +10235,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"expo@npm:^52.0.38":
-  version: 52.0.38
-  resolution: "expo@npm:52.0.38"
+"expo@npm:^52.0.39":
+  version: 52.0.39
+  resolution: "expo@npm:52.0.39"
   dependencies:
     "@babel/runtime": "npm:^7.20.0"
-    "@expo/cli": "npm:0.22.19"
+    "@expo/cli": "npm:0.22.20"
     "@expo/config": "npm:~10.0.11"
     "@expo/config-plugins": "npm:~9.0.17"
     "@expo/fingerprint": "npm:0.11.11"
@@ -10145,7 +10272,7 @@ __metadata:
       optional: true
   bin:
     expo: bin/cli
-  checksum: 10c0/ab9841d347fd82db5496f574d1b9054c562fa6b245309f8d0da0ff079843f93aee639ce954e0d4279fe02d7b6585a0e614539230286291c970fc58950bc09183
+  checksum: 10c0/70d9b18e6dc1622b3125db173ad606214a69c94c325825657fcfc565854e7f6f2250c93e3d23fa1d4eaeadad6a9b87054f2a9372bbfb27950e0134b6a6a94806
   languageName: node
   linkType: hard
 
@@ -11818,6 +11945,15 @@ __metadata:
   dependencies:
     semver: "npm:^7.6.3"
   checksum: 10c0/819e63cd4468265a3e89cdc241554e37aeb85e40375a56dd559c022f4395491273267a0f843274fda6cad1eac3b0f8dc6d9e06cc349e33e2bf45098761184736
+  languageName: node
+  linkType: hard
+
+"is-bun-module@npm:^1.3.0":
+  version: 1.3.0
+  resolution: "is-bun-module@npm:1.3.0"
+  dependencies:
+    semver: "npm:^7.6.3"
+  checksum: 10c0/2966744188fcd28e0123c52158c7073973f88babfa9ab04e2846ec5862d6b0f8f398df6413429d930f7c5ee6111ce2cbfb3eb8652d9ec42d4a37dc5089a866fb
   languageName: node
   linkType: hard
 
@@ -15972,15 +16108,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-native-app-auth@npm:^8.0.1":
-  version: 8.0.1
-  resolution: "react-native-app-auth@npm:8.0.1"
+"react-native-app-auth@npm:^8.0.2":
+  version: 8.0.2
+  resolution: "react-native-app-auth@npm:8.0.2"
   dependencies:
     invariant: "npm:2.2.4"
     react-native-base64: "npm:0.0.2"
   peerDependencies:
     react-native: ">=0.63.0"
-  checksum: 10c0/c46e4fbc13db1ace4594cd8d0d422f567607c9788ef4bcf9f9d5771a1dbcf8dfa4c28362d91b6aa1626e90fd479d6cad3730604498ef0f5dd32b0cda9bd37f3e
+  checksum: 10c0/cf6d5af9f9c7e901a1350c10f3ea0a39ae00f3c4d5d48da28d1d5f28366dafa349fa0743f301f1c42563d718236839435cd760f338bc28d0ff28b9399bce503c
   languageName: node
   linkType: hard
 
@@ -16189,15 +16325,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-native-purchases@npm:^8.8.0":
-  version: 8.8.0
-  resolution: "react-native-purchases@npm:8.8.0"
+"react-native-purchases@npm:^8.8.1":
+  version: 8.8.1
+  resolution: "react-native-purchases@npm:8.8.1"
   dependencies:
-    "@revenuecat/purchases-typescript-internal": "npm:13.22.0"
+    "@revenuecat/purchases-typescript-internal": "npm:13.25.0"
   peerDependencies:
     react: ">= 16.6.3"
     react-native: "*"
-  checksum: 10c0/8f815bd08eb52ed0ae6c4024fe48e4915600258556a54140efbae8a373a0fa08c91bb4f849947e74f3f668df7b01a56719d3de65a9def649233fe6a99676d108
+  checksum: 10c0/f3abb0a4a4dbb3f512fac39d9af4b1a07f5b3fbced3bc3715fed8dfa0399fc67e014fea97316964de721c11ac12e316f7fc39e54d5951dd5f5751af4b468f0a1
   languageName: node
   linkType: hard
 
@@ -16708,9 +16844,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"recyclerlistview@npm:4.2.1":
-  version: 4.2.1
-  resolution: "recyclerlistview@npm:4.2.1"
+"recyclerlistview@npm:4.2.2":
+  version: 4.2.2
+  resolution: "recyclerlistview@npm:4.2.2"
   dependencies:
     lodash.debounce: "npm:4.0.8"
     prop-types: "npm:15.8.1"
@@ -16718,7 +16854,7 @@ __metadata:
   peerDependencies:
     react: ">= 15.2.1"
     react-native: ">= 0.30.0"
-  checksum: 10c0/58c2f5fa6372b31f82a1fc976ddbf9c45fa2c1a2fcaab417e39096152c4815463357ff410603db1df7dabab3a383bdef80db04c54a667bc40c5a0ce130e68961
+  checksum: 10c0/fa55eb987f86a66990af364873c9da5302bb3688f3e9c784a986845b81a220af92d99c30038d681d9ccc63152427d6a70b0d7b9fad2b9adc3656797dadaf561d
   languageName: node
   linkType: hard
 
@@ -17171,6 +17307,48 @@ __metadata:
   version: 3.0.2
   resolution: "robust-predicates@npm:3.0.2"
   checksum: 10c0/4ecd53649f1c2d49529c85518f2fa69ffb2f7a4453f7fd19c042421c7b4d76c3efb48bc1c740c8f7049346d7cb58cf08ee0c9adaae595cc23564d360adb1fde4
+  languageName: node
+  linkType: hard
+
+"rspack-resolver@npm:^1.1.0":
+  version: 1.1.2
+  resolution: "rspack-resolver@npm:1.1.2"
+  dependencies:
+    "@unrs/rspack-resolver-binding-darwin-arm64": "npm:1.1.2"
+    "@unrs/rspack-resolver-binding-darwin-x64": "npm:1.1.2"
+    "@unrs/rspack-resolver-binding-freebsd-x64": "npm:1.1.2"
+    "@unrs/rspack-resolver-binding-linux-arm-gnueabihf": "npm:1.1.2"
+    "@unrs/rspack-resolver-binding-linux-arm64-gnu": "npm:1.1.2"
+    "@unrs/rspack-resolver-binding-linux-arm64-musl": "npm:1.1.2"
+    "@unrs/rspack-resolver-binding-linux-x64-gnu": "npm:1.1.2"
+    "@unrs/rspack-resolver-binding-linux-x64-musl": "npm:1.1.2"
+    "@unrs/rspack-resolver-binding-wasm32-wasi": "npm:1.1.2"
+    "@unrs/rspack-resolver-binding-win32-arm64-msvc": "npm:1.1.2"
+    "@unrs/rspack-resolver-binding-win32-x64-msvc": "npm:1.1.2"
+  dependenciesMeta:
+    "@unrs/rspack-resolver-binding-darwin-arm64":
+      optional: true
+    "@unrs/rspack-resolver-binding-darwin-x64":
+      optional: true
+    "@unrs/rspack-resolver-binding-freebsd-x64":
+      optional: true
+    "@unrs/rspack-resolver-binding-linux-arm-gnueabihf":
+      optional: true
+    "@unrs/rspack-resolver-binding-linux-arm64-gnu":
+      optional: true
+    "@unrs/rspack-resolver-binding-linux-arm64-musl":
+      optional: true
+    "@unrs/rspack-resolver-binding-linux-x64-gnu":
+      optional: true
+    "@unrs/rspack-resolver-binding-linux-x64-musl":
+      optional: true
+    "@unrs/rspack-resolver-binding-wasm32-wasi":
+      optional: true
+    "@unrs/rspack-resolver-binding-win32-arm64-msvc":
+      optional: true
+    "@unrs/rspack-resolver-binding-win32-x64-msvc":
+      optional: true
+  checksum: 10c0/db95f9b970915c901edc6a3bce9119ed84c53e9618d026645fbebfb3f08793e754c82bf6d068e6da8f81c5b23a2a701ee2db5a4a4262347e371283e788291677
   languageName: node
   linkType: hard
 
@@ -17907,10 +18085,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"stable-hash@npm:^0.0.4":
-  version: 0.0.4
-  resolution: "stable-hash@npm:0.0.4"
-  checksum: 10c0/53d010d2a1b014fb60d398c095f43912c353b7b44774e55222bb26fd428bc75b73d7bdfcae509ce927c23ca9c5aff2dc1bc82f191d30e57a879550bc2952bdb0
+"stable-hash@npm:^0.0.5":
+  version: 0.0.5
+  resolution: "stable-hash@npm:0.0.5"
+  checksum: 10c0/ca670cb6d172f1c834950e4ec661e2055885df32fee3ebf3647c5df94993b7c2666a5dbc1c9a62ee11fc5c24928579ec5e81bb5ad31971d355d5a341aab493b3
   languageName: node
   linkType: hard
 
