@@ -410,7 +410,8 @@
     "albumMatch": "Album",
     "cachedMatch": "Cached",
     "durationLessMatch": "Duration <",
-    "durationMoreMatch": "Duration >"
+    "durationMoreMatch": "Duration >",
+    "regexMatch": "Regex"
   },
   "Accessibility": { "gif": "GIF" },
   "Menu": { "local": "Local" },

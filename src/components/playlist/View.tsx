@@ -18,9 +18,7 @@ const Playlist = () => {
           { backgroundColor: playerStyle.customColors.maskedBackgroundColor },
         ]}
       >
-        <BiliSearchbar
-          onSearched={(songs: NoxMedia.Song[]) => console.log(songs)}
-        />
+        <BiliSearchbar onSearched={console.log} />
         <SongList />
       </View>
     </FlexView>
