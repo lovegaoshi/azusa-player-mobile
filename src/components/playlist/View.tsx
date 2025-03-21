@@ -11,7 +11,7 @@ const Playlist = () => {
   const playerStyle = useNoxSetting(state => state.playerStyle);
 
   return (
-    <FlexView noFlex>
+    <FlexView>
       <View
         style={[
           styles.contentContainer,
