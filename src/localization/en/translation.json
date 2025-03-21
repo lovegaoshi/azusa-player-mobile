@@ -152,7 +152,7 @@
     "abrepeat": "ABrepeat",
     "abrepeatTitle": "{{song.parsedName}} A-B repeat",
     "songRemoveTitle": "Remove",
-    "songRemoveNBanTitle": "Remove and BAN",
+    "songRemoveNBanTitle": "Ban",
     "reloadSong": "Reload",
     "selectedSongs": "Selected songs"
   },
@@ -262,7 +262,7 @@
     "SplashSettingName": "Splashes",
     "SplashSettingDesc": "View APM's splash ads",
     "DeveloperOptionsName": "Developer Options",
-    "DeveloperOptionsDesc": "Experimental Options in pre-release versions of APM",
+    "DeveloperOptionsDesc": "Experimental features may cause instabilities/does not work as expected",
     "PremiumSettingName": "Premium APM",
     "PremiumSettingDesc": "Buy Premium features",
     "AListOptionsName": "AList",
