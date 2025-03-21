@@ -5147,12 +5147,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:^22.13.10":
-  version: 22.13.10
-  resolution: "@types/node@npm:22.13.10"
+"@types/node@npm:^22.13.11":
+  version: 22.13.11
+  resolution: "@types/node@npm:22.13.11"
   dependencies:
     undici-types: "npm:~6.20.0"
-  checksum: 10c0/a3865f9503d6f718002374f7b87efaadfae62faa499c1a33b12c527cfb9fd86f733e1a1b026b80c5a0e4a965701174bc3305595a7d36078aa1abcf09daa5dee9
+  checksum: 10c0/f6ee33d36372242535c38640fe7550a6640d8a775ec19b55bfc11775b521cba072d892ca92a912332ce01b317293d645c1bf767f3f882ec719f2404a3d2a5b96
   languageName: node
   linkType: hard
 
@@ -6387,7 +6387,7 @@ __metadata:
     "@types/jest": "npm:^29.5.14"
     "@types/lodash": "npm:^4.17.16"
     "@types/md5": "npm:^2.3.5"
-    "@types/node": "npm:^22.13.10"
+    "@types/node": "npm:^22.13.11"
     "@types/qs": "npm:^6.9.18"
     "@types/react": "npm:~18.3.19"
     "@types/react-native": "npm:^0.73.0"
@@ -6473,7 +6473,7 @@ __metadata:
     react-native-lyric: "https://lovegaoshi@github.com/lovegaoshi/react-native-lyric.git#commit=6f20e83948c29b0d46833ab9173cd81f99d0ab48"
     react-native-pager-view: "npm:6.7.0"
     react-native-paper: "npm:^5.13.1"
-    react-native-purchases: "npm:^8.9.0"
+    react-native-purchases: "npm:^8.9.1"
     react-native-qrcode-svg: "npm:^6.3.15"
     react-native-reanimated: "npm:3.17.1"
     react-native-safe-area-context: "npm:^5.3.0"
@@ -6483,7 +6483,7 @@ __metadata:
     react-native-svg: "npm:15.11.2"
     react-native-svga-player: "https://lovegaoshi@github.com/lovegaoshi/react-native-svga-player.git#commit=f8c6303fddb528a1a94d2ab4696c9318c0002cfd"
     react-native-text-ticker: "https://lovegaoshi@github.com/lovegaoshi/react-native-text-ticker.git#commit=78a79c9a5f3b70e15d6de6db14d0516a56ae5d40"
-    react-native-track-player: "https://github.com/lovegaoshi/react-native-track-player.git#commit=365a2757e21dadb0b07419cacb842029c5e34944"
+    react-native-track-player: "https://github.com/lovegaoshi/react-native-track-player.git#commit=2cd9f52db56e32bd0f55d86c957193f6cfd85dd2"
     react-native-url-polyfill: "npm:^2.0.0"
     react-native-vector-icons: "npm:^10.2.0"
     react-native-video: "npm:^6.11.0"
@@ -16262,15 +16262,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-native-purchases@npm:^8.9.0":
-  version: 8.9.0
-  resolution: "react-native-purchases@npm:8.9.0"
+"react-native-purchases@npm:^8.9.1":
+  version: 8.9.1
+  resolution: "react-native-purchases@npm:8.9.1"
   dependencies:
     "@revenuecat/purchases-typescript-internal": "npm:13.26.0"
   peerDependencies:
     react: ">= 16.6.3"
     react-native: "*"
-  checksum: 10c0/f997e7f53ca41a63965aa23848d75b45813a4538a37f4dd4b514d187820de472ca059db59702a10b05ee70c57fb84df5332363c4834e7ab6bc27642136abfbdf
+  checksum: 10c0/10c897f979b0e98a37d2ec1e32a46e889333058f027f850ef5b46ca94fb4ed9888e55b77f2b083c7a8f1ad2079e0c7a7ad83c1a44d2903e175e6e9af1146f938
   languageName: node
   linkType: hard
 
@@ -16400,9 +16400,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-native-track-player@https://github.com/lovegaoshi/react-native-track-player.git#commit=365a2757e21dadb0b07419cacb842029c5e34944":
+"react-native-track-player@https://github.com/lovegaoshi/react-native-track-player.git#commit=2cd9f52db56e32bd0f55d86c957193f6cfd85dd2":
   version: 4.1.1
-  resolution: "react-native-track-player@https://github.com/lovegaoshi/react-native-track-player.git#commit=365a2757e21dadb0b07419cacb842029c5e34944"
+  resolution: "react-native-track-player@https://github.com/lovegaoshi/react-native-track-player.git#commit=2cd9f52db56e32bd0f55d86c957193f6cfd85dd2"
   peerDependencies:
     react: ">=16.8.6"
     react-native: ">=0.60.0-rc.2"
@@ -16413,7 +16413,7 @@ __metadata:
       optional: true
     shaka-player:
       optional: true
-  checksum: 10c0/3a5e9ae7b98ec4472bdbfb62268b544e44b6746b90178693e874fdfe55d1f43874825b2ab3b56c1a1bb52d92567c05c74a696982de7431110d957c7b7147390f
+  checksum: 10c0/b957e7f3b1a78a8b3125dea659e5ae6330c5ec773e4168c300323c88a6801472771cb2e9a21be5cc8e1f0239270ccd85d4c1198331ab93ffecf8d579ecc2bab7
   languageName: node
   linkType: hard
 
