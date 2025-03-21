@@ -6462,7 +6462,7 @@ __metadata:
     react-native-background-timer: "git+https://github.com/lovegaoshi/react-native-background-timer.git"
     react-native-blob-jsi-helper: "npm:^0.3.1"
     react-native-blob-util: "npm:^0.21.2"
-    react-native-carplay: "npm:2.3.0"
+    react-native-carplay: "npm:2.4.1-beta.0"
     react-native-clean-project: "npm:^4.0.3"
     react-native-device-info: "npm:^14.0.4"
     react-native-dotenv: "npm:^3.4.11"
@@ -6483,7 +6483,7 @@ __metadata:
     react-native-svg: "npm:15.11.2"
     react-native-svga-player: "https://lovegaoshi@github.com/lovegaoshi/react-native-svga-player.git#commit=f8c6303fddb528a1a94d2ab4696c9318c0002cfd"
     react-native-text-ticker: "https://lovegaoshi@github.com/lovegaoshi/react-native-text-ticker.git#commit=78a79c9a5f3b70e15d6de6db14d0516a56ae5d40"
-    react-native-track-player: "https://github.com/lovegaoshi/react-native-track-player.git#commit=2cd9f52db56e32bd0f55d86c957193f6cfd85dd2"
+    react-native-track-player: "https://github.com/lovegaoshi/react-native-track-player.git#commit=f62037c6305aa78fa5098ae5006940efe8acfe03"
     react-native-url-polyfill: "npm:^2.0.0"
     react-native-vector-icons: "npm:^10.2.0"
     react-native-video: "npm:^6.11.0"
@@ -8914,65 +8914,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"es-abstract@npm:^1.23.9":
-  version: 1.23.9
-  resolution: "es-abstract@npm:1.23.9"
-  dependencies:
-    array-buffer-byte-length: "npm:^1.0.2"
-    arraybuffer.prototype.slice: "npm:^1.0.4"
-    available-typed-arrays: "npm:^1.0.7"
-    call-bind: "npm:^1.0.8"
-    call-bound: "npm:^1.0.3"
-    data-view-buffer: "npm:^1.0.2"
-    data-view-byte-length: "npm:^1.0.2"
-    data-view-byte-offset: "npm:^1.0.1"
-    es-define-property: "npm:^1.0.1"
-    es-errors: "npm:^1.3.0"
-    es-object-atoms: "npm:^1.0.0"
-    es-set-tostringtag: "npm:^2.1.0"
-    es-to-primitive: "npm:^1.3.0"
-    function.prototype.name: "npm:^1.1.8"
-    get-intrinsic: "npm:^1.2.7"
-    get-proto: "npm:^1.0.0"
-    get-symbol-description: "npm:^1.1.0"
-    globalthis: "npm:^1.0.4"
-    gopd: "npm:^1.2.0"
-    has-property-descriptors: "npm:^1.0.2"
-    has-proto: "npm:^1.2.0"
-    has-symbols: "npm:^1.1.0"
-    hasown: "npm:^2.0.2"
-    internal-slot: "npm:^1.1.0"
-    is-array-buffer: "npm:^3.0.5"
-    is-callable: "npm:^1.2.7"
-    is-data-view: "npm:^1.0.2"
-    is-regex: "npm:^1.2.1"
-    is-shared-array-buffer: "npm:^1.0.4"
-    is-string: "npm:^1.1.1"
-    is-typed-array: "npm:^1.1.15"
-    is-weakref: "npm:^1.1.0"
-    math-intrinsics: "npm:^1.1.0"
-    object-inspect: "npm:^1.13.3"
-    object-keys: "npm:^1.1.1"
-    object.assign: "npm:^4.1.7"
-    own-keys: "npm:^1.0.1"
-    regexp.prototype.flags: "npm:^1.5.3"
-    safe-array-concat: "npm:^1.1.3"
-    safe-push-apply: "npm:^1.0.0"
-    safe-regex-test: "npm:^1.1.0"
-    set-proto: "npm:^1.0.0"
-    string.prototype.trim: "npm:^1.2.10"
-    string.prototype.trimend: "npm:^1.0.9"
-    string.prototype.trimstart: "npm:^1.0.8"
-    typed-array-buffer: "npm:^1.0.3"
-    typed-array-byte-length: "npm:^1.0.3"
-    typed-array-byte-offset: "npm:^1.0.4"
-    typed-array-length: "npm:^1.0.7"
-    unbox-primitive: "npm:^1.1.0"
-    which-typed-array: "npm:^1.1.18"
-  checksum: 10c0/1de229c9e08fe13c17fe5abaec8221545dfcd57e51f64909599a6ae896df84b8fd2f7d16c60cb00d7bf495b9298ca3581aded19939d4b7276854a4b066f8422b
-  languageName: node
-  linkType: hard
-
 "es-define-property@npm:^1.0.0":
   version: 1.0.0
   resolution: "es-define-property@npm:1.0.0"
@@ -9059,18 +9000,6 @@ __metadata:
     has-tostringtag: "npm:^1.0.2"
     hasown: "npm:^2.0.1"
   checksum: 10c0/f22aff1585eb33569c326323f0b0d175844a1f11618b86e193b386f8be0ea9474cfbe46df39c45d959f7aa8f6c06985dc51dd6bce5401645ec5a74c4ceaa836a
-  languageName: node
-  linkType: hard
-
-"es-set-tostringtag@npm:^2.1.0":
-  version: 2.1.0
-  resolution: "es-set-tostringtag@npm:2.1.0"
-  dependencies:
-    es-errors: "npm:^1.3.0"
-    get-intrinsic: "npm:^1.2.6"
-    has-tostringtag: "npm:^1.0.2"
-    hasown: "npm:^2.0.2"
-  checksum: 10c0/ef2ca9ce49afe3931cb32e35da4dcb6d86ab02592cfc2ce3e49ced199d9d0bb5085fc7e73e06312213765f5efa47cc1df553a6a5154584b21448e9fb8355b1af
   languageName: node
   linkType: hard
 
@@ -10904,24 +10833,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"get-intrinsic@npm:^1.2.7":
-  version: 1.2.7
-  resolution: "get-intrinsic@npm:1.2.7"
-  dependencies:
-    call-bind-apply-helpers: "npm:^1.0.1"
-    es-define-property: "npm:^1.0.1"
-    es-errors: "npm:^1.3.0"
-    es-object-atoms: "npm:^1.0.0"
-    function-bind: "npm:^1.1.2"
-    get-proto: "npm:^1.0.0"
-    gopd: "npm:^1.2.0"
-    has-symbols: "npm:^1.1.0"
-    hasown: "npm:^2.0.2"
-    math-intrinsics: "npm:^1.1.0"
-  checksum: 10c0/b475dec9f8bff6f7422f51ff4b7b8d0b68e6776ee83a753c1d627e3008c3442090992788038b37eff72e93e43dceed8c1acbdf2d6751672687ec22127933080d
-  languageName: node
-  linkType: hard
-
 "get-package-type@npm:^0.1.0":
   version: 0.1.0
   resolution: "get-package-type@npm:0.1.0"
@@ -10933,16 +10844,6 @@ __metadata:
   version: 3.2.0
   resolution: "get-port@npm:3.2.0"
   checksum: 10c0/1b6c3fe89074be3753d9ddf3d67126ea351ab9890537fe53fefebc2912d1d66fdc112451bbc76d33ae5ceb6ca70be2a91017944e3ee8fb0814ac9b295bf2a5b8
-  languageName: node
-  linkType: hard
-
-"get-proto@npm:^1.0.0, get-proto@npm:^1.0.1":
-  version: 1.0.1
-  resolution: "get-proto@npm:1.0.1"
-  dependencies:
-    dunder-proto: "npm:^1.0.1"
-    es-object-atoms: "npm:^1.0.0"
-  checksum: 10c0/9224acb44603c5526955e83510b9da41baf6ae73f7398875fba50edc5e944223a89c4a72b070fcd78beb5f7bdda58ecb6294adc28f7acfc0da05f76a2399643c
   languageName: node
   linkType: hard
 
@@ -15192,7 +15093,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"own-keys@npm:^1.0.0, own-keys@npm:^1.0.1":
+"own-keys@npm:^1.0.0":
   version: 1.0.1
   resolution: "own-keys@npm:1.0.1"
   dependencies:
@@ -16096,12 +15997,18 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-native-carplay@npm:2.3.0":
-  version: 2.3.0
-  resolution: "react-native-carplay@npm:2.3.0"
-  dependencies:
-    traverse: "npm:^0.6.6"
-  checksum: 10c0/c62143e2fd1700f7e502062e0138d1bcf8da756fe1879c62cc271835c00fad6340e1709705c82425b015afcf0a9ccf4cf8098f82f103a0c4e396204dc7893e6b
+"react-native-carplay@npm:2.4.1-beta.0":
+  version: 2.4.1-beta.0
+  resolution: "react-native-carplay@npm:2.4.1-beta.0"
+  peerDependencies:
+    react: ^17.0.2 || ^18.0.0
+    react-native: ^0.60.0
+  peerDependenciesMeta:
+    react:
+      optional: true
+    react-native:
+      optional: true
+  checksum: 10c0/f498ef43c7eb86f69ddfa82ba896641593cbe399c6eeb91d599b0ae5c720d06edfa7aa3019f81b31530a9c1ab4f99b92e0df16a05c17a5fc493c7a99628c138d
   languageName: node
   linkType: hard
 
@@ -16400,9 +16307,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-native-track-player@https://github.com/lovegaoshi/react-native-track-player.git#commit=2cd9f52db56e32bd0f55d86c957193f6cfd85dd2":
+"react-native-track-player@https://github.com/lovegaoshi/react-native-track-player.git#commit=f62037c6305aa78fa5098ae5006940efe8acfe03":
   version: 4.1.1
-  resolution: "react-native-track-player@https://github.com/lovegaoshi/react-native-track-player.git#commit=2cd9f52db56e32bd0f55d86c957193f6cfd85dd2"
+  resolution: "react-native-track-player@https://github.com/lovegaoshi/react-native-track-player.git#commit=f62037c6305aa78fa5098ae5006940efe8acfe03"
   peerDependencies:
     react: ">=16.8.6"
     react-native: ">=0.60.0-rc.2"
@@ -16413,7 +16320,7 @@ __metadata:
       optional: true
     shaka-player:
       optional: true
-  checksum: 10c0/b957e7f3b1a78a8b3125dea659e5ae6330c5ec773e4168c300323c88a6801472771cb2e9a21be5cc8e1f0239270ccd85d4c1198331ab93ffecf8d579ecc2bab7
+  checksum: 10c0/de1e4d0aacd7b235723ebbdb77d7898177ed852e76ffc4ca5bf7ed86e1cb6647726a78c1d0de32be6c08b581523c6b09d37c19605fbbaf5584d78e4e43856f52
   languageName: node
   linkType: hard
 
@@ -17582,17 +17489,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"set-proto@npm:^1.0.0":
-  version: 1.0.0
-  resolution: "set-proto@npm:1.0.0"
-  dependencies:
-    dunder-proto: "npm:^1.0.1"
-    es-errors: "npm:^1.3.0"
-    es-object-atoms: "npm:^1.0.0"
-  checksum: 10c0/ca5c3ccbba479d07c30460e367e66337cec825560b11e8ba9c5ebe13a2a0d6021ae34eddf94ff3dfe17a3104dc1f191519cb6c48378b503e5c3f36393938776a
-  languageName: node
-  linkType: hard
-
 "set-value@npm:^2.0.0, set-value@npm:^2.0.1":
   version: 2.0.1
   resolution: "set-value@npm:2.0.1"
@@ -18738,17 +18634,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"traverse@npm:^0.6.6":
-  version: 0.6.11
-  resolution: "traverse@npm:0.6.11"
-  dependencies:
-    gopd: "npm:^1.2.0"
-    typedarray.prototype.slice: "npm:^1.0.5"
-    which-typed-array: "npm:^1.1.18"
-  checksum: 10c0/2b57662da3061ed2aa9977a6a3e315fc19f2cfdeb691700a88c12f4d460146abdb4d726740f47a9ca5fa84d3c50096b76ee50047d1a71c2afb168852ad264e36
-  languageName: node
-  linkType: hard
-
 "trim-newlines@npm:^3.0.0":
   version: 3.0.1
   resolution: "trim-newlines@npm:3.0.1"
@@ -18992,22 +18877,6 @@ __metadata:
     possible-typed-array-names: "npm:^1.0.0"
     reflect.getprototypeof: "npm:^1.0.6"
   checksum: 10c0/e38f2ae3779584c138a2d8adfa8ecf749f494af3cd3cdafe4e688ce51418c7d2c5c88df1bd6be2bbea099c3f7cea58c02ca02ed438119e91f162a9de23f61295
-  languageName: node
-  linkType: hard
-
-"typedarray.prototype.slice@npm:^1.0.5":
-  version: 1.0.5
-  resolution: "typedarray.prototype.slice@npm:1.0.5"
-  dependencies:
-    call-bind: "npm:^1.0.8"
-    define-properties: "npm:^1.2.1"
-    es-abstract: "npm:^1.23.9"
-    es-errors: "npm:^1.3.0"
-    get-proto: "npm:^1.0.1"
-    math-intrinsics: "npm:^1.1.0"
-    typed-array-buffer: "npm:^1.0.3"
-    typed-array-byte-offset: "npm:^1.0.4"
-  checksum: 10c0/4995828640f8079cfbc9e3b4b8fc2e0eeb109edd1a2596806325ae07306dba1cd947e6ed6f63391aa7d5af0ea4f40fddf1b6eb863f8a59869a9dfc5dcfd8eac2
   languageName: node
   linkType: hard
 
