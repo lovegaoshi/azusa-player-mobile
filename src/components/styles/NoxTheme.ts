@@ -48,7 +48,6 @@ export default {
     'https://i0.hdslb.com/bfs/new_dyn/80bcfc0d0459868465ede9ffa0cc7f3c32898941.gif',
     'https://i0.hdslb.com/bfs/new_dyn/d15b52d2a64c99caaa594e0e9a8eae4d32898941.gif',
     'https://i0.hdslb.com/bfs/new_dyn/e8895104e4f298c620f58fe4f43ad59432898941.gif',
-    'https://i0.hdslb.com/bfs/new_dyn/5f2a485ca7d29afd7263ad5f370092ca32898941.gif',
     'https://i0.hdslb.com/bfs/new_dyn/e8895104e4f298c620f58fe4f43ad59432898941.gif',
     'https://i0.hdslb.com/bfs/new_dyn/6b1ceba3f1c433d494c98ef9eeb71a5e32898941.gif',
     'https://i0.hdslb.com/bfs/new_dyn/0043f21652277aba43afb176fe60ba3132898941.png',

@@ -105,6 +105,13 @@ const reExtractionsDefault: ReExtract[] = [
     process: (val: RegExpExecArray, rows: NoxMedia.Song[]) =>
       rows.filter(row => row.duration > Number(val[1])),
   },
+  /**
+  {
+    regex: SearchRegex.regexMatch.regex,
+    process: (val: RegExpExecArray, rows: NoxMedia.Song[]) =>
+      rows.filter(row => row.parsedName.match(new RegExp(val[1]))),
+  },
+   */
 ];
 
 interface ReParseSearchProps {

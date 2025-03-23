@@ -11,16 +11,14 @@ const Playlist = () => {
   const playerStyle = useNoxSetting(state => state.playerStyle);
 
   return (
-    <FlexView noFlex>
+    <FlexView>
       <View
         style={[
           styles.contentContainer,
           { backgroundColor: playerStyle.customColors.maskedBackgroundColor },
         ]}
       >
-        <BiliSearchbar
-          onSearched={(songs: NoxMedia.Song[]) => console.log(songs)}
-        />
+        <BiliSearchbar onSearched={console.log} />
         <SongList />
       </View>
     </FlexView>

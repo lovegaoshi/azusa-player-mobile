@@ -53,20 +53,25 @@ export default () => {
     );
   };
 
-  const expand = () => {
+  const expand = (animation = true) => {
     'worklet';
-    miniplayerHeight.value = withTiming(height, {
-      duration: 250,
-      easing: Easing.inOut(Easing.ease),
-    });
+    miniplayerHeight.value = animation
+      ? withTiming(height, {
+          duration: 250,
+          easing: Easing.inOut(Easing.ease),
+        })
+      : height;
     artworkOpacity.value = withTiming(1);
   };
-  const collapse = () => {
+
+  const collapse = (animation = true) => {
     'worklet';
-    miniplayerHeight.value = withTiming(MinPlayerHeight, {
-      duration: 250,
-      easing: Easing.inOut(Easing.ease),
-    });
+    miniplayerHeight.value = animation
+      ? withTiming(MinPlayerHeight, {
+          duration: 250,
+          easing: Easing.inOut(Easing.ease),
+        })
+      : MinPlayerHeight;
     artworkOpacity.value = withTiming(1);
     runOnJS(setLrcVisible)(false);
   };

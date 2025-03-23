@@ -11,6 +11,7 @@ export const SearchRegex: { [key: string]: { regex: RegExp; text: string } } = {
   cachedMatch: { regex: /Cached:(.*)/, text: 'Cached:' },
   durationLessMatch: { regex: /Duration<:(\d+)/, text: 'Duration<:' },
   durationMoreMatch: { regex: /Duration>:(\d+)/, text: 'Duration>:' },
+  // regexMatch: { regex: /Regex:(.*)/, text: 'Regex:' },
 };
 
 export enum SortOptions {
