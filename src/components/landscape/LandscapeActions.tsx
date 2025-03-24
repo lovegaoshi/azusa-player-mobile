@@ -32,8 +32,7 @@ export default ({ panelWidth = 110 }: Props) => {
     function deepLinkHandler(data: { url: string }) {
       if (data.url === 'trackplayer://notification.click') {
         logger.debug('[Drawer] click from notification; navigate to home');
-        navigation.navigate({ route: NoxRoutes.PlayerHome });
-        toggleExpand();
+        navigation.navigate({ route: NoxRoutes.Playlist });
       }
     }
     // This event will be fired when the app is already open and the notification is clicked
