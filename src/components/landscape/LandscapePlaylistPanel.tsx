@@ -20,6 +20,7 @@ export default ({ panelWidth }: Props) => {
     width: panelWidth,
     // HACK: WHY?
     height: Dimensions.get('window').height - 25,
+    padddingBottom: 10,
   };
 
   return (

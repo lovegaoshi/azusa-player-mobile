@@ -14,6 +14,7 @@ import TimerButton from '@components/playlists/TimerButton';
 import PlaylistItem from '@components/playlists/PlaylistItem';
 import usePlaylistBrowseTree from '@hooks/usePlaylistBrowseTree';
 import useNavigation from '@hooks/useNavigation';
+import { useIsLandscape } from '@hooks/useOrientation';
 
 interface NewButtonProps {
   setNewPlaylistDialogOpen: (v: boolean) => void;
@@ -36,6 +37,7 @@ const SearchPlaylistAsNewButton = ({
 export default () => {
   const [dialogOpen, setDialogOpen] = useState(false);
   const navigation = useNavigation();
+  const isLandscape = useIsLandscape();
   const currentPlaylist = useNoxSetting(state => state.currentPlaylist);
   const currentPlayingList = useNoxSetting(state => state.currentPlayingList);
   const playlists = useNoxSetting(state => state.playlists);
@@ -67,7 +69,7 @@ export default () => {
 
   const goToPlaylist = (playlistId: string) => {
     navigation.navigate({
-      route: NoxRoutes.PlayerHome,
+      route: isLandscape ? NoxRoutes.Playlist : NoxRoutes.PlayerHome,
       options: { screen: NoxRoutes.Playlist },
     });
     if (currentPlaylist.id === playlistId) {
