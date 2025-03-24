@@ -15,7 +15,6 @@ interface Props {
 export default ({ panelWidth = 110 }: Props) => {
   const playerStyle = useNoxSetting(state => state.playerStyle);
   const currentPlayingId = useNoxSetting(state => state.currentPlayingId);
-  const toggleExpand = useNoxSetting(state => state.toggleExpand);
   const navigation = useNavigation();
   const iconSize = panelWidth - 30;
 
