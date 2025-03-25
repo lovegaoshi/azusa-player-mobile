@@ -53,7 +53,7 @@ export default ({ onSearched = console.log }: Props) => {
   const [, setSharedMimeType] = useState<string | null>(null);
   const { playFromPlaylist } = usePlayback();
   const [dialogOpen, setDialogOpen] = useState(false);
-  const [menuCoords, setMenuCoords] = useState<NoxTheme.coordinates>({
+  const [menuCoords, setMenuCoords] = useState<NoxTheme.Coordinates>({
     x: 0,
     y: 0,
   });

@@ -49,7 +49,7 @@ export default ({ usePlaylist, onPressed = () => undefined }: Props) => {
     state => state.setPlaylistSearchAutoFocus,
   );
   const [dialogOpen, setDialogOpen] = useState(false);
-  const [menuCoords, setMenuCoords] = useState<NoxTheme.coordinates>({
+  const [menuCoords, setMenuCoords] = useState<NoxTheme.Coordinates>({
     x: 0,
     y: 0,
   });

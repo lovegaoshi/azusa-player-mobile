@@ -18,7 +18,7 @@ export enum RESOLVE_TYPE {
 
 const BackgroundVideoWrapper = (
   identifier: string,
-  backgroundImage: NoxTheme.backgroundImage,
+  backgroundImage: NoxTheme.BackgroundImage,
 ) => ({
   type: RESOLVE_TYPE.video,
   identifier,
@@ -30,7 +30,7 @@ const defaultBackgroundImage = {
   identifier: '',
 };
 
-export default async (backgroundImage?: string | NoxTheme.backgroundImage) => {
+export default async (backgroundImage?: string | NoxTheme.BackgroundImage) => {
   if (!backgroundImage) return defaultBackgroundImage;
   if (typeof backgroundImage === 'string') {
     return { type: RESOLVE_TYPE.image, identifier: backgroundImage };

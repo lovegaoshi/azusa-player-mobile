@@ -23,8 +23,8 @@ export interface APMUIStore {
   playlistInfoUpdate: boolean;
   togglePlaylistInfoUpdate: () => void;
 
-  songMenuCoords: NoxTheme.coordinates;
-  setSongMenuCoords: (val: NoxTheme.coordinates) => void;
+  songMenuCoords: NoxTheme.Coordinates;
+  setSongMenuCoords: (val: NoxTheme.Coordinates) => void;
   songMenuVisible: boolean;
   setSongMenuVisible: (val: boolean) => void;
   songMenuSongIndexes: number[];

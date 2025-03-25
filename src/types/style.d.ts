@@ -12,7 +12,7 @@ declare global {
       darkTheme: boolean;
     }
 
-    interface customColors {
+    interface CustomColors {
       maskedBackgroundColor: string;
       playlistDrawerBackgroundColor: string;
       playlistDrawerBackgroundColorTransparent: string;
@@ -24,7 +24,7 @@ declare global {
       playerControlIconBkgrdColor?: string;
     }
 
-    export interface backgroundImage {
+    export interface BackgroundImage {
       type: RESOLVE_TYPE;
       identifier: string;
       toA?: number;
@@ -58,7 +58,7 @@ declare global {
       isAdaptive: false;
     }
 
-    export interface coordinates {
+    export interface Coordinates {
       x: number;
       y: number;
       width?: number;

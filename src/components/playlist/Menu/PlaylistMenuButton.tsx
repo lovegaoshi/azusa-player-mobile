@@ -14,7 +14,7 @@ interface Props {
 
 export default ({ disabled = false, playlist, songListUpdateHalt }: Props) => {
   const [menuOpen, setMenuOpen] = useState(false);
-  const [menuCoords, setMenuCoords] = useState<NoxTheme.coordinates>({
+  const [menuCoords, setMenuCoords] = useState<NoxTheme.Coordinates>({
     x: 0,
     y: 0,
   });

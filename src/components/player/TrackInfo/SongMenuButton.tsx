@@ -12,7 +12,7 @@ export default ({ track }: NoxComponent.TrackProps) => {
   // to a store too, lastPlayID only records song ID.
   // but... get a better phone?
   const [songMenuSongIndex, setSongMenuSongIndex] = useState(-1);
-  const [menuCoords, setMenuCoords] = useState<NoxTheme.coordinates>({
+  const [menuCoords, setMenuCoords] = useState<NoxTheme.Coordinates>({
     x: 0,
     y: 0,
   });
