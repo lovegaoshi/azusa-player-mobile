@@ -56,7 +56,7 @@ const useSync = () => {
               setSyncCheckVisible(true);
               setNoxExtensionContent(
                 parsedContent[StorageKeys.MY_FAV_LIST_KEY].map(
-                  (val: any) =>
+                  (val: string) =>
                     parsedContent[val].title ?? parsedContent[val].info.title,
                 ),
               );

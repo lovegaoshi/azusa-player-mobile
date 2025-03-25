@@ -34,7 +34,7 @@ const searchSuggest = (option: SearchOptions | string) => {
 };
 
 interface Props {
-  onSearched: (v: NoxMedia.Song[]) => void;
+  onSearched: (val: NoxMedia.SearchPlaylist) => void;
 }
 export default ({ onSearched = console.log }: Props) => {
   const { t } = useTranslation();
