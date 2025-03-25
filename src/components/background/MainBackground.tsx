@@ -15,7 +15,7 @@ const MainBackground = ({ children }: { children: React.JSX.Element }) => {
   const playerStyle = useNoxSetting(state => state.playerStyle);
   const isLandscape = useIsLandscape();
   const { width, height } = Dimensions.get('window');
-  const [bkgrdImg, setBkgrdImg] = useState<NoxTheme.backgroundImage>();
+  const [bkgrdImg, setBkgrdImg] = useState<NoxTheme.BackgroundImage>();
   const videoRef = React.useRef<VideoRef | null>(null);
   const bkgrdImgRaw =
     isLandscape && playerStyle.bkgrdImgLandscape

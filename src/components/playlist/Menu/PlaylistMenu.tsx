@@ -25,7 +25,7 @@ enum Icons {
 interface Props {
   visible?: boolean;
   toggleVisible?: () => void;
-  menuCoords?: NoxTheme.coordinates;
+  menuCoords?: NoxTheme.Coordinates;
   playlist: NoxMedia.Playlist;
   songListUpdateHalt: () => void;
 }

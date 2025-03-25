@@ -34,7 +34,7 @@ const searchSuggest = (option: SearchOptions | string) => {
 };
 
 interface Props {
-  onSearched: (v: NoxMedia.Song[]) => void;
+  onSearched: (val: NoxMedia.SearchPlaylist) => void;
 }
 export default ({ onSearched = console.log }: Props) => {
   const { t } = useTranslation();
@@ -53,7 +53,7 @@ export default ({ onSearched = console.log }: Props) => {
   const [, setSharedMimeType] = useState<string | null>(null);
   const { playFromPlaylist } = usePlayback();
   const [dialogOpen, setDialogOpen] = useState(false);
-  const [menuCoords, setMenuCoords] = useState<NoxTheme.coordinates>({
+  const [menuCoords, setMenuCoords] = useState<NoxTheme.Coordinates>({
     x: 0,
     y: 0,
   });

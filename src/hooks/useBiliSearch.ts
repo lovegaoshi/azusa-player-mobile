@@ -7,11 +7,11 @@ import { useNoxSetting } from '../stores/useApp';
 import { getDefaultSearch } from '@utils/ChromeStorage';
 
 interface Props {
-  onSearched?: (val: any) => void;
+  onSearched?: (val: NoxMedia.SearchPlaylist) => void;
   searchListTitle?: string;
 }
 export default ({
-  onSearched = (songs: NoxMedia.Song[]) => console.log(songs),
+  onSearched = console.log,
   searchListTitle = i18n.t('PlaylistOperations.searchListName'),
 }: Props) => {
   const [searchVal, setSearchVal] = useState('');

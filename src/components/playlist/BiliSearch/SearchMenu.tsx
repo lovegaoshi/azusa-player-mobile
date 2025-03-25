@@ -16,7 +16,7 @@ import {
 interface Props {
   visible?: boolean;
   toggleVisible?: () => void;
-  menuCoords?: NoxTheme.coordinates;
+  menuCoords?: NoxTheme.Coordinates;
   showMusicFree?: boolean;
   setSearchVal: (v: string) => void;
 }

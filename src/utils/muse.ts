@@ -12,7 +12,8 @@ const findCookie = (cookies: string, match: string) => {
 export const initMuse = async (
   cookies: Promise<string> = getItem(StorageKeys.YTMCOOKIES, ''),
 ) => {
-  const sapisid = findCookie(await cookies, 'SAPISID') ?? '';
+  const sapisid = findCookie(await cookies, 'SAPISID') ?? undefined;
+  if (!sapisid) return;
   // https://github.com/sigma67/ytmusicapi/blob/9ce284a7eae9c4cdc04bb098f7549cc5f1c80e22/ytmusicapi/helpers.py#L52
   const get_headers = async () => {
     const now = new Date();

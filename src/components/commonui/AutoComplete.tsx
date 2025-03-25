@@ -32,7 +32,7 @@ export default ({
   const [showAutoComplete, setShowAutoComplete] = useState(false);
   const [data, setData] = useState<string[]>([]);
   const playerStyle = useNoxSetting(state => state.playerStyle);
-  const [menuCoords, setMenuCoords] = useState<NoxTheme.coordinates>({
+  const [menuCoords, setMenuCoords] = useState<NoxTheme.Coordinates>({
     x: 0,
     y: 0,
   });

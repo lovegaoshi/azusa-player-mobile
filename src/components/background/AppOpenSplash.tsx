@@ -12,7 +12,7 @@ enum SplashType {
   Tanaka = 'tanaka',
 }
 
-type SplashArray = [SplashType, () => any][];
+type SplashArray = [SplashType, () => unknown][];
 
 export const imageSplashes: SplashArray = [
   [SplashType.Image, () => require('@assets/splash/steria2.jpg')],

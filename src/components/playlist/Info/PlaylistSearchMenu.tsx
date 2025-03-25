@@ -7,7 +7,7 @@ import { SearchRegex } from '@enums/Playlist';
 interface Props {
   visible?: boolean;
   toggleVisible?: () => void;
-  menuCoords?: NoxTheme.coordinates;
+  menuCoords?: NoxTheme.Coordinates;
   setSearchCategory: (category: string) => void;
 }
 
