@@ -4716,9 +4716,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@shopify/react-native-skia@npm:1.12.0":
-  version: 1.12.0
-  resolution: "@shopify/react-native-skia@npm:1.12.0"
+"@shopify/react-native-skia@npm:1.12.1":
+  version: 1.12.1
+  resolution: "@shopify/react-native-skia@npm:1.12.1"
   dependencies:
     canvaskit-wasm: "npm:0.39.1"
     react-reconciler: "npm:0.27.0"
@@ -4733,7 +4733,7 @@ __metadata:
       optional: true
   bin:
     setup-skia-web: scripts/setup-canvaskit.js
-  checksum: 10c0/a289ee3912a4aaca654435e975a8564615344c756369b3d00626aabbe1ec34268137e08db430535414596c5a1f0fd6e5cbaddd5711f085dd7f32f8833677741f
+  checksum: 10c0/a8d3aae341fa193e581b1d4c0e6e84c26946489717c586d5857de5bea8eb801419e1cb96c191faa18b2251856c3484c5cd627e19377f1074d327e64e00c3d2b6
   languageName: node
   linkType: hard
 
@@ -6505,7 +6505,7 @@ __metadata:
     "@sentry/react-native": "npm:^6.10.0"
     "@sharcoux/slider": "npm:8.0.6"
     "@shopify/flash-list": "npm:^1.7.6"
-    "@shopify/react-native-skia": "npm:1.12.0"
+    "@shopify/react-native-skia": "npm:1.12.1"
     "@tsconfig/react-native": "npm:^3.0.5"
     "@types/base-64": "npm:^1.0.2"
     "@types/crypto-js": "npm:^4.2.2"
@@ -6614,7 +6614,7 @@ __metadata:
     react-native-url-polyfill: "npm:^2.0.0"
     react-native-vector-icons: "npm:^10.2.0"
     react-native-video: "npm:^6.11.0"
-    react-native-webview: "npm:13.13.4"
+    react-native-webview: "npm:13.13.5"
     react-test-renderer: "npm:18.3.1"
     reactotron-react-native: "npm:^5.1.12"
     rimraf: "npm:^6.0.1"
@@ -16606,16 +16606,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-native-webview@npm:13.13.4":
-  version: 13.13.4
-  resolution: "react-native-webview@npm:13.13.4"
+"react-native-webview@npm:13.13.5":
+  version: 13.13.5
+  resolution: "react-native-webview@npm:13.13.5"
   dependencies:
     escape-string-regexp: "npm:^4.0.0"
     invariant: "npm:2.2.4"
   peerDependencies:
     react: "*"
     react-native: "*"
-  checksum: 10c0/00218d1e3fbe3f4fe0ecbe418c47d6a9448430e6998bb49748c1206dbba2b261ba03d034fe0787d841b6365854dcfe4c03638a4d192f7288936f011296a1fa6e
+  checksum: 10c0/187441eac5a747acb58ae388b07611fcb13c6c8c801b7e3fc5175ea46e20cbc28db38ce777459fa4f405a3b4703e3011cd04c9218ac4a088a8a06031a8a2629c
   languageName: node
   linkType: hard
 
