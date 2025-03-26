@@ -3,15 +3,17 @@ import { Pressable } from 'react-native';
 import { Image } from 'expo-image';
 import { useTranslation } from 'react-i18next';
 
+import { randomNumber } from '@utils/Utils';
+
 const getRandomNumberExclude = (randRange: number, exclude = -1) => {
   if (exclude > 0) {
-    const val = Math.floor(Math.random() * (randRange - 1)) >> 0;
+    const val = randomNumber(randRange - 1);
     if (val === exclude) {
       return randRange - 1;
     }
     return val;
   }
-  return Math.floor(Math.random() * randRange) >> 0;
+  return randomNumber(randRange);
 };
 
 interface Props {

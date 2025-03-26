@@ -11,6 +11,7 @@ import {
 import { StorageKeys } from '@enums/Storage';
 import { getABRepeatRaw } from './appStore';
 import { setPlayingList } from '@stores/playingList';
+import { shuffle, smartShuffle } from '@utils/Utils';
 
 export interface PlaylistsStore {
   /**

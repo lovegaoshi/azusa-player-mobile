@@ -69,6 +69,10 @@ const GEN_SETTING_BOOLEAN: SettingEntry[] = [
     settingName: 'noBiliR128Gain',
     settingCategory: 'GeneralSettings',
   },
+  {
+    settingName: 'smartShuffle',
+    settingCategory: 'GeneralSettings',
+  },
 ];
 
 export default () => {
