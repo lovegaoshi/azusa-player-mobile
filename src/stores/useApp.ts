@@ -21,6 +21,7 @@ import createPlaylists, { PlaylistsStore } from './usePlaylists';
 import createMFsdk, { MFsdkStore } from './useMFsdk';
 import createAPMPlayback, { APMPlaybackStore } from './useAPMPlayback';
 import { initMFsdk } from '@utils/mfsdk';
+import { shuffle, smartShuffle } from '@utils/Utils';
 
 interface NoxSetting
   extends APMUIStore,
@@ -42,6 +43,8 @@ interface NoxSetting
     addSongs?: NoxMedia.Song[],
     removeSongs?: NoxMedia.Song[],
   ) => NoxMedia.Playlist;
+
+  setCurrentPlayingList: (val: NoxMedia.Playlist) => boolean;
 
   playerSetting: NoxStorage.PlayerSettingDict;
   setPlayerSetting: (
@@ -69,7 +72,13 @@ export const useNoxSetting = create<NoxSetting>((set, get, storeApi) => ({
   ...createPlaylists(set, get, storeApi),
   ...createMFsdk(set, get, storeApi),
   ...createAPMPlayback(set, get, storeApi),
-
+  setCurrentPlayingList: (val: NoxMedia.Playlist) => {
+    const { _setCurrentPlayingList, playerSetting } = get();
+    return _setCurrentPlayingList(
+      val,
+      playerSetting.smartShuffle ? smartShuffle : shuffle,
+    );
+  },
   getPlaylist: async (v, d) => {
     const {
       searchPlaylist,

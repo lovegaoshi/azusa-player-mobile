@@ -54,6 +54,7 @@ declare global {
       artworkCarousel: boolean;
       pausePlaybackOnMute: boolean;
       noBiliR128Gain: boolean;
+      smartShuffle: boolean;
 
       appID: string;
       language?: string;

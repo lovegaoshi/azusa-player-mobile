@@ -227,3 +227,31 @@ export const execWhenTrue = async ({
     `[ExecWhenTrue] function ${funcName} executed after ${loops} try.`,
   );
 };
+
+/**
+ * shuffle NoxMedia.Songs that the next song would
+ * not be the same as the previous song if possible.
+ * @param songs
+ * @returns
+ */
+export const smartShuffle = (songs: NoxMedia.Song[]) => {
+  if (songs.length === 0) {
+    return [];
+  }
+  const newSongs: NoxMedia.Song[] = [randomChoice(songs)];
+  const oldSongs = [...songs].filter(song => !newSongs.includes(song));
+  while (oldSongs.length > 0) {
+    let filteredSongs = oldSongs.filter(
+      s => s.parsedName !== newSongs[newSongs.length - 1].parsedName,
+    );
+    if (filteredSongs.length === 0) {
+      filteredSongs = oldSongs;
+    }
+    const randomIndex = randomNumber(filteredSongs.length);
+    newSongs.push(filteredSongs[randomIndex]);
+    oldSongs.splice(randomIndex, 1);
+  }
+  return newSongs;
+};
+
+export const shuffle = <T>(list: T[]) => list.sort(() => Math.random() - 0.5);
