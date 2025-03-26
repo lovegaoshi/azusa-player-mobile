@@ -11,7 +11,6 @@ import {
 import { StorageKeys } from '@enums/Storage';
 import { getABRepeatRaw } from './appStore';
 import { setPlayingList } from '@stores/playingList';
-import { shuffle, smartShuffle } from '@utils/Utils';
 
 export interface PlaylistsStore {
   /**
@@ -26,7 +25,10 @@ export interface PlaylistsStore {
    * is different than the current playing list.
    */
   currentPlayingList: NoxMedia.Playlist;
-  setCurrentPlayingList: (val: NoxMedia.Playlist) => boolean;
+  _setCurrentPlayingList: (
+    val: NoxMedia.Playlist,
+    shuffle?: (v: NoxMedia.Song[]) => NoxMedia.Song[],
+  ) => boolean;
   playlists: { [key: string]: NoxMedia.Playlist };
   playlistIds: string[];
   setPlaylistIds: (val: string[]) => void;
@@ -57,14 +59,14 @@ const store: StateCreator<PlaylistsStore, [], [], PlaylistsStore> = (
     });
   },
   currentPlayingList: dummyPlaylistList,
-  setCurrentPlayingList: val => {
+  _setCurrentPlayingList: (val, shuffle) => {
     const { currentPlayingList, currentPlayingId } = get();
     if (val.songList === currentPlayingList.songList) {
       return false;
     }
     set({ currentPlayingList: val });
     savelastPlaylistId([val.id, String(currentPlayingId)]);
-    setPlayingList(val.songList);
+    setPlayingList(val.songList, shuffle);
     return true;
   },
   playlists: {},

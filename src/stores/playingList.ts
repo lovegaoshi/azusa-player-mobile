@@ -6,7 +6,7 @@ import { clearPlaylistUninterrupted } from '@utils/RNTPUtils';
 import { NoxRepeatMode } from '../enums/RepeatMode';
 import { savePlayMode } from '@utils/ChromeStorage';
 import logger from '@utils/Logger';
-import { shuffle } from '@utils/Utils';
+import { smartShuffle } from '@utils/Utils';
 
 interface NoxPlaylistStore {
   playingList: NoxMedia.Song[];
@@ -74,7 +74,7 @@ export const playNextSong = (
 
 export const setPlayingList = (
   list: NoxMedia.Song[],
-  shuffleMethod = shuffle,
+  shuffleMethod = smartShuffle,
 ) => {
   playlistStore.setState({
     playingList: list,
