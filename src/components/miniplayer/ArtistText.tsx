@@ -7,6 +7,7 @@ import useArtist from '@stores/explore/artist';
 import useNavigation from '@hooks/useNavigation';
 import { NoxRoutes } from '@enums/Routes';
 import useSnack from '@stores/useSnack';
+import { useNoxSetting } from '@stores/useApp';
 
 interface Props {
   track?: Track;
@@ -16,6 +17,7 @@ interface Props {
 export default ({ track, style }: Props) => {
   const fetch = useArtist(state => state.fetch);
   const setSnack = useSnack(state => state.setSnack);
+  const miniPlayerCollapse = useNoxSetting(state => state.collapse);
   const navigationG = useNavigation();
   const { t } = useTranslation();
 
@@ -23,6 +25,7 @@ export default ({ track, style }: Props) => {
     <Pressable
       onPress={() => {
         if (fetch(track?.song)) {
+          miniPlayerCollapse();
           return navigationG.navigate({
             route: NoxRoutes.PlayerHome,
             options: { screen: NoxRoutes.Artist },

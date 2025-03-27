@@ -9,7 +9,7 @@ const screenOptions = { headerShown: false };
 
 export default () => {
   return (
-    <Stack.Navigator initialRouteName={NoxRoutes.Artist}>
+    <Stack.Navigator>
       <Stack.Screen
         name={NoxRoutes.Playlist}
         component={Playlist}

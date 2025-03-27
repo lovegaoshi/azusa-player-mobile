@@ -12,6 +12,8 @@ export interface ArtistFetch {
   topSongs: NoxMedia.Song[];
   albums: YTSongRowCard[];
   aboutString: string;
+  attestation?: string;
+  sign: string;
 }
 
 export default async (mid: string): Promise<ArtistFetch> => {
@@ -33,6 +35,8 @@ export default async (mid: string): Promise<ArtistFetch> => {
     profilePicURL: `https://i2.hdslb.com/${biliSpaceSetting.data.toutu.s_img}`,
     ProfilePlaySongs,
     artistName: userInfo.name,
+    attestation: userInfo.official?.title,
+    sign: userInfo.sign,
     topSongs,
     aboutString: await getBiliNotice(mid),
     albums: await getListAsYTSongRowCard(mid),

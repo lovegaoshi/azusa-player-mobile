@@ -15,13 +15,16 @@ export default create<ArtistStore>((set, get) => ({
   result: undefined,
   song: undefined,
   fetch: v => {
+    if (v?.singerId === get().song?.singerId) {
+      return true;
+    }
     const fetched = artistFetch(v);
     if (!fetched) return false;
-    set({ loading: true });
+    set({ loading: true, song: v });
     fetched
-      .then(r => set({ result: r, song: v }))
+      .then(r => set({ result: r }))
       .catch(() => set({ result: undefined }))
       .finally(() => set({ loading: false }));
-    return false;
+    return true;
   },
 }));
