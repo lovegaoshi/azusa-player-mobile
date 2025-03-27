@@ -7,4 +7,5 @@ export enum NoxRoutes {
   UserLogin = 'NoxLogin',
   Explore = 'NoxExplore',
   Lyrics = 'NoxLyrics',
+  Artist = 'NoxArtist',
 }
