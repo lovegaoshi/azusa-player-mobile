@@ -34,6 +34,7 @@ export interface FetcherProps {
   fetcher?: (url: string, params?: any) => Promise<Response>;
   startPage?: number;
   processMetadata?: (obj: any) => Promise<any>;
+  stopAtPage?: number;
 }
 
 /**
@@ -58,6 +59,7 @@ export const fetchPaginatedAPI = async ({
   fetcher = bfetch,
   startPage = 1,
   processMetadata = (v: any) => v,
+  stopAtPage = Infinity,
 }: FetcherProps) => {
   const res = await fetcher(url.replace('{pn}', String(startPage)), params);
   const data = getJSONData(await jsonify(res.clone()));
@@ -65,7 +67,8 @@ export const fetchPaginatedAPI = async ({
   const BVids: string[] = [];
   const pagesPromises: (Promise<Response> | Response)[] = [res];
   for (
-    let page = startPage + 1, n = Math.ceil(mediaCount / getPageSize(data));
+    let page = startPage + 1,
+      n = Math.min(stopAtPage, Math.ceil(mediaCount / getPageSize(data)));
     page <= n;
     page++
   ) {
@@ -118,6 +121,7 @@ export const fetchAwaitPaginatedAPI = async ({
   getBVID = (val: any) => val.bvid,
   fetcher = bfetch,
   getJSONData = (json: any) => json.data,
+  stopAtPage = Infinity,
 }: FetcherProps) => {
   // helper function that returns true if more page resolving is needed.
   const resolvePageJson = (BVids: string[], json: any) => {
@@ -139,7 +143,8 @@ export const fetchAwaitPaginatedAPI = async ({
 
   if (resolvePageJson(BVids, json)) {
     for (
-      let page = 2, n = Math.ceil(mediaCount / getPageSize(data));
+      let page = 2,
+        n = Math.min(stopAtPage, Math.ceil(mediaCount / getPageSize(data)));
       page <= n;
       page++
     ) {

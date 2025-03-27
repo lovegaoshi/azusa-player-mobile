@@ -1,4 +1,4 @@
-import { ScrollView, Text, View } from 'react-native';
+import { ScrollView, View } from 'react-native';
 import Animated, {
   runOnJS,
   useAnimatedStyle,
@@ -7,10 +7,12 @@ import Animated, {
   withTiming,
   Easing,
 } from 'react-native-reanimated';
+import { IconButton, Text } from 'react-native-paper';
 
 import FlexView from '@components/commonui/FlexViewNewArch';
+import { NoxRoutes } from '@enums/Routes';
 
-export default () => {
+export default ({ navigation }: NoxComponent.StackNavigationProps) => {
   const scrollYOffset = useSharedValue(0);
   const scrollYHeight = useSharedValue(0);
 
@@ -28,11 +30,18 @@ export default () => {
           style={{
             position: 'absolute',
             flexDirection: 'row',
+            zIndex: 1,
           }}
         >
-          <Text>go back button</Text>
-          <Animated.View style={animatedHeaderStyle}>
-            <Text>aritst text</Text>
+          <IconButton
+            icon={'arrow-left'}
+            onPress={() => navigation.navigate(NoxRoutes.Playlist)}
+            size={30}
+          />
+          <Animated.View
+            style={[{ justifyContent: 'center' }, animatedHeaderStyle]}
+          >
+            <Text variant="titleLarge">aritst text</Text>
           </Animated.View>
         </View>
         <ScrollView

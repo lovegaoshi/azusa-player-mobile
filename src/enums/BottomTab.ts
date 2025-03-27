@@ -20,4 +20,5 @@ export const IconMap: IconMapType = {
   [NoxRoutes.UserLogin]: BottomTabRouteIcons.music,
   [NoxRoutes.PlaylistsDrawer]: BottomTabRouteIcons.playlist,
   [NoxRoutes.Lyrics]: BottomTabRouteIcons.music,
+  [NoxRoutes.Artist]: BottomTabRouteIcons.music,
 };

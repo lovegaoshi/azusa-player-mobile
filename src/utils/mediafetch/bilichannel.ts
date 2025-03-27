@@ -40,12 +40,18 @@ const fastSearchResolveBVID = (bvobjs: any[]) =>
     });
   });
 
-export const fetchBiliChannelList = async (
-  url: string,
-  progressEmitter: NoxUtils.ProgressEmitter = () => undefined,
-  favList: string[] = [],
+interface FetchBiliChannelList {
+  url: string;
+  progressEmitter?: NoxUtils.ProgressEmitter;
+  favList?: string[];
+  fastSearch?: boolean;
+}
+export const fetchBiliChannelList = async ({
+  url,
+  progressEmitter = () => undefined,
+  favList = [],
   fastSearch = false,
-) => {
+}: FetchBiliChannelList) => {
   logger.info('calling fetchBiliChannelList');
   const mid = /space.bilibili\.com\/(\d+)(\/search)?\/video/.exec(url)![1];
   let searchAPI = URL_BILICHANNEL_INFO.replace('{mid}', mid);
@@ -79,12 +85,12 @@ const regexFetch = async ({
   fastSearch,
 }: NoxNetwork.RegexFetchProps): Promise<NoxNetwork.NoxRegexFetch> => ({
   songList: await biliShazamOnSonglist(
-    await fetchBiliChannelList(
-      reExtracted.input,
+    await fetchBiliChannelList({
+      url: reExtracted.input,
       progressEmitter,
       favList,
       fastSearch,
-    ),
+    }),
     false,
     progressEmitter,
     useBiliTag || false,

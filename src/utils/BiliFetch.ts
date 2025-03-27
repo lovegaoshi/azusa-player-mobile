@@ -14,6 +14,8 @@ export const parseBodyParams = (body: any) => {
   return formBody.join('&');
 };
 
+export const getJson = async (res: Promise<Response>) => (await res).json();
+
 export default async function biliFetch(
   url: string,
   paramsProp: NoxNetwork.RequestInit | RequestInit = {
