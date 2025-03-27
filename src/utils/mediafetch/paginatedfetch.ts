@@ -48,7 +48,7 @@ export const fetchPaginatedAPI = async ({
   getMediaCount,
   getPageSize,
   getItems,
-  resolveBiliBVID = async () => [],
+  resolveBiliBVID = async v => v,
   progressEmitter = () => undefined,
   favList = [],
   limiter = biliApiLimiter,
@@ -64,7 +64,7 @@ export const fetchPaginatedAPI = async ({
   const res = await fetcher(url.replace('{pn}', String(startPage)), params);
   const data = getJSONData(await jsonify(res.clone()));
   const mediaCount = getMediaCount(data);
-  const BVids: string[] = [];
+  const BVids: unknown[] = [];
   const pagesPromises: (Promise<Response> | Response)[] = [res];
   for (
     let page = startPage + 1,

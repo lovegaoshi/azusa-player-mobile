@@ -14,7 +14,7 @@ import { awaitLimiter } from './throttle';
 import { getDm } from '../Bilibili/bilidm';
 import { getWebid } from '../Bilibili/biliWebid';
 import { biliShazamOnSonglist } from './bilishazam';
-import { timestampToSeconds } from '../Utils';
+import { timestampToSeconds, appendURLSearchParam } from '../Utils';
 import SongTS from '@objects/Song';
 import { Source } from '@enums/MediaFetch';
 
@@ -59,14 +59,10 @@ export const fetchBiliChannelList = async ({
   let searchAPI = URL_BILICHANNEL_INFO.replace('{mid}', mid);
   const urlObj = new URL(url);
   const URLParams = new URLSearchParams(urlObj.search);
-  const tidVal = URLParams.get('tid');
-  if (tidVal) {
-    searchAPI += `&tid=${tidVal}`;
-  }
-  const kwVal = URLParams.get('keyword');
-  if (kwVal) {
-    searchAPI += `&keyword=${kwVal}`;
-  }
+  searchAPI = appendURLSearchParam(searchAPI, URLParams, 'tid');
+  searchAPI = appendURLSearchParam(searchAPI, URLParams, 'keyword');
+  searchAPI = appendURLSearchParam(searchAPI, URLParams, 'order');
+
   return fetchAwaitBiliPaginatedAPI({
     url: `${searchAPI}${getDm()}${await getWebid(mid)}`,
     getMediaCount: data => data.page.count,

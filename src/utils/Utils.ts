@@ -1,5 +1,14 @@
 import { logger } from '@utils/Logger';
 
+export const appendURLSearchParam = (
+  url: string,
+  urlParam: URLSearchParams,
+  kw: string,
+) => {
+  const extracted = urlParam.get(kw);
+  return extracted ? `${url}&${kw}=${extracted}` : url;
+};
+
 export const i0hdslbHTTPResolve = (url: string) =>
   url.replace('http://', 'https://');
 
