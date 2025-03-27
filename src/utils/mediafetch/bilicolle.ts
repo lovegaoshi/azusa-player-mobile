@@ -64,7 +64,7 @@ export const resolveBiliBVID = (objs: any[], _: any, rawData: any) =>
     }),
   );
 
-const fetchBiliColleList = (
+export const fetchBiliColleList = (
   mid: string,
   sid: string,
   progressEmitter: NoxUtils.ProgressEmitter = () => undefined,

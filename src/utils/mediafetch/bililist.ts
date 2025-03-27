@@ -1,5 +1,7 @@
 import { fetchPaginatedAPI } from './paginatedfetch';
 import { fetchBiliBVIDs } from './bilivideo';
+import { fetchBiliSeriesList } from './biliseries';
+import { fetchBiliColleList } from './bilicolle';
 
 /**
  * https://api.bilibili.com/x/polymer/web-space/seasons_series_list?mid=529249&page_size=20&page_num=1
@@ -18,7 +20,8 @@ export const fetchLists = async (mid: string) => {
   }) as Promise<any[]>;
 };
 
-export const getBVID = async (mid: string) => {
+// HACK: its only the top 5 videos from the list
+export const getBVIDFast = async (mid: string) => {
   const list = await fetchLists(mid);
   return list.reduce(
     (acc, curr) => [...acc, ...curr.archives.map((v: any) => v.bvid)],
@@ -26,12 +29,29 @@ export const getBVID = async (mid: string) => {
   );
 };
 
+const resolveBiliList = async (mid: string, list: any) => {
+  if (list.meta.season_id) {
+    return fetchBiliColleList(mid, list.meta.season_id);
+  }
+  if (list.meta.series_id) {
+    return fetchBiliBVIDs(await fetchBiliSeriesList(mid, list.meta.series_id));
+  }
+  return [];
+};
+
+export const getListSongs = async (mid: string) => {
+  const list = await fetchLists(mid);
+  const result = await Promise.all(
+    list.map((v: any) => resolveBiliList(mid, v)),
+  );
+  return result.flat();
+};
+
 const regexFetch = async ({
   reExtracted,
 }: NoxNetwork.RegexFetchProps): Promise<NoxNetwork.NoxRegexFetch> => {
-  const bvids = await getBVID(reExtracted[1]);
   return {
-    songList: await fetchBiliBVIDs(bvids),
+    songList: await getListSongs(reExtracted[1]),
   };
 };
 
