@@ -29,8 +29,7 @@ const processMetadata = async (metadata: any) => {
 };
 
 /**
- * its absolutely safe to not resolve bvids individually, as bilicolle
- * will never include videos w multiple episodes.
+ * its no longer safe to assume biliColle always return single episode bv videos. 
  * {
     "aid": 1805043280,
     "bvid": "BV1kb421q7x8",
@@ -47,7 +46,7 @@ const processMetadata = async (metadata: any) => {
     "ugc_pay": 0
 },
  */
-const resolveBiliBVID = (objs: any[], _: any, rawData: any) =>
+export const resolveBiliBVID = (objs: any[], _: any, rawData: any) =>
   objs.map(obj =>
     SongTS({
       cid: `null-${obj.bvid}`,
@@ -80,7 +79,6 @@ const fetchBiliColleList = (
     getItems: (js: any) => js.data.archives,
     progressEmitter,
     favList,
-    resolveBiliBVID,
     processMetadata,
   });
 };
