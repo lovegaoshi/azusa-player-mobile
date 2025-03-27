@@ -3,8 +3,6 @@ import { logger } from '@utils/Logger';
 import { removeSongBiliShazamed } from '../objects/Song';
 import { refreshMetadata } from '../utils/mediafetch/resolveURL';
 import playlistAnalyze from '../utils/Analytics';
-import { getPlaylistUniqBVIDs } from '../objects/Playlist';
-import { fetchBiliBVIDs } from '../utils/mediafetch/bilivideo';
 import { biliShazamOnSonglist } from '../utils/mediafetch/bilishazam';
 import { syncFavlist } from '@utils/Bilibili/bilifavOperate';
 import { updateSubscribeFavList } from '../utils/BiliSubscribe';
@@ -166,11 +164,10 @@ const usePlaylistCRUD = (mPlaylist?: NoxMedia.Playlist) => {
   };
 
   const playlistReload = async (playlist = currentPlaylist) => {
-    const newSongList = await fetchBiliBVIDs(
-      getPlaylistUniqBVIDs(playlist),
-      progressEmitter,
-      playlist.useBiliShazam ?? false,
-    );
+    const newSongList: NoxMedia.Song[] = [];
+    for (const song of playlist.songList) {
+      newSongList.push({ ...song, ...(await refreshMetadata(song)) });
+    }
     updatePlaylist(
       {
         ...playlist,
