@@ -192,8 +192,13 @@ export default ({ usePlaylist, onPressed = () => undefined }: Props) => {
 
       <Animated.View style={[styles.pressable, { opacity }]}>
         <Pressable onPress={onPressed}>
-          <Text variant="titleMedium">{currentPlaylist?.title}</Text>
-          <Text variant="labelMedium">{`${renderSongCount()} / ${renderSongDuration()}`}</Text>
+          <Text numberOfLines={1} variant="titleMedium">
+            {currentPlaylist?.title}
+          </Text>
+          <Text
+            numberOfLines={1}
+            variant="labelMedium"
+          >{`${renderSongCount()} / ${renderSongDuration()}`}</Text>
         </Pressable>
       </Animated.View>
       <SearchMenu

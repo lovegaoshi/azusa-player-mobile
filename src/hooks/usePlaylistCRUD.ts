@@ -3,13 +3,12 @@ import { logger } from '@utils/Logger';
 import { removeSongBiliShazamed } from '../objects/Song';
 import { refreshMetadata } from '../utils/mediafetch/resolveURL';
 import playlistAnalyze from '../utils/Analytics';
-import { getPlaylistUniqBVIDs } from '../objects/Playlist';
-import { fetchBiliBVIDs } from '../utils/mediafetch/bilivideo';
 import { biliShazamOnSonglist } from '../utils/mediafetch/bilishazam';
 import { syncFavlist } from '@utils/Bilibili/bilifavOperate';
 import { updateSubscribeFavList } from '../utils/BiliSubscribe';
 import { sortPlaylist as _sortPlaylist } from '../utils/playlistOperations';
 import { SortOptions } from '../enums/Playlist';
+import { resolveUrl } from '@utils/SongOperations';
 
 const usePlaylistCRUD = (mPlaylist?: NoxMedia.Playlist) => {
   const currentPlaylist = useNoxSetting(state => state.currentPlayingList);
@@ -116,29 +115,30 @@ const usePlaylistCRUD = (mPlaylist?: NoxMedia.Playlist) => {
   ) => {
     playlist = await playlist;
     progressEmitter(100);
-    const promises: Promise<void>[] = [];
-    const validBVIds: string[] = [];
-    const uniqBVIds = getPlaylistUniqBVIDs(playlist);
-    uniqBVIds.forEach(bvid =>
-      promises.push(
-        fetchBiliBVIDs([bvid]).then(val => {
-          if (val.length > 0) validBVIds.push(bvid);
-        }),
-      ),
-    );
-    await Promise.all(promises);
+
+    const invalidSongs: NoxMedia.Song[] = [];
+    for (const song of playlist.songList) {
+      try {
+        const resolvedURL = await resolveUrl({ song });
+        if (resolvedURL.url.length < 1) {
+          throw new Error('cannot resolve song');
+        }
+      } catch {
+        invalidSongs.push(song);
+      }
+    }
     updatePlaylist(
       {
         ...playlist,
-        songList: playlist.songList.filter(song =>
-          validBVIds.includes(song.bvid),
+        songList: playlist.songList.filter(
+          song => !invalidSongs.includes(song),
         ),
       },
       [],
       [],
     );
     progressEmitter(0);
-    return uniqBVIds.length - validBVIds.length;
+    return invalidSongs.length;
   };
 
   const playlistBiliShazam = async (
@@ -164,11 +164,10 @@ const usePlaylistCRUD = (mPlaylist?: NoxMedia.Playlist) => {
   };
 
   const playlistReload = async (playlist = currentPlaylist) => {
-    const newSongList = await fetchBiliBVIDs(
-      getPlaylistUniqBVIDs(playlist),
-      progressEmitter,
-      playlist.useBiliShazam ?? false,
-    );
+    const newSongList: NoxMedia.Song[] = [];
+    for (const song of playlist.songList) {
+      newSongList.push({ ...song, ...(await refreshMetadata(song)) });
+    }
     updatePlaylist(
       {
         ...playlist,
@@ -237,25 +236,6 @@ const usePlaylistCRUD = (mPlaylist?: NoxMedia.Playlist) => {
       updatePlaylist,
     });
 
-  // TODO: i dont think this is how it works
-  const reloadBVid = async (
-    songs: NoxMedia.Song[],
-    playlist: NoxMedia.Playlist | Promise<NoxMedia.Playlist> = getPlaylist(),
-  ) => {
-    playlist = await playlist;
-    const bvids = Array.from(new Set(songs.map(song => song.bvid)));
-    const newPlaylist: NoxMedia.Playlist = {
-      ...playlist,
-      songList: playlist.songList.filter(song => !bvids.includes(song.bvid)),
-    };
-    const newSongList = await fetchBiliBVIDs(
-      getPlaylistUniqBVIDs(playlist),
-      progressEmitter,
-      playlist.useBiliShazam ?? false,
-    );
-    updatePlaylist(newPlaylist, newSongList);
-  };
-
   const playlistRemoveBiliShazamed = async (
     playlist: NoxMedia.Playlist | Promise<NoxMedia.Playlist> = getPlaylist(),
   ) => {
@@ -290,7 +270,6 @@ const usePlaylistCRUD = (mPlaylist?: NoxMedia.Playlist) => {
     removeSongs,
     removeSongsFromAllLists,
     rssUpdate,
-    reloadBVid,
     playlistRemoveBiliShazamed,
     sortPlaylist,
   };

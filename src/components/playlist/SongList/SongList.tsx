@@ -63,7 +63,6 @@ export default () => {
   const btnContainColor =
     playerStyle.colors.primaryContainer ??
     playerStyle.customColors.playlistDrawerBackgroundColor;
-
   return (
     <View style={styles.flex}>
       <View style={[styles.topBarContainer, { top: 10 }]}>
