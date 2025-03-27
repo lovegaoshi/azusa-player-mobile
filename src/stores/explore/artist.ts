@@ -5,7 +5,7 @@ import artistFetch from '@utils/artistfetch/fetch';
 
 interface ArtistStore {
   result: ArtistFetch | undefined;
-  fetch: (song: NoxMedia.Song) => boolean;
+  fetch: (song?: NoxMedia.Song) => boolean;
   loading: boolean;
   song: NoxMedia.Song | undefined;
 }
