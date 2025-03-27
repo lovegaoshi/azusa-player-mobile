@@ -3,7 +3,7 @@ import { YTSongRowCard } from '@components/explore/types';
 import { fetchBiliChannelList } from '../mediafetch/bilichannel';
 import { getBiliUser } from '../mediafetch/biliuser';
 import getBiliNotice from '../Bilibili/biliNotice';
-import { fetchLists } from '../mediafetch/bililist';
+import { getListAsYTSongRowCard } from '../mediafetch/bililist';
 
 export interface ArtistFetch {
   profilePicURL: string;
@@ -29,13 +29,12 @@ export default async (mid: string): Promise<ArtistFetch> => {
     stopAtPage: 1,
   });
   const userInfo = await getBiliUser(mid);
-  const lists = await fetchLists(mid);
   return {
     profilePicURL: `https://i2.hdslb.com/${biliSpaceSetting.data.toutu.s_img}`,
     ProfilePlaySongs,
     artistName: userInfo.name,
     topSongs,
     aboutString: await getBiliNotice(mid),
-    albums: [],
+    albums: await getListAsYTSongRowCard(mid),
   };
 };
