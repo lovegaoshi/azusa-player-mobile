@@ -21,17 +21,17 @@ import merge from 'deepmerge';
 import { useTranslation } from 'react-i18next';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
-import SnackBar from './components/commonui/Snackbar';
-import Playlist from './components/playlist/View';
+import SnackBar from './commonui/Snackbar';
+import Home from './portrait/View';
 import { useNoxSetting } from '@stores/useApp';
-import PlaylistDrawer from './components/playlists/View';
-import { NoxRoutes } from './enums/Routes';
-import Settings from './components/setting/View';
-import Explore from './components/explore/View';
-import './localization/i18n';
+import PlaylistDrawer from './playlists/View';
+import { NoxRoutes } from '../enums/Routes';
+import Settings from './setting/View';
+import Explore from './explore/View';
+import '../localization/i18n';
 import { ScreenIcons } from '@enums/Icons';
-import NoxBottomTab from './components/bottomtab/NoxBottomTab';
-import NoxMiniPlayer from './components/miniplayer/View';
+import NoxBottomTab from './bottomtab/NoxBottomTab';
+import NoxMiniPlayer from './miniplayer/View';
 
 const { LightTheme, DarkTheme } = adaptNavigationTheme({
   reactNavigationLight: NavigationDefaultTheme,
@@ -63,9 +63,9 @@ const AzusaPlayer = () => {
   const [navigation, setNavigation] =
     React.useState<DrawerNavigationProp<ParamListBase>>();
 
-  const NoxPlayer = ({ navigation }: Props) => {
+  const APMHome = ({ navigation }: Props) => {
     useEffect(() => setNavigation(navigation), []);
-    return <Playlist />;
+    return <Home />;
   };
 
   return (
@@ -115,7 +115,7 @@ const AzusaPlayer = () => {
                 title: t('appDrawer.homeScreenName'),
                 header: () => null,
               }}
-              component={NoxPlayer}
+              component={APMHome}
             />
             <Drawer.Screen
               name={NoxRoutes.Explore}

@@ -5,7 +5,7 @@ import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { useStore } from 'zustand';
 import * as Sentry from '@sentry/react-native';
 
-import AzusaPlayer from './AzusaPlayer';
+import AzusaPlayer from './components/APM';
 import AzusaPlayerLandscape from './components/landscape/AzusaPlayerLandscape';
 import AppOpenSplash from './components/background/AppOpenSplash';
 import useSetupPlayer from './hooks/useSetupPlayer';
