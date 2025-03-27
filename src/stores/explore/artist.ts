@@ -1,48 +1,27 @@
 import { create } from 'zustand';
 
 import { ArtistFetch } from '@utils/artistfetch/biliartist';
-import fetchDynamic from '@utils/mediafetch/biliDynamic';
-import { fetchRanking } from '@utils/mediafetch/biliRanking';
-import { fetchCurrentMusicTop } from '@utils/mediafetch/biliMusicTop';
-import { fetchMusicHot } from '@utils/mediafetch/biliMusicHot';
-import { fetchMusicNew } from '@utils/mediafetch/biliMusicNew';
-import { BiliCatSongs } from '@components/explore/SongTab';
+import artistFetch from '@utils/artistfetch/fetch';
 
 interface ArtistStore {
-  biliDynamic: BiliCatSongs;
-  biliRanking: BiliCatSongs;
-  biliMusicTop: NoxMedia.Song[];
-  biliMusicHot: NoxMedia.Song[];
-  biliMusicNew: NoxMedia.Song[];
-  refreshing: boolean;
+  result: ArtistFetch | undefined;
+  fetch: (song: NoxMedia.Song) => boolean;
   loading: boolean;
-  onRefresh: () => void;
-  init: () => void;
+  song: NoxMedia.Song | undefined;
 }
 
 export default create<ArtistStore>((set, get) => ({
-  biliDynamic: {},
-  biliRanking: {},
-  biliMusicTop: [],
-  biliMusicHot: [],
-  biliMusicNew: [],
-  refreshing: false,
-  loading: true,
-  onRefresh: async () => {
-    set({ refreshing: true });
-    set({ biliDynamic: await fetchDynamic({}), refreshing: false });
-  },
-  init: async () => {
-    if (!get().loading) {
-      return;
-    }
-    set({
-      loading: false,
-      biliRanking: await fetchRanking(),
-      biliDynamic: await fetchDynamic({}),
-      biliMusicTop: await fetchCurrentMusicTop(),
-      biliMusicHot: await fetchMusicHot(),
-      biliMusicNew: await fetchMusicNew(),
-    });
+  loading: false,
+  result: undefined,
+  song: undefined,
+  fetch: v => {
+    const fetched = artistFetch(v);
+    if (!fetched) return false;
+    set({ loading: true });
+    fetched
+      .then(r => set({ result: r, song: v }))
+      .catch(() => set({ result: undefined }))
+      .finally(() => set({ loading: false }));
+    return false;
   },
 }));

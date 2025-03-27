@@ -1,4 +1,4 @@
-import { ScrollView, View } from 'react-native';
+import { ScrollView, StyleSheet, View } from 'react-native';
 import Animated, {
   runOnJS,
   useAnimatedStyle,
@@ -7,12 +7,16 @@ import Animated, {
   withTiming,
   Easing,
 } from 'react-native-reanimated';
-import { IconButton, Text } from 'react-native-paper';
+import { IconButton, Text, ActivityIndicator } from 'react-native-paper';
 
 import FlexView from '@components/commonui/FlexViewNewArch';
 import { NoxRoutes } from '@enums/Routes';
+import useArtist from '@stores/explore/artist';
 
 export default ({ navigation }: NoxComponent.StackNavigationProps) => {
+  const loading = useArtist(state => state.loading);
+  const result = useArtist(state => state.result);
+
   const scrollYOffset = useSharedValue(0);
   const scrollYHeight = useSharedValue(0);
 
@@ -22,6 +26,31 @@ export default ({ navigation }: NoxComponent.StackNavigationProps) => {
       opacity: visibleOffsetRange > 0 ? withTiming(1) : withTiming(0),
     };
   });
+
+  if (loading) {
+    return (
+      <FlexView>
+        <View>
+          <View style={mStyles.indicatorContainer} />
+          <ActivityIndicator size={100} />
+        </View>
+      </FlexView>
+    );
+  }
+
+  if (result === undefined) {
+    return (
+      <FlexView>
+        <View style={{ paddingLeft: 10 }}>
+          <View style={mStyles.indicatorContainer} />
+          <Text variant="titleLarge">Uh oh...</Text>
+          <Text variant="bodyLarge">
+            Nothing will be displayed. You shouldnt be here.
+          </Text>
+        </View>
+      </FlexView>
+    );
+  }
 
   return (
     <FlexView>
@@ -66,3 +95,9 @@ export default ({ navigation }: NoxComponent.StackNavigationProps) => {
     </FlexView>
   );
 };
+
+const mStyles = StyleSheet.create({
+  indicatorContainer: {
+    height: 40,
+  },
+});
