@@ -1,6 +1,7 @@
 import { Platform, PermissionsAndroid, NativeModules } from 'react-native';
 import RNFetchBlob from 'react-native-blob-util';
 import * as DocumentPicker from 'expo-document-picker';
+import { nativeCrash } from '@sentry/react-native';
 
 export const isAndroid = Platform.OS === 'android';
 export const isAndroid15 = isAndroid && Number(Platform.Version) >= 35;
@@ -94,4 +95,8 @@ export const chooseLocalMediaFolderAndroid = async (realPath = false) => {
 
 export const validateFile = async (fpath?: string | null) => {
   return fpath && (await RNFetchBlob.fs.exists(fpath)) ? true : false;
+};
+
+export const selfDestruct = () => {
+  return isAndroid ? NoxModule.selfDestruct() : nativeCrash();
 };

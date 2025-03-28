@@ -3,7 +3,6 @@ import { View, ScrollView, Alert } from 'react-native';
 import { List } from 'react-native-paper';
 import { useTranslation } from 'react-i18next';
 import { useStore } from 'zustand';
-import * as Sentry from '@sentry/react-native';
 
 // eslint-disable-next-line import/no-unresolved
 import { APPSTORE } from '@env';
@@ -25,7 +24,7 @@ import {
   disableTanaka,
   enableTanaka,
 } from '@hooks/useTanakaAmazingCommodities';
-import { isAndroid } from '@utils/RNUtils';
+import { isAndroid, selfDestruct } from '@utils/RNUtils';
 import SelectSetting from '../helpers/SelectSetting';
 import { SelectDialogChildren } from '../SelectDialogWrapper';
 import { Route, Icons } from './enums';
@@ -59,7 +58,7 @@ const developerSettings: { [key: string]: SettingEntry } = {
   memoryEfficiency: {
     settingName: 'memoryEfficiency',
     settingCategory: 'GeneralSettings',
-    callback: Sentry.nativeCrash,
+    callback: selfDestruct,
   },
   artworkCarousel: {
     settingName: 'artworkCarousel',
@@ -131,7 +130,7 @@ export const Home = ({
       defaultIndex: 0,
       onClose: () => setSelectVisible(false),
       onSubmit: (index: number) => {
-        saveFadeInterval(FadeOptions[index]).then(Sentry.nativeCrash);
+        saveFadeInterval(FadeOptions[index]).then(selfDestruct);
         setSelectVisible(false);
       },
       title: t('DeveloperSettings.FadeTitle'),
@@ -147,7 +146,7 @@ export const Home = ({
       onClose: () => setSelectVisible(false),
       onSubmit: (index: number) => {
         setPlayerSetting({ crossfade: CrossFadeOptions[index] / 1000 }).then(
-          Sentry.nativeCrash,
+          selfDestruct,
         );
         setSelectVisible(false);
       },
@@ -170,9 +169,7 @@ export const Home = ({
       defaultIndex: defaultIndex > -1 ? defaultIndex : 0,
       onClose: () => setSelectVisible(false),
       onSubmit: (index: number) => {
-        setPlayerSetting({ cacheSize: options[index] }).then(
-          Sentry.nativeCrash,
-        );
+        setPlayerSetting({ cacheSize: options[index] }).then(selfDestruct);
         setSelectVisible(false);
       },
       title: t('DeveloperSettings.CacheSizeName'),

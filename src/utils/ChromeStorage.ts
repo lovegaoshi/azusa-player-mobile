@@ -26,8 +26,8 @@ import { timeFunction } from './Utils';
 export const getFadeInterval = async () =>
   Number(await getItem(StorageKeys.FADE_INTERVAL)) || 0;
 
-export const saveFadeInterval = async (val: number) =>
-  await saveItem(StorageKeys.FADE_INTERVAL, val);
+export const saveFadeInterval = (val: number) =>
+  saveItem(StorageKeys.FADE_INTERVAL, val);
 
 export const getRegExtractMapping = async (): Promise<
   NoxRegExt.JSONExtractor[]
