@@ -22,6 +22,7 @@ import { YTSongRow } from '../explore/SongRow';
 import { BiliSongsArrayTabCard } from '../explore/SongTab';
 import { useNoxSetting } from '@stores/useApp';
 import { goToArtistExternalPage } from '@utils/artistfetch/fetch';
+import { styles, ItemSelectStyles } from '../style';
 
 export default ({ navigation }: NoxComponent.StackNavigationProps) => {
   const { t } = useTranslation();
@@ -36,9 +37,10 @@ export default ({ navigation }: NoxComponent.StackNavigationProps) => {
 
   const scrollYOffset = useSharedValue(0);
   const scrollYHeight = useSharedValue(0);
+  const hideAt = useDerivedValue(() => scrollYHeight.value / 3);
 
   const animatedHeaderStyle = useAnimatedStyle(() => {
-    const visibleOffsetRange = scrollYOffset.value - scrollYHeight.value / 3;
+    const visibleOffsetRange = scrollYOffset.value - hideAt.value;
     return {
       opacity: visibleOffsetRange > 0 ? withTiming(1) : withTiming(0),
     };
@@ -47,17 +49,14 @@ export default ({ navigation }: NoxComponent.StackNavigationProps) => {
   const animatedArtistTitleOpacity = useDerivedValue(() => {
     // at 1 at scrollYHeight.value / 4
     // at 0 at scrollYHeight.value / 3
-    if (scrollYOffset.value > scrollYHeight.value / 3) {
+    const showAt = scrollYHeight.value / 5;
+    if (scrollYOffset.value > hideAt.value) {
       return 0;
     }
-    if (scrollYOffset.value < scrollYHeight.value / 4) {
+    if (scrollYOffset.value < showAt) {
       return 1;
     }
-    return (
-      1 -
-        (scrollYOffset.value - scrollYHeight.value / 4) /
-          (scrollYHeight.value / 3 - scrollYHeight.value / 4) || 1
-    );
+    return 1 - (scrollYOffset.value - showAt) / (hideAt.value - showAt) || 1;
   });
 
   const animatedArtistHeaderStyle = useAnimatedStyle(() => ({
@@ -72,7 +71,8 @@ export default ({ navigation }: NoxComponent.StackNavigationProps) => {
     return (
       <FlexView>
         <View style={backgroundStyle}>
-          <Text variant="titleLarge">
+          <View style={mStyles.indicatorContainer} />
+          <Text variant="titleLarge" style={styles.centerText}>
             {t('Artist.loading', { name: song?.singer })}
           </Text>
           <View style={mStyles.indicatorContainer} />
@@ -96,17 +96,8 @@ export default ({ navigation }: NoxComponent.StackNavigationProps) => {
 
   return (
     <FlexView>
-      <View>
-        <View
-          style={[
-            {
-              position: 'absolute',
-              flexDirection: 'row',
-              zIndex: 1,
-            },
-            backgroundStyle,
-          ]}
-        >
+      <View style={backgroundStyle}>
+        <View style={mStyles.headerContainer}>
           <Animated.View
             style={[
               {
@@ -129,7 +120,8 @@ export default ({ navigation }: NoxComponent.StackNavigationProps) => {
           >
             <Text variant="titleLarge">{result.artistName}</Text>
           </Animated.View>
-          <View style={{ flex: 1, alignItems: 'flex-end' }}>
+          <View style={styles.flex} />
+          <View style={styles.topBarIcons}>
             <IconButton
               iconColor={playerStyle.colors.primary}
               icon={'playlist-plus'}
@@ -160,15 +152,23 @@ export default ({ navigation }: NoxComponent.StackNavigationProps) => {
               }}
               source={result.profilePicURL}
             />
-            <Text variant="headlineLarge">{result.artistName}</Text>
+            <View style={mStyles.titleTextContainer}>
+              <Text variant="headlineLarge">{result.artistName}</Text>
+              <Text>{t('Artist.subscribers', { c: result.subscribers })}</Text>
+            </View>
           </Animated.View>
           <BiliSongsArrayTabCard
             songs={result.ProfilePlaySongs}
             title="Latest"
           />
           <BiliSongsArrayTabCard songs={result.topSongs} title="Top" />
-          <YTSongRow songs={result.albums} title="Albums" />
-          <Text>{result.aboutString}</Text>
+          {result.albums.length > 0 && (
+            <YTSongRow songs={result.albums} title="Albums" />
+          )}
+          <View style={ItemSelectStyles.skinItemTextContainer}>
+            <Text>{result.sign}</Text>
+            <Text>{result.aboutString}</Text>
+          </View>
         </ScrollView>
       </View>
     </FlexView>
@@ -178,5 +178,14 @@ export default ({ navigation }: NoxComponent.StackNavigationProps) => {
 const mStyles = StyleSheet.create({
   indicatorContainer: {
     height: 40,
+  },
+  titleTextContainer: {
+    paddingLeft: 5,
+    paddingBottom: 15,
+  },
+  headerContainer: {
+    position: 'absolute',
+    flexDirection: 'row',
+    zIndex: 1,
   },
 });

@@ -142,7 +142,7 @@ export const YTSongRow = ({ songs = [], title }: YTSongRowProp) => {
                     width: 140,
                   }}
                   variant="titleMedium"
-                  numberOfLines={2}
+                  numberOfLines={item.singer ? 1 : 2}
                 >
                   {item.name}
                 </Text>

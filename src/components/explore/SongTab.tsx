@@ -42,7 +42,13 @@ export const BiliSongCard = ({
   const fontColor = playerStyle.colors.primary;
 
   return (
-    <View style={style.cardContainer}>
+    <View
+      style={[
+        style.cardContainer,
+        // max 4 items per list
+        { height: (Math.min(4, songs.length) * 390) / 4 },
+      ]}
+    >
       {title && <Text style={{ fontSize: 20, color: fontColor }}>{title}</Text>}
       <FlatList
         showsVerticalScrollIndicator={false}
@@ -180,5 +186,5 @@ const style = StyleSheet.create({
   cardThumbnail: { width: 70, height: 70, borderRadius: 5 },
   catContainer: { fontSize: 20, paddingLeft: 5, paddingBottom: 10 },
   paddingVertical: { width: Dimensions.get('window').width * 0.2 },
-  arrayText: { fontSize: 20, paddingLeft: 5, paddingBottom: 10 },
+  arrayText: { fontSize: 20, paddingLeft: 5, paddingBottom: 0 },
 });

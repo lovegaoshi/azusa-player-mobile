@@ -46,6 +46,7 @@ interface FetchBiliChannelList {
   favList?: string[];
   fastSearch?: boolean;
   stopAtPage?: number;
+  limit?: boolean;
 }
 export const fetchBiliChannelList = async ({
   url,
@@ -53,9 +54,10 @@ export const fetchBiliChannelList = async ({
   favList = [],
   fastSearch = false,
   stopAtPage,
+  limit = true,
 }: FetchBiliChannelList) => {
   logger.info('calling fetchBiliChannelList');
-  const mid = /space.bilibili\.com\/(\d+)(\/.+)?\/video/.exec(url)![1];
+  const mid = /space.bilibili\.com\/(\d+)/.exec(url)![1];
   let searchAPI = URL_BILICHANNEL_INFO.replace('{mid}', mid);
   const urlObj = new URL(url);
   searchAPI = appendURLSearchParam(searchAPI, urlObj.searchParams, 'tid');
@@ -69,7 +71,7 @@ export const fetchBiliChannelList = async ({
     getItems: js => js.data.list.vlist,
     progressEmitter,
     favList,
-    limiter: awaitLimiter,
+    limiter: limit ? awaitLimiter : undefined,
     resolveBiliBVID: fastSearch ? fastSearchResolveBVID : undefined,
     stopAtPage,
   });
@@ -101,7 +103,7 @@ export default {
   regexSearchMatch: /space.bilibili\.com\/(\d+)(\/search)?\/video/,
   // https://space.bilibili.com/1112031857/upload/video
   regexSearchMatch2: /space.bilibili\.com\/(\d+)(\/upload)?\/video/,
-  regexSearchMatch3: /space.bilibili\.com\/(\d+)/,
+  regexSearchMatch3: /space.bilibili\.com\/(\d+)$/,
   regexFetch,
   regexResolveURLMatch: /^null-/,
   resolveURL,
