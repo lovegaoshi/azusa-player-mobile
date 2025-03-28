@@ -26,7 +26,7 @@ export default async (mid: string): Promise<ArtistFetch> => {
     stopAtPage: 1,
   });
   const topSongs = await fetchBiliChannelList({
-    url: `https://space.bilibili.com/${mid}/upload/video&order=click`,
+    url: `https://space.bilibili.com/${mid}/upload/video?order=click`,
     fastSearch: true,
     stopAtPage: 1,
   });

@@ -8,10 +8,12 @@ import {
 import { Image } from 'expo-image';
 import Animated, {
   useAnimatedStyle,
+  useDerivedValue,
   useSharedValue,
   withTiming,
 } from 'react-native-reanimated';
 import { IconButton, Text, ActivityIndicator } from 'react-native-paper';
+import { useTranslation } from 'react-i18next';
 
 import FlexView from '@components/commonui/FlexViewNewArch';
 import { NoxRoutes } from '@enums/Routes';
@@ -22,11 +24,15 @@ import { useNoxSetting } from '@stores/useApp';
 import { goToArtistExternalPage } from '@utils/artistfetch/fetch';
 
 export default ({ navigation }: NoxComponent.StackNavigationProps) => {
+  const { t } = useTranslation();
   const dimension = Dimensions.get('window');
   const loading = useArtist(state => state.loading);
   const song = useArtist(state => state.song);
   const result = useArtist(state => state.result);
   const playerStyle = useNoxSetting(state => state.playerStyle);
+  const setExternalSearchText = useNoxSetting(
+    state => state.setExternalSearchText,
+  );
 
   const scrollYOffset = useSharedValue(0);
   const scrollYHeight = useSharedValue(0);
@@ -38,12 +44,36 @@ export default ({ navigation }: NoxComponent.StackNavigationProps) => {
     };
   });
 
+  const animatedArtistTitleOpacity = useDerivedValue(() => {
+    // at 1 at scrollYHeight.value / 4
+    // at 0 at scrollYHeight.value / 3
+    if (scrollYOffset.value > scrollYHeight.value / 3) {
+      return 0;
+    }
+    if (scrollYOffset.value < scrollYHeight.value / 4) {
+      return 1;
+    }
+    return (
+      1 -
+        (scrollYOffset.value - scrollYHeight.value / 4) /
+          (scrollYHeight.value / 3 - scrollYHeight.value / 4) || 1
+    );
+  });
+
+  const animatedArtistHeaderStyle = useAnimatedStyle(() => ({
+    opacity: animatedArtistTitleOpacity.value,
+  }));
+
+  const backgroundStyle = {
+    backgroundColor: playerStyle.customColors.maskedBackgroundColor,
+  };
+
   if (loading) {
     return (
       <FlexView>
-        <View>
+        <View style={backgroundStyle}>
           <Text variant="titleLarge">
-            Now Loading: {song?.singer}'s Artist Page
+            {t('Artist.loading', { name: song?.singer })}
           </Text>
           <View style={mStyles.indicatorContainer} />
           <ActivityIndicator size={100} />
@@ -55,12 +85,10 @@ export default ({ navigation }: NoxComponent.StackNavigationProps) => {
   if (result === undefined) {
     return (
       <FlexView>
-        <View style={{ paddingLeft: 10 }}>
+        <View style={[{ paddingLeft: 10 }, backgroundStyle]}>
           <View style={mStyles.indicatorContainer} />
-          <Text variant="titleLarge">Uh oh...</Text>
-          <Text variant="bodyLarge">
-            Nothing will be displayed. You shouldnt be here.
-          </Text>
+          <Text variant="titleLarge">{t('Artist.errorTitle')}</Text>
+          <Text variant="bodyLarge">{t('Artist.errorContent')}</Text>
         </View>
       </FlexView>
     );
@@ -70,11 +98,14 @@ export default ({ navigation }: NoxComponent.StackNavigationProps) => {
     <FlexView>
       <View>
         <View
-          style={{
-            position: 'absolute',
-            flexDirection: 'row',
-            zIndex: 1,
-          }}
+          style={[
+            {
+              position: 'absolute',
+              flexDirection: 'row',
+              zIndex: 1,
+            },
+            backgroundStyle,
+          ]}
         >
           <Animated.View
             style={[
@@ -101,6 +132,14 @@ export default ({ navigation }: NoxComponent.StackNavigationProps) => {
           <View style={{ flex: 1, alignItems: 'flex-end' }}>
             <IconButton
               iconColor={playerStyle.colors.primary}
+              icon={'playlist-plus'}
+              onPress={() =>
+                setExternalSearchText(goToArtistExternalPage(song!)!)
+              }
+              size={30}
+            />
+            <IconButton
+              iconColor={playerStyle.colors.primary}
               icon={'share'}
               onPress={() => Linking.openURL(goToArtistExternalPage(song!)!)}
               size={30}
@@ -113,14 +152,16 @@ export default ({ navigation }: NoxComponent.StackNavigationProps) => {
             scrollYHeight.value = e.nativeEvent.layoutMeasurement.height;
           }}
         >
-          <Image
-            style={{
-              width: dimension.width,
-              height: Math.max(dimension.height / 3, 200),
-            }}
-            source={result.profilePicURL}
-          />
-          <Text variant="headlineLarge">{result.artistName}</Text>
+          <Animated.View style={animatedArtistHeaderStyle}>
+            <Image
+              style={{
+                width: dimension.width,
+                height: Math.max(dimension.height / 3, 200),
+              }}
+              source={result.profilePicURL}
+            />
+            <Text variant="headlineLarge">{result.artistName}</Text>
+          </Animated.View>
           <BiliSongsArrayTabCard
             songs={result.ProfilePlaySongs}
             title="Latest"

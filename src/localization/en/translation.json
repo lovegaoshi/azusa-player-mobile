@@ -1,5 +1,10 @@
 {
   "_comment": "src/localization/en/translation.json",
+  "Artist": {
+    "errorTitle": "Uh oh...",
+    "errorContent": "Nothing will be displayed. You shouldnt be here.",
+    "loading": "Now Loading: {{name}}'s Artist Page"
+  },
   "SponsorBlock": {
     "SponsorBlockOptionsName": "SponsorBlock",
     "SponsorBlockOptionsDesc": "Enable SponsorBlock",

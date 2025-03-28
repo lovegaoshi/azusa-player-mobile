@@ -1,12 +1,12 @@
 import { logger } from '@utils/Logger';
 
 export const appendURLSearchParam = (
-  url: string,
+  api: string,
   urlParam: URLSearchParams,
   kw: string,
 ) => {
   const extracted = urlParam.get(kw);
-  return extracted ? `${url}&${kw}=${extracted}` : url;
+  return extracted ? `${api}&${kw}=${extracted}` : api;
 };
 
 export const i0hdslbHTTPResolve = (url: string) =>

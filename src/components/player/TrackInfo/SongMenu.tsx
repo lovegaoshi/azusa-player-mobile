@@ -12,6 +12,7 @@ import { addR128Gain, getR128Gain } from '@utils/ffmpeg/r128Store';
 import ABSliderMenu from './ABSliderMenu';
 import usePlayback from '@hooks/usePlayback';
 import { useTrackStore } from '@hooks/useActiveTrack';
+import radioAvailable from '@utils/radiofetch/fetch';
 
 enum Icons {
   SEND_TO = 'playlist-plus',
@@ -49,7 +50,7 @@ export default ({
 
   const playlistCRUD = usePlaylistCRUD();
   const { updateSongIndex, updateSongMetadata } = playlistCRUD;
-  const { startRadio, radioAvailable } = useSongOperations();
+  const { startRadio } = useSongOperations();
   const { playFromPlaylist } = usePlayback();
 
   const closeMenu = React.useCallback(() => setSongMenuVisible(false), []);

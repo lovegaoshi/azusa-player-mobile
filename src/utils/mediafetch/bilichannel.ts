@@ -58,10 +58,9 @@ export const fetchBiliChannelList = async ({
   const mid = /space.bilibili\.com\/(\d+)(\/.+)?\/video/.exec(url)![1];
   let searchAPI = URL_BILICHANNEL_INFO.replace('{mid}', mid);
   const urlObj = new URL(url);
-  const URLParams = new URLSearchParams(urlObj.search);
-  searchAPI = appendURLSearchParam(searchAPI, URLParams, 'tid');
-  searchAPI = appendURLSearchParam(searchAPI, URLParams, 'keyword');
-  searchAPI = appendURLSearchParam(searchAPI, URLParams, 'order');
+  searchAPI = appendURLSearchParam(searchAPI, urlObj.searchParams, 'tid');
+  searchAPI = appendURLSearchParam(searchAPI, urlObj.searchParams, 'keyword');
+  searchAPI = appendURLSearchParam(searchAPI, urlObj.searchParams, 'order');
 
   return fetchAwaitBiliPaginatedAPI({
     url: `${searchAPI}${getDm()}${await getWebid(mid)}`,
@@ -102,6 +101,7 @@ export default {
   regexSearchMatch: /space.bilibili\.com\/(\d+)(\/search)?\/video/,
   // https://space.bilibili.com/1112031857/upload/video
   regexSearchMatch2: /space.bilibili\.com\/(\d+)(\/upload)?\/video/,
+  regexSearchMatch3: /space.bilibili\.com\/(\d+)/,
   regexFetch,
   regexResolveURLMatch: /^null-/,
   resolveURL,

@@ -13,6 +13,7 @@ import useBiliSearch from '@hooks/useBiliSearch';
 import { copyCacheToDir } from '@utils/download/download';
 import { isAndroid10 } from '@utils/RNUtils';
 import useSnack from '@stores/useSnack';
+import radioAvailable from '@utils/radiofetch/fetch';
 
 enum Icons {
   SEND_TO = 'playlist-plus',
@@ -54,7 +55,7 @@ export default ({ usePlaylist, prepareForLayoutAnimationRender }: Props) => {
   const setPlaylistSearchAutoFocus = useNoxSetting(
     state => state.setPlaylistSearchAutoFocus,
   );
-  const { startRadio, radioAvailable } = useSongOperations();
+  const { startRadio } = useSongOperations();
   const { setSearchVal, handleSearch } = useBiliSearch({});
 
   const closeMenu = React.useCallback(() => setSongMenuVisible(false), []);
