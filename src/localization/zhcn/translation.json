@@ -1,5 +1,11 @@
 {
   "_comment": "src/localization/en/translation.json",
+  "Artist": {
+    "errorTitle": "欧！漏！",
+    "errorContent": "你不应该来到这里",
+    "loading": "正在加载{{name}}的主页...",
+    "subscribers": "粉丝数：{{c}}"
+  },
   "SponsorBlock": {
     "SponsorBlockOptionsName": "跳过恰饭",
     "SponsorBlockOptionsDesc": "启用SponsorBlock",

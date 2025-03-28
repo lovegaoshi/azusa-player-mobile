@@ -8,6 +8,7 @@ import usePlayback from '@hooks/usePlayback';
 import { NoxRoutes } from '@enums/Routes';
 import { BiliSongCardProp } from './SongTab';
 import useNavigation from '@hooks/useNavigation';
+import { YTSongRowProp } from './types';
 
 export const BiliSongRow = ({
   songs = [],
@@ -88,18 +89,6 @@ export const BiliSongRow = ({
   );
 };
 
-interface YTSongRowCard {
-  cover: string;
-  name: string;
-  singer?: string;
-  getPlaylist: () => Promise<{ songs: NoxMedia.Song[]; item?: NoxMedia.Song }>;
-}
-
-interface YTSongRowProp {
-  songs?: YTSongRowCard[];
-  title?: string;
-}
-
 // TODO: abstract as a parent class to above
 export const YTSongRow = ({ songs = [], title }: YTSongRowProp) => {
   const navigationGlobal = useNavigation();
@@ -153,7 +142,7 @@ export const YTSongRow = ({ songs = [], title }: YTSongRowProp) => {
                     width: 140,
                   }}
                   variant="titleMedium"
-                  numberOfLines={2}
+                  numberOfLines={item.singer ? 1 : 2}
                 >
                   {item.name}
                 </Text>

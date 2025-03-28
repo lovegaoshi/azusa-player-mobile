@@ -11,6 +11,7 @@ import SongMenuButton from '@components/player/TrackInfo/SongMenuButton';
 import FavReloadButton from '@components/player/TrackInfo/FavReloadButton';
 import { useTrackStore } from '@hooks/useActiveTrack';
 import { SongTitle } from '@components/player/TrackInfo/TrackInfoTemplate';
+import ArtistText from './ArtistText';
 
 interface Props extends NoxComponent.OpacityProps {
   artworkOpacity: SharedValue<number>;
@@ -20,7 +21,6 @@ export default ({ opacity, style, artworkOpacity }: Props) => {
   const track = useTrackStore(s => s.track);
   const playerStyle = useNoxSetting(state => state.playerStyle);
   const currentPlayingList = useNoxSetting(state => state.currentPlayingList);
-
   const getTrackLocation = () => {
     return track?.song
       ? `#${
@@ -53,6 +53,7 @@ export default ({ opacity, style, artworkOpacity }: Props) => {
   const animatedOpacityStyle = useAnimatedStyle(() => ({
     opacity: artworkOpacity.value,
   }));
+
   return (
     <Animated.View style={[styles.container, animatedOpacityStyle]}>
       <Animated.View style={[styles.container, style, animatedStyle]}>
@@ -62,7 +63,7 @@ export default ({ opacity, style, artworkOpacity }: Props) => {
             <FavReloadButton track={track} />
           </View>
           <View style={styles.artistInfoContainer}>
-            <Text style={textSubStyle}>{track?.artist}</Text>
+            <ArtistText track={track} style={textSubStyle} />
             <Text style={textSubStyle}>{currentPlayingList.title}</Text>
             <Text style={textSubStyle}>{getTrackLocation()}</Text>
           </View>

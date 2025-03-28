@@ -163,6 +163,11 @@ export const styles = StyleSheet.create({
     flex: 6,
     alignItems: 'center',
   },
+  topBarIcons: {
+    flexDirection: 'row',
+    // paddingHorizontal: 20,
+    justifyContent: 'flex-end',
+  },
   topBarContainer: {
     width: '100%',
     flexDirection: 'row',

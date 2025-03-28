@@ -73,7 +73,12 @@ const NoxAndroidBottomTab = ({ navigation }: NoxComponent.NavigationProps2) => {
         />
         <BottomIconButton
           icon={renderIcon(RouteIcons.music)}
-          onPress={() => navigationG.navigate({ route: NoxRoutes.PlayerHome })}
+          onPress={() =>
+            navigationG.navigate({
+              route: NoxRoutes.PlayerHome,
+              options: { screen: NoxRoutes.Playlist },
+            })
+          }
         />
         <BottomIconButton
           icon={renderIcon(RouteIcons.explore)}

@@ -16,7 +16,7 @@ import bfetch from '@utils/BiliFetch';
 const URL_BILISERIES_INFO =
   'https://api.bilibili.com/x/series/archives?mid={mid}&series_id={sid}&only_normal=true&sort=desc&pn={pn}&ps=30';
 
-const fetchBiliSeriesList = async (
+export const fetchBiliSeriesList = async (
   mid: string,
   sid: string,
   favList: string[] = [],

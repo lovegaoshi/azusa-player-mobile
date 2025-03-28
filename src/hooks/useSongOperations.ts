@@ -1,6 +1,5 @@
 import { useNoxSetting } from '@stores/useApp';
-import { logger } from '@utils/Logger';
-import { Source } from '@enums/MediaFetch';
+import getRadioUrl from '@utils/radiofetch/fetch';
 
 const useSongOperations = () => {
   const setExternalSearchText = useNoxSetting(
@@ -9,25 +8,14 @@ const useSongOperations = () => {
   const setSongMenuVisible = useNoxSetting(state => state.setSongMenuVisible);
 
   const startRadio = (song: NoxMedia.Song) => {
-    switch (song.source) {
-      case Source.ytbvideo:
-        setExternalSearchText(`youtu.be/list=RD${song.bvid}`);
-        break;
-      case Source.bilivideo:
-        setExternalSearchText(`bilibili.com/video/similarvideo/${song.bvid}`);
-        break;
-      default:
-        logger.warn(
-          `[startRadio] ${song.bvid} deos not have a start radio handle.`,
-        );
+    const url = getRadioUrl(song);
+    if (url) {
+      setExternalSearchText(url);
     }
     setSongMenuVisible(false);
   };
 
-  const radioAvailable = (song?: NoxMedia.Song) =>
-    [Source.ytbvideo, Source.bilivideo].includes(song?.source as Source);
-
-  return { startRadio, radioAvailable };
+  return { startRadio };
 };
 
 export default useSongOperations;

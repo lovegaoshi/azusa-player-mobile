@@ -1,5 +1,34 @@
 import { logger } from '@utils/Logger';
 
+export function nFormatter(num: number, digits: number = 1) {
+  const lookup = [
+    { value: 1, symbol: '' },
+    { value: 1e3, symbol: 'k' },
+    { value: 1e6, symbol: 'M' },
+    { value: 1e9, symbol: 'G' },
+    { value: 1e12, symbol: 'T' },
+    { value: 1e15, symbol: 'P' },
+    { value: 1e18, symbol: 'E' },
+  ];
+  const regexp = /\.0+$|(?<=\.[0-9]*[1-9])0+$/;
+  const item = lookup
+    .slice()
+    .reverse()
+    .find(item => num >= item.value);
+  return item
+    ? (num / item.value).toFixed(digits).replace(regexp, '').concat(item.symbol)
+    : '0';
+}
+
+export const appendURLSearchParam = (
+  api: string,
+  urlParam: URLSearchParams,
+  kw: string,
+) => {
+  const extracted = urlParam.get(kw);
+  return extracted ? `${api}&${kw}=${extracted}` : api;
+};
+
 export const i0hdslbHTTPResolve = (url: string) =>
   url.replace('http://', 'https://');
 

@@ -31,6 +31,7 @@ import headRequestFetch from './mediafetch/headRequest';
 import biliFavColleFetch from './mediafetch/biliFavColle';
 import alistFetch from './mediafetch/alist';
 import acfunFetch from './mediafetch/acfunvideo';
+import biliListFetch from './mediafetch/bililist';
 import { logger } from './Logger';
 import { useNoxSetting } from '@stores/useApp';
 
@@ -166,6 +167,7 @@ const reExtractionsShortURL: ReExtraction<string>[] = [
 ];
 
 const reExtractions: ReExtraction<NoxNetwork.NoxRegexFetch>[] = [
+  { match: biliListFetch.regexSearchMatch, fetch: biliListFetch.regexFetch },
   { match: acfunFetch.regexSearchMatch, fetch: acfunFetch.regexFetch },
   {
     match: ytbChannelFetch.regexSearchMatch,
@@ -219,6 +221,10 @@ const reExtractions: ReExtraction<NoxNetwork.NoxRegexFetch>[] = [
   },
   {
     match: biliChannelFetch.regexSearchMatch2,
+    fetch: biliChannelFetch.regexFetch,
+  },
+  {
+    match: biliChannelFetch.regexSearchMatch3,
     fetch: biliChannelFetch.regexFetch,
   },
   {

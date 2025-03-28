@@ -14,7 +14,7 @@ import { awaitLimiter } from './throttle';
 import { getDm } from '../Bilibili/bilidm';
 import { getWebid } from '../Bilibili/biliWebid';
 import { biliShazamOnSonglist } from './bilishazam';
-import { timestampToSeconds } from '../Utils';
+import { timestampToSeconds, appendURLSearchParam } from '../Utils';
 import SongTS from '@objects/Song';
 import { Source } from '@enums/MediaFetch';
 
@@ -40,25 +40,30 @@ const fastSearchResolveBVID = (bvobjs: any[]) =>
     });
   });
 
-export const fetchBiliChannelList = async (
-  url: string,
-  progressEmitter: NoxUtils.ProgressEmitter = () => undefined,
-  favList: string[] = [],
+interface FetchBiliChannelList {
+  url: string;
+  progressEmitter?: NoxUtils.ProgressEmitter;
+  favList?: string[];
+  fastSearch?: boolean;
+  stopAtPage?: number;
+  limit?: boolean;
+}
+export const fetchBiliChannelList = async ({
+  url,
+  progressEmitter = () => undefined,
+  favList = [],
   fastSearch = false,
-) => {
+  stopAtPage,
+  limit = true,
+}: FetchBiliChannelList) => {
   logger.info('calling fetchBiliChannelList');
-  const mid = /space.bilibili\.com\/(\d+)(\/search)?\/video/.exec(url)![1];
+  const mid = /space.bilibili\.com\/(\d+)/.exec(url)![1];
   let searchAPI = URL_BILICHANNEL_INFO.replace('{mid}', mid);
   const urlObj = new URL(url);
-  const URLParams = new URLSearchParams(urlObj.search);
-  const tidVal = URLParams.get('tid');
-  if (tidVal) {
-    searchAPI += `&tid=${tidVal}`;
-  }
-  const kwVal = URLParams.get('keyword');
-  if (kwVal) {
-    searchAPI += `&keyword=${kwVal}`;
-  }
+  searchAPI = appendURLSearchParam(searchAPI, urlObj.searchParams, 'tid');
+  searchAPI = appendURLSearchParam(searchAPI, urlObj.searchParams, 'keyword');
+  searchAPI = appendURLSearchParam(searchAPI, urlObj.searchParams, 'order');
+
   return fetchAwaitBiliPaginatedAPI({
     url: `${searchAPI}${getDm()}${await getWebid(mid)}`,
     getMediaCount: data => data.page.count,
@@ -66,8 +71,9 @@ export const fetchBiliChannelList = async (
     getItems: js => js.data.list.vlist,
     progressEmitter,
     favList,
-    limiter: awaitLimiter,
+    limiter: limit ? awaitLimiter : undefined,
     resolveBiliBVID: fastSearch ? fastSearchResolveBVID : undefined,
+    stopAtPage,
   });
 };
 
@@ -79,12 +85,12 @@ const regexFetch = async ({
   fastSearch,
 }: NoxNetwork.RegexFetchProps): Promise<NoxNetwork.NoxRegexFetch> => ({
   songList: await biliShazamOnSonglist(
-    await fetchBiliChannelList(
-      reExtracted.input,
+    await fetchBiliChannelList({
+      url: reExtracted.input,
       progressEmitter,
       favList,
       fastSearch,
-    ),
+    }),
     false,
     progressEmitter,
     useBiliTag || false,
@@ -97,6 +103,7 @@ export default {
   regexSearchMatch: /space.bilibili\.com\/(\d+)(\/search)?\/video/,
   // https://space.bilibili.com/1112031857/upload/video
   regexSearchMatch2: /space.bilibili\.com\/(\d+)(\/upload)?\/video/,
+  regexSearchMatch3: /space.bilibili\.com\/(\d+)$/,
   regexFetch,
   regexResolveURLMatch: /^null-/,
   resolveURL,
