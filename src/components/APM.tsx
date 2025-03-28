@@ -45,10 +45,6 @@ const HomeIcon = () => <IconButton icon={ScreenIcons.HomeScreen} />;
 const ExploreIcon = () => <IconButton icon={ScreenIcons.ExploreScreen} />;
 const SettingIcon = () => <IconButton icon={ScreenIcons.SettingScreen} />;
 
-interface Props extends NoxComponent.NavigationProps {
-  setNavigation?: (val: DrawerNavigationProp<ParamListBase>) => void;
-}
-
 const AzusaPlayer = () => {
   const { t } = useTranslation();
   const Drawer = createDrawerNavigator();
@@ -63,7 +59,7 @@ const AzusaPlayer = () => {
   const [navigation, setNavigation] =
     React.useState<DrawerNavigationProp<ParamListBase>>();
 
-  const APMHome = ({ navigation }: Props) => {
+  const APMHome = ({ navigation }: NoxComponent.NavigationProps) => {
     useEffect(() => setNavigation(navigation), []);
     return <Home />;
   };

@@ -24,10 +24,12 @@ export const fetchLists = async (mid: string) => {
 // HACK: its only the top 5 videos from the list
 export const getBVIDFast = async (mid: string) => {
   const list = await fetchLists(mid);
-  return list.reduce(
-    (acc, curr) => [...acc, ...curr.archives.map((v: any) => v.bvid)],
-    [],
-  );
+  return list
+    .reduce((acc, curr) => {
+      acc.push(curr.archives.map((v: any) => v.bvid));
+      return acc;
+    }, [])
+    .flat();
 };
 
 const resolveBiliList = async (mid: string, list: any) => {

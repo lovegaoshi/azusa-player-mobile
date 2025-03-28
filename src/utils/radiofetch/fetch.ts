@@ -13,5 +13,4 @@ export default (song?: NoxMedia.Song) => {
         `[startRadio] ${song?.bvid} deos not have a start radio handle.`,
       );
   }
-  return;
 };

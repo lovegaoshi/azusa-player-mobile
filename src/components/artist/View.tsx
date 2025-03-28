@@ -126,14 +126,14 @@ export default ({ navigation }: NoxComponent.StackNavigationProps) => {
               iconColor={playerStyle.colors.primary}
               icon={'playlist-plus'}
               onPress={() =>
-                setExternalSearchText(goToArtistExternalPage(song!)!)
+                setExternalSearchText(goToArtistExternalPage(song)!)
               }
               size={30}
             />
             <IconButton
               iconColor={playerStyle.colors.primary}
               icon={'share'}
-              onPress={() => Linking.openURL(goToArtistExternalPage(song!)!)}
+              onPress={() => Linking.openURL(goToArtistExternalPage(song)!)}
               size={30}
             />
           </View>
