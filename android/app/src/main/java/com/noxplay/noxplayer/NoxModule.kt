@@ -139,4 +139,12 @@ class NoxModule(reactContext: ReactApplicationContext) :
             Settings.Secure.getInt(context.contentResolver, "navigation_mode", 0) == 2
         )
     }
+
+    @ReactMethod fun selfDestruct(callback: Promise) {
+        val activity = reactApplicationContext.currentActivity as MainActivity?
+        Timber.tag("NoxModule").w("self destructing!!!")
+        activity?.finish()
+        android.os.Process.killProcess(android.os.Process.myPid())
+        callback.resolve(null)
+    }
 }
