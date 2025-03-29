@@ -13,7 +13,7 @@ export interface ArtistFetch {
   albums: YTSongRowCard[];
   aboutString: string;
   attestation?: string;
-  sign: string;
+  sign?: string;
   subscribers: string;
 }
 

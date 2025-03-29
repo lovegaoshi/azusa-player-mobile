@@ -1,6 +1,9 @@
 import {
   Video,
   Channel as SearchChannel,
+  LockupView,
+  CollectionThumbnailView,
+  ThumbnailOverlayBadgeView,
 } from 'youtubei.js/dist/src/parser/nodes';
 import {
   Channel,
@@ -9,6 +12,7 @@ import {
 
 import { ytClientWeb } from '@utils/mediafetch/ytbi';
 import { ytbiVideoToNoxSong } from './ytbSearch.ytbi';
+import { fetchYtbiPlaylist } from './ytbPlaylist.ytbi';
 
 const searchYtbChannel = async (channel: string) => {
   const yt = await ytClientWeb;
@@ -24,7 +28,7 @@ const getYtbSong = async (
 ): Promise<NoxMedia.Song[]> => {
   const videos = playlistData.videos as Video[];
   for (const video of videos) {
-    if (!favList.includes(video.id)) {
+    if (!favList.includes(video.video_id)) {
       const song = ytbiVideoToNoxSong(video);
       songs.push(song);
     } else {
@@ -37,7 +41,30 @@ const getYtbSong = async (
   return songs;
 };
 
-const fetchYtbiChannelVideos = async (
+export const fetchYtbiChannelPlaylists = async (channelID: string) => {
+  try {
+    const yt = await ytClientWeb;
+    const channel = await yt.getChannel(channelID);
+    const playlists = (await channel.getPlaylists()).playlists as LockupView[];
+    return playlists.map(v => {
+      const thumbnail = v?.content_image as CollectionThumbnailView;
+      const overlayBadge = thumbnail?.primary_thumbnail
+        ?.overlays?.[0] as ThumbnailOverlayBadgeView;
+      return {
+        cover: thumbnail?.primary_thumbnail?.image?.[0]?.url ?? '',
+        name: v.metadata?.title.text ?? '',
+        singer: overlayBadge?.badges[0].text ?? '',
+        getPlaylist: async () => ({
+          songs: await fetchYtbiPlaylist(v.content_id),
+        }),
+      };
+    });
+  } catch {
+    return [];
+  }
+};
+
+export const fetchYtbiChannelVideos = async (
   channelID: string,
   favList: string[] = [],
 ) => {

@@ -8,8 +8,8 @@ import { logger } from '@utils/Logger';
 
 export const ytbiVideoToNoxSong = (val: Video) =>
   SongTS({
-    cid: `${Source.ytbvideo}-${val.id}`,
-    bvid: val.id,
+    cid: `${Source.ytbvideo}-${val.video_id}`,
+    bvid: val.video_id,
     name: val.title.text ?? 'N/A',
     nameRaw: val.title.text ?? 'N/A',
     singer: val.author.name,
@@ -46,7 +46,9 @@ const getSearch = async ({
   const videos = playlistData.videos as Video[];
   const parsedSongs = videos
     .filter(v => v.type === 'Video')
-    .map(val => (!favList.includes(val.id) ? ytbiVideoToNoxSong(val) : []))
+    .map(val =>
+      !favList.includes(val.video_id) ? ytbiVideoToNoxSong(val) : [],
+    )
     .filter((val): val is NoxMedia.Song => val !== undefined);
   const joinedSongs = songs.concat(parsedSongs);
   return getSearch({
