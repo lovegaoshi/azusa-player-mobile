@@ -32,7 +32,9 @@ export default async (mid: string): Promise<ArtistFetch> => {
   });
   const userInfo = await getBiliUser(mid);
   return {
-    profilePicURL: i0hdslbHTTPResolve(userInfo?.space?.s_img) ?? '',
+    profilePicURL: i0hdslbHTTPResolve(
+      ProfilePlaySongs[0].cover ?? userInfo?.space?.s_img ?? '',
+    ),
     ProfilePlaySongs,
     artistName: userInfo?.card.name ?? '',
     attestation: userInfo?.card.official?.title ?? '',

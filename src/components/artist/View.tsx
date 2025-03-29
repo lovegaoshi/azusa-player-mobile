@@ -65,6 +65,7 @@ export default ({ navigation }: NoxComponent.StackNavigationProps) => {
 
   const backgroundStyle = {
     backgroundColor: playerStyle.customColors.maskedBackgroundColor,
+    flex: 1,
   };
 
   if (loading) {

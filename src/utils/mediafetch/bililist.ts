@@ -2,7 +2,7 @@ import { fetchPaginatedAPI } from './paginatedfetch';
 import { fetchBiliBVIDs } from './bilivideo';
 import { fetchBiliSeriesList } from './biliseries';
 import { fetchBiliColleList } from './bilicolle';
-import { filterUndefined } from '../Utils';
+import { filterUndefined, i0hdslbHTTPResolve } from '../Utils';
 
 /**
  * https://api.bilibili.com/x/polymer/web-space/seasons_series_list?mid=529249&page_size=20&page_num=1
@@ -46,7 +46,7 @@ export const getListAsYTSongRowCard = async (mid: string) => {
   const list = await fetchLists(mid);
   return filterUndefined(
     list.map((v: any) => ({
-      cover: v.meta.cover,
+      cover: i0hdslbHTTPResolve(v.meta.cover),
       name: v.meta.name,
       singer: v.meta.total,
       getPlaylist: async () => ({
