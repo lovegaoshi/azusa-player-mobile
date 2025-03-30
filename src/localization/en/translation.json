@@ -1,6 +1,8 @@
 {
   "_comment": "src/localization/en/translation.json",
   "Artist": {
+    "top": "Top",
+    "latest": "Latest",
     "errorTitle": "Uh oh...",
     "errorContent": "Nothing will be displayed. You shouldnt be here.",
     "loading": "Now Loading: {{name}}'s Artist Page",
