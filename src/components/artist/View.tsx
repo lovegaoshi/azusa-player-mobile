@@ -168,11 +168,18 @@ export default ({ navigation }: NoxComponent.StackNavigationProps) => {
               )}
             </View>
           </Animated.View>
-          <BiliSongsArrayTabCard
-            songs={result.ProfilePlaySongs}
-            title="Latest"
-          />
-          <BiliSongsArrayTabCard songs={result.topSongs} title="Top" />
+          {result.ProfilePlaySongs.length > 0 && (
+            <BiliSongsArrayTabCard
+              songs={result.ProfilePlaySongs}
+              title={t('Artist.latest')}
+            />
+          )}
+          {result.topSongs.length > 0 && (
+            <BiliSongsArrayTabCard
+              songs={result.topSongs}
+              title={t('Artist.top')}
+            />
+          )}
           {result.albums.map(v => (
             <YTSongRow
               key={v.data[0].cover}

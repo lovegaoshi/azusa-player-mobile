@@ -25,6 +25,7 @@ const getYtbSong = async (
   playlistData: Channel | ChannelListContinuation,
   songs: NoxMedia.Song[],
   favList: string[],
+  totalLimit = Infinity,
 ): Promise<NoxMedia.Song[]> => {
   const videos = playlistData.videos as Video[];
   for (const video of videos) {
@@ -35,8 +36,13 @@ const getYtbSong = async (
       return songs;
     }
   }
-  if (playlistData.has_continuation) {
-    return getYtbSong(await playlistData.getContinuation(), songs, favList);
+  if (playlistData.has_continuation && totalLimit > songs.length) {
+    return getYtbSong(
+      await playlistData.getContinuation(),
+      songs,
+      favList,
+      totalLimit,
+    );
   }
   return songs;
 };
@@ -64,22 +70,28 @@ export const fetchYtbiChannelPlaylists = async (channelID: string) => {
   }
 };
 
-export const fetchYtbiChannelVideos = async (
-  channelID: string,
-  favList: string[] = [],
-) => {
+interface FetchYtbiChannelVideos {
+  channelID: string;
+  favList?: string[];
+  totalLimit?: number;
+}
+export const fetchYtbiChannelVideos = async ({
+  channelID,
+  favList = [],
+  totalLimit = Infinity,
+}: FetchYtbiChannelVideos) => {
   const yt = await ytClientWeb;
   const channel = await yt.getChannel(channelID);
   const channelvideos = await channel.getVideos();
-  return getYtbSong(channelvideos, [], favList);
+  return getYtbSong(channelvideos, [], favList, totalLimit);
 };
 
 const regexFetch = async ({
   reExtracted,
   favList = [],
 }: NoxNetwork.RegexFetchProps): Promise<NoxNetwork.NoxRegexFetch> => {
-  const ytbChannel = await searchYtbChannel(reExtracted[1]);
-  return { songList: await fetchYtbiChannelVideos(ytbChannel) };
+  const channelID = await searchYtbChannel(reExtracted[1]);
+  return { songList: await fetchYtbiChannelVideos({ channelID, favList }) };
 };
 export default {
   // https://www.youtube.com/c/MioriCelesta

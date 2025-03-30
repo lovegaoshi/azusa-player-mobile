@@ -19,8 +19,11 @@ export default async (channelID: string): Promise<ArtistFetch> => {
       channelHeader?.content?.metadata?.metadata_rows?.[1]?.metadata_parts?.[0]
         .text?.text ?? ''
     ).split(' ')[0],
-    ProfilePlaySongs: await fetchYtbiChannelVideos(channelID),
+    ProfilePlaySongs: await fetchYtbiChannelVideos({
+      channelID,
+      totalLimit: 200,
+    }),
     topSongs: [],
-    albums: await fetchYtbiChannelPlaylists(channelID),
+    albums: [{ data: await fetchYtbiChannelPlaylists(channelID) }],
   };
 };

@@ -1,6 +1,8 @@
 {
   "_comment": "src/localization/en/translation.json",
   "Artist": {
+    "top": "最热",
+    "latest": "最新",
     "errorTitle": "欧！漏！",
     "errorContent": "你不应该来到这里",
     "loading": "正在加载{{name}}的主页...",

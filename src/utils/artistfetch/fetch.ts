@@ -17,8 +17,8 @@ export default (song?: NoxMedia.Song) => {
     case Source.bilivideo:
       return fetchBiliArtist(String(song.singerId));
     case Source.ytbvideo:
-      return fetchYtbiArtist(String(song.singerId)).catch(() =>
-        fetchYtmArtist(String(song.singerId)),
+      return fetchYtmArtist(String(song.singerId)).catch(() =>
+        fetchYtbiArtist(String(song.singerId)).catch(console.error),
       );
   }
 };
