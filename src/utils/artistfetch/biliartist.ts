@@ -5,16 +5,23 @@ import getBiliNotice from '../Bilibili/biliNotice';
 import { getListAsYTSongRowCard } from '../mediafetch/bililist';
 import { i0hdslbHTTPResolve, nFormatter } from '../Utils';
 
+interface SongRowCard {
+  name?: string;
+  data: YTSongRowCard[];
+}
+
 export interface ArtistFetch {
   profilePicURL: string;
   artistName: string;
   ProfilePlaySongs: NoxMedia.Song[];
   topSongs: NoxMedia.Song[];
-  albums: YTSongRowCard[];
+  albums: SongRowCard[];
   aboutString: string;
   attestation?: string;
   sign?: string;
   subscribers: string;
+  shareURL?: string;
+  playURL?: string;
 }
 
 export default async (mid: string): Promise<ArtistFetch> => {
@@ -41,7 +48,7 @@ export default async (mid: string): Promise<ArtistFetch> => {
     sign: userInfo?.sign ?? '',
     topSongs,
     aboutString: await getBiliNotice(mid),
-    albums: await getListAsYTSongRowCard(mid),
+    albums: [{ data: await getListAsYTSongRowCard(mid) }],
     subscribers: nFormatter(userInfo?.card?.fans ?? 0),
   };
 };

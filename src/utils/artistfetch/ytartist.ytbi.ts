@@ -9,16 +9,16 @@ import {
 
 export default async (channelID: string): Promise<ArtistFetch> => {
   const yt = await ytClientWeb;
-  console.log(channelID);
   const channel = await yt.getChannel(channelID);
   const channelHeader = channel.header as PageHeader;
   return {
     profilePicURL: channelHeader?.content?.banner?.image?.[0]?.url ?? '',
     artistName: channelHeader?.content?.title?.text?.text ?? '',
     aboutString: channelHeader?.content?.description?.description?.text ?? '',
-    subscribers:
+    subscribers: (
       channelHeader?.content?.metadata?.metadata_rows?.[1]?.metadata_parts?.[0]
-        .text?.text ?? '',
+        .text?.text ?? ''
+    ).split(' ')[0],
     ProfilePlaySongs: await fetchYtbiChannelVideos(channelID),
     topSongs: [],
     albums: await fetchYtbiChannelPlaylists(channelID),

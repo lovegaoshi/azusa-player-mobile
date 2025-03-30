@@ -5,7 +5,7 @@ export default (song?: NoxMedia.Song) => {
   if (!song) return;
   switch (song?.source) {
     case Source.ytbvideo:
-      return `youtu.be/list=RD${song.bvid}`;
+      return `youtu.be/list=RDAMVM${song.bvid}`;
     case Source.bilivideo:
       return `bilibili.com/video/similarvideo/${song.bvid}`;
     default:

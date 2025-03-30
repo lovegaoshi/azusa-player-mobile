@@ -127,14 +127,20 @@ export default ({ navigation }: NoxComponent.StackNavigationProps) => {
               iconColor={playerStyle.colors.primary}
               icon={'playlist-plus'}
               onPress={() =>
-                setExternalSearchText(goToArtistExternalPage(song)!)
+                setExternalSearchText(
+                  result.playURL ?? goToArtistExternalPage(song)!,
+                )
               }
               size={30}
             />
             <IconButton
               iconColor={playerStyle.colors.primary}
               icon={'share'}
-              onPress={() => Linking.openURL(goToArtistExternalPage(song)!)}
+              onPress={() =>
+                Linking.openURL(
+                  result.shareURL ?? goToArtistExternalPage(song)!,
+                )
+              }
               size={30}
             />
           </View>
@@ -155,7 +161,11 @@ export default ({ navigation }: NoxComponent.StackNavigationProps) => {
             />
             <View style={mStyles.titleTextContainer}>
               <Text variant="headlineLarge">{result.artistName}</Text>
-              <Text>{t('Artist.subscribers', { c: result.subscribers })}</Text>
+              {result.subscribers.length > 0 && (
+                <Text>
+                  {t('Artist.subscribers', { c: result.subscribers })}
+                </Text>
+              )}
             </View>
           </Animated.View>
           <BiliSongsArrayTabCard
@@ -163,9 +173,13 @@ export default ({ navigation }: NoxComponent.StackNavigationProps) => {
             title="Latest"
           />
           <BiliSongsArrayTabCard songs={result.topSongs} title="Top" />
-          {result.albums.length > 0 && (
-            <YTSongRow songs={result.albums} title="Albums" />
-          )}
+          {result.albums.map(v => (
+            <YTSongRow
+              key={v.data[0].cover}
+              songs={v.data}
+              title={t(v.name ?? 'Albums')}
+            />
+          ))}
           <View style={ItemSelectStyles.skinItemTextContainer}>
             <Text>{result.sign}</Text>
             <Text>{result.aboutString}</Text>

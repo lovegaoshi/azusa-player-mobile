@@ -1,6 +1,7 @@
 import { Source } from '@enums/MediaFetch';
 import fetchBiliArtist from './biliartist';
 import fetchYtbiArtist from './ytartist.ytbi';
+import fetchYtmArtist from './ytmartist.ytbi';
 
 export const goToArtistExternalPage = (song?: NoxMedia.Song) => {
   switch (song?.source) {
@@ -16,6 +17,8 @@ export default (song?: NoxMedia.Song) => {
     case Source.bilivideo:
       return fetchBiliArtist(String(song.singerId));
     case Source.ytbvideo:
-      return fetchYtbiArtist(String(song.singerId));
+      return fetchYtbiArtist(String(song.singerId)).catch(() =>
+        fetchYtmArtist(String(song.singerId)),
+      );
   }
 };
