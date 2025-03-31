@@ -4,7 +4,9 @@ import {
   View,
   Dimensions,
   Linking,
+  RefreshControl,
 } from 'react-native';
+import { useCallback, useState } from 'react';
 import { Image } from 'expo-image';
 import Animated, {
   useAnimatedStyle,
@@ -30,6 +32,7 @@ export default ({ navigation }: NoxComponent.StackNavigationProps) => {
   const loading = useArtist(state => state.loading);
   const song = useArtist(state => state.song);
   const result = useArtist(state => state.result);
+  const fetch = useArtist(state => state.fetch);
   const playerStyle = useNoxSetting(state => state.playerStyle);
   const setExternalSearchText = useNoxSetting(
     state => state.setExternalSearchText,
@@ -68,6 +71,11 @@ export default ({ navigation }: NoxComponent.StackNavigationProps) => {
     flex: 1,
   };
 
+  const onRefresh = useCallback(() => {
+    if (song === undefined) return;
+    fetch(song);
+  }, []);
+
   if (loading) {
     return (
       <FlexView>
@@ -86,11 +94,16 @@ export default ({ navigation }: NoxComponent.StackNavigationProps) => {
   if (result === undefined) {
     return (
       <FlexView>
-        <View style={[{ paddingLeft: 10 }, backgroundStyle]}>
+        <ScrollView
+          style={[{ paddingLeft: 10 }, backgroundStyle]}
+          refreshControl={
+            <RefreshControl refreshing={false} onRefresh={onRefresh} />
+          }
+        >
           <View style={mStyles.indicatorContainer} />
           <Text variant="titleLarge">{t('Artist.errorTitle')}</Text>
           <Text variant="bodyLarge">{t('Artist.errorContent')}</Text>
-        </View>
+        </ScrollView>
       </FlexView>
     );
   }
