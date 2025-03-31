@@ -94,6 +94,9 @@ export const YTSongRow = ({ songs = [], title }: YTSongRowProp) => {
   const navigationGlobal = useNavigation();
   const playerStyle = useNoxSetting(state => state.playerStyle);
   const scroll = useNoxSetting(state => state.incSongListScrollCounter);
+  const progressEmitter = useNoxSetting(
+    state => state.searchBarProgressEmitter,
+  );
   const { playAsSearchList } = usePlayback();
 
   const fontColor = playerStyle.colors.primary;
@@ -123,11 +126,15 @@ export const YTSongRow = ({ songs = [], title }: YTSongRowProp) => {
                   route: NoxRoutes.PlayerHome,
                   options: { screen: NoxRoutes.Playlist },
                 });
+                progressEmitter(100);
                 const playlist = await item.getPlaylist();
                 playAsSearchList({
                   songs: playlist.songs,
                   song: playlist.item,
-                }).then(() => setTimeout(scroll, 500));
+                }).then(() => {
+                  progressEmitter(0);
+                  setTimeout(scroll, 500);
+                });
               }}
             >
               <Image

@@ -45,14 +45,16 @@ const resolveBiliList = async (mid: string, list: any) => {
 export const getListAsYTSongRowCard = async (mid: string) => {
   const list = await fetchLists(mid);
   return filterUndefined(
-    list.map((v: any) => ({
-      cover: i0hdslbHTTPResolve(v.meta.cover),
-      name: v.meta.name,
-      singer: v.meta.total,
-      getPlaylist: async () => ({
-        songs: await resolveBiliList(mid, v),
-      }),
-    })),
+    list
+      .filter(v => v.archives.length > 0)
+      .map((v: any) => ({
+        cover: i0hdslbHTTPResolve(v.meta.cover),
+        name: v.meta.name,
+        singer: v.meta.total,
+        getPlaylist: async () => ({
+          songs: await resolveBiliList(mid, v),
+        }),
+      })),
     v => v,
   );
 };

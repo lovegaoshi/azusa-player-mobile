@@ -155,7 +155,7 @@ export default ({ navigation }: NoxComponent.StackNavigationProps) => {
             <Image
               style={{
                 width: dimension.width,
-                height: Math.max(dimension.height / 3, 200),
+                height: Math.max(Math.floor(dimension.height / 2.5), 200),
               }}
               source={result.profilePicURL}
             />
@@ -180,13 +180,15 @@ export default ({ navigation }: NoxComponent.StackNavigationProps) => {
               title={t('Artist.top')}
             />
           )}
-          {result.albums.map(v => (
-            <YTSongRow
-              key={v.data[0].cover}
-              songs={v.data}
-              title={t(v.name ?? 'Albums')}
-            />
-          ))}
+          {result.albums
+            .filter(v => v.data[0])
+            .map(v => (
+              <YTSongRow
+                key={v.data[0].cover}
+                songs={v.data}
+                title={t(v.name ?? 'Albums')}
+              />
+            ))}
           <View style={ItemSelectStyles.skinItemTextContainer}>
             <Text>{result.sign}</Text>
             <Text>{result.aboutString}</Text>
