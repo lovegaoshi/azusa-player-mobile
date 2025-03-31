@@ -14,7 +14,7 @@ import { ytClientWeb } from '@utils/mediafetch/ytbi';
 import { ytbiVideoToNoxSong } from './ytbSearch.ytbi';
 import { fetchYtbiPlaylist } from './ytbPlaylist.ytbi';
 
-const searchYtbChannel = async (channel: string) => {
+export const searchYtbChannel = async (channel: string) => {
   const yt = await ytClientWeb;
   const res = await yt.search(channel, { type: 'channel' });
   const channels = res.results as unknown as SearchChannel[];
@@ -74,15 +74,18 @@ interface FetchYtbiChannelVideos {
   channelID: string;
   favList?: string[];
   totalLimit?: number;
+  extraChannelGet?: (v: Channel) => Promise<Channel>;
 }
 export const fetchYtbiChannelVideos = async ({
   channelID,
   favList = [],
   totalLimit = Infinity,
+  extraChannelGet = async v => v,
 }: FetchYtbiChannelVideos) => {
   const yt = await ytClientWeb;
   const channel = await yt.getChannel(channelID);
-  const channelvideos = await channel.getVideos();
+  const finalChannel = await extraChannelGet(channel);
+  const channelvideos = await finalChannel.getVideos();
   return getYtbSong(channelvideos, [], favList, totalLimit);
 };
 
