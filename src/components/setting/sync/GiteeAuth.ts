@@ -28,7 +28,7 @@ export const getAuth = async (
   if (accessToken) {
     logger.debug('gitee login successful');
     authToken = accessToken;
-    callback();
+    await callback();
   } else {
     errorHandling('no response url returned. auth aborted by user.');
   }
@@ -43,7 +43,7 @@ const login = async (
       logger.debug('gitee token expired, need to log in');
       await getAuth(callback, errorCallback);
     } else {
-      callback();
+      await callback();
     }
     return true;
   } catch (e) {

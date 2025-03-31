@@ -50,7 +50,7 @@ const getAuth = async (
     dbx = new _Dropbox({
       accessToken: accessToken, //dropboxUID,
     });
-    callback();
+    await callback();
   } else {
     errorHandling('no response url returned. auth aborted by user.');
   }
@@ -72,7 +72,7 @@ const login = async (
       logger.debug('dropbox token expired, need to log in');
       await getAuth(callback, errorCallback);
     } else {
-      callback();
+      await callback();
     }
     return true;
   } catch (e) {
