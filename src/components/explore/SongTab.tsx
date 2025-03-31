@@ -135,7 +135,7 @@ export const BiliSongsArrayTabCard = ({
   title: string;
 }) => {
   if (songs.length === 0) {
-    return;
+    return <></>;
   }
 
   const splicedSongs: NoxMedia.Song[][] = chunkArray(songs, 4);

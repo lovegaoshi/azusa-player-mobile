@@ -37,7 +37,7 @@ export default ({ navigation }: NoxComponent.StackNavigationProps) => {
 
   const scrollYOffset = useSharedValue(0);
   const scrollYHeight = useSharedValue(0);
-  const hideAt = useDerivedValue(() => scrollYHeight.value / 3);
+  const hideAt = useDerivedValue(() => scrollYHeight.value / 2.5);
 
   const animatedHeaderStyle = useAnimatedStyle(() => {
     const visibleOffsetRange = scrollYOffset.value - hideAt.value;
@@ -155,7 +155,7 @@ export default ({ navigation }: NoxComponent.StackNavigationProps) => {
             <Image
               style={{
                 width: dimension.width,
-                height: Math.max(Math.floor(dimension.height / 2.5), 200),
+                height: Math.max(hideAt.value, 200),
               }}
               source={result.profilePicURL}
             />
