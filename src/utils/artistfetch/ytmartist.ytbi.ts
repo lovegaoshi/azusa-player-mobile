@@ -20,32 +20,43 @@ export default async (channelID: string): Promise<ArtistFetch> => {
   const carousels = channel.sections.filter(
     s => s.type === 'MusicCarouselShelf',
   ) as MusicCarouselShelf[];
+  const profilePicURL = channelHeader?.thumbnail?.contents?.[0]?.url ?? '';
+  const artistName = channelHeader?.title?.text ?? '';
+  const aboutString = channelHeader?.description?.text ?? '';
   return {
-    profilePicURL: channelHeader?.thumbnail?.contents?.[0]?.url ?? '',
-    artistName: channelHeader?.title?.text ?? '',
-    aboutString: channelHeader?.description?.text ?? '',
+    profilePicURL,
+    artistName,
+    aboutString,
     subscribers: '',
     ProfilePlaySongs: [],
     topSongs: await fetchYtbiPlaylist(
       musicShelf.title.endpoint?.payload?.browseId,
     ),
-    albums: carousels.map(c => ({
-      data: c.contents
-        .filter(i => i.type === 'MusicTwoRowItem')
-        // @ts-ignore
-        .map((musicTwoRowItem: MusicTwoRowItem) => ({
-          cover: musicTwoRowItem.thumbnail?.[0]?.url ?? '',
-          name: musicTwoRowItem.title.text ?? '',
-          singer: musicTwoRowItem.year ?? '',
-          getPlaylist: async () => ({
-            songs: await fetchYtbiPlaylist(
+    albums: carousels.map(c => {
+      const name = c.header?.title.text ?? '';
+      return {
+        data: c.contents
+          .filter(i => i.type === 'MusicTwoRowItem')
+          // @ts-ignore
+          .map((musicTwoRowItem: MusicTwoRowItem) => {
+            const cover = musicTwoRowItem.thumbnail?.[0]?.url ?? '';
+            const name = musicTwoRowItem.title.text ?? '';
+            const singer = musicTwoRowItem.year ?? '';
+            const playlistId =
               musicTwoRowItem.thumbnail_overlay?.content?.endpoint.payload
-                .playlistId,
-            ),
+                .playlistId;
+            return {
+              cover,
+              name,
+              singer,
+              getPlaylist: async () => ({
+                songs: await fetchYtbiPlaylist(playlistId),
+              }),
+            };
           }),
-        })),
-      name: c.header?.title.text ?? '',
-    })),
+        name,
+      };
+    }),
     playURL: `https://music.youtube.com/channel/${channelID}`,
     shareURL: `https://music.youtube.com/channel/${channelID}`,
   };

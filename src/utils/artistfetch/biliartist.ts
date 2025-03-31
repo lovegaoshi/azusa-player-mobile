@@ -38,14 +38,17 @@ export default async (mid: string): Promise<ArtistFetch> => {
     limit: false,
   });
   const userInfo = await getBiliUser(mid);
+  const artistName = userInfo?.card.name ?? '';
+  const attestation = userInfo?.card.official?.title ?? '';
+  const sign = userInfo?.sign ?? '';
   return {
     profilePicURL: i0hdslbHTTPResolve(
       ProfilePlaySongs[0].cover ?? userInfo?.space?.s_img ?? '',
     ),
     ProfilePlaySongs,
-    artistName: userInfo?.card.name ?? '',
-    attestation: userInfo?.card.official?.title ?? '',
-    sign: userInfo?.sign ?? '',
+    artistName,
+    attestation,
+    sign,
     topSongs,
     aboutString: await getBiliNotice(mid),
     albums: [{ data: await getListAsYTSongRowCard(mid) }],
