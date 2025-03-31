@@ -69,7 +69,11 @@ export const BiliSongCard = ({
                 }).then(() => setTimeout(scroll, 500));
               }}
             >
-              <Image style={style.cardThumbnail} source={{ uri: item.cover }} />
+              <Image
+                cachePolicy="none"
+                style={style.cardThumbnail}
+                source={{ uri: item.cover }}
+              />
               <View style={styles.flex}>
                 <Text
                   style={{

@@ -138,6 +138,7 @@ export const YTSongRow = ({ songs = [], title }: YTSongRowProp) => {
               }}
             >
               <Image
+                cachePolicy="none"
                 style={{ width: 140, height: 140, borderRadius: 5 }}
                 source={{ uri: item.cover }}
               />
