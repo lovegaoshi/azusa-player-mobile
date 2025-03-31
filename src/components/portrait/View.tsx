@@ -3,9 +3,13 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Playlist from '../playlist/View';
 import Artist from '../artist/View';
 import { NoxRoutes } from '@enums/Routes';
+import DefaultScreenOption from '@enums/ScreenOption';
 
 const Stack = createNativeStackNavigator();
-const screenOptions = { headerShown: false };
+const screenOptions = {
+  headerShown: false,
+  ...DefaultScreenOption,
+};
 
 export default () => {
   return (
@@ -18,7 +22,7 @@ export default () => {
       <Stack.Screen
         name={NoxRoutes.Artist}
         component={Artist}
-        options={screenOptions}
+        options={{ ...screenOptions, freezeOnBlur: true }}
       />
     </Stack.Navigator>
   );
