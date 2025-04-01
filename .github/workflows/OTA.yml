@@ -1,6 +1,9 @@
 name: APM OTA
 on:
   workflow_dispatch:
+  push:
+    branches:
+      - 'dev'
 jobs:
   checkLastCommit:
     runs-on: ubuntu-latest
