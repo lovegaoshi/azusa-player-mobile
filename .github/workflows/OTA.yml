@@ -118,7 +118,7 @@ jobs:
           git config --global user.name "gaoshi"
           git commit -m 'release'
           git push --set-upstream origin AndroidOTA --force
-          cd ..
+          cd ../ios
           git init
           git branch -m IOSOTA
           git remote add origin https://${{ secrets.GHTOKEN }}@github.com/lovegaoshi/azusa-player-mobile.git
