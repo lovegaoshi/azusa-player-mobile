@@ -133,7 +133,7 @@ const Settings = ({ headerBackVisible = true }: Props) => {
   const { t } = useTranslation();
 
   return (
-    <FlexView>
+    <FlexView noFlex>
       <Stack.Navigator screenOptions={{ headerBackVisible }}>
         <Stack.Screen
           name={NoxView.HOME}
