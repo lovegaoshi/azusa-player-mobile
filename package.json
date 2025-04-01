@@ -25,7 +25,9 @@
     "ios:build": "yarn build && cd ios && rm Podfile.lock && RCT_NEW_ARCH_ENABLED=0 pod install --repo-update && cd ..",
     "dep": "yarn upgrade-interactive && yarn postinstall",
     "release": "git switch master && git pull && python release_bump.py",
-    "postinstall": "patch-package"
+    "postinstall": "patch-package",
+    "export-android": "mkdir -p bundles/android && react-native bundle --platform android --dev false --entry-file index.js --bundle-output bundles/android/index.android.bundle --assets-dest bundles/android",
+    "export-ios": "mkdir -p bundles/ios && react-native bundle --platform ios --dev false --entry-file index.js --bundle-output bundles/ios/main.jsbundle --assets-dest bundles/ios"
   },
   "dependencies": {
     "@material/material-color-utilities": "^0.3.0",
@@ -100,6 +102,7 @@
     "react-native-get-random-values": "^1.11.0",
     "react-native-image-colors": "^2.4.0",
     "react-native-lyric": "https://lovegaoshi@github.com/lovegaoshi/react-native-lyric.git#commit=6f20e83948c29b0d46833ab9173cd81f99d0ab48",
+    "react-native-ota-hot-update": "2.1.9",
     "react-native-pager-view": "6.7.0",
     "react-native-paper": "^5.13.1",
     "react-native-purchases": "^8.9.1",
