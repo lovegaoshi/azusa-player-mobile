@@ -6,7 +6,7 @@ import {
   Linking,
   RefreshControl,
 } from 'react-native';
-import { useCallback, useState } from 'react';
+import { useCallback } from 'react';
 import { Image } from 'expo-image';
 import Animated, {
   useAnimatedStyle,

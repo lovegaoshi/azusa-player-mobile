@@ -147,6 +147,7 @@ export const YTSongRow = ({ songs = [], title }: YTSongRowProp) => {
               <Image
                 style={styles.albumImage}
                 source={{ uri: item.cover }}
+                resizeMode={'cover'}
                 resize={140}
               />
               <View style={{ flex: 1 }}>
