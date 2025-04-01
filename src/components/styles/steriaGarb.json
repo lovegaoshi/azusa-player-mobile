@@ -2086,8 +2086,88 @@
       "themeIcon": "https://i0.hdslb.com/bfs/garb/e57873f97d386583a4703380f059d0eb4d58cbe3.png",
       "darkTheme": true
     },
-    "gifs": [],
+    "gifs": [
+      "https://i0.hdslb.com/bfs/garb/a373b140d287a95fd5c74948062a88530126d730.png",
+      "https://i0.hdslb.com/bfs/garb/22ff447737a68e3d693c1222611a2aed841659d9.png",
+      "https://i0.hdslb.com/bfs/garb/54f850264d8526210e0e9f2a7a5a6da4a5e002b9.png",
+      "https://i0.hdslb.com/bfs/garb/4f4df5910ba5eb2eb6a645f9f2610aa78a060c31.png",
+      "https://i0.hdslb.com/bfs/garb/17cee39391c42d1395d18ea6cba25be4418973ed.png",
+      "https://i0.hdslb.com/bfs/garb/b4ff88b75f5dca41abc538e1a83ce09bef3d9fe5.png",
+      "https://i0.hdslb.com/bfs/garb/651948c9e47fd3291264334db6b087f5f5304741.png",
+      "https://i0.hdslb.com/bfs/garb/b0d740ad7d280866259a4e9154da62725f016f44.png",
+      "https://i0.hdslb.com/bfs/garb/b7de076bee26c735b6c5abdf9e313685dd2f5ebc.png",
+      "https://i0.hdslb.com/bfs/garb/f0c172d9e231541ff8d783f5ef1d223b4a0cb806.png",
+      "https://i0.hdslb.com/bfs/garb/92869a70d02853f26b9543f3f6ae933022657ef0.png",
+      "https://i0.hdslb.com/bfs/garb/a181bd7b66b96fe4c098650290c8ea1f7498fdef.png",
+      "https://i0.hdslb.com/bfs/garb/9478a6ac49e799c3a0ebd04c4df3e441e8177214.png",
+      "https://i0.hdslb.com/bfs/garb/7d3c5c3c867d66cb4db44b0266bc6a712f93b631.png",
+      "https://i0.hdslb.com/bfs/garb/b50351388290e19bc60284b02ee198541055968a.png",
+      "https://i0.hdslb.com/bfs/garb/0d216202692d95d3ae843d787434527941ef4099.png",
+      "https://i0.hdslb.com/bfs/garb/77398fec57c113af3302e3b18ffdc4734c6a8603.png",
+      "https://i0.hdslb.com/bfs/garb/d635b9b6beca8c9cc4b47c2e1efea4c9554a71ba.png",
+      "https://i0.hdslb.com/bfs/garb/4aa68f9aab1070a918042149a6d2512c7f277f2d.png",
+      "https://i0.hdslb.com/bfs/garb/898b16d296c8bc0d9bcc93163edc52e41df64580.png"],
     "backgroundImages": [
+      {
+        "type": "biliNFTVideoNew",
+        "identifier": "[\"106726\",\"106727\",\"霓歌吟梦\"]"
+      },
+      {
+        "type": "biliNFTVideoNew",
+        "identifier": "[\"106726\",\"106727\",\"暖息糯糯\"]"
+      },
+      {
+        "type": "biliNFTVideoNew",
+        "identifier": "[\"106726\",\"106727\",\"璃上映肤\"]"
+      },
+      {
+        "type": "biliNFTVideoNew",
+        "identifier": "[\"106726\",\"106727\",\"NEEKO!\"]"
+      },
+      {
+        "type": "biliNFTVideoNew",
+        "identifier": "[\"106726\",\"106727\",\"夹击妹抖\"]"
+      },
+      {
+        "type": "biliNFTVideoNew",
+        "identifier": "[\"106726\",\"106727\",\"余韵未散\"]"
+      },
+      {
+        "type": "biliNFTVideoNew",
+        "identifier": "[\"106726\",\"106727\",\"粉梦微酣\"]"
+      },
+      {
+        "type": "biliNFTVideoNew",
+        "identifier": "[\"106726\",\"106727\",\"涟漪依依\"]"
+      },
+      {
+        "type": "biliNFTVideoNew",
+        "identifier": "[\"106726\",\"106727\",\"夜色流萤\"]"
+      },
+      {
+        "type": "biliNFTVideoNew",
+        "identifier": "[\"106726\",\"106727\",\"夜夜喵鸽\"]"
+      },
+      {
+        "type": "biliNFTVideoNew",
+        "identifier": "[\"106726\",\"106727\",\"绯影柔息\"]"
+      },
+      {
+        "type": "biliNFTVideoNew",
+        "identifier": "[\"106726\",\"106727\",\"小小白巧\"]"
+      },
+      {
+        "type": "biliNFTVideoNew",
+        "identifier": "[\"106726\",\"106727\",\"予宠欢歌\"]"
+      },
+      {
+        "type": "biliNFTVideoRedeem",
+        "identifier": "[\"106726\",\"106727\",\"全图鉴收集·典藏卡·霓歌吟音\"]"
+      },
+      {
+        "type": "biliNFTVideoRedeem",
+        "identifier": "[\"106726\",\"106727\",\"霓歌吟梦·典藏卡·小小黑巧\"]"
+      },
       {
         "type": "biliNFTVideoNew",
         "identifier": "[\"100858\",\"100859\",\"韵夜邀欢\"]"

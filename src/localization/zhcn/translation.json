@@ -221,6 +221,8 @@
     "suggestedSkipLongVideoDesc": "推荐播放时跳过超过10分钟的视频"
   },
   "DeveloperSettings": {
+    "OTAUName": "热更新",
+    "OTAUDesc": "热更新（不要触碰）",
     "LogName": "显示日志",
     "LogDesc": "显示已经记录的日志",
     "LogLevelName": "日志等级",

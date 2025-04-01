@@ -28,6 +28,7 @@ import { isAndroid, selfDestruct } from '@utils/RNUtils';
 import SelectSetting from '../helpers/SelectSetting';
 import { SelectDialogChildren } from '../SelectDialogWrapper';
 import { Route, Icons } from './enums';
+import OTA from './OTA';
 
 const FadeOptions = [0, 250, 500, 1000];
 const CrossFadeOptions = [0, 2500, 5000, 7500, 12000];
@@ -304,6 +305,7 @@ export const Home = ({
           }
           settingCategory="DeveloperSettings"
         />
+        <OTA />
       </List.Section>
     </ScrollView>
   );
