@@ -219,6 +219,8 @@
     "suggestedSkipLongVideoDesc": "Skip > 10 min videos when in playing suggested mode."
   },
   "DeveloperSettings": {
+    "OTAUName": "OTA Update",
+    "OTAUDesc": "OTA update (do not touch)",
     "LogName": "Show logs",
     "LogDesc": "Show the current logs.",
     "LogLevelName": "Log Level",

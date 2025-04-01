@@ -19,6 +19,7 @@ import ytbPlaylistFetch from './mediafetch/ytbPlaylist';
 import ytbMixlistFetch from './mediafetch/ytbmixlist';
 import ytbLiveFetch from './mediafetch/ytbLive';
 import ytbChannelFetch from './mediafetch/ytbChannel.ytbi';
+import ytbChannelLiveFetch from './mediafetch/ytbChannelLive.ytbi';
 import { fetchInnerTuneSearch } from './mediafetch/ytbSearch.muse';
 import {
   fetchYtbiSearch,
@@ -169,6 +170,10 @@ const reExtractionsShortURL: ReExtraction<string>[] = [
 const reExtractions: ReExtraction<NoxNetwork.NoxRegexFetch>[] = [
   { match: biliListFetch.regexSearchMatch, fetch: biliListFetch.regexFetch },
   { match: acfunFetch.regexSearchMatch, fetch: acfunFetch.regexFetch },
+  {
+    match: ytbChannelLiveFetch.regexSearchMatch,
+    fetch: ytbChannelLiveFetch.regexFetch,
+  },
   {
     match: ytbChannelFetch.regexSearchMatch,
     fetch: ytbChannelFetch.regexFetch,

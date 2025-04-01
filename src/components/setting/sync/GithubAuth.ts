@@ -31,7 +31,7 @@ export const getAuth = async (
   if (accessToken) {
     logger.debug('github login successful');
     authToken = accessToken;
-    callback();
+    await callback();
   } else {
     errorHandling('no response url returned. auth aborted by user.');
   }
@@ -46,7 +46,7 @@ export const login = async (
       logger.debug('Github token expired, need to log in');
       await getAuth(callback, errorCallback);
     } else {
-      callback();
+      await callback();
     }
     return true;
   } catch (e) {

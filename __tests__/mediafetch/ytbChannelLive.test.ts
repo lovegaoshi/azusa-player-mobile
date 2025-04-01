@@ -1,12 +1,12 @@
 // GMHikaru
-import fetcher from '../../src/utils/mediafetch/ytbChannel.ytbi';
+import fetcher from '../../src/utils/mediafetch/ytbChannelLive.ytbi';
 test('YT channel', async () => {
   // HACK: due to yti limiatations this only gets up to 30 videos
   const result = await fetcher.regexFetch({
     reExtracted: fetcher.regexSearchMatch.exec(
-      'https://www.youtube.com/c/@MioriCelesta',
+      'https://www.youtube.com/@MioriCelesta/streams',
     )!,
   });
-  // console.log(result.songList.length);
+  console.log(result.songList.length);
   expect(result.songList[0]?.id).not.toBeUndefined();
 });

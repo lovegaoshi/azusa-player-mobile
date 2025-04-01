@@ -14,6 +14,7 @@ import com.facebook.soloader.SoLoader
 import expo.modules.ApplicationLifecycleDispatcher.onApplicationCreate
 import expo.modules.ApplicationLifecycleDispatcher.onConfigurationChanged
 import expo.modules.ReactNativeHostWrapper
+import com.otahotupdate.OtaHotUpdate
 
 class MainApplication : Application(), ReactApplication {
     override val reactNativeHost: ReactNativeHost =
@@ -28,6 +29,9 @@ class MainApplication : Application(), ReactApplication {
                 }
 
             override fun getJSMainModuleName(): String = "index"
+            override fun getJSBundleFile(): String? {
+                return OtaHotUpdate.bundleJS(this@MainApplication)
+            }
             override fun getUseDeveloperSupport(): Boolean = BuildConfig.DEBUG
             override val isNewArchEnabled: Boolean = BuildConfig.IS_NEW_ARCHITECTURE_ENABLED
             override val isHermesEnabled: Boolean = BuildConfig.IS_HERMES_ENABLED

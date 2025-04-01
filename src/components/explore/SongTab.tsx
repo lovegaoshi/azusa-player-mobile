@@ -8,7 +8,7 @@ import {
   StyleSheet,
 } from 'react-native';
 import { Text } from 'react-native-paper';
-import { Image } from 'expo-image';
+import Image from 'react-native-turbo-image';
 import { useTranslation } from 'react-i18next';
 
 import { chunkArray } from '@utils/Utils';
@@ -69,7 +69,12 @@ export const BiliSongCard = ({
                 }).then(() => setTimeout(scroll, 500));
               }}
             >
-              <Image style={style.cardThumbnail} source={{ uri: item.cover }} />
+              <Image
+                style={style.cardThumbnail}
+                source={{ uri: item.cover }}
+                resizeMode={'cover'}
+                resize={70}
+              />
               <View style={styles.flex}>
                 <Text
                   style={{
@@ -135,7 +140,7 @@ export const BiliSongsArrayTabCard = ({
   title: string;
 }) => {
   if (songs.length === 0) {
-    return;
+    return <></>;
   }
 
   const splicedSongs: NoxMedia.Song[][] = chunkArray(songs, 4);
