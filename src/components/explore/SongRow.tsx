@@ -1,5 +1,11 @@
 import * as React from 'react';
-import { View, Dimensions, FlatList, TouchableOpacity } from 'react-native';
+import {
+  View,
+  Dimensions,
+  FlatList,
+  TouchableOpacity,
+  StyleSheet,
+} from 'react-native';
 import { Text } from 'react-native-paper';
 import Image from 'react-native-turbo-image';
 
@@ -8,7 +14,7 @@ import usePlayback from '@hooks/usePlayback';
 import { NoxRoutes } from '@enums/Routes';
 import { BiliSongCardProp } from './SongTab';
 import useNavigation from '@hooks/useNavigation';
-import { YTSongRowProp } from './types';
+import { YTSongRowCard, YTSongRowProp } from './types';
 
 export const BiliSongRow = ({
   songs = [],
@@ -40,7 +46,7 @@ export const BiliSongRow = ({
         data={songs}
         horizontal
         renderItem={({ item }) => (
-          <View style={{ paddingHorizontal: 5, flex: 1 }}>
+          <View style={styles.albumContainer}>
             <TouchableOpacity
               onPress={() => {
                 navigationGlobal.navigate({
@@ -54,12 +60,12 @@ export const BiliSongRow = ({
               }}
             >
               <Image
-                style={{ width: 140, height: 140, borderRadius: 5 }}
+                style={styles.albumImage}
                 source={{ uri: item.cover }}
                 resizeMode={'cover'}
                 resize={140}
               />
-              <View style={{ flex: 1 }}>
+              <View style={styles.flex}>
                 <Text
                   style={{
                     color: fontColor,
@@ -102,6 +108,21 @@ export const YTSongRow = ({ songs = [], title }: YTSongRowProp) => {
   const { playAsSearchList } = usePlayback();
 
   const fontColor = playerStyle.colors.primary;
+  const onPress = async (item: YTSongRowCard) => {
+    navigationGlobal.navigate({
+      route: NoxRoutes.PlayerHome,
+      options: { screen: NoxRoutes.Playlist },
+    });
+    progressEmitter(100);
+    const playlist = await item.getPlaylist();
+    playAsSearchList({
+      songs: playlist.songs,
+      song: playlist.item,
+    }).then(() => {
+      progressEmitter(0);
+      setTimeout(scroll, 500);
+    });
+  };
 
   return (
     <View
@@ -121,27 +142,12 @@ export const YTSongRow = ({ songs = [], title }: YTSongRowProp) => {
         data={songs}
         horizontal
         renderItem={({ item }) => (
-          <View style={{ paddingHorizontal: 5, flex: 1 }}>
-            <TouchableOpacity
-              onPress={async () => {
-                navigationGlobal.navigate({
-                  route: NoxRoutes.PlayerHome,
-                  options: { screen: NoxRoutes.Playlist },
-                });
-                progressEmitter(100);
-                const playlist = await item.getPlaylist();
-                playAsSearchList({
-                  songs: playlist.songs,
-                  song: playlist.item,
-                }).then(() => {
-                  progressEmitter(0);
-                  setTimeout(scroll, 500);
-                });
-              }}
-            >
+          <View style={styles.albumContainer}>
+            <TouchableOpacity onPress={() => onPress(item)}>
               <Image
-                style={{ width: 140, height: 140, borderRadius: 5 }}
+                style={styles.albumImage}
                 source={{ uri: item.cover }}
+                resize={140}
               />
               <View style={{ flex: 1 }}>
                 <Text
@@ -176,3 +182,9 @@ export const YTSongRow = ({ songs = [], title }: YTSongRowProp) => {
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  flex: { flex: 1 },
+  albumImage: { width: 140, height: 140, borderRadius: 5 },
+  albumContainer: { paddingHorizontal: 5, flex: 1 },
+});
