@@ -6639,6 +6639,7 @@ __metadata:
     react-native-svga-player: "https://lovegaoshi@github.com/lovegaoshi/react-native-svga-player.git#commit=f8c6303fddb528a1a94d2ab4696c9318c0002cfd"
     react-native-text-ticker: "https://lovegaoshi@github.com/lovegaoshi/react-native-text-ticker.git#commit=78a79c9a5f3b70e15d6de6db14d0516a56ae5d40"
     react-native-track-player: "https://github.com/lovegaoshi/react-native-track-player.git#commit=092f1115fbbe49165e2b575cb24dd0fb688151a4"
+    react-native-turbo-image: "npm:^1.22.1"
     react-native-url-polyfill: "npm:^2.0.0"
     react-native-vector-icons: "npm:^10.2.0"
     react-native-video: "npm:^6.11.0"
@@ -16578,6 +16579,16 @@ __metadata:
     shaka-player:
       optional: true
   checksum: 10c0/d6d6277c4e6748a58b75e3e687d5b16ed4afa5ca73631d151630db421cf0d3c63a2394dabec12e5dff30866c752729b16207a5782df63b0fdfe34696c591a41f
+  languageName: node
+  linkType: hard
+
+"react-native-turbo-image@npm:^1.22.1":
+  version: 1.22.1
+  resolution: "react-native-turbo-image@npm:1.22.1"
+  peerDependencies:
+    react: "*"
+    react-native: "*"
+  checksum: 10c0/85780b2685384017770a8ef0c1d44e2d52db18513eb281bc832ea3772abd257593fa21d1b6188741535bdb9de944cdd22292c3469ae4e81c714f7eaa4522e26b
   languageName: node
   linkType: hard
 

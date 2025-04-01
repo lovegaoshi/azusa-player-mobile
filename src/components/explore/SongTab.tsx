@@ -8,7 +8,7 @@ import {
   StyleSheet,
 } from 'react-native';
 import { Text } from 'react-native-paper';
-import { Image } from 'expo-image';
+import Image from 'react-native-turbo-image';
 import { useTranslation } from 'react-i18next';
 
 import { chunkArray } from '@utils/Utils';
@@ -70,9 +70,10 @@ export const BiliSongCard = ({
               }}
             >
               <Image
-                cachePolicy="none"
                 style={style.cardThumbnail}
                 source={{ uri: item.cover }}
+                resizeMode={'cover'}
+                resize={70}
               />
               <View style={styles.flex}>
                 <Text

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { View, Dimensions, FlatList, TouchableOpacity } from 'react-native';
 import { Text } from 'react-native-paper';
-import { Image } from 'expo-image';
+import Image from 'react-native-turbo-image';
 
 import { useNoxSetting } from '@stores/useApp';
 import usePlayback from '@hooks/usePlayback';
@@ -56,6 +56,8 @@ export const BiliSongRow = ({
               <Image
                 style={{ width: 140, height: 140, borderRadius: 5 }}
                 source={{ uri: item.cover }}
+                resizeMode={'cover'}
+                resize={140}
               />
               <View style={{ flex: 1 }}>
                 <Text
@@ -138,7 +140,6 @@ export const YTSongRow = ({ songs = [], title }: YTSongRowProp) => {
               }}
             >
               <Image
-                cachePolicy="none"
                 style={{ width: 140, height: 140, borderRadius: 5 }}
                 source={{ uri: item.cover }}
               />
