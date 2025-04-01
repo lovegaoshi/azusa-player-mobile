@@ -26,8 +26,9 @@
     "dep": "yarn upgrade-interactive && yarn postinstall",
     "release": "git switch master && git pull && python release_bump.py",
     "postinstall": "patch-package",
-    "export-android": "mkdir -p bundles/android && react-native bundle --platform android --dev false --entry-file index.js --bundle-output bundles/android/index.android.bundle --assets-dest bundles/android",
-    "export-ios": "mkdir -p bundles/ios && react-native bundle --platform ios --dev false --entry-file index.js --bundle-output bundles/ios/main.jsbundle --assets-dest bundles/ios"
+    "export-android": "mkdir -p android/output && react-native bundle --platform android --dev false --entry-file index.js --bundle-output android/output/index.android.bundle --assets-dest android/output --sourcemap-output android/sourcemap.js && cd android && find output -type f | zip index.android.bundle.zip -@ && cd .. && rm -rf android/output && rm -rf android/sourcemap.js",
+    "export-ios": "mkdir -p ios/output && react-native bundle --platform ios --dev false --entry-file index.js --bundle-output ios/output/main.jsbundle --assets-dest ios/output --sourcemap-output ios/sourcemap.js && cd ios && find output -type f | zip main.jsbundle.zip -@ && cd .. && rm -rf ios/output && rm -rf ios/sourcemap.js",
+    "ota": "yarn export-android; yarn export-ios; mkdir -p bundles; mv android/index.android.bundle.zip bundles; mv ios/main.jsbundle.zip bundles"
   },
   "dependencies": {
     "@material/material-color-utilities": "^0.3.0",
