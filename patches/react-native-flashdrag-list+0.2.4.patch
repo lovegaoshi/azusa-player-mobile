@@ -90,7 +90,7 @@ index 5dc1689..eae0179 100644
      activeIndex.value = index;
      setActiveIndexState(index);
      setActive(true);
-+    zoomOnActive.value = withTiming(1.1);
++    // zoomOnActive.value = withTiming(1.1);
    }, []);
  
    useEffect(() => {
