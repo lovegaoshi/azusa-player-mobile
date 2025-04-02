@@ -14,7 +14,7 @@ import SongMenu from './SongMenu';
 import PlaylistInfo from '../Info/PlaylistInfo';
 import PlaylistMenuButton from '../Menu/PlaylistMenuButton';
 import usePlaylist from '../usePlaylistRN';
-import SongListScrollbar from './SongListScrollbar.new';
+import SongListScrollbar from './SongListScrollbar';
 import keepAwake from '@utils/keepAwake';
 
 export default () => {
