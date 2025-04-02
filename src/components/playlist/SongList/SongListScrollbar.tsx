@@ -73,7 +73,7 @@ export default function CustomScrollView({
   };
 
   const scrollDragGesture = Gesture.Pan()
-    .onBegin(e => runOnJS(resetHideTimeout)())
+    .onBegin(() => runOnJS(resetHideTimeout)())
     .onChange(e => {
       const scrollToPercent =
         (e.y - getBarHeight() / 2) / scrollViewHeight.value +
