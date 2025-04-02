@@ -20,11 +20,13 @@ export default () => {
           name={NoxRoutes.Playlist}
           component={Playlist}
           options={screenOptions}
+          getId={() => NoxRoutes.Playlist}
         />
         <Stack.Screen
           name={NoxRoutes.Artist}
           component={Artist}
           options={{ ...screenOptions, freezeOnBlur: true }}
+          getId={() => NoxRoutes.Artist}
         />
       </Stack.Navigator>
     </FlexView>
