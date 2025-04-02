@@ -8,6 +8,7 @@ import Animated, {
   useAnimatedStyle,
   Easing,
   runOnJS,
+  useDerivedValue,
 } from 'react-native-reanimated';
 
 const SCROLLBAR_HIDE_TIMEOUT = 3000;
@@ -33,15 +34,8 @@ export default function CustomScrollView({
   const scrollBarStartPosY = useRef(0);
   const scrollTimeoutId = useRef<NodeJS.Timeout>();
   const scrollIndicatorFromTopPos = useSharedValue(0);
-  const scrollIndicatorHeight = useSharedValue(0);
   const scrollIndicatorOpacity = useSharedValue(1);
-
-  const scrollTimingAnimConfig = {
-    duration: SCROLLBAR_ANIM_TIME,
-    easing: Easing.linear,
-  };
-
-  const calculateScrollBarIndicatorHeight = () => {
+  const scrollIndicatorHeight = useDerivedValue(() => {
     if (
       scrollViewHeight > 0 &&
       contentViewHeight > 0 &&
@@ -53,6 +47,11 @@ export default function CustomScrollView({
     } else {
       return 0;
     }
+  });
+
+  const scrollTimingAnimConfig = {
+    duration: SCROLLBAR_ANIM_TIME,
+    easing: Easing.linear,
   };
 
   const calculateScrollBarIndicatorPosition = (maxScrollFromTop: number) => {
@@ -76,11 +75,10 @@ export default function CustomScrollView({
   };
 
   useEffect(() => {
-    const scrollBarIndicatorHeight = calculateScrollBarIndicatorHeight();
+    const scrollBarIndicatorHeight = scrollIndicatorHeight.value;
     const maxScrollFromTop = scrollViewHeight - scrollBarIndicatorHeight;
     const scrollBarIndicatorPosition =
       calculateScrollBarIndicatorPosition(maxScrollFromTop);
-    scrollIndicatorHeight.value = scrollBarIndicatorHeight;
     scrollIndicatorFromTopPos.value = scrollBarIndicatorPosition;
     resetHideTimeout(SCROLLBAR_HIDE_TIMEOUT);
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -102,8 +100,7 @@ export default function CustomScrollView({
   };
 
   const scrollByTranslationY = (translationY: number) => {
-    const scrollBarIndicatorHeight = calculateScrollBarIndicatorHeight();
-    const maxScrollFromTop = scrollViewHeight - scrollBarIndicatorHeight;
+    const maxScrollFromTop = scrollViewHeight - scrollIndicatorHeight.value;
     const scrollPosition =
       (contentViewHeight - scrollViewHeight) *
         (translationY / maxScrollFromTop) +
@@ -151,7 +148,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     right: -19,
     backgroundColor: 'rgba(200, 200, 200, 0.45)',
-    width: 25,
+    width: 75,
     borderRadius: 0,
     zIndex: 10,
   },
