@@ -76,7 +76,7 @@ const NoxAndroidBottomTab = ({ navigation }: NoxComponent.NavigationProps2) => {
           onPress={() =>
             navigationG.navigate({
               route: NoxRoutes.PlayerHome,
-              options: { screen: NoxRoutes.Playlist },
+              params: { screen: NoxRoutes.Playlist },
             })
           }
         />

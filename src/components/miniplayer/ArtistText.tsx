@@ -28,7 +28,7 @@ export default ({ track, style }: Props) => {
           miniPlayerCollapse();
           return navigationG.navigate({
             route: NoxRoutes.PlayerHome,
-            options: { screen: NoxRoutes.Artist },
+            params: { screen: NoxRoutes.Artist },
           });
         }
         setSnack({

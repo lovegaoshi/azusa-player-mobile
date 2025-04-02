@@ -26,7 +26,7 @@ export default () => {
   const { explorePage, setExplorePage } = useAPM();
 
   return (
-    <FlexView>
+    <FlexView noFlex>
       <SiteSelector
         containerStyle={{
           backgroundColor: playerStyle.customColors.maskedBackgroundColor,

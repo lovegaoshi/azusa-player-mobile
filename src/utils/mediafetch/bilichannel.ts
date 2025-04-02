@@ -103,7 +103,6 @@ export default {
   regexSearchMatch: /space.bilibili\.com\/(\d+)(\/search)?\/video/,
   // https://space.bilibili.com/1112031857/upload/video
   regexSearchMatch2: /space.bilibili\.com\/(\d+)(\/upload)?\/video/,
-  regexSearchMatch3: /space.bilibili\.com\/(\d+)$/,
   regexFetch,
   regexResolveURLMatch: /^null-/,
   resolveURL,

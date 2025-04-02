@@ -67,6 +67,8 @@ jobs:
           echo "APPSTORE=true" >> .env
           echo "TRACKING=true" >> .env
           echo "${{ secrets.SENTRY_PROPERTIES }}" > ./android/sentry.properties
+          # enables OTA hot update
+          python scripts/hashyarnlock.py
 
       - name: alias yarn.cmd to yarn
         run: alias yarn.cmd="yarn"

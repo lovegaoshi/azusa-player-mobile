@@ -53,5 +53,6 @@ export default async (mid: string): Promise<ArtistFetch> => {
     aboutString: await getBiliNotice(mid),
     albums: [{ data: await getListAsYTSongRowCard(mid) }],
     subscribers: nFormatter(userInfo?.card?.fans ?? 0),
+    playURL: `https://space.bilibili.com/${mid}/upload/video`,
   };
 };
