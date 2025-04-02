@@ -120,7 +120,9 @@ export default ({ navigation }: NoxComponent.StackNavigationProps) => {
         <IconButton
           iconColor={playerStyle.colors.primary}
           icon={'arrow-left'}
-          onPress={() => navigation.navigate(NoxRoutes.Playlist)}
+          onPress={() =>
+            navigation.navigate(NoxRoutes.Playlist, undefined, { pop: true })
+          }
           size={30}
         />
         <Animated.View

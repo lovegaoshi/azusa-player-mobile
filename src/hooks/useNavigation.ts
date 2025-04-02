@@ -7,16 +7,22 @@ import { IconMap } from '@enums/BottomTab';
 interface NavigateProps {
   route: NoxRoutes;
   setIcon?: boolean;
-  options?: any;
+  options?: { merge?: boolean; pop?: boolean };
+  params?: any;
 }
 
 export default () => {
   const navigationGlobal = useNavigation();
   const setRoute = useNoxMobile(state => state.setBottomTabRoute);
 
-  const navigate = ({ route, setIcon = true, options }: NavigateProps) => {
+  const navigate = ({
+    route,
+    setIcon = true,
+    options = { pop: true },
+    params,
+  }: NavigateProps) => {
     // @ts-expect-error nav v7 hasnt fixed this type yet
-    navigationGlobal.navigate(route as never, options);
+    navigationGlobal.navigate(route as never, params, options);
     if (setIcon) {
       setRoute(IconMap[route]);
     }
