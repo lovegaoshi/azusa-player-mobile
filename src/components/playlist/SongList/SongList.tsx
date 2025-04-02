@@ -144,9 +144,14 @@ export default () => {
           onContentSizeChange={(_, contentHeight) => {
             setContentViewHeight(contentHeight);
           }}
-          onScroll={({ nativeEvent: { contentOffset, contentSize } }) => {
+          onScroll={({
+            nativeEvent: { contentOffset, contentSize, layoutMeasurement },
+          }) => {
             setScrollPositionY(contentOffset.y);
             setContentViewHeight(contentSize.height);
+            console.log(
+              contentOffset.y / (contentSize.height - layoutMeasurement.height),
+            );
           }}
         />
         <SongMenu
