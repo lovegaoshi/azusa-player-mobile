@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next';
 import { useStore } from 'zustand';
 
 // eslint-disable-next-line import/no-unresolved
-import { APPSTORE } from '@env';
+import { APPSTORE, LOCKHASH } from '@env';
 import { useNoxSetting } from '@stores/useApp';
 import { logStore, LOGLEVEL } from '@utils/Logger';
 import { RenderSetting } from '../helpers/RenderSetting';
@@ -305,7 +305,7 @@ export const Home = ({
           }
           settingCategory="DeveloperSettings"
         />
-        <OTA />
+        {LOCKHASH && <OTA />}
       </List.Section>
     </ScrollView>
   );
