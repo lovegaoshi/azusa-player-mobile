@@ -1,5 +1,5 @@
 import { FlashList } from '@shopify/flash-list';
-import { RefObject, useEffect, useRef } from 'react';
+import { RefObject, useRef } from 'react';
 import { View, StyleSheet, StyleProp, ViewStyle } from 'react-native';
 import { GestureDetector, Gesture } from 'react-native-gesture-handler';
 import Animated, {
@@ -8,7 +8,6 @@ import Animated, {
   useAnimatedStyle,
   Easing,
   runOnJS,
-  useDerivedValue,
   SharedValue,
   interpolate,
   Extrapolation,
@@ -25,6 +24,7 @@ interface Props {
   scrollViewHeight: SharedValue<number>;
   scrollBarPosition: SharedValue<number>;
   barHeight?: number;
+  contentHeight: SharedValue<number>;
 }
 
 export default function CustomScrollView({
@@ -34,10 +34,9 @@ export default function CustomScrollView({
   scrollViewHeight,
   scrollBarPosition,
   barHeight = 0.2,
+  contentHeight,
 }: Props) {
-  const scrollBarStartPosY = useRef(0);
   const scrollTimeoutId = useRef<NodeJS.Timeout>();
-  const scrollIndicatorFromTopPos = useSharedValue(0);
   const scrollIndicatorOpacity = useSharedValue(0);
   const getBarHeight = () => {
     'worklet';
@@ -66,16 +65,20 @@ export default function CustomScrollView({
     () => runOnJS(resetHideTimeout)(),
   );
 
-  const scrollByTranslationY = (translationY: number) => {
-    console.log(translationY);
+  const scrollByTranslationY = (scrollToPercent: number) => {
+    scrollViewReference.current?.scrollToOffset({
+      offset: contentHeight.value * scrollToPercent,
+      animated: false,
+    });
   };
 
   const scrollDragGesture = Gesture.Pan()
-    .onBegin(() => {
-      scrollBarPosition.value = 0;
-    })
+    .onBegin(e => runOnJS(resetHideTimeout)())
     .onChange(e => {
-      runOnJS(scrollByTranslationY)(e.translationY);
+      const scrollToPercent =
+        (e.y - getBarHeight() / 2) / scrollViewHeight.value +
+        scrollBarPosition.value;
+      runOnJS(scrollByTranslationY)(scrollToPercent);
     });
 
   const scrollBarDynamicStyle = useAnimatedStyle(() => {
@@ -109,7 +112,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     right: -19,
     backgroundColor: 'rgba(200, 200, 200, 0.45)',
-    width: 75,
+    width: 25,
     borderRadius: 0,
     zIndex: 10,
   },

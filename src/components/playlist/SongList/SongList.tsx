@@ -43,6 +43,7 @@ export default () => {
   const netInfo = useNetInfo();
   const scrollViewHeight = useSharedValue(0);
   const scrollBarPosition = useSharedValue(0);
+  const contentHeight = useSharedValue(0);
 
   useEffect(
     () => scrollTo({ toIndex: -1, reset: true }),
@@ -106,6 +107,7 @@ export default () => {
         scrollViewReference={playlistRef}
         scrollBarPosition={scrollBarPosition}
         scrollViewHeight={scrollViewHeight}
+        contentHeight={contentHeight}
       >
         <FlashList
           ref={playlistRef}
@@ -136,9 +138,10 @@ export default () => {
           onScroll={({
             nativeEvent: { contentOffset, contentSize, layoutMeasurement },
           }) => {
-            scrollBarPosition.value =
-              contentOffset.y / (contentSize.height - layoutMeasurement.height);
+            const contentH = contentSize.height - layoutMeasurement.height;
+            scrollBarPosition.value = contentOffset.y / contentH;
             scrollViewHeight.value = layoutMeasurement.height;
+            contentHeight.value = contentH;
           }}
         />
         <SongMenu
