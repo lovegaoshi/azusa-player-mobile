@@ -7,13 +7,11 @@ def file_ends_in_newline(file_path):
     return '\n'
 
 if __name__ == '__main__':
-    lockhash = hashlib.md5(open('yarn.lock','rb').read()).hexdigest()
+    lockhash = hashlib.md5(
+      open('yarn.lock','rb').read(), usedforsecurity=False).hexdigest()
     import os
     os.makedirs('bundles', exist_ok=True)
     with open('./bundles/yarn.hash','a') as f: 
         f.write(lockhash)
-    try:
-        with open('.env','a') as f:
-            f.write(f'{file_ends_in_newline(".env")}LOCKHASH={lockhash}')
-    except:
-        raise
+    with open('.env','a') as f:
+        f.write(f'{file_ends_in_newline(".env")}LOCKHASH={lockhash}')
