@@ -2,6 +2,7 @@ package com.noxplay.noxplayer
 
 import android.app.Application
 import android.content.res.Configuration
+import android.util.Log
 import com.facebook.react.PackageList
 import com.facebook.react.ReactApplication
 import com.facebook.react.ReactHost
@@ -30,6 +31,16 @@ class MainApplication : Application(), ReactApplication {
 
             override fun getJSMainModuleName(): String = "index"
             override fun getJSBundleFile(): String? {
+                val sharedPref = this@MainApplication.getSharedPreferences(
+                    "com.noxplay.noxplayer.APMSettings", MODE_PRIVATE)
+                if (sharedPref.getBoolean("safemode", false)) {
+                    Log.d("APM", "launching in safe mode")
+                    with (sharedPref.edit()) {
+                        putBoolean("safemode", false)
+                        apply()
+                    }
+                    return "assets://index.android.bundle"
+                }
                 return OtaHotUpdate.bundleJS(this@MainApplication)
             }
             override fun getUseDeveloperSupport(): Boolean = BuildConfig.DEBUG

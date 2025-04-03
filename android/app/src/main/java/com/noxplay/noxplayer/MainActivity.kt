@@ -102,6 +102,14 @@ class MainActivity(override var loadedRN: Boolean = false) :
             val launchOptions = super.getLaunchOptions() ?: Bundle()
             launchOptions.putString("intentData", mActivity.intent.dataString)
             launchOptions.putString("intentAction", mActivity.intent.action ?: "")
+            if (mActivity.intent.dataString == "safemode") {
+                val sharedPref = mActivity.getSharedPreferences(
+                    "com.noxplay.noxplayer.APMSettings", MODE_PRIVATE)
+                with (sharedPref.edit()) {
+                    putBoolean("safemode", true)
+                    apply()
+                }
+            }
             // launchOptions.putBundle("intentBundle", mActivity.intent.extras ?: Bundle())
             return launchOptions
         }
