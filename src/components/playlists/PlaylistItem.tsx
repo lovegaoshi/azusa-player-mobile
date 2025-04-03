@@ -1,6 +1,6 @@
 import React, { ReactNode } from 'react';
 import { IconButton, Text } from 'react-native-paper';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, TouchableOpacity, View } from 'react-native';
 
 import { useNoxSetting } from '@stores/useApp';
 
@@ -25,19 +25,24 @@ interface PlaylistItemProps {
   icon?: ReactNode;
   confirmOnDelete?: (id: string) => void;
   leadColor?: string;
+  beginDrag?: () => void;
 }
 const PlaylistItem = ({
   item,
   icon,
   confirmOnDelete = () => undefined,
   leadColor,
+  beginDrag,
 }: PlaylistItemProps) => {
   const currentPlayingList = useNoxSetting(state => state.currentPlayingList);
 
   if (!item) return <></>;
   return (
     <View style={styles.playlistItemContainer}>
-      <View style={{ backgroundColor: leadColor, width: 15 }} />
+      <TouchableOpacity
+        style={{ backgroundColor: leadColor, width: 15 }}
+        onPressIn={beginDrag}
+      />
       <View style={styles.playlistItemTextContainer}>
         <Text
           variant="bodyLarge"

@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { View, BackHandler, StyleSheet } from 'react-native';
 import { FlashList } from '@shopify/flash-list';
 import { IconButton } from 'react-native-paper';
 import { useNetInfo } from '@react-native-community/netinfo';
 import { useFocusEffect } from '@react-navigation/native';
+import { useSharedValue } from 'react-native-reanimated';
 
 import { styles } from '@components/style';
 import SongInfo from './SongInfo';
@@ -40,9 +41,9 @@ export default () => {
     playlistRef,
   } = usedPlaylist;
   const netInfo = useNetInfo();
-  const [scrollViewHeight, setScrollViewHeight] = useState(0);
-  const [contentViewHeight, setContentViewHeight] = useState(0);
-  const [scrollPositionY, setScrollPositionY] = useState(0);
+  const scrollViewHeight = useSharedValue(0);
+  const scrollBarPosition = useSharedValue(0);
+  const contentHeight = useSharedValue(0);
 
   useEffect(
     () => scrollTo({ toIndex: -1, reset: true }),
@@ -104,9 +105,9 @@ export default () => {
       <SongListScrollbar
         style={stylesLocal.playlistContainer}
         scrollViewReference={playlistRef}
+        scrollBarPosition={scrollBarPosition}
         scrollViewHeight={scrollViewHeight}
-        contentViewHeight={contentViewHeight}
-        scrollPositionY={scrollPositionY}
+        contentHeight={contentHeight}
       >
         <FlashList
           ref={playlistRef}
@@ -134,19 +135,16 @@ export default () => {
           onRefresh={() => keepAwake(refreshPlaylist)}
           refreshing={refreshing}
           showsVerticalScrollIndicator={false}
-          onLayout={({
-            nativeEvent: {
-              layout: { height },
-            },
+          onScroll={({
+            nativeEvent: { contentOffset, contentSize, layoutMeasurement },
           }) => {
-            setScrollViewHeight(height);
-          }}
-          onContentSizeChange={(_, contentHeight) => {
-            setContentViewHeight(contentHeight);
-          }}
-          onScroll={({ nativeEvent: { contentOffset, contentSize } }) => {
-            setScrollPositionY(contentOffset.y);
-            setContentViewHeight(contentSize.height);
+            const contentH = Math.min(
+              1,
+              contentSize.height - layoutMeasurement.height,
+            );
+            scrollBarPosition.value = contentOffset.y / contentH;
+            scrollViewHeight.value = layoutMeasurement.height;
+            contentHeight.value = contentH;
           }}
         />
         <SongMenu

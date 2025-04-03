@@ -1,5 +1,5 @@
 import { get_song } from 'libmuse';
-import _ from 'lodash';
+import last from 'lodash/last';
 
 import SongTS from '@objects/Song';
 import { Source } from '@enums/MediaFetch';
@@ -44,7 +44,7 @@ export const fetchAudioInfo = async (sid: string) => {
       nameRaw: videoDetails.title,
       singer: videoDetails.author,
       singerId: videoDetails.channelId,
-      cover: _.last(videoDetails.thumbnail.thumbnails)!.url,
+      cover: last(videoDetails.thumbnail.thumbnails)!.url,
       lyric: '',
       page: 1,
       duration:

@@ -1,7 +1,7 @@
 import { View, ScrollView } from 'react-native';
 import { ActivityIndicator, Button } from 'react-native-paper';
 import React, { useEffect, useState } from 'react';
-import _ from 'lodash';
+import isArray from 'lodash/isArray';
 import {
   MixedContent,
   ParsedPlaylist,
@@ -28,7 +28,7 @@ interface ContentProps {
 }
 
 export const YTMixedContent = ({ content }: ContentProps) => {
-  if (!_.isArray(content.contents)) {
+  if (!isArray(content.contents)) {
     return <></>;
   }
   const filteredContent = content.contents.filter(v => v);

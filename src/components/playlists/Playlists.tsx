@@ -106,6 +106,7 @@ export default () => {
         ]}
       >
         <PlaylistItem
+          beginDrag={beginDrag}
           item={playlist}
           confirmOnDelete={confirmOnDelete}
           leadColor={

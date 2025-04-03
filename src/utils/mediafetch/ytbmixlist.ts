@@ -1,4 +1,4 @@
-import _ from 'lodash';
+import last from 'lodash/last';
 
 import SongTS from '@objects/Song';
 import { timestampToSeconds } from '../Utils';
@@ -35,7 +35,7 @@ const fetchYTPlaylist = async (
           singerId:
             val.playlistPanelVideoRenderer.shortBylineText.runs[0]
               .navigationEndpoint.browseEndpoint.browseId,
-          cover: _.last(
+          cover: last(
             val.playlistPanelVideoRenderer.thumbnail.thumbnails as any[],
           ).url,
           lyric: '',
@@ -66,7 +66,7 @@ const regexFetch = async ({
   return {
     songList,
     refresh,
-    refreshToken: [_.last(songList)!.bvid, songList[0].bvid],
+    refreshToken: [last(songList)!.bvid, songList[0].bvid],
   };
 };
 
@@ -78,14 +78,14 @@ const refresh = async (v: NoxMedia.Playlist) => {
       v.songList.map(s => s.bvid),
       v.refreshToken[1],
     );
-    results.refreshToken = [_.last(results.songList)!.bvid, v.refreshToken[1]];
+    results.refreshToken = [last(results.songList)!.bvid, v.refreshToken[1]];
   } else {
     results.songList = await fetchYTPlaylist(
-      _.last(v.songList)!.bvid,
+      last(v.songList)!.bvid,
       v.songList.map(s => s.bvid),
       v.songList[0].bvid,
     );
-    results.refreshToken = [_.last(results.songList)!.bvid, v.songList[0].bvid];
+    results.refreshToken = [last(results.songList)!.bvid, v.songList[0].bvid];
   }
   return results;
 };
