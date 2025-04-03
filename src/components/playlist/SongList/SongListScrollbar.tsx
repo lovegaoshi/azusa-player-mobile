@@ -130,7 +130,7 @@ export default function CustomScrollView({
       0;
     return {
       height: legendHeight,
-      opacity: 1 ?? showLegend.value,
+      opacity: showLegend.value,
       right: legendBoxStyle?.width,
       /*
       // center it
