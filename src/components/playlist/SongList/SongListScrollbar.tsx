@@ -1,5 +1,4 @@
 import { FlashList } from '@shopify/flash-list';
-import clamp from 'lodash/clamp';
 import { RefObject, useRef } from 'react';
 import { View, StyleSheet, StyleProp, ViewStyle } from 'react-native';
 import { GestureDetector, Gesture } from 'react-native-gesture-handler';
@@ -13,6 +12,7 @@ import Animated, {
   interpolate,
   Extrapolation,
   useAnimatedReaction,
+  useDerivedValue,
 } from 'react-native-reanimated';
 
 const SCROLLBAR_HIDE_TIMEOUT = 3000;
@@ -23,9 +23,11 @@ interface Props {
   scrollViewReference: RefObject<FlashList<NoxMedia.Song>>;
   style?: StyleProp<ViewStyle>;
   scrollViewHeight: SharedValue<number>;
-  scrollBarPosition: SharedValue<number>;
+  scrollPosition: SharedValue<number>;
   barHeight?: number;
   contentHeight: SharedValue<number>;
+  scrollBarHideTimeout?: number;
+  scrollBarAnimTime?: number;
 }
 
 export default function CustomScrollView({
@@ -33,19 +35,29 @@ export default function CustomScrollView({
   scrollViewReference,
   style,
   scrollViewHeight,
-  scrollBarPosition,
+  scrollPosition,
   barHeight = 0.2,
   contentHeight,
+  scrollBarAnimTime = SCROLLBAR_ANIM_TIME,
+  scrollBarHideTimeout = SCROLLBAR_HIDE_TIMEOUT,
 }: Props) {
   const scrollTimeoutId = useRef<NodeJS.Timeout>();
   const scrollIndicatorOpacity = useSharedValue(0);
-  const getBarHeight = () => {
-    'worklet';
-    return barHeight > 1 ? barHeight : scrollViewHeight.value * barHeight;
-  };
+  const startScrollY = useSharedValue(0);
+  const barHeightP = useDerivedValue(() =>
+    barHeight > 1 ? barHeight : scrollViewHeight.value * barHeight,
+  );
+  const scrollBarY = useDerivedValue(() =>
+    interpolate(
+      scrollPosition.value,
+      [0, 1],
+      [0, scrollViewHeight.value - barHeightP.value],
+      Extrapolation.CLAMP,
+    ),
+  );
 
   const scrollTimingAnimConfig = {
-    duration: SCROLLBAR_ANIM_TIME,
+    duration: scrollBarAnimTime,
     easing: Easing.linear,
   };
 
@@ -55,45 +67,52 @@ export default function CustomScrollView({
     }, timeout);
   };
 
-  const resetHideTimeout = (timeout = SCROLLBAR_HIDE_TIMEOUT) => {
+  const resetHideTimeout = (timeout = scrollBarHideTimeout) => {
     scrollIndicatorOpacity.value = 1;
     clearTimeout(scrollTimeoutId.current);
     scrollTimeoutId.current = createScrollHideTimeout(timeout);
   };
 
   useAnimatedReaction(
-    () => scrollBarPosition.value,
+    () => scrollPosition.value,
     () => runOnJS(resetHideTimeout)(),
   );
 
-  const scrollByTranslationY = (scrollToPercent: number) => {
+  const scrollByTranslationY = (offset: number) => {
     scrollViewReference.current?.scrollToOffset({
-      offset: contentHeight.value * scrollToPercent,
+      offset,
       animated: false,
     });
   };
 
   const scrollDragGesture = Gesture.Pan()
-    .onBegin(() => runOnJS(resetHideTimeout)())
+    .onBegin(e => {
+      runOnJS(resetHideTimeout)();
+      console.log('start', e.y, scrollViewHeight.value, scrollPosition.value);
+      startScrollY.value = e.y + scrollBarY.value;
+    })
     .onChange(e => {
-      const scrollToPercent =
-        (e.y - getBarHeight() / 2) / scrollViewHeight.value +
-        scrollBarPosition.value;
-      const clampedScrollToPercent = clamp(scrollToPercent, 0, 1);
-      runOnJS(scrollByTranslationY)(clampedScrollToPercent);
+      // the actual thumb range is half bar size - height - half bar size
+      // and this gets intrapolated to 0 - 1 for scrollToPercent
+      const halfBar = barHeightP.value / 2;
+
+      const clampedScrollToPercent = interpolate(
+        startScrollY.value + e.translationY,
+        [halfBar, scrollViewHeight.value - halfBar],
+        [0, 1],
+        Extrapolation.CLAMP,
+      );
+      console.log(clampedScrollToPercent);
+      runOnJS(scrollByTranslationY)(
+        clampedScrollToPercent * contentHeight.value,
+      );
     });
 
   const scrollBarDynamicStyle = useAnimatedStyle(() => {
-    const barHeight = getBarHeight();
     return {
       opacity: withTiming(scrollIndicatorOpacity.value, scrollTimingAnimConfig),
-      height: barHeight,
-      top: interpolate(
-        scrollBarPosition.value,
-        [0, 1],
-        [0, scrollViewHeight.value - barHeight],
-        Extrapolation.CLAMP,
-      ),
+      height: barHeightP.value,
+      top: scrollBarY.value,
     };
   });
 
