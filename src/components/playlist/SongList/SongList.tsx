@@ -1,10 +1,14 @@
 import React, { useEffect } from 'react';
-import { View, BackHandler, StyleSheet } from 'react-native';
-import { FlashList } from '@shopify/flash-list';
+import { View, BackHandler, StyleSheet, NativeScrollEvent } from 'react-native';
+import { FlashList, FlashListProps } from '@shopify/flash-list';
 import { IconButton } from 'react-native-paper';
 import { useNetInfo } from '@react-native-community/netinfo';
 import { useFocusEffect } from '@react-navigation/native';
-import { useSharedValue } from 'react-native-reanimated';
+import Animated, {
+  AnimateProps,
+  useAnimatedScrollHandler,
+  useSharedValue,
+} from 'react-native-reanimated';
 
 import { styles } from '@components/style';
 import SongInfo from './SongInfo';
@@ -17,6 +21,10 @@ import usePlaylist from '../usePlaylistRN';
 import SongListScrollbar from './SongListScrollbar';
 import { LegendExample, ScrollProps } from './ScrollBarLegend';
 import keepAwake from '@utils/keepAwake';
+
+const AnimatedFlashList = Animated.createAnimatedComponent(
+  FlashList,
+) as React.ComponentClass<AnimateProps<FlashListProps<NoxMedia.Song>>, any>;
 
 export default () => {
   const currentPlayingId = useNoxSetting(state => state.currentPlayingId);
@@ -67,6 +75,17 @@ export default () => {
     playerStyle.colors.primaryContainer ??
     playerStyle.customColors.playlistDrawerBackgroundColor;
 
+  const scrollBarOnScroll = ({
+    contentOffset,
+    contentSize,
+    layoutMeasurement,
+  }: NativeScrollEvent) => {
+    const contentH = Math.max(1, contentSize.height - layoutMeasurement.height);
+    scrollPosition.value = contentOffset.y / contentH;
+    scrollViewHeight.value = layoutMeasurement.height;
+    contentHeight.value = contentH;
+  };
+
   const ScrollLegend = (p: ScrollProps) => (
     <LegendExample
       {...p}
@@ -75,7 +94,7 @@ export default () => {
       processData={(v: any) => v?.parsedName?.[0] ?? ''}
     />
   );
-
+  const scrollHandler = useAnimatedScrollHandler(scrollBarOnScroll);
   return (
     <View style={styles.flex}>
       <View style={[styles.topBarContainer, { top: 10 }]}>
@@ -122,7 +141,7 @@ export default () => {
         contentHeight={contentHeight}
         LegendContent={ScrollLegend}
       >
-        <FlashList
+        <AnimatedFlashList
           ref={playlistRef}
           data={rows}
           renderItem={({ item, index }) => (
@@ -154,17 +173,7 @@ export default () => {
           viewabilityConfig={{
             viewAreaCoveragePercentThreshold: 50,
           }}
-          onScroll={({
-            nativeEvent: { contentOffset, contentSize, layoutMeasurement },
-          }) => {
-            const contentH = Math.max(
-              1,
-              contentSize.height - layoutMeasurement.height,
-            );
-            scrollPosition.value = contentOffset.y / contentH;
-            scrollViewHeight.value = layoutMeasurement.height;
-            contentHeight.value = contentH;
-          }}
+          onScroll={scrollHandler}
         />
         <SongMenu
           usePlaylist={usedPlaylist}
