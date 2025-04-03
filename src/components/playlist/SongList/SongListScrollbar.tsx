@@ -22,7 +22,7 @@ interface Props {
   scrollViewReference: RefObject<FlashList<NoxMedia.Song>>;
   style?: StyleProp<ViewStyle>;
   scrollViewHeight: SharedValue<number>;
-  scrollBarPosition: SharedValue<number>;
+  scrollPosition: SharedValue<number>;
   barHeight?: number;
   contentHeight: SharedValue<number>;
 }
@@ -32,7 +32,7 @@ export default function CustomScrollView({
   scrollViewReference,
   style,
   scrollViewHeight,
-  scrollBarPosition,
+  scrollPosition,
   barHeight = 0.2,
   contentHeight,
 }: Props) {
@@ -62,7 +62,7 @@ export default function CustomScrollView({
   };
 
   useAnimatedReaction(
-    () => scrollBarPosition.value,
+    () => scrollPosition.value,
     () => runOnJS(resetHideTimeout)(),
   );
 
@@ -76,14 +76,9 @@ export default function CustomScrollView({
   const scrollDragGesture = Gesture.Pan()
     .onBegin(e => {
       runOnJS(resetHideTimeout)();
-      console.log(
-        'start',
-        e.y,
-        scrollViewHeight.value,
-        scrollBarPosition.value,
-      );
+      console.log('start', e.y, scrollViewHeight.value, scrollPosition.value);
       startScrollY.value = Math.min(
-        e.y + scrollViewHeight.value * scrollBarPosition.value,
+        e.y + scrollViewHeight.value * scrollPosition.value,
         scrollViewHeight.value,
       );
     })
@@ -109,7 +104,7 @@ export default function CustomScrollView({
       opacity: withTiming(scrollIndicatorOpacity.value, scrollTimingAnimConfig),
       height: barHeight,
       top: interpolate(
-        scrollBarPosition.value,
+        scrollPosition.value,
         [0, 1],
         [0, scrollViewHeight.value - barHeight],
         Extrapolation.CLAMP,

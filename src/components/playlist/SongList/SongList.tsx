@@ -42,7 +42,7 @@ export default () => {
   } = usedPlaylist;
   const netInfo = useNetInfo();
   const scrollViewHeight = useSharedValue(0);
-  const scrollBarPosition = useSharedValue(0);
+  const scrollPosition = useSharedValue(0);
   const contentHeight = useSharedValue(0);
 
   useEffect(
@@ -105,7 +105,7 @@ export default () => {
       <SongListScrollbar
         style={stylesLocal.playlistContainer}
         scrollViewReference={playlistRef}
-        scrollBarPosition={scrollBarPosition}
+        scrollPosition={scrollPosition}
         scrollViewHeight={scrollViewHeight}
         contentHeight={contentHeight}
       >
@@ -142,7 +142,7 @@ export default () => {
               1,
               contentSize.height - layoutMeasurement.height,
             );
-            scrollBarPosition.value = contentOffset.y / contentH;
+            scrollPosition.value = contentOffset.y / contentH;
             scrollViewHeight.value = layoutMeasurement.height;
             contentHeight.value = contentH;
           }}
