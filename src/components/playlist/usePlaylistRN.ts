@@ -1,9 +1,10 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import { FlashList } from '@shopify/flash-list';
 import { useTranslation } from 'react-i18next';
 import { useDebounce } from 'use-debounce';
 import { useNetInfo } from '@react-native-community/netinfo';
 import { activateKeepAwakeAsync, deactivateKeepAwake } from 'expo-keep-awake';
+import { useAnimatedRef } from 'react-native-reanimated';
 
 import { useNoxSetting } from '@stores/useApp';
 import { PlaylistTypes, SearchRegex } from '@enums/Playlist';
@@ -57,7 +58,7 @@ export default (playlist: NoxMedia.Playlist) => {
   const progressEmitter = useNoxSetting(
     state => state.searchBarProgressEmitter,
   );
-  const playlistRef = useRef<FlashList<NoxMedia.Song>>(null);
+  const playlistRef = useAnimatedRef<FlashList<NoxMedia.Song>>();
   const { playFromPlaylist } = usePlayback();
   const { performFade } = useTPControls();
 

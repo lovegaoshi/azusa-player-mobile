@@ -1,12 +1,7 @@
 import * as React from 'react';
 import { Image } from 'expo-image';
 import { View, SafeAreaView, LayoutAnimation } from 'react-native';
-import {
-  Text,
-  IconButton,
-  TouchableRipple,
-  RadioButton,
-} from 'react-native-paper';
+import { Text, IconButton, TouchableRipple } from 'react-native-paper';
 import { FlashList } from '@shopify/flash-list';
 
 import SkinSearchbar from './SkinSearchbar';
@@ -116,13 +111,6 @@ const SkinItem = ({
           </View>
         </View>
         <View style={styles.skinItemRightContainer}>
-          <View style={styles.radioButton}>
-            <RadioButton
-              value={themeID}
-              status={isSelected ? 'checked' : 'unchecked'}
-              onPress={selectTheme}
-            />
-          </View>
           <IconButton
             icon="trash-can"
             style={styles.deleteButton}

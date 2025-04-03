@@ -1,5 +1,5 @@
 import { FlashList } from '@shopify/flash-list';
-import { RefObject, useRef } from 'react';
+import { RefObject, useMemo, useRef } from 'react';
 import { View, StyleSheet, StyleProp, ViewStyle } from 'react-native';
 import { GestureDetector, Gesture } from 'react-native-gesture-handler';
 import Animated, {
@@ -90,30 +90,34 @@ export default function CustomScrollView({
     });
   };
 
-  const scrollDragGesture = Gesture.Pan()
-    .onBegin(e => {
-      runOnJS(resetHideTimeout)();
-      startScrollY.value = e.y + scrollBarY.value;
-      showLegend.value = 1;
-    })
-    .onChange(e => {
-      // the actual thumb range is half bar size - height - half bar size
-      // and this gets intrapolated to 0 - 1 for scrollToPercent
-      const halfBar = barHeightP.value / 2;
+  const scrollDragGesture = useMemo(
+    () =>
+      Gesture.Pan()
+        .onBegin(e => {
+          runOnJS(resetHideTimeout)();
+          startScrollY.value = e.y + scrollBarY.value;
+          showLegend.value = 1;
+        })
+        .onChange(e => {
+          // the actual thumb range is half bar size - height - half bar size
+          // and this gets intrapolated to 0 - 1 for scrollToPercent
+          const halfBar = barHeightP.value / 2;
 
-      const clampedScrollToPercent = interpolate(
-        startScrollY.value + e.translationY,
-        [halfBar, scrollViewHeight.value - halfBar],
-        [0, 1],
-        Extrapolation.CLAMP,
-      );
-      runOnJS(scrollByTranslationY)(
-        clampedScrollToPercent * contentHeight.value,
-      );
-    })
-    .onEnd(() => {
-      showLegend.value = 0;
-    });
+          const clampedScrollToPercent = interpolate(
+            startScrollY.value + e.translationY,
+            [halfBar, scrollViewHeight.value - halfBar],
+            [0, 1],
+            Extrapolation.CLAMP,
+          );
+          runOnJS(scrollByTranslationY)(
+            clampedScrollToPercent * contentHeight.value,
+          );
+        })
+        .onEnd(() => {
+          showLegend.value = 0;
+        }),
+    [],
+  );
 
   const scrollBarDynamicStyle = useAnimatedStyle(() => {
     return {
@@ -130,7 +134,7 @@ export default function CustomScrollView({
       0;
     return {
       height: legendHeight,
-      opacity: 1 ?? showLegend.value,
+      opacity: showLegend.value,
       right: legendBoxStyle?.width,
       /*
       // center it
