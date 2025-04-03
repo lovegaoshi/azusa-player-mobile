@@ -12,6 +12,7 @@ import Animated, {
   interpolate,
   Extrapolation,
   useAnimatedReaction,
+  useDerivedValue,
 } from 'react-native-reanimated';
 
 const SCROLLBAR_HIDE_TIMEOUT = 3000;
@@ -25,6 +26,8 @@ interface Props {
   scrollPosition: SharedValue<number>;
   barHeight?: number;
   contentHeight: SharedValue<number>;
+  scrollBarHideTimeout?: number;
+  scrollBarAnimTime?: number;
 }
 
 export default function CustomScrollView({
@@ -35,6 +38,8 @@ export default function CustomScrollView({
   scrollPosition,
   barHeight = 0.2,
   contentHeight,
+  scrollBarAnimTime = SCROLLBAR_ANIM_TIME,
+  scrollBarHideTimeout = SCROLLBAR_HIDE_TIMEOUT,
 }: Props) {
   const scrollTimeoutId = useRef<NodeJS.Timeout>();
   const scrollIndicatorOpacity = useSharedValue(0);
@@ -43,9 +48,17 @@ export default function CustomScrollView({
     'worklet';
     return barHeight > 1 ? barHeight : scrollViewHeight.value * barHeight;
   };
+  const scrollBarY = useDerivedValue(() =>
+    interpolate(
+      scrollPosition.value,
+      [0, 1],
+      [0, scrollViewHeight.value - getBarHeight()],
+      Extrapolation.CLAMP,
+    ),
+  );
 
   const scrollTimingAnimConfig = {
-    duration: SCROLLBAR_ANIM_TIME,
+    duration: scrollBarAnimTime,
     easing: Easing.linear,
   };
 
@@ -55,7 +68,7 @@ export default function CustomScrollView({
     }, timeout);
   };
 
-  const resetHideTimeout = (timeout = SCROLLBAR_HIDE_TIMEOUT) => {
+  const resetHideTimeout = (timeout = scrollBarHideTimeout) => {
     scrollIndicatorOpacity.value = 1;
     clearTimeout(scrollTimeoutId.current);
     scrollTimeoutId.current = createScrollHideTimeout(timeout);
@@ -77,10 +90,7 @@ export default function CustomScrollView({
     .onBegin(e => {
       runOnJS(resetHideTimeout)();
       console.log('start', e.y, scrollViewHeight.value, scrollPosition.value);
-      startScrollY.value = Math.min(
-        e.y + scrollViewHeight.value * scrollPosition.value,
-        scrollViewHeight.value,
-      );
+      startScrollY.value = e.y + scrollBarY.value;
     })
     .onChange(e => {
       // the actual thumb range is half bar size - height - half bar size
@@ -93,6 +103,7 @@ export default function CustomScrollView({
         [0, 1],
         Extrapolation.CLAMP,
       );
+      console.log(clampedScrollToPercent);
       runOnJS(scrollByTranslationY)(
         clampedScrollToPercent * contentHeight.value,
       );
@@ -103,12 +114,7 @@ export default function CustomScrollView({
     return {
       opacity: withTiming(scrollIndicatorOpacity.value, scrollTimingAnimConfig),
       height: barHeight,
-      top: interpolate(
-        scrollPosition.value,
-        [0, 1],
-        [0, scrollViewHeight.value - barHeight],
-        Extrapolation.CLAMP,
-      ),
+      top: scrollBarY.value,
     };
   });
 
@@ -129,7 +135,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     right: -19,
     backgroundColor: 'rgba(200, 200, 200, 0.45)',
-    width: 25,
+    width: 65,
     borderRadius: 0,
     zIndex: 10,
   },
