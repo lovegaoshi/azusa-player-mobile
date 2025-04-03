@@ -44,6 +44,7 @@ export default () => {
   const scrollViewHeight = useSharedValue(0);
   const scrollPosition = useSharedValue(0);
   const contentHeight = useSharedValue(0);
+  const visibleIndex = useSharedValue(-1);
 
   useEffect(
     () => scrollTo({ toIndex: -1, reset: true }),
@@ -108,6 +109,11 @@ export default () => {
         scrollPosition={scrollPosition}
         scrollViewHeight={scrollViewHeight}
         contentHeight={contentHeight}
+        legendBoxStyle={{
+          width: 30,
+          height: 50,
+          backgroundColor: 'red',
+        }}
       >
         <FlashList
           ref={playlistRef}
@@ -135,6 +141,12 @@ export default () => {
           onRefresh={() => keepAwake(refreshPlaylist)}
           refreshing={refreshing}
           showsVerticalScrollIndicator={false}
+          onViewableItemsChanged={({ viewableItems }) => {
+            visibleIndex.value = viewableItems[0]?.index ?? -1;
+          }}
+          viewabilityConfig={{
+            viewAreaCoveragePercentThreshold: 50,
+          }}
           onScroll={({
             nativeEvent: { contentOffset, contentSize, layoutMeasurement },
           }) => {

@@ -10,13 +10,26 @@ export interface ScrollProps {
   scrollPosition: SharedValue<number>;
 }
 
-export default ({ scrollPosition }: ScrollProps) => {
+export interface LegendProps extends ScrollProps {
+  data?: unknown[];
+  index?: SharedValue<number>;
+  processData?: (data: unknown) => string;
+}
+
+export const LegendExample = ({
+  data = [],
+  index,
+  scrollPosition,
+  processData,
+}: LegendProps) => {
   const [text, setText] = useState('');
 
   useAnimatedReaction(
     () => scrollPosition.value,
     curr => {
-      runOnJS(setText)(String(curr));
+      runOnJS(setText)(
+        processData?.(data?.[index?.value ?? 0]) ?? String(curr),
+      );
     },
   );
 
