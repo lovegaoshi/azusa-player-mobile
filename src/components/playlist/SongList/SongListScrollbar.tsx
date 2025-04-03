@@ -44,15 +44,14 @@ export default function CustomScrollView({
   const scrollTimeoutId = useRef<NodeJS.Timeout>();
   const scrollIndicatorOpacity = useSharedValue(0);
   const startScrollY = useSharedValue(0);
-  const getBarHeight = () => {
-    'worklet';
-    return barHeight > 1 ? barHeight : scrollViewHeight.value * barHeight;
-  };
+  const barHeightP = useDerivedValue(() =>
+    barHeight > 1 ? barHeight : scrollViewHeight.value * barHeight,
+  );
   const scrollBarY = useDerivedValue(() =>
     interpolate(
       scrollPosition.value,
       [0, 1],
-      [0, scrollViewHeight.value - getBarHeight()],
+      [0, scrollViewHeight.value - barHeightP.value],
       Extrapolation.CLAMP,
     ),
   );
@@ -95,7 +94,7 @@ export default function CustomScrollView({
     .onChange(e => {
       // the actual thumb range is half bar size - height - half bar size
       // and this gets intrapolated to 0 - 1 for scrollToPercent
-      const halfBar = getBarHeight() / 2;
+      const halfBar = barHeightP.value / 2;
 
       const clampedScrollToPercent = interpolate(
         startScrollY.value + e.translationY,
@@ -110,10 +109,9 @@ export default function CustomScrollView({
     });
 
   const scrollBarDynamicStyle = useAnimatedStyle(() => {
-    const barHeight = getBarHeight();
     return {
       opacity: withTiming(scrollIndicatorOpacity.value, scrollTimingAnimConfig),
-      height: barHeight,
+      height: barHeightP.value,
       top: scrollBarY.value,
     };
   });
@@ -135,7 +133,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     right: -19,
     backgroundColor: 'rgba(200, 200, 200, 0.45)',
-    width: 65,
+    width: 25,
     borderRadius: 0,
     zIndex: 10,
   },
