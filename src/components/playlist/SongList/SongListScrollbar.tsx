@@ -1,4 +1,5 @@
 import { FlashList } from '@shopify/flash-list';
+import clamp from 'lodash/clamp';
 import { RefObject, useRef } from 'react';
 import { View, StyleSheet, StyleProp, ViewStyle } from 'react-native';
 import { GestureDetector, Gesture } from 'react-native-gesture-handler';
@@ -61,7 +62,7 @@ export default function CustomScrollView({
   };
 
   useAnimatedReaction(
-    () => scrollBarPosition,
+    () => scrollBarPosition.value,
     () => runOnJS(resetHideTimeout)(),
   );
 
@@ -78,7 +79,8 @@ export default function CustomScrollView({
       const scrollToPercent =
         (e.y - getBarHeight() / 2) / scrollViewHeight.value +
         scrollBarPosition.value;
-      runOnJS(scrollByTranslationY)(scrollToPercent);
+      const clampedScrollToPercent = clamp(scrollToPercent, 0, 1);
+      runOnJS(scrollByTranslationY)(clampedScrollToPercent);
     });
 
   const scrollBarDynamicStyle = useAnimatedStyle(() => {

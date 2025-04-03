@@ -138,7 +138,10 @@ export default () => {
           onScroll={({
             nativeEvent: { contentOffset, contentSize, layoutMeasurement },
           }) => {
-            const contentH = contentSize.height - layoutMeasurement.height;
+            const contentH = Math.min(
+              1,
+              contentSize.height - layoutMeasurement.height,
+            );
             scrollBarPosition.value = contentOffset.y / contentH;
             scrollViewHeight.value = layoutMeasurement.height;
             contentHeight.value = contentH;

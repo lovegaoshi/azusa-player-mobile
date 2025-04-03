@@ -9,7 +9,7 @@ import {
   RelatedArtist,
 } from 'libmuse';
 import { create } from 'zustand';
-import _ from 'lodash';
+import last from 'lodash/last';
 
 import { fetchYtmPlaylist } from '@utils/mediafetch/ytbPlaylist.muse';
 import SongTS from '@objects/Song';
@@ -26,7 +26,7 @@ interface YTMExplore {
 
 export const YTArtistTransform = (v: RelatedArtist[]) =>
   v.map(i => ({
-    cover: _.last(i.thumbnails)!.url,
+    cover: last(i.thumbnails)!.url,
     name: i?.name,
     singer: i.subscribers ?? '',
     getPlaylist: async () => {
@@ -38,7 +38,7 @@ export const YTArtistTransform = (v: RelatedArtist[]) =>
 
 export const YTPlaylistTransform = (v: ParsedPlaylist[]) =>
   v.map(i => ({
-    cover: _.last(i.thumbnails)!.url,
+    cover: last(i.thumbnails)!.url,
     name: i?.title,
     singer: i.description!,
     getPlaylist: async () => {
@@ -48,7 +48,7 @@ export const YTPlaylistTransform = (v: ParsedPlaylist[]) =>
 
 export const YTAlbumTransform = (v: ParsedAlbum[]) =>
   v.map(i => ({
-    cover: _.last(i.thumbnails)!.url,
+    cover: last(i.thumbnails)!.url,
     name: i.title,
     singer: i.album_type!,
     getPlaylist: async () => ({
@@ -65,7 +65,7 @@ export const YTMFlatSongTransform = (v: FlatSong[]) =>
       nameRaw: i.title,
       singer: i.artists?.[0].name ?? '',
       singerId: i.artists?.[0].id ?? '',
-      cover: _.last(i.thumbnails)!.url,
+      cover: last(i.thumbnails)!.url,
       lyric: '',
       page: 1,
       duration: 0,
@@ -84,7 +84,7 @@ export const YTMInlineVideoTransform = (v: ParsedVideo[]) =>
       nameRaw: i.title,
       singer: i.artists?.[0].name ?? '',
       singerId: i.artists?.[0].id ?? '',
-      cover: _.last(i.thumbnails)!.url,
+      cover: last(i.thumbnails)!.url,
       lyric: '',
       page: 1,
       duration: 0,

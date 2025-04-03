@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { get_playlist_tracks_only } from 'libmuse';
-import _ from 'lodash';
+import last from 'lodash/last';
 
 import { fetchAudioInfo } from '@utils/mediafetch/ytbvideo';
 import SongTS from '@objects/Song';
@@ -47,8 +47,7 @@ const fastYTPlaylistSongResolve = (val: any, data: any) => {
       singerId:
         val.playlistVideoRenderer.shortBylineText.runs[0].navigationEndpoint
           .browseEndpoint.browseId,
-      cover: _.last(val.playlistVideoRenderer.thumbnail.thumbnails as any[])
-        .url,
+      cover: last(val.playlistVideoRenderer.thumbnail.thumbnails as any[]).url,
       lyric: '',
       page: Number(val.playlistVideoRenderer.index.simpleText),
       duration: Number(val.playlistVideoRenderer.lengthSeconds),

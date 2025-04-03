@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { search } from 'libmuse';
-import _ from 'lodash';
+import last from 'lodash/last';
 
 import SongTS from '@objects/Song';
 import { Source } from '@enums/MediaFetch';
@@ -15,7 +15,7 @@ export const musePlaylistItemToNoxSong = (val: any, data: any) => {
       nameRaw: val.title,
       singer: val.artists[0]?.name ?? 'YT-mix',
       singerId: val.artists[0]?.id ?? '',
-      cover: _.last(val.thumbnails as any[]).url,
+      cover: last(val.thumbnails as any[]).url,
       lyric: '',
       page: 1,
       duration: val.duration_seconds,
