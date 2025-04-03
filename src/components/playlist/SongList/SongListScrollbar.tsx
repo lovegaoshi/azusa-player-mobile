@@ -88,7 +88,6 @@ export default function CustomScrollView({
   const scrollDragGesture = Gesture.Pan()
     .onBegin(e => {
       runOnJS(resetHideTimeout)();
-      console.log('start', e.y, scrollViewHeight.value, scrollPosition.value);
       startScrollY.value = e.y + scrollBarY.value;
     })
     .onChange(e => {
@@ -102,7 +101,6 @@ export default function CustomScrollView({
         [0, 1],
         Extrapolation.CLAMP,
       );
-      console.log(clampedScrollToPercent);
       runOnJS(scrollByTranslationY)(
         clampedScrollToPercent * contentHeight.value,
       );
