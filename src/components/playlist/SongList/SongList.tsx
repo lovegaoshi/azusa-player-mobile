@@ -15,6 +15,7 @@ import PlaylistInfo from '../Info/PlaylistInfo';
 import PlaylistMenuButton from '../Menu/PlaylistMenuButton';
 import usePlaylist from '../usePlaylistRN';
 import SongListScrollbar from './SongListScrollbar';
+import { LegendExample, ScrollProps } from './ScrollBarLegend';
 import keepAwake from '@utils/keepAwake';
 
 export default () => {
@@ -44,6 +45,7 @@ export default () => {
   const scrollViewHeight = useSharedValue(0);
   const scrollPosition = useSharedValue(0);
   const contentHeight = useSharedValue(0);
+  const visibleIndex = useSharedValue(-1);
 
   useEffect(
     () => scrollTo({ toIndex: -1, reset: true }),
@@ -64,6 +66,16 @@ export default () => {
   const btnContainColor =
     playerStyle.colors.primaryContainer ??
     playerStyle.customColors.playlistDrawerBackgroundColor;
+
+  const ScrollLegend = (p: ScrollProps) => (
+    <LegendExample
+      {...p}
+      data={rows}
+      index={visibleIndex}
+      processData={(v: any) => v?.parsedName?.[0] ?? ''}
+    />
+  );
+
   return (
     <View style={styles.flex}>
       <View style={[styles.topBarContainer, { top: 10 }]}>
@@ -108,6 +120,7 @@ export default () => {
         scrollPosition={scrollPosition}
         scrollViewHeight={scrollViewHeight}
         contentHeight={contentHeight}
+        LegendContent={ScrollLegend}
       >
         <FlashList
           ref={playlistRef}
@@ -135,6 +148,12 @@ export default () => {
           onRefresh={() => keepAwake(refreshPlaylist)}
           refreshing={refreshing}
           showsVerticalScrollIndicator={false}
+          onViewableItemsChanged={({ viewableItems }) => {
+            visibleIndex.value = viewableItems[0]?.index ?? -1;
+          }}
+          viewabilityConfig={{
+            viewAreaCoveragePercentThreshold: 50,
+          }}
           onScroll={({
             nativeEvent: { contentOffset, contentSize, layoutMeasurement },
           }) => {

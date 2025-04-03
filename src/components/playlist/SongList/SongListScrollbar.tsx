@@ -14,20 +14,22 @@ import Animated, {
   useAnimatedReaction,
   useDerivedValue,
 } from 'react-native-reanimated';
+import { LegendExample, ScrollProps } from './ScrollBarLegend';
 
 const SCROLLBAR_HIDE_TIMEOUT = 3000;
 const SCROLLBAR_ANIM_TIME = 300;
 
-interface Props {
+interface Props extends ScrollProps {
   children: JSX.Element | JSX.Element[];
   scrollViewReference: RefObject<FlashList<NoxMedia.Song>>;
   style?: StyleProp<ViewStyle>;
   scrollViewHeight: SharedValue<number>;
-  scrollPosition: SharedValue<number>;
   barHeight?: number;
   contentHeight: SharedValue<number>;
   scrollBarHideTimeout?: number;
   scrollBarAnimTime?: number;
+  legendBoxStyle?: ViewStyle;
+  LegendContent?: (p: ScrollProps) => JSX.Element;
 }
 
 export default function CustomScrollView({
@@ -40,6 +42,8 @@ export default function CustomScrollView({
   contentHeight,
   scrollBarAnimTime = SCROLLBAR_ANIM_TIME,
   scrollBarHideTimeout = SCROLLBAR_HIDE_TIMEOUT,
+  legendBoxStyle,
+  LegendContent = LegendExample,
 }: Props) {
   const scrollTimeoutId = useRef<NodeJS.Timeout>();
   const scrollIndicatorOpacity = useSharedValue(0);
@@ -55,6 +59,7 @@ export default function CustomScrollView({
       Extrapolation.CLAMP,
     ),
   );
+  const showLegend = useSharedValue(1);
 
   const scrollTimingAnimConfig = {
     duration: scrollBarAnimTime,
@@ -88,8 +93,8 @@ export default function CustomScrollView({
   const scrollDragGesture = Gesture.Pan()
     .onBegin(e => {
       runOnJS(resetHideTimeout)();
-      console.log('start', e.y, scrollViewHeight.value, scrollPosition.value);
       startScrollY.value = e.y + scrollBarY.value;
+      showLegend.value = 1;
     })
     .onChange(e => {
       // the actual thumb range is half bar size - height - half bar size
@@ -102,10 +107,12 @@ export default function CustomScrollView({
         [0, 1],
         Extrapolation.CLAMP,
       );
-      console.log(clampedScrollToPercent);
       runOnJS(scrollByTranslationY)(
         clampedScrollToPercent * contentHeight.value,
       );
+    })
+    .onEnd(() => {
+      showLegend.value = 0;
     });
 
   const scrollBarDynamicStyle = useAnimatedStyle(() => {
@@ -116,12 +123,37 @@ export default function CustomScrollView({
     };
   });
 
+  const animatedLegendStyle = useAnimatedStyle(() => {
+    const legendHeight =
+      (legendBoxStyle?.height as number) ??
+      (legendBoxStyle?.width as number) ??
+      0;
+    return {
+      height: legendHeight,
+      opacity: 1 ?? showLegend.value,
+      right: legendBoxStyle?.width,
+      /*
+      // center it
+      top:
+        barHeightP.value > legendHeight
+          ? (barHeightP.value - legendHeight) / 2
+          : undefined,
+      */
+    };
+  });
+
   return (
     <View style={style}>
       <GestureDetector gesture={scrollDragGesture}>
         <Animated.View
           style={[scrollBarDynamicStyle, styles.indicatorStaticStyle]}
-        />
+        >
+          {legendBoxStyle && (
+            <Animated.View style={[legendBoxStyle, animatedLegendStyle]}>
+              <LegendContent scrollPosition={scrollPosition} />
+            </Animated.View>
+          )}
+        </Animated.View>
       </GestureDetector>
       {children}
     </View>
