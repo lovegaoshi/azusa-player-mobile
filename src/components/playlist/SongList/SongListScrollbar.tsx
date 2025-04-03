@@ -1,5 +1,4 @@
 import { FlashList } from '@shopify/flash-list';
-import clamp from 'lodash/clamp';
 import { RefObject, useRef } from 'react';
 import { View, StyleSheet, StyleProp, ViewStyle } from 'react-native';
 import { GestureDetector, Gesture } from 'react-native-gesture-handler';
@@ -39,6 +38,7 @@ export default function CustomScrollView({
 }: Props) {
   const scrollTimeoutId = useRef<NodeJS.Timeout>();
   const scrollIndicatorOpacity = useSharedValue(0);
+  const startScrollY = useSharedValue(0);
   const getBarHeight = () => {
     'worklet';
     return barHeight > 1 ? barHeight : scrollViewHeight.value * barHeight;
@@ -66,21 +66,41 @@ export default function CustomScrollView({
     () => runOnJS(resetHideTimeout)(),
   );
 
-  const scrollByTranslationY = (scrollToPercent: number) => {
+  const scrollByTranslationY = (offset: number) => {
     scrollViewReference.current?.scrollToOffset({
-      offset: contentHeight.value * scrollToPercent,
+      offset,
       animated: false,
     });
   };
 
   const scrollDragGesture = Gesture.Pan()
-    .onBegin(() => runOnJS(resetHideTimeout)())
+    .onBegin(e => {
+      runOnJS(resetHideTimeout)();
+      console.log(
+        'start',
+        e.y,
+        scrollViewHeight.value,
+        scrollBarPosition.value,
+      );
+      startScrollY.value = Math.min(
+        e.y + scrollViewHeight.value * scrollBarPosition.value,
+        scrollViewHeight.value,
+      );
+    })
     .onChange(e => {
-      const scrollToPercent =
-        (e.y - getBarHeight() / 2) / scrollViewHeight.value +
-        scrollBarPosition.value;
-      const clampedScrollToPercent = clamp(scrollToPercent, 0, 1);
-      runOnJS(scrollByTranslationY)(clampedScrollToPercent);
+      // the actual thumb range is half bar size - height - half bar size
+      // and this gets intrapolated to 0 - 1 for scrollToPercent
+      const halfBar = getBarHeight() / 2;
+
+      const clampedScrollToPercent = interpolate(
+        startScrollY.value + e.translationY,
+        [halfBar, scrollViewHeight.value - halfBar],
+        [0, 1],
+        Extrapolation.CLAMP,
+      );
+      runOnJS(scrollByTranslationY)(
+        clampedScrollToPercent * contentHeight.value,
+      );
     });
 
   const scrollBarDynamicStyle = useAnimatedStyle(() => {

@@ -138,7 +138,7 @@ export default () => {
           onScroll={({
             nativeEvent: { contentOffset, contentSize, layoutMeasurement },
           }) => {
-            const contentH = Math.min(
+            const contentH = Math.max(
               1,
               contentSize.height - layoutMeasurement.height,
             );
