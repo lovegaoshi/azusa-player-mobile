@@ -15,6 +15,7 @@ import PlaylistInfo from '../Info/PlaylistInfo';
 import PlaylistMenuButton from '../Menu/PlaylistMenuButton';
 import usePlaylist from '../usePlaylistRN';
 import SongListScrollbar from './SongListScrollbar';
+import { LegendExample, ScrollProps } from './ScrollBarLegend';
 import keepAwake from '@utils/keepAwake';
 
 export default () => {
@@ -65,6 +66,16 @@ export default () => {
   const btnContainColor =
     playerStyle.colors.primaryContainer ??
     playerStyle.customColors.playlistDrawerBackgroundColor;
+
+  const ScrollLegend = (p: ScrollProps) => (
+    <LegendExample
+      {...p}
+      data={rows}
+      index={visibleIndex}
+      processData={(v: any) => v?.parsedName?.[0] ?? ''}
+    />
+  );
+
   return (
     <View style={styles.flex}>
       <View style={[styles.topBarContainer, { top: 10 }]}>
@@ -109,11 +120,7 @@ export default () => {
         scrollPosition={scrollPosition}
         scrollViewHeight={scrollViewHeight}
         contentHeight={contentHeight}
-        legendBoxStyle={{
-          width: 30,
-          height: 50,
-          backgroundColor: 'red',
-        }}
+        LegendContent={ScrollLegend}
       >
         <FlashList
           ref={playlistRef}
