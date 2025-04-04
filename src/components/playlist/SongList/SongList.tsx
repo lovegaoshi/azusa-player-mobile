@@ -1,11 +1,10 @@
 import React, { useEffect } from 'react';
 import { View, BackHandler, StyleSheet, NativeScrollEvent } from 'react-native';
-import { FlashList, FlashListProps } from '@shopify/flash-list';
+import { FlashList } from '@shopify/flash-list';
 import { IconButton } from 'react-native-paper';
 import { useNetInfo } from '@react-native-community/netinfo';
 import { useFocusEffect } from '@react-navigation/native';
 import Animated, {
-  AnimateProps,
   useAnimatedScrollHandler,
   useSharedValue,
 } from 'react-native-reanimated';
@@ -23,8 +22,8 @@ import { LegendExample, LegendProps } from './ScrollBarLegend';
 import keepAwake from '@utils/keepAwake';
 
 const AnimatedFlashList = Animated.createAnimatedComponent(
-  FlashList,
-) as React.ComponentClass<AnimateProps<FlashListProps<NoxMedia.Song>>, any>;
+  FlashList<NoxMedia.Song>,
+);
 
 export default () => {
   const currentPlayingId = useNoxSetting(state => state.currentPlayingId);
