@@ -76,7 +76,10 @@ jobs:
       - name: 'Create env file'
         run: |
           echo "${{ secrets.ENV_FILE }}" > .env
+          echo "TRACKING=true" >> .env
           echo "${{ secrets.SENTRY_PROPERTIES }}" > ./android/sentry.properties
+          # enables OTA hot update
+          python scripts/hashyarnlock.py
 
       - name: alias yarn.cmd to yarn
         run: alias yarn.cmd="yarn"
