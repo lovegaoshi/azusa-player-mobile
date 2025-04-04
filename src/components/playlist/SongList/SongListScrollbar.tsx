@@ -14,7 +14,7 @@ import Animated, {
   useAnimatedReaction,
   useDerivedValue,
 } from 'react-native-reanimated';
-import { LegendExample, ScrollProps, LegendProps } from './ScrollBarLegend';
+import { ScrollProps, LegendProps } from './ScrollBarLegend';
 
 const SCROLLBAR_HIDE_TIMEOUT = 3000;
 const SCROLLBAR_ANIM_TIME = 300;

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Text, View } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 import Animated, {
   runOnJS,
   SharedValue,
@@ -81,16 +81,7 @@ export const LegendExample = ({
   });
   return (
     <Animated.View style={[legendBoxStyle, animatedLegendStyle]}>
-      <View
-        style={{
-          width: 999,
-          height: 20,
-          flex: 1,
-          flexDirection: 'row',
-          position: 'absolute',
-          opacity: 0,
-        }}
-      >
+      <View style={styles.invisibleFlexTextContainer}>
         <Text
           onLayout={e => {
             prevTextLength.value = actualTextLength.value;
@@ -100,7 +91,7 @@ export const LegendExample = ({
         >
           {text}
         </Text>
-        <View style={{ flex: 1 }}></View>
+        <View style={styles.flex}></View>
       </View>
       <Text
         style={{
@@ -114,3 +105,15 @@ export const LegendExample = ({
     </Animated.View>
   );
 };
+
+const styles = StyleSheet.create({
+  invisibleFlexTextContainer: {
+    width: 999,
+    height: 20,
+    flex: 1,
+    flexDirection: 'row',
+    position: 'absolute',
+    opacity: 0,
+  },
+  flex: { flex: 1 },
+});
