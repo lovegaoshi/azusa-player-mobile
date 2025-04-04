@@ -45,6 +45,7 @@ export const LegendExample = ({
     borderBottomRightRadius: 0,
   };
   const actualTextLength = useSharedValue(0);
+  const prevTextLength = useSharedValue(0);
 
   const changeText = (scrollPos: number) => {
     setText(processData?.(data?.[index?.value ?? 0]) ?? String(scrollPos));
@@ -63,11 +64,12 @@ export const LegendExample = ({
         (legendBoxStyle?.width as number)) ??
       0;
     // const legendHeight = (legendBoxStyle?.height as number) ?? legendWidth;
+    const expanding = actualTextLength.value > prevTextLength.value;
     return {
       height: undefined,
       opacity: showLegend.value,
-      right: legendWidth,
-      width: withTiming(legendWidth, { duration: 20 }),
+      right: withTiming(legendWidth + 5, { duration: expanding ? 120 : 0 }),
+      width: legendWidth,
       /*
       // center it
       top:
@@ -91,6 +93,7 @@ export const LegendExample = ({
       >
         <Text
           onLayout={e => {
+            prevTextLength.value = actualTextLength.value;
             actualTextLength.value = e.nativeEvent.layout.width;
             setdebouncedText(text);
           }}
@@ -101,8 +104,9 @@ export const LegendExample = ({
       </View>
       <Text
         style={{
-          paddingLeft: TextPadding,
+          paddingRight: TextPadding,
           color: playerStyle.colors.primary,
+          alignSelf: 'flex-end',
         }}
       >
         {debouncedText}
