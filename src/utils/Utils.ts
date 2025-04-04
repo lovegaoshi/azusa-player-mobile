@@ -1,3 +1,5 @@
+import last from 'lodash/last';
+
 import { logger } from '@utils/Logger';
 
 export function nFormatter(num: number, digits: number = 1) {
@@ -270,9 +272,8 @@ export const smartShuffle = (songs: NoxMedia.Song[]) => {
   const newSongs: NoxMedia.Song[] = [randomChoice(songs)];
   const oldSongs = [...songs].filter(song => !newSongs.includes(song));
   while (oldSongs.length > 0) {
-    let filteredSongs = oldSongs.filter(
-      s => s.parsedName !== newSongs[newSongs.length - 1].parsedName,
-    );
+    const lastName = last(newSongs)?.parsedName;
+    let filteredSongs = oldSongs.filter(s => s.parsedName !== lastName);
     if (filteredSongs.length === 0) {
       filteredSongs = oldSongs;
     }

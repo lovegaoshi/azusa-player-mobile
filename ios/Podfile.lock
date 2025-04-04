@@ -1,4 +1,6 @@
 PODS:
+  - APNGKit (2.3.0):
+    - Delegate (~> 1.3)
   - AppAuth (1.7.6):
     - AppAuth/Core (= 1.7.6)
     - AppAuth/ExternalUserAgent (= 1.7.6)
@@ -6,6 +8,7 @@ PODS:
   - AppAuth/ExternalUserAgent (1.7.6):
     - AppAuth/Core
   - boost (1.84.0)
+  - Delegate (1.3.0)
   - DoubleConversion (1.1.6)
   - EXApplication (6.0.2):
     - ExpoModulesCore
@@ -14,7 +17,7 @@ PODS:
   - EXImageLoader (5.0.0):
     - ExpoModulesCore
     - React-Core
-  - Expo (52.0.40):
+  - Expo (52.0.41):
     - ExpoModulesCore
   - ExpoAsset (11.0.5):
     - ExpoModulesCore
@@ -28,7 +31,7 @@ PODS:
     - ExpoModulesCore
   - ExpoFont (13.0.4):
     - ExpoModulesCore
-  - ExpoImage (2.0.6):
+  - ExpoImage (2.0.7):
     - ExpoModulesCore
     - libavif/libdav1d
     - SDWebImage (~> 5.19.1)
@@ -66,7 +69,7 @@ PODS:
     - Yoga
   - ExpoSecureStore (14.0.1):
     - ExpoModulesCore
-  - ExpoSQLite (15.1.2):
+  - ExpoSQLite (15.1.3):
     - ExpoModulesCore
   - ExpoWebBrowser (14.0.2):
     - ExpoModulesCore
@@ -77,6 +80,7 @@ PODS:
     - ffmpeg-kit-ios-audio (= 6.0)
     - React-Core
   - fmt (11.0.2)
+  - Gifu (3.5.1)
   - glog (0.3.5)
   - hermes-engine (0.77.2):
     - hermes-engine/Pre-built (= 0.77.2)
@@ -1334,6 +1338,28 @@ PODS:
     - React-Core
   - react-native-netinfo (11.4.1):
     - React-Core
+  - react-native-ota-hot-update (2.1.9):
+    - DoubleConversion
+    - glog
+    - hermes-engine
+    - RCT-Folly (= 2024.11.18.00)
+    - RCTRequired
+    - RCTTypeSafety
+    - React-Core
+    - React-debug
+    - React-Fabric
+    - React-featureflags
+    - React-graphics
+    - React-ImageManager
+    - React-NativeModulesApple
+    - React-RCTFabric
+    - React-rendererdebug
+    - React-utils
+    - ReactCodegen
+    - ReactCommon/turbomodule/bridging
+    - ReactCommon/turbomodule/core
+    - SSZipArchive (~> 2.4.3)
+    - Yoga
   - react-native-pager-view (6.7.0):
     - DoubleConversion
     - glog
@@ -1357,7 +1383,7 @@ PODS:
     - Yoga
   - react-native-safe-area-context (5.3.0):
     - React-Core
-  - react-native-skia (1.12.1):
+  - react-native-skia (1.12.3):
     - DoubleConversion
     - glog
     - hermes-engine
@@ -1386,6 +1412,30 @@ PODS:
   - react-native-track-player (4.1.1):
     - React-Core
     - SwiftAudioEx (= 1.1.0)
+  - react-native-turbo-image (1.22.1):
+    - APNGKit
+    - DoubleConversion
+    - Gifu
+    - glog
+    - hermes-engine
+    - RCT-Folly (= 2024.11.18.00)
+    - RCTRequired
+    - RCTTypeSafety
+    - React-Core
+    - React-debug
+    - React-Fabric
+    - React-featureflags
+    - React-graphics
+    - React-ImageManager
+    - React-NativeModulesApple
+    - React-RCTFabric
+    - React-rendererdebug
+    - React-utils
+    - ReactCodegen
+    - ReactCommon/turbomodule/bridging
+    - ReactCommon/turbomodule/core
+    - SwiftSVG
+    - Yoga
   - react-native-video (6.11.0):
     - DoubleConversion
     - glog
@@ -1763,7 +1813,7 @@ PODS:
     - Yoga
   - RNDeviceInfo (14.0.4):
     - React-Core
-  - RNFlashList (1.7.6):
+  - RNFlashList (1.8.0):
     - DoubleConversion
     - glog
     - hermes-engine
@@ -1784,7 +1834,7 @@ PODS:
     - ReactCommon/turbomodule/bridging
     - ReactCommon/turbomodule/core
     - Yoga
-  - RNGestureHandler (2.24.0):
+  - RNGestureHandler (2.25.0):
     - DoubleConversion
     - glog
     - hermes-engine
@@ -1932,7 +1982,7 @@ PODS:
     - ReactCommon/turbomodule/bridging
     - ReactCommon/turbomodule/core
     - Yoga
-  - RNScreens (4.9.2):
+  - RNScreens (4.10.0):
     - DoubleConversion
     - glog
     - hermes-engine
@@ -2022,6 +2072,7 @@ PODS:
   - SVGAPlayer/ProtoFiles (2.5.7):
     - Protobuf (~> 3.4)
   - SwiftAudioEx (1.1.0)
+  - SwiftSVG (2.3.2)
   - Yoga (0.0.0)
 
 DEPENDENCIES:
@@ -2094,11 +2145,13 @@ DEPENDENCIES:
   - "react-native-cookies (from `../node_modules/@react-native-cookies/cookies`)"
   - react-native-get-random-values (from `../node_modules/react-native-get-random-values`)
   - "react-native-netinfo (from `../node_modules/@react-native-community/netinfo`)"
+  - react-native-ota-hot-update (from `../node_modules/react-native-ota-hot-update`)
   - react-native-pager-view (from `../node_modules/react-native-pager-view`)
   - react-native-safe-area-context (from `../node_modules/react-native-safe-area-context`)
   - "react-native-skia (from `../node_modules/@shopify/react-native-skia`)"
   - react-native-svga-player (from `../node_modules/react-native-svga-player`)
   - react-native-track-player (from `../node_modules/react-native-track-player`)
+  - react-native-turbo-image (from `../node_modules/react-native-turbo-image`)
   - react-native-video (from `../node_modules/react-native-video`)
   - react-native-webview (from `../node_modules/react-native-webview`)
   - React-nativeconfig (from `../node_modules/react-native/ReactCommon`)
@@ -2146,7 +2199,10 @@ DEPENDENCIES:
 
 SPEC REPOS:
   trunk:
+    - APNGKit
     - AppAuth
+    - Delegate
+    - Gifu
     - libavif
     - libdav1d
     - lottie-ios
@@ -2161,6 +2217,7 @@ SPEC REPOS:
     - SSZipArchive
     - SVGAPlayer
     - SwiftAudioEx
+    - SwiftSVG
 
 EXTERNAL SOURCES:
   boost:
@@ -2296,6 +2353,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native-get-random-values"
   react-native-netinfo:
     :path: "../node_modules/@react-native-community/netinfo"
+  react-native-ota-hot-update:
+    :path: "../node_modules/react-native-ota-hot-update"
   react-native-pager-view:
     :path: "../node_modules/react-native-pager-view"
   react-native-safe-area-context:
@@ -2306,6 +2365,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native-svga-player"
   react-native-track-player:
     :path: "../node_modules/react-native-track-player"
+  react-native-turbo-image:
+    :path: "../node_modules/react-native-turbo-image"
   react-native-video:
     :path: "../node_modules/react-native-video"
   react-native-webview:
@@ -2396,32 +2457,35 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon/yoga"
 
 SPEC CHECKSUMS:
+  APNGKit: eb7e111277527cfd47636f797c9c8e7aab5d9601
   AppAuth: d4f13a8fe0baf391b2108511793e4b479691fb73
   boost: 7e761d76ca2ce687f7cc98e698152abd03a18f90
+  Delegate: 0ff4467868095239ff578ab531efd8af46e62881
   DoubleConversion: cb417026b2400c8f53ae97020b2be961b59470cb
   EXApplication: 27a524f5c3e671c6218220fba04752629466a1a9
   EXConstants: aa93a3e70f8b37c81a80931cfd23f860b1819167
   EXImageLoader: 759063a65ab016b836f73972d3bb25404888713d
-  Expo: 2f39ef76a9b526e4d27e09903cac67ac083790ba
+  Expo: 3a8a619381412bbf8537746ec27b485be01c8a1f
   ExpoAsset: 0687fe05f5d051c4a34dd1f9440bd00858413cfe
   ExpoClipboard: 5250b207b6d545f4e9aac5ea3c6e61c4f16d0aed
   ExpoCrypto: 1eaf79360c8135af1f2ebb133394fd3513ca9a3d
   ExpoDocumentPicker: 8c1f88c2809ab2287350e8fac65964bf423578be
   ExpoFileSystem: c8c19bf80d914c83dda3beb8569d7fb603be0970
   ExpoFont: 773955186469acc5108ff569712a2d243857475f
-  ExpoImage: 36f2f4a3a530c1d1a2d349a1f0a0b400b0e1af47
+  ExpoImage: c37f79e5e97e0a662ed1c4b17363464007da3148
   ExpoImagePicker: 482b2a6198b365dd18b5a0cb6d4caeec880cb8e1
   ExpoKeepAwake: 2a5f15dd4964cba8002c9a36676319a3394c85c7
   ExpoLinking: 0381341519ca7180a3a057d20edb1cf6a908aaf4
   ExpoModulesCore: 169b74d1cca71d355097e27b183ae5950d10b135
   ExpoSecureStore: d006eea5e316283099d46f80a6b10055b89a6008
-  ExpoSQLite: 120519a7bc76d95265b7ace13ac18aea98c4f000
+  ExpoSQLite: 2e5177890cb107cb8500e06636f7c1f94fd477aa
   ExpoWebBrowser: 6890a769e6c9d83da938dceb9a03e764afc3ec9c
   fast_float: 06eeec4fe712a76acc9376682e4808b05ce978b6
   FBLazyVector: 4c16dde959a9d6b24f2aa32cb87cb919a1ace3f3
   ffmpeg-kit-ios-audio: 9477154318f8423cdcefb2acf5eb6b5f2eae0a34
   ffmpeg-kit-react-native: 3cea88c9c5cfad62e1465279ea7d800dfbba3b00
   fmt: a40bb5bd0294ea969aaaba240a927bd33d878cdd
+  Gifu: 9f7e52357d41c0739709019eb80a71ad9aab1b6d
   glog: eb93e2f488219332457c3c4eafd2738ddc7e80b8
   hermes-engine: 8eb265241fa1d7095d3a40d51fd90f7dce68217c
   ImageColors: 88be684570585c07ae2750bff34eb7b78bfc53b4
@@ -2468,11 +2532,13 @@ SPEC CHECKSUMS:
   react-native-cookies: f54fcded06bb0cda05c11d86788020b43528a26c
   react-native-get-random-values: 21325b2244dfa6b58878f51f9aa42821e7ba3d06
   react-native-netinfo: f0a9899081c185db1de5bb2fdc1c88c202a059ac
+  react-native-ota-hot-update: 7fabc993a4db21608dc86b0dc85d98a6a03ca709
   react-native-pager-view: 4399429b104ed1085fd53ecd433127ae0af57dbb
   react-native-safe-area-context: f6fd1adb0c0dfb0a528f561c7c6f9297f3391af3
-  react-native-skia: 4f15ab8218e73f4ab576839032d2d082dcc95069
+  react-native-skia: 93af6a02be7cc3fc038d75d657cf9a964a3c194e
   react-native-svga-player: f1c7faf0864b22437b9b7cc7d7aa202d56f3906c
   react-native-track-player: 82ef1756ffeea61140fea17519ecd6d64ec3cf3e
+  react-native-turbo-image: c9f402c0d3a4e984ea8822176a9c38558b2644ba
   react-native-video: e789200a766b1a892ed24a699b895ffc7c21b45f
   react-native-webview: af6774e34b542209d861eba069bd0ec684a569f9
   React-nativeconfig: ecf4dc92c40b97e2b3f0c619938f78bfd6507b08
@@ -2507,12 +2573,12 @@ SPEC CHECKSUMS:
   RevenueCat: e47ff90dfd271fde155a4befe48e8fc02e8281e4
   RNCMaskedView: 6d4bf14f158d1a93484edf30850cbbd7ccbb8668
   RNDeviceInfo: feea80a690d2bde1fe51461cf548039258bd03f2
-  RNFlashList: 558b421ae7f5a9f238026d41ad85c85e0fa27e50
-  RNGestureHandler: ebb08ce5dfc9caff34ae9cda3ef0d18daae3a7ef
+  RNFlashList: 4330dea6fb873d11d412eab5ac33b6ce4d26dd57
+  RNGestureHandler: 83e18e53d3388ac5cb165a1404bc3be1e4cbdad0
   RNNotifee: 4a6ee5c7deaf00e005050052d73ee6315dff7ec9
   RNPurchases: 596c32adac473fe4c9aa6185defdaa1dbd3b68f9
   RNReanimated: d624c19fca5c509cab84bb727d8ac1c3c9d90063
-  RNScreens: 33f5df3f709bc862af4b8d6e2ff34b3492f93fa8
+  RNScreens: 176178299cb4812e59b30a6b07c350450b926486
   RNSentry: 700416958ba5af5149e4bf6567f4eaaf09dcc699
   RNShareMenu: cb9dac548c8bf147d06f0bf07296ad51ea9f5fc3
   RNSVG: 4cbae6c6f0ef2b0aa277c5fce8447d3e4cd97cd0
@@ -2525,6 +2591,7 @@ SPEC CHECKSUMS:
   SSZipArchive: fe6a26b2a54d5a0890f2567b5cc6de5caa600aef
   SVGAPlayer: 318b85a78b61292d6ae9dfcd651f3f0d1cdadd86
   SwiftAudioEx: f6aa653770f3a0d3851edaf8d834a30aee4a7646
+  SwiftSVG: ca7f64e403b8ea7ea8eba8c823b83ba4a059834c
   Yoga: 31a098f74c16780569aebd614a0f37a907de0189
 
 PODFILE CHECKSUM: 90acaaacc1c9a7b8a01917d4e94bd4673e5209f3

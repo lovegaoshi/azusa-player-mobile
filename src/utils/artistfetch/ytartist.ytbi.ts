@@ -1,6 +1,6 @@
-import { ytClientWeb } from '@utils/mediafetch/ytbi';
 import { PageHeader } from 'youtubei.js/dist/src/parser/nodes';
 
+import { ytClientWeb } from '@utils/mediafetch/ytbi';
 import { ArtistFetch } from './biliartist';
 import {
   fetchYtbiChannelVideos,

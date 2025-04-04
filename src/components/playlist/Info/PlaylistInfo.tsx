@@ -34,7 +34,6 @@ export default ({ usePlaylist, onPressed = () => undefined }: Props) => {
   const playerStyle = useNoxSetting(state => state.playerStyle);
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const searchContainerRef = useRef<any>(null);
-  const searchBarWidth = useRef(new Animated.Value(0)).current;
   const opacity = useRef(new Animated.Value(1)).current;
   const searchBkgrdWidth = useRef(new Animated.Value(0)).current;
   const searchBkgrdHeight = useRef(new Animated.Value(0)).current;
@@ -105,11 +104,6 @@ export default ({ usePlaylist, onPressed = () => undefined }: Props) => {
     setSearchVisible(true);
     if (searching) {
       Animated.parallel([
-        Animated.timing(searchBarWidth, {
-          toValue: 1,
-          duration: 180,
-          useNativeDriver: true,
-        }),
         Animated.timing(opacity, {
           toValue: 0,
           duration: 220,
@@ -134,11 +128,6 @@ export default ({ usePlaylist, onPressed = () => undefined }: Props) => {
       });
     } else {
       Animated.parallel([
-        Animated.timing(searchBarWidth, {
-          toValue: 0,
-          duration: 180,
-          useNativeDriver: true,
-        }),
         Animated.timing(opacity, {
           toValue: 1,
           duration: 280,
