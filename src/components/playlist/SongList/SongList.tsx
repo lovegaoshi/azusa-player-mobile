@@ -19,7 +19,7 @@ import PlaylistInfo from '../Info/PlaylistInfo';
 import PlaylistMenuButton from '../Menu/PlaylistMenuButton';
 import usePlaylist from '../usePlaylistRN';
 import SongListScrollbar from './SongListScrollbar';
-import { LegendExample, ScrollProps } from './ScrollBarLegend';
+import { LegendExample, LegendProps } from './ScrollBarLegend';
 import keepAwake from '@utils/keepAwake';
 
 const AnimatedFlashList = Animated.createAnimatedComponent(
@@ -86,12 +86,12 @@ export default () => {
     contentHeight.value = contentH;
   };
 
-  const ScrollLegend = (p: ScrollProps) => (
+  const ScrollLegend = (p: LegendProps) => (
     <LegendExample
       {...p}
       data={rows}
       index={visibleIndex}
-      processData={(v: any) => v?.parsedName?.[0] ?? ''}
+      processData={(v: any) => v?.parsedName ?? ''}
     />
   );
   const scrollHandler = useAnimatedScrollHandler(scrollBarOnScroll);

@@ -14,7 +14,7 @@ import Animated, {
   useAnimatedReaction,
   useDerivedValue,
 } from 'react-native-reanimated';
-import { LegendExample, ScrollProps } from './ScrollBarLegend';
+import { LegendExample, ScrollProps, LegendProps } from './ScrollBarLegend';
 
 const SCROLLBAR_HIDE_TIMEOUT = 3000;
 const SCROLLBAR_ANIM_TIME = 300;
@@ -28,8 +28,7 @@ interface Props extends ScrollProps {
   contentHeight: SharedValue<number>;
   scrollBarHideTimeout?: number;
   scrollBarAnimTime?: number;
-  legendBoxStyle?: ViewStyle;
-  LegendContent?: (p: ScrollProps) => JSX.Element;
+  LegendContent?: (p: LegendProps) => JSX.Element;
 }
 
 export default function CustomScrollView({
@@ -42,8 +41,7 @@ export default function CustomScrollView({
   contentHeight,
   scrollBarAnimTime = SCROLLBAR_ANIM_TIME,
   scrollBarHideTimeout = SCROLLBAR_HIDE_TIMEOUT,
-  legendBoxStyle,
-  LegendContent = LegendExample,
+  LegendContent,
 }: Props) {
   const scrollTimeoutId = useRef<NodeJS.Timeout>();
   const scrollIndicatorOpacity = useSharedValue(0);
@@ -59,7 +57,7 @@ export default function CustomScrollView({
       Extrapolation.CLAMP,
     ),
   );
-  const showLegend = useSharedValue(1);
+  const showLegend = useSharedValue(0);
 
   const scrollTimingAnimConfig = {
     duration: scrollBarAnimTime,
@@ -127,35 +125,17 @@ export default function CustomScrollView({
     };
   });
 
-  const animatedLegendStyle = useAnimatedStyle(() => {
-    const legendHeight =
-      (legendBoxStyle?.height as number) ??
-      (legendBoxStyle?.width as number) ??
-      0;
-    return {
-      height: legendHeight,
-      opacity: showLegend.value,
-      right: legendBoxStyle?.width,
-      /*
-      // center it
-      top:
-        barHeightP.value > legendHeight
-          ? (barHeightP.value - legendHeight) / 2
-          : undefined,
-      */
-    };
-  });
-
   return (
     <View style={style}>
       <GestureDetector gesture={scrollDragGesture}>
         <Animated.View
           style={[scrollBarDynamicStyle, styles.indicatorStaticStyle]}
         >
-          {legendBoxStyle && (
-            <Animated.View style={[legendBoxStyle, animatedLegendStyle]}>
-              <LegendContent scrollPosition={scrollPosition} />
-            </Animated.View>
+          {LegendContent !== undefined && (
+            <LegendContent
+              scrollPosition={scrollPosition}
+              showLegend={showLegend}
+            />
           )}
         </Animated.View>
       </GestureDetector>
