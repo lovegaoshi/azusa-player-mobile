@@ -1,0 +1,55 @@
+diff --git a/node_modules/react-native-ota-hot-update/android/src/main/java/com/otahotupdate/OtaHotUpdate.kt b/node_modules/react-native-ota-hot-update/android/src/main/java/com/otahotupdate/OtaHotUpdate.kt
+index 3bd776e..cbc5c80 100644
+--- a/node_modules/react-native-ota-hot-update/android/src/main/java/com/otahotupdate/OtaHotUpdate.kt
++++ b/node_modules/react-native-ota-hot-update/android/src/main/java/com/otahotupdate/OtaHotUpdate.kt
+@@ -55,7 +55,13 @@ class OtaHotUpdate : BaseReactPackage() {
+       val pathBundle = sharedPrefs.getString(PATH)
+       val version = sharedPrefs.getString(VERSION)
+       val currentVersionName = sharedPrefs.getString(CURRENT_VERSION_NAME)
+-      if (pathBundle == "" || (currentVersionName != context.getPackageInfo().versionName)) {
++      val pkgVersion = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
++        context.getPackageInfo().longVersionCode
++      } else {
++        context.getPackageInfo().versionCode
++      }
++
++      if (pathBundle == "" || (currentVersionName != pkgVersion.toString())) {
+         if (version != "") {
+           // reset version number because bundle is wrong version, need download from new version
+           sharedPrefs.putString(VERSION, "")
+diff --git a/node_modules/react-native-ota-hot-update/android/src/main/java/com/otahotupdate/OtaHotUpdateModule.kt b/node_modules/react-native-ota-hot-update/android/src/main/java/com/otahotupdate/OtaHotUpdateModule.kt
+index 911732d..436da7c 100644
+--- a/node_modules/react-native-ota-hot-update/android/src/main/java/com/otahotupdate/OtaHotUpdateModule.kt
++++ b/node_modules/react-native-ota-hot-update/android/src/main/java/com/otahotupdate/OtaHotUpdateModule.kt
+@@ -38,9 +38,14 @@ class OtaHotUpdateModule internal constructor(context: ReactApplicationContext)
+             sharedPrefs.putString(PREVIOUS_PATH, oldPath)
+           }
+           sharedPrefs.putString(PATH, fileUnzip)
++          val version = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
++            reactApplicationContext?.getPackageInfo()?.longVersionCode
++          } else {
++            reactApplicationContext?.getPackageInfo()?.versionCode
++          }
+           sharedPrefs.putString(
+             CURRENT_VERSION_NAME,
+-            reactApplicationContext?.getPackageInfo()?.versionName
++            version.toString()
+           )
+           promise.resolve(true)
+         } else {
+@@ -120,9 +125,14 @@ class OtaHotUpdateModule internal constructor(context: ReactApplicationContext)
+   override fun setExactBundlePath(path: String?, promise: Promise) {
+     val sharedPrefs = SharedPrefs(reactApplicationContext)
+     sharedPrefs.putString(PATH, path)
++    val version = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
++      reactApplicationContext?.getPackageInfo()?.longVersionCode
++    } else {
++      reactApplicationContext?.getPackageInfo()?.versionCode
++    }
+     sharedPrefs.putString(
+       CURRENT_VERSION_NAME,
+-      reactApplicationContext?.getPackageInfo()?.versionName
++      version.toString()
+     )
+     promise.resolve(true)
+   }
