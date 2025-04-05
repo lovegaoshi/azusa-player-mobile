@@ -77,6 +77,6 @@ const regexFetch = async ({
 
 export default {
   // https://space.bilibili.com/20159625/lists
-  regexSearchMatch: /space.bilibili.com\/(\d+)\/lists/,
+  regexSearchMatch: /space.bilibili.com\/(\d+)\/lists$/,
   regexFetch,
 };
