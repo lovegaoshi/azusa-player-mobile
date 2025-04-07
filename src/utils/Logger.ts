@@ -24,7 +24,7 @@ export const logStore = createStore<{ logs: Log[]; logLevel: number }>(() => ({
 export const getLog = () => {
   return logStore
     .getState()
-    .logs.map(log => `${log.level}: ${log.msg}`)
+    .logs.map(log => `[${log.level}]@${log.time}: ${log.msg}`)
     .join('\n');
 };
 
