@@ -3387,6 +3387,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@legendapp/list@npm:^1.0.0-beta.30":
+  version: 1.0.0-beta.30
+  resolution: "@legendapp/list@npm:1.0.0-beta.30"
+  peerDependencies:
+    react: "*"
+    react-native: "*"
+  checksum: 10c0/89a284cfc124e49f1d87a4ba0f6fc83a43ce44e021525b57052997e75739ad2b7d094d9a3b5f44642023e063ccbd461b67ab37ae11099b430636874d7283eaf7
+  languageName: node
+  linkType: hard
+
 "@material/material-color-utilities@npm:^0.3.0":
   version: 0.3.0
   resolution: "@material/material-color-utilities@npm:0.3.0"
@@ -6511,6 +6521,7 @@ __metadata:
     "@babel/preset-env": "npm:^7.26.9"
     "@babel/preset-typescript": "npm:^7.27.0"
     "@babel/runtime": "npm:^7.27.0"
+    "@legendapp/list": "npm:^1.0.0-beta.30"
     "@material/material-color-utilities": "npm:^0.3.0"
     "@notifee/react-native": "npm:^9.1.8"
     "@react-native-community/cli": "npm:16.0.2"

@@ -31,6 +31,7 @@
     "ota": "yarn export-android; yarn export-ios; mkdir -p bundles; mv android/index.android.bundle.zip bundles; mv ios/main.jsbundle.zip bundles; python3 scripts/hashyarnlock.py"
   },
   "dependencies": {
+    "@legendapp/list": "^1.0.0-beta.30",
     "@material/material-color-utilities": "^0.3.0",
     "@notifee/react-native": "^9.1.8",
     "@react-native-community/cli": "16.0.2",
