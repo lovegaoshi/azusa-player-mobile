@@ -1,5 +1,5 @@
 diff --git a/node_modules/react-native-video/android/src/main/java/com/brentvatne/exoplayer/ReactExoplayerView.java b/node_modules/react-native-video/android/src/main/java/com/brentvatne/exoplayer/ReactExoplayerView.java
-index 7f46d05..3dfaa1b 100644
+index 7760d1b..c7d841e 100644
 --- a/node_modules/react-native-video/android/src/main/java/com/brentvatne/exoplayer/ReactExoplayerView.java
 +++ b/node_modules/react-native-video/android/src/main/java/com/brentvatne/exoplayer/ReactExoplayerView.java
 @@ -125,7 +125,6 @@ import com.brentvatne.react.R;
@@ -10,7 +10,7 @@ index 7f46d05..3dfaa1b 100644
  import com.facebook.react.bridge.LifecycleEventListener;
  import com.facebook.react.bridge.Promise;
  import com.facebook.react.bridge.UiThreadUtil;
-@@ -256,7 +255,6 @@ public class ReactExoplayerView extends FrameLayout implements
+@@ -257,7 +256,6 @@ public class ReactExoplayerView extends FrameLayout implements
      private final ThemedReactContext themedReactContext;
      private final AudioManager audioManager;
      private final AudioBecomingNoisyReceiver audioBecomingNoisyReceiver;
@@ -18,7 +18,7 @@ index 7f46d05..3dfaa1b 100644
      private final AudioManager.OnAudioFocusChangeListener audioFocusChangeListener;
  
      // store last progress event values to avoid sending unnecessary messages
-@@ -334,7 +332,6 @@ public class ReactExoplayerView extends FrameLayout implements
+@@ -335,7 +333,6 @@ public class ReactExoplayerView extends FrameLayout implements
          themedReactContext.addLifecycleEventListener(this);
          audioBecomingNoisyReceiver = new AudioBecomingNoisyReceiver(themedReactContext);
          audioFocusChangeListener = new OnAudioFocusChangedListener(this, themedReactContext);
@@ -26,7 +26,7 @@ index 7f46d05..3dfaa1b 100644
      }
  
      private boolean isPlayingAd() {
-@@ -766,7 +763,6 @@ public class ReactExoplayerView extends FrameLayout implements
+@@ -769,7 +766,6 @@ public class ReactExoplayerView extends FrameLayout implements
                  if (player == null) {
                      // Initialize core configuration and listeners
                      initializePlayerCore(self);
@@ -34,7 +34,7 @@ index 7f46d05..3dfaa1b 100644
                      PictureInPictureUtil.applyAutoEnterEnabled(themedReactContext, pictureInPictureParamsBuilder, this.enterPictureInPictureOnLeave);
                  }
                  if (!source.isLocalAssetFile() && !source.isAsset() && source.getBufferConfig().getCacheSize() > 0) {
-@@ -872,7 +868,6 @@ public class ReactExoplayerView extends FrameLayout implements
+@@ -882,7 +878,6 @@ public class ReactExoplayerView extends FrameLayout implements
          exoPlayerView.setPlayer(player);
  
          audioBecomingNoisyReceiver.setListener(self);
@@ -42,7 +42,7 @@ index 7f46d05..3dfaa1b 100644
          bandwidthMeter.addEventListener(new Handler(), self);
          setPlayWhenReady(!isPaused);
          playerNeedsSource = true;
-@@ -1301,7 +1296,6 @@ public class ReactExoplayerView extends FrameLayout implements
+@@ -1319,7 +1314,6 @@ public class ReactExoplayerView extends FrameLayout implements
          }
          progressHandler.removeMessages(SHOW_PROGRESS);
          audioBecomingNoisyReceiver.removeListener();
@@ -50,7 +50,7 @@ index 7f46d05..3dfaa1b 100644
          bandwidthMeter.removeEventListener(this);
  
          if (mainHandler != null && mainRunnable != null) {
-@@ -1820,7 +1814,6 @@ public class ReactExoplayerView extends FrameLayout implements
+@@ -1838,7 +1832,6 @@ public class ReactExoplayerView extends FrameLayout implements
          if (isPlaying && isSeeking) {
              eventEmitter.onVideoSeek.invoke(player.getCurrentPosition(), seekPosition);
          }
@@ -58,7 +58,7 @@ index 7f46d05..3dfaa1b 100644
          eventEmitter.onVideoPlaybackStateChanged.invoke(isPlaying, isSeeking);
  
          if (isPlaying) {
-@@ -2281,36 +2274,9 @@ public class ReactExoplayerView extends FrameLayout implements
+@@ -2304,36 +2297,9 @@ public class ReactExoplayerView extends FrameLayout implements
      }
  
      public void enterPictureInPictureMode() {

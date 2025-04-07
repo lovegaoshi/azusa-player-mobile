@@ -117,12 +117,12 @@
     "react-native-svga-player": "https://lovegaoshi@github.com/lovegaoshi/react-native-svga-player.git#commit=f8c6303fddb528a1a94d2ab4696c9318c0002cfd",
     "react-native-text-ticker": "https://lovegaoshi@github.com/lovegaoshi/react-native-text-ticker.git#commit=78a79c9a5f3b70e15d6de6db14d0516a56ae5d40",
     "react-native-track-player": "https://github.com/lovegaoshi/react-native-track-player.git#commit=092f1115fbbe49165e2b575cb24dd0fb688151a4",
-    "react-native-turbo-image": "^1.22.1",
+    "react-native-turbo-image": "^1.22.3",
     "react-native-url-polyfill": "^2.0.0",
     "react-native-vector-icons": "^10.2.0",
-    "react-native-video": "^6.11.0",
+    "react-native-video": "^6.12.0",
     "react-native-webview": "13.13.5",
-    "sp-react-native-in-app-updates": "^1.4.0",
+    "sp-react-native-in-app-updates": "^1.4.1",
     "text-encoding-polyfill": "^0.6.7",
     "use-debounce": "^10.0.4",
     "uuid": "^11.1.0",
@@ -185,7 +185,7 @@
     "react-test-renderer": "18.3.1",
     "reactotron-react-native": "^5.1.12",
     "rimraf": "^6.0.1",
-    "typescript": "~5.8.2"
+    "typescript": "~5.8.3"
   },
   "engines": {
     "node": ">=18.0.0"
