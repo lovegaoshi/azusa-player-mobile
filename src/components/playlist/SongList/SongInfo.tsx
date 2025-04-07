@@ -10,18 +10,13 @@ import { useNoxSetting } from '@stores/useApp';
 import { seconds2MMSS } from '@utils/Utils';
 import { PlaylistTypes } from '@enums/Playlist';
 import NoxCache from '@utils/Cache';
-
-interface UsePlaylist {
-  playSong: (song: NoxMedia.Song) => void;
-  checking: boolean;
-  selected: boolean[];
-}
+import { UsePlaylistRN } from '../usePlaylistRN';
 
 interface Props {
   item: NoxMedia.Song;
   index: number;
   currentPlaying: boolean;
-  usePlaylist: UsePlaylist;
+  usePlaylist: UsePlaylistRN;
   onLongPress?: () => void;
   onChecked?: () => void;
   networkCellular?: boolean;

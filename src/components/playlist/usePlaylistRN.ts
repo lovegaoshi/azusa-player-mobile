@@ -4,11 +4,11 @@ import { useTranslation } from 'react-i18next';
 import { useDebounce } from 'use-debounce';
 import { useNetInfo } from '@react-native-community/netinfo';
 import { activateKeepAwakeAsync, deactivateKeepAwake } from 'expo-keep-awake';
-import { useAnimatedRef } from 'react-native-reanimated';
+import { AnimatedRef, useAnimatedRef } from 'react-native-reanimated';
 
 import { useNoxSetting } from '@stores/useApp';
 import { PlaylistTypes, SearchRegex } from '@enums/Playlist';
-import usePlaylist from '@hooks/usePlaylist';
+import usePlaylist, { UsePlaylist } from '@hooks/usePlaylist';
 import noxCache, { noxCacheKey } from '@utils/Cache';
 import { reParseSearch as reParseSearchRaw } from '@utils/re';
 import { syncFavlist } from '@utils/Bilibili/bilifavOperate';
@@ -24,7 +24,7 @@ interface ScrollTo {
   viewPosition?: number; // toIndex = -1, reset = false, viewPosition = -4
 }
 
-export default (playlist: NoxMedia.Playlist) => {
+export default (playlist: NoxMedia.Playlist): UsePlaylistRN => {
   const { t } = useTranslation();
   const setSnack = useSnack(state => state.setSnack);
   const netInfo = useNetInfo();
@@ -220,3 +220,13 @@ export default (playlist: NoxMedia.Playlist) => {
     playlistRef,
   };
 };
+
+export interface UsePlaylistRN extends UsePlaylist {
+  refreshPlaylist: () => Promise<void>;
+  cachedSongs: string[];
+  setCachedSongs: (val: string[]) => void;
+  handleSearch: (searchedVal: string) => void;
+  playSong: (song: NoxMedia.Song) => void;
+  scrollTo: ({ toIndex, reset, viewPosition }: ScrollTo) => void;
+  playlistRef: AnimatedRef<FlashList<NoxMedia.Song>>;
+}

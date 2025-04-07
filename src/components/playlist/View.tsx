@@ -3,7 +3,7 @@ import { View } from 'react-native';
 
 import { styles } from '../style';
 import BiliSearchbar from './BiliSearch/BiliSearchbar';
-import SongList from './SongList/SongList';
+import SongList from './SongList/View';
 import { useNoxSetting } from '@stores/useApp';
 
 const Playlist = () => {
