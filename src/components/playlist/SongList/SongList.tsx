@@ -129,9 +129,7 @@ export default ({
           animated: false,
         });
       }, 16);
-      return;
-    }
-    if (scrollActive === 1) {
+    } else if (scrollActive === 1) {
       scrollingRef.current = setInterval(() => {
         playlistRef.current?.scrollToOffset({
           offset:
@@ -140,8 +138,10 @@ export default ({
           animated: false,
         });
       }, 16);
-      return;
     }
+    return () => {
+      scrollingRef.current && clearInterval(scrollingRef.current);
+    };
   }, [scrollActive]);
 
   const getLayoutY = useCallback(
