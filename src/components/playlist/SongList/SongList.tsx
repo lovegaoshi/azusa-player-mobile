@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo, useState } from 'react';
 import { NativeScrollEvent } from 'react-native';
 import { FlashList } from '@shopify/flash-list';
 import { useNetInfo } from '@react-native-community/netinfo';
@@ -6,6 +6,7 @@ import Animated, {
   SharedValue,
   useAnimatedScrollHandler,
 } from 'react-native-reanimated';
+import { Gesture, GestureDetector } from 'react-native-gesture-handler';
 
 import SongInfo from './SongInfo';
 import SongBackground from './SongBackground';
@@ -42,6 +43,7 @@ export default ({
     rows,
     toggleSelected,
     shouldReRender,
+    checking,
     setChecking,
     getSongIndex,
     playlistRef,
@@ -59,35 +61,48 @@ export default ({
     contentHeight.value = contentH;
   };
   const scrollHandler = useAnimatedScrollHandler(scrollBarOnScroll);
+  const scrollDragGesture = useMemo(
+    () =>
+      Gesture.Pan()
+        .enabled(checking)
+        .activateAfterLongPress(500)
+        .onBegin(e => console.log('begin', e.y))
+        .onChange(e => {
+          console.log(e.changeY);
+        }),
+    [checking],
+  );
 
   return (
-    <AnimatedFlashList
-      ref={playlistRef}
-      data={rows}
-      renderItem={({ item, index }) => (
-        <SongBackground song={item}>
-          <SongInfo
-            item={item}
-            index={index}
-            currentPlaying={item.id === currentPlayingId}
-            usePlaylist={usedPlaylist}
-            onChecked={() => toggleSelected(getSongIndex(item, index))}
-            onLongPress={() => {
-              toggleSelected(getSongIndex(item, index));
-              setChecking(true);
-            }}
-            networkCellular={netInfo.type === 'cellular'}
-          />
-        </SongBackground>
-        // </Animated.View>
-      )}
-      keyExtractor={(item, index) => `${item.id}.${index}`}
-      estimatedItemSize={58}
-      extraData={shouldReRender}
-      onRefresh={() => keepAwake(refreshPlaylist)}
-      refreshing={refreshing}
-      showsVerticalScrollIndicator={false}
-      onScroll={scrollHandler}
-    />
+    <GestureDetector gesture={scrollDragGesture}>
+      <AnimatedFlashList
+        ref={playlistRef}
+        data={rows}
+        renderItem={({ item, index }) => (
+          <SongBackground song={item}>
+            <SongInfo
+              item={item}
+              index={index}
+              currentPlaying={item.id === currentPlayingId}
+              usePlaylist={usedPlaylist}
+              onChecked={() => toggleSelected(getSongIndex(item, index))}
+              onLongPress={() => {
+                toggleSelected(getSongIndex(item, index));
+                setChecking(true);
+              }}
+              networkCellular={netInfo.type === 'cellular'}
+            />
+          </SongBackground>
+          // </Animated.View>
+        )}
+        keyExtractor={(item, index) => `${item.id}.${index}`}
+        estimatedItemSize={58}
+        extraData={shouldReRender}
+        onRefresh={() => keepAwake(refreshPlaylist)}
+        refreshing={refreshing}
+        showsVerticalScrollIndicator={false}
+        onScroll={scrollHandler}
+      />
+    </GestureDetector>
   );
 };
