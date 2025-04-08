@@ -33,6 +33,7 @@ export default () => {
   } = usedPlaylist;
   const scrollViewHeight = useSharedValue(0);
   const scrollPosition = useSharedValue(0);
+  const scrollOffset = useSharedValue(0);
   const contentHeight = useSharedValue(0);
   const visibleIndex = useSharedValue(-1);
 
@@ -107,6 +108,7 @@ export default () => {
         style={stylesLocal.playlistContainer}
         scrollViewReference={playlistRef}
         scrollPosition={scrollPosition}
+        scrollOffset={scrollOffset}
         scrollViewHeight={scrollViewHeight}
         contentHeight={contentHeight}
         LegendContent={ScrollLegend}
@@ -115,6 +117,7 @@ export default () => {
           usedPlaylist={usedPlaylist}
           visibleIndex={visibleIndex}
           scrollPosition={scrollPosition}
+          scrollOffset={scrollOffset}
           scrollViewHeight={scrollViewHeight}
           contentHeight={contentHeight}
         />

@@ -11,9 +11,10 @@ import Animated, {
 } from 'react-native-reanimated';
 
 import { useNoxSetting } from '@stores/useApp';
+import bs from '@utils/binarySearch';
 
 export interface ScrollProps {
-  scrollPosition: SharedValue<number>;
+  scrollOffset: SharedValue<number>;
   scrollViewReference: RefObject<FlashList<NoxMedia.Song>>;
 }
 
@@ -31,10 +32,10 @@ const TextPadding = 5;
 
 export const LegendExample = ({
   data = [],
-  index,
-  scrollPosition,
+  scrollOffset,
   processData,
   showLegend,
+  scrollViewReference,
 }: CustomLegendProps<unknown>) => {
   const playerStyle = useNoxSetting(state => state.playerStyle);
   const [debouncedText, setdebouncedText] = useState('');
@@ -49,13 +50,25 @@ export const LegendExample = ({
   const actualTextLength = useSharedValue(0);
   const prevTextLength = useSharedValue(0);
 
-  const changeText = (scrollPos: number) => {
-    setText(processData?.(data?.[index?.value ?? 0]) ?? String(scrollPos));
+  const changeText = (offset: number) => {
+    (async () => {
+      const bsindex = bs({
+        dataLen: data.length,
+        target: offset,
+        comparator: (a, b) => a - b,
+        getData: i => scrollViewReference.current?.getLayout(i)?.y ?? 0,
+      });
+      console.log('bsindex', bsindex);
+      setText(processData?.(data?.[Math.abs(bsindex)]) ?? String(offset));
+    })();
   };
 
   useAnimatedReaction(
-    () => scrollPosition.value,
+    () => scrollOffset.value,
     curr => {
+      if (showLegend.value === 0) {
+        return;
+      }
       runOnJS(changeText)(curr);
     },
   );

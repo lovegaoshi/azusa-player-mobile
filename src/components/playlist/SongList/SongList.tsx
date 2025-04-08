@@ -21,14 +21,15 @@ interface Props {
   usedPlaylist: UsePlaylistRN;
   visibleIndex: SharedValue<number>;
   scrollPosition: SharedValue<number>;
+  scrollOffset: SharedValue<number>;
   scrollViewHeight: SharedValue<number>;
   contentHeight: SharedValue<number>;
 }
 
 export default ({
   usedPlaylist,
-  visibleIndex,
   scrollPosition,
+  scrollOffset,
   scrollViewHeight,
   contentHeight,
 }: Props) => {
@@ -53,6 +54,7 @@ export default ({
   }: NativeScrollEvent) => {
     const contentH = Math.max(1, contentSize.height - layoutMeasurement.height);
     scrollPosition.value = contentOffset.y / contentH;
+    scrollOffset.value = contentOffset.y;
     scrollViewHeight.value = layoutMeasurement.height;
     contentHeight.value = contentH;
   };
@@ -85,12 +87,6 @@ export default ({
       onRefresh={() => keepAwake(refreshPlaylist)}
       refreshing={refreshing}
       showsVerticalScrollIndicator={false}
-      onViewableItemsChanged={({ viewableItems }) => {
-        visibleIndex.value = viewableItems[0]?.index ?? -1;
-      }}
-      viewabilityConfig={{
-        viewAreaCoveragePercentThreshold: 50,
-      }}
       onScroll={scrollHandler}
     />
   );

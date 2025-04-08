@@ -19,6 +19,7 @@ const SCROLLBAR_HIDE_TIMEOUT = 3000;
 const SCROLLBAR_ANIM_TIME = 300;
 
 interface Props extends ScrollProps {
+  scrollPosition: SharedValue<number>;
   children: JSX.Element | JSX.Element[];
   style?: StyleProp<ViewStyle>;
   scrollViewHeight: SharedValue<number>;
@@ -35,6 +36,7 @@ export default function CustomScrollView({
   style,
   scrollViewHeight,
   scrollPosition,
+  scrollOffset,
   barHeight = 0.2,
   contentHeight,
   scrollBarAnimTime = SCROLLBAR_ANIM_TIME,
@@ -132,7 +134,7 @@ export default function CustomScrollView({
           {LegendContent !== undefined && (
             <LegendContent
               scrollViewReference={scrollViewReference}
-              scrollPosition={scrollPosition}
+              scrollOffset={scrollOffset}
               showLegend={showLegend}
             />
           )}
