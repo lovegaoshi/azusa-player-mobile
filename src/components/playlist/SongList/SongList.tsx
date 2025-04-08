@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { NativeScrollEvent } from 'react-native';
 import { FlashList } from '@shopify/flash-list';
 import { useNetInfo } from '@react-native-community/netinfo';
@@ -8,6 +8,7 @@ import Animated, {
   runOnJS,
   SharedValue,
   useAnimatedScrollHandler,
+  useDerivedValue,
   useSharedValue,
 } from 'react-native-reanimated';
 import { Gesture, GestureDetector } from 'react-native-gesture-handler';
@@ -41,9 +42,15 @@ export default ({
   const currentPlayingId = useNoxSetting(state => state.currentPlayingId);
   const netInfo = useNetInfo();
   const initialDragY = useSharedValue(0);
+  const translationDragY = useSharedValue(0);
+  const initialDragOffset = useSharedValue(0);
   const scrollingRef = React.useRef<NodeJS.Timeout>();
   const dragPos = useSharedValue(0);
+  const dragToSelect = useSharedValue(0);
   const [scrollActive, setScrollActive] = useState(0);
+  const cursorOffset = useDerivedValue(
+    () => initialDragY.value + translationDragY.value + scrollOffset.value,
+  );
 
   const {
     refreshPlaylist,
@@ -75,24 +82,33 @@ export default ({
       Gesture.Pan()
         .enabled(checking)
         .activateAfterLongPress(500)
-        .onBegin(e => (initialDragY.value = e.y))
+        .onStart(e => {
+          initialDragY.value = e.y;
+          translationDragY.value = 0;
+          initialDragOffset.value = scrollOffset.value + e.y;
+        })
         .onChange(e => {
+          dragToSelect.value = 1;
+          translationDragY.value = e.translationY;
           const cursorPos =
             (e.translationY + initialDragY.value) / scrollViewHeight.value;
           const scrollDown = cursorPos > 0.8;
           dragPos.value = cursorPos;
           const scrollUp = cursorPos < 0.2;
           if (scrollDown) {
-            console.log('start scrolling down');
             runOnJS(setScrollActive)(1);
           } else if (scrollUp) {
             runOnJS(setScrollActive)(2);
           } else {
-            console.log('stop scrolling');
             runOnJS(setScrollActive)(0);
           }
         })
-        .onEnd(() => runOnJS(setScrollActive)(0)),
+        .onFinalize(() => {
+          dragToSelect.value = 0;
+          initialDragY.value = 0;
+          translationDragY.value = 0;
+          runOnJS(setScrollActive)(0);
+        }),
     [checking],
   );
 
@@ -127,6 +143,11 @@ export default ({
     }
   }, [scrollActive]);
 
+  const getLayoutY = useCallback(
+    (index: number) => playlistRef.current?.getLayout(index)?.y ?? 0,
+    [],
+  );
+
   return (
     <GestureDetector gesture={scrollDragGesture}>
       <AnimatedFlashList
@@ -135,6 +156,9 @@ export default ({
         renderItem={({ item, index }) => (
           <SongBackground song={item}>
             <SongInfo
+              dragToSelect={dragToSelect}
+              getLayoutY={getLayoutY}
+              cursorOffset={cursorOffset}
               item={item}
               index={index}
               currentPlaying={item.id === currentPlayingId}

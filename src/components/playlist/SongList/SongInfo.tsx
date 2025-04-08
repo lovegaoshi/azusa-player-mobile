@@ -6,6 +6,15 @@ import {
   TouchableRipple,
 } from 'react-native-paper';
 import { View, GestureResponderEvent, StyleSheet } from 'react-native';
+import {
+  DerivedValue,
+  runOnJS,
+  SharedValue,
+  useAnimatedReaction,
+} from 'react-native-reanimated';
+import inRange from 'lodash/inRange';
+import throttle from 'lodash/throttle';
+
 import { useNoxSetting } from '@stores/useApp';
 import { seconds2MMSS } from '@utils/Utils';
 import { PlaylistTypes } from '@enums/Playlist';
@@ -21,6 +30,9 @@ interface Props {
   onLongPress?: () => void;
   onChecked?: () => void;
   networkCellular?: boolean;
+  cursorOffset: DerivedValue<number>;
+  getLayoutY: (index: number) => number;
+  dragToSelect: SharedValue<number>;
 }
 
 const isItemSolid = (
@@ -44,6 +56,9 @@ const SongInfo = ({
   onLongPress = () => undefined,
   onChecked = () => undefined,
   networkCellular = false,
+  getLayoutY,
+  cursorOffset,
+  dragToSelect,
 }: Props) => {
   const { playSong, checking, selected } = usePlaylist;
   const currentPlaylist = useNoxSetting(state => state.currentPlaylist);
@@ -54,6 +69,7 @@ const SongInfo = ({
   const setSongMenuSongIndexes = useNoxSetting(
     state => state.setSongMenuSongIndexes,
   );
+  const layoutY = React.useRef(-1);
 
   const title =
     playerSetting.parseSongName && currentPlaylist.type !== PlaylistTypes.Search
@@ -63,10 +79,25 @@ const SongInfo = ({
 
   const [, setChecked] = React.useState(false);
 
-  const toggleCheck = () => {
-    setChecked(val => !val);
+  const toggleCheck = throttle(() => {
     onChecked();
+    setChecked(val => !val);
+  }, 100);
+
+  const dragToggleCheck = (min: number, max: number) => {
+    if (inRange(layoutY.current, min, max)) {
+      console.log(layoutY.current, min, max, index + 1, dragToSelect.value);
+      toggleCheck();
+    }
   };
+
+  useAnimatedReaction(
+    () => cursorOffset.value,
+    (c, p) => {
+      if (dragToSelect.value === 0) return;
+      runOnJS(dragToggleCheck)(c, p ?? 0);
+    },
+  );
 
   const getSongIndex = () => {
     // HACK: :index is no longer reliable because currentRow may filter view.
@@ -75,6 +106,10 @@ const SongInfo = ({
     return currentPlaylist.songList.findIndex(song => song.id === id);
   };
   const checked = selected[getSongIndex()];
+
+  React.useEffect(() => {
+    (async () => (layoutY.current = getLayoutY(index)))();
+  });
 
   return (
     <View
