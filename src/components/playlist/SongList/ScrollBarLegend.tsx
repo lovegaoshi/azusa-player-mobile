@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { RefObject, useState } from 'react';
+import { FlashList } from '@shopify/flash-list';
 import { StyleSheet, Text, View } from 'react-native';
 import Animated, {
   runOnJS,
@@ -13,6 +14,7 @@ import { useNoxSetting } from '@stores/useApp';
 
 export interface ScrollProps {
   scrollPosition: SharedValue<number>;
+  scrollViewReference: RefObject<FlashList<NoxMedia.Song>>;
 }
 
 export interface LegendProps extends ScrollProps {
