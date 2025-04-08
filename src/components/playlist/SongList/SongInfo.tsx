@@ -69,7 +69,6 @@ const SongInfo = ({
   const setSongMenuSongIndexes = useNoxSetting(
     state => state.setSongMenuSongIndexes,
   );
-  const layoutY = React.useRef(-1);
 
   const title =
     playerSetting.parseSongName && currentPlaylist.type !== PlaylistTypes.Search
@@ -85,8 +84,7 @@ const SongInfo = ({
   }, 100);
 
   const dragToggleCheck = (min: number, max: number) => {
-    if (inRange(layoutY.current, min, max)) {
-      console.log(layoutY.current, min, max, index + 1, dragToSelect.value);
+    if (inRange(getLayoutY(index), min, max)) {
       toggleCheck();
     }
   };
@@ -94,8 +92,8 @@ const SongInfo = ({
   useAnimatedReaction(
     () => cursorOffset.value,
     (c, p) => {
-      if (dragToSelect.value === 0) return;
-      runOnJS(dragToggleCheck)(c, p ?? 0);
+      if (dragToSelect.value === 0 || p === null) return;
+      runOnJS(dragToggleCheck)(c, p);
     },
   );
 
@@ -106,10 +104,6 @@ const SongInfo = ({
     return currentPlaylist.songList.findIndex(song => song.id === id);
   };
   const checked = selected[getSongIndex()];
-
-  React.useEffect(() => {
-    (async () => (layoutY.current = getLayoutY(index)))();
-  });
 
   return (
     <View

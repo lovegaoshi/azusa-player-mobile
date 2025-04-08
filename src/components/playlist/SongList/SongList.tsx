@@ -51,6 +51,7 @@ export default ({
   const cursorOffset = useDerivedValue(
     () => initialDragY.value + translationDragY.value + scrollOffset.value,
   );
+  const layoutY = React.useRef<number[]>([]);
 
   const {
     refreshPlaylist,
@@ -144,9 +145,19 @@ export default ({
   }, [scrollActive]);
 
   const getLayoutY = useCallback(
-    (index: number) => playlistRef.current?.getLayout(index)?.y ?? 0,
-    [],
+    (index: number) => {
+      if (layoutY.current[index] === undefined) {
+        const layout = playlistRef.current?.getLayout(index);
+        layoutY.current[index] = (layout?.y ?? 0) + (layout?.height ?? 0);
+      }
+      return layoutY.current[index];
+    },
+    [rows],
   );
+
+  useEffect(() => {
+    layoutY.current = [];
+  }, [rows]);
 
   return (
     <GestureDetector gesture={scrollDragGesture}>
