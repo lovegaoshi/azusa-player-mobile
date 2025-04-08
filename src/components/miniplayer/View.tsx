@@ -58,7 +58,7 @@ export default () => {
     miniplayerHeight.value = animation
       ? withTiming(height, {
           duration: 250,
-          easing: Easing.inOut(Easing.ease),
+          easing: Easing.out(Easing.exp),
         })
       : height;
     artworkOpacity.value = withTiming(1);
@@ -69,7 +69,7 @@ export default () => {
     miniplayerHeight.value = animation
       ? withTiming(MinPlayerHeight, {
           duration: 250,
-          easing: Easing.inOut(Easing.ease),
+          easing: Easing.out(Easing.exp),
         })
       : MinPlayerHeight;
     artworkOpacity.value = withTiming(1);

@@ -10,18 +10,14 @@ import { useNoxSetting } from '@stores/useApp';
 import { seconds2MMSS } from '@utils/Utils';
 import { PlaylistTypes } from '@enums/Playlist';
 import NoxCache from '@utils/Cache';
-
-interface UsePlaylist {
-  playSong: (song: NoxMedia.Song) => void;
-  checking: boolean;
-  selected: boolean[];
-}
+import { UsePlaylistRN } from '../usePlaylistRN';
+import { getArtistName } from '@objects/Song';
 
 interface Props {
   item: NoxMedia.Song;
   index: number;
   currentPlaying: boolean;
-  usePlaylist: UsePlaylist;
+  usePlaylist: UsePlaylistRN;
   onLongPress?: () => void;
   onChecked?: () => void;
   networkCellular?: boolean;
@@ -64,11 +60,6 @@ const SongInfo = ({
       ? item.parsedName
       : item.name;
   const id = item.id;
-  let artist = item.singer;
-  artist =
-    item.album && item.parsedName !== item.album
-      ? artist + ' - ' + item.album
-      : artist;
 
   const [, setChecked] = React.useState(false);
 
@@ -123,7 +114,7 @@ const SongInfo = ({
                   style={{ color: playerStyle.colors.onSurfaceVariant }}
                   numberOfLines={1}
                 >
-                  {artist}
+                  {getArtistName(item)}
                 </Text>
               </View>
             </View>

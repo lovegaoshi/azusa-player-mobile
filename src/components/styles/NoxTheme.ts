@@ -126,7 +126,7 @@ export default {
     onBackground: '#e6e6e2',
     surface: '#333330',
     onSurface: '#fcf75e',
-    surfaceVariant: '#666652',
+    surfaceVariant: '#1E1E1E',
     onSurfaceVariant: 'rgb(202, 200, 165)',
     outline: '#b3b39c',
     // blackground of inputs

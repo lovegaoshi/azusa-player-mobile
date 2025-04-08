@@ -118,3 +118,9 @@ export const dummySong = (): NoxMedia.Song => {
 };
 
 export const dummySongObj = dummySong();
+
+export const getArtistName = (item: NoxMedia.Song) => {
+  return item.album && item.parsedName !== item.album
+    ? item.singer + ' - ' + item.album
+    : item.singer;
+};

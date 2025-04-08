@@ -1,5 +1,4 @@
-import { FlashList } from '@shopify/flash-list';
-import { RefObject, useMemo, useRef } from 'react';
+import { useMemo, useRef } from 'react';
 import { View, StyleSheet, StyleProp, ViewStyle } from 'react-native';
 import { GestureDetector, Gesture } from 'react-native-gesture-handler';
 import Animated, {
@@ -20,8 +19,8 @@ const SCROLLBAR_HIDE_TIMEOUT = 3000;
 const SCROLLBAR_ANIM_TIME = 300;
 
 interface Props extends ScrollProps {
+  scrollPosition: SharedValue<number>;
   children: JSX.Element | JSX.Element[];
-  scrollViewReference: RefObject<FlashList<NoxMedia.Song>>;
   style?: StyleProp<ViewStyle>;
   scrollViewHeight: SharedValue<number>;
   barHeight?: number;
@@ -37,6 +36,7 @@ export default function CustomScrollView({
   style,
   scrollViewHeight,
   scrollPosition,
+  scrollOffset,
   barHeight = 0.2,
   contentHeight,
   scrollBarAnimTime = SCROLLBAR_ANIM_TIME,
@@ -133,7 +133,8 @@ export default function CustomScrollView({
         >
           {LegendContent !== undefined && (
             <LegendContent
-              scrollPosition={scrollPosition}
+              scrollViewReference={scrollViewReference}
+              scrollOffset={scrollOffset}
               showLegend={showLegend}
             />
           )}
@@ -149,7 +150,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     right: -19,
     backgroundColor: 'rgba(200, 200, 200, 0.45)',
-    width: 25,
+    width: 27,
     borderRadius: 0,
     zIndex: 10,
   },

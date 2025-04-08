@@ -3,10 +3,10 @@ import {
   View,
   ScrollView,
   Dimensions,
-  FlatList,
   TouchableOpacity,
   StyleSheet,
 } from 'react-native';
+import { LegendList } from '@legendapp/list';
 import { Text } from 'react-native-paper';
 import Image from 'react-native-turbo-image';
 import { useTranslation } from 'react-i18next';
@@ -50,7 +50,8 @@ export const BiliSongCard = ({
       ]}
     >
       {title && <Text style={{ fontSize: 20, color: fontColor }}>{title}</Text>}
-      <FlatList
+      <LegendList<NoxMedia.Song>
+        recycleItems
         showsVerticalScrollIndicator={false}
         data={songs}
         renderItem={({ item }) => (

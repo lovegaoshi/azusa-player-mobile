@@ -12,18 +12,19 @@ export enum LOGLEVEL {
 
 interface Log {
   level: string;
+  time: string;
   msg: any;
 }
 
 export const logStore = createStore<{ logs: Log[]; logLevel: number }>(() => ({
   logs: [],
-  logLevel: LOGLEVEL.WARN,
+  logLevel: LOGLEVEL.ERROR,
 }));
 
 export const getLog = () => {
   return logStore
     .getState()
-    .logs.map(log => `${log.level}: ${log.msg}`)
+    .logs.map(log => `[${log.level}]@${log.time}: ${log.msg}`)
     .join('\n');
 };
 
@@ -33,7 +34,9 @@ export const resetLog = () => {
 
 export const addLog = (level: string, msg: any) => {
   logStore.setState(state => ({
-    logs: [{ level, msg: JSON.stringify(msg) }].concat(state.logs),
+    logs: [
+      { level, time: new Date().toISOString(), msg: JSON.stringify(msg) },
+    ].concat(state.logs),
   }));
 };
 
