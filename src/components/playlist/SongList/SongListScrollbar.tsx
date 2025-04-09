@@ -46,9 +46,10 @@ export default function CustomScrollView({
   const scrollTimeoutId = useRef<NodeJS.Timeout>();
   const scrollIndicatorOpacity = useSharedValue(0);
   const startScrollY = useSharedValue(0);
-  const barHeightP = useDerivedValue(() =>
-    barHeight > 1 ? barHeight : scrollViewHeight.value * barHeight,
-  );
+  const barHeightP = useDerivedValue(() => {
+    if (contentHeight.value === 1) return 0;
+    return barHeight > 1 ? barHeight : scrollViewHeight.value * barHeight;
+  });
   const scrollBarY = useDerivedValue(() =>
     interpolate(
       scrollPosition.value,
