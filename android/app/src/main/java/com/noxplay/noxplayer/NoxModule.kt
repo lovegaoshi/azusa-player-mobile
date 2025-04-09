@@ -107,6 +107,11 @@ class NoxModule(reactContext: ReactApplicationContext) :
         callback.resolve(null)
     }
 
+    @ReactMethod fun isRNLoaded(callback: Promise) {
+        val activity = reactApplicationContext.currentActivity as MainActivity?
+        callback.resolve(activity?.loadedRN)
+    }
+
     @ReactMethod fun getLastExitReason(callback: Promise) {
         try {
             val activity = reactApplicationContext.currentActivity
