@@ -1,6 +1,11 @@
 import * as React from 'react';
-import { View, Dimensions, TouchableOpacity, StyleSheet } from 'react-native';
-import { LegendList } from '@legendapp/list';
+import {
+  View,
+  Dimensions,
+  TouchableOpacity,
+  StyleSheet,
+  FlatList,
+} from 'react-native';
 import { Text } from 'react-native-paper';
 import Image from 'react-native-turbo-image';
 
@@ -36,8 +41,7 @@ export const BiliSongRow = ({
           {title}
         </Text>
       )}
-      <LegendList<NoxMedia.Song>
-        recycleItems
+      <FlatList
         showsHorizontalScrollIndicator={false}
         data={songs}
         horizontal
@@ -133,8 +137,7 @@ export const YTSongRow = ({ songs = [], title }: YTSongRowProp) => {
           {title}
         </Text>
       )}
-      <LegendList<YTSongRowCard>
-        recycleItems
+      <FlatList
         showsHorizontalScrollIndicator={false}
         data={songs}
         horizontal
