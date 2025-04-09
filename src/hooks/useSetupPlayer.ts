@@ -61,11 +61,12 @@ export default ({ intentData, vip }: NoxComponent.SetupPlayerProps) => {
   const setTrack = useTrackStore(state => state.setTrack);
 
   useEffect(() => {
-    if (!vip) {
-      NoxModule?.loadRN();
-    }
     let unmounted = false;
     (async () => {
+      const isRNLoaded = await NoxModule?.isRNLoaded?.();
+      if (!vip) {
+        NoxModule?.loadRN?.();
+      }
       await appStartupInit;
       const storedPlayerSetting =
         intentData === IntentData.SafeMode
@@ -79,6 +80,10 @@ export default ({ intentData, vip }: NoxComponent.SetupPlayerProps) => {
       checkPlayStoreUpdates();
       setIntentData(intentData);
       setTrack(await TrackPlayer.getActiveTrack());
+      // activity is already loaded. this indicates a GC induced JS crash
+      if (isRNLoaded && !__DEV__) {
+        return TrackPlayer.play();
+      }
       switch (intentData) {
         case IntentData.Resume:
           await TrackPlayer.play();
