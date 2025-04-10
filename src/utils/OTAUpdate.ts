@@ -16,7 +16,7 @@ export const onCheckGitVersion = async () => {
     'https://raw.githubusercontent.com/lovegaoshi/azusa-player-mobile/refs/heads/OTA/yarn.hash',
   );
   const txt = await req.text();
-  if (txt !== LOCKHASH) {
+  if (!txt.includes(LOCKHASH)) {
     logger.error(`[NoxOTA] OTA's ${txt} does not match current: ${LOCKHASH}`);
     throw new Error('[NoxOTA] OTA yarn.lock version mismatch!');
   }
