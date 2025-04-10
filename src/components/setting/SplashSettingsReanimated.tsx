@@ -2,29 +2,49 @@
 import * as React from 'react';
 import { View, StyleSheet, Dimensions } from 'react-native';
 import { Image } from 'expo-image';
-import Animated from 'react-native-reanimated';
+import Animated, {
+  useAnimatedStyle,
+  useSharedValue,
+  withSpring,
+} from 'react-native-reanimated';
 import { GestureDetector, Gesture } from 'react-native-gesture-handler';
 
 import { imageSplashes } from '../background/AppOpenSplash';
 
 export default () => {
   const [index, setIndex] = React.useState(0);
+  const cardPositionX = useSharedValue(0);
+  const cardPositionY = useSharedValue(0);
+
   const swipeGesture = React.useMemo(
     () =>
       Gesture.Pan()
-        .enabled(false)
-        .onStart(() => undefined)
-        .onChange(() => undefined)
+        .onStart(e => console.log('start, e'))
+        .onChange(e => {
+          cardPositionX.value = e.translationX;
+          cardPositionY.value = e.translationY;
+        })
         .onEnd(() => undefined),
     [],
   );
+
+  const cardStyle = useAnimatedStyle(() => {
+    return {
+      transform: [
+        { translateX: cardPositionX.value },
+        { translateY: cardPositionY.value },
+      ],
+    };
+  });
 
   return (
     <GestureDetector gesture={swipeGesture}>
       <View style={styles.view}>
         {imageSplashes
           .map((splash, i) => (
-            <Animated.View>
+            <Animated.View
+              style={[styles.animatedView, i === index && cardStyle]}
+            >
               <Image
                 // source={i < index || i > index + 1 ? undefined : splash()}
                 source={splash[1]()}
@@ -58,7 +78,5 @@ const styles = StyleSheet.create({
   },
   splashCard: {
     flex: 1,
-    // HACK: ???
-    marginTop: -120,
   },
 });
