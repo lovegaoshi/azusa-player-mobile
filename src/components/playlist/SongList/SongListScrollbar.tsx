@@ -48,7 +48,14 @@ export default function CustomScrollView({
   const startScrollY = useSharedValue(0);
   const barHeightP = useDerivedValue(() => {
     if (contentHeight.value === 1) return 0;
-    return barHeight > 1 ? barHeight : scrollViewHeight.value * barHeight;
+    const minBarHeight =
+      barHeight > 1 ? barHeight : scrollViewHeight.value * barHeight;
+
+    return Math.max(
+      minBarHeight,
+      scrollViewHeight.value *
+        Math.min(1, scrollViewHeight.value / contentHeight.value),
+    );
   });
   const scrollBarY = useDerivedValue(() =>
     interpolate(
