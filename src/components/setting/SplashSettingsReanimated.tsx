@@ -3,9 +3,12 @@ import * as React from 'react';
 import { View, StyleSheet, Dimensions } from 'react-native';
 import { Image } from 'expo-image';
 import Animated, {
+  Extrapolation,
+  interpolate,
   useAnimatedStyle,
   useSharedValue,
   withSpring,
+  withTiming,
 } from 'react-native-reanimated';
 import { GestureDetector, Gesture } from 'react-native-gesture-handler';
 
@@ -24,7 +27,20 @@ export default () => {
           cardPositionX.value = e.translationX;
           cardPositionY.value = e.translationY;
         })
-        .onEnd(() => undefined),
+        .onEnd(e => {
+          if (e.translationX > 120) {
+            cardPositionX.value = withTiming(WindowWidth + 100, {
+              duration: 200,
+            });
+          } else if (e.translationX < -120) {
+            cardPositionX.value = withTiming(-WindowWidth - 100, {
+              duration: 200,
+            });
+          } else {
+            cardPositionX.value = withSpring(0);
+            cardPositionY.value = withSpring(0);
+          }
+        }),
     [],
   );
 
@@ -33,6 +49,17 @@ export default () => {
       transform: [
         { translateX: cardPositionX.value },
         { translateY: cardPositionY.value },
+        {
+          rotate:
+            String(
+              interpolate(
+                cardPositionX.value,
+                [-WindowWidth, 0, WindowWidth],
+                [-10, 0, 10],
+                Extrapolation.CLAMP,
+              ),
+            ) + 'deg',
+        },
       ],
     };
   });
