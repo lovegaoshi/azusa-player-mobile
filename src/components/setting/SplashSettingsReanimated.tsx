@@ -19,6 +19,9 @@ export default () => {
   const cardPositionX = useSharedValue(0);
   const cardPositionY = useSharedValue(0);
 
+  const isIndexEnd = (i: number) => {
+    return index === imageSplashes.length - 1 && i === 0;
+  };
   const swipeGesture = React.useMemo(
     () =>
       Gesture.Pan()
@@ -64,17 +67,46 @@ export default () => {
     };
   });
 
+  const nextCardStyle = useAnimatedStyle(() => {
+    return {
+      transform: [
+        {
+          scale: interpolate(
+            cardPositionX.value,
+            [-WindowWidth / 2, 0, WindowWidth / 2],
+            [1, 0.8, 1],
+            Extrapolation.CLAMP,
+          ),
+        },
+      ],
+      opacity: interpolate(
+        cardPositionX.value,
+        [-WindowWidth / 2, 0, WindowWidth / 2],
+        [1, 0, 1],
+        Extrapolation.CLAMP,
+      ),
+    };
+  });
+
   return (
     <GestureDetector gesture={swipeGesture}>
       <View style={styles.view}>
         {imageSplashes
           .map((splash, i) => (
             <Animated.View
-              style={[styles.animatedView, i === index && cardStyle]}
+              style={[
+                styles.animatedView,
+                i === index && cardStyle,
+                (i === index + 1 || isIndexEnd(i)) && nextCardStyle,
+              ]}
             >
               <Image
                 // source={i < index || i > index + 1 ? undefined : splash()}
-                source={splash[1]()}
+                source={
+                  (i >= index && i < index + 2) || isIndexEnd(i)
+                    ? splash[1]()
+                    : undefined
+                }
                 style={styles.splashCard}
                 contentFit={'contain'}
               />
