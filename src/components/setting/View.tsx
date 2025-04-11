@@ -12,11 +12,12 @@ import SettingListItem from './helpers/SettingListItem';
 import LanguageSettings from './LanguageSettings';
 import AboutSettings from './AboutSettings';
 import SplashSettings from './SplashSettings';
+import SplashSettingsR from './SplashSettingsReanimated';
 import DownloadSettings from './DownloadSettings';
 import LoginSettings from '../login/View';
 import PremiumSettings from '../billing/View';
 import SponsorBlockSettings from './sponsorblock/View';
-import { isAndroid, isIOS } from '@utils/RNUtils';
+import { isAndroid, isIOS, isOldArch } from '@utils/RNUtils';
 import FlexView from '@components/commonui/FlexViewNewArch';
 import DefaultScreenOption from '@enums/ScreenOption';
 
@@ -129,6 +130,11 @@ const HomeSettings = ({ navigation }: Props) => {
   );
 };
 
+const SplashView = () => {
+  if (isOldArch() && isAndroid) return <SplashSettings />;
+  return <SplashSettingsR />;
+};
+
 const Settings = ({ headerBackVisible = true }: Props) => {
   const { t } = useTranslation();
 
@@ -145,7 +151,7 @@ const Settings = ({ headerBackVisible = true }: Props) => {
         />
         <Stack.Screen
           name={NoxView.SPLASH_GALLARY}
-          component={SplashSettings}
+          component={SplashView}
           options={{
             title: t('Settings.SplashSettingName'),
             ...DefaultScreenOption,

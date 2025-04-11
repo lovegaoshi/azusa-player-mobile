@@ -151,5 +151,6 @@ const styles = StyleSheet.create({
   },
   splashCard: {
     flex: 1,
+    marginTop: -120,
   },
 });

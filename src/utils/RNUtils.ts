@@ -9,6 +9,10 @@ export const isAndroid10 = isAndroid && Number(Platform.Version) >= 29;
 export const isIOS = Platform.OS === 'ios';
 const { NoxModule } = NativeModules;
 
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-expect-error
+export const isOldArch = () => global?.nativeFabricUIManager === undefined;
+
 export const getFileSize = async (fpath: string) => {
   try {
     return await RNFetchBlob.fs.stat(fpath);
