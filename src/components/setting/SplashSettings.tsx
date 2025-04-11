@@ -1,134 +1,147 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import * as React from 'react';
-import { View, StyleSheet, Dimensions } from 'react-native';
+import {
+  View,
+  Animated,
+  StyleSheet,
+  PanResponder,
+  Dimensions,
+} from 'react-native';
 import { Image } from 'expo-image';
-import Animated, {
-  Extrapolation,
-  interpolate,
-  runOnJS,
-  useAnimatedStyle,
-  useSharedValue,
-  withSpring,
-  withTiming,
-} from 'react-native-reanimated';
-import { GestureDetector, Gesture } from 'react-native-gesture-handler';
 
 import { imageSplashes } from '../background/AppOpenSplash';
 
-const ImageHolderCount = 3;
-
 export default () => {
   const [index, setIndex] = React.useState(0);
-  const cardPositionX = useSharedValue(0);
-  const cardPositionY = useSharedValue(0);
+  const position = React.useRef(new Animated.ValueXY()).current;
+  const panResponder = React.useRef(
+    PanResponder.create({
+      // Ask to be the responder:
+      onStartShouldSetPanResponder: (evt, gestureState) => true,
+      onStartShouldSetPanResponderCapture: (evt, gestureState) => true,
+      onMoveShouldSetPanResponder: (evt, gestureState) => true,
+      onMoveShouldSetPanResponderCapture: (evt, gestureState) => true,
 
-  const incIndex = () => setIndex(v => v + 1);
-  const getSourceIndex = (position: number) => {
-    const mod = index % ImageHolderCount;
-    if (position === 0 && mod !== 0) {
-      return index - mod + ImageHolderCount;
-    }
-    return index - mod + position;
+      onPanResponderGrant: (evt, gestureState) => {
+        // The gesture has started. Show visual feedback so the user knows
+        // what is happening!
+        // gestureState.d{x,y} will be set to zero now
+      },
+      onPanResponderMove: (evt, gestureState) => {
+        // The most recent move distance is gestureState.move{X,Y}
+        // The accumulated gesture distance since becoming responder is
+        // gestureState.d{x,y}
+        // if (Math.abs(gestureState.dy) < Math.abs(gestureState.dx)) {
+        position.setValue({ x: gestureState.dx, y: gestureState.dy });
+        // }
+      },
+      onPanResponderTerminationRequest: (evt, gestureState) => true,
+      onPanResponderRelease: (evt, gestureState) => {
+        // The user has released all touches while this view is the
+        // responder. This typically means a gesture has succeeded
+
+        if (gestureState.dx > 120) {
+          Animated.timing(position, {
+            toValue: { x: WindowWidth + 100, y: gestureState.dy },
+            duration: 200,
+            useNativeDriver: true,
+          }).start(() => {
+            nextImage();
+            position.setValue({ x: 0, y: 0 });
+          });
+        } else if (gestureState.dx < -120) {
+          Animated.timing(position, {
+            toValue: { x: -WindowWidth + 100, y: gestureState.dy },
+            duration: 200,
+            useNativeDriver: true,
+          }).start(() => {
+            nextImage();
+            position.setValue({ x: 0, y: 0 });
+          });
+        } else {
+          Animated.spring(position, {
+            toValue: { x: 0, y: 0 },
+            friction: 4,
+            useNativeDriver: true,
+          }).start();
+        }
+      },
+      onPanResponderTerminate: (evt, gestureState) => {
+        // Another component has become the responder, so this gesture
+        // should be cancelled
+      },
+      onShouldBlockNativeResponder: (evt, gestureState) => {
+        // Returns whether this component should block native components from becoming the JS
+        // responder. Returns true by default. Is currently only supported on android.
+        return true;
+      },
+    }),
+  ).current;
+
+  const nextImage = () => {
+    setIndex(val => (val < imageSplashes.length - 1 ? val + 1 : 0));
   };
 
-  const getSource = (i: number) => imageSplashes[i % imageSplashes.length][1]();
-
-  const swipeGesture = React.useMemo(
-    () =>
-      Gesture.Pan()
-        .onChange(e => {
-          cardPositionX.value = e.translationX;
-          cardPositionY.value = e.translationY;
-        })
-        .onEnd(e => {
-          if (e.translationX > 120) {
-            cardPositionX.value = withTiming(
-              WindowWidth + 100,
-              { duration: 200 },
-              () => runOnJS(incIndex)(),
-            );
-          } else if (e.translationX < -120) {
-            cardPositionX.value = withTiming(
-              -WindowWidth - 100,
-              { duration: 200 },
-              () => runOnJS(incIndex)(),
-            );
-          } else {
-            cardPositionX.value = withSpring(0);
-            cardPositionY.value = withSpring(0);
-          }
-        }),
-    [],
-  );
-
-  const cardStyle = useAnimatedStyle(() => {
-    return {
-      transform: [
-        { translateX: cardPositionX.value },
-        { translateY: cardPositionY.value },
-        {
-          rotate: `${interpolate(
-            cardPositionX.value,
-            [-WindowWidth, 0, WindowWidth],
-            [-10, 0, 10],
-            Extrapolation.CLAMP,
-          )}deg`,
-        },
-      ],
-    };
-  });
-
-  const nextCardStyle = useAnimatedStyle(() => {
-    return {
-      transform: [
-        {
-          scale: interpolate(
-            cardPositionX.value,
-            [-WindowWidth / 2, 0, WindowWidth / 2],
-            [1, 0.8, 1],
-            Extrapolation.CLAMP,
-          ),
-        },
-      ],
-      opacity: interpolate(
-        cardPositionX.value,
-        [-WindowWidth / 2, 0, WindowWidth / 2],
-        [1, 0, 1],
-        Extrapolation.CLAMP,
-      ),
-    };
-  });
-
-  const getStyle = (i: number) => {
-    const mod = index % ImageHolderCount;
-    if (mod === i) return cardStyle;
-    if ((mod + 1) % ImageHolderCount === i) return nextCardStyle;
-    return {
-      opacity: 0,
-    };
+  const isIndexEnd = (i: number) => {
+    return index === imageSplashes.length - 1 && i === 0;
   };
-
-  React.useEffect(() => {
-    cardPositionX.value = 0;
-    cardPositionY.value = 0;
-  }, [index]);
 
   return (
-    <GestureDetector gesture={swipeGesture}>
-      <View style={styles.view}>
-        {Array.from(Array(ImageHolderCount).keys())
-          .map((_, i) => (
-            <Animated.View key={i} style={[styles.animatedView, getStyle(i)]}>
-              <Image
-                source={getSource(getSourceIndex(i))}
-                style={styles.splashCard}
-                contentFit={'contain'}
-              />
-            </Animated.View>
-          ))
-          .reverse()}
-      </View>
-    </GestureDetector>
+    <View style={styles.view}>
+      {imageSplashes
+        .map((splash, i) => (
+          <Animated.View
+            style={[
+              styles.animatedView,
+              i === index && {
+                transform: [
+                  ...position.getTranslateTransform(),
+                  {
+                    rotate: position.x.interpolate({
+                      inputRange: [-WindowWidth / 2, 0, WindowWidth / 2],
+                      outputRange: ['-10deg', '0deg', '10deg'],
+                      extrapolate: 'clamp',
+                    }),
+                  },
+                ],
+              },
+              (i === index + 1 || isIndexEnd(i)) && {
+                transform: [
+                  {
+                    scale: position.x.interpolate({
+                      inputRange: [-WindowWidth / 2, 0, WindowWidth / 2],
+                      outputRange: [1, 0.8, 1],
+                      extrapolate: 'clamp',
+                    }),
+                  },
+                ],
+                opacity: position.x.interpolate({
+                  inputRange: [-WindowWidth / 2, 0, WindowWidth / 2],
+                  outputRange: [1, 0, 1],
+                  extrapolate: 'clamp',
+                }),
+              },
+              isIndexEnd(i) && {
+                zIndex: -1,
+              },
+            ]}
+            key={i}
+            {...panResponder.panHandlers}
+          >
+            <Image
+              // source={i < index || i > index + 1 ? undefined : splash()}
+              source={
+                (i >= index && i < index + 2) || isIndexEnd(i)
+                  ? splash[1]()
+                  : undefined
+              }
+              style={styles.splashCard}
+              contentFit={'contain'}
+            />
+          </Animated.View>
+        ))
+        .reverse()}
+    </View>
   );
 };
 
@@ -151,5 +164,7 @@ const styles = StyleSheet.create({
   },
   splashCard: {
     flex: 1,
+    // HACK: ???
+    marginTop: -120,
   },
 });
