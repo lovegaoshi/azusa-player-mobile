@@ -5,6 +5,7 @@ import { Image } from 'expo-image';
 import Animated, {
   Extrapolation,
   interpolate,
+  runOnJS,
   useAnimatedStyle,
   useSharedValue,
   withSpring,
@@ -14,31 +15,44 @@ import { GestureDetector, Gesture } from 'react-native-gesture-handler';
 
 import { imageSplashes } from '../background/AppOpenSplash';
 
+const ImageHolderCount = 3;
+
 export default () => {
   const [index, setIndex] = React.useState(0);
   const cardPositionX = useSharedValue(0);
   const cardPositionY = useSharedValue(0);
 
-  const isIndexEnd = (i: number) => {
-    return index === imageSplashes.length - 1 && i === 0;
+  const incIndex = () => setIndex(v => v + 1);
+  const getSourceIndex = (position: number) => {
+    const mod = index % ImageHolderCount;
+    if (position === 0 && mod !== 0) {
+      return index - mod + ImageHolderCount;
+    }
+    return index - mod + position;
   };
+
+  const getSource = (i: number) => imageSplashes[i % imageSplashes.length][1]();
+
   const swipeGesture = React.useMemo(
     () =>
       Gesture.Pan()
-        .onStart(e => console.log('start, e'))
         .onChange(e => {
           cardPositionX.value = e.translationX;
           cardPositionY.value = e.translationY;
         })
         .onEnd(e => {
           if (e.translationX > 120) {
-            cardPositionX.value = withTiming(WindowWidth + 100, {
-              duration: 200,
-            });
+            cardPositionX.value = withTiming(
+              WindowWidth + 100,
+              { duration: 200 },
+              () => runOnJS(incIndex)(),
+            );
           } else if (e.translationX < -120) {
-            cardPositionX.value = withTiming(-WindowWidth - 100, {
-              duration: 200,
-            });
+            cardPositionX.value = withTiming(
+              -WindowWidth - 100,
+              { duration: 200 },
+              () => runOnJS(incIndex)(),
+            );
           } else {
             cardPositionX.value = withSpring(0);
             cardPositionY.value = withSpring(0);
@@ -53,15 +67,12 @@ export default () => {
         { translateX: cardPositionX.value },
         { translateY: cardPositionY.value },
         {
-          rotate:
-            String(
-              interpolate(
-                cardPositionX.value,
-                [-WindowWidth, 0, WindowWidth],
-                [-10, 0, 10],
-                Extrapolation.CLAMP,
-              ),
-            ) + 'deg',
+          rotate: `${interpolate(
+            cardPositionX.value,
+            [-WindowWidth, 0, WindowWidth],
+            [-10, 0, 10],
+            Extrapolation.CLAMP,
+          )}deg`,
         },
       ],
     };
@@ -88,25 +99,28 @@ export default () => {
     };
   });
 
+  const getStyle = (i: number) => {
+    const mod = index % ImageHolderCount;
+    if (mod === i) return cardStyle;
+    if ((mod + 1) % ImageHolderCount === i) return nextCardStyle;
+    return {
+      opacity: 0,
+    };
+  };
+
+  React.useEffect(() => {
+    cardPositionX.value = 0;
+    cardPositionY.value = 0;
+  }, [index]);
+
   return (
     <GestureDetector gesture={swipeGesture}>
       <View style={styles.view}>
-        {imageSplashes
-          .map((splash, i) => (
-            <Animated.View
-              style={[
-                styles.animatedView,
-                i === index && cardStyle,
-                (i === index + 1 || isIndexEnd(i)) && nextCardStyle,
-              ]}
-            >
+        {Array.from(Array(ImageHolderCount).keys())
+          .map((_, i) => (
+            <Animated.View key={i} style={[styles.animatedView, getStyle(i)]}>
               <Image
-                // source={i < index || i > index + 1 ? undefined : splash()}
-                source={
-                  (i >= index && i < index + 2) || isIndexEnd(i)
-                    ? splash[1]()
-                    : undefined
-                }
+                source={getSource(getSourceIndex(i))}
                 style={styles.splashCard}
                 contentFit={'contain'}
               />
