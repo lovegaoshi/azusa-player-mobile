@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import * as React from 'react';
-import { View, StyleSheet, Dimensions, Text } from 'react-native';
+import { View, StyleSheet, Dimensions } from 'react-native';
 import { Image } from 'expo-image';
 import Animated, {
   Extrapolation,
@@ -16,6 +16,18 @@ import { GestureDetector, Gesture } from 'react-native-gesture-handler';
 import { imageSplashes } from '../background/AppOpenSplash';
 
 const ImageHolderCount = 3;
+enum ImagePos {
+  Current = 0,
+  Next = 1,
+  Others = 2,
+}
+
+const getImagePosition = (index: number, position: number) => {
+  const mod = index % ImageHolderCount;
+  if (mod === position) return ImagePos.Current;
+  if ((mod + 1) % ImageHolderCount === position) return ImagePos.Next;
+  return ImagePos.Others;
+};
 
 export default () => {
   const [index, setIndex] = React.useState(0);
@@ -120,10 +132,14 @@ export default () => {
   });
 
   const getStyle = (i: number) => {
-    const mod = index % ImageHolderCount;
-    if (mod === i) return cardStyle;
-    if ((mod + 1) % ImageHolderCount === i) return nextCardStyle;
-    return hiddenStyle;
+    switch (getImagePosition(index, i)) {
+      case ImagePos.Current:
+        return cardStyle;
+      case ImagePos.Next:
+        return nextCardStyle;
+      default:
+        return hiddenStyle;
+    }
   };
 
   React.useEffect(() => {
@@ -137,11 +153,12 @@ export default () => {
         {Array.from(Array(ImageHolderCount).keys())
           .map((_, i) => (
             <Animated.View key={i} style={[styles.animatedView, getStyle(i)]}>
-              <Text
-                style={{ position: 'absolute' }}
-              >{`       ${i} ${index}`}</Text>
               <Image
-                source={getSource(getSourceIndex(i))}
+                source={
+                  getImagePosition(index, i) === ImagePos.Others
+                    ? undefined
+                    : getSource(getSourceIndex(i))
+                }
                 style={styles.splashCard}
                 contentFit={'contain'}
               />
@@ -173,6 +190,6 @@ const styles = StyleSheet.create({
   },
   splashCard: {
     flex: 1,
-    marginTop: -120,
+    marginTop: -220,
   },
 });
