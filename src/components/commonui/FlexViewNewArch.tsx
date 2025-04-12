@@ -1,6 +1,8 @@
 import React, { useRef, useState } from 'react';
 import { View } from 'react-native';
+
 import { styles } from '@components/style';
+import { isOldArch } from '@utils/RNUtils';
 
 interface Props {
   children: React.JSX.Element;
@@ -10,9 +12,7 @@ interface Props {
  * a view of flex:1 for new arch, resolves resizing issues
  */
 export default ({ children, noFlex }: Props) => {
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  // @ts-expect-error
-  if (global?.nativeFabricUIManager === undefined && !noFlex) {
+  if (isOldArch() && !noFlex) {
     return <View style={styles.flex}>{children}</View>;
   }
 
