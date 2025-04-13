@@ -5,6 +5,7 @@ import { useTranslation } from 'react-i18next';
 
 import { useNoxSetting } from '@stores/useApp';
 import NoxInput from '@components/dialogs/NoxInput';
+import SplitInput from '@components/dialogs/SplitInput';
 import usePlaylistSetting from '@hooks/usePlaylistSetting';
 
 interface Props {
@@ -54,16 +55,14 @@ const PlaylistDialog = ({
     <Dialog visible={visible} onDismiss={handleClose}>
       <Dialog.Content>
         <NoxInput
-          label={t('RenameSongDialog.label')}
+          label={t('PlaylistSettingsDialog.playlistNameLabel')}
           autofocus={false}
           selectTextOnFocus={false}
           text={name}
           setText={setName}
         />
-        <NoxInput
+        <SplitInput
           label={t('PlaylistSettingsDialog.subscribeUrlLabel')}
-          autofocus={false}
-          selectTextOnFocus={false}
           text={sub}
           setText={setSub}
         />
