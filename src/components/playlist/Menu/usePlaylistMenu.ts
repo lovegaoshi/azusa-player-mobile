@@ -28,7 +28,7 @@ export default ({ callback = () => {} }: Props) => {
 
   const playlistAnalyze = (playlist = currentPlaylist) => {
     const analytics = playlistCRUD.playlistAnalyze(playlist, 5);
-    OneWayAlert(analytics.title, analytics.content.join('\n'), callback);
+    OneWayAlert(analytics.title, analytics.content.join('\n'));
   };
 
   const confirmOnPlaylistClear = (playlist = currentPlaylist) => {
