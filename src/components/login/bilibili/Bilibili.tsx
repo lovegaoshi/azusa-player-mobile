@@ -11,6 +11,7 @@ import GenericInputDialog from '../../dialogs/GenericInputDialog';
 import BiliSelectFavButtton from './BiliSelectFavButtton';
 import { BiliLogin } from './useBiliLoginApp';
 import useSnack from '@stores/useSnack';
+import { styles as gStyles } from '@components/style';
 
 const domain = 'https://bilibili.com';
 
@@ -163,12 +164,7 @@ export default ({ biliLogin }: Props) => {
   }, []);
 
   return (
-    <SafeAreaView
-      style={{
-        backgroundColor: playerStyle.customColors.maskedBackgroundColor,
-        flex: 1,
-      }}
-    >
+    <SafeAreaView style={gStyles.flex}>
       {initialize ? (
         <ActivityIndicator size={100} />
       ) : loginInfo ? (

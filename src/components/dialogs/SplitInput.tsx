@@ -2,6 +2,7 @@ import { FlatList, Pressable, View } from 'react-native';
 import { useEffect, useState } from 'react';
 import { Button, IconButton } from 'react-native-paper';
 import { useTranslation } from 'react-i18next';
+import Animated, { LinearTransition } from 'react-native-reanimated';
 
 import NoxInput, { ManagedInput } from './NoxInput';
 import GenericDialog from './GenericDialog';
@@ -66,7 +67,8 @@ export default ({ text, setText, label }: Props) => {
         }}
         ExtraButtons={AddEntryButton}
       >
-        <FlatList
+        <Animated.FlatList
+          itemLayoutAnimation={LinearTransition}
           data={splitText}
           renderItem={({ index }) => (
             <View style={{ flexDirection: 'row' }}>
@@ -75,7 +77,6 @@ export default ({ text, setText, label }: Props) => {
                 text={splitText[index]}
                 setText={t => updateText(t, index)}
                 autofocus={false}
-                selectTextOnFocus={false}
                 extraData={splitText.length}
               />
               <IconButton

@@ -34,6 +34,8 @@ export default () => {
   const cardPositionX = useSharedValue(0);
   const cardPositionY = useSharedValue(0);
   const boundingBack = useSharedValue(0);
+  const viewHeight = useSharedValue(0);
+  const WindowHeight = Dimensions.get('window').height;
 
   const incIndex = () => setIndex(v => v + 1);
   const getSourceIndex = (position: number) => {
@@ -131,6 +133,10 @@ export default () => {
     };
   });
 
+  const cardHeightOffsetStyle = useAnimatedStyle(() => ({
+    marginTop: (viewHeight.value - WindowHeight) / 2,
+  }));
+
   const getStyle = (i: number) => {
     switch (getImagePosition(index, i)) {
       case ImagePos.Current:
@@ -149,17 +155,23 @@ export default () => {
 
   return (
     <GestureDetector gesture={swipeGesture}>
-      <View style={styles.view}>
+      <View
+        style={styles.view}
+        onLayout={e => (viewHeight.value = e.nativeEvent.layout.height)}
+      >
         {Array.from(Array(ImageHolderCount).keys())
           .map((_, i) => (
-            <Animated.View key={i} style={[styles.animatedView, getStyle(i)]}>
+            <Animated.View
+              key={i}
+              style={[styles.animatedView, getStyle(i), cardHeightOffsetStyle]}
+            >
               <Image
                 source={
                   getImagePosition(index, i) === ImagePos.Others
                     ? undefined
                     : getSource(getSourceIndex(i))
                 }
-                style={styles.splashCard}
+                style={styles.flex}
                 contentFit={'contain'}
               />
             </Animated.View>
@@ -179,7 +191,7 @@ const styles = StyleSheet.create({
     height: Dimensions.get('window').height,
     width: Dimensions.get('window').width,
   },
-  expandObject: {
+  flex: {
     flex: 1,
   },
   animatedView: {
@@ -187,9 +199,5 @@ const styles = StyleSheet.create({
     height: Dimensions.get('window').height,
     width: Dimensions.get('window').width,
     position: 'absolute',
-  },
-  splashCard: {
-    flex: 1,
-    marginTop: -220,
   },
 });

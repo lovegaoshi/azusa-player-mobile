@@ -5,6 +5,7 @@ import SiteSelector from './SiteSelector';
 import { useYTMLogin } from './google/useYTMLogin';
 import useBiliLogin from './bilibili/useBiliLoginApp';
 import { useAPM } from '@stores/usePersistStore';
+import { useNoxSetting } from '@stores/useApp';
 
 const LoginPage = ({ loginSite }: { loginSite: Site }) => {
   const ytmLogin = useYTMLogin();
@@ -22,10 +23,15 @@ const LoginPage = ({ loginSite }: { loginSite: Site }) => {
 };
 
 export default () => {
+  const playerStyle = useNoxSetting(state => state.playerStyle);
   const { loginPage, setLoginPage } = useAPM();
 
   return (
     <SiteSelector
+      containerStyle={{
+        backgroundColor: playerStyle.customColors.maskedBackgroundColor,
+        flex: 1,
+      }}
       LoginComponent={LoginPage}
       defaultSite={loginPage}
       onSiteChange={setLoginPage}

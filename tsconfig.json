@@ -27,7 +27,7 @@
     "moduleResolution": "node",
     "outDir": "./lib",
     "strict": true,
-    "target": "esnext",
+    "target": "ESNext",
     "skipLibCheck": true,
     "types": ["node"]
   },

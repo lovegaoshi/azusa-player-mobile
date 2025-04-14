@@ -38,7 +38,6 @@ const developerSettings: { [key: string]: SettingEntry } = {
   noInterruption: {
     settingName: 'noInterruption',
     settingCategory: 'DeveloperSettings',
-    checkbox: true,
   },
   prefetchTrack: {
     settingName: 'prefetchTrack',
