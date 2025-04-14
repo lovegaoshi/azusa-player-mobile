@@ -74,6 +74,7 @@
   "Dialog": {
     "ok": "Done",
     "cancel": "Cancel",
+    "addEntry": "Add",
     "zero": "Zero",
     "nullify": "Nullify"
   },

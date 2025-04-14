@@ -1,6 +1,7 @@
 import React from 'react';
 import { Button, Dialog, Portal, Text } from 'react-native-paper';
 import { useTranslation } from 'react-i18next';
+import { StyleSheet } from 'react-native';
 
 interface Props {
   visible: boolean;
@@ -8,6 +9,7 @@ interface Props {
   onClose?: () => void;
   onSubmit?: () => void;
   title?: string;
+  ExtraButtons?: () => JSX.Element;
 }
 
 export const GenericDialog = ({
@@ -16,6 +18,7 @@ export const GenericDialog = ({
   onClose = () => undefined,
   onSubmit = () => undefined,
   title,
+  ExtraButtons = () => <></>,
 }: Props) => {
   const { t } = useTranslation();
   const handleClose = () => {
@@ -28,8 +31,9 @@ export const GenericDialog = ({
   return (
     <Dialog visible={visible} onDismiss={handleClose}>
       {title && <Dialog.Title>{title}</Dialog.Title>}
-      <Dialog.Content>{children}</Dialog.Content>
+      <Dialog.Content style={styles.dialogContent}>{children}</Dialog.Content>
       <Dialog.Actions>
+        <ExtraButtons />
         <Button onPress={handleClose}>{t('Dialog.cancel')}</Button>
         <Button onPress={handleSubmit}>{t('Dialog.ok')}</Button>
       </Dialog.Actions>
@@ -44,3 +48,9 @@ export default (p: Props) => {
     </Portal>
   );
 };
+
+const styles = StyleSheet.create({
+  dialogContent: {
+    maxHeight: '80%',
+  },
+});

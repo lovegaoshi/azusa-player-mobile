@@ -17,6 +17,7 @@ interface InputProps {
   reactNative?: boolean;
   numberOfLines?: number;
   enable?: boolean;
+  extraData?: unknown;
 }
 
 export const ManagedInput = ({
@@ -31,6 +32,7 @@ export const ManagedInput = ({
   reactNative = false,
   numberOfLines = 1,
   enable = true,
+  extraData,
 }: InputProps) => {
   const playerStyle = useNoxSetting(state => state.playerStyle);
   const Input = reactNative ? RNTextInput : TextInput;
@@ -38,7 +40,7 @@ export const ManagedInput = ({
 
   React.useEffect(() => {
     setMText(text);
-  }, [text]);
+  }, [text, extraData]);
 
   return (
     <Input

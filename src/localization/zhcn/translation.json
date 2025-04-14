@@ -74,6 +74,7 @@
   "Dialog": {
     "ok": "好的",
     "cancel": "算了",
+    "addEntry": "添加",
     "zero": "清零",
     "nullify": "重置"
   },
