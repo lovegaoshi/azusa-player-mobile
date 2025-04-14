@@ -18,3 +18,4 @@ jobs:
           dst_key: ${{ secrets.GITEE_SSH_PRIVATE }}
           dst_token: ${{ secrets.GITEE_TOKEN }}
           static_list: 'azusa-player-mobile'
+          force_update: true
