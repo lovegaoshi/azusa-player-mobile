@@ -77,7 +77,6 @@ export default ({ text, setText, label }: Props) => {
                 text={splitText[index]}
                 setText={t => updateText(t, index)}
                 autofocus={false}
-                selectTextOnFocus={false}
                 extraData={splitText.length}
               />
               <IconButton
