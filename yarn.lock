@@ -3387,13 +3387,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@legendapp/list@npm:^1.0.0-beta.30":
-  version: 1.0.0-beta.30
-  resolution: "@legendapp/list@npm:1.0.0-beta.30"
+"@legendapp/list@npm:^1.0.0-beta.42":
+  version: 1.0.0-beta.42
+  resolution: "@legendapp/list@npm:1.0.0-beta.42"
   peerDependencies:
     react: "*"
     react-native: "*"
-  checksum: 10c0/89a284cfc124e49f1d87a4ba0f6fc83a43ce44e021525b57052997e75739ad2b7d094d9a3b5f44642023e063ccbd461b67ab37ae11099b430636874d7283eaf7
+  checksum: 10c0/e325095435d28c204af6ed8e9b743b6b00ae8606f30a9ae5727cfc7ec3fd6ce07c07a0ff94ea1e59120e473cdafc6c21dec8557351973a9769f15f9237f26987
   languageName: node
   linkType: hard
 
@@ -4457,10 +4457,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@revenuecat/purchases-js@npm:^1.0.6":
-  version: 1.0.6
-  resolution: "@revenuecat/purchases-js@npm:1.0.6"
-  checksum: 10c0/594b074f371407a44fd689720f9d98de98543c0dc3f6dbf0d6332a56a3c7ce612e8ee4d43f479b781edc0ab31093f6f4f223f1f960ebd5df471c5f75d71f34bb
+"@revenuecat/purchases-js@npm:^1.1.0":
+  version: 1.1.0
+  resolution: "@revenuecat/purchases-js@npm:1.1.0"
+  checksum: 10c0/720b748164e586ae77efa21b3763cd717b3daea30baf4bde467221f3cf2ceea0fa386f0dafe816ba58268163fc8cb48c8d3d7546b9c27801a3f2f8a074059a17
   languageName: node
   linkType: hard
 
@@ -5284,12 +5284,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:^22.14.0":
-  version: 22.14.0
-  resolution: "@types/node@npm:22.14.0"
+"@types/node@npm:^22.14.1":
+  version: 22.14.1
+  resolution: "@types/node@npm:22.14.1"
   dependencies:
     undici-types: "npm:~6.21.0"
-  checksum: 10c0/9d79f3fa1af9c2c869514f419c4a4905b34c10e12915582fd1784868ac4e74c6d306cf5eb47ef889b6750ab85a31be96618227b86739c4a3e0b1c15063f384c6
+  checksum: 10c0/d49c4d00403b1c2348cf0701b505fd636d80aabe18102105998dc62fdd36dcaf911e73c7a868c48c21c1022b825c67b475b65b1222d84b704d8244d152bb7f86
   languageName: node
   linkType: hard
 
@@ -6521,7 +6521,7 @@ __metadata:
     "@babel/preset-env": "npm:^7.26.9"
     "@babel/preset-typescript": "npm:^7.27.0"
     "@babel/runtime": "npm:^7.27.0"
-    "@legendapp/list": "npm:^1.0.0-beta.30"
+    "@legendapp/list": "npm:^1.0.0-beta.42"
     "@material/material-color-utilities": "npm:^0.3.0"
     "@notifee/react-native": "npm:^9.1.8"
     "@react-native-community/cli": "npm:16.0.2"
@@ -6538,7 +6538,7 @@ __metadata:
     "@react-navigation/drawer": "npm:^7.3.9"
     "@react-navigation/native": "npm:^7.1.6"
     "@react-navigation/native-stack": "npm:^7.3.10"
-    "@revenuecat/purchases-js": "npm:^1.0.6"
+    "@revenuecat/purchases-js": "npm:^1.1.0"
     "@sentry/react-native": "npm:^6.10.0"
     "@sharcoux/slider": "npm:8.0.6"
     "@shopify/flash-list": "npm:^1.8.0"
@@ -6551,7 +6551,7 @@ __metadata:
     "@types/jest": "npm:^29.5.14"
     "@types/lodash": "npm:^4.17.16"
     "@types/md5": "npm:^2.3.5"
-    "@types/node": "npm:^22.14.0"
+    "@types/node": "npm:^22.14.1"
     "@types/qs": "npm:^6.9.18"
     "@types/react": "npm:~18.3.20"
     "@types/react-native": "npm:^0.73.0"
@@ -6641,7 +6641,7 @@ __metadata:
     react-native-purchases: "npm:^8.9.4"
     react-native-qrcode-svg: "npm:^6.3.15"
     react-native-reanimated: "npm:3.17.3"
-    react-native-safe-area-context: "npm:^5.3.0"
+    react-native-safe-area-context: "npm:^5.4.0"
     react-native-screens: "npm:4.10.0"
     react-native-shadow-2: "npm:^7.1.1"
     react-native-share-menu: "git+https://github.com/Expensify/react-native-share-menu.git"
@@ -16660,13 +16660,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-native-safe-area-context@npm:^5.3.0":
-  version: 5.3.0
-  resolution: "react-native-safe-area-context@npm:5.3.0"
+"react-native-safe-area-context@npm:^5.4.0":
+  version: 5.4.0
+  resolution: "react-native-safe-area-context@npm:5.4.0"
   peerDependencies:
     react: "*"
     react-native: "*"
-  checksum: 10c0/3732f85444342f58f17709ecbbcfe754a0ebda1030765e8df0ce80413e95fcb34ee7d5e83b4627fbf383c13eeb50554c244aff3d908734eab67807aa6ca23bb6
+  checksum: 10c0/729fef1f768d57b905f51882374aa93b209d54576b8a0cf328e0a349c8dc9705ae8f9032e572fd7a7c9e94b588105f44760c0bb15ab9911b7977073d6754b54d
   languageName: node
   linkType: hard
 
