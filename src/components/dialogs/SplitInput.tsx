@@ -1,4 +1,4 @@
-import { FlatList, Pressable, View } from 'react-native';
+import { Pressable, View } from 'react-native';
 import { useEffect, useState } from 'react';
 import { Button, IconButton } from 'react-native-paper';
 import { useTranslation } from 'react-i18next';
