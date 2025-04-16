@@ -30,6 +30,7 @@ export default () => {
   const artworkOpacity = useSharedValue(1);
   const initHeight = useSharedValue(0);
   const expandCounter = useNoxSetting(state => state.expandCounter);
+  const sliding = useNoxSetting(state => state.miniProgressSliding);
 
   const opacityVisible = useDerivedValue(() => {
     const opacityLevel = width + 50;
@@ -106,10 +107,11 @@ export default () => {
   const scrollDragGesture = React.useMemo(
     () =>
       Gesture.Pan()
+        .enabled(!sliding)
         .onStart(() => (initHeight.value = miniplayerHeight.value))
         .onChange(e => dragPlayerHeight(e.translationY))
         .onEnd(e => snapPlayerHeight(e.translationY)),
-    [],
+    [sliding],
   );
 
   const disabledGesture = React.useMemo(() => Gesture.Manual(), []);
