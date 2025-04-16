@@ -107,7 +107,6 @@ interface Props {
 
 export default ({ biliLogin }: Props) => {
   const { t } = useTranslation();
-  const playerStyle = useNoxSetting(state => state.playerStyle);
   const appRefresh = useNoxSetting(state => state.appRefresh);
   const [inputCookieVisible, setInputCookieVisible] = React.useState(false);
   const {

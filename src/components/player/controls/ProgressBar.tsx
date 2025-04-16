@@ -25,9 +25,12 @@ export const SimpleProgressBar = ({
 }: Props) => {
   const { position, duration } = useProgress(progressInterval, false);
   const playerStyle = useNoxSetting(state => state.playerStyle);
+  const enterSliding = useNoxSetting(state => state.enableMiniProgressSliding);
+  const exitSliding = useNoxSetting(state => state.disableMiniProgressSliding);
 
   return (
     <Slider
+      onSlidingStart={enterSliding}
       trackStyle={trackStyle}
       trackHeight={trackHeight}
       style={[styles.progressBar, style]}
@@ -42,7 +45,10 @@ export const SimpleProgressBar = ({
       enabled={enabled}
       minimumTrackTintColor={playerStyle.colors.primary}
       maximumTrackTintColor={playerStyle.colors.secondaryContainer}
-      onSlidingComplete={TrackPlayer.seekTo}
+      onSlidingComplete={v => {
+        TrackPlayer.seekTo(v);
+        exitSliding();
+      }}
       thumbImage={progressThumbImage ? { uri: progressThumbImage } : undefined}
       thumbSize={thumbSize ?? (progressThumbImage ? 40 : undefined)}
       thumbStyle={{

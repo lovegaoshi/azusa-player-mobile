@@ -7,6 +7,10 @@ import { saveDefaultSearch } from '@utils/ChromeStorage';
 export interface APMUIStore {
   appRefresh: boolean;
   setAppRefresh: () => void;
+  // specifically for disabling miniplayer's RNGH on progress sliding
+  miniProgressSliding: boolean;
+  enableMiniProgressSliding: () => void;
+  disableMiniProgressSliding: () => void;
 
   songListScrollCounter: number;
   incSongListScrollCounter: () => void;
@@ -39,6 +43,10 @@ export interface APMUIStore {
 const store: StateCreator<APMUIStore, [], [], APMUIStore> = set => ({
   appRefresh: false,
   setAppRefresh: () => set({ appRefresh: true }),
+
+  miniProgressSliding: false,
+  enableMiniProgressSliding: () => set({ miniProgressSliding: true }),
+  disableMiniProgressSliding: () => set({ miniProgressSliding: false }),
 
   songListScrollCounter: 0,
   incSongListScrollCounter: () =>
