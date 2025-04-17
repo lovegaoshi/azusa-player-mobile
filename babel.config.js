@@ -41,6 +41,7 @@ module.exports = api => {
   return {
     presets: ['babel-preset-expo'],
     plugins: [
+      ['inline-import', { extensions: ['.sql'] }],
       [
         'module-resolver',
         {
