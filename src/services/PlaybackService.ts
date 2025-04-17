@@ -23,6 +23,7 @@ import { useNoxSetting } from '@stores/useApp';
 import { appStartupInit } from '@hooks/useSetupPlayer';
 import { playFromMediaId, playFromSearch } from '@hooks/usePlayback.migrate';
 import { isAndroid, isIOS } from '@utils/RNUtils';
+import { increasePlaybackCount } from '@utils/db/sqlStorage';
 
 const { APMWidgetModule } = NativeModules;
 const { getState } = noxPlayingList;
@@ -148,6 +149,7 @@ export async function PlaybackService() {
         (await TrackPlayer.getPlaybackState()).state === State.Error;
       await TrackPlayer.setVolume(0);
       if (event.track?.song === undefined) return;
+      increasePlaybackCount(event.track.song.id);
       useNoxSetting.getState().setCurrentPlayingId(event.track.song.id);
       if (playerErrored) {
         resetResolvedURL(event.track.song, true);

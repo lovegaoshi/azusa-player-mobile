@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import TrackPlayer from 'react-native-track-player';
+import { migrate } from 'drizzle-orm/expo-sqlite/migrator';
 
 import { SetupService, additionalPlaybackService } from 'services';
 import { initPlayerObject } from '@utils/ChromeStorage';
@@ -13,10 +14,13 @@ import usePlayStore from './usePlayStore';
 import { buildBrowseTree } from '@utils/automotive/androidAuto';
 import { NativeModules } from 'react-native';
 import useActiveTrack, { useTrackStore } from './useActiveTrack';
+import migrations from '../../drizzle/migrations';
+import sqldb from '../utils/db/sql';
 
 const { NoxModule } = NativeModules;
 
 const initializePlayer = async (safeMode = false) => {
+  await migrate(sqldb, migrations);
   const {
     playlists,
     currentPlayingID,
