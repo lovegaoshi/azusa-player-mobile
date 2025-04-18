@@ -28,17 +28,20 @@ export const getPlaybackCount = (songcid: string | null) => {
   return res?.field1;
 };
 
-export const increasePlaybackCount = async (songcid: string | null) => {
+export const increasePlaybackCount = async (
+  songcid: string | null,
+  inc = 1,
+) => {
   if (!songcid) {
     return;
   }
-  const count = await getPlaybackCount(songcid);
+  const count = getPlaybackCount(songcid);
   if (count === undefined) {
-    await db.insert(playbackTable).values({ songcid, count: 1 });
+    await db.insert(playbackTable).values({ songcid, count: inc });
     return;
   }
   await db
     .update(playbackTable)
-    .set({ count: count + 1 })
+    .set({ count: count + inc })
     .where(eq(playbackTable.songcid, songcid));
 };
