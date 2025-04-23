@@ -64,8 +64,12 @@ export default ({ opacity, style, artworkOpacity }: Props) => {
           </View>
           <View style={styles.artistInfoContainer}>
             <ArtistText track={track} style={textSubStyle} />
-            <Text style={textSubStyle}>{currentPlayingList.title}</Text>
-            <Text style={textSubStyle}>{getTrackLocation()}</Text>
+            <Text style={textSubStyle} numberOfLines={1}>
+              {currentPlayingList.title}
+            </Text>
+            <Text style={textSubStyle} numberOfLines={1}>
+              {getTrackLocation()}
+            </Text>
           </View>
           <View style={styles.songMenuButtonContainer}>
             <SongMenuButton track={track} />

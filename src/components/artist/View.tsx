@@ -24,8 +24,15 @@ import { BiliSongsArrayTabCard } from '../explore/SongTab';
 import { useNoxSetting } from '@stores/useApp';
 import { goToArtistExternalPage } from '@utils/artistfetch/fetch';
 import { styles, ItemSelectStyles } from '../style';
+import AutoUnmountNavView from '../commonui/AutoUnmountNavView';
 
-export default ({ navigation }: NoxComponent.StackNavigationProps) => {
+export default ({ navigation }: NoxComponent.StackNavigationProps) => (
+  <AutoUnmountNavView>
+    <Artist navigation={navigation} />
+  </AutoUnmountNavView>
+);
+
+const Artist = ({ navigation }: NoxComponent.StackNavigationProps) => {
   const { t } = useTranslation();
   const dimension = Dimensions.get('window');
   const loading = useArtist(state => state.loading);

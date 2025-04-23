@@ -36,7 +36,9 @@ export default ({ track, style }: Props) => {
         });
       }}
     >
-      <Text style={style}>{track?.artist}</Text>
+      <Text style={style} numberOfLines={1}>
+        {track?.artist}
+      </Text>
     </Pressable>
   );
 };

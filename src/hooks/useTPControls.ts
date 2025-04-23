@@ -11,6 +11,7 @@ import { songlistToTracklist } from '@utils/RNTPUtils';
 import appStore from '@stores/appStore';
 import ytbvideoFetch from '@utils/mediafetch/ytbvideo';
 import logger from '@utils/Logger';
+import { increasePlaybackCount } from '@utils/db/sqlStorage';
 
 const setAppStore = appStore.setState;
 const regexResolveURLs: NoxUtils.RegexMatchSuggest<NoxMedia.Song> = [
@@ -155,6 +156,11 @@ export const performSkipToNext = (
     logger.debug('[autoRepeat] stopping playback as autoRepeat is set to off');
     return;
   }
+  if (!auto) {
+    TrackPlayer.getActiveTrack().then(t =>
+      increasePlaybackCount(t?.song?.id, -1),
+    );
+  }
   const callback = () =>
     preparePromise().then(async () => {
       // await TrackPlayer.skipToNext();
@@ -169,6 +175,9 @@ export const performSkipToPrevious = (
   preparePromise = prepareSkipToPrevious,
   mPerformFade = performFade,
 ) => {
+  TrackPlayer.getActiveTrack().then(t =>
+    increasePlaybackCount(t?.song?.id, -1),
+  );
   const callback = () =>
     preparePromise().then(async () => {
       await TrackPlayer.skipToPrevious();
