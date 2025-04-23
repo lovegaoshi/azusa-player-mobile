@@ -82,6 +82,12 @@ export const setPlayingList = (
   });
 };
 
+export const shufflePlayingList = (shuffleMethod = smartShuffle) => {
+  playlistStore.setState(v => ({
+    playingListShuffled: shuffleMethod(v.playingList),
+  }));
+};
+
 export const getCurrentTPQueue = (playmode?: NoxRepeatMode) => {
   const state = playlistStore.getState();
   if (!playmode) playmode = state.playmode;

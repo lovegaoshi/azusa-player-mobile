@@ -8,7 +8,7 @@ import {
 } from 'react-native';
 import { LegendList } from '@legendapp/list';
 import { Text } from 'react-native-paper';
-import Image from 'react-native-turbo-image';
+import { Image } from 'expo-image';
 import { useTranslation } from 'react-i18next';
 
 import { chunkArray } from '@utils/Utils';
@@ -73,8 +73,7 @@ export const BiliSongCard = ({
               <Image
                 style={style.cardThumbnail}
                 source={{ uri: item.cover }}
-                resizeMode={'cover'}
-                resize={70}
+                contentFit="cover"
               />
               <View style={styles.flex}>
                 <Text

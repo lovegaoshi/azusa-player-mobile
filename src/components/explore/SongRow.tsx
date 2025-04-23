@@ -7,7 +7,7 @@ import {
   FlatList,
 } from 'react-native';
 import { Text } from 'react-native-paper';
-import Image from 'react-native-turbo-image';
+import { Image } from 'expo-image';
 
 import { useNoxSetting } from '@stores/useApp';
 import usePlayback from '@hooks/usePlayback';
@@ -63,7 +63,6 @@ export const BiliSongRow = ({
                 style={styles.albumImage}
                 source={{ uri: item.cover }}
                 resizeMode={'cover'}
-                resize={140}
               />
               <View style={styles.flex}>
                 <Text
@@ -147,8 +146,7 @@ export const YTSongRow = ({ songs = [], title }: YTSongRowProp) => {
               <Image
                 style={styles.albumImage}
                 source={{ uri: item.cover }}
-                resizeMode={'cover'}
-                resize={140}
+                contentFit="cover"
               />
               <View style={{ flex: 1 }}>
                 <Text
