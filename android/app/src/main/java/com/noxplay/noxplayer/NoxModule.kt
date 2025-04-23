@@ -23,6 +23,10 @@ import java.io.File
 class NoxModule(reactContext: ReactApplicationContext) :
     ReactContextBaseJavaModule(reactContext) {
     override fun getName() = "NoxModule"
+    
+    private fun getActivity(): MainActivity? {
+        return reactApplicationContext.currentActivity as MainActivity?
+    }
 
     private fun listMediaDirNative(relativeDir: String, subdir: Boolean, selection: String? = null): WritableArray {
         val results: WritableArray = WritableNativeArray()
@@ -102,19 +106,20 @@ class NoxModule(reactContext: ReactApplicationContext) :
     }
 
     @ReactMethod fun loadRN(callback: Promise) {
-        val activity = reactApplicationContext.currentActivity as MainActivity?
+        val activity = getActivity()
         activity?.loadedRN = true
         callback.resolve(null)
     }
 
     @ReactMethod fun isRNLoaded(callback: Promise) {
-        val activity = reactApplicationContext.currentActivity as MainActivity?
+        val activity = getActivity()
+        Timber.tag("APM").d("probing if RN is loaded: ${activity?.loadedRN}")
         callback.resolve(activity?.loadedRN)
     }
 
     @ReactMethod fun getLastExitReason(callback: Promise) {
         try {
-            val activity = reactApplicationContext.currentActivity
+            val activity = getActivity()
             val am = activity?.getSystemService(Context.ACTIVITY_SERVICE) as ActivityManager
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
                 val reason = am.getHistoricalProcessExitReasons(
@@ -146,7 +151,7 @@ class NoxModule(reactContext: ReactApplicationContext) :
     }
 
     @ReactMethod fun selfDestruct(callback: Promise) {
-        val activity = reactApplicationContext.currentActivity as MainActivity?
+        val activity = getActivity()
         Timber.tag("NoxModule").w("self destructing!!!")
         activity?.finish()
         android.os.Process.killProcess(android.os.Process.myPid())
