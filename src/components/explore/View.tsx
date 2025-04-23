@@ -9,6 +9,7 @@ import SiteSelector from '../login/SiteSelector';
 import { Site } from '@enums/Network';
 import { useAPM } from '@stores/usePersistStore';
 import FlexView from '@components/commonui/FlexViewNewArch';
+import AutoUnmountNavView from '../commonui/AutoUnmountNavView';
 
 const LoginComponent = ({ loginSite }: { loginSite: Site }) => {
   switch (loginSite) {
@@ -21,7 +22,7 @@ const LoginComponent = ({ loginSite }: { loginSite: Site }) => {
   }
 };
 
-export default () => {
+const Explore = () => {
   const playerStyle = useNoxSetting(state => state.playerStyle);
   const { explorePage, setExplorePage } = useAPM();
 
@@ -41,6 +42,12 @@ export default () => {
     </FlexView>
   );
 };
+
+export default () => (
+  <AutoUnmountNavView>
+    <Explore />
+  </AutoUnmountNavView>
+);
 
 const styles = StyleSheet.create({
   container: {
