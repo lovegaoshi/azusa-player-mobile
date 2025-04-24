@@ -117,6 +117,19 @@ class NoxModule(reactContext: ReactApplicationContext) :
         callback.resolve(activity?.loadedRN)
     }
 
+    @ReactMethod fun getLastExitCode(callback: Promise) {
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            val activity = getActivity()
+            val am = activity?.getSystemService(Context.ACTIVITY_SERVICE) as ActivityManager
+            callback.resolve(am.getHistoricalProcessExitReasons(
+                "com.noxplay.noxplayer",0,0
+            )[0].reason)
+        } else {
+            callback.resolve(0)
+        }
+    }
+
     @ReactMethod fun getLastExitReason(callback: Promise) {
         try {
             val activity = getActivity()
@@ -125,7 +138,6 @@ class NoxModule(reactContext: ReactApplicationContext) :
                 val reason = am.getHistoricalProcessExitReasons(
                     "com.noxplay.noxplayer",0,0
                 )[0].reason
-                Timber.tag("APM").d("APM's last exit reason code is: $reason")
                 callback.resolve(reason in intArrayOf(
                     ApplicationExitInfo.REASON_USER_REQUESTED,
                     ApplicationExitInfo.REASON_USER_STOPPED,
