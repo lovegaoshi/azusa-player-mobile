@@ -123,7 +123,7 @@ class NoxModule(reactContext: ReactApplicationContext) :
             val activity = getActivity()
             val am = activity?.getSystemService(Context.ACTIVITY_SERVICE) as ActivityManager
             callback.resolve(am.getHistoricalProcessExitReasons(
-                "com.noxplay.noxplayer",0,0
+                BuildConfig.APPLICATION_ID,0,0
             )[0].reason)
         } else {
             callback.resolve(0)
@@ -136,7 +136,7 @@ class NoxModule(reactContext: ReactApplicationContext) :
             val am = activity?.getSystemService(Context.ACTIVITY_SERVICE) as ActivityManager
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
                 val reason = am.getHistoricalProcessExitReasons(
-                    "com.noxplay.noxplayer",0,0
+                    BuildConfig.APPLICATION_ID,0,0
                 )[0].reason
                 callback.resolve(reason in intArrayOf(
                     ApplicationExitInfo.REASON_USER_REQUESTED,
