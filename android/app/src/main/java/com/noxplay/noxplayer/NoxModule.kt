@@ -23,7 +23,7 @@ import java.io.File
 class NoxModule(reactContext: ReactApplicationContext) :
     ReactContextBaseJavaModule(reactContext) {
     override fun getName() = "NoxModule"
-    
+
     private fun getActivity(): MainActivity? {
         return reactApplicationContext.currentActivity as MainActivity?
     }
@@ -125,6 +125,7 @@ class NoxModule(reactContext: ReactApplicationContext) :
                 val reason = am.getHistoricalProcessExitReasons(
                     "com.noxplay.noxplayer",0,0
                 )[0].reason
+                Timber.tag("APM").d("APM's last exit reason code is: $reason")
                 callback.resolve(reason in intArrayOf(
                     ApplicationExitInfo.REASON_USER_REQUESTED,
                     ApplicationExitInfo.REASON_USER_STOPPED,
