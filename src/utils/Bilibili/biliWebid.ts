@@ -1,5 +1,6 @@
 import * as cheerio from 'cheerio';
 import bFetch from '../BiliFetch';
+import logger from '../Logger';
 
 const _getWebid = async (mid: string) => {
   const req = await bFetch(`https://space.bilibili.com/${mid}/dynamic`);
@@ -14,5 +15,11 @@ const _getWebid = async (mid: string) => {
   return extractedJSON.access_id as string;
 };
 
-export const getWebid = async (mid: string) =>
-  `&w_webid=${await _getWebid(mid)}`;
+export const getWebid = async (mid: string) => {
+  try {
+    return `&w_webid=${await _getWebid(mid)}`;
+  } catch {
+    logger.warn('[biliWebId] failed to parse webid.');
+    return '';
+  }
+};
