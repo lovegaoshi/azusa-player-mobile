@@ -3743,13 +3743,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@legendapp/list@npm:^1.0.0":
-  version: 1.0.0
-  resolution: "@legendapp/list@npm:1.0.0"
+"@legendapp/list@npm:^1.0.1":
+  version: 1.0.1
+  resolution: "@legendapp/list@npm:1.0.1"
   peerDependencies:
     react: "*"
     react-native: "*"
-  checksum: 10c0/3bc3753b6cda2cc4ffcd5fd0d8dbb1c880ac73d96bb2e6747eb9de96255ffd9fbaa12fe4f67859883fd1256f28d1cab044fe24c6cfe2780d2b1d6012bc6cf140
+  checksum: 10c0/f0a9f2876096ac1f6f2281f29f0e626ecf060b153f9caeb784ee46b1c273fdc9d13e7d559d4af2e1e25b593ff60c70753e96c859009f5fef54268814c3e53b78
   languageName: node
   linkType: hard
 
@@ -5650,12 +5650,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:^22.14.1":
-  version: 22.14.1
-  resolution: "@types/node@npm:22.14.1"
+"@types/node@npm:^22.15.1":
+  version: 22.15.1
+  resolution: "@types/node@npm:22.15.1"
   dependencies:
     undici-types: "npm:~6.21.0"
-  checksum: 10c0/d49c4d00403b1c2348cf0701b505fd636d80aabe18102105998dc62fdd36dcaf911e73c7a868c48c21c1022b825c67b475b65b1222d84b704d8244d152bb7f86
+  checksum: 10c0/80bd7fff7d6f4058875feb2c980fa066266b02ffde51e794cf4b7bea5f1316c08baa135fa7cbffa677efb999b0945b2697b318e84af4563c1ab8d3392a17bf9a
   languageName: node
   linkType: hard
 
@@ -6872,7 +6872,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"axios@npm:^1.7.7, axios@npm:^1.8.4":
+"axios@npm:^1.7.7":
   version: 1.8.4
   resolution: "axios@npm:1.8.4"
   dependencies:
@@ -6880,6 +6880,17 @@ __metadata:
     form-data: "npm:^4.0.0"
     proxy-from-env: "npm:^1.1.0"
   checksum: 10c0/450993c2ba975ffccaf0d480b68839a3b2435a5469a71fa2fb0b8a55cdb2c2ae47e609360b9c1e2b2534b73dfd69e2733a1cf9f8215bee0bcd729b72f801b0ce
+  languageName: node
+  linkType: hard
+
+"axios@npm:^1.9.0":
+  version: 1.9.0
+  resolution: "axios@npm:1.9.0"
+  dependencies:
+    follow-redirects: "npm:^1.15.6"
+    form-data: "npm:^4.0.0"
+    proxy-from-env: "npm:^1.1.0"
+  checksum: 10c0/9371a56886c2e43e4ff5647b5c2c3c046ed0a3d13482ef1d0135b994a628c41fbad459796f101c655e62f0c161d03883454474d2e435b2e021b1924d9f24994c
   languageName: node
   linkType: hard
 
@@ -6894,7 +6905,7 @@ __metadata:
     "@babel/preset-env": "npm:^7.26.9"
     "@babel/preset-typescript": "npm:^7.27.0"
     "@babel/runtime": "npm:^7.27.0"
-    "@legendapp/list": "npm:^1.0.0"
+    "@legendapp/list": "npm:^1.0.1"
     "@material/material-color-utilities": "npm:^0.3.0"
     "@notifee/react-native": "npm:^9.1.8"
     "@react-native-community/cli": "npm:16.0.2"
@@ -6924,7 +6935,7 @@ __metadata:
     "@types/jest": "npm:^29.5.14"
     "@types/lodash": "npm:^4.17.16"
     "@types/md5": "npm:^2.3.5"
-    "@types/node": "npm:^22.14.1"
+    "@types/node": "npm:^22.15.1"
     "@types/qs": "npm:^6.9.18"
     "@types/react": "npm:~18.3.20"
     "@types/react-native": "npm:^0.73.0"
@@ -6936,7 +6947,7 @@ __metadata:
     "@typescript-eslint/parser": "npm:^8.31.0"
     "@welldone-software/why-did-you-render": "npm:^10.0.1"
     argparse: "npm:^2.0.1"
-    axios: "npm:^1.8.4"
+    axios: "npm:^1.9.0"
     babel-plugin-inline-import: "npm:^3.0.0"
     babel-plugin-module-resolver: "npm:^5.0.2"
     babel-plugin-transform-remove-console: "npm:^6.9.4"
@@ -7016,7 +7027,7 @@ __metadata:
     react-native-paper: "npm:^5.13.4"
     react-native-purchases: "npm:^8.9.5"
     react-native-qrcode-svg: "npm:^6.3.15"
-    react-native-reanimated: "npm:3.17.4"
+    react-native-reanimated: "npm:3.17.5"
     react-native-safe-area-context: "npm:^5.4.0"
     react-native-screens: "npm:4.10.0"
     react-native-shadow-2: "npm:^7.1.1"
@@ -17324,9 +17335,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-native-reanimated@npm:3.17.4":
-  version: 3.17.4
-  resolution: "react-native-reanimated@npm:3.17.4"
+"react-native-reanimated@npm:3.17.5":
+  version: 3.17.5
+  resolution: "react-native-reanimated@npm:3.17.5"
   dependencies:
     "@babel/plugin-transform-arrow-functions": "npm:^7.0.0-0"
     "@babel/plugin-transform-class-properties": "npm:^7.0.0-0"
@@ -17344,7 +17355,7 @@ __metadata:
     "@babel/core": ^7.0.0-0
     react: "*"
     react-native: "*"
-  checksum: 10c0/a86e0886acec76367b14cb3026de09a5c83b2845349b4c643b2a95eb56b9e477a3c6b5956707457c794dde3dc06e47d451c55d94188533abec04451c2c378160
+  checksum: 10c0/22788541546cf3e818f0ad9fc9fb1cb53fd7b398d5f49078cd6adf8064957663d97de4e60de9e7894a359d2379685a9dd5d69183c3e13b5e4e78f2d49333921a
   languageName: node
   linkType: hard
 
