@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Text, Menu } from 'react-native-paper';
 import { useTranslation } from 'react-i18next';
 import { useProgress } from 'react-native-track-player';
-import { RangeSlider } from '@sharcoux/slider';
+import { RangeSlider } from '@react-native-assets/slider';
 import { StyleSheet, View } from 'react-native';
 
 import { useNoxSetting } from '@stores/useApp';

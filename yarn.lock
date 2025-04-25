@@ -3753,6 +3753,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@lodev09/react-native-true-sheet@npm:^2.0.5":
+  version: 2.0.5
+  resolution: "@lodev09/react-native-true-sheet@npm:2.0.5"
+  peerDependencies:
+    react: "*"
+    react-native: "*"
+  checksum: 10c0/cee2d9818ba00ec0fe1cae75027383503e7efb08fc53b564572f4fecf9ca6db82ce5d35bf6669b84364a8cd3e8a3b941b65ec2b34e634c473ac3a6a7aa6c195e
+  languageName: node
+  linkType: hard
+
 "@material/material-color-utilities@npm:^0.3.0":
   version: 0.3.0
   resolution: "@material/material-color-utilities@npm:0.3.0"
@@ -3863,6 +3873,24 @@ __metadata:
   version: 0.2.0
   resolution: "@pkgr/core@npm:0.2.0"
   checksum: 10c0/29cb9c15f4788096b8b8b786b19c75b6398b6afe814a97189922c3046d8acb5d24f1217fd2537c3f8e42c04e48d572295e7ee56d77964ddc932c44eb5a615931
+  languageName: node
+  linkType: hard
+
+"@react-native-assets/slider@npm:^11.0.5":
+  version: 11.0.5
+  resolution: "@react-native-assets/slider@npm:11.0.5"
+  dependencies:
+    react-dom: "npm:>=16.13.1"
+    react-native-web: "npm:>=0.13.4"
+  peerDependencies:
+    react: ">=16.13.1"
+    react-native: ">=0.61.4"
+  dependenciesMeta:
+    react-dom:
+      optional: true
+    react-native-web:
+      optional: true
+  checksum: 10c0/9fed295833dba6cecf507b8ae286e63c3593a6484b2f83c16c7256030695737250f1ed86b447dad8845aa25e65108ef210cb4894383c4db76fd5f7eed1cbbfd1
   languageName: node
   linkType: hard
 
@@ -5057,24 +5085,6 @@ __metadata:
   dependencies:
     "@sentry/core": "npm:8.54.0"
   checksum: 10c0/29d00439b9029011ee74d45c48897181bf0fe8d9d3ba7dc380ba2a9225feaf7a9a135c367614160a6813037dd507000574c31ffb7df5a1c26bbccaee0dfa13e7
-  languageName: node
-  linkType: hard
-
-"@sharcoux/slider@npm:8.0.6":
-  version: 8.0.6
-  resolution: "@sharcoux/slider@npm:8.0.6"
-  dependencies:
-    react-dom: "npm:>=16.13.1"
-    react-native-web: "npm:>=0.13.4"
-  peerDependencies:
-    react: ">=16.13.1"
-    react-native: ">=0.61.4"
-  dependenciesMeta:
-    react-dom:
-      optional: true
-    react-native-web:
-      optional: true
-  checksum: 10c0/5243dbf9e9303406e39c233fc92954143b1a493d25734356f02362c521a911c6e7a4b993a35dd2f242bcfd54dbfc6fc475fccfe934888ec715e2b4f791e6d4a6
   languageName: node
   linkType: hard
 
@@ -6906,8 +6916,10 @@ __metadata:
     "@babel/preset-typescript": "npm:^7.27.0"
     "@babel/runtime": "npm:^7.27.0"
     "@legendapp/list": "npm:^1.0.1"
+    "@lodev09/react-native-true-sheet": "npm:^2.0.5"
     "@material/material-color-utilities": "npm:^0.3.0"
     "@notifee/react-native": "npm:^9.1.8"
+    "@react-native-assets/slider": "npm:^11.0.5"
     "@react-native-community/cli": "npm:16.0.2"
     "@react-native-community/cli-platform-android": "npm:15.1.3"
     "@react-native-community/cli-platform-ios": "npm:15.1.3"
@@ -6924,7 +6936,6 @@ __metadata:
     "@react-navigation/native-stack": "npm:^7.3.10"
     "@revenuecat/purchases-js": "npm:^1.2.0"
     "@sentry/react-native": "npm:^6.11.0"
-    "@sharcoux/slider": "npm:8.0.6"
     "@shopify/flash-list": "npm:^1.8.0"
     "@shopify/react-native-skia": "npm:1.12.4"
     "@tsconfig/react-native": "npm:^3.0.5"
