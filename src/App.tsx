@@ -17,6 +17,7 @@ import useTheme from './hooks/useTheme';
 // eslint-disable-next-line import/no-unresolved
 import { TRACKING } from '@env';
 import { useSetupVIP } from './hooks/useVIP';
+import SongMenuSheet from '@components/songmenu/SongMenuSheet';
 
 if (TRACKING) {
   Sentry.init({
@@ -93,6 +94,7 @@ export default function App(appProps: NoxComponent.AppProps) {
       <MainBackground>
         <SafeAreaProvider>
           <APM PIP={PIPMode} isLandscape={isLandscape} />
+          <SongMenuSheet />
         </SafeAreaProvider>
       </MainBackground>
     </GestureHandlerRootView>

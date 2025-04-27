@@ -77,12 +77,6 @@ const TrackInfoTemplate: React.FC<Props> = props => {
       : '';
   };
 
-  const textStyle = [
-    styles.titleText,
-    {
-      color: playerStyle.colors.onSurface,
-    },
-  ];
   const textSubStyle = [
     styles.artistText,
     {
@@ -92,13 +86,15 @@ const TrackInfoTemplate: React.FC<Props> = props => {
   return (
     <View style={[styles.container, containerStyle, { width: windowWidth }]}>
       {children ?? <AlbumArt {...props} />}
-      <SongTitle style={textStyle} text={track?.title} />
+      <SongTitle style={styles.titleText} text={track?.title} />
       <View style={styles.infoContainer}>
         <View style={styles.favoriteButtonContainer}>
           <FavReloadButton track={track} />
         </View>
         <View style={styles.artistInfoContainer}>
-          <Text style={textSubStyle}>{track?.artist}</Text>
+          <Text style={textSubStyle} numberOfLines={1}>
+            {track?.artist}
+          </Text>
           <Text style={textSubStyle}>{currentPlayingList.title}</Text>
           <Text style={textSubStyle}>{getTrackLocation()}</Text>
         </View>
@@ -116,24 +112,25 @@ interface SongTitleProps {
 }
 export const SongTitle = (props: SongTitleProps) => {
   const resolveError = useRef(0);
+  const playerStyle = useNoxSetting(state => state.playerStyle);
 
   return (
     <MarqueeText
       duration={3000}
       animationType={'bounce'}
       bounceDelay={2000}
-      style={props.style}
+      style={[props.style, { color: playerStyle.colors.onSurface }]}
       easing={Easing.linear}
       onWidthResolveError={() => resolveError.current++}
     >
-      {`${props.text}`}
+      {props.text}
     </MarqueeText>
   );
 };
 
 export default TrackInfoTemplate;
 
-const styles = StyleSheet.create({
+export const styles = StyleSheet.create({
   container: {
     alignItems: 'center',
   },

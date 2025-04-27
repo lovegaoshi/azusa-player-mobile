@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { GestureResponderEvent, View } from 'react-native';
 import { IconButton } from 'react-native-paper';
+import { TrueSheet } from '@lodev09/react-native-true-sheet';
 
 import { useNoxSetting } from '@stores/useApp';
 import SongMenu from './SongMenu';
+import { NoxRoutes } from '@enums/Routes';
 
 export default ({ track }: NoxComponent.TrackProps) => {
   const song = track?.song as NoxMedia.Song;
@@ -20,7 +22,8 @@ export default ({ track }: NoxComponent.TrackProps) => {
   const playerStyle = useNoxSetting(state => state.playerStyle);
 
   const handlePress = (event: GestureResponderEvent) => {
-    setSongMenuVisible(true);
+    TrueSheet.present(NoxRoutes.SongMenuSheet);
+    //setSongMenuVisible(true);
     setMenuCoords({
       x: event.nativeEvent.pageX,
       y: event.nativeEvent.pageY,
