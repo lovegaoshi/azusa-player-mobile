@@ -27,8 +27,6 @@ export default () => {
   const currentPlaylist = useNoxSetting(state => state.currentPlaylist);
   const playerStyle = useNoxSetting(state => state.playerStyle);
   const { t } = useTranslation();
-  const { updateSongIndex, updateSongMetadata, findSongIndex } =
-    usePlaylistCRUD();
   const updateTrack = useTrackStore(state => state.updateTrack);
   const getPlaylist = useNoxSetting(state => state.getPlaylist);
   const { startRadio } = useSongOperations();
@@ -50,7 +48,7 @@ export default () => {
     };
   };
   const renameSong = (name: string) => {
-    updateSongIndex(findSongIndex(song), {
+    playlistCRUD.updateSongIndex(playlistCRUD.findSongIndex(song), {
       name,
       parsedName: name,
     });
@@ -60,8 +58,8 @@ export default () => {
   const reloadSong = async () => {
     showSheet(false);
     const currentPlaylist2 = await getPlaylist(currentPlaylist.id);
-    const metadata = await updateSongMetadata(
-      findSongIndex(song),
+    const metadata = await playlistCRUD.updateSongMetadata(
+      playlistCRUD.findSongIndex(song),
       currentPlaylist2,
     );
     updateTrack({
