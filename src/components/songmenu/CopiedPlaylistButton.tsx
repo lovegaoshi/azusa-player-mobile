@@ -12,11 +12,13 @@ interface MenuProps {
   getFromListOnClick: () => NoxMedia.Playlist;
   onSubmit?: () => void;
   onCancel?: () => void;
+  showSheet?: (v: boolean) => void;
 }
 export default ({
   getFromListOnClick,
   onSubmit = () => undefined,
   onCancel = () => undefined,
+  showSheet,
 }: MenuProps) => {
   const { t } = useTranslation();
   const [dialogOpen, setDialogOpen] = useState(false);
@@ -26,6 +28,7 @@ export default ({
   const handleClose = () => {
     setDialogOpen(false);
     onCancel();
+    showSheet?.(true);
   };
 
   const handleSubmit = () => {
@@ -39,6 +42,7 @@ export default ({
       onPress={() => {
         setDialogOpen(true);
         setFromList(getFromListOnClick());
+        showSheet?.(false);
       }}
       buttonText={t('PlaylistOperations.playlistSendToTitle')}
     >

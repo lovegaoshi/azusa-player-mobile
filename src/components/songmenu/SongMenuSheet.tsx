@@ -2,7 +2,7 @@ import { TrueSheet } from '@lodev09/react-native-true-sheet';
 import { useRef } from 'react';
 import { Text, View } from 'react-native';
 import { Image } from 'expo-image';
-import { Divider } from 'react-native-paper';
+import { Divider, IconButton } from 'react-native-paper';
 import { useTranslation } from 'react-i18next';
 
 import { NoxRoutes } from '@enums/Routes';
@@ -11,6 +11,7 @@ import { SongTitle, styles } from '../player/TrackInfo/TrackInfoTemplate';
 import { useTrackStore } from '@hooks/useActiveTrack';
 import SheetIconButton from './SheetIconButton';
 import CopiedPlaylistButton from './CopiedPlaylistButton';
+import SheetIconEntry from './SheetIconEntry';
 
 interface UsePlaylist {
   checking: boolean;
@@ -33,7 +34,8 @@ export default () => {
   const playerStyle = useNoxSetting(state => state.playerStyle);
   const { t } = useTranslation();
 
-  const dismissSheet = () => sheet.current?.dismiss();
+  const showSheet = (show = true) =>
+    show ? sheet.current?.present() : sheet.current?.dismiss();
 
   const selectedPlaylist = () => {
     const songs = [song];
@@ -84,10 +86,10 @@ export default () => {
         </View>
       </View>
       <Divider />
-      <View style={{ flexDirection: 'row' }}>
+      <View style={{ flexDirection: 'row', paddingVertical: 10 }}>
         <CopiedPlaylistButton
           getFromListOnClick={selectedPlaylist}
-          onSubmit={dismissSheet}
+          showSheet={showSheet}
         />
         <SheetIconButton
           icon={'playlist-plus'}
@@ -100,12 +102,31 @@ export default () => {
           buttonText={t('PlaylistOperations.playlistSendToTitle')}
         />
       </View>
-      <Text> Hello </Text>
-      <Text> Hello </Text>
-      <Text> Hello </Text>
-      <Text> Hello </Text>
-      <Text> Hello </Text>
-      <Text> Hello </Text>
+      <SheetIconEntry
+        text={'hello'}
+        icon={'playlist-plus'}
+        onPress={() => console.log('pressed!')}
+      />
+      <SheetIconEntry
+        text={'hello'}
+        icon={'playlist-plus'}
+        onPress={() => console.log('pressed!')}
+      />
+      <SheetIconEntry
+        text={'hello'}
+        icon={'playlist-plus'}
+        onPress={() => console.log('pressed!')}
+      />
+      <SheetIconEntry
+        text={'hello'}
+        icon={'playlist-plus'}
+        onPress={() => console.log('pressed!')}
+      />
+      <SheetIconEntry
+        text={'hello'}
+        icon={'playlist-plus'}
+        onPress={() => console.log('pressed!')}
+      />
     </TrueSheet>
   );
 };

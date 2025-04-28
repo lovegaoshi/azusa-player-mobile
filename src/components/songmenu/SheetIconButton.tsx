@@ -18,7 +18,7 @@ export default ({
     <View
       style={{
         flex: 1,
-        height: 120,
+        height: 110,
         alignItems: 'center',
       }}
     >
