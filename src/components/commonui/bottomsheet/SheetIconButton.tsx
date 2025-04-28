@@ -6,6 +6,7 @@ interface IconButtonProps {
   icon: string;
   buttonText?: string;
   children?: React.ReactNode;
+  disabled?: boolean;
 }
 
 export default ({
@@ -13,6 +14,7 @@ export default ({
   onPress = () => console.log('pressed!'),
   buttonText,
   children,
+  disabled,
 }: IconButtonProps) => {
   return (
     <View
@@ -23,6 +25,7 @@ export default ({
       }}
     >
       <IconButton
+        disabled={disabled}
         icon={icon}
         mode={'contained-tonal'}
         size={30}

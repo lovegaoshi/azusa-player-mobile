@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { Menu } from 'react-native-paper';
 import { useTranslation } from 'react-i18next';
 
 import Dialog from '@components/player/TrackInfo/RenameSong/RenameSongDialog';
@@ -8,11 +7,12 @@ import SheetIconButton from '../commonui/bottomsheet/SheetIconButton';
 
 const ICON = 'pencil';
 
-interface MenuProps {
+interface Props {
   getSongOnClick: () => NoxMedia.Song;
   disabled?: boolean;
   onSubmit?: (rename: string) => void;
   onCancel?: () => void;
+  showSheet?: (v: boolean) => void;
 }
 
 export default ({
@@ -20,7 +20,8 @@ export default ({
   disabled = false,
   onSubmit = (rename: string) => console.log(rename),
   onCancel = () => undefined,
-}: MenuProps) => {
+  showSheet,
+}: Props) => {
   const { t } = useTranslation();
   const [dialogOpen, setDialogOpen] = useState(false);
   const [song, setSong] = useState(dummySongObj);
@@ -28,6 +29,7 @@ export default ({
   const handleClose = () => {
     setDialogOpen(false);
     onCancel();
+    showSheet?.(true);
   };
 
   const handleSubmit = (rename: string) => {
@@ -36,22 +38,22 @@ export default ({
   };
 
   return (
-    <React.Fragment>
-      <Menu.Item
-        leadingIcon={ICON}
-        onPress={() => {
-          setDialogOpen(true);
-          setSong(getSongOnClick());
-        }}
-        title={t('SongOperations.songRenameTitle')}
-        disabled={disabled}
-      />
+    <SheetIconButton
+      icon={ICON}
+      onPress={() => {
+        setDialogOpen(true);
+        setSong(getSongOnClick());
+        showSheet?.(false);
+      }}
+      buttonText={t('SongOperations.songRenameTitle')}
+      disabled={disabled}
+    >
       <Dialog
         visible={dialogOpen}
         song={song}
         onClose={handleClose}
         onSubmit={handleSubmit}
       />
-    </React.Fragment>
+    </SheetIconButton>
   );
 };

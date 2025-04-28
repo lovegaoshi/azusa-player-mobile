@@ -2,7 +2,7 @@ import { TrueSheet } from '@lodev09/react-native-true-sheet';
 import { useRef } from 'react';
 import { Text, View } from 'react-native';
 import { Image } from 'expo-image';
-import { Divider, IconButton } from 'react-native-paper';
+import { Divider } from 'react-native-paper';
 import { useTranslation } from 'react-i18next';
 
 import { NoxRoutes } from '@enums/Routes';
@@ -12,6 +12,8 @@ import { useTrackStore } from '@hooks/useActiveTrack';
 import SheetIconButton from '../commonui/bottomsheet/SheetIconButton';
 import CopiedPlaylistButton from './CopiedPlaylistButton';
 import SheetIconEntry from '@components/commonui/bottomsheet/SheetIconEntry';
+import usePlaylistCRUD from '@hooks/usePlaylistCRUD';
+import RenameSongButton from './RenameSongButton';
 
 interface UsePlaylist {
   checking: boolean;
@@ -29,10 +31,12 @@ export default () => {
   const sheet = useRef<TrueSheet>(null);
   const track = useTrackStore(s => s.track);
   const song = track?.song;
-  const songMenuSongIndexes = useNoxSetting(state => state.songMenuSongIndexes);
   const currentPlaylist = useNoxSetting(state => state.currentPlaylist);
   const playerStyle = useNoxSetting(state => state.playerStyle);
   const { t } = useTranslation();
+  const { updateSongIndex, updateSongMetadata, findSongIndex } =
+    usePlaylistCRUD();
+  const updateTrack = useTrackStore(state => state.updateTrack);
 
   const showSheet = (show = true) =>
     show ? sheet.current?.present() : sheet.current?.dismiss();
@@ -47,6 +51,13 @@ export default () => {
           ? t('SongOperations.selectedSongs')
           : songs[0].parsedName,
     };
+  };
+  const renameSong = (name: string) => {
+    updateSongIndex(findSongIndex(song), {
+      name,
+      parsedName: name,
+    });
+    updateTrack({ title: name });
   };
 
   return (
@@ -91,10 +102,12 @@ export default () => {
           getFromListOnClick={selectedPlaylist}
           showSheet={showSheet}
         />
-        <SheetIconButton
-          icon={'playlist-plus'}
-          onPress={() => console.log('pressed!')}
-          buttonText={t('PlaylistOperations.playlistSendToTitle')}
+        <RenameSongButton
+          getSongOnClick={() => song}
+          onSubmit={(rename: string) => {
+            renameSong(rename);
+          }}
+          showSheet={showSheet}
         />
         <SheetIconButton
           icon={'playlist-plus'}
