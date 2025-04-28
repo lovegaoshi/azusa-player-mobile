@@ -11,12 +11,13 @@ interface Props extends NoxComponent.AppThemeProps {
   isLandscape: boolean;
 }
 
+const APM = ({ isLandscape }: { isLandscape: boolean }) => {
+  if (isLandscape) return <AzusaPlayerLandscape />;
+  return <AzusaPlayer />;
+};
+
 export default ({ PIP, isLandscape, defaultNavTheme, defaultTheme }: Props) => {
   const playerStyle = useNoxSetting(state => state.playerStyle);
-  const APM = () => {
-    if (isLandscape) return <AzusaPlayerLandscape />;
-    return <AzusaPlayer />;
-  };
 
   if (PIP) return <PIPLyricView />;
   return (
@@ -33,7 +34,7 @@ export default ({ PIP, isLandscape, defaultNavTheme, defaultTheme }: Props) => {
         fonts: defaultNavTheme.fonts,
       }}
     >
-      <APM />
+      <APM isLandscape={isLandscape} />
     </NavigationContainer>
   );
 };
