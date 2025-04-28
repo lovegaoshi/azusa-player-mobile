@@ -147,7 +147,7 @@ export default () => {
         <SheetIconButton
           icon={'refresh'}
           onPress={reloadSong}
-          buttonText={t('SongOperations.reloadSong')}
+          text={t('SongOperations.reloadSong')}
         />
       </View>
       <SheetIconEntry

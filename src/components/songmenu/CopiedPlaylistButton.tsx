@@ -3,7 +3,9 @@ import { useTranslation } from 'react-i18next';
 
 import Dialog from '../dialogs/CopiedPlaylistDialog';
 import { dummyPlaylistList } from '@objects/Playlist';
-import SheetIconButton from '../commonui/bottomsheet/SheetIconButton';
+import SheetIconButton, {
+  Props,
+} from '../commonui/bottomsheet/SheetIconButton';
 
 const ICON = 'playlist-plus';
 
@@ -12,12 +14,14 @@ interface MenuProps {
   onSubmit?: () => void;
   onCancel?: () => void;
   showSheet?: (v: boolean) => void;
+  Button?: (p: Props) => React.ReactNode;
 }
 export default ({
   getFromListOnClick,
   onSubmit = () => undefined,
   onCancel = () => undefined,
   showSheet,
+  Button = SheetIconButton,
 }: MenuProps) => {
   const { t } = useTranslation();
   const [dialogOpen, setDialogOpen] = useState(false);
@@ -36,14 +40,14 @@ export default ({
   };
 
   return (
-    <SheetIconButton
+    <Button
       icon={ICON}
       onPress={() => {
         setDialogOpen(true);
         setFromList(getFromListOnClick());
         showSheet?.(false);
       }}
-      buttonText={t('PlaylistOperations.playlistSendToTitle')}
+      text={t('PlaylistOperations.playlistSendToTitle')}
     >
       <Dialog
         visible={dialogOpen}
@@ -51,6 +55,6 @@ export default ({
         onClose={handleClose}
         onSubmit={handleSubmit}
       />
-    </SheetIconButton>
+    </Button>
   );
 };

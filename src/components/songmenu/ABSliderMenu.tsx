@@ -75,12 +75,11 @@ const ABSliderMenu = ({ song, showSheet }: Props) => {
   };
 
   return (
-    <>
-      <SheetIconEntry
-        text={t('SongOperations.abrepeat')}
-        icon={'ab-testing'}
-        onPress={showDialog}
-      />
+    <SheetIconEntry
+      text={t('SongOperations.abrepeat')}
+      icon={'ab-testing'}
+      onPress={showDialog}
+    >
       <GenericDialog
         visible={dialogVisible}
         title={t('SongOperations.abrepeat')}
@@ -89,7 +88,7 @@ const ABSliderMenu = ({ song, showSheet }: Props) => {
       >
         <ABSlider range={range} setRange={setRange} />
       </GenericDialog>
-    </>
+    </SheetIconEntry>
   );
 };
 

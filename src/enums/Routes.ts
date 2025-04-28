@@ -9,4 +9,6 @@ export enum NoxRoutes {
   Lyrics = 'NoxLyrics',
   Artist = 'NoxArtist',
   SongMenuSheet = 'NoxSongMenuSheet',
+  PlaylistMenuSheet = 'NoxPlaylistMenuSheet',
+  SongsMenuInListSheet = 'NoxSongsMenuInListSheet',
 }
