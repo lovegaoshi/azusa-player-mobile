@@ -30,13 +30,13 @@ interface Props {
 export default () => {
   const sheet = useRef<TrueSheet>(null);
   const track = useTrackStore(s => s.track);
-  const song = track?.song;
   const currentPlaylist = useNoxSetting(state => state.currentPlaylist);
   const playerStyle = useNoxSetting(state => state.playerStyle);
   const { t } = useTranslation();
-  const { updateSongIndex, updateSongMetadata, findSongIndex } =
+  const { updateSongIndex, updateSongMetadata, findSongIndex, findSong } =
     usePlaylistCRUD();
   const updateTrack = useTrackStore(state => state.updateTrack);
+  const song = track?.song;
 
   const showSheet = (show = true) =>
     show ? sheet.current?.present() : sheet.current?.dismiss();
@@ -57,13 +57,14 @@ export default () => {
       name,
       parsedName: name,
     });
-    updateTrack({ title: name });
+    updateTrack({ title: name, song: { ...song, name, parsedName: name } });
   };
 
   return (
     <TrueSheet
       name={NoxRoutes.SongMenuSheet}
       ref={sheet}
+      backgroundColor={'black'}
       sizes={['auto', 'large']}
     >
       <View
@@ -74,13 +75,13 @@ export default () => {
         }}
       >
         <Image
-          source={song.cover}
+          source={song?.cover}
           style={{ width: 50, height: 50, borderRadius: 5 }}
         />
         <View style={{ paddingLeft: 5, marginTop: -10 }}>
           <SongTitle
             style={[styles.titleText, { width: '100%' }]}
-            text={song.parsedName}
+            text={song?.parsedName}
           />
           <Text
             style={[
@@ -92,7 +93,7 @@ export default () => {
             ]}
             numberOfLines={1}
           >
-            {song.singer}
+            {song?.singer}
           </Text>
         </View>
       </View>

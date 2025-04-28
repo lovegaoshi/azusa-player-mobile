@@ -257,6 +257,9 @@ const usePlaylistCRUD = (mPlaylist?: NoxMedia.Playlist) => {
   const findSongIndex = (song?: NoxMedia.Song) =>
     song ? currentPlaylist.songList.findIndex(v => v.id === song.id) : -1;
 
+  const findSong = (song?: NoxMedia.Song): NoxMedia.Song =>
+    currentPlaylist.songList[findSongIndex(song)];
+
   return {
     updateSong,
     updateSongIndex,
@@ -276,6 +279,7 @@ const usePlaylistCRUD = (mPlaylist?: NoxMedia.Playlist) => {
     playlistRemoveBiliShazamed,
     sortPlaylist,
     findSongIndex,
+    findSong,
   };
 };
 
