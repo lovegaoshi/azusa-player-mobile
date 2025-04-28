@@ -1,6 +1,8 @@
 import { View } from 'react-native';
 import { Text, IconButton } from 'react-native-paper';
 
+import { useNoxSetting } from '@stores/useApp';
+
 interface IconButtonProps {
   onPress?: () => unknown;
   icon: string;
@@ -16,6 +18,8 @@ export default ({
   children,
   disabled,
 }: IconButtonProps) => {
+  const playerStyle = useNoxSetting(state => state.playerStyle);
+
   return (
     <View
       style={{
@@ -31,6 +35,7 @@ export default ({
         size={30}
         style={{ flex: 1, width: '90%' }}
         onPress={onPress}
+        containerColor={playerStyle.colors.surface}
       />
       {buttonText && <Text>{buttonText}</Text>}
       {children}

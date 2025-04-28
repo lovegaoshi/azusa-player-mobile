@@ -1,6 +1,6 @@
 import { TrueSheet } from '@lodev09/react-native-true-sheet';
 import { useRef } from 'react';
-import { Text, View } from 'react-native';
+import { Text, View, Alert } from 'react-native';
 import { Image } from 'expo-image';
 import { Divider } from 'react-native-paper';
 import { useTranslation } from 'react-i18next';
@@ -14,18 +14,11 @@ import CopiedPlaylistButton from './CopiedPlaylistButton';
 import SheetIconEntry from '@components/commonui/bottomsheet/SheetIconEntry';
 import usePlaylistCRUD from '@hooks/usePlaylistCRUD';
 import RenameSongButton from './RenameSongButton';
-
-interface UsePlaylist {
-  checking: boolean;
-  resetSelected: () => void;
-  searchAndEnableSearch: (val: string) => void;
-  getSelectedSongs: () => NoxMedia.Song[] | undefined;
-}
-
-interface Props {
-  usePlaylist: UsePlaylist;
-  prepareForLayoutAnimationRender: () => void;
-}
+import useSongOperations from '@hooks/useSongOperations';
+import radioAvailable from '@utils/radiofetch/fetch';
+import { addR128Gain, getR128Gain } from '@utils/ffmpeg/r128Store';
+import usePlayback from '@hooks/usePlayback';
+import ABSliderMenu from './ABSliderMenu';
 
 export default () => {
   const sheet = useRef<TrueSheet>(null);
@@ -34,10 +27,13 @@ export default () => {
   const currentPlaylist = useNoxSetting(state => state.currentPlaylist);
   const playerStyle = useNoxSetting(state => state.playerStyle);
   const { t } = useTranslation();
-  const { updateSongIndex, updateSongMetadata, findSongIndex, findSong } =
+  const { updateSongIndex, updateSongMetadata, findSongIndex } =
     usePlaylistCRUD();
   const updateTrack = useTrackStore(state => state.updateTrack);
   const getPlaylist = useNoxSetting(state => state.getPlaylist);
+  const { startRadio } = useSongOperations();
+  const { playFromPlaylist } = usePlayback();
+  const playlistCRUD = usePlaylistCRUD();
 
   const showSheet = (show = true) =>
     show ? sheet.current?.present() : sheet.current?.dismiss();
@@ -75,12 +71,39 @@ export default () => {
     return metadata;
   };
 
+  const onRadioPressed = () => {
+    startRadio(song);
+    showSheet(false);
+  };
+
+  const onR128Gain = () => {
+    showSheet(false);
+    Alert.alert(
+      `R128Gain of ${song.parsedName}`,
+      `${getR128Gain(song)} dB`,
+      [
+        { text: t('Dialog.nullify'), onPress: () => addR128Gain(song, null) },
+        { text: t('Dialog.zero'), onPress: () => addR128Gain(song, 0) },
+        { text: t('Dialog.ok') },
+      ],
+      { cancelable: true },
+    );
+  };
+
+  const removeSongs = async (banBVID = true) => {
+    showSheet(false);
+    playFromPlaylist({
+      playlist: await playlistCRUD.removeSongs([song], banBVID),
+    });
+  };
+
   return (
     <TrueSheet
       name={NoxRoutes.SongMenuSheet}
       ref={sheet}
-      backgroundColor={'black'}
+      backgroundColor={playerStyle.colors.surfaceVariant}
       sizes={['auto', 'large']}
+      cornerRadius={5}
     >
       <View
         style={{
@@ -130,30 +153,23 @@ export default () => {
         />
       </View>
       <SheetIconEntry
-        text={'hello'}
-        icon={'playlist-plus'}
-        onPress={() => console.log('pressed!')}
+        text={t('SongOperations.songStartRadio')}
+        icon={'radio-tower'}
+        onPress={onRadioPressed}
+        disabled={!radioAvailable(song)}
       />
       <SheetIconEntry
-        text={'hello'}
-        icon={'playlist-plus'}
-        onPress={() => console.log('pressed!')}
+        text={t('SongOperations.songR128gain')}
+        icon={'replay'}
+        onPress={onR128Gain}
       />
+      <ABSliderMenu song={song} showSheet={showSheet} />
       <SheetIconEntry
-        text={'hello'}
-        icon={'playlist-plus'}
-        onPress={() => console.log('pressed!')}
+        text={t('SongOperations.songRemoveTitle')}
+        icon={'delete-forever'}
+        onPress={removeSongs}
       />
-      <SheetIconEntry
-        text={'hello'}
-        icon={'playlist-plus'}
-        onPress={() => console.log('pressed!')}
-      />
-      <SheetIconEntry
-        text={'hello'}
-        icon={'playlist-plus'}
-        onPress={() => console.log('pressed!')}
-      />
+      <View style={{ paddingBottom: 10 }} />
     </TrueSheet>
   );
 };
