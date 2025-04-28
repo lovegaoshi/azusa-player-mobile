@@ -9,9 +9,9 @@ import { NoxRoutes } from '@enums/Routes';
 import { useNoxSetting } from '@stores/useApp';
 import { SongTitle, styles } from '../player/TrackInfo/TrackInfoTemplate';
 import { useTrackStore } from '@hooks/useActiveTrack';
-import SheetIconButton from './SheetIconButton';
+import SheetIconButton from '../commonui/bottomsheet/SheetIconButton';
 import CopiedPlaylistButton from './CopiedPlaylistButton';
-import SheetIconEntry from './SheetIconEntry';
+import SheetIconEntry from '@components/commonui/bottomsheet/SheetIconEntry';
 
 interface UsePlaylist {
   checking: boolean;

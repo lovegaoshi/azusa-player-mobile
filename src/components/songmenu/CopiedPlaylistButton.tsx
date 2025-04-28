@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
-import { Menu } from 'react-native-paper';
 import { useTranslation } from 'react-i18next';
 
 import Dialog from '../dialogs/CopiedPlaylistDialog';
 import { dummyPlaylistList } from '@objects/Playlist';
-import SheetIconButton from './SheetIconButton';
+import SheetIconButton from '../commonui/bottomsheet/SheetIconButton';
 
 const ICON = 'playlist-plus';
 
