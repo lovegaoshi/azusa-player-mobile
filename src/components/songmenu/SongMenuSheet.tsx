@@ -2,7 +2,7 @@ import { TrueSheet } from '@lodev09/react-native-true-sheet';
 import { useRef } from 'react';
 import { Text, View } from 'react-native';
 import { Image } from 'expo-image';
-import { Divider, IconButton } from 'react-native-paper';
+import { Divider } from 'react-native-paper';
 import { useTranslation } from 'react-i18next';
 
 import { NoxRoutes } from '@enums/Routes';
@@ -10,6 +10,7 @@ import { useNoxSetting } from '@stores/useApp';
 import { SongTitle, styles } from '../player/TrackInfo/TrackInfoTemplate';
 import { useTrackStore } from '@hooks/useActiveTrack';
 import SheetIconButton from './SheetIconButton';
+import CopiedPlaylistButton from './CopiedPlaylistButton';
 
 interface UsePlaylist {
   checking: boolean;
@@ -30,6 +31,21 @@ export default () => {
   const songMenuSongIndexes = useNoxSetting(state => state.songMenuSongIndexes);
   const currentPlaylist = useNoxSetting(state => state.currentPlaylist);
   const playerStyle = useNoxSetting(state => state.playerStyle);
+  const { t } = useTranslation();
+
+  const dismissSheet = () => sheet.current?.dismiss();
+
+  const selectedPlaylist = () => {
+    const songs = [song];
+    return {
+      ...currentPlaylist,
+      songList: songs,
+      title:
+        songs.length > 1
+          ? t('SongOperations.selectedSongs')
+          : songs[0].parsedName,
+    };
+  };
 
   return (
     <TrueSheet
@@ -69,20 +85,19 @@ export default () => {
       </View>
       <Divider />
       <View style={{ flexDirection: 'row' }}>
-        <SheetIconButton
-          icon={'playlist-plus'}
-          onPress={() => console.log('pressed!')}
-          buttonText="PlaylistOperations.playlistSendToTitle"
+        <CopiedPlaylistButton
+          getFromListOnClick={selectedPlaylist}
+          onSubmit={dismissSheet}
         />
         <SheetIconButton
           icon={'playlist-plus'}
           onPress={() => console.log('pressed!')}
-          buttonText="PlaylistOperations.playlistSendToTitle"
+          buttonText={t('PlaylistOperations.playlistSendToTitle')}
         />
         <SheetIconButton
           icon={'playlist-plus'}
           onPress={() => console.log('pressed!')}
-          buttonText="PlaylistOperations.playlistSendToTitle"
+          buttonText={t('PlaylistOperations.playlistSendToTitle')}
         />
       </View>
       <Text> Hello </Text>

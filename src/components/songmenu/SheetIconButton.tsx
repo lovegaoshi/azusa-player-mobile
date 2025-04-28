@@ -1,6 +1,5 @@
 import { View } from 'react-native';
 import { Text, IconButton } from 'react-native-paper';
-import { useTranslation } from 'react-i18next';
 
 interface IconButtonProps {
   onPress?: () => unknown;
@@ -15,7 +14,6 @@ export default ({
   buttonText,
   children,
 }: IconButtonProps) => {
-  const { t } = useTranslation();
   return (
     <View
       style={{
@@ -31,7 +29,7 @@ export default ({
         style={{ flex: 1, width: '90%' }}
         onPress={onPress}
       />
-      {buttonText && <Text>{t(buttonText)}</Text>}
+      {buttonText && <Text>{buttonText}</Text>}
       {children}
     </View>
   );

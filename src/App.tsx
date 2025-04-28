@@ -4,20 +4,39 @@ import { Linking, SafeAreaView, StyleSheet } from 'react-native';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { useStore } from 'zustand';
 import * as Sentry from '@sentry/react-native';
+import {
+  MD3DarkTheme,
+  MD3LightTheme,
+  adaptNavigationTheme,
+  Provider as PaperProvider,
+} from 'react-native-paper';
+import merge from 'deepmerge';
+import {
+  DarkTheme as NavigationDarkTheme,
+  DefaultTheme as NavigationDefaultTheme,
+} from '@react-navigation/native';
 
-import AzusaPlayer from './components/APM';
-import AzusaPlayerLandscape from './components/landscape/AzusaPlayerLandscape';
 import AppOpenSplash from './components/background/AppOpenSplash';
 import useSetupPlayer from './hooks/useSetupPlayer';
 import { useIsLandscape } from './hooks/useOrientation';
 import appStore from '@stores/appStore';
-import PIPLyricView from './components/player/PIPLyric';
 import MainBackground from './components/background/MainBackground';
 import useTheme from './hooks/useTheme';
 // eslint-disable-next-line import/no-unresolved
 import { TRACKING } from '@env';
 import { useSetupVIP } from './hooks/useVIP';
 import SongMenuSheet from '@components/songmenu/SongMenuSheet';
+import { useNoxSetting } from '@stores/useApp';
+import SnackBar from './components/commonui/Snackbar';
+import APM from './components/APM';
+
+const { LightTheme, DarkTheme } = adaptNavigationTheme({
+  reactNavigationLight: NavigationDefaultTheme,
+  reactNavigationDark: NavigationDarkTheme,
+});
+
+const CombinedDefaultTheme = merge(MD3LightTheme, LightTheme);
+const CombinedDarkTheme = merge(MD3DarkTheme, DarkTheme);
 
 if (TRACKING) {
   Sentry.init({
@@ -48,12 +67,6 @@ const useSplash = (duration = 1000) => {
   return isReady;
 };
 
-const APM = ({ PIP, isLandscape }: { PIP: boolean; isLandscape: boolean }) => {
-  if (PIP) return <PIPLyricView />;
-  if (isLandscape) return <AzusaPlayerLandscape />;
-  return <AzusaPlayer />;
-};
-
 export default function App(appProps: NoxComponent.AppProps) {
   const { vip } = useSetupVIP();
   const isSplashReady = useSplash(
@@ -65,6 +78,13 @@ export default function App(appProps: NoxComponent.AppProps) {
   const PIPMode = useStore(appStore, state => state.pipMode);
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const usedTheme = useTheme();
+  const playerStyle = useNoxSetting(state => state.playerStyle);
+  const defaultTheme = playerStyle.metaData.darkTheme
+    ? CombinedDarkTheme
+    : CombinedDefaultTheme;
+  const defaultNavTheme = playerStyle.metaData.darkTheme
+    ? NavigationDarkTheme
+    : NavigationDefaultTheme;
 
   useEffect(() => {
     function deepLinkHandler(data: { url: string }) {
@@ -93,8 +113,21 @@ export default function App(appProps: NoxComponent.AppProps) {
     <GestureHandlerRootView style={styles.gestureContainer}>
       <MainBackground>
         <SafeAreaProvider>
-          <APM PIP={PIPMode} isLandscape={isLandscape} />
-          <SongMenuSheet />
+          <PaperProvider
+            theme={{
+              ...defaultTheme,
+              colors: playerStyle.colors,
+            }}
+          >
+            <APM
+              PIP={PIPMode}
+              isLandscape={isLandscape}
+              defaultNavTheme={defaultNavTheme}
+              defaultTheme={defaultTheme}
+            />
+            <SongMenuSheet />
+            <SnackBar />
+          </PaperProvider>
         </SafeAreaProvider>
       </MainBackground>
     </GestureHandlerRootView>
