@@ -1,18 +1,19 @@
 import React, { useState, useEffect } from 'react';
-import { Text, Menu } from 'react-native-paper';
+import { Text } from 'react-native-paper';
 import { useTranslation } from 'react-i18next';
 import { useProgress } from 'react-native-track-player';
-import { RangeSlider } from '@sharcoux/slider';
+import { RangeSlider } from '@react-native-assets/slider';
 import { StyleSheet, View } from 'react-native';
 
 import { useNoxSetting } from '@stores/useApp';
 import GenericDialog from '@components/dialogs/GenericDialog';
 import { seconds2MMSS as formatSeconds } from '@utils/Utils';
 import { addABRepeat } from '@stores/appStore';
+import SheetIconEntry from '@components/commonui/bottomsheet/SheetIconEntry';
 
 interface Props {
-  closeMenu?: () => void;
   song: NoxMedia.Song;
+  showSheet?: (v: boolean) => void;
 }
 
 interface SliderProps {
@@ -51,30 +52,39 @@ const ABSlider = ({ range, setRange }: SliderProps) => {
   );
 };
 
-const ABSliderMenu = ({ song, closeMenu }: Props) => {
+const ABSliderMenu = ({ song, showSheet }: Props) => {
   const { t } = useTranslation();
   const [dialogVisible, setDialogVisible] = useState(false);
   const setCurrentABRepeat = useNoxSetting(state => state.setCurrentABRepeat);
   const [range, setRange] = useState<[number, number]>([0, 1]);
 
   const onSubmit = () => {
-    if (closeMenu) closeMenu();
     setDialogVisible(val => !val);
     setCurrentABRepeat(range);
     addABRepeat(song, range);
   };
 
+  const showDialog = () => {
+    setDialogVisible(true);
+    showSheet?.(false);
+  };
+
+  const dismissDialog = () => {
+    setDialogVisible(val => !val);
+    showSheet?.(true);
+  };
+
   return (
     <>
-      <Menu.Item
-        leadingIcon={'ab-testing'}
-        title={t('SongOperations.abrepeat')}
-        onPress={() => setDialogVisible(true)}
+      <SheetIconEntry
+        text={t('SongOperations.abrepeat')}
+        icon={'ab-testing'}
+        onPress={showDialog}
       />
       <GenericDialog
         visible={dialogVisible}
         title={t('SongOperations.abrepeat')}
-        onClose={() => setDialogVisible(val => !val)}
+        onClose={dismissDialog}
         onSubmit={onSubmit}
       >
         <ABSlider range={range} setRange={setRange} />

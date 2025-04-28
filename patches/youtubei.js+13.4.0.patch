@@ -1,5 +1,5 @@
 diff --git a/node_modules/youtubei.js/dist/src/core/Player.js b/node_modules/youtubei.js/dist/src/core/Player.js
-index 4008af9..f172252 100644
+index 4008af9..3aeeeb4 100644
 --- a/node_modules/youtubei.js/dist/src/core/Player.js
 +++ b/node_modules/youtubei.js/dist/src/core/Player.js
 @@ -25,15 +25,14 @@ export default class Player {
@@ -24,17 +24,24 @@ index 4008af9..f172252 100644
          Log.info(TAG, `Could not find any cached player. Will download a new player from ${player_url}.`);
          const player_res = await fetch(player_url, {
              headers: {
-@@ -129,7 +128,17 @@ export default class Player {
+@@ -129,7 +128,24 @@ export default class Player {
          return url_components.toString();
      }
      static async fromCache(cache, player_id) {
 -        const buffer = await cache.get(player_id);
 +      try {
 +        console.log(`[fakeMMKV] attempts to load from gh: ${player_id}`);
-+
 +        const getCachedPlayer = async () => {
++            // attempt to load from github first
 +            const req = await fetch(`https://raw.githubusercontent.com/lovegaoshi/my-express-api/refs/heads/ghactions/cachedPlayers/${player_id}`);
 +            if (req.ok) return req.arrayBuffer();
++            // resort to the latest cached by github instead. 
++            const latestGHCacheReq = await fetch('https://raw.githubusercontent.com/lovegaoshi/my-express-api/refs/heads/ghactions/cachedPlayers/latest');
++            const ghCache = await latestGHCacheReq.text();
++            console.log(`[fakeMMKV] attempts to load from gh latest instead: ${ghCache}`);
++            const reqGH = await fetch(`https://raw.githubusercontent.com/lovegaoshi/my-express-api/refs/heads/ghactions/cachedPlayers/${ghCache}`);
++            if (reqGH.ok) return reqGH.arrayBuffer();
++            // old implementation that uses netlify to resolve on the fly. ~5s delay
 +            const req2 = await fetch(`https://ytb-cache.netlify.app/api?playerURL=${player_id}`);
 +            if (req2.ok) return req2.arrayBuffer();
 +            return cache.get(player_id);
@@ -43,7 +50,7 @@ index 4008af9..f172252 100644
          if (!buffer)
              return null;
          const view = new DataView(buffer);
-@@ -143,6 +152,10 @@ export default class Player {
+@@ -143,6 +159,10 @@ export default class Player {
          const sig_sc = LZW.decompress(new TextDecoder().decode(sig_buf));
          const nsig_sc = LZW.decompress(new TextDecoder().decode(nsig_buf));
          return new Player(player_id, sig_timestamp, sig_sc, nsig_sc);

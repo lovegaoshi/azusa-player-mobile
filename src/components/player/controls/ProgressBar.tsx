@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet, ViewStyle } from 'react-native';
 import TrackPlayer, { useProgress } from 'react-native-track-player';
-import { Slider } from '@sharcoux/slider';
+import { Slider } from '@react-native-assets/slider';
 
 import { useNoxSetting } from '@stores/useApp';
 

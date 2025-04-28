@@ -6,7 +6,7 @@ import {
   TouchableOpacity,
   StyleSheet,
 } from 'react-native';
-import { LegendList } from '@legendapp/list';
+import { FlashList } from '@shopify/flash-list';
 import { Text } from 'react-native-paper';
 import { Image } from 'expo-image';
 import { useTranslation } from 'react-i18next';
@@ -50,8 +50,8 @@ export const BiliSongCard = ({
       ]}
     >
       {title && <Text style={{ fontSize: 20, color: fontColor }}>{title}</Text>}
-      <LegendList<NoxMedia.Song>
-        recycleItems
+      <FlashList
+        estimatedItemSize={390}
         showsVerticalScrollIndicator={false}
         data={songs}
         renderItem={({ item }) => (

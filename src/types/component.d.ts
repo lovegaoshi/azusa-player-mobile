@@ -1,15 +1,19 @@
 import { StyleProp, ViewStyle } from 'react-native';
-import { ParamListBase } from '@react-navigation/native';
+import { ParamListBase, Theme } from '@react-navigation/native';
 import { DrawerNavigationProp } from '@react-navigation/drawer';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { Track } from 'react-native-track-player';
-
 import { SharedValue } from 'react-native-reanimated';
 
 import { IntentData } from '@enums/Intent';
 
 declare global {
   namespace NoxComponent {
+    interface AppThemeProps {
+      defaultTheme: any;
+      defaultNavTheme: Theme;
+    }
+
     interface OpacityProps {
       opacity: SharedValue<number>;
       style?: StyleProp<ViewStyle>;

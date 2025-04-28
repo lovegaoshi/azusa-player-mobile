@@ -85,7 +85,11 @@ export default ({ intentData, vip }: NoxComponent.SetupPlayerProps) => {
       setIntentData(intentData);
       setTrack(await TrackPlayer.getActiveTrack());
       // activity is already loaded. this indicates a GC induced JS crash
-      if (isRNLoaded && !__DEV__) {
+      // or last exit reason is ApplicationExitInfo.REASON_SIGNALED (2)
+      // for Samsung S21
+      const GCCrash = isRNLoaded && !__DEV__;
+      const OSkill = (await NoxModule?.getLastExitCode?.()) === 2;
+      if (GCCrash || OSkill) {
         return TrackPlayer.play();
       }
       switch (intentData) {

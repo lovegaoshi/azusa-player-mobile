@@ -103,6 +103,7 @@ export const LegendExample = ({
             actualTextLength.value = e.nativeEvent.layout.width;
             setdebouncedText(text);
           }}
+          numberOfLines={1}
         >
           {text}
         </Text>
@@ -114,6 +115,7 @@ export const LegendExample = ({
           color: playerStyle.colors.primary,
           alignSelf: 'flex-end',
         }}
+        numberOfLines={1}
       >
         {debouncedText}
       </Text>

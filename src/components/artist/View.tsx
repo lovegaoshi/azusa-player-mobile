@@ -49,7 +49,10 @@ const Artist = ({ navigation }: NoxComponent.StackNavigationProps) => {
   const hideAt = useDerivedValue(() => scrollYHeight.value / 2.5);
 
   const animatedHeaderStyle = useAnimatedStyle(() => {
-    const visibleOffsetRange = scrollYOffset.value - hideAt.value;
+    const visibleOffsetRange =
+      scrollYOffset.value -
+      hideAt.value +
+      (scrollYHeight.value === 0 ? 0 : 130);
     return {
       opacity: visibleOffsetRange > 0 ? withTiming(1) : withTiming(0),
     };
@@ -58,7 +61,7 @@ const Artist = ({ navigation }: NoxComponent.StackNavigationProps) => {
   const animatedArtistTitleOpacity = useDerivedValue(() => {
     // at 1 at scrollYHeight.value / 4
     // at 0 at scrollYHeight.value / 3
-    const showAt = scrollYHeight.value / 5;
+    const showAt = 30;
     if (scrollYOffset.value > hideAt.value) {
       return 0;
     }
