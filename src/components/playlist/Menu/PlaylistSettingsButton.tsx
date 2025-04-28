@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { Menu } from 'react-native-paper';
 import { useTranslation } from 'react-i18next';
 
 import Dialog from './PlaylistSettingsDialog';
+import SheetIconEntry from '@components/commonui/bottomsheet/SheetIconEntry';
 
 const ICON = 'pencil';
 
@@ -11,6 +11,7 @@ interface Props {
   onSubmit?: (playlist: NoxMedia.Playlist) => void;
   onCancel?: () => void;
   playlist: NoxMedia.Playlist;
+  showSheet?: (v: boolean) => void;
 }
 
 export default ({
@@ -18,6 +19,7 @@ export default ({
   onSubmit = () => undefined,
   onCancel = () => undefined,
   playlist,
+  showSheet,
 }: Props) => {
   const { t } = useTranslation();
   const [dialogOpen, setDialogOpen] = useState(false);
@@ -25,6 +27,7 @@ export default ({
   const handleClose = () => {
     setDialogOpen(false);
     onCancel();
+    showSheet?.(true);
   };
 
   const handleSubmit = (playlist: NoxMedia.Playlist) => {
@@ -33,19 +36,21 @@ export default ({
   };
 
   return (
-    <React.Fragment>
-      <Menu.Item
-        leadingIcon={ICON}
-        onPress={() => setDialogOpen(true)}
-        title={t('PlaylistOperations.playlistSettingsTitle')}
-        disabled={disabled}
-      />
+    <SheetIconEntry
+      text={t('PlaylistOperations.playlistSettingsTitle')}
+      icon={ICON}
+      onPress={() => {
+        setDialogOpen(true);
+        showSheet?.(false);
+      }}
+      disabled={disabled}
+    >
       <Dialog
         playlist={playlist}
         visible={dialogOpen}
         onClose={handleClose}
         onSubmit={handleSubmit}
       />
-    </React.Fragment>
+    </SheetIconEntry>
   );
 };

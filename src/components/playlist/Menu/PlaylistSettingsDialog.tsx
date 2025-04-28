@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { View, StyleSheet } from 'react-native';
 import { Button, Dialog, Portal, Text, Switch } from 'react-native-paper';
 import { useTranslation } from 'react-i18next';
@@ -38,8 +38,15 @@ const PlaylistDialog = ({
     saveSetting,
   } = usePlaylistSetting(playlist);
 
+  const initField = () => {
+    setName(playlist.title);
+    setSub(playlist.subscribeUrl.join(';'));
+    setBlacklist(playlist.blacklistedUrl.join(';'));
+  };
+
   const handleClose = () => {
     onClose();
+    initField();
   };
 
   const handleSubmit = () => {
@@ -50,6 +57,8 @@ const PlaylistDialog = ({
     };
     saveSetting(newSetting, onSubmit);
   };
+
+  useEffect(() => initField(), [playlist.id]);
 
   return (
     <Dialog visible={visible} onDismiss={handleClose}>
