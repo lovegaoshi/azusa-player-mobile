@@ -1,4 +1,5 @@
 import last from 'lodash/last';
+import pickBy from 'lodash/pickBy';
 
 import { logger } from '@utils/Logger';
 
@@ -285,3 +286,6 @@ export const smartShuffle = (songs: NoxMedia.Song[]) => {
 };
 
 export const shuffle = <T>(list: T[]) => list.sort(() => Math.random() - 0.5);
+
+export const removeUndefined = (originalObject: any) =>
+  pickBy(originalObject, v => v !== undefined);

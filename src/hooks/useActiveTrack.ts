@@ -5,6 +5,8 @@ import TrackPlayer, {
   Event,
 } from 'react-native-track-player';
 
+import { removeUndefined } from '@utils/Utils';
+
 interface TrackStore {
   track: Track | undefined;
   setTrack: (t: Track | undefined) => void;
@@ -18,9 +20,10 @@ export const useTrackStore = create<TrackStore>((set, get) => ({
     const cTrack = get().track;
     const index = await TrackPlayer.getActiveTrackIndex();
     if (index === undefined) return;
-    await TrackPlayer.updateMetadataForTrack(index, metadata);
+    const newMetadata = removeUndefined(metadata);
+    await TrackPlayer.updateMetadataForTrack(index, newMetadata);
     // @ts-ignore-error metadata's url is possibly undefined as its a partial.
-    set({ track: { ...cTrack, ...metadata } });
+    set({ track: { ...cTrack, ...newMetadata } });
   },
 }));
 

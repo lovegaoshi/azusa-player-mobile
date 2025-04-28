@@ -5,10 +5,11 @@ interface Props {
   icon: string;
   text: string;
   onPress?: () => void;
+  disabled?: boolean;
 }
-export default ({ icon, text, onPress }: Props) => {
+export default ({ icon, text, onPress, disabled }: Props) => {
   return (
-    <TouchableRipple onPress={onPress}>
+    <TouchableRipple onPress={onPress} disabled={disabled}>
       <View style={{ flexDirection: 'row', alignItems: 'center' }}>
         <IconButton icon={icon} size={32} />
         <Text> {text} </Text>

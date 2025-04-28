@@ -30,13 +30,14 @@ interface Props {
 export default () => {
   const sheet = useRef<TrueSheet>(null);
   const track = useTrackStore(s => s.track);
+  const song = track?.song;
   const currentPlaylist = useNoxSetting(state => state.currentPlaylist);
   const playerStyle = useNoxSetting(state => state.playerStyle);
   const { t } = useTranslation();
   const { updateSongIndex, updateSongMetadata, findSongIndex, findSong } =
     usePlaylistCRUD();
   const updateTrack = useTrackStore(state => state.updateTrack);
-  const song = track?.song;
+  const getPlaylist = useNoxSetting(state => state.getPlaylist);
 
   const showSheet = (show = true) =>
     show ? sheet.current?.present() : sheet.current?.dismiss();
@@ -58,6 +59,20 @@ export default () => {
       parsedName: name,
     });
     updateTrack({ title: name, song: { ...song, name, parsedName: name } });
+  };
+
+  const reloadSong = async () => {
+    showSheet(false);
+    const currentPlaylist2 = await getPlaylist(currentPlaylist.id);
+    const metadata = await updateSongMetadata(
+      findSongIndex(song),
+      currentPlaylist2,
+    );
+    updateTrack({
+      title: metadata.name,
+      artwork: metadata.cover,
+    });
+    return metadata;
   };
 
   return (
@@ -105,15 +120,13 @@ export default () => {
         />
         <RenameSongButton
           getSongOnClick={() => song}
-          onSubmit={(rename: string) => {
-            renameSong(rename);
-          }}
+          onSubmit={renameSong}
           showSheet={showSheet}
         />
         <SheetIconButton
-          icon={'playlist-plus'}
-          onPress={() => console.log('pressed!')}
-          buttonText={t('PlaylistOperations.playlistSendToTitle')}
+          icon={'refresh'}
+          onPress={reloadSong}
+          buttonText={t('SongOperations.reloadSong')}
         />
       </View>
       <SheetIconEntry
