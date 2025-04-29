@@ -3,14 +3,14 @@ import { IconButton } from 'react-native-paper';
 import { TrueSheet } from '@lodev09/react-native-true-sheet';
 
 import { useNoxSetting } from '@stores/useApp';
-import { NoxRoutes } from '@enums/Routes';
+import { NoxSheetRoutes } from '@enums/Routes';
 
 export default ({ track }: NoxComponent.TrackProps) => {
   const song = track?.song as NoxMedia.Song;
   const playerStyle = useNoxSetting(state => state.playerStyle);
 
   const handlePress = () => {
-    TrueSheet.present(NoxRoutes.SongMenuSheet);
+    TrueSheet.present(NoxSheetRoutes.SongMenuSheet);
   };
 
   return (

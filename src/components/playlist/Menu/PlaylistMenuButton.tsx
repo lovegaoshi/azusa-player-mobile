@@ -4,7 +4,7 @@ import { TrueSheet } from '@lodev09/react-native-true-sheet';
 import { useTranslation } from 'react-i18next';
 import { View } from 'react-native';
 
-import { NoxRoutes } from '@enums/Routes';
+import { NoxSheetRoutes } from '@enums/Routes';
 import { useNoxSetting } from '@stores/useApp';
 import SheetIconEntry from '@components/commonui/bottomsheet/SheetIconEntry';
 import PlaylistSettingsButton from './PlaylistSettingsButton';
@@ -54,7 +54,7 @@ export default ({ disabled = false, playlist, songListUpdateHalt }: Props) => {
         //iconColor={playerStyle.colors.primary}
       />
       <TrueSheet
-        name={NoxRoutes.PlaylistMenuSheet}
+        name={NoxSheetRoutes.PlaylistMenuSheet}
         ref={sheet}
         backgroundColor={playerStyle.colors.surfaceVariant}
         sizes={['auto', 'large']}
