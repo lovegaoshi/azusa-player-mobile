@@ -6,14 +6,13 @@ import { useSharedValue } from 'react-native-reanimated';
 
 import { styles } from '@components/style';
 import { useNoxSetting } from '@stores/useApp';
-import SongMenu from './SongMenu';
 import PlaylistInfo from '../Info/PlaylistInfo';
 import PlaylistMenuButton from '../Menu/PlaylistMenuButton';
 import usePlaylist from '../usePlaylistRN';
 import SongListScrollbar from './SongListScrollbar';
 import { LegendExample, LegendProps } from './ScrollBarLegend';
 import SongList from './SongList';
-import SongListMenuSheet from '@components/songmenu/SongListMenuSheet';
+import SongMenuSheet from '@components/playlist/SongList/SongMenuSheet';
 
 export default () => {
   const playerStyle = useNoxSetting(state => state.playerStyle);
@@ -122,7 +121,7 @@ export default () => {
           scrollViewHeight={scrollViewHeight}
           contentHeight={contentHeight}
         />
-        <SongListMenuSheet
+        <SongMenuSheet
           usePlaylist={usedPlaylist}
           prepareForLayoutAnimationRender={() =>
             playlistRef.current?.prepareForLayoutAnimationRender()

@@ -20,7 +20,7 @@ export const PlayPauseButton: React.FC<Props> = ({ iconSize = 50 }) => {
   if (showBuffering) {
     return playerStyle.loadingIcon ? (
       <Image
-        source={{ uri: playerStyle.loadingIcon }}
+        source={{ uri: playerStyle.loadingIcon, ...iconContainerStyle }}
         style={[styles.LoadingIconStyle, iconContainerStyle]}
       />
     ) : (

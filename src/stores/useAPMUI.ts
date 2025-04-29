@@ -27,10 +27,6 @@ export interface APMUIStore {
   playlistInfoUpdate: boolean;
   togglePlaylistInfoUpdate: () => void;
 
-  songMenuCoords: NoxTheme.Coordinates;
-  setSongMenuCoords: (val: NoxTheme.Coordinates) => void;
-  songMenuVisible: boolean;
-  setSongMenuVisible: (val: boolean) => void;
   songMenuSongIndexes: number[];
   setSongMenuSongIndexes: (val: number[]) => void;
 
@@ -73,10 +69,6 @@ const store: StateCreator<APMUIStore, [], [], APMUIStore> = set => ({
       playlistInfoUpdate: !state.playlistInfoUpdate,
     })),
 
-  songMenuCoords: { x: 0, y: 0 },
-  setSongMenuCoords: val => set({ songMenuCoords: val }),
-  songMenuVisible: false,
-  setSongMenuVisible: val => set({ songMenuVisible: val }),
   songMenuSongIndexes: [],
   setSongMenuSongIndexes: val => set({ songMenuSongIndexes: val }),
 

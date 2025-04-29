@@ -163,7 +163,8 @@
     "songRemoveTitle": "Remove",
     "songRemoveNBanTitle": "Ban",
     "reloadSong": "Reload",
-    "selectedSongs": "Selected songs"
+    "selectedSongs": "Selected songs",
+    "selectedSongsAndSong": "{{name}} and {{count}} more..."
   },
   "GeneralSettings": {
     "autoRSSUpdateName": "Daily auto RSS update",
