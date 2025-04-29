@@ -61,8 +61,8 @@ export const BiliSongRow = ({
             >
               <Image
                 style={styles.albumImage}
-                source={{ uri: item.cover }}
-                resizeMode={'cover'}
+                source={{ uri: item.cover, width: 140, height: 140 }}
+                contentFit="cover"
               />
               <View style={styles.flex}>
                 <Text
@@ -145,7 +145,7 @@ export const YTSongRow = ({ songs = [], title }: YTSongRowProp) => {
             <TouchableOpacity onPress={() => onPress(item)}>
               <Image
                 style={styles.albumImage}
-                source={{ uri: item.cover }}
+                source={{ uri: item.cover, width: 140, height: 140 }}
                 contentFit="cover"
               />
               <View style={{ flex: 1 }}>

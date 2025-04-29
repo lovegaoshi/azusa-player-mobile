@@ -163,7 +163,8 @@
     "songRemoveTitle": "删除歌曲",
     "songRemoveNBanTitle": "删除并拉黑",
     "reloadSong": "重载",
-    "selectedSongs": "选择的歌"
+    "selectedSongs": "选择的歌",
+    "selectedSongsAndSong": "{{name}} 和另外{{count}}首歌..."
   },
   "GeneralSettings": {
     "selectPhotoName": "选择照片",

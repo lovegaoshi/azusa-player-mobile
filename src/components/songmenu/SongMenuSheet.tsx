@@ -5,7 +5,7 @@ import { Image } from 'expo-image';
 import { Divider } from 'react-native-paper';
 import { useTranslation } from 'react-i18next';
 
-import { NoxRoutes } from '@enums/Routes';
+import { NoxSheetRoutes } from '@enums/Routes';
 import { useNoxSetting } from '@stores/useApp';
 import { SongTitle, styles } from '../player/TrackInfo/TrackInfoTemplate';
 import { useTrackStore } from '@hooks/useActiveTrack';
@@ -97,7 +97,7 @@ export default () => {
 
   return (
     <TrueSheet
-      name={NoxRoutes.SongMenuSheet}
+      name={NoxSheetRoutes.SongMenuSheet}
       ref={sheet}
       backgroundColor={playerStyle.colors.surfaceVariant}
       sizes={['auto', 'large']}
@@ -111,7 +111,7 @@ export default () => {
         }}
       >
         <Image
-          source={song?.cover}
+          source={{ uri: song?.cover, width: 50, height: 50 }}
           style={{ width: 50, height: 50, borderRadius: 5 }}
         />
         <View style={{ paddingLeft: 5, marginTop: -10 }}>

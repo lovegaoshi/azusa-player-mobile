@@ -55,10 +55,11 @@ const NoWeebDialog = ({ visible, setVisible }: Props) => {
       <ScrollView>
         <View style={{ alignItems: 'center' }}>
           <Image
-            style={{ width: 60, height: 60 }}
-            source={
-              'https://i2.hdslb.com/bfs/archive/7d83d7c95b11df26a700f445788877ef279c4b80.jpg@600w_600h_1c.png'
-            }
+            style={styles.image}
+            source={{
+              uri: 'https://i2.hdslb.com/bfs/archive/7d83d7c95b11df26a700f445788877ef279c4b80.jpg@600w_600h_1c.png',
+              ...styles.image,
+            }}
           />
         </View>
         <View style={styles.rowView}>
@@ -161,6 +162,7 @@ const styles = StyleSheet.create({
   colorBlockSpace: {
     width: 10,
   },
+  image: { width: 60, height: 60 },
 });
 
 export default (p: Props) => {

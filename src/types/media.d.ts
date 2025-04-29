@@ -14,6 +14,7 @@ declare global {
       singer: string;
       singerId: string | number;
       cover: string;
+      coverLowRes?: string;
       lyric?: string;
       lyricOffset?: number;
       parsedName: string;
