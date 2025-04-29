@@ -45,7 +45,7 @@ export default ({
         setSong(getSongOnClick());
         showSheet?.(false);
       }}
-      buttonText={t('SongOperations.songRenameTitle')}
+      text={t('SongOperations.songRenameTitle')}
       disabled={disabled}
     >
       <Dialog

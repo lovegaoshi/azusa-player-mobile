@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
-import { Menu, Checkbox, Text } from 'react-native-paper';
+import { Checkbox, Text } from 'react-native-paper';
 import { useTranslation } from 'react-i18next';
 import { View, StyleSheet } from 'react-native';
 
 import Dialog from '@components/dialogs/GenericSelectDialog';
 import { SortOptions } from '@enums/Playlist';
+import SheetIconEntry from '@components/commonui/bottomsheet/SheetIconEntry';
 
 const ICON = 'sort';
 
@@ -16,12 +17,14 @@ interface Props {
     playlist: NoxMedia.Playlist,
   ) => void;
   playlist: NoxMedia.Playlist;
+  showSheet?: (v: boolean) => void;
 }
 
 export default ({
   onCancel = () => undefined,
   sortPlaylist,
   playlist,
+  showSheet,
 }: Props) => {
   const { t } = useTranslation();
   const [dialogOpen, setDialogOpen] = useState(false);
@@ -31,6 +34,7 @@ export default ({
   const handleClose = () => {
     setDialogOpen(false);
     onCancel();
+    showSheet?.(true);
   };
 
   const handleSubmit = (index: number) => {
@@ -40,12 +44,14 @@ export default ({
   };
 
   return (
-    <React.Fragment>
-      <Menu.Item
-        leadingIcon={ICON}
-        onPress={() => setDialogOpen(true)}
-        title={t('PlaylistOperations.sortDiagTitle')}
-      />
+    <SheetIconEntry
+      text={t('PlaylistOperations.sortDiagTitle')}
+      icon={ICON}
+      onPress={() => {
+        setDialogOpen(true);
+        showSheet?.(false);
+      }}
+    >
       <Dialog
         options={sortOptions.map(val => val[0])}
         visible={dialogOpen}
@@ -65,7 +71,7 @@ export default ({
           </Text>
         </View>
       </Dialog>
-    </React.Fragment>
+    </SheetIconEntry>
   );
 };
 

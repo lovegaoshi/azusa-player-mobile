@@ -1,5 +1,4 @@
 import React from 'react';
-import { GestureResponderEvent } from 'react-native';
 import { IconButton } from 'react-native-paper';
 import { TrueSheet } from '@lodev09/react-native-true-sheet';
 
@@ -10,7 +9,7 @@ export default ({ track }: NoxComponent.TrackProps) => {
   const song = track?.song as NoxMedia.Song;
   const playerStyle = useNoxSetting(state => state.playerStyle);
 
-  const handlePress = (event: GestureResponderEvent) => {
+  const handlePress = () => {
     TrueSheet.present(NoxRoutes.SongMenuSheet);
   };
 

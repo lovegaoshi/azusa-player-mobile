@@ -189,7 +189,12 @@ export default () => {
             copy.splice(toIndex, 0, removed[0]!);
             setPlaylistIds(copy);
           }}
-          extraData={[currentPlaylist.id, currentPlayingList.id, playerStyle]}
+          extraData={[
+            currentPlaylist.id,
+            currentPlayingList.id,
+            currentPlaylist.title,
+            playerStyle,
+          ]}
         />
       </View>
       <View style={styles.bottomInfo}>

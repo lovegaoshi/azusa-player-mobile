@@ -1,19 +1,17 @@
 import { View } from 'react-native';
 import { IconButton, Text, TouchableRipple } from 'react-native-paper';
+import { Props } from './SheetIconButton';
 
-interface Props {
-  icon: string;
-  text: string;
-  onPress?: () => void;
-  disabled?: boolean;
-}
-export default ({ icon, text, onPress, disabled }: Props) => {
+export default ({ icon, text, onPress, disabled, children }: Props) => {
   return (
-    <TouchableRipple onPress={onPress} disabled={disabled}>
-      <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-        <IconButton icon={icon} size={32} />
-        <Text> {text} </Text>
-      </View>
-    </TouchableRipple>
+    <View>
+      <TouchableRipple onPress={onPress} disabled={disabled}>
+        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+          <IconButton icon={icon} size={32} />
+          <Text> {text} </Text>
+        </View>
+      </TouchableRipple>
+      {children}
+    </View>
   );
 };

@@ -3,10 +3,10 @@ import { Text, IconButton } from 'react-native-paper';
 
 import { useNoxSetting } from '@stores/useApp';
 
-interface IconButtonProps {
+export interface Props {
   onPress?: () => unknown;
   icon: string;
-  buttonText?: string;
+  text?: string;
   children?: React.ReactNode;
   disabled?: boolean;
 }
@@ -14,10 +14,10 @@ interface IconButtonProps {
 export default ({
   icon,
   onPress = () => console.log('pressed!'),
-  buttonText,
+  text,
   children,
   disabled,
-}: IconButtonProps) => {
+}: Props) => {
   const playerStyle = useNoxSetting(state => state.playerStyle);
 
   return (
@@ -37,7 +37,7 @@ export default ({
         onPress={onPress}
         containerColor={playerStyle.colors.surface}
       />
-      {buttonText && <Text>{buttonText}</Text>}
+      {text && <Text>{text}</Text>}
       {children}
     </View>
   );
