@@ -12,7 +12,7 @@ import {
   ViewStyle,
 } from 'react-native';
 import { Lrc as Lyric, KaraokeMode } from 'react-native-lyric';
-import { Track, useProgress } from 'react-native-track-player';
+import TrackPlayer, { Track, useProgress } from 'react-native-track-player';
 import { IconButton } from 'react-native-paper';
 import { useTranslation } from 'react-i18next';
 
@@ -133,6 +133,7 @@ export const LyricView = ({
         height={height}
         noScrollThrottle={noScrollThrottle}
         onPress={onPress}
+        onLinePress={v => TrackPlayer.seekTo(v.millisecond / 1000)}
         karaokeOnColor={
           playerStyle.colors.karaokeOn ?? playerStyle.colors.onSurface
         }
