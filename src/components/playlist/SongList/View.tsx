@@ -13,6 +13,7 @@ import usePlaylist from '../usePlaylistRN';
 import SongListScrollbar from './SongListScrollbar';
 import { LegendExample, LegendProps } from './ScrollBarLegend';
 import SongList from './SongList';
+import SongListMenuSheet from '@components/songmenu/SongListMenuSheet';
 
 export default () => {
   const playerStyle = useNoxSetting(state => state.playerStyle);
@@ -121,7 +122,7 @@ export default () => {
           scrollViewHeight={scrollViewHeight}
           contentHeight={contentHeight}
         />
-        <SongMenu
+        <SongListMenuSheet
           usePlaylist={usedPlaylist}
           prepareForLayoutAnimationRender={() =>
             playlistRef.current?.prepareForLayoutAnimationRender()

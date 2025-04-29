@@ -5,7 +5,7 @@ import {
   Text,
   TouchableRipple,
 } from 'react-native-paper';
-import { View, GestureResponderEvent, StyleSheet } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import {
   DerivedValue,
   runOnJS,
@@ -14,6 +14,7 @@ import {
 } from 'react-native-reanimated';
 import inRange from 'lodash/inRange';
 import throttle from 'lodash/throttle';
+import { TrueSheet } from '@lodev09/react-native-true-sheet';
 
 import { useNoxSetting } from '@stores/useApp';
 import { seconds2MMSS } from '@utils/Utils';
@@ -21,6 +22,7 @@ import { PlaylistTypes } from '@enums/Playlist';
 import NoxCache from '@utils/Cache';
 import { UsePlaylistRN } from '../usePlaylistRN';
 import { getArtistName } from '@objects/Song';
+import { NoxSheetRoutes } from '@enums/Routes';
 
 interface Props {
   item: NoxMedia.Song;
@@ -64,8 +66,6 @@ const SongInfo = ({
   const currentPlaylist = useNoxSetting(state => state.currentPlaylist);
   const playerSetting = useNoxSetting(state => state.playerSetting);
   const playerStyle = useNoxSetting(state => state.playerStyle);
-  const setSongMenuCoords = useNoxSetting(state => state.setSongMenuCoords);
-  const setSongMenuVisible = useNoxSetting(state => state.setSongMenuVisible);
   const setSongMenuSongIndexes = useNoxSetting(
     state => state.setSongMenuSongIndexes,
   );
@@ -154,13 +154,9 @@ const SongInfo = ({
             </Text>
             <IconButton
               icon="dots-vertical"
-              onPress={(event: GestureResponderEvent) => {
+              onPress={() => {
                 setSongMenuSongIndexes([getSongIndex()]);
-                setSongMenuVisible(true);
-                setSongMenuCoords({
-                  x: event.nativeEvent.pageX,
-                  y: event.nativeEvent.pageY,
-                });
+                TrueSheet.present(NoxSheetRoutes.SongsMenuInListSheet);
               }}
               size={20}
             />
