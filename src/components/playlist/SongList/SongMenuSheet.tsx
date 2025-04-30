@@ -24,6 +24,7 @@ import { SearchRegex } from '@enums/Playlist';
 import { Source } from '@enums/MediaFetch';
 import { isAndroid10 } from '@utils/RNUtils';
 import { copyCacheToDir } from '@utils/download/download';
+import NoxBottomSheet from '@components/commonui/bottomsheet/NoxBottomSheet';
 
 interface UsePlaylist {
   checking: boolean;
@@ -115,13 +116,7 @@ export default ({ usePlaylist, prepareForLayoutAnimationRender }: Props) => {
   };
 
   return (
-    <TrueSheet
-      name={NoxSheetRoutes.SongsMenuInListSheet}
-      ref={sheet}
-      backgroundColor={playerStyle.colors.surfaceVariant}
-      sizes={['auto', 'large']}
-      cornerRadius={5}
-    >
+    <NoxBottomSheet name={NoxSheetRoutes.SongsMenuInListSheet} ref={sheet}>
       {songs.length === 1 && (
         <>
           <View
@@ -244,7 +239,6 @@ export default ({ usePlaylist, prepareForLayoutAnimationRender }: Props) => {
           onPress={() => console.log(songs)}
         />
       )}
-      <View style={{ paddingBottom: 10 }} />
-    </TrueSheet>
+    </NoxBottomSheet>
   );
 };

@@ -7,6 +7,7 @@ import { View } from 'react-native';
 import { NoxSheetRoutes } from '@enums/Routes';
 import { useNoxSetting } from '@stores/useApp';
 import SheetIconEntry from '@components/commonui/bottomsheet/SheetIconEntry';
+import NoxBottomSheet from '@components/commonui/bottomsheet/NoxBottomSheet';
 import PlaylistSettingsButton from './PlaylistSettingsButton';
 import { PlaylistTypes } from '@enums/Playlist';
 import CopiedPlaylistButton from '@components/songmenu/CopiedPlaylistButton';
@@ -53,13 +54,7 @@ export default ({ disabled = false, playlist, songListUpdateHalt }: Props) => {
         disabled={disabled}
         //iconColor={playerStyle.colors.primary}
       />
-      <TrueSheet
-        name={NoxSheetRoutes.PlaylistMenuSheet}
-        ref={sheet}
-        backgroundColor={playerStyle.colors.surfaceVariant}
-        sizes={['auto', 'large']}
-        cornerRadius={5}
-      >
+      <NoxBottomSheet name={NoxSheetRoutes.PlaylistMenuSheet} ref={sheet}>
         <View style={{ paddingTop: 10 }} />
         <PlaylistSettingsButton
           disabled={limitedPlaylistFeatures}
@@ -139,7 +134,7 @@ export default ({ disabled = false, playlist, songListUpdateHalt }: Props) => {
           }}
           disabled={limitedPlaylistFeatures}
         />
-      </TrueSheet>
+      </NoxBottomSheet>
     </React.Fragment>
   );
 };

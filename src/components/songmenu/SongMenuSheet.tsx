@@ -12,6 +12,7 @@ import { useTrackStore } from '@hooks/useActiveTrack';
 import SheetIconButton from '../commonui/bottomsheet/SheetIconButton';
 import CopiedPlaylistButton from './CopiedPlaylistButton';
 import SheetIconEntry from '@components/commonui/bottomsheet/SheetIconEntry';
+import NoxBottomSheet from '@components/commonui/bottomsheet/NoxBottomSheet';
 import usePlaylistCRUD from '@hooks/usePlaylistCRUD';
 import RenameSongButton from './RenameSongButton';
 import useSongOperations from '@hooks/useSongOperations';
@@ -96,13 +97,7 @@ export default () => {
   };
 
   return (
-    <TrueSheet
-      name={NoxSheetRoutes.SongMenuSheet}
-      ref={sheet}
-      backgroundColor={playerStyle.colors.surfaceVariant}
-      sizes={['auto', 'large']}
-      cornerRadius={5}
-    >
+    <NoxBottomSheet name={NoxSheetRoutes.SongMenuSheet} ref={sheet}>
       <View
         style={{
           paddingVertical: 15,
@@ -167,7 +162,6 @@ export default () => {
         icon={'delete-forever'}
         onPress={removeSongs}
       />
-      <View style={{ paddingBottom: 10 }} />
-    </TrueSheet>
+    </NoxBottomSheet>
   );
 };
