@@ -27,7 +27,6 @@ export default ({
   const handleClose = () => {
     setDialogOpen(false);
     onCancel();
-    showSheet?.(true);
   };
 
   const handleSubmit = (playlist: NoxMedia.Playlist) => {
