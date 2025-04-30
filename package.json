@@ -106,7 +106,7 @@
     "react-native-gesture-handler": "2.25.0",
     "react-native-get-random-values": "^1.11.0",
     "react-native-image-colors": "^2.4.0",
-    "react-native-lyric": "https://lovegaoshi@github.com/lovegaoshi/react-native-lyric.git#commit=25c57ea85e96633b1f56d6e0455d99d03c80e2af",
+    "react-native-lyric": "https://lovegaoshi@github.com/lovegaoshi/react-native-lyric.git#commit=9d52375ef947e811648fec375a8a55441116aa4f",
     "react-native-ota-hot-update": "2.2.2",
     "react-native-pager-view": "6.7.1",
     "react-native-paper": "^5.13.5",
@@ -195,5 +195,5 @@
     "node": ">=18.0.0"
   },
   "isSwift": true,
-  "packageManager": "yarn@4.9.0"
+  "packageManager": "yarn@4.9.1"
 }
