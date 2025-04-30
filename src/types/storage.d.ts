@@ -55,6 +55,7 @@ declare global {
       pausePlaybackOnMute: boolean;
       noBiliR128Gain: boolean;
       smartShuffle: boolean;
+      lyricTap: boolean;
 
       appID: string;
       language?: string;

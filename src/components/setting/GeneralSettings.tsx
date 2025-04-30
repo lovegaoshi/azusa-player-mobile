@@ -73,6 +73,10 @@ const GEN_SETTING_BOOLEAN: SettingEntry[] = [
     settingName: 'smartShuffle',
     settingCategory: 'GeneralSettings',
   },
+  {
+    settingName: 'lyricTap',
+    settingCategory: 'GeneralSettings',
+  },
 ];
 
 export default () => {

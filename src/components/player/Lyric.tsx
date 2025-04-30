@@ -134,7 +134,11 @@ export const LyricView = ({
         noScrollThrottle={noScrollThrottle}
         onPress={onPress}
         // HACK: this is NOT any. this is LrcLine. need to fix with ts
-        onLinePress={(v: any) => TrackPlayer.seekTo(v.millisecond / 1000)}
+        onLinePress={
+          playerSetting.lyricTap
+            ? (v: any) => TrackPlayer.seekTo(v.millisecond / 1000)
+            : onPress
+        }
         karaokeOnColor={
           playerStyle.colors.karaokeOn ?? playerStyle.colors.onSurface
         }

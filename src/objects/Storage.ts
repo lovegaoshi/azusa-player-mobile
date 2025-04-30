@@ -52,6 +52,7 @@ export const DefaultSetting: NoxStorage.PlayerSettingDict = {
   pausePlaybackOnMute: false,
   noBiliR128Gain: false,
   smartShuffle: true,
+  lyricTap: true,
 
   appID: AppID,
   language: undefined,

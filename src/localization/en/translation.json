@@ -187,6 +187,8 @@
     "smartShuffleDesc": "Shuffle songs that the next song is different from the previous",
     "chatGPTResolveNameName": "ChatGPT on Songs",
     "chatGPTResolveNameDesc": "TODO: Use chatGPT to resolve song names",
+    "lyricTapName": "Seek on Lyric Tap",
+    "lyricTapDesc": "Seek to song when tapping on lyrics",
     "noBiliR128GainName": "Disable BiliR128Gain",
     "noBiliR128GainDesc": "Disable Bili R128gain, use ffmpeg instead",
     "pausePlaybackOnMuteName": "Pause Playback on Mute",
