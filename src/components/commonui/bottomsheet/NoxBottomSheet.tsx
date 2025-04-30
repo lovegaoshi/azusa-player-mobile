@@ -1,10 +1,6 @@
 import { SheetSize, TrueSheet } from '@lodev09/react-native-true-sheet';
-import { MutableRefObject, RefObject, useRef } from 'react';
-import { Text, View, Alert, ScrollView } from 'react-native';
-import { Image } from 'expo-image';
-import { Divider } from 'react-native-paper';
-import { useTranslation } from 'react-i18next';
-
+import { RefObject } from 'react';
+import { View, ScrollView } from 'react-native';
 import { useNoxSetting } from '@stores/useApp';
 
 interface Props {

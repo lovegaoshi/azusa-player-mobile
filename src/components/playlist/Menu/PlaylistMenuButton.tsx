@@ -5,7 +5,6 @@ import { useTranslation } from 'react-i18next';
 import { View } from 'react-native';
 
 import { NoxSheetRoutes } from '@enums/Routes';
-import { useNoxSetting } from '@stores/useApp';
 import SheetIconEntry from '@components/commonui/bottomsheet/SheetIconEntry';
 import NoxBottomSheet from '@components/commonui/bottomsheet/NoxBottomSheet';
 import PlaylistSettingsButton from './PlaylistSettingsButton';
@@ -24,7 +23,6 @@ interface Props {
 export default ({ disabled = false, playlist, songListUpdateHalt }: Props) => {
   const { t } = useTranslation();
   const sheet = useRef<TrueSheet>(null);
-  const playerStyle = useNoxSetting(state => state.playerStyle);
   const {
     playlistSync2Bilibili,
     playlistAnalyze,
