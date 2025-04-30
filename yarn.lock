@@ -7033,7 +7033,7 @@ __metadata:
     react-native-get-random-values: "npm:^1.11.0"
     react-native-image-colors: "npm:^2.4.0"
     react-native-lyric: "https://lovegaoshi@github.com/lovegaoshi/react-native-lyric.git#commit=25c57ea85e96633b1f56d6e0455d99d03c80e2af"
-    react-native-ota-hot-update: "npm:2.2.61"
+    react-native-ota-hot-update: "npm:2.2.5"
     react-native-pager-view: "npm:6.7.1"
     react-native-paper: "npm:^5.13.5"
     react-native-purchases: "npm:^8.9.5"
@@ -17279,9 +17279,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-native-ota-hot-update@npm:2.2.61":
-  version: 2.2.61
-  resolution: "react-native-ota-hot-update@npm:2.2.61"
+"react-native-ota-hot-update@npm:2.2.5":
+  version: 2.2.5
+  resolution: "react-native-ota-hot-update@npm:2.2.5"
   dependencies:
     buffer: "npm:^6.0.3"
     isomorphic-git: "npm:1.27.3"
@@ -17289,7 +17289,7 @@ __metadata:
     react: "*"
     react-native: "*"
     react-native-fs: "*"
-  checksum: 10c0/3f4910e8244093277c5c1fda5d1168125d0d5092c71e19d5ff03daddff236c33773f05679630c3ac279976dd2399d85e5c4a74e1ebfd15a27af16f9988b937e3
+  checksum: 10c0/792a9b557bb4b7e90d5fd6b1c7699fb64530e990822a3dfb7b36f0dbf93885cfbaadfb01cabc8d89123a01a7c5d265e2e697fc441f947f8d4819105c9e1a4521
   languageName: node
   linkType: hard
 
