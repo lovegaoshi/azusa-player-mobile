@@ -187,6 +187,8 @@
     "prefetchTrackDesc": "预加载下一首歌（仅在歌曲缓存开启时有用）",
     "chatGPTResolveSongNameName": "ChatGPT找歌",
     "chatGPTResolveSongNameDesc": "TODO：用chatGPT解析歌名",
+    "lyricTapName": "歌词跳跃",
+    "lyricTapDesc": "点击歌词跳转到歌曲位置",
     "smartShuffleName": "智能随机",
     "smartShuffleDesc": "在播放时随机播放不同的歌曲",
     "noBiliR128GainName": "Disable BiliR128Gain",
