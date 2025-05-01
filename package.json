@@ -107,7 +107,7 @@
     "react-native-gesture-handler": "~2.25.0",
     "react-native-get-random-values": "^1.11.0",
     "react-native-image-colors": "^2.4.0",
-    "react-native-lyric": "https://lovegaoshi@github.com/lovegaoshi/react-native-lyric.git#commit=8364025d8abc9abc92725c375bd4c826155d862a",
+    "react-native-lyric": "https://lovegaoshi@github.com/lovegaoshi/react-native-lyric.git#commit=bce8cc775c8e42fb451d2b97ba5c113cb8263379",
     "react-native-ota-hot-update": "2.2.2",
     "react-native-pager-view": "6.7.1",
     "react-native-paper": "^5.13.5",
