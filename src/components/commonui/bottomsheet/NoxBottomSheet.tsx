@@ -5,7 +5,7 @@ import { useNoxSetting } from '@stores/useApp';
 
 interface Props {
   name: string;
-  ref: RefObject<TrueSheet>;
+  ref: RefObject<TrueSheet | null>;
   cornerRadius?: number;
   sizes?: SheetSize[];
   children?: React.ReactNode;
