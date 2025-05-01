@@ -20,6 +20,23 @@ target 'azusa-player-mobile' do
   pod 'ffmpeg-kit-ios-audio', :podspec => '../ffmpeg-kit-ios-audio.podspec'
   use_expo_modules!
 
+  if ENV['EXPO_USE_COMMUNITY_AUTOLINKING'] == '1'
+    config_command = ['node', '-e', "process.argv=['', '', 'config'];require('@react-native-community/cli').run()"];
+  else
+    config_command = [
+      'node',
+      '--no-warnings',
+      '--eval',
+      'require(require.resolve(\'expo-modules-autolinking\', { paths: [require.resolve(\'expo/package.json\')] }))(process.argv.slice(1))',
+      'react-native-config',
+      '--json',
+      '--platform',
+      'ios'
+    ]
+  end
+ 
+  config = use_native_modules!(config_command)
+
   post_integrate do |installer|
     begin
       expo_patch_react_imports!(installer)
@@ -28,7 +45,7 @@ target 'azusa-player-mobile' do
     end
   end
 
-  config = use_native_modules!
+  config = use_native_modules!(config_command)
   # for svga-player
   pod 'Protobuf', '= 3.22.1'
   

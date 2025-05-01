@@ -22,7 +22,7 @@
     "pretest": "yarn run compile",
     "prettify": "prettier --write ./src",
     "build": "yarn install && yarn postinstall && yarn compile; cd node_modules/youtubei.js/; yarn bundle:react-native",
-    "ios:build": "yarn build && cd ios && rm Podfile.lock && RCT_NEW_ARCH_ENABLED=0 pod install --repo-update && cd ..",
+    "ios:build": "yarn build && cd ios && rm Podfile.lock && pod install --repo-update && cd ..",
     "dep": "yarn upgrade-interactive && yarn postinstall",
     "release": "git switch master && git pull && python release_bump.py",
     "postinstall": "patch-package",

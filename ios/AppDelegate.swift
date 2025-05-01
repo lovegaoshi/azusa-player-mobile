@@ -1,36 +1,41 @@
 import UIKit
-import CarPlay
 import React
+import CarPlay
+import Expo
+import React_RCTAppDelegate
+import ReactAppDependencyProvider
 
 @main
-class AppDelegate: EXAppDelegateWrapper, RNAppAuthAuthorizationFlowManager {
-  
-  public weak var authorizationFlowManagerDelegate: RNAppAuthAuthorizationFlowManagerDelegate? // <-- this property is required by the protocol
-    //"open url" delegate function for managing deep linking needs to call the resumeExternalUserAgentFlowWithURL method
-    override func application(
-        _ app: UIApplication,
-        open url: URL,
-        options: [UIApplication.OpenURLOptionsKey: Any] = [:]) -> Bool {
-        return authorizationFlowManagerDelegate?.resumeExternalUserAgentFlow(with: url) ?? false
-    }
+class AppDelegate: ExpoAppDelegate {
+  var window: UIWindow?
 
-  var rootView: UIView?
-  var concurrentRootEnabled = true
+  var reactNativeDelegate: ReactNativeDelegate?
+  var reactNativeFactory: RCTReactNativeFactory?
 
-  static var shared: AppDelegate { return UIApplication.shared.delegate as! AppDelegate }
+  override func application(
+    _ application: UIApplication,
+    didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil
+  ) -> Bool {
+    let delegate = ReactNativeDelegate()
+    let factory = ExpoReactNativeFactory(delegate: delegate)
+    delegate.dependencyProvider = RCTAppDependencyProvider()
 
-  override func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
-    self.moduleName = "azusa-player-mobile"
-    let app = super.application(application, didFinishLaunchingWithOptions: launchOptions)
-    self.rootView = self.createRootView(
-      with: self.bridge!,
-      moduleName: self.moduleName!,
-      initProps: self.prepareInitialProps()
+    reactNativeDelegate = delegate
+    reactNativeFactory = factory
+    bindReactNativeFactory(factory)
+
+    window = UIWindow(frame: UIScreen.main.bounds)
+
+    factory.startReactNative(
+      withModuleName: "azusa-player-mobile",
+      in: window,
+      launchOptions: launchOptions
     )
-    return app
-  }
 
-  override func application(_ application: UIApplication, configurationForConnecting connectingSceneSession: UISceneSession, options: UIScene.ConnectionOptions) -> UISceneConfiguration {
+    return super.application(application, didFinishLaunchingWithOptions: launchOptions)
+  }
+  
+  func application(_ application: UIApplication, configurationForConnecting connectingSceneSession: UISceneSession, options: UIScene.ConnectionOptions) -> UISceneConfiguration {
     if (connectingSceneSession.role == UISceneSession.Role.carTemplateApplication) {
       let scene =  UISceneConfiguration(name: "CarPlay", sessionRole: connectingSceneSession.role)
       scene.delegateClass = CarSceneDelegate.self
@@ -41,25 +46,22 @@ class AppDelegate: EXAppDelegateWrapper, RNAppAuthAuthorizationFlowManager {
       return scene
     }
   }
-
-  override func sourceURL(for bridge: RCTBridge) -> URL? {
-    #if DEBUG
-      return bundleURL()
-    #else
-      return Bundle.main.url(forResource:"main", withExtension:"jsbundle")
-    #endif
+  
+  func application(_ application: UIApplication, didDiscardSceneSessions sceneSessions: Set<UISceneSession>) {
   }
   
-  override func bundleURL() -> URL? {
-    return RCTBundleURLProvider.sharedSettings().jsBundleURL(forBundleRoot: "index")
+}
+
+class ReactNativeDelegate: ExpoReactNativeFactoryDelegate {
+  override func sourceURL(for bridge: RCTBridge) -> URL? {
+    bridge.bundleURL ?? bundleURL()
   }
 
-  // not exposed from RCTAppDelegate, recreating.
-  func prepareInitialProps() -> [String: Any] {
-    var initProps = self.initialProps as? [String: Any] ?? [String: Any]()
-    #if RCT_NEW_ARCH_ENABLED
-      initProps["kRNConcurrentRoot"] = concurrentRootEnabled()
-    #endif
-    return initProps
+  override func bundleURL() -> URL? {
+#if DEBUG
+    RCTBundleURLProvider.sharedSettings().jsBundleURL(forBundleRoot: "index")
+#else
+    Bundle.main.url(forResource: "main", withExtension: "jsbundle")
+#endif
   }
 }
