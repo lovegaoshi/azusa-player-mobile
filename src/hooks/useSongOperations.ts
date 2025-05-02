@@ -1,5 +1,5 @@
 import { useNoxSetting } from '@stores/useApp';
-import getRadioUrl from '@utils/radiofetch/fetch';
+import getRadioUrl from '@/utils/mediafetch/radiofetch';
 
 const useSongOperations = () => {
   const setExternalSearchText = useNoxSetting(
