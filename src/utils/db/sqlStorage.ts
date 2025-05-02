@@ -1,8 +1,8 @@
 import { eq } from 'drizzle-orm';
 
-import playbackTable from './schema/playbackCount';
-import db from './sql';
-import { _getPlaybackCount, getPlaybackCountTable } from './sqlAPI';
+import playbackTable from '@utils/db/schema/playbackCount';
+import db from '@utils/db/sql';
+import { _getPlaybackCount, getPlaybackCountTable } from '@utils/db/sqlAPI';
 
 export const clearPlaybackCount = async () => {
   await db.delete(playbackTable);
