@@ -2,13 +2,14 @@ import { eq } from 'drizzle-orm';
 
 import playbackTable from './schema/playbackCount';
 import db from './sql';
+import { _getPlaybackCount, getPlaybackCountTable } from './sqlAPI';
 
 export const clearPlaybackCount = async () => {
   await db.delete(playbackTable);
 };
 
 export const getPlaybackCounts = async () => {
-  const res = db.select().from(playbackTable).all();
+  const res = await getPlaybackCountTable();
   const result: { [id: string]: number } = {};
   res.forEach(v => {
     result[v.songcid] = v.count;
@@ -16,15 +17,11 @@ export const getPlaybackCounts = async () => {
   return result;
 };
 
-export const getPlaybackCount = (songcid: string | null) => {
+export const getPlaybackCount = async (songcid: string | null) => {
   if (!songcid) {
     return 0;
   }
-  const res = db
-    .select({ field1: playbackTable.count })
-    .from(playbackTable)
-    .where(eq(playbackTable.songcid, songcid))
-    .get();
+  const res = await _getPlaybackCount(songcid);
   return res?.field1;
 };
 
@@ -35,7 +32,7 @@ export const increasePlaybackCount = async (
   if (!songcid) {
     return;
   }
-  const count = getPlaybackCount(songcid);
+  const count = await getPlaybackCount(songcid);
   if (count === undefined) {
     await db.insert(playbackTable).values({ songcid, count: inc });
     return;
