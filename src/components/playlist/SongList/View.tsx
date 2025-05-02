@@ -8,17 +8,20 @@ import { styles } from '@components/style';
 import { useNoxSetting } from '@stores/useApp';
 import PlaylistInfo from '../Info/PlaylistInfo';
 import PlaylistMenuButton from '../Menu/PlaylistMenuButton';
-import usePlaylist from '../usePlaylistRN';
+import { UsePlaylistRN } from '../usePlaylistRN';
 import SongListScrollbar from './SongListScrollbar';
 import { LegendExample, LegendProps } from './ScrollBarLegend';
 import SongList from './SongList';
 import SongMenuSheet from '@components/playlist/SongList/SongMenuSheet';
 
-export default () => {
+interface Props {
+  usedPlaylist: UsePlaylistRN;
+}
+
+export default ({ usedPlaylist }: Props) => {
   const playerStyle = useNoxSetting(state => state.playerStyle);
   const currentPlaylist = useNoxSetting(state => state.currentPlaylist);
   const songListScrollCounter = useNoxSetting(s => s.songListScrollCounter);
-  const usedPlaylist = usePlaylist(currentPlaylist);
   const {
     rows,
     setRows,
