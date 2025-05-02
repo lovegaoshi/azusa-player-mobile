@@ -204,7 +204,7 @@ jobs:
           python ./scripts/newarch.py
           python ./scripts/dev_cleartext.py
           python ./scripts/release_bump.py --dev
-          rm ./patches/react-native-paper+5.14.0.patch
+          rm ./patches/react-native-paper+5.13.5.patch
 
       - name: Build Sign jks
         id: write_file
