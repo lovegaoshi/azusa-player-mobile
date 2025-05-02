@@ -7,6 +7,8 @@ import ReactAppDependencyProvider
 
 @main
 class AppDelegate: ExpoAppDelegate {
+  
+  var initialized: Bool = false
   var window: UIWindow?
 
   var reactNativeDelegate: ReactNativeDelegate?
@@ -16,6 +18,15 @@ class AppDelegate: ExpoAppDelegate {
     _ application: UIApplication,
     didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil
   ) -> Bool {
+    
+    initRN(launchOptions: launchOptions)
+    
+    return super.application(application, didFinishLaunchingWithOptions: launchOptions)
+  }
+  
+  func initRN(launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) {
+    if (initialized) { return }
+    initialized = true
     let delegate = ReactNativeDelegate()
     let factory = ExpoReactNativeFactory(delegate: delegate)
     delegate.dependencyProvider = RCTAppDependencyProvider()
@@ -32,7 +43,6 @@ class AppDelegate: ExpoAppDelegate {
       launchOptions: launchOptions
     )
 
-    return super.application(application, didFinishLaunchingWithOptions: launchOptions)
   }
   
   func application(_ application: UIApplication, configurationForConnecting connectingSceneSession: UISceneSession, options: UIScene.ConnectionOptions) -> UISceneConfiguration {
