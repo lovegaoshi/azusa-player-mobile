@@ -26,7 +26,7 @@ interface SkinItemProps {
   checked: string;
   onHold: () => void;
   selectTheme: () => void;
-  listRef?: React.RefObject<FlashList<DisplayTheme>>;
+  listRef?: React.RefObject<FlashList<DisplayTheme> | null>;
 }
 
 const BuiltInThemes: DisplayTheme[] = [

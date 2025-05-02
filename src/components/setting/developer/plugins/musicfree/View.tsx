@@ -11,7 +11,7 @@ import { fetchMFsdk } from '@utils/mfsdk';
 
 interface ItemProps {
   sdk: MFsdk;
-  listRef?: React.RefObject<FlashList<MFsdk>>;
+  listRef?: React.RefObject<FlashList<MFsdk> | null>;
 }
 
 const RenderItem = ({ sdk, listRef }: ItemProps) => {

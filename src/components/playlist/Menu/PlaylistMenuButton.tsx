@@ -5,8 +5,8 @@ import { useTranslation } from 'react-i18next';
 import { View } from 'react-native';
 
 import { NoxSheetRoutes } from '@enums/Routes';
-import { useNoxSetting } from '@stores/useApp';
 import SheetIconEntry from '@components/commonui/bottomsheet/SheetIconEntry';
+import NoxBottomSheet from '@components/commonui/bottomsheet/NoxBottomSheet';
 import PlaylistSettingsButton from './PlaylistSettingsButton';
 import { PlaylistTypes } from '@enums/Playlist';
 import CopiedPlaylistButton from '@components/songmenu/CopiedPlaylistButton';
@@ -23,7 +23,6 @@ interface Props {
 export default ({ disabled = false, playlist, songListUpdateHalt }: Props) => {
   const { t } = useTranslation();
   const sheet = useRef<TrueSheet>(null);
-  const playerStyle = useNoxSetting(state => state.playerStyle);
   const {
     playlistSync2Bilibili,
     playlistAnalyze,
@@ -53,13 +52,7 @@ export default ({ disabled = false, playlist, songListUpdateHalt }: Props) => {
         disabled={disabled}
         //iconColor={playerStyle.colors.primary}
       />
-      <TrueSheet
-        name={NoxSheetRoutes.PlaylistMenuSheet}
-        ref={sheet}
-        backgroundColor={playerStyle.colors.surfaceVariant}
-        sizes={['auto', 'large']}
-        cornerRadius={5}
-      >
+      <NoxBottomSheet name={NoxSheetRoutes.PlaylistMenuSheet} ref={sheet}>
         <View style={{ paddingTop: 10 }} />
         <PlaylistSettingsButton
           disabled={limitedPlaylistFeatures}
@@ -139,7 +132,7 @@ export default ({ disabled = false, playlist, songListUpdateHalt }: Props) => {
           }}
           disabled={limitedPlaylistFeatures}
         />
-      </TrueSheet>
+      </NoxBottomSheet>
     </React.Fragment>
   );
 };

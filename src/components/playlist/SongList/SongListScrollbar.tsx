@@ -43,7 +43,7 @@ export default function CustomScrollView({
   scrollBarHideTimeout = SCROLLBAR_HIDE_TIMEOUT,
   LegendContent,
 }: Props) {
-  const scrollTimeoutId = useRef<NodeJS.Timeout>();
+  const scrollTimeoutId = useRef<NodeJS.Timeout | null>(null);
   const scrollIndicatorOpacity = useSharedValue(0);
   const startScrollY = useSharedValue(0);
   const barHeightP = useDerivedValue(() => {
@@ -79,7 +79,7 @@ export default function CustomScrollView({
 
   const resetHideTimeout = (timeout = scrollBarHideTimeout) => {
     scrollIndicatorOpacity.value = 1;
-    clearTimeout(scrollTimeoutId.current);
+    scrollTimeoutId.current && clearTimeout(scrollTimeoutId.current);
     scrollTimeoutId.current = createScrollHideTimeout(timeout);
   };
 

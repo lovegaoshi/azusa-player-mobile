@@ -44,7 +44,7 @@ export default ({
   const initialDragY = useSharedValue(0);
   const translationDragY = useSharedValue(0);
   const initialDragOffset = useSharedValue(0);
-  const scrollingRef = React.useRef<NodeJS.Timeout>();
+  const scrollingRef = React.useRef<NodeJS.Timeout | null>(null);
   const dragPos = useSharedValue(0);
   const dragToSelect = useSharedValue(0);
   const [scrollActive, setScrollActive] = useState(0);

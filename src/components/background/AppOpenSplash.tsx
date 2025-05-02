@@ -86,7 +86,7 @@ const AppOpenSplash = ({ setIsSplashReady }: Props) => {
       setTimeout(() => setIsSplashReady(true), 1);
       return (
         <Image
-          source={randomSplash[1]()}
+          source={randomSplash[1]() as number}
           style={styles.fullscreen}
           contentFit={'contain'}
         />
