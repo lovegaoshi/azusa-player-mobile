@@ -299,10 +299,7 @@ jobs:
           echo "Commit Tag: $COMMIT_TAG"
 
       - name: Install dependencies
-        run: yarn install; yarn build
-
-      - name: Pod Install
-        run: cd ios && rm Podfile.lock && pod install --repo-update
+        run: yarn install; yarn ios:build
 
       - name: python fixHTTP
         run: |
