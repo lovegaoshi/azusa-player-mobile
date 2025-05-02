@@ -15,7 +15,7 @@ import bs from '@utils/binarySearch';
 
 export interface ScrollProps {
   scrollOffset: SharedValue<number>;
-  scrollViewReference: RefObject<FlashList<NoxMedia.Song>>;
+  scrollViewReference: RefObject<FlashList<NoxMedia.Song> | null>;
 }
 
 export interface LegendProps extends ScrollProps {

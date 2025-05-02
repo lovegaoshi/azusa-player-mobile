@@ -9,6 +9,10 @@ const { withSentryConfig } = require('@sentry/react-native/metro');
 
 const config = getDefaultConfig(__dirname);
 config.resolver.sourceExts.push('sql');
-const customConfig = {};
+const customConfig = {
+  resolver: {
+    unstable_enablePackageExports: false,
+  },
+};
 
 module.exports = withSentryConfig(mergeConfig(config, customConfig));

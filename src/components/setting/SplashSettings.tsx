@@ -169,7 +169,7 @@ export default () => {
                 source={
                   getImagePosition(index, i) === ImagePos.Others
                     ? undefined
-                    : getSource(getSourceIndex(i))
+                    : (getSource(getSourceIndex(i)) as number)
                 }
                 style={styles.flex}
                 contentFit={'contain'}
