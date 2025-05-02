@@ -14,7 +14,7 @@ export default () => {
   );
 
   const checkPlayStoreUpdates = async () => {
-    if (!isAndroid || !APPSTORE) return;
+    if (!isAndroid || !APPSTORE || __DEV__) return;
     try {
       // curVersion is optional if you don't provide it will automatically take from the app using react-native-device-info
       const result = await inAppUpdates.checkNeedsUpdate();
