@@ -2,7 +2,7 @@ import { eq } from 'drizzle-orm';
 
 import playbackTable from '@utils/db/schema/playbackCount';
 import db from '@utils/db/sql';
-import { _getPlaybackCount, getPlaybackCountTable } from '@utils/db/sqlAPI';
+import { getPlaybackCountAPI, getPlaybackCountTable } from '@utils/db/sqlAPI';
 
 export const clearPlaybackCount = async () => {
   await db.delete(playbackTable);
@@ -21,8 +21,7 @@ export const getPlaybackCount = async (songcid: string | null) => {
   if (!songcid) {
     return 0;
   }
-  const res = await _getPlaybackCount(songcid);
-  return res?.field1;
+  return getPlaybackCountAPI(songcid);
 };
 
 export const increasePlaybackCount = async (
