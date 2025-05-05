@@ -3,6 +3,27 @@ import { eq } from 'drizzle-orm';
 import playbackTable from '@utils/db/schema/playbackCount';
 import db from '@utils/db/sql';
 import { getPlaybackCountAPI, getPlaybackCountTable } from '@utils/db/sqlAPI';
+import { logger } from '@utils/Logger';
+
+export const exportSQL = async () => {
+  const data = {
+    playbackCount: await getPlaybackCountTable(),
+  };
+  return JSON.stringify(data);
+};
+
+export const importSQL = async (json: string) => {
+  try {
+    const data = JSON.parse(json);
+    if (data.playbackCount) {
+      await clearPlaybackCount();
+      db.insert(playbackTable).values(data.playbackCount);
+    }
+  } catch (e) {
+    logger.error(e);
+    logger.error('[APMSQL] Import SQL failed');
+  }
+};
 
 export const clearPlaybackCount = async () => {
   await db.delete(playbackTable);
