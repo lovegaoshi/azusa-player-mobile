@@ -159,6 +159,7 @@ export default ({ usePlaylist, prepareForLayoutAnimationRender }: Props) => {
           getSongOnClick={() => selectedSongs()[0]}
           onSubmit={renameSong}
           showSheet={showSheet}
+          disabled={checking}
         />
         <SheetIconButton
           text={t('SongOperations.songSearchInPlaylistTitle')}
