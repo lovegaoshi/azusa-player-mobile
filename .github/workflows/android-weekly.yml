@@ -222,7 +222,7 @@ jobs:
 
       - name: gradle build
         run: |
-          cd android && chmod +x gradlew && ./gradlew assembleRelease
+          cd android && chmod +x gradlew && ./gradlew clean && ./gradlew generateCodegenArtifactsFromSchema --rerun-tasks && ./gradlew assembleRelease
           mv app/build/outputs/apk/release/app-arm64-v8a-release.apk app/build/outputs/apk/release/app-newarch-arm64-v8a-release.apk
 
       - name: Release
