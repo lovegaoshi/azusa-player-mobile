@@ -39,7 +39,7 @@ jobs:
           fi
 
   buildIPA:
-    runs-on: macos-14
+    runs-on: macos-15
     name: build IPA
     needs: checkLastCommit
     if: ${{ needs.checkLastCommit.outputs.is_old_commit == false }}
