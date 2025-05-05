@@ -72,7 +72,7 @@ export const BiliSongCard = ({
             >
               <Image
                 style={style.cardThumbnail}
-                source={{ uri: item.cover, width: 70, height: 70 }}
+                source={{ uri: item.cover, width: 140, height: 140 }}
                 contentFit="cover"
               />
               <View style={styles.flex}>
