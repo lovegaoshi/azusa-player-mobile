@@ -17,7 +17,7 @@ import SheetIconEntry from '@components/commonui/bottomsheet/SheetIconEntry';
 import usePlaylistCRUD from '@hooks/usePlaylistCRUD';
 import RenameSongButton from '@components/songmenu/RenameSongButton';
 import useSongOperations from '@hooks/useSongOperations';
-import radioAvailable from '@utils/radiofetch/fetch';
+import radioAvailable from '@utils/mediafetch/radiofetch';
 import useSnack from '@stores/useSnack';
 import useBiliSearch from '@hooks/useBiliSearch';
 import { SearchRegex } from '@enums/Playlist';

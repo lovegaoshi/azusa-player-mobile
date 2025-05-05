@@ -82,7 +82,7 @@ export const LegendExample = ({
     const expanding = actualTextLength.value > prevTextLength.value;
     return {
       height: undefined,
-      opacity: showLegend.value,
+      opacity: withTiming(showLegend.value, { duration: 100 }),
       right: withTiming(legendWidth + 5, { duration: expanding ? 120 : 0 }),
       width: legendWidth,
       /*

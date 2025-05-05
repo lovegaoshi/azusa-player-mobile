@@ -28,7 +28,10 @@ export enum StorageKeys {
   YTMTOKEN = 'YTMToken',
   YTMCOOKIES = 'YTMCookies',
   EXPO_SQL_MIGRATION = 'ExpoSqlMigration',
+  SQL_PLACEHOLDER = 'SQLPlaceholder',
 }
+
+export const StoragePlaceholders = [StorageKeys.SQL_PLACEHOLDER];
 
 export enum SearchOptions {
   BILIBILI = 'bilibili',

@@ -6,9 +6,10 @@ import { v4 as uuidv4 } from 'uuid';
 import { strToU8, compressSync } from 'fflate';
 
 import { chunkArray, arrayToObject } from '../utils/Utils';
-import { StorageKeys } from '@enums/Storage';
+import { StorageKeys, StoragePlaceholders } from '@enums/Storage';
 import { AppID } from '@objects/Storage';
 import AdaptiveTheme from '../components/styles/AdaptiveTheme';
+import { exportSQL } from './db/sqlStorage';
 /**
  * noxplayer's storage handler.
  * ChromeStorage has quite a few changes from azusa player the chrome extension;
@@ -148,6 +149,7 @@ export const exportPlayerContent = async (content?: any) => {
   if (!content) {
     const allKeys = await AsyncStorage.getAllKeys.bind(AsyncStorage)();
     content = await AsyncStorage.multiGet.bind(AsyncStorage)(allKeys);
+    content.append([StorageKeys.SQL_PLACEHOLDER, await exportSQL()]);
   }
   return compressSync(strToU8(JSON.stringify(content)));
 };
@@ -156,13 +158,14 @@ const parseImportedPartial = (
   key: string,
   parsedContent: [string, string][],
 ) => {
-  return JSON.parse(
-    parsedContent.filter((val: [string, string]) => val[0] === key)[0][1],
-  );
+  return JSON.parse(parsedContent.filter(val => val[0] === key)[0][1]);
 };
 
+const removePlaceholders = (p: [string, string][]) =>
+  p.filter(v => !StoragePlaceholders.includes(v[0] as StorageKeys));
+
 export const importPlayerContentRaw = async (
-  parsedContent: any,
+  parsedContent: [string, string][],
   getContent: () => Promise<any>,
 ) => {
   const importedAppID = parseImportedPartial(
@@ -174,7 +177,9 @@ export const importPlayerContentRaw = async (
   } else {
     const content = await getContent();
     await clearStorage();
-    await AsyncStorage.multiSet.bind(AsyncStorage)(parsedContent);
+    await AsyncStorage.multiSet.bind(AsyncStorage)(
+      removePlaceholders(parsedContent),
+    );
     return content;
   }
 };

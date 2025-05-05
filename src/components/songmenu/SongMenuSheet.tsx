@@ -16,7 +16,7 @@ import NoxBottomSheet from '@components/commonui/bottomsheet/NoxBottomSheet';
 import usePlaylistCRUD from '@hooks/usePlaylistCRUD';
 import RenameSongButton from './RenameSongButton';
 import useSongOperations from '@hooks/useSongOperations';
-import radioAvailable from '@utils/radiofetch/fetch';
+import radioAvailable from '@utils/mediafetch/radiofetch';
 import { addR128Gain, getR128Gain } from '@utils/ffmpeg/r128Store';
 import usePlayback from '@hooks/usePlayback';
 import ABSliderMenu from './ABSliderMenu';
