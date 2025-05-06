@@ -70,6 +70,9 @@ declare global {
       sponsorBlockEnabled: boolean;
       alwaysShowBottomTab: boolean;
 
+      eqPreset: number;
+      loudnessEnhance: number;
+
       [key: string]: any;
     }
 

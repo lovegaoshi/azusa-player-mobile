@@ -33,6 +33,8 @@ export const SetupService = async ({
   skipSilence = false,
   parseEmbeddedArtwork = false,
   crossfade = 0,
+  eqPreset = 0,
+  loudnessEnhance = 0,
 }: Partial<NoxStorage.PlayerSettingDict>) => {
   await setupPlayer({
     crossfade: crossfade !== 0,
@@ -53,5 +55,7 @@ export const SetupService = async ({
   setState({ RNTPOptions });
   await TrackPlayer.updateOptions(RNTPOptions);
   await TrackPlayer.setRepeatMode(RepeatMode.Off);
+  await TrackPlayer.setLoudnessEnhance(loudnessEnhance);
+  await TrackPlayer.setEqualizerPreset(eqPreset);
   initAA();
 };

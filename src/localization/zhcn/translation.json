@@ -8,6 +8,21 @@
     "loading": "正在加载{{name}}的主页...",
     "subscribers": "粉丝数：{{c}}"
   },
+  "Equalizer": {
+    "EqualizerOptionsName": "EQ均衡器",
+    "EqualizerOptionsDesc": "启用EQ均衡器",
+    "EqualizerOptionsTitle": "选择EQ预设",
+    "Normal": "正常",
+    "Pop": "流行",
+    "Jazz": "爵士",
+    "Rock": "摇滚",
+    "Classical": "古典",
+    "Dance": "舞曲",
+    "Flat": "平滑",
+    "Heavy Metal": "重金属",
+    "Folk": "民谣",
+    "Hip Hop": "说唱"
+  },
   "SponsorBlock": {
     "SponsorBlockOptionsName": "跳过恰饭",
     "SponsorBlockOptionsDesc": "启用SponsorBlock",

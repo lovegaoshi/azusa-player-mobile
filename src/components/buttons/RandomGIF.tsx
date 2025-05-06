@@ -53,7 +53,7 @@ export default function RandomGIFButton({
     >
       <Image
         style={{ width: iconsize, height: iconsize }}
-        source={{ ...randomGIFURI, width: iconsize, height: iconsize }}
+        source={randomGIFURI}
         contentFit={'contain'}
       />
     </Pressable>
