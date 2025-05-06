@@ -29,6 +29,7 @@ import SelectSetting from '../helpers/SelectSetting';
 import { SelectDialogChildren } from '../SelectDialogWrapper';
 import { Route, Icons } from './enums';
 import OTA from './OTA';
+import EqualizerButton from '../equalizer/EQButton';
 
 const FadeOptions = [0, 250, 500, 1000];
 const CrossFadeOptions = [0, 2500, 5000, 7500, 12000];
@@ -229,6 +230,7 @@ export const Home = ({
             `${val}: ${logLevelString[getState().logLevel]}`
           }
         />
+        {isAndroid && <EqualizerButton />}
         <SettingListItem
           icon={Icons.fade}
           settingName="Fade"

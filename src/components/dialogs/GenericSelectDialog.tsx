@@ -55,6 +55,11 @@ export default function GenericSelectDialog<T>({
     onSubmit(currentIndex);
   };
 
+  const onItemPress = (index: number) => {
+    setCurrentIndex(index);
+    onPress(index);
+  };
+
   React.useEffect(() => setCurrentIndex(defaultIndex), [defaultIndex]);
 
   return (
@@ -74,10 +79,7 @@ export default function GenericSelectDialog<T>({
             data={options}
             renderItem={({ item, index }) => (
               <Pressable
-                onPress={() => {
-                  setCurrentIndex(index);
-                  onPress(index);
-                }}
+                onPress={() => onItemPress(index)}
                 style={styles.dialogItem}
                 key={index}
               >
@@ -85,7 +87,7 @@ export default function GenericSelectDialog<T>({
                   <RadioButton
                     value={String(item)}
                     status={currentIndex === index ? 'checked' : 'unchecked'}
-                    onPress={() => setCurrentIndex(index)}
+                    onPress={() => onItemPress(index)}
                   />
                   <Text variant="titleLarge" style={styles.dialogText}>
                     {renderOptionTitle(item)}

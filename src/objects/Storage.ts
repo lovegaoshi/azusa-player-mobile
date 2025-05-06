@@ -66,6 +66,9 @@ export const DefaultSetting: NoxStorage.PlayerSettingDict = {
 
   sponsorBlockCat: [],
   sponsorBlockEnabled: false,
+
+  eqPreset: 0,
+  loudnessEnhance: 0,
 };
 
 export const OverrideSetting: Partial<NoxStorage.PlayerSettingDict> = {};

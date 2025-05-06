@@ -8,6 +8,21 @@
     "loading": "Now Loading: {{name}}'s Artist Page",
     "subscribers": "{{c}} subscribers"
   },
+  "Equalizer": {
+    "EqualizerOptionsName": "Equalizer",
+    "EqualizerOptionsDesc": "Enable Equalizer",
+    "EqualizerOptionsTitle": "Choose EQ Preset",
+    "Normal": "Normal",
+    "Pop": "Pop",
+    "Jazz": "Jazz",
+    "Rock": "Rock",
+    "Classical": "Classical",
+    "Dance": "Dance",
+    "Flat": "Flat",
+    "Heavy Metal": "Heavy Metal",
+    "Folk": "Folk",
+    "Hip Hop": "Hip Hop"
+  },
   "SponsorBlock": {
     "SponsorBlockOptionsName": "SponsorBlock",
     "SponsorBlockOptionsDesc": "Enable SponsorBlock",
