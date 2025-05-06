@@ -22,6 +22,7 @@ import { addR128Gain, getR128Gain } from '@utils/ffmpeg/r128Store';
 import usePlayback from '@hooks/usePlayback';
 import ABSliderMenu from './ABSliderMenu';
 import VolumeSlider from './VolumeSlider';
+import { isAndroid } from '@utils/RNUtils';
 
 export default () => {
   const sheet = useRef<TrueSheet>(null);
@@ -101,7 +102,7 @@ export default () => {
   return (
     <NoxBottomSheet name={NoxSheetRoutes.SongMenuSheet} ref={sheet}>
       <GestureHandlerRootView>
-        <VolumeSlider />
+        {isAndroid && <VolumeSlider />}
         <View
           style={{
             paddingVertical: 15,
