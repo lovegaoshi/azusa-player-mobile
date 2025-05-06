@@ -4,6 +4,7 @@ import { Text, View, Alert } from 'react-native';
 import { Image } from 'expo-image';
 import { Divider } from 'react-native-paper';
 import { useTranslation } from 'react-i18next';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
 import { NoxSheetRoutes } from '@enums/Routes';
 import { useNoxSetting } from '@stores/useApp';
@@ -20,6 +21,7 @@ import radioAvailable from '@utils/mediafetch/radiofetch';
 import { addR128Gain, getR128Gain } from '@utils/ffmpeg/r128Store';
 import usePlayback from '@hooks/usePlayback';
 import ABSliderMenu from './ABSliderMenu';
+import VolumeSlider from './VolumeSlider';
 
 export default () => {
   const sheet = useRef<TrueSheet>(null);
@@ -98,70 +100,73 @@ export default () => {
 
   return (
     <NoxBottomSheet name={NoxSheetRoutes.SongMenuSheet} ref={sheet}>
-      <View
-        style={{
-          paddingVertical: 15,
-          paddingHorizontal: 20,
-          flexDirection: 'row',
-        }}
-      >
-        <Image
-          source={{ uri: song?.cover, width: 50, height: 50 }}
-          style={{ width: 50, height: 50, borderRadius: 5 }}
-        />
-        <View style={{ paddingLeft: 5, marginTop: -10 }}>
-          <SongTitle
-            style={[styles.titleText, { width: '100%' }]}
-            text={song?.parsedName}
+      <GestureHandlerRootView>
+        <VolumeSlider />
+        <View
+          style={{
+            paddingVertical: 15,
+            paddingHorizontal: 20,
+            flexDirection: 'row',
+          }}
+        >
+          <Image
+            source={{ uri: song?.cover, width: 50, height: 50 }}
+            style={{ width: 50, height: 50, borderRadius: 5 }}
           />
-          <Text
-            style={[
-              styles.artistText,
-              {
-                color: playerStyle.colors.onSurfaceVariant,
-                paddingLeft: 5,
-              },
-            ]}
-            numberOfLines={1}
-          >
-            {song?.singer}
-          </Text>
+          <View style={{ paddingLeft: 5, marginTop: -10 }}>
+            <SongTitle
+              style={[styles.titleText, { width: '100%' }]}
+              text={song?.parsedName}
+            />
+            <Text
+              style={[
+                styles.artistText,
+                {
+                  color: playerStyle.colors.onSurfaceVariant,
+                  paddingLeft: 5,
+                },
+              ]}
+              numberOfLines={1}
+            >
+              {song?.singer}
+            </Text>
+          </View>
         </View>
-      </View>
-      <Divider />
-      <View style={{ flexDirection: 'row', paddingVertical: 10 }}>
-        <CopiedPlaylistButton
-          getFromListOnClick={selectedPlaylist}
-          showSheet={showSheet}
+        <Divider />
+        <View style={{ flexDirection: 'row', paddingVertical: 10 }}>
+          <CopiedPlaylistButton
+            getFromListOnClick={selectedPlaylist}
+            showSheet={showSheet}
+          />
+          <RenameSongButton
+            getSongOnClick={() => song}
+            onSubmit={renameSong}
+            showSheet={showSheet}
+          />
+          <SheetIconButton
+            icon={'refresh'}
+            onPress={reloadSong}
+            text={t('SongOperations.reloadSong')}
+          />
+        </View>
+        <SheetIconEntry
+          text={t('SongOperations.songStartRadio')}
+          icon={'radio-tower'}
+          onPress={onRadioPressed}
+          disabled={!radioAvailable(song)}
         />
-        <RenameSongButton
-          getSongOnClick={() => song}
-          onSubmit={renameSong}
-          showSheet={showSheet}
+        <SheetIconEntry
+          text={t('SongOperations.songR128gain')}
+          icon={'replay'}
+          onPress={onR128Gain}
         />
-        <SheetIconButton
-          icon={'refresh'}
-          onPress={reloadSong}
-          text={t('SongOperations.reloadSong')}
+        <ABSliderMenu song={song} showSheet={showSheet} />
+        <SheetIconEntry
+          text={t('SongOperations.songRemoveTitle')}
+          icon={'delete-forever'}
+          onPress={removeSongs}
         />
-      </View>
-      <SheetIconEntry
-        text={t('SongOperations.songStartRadio')}
-        icon={'radio-tower'}
-        onPress={onRadioPressed}
-        disabled={!radioAvailable(song)}
-      />
-      <SheetIconEntry
-        text={t('SongOperations.songR128gain')}
-        icon={'replay'}
-        onPress={onR128Gain}
-      />
-      <ABSliderMenu song={song} showSheet={showSheet} />
-      <SheetIconEntry
-        text={t('SongOperations.songRemoveTitle')}
-        icon={'delete-forever'}
-        onPress={removeSongs}
-      />
+      </GestureHandlerRootView>
     </NoxBottomSheet>
   );
 };
