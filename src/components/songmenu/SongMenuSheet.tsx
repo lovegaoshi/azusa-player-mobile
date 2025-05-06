@@ -110,7 +110,7 @@ export default () => {
           }}
         >
           <Image
-            source={{ uri: song?.cover, width: 50, height: 50 }}
+            source={{ uri: song?.cover, width: 100, height: 100 }}
             style={{ width: 50, height: 50, borderRadius: 5 }}
           />
           <View style={{ paddingLeft: 5, marginTop: -10 }}>
