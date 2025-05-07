@@ -145,13 +145,19 @@ export const delPlaylist = async (playlistId: string) => {
 
 const clearStorage = () => AsyncStorage.clear.bind(AsyncStorage)();
 
-export const exportPlayerContent = async (content?: any) => {
-  if (!content) {
-    const allKeys = await AsyncStorage.getAllKeys.bind(AsyncStorage)();
-    content = await AsyncStorage.multiGet.bind(AsyncStorage)(allKeys);
-    content.append([StorageKeys.SQL_PLACEHOLDER, await exportSQL()]);
+const getPlayerContent = async (content?: any) => {
+  if (content) {
+    return content;
   }
-  return compressSync(strToU8(JSON.stringify(content)));
+  const allKeys = await AsyncStorage.getAllKeys.bind(AsyncStorage)();
+  const retrivedContent =
+    await AsyncStorage.multiGet.bind(AsyncStorage)(allKeys);
+  retrivedContent.push([StorageKeys.SQL_PLACEHOLDER, await exportSQL()]);
+  return retrivedContent;
+};
+
+export const exportPlayerContent = async (content?: any) => {
+  return compressSync(strToU8(JSON.stringify(await getPlayerContent(content))));
 };
 
 const parseImportedPartial = (
