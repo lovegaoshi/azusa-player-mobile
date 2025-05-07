@@ -19,7 +19,7 @@ export default () => {
         flex: 1,
       }}
     >
-      <View style={{ paddingHorizontal: 20 }}>
+      <View>
         <IconButton
           size={40}
           icon={'volume-plus'}
@@ -42,7 +42,7 @@ export default () => {
           })
         }
       />
-      <View style={{ width: 40 }} />
+      <View style={{ width: 20 }} />
     </View>
   );
 };
