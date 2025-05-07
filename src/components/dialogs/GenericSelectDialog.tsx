@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { Pressable, View, FlatList, StyleSheet } from 'react-native';
 import { Button, Dialog, Portal, Text, RadioButton } from 'react-native-paper';
 import { useTranslation } from 'react-i18next';
+import { execWhenTrue } from '@utils/Utils';
 
 const DialogTitle = ({ title }: { title: string | undefined }) => {
   if (!title) return <View></View>;
@@ -41,6 +42,7 @@ export default function GenericSelectDialog<T>({
 }: Props<T>) {
   const { t } = useTranslation();
   const [currentIndex, setCurrentIndex] = useState(defaultIndex);
+  const listRef = React.useRef<FlatList<T>>(null);
 
   const handleClose = () => {
     onClose(currentIndex);
@@ -62,6 +64,23 @@ export default function GenericSelectDialog<T>({
 
   React.useEffect(() => setCurrentIndex(defaultIndex), [defaultIndex]);
 
+  React.useEffect(() => {
+    if (!visible) return;
+    /// HACK: initScrollIndex isnt working if flatlist is not init
+    // with initScrollIndex or without execWhenTrue will yield a rte
+    execWhenTrue({
+      loopCheck: async () => listRef?.current !== null,
+      executeFn: () =>
+        setTimeout(() => {
+          console.log('defaultIndex', defaultIndex, listRef.current);
+          listRef.current?.scrollToIndex({
+            index: defaultIndex,
+            animated: false,
+          });
+        }, 1),
+    });
+  }, [visible]);
+
   return (
     <Portal>
       <Dialog
@@ -75,6 +94,7 @@ export default function GenericSelectDialog<T>({
         <Dialog.Content style={styles.dialogContent}>
           {children}
           <FlatList
+            ref={listRef}
             style={[styles.flatList]}
             data={options}
             renderItem={({ item, index }) => (
