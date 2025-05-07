@@ -54,7 +54,11 @@ export default ({ opacity, style, artworkOpacity }: Props) => {
   return (
     <Animated.View style={[styles.container, animatedOpacityStyle]}>
       <Animated.View style={[styles.container, style, animatedStyle]}>
-        <SongTitle style={styles.titleText} text={track?.title} />
+        <SongTitle
+          style={styles.titleText}
+          text={track?.title}
+          bouncePadding={BouncePadding}
+        />
         <View style={styles.infoContainer}>
           <View style={styles.favoriteButtonContainer}>
             <FavReloadButton track={track} />
@@ -76,3 +80,5 @@ export default ({ opacity, style, artworkOpacity }: Props) => {
     </Animated.View>
   );
 };
+
+const BouncePadding = { left: 10, right: 10 };

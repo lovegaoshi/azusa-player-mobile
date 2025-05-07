@@ -7366,7 +7366,7 @@ __metadata:
     react-native-share-menu: "git+https://github.com/Expensify/react-native-share-menu.git"
     react-native-svg: "npm:15.11.2"
     react-native-svga-player: "https://lovegaoshi@github.com/lovegaoshi/react-native-svga-player.git#commit=f8c6303fddb528a1a94d2ab4696c9318c0002cfd"
-    react-native-text-ticker: "https://lovegaoshi@github.com/lovegaoshi/react-native-text-ticker.git#commit=78a79c9a5f3b70e15d6de6db14d0516a56ae5d40"
+    react-native-text-ticker: "https://lovegaoshi@github.com/lovegaoshi/react-native-text-ticker.git#commit=39d022e8e1eed15811c7155d39ec991742d37722"
     react-native-track-player: "https://github.com/lovegaoshi/react-native-track-player.git#commit=2282544a9ce398d0d8b79977edcb8ed9670dc2a4"
     react-native-url-polyfill: "npm:^2.0.0"
     react-native-vector-icons: "npm:^10.2.0"
@@ -17682,10 +17682,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-native-text-ticker@https://lovegaoshi@github.com/lovegaoshi/react-native-text-ticker.git#commit=78a79c9a5f3b70e15d6de6db14d0516a56ae5d40":
+"react-native-text-ticker@https://lovegaoshi@github.com/lovegaoshi/react-native-text-ticker.git#commit=39d022e8e1eed15811c7155d39ec991742d37722":
   version: 1.14.0
-  resolution: "react-native-text-ticker@https://lovegaoshi@github.com/lovegaoshi/react-native-text-ticker.git#commit=78a79c9a5f3b70e15d6de6db14d0516a56ae5d40"
-  checksum: 10c0/97119117e1516445831f4a43758d540da05cc325b13fc372e047cc31cffc0d25d086102ad1dad3385dbcbf267ee83d055486d0704c98231ca57f5b0c07f3a239
+  resolution: "react-native-text-ticker@https://lovegaoshi@github.com/lovegaoshi/react-native-text-ticker.git#commit=39d022e8e1eed15811c7155d39ec991742d37722"
+  checksum: 10c0/6dd57435d8dcacd313e6f5daa9867589d20011e92b8df63755f9179d6c496c1874d1e4f9817b5a7f7a7aa63e543a8d009df274eb89ae33f91c15861ca0131627
   languageName: node
   linkType: hard
 
