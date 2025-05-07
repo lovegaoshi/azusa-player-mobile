@@ -74,7 +74,7 @@ export const playNextSong = (
 
 export const setPlayingList = (
   list: NoxMedia.Song[],
-  shuffleMethod = shuffle,
+  shuffleMethod: (v: NoxMedia.Song[]) => NoxMedia.Song[] = shuffle,
 ) => {
   playlistStore.setState({
     playingList: list,
