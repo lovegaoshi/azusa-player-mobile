@@ -285,7 +285,8 @@ export const smartShuffle = (songs: NoxMedia.Song[]) => {
   return newSongs;
 };
 
-export const shuffle = <T>(list: T[]) => list.sort(() => Math.random() - 0.5);
+export const shuffle = <T>(list: T[]) =>
+  Array.from(list).sort(() => Math.random() - 0.5);
 
 export const removeUndefined = (originalObject: any) =>
   pickBy(originalObject, v => v !== undefined);
