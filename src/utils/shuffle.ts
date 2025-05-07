@@ -6,7 +6,7 @@ import shuffle from 'lodash/shuffle';
  * @param getKey
  * @returns
  */
-function _smartShuffle<T>(
+function shuffleObjectsNoAdjacentDuplicates<T>(
   objects: T[],
   getKey: (v: T) => string = v => v as any,
 ) {
@@ -65,7 +65,7 @@ function _smartShuffle<T>(
 
 export const smartShuffle = (v: NoxMedia.Song[]) => {
   try {
-    return _smartShuffle(v, v => v.parsedName);
+    return shuffleObjectsNoAdjacentDuplicates(v, v => v.parsedName);
   } catch {
     return shuffle(v);
   }
