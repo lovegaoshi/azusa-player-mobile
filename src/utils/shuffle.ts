@@ -1,10 +1,12 @@
+import shuffle from 'lodash/shuffle';
+
 /**
  * shuffleObjectsNoAdjacentDuplicates. cortesy of chatGPT
  * @param objects
  * @param getKey
  * @returns
  */
-export function smartShuffle<T>(
+function _smartShuffle<T>(
   objects: T[],
   getKey: (v: T) => string = v => v as any,
 ) {
@@ -60,3 +62,11 @@ export function smartShuffle<T>(
 
   return result;
 }
+
+export const smartShuffle = (v: NoxMedia.Song[]) => {
+  try {
+    return _smartShuffle(v, v => v.parsedName);
+  } catch {
+    return shuffle(v);
+  }
+};
