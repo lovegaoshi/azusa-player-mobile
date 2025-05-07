@@ -53,7 +53,11 @@ export default function CustomScrollView({
     return Math.max(
       minBarHeight,
       scrollViewHeight.value *
-        Math.min(0.9, scrollViewHeight.value / contentHeight.value),
+        Math.min(
+          0.9,
+          scrollViewHeight.value /
+            (scrollViewHeight.value + contentHeight.value),
+        ),
     );
   });
   const scrollBarY = useDerivedValue(() =>
