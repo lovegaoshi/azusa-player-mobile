@@ -21,7 +21,8 @@ import createPlaylists, { PlaylistsStore } from './usePlaylists';
 import createMFsdk, { MFsdkStore } from './useMFsdk';
 import createAPMPlayback, { APMPlaybackStore } from './useAPMPlayback';
 import { initMFsdk } from '@utils/mfsdk';
-import { shuffle, smartShuffle } from '@utils/Utils';
+import { shuffle } from '@utils/Utils';
+import { smartShuffle } from '@utils/shuffle';
 
 interface NoxSetting
   extends APMUIStore,
