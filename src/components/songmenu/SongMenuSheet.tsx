@@ -116,7 +116,7 @@ export default () => {
           />
           <View style={{ paddingLeft: 5, marginTop: -10 }}>
             <SongTitle
-              style={[styles.titleText, { width: '100%' }]}
+              style={[styles.titleText, { paddingRight: 35 }]}
               text={song?.parsedName}
             />
             <Text

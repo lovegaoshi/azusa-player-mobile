@@ -86,7 +86,11 @@ const TrackInfoTemplate: React.FC<Props> = props => {
   return (
     <View style={[styles.container, containerStyle, { width: windowWidth }]}>
       {children ?? <AlbumArt {...props} />}
-      <SongTitle style={styles.titleText} text={track?.title} />
+      <SongTitle
+        style={styles.titleText}
+        text={track?.title}
+        bouncePadding={BouncePadding10}
+      />
       <View style={styles.infoContainer}>
         <View style={styles.favoriteButtonContainer}>
           <FavReloadButton track={track} />
@@ -109,8 +113,13 @@ const TrackInfoTemplate: React.FC<Props> = props => {
 interface SongTitleProps {
   style: StyleProp<TextStyle>;
   text?: string;
+  bouncePadding?: { left: number; right: number };
 }
-export const SongTitle = (props: SongTitleProps) => {
+export const SongTitle = ({
+  style,
+  text,
+  bouncePadding = BouncePadding,
+}: SongTitleProps) => {
   const resolveError = useRef(0);
   const playerStyle = useNoxSetting(state => state.playerStyle);
 
@@ -119,14 +128,18 @@ export const SongTitle = (props: SongTitleProps) => {
       duration={3000}
       animationType={'bounce'}
       bounceDelay={2000}
-      style={[props.style, { color: playerStyle.colors.onSurface }]}
+      style={[style, { color: playerStyle.colors.onSurface }]}
       easing={Easing.linear}
       onWidthResolveError={() => resolveError.current++}
+      bouncePadding={bouncePadding}
     >
-      {props.text}
+      {text}
     </MarqueeText>
   );
 };
+
+const BouncePadding = { left: 0, right: 0 };
+const BouncePadding10 = { left: 10, right: 10 };
 
 export default TrackInfoTemplate;
 
