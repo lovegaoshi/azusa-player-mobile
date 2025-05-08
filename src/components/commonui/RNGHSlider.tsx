@@ -11,9 +11,13 @@ import Animated, {
 } from 'react-native-reanimated';
 import MaskedView from '@react-native-masked-view/masked-view';
 
-interface Props {
+export interface SliderProps {
+  onValueStart?: (value: number) => void;
   onValueChange?: (value: number) => void;
   onValueEnd?: (value: number) => void;
+}
+
+interface Props extends SliderProps {
   min?: number;
   max?: number;
   defaultValue?: number;
@@ -24,6 +28,7 @@ interface Props {
 }
 
 export default ({
+  onValueStart = console.log,
   onValueChange = console.log,
   onValueEnd = console.log,
   min = 0,
@@ -51,6 +56,9 @@ export default ({
   const dragGesture = useMemo(
     () =>
       Gesture.Pan()
+        .onStart(e => {
+          onValueStart && runOnJS(onValueStart)(interpolateVal(e.x));
+        })
         .onChange(e => {
           const slideVal = interpolateVal(e.x);
           const slidePos = interpolate(

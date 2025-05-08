@@ -4129,13 +4129,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@lodev09/react-native-true-sheet@npm:^2.0.5":
+"@lodev09/react-native-true-sheet@https://github.com/lovegaoshi/react-native-true-sheet.git#commit=0ea919583af444332017b1e9ba630369f88fd5dd":
   version: 2.0.5
-  resolution: "@lodev09/react-native-true-sheet@npm:2.0.5"
+  resolution: "@lodev09/react-native-true-sheet@https://github.com/lovegaoshi/react-native-true-sheet.git#commit=0ea919583af444332017b1e9ba630369f88fd5dd"
   peerDependencies:
     react: "*"
     react-native: "*"
-  checksum: 10c0/cee2d9818ba00ec0fe1cae75027383503e7efb08fc53b564572f4fecf9ca6db82ce5d35bf6669b84364a8cd3e8a3b941b65ec2b34e634c473ac3a6a7aa6c195e
+  checksum: 10c0/5130e9898f3f1bc61c60c6d861a14b891676d1c545380d17927579fc1fc0124c62a6234315f4e50278d4ec6e563acf8aefd13fd2c36cc3de4546af503011367e
   languageName: node
   linkType: hard
 
@@ -7236,7 +7236,7 @@ __metadata:
     "@babel/preset-typescript": "npm:^7.27.1"
     "@babel/runtime": "npm:^7.27.1"
     "@legendapp/list": "npm:^1.0.9"
-    "@lodev09/react-native-true-sheet": "npm:^2.0.5"
+    "@lodev09/react-native-true-sheet": "https://github.com/lovegaoshi/react-native-true-sheet.git#commit=0ea919583af444332017b1e9ba630369f88fd5dd"
     "@material/material-color-utilities": "npm:^0.3.0"
     "@notifee/react-native": "npm:^9.1.8"
     "@react-native-assets/slider": "npm:^11.0.5"

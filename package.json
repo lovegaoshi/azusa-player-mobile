@@ -32,7 +32,7 @@
   },
   "dependencies": {
     "@legendapp/list": "^1.0.9",
-    "@lodev09/react-native-true-sheet": "^2.0.5",
+    "@lodev09/react-native-true-sheet": "https://github.com/lovegaoshi/react-native-true-sheet.git#commit=0ea919583af444332017b1e9ba630369f88fd5dd",
     "@material/material-color-utilities": "^0.3.0",
     "@notifee/react-native": "^9.1.8",
     "@react-native-assets/slider": "^11.0.5",

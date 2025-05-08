@@ -1,6 +1,8 @@
 import { SheetSize, TrueSheet } from '@lodev09/react-native-true-sheet';
 import { RefObject } from 'react';
-import { View, ScrollView } from 'react-native';
+import { View, ScrollView, StyleSheet } from 'react-native';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
+
 import { useNoxSetting } from '@stores/useApp';
 
 interface Props {
@@ -9,6 +11,7 @@ interface Props {
   cornerRadius?: number;
   sizes?: SheetSize[];
   children?: React.ReactNode;
+  draggable?: boolean;
 }
 
 export default ({
@@ -17,21 +20,33 @@ export default ({
   cornerRadius = 5,
   children,
   sizes = ['auto', 'large'],
+  draggable,
 }: Props) => {
   const playerStyle = useNoxSetting(state => state.playerStyle);
 
   return (
     <TrueSheet
+      draggingEnabled={draggable}
       name={name}
       ref={ref}
       backgroundColor={playerStyle.colors.surfaceVariant}
       sizes={sizes}
       cornerRadius={cornerRadius}
     >
-      <ScrollView>
-        {children}
-        <View style={{ paddingBottom: 10 }} />
-      </ScrollView>
+      {/* https://sheet.lodev09.com/troubleshooting#react-native-gesture-handler */}
+      <GestureHandlerRootView style={styles.RNGHcontainer}>
+        <ScrollView>
+          {children}
+          <View style={styles.footer} />
+        </ScrollView>
+      </GestureHandlerRootView>
     </TrueSheet>
   );
 };
+
+const styles = StyleSheet.create({
+  RNGHcontainer: {
+    flexGrow: 1,
+  },
+  footer: { paddingBottom: 10 },
+});
