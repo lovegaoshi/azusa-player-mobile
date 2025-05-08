@@ -3,8 +3,6 @@ import { NativeScrollEvent } from 'react-native';
 import { FlashList } from '@shopify/flash-list';
 import { useNetInfo } from '@react-native-community/netinfo';
 import Animated, {
-  Extrapolation,
-  interpolate,
   runOnJS,
   SharedValue,
   useAnimatedScrollHandler,
@@ -48,6 +46,7 @@ export default ({
   const dragPos = useSharedValue(0);
   const dragToSelect = useSharedValue(0);
   const [scrollActive, setScrollActive] = useState(0);
+  const acceleration = useSharedValue(0);
   const cursorOffset = useDerivedValue(
     () => initialDragY.value + translationDragY.value + scrollOffset.value,
   );
@@ -118,29 +117,27 @@ export default ({
     if (scrollActive === 2) {
       scrollingRef.current = setInterval(() => {
         playlistRef.current?.scrollToOffset({
-          offset:
-            scrollOffset.value -
-            interpolate(
-              dragPos.value,
-              [0.01, 0.2],
-              [50, 1],
-              Extrapolation.CLAMP,
-            ),
+          offset: scrollOffset.value - acceleration.value,
           animated: false,
         });
+        if (dragPos.value < 0.2) {
+          acceleration.value = Math.min(acceleration.value + 0.5, 50);
+        }
       }, 16);
     } else if (scrollActive === 1) {
       scrollingRef.current = setInterval(() => {
         playlistRef.current?.scrollToOffset({
-          offset:
-            scrollOffset.value +
-            interpolate(dragPos.value, [0.8, 1], [1, 50], Extrapolation.CLAMP),
+          offset: scrollOffset.value + acceleration.value,
           animated: false,
         });
+        if (dragPos.value > 0.8) {
+          acceleration.value = Math.min(acceleration.value + 0.5, 50);
+        }
       }, 16);
     }
     return () => {
       scrollingRef.current && clearInterval(scrollingRef.current);
+      acceleration.value = 0;
     };
   }, [scrollActive]);
 
