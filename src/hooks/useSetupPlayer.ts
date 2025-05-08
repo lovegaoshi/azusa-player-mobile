@@ -16,6 +16,7 @@ import { NativeModules } from 'react-native';
 import useActiveTrack, { useTrackStore } from './useActiveTrack';
 import migrations from '../../drizzle/migrations';
 import sqldb from '../utils/db/sql';
+import logger from '@utils/Logger';
 
 const { NoxModule } = NativeModules;
 
@@ -92,7 +93,9 @@ export default ({ intentData, vip }: NoxComponent.SetupPlayerProps) => {
       const GCCrash = isRNLoaded && !__DEV__;
       const OSkill = (await NoxModule?.getLastExitCode?.()) === 2;
       if (GCCrash || OSkill) {
-        return TrackPlayer.play();
+        await TrackPlayer.play();
+        logger.error(`[APMReplay] detected ${GCCrash} and ${OSkill}!`);
+        return;
       }
       switch (intentData) {
         case IntentData.Resume:

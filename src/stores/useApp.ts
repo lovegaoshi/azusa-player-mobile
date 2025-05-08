@@ -22,7 +22,7 @@ import createMFsdk, { MFsdkStore } from './useMFsdk';
 import createAPMPlayback, { APMPlaybackStore } from './useAPMPlayback';
 import { initMFsdk } from '@utils/mfsdk';
 import { shuffle } from '@utils/Utils';
-import { smartShuffle } from '@utils/shuffle';
+import { smartShuffle } from '../utils/shuffle';
 
 interface NoxSetting
   extends APMUIStore,
