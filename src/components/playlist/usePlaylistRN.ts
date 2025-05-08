@@ -148,8 +148,9 @@ export default (playlist: NoxMedia.Playlist): UsePlaylistRN => {
             animated: false,
           }),
         loopCheck: async () => {
-          // @ts-expect-error detect if flashlist is rendered
-          const layoutHeight = playlistRef?.current?.rlvRef._layout.height;
+          const layoutHeight =
+            // @ts-expect-error detect if flashlist is rendered
+            playlistRef?.current?.rlvRef?._layout?.height ?? 0;
           if (layoutHeight < 1.1) {
             return false;
           }

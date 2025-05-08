@@ -118,16 +118,19 @@ class NoxModule(reactContext: ReactApplicationContext) :
     }
 
     @ReactMethod fun getLastExitCode(callback: Promise) {
-
+    try {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
             val activity = getActivity()
             val am = activity?.getSystemService(Context.ACTIVITY_SERVICE) as ActivityManager
-            callback.resolve(am.getHistoricalProcessExitReasons(
+            return callback.resolve(am.getHistoricalProcessExitReasons(
                 BuildConfig.APPLICATION_ID,0,0
             )[0].reason)
-        } else {
-            callback.resolve(0)
         }
+    } catch (e: Exception) {
+        Timber.tag("APMLastExitCode").d(e)
+    } finally {
+        callback.resolve(0)
+    }
     }
 
     @ReactMethod fun getLastExitReason(callback: Promise) {
