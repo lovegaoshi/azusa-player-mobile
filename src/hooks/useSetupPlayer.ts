@@ -81,11 +81,6 @@ export default ({ intentData, vip }: NoxComponent.SetupPlayerProps) => {
           : await appStartupInit;
       updateVersion(storedPlayerSetting);
       checkVersion(true, storedPlayerSetting);
-      if (unmounted) return;
-      setPlayerReady(true);
-      if (unmounted) return;
-      checkPlayStoreUpdates();
-      setIntentData(intentData);
       setTrack(await TrackPlayer.getActiveTrack());
       // activity is already loaded. this indicates a GC induced JS crash
       // or last exit reason is ApplicationExitInfo.REASON_SIGNALED (2)
@@ -95,8 +90,12 @@ export default ({ intentData, vip }: NoxComponent.SetupPlayerProps) => {
       if (GCCrash || OSkill) {
         await TrackPlayer.play();
         logger.error(`[APMReplay] detected ${GCCrash} and ${OSkill}!`);
-        return;
       }
+      if (unmounted) return;
+      setPlayerReady(true);
+      if (unmounted) return;
+      checkPlayStoreUpdates();
+      setIntentData(intentData);
       switch (intentData) {
         case IntentData.Resume:
           await TrackPlayer.play();
