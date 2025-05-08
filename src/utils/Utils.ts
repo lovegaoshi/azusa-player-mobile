@@ -1,6 +1,7 @@
 import pickBy from 'lodash/pickBy';
 
 import { logger } from '@utils/Logger';
+import { last } from 'lodash';
 
 export function nFormatter(num: number, digits: number = 1) {
   const lookup = [
@@ -264,3 +265,26 @@ export const shuffle = <T>(list: T[]) =>
 
 export const removeUndefined = (originalObject: any) =>
   pickBy(originalObject, v => v !== undefined);
+
+export const smartShuffle = (songs: NoxMedia.Song[]) => {
+  if (songs.length === 0) {
+    return [];
+  }
+  // performance is too poor now
+  if (songs.length > 1000) {
+    return shuffle(songs);
+  }
+  const newSongs: NoxMedia.Song[] = [randomChoice(songs)];
+  const oldSongs = [...songs].filter(song => !newSongs.includes(song));
+  while (oldSongs.length > 0) {
+    const lastName = last(newSongs)?.parsedName;
+    let filteredSongs = oldSongs.filter(s => s.parsedName !== lastName);
+    if (filteredSongs.length === 0) {
+      filteredSongs = oldSongs;
+    }
+    const randomIndex = randomNumber(filteredSongs.length);
+    newSongs.push(filteredSongs[randomIndex]);
+    oldSongs.splice(randomIndex, 1);
+  }
+  return newSongs;
+};

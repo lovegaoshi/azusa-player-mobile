@@ -1,12 +1,15 @@
 import shuffle from 'lodash/shuffle';
 
+import { randomNumber } from './Utils';
+
 /**
- * shuffleObjectsNoAdjacentDuplicates. cortesy of chatGPT
+ * shuffleObjectsNoAdjacentDuplicates.
+ * this is fast when there are many commmon objects. GPT you failed me
  * @param objects
  * @param getKey
  * @returns
  */
-function shuffleObjectsNoAdjacentDuplicates<T>(
+export function shuffleObjectsNoAdjacentDuplicates<T>(
   objects: T[],
   getKey: (v: T) => string = v => v as any,
 ) {
@@ -62,6 +65,36 @@ function shuffleObjectsNoAdjacentDuplicates<T>(
 
   return result;
 }
+
+/**
+ * this bets on the initial shuffle is random enough with not so similar songlist
+ * worst is still n! but should be ok
+ * @param objects
+ * @param getKey
+ * @returns
+ */
+export const dumberShuffle = <T>(
+  objects: T[],
+  getKey: (v: T) => string = v => v as any,
+) => {
+  // first shuffle the list;
+  const shuffled = shuffle(objects);
+  // then loop from item 1, compare to the next;
+  const arrLength = shuffled.length;
+  for (const [i, value] of shuffled.entries()) {
+    // if item is the 3rd last item, there is no point to swap at all.
+    if (i > arrLength - 3) break;
+    // if different, next;
+    if (getKey(shuffled[i]) !== getKey(shuffled[i + 1])) continue;
+    // if same, get the rest of array, filter, then get a random index; swap with next.
+    const rest = shuffled.slice(i + 2).filter(v => getKey(v) !== getKey(value));
+    const randomIndex = randomNumber(rest.length);
+    const tmp = rest[i + 1];
+    shuffled[i + 1] = rest[randomIndex];
+    rest[randomIndex] = tmp;
+  }
+  return shuffled;
+};
 
 export const smartShuffle = (v: NoxMedia.Song[]) => {
   try {
