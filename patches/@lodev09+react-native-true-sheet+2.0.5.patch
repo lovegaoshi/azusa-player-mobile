@@ -1,0 +1,13 @@
+diff --git a/node_modules/@lodev09/react-native-true-sheet/lib/commonjs/TrueSheet.js b/node_modules/@lodev09/react-native-true-sheet/lib/commonjs/TrueSheet.js
+index 5d5720c..d5ff5fb 100644
+--- a/node_modules/@lodev09/react-native-true-sheet/lib/commonjs/TrueSheet.js
++++ b/node_modules/@lodev09/react-native-true-sheet/lib/commonjs/TrueSheet.js
+@@ -252,7 +252,6 @@ exports.TrueSheet = TrueSheet;
+ const $nativeSheet = {
+   position: 'absolute',
+   width: '100%',
+-  left: -9999,
+   zIndex: -9999
+ };
+ //# sourceMappingURL=TrueSheet.js.map
+\ No newline at end of file
