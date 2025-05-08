@@ -1,5 +1,5 @@
 import { TrueSheet } from '@lodev09/react-native-true-sheet';
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import { Text, View, Alert } from 'react-native';
 import { Image } from 'expo-image';
 import { Divider } from 'react-native-paper';
@@ -35,6 +35,7 @@ export default () => {
   const { startRadio } = useSongOperations();
   const { playFromPlaylist } = usePlayback();
   const playlistCRUD = usePlaylistCRUD();
+  const [draggable, setDraggable] = useState(true);
 
   const showSheet = (show = true) =>
     show ? sheet.current?.present() : sheet.current?.dismiss();
@@ -99,8 +100,17 @@ export default () => {
   };
 
   return (
-    <NoxBottomSheet name={NoxSheetRoutes.SongMenuSheet} ref={sheet}>
-      {isAndroid && <VolumeSlider />}
+    <NoxBottomSheet
+      draggable={draggable}
+      name={NoxSheetRoutes.SongMenuSheet}
+      ref={sheet}
+    >
+      {isAndroid && (
+        <VolumeSlider
+          onValueStart={() => setDraggable(false)}
+          onValueEnd={() => setDraggable(true)}
+        />
+      )}
       <View
         style={{
           paddingVertical: 15,

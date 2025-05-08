@@ -11,6 +11,7 @@ interface Props {
   cornerRadius?: number;
   sizes?: SheetSize[];
   children?: React.ReactNode;
+  draggable?: boolean;
 }
 
 export default ({
@@ -19,11 +20,13 @@ export default ({
   cornerRadius = 5,
   children,
   sizes = ['auto', 'large'],
+  draggable,
 }: Props) => {
   const playerStyle = useNoxSetting(state => state.playerStyle);
 
   return (
     <TrueSheet
+      draggingEnabled={draggable}
       name={name}
       ref={ref}
       backgroundColor={playerStyle.colors.surfaceVariant}
