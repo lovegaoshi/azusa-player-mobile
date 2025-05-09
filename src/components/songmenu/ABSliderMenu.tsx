@@ -41,6 +41,7 @@ const ABSlider = ({ range, setRange }: SliderProps) => {
       </View>
       <View style={styles.labelSpacer} />
       <RangeSlider
+        thumbStyle={{ elevation: 0 }}
         range={currentABRepeat}
         thumbTintColor={playerStyle.colors.tertiary}
         onValueChange={setRange}

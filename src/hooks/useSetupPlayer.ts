@@ -16,6 +16,7 @@ import { NativeModules } from 'react-native';
 import useActiveTrack, { useTrackStore } from './useActiveTrack';
 import migrations from '../../drizzle/migrations';
 import sqldb from '../utils/db/sql';
+import logger from '@utils/Logger';
 
 const { NoxModule } = NativeModules;
 
@@ -80,11 +81,6 @@ export default ({ intentData, vip }: NoxComponent.SetupPlayerProps) => {
           : await appStartupInit;
       updateVersion(storedPlayerSetting);
       checkVersion(true, storedPlayerSetting);
-      if (unmounted) return;
-      setPlayerReady(true);
-      if (unmounted) return;
-      checkPlayStoreUpdates();
-      setIntentData(intentData);
       setTrack(await TrackPlayer.getActiveTrack());
       // activity is already loaded. this indicates a GC induced JS crash
       // or last exit reason is ApplicationExitInfo.REASON_SIGNALED (2)
@@ -92,8 +88,14 @@ export default ({ intentData, vip }: NoxComponent.SetupPlayerProps) => {
       const GCCrash = isRNLoaded && !__DEV__;
       const OSkill = (await NoxModule?.getLastExitCode?.()) === 2;
       if (GCCrash || OSkill) {
-        return TrackPlayer.play();
+        await TrackPlayer.play();
+        logger.error(`[APMReplay] detected ${GCCrash} and ${OSkill}!`);
       }
+      if (unmounted) return;
+      setPlayerReady(true);
+      if (unmounted) return;
+      checkPlayStoreUpdates();
+      setIntentData(intentData);
       switch (intentData) {
         case IntentData.Resume:
           await TrackPlayer.play();

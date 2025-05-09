@@ -55,6 +55,7 @@ export const SimpleProgressBar = ({
         backgroundColor: progressThumbImage
           ? 'transparent'
           : playerStyle.colors.primary,
+        elevation: 0,
       }}
       maxTrackStyle={styles.transparent}
     />
