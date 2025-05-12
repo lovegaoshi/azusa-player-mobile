@@ -5,7 +5,8 @@ import TrackPlayer from 'react-native-track-player';
 
 import { r128gain, setR128Gain, ffmpegToMP3 } from './ffmpeg/ffmpeg';
 import { addDownloadProgress, setFetchProgress } from '@stores/appStore';
-import { addR128Gain, getR128Gain } from '@utils/ffmpeg/r128Store';
+import { getR128Gain } from '@utils/db/sqlAPI';
+import { setR128Gain as setR128GainSQL } from '@utils/db/sqlStorage';
 import { useNoxSetting } from '@stores/useApp';
 import { getCachedMediaMapping, saveCachedMediaMapping } from './ChromeStorage';
 import { logger } from './Logger';
@@ -69,10 +70,10 @@ class NoxMediaCache {
     const parseR128Gain = async () => {
       if (useNoxSetting.getState().playerSetting.r128gain) {
         logger.debug('[FFMPEG] now starting FFMPEG r128gain...');
-        const previousGain = getR128Gain(song);
-        if (previousGain === null) {
+        const previousGain = await getR128Gain(song.id);
+        if (previousGain === null || previousGain === undefined) {
           const gain = await r128gain(res.path());
-          addR128Gain(song, gain);
+          setR128GainSQL(song.id, gain);
           setR128Gain(gain, song);
         } else {
           setR128Gain(previousGain, song);

@@ -4,7 +4,8 @@ import { logger } from '../utils/Logger';
 import NoxCache from '../utils/Cache';
 import { useNoxSetting } from '@stores/useApp';
 import { cacheResolvedURL } from '@stores/appStore';
-import { addR128Gain, getR128Gain } from '@utils/ffmpeg/r128Store';
+import { getR128Gain } from '@utils/db/sqlAPI';
+import { setR128Gain as setR128GainSQL } from '@utils/db/sqlStorage';
 import { r128gain, setR128Gain } from '@utils/ffmpeg/ffmpeg';
 import { Source } from '@enums/MediaFetch';
 
@@ -17,7 +18,7 @@ export const parseSongR128gain = async (
   init = -1,
 ) => {
   const { playerSetting } = useNoxSetting.getState();
-  const cachedR128gain = getR128Gain(song);
+  const cachedR128gain = await getR128Gain(song.id);
   // HACK: hard code local file logic
   const cachedUrl = song.bvid?.startsWith?.('file://')
     ? song.bvid
@@ -33,7 +34,7 @@ export const parseSongR128gain = async (
   } else if (cachedUrl) {
     logger.debug('[FFMPEG] r128gain null. now parsing FFMPEG r128gain...');
     const gain = await r128gain(cachedUrl);
-    addR128Gain(song, gain);
+    setR128GainSQL(song.id, gain);
     setR128Gain(gain, song, fade, init);
   } else {
     logger.debug(
@@ -98,7 +99,7 @@ export const resolveUrl = async ({
       logger.debug(
         `[SongResolveURL] ${song.parsedName} contains loudness ${url.loudness} and ${url.perceivedLoudness}`,
       );
-      addR128Gain(song, -url.loudness);
+      setR128GainSQL(song.id, -url.loudness);
     }
     return {
       url: url.url,

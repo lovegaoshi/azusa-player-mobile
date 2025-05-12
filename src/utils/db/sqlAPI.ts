@@ -49,14 +49,16 @@ export const getPlaybackCountsAPI = async () => {
   );
 };
 
-export const getR128Gain = async (songcid?: string) =>
-  db
+export const getR128Gain = async (songcid?: string) => {
+  const res = db
     .select({
       r128gain: r128GainTable.r128gain,
     })
     .from(r128GainTable)
     .where(eq(r128GainTable.songcid, songcid ?? ''))
     .get();
+  return res?.r128gain;
+};
 
 export const getABRepeat = async (songcid?: string) =>
   db

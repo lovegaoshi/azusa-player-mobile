@@ -132,7 +132,10 @@ export const increasePlaybackCount = async (
     .where(eq(playbackTable.songcid, songcid));
 };
 
-export const setR128Gain = async (songcid: string, r128gain?: number) => {
+export const setR128Gain = async (
+  songcid: string,
+  r128gain?: number | null,
+) => {
   db.insert(r128gainTable).values({ songcid, r128gain }).onConflictDoUpdate({
     target: r128gainTable.songcid,
     set: { r128gain },
