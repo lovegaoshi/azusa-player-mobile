@@ -2,6 +2,9 @@ import { eq } from 'drizzle-orm';
 
 import db from './sql';
 import playbackTable from './schema/playbackCount';
+import r128GainTable from './schema/r128gainTable';
+import lyricTable from './schema/lyricTable';
+import abrepeatTable from './schema/abrepeatTable';
 import tempTable from './schema/tempSongTable';
 
 export const getPlaybackCountTable = async () =>
@@ -38,3 +41,22 @@ export const getPlaybackCountsAPI = async () => {
     {} as { [id: string]: { count: number; lastPlayed: number | null } },
   );
 };
+
+export const getR128GainAPI = async (songcid: string) =>
+  db
+    .select({
+      r128gain: r128GainTable.r128gain,
+    })
+    .from(r128GainTable)
+    .where(eq(r128GainTable.songcid, songcid))
+    .get();
+
+export const getABRepeatAPI = async (songcid: string) =>
+  db
+    .select({
+      a: abrepeatTable.a,
+      b: abrepeatTable.b,
+    })
+    .from(abrepeatTable)
+    .where(eq(abrepeatTable.songcid, songcid))
+    .get();
