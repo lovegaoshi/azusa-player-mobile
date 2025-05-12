@@ -1,7 +1,7 @@
 import { eq } from 'drizzle-orm';
 
 import playbackTable from '@utils/db/schema/playbackCount';
-import tempTable from './schema/tempSongTable';
+import tempTable from '@utils/db/schema/tempSongTable';
 import db from '@utils/db/sql';
 import {
   getPlaybackCountAPI,
