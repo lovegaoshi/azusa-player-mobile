@@ -58,7 +58,6 @@ export const LegendExample = ({
         comparator: (a, b) => a - b,
         getData: i => scrollViewReference.current?.getLayout(i)?.y ?? 0,
       });
-      console.log('bsindex', bsindex);
       setText(processData?.(data?.[Math.abs(bsindex)]) ?? String(offset));
     })();
   };

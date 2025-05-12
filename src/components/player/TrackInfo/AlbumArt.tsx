@@ -73,7 +73,6 @@ const AlbumArt: React.FC<Props> = ({
   useFocusEffect(
     React.useCallback(() => {
       if (playerSetting.screenAlwaysWake && !isImageVisible) {
-        console.log(`screen mount?, ${isImageVisible}`);
         activateKeepAwakeAsync();
         return deactivateKeepAwake;
       }

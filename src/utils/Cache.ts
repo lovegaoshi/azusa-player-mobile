@@ -69,13 +69,16 @@ class NoxMediaCache {
   }: SaveCacheMedia) => {
     const parseR128Gain = async () => {
       if (useNoxSetting.getState().playerSetting.r128gain) {
-        logger.debug('[FFMPEG] now starting FFMPEG r128gain...');
         const previousGain = await getR128Gain(song.id);
+        logger.debug(
+          `[FFMPEG] now starting FFMPEG r128gain. prev: (${previousGain})`,
+        );
         if (previousGain === null || previousGain === undefined) {
           const gain = await r128gain(res.path());
           setR128GainSQL(song.id, gain);
           setR128Gain(gain, song);
         } else {
+          setR128GainSQL(song.id, previousGain);
           setR128Gain(previousGain, song);
         }
       }

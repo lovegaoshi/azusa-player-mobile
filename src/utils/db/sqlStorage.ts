@@ -136,8 +136,11 @@ export const setR128Gain = async (
   songcid: string,
   r128gain?: number | null,
 ) => {
-  db.insert(r128gainTable).values({ songcid, r128gain }).onConflictDoUpdate({
-    target: r128gainTable.songcid,
-    set: { r128gain },
-  });
+  await db
+    .insert(r128gainTable)
+    .values({ songcid, r128gain })
+    .onConflictDoUpdate({
+      target: r128gainTable.songcid,
+      set: { r128gain },
+    });
 };

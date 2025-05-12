@@ -83,7 +83,7 @@ export default () => {
     showSheet(false);
     Alert.alert(
       `R128Gain of ${song.parsedName}`,
-      `${await getR128Gain(song)} dB`,
+      `${await getR128Gain(song.id)} dB`,
       [
         {
           text: t('Dialog.nullify'),
