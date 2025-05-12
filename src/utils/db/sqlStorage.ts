@@ -1,9 +1,15 @@
 import { eq } from 'drizzle-orm';
 
 import playbackTable from '@utils/db/schema/playbackCount';
+import tempTable from './schema/tempSongTable';
 import db from '@utils/db/sql';
 import { getPlaybackCountAPI, getPlaybackCountTable } from '@utils/db/sqlAPI';
 import { logger } from '@utils/Logger';
+
+export const loadPlaylistToTemp = async (songcids: NoxMedia.Song[]) => {
+  await db.delete(tempTable);
+  db.insert(tempTable).values(songcids.map(v => ({ songcid: v.id })));
+};
 
 export const exportSQL = async () => {
   const data = {
