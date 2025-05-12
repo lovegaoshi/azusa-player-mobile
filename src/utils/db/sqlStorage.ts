@@ -3,12 +3,25 @@ import { eq } from 'drizzle-orm';
 import playbackTable from '@utils/db/schema/playbackCount';
 import tempTable from './schema/tempSongTable';
 import db from '@utils/db/sql';
-import { getPlaybackCountAPI, getPlaybackCountTable } from '@utils/db/sqlAPI';
+import {
+  getPlaybackCountAPI,
+  getPlaybackCountsAPI,
+  getPlaybackCountTable,
+} from '@utils/db/sqlAPI';
 import { logger } from '@utils/Logger';
 
-export const loadPlaylistToTemp = async (songcids: NoxMedia.Song[]) => {
+const loadPlaylistToTemp = async (songcids: NoxMedia.Song[]) => {
   await db.delete(tempTable);
-  db.insert(tempTable).values(songcids.map(v => ({ songcid: v.id })));
+  await db.insert(tempTable).values(songcids.map(v => ({ songcid: v.id })));
+};
+
+export const getPlaylistPlaybackCount = async (playlist: NoxMedia.Playlist) => {
+  try {
+    await loadPlaylistToTemp(playlist.songList);
+    return await getPlaybackCountsAPI();
+  } catch {
+    return {};
+  }
 };
 
 export const exportSQL = async () => {
