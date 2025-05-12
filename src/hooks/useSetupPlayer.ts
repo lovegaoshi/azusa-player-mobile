@@ -15,6 +15,7 @@ import { buildBrowseTree } from '@utils/automotive/androidAuto';
 import { NativeModules } from 'react-native';
 import useActiveTrack, { useTrackStore } from './useActiveTrack';
 import migrations from '../../drizzle/migrations';
+import APMMigration from '../utils/db/migration';
 import sqldb from '../utils/db/sql';
 import logger from '@utils/Logger';
 
@@ -22,6 +23,7 @@ const { NoxModule } = NativeModules;
 
 const initializePlayer = async (safeMode = false) => {
   await migrate(sqldb, migrations);
+  await APMMigration();
   const {
     playlists,
     currentPlayingID,
