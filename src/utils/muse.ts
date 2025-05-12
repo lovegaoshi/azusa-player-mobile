@@ -1,5 +1,6 @@
 import * as crypto from 'expo-crypto';
 import { get_option } from 'libmuse';
+import { Platform } from 'youtubei.js';
 
 import { getSecure as getItem } from '@utils/ChromeStorageAPI';
 import { StorageKeys } from '@enums/Storage';
@@ -31,4 +32,10 @@ export const initMuse = async (
   const auth = get_option('auth');
   auth.get_headers = get_headers;
   auth.requires_login = async () => false;
+
+  Platform.load({
+    ...Platform.shim,
+    sha1Hash: i =>
+      crypto.digestStringAsync(crypto.CryptoDigestAlgorithm.SHA1, i),
+  });
 };

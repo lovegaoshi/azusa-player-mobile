@@ -153,6 +153,8 @@
     "sortArtist": "up主人",
     "sortAlbum": "视频名",
     "sortDate": "日期",
+    "sortLastPlayed": "最后播放",
+    "sortPlayCount": "播放次数",
     "sortPreviousOrder": "之前的顺序",
     "searchListName": "搜索歌单"
   },

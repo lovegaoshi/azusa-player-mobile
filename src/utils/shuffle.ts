@@ -98,7 +98,7 @@ export const dumberShuffle = <T>(
 
 export const smartShuffle = (v: NoxMedia.Song[]) => {
   try {
-    return shuffleObjectsNoAdjacentDuplicates(v, v => v.parsedName);
+    return dumberShuffle(v, v => v.parsedName);
   } catch {
     return shuffle(v);
   }

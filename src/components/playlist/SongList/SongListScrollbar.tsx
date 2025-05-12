@@ -53,11 +53,8 @@ export default function CustomScrollView({
     return Math.max(
       minBarHeight,
       scrollViewHeight.value *
-        Math.min(
-          0.9,
-          scrollViewHeight.value /
-            (scrollViewHeight.value + contentHeight.value),
-        ),
+        (scrollViewHeight.value /
+          (scrollViewHeight.value + contentHeight.value)),
     );
   });
   const scrollBarY = useDerivedValue(() =>
@@ -82,7 +79,9 @@ export default function CustomScrollView({
   };
 
   const resetHideTimeout = (timeout = scrollBarHideTimeout) => {
-    scrollIndicatorOpacity.value = 1;
+    if (barHeightP.value < scrollViewHeight.value) {
+      scrollIndicatorOpacity.value = 1;
+    }
     scrollTimeoutId.current && clearTimeout(scrollTimeoutId.current);
     scrollTimeoutId.current = createScrollHideTimeout(timeout);
   };

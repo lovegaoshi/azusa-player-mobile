@@ -1,4 +1,5 @@
 import { SortOptions } from '@enums/Playlist';
+import { getPlaylistPlaybackCount } from './db/sqlStorage';
 
 export const updatePlaylistSongs = (
   playlist: NoxMedia.Playlist,
@@ -15,11 +16,11 @@ export const updatePlaylistSongs = (
   return playlist;
 };
 
-export const sortPlaylist = (
+export const sortPlaylist = async (
   playlist: NoxMedia.Playlist,
   sort: SortOptions = SortOptions.PreviousOrder,
   ascend = false,
-): NoxMedia.Playlist => {
+): Promise<NoxMedia.Playlist> => {
   playlist.sort = sort;
   if (SortOptions.PreviousOrder === sort) {
     // first get the largest order number in the songlist:
@@ -83,6 +84,32 @@ export const sortPlaylist = (
             : (b.album ?? '').localeCompare(a.album ?? ''),
         ),
       };
+    case SortOptions.LastPlayed: {
+      const lastPlayCount = await getPlaylistPlaybackCount(playlist);
+      return {
+        ...playlist,
+        songList: playlist.songList.sort((a, b) =>
+          ascend
+            ? (lastPlayCount[a.id]?.lastPlayed ?? 0) -
+              (lastPlayCount[b.id]?.lastPlayed ?? 0)
+            : (lastPlayCount[b.id]?.lastPlayed ?? 0) -
+              (lastPlayCount[a.id]?.lastPlayed ?? 0),
+        ),
+      };
+    }
+    case SortOptions.PlayCount: {
+      const lastPlayCount = await getPlaylistPlaybackCount(playlist);
+      return {
+        ...playlist,
+        songList: playlist.songList.sort((a, b) =>
+          ascend
+            ? (lastPlayCount[a.id]?.count ?? 0) -
+              (lastPlayCount[b.id]?.count ?? 0)
+            : (lastPlayCount[b.id]?.count ?? 0) -
+              (lastPlayCount[a.id]?.count ?? 0),
+        ),
+      };
+    }
     default:
       return playlist;
   }

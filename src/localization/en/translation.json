@@ -153,6 +153,8 @@
     "sortArtist": "artist",
     "sortAlbum": "album",
     "sortDate": "date",
+    "sortLastPlayed": "last played",
+    "sortPlayCount": "play count",
     "sortPreviousOrder": "previous",
     "searchListName": "Search"
   },

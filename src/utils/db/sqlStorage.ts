@@ -1,9 +1,28 @@
 import { eq } from 'drizzle-orm';
 
 import playbackTable from '@utils/db/schema/playbackCount';
+import tempTable from '@utils/db/schema/tempSongTable';
 import db from '@utils/db/sql';
-import { getPlaybackCountAPI, getPlaybackCountTable } from '@utils/db/sqlAPI';
+import {
+  getPlaybackCountAPI,
+  getPlaybackCountsAPI,
+  getPlaybackCountTable,
+} from '@utils/db/sqlAPI';
 import { logger } from '@utils/Logger';
+
+const loadPlaylistToTemp = async (songcids: NoxMedia.Song[]) => {
+  await db.delete(tempTable);
+  await db.insert(tempTable).values(songcids.map(v => ({ songcid: v.id })));
+};
+
+export const getPlaylistPlaybackCount = async (playlist: NoxMedia.Playlist) => {
+  try {
+    await loadPlaylistToTemp(playlist.songList);
+    return await getPlaybackCountsAPI();
+  } catch {
+    return {};
+  }
+};
 
 export const exportSQL = async () => {
   const data = {
@@ -42,7 +61,16 @@ export const getPlaybackCount = async (songcid: string | null) => {
   if (!songcid) {
     return 0;
   }
-  return getPlaybackCountAPI(songcid);
+  const res = await getPlaybackCountAPI(songcid);
+  return res?.count;
+};
+
+export const getPlaybackDate = async (songcid: string | null) => {
+  if (!songcid) {
+    return 0;
+  }
+  const res = await getPlaybackCountAPI(songcid);
+  return res?.lastPlayed;
 };
 
 export const increasePlaybackCount = async (
@@ -53,12 +81,15 @@ export const increasePlaybackCount = async (
     return;
   }
   const count = await getPlaybackCount(songcid);
+  const currentTime = Date.now();
   if (count === undefined) {
-    await db.insert(playbackTable).values({ songcid, count: inc });
+    await db
+      .insert(playbackTable)
+      .values({ songcid, count: inc, lastPlayed: currentTime });
     return;
   }
   await db
     .update(playbackTable)
-    .set({ count: count + inc })
+    .set({ count: count + inc, lastPlayed: currentTime })
     .where(eq(playbackTable.songcid, songcid));
 };

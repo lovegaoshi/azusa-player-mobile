@@ -251,7 +251,7 @@ const usePlaylistCRUD = (mPlaylist?: NoxMedia.Playlist) => {
     ascend = false,
     playlist: NoxMedia.Playlist | Promise<NoxMedia.Playlist> = getPlaylist(),
   ) => {
-    updatePlaylist(_sortPlaylist(await playlist, sort, ascend));
+    updatePlaylist(await _sortPlaylist(await playlist, sort, ascend));
   };
 
   const findSongIndex = (song?: NoxMedia.Song) =>
