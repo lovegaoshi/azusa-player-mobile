@@ -28,7 +28,8 @@
     "postinstall": "patch-package",
     "export-android": "mkdir -p android/output && react-native bundle --platform android --dev false --entry-file index.js --bundle-output android/output/index.android.bundle --assets-dest android/output --sourcemap-output android/sourcemap.js && cd android && find output -type f | zip index.android.bundle.zip -@ && cd .. && rm -rf android/output && rm -rf android/sourcemap.js",
     "export-ios": "mkdir -p ios/output && react-native bundle --platform ios --dev false --entry-file index.js --bundle-output ios/output/main.jsbundle --assets-dest ios/output --sourcemap-output ios/sourcemap.js && cd ios && find output -type f | zip main.jsbundle.zip -@ && cd .. && rm -rf ios/output && rm -rf ios/sourcemap.js",
-    "ota": "yarn export-android; yarn export-ios; mkdir -p bundles; mv android/index.android.bundle.zip bundles; mv ios/main.jsbundle.zip bundles; python3 scripts/hashyarnlock.py"
+    "ota": "yarn export-android; yarn export-ios; mkdir -p bundles; mv android/index.android.bundle.zip bundles; mv ios/main.jsbundle.zip bundles; python3 scripts/hashyarnlock.py",
+    "sql": "npx drizzle-kit generate"
   },
   "dependencies": {
     "@legendapp/list": "^1.0.9",

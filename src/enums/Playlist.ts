@@ -19,6 +19,8 @@ export enum SortOptions {
   Artist = 'ARTIST',
   Album = 'ALBUM',
   Date = 'DATE',
+  LastPlayed = 'LAST_PLAYED',
+  PlayCount = 'PLAY_COUNT',
   PreviousOrder = 'PREVIOUS_ORDER',
 }
 

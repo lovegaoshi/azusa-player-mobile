@@ -65,14 +65,13 @@ export default function GenericSelectDialog<T>({
   React.useEffect(() => setCurrentIndex(defaultIndex), [defaultIndex]);
 
   React.useEffect(() => {
-    if (!visible) return;
+    if (!visible || defaultIndex < 0) return;
     /// HACK: initScrollIndex isnt working if flatlist is not init
     // with initScrollIndex or without execWhenTrue will yield a rte
     execWhenTrue({
       loopCheck: async () => listRef?.current !== null,
       executeFn: () =>
         setTimeout(() => {
-          console.log('defaultIndex', defaultIndex, listRef.current);
           listRef.current?.scrollToIndex({
             index: defaultIndex,
             animated: false,

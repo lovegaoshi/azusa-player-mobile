@@ -8,7 +8,10 @@ export const getPlaybackCountTable = async () =>
 
 export const getPlaybackCountAPI = async (songcid: string) =>
   db
-    .select({ field1: playbackTable.count })
+    .select({
+      count: playbackTable.count,
+      lastPlayed: playbackTable.lastPlayed,
+    })
     .from(playbackTable)
     .where(eq(playbackTable.songcid, songcid))
-    .get()?.field1;
+    .get();

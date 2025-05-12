@@ -42,7 +42,16 @@ export const getPlaybackCount = async (songcid: string | null) => {
   if (!songcid) {
     return 0;
   }
-  return getPlaybackCountAPI(songcid);
+  const res = await getPlaybackCountAPI(songcid);
+  return res?.count;
+};
+
+export const getPlaybackDate = async (songcid: string | null) => {
+  if (!songcid) {
+    return 0;
+  }
+  const res = await getPlaybackCountAPI(songcid);
+  return res?.lastPlayed;
 };
 
 export const increasePlaybackCount = async (
@@ -53,12 +62,15 @@ export const increasePlaybackCount = async (
     return;
   }
   const count = await getPlaybackCount(songcid);
+  const currentTime = Date.now();
   if (count === undefined) {
-    await db.insert(playbackTable).values({ songcid, count: inc });
+    await db
+      .insert(playbackTable)
+      .values({ songcid, count: inc, lastPlayed: currentTime });
     return;
   }
   await db
     .update(playbackTable)
-    .set({ count: count + inc })
+    .set({ count: count + inc, lastPlayed: currentTime })
     .where(eq(playbackTable.songcid, songcid));
 };

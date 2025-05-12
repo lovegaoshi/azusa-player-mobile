@@ -83,6 +83,8 @@ export const sortPlaylist = (
             : (b.album ?? '').localeCompare(a.album ?? ''),
         ),
       };
+    case SortOptions.LastPlayed:
+    case SortOptions.PlayCount:
     default:
       return playlist;
   }
