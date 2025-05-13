@@ -4,7 +4,6 @@ import i18n from 'i18next';
 import { reExtractSongName } from '@stores/regexStore';
 import { LrcSource } from '@enums/LyricFetch';
 import { searchLyricOptions, searchLyric } from '../utils/LyricFetch';
-import { useNoxSetting } from '@stores/useApp';
 import { logger } from '@utils/Logger';
 
 export interface FetchedLocalLrc {
@@ -18,8 +17,6 @@ export default (currentSong?: NoxMedia.Song) => {
   const [lrcOption, setLrcOption] = useState<NoxLyric.NoxFetchedLyric>();
   const [searchText, setSearchText] = useState('');
   const [currentTimeOffset, setCurrentTimeOffset] = useState(0);
-  const lyricMapping = useNoxSetting(state => state.lyricMapping);
-  const setLyricMapping = useNoxSetting(state => state.setLyricMapping);
 
   const hasLrcFromLocal = (song = currentSong) => {
     return lyricMapping.has(song?.id ?? '');

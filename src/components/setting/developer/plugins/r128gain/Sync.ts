@@ -48,7 +48,9 @@ export const downloadR128GainDB = async () => {
             b: numberedABRepeat[1],
           };
         }
-      } catch {}
+      } catch {
+        logger.error(`[R128Sync] failed to parse ${curr.abrepeat}`);
+      }
       return {
         songcid: curr.itemid,
         a: curr.abrepeat ? JSON.parse(curr.abrepeat)[0] : 0,

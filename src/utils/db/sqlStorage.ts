@@ -27,8 +27,11 @@ interface ABRepeat {
 }
 
 interface Lyric {
-  songcid: string;
-  lyric: string | null;
+  songId: string;
+  lyric: string;
+  lyricKey: string;
+  lyricOffset: number;
+  source?: string | null;
 }
 
 const loadPlaylistToTemp = async (songcids: NoxMedia.Song[]) => {
@@ -76,6 +79,7 @@ export const restoreLyric = async (data: Lyric[], reset = false) => {
   } catch (e) {
     logger.error(`[APMSQL] failed to import lyric! ${e}`);
   }
+  console.log('[APMSQL] lyric imported', db.select().from(lyricTable).all());
 };
 
 export const restoreR128Gain = async (data: R128Gain[], reset = false) => {
@@ -162,4 +166,11 @@ export const setABRepeat = async (
       target: abRepeatTable.songcid,
       set: ab,
     });
+};
+
+export const setLyricMapping = async (v: Partial<NoxMedia.LyricDetail>) => {
+  await db.insert(lyricTable).values(v).onConflictDoUpdate({
+    target: abRepeatTable.songcid,
+    set: ab,
+  });
 };

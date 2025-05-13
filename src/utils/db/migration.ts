@@ -3,8 +3,10 @@ import {
   saveR128GainMapping,
   getABMapping,
   saveABMapping,
+  getLyricMapping,
+  saveLyricMapping,
 } from '@utils/ChromeStorage';
-import { restoreR128Gain, restoreABRepeat } from './sqlStorage';
+import { restoreR128Gain, restoreABRepeat, restoreLyric } from './sqlStorage';
 import logger from '../Logger';
 
 const migrateR128GainToSQL = async () => {
@@ -41,7 +43,22 @@ const migrateABRepeatToSQL = async () => {
   }
 };
 
+const migrateLyricToSQL = async () => {
+  try {
+    const arr = Array.from(
+      (await getLyricMapping()).values(),
+    ) as NoxMedia.LyricDetail[];
+    if ((arr.length ?? 0) > 0) {
+      logger.debug(`[APMSQL] migrating lyric mapping. `);
+      await restoreLyric(arr);
+    }
+    await saveLyricMapping(new Map());
+  } catch (e) {
+    logger.error(`[APMSQL] failed to migrate r128gain. ${e}`);
+  }
+};
 export default async () => {
   await migrateR128GainToSQL();
   await migrateABRepeatToSQL();
+  await migrateLyricToSQL();
 };

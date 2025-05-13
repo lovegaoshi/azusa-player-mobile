@@ -4,17 +4,12 @@ import { create } from 'zustand';
 
 import { updatePlaylistSongs } from '../utils/playlistOperations';
 import { savePlaylist } from '@utils/ChromeStorageAPI';
-import {
-  saveSettings,
-  saveLyricMapping,
-  getPlaylist,
-} from '@utils/ChromeStorage';
+import { saveSettings, getPlaylist } from '@utils/ChromeStorage';
 import { StorageKeys } from '@enums/Storage';
 import { DefaultSetting } from '@objects/Storage';
 import { savePlayerStyle } from '@utils/StyleStorage';
 import { getABRepeat } from '@utils/db/sqlAPI';
 import { setPlayingList, setPlayingIndex } from '@stores/playingList';
-import DummyLyricDetail from '../objects/LyricDetail';
 import createAPMUI, { APMUIStore } from './useAPMUI';
 import createUI, { UIStore } from './useUI';
 import createPlaylists, { PlaylistsStore } from './usePlaylists';
@@ -51,9 +46,6 @@ interface NoxSetting
   setPlayerSetting: (
     val: Partial<NoxStorage.PlayerSettingDict>,
   ) => Promise<void>;
-
-  lyricMapping: Map<string, NoxMedia.LyricDetail>;
-  setLyricMapping: (val: Partial<NoxMedia.LyricDetail>) => void;
 
   externalSearchText: string;
   setExternalSearchText: (val: string) => void;
@@ -137,21 +129,6 @@ export const useNoxSetting = create<NoxSetting>((set, get, storeApi) => ({
     return playlist;
   },
 
-  lyricMapping: new Map<string, NoxMedia.LyricDetail>(),
-  setLyricMapping: val => {
-    if (!val.songId) {
-      return;
-    }
-    const lyricMapping = get().lyricMapping;
-    lyricMapping.set(val.songId, {
-      ...DummyLyricDetail,
-      ...lyricMapping.get(val.songId),
-      ...val,
-    });
-    set({ lyricMapping });
-    saveLyricMapping(lyricMapping);
-  },
-
   externalSearchText: '',
   setExternalSearchText: val => {
     set({ externalSearchText: val });
@@ -179,7 +156,6 @@ export const useNoxSetting = create<NoxSetting>((set, get, storeApi) => ({
       playlistIds: val.playlistIds,
       playerStyle: savePlayerStyle(val.skin, false),
       playerStyles: val.skins,
-      lyricMapping: val.lyricMapping,
       searchOption: val.defaultSearchOptions,
     });
     setPlayingList(playingList.songList);
