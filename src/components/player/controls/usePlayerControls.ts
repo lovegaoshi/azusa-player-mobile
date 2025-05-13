@@ -9,15 +9,11 @@ import { useNoxSetting } from '@stores/useApp';
 import useTPControls from '@hooks/useTPControls';
 import { saveLastPlayDuration } from '@utils/ChromeStorage';
 import { logger } from '@utils/Logger';
-import appStore, {
-  getABRepeatRaw,
-  setCurrentPlaying,
-  setCrossfaded,
-} from '@stores/appStore';
+import appStore, { setCurrentPlaying, setCrossfaded } from '@stores/appStore';
 import noxPlayingList from '@stores/playingList';
 import { NoxRepeatMode } from '@enums/RepeatMode';
 import usePlaylistCRUD from '@hooks/usePlaylistCRUD';
-import { getR128Gain } from '@utils/db/sqlAPI';
+import { getR128Gain, getABRepeat } from '@utils/db/sqlAPI';
 import { isAndroid } from '@utils/RNUtils';
 import { useTrackStore } from '@hooks/useActiveTrack';
 import { execWhenTrue, r128gain2Volume } from '@utils/Utils';
@@ -170,7 +166,7 @@ export default () => {
     if (!loadingTracker.current || playmode !== NoxRepeatMode.RepeatTrack) {
       return;
     }
-    const newABRepeat = getABRepeatRaw(currentPlayingId);
+    const newABRepeat = await getABRepeat(currentPlayingId);
     if (newABRepeat[0] === 0) return;
     loadingTracker.current = false;
     const trackDuration = (await TrackPlayer.getProgress()).duration;
@@ -180,7 +176,7 @@ export default () => {
   useTrackPlayerEvents([Event.PlaybackActiveTrackChanged], async event => {
     const song = event.track?.song as NoxMedia.Song;
     initSponsorBlock(song);
-    const newABRepeat = getABRepeatRaw(song.id);
+    const newABRepeat = await getABRepeat(song.id);
     logger.debug(`[SongReady] logging ABRepeat as ${newABRepeat}`);
     setABRepeat(newABRepeat);
     if (setCurrentPlaying(song) && !loadingTracker.current) return;

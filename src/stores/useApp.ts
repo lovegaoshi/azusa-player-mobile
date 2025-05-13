@@ -12,7 +12,7 @@ import {
 import { StorageKeys } from '@enums/Storage';
 import { DefaultSetting } from '@objects/Storage';
 import { savePlayerStyle } from '@utils/StyleStorage';
-import { getABRepeatRaw } from './appStore';
+import { getABRepeat } from '@utils/db/sqlAPI';
 import { setPlayingList, setPlayingIndex } from '@stores/playingList';
 import DummyLyricDetail from '../objects/LyricDetail';
 import createAPMUI, { APMUIStore } from './useAPMUI';
@@ -169,7 +169,7 @@ export const useNoxSetting = create<NoxSetting>((set, get, storeApi) => ({
     set({
       MFsdks: await initMFsdk(),
       currentPlayingId: val.lastPlaylistId[1],
-      currentABRepeat: getABRepeatRaw(val.lastPlaylistId[1]),
+      currentABRepeat: await getABRepeat(val.lastPlaylistId[1]),
       currentPlayingList: playingList,
       currentPlaylist: playingList,
       searchPlaylist: val.searchPlaylist,

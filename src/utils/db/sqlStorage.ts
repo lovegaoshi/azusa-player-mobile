@@ -144,3 +144,16 @@ export const setR128Gain = async (
       set: { r128gain },
     });
 };
+
+export const setABRepeat = async (
+  songcid: string,
+  ab: { a: number | null | undefined; b: number | null | undefined },
+) => {
+  await db
+    .insert(abRepeatTable)
+    .values({ songcid, ...ab })
+    .onConflictDoUpdate({
+      target: r128gainTable.songcid,
+      set: ab,
+    });
+};

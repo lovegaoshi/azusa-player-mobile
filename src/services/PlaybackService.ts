@@ -150,7 +150,7 @@ export async function PlaybackService() {
       await TrackPlayer.setVolume(0);
       if (event.track?.song === undefined) return;
       await increasePlaybackCount(event.track.song.id);
-      useNoxSetting.getState().setCurrentPlayingId(event.track.song.id);
+      await useNoxSetting.getState().setCurrentPlayingId(event.track.song.id);
       if (playerErrored) {
         resetResolvedURL(event.track.song, true);
       }
