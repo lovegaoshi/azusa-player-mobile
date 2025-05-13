@@ -6,7 +6,7 @@ import { LrcSource } from '@enums/LyricFetch';
 import { searchLyricOptions, searchLyric } from '../utils/LyricFetch';
 import { logger } from '@utils/Logger';
 import { getLyric } from '@utils/db/sqlAPI';
-import { setLyricMapping } from '@utils/db/sqlStorage';
+import { setLyricMapping } from '../utils/db/sqlStorage';
 
 export interface FetchedLocalLrc {
   lrcDetail: NoxMedia.LyricDetail;

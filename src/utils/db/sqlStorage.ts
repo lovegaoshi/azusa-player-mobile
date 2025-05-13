@@ -1,3 +1,7 @@
+/**
+ * this is the common SQL interface meant to be shared between mobile (sqlite) and web (pglite).
+ * any incompatibilities should be handled in sqlAPI
+ */
 import { eq } from 'drizzle-orm';
 
 import playbackTable from '@utils/db/schema/playbackCount';
