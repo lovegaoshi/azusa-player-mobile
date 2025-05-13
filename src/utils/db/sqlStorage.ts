@@ -153,7 +153,7 @@ export const setABRepeat = async (
     .insert(abRepeatTable)
     .values({ songcid, ...ab })
     .onConflictDoUpdate({
-      target: r128gainTable.songcid,
+      target: abRepeatTable.songcid,
       set: ab,
     });
 };
