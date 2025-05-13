@@ -1,14 +1,35 @@
 import { eq } from 'drizzle-orm';
 
 import playbackTable from '@utils/db/schema/playbackCount';
+import r128gainTable from '@utils/db/schema/r128gainTable';
+import lyricTable from '@utils/db/schema/lyricTable';
+import abRepeatTable from '@utils/db/schema/abrepeatTable';
 import tempTable from '@utils/db/schema/tempSongTable';
 import db from '@utils/db/sql';
-import {
-  getPlaybackCountAPI,
-  getPlaybackCountsAPI,
-  getPlaybackCountTable,
-} from '@utils/db/sqlAPI';
+import { getPlaybackCountAPI, getPlaybackCountsAPI } from '@utils/db/sqlAPI';
 import { logger } from '@utils/Logger';
+
+interface PlaybackCount {
+  songcid: string;
+  count: number;
+  lastPlayed: number | null;
+}
+
+interface R128Gain {
+  songcid: string;
+  r128gain: number | null;
+}
+
+interface ABRepeat {
+  songcid: string;
+  a: number | null;
+  b: number | null;
+}
+
+interface Lyric {
+  songcid: string;
+  lyric: string | null;
+}
 
 const loadPlaylistToTemp = async (songcids: NoxMedia.Song[]) => {
   await db.delete(tempTable);
@@ -24,37 +45,54 @@ export const getPlaylistPlaybackCount = async (playlist: NoxMedia.Playlist) => {
   }
 };
 
-export const exportSQL = async () => {
-  const data = {
-    playbackCount: await getPlaybackCountTable(),
-  };
-  return JSON.stringify(data);
+export const restorePlaybackCount = async (data: PlaybackCount[]) => {
+  if (!data) return;
+  try {
+    await db.delete(playbackTable);
+    await db.insert(playbackTable).values(data);
+  } catch (e) {
+    logger.error(`[APMSQL] failed to import playback count! ${e}`);
+  }
+};
+
+export const restoreABRepeat = async (data: ABRepeat[]) => {
+  if (!data) return;
+  try {
+    await db.delete(abRepeatTable);
+    await db.insert(abRepeatTable).values(data);
+  } catch (e) {
+    logger.error(`[APMSQL] failed to import abRepeatTable! ${e}`);
+  }
+};
+
+export const restoreLyric = async (data: Lyric[]) => {
+  if (!data) return;
+  try {
+    await db.delete(lyricTable);
+    await db.insert(lyricTable).values(data);
+  } catch (e) {
+    logger.error(`[APMSQL] failed to import lyric! ${e}`);
+  }
+};
+
+export const restoreR128Gain = async (data: R128Gain[]) => {
+  if (!data) return;
+  try {
+    await db.delete(r128gainTable);
+    await db.insert(r128gainTable).values(data);
+  } catch (e) {
+    logger.error(`[APMSQL] failed to import r128gain! ${e}`);
+  }
 };
 
 export const importSQL = async (json: string) => {
   try {
     const data = JSON.parse(json);
-    if (data.playbackCount) {
-      await clearPlaybackCount();
-      db.insert(playbackTable).values(data.playbackCount);
-    }
+    await restorePlaybackCount(data.playbackCount);
   } catch (e) {
     logger.error(e);
     logger.error('[APMSQL] Import SQL failed');
   }
-};
-
-export const clearPlaybackCount = async () => {
-  await db.delete(playbackTable);
-};
-
-export const getPlaybackCounts = async () => {
-  const res = await getPlaybackCountTable();
-  const result: { [id: string]: number } = {};
-  res.forEach(v => {
-    result[v.songcid] = v.count;
-  });
-  return result;
 };
 
 export const getPlaybackCount = async (songcid: string | null) => {
@@ -92,4 +130,17 @@ export const increasePlaybackCount = async (
     .update(playbackTable)
     .set({ count: count + inc, lastPlayed: currentTime })
     .where(eq(playbackTable.songcid, songcid));
+};
+
+export const setR128Gain = async (
+  songcid: string,
+  r128gain?: number | null,
+) => {
+  await db
+    .insert(r128gainTable)
+    .values({ songcid, r128gain })
+    .onConflictDoUpdate({
+      target: r128gainTable.songcid,
+      set: { r128gain },
+    });
 };

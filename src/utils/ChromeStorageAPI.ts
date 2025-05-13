@@ -9,7 +9,7 @@ import { chunkArray, arrayToObject } from '../utils/Utils';
 import { StorageKeys, StoragePlaceholders } from '@enums/Storage';
 import { AppID } from '@objects/Storage';
 import AdaptiveTheme from '../components/styles/AdaptiveTheme';
-import { exportSQL } from './db/sqlStorage';
+import { exportSQL } from '@utils/db/sqlAPI';
 /**
  * noxplayer's storage handler.
  * ChromeStorage has quite a few changes from azusa player the chrome extension;

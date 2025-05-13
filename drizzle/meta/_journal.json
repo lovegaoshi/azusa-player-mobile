@@ -15,6 +15,20 @@
       "when": 1747067793035,
       "tag": "0001_normal_phil_sheldon",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "6",
+      "when": 1747075974966,
+      "tag": "0002_jittery_nova",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "6",
+      "when": 1747080215855,
+      "tag": "0003_many_marrow",
+      "breakpoints": true
     }
   ]
 }

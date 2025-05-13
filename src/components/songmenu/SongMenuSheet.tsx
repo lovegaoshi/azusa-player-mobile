@@ -17,7 +17,8 @@ import usePlaylistCRUD from '@hooks/usePlaylistCRUD';
 import RenameSongButton from './RenameSongButton';
 import useSongOperations from '@hooks/useSongOperations';
 import radioAvailable from '@utils/mediafetch/radiofetch';
-import { addR128Gain, getR128Gain } from '@utils/ffmpeg/r128Store';
+import { getR128Gain } from '@utils/db/sqlAPI';
+import { setR128Gain } from '@utils/db/sqlStorage';
 import usePlayback from '@hooks/usePlayback';
 import ABSliderMenu from './ABSliderMenu';
 import VolumeSlider from './VolumeSlider';
@@ -78,14 +79,17 @@ export default () => {
     showSheet(false);
   };
 
-  const onR128Gain = () => {
+  const onR128Gain = async () => {
     showSheet(false);
     Alert.alert(
       `R128Gain of ${song.parsedName}`,
-      `${getR128Gain(song)} dB`,
+      `${await getR128Gain(song.id)} dB`,
       [
-        { text: t('Dialog.nullify'), onPress: () => addR128Gain(song, null) },
-        { text: t('Dialog.zero'), onPress: () => addR128Gain(song, 0) },
+        {
+          text: t('Dialog.nullify'),
+          onPress: () => setR128Gain(song.id, null),
+        },
+        { text: t('Dialog.zero'), onPress: () => setR128Gain(song.id, 0) },
         { text: t('Dialog.ok') },
       ],
       { cancelable: true },

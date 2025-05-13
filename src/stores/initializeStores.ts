@@ -5,7 +5,6 @@ import i18next from 'i18next';
 
 import { initialize as initializeAppStore } from './appStore';
 import { initialize as initializeRegexStore } from './regexStore';
-import { initializeR128Gain } from '../utils/ffmpeg/r128Store';
 import { dataSaverPlaylist, initCache } from '../utils/Cache';
 import { initMuse } from '../utils/muse';
 import { useAPM } from './usePersistStore';
@@ -43,7 +42,6 @@ export const initializeStores = async ({
   await initMuse();
   await initializeAppStore();
   await initializeRegexStore();
-  await initializeR128Gain();
   await useAPM.persist.rehydrate();
   const results = await initPlayer(val);
   initCache({ max: results.storedPlayerSetting.cacheSize });

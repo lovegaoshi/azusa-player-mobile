@@ -60,7 +60,6 @@ const Login = ({ refresh }: { refresh: () => void }) => {
   };
 
   const checkWebView = () => {
-    console.log(cookies);
     if (cookies.length === 0) {
       return logger.error('[YTM] failed to login, as cookie length is 0.');
     }

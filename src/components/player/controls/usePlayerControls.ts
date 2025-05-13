@@ -17,7 +17,7 @@ import appStore, {
 import noxPlayingList from '@stores/playingList';
 import { NoxRepeatMode } from '@enums/RepeatMode';
 import usePlaylistCRUD from '@hooks/usePlaylistCRUD';
-import { getR128Gain } from '@utils/ffmpeg/r128Store';
+import { getR128Gain } from '@utils/db/sqlAPI';
 import { isAndroid } from '@utils/RNUtils';
 import { useTrackStore } from '@hooks/useActiveTrack';
 import { execWhenTrue, r128gain2Volume } from '@utils/Utils';
@@ -109,7 +109,7 @@ export default () => {
         crossfadingId !== currentSongId
       ) {
         const nextSong = await getNextSong();
-        const r128gain = getR128Gain(nextSong);
+        const r128gain = await getR128Gain(nextSong.id);
         logger.debug(
           `[crossfade] crossfading: ${event.position}, ${trueDuration}, ${playerSetting.crossfade} to ${nextSong.name} @ ${r128gain}`,
         );
