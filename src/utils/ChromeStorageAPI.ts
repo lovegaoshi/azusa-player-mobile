@@ -5,11 +5,12 @@ import * as SecureStore from 'expo-secure-store';
 import { v4 as uuidv4 } from 'uuid';
 import { strToU8, compressSync } from 'fflate';
 
-import { chunkArray, arrayToObject } from '../utils/Utils';
+import { chunkArray, arrayToObject } from './Utils';
 import { StorageKeys, StoragePlaceholders } from '@enums/Storage';
 import { AppID } from '@objects/Storage';
 import AdaptiveTheme from '../components/styles/AdaptiveTheme';
 import { exportSQL } from '@utils/db/sqlAPI';
+import APMMigration from './db/migration';
 /**
  * noxplayer's storage handler.
  * ChromeStorage has quite a few changes from azusa player the chrome extension;
@@ -186,6 +187,7 @@ export const importPlayerContentRaw = async (
     await AsyncStorage.multiSet.bind(AsyncStorage)(
       removePlaceholders(parsedContent),
     );
+    APMMigration();
     return content;
   }
 };
