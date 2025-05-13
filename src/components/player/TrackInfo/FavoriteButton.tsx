@@ -5,30 +5,25 @@ import TrackPlayer, {
 } from 'react-native-track-player';
 import { useStore } from 'zustand';
 
-import { useNoxSetting } from '@stores/useApp';
-import { updatePlaylistSongs } from '@utils/playlistOperations';
 import LottieButtonAnimated from '@components/buttons/LottieButtonAnimated';
 import appStore from '@stores/appStore';
 import logger from '@utils/Logger';
 import { isAndroid } from '@utils/RNUtils';
+import { getFavContainSong } from '@utils/db/sqlStorage';
 
 const getAppStoreState = appStore.getState;
 
 export default ({ track }: NoxComponent.TrackProps) => {
   const song = track?.song as NoxMedia.Song;
-  const favoritePlaylist = useNoxSetting(state => state.favoritePlaylist);
-  const setFavoritePlaylist = useNoxSetting(state => state.setFavoritePlaylist);
-  const [liked, setLiked] = useState(
-    favoritePlaylist.songList.filter(val => val.id === song?.id).length > 0,
-  );
+  const [liked, setLiked] = useState(false);
   const setRNTPOptions = useStore(appStore, state => state.setRNTPOptions);
 
-  const onClick = () => {
+  const onClick = async () => {
     if (!song) return;
     if (liked) {
-      setFavoritePlaylist(updatePlaylistSongs(favoritePlaylist, [], [song]));
+      await getFavContainSong({ song, remove: true });
     } else {
-      setFavoritePlaylist(updatePlaylistSongs(favoritePlaylist, [song], []));
+      await getFavContainSong({ song, add: true });
     }
     setLiked(!liked);
     setHeart(!liked);
@@ -58,10 +53,10 @@ export default ({ track }: NoxComponent.TrackProps) => {
   });
 
   useEffect(() => {
-    const liked =
-      favoritePlaylist.songList.filter(val => val.id === song?.id).length > 0;
-    setHeart(liked);
-    setLiked(liked);
+    getFavContainSong({ song }).then(liked => {
+      setHeart(liked);
+      setLiked(liked);
+    });
   }, [track]);
 
   return (

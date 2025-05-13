@@ -3,12 +3,11 @@
 import { create } from 'zustand';
 
 import { updatePlaylistSongs } from '../utils/playlistOperations';
-import { savePlaylist } from '@utils/ChromeStorageAPI';
-import { saveSettings, getPlaylist } from '@utils/ChromeStorage';
+import { saveSettings } from '@utils/ChromeStorage';
+import { getABRepeat, getPlaylist } from '@utils/db/sqlAPI';
 import { StorageKeys } from '@enums/Storage';
 import { DefaultSetting } from '@objects/Storage';
 import { savePlayerStyle } from '@utils/StyleStorage';
-import { getABRepeat } from '@utils/db/sqlAPI';
 import { setPlayingList, setPlayingIndex } from '@stores/playingList';
 import createAPMUI, { APMUIStore } from './useAPMUI';
 import createUI, { UIStore } from './useUI';
@@ -18,6 +17,7 @@ import createAPMPlayback, { APMPlaybackStore } from './useAPMPlayback';
 import { initMFsdk } from '@utils/mfsdk';
 import { shuffle } from '@utils/Utils';
 import { smartShuffle } from '../utils/shuffle';
+import { getFavoritePlaylist, savePlaylist } from '../utils/db/sqlStorage';
 
 interface NoxSetting
   extends APMUIStore,
@@ -38,6 +38,7 @@ interface NoxSetting
     playlist: NoxMedia.Playlist,
     addSongs?: NoxMedia.Song[],
     removeSongs?: NoxMedia.Song[],
+    save?: boolean,
   ) => NoxMedia.Playlist;
 
   setCurrentPlayingList: (val: NoxMedia.Playlist) => boolean;
@@ -73,19 +74,13 @@ export const useNoxSetting = create<NoxSetting>((set, get, storeApi) => ({
     );
   },
   getPlaylist: async (v, d) => {
-    const {
-      searchPlaylist,
-      favoritePlaylist,
-      playlists,
-      playerSetting,
-      currentPlaylist,
-    } = get();
+    const { searchPlaylist, playlists, playerSetting, currentPlaylist } = get();
     const _getPlaylist = () => {
       switch (v) {
         case StorageKeys.SEARCH_PLAYLIST_KEY:
           return searchPlaylist;
         case StorageKeys.FAVORITE_PLAYLIST_KEY:
-          return favoritePlaylist;
+          return getFavoritePlaylist();
         default:
           if (currentPlaylist.id === v) {
             return currentPlaylist;
@@ -109,7 +104,7 @@ export const useNoxSetting = create<NoxSetting>((set, get, storeApi) => ({
     return saveSettings(newPlayerSetting);
   },
 
-  updatePlaylist: (playlist, addSongs = [], removeSongs = []) => {
+  updatePlaylist: (playlist, addSongs = [], removeSongs = [], save = true) => {
     const {
       playlists,
       playerSetting,
@@ -124,7 +119,7 @@ export const useNoxSetting = create<NoxSetting>((set, get, storeApi) => ({
       set({ currentPlaylist: playlist });
     }
     set({ playlists });
-    savePlaylist(playlist);
+    save && savePlaylist(playlist);
     set({ playlistShouldReRender: !playlistShouldReRender });
     return playlist;
   },
@@ -135,13 +130,13 @@ export const useNoxSetting = create<NoxSetting>((set, get, storeApi) => ({
   },
 
   initPlayer: async val => {
-    const playingList = await getPlaylist({
-      key: val.lastPlaylistId[0],
-      defaultPlaylist: () =>
-        val.lastPlaylistId[0] === val.favoriPlaylist.id
-          ? val.favoriPlaylist
-          : val.searchPlaylist,
-    });
+    const playingList =
+      val.lastPlaylistId[0] === StorageKeys.FAVORITE_PLAYLIST_KEY
+        ? await getFavoritePlaylist()
+        : await getPlaylist({
+            key: val.lastPlaylistId[0],
+            defaultPlaylist: () => val.searchPlaylist,
+          });
     const initializedPlayerSetting = val.settings;
     set({
       MFsdks: await initMFsdk(),
@@ -150,7 +145,6 @@ export const useNoxSetting = create<NoxSetting>((set, get, storeApi) => ({
       currentPlayingList: playingList,
       currentPlaylist: playingList,
       searchPlaylist: val.searchPlaylist,
-      favoritePlaylist: val.favoriPlaylist,
       playerSetting: initializedPlayerSetting,
       playlists: val.playlists,
       playlistIds: val.playlistIds,

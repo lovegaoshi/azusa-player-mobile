@@ -6,6 +6,8 @@ import m0001 from './0001_normal_phil_sheldon.sql';
 import m0002 from './0002_jittery_nova.sql';
 import m0003 from './0003_many_marrow.sql';
 import m0004 from './0004_sad_blink.sql';
+import m0005 from './0005_great_madelyne_pryor.sql';
+import m0006 from './0006_nappy_black_tom.sql';
 
   export default {
     journal,
@@ -14,7 +16,9 @@ import m0004 from './0004_sad_blink.sql';
 m0001,
 m0002,
 m0003,
-m0004
+m0004,
+m0005,
+m0006
     }
   }
   

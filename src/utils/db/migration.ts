@@ -5,9 +5,19 @@ import {
   saveABMapping,
   getLyricMapping,
   saveLyricMapping,
+  getPlaylist,
 } from '@utils/ChromeStorage';
-import { restoreR128Gain, restoreABRepeat, restoreLyric } from './sqlStorage';
+import { saveItem, getItem, delPlaylist } from '@utils/ChromeStorageAPI';
+import {
+  restoreR128Gain,
+  restoreABRepeat,
+  restoreLyric,
+  migratePlaylistToSQL,
+} from './sqlStorage';
 import logger from '../Logger';
+import { StorageKeys } from '@enums/Storage';
+import type { Override } from './type';
+import { timeFunction } from '../Utils';
 
 const migrateR128GainToSQL = async () => {
   try {
@@ -57,8 +67,44 @@ const migrateLyricToSQL = async () => {
     logger.error(`[APMSQL] failed to migrate r128gain. ${e}`);
   }
 };
-export default async () => {
+
+const migratePlaylist = async (forced = false) => {
+  const migrated = await getItem(StorageKeys.EXPO_SQL_MIGRATION, false);
+  if (!forced && migrated) {
+    return;
+  }
+  const playlists = await getItem(StorageKeys.MY_FAV_LIST_KEY, []);
+  logger.debug(`[APMSQL] migrating playlist. `);
+  await Promise.all(
+    playlists.map(async (key: string) => {
+      try {
+        const playlist = await getPlaylist({
+          key,
+          throwOnNull: true,
+        });
+        return await timeFunction(
+          () => migratePlaylistToSQL(playlist),
+          `[APMSQL] migrating ${playlist.songList.length} songs`,
+        );
+      } catch {
+        logger.warn(`[APMSQL] failed to migrate playlist ${key} (DNE).`);
+      }
+    }),
+  );
+  await Promise.all(playlists.map(delPlaylist));
+
+  const favPlaylist = await getPlaylist({
+    key: StorageKeys.FAVORITE_PLAYLIST_KEY,
+  });
+  await migratePlaylistToSQL(favPlaylist);
+  await delPlaylist(StorageKeys.FAVORITE_PLAYLIST_KEY);
+
+  await saveItem(StorageKeys.EXPO_SQL_MIGRATION, 'true');
+};
+
+export default async ({ playlist = false }: Override) => {
   await migrateR128GainToSQL();
   await migrateABRepeatToSQL();
   await migrateLyricToSQL();
+  await migratePlaylist(playlist);
 };

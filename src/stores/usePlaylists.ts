@@ -1,16 +1,15 @@
 import { StateCreator } from 'zustand';
 
 import { dummyPlaylist, dummyPlaylistList } from '../objects/Playlist';
-import { savePlaylist } from '@utils/ChromeStorageAPI';
 import {
   delPlaylist,
-  saveFavPlaylist,
   savePlaylistIds,
   savelastPlaylistId,
 } from '@utils/ChromeStorage';
 import { StorageKeys } from '@enums/Storage';
 import { getABRepeat } from '@utils/db/sqlAPI';
 import { setPlayingList } from '@stores/playingList';
+import { savePlaylist } from '../utils/db/sqlStorage';
 
 export interface PlaylistsStore {
   /**
@@ -41,8 +40,6 @@ export interface PlaylistsStore {
   setCurrentPlaylist: (val: NoxMedia.Playlist) => void;
   searchPlaylist: NoxMedia.Playlist;
   setSearchPlaylist: (val: NoxMedia.Playlist) => void;
-  favoritePlaylist: NoxMedia.Playlist;
-  setFavoritePlaylist: (val: NoxMedia.Playlist) => void;
   addPlaylist: (val: NoxMedia.Playlist) => void;
   removePlaylist: (val: string) => void;
 }
@@ -85,15 +82,7 @@ const store: StateCreator<PlaylistsStore, [], [], PlaylistsStore> = (
     playlists[StorageKeys.SEARCH_PLAYLIST_KEY] = val;
     set({ searchPlaylist: val, playlists });
   },
-  favoritePlaylist: dummyPlaylist(),
-  setFavoritePlaylist: val => {
-    const { playlists } = get();
-    playlists[StorageKeys.FAVORITE_PLAYLIST_KEY] = val;
-    saveFavPlaylist(val);
-    set({ favoritePlaylist: val, playlists });
-  },
-
-  addPlaylist: playlist => {
+  addPlaylist: async playlist => {
     const { playlistIds, playlists } = get();
     const newPlaylistIds = playlistIds.concat(playlist.id);
     set({
