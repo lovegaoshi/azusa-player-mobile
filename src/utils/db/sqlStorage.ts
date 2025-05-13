@@ -79,7 +79,6 @@ export const restoreLyric = async (data: Lyric[], reset = false) => {
   } catch (e) {
     logger.error(`[APMSQL] failed to import lyric! ${e}`);
   }
-  console.log('[APMSQL] lyric imported', db.select().from(lyricTable).all());
 };
 
 export const restoreR128Gain = async (data: R128Gain[], reset = false) => {
