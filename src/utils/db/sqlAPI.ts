@@ -73,3 +73,51 @@ export const getABRepeat = async (
     .get();
   return [res?.a ?? 0, res?.b ?? 1];
 };
+
+export const getSyncABRepeatR128 = async () => {
+  const abrepeat = db
+    .select({
+      id: abrepeatTable.songcid,
+      a: abrepeatTable.a,
+      b: abrepeatTable.b,
+    })
+    .from(abrepeatTable)
+    .all();
+
+  const r128gain = db
+    .select({
+      id: r128GainTable.songcid,
+      r128gain: r128GainTable.r128gain,
+    })
+    .from(r128GainTable)
+    .all();
+
+  const res: {
+    [id: string]: { itemid: string; abrepeat?: string; r128gain?: number };
+  } = {};
+
+  abrepeat.reduce(
+    (acc, curr) => ({
+      ...acc,
+      [curr.id]: {
+        ...acc[curr.id],
+        itemid: curr.id,
+        abrepeat: JSON.stringify([(curr.a ?? 0, curr.b ?? 1)]),
+      },
+    }),
+    res,
+  );
+  r128gain.reduce(
+    (acc, curr) => ({
+      ...acc,
+      [curr.id]: {
+        ...acc[curr.id],
+        itemid: curr.id,
+        r128gain: curr.r128gain ?? undefined,
+      },
+    }),
+    res,
+  );
+
+  return Object.values(res);
+};

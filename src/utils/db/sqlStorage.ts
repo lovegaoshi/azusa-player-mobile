@@ -45,41 +45,44 @@ export const getPlaylistPlaybackCount = async (playlist: NoxMedia.Playlist) => {
   }
 };
 
-export const restorePlaybackCount = async (data: PlaybackCount[]) => {
+export const restorePlaybackCount = async (
+  data: PlaybackCount[],
+  reset = false,
+) => {
   if (!data) return;
   try {
-    await db.delete(playbackTable);
-    await db.insert(playbackTable).values(data);
+    reset && (await db.delete(playbackTable));
+    await db.insert(playbackTable).values(data).onConflictDoNothing();
   } catch (e) {
     logger.error(`[APMSQL] failed to import playback count! ${e}`);
   }
 };
 
-export const restoreABRepeat = async (data: ABRepeat[]) => {
+export const restoreABRepeat = async (data: ABRepeat[], reset = false) => {
   if (!data) return;
   try {
-    await db.delete(abRepeatTable);
-    await db.insert(abRepeatTable).values(data);
+    reset && (await db.delete(abRepeatTable));
+    await db.insert(abRepeatTable).values(data).onConflictDoNothing();
   } catch (e) {
     logger.error(`[APMSQL] failed to import abRepeatTable! ${e}`);
   }
 };
 
-export const restoreLyric = async (data: Lyric[]) => {
+export const restoreLyric = async (data: Lyric[], reset = false) => {
   if (!data) return;
   try {
-    await db.delete(lyricTable);
-    await db.insert(lyricTable).values(data);
+    reset && (await db.delete(lyricTable));
+    await db.insert(lyricTable).values(data).onConflictDoNothing();
   } catch (e) {
     logger.error(`[APMSQL] failed to import lyric! ${e}`);
   }
 };
 
-export const restoreR128Gain = async (data: R128Gain[]) => {
+export const restoreR128Gain = async (data: R128Gain[], reset = false) => {
   if (!data) return;
   try {
-    await db.delete(r128gainTable);
-    await db.insert(r128gainTable).values(data);
+    reset && (await db.delete(r128gainTable));
+    await db.insert(r128gainTable).values(data).onConflictDoNothing();
   } catch (e) {
     logger.error(`[APMSQL] failed to import r128gain! ${e}`);
   }
@@ -89,6 +92,9 @@ export const importSQL = async (json: string) => {
   try {
     const data = JSON.parse(json);
     await restorePlaybackCount(data.playbackCount);
+    await restoreLyric(data.lyric);
+    await restoreR128Gain(data.r128gain);
+    await restoreABRepeat(data.abrepeat);
   } catch (e) {
     logger.error(e);
     logger.error('[APMSQL] Import SQL failed');
