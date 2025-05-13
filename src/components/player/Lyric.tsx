@@ -95,8 +95,11 @@ export const LyricView = ({
   }, [track]);
 
   useEffect(() => {
-    if (hasLrcFromLocal(track?.song)) return;
-    searchAndSetCurrentLyric({});
+    const init = async () => {
+      if (await hasLrcFromLocal(track?.song)) return;
+      searchAndSetCurrentLyric({});
+    };
+    init();
   }, [lrcOptions]);
 
   const LyricOptions = (key: string) => {

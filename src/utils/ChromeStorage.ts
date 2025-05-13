@@ -38,15 +38,31 @@ export const getRegExtractMapping = async (): Promise<
 export const saveRegextractMapping = (val: NoxRegExt.JSONExtractor[]) =>
   saveItem(StorageKeys.REGEXTRACT_MAPPING, val);
 
+/**
+ * @deprecated
+ * migrated to SQL based solutions.
+ */
 export const getR128GainMapping = (): Promise<NoxStorage.R128Dict> =>
   getMapping(StorageKeys.R128GAIN_MAPPING);
 
+/**
+ * @deprecated
+ * migrated to SQL based solutions.
+ */
 export const saveR128GainMapping = (val: NoxStorage.R128Dict) =>
   saveChucked(StorageKeys.R128GAIN_MAPPING, Object.entries(val));
 
+/**
+ * @deprecated
+ * migrated to SQL based solutions.
+ */
 export const getABMapping = (): Promise<NoxStorage.ABDict> =>
   getMapping(StorageKeys.ABREPEAT_MAPPING);
 
+/**
+ * @deprecated
+ * migrated to SQL based solutions.
+ */
 export const saveABMapping = async (val: NoxStorage.ABDict) =>
   saveChucked(StorageKeys.ABREPEAT_MAPPING, Object.entries(val));
 
@@ -115,10 +131,18 @@ export const savePlayerSkins = async (skins: any[]) =>
 export const getPlayerSkins = async () =>
   await loadChucked(await getItem(StorageKeys.SKINSTORAGE, []));
 
+/**
+ * @deprecated
+ * migrated to SQL based solutions.
+ */
 export const saveLyricMapping = async (
   lyricMapping: Map<string, NoxMedia.LyricDetail>,
 ) => saveChucked(StorageKeys.LYRIC_MAPPING, Array.from(lyricMapping.entries()));
 
+/**
+ * @deprecated
+ * migrated to SQL based solutions.
+ */
 export const getLyricMapping = () =>
   getMapping(StorageKeys.LYRIC_MAPPING, (val: any) => new Map(val));
 

@@ -74,6 +74,16 @@ export const getABRepeat = async (
   return [res?.a ?? 0, res?.b ?? 1];
 };
 
+export const getLyric = async (
+  songcid?: string,
+): Promise<NoxMedia.LyricDetail | undefined> => {
+  return db
+    .select()
+    .from(lyricTable)
+    .where(eq(lyricTable.songId, songcid ?? ''))
+    .get() as NoxMedia.LyricDetail;
+};
+
 export const getSyncABRepeatR128 = async () => {
   const abrepeat = db
     .select({

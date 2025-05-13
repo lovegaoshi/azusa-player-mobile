@@ -169,8 +169,17 @@ export const setABRepeat = async (
 };
 
 export const setLyricMapping = async (v: Partial<NoxMedia.LyricDetail>) => {
-  await db.insert(lyricTable).values(v).onConflictDoUpdate({
-    target: abRepeatTable.songcid,
-    set: ab,
-  });
+  await db
+    .insert(lyricTable)
+    .values({
+      songId: '',
+      lyricKey: '',
+      lyricOffset: 0,
+      lyric: '',
+      ...v,
+    })
+    .onConflictDoUpdate({
+      target: lyricTable.songId,
+      set: v,
+    });
 };

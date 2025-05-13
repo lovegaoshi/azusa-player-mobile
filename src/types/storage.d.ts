@@ -88,7 +88,6 @@ declare global {
       skins: any[];
       // site: set-cookie header
       cookies: { [key: string]: string };
-      lyricMapping: Map<string, NoxMedia.LyricDetail>;
       language?: string;
       lastPlayDuration: number;
       colorScheme: ColorSchemeName;
