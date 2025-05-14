@@ -26,6 +26,7 @@ import type {
   Song,
   Playlist,
 } from './type';
+import { conflictUpdateSetAllColumns } from '@utils/db/helper';
 
 const loadPlaylistToTemp = async (songcids: NoxMedia.Song[]) => {
   await db.delete(tempTable);
@@ -48,7 +49,13 @@ export const restorePlaybackCount = async (
   if (!data) return;
   try {
     reset && (await db.delete(playbackTable));
-    await db.insert(playbackTable).values(data).onConflictDoNothing();
+    await db
+      .insert(playbackTable)
+      .values(data)
+      .onConflictDoUpdate({
+        target: playbackTable.songcid,
+        set: conflictUpdateSetAllColumns(playbackTable, ['songcid', 'id']),
+      });
   } catch (e) {
     logger.error(`[APMSQL] failed to import playback count! ${e}`);
   }
@@ -58,7 +65,13 @@ export const restoreABRepeat = async (data: ABRepeat[], reset = false) => {
   if (!data) return;
   try {
     reset && (await db.delete(abRepeatTable));
-    await db.insert(abRepeatTable).values(data).onConflictDoNothing();
+    await db
+      .insert(abRepeatTable)
+      .values(data)
+      .onConflictDoUpdate({
+        target: abRepeatTable.songcid,
+        set: conflictUpdateSetAllColumns(playbackTable, ['songcid', 'id']),
+      });
   } catch (e) {
     logger.error(`[APMSQL] failed to import abRepeatTable! ${e}`);
   }
@@ -68,7 +81,13 @@ export const restoreLyric = async (data: Lyric[], reset = false) => {
   if (!data) return;
   try {
     reset && (await db.delete(lyricTable));
-    await db.insert(lyricTable).values(data).onConflictDoNothing();
+    await db
+      .insert(lyricTable)
+      .values(data)
+      .onConflictDoUpdate({
+        target: lyricTable.songId,
+        set: conflictUpdateSetAllColumns(lyricTable, ['songId', 'id']),
+      });
   } catch (e) {
     logger.error(`[APMSQL] failed to import lyric! ${e}`);
   }
@@ -78,7 +97,13 @@ export const restoreR128Gain = async (data: R128Gain[], reset = false) => {
   if (!data) return;
   try {
     reset && (await db.delete(r128gainTable));
-    await db.insert(r128gainTable).values(data).onConflictDoNothing();
+    await db
+      .insert(r128gainTable)
+      .values(data)
+      .onConflictDoUpdate({
+        target: r128gainTable.songcid,
+        set: conflictUpdateSetAllColumns(r128gainTable, ['songcid', 'id']),
+      });
   } catch (e) {
     logger.error(`[APMSQL] failed to import r128gain! ${e}`);
   }
@@ -88,7 +113,13 @@ export const restoreSongs = async (data: Song[], reset = true) => {
   if (!data) return;
   try {
     reset && (await db.delete(songTable));
-    await db.insert(songTable).values(data).onConflictDoNothing();
+    await db
+      .insert(songTable)
+      .values(data)
+      .onConflictDoUpdate({
+        target: songTable.id,
+        set: conflictUpdateSetAllColumns(songTable, ['internalid', 'id']),
+      });
   } catch (e) {
     logger.error(`[APMSQL] failed to import songTable!! CRITICAL ${e}`);
   }
@@ -98,7 +129,13 @@ export const restorePlaylist = async (data: Playlist[], reset = false) => {
   if (!data) return;
   try {
     reset && (await db.delete(playlistTable));
-    await db.insert(playlistTable).values(data).onConflictDoNothing();
+    await db
+      .insert(playlistTable)
+      .values(data)
+      .onConflictDoUpdate({
+        target: playlistTable.id,
+        set: conflictUpdateSetAllColumns(playlistTable, ['internalid', 'id']),
+      });
   } catch (e) {
     logger.error(`[APMSQL] failed to import playlist table! ${e}`);
   }
@@ -196,8 +233,12 @@ export const setLyricMapping = async (v: Partial<NoxMedia.LyricDetail>) => {
     });
 };
 
-export const migratePlaylistToSQL = async (v: NoxMedia.Playlist) => {
-  const newSongList = await Promise.all(v.songList.map(v => getSongSQLID(v)));
+export const migratePlaylistToSQL = async (
+  v: NoxMedia.Playlist,
+  getSongListIndex?: () => Promise<number[]>,
+) => {
+  const newSongList = await (getSongListIndex?.() ??
+    Promise.all(v.songList.map(v => getSongSQLID(v))));
   const newPlaylist = {
     ...v,
     songList: [],
@@ -214,4 +255,30 @@ export const migratePlaylistToSQL = async (v: NoxMedia.Playlist) => {
     target: playlistTable.id,
     set: sqlPlaylist,
   });
+};
+
+export const updateSongs = async (songs: NoxMedia.Song[]) => {
+  await restoreSongs(
+    songs.map(v => ({ ...v, singerId: String(v.singerId) })),
+    false,
+  );
+};
+
+export const savePlaylist = async (playlist: NoxMedia.Playlist) => {
+  /**
+   * here savePlaylist needs to be migrated into the SQL version;
+   * challenge is now we have NoxMedia.Playlist and have to assess if NoxMedia.Song needs to be
+   * inserted. so first do a songList.filter(v => v.internalId === undefined) to get the
+   * ones need to be inserted. insert. then do songList.map(async v => v.internalId ?? getSongSQLID(v))
+   * to get the id. then songList is transformed and can be saved. need to extract migrateSQL
+   *
+   * rename operations should directly call updateSongs instead of here
+   * take care of songTable remove in a clean up function alone soemwhere else
+   */
+  const insertSongs = playlist.songList.filter(v => v.internalid === undefined);
+  await updateSongs(insertSongs);
+  const newIndices = await Promise.all(
+    playlist.songList.map(async v => v.internalid ?? getSongSQLID(v)),
+  );
+  await migratePlaylistToSQL(playlist, async () => newIndices);
 };

@@ -1,7 +1,6 @@
 import { StateCreator } from 'zustand';
 
 import { dummyPlaylist, dummyPlaylistList } from '../objects/Playlist';
-import { savePlaylist } from '@utils/ChromeStorageAPI';
 import {
   delPlaylist,
   saveFavPlaylist,
@@ -11,6 +10,7 @@ import {
 import { StorageKeys } from '@enums/Storage';
 import { getABRepeat } from '@utils/db/sqlAPI';
 import { setPlayingList } from '@stores/playingList';
+import { savePlaylist } from '../utils/db/sqlStorage';
 
 export interface PlaylistsStore {
   /**
@@ -93,7 +93,7 @@ const store: StateCreator<PlaylistsStore, [], [], PlaylistsStore> = (
     set({ favoritePlaylist: val, playlists });
   },
 
-  addPlaylist: playlist => {
+  addPlaylist: async playlist => {
     const { playlistIds, playlists } = get();
     const newPlaylistIds = playlistIds.concat(playlist.id);
     set({

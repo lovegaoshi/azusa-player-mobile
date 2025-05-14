@@ -24,7 +24,7 @@ export interface Lyric {
 }
 
 export interface Song {
-  internalid: number;
+  internalid?: number;
   id: string;
   bvid: string;
   name: string;

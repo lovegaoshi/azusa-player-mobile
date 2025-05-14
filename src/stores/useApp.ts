@@ -3,7 +3,6 @@
 import { create } from 'zustand';
 
 import { updatePlaylistSongs } from '../utils/playlistOperations';
-import { savePlaylist } from '@utils/ChromeStorageAPI';
 import { saveSettings } from '@utils/ChromeStorage';
 import { getPlaylist } from '@utils/db/sqlAPI';
 import { StorageKeys } from '@enums/Storage';
@@ -19,6 +18,7 @@ import createAPMPlayback, { APMPlaybackStore } from './useAPMPlayback';
 import { initMFsdk } from '@utils/mfsdk';
 import { shuffle } from '@utils/Utils';
 import { smartShuffle } from '../utils/shuffle';
+import { savePlaylist } from '../utils/db/sqlStorage';
 
 interface NoxSetting
   extends APMUIStore,
