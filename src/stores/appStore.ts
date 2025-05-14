@@ -3,19 +3,13 @@ import { createStore } from 'zustand/vanilla';
 // @ts-ignore HACK: for noxplayer's compatibility
 import { UpdateOptions } from 'react-native-track-player';
 
-import {
-  getABMapping,
-  saveABMapping,
-  getFadeInterval,
-} from '@utils/ChromeStorage';
+import { getFadeInterval } from '@utils/ChromeStorage';
 import { logger } from '@utils/Logger';
 import noxCache from '@utils/Cache';
 
 interface AppStore {
   crossfaded: boolean;
   pipMode: boolean;
-  ABRepeat: NoxStorage.ABDict;
-  setABRepeat: (val: NoxStorage.ABDict) => void;
   // used for Event.PlaybackActiveTrackChanged.
   // this is set immediately at Event.PlaybackActiveTrackChanged.
   activeTrackPlayingId: string;
@@ -45,11 +39,6 @@ const appStore = createStore<AppStore>(set => ({
   crossfaded: false,
   downloadQueue: [],
   pipMode: false,
-  ABRepeat: {},
-  setABRepeat: (val: NoxStorage.ABDict) => {
-    set({ ABRepeat: val });
-    saveABMapping(val);
-  },
   activeTrackPlayingId: '',
   setActiveTrackPlayingId: (val: string) => {
     set({ activeTrackPlayingId: val });
@@ -83,7 +72,6 @@ const appStore = createStore<AppStore>(set => ({
 export const initialize = async () => {
   const fadeInterval = await getFadeInterval();
   appStore.setState({
-    ABRepeat: await getABMapping(),
     fadeIntervalMs: fadeInterval,
     fadeIntervalSec: fadeInterval / 1000,
   });
@@ -91,28 +79,6 @@ export const initialize = async () => {
 
 export const setCrossfaded = (crossfaded = true) => {
   appStore.setState({ crossfaded });
-};
-
-export const saveABRepeat = (val: NoxStorage.ABDict) => {
-  const newR128gain = { ...appStore.getState().ABRepeat, ...val };
-  appStore.setState({ ABRepeat: newR128gain });
-  saveABMapping(newR128gain);
-};
-
-export const getABRepeatRaw = (songId: string) => {
-  const { ABRepeat } = appStore.getState();
-  return ABRepeat[songId] ?? [0, 1];
-};
-
-export const getABRepeat = (song: NoxMedia.Song) => {
-  return getABRepeatRaw(song.id);
-};
-
-export const addABRepeat = (
-  song: NoxMedia.Song,
-  abrepeat: [number, number],
-) => {
-  saveABRepeat({ [song.id]: abrepeat });
 };
 
 export const setCurrentPlaying = (song: NoxMedia.Song) => {

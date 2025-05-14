@@ -1,3 +1,7 @@
+/**
+ * this is the common SQL interface meant to be shared between mobile (sqlite) and web (pglite).
+ * any incompatibilities should be handled in sqlAPI
+ */
 import { eq } from 'drizzle-orm';
 
 import playbackTable from '@utils/db/schema/playbackCount';
@@ -27,8 +31,11 @@ interface ABRepeat {
 }
 
 interface Lyric {
-  songcid: string;
-  lyric: string | null;
+  songId: string;
+  lyric: string;
+  lyricKey: string;
+  lyricOffset: number;
+  source?: string | null;
 }
 
 const loadPlaylistToTemp = async (songcids: NoxMedia.Song[]) => {
@@ -45,41 +52,44 @@ export const getPlaylistPlaybackCount = async (playlist: NoxMedia.Playlist) => {
   }
 };
 
-export const restorePlaybackCount = async (data: PlaybackCount[]) => {
+export const restorePlaybackCount = async (
+  data: PlaybackCount[],
+  reset = false,
+) => {
   if (!data) return;
   try {
-    await db.delete(playbackTable);
-    await db.insert(playbackTable).values(data);
+    reset && (await db.delete(playbackTable));
+    await db.insert(playbackTable).values(data).onConflictDoNothing();
   } catch (e) {
     logger.error(`[APMSQL] failed to import playback count! ${e}`);
   }
 };
 
-export const restoreABRepeat = async (data: ABRepeat[]) => {
+export const restoreABRepeat = async (data: ABRepeat[], reset = false) => {
   if (!data) return;
   try {
-    await db.delete(abRepeatTable);
-    await db.insert(abRepeatTable).values(data);
+    reset && (await db.delete(abRepeatTable));
+    await db.insert(abRepeatTable).values(data).onConflictDoNothing();
   } catch (e) {
     logger.error(`[APMSQL] failed to import abRepeatTable! ${e}`);
   }
 };
 
-export const restoreLyric = async (data: Lyric[]) => {
+export const restoreLyric = async (data: Lyric[], reset = false) => {
   if (!data) return;
   try {
-    await db.delete(lyricTable);
-    await db.insert(lyricTable).values(data);
+    reset && (await db.delete(lyricTable));
+    await db.insert(lyricTable).values(data).onConflictDoNothing();
   } catch (e) {
     logger.error(`[APMSQL] failed to import lyric! ${e}`);
   }
 };
 
-export const restoreR128Gain = async (data: R128Gain[]) => {
+export const restoreR128Gain = async (data: R128Gain[], reset = false) => {
   if (!data) return;
   try {
-    await db.delete(r128gainTable);
-    await db.insert(r128gainTable).values(data);
+    reset && (await db.delete(r128gainTable));
+    await db.insert(r128gainTable).values(data).onConflictDoNothing();
   } catch (e) {
     logger.error(`[APMSQL] failed to import r128gain! ${e}`);
   }
@@ -89,6 +99,9 @@ export const importSQL = async (json: string) => {
   try {
     const data = JSON.parse(json);
     await restorePlaybackCount(data.playbackCount);
+    await restoreLyric(data.lyric);
+    await restoreR128Gain(data.r128gain);
+    await restoreABRepeat(data.abrepeat);
   } catch (e) {
     logger.error(e);
     logger.error('[APMSQL] Import SQL failed');
@@ -142,5 +155,34 @@ export const setR128Gain = async (
     .onConflictDoUpdate({
       target: r128gainTable.songcid,
       set: { r128gain },
+    });
+};
+
+export const setABRepeat = async (
+  songcid: string,
+  ab: { a: number | null | undefined; b: number | null | undefined },
+) => {
+  await db
+    .insert(abRepeatTable)
+    .values({ songcid, ...ab })
+    .onConflictDoUpdate({
+      target: abRepeatTable.songcid,
+      set: ab,
+    });
+};
+
+export const setLyricMapping = async (v: Partial<NoxMedia.LyricDetail>) => {
+  await db
+    .insert(lyricTable)
+    .values({
+      songId: '',
+      lyricKey: '',
+      lyricOffset: 0,
+      lyric: '',
+      ...v,
+    })
+    .onConflictDoUpdate({
+      target: lyricTable.songId,
+      set: v,
     });
 };

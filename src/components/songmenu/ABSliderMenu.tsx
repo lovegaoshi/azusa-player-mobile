@@ -8,7 +8,7 @@ import { StyleSheet, View } from 'react-native';
 import { useNoxSetting } from '@stores/useApp';
 import GenericDialog from '@components/dialogs/GenericDialog';
 import { seconds2MMSS as formatSeconds } from '@utils/Utils';
-import { addABRepeat } from '@stores/appStore';
+import { setABRepeat } from '@utils/db/sqlStorage';
 import SheetIconEntry from '@components/commonui/bottomsheet/SheetIconEntry';
 
 interface Props {
@@ -59,10 +59,10 @@ const ABSliderMenu = ({ song, showSheet }: Props) => {
   const setCurrentABRepeat = useNoxSetting(state => state.setCurrentABRepeat);
   const [range, setRange] = useState<[number, number]>([0, 1]);
 
-  const onSubmit = () => {
+  const onSubmit = async () => {
     setDialogVisible(val => !val);
     setCurrentABRepeat(range);
-    addABRepeat(song, range);
+    await setABRepeat(song.id, { a: range[0], b: range[1] });
   };
 
   const showDialog = () => {

@@ -9,7 +9,7 @@ import {
   savelastPlaylistId,
 } from '@utils/ChromeStorage';
 import { StorageKeys } from '@enums/Storage';
-import { getABRepeatRaw } from './appStore';
+import { getABRepeat } from '@utils/db/sqlAPI';
 import { setPlayingList } from '@stores/playingList';
 
 export interface PlaylistsStore {
@@ -18,7 +18,7 @@ export interface PlaylistsStore {
    * what is current playing in the playlist view.
    */
   currentPlayingId: string | null;
-  setCurrentPlayingId: (val: string) => void;
+  setCurrentPlayingId: (val: string) => Promise<void>;
   /**
    * currentPlayingList is a copied playlist of what's currently playing.
    * its not a reference to existing playlists because sometimes the playing queue
@@ -52,10 +52,11 @@ const store: StateCreator<PlaylistsStore, [], [], PlaylistsStore> = (
   get,
 ) => ({
   currentPlayingId: '',
-  setCurrentPlayingId: val => {
+  setCurrentPlayingId: async val => {
+    const currentABRepeat = await getABRepeat(val);
     set(v => {
       savelastPlaylistId([v.currentPlayingList.id, val]);
-      return { currentPlayingId: val, currentABRepeat: getABRepeatRaw(val) };
+      return { currentPlayingId: val, currentABRepeat };
     });
   },
   currentPlayingList: dummyPlaylistList,

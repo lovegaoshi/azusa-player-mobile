@@ -75,10 +75,9 @@ class NoxMediaCache {
         );
         if (previousGain === null || previousGain === undefined) {
           const gain = await r128gain(res.path());
-          setR128GainSQL(song.id, gain);
+          await setR128GainSQL(song.id, gain);
           setR128Gain(gain, song);
         } else {
-          setR128GainSQL(song.id, previousGain);
           setR128Gain(previousGain, song);
         }
       }

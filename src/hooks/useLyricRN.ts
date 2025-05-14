@@ -37,7 +37,7 @@ export default (currentSong?: NoxMedia.Song, artist = '') => {
   };
 
   const getLrcFromLocal = async (song?: NoxMedia.Song) => {
-    const lrcDetail = usedLyric.getLrcFromLocal(song);
+    const lrcDetail = await usedLyric.getLrcFromLocal(song);
     if (lrcDetail === undefined) return;
     let localLrc: string | undefined = undefined;
     if (lrcDetail.lyric.endsWith('.txt')) {
