@@ -4,7 +4,8 @@ import { create } from 'zustand';
 
 import { updatePlaylistSongs } from '../utils/playlistOperations';
 import { savePlaylist } from '@utils/ChromeStorageAPI';
-import { saveSettings, getPlaylist } from '@utils/ChromeStorage';
+import { saveSettings } from '@utils/ChromeStorage';
+import { getPlaylist } from '@utils/db/sqlAPI';
 import { StorageKeys } from '@enums/Storage';
 import { DefaultSetting } from '@objects/Storage';
 import { savePlayerStyle } from '@utils/StyleStorage';

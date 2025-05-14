@@ -5,9 +5,19 @@ import {
   saveABMapping,
   getLyricMapping,
   saveLyricMapping,
+  clearPlaylists,
+  getPlaylist,
 } from '@utils/ChromeStorage';
-import { restoreR128Gain, restoreABRepeat, restoreLyric } from './sqlStorage';
+import { saveItem, getItem } from '@utils/ChromeStorageAPI';
+import {
+  restoreR128Gain,
+  restoreABRepeat,
+  restoreLyric,
+  migratePlaylistToSQL,
+} from './sqlStorage';
 import logger from '../Logger';
+import { StorageKeys } from '@enums/Storage';
+import { getPlaylist as getPlaylistSQL } from './sqlAPI';
 
 const migrateR128GainToSQL = async () => {
   try {
@@ -57,8 +67,25 @@ const migrateLyricToSQL = async () => {
     logger.error(`[APMSQL] failed to migrate r128gain. ${e}`);
   }
 };
+
+const migratePlaylist = async () => {
+  const playlists = await getItem(StorageKeys.MY_FAV_LIST_KEY, []);
+  if (playlists.length > 0) {
+    logger.debug(`[APMSQL] migrating playlist. `);
+    await Promise.all(
+      playlists.map(async (key: string) => {
+        const playlist = await getPlaylist({ key });
+        return migratePlaylistToSQL(playlist);
+      }),
+    );
+    // await clearPlaylists();
+  }
+  console.log('APMSQL', await getPlaylistSQL(playlists[0]));
+};
+
 export default async () => {
   await migrateR128GainToSQL();
   await migrateABRepeatToSQL();
   await migrateLyricToSQL();
+  await migratePlaylist();
 };

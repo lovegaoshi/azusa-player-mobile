@@ -12,7 +12,11 @@ import tempTable from '@utils/db/schema/tempSongTable';
 import songTable from '@utils/db/schema/songTable';
 import playlistTable from '@utils/db/schema/playlistTable';
 import db from '@utils/db/sql';
-import { getPlaybackCountAPI, getPlaybackCountsAPI } from '@utils/db/sqlAPI';
+import {
+  getPlaybackCountAPI,
+  getPlaybackCountsAPI,
+  getSongSQLID,
+} from '@utils/db/sqlAPI';
 import { logger } from '@utils/Logger';
 import type {
   ABRepeat,
@@ -190,4 +194,24 @@ export const setLyricMapping = async (v: Partial<NoxMedia.LyricDetail>) => {
       target: lyricTable.songId,
       set: v,
     });
+};
+
+export const migratePlaylistToSQL = async (v: NoxMedia.Playlist) => {
+  const newSongList = await Promise.all(v.songList.map(v => getSongSQLID(v)));
+  const newPlaylist = {
+    ...v,
+    songList: [],
+  };
+  const sqlPlaylist = {
+    id: v.id,
+    title: v.title,
+    type: v.type,
+    lastSubscribed: v.lastSubscribed,
+    songList: JSON.stringify(newSongList),
+    settings: JSON.stringify(newPlaylist),
+  };
+  await db.insert(playlistTable).values(sqlPlaylist).onConflictDoUpdate({
+    target: playlistTable.id,
+    set: sqlPlaylist,
+  });
 };

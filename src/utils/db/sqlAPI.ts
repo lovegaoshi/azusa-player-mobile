@@ -136,6 +136,11 @@ export const getSyncABRepeatR128 = async () => {
   return Object.values(res);
 };
 
+/**
+ * unsure how useful this is - gets a song by its cid.
+ * @param songcid
+ * @returns
+ */
 export const getSong = async (
   songcid?: string,
 ): Promise<NoxMedia.Song | undefined> => {
@@ -148,15 +153,21 @@ export const getSong = async (
   return res as NoxMedia.Song;
 };
 
-export const getPlaylist = async (
-  id?: string,
-): Promise<NoxMedia.Playlist | undefined> => {
+/**
+ *
+ * @param id
+ * @returns
+ */
+export const getPlaylist = async ({
+  key = '',
+  defaultPlaylist = dummyPlaylist,
+}): Promise<NoxMedia.Playlist> => {
   const res = db
     .select()
     .from(playlistTable)
-    .where(eq(playlistTable.id, id ?? ''))
+    .where(eq(playlistTable.id, key))
     .get();
-  if (res === undefined) return;
+  if (res === undefined) return defaultPlaylist();
   const songListIds = JSON.parse(res.songList) as number[];
 
   await db.delete(tempidTable);
@@ -168,7 +179,7 @@ export const getPlaylist = async (
     .all();
   const settings = JSON.parse(res.settings);
   return {
-    ...dummyPlaylist(),
+    ...defaultPlaylist(),
     ...res,
     ...settings,
     settings: undefined,
@@ -176,6 +187,11 @@ export const getPlaylist = async (
   };
 };
 
+/**
+ * used in migrating/importing playlists
+ * @param v
+ * @returns
+ */
 export const getSongSQLID = async (v: NoxMedia.Song) => {
   const res = db
     .select({ id: songTable.internalid })
@@ -184,6 +200,18 @@ export const getSongSQLID = async (v: NoxMedia.Song) => {
     .get();
   if (res !== undefined) return res.id;
   // insert it
+  const parsedSong = {
+    ...v,
+    singerId: String(v.singerId),
+  };
+  const insert = await db
+    .insert(songTable)
+    .values(parsedSong)
+    .returning({ id: songTable.internalid });
+  return insert[0].id;
+};
 
-  return -1;
+export const getPlaylistIds = async () => {
+  const res = db.select({ id: playlistTable.id }).from(playlistTable).all();
+  return res.map(v => v.id);
 };

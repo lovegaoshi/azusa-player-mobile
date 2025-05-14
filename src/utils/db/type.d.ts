@@ -23,6 +23,35 @@ export interface Lyric {
   source?: string | null;
 }
 
-export interface Song {}
+export interface Song {
+  internalid: number;
+  id: string;
+  bvid: string;
+  name: string;
+  nameRaw: string;
+  singer: string;
+  singerId: string;
+  cover: string;
+  coverLowRes?: string;
+  lyric?: string;
+  lyricOffset?: number;
+  parsedName: string;
+  biliShazamedName?: string;
+  page?: number;
+  duration: number;
+  album?: string;
+  addedDate?: number;
+  source?: string;
+  isLive?: boolean;
+  liveStatus?: boolean;
+}
 
-export interface Playlist {}
+export interface Playlist {
+  internalid: number;
+  id: string;
+  title: string;
+  type: string;
+  lastSubscribed: number;
+  songList: string;
+  settings: string;
+}
