@@ -9,34 +9,19 @@ import r128gainTable from '@utils/db/schema/r128gainTable';
 import lyricTable from '@utils/db/schema/lyricTable';
 import abRepeatTable from '@utils/db/schema/abrepeatTable';
 import tempTable from '@utils/db/schema/tempSongTable';
+import songTable from '@utils/db/schema/songTable';
+import playlistTable from '@utils/db/schema/playlistTable';
 import db from '@utils/db/sql';
 import { getPlaybackCountAPI, getPlaybackCountsAPI } from '@utils/db/sqlAPI';
 import { logger } from '@utils/Logger';
-
-interface PlaybackCount {
-  songcid: string;
-  count: number;
-  lastPlayed: number | null;
-}
-
-interface R128Gain {
-  songcid: string;
-  r128gain: number | null;
-}
-
-interface ABRepeat {
-  songcid: string;
-  a: number | null;
-  b: number | null;
-}
-
-interface Lyric {
-  songId: string;
-  lyric: string;
-  lyricKey: string;
-  lyricOffset: number;
-  source?: string | null;
-}
+import type {
+  ABRepeat,
+  Lyric,
+  PlaybackCount,
+  R128Gain,
+  Song,
+  Playlist,
+} from './type';
 
 const loadPlaylistToTemp = async (songcids: NoxMedia.Song[]) => {
   await db.delete(tempTable);
@@ -92,6 +77,26 @@ export const restoreR128Gain = async (data: R128Gain[], reset = false) => {
     await db.insert(r128gainTable).values(data).onConflictDoNothing();
   } catch (e) {
     logger.error(`[APMSQL] failed to import r128gain! ${e}`);
+  }
+};
+
+export const restoreSongs = async (data: Song[], reset = true) => {
+  if (!data) return;
+  try {
+    reset && (await db.delete(songTable));
+    await db.insert(songTable).values(data).onConflictDoNothing();
+  } catch (e) {
+    logger.error(`[APMSQL] failed to import songTable!! CRITICAL ${e}`);
+  }
+};
+
+export const restorePlaylist = async (data: Playlist[], reset = false) => {
+  if (!data) return;
+  try {
+    reset && (await db.delete(playlistTable));
+    await db.insert(playlistTable).values(data).onConflictDoNothing();
+  } catch (e) {
+    logger.error(`[APMSQL] failed to import playlist table! ${e}`);
   }
 };
 

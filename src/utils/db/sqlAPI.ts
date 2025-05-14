@@ -175,3 +175,15 @@ export const getPlaylist = async (
     songList: songs,
   };
 };
+
+export const getSongSQLID = async (v: NoxMedia.Song) => {
+  const res = db
+    .select({ id: songTable.internalid })
+    .from(songTable)
+    .where(eq(songTable.id, v.id))
+    .get();
+  if (res !== undefined) return res.id;
+  // insert it
+
+  return -1;
+};
