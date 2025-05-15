@@ -55,3 +55,12 @@ export interface Playlist {
   songList: string;
   settings: string;
 }
+
+export interface Override {
+  r128gain?: boolean;
+  abrepeat?: boolean;
+  lyric?: boolean;
+  playlist?: boolean;
+  playbackCount?: boolean;
+  song?: boolean;
+}

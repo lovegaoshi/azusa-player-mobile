@@ -16,6 +16,7 @@ import {
 } from './sqlStorage';
 import logger from '../Logger';
 import { StorageKeys } from '@enums/Storage';
+import type { Override } from './type';
 
 const migrateR128GainToSQL = async () => {
   try {
@@ -97,14 +98,7 @@ const migratePlaylist = async (forced = false) => {
   await saveItem(StorageKeys.EXPO_SQL_MIGRATION, 'true');
 };
 
-interface Migration {
-  r128gain?: boolean;
-  abrepeat?: boolean;
-  lyric?: boolean;
-  playlist?: boolean;
-}
-
-export default async ({ playlist = false }: Migration) => {
+export default async ({ playlist = false }: Override) => {
   await migrateR128GainToSQL();
   await migrateABRepeatToSQL();
   await migrateLyricToSQL();

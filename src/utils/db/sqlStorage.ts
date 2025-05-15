@@ -27,6 +27,7 @@ import type {
   R128Gain,
   Song,
   Playlist,
+  Override,
 } from './type';
 import { conflictUpdateSetAllColumns } from '@utils/db/helper';
 import { dummyPlaylist } from '@objects/Playlist';
@@ -75,7 +76,7 @@ export const restoreABRepeat = async (data: ABRepeat[], reset = false) => {
       .values(data)
       .onConflictDoUpdate({
         target: abRepeatTable.songcid,
-        set: conflictUpdateSetAllColumns(playbackTable, ['songcid', 'id']),
+        set: conflictUpdateSetAllColumns(abRepeatTable, ['songcid', 'id']),
       });
   } catch (e) {
     logger.error(`[APMSQL] failed to import abRepeatTable! ${e}`);
@@ -146,14 +147,24 @@ export const restorePlaylist = async (data: Playlist[], reset = false) => {
   }
 };
 
-export const importSQL = async (data: any) => {
+export const importSQL = async (
+  data: any,
+  {
+    r128gain = false,
+    abrepeat = false,
+    lyric = false,
+    playlist = false,
+    playbackCount = false,
+    song = false,
+  }: Override,
+) => {
   try {
-    await restoreSongs(data.songs);
-    await restorePlaylist(data.playlist);
-    await restorePlaybackCount(data.playbackCount);
-    await restoreLyric(data.lyric);
-    await restoreR128Gain(data.r128gain);
-    await restoreABRepeat(data.abrepeat);
+    await restoreSongs(data?.songs, song);
+    await restorePlaylist(data?.playlist, playlist);
+    await restorePlaybackCount(data?.playbackCount, playbackCount);
+    await restoreLyric(data?.lyric, lyric);
+    await restoreR128Gain(data?.r128gain, r128gain);
+    await restoreABRepeat(data?.abrepeat, abrepeat);
   } catch (e) {
     logger.error(e);
     logger.error('[APMSQL] Import SQL failed');

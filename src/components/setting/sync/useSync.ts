@@ -52,6 +52,7 @@ const useSync = () => {
           },
           {
             text: t('Sync.NoxExtensionAppend'),
+            // HACK: this only supports sql stored playlists compatibility wise
             onPress: () => {
               setSyncCheckVisible(true);
               setNoxExtensionContent(
@@ -89,7 +90,7 @@ const useSync = () => {
   };
 
   const isSyncNoxExtension = (parsedContent: any) => {
-    return Array.isArray(parsedContent.MyFavList);
+    return !Array.isArray(parsedContent);
   };
 
   const restoreFromUint8Array = async (content: Uint8Array) => {
