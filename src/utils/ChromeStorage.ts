@@ -15,6 +15,7 @@ import {
   getRegExtractMapping as _getRegExtractMapping,
   getDefaultTheme,
 } from '@utils/ChromeStorageAPI';
+import { getPlaylist as getPlaylistSQL } from '@utils/db/sqlAPI';
 import { dummyPlaylist, dummyPlaylistList } from '@objects/Playlist';
 import { NoxRepeatMode } from '@enums/RepeatMode';
 import { PlaylistTypes } from '@enums/Playlist';
@@ -191,7 +192,6 @@ export const saveLastPlayDuration = (val: number) =>
   saveItem(StorageKeys.LAST_PLAY_DURATION, val);
 
 export const initPlayerObject = async (safeMode = false) => {
-  const lyricMapping = (await getLyricMapping()) || {};
   const playerObject = {
     settings: {
       ...DefaultSetting,
@@ -216,7 +216,6 @@ export const initPlayerObject = async (safeMode = false) => {
     skin: await getItem(StorageKeys.SKIN, getDefaultTheme()),
     skins: (await getPlayerSkins()) || [],
     cookies: await getItem(StorageKeys.COOKIES, {}),
-    lyricMapping,
     lastPlayDuration: await getItem(StorageKeys.LAST_PLAY_DURATION, 0),
     colorScheme: await getColorScheme(),
     defaultSearchOptions: await getDefaultSearch(),
@@ -239,7 +238,7 @@ export const initPlayerObject = async (safeMode = false) => {
   await timeFunction(async () => {
     await Promise.all(
       playerObject.playlistIds.map(async id => {
-        const retrievedPlaylist = await getPlaylist({
+        const retrievedPlaylist = await getPlaylistSQL({
           key: id,
           hydrateSongList: !playerObject.settings.memoryEfficiency,
         });
@@ -252,7 +251,10 @@ export const initPlayerObject = async (safeMode = false) => {
 };
 
 export const clearPlaylists = async () => {
-  const playlistIds = await getItem(StorageKeys.MY_FAV_LIST_KEY, []);
+  const playlistIds = (await getItem(
+    StorageKeys.MY_FAV_LIST_KEY,
+    [],
+  )) as string[];
   await savePlaylistIds([]);
   return playlistIds.map(_delPlaylist);
 };

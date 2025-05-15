@@ -67,29 +67,40 @@ const migrateLyricToSQL = async () => {
   }
 };
 
-const migratePlaylist = async () => {
-  const playlists = await getItem(StorageKeys.MY_FAV_LIST_KEY, []);
-  if (playlists.length > 0) {
-    logger.debug(`[APMSQL] migrating playlist. `);
-    await Promise.all(
-      playlists.map(async (key: string) => {
-        try {
-          const playlist = await getPlaylist({
-            key,
-          });
-          return migratePlaylistToSQL(playlist);
-        } catch {
-          logger.warn(`[APMSQL] failed to migrate playlist ${key} (DNE).`);
-        }
-      }),
-    );
-    // await clearPlaylists();
+const migratePlaylist = async (forced = false) => {
+  const migrated = await getItem(StorageKeys.EXPO_SQL_MIGRATION, false);
+  if (!forced && migrated) {
+    return;
   }
+  const playlists = await getItem(StorageKeys.MY_FAV_LIST_KEY, []);
+  logger.debug(`[APMSQL] migrating playlist. `);
+  await Promise.all(
+    playlists.map(async (key: string) => {
+      try {
+        const playlist = await getPlaylist({
+          key,
+        });
+        return migratePlaylistToSQL(playlist);
+      } catch {
+        logger.warn(`[APMSQL] failed to migrate playlist ${key} (DNE).`);
+      }
+    }),
+  );
+  await Promise.all(await clearPlaylists());
+  await saveItem(StorageKeys.MY_FAV_LIST_KEY, playlists);
+  await saveItem(StorageKeys.EXPO_SQL_MIGRATION, 'true');
 };
 
-export default async () => {
+interface Migration {
+  r128gain?: boolean;
+  abrepeat?: boolean;
+  lyric?: boolean;
+  playlist?: boolean;
+}
+
+export default async ({ playlist = false }: Migration) => {
   await migrateR128GainToSQL();
   await migrateABRepeatToSQL();
   await migrateLyricToSQL();
-  await migratePlaylist();
+  await migratePlaylist(playlist);
 };

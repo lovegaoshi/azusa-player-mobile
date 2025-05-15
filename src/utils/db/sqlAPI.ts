@@ -161,6 +161,7 @@ export const getSong = async (
 export const getPlaylist = async ({
   key = '',
   defaultPlaylist = dummyPlaylist,
+  hydrateSongList = true,
 }): Promise<NoxMedia.Playlist> => {
   const res = db
     .select()
@@ -172,7 +173,7 @@ export const getPlaylist = async ({
   const songListIds = JSON.parse(res.songList) as number[];
   let songs: NoxMedia.Song[] = [];
   // innerjoin will fail if tempidTable is empty
-  if (songListIds.length > 0) {
+  if (hydrateSongList && songListIds.length > 0) {
     await db.delete(tempidTable);
     await db
       .insert(tempidTable)

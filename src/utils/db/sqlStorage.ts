@@ -109,8 +109,8 @@ export const restoreR128Gain = async (data: R128Gain[], reset = false) => {
   }
 };
 
-export const restoreSongs = async (data: Song[], reset = true) => {
-  if (!data) return;
+export const restoreSongs = async (data?: Song[], reset = true) => {
+  if (!data || data.length === 0) return;
   try {
     reset && (await db.delete(songTable));
     await db
