@@ -153,9 +153,12 @@ export const importSQL = async (
     r128gain = false,
     abrepeat = false,
     lyric = false,
-    playlist = false,
+    // since internalid instead of cid is stored, there is no reason to not wipe playlist/song
+    // on an importSQL event; else are primed by cid so they are fine.
+    // to achieve NoxExtension.append first hydrate the songs then use migratePlaylistSQL
+    playlist = true,
     playbackCount = false,
-    song = false,
+    song = true,
   }: Override,
 ) => {
   try {

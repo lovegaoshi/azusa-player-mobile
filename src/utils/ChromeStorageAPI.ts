@@ -189,6 +189,7 @@ export const importPlayerContentRaw = async (
     await clearStorage();
     await importSQL(
       parseImportedPartial(StorageKeys.SQL_PLACEHOLDER, parsedContent),
+      {},
     );
     await AsyncStorage.multiSet.bind(AsyncStorage)(
       removePlaceholders(parsedContent),

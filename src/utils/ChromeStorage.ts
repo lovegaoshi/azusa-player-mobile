@@ -7,7 +7,6 @@ import {
   getMapping,
   saveChucked,
   loadChucked,
-  savePlaylist,
   delPlaylist as _delPlaylist,
   importPlayerContentRaw as _importPlayerContentRaw,
   getColorScheme,
@@ -23,6 +22,7 @@ import { StorageKeys, SearchOptions } from '@enums/Storage';
 import { DefaultSetting, OverrideSetting } from '@objects/Storage';
 import { getAlistCred } from './alist/storage';
 import { timeFunction } from './Utils';
+import { importSQL, savePlaylist } from '../utils/db/sqlStorage';
 
 export const getFadeInterval = async () =>
   Number(await getItem(StorageKeys.FADE_INTERVAL)) || 0;
@@ -179,9 +179,6 @@ export const delPlaylist = (playlistId: string, playlistIds: string[]) => {
   return playlistIds2;
 };
 
-export const saveFavPlaylist = (playlist: NoxMedia.Playlist) =>
-  savePlaylist(playlist, StorageKeys.FAVORITE_PLAYLIST_KEY);
-
 export const savelastPlaylistId = (val: [string, string]) =>
   saveItem(StorageKeys.LAST_PLAY_LIST, val);
 
@@ -244,17 +241,11 @@ export const initPlayerObject = async (safeMode = false) => {
   return playerObject;
 };
 
-export const clearPlaylists = async () => {
-  const playlistIds = (await getItem(
-    StorageKeys.MY_FAV_LIST_KEY,
-    [],
-  )) as string[];
-  await savePlaylistIds([]);
-  return playlistIds.map(_delPlaylist);
-};
-
 const saveImportedPlaylist = async (playlists: any[]) => {
   for (const playlist of playlists) {
+    if (!playlist) {
+      return;
+    }
     await savePlaylist({
       ...dummyPlaylistList,
       // HACK: seriously who thought of renaming variables is a good idea?
@@ -268,12 +259,19 @@ const saveImportedPlaylist = async (playlists: any[]) => {
 };
 
 export const clearPlaylistNImport = async (parsedContent: any) => {
-  await clearPlaylists();
+  await importSQL(parsedContent[StorageKeys.SQL_PLACEHOLDER], {});
+  // this is only for the old style: songList is still hydrated. here if they are NOT,
+  // its the new style (SQL) and should skip
   await saveImportedPlaylist(
-    parsedContent[StorageKeys.MY_FAV_LIST_KEY].map((val: string) => ({
-      ...parsedContent[val],
-      songList: parsedContent[`${val}-songList`],
-    })),
+    parsedContent[StorageKeys.MY_FAV_LIST_KEY].map((val: string) => {
+      const songList = parsedContent[`${val}-songList`];
+      return songList
+        ? {
+            ...parsedContent[val],
+            songList,
+          }
+        : undefined;
+    }),
   );
   await savePlaylistIds(parsedContent[StorageKeys.MY_FAV_LIST_KEY]);
 };
