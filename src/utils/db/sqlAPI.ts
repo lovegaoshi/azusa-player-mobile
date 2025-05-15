@@ -17,6 +17,8 @@ export const exportSQL = async () => {
     lyric: db.select().from(lyricTable).all(),
     r128gain: db.select().from(r128GainTable).all(),
     abrepeat: db.select().from(abrepeatTable).all(),
+    songs: db.select().from(songTable).all(),
+    playlists: db.select().from(playlistTable).all(),
   };
   return JSON.stringify(res);
 };
@@ -183,6 +185,7 @@ export const getPlaylist = async ({
       .select({ ...getTableColumns(songTable) })
       .from(songTable)
       .innerJoin(tempidTable, eq(tempidTable.songid, songTable.internalid))
+      .orderBy(tempidTable.id)
       .all() as NoxMedia.Song[];
   }
   const settings = JSON.parse(res.settings);

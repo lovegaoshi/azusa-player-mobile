@@ -46,7 +46,7 @@ export const restorePlaybackCount = async (
   data: PlaybackCount[],
   reset = false,
 ) => {
-  if (!data) return;
+  if (!data || data.length === 0) return;
   try {
     reset && (await db.delete(playbackTable));
     await db
@@ -62,7 +62,7 @@ export const restorePlaybackCount = async (
 };
 
 export const restoreABRepeat = async (data: ABRepeat[], reset = false) => {
-  if (!data) return;
+  if (!data || data.length === 0) return;
   try {
     reset && (await db.delete(abRepeatTable));
     await db
@@ -78,7 +78,7 @@ export const restoreABRepeat = async (data: ABRepeat[], reset = false) => {
 };
 
 export const restoreLyric = async (data: Lyric[], reset = false) => {
-  if (!data) return;
+  if (!data || data.length === 0) return;
   try {
     reset && (await db.delete(lyricTable));
     await db
@@ -94,7 +94,7 @@ export const restoreLyric = async (data: Lyric[], reset = false) => {
 };
 
 export const restoreR128Gain = async (data: R128Gain[], reset = false) => {
-  if (!data) return;
+  if (!data || data.length === 0) return;
   try {
     reset && (await db.delete(r128gainTable));
     await db
@@ -126,7 +126,7 @@ export const restoreSongs = async (data?: Song[], reset = true) => {
 };
 
 export const restorePlaylist = async (data: Playlist[], reset = false) => {
-  if (!data) return;
+  if (!data || data.length === 0) return;
   try {
     reset && (await db.delete(playlistTable));
     await db
@@ -141,9 +141,10 @@ export const restorePlaylist = async (data: Playlist[], reset = false) => {
   }
 };
 
-export const importSQL = async (json: string) => {
+export const importSQL = async (data: any) => {
   try {
-    const data = JSON.parse(json);
+    await restoreSongs(data.songs);
+    await restorePlaylist(data.playlist);
     await restorePlaybackCount(data.playbackCount);
     await restoreLyric(data.lyric);
     await restoreR128Gain(data.r128gain);

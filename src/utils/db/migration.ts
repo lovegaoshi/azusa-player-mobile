@@ -5,10 +5,9 @@ import {
   saveABMapping,
   getLyricMapping,
   saveLyricMapping,
-  clearPlaylists,
   getPlaylist,
 } from '@utils/ChromeStorage';
-import { saveItem, getItem } from '@utils/ChromeStorageAPI';
+import { saveItem, getItem, delPlaylist } from '@utils/ChromeStorageAPI';
 import {
   restoreR128Gain,
   restoreABRepeat,
@@ -79,6 +78,7 @@ const migratePlaylist = async (forced = false) => {
       try {
         const playlist = await getPlaylist({
           key,
+          throwOnNull: true,
         });
         return migratePlaylistToSQL(playlist);
       } catch {
@@ -86,8 +86,16 @@ const migratePlaylist = async (forced = false) => {
       }
     }),
   );
-  await Promise.all(await clearPlaylists());
-  await saveItem(StorageKeys.MY_FAV_LIST_KEY, playlists);
+  await Promise.all(playlists.map(delPlaylist));
+
+  /**
+  TODO: migrate favPlaylist, but how
+  const favPlaylist = await getPlaylist({
+    key: StorageKeys.FAVORITE_PLAYLIST_KEY,
+  });
+  await migratePlaylistToSQL(favPlaylist);
+  await delPlaylist(StorageKeys.FAVORITE_PLAYLIST_KEY);
+   */
   await saveItem(StorageKeys.EXPO_SQL_MIGRATION, 'true');
 };
 
@@ -98,7 +106,7 @@ interface Migration {
   playlist?: boolean;
 }
 
-export default async ({ playlist = false }: Migration) => {
+export default async ({ playlist = true }: Migration) => {
   await migrateR128GainToSQL();
   await migrateABRepeatToSQL();
   await migrateLyricToSQL();
