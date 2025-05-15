@@ -97,6 +97,7 @@ interface GetPlaylist {
   key: string;
   defaultPlaylist?: () => NoxMedia.Playlist;
   hydrateSongList?: boolean;
+  throwOnNull?: boolean;
 }
 
 /**
@@ -107,9 +108,13 @@ export const getPlaylist = async ({
   key,
   defaultPlaylist = dummyPlaylist,
   hydrateSongList = true,
+  throwOnNull = false,
 }: GetPlaylist): Promise<NoxMedia.Playlist> => {
   const dPlaylist = defaultPlaylist();
   const retrievedPlaylist = await getItem(key);
+  if (throwOnNull && !retrievedPlaylist) {
+    throw new Error(`[APMStorage] playlist ${key} not found. throwing...`);
+  }
   try {
     return {
       ...dPlaylist,

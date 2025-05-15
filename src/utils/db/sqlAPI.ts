@@ -168,15 +168,22 @@ export const getPlaylist = async ({
     .where(eq(playlistTable.id, key))
     .get();
   if (res === undefined) return defaultPlaylist();
-  const songListIds = JSON.parse(res.songList) as number[];
 
-  await db.delete(tempidTable);
-  await db.insert(tempidTable).values(songListIds.map(v => ({ songid: v })));
-  const songs = db
-    .select({ ...getTableColumns(songTable) })
-    .from(songTable)
-    .innerJoin(tempidTable, eq(tempidTable.songid, songTable.internalid))
-    .all();
+  const songListIds = JSON.parse(res.songList) as number[];
+  let songs: NoxMedia.Song[] = [];
+  // innerjoin will fail if tempidTable is empty
+  if (songListIds.length > 0) {
+    await db.delete(tempidTable);
+    await db
+      .insert(tempidTable)
+      .values(songListIds.map(v => ({ songid: v })))
+      .onConflictDoNothing();
+    songs = db
+      .select({ ...getTableColumns(songTable) })
+      .from(songTable)
+      .innerJoin(tempidTable, eq(tempidTable.songid, songTable.internalid))
+      .all() as NoxMedia.Song[];
+  }
   const settings = JSON.parse(res.settings);
   return {
     ...defaultPlaylist(),

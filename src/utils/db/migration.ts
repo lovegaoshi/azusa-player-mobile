@@ -17,7 +17,6 @@ import {
 } from './sqlStorage';
 import logger from '../Logger';
 import { StorageKeys } from '@enums/Storage';
-import { getPlaylist as getPlaylistSQL } from './sqlAPI';
 
 const migrateR128GainToSQL = async () => {
   try {
@@ -74,13 +73,18 @@ const migratePlaylist = async () => {
     logger.debug(`[APMSQL] migrating playlist. `);
     await Promise.all(
       playlists.map(async (key: string) => {
-        const playlist = await getPlaylist({ key });
-        return migratePlaylistToSQL(playlist);
+        try {
+          const playlist = await getPlaylist({
+            key,
+          });
+          return migratePlaylistToSQL(playlist);
+        } catch {
+          logger.warn(`[APMSQL] failed to migrate playlist ${key} (DNE).`);
+        }
       }),
     );
     // await clearPlaylists();
   }
-  console.log('APMSQL', await getPlaylistSQL(playlists[0]));
 };
 
 export default async () => {
