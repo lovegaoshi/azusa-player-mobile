@@ -39,6 +39,7 @@ interface NoxSetting
     playlist: NoxMedia.Playlist,
     addSongs?: NoxMedia.Song[],
     removeSongs?: NoxMedia.Song[],
+    save?: boolean,
   ) => NoxMedia.Playlist;
 
   setCurrentPlayingList: (val: NoxMedia.Playlist) => boolean;
@@ -110,7 +111,7 @@ export const useNoxSetting = create<NoxSetting>((set, get, storeApi) => ({
     return saveSettings(newPlayerSetting);
   },
 
-  updatePlaylist: (playlist, addSongs = [], removeSongs = []) => {
+  updatePlaylist: (playlist, addSongs = [], removeSongs = [], save = true) => {
     const {
       playlists,
       playerSetting,
@@ -125,7 +126,7 @@ export const useNoxSetting = create<NoxSetting>((set, get, storeApi) => ({
       set({ currentPlaylist: playlist });
     }
     set({ playlists });
-    savePlaylist(playlist);
+    save && savePlaylist(playlist);
     set({ playlistShouldReRender: !playlistShouldReRender });
     return playlist;
   },
