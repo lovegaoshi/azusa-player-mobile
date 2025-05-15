@@ -13,8 +13,10 @@ import songTable from '@utils/db/schema/songTable';
 import playlistTable from '@utils/db/schema/playlistTable';
 import db from '@utils/db/sql';
 import {
+  getFavSongList,
   getPlaybackCountAPI,
   getPlaybackCountsAPI,
+  getPlaylist,
   getSongSQLID,
 } from '@utils/db/sqlAPI';
 import { logger } from '@utils/Logger';
@@ -27,6 +29,9 @@ import type {
   Playlist,
 } from './type';
 import { conflictUpdateSetAllColumns } from '@utils/db/helper';
+import { dummyPlaylist } from '@objects/Playlist';
+import { StorageKeys } from '@enums/Storage';
+import { PlaylistTypes } from '@enums/Playlist';
 
 const loadPlaylistToTemp = async (songcids: NoxMedia.Song[]) => {
   await db.delete(tempTable);
@@ -282,4 +287,47 @@ export const savePlaylist = async (playlist: NoxMedia.Playlist) => {
     playlist.songList.map(async v => v.internalid ?? getSongSQLID(v)),
   );
   await migratePlaylistToSQL(playlist, async () => newIndices);
+};
+
+export const getFavoritePlaylist = async () =>
+  getPlaylist({
+    key: StorageKeys.FAVORITE_PLAYLIST_KEY,
+    defaultPlaylist: () => dummyPlaylist('Favorite', PlaylistTypes.Favorite),
+  });
+
+interface GetFavContainSongParams {
+  song: NoxMedia.Song;
+  add?: boolean;
+  remove?: boolean;
+}
+export const getFavContainSong = async ({
+  song,
+  add = false,
+  remove = false,
+}: GetFavContainSongParams) => {
+  const res = await getFavSongList();
+  if (res === undefined) {
+    await migratePlaylistToSQL(
+      dummyPlaylist('Favorite', PlaylistTypes.Favorite),
+    );
+  }
+  const songList: number[] = res ? JSON.parse(res) : [];
+  const songInternalIndex = song.internalid ?? (await getSongSQLID(song));
+  const update = () =>
+    db
+      .update(playlistTable)
+      .set({ songList: JSON.stringify(songList) })
+      .where(eq(playlistTable.id, StorageKeys.FAVORITE_PLAYLIST_KEY));
+
+  if (add) {
+    songList.unshift(songInternalIndex);
+    await update();
+    return true;
+  }
+  if (remove) {
+    songList.splice(songList.indexOf(songInternalIndex), 1);
+    await update();
+    return false;
+  }
+  return songList.includes(songInternalIndex);
 };

@@ -3,7 +3,6 @@ import { StateCreator } from 'zustand';
 import { dummyPlaylist, dummyPlaylistList } from '../objects/Playlist';
 import {
   delPlaylist,
-  saveFavPlaylist,
   savePlaylistIds,
   savelastPlaylistId,
 } from '@utils/ChromeStorage';
@@ -41,8 +40,6 @@ export interface PlaylistsStore {
   setCurrentPlaylist: (val: NoxMedia.Playlist) => void;
   searchPlaylist: NoxMedia.Playlist;
   setSearchPlaylist: (val: NoxMedia.Playlist) => void;
-  favoritePlaylist: NoxMedia.Playlist;
-  setFavoritePlaylist: (val: NoxMedia.Playlist) => void;
   addPlaylist: (val: NoxMedia.Playlist) => void;
   removePlaylist: (val: string) => void;
 }
@@ -85,14 +82,6 @@ const store: StateCreator<PlaylistsStore, [], [], PlaylistsStore> = (
     playlists[StorageKeys.SEARCH_PLAYLIST_KEY] = val;
     set({ searchPlaylist: val, playlists });
   },
-  favoritePlaylist: dummyPlaylist(),
-  setFavoritePlaylist: val => {
-    const { playlists } = get();
-    playlists[StorageKeys.FAVORITE_PLAYLIST_KEY] = val;
-    saveFavPlaylist(val);
-    set({ favoritePlaylist: val, playlists });
-  },
-
   addPlaylist: async playlist => {
     const { playlistIds, playlists } = get();
     const newPlaylistIds = playlistIds.concat(playlist.id);

@@ -1,7 +1,6 @@
 // https://github.com/drizzle-team/drizzle-orm/discussions/2557
 // src/db/helpers.ts
-import { sql } from 'drizzle-orm';
-import { getTableColumns } from 'drizzle-orm';
+import { sql, getTableColumns } from 'drizzle-orm';
 import {
   getTableConfig,
   SQLiteTable,

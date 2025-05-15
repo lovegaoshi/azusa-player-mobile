@@ -10,6 +10,7 @@ import tempidTable from './schema/tempSongidTable';
 import songTable from './schema/songTable';
 import playlistTable from './schema/playlistTable';
 import { dummyPlaylist } from '@objects/Playlist';
+import { StorageKeys } from '@enums/Storage';
 
 export const exportSQL = async () => {
   const res = {
@@ -225,4 +226,13 @@ export const getSongSQLID = async (v: NoxMedia.Song) => {
 export const getPlaylistIds = async () => {
   const res = db.select({ id: playlistTable.id }).from(playlistTable).all();
   return res.map(v => v.id);
+};
+
+export const getFavSongList = async () => {
+  const res = db
+    .select({ songlist: playlistTable.songList })
+    .from(playlistTable)
+    .where(eq(playlistTable.id, StorageKeys.FAVORITE_PLAYLIST_KEY))
+    .get();
+  return res?.songlist;
 };

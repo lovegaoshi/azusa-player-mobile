@@ -205,10 +205,6 @@ export const initPlayerObject = async (safeMode = false) => {
       i18n.t('PlaylistOperations.searchListName'),
       PlaylistTypes.Search,
     ),
-    favoriPlaylist: await getPlaylist({
-      key: StorageKeys.FAVORITE_PLAYLIST_KEY,
-      defaultPlaylist: () => dummyPlaylist('Favorite', PlaylistTypes.Favorite),
-    }),
     playbackMode: await getItem(
       StorageKeys.PLAYMODE_KEY,
       NoxRepeatMode.Shuffle,
@@ -232,8 +228,6 @@ export const initPlayerObject = async (safeMode = false) => {
 
   playerObject.playlists[StorageKeys.SEARCH_PLAYLIST_KEY] =
     playerObject.searchPlaylist;
-  playerObject.playlists[StorageKeys.FAVORITE_PLAYLIST_KEY] =
-    playerObject.favoriPlaylist;
 
   await timeFunction(async () => {
     await Promise.all(

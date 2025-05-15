@@ -88,14 +88,12 @@ const migratePlaylist = async (forced = false) => {
   );
   await Promise.all(playlists.map(delPlaylist));
 
-  /**
-  TODO: migrate favPlaylist, but how
   const favPlaylist = await getPlaylist({
     key: StorageKeys.FAVORITE_PLAYLIST_KEY,
   });
   await migratePlaylistToSQL(favPlaylist);
   await delPlaylist(StorageKeys.FAVORITE_PLAYLIST_KEY);
-   */
+
   await saveItem(StorageKeys.EXPO_SQL_MIGRATION, 'true');
 };
 
@@ -106,7 +104,7 @@ interface Migration {
   playlist?: boolean;
 }
 
-export default async ({ playlist = true }: Migration) => {
+export default async ({ playlist = false }: Migration) => {
   await migrateR128GainToSQL();
   await migrateABRepeatToSQL();
   await migrateLyricToSQL();
