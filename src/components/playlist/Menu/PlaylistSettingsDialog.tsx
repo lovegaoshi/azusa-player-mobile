@@ -6,7 +6,8 @@ import { useTranslation } from 'react-i18next';
 import { useNoxSetting } from '@stores/useApp';
 import NoxInput from '@components/dialogs/NoxInput';
 import SplitInput from '@components/dialogs/SplitInput';
-import usePlaylistSetting from '@hooks/usePlaylistSetting';
+import usePlaylistSetting from './usePlaylistSetting';
+import PlaylistRepeatMode from './PlaylistRepeatMode';
 
 interface Props {
   visible: boolean;
@@ -30,8 +31,10 @@ const PlaylistDialog = ({
   );
   const {
     useBiliShazam,
-    useBiliSync,
-    useNewSongOverwrite,
+    biliSync,
+    newSongOverwrite,
+    repeatMode,
+    setRepeatMode,
     toggleBiliShazam,
     toggleBiliSync,
     toggleNewSongOverwrite,
@@ -94,7 +97,7 @@ const PlaylistDialog = ({
         </View>
         <View style={styles.switchContainer}>
           <Switch
-            value={useBiliSync}
+            value={biliSync}
             onValueChange={toggleBiliSync}
             color={playerStyle.colors.onSurfaceVariant}
           />
@@ -104,7 +107,7 @@ const PlaylistDialog = ({
         </View>
         <View style={styles.switchContainer}>
           <Switch
-            value={useNewSongOverwrite}
+            value={newSongOverwrite}
             onValueChange={toggleNewSongOverwrite}
             color={playerStyle.colors.onSurfaceVariant}
           />
@@ -112,6 +115,7 @@ const PlaylistDialog = ({
             {t('PlaylistSettingsDialog.useNewSongOverwriteLabel')}
           </Text>
         </View>
+        <PlaylistRepeatMode onPress={setRepeatMode} mode={repeatMode} />
       </Dialog.Content>
 
       <Dialog.Actions>

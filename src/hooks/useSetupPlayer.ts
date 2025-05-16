@@ -6,7 +6,7 @@ import { SetupService, additionalPlaybackService } from 'services';
 import { initPlayerObject } from '@utils/ChromeStorage';
 import { getCurrentTPQueue, initializePlaybackMode } from '@stores/playingList';
 import useVersionCheck from '@hooks/useVersionCheck';
-import { songlistToTracklist } from '@utils/RNTPUtils';
+import { cycleThroughPlaymode, songlistToTracklist } from '@utils/RNTPUtils';
 import { initializeStores } from '@stores/initializeStores';
 import { IntentData } from '@enums/Intent';
 import { useNoxSetting } from '@stores/useApp';
@@ -30,6 +30,7 @@ const initializePlayer = async (safeMode = false) => {
     storedPlayerSetting,
     lastPlayDuration,
     playbackMode,
+    currentPlayingList,
   } = await initializeStores({ val: await initPlayerObject(safeMode) });
   const serviceOptions = {
     noInterruption: storedPlayerSetting.noInterruption,
@@ -43,7 +44,12 @@ const initializePlayer = async (safeMode = false) => {
   };
   await SetupService(serviceOptions);
   buildBrowseTree(playlists);
-  initializePlaybackMode(playbackMode);
+  cycleThroughPlaymode(initializePlaybackMode(playbackMode));
+  // HACK: potential race condition
+  currentPlayingList.repeatMode &&
+    cycleThroughPlaymode(
+      initializePlaybackMode(currentPlayingList.repeatMode, false),
+    );
 
   const currentQueue = getCurrentTPQueue();
   const findCurrentSong = currentQueue.find(val => val.id === currentPlayingID);

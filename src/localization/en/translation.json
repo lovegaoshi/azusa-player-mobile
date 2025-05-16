@@ -105,6 +105,7 @@
     "blacklistedUrlLabel": "Banned BVIDs",
     "useBiliShazamLabel": "Use BiliShazam",
     "useBiliSyncLabel": "BiliSync as favorite",
+    "repeatMode": "playlist specific repeat mode",
     "useNewSongOverwriteLabel": "New songs overwrite"
   },
   "RenameSongDialog": {

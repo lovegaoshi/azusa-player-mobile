@@ -1,5 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useNoxSetting } from '@stores/useApp';
+import { cycleThroughPlaymode } from '@utils/RNTPUtils';
+import { initializePlaybackMode } from '@stores/playingList';
 
 export default (playlist: NoxMedia.Playlist) => {
   const updatePlaylist = useNoxSetting(state => state.updatePlaylist);
@@ -8,12 +10,13 @@ export default (playlist: NoxMedia.Playlist) => {
   const [blacklistedUrl, setBlacklistedUrl] = useState('');
   const [title, setTitle] = useState('');
   const [useBiliShazam, setUseBiliShazam] = useState(false);
-  const [useBiliSync, setUseBiliSync] = useState(false);
-  const [useNewSongOverwrite, setUseNewSongOverwrite] = useState(false);
+  const [biliSync, setBiliSync] = useState(false);
+  const [newSongOverwrite, setNewSongOverwrite] = useState(false);
+  const [repeatMode, setRepeatMode] = useState(playlist.repeatMode);
 
   const toggleBiliShazam = () => setUseBiliShazam(val => !val);
-  const toggleBiliSync = () => setUseBiliSync(val => !val);
-  const toggleNewSongOverwrite = () => setUseNewSongOverwrite(val => !val);
+  const toggleBiliSync = () => setBiliSync(val => !val);
+  const toggleNewSongOverwrite = () => setNewSongOverwrite(val => !val);
 
   const saveSetting = (
     setting: Partial<NoxMedia.Playlist> = {},
@@ -25,10 +28,14 @@ export default (playlist: NoxMedia.Playlist) => {
       subscribeUrl: subscribeUrl.split(';'),
       blacklistedUrl: blacklistedUrl.split(';'),
       useBiliShazam: useBiliShazam,
-      biliSync: useBiliSync,
-      newSongOverwrite: useNewSongOverwrite,
+      biliSync,
+      newSongOverwrite,
+      repeatMode,
       ...setting,
     };
+
+    repeatMode &&
+      cycleThroughPlaymode(initializePlaybackMode(repeatMode, false));
     updatePlaylist(updatedPlaylist);
     callback(updatedPlaylist);
   };
@@ -38,8 +45,9 @@ export default (playlist: NoxMedia.Playlist) => {
     setBlacklistedUrl(playlist.blacklistedUrl.join(';'));
     setTitle(playlist.title);
     setUseBiliShazam(playlist.useBiliShazam);
-    setUseBiliSync(playlist.biliSync);
-    setUseNewSongOverwrite(playlist.newSongOverwrite ?? false);
+    setBiliSync(playlist.biliSync);
+    setNewSongOverwrite(playlist.newSongOverwrite ?? false);
+    setRepeatMode(playlist.repeatMode);
   };
 
   useEffect(loadSetting, [playlist]);
@@ -52,11 +60,13 @@ export default (playlist: NoxMedia.Playlist) => {
     title,
     setTitle,
     useBiliShazam,
-    useBiliSync,
-    useNewSongOverwrite,
+    biliSync,
+    newSongOverwrite,
     toggleBiliShazam,
     toggleBiliSync,
     toggleNewSongOverwrite,
+    repeatMode,
+    setRepeatMode,
     saveSetting,
     loadSetting,
   };
