@@ -1,6 +1,7 @@
 import { SortOptions, PlaylistTypes } from '@enums/Playlist';
 import { Source } from '@enums/MediaFetch';
 import { LrcSource } from '@enums/LyricFetch';
+import { NoxRepeatMode } from '@enums/RepeatMode';
 
 declare global {
   namespace NoxMedia {
@@ -48,6 +49,7 @@ declare global {
       newSongOverwrite?: boolean;
 
       sort?: SortOptions;
+      repeatMode?: NoxRepeatMode;
       // function to support infinite loading; only applicable to
       // search playlists. bc we stringify playlists, this will be
       // lost upon loading from storage

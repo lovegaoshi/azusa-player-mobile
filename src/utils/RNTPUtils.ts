@@ -112,8 +112,7 @@ export const fadePlay = async () => {
   setTPR128Gain(await getR128GainAsync(), fadeIntervalMs, 0);
 };
 
-export const cycleThroughPlaymode = () => {
-  const customPlaymode = cyclePlaymode();
+export const cycleThroughPlaymode = (customPlaymode = cyclePlaymode()) => {
   if (isAndroid) {
     const oldOptions = getState().RNTPOptions;
     const newRNTPOptions = {

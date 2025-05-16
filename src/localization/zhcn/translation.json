@@ -105,6 +105,7 @@
     "blacklistedUrlLabel": "黑名单BV号",
     "useBiliShazamLabel": "使用b站识歌（王胡桃专用）",
     "useBiliSyncLabel": "b站收藏夹同步",
+    "repeatMode": "歌单重复模式",
     "useNewSongOverwriteLabel": "新歌曲同步时覆盖"
   },
   "RenameSongDialog": {
