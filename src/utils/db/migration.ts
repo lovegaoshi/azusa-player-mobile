@@ -81,7 +81,7 @@ const migratePlaylist = async (forced = false) => {
           key,
           throwOnNull: true,
         });
-        return migratePlaylistToSQL(playlist);
+        return await migratePlaylistToSQL(playlist);
       } catch {
         logger.warn(`[APMSQL] failed to migrate playlist ${key} (DNE).`);
       }

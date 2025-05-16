@@ -194,7 +194,7 @@ export const importPlayerContentRaw = async (
     await AsyncStorage.multiSet.bind(AsyncStorage)(
       removePlaceholders(parsedContent),
     );
-    APMMigration({});
+    APMMigration({ playlist: true });
     return content;
   }
 };
