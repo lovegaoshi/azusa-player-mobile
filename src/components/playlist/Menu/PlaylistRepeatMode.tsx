@@ -10,21 +10,19 @@ import noxPlayingList from '@stores/playingList';
 
 interface Props {
   mode?: NoxRepeatMode;
-  onPress: (v: NoxRepeatMode) => void;
+  onPress: (v?: NoxRepeatMode) => void;
 }
 
 export default ({ mode, onPress }: Props) => {
   const { t } = useTranslation();
-  const playMode = useStore(noxPlayingList, state => state.playmode);
   const playerStyle = useNoxSetting(state => state.playerStyle);
-  const actualMode = mode ?? playMode;
 
   const nextPlaymode = () => {
-    switch (actualMode) {
+    switch (mode) {
       case NoxRepeatMode.Repeat:
         return NoxRepeatMode.RepeatTrack;
       case NoxRepeatMode.RepeatTrack:
-        return NoxRepeatMode.Shuffle;
+        return undefined;
       case NoxRepeatMode.Shuffle:
         return NoxRepeatMode.Repeat;
       default:
@@ -39,7 +37,7 @@ export default ({ mode, onPress }: Props) => {
         style={{ paddingHorizontal: 11 }}
       >
         <Icon
-          source={actualMode}
+          source={mode ?? 'progress-question'}
           color={playerStyle.colors.primary}
           size={25}
         />

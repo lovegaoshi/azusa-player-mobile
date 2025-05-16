@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useNoxSetting } from '@stores/useApp';
 import { cycleThroughPlaymode } from '@utils/RNTPUtils';
-import { initializePlaybackMode } from '@stores/playingList';
+import playlistStore, { initializePlaybackMode } from '@stores/playingList';
 
 export default (playlist: NoxMedia.Playlist) => {
   const updatePlaylist = useNoxSetting(state => state.updatePlaylist);
@@ -34,8 +34,12 @@ export default (playlist: NoxMedia.Playlist) => {
       ...setting,
     };
 
-    repeatMode &&
-      cycleThroughPlaymode(initializePlaybackMode(repeatMode, false));
+    cycleThroughPlaymode(
+      initializePlaybackMode(
+        repeatMode ?? playlistStore.getState().playmode,
+        false,
+      ),
+    );
     updatePlaylist(updatedPlaylist);
     callback(updatedPlaylist);
   };

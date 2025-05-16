@@ -44,12 +44,12 @@ const initializePlayer = async (safeMode = false) => {
   };
   await SetupService(serviceOptions);
   buildBrowseTree(playlists);
-  cycleThroughPlaymode(initializePlaybackMode(playbackMode));
-  // HACK: potential race condition
-  currentPlayingList.repeatMode &&
-    cycleThroughPlaymode(
-      initializePlaybackMode(currentPlayingList.repeatMode, false),
-    );
+  cycleThroughPlaymode(
+    initializePlaybackMode(
+      currentPlayingList.repeatMode ?? playbackMode,
+      currentPlayingList.repeatMode === undefined,
+    ),
+  );
 
   const currentQueue = getCurrentTPQueue();
   const findCurrentSong = currentQueue.find(val => val.id === currentPlayingID);
