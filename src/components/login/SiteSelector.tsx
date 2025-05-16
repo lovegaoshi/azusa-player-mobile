@@ -14,6 +14,7 @@ interface Props {
   onSiteChange?: (site: Site) => void;
   defaultSite?: Site;
   sites?: Site[];
+  wrapCollapsible?: boolean;
 }
 
 export default ({
@@ -24,6 +25,7 @@ export default ({
   containerStyle = styles.container,
   onSiteChange,
   sites = Sites,
+  wrapCollapsible = true,
 }: Props) => {
   const [loginSite, setLoginSite] = useState<Site>(defaultSite);
   const collapsed = useCollapsible(state => state.collapse);
@@ -66,7 +68,22 @@ export default ({
 
   return (
     <View style={containerStyle}>
-      <Collapsible collapsed={collapsed}>
+      {/** HACK: terrible hack */}
+      {wrapCollapsible ? (
+        <Collapsible collapsed={collapsed}>
+          <View style={iconTabStyle}>
+            {sites.map(site => (
+              <IconButton
+                key={site}
+                style={{ opacity: getAnimatedOpacityRef(site) }}
+                icon={SiteIcon(site, iconSize)}
+                size={iconSize}
+                onPress={() => setLoginSiteAnimated(site)}
+              />
+            ))}
+          </View>
+        </Collapsible>
+      ) : (
         <View style={iconTabStyle}>
           {sites.map(site => (
             <IconButton
@@ -78,7 +95,7 @@ export default ({
             />
           ))}
         </View>
-      </Collapsible>
+      )}
       <LoginComponent loginSite={loginSite} />
     </View>
   );
