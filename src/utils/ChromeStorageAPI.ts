@@ -11,7 +11,6 @@ import { AppID } from '@objects/Storage';
 import AdaptiveTheme from '../components/styles/AdaptiveTheme';
 import { exportSQL } from '@utils/db/sqlAPI';
 import APMMigration from './db/migration';
-import { importSQL } from './db/sqlStorage';
 /**
  * noxplayer's storage handler.
  * ChromeStorage has quite a few changes from azusa player the chrome extension;
@@ -166,9 +165,7 @@ const parseImportedPartial = (
   key: string,
   parsedContent: [string, string][],
 ) => {
-  return JSON.parse(
-    parsedContent.filter(val => val[0] === key)[0]?.[1] ?? '{}',
-  );
+  return JSON.parse(parsedContent.filter(val => val[0] === key)[0][1]);
 };
 
 const removePlaceholders = (p: [string, string][]) =>
@@ -187,14 +184,10 @@ export const importPlayerContentRaw = async (
   } else {
     const content = await getContent();
     await clearStorage();
-    await importSQL(
-      parseImportedPartial(StorageKeys.SQL_PLACEHOLDER, parsedContent),
-      {},
-    );
     await AsyncStorage.multiSet.bind(AsyncStorage)(
       removePlaceholders(parsedContent),
     );
-    APMMigration({ playlist: true });
+    APMMigration();
     return content;
   }
 };

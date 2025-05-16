@@ -42,7 +42,7 @@ const isItemSolid = (
   networkCellular = false,
   dataSaver = false,
 ) => {
-  if (typeof item.liveStatus === 'boolean') return item.liveStatus;
+  if (item.liveStatus !== undefined) return item.liveStatus;
   if (!networkCellular) return true;
   if (dataSaver && !NoxCache.noxMediaCache?.peekCache(item)) {
     return false;

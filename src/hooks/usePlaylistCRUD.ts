@@ -9,7 +9,6 @@ import { updateSubscribeFavList } from '../utils/BiliSubscribe';
 import { sortPlaylist as _sortPlaylist } from '../utils/playlistOperations';
 import { SortOptions } from '../enums/Playlist';
 import { resolveUrl } from '@utils/SongOperations';
-import { updateSongs } from '../utils/db/sqlStorage';
 
 const usePlaylistCRUD = (mPlaylist?: NoxMedia.Playlist) => {
   const currentPlaylist = useNoxSetting(state => state.currentPlayingList);
@@ -48,14 +47,11 @@ const usePlaylistCRUD = (mPlaylist?: NoxMedia.Playlist) => {
       ...playlist,
       songList: Array.from(playlist.songList),
     };
-    const newSong = {
+    newPlaylist.songList[index] = {
       ...newPlaylist.songList[index],
       ...newMetadata,
     };
-    newPlaylist.songList[index] = newSong;
-    // songlist does not change here; but song does
-    updateSongs([newSong]);
-    updatePlaylist(newPlaylist, [], [], false);
+    updatePlaylist(newPlaylist, [], []);
   };
 
   const updateSongMetadata = async (

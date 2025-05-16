@@ -82,6 +82,7 @@ declare global {
       playlists: { [key: string]: NoxMedia.Playlist };
       lastPlaylistId: [string, string];
       searchPlaylist: NoxMedia.Playlist;
+      favoriPlaylist: NoxMedia.Playlist;
       playbackMode: NoxRepeatMode;
       skin: NoxTheme.Style;
       skins: any[];

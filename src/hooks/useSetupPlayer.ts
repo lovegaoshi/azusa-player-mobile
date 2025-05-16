@@ -23,7 +23,7 @@ const { NoxModule } = NativeModules;
 
 const initializePlayer = async (safeMode = false) => {
   await migrate(sqldb, migrations);
-  await APMMigration({});
+  await APMMigration();
   const {
     playlists,
     currentPlayingID,

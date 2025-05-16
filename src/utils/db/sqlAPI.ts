@@ -1,4 +1,4 @@
-import { eq, getTableColumns } from 'drizzle-orm';
+import { eq } from 'drizzle-orm';
 
 import db from './sql';
 import playbackTable from './schema/playbackCount';
@@ -6,12 +6,6 @@ import r128GainTable from './schema/r128gainTable';
 import lyricTable from './schema/lyricTable';
 import abrepeatTable from './schema/abrepeatTable';
 import tempTable from './schema/tempSongTable';
-import tempidTable from './schema/tempSongidTable';
-import songTable from './schema/songTable';
-import playlistTable from './schema/playlistTable';
-import { dummyPlaylist } from '@objects/Playlist';
-import { StorageKeys } from '@enums/Storage';
-import { timeFunction } from '../Utils';
 
 export const exportSQL = async () => {
   const res = {
@@ -19,8 +13,6 @@ export const exportSQL = async () => {
     lyric: db.select().from(lyricTable).all(),
     r128gain: db.select().from(r128GainTable).all(),
     abrepeat: db.select().from(abrepeatTable).all(),
-    songs: db.select().from(songTable).all(),
-    playlists: db.select().from(playlistTable).all(),
   };
   return JSON.stringify(res);
 };
@@ -138,109 +130,4 @@ export const getSyncABRepeatR128 = async () => {
   );
 
   return Object.values(res);
-};
-
-/**
- * unsure how useful this is - gets a song by its cid.
- * @param songcid
- * @returns
- */
-export const getSong = async (
-  songcid?: string,
-): Promise<NoxMedia.Song | undefined> => {
-  const res = db
-    .select()
-    .from(songTable)
-    .where(eq(songTable.id, songcid ?? ''))
-    .get();
-  // HACK: force converted some null here! check if an issue
-  return res as NoxMedia.Song;
-};
-
-/**
- *
- * @param id
- * @returns
- */
-export const getPlaylist = async ({
-  key = '',
-  defaultPlaylist = dummyPlaylist,
-  hydrateSongList = true,
-}): Promise<NoxMedia.Playlist> => {
-  const res = db
-    .select()
-    .from(playlistTable)
-    .where(eq(playlistTable.id, key))
-    .get();
-  if (res === undefined) return defaultPlaylist();
-  const songListIds = JSON.parse(res.songList) as number[];
-
-  const get = async () => {
-    let songs: NoxMedia.Song[] = [];
-    // innerjoin will fail if tempidTable is empty
-    if (hydrateSongList && songListIds.length > 0) {
-      await db.delete(tempidTable);
-      await db
-        .insert(tempidTable)
-        .values(songListIds.map(v => ({ songid: v })))
-        .onConflictDoNothing();
-      songs = db
-        .select({ ...getTableColumns(songTable) })
-        .from(songTable)
-        .innerJoin(tempidTable, eq(tempidTable.songid, songTable.internalid))
-        .orderBy(tempidTable.id)
-        .all() as NoxMedia.Song[];
-    }
-    const settings = JSON.parse(res.settings);
-    return {
-      ...defaultPlaylist(),
-      ...res,
-      ...settings,
-      settings: undefined,
-      songList: songs,
-    };
-  };
-  const res2 = await timeFunction(
-    get,
-    `[APMSQL] hydrating ${songListIds.length} songs`,
-  );
-  return res2.result;
-};
-
-/**
- * used in migrating/importing playlists
- * @param v
- * @returns
- */
-export const getSongSQLID = async (v: NoxMedia.Song) => {
-  const res = db
-    .select({ id: songTable.internalid })
-    .from(songTable)
-    .where(eq(songTable.id, v.id))
-    .get();
-  if (res !== undefined) return res.id;
-  // insert it
-  const parsedSong = {
-    ...v,
-    singerId: String(v.singerId),
-  };
-  const insert = await db
-    .insert(songTable)
-    .values(parsedSong)
-    .returning({ id: songTable.internalid });
-  return insert[0].id;
-};
-
-export const getPlaylistIds = async () => {
-  const res = db.select({ id: playlistTable.id }).from(playlistTable).all();
-  return res.map(v => v.id);
-};
-
-export const getFavSongList = async () => {
-  const res = db
-    .select({ songlist: playlistTable.songList })
-    .from(playlistTable)
-    .where(eq(playlistTable.id, StorageKeys.FAVORITE_PLAYLIST_KEY))
-    .get();
-  return res?.songlist;
 };

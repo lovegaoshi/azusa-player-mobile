@@ -7,7 +7,6 @@ declare global {
     type SongSource = Source;
 
     export interface Song {
-      internalid?: number;
       id: string;
       bvid: string;
       name: string;

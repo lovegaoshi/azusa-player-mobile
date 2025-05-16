@@ -52,8 +52,6 @@ const useSync = () => {
           },
           {
             text: t('Sync.NoxExtensionAppend'),
-            // HACK: this only supports sql stored playlists compatibility wise
-            // playlist.songList will be hydrated in the dumbest way possible
             onPress: () => {
               setSyncCheckVisible(true);
               setNoxExtensionContent(
@@ -79,8 +77,7 @@ const useSync = () => {
               songList:
                 cachedParsedContent[
                   `${cachedParsedContent.MyFavList[index]}-songList`
-                  // hydrate here
-                ] ?? [],
+                ],
             }
           : undefined,
       )
@@ -92,7 +89,7 @@ const useSync = () => {
   };
 
   const isSyncNoxExtension = (parsedContent: any) => {
-    return !Array.isArray(parsedContent);
+    return Array.isArray(parsedContent.MyFavList);
   };
 
   const restoreFromUint8Array = async (content: Uint8Array) => {

@@ -52,7 +52,7 @@ export const biliShazamOnSonglist = (
 ) => {
   if (!biliShazam) return songlist;
   const newSongList = songlist.map((song, index) => {
-    if (!song.biliShazamedName || forced) {
+    if (song.biliShazamedName === undefined || forced) {
       return new Promise<NoxMedia.Song>(resolve =>
         fetchVideoTagPromise({ bvid: song.bvid, cid: song.id })
           // getBiliShazamedSongname({ bvid: song.bvid, cid: song.id, name: null })
