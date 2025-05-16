@@ -17,6 +17,7 @@ import {
 import logger from '../Logger';
 import { StorageKeys } from '@enums/Storage';
 import type { Override } from './type';
+import { timeFunction } from '../Utils';
 
 const migrateR128GainToSQL = async () => {
   try {
@@ -81,7 +82,10 @@ const migratePlaylist = async (forced = false) => {
           key,
           throwOnNull: true,
         });
-        return await migratePlaylistToSQL(playlist);
+        return await timeFunction(
+          () => migratePlaylistToSQL(playlist),
+          `[APMSQL] migrating ${playlist.songList.length} songs`,
+        );
       } catch {
         logger.warn(`[APMSQL] failed to migrate playlist ${key} (DNE).`);
       }

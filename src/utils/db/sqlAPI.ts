@@ -11,6 +11,7 @@ import songTable from './schema/songTable';
 import playlistTable from './schema/playlistTable';
 import { dummyPlaylist } from '@objects/Playlist';
 import { StorageKeys } from '@enums/Storage';
+import { timeFunction } from '../Utils';
 
 export const exportSQL = async () => {
   const res = {
@@ -172,31 +173,38 @@ export const getPlaylist = async ({
     .where(eq(playlistTable.id, key))
     .get();
   if (res === undefined) return defaultPlaylist();
-
   const songListIds = JSON.parse(res.songList) as number[];
-  let songs: NoxMedia.Song[] = [];
-  // innerjoin will fail if tempidTable is empty
-  if (hydrateSongList && songListIds.length > 0) {
-    await db.delete(tempidTable);
-    await db
-      .insert(tempidTable)
-      .values(songListIds.map(v => ({ songid: v })))
-      .onConflictDoNothing();
-    songs = db
-      .select({ ...getTableColumns(songTable) })
-      .from(songTable)
-      .innerJoin(tempidTable, eq(tempidTable.songid, songTable.internalid))
-      .orderBy(tempidTable.id)
-      .all() as NoxMedia.Song[];
-  }
-  const settings = JSON.parse(res.settings);
-  return {
-    ...defaultPlaylist(),
-    ...res,
-    ...settings,
-    settings: undefined,
-    songList: songs,
+
+  const get = async () => {
+    let songs: NoxMedia.Song[] = [];
+    // innerjoin will fail if tempidTable is empty
+    if (hydrateSongList && songListIds.length > 0) {
+      await db.delete(tempidTable);
+      await db
+        .insert(tempidTable)
+        .values(songListIds.map(v => ({ songid: v })))
+        .onConflictDoNothing();
+      songs = db
+        .select({ ...getTableColumns(songTable) })
+        .from(songTable)
+        .innerJoin(tempidTable, eq(tempidTable.songid, songTable.internalid))
+        .orderBy(tempidTable.id)
+        .all() as NoxMedia.Song[];
+    }
+    const settings = JSON.parse(res.settings);
+    return {
+      ...defaultPlaylist(),
+      ...res,
+      ...settings,
+      settings: undefined,
+      songList: songs,
+    };
   };
+  const res2 = await timeFunction(
+    get,
+    `[APMSQL] hydrating ${songListIds.length} songs`,
+  );
+  return res2.result;
 };
 
 /**
