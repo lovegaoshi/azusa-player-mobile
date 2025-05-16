@@ -111,13 +111,19 @@ export const getPlaylist = async ({
   const dPlaylist = defaultPlaylist();
   const retrievedPlaylist = await getItem(key);
   try {
+    const hydratedSonglist = (
+      await timeFunction(
+        async () =>
+          hydrateSongList ? await getPlaylistSongList(retrievedPlaylist) : [],
+        `[APMStorage] hydrating songList for ${key}`,
+      )
+    ).result;
+    console.log(`[APMStorage] hydrated ${hydratedSonglist.length} songs`);
     return {
       ...dPlaylist,
       ...retrievedPlaylist,
       id: key,
-      songList: hydrateSongList
-        ? await getPlaylistSongList(retrievedPlaylist)
-        : [],
+      songList: hydratedSonglist,
     };
   } catch (e) {
     console.error(e);
