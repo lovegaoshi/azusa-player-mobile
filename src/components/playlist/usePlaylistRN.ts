@@ -15,8 +15,12 @@ import { syncFavlist } from '@utils/Bilibili/bilifavOperate';
 import usePlayback from '@hooks/usePlayback';
 import useTPControls from '@hooks/useTPControls';
 import useSnack from '@stores/useSnack';
-import { clearPlaylistUninterrupted } from '@utils/RNTPUtils';
+import {
+  clearPlaylistUninterrupted,
+  cycleThroughPlaymode,
+} from '@utils/RNTPUtils';
 import { execWhenTrue } from '@utils/Utils';
+import playlistStore, { initializePlaybackMode } from '@stores/playingList';
 
 interface ScrollTo {
   toIndex?: number;
@@ -122,6 +126,12 @@ export default (playlist: NoxMedia.Playlist): UsePlaylistRN => {
       // on an event to emit) so we have to do conditionals outside of playFromPlaylist.
       performFade(callback);
     };
+    cycleThroughPlaymode(
+      initializePlaybackMode(
+        playlist.repeatMode ?? playlistStore.getState().playmode,
+        false,
+      ),
+    );
     usedPlaylist.playSong(song, playSongCallback, p =>
       clearPlaylistUninterrupted().then(() => setCurrentPlayingList(p)),
     );
