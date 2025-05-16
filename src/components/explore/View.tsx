@@ -38,7 +38,6 @@ const Explore = () => {
         LoginComponent={LoginComponent}
         defaultSite={explorePage}
         onSiteChange={setExplorePage}
-        wrapCollapsible={false}
       />
     </FlexView>
   );
