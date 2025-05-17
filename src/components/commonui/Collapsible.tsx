@@ -37,7 +37,7 @@ export const Collapsible = ({
   pinTo = 'top',
   renderChildrenCollapsed = true,
 }: CollapsibleProps) => {
-  const sharedValue = useSharedValue(0);
+  const sharedValue = useSharedValue(1);
   const [bodySectionHeight, setBodySectionHeight] = useState<null | number>(
     null,
   );
@@ -46,11 +46,14 @@ export const Collapsible = ({
   const initialHeight = collapsedHeight ?? 0;
 
   const animatedStyle = useAnimatedStyle(() => ({
-    height: interpolate(
-      sharedValue.value,
-      [initialHeight ?? 0, 1],
-      [initialHeight, bodySectionHeight ?? initialHeight],
-    ),
+    height:
+      bodySectionHeight === null
+        ? undefined
+        : interpolate(
+            sharedValue.value,
+            [initialHeight ?? 0, 1],
+            [initialHeight, bodySectionHeight ?? initialHeight],
+          ),
   }));
 
   const onAnimationEnd = useCallback(() => {
@@ -95,7 +98,7 @@ export const Collapsible = ({
   return (
     <Animated.View style={[{ overflow: 'hidden' }, animatedStyle]}>
       <View
-        style={[{ position: 'absolute', [pinTo]: 0, left: 0, right: 0 }, style]}
+        style={[{ [pinTo]: 0, left: 0, right: 0 }, style]}
         onLayout={handleLayout}
       >
         {showTheKids && children}
