@@ -126,14 +126,14 @@ export default (playlist: NoxMedia.Playlist): UsePlaylistRN => {
       // on an event to emit) so we have to do conditionals outside of playFromPlaylist.
       performFade(callback);
     };
+    usedPlaylist.playSong(song, playSongCallback, p =>
+      clearPlaylistUninterrupted().then(() => setCurrentPlayingList(p)),
+    );
     cycleThroughPlaymode(
       initializePlaybackMode(
         playlist.repeatMode ?? playlistStore.getState().playmode,
         false,
       ),
-    );
-    usedPlaylist.playSong(song, playSongCallback, p =>
-      clearPlaylistUninterrupted().then(() => setCurrentPlayingList(p)),
     );
   };
 
