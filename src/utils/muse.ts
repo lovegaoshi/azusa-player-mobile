@@ -13,6 +13,11 @@ const findCookie = (cookies: string, match: string) => {
 export const initMuse = async (
   cookies: Promise<string> = getItem(StorageKeys.YTMCOOKIES, ''),
 ) => {
+  Platform.load({
+    ...Platform.shim,
+    sha1Hash: i =>
+      crypto.digestStringAsync(crypto.CryptoDigestAlgorithm.SHA1, i),
+  });
   const sapisid = findCookie(await cookies, 'SAPISID') ?? undefined;
   if (!sapisid) return;
   // https://github.com/sigma67/ytmusicapi/blob/9ce284a7eae9c4cdc04bb098f7549cc5f1c80e22/ytmusicapi/helpers.py#L52
@@ -32,10 +37,4 @@ export const initMuse = async (
   const auth = get_option('auth');
   auth.get_headers = get_headers;
   auth.requires_login = async () => false;
-
-  Platform.load({
-    ...Platform.shim,
-    sha1Hash: i =>
-      crypto.digestStringAsync(crypto.CryptoDigestAlgorithm.SHA1, i),
-  });
 };

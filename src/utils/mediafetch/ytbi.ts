@@ -52,7 +52,25 @@ const createYtClient = () =>
       enable_session_cache: false,
       generate_session_locally: false,
       client_type: ClientType.IOS,
-      //cookie,
+      cookie: '',
+      fetch: (url, init) => {
+        console.log('[ytbi.js] fetch', url, init);
+        init?.headers?.set('referer', 'https://www.youtube.com/');
+        init?.headers?.set('x-origin', 'https://www.youtube.com');
+        init?.headers?.set('origin', 'https://www.youtube.com');
+        init?.headers?.set('sec-fetch-dest', 'empty');
+        init?.headers?.set('sec-fetch-site', 'same-origin');
+        init?.headers?.set('sec-fetch-mode', 'same-origin');
+        init?.headers?.set(
+          'user-agent',
+          'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36',
+        );
+        init?.credentials && (init.credentials = 'include');
+        url.credentials && (url.credentials = 'include');
+        url.referrer && (url.referrer = 'https://www.youtube.com/');
+        console.log('[ytbi.js] fetch2', url, init);
+        return fetch(url, init);
+      },
     }),
   );
 
