@@ -17,6 +17,7 @@ interface NoxPlaylistStore {
   // saveLastPlayedSongId, etc  set in useApp.
   currentPlayingId: string;
   playmode: NoxRepeatMode;
+  playmodeGlobal: NoxRepeatMode;
 }
 
 const playlistStore = createStore<NoxPlaylistStore>(() => ({
@@ -25,6 +26,7 @@ const playlistStore = createStore<NoxPlaylistStore>(() => ({
   currentPlayingIndex: -1,
   currentPlayingId: '',
   playmode: NoxRepeatMode.Shuffle,
+  playmodeGlobal: NoxRepeatMode.Shuffle,
 }));
 
 export const setPlayingIndex = (index = 0, songId?: string) => {
@@ -149,14 +151,17 @@ const RefreshPlayingIndex = [NoxRepeatMode.Shuffle, NoxRepeatMode.Repeat];
  */
 export const initializePlaybackMode = (state: NoxRepeatMode, global = true) => {
   const [nextIcon, TPRepeatMode] = getPlaybackModeNotifIcon(state);
+  const currentPlayingId = playlistStore.getState().currentPlayingId;
   if (RefreshPlayingIndex.includes(state)) {
-    setPlayingIndex(0, playlistStore.getState().currentPlayingId);
+    setPlayingIndex(0, currentPlayingId);
     clearPlaylistUninterrupted();
   }
+  playlistStore.setState({ playmode: state });
   if (global) {
-    playlistStore.setState({ playmode: state });
+    playlistStore.setState({ playmodeGlobal: state });
     savePlayMode(state);
   }
+  setPlayingIndex(0, currentPlayingId);
   TrackPlayer.setRepeatMode(TPRepeatMode);
   return nextIcon;
 };
@@ -167,6 +172,7 @@ export const initializePlaybackMode = (state: NoxRepeatMode, global = true) => {
 export const cycleThroughPlaymode = (
   mode = playlistStore.getState().playmode,
 ) => {
+  console.log(mode);
   switch (mode) {
     case NoxRepeatMode.Shuffle:
       return initializePlaybackMode(NoxRepeatMode.Repeat);

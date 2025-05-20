@@ -44,12 +44,15 @@ const initializePlayer = async (safeMode = false) => {
   };
   await SetupService(serviceOptions);
   buildBrowseTree(playlists);
-  cycleThroughPlaymode(
-    initializePlaybackMode(
-      currentPlayingList.repeatMode ?? playbackMode,
-      currentPlayingList.repeatMode === undefined,
-    ),
-  );
+  initializePlaybackMode(currentPlayingList.repeatMode ?? playbackMode);
+  if (currentPlayingList.repeatMode !== undefined) {
+    cycleThroughPlaymode(
+      initializePlaybackMode(
+        currentPlayingList.repeatMode ?? playbackMode,
+        false,
+      ),
+    );
+  }
 
   const currentQueue = getCurrentTPQueue();
   const findCurrentSong = currentQueue.find(val => val.id === currentPlayingID);

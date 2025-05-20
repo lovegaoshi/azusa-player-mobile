@@ -15,7 +15,7 @@ export default ({ iconSize = 30 }: Props) => {
     <ShadowedButton
       iconSize={iconSize}
       icon={playMode}
-      onPress={cycleThroughPlaymode}
+      onPress={() => cycleThroughPlaymode()}
       style={{ backgroundColor: undefined }}
     />
   );

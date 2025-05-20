@@ -116,7 +116,15 @@ export default (playlist: NoxMedia.Playlist): UsePlaylistRN => {
 
   const playSong = (song: NoxMedia.Song) => {
     const playSongCallback = (playlist: NoxMedia.Playlist) => {
-      const callback = () => playFromPlaylist({ playlist, song });
+      const setPlaylistPlaymode = () =>
+        cycleThroughPlaymode(
+          initializePlaybackMode(
+            playlist.repeatMode ?? playlistStore.getState().playmodeGlobal,
+            false,
+          ),
+        );
+      const callback = () =>
+        playFromPlaylist({ playlist, song }).then(setPlaylistPlaymode);
       if (song.id === currentPlayingId) {
         callback();
         return;
@@ -128,12 +136,6 @@ export default (playlist: NoxMedia.Playlist): UsePlaylistRN => {
     };
     usedPlaylist.playSong(song, playSongCallback, p =>
       clearPlaylistUninterrupted().then(() => setCurrentPlayingList(p)),
-    );
-    cycleThroughPlaymode(
-      initializePlaybackMode(
-        playlist.repeatMode ?? playlistStore.getState().playmode,
-        false,
-      ),
     );
   };
 

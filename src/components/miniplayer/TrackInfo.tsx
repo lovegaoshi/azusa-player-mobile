@@ -4,6 +4,7 @@ import Animated, {
   SharedValue,
   useAnimatedStyle,
 } from 'react-native-reanimated';
+import { useStore } from 'zustand';
 
 import { useNoxSetting } from '@stores/useApp';
 import NoxPlayingList from '@stores/playingList';
@@ -24,15 +25,18 @@ export default ({ opacity, style, artworkOpacity }: Props) => {
   const track = useTrackStore(s => s.track);
   const playerStyle = useNoxSetting(state => state.playerStyle);
   const currentPlayingList = useNoxSetting(state => state.currentPlayingList);
+  const currentPlayingIndex = useStore(
+    NoxPlayingList,
+    state => state.currentPlayingIndex,
+  );
+
   const getTrackLocation = () => {
     return track?.song
       ? `#${
           currentPlayingList.songList.findIndex(
             song => song.id === track.song.id,
           ) + 1
-        } - ${NoxPlayingList.getState().currentPlayingIndex + 1}/${
-          currentPlayingList.songList.length
-        }`
+        } - ${currentPlayingIndex + 1}/${currentPlayingList.songList.length}`
       : '';
   };
 
