@@ -36,7 +36,7 @@ export default (playlist: NoxMedia.Playlist) => {
 
     cycleThroughPlaymode(
       initializePlaybackMode(
-        repeatMode ?? playlistStore.getState().playmode,
+        repeatMode ?? playlistStore.getState().playmodeGlobal,
         false,
       ),
     );

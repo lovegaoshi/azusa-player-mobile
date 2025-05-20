@@ -1,12 +1,10 @@
 import { Pressable, StyleSheet, View } from 'react-native';
-import { useStore } from 'zustand';
 import { useTranslation } from 'react-i18next';
 
 import { useNoxSetting } from '@stores/useApp';
 import { NoxRepeatMode } from '@enums/RepeatMode';
 import { styles } from '@components/style';
 import { Icon, Text } from 'react-native-paper';
-import noxPlayingList from '@stores/playingList';
 
 interface Props {
   mode?: NoxRepeatMode;
