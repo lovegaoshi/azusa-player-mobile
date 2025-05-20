@@ -22,7 +22,6 @@
 
 <p align="center"> 
   <a href='https://play.google.com/store/apps/details?id=com.noxplay.noxplayer&pcampaignid=pcampaignidMKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1'><img alt='Get it on Google Play' src='https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png' height="80"/></a>
-  <a href='https://play.google.com/apps/internaltest/4701326682273400640'><img alt='加入内测计划' src='https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png' height="80"/></a>
 <a href="https://f-droid.org/packages/com.noxplay.noxplayer">
     <img src="https://fdroid.gitlab.io/artwork/badge/get-it-on-zh-cn.png"
     alt="下载应用，请到 F-Droid"

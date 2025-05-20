@@ -246,7 +246,7 @@ jobs:
           #changesNotSentForReview: true
 
   buildIPA:
-    runs-on: macos-14
+    runs-on: macos-15
     name: build IPA
     permissions:
       contents: write
@@ -280,6 +280,7 @@ jobs:
 
       - name: 'Create env file'
         run: |
+          sudo xcode-select -s "/Applications/Xcode_16.0.app"
           echo "${{ secrets.ENV_FILE }}" > .env
           echo "APPSTORE=true" >> .env
           echo "${{ secrets.SENTRY_PROPERTIES }}" > ./ios/sentry.properties
