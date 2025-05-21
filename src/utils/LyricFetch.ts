@@ -6,6 +6,7 @@ import qqLrcFetch from './lrcfetch/qq';
 import qqQrcFetch from './lrcfetch/qqqrc';
 import BiliLrcFetch from './lrcfetch/bili';
 import LrcLibFetch from './lrcfetch/lrclib';
+import neteaseFetch from './lrcfetch/netease';
 import { LrcSource } from '@enums/LyricFetch';
 
 interface SearchLyricOptions {
@@ -29,6 +30,8 @@ export const searchLyricOptions = async ({
         return await BiliLrcFetch.getLrcOptions(song);
       case LrcSource.LrcLib:
         return await LrcLibFetch.getLrcOptions(searchKey);
+      case LrcSource.Netease:
+        return await neteaseFetch.getLrcOptions(searchKey);
       case LrcSource.QQ:
       default:
         return await qqLrcFetch.getLrcOptions(searchKey);
@@ -48,6 +51,8 @@ export const searchLyric = async (searchMID: string, source = LrcSource.QQ) => {
         return await qqQrcFetch.getLyric(searchMID);
       case LrcSource.BiliBili:
         return await BiliLrcFetch.getLyric(searchMID);
+      case LrcSource.Netease:
+        return await neteaseFetch.getLyric(searchMID);
       case LrcSource.QQ:
       default:
         return await qqLrcFetch.getLyric(searchMID);
