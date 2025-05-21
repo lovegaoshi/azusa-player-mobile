@@ -16,6 +16,7 @@ import DownloadSettings from './DownloadSettings';
 import LoginSettings from '../login/View';
 import PremiumSettings from '../billing/View';
 import SponsorBlockSettings from './sponsorblock/View';
+import PlaybackSettings from './playback/View';
 import { isAndroid, isIOS } from '@utils/RNUtils';
 import FlexView from '@components/commonui/FlexViewNewArch';
 import DefaultScreenOption from '@enums/ScreenOption';
@@ -23,6 +24,7 @@ import DefaultScreenOption from '@enums/ScreenOption';
 enum NoxView {
   HOME = 'cog',
   SKIN = 'palette',
+  PLAYBACK = 'play-circle',
   BACKUP = 'backup-restore',
   INFO = 'information',
   DEVELOPER = 'application-brackets',
@@ -60,6 +62,12 @@ const HomeSettings = ({ navigation }: Props) => {
           settingName="GeneralSetting"
           onPress={() => navigation.navigate(NoxView.GENERAL)}
           settingCategory="Settings"
+        />
+        <SettingListItem
+          icon={NoxView.PLAYBACK}
+          settingName="GeneralSetting"
+          onPress={() => navigation.navigate(NoxView.PLAYBACK)}
+          settingCategory="PlaybackSettings"
         />
         <SettingListItem
           icon={NoxView.SKIN}
@@ -140,6 +148,14 @@ const Settings = ({ headerBackVisible = true }: Props) => {
           component={HomeSettings}
           options={{
             title: t('Settings.HomeSettingName'),
+            ...DefaultScreenOption,
+          }}
+        />
+        <Stack.Screen
+          name={NoxView.PLAYBACK}
+          component={PlaybackSettings}
+          options={{
+            title: t('Settings.PlaybackSettingName'),
             ...DefaultScreenOption,
           }}
         />

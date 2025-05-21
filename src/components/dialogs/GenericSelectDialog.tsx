@@ -1,9 +1,9 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useState } from 'react';
 import { Pressable, View, FlatList, StyleSheet } from 'react-native';
 import { Button, Dialog, Portal, Text, RadioButton } from 'react-native-paper';
 import { useTranslation } from 'react-i18next';
 import { execWhenTrue } from '@utils/Utils';
+import logger from '@utils/Logger';
 
 const DialogTitle = ({ title }: { title: string | undefined }) => {
   if (!title) return <View></View>;
@@ -93,6 +93,9 @@ export default function GenericSelectDialog<T>({
         <Dialog.Content style={styles.dialogContent}>
           {children}
           <FlatList
+            onScrollToIndexFailed={i =>
+              logger.warn(`onScrollToIndexFailed: ${JSON.stringify(i)}`)
+            }
             ref={listRef}
             style={[styles.flatList]}
             data={options}

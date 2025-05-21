@@ -34,10 +34,6 @@ const GEN_SETTING_BOOLEAN: SettingEntry[] = [
     settingCategory: 'GeneralSettings',
   },
   {
-    settingName: 'r128gain',
-    settingCategory: 'GeneralSettings',
-  },
-  {
     settingName: 'suggestedSkipLongVideo',
     settingCategory: 'GeneralSettings',
   },
@@ -59,14 +55,6 @@ const GEN_SETTING_BOOLEAN: SettingEntry[] = [
   },
   {
     settingName: 'preferYTMSuggest',
-    settingCategory: 'GeneralSettings',
-  },
-  {
-    settingName: 'pausePlaybackOnMute',
-    settingCategory: 'GeneralSettings',
-  },
-  {
-    settingName: 'noBiliR128Gain',
     settingCategory: 'GeneralSettings',
   },
   {

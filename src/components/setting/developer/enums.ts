@@ -11,8 +11,7 @@ export enum Icons {
   cache = 'floppy',
   clearcache = 'delete-sweep',
   clearOrphanCache = 'delete-empty',
-  crossfade = 'shuffle-variant',
-  fade = 'cosine-wave',
+
   plugins = 'puzzle',
   Tanaka = 'emoticon-devil',
   ArtworkRes = 'quality-high',
