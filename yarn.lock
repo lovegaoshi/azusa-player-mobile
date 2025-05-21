@@ -7397,10 +7397,12 @@ __metadata:
     react: "npm:19.0.0"
     react-i18next: "npm:^15.5.1"
     react-native: "npm:0.79.2"
+    react-native-aes-crypto: "npm:^3.2.1"
     react-native-app-auth: "npm:^8.0.2"
     react-native-background-timer: "git+https://github.com/lovegaoshi/react-native-background-timer.git"
     react-native-blob-jsi-helper: "npm:^0.3.1"
     react-native-blob-util: "npm:^0.21.2"
+    react-native-buffer: "npm:^6.0.3"
     react-native-carplay: "npm:2.4.1-beta.0"
     react-native-clean-project: "npm:^4.0.3"
     react-native-device-info: "npm:^14.0.4"
@@ -17368,6 +17370,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"react-native-aes-crypto@npm:^3.2.1":
+  version: 3.2.1
+  resolution: "react-native-aes-crypto@npm:3.2.1"
+  checksum: 10c0/f2ccbb3f8629ae94a76dbb2f31c6a6de8fc909fc0f8ad0920ff320da00770b0a8c1ca244b435abd2bdb544c7da18ea0c17b4d240ea500fc5cc55a675cae48484
+  languageName: node
+  linkType: hard
+
 "react-native-app-auth@npm:^8.0.2":
   version: 8.0.2
   resolution: "react-native-app-auth@npm:8.0.2"
@@ -17416,6 +17425,20 @@ __metadata:
     react: "*"
     react-native: "*"
   checksum: 10c0/7d7ca9abd02d2af4b9606813258047ad7748984d1ca5970ee2bc77ca3272690ca102d0cbccbc5e2d8193b3da73b453a03f918ff0f5269e1fe8b759df3dfd6ed0
+  languageName: node
+  linkType: hard
+
+"react-native-buffer@npm:^6.0.3":
+  version: 6.0.3
+  resolution: "react-native-buffer@npm:6.0.3"
+  dependencies:
+    ieee754: "npm:^1.2.1"
+    react-native-fast-base64: "npm:^0.1.1"
+  peerDependencies:
+    react: "*"
+    react-native: "*"
+    react-native-fast-base64: "*"
+  checksum: 10c0/e0b391ebf7dd0fa0e03dee916bfe9219fa022eabdffcd740a4bc0928be5750b1a9a3536ebf5c4c38582a93a653dbb43b4778c70c044da100d8f1867b50cb2e2c
   languageName: node
   linkType: hard
 
@@ -17502,6 +17525,16 @@ __metadata:
     react: "*"
     react-native: "*"
   checksum: 10c0/6373cc1b447eae31689a9b62e38b15621e9273626e2324700c4c3eb58c02ce489236a4b9e3e0dc1187e062defd8316195c5b1213facd718706b79b92127a05a3
+  languageName: node
+  linkType: hard
+
+"react-native-fast-base64@npm:^0.1.1":
+  version: 0.1.2
+  resolution: "react-native-fast-base64@npm:0.1.2"
+  peerDependencies:
+    react: "*"
+    react-native: "*"
+  checksum: 10c0/c7b1216830ca68d14b6ac6fe5a2b8b9519cf44fdd45db2d0fa475bfab88eef492c3d5827e1e1bcdcdd6a74eb36994e2ebf9730e404e6b029348673973d73dde0
   languageName: node
   linkType: hard
 
