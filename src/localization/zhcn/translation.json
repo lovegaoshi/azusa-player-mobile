@@ -242,6 +242,10 @@
     "suggestedSkipLongVideoName": "推荐播放跳过长视频",
     "suggestedSkipLongVideoDesc": "推荐播放时跳过超过10分钟的视频"
   },
+  "PlaybackSettings": {
+    "GeneralSettingName": "播放",
+    "GeneralSettingDesc": "播放相关设置"
+  },
   "DeveloperSettings": {
     "OTAUName": "热更新",
     "OTAUDesc": "热更新（不要触碰）",
@@ -282,6 +286,7 @@
     "LogLevel5": "关闭"
   },
   "Settings": {
+    "PlaybackSettingName": "播放",
     "HomeSettingName": "设置",
     "PluginsSettingName": "插件",
     "PluginsSettingDesc": "有可能导致数据错误的插件",

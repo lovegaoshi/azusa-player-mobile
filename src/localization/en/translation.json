@@ -240,6 +240,10 @@
     "suggestedSkipLongVideoName": "Skip Long Recommended Video",
     "suggestedSkipLongVideoDesc": "Skip > 10 min videos when in playing suggested mode."
   },
+  "PlaybackSettings": {
+    "GeneralSettingName": "Playback",
+    "GeneralSettingDesc": "Playback related settings"
+  },
   "DeveloperSettings": {
     "OTAUName": "OTA Update",
     "OTAUDesc": "OTA update (do not touch)",
@@ -280,8 +284,9 @@
     "LogLevel5": "OFF"
   },
   "Settings": {
+    "PlaybackSettingName": "Playback",
     "HomeSettingName": "Settings",
-    "GeneralSettingName": "General Settings",
+    "GeneralSettingName": "General",
     "GeneralSettingDesc": "General APM settings",
     "PluginsSettingName": "Plugins",
     "PluginsSettingDesc": "Plugins may modify app behavior. Continue with discretion.",
