@@ -6760,6 +6760,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"aes-js@npm:^3.1.2":
+  version: 3.1.2
+  resolution: "aes-js@npm:3.1.2"
+  checksum: 10c0/2568cc67af66fd9d41de25dc73d49ae810269c7648bbb1928b9f84d8fd6ddb4e39ed506d1be6794f5ffd567aadea75fc6895ef34d2b70b764f539f72a6a2baeb
+  languageName: node
+  linkType: hard
+
 "agent-base@npm:6":
   version: 6.0.2
   resolution: "agent-base@npm:6.0.2"
@@ -7397,10 +7404,12 @@ __metadata:
     react: "npm:19.0.0"
     react-i18next: "npm:^15.5.1"
     react-native: "npm:0.79.2"
+    react-native-aes-ecb: "npm:^1.0.0"
     react-native-app-auth: "npm:^8.0.2"
     react-native-background-timer: "git+https://github.com/lovegaoshi/react-native-background-timer.git"
     react-native-blob-jsi-helper: "npm:^0.3.1"
     react-native-blob-util: "npm:^0.21.2"
+    react-native-buffer: "npm:^6.0.3"
     react-native-carplay: "npm:2.4.1-beta.0"
     react-native-clean-project: "npm:^4.0.3"
     react-native-device-info: "npm:^14.0.4"
@@ -7409,7 +7418,7 @@ __metadata:
     react-native-gesture-handler: "npm:~2.25.0"
     react-native-get-random-values: "npm:^1.11.0"
     react-native-image-colors: "npm:^2.4.0"
-    react-native-lyric: "https://lovegaoshi@github.com/lovegaoshi/react-native-lyric.git#commit=bce8cc775c8e42fb451d2b97ba5c113cb8263379"
+    react-native-lyric: "https://lovegaoshi@github.com/lovegaoshi/react-native-lyric.git#commit=5709337b4860f0246098b9a9daa9896bf7613bc5"
     react-native-ota-hot-update: "npm:2.2.2"
     react-native-pager-view: "npm:6.7.1"
     react-native-paper: "npm:5.14.4"
@@ -17368,6 +17377,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"react-native-aes-ecb@npm:^1.0.0":
+  version: 1.0.0
+  resolution: "react-native-aes-ecb@npm:1.0.0"
+  dependencies:
+    aes-js: "npm:^3.1.2"
+    buffer: "npm:^6.0.3"
+  checksum: 10c0/af8603570bf29b1f943334ab4fe0ab0f0fd16e2b9d4b768e8ef94c6f393ace9d730c1db39d479a91ce56802883c1518b059cc82a492e9b8083b23f794b911d78
+  languageName: node
+  linkType: hard
+
 "react-native-app-auth@npm:^8.0.2":
   version: 8.0.2
   resolution: "react-native-app-auth@npm:8.0.2"
@@ -17416,6 +17435,20 @@ __metadata:
     react: "*"
     react-native: "*"
   checksum: 10c0/7d7ca9abd02d2af4b9606813258047ad7748984d1ca5970ee2bc77ca3272690ca102d0cbccbc5e2d8193b3da73b453a03f918ff0f5269e1fe8b759df3dfd6ed0
+  languageName: node
+  linkType: hard
+
+"react-native-buffer@npm:^6.0.3":
+  version: 6.0.3
+  resolution: "react-native-buffer@npm:6.0.3"
+  dependencies:
+    ieee754: "npm:^1.2.1"
+    react-native-fast-base64: "npm:^0.1.1"
+  peerDependencies:
+    react: "*"
+    react-native: "*"
+    react-native-fast-base64: "*"
+  checksum: 10c0/e0b391ebf7dd0fa0e03dee916bfe9219fa022eabdffcd740a4bc0928be5750b1a9a3536ebf5c4c38582a93a653dbb43b4778c70c044da100d8f1867b50cb2e2c
   languageName: node
   linkType: hard
 
@@ -17505,6 +17538,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"react-native-fast-base64@npm:^0.1.1":
+  version: 0.1.2
+  resolution: "react-native-fast-base64@npm:0.1.2"
+  peerDependencies:
+    react: "*"
+    react-native: "*"
+  checksum: 10c0/c7b1216830ca68d14b6ac6fe5a2b8b9519cf44fdd45db2d0fa475bfab88eef492c3d5827e1e1bcdcdd6a74eb36994e2ebf9730e404e6b029348673973d73dde0
+  languageName: node
+  linkType: hard
+
 "react-native-flashdrag-list@npm:^0.2.4":
   version: 0.2.4
   resolution: "react-native-flashdrag-list@npm:0.2.4"
@@ -17566,14 +17609,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-native-lyric@https://lovegaoshi@github.com/lovegaoshi/react-native-lyric.git#commit=bce8cc775c8e42fb451d2b97ba5c113cb8263379":
+"react-native-lyric@https://lovegaoshi@github.com/lovegaoshi/react-native-lyric.git#commit=5709337b4860f0246098b9a9daa9896bf7613bc5":
   version: 1.0.1
-  resolution: "react-native-lyric@https://lovegaoshi@github.com/lovegaoshi/react-native-lyric.git#commit=bce8cc775c8e42fb451d2b97ba5c113cb8263379"
+  resolution: "react-native-lyric@https://lovegaoshi@github.com/lovegaoshi/react-native-lyric.git#commit=5709337b4860f0246098b9a9daa9896bf7613bc5"
   peerDependencies:
     "@react-native-masked-view/masked-view": ^0.3.1
     react: "*"
     react-native: "*"
-  checksum: 10c0/f2d960b37e821d2fa411ade344227b80d7119907df734548993a5074b1a824ca706dd11efeeb509a48ad347939dec70f6e64de3ae0ba15b88d13569e4ef660e5
+  checksum: 10c0/a43b00895618bc041749e50e396252eeaca494fee6843eeb2b0644d757c86578f4b4bd09f1697d094c7041fee014143f95813884d26aa9b509e05fb195761af8
   languageName: node
   linkType: hard
 
