@@ -5,6 +5,7 @@ import { createStore } from 'zustand/vanilla';
 import bfetch from '@utils/BiliFetch';
 import { LrcSource } from '@enums/LyricFetch';
 import { logger } from '../Logger';
+import { getLyric } from './neteaseEapi';
 
 // 绑定手机后，可进行下一步操作哦
 interface Store {
@@ -54,7 +55,7 @@ const getLrcOptions = async (
   }));
 };
 
-const getLyric = async (songMid: string) => {
+export const getLyricOld = async (songMid: string) => {
   logger.debug(`[netease] calling getNeteaseLyric: ${songMid}`);
   const res = await bfetch(LRC_API.replace('{id}', songMid));
   const json = await res.json();
