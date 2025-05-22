@@ -127,12 +127,8 @@ export const Home = ({
       <List.Section>
         <GroupView>
           <View>
-            <RenderSetting item={developerSettings.noInterruption} />
-            <RenderSetting item={developerSettings.prefetchTrack} />
             {isAndroid && (
               <>
-                <RenderSetting item={developerSettings.audioOffload} />
-                <RenderSetting item={developerSettings.skipSilence} />
                 <RenderSetting item={developerSettings.parseEmbeddedArtwork} />
               </>
             )}
