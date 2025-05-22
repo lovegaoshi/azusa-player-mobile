@@ -5,7 +5,6 @@ import { useTranslation } from 'react-i18next';
 
 // eslint-disable-next-line import/no-unresolved
 import { APPSTORE, LOCKHASH } from '@env';
-import { useNoxSetting } from '@stores/useApp';
 import { logStore, LOGLEVEL } from '@utils/Logger';
 import { RenderSetting } from '../helpers/RenderSetting';
 import SettingListItem from '../helpers/SettingListItem';
@@ -22,12 +21,10 @@ import {
   enableTanaka,
 } from '@hooks/useTanakaAmazingCommodities';
 import { isAndroid, selfDestruct } from '@utils/RNUtils';
-import SelectSetting from '../helpers/SelectSetting';
 import { SelectDialogChildren } from '../SelectDialogWrapper';
 import { Route, Icons } from './enums';
 import OTA from './OTA';
-
-const ArtworkResOptions = [0, 240, 360, 480, 720, 1080];
+import PlayerSettingItems from './PlayerSettingItems';
 
 const developerSettings: { [key: string]: SettingEntry } = {
   parseEmbeddedArtwork: {
@@ -62,8 +59,6 @@ export const Home = ({
   setCurrentSelectOption,
   setSelectVisible,
 }: HomeProps) => {
-  const playerSetting = useNoxSetting(state => state.playerSetting);
-  const setPlayerSetting = useNoxSetting(state => state.setPlayerSetting);
   const { t } = useTranslation();
   const { checkVersion } = useVersionCheck();
   const { orphanedCache, cleanOrphanedCache } = useCleanCache();
@@ -97,28 +92,6 @@ export const Home = ({
         setSelectVisible(false);
       },
       title: t('DeveloperSettings.LogLevelName'),
-    } as SelectSettingEntry<number>);
-  };
-
-  const selectCacheLevel = () => {
-    setSelectVisible(true);
-    const options = [
-      0, // disabled
-      100, // ~500 MB
-      200,
-      1000, // ~5 GB
-      9999, // 50 GB
-    ];
-    const defaultIndex = options.indexOf(playerSetting.cacheSize);
-    setCurrentSelectOption({
-      options,
-      defaultIndex: defaultIndex > -1 ? defaultIndex : 0,
-      onClose: () => setSelectVisible(false),
-      onSubmit: (index: number) => {
-        setPlayerSetting({ cacheSize: options[index] }).then(selfDestruct);
-        setSelectVisible(false);
-      },
-      title: t('DeveloperSettings.CacheSizeName'),
     } as SelectSettingEntry<number>);
   };
 
@@ -171,26 +144,9 @@ export const Home = ({
             `${val}: ${logLevelString[getState().logLevel]}`
           }
         />
-        <SelectSetting
-          setVisible={setSelectVisible}
-          setCurrentOption={setCurrentSelectOption}
-          options={ArtworkResOptions}
-          renderOption={(option: number) => `${option}p`}
-          settingKey="artworkRes"
-          icon={Icons.ArtworkRes}
-          settingCategory="DeveloperSettings"
-          modifyDescription={v => `${v}: ${playerSetting.artworkRes}p`}
-        />
-        <SettingListItem
-          icon={Icons.cache}
-          settingName="CacheSize"
-          onPress={selectCacheLevel}
-          settingCategory="DeveloperSettings"
-          modifyDescription={() =>
-            t('DeveloperSettings.CacheSizeDesc2', {
-              val: playerSetting.cacheSize,
-            })
-          }
+        <PlayerSettingItems
+          setCurrentSelectOption={setCurrentSelectOption}
+          setSelectVisible={setSelectVisible}
         />
         <SettingListItem
           icon={Icons.clearcache}
