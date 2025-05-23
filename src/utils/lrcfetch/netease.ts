@@ -47,12 +47,14 @@ const getLrcOptions = async (
     },
   });
   const json = await res.json();
-  return json?.result?.songs?.map((info: any) => ({
-    key: info.id,
-    songMid: info.id,
-    source: LrcSource.Netease,
-    label: `[${LrcSource.Netease}] ${info.name} - ${info.artists[0]?.name}`,
-  }));
+  return (
+    json?.result?.songs?.map((info: any) => ({
+      key: info.id,
+      songMid: info.id,
+      source: LrcSource.Netease,
+      label: `[${LrcSource.Netease}] ${info.name} - ${info.artists[0]?.name}`,
+    })) ?? []
+  );
 };
 
 export const getLyricOld = async (songMid: string) => {
