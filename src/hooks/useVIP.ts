@@ -29,8 +29,11 @@ const initRevenueCatWeb = async (userid?: string) => {
     // setSnackMsg(i18n.t('Billing.MustLoginBilibili'));
     throw new Error('[initRevenueCatWeb] mid is undefined');
   }
+  logger.info(`[APMVIP] ${mUserid}`);
   isRevenueCatInitialized = true;
-  PurchasesWeb.configure(REVENUECAT_STRIPE, `${mUserid}`);
+  PurchasesWeb.configure(REVENUECAT_STRIPE, `${mUserid}`, {
+    proxyURL: 'https://api.rc-backup.com',
+  });
 };
 
 const getVIPStatus = async () => {
@@ -40,6 +43,7 @@ const getVIPStatus = async () => {
   }
   await initRevenueCatWeb();
   const customerInfo = await PurchasesWeb.getSharedInstance().getCustomerInfo();
+  logger.info(JSON.stringify(customerInfo));
   return customerInfo.entitlements.active[VIPId] !== undefined;
 };
 
