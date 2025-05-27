@@ -1,4 +1,4 @@
-import { View, StyleSheet, Linking } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import { Text, Button, ActivityIndicator } from 'react-native-paper';
 import { useTranslation } from 'react-i18next';
@@ -54,9 +54,6 @@ const RevenueCatVIP = ({ setLoading }: LoadingChildrenProps) => {
     setLoading(false);
   };
 
-  const goToStripePay = () =>
-    Linking.openURL('https://buy.stripe.com/3cs17p4Lj6KZ9B64gg');
-
   if (APPSTORE) {
     return (
       <Button onPress={checkRevenueCatVIP}>{t('Billing.RevenueCat')}</Button>
@@ -65,7 +62,9 @@ const RevenueCatVIP = ({ setLoading }: LoadingChildrenProps) => {
   if (biliMid) {
     return (
       <View>
-        <Button onPress={goToStripePay}>{t('Billing.StripePurchase')}</Button>
+        <Button onPress={checkRevenueCatVIP}>
+          {t('Billing.StripePurchase')}
+        </Button>
         <Text>{t('Billing.StripePurchaseNote', { biliMid })}</Text>
       </View>
     );

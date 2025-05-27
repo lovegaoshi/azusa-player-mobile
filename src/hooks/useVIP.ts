@@ -3,6 +3,7 @@ import { useEffect } from 'react';
 import Purchases from 'react-native-purchases';
 import { create } from 'zustand';
 import { Purchases as PurchasesWeb } from '@revenuecat/purchases-js';
+import { Linking } from 'react-native';
 
 import { isAndroid } from '@utils/RNUtils';
 import { getUser, getHasGuard } from '@utils/Bilibili/BiliUser';
@@ -28,8 +29,11 @@ const initRevenueCatWeb = async (userid?: string) => {
     // setSnackMsg(i18n.t('Billing.MustLoginBilibili'));
     throw new Error('[initRevenueCatWeb] mid is undefined');
   }
+  logger.info(`[APMVIP] ${mUserid}`);
   isRevenueCatInitialized = true;
-  PurchasesWeb.configure(REVENUECAT_STRIPE, `${mUserid}`);
+  PurchasesWeb.configure(REVENUECAT_STRIPE, `${mUserid}`, {
+    proxyURL: 'https://api.rc-backup.com',
+  });
 };
 
 const getVIPStatus = async () => {
@@ -39,6 +43,7 @@ const getVIPStatus = async () => {
   }
   await initRevenueCatWeb();
   const customerInfo = await PurchasesWeb.getSharedInstance().getCustomerInfo();
+  logger.info(JSON.stringify(customerInfo));
   return customerInfo.entitlements.active[VIPId] !== undefined;
 };
 
@@ -60,6 +65,9 @@ export const purchaseVIP = async () => {
         APMActive = customerInfo.entitlements.active[VIPId] !== undefined;
       }
     } else {
+      return Linking.openURL('https://buy.stripe.com/3cs17p4Lj6KZ9B64gg');
+      /**
+       * TODO: in-app purchase page later
       const offerings = await PurchasesWeb.getSharedInstance().getOfferings();
       if (
         offerings.current !== null &&
@@ -72,6 +80,7 @@ export const purchaseVIP = async () => {
           });
         APMActive = customerInfo.entitlements.active[VIPId] !== undefined;
       }
+       */
     }
   } catch (e) {
     logger.error(JSON.stringify(e));
@@ -128,7 +137,7 @@ export const useSetupVIP = () => {
         Purchases.configure({ apiKey: REVENUECAT_GOOGLE });
       }
     } else {
-      initRevenueCatWeb('lovegaoshi');
+      initRevenueCatWeb();
     }
     checkVIP();
   };
