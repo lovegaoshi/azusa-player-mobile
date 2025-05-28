@@ -18,7 +18,6 @@ export const createStyle = (
       ...((customStyle.metaData ?? {}) as any),
     },
     colors: {
-      ...refTheme.colors,
       ...(customStyle.colors ?? refTheme.colors),
     },
 
