@@ -22,6 +22,7 @@ import { StorageKeys, SearchOptions } from '@enums/Storage';
 import { DefaultSetting, OverrideSetting } from '@objects/Storage';
 import { getAlistCred } from './alist/storage';
 import { timeFunction } from './Utils';
+// import json from '../components/styles/testStyle.json';
 
 export const getFadeInterval = async () =>
   Number(await getItem(StorageKeys.FADE_INTERVAL)) || 0;
@@ -208,6 +209,7 @@ export const initPlayerObject = async (safeMode = false) => {
       StorageKeys.PLAYMODE_KEY,
       NoxRepeatMode.Shuffle,
     ),
+    // json
     skin: await getItem(StorageKeys.SKIN, getDefaultTheme()),
     skins: (await getPlayerSkins()) || [],
     cookies: await getItem(StorageKeys.COOKIES, {}),
