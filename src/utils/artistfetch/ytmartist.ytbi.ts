@@ -10,7 +10,7 @@ import { ArtistFetch } from './biliartist';
 import { fetchYtbiPlaylist } from '../mediafetch/ytbPlaylist.ytbi';
 
 export default async (channelID: string): Promise<ArtistFetch> => {
-  const yt = await ytClientWeb;
+  const yt = await ytClientWeb();
   const channel = await yt.music.getArtist(channelID);
   const channelHeader = channel.header as MusicImmersiveHeader;
   if (channel.sections.length === 0) {

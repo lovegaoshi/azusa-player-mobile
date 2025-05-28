@@ -44,6 +44,7 @@ global.CustomEvent = CustomEvent as any;
 // === END === Making Youtube.js work
 
 let ytClient: undefined | Innertube;
+let ytWebClient: undefined | Innertube;
 
 const createYtClient = () =>
   getItem(StorageKeys.YTMCOOKIES, undefined).then(() =>
@@ -65,8 +66,14 @@ export default async () => {
   return ytClient!;
 };
 
-export const ytClientWeb = Innertube.create({
-  retrieve_player: false,
-  enable_session_cache: false,
-  generate_session_locally: false,
-});
+export const ytClientWeb = async () => {
+  if (ytWebClient !== undefined) {
+    return ytWebClient;
+  }
+  ytWebClient = await Innertube.create({
+    retrieve_player: false,
+    enable_session_cache: false,
+    generate_session_locally: false,
+  });
+  return ytWebClient!;
+};

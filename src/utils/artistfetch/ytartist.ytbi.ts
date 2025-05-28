@@ -8,7 +8,7 @@ import {
 } from '../mediafetch/ytbChannel.ytbi';
 
 export default async (channelID: string): Promise<ArtistFetch> => {
-  const yt = await ytClientWeb;
+  const yt = await ytClientWeb();
   const channel = await yt.getChannel(channelID);
   const channelHeader = channel.header as PageHeader;
   const profilePicURL = channelHeader?.content?.banner?.image?.[0]?.url ?? '';
