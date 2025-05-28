@@ -115,7 +115,7 @@ export default function App(appProps: NoxComponent.AppProps) {
       title={'FFF'}
       onPress={async () => {
         const ytc = await yt();
-        console.log(1234, await ytc.getSubscriptionsFeed());
+        console.log(1234, await ytc.getUnseenNotificationsCount());
       }}
     ></Button>
   );
