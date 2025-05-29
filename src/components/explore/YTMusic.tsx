@@ -18,7 +18,7 @@ import useYTMExplore, {
   YTMFlatSongTransform,
   YTMInlineVideoTransform,
   YTArtistTransform,
-} from '@stores/explore/ytm';
+} from '@stores/explore/ytmHome.muse';
 import { YTSongRow } from './SongRow';
 import { BiliSongsArrayTabCard } from './SongTab';
 
