@@ -17,7 +17,7 @@ import createMFsdk, { MFsdkStore } from './useMFsdk';
 import createAPMPlayback, { APMPlaybackStore } from './useAPMPlayback';
 import { initMFsdk } from '@utils/mfsdk';
 import { shuffle } from '@utils/Utils';
-import { smartShuffle } from '../utils/shuffle';
+import smarterShuffle from '../utils/shuffle';
 
 interface NoxSetting
   extends APMUIStore,
@@ -69,7 +69,7 @@ export const useNoxSetting = create<NoxSetting>((set, get, storeApi) => ({
     const { _setCurrentPlayingList, playerSetting } = get();
     return _setCurrentPlayingList(
       val,
-      playerSetting.smartShuffle ? smartShuffle : shuffle,
+      smarterShuffle(playerSetting.smartShuffle),
     );
   },
   getPlaylist: async (v, d) => {
