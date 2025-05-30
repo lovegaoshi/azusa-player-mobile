@@ -53,6 +53,7 @@ export default ({ usePlaylist, onPressed = () => undefined }: Props) => {
     x: 0,
     y: 0,
   });
+  const [headerHeight, setHeaderHeight] = useState<number>();
 
   const handleMenuPress = (event: GestureResponderEvent) => {
     toggleVisible();
@@ -157,6 +158,7 @@ export default ({ usePlaylist, onPressed = () => undefined }: Props) => {
               inputRange: [0, 100],
               outputRange: ['0%', '100%'],
             }),
+            height: headerHeight,
           },
           { zIndex: 2 },
         ]}
@@ -180,7 +182,12 @@ export default ({ usePlaylist, onPressed = () => undefined }: Props) => {
         )}
       </Animated.View>
 
-      <Animated.View style={[styles.pressable, { opacity }]}>
+      <Animated.View
+        style={[styles.pressable, { opacity }]}
+        onLayout={e =>
+          !headerHeight && setHeaderHeight(e.nativeEvent.layout.height)
+        }
+      >
         <Pressable onPress={onPressed}>
           <Text numberOfLines={1} variant="titleMedium">
             {currentPlaylist?.title}
@@ -207,7 +214,6 @@ const styles = StyleSheet.create({
     paddingLeft: 10,
   },
   textInput: {
-    height: 45,
     zIndex: 15,
   },
   searchInput: {
