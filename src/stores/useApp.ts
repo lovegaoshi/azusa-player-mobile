@@ -16,7 +16,6 @@ import createPlaylists, { PlaylistsStore } from './usePlaylists';
 import createMFsdk, { MFsdkStore } from './useMFsdk';
 import createAPMPlayback, { APMPlaybackStore } from './useAPMPlayback';
 import { initMFsdk } from '@utils/mfsdk';
-import { shuffle } from '@utils/Utils';
 import smarterShuffle from '../utils/shuffle';
 
 interface NoxSetting
