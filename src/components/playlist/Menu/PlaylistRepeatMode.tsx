@@ -1,10 +1,11 @@
 import { Pressable, StyleSheet, View } from 'react-native';
 import { useTranslation } from 'react-i18next';
+import { Icon } from 'react-native-paper';
 
 import { useNoxSetting } from '@stores/useApp';
 import { NoxRepeatMode } from '@enums/RepeatMode';
 import { styles } from '@components/style';
-import { Icon, Text } from 'react-native-paper';
+import { PaperText as Text } from '@components/commonui/ScaledText';
 
 interface Props {
   mode?: NoxRepeatMode;

@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import { Pressable, View, FlatList, StyleSheet } from 'react-native';
-import { Button, Dialog, Portal, Text, RadioButton } from 'react-native-paper';
+import { Button, Dialog, Portal, RadioButton } from 'react-native-paper';
 import { useTranslation } from 'react-i18next';
+
+import { PaperText as Text } from '@components/commonui/ScaledText';
 import { execWhenTrue } from '@utils/Utils';
 import logger from '@utils/Logger';
 

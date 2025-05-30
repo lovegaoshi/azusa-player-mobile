@@ -1,7 +1,8 @@
 import { View, FlatList } from 'react-native';
 import { useEffect, useState } from 'react';
-import { IconButton, Text, TouchableRipple } from 'react-native-paper';
+import { IconButton, TouchableRipple } from 'react-native-paper';
 
+import { PaperText as Text } from '@components/commonui/ScaledText';
 import {
   getAlistCred,
   addAlistCred,

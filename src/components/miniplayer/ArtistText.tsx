@@ -1,5 +1,5 @@
 import React from 'react';
-import { Pressable, Text } from 'react-native';
+import { Pressable } from 'react-native';
 import { Track } from 'react-native-track-player';
 import { useTranslation } from 'react-i18next';
 
@@ -8,6 +8,7 @@ import useNavigation from '@hooks/useNavigation';
 import { NoxRoutes } from '@enums/Routes';
 import useSnack from '@stores/useSnack';
 import { useNoxSetting } from '@stores/useApp';
+import { PaperText as Text } from '@components/commonui/ScaledText';
 
 interface Props {
   track?: Track;

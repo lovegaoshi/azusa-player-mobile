@@ -1,7 +1,7 @@
 import { View, StyleSheet } from 'react-native';
-import { Text } from 'react-native-paper';
 import { useTranslation } from 'react-i18next';
 
+import { PaperText as Text } from '@components/commonui/ScaledText';
 import { useNoxSetting } from '@stores/useApp';
 const DummySettings = () => {
   const { t } = useTranslation();

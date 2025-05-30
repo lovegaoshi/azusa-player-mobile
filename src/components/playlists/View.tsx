@@ -1,9 +1,10 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect } from 'react';
-import { IconButton, Divider, Text, TouchableRipple } from 'react-native-paper';
+import { IconButton, Divider, TouchableRipple } from 'react-native-paper';
 import { View, ImageBackground, StyleSheet, Linking } from 'react-native';
 import { useTranslation } from 'react-i18next';
 
+import { PaperText as Text } from '@components/commonui/ScaledText';
 import { useNoxSetting } from '@stores/useApp';
 import usePlaybackAA from '@hooks/usePlaybackAA';
 import { NoxRoutes } from '@enums/Routes';

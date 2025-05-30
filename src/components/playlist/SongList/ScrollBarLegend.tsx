@@ -1,6 +1,6 @@
 import React, { RefObject, useState } from 'react';
 import { FlashList } from '@shopify/flash-list';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import Animated, {
   runOnJS,
   SharedValue,
@@ -11,6 +11,7 @@ import Animated, {
 } from 'react-native-reanimated';
 
 import { useNoxSetting } from '@stores/useApp';
+import { NativeText as Text } from '@components/commonui/ScaledText';
 import bs from '@utils/binarySearch';
 
 export interface ScrollProps {

@@ -1,8 +1,10 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useState } from 'react';
 import { Pressable, View, FlatList, StyleSheet } from 'react-native';
-import { Button, Dialog, Portal, Text, Checkbox } from 'react-native-paper';
+import { Button, Dialog, Portal, Checkbox } from 'react-native-paper';
 import { useTranslation } from 'react-i18next';
+
+import { PaperText as Text } from '@components/commonui/ScaledText';
 
 const DialogTitle = ({ title }: { title: string | undefined }) => {
   if (!title) return <View></View>;

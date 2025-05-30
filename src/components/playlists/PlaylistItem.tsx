@@ -1,8 +1,9 @@
 import React, { ReactNode } from 'react';
-import { IconButton, Text } from 'react-native-paper';
+import { IconButton } from 'react-native-paper';
 import { StyleSheet, TouchableOpacity, View } from 'react-native';
 
 import { useNoxSetting } from '@stores/useApp';
+import { PaperText as Text } from '@components/commonui/ScaledText';
 
 const DefaultIcon = (
   item: NoxMedia.Playlist,

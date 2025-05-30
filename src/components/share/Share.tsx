@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { Text, View, Image, Button } from 'react-native';
+import { View, Image, Button } from 'react-native';
 import { ShareMenuReactView } from 'react-native-share-menu';
+
+import { NativeText as Text } from '@components/commonui/ScaledText';
 
 const Share = () => {
   const [sharedData, setSharedData] = useState('');

@@ -1,7 +1,9 @@
 import React from 'react';
-import { Button, Dialog, Portal, Text } from 'react-native-paper';
+import { Button, Dialog, Portal } from 'react-native-paper';
 import { useTranslation } from 'react-i18next';
 import { StyleSheet } from 'react-native';
+
+import { PaperText as Text } from '@components/commonui/ScaledText';
 
 interface Props {
   visible: boolean;

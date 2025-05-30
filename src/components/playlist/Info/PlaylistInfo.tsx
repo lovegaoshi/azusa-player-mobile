@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Searchbar, Text } from 'react-native-paper';
+import { Searchbar } from 'react-native-paper';
 import {
   View,
   Pressable,
@@ -12,6 +12,7 @@ import { useTranslation } from 'react-i18next';
 import SearchMenu from './PlaylistSearchMenu';
 import { useNoxSetting } from '@stores/useApp';
 import { seconds2HHMMSS } from '@utils/Utils';
+import { PaperText as Text } from '@components/commonui/ScaledText';
 
 interface UsePlaylist {
   searchText: string;

@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { View, SafeAreaView, StyleSheet, ScrollView } from 'react-native';
-import { Text, Avatar, ActivityIndicator, Button } from 'react-native-paper';
+import { Avatar, ActivityIndicator, Button } from 'react-native-paper';
 import { useTranslation } from 'react-i18next';
 import QRCode from 'react-native-qrcode-svg';
 import CookieManager from '@react-native-cookies/cookies';
@@ -12,6 +12,7 @@ import BiliSelectFavButtton from './BiliSelectFavButtton';
 import { BiliLogin } from './useBiliLoginApp';
 import useSnack from '@stores/useSnack';
 import { styles as gStyles } from '@components/style';
+import { PaperText as Text } from '@components/commonui/ScaledText';
 
 const domain = 'https://bilibili.com';
 

@@ -1,8 +1,9 @@
 import * as React from 'react';
 import { View, SafeAreaView, LayoutAnimation } from 'react-native';
-import { Text, IconButton } from 'react-native-paper';
+import { IconButton } from 'react-native-paper';
 import { FlashList } from '@shopify/flash-list';
 
+import { PaperText as Text } from '@components/commonui/ScaledText';
 import { ItemSelectStyles as styles } from '@components/style';
 import Searchbar from './Searchbar';
 import { useNoxSetting } from '@stores/useApp';

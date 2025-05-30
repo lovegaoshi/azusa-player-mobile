@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { Text } from 'react-native-paper';
 import { useTranslation } from 'react-i18next';
 import { useProgress } from 'react-native-track-player';
 import { RangeSlider } from '@react-native-assets/slider';
 import { StyleSheet, View } from 'react-native';
 
+import { PaperText as Text } from '@components/commonui/ScaledText';
 import { useNoxSetting } from '@stores/useApp';
 import GenericDialog from '@components/dialogs/GenericDialog';
 import { seconds2MMSS as formatSeconds } from '@utils/Utils';

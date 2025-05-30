@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Pressable, View, FlatList, StyleSheet } from 'react-native';
-import { Button, Dialog, Portal, Text, RadioButton } from 'react-native-paper';
+import { Button, Dialog, Portal, RadioButton } from 'react-native-paper';
 import { useTranslation } from 'react-i18next';
 
 import { useNoxSetting } from '@stores/useApp';
@@ -8,6 +8,7 @@ import logger from '@utils/Logger';
 import noxPlayingList from '@stores/playingList';
 import { NoxRepeatMode } from '@enums/RepeatMode';
 import { isAndroid } from '@utils/RNUtils';
+import { PaperText as Text } from '@components/commonui/ScaledText';
 
 const { getState } = noxPlayingList;
 

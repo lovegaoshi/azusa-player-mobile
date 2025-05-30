@@ -1,7 +1,6 @@
 import React, { useRef } from 'react';
 import {
   StyleSheet,
-  Text,
   View,
   Animated,
   TouchableWithoutFeedback,
@@ -18,6 +17,7 @@ import { useNoxSetting } from '@stores/useApp';
 import NoxPlayingList from '@stores/playingList';
 import SongMenuButton from './SongMenuButton';
 import FavReloadButton from './FavReloadButton';
+import { NativeText as Text } from '@components/commonui/ScaledText';
 
 interface Props {
   track?: Track;
