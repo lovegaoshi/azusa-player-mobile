@@ -103,3 +103,7 @@ export const smartShuffle = (v: NoxMedia.Song[]) => {
     return shuffle(v);
   }
 };
+
+export default (smart = true) => {
+  return smart ? smartShuffle : shuffle;
+};

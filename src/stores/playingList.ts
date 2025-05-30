@@ -68,6 +68,19 @@ const playNextIndex = ({ direction = 1, set = true }: PlayNextIndex) => {
   return newIndex;
 };
 
+export const autoShuffleQueue = async (
+  queueLength = 0,
+  shuffleMethod: (v: NoxMedia.Song[]) => NoxMedia.Song[] = shuffle,
+) => {
+  const { playingList } = playlistStore.getState();
+  if (queueLength % playingList.length !== 0) {
+    return;
+  }
+  playlistStore.setState({
+    playingListShuffled: shuffleMethod(playingList),
+  });
+};
+
 export const playNextSong = (
   direction = 1,
   set = true,

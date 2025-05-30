@@ -44,17 +44,16 @@ global.CustomEvent = CustomEvent as any;
 // === END === Making Youtube.js work
 
 let ytClient: undefined | Innertube;
+let ytWebClient: undefined | Innertube;
 
 const createYtClient = () =>
-  getItem(StorageKeys.YTMCOOKIES, undefined).then(() =>
-    Innertube.create({
-      retrieve_player: true,
-      enable_session_cache: false,
-      generate_session_locally: false,
-      client_type: ClientType.IOS,
-      //cookie,
-    }),
-  );
+  Innertube.create({
+    retrieve_player: true,
+    enable_session_cache: false,
+    generate_session_locally: false,
+    client_type: ClientType.IOS,
+    //cookie,
+  });
 
 export default async () => {
   if (ytClient !== undefined) {
@@ -65,8 +64,21 @@ export default async () => {
   return ytClient!;
 };
 
-export const ytClientWeb = Innertube.create({
-  retrieve_player: false,
-  enable_session_cache: false,
-  generate_session_locally: false,
-});
+export const ytClientWeb = async () => {
+  if (ytWebClient !== undefined) {
+    return ytWebClient;
+  }
+  const cookie = await getItem(StorageKeys.YTMCOOKIES, undefined);
+  ytWebClient = await Innertube.create({
+    retrieve_player: false,
+    enable_session_cache: false,
+    generate_session_locally: false,
+    cookie,
+    fetch: (url, init) => {
+      // @ts-expect-error this headers is actually a map
+      init?.headers?.set('origin', 'https://www.youtube.com');
+      return fetch(url, init);
+    },
+  });
+  return ytWebClient!;
+};

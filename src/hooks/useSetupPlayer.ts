@@ -90,9 +90,6 @@ export default ({ intentData, vip }: NoxComponent.SetupPlayerProps) => {
         intentData === IntentData.SafeMode
           ? await initializePlayer(true)
           : await appStartupInit;
-      updateVersion(storedPlayerSetting);
-      checkVersion(true, storedPlayerSetting);
-      setTrack(await TrackPlayer.getActiveTrack());
       // activity is already loaded. this indicates a GC induced JS crash
       // or last exit reason is ApplicationExitInfo.REASON_SIGNALED (2)
       // for Samsung S21
@@ -102,6 +99,9 @@ export default ({ intentData, vip }: NoxComponent.SetupPlayerProps) => {
         await TrackPlayer.play();
         logger.error(`[APMReplay] detected ${GCCrash} and ${OSkill}!`);
       }
+      updateVersion(storedPlayerSetting);
+      checkVersion(true, storedPlayerSetting);
+      setTrack(await TrackPlayer.getActiveTrack());
       if (unmounted) return;
       setPlayerReady(true);
       if (unmounted) return;

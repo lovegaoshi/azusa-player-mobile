@@ -15,7 +15,7 @@ import { ytbiVideoToNoxSong } from './ytbSearch.ytbi';
 import { fetchYtbiPlaylist } from './ytbPlaylist.ytbi';
 
 export const searchYtbChannel = async (channel: string) => {
-  const yt = await ytClientWeb;
+  const yt = await ytClientWeb();
   const res = await yt.search(channel, { type: 'channel' });
   const channels = res.results as unknown as SearchChannel[];
   return channels[0].id;
@@ -49,7 +49,7 @@ const getYtbSong = async (
 
 export const fetchYtbiChannelPlaylists = async (channelID: string) => {
   try {
-    const yt = await ytClientWeb;
+    const yt = await ytClientWeb();
     const channel = await yt.getChannel(channelID);
     const playlists = (await channel.getPlaylists()).playlists as LockupView[];
     return playlists.map(v => {
@@ -82,7 +82,7 @@ export const fetchYtbiChannelVideos = async ({
   totalLimit = Infinity,
   extraChannelGet = async v => v,
 }: FetchYtbiChannelVideos) => {
-  const yt = await ytClientWeb;
+  const yt = await ytClientWeb();
   const channel = await yt.getChannel(channelID);
   const finalChannel = await extraChannelGet(channel);
   const channelvideos = await finalChannel.getVideos();

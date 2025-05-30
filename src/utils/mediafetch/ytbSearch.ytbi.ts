@@ -79,7 +79,7 @@ export const fetchYtbiSearch = async (
   favList: string[] = [],
 ): Promise<SearchResult> => {
   try {
-    const yt = await ytClientWeb;
+    const yt = await ytClientWeb();
     return getSearch({
       songs: [],
       favList,

@@ -4,7 +4,7 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { styles } from '@components/style';
-import useYTMChartExplore from '@stores/explore/ytmchart';
+import useYTMChartExplore from '@stores/explore/ytmchart.muse';
 import { YTMixedContent } from './YTMusic';
 import { toMixedContent } from './Utils';
 
