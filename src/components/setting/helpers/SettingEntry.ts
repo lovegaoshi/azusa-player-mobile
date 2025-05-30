@@ -1,6 +1,6 @@
 interface BaseSettingEntry<T> {
   options: T[];
-  renderOption: (option: T) => string;
+  renderOption: (option: T, index: number) => string;
   title: string;
 }
 

@@ -19,7 +19,7 @@ const DialogTitle = ({ title }: { title: string | undefined }) => {
 interface Props<T> {
   visible: boolean;
   options?: T[];
-  renderOptionTitle?: (val: T) => string;
+  renderOptionTitle?: (val: T, index: number) => string;
   title?: string;
   defaultIndex?: number;
   onClose?: (index?: number) => void;
@@ -114,7 +114,7 @@ export default function GenericSelectDialog<T>({
                     onPress={() => onItemPress(index)}
                   />
                   <Text variant="titleLarge" style={styles.dialogText}>
-                    {renderOptionTitle(item)}
+                    {renderOptionTitle(item, index)}
                   </Text>
                 </View>
               </Pressable>

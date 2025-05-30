@@ -342,6 +342,15 @@
     "ABRepeatDesc": "Update ABRepeat rules from GitHub"
   },
   "AppearanceSettings": {
+    "fontScaleName": "Font Scale",
+    "fontScaleDesc": "Adjust fonts to be smaller or bigger",
+    "fontScale0": "Extra Small",
+    "fontScale1": "Small",
+    "fontScale2": "Medium",
+    "fontScale3": "Large",
+    "fontScale4": "Extra Large",
+    "fontScale5": "Extra Extra Large",
+    "fontScale6": "Fatass",
     "selectPhotoName": "Select Photo",
     "selectPhotoDesc": "Select local photo as background",
     "noWeebSkinsName": "Weeb be Gone",
