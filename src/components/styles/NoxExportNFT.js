@@ -81,14 +81,24 @@ const emojiIds = garblistdata
 parsedGarbData.gifs = (
   await Promise.all(
     emojiIds.map(async emojiId => {
-      const realEmojiId = (
-        await axios.get(`https://bili-nft.vercel.app/get-emote/?mid=${emojiId}`)
-      ).data.id;
-      return (
-        await axios.get(
-          `https://api.bilibili.com/x/emote/package?business=reply&ids=${realEmojiId}`,
-        )
-      ).data.data.packages[0].emote.map(v => v.url);
+      try {
+        const req = await axios.get(
+          `https://api.bilibili.com/x/garb/v2/user/suit/benefit?item_id=${emojiId}&part=1`,
+        );
+        const data = await req.data.data;
+        return data.suit_items.emoji.map(v => v.properties.image);
+      } catch {
+        const realEmojiId = (
+          await axios.get(
+            `https://bili-nft.vercel.app/get-emote/?mid=${emojiId}`,
+          )
+        ).data.id;
+        return (
+          await axios.get(
+            `https://api.bilibili.com/x/emote/package?business=reply&ids=${realEmojiId}`,
+          )
+        ).data.data.packages[0].emote.map(v => v.url);
+      }
     }),
   )
 ).flat();

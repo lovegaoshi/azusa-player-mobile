@@ -1,10 +1,11 @@
 import { TrueSheet } from '@lodev09/react-native-true-sheet';
 import { useRef, useState } from 'react';
-import { Text, View, Alert } from 'react-native';
+import { View, Alert } from 'react-native';
 import { Image } from 'expo-image';
 import { Divider } from 'react-native-paper';
 import { useTranslation } from 'react-i18next';
 
+import { NativeText as Text } from '@components/commonui/ScaledText';
 import { NoxSheetRoutes } from '@enums/Routes';
 import { useNoxSetting } from '@stores/useApp';
 import { SongTitle, styles } from '../player/TrackInfo/TrackInfoTemplate';

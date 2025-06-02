@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { IconButton, Text, TouchableRipple } from 'react-native-paper';
+import { IconButton, TouchableRipple } from 'react-native-paper';
 import { Pressable, View, StyleSheet } from 'react-native';
 import FlashDragList from 'react-native-flashdrag-list';
 
@@ -15,6 +15,7 @@ import PlaylistItem from '@components/playlists/PlaylistItem';
 import usePlaylistBrowseTree from '@hooks/usePlaylistBrowseTree';
 import useNavigation from '@hooks/useNavigation';
 import { useIsLandscape } from '@hooks/useOrientation';
+import { PaperText as Text } from '@components/commonui/ScaledText';
 
 interface NewButtonProps {
   setNewPlaylistDialogOpen: (v: boolean) => void;

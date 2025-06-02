@@ -1,9 +1,10 @@
 import { View, StyleSheet } from 'react-native';
 import React, { useEffect, useState } from 'react';
-import { Text, Button, ActivityIndicator } from 'react-native-paper';
+import { Button, ActivityIndicator } from 'react-native-paper';
 import { useTranslation } from 'react-i18next';
 import { Image } from 'expo-image';
 
+import { PaperText as Text } from '@components/commonui/ScaledText';
 import useVIP, { checkGuardVIP, purchaseVIP } from '@hooks/useVIP';
 import { styles } from '../style';
 // eslint-disable-next-line import/no-unresolved

@@ -6,7 +6,6 @@ import {
   StyleSheet,
   FlatList,
 } from 'react-native';
-import { Text } from 'react-native-paper';
 import { Image } from 'expo-image';
 
 import { useNoxSetting } from '@stores/useApp';
@@ -15,6 +14,7 @@ import { NoxRoutes } from '@enums/Routes';
 import { BiliSongCardProp } from './SongTab';
 import useNavigation from '@hooks/useNavigation';
 import { YTSongRowCard, YTSongRowProp } from './types';
+import { PaperText as Text } from '@components/commonui/ScaledText';
 
 export const BiliSongRow = ({
   songs = [],

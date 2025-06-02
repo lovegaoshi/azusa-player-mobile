@@ -1,7 +1,6 @@
 import React, { useRef } from 'react';
 import {
   StyleSheet,
-  Text,
   View,
   Animated,
   TouchableWithoutFeedback,
@@ -12,12 +11,15 @@ import {
 } from 'react-native';
 import type { Track } from 'react-native-track-player';
 import { Image } from 'expo-image';
-import MarqueeText from 'react-native-text-ticker';
 
 import { useNoxSetting } from '@stores/useApp';
 import NoxPlayingList from '@stores/playingList';
 import SongMenuButton from './SongMenuButton';
 import FavReloadButton from './FavReloadButton';
+import {
+  NativeText as Text,
+  MarqueeText,
+} from '@components/commonui/ScaledText';
 
 interface Props {
   track?: Track;

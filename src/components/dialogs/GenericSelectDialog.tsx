@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import { Pressable, View, FlatList, StyleSheet } from 'react-native';
-import { Button, Dialog, Portal, Text, RadioButton } from 'react-native-paper';
+import { Button, Dialog, Portal, RadioButton } from 'react-native-paper';
 import { useTranslation } from 'react-i18next';
+
+import { PaperText as Text } from '@components/commonui/ScaledText';
 import { execWhenTrue } from '@utils/Utils';
 import logger from '@utils/Logger';
 
@@ -17,7 +19,7 @@ const DialogTitle = ({ title }: { title: string | undefined }) => {
 interface Props<T> {
   visible: boolean;
   options?: T[];
-  renderOptionTitle?: (val: T) => string;
+  renderOptionTitle?: (val: T, index: number) => string;
   title?: string;
   defaultIndex?: number;
   onClose?: (index?: number) => void;
@@ -112,7 +114,7 @@ export default function GenericSelectDialog<T>({
                     onPress={() => onItemPress(index)}
                   />
                   <Text variant="titleLarge" style={styles.dialogText}>
-                    {renderOptionTitle(item)}
+                    {renderOptionTitle(item, index)}
                   </Text>
                 </View>
               </Pressable>

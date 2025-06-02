@@ -1,24 +1,16 @@
 import * as React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { StyleSheet, View, ScrollView } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 
 import SkinSettings from './SkinSettings';
-import { RenderSetting } from '../helpers/RenderSetting';
-import SettingListItem from '../helpers/SettingListItem';
 import { useNoxSetting } from '@stores/useApp';
-import SelectDarkModeButton from './SelectDarkModeButton';
-import NoWeebButton from './NoWeebButton';
-import SelectPhotoButton from './SelectPhotoButton';
 import DefaultScreenOption from '@enums/ScreenOption';
-
-enum VIEW {
-  HOME = 'AppearanceHome',
-  SKIN = 'SkinSetting',
-}
+import Home, { VIEW } from './AppearanceSetting';
+import SelectDialogWrapper from '../SelectDialogWrapper';
 
 const Stack = createNativeStackNavigator();
 
-const MainView = ({ navigation }: NoxComponent.StackNavigationProps) => {
+const HomeWrapper = ({ navigation }: NoxComponent.StackNavigationProps) => {
   const playerStyle = useNoxSetting(state => state.playerStyle);
 
   return (
@@ -28,47 +20,9 @@ const MainView = ({ navigation }: NoxComponent.StackNavigationProps) => {
         { backgroundColor: playerStyle.customColors.maskedBackgroundColor },
       ]}
     >
-      <ScrollView>
-        <SettingListItem
-          icon={'palette-swatch-variant'}
-          settingName="SkinSetting"
-          onPress={() => navigation.navigate(VIEW.SKIN)}
-          settingCategory="Settings"
-        />
-        <RenderSetting
-          item={{
-            settingName: 'hideCoverInMobile',
-            settingCategory: 'AppearanceSettings',
-          }}
-        />
-        <RenderSetting
-          item={{
-            settingName: 'trackCoverArtCard',
-            settingCategory: 'AppearanceSettings',
-          }}
-        />
-        <RenderSetting
-          item={{
-            settingName: 'wavyProgressBar',
-            settingCategory: 'AppearanceSettings',
-          }}
-        />
-        <RenderSetting
-          item={{
-            settingName: 'accentColor',
-            settingCategory: 'AppearanceSettings',
-          }}
-        />
-        <SelectDarkModeButton />
-        <NoWeebButton />
-        <SelectPhotoButton />
-        <RenderSetting
-          item={{
-            settingName: 'alwaysShowBottomTab',
-            settingCategory: 'AppearanceSettings',
-          }}
-        />
-      </ScrollView>
+      <SelectDialogWrapper
+        Children={p => <Home {...p} navigation={navigation} />}
+      />
     </View>
   );
 };
@@ -78,7 +32,7 @@ const AppearanceSetting = () => {
     <Stack.Navigator>
       <Stack.Screen
         name={VIEW.HOME}
-        component={MainView}
+        component={HomeWrapper}
         options={{ headerShown: false, ...DefaultScreenOption }}
       />
       <Stack.Screen

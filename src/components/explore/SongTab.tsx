@@ -7,7 +7,6 @@ import {
   StyleSheet,
 } from 'react-native';
 import { FlashList } from '@shopify/flash-list';
-import { Text } from 'react-native-paper';
 import { Image } from 'expo-image';
 import { useTranslation } from 'react-i18next';
 
@@ -18,6 +17,7 @@ import { NoxRoutes } from '@enums/Routes';
 import useNavigation from '@hooks/useNavigation';
 import { styles } from '../style';
 import { BiliMusicTid } from '@enums/MediaFetch';
+import { PaperText as Text } from '@components/commonui/ScaledText';
 
 export interface BiliCatSongs {
   [key: number]: NoxMedia.Song[];

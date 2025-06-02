@@ -56,6 +56,7 @@ declare global {
       noBiliR128Gain: boolean;
       smartShuffle: boolean;
       lyricTap: boolean;
+      scaleFont: number;
 
       appID: string;
       language?: string;

@@ -2,13 +2,17 @@ import TrackPlayer, { State } from 'react-native-track-player';
 import { useStore } from 'zustand';
 
 import { useNoxSetting } from '@stores/useApp';
-import noxPlayingList, { playNextSong } from '@stores/playingList';
+import noxPlayingList, {
+  autoShuffleQueue,
+  playNextSong,
+} from '@stores/playingList';
 import { NoxRepeatMode } from '@enums/RepeatMode';
 import { songlistToTracklist } from '@utils/RNTPUtils';
 import appStore from '@stores/appStore';
 import logger from '@utils/Logger';
 import { increasePlaybackCount } from '@utils/db/sqlStorage';
 import getBiliSuggest from '@utils/mediafetch/suggestfetch';
+import smarterShuffle from '@utils/shuffle';
 
 const setAppStore = appStore.setState;
 const skipToBiliSuggest = async (
@@ -33,12 +37,14 @@ const skipToBiliSuggest = async (
 };
 
 const prepareSkipToNext = async (mSkipToBiliSuggest = skipToBiliSuggest) => {
-  const nextSong = playNextSong();
-  if (
-    nextSong &&
-    (await TrackPlayer.getActiveTrackIndex()) ===
-      (await TrackPlayer.getQueue()).length - 1
-  ) {
+  const TPQueueLength = (await TrackPlayer.getQueue()).length;
+  if ((await TrackPlayer.getActiveTrackIndex()) === TPQueueLength - 1) {
+    const { playerSetting } = useNoxSetting.getState();
+    autoShuffleQueue(TPQueueLength, smarterShuffle(playerSetting.smartShuffle));
+    const nextSong = playNextSong();
+    if (!nextSong) {
+      return;
+    }
     try {
       await mSkipToBiliSuggest();
     } catch {

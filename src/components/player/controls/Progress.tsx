@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import { useProgress } from 'react-native-track-player';
 import { ProgressBar } from 'react-native-paper';
 import { useStore } from 'zustand';
@@ -9,6 +9,7 @@ import ProgressBarAPM from './ProgressBar';
 import { useNoxSetting } from '@stores/useApp';
 import { seconds2MMSS as formatSeconds } from '@utils/Utils';
 import appStore from '@stores/appStore';
+import { NativeText as Text } from '@components/commonui/ScaledText';
 
 export const Progress: React.FC<{ live?: boolean }> = ({ live }) => {
   const { position, duration } = useProgress(1000, false);

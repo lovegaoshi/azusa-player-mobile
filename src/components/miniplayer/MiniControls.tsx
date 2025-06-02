@@ -1,5 +1,5 @@
 import TrackPlayer from 'react-native-track-player';
-import { ActivityIndicator, IconButton, Text } from 'react-native-paper';
+import { ActivityIndicator, IconButton } from 'react-native-paper';
 import { Dimensions, TouchableWithoutFeedback, View } from 'react-native';
 import Animated, {
   useAnimatedStyle,
@@ -13,6 +13,7 @@ import { styles } from '../style';
 import { useTrackStore } from '@hooks/useActiveTrack';
 import { MinPlayerHeight } from './Constants';
 import { useNoxSetting } from '@stores/useApp';
+import { PaperText as Text } from '@components/commonui/ScaledText';
 
 const IconSize = 30;
 const iconContainerStyle = {

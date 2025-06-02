@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { View, FlatList, StyleSheet } from 'react-native';
 import { Button, Dialog, TextInput } from 'react-native-paper';
 import { useTranslation } from 'react-i18next';
+
 import { logger } from '@utils/Logger';
 
 interface Props {

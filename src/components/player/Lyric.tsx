@@ -4,7 +4,6 @@ import {
   Modal,
   View,
   StyleSheet,
-  Text,
   FlatList,
   TouchableOpacity,
   Button,
@@ -19,6 +18,7 @@ import { useTranslation } from 'react-i18next';
 import { useNoxSetting } from '@stores/useApp';
 import useLyric from '@hooks/useLyricRN';
 import { isIOS } from '@utils/RNUtils';
+import { NativeText as Text } from '@components/commonui/ScaledText';
 
 interface ModalContainerProps {
   children: React.JSX.Element[];

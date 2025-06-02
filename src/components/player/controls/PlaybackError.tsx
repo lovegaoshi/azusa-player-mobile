@@ -1,5 +1,7 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
+
+import { NativeText as Text } from '@components/commonui/ScaledText';
 
 export const PlaybackError: React.FC<{ error?: string }> = ({ error }) => {
   return (

@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import { BackHandler, SafeAreaView, StyleSheet, View } from 'react-native';
-import { Button, Avatar, Text, ActivityIndicator } from 'react-native-paper';
+import { Button, Avatar, ActivityIndicator } from 'react-native-paper';
 import { WebView } from 'react-native-webview';
 import { useFocusEffect } from '@react-navigation/native';
 import CookieManager from '@react-native-cookies/cookies';
@@ -14,6 +14,7 @@ import useCollapsible from '../useCollapsible';
 import { initMuse } from '@utils/muse';
 import logger from '@utils/Logger';
 import { styles as stylesG } from '@components/style';
+import { PaperText as Text } from '@components/commonui/ScaledText';
 
 const jsCode = 'window.ReactNativeWebView.postMessage(document.cookie)';
 

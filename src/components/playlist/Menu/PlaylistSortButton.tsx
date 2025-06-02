@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
-import { Checkbox, Text } from 'react-native-paper';
+import { Checkbox } from 'react-native-paper';
 import { useTranslation } from 'react-i18next';
 import { View, StyleSheet } from 'react-native';
 
 import Dialog from '@components/dialogs/GenericSelectDialog';
 import { SortOptions } from '@enums/Playlist';
 import SheetIconEntry from '@components/commonui/bottomsheet/SheetIconEntry';
+import { PaperText as Text } from '@components/commonui/ScaledText';
 
 const ICON = 'sort';
 

@@ -1,6 +1,7 @@
 import { StyleSheet, View } from 'react-native';
-import { Text, IconButton } from 'react-native-paper';
+import { IconButton } from 'react-native-paper';
 
+import { PaperText as Text } from '@components/commonui/ScaledText';
 import { useNoxSetting } from '@stores/useApp';
 
 export interface Props {

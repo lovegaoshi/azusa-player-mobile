@@ -1,7 +1,8 @@
 import { StyleSheet, View } from 'react-native';
-import { IconButton, Text, TouchableRipple } from 'react-native-paper';
+import { IconButton, TouchableRipple } from 'react-native-paper';
 
 import { Props } from './SheetIconButton';
+import { PaperText as Text } from '@components/commonui/ScaledText';
 
 export default ({ icon, text, onPress, disabled, children }: Props) => {
   return (
