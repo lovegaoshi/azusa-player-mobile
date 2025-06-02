@@ -632,6 +632,26 @@
       "darkTheme": false
     },
     "gifs": [
+      "https://i0.hdslb.com/bfs/garb/e3ed378c5c216ffa6f43220ca527cb6ed1dabf26.png",
+      "https://i0.hdslb.com/bfs/garb/87de46b07a3fe09812580dc6199c2c1161623390.png",
+      "https://i0.hdslb.com/bfs/garb/4f47367159a14cb8e6a53dfe4a6cd8a3f1a281d5.png",
+      "https://i0.hdslb.com/bfs/garb/e3707820e67bcd311381a779f4b8082ce86136c0.png",
+      "https://i0.hdslb.com/bfs/garb/6c2453b72254eefc0a742009f6cf06bd45b42c08.png",
+      "https://i0.hdslb.com/bfs/garb/79d2336db2e7de00505fdaf089d5f3677bf89f5a.png",
+      "https://i0.hdslb.com/bfs/garb/f218b21171015f02d20aac8782b9714ae3d5d111.png",
+      "https://i0.hdslb.com/bfs/garb/016d288d109ee3dc2a8a3a60096b43fbceb85eb6.png",
+      "https://i0.hdslb.com/bfs/garb/54e18f21ca96b02e1c0b17605a287edebef9096b.png",
+      "https://i0.hdslb.com/bfs/garb/376cacf993b0486c07d1e1de0bf4f21d1d9a5552.png",
+      "https://i0.hdslb.com/bfs/garb/0c9245415721c9af41c33d220ced658956660a82.png",
+      "https://i0.hdslb.com/bfs/garb/ab2f6fe190f73eef5831090a75659fb86b28a56b.png",
+      "https://i0.hdslb.com/bfs/garb/4060524fd152e9cc759b2365ee25e530b6bf9f4d.png",
+      "https://i0.hdslb.com/bfs/garb/d1ab539500a04b8f7c435161c4bf5860a3a1af7f.png",
+      "https://i0.hdslb.com/bfs/garb/f1918571ef7b01f601b5b7bcedbafd3c023b2c10.png",
+      "https://i0.hdslb.com/bfs/garb/cd4e98c64cd93b7a2690f4642b109ff789cb7177.png",
+      "https://i0.hdslb.com/bfs/garb/889dc4055382dddbacc8176c13bb84fd3c7b5d01.png",
+      "https://i0.hdslb.com/bfs/garb/905e074094ad846b116bd9b20334ebbf81b6eb41.png",
+      "https://i0.hdslb.com/bfs/garb/4c7c91fdb330021d28fe6a91fc93c27ec05f5d65.png",
+      "https://i0.hdslb.com/bfs/garb/66e16f4b1d3baa7ea6d6c94faf5989a33985b959.png",
       "https://i0.hdslb.com/bfs/garb/61a76c7c670394dcdbe1f0164b731845f4584c92.png",
       "https://i0.hdslb.com/bfs/garb/99ed0b0835a0f1241d3522a1fa0ebd5003d5adcc.png",
       "https://i0.hdslb.com/bfs/garb/f9d3a3d00fe2678b3d5fcf907d426a314f76f45c.png",
@@ -688,6 +708,25 @@
       "https://i0.hdslb.com/bfs/garb/d2d50a1822d3a526b32330cd75420e67a9a5b51e.png"
     ],
     "backgroundImages": [
+      {
+        "type": "biliNFTVideoNew",
+        "identifier": "[\"107797\",\"107798\",\"小猫结婚\"]"
+      },
+      {
+        "type": "biliNFTVideoNew",
+        "identifier": "[\"107797\",\"107798\",\"小猫弹琴\"]"
+      },
+      "https://i0.hdslb.com/bfs/garb/open/36e7f5ad2b6c0d433845843de4f70c2e55a1e17c.png",
+      "https://i0.hdslb.com/bfs/garb/open/6c23d4dae297ec922432d59366ec7f459836155d.png",
+      "https://i0.hdslb.com/bfs/garb/open/981ff5f3e9535f5a6c24a0e08970ba3b10f8f75f.png",
+      "https://i0.hdslb.com/bfs/garb/open/13e0793ecb3c5f18e39675d537644d863c80c0ab.png",
+      "https://i0.hdslb.com/bfs/garb/open/d0277f9e5304266d03ea8d906e4d0fbcfc5a8ce5.png",
+      "https://i0.hdslb.com/bfs/garb/open/afd3f19d91aee19b9faffd7a1c3c03793590d4e1.png",
+      "https://i0.hdslb.com/bfs/garb/open/500bbd7d622b1a7487a7da1fe0ad6a34b1380eed.png",
+      {
+        "type": "biliNFTVideoRedeem",
+        "identifier": "[\"107797\",\"107798\",\"典藏卡-月下美猫\"]"
+      },
       {
         "type": "biliNFTVideoNew",
         "identifier": "[\"103205\",\"103206\",\"疏影暗香-桃几OvO\"]"
