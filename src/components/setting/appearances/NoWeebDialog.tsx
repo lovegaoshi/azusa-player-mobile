@@ -1,9 +1,10 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { ScrollView, StyleSheet, View } from 'react-native';
-import { Portal, Text } from 'react-native-paper';
+import { Portal } from 'react-native-paper';
 import { Image } from 'expo-image';
 
+import { PaperText as Text } from '@components/commonui/ScaledText';
 import { GenericDialog } from '@components/dialogs/GenericDialog';
 import { useNoxSetting } from '@stores/useApp';
 import { replaceStyleColor } from '@components/style';

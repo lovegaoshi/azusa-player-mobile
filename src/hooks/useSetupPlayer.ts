@@ -12,7 +12,7 @@ import { IntentData } from '@enums/Intent';
 import { useNoxSetting } from '@stores/useApp';
 import usePlayStore from './usePlayStore';
 import { buildBrowseTree } from '@utils/automotive/androidAuto';
-import { NativeModules } from 'react-native';
+import { Dimensions, NativeModules, PixelRatio } from 'react-native';
 import useActiveTrack, { useTrackStore } from './useActiveTrack';
 import migrations from '../../drizzle/migrations';
 import APMMigration from '../utils/db/migration';
@@ -32,6 +32,12 @@ const initializePlayer = async (safeMode = false) => {
     playbackMode,
     currentPlayingList,
   } = await initializeStores({ val: await initPlayerObject(safeMode) });
+  console.log(
+    'DPI',
+    PixelRatio.get(),
+    PixelRatio.getFontScale(),
+    Dimensions.get('window'),
+  );
   const serviceOptions = {
     noInterruption: storedPlayerSetting.noInterruption,
     keepForeground: storedPlayerSetting.keepForeground,

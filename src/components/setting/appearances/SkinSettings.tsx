@@ -1,9 +1,10 @@
 import * as React from 'react';
 import { Image } from 'expo-image';
 import { View, SafeAreaView, LayoutAnimation } from 'react-native';
-import { Text, IconButton, TouchableRipple } from 'react-native-paper';
+import { IconButton, TouchableRipple } from 'react-native-paper';
 import { FlashList } from '@shopify/flash-list';
 
+import { PaperText as Text } from '@components/commonui/ScaledText';
 import SkinSearchbar from './SkinSearchbar';
 import { useNoxSetting } from '@stores/useApp';
 import AzusaTheme from '@components/styles/AzusaTheme';

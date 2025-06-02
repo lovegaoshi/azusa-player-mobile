@@ -5,6 +5,7 @@ import { styles } from '../style';
 import BiliSearchbar from './BiliSearch/BiliSearchbar';
 import usePlaylist from './usePlaylistRN';
 import SongList from './SongList/View';
+import MenuSheet from './MenuSheet';
 import { useNoxSetting } from '@stores/useApp';
 
 const Playlist = () => {
@@ -19,6 +20,7 @@ const Playlist = () => {
         { backgroundColor: playerStyle.customColors.maskedBackgroundColor },
       ]}
     >
+      <MenuSheet usedPlaylist={usedPlaylist} />
       <BiliSearchbar onSearched={() => usedPlaylist.scrollTo({ toIndex: 0 })} />
       <SongList usedPlaylist={usedPlaylist} />
     </View>

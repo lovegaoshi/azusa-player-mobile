@@ -1,4 +1,4 @@
-import { Button, Text, View } from 'react-native';
+import { Button, View } from 'react-native';
 import Animated, {
   useAnimatedStyle,
   useSharedValue,
@@ -6,6 +6,8 @@ import Animated, {
 } from 'react-native-reanimated';
 import { TrueSheet } from '@lodev09/react-native-true-sheet';
 import { useRef } from 'react';
+
+import { NativeText as Text } from '@components/commonui/ScaledText';
 
 export default () => {
   const sheet = useRef<TrueSheet>(null);

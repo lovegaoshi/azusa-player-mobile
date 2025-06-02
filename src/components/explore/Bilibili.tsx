@@ -6,7 +6,7 @@ import {
   StyleSheet,
   ViewStyle,
 } from 'react-native';
-import { ActivityIndicator, Text } from 'react-native-paper';
+import { ActivityIndicator } from 'react-native-paper';
 import { useTranslation } from 'react-i18next';
 
 import { styles } from '@components/style';
@@ -14,6 +14,7 @@ import { BiliSongsTabCard, BiliSongsArrayTabCard } from './SongTab';
 import { BiliSongRow } from './SongRow';
 import useBiliExplore from '@stores/explore/bilibili';
 import { BiliMusicTid } from '@enums/MediaFetch';
+import { PaperText as Text } from '@components/commonui/ScaledText';
 
 interface Props {
   style?: ViewStyle;

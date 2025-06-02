@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, View } from 'react-native';
+import { View } from 'react-native';
 import Animated, {
   SharedValue,
   useAnimatedStyle,
@@ -16,6 +16,7 @@ import {
   styles,
 } from '@components/player/TrackInfo/TrackInfoTemplate';
 import ArtistText from './ArtistText';
+import { NativeText as Text } from '@components/commonui/ScaledText';
 
 interface Props extends NoxComponent.OpacityProps {
   artworkOpacity: SharedValue<number>;

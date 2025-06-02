@@ -344,6 +344,15 @@
     "ABRepeatDesc": "从 GitHub 更新 ABRepeat 规则"
   },
   "AppearanceSettings": {
+    "fontScaleName": "字体缩放",
+    "fontScaleDesc": "字体缩放",
+    "fontScale0": "非常小",
+    "fontScale1": "小",
+    "fontScale2": "中",
+    "fontScale3": "大",
+    "fontScale4": "老大",
+    "fontScale5": "贼大",
+    "fontScale6": "贼他妈大",
     "selectPhotoName": "选择照片",
     "selectPhotoDesc": "选择本地照片作为背景",
     "noWeebSkinsName": "二次元收收味",

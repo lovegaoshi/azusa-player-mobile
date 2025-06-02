@@ -14,9 +14,10 @@ import Animated, {
   useSharedValue,
   withTiming,
 } from 'react-native-reanimated';
-import { IconButton, Text, ActivityIndicator } from 'react-native-paper';
+import { IconButton, ActivityIndicator } from 'react-native-paper';
 import { useTranslation } from 'react-i18next';
 
+import { PaperText as Text } from '@components/commonui/ScaledText';
 import { NoxRoutes } from '@enums/Routes';
 import useArtist from '@stores/explore/artist';
 import { YTSongRow } from '../explore/SongRow';

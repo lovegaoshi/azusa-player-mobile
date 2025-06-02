@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Searchbar, Text } from 'react-native-paper';
+import { Searchbar } from 'react-native-paper';
 import {
   View,
   Pressable,
@@ -12,6 +12,7 @@ import { useTranslation } from 'react-i18next';
 import SearchMenu from './PlaylistSearchMenu';
 import { useNoxSetting } from '@stores/useApp';
 import { seconds2HHMMSS } from '@utils/Utils';
+import { PaperText as Text } from '@components/commonui/ScaledText';
 
 interface UsePlaylist {
   searchText: string;
@@ -52,6 +53,7 @@ export default ({ usePlaylist, onPressed = () => undefined }: Props) => {
     x: 0,
     y: 0,
   });
+  const [headerHeight, setHeaderHeight] = useState<number>();
 
   const handleMenuPress = (event: GestureResponderEvent) => {
     toggleVisible();
@@ -156,6 +158,7 @@ export default ({ usePlaylist, onPressed = () => undefined }: Props) => {
               inputRange: [0, 100],
               outputRange: ['0%', '100%'],
             }),
+            height: headerHeight,
           },
           { zIndex: 2 },
         ]}
@@ -179,7 +182,12 @@ export default ({ usePlaylist, onPressed = () => undefined }: Props) => {
         )}
       </Animated.View>
 
-      <Animated.View style={[styles.pressable, { opacity }]}>
+      <Animated.View
+        style={[styles.pressable, { opacity }]}
+        onLayout={e =>
+          !headerHeight && setHeaderHeight(e.nativeEvent.layout.height)
+        }
+      >
         <Pressable onPress={onPressed}>
           <Text numberOfLines={1} variant="titleMedium">
             {currentPlaylist?.title}
@@ -206,7 +214,6 @@ const styles = StyleSheet.create({
     paddingLeft: 10,
   },
   textInput: {
-    height: 45,
     zIndex: 15,
   },
   searchInput: {

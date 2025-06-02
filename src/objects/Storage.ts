@@ -53,6 +53,7 @@ export const DefaultSetting: NoxStorage.PlayerSettingDict = {
   noBiliR128Gain: false,
   smartShuffle: true,
   lyricTap: true,
+  scaleFont: 1,
 
   appID: AppID,
   language: undefined,

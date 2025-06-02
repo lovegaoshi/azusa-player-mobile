@@ -1,15 +1,11 @@
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
-import {
-  IconButton,
-  Dialog,
-  Portal,
-  TextInput,
-  Text,
-} from 'react-native-paper';
+import { IconButton, Dialog, Portal, TextInput } from 'react-native-paper';
 import { useTranslation } from 'react-i18next';
+
 import useTimer from './useTimerRN';
 import { useNoxSetting } from '@stores/useApp';
+import { PaperText as Text } from '@components/commonui/ScaledText';
 
 interface Props {
   visible: boolean;

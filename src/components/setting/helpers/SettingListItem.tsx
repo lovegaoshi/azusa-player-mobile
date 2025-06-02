@@ -1,9 +1,10 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { StyleSheet } from 'react-native';
-import { IconButton, List } from 'react-native-paper';
+import { IconButton } from 'react-native-paper';
 
 import { useNoxSetting } from '@stores/useApp';
+import { PaperListItem } from '@components/commonui/ScaledText';
 /**
  * renders a generic clickable item.
  */
@@ -42,7 +43,7 @@ const SettingListItem = ({
   };
 
   return (
-    <List.Item
+    <PaperListItem
       left={getIcon}
       title={t(`${settingCategory}.${settingName}Name`)}
       description={modifyDescription(

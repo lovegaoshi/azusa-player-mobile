@@ -1,7 +1,8 @@
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
 import { useNoxSetting } from '@stores/useApp';
-import { Text } from 'react-native-paper';
+
+import { PaperText as Text } from '@components/commonui/ScaledText';
 
 interface Props {
   title?: string;

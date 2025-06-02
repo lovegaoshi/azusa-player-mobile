@@ -47,6 +47,14 @@ const developerSettings: { [key: string]: SettingEntry } = {
   },
    */
 };
+const LogOptions = [
+  LOGLEVEL.DEBUG,
+  LOGLEVEL.INFO,
+  LOGLEVEL.WARN,
+  LOGLEVEL.ERROR,
+  LOGLEVEL.CRITICAL,
+  LOGLEVEL.NONE,
+];
 
 const { getState, setState } = logStore;
 
@@ -76,14 +84,7 @@ export const Home = ({
   const selectLogLevel = () => {
     setSelectVisible(true);
     setCurrentSelectOption({
-      options: [
-        LOGLEVEL.DEBUG,
-        LOGLEVEL.INFO,
-        LOGLEVEL.WARN,
-        LOGLEVEL.ERROR,
-        LOGLEVEL.CRITICAL,
-        LOGLEVEL.NONE,
-      ],
+      options: LogOptions,
       renderOption: (option: number) => logLevelString[option],
       defaultIndex: getState().logLevel,
       onClose: () => setSelectVisible(false),

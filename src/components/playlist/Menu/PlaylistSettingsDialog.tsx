@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { View, StyleSheet } from 'react-native';
-import { Button, Dialog, Portal, Text, Switch } from 'react-native-paper';
+import { Button, Dialog, Portal, Switch } from 'react-native-paper';
 import { useTranslation } from 'react-i18next';
 
 import { useNoxSetting } from '@stores/useApp';
@@ -8,6 +8,7 @@ import NoxInput from '@components/dialogs/NoxInput';
 import SplitInput from '@components/dialogs/SplitInput';
 import usePlaylistSetting from './usePlaylistSetting';
 import PlaylistRepeatMode from './PlaylistRepeatMode';
+import { PaperText as Text } from '@components/commonui/ScaledText';
 
 interface Props {
   visible: boolean;

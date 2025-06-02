@@ -12,7 +12,6 @@ import { UsePlaylistRN } from '../usePlaylistRN';
 import SongListScrollbar from './SongListScrollbar';
 import { LegendExample, LegendProps } from './ScrollBarLegend';
 import SongList from './SongList';
-import SongMenuSheet from '@components/playlist/SongList/SongMenuSheet';
 
 interface Props {
   usedPlaylist: UsePlaylistRN;
@@ -20,11 +19,9 @@ interface Props {
 
 export default ({ usedPlaylist }: Props) => {
   const playerStyle = useNoxSetting(state => state.playerStyle);
-  const currentPlaylist = useNoxSetting(state => state.currentPlaylist);
   const songListScrollCounter = useNoxSetting(s => s.songListScrollCounter);
   const {
     rows,
-    setRows,
     toggleSelectedAll,
     checking,
     setChecking,
@@ -100,11 +97,7 @@ export default ({ usedPlaylist }: Props) => {
             containerColor={searching ? btnContainColor : undefined}
             //iconColor={playerStyle.colors.primary}
           />
-          <PlaylistMenuButton
-            disabled={checking}
-            playlist={currentPlaylist}
-            songListUpdateHalt={() => setRows([])}
-          />
+          <PlaylistMenuButton disabled={checking} />
         </View>
       </View>
       <SongListScrollbar
@@ -123,12 +116,6 @@ export default ({ usedPlaylist }: Props) => {
           scrollOffset={scrollOffset}
           scrollViewHeight={scrollViewHeight}
           contentHeight={contentHeight}
-        />
-        <SongMenuSheet
-          usePlaylist={usedPlaylist}
-          prepareForLayoutAnimationRender={() =>
-            playlistRef.current?.prepareForLayoutAnimationRender()
-          }
         />
       </SongListScrollbar>
     </View>
