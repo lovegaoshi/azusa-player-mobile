@@ -22,7 +22,6 @@ export default ({ usedPlaylist }: Props) => {
   const songListScrollCounter = useNoxSetting(s => s.songListScrollCounter);
   const {
     rows,
-    setRows,
     toggleSelectedAll,
     checking,
     setChecking,
