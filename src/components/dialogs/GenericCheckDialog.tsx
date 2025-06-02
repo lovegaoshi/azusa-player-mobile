@@ -18,7 +18,7 @@ const DialogTitle = ({ title }: { title: string | undefined }) => {
 interface Props<T> {
   visible: boolean;
   options?: T[];
-  renderOptionTitle?: (val: T) => string;
+  renderOptionTitle?: (val: T, i: number) => string;
   title?: string;
   onClose?: (index?: boolean[]) => void;
   onSubmit?: (index: boolean[]) => void;
@@ -83,7 +83,7 @@ export default ({
                     onPress={() => toggleIndex(index)}
                   />
                   <Text variant="titleLarge" style={styles.checkbox}>
-                    {renderOptionTitle(item)}
+                    {renderOptionTitle(item, index)}
                   </Text>
                 </View>
               </Pressable>
