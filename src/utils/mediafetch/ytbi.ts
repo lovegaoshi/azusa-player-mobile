@@ -43,7 +43,8 @@ global.CustomEvent = CustomEvent as any;
 // === END === Making Youtube.js work
 
 let ytClient: undefined | Innertube;
-let ytWebClient: undefined | Innertube;
+let _ytWebClient: undefined | Innertube;
+let _ytmClient: undefined | Innertube;
 
 const createYtClient = () =>
   Innertube.create({
@@ -63,12 +64,12 @@ export default async () => {
   return ytClient!;
 };
 
-export const ytClientWeb = async () => {
-  if (ytWebClient !== undefined) {
-    return ytWebClient;
+export const ytwebClient = async () => {
+  if (_ytWebClient !== undefined) {
+    return _ytWebClient;
   }
   const cookie = await getItem(StorageKeys.YTMCOOKIES, undefined);
-  ytWebClient = await Innertube.create({
+  _ytWebClient = await Innertube.create({
     retrieve_player: false,
     enable_session_cache: false,
     generate_session_locally: false,
@@ -79,5 +80,25 @@ export const ytClientWeb = async () => {
       return fetch(url, init);
     },
   });
-  return ytWebClient!;
+  return _ytWebClient!;
+};
+
+export const ytmClient = async () => {
+  if (_ytmClient !== undefined) {
+    return _ytmClient;
+  }
+  const cookie = await getItem(StorageKeys.YTMCOOKIES, undefined);
+  _ytmClient = await Innertube.create({
+    retrieve_player: false,
+    enable_session_cache: false,
+    generate_session_locally: false,
+    client_type: ClientType.MUSIC,
+    cookie,
+    fetch: (url, init) => {
+      // @ts-expect-error this headers is actually a map
+      init?.headers?.set('origin', 'https://www.youtube.com');
+      return fetch(url, init);
+    },
+  });
+  return _ytmClient!;
 };

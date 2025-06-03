@@ -29,9 +29,7 @@ import SongMenuSheet from '@components/songmenu/SongMenuSheet';
 import { useNoxSetting } from '@stores/useApp';
 import SnackBar from './components/commonui/Snackbar';
 import APM from './components/APM';
-import { ytClientWeb } from '@utils/mediafetch/ytbi';
-import { MusicTwoRowItem } from 'youtubei.js/dist/src/parser/nodes';
-import M from '@components/explore/YTMusic.ytbi';
+import { ytmClient } from '@utils/mediafetch/ytbi';
 
 const { LightTheme, DarkTheme } = adaptNavigationTheme({
   reactNavigationLight: NavigationDefaultTheme,
@@ -112,6 +110,19 @@ export default function App(appProps: NoxComponent.AppProps) {
     );
   }
 
+  return (
+    <Button
+      title={'FFF'}
+      onPress={async () => {
+        const ytc = await ytmClient();
+
+        const data = await ytc.music.getExplore();
+        const pt = data.top_buttons[1].endpoint;
+        console.log(555, pt);
+        console.log(1234, await pt.call(ytc.actions));
+      }}
+    ></Button>
+  );
   return (
     <GestureHandlerRootView style={styles.gestureContainer}>
       <MainBackground>

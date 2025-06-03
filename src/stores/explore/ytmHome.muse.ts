@@ -14,7 +14,7 @@ import last from 'lodash/last';
 import { fetchYtmPlaylist } from '@utils/mediafetch/ytbPlaylist.muse';
 import SongTS from '@objects/Song';
 import { Source } from '@enums/MediaFetch';
-import { ytClientWeb } from '@utils/mediafetch/ytbi';
+import { ytwebClient } from '@utils/mediafetch/ytbi';
 import { SongTransform } from './ytmHome.ytbi';
 
 interface YTMExplore {
@@ -32,7 +32,7 @@ export const YTArtistTransform = (v: RelatedArtist[]) =>
     name: i?.name,
     singer: i.subscribers ?? '',
     getPlaylist: async () => {
-      const ytc = await ytClientWeb();
+      const ytc = await ytwebClient();
       const data = await ytc.music.getArtist(i.browseId);
       const songs = await data.getAllSongs();
       return {

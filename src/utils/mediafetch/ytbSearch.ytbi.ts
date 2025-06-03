@@ -3,7 +3,7 @@ import Search from 'youtubei.js/dist/src/parser/youtube/Search';
 
 import SongTS from '@objects/Song';
 import { Source } from '@enums/MediaFetch';
-import { ytClientWeb } from '@utils/mediafetch/ytbi';
+import { ytwebClient } from '@utils/mediafetch/ytbi';
 import { logger } from '@utils/Logger';
 
 export const ytbiVideoToNoxSong = (val: Video) =>
@@ -79,7 +79,7 @@ export const fetchYtbiSearch = async (
   favList: string[] = [],
 ): Promise<SearchResult> => {
   try {
-    const yt = await ytClientWeb();
+    const yt = await ytwebClient();
     return getSearch({
       songs: [],
       favList,

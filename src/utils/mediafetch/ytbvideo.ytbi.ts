@@ -7,7 +7,7 @@ import {
 import SongTS from '@objects/Song';
 import { Source } from '@enums/MediaFetch';
 import { logger } from '@utils/Logger';
-import ytClient, { ytClientWeb } from '@utils/mediafetch/ytbi';
+import ytClient, { ytwebClient } from '@utils/mediafetch/ytbi';
 import { isIOS } from '@utils/RNUtils';
 
 const getHiResThumbnail = (thumbnails?: Thumbnail[]) => {
@@ -36,7 +36,7 @@ export const suggestYTM = async (
   song: NoxMedia.Song,
   filterMW = <T>(v: T[]) => v[0],
 ) => {
-  const yt = await ytClientWeb();
+  const yt = await ytwebClient();
   const videoInfo = await yt.music.getUpNext(song.bvid);
   const relatedVideos = videoInfo.contents as PlaylistPanelVideo[];
   const parsedVideos = relatedVideos.slice(1).map(suggestSong =>
@@ -63,7 +63,7 @@ export const suggest = async (
   song: NoxMedia.Song,
   filterMW = <T>(v: T[]) => v[0],
 ) => {
-  const yt = await ytClientWeb();
+  const yt = await ytwebClient();
   const videoInfo = await yt.getInfo(song.bvid);
   try {
     const relatedVideos =
@@ -93,7 +93,7 @@ export const suggest = async (
 };
 
 export const fetchAudioInfo = async (sid: string) => {
-  const yt = await ytClientWeb();
+  const yt = await ytwebClient();
   const videoInfo = (await yt.getBasicInfo(sid)).basic_info;
   return [
     SongTS({

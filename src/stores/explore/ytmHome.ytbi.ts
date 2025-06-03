@@ -8,7 +8,7 @@ import {
   MusicTwoRowItem,
 } from 'youtubei.js/dist/src/parser/nodes';
 
-import { ytClientWeb } from '@utils/mediafetch/ytbi';
+import { ytwebClient } from '@utils/mediafetch/ytbi';
 import SongTS from '@objects/Song';
 import { Source } from '@enums/MediaFetch';
 
@@ -74,7 +74,7 @@ export const PlaylistTransform = (v: MusicTwoRowItem[]) => {
       name: i?.title?.text!,
       singer: i.subtitle?.text,
       getPlaylist: async () => {
-        const ytc = await ytClientWeb();
+        const ytc = await ytwebClient();
         const songs = await ytc.music.getPlaylist(i.id!);
         songs.getContinuation();
         // const continuationToken = songs.contents?.filter(v => v.type === 'ContinuationItem')?.[0] as ContinuationItem
@@ -104,7 +104,7 @@ export const useYTMExplore = create<YTMExplore>((set, get) => ({
     });
   },
   refreshHome: async (params?: ChipCloudChip) => {
-    const yt = await ytClientWeb();
+    const yt = await ytwebClient();
     let homedata: HomeFeed;
     if (params) {
       const oldHomeData = get().homedata ?? (await yt.music.getHomeFeed());
