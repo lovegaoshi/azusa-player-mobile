@@ -38,7 +38,6 @@ class CustomEvent extends Event {
   }
 }
 
-// @ts-expect-error to avoid typings' fuss
 global.CustomEvent = CustomEvent as any;
 
 // === END === Making Youtube.js work
