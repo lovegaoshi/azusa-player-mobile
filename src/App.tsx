@@ -30,6 +30,7 @@ import { useNoxSetting } from '@stores/useApp';
 import SnackBar from './components/commonui/Snackbar';
 import APM from './components/APM';
 import { ytmClient } from '@utils/mediafetch/ytbi';
+import { Parser } from 'youtubei.js';
 
 const { LightTheme, DarkTheme } = adaptNavigationTheme({
   reactNavigationLight: NavigationDefaultTheme,
@@ -118,8 +119,9 @@ export default function App(appProps: NoxComponent.AppProps) {
 
         const data = await ytc.music.getExplore();
         const pt = data.top_buttons[1].endpoint;
-        console.log(555, pt);
-        console.log(1234, await pt.call(ytc.actions));
+        const ndata = await pt.call(ytc.actions);
+        const parseddata = Parser.parseResponse(ndata.data);
+        console.log(parseddata);
       }}
     ></Button>
   );
