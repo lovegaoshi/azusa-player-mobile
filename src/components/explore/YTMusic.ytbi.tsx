@@ -3,27 +3,23 @@ import { ActivityIndicator, Button } from 'react-native-paper';
 import React, { useEffect, useState } from 'react';
 import isArray from 'lodash/isArray';
 import {
-  MixedContent,
-  ParsedPlaylist,
-  ParsedAlbum,
-  FlatSong,
-  ParsedVideo,
-  RelatedArtist,
-} from 'libmuse';
+  ChipCloudChip,
+  MusicCarouselShelf,
+  MusicResponsiveListItem,
+  MusicTwoRowItem,
+} from 'youtubei.js/dist/src/parser/nodes';
 
 import { styles } from '@components/style';
 import useYTMExplore, {
-  YTPlaylistTransform,
-  YTAlbumTransform,
-  YTMFlatSongTransform,
-  YTMInlineVideoTransform,
-  YTArtistTransform,
-} from '@stores/explore/ytmHome.muse';
+  SongTransform,
+  VideoTransform,
+  PlaylistTransform,
+} from '@stores/explore/ytmHome.ytbi';
 import { YTSongRow } from './SongRow';
 import { BiliSongsArrayTabCard } from './SongTab';
 
 interface ContentProps {
-  content: MixedContent;
+  content: MusicCarouselShelf;
   key?: string;
 }
 
@@ -32,69 +28,53 @@ export const YTMixedContent = ({ content }: ContentProps) => {
     return <></>;
   }
   const filteredContent = content.contents.filter(v => v);
-  switch (filteredContent[0]?.type) {
-    case 'artist':
-      // HACK: doesnt work!
-      console.log(
-        <YTSongRow
-          songs={YTArtistTransform(filteredContent as RelatedArtist[])}
-          title={content.title!}
-        />,
-      );
-      return <></>;
+  const title = content.header?.title.text!;
+  // @ts-expect-error
+  switch (filteredContent[0]?.item_type) {
     case 'playlist':
       return (
         <YTSongRow
-          songs={YTPlaylistTransform(filteredContent as ParsedPlaylist[])}
-          title={content.title!}
+          songs={PlaylistTransform(filteredContent as MusicTwoRowItem[])}
+          title={title}
         />
       );
-    case 'album':
-      return (
-        <YTSongRow
-          songs={YTAlbumTransform(filteredContent as ParsedAlbum[])}
-          title={content.title!}
-        />
-      );
-    case 'flat-song':
+    case 'song':
       return (
         <BiliSongsArrayTabCard
-          songs={YTMFlatSongTransform(filteredContent as FlatSong[])}
-          title={content.title!}
-        />
-      );
-    case 'inline-video':
-      return (
-        <BiliSongsArrayTabCard
-          songs={YTMInlineVideoTransform(filteredContent as ParsedVideo[])}
-          title={content.title!}
+          songs={SongTransform(filteredContent as MusicResponsiveListItem[])}
+          title={title}
         />
       );
     case 'video':
       return (
         <BiliSongsArrayTabCard
-          songs={YTMInlineVideoTransform(filteredContent as ParsedVideo[])}
-          title={content.title!}
+          songs={VideoTransform(filteredContent as MusicTwoRowItem[])}
+          title={title}
         />
       );
     default:
-      console.log('not supported!', filteredContent[0]?.type, content);
+      console.log('[YTM] not supported!', filteredContent[0]?.type, content);
       return <></>;
   }
 };
 
 export default () => {
-  const [activeMood, setActiveMood] = useState('');
   const moods = useYTMExplore(state => state.moods);
   const refreshHome = useYTMExplore(state => state.refreshHome);
   const initialize = useYTMExplore(state => state.initialize);
-  const contents = useYTMExplore(state => state.homedata)?.results;
+  const activeMood = useYTMExplore(state => state.activeMood);
+  const setActiveMood = useYTMExplore(state => state.setActiveMood);
+  const contents = useYTMExplore(state => state.homedata)?.sections;
 
-  const onClickMood = (mood: string) => {
-    const newMood = mood === activeMood ? '' : mood;
+  const onClickMood = (mood: ChipCloudChip) => {
+    const newMood = mood === activeMood ? undefined : mood;
     setActiveMood(newMood);
     refreshHome(newMood);
   };
+
+  const carouselShelfs = contents?.filter(
+    v => v.type === 'MusicCarouselShelf',
+  ) as MusicCarouselShelf[] | undefined;
 
   useEffect(() => {
     initialize();
@@ -108,15 +88,13 @@ export default () => {
         style={{ flex: 0, flexGrow: 0 }}
       >
         {moods.map(mood => (
-          <View style={styles.rowView} key={mood.params}>
+          <View style={styles.rowView} key={mood.endpoint?.payload.params}>
             <Button
-              key={mood.name}
-              mode={
-                mood.params === activeMood ? 'contained' : 'contained-tonal'
-              }
-              onPress={() => onClickMood(mood.params)}
+              key={mood.text}
+              mode={mood === activeMood ? 'contained' : 'contained-tonal'}
+              onPress={() => onClickMood(mood)}
             >
-              {mood.name}
+              {mood.text}
             </Button>
             <View style={{ width: 15 }} />
           </View>
@@ -124,9 +102,9 @@ export default () => {
       </ScrollView>
       <View style={{ height: 10 }} />
       <ScrollView style={{ flex: 1 }}>
-        {contents ? (
-          contents.map(content => (
-            <YTMixedContent content={content} key={content.browseId!} />
+        {carouselShelfs ? (
+          carouselShelfs.map((content: any) => (
+            <YTMixedContent content={content} key={content.header?.title} />
           ))
         ) : (
           <View style={styles.alignMiddle}>

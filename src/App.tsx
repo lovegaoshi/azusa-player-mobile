@@ -30,6 +30,8 @@ import { useNoxSetting } from '@stores/useApp';
 import SnackBar from './components/commonui/Snackbar';
 import APM from './components/APM';
 import { ytClientWeb } from '@utils/mediafetch/ytbi';
+import { MusicTwoRowItem } from 'youtubei.js/dist/src/parser/nodes';
+import M from '@components/explore/YTMusic.ytbi';
 
 const { LightTheme, DarkTheme } = adaptNavigationTheme({
   reactNavigationLight: NavigationDefaultTheme,
@@ -110,16 +112,6 @@ export default function App(appProps: NoxComponent.AppProps) {
     );
   }
 
-  return (
-    <Button
-      title={'FFF'}
-      onPress={async () => {
-        const ytc = await ytClientWeb();
-        const data = await ytc.music.getHomeFeed();
-        console.log(1234, data);
-      }}
-    ></Button>
-  );
   return (
     <GestureHandlerRootView style={styles.gestureContainer}>
       <MainBackground>
