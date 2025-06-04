@@ -1,6 +1,6 @@
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import React, { useEffect } from 'react';
-import { Button, Linking, SafeAreaView, StyleSheet } from 'react-native';
+import { Linking, SafeAreaView, StyleSheet } from 'react-native';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { useStore } from 'zustand';
 import * as Sentry from '@sentry/react-native';
@@ -29,8 +29,6 @@ import SongMenuSheet from '@components/songmenu/SongMenuSheet';
 import { useNoxSetting } from '@stores/useApp';
 import SnackBar from './components/commonui/Snackbar';
 import APM from './components/APM';
-import { ytmClient } from '@utils/mediafetch/ytbi';
-import { Parser } from 'youtubei.js';
 
 const { LightTheme, DarkTheme } = adaptNavigationTheme({
   reactNavigationLight: NavigationDefaultTheme,
@@ -110,21 +108,6 @@ export default function App(appProps: NoxComponent.AppProps) {
       </SafeAreaView>
     );
   }
-
-  return (
-    <Button
-      title={'FFF'}
-      onPress={async () => {
-        const ytc = await ytmClient();
-
-        const data = await ytc.music.getExplore();
-        const pt = data.top_buttons[1].endpoint;
-        const ndata = await pt.call(ytc.actions);
-        const parseddata = Parser.parseResponse(ndata.data);
-        console.log(parseddata);
-      }}
-    ></Button>
-  );
   return (
     <GestureHandlerRootView style={styles.gestureContainer}>
       <MainBackground>

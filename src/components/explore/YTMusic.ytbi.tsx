@@ -1,6 +1,6 @@
 import { View, ScrollView } from 'react-native';
 import { ActivityIndicator, Button } from 'react-native-paper';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import isArray from 'lodash/isArray';
 import {
   ChipCloudChip,
@@ -14,6 +14,7 @@ import useYTMExplore, {
   SongTransform,
   VideoTransform,
   PlaylistTransform,
+  ArtistTransform,
 } from '@stores/explore/ytmHome.ytbi';
 import { YTSongRow } from './SongRow';
 import { BiliSongsArrayTabCard } from './SongTab';
@@ -28,13 +29,15 @@ export const YTMixedContent = ({ content }: ContentProps) => {
     return <></>;
   }
   const filteredContent = content.contents.filter(v => v);
-  const title = content.header?.title.text!;
+  const title = content.header?.title.text ?? 'N/A';
   // @ts-expect-error
   switch (filteredContent[0]?.item_type) {
     case 'playlist':
       return (
         <YTSongRow
-          songs={PlaylistTransform(filteredContent as MusicTwoRowItem[])}
+          songs={filteredContent.map(v =>
+            PlaylistTransform(v as MusicTwoRowItem),
+          )}
           title={title}
         />
       );
@@ -48,7 +51,16 @@ export const YTMixedContent = ({ content }: ContentProps) => {
     case 'video':
       return (
         <BiliSongsArrayTabCard
-          songs={VideoTransform(filteredContent as MusicTwoRowItem[])}
+          songs={filteredContent.map(v => VideoTransform(v as MusicTwoRowItem))}
+          title={title}
+        />
+      );
+    case 'artist':
+      return (
+        <YTSongRow
+          songs={filteredContent.map(v =>
+            ArtistTransform(v as MusicTwoRowItem),
+          )}
           title={title}
         />
       );

@@ -1,4 +1,4 @@
-import { ytwebClient } from '@utils/mediafetch/ytbi';
+import { ytmClient } from '@utils/mediafetch/ytbi';
 import {
   MusicCarouselShelf,
   MusicImmersiveHeader,
@@ -7,10 +7,13 @@ import {
 } from 'youtubei.js/dist/src/parser/nodes';
 
 import { ArtistFetch } from './biliartist';
-import { fetchYtbiPlaylist } from '../mediafetch/ytbPlaylist.ytbi';
+import { fetchPlaylist } from '../mediafetch/ytbPlaylist.ytbi';
+import logger from '../Logger';
+import { parseContent } from '@stores/explore/ytmHome.ytbi';
 
 export default async (channelID: string): Promise<ArtistFetch> => {
-  const yt = await ytwebClient();
+  logger.debug(`[YTMArtist] resolving ${channelID}`);
+  const yt = await ytmClient();
   const channel = await yt.music.getArtist(channelID);
   const channelHeader = channel.header as MusicImmersiveHeader;
   if (channel.sections.length === 0) {
@@ -23,35 +26,30 @@ export default async (channelID: string): Promise<ArtistFetch> => {
   const profilePicURL = channelHeader?.thumbnail?.contents?.[0]?.url ?? '';
   const artistName = channelHeader?.title?.text ?? '';
   const aboutString = channelHeader?.description?.text ?? '';
+  console.log('ytm section', carousels);
   return {
     profilePicURL,
     artistName,
     aboutString,
     subscribers: '',
     ProfilePlaySongs: [],
-    topSongs: await fetchYtbiPlaylist(
-      musicShelf.title.endpoint?.payload?.browseId,
-    ),
+    topSongs: await fetchPlaylist(musicShelf.title.endpoint?.payload?.browseId),
     albums: carousels.map(c => {
       const name = c.header?.title.text ?? '';
       return {
         data: c.contents
           .filter(i => i.type === 'MusicTwoRowItem')
-          // @ts-ignore
+          // @ts-expect-error force (safe) type casting
           .map((musicTwoRowItem: MusicTwoRowItem) => {
             const cover = musicTwoRowItem.thumbnail?.[0]?.url ?? '';
             const name = musicTwoRowItem.title.text ?? '';
             const singer = musicTwoRowItem.year ?? '';
-            const playlistId =
-              musicTwoRowItem.thumbnail_overlay?.content?.endpoint.payload
-                .playlistId;
+            const parsedContent = parseContent(musicTwoRowItem);
             return {
               cover,
               name,
               singer,
-              getPlaylist: async () => ({
-                songs: await fetchYtbiPlaylist(playlistId),
-              }),
+              getPlaylist: parsedContent?.getPlaylist ?? dummyFetch,
             };
           }),
         name,
@@ -61,3 +59,5 @@ export default async (channelID: string): Promise<ArtistFetch> => {
     shareURL: `https://music.youtube.com/channel/${channelID}`,
   };
 };
+
+const dummyFetch = async () => ({ songs: [] });
