@@ -51,7 +51,7 @@ export const BiliSongRow = ({
               onPress={() => {
                 navigationGlobal.navigate({
                   route: NoxRoutes.PlayerHome,
-                  params: { screen: NoxRoutes.Playlist },
+                  params: { screen: NoxRoutes.Playlist, pop: true },
                 });
                 playAsSearchList({
                   songs: totalSongs ?? songs,
@@ -110,7 +110,7 @@ export const YTSongRow = ({ songs = [], title }: YTSongRowProp) => {
   const onPress = async (item: YTSongRowCard) => {
     navigationGlobal.navigate({
       route: NoxRoutes.PlayerHome,
-      params: { screen: NoxRoutes.Playlist },
+      params: { screen: NoxRoutes.Playlist, pop: true },
     });
     progressEmitter(100);
     const playlist = await item.getPlaylist();
