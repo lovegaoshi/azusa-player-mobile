@@ -3,7 +3,7 @@ import { StyleSheet } from 'react-native';
 
 import { useNoxSetting } from '@stores/useApp';
 import BiliExplore from './Bilibili';
-import YTMExplore from './YTMusic';
+import YTMExplore from './YTMusic.ytbi';
 import YTMChartExplore from './YTMChart';
 import SiteSelector from '../login/SiteSelector';
 import { Site } from '@enums/Network';

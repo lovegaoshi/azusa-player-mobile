@@ -108,7 +108,6 @@ export default function App(appProps: NoxComponent.AppProps) {
       </SafeAreaView>
     );
   }
-
   return (
     <GestureHandlerRootView style={styles.gestureContainer}>
       <MainBackground>

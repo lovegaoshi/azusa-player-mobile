@@ -18,7 +18,6 @@ const APM = ({ isLandscape }: { isLandscape: boolean }) => {
 
 export default ({ PIP, isLandscape, defaultNavTheme, defaultTheme }: Props) => {
   const playerStyle = useNoxSetting(state => state.playerStyle);
-
   if (PIP) return <PIPLyricView />;
   return (
     <NavigationContainer
