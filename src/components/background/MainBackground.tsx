@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { ImageBackground, Dimensions, View, StyleSheet } from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import Video, { VideoRef, ResizeMode } from 'react-native-video';
 
 import { useNoxSetting } from '@stores/useApp';
@@ -12,6 +13,7 @@ import resolveBackgroundImage, {
 import EmptyBackground from './AccentColorBackground';
 
 const MainBackground = ({ children }: { children: React.JSX.Element }) => {
+  const insets = useSafeAreaInsets();
   const playerStyle = useNoxSetting(state => state.playerStyle);
   const isLandscape = useIsLandscape();
   const { width, height } = Dimensions.get('window');
@@ -32,7 +34,7 @@ const MainBackground = ({ children }: { children: React.JSX.Element }) => {
         <ImageBackground
           source={{ uri: bkgrdImg.identifier }}
           resizeMode="cover"
-          style={[styles.mobileStyle, { height }]}
+          style={[styles.mobileStyle, { height: height + insets.bottom }]}
         >
           <View
             style={{ backgroundColor: playerStyle.colors.background, flex: 1 }}
@@ -52,7 +54,10 @@ const MainBackground = ({ children }: { children: React.JSX.Element }) => {
               headers: customReqHeader(bkgrdImg.identifier, {}),
               bufferConfig: { cacheSizeMB: 200 },
             }}
-            style={[styles.videoStyle, { width, height }]}
+            style={[
+              styles.videoStyle,
+              { width, height: height + insets.bottom },
+            ]}
             onError={e => {
               logger.error(JSON.stringify(e));
               logger.error(

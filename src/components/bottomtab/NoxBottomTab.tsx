@@ -2,6 +2,7 @@ import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import { IconButton } from 'react-native-paper';
 import { getDrawerStatusFromState } from '@react-navigation/drawer';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { NoxRoutes } from '@enums/Routes';
 import { useNoxSetting } from '@stores/useApp';
@@ -29,6 +30,7 @@ const BottomIconButton = ({ icon, onPress }: IconProps) => {
 
 const NoxAndroidBottomTab = ({ navigation }: NoxComponent.NavigationProps2) => {
   const navigationG = useNavigation();
+  const insets = useSafeAreaInsets();
   const playerStyle = useNoxSetting(state => state.playerStyle);
   const gestureMode = useNoxSetting(state => state.gestureMode);
   const alwaysShowBottomTab = useNoxSetting(
@@ -57,7 +59,7 @@ const NoxAndroidBottomTab = ({ navigation }: NoxComponent.NavigationProps2) => {
     route === icon ? icon : `${icon}-outline`;
 
   if (!(gestureMode || alwaysShowBottomTab)) {
-    return <></>;
+    return <View style={{ height: insets.bottom }} />;
   }
   return (
     <View
@@ -66,7 +68,12 @@ const NoxAndroidBottomTab = ({ navigation }: NoxComponent.NavigationProps2) => {
           playerStyle.colors.elevation?.level5 ?? playerStyle.colors.background,
       }}
     >
-      <View style={[styles.panel, isLandscape ? { paddingBottom: 0 } : {}]}>
+      <View
+        style={[
+          styles.panel,
+          { paddingBottom: isLandscape ? 0 : insets.bottom },
+        ]}
+      >
         <BottomIconButton
           icon={renderIcon(RouteIcons.playlist)}
           onPress={onDrawerPress}
@@ -96,7 +103,6 @@ const NoxAndroidBottomTab = ({ navigation }: NoxComponent.NavigationProps2) => {
 const styles = StyleSheet.create({
   panel: {
     flexDirection: 'row',
-    paddingBottom: isIOS ? 20 : 0,
   },
   iconButton: {
     flex: 1,

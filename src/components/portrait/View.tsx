@@ -1,4 +1,5 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import Playlist from '../playlist/View';
 import Artist from '../artist/View';
@@ -13,8 +14,9 @@ const screenOptions = {
 };
 
 export default () => {
+  const insets = useSafeAreaInsets();
   return (
-    <FlexView>
+    <FlexView style={{ paddingTop: insets.top }}>
       <Stack.Navigator>
         <Stack.Screen
           name={NoxRoutes.Playlist}

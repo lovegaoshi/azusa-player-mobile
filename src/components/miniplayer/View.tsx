@@ -9,6 +9,7 @@ import Animated, {
   withTiming,
   Easing,
 } from 'react-native-reanimated';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import MiniControls from './MiniControls';
 import { MinPlayerHeight } from './Constants';
@@ -25,7 +26,10 @@ const SnapToRatio = 0.15;
 
 export default () => {
   const [lrcVisible, setLrcVisible] = React.useState(false);
-  const { width, height } = Dimensions.get('window');
+  const insets = useSafeAreaInsets();
+  const dim = Dimensions.get('window');
+  const width = dim.width;
+  const height = dim.height + insets.bottom;
   const miniplayerHeight = useSharedValue(MinPlayerHeight);
   const artworkOpacity = useSharedValue(1);
   const initHeight = useSharedValue(0);

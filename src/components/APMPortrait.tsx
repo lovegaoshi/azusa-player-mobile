@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react';
-import { View } from 'react-native';
 import { ParamListBase } from '@react-navigation/native';
 import {
   createDrawerNavigator,
@@ -7,7 +6,7 @@ import {
 } from '@react-navigation/drawer';
 import { IconButton } from 'react-native-paper';
 import { useTranslation } from 'react-i18next';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 import Home from './portrait/View';
 import PlaylistDrawer from './playlists/View';
@@ -26,7 +25,6 @@ const SettingIcon = () => <IconButton icon={ScreenIcons.SettingScreen} />;
 const AzusaPlayer = () => {
   const { t } = useTranslation();
   const Drawer = createDrawerNavigator();
-  const insets = useSafeAreaInsets();
   const [navigation, setNavigation] =
     React.useState<DrawerNavigationProp<ParamListBase>>();
 
@@ -36,14 +34,11 @@ const AzusaPlayer = () => {
   };
 
   return (
-    <View
+    <SafeAreaView
       style={{
         flex: 1,
-        // Paddings to handle safe area
-        paddingTop: insets.top,
-        paddingLeft: insets.left,
-        paddingRight: insets.right,
       }}
+      edges={{ top: 'off', bottom: 'off' }}
     >
       <Drawer.Navigator
         initialRouteName={NoxRoutes.PlayerHome}
@@ -86,7 +81,7 @@ const AzusaPlayer = () => {
       </Drawer.Navigator>
       <NoxMiniPlayer />
       <NoxBottomTab navigation={navigation} />
-    </View>
+    </SafeAreaView>
   );
 };
 

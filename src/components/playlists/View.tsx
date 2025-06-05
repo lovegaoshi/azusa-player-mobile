@@ -3,6 +3,7 @@ import React, { useEffect } from 'react';
 import { IconButton, Divider, TouchableRipple } from 'react-native-paper';
 import { View, ImageBackground, StyleSheet, Linking } from 'react-native';
 import { useTranslation } from 'react-i18next';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { PaperText as Text } from '@components/commonui/ScaledText';
 import { useNoxSetting } from '@stores/useApp';
@@ -59,6 +60,7 @@ const BiliCard = (props: any) => {
 
 export default () => {
   const navigation = useNavigation();
+  const insets = useSafeAreaInsets();
   const playlistIds = useNoxSetting(state => state.playlistIds);
   const playerStyle = useNoxSetting(state => state.playerStyle);
   const toggleExpand = useNoxSetting(state => state.toggleExpand);
@@ -91,7 +93,7 @@ export default () => {
   return (
     <FlexView>
       <>
-        <View style={styles.topPadding} />
+        <View style={{ height: 10 + insets.top }} />
         <BiliCard backgroundURI={playerStyle.biliGarbCard}>
           <RenderDrawerItem
             icon={'home-outline'}
