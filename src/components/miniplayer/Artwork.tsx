@@ -1,4 +1,4 @@
-import { TouchableWithoutFeedback, Dimensions } from 'react-native';
+import { TouchableWithoutFeedback, Dimensions, View } from 'react-native';
 import Animated, {
   SharedValue,
   useAnimatedStyle,
@@ -6,6 +6,7 @@ import Animated, {
 } from 'react-native-reanimated';
 import { useEffect, useState } from 'react';
 import { Image, useImage } from 'expo-image';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { useTrackStore } from '@hooks/useActiveTrack';
 import { MinPlayerHeight } from './Constants';
@@ -29,6 +30,7 @@ export default ({ miniplayerHeight, opacity, onPress, expand }: Props) => {
   const playerSetting = useNoxSetting(state => state.playerSetting);
   const [overwriteAlbumArt, setOverwriteAlbumArt] = useState<string | void>();
   const { width } = Dimensions.get('window');
+  const insets = useSafeAreaInsets();
 
   const imgURI = playerSetting.hideCoverInMobile
     ? ''
@@ -54,7 +56,7 @@ export default ({ miniplayerHeight, opacity, onPress, expand }: Props) => {
   );
 
   const artworkTranslateY = useDerivedValue(() => {
-    return Math.min(95, 30 + (expandDiff.value - width) / 2);
+    return Math.min(95, 30 + (expandDiff.value - width - insets.top) / 2);
   });
   const artworkTranslateX = useDerivedValue(() => {
     const halfTranslation = (artworkWidth.value - width) / 2;
@@ -104,13 +106,14 @@ export default ({ miniplayerHeight, opacity, onPress, expand }: Props) => {
         style={[
           {
             width,
-            height: width,
+            height: width + insets.top,
             position: 'absolute',
             overflow: 'hidden',
           },
           animatedStyle,
         ]}
       >
+        <View style={{ height: insets.top }} />
         {playerSetting.artworkCarousel ? (
           <HorizontalCarousel
             images={trackCarousel}

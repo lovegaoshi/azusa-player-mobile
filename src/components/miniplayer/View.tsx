@@ -157,6 +157,7 @@ export default () => {
           opacity={lrcOpacity}
           onPress={onArtworkPress}
         />
+        <View style={{ height: insets.top }} />
         <TrackInfo
           opacity={opacityVisible}
           artworkOpacity={artworkOpacity}

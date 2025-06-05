@@ -1,6 +1,6 @@
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import React, { useEffect } from 'react';
-import { Linking, SafeAreaView, StyleSheet } from 'react-native';
+import { Linking, View, StyleSheet } from 'react-native';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { useStore } from 'zustand';
 import * as Sentry from '@sentry/react-native';
@@ -103,9 +103,11 @@ export default function App(appProps: NoxComponent.AppProps) {
 
   if (!(isPlayerReady && isSplashReady && isSplashAnimReady)) {
     return (
-      <SafeAreaView style={styles.screenContainer}>
-        <AppOpenSplash setIsSplashReady={setIsSplashAnimReady} />
-      </SafeAreaView>
+      <SafeAreaProvider>
+        <View style={styles.screenContainer}>
+          <AppOpenSplash setIsSplashReady={setIsSplashAnimReady} />
+        </View>
+      </SafeAreaProvider>
     );
   }
   return (

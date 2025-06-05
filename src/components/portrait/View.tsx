@@ -1,11 +1,11 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import Playlist from '../playlist/View';
 import Artist from '../artist/View';
 import { NoxRoutes } from '@enums/Routes';
 import DefaultScreenOption from '@enums/ScreenOption';
 import FlexView from '@components/commonui/FlexViewNewArch';
+import { useNoxSetting } from '@stores/useApp';
 
 const Stack = createNativeStackNavigator();
 const screenOptions = {
@@ -14,9 +14,14 @@ const screenOptions = {
 };
 
 export default () => {
-  const insets = useSafeAreaInsets();
+  const playerStyle = useNoxSetting(state => state.playerStyle);
+
   return (
-    <FlexView style={{ paddingTop: insets.top }}>
+    <FlexView
+      style={{
+        backgroundColor: playerStyle.customColors.maskedBackgroundColor,
+      }}
+    >
       <Stack.Navigator>
         <Stack.Screen
           name={NoxRoutes.Playlist}

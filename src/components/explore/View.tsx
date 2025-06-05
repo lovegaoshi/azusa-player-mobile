@@ -1,5 +1,6 @@
 import * as React from 'react';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, View } from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { useNoxSetting } from '@stores/useApp';
 import BiliExplore from './Bilibili';
@@ -23,6 +24,7 @@ const LoginComponent = ({ loginSite }: { loginSite: Site }) => {
 };
 
 const Explore = () => {
+  const insets = useSafeAreaInsets();
   const playerStyle = useNoxSetting(state => state.playerStyle);
   const { explorePage, setExplorePage } = useAPM();
 
@@ -32,6 +34,7 @@ const Explore = () => {
         containerStyle={{
           backgroundColor: playerStyle.customColors.maskedBackgroundColor,
           flex: 1,
+          paddingTop: insets.top,
         }}
         iconSize={30}
         iconTabStyle={styles.iconTab}

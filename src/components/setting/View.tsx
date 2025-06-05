@@ -1,6 +1,7 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { View, StyleSheet, ScrollView } from 'react-native';
 import { useTranslation } from 'react-i18next';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import GeneralSettings from './GeneralSettings';
 import AppearanceSettings from './appearances/View';
@@ -138,10 +139,11 @@ const HomeSettings = ({ navigation }: Props) => {
 };
 
 const Settings = ({ headerBackVisible = true }: Props) => {
+  const insets = useSafeAreaInsets();
   const { t } = useTranslation();
 
   return (
-    <FlexView noFlex>
+    <FlexView noFlex style={{ paddingTop: insets.top }}>
       <Stack.Navigator screenOptions={{ headerBackVisible }}>
         <Stack.Screen
           name={NoxView.HOME}

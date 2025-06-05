@@ -2,6 +2,7 @@ import React from 'react';
 import { View, StyleSheet } from 'react-native';
 import { IconButton } from 'react-native-paper';
 import Animated, { useAnimatedStyle } from 'react-native-reanimated';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { useNoxSetting } from '@stores/useApp';
 import RandomGIFButton from '../buttons/RandomGIF';
@@ -13,6 +14,7 @@ interface Props extends NoxComponent.OpacityProps {
 }
 
 export default ({ opacity, collapse }: Props) => {
+  const insets = useSafeAreaInsets();
   const playerStyle = useNoxSetting(state => state.playerStyle);
   const currentPlayingId = useNoxSetting(state => state.currentPlayingId);
   const navigation = useNavigation();
@@ -43,7 +45,7 @@ export default ({ opacity, collapse }: Props) => {
       style={[
         styles.containerStyle,
         playerStyle.playerTopBarContainer,
-        { position: 'absolute' },
+        { position: 'absolute', paddingTop: insets.top },
         animatedStyle,
       ]}
     >

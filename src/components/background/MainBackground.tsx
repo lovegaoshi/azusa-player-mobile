@@ -34,7 +34,10 @@ const MainBackground = ({ children }: { children: React.JSX.Element }) => {
         <ImageBackground
           source={{ uri: bkgrdImg.identifier }}
           resizeMode="cover"
-          style={[styles.mobileStyle, { height: height + insets.bottom }]}
+          style={[
+            styles.mobileStyle,
+            { height: height + insets.bottom + insets.top },
+          ]}
         >
           <View
             style={{ backgroundColor: playerStyle.colors.background, flex: 1 }}
@@ -56,7 +59,7 @@ const MainBackground = ({ children }: { children: React.JSX.Element }) => {
             }}
             style={[
               styles.videoStyle,
-              { width, height: height + insets.bottom },
+              { width, height: height + insets.bottom + insets.top },
             ]}
             onError={e => {
               logger.error(JSON.stringify(e));
