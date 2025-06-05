@@ -80,7 +80,7 @@ export default ({ onSearched = console.log }: Props) => {
   const handleExternalSearch = (data: string) => {
     navigationGlobal.navigate({
       route: NoxRoutes.PlayerHome,
-      params: { screen: NoxRoutes.Playlist },
+      params: { screen: NoxRoutes.Playlist, pop: true },
     });
     miniPlayerCollapse();
     return handleSearch(data);

@@ -1,6 +1,6 @@
 import { PageHeader } from 'youtubei.js/dist/src/parser/nodes';
 
-import { ytClientWeb } from '@utils/mediafetch/ytbi';
+import { ytwebClient } from '@utils/mediafetch/ytbi';
 import { ArtistFetch } from './biliartist';
 import {
   fetchYtbiChannelVideos,
@@ -8,7 +8,7 @@ import {
 } from '../mediafetch/ytbChannel.ytbi';
 
 export default async (channelID: string): Promise<ArtistFetch> => {
-  const yt = await ytClientWeb();
+  const yt = await ytwebClient();
   const channel = await yt.getChannel(channelID);
   const channelHeader = channel.header as PageHeader;
   const profilePicURL = channelHeader?.content?.banner?.image?.[0]?.url ?? '';

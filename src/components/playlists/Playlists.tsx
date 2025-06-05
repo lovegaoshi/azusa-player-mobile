@@ -71,7 +71,7 @@ export default () => {
   const goToPlaylist = (playlistId: string) => {
     navigation.navigate({
       route: isLandscape ? NoxRoutes.Playlist : NoxRoutes.PlayerHome,
-      params: { screen: NoxRoutes.Playlist },
+      params: { screen: NoxRoutes.Playlist, pop: true },
     });
     if (currentPlaylist.id === playlistId) {
       scroll();

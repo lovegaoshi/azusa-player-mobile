@@ -1,6 +1,6 @@
-import { ytClientWeb } from '../../src/utils/mediafetch/ytbi';
+import { ytwebClient } from '../../src/utils/mediafetch/ytbi';
 
 test('test ytbvideo', async () => {
-  const client = await ytClientWeb;
+  const client = await ytwebClient;
   console.log(await client.music.getHomeFeed());
 }, 220000);

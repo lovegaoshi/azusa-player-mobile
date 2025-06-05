@@ -12,9 +12,7 @@ import {
 } from './ytbvideo.muse';
 
 const resolveURL = (song: NoxMedia.Song, iOS = false) =>
-  iOS
-    ? resolveURLYtbi(song, iOS).catch(() => resolveURLMuse(song))
-    : resolveURLMuse(song).catch(() => resolveURLYtbi(song, iOS));
+  resolveURLYtbi(song, iOS).catch(() => resolveURLMuse(song));
 
 export const fetchAudioInfo = (bvid: string, progressEmitter?: () => void) =>
   biliApiLimiter.schedule(() => {

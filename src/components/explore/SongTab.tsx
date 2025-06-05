@@ -61,7 +61,7 @@ export const BiliSongCard = ({
               onPress={() => {
                 navigationGlobal.navigate({
                   route: NoxRoutes.PlayerHome,
-                  params: { screen: NoxRoutes.Playlist },
+                  params: { screen: NoxRoutes.Playlist, pop: true },
                 });
                 playAsSearchList({
                   songs: totalSongs ?? songs,

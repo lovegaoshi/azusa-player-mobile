@@ -3,9 +3,13 @@ import { Playlist } from 'youtubei.js/dist/src/parser/youtube';
 
 import SongTS from '@objects/Song';
 import { Source } from '@enums/MediaFetch';
-import { ytClientWeb } from '@utils/mediafetch/ytbi';
+import { ytwebClient } from '@utils/mediafetch/ytbi';
+import { fetchYtbiPlaylist as fetchYtmPlaylist } from './ytmPlaylist.ytbi';
 
-const ytbiPlaylistItemToNoxSong = (val: PlaylistVideo, data: Playlist) => {
+export const ytbiPlaylistItemToNoxSong = (
+  val: PlaylistVideo,
+  data: Playlist,
+) => {
   try {
     return SongTS({
       cid: `${Source.ytbvideo}-${val.id}`,
@@ -53,10 +57,18 @@ export const fetchYtbiPlaylist = async (
   playlistId: string,
   favList: string[] = [],
 ): Promise<NoxMedia.Song[]> => {
-  const yt = await ytClientWeb();
+  const yt = await ytwebClient();
   try {
     return getYtbSong(await yt.getPlaylist(playlistId), [], favList);
   } catch {
     return [];
   }
 };
+
+export const fetchPlaylist = async (
+  playlistId: string,
+  favList: string[] = [],
+): Promise<NoxMedia.Song[]> =>
+  fetchYtmPlaylist(playlistId, favList).catch(() =>
+    fetchYtbiPlaylist(playlistId, favList),
+  );

@@ -34,14 +34,12 @@ export const YTMixedContent = ({ content }: ContentProps) => {
   const filteredContent = content.contents.filter(v => v);
   switch (filteredContent[0]?.type) {
     case 'artist':
-      // HACK: doesnt work!
-      console.log(
+      return (
         <YTSongRow
           songs={YTArtistTransform(filteredContent as RelatedArtist[])}
           title={content.title!}
-        />,
+        />
       );
-      return <></>;
     case 'playlist':
       return (
         <YTSongRow

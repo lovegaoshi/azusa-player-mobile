@@ -25,7 +25,7 @@ export default ({ opacity, collapse }: Props) => {
     setCurrentPlaylist(await getPlaylist(currentPlayingList.id));
     navigation.navigate({
       route: NoxRoutes.PlayerHome,
-      params: { screen: NoxRoutes.Playlist },
+      params: { screen: NoxRoutes.Playlist, pop: true },
     });
     scroll();
     collapse();
