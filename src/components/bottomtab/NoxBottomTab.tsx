@@ -9,7 +9,6 @@ import { useNoxSetting } from '@stores/useApp';
 import useNoxMobile from '@stores/useMobile';
 import { BottomTabRouteIcons as RouteIcons } from '@enums/BottomTab';
 import { useIsLandscape } from '@hooks/useOrientation';
-import { isIOS } from '@utils/RNUtils';
 import useNavigation from '@hooks/useNavigation';
 
 interface IconProps {
