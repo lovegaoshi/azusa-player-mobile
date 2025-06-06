@@ -113,7 +113,10 @@ export default function App(appProps: NoxComponent.AppProps) {
   return (
     <GestureHandlerRootView style={styles.gestureContainer}>
       <SafeAreaProvider>
-        <MainBackground>
+        <MainBackground />
+        <View
+          style={{ backgroundColor: playerStyle.colors.background, flex: 1 }}
+        >
           <PaperProvider
             theme={{
               ...defaultTheme,
@@ -129,7 +132,7 @@ export default function App(appProps: NoxComponent.AppProps) {
             <SongMenuSheet />
             <SnackBar />
           </PaperProvider>
-        </MainBackground>
+        </View>
       </SafeAreaProvider>
     </GestureHandlerRootView>
   );
