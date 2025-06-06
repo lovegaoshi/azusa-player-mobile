@@ -34,11 +34,12 @@ export const initializeStores = async ({
       } catch {
         // TODO: do something?
       }
-      setGestureMode(await NoxModule.isGestureNavigationMode());
+      setGestureMode(await NoxModule.isGestureNavigationMode?.());
       break;
     default:
       break;
   }
+
   await initMuse();
   await initializeAppStore();
   await initializeRegexStore();

@@ -1,4 +1,10 @@
-import { Platform, PermissionsAndroid, NativeModules } from 'react-native';
+import {
+  Platform,
+  PermissionsAndroid,
+  NativeModules,
+  Appearance,
+  ColorSchemeName,
+} from 'react-native';
 import RNFetchBlob from 'react-native-blob-util';
 import * as DocumentPicker from 'expo-document-picker';
 import { nativeCrash } from '@sentry/react-native';
@@ -9,15 +15,35 @@ export const isAndroid10 = isAndroid && Number(Platform.Version) >= 29;
 export const isIOS = Platform.OS === 'ios';
 const { NoxModule } = NativeModules;
 
+const themeConversion = (t: ColorSchemeName) => {
+  switch (t) {
+    case 'light':
+      return 1;
+    case 'dark':
+      return 2;
+  }
+  return 0;
+};
+
+/**
+ * wrapper of Appearance.setColorScheme and uiManager.setApplicationNightMode(android)
+ * @param t ColorSchemeName
+ */
+export const setDarkTheme = (t: ColorSchemeName) => {
+  Appearance.setColorScheme(t);
+  NoxModule?.setDarkTheme?.(themeConversion(t));
+};
+
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-expect-error
 export const isOldArch = () => global?.nativeFabricUIManager === undefined;
 
 export const getFileSize = async (fpath: string) => {
   try {
-    return await RNFetchBlob.fs.stat(fpath);
+    const stat = await RNFetchBlob.fs.stat(fpath);
+    return stat.size;
   } catch {
-    return { size: 0 };
+    return 0;
   }
 };
 

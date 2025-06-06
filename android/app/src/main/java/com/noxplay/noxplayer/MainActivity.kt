@@ -47,7 +47,6 @@ class MainActivity(override var loadedRN: Boolean = BuildConfig.DEBUG) :
         super.onCreate(null)
         volumeListener = APMVolumeListener(::emit)
         registerReceiver(volumeListener, IntentFilter("android.media.VOLUME_CHANGED_ACTION"))
-
         val content: View = findViewById(android.R.id.content)
         content.viewTreeObserver.addOnPreDrawListener(
             object : ViewTreeObserver.OnPreDrawListener {
