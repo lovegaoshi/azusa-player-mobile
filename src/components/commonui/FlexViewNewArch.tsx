@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react';
-import { View } from 'react-native';
+import { View, ViewStyle } from 'react-native';
 
 import { styles } from '@components/style';
 import { isOldArch } from '@utils/RNUtils';
@@ -7,13 +7,14 @@ import { isOldArch } from '@utils/RNUtils';
 interface Props {
   children: React.JSX.Element;
   noFlex?: boolean;
+  style?: ViewStyle;
 }
 /**
  * a view of flex:1 for new arch, resolves resizing issues
  */
-export default ({ children, noFlex }: Props) => {
+export default ({ children, noFlex, style }: Props) => {
   if (isOldArch() && !noFlex) {
-    return <View style={styles.flex}>{children}</View>;
+    return <View style={[styles.flex, style]}>{children}</View>;
   }
 
   const [initHeight, setInitHeight] = useState(0);

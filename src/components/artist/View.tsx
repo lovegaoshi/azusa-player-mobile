@@ -16,6 +16,7 @@ import Animated, {
 } from 'react-native-reanimated';
 import { IconButton, ActivityIndicator } from 'react-native-paper';
 import { useTranslation } from 'react-i18next';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { PaperText as Text } from '@components/commonui/ScaledText';
 import { NoxRoutes } from '@enums/Routes';
@@ -34,6 +35,7 @@ export default ({ navigation }: NoxComponent.StackNavigationProps) => (
 );
 
 const Artist = ({ navigation }: NoxComponent.StackNavigationProps) => {
+  const insets = useSafeAreaInsets();
   const { t } = useTranslation();
   const dimension = Dimensions.get('window');
   const loading = useArtist(state => state.loading);
@@ -77,7 +79,6 @@ const Artist = ({ navigation }: NoxComponent.StackNavigationProps) => {
   }));
 
   const backgroundStyle = {
-    backgroundColor: playerStyle.customColors.maskedBackgroundColor,
     flex: 1,
   };
 
@@ -116,12 +117,12 @@ const Artist = ({ navigation }: NoxComponent.StackNavigationProps) => {
 
   return (
     <View style={backgroundStyle}>
-      <View style={mStyles.headerContainer}>
+      <View style={[mStyles.headerContainer, { paddingTop: insets.top }]}>
         <Animated.View
           style={[
             {
               width: dimension.width,
-              height: 60,
+              height: 60 + insets.top,
               position: 'absolute',
               backgroundColor: playerStyle.colors.primaryContainer,
             },

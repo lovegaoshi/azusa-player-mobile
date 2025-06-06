@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { View } from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { styles } from '../style';
 import BiliSearchbar from './BiliSearch/BiliSearchbar';
@@ -9,17 +10,12 @@ import MenuSheet from './MenuSheet';
 import { useNoxSetting } from '@stores/useApp';
 
 const Playlist = () => {
-  const playerStyle = useNoxSetting(state => state.playerStyle);
+  const insets = useSafeAreaInsets();
   const currentPlaylist = useNoxSetting(state => state.currentPlaylist);
   const usedPlaylist = usePlaylist(currentPlaylist);
 
   return (
-    <View
-      style={[
-        styles.contentContainer,
-        { backgroundColor: playerStyle.customColors.maskedBackgroundColor },
-      ]}
-    >
+    <View style={[styles.contentContainer, { paddingTop: insets.top }]}>
       <MenuSheet usedPlaylist={usedPlaylist} />
       <BiliSearchbar onSearched={() => usedPlaylist.scrollTo({ toIndex: 0 })} />
       <SongList usedPlaylist={usedPlaylist} />

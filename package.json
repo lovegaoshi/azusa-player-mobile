@@ -107,6 +107,7 @@
     "react-native-buffer": "^6.0.3",
     "react-native-carplay": "2.4.1-beta.0",
     "react-native-device-info": "^14.0.4",
+    "react-native-edge-to-edge": "^1.6.1",
     "react-native-flashdrag-list": "^0.2.4",
     "react-native-gesture-handler": "~2.25.0",
     "react-native-get-random-values": "^1.11.0",

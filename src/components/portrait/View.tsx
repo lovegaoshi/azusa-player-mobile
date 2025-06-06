@@ -5,6 +5,7 @@ import Artist from '../artist/View';
 import { NoxRoutes } from '@enums/Routes';
 import DefaultScreenOption from '@enums/ScreenOption';
 import FlexView from '@components/commonui/FlexViewNewArch';
+import { useNoxSetting } from '@stores/useApp';
 
 const Stack = createNativeStackNavigator();
 const screenOptions = {
@@ -13,8 +14,14 @@ const screenOptions = {
 };
 
 export default () => {
+  const playerStyle = useNoxSetting(state => state.playerStyle);
+
   return (
-    <FlexView>
+    <FlexView
+      style={{
+        backgroundColor: playerStyle.customColors.maskedBackgroundColor,
+      }}
+    >
       <Stack.Navigator>
         <Stack.Screen
           name={NoxRoutes.Playlist}

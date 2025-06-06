@@ -1,11 +1,11 @@
 import React from 'react';
-import { Dimensions, Pressable, StyleSheet, View } from 'react-native';
+import { Dimensions, Pressable, View } from 'react-native';
 import { Image } from 'expo-image';
 import Video from 'react-native-video';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { randomChoice } from '@utils/Utils';
 import useTanakaAmazingCommodities from '@hooks/useTanakaAmazingCommodities';
-
 enum SplashType {
   Image = 'image',
   Video = 'video',
@@ -28,47 +28,51 @@ const localSplashes: SplashArray = [
 
 const randomSplash = randomChoice(localSplashes);
 
-const fullScreenStyle = {
-  flex: 1,
-  height: Dimensions.get('window').height,
-  width: Dimensions.get('window').width,
-};
-
-const styles = StyleSheet.create({
-  fullscreen: fullScreenStyle,
-  tanaka: {
-    ...fullScreenStyle,
-    position: 'absolute',
-  },
-});
-
 interface TanakaProps {
   url: string;
   onEnd?: () => void;
 }
-const TanakaAmazingCommodities = ({ url, onEnd }: TanakaProps) => (
-  <>
-    <Video
-      source={{
-        uri: url,
-      }}
-      volume={0.7}
-      style={styles.tanaka}
-      onEnd={onEnd}
-      repeat={false}
-      resizeMode="cover"
-      disableFocus={true}
-      preventsDisplaySleepDuringVideoPlayback={false}
-    />
-    <Pressable style={styles.fullscreen} onPress={onEnd} />
-  </>
-);
+const TanakaAmazingCommodities = ({ url, onEnd }: TanakaProps) => {
+  const { width, height } = Dimensions.get('window');
+  const insets = useSafeAreaInsets();
+  const fullScreenStyle = {
+    width,
+    height: height + insets.top + insets.bottom,
+    flex: 1,
+  };
+
+  return (
+    <>
+      <Video
+        source={{
+          uri: url,
+        }}
+        volume={0.7}
+        style={[{ position: 'absolute' }, fullScreenStyle]}
+        onEnd={onEnd}
+        repeat={false}
+        resizeMode="cover"
+        disableFocus={true}
+        preventsDisplaySleepDuringVideoPlayback={false}
+      />
+      <Pressable style={fullScreenStyle} onPress={onEnd} />
+    </>
+  );
+};
 
 interface Props {
   setIsSplashReady: (v: boolean) => void;
 }
 const AppOpenSplash = ({ setIsSplashReady }: Props) => {
   const { tanaka, initialized } = useTanakaAmazingCommodities();
+  const { width, height } = Dimensions.get('window');
+  const insets = useSafeAreaInsets();
+  const fullScreenStyle = {
+    width,
+    height: height + insets.top + insets.bottom,
+    flex: 1,
+  };
+
   switch (randomSplash[0]) {
     case SplashType.Tanaka:
       if (!initialized) return <View />;
@@ -87,7 +91,7 @@ const AppOpenSplash = ({ setIsSplashReady }: Props) => {
       return (
         <Image
           source={randomSplash[1]() as number}
-          style={styles.fullscreen}
+          style={fullScreenStyle}
           contentFit={'contain'}
         />
       );

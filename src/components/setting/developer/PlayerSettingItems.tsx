@@ -11,6 +11,9 @@ import { Icons } from './enums';
 
 const ArtworkResOptions = [0, 240, 360, 480, 720, 1080];
 
+// XS - S - M -L - XL - XXL - XXXL
+const fontScaleOptions = [0.8, 0.9, 1, 1.1, 1.2, 1.4, 2];
+
 // refactors anything depends on playerSetting out into its own component
 export default ({
   setCurrentSelectOption,
@@ -19,6 +22,10 @@ export default ({
   const playerSetting = useNoxSetting(state => state.playerSetting);
   const setPlayerSetting = useNoxSetting(state => state.setPlayerSetting);
   const { t } = useTranslation();
+  const fontScaleString = fontScaleOptions.map((item, index) =>
+    t(`AppearanceSettings.fontScale${index}`),
+  );
+
   const selectCacheLevel = () => {
     setSelectVisible(true);
     const options = [
@@ -38,6 +45,21 @@ export default ({
         setSelectVisible(false);
       },
       title: t('DeveloperSettings.CacheSizeName'),
+    } as SelectSettingEntry<number>);
+  };
+
+  const selectFontScale = () => {
+    setSelectVisible(true);
+    setCurrentSelectOption({
+      options: fontScaleOptions,
+      renderOption: (_, index) => fontScaleString[index],
+      defaultIndex: 2,
+      onClose: () => setSelectVisible(false),
+      onSubmit: (index: number) => {
+        setPlayerSetting({ fontScale: fontScaleOptions[index] });
+        setSelectVisible(false);
+      },
+      title: t('AppearanceSettings.fontScaleName'),
     } as SelectSettingEntry<number>);
   };
 
@@ -63,6 +85,12 @@ export default ({
             val: playerSetting.cacheSize,
           })
         }
+      />
+      <SettingListItem
+        icon={'format-size'}
+        settingName="fontScale"
+        onPress={selectFontScale}
+        settingCategory="AppearanceSettings"
       />
     </>
   );
