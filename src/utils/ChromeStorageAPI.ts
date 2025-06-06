@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import AsyncStorage from 'expo-sqlite/kv-store';
-import { Appearance, ColorSchemeName } from 'react-native';
+import { Appearance, ColorSchemeName, NativeModules } from 'react-native';
 import * as SecureStore from 'expo-secure-store';
 import { v4 as uuidv4 } from 'uuid';
 import { strToU8, compressSync } from 'fflate';
@@ -11,6 +11,10 @@ import { AppID } from '@objects/Storage';
 import AdaptiveTheme from '../components/styles/AdaptiveTheme';
 import { exportSQL } from '@utils/db/sqlAPI';
 import APMMigration from './db/migration';
+import { setDarkTheme } from './RNUtils';
+
+const { NoxModule } = NativeModules;
+
 /**
  * noxplayer's storage handler.
  * ChromeStorage has quite a few changes from azusa player the chrome extension;
@@ -194,12 +198,14 @@ export const importPlayerContentRaw = async (
 
 export const getColorScheme = async () => {
   const colorScheme = await getItem(StorageKeys.COLORTHEME, null);
-  Appearance.setColorScheme(colorScheme);
+  setDarkTheme(colorScheme);
   return colorScheme;
 };
 
-export const saveColorScheme = (val: ColorSchemeName) =>
-  saveItem(StorageKeys.COLORTHEME, val);
+export const saveColorScheme = async (val: ColorSchemeName) => {
+  setDarkTheme(val);
+  await saveItem(StorageKeys.COLORTHEME, val);
+};
 
 export const getPlaylistSongList = async (
   playlist?: NoxMedia.Playlist,

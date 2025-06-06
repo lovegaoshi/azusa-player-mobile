@@ -17,6 +17,7 @@ import {
   ItemSelectStyles as styles,
   styles as stylesG,
 } from '@components/style';
+import { setDarkTheme } from '@utils/RNUtils';
 
 interface DisplayTheme extends NoxTheme.Style {
   builtin: boolean;
@@ -139,6 +140,9 @@ const SkinSettings = () => {
   const selectTheme = (theme: NoxTheme.Style) => {
     setChecked(getThemeID(theme));
     setPlayerStyle(theme);
+    setDarkTheme(
+      theme.isAdaptive ? null : theme.metaData.darkTheme ? 'dark' : 'light',
+    );
     scrollViewRef.current?.prepareForLayoutAnimationRender();
     LayoutAnimation.configureNext(LayoutAnimation.Presets.linear);
   };

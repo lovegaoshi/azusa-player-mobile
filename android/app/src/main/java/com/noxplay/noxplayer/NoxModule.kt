@@ -2,12 +2,15 @@ package com.noxplay.noxplayer
 
 import android.app.ActivityManager
 import android.app.ApplicationExitInfo
+import android.app.UiModeManager
 import android.content.ContentUris
 import android.content.Context
+import android.content.Context.UI_MODE_SERVICE
 import android.net.Uri
 import android.os.Build
 import android.provider.MediaStore
 import android.provider.Settings
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.content.FileProvider
 import com.facebook.react.bridge.Arguments
 import com.facebook.react.bridge.Promise
@@ -172,5 +175,17 @@ class NoxModule(reactContext: ReactApplicationContext) :
         activity?.finish()
         android.os.Process.killProcess(android.os.Process.myPid())
         callback.resolve(null)
+    }
+
+    // HACK: this unfortunately doesnt immediately change on S21 android 14?
+    // AUTO = 0; NO = 1, YES = 2
+    @ReactMethod fun setDarkTheme(mode: Int, callback: Promise) {
+        val activity = getActivity()
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+            val ui = activity?.getSystemService(UI_MODE_SERVICE) as UiModeManager?
+            ui?.setApplicationNightMode(mode)
+        } else {
+            AppCompatDelegate.setDefaultNightMode(mode)
+        }
     }
 }
