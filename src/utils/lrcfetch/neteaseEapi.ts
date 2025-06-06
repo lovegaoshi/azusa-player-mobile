@@ -1,7 +1,6 @@
 import md5 from 'md5';
-// @ts-expect-error
-import Aes from 'react-native-aes-ecb';
 
+import { Aes } from '../Crypto';
 import bfetch from '@utils/BiliFetch';
 // https://github.com/lyswhut/lx-music-desktop/blob/c1e7faa7bf8daeaf3ef4090c30a552931edd6150/src/renderer/utils/musicSdk/wy/lyric.js#L38
 
