@@ -1,6 +1,6 @@
 import md5 from 'md5';
 
-import { Aes } from '../Crypto';
+import { Aes } from '@utils/Crypto';
 import bfetch from '@utils/BiliFetch';
 // https://github.com/lyswhut/lx-music-desktop/blob/c1e7faa7bf8daeaf3ef4090c30a552931edd6150/src/renderer/utils/musicSdk/wy/lyric.js#L38
 
