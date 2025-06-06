@@ -6,7 +6,6 @@ import SkinSettings from './SkinSettings';
 import { useNoxSetting } from '@stores/useApp';
 import DefaultScreenOption from '@enums/ScreenOption';
 import Home, { VIEW } from './AppearanceSetting';
-import SelectDialogWrapper from '../SelectDialogWrapper';
 
 const Stack = createNativeStackNavigator();
 
@@ -20,9 +19,7 @@ const HomeWrapper = ({ navigation }: NoxComponent.StackNavigationProps) => {
         { backgroundColor: playerStyle.customColors.maskedBackgroundColor },
       ]}
     >
-      <SelectDialogWrapper
-        Children={p => <Home {...p} navigation={navigation} />}
-      />
+      <Home navigation={navigation} />
     </View>
   );
 };
@@ -33,7 +30,11 @@ const AppearanceSetting = () => {
       <Stack.Screen
         name={VIEW.HOME}
         component={HomeWrapper}
-        options={{ headerShown: false, ...DefaultScreenOption }}
+        options={{
+          headerShown: false,
+          ...DefaultScreenOption,
+          freezeOnBlur: true,
+        }}
       />
       <Stack.Screen
         name={VIEW.SKIN}
