@@ -4,6 +4,7 @@ import { Snackbar, Portal, ActivityIndicator } from 'react-native-paper';
 
 import useSnack, { InfiniteDuration } from '@stores/useSnack';
 import { useNoxSetting } from '@stores/useApp';
+import { CombinedDarkTheme, CombinedDefaultTheme } from '../styles/Theme';
 
 const Loading = () => <ActivityIndicator />;
 
@@ -15,7 +16,11 @@ export default function SnackBar() {
   return (
     <Portal>
       <Snackbar
-        theme={{ dark: playerStyle.metaData.darkTheme }}
+        theme={
+          playerStyle.metaData.darkTheme
+            ? CombinedDarkTheme
+            : CombinedDefaultTheme
+        }
         visible={snackVisible}
         onDismiss={snackOnDismiss}
         duration={snackDuration}
