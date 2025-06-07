@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import AsyncStorage from 'expo-sqlite/kv-store';
-import { Appearance, ColorSchemeName, NativeModules } from 'react-native';
+import { ColorSchemeName } from 'react-native';
 import * as SecureStore from 'expo-secure-store';
 import { v4 as uuidv4 } from 'uuid';
 import { strToU8, compressSync } from 'fflate';
@@ -12,8 +12,6 @@ import AdaptiveTheme from '../components/styles/AdaptiveTheme';
 import { exportSQL } from '@utils/db/sqlAPI';
 import APMMigration from './db/migration';
 import { setDarkTheme } from './RNUtils';
-
-const { NoxModule } = NativeModules;
 
 /**
  * noxplayer's storage handler.
