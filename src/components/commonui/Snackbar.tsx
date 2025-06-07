@@ -6,7 +6,7 @@ import useSnack, { InfiniteDuration } from '@stores/useSnack';
 import { useNoxSetting } from '@stores/useApp';
 import { CombinedDarkTheme, CombinedDefaultTheme } from '../styles/Theme';
 import { useColorScheme } from 'react-native';
-import logger from '@/utils/Logger';
+import logger from '@utils/Logger';
 
 const Loading = () => <ActivityIndicator />;
 
