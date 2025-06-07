@@ -4,13 +4,7 @@ import { Linking, View, StyleSheet } from 'react-native';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { useStore } from 'zustand';
 import * as Sentry from '@sentry/react-native';
-import {
-  MD3DarkTheme,
-  MD3LightTheme,
-  adaptNavigationTheme,
-  Provider as PaperProvider,
-} from 'react-native-paper';
-import merge from 'deepmerge';
+import { Provider as PaperProvider } from 'react-native-paper';
 import {
   DarkTheme as NavigationDarkTheme,
   DefaultTheme as NavigationDefaultTheme,
@@ -29,14 +23,10 @@ import SongMenuSheet from '@components/songmenu/SongMenuSheet';
 import { useNoxSetting } from '@stores/useApp';
 import SnackBar from './components/commonui/Snackbar';
 import APM from './components/APM';
-
-const { LightTheme, DarkTheme } = adaptNavigationTheme({
-  reactNavigationLight: NavigationDefaultTheme,
-  reactNavigationDark: NavigationDarkTheme,
-});
-
-const CombinedDefaultTheme = merge(MD3LightTheme, LightTheme);
-const CombinedDarkTheme = merge(MD3DarkTheme, DarkTheme);
+import {
+  CombinedDarkTheme,
+  CombinedDefaultTheme,
+} from './components/styles/Theme';
 
 if (TRACKING) {
   Sentry.init({
@@ -82,6 +72,7 @@ export default function App(appProps: NoxComponent.AppProps) {
   const defaultTheme = playerStyle.metaData.darkTheme
     ? CombinedDarkTheme
     : CombinedDefaultTheme;
+  console.log(defaultTheme, 'tttttt, theme');
   const defaultNavTheme = playerStyle.metaData.darkTheme
     ? NavigationDarkTheme
     : NavigationDefaultTheme;
