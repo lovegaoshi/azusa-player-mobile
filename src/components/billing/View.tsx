@@ -1,8 +1,9 @@
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, Pressable } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import { Button, ActivityIndicator } from 'react-native-paper';
 import { useTranslation } from 'react-i18next';
 import { Image } from 'expo-image';
+import * as Clipboard from 'expo-clipboard';
 
 import { PaperText as Text } from '@components/commonui/ScaledText';
 import useVIP, { checkGuardVIP, purchaseVIP } from '@hooks/useVIP';
@@ -66,7 +67,9 @@ const RevenueCatVIP = ({ setLoading }: LoadingChildrenProps) => {
         <Button onPress={checkRevenueCatVIP}>
           {t('Billing.StripePurchase')}
         </Button>
-        <Text>{t('Billing.StripePurchaseNote', { biliMid })}</Text>
+        <Pressable onPress={() => Clipboard.setStringAsync(`${biliMid}`)}>
+          <Text>{t('Billing.StripePurchaseNote', { biliMid })}</Text>
+        </Pressable>
       </View>
     );
   }
