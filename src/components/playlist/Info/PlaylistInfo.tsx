@@ -215,6 +215,7 @@ const styles = StyleSheet.create({
   },
   textInput: {
     zIndex: 15,
+    height: 44,
   },
   searchInput: {
     marginTop: -6,
