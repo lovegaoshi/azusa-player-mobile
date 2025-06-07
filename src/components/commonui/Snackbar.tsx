@@ -1,12 +1,11 @@
 // Credits to @matewka: https://snack.expo.dev/@matewka/react-native-paper-snackbar-problem
 import * as React from 'react';
 import { Snackbar, Portal, ActivityIndicator } from 'react-native-paper';
+import { useColorScheme } from 'react-native';
 
 import useSnack, { InfiniteDuration } from '@stores/useSnack';
 import { useNoxSetting } from '@stores/useApp';
 import { CombinedDarkTheme, CombinedDefaultTheme } from '../styles/Theme';
-import { useColorScheme } from 'react-native';
-import logger from '@utils/Logger';
 
 const Loading = () => <ActivityIndicator />;
 
@@ -17,19 +16,18 @@ export default function SnackBar() {
 
   const colorScheme = useColorScheme();
 
+  // HACK: for whatever reason snackbar uses the inverseOnSurface; so this theme
+  // has to be inversed to match the current theme
   const snackTheme = () => {
-    logger.error(
-      `snacktheme: ${colorScheme}, ${JSON.stringify(CombinedDarkTheme)}, ${JSON.stringify(CombinedDefaultTheme)},${playerStyle.metaData.darkTheme}`,
-    );
     switch (colorScheme) {
       case 'dark':
-        return CombinedDarkTheme;
-      case 'light':
         return CombinedDefaultTheme;
+      case 'light':
+        return CombinedDarkTheme;
       default:
         return playerStyle.metaData.darkTheme
-          ? CombinedDarkTheme
-          : CombinedDefaultTheme;
+          ? CombinedDefaultTheme
+          : CombinedDarkTheme;
     }
   };
 
