@@ -25,7 +25,7 @@ export default ({ visible, onPress, opacity, style }: Props) => {
     opacity: opacity.value,
     zIndex: visible ? 1 : -1,
     position: 'absolute',
-    bottom: dimension.height - dimension.width - 200 + insets.top,
+    bottom: dimension.height - dimension.width - 200 + insets.bottom,
     width: '100%',
   }));
 
