@@ -72,7 +72,6 @@ export default function App(appProps: NoxComponent.AppProps) {
   const defaultTheme = playerStyle.metaData.darkTheme
     ? CombinedDarkTheme
     : CombinedDefaultTheme;
-  console.log(defaultTheme, 'tttttt, theme');
   const defaultNavTheme = playerStyle.metaData.darkTheme
     ? NavigationDarkTheme
     : NavigationDefaultTheme;

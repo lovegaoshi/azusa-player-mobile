@@ -33,8 +33,17 @@ export default () => {
   const alwaysShowBottomTab = useNoxSetting(
     state => state.playerSetting,
   ).alwaysShowBottomTab;
-  const extraPadding = !gestureMode || alwaysShowBottomTab ? insets.top : 0;
-  const height = dim.height + insets.bottom + extraPadding;
+  const showPadding = gestureMode || alwaysShowBottomTab;
+  const extraPadding = showPadding ? insets.bottom : 0;
+  const height = dim.height + insets.top + extraPadding;
+  console.log(
+    'probe',
+    extraPadding,
+    height,
+    showPadding,
+    gestureMode,
+    alwaysShowBottomTab,
+  );
   const miniplayerHeight = useSharedValue(MinPlayerHeight);
   const artworkOpacity = useSharedValue(1);
   const initHeight = useSharedValue(0);
