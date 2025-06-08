@@ -29,13 +29,7 @@ export default () => {
   const insets = useSafeAreaInsets();
   const dim = Dimensions.get('window');
   const width = dim.width;
-  const gestureMode = useNoxSetting(state => state.gestureMode);
-  const alwaysShowBottomTab = useNoxSetting(
-    state => state.playerSetting,
-  ).alwaysShowBottomTab;
-  const showPadding = gestureMode || alwaysShowBottomTab;
-  const extraPadding = showPadding ? insets.top + insets.bottom : 0;
-  const height = dim.height + extraPadding;
+  const height = dim.height + insets.top + insets.bottom;
   const miniplayerHeight = useSharedValue(MinPlayerHeight);
   const artworkOpacity = useSharedValue(1);
   const initHeight = useSharedValue(0);
