@@ -70,7 +70,10 @@ export const YTMixedContent = ({ content }: ContentProps) => {
   }
 };
 
-export default () => {
+export default ({
+  onScroll,
+  onMomentumScrollEnd,
+}: NoxComponent.ScrollableProps) => {
   const moods = useYTMExplore(state => state.moods);
   const refreshHome = useYTMExplore(state => state.refreshHome);
   const initialize = useYTMExplore(state => state.initialize);
@@ -98,6 +101,8 @@ export default () => {
         horizontal
         showsHorizontalScrollIndicator={false}
         style={{ flex: 0, flexGrow: 0 }}
+        onScroll={onScroll}
+        onMomentumScrollEnd={onMomentumScrollEnd}
       >
         {moods.map(mood => (
           <View style={styles.rowView} key={mood.endpoint?.payload.params}>
