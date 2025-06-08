@@ -34,8 +34,8 @@ export default () => {
     state => state.playerSetting,
   ).alwaysShowBottomTab;
   const showPadding = gestureMode || alwaysShowBottomTab;
-  const extraPadding = showPadding ? insets.bottom : 0;
-  const height = dim.height + insets.top + extraPadding;
+  const extraPadding = showPadding ? insets.top + insets.bottom : 0;
+  const height = dim.height + extraPadding;
   const miniplayerHeight = useSharedValue(MinPlayerHeight);
   const artworkOpacity = useSharedValue(1);
   const initHeight = useSharedValue(0);
