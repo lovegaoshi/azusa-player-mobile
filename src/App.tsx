@@ -27,6 +27,7 @@ import {
   CombinedDarkTheme,
   CombinedDefaultTheme,
 } from './components/styles/Theme';
+import { AnimatedHeaderExample } from './components/commonui/AnimatedHeader';
 
 if (TRACKING) {
   Sentry.init({
@@ -91,6 +92,11 @@ export default function App(appProps: NoxComponent.AppProps) {
     };
   }, []);
 
+  return (
+    <View style={{ paddingTop: 100, paddingBottom: 100 }}>
+      <AnimatedHeaderExample />
+    </View>
+  );
   if (!(isPlayerReady && isSplashReady && isSplashAnimReady)) {
     return (
       <SafeAreaProvider>
