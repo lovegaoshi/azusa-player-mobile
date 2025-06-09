@@ -10,21 +10,29 @@ import {
   Text,
   View,
   ScrollView,
+  Pressable,
 } from 'react-native';
 import Animated, {
   clamp,
   useAnimatedStyle,
   useSharedValue,
 } from 'react-native-reanimated';
+import MaskedView from '@react-native-masked-view/masked-view';
 
 interface Props {
   HeaderComponent: () => ReactNode;
   ScrollableComponent: (p: {
     onScroll: (e: NativeSyntheticEvent<NativeScrollEvent>) => void;
+    HeaderPlaceholderBlock: () => ReactNode;
   }) => ReactNode;
+  fade?: boolean;
 }
 
-const AnimatedHeader = ({ HeaderComponent, ScrollableComponent }: Props) => {
+const AnimatedHeader = ({
+  HeaderComponent,
+  ScrollableComponent,
+  fade,
+}: Props) => {
   const [headerHeight, setHeaderHeight] = useState(0);
   const scrollPosition = useSharedValue(0);
   const lastScrollPosition = useSharedValue(0);
@@ -32,6 +40,13 @@ const AnimatedHeader = ({ HeaderComponent, ScrollableComponent }: Props) => {
   const animatedHeaderStyle = useAnimatedStyle(() => {
     return {
       transform: [{ translateY: -scrollPosition.value }],
+      opacity: fade ? 1 - scrollPosition.value / headerHeight : 1,
+    };
+  });
+
+  const animatedHeaderPlaceholderStyle = useAnimatedStyle(() => {
+    return {
+      height: headerHeight - scrollPosition.value,
     };
   });
 
@@ -42,6 +57,7 @@ const AnimatedHeader = ({ HeaderComponent, ScrollableComponent }: Props) => {
           {
             opacity: headerHeight === 0 ? 0 : 1,
             zIndex: 1,
+            position: 'absolute',
           },
           animatedHeaderStyle,
         ]}
@@ -50,8 +66,25 @@ const AnimatedHeader = ({ HeaderComponent, ScrollableComponent }: Props) => {
         <HeaderComponent />
       </Animated.View>
       {headerHeight !== 0 && (
-        <Animated.View style={animatedHeaderStyle}>
+        <MaskedView
+          maskElement={
+            <View>
+              <Animated.View style={animatedHeaderPlaceholderStyle} />
+              <View
+                style={{
+                  backgroundColor: 'rgba(0,0,0,1)',
+                  width: 9999,
+                  height: 9999,
+                }}
+              />
+            </View>
+          }
+          androidRenderingMode={'software'}
+        >
           <ScrollableComponent
+            HeaderPlaceholderBlock={() => (
+              <View style={{ height: headerHeight }} />
+            )}
             onScroll={e => {
               scrollPosition.value = clamp(
                 scrollPosition.value -
@@ -63,7 +96,7 @@ const AnimatedHeader = ({ HeaderComponent, ScrollableComponent }: Props) => {
               lastScrollPosition.value = e.nativeEvent.contentOffset.y;
             }}
           />
-        </Animated.View>
+        </MaskedView>
       )}
     </View>
   );
@@ -72,21 +105,29 @@ const AnimatedHeader = ({ HeaderComponent, ScrollableComponent }: Props) => {
 export const AnimatedHeaderExample = () => {
   return (
     <AnimatedHeader
+      fade
       HeaderComponent={() => (
         <View>
-          <Text>Header</Text>
-          <Text>Header</Text>
-          <Text>Header</Text>
-          <Text>Header</Text>
-          <Text>Header</Text>
-          <Text>Header</Text>
-          <Text>Header</Text>
-          <Text>Header</Text>
-          <Text>Header</Text>
+          <Pressable onPress={() => console.log(1)}>
+            <Text>Header</Text>
+          </Pressable>
+          <Pressable onPress={() => console.log(12)}>
+            <Text>Header</Text>
+          </Pressable>
+          <Pressable onPress={() => console.log(13)}>
+            <Text>Header</Text>
+          </Pressable>
+          <Pressable onPress={() => console.log(14)}>
+            <Text>Header</Text>
+          </Pressable>
+          <Pressable onPress={() => console.log(15)}>
+            <Text>Header</Text>
+          </Pressable>
         </View>
       )}
-      ScrollableComponent={({ onScroll }) => (
-        <ScrollView onScroll={onScroll} scrollEventThrottle={20}>
+      ScrollableComponent={({ onScroll, HeaderPlaceholderBlock }) => (
+        <ScrollView onScroll={onScroll}>
+          <HeaderPlaceholderBlock />
           {Array.from({ length: 100 }).map((m, i) => (
             <Text key={i}>{`item ${i}`}</Text>
           ))}
