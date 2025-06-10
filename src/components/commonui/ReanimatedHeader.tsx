@@ -29,9 +29,9 @@ const AnimatedHeader = ({ viewStyle, Header, Content, fade }: Props) => {
   const headerOffset = useSharedValue(0);
   const previousContentOffset = useSharedValue(0);
 
-  const onScroll = (e: NativeSyntheticEvent<NativeScrollEvent>) => {
+  const onScroll = (e: NativeScrollEvent) => {
     'worklet';
-    const diff = e.nativeEvent.contentOffset.y - previousContentOffset.value;
+    const diff = e.contentOffset.y - previousContentOffset.value;
     headerOffset.value = clamp(headerOffset.value + diff, 0, headerHeight);
     previousContentOffset.value = e.nativeEvent.contentOffset.y;
   };
