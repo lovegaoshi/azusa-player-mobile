@@ -43,7 +43,7 @@ jobs:
           fi
   build:
     name: Build
-    runs-on: ubuntu-latest
+    runs-on: macos-15
     needs: checkLastCommit
     if: ${{ needs.checkLastCommit.outputs.is_old_commit == false }}
     permissions:
@@ -137,7 +137,7 @@ jobs:
           target_commitish: ${{ env.GIT_BRANCH }}
   buildNewArch:
     name: Build-new-arch
-    runs-on: ubuntu-latest
+    runs-on: macos-15
     needs: checkLastCommit
     if: ${{ needs.checkLastCommit.outputs.is_old_commit == false }}
     permissions:
