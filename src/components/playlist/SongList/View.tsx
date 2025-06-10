@@ -1,25 +1,33 @@
 import React, { useEffect } from 'react';
 import { View, BackHandler, StyleSheet } from 'react-native';
+import { IconButton } from 'react-native-paper';
 import { useFocusEffect } from '@react-navigation/native';
-import { useSharedValue } from 'react-native-reanimated';
+import Animated, {
+  interpolate,
+  useAnimatedStyle,
+  useSharedValue,
+} from 'react-native-reanimated';
 
 import { styles } from '@components/style';
 import { useNoxSetting } from '@stores/useApp';
+import PlaylistInfo from '../Info/PlaylistInfo';
+import PlaylistMenuButton from '../Menu/PlaylistMenuButton';
 import { UsePlaylistRN } from '../usePlaylistRN';
 import SongListScrollbar from './SongListScrollbar';
 import { LegendExample, LegendProps } from './ScrollBarLegend';
 import SongList from './SongList';
 import Animatedheader from '@components/commonui/ReanimatedHeader';
-import Header from './SongListHeader';
 
 interface Props {
   usedPlaylist: UsePlaylistRN;
 }
 
 export default ({ usedPlaylist }: Props) => {
+  const playerStyle = useNoxSetting(state => state.playerStyle);
   const songListScrollCounter = useNoxSetting(s => s.songListScrollCounter);
   const {
     rows,
+    toggleSelectedAll,
     checking,
     setChecking,
     searching,
@@ -50,6 +58,10 @@ export default ({ usedPlaylist }: Props) => {
     }, [checking, setChecking, searching, setSearching]),
   );
 
+  const btnContainColor =
+    playerStyle.colors.primaryContainer ??
+    playerStyle.customColors.playlistDrawerBackgroundColor;
+
   const ScrollLegend = (p: LegendProps) => (
     <LegendExample
       {...p}
@@ -59,36 +71,79 @@ export default ({ usedPlaylist }: Props) => {
     />
   );
 
+  const headerStyle = useAnimatedStyle(() => {
+    return {
+      height: interpolate(scrollPosition.value, [0, 1], [70, 0]),
+    };
+  });
+
   return (
     <View style={styles.flex}>
-      <Animatedheader
-        Header={() => <Header usedPlaylist={usedPlaylist} />}
-        Content={({ onScroll }) => (
-          <SongListScrollbar
-            style={stylesLocal.playlistContainer}
-            scrollViewReference={playlistRef}
-            scrollPosition={scrollPosition}
-            scrollOffset={scrollOffset}
-            scrollViewHeight={scrollViewHeight}
-            contentHeight={contentHeight}
-            LegendContent={ScrollLegend}
-          >
-            <SongList
-              usedPlaylist={usedPlaylist}
-              visibleIndex={visibleIndex}
-              scrollPosition={scrollPosition}
-              scrollOffset={scrollOffset}
-              scrollViewHeight={scrollViewHeight}
-              contentHeight={contentHeight}
-              onScroll={onScroll}
+      <Animated.View
+        style={[
+          styles.topBarContainer,
+          { top: 10, overflow: 'hidden' },
+          headerStyle,
+        ]}
+      >
+        <PlaylistInfo
+          onPressed={() => scrollTo({ viewPosition: 0.5 })}
+          usePlaylist={usedPlaylist}
+        />
+        <View style={stylesLocal.container}>
+          {checking && (
+            <IconButton
+              icon="select-all"
+              onPress={toggleSelectedAll}
+              size={25}
+              //iconColor={playerStyle.colors.primary}
             />
-          </SongListScrollbar>
-        )}
-      />
+          )}
+          <IconButton
+            icon="select"
+            onPress={() => setChecking(val => !val)}
+            size={25}
+            containerColor={checking ? btnContainColor : undefined}
+            //iconColor={playerStyle.colors.primary}
+          />
+          <IconButton
+            icon="magnify"
+            onPress={() => setSearching(val => !val)}
+            size={25}
+            mode={searching ? 'contained' : undefined}
+            containerColor={searching ? btnContainColor : undefined}
+            //iconColor={playerStyle.colors.primary}
+          />
+          <PlaylistMenuButton disabled={checking} />
+        </View>
+      </Animated.View>
+      <SongListScrollbar
+        style={stylesLocal.playlistContainer}
+        scrollViewReference={playlistRef}
+        scrollPosition={scrollPosition}
+        scrollOffset={scrollOffset}
+        scrollViewHeight={scrollViewHeight}
+        contentHeight={contentHeight}
+        LegendContent={ScrollLegend}
+      >
+        <SongList
+          usedPlaylist={usedPlaylist}
+          visibleIndex={visibleIndex}
+          scrollPosition={scrollPosition}
+          scrollOffset={scrollOffset}
+          scrollViewHeight={scrollViewHeight}
+          contentHeight={contentHeight}
+        />
+      </SongListScrollbar>
     </View>
   );
 };
 const stylesLocal = StyleSheet.create({
+  container: {
+    flexDirection: 'row',
+    bottom: 5,
+    justifyContent: 'flex-end',
+  },
   playlistContainer: {
     ...styles.topBarContainer,
     flex: 4,
