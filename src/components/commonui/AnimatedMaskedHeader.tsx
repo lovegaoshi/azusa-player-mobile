@@ -20,19 +20,15 @@ import Animated, {
 import MaskedView from '@react-native-masked-view/masked-view';
 
 interface Props {
-  HeaderComponent: () => ReactNode;
-  ScrollableComponent: (p: {
+  Header: () => ReactNode;
+  Content: (p: {
     onScroll: (e: NativeSyntheticEvent<NativeScrollEvent>) => void;
     HeaderPlaceholderBlock: () => ReactNode;
   }) => ReactNode;
   fade?: boolean;
 }
 
-const AnimatedHeader = ({
-  HeaderComponent,
-  ScrollableComponent,
-  fade,
-}: Props) => {
+const AnimatedHeader = ({ Header, Content, fade }: Props) => {
   const [headerHeight, setHeaderHeight] = useState(0);
   const scrollPosition = useSharedValue(0);
   const lastScrollPosition = useSharedValue(0);
@@ -55,6 +51,8 @@ const AnimatedHeader = ({
       <Animated.View
         style={[
           {
+            // this is here because this implementation needs to add a spacer with headerHeight to content;
+            // to avoid flickering the header is "invisible" when probing for headerHeight
             opacity: headerHeight === 0 ? 0 : 1,
             zIndex: 1,
             position: 'absolute',
@@ -63,7 +61,7 @@ const AnimatedHeader = ({
         ]}
         onLayout={e => setHeaderHeight(e.nativeEvent.layout.height)}
       >
-        <HeaderComponent />
+        <Header />
       </Animated.View>
       {headerHeight !== 0 && (
         <MaskedView
@@ -81,7 +79,7 @@ const AnimatedHeader = ({
           }
           androidRenderingMode={'software'}
         >
-          <ScrollableComponent
+          <Content
             HeaderPlaceholderBlock={() => (
               <View style={{ height: headerHeight }} />
             )}
@@ -106,7 +104,7 @@ export const AnimatedHeaderExample = () => {
   return (
     <AnimatedHeader
       fade
-      HeaderComponent={() => (
+      Header={() => (
         <View>
           <Pressable onPress={() => console.log(1)}>
             <Text>Header</Text>
@@ -125,7 +123,7 @@ export const AnimatedHeaderExample = () => {
           </Pressable>
         </View>
       )}
-      ScrollableComponent={({ onScroll, HeaderPlaceholderBlock }) => (
+      Content={({ onScroll, HeaderPlaceholderBlock }) => (
         <ScrollView onScroll={onScroll}>
           <HeaderPlaceholderBlock />
           {Array.from({ length: 100 }).map((m, i) => (

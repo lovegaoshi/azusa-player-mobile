@@ -28,6 +28,7 @@ interface Props {
   scrollOffset: SharedValue<number>;
   scrollViewHeight: SharedValue<number>;
   contentHeight: SharedValue<number>;
+  onScroll?: (e: NativeScrollEvent) => void;
 }
 
 export default ({
@@ -36,6 +37,7 @@ export default ({
   scrollOffset,
   scrollViewHeight,
   contentHeight,
+  onScroll,
 }: Props) => {
   const currentPlayingId = useNoxSetting(state => state.currentPlayingId);
   const netInfo = useNetInfo();
@@ -64,16 +66,16 @@ export default ({
     playlistRef,
   } = usedPlaylist;
 
-  const scrollBarOnScroll = ({
-    contentOffset,
-    contentSize,
-    layoutMeasurement,
-  }: NativeScrollEvent) => {
-    const contentH = Math.max(1, contentSize.height - layoutMeasurement.height);
-    scrollPosition.value = contentOffset.y / contentH;
-    scrollOffset.value = contentOffset.y;
-    scrollViewHeight.value = layoutMeasurement.height;
+  const scrollBarOnScroll = (p: NativeScrollEvent) => {
+    const contentH = Math.max(
+      1,
+      p.contentSize.height - p.layoutMeasurement.height,
+    );
+    scrollPosition.value = p.contentOffset.y / contentH;
+    scrollOffset.value = p.contentOffset.y;
+    scrollViewHeight.value = p.layoutMeasurement.height;
     contentHeight.value = contentH;
+    onScroll?.(p);
   };
   const scrollHandler = useAnimatedScrollHandler(scrollBarOnScroll);
 
