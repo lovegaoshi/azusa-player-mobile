@@ -1,7 +1,12 @@
+/**
+ * an animated header component that animates by component height. this is inferior to both
+ * the header and content translateY because the header doesnt "scroll up" to hide, but rather stays the same.
+ * this method still causes the flickering regardless so its bad in general.
+ */
+
 import { useState } from 'react';
 import {
   NativeScrollEvent,
-  NativeSyntheticEvent,
   Pressable,
   ScrollView,
   Text,
@@ -17,7 +22,7 @@ import Animated, {
 interface Props {
   Header: () => React.JSX.Element;
   Content: (p: {
-    onScroll: (e: NativeSyntheticEvent<NativeScrollEvent>) => void;
+    onScroll: (e: NativeScrollEvent) => void;
   }) => React.JSX.Element;
   viewStyle?: ViewStyle;
   fade?: boolean;
@@ -33,7 +38,7 @@ const AnimatedHeader = ({ viewStyle, Header, Content, fade }: Props) => {
     'worklet';
     const diff = e.contentOffset.y - previousContentOffset.value;
     headerOffset.value = clamp(headerOffset.value + diff, 0, headerHeight);
-    previousContentOffset.value = e.nativeEvent.contentOffset.y;
+    previousContentOffset.value = e.contentOffset.y;
   };
 
   const headerStyle = useAnimatedStyle(() => {
@@ -86,7 +91,7 @@ export const AnimatedHeaderExample = () => {
         </View>
       )}
       Content={({ onScroll }) => (
-        <ScrollView onScroll={onScroll}>
+        <ScrollView onScroll={e => onScroll(e.nativeEvent)}>
           {Array.from({ length: 100 }).map((m, i) => (
             <Text key={i}>{`item ${i}`}</Text>
           ))}

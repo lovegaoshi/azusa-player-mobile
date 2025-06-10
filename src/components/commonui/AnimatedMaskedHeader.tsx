@@ -1,6 +1,10 @@
 /**
- * a wrapper on scrollView that a header is scrolled to hidden when the scrollview is scrolling down;
- * then scrolled to show when the scrollview is scrolling up
+ * an animated header component made with maskedView. the idea is:
+ * when header renders, a spacer with height of headerHeight is inserted to the scrollable content;
+ * header is position: absolute.
+ * as content scrolls, header "hides" by translateY and overflow: hidden; vice versa.
+ * this doesnt solve the problem that the header needs to mask the content below, so a
+ * maskedView is used to hide that
  */
 
 import { ReactNode, useState } from 'react';
