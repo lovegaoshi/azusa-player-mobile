@@ -104,39 +104,4 @@ const AnimatedHeader = ({ Header, Content, fade }: Props) => {
   );
 };
 
-export const AnimatedHeaderExample = () => {
-  return (
-    <AnimatedHeader
-      fade
-      Header={() => (
-        <View>
-          <Pressable onPress={() => console.log(1)}>
-            <Text>Header</Text>
-          </Pressable>
-          <Pressable onPress={() => console.log(12)}>
-            <Text>Header</Text>
-          </Pressable>
-          <Pressable onPress={() => console.log(13)}>
-            <Text>Header</Text>
-          </Pressable>
-          <Pressable onPress={() => console.log(14)}>
-            <Text>Header</Text>
-          </Pressable>
-          <Pressable onPress={() => console.log(15)}>
-            <Text>Header</Text>
-          </Pressable>
-        </View>
-      )}
-      Content={({ onScroll, HeaderPlaceholderBlock }) => (
-        <ScrollView onScroll={onScroll}>
-          <HeaderPlaceholderBlock />
-          {Array.from({ length: 100 }).map((m, i) => (
-            <Text key={i}>{`item ${i}`}</Text>
-          ))}
-        </ScrollView>
-      )}
-    />
-  );
-};
-
 export default AnimatedHeader;
