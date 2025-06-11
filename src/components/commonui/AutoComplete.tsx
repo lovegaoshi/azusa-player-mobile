@@ -3,6 +3,7 @@ import { Menu, Searchbar } from 'react-native-paper';
 import React, { useEffect, useState, useRef } from 'react';
 import { useDebounce } from 'use-debounce';
 import { v4 as uuidv4 } from 'uuid';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { useNoxSetting } from '@stores/useApp';
 
@@ -27,6 +28,7 @@ export default ({
   resolveData,
   pressed,
 }: Props) => {
+  const insets = useSafeAreaInsets();
   const autoCompleteId = useRef('');
   const [debouncedValue] = useDebounce(value, 250);
   const [showAutoComplete, setShowAutoComplete] = useState(false);
@@ -68,7 +70,8 @@ export default ({
         onLayout={e =>
           setMenuCoords({
             x: e.nativeEvent.layout.x,
-            y: e.nativeEvent.layout.y + e.nativeEvent.layout.height,
+            y:
+              e.nativeEvent.layout.y + e.nativeEvent.layout.height + insets.top,
             width: e.nativeEvent.layout.width,
             height: e.nativeEvent.layout.height,
           })

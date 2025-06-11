@@ -16,10 +16,10 @@ import useBiliExplore from '@stores/explore/bilibili';
 import { BiliMusicTid } from '@enums/MediaFetch';
 import { PaperText as Text } from '@components/commonui/ScaledText';
 
-interface Props {
+interface Props extends NoxComponent.ScrollableProps {
   style?: ViewStyle;
 }
-export default ({ style }: Props) => {
+export default ({ style, onScroll, onMomentumScrollEnd }: Props) => {
   const { t } = useTranslation();
   const loading = useBiliExplore(state => state.loading);
   const refreshing = useBiliExplore(state => state.refreshing);
@@ -50,6 +50,8 @@ export default ({ style }: Props) => {
       refreshControl={
         <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
       }
+      onScroll={onScroll}
+      onMomentumScrollEnd={onMomentumScrollEnd}
     >
       <BiliSongsTabCard songs={biliRanking} title={t('BiliCategory.ranking')} />
       <Text style={mStyles.dynamicHeader}>{t('BiliCategory.dynamic')}</Text>

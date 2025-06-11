@@ -102,8 +102,8 @@ export default ({ intentData, vip }: NoxComponent.SetupPlayerProps) => {
       const GCCrash = isRNLoaded && !__DEV__;
       const OSkill = (await NoxModule?.getLastExitCode?.()) === 2;
       if (GCCrash || OSkill) {
-        await TrackPlayer.play();
-        logger.error(`[APMReplay] detected ${GCCrash} and ${OSkill}!`);
+        vip && (await TrackPlayer.play());
+        logger.error(`[APMResume] detected ${GCCrash} and ${OSkill}!`);
       }
       updateVersion(storedPlayerSetting);
       checkVersion(true, storedPlayerSetting);

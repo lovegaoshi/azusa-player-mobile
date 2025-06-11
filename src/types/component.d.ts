@@ -1,4 +1,9 @@
-import { StyleProp, ViewStyle } from 'react-native';
+import {
+  StyleProp,
+  ViewStyle,
+  NativeScrollEvent,
+  NativeSyntheticEvent,
+} from 'react-native';
 import { ParamListBase, Theme } from '@react-navigation/native';
 import { DrawerNavigationProp } from '@react-navigation/drawer';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
@@ -9,6 +14,12 @@ import { IntentData } from '@enums/Intent';
 
 declare global {
   namespace NoxComponent {
+    interface ScrollableProps {
+      onScroll?: (e: NativeSyntheticEvent<NativeScrollEvent>) => void;
+      onMomentumScrollEnd?: (
+        e: NativeSyntheticEvent<NativeScrollEvent>,
+      ) => void;
+    }
     interface AppThemeProps {
       defaultTheme: any;
       defaultNavTheme: Theme;
