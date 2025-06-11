@@ -4,6 +4,7 @@ import { View, Alert } from 'react-native';
 import { Image } from 'expo-image';
 import { Divider } from 'react-native-paper';
 import { useTranslation } from 'react-i18next';
+import * as Clipboard from 'expo-clipboard';
 
 import { NativeText as Text } from '@components/commonui/ScaledText';
 import { NoxSheetRoutes } from '@enums/Routes';
@@ -24,6 +25,8 @@ import usePlayback from '@hooks/usePlayback';
 import ABSliderMenu from './ABSliderMenu';
 import VolumeSlider from './VolumeSlider';
 import { isAndroid } from '@utils/RNUtils';
+import { songExport2URL } from '@utils/mediafetch/resolveURL';
+import useSnack from '@stores/useSnack';
 
 export default () => {
   const sheet = useRef<TrueSheet>(null);
@@ -36,6 +39,7 @@ export default () => {
   const getPlaylist = useNoxSetting(state => state.getPlaylist);
   const { startRadio } = useSongOperations();
   const { playFromPlaylist } = usePlayback();
+  const setSnack = useSnack(state => state.setSnack);
   const playlistCRUD = usePlaylistCRUD();
   const [draggable, setDraggable] = useState(true);
 
@@ -173,6 +177,17 @@ export default () => {
         text={t('SongOperations.songR128gain')}
         icon={'replay'}
         onPress={onR128Gain}
+      />
+      <SheetIconEntry
+        text={t('SongOperations.share')}
+        icon={'share'}
+        onPress={() => {
+          Clipboard.setStringAsync(songExport2URL(song));
+          setSnack({
+            snackMsg: { success: t('SongOperations.songShared', { song }) },
+          });
+          showSheet(false);
+        }}
       />
       <ABSliderMenu song={song} showSheet={showSheet} />
       <SheetIconEntry
