@@ -8,14 +8,7 @@
  */
 
 import { ReactNode, useState } from 'react';
-import {
-  NativeScrollEvent,
-  NativeSyntheticEvent,
-  Text,
-  View,
-  ScrollView,
-  Pressable,
-} from 'react-native';
+import { NativeScrollEvent, NativeSyntheticEvent, View } from 'react-native';
 import Animated, {
   clamp,
   useAnimatedStyle,
