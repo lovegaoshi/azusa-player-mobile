@@ -182,6 +182,8 @@
     "songRemoveNBanTitle": "删除并拉黑",
     "reloadSong": "重载",
     "selectedSongs": "选择的歌",
+    "share": "分享",
+    "songShared": "{{song.name}} 的URL已复制到剪贴板！",
     "selectedSongsAndSong": "{{name}} 和另外{{count}}首歌..."
   },
   "GeneralSettings": {

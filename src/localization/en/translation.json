@@ -182,6 +182,8 @@
     "songRemoveNBanTitle": "Ban",
     "reloadSong": "Reload",
     "selectedSongs": "Selected songs",
+    "share": "Share",
+    "songShared": "{{song.name}}'s URL copied to clipboard!",
     "selectedSongsAndSong": "{{name}} and {{count}} more..."
   },
   "GeneralSettings": {
