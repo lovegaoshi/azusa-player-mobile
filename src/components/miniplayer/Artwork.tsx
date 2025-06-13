@@ -45,7 +45,10 @@ export default ({ miniplayerHeight, opacity, onPress, expand }: Props) => {
   });
 
   const artworkWidth = useDerivedValue(() => {
-    return Math.min(miniplayerHeight.value - 15, width);
+    return Math.min(
+      Math.max(miniplayerHeight.value, MinPlayerHeight) - 15,
+      width,
+    );
   });
 
   const artworkScale = useDerivedValue(() => {
@@ -56,12 +59,15 @@ export default ({ miniplayerHeight, opacity, onPress, expand }: Props) => {
   );
 
   const artworkTranslateY = useDerivedValue(() => {
-    return Math.min(95, 30 + (expandDiff.value - width - insets.top) / 2);
+    return Math.min(
+      95,
+      30 + (Math.max(0, expandDiff.value) - width - insets.top) / 2,
+    );
   });
   const artworkTranslateX = useDerivedValue(() => {
     const halfTranslation = (artworkWidth.value - width) / 2;
     if (expandDiff.value < 6) {
-      return 5 - expandDiff.value + halfTranslation;
+      return 5 - Math.max(0, expandDiff.value) + halfTranslation;
     }
     return halfTranslation;
   });

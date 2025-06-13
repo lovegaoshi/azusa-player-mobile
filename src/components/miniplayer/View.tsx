@@ -34,6 +34,10 @@ export default () => {
   const artworkOpacity = useSharedValue(1);
   const initHeight = useSharedValue(0);
   const expandCounter = useNoxSetting(state => state.expandCounter);
+
+  const miniplayerVisibleCounter = useNoxSetting(
+    state => state.miniplayerVisibleCounter,
+  );
   const sliding = useNoxSetting(state => state.miniProgressSliding);
 
   const opacityVisible = useDerivedValue(() => {
@@ -52,34 +56,48 @@ export default () => {
   const dragPlayerHeight = (translationY: number) => {
     'worklet';
     const newHeight = initHeight.value - translationY;
-    miniplayerHeight.value = Math.max(
-      MinPlayerHeight,
-      Math.min(newHeight, height),
-    );
+    miniplayerHeight.value = Math.max(0, Math.min(newHeight, height));
   };
 
-  const expand = (animation = true) => {
+  const transitionHeight = (toHeight: number, animation = true) => {
     'worklet';
     miniplayerHeight.value = animation
-      ? withTiming(height, {
+      ? withTiming(toHeight, {
           duration: 250,
           easing: Easing.out(Easing.exp),
         })
-      : height;
+      : toHeight;
     artworkOpacity.value = withTiming(1);
   };
 
-  const collapse = (animation = true) => {
+  const expand = (animation = true, toHeight = -1) => {
     'worklet';
-    miniplayerHeight.value = animation
-      ? withTiming(MinPlayerHeight, {
-          duration: 250,
-          easing: Easing.out(Easing.exp),
-        })
-      : MinPlayerHeight;
-    artworkOpacity.value = withTiming(1);
+    if (toHeight === -1) {
+      toHeight = height;
+    }
+    transitionHeight(toHeight, animation);
+  };
+
+  const collapse = (animation = true, toHeight = -1) => {
+    'worklet';
+    if (toHeight === -1) {
+      toHeight = MinPlayerHeight;
+    }
+    transitionHeight(toHeight, animation);
     runOnJS(setLrcVisible)(false);
   };
+
+  const hide = (animation = true) => {
+    'worklet';
+    transitionHeight(0, animation);
+  };
+
+  const show = (animation = true) => {
+    'worklet';
+    miniplayerHeight.value === 0 &&
+      transitionHeight(MinPlayerHeight, animation);
+  };
+
   const onArtworkPress = () => {
     if (artworkOpacity.value === 1) {
       artworkOpacity.value = withTiming(0, { duration: 100 }, () => {
@@ -96,6 +114,9 @@ export default () => {
 
   const snapPlayerHeight = (translationY: number) => {
     'worklet';
+    if (miniplayerHeight.value < MinPlayerHeight * 0.7) {
+      return hide();
+    }
     if (translationY > height * SnapToRatio) {
       return collapse();
     }
@@ -123,6 +144,7 @@ export default () => {
   const animatedStyle = useAnimatedStyle(() => {
     return {
       height: miniplayerHeight.value,
+      opacity: Math.min(1, miniplayerHeight.value / MinPlayerHeight),
     };
   });
 
@@ -135,12 +157,17 @@ export default () => {
   }, [expandCounter]);
 
   useEffect(() => {
+    show();
+  }, [miniplayerVisibleCounter]);
+
+  useEffect(() => {
     useNoxSetting.setState({ collapse, expand });
   }, []);
 
   return (
     <GestureDetector gesture={lrcVisible ? disabledGesture : scrollDragGesture}>
-      <Animated.View style={[{ width: '100%', paddingTop: 3 }, animatedStyle]}>
+      <Animated.View style={[{ width: '100%' }, animatedStyle]}>
+        <View style={{ height: 3 }} />
         <View style={styles.rowView}>
           <PlayerTopInfo opacity={opacityVisible} collapse={collapse} />
           <TrackAlbumArt
