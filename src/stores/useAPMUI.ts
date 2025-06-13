@@ -34,6 +34,9 @@ export interface APMUIStore {
   expand: () => void;
   expandCounter: number;
   toggleExpand: () => void;
+
+  miniplayerVisibleCounter: number;
+  toggleMiniplayerVisible: () => void;
 }
 
 const store: StateCreator<APMUIStore, [], [], APMUIStore> = set => ({
@@ -77,6 +80,12 @@ const store: StateCreator<APMUIStore, [], [], APMUIStore> = set => ({
   expandCounter: 0,
   toggleExpand: () =>
     set(state => ({ expandCounter: state.expandCounter + 1 })),
+
+  miniplayerVisibleCounter: 0,
+  toggleMiniplayerVisible: () =>
+    set(state => ({
+      miniplayerVisibleCounter: state.miniplayerVisibleCounter + 1,
+    })),
 });
 
 export default store;

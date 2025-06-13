@@ -62,6 +62,9 @@ export default (playlist: NoxMedia.Playlist): UsePlaylistRN => {
   const progressEmitter = useNoxSetting(
     state => state.searchBarProgressEmitter,
   );
+  const toggleMiniplayerVisible = useNoxSetting(
+    state => state.toggleMiniplayerVisible,
+  );
   const playlistRef = useAnimatedRef<FlashList<NoxMedia.Song>>();
   const { playFromPlaylist } = usePlayback();
   const { performFade } = useTPControls();
@@ -115,6 +118,7 @@ export default (playlist: NoxMedia.Playlist): UsePlaylistRN => {
   };
 
   const playSong = (song: NoxMedia.Song) => {
+    toggleMiniplayerVisible();
     const playSongCallback = (playlist: NoxMedia.Playlist) => {
       const setPlaylistPlaymode = () =>
         cycleThroughPlaymode(
