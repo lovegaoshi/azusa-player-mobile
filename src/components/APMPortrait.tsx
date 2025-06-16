@@ -81,7 +81,7 @@ const AzusaPlayer = () => {
         />
       </Drawer.Navigator>
       <NoxMiniPlayer />
-      <NoxNativeBottomTab />
+      <NoxNativeBottomTab navigation={navigation} />
     </SafeAreaView>
   );
 };

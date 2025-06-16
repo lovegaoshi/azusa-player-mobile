@@ -343,6 +343,12 @@
     "ABRepeatName": "Update ABRepeat",
     "ABRepeatDesc": "Update ABRepeat rules from GitHub"
   },
+  "BottomTab": {
+    "playlist-music": "Playlist",
+    "music-note": "Music",
+    "compass": "Explore",
+    "cog": "Settings"
+  },
   "AppearanceSettings": {
     "fontScaleName": "Font Scale",
     "fontScaleDesc": "Adjust fonts to be smaller or bigger",
