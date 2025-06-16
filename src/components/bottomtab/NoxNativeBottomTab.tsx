@@ -6,7 +6,6 @@ import TabView, {
 } from 'react-native-bottom-tabs';
 import Icon from '@react-native-vector-icons/material-design-icons';
 import { BaseRoute } from 'react-native-bottom-tabs/lib/typescript/commonjs/src/types';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { getDrawerStatusFromState } from '@react-navigation/drawer';
 import { useTranslation } from 'react-i18next';
 
@@ -87,12 +86,7 @@ export default function TabViewExample({
   const [index, setIndex] = React.useState(1);
   const [tabBarHeight, setTabBarHeight] = React.useState(0);
   const navigationG = useNavigation();
-  const insets = useSafeAreaInsets();
   const playerStyle = useNoxSetting(state => state.playerStyle);
-  const gestureMode = useNoxSetting(state => state.gestureMode);
-  const alwaysShowBottomTab = useNoxSetting(
-    state => state.playerSetting,
-  ).alwaysShowBottomTab;
   const route = useNoxMobile(state => state.bottomTabRoute);
   const toggleDrawer = useNoxMobile(state => state.toggleBottomTabDrawer);
 
@@ -115,10 +109,6 @@ export default function TabViewExample({
       <DummyScreen setTabBarHeight={setTabBarHeight} />
     ),
   });
-
-  if (!(gestureMode || alwaysShowBottomTab)) {
-    return <View style={{ height: insets.bottom }} />;
-  }
 
   const onIndexChange = (i: number) => {
     setIndex(i);

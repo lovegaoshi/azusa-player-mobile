@@ -15,8 +15,7 @@ import Settings from './setting/View';
 import Explore from './explore/View';
 import '../localization/i18n';
 import { ScreenIcons } from '@enums/Icons';
-import NoxNativeBottomTab from './bottomtab/NoxNativeBottomTab';
-import NoxBottomTab from './bottomtab/NoxBottomTab';
+import NoxBottomTab from './bottomtab/View';
 import NoxMiniPlayer from './miniplayer/View';
 
 const HomeIcon = () => <IconButton icon={ScreenIcons.HomeScreen} />;
@@ -81,7 +80,7 @@ const AzusaPlayer = () => {
         />
       </Drawer.Navigator>
       <NoxMiniPlayer />
-      <NoxNativeBottomTab navigation={navigation} />
+      <NoxBottomTab navigation={navigation} />
     </SafeAreaView>
   );
 };

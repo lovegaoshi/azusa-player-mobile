@@ -31,10 +31,6 @@ const NoxAndroidBottomTab = ({ navigation }: NoxComponent.NavigationProps2) => {
   const navigationG = useNavigation();
   const insets = useSafeAreaInsets();
   const playerStyle = useNoxSetting(state => state.playerStyle);
-  const gestureMode = useNoxSetting(state => state.gestureMode);
-  const alwaysShowBottomTab = useNoxSetting(
-    state => state.playerSetting,
-  ).alwaysShowBottomTab;
   const route = useNoxMobile(state => state.bottomTabRoute);
   const toggleDrawer = useNoxMobile(state => state.toggleBottomTabDrawer);
   const isLandscape = useIsLandscape();
@@ -57,9 +53,6 @@ const NoxAndroidBottomTab = ({ navigation }: NoxComponent.NavigationProps2) => {
   const renderIcon = (icon: RouteIcons) =>
     route === icon ? icon : `${icon}-outline`;
 
-  if (!(gestureMode || alwaysShowBottomTab)) {
-    return <View style={{ height: insets.bottom }} />;
-  }
   return (
     <View
       style={{
