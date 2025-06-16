@@ -1,5 +1,6 @@
 import { FFmpegKit, FFprobeKit } from 'ffmpeg-kit-react-native';
 import RNFetchBlob from 'react-native-blob-util';
+import findLastIndex from 'lodash/findLastIndex';
 import TrackPlayer from 'react-native-track-player';
 
 import { logger } from '../Logger';
@@ -32,6 +33,30 @@ export const probeMetadata = async (
   const parsedMetadata = JSON.parse(await session.getOutput());
   logger.debug(parsedMetadata);
   return parsedMetadata.format;
+};
+
+export const probeLoudness = async (
+  fspath: string,
+  threshold = -10,
+  interval: 30,
+): Promise<[number, number]> => {
+  const session = await FFprobeKit.execute(
+    `-v error -f lavfi -i "amovie=${fspath},asetnsamples=44100,astats=metadata=1:reset=1" -show_entries frame=pkt_pts_time:frame_tags=lavfi.astats.Overall.Peak_level -of csv=p=0`,
+  );
+  // https://stackoverflow.com/questions/32254818/generating-a-waveform-using-ffmpeg/32276471#32276471
+  const parsedLoudness = await session.getOutput();
+  // Peak level per second
+  const loudness = parsedLoudness.split('\n').map(Number);
+  const arepeat = loudness.findIndex(i => i > threshold);
+
+  const brepeat = findLastIndex(loudness, i => i > threshold);
+
+  return [
+    arepeat < 0 || arepeat > interval ? 0 : arepeat,
+    brepeat < 0 || loudness.length - brepeat < interval
+      ? 1
+      : brepeat / loudness.length,
+  ];
 };
 
 const parseReplayGainLog = (log: string) => {
