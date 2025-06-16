@@ -343,6 +343,12 @@
     "ABRepeatName": "Update ABRepeat",
     "ABRepeatDesc": "Update ABRepeat rules from GitHub"
   },
+  "BottomTab": {
+    "playlist-music": "Playlist",
+    "music-note": "Music",
+    "compass": "Explore",
+    "cog": "Settings"
+  },
   "AppearanceSettings": {
     "fontScaleName": "Font Scale",
     "fontScaleDesc": "Adjust fonts to be smaller or bigger",
@@ -367,6 +373,8 @@
     "ColorSchemeDesc": "Current color scheme is {{ scheme }}",
     "alwaysShowBottomTabName": "Show Bottom Tab",
     "alwaysShowBottomTabDesc": "Always show bottom tab, regardless of gesture mode",
+    "nativeBottomTabName": "Native Bottom Tab",
+    "nativeBottomTabDesc": "use native bottom tab",
     "wavyProgressBarName": "Wavy Progress Bar",
     "wavyProgressBarDesc": "Show a wavy progress bar (huge battery drain)",
     "ColorSchemeLight": "light",

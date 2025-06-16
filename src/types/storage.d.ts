@@ -70,6 +70,7 @@ declare global {
       sponsorBlockCat: Category[];
       sponsorBlockEnabled: boolean;
       alwaysShowBottomTab: boolean;
+      nativeBottomTab: boolean;
 
       eqPreset: number;
       loudnessEnhance: number;

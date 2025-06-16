@@ -15,7 +15,7 @@ import Settings from './setting/View';
 import Explore from './explore/View';
 import '../localization/i18n';
 import { ScreenIcons } from '@enums/Icons';
-import NoxBottomTab from './bottomtab/NoxBottomTab';
+import NoxBottomTab from './bottomtab/View';
 import NoxMiniPlayer from './miniplayer/View';
 
 const HomeIcon = () => <IconButton icon={ScreenIcons.HomeScreen} />;

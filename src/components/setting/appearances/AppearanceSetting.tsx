@@ -54,6 +54,12 @@ export default ({ navigation }: NoxComponent.StackNavigationProps) => {
           settingCategory: 'AppearanceSettings',
         }}
       />
+      <RenderSetting
+        item={{
+          settingName: 'nativeBottomTab',
+          settingCategory: 'AppearanceSettings',
+        }}
+      />
     </ScrollView>
   );
 };

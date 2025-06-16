@@ -132,7 +132,7 @@ export default ({ miniplayerHeight, opacity, onPress, expand }: Props) => {
           />
         ) : (
           !playerSetting.hideCoverInMobile && (
-            <Image style={styles.flex} source={img} />
+            <Image style={styles.flex} source={img} transition={500} />
           )
         )}
       </Animated.View>

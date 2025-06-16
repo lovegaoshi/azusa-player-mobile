@@ -167,7 +167,6 @@ export default () => {
   return (
     <GestureDetector gesture={lrcVisible ? disabledGesture : scrollDragGesture}>
       <Animated.View style={[{ width: '100%' }, animatedStyle]}>
-        <View style={{ height: 3 }} />
         <View style={styles.rowView}>
           <PlayerTopInfo opacity={opacityVisible} collapse={collapse} />
           <TrackAlbumArt

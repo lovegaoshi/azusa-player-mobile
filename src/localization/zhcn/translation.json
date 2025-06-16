@@ -345,6 +345,12 @@
     "ABRepeatName": "更新 ABRepeat",
     "ABRepeatDesc": "从 GitHub 更新 ABRepeat 规则"
   },
+  "BottomTab": {
+    "playlist-music": "歌单",
+    "music-note": "音乐",
+    "compass": "发现",
+    "cog": "设置"
+  },
   "AppearanceSettings": {
     "fontScaleName": "字体缩放",
     "fontScaleDesc": "字体缩放",
@@ -363,6 +369,8 @@
     "accentColorDesc": "二次元ssw时，用专辑的主题色",
     "alwaysShowBottomTabName": "显示底部标签",
     "alwaysShowBottomTabDesc": "始终显示底部标签",
+    "nativeBottomTabName": "原生底部标签",
+    "nativeBottomTabDesc": "使用原生底部标签",
     "PrimaryColor": "主题颜色",
     "SecondaryColor": "辅助颜色",
     "ContrastColor": "对比颜色",

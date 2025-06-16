@@ -109,6 +109,7 @@ const AlbumArt: React.FC<Props> = ({
                     uri: `${overwriteAlbumArt ?? track?.artwork}`,
                   }
             }
+            transition={500}
           />
         </Animated.View>
       </TouchableWithoutFeedback>
