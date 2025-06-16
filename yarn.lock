@@ -4649,6 +4649,25 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@react-native-community/cli-tools@npm:^15.1.2":
+  version: 15.1.3
+  resolution: "@react-native-community/cli-tools@npm:15.1.3"
+  dependencies:
+    appdirsjs: "npm:^1.2.4"
+    chalk: "npm:^4.1.2"
+    execa: "npm:^5.0.0"
+    find-up: "npm:^5.0.0"
+    mime: "npm:^2.4.1"
+    open: "npm:^6.2.0"
+    ora: "npm:^5.4.1"
+    prompts: "npm:^2.4.2"
+    semver: "npm:^7.5.2"
+    shell-quote: "npm:^1.7.3"
+    sudo-prompt: "npm:^9.0.0"
+  checksum: 10c0/e458f3a5e97456b6fa8741cd8c04ca384b7657df9f53111daaf132911b00b6b5bf08fad2206c8461d0974b71548296b9da669af76dddf7f3261ac5d527df6bcc
+  languageName: node
+  linkType: hard
+
 "@react-native-community/cli-tools@npm:^17.0.0":
   version: 17.0.0
   resolution: "@react-native-community/cli-tools@npm:17.0.0"
@@ -4779,6 +4798,18 @@ __metadata:
   bin:
     rnvi-update-plist: lib/commonjs/scripts/updatePlist.js
   checksum: 10c0/f4a5c741c1e2aa14c9ad6d4c7b04aaa3925aef838820b3c05cb224ccdfbc9c5416dae0230180f913851e4eab54ebad5a1251314acfe28db1f9501b5da30b2e51
+  languageName: node
+  linkType: hard
+
+"@react-native-vector-icons/get-image@npm:^12.0.1":
+  version: 12.0.1
+  resolution: "@react-native-vector-icons/get-image@npm:12.0.1"
+  dependencies:
+    "@react-native-community/cli-tools": "npm:^15.1.2"
+  peerDependencies:
+    react: "*"
+    react-native: "*"
+  checksum: 10c0/50b6875413a94f6de54e6f760035bd64d104b8109bba7392c21faf8e383ea6f8cc67e807cb4520793f56beeff21845dceacdfadac7e5cdb96259c86540ac3f1d
   languageName: node
   linkType: hard
 
@@ -7600,6 +7631,7 @@ __metadata:
     "@react-native-community/netinfo": "npm:^11.4.1"
     "@react-native-cookies/cookies": "npm:^6.2.1"
     "@react-native-masked-view/masked-view": "npm:^0.3.2"
+    "@react-native-vector-icons/get-image": "npm:^12.0.1"
     "@react-native-vector-icons/material-design-icons": "npm:^12.0.0"
     "@react-native/babel-preset": "npm:0.79.3"
     "@react-native/eslint-config": "npm:0.79.3"
@@ -19674,6 +19706,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"shell-quote@npm:^1.7.3":
+  version: 1.8.3
+  resolution: "shell-quote@npm:1.8.3"
+  checksum: 10c0/bee87c34e1e986cfb4c30846b8e6327d18874f10b535699866f368ade11ea4ee45433d97bf5eada22c4320c27df79c3a6a7eb1bf3ecfc47f2c997d9e5e2672fd
+  languageName: node
+  linkType: hard
+
 "shell-quote@npm:^1.8.1":
   version: 1.8.2
   resolution: "shell-quote@npm:1.8.2"
@@ -20417,6 +20456,13 @@ __metadata:
   version: 8.2.5
   resolution: "sudo-prompt@npm:8.2.5"
   checksum: 10c0/c17bcc852112c11addcdfb8630fad1a236823887959f133ba47de9fcec22c03aafc49bbb35184ab7f13a78e625fb8324b86d5aa21b73b15d601aee71fb9b976e
+  languageName: node
+  linkType: hard
+
+"sudo-prompt@npm:^9.0.0":
+  version: 9.2.1
+  resolution: "sudo-prompt@npm:9.2.1"
+  checksum: 10c0/e56793513a9c95f66367a3be2ec4c1adee84a2a62f1b7ff6453d610586dcd373d7d8f4df522a7dae03aea8b779ef7f7ba25d1130d24fb1e495cfbbc2c72c7486
   languageName: node
   linkType: hard
 
