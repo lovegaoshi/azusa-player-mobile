@@ -1,8 +1,4 @@
 import { Dropbox as _Dropbox } from 'dropbox';
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore: dropbox didnt have fileBlob in their sdk anywhere but UPGRADING.md
-// eslint-disable-next-line import/no-unresolved
-import { getArrayBufferForBlob } from 'react-native-blob-jsi-helper';
 
 // eslint-disable-next-line import/no-unresolved
 import { DROPBOX_KEY, DROPBOX_SECRET } from '@env';
@@ -87,7 +83,7 @@ const DropboxSyncButton = ({
   GenericSyncButton({
     restoreFromUint8Array,
     noxBackup: v => noxBackup(dbx, v),
-    noxRestore: () => noxRestore(dbx, async v => getArrayBufferForBlob(v)),
+    noxRestore: () => noxRestore(dbx),
     login,
   });
 

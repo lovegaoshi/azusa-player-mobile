@@ -33,18 +33,14 @@ export const noxBackup = (
     contents: content,
   });
 
-const download = async (
-  dbx: _Dropbox,
-  contentParse: (v: Blob) => Promise<Uint8Array>,
-  fpath = DEFAULT_FILE_PATH,
-) => {
+const download = async (dbx: _Dropbox, fpath = DEFAULT_FILE_PATH) => {
   if (fpath === null) {
     return null;
   }
   const downloadedFile = await dbx.filesDownload({ path: fpath });
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-expect-error: dropbox didnt have fileBlob in their sdk anywhere but UPGRADING.md
-  const blob = await contentParse(downloadedFile.result.fileBlob);
+  const blob = await new Response(downloadedFile.result.fileBlob).arrayBuffer();
   return new Uint8Array(blob);
 };
 
@@ -53,15 +49,12 @@ const download = async (
  * returns the JSON object of settting or null if not found.
  * @returns playerSetting object, or null
  */
-export const noxRestore = async (
-  dbx: _Dropbox,
-  contentParse: (v: Blob) => Promise<Uint8Array>,
-) => {
+export const noxRestore = async (dbx: _Dropbox) => {
   const noxFile = await find(dbx);
   if (!noxFile) {
     throw new Error('noxfile is not found on dropbox.');
   }
-  return download(dbx, contentParse, noxFile);
+  return download(dbx, noxFile);
 };
 
 export const checkAuthentication = async (dbx: _Dropbox) => {
