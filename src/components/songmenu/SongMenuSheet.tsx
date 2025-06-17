@@ -162,9 +162,15 @@ export default () => {
           showSheet={showSheet}
         />
         <SheetIconButton
-          icon={'refresh'}
-          onPress={reloadSong}
-          text={t('SongOperations.reloadSong')}
+          icon={'share'}
+          onPress={() => {
+            Clipboard.setStringAsync(songExport2URL(song));
+            setSnack({
+              snackMsg: { success: t('SongOperations.songShared', { song }) },
+            });
+            showSheet(false);
+          }}
+          text={t('SongOperations.share')}
         />
       </View>
       <SheetIconEntry
@@ -174,20 +180,14 @@ export default () => {
         disabled={!radioAvailable(song)}
       />
       <SheetIconEntry
+        text={t('SongOperations.reloadSong')}
+        icon={'refresh'}
+        onPress={reloadSong}
+      />
+      <SheetIconEntry
         text={t('SongOperations.songR128gain')}
         icon={'replay'}
         onPress={onR128Gain}
-      />
-      <SheetIconEntry
-        text={t('SongOperations.share')}
-        icon={'share'}
-        onPress={() => {
-          Clipboard.setStringAsync(songExport2URL(song));
-          setSnack({
-            snackMsg: { success: t('SongOperations.songShared', { song }) },
-          });
-          showSheet(false);
-        }}
       />
       <ABSliderMenu song={song} showSheet={showSheet} />
       <SheetIconEntry
