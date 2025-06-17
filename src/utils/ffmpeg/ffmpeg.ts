@@ -72,7 +72,7 @@ export const probeLoudness = async (
   const brepeat = findEnd();
 
   return [
-    arepeat < 0 ? 0 : arepeat,
+    arepeat < 0 ? 0 : arepeat / loudness.length,
     brepeat < 0 ? 1 : brepeat / loudness.length,
   ];
 };
