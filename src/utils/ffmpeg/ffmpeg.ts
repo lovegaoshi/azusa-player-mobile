@@ -1,6 +1,5 @@
 import { FFmpegKit, FFprobeKit } from 'ffmpeg-kit-react-native';
 import RNFetchBlob from 'react-native-blob-util';
-import findLastIndex from 'lodash/findLastIndex';
 import TrackPlayer from 'react-native-track-player';
 
 import { logger } from '../Logger';
@@ -37,9 +36,12 @@ export const probeMetadata = async (
 
 export const probeLoudness = async (
   fspath: string,
-  threshold = -10,
-  interval: 30,
+  threshold = -20,
+  interval = 30,
 ): Promise<[number, number]> => {
+  if (fspath.startsWith('file://')) {
+    fspath = fspath.substring('file://'.length);
+  }
   const session = await FFprobeKit.execute(
     `-v error -f lavfi -i "amovie=${fspath},asetnsamples=44100,astats=metadata=1:reset=1" -show_entries frame=pkt_pts_time:frame_tags=lavfi.astats.Overall.Peak_level -of csv=p=0`,
   );
@@ -47,9 +49,27 @@ export const probeLoudness = async (
   const parsedLoudness = await session.getOutput();
   // Peak level per second
   const loudness = parsedLoudness.split('\n').map(Number);
-  const arepeat = loudness.findIndex(i => i > threshold);
 
-  const brepeat = findLastIndex(loudness, i => i > threshold);
+  const findBeginning = () => {
+    for (let i = 0; i < interval; i++) {
+      if (loudness[i] > threshold) {
+        return i - 1;
+      }
+    }
+    return -1;
+  };
+
+  const findEnd = () => {
+    for (let i = loudness.length - 1; i > loudness.length - interval; i--) {
+      if (loudness[i] > threshold) {
+        return (i + 1) / loudness.length;
+      }
+    }
+    return 1;
+  };
+
+  const arepeat = findBeginning();
+  const brepeat = findEnd();
 
   return [
     arepeat < 0 || arepeat > interval ? 0 : arepeat,
