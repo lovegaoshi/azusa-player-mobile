@@ -33,6 +33,10 @@ const renderSettings: { [key: string]: SettingEntry } = {
     settingName: 'skipSilence',
     settingCategory: 'GeneralSettings',
   },
+  noxSkipSilence: {
+    settingName: 'noxSkipSilence',
+    settingCategory: 'GeneralSettings',
+  },
   r128gain: {
     settingName: 'r128gain',
     settingCategory: 'GeneralSettings',
@@ -82,6 +86,7 @@ const Home = ({
       <RenderSetting item={renderSettings.noInterruption} />
       {isAndroid && <RenderSetting item={renderSettings.prefetchTrack} />}
       {isAndroid && <RenderSetting item={renderSettings.audioOffload} />}
+      <RenderSetting item={renderSettings.noxSkipSilence} />
       {isAndroid && <RenderSetting item={renderSettings.skipSilence} />}
       {isAndroid && <RenderSetting item={renderSettings.pausePlaybackOnMute} />}
       {isAndroid && <EqualizerButton />}

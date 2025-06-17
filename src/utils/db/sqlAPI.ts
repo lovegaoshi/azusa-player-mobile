@@ -64,10 +64,8 @@ export const getR128Gain = async (songcid?: string) => {
   return res?.r128gain;
 };
 
-export const getABRepeat = async (
-  songcid?: string,
-): Promise<[number, number]> => {
-  const res = db
+export const getABRepeatRaw = async (songcid?: string) => {
+  return db
     .select({
       a: abrepeatTable.a,
       b: abrepeatTable.b,
@@ -75,6 +73,12 @@ export const getABRepeat = async (
     .from(abrepeatTable)
     .where(eq(abrepeatTable.songcid, songcid ?? ''))
     .get();
+};
+
+export const getABRepeat = async (
+  songcid?: string,
+): Promise<[number, number]> => {
+  const res = await getABRepeatRaw(songcid);
   return [res?.a ?? 0, res?.b ?? 1];
 };
 
