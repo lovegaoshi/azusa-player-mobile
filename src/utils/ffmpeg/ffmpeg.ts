@@ -62,20 +62,18 @@ export const probeLoudness = async (
   const findEnd = () => {
     for (let i = loudness.length - 1; i > loudness.length - interval; i--) {
       if (loudness[i] > threshold) {
-        return (i + 1) / loudness.length;
+        return i + 1;
       }
     }
-    return 1;
+    return -1;
   };
 
   const arepeat = findBeginning();
   const brepeat = findEnd();
 
   return [
-    arepeat < 0 || arepeat > interval ? 0 : arepeat,
-    brepeat < 0 || loudness.length - brepeat < interval
-      ? 1
-      : brepeat / loudness.length,
+    arepeat < 0 ? 0 : arepeat,
+    brepeat < 0 ? 1 : brepeat / loudness.length,
   ];
 };
 

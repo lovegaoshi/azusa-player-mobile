@@ -3,10 +3,8 @@ import LRUCache from 'lru-cache';
 import RNFetchBlob from 'react-native-blob-util';
 import TrackPlayer from 'react-native-track-player';
 
-import { r128gain, setR128Gain, ffmpegToMP3 } from './ffmpeg/ffmpeg';
+import { ffmpegToMP3 } from './ffmpeg/ffmpeg';
 import { addDownloadProgress, setFetchProgress } from '@stores/appStore';
-import { getR128Gain } from '@utils/db/sqlAPI';
-import { setR128Gain as setR128GainSQL } from '@utils/db/sqlStorage';
 import { useNoxSetting } from '@stores/useApp';
 import { getCachedMediaMapping, saveCachedMediaMapping } from './ChromeStorage';
 import { logger } from './Logger';
@@ -14,6 +12,8 @@ import { customReqHeader } from './BiliFetch';
 import { Source } from '@enums/MediaFetch';
 import { validateFile, isIOS } from './RNUtils';
 import { displayDLProgress } from './download/notification';
+import { setNoxSkipSilence } from './ffmpeg/skipSilence';
+import { setNoxR128Gain } from './ffmpeg/r128RN';
 
 interface OptionsProps {
   max?: number;
@@ -68,19 +68,10 @@ class NoxMediaCache {
     notify = false,
   }: SaveCacheMedia) => {
     const parseR128Gain = async () => {
-      if (useNoxSetting.getState().playerSetting.r128gain) {
-        const previousGain = await getR128Gain(song.id);
-        logger.debug(
-          `[FFMPEG] now starting FFMPEG r128gain. prev: (${previousGain})`,
-        );
-        if (previousGain === null || previousGain === undefined) {
-          const gain = await r128gain(res.path());
-          await setR128GainSQL(song.id, gain);
-          setR128Gain(gain, song);
-        } else {
-          setR128Gain(previousGain, song);
-        }
-      }
+      const { r128gain, noxSkipSilence } =
+        useNoxSetting.getState().playerSetting;
+      noxSkipSilence && (await setNoxSkipSilence(res.path(), song));
+      r128gain && (await setNoxR128Gain(res.path(), song));
     };
     // HACK: local files also need r128gain
     if (resolvedURL.url.startsWith('file://')) parseR128Gain();
