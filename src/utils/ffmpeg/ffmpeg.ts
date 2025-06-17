@@ -48,7 +48,7 @@ export const probeLoudness = async (
   // https://stackoverflow.com/questions/32254818/generating-a-waveform-using-ffmpeg/32276471#32276471
   const parsedLoudness = await session.getOutput();
   // Peak level per second
-  const loudness = parsedLoudness.split('\n').map(Number);
+  const loudness = parsedLoudness.split('\n').map(Number).slice(0, -1);
 
   const findBeginning = () => {
     for (let i = 0; i < interval; i++) {
@@ -72,8 +72,8 @@ export const probeLoudness = async (
   const brepeat = findEnd();
 
   return [
-    arepeat < 0 ? 0 : arepeat / loudness.length,
-    brepeat < 0 ? 1 : brepeat / loudness.length,
+    arepeat < 0 ? 0 : (arepeat * 1.0) / loudness.length,
+    brepeat < 0 ? 1 : (brepeat * 1.0) / loudness.length,
   ];
 };
 
