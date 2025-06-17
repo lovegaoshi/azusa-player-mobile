@@ -26,6 +26,8 @@ import { Source } from '@enums/MediaFetch';
 import { isAndroid10 } from '@utils/RNUtils';
 import { copyCacheToDir } from '@utils/download/download';
 import NoxBottomSheet from '@components/commonui/bottomsheet/NoxBottomSheet';
+import { resolveUrl } from '@utils/SongOperations';
+import { probeLoudness, r128gain } from '@utils/ffmpeg/ffmpeg';
 
 interface UsePlaylist {
   checking: boolean;
@@ -238,7 +240,11 @@ export default ({ usePlaylist, prepareForLayoutAnimationRender }: Props) => {
         <SheetIconEntry
           text={t('console.log')}
           icon={'console'}
-          onPress={() => console.log(songs)}
+          onPress={async () => {
+            console.log(songs);
+            const url = await resolveUrl({ song: songs[0] });
+            console.log(await probeLoudness(url.url));
+          }}
         />
       )}
     </NoxBottomSheet>
