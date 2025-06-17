@@ -1,5 +1,5 @@
 diff --git a/node_modules/react-native-blob-jsi-helper/android/build.gradle b/node_modules/react-native-blob-jsi-helper/android/build.gradle
-index 57945ae..95fe72a 100644
+index 57945ae..666f46c 100644
 --- a/node_modules/react-native-blob-jsi-helper/android/build.gradle
 +++ b/node_modules/react-native-blob-jsi-helper/android/build.gradle
 @@ -45,6 +45,7 @@ repositories {
@@ -10,7 +10,15 @@ index 57945ae..95fe72a 100644
      // Used to override the NDK path/version on internal CI or by allowing
     // users to customize the NDK path/version from their root project (e.g. for M1 support)
     if (rootProject.hasProperty("ndkPath")) {
-@@ -73,10 +74,6 @@ android {
+@@ -67,16 +68,13 @@ android {
+     externalNativeBuild {
+       cmake {
+         cppFlags "-O2 -frtti -fexceptions -Wall -Wno-unused-variable -fstack-protector-all"
+-        arguments "-DANDROID_STL=c++_shared"
++        arguments "-DANDROID_STL=c++_shared",
++                "-DANDROID_SUPPORT_FLEXIBLE_PAGE_SIZES=ON"
+         abiFilters (*reactNativeArchitectures())
+       }
      }
    }
  
