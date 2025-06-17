@@ -71,6 +71,7 @@ declare global {
       sponsorBlockEnabled: boolean;
       alwaysShowBottomTab: boolean;
       nativeBottomTab: boolean;
+      noxSkipSilence: boolean;
 
       eqPreset: number;
       loudnessEnhance: number;

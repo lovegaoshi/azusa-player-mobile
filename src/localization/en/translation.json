@@ -231,6 +231,8 @@
     "parseEmbeddedArtworkDesc": "Parse embedded artwork 1 additional time for android auto (will slow local playback otherwise!!).",
     "skipSilenceName": "Skip Silence",
     "skipSilenceDesc": "skip segments with no audio (exoplayer feature)",
+    "noxSkipSilenceName": "Skip Silence (ffmpeg)",
+    "noxSkipSilenceDesc": "skip segments using ffmpeg loudness filter",
     "karaokeLyricsName": "Karaoke Lyrics",
     "karaokeLyricsDesc": "Show karaoke style lyrics",
     "biliEditAPIName": "use bilibili edit API",

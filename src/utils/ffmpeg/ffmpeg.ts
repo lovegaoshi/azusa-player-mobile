@@ -34,6 +34,49 @@ export const probeMetadata = async (
   return parsedMetadata.format;
 };
 
+export const probeLoudness = async (
+  fspath: string,
+  threshold = -20,
+  interval = 30,
+): Promise<[number, number]> => {
+  if (fspath.startsWith('file://')) {
+    fspath = fspath.substring('file://'.length);
+  }
+  const session = await FFprobeKit.execute(
+    `-v error -f lavfi -i "amovie=${fspath},asetnsamples=44100,astats=metadata=1:reset=1" -show_entries frame=pkt_pts_time:frame_tags=lavfi.astats.Overall.Peak_level -of csv=p=0`,
+  );
+  // https://stackoverflow.com/questions/32254818/generating-a-waveform-using-ffmpeg/32276471#32276471
+  const parsedLoudness = await session.getOutput();
+  // Peak level per second
+  const loudness = parsedLoudness.split('\n').map(Number).slice(0, -1);
+
+  const findBeginning = () => {
+    for (let i = 0; i < interval; i++) {
+      if (loudness[i] > threshold) {
+        return i - 1;
+      }
+    }
+    return -1;
+  };
+
+  const findEnd = () => {
+    for (let i = loudness.length - 1; i > loudness.length - interval; i--) {
+      if (loudness[i] > threshold) {
+        return i + 1;
+      }
+    }
+    return -1;
+  };
+
+  const arepeat = findBeginning();
+  const brepeat = findEnd();
+
+  return [
+    arepeat < 0 ? 0 : (arepeat * 1.0) / loudness.length,
+    brepeat < 0 ? 1 : (brepeat * 1.0) / loudness.length,
+  ];
+};
+
 const parseReplayGainLog = (log: string) => {
   const regex = /Parsed_replaygain.+ track_gain = (.+) dB/g;
   regex.exec(log);

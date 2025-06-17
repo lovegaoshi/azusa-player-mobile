@@ -233,6 +233,8 @@
     "parseEmbeddedArtworkDesc": "二次解析专辑封面（仅适用于android auto，会拖慢性能）",
     "skipSilenceName": "跳过静音",
     "skipSilenceDesc": "跳过静音片段（exoplayer特性，不适用于音乐）",
+    "noxSkipSilenceName": "跳过静音 (ffmpeg)",
+    "noxSkipSilenceDesc": "跳过静音片段;使用ffmpeg获得音量",
     "karaokeLyricsName": "逐字歌词",
     "karaokeLyricsDesc": "使用逐字歌词",
     "biliEditAPIName": "使用b站修改投稿API",

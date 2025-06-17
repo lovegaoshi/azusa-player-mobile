@@ -78,10 +78,7 @@ export const checkAuthentication = async (token = '') => {
   }
 };
 
-export const noxRestore = async (
-  token: string,
-  contentParse: (v: Blob) => Promise<Uint8Array>,
-) => {
+export const noxRestore = async (token: string) => {
   const res = await bfetch(
     `https://api.github.com/repos/${await getUserName(token)}/${APM_REPO_NAME}/contents/${APM_FILE_NAME}`,
     {
@@ -91,9 +88,9 @@ export const noxRestore = async (
       },
     },
   );
-  const noxFile = await res.blob();
+  const noxFile = await res.arrayBuffer();
   if (!noxFile) {
     throw new Error('noxfile is not found on github.');
   }
-  return contentParse(noxFile);
+  return new Uint8Array(noxFile);
 };
