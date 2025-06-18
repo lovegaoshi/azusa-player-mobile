@@ -21,11 +21,11 @@ enum Routes {
   LyricSearch = 'lyric',
 }
 
-interface IMain {
+interface IMain extends Props {
   setRoute: (route: Routes) => void;
   sheet: RefObject<TrueSheet | null>;
 }
-const Main = ({ setRoute }: IMain) => {
+const Main = ({ sheet, setRoute, showLyricOffsetModal }: IMain) => {
   const { t } = useTranslation();
   return (
     <View>
@@ -35,12 +35,15 @@ const Main = ({ setRoute }: IMain) => {
       <SheetIconEntry
         text={t('Lyric.changeLyric')}
         icon={'text-search'}
-        onPress={() => console.log('[pressed!')}
+        onPress={() => setRoute(Routes.LyricSearch)}
       />
       <SheetIconEntry
         text={t('Lyric.offset')}
         icon={'tune-variant'}
-        onPress={() => console.log('[pressed!')}
+        onPress={() => {
+          showLyricOffsetModal();
+          sheet.current?.dismiss();
+        }}
       />
     </View>
   );
@@ -86,7 +89,11 @@ const LyricSearch = () => {
   );
 };
 
-export default () => {
+interface Props {
+  showLyricOffsetModal: () => void;
+}
+
+export default ({ showLyricOffsetModal }: Props) => {
   const sheet = useRef<TrueSheet>(null);
   const { t } = useTranslation();
   const [route, setRoute] = useState(Routes.Main);
@@ -95,7 +102,13 @@ export default () => {
   const Content = () => {
     switch (route) {
       default:
-        return <Main sheet={sheet} setRoute={setRoute} />;
+        return (
+          <Main
+            sheet={sheet}
+            setRoute={setRoute}
+            showLyricOffsetModal={showLyricOffsetModal}
+          />
+        );
     }
   };
 

@@ -13,12 +13,15 @@ import {
 import { Lrc as Lyric, KaraokeMode } from 'react-native-lyric';
 import TrackPlayer, { Track, useProgress } from 'react-native-track-player';
 import { IconButton } from 'react-native-paper';
+import { TrueSheet } from '@lodev09/react-native-true-sheet';
 import { useTranslation } from 'react-i18next';
 
 import { useNoxSetting } from '@stores/useApp';
 import useLyric from '@hooks/useLyricRN';
 import { isIOS } from '@utils/RNUtils';
 import { NativeText as Text } from '@components/commonui/ScaledText';
+import LyricBottomSheet from './LyricBottomSheet';
+import { NoxSheetRoutes } from '@enums/Routes';
 
 interface ModalContainerProps {
   children: React.JSX.Element[];
@@ -128,6 +131,9 @@ export const LyricView = ({
 
   return (
     <View style={style}>
+      <LyricBottomSheet
+        showLyricOffsetModal={() => setOffsetModalVisible(true)}
+      />
       <Lyric
         style={{ marginTop: 30, height: 500 }}
         lrc={lrc}
@@ -157,7 +163,7 @@ export const LyricView = ({
           <View style={styles.optionsButton}>
             <IconButton
               icon="more"
-              onPress={() => setModalVisible(!modalVisible)}
+              onPress={() => TrueSheet.present(NoxSheetRoutes.LyricSheet)}
             />
           </View>
           <ModalContainer
