@@ -14,4 +14,5 @@ export enum NoxSheetRoutes {
   SongMenuSheet = 'NoxSongMenuSheet',
   PlaylistMenuSheet = 'NoxPlaylistMenuSheet',
   SongsMenuInListSheet = 'NoxSongsMenuInListSheet',
+  LyricSheet = 'NoxLyricSheet',
 }

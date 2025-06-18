@@ -483,6 +483,7 @@
     "notFound": "[00:00.000] 无法找到歌词,请手动搜索",
     "options": "更多",
     "changeLyric": "更换歌词",
+    "Search": "歌词搜索",
     "offset": "歌词时间调整"
   },
   "PlaylistAnalytics": {

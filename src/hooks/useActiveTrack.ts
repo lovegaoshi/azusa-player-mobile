@@ -13,6 +13,9 @@ interface TrackStore {
   updateTrack: (metadata: Partial<Track> | undefined) => Promise<void>;
 }
 
+// this is a global store; the default export (useTrack) is initialized in useSetupPlayer
+// so it always updates
+
 export const useTrackStore = create<TrackStore>((set, get) => ({
   track: undefined,
   setTrack: track => set({ track }),
