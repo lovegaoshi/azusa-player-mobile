@@ -118,7 +118,7 @@ export default ({ showLyricOffsetModal, usedLyric }: Props) => {
           </View>
         ) : (
           <View style={{ paddingVertical: 15, alignItems: 'center' }}>
-            <Text variant="titleLarge">{t('歌词搜索')}</Text>
+            <Text variant="titleLarge">{t('Lyric.Search')}</Text>
           </View>
         )
       }

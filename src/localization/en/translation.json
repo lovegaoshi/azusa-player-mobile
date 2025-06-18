@@ -481,6 +481,7 @@
     "notFound": "[00:00.000] Lyric was not found",
     "options": "Lyric Options",
     "changeLyric": "Change Source",
+    "Search": "Lyric Search",
     "offset": "Adjust Offset"
   },
   "PlaylistAnalytics": {
