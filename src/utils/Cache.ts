@@ -70,8 +70,9 @@ class NoxMediaCache {
     const parseR128Gain = async () => {
       const { r128gain, noxSkipSilence } =
         useNoxSetting.getState().playerSetting;
-      noxSkipSilence && (await setNoxSkipSilence(res.path(), song));
-      r128gain && (await setNoxR128Gain(res.path(), song));
+      const path = res?.path();
+      noxSkipSilence && path && (await setNoxSkipSilence(path, song));
+      r128gain && path && (await setNoxR128Gain(path, song));
     };
     // HACK: local files also need r128gain
     if (resolvedURL.url.startsWith('file://')) parseR128Gain();
