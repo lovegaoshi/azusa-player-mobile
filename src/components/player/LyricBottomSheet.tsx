@@ -1,14 +1,23 @@
 import { TrueSheet } from '@lodev09/react-native-true-sheet';
 import { RefObject, useRef, useState } from 'react';
-import { View, Alert, Button } from 'react-native';
+import {
+  View,
+  Alert,
+  Button,
+  StyleSheet,
+  FlatList,
+  TouchableOpacity,
+  TextInput,
+  ViewStyle,
+} from 'react-native';
 import { Image } from 'expo-image';
 import { Divider } from 'react-native-paper';
 import { useTranslation } from 'react-i18next';
+import { Track } from 'react-native-track-player';
 
 import { PaperText as Text } from '@components/commonui/ScaledText';
 import { NoxSheetRoutes } from '@enums/Routes';
 import { useNoxSetting } from '@stores/useApp';
-import { SongTitle, styles } from '../player/TrackInfo/TrackInfoTemplate';
 import { useTrackStore } from '@hooks/useActiveTrack';
 import SheetIconButton from '../commonui/bottomsheet/SheetIconButton';
 import SheetIconEntry from '@components/commonui/bottomsheet/SheetIconEntry';
@@ -21,7 +30,8 @@ enum Routes {
   LyricSearch = 'lyric',
 }
 
-interface IMain extends Props {
+interface IMain {
+  showLyricOffsetModal: () => void;
   setRoute: (route: Routes) => void;
   sheet: RefObject<TrueSheet | null>;
 }
@@ -49,9 +59,29 @@ const Main = ({ sheet, setRoute, showLyricOffsetModal }: IMain) => {
   );
 };
 
-const LyricSearch = () => {
+interface UseLyric {
+  lrcOptions: NoxLyric.NoxFetchedLyric[];
+  searchText: string;
+  setSearchText: (text: string) => void;
+  searchAndSetCurrentLyric: (p: { index: number }) => unknown;
+  fetchAndSetLyricOptions: (s?: string) => unknown;
+}
+
+interface ILyricSearch {
+  usedLyric: UseLyric;
+}
+const LyricSearch = ({ usedLyric }: ILyricSearch) => {
+  const {
+    searchAndSetCurrentLyric,
+    fetchAndSetLyricOptions,
+    lrcOptions,
+    searchText,
+    setSearchText,
+  } = usedLyric;
   const { t } = useTranslation();
   const playerStyle = useNoxSetting(state => state.playerStyle);
+  const track = useTrackStore(s => s.track);
+
   return (
     <View>
       <View style={{ paddingVertical: 15, alignItems: 'center' }}>
@@ -89,18 +119,19 @@ const LyricSearch = () => {
   );
 };
 
-interface Props {
+interface Props extends ILyricSearch {
   showLyricOffsetModal: () => void;
 }
 
-export default ({ showLyricOffsetModal }: Props) => {
+export default ({ showLyricOffsetModal, usedLyric }: Props) => {
   const sheet = useRef<TrueSheet>(null);
   const { t } = useTranslation();
   const [route, setRoute] = useState(Routes.Main);
-  const track = useTrackStore(s => s.track);
 
   const Content = () => {
     switch (route) {
+      case Routes.LyricSearch:
+        return <LyricSearch usedLyric={usedLyric} />;
       default:
         return (
           <Main
@@ -122,3 +153,18 @@ export default ({ showLyricOffsetModal }: Props) => {
     </NoxBottomSheet>
   );
 };
+
+const styles = StyleSheet.create({
+  listItem: {
+    padding: 10,
+    fontSize: 16,
+    borderTopColor: 'grey',
+  },
+  searchBar: {
+    height: 40,
+    paddingLeft: 15,
+    backgroundColor: '#f0f0f0',
+    fontSize: 16,
+    color: '#333',
+  },
+});

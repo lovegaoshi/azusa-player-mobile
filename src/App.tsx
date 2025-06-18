@@ -20,7 +20,6 @@ import useTheme from './hooks/useTheme';
 import { TRACKING } from '@env';
 import { useSetupVIP } from './hooks/useVIP';
 import SongMenuSheet from '@components/songmenu/SongMenuSheet';
-import LyricBottomSheet from '@components/player/LyricBottomSheet';
 import { useNoxSetting } from '@stores/useApp';
 import SnackBar from './components/commonui/Snackbar';
 import APM from './components/APM';
@@ -121,7 +120,6 @@ export default function App(appProps: NoxComponent.AppProps) {
               defaultTheme={defaultTheme}
             />
             <SongMenuSheet />
-            <LyricBottomSheet />
             <SnackBar />
           </PaperProvider>
         </View>
