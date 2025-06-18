@@ -17,6 +17,7 @@ interface Props extends TrueSheetProps {
   sizes?: SheetSize[];
   children?: React.ReactNode;
   draggable?: boolean;
+  Header?: () => React.ReactNode;
 }
 
 export default (p: Props) => {
@@ -25,16 +26,19 @@ export default (p: Props) => {
     children,
     sizes = ['auto', 'large'],
     draggable,
+    onDismiss,
+    Header = () => null,
   } = p;
   const playerStyle = useNoxSetting(state => state.playerStyle);
   const [topOffset, setTopOffset] = useState(0);
   const [leftOffset, setLeftOffset] = useState(0);
-  const ref = useRef<View>(null);
+  const pressableRef = useRef<View>(null);
+  const scrollViewRef = useRef<ScrollView>(null);
 
   useEffect(() => {
     isAndroid &&
       !isOldArch() &&
-      ref.current?.measure((_x, _y, _width, _height, pageX, pageY) => {
+      pressableRef.current?.measure((_x, _y, _width, _height, pageX, pageY) => {
         setTopOffset(-pageY);
         setLeftOffset(-pageX);
       });
@@ -48,11 +52,18 @@ export default (p: Props) => {
       backgroundColor={playerStyle.colors.surfaceVariant}
       sizes={sizes}
       cornerRadius={cornerRadius}
+      // @ts-expect-error typing issues
+      scrollRef={scrollViewRef}
+      onDismiss={() => {
+        onDismiss?.();
+        scrollViewRef.current?.scrollTo({ x: 0, y: 0, animated: false });
+      }}
     >
-      <Pressable ref={ref} />
+      <Pressable ref={pressableRef} />
       {/* https://sheet.lodev09.com/troubleshooting#react-native-gesture-handler */}
       <GestureHandlerRootView style={styles.RNGHcontainer}>
-        <ScrollView>
+        <Header />
+        <ScrollView nestedScrollEnabled ref={scrollViewRef}>
           {children}
           <View style={styles.footer} />
         </ScrollView>
