@@ -1,11 +1,15 @@
-import { SheetSize, TrueSheet } from '@lodev09/react-native-true-sheet';
+import {
+  SheetSize,
+  TrueSheet,
+  TrueSheetProps,
+} from '@lodev09/react-native-true-sheet';
 import { RefObject } from 'react';
 import { View, ScrollView, StyleSheet } from 'react-native';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
 import { useNoxSetting } from '@stores/useApp';
 
-interface Props {
+interface Props extends TrueSheetProps {
   name: string;
   ref: RefObject<TrueSheet | null>;
   cornerRadius?: number;
@@ -14,21 +18,19 @@ interface Props {
   draggable?: boolean;
 }
 
-export default ({
-  name,
-  ref,
-  cornerRadius = 5,
-  children,
-  sizes = ['auto', 'large'],
-  draggable,
-}: Props) => {
+export default (p: Props) => {
+  const {
+    cornerRadius = 5,
+    children,
+    sizes = ['auto', 'large'],
+    draggable,
+  } = p;
   const playerStyle = useNoxSetting(state => state.playerStyle);
 
   return (
     <TrueSheet
+      {...p}
       draggingEnabled={draggable}
-      name={name}
-      ref={ref}
       backgroundColor={playerStyle.colors.surfaceVariant}
       sizes={sizes}
       cornerRadius={cornerRadius}
