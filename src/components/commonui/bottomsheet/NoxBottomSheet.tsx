@@ -18,6 +18,7 @@ interface Props extends TrueSheetProps {
   children?: React.ReactNode;
   draggable?: boolean;
   Header?: () => React.ReactNode;
+  nestedScrollEnabled?: boolean;
 }
 
 export default (p: Props) => {
@@ -28,10 +29,13 @@ export default (p: Props) => {
     draggable,
     onDismiss,
     Header = () => null,
+    nestedScrollEnabled,
   } = p;
   const playerStyle = useNoxSetting(state => state.playerStyle);
   const [topOffset, setTopOffset] = useState(0);
   const [leftOffset, setLeftOffset] = useState(0);
+  const [scrollViewShouldNest, setScrollViewShouldNest] = useState(false);
+  const scrollViewHeight = useRef(0);
   const pressableRef = useRef<View>(null);
   const scrollViewRef = useRef<ScrollView>(null);
 
@@ -65,7 +69,13 @@ export default (p: Props) => {
       <GestureHandlerRootView style={styles.RNGHcontainer}>
         <Header />
         <ScrollView
-          nestedScrollEnabled
+          onLayout={e =>
+            (scrollViewHeight.current = e.nativeEvent.layout.height)
+          }
+          onContentSizeChange={(_w, h) =>
+            setScrollViewShouldNest(h > scrollViewHeight.current)
+          }
+          nestedScrollEnabled={nestedScrollEnabled ?? scrollViewShouldNest}
           ref={scrollViewRef}
           showsVerticalScrollIndicator={false}
         >
