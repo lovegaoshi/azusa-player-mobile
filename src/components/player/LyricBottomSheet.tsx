@@ -64,7 +64,7 @@ const LyricSearch = ({ usedLyric }: ILyricSearch) => {
   const track = useTrackStore(s => s.track);
 
   return (
-    <View>
+    <>
       <TextInput
         style={[
           styles.searchBar,
@@ -91,7 +91,8 @@ const LyricSearch = ({ usedLyric }: ILyricSearch) => {
           </Text>
         </TouchableOpacity>
       ))}
-    </View>
+      <View style={{ height: 120 }} />
+    </>
   );
 };
 

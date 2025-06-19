@@ -47,6 +47,7 @@ export default (p: Props) => {
   return (
     <TrueSheet
       {...p}
+      keyboardMode={'pan'}
       positionOffset={{ top: topOffset, left: leftOffset }}
       draggingEnabled={draggable}
       backgroundColor={playerStyle.colors.surfaceVariant}
@@ -63,7 +64,11 @@ export default (p: Props) => {
       {/* https://sheet.lodev09.com/troubleshooting#react-native-gesture-handler */}
       <GestureHandlerRootView style={styles.RNGHcontainer}>
         <Header />
-        <ScrollView nestedScrollEnabled ref={scrollViewRef}>
+        <ScrollView
+          nestedScrollEnabled
+          ref={scrollViewRef}
+          showsVerticalScrollIndicator={false}
+        >
           {children}
           <View style={styles.footer} />
         </ScrollView>
