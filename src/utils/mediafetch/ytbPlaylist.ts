@@ -5,6 +5,7 @@ const regexFetch = async ({
   reExtracted,
   favList = [],
 }: NoxNetwork.RegexFetchProps): Promise<NoxNetwork.NoxRegexFetch> => {
+  const limit = Number(/limit=(\d+)/.exec(reExtracted[0])?.[1]);
   try {
     const results = await fetchYtmPlaylist(
       // fetchYTPlaylist(
@@ -17,11 +18,17 @@ const regexFetch = async ({
     }
     return { songList: results };
   } catch {
-    return { songList: await fetchYtbiPlaylist(reExtracted[1], favList) };
+    return {
+      songList: await fetchYtbiPlaylist(
+        reExtracted[1],
+        favList,
+        Number.isNaN(limit) ? Infinity : limit,
+      ),
+    };
   }
 };
 
 export default {
-  regexSearchMatch: /youtu.*list=([^&]+)/,
+  regexSearchMatch: /youtu.*list=([^&]+).+(&limit=\d+)?/,
   regexFetch,
 };
