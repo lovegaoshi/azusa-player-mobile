@@ -18,6 +18,7 @@ import {
   styles as stylesG,
 } from '@components/style';
 import { setDarkTheme } from '@utils/RNUtils';
+import { saveColorScheme } from '@utils/ChromeStorageAPI';
 
 interface DisplayTheme extends NoxTheme.Style {
   builtin: boolean;
@@ -140,9 +141,13 @@ const SkinSettings = () => {
   const selectTheme = (theme: NoxTheme.Style) => {
     setChecked(getThemeID(theme));
     setPlayerStyle(theme);
-    setDarkTheme(
-      theme.isAdaptive ? null : theme.metaData.darkTheme ? 'dark' : 'light',
-    );
+    const newDarkTheme = theme.isAdaptive
+      ? null
+      : theme.metaData.darkTheme
+        ? 'dark'
+        : 'light';
+    setDarkTheme(newDarkTheme);
+    saveColorScheme(newDarkTheme);
     scrollViewRef.current?.prepareForLayoutAnimationRender();
     LayoutAnimation.configureNext(LayoutAnimation.Presets.linear);
   };
