@@ -61,19 +61,6 @@ index 4008af9..3aeeeb4 100644
      }
      static async fromSource(player_id, sig_timestamp, cache, sig_sc, nsig_sc) {
          const player = new Player(player_id, sig_timestamp, sig_sc, nsig_sc);
-diff --git a/node_modules/youtubei.js/dist/src/core/Session.js b/node_modules/youtubei.js/dist/src/core/Session.js
-index 4d88803..43a2b47 100644
---- a/node_modules/youtubei.js/dist/src/core/Session.js
-+++ b/node_modules/youtubei.js/dist/src/core/Session.js
-@@ -118,7 +118,7 @@ class Session extends EventEmitter {
-                 user_agent: user_agent,
-                 visitor_data: visitor_data || ProtoUtils.encodeVisitorData(generateRandomString(11), Math.floor(Date.now() / 1000)),
-                 client_name: client_name,
--                client_version: Constants.CLIENTS.WEB.VERSION,
-+                client_version: Object.values(Constants.CLIENTS).filter(v => v.NAME === client_name)[0]?.VERSION ?? Constants.CLIENTS.WEB.VERSION,
-                 device_category: device_category.toUpperCase(),
-                 os_name: 'Windows',
-                 os_version: '10.0',
 diff --git a/node_modules/youtubei.js/dist/src/parser/classes/Video2.js b/node_modules/youtubei.js/dist/src/parser/classes/Video2.js
 new file mode 100644
 index 0000000..ed833a8
