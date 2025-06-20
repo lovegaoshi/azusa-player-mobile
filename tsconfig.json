@@ -8,6 +8,7 @@
       "@components/*": ["src/components/*"],
       "@types/*": ["src/types/*"],
       "@utils/*": ["src/utils/*"],
+      "@contexts/*": ["src/contexts/*"],
       "@assets/*": ["src/assets/*"],
       "@enums/*": ["src/enums/*"],
       "@objects/*": ["src/objects/*"],

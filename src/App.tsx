@@ -27,6 +27,7 @@ import {
   CombinedDarkTheme,
   CombinedDefaultTheme,
 } from './components/styles/Theme';
+import APMContext from './contexts/APMContext';
 
 if (TRACKING) {
   Sentry.init({
@@ -102,28 +103,30 @@ export default function App(appProps: NoxComponent.AppProps) {
   }
   return (
     <GestureHandlerRootView style={styles.gestureContainer}>
-      <SafeAreaProvider>
-        <MainBackground />
-        <View
-          style={{ backgroundColor: playerStyle.colors.background, flex: 1 }}
-        >
-          <PaperProvider
-            theme={{
-              ...defaultTheme,
-              colors: playerStyle.colors,
-            }}
+      <APMContext>
+        <SafeAreaProvider>
+          <MainBackground />
+          <View
+            style={{ backgroundColor: playerStyle.colors.background, flex: 1 }}
           >
-            <APM
-              PIP={PIPMode}
-              isLandscape={isLandscape}
-              defaultNavTheme={defaultNavTheme}
-              defaultTheme={defaultTheme}
-            />
-            <SongMenuSheet />
-            <SnackBar />
-          </PaperProvider>
-        </View>
-      </SafeAreaProvider>
+            <PaperProvider
+              theme={{
+                ...defaultTheme,
+                colors: playerStyle.colors,
+              }}
+            >
+              <APM
+                PIP={PIPMode}
+                isLandscape={isLandscape}
+                defaultNavTheme={defaultNavTheme}
+                defaultTheme={defaultTheme}
+              />
+              <SongMenuSheet />
+              <SnackBar />
+            </PaperProvider>
+          </View>
+        </SafeAreaProvider>
+      </APMContext>
     </GestureHandlerRootView>
   );
 }

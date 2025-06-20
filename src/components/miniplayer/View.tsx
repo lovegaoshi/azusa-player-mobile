@@ -21,6 +21,7 @@ import PlayerControls from '../player/controls/PlayerProgressControls';
 import Lrc from './Lrc';
 import ProgressBar from './ProgressBar';
 import { useNoxSetting } from '@stores/useApp';
+import { useMiniplayerHeight } from '@contexts/MiniPlayerHeightContext';
 
 const SnapToRatio = 0.15;
 
@@ -30,7 +31,7 @@ export default () => {
   const dim = Dimensions.get('window');
   const width = dim.width;
   const height = dim.height + insets.top + insets.bottom;
-  const miniplayerHeight = useSharedValue(MinPlayerHeight);
+  const miniplayerHeight = useMiniplayerHeight();
   const artworkOpacity = useSharedValue(1);
   const initHeight = useSharedValue(0);
   const expandCounter = useNoxSetting(state => state.expandCounter);
