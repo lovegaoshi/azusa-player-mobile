@@ -61,7 +61,6 @@ export const fetchYtbiPlaylist = async (
 ): Promise<NoxMedia.Song[]> => {
   const yt = await ytwebClient();
   try {
-    const data = await yt.getPlaylist(playlistId);
     return getYtbSong(await yt.getPlaylist(playlistId), [], favList, limit);
   } catch {
     return [];
