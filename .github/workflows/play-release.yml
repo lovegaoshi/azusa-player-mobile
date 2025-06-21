@@ -97,7 +97,7 @@ jobs:
         run: rm -rf android/app/build/generated/
 
       - name: gradle build AAB
-        run: cd android && chmod +x gradlew && ./gradlew generateCodegenArtifactsFromSchema --rerun-tasks && ./gradlew assembleRelease
+        run: cd android && chmod +x gradlew && ./gradlew generateCodegenArtifactsFromSchema --rerun-tasks && ./gradlew bundleRelease
 
       - name: Push changes to master
         uses: ad-m/github-push-action@master
