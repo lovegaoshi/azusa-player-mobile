@@ -112,7 +112,7 @@ jobs:
       #    yarn codepush:promote --token ${{secrets.CODEPUSH_ACCESS_TOKEN}}
 
       - name: gradle build APK
-        run: cd android && chmod +x gradlew && ./gradlew assembleRelease
+        run: cd android && chmod +x gradlew && ./gradlew generateCodegenArtifactsFromSchema --rerun-tasks && ./gradlew assembleRelease
 
       - name: Release APK
         uses: softprops/action-gh-release@v2
