@@ -1,3 +1,4 @@
+import logger from '../Logger';
 import { fetchYtmPlaylist } from './ytbPlaylist.muse';
 import { fetchYtbiPlaylist } from './ytbPlaylist.ytbi';
 
@@ -6,6 +7,7 @@ const regexFetch = async ({
   favList = [],
 }: NoxNetwork.RegexFetchProps): Promise<NoxNetwork.NoxRegexFetch> => {
   const limit = Number(/limit=(\d+)/.exec(reExtracted[0])?.[1]);
+  logger.debug(`[ytbPlaylist] extracting playlist ${reExtracted[1]}`);
   try {
     const results = await fetchYtmPlaylist(
       // fetchYTPlaylist(
@@ -29,6 +31,6 @@ const regexFetch = async ({
 };
 
 export default {
-  regexSearchMatch: /youtu.*list=([^&]+).+(&limit=\d+)?/,
+  regexSearchMatch: /youtu.*list=([^&]+).*(&limit=\d+)?/,
   regexFetch,
 };
