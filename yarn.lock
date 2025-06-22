@@ -7839,7 +7839,6 @@ __metadata:
     react-native-aes-ecb: "npm:^1.0.0"
     react-native-app-auth: "npm:^8.0.3"
     react-native-background-timer: "git+https://github.com/lovegaoshi/react-native-background-timer.git"
-    react-native-blob-jsi-helper: "npm:^0.3.1"
     react-native-blob-util: "npm:^0.22.2"
     react-native-bottom-tabs: "npm:^0.9.2"
     react-native-buffer: "npm:^6.0.3"
@@ -18428,16 +18427,6 @@ __metadata:
   version: 0.0.2
   resolution: "react-native-base64@npm:0.0.2"
   checksum: 10c0/655e5638c30bc0af1ac649ba053e849a268f12d9657124b1418e27019cbf0f4141e5a93086ee640b46e90e5bb1003d640f38d55504b3637fcd72b7894ac1a30c
-  languageName: node
-  linkType: hard
-
-"react-native-blob-jsi-helper@npm:^0.3.1":
-  version: 0.3.1
-  resolution: "react-native-blob-jsi-helper@npm:0.3.1"
-  peerDependencies:
-    react: "*"
-    react-native: ">=0.71.0"
-  checksum: 10c0/f89df070abdea2cb83d6f23cdea8ec47e434b0fe5631d783266d3b49da71a8154a1e8578b26c77447474ad9cf13ab437c2caa044b8e8db43d9f69ebc7172ebf8
   languageName: node
   linkType: hard
 
