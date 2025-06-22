@@ -110,6 +110,15 @@ export const sortPlaylist = async (
         ),
       };
     }
+    case SortOptions.Date:
+      return {
+        ...playlist,
+        songList: playlist.songList.sort((a, b) =>
+          ascend
+            ? (a.addedDate ?? 0) - (b.addedDate ?? 0)
+            : (b.addedDate ?? 0) - (a.addedDate ?? 0),
+        ),
+      };
     default:
       return playlist;
   }
