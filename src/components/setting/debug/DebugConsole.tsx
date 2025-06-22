@@ -4,6 +4,7 @@ import { NativeModules } from 'react-native';
 
 import GenericDialog from '@components/dialogs/GenericDialog';
 import showLog from './Log';
+import { isOldArch } from '@utils/RNUtils';
 
 const { NoxModule } = NativeModules;
 
@@ -15,6 +16,7 @@ export default () => {
 export const showDebugLog = async () => {
   const log = `TP.volume: ${await TrackPlayer.getVolume()}\n
     TP.activeTrack: ${JSON.stringify(await TrackPlayer.getActiveTrack())}\n
-    LastExitCode: ${await NoxModule?.getLastExitCode?.()}`;
+    LastExitCode: ${await NoxModule?.getLastExitCode?.()}\n
+    RN architecture: ${isOldArch() ? 'paper' : 'fabric'}`;
   showLog(log);
 };
