@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet, ViewStyle } from 'react-native';
 import TrackPlayer, { useProgress } from 'react-native-track-player';
-import { Slider } from '@react-native-assets/slider';
+import Slider from '@react-native-community/slider';
 
 import { useNoxSetting } from '@stores/useApp';
 
@@ -19,7 +19,6 @@ export const SimpleProgressBar = ({
   progressThumbImage,
   trackHeight,
   style,
-  trackStyle,
   enabled = true,
   progressInterval = 200,
 }: Props) => {
@@ -31,8 +30,6 @@ export const SimpleProgressBar = ({
   return (
     <Slider
       onSlidingStart={enterSliding}
-      trackStyle={trackStyle}
-      trackHeight={trackHeight}
       style={[styles.progressBar, style]}
       value={position}
       minimumValue={0}
@@ -40,24 +37,17 @@ export const SimpleProgressBar = ({
       thumbTintColor={
         progressThumbImage
           ? undefined
-          : playerStyle.customColors.progressThumbTintColor
+          : (playerStyle.customColors.progressThumbTintColor ??
+            playerStyle.colors.primary)
       }
-      enabled={enabled}
+      disabled={!enabled}
       minimumTrackTintColor={playerStyle.colors.primary}
-      maximumTrackTintColor={playerStyle.colors.secondaryContainer}
+      maximumTrackTintColor={'transparent'}
       onSlidingComplete={v => {
         TrackPlayer.seekTo(v);
         exitSliding();
       }}
       thumbImage={progressThumbImage ? { uri: progressThumbImage } : undefined}
-      thumbSize={thumbSize ?? (progressThumbImage ? 40 : undefined)}
-      thumbStyle={{
-        backgroundColor: progressThumbImage
-          ? 'transparent'
-          : playerStyle.colors.primary,
-        elevation: 0,
-      }}
-      maxTrackStyle={styles.transparent}
     />
   );
 };
