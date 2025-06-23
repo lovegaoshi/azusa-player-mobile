@@ -11,3 +11,22 @@ index cc6d464..da00e2e 100644
      defaultConfig {
          minSdkVersion safeExtGet('minSdkVersion', rnsmDefaultCompileSdkVersion)
          targetSdkVersion safeExtGet('targetSdkVersion', rnsmDefaultCompileSdkVersion)
+diff --git a/node_modules/react-native-share-menu/ios/ShareMenuManager.m b/node_modules/react-native-share-menu/ios/ShareMenuManager.m
+index 308ec99..6817a4a 100644
+--- a/node_modules/react-native-share-menu/ios/ShareMenuManager.m
++++ b/node_modules/react-native-share-menu/ios/ShareMenuManager.m
+@@ -6,7 +6,13 @@
+ //
+ 
+ #import "ShareMenuManager.h"
+-#import "RNShareMenu-Swift.h"
++// `use_frameworks!` moves this file to a different location
++// See: https://github.com/meedan/react-native-share-menu/issues/217#issuecomment-1301608521
++#if __has_include(<RNShareMenu/RNShareMenu-Swift.h>)
++  #import <RNShareMenu/RNShareMenu-Swift.h>
++#else
++  #import "RNShareMenu-Swift.h"
++#endif
+ 
+ #import <React/RCTLinkingManager.h>
+ 
