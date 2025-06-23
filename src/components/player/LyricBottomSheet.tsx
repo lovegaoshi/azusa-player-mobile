@@ -109,6 +109,8 @@ export default ({ showLyricOffsetModal, usedLyric }: Props) => {
   return (
     <NoxBottomSheet
       sizes={['auto', '50%']}
+      /* HACK: for some reason menusheets wont scroll with this always on. but why it works here? */
+      nestedScrollEnabled
       name={NoxSheetRoutes.LyricSheet}
       ref={sheet}
       onDismiss={() => setRoute(Routes.Main)}
