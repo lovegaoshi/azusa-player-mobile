@@ -75,6 +75,7 @@ export default (p: Props) => {
           onContentSizeChange={(_w, h) =>
             setScrollViewShouldNest(h > scrollViewHeight.current)
           }
+          // HACK: this is totally not necessary. consider removing
           nestedScrollEnabled={nestedScrollEnabled ?? scrollViewShouldNest}
           ref={scrollViewRef}
           showsVerticalScrollIndicator={false}

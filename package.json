@@ -103,7 +103,6 @@
     "react-native-aes-ecb": "^1.0.0",
     "react-native-app-auth": "^8.0.3",
     "react-native-background-timer": "git+https://github.com/lovegaoshi/react-native-background-timer.git",
-    "react-native-blob-jsi-helper": "^0.3.1",
     "react-native-blob-util": "^0.22.2",
     "react-native-bottom-tabs": "^0.9.2",
     "react-native-buffer": "^6.0.3",
