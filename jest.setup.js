@@ -1,5 +1,3 @@
-import { Innertube } from 'youtubei.js';
-
 // HACK: generic jest mock to get around expo sqlite
 
 jest.mock('./src/utils/db/sqlAPI', () => ({
