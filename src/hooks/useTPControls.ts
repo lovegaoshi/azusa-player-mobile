@@ -38,10 +38,13 @@ const skipToBiliSuggest = async (
 
 const prepareSkipToNext = async (mSkipToBiliSuggest = skipToBiliSuggest) => {
   const TPQueueLength = (await TrackPlayer.getQueue()).length;
+  const nextSong = playNextSong();
   if ((await TrackPlayer.getActiveTrackIndex()) === TPQueueLength - 1) {
     const { playerSetting } = useNoxSetting.getState();
-    autoShuffleQueue(TPQueueLength, smarterShuffle(playerSetting.smartShuffle));
-    const nextSong = playNextSong();
+    autoShuffleQueue(
+      TPQueueLength + 1,
+      smarterShuffle(playerSetting.smartShuffle),
+    );
     if (!nextSong) {
       return;
     }
