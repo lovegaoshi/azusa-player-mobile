@@ -33,7 +33,7 @@ export const downloadR128GainDB = async () => {
   await restoreABRepeat(
     json.map(curr => {
       try {
-        const numberedABRepeat = JSON.parse(curr.abrepeat ?? '') as [
+        const numberedABRepeat = JSON.parse(curr.abrepeat ?? '""') as [
           number,
           number,
         ];
@@ -65,14 +65,18 @@ export const downloadR128GainDB = async () => {
   logger.debug(
     `[R128Sync] now uploading ${uploadR128Dict.length} entries back to noxPlay`,
   );
-  const uploadRes = await fetch(RGAIN_URL, {
-    method: 'POST',
-    headers: {
-      Accept: 'application/json',
-      'Content-Type': 'application/json',
-    },
-    // TODO: gzip this
-    body: JSON.stringify(uploadR128Dict),
-  });
-  logger.debug(uploadRes);
+  try {
+    const uploadRes = await fetch(RGAIN_URL, {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      // TODO: gzip this
+      body: JSON.stringify(uploadR128Dict),
+    });
+    logger.debug(uploadRes);
+  } catch {
+    logger.warn(`[APMSync] failed to upload to ${RGAIN_URL}`);
+  }
 };

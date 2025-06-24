@@ -1,4 +1,4 @@
 module.exports = {
-  setItemAsync: jest.fn(),
-  getItemAsync: jest.fn(),
+  setItemAsync: jest.fn(() => null),
+  getItemAsync: jest.fn(() => null),
 };

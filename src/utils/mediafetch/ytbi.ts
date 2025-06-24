@@ -4,7 +4,7 @@ import 'web-streams-polyfill';
 import 'text-encoding-polyfill';
 import 'react-native-url-polyfill/auto';
 import { decode, encode } from 'base-64';
-import { Innertube, ClientType } from 'youtubei.js';
+import { Innertube, ClientType, Platform } from 'youtubei.js';
 import { getSecure as getItem } from '@utils/ChromeStorageAPI';
 
 import { timeFunction } from '../Utils';
@@ -77,7 +77,7 @@ export const ytwebClient = async () => {
     fetch: (url, init) => {
       // @ts-expect-error this headers is actually a map
       init?.headers?.set('origin', 'https://www.youtube.com');
-      return fetch(url, init);
+      return Platform.shim.fetch(url, init);
     },
   });
   return _ytWebClient!;
