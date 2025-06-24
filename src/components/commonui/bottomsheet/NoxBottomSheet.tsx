@@ -51,6 +51,7 @@ export default (p: Props) => {
   return (
     <TrueSheet
       {...p}
+      dismissWithAnimation
       keyboardMode={'pan'}
       positionOffset={{ top: topOffset, left: leftOffset }}
       draggingEnabled={draggable}
