@@ -22,6 +22,7 @@ const config = {
   },
 
   transformIgnorePatterns: [`/node_modules/(?!${esModules})`],
+  setupFilesAfterEnv: ['<rootDir>/jest.setup.js'],
 };
 
 module.exports = config;
