@@ -4656,6 +4656,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@react-native-community/slider@npm:^5.0.0":
+  version: 5.0.0
+  resolution: "@react-native-community/slider@npm:5.0.0"
+  checksum: 10c0/8f59c6eea37f0b28cb671aa611521c5156349b8de7ff481d17ef13a5a459308db730151a7790df6974231c59667b94373df986c5e2691a648dc6e5b1553e1dd9
+  languageName: node
+  linkType: hard
+
 "@react-native-cookies/cookies@npm:^6.2.1":
   version: 6.2.1
   resolution: "@react-native-cookies/cookies@npm:6.2.1"
@@ -7563,6 +7570,7 @@ __metadata:
     "@react-native-community/cli-platform-ios": "npm:18.0.0"
     "@react-native-community/eslint-config": "npm:^3.2.0"
     "@react-native-community/netinfo": "npm:^11.4.1"
+    "@react-native-community/slider": "npm:^5.0.0"
     "@react-native-cookies/cookies": "npm:^6.2.1"
     "@react-native-masked-view/masked-view": "npm:^0.3.2"
     "@react-native-vector-icons/get-image": "npm:^12.0.1"
