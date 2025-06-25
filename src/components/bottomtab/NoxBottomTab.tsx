@@ -32,7 +32,6 @@ const NoxAndroidBottomTab = ({ navigation }: NoxComponent.NavigationProps2) => {
   const insets = useSafeAreaInsets();
   const playerStyle = useNoxSetting(state => state.playerStyle);
   const route = useNoxMobile(state => state.bottomTabRoute);
-  const toggleDrawer = useNoxMobile(state => state.toggleBottomTabDrawer);
   const isLandscape = useIsLandscape();
 
   const isDrawerOpen = () =>
@@ -42,7 +41,6 @@ const NoxAndroidBottomTab = ({ navigation }: NoxComponent.NavigationProps2) => {
 
   const onDrawerPress = () => {
     if (navigation === undefined) return;
-    toggleDrawer();
     if (isDrawerOpen()) {
       navigation.closeDrawer();
       return;

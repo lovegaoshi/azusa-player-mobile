@@ -6,7 +6,7 @@ export interface BottomTabStore {
   bottomTabRoute: BottomTabRouteIcons;
   bottomTabRouteP: BottomTabRouteIcons;
   setBottomTabRoute: (val: BottomTabRouteIcons) => void;
-  toggleBottomTabDrawer: () => void;
+  toggleBottomTabDrawer: (drawerOpened: boolean) => void;
 }
 
 const store: StateCreator<BottomTabStore, [], [], BottomTabStore> = (
@@ -17,8 +17,11 @@ const store: StateCreator<BottomTabStore, [], [], BottomTabStore> = (
   bottomTabRouteP: BottomTabRouteIcons.music,
   setBottomTabRoute: val =>
     set(s => ({ bottomTabRoute: val, bottomTabRouteP: s.bottomTabRoute })),
-  toggleBottomTabDrawer: () => {
+  toggleBottomTabDrawer: drawerOpened => {
     const { bottomTabRoute, bottomTabRouteP, setBottomTabRoute } = get();
+    if (!drawerOpened && bottomTabRoute !== BottomTabRouteIcons.playlist) {
+      return;
+    }
     setBottomTabRoute(
       bottomTabRoute === BottomTabRouteIcons.playlist
         ? bottomTabRouteP
