@@ -47,6 +47,8 @@ export const SimpleProgressBar = ({
         TrackPlayer.seekTo(v);
         exitSliding();
       }}
+      sliderHeight={10}
+      sliderCornerRoundness={100}
       thumbImage={progressThumbImage ? { uri: progressThumbImage } : undefined}
     />
   );
