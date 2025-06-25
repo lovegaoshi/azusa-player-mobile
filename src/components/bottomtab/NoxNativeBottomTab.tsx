@@ -88,7 +88,6 @@ export default function TabViewExample({
   const navigationG = useNavigation();
   const playerStyle = useNoxSetting(state => state.playerStyle);
   const route = useNoxMobile(state => state.bottomTabRoute);
-  const toggleDrawer = useNoxMobile(state => state.toggleBottomTabDrawer);
 
   const isDrawerOpen = () =>
     navigation === undefined
@@ -97,7 +96,6 @@ export default function TabViewExample({
 
   const onDrawerPress = () => {
     if (navigation === undefined) return;
-    toggleDrawer();
     if (isDrawerOpen()) {
       return navigation.closeDrawer();
     }

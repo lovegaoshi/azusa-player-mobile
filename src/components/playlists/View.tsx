@@ -14,6 +14,7 @@ import Playlists from './Playlists';
 import { BottomTabRouteIcons as RouteIcons } from '@enums/BottomTab';
 import useNavigation from '@hooks/useNavigation';
 import FlexView from '../commonui/FlexViewNewArch';
+import useDrawerStatus from '@hooks/useDrawerStatus';
 
 interface Props {
   view: NoxRoutes;
@@ -64,6 +65,8 @@ export default () => {
   const playlistIds = useNoxSetting(state => state.playlistIds);
   const playerStyle = useNoxSetting(state => state.playerStyle);
   const toggleExpand = useNoxSetting(state => state.toggleExpand);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const _drawerStatus = useDrawerStatus();
 
   // HACK: I know its bad! But somehow this hook isnt updating in its own
   // useEffects...
