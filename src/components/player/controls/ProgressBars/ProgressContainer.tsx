@@ -27,7 +27,7 @@ export default () => {
   return (
     <View>
       <ProgressWavy />
-      {playerSetting.nativeBottomTab ? <Progress /> : <Progress />}
+      {playerSetting.nativeBottomTab ? <NativeProgress /> : <Progress />}
     </View>
   );
 };
