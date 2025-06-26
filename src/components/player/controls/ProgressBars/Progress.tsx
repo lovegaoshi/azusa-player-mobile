@@ -2,9 +2,7 @@ import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import { useProgress } from 'react-native-track-player';
 
-import ProgressWavy from './ProgressWavy';
-import ProgressBarAPM from './ProgressBar';
-import ProgressFetchBar from './ProgressFetchBar';
+import ProgressContainer from './ProgressContainer';
 import { useNoxSetting } from '@stores/useApp';
 import { seconds2MMSS as formatSeconds } from '@utils/Utils';
 import { NativeText as Text } from '@components/commonui/ScaledText';
@@ -30,11 +28,7 @@ export const Progress: React.FC<{ live?: boolean }> = ({ live }) => {
     </View>
   ) : (
     <View style={styles.container}>
-      <ProgressWavy />
-      <View style={styles.progressContainer}>
-        <ProgressBarAPM />
-        <ProgressFetchBar />
-      </View>
+      <ProgressContainer />
       <View style={[styles.labelContainer, { paddingHorizontal: 10 }]}>
         <Text style={progressTextStyle}>{formatSeconds(position)}</Text>
         <Text style={progressTextStyle}>
@@ -61,6 +55,7 @@ const styles = StyleSheet.create({
   },
   progressContainer: {
     width: '100%',
+    // for android native bar, set this to 0
     paddingHorizontal: 25,
     marginTop: -22,
   },
