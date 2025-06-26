@@ -7,6 +7,7 @@ import ProgressFetchBar from './ProgressFetchBar';
 import NativeProgressBarAPM from './NativeProgressBar';
 import NativeProgressFetchBar from './NativeProgressFetchBar';
 import { useNoxSetting } from '@stores/useApp';
+import { isAndroid } from '@utils/RNUtils';
 
 const Progress = () => (
   <View style={styles.progressContainer}>
@@ -16,7 +17,13 @@ const Progress = () => (
 );
 
 const NativeProgress = () => (
-  <View style={styles.progressContainerAndroidNative}>
+  <View
+    style={
+      isAndroid
+        ? styles.progressContainerAndroidNative
+        : styles.progressContainer
+    }
+  >
     <NativeProgressBarAPM />
     <NativeProgressFetchBar />
   </View>

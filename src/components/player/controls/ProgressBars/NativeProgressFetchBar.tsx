@@ -17,7 +17,7 @@ export default () => {
       maximumValue={100}
       minimumTrackTintColor={playerStyle.colors.secondary}
       style={[styles.progressBarDouble]}
-      thumbImage={{ uri: '' }}
+      thumbImage={require('@assets/icons/1x1.png')}
       sliderThickness={10}
       sliderCornerRoundness={100}
     />

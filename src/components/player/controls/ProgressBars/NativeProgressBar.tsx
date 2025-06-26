@@ -29,6 +29,7 @@ export const SimpleProgressBar = ({
 
   return (
     <Slider
+      tapToSeek
       onSlidingStart={enterSliding}
       style={[styles.progressBar, style]}
       value={position}
