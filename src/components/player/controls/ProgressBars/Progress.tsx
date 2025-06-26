@@ -1,20 +1,17 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import { useProgress } from 'react-native-track-player';
-import { ProgressBar } from 'react-native-paper';
-import { useStore } from 'zustand';
 
 import ProgressWavy from './ProgressWavy';
 import ProgressBarAPM from './ProgressBar';
+import ProgressFetchBar from './ProgressFetchBar';
 import { useNoxSetting } from '@stores/useApp';
 import { seconds2MMSS as formatSeconds } from '@utils/Utils';
-import appStore from '@stores/appStore';
 import { NativeText as Text } from '@components/commonui/ScaledText';
 
 export const Progress: React.FC<{ live?: boolean }> = ({ live }) => {
   const { position, duration } = useProgress(1000, false);
   const playerStyle = useNoxSetting(state => state.playerStyle);
-  const fetchProgress = useStore(appStore, state => state.fetchProgress);
 
   const progressTextStyle = [
     styles.labelText,
@@ -36,14 +33,7 @@ export const Progress: React.FC<{ live?: boolean }> = ({ live }) => {
       <ProgressWavy />
       <View style={styles.progressContainer}>
         <ProgressBarAPM />
-        <ProgressBar
-          progress={fetchProgress / 100}
-          color={playerStyle.colors.secondary}
-          style={[
-            styles.progressBarDouble,
-            { backgroundColor: playerStyle.colors.secondaryContainer },
-          ]}
-        />
+        <ProgressFetchBar />
       </View>
       <View style={[styles.labelContainer, { paddingHorizontal: 10 }]}>
         <Text style={progressTextStyle}>{formatSeconds(position)}</Text>
@@ -73,13 +63,6 @@ const styles = StyleSheet.create({
     width: '100%',
     paddingHorizontal: 25,
     marginTop: -22,
-  },
-  progressBarDouble: {
-    position: 'absolute',
-    top: -14,
-    alignSelf: 'center',
-    backgroundColor: 'lightgrey',
-    borderRadius: 5,
   },
   labelContainer: {
     width: '100%',

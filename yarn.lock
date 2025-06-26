@@ -4656,10 +4656,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@react-native-community/slider@https://gitpkg.vercel.app/lovegaoshi/react-native-slider/package?b7875625a1601d27071b6a9268cba610c0523f4d":
+"@react-native-community/slider@https://gitpkg.vercel.app/lovegaoshi/react-native-slider/package?3ca0d20cdf25a5a426c01c400c35422df847046e":
   version: 5.0.0
-  resolution: "@react-native-community/slider@https://gitpkg.vercel.app/lovegaoshi/react-native-slider/package?b7875625a1601d27071b6a9268cba610c0523f4d"
-  checksum: 10c0/77cfb93abc91fc27b991d1e3634c12591a8206a36994b26eb2d09a6d3990deafc8e0778e9a3c610091adae1c8a81cb92544f2be28c334b3e119ee1c5f363be21
+  resolution: "@react-native-community/slider@https://gitpkg.vercel.app/lovegaoshi/react-native-slider/package?3ca0d20cdf25a5a426c01c400c35422df847046e"
+  checksum: 10c0/46aa6ffe0c61c87971df818101618f74520cb739d216feea6f4d0aba01479f9a7c75f4827a5f439ba896d2e0a60d95021f33e0c88785e3fcc9a47727593913cc
   languageName: node
   linkType: hard
 
@@ -7584,7 +7584,7 @@ __metadata:
     "@react-native-community/cli-platform-ios": "npm:18.0.0"
     "@react-native-community/eslint-config": "npm:^3.2.0"
     "@react-native-community/netinfo": "npm:^11.4.1"
-    "@react-native-community/slider": "https://gitpkg.vercel.app/lovegaoshi/react-native-slider/package?b7875625a1601d27071b6a9268cba610c0523f4d"
+    "@react-native-community/slider": "https://gitpkg.vercel.app/lovegaoshi/react-native-slider/package?3ca0d20cdf25a5a426c01c400c35422df847046e"
     "@react-native-cookies/cookies": "npm:^6.2.1"
     "@react-native-masked-view/masked-view": "npm:^0.3.2"
     "@react-native-vector-icons/get-image": "npm:^12.0.1"

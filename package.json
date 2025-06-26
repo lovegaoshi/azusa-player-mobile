@@ -41,7 +41,7 @@
     "@react-native-community/cli-platform-android": "18.0.0",
     "@react-native-community/cli-platform-ios": "18.0.0",
     "@react-native-community/netinfo": "^11.4.1",
-    "@react-native-community/slider": "https://gitpkg.vercel.app/lovegaoshi/react-native-slider/package?b7875625a1601d27071b6a9268cba610c0523f4d",
+    "@react-native-community/slider": "https://gitpkg.vercel.app/lovegaoshi/react-native-slider/package?3ca0d20cdf25a5a426c01c400c35422df847046e",
     "@react-native-cookies/cookies": "^6.2.1",
     "@react-native-masked-view/masked-view": "^0.3.2",
     "@react-native-vector-icons/get-image": "^12.0.1",
