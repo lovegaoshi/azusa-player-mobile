@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { StyleSheet } from 'react-native';
 import { runOnJS, useAnimatedReaction } from 'react-native-reanimated';
 
-import { SimpleProgressBar } from '../player/controls/ProgressBar';
+import { SimpleProgressBar } from '../player/controls/ProgressBars/ProgressBar';
 import { MinPlayerHeight } from './Constants';
 
 export default ({ miniplayerHeight }: NoxComponent.MiniplayerProps) => {

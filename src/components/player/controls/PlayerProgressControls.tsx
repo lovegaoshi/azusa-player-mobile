@@ -1,7 +1,7 @@
 import { useActiveTrack } from 'react-native-track-player';
 import Animated, { useAnimatedStyle } from 'react-native-reanimated';
 
-import { Progress } from './Progress';
+import { Progress } from './ProgressBars/Progress';
 import { PlayerControls } from './PlayerControls';
 import { styles } from '@components/style';
 

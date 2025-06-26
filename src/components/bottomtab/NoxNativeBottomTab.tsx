@@ -110,22 +110,24 @@ export default function TabViewExample({
 
   const onIndexChange = (i: number) => {
     setIndex(i);
-    const newRoute = Routes[i].key;
-    switch (newRoute) {
-      case BottomTabRouteIcons.music:
-        return navigationG.navigate({
-          route: NoxRoutes.PlayerHome,
-          params: { screen: NoxRoutes.Playlist, pop: true },
-        });
-      case BottomTabRouteIcons.playlist:
-        return onDrawerPress();
-      case BottomTabRouteIcons.explore:
-        return navigationG.navigate({ route: NoxRoutes.Explore });
-      case BottomTabRouteIcons.setting:
-        return navigationG.navigate({ route: NoxRoutes.Settings });
-      default:
-        navigationG.navigate({ route: NoxRoutes.Settings });
-    }
+    setTimeout(() => {
+      const newRoute = Routes[i].key;
+      switch (newRoute) {
+        case BottomTabRouteIcons.music:
+          return navigationG.navigate({
+            route: NoxRoutes.PlayerHome,
+            params: { screen: NoxRoutes.Playlist, pop: true },
+          });
+        case BottomTabRouteIcons.playlist:
+          return onDrawerPress();
+        case BottomTabRouteIcons.explore:
+          return navigationG.navigate({ route: NoxRoutes.Explore });
+        case BottomTabRouteIcons.setting:
+          return navigationG.navigate({ route: NoxRoutes.Settings });
+        default:
+          navigationG.navigate({ route: NoxRoutes.Settings });
+      }
+    }, 1);
   };
 
   React.useEffect(() => {
