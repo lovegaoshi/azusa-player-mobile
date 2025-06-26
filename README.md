@@ -58,8 +58,6 @@
 - **切片 man 不易，没有各位切片 man 也不会有这个项目的意义，请大家溜歌同时点右下方的点赞按钮点赞和三连 👍**
 - 自用为主要目的，不感兴趣的 feature 大概不会做，有问题可以[b 站私信](https://message.bilibili.com/#/whisper/mid1989881)
 
-**This project uses free icon assets from [Icons8.com](https://icons8.com/).**
-
 ## 为什么要使用管人播放器？
 
 市面上有很多播放器竞品，比如整合大量音乐网站，跨平台的[~listen1~](https://github.com/listen1/listen1_chrome_extension)、[~洛雪音乐~](https://github.com/lyswhut/lx-music-mobile)、[musicfree](https://github.com/maotoumao/MusicFree)；动画elegent的[namida](https://github.com/namidaco/namida)；界面简洁好使的本地播放器[AIMP](https://www.aimp.ru/)；支持b站的也不是没有，为什么要用管人播放器？
@@ -95,20 +93,16 @@
 <img alt="GitHub all releases" src="https://github.com/lovegaoshi/azusa-player-mobile/blob/3958211a07617d8e15e4be56da984dbd53d7e9fb/docs/docs/usage-tutorial/images/Screenshot_20230606_143018_APM.jpg" width=270>
 </p>
 
-APM 有横屏适配！
-
-<p align="center"><a href="https://github.com/lovegaoshi/azusa-player-mobile"><img src="https://github.com/lovegaoshi/azusa-player-mobile/blob/a89c26ac561a9e6431066e6c0c79cb689e9f19b4/docs/docs/usage-tutorial/images/wsa-landscape.png"></a></p>
-
 ## 开发
 
-ios开发需要XCode。安卓开发需要android studio。编译问题请看github Actions
+ios开发需要XCode。安卓开发需要android studio。编译问题请看[github Actions](https://github.com/lovegaoshi/azusa-player-mobile/actions)
 
 ```
 git clone https://github.com/lovegaoshi/azusa-player-mobile.git
 yarn
 yarn build
 cd ios && pod install && cd ..
-mv ios/sentry.properties.example ios/sentry.properties
+cp ios/sentry.properties.example ios/sentry.properties
 yarn start
 ```
 
@@ -116,7 +110,16 @@ yarn start
 
 APM偷偷做了MusicFree插件适配。你可以参考MusicFree插件编写，然后放到你自己编译的APM里用，如果你太痴迷管人只想用APM的话。
 
-## 捐助
+## Sponsor
+
+**This project uses free icon assets from [Icons8.com](https://icons8.com/).**
+
+
+CDN acceleration and security protection for this project are sponsored by Tencent EdgeOne.
+
+
+![https://edgeone.ai/media/34fe3a45-492d-4ea4-ae5d-ea1087ca7b4b.png](https://edgeone.ai/media/34fe3a45-492d-4ea4-ae5d-ea1087ca7b4b.png)
+
 
 感谢你对中国管人事业的支持。您赞助的每一分钱将用于购买《博德之门3》。
 
