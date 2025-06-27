@@ -190,7 +190,7 @@ export default () => {
         <TrackInfo
           opacity={opacityVisible}
           artworkOpacity={artworkOpacity}
-          style={{ width: '100%', top: width + 28 }}
+          style={{ width: '100%', top: width + 33 }}
         />
         <PlayerControls
           opacity={opacityVisible}
