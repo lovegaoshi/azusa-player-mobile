@@ -94,11 +94,18 @@ const regexFetch = async ({
   favList = [],
 }: NoxNetwork.RegexFetchProps): Promise<NoxNetwork.NoxRegexFetch> => {
   const channelID = await searchYtbChannel(reExtracted[1]);
-  return { songList: await fetchYtbiChannelVideos({ channelID, favList }) };
+  const limit = Number(/limit=(\d+)/.exec(reExtracted[0])?.[1]);
+  return {
+    songList: await fetchYtbiChannelVideos({
+      channelID,
+      favList,
+      totalLimit: Number.isNaN(limit) ? Infinity : limit,
+    }),
+  };
 };
 export default {
   // https://www.youtube.com/c/MioriCelesta
-  regexSearchMatch: /youtube\.com\/c\/([^&/]+)/,
-  regexSearchMatch2: /youtube\.com\/(@[^&/]+)/,
+  regexSearchMatch: /youtube\.com\/c\/([^&/]+).*(&limit=\d+)?/,
+  regexSearchMatch2: /youtube\.com\/(@[^&/]+).*(&limit=\d+)?/,
   regexFetch,
 };
