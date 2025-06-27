@@ -15,10 +15,18 @@ export interface FetchedLocalLrc {
 
 export default (currentSong?: NoxMedia.Song) => {
   const [lrc, setLrc] = useState(i18n.t('Lyric.loading'));
+  const [loading, setLoading] = useState(false);
   const [lrcOptions, setLrcOptions] = useState<NoxLyric.NoxFetchedLyric[]>([]);
   const [lrcOption, setLrcOption] = useState<NoxLyric.NoxFetchedLyric>();
   const [searchText, setSearchText] = useState('');
   const [currentTimeOffset, setCurrentTimeOffset] = useState(0);
+
+  const loadingWrapper = async (fn: () => Promise<unknown>) => {
+    setLoading(true);
+    const result = await fn();
+    setLoading(false);
+    return result;
+  };
 
   const hasLrcFromLocal = async (song = currentSong) => {
     const res = await getLyric(song?.id);
@@ -30,7 +38,7 @@ export default (currentSong?: NoxMedia.Song) => {
     return getLyric(song?.id);
   };
 
-  const searchAndSetCurrentLyric = async ({
+  const _searchAndSetCurrentLyric = async ({
     updateLyricMapping,
     index = 0,
     resolvedLrcOptions = lrcOptions,
@@ -58,6 +66,9 @@ export default (currentSong?: NoxMedia.Song) => {
       });
     }
   };
+
+  const searchAndSetCurrentLyric = (p: NoxLyric.SearchLyric) =>
+    loadingWrapper(() => _searchAndSetCurrentLyric(p));
 
   const fetchAndSetLyricOptions = async (
     adhocTitle?: string,
@@ -152,6 +163,7 @@ export default (currentSong?: NoxMedia.Song) => {
     loadLocalLrc,
     onLrcOffsetChange,
 
+    loading,
     lrc,
     setLrc,
     lrcOption,
