@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import TrackPlayer from 'react-native-track-player';
 import { migrate } from 'drizzle-orm/expo-sqlite/migrator';
+import { NativeModules } from 'react-native';
 
 import { SetupService, additionalPlaybackService } from 'services';
 import { initPlayerObject } from '@utils/ChromeStorage';
@@ -12,7 +13,6 @@ import { IntentData } from '@enums/Intent';
 import { useNoxSetting } from '@stores/useApp';
 import usePlayStore from './usePlayStore';
 import { buildBrowseTree } from '@utils/automotive/androidAuto';
-import { Dimensions, NativeModules, PixelRatio } from 'react-native';
 import useActiveTrack, { useTrackStore } from './useActiveTrack';
 import migrations from '../../drizzle/migrations';
 import APMMigration from '../utils/db/migration';
