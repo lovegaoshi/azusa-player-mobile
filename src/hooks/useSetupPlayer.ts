@@ -32,12 +32,6 @@ const initializePlayer = async (safeMode = false) => {
     playbackMode,
     currentPlayingList,
   } = await initializeStores({ val: await initPlayerObject(safeMode) });
-  console.log(
-    'DPI',
-    PixelRatio.get(),
-    PixelRatio.getFontScale(),
-    Dimensions.get('window'),
-  );
   const serviceOptions = {
     noInterruption: storedPlayerSetting.noInterruption,
     keepForeground: storedPlayerSetting.keepForeground,

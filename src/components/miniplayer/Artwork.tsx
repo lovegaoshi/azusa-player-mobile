@@ -1,4 +1,4 @@
-import { TouchableWithoutFeedback, Dimensions, View } from 'react-native';
+import { TouchableWithoutFeedback, Dimensions } from 'react-native';
 import Animated, {
   SharedValue,
   useAnimatedStyle,

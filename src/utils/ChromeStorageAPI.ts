@@ -8,7 +8,7 @@ import { strToU8, compressSync } from 'fflate';
 import { chunkArray, arrayToObject } from './Utils';
 import { StorageKeys, StoragePlaceholders } from '@enums/Storage';
 import { AppID } from '@objects/Storage';
-import AdaptiveTheme from '../components/styles/AdaptiveTheme';
+import AdaptiveTheme from '../components/styles/SolidTheme';
 import { exportSQL } from '@utils/db/sqlAPI';
 import APMMigration from './db/migration';
 import { setDarkTheme } from './RNUtils';
