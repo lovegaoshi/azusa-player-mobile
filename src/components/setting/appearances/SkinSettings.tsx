@@ -10,6 +10,7 @@ import { useNoxSetting } from '@stores/useApp';
 import AzusaTheme from '@components/styles/AzusaTheme';
 import NoxTheme from '@components/styles/NoxTheme';
 import AdaptiveTheme from '@components/styles/AdaptiveTheme';
+import SolidTheme from '@components/styles/SolidTheme';
 import { execWhenTrue } from '@utils/Utils';
 import GenericSelectDialog from '../../dialogs/GenericSelectDialog';
 import { getStyle } from '@utils/StyleStorage';
@@ -33,6 +34,13 @@ interface SkinItemProps {
 }
 
 const BuiltInThemes: DisplayTheme[] = [
+  {
+    ...SolidTheme,
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore: super HACK
+    isAdaptive: true,
+    builtin: true,
+  },
   {
     ...AdaptiveTheme,
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
