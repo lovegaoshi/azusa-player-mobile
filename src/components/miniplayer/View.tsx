@@ -133,6 +133,7 @@ export default () => {
   const scrollDragGesture = React.useMemo(
     () =>
       Gesture.Pan()
+        .activeOffsetY([-5, 5])
         .onStart(() => (initHeight.value = miniplayerHeight.value))
         .onChange(e => dragPlayerHeight(e.translationY))
         .onEnd(e => snapPlayerHeight(e.translationY)),

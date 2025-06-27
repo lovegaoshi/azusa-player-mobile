@@ -24,13 +24,9 @@ export const SimpleProgressBar = ({
 }: Props) => {
   const { position, duration } = useProgress(progressInterval, false);
   const playerStyle = useNoxSetting(state => state.playerStyle);
-  const enterSliding = useNoxSetting(state => state.enableMiniProgressSliding);
-  const exitSliding = useNoxSetting(state => state.disableMiniProgressSliding);
-
   return (
     <Slider
       tapToSeek
-      onSlidingStart={enterSliding}
       onStartShouldSetResponder={() => {
         console.log('onstartShouldSewtRESponsro');
         return true;
@@ -56,10 +52,7 @@ export const SimpleProgressBar = ({
       disabled={!enabled}
       minimumTrackTintColor={playerStyle.colors.primary}
       maximumTrackTintColor={'transparent'}
-      onSlidingComplete={v => {
-        TrackPlayer.seekTo(v);
-        exitSliding();
-      }}
+      onSlidingComplete={v => TrackPlayer.seekTo(v)}
       sliderThickness={trackHeight}
       thumbSize={thumbSize}
       sliderCornerRoundness={100}
