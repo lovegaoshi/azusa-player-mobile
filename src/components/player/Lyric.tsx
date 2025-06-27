@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { Modal, View, StyleSheet, Button, ViewStyle } from 'react-native';
 import { Lrc as Lyric, KaraokeMode } from 'react-native-lyric';
 import TrackPlayer, { Track, useProgress } from 'react-native-track-player';
-import { IconButton } from 'react-native-paper';
+import { IconButton, ActivityIndicator } from 'react-native-paper';
 import { TrueSheet } from '@lodev09/react-native-true-sheet';
 
 import { useNoxSetting } from '@stores/useApp';
@@ -41,6 +41,7 @@ export const LyricView = ({
   const playerStyle = useNoxSetting(state => state.playerStyle);
   const usedLyric = useLyric(track.song, artist);
   const {
+    loading,
     hasLrcFromLocal,
     searchAndSetCurrentLyric,
     addSubtractOffset,
@@ -74,30 +75,41 @@ export const LyricView = ({
         showLyricOffsetModal={() => setOffsetModalVisible(true)}
         usedLyric={usedLyric}
       />
-      <Lyric
-        style={{ marginTop: 30, height: 500 }}
-        lrc={lrc}
-        currentTime={(position + currentTimeOffset) * 1000}
-        lineHeight={32}
-        height={height}
-        noScrollThrottle={noScrollThrottle}
-        onPress={onPress}
-        // HACK: this is NOT any. this is LrcLine. need to fix with ts
-        onLinePress={
-          playerSetting.lyricTap
-            ? (v: any) => TrackPlayer.seekTo(v.millisecond / 1000)
-            : onPress
-        }
-        karaokeOnColor={
-          playerStyle.colors.karaokeOn ?? playerStyle.colors.onSurface
-        }
-        karaokeOffColor={
-          playerStyle.colors.karaokeOff ?? playerStyle.colors.onSurfaceVariant
-        }
-        karaokeMode={
-          playerSetting.karaokeLyrics ? KaraokeMode.OnlyRealKaraoke : undefined
-        }
-      />
+      {loading ? (
+        <ActivityIndicator
+          size={70}
+          // HACK: ???
+          style={[styles.lrcView, { marginTop: 78 }]}
+        />
+      ) : (
+        <Lyric
+          style={styles.lrcView}
+          lrc={lrc}
+          currentTime={(position + currentTimeOffset) * 1000}
+          lineHeight={32}
+          height={height}
+          noScrollThrottle={noScrollThrottle}
+          onPress={onPress}
+          // HACK: this is NOT any. this is LrcLine. need to fix with ts
+          onLinePress={
+            playerSetting.lyricTap
+              ? (v: any) => TrackPlayer.seekTo(v.millisecond / 1000)
+              : onPress
+          }
+          karaokeOnColor={
+            playerStyle.colors.karaokeOn ?? playerStyle.colors.onSurface
+          }
+          karaokeOffColor={
+            playerStyle.colors.karaokeOff ?? playerStyle.colors.onSurfaceVariant
+          }
+          karaokeMode={
+            playerSetting.karaokeLyrics
+              ? KaraokeMode.OnlyRealKaraoke
+              : undefined
+          }
+        />
+      )}
+
       {showUI && (
         <>
           <View style={styles.optionsButton}>
@@ -148,6 +160,7 @@ export const LyricView = ({
 };
 
 const styles = StyleSheet.create({
+  lrcView: { marginTop: 30, height: 500 },
   container: {
     flex: 1,
   },
