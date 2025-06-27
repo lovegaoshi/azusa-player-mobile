@@ -5,6 +5,7 @@ import Animated, {
   useAnimatedStyle,
 } from 'react-native-reanimated';
 import { useStore } from 'zustand';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { useNoxSetting } from '@stores/useApp';
 import NoxPlayingList from '@stores/playingList';
@@ -24,6 +25,7 @@ interface Props extends NoxComponent.OpacityProps {
 
 export default ({ opacity, style, artworkOpacity }: Props) => {
   const track = useTrackStore(s => s.track);
+  const insets = useSafeAreaInsets();
   const playerStyle = useNoxSetting(state => state.playerStyle);
   const currentPlayingList = useNoxSetting(state => state.currentPlayingList);
   const currentPlayingIndex = useStore(
@@ -58,7 +60,14 @@ export default ({ opacity, style, artworkOpacity }: Props) => {
 
   return (
     <Animated.View style={[styles.container, animatedOpacityStyle]}>
-      <Animated.View style={[styles.container, style, animatedStyle]}>
+      <Animated.View
+        style={[
+          styles.container,
+          style,
+          animatedStyle,
+          { paddingTop: insets.top },
+        ]}
+      >
         <SongTitle
           style={styles.titleText}
           text={track?.title}
