@@ -27,18 +27,6 @@ export const SimpleProgressBar = ({
   return (
     <Slider
       tapToSeek
-      onStartShouldSetResponder={() => {
-        console.log('onstartShouldSewtRESponsro');
-        return true;
-      }}
-      onMoveShouldSetResponder={() => {
-        console.log('onMoveShouldSetResponder');
-        return true;
-      }}
-      onResponderReject={() => {
-        console.log('onResponderReject');
-        return true;
-      }}
       style={[styles.progressBar, style]}
       value={position}
       minimumValue={0}
