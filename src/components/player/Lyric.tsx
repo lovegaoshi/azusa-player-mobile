@@ -83,6 +83,9 @@ export const LyricView = ({
         />
       ) : (
         <Lyric
+          fontScale={
+            (playerSetting.lyricFontScale || playerSetting.fontScale) ?? 1
+          }
           style={styles.lrcView}
           lrc={lrc}
           currentTime={(position + currentTimeOffset) * 1000}

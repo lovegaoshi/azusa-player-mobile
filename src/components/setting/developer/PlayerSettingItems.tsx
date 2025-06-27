@@ -14,6 +14,9 @@ const ArtworkResOptions = [0, 240, 360, 480, 720, 1080];
 // XS - S - M -L - XL - XXL - XXXL
 const fontScaleOptions = [0.8, 0.9, 1, 1.1, 1.2, 1.4, 2];
 
+// Auto - M -L - XL - XXL
+const lyricFontScaleOptions = [0, 1, 1.2, 1.5, 2];
+
 // refactors anything depends on playerSetting out into its own component
 export default ({
   setCurrentSelectOption,
@@ -22,8 +25,11 @@ export default ({
   const playerSetting = useNoxSetting(state => state.playerSetting);
   const setPlayerSetting = useNoxSetting(state => state.setPlayerSetting);
   const { t } = useTranslation();
-  const fontScaleString = fontScaleOptions.map((item, index) =>
+  const fontScaleString = fontScaleOptions.map((_, index) =>
     t(`AppearanceSettings.fontScale${index}`),
+  );
+  const lyricFontScaleString = fontScaleOptions.map((_, index) =>
+    t(`AppearanceSettings.lyricFontScale${index}`),
   );
 
   const selectCacheLevel = () => {
@@ -63,6 +69,21 @@ export default ({
     } as SelectSettingEntry<number>);
   };
 
+  const selectLyricFontScale = () => {
+    setSelectVisible(true);
+    setCurrentSelectOption({
+      options: lyricFontScaleOptions,
+      renderOption: (_, index) => lyricFontScaleString[index],
+      defaultIndex: 0,
+      onClose: () => setSelectVisible(false),
+      onSubmit: (index: number) => {
+        setPlayerSetting({ lyricFontScale: lyricFontScaleOptions[index] });
+        setSelectVisible(false);
+      },
+      title: t('AppearanceSettings.lyricFontScaleName'),
+    } as SelectSettingEntry<number>);
+  };
+
   return (
     <>
       <SelectSetting
@@ -90,6 +111,12 @@ export default ({
         icon={'format-size'}
         settingName="fontScale"
         onPress={selectFontScale}
+        settingCategory="AppearanceSettings"
+      />
+      <SettingListItem
+        icon={'format-size'}
+        settingName="lyricFontScale"
+        onPress={selectLyricFontScale}
         settingCategory="AppearanceSettings"
       />
     </>
