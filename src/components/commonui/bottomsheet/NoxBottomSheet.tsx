@@ -10,6 +10,8 @@ import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { useNoxSetting } from '@stores/useApp';
 import { isAndroid, isOldArch } from '@utils/RNUtils';
 
+const isAndroidNewArch = isAndroid && !isOldArch();
+
 interface Props extends TrueSheetProps {
   name: string;
   ref: RefObject<TrueSheet | null>;
@@ -35,13 +37,13 @@ export default (p: Props) => {
   const [topOffset, setTopOffset] = useState(0);
   const [leftOffset, setLeftOffset] = useState(0);
   const [scrollViewShouldNest, setScrollViewShouldNest] = useState(false);
+  const [sheetPresent, setSheetPresent] = useState(false);
   const scrollViewHeight = useRef(0);
   const pressableRef = useRef<View>(null);
   const scrollViewRef = useRef<ScrollView>(null);
 
   useEffect(() => {
-    isAndroid &&
-      !isOldArch() &&
+    isAndroidNewArch &&
       pressableRef.current?.measure((_x, _y, _width, _height, pageX, pageY) => {
         setTopOffset(-pageY);
         setLeftOffset(-pageX);
@@ -51,9 +53,12 @@ export default (p: Props) => {
   return (
     <TrueSheet
       {...p}
+      onPresent={() => isAndroidNewArch && setSheetPresent(true)}
       dismissWithAnimation
       keyboardMode={'pan'}
-      positionOffset={{ top: topOffset, left: leftOffset }}
+      positionOffset={
+        sheetPresent ? { top: topOffset, left: leftOffset } : undefined
+      }
       draggingEnabled={draggable}
       backgroundColor={playerStyle.colors.surfaceVariant}
       sizes={sizes}
@@ -62,6 +67,7 @@ export default (p: Props) => {
       scrollRef={scrollViewRef}
       onDismiss={() => {
         onDismiss?.();
+        setSheetPresent(false);
         scrollViewRef.current?.scrollTo({ x: 0, y: 0, animated: false });
       }}
     >

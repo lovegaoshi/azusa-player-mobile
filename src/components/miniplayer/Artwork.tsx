@@ -61,7 +61,7 @@ export default ({ miniplayerHeight, opacity, onPress, expand }: Props) => {
   const artworkTranslateY = useDerivedValue(() => {
     return Math.min(
       95,
-      30 + (Math.max(0, expandDiff.value) - width - insets.top) / 2,
+      30 + (Math.max(0, expandDiff.value) - width - insets.top * 3) / 2,
     );
   });
   const artworkTranslateX = useDerivedValue(() => {
@@ -112,6 +112,7 @@ export default ({ miniplayerHeight, opacity, onPress, expand }: Props) => {
         style={[
           {
             width,
+            marginTop: insets.top,
             height: width + insets.top,
             position: 'absolute',
             overflow: 'hidden',
@@ -119,7 +120,6 @@ export default ({ miniplayerHeight, opacity, onPress, expand }: Props) => {
           animatedStyle,
         ]}
       >
-        <View style={{ height: insets.top }} />
         {playerSetting.artworkCarousel ? (
           <HorizontalCarousel
             images={trackCarousel}
