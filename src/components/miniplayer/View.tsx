@@ -133,11 +133,11 @@ export default () => {
   const scrollDragGesture = React.useMemo(
     () =>
       Gesture.Pan()
-        .enabled(!sliding)
+        .activeOffsetY([-5, 5])
         .onStart(() => (initHeight.value = miniplayerHeight.value))
         .onChange(e => dragPlayerHeight(e.translationY))
         .onEnd(e => snapPlayerHeight(e.translationY)),
-    [sliding],
+    [],
   );
 
   const disabledGesture = React.useMemo(() => Gesture.Manual(), []);
@@ -166,7 +166,9 @@ export default () => {
   }, []);
 
   return (
-    <GestureDetector gesture={lrcVisible ? disabledGesture : scrollDragGesture}>
+    <GestureDetector
+      gesture={lrcVisible || sliding ? disabledGesture : scrollDragGesture}
+    >
       <Animated.View style={[{ width: '100%' }, animatedStyle]}>
         <View style={styles.rowView}>
           <PlayerTopInfo opacity={opacityVisible} collapse={collapse} />

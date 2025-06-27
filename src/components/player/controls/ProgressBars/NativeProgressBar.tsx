@@ -17,20 +17,16 @@ interface Props {
 export const SimpleProgressBar = ({
   thumbSize,
   progressThumbImage,
-  trackHeight,
+  trackHeight = 10,
   style,
   enabled = true,
   progressInterval = 200,
 }: Props) => {
   const { position, duration } = useProgress(progressInterval, false);
   const playerStyle = useNoxSetting(state => state.playerStyle);
-  const enterSliding = useNoxSetting(state => state.enableMiniProgressSliding);
-  const exitSliding = useNoxSetting(state => state.disableMiniProgressSliding);
-
   return (
     <Slider
       tapToSeek
-      onSlidingStart={enterSliding}
       style={[styles.progressBar, style]}
       value={position}
       minimumValue={0}
@@ -44,11 +40,9 @@ export const SimpleProgressBar = ({
       disabled={!enabled}
       minimumTrackTintColor={playerStyle.colors.primary}
       maximumTrackTintColor={'transparent'}
-      onSlidingComplete={v => {
-        TrackPlayer.seekTo(v);
-        exitSliding();
-      }}
-      sliderThickness={10}
+      onSlidingComplete={v => TrackPlayer.seekTo(v)}
+      sliderThickness={trackHeight}
+      thumbSize={thumbSize}
       sliderCornerRoundness={100}
       thumbImage={progressThumbImage ? { uri: progressThumbImage } : undefined}
     />
