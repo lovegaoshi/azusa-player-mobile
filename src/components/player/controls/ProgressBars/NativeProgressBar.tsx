@@ -17,7 +17,7 @@ interface Props {
 export const SimpleProgressBar = ({
   thumbSize,
   progressThumbImage,
-  trackHeight,
+  trackHeight = 10,
   style,
   enabled = true,
   progressInterval = 200,
@@ -31,6 +31,18 @@ export const SimpleProgressBar = ({
     <Slider
       tapToSeek
       onSlidingStart={enterSliding}
+      onStartShouldSetResponder={() => {
+        console.log('onstartShouldSewtRESponsro');
+        return true;
+      }}
+      onMoveShouldSetResponder={() => {
+        console.log('onMoveShouldSetResponder');
+        return true;
+      }}
+      onResponderReject={() => {
+        console.log('onResponderReject');
+        return true;
+      }}
       style={[styles.progressBar, style]}
       value={position}
       minimumValue={0}
@@ -48,7 +60,8 @@ export const SimpleProgressBar = ({
         TrackPlayer.seekTo(v);
         exitSliding();
       }}
-      sliderThickness={10}
+      sliderThickness={trackHeight}
+      thumbSize={thumbSize}
       sliderCornerRoundness={100}
       thumbImage={progressThumbImage ? { uri: progressThumbImage } : undefined}
     />
