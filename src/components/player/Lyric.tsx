@@ -23,6 +23,13 @@ interface LyricViewProps {
   style?: ViewStyle;
 }
 
+const SpotifyLyricStyle = {
+  align: 'left',
+  fontSize: 20,
+  activeFontSize: 20,
+  lapsedAsActiveColor: true,
+};
+
 export const LyricView = ({
   track,
   artist,
@@ -50,6 +57,9 @@ export const LyricView = ({
     lrcOptions,
     currentTimeOffset,
   } = usedLyric;
+  const spotifyLyricStyle = playerSetting.spotifyLyricStyle
+    ? SpotifyLyricStyle
+    : {};
 
   useEffect(() => {
     if (track === undefined || track.title === '') return;
@@ -67,10 +77,7 @@ export const LyricView = ({
   if (!visible) return null;
 
   return (
-    <View
-      style={style}
-      onLayout={e => console.log('debug', e.nativeEvent.layout)}
-    >
+    <View style={style}>
       <LyricBottomSheet
         showLyricOffsetModal={() => setOffsetModalVisible(true)}
         usedLyric={usedLyric}
@@ -79,7 +86,7 @@ export const LyricView = ({
         <ActivityIndicator
           size={70}
           // HACK: ???
-          style={[styles.lrcView, { marginTop: 78 }]}
+          style={styles.lrcView}
         />
       ) : (
         <Lyric
@@ -89,7 +96,6 @@ export const LyricView = ({
           style={styles.lrcView}
           lrc={lrc}
           currentTime={(position + currentTimeOffset) * 1000}
-          lineHeight={32}
           height={height}
           noScrollThrottle={noScrollThrottle}
           onPress={onPress}
@@ -110,6 +116,7 @@ export const LyricView = ({
               ? KaraokeMode.OnlyRealKaraoke
               : undefined
           }
+          {...spotifyLyricStyle}
         />
       )}
 
@@ -163,13 +170,13 @@ export const LyricView = ({
 };
 
 const styles = StyleSheet.create({
-  lrcView: { marginTop: 30, height: 500 },
+  lrcView: { height: 500, paddingHorizontal: 20 },
   container: {
     flex: 1,
   },
   optionsButton: {
     position: 'absolute',
-    top: 10,
+    top: -35,
     left: 10,
     zIndex: 1, // add this line
   },

@@ -55,6 +55,7 @@ export const DefaultSetting: NoxStorage.PlayerSettingDict = {
   lyricTap: true,
   fontScale: 1,
   lyricFontScale: 0,
+  spotifyLyricStyle: false,
 
   appID: AppID,
   language: undefined,
