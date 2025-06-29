@@ -27,8 +27,8 @@ export interface BiliRanking {
   [key: number]: NoxMedia.Song[];
 }
 
-export const fetchRanking = async (rid = '3', results: BiliRanking = {}) => {
-  logger.info(`[biliRanking] calling fetchRanking of ${rid}`);
+export const fetchRanking = async (rid = '1003', results: BiliRanking = {}) => {
+  logger.info(`[biliRanking] calling fetch biliRegionRecommendxc  of ${rid}`);
   try {
     const res = await biliApiLimiter.schedule(() =>
       bfetch(API.replace('{rid}', rid)),
@@ -49,7 +49,7 @@ export const fetchRanking = async (rid = '3', results: BiliRanking = {}) => {
   return results;
 };
 
-export default async (rids = [3, 119]) => {
+export default async (rids = [1003]) => {
   const res: BiliRanking = {};
   for (const rid of rids) {
     await fetchRanking(String(rid), res);
