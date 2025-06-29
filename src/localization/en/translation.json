@@ -384,6 +384,8 @@
     "alwaysShowBottomTabDesc": "Always show bottom tab, regardless of gesture mode",
     "nativeBottomTabName": "Native Components",
     "nativeBottomTabDesc": "use native components (bottom tab, progress) if possible",
+    "spotifyLyricStyleName": "Spotify lyric style",
+    "spotifyLyricStyleDesc": "Lyric screen is left aligned like spotify",
     "wavyProgressBarName": "Wavy Progress Bar",
     "wavyProgressBarDesc": "Show a wavy progress bar (huge battery drain)",
     "ColorSchemeLight": "light",

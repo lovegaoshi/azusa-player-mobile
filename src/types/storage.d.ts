@@ -58,6 +58,7 @@ declare global {
       lyricTap: boolean;
       fontScale: number;
       lyricFontScale: number;
+      spotifyLyricStyle: boolean;
 
       appID: string;
       language?: string;

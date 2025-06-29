@@ -60,6 +60,12 @@ export default ({ navigation }: NoxComponent.StackNavigationProps) => {
           settingCategory: 'AppearanceSettings',
         }}
       />
+      <RenderSetting
+        item={{
+          settingName: 'spotifyLyricStyle',
+          settingCategory: 'AppearanceSettings',
+        }}
+      />
     </ScrollView>
   );
 };
