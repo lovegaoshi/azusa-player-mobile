@@ -70,7 +70,7 @@ export default () => {
   });
 
   useTrackPlayerEvents([Event.PlaybackProgressUpdated], async event => {
-    const { playmode } = getState();
+    const { playmode, playingList } = getState();
     saveLastPlayDuration(event.position);
     const currentSongId = track?.song?.id ?? '';
     const sbSkip = checkSponsorBlock(event.position);
@@ -102,7 +102,8 @@ export default () => {
         playerSetting.crossfade > 0 &&
         event.position > trueDuration - playerSetting.crossfade &&
         crossfadeId === currentSongId &&
-        crossfadingId !== currentSongId
+        // enable crossfade on playlist size = 1 (repeatTrack without repeatTrack)
+        (crossfadingId !== currentSongId || playingList.length === 1)
       ) {
         const nextSong = await getNextSong();
         const r128gain = await getR128Gain(nextSong.id);

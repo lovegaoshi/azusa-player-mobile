@@ -7768,7 +7768,7 @@ __metadata:
     react-native-gesture-handler: "npm:~2.25.0"
     react-native-get-random-values: "npm:^1.11.0"
     react-native-image-colors: "npm:^2.4.0"
-    react-native-lyric: "https://lovegaoshi@github.com/lovegaoshi/react-native-lyric.git#commit=c671234bb42799c4c30c3f6c77be747f23cf208b"
+    react-native-lyric: "https://lovegaoshi@github.com/lovegaoshi/react-native-lyric.git#commit=107e5da80361d0235ce0a5fca83c887641097769"
     react-native-ota-hot-update: "npm:2.2.2"
     react-native-pager-view: "npm:6.8.1"
     react-native-paper: "npm:5.14.5"
@@ -18769,14 +18769,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-native-lyric@https://lovegaoshi@github.com/lovegaoshi/react-native-lyric.git#commit=c671234bb42799c4c30c3f6c77be747f23cf208b":
+"react-native-lyric@https://lovegaoshi@github.com/lovegaoshi/react-native-lyric.git#commit=107e5da80361d0235ce0a5fca83c887641097769":
   version: 1.0.1
-  resolution: "react-native-lyric@https://lovegaoshi@github.com/lovegaoshi/react-native-lyric.git#commit=c671234bb42799c4c30c3f6c77be747f23cf208b"
+  resolution: "react-native-lyric@https://lovegaoshi@github.com/lovegaoshi/react-native-lyric.git#commit=107e5da80361d0235ce0a5fca83c887641097769"
   peerDependencies:
     "@react-native-masked-view/masked-view": ^0.3.1
     react: "*"
     react-native: "*"
-  checksum: 10c0/71f70ce2eb1c992c5d1ddb1a57ea4b97c0e5f0da7b1863215ef05d5038e113ac946f21e8bad9d7f1cc3a865bfc9122d8a5d42d15b55203a2656771af293e7bab
+  checksum: 10c0/90be2cea7ef1aad0aa278609fc0029291d78bbc5c50522b4282a6a42b6d9b6d7e80c050529ab425113e53c18c0a0323d0ec709040ac9802849102adc23f024de
   languageName: node
   linkType: hard
 

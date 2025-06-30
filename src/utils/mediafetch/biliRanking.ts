@@ -4,6 +4,7 @@ import bfetch from '@utils/BiliFetch';
 import { Source, BiliMusicTid } from '@enums/MediaFetch';
 import { biliApiLimiter } from './throttle';
 
+// HACK: this API is deprecated - no new data is being pushed est Apr.2025
 const API = 'https://api.bilibili.com/x/web-interface/ranking/v2?rid={rid}';
 
 const rankingToSong = (data: any) =>
