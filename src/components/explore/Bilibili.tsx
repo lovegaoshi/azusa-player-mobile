@@ -10,7 +10,7 @@ import { ActivityIndicator } from 'react-native-paper';
 import { useTranslation } from 'react-i18next';
 
 import { styles } from '@components/style';
-import { BiliSongsTabCard, BiliSongsArrayTabCard } from './SongTab';
+import { BiliSongsArrayTabCard } from './SongTab';
 import { BiliSongRow } from './SongRow';
 import useBiliExplore from '@stores/explore/bilibili';
 import { BiliMusicTid } from '@enums/MediaFetch';
@@ -25,7 +25,7 @@ export default ({ style, onScroll, onMomentumScrollEnd }: Props) => {
   const refreshing = useBiliExplore(state => state.refreshing);
   const onRefresh = useBiliExplore(state => state.onRefresh);
   const biliDynamic = useBiliExplore(state => state.biliDynamic);
-  const biliRanking = useBiliExplore(state => state.biliRanking);
+  const biliRecommend = useBiliExplore(state => state.biliRecommend);
   const biliMusicTop = useBiliExplore(state => state.biliMusicTop);
   const biliMusicHot = useBiliExplore(state => state.biliMusicHot);
   const biliMusicNew = useBiliExplore(state => state.biliMusicNew);
@@ -53,7 +53,10 @@ export default ({ style, onScroll, onMomentumScrollEnd }: Props) => {
       onScroll={onScroll}
       onMomentumScrollEnd={onMomentumScrollEnd}
     >
-      <BiliSongsTabCard songs={biliRanking} title={t('BiliCategory.ranking')} />
+      <BiliSongsArrayTabCard
+        songs={biliRecommend}
+        title={t('BiliCategory.ranking')}
+      />
       <Text style={mStyles.dynamicHeader}>{t('BiliCategory.dynamic')}</Text>
       {BiliMusicTid.filter(v => biliDynamic[v]).map(k => (
         <BiliSongRow
