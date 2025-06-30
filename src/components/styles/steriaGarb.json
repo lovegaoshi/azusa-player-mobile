@@ -5678,5 +5678,176 @@
       "onSurfaceDisabled": "rgba(230, 226, 217, 0.38)",
       "backdrop": "rgba(49, 49, 37, 0.4)"
     }
+  },
+  {
+    "metaData": {
+      "themeName": "2024明日方舟音律联觉",
+      "themeDesc": "【2024明日方舟音律联觉】是哔哩哔哩与明日方舟联名打造的数字典藏，其中的每张数字卡片都将拥有独特编号，期待大家一起来解锁2024年明日方舟音律联觉精美立绘吧！",
+      "themeAuthor": "NoxAutoGen",
+      "themeIcon": "https://i0.hdslb.com/bfs/garb/2421613aa99ffd2b8dd02232a0d7a73e7a28541d.png",
+      "darkTheme": true
+    },
+    "gifs": [
+      "https://i0.hdslb.com/bfs/garb/06557743c28a8676e1e1cb5789e1103e99227c94.png",
+      "https://i0.hdslb.com/bfs/garb/61e52daba5604b2c8ffe5ab1a9ca3fb847352020.png",
+      "https://i0.hdslb.com/bfs/garb/67ac586b287f2072931a6099f887852c91129d93.png",
+      "https://i0.hdslb.com/bfs/garb/edb6cea2b53d4dbf369233ef68d709f760eaae69.png",
+      "https://i0.hdslb.com/bfs/garb/a1c788bbedf0aa086507f1d86fce98747a2da647.png",
+      "https://i0.hdslb.com/bfs/garb/7b3a200ac1f9e953b93f28a8c10655a75d5c67c0.png",
+      "https://i0.hdslb.com/bfs/garb/51b5fc6549cf1d22b16fcbe4f928b14b8e185c9c.png",
+      "https://i0.hdslb.com/bfs/garb/6566b43d6a4fb60588cffbcbd71d2521fabb5b27.png",
+      "https://i0.hdslb.com/bfs/garb/8baf7ff93a96aabfbc9a66235a268238c924ce2f.png",
+      "https://i0.hdslb.com/bfs/garb/c9f23171a0126816898a0183b65a616f0fc9e7b2.png",
+      "https://i0.hdslb.com/bfs/garb/ea0dd05439a8a3fe8ffd0ddce8da15de773aedf6.png",
+      "https://i0.hdslb.com/bfs/garb/239447329a8274dde3a82f1705e92bde86dfcb04.png",
+      "https://i0.hdslb.com/bfs/garb/ec09e97ff8f01f4377f1fcc86fe1626d921cca6c.png",
+      "https://i0.hdslb.com/bfs/garb/450922308330af6a3865faac7bf608e8bbc3cd0f.png",
+      "https://i0.hdslb.com/bfs/garb/0143c7a62ddeb6fc1e9244c422bd4a375ad9bd61.png",
+      "https://i0.hdslb.com/bfs/garb/e881dfd32d7de0212c932af5bf71e3e72ae4d954.png",
+      "https://i0.hdslb.com/bfs/garb/b750724411cedf90fd5bf2fc11854494b013c944.png",
+      "https://i0.hdslb.com/bfs/garb/fd7673323fba9cfc9e0e4f4bf6f74ce26236e99d.png",
+      "https://i0.hdslb.com/bfs/garb/21630b415a0ead9e3599f023445d9a47d3343149.png",
+      "https://i0.hdslb.com/bfs/garb/62fae66b64455754df8dda0f96d9032c63c4b433.png",
+      "https://i0.hdslb.com/bfs/garb/28fecb6a0259a5a54c341ce11d248bdd135c4238.png",
+      "https://i0.hdslb.com/bfs/garb/33f99f7864fc3efce2d40fb8f9b426e3042962b6.png",
+      "https://i0.hdslb.com/bfs/garb/699a4931cfac6e3ac83f4312ce41246bb6988b92.png",
+      "https://i0.hdslb.com/bfs/garb/c2c06ddecce3fdac54f603977619241608ff220c.png",
+      "https://i0.hdslb.com/bfs/garb/7d7ac2393c9506d3423dec579a54cf78a978a593.png"
+    ],
+    "backgroundImages": [
+      {
+        "type": "biliNFTVideoNew",
+        "identifier": "[\"102942\",\"102943\",\"超新星-尤里卡\"]"
+      },
+      {
+        "type": "biliNFTVideoNew",
+        "identifier": "[\"102942\",\"102943\",\"梦人-阿米娅\"]"
+      },
+      {
+        "type": "biliNFTVideoNew",
+        "identifier": "[\"102942\",\"102943\",\"行者-凯尔希\"]"
+      },
+      {
+        "type": "biliNFTVideoNew",
+        "identifier": "[\"102942\",\"102943\",\"遗君-推进之王\"]"
+      },
+      {
+        "type": "biliNFTVideoNew",
+        "identifier": "[\"102942\",\"102943\",\"梦人-霍尔海雅\"]"
+      },
+      {
+        "type": "biliNFTVideoNew",
+        "identifier": "[\"102942\",\"102943\",\"梦人-塑心\"]"
+      },
+      {
+        "type": "biliNFTVideoNew",
+        "identifier": "[\"102942\",\"102943\",\"梦人-夜莺\"]"
+      },
+      {
+        "type": "biliNFTVideoNew",
+        "identifier": "[\"102942\",\"102943\",\"梦人-伊内丝\"]"
+      },
+      {
+        "type": "biliNFTVideoNew",
+        "identifier": "[\"102942\",\"102943\",\"行者-重岳\"]"
+      },
+      {
+        "type": "biliNFTVideoNew",
+        "identifier": "[\"102942\",\"102943\",\"行者-提丰\"]"
+      },
+      {
+        "type": "biliNFTVideoNew",
+        "identifier": "[\"102942\",\"102943\",\"行者-浊心斯卡蒂\"]"
+      },
+      {
+        "type": "biliNFTVideoNew",
+        "identifier": "[\"102942\",\"102943\",\"行者-银灰\"]"
+      },
+      {
+        "type": "biliNFTVideoNew",
+        "identifier": "[\"102942\",\"102943\",\"遗君-缄默德克萨斯\"]"
+      },
+      {
+        "type": "biliNFTVideoNew",
+        "identifier": "[\"102942\",\"102943\",\"遗君-焰影苇草\"]"
+      },
+      {
+        "type": "biliNFTVideoNew",
+        "identifier": "[\"102942\",\"102943\",\"遗君-耀骑士临光\"]"
+      },
+      {
+        "type": "biliNFTVideoNew",
+        "identifier": "[\"102942\",\"102943\",\"遗君-白铁\"]"
+      },
+      {
+        "type": "biliNFTVideoNew",
+        "identifier": "[\"102942\",\"102943\",\"超新星-圣约送葬人\"]"
+      },
+      {
+        "type": "biliNFTVideoNew",
+        "identifier": "[\"102942\",\"102943\",\"超新星-能天使\"]"
+      },
+      {
+        "type": "biliNFTVideoNew",
+        "identifier": "[\"102942\",\"102943\",\"超新星-杰西卡\"]"
+      },
+      {
+        "type": "biliNFTVideoNew",
+        "identifier": "[\"102942\",\"102943\",\"超新星-琳琅诗怀雅\"]"
+      }
+    ],
+    "customColors": {
+      "maskedBackgroundColor": "rgba(0, 0, 0, 0.60)",
+      "playlistDrawerBackgroundColor": "green",
+      "playlistDrawerBackgroundColorTransparent": "rgba(0, 255, 0, 0.35)",
+      "progressThumbTintColor": "rgb(235, 235, 0)",
+      "progressMinimumTrackTintColor": "rgb(235, 235, 0)",
+      "progressMaximumTrackTintColor": "#FFFFFF",
+      "btnBackgroundColor": "rgb(72, 71, 58)",
+      "textInputSelectionColor": "green"
+    },
+    "colors": {
+      "primary": "#fcf75e",
+      "onPrimary": "rgb(50, 50, 0)",
+      "primaryContainer": "rgb(73, 73, 0)",
+      "onPrimaryContainer": "rgb(234, 234, 0)",
+      "secondary": "rgb(202, 200, 165)",
+      "onSecondary": "rgb(50, 50, 24)",
+      "secondaryContainer": "rgb(73, 72, 45)",
+      "onSecondaryContainer": "rgb(231, 228, 191)",
+      "tertiary": "rgb(164, 208, 189)",
+      "onTertiary": "rgb(11, 55, 42)",
+      "tertiaryContainer": "rgb(37, 78, 64)",
+      "onTertiaryContainer": "rgb(191, 236, 216)",
+      "error": "rgb(255, 180, 171)",
+      "onError": "rgb(105, 0, 5)",
+      "errorContainer": "rgb(147, 0, 10)",
+      "onErrorContainer": "rgb(255, 180, 171)",
+      "background": "rgba(0,0,0, 0.4)",
+      "onBackground": "rgb(230, 226, 217)",
+      "surface": "rgb(28, 28, 23)",
+      "onSurface": "rgba(235, 235, 0, 1)",
+      "text": "#fcf75e",
+      "surfaceVariant": "rgb(10, 10, 10)",
+      "onSurfaceVariant": "rgb(225, 225, 0)",
+      "outline": "rgb(147, 145, 130)",
+      "outlineVariant": "rgb(72, 71, 58)",
+      "shadow": "rgb(0, 0, 0)",
+      "scrim": "rgb(0, 0, 0)",
+      "inverseSurface": "rgb(230, 226, 217)",
+      "inverseOnSurface": "rgb(49, 49, 43)",
+      "inversePrimary": "rgb(98, 98, 0)",
+      "elevation": {
+        "level0": "transparent",
+        "level1": "rgb(53, 56, 57)",
+        "level2": "rgb(10, 10, 10)",
+        "level3": "rgb(10, 10, 10)",
+        "level4": "rgb(49, 49, 20)",
+        "level5": "rgb(53, 53, 20)"
+      },
+      "surfaceDisabled": "rgba(230, 226, 217, 0.12)",
+      "onSurfaceDisabled": "rgba(230, 226, 217, 0.38)",
+      "backdrop": "rgba(49, 49, 37, 0.4)"
+    }
   }
 ]
