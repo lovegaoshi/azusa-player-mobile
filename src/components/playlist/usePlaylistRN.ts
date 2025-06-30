@@ -5,6 +5,7 @@ import { useDebounce } from 'use-debounce';
 import { useNetInfo } from '@react-native-community/netinfo';
 import { activateKeepAwakeAsync, deactivateKeepAwake } from 'expo-keep-awake';
 import { AnimatedRef, useAnimatedRef } from 'react-native-reanimated';
+import TrackPlayer, { State } from 'react-native-track-player';
 
 import { useNoxSetting } from '@stores/useApp';
 import { PlaylistTypes, SearchRegex } from '@enums/Playlist';
@@ -120,6 +121,9 @@ export default (playlist: NoxMedia.Playlist): UsePlaylistRN => {
   const playSong = (song: NoxMedia.Song) => {
     toggleMiniplayerVisible();
     const playSongCallback = (playlist: NoxMedia.Playlist) => {
+      TrackPlayer.getPlaybackState().then(s => {
+        s.state !== State.Playing && TrackPlayer.play();
+      });
       const setPlaylistPlaymode = () =>
         cycleThroughPlaymode(
           initializePlaybackMode(

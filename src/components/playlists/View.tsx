@@ -94,7 +94,7 @@ export default () => {
   }, []);
 
   return (
-    <FlexView>
+    <FlexView mkey={'drawer'}>
       <>
         <View style={{ height: 10 + insets.top }} />
         <BiliCard backgroundURI={playerStyle.biliGarbCard}>

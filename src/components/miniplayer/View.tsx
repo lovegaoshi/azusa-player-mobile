@@ -150,10 +150,6 @@ export default () => {
   });
 
   useEffect(() => {
-    if (expandCounter === 0) {
-      setTimeout(() => expand(), 50);
-      return;
-    }
     expand();
   }, [expandCounter]);
 

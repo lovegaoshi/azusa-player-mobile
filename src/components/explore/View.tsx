@@ -29,7 +29,7 @@ const Explore = () => {
   const { explorePage, setExplorePage } = useAPM();
 
   return (
-    <FlexView noFlex>
+    <FlexView noFlex mkey={'explore'}>
       <SiteSelector
         containerStyle={{
           backgroundColor: playerStyle.customColors.maskedBackgroundColor,
