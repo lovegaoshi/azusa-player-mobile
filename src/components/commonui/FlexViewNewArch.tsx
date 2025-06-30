@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useState } from 'react';
 import { View, ViewStyle } from 'react-native';
 
 import { styles } from '@components/style';
@@ -11,6 +11,7 @@ interface Props {
   children: React.JSX.Element;
   noFlex?: boolean;
   style?: ViewStyle;
+  mkey?: string;
 }
 /**
  * a view of flex:1 for new arch, resolves resizing issues
@@ -22,7 +23,6 @@ export default ({ children, noFlex, style }: Props) => {
   }
 
   const [initHeight, setInitHeight] = useState(0);
-  const largestHeight = useRef(-1);
   const miniplayerHeight = useMiniplayerHeight();
 
   const animatedStyle = useAnimatedStyle(() => {
@@ -40,14 +40,9 @@ export default ({ children, noFlex, style }: Props) => {
         animatedStyle,
       ]}
       onLayout={e => {
-        if (initHeight > 0 || e.nativeEvent.layout.height === 0) {
-          return;
+        if (miniplayerHeight.value <= MinPlayerHeight) {
+          setInitHeight(e.nativeEvent.layout.height);
         }
-        if (largestHeight.current < e.nativeEvent.layout.height) {
-          largestHeight.current = e.nativeEvent.layout.height;
-          return;
-        }
-        setInitHeight(largestHeight.current);
       }}
     >
       {children}

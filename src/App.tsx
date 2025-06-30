@@ -103,8 +103,8 @@ export default function App(appProps: NoxComponent.AppProps) {
   }
   return (
     <GestureHandlerRootView style={styles.gestureContainer}>
-      <APMContext>
-        <SafeAreaProvider>
+      <SafeAreaProvider>
+        <APMContext>
           <MainBackground />
           <View
             style={{ backgroundColor: playerStyle.colors.background, flex: 1 }}
@@ -125,8 +125,8 @@ export default function App(appProps: NoxComponent.AppProps) {
               <SnackBar />
             </PaperProvider>
           </View>
-        </SafeAreaProvider>
-      </APMContext>
+        </APMContext>
+      </SafeAreaProvider>
     </GestureHandlerRootView>
   );
 }

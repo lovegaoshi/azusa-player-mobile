@@ -1,7 +1,7 @@
 import { createContext, ReactNode, useContext } from 'react';
 import { SharedValue, useSharedValue } from 'react-native-reanimated';
-
-import { MinPlayerHeight } from '@components/miniplayer/Constants';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { Dimensions } from 'react-native';
 
 const MiniPlayerHeightContext = createContext<SharedValue<number> | null>(null);
 
@@ -10,7 +10,11 @@ export const MiniPlayerHeightProvider = ({
 }: {
   children: ReactNode;
 }) => {
-  const miniPlayerHeight = useSharedValue(MinPlayerHeight);
+  const insets = useSafeAreaInsets();
+  const dim = Dimensions.get('window');
+  const miniPlayerHeight = useSharedValue(
+    dim.height + insets.top + insets.bottom,
+  );
 
   return (
     <MiniPlayerHeightContext.Provider value={miniPlayerHeight}>

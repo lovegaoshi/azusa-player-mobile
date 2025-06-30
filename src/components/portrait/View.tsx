@@ -18,6 +18,7 @@ export default () => {
 
   return (
     <FlexView
+      mkey={'music'}
       style={{
         backgroundColor: playerStyle.customColors.maskedBackgroundColor,
       }}
