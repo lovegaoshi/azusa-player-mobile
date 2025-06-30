@@ -84,7 +84,13 @@ const SkinItem = ({
       <View
         style={[
           styles.skinItemContainer,
-          isSelected ? { backgroundColor: playerStyle.colors.background } : {},
+          isSelected
+            ? {
+                backgroundColor:
+                  playerStyle.colors.primaryContainer ??
+                  playerStyle.colors.background,
+              }
+            : {},
         ]}
       >
         <View style={styles.skinItemLeftContainer}>

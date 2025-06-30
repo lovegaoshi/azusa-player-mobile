@@ -24,7 +24,7 @@ export default {
   },
   colors: {
     karaokeOn: 'rgba(103, 80, 164, 1)',
-    karaokeOff: 'rgba(83, 79, 89, 1)',
+    karaokeOff: '#c0bdc4',
     ...MD3LightTheme.colors,
     // background: 'rgba(255, 255, 255, 0.4)',
   },
