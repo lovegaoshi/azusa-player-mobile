@@ -497,6 +497,80 @@
   },
   {
     "metaData": {
+      "themeName": "粥p播放器",
+      "themeDesc": "为斯卡蒂献上心脏！",
+      "themeAuthor": "",
+      "themeIcon": "https://img1.baidu.com/it/u=3211295218,2235551042&fm=253&fmt=auto&app=138&f=JPEG",
+      "darkTheme": true
+    },
+    "gifs": [
+
+    ],
+    "backgroundImages": [
+      {
+        "type": "bvid",
+        "identifier": "BV1Ei4y1b78A"
+      }
+    ],
+    "backgroundImagesLandscape": [
+    ],
+    "customColors": {
+      "maskedBackgroundColor": "rgba(0, 0, 0, 0.30)",
+      "playlistDrawerBackgroundColor": "rgba(255, 0, 0, 0.35)",
+      "playlistDrawerBackgroundColorTransparent": "rgba(255, 0, 0, 0.35)",
+      "progressThumbTintColor": "#f2003c",
+      "progressMinimumTrackTintColor": "#f2003c",
+      "progressMaximumTrackTintColor": "#FFFFFF",
+      "btnBackgroundColor": "rgb(72, 71, 58)",
+      "textInputSelectionColor": "lightgreen"
+    },
+    "colors": {
+      "primary": "rgb(233, 233, 233)",
+      "onPrimary": "rgb(50, 50, 0)",
+      "primaryContainer": "rgb(30, 30, 30)",
+      "onPrimaryContainer": "rgb(234, 234, 0)",
+      "secondary": "rgb(157, 157, 157)",
+      "onSecondary": "rgb(50, 50, 24)",
+      "secondaryContainer": "rgb(73, 72, 45)",
+      "onSecondaryContainer": "rgb(231, 228, 191)",
+      "tertiary": "rgb(164, 208, 189)",
+      "onTertiary": "rgb(11, 55, 42)",
+      "tertiaryContainer": "rgb(37, 78, 64)",
+      "onTertiaryContainer": "rgb(191, 236, 216)",
+      "error": "rgb(255, 180, 171)",
+      "onError": "rgb(105, 0, 5)",
+      "errorContainer": "rgb(147, 0, 10)",
+      "onErrorContainer": "rgb(255, 180, 171)",
+      "background": "rgba(0,0,0, 0.6)",
+      "onBackground": "rgb(230, 226, 217)",
+      "surface": "rgb(28, 28, 23)",
+      "onSurface": "rgb(233, 233, 233)",
+      "text": "rgb(233, 233, 233)",
+      "surfaceVariant": "rgb(10, 10, 10)",
+      "onSurfaceVariant": "rgb(157, 157, 157)",
+      "outline": "rgb(147, 145, 130)",
+      "outlineVariant": "rgb(72, 71, 58)",
+      "shadow": "rgb(0, 0, 0)",
+      "scrim": "rgb(0, 0, 0)",
+      "inverseSurface": "rgb(230, 226, 217)",
+      "inverseOnSurface": "rgb(49, 49, 43)",
+      "inversePrimary": "rgb(98, 98, 0)",
+      "elevation": {
+        "level0": "transparent",
+        "level1": "rgb(53, 56, 57)",
+        "level2": "rgb(10, 10, 10)",
+        "level3": "rgb(10, 10, 10)",
+        "level4": "rgb(49, 49, 20)",
+        "level5": "rgb(53, 53, 20)"
+      },
+      "surfaceDisabled": "rgba(230, 226, 217, 0.12)",
+      "onSurfaceDisabled": "rgba(230, 226, 217, 0.38)",
+      "backdrop": "rgba(49, 49, 37, 0.4)"
+    },
+    "playerControlIconContained": "contained"
+  },
+  {
+    "metaData": {
       "themeName": "克√播放器",
       "themeDesc": "快滚",
       "themeAuthor": "内德维德的军火库",
