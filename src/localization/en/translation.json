@@ -109,8 +109,12 @@
     "useNewSongOverwriteLabel": "New songs overwrite"
   },
   "RenameSongDialog": {
-    "title": "Remame {{song.name}} to...",
+    "title": "Rename {{song.name}} to...",
     "label": "Song name"
+  },
+  "SetMVDialog": {
+    "title": "Override background when playing {{song.name}}...",
+    "label": "BVID"
   },
   "PlaylistsDrawer": {
     "SearchListTitle": "Search",
@@ -169,6 +173,7 @@
     "downloadFailed": "{{song.parsedName}} download failed"
   },
   "SongOperations": {
+    "setMV": "Override Background",
     "songDownloadTitle": "Download",
     "songSendToTitle": "Send to...",
     "songRenameTitle": "Rename...",

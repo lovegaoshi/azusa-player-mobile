@@ -32,6 +32,8 @@ declare global {
       metadataOnReceived?: boolean;
       order?: number;
       localPath?: string;
+
+      backgroundOverride?: string;
     }
 
     export interface Playlist {

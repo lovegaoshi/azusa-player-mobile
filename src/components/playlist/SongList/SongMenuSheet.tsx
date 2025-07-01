@@ -26,6 +26,7 @@ import { Source } from '@enums/MediaFetch';
 import { isAndroid10 } from '@utils/RNUtils';
 import { copyCacheToDir } from '@utils/download/download';
 import NoxBottomSheet from '@components/commonui/bottomsheet/NoxBottomSheet';
+import SetMVButton from '@components/songmenu/SetMVButton';
 
 interface UsePlaylist {
   checking: boolean;
@@ -224,6 +225,18 @@ export default ({ usePlaylist, prepareForLayoutAnimationRender }: Props) => {
           }}
         />
       )}
+      <SetMVButton
+        onSubmit={backgroundOverride =>
+          playlistCRUD.updateSongIndex(
+            songMenuSongIndexes[0],
+            { backgroundOverride },
+            currentPlaylist,
+          )
+        }
+        getSongOnClick={() => selectedSongs()[0]}
+        showSheet={showSheet}
+        disabled={checking}
+      />
       <SheetIconEntry
         text={t('SongOperations.songRemoveTitle')}
         icon={'delete'}

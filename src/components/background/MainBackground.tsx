@@ -12,6 +12,7 @@ import resolveBackgroundImage, {
   RESOLVE_TYPE,
 } from '@utils/mediafetch/mainbackgroundfetch';
 import EmptyBackground from './AccentColorBackground';
+import useTrackMV from '@hooks/useTrackMV';
 
 const MainBackground = () => {
   const insets = useSafeAreaInsets();
@@ -20,14 +21,15 @@ const MainBackground = () => {
   const { width, height } = Dimensions.get('window');
   const [bkgrdImg, setBkgrdImg] = useState<NoxTheme.BackgroundImage>();
   const videoRef = React.useRef<VideoRef | null>(null);
+  const trackMV = useTrackMV(videoRef);
   const bkgrdImgRaw =
     isLandscape && playerStyle.bkgrdImgLandscape
       ? playerStyle.bkgrdImgLandscape
       : playerStyle.bkgrdImg;
 
   React.useEffect(() => {
-    resolveBackgroundImage(bkgrdImgRaw).then(setBkgrdImg);
-  }, [bkgrdImgRaw]);
+    resolveBackgroundImage(trackMV ?? bkgrdImgRaw).then(setBkgrdImg);
+  }, [trackMV, bkgrdImgRaw]);
 
   switch (bkgrdImg?.type) {
     case RESOLVE_TYPE.image:
