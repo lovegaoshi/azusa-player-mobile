@@ -1,5 +1,6 @@
 import { TouchableWithoutFeedback, Dimensions } from 'react-native';
 import Animated, {
+  interpolate,
   SharedValue,
   useAnimatedStyle,
   useDerivedValue,
@@ -54,14 +55,28 @@ export default ({ miniplayerHeight, opacity, onPress, expand }: Props) => {
   const artworkScale = useDerivedValue(() => {
     return artworkWidth.value / width;
   });
+
   const expandDiff = useDerivedValue(
     () => miniplayerHeight.value - MinPlayerHeight,
   );
 
+  const borderRadius = useDerivedValue(() => {
+    /**
+    round until miniplayerHeight > width:
+    if (miniplayerHeight.value < width) return 40;
+    return Math.max(0, 40 - (miniplayerHeight.value - width) / 4);
+     */
+    return interpolate(
+      width + MinPlayerHeight - miniplayerHeight.value,
+      [0, width],
+      [0, 30],
+    );
+  });
+
   const artworkTranslateY = useDerivedValue(() => {
     return Math.min(
       95,
-      30 + (Math.max(0, expandDiff.value) - width - insets.top * 3) / 2,
+      32 + (Math.max(0, expandDiff.value) - width - insets.top * 3) / 2,
     );
   });
   const artworkTranslateX = useDerivedValue(() => {
@@ -81,6 +96,7 @@ export default ({ miniplayerHeight, opacity, onPress, expand }: Props) => {
       ],
       opacity: opacity.value,
       zIndex: opacity.value > 0 ? 1 : -1,
+      borderRadius: borderRadius.value,
     };
   });
 
