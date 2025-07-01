@@ -105,7 +105,10 @@ export default ({
         onMomentumScrollEnd={onMomentumScrollEnd}
       >
         {moods.map(mood => (
-          <View style={styles.rowView} key={mood.endpoint?.payload.params}>
+          <View
+            style={[styles.rowView, { paddingHorizontal: 5 }]}
+            key={mood.endpoint?.payload.params}
+          >
             <Button
               key={mood.text}
               mode={mood === activeMood ? 'contained' : 'contained-tonal'}
@@ -113,7 +116,6 @@ export default ({
             >
               {mood.text}
             </Button>
-            <View style={{ width: 15 }} />
           </View>
         ))}
       </ScrollView>
