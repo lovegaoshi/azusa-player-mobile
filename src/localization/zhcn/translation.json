@@ -112,6 +112,10 @@
     "title": "将 {{song.name}} 重命名为...",
     "label": "歌名"
   },
+  "SetMVDialog": {
+    "title": "为{{song.name}} 选择动态背景...",
+    "label": "BV号"
+  },
   "PlaylistsDrawer": {
     "SearchListTitle": "搜索歌单",
     "SearchListTitleNA": "错误错误错误错误"
@@ -169,6 +173,7 @@
     "downloadFailed": "{{song.parsedName}} 缓存失败"
   },
   "SongOperations": {
+    "setMV": "覆盖背景",
     "songDownloadTitle": "下载",
     "songSendToTitle": "送往...",
     "songRenameTitle": "改名...",

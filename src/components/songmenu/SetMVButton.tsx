@@ -5,7 +5,7 @@ import Dialog from '@components/dialogs/SetMVDialog';
 import { dummySongObj } from '@objects/Song';
 import SheetIconEntry from '@components/commonui/bottomsheet/SheetIconEntry';
 
-const ICON = 'pencil';
+const ICON = 'video';
 
 interface Props {
   getSongOnClick: () => NoxMedia.Song;
@@ -45,7 +45,7 @@ export default ({
         setSong(getSongOnClick());
         showSheet?.(false);
       }}
-      text={t('SongOperations.SetMV')}
+      text={t('SongOperations.setMV')}
       disabled={disabled}
     >
       <Dialog

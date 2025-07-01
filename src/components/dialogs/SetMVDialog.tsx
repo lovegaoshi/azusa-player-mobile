@@ -37,11 +37,11 @@ const SongDialog = ({
 
   return (
     <Dialog visible={visible} onDismiss={handleClose}>
-      <Dialog.Title>{t('RenameSongDialog.title', { song })}</Dialog.Title>
+      <Dialog.Title>{t('SetMVDialog.title', { song })}</Dialog.Title>
       <Dialog.Content>
         <NoxInput
           handleSubmit={handleSubmit}
-          label={t('RenameSongDialog.label')}
+          label={t('SetMVDialog.label')}
           text={text}
           setText={setText}
         />

@@ -112,6 +112,10 @@
     "title": "Rename {{song.name}} to...",
     "label": "Song name"
   },
+  "SetMVDialog": {
+    "title": "Override background when playing {{song.name}}...",
+    "label": "BVID"
+  },
   "PlaylistsDrawer": {
     "SearchListTitle": "Search",
     "SearchListTitleNA": "MISSINGNO."
@@ -169,6 +173,7 @@
     "downloadFailed": "{{song.parsedName}} download failed"
   },
   "SongOperations": {
+    "setMV": "Override Background",
     "songDownloadTitle": "Download",
     "songSendToTitle": "Send to...",
     "songRenameTitle": "Rename...",
