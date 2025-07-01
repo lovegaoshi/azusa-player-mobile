@@ -11,6 +11,7 @@ import useLyric from '@hooks/useLyricRN';
 import { NativeText as Text } from '@components/commonui/ScaledText';
 import LyricBottomSheet from './LyricBottomSheet';
 import { NoxSheetRoutes } from '@enums/Routes';
+import { useIsLandscape } from '@hooks/useOrientation';
 
 interface LyricViewProps {
   track: Track;
@@ -40,6 +41,7 @@ export const LyricView = ({
   visible = true,
   style = styles.container,
 }: LyricViewProps) => {
+  const isLandscape = useIsLandscape();
   const playerSetting = useNoxSetting(state => state.playerSetting);
   const { position } = useProgress(
     playerSetting.karaokeLyrics ? 50 : undefined,
@@ -122,7 +124,11 @@ export const LyricView = ({
 
       {showUI && (
         <>
-          <View style={styles.optionsButton}>
+          <View
+            style={
+              isLandscape ? styles.optionsButtonLandscape : styles.optionsButton
+            }
+          >
             <IconButton
               icon="more"
               onPress={() => TrueSheet.present(NoxSheetRoutes.LyricSheet)}
@@ -179,6 +185,12 @@ const styles = StyleSheet.create({
     top: -35,
     left: 10,
     zIndex: 1, // add this line
+  },
+  optionsButtonLandscape: {
+    position: 'absolute',
+    top: 50,
+    zIndex: 1, // add this line
+    opacity: 0.5,
   },
   offsetModalView: {
     position: 'absolute',

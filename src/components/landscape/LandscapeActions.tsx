@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { Linking, StyleSheet, View } from 'react-native';
 import { IconButton } from 'react-native-paper';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { ScreenIcons } from '@enums/Icons';
 import RandomGIFButton from '../buttons/RandomGIF';
@@ -16,7 +17,8 @@ export default ({ panelWidth = 110 }: Props) => {
   const playerStyle = useNoxSetting(state => state.playerStyle);
   const currentPlayingId = useNoxSetting(state => state.currentPlayingId);
   const navigation = useNavigation();
-  const iconSize = panelWidth - 30;
+  const insets = useSafeAreaInsets();
+  const iconSize = panelWidth - insets.left - 30;
 
   const onPlaylistPress = () => {
     navigation.navigate({
@@ -51,6 +53,9 @@ export default ({ panelWidth = 110 }: Props) => {
           backgroundColor: playerStyle.metaData.darkTheme
             ? 'rgb(44, 40, 49)'
             : 'rgb(243, 237, 246)',
+          paddingTop: insets.top / 2,
+          paddingBottom: insets.bottom,
+          paddingLeft: insets.left,
         },
       ]}
     >
