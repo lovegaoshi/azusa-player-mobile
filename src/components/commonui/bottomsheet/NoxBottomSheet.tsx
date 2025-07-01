@@ -53,6 +53,7 @@ export default (p: Props) => {
   return (
     <TrueSheet
       {...p}
+      edgeToEdge
       onPresent={() => isAndroidNewArch && setSheetPresent(true)}
       dismissWithAnimation
       keyboardMode={'pan'}
