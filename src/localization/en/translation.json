@@ -109,7 +109,7 @@
     "useNewSongOverwriteLabel": "New songs overwrite"
   },
   "RenameSongDialog": {
-    "title": "Remame {{song.name}} to...",
+    "title": "Rename {{song.name}} to...",
     "label": "Song name"
   },
   "PlaylistsDrawer": {

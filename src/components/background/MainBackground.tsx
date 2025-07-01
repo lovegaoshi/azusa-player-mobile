@@ -21,7 +21,7 @@ const MainBackground = () => {
   const { width, height } = Dimensions.get('window');
   const [bkgrdImg, setBkgrdImg] = useState<NoxTheme.BackgroundImage>();
   const videoRef = React.useRef<VideoRef | null>(null);
-  const trackMV = useTrackMV();
+  const trackMV = useTrackMV(videoRef);
   const bkgrdImgRaw =
     isLandscape && playerStyle.bkgrdImgLandscape
       ? playerStyle.bkgrdImgLandscape
@@ -29,7 +29,7 @@ const MainBackground = () => {
 
   React.useEffect(() => {
     resolveBackgroundImage(trackMV ?? bkgrdImgRaw).then(setBkgrdImg);
-  }, [bkgrdImgRaw]);
+  }, [trackMV, bkgrdImgRaw]);
 
   switch (bkgrdImg?.type) {
     case RESOLVE_TYPE.image:

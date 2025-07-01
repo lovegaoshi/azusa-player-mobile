@@ -33,8 +33,7 @@ declare global {
       order?: number;
       localPath?: string;
 
-      musicVideo?: string;
-      musicVideoSync?: boolean;
+      backgroundOverride?: string;
     }
 
     export interface Playlist {
