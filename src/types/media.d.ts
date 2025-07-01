@@ -32,6 +32,9 @@ declare global {
       metadataOnReceived?: boolean;
       order?: number;
       localPath?: string;
+
+      musicVideo?: string;
+      musicVideoSync?: boolean;
     }
 
     export interface Playlist {
