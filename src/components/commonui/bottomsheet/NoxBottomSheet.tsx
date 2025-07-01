@@ -4,7 +4,13 @@ import {
   TrueSheetProps,
 } from '@lodev09/react-native-true-sheet';
 import { RefObject, useEffect, useRef, useState } from 'react';
-import { View, ScrollView, StyleSheet, Pressable } from 'react-native';
+import {
+  Dimensions,
+  View,
+  ScrollView,
+  StyleSheet,
+  Pressable,
+} from 'react-native';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
 import { useNoxSetting } from '@stores/useApp';
@@ -36,9 +42,9 @@ export default (p: Props) => {
   const playerStyle = useNoxSetting(state => state.playerStyle);
   const [topOffset, setTopOffset] = useState(0);
   const [leftOffset, setLeftOffset] = useState(0);
-  const [scrollViewShouldNest, setScrollViewShouldNest] = useState(false);
+  const [scrollViewShouldNest, setScrollViewShouldNest] = useState<boolean>();
   const [sheetPresent, setSheetPresent] = useState(false);
-  const scrollViewHeight = useRef(0);
+  const { height } = Dimensions.get('window');
   const pressableRef = useRef<View>(null);
   const scrollViewRef = useRef<ScrollView>(null);
 
@@ -76,21 +82,25 @@ export default (p: Props) => {
       {/* https://sheet.lodev09.com/troubleshooting#react-native-gesture-handler */}
       <GestureHandlerRootView style={styles.RNGHcontainer}>
         <Header />
-        <ScrollView
-          onLayout={e =>
-            (scrollViewHeight.current = e.nativeEvent.layout.height)
-          }
-          onContentSizeChange={(_w, h) =>
-            setScrollViewShouldNest(h > scrollViewHeight.current)
-          }
-          // HACK: this is totally not necessary. consider removing
-          nestedScrollEnabled={nestedScrollEnabled ?? scrollViewShouldNest}
-          ref={scrollViewRef}
-          showsVerticalScrollIndicator={false}
-        >
-          {children}
-          <View style={styles.footer} />
-        </ScrollView>
+        {scrollViewShouldNest === undefined ? (
+          <View
+            style={{ position: 'absolute' }}
+            onLayout={e =>
+              setScrollViewShouldNest(e.nativeEvent.layout.height > height)
+            }
+          >
+            {children}
+          </View>
+        ) : (
+          <ScrollView
+            nestedScrollEnabled={nestedScrollEnabled ?? scrollViewShouldNest}
+            ref={scrollViewRef}
+            showsVerticalScrollIndicator={false}
+          >
+            {children}
+            <View style={styles.footer} />
+          </ScrollView>
+        )}
       </GestureHandlerRootView>
     </TrueSheet>
   );
