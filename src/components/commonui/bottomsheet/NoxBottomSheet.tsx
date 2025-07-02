@@ -12,6 +12,7 @@ import {
   Pressable,
 } from 'react-native';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { useNoxSetting } from '@stores/useApp';
 import { isAndroid, isOldArch } from '@utils/RNUtils';
@@ -39,6 +40,7 @@ export default (p: Props) => {
     Header = () => null,
     nestedScrollEnabled,
   } = p;
+  const insets = useSafeAreaInsets();
   const playerStyle = useNoxSetting(state => state.playerStyle);
   const [topOffset, setTopOffset] = useState(0);
   const [leftOffset, setLeftOffset] = useState(0);
@@ -98,7 +100,7 @@ export default (p: Props) => {
             showsVerticalScrollIndicator={false}
           >
             {children}
-            <View style={styles.footer} />
+            <View style={{ paddingBottom: 10 + insets.bottom }} />
           </ScrollView>
         )}
       </GestureHandlerRootView>
@@ -110,5 +112,4 @@ const styles = StyleSheet.create({
   RNGHcontainer: {
     flexGrow: 1,
   },
-  footer: { paddingBottom: 10 },
 });
