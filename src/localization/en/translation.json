@@ -174,7 +174,7 @@
     "downloadFailed": "{{song.parsedName}} download failed"
   },
   "SongOperations": {
-    "setMV": "Override Background",
+    "setMV": "Live Background",
     "songDownloadTitle": "Download",
     "songSendToTitle": "Send to...",
     "songRenameTitle": "Rename...",
