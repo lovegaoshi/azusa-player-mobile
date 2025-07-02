@@ -24,6 +24,7 @@ import { appStartupInit } from '@hooks/useSetupPlayer';
 import { playFromMediaId, playFromSearch } from '@hooks/usePlayback.migrate';
 import { isAndroid, isIOS } from '@utils/RNUtils';
 import { increasePlaybackCount } from '@utils/db/sqlStorage';
+import { TPSeek, TPPlay } from '@stores/RNObserverStore';
 
 const { APMWidgetModule } = NativeModules;
 const { getState } = noxPlayingList;
@@ -49,7 +50,7 @@ export async function additionalPlaybackService({
       if ((await TrackPlayer.getPlaybackState()).state === State.Playing) {
         fadePause();
       } else {
-        TrackPlayer.play();
+        TPPlay();
       }
     });
   }
@@ -81,7 +82,7 @@ export async function additionalPlaybackService({
         logger.debug(
           `[Playback] initalized last played duration to ${lastPlayDuration}`,
         );
-        TrackPlayer.seekTo(lastPlayedDuration.val);
+        TPSeek(lastPlayedDuration.val);
       }
       lastPlayedDuration.val = undefined;
     }
@@ -103,8 +104,8 @@ export async function additionalPlaybackService({
             ...updatedMetadata,
             urlRefreshTimeStamp: currTime,
           });
-          await TrackPlayer.seekTo(currentProgress.position);
-          TrackPlayer.play();
+          await TPSeek(currentProgress.position);
+          TPPlay();
           refetchThrottleGuard = currTime;
         } catch (e) {
           console.error('resolveURL failed', track, e);
@@ -134,11 +135,11 @@ export async function PlaybackService() {
   });
 
   TrackPlayer.addEventListener(Event.RemotePlay, async () => {
-    TrackPlayer.play();
+    TPPlay();
   });
 
   TrackPlayer.addEventListener(Event.RemoteSeek, event => {
-    TrackPlayer.seekTo(event.position);
+    TPSeek(event.position);
   });
 
   TrackPlayer.addEventListener(

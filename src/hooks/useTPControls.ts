@@ -13,6 +13,7 @@ import logger from '@utils/Logger';
 import { increasePlaybackCount } from '@utils/db/sqlStorage';
 import getBiliSuggest from '@utils/mediafetch/suggestfetch';
 import smarterShuffle from '@utils/shuffle';
+import { TPPlay } from '@stores/RNObserverStore';
 
 const setAppStore = appStore.setState;
 const skipToBiliSuggest = async (
@@ -107,7 +108,7 @@ export const performSkipToNext = (
       // await TrackPlayer.skipToNext();
       const queueLen = (await TrackPlayer.getQueue()).length;
       await TrackPlayer.skip(queueLen - 1);
-      TrackPlayer.play();
+      TPPlay();
     });
   mPerformFade(callback);
 };
@@ -122,7 +123,7 @@ export const performSkipToPrevious = (
   const callback = () =>
     preparePromise().then(async () => {
       await TrackPlayer.skipToPrevious();
-      TrackPlayer.play();
+      TPPlay();
     });
   mPerformFade(callback);
 };

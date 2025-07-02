@@ -19,6 +19,7 @@ import { useTrackStore } from '@hooks/useActiveTrack';
 import { execWhenTrue, r128gain2Volume } from '@utils/Utils';
 import useSponsorBlock from './useSponsorBlock';
 import { getNextSong } from '@utils/RNTPUtils';
+import { TPSeek } from '@stores/RNObserverStore';
 
 const { getState } = noxPlayingList;
 const { fadeIntervalMs, fadeIntervalSec } = appStore.getState();
@@ -75,7 +76,7 @@ export default () => {
     const currentSongId = track?.song?.id ?? '';
     const sbSkip = checkSponsorBlock(event.position);
     if (sbSkip) {
-      return TrackPlayer.seekTo(sbSkip);
+      return TPSeek(sbSkip);
     }
     // prepare for cross fading if enabled, playback is > 50% done and crossfade preparation isnt done
     if (
@@ -136,7 +137,7 @@ export default () => {
     if (abRepeat[1] === 1) return;
     if (event.position > bRepeatDuration) {
       if (playmode === NoxRepeatMode.RepeatTrack) {
-        TrackPlayer.seekTo(abRepeat[0] * event.duration);
+        TPSeek(abRepeat[0] * event.duration);
         return;
       }
       logger.debug(
@@ -171,7 +172,7 @@ export default () => {
     if (newABRepeat[0] === 0) return;
     loadingTracker.current = false;
     const trackDuration = (await TrackPlayer.getProgress()).duration;
-    TrackPlayer.seekTo(trackDuration * newABRepeat[0]);
+    TPSeek(trackDuration * newABRepeat[0]);
   });
 
   useTrackPlayerEvents([Event.PlaybackActiveTrackChanged], async event => {
@@ -191,7 +192,7 @@ export default () => {
         logger.debug(
           `[ABRepeat] starting at ${trackDuration}, ${newABRepeat[0]}`,
         );
-        TrackPlayer.seekTo(trackDuration * newABRepeat[0]);
+        TPSeek(trackDuration * newABRepeat[0]);
       },
       funcName: 'ABRepeat A seek',
     });

@@ -14,6 +14,7 @@ import { validateFile, isIOS } from './RNUtils';
 import { displayDLProgress } from './download/notification';
 import { setNoxSkipSilence } from './ffmpeg/skipSilence';
 import { setNoxR128Gain } from './ffmpeg/r128RN';
+import { TPPlay } from '@stores/RNObserverStore';
 
 interface OptionsProps {
   max?: number;
@@ -119,7 +120,7 @@ class NoxMediaCache {
         );
         const currentTrack = await TrackPlayer.getActiveTrack();
         await TrackPlayer.load({ ...currentTrack, url: finalPath });
-        TrackPlayer.play();
+        TPPlay();
       }
     }
     this.dumpCache();
