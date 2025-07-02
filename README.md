@@ -1,4 +1,4 @@
-# Azusa-player-mobile
+# [EN-US](https://github.com/lovegaoshi/azusa-player-mobile/blob/master/README-en.md) &emsp; [Zh-CN](https://github.com/lovegaoshi/azusa-player-mobile/blob/master/README.md)
 
 <p align="center"><a href="https://github.com/kenmingwang/azusa-player"><img width="200" src="https://github.com/kenmingwang/azusa-player/blob/master/public/img/logo2-01.png?raw=true"></a></p>
 
