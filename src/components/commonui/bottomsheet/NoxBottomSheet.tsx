@@ -83,6 +83,9 @@ export default (p: Props) => {
       <Pressable ref={pressableRef} />
       {/* https://sheet.lodev09.com/troubleshooting#react-native-gesture-handler */}
       <GestureHandlerRootView style={styles.RNGHcontainer}>
+        {(p.sizes?.findIndex?.(v => v.toString().includes('%')) ?? -1) < 0 && (
+          <View style={{ height: insets.top }} />
+        )}
         <Header />
         {scrollViewShouldNest === undefined ? (
           <View
@@ -100,7 +103,7 @@ export default (p: Props) => {
             showsVerticalScrollIndicator={false}
           >
             {children}
-            <View style={{ paddingBottom: 10 + insets.bottom }} />
+            <View style={{ paddingBottom: insets.bottom }} />
           </ScrollView>
         )}
       </GestureHandlerRootView>
