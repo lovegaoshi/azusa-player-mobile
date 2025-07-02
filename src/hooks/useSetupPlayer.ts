@@ -18,6 +18,7 @@ import migrations from '../../drizzle/migrations';
 import APMMigration from '../utils/db/migration';
 import sqldb from '../utils/db/sql';
 import logger from '@utils/Logger';
+import { TPPlay } from '@stores/RNObserverStore';
 
 const { NoxModule } = NativeModules;
 
@@ -96,7 +97,7 @@ export default ({ intentData, vip }: NoxComponent.SetupPlayerProps) => {
       const GCCrash = isRNLoaded && !__DEV__;
       const OSkill = (await NoxModule?.getLastExitCode?.()) === 2;
       if (GCCrash || OSkill) {
-        vip && (await TrackPlayer.play());
+        vip && (await TPPlay());
         logger.error(`[APMResume] detected ${GCCrash} and ${OSkill}!`);
       }
       updateVersion(storedPlayerSetting);
@@ -109,7 +110,7 @@ export default ({ intentData, vip }: NoxComponent.SetupPlayerProps) => {
       setIntentData(intentData);
       switch (intentData) {
         case IntentData.Resume:
-          await TrackPlayer.play();
+          await TPPlay();
           break;
         case IntentData.PlayAll:
           // this hook cannot use usePlayback bc of rerendering..??

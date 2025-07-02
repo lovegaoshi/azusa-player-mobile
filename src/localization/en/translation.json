@@ -114,7 +114,8 @@
   },
   "SetMVDialog": {
     "title": "Override background when playing {{song.name}}...",
-    "label": "BVID"
+    "label": "BVID",
+    "MVSynclabel": "is this a MV?"
   },
   "PlaylistsDrawer": {
     "SearchListTitle": "Search",

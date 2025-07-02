@@ -24,6 +24,7 @@ import NoxCache from './Cache';
 import { setTPR128Gain } from './ffmpeg/ffmpeg';
 import { NULL_TRACK } from '@objects/Song';
 import { isAndroid, isIOS } from './RNUtils';
+import { TPPlay } from '@stores/RNObserverStore';
 
 const { getState, setState } = appStore ?? {};
 const animatedVolume = new Animated.Value(1);
@@ -228,13 +229,13 @@ export const playSongUninterrupted = async (song: NoxMedia.Song) => {
   const currentQueue = await TrackPlayer.getQueue();
   await TrackPlayer.add(await songlistToTracklist([song]));
   await TrackPlayer.skip(currentQueue.length);
-  await TrackPlayer.play();
+  await TPPlay();
 };
 
 export const playSongInterrupted = async (song: NoxMedia.Song) => {
   await TrackPlayer.reset();
   await TrackPlayer.add(await songlistToTracklist([song]));
-  TrackPlayer.play();
+  TPPlay();
 };
 
 export const getNextSong = async (next = true) => {

@@ -1,4 +1,3 @@
-import TrackPlayer from 'react-native-track-player';
 import { ActivityIndicator, IconButton } from 'react-native-paper';
 import { Dimensions, TouchableWithoutFeedback, View } from 'react-native';
 import Animated, {
@@ -14,6 +13,7 @@ import { useTrackStore } from '@hooks/useActiveTrack';
 import { MinPlayerHeight } from './Constants';
 import { useNoxSetting } from '@stores/useApp';
 import { PaperText as Text } from '@components/commonui/ScaledText';
+import { TPPlay } from '@stores/RNObserverStore';
 
 const IconSize = 30;
 const iconContainerStyle = {
@@ -103,7 +103,7 @@ const PlayPauseButton = () => {
       iconColor={playerStyle.colors.primary}
       icon={showPause ? 'pause' : 'play'}
       size={IconSize}
-      onPress={showPause ? fadePause : TrackPlayer.play}
+      onPress={showPause ? fadePause : TPPlay}
     />
   );
 };

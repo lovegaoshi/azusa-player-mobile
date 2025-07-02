@@ -2,12 +2,11 @@ import React from 'react';
 import { StyleSheet } from 'react-native';
 import { Image } from 'expo-image';
 import { ActivityIndicator } from 'react-native-paper';
-import TrackPlayer from 'react-native-track-player';
-
 import usePlaybackState from '@hooks/usePlaybackState';
 import { useNoxSetting } from '@stores/useApp';
 import LottieButtonAnimated from '@components/buttons/LottieButtonAnimated';
 import { fadePause } from '@utils/RNTPUtils';
+import { TPPlay } from '@stores/RNObserverStore';
 
 interface Props {
   iconSize?: number;
@@ -31,7 +30,7 @@ export const PlayPauseButton: React.FC<Props> = ({ iconSize = 50 }) => {
     <LottieButtonAnimated
       src={require('@assets/lottie/PauseGoAndBack.json')}
       size={iconSize}
-      onPress={showPause ? fadePause : TrackPlayer.play}
+      onPress={showPause ? fadePause : TPPlay}
       clicked={!showPause}
       strokes={['Play', 'Play 2', 'Pause', 'Pause 3']}
     />

@@ -8,3 +8,15 @@ export interface Slice {}
 const store: StateCreator<Slice, [], [], Slice> = set => ({});
 
 export default store;
+
+/**
+ * 
+a store template:
+
+import { create } from 'zustand';
+
+interface Store {}
+
+export default create<Store>((set, get) => ({}));
+
+*/

@@ -19,6 +19,7 @@ import {
   parseFromMediaId,
   PlayFromMediaID,
 } from '@utils/automotive/androidAuto';
+import { TPPlay } from '@stores/RNObserverStore';
 
 const { getState } = noxPlayingList;
 
@@ -76,7 +77,7 @@ export const _playFromPlaylist = async ({
     await playSongUninterrupted(song);
   }
   // HACK: WHY?
-  return clearPlaylistUninterrupted().then(TrackPlayer.play);
+  return clearPlaylistUninterrupted().then(TPPlay);
 };
 
 const playFromPlaylist = async (args: PlayFromPlaylist) => {

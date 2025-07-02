@@ -22,6 +22,7 @@ import {
 } from '@utils/RNTPUtils';
 import { execWhenTrue } from '@utils/Utils';
 import playlistStore, { initializePlaybackMode } from '@stores/playingList';
+import { TPPlay } from '@stores/RNObserverStore';
 
 interface ScrollTo {
   toIndex?: number;
@@ -122,7 +123,7 @@ export default (playlist: NoxMedia.Playlist): UsePlaylistRN => {
     toggleMiniplayerVisible();
     const playSongCallback = (playlist: NoxMedia.Playlist) => {
       TrackPlayer.getPlaybackState().then(s => {
-        s.state !== State.Playing && TrackPlayer.play();
+        s.state !== State.Playing && TPPlay();
       });
       const setPlaylistPlaymode = () =>
         cycleThroughPlaymode(

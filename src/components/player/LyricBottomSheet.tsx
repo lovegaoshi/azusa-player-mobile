@@ -114,17 +114,13 @@ export default ({ showLyricOffsetModal, usedLyric }: Props) => {
       name={NoxSheetRoutes.LyricSheet}
       ref={sheet}
       onDismiss={() => setRoute(Routes.Main)}
-      Header={() =>
-        route === Routes.Main ? (
-          <View style={{ paddingVertical: 15, alignItems: 'center' }}>
-            <Text variant="titleLarge">{t('Lyric.options')}</Text>
-          </View>
-        ) : (
-          <View style={{ paddingVertical: 15, alignItems: 'center' }}>
-            <Text variant="titleLarge">{t('Lyric.Search')}</Text>
-          </View>
-        )
-      }
+      Header={() => (
+        <View style={{ paddingVertical: 15, alignItems: 'center' }}>
+          <Text variant="titleLarge">
+            {t(route === Routes.Main ? 'Lyric.options' : 'Lyric.Search')}
+          </Text>
+        </View>
+      )}
     >
       {route === Routes.Main ? (
         <Main

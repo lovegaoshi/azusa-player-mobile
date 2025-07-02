@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import { Modal, View, StyleSheet, Button, ViewStyle } from 'react-native';
 import { Lrc as Lyric, KaraokeMode } from 'react-native-lyric';
-import TrackPlayer, { Track, useProgress } from 'react-native-track-player';
+import { Track, useProgress } from 'react-native-track-player';
 import { IconButton, ActivityIndicator } from 'react-native-paper';
 import { TrueSheet } from '@lodev09/react-native-true-sheet';
 
@@ -12,6 +12,7 @@ import { NativeText as Text } from '@components/commonui/ScaledText';
 import LyricBottomSheet from './LyricBottomSheet';
 import { NoxSheetRoutes } from '@enums/Routes';
 import { useIsLandscape } from '@hooks/useOrientation';
+import { TPSeek } from '@stores/RNObserverStore';
 
 interface LyricViewProps {
   track: Track;
@@ -104,7 +105,7 @@ export const LyricView = ({
           // HACK: this is NOT any. this is LrcLine. need to fix with ts
           onLinePress={
             playerSetting.lyricTap
-              ? (v: any) => TrackPlayer.seekTo(v.millisecond / 1000)
+              ? (v: any) => TPSeek(v.millisecond / 1000)
               : onPress
           }
           karaokeOnColor={

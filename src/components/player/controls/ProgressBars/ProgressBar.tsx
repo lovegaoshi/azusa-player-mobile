@@ -1,9 +1,10 @@
 import React from 'react';
 import { StyleSheet, ViewStyle } from 'react-native';
-import TrackPlayer, { useProgress } from 'react-native-track-player';
+import { useProgress } from 'react-native-track-player';
 import { Slider } from '@react-native-assets/slider';
 
 import { useNoxSetting } from '@stores/useApp';
+import { TPSeek } from '@stores/RNObserverStore';
 
 interface Props {
   thumbSize?: number;
@@ -46,7 +47,7 @@ export const SimpleProgressBar = ({
       minimumTrackTintColor={playerStyle.colors.primary}
       maximumTrackTintColor={playerStyle.colors.secondaryContainer}
       onSlidingComplete={v => {
-        TrackPlayer.seekTo(v);
+        TPSeek(v);
         exitSliding();
       }}
       thumbImage={progressThumbImage ? { uri: progressThumbImage } : undefined}

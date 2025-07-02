@@ -226,10 +226,10 @@ export default ({ usePlaylist, prepareForLayoutAnimationRender }: Props) => {
         />
       )}
       <SetMVButton
-        onSubmit={backgroundOverride =>
+        onSubmit={s =>
           playlistCRUD.updateSongIndex(
             songMenuSongIndexes[0],
-            { backgroundOverride },
+            s,
             currentPlaylist,
           )
         }
