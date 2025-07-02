@@ -11,7 +11,7 @@ export const setNoxSkipSilence = async (path: string, song: NoxMedia.Song) => {
     logger.debug(`[SkipSilence] ABrepeat exists; skipping...`);
     return;
   }
-  const newABRepeat = await probeLoudness(path);
+  const newABRepeat = await probeLoudness(path, -10);
   logger.debug(`[SkipSilence] analyzed: ${newABRepeat[0]}, ${newABRepeat[1]}`);
   setABRepeatSQL(song.id, { a: newABRepeat[0], b: newABRepeat[1] });
   const { setCurrentABRepeat, currentPlayingId, setABRepeat } =
