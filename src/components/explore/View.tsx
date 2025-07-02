@@ -11,6 +11,7 @@ import { Site } from '@enums/Network';
 import { useAPM } from '@stores/usePersistStore';
 import FlexView from '@components/commonui/FlexViewNewArch';
 import AutoUnmountNavView from '../commonui/AutoUnmountNavView';
+import { useIsLandscape } from '@hooks/useOrientation';
 
 const LoginComponent = ({ loginSite }: { loginSite: Site }) => {
   switch (loginSite) {
@@ -25,6 +26,7 @@ const LoginComponent = ({ loginSite }: { loginSite: Site }) => {
 
 const Explore = () => {
   const insets = useSafeAreaInsets();
+  const isLandscape = useIsLandscape();
   const playerStyle = useNoxSetting(state => state.playerStyle);
   const { explorePage, setExplorePage } = useAPM();
 
@@ -34,7 +36,7 @@ const Explore = () => {
         containerStyle={{
           backgroundColor: playerStyle.customColors.maskedBackgroundColor,
           flex: 1,
-          paddingTop: insets.top,
+          paddingTop: isLandscape ? 0 : insets.top,
         }}
         iconSize={30}
         iconTabStyle={styles.iconTab}

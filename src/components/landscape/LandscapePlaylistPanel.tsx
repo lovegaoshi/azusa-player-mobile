@@ -19,8 +19,7 @@ export default ({ panelWidth }: Props) => {
   const panelStyle = {
     width: panelWidth,
     // HACK: WHY?
-    height: Dimensions.get('window').height - 25,
-    padddingBottom: 10,
+    height: Dimensions.get('window').height,
   };
 
   return (

@@ -137,10 +137,17 @@ export default (playlist: NoxMedia.Playlist): UsePlaylistRN => {
         callback();
         return;
       }
-      // REVIEW: ideally playFromPlaylist should accept an async function to wait
-      // for it, but performFade is not exactly functional on android (it replies
-      // on an event to emit) so we have to do conditionals outside of playFromPlaylist.
-      performFade(callback);
+
+      TrackPlayer.getPlaybackState().then(isPlaying => {
+        if (isPlaying.state === State.Playing) {
+          // REVIEW: ideally playFromPlaylist should accept an async function to wait
+          // for it, but performFade is not exactly functional on android (it replies
+          // on an event to emit) so we have to do conditionals outside of playFromPlaylist.
+          performFade(callback);
+        } else {
+          callback();
+        }
+      });
     };
     usedPlaylist.playSong(song, playSongCallback, p =>
       clearPlaylistUninterrupted().then(() => setCurrentPlayingList(p)),

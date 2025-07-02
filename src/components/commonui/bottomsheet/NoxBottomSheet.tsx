@@ -4,8 +4,15 @@ import {
   TrueSheetProps,
 } from '@lodev09/react-native-true-sheet';
 import { RefObject, useEffect, useRef, useState } from 'react';
-import { View, ScrollView, StyleSheet, Pressable } from 'react-native';
+import {
+  Dimensions,
+  View,
+  ScrollView,
+  StyleSheet,
+  Pressable,
+} from 'react-native';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { useNoxSetting } from '@stores/useApp';
 import { isAndroid, isOldArch } from '@utils/RNUtils';
@@ -33,12 +40,13 @@ export default (p: Props) => {
     Header = () => null,
     nestedScrollEnabled,
   } = p;
+  const insets = useSafeAreaInsets();
   const playerStyle = useNoxSetting(state => state.playerStyle);
   const [topOffset, setTopOffset] = useState(0);
   const [leftOffset, setLeftOffset] = useState(0);
-  const [scrollViewShouldNest, setScrollViewShouldNest] = useState(false);
+  const [scrollViewShouldNest, setScrollViewShouldNest] = useState<boolean>();
   const [sheetPresent, setSheetPresent] = useState(false);
-  const scrollViewHeight = useRef(0);
+  const { height } = Dimensions.get('window');
   const pressableRef = useRef<View>(null);
   const scrollViewRef = useRef<ScrollView>(null);
 
@@ -75,22 +83,29 @@ export default (p: Props) => {
       <Pressable ref={pressableRef} />
       {/* https://sheet.lodev09.com/troubleshooting#react-native-gesture-handler */}
       <GestureHandlerRootView style={styles.RNGHcontainer}>
+        {(p.sizes?.findIndex?.(v => v.toString().includes('%')) ?? -1) < 0 && (
+          <View style={{ height: insets.top }} />
+        )}
         <Header />
-        <ScrollView
-          onLayout={e =>
-            (scrollViewHeight.current = e.nativeEvent.layout.height)
-          }
-          onContentSizeChange={(_w, h) =>
-            setScrollViewShouldNest(h > scrollViewHeight.current)
-          }
-          // HACK: this is totally not necessary. consider removing
-          nestedScrollEnabled={nestedScrollEnabled ?? scrollViewShouldNest}
-          ref={scrollViewRef}
-          showsVerticalScrollIndicator={false}
-        >
-          {children}
-          <View style={styles.footer} />
-        </ScrollView>
+        {scrollViewShouldNest === undefined ? (
+          <View
+            style={{ position: 'absolute' }}
+            onLayout={e =>
+              setScrollViewShouldNest(e.nativeEvent.layout.height > height)
+            }
+          >
+            {children}
+          </View>
+        ) : (
+          <ScrollView
+            nestedScrollEnabled={nestedScrollEnabled ?? scrollViewShouldNest}
+            ref={scrollViewRef}
+            showsVerticalScrollIndicator={false}
+          >
+            {children}
+            <View style={{ paddingBottom: insets.bottom }} />
+          </ScrollView>
+        )}
       </GestureHandlerRootView>
     </TrueSheet>
   );
@@ -100,5 +115,4 @@ const styles = StyleSheet.create({
   RNGHcontainer: {
     flexGrow: 1,
   },
-  footer: { paddingBottom: 10 },
 });
