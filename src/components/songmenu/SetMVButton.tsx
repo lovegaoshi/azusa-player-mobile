@@ -10,7 +10,7 @@ const ICON = 'video';
 interface Props {
   getSongOnClick: () => NoxMedia.Song;
   disabled?: boolean;
-  onSubmit?: (rename: string) => void;
+  onSubmit?: (s: Partial<NoxMedia.Song>) => void;
   onCancel?: () => void;
   showSheet?: (v: boolean) => void;
 }
@@ -18,7 +18,7 @@ interface Props {
 export default ({
   getSongOnClick,
   disabled = false,
-  onSubmit = (rename: string) => console.log(rename),
+  onSubmit = s => console.log(s),
   onCancel = () => undefined,
   showSheet,
 }: Props) => {
@@ -32,9 +32,9 @@ export default ({
     showSheet?.(true);
   };
 
-  const handleSubmit = (rename: string) => {
+  const handleSubmit = (s: Partial<NoxMedia.Song>) => {
     setDialogOpen(false);
-    onSubmit(rename);
+    onSubmit(s);
   };
 
   return (

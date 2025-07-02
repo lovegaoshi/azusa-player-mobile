@@ -34,6 +34,7 @@ declare global {
       localPath?: string;
 
       backgroundOverride?: string;
+      MVsync?: boolean;
     }
 
     export interface Playlist {
