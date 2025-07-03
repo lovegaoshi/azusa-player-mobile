@@ -55,6 +55,12 @@ export const seconds2MMSS = (sec_num: number) => {
     : `${padding(minutes)}:${padding(seconds)}`;
 };
 
+export const ms2MMSS = (ms: number) => {
+  const mmss = seconds2MMSS(ms / 1000);
+  const msRemainder = ms % 1000;
+  return `${mmss}.${Math.floor(msRemainder / 10)}`;
+};
+
 export const timestampToSeconds = (timestamp: string) => {
   try {
     const timeArray = timestamp.split(':').map(parseFloat);

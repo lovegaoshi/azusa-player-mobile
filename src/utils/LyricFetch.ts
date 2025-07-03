@@ -5,6 +5,7 @@ import kugouLrcFetch from './lrcfetch/kugou';
 import qqLrcFetch from './lrcfetch/qq';
 import qqQrcFetch from './lrcfetch/qqqrc';
 import BiliLrcFetch from './lrcfetch/bili';
+import YTLrcFetch from './lrcfetch/yt';
 import LrcLibFetch from './lrcfetch/lrclib';
 import neteaseFetch from './lrcfetch/netease';
 import { LrcSource } from '@enums/LyricFetch';
@@ -32,6 +33,8 @@ export const searchLyricOptions = async ({
         return await LrcLibFetch.getLrcOptions(searchKey);
       case LrcSource.Netease:
         return await neteaseFetch.getLrcOptions(searchKey);
+      case LrcSource.YT:
+        return await YTLrcFetch.getLrcOptions(song);
       case LrcSource.QQ:
       default:
         return await qqLrcFetch.getLrcOptions(searchKey);
@@ -53,6 +56,8 @@ export const searchLyric = async (searchMID: string, source = LrcSource.QQ) => {
         return await BiliLrcFetch.getLyric(searchMID);
       case LrcSource.Netease:
         return await neteaseFetch.getLyric(searchMID);
+      case LrcSource.YT:
+        return await YTLrcFetch.getLyric(searchMID);
       case LrcSource.QQ:
       default:
         return await qqLrcFetch.getLyric(searchMID);

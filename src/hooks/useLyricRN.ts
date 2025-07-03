@@ -87,6 +87,7 @@ export default (currentSong?: NoxMedia.Song, artist = '') => {
     usedLyric.fetchAndSetLyricOptions(
       adhocTitle,
       [
+        LrcSource.YT,
         LrcSource.QQQrc,
         LrcSource.QQ,
         LrcSource.BiliBili,
