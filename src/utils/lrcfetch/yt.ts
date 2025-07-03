@@ -11,7 +11,7 @@ const getLrcOptions = async (
     if (song?.source !== Source.ytbvideo) return [];
     const ytc = await ytwebClient();
     const info = await ytc.getInfo(song.bvid);
-    const a = await info.getTranscript();
+    await info.getTranscript();
     return [
       {
         key: song.bvid,
