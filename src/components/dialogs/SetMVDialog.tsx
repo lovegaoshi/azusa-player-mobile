@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { Button, Dialog, Portal, Checkbox } from 'react-native-paper';
 import { useTranslation } from 'react-i18next';
-import { View } from 'react-native';
+import { Pressable, View } from 'react-native';
 
 import { PaperText as Text } from '@components/commonui/ScaledText';
 import NoxInput from '@components/dialogs/NoxInput';
@@ -55,7 +55,9 @@ const SongDialog = ({
             status={mvSync ? 'checked' : 'unchecked'}
             onPress={() => setMvSync(v => !v)}
           />
-          <Text>{t('SetMVDialog.MVSynclabel')}</Text>
+          <Pressable onPress={() => setMvSync(v => !v)}>
+            <Text>{t('SetMVDialog.MVSynclabel')}</Text>
+          </Pressable>
         </View>
       </Dialog.Content>
 

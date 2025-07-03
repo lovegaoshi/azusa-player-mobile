@@ -174,7 +174,7 @@
     "downloadFailed": "{{song.parsedName}} 缓存失败"
   },
   "SongOperations": {
-    "setMV": "覆盖背景",
+    "setMV": "动态背景",
     "songDownloadTitle": "下载",
     "songSendToTitle": "送往...",
     "songRenameTitle": "改名...",

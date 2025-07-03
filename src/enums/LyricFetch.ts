@@ -5,4 +5,5 @@ export enum LrcSource {
   BiliBili = 'bilibili',
   LrcLib = 'lrclib',
   Netease = 'netease',
+  YT = 'youtube',
 }
