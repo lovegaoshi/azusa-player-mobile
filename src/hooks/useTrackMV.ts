@@ -3,6 +3,7 @@
 import { RefObject, useEffect, useState } from 'react';
 import { VideoRef } from 'react-native-video';
 import TrackPlayer from 'react-native-track-player';
+import { AppState } from 'react-native';
 
 import { useTrackStore } from '@hooks/useActiveTrack';
 import useRNTPObserverStore from '@stores/RNObserverStore';
@@ -41,6 +42,16 @@ export default (videoRef: RefObject<VideoRef | null>) => {
       // setParsedMV({ type: RESOLVE_TYPE.bvid, identifier: 'BV1Ei4y1b78A' });
     }
   }, [song]);
+
+  useEffect(() => {
+    const subscription = AppState.addEventListener('change', nextAppState => {
+      nextAppState === 'active' && primeVideoPosition();
+    });
+
+    return () => {
+      subscription.remove();
+    };
+  }, []);
 
   return parsedMV;
 };
