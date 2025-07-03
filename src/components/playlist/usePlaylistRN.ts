@@ -122,9 +122,6 @@ export default (playlist: NoxMedia.Playlist): UsePlaylistRN => {
   const playSong = (song: NoxMedia.Song) => {
     toggleMiniplayerVisible();
     const playSongCallback = (playlist: NoxMedia.Playlist) => {
-      TrackPlayer.getPlaybackState().then(s => {
-        s.state !== State.Playing && TPPlay();
-      });
       const setPlaylistPlaymode = () =>
         cycleThroughPlaymode(
           initializePlaybackMode(
@@ -138,21 +135,14 @@ export default (playlist: NoxMedia.Playlist): UsePlaylistRN => {
         callback();
         return;
       }
-
-      TrackPlayer.getPlaybackState().then(isPlaying => {
-        if (isPlaying.state === State.Playing) {
-          // REVIEW: ideally playFromPlaylist should accept an async function to wait
-          // for it, but performFade is not exactly functional on android (it replies
-          // on an event to emit) so we have to do conditionals outside of playFromPlaylist.
-          performFade(callback);
-        } else {
-          callback();
-        }
-      });
+      performFade(callback);
     };
-    usedPlaylist.playSong(song, playSongCallback, p =>
-      clearPlaylistUninterrupted().then(() => setCurrentPlayingList(p)),
-    );
+    usedPlaylist.playSong(song, playSongCallback, p => {
+      clearPlaylistUninterrupted().then(() => setCurrentPlayingList(p));
+      TrackPlayer.getPlaybackState().then(s => {
+        s.state !== State.Playing && TPPlay();
+      });
+    });
   };
 
   const scrollTo = ({
