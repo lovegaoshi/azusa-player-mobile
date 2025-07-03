@@ -32,7 +32,7 @@ export interface UsePlaylist {
   getSongIndex: (item: NoxMedia.Song, index: number) => number;
   playSong: (
     song: NoxMedia.Song,
-    callback: (p: NoxMedia.Playlist, s: NoxMedia.Song) => void,
+    callback: (p: NoxMedia.Playlist, s: NoxMedia.Song) => unknown,
     isPlayingCallback: (p: NoxMedia.Playlist) => void,
   ) => void;
   resetSelected: () => void;
