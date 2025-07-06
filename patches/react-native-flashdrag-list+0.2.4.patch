@@ -1,31 +1,22 @@
 diff --git a/node_modules/react-native-flashdrag-list/src/FlashDragList.tsx b/node_modules/react-native-flashdrag-list/src/FlashDragList.tsx
-index 5dc1689..eae0179 100644
+index e61b462..757b6a7 100644
 --- a/node_modules/react-native-flashdrag-list/src/FlashDragList.tsx
 +++ b/node_modules/react-native-flashdrag-list/src/FlashDragList.tsx
-@@ -12,7 +12,6 @@ import { FlashList, FlashListProps } from '@shopify/flash-list';
- import {
-   GestureDetector,
-   Gesture,
--  createNativeWrapper,
-   ScrollView,
- } from 'react-native-gesture-handler';
- import Animated, {
-@@ -24,8 +23,7 @@ import Animated, {
+@@ -23,7 +23,6 @@ import Animated, {
  } from 'react-native-reanimated';
  import ItemWrapper from './ItemWrapper';
  
--const GestureFlashList = createNativeWrapper(FlashList);
--const AnimatedFlashList = Animated.createAnimatedComponent(GestureFlashList);
-+const AnimatedFlashList = Animated.createAnimatedComponent(FlashList);
+-// const GestureFlashList = createNativeWrapper(FlashList);
+ const AnimatedFlashList = Animated.createAnimatedComponent(FlashList);
  
  type Props = Omit<FlashListProps<any>, 'renderItem'> & {
-   data: Array<any>;
-@@ -81,39 +79,36 @@ const FlashDragList: FunctionComponent<Props> = (props) => {
+@@ -80,49 +79,49 @@ const FlashDragList: FunctionComponent<Props> = (props) => {
    const panScroll = useSharedValue(0);
    const panOffset = useSharedValue(0);
  
 +  const zoomOnActive = useSharedValue(1);
 +
++  
    const endDrag = (fromIndex: number, toIndex: number) => {
 -    const endAnimationDuration = 300
 -    panAbs.value = withTiming((toIndex * itemsSize) + (itemsSize / 2) - scroll.value, {
@@ -64,11 +55,11 @@ index 5dc1689..eae0179 100644
 +      setData(copy);
 +    }
 +    panOffset.value = 0;
-+    panAbs.value = -1;
 +    panScroll.value = 0;
-+    activeIndex.value = -1;
++    //panAbs.value = -1;
++    //activeIndex.value = -1;
 +    setActiveIndexState(-1);
-+    insertIndex.value = -1;
++    //insertIndex.value = -1;
 +    autoScrollSpeed.value = 0;
 +    autoScrollAcc.value = 1;
 +    setActive(false);
@@ -86,7 +77,11 @@ index 5dc1689..eae0179 100644
        return
      avoidDataUpdate.current = false;
      props.onSort?.(fromIndexRef.current, toIndexRef.current);
-@@ -124,6 +119,7 @@ const FlashDragList: FunctionComponent<Props> = (props) => {
+     setCallOnSort(false);
++    insertIndex.value = -1;
+   }, [callOnSort])
+ 
+   const beginDrag = useCallback((index: number) => {
      activeIndex.value = index;
      setActiveIndexState(index);
      setActive(true);
@@ -94,7 +89,7 @@ index 5dc1689..eae0179 100644
    }, []);
  
    useEffect(() => {
-@@ -135,11 +131,11 @@ const FlashDragList: FunctionComponent<Props> = (props) => {
+@@ -134,11 +133,11 @@ const FlashDragList: FunctionComponent<Props> = (props) => {
              offset:
                scroll.value +
                autoScrollSpeed.value *
@@ -109,7 +104,7 @@ index 5dc1689..eae0179 100644
          }, 16);
        }
      } else {
-@@ -162,6 +158,7 @@ const FlashDragList: FunctionComponent<Props> = (props) => {
+@@ -161,6 +160,7 @@ const FlashDragList: FunctionComponent<Props> = (props) => {
      .manualActivation(isIOS)
      .enabled(layout !== null)
      .shouldCancelWhenOutside(false)
@@ -117,7 +112,7 @@ index 5dc1689..eae0179 100644
      .onTouchesMove((_evt, stateManager) => {
        if (!isIOS) return;
        if (active || activeIndexState >= 0 || activeIndex.value >= 0)
-@@ -213,8 +210,9 @@ const FlashDragList: FunctionComponent<Props> = (props) => {
+@@ -212,8 +212,9 @@ const FlashDragList: FunctionComponent<Props> = (props) => {
    const extraData = useMemo(
      () => ({
        active,
@@ -128,7 +123,7 @@ index 5dc1689..eae0179 100644
    );
  
    const renderItem = ({ item, index }: any) => {
-@@ -240,6 +238,7 @@ const FlashDragList: FunctionComponent<Props> = (props) => {
+@@ -239,6 +240,7 @@ const FlashDragList: FunctionComponent<Props> = (props) => {
          {
            translateY: panAbs.value - itemsSize / 2,
          },
@@ -136,7 +131,7 @@ index 5dc1689..eae0179 100644
        ],
      };
    }, [itemsSize]);
-@@ -291,7 +290,7 @@ const FlashDragList: FunctionComponent<Props> = (props) => {
+@@ -290,7 +292,7 @@ const FlashDragList: FunctionComponent<Props> = (props) => {
                data[Math.max(0, activeIndexState)],
                Math.max(0, activeIndexState),
                true,
