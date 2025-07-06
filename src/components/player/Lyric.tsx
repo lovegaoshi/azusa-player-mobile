@@ -1,6 +1,13 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react';
-import { Modal, View, StyleSheet, Button, ViewStyle } from 'react-native';
+import {
+  Modal,
+  View,
+  StyleSheet,
+  Button,
+  ViewStyle,
+  Pressable,
+} from 'react-native';
 import { Lrc as Lyric, KaraokeMode } from 'react-native-lyric';
 import { Track, useProgress } from 'react-native-track-player';
 import { IconButton, ActivityIndicator } from 'react-native-paper';
@@ -86,11 +93,13 @@ export const LyricView = ({
         usedLyric={usedLyric}
       />
       {loading ? (
-        <ActivityIndicator
-          size={70}
-          // HACK: ???
-          style={styles.lrcView}
-        />
+        <Pressable onPress={onPress}>
+          <ActivityIndicator
+            size={70}
+            // HACK: ???
+            style={styles.lrcView}
+          />
+        </Pressable>
       ) : (
         <Lyric
           fontScale={
