@@ -57,7 +57,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '22'
-          cache: 'yarn
+          cache: 'yarn'
 
       - name: 'Create env file'
         run: |
