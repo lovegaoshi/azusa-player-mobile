@@ -27,6 +27,7 @@ import { isAndroid10 } from '@utils/RNUtils';
 import { copyCacheToDir } from '@utils/download/download';
 import NoxBottomSheet from '@components/commonui/bottomsheet/NoxBottomSheet';
 import SetMVButton from '@components/songmenu/SetMVButton';
+import { useTrackStore } from '@hooks/useActiveTrack';
 
 interface UsePlaylist {
   checking: boolean;
@@ -50,6 +51,7 @@ export default ({ usePlaylist, prepareForLayoutAnimationRender }: Props) => {
   const songMenuSongIndexes = useNoxSetting(state => state.songMenuSongIndexes);
   const currentPlaylist = useNoxSetting(state => state.currentPlaylist);
   const playerSetting = useNoxSetting(state => state.playerSetting);
+  const updateActiveSong = useTrackStore(state => state.updateSong);
   const playlistCRUD = usePlaylistCRUD(currentPlaylist);
   const setPlaylistSearchAutoFocus = useNoxSetting(
     state => state.setPlaylistSearchAutoFocus,
@@ -226,13 +228,14 @@ export default ({ usePlaylist, prepareForLayoutAnimationRender }: Props) => {
         />
       )}
       <SetMVButton
-        onSubmit={s =>
+        onSubmit={s => {
           playlistCRUD.updateSongIndex(
             songMenuSongIndexes[0],
             s,
             currentPlaylist,
-          )
-        }
+          );
+          updateActiveSong(s, song.id);
+        }}
         getSongOnClick={() => selectedSongs()[0]}
         showSheet={showSheet}
         disabled={checking}
