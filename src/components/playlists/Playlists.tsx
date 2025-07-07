@@ -179,25 +179,23 @@ export default () => {
         onClose={() => setNewPlaylistDialogOpen(false)}
         onSubmit={() => setNewPlaylistDialogOpen(false)}
       />
-      <View style={{ flex: 1 }}>
-        <FlashDragList
-          data={playlistIds}
-          renderItem={renderItem}
-          itemsSize={53}
-          onSort={(fromIndex, toIndex) => {
-            const copy = [...playlistIds];
-            const removed = copy.splice(fromIndex, 1);
-            copy.splice(toIndex, 0, removed[0]!);
-            setPlaylistIds(copy);
-          }}
-          extraData={[
-            currentPlaylist.id,
-            currentPlayingList.id,
-            currentPlaylist.title,
-            playerStyle,
-          ]}
-        />
-      </View>
+      <FlashDragList
+        data={playlistIds}
+        renderItem={renderItem}
+        itemsSize={53}
+        onSort={(fromIndex, toIndex) => {
+          const copy = [...playlistIds];
+          const removed = copy.splice(fromIndex, 1);
+          copy.splice(toIndex, 0, removed[0]!);
+          setPlaylistIds(copy);
+        }}
+        extraData={[
+          currentPlaylist.id,
+          currentPlayingList.id,
+          currentPlaylist.title,
+          playerStyle,
+        ]}
+      />
       <View style={styles.bottomInfo}>
         <Text style={styles.bottomInfoText}>
           {`${playerStyle.metaData.themeName} @ ${playerSetting.noxVersion}`}
