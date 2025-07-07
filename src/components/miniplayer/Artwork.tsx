@@ -52,6 +52,17 @@ export default ({ miniplayerHeight, opacity, onPress, expand }: Props) => {
     );
   });
 
+  const artworkOpacity = useDerivedValue(() => {
+    if (!track?.song?.MVHide || !track?.song?.backgroundOverride) {
+      return opacity.value;
+    }
+    return interpolate(
+      artworkWidth.value,
+      [MinPlayerHeight - 15, width],
+      [opacity.value, 0],
+    );
+  });
+
   const artworkScale = useDerivedValue(() => {
     return artworkWidth.value / width;
   });
@@ -94,7 +105,7 @@ export default ({ miniplayerHeight, opacity, onPress, expand }: Props) => {
         { translateY: artworkTranslateY.value },
         { scale: artworkScale.value },
       ],
-      opacity: opacity.value,
+      opacity: artworkOpacity.value,
       zIndex: opacity.value > 0 ? 1 : -1,
       borderRadius: borderRadius.value,
     };

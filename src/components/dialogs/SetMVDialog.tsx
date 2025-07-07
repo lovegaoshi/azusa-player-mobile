@@ -1,9 +1,7 @@
 import React, { useEffect } from 'react';
 import { Button, Dialog, Portal, Checkbox } from 'react-native-paper';
 import { useTranslation } from 'react-i18next';
-import { Pressable, View } from 'react-native';
 
-import { PaperText as Text } from '@components/commonui/ScaledText';
 import NoxInput from '@components/dialogs/NoxInput';
 import { RESOLVE_TYPE } from '@utils/mediafetch/mainbackgroundfetch';
 
@@ -23,6 +21,7 @@ const SongDialog = ({
   const { t } = useTranslation();
   const [text, setText] = React.useState('');
   const [mvSync, setMvSync] = React.useState<boolean>();
+  const [mvHide, setMvHide] = React.useState<boolean>();
 
   const handleClose = () => {
     onClose();
@@ -32,13 +31,14 @@ const SongDialog = ({
     if (text.startsWith('BV')) {
       finalText = JSON.stringify({ type: RESOLVE_TYPE.bvid, identifier: text });
     }
-    onSubmit({ backgroundOverride: finalText, MVsync: mvSync });
+    onSubmit({ backgroundOverride: finalText, MVsync: mvSync, MVHide: mvHide });
   };
 
   useEffect(() => {
     setText(song.bvid);
     setMvSync(song.MVsync);
-  }, [song]);
+    setMvHide(song.MVHide);
+  }, [song, visible]);
 
   return (
     <Dialog visible={visible} onDismiss={handleClose}>
@@ -50,15 +50,22 @@ const SongDialog = ({
           text={text}
           setText={setText}
         />
-        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-          <Checkbox
-            status={mvSync ? 'checked' : 'unchecked'}
-            onPress={() => setMvSync(v => !v)}
-          />
-          <Pressable onPress={() => setMvSync(v => !v)}>
-            <Text>{t('SetMVDialog.MVSynclabel')}</Text>
-          </Pressable>
-        </View>
+        <Checkbox.Item
+          style={{ justifyContent: 'flex-start' }}
+          labelStyle={{ flexGrow: undefined, flexShrink: undefined }}
+          status={mvSync ? 'checked' : 'unchecked'}
+          onPress={() => setMvSync(v => !v)}
+          label={t('SetMVDialog.MVSyncLabel')}
+          position={'leading'}
+        />
+        <Checkbox.Item
+          style={{ justifyContent: 'flex-start' }}
+          labelStyle={{ flexGrow: undefined, flexShrink: undefined }}
+          status={mvHide ? 'checked' : 'unchecked'}
+          onPress={() => setMvHide(v => !v)}
+          label={t('SetMVDialog.MVHideLabel')}
+          position={'leading'}
+        />
       </Dialog.Content>
 
       <Dialog.Actions>

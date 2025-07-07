@@ -10,7 +10,8 @@ import { removeUndefined } from '@utils/Utils';
 interface TrackStore {
   track: Track | undefined;
   setTrack: (t: Track | undefined) => void;
-  updateTrack: (metadata: Partial<Track> | undefined) => Promise<void>;
+  updateTrack: (metadata?: Partial<Track>) => Promise<void>;
+  updateSong: (metadata?: Partial<NoxMedia.Song>, songID?: string) => void;
 }
 
 // this is a global store; the default export (useTrack) is initialized in useSetupPlayer
@@ -27,6 +28,11 @@ export const useTrackStore = create<TrackStore>((set, get) => ({
     await TrackPlayer.updateMetadataForTrack(index, newMetadata);
     // @ts-ignore-error metadata's url is possibly undefined as its a partial.
     set({ track: { ...cTrack, ...newMetadata } });
+  },
+  updateSong: (metadata = {}, songID) => {
+    const cTrack = get().track;
+    if (cTrack === undefined || (songID && cTrack.song?.id !== songID)) return;
+    set({ track: { ...cTrack, song: { ...cTrack?.song, ...metadata } } });
   },
 }));
 
