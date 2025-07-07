@@ -35,6 +35,7 @@ declare global {
 
       backgroundOverride?: string;
       MVsync?: boolean;
+      MVHide?: boolean;
     }
 
     export interface Playlist {

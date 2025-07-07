@@ -115,7 +115,8 @@
   "SetMVDialog": {
     "title": "为{{song.name}} 选择动态背景...",
     "label": "BV号",
-    "MVSynclabel": "与歌曲同步？"
+    "MVSynclabel": "与歌曲同步？",
+    "MVHideLabel": "隐藏专辑封面"
   },
   "PlaylistsDrawer": {
     "SearchListTitle": "搜索歌单",
