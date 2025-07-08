@@ -148,7 +148,7 @@ export default (playlist: NoxMedia.Playlist): UsePlaylistRN => {
   const scrollTo = ({
     toIndex = -1,
     reset = false,
-    viewPosition = 0,
+    viewPosition = __DEV__ ? 0 : 0.5,
   }: ScrollTo) => {
     let currentIndex =
       toIndex < 0
