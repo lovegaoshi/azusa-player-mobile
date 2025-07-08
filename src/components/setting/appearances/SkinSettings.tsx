@@ -175,7 +175,7 @@ const SkinSettings = () => {
         executeFn: () =>
           scrollViewRef.current?.scrollToIndex({
             index: currentThemeIndex,
-            viewPosition: 0,
+            viewPosition: __DEV__ ? 0 : 0.5,
             animated: false,
           }),
         // @ts-expect-error detect if flashlist is rendered
