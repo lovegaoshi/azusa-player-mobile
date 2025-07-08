@@ -35,7 +35,7 @@ const SongDialog = ({
   };
 
   useEffect(() => {
-    setText(song.bvid);
+    setText(song.backgroundOverride ?? song.bvid);
     setMvSync(song.MVsync);
     setMvHide(song.MVHide);
   }, [song, visible]);
