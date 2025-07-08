@@ -175,11 +175,11 @@ const SkinSettings = () => {
         executeFn: () =>
           scrollViewRef.current?.scrollToIndex({
             index: currentThemeIndex,
-            viewPosition: 1,
+            viewPosition: 0,
             animated: false,
           }),
         // @ts-expect-error detect if flashlist is rendered
-        loopCheck: () => scrollViewRef.current.rlvRef._layout.height > 0,
+        loopCheck: () => scrollViewRef.current?.getLayout(0) !== undefined,
       });
     }
   }, []);

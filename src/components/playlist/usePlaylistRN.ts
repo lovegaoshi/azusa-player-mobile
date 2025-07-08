@@ -148,14 +148,13 @@ export default (playlist: NoxMedia.Playlist): UsePlaylistRN => {
   const scrollTo = ({
     toIndex = -1,
     reset = false,
-    viewPosition = 0.5,
+    viewPosition = 0,
   }: ScrollTo) => {
     let currentIndex =
       toIndex < 0
         ? playlist.songList.findIndex(song => song.id === currentPlayingId)
         : toIndex;
     if (currentIndex === -1 && reset) currentIndex = 0;
-    let layoutHeightCheck = 0;
     if (currentIndex > -1) {
       execWhenTrue({
         funcName: 'playlist index priming',
@@ -166,17 +165,12 @@ export default (playlist: NoxMedia.Playlist): UsePlaylistRN => {
             animated: false,
           }),
         loopCheck: async () => {
-          const layoutHeight =
-            // @ts-expect-error detect if flashlist is rendered
-            playlistRef?.current?.rlvRef?._layout?.height ?? 0;
-          if (layoutHeight < 1.1) {
-            return false;
-          }
-          if (layoutHeightCheck !== layoutHeight) {
-            layoutHeightCheck = layoutHeight;
-            return false;
-          }
-          return true;
+          if (
+            playlist.songList.length === 0 ||
+            playlistRef?.current?.getLayout(0) !== undefined
+          )
+            return true;
+          return false;
         },
       });
     }

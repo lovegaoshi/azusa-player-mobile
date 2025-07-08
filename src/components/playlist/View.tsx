@@ -16,7 +16,6 @@ const Playlist = () => {
   const currentPlaylist = useNoxSetting(state => state.currentPlaylist);
   const usedPlaylist = usePlaylist(currentPlaylist);
 
-  console.log(insets);
   return (
     <View
       style={[
