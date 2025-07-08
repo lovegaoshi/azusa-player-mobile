@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { IconButton, TouchableRipple } from 'react-native-paper';
 import { Pressable, View, StyleSheet } from 'react-native';
 import FlashDragList from 'react-native-flashdrag-list';
+import { useDrawerProgress } from '@react-navigation/drawer';
 
 import { useNoxSetting } from '@stores/useApp';
 import { NoxRoutes } from '@enums/Routes';
@@ -16,6 +17,11 @@ import usePlaylistBrowseTree from '@hooks/usePlaylistBrowseTree';
 import useNavigation from '@hooks/useNavigation';
 import { useIsLandscape } from '@hooks/useOrientation';
 import { PaperText as Text } from '@components/commonui/ScaledText';
+import {
+  runOnJS,
+  useAnimatedReaction,
+  useSharedValue,
+} from 'react-native-reanimated';
 
 interface NewButtonProps {
   setNewPlaylistDialogOpen: (v: boolean) => void;
@@ -37,6 +43,7 @@ const SearchPlaylistAsNewButton = ({
 
 export default () => {
   const [dialogOpen, setDialogOpen] = useState(false);
+  const [drawerOpen, setDrawerOpen] = useState(false);
   const navigation = useNavigation();
   const isLandscape = useIsLandscape();
   const currentPlaylist = useNoxSetting(state => state.currentPlaylist);
@@ -51,6 +58,16 @@ export default () => {
   const scroll = useNoxSetting(state => state.incSongListScrollCounter);
   const { removePlaylist } = usePlaylistBrowseTree();
   const { TwoWayAlert } = useAlert();
+  const progress = useDrawerProgress();
+  const scrollProgress = useSharedValue(0);
+
+  useAnimatedReaction(
+    () => progress.value,
+    (c, p) => {
+      if (p === 0) runOnJS(setDrawerOpen)(true);
+      if (c === 0) runOnJS(setDrawerOpen)(false);
+    },
+  );
 
   // HACK: I know its bad! But somehow this hook isnt updating in its own
   // useEffects...
@@ -179,23 +196,27 @@ export default () => {
         onClose={() => setNewPlaylistDialogOpen(false)}
         onSubmit={() => setNewPlaylistDialogOpen(false)}
       />
-      <FlashDragList
-        data={playlistIds}
-        renderItem={renderItem}
-        itemsSize={53}
-        onSort={(fromIndex, toIndex) => {
-          const copy = [...playlistIds];
-          const removed = copy.splice(fromIndex, 1);
-          copy.splice(toIndex, 0, removed[0]!);
-          setPlaylistIds(copy);
-        }}
-        extraData={[
-          currentPlaylist.id,
-          currentPlayingList.id,
-          currentPlaylist.title,
-          playerStyle,
-        ]}
-      />
+      {drawerOpen && (
+        <FlashDragList
+          onScroll={e => (scrollProgress.value = e.nativeEvent.contentOffset.y)}
+          startPosition={scrollProgress}
+          data={playlistIds}
+          renderItem={renderItem}
+          itemsSize={53}
+          onSort={(fromIndex, toIndex) => {
+            const copy = [...playlistIds];
+            const removed = copy.splice(fromIndex, 1);
+            copy.splice(toIndex, 0, removed[0]!);
+            setPlaylistIds(copy);
+          }}
+          extraData={[
+            currentPlaylist.id,
+            currentPlayingList.id,
+            currentPlaylist.title,
+            playerStyle,
+          ]}
+        />
+      )}
       <View style={styles.bottomInfo}>
         <Text style={styles.bottomInfoText}>
           {`${playerStyle.metaData.themeName} @ ${playerSetting.noxVersion}`}
