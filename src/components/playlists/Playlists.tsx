@@ -137,6 +137,8 @@ export default () => {
     );
   };
 
+  if (!drawerOpen) return <></>;
+
   return (
     <View style={styles.flexContainer}>
       <TouchableRipple
@@ -196,27 +198,25 @@ export default () => {
         onClose={() => setNewPlaylistDialogOpen(false)}
         onSubmit={() => setNewPlaylistDialogOpen(false)}
       />
-      {drawerOpen && (
-        <FlashDragList
-          onScroll={e => (scrollProgress.value = e.nativeEvent.contentOffset.y)}
-          startPosition={scrollProgress}
-          data={playlistIds}
-          renderItem={renderItem}
-          itemsSize={53}
-          onSort={(fromIndex, toIndex) => {
-            const copy = [...playlistIds];
-            const removed = copy.splice(fromIndex, 1);
-            copy.splice(toIndex, 0, removed[0]!);
-            setPlaylistIds(copy);
-          }}
-          extraData={[
-            currentPlaylist.id,
-            currentPlayingList.id,
-            currentPlaylist.title,
-            playerStyle,
-          ]}
-        />
-      )}
+      <FlashDragList
+        onScroll={e => (scrollProgress.value = e.nativeEvent.contentOffset.y)}
+        startPosition={scrollProgress}
+        data={playlistIds}
+        renderItem={renderItem}
+        itemsSize={53}
+        onSort={(fromIndex, toIndex) => {
+          const copy = [...playlistIds];
+          const removed = copy.splice(fromIndex, 1);
+          copy.splice(toIndex, 0, removed[0]!);
+          setPlaylistIds(copy);
+        }}
+        extraData={[
+          currentPlaylist.id,
+          currentPlayingList.id,
+          currentPlaylist.title,
+          playerStyle,
+        ]}
+      />
       <View style={styles.bottomInfo}>
         <Text style={styles.bottomInfoText}>
           {`${playerStyle.metaData.themeName} @ ${playerSetting.noxVersion}`}
