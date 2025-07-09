@@ -65,6 +65,7 @@ export const _playFromPlaylist = async ({
       song = randomChoice(playlist.songList);
     }
   }
+  logger.debug(`[playfromPlaylist] playing ${song.id} from ${playlist.id}`);
   setPlayingIndex(0, song.id);
   setCurrentPlayingId(song.id);
   logger.debug(
