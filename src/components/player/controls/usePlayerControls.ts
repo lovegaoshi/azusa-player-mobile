@@ -74,7 +74,7 @@ export default () => {
     const { playmode, playingList } = getState();
     saveLastPlayDuration(event.position);
     const currentSongId = track?.song?.id ?? '';
-    const sbSkip = checkSponsorBlock(event.position);
+    const sbSkip = checkSponsorBlock(event.position, currentSongId);
     if (sbSkip) {
       return TPSeek(sbSkip);
     }
