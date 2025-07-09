@@ -112,6 +112,7 @@ export default () => {
           `[crossfade] crossfading: ${event.position}, ${trueDuration}, ${playerSetting.crossfade} to ${nextSong.name} @ ${r128gain}`,
         );
         setCrossfadingId(currentSongId);
+        setCrossfadeId('');
         setCrossfaded(true);
         return TrackPlayer.crossFade(
           playerSetting.crossfade * 1000,
