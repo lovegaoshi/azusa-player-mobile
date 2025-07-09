@@ -67,7 +67,7 @@ const useSnack = create<NoxSnack>((set, get) => ({
               snackDuration,
               snackOnDismiss: () => set({ snackVisible: false }),
             }),
-          100,
+          1000,
         );
       } catch (e) {
         logger.error(e);
@@ -80,7 +80,7 @@ const useSnack = create<NoxSnack>((set, get) => ({
               snackDuration,
               snackOnDismiss: () => set({ snackVisible: false }),
             }),
-          100,
+          1000,
         );
       }
       callback?.();
