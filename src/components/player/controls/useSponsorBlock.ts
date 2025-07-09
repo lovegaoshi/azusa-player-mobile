@@ -5,21 +5,31 @@ import useSnack from '@stores/useSnack';
 import { ActionType, SponsorBlockBili } from '@utils/sponsorblock/Constants';
 import useNoxSetting from '@stores/useApp';
 import { getSponsorBlock } from '@utils/sponsorblock/parser';
+import logger from '@utils/Logger';
+
+interface SponsorBlockState {
+  songid: string;
+  sponsorBlock: SponsorBlockBili[];
+}
 
 export default () => {
   const setSnack = useSnack(state => state.setSnack);
   const { t } = useTranslation();
   const playerSetting = useNoxSetting(state => state.playerSetting);
-  const [sponsorBlock, setSponsorBlock] = useState<SponsorBlockBili[]>([]);
+  const [sponsorBlock, setSponsorBlock] = useState<SponsorBlockState>();
 
   const initSponsorBlock = (song: NoxMedia.Song) => {
     if (playerSetting.sponsorBlockEnabled) {
-      getSponsorBlock(song).then(setSponsorBlock);
+      logger.debug(`[SponsorBlock] init for ${song.name}`);
+      getSponsorBlock(song).then(sponsorBlock =>
+        setSponsorBlock({ songid: song.id, sponsorBlock }),
+      );
     }
   };
 
-  const checkSponsorBlock = (position: number) => {
-    for (const sb of sponsorBlock) {
+  const checkSponsorBlock = (position: number, songid: string) => {
+    if (songid !== sponsorBlock?.songid) return undefined;
+    for (const sb of sponsorBlock?.sponsorBlock ?? []) {
       if (
         playerSetting.sponsorBlockCat.includes(sb.category) &&
         sb.actionType === ActionType.Skip &&
