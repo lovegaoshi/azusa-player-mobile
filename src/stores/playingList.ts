@@ -43,6 +43,9 @@ export const setPlayingIndex = (index = 0, songId?: string) => {
       return;
     }
   }
+  logger.debug(
+    `[setPlayingIndex] moving playing index to ${index} / ${songId}`,
+  );
   playlistStore.setState({
     currentPlayingIndex: index,
     currentPlayingId: songId,
@@ -50,13 +53,13 @@ export const setPlayingIndex = (index = 0, songId?: string) => {
 };
 
 interface PlayNextIndex {
-  direction: number;
-  set: boolean;
+  direction?: number;
+  set?: boolean;
 }
 /**
  * WARN: actually moves currentPlayingIndex
  */
-const playNextIndex = ({ direction = 1, set = true }: PlayNextIndex) => {
+export const playNextIndex = ({ direction = 1, set = true }: PlayNextIndex) => {
   const { currentPlayingIndex, playingList } = playlistStore.getState();
   let newIndex = currentPlayingIndex + direction;
   if (newIndex < 0) {
@@ -64,6 +67,7 @@ const playNextIndex = ({ direction = 1, set = true }: PlayNextIndex) => {
   } else if (newIndex >= playingList.length) {
     newIndex = 0;
   }
+  logger.debug(`[playNextIndex] moving to ${newIndex}, ${set}`);
   if (set) setPlayingIndex(newIndex);
   return newIndex;
 };

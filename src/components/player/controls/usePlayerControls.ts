@@ -10,7 +10,7 @@ import useTPControls from '@hooks/useTPControls';
 import { saveLastPlayDuration } from '@utils/ChromeStorage';
 import { logger } from '@utils/Logger';
 import appStore, { setCurrentPlaying, setCrossfaded } from '@stores/appStore';
-import noxPlayingList from '@stores/playingList';
+import noxPlayingList, { playNextIndex } from '@stores/playingList';
 import { NoxRepeatMode } from '@enums/RepeatMode';
 import usePlaylistCRUD from '@hooks/usePlaylistCRUD';
 import { getR128Gain, getABRepeat } from '@utils/db/sqlAPI';
@@ -87,7 +87,7 @@ export default () => {
       logger.debug(
         `[crossfade] preparing crossfade at ${event.position}/${event.duration}`,
       );
-      await prepareSkipToNext();
+      await prepareSkipToNext(false);
       setCrossfadeId(track?.song?.id ?? '');
       setBRepeatDuration(event.duration * abRepeat[1]);
       return TrackPlayer.crossFadePrepare();
@@ -114,6 +114,9 @@ export default () => {
         setCrossfadingId(currentSongId);
         setCrossfadeId('');
         setCrossfaded(true);
+        // HACK: manually update playing index.
+        // this needs to be refactored at some point (eg setting index hooked inside useActiveTrack)
+        playNextIndex({});
         return TrackPlayer.crossFade(
           playerSetting.crossfade * 1000,
           20,
