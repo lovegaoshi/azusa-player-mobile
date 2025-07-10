@@ -17,11 +17,7 @@ import usePlaylistBrowseTree from '@hooks/usePlaylistBrowseTree';
 import useNavigation from '@hooks/useNavigation';
 import { useIsLandscape } from '@hooks/useOrientation';
 import { PaperText as Text } from '@components/commonui/ScaledText';
-import {
-  runOnJS,
-  useAnimatedReaction,
-  useSharedValue,
-} from 'react-native-reanimated';
+import { runOnJS, useAnimatedReaction } from 'react-native-reanimated';
 
 interface NewButtonProps {
   setNewPlaylistDialogOpen: (v: boolean) => void;
