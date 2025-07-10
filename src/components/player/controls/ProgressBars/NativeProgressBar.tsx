@@ -46,6 +46,8 @@ export const SimpleProgressBar = ({
       thumbSize={thumbSize}
       sliderCornerRoundness={100}
       thumbImage={progressThumbImage ? { uri: progressThumbImage } : undefined}
+      // this is effectively calculated in seconds - default is total 128 ticks (duration/128 steps)
+      step={progressInterval / 1000}
     />
   );
 };
