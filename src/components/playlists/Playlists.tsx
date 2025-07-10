@@ -17,11 +17,7 @@ import usePlaylistBrowseTree from '@hooks/usePlaylistBrowseTree';
 import useNavigation from '@hooks/useNavigation';
 import { useIsLandscape } from '@hooks/useOrientation';
 import { PaperText as Text } from '@components/commonui/ScaledText';
-import {
-  runOnJS,
-  useAnimatedReaction,
-  useSharedValue,
-} from 'react-native-reanimated';
+import { runOnJS, useAnimatedReaction } from 'react-native-reanimated';
 
 interface NewButtonProps {
   setNewPlaylistDialogOpen: (v: boolean) => void;
@@ -59,18 +55,13 @@ export default () => {
   const { removePlaylist } = usePlaylistBrowseTree();
   const { TwoWayAlert } = useAlert();
   const progress = useDrawerProgress();
-  const scrollProgress = useSharedValue(0);
 
   useAnimatedReaction(
     () => progress.value,
-    (c, p) => {
-      if (p === 0) runOnJS(setDrawerOpen)(true);
-      if (c === 0) runOnJS(setDrawerOpen)(false);
+    c => {
+      runOnJS(setDrawerOpen)(c === 1);
     },
   );
-
-  // HACK: I know its bad! But somehow this hook isnt updating in its own
-  // useEffects...
 
   // HACK: tried to make searchList draweritem button as addPlaylistButton, but
   // dialog disposes on textinput focus. created a dialog directly in this component
@@ -137,8 +128,6 @@ export default () => {
     );
   };
 
-  if (!drawerOpen) return <></>;
-
   return (
     <View style={styles.flexContainer}>
       <TouchableRipple
@@ -199,8 +188,7 @@ export default () => {
         onSubmit={() => setNewPlaylistDialogOpen(false)}
       />
       <FlashDragList
-        onScroll={e => (scrollProgress.value = e.nativeEvent.contentOffset.y)}
-        startPosition={scrollProgress}
+        loaded={drawerOpen}
         data={playlistIds}
         renderItem={renderItem}
         itemsSize={53}
