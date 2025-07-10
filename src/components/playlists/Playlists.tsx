@@ -1,8 +1,12 @@
 import React, { useState } from 'react';
 import { IconButton, TouchableRipple } from 'react-native-paper';
-import { Pressable, View, StyleSheet } from 'react-native';
+import { Pressable, View, StyleSheet, Dimensions } from 'react-native';
 import FlashDragList from 'react-native-flashdrag-list';
 import { useDrawerProgress } from '@react-navigation/drawer';
+import DraggableFlatList, {
+  ScaleDecorator,
+  RenderItemParams,
+} from 'react-native-draggable-flatlist';
 
 import { useNoxSetting } from '@stores/useApp';
 import { NoxRoutes } from '@enums/Routes';
@@ -43,7 +47,6 @@ const SearchPlaylistAsNewButton = ({
 
 export default () => {
   const [dialogOpen, setDialogOpen] = useState(false);
-  const [drawerOpen, setDrawerOpen] = useState(false);
   const navigation = useNavigation();
   const isLandscape = useIsLandscape();
   const currentPlaylist = useNoxSetting(state => state.currentPlaylist);
@@ -58,16 +61,6 @@ export default () => {
   const scroll = useNoxSetting(state => state.incSongListScrollCounter);
   const { removePlaylist } = usePlaylistBrowseTree();
   const { TwoWayAlert } = useAlert();
-  const progress = useDrawerProgress();
-  const scrollProgress = useSharedValue(0);
-
-  useAnimatedReaction(
-    () => progress.value,
-    (c, p) => {
-      if (p === 0) runOnJS(setDrawerOpen)(true);
-      if (c === 0) runOnJS(setDrawerOpen)(false);
-    },
-  );
 
   // HACK: I know its bad! But somehow this hook isnt updating in its own
   // useEffects...
@@ -100,44 +93,39 @@ export default () => {
     }
   };
 
-  const renderItem = (
-    item: string,
-    index: number,
-    active: boolean,
-    beginDrag: () => any,
-  ) => {
-    const playlist = playlists[item];
+  const renderItem = ({
+    item,
+    drag,
+    isActive,
+  }: RenderItemParams<NoxMedia.Playlist>) => {
     return (
-      <TouchableRipple
-        key={index}
-        onPress={() => goToPlaylist(item)}
-        onLongPress={beginDrag}
-        style={[
-          {
-            backgroundColor:
-              currentPlaylist.id === item
-                ? // this is a special high contrast color than primaryContainer.
-                  (playerStyle.customColors.playlistDrawerBackgroundColor ??
-                  playerStyle.colors.primaryContainer)
-                : undefined,
-          },
-        ]}
-      >
-        <PlaylistItem
-          beginDrag={beginDrag}
-          item={playlist}
-          confirmOnDelete={confirmOnDelete}
-          leadColor={
-            currentPlayingList.id === item
-              ? playerStyle.colors.primary
-              : undefined
-          }
-        />
-      </TouchableRipple>
+      <ScaleDecorator>
+        <TouchableRipple
+          onLongPress={drag}
+          disabled={isActive}
+          onPress={() => goToPlaylist(item.id)}
+          style={[
+            {
+              backgroundColor:
+                currentPlaylist.id === item?.id
+                  ? playerStyle.customColors.playlistDrawerBackgroundColor
+                  : undefined,
+            },
+          ]}
+        >
+          <PlaylistItem
+            item={item}
+            confirmOnDelete={confirmOnDelete}
+            leadColor={
+              currentPlayingList.id === item?.id
+                ? playerStyle.colors.primary //customColors.playlistDrawerBackgroundColor
+                : undefined
+            }
+          />
+        </TouchableRipple>
+      </ScaleDecorator>
     );
   };
-
-  if (!drawerOpen) return <></>;
 
   return (
     <View style={styles.flexContainer}>
@@ -198,24 +186,14 @@ export default () => {
         onClose={() => setNewPlaylistDialogOpen(false)}
         onSubmit={() => setNewPlaylistDialogOpen(false)}
       />
-      <FlashDragList
-        onScroll={e => (scrollProgress.value = e.nativeEvent.contentOffset.y)}
-        startPosition={scrollProgress}
-        data={playlistIds}
+      <DraggableFlatList
+        style={{ maxHeight: Dimensions.get('window').height - 380 }}
+        data={playlistIds.map(val => playlists[val])}
+        onDragEnd={({ data }) =>
+          setPlaylistIds(data.map(playlist => playlist.id))
+        }
+        keyExtractor={item => item?.id}
         renderItem={renderItem}
-        itemsSize={53}
-        onSort={(fromIndex, toIndex) => {
-          const copy = [...playlistIds];
-          const removed = copy.splice(fromIndex, 1);
-          copy.splice(toIndex, 0, removed[0]!);
-          setPlaylistIds(copy);
-        }}
-        extraData={[
-          currentPlaylist.id,
-          currentPlayingList.id,
-          currentPlaylist.title,
-          playerStyle,
-        ]}
       />
       <View style={styles.bottomInfo}>
         <Text style={styles.bottomInfoText}>

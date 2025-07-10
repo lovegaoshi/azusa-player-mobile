@@ -109,6 +109,7 @@
     "react-native-buffer": "^6.0.4",
     "react-native-carplay": "2.4.1-beta.0",
     "react-native-device-info": "^14.0.4",
+    "react-native-draggable-flatlist": "^4.0.3",
     "react-native-edge-to-edge": "^1.6.2",
     "react-native-flashdrag-list": "https://lovegaoshi@github.com/lovegaoshi/react-native-flashdrag-list.git#commit=6e18c4877dc58a108f3d20a02db76ae4592ac2cc",
     "react-native-gesture-handler": "~2.25.0",
