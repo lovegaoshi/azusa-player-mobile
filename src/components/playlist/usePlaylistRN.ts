@@ -148,7 +148,7 @@ export default (playlist: NoxMedia.Playlist): UsePlaylistRN => {
   const scrollTo = ({
     toIndex = -1,
     reset = false,
-    viewPosition = __DEV__ ? 0 : 0.5,
+    viewPosition,
   }: ScrollTo) => {
     let currentIndex =
       toIndex < 0
@@ -161,7 +161,11 @@ export default (playlist: NoxMedia.Playlist): UsePlaylistRN => {
         executeFn: () =>
           playlistRef.current?.scrollToIndex({
             index: currentIndex,
-            viewPosition: viewPosition,
+            viewPosition:
+              (viewPosition ??
+              (playlistRef.current?.getWindowSize?.()?.height ?? 0) > 0)
+                ? 0.5
+                : -5,
             animated: false,
           }),
         loopCheck: async () => {
@@ -207,6 +211,7 @@ export default (playlist: NoxMedia.Playlist): UsePlaylistRN => {
       searchAndEnableSearch(SearchRegex.cachedMatch.text);
       handleSearch(SearchRegex.cachedMatch.text);
       setPlaylistSearchAutoFocus(false);
+      setTimeout(() => scrollTo({}), 1);
     }
   }, [playlist]);
 
