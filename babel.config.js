@@ -59,6 +59,7 @@ module.exports = api => {
             '@components': './src/components',
             '@types': './src/types',
             '@utils': './src/utils',
+            '@network': './src/network',
             '@contexts': './src/contexts',
             '@enums': './src/enums',
             '@objects': './src/objects',

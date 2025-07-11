@@ -3,11 +3,7 @@ import { Linking, StyleSheet, View } from 'react-native';
 import { IconButton } from 'react-native-paper';
 import RNSvgaPlayer from 'react-native-svga-player';
 
-import {
-  checkBVLiked,
-  sendBVLike,
-  sendBVTriple,
-} from '@utils/Bilibili/BiliOperate';
+import { checkBVLiked, sendBVLike, sendBVTriple } from '@network/like/bilibili';
 import { useNoxSetting } from '@stores/useApp';
 import { logger } from '@utils/Logger';
 import { useTrackStore } from '@hooks/useActiveTrack';

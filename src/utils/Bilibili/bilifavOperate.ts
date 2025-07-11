@@ -1,7 +1,7 @@
 import bfetch from '@utils/BiliFetch';
 import { getBiliJct } from '@utils/Bilibili/biliCookies';
 import getBiliUser from './BiliUser';
-import { sendBVFavorite } from './BiliOperate';
+import { sendBVFavorite } from '@network/like/bilibili';
 import { getFavListBVID } from '../mediafetch/bilifavlist';
 import { humanishApiLimiter } from '../mediafetch/throttle';
 import { getPlaylistUniqBVIDs } from '@objects/Playlist';
