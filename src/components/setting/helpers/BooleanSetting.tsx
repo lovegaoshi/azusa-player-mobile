@@ -13,6 +13,7 @@ const BooleanSetting = ({
   reRender = false,
   checkbox = false,
   callback,
+  delayedLoading = true,
 }: SettingEntry) => {
   const { t } = useTranslation();
   const playerStyle = useNoxSetting(state => state.playerStyle);
@@ -61,7 +62,7 @@ const BooleanSetting = ({
           </Text>
         </View>
         <View style={styles.switchContainer}>
-          {loaded &&
+          {(!delayedLoading || loaded) &&
             (checkbox ? (
               <Checkbox
                 status={playerSetting[settingName] ? 'checked' : 'unchecked'}
