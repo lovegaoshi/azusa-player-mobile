@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 
 import NoxInput from '@components/dialogs/NoxInput';
 import { RESOLVE_TYPE } from '@utils/mediafetch/mainbackgroundfetch';
+import { extractMV } from '@hooks/useTrackMV';
 
 interface Props {
   visible: boolean;
@@ -35,7 +36,7 @@ const SongDialog = ({
   };
 
   useEffect(() => {
-    setText(song.backgroundOverride ?? song.bvid);
+    setText(extractMV(song));
     setMvSync(song.MVsync);
     setMvHide(song.MVHide);
   }, [song, visible]);
