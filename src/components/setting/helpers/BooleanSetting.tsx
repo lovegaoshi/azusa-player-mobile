@@ -18,6 +18,7 @@ const BooleanSetting = ({
   const playerStyle = useNoxSetting(state => state.playerStyle);
   const playerSetting = useNoxSetting(state => state.playerSetting);
   const setPlayerSetting = useNoxSetting(state => state.setPlayerSetting);
+  const [loaded, setLoaded] = React.useState(false);
 
   const togglePlaylistReRender = useNoxSetting(
     state => state.togglePlaylistShouldReRender,
@@ -33,6 +34,10 @@ const BooleanSetting = ({
       togglePlaylistReRender();
     }
   };
+
+  React.useEffect(() => {
+    setTimeout(() => setLoaded(true), 1);
+  }, []);
 
   return (
     <TouchableRipple onPress={onToggle} style={styles.touchableRipple}>
@@ -56,17 +61,18 @@ const BooleanSetting = ({
           </Text>
         </View>
         <View style={styles.switchContainer}>
-          {checkbox ? (
-            <Checkbox
-              status={playerSetting[settingName] ? 'checked' : 'unchecked'}
-              onPress={onToggle}
-            />
-          ) : (
-            <Switch
-              value={playerSetting[settingName]}
-              onValueChange={onToggle}
-            />
-          )}
+          {loaded &&
+            (checkbox ? (
+              <Checkbox
+                status={playerSetting[settingName] ? 'checked' : 'unchecked'}
+                onPress={onToggle}
+              />
+            ) : (
+              <Switch
+                value={playerSetting[settingName]}
+                onValueChange={onToggle}
+              />
+            ))}
         </View>
       </View>
     </TouchableRipple>
