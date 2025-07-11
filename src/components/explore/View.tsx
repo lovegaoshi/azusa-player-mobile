@@ -51,9 +51,7 @@ const Explore = () => {
 
 export default () => (
   <AutoUnmountNavView>
-    <DelayedComponent>
-      <Explore />
-    </DelayedComponent>
+    <Explore />
   </AutoUnmountNavView>
 );
 
