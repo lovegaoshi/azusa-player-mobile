@@ -15,22 +15,33 @@ import { BottomTabRouteIcons as RouteIcons } from '@enums/BottomTab';
 import useNavigation from '@hooks/useNavigation';
 import FlexView from '../commonui/FlexViewNewArch';
 import useDrawerStatus from '@hooks/useDrawerStatus';
+import { DrawerNavigationHelpers } from '@react-navigation/drawer/lib/typescript/src/types';
 
 interface Props {
   view: NoxRoutes;
   routeIcon?: RouteIcons;
   icon: string;
   text: string;
+  navigation: DrawerNavigationHelpers;
 }
-const RenderDrawerItem = ({ view, icon, text, routeIcon }: Props) => {
-  const navigation = useNavigation();
+const RenderDrawerItem = ({
+  view,
+  icon,
+  text,
+  routeIcon,
+  navigation,
+}: Props) => {
+  const noxNavigation = useNavigation(navigation);
   const { t } = useTranslation();
   const playerStyle = useNoxSetting(state => state.playerStyle);
 
   return (
     <TouchableRipple
       onPress={() =>
-        navigation.navigate({ route: view, setIcon: routeIcon !== undefined })
+        noxNavigation.navigate({
+          route: view,
+          setIcon: routeIcon !== undefined,
+        })
       }
     >
       <View style={styles.drawerItemContainer}>
@@ -59,8 +70,7 @@ const BiliCard = (props: any) => {
   return <>{props.children}</>;
 };
 
-export default () => {
-  const navigation = useNavigation();
+export default ({ navigation }: { navigation: DrawerNavigationHelpers }) => {
   const insets = useSafeAreaInsets();
   const playlistIds = useNoxSetting(state => state.playlistIds);
   const playerStyle = useNoxSetting(state => state.playerStyle);
@@ -80,7 +90,7 @@ export default () => {
     function deepLinkHandler(data: { url: string }) {
       if (data.url === 'trackplayer://notification.click') {
         logger.debug('[Drawer] click from notification; navigate to home');
-        navigation.navigate({ route: NoxRoutes.PlayerHome });
+        navigation.navigate(NoxRoutes.PlayerHome);
         toggleExpand();
       }
     }
@@ -103,6 +113,7 @@ export default () => {
             view={NoxRoutes.PlayerHome}
             text={'appDrawer.homeScreenName'}
             routeIcon={RouteIcons.music}
+            navigation={navigation}
           />
         </BiliCard>
         <RenderDrawerItem
@@ -110,15 +121,17 @@ export default () => {
           view={NoxRoutes.Explore}
           text={'appDrawer.exploreScreenName'}
           routeIcon={RouteIcons.explore}
+          navigation={navigation}
         />
         <RenderDrawerItem
           icon={'cog'}
           view={NoxRoutes.Settings}
           text={'appDrawer.settingScreenName'}
           routeIcon={RouteIcons.setting}
+          navigation={navigation}
         />
         <Divider />
-        <Playlists />
+        <Playlists navigation={navigation} />
       </>
     </FlexView>
   );

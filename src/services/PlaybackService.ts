@@ -7,7 +7,7 @@ import { DeviceEventEmitter, NativeModules } from 'react-native';
 
 import { NULL_TRACK } from '../objects/Song';
 import { parseSongR128gain, resolveUrl } from '../utils/SongOperations';
-import { initBiliHeartbeat } from '../utils/Bilibili/BiliOperate';
+import { initBiliHeartbeat } from '../network/like/bilibili';
 import { logger } from '../utils/Logger';
 import noxPlayingList, { getNextSong } from '../stores/playingList';
 import { NoxRepeatMode } from '../enums/RepeatMode';

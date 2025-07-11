@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { View, BackHandler, StyleSheet } from 'react-native';
 import { IconButton } from 'react-native-paper';
 import { useFocusEffect } from '@react-navigation/native';
@@ -15,7 +15,6 @@ interface Props {
 
 export default ({ usedPlaylist }: Props) => {
   const playerStyle = useNoxSetting(state => state.playerStyle);
-  const songListScrollCounter = useNoxSetting(s => s.songListScrollCounter);
   const {
     toggleSelectedAll,
     checking,
@@ -25,11 +24,6 @@ export default ({ usedPlaylist }: Props) => {
     onBackPress,
     scrollTo,
   } = usedPlaylist;
-
-  useEffect(
-    () => scrollTo({ toIndex: -1, reset: true }),
-    [songListScrollCounter],
-  );
 
   useFocusEffect(
     React.useCallback(() => {

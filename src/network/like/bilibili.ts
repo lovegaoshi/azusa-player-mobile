@@ -1,8 +1,8 @@
 import { getBiliJct } from '@utils/Bilibili/biliCookies';
 import bfetch from '@utils/BiliFetch';
 import { logger } from '@utils/Logger';
-import { throttler } from '../throttle';
-import { bv2av as BVIDtoAID } from './bv2av';
+import { throttler } from '@utils/throttle';
+import { bv2av as BVIDtoAID } from '@utils/Bilibili/bv2av';
 
 const BILI_LIKE_API = 'https://api.bilibili.com/x/web-interface/archive/like';
 const BILI_RELATED_API =
@@ -136,12 +136,4 @@ export const sendBVFavorite = async (
   } catch (e) {
     logger.error(`BVID favorite POST failed ${String(e)};`);
   }
-};
-
-export const biliSuggest = async (bvid: string) => {
-  logger.debug(`fetching biliSuggest wiht ${bvid}`);
-  const res = await bfetch(BILI_RELATED_API.replace('{bvid}', bvid)),
-    json = await res.json();
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  return json.data as any[];
 };

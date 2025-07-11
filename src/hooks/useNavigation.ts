@@ -1,5 +1,6 @@
 import useNoxMobile from '@stores/useMobile';
 import { useNavigation } from '@react-navigation/native';
+import { DrawerNavigationHelpers } from '@react-navigation/drawer/lib/typescript/src/types';
 
 import { NoxRoutes } from '@enums/Routes';
 import { IconMap } from '@enums/BottomTab';
@@ -11,8 +12,8 @@ interface NavigateProps {
   params?: any;
 }
 
-export default () => {
-  const navigationGlobal = useNavigation();
+export default (navigation?: DrawerNavigationHelpers) => {
+  const navigationGlobal = (navigation ?? useNavigation())!;
   const setRoute = useNoxMobile(state => state.setBottomTabRoute);
 
   const navigate = ({

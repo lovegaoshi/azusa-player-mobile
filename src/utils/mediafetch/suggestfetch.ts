@@ -1,4 +1,4 @@
-import { biliSuggest } from '@utils/Bilibili/BiliOperate';
+import { biliSuggest } from '@network/suggest/bilisuggest';
 import biliavideo from './biliavideo';
 import { randomChoice, regexMatchOperations } from '@utils/Utils';
 import ytbvideoFetch from './ytbvideo';
