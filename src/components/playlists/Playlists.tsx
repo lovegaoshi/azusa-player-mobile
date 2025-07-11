@@ -3,6 +3,7 @@ import { IconButton, TouchableRipple } from 'react-native-paper';
 import { Pressable, View, StyleSheet } from 'react-native';
 import FlashDragList from 'react-native-flashdrag-list';
 import { useDrawerProgress } from '@react-navigation/drawer';
+import { DrawerNavigationHelpers } from '@react-navigation/drawer/lib/typescript/src/types';
 
 import { useNoxSetting } from '@stores/useApp';
 import { NoxRoutes } from '@enums/Routes';
@@ -37,10 +38,10 @@ const SearchPlaylistAsNewButton = ({
   );
 };
 
-export default () => {
+export default ({ navigation }: { navigation: DrawerNavigationHelpers }) => {
   const [dialogOpen, setDialogOpen] = useState(false);
   const [drawerOpen, setDrawerOpen] = useState(false);
-  const navigation = useNavigation();
+  const noxNavigation = useNavigation(navigation);
   const isLandscape = useIsLandscape();
   const currentPlaylist = useNoxSetting(state => state.currentPlaylist);
   const currentPlayingList = useNoxSetting(state => state.currentPlayingList);
@@ -77,7 +78,7 @@ export default () => {
   };
 
   const goToPlaylist = (playlistId: string) => {
-    navigation.navigate({
+    noxNavigation.navigate({
       route: isLandscape ? NoxRoutes.Playlist : NoxRoutes.PlayerHome,
       params: { screen: NoxRoutes.Playlist, pop: true },
     });
@@ -147,7 +148,9 @@ export default () => {
           {false && (
             <IconButton
               icon={'cog'}
-              onPress={() => navigation.navigate({ route: NoxRoutes.Settings })}
+              onPress={() =>
+                noxNavigation.navigate({ route: NoxRoutes.Settings })
+              }
             />
           )}
         </View>
