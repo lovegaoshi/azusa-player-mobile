@@ -64,6 +64,7 @@ const BooleanSetting = ({
         </View>
         <View style={styles.switchContainer}>
           {(!delayedLoading || loaded) &&
+            // delayedComponent doesnt work here, i dunno
             (checkbox ? (
               <Checkbox
                 status={playerSetting[settingName] ? 'checked' : 'unchecked'}
