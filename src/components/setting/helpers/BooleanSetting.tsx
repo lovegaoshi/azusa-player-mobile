@@ -6,6 +6,7 @@ import { Switch, TouchableRipple, Checkbox } from 'react-native-paper';
 import { NativeText as Text } from '@components/commonui/ScaledText';
 import { useNoxSetting } from '@stores/useApp';
 import { SettingEntry } from './SettingEntry';
+import { isAndroid } from '@utils/RNUtils';
 
 const BooleanSetting = ({
   settingName,
@@ -13,7 +14,7 @@ const BooleanSetting = ({
   reRender = false,
   checkbox = false,
   callback,
-  delayedLoading = true,
+  delayedLoading = isAndroid,
 }: SettingEntry) => {
   const { t } = useTranslation();
   const playerStyle = useNoxSetting(state => state.playerStyle);

@@ -9,6 +9,17 @@ import { useTrackStore } from '@hooks/useActiveTrack';
 import useRNTPObserverStore from '@stores/RNObserverStore';
 import { useLazyEffect } from '@utils/useLazyEffect';
 import { execWhenTrue } from '@utils/Utils';
+import { Source } from '@enums/MediaFetch';
+
+export const extractMV = (song: NoxMedia.Song) => {
+  if (song.backgroundOverride) return song.backgroundOverride;
+  switch (song.source) {
+    case Source.bilivideo:
+      return song.bvid;
+    default:
+      return '';
+  }
+};
 
 export default (videoRef: RefObject<VideoRef | null>) => {
   const track = useTrackStore(s => s.track);

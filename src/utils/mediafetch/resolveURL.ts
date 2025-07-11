@@ -107,7 +107,7 @@ export const refreshMetadata = async (
 
 const regexExportURLs: NoxUtils.RegexMatchResolve<string> = [
   [biliaudioFetch.regexResolveURLMatch, biliaudioFetch.export2URL],
-  [ytbvideoFetch.regexResolveURLMatch, ytbvideoFetch.export2URL],
+  [ytbvideoFetch.regexResolveURLMatch2, ytbvideoFetch.export2URL],
   [biliBangumiFetch.regexResolveURLMatch, biliBangumiFetch.export2URL],
 ];
 
