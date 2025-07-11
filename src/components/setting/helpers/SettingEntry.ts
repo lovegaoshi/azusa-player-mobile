@@ -22,4 +22,5 @@ export interface SettingEntry {
   settingType?: string;
   checkbox?: boolean;
   callback?: () => void;
+  delayedLoading?: boolean;
 }

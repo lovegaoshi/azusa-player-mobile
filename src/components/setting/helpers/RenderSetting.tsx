@@ -6,11 +6,18 @@ import BooleanSetting from './BooleanSetting';
 
 interface Props {
   item: SettingEntry;
+  delayedLoading?: boolean;
 }
 
-export const RenderSetting = ({ item }: Props) => {
+export const RenderSetting = ({ item, delayedLoading }: Props) => {
   switch (item.settingType) {
     default:
-      return <BooleanSetting {...item} key={uuidv4()} />;
+      return (
+        <BooleanSetting
+          {...item}
+          delayedLoading={delayedLoading}
+          key={uuidv4()}
+        />
+      );
   }
 };

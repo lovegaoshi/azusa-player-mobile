@@ -103,11 +103,20 @@ export const Home = ({
           <View>
             {isAndroid && (
               <>
-                <RenderSetting item={developerSettings.parseEmbeddedArtwork} />
+                <RenderSetting
+                  item={developerSettings.parseEmbeddedArtwork}
+                  delayedLoading={false}
+                />
               </>
             )}
-            <RenderSetting item={developerSettings.artworkCarousel} />
-            <RenderSetting item={developerSettings.memoryEfficiency} />
+            <RenderSetting
+              item={developerSettings.artworkCarousel}
+              delayedLoading={false}
+            />
+            <RenderSetting
+              item={developerSettings.memoryEfficiency}
+              delayedLoading={false}
+            />
           </View>
         </GroupView>
         <SettingListItem
