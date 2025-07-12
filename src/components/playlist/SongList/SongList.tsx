@@ -185,6 +185,8 @@ export default ({
     Gesture.Simultaneous(pullUpRefreshGesture, nativeGesture),
   );
 
+  const gestureRef = React.useRef(pullUpRefreshGesture);
+
   useEffect(() => {
     layoutY.current = [];
   }, [rows]);
@@ -194,7 +196,7 @@ export default ({
       <AnimatedFlashList
         renderScrollComponent={ScrollView}
         overrideProps={{
-          simultaneousHandlers: composedGesture,
+          simultaneousHandlers: gestureRef,
         }}
         ref={playlistRef}
         data={rows}
