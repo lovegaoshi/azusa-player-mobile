@@ -9,7 +9,11 @@ import Animated, {
   useDerivedValue,
   useSharedValue,
 } from 'react-native-reanimated';
-import { Gesture, GestureDetector } from 'react-native-gesture-handler';
+import {
+  Gesture,
+  GestureDetector,
+  ScrollView,
+} from 'react-native-gesture-handler';
 
 import SongInfo from './SongInfo';
 import SongBackground from './SongBackground';
@@ -154,13 +158,44 @@ export default ({
     [rows],
   );
 
+  const nativeGesture = useMemo(() => Gesture.Native(), []);
+
+  const pullUpActivated = useSharedValue(0);
+  const pullUpDistance = useSharedValue(0);
+  const pullUpRefreshGesture = useMemo(
+    () =>
+      Gesture.Pan()
+        .onStart(() => {
+          console.log(
+            'pullUpRefreshStart',
+            scrollPosition.value,
+            scrollOffset.value,
+          );
+          // if flashlist is at the very bottom, set pullupAct to 1
+        })
+        .onChange(e => console.log('pullUpRefresh', e))
+        .onFinalize(() => {
+          pullUpActivated.value = 0;
+        }),
+    [],
+  );
+
+  const composedGesture = Gesture.Simultaneous(
+    scrollDragGesture,
+    Gesture.Simultaneous(pullUpRefreshGesture, nativeGesture),
+  );
+
   useEffect(() => {
     layoutY.current = [];
   }, [rows]);
 
   return (
-    <GestureDetector gesture={scrollDragGesture}>
+    <GestureDetector gesture={composedGesture}>
       <AnimatedFlashList
+        renderScrollComponent={ScrollView}
+        overrideProps={{
+          simultaneousHandlers: composedGesture,
+        }}
         ref={playlistRef}
         data={rows}
         renderItem={({ item, index }) => (
