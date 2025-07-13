@@ -13,6 +13,7 @@ import {
   Gesture,
   GestureDetector,
   ScrollView,
+  RefreshControl,
 } from 'react-native-gesture-handler';
 
 import SongInfo from './SongInfo';
@@ -158,34 +159,33 @@ export default ({
     [rows],
   );
 
-  const nativeGesture = useMemo(() => Gesture.Native(), []);
-
   const pullUpActivated = useSharedValue(0);
   const pullUpDistance = useSharedValue(0);
-  const pullUpRefreshGesture = useMemo(
-    () =>
-      Gesture.Pan()
-        .onStart(() => {
-          console.log(
-            'pullUpRefreshStart',
-            scrollPosition.value,
-            scrollOffset.value,
-          );
-          // if flashlist is at the very bottom, set pullupAct to 1
-        })
-        .onChange(e => console.log('pullUpRefresh', e))
-        .onFinalize(() => {
-          pullUpActivated.value = 0;
-        }),
-    [],
-  );
 
-  const composedGesture = Gesture.Simultaneous(
-    scrollDragGesture,
-    Gesture.Simultaneous(pullUpRefreshGesture, nativeGesture),
-  );
+  const pullUpRefreshGesture = Gesture.Pan()
+    .onStart(e => {
+      // if flashlist is at the very bottom, set pullupAct to 1
+      if (scrollPosition.value > 1 && e.velocityY < 0) {
+        console.log('pullupstart changed', scrollPosition.value, e);
+        pullUpActivated.value = 1;
+      }
+    })
+    .onChange(e => {
+      if (pullUpActivated.value !== 1) return;
+      if (e.translationY > 0) return (pullUpActivated.value = 0);
+      console.log('pullupchange', e.translationY);
+      pullUpDistance.value = e.translationY;
+    })
+    .onFinalize(() => {
+      pullUpActivated.value = 0;
+    });
 
   const gestureRef = React.useRef(pullUpRefreshGesture);
+
+  const composedGesture = Gesture.Exclusive(
+    scrollDragGesture,
+    pullUpRefreshGesture,
+  );
 
   useEffect(() => {
     layoutY.current = [];
@@ -197,6 +197,12 @@ export default ({
         renderScrollComponent={ScrollView}
         overrideProps={{
           simultaneousHandlers: gestureRef,
+          refreshControl: (
+            <RefreshControl
+              refreshing={refreshing}
+              onRefresh={() => keepAwake(refreshPlaylist)}
+            />
+          ),
         }}
         ref={playlistRef}
         data={rows}
@@ -223,8 +229,6 @@ export default ({
         keyExtractor={(item, index) => `${item.id}.${index}`}
         estimatedItemSize={58}
         extraData={shouldReRender}
-        onRefresh={() => keepAwake(refreshPlaylist)}
-        refreshing={refreshing}
         showsVerticalScrollIndicator={false}
         onScroll={scrollHandler}
       />
