@@ -1,13 +1,11 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
-import { LayoutRectangle, NativeScrollEvent, Text, View } from 'react-native';
+import { LayoutRectangle, NativeScrollEvent } from 'react-native';
 import { FlashList } from '@shopify/flash-list';
 import { useNetInfo } from '@react-native-community/netinfo';
 import Animated, {
   runOnJS,
   SharedValue,
-  useAnimatedReaction,
   useAnimatedScrollHandler,
-  useAnimatedStyle,
   useDerivedValue,
   useSharedValue,
 } from 'react-native-reanimated';
@@ -23,7 +21,7 @@ import SongBackground from './SongBackground';
 import { useNoxSetting } from '@stores/useApp';
 import keepAwake from '@utils/keepAwake';
 import { UsePlaylistRN } from '../usePlaylistRN';
-import { pull } from 'lodash';
+import RefreshIndicator from '@components/commonui/RefreshIndicator';
 
 const AnimatedFlashList = Animated.createAnimatedComponent(
   FlashList<NoxMedia.Song>,
@@ -242,51 +240,11 @@ export default ({
           showsVerticalScrollIndicator={false}
           onScroll={scrollHandler}
         />
-        <PullUpIndicator
+        <RefreshIndicator
           pullUpDistance={pullUpDistance}
           layout={flashlistLayout}
         />
       </>
     </GestureDetector>
-  );
-};
-
-const PullUpIndicator = ({
-  pullUpDistance,
-  layout,
-}: {
-  pullUpDistance: SharedValue<number>;
-  layout?: LayoutRectangle;
-}) => {
-  const [value, setValue] = useState(0);
-
-  useAnimatedReaction(
-    () => pullUpDistance.value,
-    curr => {
-      runOnJS(setValue)(curr);
-    },
-  );
-
-  const animatedStyle = useAnimatedStyle(() => ({
-    transform: [{ translateY: pullUpDistance.value }],
-  }));
-
-  return (
-    <Animated.View
-      style={[
-        {
-          position: 'absolute',
-          backgroundColor: 'red',
-          alignItems: 'center',
-          left: 0,
-          width: layout?.width ?? 0,
-          top: (layout?.height ?? -999) - 100,
-        },
-        animatedStyle,
-      ]}
-      onLayout={e => console.log('scrollindicatorlayout', e.nativeEvent.layout)}
-    >
-      <Text>{value}</Text>
-    </Animated.View>
   );
 };
