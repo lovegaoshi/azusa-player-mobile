@@ -10,6 +10,12 @@ import { sortPlaylist as _sortPlaylist } from '../utils/playlistOperations';
 import { SortOptions } from '../enums/Playlist';
 import { resolveUrl } from '@utils/SongOperations';
 
+export interface IRSSUpdate {
+  subscribeUrls?: string[];
+  playlist?: NoxMedia.Playlist | Promise<NoxMedia.Playlist>;
+  addToEnd?: boolean;
+}
+
 const usePlaylistCRUD = (mPlaylist?: NoxMedia.Playlist) => {
   const currentPlaylist = useNoxSetting(state => state.currentPlayingList);
   const currentPlayingId = useNoxSetting(state => state.currentPlayingId);
@@ -225,15 +231,17 @@ const usePlaylistCRUD = (mPlaylist?: NoxMedia.Playlist) => {
       .map(v => _getPlaylist(v))
       .forEach(playlist => removeSongs(songs, banBVID, playlist));
 
-  const rssUpdate = async (
-    subscribeUrls?: string[],
-    playlist: NoxMedia.Playlist | Promise<NoxMedia.Playlist> = getPlaylist(),
-  ) =>
+  const rssUpdate = async ({
+    subscribeUrls,
+    playlist = getPlaylist(),
+    addToEnd = false,
+  }: IRSSUpdate) =>
     updateSubscribeFavList({
       playlist: await playlist,
       subscribeUrls,
       progressEmitter,
       updatePlaylist,
+      addToEnd,
     });
 
   const playlistRemoveBiliShazamed = async (

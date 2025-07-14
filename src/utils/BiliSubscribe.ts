@@ -14,6 +14,7 @@ interface Props {
   progressEmitter?: NoxUtils.ProgressEmitter;
   overwriteOnRefresh?: () => boolean;
   callback?: (newPlaylist: NoxMedia.Playlist) => void;
+  addToEnd?: boolean;
 }
 export const updateSubscribeFavList = async ({
   playlist,
@@ -23,6 +24,7 @@ export const updateSubscribeFavList = async ({
   overwriteOnRefresh = () =>
     playlist.newSongOverwrite || playlist.title.includes('live'),
   callback = () => undefined,
+  addToEnd = false,
 }: Props): Promise<NoxMedia.Playlist | undefined> => {
   let newPlaylist = { ...playlist, lastSubscribed: new Date().getTime() };
   if ([PlaylistTypes.Favorite].includes(playlist.type)) {
@@ -36,7 +38,9 @@ export const updateSubscribeFavList = async ({
       return;
     }
     newPlaylist = { ...newPlaylist, ...(await playlist.refresh(newPlaylist)) };
-    newPlaylist.songList = newPlaylist.songList.concat(playlist.songList);
+    newPlaylist.songList = addToEnd
+      ? playlist.songList.concat(newPlaylist.songList)
+      : newPlaylist.songList.concat(playlist.songList);
   } else {
     subscribeUrls = subscribeUrls ?? playlist.subscribeUrl;
     if (subscribeUrls.length === 0 || subscribeUrls[0].length === 0) {
