@@ -173,39 +173,43 @@ export default ({
 
   const pullUpActivated = useSharedValue(0);
   const pullUpDistance = useSharedValue(0);
-
   const gestureRef = React.useRef<PanGesture>(undefined);
+  const isPullUpable = usedPlaylist.playlist.type === PlaylistTypes.Search;
 
-  const pullUpRefreshGesture = Gesture.Pan()
-    .withRef(gestureRef)
-    .onStart(e => {
-      // if flashlist is at the very bottom, set pullupAct to 1
-      // HACK: how to resolve js precision issue?
-      if (
-        Math.round((scrollPosition.value - 1) * 10000) === 0 &&
-        e.velocityY < 0 &&
-        usedPlaylist.playlist.type === PlaylistTypes.Search
-      ) {
-        pullUpActivated.value = 1;
-      }
-    })
-    .onChange(e => {
-      if (pullUpActivated.value !== 1) return;
-      if (e.translationY > 0) return (pullUpActivated.value = -1);
-      pullUpDistance.value = e.translationY;
-    })
-    .onEnd(() => {
-      if (pullUpActivated.value !== 1) return;
-      if (pullUpDistance.value < -200) {
-        runOnJS(refreshPlaylist)(true);
-      } else {
-        pullUpActivated.value = -1;
-        pullUpDistance.value = withTiming(0, { duration: 400 });
-      }
-    })
-    .onFinalize(() => {
-      if (pullUpActivated.value > 0) pullUpActivated.value = 0;
-    });
+  const pullUpRefreshGesture = useMemo(
+    () =>
+      Gesture.Pan()
+        .withRef(gestureRef)
+        .onStart(e => {
+          // if flashlist is at the very bottom, set pullupAct to 1
+          // HACK: how to resolve js precision issue?
+          if (
+            Math.round((scrollPosition.value - 1) * 10000) === 0 &&
+            e.velocityY < 0 &&
+            isPullUpable
+          ) {
+            pullUpActivated.value = 1;
+          }
+        })
+        .onChange(e => {
+          if (pullUpActivated.value !== 1) return;
+          if (e.translationY > 0) return (pullUpActivated.value = -1);
+          pullUpDistance.value = e.translationY;
+        })
+        .onEnd(() => {
+          if (pullUpActivated.value !== 1) return;
+          if (pullUpDistance.value < -200) {
+            runOnJS(refreshPlaylist)(true);
+          } else {
+            pullUpActivated.value = -1;
+            pullUpDistance.value = withTiming(0, { duration: 400 });
+          }
+        })
+        .onFinalize(() => {
+          if (pullUpActivated.value > 0) pullUpActivated.value = 0;
+        }),
+    [usedPlaylist],
+  );
 
   const composedGesture = Gesture.Exclusive(
     scrollDragGesture,
