@@ -75,6 +75,13 @@ export default ({
     playlistRef,
   } = usedPlaylist;
 
+  const onContentHeightCHange = (h: number) => {
+    const contentH = h - scrollViewHeight.value;
+    scrollPosition.value =
+      (scrollPosition.value * contentHeight.value) / contentH;
+    contentHeight.value = contentH;
+  };
+
   const scrollBarOnScroll = (p: NativeScrollEvent) => {
     const contentH = Math.max(
       1,
@@ -209,6 +216,7 @@ export default ({
     <GestureDetector gesture={composedGesture}>
       <>
         <AnimatedFlashList
+          onContentSizeChange={onContentHeightCHange}
           onLayout={e => setFlashlistLayout(e.nativeEvent.layout)}
           renderScrollComponent={ScrollView}
           overrideProps={{
