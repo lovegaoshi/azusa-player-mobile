@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { LayoutRectangle, Text, View, ViewStyle } from 'react-native';
+import { LayoutRectangle, Text, View } from 'react-native';
 import { Icon } from 'react-native-paper';
 import Animated, {
   interpolate,
