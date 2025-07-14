@@ -15,6 +15,7 @@ import {
   GestureDetector,
   ScrollView,
   RefreshControl,
+  PanGesture,
 } from 'react-native-gesture-handler';
 
 import SongInfo from './SongInfo';
@@ -173,7 +174,10 @@ export default ({
   const pullUpActivated = useSharedValue(0);
   const pullUpDistance = useSharedValue(0);
 
+  const gestureRef = React.useRef<PanGesture>(undefined);
+
   const pullUpRefreshGesture = Gesture.Pan()
+    .withRef(gestureRef)
     .onStart(e => {
       // if flashlist is at the very bottom, set pullupAct to 1
       // HACK: how to resolve js precision issue?
@@ -202,8 +206,6 @@ export default ({
     .onFinalize(() => {
       if (pullUpActivated.value > 0) pullUpActivated.value = 0;
     });
-
-  const gestureRef = React.useRef(pullUpRefreshGesture);
 
   const composedGesture = Gesture.Exclusive(
     scrollDragGesture,
