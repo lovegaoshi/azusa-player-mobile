@@ -187,18 +187,20 @@ export default ({
     })
     .onChange(e => {
       if (pullUpActivated.value !== 1) return;
-      if (e.translationY > 0) return (pullUpActivated.value = 0);
+      if (e.translationY > 0) return (pullUpActivated.value = -1);
       pullUpDistance.value = e.translationY;
     })
     .onEnd(() => {
       if (pullUpActivated.value !== 1) return;
-      if (pullUpDistance.value < -100) {
+      if (pullUpDistance.value < -200) {
         runOnJS(refreshPlaylist)(true);
+      } else {
+        pullUpActivated.value = -1;
+        pullUpDistance.value = withTiming(0, { duration: 400 });
       }
     })
     .onFinalize(() => {
-      pullUpActivated.value = 0;
-      pullUpDistance.value = withTiming(0, { duration: 400 });
+      if (pullUpActivated.value > 0) pullUpActivated.value = 0;
     });
 
   const gestureRef = React.useRef(pullUpRefreshGesture);
@@ -257,6 +259,7 @@ export default ({
           onScroll={scrollHandler}
         />
         <RefreshIndicator
+          pullUpActivated={pullUpActivated}
           pullUpDistance={pullUpDistance}
           layout={flashlistLayout}
         />
