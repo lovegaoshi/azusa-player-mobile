@@ -71,7 +71,7 @@ export default (playlist: NoxMedia.Playlist): UsePlaylistRN => {
   const { playFromPlaylist } = usePlayback();
   const { performFade } = useTPControls();
 
-  const refreshPlaylist = () => {
+  const refreshPlaylist = (addToEnd = false) => {
     progressEmitter(100);
     activateKeepAwakeAsync();
     return setSnack({
@@ -80,7 +80,7 @@ export default (playlist: NoxMedia.Playlist): UsePlaylistRN => {
         success: t('PlaylistOperations.updated', { playlist }),
         fail: '[refreshPlaylist] failed',
       },
-      processFunction: rssUpdate,
+      processFunction: () => rssUpdate(undefined, addToEnd),
       callback: () => {
         progressEmitter(0);
         deactivateKeepAwake();
@@ -240,7 +240,7 @@ export default (playlist: NoxMedia.Playlist): UsePlaylistRN => {
 };
 
 export interface UsePlaylistRN extends UsePlaylist {
-  refreshPlaylist: () => Promise<void>;
+  refreshPlaylist: (addToEnd?: boolean) => Promise<void>;
   cachedSongs: string[];
   setCachedSongs: (val: string[]) => void;
   handleSearch: (searchedVal: string) => void;

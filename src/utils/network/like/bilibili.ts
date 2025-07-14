@@ -5,8 +5,6 @@ import { throttler } from '@utils/throttle';
 import { bv2av as BVIDtoAID } from '@utils/Bilibili/bv2av';
 
 const BILI_LIKE_API = 'https://api.bilibili.com/x/web-interface/archive/like';
-const BILI_RELATED_API =
-  'https://api.bilibili.com/x/web-interface/archive/related?bvid={bvid}';
 const BILI_TRIP_API =
   'https://api.bilibili.com/x/web-interface/archive/like/triple';
 const BILI_VIDEOPLAY_API =

@@ -12,7 +12,6 @@ import { useAPM } from '@stores/usePersistStore';
 import FlexView from '@components/commonui/FlexViewNewArch';
 import AutoUnmountNavView from '../commonui/AutoUnmountNavView';
 import { useIsLandscape } from '@hooks/useOrientation';
-import DelayedComponent from '../commonui/DelayedComponent';
 
 const LoginComponent = ({ loginSite }: { loginSite: Site }) => {
   switch (loginSite) {
@@ -51,9 +50,7 @@ const Explore = () => {
 
 export default () => (
   <AutoUnmountNavView>
-    <DelayedComponent>
-      <Explore />
-    </DelayedComponent>
+    <Explore />
   </AutoUnmountNavView>
 );
 

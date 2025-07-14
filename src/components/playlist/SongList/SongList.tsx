@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
-import { NativeScrollEvent } from 'react-native';
+import { LayoutRectangle, NativeScrollEvent } from 'react-native';
 import { FlashList } from '@shopify/flash-list';
 import { useNetInfo } from '@react-native-community/netinfo';
 import Animated, {
@@ -8,14 +8,23 @@ import Animated, {
   useAnimatedScrollHandler,
   useDerivedValue,
   useSharedValue,
+  withTiming,
 } from 'react-native-reanimated';
-import { Gesture, GestureDetector } from 'react-native-gesture-handler';
+import {
+  Gesture,
+  GestureDetector,
+  ScrollView,
+  RefreshControl,
+  PanGesture,
+} from 'react-native-gesture-handler';
 
 import SongInfo from './SongInfo';
 import SongBackground from './SongBackground';
 import { useNoxSetting } from '@stores/useApp';
 import keepAwake from '@utils/keepAwake';
 import { UsePlaylistRN } from '../usePlaylistRN';
+import RefreshIndicator from '@components/commonui/RefreshIndicator';
+import { PlaylistTypes } from '@enums/Playlist';
 
 const AnimatedFlashList = Animated.createAnimatedComponent(
   FlashList<NoxMedia.Song>,
@@ -53,6 +62,7 @@ export default ({
     () => initialDragY.value + translationDragY.value + scrollOffset.value,
   );
   const layoutY = React.useRef<number[]>([]);
+  const [flashlistLayout, setFlashlistLayout] = useState<LayoutRectangle>();
 
   const {
     refreshPlaylist,
@@ -65,6 +75,13 @@ export default ({
     getSongIndex,
     playlistRef,
   } = usedPlaylist;
+
+  const onContentHeightCHange = (h: number) => {
+    const contentH = h - scrollViewHeight.value;
+    scrollPosition.value =
+      (scrollPosition.value * contentHeight.value) / contentH;
+    contentHeight.value = contentH;
+  };
 
   const scrollBarOnScroll = (p: NativeScrollEvent) => {
     const contentH = Math.max(
@@ -154,43 +171,105 @@ export default ({
     [rows],
   );
 
+  const pullUpActivated = useSharedValue(0);
+  const pullUpDistance = useSharedValue(0);
+  const gestureRef = React.useRef<PanGesture>(undefined);
+  const isPullUpable = usedPlaylist.playlist.type === PlaylistTypes.Search;
+
+  const pullUpRefreshGesture = useMemo(
+    () =>
+      Gesture.Pan()
+        .withRef(gestureRef)
+        .onStart(e => {
+          // if flashlist is at the very bottom, set pullupAct to 1
+          // HACK: how to resolve js precision issue?
+          if (
+            Math.round((scrollPosition.value - 1) * 10000) === 0 &&
+            e.velocityY < 0 &&
+            isPullUpable
+          ) {
+            pullUpActivated.value = 1;
+          }
+        })
+        .onChange(e => {
+          if (pullUpActivated.value !== 1) return;
+          if (e.translationY > 0) return (pullUpActivated.value = -1);
+          pullUpDistance.value = e.translationY;
+        })
+        .onEnd(() => {
+          if (pullUpActivated.value !== 1) return;
+          if (pullUpDistance.value < -200) {
+            runOnJS(refreshPlaylist)(true);
+          } else {
+            pullUpActivated.value = -1;
+            pullUpDistance.value = withTiming(0, { duration: 400 });
+          }
+        })
+        .onFinalize(() => {
+          if (pullUpActivated.value > 0) pullUpActivated.value = 0;
+        }),
+    [usedPlaylist],
+  );
+
+  const composedGesture = Gesture.Exclusive(
+    scrollDragGesture,
+    pullUpRefreshGesture,
+  );
+
   useEffect(() => {
     layoutY.current = [];
   }, [rows]);
 
   return (
-    <GestureDetector gesture={scrollDragGesture}>
-      <AnimatedFlashList
-        ref={playlistRef}
-        data={rows}
-        renderItem={({ item, index }) => (
-          <SongBackground song={item}>
-            <SongInfo
-              dragToSelect={dragToSelect}
-              getLayoutY={getLayoutY}
-              cursorOffset={cursorOffset}
-              item={item}
-              index={index}
-              currentPlaying={item.id === currentPlayingId}
-              usePlaylist={usedPlaylist}
-              onChecked={() => toggleSelected(getSongIndex(item, index))}
-              onLongPress={() => {
-                toggleSelected(getSongIndex(item, index));
-                setChecking(true);
-              }}
-              networkCellular={netInfo.type === 'cellular'}
-            />
-          </SongBackground>
-          // </Animated.View>
-        )}
-        keyExtractor={(item, index) => `${item.id}.${index}`}
-        estimatedItemSize={58}
-        extraData={shouldReRender}
-        onRefresh={() => keepAwake(refreshPlaylist)}
-        refreshing={refreshing}
-        showsVerticalScrollIndicator={false}
-        onScroll={scrollHandler}
-      />
+    <GestureDetector gesture={composedGesture}>
+      <>
+        <AnimatedFlashList
+          onContentSizeChange={onContentHeightCHange}
+          onLayout={e => setFlashlistLayout(e.nativeEvent.layout)}
+          renderScrollComponent={ScrollView}
+          overrideProps={{
+            simultaneousHandlers: gestureRef,
+            refreshControl: (
+              <RefreshControl
+                refreshing={refreshing}
+                onRefresh={() => keepAwake(refreshPlaylist)}
+              />
+            ),
+          }}
+          ref={playlistRef}
+          data={rows}
+          renderItem={({ item, index }) => (
+            <SongBackground song={item}>
+              <SongInfo
+                dragToSelect={dragToSelect}
+                getLayoutY={getLayoutY}
+                cursorOffset={cursorOffset}
+                item={item}
+                index={index}
+                currentPlaying={item.id === currentPlayingId}
+                usePlaylist={usedPlaylist}
+                onChecked={() => toggleSelected(getSongIndex(item, index))}
+                onLongPress={() => {
+                  toggleSelected(getSongIndex(item, index));
+                  setChecking(true);
+                }}
+                networkCellular={netInfo.type === 'cellular'}
+              />
+            </SongBackground>
+            // </Animated.View>
+          )}
+          keyExtractor={(item, index) => `${item.id}.${index}`}
+          estimatedItemSize={58}
+          extraData={shouldReRender}
+          showsVerticalScrollIndicator={false}
+          onScroll={scrollHandler}
+        />
+        <RefreshIndicator
+          pullUpActivated={pullUpActivated}
+          pullUpDistance={pullUpDistance}
+          layout={flashlistLayout}
+        />
+      </>
     </GestureDetector>
   );
 };
