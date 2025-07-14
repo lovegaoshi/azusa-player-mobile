@@ -14,13 +14,13 @@
 		364DDFCC2C1347090074A504 /* CarSceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 364DDFCB2C1347090074A504 /* CarSceneDelegate.swift */; };
 		364DDFCE2C1347200074A504 /* PhoneSceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 364DDFCD2C1347200074A504 /* PhoneSceneDelegate.swift */; };
 		364DDFD12C13515C0074A504 /* Entitlements.plist in Resources */ = {isa = PBXBuildFile; fileRef = 364DDFD02C13515B0074A504 /* Entitlements.plist */; };
+		5113E2BB4D6051600F956353 /* Pods_azusa_player_mobile_APMTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 11B0762E2BB6B80DC3E472C8 /* Pods_azusa_player_mobile_APMTests.framework */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
-		A7ED8C5E3242B7A11910AC34 /* libPods-azusa-player-mobile.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 13EEFF6BBEF989EDAD5FC4B7 /* libPods-azusa-player-mobile.a */; };
 		AA9F058A2AB48946005FA2C6 /* libavfilter.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA9F05892AB48946005FA2C6 /* libavfilter.xcframework */; };
 		AA9F058E2AB489B1005FA2C6 /* libavutil.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA9F058D2AB489B1005FA2C6 /* libavutil.xcframework */; };
 		BDB3121DF2250E03AB81F873 /* ExpoModulesProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 629CB7CB958060A0F3604281 /* ExpoModulesProvider.swift */; };
 		DC4736F4D25A78F1E3AF4737 /* ExpoModulesProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BED8643AF15A76097355103 /* ExpoModulesProvider.swift */; };
-		DD0F20A1AEB65330E3293A26 /* libPods-azusa-player-mobile-APMTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9820FB6C9BC4AE8228F06F70 /* libPods-azusa-player-mobile-APMTests.a */; };
+		EF174DA98930A4C1B47966AF /* Pods_azusa_player_mobile.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 150FB18D67701151BBD83CB5 /* Pods_azusa_player_mobile.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -37,10 +37,11 @@
 		00E356EE1AD99517003FC87E /* APMTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = APMTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00E356F21AD99517003FC87E /* exampleTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = exampleTests.m; sourceTree = "<group>"; };
+		11B0762E2BB6B80DC3E472C8 /* Pods_azusa_player_mobile_APMTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_azusa_player_mobile_APMTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07F961A680F5B00A75B9A /* AzusaPlayer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AzusaPlayer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = example/Images.xcassets; sourceTree = "<group>"; };
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = example/Info.plist; sourceTree = "<group>"; };
-		13EEFF6BBEF989EDAD5FC4B7 /* libPods-azusa-player-mobile.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-azusa-player-mobile.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		150FB18D67701151BBD83CB5 /* Pods_azusa_player_mobile.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_azusa_player_mobile.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1BED8643AF15A76097355103 /* ExpoModulesProvider.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ExpoModulesProvider.swift; path = "Pods/Target Support Files/Pods-azusa-player-mobile-APMTests/ExpoModulesProvider.swift"; sourceTree = "<group>"; };
 		269A6C2B650C46BC21877CBC /* Pods-azusa-player-mobile-APMTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-azusa-player-mobile-APMTests.debug.xcconfig"; path = "Target Support Files/Pods-azusa-player-mobile-APMTests/Pods-azusa-player-mobile-APMTests.debug.xcconfig"; sourceTree = "<group>"; };
 		2C2F9802D9A70707E1CB329F /* Pods-example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-example.release.xcconfig"; path = "Target Support Files/Pods-example/Pods-example.release.xcconfig"; sourceTree = "<group>"; };
@@ -54,7 +55,6 @@
 		7CA01EA30DD1126F19B1D56B /* Pods-azusa-player-mobile-exampleTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-azusa-player-mobile-exampleTests.debug.xcconfig"; path = "Target Support Files/Pods-azusa-player-mobile-exampleTests/Pods-azusa-player-mobile-exampleTests.debug.xcconfig"; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = example/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		90F8A623B625BC290532B128 /* Pods-azusa-player-mobile-exampleTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-azusa-player-mobile-exampleTests.release.xcconfig"; path = "Target Support Files/Pods-azusa-player-mobile-exampleTests/Pods-azusa-player-mobile-exampleTests.release.xcconfig"; sourceTree = "<group>"; };
-		9820FB6C9BC4AE8228F06F70 /* libPods-azusa-player-mobile-APMTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-azusa-player-mobile-APMTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9ACBB5246153355184C73F02 /* Pods-azusa-player-mobile-APMTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-azusa-player-mobile-APMTests.release.xcconfig"; path = "Target Support Files/Pods-azusa-player-mobile-APMTests/Pods-azusa-player-mobile-APMTests.release.xcconfig"; sourceTree = "<group>"; };
 		9B521D0626604D3800EF0C3A /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		9B521D0A26610C0600EF0C3A /* example-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "example-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -73,7 +73,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DD0F20A1AEB65330E3293A26 /* libPods-azusa-player-mobile-APMTests.a in Frameworks */,
+				5113E2BB4D6051600F956353 /* Pods_azusa_player_mobile_APMTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -83,7 +83,7 @@
 			files = (
 				AA9F058A2AB48946005FA2C6 /* libavfilter.xcframework in Frameworks */,
 				AA9F058E2AB489B1005FA2C6 /* libavutil.xcframework in Frameworks */,
-				A7ED8C5E3242B7A11910AC34 /* libPods-azusa-player-mobile.a in Frameworks */,
+				EF174DA98930A4C1B47966AF /* Pods_azusa_player_mobile.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -128,8 +128,8 @@
 				AA9F05892AB48946005FA2C6 /* libavfilter.xcframework */,
 				9B521D0626604D3800EF0C3A /* AVFoundation.framework */,
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
-				13EEFF6BBEF989EDAD5FC4B7 /* libPods-azusa-player-mobile.a */,
-				9820FB6C9BC4AE8228F06F70 /* libPods-azusa-player-mobile-APMTests.a */,
+				150FB18D67701151BBD83CB5 /* Pods_azusa_player_mobile.framework */,
+				11B0762E2BB6B80DC3E472C8 /* Pods_azusa_player_mobile_APMTests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -726,6 +726,17 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"${PODS_CONFIGURATION_BUILD_DIR}/ReactCommon/ReactCommon.framework/Headers",
+					"${PODS_CONFIGURATION_BUILD_DIR}/ReactCommon/ReactCommon.framework/Headers/react/nativemodule/core",
+					"${PODS_CONFIGURATION_BUILD_DIR}/ReactCommon-Samples/ReactCommon_Samples.framework/Headers",
+					"${PODS_CONFIGURATION_BUILD_DIR}/ReactCommon-Samples/ReactCommon_Samples.framework/Headers/platform/ios",
+					"${PODS_CONFIGURATION_BUILD_DIR}/React-Fabric/React_Fabric.framework/Headers/react/renderer/components/view/platform/cxx",
+					"${PODS_CONFIGURATION_BUILD_DIR}/React-NativeModulesApple/React_NativeModulesApple.framework/Headers",
+					"${PODS_CONFIGURATION_BUILD_DIR}/React-graphics/React_graphics.framework/Headers",
+					"${PODS_CONFIGURATION_BUILD_DIR}/React-graphics/React_graphics.framework/Headers/react/renderer/graphics/platform/ios",
+				);
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD = "";
 				LDPLUSPLUS = "";
@@ -799,6 +810,17 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"${PODS_CONFIGURATION_BUILD_DIR}/ReactCommon/ReactCommon.framework/Headers",
+					"${PODS_CONFIGURATION_BUILD_DIR}/ReactCommon/ReactCommon.framework/Headers/react/nativemodule/core",
+					"${PODS_CONFIGURATION_BUILD_DIR}/ReactCommon-Samples/ReactCommon_Samples.framework/Headers",
+					"${PODS_CONFIGURATION_BUILD_DIR}/ReactCommon-Samples/ReactCommon_Samples.framework/Headers/platform/ios",
+					"${PODS_CONFIGURATION_BUILD_DIR}/React-Fabric/React_Fabric.framework/Headers/react/renderer/components/view/platform/cxx",
+					"${PODS_CONFIGURATION_BUILD_DIR}/React-NativeModulesApple/React_NativeModulesApple.framework/Headers",
+					"${PODS_CONFIGURATION_BUILD_DIR}/React-graphics/React_graphics.framework/Headers",
+					"${PODS_CONFIGURATION_BUILD_DIR}/React-graphics/React_graphics.framework/Headers/react/renderer/graphics/platform/ios",
+				);
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD = "";
 				LDPLUSPLUS = "";
