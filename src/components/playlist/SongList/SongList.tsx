@@ -8,6 +8,7 @@ import Animated, {
   useAnimatedScrollHandler,
   useDerivedValue,
   useSharedValue,
+  withTiming,
 } from 'react-native-reanimated';
 import {
   Gesture,
@@ -22,6 +23,7 @@ import { useNoxSetting } from '@stores/useApp';
 import keepAwake from '@utils/keepAwake';
 import { UsePlaylistRN } from '../usePlaylistRN';
 import RefreshIndicator from '@components/commonui/RefreshIndicator';
+import { PlaylistTypes } from '@enums/Playlist';
 
 const AnimatedFlashList = Animated.createAnimatedComponent(
   FlashList<NoxMedia.Song>,
@@ -170,20 +172,26 @@ export default ({
       // HACK: how to resolve js precision issue?
       if (
         Math.round((scrollPosition.value - 1) * 10000) === 0 &&
-        e.velocityY < 0
+        e.velocityY < 0 &&
+        usedPlaylist.playlist.type === PlaylistTypes.Search
       ) {
-        console.log('pullupstart changed', scrollPosition.value, e);
         pullUpActivated.value = 1;
       }
     })
     .onChange(e => {
       if (pullUpActivated.value !== 1) return;
       if (e.translationY > 0) return (pullUpActivated.value = 0);
-      console.log('pullupchange', e.translationY);
       pullUpDistance.value = e.translationY;
+    })
+    .onEnd(() => {
+      if (pullUpActivated.value !== 1) return;
+      if (pullUpDistance.value < -100) {
+        runOnJS(refreshPlaylist)(true);
+      }
     })
     .onFinalize(() => {
       pullUpActivated.value = 0;
+      pullUpDistance.value = withTiming(0, { duration: 400 });
     });
 
   const gestureRef = React.useRef(pullUpRefreshGesture);

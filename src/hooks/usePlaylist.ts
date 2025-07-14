@@ -24,6 +24,7 @@ export interface UsePlaylist {
   handleSearch: (searchedVal: string) => void;
   rssUpdate: (
     subscribeUrls?: string[],
+    addToEnd?: boolean,
   ) => Promise<NoxMedia.Playlist | undefined>;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   searchBarRef: React.MutableRefObject<any>;
@@ -78,10 +79,10 @@ const usePlaylist = (playlist: NoxMedia.Playlist): UsePlaylist => {
     setRows(reParseSearch({ searchStr: searchedVal, rows: playlist.songList }));
   };
 
-  const rssUpdate = async (subscribeUrls?: string[]) => {
+  const rssUpdate = async (subscribeUrls?: string[], addToEnd = false) => {
     setRefreshing(true);
     try {
-      const result = await playlistCRUD.rssUpdate(subscribeUrls);
+      const result = await playlistCRUD.rssUpdate({ subscribeUrls, addToEnd });
       setRefreshing(false);
       return result;
     } catch (e) {
