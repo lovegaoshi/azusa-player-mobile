@@ -17,6 +17,7 @@ import createMFsdk, { MFsdkStore } from './useMFsdk';
 import createAPMPlayback, { APMPlaybackStore } from './useAPMPlayback';
 import { initMFsdk } from '@utils/mfsdk';
 import smarterShuffle from '../utils/shuffle';
+import { PlaylistTypes } from '@enums/Playlist';
 
 interface NoxSetting
   extends APMUIStore,
@@ -116,13 +117,21 @@ export const useNoxSetting = create<NoxSetting>((set, get, storeApi) => ({
       playlistShouldReRender,
     } = get();
     updatePlaylistSongs(playlist, addSongs, removeSongs);
-    playlists[playlist.id] = playerSetting.memoryEfficiency
-      ? { ...playlist, songList: [] }
-      : playlist;
     if (playlist.id === currentPlaylist.id) {
       set({ currentPlaylist: playlist });
     }
-    set({ playlists });
+    switch (playlist.type) {
+      case PlaylistTypes.Search:
+        set({ searchPlaylist: playlist });
+        break;
+      case PlaylistTypes.Favorite:
+        set({ favoritePlaylist: playlist });
+        break;
+      default:
+        playlists[playlist.id] = playerSetting.memoryEfficiency
+          ? { ...playlist, songList: [] }
+          : playlist;
+    }
     savePlaylist(playlist);
     set({ playlistShouldReRender: !playlistShouldReRender });
     return playlist;
