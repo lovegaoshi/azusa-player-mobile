@@ -46,6 +46,7 @@ export default (p: Props) => {
   const [leftOffset, setLeftOffset] = useState(0);
   const [scrollViewShouldNest, setScrollViewShouldNest] = useState<boolean>();
   const [sheetPresent, setSheetPresent] = useState(false);
+  const [initialized, setInitialized] = useState(false);
   const { height } = Dimensions.get('window');
   const pressableRef = useRef<View>(null);
   const scrollViewRef = useRef<ScrollView>(null);
@@ -55,6 +56,7 @@ export default (p: Props) => {
       pressableRef.current?.measure((_x, _y, _width, _height, pageX, pageY) => {
         setTopOffset(-pageY);
         setLeftOffset(-pageX);
+        setInitialized(true);
       });
   }, []);
 
@@ -66,7 +68,13 @@ export default (p: Props) => {
       dismissWithAnimation
       keyboardMode={'pan'}
       positionOffset={
-        sheetPresent ? { top: topOffset, left: leftOffset } : undefined
+        sheetPresent
+          ? { top: topOffset, left: leftOffset }
+          : // HACK: android only to move the sheet to a nonexistent plane AFTER
+            // the measure offset event is fired
+            initialized
+            ? { top: -9999 }
+            : undefined
       }
       draggingEnabled={draggable}
       backgroundColor={playerStyle.colors.surfaceVariant}
