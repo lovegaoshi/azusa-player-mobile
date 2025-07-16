@@ -9,7 +9,7 @@ interface Props {
   delayedLoading?: boolean;
 }
 
-export const RenderSetting = ({ item, delayedLoading }: Props) => {
+export const RenderSetting = React.memo(({ item, delayedLoading }: Props) => {
   switch (item.settingType) {
     default:
       return (
@@ -20,4 +20,4 @@ export const RenderSetting = ({ item, delayedLoading }: Props) => {
         />
       );
   }
-};
+});
