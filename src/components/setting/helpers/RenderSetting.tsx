@@ -9,21 +9,15 @@ interface Props {
   delayedLoading?: boolean;
 }
 
-export const RenderSetting = React.memo(
-  ({ item, delayedLoading }: Props) => {
-    switch (item.settingType) {
-      default:
-        return (
-          <BooleanSetting
-            {...item}
-            delayedLoading={delayedLoading}
-            key={uuidv4()}
-          />
-        );
-    }
-  },
-  (p, r) => {
-    console.log('memo', p, r);
-    return true;
-  },
-);
+export const RenderSetting = React.memo(({ item, delayedLoading }: Props) => {
+  switch (item.settingType) {
+    default:
+      return (
+        <BooleanSetting
+          {...item}
+          delayedLoading={delayedLoading}
+          key={uuidv4()}
+        />
+      );
+  }
+});
