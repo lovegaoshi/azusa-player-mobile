@@ -42,6 +42,7 @@ const usePlayback = () => {
     playlistSongs,
     title = t('PlaylistsDrawer.SearchListTitle'),
     song,
+    refresh,
   }: PlayAsSearchList) =>
     _playAsSearchList({
       songs,
@@ -51,6 +52,7 @@ const usePlayback = () => {
       searchPlaylist,
       setSearchPlaylist,
       setCurrentPlaylist,
+      refresh,
     });
 
   const shuffleAll = async () =>

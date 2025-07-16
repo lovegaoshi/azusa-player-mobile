@@ -147,6 +147,7 @@ export interface PlayAsSearchList {
   playlistSongs?: NoxMedia.Song[];
   title?: string;
   song?: NoxMedia.Song;
+  refresh?: (v: NoxMedia.Playlist) => Promise<NoxMedia.SearchPlaylist>;
 }
 
 interface _PlayAsSearchList extends PlayAsSearchList {
@@ -163,11 +164,13 @@ export const _playAsSearchList = async ({
   searchPlaylist,
   setSearchPlaylist,
   setCurrentPlaylist,
+  refresh,
 }: _PlayAsSearchList) => {
   const newPlayingPlaylist = {
     ...searchPlaylist,
     title,
     songList: songs,
+    refresh,
   };
   const newSearchPlaylist = playlistSongs
     ? { ...newPlayingPlaylist, songList: playlistSongs }

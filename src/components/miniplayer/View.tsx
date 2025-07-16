@@ -77,6 +77,7 @@ export default () => {
       toHeight = height;
     }
     transitionHeight(toHeight, animation);
+    runOnJS(setLrcVisible)(false);
   };
 
   const collapse = (animation = true, toHeight = -1) => {
