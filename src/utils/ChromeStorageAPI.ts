@@ -146,7 +146,7 @@ export const delPlaylist = async (playlistId: string) => {
   return Promise.all(playlistKeys.map(k => removeItem(k)));
 };
 
-const clearStorage = () => AsyncStorage.clear.bind(AsyncStorage)();
+export const clearStorage = () => AsyncStorage.clear.bind(AsyncStorage)();
 
 const getPlayerContent = async (content?: any) => {
   if (content) {

@@ -6,6 +6,9 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { randomChoice } from '@utils/Utils';
 import useTanakaAmazingCommodities from '@hooks/useTanakaAmazingCommodities';
+import useAlert from '../dialogs/useAlert';
+import { clearStorage } from '@utils/ChromeStorageAPI';
+
 enum SplashType {
   Image = 'image',
   Video = 'video',
@@ -98,4 +101,20 @@ const AppOpenSplash = ({ setIsSplashReady }: Props) => {
   }
 };
 
-export default AppOpenSplash;
+export default (p: Props) => {
+  const pressingCount = React.useRef(0);
+  const { TwoWayAlert } = useAlert();
+
+  return (
+    <Pressable
+      onPress={() => {
+        pressingCount.current++;
+        if (pressingCount.current > 5) {
+          TwoWayAlert('Reset', 'Are you sure to reset the app?', clearStorage);
+        }
+      }}
+    >
+      <AppOpenSplash {...p} />
+    </Pressable>
+  );
+};
