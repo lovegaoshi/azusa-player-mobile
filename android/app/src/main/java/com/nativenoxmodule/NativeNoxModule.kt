@@ -1,4 +1,4 @@
-package com.noxplay.noxplayer
+package com.nativenoxmodule
 
 import android.app.ActivityManager
 import android.app.ApplicationExitInfo
@@ -13,23 +13,22 @@ import android.provider.Settings
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.content.FileProvider
 import com.facebook.react.bridge.Arguments
-import com.facebook.react.bridge.Promise
 import com.facebook.react.bridge.ReactApplicationContext
-import com.facebook.react.bridge.ReactContextBaseJavaModule
-import com.facebook.react.bridge.ReactMethod
 import com.facebook.react.bridge.WritableArray
 import com.facebook.react.bridge.WritableNativeArray
+import com.noxplay.noxplayer.BuildConfig
+import com.noxplay.noxplayer.MainActivity
 import timber.log.Timber
 import java.io.File
 
+class NativeNoxModule(reactContext: ReactApplicationContext) : NativeNoxModuleSpec(reactContext) {
 
-class NoxModule(reactContext: ReactApplicationContext) :
-    ReactContextBaseJavaModule(reactContext) {
-    override fun getName() = "NoxModule"
+    override fun getName() = NAME
 
     private fun getActivity(): MainActivity? {
         return reactApplicationContext.currentActivity as MainActivity?
     }
+
 
     private fun listMediaDirNative(relativeDir: String, subdir: Boolean, selection: String? = null): WritableArray {
         val results: WritableArray = WritableNativeArray()
@@ -89,54 +88,53 @@ class NoxModule(reactContext: ReactApplicationContext) :
         return results
     }
 
-    @ReactMethod fun getUri(uri: String, callback: Promise) {
-        callback.resolve(FileProvider.getUriForFile(reactApplicationContext,
-            "${BuildConfig.APPLICATION_ID}.provider", File(uri)).toString())
+    override fun getUri(uri: String?): String {
+        return FileProvider.getUriForFile(reactApplicationContext,
+            "${BuildConfig.APPLICATION_ID}.provider", File(uri!!)
+        ).toString()
     }
 
-    @ReactMethod fun listMediaDir(relativeDir: String, subdir: Boolean, callback: Promise) {
-        callback.resolve(listMediaDirNative(relativeDir, subdir))
+    override fun listMediaDir(relativeDir: String?, subdir: Boolean): WritableArray {
+        return listMediaDirNative(relativeDir!!, subdir)
     }
 
-    @ReactMethod fun listMediaFileByFName(filename: String, relDir: String, callback: Promise) {
-        callback.resolve(listMediaDirNative(relDir, true,
-            "${MediaStore.Audio.Media.DISPLAY_NAME} IN ('$filename')"))
+    override fun listMediaFileByFName(filename: String?, relativeDir: String?): WritableArray {
+        return listMediaDirNative(relativeDir!!, true,
+            "${MediaStore.Audio.Media.DISPLAY_NAME} IN ('$filename')")
     }
 
-    @ReactMethod fun listMediaFileByID(id: String, callback: Promise) {
-        callback.resolve(listMediaDirNative("", true,
-            "${MediaStore.Audio.Media._ID} = $id"))
+    override fun listMediaFileByID(id: String?): WritableArray {
+        return listMediaDirNative("", true,
+            "${MediaStore.Audio.Media._ID} = $id")
     }
 
-    @ReactMethod fun loadRN(callback: Promise) {
+    override fun loadRN() {
         val activity = getActivity()
         activity?.loadedRN = true
-        callback.resolve(null)
     }
 
-    @ReactMethod fun isRNLoaded(callback: Promise) {
+    override fun isRNLoaded(): Boolean {
         val activity = getActivity()
         Timber.tag("APM").d("probing if RN is loaded: ${activity?.loadedRN}")
-        callback.resolve(activity?.loadedRN)
+        return activity?.loadedRN ?: true
     }
 
-    @ReactMethod fun getLastExitCode(callback: Promise) {
-    try {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-            val activity = getActivity()
-            val am = activity?.getSystemService(Context.ACTIVITY_SERVICE) as ActivityManager
-            return callback.resolve(am.getHistoricalProcessExitReasons(
-                BuildConfig.APPLICATION_ID,0,0
-            )[0].reason)
+    override fun getLastExitCode(): Double {
+        try {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+                val activity = getActivity()
+                val am = activity?.getSystemService(Context.ACTIVITY_SERVICE) as ActivityManager
+                return am.getHistoricalProcessExitReasons(
+                    BuildConfig.APPLICATION_ID,0,0
+                )[0].reason.toDouble()
+            }
+        } catch (e: Exception) {
+            Timber.tag("APMLastExitCode").d(e)
         }
-    } catch (e: Exception) {
-        Timber.tag("APMLastExitCode").d(e)
-    } finally {
-        callback.resolve(0)
-    }
+        return 0.0
     }
 
-    @ReactMethod fun getLastExitReason(callback: Promise) {
+    override fun getLastExitReason(): Boolean {
         try {
             val activity = getActivity()
             val am = activity?.getSystemService(Context.ACTIVITY_SERVICE) as ActivityManager
@@ -144,7 +142,7 @@ class NoxModule(reactContext: ReactApplicationContext) :
                 val reason = am.getHistoricalProcessExitReasons(
                     BuildConfig.APPLICATION_ID,0,0
                 )[0].reason
-                callback.resolve(reason in intArrayOf(
+                return reason in intArrayOf(
                     ApplicationExitInfo.REASON_USER_REQUESTED,
                     ApplicationExitInfo.REASON_USER_STOPPED,
                     ApplicationExitInfo.REASON_EXIT_SELF,
@@ -153,39 +151,38 @@ class NoxModule(reactContext: ReactApplicationContext) :
                     ApplicationExitInfo.REASON_EXCESSIVE_RESOURCE_USAGE,
                     ApplicationExitInfo.REASON_LOW_MEMORY,
                     ApplicationExitInfo.REASON_SIGNALED,
-                ))
-            } else {
-                callback.resolve(true)
+                )
             }
-        } catch (e: Exception) {
-            callback.resolve(true)
+        } catch (_: Exception) {
         }
+        return true
     }
 
-    @ReactMethod fun isGestureNavigationMode(callback: Promise) {
+    override fun isGestureNavigationMode(): Boolean {
         val context = reactApplicationContext
-        callback.resolve(
-            Settings.Secure.getInt(context.contentResolver, "navigation_mode", 0) == 2
-        )
+
+        return Settings.Secure.getInt(context.contentResolver, "navigation_mode", 0) == 2
+
     }
 
-    @ReactMethod fun selfDestruct(callback: Promise) {
+    override fun selfDestruct() {
         val activity = getActivity()
         Timber.tag("NoxModule").w("self destructing!!!")
         activity?.finish()
         android.os.Process.killProcess(android.os.Process.myPid())
-        callback.resolve(null)
     }
 
-    // HACK: this unfortunately doesnt immediately change on S21 android 14?
-    // AUTO = 0; NO = 1, YES = 2
-    @ReactMethod fun setDarkTheme(mode: Int, callback: Promise) {
+    override fun setDarkTheme(mode: Double) {
         val activity = getActivity()
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
             val ui = activity?.getSystemService(UI_MODE_SERVICE) as UiModeManager?
-            ui?.setApplicationNightMode(mode)
+            ui?.setApplicationNightMode(mode.toInt())
         } else {
-            AppCompatDelegate.setDefaultNightMode(mode)
+            AppCompatDelegate.setDefaultNightMode(mode.toInt())
         }
+    }
+
+    companion object {
+        const val NAME = "NativeNoxModule"
     }
 }

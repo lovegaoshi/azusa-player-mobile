@@ -12,10 +12,10 @@ import com.facebook.react.defaults.DefaultNewArchitectureEntryPoint.load
 import com.facebook.react.defaults.DefaultReactNativeHost
 import com.facebook.react.soloader.OpenSourceMergedSoMapping
 import com.facebook.soloader.SoLoader
-import expo.modules.ApplicationLifecycleDispatcher.onApplicationCreate
-import expo.modules.ApplicationLifecycleDispatcher.onConfigurationChanged
 import expo.modules.ReactNativeHostWrapper
 import com.otahotupdate.OtaHotUpdate
+import com.nativenoxmodule.NativeNoxModulePackage
+import expo.modules.ApplicationLifecycleDispatcher
 
 class MainApplication : Application(), ReactApplication {
     override val reactNativeHost: ReactNativeHost =
@@ -26,11 +26,11 @@ class MainApplication : Application(), ReactApplication {
                 PackageList(this).packages.apply {
                     // Packages that cannot be autolinked yet can be added manually here, for example:
                     // add(MyReactNativePackage())
-                    add(NoxPackage())
+                    add(NativeNoxModulePackage())
                 }
 
             override fun getJSMainModuleName(): String = "index"
-            override fun getJSBundleFile(): String? {
+            override fun getJSBundleFile(): String {
                 val sharedPref = this@MainApplication.getSharedPreferences(
                     "com.noxplay.noxplayer.APMSettings", MODE_PRIVATE)
                 if (sharedPref.getBoolean("safemode", false)) {
@@ -59,11 +59,11 @@ class MainApplication : Application(), ReactApplication {
             // If you opted-in for the New Architecture, we load the native entry point for this app.
             load()
         }
-        onApplicationCreate(this)
+        ApplicationLifecycleDispatcher.onApplicationCreate(this)
     }
 
     override fun onConfigurationChanged(newConfig: Configuration) {
         super.onConfigurationChanged(newConfig)
-        onConfigurationChanged(this, newConfig)
+        ApplicationLifecycleDispatcher.onConfigurationChanged(this, newConfig)
     }
 }

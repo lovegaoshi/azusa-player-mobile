@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import TrackPlayer from 'react-native-track-player';
 import { migrate } from 'drizzle-orm/expo-sqlite/migrator';
-import { NativeModules } from 'react-native';
 
 import { SetupService, additionalPlaybackService } from 'services';
 import { initPlayerObject } from '@utils/ChromeStorage';
@@ -19,8 +18,7 @@ import APMMigration from '../utils/db/migration';
 import sqldb from '../utils/db/sql';
 import logger from '@utils/Logger';
 import { TPPlay } from '@stores/RNObserverStore';
-
-const { NoxModule } = NativeModules;
+import NativeNoxModule from '@specs/NativeNoxModule';
 
 const initializePlayer = async (safeMode = false) => {
   await migrate(sqldb, migrations);
@@ -82,9 +80,9 @@ export default ({ intentData, vip }: NoxComponent.SetupPlayerProps) => {
   useEffect(() => {
     let unmounted = false;
     (async () => {
-      const isRNLoaded = await NoxModule?.isRNLoaded?.();
+      const isRNLoaded = NativeNoxModule?.isRNLoaded?.();
       if (!vip) {
-        NoxModule?.loadRN?.();
+        NativeNoxModule?.loadRN?.();
       }
       await appStartupInit;
       const storedPlayerSetting =
@@ -95,7 +93,7 @@ export default ({ intentData, vip }: NoxComponent.SetupPlayerProps) => {
       // or last exit reason is ApplicationExitInfo.REASON_SIGNALED (2)
       // for Samsung S21
       const GCCrash = isRNLoaded && !__DEV__;
-      const OSkill = (await NoxModule?.getLastExitCode?.()) === 2;
+      const OSkill = NativeNoxModule?.getLastExitCode?.() === 2;
       if (GCCrash || OSkill) {
         vip && (await TPPlay());
         logger.error(`[APMResume] detected ${GCCrash} and ${OSkill}!`);
@@ -129,7 +127,7 @@ export default ({ intentData, vip }: NoxComponent.SetupPlayerProps) => {
 
   useEffect(() => {
     // HACK: fix when starting via notification clicks, loadRN is not set yet
-    playerReady && NoxModule?.loadRN();
+    playerReady && NativeNoxModule?.loadRN?.();
   }, [playerReady]);
 
   return playerReady;

@@ -8,14 +8,14 @@
       "@components/*": ["src/components/*"],
       "@types/*": ["src/types/*"],
       "@utils/*": ["src/utils/*"],
+      "@specs/*": ["./specs/*"],
       "@contexts/*": ["src/contexts/*"],
       "@assets/*": ["src/assets/*"],
       "@enums/*": ["src/enums/*"],
       "@objects/*": ["src/objects/*"],
       "@services/*": ["src/services/*"],
       "@stores/*": ["src/stores/*"],
-      "@hooks/*": ["src/hooks/*"],
-      "@mfsdk/*": ["./MusicFreePlugins/dist/*"]
+      "@hooks/*": ["src/hooks/*"]
     },
     "allowJs": true,
     "allowSyntheticDefaultImports": true,

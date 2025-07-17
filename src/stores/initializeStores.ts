@@ -1,4 +1,4 @@
-import { NativeModules, Platform } from 'react-native';
+import { Platform } from 'react-native';
 import { useNoxSetting } from './useApp';
 import { fetch } from '@react-native-community/netinfo';
 import i18next from 'i18next';
@@ -8,8 +8,7 @@ import { initialize as initializeRegexStore } from './regexStore';
 import { dataSaverPlaylist, initCache } from '../utils/Cache';
 import { initMuse } from '../utils/muse';
 import { useAPM } from './usePersistStore';
-
-const { NoxModule } = NativeModules;
+import NativeNoxModule from '@specs/NativeNoxModule';
 
 interface InitializeStores {
   val: NoxStorage.PlayerStorageObject;
@@ -28,13 +27,13 @@ export const initializeStores = async ({
   switch (Platform.OS) {
     case 'android':
       try {
-        if (!(await NoxModule.getLastExitReason())) {
+        if (!NativeNoxModule?.getLastExitReason()) {
           val.lastPlaylistId = ['DUMMY', 'DUMMY'];
         }
       } catch {
         // TODO: do something?
       }
-      setGestureMode(await NoxModule.isGestureNavigationMode?.());
+      setGestureMode(NativeNoxModule?.isGestureNavigationMode?.() ?? true);
       break;
     default:
       break;
