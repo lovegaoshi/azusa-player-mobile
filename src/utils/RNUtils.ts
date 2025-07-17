@@ -1,7 +1,6 @@
 import {
   Platform,
   PermissionsAndroid,
-  NativeModules,
   Appearance,
   ColorSchemeName,
 } from 'react-native';
@@ -9,11 +8,12 @@ import RNFetchBlob from 'react-native-blob-util';
 import * as DocumentPicker from 'expo-document-picker';
 import { nativeCrash } from '@sentry/react-native';
 
+import NativeNoxModule from '@specs/NativeNoxModule';
+
 export const isAndroid = Platform.OS === 'android';
 export const isAndroid15 = isAndroid && Number(Platform.Version) >= 35;
 export const isAndroid10 = isAndroid && Number(Platform.Version) >= 29;
 export const isIOS = Platform.OS === 'ios';
-const { NoxModule } = NativeModules;
 
 const themeConversion = (t: ColorSchemeName) => {
   switch (t) {
@@ -31,7 +31,7 @@ const themeConversion = (t: ColorSchemeName) => {
  */
 export const setDarkTheme = (t: ColorSchemeName) => {
   Appearance.setColorScheme(t);
-  NoxModule?.setDarkTheme?.(themeConversion(t));
+  NativeNoxModule.setDarkTheme?.(themeConversion(t));
 };
 
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -88,7 +88,7 @@ const chooseLocalFileAndroid = async (
 };
 
 const getMediaRealPath = async (uri: string, parsedURI: string) => {
-  const mediaFiles = await NoxModule.listMediaFileByFName(
+  const mediaFiles = NativeNoxModule.listMediaFileByFName(
     uri.substring(uri.lastIndexOf('%2F') + 3),
     parsedURI.substring(0, parsedURI.lastIndexOf('/')),
   );
@@ -112,9 +112,8 @@ export const chooseLocalMediaFolderAndroid = async (realPath = false) => {
         : undefined,
     };
   }
-  const mediaFiles = await NoxModule.listMediaFileByID(
+  const mediaFiles = NativeNoxModule.listMediaFileByID(
     location.uri.substring(location.uri.lastIndexOf('%3A') + 3),
-    '',
   );
   return {
     reason: FilePickerResult.Success,
@@ -128,5 +127,5 @@ export const validateFile = async (fpath?: string | null) => {
 };
 
 export const selfDestruct = () => {
-  return isAndroid ? NoxModule.selfDestruct() : nativeCrash();
+  return isAndroid ? NativeNoxModule.selfDestruct() : nativeCrash();
 };

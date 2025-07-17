@@ -46,6 +46,7 @@ export default (videoRef: RefObject<VideoRef | null>) => {
   }, [RNTPPlay, RNTPSeek]);
 
   useEffect(() => {
+    console.log('debug', song, song?.backgroundOverride);
     try {
       setParsedMV(JSON.parse(song?.backgroundOverride ?? ''));
     } catch {

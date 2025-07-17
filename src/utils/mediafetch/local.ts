@@ -9,15 +9,12 @@
  * steps to refactor:
  * each site needs a fetch to parse regex extracted, a videoinfo fetcher and a song fetcher.
  */
-import { NativeModules } from 'react-native';
-
 import { cacheAlbumArt, base64AlbumArt } from '@utils/ffmpeg/ffmpeg';
 import { Source } from '@enums/MediaFetch';
 import SongTS from '@objects/Song';
 import logger from '../Logger';
 import { isAndroid } from '@utils/RNUtils';
-
-const { NoxModule } = NativeModules;
+import NativeNoxModule from '@specs/NativeNoxModule';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const songFetch = async (
@@ -26,7 +23,7 @@ const songFetch = async (
 ): Promise<NoxMedia.Song[]> => {
   if (!isAndroid) return [];
   const mediaFiles: NoxUtils.NoxFileUtilMediaInfo[] =
-    await NoxModule.listMediaDir(fpath, true);
+    NativeNoxModule.listMediaDir(fpath, true);
   const uniqMediaFiles = mediaFiles.filter(v => !favlist.includes(v.realPath));
   return uniqMediaFiles.map(v =>
     SongTS({
@@ -60,7 +57,7 @@ const resolveURL = async (song: NoxMedia.Song) => {
   if (isAndroid) {
     const artworkUri = await cacheAlbumArt(song.bvid);
     if (artworkUri) {
-      cover = await NoxModule.getUri(artworkUri);
+      cover = NativeNoxModule.getUri(artworkUri);
     }
   }
   return { ...(await resolveURLPrefetch(song)), cover };
