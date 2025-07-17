@@ -5,7 +5,6 @@ import { biliGarbHeadVideoFetch } from './biliGarb';
 import { cacheWrapper } from '@utils/Cache';
 import logger from '../Logger';
 import { isIOS } from '../RNUtils';
-import { ffmpegToMP4 } from '@utils/ffmpeg/ffmpeg';
 
 export enum RESOLVE_TYPE {
   bvid = 'bvid',
@@ -43,8 +42,7 @@ export default async (backgroundImage?: string | NoxTheme.BackgroundImage) => {
         return BackgroundVideoWrapper(
           await cacheWrapper(
             `${RESOLVE_TYPE.bvid}-${backgroundImage.identifier}`,
-            () => fetchVideoPlayUrl(backgroundImage.identifier),
-            isIOS ? ffmpegToMP4 : undefined,
+            () => fetchVideoPlayUrl(backgroundImage.identifier, isIOS),
           ),
           backgroundImage,
         );
