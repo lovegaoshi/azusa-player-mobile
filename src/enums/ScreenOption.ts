@@ -1,3 +1,7 @@
 import { StackAnimationTypes } from 'react-native-screens';
 
-export default { animation: 'fade' as StackAnimationTypes };
+import { isAndroid } from '@utils/RNUtils';
+
+export default {
+  animation: (isAndroid ? 'fade' : 'default') as StackAnimationTypes,
+};

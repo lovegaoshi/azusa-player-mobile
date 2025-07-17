@@ -147,6 +147,7 @@ class NoxMediaCache {
   loadCacheFunction = async (
     identifier: string,
     getURL: () => Promise<string>,
+    transform: (v: string) => Promise<string> = async v => v,
   ) => {
     logger.debug(`[NoxCache] looking up ${identifier} from cache...`);
     const cachedPath = await this.loadCacheObject(identifier);
@@ -163,8 +164,9 @@ class NoxMediaCache {
         const progress = Math.floor((Number(received) * 100) / Number(total));
         logger.debug(`[NoxCache] ${identifier} caching progress: ${progress}%`);
       })
-      .then(res => {
-        this.cache.set(identifier, res.path());
+      .then(async res => {
+        const path = await transform(res.path());
+        this.cache.set(identifier, path);
         this.dumpCache();
       })
       .catch();
@@ -233,7 +235,8 @@ export const initCache = async (
 export const cacheWrapper = (
   identifier: string,
   getURL: () => Promise<string>,
-) => cache.noxMediaCache.loadCacheFunction(identifier, getURL);
+  transform: (v: string) => Promise<string> = async v => v,
+) => cache.noxMediaCache.loadCacheFunction(identifier, getURL, transform);
 
 const _dataSaverSongs = (v: NoxMedia.Song[]) =>
   v.filter(song => cache.noxMediaCache?.peekCache(song) !== undefined);
