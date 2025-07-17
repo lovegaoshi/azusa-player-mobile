@@ -141,6 +141,19 @@ export const ffmpegToMP3 = async ({
   return `${fspath}.mp3`;
 };
 
+export const ffmpegToMP4 = async (fspath: string) => {
+  try {
+    await FFmpegKit.execute(
+      `-i '${fspath}' -c:v libx264 -c:a copy ${fspath}.mp4`,
+    );
+    RNFetchBlob.fs.unlink(fspath).catch();
+    return `${fspath}.mp4`;
+  } catch (e) {
+    logger.warn(`[ffmpegToMP4] failed ${e}`);
+  }
+  return '';
+};
+
 export const setTPR128Gain = async (gain: number, fade = 0, init = -1) => {
   const volume = r128gain2Volume(gain || 0);
   logger.debug(`[r128gain] set r128gain volume to ${volume} in ${fade}`);
