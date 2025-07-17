@@ -31,7 +31,7 @@ class MainApplication : Application(), ReactApplication {
                 }
 
             override fun getJSMainModuleName(): String = "index"
-            override fun getJSBundleFile(): String? {
+            override fun getJSBundleFile(): String {
                 val sharedPref = this@MainApplication.getSharedPreferences(
                     "com.noxplay.noxplayer.APMSettings", MODE_PRIVATE)
                 if (sharedPref.getBoolean("safemode", false)) {

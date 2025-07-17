@@ -14,7 +14,7 @@ export default () => {
 export const showDebugLog = async () => {
   const log = `TP.volume: ${await TrackPlayer.getVolume()}\n
     TP.activeTrack: ${JSON.stringify(await TrackPlayer.getActiveTrack())}\n
-    LastExitCode: ${NativeNoxModule.getLastExitCode?.()}\n
+    LastExitCode: ${NativeNoxModule?.getLastExitCode?.()}\n
     RN architecture: ${isOldArch() ? 'paper' : 'fabric'}`;
   showLog(log);
 };

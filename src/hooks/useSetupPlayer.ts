@@ -80,9 +80,9 @@ export default ({ intentData, vip }: NoxComponent.SetupPlayerProps) => {
   useEffect(() => {
     let unmounted = false;
     (async () => {
-      const isRNLoaded = NativeNoxModule.isRNLoaded?.();
+      const isRNLoaded = NativeNoxModule?.isRNLoaded?.();
       if (!vip) {
-        NativeNoxModule.loadRN?.();
+        NativeNoxModule?.loadRN?.();
       }
       await appStartupInit;
       const storedPlayerSetting =
@@ -93,7 +93,7 @@ export default ({ intentData, vip }: NoxComponent.SetupPlayerProps) => {
       // or last exit reason is ApplicationExitInfo.REASON_SIGNALED (2)
       // for Samsung S21
       const GCCrash = isRNLoaded && !__DEV__;
-      const OSkill = NativeNoxModule.getLastExitCode?.() === 2;
+      const OSkill = NativeNoxModule?.getLastExitCode?.() === 2;
       if (GCCrash || OSkill) {
         vip && (await TPPlay());
         logger.error(`[APMResume] detected ${GCCrash} and ${OSkill}!`);
@@ -127,7 +127,7 @@ export default ({ intentData, vip }: NoxComponent.SetupPlayerProps) => {
 
   useEffect(() => {
     // HACK: fix when starting via notification clicks, loadRN is not set yet
-    playerReady && NativeNoxModule.loadRN();
+    playerReady && NativeNoxModule?.loadRN?.();
   }, [playerReady]);
 
   return playerReady;

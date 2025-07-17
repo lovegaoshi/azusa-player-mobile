@@ -24,7 +24,6 @@ module.exports = api => {
               '@stores': './src/stores',
               '@hooks': './src/hooks',
               '@assets': './src/assets',
-              '@mfsdk': './MusicFreePlugins/dist',
             },
           },
         ],
@@ -58,6 +57,7 @@ module.exports = api => {
           alias: {
             tests: ['./tests/'],
             '@components': './src/components',
+            '@specs': './specs',
             '@types': './src/types',
             '@utils': './src/utils',
             '@contexts': './src/contexts',
@@ -67,7 +67,6 @@ module.exports = api => {
             '@stores': './src/stores',
             '@hooks': './src/hooks',
             '@assets': './src/assets',
-            '@mfsdk': './MusicFreePlugins/dist',
           },
         },
       ],

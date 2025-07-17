@@ -31,7 +31,7 @@ const themeConversion = (t: ColorSchemeName) => {
  */
 export const setDarkTheme = (t: ColorSchemeName) => {
   Appearance.setColorScheme(t);
-  NativeNoxModule.setDarkTheme?.(themeConversion(t));
+  NativeNoxModule?.setDarkTheme?.(themeConversion(t));
 };
 
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -88,10 +88,11 @@ const chooseLocalFileAndroid = async (
 };
 
 const getMediaRealPath = async (uri: string, parsedURI: string) => {
-  const mediaFiles = NativeNoxModule.listMediaFileByFName(
-    uri.substring(uri.lastIndexOf('%2F') + 3),
-    parsedURI.substring(0, parsedURI.lastIndexOf('/')),
-  );
+  const mediaFiles =
+    NativeNoxModule?.listMediaFileByFName(
+      uri.substring(uri.lastIndexOf('%2F') + 3),
+      parsedURI.substring(0, parsedURI.lastIndexOf('/')),
+    ) ?? [];
   return mediaFiles[0].realPath;
 };
 
@@ -112,9 +113,10 @@ export const chooseLocalMediaFolderAndroid = async (realPath = false) => {
         : undefined,
     };
   }
-  const mediaFiles = NativeNoxModule.listMediaFileByID(
-    location.uri.substring(location.uri.lastIndexOf('%3A') + 3),
-  );
+  const mediaFiles =
+    NativeNoxModule?.listMediaFileByID(
+      location.uri.substring(location.uri.lastIndexOf('%3A') + 3),
+    ) ?? [];
   return {
     reason: FilePickerResult.Success,
     relativePath: mediaFiles[0].relativePath,
@@ -127,5 +129,5 @@ export const validateFile = async (fpath?: string | null) => {
 };
 
 export const selfDestruct = () => {
-  return isAndroid ? NativeNoxModule.selfDestruct() : nativeCrash();
+  return isAndroid ? NativeNoxModule?.selfDestruct() : nativeCrash();
 };

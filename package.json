@@ -32,7 +32,7 @@
     "sql": "npx drizzle-kit generate"
   },
   "codegenConfig": {
-    "name": "NativeNoxModule",
+    "name": "NativeNoxModuleSpec",
     "type": "modules",
     "jsSrcsDir": "specs",
     "android": {

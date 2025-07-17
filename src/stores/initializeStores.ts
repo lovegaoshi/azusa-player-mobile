@@ -27,13 +27,13 @@ export const initializeStores = async ({
   switch (Platform.OS) {
     case 'android':
       try {
-        if (!NativeNoxModule.getLastExitReason()) {
+        if (!NativeNoxModule?.getLastExitReason()) {
           val.lastPlaylistId = ['DUMMY', 'DUMMY'];
         }
       } catch {
         // TODO: do something?
       }
-      setGestureMode(NativeNoxModule.isGestureNavigationMode?.());
+      setGestureMode(NativeNoxModule?.isGestureNavigationMode?.() ?? true);
       break;
     default:
       break;

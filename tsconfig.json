@@ -15,8 +15,7 @@
       "@objects/*": ["src/objects/*"],
       "@services/*": ["src/services/*"],
       "@stores/*": ["src/stores/*"],
-      "@hooks/*": ["src/hooks/*"],
-      "@mfsdk/*": ["./MusicFreePlugins/dist/*"]
+      "@hooks/*": ["src/hooks/*"]
     },
     "allowJs": true,
     "allowSyntheticDefaultImports": true,
