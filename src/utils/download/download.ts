@@ -30,6 +30,13 @@ export const copyCacheToDir = async ({
       song,
       unlink: false,
     });
+
+    if (!(await RNFetchBlob.fs.exists(filePath))) {
+      throw new Error(
+        `[download] ${song.parsedName} failed to be converted to mp3. check debug logs`,
+      );
+    }
+
     const result = await RNFetchBlob.MediaCollection.copyToMediaStore(
       {
         name: `${song.parsedName}.mp3`,
@@ -39,13 +46,27 @@ export const copyCacheToDir = async ({
       'Audio',
       filePath,
     );
+
     RNFetchBlob.fs.unlink(filePath).catch();
     displayDLComplete(song);
     return result;
   } catch (e) {
+    // HACK
     displayDLComplete(song);
     logger.warn(
       `[Download] ${song.parsedName} failed to copy to music dir: ${e}`,
+    );
+    logger.warn(
+      '[Download] now copying the cached object to mediaStore with mp3 extension instead',
+    );
+    await RNFetchBlob.MediaCollection.copyToMediaStore(
+      {
+        name: `${song.parsedName}.mp3`,
+        parentFolder: fsdir,
+        mimeType: 'audio/mp3',
+      },
+      'Audio',
+      resolvedPath,
     );
   }
 };
