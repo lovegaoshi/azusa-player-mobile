@@ -27,4 +27,4 @@ export interface Spec extends TurboModule {
   setDarkTheme: (mode: number) => void;
 }
 
-export default TurboModuleRegistry.getEnforcing<Spec>('NativeNoxModule');
+export default TurboModuleRegistry.get<Spec>('NativeNoxModule');
