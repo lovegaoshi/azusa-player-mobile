@@ -42,7 +42,7 @@ const prepareSkipToNext = async (
   set = true,
 ) => {
   const TPQueueLength = (await TrackPlayer.getQueue()).length;
-  const nextSong = playNextSong(undefined, set);
+  const nextSong = playNextSong(1, set);
   if ((await TrackPlayer.getActiveTrackIndex()) === TPQueueLength - 1) {
     const { playerSetting } = useNoxSetting.getState();
     autoShuffleQueue(
@@ -108,9 +108,7 @@ export const performSkipToNext = (
   }
   const callback = () =>
     preparePromise().then(async () => {
-      // await TrackPlayer.skipToNext();
-      const queueLen = (await TrackPlayer.getQueue()).length;
-      await TrackPlayer.skip(queueLen - 1);
+      await TrackPlayer.skipToNext();
       TPPlay();
     });
   mPerformFade(callback);
