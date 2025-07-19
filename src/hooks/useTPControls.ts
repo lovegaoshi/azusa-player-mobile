@@ -108,7 +108,12 @@ export const performSkipToNext = (
   }
   const callback = () =>
     preparePromise().then(async () => {
-      await TrackPlayer.skipToNext();
+      //await TrackPlayer.skipToNext();
+      // WHY?
+      const nextIndex = ((await TrackPlayer.getActiveTrackIndex()) ?? 0) + 1;
+      const maxQueueLen = (await TrackPlayer.getQueue()).length - 1;
+      // HACK: log when nextIndex > maxQueueLen here
+      await TrackPlayer.skip(Math.min(nextIndex, maxQueueLen));
       TPPlay();
     });
   mPerformFade(callback);
