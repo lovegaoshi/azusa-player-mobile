@@ -55,6 +55,9 @@ const prepareSkipToNext = async (
     try {
       await mSkipToBiliSuggest();
     } catch {
+      logger.debug(
+        `[skipToNext] adding song ${nextSong.parsedName}/${nextSong.id}to TP queue`,
+      );
       // TODO: this will just grow infinitely. WTF was i thinking?
       await TrackPlayer.add(await songlistToTracklist([nextSong]));
     }
