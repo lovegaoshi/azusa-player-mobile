@@ -131,7 +131,9 @@ export default ({ miniplayerHeight, opacity, onPress, expand }: Props) => {
     songResolveArtwork(track?.song)?.then(setOverwriteAlbumArt);
   }, [track]);
 
-  useEffect(() => refreshImageCarousel(), [img]);
+  useEffect(() => {
+    playerSetting.artworkCarousel && refreshImageCarousel();
+  }, [img]);
 
   return (
     <TouchableWithoutFeedback onPress={onImagePress}>

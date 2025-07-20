@@ -51,6 +51,12 @@ export const logger = {
     if (logStore.getState().logLevel > LOGLEVEL.DEBUG) return;
     addLog('debug', msg);
   },
+  debugR: (msg: () => any) => {
+    if (logStore.getState().logLevel > LOGLEVEL.DEBUG) return;
+    const result = msg();
+    console.debug(result);
+    addLog('debug', result);
+  },
   log: (msg: any) => {
     console.log(msg);
     if (logStore.getState().logLevel > LOGLEVEL.INFO) return;

@@ -41,9 +41,14 @@ const prepareSkipToNext = async (
   mSkipToBiliSuggest = skipToBiliSuggest,
   set = true,
 ) => {
-  const TPQueueLength = (await TrackPlayer.getQueue()).length;
+  const TPQueue = await TrackPlayer.getQueue();
+  const TPQueueLength = TPQueue.length;
   const nextSong = playNextSong(1, set);
-  if ((await TrackPlayer.getActiveTrackIndex()) === TPQueueLength - 1) {
+  const currentIndex = await TrackPlayer.getActiveTrackIndex();
+  logger.debug(
+    `[skipToNext] preparing skipToNext: ${currentIndex}/${TPQueueLength}, with ${nextSong?.parsedName}`,
+  );
+  if (currentIndex === TPQueueLength - 1) {
     const { playerSetting } = useNoxSetting.getState();
     autoShuffleQueue(
       TPQueueLength + 1,
@@ -61,6 +66,11 @@ const prepareSkipToNext = async (
       // TODO: this will just grow infinitely. WTF was i thinking?
       await TrackPlayer.add(await songlistToTracklist([nextSong]));
     }
+  } else {
+    logger.debugR(
+      () =>
+        `[skipToNext] currentQueue: ${TPQueue.map(s => `${s.song.parsedName}/${s.song.id}`)}`,
+    );
   }
 };
 
