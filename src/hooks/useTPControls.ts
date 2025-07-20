@@ -114,6 +114,7 @@ export const performSkipToNext = (
     logger.debug('[autoRepeat] stopping playback as autoRepeat is set to off');
     return;
   }
+  logger.debug('[skipToNext] calling skipToNext');
   if (!auto) {
     TrackPlayer.getActiveTrack().then(t =>
       increasePlaybackCount(t?.song?.id, -1),
