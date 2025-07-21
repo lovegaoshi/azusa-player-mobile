@@ -41,9 +41,14 @@ const prepareSkipToNext = async (
   mSkipToBiliSuggest = skipToBiliSuggest,
   set = true,
 ) => {
-  const TPQueueLength = (await TrackPlayer.getQueue()).length;
-  const nextSong = playNextSong(undefined, set);
-  if ((await TrackPlayer.getActiveTrackIndex()) === TPQueueLength - 1) {
+  const TPQueue = await TrackPlayer.getQueue();
+  const TPQueueLength = TPQueue.length;
+  const nextSong = playNextSong(1, set);
+  const currentIndex = await TrackPlayer.getActiveTrackIndex();
+  logger.debug(
+    `[skipToNext] preparing skipToNext: ${currentIndex}/${TPQueueLength}, with ${nextSong?.parsedName}`,
+  );
+  if (currentIndex === TPQueueLength - 1) {
     const { playerSetting } = useNoxSetting.getState();
     autoShuffleQueue(
       TPQueueLength + 1,
@@ -55,9 +60,17 @@ const prepareSkipToNext = async (
     try {
       await mSkipToBiliSuggest();
     } catch {
+      logger.debug(
+        `[skipToNext] adding song ${nextSong.parsedName}/${nextSong.id}to TP queue`,
+      );
       // TODO: this will just grow infinitely. WTF was i thinking?
       await TrackPlayer.add(await songlistToTracklist([nextSong]));
     }
+  } else {
+    logger.debugR(
+      () =>
+        `[skipToNext] currentQueue: ${TPQueue.map(s => `${s.song.parsedName}/${s.song.id}`)}`,
+    );
   }
 };
 
@@ -101,6 +114,7 @@ export const performSkipToNext = (
     logger.debug('[autoRepeat] stopping playback as autoRepeat is set to off');
     return;
   }
+  logger.debug('[skipToNext] calling skipToNext');
   if (!auto) {
     TrackPlayer.getActiveTrack().then(t =>
       increasePlaybackCount(t?.song?.id, -1),
@@ -108,9 +122,12 @@ export const performSkipToNext = (
   }
   const callback = () =>
     preparePromise().then(async () => {
-      // await TrackPlayer.skipToNext();
-      const queueLen = (await TrackPlayer.getQueue()).length;
-      await TrackPlayer.skip(queueLen - 1);
+      //await TrackPlayer.skipToNext();
+      // WHY?
+      const nextIndex = ((await TrackPlayer.getActiveTrackIndex()) ?? 0) + 1;
+      const maxQueueLen = (await TrackPlayer.getQueue()).length - 1;
+      // HACK: log when nextIndex > maxQueueLen here
+      await TrackPlayer.skip(Math.min(nextIndex, maxQueueLen));
       TPPlay();
     });
   mPerformFade(callback);

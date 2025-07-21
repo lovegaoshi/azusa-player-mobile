@@ -67,7 +67,9 @@ export const playNextIndex = ({ direction = 1, set = true }: PlayNextIndex) => {
   } else if (newIndex >= playingList.length) {
     newIndex = 0;
   }
-  logger.debug(`[playNextIndex] moving to ${newIndex}, ${set}`);
+  logger.debug(
+    `[playNextIndex] moving to ${newIndex}, dir: ${direction}, curr: ${currentPlayingIndex}, set: ${set}`,
+  );
   if (set) setPlayingIndex(newIndex);
   return newIndex;
 };

@@ -87,9 +87,9 @@ export default () => {
       logger.debug(
         `[crossfade] preparing crossfade at ${event.position}/${event.duration}`,
       );
-      await prepareSkipToNext(false);
-      setCrossfadeId(track?.song?.id ?? '');
+      setCrossfadeId(currentSongId);
       setBRepeatDuration(event.duration * abRepeat[1]);
+      await prepareSkipToNext(false);
       return TrackPlayer.crossFadePrepare();
     }
 
