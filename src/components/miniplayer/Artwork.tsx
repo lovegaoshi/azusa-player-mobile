@@ -133,7 +133,7 @@ export default ({ miniplayerHeight, opacity, onPress, expand }: Props) => {
 
   useEffect(() => {
     playerSetting.artworkCarousel && refreshImageCarousel();
-  }, [img]);
+  }, [img, playerSetting.artworkCarousel]);
 
   return (
     <TouchableWithoutFeedback onPress={onImagePress}>
