@@ -1,8 +1,8 @@
 diff --git a/node_modules/youtubei.js/dist/src/core/Player.js b/node_modules/youtubei.js/dist/src/core/Player.js
-index 4008af9..3aeeeb4 100644
+index 11e20ca..7d54eed 100644
 --- a/node_modules/youtubei.js/dist/src/core/Player.js
 +++ b/node_modules/youtubei.js/dist/src/core/Player.js
-@@ -25,15 +25,14 @@ export default class Player {
+@@ -30,15 +30,14 @@ export default class Player {
          if (!player_id)
              throw new PlayerError('Failed to get player id');
          // We have the player id, now we can check if we have a cached player.
@@ -24,7 +24,7 @@ index 4008af9..3aeeeb4 100644
          Log.info(TAG, `Could not find any cached player. Will download a new player from ${player_url}.`);
          const player_res = await fetch(player_url, {
              headers: {
-@@ -129,7 +128,24 @@ export default class Player {
+@@ -137,21 +136,42 @@ export default class Player {
          return url_components.toString();
      }
      static async fromCache(cache, player_id) {
@@ -48,25 +48,45 @@ index 4008af9..3aeeeb4 100644
 +        }
 +        const buffer = await getCachedPlayer();
          if (!buffer)
-             return null;
-         const view = new DataView(buffer);
-@@ -143,6 +159,10 @@ export default class Player {
-         const sig_sc = LZW.decompress(new TextDecoder().decode(sig_buf));
-         const nsig_sc = LZW.decompress(new TextDecoder().decode(nsig_buf));
-         return new Player(player_id, sig_timestamp, sig_sc, nsig_sc);
-+      } catch {
-+        console.log('[fakeMMKV] failed to load from cache');
-+        return null;
+-            return null;
+-        const view = new DataView(buffer);
+-        const version = view.getUint32(0, true);
+-        if (version !== Player.LIBRARY_VERSION)
+-            return null;
+-        const sig_timestamp = view.getUint32(4, true);
+-        const sig_len = view.getUint32(8, true);
+-        const sig_buf = buffer.slice(12, 12 + sig_len);
+-        const nsig_buf = buffer.slice(12 + sig_len);
+-        const sig_sc = LZW.decompress(new TextDecoder().decode(sig_buf));
+-        const nsig_sc = LZW.decompress(new TextDecoder().decode(nsig_buf));
+-        return new Player(player_id, sig_timestamp, sig_sc, nsig_sc);
+-    }
++              return null;
++          const view = new DataView(buffer);
++          const version = view.getUint32(0, true);
++          if (version !== Player.LIBRARY_VERSION)
++              return null;
++          const sig_timestamp = view.getUint32(4, true);
++          const sig_len = view.getUint32(8, true);
++          const sig_buf = buffer.slice(12, 12 + sig_len);
++          const nsig_buf = buffer.slice(12 + sig_len);
++          const sig_sc = LZW.decompress(new TextDecoder().decode(sig_buf));
++          const nsig_sc = LZW.decompress(new TextDecoder().decode(nsig_buf));
++          return new Player(player_id, sig_timestamp, sig_sc, nsig_sc);
++        } catch {
++          console.log('[fakeMMKV] failed to load from cache');
++          return null;
++        }
 +      }
-     }
      static async fromSource(player_id, sig_timestamp, cache, sig_sc, nsig_sc) {
          const player = new Player(player_id, sig_timestamp, sig_sc, nsig_sc);
+         await player.cache(cache);
 diff --git a/node_modules/youtubei.js/dist/src/parser/classes/Video2.js b/node_modules/youtubei.js/dist/src/parser/classes/Video2.js
 new file mode 100644
-index 0000000..ed833a8
+index 0000000..5b65dd0
 --- /dev/null
 +++ b/node_modules/youtubei.js/dist/src/parser/classes/Video2.js
-@@ -0,0 +1,105 @@
+@@ -0,0 +1,130 @@
 +import { timeToSeconds } from '../../utils/Utils.js';
 +import { YTNode } from '../helpers.js';
 +import { Parser } from '../index.js';
@@ -78,7 +98,34 @@ index 0000000..ed833a8
 +import Author from './misc/Author.js';
 +import Text from './misc/Text.js';
 +import Thumbnail from './misc/Thumbnail.js';
-+class Video extends YTNode {
++export default class Video extends YTNode {
++    static type = 'Video';
++    video_id;
++    title;
++    untranslated_title;
++    description_snippet;
++    snippets;
++    expandable_metadata;
++    additional_metadatas;
++    thumbnails;
++    thumbnail_overlays;
++    rich_thumbnail;
++    author;
++    badges;
++    endpoint;
++    published;
++    view_count;
++    short_view_count;
++    upcoming;
++    length_text;
++    show_action_menu;
++    is_watched;
++    menu;
++    byline_text;
++    search_video_result_entity_key;
++    service_endpoints;
++    service_endpoint;
++    style;
 +    constructor(data) {
 +        super();
 +        this.title = new Text(data.title);
@@ -169,12 +216,10 @@ index 0000000..ed833a8
 +        };
 +    }
 +}
-+Video.type = 'Video';
-+export default Video;
 +//# sourceMappingURL=Video.js.map
 \ No newline at end of file
 diff --git a/node_modules/youtubei.js/dist/src/parser/classes/VideoCard.js b/node_modules/youtubei.js/dist/src/parser/classes/VideoCard.js
-index 143508c..ee4e444 100644
+index bd6fbd4..b965ef2 100644
 --- a/node_modules/youtubei.js/dist/src/parser/classes/VideoCard.js
 +++ b/node_modules/youtubei.js/dist/src/parser/classes/VideoCard.js
 @@ -1,6 +1,6 @@
@@ -182,22 +227,9 @@ index 143508c..ee4e444 100644
  import Text from './misc/Text.js';
 -import Video from './Video.js';
 +import Video from './Video2.js';
- class VideoCard extends Video {
-     constructor(data) {
-         super(data);
-diff --git a/node_modules/youtubei.js/dist/src/platform/react-native.js b/node_modules/youtubei.js/dist/src/platform/react-native.js
-index 6542624..78cda7c 100644
---- a/node_modules/youtubei.js/dist/src/platform/react-native.js
-+++ b/node_modules/youtubei.js/dist/src/platform/react-native.js
-@@ -2,7 +2,7 @@ var _Cache_instances, _Cache_persistent_directory, _Cache_persistent, _Cache_get
- import { __classPrivateFieldGet, __classPrivateFieldSet } from "tslib";
- import { Platform } from '../utils/Utils.js';
- import sha1Hash from './polyfills/web-crypto.js';
--import package_json from '../../package.json' assert { type: 'json' };
-+import package_json from '../../package.json' with { type: 'json' };
- import evaluate from './jsruntime/jinter.js';
- class Cache {
-     constructor(persistent = false, persistent_directory) {
+ export default class VideoCard extends Video {
+     static type = 'VideoCard';
+     metadata_text;
 diff --git a/node_modules/youtubei.js/index.js b/node_modules/youtubei.js/index.js
 new file mode 100644
 index 0000000..02925cf
