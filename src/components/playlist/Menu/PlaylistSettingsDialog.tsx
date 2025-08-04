@@ -136,6 +136,7 @@ export default (p: Props) => (
 const styles = StyleSheet.create({
   switchContainer: {
     flexDirection: 'row',
+    alignItems: 'center',
   },
   switchText: {
     fontSize: 18,
