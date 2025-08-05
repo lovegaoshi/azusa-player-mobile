@@ -8071,7 +8071,7 @@ __metadata:
     use-debounce: "npm:^10.0.5"
     uuid: "npm:^11.1.0"
     web-streams-polyfill: "npm:^4.1.0"
-    youtubei.js: "npm:15.0.0"
+    youtubei.js: "npm:15.0.1"
     zustand: "npm:^5.0.7"
   languageName: unknown
   linkType: soft
@@ -21711,7 +21711,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tslib@npm:2.8.1, tslib@npm:^2.0.1, tslib@npm:^2.4.0, tslib@npm:^2.5.0, tslib@npm:^2.6.2":
+"tslib@npm:2.8.1, tslib@npm:^2.0.1, tslib@npm:^2.4.0, tslib@npm:^2.6.2":
   version: 2.8.1
   resolution: "tslib@npm:2.8.1"
   checksum: 10c0/9c4759110a19c53f992d9aae23aac5ced636e99887b51b9e61def52611732872ff7668757d4e4c61f19691e36f4da981cd9485e869b4a7408d689f6bf1f14e62
@@ -22902,15 +22902,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"youtubei.js@npm:15.0.0":
-  version: 15.0.0
-  resolution: "youtubei.js@npm:15.0.0"
+"youtubei.js@npm:15.0.1":
+  version: 15.0.1
+  resolution: "youtubei.js@npm:15.0.1"
   dependencies:
     "@bufbuild/protobuf": "npm:^2.0.0"
     jintr: "npm:^3.3.1"
-    tslib: "npm:^2.5.0"
     undici: "npm:^6.21.3"
-  checksum: 10c0/710e46cd0014170f487d2c26c8b30f86d718b441c90c38c98e4962d87feb93ad73e5d4f08c6ea2d466da8f0bd8616501e602ba7dd1bd369229950d99ac2d57c8
+  checksum: 10c0/2ee8c939a33245e7078fd61d26b75e14b8257e24f2b42f3e1509c44a3d53ee5d0d3861d9b7154b20ec13fd521361317147b5ac5d10cf1ada4553a4b37d3c59c6
   languageName: node
   linkType: hard
 

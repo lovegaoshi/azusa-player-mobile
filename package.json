@@ -146,7 +146,7 @@
     "use-debounce": "^10.0.5",
     "uuid": "^11.1.0",
     "web-streams-polyfill": "^4.1.0",
-    "youtubei.js": "15.0.0",
+    "youtubei.js": "15.0.1",
     "zustand": "^5.0.7"
   },
   "resolutions": {
