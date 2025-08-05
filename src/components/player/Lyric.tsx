@@ -53,6 +53,7 @@ export const LyricView = ({
   const playerSetting = useNoxSetting(state => state.playerSetting);
   const { position } = useProgress(
     playerSetting.karaokeLyrics ? 50 : undefined,
+    false,
   );
   const [offsetModalVisible, setOffsetModalVisible] = useState(false);
   const playerStyle = useNoxSetting(state => state.playerStyle);
