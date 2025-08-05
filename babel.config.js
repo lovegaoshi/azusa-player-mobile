@@ -70,7 +70,7 @@ module.exports = api => {
           },
         },
       ],
-      'react-native-reanimated/plugin',
+      'react-native-worklets/plugin',
       ['@babel/plugin-transform-private-methods', { loose: true }],
     ],
   };
