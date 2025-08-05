@@ -1,0 +1,18 @@
+appId: com.noxplay.noxplayer
+
+# playback testing: search something on bilibili, then play it, it should be played
+
+---
+- runFlow: launch.yaml
+- tapOn:
+    id: 'songList.0'
+    delay: 10000
+- extendedWaitUntil:
+    visible: pleasejustwaitthanks
+    optional: true # This should be true so that the test won't fail
+    timeout: 3333
+- copyTextFrom:
+    id: miniplayer-track-title
+- evalScript: '${output.istrue = maestro.copiedText.length}'
+- assertTrue: '${output.istrue > 0}'
+- stopApp

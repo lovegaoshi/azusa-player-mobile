@@ -51,6 +51,7 @@ export default ({ opacity, collapse }: Props) => {
     >
       <View style={styles.iconButtonContainerStyle}>
         <IconButton
+          testID="miniplayer-collapse"
           icon="arrow-collapse"
           size={40}
           iconColor={playerStyle.colors.primary}
@@ -66,6 +67,7 @@ export default ({ opacity, collapse }: Props) => {
       </View>
       <View style={styles.playlistIconButtonContainerStyle}>
         <IconButton
+          testID="miniplayer-go2playlist"
           icon="playlist-music"
           size={40}
           iconColor={playerStyle.colors.primary}

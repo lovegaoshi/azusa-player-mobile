@@ -16,6 +16,7 @@ interface Props {
   onIconPress: (e: GestureResponderEvent) => void;
   icon: () => React.ReactNode;
   resolveData?: (v: string) => Promise<string[]>;
+  testID?: string;
 }
 
 export default ({
@@ -27,6 +28,7 @@ export default ({
   icon,
   resolveData,
   pressed,
+  testID,
 }: Props) => {
   const insets = useSafeAreaInsets();
   const autoCompleteId = useRef('');
@@ -67,6 +69,7 @@ export default ({
   return (
     <View style={styles.container}>
       <Searchbar
+        testID={testID}
         onLayout={e =>
           setMenuCoords({
             x: e.nativeEvent.layout.x,

@@ -241,6 +241,7 @@ export default ({
           renderItem={({ item, index }) => (
             <SongBackground song={item}>
               <SongInfo
+                testID={`songList.${index}`}
                 dragToSelect={dragToSelect}
                 getLayoutY={getLayoutY}
                 cursorOffset={cursorOffset}

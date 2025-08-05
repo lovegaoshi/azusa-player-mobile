@@ -140,6 +140,7 @@ export default ({ onSearched = console.log }: Props) => {
     <View style={styles.container}>
       <View style={styles.searchContainer}>
         <AutoComplete
+          testID="BiliSearchBar"
           pressed={pressed}
           placeholder={t('BiliSearchBar.label')}
           value={searchVal}
