@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Image } from 'expo-image';
 import { View, SafeAreaView, LayoutAnimation } from 'react-native';
 import { IconButton, TouchableRipple } from 'react-native-paper';
-import { FlashList } from '@shopify/flash-list';
+import { FlashList, FlashListRef } from '@shopify/flash-list';
 
 import { PaperText as Text } from '@components/commonui/ScaledText';
 import SkinSearchbar from './SkinSearchbar';
@@ -30,7 +30,7 @@ interface SkinItemProps {
   checked: string;
   onHold: () => void;
   selectTheme: () => void;
-  listRef?: React.RefObject<FlashList<DisplayTheme> | null>;
+  listRef?: React.RefObject<FlashListRef<DisplayTheme> | null>;
 }
 
 const BuiltInThemes: DisplayTheme[] = [
@@ -150,7 +150,7 @@ const SkinSettings = () => {
   const setPlayerStyle = useNoxSetting(state => state.setPlayerStyle);
   const allThemes = BuiltInThemes.concat(playerStyles);
   const [checked, setChecked] = React.useState(getThemeID(playerStyle));
-  const scrollViewRef = React.useRef<FlashList<DisplayTheme>>(null);
+  const scrollViewRef = React.useRef<FlashListRef<DisplayTheme>>(null);
 
   const selectTheme = (theme: NoxTheme.Style) => {
     setChecked(getThemeID(theme));
@@ -205,7 +205,6 @@ const SkinSettings = () => {
             listRef={scrollViewRef}
           />
         )}
-        estimatedItemSize={107}
       />
       <GenericSelectDialog
         visible={selectSkin !== undefined}

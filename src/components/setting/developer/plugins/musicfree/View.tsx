@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { View, SafeAreaView, LayoutAnimation } from 'react-native';
 import { IconButton } from 'react-native-paper';
-import { FlashList } from '@shopify/flash-list';
+import { FlashList, FlashListRef } from '@shopify/flash-list';
 
 import { PaperText as Text } from '@components/commonui/ScaledText';
 import { ItemSelectStyles as styles } from '@components/style';
@@ -12,7 +12,7 @@ import { fetchMFsdk } from '@utils/mfsdk';
 
 interface ItemProps {
   sdk: MFsdk;
-  listRef?: React.RefObject<FlashList<MFsdk> | null>;
+  listRef?: React.RefObject<FlashListRef<MFsdk> | null>;
 }
 
 const RenderItem = ({ sdk, listRef }: ItemProps) => {
@@ -66,7 +66,7 @@ const RenderItem = ({ sdk, listRef }: ItemProps) => {
 
 const MFSettings = () => {
   const MFsdks = useNoxSetting(state => state.MFsdks);
-  const scrollViewRef = React.useRef<FlashList<MFsdk>>(null);
+  const scrollViewRef = React.useRef<FlashListRef<MFsdk>>(null);
 
   return (
     <SafeAreaView style={styles.safeAreaView}>
@@ -77,7 +77,6 @@ const MFSettings = () => {
         renderItem={({ item }) => (
           <RenderItem sdk={item} listRef={scrollViewRef} />
         )}
-        estimatedItemSize={100}
       />
     </SafeAreaView>
   );

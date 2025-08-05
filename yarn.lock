@@ -5736,17 +5736,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@shopify/flash-list@npm:2.0.0-rc.11":
-  version: 2.0.0-rc.11
-  resolution: "@shopify/flash-list@npm:2.0.0-rc.11"
+"@shopify/flash-list@npm:2.0.1":
+  version: 2.0.1
+  resolution: "@shopify/flash-list@npm:2.0.1"
   dependencies:
-    recyclerlistview: "npm:4.2.3"
     tslib: "npm:2.8.1"
   peerDependencies:
     "@babel/runtime": "*"
     react: "*"
     react-native: "*"
-  checksum: 10c0/1b7636b9a29ff46733007735f4591edb697132bde17f4a133ac69665d78d46f829e1818c1115264ebb370f12b86eb0e70311b00a341f81d7136ef5dcbda67190
+  checksum: 10c0/0d008545a38f9f7844fab79d75f0f4927b7a350ffe90ba6b069c3a7ea4bc5e1ccd0e683240bcd75ce28bc7b5d16bf3cd4c6ed2430b7d5eef24795867cf5d6629
   languageName: node
   linkType: hard
 
@@ -7944,7 +7943,7 @@ __metadata:
     "@react-navigation/native-stack": "npm:^7.3.24"
     "@revenuecat/purchases-js": "npm:^1.11.1"
     "@sentry/react-native": "npm:~6.19.0"
-    "@shopify/flash-list": "npm:2.0.0-rc.11"
+    "@shopify/flash-list": "npm:2.0.1"
     "@shopify/react-native-skia": "npm:^2.2.0"
     "@tsconfig/react-native": "npm:^3.0.6"
     "@types/base-64": "npm:^1.0.2"
@@ -8040,7 +8039,7 @@ __metadata:
     react-native-device-info: "npm:^14.0.4"
     react-native-dotenv: "npm:^3.4.11"
     react-native-edge-to-edge: "npm:^1.6.2"
-    react-native-flashdrag-list: "https://lovegaoshi@github.com/lovegaoshi/react-native-flashdrag-list.git#commit=3850e1ee2929c0e24c82dc625deee6625389dc7f"
+    react-native-flashdrag-list: "https://lovegaoshi@github.com/lovegaoshi/react-native-flashdrag-list.git#commit=aa343c6ffa749b2557a14985b6ceaa8267f0ac0b"
     react-native-gesture-handler: "npm:~2.27.2"
     react-native-get-random-values: "npm:^1.11.0"
     react-native-image-colors: "npm:^2.5.0"
@@ -16191,7 +16190,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"lodash.debounce@npm:4.0.8, lodash.debounce@npm:^4.0.8":
+"lodash.debounce@npm:^4.0.8":
   version: 4.0.8
   resolution: "lodash.debounce@npm:4.0.8"
   checksum: 10c0/762998a63e095412b6099b8290903e0a8ddcb353ac6e2e0f2d7e7d03abd4275fe3c689d88960eb90b0dde4f177554d51a690f22a343932ecbc50a5d111849987
@@ -18589,7 +18588,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"prop-types@npm:15.8.1, prop-types@npm:^15.8.0, prop-types@npm:^15.8.1":
+"prop-types@npm:^15.8.0, prop-types@npm:^15.8.1":
   version: 15.8.1
   resolution: "prop-types@npm:15.8.1"
   dependencies:
@@ -19015,16 +19014,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-native-flashdrag-list@https://lovegaoshi@github.com/lovegaoshi/react-native-flashdrag-list.git#commit=3850e1ee2929c0e24c82dc625deee6625389dc7f":
+"react-native-flashdrag-list@https://lovegaoshi@github.com/lovegaoshi/react-native-flashdrag-list.git#commit=aa343c6ffa749b2557a14985b6ceaa8267f0ac0b":
   version: 0.2.5
-  resolution: "react-native-flashdrag-list@https://lovegaoshi@github.com/lovegaoshi/react-native-flashdrag-list.git#commit=3850e1ee2929c0e24c82dc625deee6625389dc7f"
+  resolution: "react-native-flashdrag-list@https://lovegaoshi@github.com/lovegaoshi/react-native-flashdrag-list.git#commit=aa343c6ffa749b2557a14985b6ceaa8267f0ac0b"
   peerDependencies:
     "@shopify/flash-list": "*"
     react: "*"
     react-native: "*"
     react-native-gesture-handler: "*"
     react-native-reanimated: "*"
-  checksum: 10c0/ee24c759b8a06392b3c8576a5c962bd32d977ffcdb04c88bd1ca1b47a76acdbd9abf8ef2ae77a0405bf5b6552d004e63a662c9adb3bb5540b71aaf0e6a3b8b32
+  checksum: 10c0/0b49fa5750c260dbbd4dc0e366339d924867c66a5f9c78714ec41b426d9e05d17e8934999ddaac8d527cfe276004e6b26693f8fff8930736b25889b29f25b5cf
   languageName: node
   linkType: hard
 
@@ -19615,20 +19614,6 @@ __metadata:
     source-map: "npm:~0.6.1"
     tslib: "npm:^2.0.1"
   checksum: 10c0/a45168c82195f24fa2c70293a624fece0069a2e8e8adb637f9963777735f81cb3bb62e55172db677ec3573b08b2daaf1eddd85b74da6fe0bd37c9b15eeaf94b4
-  languageName: node
-  linkType: hard
-
-"recyclerlistview@npm:4.2.3":
-  version: 4.2.3
-  resolution: "recyclerlistview@npm:4.2.3"
-  dependencies:
-    lodash.debounce: "npm:4.0.8"
-    prop-types: "npm:15.8.1"
-    ts-object-utils: "npm:0.0.5"
-  peerDependencies:
-    react: ">= 15.2.1"
-    react-native: ">= 0.30.0"
-  checksum: 10c0/40b8b948d09f560ce98842e9141d2ce7ee5677ae2c20f7e30de901136d7764a42cc4e5ba3242fca0934055d5fef99c5b03430fcba28d7cfc27155b4ef97f70d5
   languageName: node
   linkType: hard
 
@@ -21711,13 +21696,6 @@ __metadata:
   version: 0.1.13
   resolution: "ts-interface-checker@npm:0.1.13"
   checksum: 10c0/232509f1b84192d07b81d1e9b9677088e590ac1303436da1e92b296e9be8e31ea042e3e1fd3d29b1742ad2c959e95afe30f63117b8f1bc3a3850070a5142fea7
-  languageName: node
-  linkType: hard
-
-"ts-object-utils@npm:0.0.5":
-  version: 0.0.5
-  resolution: "ts-object-utils@npm:0.0.5"
-  checksum: 10c0/0279f8a7504b3905f2b14769769985f214154f1aedc60077c3baaced078369ae465aecc6acc04c614f40893e559d05697f6f4ef9fc411e3b6d1d15e6269a5e14
   languageName: node
   linkType: hard
 
