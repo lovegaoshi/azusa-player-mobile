@@ -4,7 +4,7 @@ import { biliNFTVideoFetch as biliNFTVideoFetchOld } from './biliNFT';
 import { biliGarbHeadVideoFetch } from './biliGarb';
 import { cacheWrapper } from '@utils/Cache';
 import logger from '../Logger';
-import { isIOS } from '../RNUtils';
+import { isIOS } from '@utils/RNUtils';
 
 export enum RESOLVE_TYPE {
   bvid = 'bvid',
