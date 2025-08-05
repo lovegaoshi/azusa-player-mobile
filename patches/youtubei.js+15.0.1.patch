@@ -1,0 +1,60 @@
+diff --git a/node_modules/youtubei.js/dist/src/core/Player.js b/node_modules/youtubei.js/dist/src/core/Player.js
+index fb1cdfb..aa69d9e 100644
+--- a/node_modules/youtubei.js/dist/src/core/Player.js
++++ b/node_modules/youtubei.js/dist/src/core/Player.js
+@@ -30,15 +30,14 @@ export default class Player {
+         if (!player_id)
+             throw new PlayerError('Failed to get player id');
+         // We have the player id, now we can check if we have a cached player.
+-        if (cache) {
+-            const cached_player = await Player.fromCache(cache, player_id);
+-            if (cached_player) {
+-                Log.info(TAG, 'Found up-to-date player data in cache.');
+-                cached_player.po_token = po_token;
+-                return cached_player;
+-            }
++        const cached_player = await Player.fromCache(cache, player_id);
++        if (cached_player) {
++            Log.info(TAG, 'Found up-to-date player data in cache.');
++            cached_player.po_token = po_token;
++            return cached_player;
+         }
+         const player_url = new URL(`/s/player/${player_id}/player_ias.vflset/en_US/base.js`, Constants.URLS.YT_BASE);
++        this.player_url = player_url;
+         Log.info(TAG, `Could not find any cached player. Will download a new player from ${player_url}.`);
+         const player_res = await fetch(player_url, {
+             headers: {
+@@ -137,7 +136,24 @@ export default class Player {
+         return url_components.toString();
+     }
+     static async fromCache(cache, player_id) {
+-        const buffer = await cache.get(player_id);
++        console.log(`[fakeMMKV] attempts to load from gh: ${player_id}`);
++        const getCachedPlayer = async () => {
++            // attempt to load from github first
++            const req = await fetch(`https://raw.githubusercontent.com/lovegaoshi/my-express-api/refs/heads/ghactions/cachedPlayers/${player_id}`);
++            if (req.ok) return req.arrayBuffer();
++            // resort to the latest cached by github instead. 
++            const latestGHCacheReq = await fetch('https://raw.githubusercontent.com/lovegaoshi/my-express-api/refs/heads/ghactions/cachedPlayers/latest');
++            const ghCache = await latestGHCacheReq.text();
++            console.log(`[fakeMMKV] attempts to load from gh latest instead: ${ghCache}`);
++            const reqGH = await fetch(`https://raw.githubusercontent.com/lovegaoshi/my-express-api/refs/heads/ghactions/cachedPlayers/${ghCache}`);
++            if (reqGH.ok) return reqGH.arrayBuffer();
++            console.log(`[fakeMMKV] attempts to load from netlify: ${player_id}`);
++            // old implementation that uses netlify to resolve on the fly. ~5s delay
++            const req2 = await fetch(`https://ytb-cache.netlify.app/api?playerURL=${player_id}`);
++            if (req2.ok) return req2.arrayBuffer();
++            return cache.get(player_id);
++        }
++        const buffer = await getCachedPlayer();
+         if (!buffer)
+             return null;
+         try {
+diff --git a/node_modules/youtubei.js/index.js b/node_modules/youtubei.js/index.js
+new file mode 100644
+index 0000000..02925cf
+--- /dev/null
++++ b/node_modules/youtubei.js/index.js
+@@ -0,0 +1 @@
++export * from './bundle/react-native'
+\ No newline at end of file
