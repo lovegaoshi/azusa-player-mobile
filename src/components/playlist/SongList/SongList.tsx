@@ -259,7 +259,6 @@ export default ({
             // </Animated.View>
           )}
           keyExtractor={(item, index) => `${item.id}.${index}`}
-          estimatedItemSize={58}
           extraData={shouldReRender}
           showsVerticalScrollIndicator={false}
           onScroll={scrollHandler}
