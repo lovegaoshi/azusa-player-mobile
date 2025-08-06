@@ -3,8 +3,6 @@ appId: com.noxplay.noxplayer
 # playlist: search something and create search playlist as playlist
 
 ---
-- runFlow: launch.yaml
-
 - tapOn: 'Playlist'
 - tapOn:
     id: 'search-playlist-as-new-playlist-button'
@@ -20,5 +18,3 @@ appId: com.noxplay.noxplayer
 - tapOn:
     id: 'android:id/button1'
 - assertNotVisible: 'test-playlist'
-
-- stopApp

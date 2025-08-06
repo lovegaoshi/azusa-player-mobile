@@ -15,4 +15,3 @@ appId: com.noxplay.noxplayer
     id: miniplayer-track-title
 - evalScript: '${output.istrue = maestro.copiedText.length}'
 - assertTrue: '${output.istrue > 0}'
-- stopApp
