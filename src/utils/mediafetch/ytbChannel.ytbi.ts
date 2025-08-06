@@ -61,7 +61,7 @@ export const fetchYtbiChannelPlaylists = async (channelID: string) => {
         name: v.metadata?.title.text ?? '',
         singer: overlayBadge?.badges[0].text ?? '',
         getPlaylist: async () => ({
-          songs: await fetchYtbiPlaylist(v.content_id),
+          songs: await fetchYtbiPlaylist({ playlistId: v.content_id }),
         }),
       };
     });
