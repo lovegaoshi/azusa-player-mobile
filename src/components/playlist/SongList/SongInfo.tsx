@@ -31,6 +31,7 @@ interface Props {
   cursorOffset: DerivedValue<number>;
   getLayoutY: (index: number) => number;
   dragToSelect: SharedValue<number>;
+  testID?: string;
 }
 
 const isItemSolid = (
@@ -57,6 +58,7 @@ const SongInfo = ({
   getLayoutY,
   cursorOffset,
   dragToSelect,
+  testID,
 }: Props) => {
   const { playSong, checking, selected } = usePlaylist;
   const currentPlaylist = useNoxSetting(state => state.currentPlaylist);
@@ -103,6 +105,7 @@ const SongInfo = ({
 
   return (
     <View
+      testID={testID}
       style={[
         styles.container,
         {

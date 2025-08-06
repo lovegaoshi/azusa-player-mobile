@@ -13,6 +13,7 @@ const DefaultIcon = (
 
   return (
     <IconButton
+      testID="playlist-item-delete-button"
       icon="close"
       onPress={() => deleteCallback(item.id)}
       size={25}

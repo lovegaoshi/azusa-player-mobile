@@ -126,9 +126,10 @@ export const parseContent = (v: MusicTwoRowItem) => {
         getPlaylist: async () => {
           return {
             // HACK: ytm doesnt resolve this for wahtever reason
-            songs: await fetchYtbiPlaylist(
-              v.thumbnail_overlay?.content?.endpoint.payload.playlistId,
-            ),
+            songs: await fetchYtbiPlaylist({
+              playlistId:
+                v.thumbnail_overlay?.content?.endpoint.payload.playlistId,
+            }),
           };
         },
       };

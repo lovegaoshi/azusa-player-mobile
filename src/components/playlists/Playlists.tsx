@@ -30,6 +30,7 @@ const SearchPlaylistAsNewButton = ({
   return (
     <Pressable onPress={() => setNewPlaylistDialogOpen(true)}>
       <IconButton
+        testID="search-playlist-as-new-playlist-button"
         icon="new-box"
         size={25}
         iconColor={playerStyle.colors.primary}

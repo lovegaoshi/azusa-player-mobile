@@ -28,10 +28,15 @@ const TrackInfo = () => {
 
   return (
     <View style={[styles.centeredFlex, { paddingLeft: MinPlayerHeight }]}>
-      <Text numberOfLines={2} style={{ color: playerStyle.colors.onSurface }}>
+      <Text
+        testID={'miniplayer-track-title'}
+        numberOfLines={2}
+        style={{ color: playerStyle.colors.onSurface }}
+      >
         {track?.title}
       </Text>
       <Text
+        testID={'miniplayer-track-artist'}
         numberOfLines={1}
         style={{ color: playerStyle.colors.onSurfaceVariant }}
       >

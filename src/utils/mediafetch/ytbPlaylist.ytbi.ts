@@ -36,6 +36,7 @@ const getYtbSong = async (
   songs: NoxMedia.Song[],
   favList: string[],
   limit = Infinity,
+  getall = false,
 ) => {
   const videos = playlistData.videos as PlaylistVideo[];
   for (const video of videos) {
@@ -44,7 +45,7 @@ const getYtbSong = async (
       if (song) {
         songs.push(song);
       }
-    } else {
+    } else if (!getall) {
       return songs;
     }
   }
@@ -54,14 +55,27 @@ const getYtbSong = async (
   return songs;
 };
 
-export const fetchYtbiPlaylist = async (
-  playlistId: string,
-  favList: string[] = [],
+interface IFetchYtbiPlaylist {
+  playlistId: string;
+  favList?: string[];
+  limit?: number;
+  getall?: boolean;
+}
+export const fetchYtbiPlaylist = async ({
+  playlistId,
+  favList = [],
   limit = Infinity,
-): Promise<NoxMedia.Song[]> => {
+  getall = false,
+}: IFetchYtbiPlaylist): Promise<NoxMedia.Song[]> => {
   const yt = await ytwebClient();
   try {
-    return getYtbSong(await yt.getPlaylist(playlistId), [], favList, limit);
+    return getYtbSong(
+      await yt.getPlaylist(playlistId),
+      [],
+      favList,
+      limit,
+      getall,
+    );
   } catch {
     return [];
   }
@@ -72,5 +86,5 @@ export const fetchPlaylist = async (
   favList: string[] = [],
 ): Promise<NoxMedia.Song[]> =>
   fetchYtmPlaylist(playlistId, favList).catch(() =>
-    fetchYtbiPlaylist(playlistId, favList),
+    fetchYtbiPlaylist({ playlistId, favList }),
   );

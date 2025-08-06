@@ -1,0 +1,9 @@
+appId: com.noxplay.noxplayer
+
+# playlist: search something and create search playlist as playlist
+
+---
+- launchApp
+- runFlow: playback.yaml
+- runFlow: playlist.yaml
+- stopApp

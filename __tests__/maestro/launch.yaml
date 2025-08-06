@@ -1,0 +1,18 @@
+appId: com.noxplay.noxplayer
+
+# playlist: search something and create search playlist as playlist
+
+---
+- extendedWaitUntil:
+    visible: 'miniplayer-collapse'
+    optional: true # This should be true so that the test won't fail
+    timeout: 10000
+- waitForAnimationToEnd
+- tapOn:
+    id: 'miniplayer-collapse'
+- tapOn:
+    id: 'BiliSearchBar'
+- inputText: 'wake'
+- pressKey: 'Enter'
+- assertVisible:
+    id: 'songList.0'

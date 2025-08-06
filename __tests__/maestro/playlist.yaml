@@ -1,0 +1,20 @@
+appId: com.noxplay.noxplayer
+
+# playlist: search something and create search playlist as playlist
+
+---
+- tapOn: 'Playlist'
+- tapOn:
+    id: 'search-playlist-as-new-playlist-button'
+- inputText: 'test-playlist'
+- tapOn:
+    id: 'button'
+    index: 1
+- assertVisible: 'test-playlist'
+
+- tapOn:
+    id: 'playlist-item-delete-button'
+    index: 0
+- tapOn:
+    id: 'android:id/button1'
+- assertNotVisible: 'test-playlist'
