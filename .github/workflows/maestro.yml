@@ -129,9 +129,21 @@ jobs:
 
       - uses: dniHze/maestro-test-action@v1
       - uses: reactivecircus/android-emulator-runner@v2
+        id: maestro
+        continue-on-error: true
         with:
           api-level: 34
           arch: x86_64
           ram-size: 8192M
           target: default
           script: adb install ./artifacts/app-x86_64-release.apk && maestro test ./__tests__/maestro/tests/
+
+      - name: Upload Maestro Results
+        uses: actions/upload-artifact@v4
+        with:
+          name: APM-APK
+          path: ~/.maestro/tests
+
+      - name: CheckIfSomeStepFailed
+        if: steps.maestro.outcome == 'failure'
+        run: exit 1
