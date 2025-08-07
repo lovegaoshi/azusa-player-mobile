@@ -1,6 +1,7 @@
 appId: com.noxplay.noxplayer
 
-# playlist: search something and create search playlist as playlist
+# dev versions will always pop up a version check upon app first launch; use this flow to skip it
+# HACK: useVersionCheck needs a test but should be sufficient in jest anyways
 
 ---
 - launchApp
