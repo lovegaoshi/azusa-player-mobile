@@ -141,7 +141,7 @@ jobs:
       - name: Upload Maestro Results
         uses: actions/upload-artifact@v4
         with:
-          name: APM-APK
+          name: APM-Maestro
           path: ~/.maestro/tests
 
       - name: CheckIfSomeStepFailed
