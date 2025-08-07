@@ -4,6 +4,6 @@ appId: com.noxplay.noxplayer
 
 ---
 - launchApp
-- runFlow: playback.yaml
-- runFlow: playlist.yaml
+- runFlow: ../flows/playback.yaml
+- runFlow: ../flows/playlist.yaml
 - stopApp
