@@ -1,0 +1,12 @@
+appId: com.noxplay.noxplayer
+
+# dev versions will always pop up a version check upon app first launch; use this flow to skip it
+# HACK: useVersionCheck needs a test but should be sufficient in jest anyways
+
+---
+- launchApp
+- extendedWaitUntil:
+    visible: 'miniplayer-collapse'
+    optional: true # This should be true so that the test won't fail
+    timeout: 60000
+- stopApp

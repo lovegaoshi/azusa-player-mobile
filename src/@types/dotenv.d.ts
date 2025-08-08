@@ -16,4 +16,5 @@ declare module '@env' {
   export const REVENUECAT_STRIPE: string;
   export const REVENUECAT_GOOGLE: string;
   export const LOCKHASH: string;
+  export const MAESTRO: string;
 }

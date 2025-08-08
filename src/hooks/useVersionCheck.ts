@@ -10,6 +10,7 @@ import logger from '@utils/Logger';
 import useInstallAPK from './useInstallAPK';
 import useSnack, { InfiniteDuration } from '../stores/useSnack';
 import { isAndroid } from '@utils/RNUtils';
+import { getVersion as _getVersion } from '@utils/versionCheck';
 
 const regexVersion = (version: string) => {
   const regexMatch = /\d+\.\d+\.\d+/.exec(version),
@@ -27,29 +28,9 @@ export default () => {
   const { t } = useTranslation();
 
   const getVersion = async () => {
-    let noxCheckedVersion: string | undefined;
-    let noxAPKUrl: string | undefined;
-    let devVersion: string | undefined;
-    try {
-      const res = await fetch(
-        'https://api.github.com/repos/lovegaoshi/azusa-player-mobile/releases/latest',
-      );
-      const json = await res.json();
-      noxCheckedVersion = json.tag_name;
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      noxAPKUrl = json.assets.filter((f: any) =>
-        f.name.includes('arm64-v8a'),
-      )[0].browser_download_url;
-      const devres = await fetch(
-          'https://api.github.com/repos/lovegaoshi/azusa-player-mobile/releases',
-        ),
-        devjson = await devres.json();
-      devVersion = devjson[0].tag_name;
-      setPlayerSetting({ noxCheckedVersion });
-    } catch (e) {
-      logger.error(e);
-    }
-    return { noxCheckedVersion, devVersion, noxAPKUrl };
+    const res = await _getVersion();
+    setPlayerSetting({ noxCheckedVersion: res.noxCheckedVersion });
+    return res;
   };
 
   const checkVersion = async (

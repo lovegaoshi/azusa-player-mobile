@@ -1,10 +1,12 @@
 import { NoxRepeatMode } from '../enums/RepeatMode';
 import { Versions } from '../enums/Version';
 import { SyncOptions } from '../enums/Sync';
+// eslint-disable-next-line import/no-unresolved
+import { MAESTRO } from '@env';
 
 export const AppID = 'NoxPlayerMobile';
 
-export const DefaultSetting: NoxStorage.PlayerSettingDict = {
+const _DefaultSetting: NoxStorage.PlayerSettingDict = {
   playMode: 'shufflePlay',
   defaultPlayMode: 'shufflePlay',
   defaultVolume: 1,
@@ -75,5 +77,9 @@ export const DefaultSetting: NoxStorage.PlayerSettingDict = {
   eqPreset: 0,
   loudnessEnhance: 0,
 };
+
+export const DefaultSetting = MAESTRO
+  ? { ..._DefaultSetting, alwaysShowBottomTab: true }
+  : _DefaultSetting;
 
 export const OverrideSetting: Partial<NoxStorage.PlayerSettingDict> = {};
