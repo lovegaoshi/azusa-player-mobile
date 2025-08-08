@@ -137,6 +137,8 @@ jobs:
           arch: x86_64
           ram-size: 8192M
           target: default
+          cores: 4
+          profile: pixel_7
           script: adb install ./artifacts/app-x86_64-release.apk && maestro test ./__tests__/maestro/tests/
 
       - name: Upload Maestro Results
