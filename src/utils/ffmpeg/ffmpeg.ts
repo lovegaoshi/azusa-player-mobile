@@ -120,7 +120,7 @@ export const ffmpegToMP3 = async ({
         .fetch('GET', song.cover)
         .catch(e => console.warn(e))
     )?.path();
-    const command = `-i '${fspath}' -vn -ab 256k -id3v2_version 3 -metadata title='${song.name.replace("'", '')}' -metadata artist='${song.singer}' -metadata album='${song.album?.replace("'", '') ?? ''}' ${fspath}.mp3`;
+    const command = `-i '${fspath}' -vn -ab 256k -id3v2_version 3 -metadata title='${song.name.replaceAll("'", '')}' -metadata artist='${song.singer}' -metadata album='${song.album?.replace("'", '') ?? ''}' ${fspath}.mp3`;
     logger.debug(`[ffmpeg] ffmpeg to mp3 command: ${command}`);
     await FFmpegKit.execute(command);
     if (coverArt) {
