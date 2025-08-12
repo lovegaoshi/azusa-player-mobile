@@ -3,7 +3,7 @@ import TrackPlayer, {
   State,
   RepeatMode,
 } from 'react-native-track-player';
-import { DeviceEventEmitter, NativeModules } from 'react-native';
+import { DeviceEventEmitter } from 'react-native';
 
 import { NULL_TRACK } from '../objects/Song';
 import { parseSongR128gain, resolveUrl } from '../utils/SongOperations';
@@ -25,8 +25,8 @@ import { playFromMediaId, playFromSearch } from '@hooks/usePlayback.migrate';
 import { isAndroid, isIOS } from '@utils/RNUtils';
 import { increasePlaybackCount } from '@utils/db/sqlStorage';
 import { TPSeek, TPPlay } from '@stores/RNObserverStore';
+import APMWidgetModule from '@specs/NativeWidgetModule';
 
-const { APMWidgetModule } = NativeModules;
 const { getState } = noxPlayingList;
 const { setState } = appStore;
 const getAppStoreState = appStore.getState;
@@ -75,7 +75,7 @@ export async function additionalPlaybackService({
 
   lastPlayedDuration.val = lastPlayDuration;
   TrackPlayer.addEventListener(Event.PlaybackState, async event => {
-    APMWidgetModule?.updateWidget();
+    APMWidgetModule?.updateWidget?.();
     if (event.state === State.Playing) fadePlay();
     if (lastPlayedDuration.val && event.state === State.Ready) {
       if ((await TrackPlayer.getActiveTrack())?.song?.id === currentPlayingID) {
@@ -145,7 +145,7 @@ export async function PlaybackService() {
   TrackPlayer.addEventListener(
     Event.PlaybackActiveTrackChanged,
     async event => {
-      APMWidgetModule?.updateWidget();
+      APMWidgetModule?.updateWidget?.();
       const playerErrored =
         (await TrackPlayer.getPlaybackState()).state === State.Error;
       await TrackPlayer.setVolume(0);

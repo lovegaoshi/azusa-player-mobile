@@ -15,6 +15,7 @@ import com.facebook.soloader.SoLoader
 import expo.modules.ReactNativeHostWrapper
 import com.otahotupdate.OtaHotUpdate
 import com.nativenoxmodule.NativeNoxModulePackage
+import com.nativenoxmodule.NativeWidgetModulePackage
 import expo.modules.ApplicationLifecycleDispatcher
 
 class MainApplication : Application(), ReactApplication {
@@ -27,6 +28,7 @@ class MainApplication : Application(), ReactApplication {
                     // Packages that cannot be autolinked yet can be added manually here, for example:
                     // add(MyReactNativePackage())
                     add(NativeNoxModulePackage())
+                    add(NativeWidgetModulePackage())
                 }
 
             override fun getJSMainModuleName(): String = "index"

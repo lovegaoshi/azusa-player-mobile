@@ -6,11 +6,11 @@ import com.facebook.react.bridge.ReactApplicationContext
 import com.facebook.react.module.model.ReactModuleInfo
 import com.facebook.react.module.model.ReactModuleInfoProvider
 
-class NativeNoxModulePackage : BaseReactPackage() {
+class NativeWidgetModulePackage : BaseReactPackage() {
 
     override fun getModule(name: String, reactContext: ReactApplicationContext): NativeModule? {
-        return if (name == NativeNoxModule.NAME) {
-            NativeNoxModule(reactContext)
+        return if (name == NativeWidgetModule.NAME) {
+            NativeWidgetModule(reactContext)
         } else {
             null
         }
@@ -18,9 +18,9 @@ class NativeNoxModulePackage : BaseReactPackage() {
 
     override fun getReactModuleInfoProvider() = ReactModuleInfoProvider {
         mapOf(
-            NativeNoxModule.NAME to ReactModuleInfo(
-                name = NativeNoxModule.NAME,
-                className = NativeNoxModule.NAME,
+            NativeWidgetModule.NAME to ReactModuleInfo(
+                name = NativeWidgetModule.NAME,
+                className = NativeWidgetModule.NAME,
                 canOverrideExistingModule = false,
                 needsEagerInit = false,
                 isCxxModule = false,
