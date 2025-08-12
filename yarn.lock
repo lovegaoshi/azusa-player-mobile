@@ -5499,17 +5499,33 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@revenuecat/purchases-js@npm:^1.11.1":
+"@revenuecat/purchases-js-hybrid-mappings@npm:16.2.1":
+  version: 16.2.1
+  resolution: "@revenuecat/purchases-js-hybrid-mappings@npm:16.2.1"
+  dependencies:
+    "@revenuecat/purchases-js": "npm:1.11.1"
+  checksum: 10c0/0b66389fe4a8c105d5ee3d1bf2a6d39f3c7c13f9276fc9d2bc4a754b89365d7f8fe7bc44463dcfe0d5d656338ba55b05db2f946e351e29659e1763f226e094f8
+  languageName: node
+  linkType: hard
+
+"@revenuecat/purchases-js@npm:1.11.1":
   version: 1.11.1
   resolution: "@revenuecat/purchases-js@npm:1.11.1"
   checksum: 10c0/b452a0f29ee95b8efa39f23fbaa8dc2534c6425df8f4fb712949ca63aa169bd3c2e0eb528051b2b4480bd55477be129db3a242fce49039727045f4363f376e73
   languageName: node
   linkType: hard
 
-"@revenuecat/purchases-typescript-internal@npm:16.0.2":
-  version: 16.0.2
-  resolution: "@revenuecat/purchases-typescript-internal@npm:16.0.2"
-  checksum: 10c0/dcbcc5ce2666d58f79e80dabc3c7505fb90c37e16be9c1ac3b8a3360ab8c83d1430a52309b25389fc970715c4b0e0f30f07f01c323438a061c21c65675602fd9
+"@revenuecat/purchases-js@npm:^1.12.1":
+  version: 1.12.1
+  resolution: "@revenuecat/purchases-js@npm:1.12.1"
+  checksum: 10c0/fe5ff85462260a0fb6cac3236557b3316186a9e2a4a9f719fb210295433d6940b7ed533dcb51423c9d9ffcc3ed3ffaab21ad64937fc99bc5d8b51399027ad6cd
+  languageName: node
+  linkType: hard
+
+"@revenuecat/purchases-typescript-internal@npm:16.2.1":
+  version: 16.2.1
+  resolution: "@revenuecat/purchases-typescript-internal@npm:16.2.1"
+  checksum: 10c0/577adbed222fd9a1b95e9fdc06845d7745a1a8823e4a8a817512f2bfa6467ffd7cb2a5e42687f9f0c5d2f10d180761759bb478e5657e4fb761fa8485ed6abb1e
   languageName: node
   linkType: hard
 
@@ -5736,22 +5752,22 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@shopify/flash-list@npm:2.0.1":
-  version: 2.0.1
-  resolution: "@shopify/flash-list@npm:2.0.1"
+"@shopify/flash-list@npm:2.0.2":
+  version: 2.0.2
+  resolution: "@shopify/flash-list@npm:2.0.2"
   dependencies:
     tslib: "npm:2.8.1"
   peerDependencies:
     "@babel/runtime": "*"
     react: "*"
     react-native: "*"
-  checksum: 10c0/0d008545a38f9f7844fab79d75f0f4927b7a350ffe90ba6b069c3a7ea4bc5e1ccd0e683240bcd75ce28bc7b5d16bf3cd4c6ed2430b7d5eef24795867cf5d6629
+  checksum: 10c0/c4e88348ce66e8f51c6213a42574a097d54cebf2125dc3fd8c077f3f7b83e25209c67bcb9a9102a3178c146cf5c23a978febd9a5ed5328ba1d7c663b5a8149d2
   languageName: node
   linkType: hard
 
-"@shopify/react-native-skia@npm:^2.2.0":
-  version: 2.2.0
-  resolution: "@shopify/react-native-skia@npm:2.2.0"
+"@shopify/react-native-skia@npm:^2.2.2":
+  version: 2.2.2
+  resolution: "@shopify/react-native-skia@npm:2.2.2"
   dependencies:
     canvaskit-wasm: "npm:0.40.0"
     react-reconciler: "npm:0.31.0"
@@ -5766,7 +5782,7 @@ __metadata:
       optional: true
   bin:
     setup-skia-web: scripts/setup-canvaskit.js
-  checksum: 10c0/664328014686d7a6881c489a441d8432a978082af727242a9781a0bd8097975df9f7433df41f66521eb9dfffbd6baadec98bdb285253904dd7068d4ceba889bf
+  checksum: 10c0/0da6bce0227edc52eede1b3b55918d5dbee1e7bbea842bc08ff954c6a3a4a3f17974beb0282f38d76067e01cd34b952b0ec6b70aa583109cda22283ebd00a478
   languageName: node
   linkType: hard
 
@@ -6325,12 +6341,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:^24.2.0":
-  version: 24.2.0
-  resolution: "@types/node@npm:24.2.0"
+"@types/node@npm:^24.2.1":
+  version: 24.2.1
+  resolution: "@types/node@npm:24.2.1"
   dependencies:
     undici-types: "npm:~7.10.0"
-  checksum: 10c0/0b55af4d7b37fea47bbeffffaff908462fa19ea9b1a18f92d9ed6d8415d97971b254f8cb3f629cd238916e94711fdb6ac939aa750cb353dfd6df6c0339435740
+  checksum: 10c0/439a3c7edf88a298e0c92e46f670234070b892589c3b06e82cc86c47a7e1cf220f4a4b4736ec6ac7e4b9e1c40d7b6d443a1e22f99dd17f13f9dd15de3b32011b
   languageName: node
   linkType: hard
 
@@ -7941,10 +7957,10 @@ __metadata:
     "@react-navigation/drawer": "npm:^7.5.6"
     "@react-navigation/native": "npm:^7.1.17"
     "@react-navigation/native-stack": "npm:^7.3.24"
-    "@revenuecat/purchases-js": "npm:^1.11.1"
+    "@revenuecat/purchases-js": "npm:^1.12.1"
     "@sentry/react-native": "npm:~6.19.0"
-    "@shopify/flash-list": "npm:2.0.1"
-    "@shopify/react-native-skia": "npm:^2.2.0"
+    "@shopify/flash-list": "npm:2.0.2"
+    "@shopify/react-native-skia": "npm:^2.2.2"
     "@tsconfig/react-native": "npm:^3.0.6"
     "@types/base-64": "npm:^1.0.2"
     "@types/crypto-js": "npm:^4.2.2"
@@ -7953,7 +7969,7 @@ __metadata:
     "@types/jest": "npm:^30.0.0"
     "@types/lodash": "npm:^4.17.20"
     "@types/md5": "npm:^2.3.5"
-    "@types/node": "npm:^24.2.0"
+    "@types/node": "npm:^24.2.1"
     "@types/qs": "npm:^6.14.0"
     "@types/react": "npm:~19.1.9"
     "@types/react-native": "npm:^0.73.0"
@@ -7992,7 +8008,7 @@ __metadata:
     eslint-import-resolver-typescript: "npm:^4.4.4"
     eslint-plugin-import: "npm:^2.32.0"
     eslint-plugin-node: "npm:^11.1.0"
-    eslint-plugin-prettier: "npm:^5.5.3"
+    eslint-plugin-prettier: "npm:^5.5.4"
     eslint-plugin-react: "npm:^7.37.5"
     eslint-plugin-react-hooks: "npm:^5.2.0"
     event-target-polyfill: "npm:^0.0.4"
@@ -8016,7 +8032,7 @@ __metadata:
     js-base64: "npm:^3.7.7"
     libmuse: "https://github.com/lovegaoshi/muse.git#commit=942f16bde7ba44ad1d0452ce838a96b17fe95aff"
     lodash: "npm:^4.17.21"
-    lottie-react-native: "npm:7.3.0"
+    lottie-react-native: "npm:7.3.1"
     lru-cache: "npm:7.18.3"
     md5: "npm:^2.3.0"
     metro: "npm:^0.82.5"
@@ -8032,7 +8048,7 @@ __metadata:
     react-native-app-auth: "npm:^8.0.3"
     react-native-background-timer: "git+https://github.com/lovegaoshi/react-native-background-timer.git"
     react-native-blob-util: "npm:^0.22.2"
-    react-native-bottom-tabs: "npm:^0.9.2"
+    react-native-bottom-tabs: "npm:^0.10.0"
     react-native-buffer: "npm:^6.0.4"
     react-native-carplay: "npm:2.4.1-beta.0"
     react-native-clean-project: "npm:^4.0.3"
@@ -8045,19 +8061,19 @@ __metadata:
     react-native-image-colors: "npm:^2.5.0"
     react-native-lyric: "https://lovegaoshi@github.com/lovegaoshi/react-native-lyric.git#commit=fe46871eba41445aa432fc6d0a5bc5e6c334e170"
     react-native-ota-hot-update: "npm:2.2.2"
-    react-native-pager-view: "npm:6.8.1"
+    react-native-pager-view: "npm:6.9.1"
     react-native-paper: "npm:5.14.5"
-    react-native-purchases: "npm:^9.1.0"
+    react-native-purchases: "npm:^9.2.0"
     react-native-qrcode-svg: "npm:^6.3.15"
-    react-native-reanimated: "npm:4.0.1"
-    react-native-safe-area-context: "npm:5.5.2"
+    react-native-reanimated: "npm:4.0.2"
+    react-native-safe-area-context: "npm:5.6.0"
     react-native-screens: "npm:4.13.1"
     react-native-shadow-2: "npm:^7.1.2"
     react-native-share-menu: "git+https://github.com/Expensify/react-native-share-menu.git"
     react-native-svg: "npm:15.12.1"
     react-native-svga-player: "https://lovegaoshi@github.com/lovegaoshi/react-native-svga-player.git#commit=f8c6303fddb528a1a94d2ab4696c9318c0002cfd"
     react-native-text-ticker: "https://lovegaoshi@github.com/lovegaoshi/react-native-text-ticker.git#commit=39d022e8e1eed15811c7155d39ec991742d37722"
-    react-native-track-player: "https://github.com/lovegaoshi/react-native-track-player.git#commit=78bc146a330447e31d1008444cde581c907172a2"
+    react-native-track-player: "https://github.com/lovegaoshi/react-native-track-player.git#commit=86d9fb420a606e7e1236ce194fad81b80192bb3b"
     react-native-url-polyfill: "npm:^2.0.0"
     react-native-video: "npm:6.15.0"
     react-native-webview: "npm:13.15.0"
@@ -11788,9 +11804,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-plugin-prettier@npm:^5.5.3":
-  version: 5.5.3
-  resolution: "eslint-plugin-prettier@npm:5.5.3"
+"eslint-plugin-prettier@npm:^5.5.4":
+  version: 5.5.4
+  resolution: "eslint-plugin-prettier@npm:5.5.4"
   dependencies:
     prettier-linter-helpers: "npm:^1.0.0"
     synckit: "npm:^0.11.7"
@@ -11804,7 +11820,7 @@ __metadata:
       optional: true
     eslint-config-prettier:
       optional: true
-  checksum: 10c0/7524e381b400fec67dd2bd1a71779c220a5410f0063cd220d144431f291ec800bee1985709ef0dd38d666d01e0e53bec93824063912784d4021db8473fafe73e
+  checksum: 10c0/5cc780e0ab002f838ad8057409e86de4ff8281aa2704a50fa8511abff87028060c2e45741bc9cbcbd498712e8d189de8026e70aed9e20e50fe5ba534ee5a8442
   languageName: node
   linkType: hard
 
@@ -16261,9 +16277,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"lottie-react-native@npm:7.3.0":
-  version: 7.3.0
-  resolution: "lottie-react-native@npm:7.3.0"
+"lottie-react-native@npm:7.3.1":
+  version: 7.3.1
+  resolution: "lottie-react-native@npm:7.3.1"
   peerDependencies:
     "@lottiefiles/dotlottie-react": ^0.6.5
     react: "*"
@@ -16274,7 +16290,7 @@ __metadata:
       optional: true
     react-native-windows:
       optional: true
-  checksum: 10c0/b3bb2102bee33123663f5ea8eec45d612865355753d5c7746ab6d4f000f9abdf271376b06d7d52dc1fda91fd49286e74a6ffa43966139923c82583b9b29f4fef
+  checksum: 10c0/0cc257fbb054a0489f11b9785ba3a0408946648b7db55ca335ee86fbbb95662f89f94dd70190f928f479f94a1f1bce729f789842fdbd130d8a3661d61c94a021
   languageName: node
   linkType: hard
 
@@ -18880,9 +18896,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-native-bottom-tabs@npm:^0.9.2":
-  version: 0.9.2
-  resolution: "react-native-bottom-tabs@npm:0.9.2"
+"react-native-bottom-tabs@npm:^0.10.0":
+  version: 0.10.0
+  resolution: "react-native-bottom-tabs@npm:0.10.0"
   dependencies:
     react-freeze: "npm:^1.0.0"
     sf-symbols-typescript: "npm:^2.0.0"
@@ -18890,7 +18906,7 @@ __metadata:
   peerDependencies:
     react: "*"
     react-native: "*"
-  checksum: 10c0/71da3beafe0c37c3fe9b02a03ddbcfd2a10c46e71c78f1b757ce3ff6fb6b872e8d5dd84909378d92da76fe870e0b9bce5618fd0a6c5af38eb662233514e8e695
+  checksum: 10c0/99a905501378fc9e69df621cb08bbb30905932387f284203e8335b6cef3772da7e34af541b387777c05c82998cd29d51ca1ef90a77dfa8c84f619c9e06806cbe
   languageName: node
   linkType: hard
 
@@ -19100,13 +19116,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-native-pager-view@npm:6.8.1":
-  version: 6.8.1
-  resolution: "react-native-pager-view@npm:6.8.1"
+"react-native-pager-view@npm:6.9.1":
+  version: 6.9.1
+  resolution: "react-native-pager-view@npm:6.9.1"
   peerDependencies:
     react: "*"
     react-native: "*"
-  checksum: 10c0/1b6f6bac77616adbe59f0b9b2f37c86c00c27b9fc8ebee7b769ffdbce88c235689deb53dca923e263ab0f97a9a1731362add4b1dff65467ce82889c8910f7186
+  checksum: 10c0/c5229d230734ad9dad0b1e296168f0eebc5cff1b4b63201266ee7d5ecadc2e9c584b426b4ef146718c2e581dfcf63914174133b3ed1657294ccd437c22dbbc05
   languageName: node
   linkType: hard
 
@@ -19125,11 +19141,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-native-purchases@npm:^9.1.0":
-  version: 9.1.0
-  resolution: "react-native-purchases@npm:9.1.0"
+"react-native-purchases@npm:^9.2.0":
+  version: 9.2.0
+  resolution: "react-native-purchases@npm:9.2.0"
   dependencies:
-    "@revenuecat/purchases-typescript-internal": "npm:16.0.2"
+    "@revenuecat/purchases-js-hybrid-mappings": "npm:16.2.1"
+    "@revenuecat/purchases-typescript-internal": "npm:16.2.1"
+    react-native-get-random-values: "npm:^1.11.0"
   peerDependencies:
     react: ">= 16.6.3"
     react-native: ">= 0.73.0"
@@ -19137,7 +19155,7 @@ __metadata:
   peerDependenciesMeta:
     react-native-web:
       optional: true
-  checksum: 10c0/1e10cf224d319e968d6027c92f2d7e5379e0c453ddbc500d85f16426a8481a36bd31797a18f2461df7ef8de8a33ea8a492861ab1d9f1ac10fc96deb82083d4d5
+  checksum: 10c0/aaa4a4ec99f233c21d98cb0c7af935362739df8b79817a7b62d7d04399bb6244ef9c728474cb1790d56eaf6e9dbabea29c10970e64a1568a610e737db75bc92b
   languageName: node
   linkType: hard
 
@@ -19156,9 +19174,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-native-reanimated@npm:4.0.1":
-  version: 4.0.1
-  resolution: "react-native-reanimated@npm:4.0.1"
+"react-native-reanimated@npm:4.0.2":
+  version: 4.0.2
+  resolution: "react-native-reanimated@npm:4.0.2"
   dependencies:
     react-native-is-edge-to-edge: "npm:^1.2.1"
     semver: "npm:7.7.2"
@@ -19166,18 +19184,18 @@ __metadata:
     "@babel/core": ^7.0.0-0
     react: "*"
     react-native: "*"
-    react-native-worklets: ">=0.3.0"
-  checksum: 10c0/bbf9d715f0305a586181b34fab6cb81ca3f2f737314efb02c7ce4bbbced54da388c2ccc6730450fa6be8fce4083ff29fe990a9a9accf6e4f9f7d4f9cc2a742ab
+    react-native-worklets: ">=0.4.0"
+  checksum: 10c0/422aa8308c586dd37d53760860aa963ef5f569d9fce3c03a3ce3d5592e5c93d6bd399567f616b2db2c3156712d9bc3c99d4380f454b8ed9dceedb525dd171ee9
   languageName: node
   linkType: hard
 
-"react-native-safe-area-context@npm:5.5.2":
-  version: 5.5.2
-  resolution: "react-native-safe-area-context@npm:5.5.2"
+"react-native-safe-area-context@npm:5.6.0":
+  version: 5.6.0
+  resolution: "react-native-safe-area-context@npm:5.6.0"
   peerDependencies:
     react: "*"
     react-native: "*"
-  checksum: 10c0/529cafcafbc1d994f6d9c9be41ae4f78768b7c103a22265d3fe5223a930249e0a07a934b5ec358ce510622061f339a20c2147b620bd15032366b12b4258c2ce5
+  checksum: 10c0/17877475217e3b9fc75afcd28bfa287cc996e4eb8cfc698f825670596d3e93d38d28aabc32a038f5167932412c6ef632a749b1c5fe49e15bd863326643740108
   languageName: node
   linkType: hard
 
@@ -19259,9 +19277,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-native-track-player@https://github.com/lovegaoshi/react-native-track-player.git#commit=78bc146a330447e31d1008444cde581c907172a2":
+"react-native-track-player@https://github.com/lovegaoshi/react-native-track-player.git#commit=86d9fb420a606e7e1236ce194fad81b80192bb3b":
   version: 4.1.1
-  resolution: "react-native-track-player@https://github.com/lovegaoshi/react-native-track-player.git#commit=78bc146a330447e31d1008444cde581c907172a2"
+  resolution: "react-native-track-player@https://github.com/lovegaoshi/react-native-track-player.git#commit=86d9fb420a606e7e1236ce194fad81b80192bb3b"
   peerDependencies:
     react: "*"
     react-native: "*"
@@ -19272,7 +19290,7 @@ __metadata:
       optional: true
     shaka-player:
       optional: true
-  checksum: 10c0/dc9ddd685b685fe8a86e205d2bcd2217d934dbf906fe1fdbfda5c37225f50c0ce60080d399aa29844288cb2d63a91cfc038465ae96641cb18aa0c31de6f2732b
+  checksum: 10c0/de12b116ef97b9377feb935f7d61639b915cf55d6ec04bfa14558643d7f883b8d47cae941c83711336b68ff69e81c702e931247b5c3c9e0e23933e6616599a6e
   languageName: node
   linkType: hard
 
