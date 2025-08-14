@@ -1,5 +1,4 @@
 // https://github.com/bingaha/kugou-lrc
-import { decode as atob, encode as btoa } from 'js-base64';
 
 import bfetch from '@utils/BiliFetch';
 import { LrcSource } from '@enums/LyricFetch';

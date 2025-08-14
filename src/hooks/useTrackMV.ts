@@ -56,7 +56,7 @@ export default (videoRef: RefObject<VideoRef | null>) => {
 
   useEffect(() => {
     const subscription = AppState.addEventListener('change', nextAppState => {
-      nextAppState === 'active' && primeVideoPosition();
+      nextAppState === 'active' && setTimeout(primeVideoPosition, 1);
     });
 
     return () => {

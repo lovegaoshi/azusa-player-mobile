@@ -3,7 +3,6 @@ import 'event-target-polyfill';
 import 'web-streams-polyfill';
 import 'text-encoding-polyfill';
 import 'react-native-url-polyfill/auto';
-import { decode, encode } from 'base-64';
 import { Innertube, ClientType, Platform } from 'youtubei.js';
 import { getSecure as getItem } from '@utils/ChromeStorageAPI';
 
@@ -11,14 +10,6 @@ import { timeFunction } from '../Utils';
 import MMKV from '../fakeMMKV';
 import { StorageKeys } from '@enums/Storage';
 import logger from '../Logger';
-
-if (!global.btoa) {
-  global.btoa = encode;
-}
-
-if (!global.atob) {
-  global.atob = decode;
-}
 
 // @ts-expect-error to avoid typings' fuss
 global.mmkvStorage = MMKV as any;
