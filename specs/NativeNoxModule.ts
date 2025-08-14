@@ -25,6 +25,7 @@ export interface Spec extends TurboModule {
   isGestureNavigationMode: () => boolean;
   selfDestruct: () => void;
   setDarkTheme: (mode: number) => void;
+  getRAMUsage: () => number;
 }
 
 export default TurboModuleRegistry.get<Spec>('NativeNoxModule');

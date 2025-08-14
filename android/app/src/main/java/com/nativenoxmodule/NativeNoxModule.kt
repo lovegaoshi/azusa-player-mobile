@@ -8,6 +8,7 @@ import android.content.Context
 import android.content.Context.UI_MODE_SERVICE
 import android.net.Uri
 import android.os.Build
+import android.os.Debug
 import android.provider.MediaStore
 import android.provider.Settings
 import androidx.appcompat.app.AppCompatDelegate
@@ -28,7 +29,6 @@ class NativeNoxModule(reactContext: ReactApplicationContext) : NativeNoxModuleSp
     private fun getActivity(): MainActivity? {
         return reactApplicationContext.currentActivity as MainActivity?
     }
-
 
     private fun listMediaDirNative(relativeDir: String, subdir: Boolean, selection: String? = null): WritableArray {
         val results: WritableArray = WritableNativeArray()
@@ -179,6 +179,16 @@ class NativeNoxModule(reactContext: ReactApplicationContext) : NativeNoxModuleSp
             ui?.setApplicationNightMode(mode.toInt())
         } else {
             AppCompatDelegate.setDefaultNightMode(mode.toInt())
+        }
+    }
+
+    override fun getRAMUsage(): Double {
+        try {
+            val memoryInfo = Debug.MemoryInfo()
+            Debug.getMemoryInfo(memoryInfo)
+            return memoryInfo.totalPss / 1000.0
+        } catch (_: Exception) {
+            return 0.0
         }
     }
 

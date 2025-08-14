@@ -15,9 +15,9 @@ import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { useNoxSetting } from '@stores/useApp';
-import { isAndroid, isOldArch } from '@utils/RNUtils';
+import { isAndroid } from '@utils/RNUtils';
 
-const isAndroidNewArch = isAndroid && !isOldArch();
+const isAndroidNewArch = isAndroid;
 
 interface Props extends TrueSheetProps {
   name: string;

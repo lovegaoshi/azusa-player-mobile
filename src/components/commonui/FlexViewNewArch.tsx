@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { View, ViewStyle } from 'react-native';
 
 import { styles } from '@components/style';
-import { isOldArch } from '@utils/RNUtils';
 import { useMiniplayerHeight } from '@contexts/MiniPlayerHeightContext';
 import Animated, { useAnimatedStyle } from 'react-native-reanimated';
 import { MinPlayerHeight } from '../miniplayer/Constants';
@@ -18,7 +17,7 @@ interface Props {
  */
 export default ({ children, noFlex, style }: Props) => {
   // do NOT change noFlex OTF.
-  if (isOldArch() && !noFlex) {
+  if (!noFlex) {
     return <View style={[styles.flex, style]}>{children}</View>;
   }
 

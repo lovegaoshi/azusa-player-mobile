@@ -34,10 +34,6 @@ export const setDarkTheme = (t: ColorSchemeName) => {
   NativeNoxModule?.setDarkTheme?.(themeConversion(t));
 };
 
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-expect-error
-export const isOldArch = () => global?.nativeFabricUIManager === undefined;
-
 export const getFileSize = async (fpath: string) => {
   try {
     const stat = await RNFetchBlob.fs.stat(fpath);
