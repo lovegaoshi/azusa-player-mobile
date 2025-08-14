@@ -1,5 +1,3 @@
-import { encode as btoa } from 'js-base64';
-
 const { floor, random } = Math;
 
 function f114i(a, b, i) {

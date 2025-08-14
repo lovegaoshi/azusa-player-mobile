@@ -1,6 +1,5 @@
 // https://github.com/bingaha/kugou-lrc
 import { strFromU8, decompressSync } from 'fflate';
-import { decode as atob } from 'base-64';
 
 import bfetch from '@utils/BiliFetch';
 import { LrcSource } from '@enums/LyricFetch';
