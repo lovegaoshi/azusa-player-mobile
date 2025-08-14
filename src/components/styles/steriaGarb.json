@@ -5849,5 +5849,155 @@
       "onSurfaceDisabled": "rgba(230, 226, 217, 0.38)",
       "backdrop": "rgba(49, 49, 37, 0.4)"
     }
+  },
+  {
+    "metaData": {
+      "themeName": "陆鳐LuLu·心电同频",
+      "themeDesc": "【陆鳐LuLu收藏集】是哔哩哔哩携手陆鳐LuLu定制打造的个人数字集卡，其中的每张数字卡片都将拥有独特编号。卡牌中收录了陆鳐LuLu四周年全新原创单曲，期待大家在心电同频中解锁不同的陆鳐LuLu！",
+      "themeAuthor": "NoxAutoGen",
+      "themeIcon": "https://i0.hdslb.com/bfs/garb/caa61fdf08cc1c95e4e15bfe115032a45cd8283f.png",
+      "darkTheme": true
+    },
+    "gifs": [
+      "https://i0.hdslb.com/bfs/garb/item/b6dc7094d39153830c00f706a016f30bd1fe541f.png",
+      "https://i0.hdslb.com/bfs/garb/item/1591f5e54880308020bd49a52d2c610c47e5c7ac.png",
+      "https://i0.hdslb.com/bfs/garb/item/e4621c6d3710c315851cd024e9d720f0c8d85082.png",
+      "https://i0.hdslb.com/bfs/garb/item/f1cf32d76a3cb0223c5e96a5303fe0cc707d08bc.png",
+      "https://i0.hdslb.com/bfs/garb/item/6d699faa0b72183f2c67557586d66b2f2db485d1.png",
+      "https://i0.hdslb.com/bfs/garb/item/7d4c4a6adc6a0c29a36fc737850f2797c88cffb3.png",
+      "https://i0.hdslb.com/bfs/garb/item/1aa30836a09d40da8d6781d7149cbe2c57b2ab7a.png",
+      "https://i0.hdslb.com/bfs/garb/item/87d0f28626ccdc5c4d2c4e67285c5427e1984cdf.png",
+      "https://i0.hdslb.com/bfs/garb/item/5981d20121fa2bbb0801d3bbe80ab2f8b878966a.png",
+      "https://i0.hdslb.com/bfs/garb/item/a16a88c647a185c94dc1f9eee920e1742fd143e2.png",
+      "https://i0.hdslb.com/bfs/garb/item/3bebfc30fdd96fe35aaeed4b1c6fff28d1f9bc96.png",
+      "https://i0.hdslb.com/bfs/garb/item/c07c6c0cb1efff466afd622f8a772209b1b15852.png",
+      "https://i0.hdslb.com/bfs/garb/item/989b2b603e04f72a1cf29a4d041e095336eea9f0.png",
+      "https://i0.hdslb.com/bfs/garb/item/8c8635a39ffdb88d8d0e009acc1eae017ee93e44.png",
+      "https://i0.hdslb.com/bfs/garb/item/a93513d58bef3fffb31a374970e7291c0b97af5d.png",
+      "https://i0.hdslb.com/bfs/garb/item/7981a73867357895ab3d39dec9c70a1403e16b20.png",
+      "https://i0.hdslb.com/bfs/garb/item/1c8394ceffb4f7bcf6c06b3e8feb7c17c3ba642b.png",
+      "https://i0.hdslb.com/bfs/garb/item/a9d3255dfad75a1e1b97ad6327b0794660b842b3.png",
+      "https://i0.hdslb.com/bfs/garb/item/66e6ab0a00da7617866b6fa521e5dc31364e2a5b.png",
+      "https://i0.hdslb.com/bfs/garb/item/6586973ac8df793c9bea91f7ace0c8e2c4d4036d.png"
+    ],
+    "backgroundImages": [
+      {
+        "type": "biliNFTVideoNew",
+        "identifier": "[\"108619\",\"108620\",\"霓虹派对\"]"
+      },
+      {
+        "type": "biliNFTVideoNew",
+        "identifier": "[\"108619\",\"108620\",\"喵影戏牌\"]"
+      },
+      {
+        "type": "biliNFTVideoNew",
+        "identifier": "[\"108619\",\"108620\",\"霓虹海\"]"
+      },
+      {
+        "type": "biliNFTVideoNew",
+        "identifier": "[\"108619\",\"108620\",\"悸动回廊\"]"
+      },
+      {
+        "type": "biliNFTVideoNew",
+        "identifier": "[\"108619\",\"108620\",\"圣裁终焉\"]"
+      },
+      {
+        "type": "biliNFTVideoNew",
+        "identifier": "[\"108619\",\"108620\",\"对焦心跳\"]"
+      },
+      {
+        "type": "biliNFTVideoNew",
+        "identifier": "[\"108619\",\"108620\",\"莓愿缠缠\"]"
+      },
+      {
+        "type": "biliNFTVideoNew",
+        "identifier": "[\"108619\",\"108620\",\"糖沁蜜咒\"]"
+      },
+      {
+        "type": "biliNFTVideoNew",
+        "identifier": "[\"108619\",\"108620\",\"虚瞳双誓\"]"
+      },
+      {
+        "type": "biliNFTVideoNew",
+        "identifier": "[\"108619\",\"108620\",\"千花一荧\"]"
+      },
+      {
+        "type": "biliNFTVideoNew",
+        "identifier": "[\"108619\",\"108620\",\"极夜频率\"]"
+      },
+      {
+        "type": "biliNFTVideoNew",
+        "identifier": "[\"108619\",\"108620\",\"音爆次元\"]"
+      },
+      {
+        "type": "biliNFTVideoNew",
+        "identifier": "[\"108619\",\"108620\",\"云端礼赞\"]"
+      },
+      {
+        "type": "biliNFTVideoRedeem",
+        "identifier": "[\"108619\",\"108620\",\"典藏卡·神眷圣礼\"]"
+      },
+      {
+        "type": "biliNFTVideoRedeem",
+        "identifier": "[\"108619\",\"108620\",\"音乐典藏卡·第七秒沉溺\"]"
+      },
+      {
+        "type": "biliNFTVideoRedeem",
+        "identifier": "[\"108619\",\"108620\",\"剧情典藏卡·第七秒沉溺\"]"
+      }
+    ],
+    "customColors": {
+      "maskedBackgroundColor": "rgba(0, 0, 0, 0.60)",
+      "playlistDrawerBackgroundColor": "green",
+      "playlistDrawerBackgroundColorTransparent": "rgba(0, 255, 0, 0.35)",
+      "progressThumbTintColor": "rgb(235, 235, 0)",
+      "progressMinimumTrackTintColor": "rgb(235, 235, 0)",
+      "progressMaximumTrackTintColor": "#FFFFFF",
+      "btnBackgroundColor": "rgb(72, 71, 58)",
+      "textInputSelectionColor": "green"
+    },
+    "colors": {
+      "primary": "#fcf75e",
+      "onPrimary": "rgb(50, 50, 0)",
+      "primaryContainer": "rgb(73, 73, 0)",
+      "onPrimaryContainer": "rgb(234, 234, 0)",
+      "secondary": "rgb(202, 200, 165)",
+      "onSecondary": "rgb(50, 50, 24)",
+      "secondaryContainer": "rgb(73, 72, 45)",
+      "onSecondaryContainer": "rgb(231, 228, 191)",
+      "tertiary": "rgb(164, 208, 189)",
+      "onTertiary": "rgb(11, 55, 42)",
+      "tertiaryContainer": "rgb(37, 78, 64)",
+      "onTertiaryContainer": "rgb(191, 236, 216)",
+      "error": "rgb(255, 180, 171)",
+      "onError": "rgb(105, 0, 5)",
+      "errorContainer": "rgb(147, 0, 10)",
+      "onErrorContainer": "rgb(255, 180, 171)",
+      "background": "rgba(0,0,0, 0.4)",
+      "onBackground": "rgb(230, 226, 217)",
+      "surface": "rgb(28, 28, 23)",
+      "onSurface": "rgba(235, 235, 0, 1)",
+      "text": "#fcf75e",
+      "surfaceVariant": "rgb(10, 10, 10)",
+      "onSurfaceVariant": "rgb(225, 225, 0)",
+      "outline": "rgb(147, 145, 130)",
+      "outlineVariant": "rgb(72, 71, 58)",
+      "shadow": "rgb(0, 0, 0)",
+      "scrim": "rgb(0, 0, 0)",
+      "inverseSurface": "rgb(230, 226, 217)",
+      "inverseOnSurface": "rgb(49, 49, 43)",
+      "inversePrimary": "rgb(98, 98, 0)",
+      "elevation": {
+        "level0": "transparent",
+        "level1": "rgb(53, 56, 57)",
+        "level2": "rgb(10, 10, 10)",
+        "level3": "rgb(10, 10, 10)",
+        "level4": "rgb(49, 49, 20)",
+        "level5": "rgb(53, 53, 20)"
+      },
+      "surfaceDisabled": "rgba(230, 226, 217, 0.12)",
+      "onSurfaceDisabled": "rgba(230, 226, 217, 0.38)",
+      "backdrop": "rgba(49, 49, 37, 0.4)"
+    }
   }
 ]
