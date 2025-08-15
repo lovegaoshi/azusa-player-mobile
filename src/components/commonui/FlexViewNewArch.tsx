@@ -15,12 +15,7 @@ interface Props {
 /**
  * a view of flex:1 for new arch, resolves resizing issues
  */
-export default ({ children, noFlex, style }: Props) => {
-  // do NOT change noFlex OTF.
-  if (!noFlex) {
-    return <View style={[styles.flex, style]}>{children}</View>;
-  }
-
+export default ({ children, style }: Props) => {
   const [initHeight, setInitHeight] = useState(0);
   const miniplayerHeight = useMiniplayerHeight();
 
