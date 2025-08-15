@@ -8,6 +8,7 @@ import m0003 from './0003_many_marrow.sql';
 import m0004 from './0004_sad_blink.sql';
 import m0005 from './0005_great_madelyne_pryor.sql';
 import m0006 from './0006_nappy_black_tom.sql';
+import m0007 from './0007_productive_dormammu.sql';
 
   export default {
     journal,
@@ -18,7 +19,8 @@ m0002,
 m0003,
 m0004,
 m0005,
-m0006
+m0006,
+m0007
     }
   }
   
