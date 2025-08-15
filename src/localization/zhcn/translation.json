@@ -163,6 +163,7 @@
     "sortLastPlayed": "最后播放",
     "sortPlayCount": "播放次数",
     "sortPreviousOrder": "之前的顺序",
+    "sortAsIs": "原顺序",
     "searchListName": "搜索歌单"
   },
   "Download": {

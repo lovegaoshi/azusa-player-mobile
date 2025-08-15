@@ -1,6 +1,6 @@
 import md5 from 'md5';
+import CryptoJS from 'crypto-js';
 
-import { Aes } from '@utils/Crypto';
 import bfetch from '@utils/BiliFetch';
 // https://github.com/lyswhut/lx-music-desktop/blob/c1e7faa7bf8daeaf3ef4090c30a552931edd6150/src/renderer/utils/musicSdk/wy/lyric.js#L38
 
@@ -8,14 +8,26 @@ const Buffer = require('buffer/').Buffer;
 const LyricAPI = 'api/song/lyric/v1';
 const eapiKey = 'e82ckenh8dichen8';
 
+const neteaseEapiAES = (key: string, data: string) => {
+  return CryptoJS.AES.encrypt(
+    CryptoJS.enc.Utf8.parse(data),
+    CryptoJS.enc.Utf8.parse(key),
+    {
+      iv: CryptoJS.enc.Utf8.parse(''),
+      mode: CryptoJS.mode['ECB'],
+      padding: CryptoJS.pad.Pkcs7,
+    },
+  )
+    .ciphertext.toString()
+    .toUpperCase();
+};
+
 const eapi = (url: string, body: string) => {
   const message = `nobody${url}use${body}md5forencrypt`;
   const digest = md5(message);
   const data = `${url}-36cd479b6b5-${body}-36cd479b6b5-${digest}`;
   return {
-    params: Buffer.from(Aes.encrypt(eapiKey, data), 'base64')
-      .toString('hex')
-      .toUpperCase(),
+    params: neteaseEapiAES(eapiKey, data),
   };
 };
 

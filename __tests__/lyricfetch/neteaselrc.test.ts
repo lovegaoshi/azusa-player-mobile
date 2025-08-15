@@ -1,5 +1,4 @@
 import lrcFetch from '../../src/utils/lrcfetch/netease';
-import { getLyric } from '../../src/utils/lrcfetch/neteaseEapi';
 
 test('netease lrc', async () => {
   const content = await lrcFetch.getLrcOptions('starship III');
