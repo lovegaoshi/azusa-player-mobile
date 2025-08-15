@@ -1,5 +1,6 @@
 package com.nativenoxmodule
 
+
 import android.app.ActivityManager
 import android.app.ApplicationExitInfo
 import android.app.UiModeManager
@@ -28,6 +29,10 @@ class NativeNoxModule(reactContext: ReactApplicationContext) : NativeNoxModuleSp
 
     private fun getActivity(): MainActivity? {
         return reactApplicationContext.currentActivity as MainActivity?
+    }
+
+    override fun calcBeatsFromFile(filePath: String) {
+        beatRoot(filePath)
     }
 
     private fun listMediaDirNative(relativeDir: String, subdir: Boolean, selection: String? = null): WritableArray {
@@ -160,9 +165,7 @@ class NativeNoxModule(reactContext: ReactApplicationContext) : NativeNoxModuleSp
 
     override fun isGestureNavigationMode(): Boolean {
         val context = reactApplicationContext
-
         return Settings.Secure.getInt(context.contentResolver, "navigation_mode", 0) == 2
-
     }
 
     override fun selfDestruct() {
