@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
-import { View, ViewStyle } from 'react-native';
+import { ViewStyle } from 'react-native';
 
 import { styles } from '@components/style';
-import { isOldArch } from '@utils/RNUtils';
 import { useMiniplayerHeight } from '@contexts/MiniPlayerHeightContext';
 import Animated, { useAnimatedStyle } from 'react-native-reanimated';
 import { MinPlayerHeight } from '../miniplayer/Constants';
@@ -16,12 +15,7 @@ interface Props {
 /**
  * a view of flex:1 for new arch, resolves resizing issues
  */
-export default ({ children, noFlex, style }: Props) => {
-  // do NOT change noFlex OTF.
-  if (isOldArch() && !noFlex) {
-    return <View style={[styles.flex, style]}>{children}</View>;
-  }
-
+export default ({ children, style }: Props) => {
   const [initHeight, setInitHeight] = useState(0);
   const miniplayerHeight = useMiniplayerHeight();
 
