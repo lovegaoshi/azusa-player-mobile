@@ -18,10 +18,12 @@ import com.facebook.react.bridge.Arguments
 import com.facebook.react.bridge.ReactApplicationContext
 import com.facebook.react.bridge.WritableArray
 import com.facebook.react.bridge.WritableNativeArray
+import com.nativenoxmodule.dsp.AudioDispatcherFactory
 import com.noxplay.noxplayer.BuildConfig
 import com.noxplay.noxplayer.MainActivity
 import timber.log.Timber
 import java.io.File
+import androidx.core.net.toUri
 
 class NativeNoxModule(reactContext: ReactApplicationContext) : NativeNoxModuleSpec(reactContext) {
 
@@ -32,7 +34,11 @@ class NativeNoxModule(reactContext: ReactApplicationContext) : NativeNoxModuleSp
     }
 
     override fun calcBeatsFromFile(filePath: String) {
-        beatRoot(filePath)
+        val dispatcher = AudioDispatcherFactory.fromPipe(
+            reactApplicationContext,
+            filePath.toUri(), 0.0, 0.0, SAMPLE_RATE, BUFFER_SIZE, BUFFER_OVERLAP)
+
+        beatRoot(dispatcher)
     }
 
     private fun listMediaDirNative(relativeDir: String, subdir: Boolean, selection: String? = null): WritableArray {
