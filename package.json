@@ -106,7 +106,6 @@
     "react": "19.0.0",
     "react-i18next": "^15.6.1",
     "react-native": "0.79.5",
-    "react-native-aes-ecb": "^1.0.0",
     "react-native-app-auth": "^8.0.3",
     "react-native-background-timer": "git+https://github.com/lovegaoshi/react-native-background-timer.git",
     "react-native-blob-util": "^0.22.2",
