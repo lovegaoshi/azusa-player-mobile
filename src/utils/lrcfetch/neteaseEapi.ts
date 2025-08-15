@@ -4,7 +4,6 @@ import CryptoJS from 'crypto-js';
 import bfetch from '@utils/BiliFetch';
 // https://github.com/lyswhut/lx-music-desktop/blob/c1e7faa7bf8daeaf3ef4090c30a552931edd6150/src/renderer/utils/musicSdk/wy/lyric.js#L38
 
-const Buffer = require('buffer/').Buffer;
 const LyricAPI = 'api/song/lyric/v1';
 const eapiKey = 'e82ckenh8dichen8';
 
