@@ -114,24 +114,49 @@ class NativeNoxModule(reactContext: ReactApplicationContext) : NativeNoxModuleSp
         return results
     }
 
-    override fun getUri(uri: String?): String {
-        return FileProvider.getUriForFile(reactApplicationContext,
-            "${BuildConfig.APPLICATION_ID}.provider", File(uri!!)
-        ).toString()
+    override fun getUri(uri: String, promise: Promise) {
+        CoroutineScope(Dispatchers.Default).launch {
+            try {
+                promise.resolve(FileProvider.getUriForFile(reactApplicationContext,
+                    "${BuildConfig.APPLICATION_ID}.provider", File(uri)
+                ).toString())
+            } catch (e: Exception) {
+                promise.reject(e)
+            }
+        }
     }
 
-    override fun listMediaDir(relativeDir: String?, subdir: Boolean): WritableArray {
-        return listMediaDirNative(relativeDir!!, subdir)
+    override fun listMediaDir(relativeDir: String, subdir: Boolean, promise: Promise) {
+        CoroutineScope(Dispatchers.Default).launch {
+            try {
+                promise.resolve(listMediaDirNative(relativeDir, subdir))
+            } catch (e: Exception) {
+                promise.reject(e)
+            }
+        }
+
     }
 
-    override fun listMediaFileByFName(filename: String?, relativeDir: String?): WritableArray {
-        return listMediaDirNative(relativeDir!!, true,
-            "${MediaStore.Audio.Media.DISPLAY_NAME} IN ('$filename')")
+    override fun listMediaFileByFName(filename: String, relativeDir: String, promise: Promise) {
+        CoroutineScope(Dispatchers.Default).launch {
+            try {
+                promise.resolve(listMediaDirNative(relativeDir, true,
+                    "${MediaStore.Audio.Media.DISPLAY_NAME} IN ('$filename')"))
+            } catch (e: Exception) {
+                promise.reject(e)
+            }
+        }
     }
 
-    override fun listMediaFileByID(id: String?): WritableArray {
-        return listMediaDirNative("", true,
-            "${MediaStore.Audio.Media._ID} = $id")
+    override fun listMediaFileByID(id: String, promise: Promise) {
+        CoroutineScope(Dispatchers.Default).launch {
+            try {
+                promise.resolve( listMediaDirNative("", true,
+                    "${MediaStore.Audio.Media._ID} = $id"))
+            } catch (e: Exception) {
+                promise.reject(e)
+            }
+        }
     }
 
     override fun loadRN() {
