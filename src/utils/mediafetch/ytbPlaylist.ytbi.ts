@@ -50,7 +50,13 @@ const getYtbSong = async (
     }
   }
   if (limit > songs.length && playlistData.has_continuation) {
-    return getYtbSong(await playlistData.getContinuation(), songs, favList);
+    return getYtbSong(
+      await playlistData.getContinuation(),
+      songs,
+      favList,
+      limit,
+      getall,
+    );
   }
   return songs;
 };
