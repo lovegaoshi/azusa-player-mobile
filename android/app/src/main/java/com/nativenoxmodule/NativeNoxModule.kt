@@ -46,7 +46,7 @@ class NativeNoxModule(reactContext: ReactApplicationContext) : NativeNoxModuleSp
             reactApplicationContext,
             filePath.toUri(), 0.0, 0.0, SAMPLE_RATE, BUFFER_SIZE, BUFFER_OVERLAP
         )
-        CoroutineScope(Dispatchers.IO).launch {
+        CoroutineScope(Dispatchers.Default).launch {
             try {
                 promise.resolve(Arguments.fromList(beatRoot(dispatcher)))
             } catch (e: Exception) {
