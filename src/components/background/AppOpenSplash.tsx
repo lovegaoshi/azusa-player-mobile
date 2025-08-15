@@ -19,14 +19,13 @@ type SplashArray = [SplashType, () => unknown][];
 
 export const imageSplashes: SplashArray = [
   [SplashType.Image, () => require('@assets/splash/steria2.jpg')],
-  [SplashType.Image, () => require('@assets/splash/abu-10k-subs.gif')],
-  [SplashType.Image, () => require('@assets/splash/nox-3d.png')],
+  [SplashType.Image, () => require('@assets/splash/nox-3d.jpg')],
   [SplashType.Image, () => require('@assets/splash/nox-3d-2024.jpg')],
 ];
 
 const localSplashes: SplashArray = [
   ...imageSplashes,
-  [SplashType.Tanaka, () => require('@assets/splash/nox-3d.png')],
+  [SplashType.Tanaka, () => require('@assets/splash/nox-3d.jpg')],
 ];
 
 const randomSplash = randomChoice(localSplashes);
