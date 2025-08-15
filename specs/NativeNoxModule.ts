@@ -26,7 +26,7 @@ export interface Spec extends TurboModule {
   selfDestruct: () => void;
   setDarkTheme: (mode: number) => void;
   getRAMUsage: () => number;
-  calcBeatsFromFile: (filePath: string) => void;
+  calcBeatsFromFile: (filePath: string) => Promise<number[]>;
 }
 
 export default TurboModuleRegistry.get<Spec>('NativeNoxModule');

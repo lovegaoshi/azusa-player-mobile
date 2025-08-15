@@ -24,6 +24,14 @@ import com.noxplay.noxplayer.MainActivity
 import timber.log.Timber
 import java.io.File
 import androidx.core.net.toUri
+import com.facebook.react.bridge.Promise
+import com.nativenoxmodule.dsp.BUFFER_OVERLAP
+import com.nativenoxmodule.dsp.BUFFER_SIZE
+import com.nativenoxmodule.dsp.SAMPLE_RATE
+import com.nativenoxmodule.dsp.beatRoot
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class NativeNoxModule(reactContext: ReactApplicationContext) : NativeNoxModuleSpec(reactContext) {
 
@@ -33,16 +41,23 @@ class NativeNoxModule(reactContext: ReactApplicationContext) : NativeNoxModuleSp
         return reactApplicationContext.currentActivity as MainActivity?
     }
 
-    override fun calcBeatsFromFile(filePath: String) {
+    override fun calcBeatsFromFile(filePath: String, promise: Promise) {
         val dispatcher = AudioDispatcherFactory.fromPipe(
             reactApplicationContext,
-            filePath.toUri(), 0.0, 0.0, SAMPLE_RATE, BUFFER_SIZE, BUFFER_OVERLAP)
-
-        beatRoot(dispatcher)
+            filePath.toUri(), 0.0, 0.0, SAMPLE_RATE, BUFFER_SIZE, BUFFER_OVERLAP
+        )
+        CoroutineScope(Dispatchers.IO).launch {
+            try {
+                promise.resolve(Arguments.fromList(beatRoot(dispatcher)))
+            } catch (e: Exception) {
+                promise.reject(e)
+            }
+        }
+        return
     }
 
     private fun listMediaDirNative(relativeDir: String, subdir: Boolean, selection: String? = null): WritableArray {
-        val results: WritableArray = WritableNativeArray()
+        val results = WritableNativeArray()
         try {
             val query = reactApplicationContext.contentResolver.query(
                 MediaStore.Audio.Media.EXTERNAL_CONTENT_URI,
