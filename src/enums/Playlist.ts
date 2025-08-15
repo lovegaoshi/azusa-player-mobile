@@ -22,6 +22,7 @@ export enum SortOptions {
   LastPlayed = 'LAST_PLAYED',
   PlayCount = 'PLAY_COUNT',
   PreviousOrder = 'PREVIOUS_ORDER',
+  AsIs = 'AS_IS',
 }
 
 export const PlaylistMediaID = 'playlist-';

@@ -22,7 +22,12 @@ export const sortPlaylist = async (
   ascend = false,
 ): Promise<NoxMedia.Playlist> => {
   playlist.sort = sort;
-  if (SortOptions.PreviousOrder === sort) {
+  if (sort === SortOptions.AsIs) {
+    return ascend
+      ? playlist
+      : { ...playlist, songList: playlist.songList.reverse() };
+  }
+  if (sort === SortOptions.PreviousOrder) {
     // first get the largest order number in the songlist:
     let largestOrder = 0;
     let songsWithoutOrder = 1;
