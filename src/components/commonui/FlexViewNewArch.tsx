@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, ViewStyle } from 'react-native';
+import { ViewStyle } from 'react-native';
 
 import { styles } from '@components/style';
 import { useMiniplayerHeight } from '@contexts/MiniPlayerHeightContext';
