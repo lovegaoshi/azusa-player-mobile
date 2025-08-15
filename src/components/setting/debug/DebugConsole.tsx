@@ -11,9 +11,11 @@ export default () => {
 };
 
 export const showDebugLog = async () => {
-  const log = `TP.volume: ${await TrackPlayer.getVolume()}\n
-    LastExitCode: ${NativeNoxModule?.getLastExitCode?.()}\n
-    Mem Usage: ${NativeNoxModule?.getRAMUsage?.()}\n
-    TP.activeTrack: ${JSON.stringify(await TrackPlayer.getActiveTrack())}\n`;
+  const log = `
+  TP.volume: ${await TrackPlayer.getVolume()}\n
+  LastExitCode: ${NativeNoxModule?.getLastExitCode?.()}\n
+  Mem Usage: ${NativeNoxModule?.getRAMUsage?.()} MB\n
+  TP.activeTrack: ${JSON.stringify(await TrackPlayer.getActiveTrack())}\n
+  `;
   showLog(log);
 };
