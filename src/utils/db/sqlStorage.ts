@@ -9,6 +9,7 @@ import r128gainTable from '@utils/db/schema/r128gainTable';
 import lyricTable from '@utils/db/schema/lyricTable';
 import abRepeatTable from '@utils/db/schema/abrepeatTable';
 import tempTable from '@utils/db/schema/tempSongTable';
+import songBeatTable from '@utils/db/schema/songBeatTable';
 import db from '@utils/db/sql';
 import { getPlaybackCountAPI, getPlaybackCountsAPI } from '@utils/db/sqlAPI';
 import { logger } from '@utils/Logger';
@@ -185,4 +186,12 @@ export const setLyricMapping = async (v: Partial<NoxMedia.LyricDetail>) => {
       target: lyricTable.songId,
       set: v,
     });
+};
+
+export const setSongBeat = async (songcid: string, beatArray: number[]) => {
+  const beat = JSON.stringify(beatArray);
+  await db.insert(songBeatTable).values({ songcid, beat }).onConflictDoUpdate({
+    target: songBeatTable.songcid,
+    set: { beat },
+  });
 };

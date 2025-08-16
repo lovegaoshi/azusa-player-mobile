@@ -85,10 +85,10 @@ const chooseLocalFileAndroid = async (
 
 const getMediaRealPath = async (uri: string, parsedURI: string) => {
   const mediaFiles =
-    NativeNoxModule?.listMediaFileByFName(
+    (await NativeNoxModule?.listMediaFileByFName(
       uri.substring(uri.lastIndexOf('%2F') + 3),
       parsedURI.substring(0, parsedURI.lastIndexOf('/')),
-    ) ?? [];
+    )) ?? [];
   return mediaFiles[0].realPath;
 };
 
@@ -110,9 +110,9 @@ export const chooseLocalMediaFolderAndroid = async (realPath = false) => {
     };
   }
   const mediaFiles =
-    NativeNoxModule?.listMediaFileByID(
+    (await NativeNoxModule?.listMediaFileByID(
       location.uri.substring(location.uri.lastIndexOf('%3A') + 3),
-    ) ?? [];
+    )) ?? [];
   return {
     reason: FilePickerResult.Success,
     relativePath: mediaFiles[0].relativePath,

@@ -1,5 +1,6 @@
 package com.nativenoxmodule
 
+
 import android.app.ActivityManager
 import android.app.ApplicationExitInfo
 import android.app.UiModeManager
@@ -17,10 +18,20 @@ import com.facebook.react.bridge.Arguments
 import com.facebook.react.bridge.ReactApplicationContext
 import com.facebook.react.bridge.WritableArray
 import com.facebook.react.bridge.WritableNativeArray
+import com.nativenoxmodule.dsp.AudioDispatcherFactory
 import com.noxplay.noxplayer.BuildConfig
 import com.noxplay.noxplayer.MainActivity
 import timber.log.Timber
 import java.io.File
+import androidx.core.net.toUri
+import com.facebook.react.bridge.Promise
+import com.nativenoxmodule.dsp.BUFFER_OVERLAP
+import com.nativenoxmodule.dsp.BUFFER_SIZE
+import com.nativenoxmodule.dsp.SAMPLE_RATE
+import com.nativenoxmodule.dsp.beatRoot
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class NativeNoxModule(reactContext: ReactApplicationContext) : NativeNoxModuleSpec(reactContext) {
 
@@ -30,8 +41,23 @@ class NativeNoxModule(reactContext: ReactApplicationContext) : NativeNoxModuleSp
         return reactApplicationContext.currentActivity as MainActivity?
     }
 
+    override fun calcBeatsFromFile(filePath: String, promise: Promise) {
+        val dispatcher = AudioDispatcherFactory.fromPipe(
+            reactApplicationContext,
+            filePath.toUri(), 0.0, 0.0, SAMPLE_RATE, BUFFER_SIZE, BUFFER_OVERLAP
+        )
+        CoroutineScope(Dispatchers.Default).launch {
+            try {
+                promise.resolve(Arguments.fromList(beatRoot(dispatcher)))
+            } catch (e: Exception) {
+                promise.reject(e)
+            }
+        }
+        return
+    }
+
     private fun listMediaDirNative(relativeDir: String, subdir: Boolean, selection: String? = null): WritableArray {
-        val results: WritableArray = WritableNativeArray()
+        val results = WritableNativeArray()
         try {
             val query = reactApplicationContext.contentResolver.query(
                 MediaStore.Audio.Media.EXTERNAL_CONTENT_URI,
@@ -88,24 +114,49 @@ class NativeNoxModule(reactContext: ReactApplicationContext) : NativeNoxModuleSp
         return results
     }
 
-    override fun getUri(uri: String?): String {
-        return FileProvider.getUriForFile(reactApplicationContext,
-            "${BuildConfig.APPLICATION_ID}.provider", File(uri!!)
-        ).toString()
+    override fun getUri(uri: String, promise: Promise) {
+        CoroutineScope(Dispatchers.Default).launch {
+            try {
+                promise.resolve(FileProvider.getUriForFile(reactApplicationContext,
+                    "${BuildConfig.APPLICATION_ID}.provider", File(uri)
+                ).toString())
+            } catch (e: Exception) {
+                promise.reject(e)
+            }
+        }
     }
 
-    override fun listMediaDir(relativeDir: String?, subdir: Boolean): WritableArray {
-        return listMediaDirNative(relativeDir!!, subdir)
+    override fun listMediaDir(relativeDir: String, subdir: Boolean, promise: Promise) {
+        CoroutineScope(Dispatchers.Default).launch {
+            try {
+                promise.resolve(listMediaDirNative(relativeDir, subdir))
+            } catch (e: Exception) {
+                promise.reject(e)
+            }
+        }
+
     }
 
-    override fun listMediaFileByFName(filename: String?, relativeDir: String?): WritableArray {
-        return listMediaDirNative(relativeDir!!, true,
-            "${MediaStore.Audio.Media.DISPLAY_NAME} IN ('$filename')")
+    override fun listMediaFileByFName(filename: String, relativeDir: String, promise: Promise) {
+        CoroutineScope(Dispatchers.Default).launch {
+            try {
+                promise.resolve(listMediaDirNative(relativeDir, true,
+                    "${MediaStore.Audio.Media.DISPLAY_NAME} IN ('$filename')"))
+            } catch (e: Exception) {
+                promise.reject(e)
+            }
+        }
     }
 
-    override fun listMediaFileByID(id: String?): WritableArray {
-        return listMediaDirNative("", true,
-            "${MediaStore.Audio.Media._ID} = $id")
+    override fun listMediaFileByID(id: String, promise: Promise) {
+        CoroutineScope(Dispatchers.Default).launch {
+            try {
+                promise.resolve( listMediaDirNative("", true,
+                    "${MediaStore.Audio.Media._ID} = $id"))
+            } catch (e: Exception) {
+                promise.reject(e)
+            }
+        }
     }
 
     override fun loadRN() {
@@ -160,9 +211,7 @@ class NativeNoxModule(reactContext: ReactApplicationContext) : NativeNoxModuleSp
 
     override fun isGestureNavigationMode(): Boolean {
         val context = reactApplicationContext
-
         return Settings.Secure.getInt(context.contentResolver, "navigation_mode", 0) == 2
-
     }
 
     override fun selfDestruct() {
