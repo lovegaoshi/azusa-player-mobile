@@ -9,6 +9,7 @@ import tempTable from './schema/tempSongTable';
 import tempidTable from './schema/tempSongidTable';
 import songTable from './schema/songTable';
 import playlistTable from './schema/playlistTable';
+import songBeatTable from './schema/songBeatTable';
 import { dummyPlaylist } from '@objects/Playlist';
 
 export const exportSQL = async () => {
@@ -178,4 +179,15 @@ export const getPlaylist = async (
     settings: undefined,
     songList: songs,
   };
+};
+
+export const getSongBeat = (songcid: string): number[] | undefined => {
+  const res = db
+    .select({
+      beat: songBeatTable.beat,
+    })
+    .from(songBeatTable)
+    .where(eq(songBeatTable.songcid, songcid))
+    .get()?.beat;
+  return res === undefined ? res : (JSON.parse(res) as number[]);
 };

@@ -110,7 +110,6 @@
     "react-native-background-timer": "git+https://github.com/lovegaoshi/react-native-background-timer.git",
     "react-native-blob-util": "^0.22.2",
     "react-native-bottom-tabs": "^0.10.0",
-    "react-native-buffer": "^6.0.4",
     "react-native-carplay": "2.4.1-beta.0",
     "react-native-device-info": "^14.0.4",
     "react-native-edge-to-edge": "^1.6.2",

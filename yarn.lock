@@ -8116,7 +8116,6 @@ __metadata:
     react-native-background-timer: "git+https://github.com/lovegaoshi/react-native-background-timer.git"
     react-native-blob-util: "npm:^0.22.2"
     react-native-bottom-tabs: "npm:^0.10.0"
-    react-native-buffer: "npm:^6.0.4"
     react-native-carplay: "npm:2.4.1-beta.0"
     react-native-clean-project: "npm:^4.0.3"
     react-native-device-info: "npm:^14.0.4"
@@ -18953,20 +18952,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-native-buffer@npm:^6.0.4":
-  version: 6.0.4
-  resolution: "react-native-buffer@npm:6.0.4"
-  dependencies:
-    ieee754: "npm:^1.2.1"
-    react-native-fast-base64: "npm:^0.1.4"
-  peerDependencies:
-    react: "*"
-    react-native: "*"
-    react-native-fast-base64: "*"
-  checksum: 10c0/0883ae2749cfe02d26b31c168ff7a2d1d69da0234a093cbeaae26a76370d0d778a3fa3ab7bf4e567f46698355dc5f4fa732c7718a1d7bffc9f24e827ab3abf8d
-  languageName: node
-  linkType: hard
-
 "react-native-carplay@npm:2.4.1-beta.0":
   version: 2.4.1-beta.0
   resolution: "react-native-carplay@npm:2.4.1-beta.0"
@@ -19060,16 +19045,6 @@ __metadata:
     react: "*"
     react-native: "*"
   checksum: 10c0/4c9defc3075aedff2bcef2a39ed97d037f220342baa95d374f3c68dee9e4493429f2f8f3b3dbb7ba355cdfb89a00d6400218c90944cc80e84283d3eb8646c584
-  languageName: node
-  linkType: hard
-
-"react-native-fast-base64@npm:^0.1.4":
-  version: 0.1.4
-  resolution: "react-native-fast-base64@npm:0.1.4"
-  peerDependencies:
-    react: "*"
-    react-native: "*"
-  checksum: 10c0/9c8ae7061c79cbf46be46d31dda9e50de4709b3550dd9f611a192ee5fa39b19e9256eb2f7b137ee6070285c00ee83ae2fe6e521a3351d1d0953d4c07d95dd0e1
   languageName: node
   linkType: hard
 

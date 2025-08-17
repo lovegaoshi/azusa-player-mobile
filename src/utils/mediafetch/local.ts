@@ -23,7 +23,7 @@ const songFetch = async (
 ): Promise<NoxMedia.Song[]> => {
   if (!isAndroid) return [];
   const mediaFiles: NoxUtils.NoxFileUtilMediaInfo[] =
-    NativeNoxModule?.listMediaDir(fpath, true) ?? [];
+    (await NativeNoxModule?.listMediaDir(fpath, true)) ?? [];
   const uniqMediaFiles = mediaFiles.filter(v => !favlist.includes(v.realPath));
   return uniqMediaFiles.map(v =>
     SongTS({
@@ -57,7 +57,7 @@ const resolveURL = async (song: NoxMedia.Song) => {
   if (isAndroid) {
     const artworkUri = await cacheAlbumArt(song.bvid);
     if (artworkUri) {
-      cover = NativeNoxModule?.getUri(artworkUri);
+      cover = await NativeNoxModule?.getUri(artworkUri);
     }
   }
   return { ...(await resolveURLPrefetch(song)), cover };
