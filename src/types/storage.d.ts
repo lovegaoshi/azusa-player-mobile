@@ -78,6 +78,10 @@ declare global {
       eqPreset: number;
       loudnessEnhance: number;
 
+      beatMatchCrossfade: boolean;
+      beatMatchCrossfadeIn: number;
+      beatMatchCrossfadeOut: number;
+
       [key: string]: any;
     }
 

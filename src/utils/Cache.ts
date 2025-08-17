@@ -15,6 +15,7 @@ import { displayDLProgress } from './download/notification';
 import { setNoxSkipSilence } from './ffmpeg/skipSilence';
 import { setNoxR128Gain } from './ffmpeg/r128RN';
 import { TPPlay } from '@stores/RNObserverStore';
+import { setNoxBeats } from './ffmpeg/beatmatching';
 
 interface OptionsProps {
   max?: number;
@@ -68,15 +69,16 @@ class NoxMediaCache {
     extension,
     notify = false,
   }: SaveCacheMedia) => {
-    const parseR128Gain = async () => {
-      const { r128gain, noxSkipSilence } =
+    const parseR128Gain = async (path?: string) => {
+      if (!path) return;
+      const { r128gain, noxSkipSilence, beatMatchCrossfade } =
         useNoxSetting.getState().playerSetting;
-      const path = res?.path();
-      noxSkipSilence && path && (await setNoxSkipSilence(path, song));
-      r128gain && path && (await setNoxR128Gain(path, song));
+      noxSkipSilence && (await setNoxSkipSilence(path, song));
+      r128gain && (await setNoxR128Gain(path, song));
+      beatMatchCrossfade && (await setNoxBeats(path, song));
     };
     // HACK: local files also need r128gain
-    if (resolvedURL.url.startsWith('file://')) parseR128Gain();
+    if (resolvedURL.url.startsWith('file://')) parseR128Gain(resolvedURL.url);
     if (this.cache.max < 2 || song.isLive) {
       setFetchProgress(0);
       return;
@@ -107,9 +109,9 @@ class NoxMediaCache {
     let finalPath = res.path();
     this.cache.set(noxCacheKey(song), finalPath);
     addDownloadProgress(song, 100);
-    await parseR128Gain();
+    await parseR128Gain(finalPath);
     if (isIOS) {
-      finalPath = await ffmpegToMP3({ fspath: res.path() });
+      finalPath = await ffmpegToMP3({ fspath: finalPath });
       this.cache.set(noxCacheKey(song), finalPath);
       const playbackState = await TrackPlayer.getPlaybackState();
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment

@@ -181,13 +181,13 @@ export const getPlaylist = async (
   };
 };
 
-export const getSongBeat = (songcid?: string): number[] | undefined => {
+export const getSongBeat = (songcid: string): number[] | undefined => {
   const res = db
     .select({
       beat: songBeatTable.beat,
     })
     .from(songBeatTable)
-    .where(eq(songBeatTable.songcid, songcid ?? ''))
+    .where(eq(songBeatTable.songcid, songcid))
     .get()?.beat;
   return res === undefined ? res : (JSON.parse(res) as number[]);
 };
