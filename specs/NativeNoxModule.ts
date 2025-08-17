@@ -14,10 +14,13 @@ interface NoxMedia {
 }
 
 export interface Spec extends TurboModule {
-  getUri: (uri: string) => string;
-  listMediaDir: (relativeDir: string, subdir: boolean) => NoxMedia[];
-  listMediaFileByFName: (filename: string, relativeDir: string) => NoxMedia[];
-  listMediaFileByID: (id: string) => NoxMedia[];
+  getUri: (uri: string) => Promise<string>;
+  listMediaDir: (relativeDir: string, subdir: boolean) => Promise<NoxMedia[]>;
+  listMediaFileByFName: (
+    filename: string,
+    relativeDir: string,
+  ) => Promise<NoxMedia[]>;
+  listMediaFileByID: (id: string) => Promise<NoxMedia[]>;
   loadRN: () => void;
   isRNLoaded: () => boolean;
   getLastExitCode: () => number;
@@ -26,6 +29,7 @@ export interface Spec extends TurboModule {
   selfDestruct: () => void;
   setDarkTheme: (mode: number) => void;
   getRAMUsage: () => number;
+  calcBeatsFromFile: (filePath: string) => Promise<number[]>;
 }
 
 export default TurboModuleRegistry.get<Spec>('NativeNoxModule');

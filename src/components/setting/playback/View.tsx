@@ -49,6 +49,10 @@ const renderSettings: { [key: string]: SettingEntry } = {
     settingName: 'noBiliR128Gain',
     settingCategory: 'GeneralSettings',
   },
+  beatMatchCrossfade: {
+    settingName: 'beatMatchCrossfade',
+    settingCategory: 'GeneralSettings',
+  },
   /**
   chatGPTSongName: {
     settingName: 'chatGPTResolveSongName',
@@ -101,6 +105,7 @@ const Home = ({
         setCurrentSelectOption={setCurrentSelectOption}
         setSelectVisible={setSelectVisible}
       />
+      {isAndroid && <RenderSetting item={renderSettings.beatMatchCrossfade} />}
     </ScrollView>
   );
 };
