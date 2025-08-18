@@ -161,7 +161,12 @@ export const setR128Gain = async (
 
 export const setABRepeat = async (
   songcid: string,
-  ab: { a: number | null | undefined; b: number | null | undefined },
+  ab: {
+    a: number | null | undefined;
+    b: number | null | undefined;
+    aAbs?: number | null;
+    bAbs?: number | null;
+  },
 ) => {
   await db
     .insert(abRepeatTable)
