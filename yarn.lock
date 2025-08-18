@@ -8139,7 +8139,7 @@ __metadata:
     react-native-svg: "npm:15.12.1"
     react-native-svga-player: "https://lovegaoshi@github.com/lovegaoshi/react-native-svga-player.git#commit=f8c6303fddb528a1a94d2ab4696c9318c0002cfd"
     react-native-text-ticker: "https://lovegaoshi@github.com/lovegaoshi/react-native-text-ticker.git#commit=39d022e8e1eed15811c7155d39ec991742d37722"
-    react-native-track-player: "https://github.com/lovegaoshi/react-native-track-player.git#commit=86d9fb420a606e7e1236ce194fad81b80192bb3b"
+    react-native-track-player: "https://github.com/lovegaoshi/react-native-track-player.git#commit=b11cefd1130056fe5202fe4d2c48286a084efec3"
     react-native-url-polyfill: "npm:^2.0.0"
     react-native-video: "npm:6.15.0"
     react-native-webview: "npm:13.15.0"
@@ -8152,7 +8152,7 @@ __metadata:
     typescript: "npm:5.9.2"
     use-debounce: "npm:^10.0.5"
     uuid: "npm:^11.1.0"
-    web-streams-polyfill: "npm:^4.1.0"
+    web-streams-polyfill: "npm:^4.2.0"
     youtubei.js: "npm:15.0.1"
     zustand: "npm:^5.0.7"
   languageName: unknown
@@ -19295,9 +19295,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-native-track-player@https://github.com/lovegaoshi/react-native-track-player.git#commit=86d9fb420a606e7e1236ce194fad81b80192bb3b":
+"react-native-track-player@https://github.com/lovegaoshi/react-native-track-player.git#commit=b11cefd1130056fe5202fe4d2c48286a084efec3":
   version: 4.1.1
-  resolution: "react-native-track-player@https://github.com/lovegaoshi/react-native-track-player.git#commit=86d9fb420a606e7e1236ce194fad81b80192bb3b"
+  resolution: "react-native-track-player@https://github.com/lovegaoshi/react-native-track-player.git#commit=b11cefd1130056fe5202fe4d2c48286a084efec3"
   peerDependencies:
     react: "*"
     react-native: "*"
@@ -19308,7 +19308,7 @@ __metadata:
       optional: true
     shaka-player:
       optional: true
-  checksum: 10c0/de12b116ef97b9377feb935f7d61639b915cf55d6ec04bfa14558643d7f883b8d47cae941c83711336b68ff69e81c702e931247b5c3c9e0e23933e6616599a6e
+  checksum: 10c0/1894457bc559ffa3d55ed0532593acaae9c3ea73a640b0628d75ff9f9bdfe248f77eab7e98c4f42fea633d3a7f2eff218d6f64105f8a017305c01e86e448186d
   languageName: node
   linkType: hard
 
@@ -22449,10 +22449,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"web-streams-polyfill@npm:^4.1.0":
-  version: 4.1.0
-  resolution: "web-streams-polyfill@npm:4.1.0"
-  checksum: 10c0/1022a7d13f0994002c1fa65f53576d85ea76ec59f8ffb3413f052dfcc0ca656bbcbe2611a35180b14f9bca6f3fe83802028b641ec9d200362797c99fa3e68e4e
+"web-streams-polyfill@npm:^4.2.0":
+  version: 4.2.0
+  resolution: "web-streams-polyfill@npm:4.2.0"
+  checksum: 10c0/d7a5ece7a073f4a687b193d8bc39610347179241a16a5591af6c7059f440242b9caf2fcf87b04d23e23c7d52c1cc1a2ef8470ab6d792d8150bf09beaf880fd36
   languageName: node
   linkType: hard
 
