@@ -154,10 +154,7 @@ export const useNoxSetting = create<NoxSetting>((set, get, storeApi) => ({
     set({
       MFsdks: await initMFsdk(),
       currentPlayingId: val.lastPlaylistId[1],
-      currentABRepeat: (await getABRepeat(val.lastPlaylistId[1])).slice(
-        0,
-        2,
-      ) as [number, number],
+      currentABRepeat: await getABRepeat(val.lastPlaylistId[1]),
       currentPlayingList: playingList,
       currentPlaylist: playingList,
       searchPlaylist: val.searchPlaylist,

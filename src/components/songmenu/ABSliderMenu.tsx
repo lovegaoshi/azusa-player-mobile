@@ -25,8 +25,8 @@ const ABSlider = ({ range, setRange }: SliderProps) => {
   const { duration } = useProgress(1000, false);
   const playerStyle = useNoxSetting(state => state.playerStyle);
   const currentABRepeat = useNoxSetting(state => state.currentABRepeat);
-
-  useEffect(() => setRange(currentABRepeat), [currentABRepeat]);
+  const parsedRange = currentABRepeat.slice(0, 2) as [number, number];
+  useEffect(() => setRange(parsedRange), [currentABRepeat]);
 
   return (
     <View>
@@ -42,7 +42,7 @@ const ABSlider = ({ range, setRange }: SliderProps) => {
       <View style={styles.labelSpacer} />
       <RangeSlider
         thumbStyle={{ elevation: 0 }}
-        range={currentABRepeat}
+        range={parsedRange}
         thumbTintColor={playerStyle.colors.tertiary}
         onValueChange={setRange}
         outboundColor={playerStyle.colors.secondaryContainer}
