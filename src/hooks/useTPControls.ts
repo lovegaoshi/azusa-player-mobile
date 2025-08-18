@@ -32,9 +32,10 @@ const skipToBiliSuggest = async (
   ];
   if (next) {
     await TrackPlayer.add(await songlistToTracklist(suggestedSong));
-    return;
+  } else {
+    await TrackPlayer.add(await songlistToTracklist(suggestedSong), 0);
   }
-  await TrackPlayer.add(await songlistToTracklist(suggestedSong), 0);
+  return suggestedSong[0];
 };
 
 const prepareSkipToNext = async (
@@ -58,7 +59,7 @@ const prepareSkipToNext = async (
       return;
     }
     try {
-      await mSkipToBiliSuggest();
+      return await mSkipToBiliSuggest();
     } catch {
       logger.debug(
         `[skipToNext] adding song ${nextSong.parsedName}/${nextSong.id}to TP queue`,
@@ -72,6 +73,7 @@ const prepareSkipToNext = async (
         `[skipToNext] currentQueue: ${TPQueue.map(s => `${s.song.parsedName}/${s.song.id}`)}`,
     );
   }
+  return nextSong;
 };
 
 const prepareSkipToPrevious = async (
@@ -80,11 +82,12 @@ const prepareSkipToPrevious = async (
   const nextSong = playNextSong(-1);
   if (nextSong && (await TrackPlayer.getActiveTrackIndex()) === 0) {
     try {
-      await mSkipToBiliSuggest(false);
+      return await mSkipToBiliSuggest(false);
     } catch {
       await TrackPlayer.add(await songlistToTracklist([nextSong]), 0);
     }
   }
+  return nextSong;
 };
 
 export const performFade = async (
