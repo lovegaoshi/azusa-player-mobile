@@ -96,7 +96,10 @@ export default () => {
       let arepeat = 0;
       if (nextSong) {
         const newABRepeat = await getABRepeat(nextSong.id);
-        arepeat = newABRepeat[0] * nextSong.duration;
+        arepeat =
+          newABRepeat[2] === undefined
+            ? newABRepeat[0] * nextSong.duration
+            : newABRepeat[2];
         setSkipARepeat(true);
       }
       return TrackPlayer.crossFadePrepare(false, arepeat);

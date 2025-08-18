@@ -78,6 +78,9 @@ export const getABRepeatRaw = async (songcid?: string) => {
     .get();
 };
 
+/**
+ * returns [a, b, aAbs, bAbs] where a-b is the 0-1 range; aAbs-bAbs is the absolute range
+ */
 export const getABRepeat = async (
   songcid?: string,
 ): Promise<[number, number, number?, number?]> => {
