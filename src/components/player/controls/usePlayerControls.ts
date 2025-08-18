@@ -197,7 +197,7 @@ export default () => {
     initSponsorBlock(song);
     const newABRepeat = await getABRepeat(song.id);
     logger.debug(`[SongReady] logging ABRepeat as ${newABRepeat}`);
-    setABRepeat(newABRepeat);
+    setABRepeat(newABRepeat.slice(0, 2) as [number, number]);
     if (setCurrentPlaying(song) && !loadingTracker.current) return;
     loadingTracker.current = false;
     execWhenTrue({
