@@ -70,17 +70,27 @@ export const getABRepeatRaw = async (songcid?: string) => {
     .select({
       a: abrepeatTable.a,
       b: abrepeatTable.b,
+      aAbs: abrepeatTable.aAbs,
+      bAbs: abrepeatTable.bAbs,
     })
     .from(abrepeatTable)
     .where(eq(abrepeatTable.songcid, songcid ?? ''))
     .get();
 };
 
+/**
+ * returns [a, b, aAbs, bAbs] where a-b is the 0-1 range; aAbs-bAbs is the absolute range
+ */
 export const getABRepeat = async (
   songcid?: string,
-): Promise<[number, number]> => {
+): Promise<[number, number, number?, number?]> => {
   const res = await getABRepeatRaw(songcid);
-  return [res?.a ?? 0, res?.b ?? 1];
+  return [
+    res?.a ?? 0,
+    res?.b ?? 1,
+    res?.aAbs ?? undefined,
+    res?.bAbs ?? undefined,
+  ];
 };
 
 export const getLyric = async (

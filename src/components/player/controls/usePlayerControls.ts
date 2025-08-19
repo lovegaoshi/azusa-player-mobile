@@ -28,6 +28,8 @@ export default () => {
   const { performSkipToNext, performSkipToPrevious, prepareSkipToNext } =
     useTPControls();
 
+  const [skipARepeat, setSkipARepeat] = React.useState(false);
+
   const abRepeat = useNoxSetting(state => state.abRepeat);
   const setABRepeat = useNoxSetting(state => state.setABRepeat);
   const bRepeatDuration = useNoxSetting(state => state.bRepeatDuration);
@@ -89,8 +91,18 @@ export default () => {
       );
       setCrossfadeId(currentSongId);
       setBRepeatDuration(event.duration * abRepeat[1]);
-      await prepareSkipToNext(false);
-      return TrackPlayer.crossFadePrepare();
+      const nextSong = await prepareSkipToNext(false);
+
+      let arepeat = 0;
+      if (nextSong) {
+        const newABRepeat = await getABRepeat(nextSong.id);
+        arepeat =
+          newABRepeat[2] === undefined
+            ? newABRepeat[0] * nextSong.duration
+            : newABRepeat[2];
+        setSkipARepeat(true);
+      }
+      return TrackPlayer.crossFadePrepare(false, arepeat);
     }
 
     // if fade or crossfade should be triggered
@@ -175,8 +187,12 @@ export default () => {
     const newABRepeat = await getABRepeat(currentPlayingId);
     if (newABRepeat[0] === 0) return;
     loadingTracker.current = false;
-    const trackDuration = (await TrackPlayer.getProgress()).duration;
-    TPSeek(trackDuration * newABRepeat[0]);
+    if (skipARepeat) {
+      setSkipARepeat(false);
+    } else {
+      const trackDuration = (await TrackPlayer.getProgress()).duration;
+      TPSeek(trackDuration * newABRepeat[0]);
+    }
   });
 
   useTrackPlayerEvents([Event.PlaybackActiveTrackChanged], async event => {
@@ -184,7 +200,7 @@ export default () => {
     initSponsorBlock(song);
     const newABRepeat = await getABRepeat(song.id);
     logger.debug(`[SongReady] logging ABRepeat as ${newABRepeat}`);
-    setABRepeat(newABRepeat);
+    setABRepeat(newABRepeat.slice(0, 2) as [number, number]);
     if (setCurrentPlaying(song) && !loadingTracker.current) return;
     loadingTracker.current = false;
     execWhenTrue({

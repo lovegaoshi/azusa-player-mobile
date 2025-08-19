@@ -131,7 +131,7 @@
     "react-native-svg": "15.12.1",
     "react-native-svga-player": "https://lovegaoshi@github.com/lovegaoshi/react-native-svga-player.git#commit=f8c6303fddb528a1a94d2ab4696c9318c0002cfd",
     "react-native-text-ticker": "https://lovegaoshi@github.com/lovegaoshi/react-native-text-ticker.git#commit=39d022e8e1eed15811c7155d39ec991742d37722",
-    "react-native-track-player": "https://github.com/lovegaoshi/react-native-track-player.git#commit=86d9fb420a606e7e1236ce194fad81b80192bb3b",
+    "react-native-track-player": "https://github.com/lovegaoshi/react-native-track-player.git#commit=b11cefd1130056fe5202fe4d2c48286a084efec3",
     "react-native-url-polyfill": "^2.0.0",
     "react-native-video": "6.15.0",
     "react-native-webview": "13.15.0",
@@ -140,7 +140,7 @@
     "text-encoding-polyfill": "^0.6.7",
     "use-debounce": "^10.0.5",
     "uuid": "^11.1.0",
-    "web-streams-polyfill": "^4.1.0",
+    "web-streams-polyfill": "^4.2.0",
     "youtubei.js": "15.0.1",
     "zustand": "^5.0.7"
   },

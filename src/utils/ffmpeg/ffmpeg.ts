@@ -38,7 +38,7 @@ export const probeLoudness = async (
   fspath: string,
   threshold = -20,
   interval = 30,
-): Promise<[number, number]> => {
+): Promise<[number, number, number, number]> => {
   if (fspath.startsWith('file://')) {
     fspath = fspath.substring('file://'.length);
   }
@@ -74,6 +74,8 @@ export const probeLoudness = async (
   return [
     arepeat < 0 ? 0 : (arepeat * 1.0) / loudness.length,
     brepeat < 0 ? 1 : (brepeat * 1.0) / loudness.length,
+    arepeat < 0 ? 0 : arepeat,
+    brepeat < 0 ? loudness.length : brepeat,
   ];
 };
 

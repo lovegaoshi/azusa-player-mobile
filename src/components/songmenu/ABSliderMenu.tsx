@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useProgress } from 'react-native-track-player';
+import TrackPlayer, { useProgress } from 'react-native-track-player';
 import { RangeSlider } from '@react-native-assets/slider';
 import { StyleSheet, View } from 'react-native';
 
@@ -25,8 +25,8 @@ const ABSlider = ({ range, setRange }: SliderProps) => {
   const { duration } = useProgress(1000, false);
   const playerStyle = useNoxSetting(state => state.playerStyle);
   const currentABRepeat = useNoxSetting(state => state.currentABRepeat);
-
-  useEffect(() => setRange(currentABRepeat), [currentABRepeat]);
+  const parsedRange = currentABRepeat.slice(0, 2) as [number, number];
+  useEffect(() => setRange(parsedRange), [currentABRepeat]);
 
   return (
     <View>
@@ -42,7 +42,7 @@ const ABSlider = ({ range, setRange }: SliderProps) => {
       <View style={styles.labelSpacer} />
       <RangeSlider
         thumbStyle={{ elevation: 0 }}
-        range={currentABRepeat}
+        range={parsedRange}
         thumbTintColor={playerStyle.colors.tertiary}
         onValueChange={setRange}
         outboundColor={playerStyle.colors.secondaryContainer}
@@ -62,7 +62,13 @@ const ABSliderMenu = ({ song, showSheet }: Props) => {
   const onSubmit = async () => {
     setDialogVisible(val => !val);
     setCurrentABRepeat(range);
-    await setABRepeat(song.id, { a: range[0], b: range[1] });
+    const duration = (await TrackPlayer.getProgress()).duration;
+    await setABRepeat(song.id, {
+      a: range[0],
+      b: range[1],
+      aAbs: range[0] * duration,
+      bAbs: range[1] * duration,
+    });
   };
 
   const showDialog = () => {

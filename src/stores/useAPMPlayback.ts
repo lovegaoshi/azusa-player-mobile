@@ -5,11 +5,11 @@ export interface APMPlaybackStore {
   crossfadeId: string;
   setCrossfadeId: (val: string) => void;
 
-  currentABRepeat: [number, number];
-  setCurrentABRepeat: (val: [number, number]) => void;
+  currentABRepeat: [number, number, number?, number?];
+  setCurrentABRepeat: (val: [number, number, number?, number?]) => void;
 
-  abRepeat: [number, number];
-  setABRepeat: (val: [number, number]) => void;
+  abRepeat: [number, number, number?, number?];
+  setABRepeat: (val: [number, number, number?, number?]) => void;
   bRepeatDuration: number;
   setBRepeatDuration: (val: number) => void;
   crossfadingId: string;
