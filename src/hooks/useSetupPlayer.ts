@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
-import TrackPlayer from 'react-native-track-player';
+import TrackPlayer, { State } from 'react-native-track-player';
 import { migrate } from 'drizzle-orm/expo-sqlite/migrator';
 
 import { SetupService, additionalPlaybackService } from 'services';
-import { initPlayerObject } from '@utils/ChromeStorage';
+import { getLastPlaybackStatus, initPlayerObject } from '@utils/ChromeStorage';
 import { getCurrentTPQueue, initializePlaybackMode } from '@stores/playingList';
 import useVersionCheck from '@hooks/useVersionCheck';
 import { cycleThroughPlaymode, songlistToTracklist } from '@utils/RNTPUtils';
@@ -95,7 +95,9 @@ export default ({ intentData, vip }: NoxComponent.SetupPlayerProps) => {
       const GCCrash = isRNLoaded && !__DEV__;
       const OSkill = NativeNoxModule?.getLastExitCode?.() === 2;
       if (GCCrash || OSkill) {
-        vip && (await TPPlay());
+        vip &&
+          (await getLastPlaybackStatus()) === State.Playing &&
+          (await TPPlay());
         logger.error(`[APMResume] detected ${GCCrash} and ${OSkill}!`);
       }
       updateVersion(storedPlayerSetting);

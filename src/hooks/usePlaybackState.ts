@@ -4,8 +4,19 @@ import {
   usePlayWhenReady,
 } from 'react-native-track-player';
 import { useDebouncedValue } from 'hooks';
+import { useEffect } from 'react';
+
+import { setLastPlaybackStatus } from '@utils/ChromeStorage';
 
 const NotLoading = [State.Paused, State.Playing, State.Stopped, State.Ended];
+
+export const usePlaybackStateLogging = () => {
+  const playback = usePlaybackState();
+  useEffect(() => {
+    setLastPlaybackStatus(playback.state);
+  }, [playback.state]);
+  return playback;
+};
 
 export default () => {
   const playback = usePlaybackState();
