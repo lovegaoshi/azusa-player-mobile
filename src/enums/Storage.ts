@@ -29,6 +29,7 @@ export enum StorageKeys {
   YTMCOOKIES = 'YTMCookies',
   EXPO_SQL_MIGRATION = 'ExpoSqlMigration',
   SQL_PLACEHOLDER = 'SQLPlaceholder',
+  LAST_PLAYBACK_STATUS = 'LastPlaybackStatus',
 }
 
 export const StoragePlaceholders = [StorageKeys.SQL_PLACEHOLDER];

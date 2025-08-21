@@ -24,6 +24,12 @@ import { getAlistCred } from './alist/storage';
 import { timeFunction } from './Utils';
 // import json from '../components/styles/testStyle.json';
 
+export const getLastPlaybackStatus = () =>
+  getItem(StorageKeys.LAST_PLAYBACK_STATUS);
+
+export const setLastPlaybackStatus = (state: any) =>
+  saveItem(StorageKeys.LAST_PLAYBACK_STATUS, state);
+
 export const getFadeInterval = async () =>
   Number(await getItem(StorageKeys.FADE_INTERVAL)) || 0;
 

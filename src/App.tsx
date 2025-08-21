@@ -28,6 +28,7 @@ import {
   CombinedDefaultTheme,
 } from './components/styles/Theme';
 import APMContext from './contexts/APMContext';
+import HookEmptyComponent from './HookEmptyComponent';
 
 if (TRACKING) {
   Sentry.init({
@@ -103,6 +104,7 @@ export default function App(appProps: NoxComponent.AppProps) {
   }
   return (
     <GestureHandlerRootView style={styles.gestureContainer}>
+      <HookEmptyComponent />
       <SafeAreaProvider>
         <APMContext>
           <MainBackground />
