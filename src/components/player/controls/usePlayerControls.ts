@@ -101,6 +101,7 @@ export default () => {
             ? newABRepeat[0] * nextSong.duration
             : newABRepeat[2];
         setSkipARepeat(true);
+        logger.debug(`[crossfade] priming the fading player to ${arepeat}...`);
       }
       await TrackPlayer.crossFadePrepare(false, Number(arepeat));
       return;
