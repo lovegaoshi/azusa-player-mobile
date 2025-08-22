@@ -28,8 +28,8 @@ export default () => {
   const { performSkipToNext, performSkipToPrevious, prepareSkipToNext } =
     useTPControls();
 
-  const [skipARepeat, setSkipARepeat] = React.useState(false);
-
+  const skipARepeat = useNoxSetting(state => state.skipARepeat);
+  const setSkipARepeat = useNoxSetting(state => state.setSkipARepeat);
   const abRepeat = useNoxSetting(state => state.abRepeat);
   const setABRepeat = useNoxSetting(state => state.setABRepeat);
   const bRepeatDuration = useNoxSetting(state => state.bRepeatDuration);
@@ -101,8 +101,9 @@ export default () => {
             ? newABRepeat[0] * nextSong.duration
             : newABRepeat[2];
         setSkipARepeat(true);
+        logger.debug(`[crossfade] priming the fading player to ${arepeat}...`);
       }
-      await TrackPlayer.crossFadePrepare(false, arepeat);
+      await TrackPlayer.crossFadePrepare(false, Number(arepeat));
       return;
     }
 
