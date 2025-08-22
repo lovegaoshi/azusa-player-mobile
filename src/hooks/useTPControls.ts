@@ -64,8 +64,9 @@ const prepareSkipToNext = async (
       logger.debug(
         `[skipToNext] adding song ${nextSong.parsedName}/${nextSong.id}to TP queue`,
       );
-      // TODO: this will just grow infinitely. WTF was i thinking?
-      await TrackPlayer.add(await songlistToTracklist([nextSong]));
+      const resolved = await songlistToTracklist([nextSong]);
+      // HACK: this grows indefinitely. luckily queue resets frequent enough that this should be fine
+      await TrackPlayer.add(resolved);
     }
   } else {
     logger.debugR(
