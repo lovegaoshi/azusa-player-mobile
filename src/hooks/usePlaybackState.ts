@@ -13,7 +13,7 @@ const NotLoading = [State.Paused, State.Playing, State.Stopped, State.Ended];
 export const usePlaybackStateLogging = () => {
   const playback = usePlaybackState();
   useEffect(() => {
-    setLastPlaybackStatus(playback.state);
+    setLastPlaybackStatus(playback.state ?? 'unknown');
   }, [playback.state]);
   return playback;
 };
