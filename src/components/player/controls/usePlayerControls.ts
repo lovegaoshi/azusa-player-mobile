@@ -102,7 +102,8 @@ export default () => {
             : newABRepeat[2];
         setSkipARepeat(true);
       }
-      return TrackPlayer.crossFadePrepare(false, arepeat);
+      await TrackPlayer.crossFadePrepare(false, arepeat);
+      return;
     }
 
     // if fade or crossfade should be triggered
