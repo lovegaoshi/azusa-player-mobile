@@ -28,8 +28,8 @@ export default () => {
   const { performSkipToNext, performSkipToPrevious, prepareSkipToNext } =
     useTPControls();
 
-  const [skipARepeat, setSkipARepeat] = React.useState(false);
-
+  const skipARepeat = useNoxSetting(state => state.skipARepeat);
+  const setSkipARepeat = useNoxSetting(state => state.setSkipARepeat);
   const abRepeat = useNoxSetting(state => state.abRepeat);
   const setABRepeat = useNoxSetting(state => state.setABRepeat);
   const bRepeatDuration = useNoxSetting(state => state.bRepeatDuration);

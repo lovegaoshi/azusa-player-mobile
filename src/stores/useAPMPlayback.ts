@@ -10,6 +10,8 @@ export interface APMPlaybackStore {
 
   abRepeat: [number, number, number?, number?];
   setABRepeat: (val: [number, number, number?, number?]) => void;
+  skipARepeat: boolean;
+  setSkipARepeat: (val: boolean) => void;
   bRepeatDuration: number;
   setBRepeatDuration: (val: number) => void;
   crossfadingId: string;
@@ -30,6 +32,8 @@ const store: StateCreator<
 
   abRepeat: [0, 1],
   setABRepeat: val => set({ abRepeat: val }),
+  skipARepeat: false,
+  setSkipARepeat: val => set({ skipARepeat: val }),
   bRepeatDuration: 9999,
   setBRepeatDuration: val => set({ bRepeatDuration: val }),
   crossfadingId: '',
