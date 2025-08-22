@@ -102,7 +102,7 @@ export default () => {
             : newABRepeat[2];
         setSkipARepeat(true);
       }
-      await TrackPlayer.crossFadePrepare(false, arepeat);
+      await TrackPlayer.crossFadePrepare(false, Number(arepeat));
       return;
     }
 
