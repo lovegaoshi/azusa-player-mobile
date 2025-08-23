@@ -96,14 +96,14 @@ export default () => {
       let arepeat = 0;
       if (nextSong) {
         const newABRepeat = await getABRepeat(nextSong.id);
-        arepeat =
-          newABRepeat[2] === undefined
-            ? newABRepeat[0] * nextSong.duration
-            : newABRepeat[2];
+        const absARepeat = Number(newABRepeat[2]);
+        arepeat = Number.isNaN(absARepeat)
+          ? newABRepeat[0] * nextSong.duration
+          : absARepeat;
         setSkipARepeat(true);
         logger.debug(`[crossfade] priming the fading player to ${arepeat}...`);
       }
-      await TrackPlayer.crossFadePrepare(false, Number(arepeat));
+      await TrackPlayer.crossFadePrepare(false, arepeat);
       return;
     }
 

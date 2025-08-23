@@ -9,6 +9,7 @@ import m0004 from './0004_sad_blink.sql';
 import m0005 from './0005_great_madelyne_pryor.sql';
 import m0006 from './0006_nappy_black_tom.sql';
 import m0007 from './0007_productive_dormammu.sql';
+import m0008 from './0008_daffy_moonstone.sql';
 
   export default {
     journal,
@@ -20,7 +21,8 @@ m0003,
 m0004,
 m0005,
 m0006,
-m0007
+m0007,
+m0008
     }
   }
   
