@@ -1,3 +1,9 @@
+import { getSongBeat } from '../db/sqlAPI';
+import { setSongBeat } from '../db/sqlStorage';
+import logger from '../Logger';
+import NativeNoxModule from '@specs/NativeNoxModule';
+import { isAndroid } from '../RNUtils';
+
 interface IBeatMatch {
   song1Beats: number[];
   song2Beats: number[];
@@ -43,15 +49,11 @@ export const beatMatch = ({
     'beat map',
     song1Beats.slice(song1Transition),
     song2Beats.slice(song2FirstIndex, song2FirstIndex + 10),
+    song1BeatDiff.slice(song1Transition - 1),
+    song2BeatDiff.slice(song2FirstIndex - 1, song2FirstIndex + 10),
   );
   return [song1Beats[song1Transition], song2Beats[song2FirstIndex]];
 };
-
-import { getSongBeat } from '../db/sqlAPI';
-import { setSongBeat } from '../db/sqlStorage';
-import logger from '../Logger';
-import NativeNoxModule from '@specs/NativeNoxModule';
-import { isAndroid } from '../RNUtils';
 
 export const setNoxBeats = async (path: string, song: NoxMedia.Song) => {
   if (!isAndroid || getSongBeat(song.id) !== undefined) return;
