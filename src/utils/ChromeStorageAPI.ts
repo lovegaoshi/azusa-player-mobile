@@ -12,6 +12,7 @@ import AdaptiveTheme from '../components/styles/SolidTheme';
 import { exportSQL } from '@utils/db/sqlAPI';
 import APMMigration from './db/migration';
 import { setDarkTheme } from './RNUtils';
+import { importSQL } from './db/sqlStorage';
 
 /**
  * noxplayer's storage handler.
@@ -189,7 +190,10 @@ export const importPlayerContentRaw = async (
     await AsyncStorage.multiSet.bind(AsyncStorage)(
       removePlaceholders(parsedContent),
     );
-    APMMigration();
+    await APMMigration();
+    await importSQL(
+      parseImportedPartial(StorageKeys.SQL_PLACEHOLDER, parsedContent),
+    );
     return content;
   }
 };

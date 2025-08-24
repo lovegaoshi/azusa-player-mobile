@@ -57,6 +57,13 @@
       "when": 1755297462408,
       "tag": "0007_productive_dormammu",
       "breakpoints": true
+    },
+    {
+      "idx": 8,
+      "version": "6",
+      "when": 1755955988688,
+      "tag": "0008_daffy_moonstone",
+      "breakpoints": true
     }
   ]
 }

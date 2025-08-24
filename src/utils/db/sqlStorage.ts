@@ -96,9 +96,8 @@ export const restoreR128Gain = async (data: R128Gain[], reset = false) => {
   }
 };
 
-export const importSQL = async (json: string) => {
+export const importSQL = async (data: any) => {
   try {
-    const data = JSON.parse(json);
     await restorePlaybackCount(data.playbackCount);
     await restoreLyric(data.lyric);
     await restoreR128Gain(data.r128gain);
