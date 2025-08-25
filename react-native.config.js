@@ -6,10 +6,5 @@ module.exports = {
         android: null, // Disable autolinking for Android
       },
     },
-    'react-native-blob-jsi-helper': {
-      platforms: {
-        ios: null, // Disable autolinking for Android
-      },
-    },
   },
 };

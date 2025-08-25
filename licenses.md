@@ -42,8 +42,6 @@ Licenses of used dependencies:
 
 [react-native-background-timer](https://github.com/ocetnik/react-native-background-timer): MIT License
 
-[react-native-blob-jsi-helper](https://github.com/mrousavy/react-native-blob-jsi-helper): MIT License
-
 [react-native-countdown-circle-timer](https://github.com/vydimitrov/react-countdown-circle-timer): MIT
 
 [react-native-draggable-flatlist](https://github.com/computerjazz/react-native-draggable-flatlist): MIT License
