@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 import { View, Dimensions } from 'react-native';
 import { GestureDetector, Gesture } from 'react-native-gesture-handler';
 import Animated, {
-  runOnJS,
   useAnimatedStyle,
   useDerivedValue,
   useSharedValue,
@@ -10,6 +9,7 @@ import Animated, {
   Easing,
 } from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { runOnJS } from 'react-native-worklets';
 
 import MiniControls from './MiniControls';
 import { MinPlayerHeight } from './Constants';

@@ -1,6 +1,5 @@
 import { View, ImageStyle } from 'react-native';
 import Animated, {
-  runOnJS,
   useAnimatedStyle,
   useSharedValue,
   withTiming,
@@ -8,6 +7,7 @@ import Animated, {
 import { useEffect, useMemo, useState } from 'react';
 import { Image } from 'expo-image';
 import { GestureDetector, Gesture } from 'react-native-gesture-handler';
+import { runOnJS } from 'react-native-worklets';
 
 const AnimatedExpoImage = Animated.createAnimatedComponent(Image);
 

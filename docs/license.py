@@ -19,7 +19,6 @@ react-i18next
 react-native
 react-native-app-auth
 react-native-background-timer
-react-native-blob-jsi-helper
 react-native-countdown-circle-timer
 react-native-draggable-flatlist
 react-native-fast-image

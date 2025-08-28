@@ -5,13 +5,13 @@ import { Image } from 'expo-image';
 import Animated, {
   Extrapolation,
   interpolate,
-  runOnJS,
   useAnimatedStyle,
   useSharedValue,
   withSpring,
   withTiming,
 } from 'react-native-reanimated';
 import { GestureDetector, Gesture } from 'react-native-gesture-handler';
+import { runOnJS } from 'react-native-worklets';
 
 import { imageSplashes } from '../background/AppOpenSplash';
 

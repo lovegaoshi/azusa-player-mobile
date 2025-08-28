@@ -3,13 +3,13 @@ import { LayoutRectangle, NativeScrollEvent } from 'react-native';
 import { FlashList } from '@shopify/flash-list';
 import { useNetInfo } from '@react-native-community/netinfo';
 import Animated, {
-  runOnJS,
   SharedValue,
   useAnimatedScrollHandler,
   useDerivedValue,
   useSharedValue,
   withTiming,
 } from 'react-native-reanimated';
+import { runOnJS } from 'react-native-worklets';
 import {
   Gesture,
   GestureDetector,

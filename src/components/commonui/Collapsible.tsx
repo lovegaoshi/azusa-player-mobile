@@ -9,11 +9,11 @@ import { View } from 'react-native';
 import Animated, {
   Easing,
   interpolate,
-  runOnJS,
   useAnimatedStyle,
   useSharedValue,
   withTiming,
 } from 'react-native-reanimated';
+import { runOnJS } from 'react-native-worklets';
 
 type CollapsibleProps = PropsWithChildren<{
   collapsed: boolean;

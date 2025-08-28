@@ -2,13 +2,13 @@ import React, { RefObject, useState } from 'react';
 import { FlashListRef } from '@shopify/flash-list';
 import { StyleSheet, View } from 'react-native';
 import Animated, {
-  runOnJS,
   SharedValue,
   useAnimatedReaction,
   useAnimatedStyle,
   useSharedValue,
   withTiming,
 } from 'react-native-reanimated';
+import { runOnJS } from 'react-native-worklets';
 
 import { useNoxSetting } from '@stores/useApp';
 import { NativeText as Text } from '@components/commonui/ScaledText';

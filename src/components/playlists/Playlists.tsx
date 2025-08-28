@@ -4,6 +4,8 @@ import { Pressable, View, StyleSheet } from 'react-native';
 import FlashDragList from 'react-native-flashdrag-list';
 import { useDrawerProgress } from '@react-navigation/drawer';
 import { DrawerNavigationHelpers } from '@react-navigation/drawer/lib/typescript/src/types';
+import { runOnJS } from 'react-native-worklets';
+import { useAnimatedReaction } from 'react-native-reanimated';
 
 import { useNoxSetting } from '@stores/useApp';
 import { NoxRoutes } from '@enums/Routes';
@@ -18,7 +20,6 @@ import usePlaylistBrowseTree from '@hooks/usePlaylistBrowseTree';
 import useNavigation from '@hooks/useNavigation';
 import { useIsLandscape } from '@hooks/useOrientation';
 import { PaperText as Text } from '@components/commonui/ScaledText';
-import { runOnJS, useAnimatedReaction } from 'react-native-reanimated';
 
 interface NewButtonProps {
   setNewPlaylistDialogOpen: (v: boolean) => void;

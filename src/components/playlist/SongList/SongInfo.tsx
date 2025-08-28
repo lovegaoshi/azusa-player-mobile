@@ -3,13 +3,13 @@ import { Checkbox, IconButton, TouchableRipple } from 'react-native-paper';
 import { View, StyleSheet } from 'react-native';
 import {
   DerivedValue,
-  runOnJS,
   SharedValue,
   useAnimatedReaction,
 } from 'react-native-reanimated';
 import inRange from 'lodash/inRange';
 import throttle from 'lodash/throttle';
 import { TrueSheet } from '@lodev09/react-native-true-sheet';
+import { runOnJS } from 'react-native-worklets';
 
 import { PaperText as Text } from '@components/commonui/ScaledText';
 import { useNoxSetting } from '@stores/useApp';
