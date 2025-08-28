@@ -1,6 +1,7 @@
 import React, { ReactNode } from 'react';
 import { IconButton } from 'react-native-paper';
-import { StyleSheet, TouchableOpacity, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
+import { Pressable } from 'react-native-gesture-handler';
 
 import { useNoxSetting } from '@stores/useApp';
 import { PaperText as Text } from '@components/commonui/ScaledText';
@@ -41,7 +42,7 @@ const PlaylistItem = ({
   if (!item) return <></>;
   return (
     <View style={styles.playlistItemContainer}>
-      <TouchableOpacity
+      <Pressable
         style={{ backgroundColor: leadColor, width: 15 }}
         onPressIn={beginDrag}
       />

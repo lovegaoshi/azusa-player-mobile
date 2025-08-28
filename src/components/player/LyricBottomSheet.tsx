@@ -1,7 +1,8 @@
 import { TrueSheet } from '@lodev09/react-native-true-sheet';
 import { RefObject, useRef, useState } from 'react';
-import { View, StyleSheet, TouchableOpacity, TextInput } from 'react-native';
+import { View, StyleSheet, TextInput } from 'react-native';
 import { useTranslation } from 'react-i18next';
+import { RectButton } from 'react-native-gesture-handler';
 
 import { PaperText as Text } from '@components/commonui/ScaledText';
 import { NoxSheetRoutes } from '@enums/Routes';
@@ -80,7 +81,7 @@ const LyricSearch = ({ usedLyric }: ILyricSearch) => {
         selectionColor={playerStyle.customColors.textInputSelectionColor}
       />
       {lrcOptions.map((item, index) => (
-        <TouchableOpacity
+        <RectButton
           onPress={() => searchAndSetCurrentLyric({ index })}
           key={item.key}
         >
@@ -89,7 +90,7 @@ const LyricSearch = ({ usedLyric }: ILyricSearch) => {
           >
             {item.label}
           </Text>
-        </TouchableOpacity>
+        </RectButton>
       ))}
       <View style={{ height: 120 }} />
     </>
