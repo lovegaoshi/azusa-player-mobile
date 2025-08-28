@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { StyleSheet } from 'react-native';
-import { runOnJS, useAnimatedReaction } from 'react-native-reanimated';
+import { useAnimatedReaction } from 'react-native-reanimated';
+import { runOnJS } from 'react-native-worklets';
 
 import { SimpleProgressBar } from '../player/controls/ProgressBars/ProgressBar';
 import { MinPlayerHeight } from './Constants';

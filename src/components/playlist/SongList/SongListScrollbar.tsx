@@ -6,13 +6,14 @@ import Animated, {
   withTiming,
   useAnimatedStyle,
   Easing,
-  runOnJS,
   SharedValue,
   interpolate,
   Extrapolation,
   useAnimatedReaction,
   useDerivedValue,
 } from 'react-native-reanimated';
+import { runOnJS } from 'react-native-worklets';
+
 import { ScrollProps, LegendProps } from './ScrollBarLegend';
 
 const SCROLLBAR_HIDE_TIMEOUT = 3000;

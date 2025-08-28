@@ -3,13 +3,13 @@ import { LayoutRectangle, Text, View } from 'react-native';
 import { Icon } from 'react-native-paper';
 import Animated, {
   interpolate,
-  runOnJS,
   SharedValue,
   useAnimatedReaction,
   useAnimatedStyle,
   useSharedValue,
   withTiming,
 } from 'react-native-reanimated';
+import { runOnJS } from 'react-native-worklets';
 
 interface IndicatorProps {
   pullDistanceValue: SharedValue<number>;

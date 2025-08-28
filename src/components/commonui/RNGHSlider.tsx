@@ -4,12 +4,12 @@ import { useEffect, useMemo } from 'react';
 import Animated, {
   Extrapolation,
   interpolate,
-  runOnJS,
   useAnimatedStyle,
   useSharedValue,
   withTiming,
 } from 'react-native-reanimated';
 import MaskedView from '@react-native-masked-view/masked-view';
+import { runOnJS } from 'react-native-worklets';
 
 export interface SliderProps {
   onValueStart?: (value: number) => void;

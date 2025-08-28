@@ -99,7 +99,6 @@
     "lottie-react-native": "7.3.2",
     "lru-cache": "7.18.3",
     "md5": "^2.3.0",
-    "metro": "^0.82.5",
     "patch-package": "^8.0.0",
     "postinstall-postinstall": "^2.1.0",
     "qs": "^6.14.0",
@@ -143,9 +142,6 @@
     "web-streams-polyfill": "^4.2.0",
     "youtubei.js": "15.0.1",
     "zustand": "^5.0.8"
-  },
-  "resolutions": {
-    "metro": "^0.82.5"
   },
   "devDependencies": {
     "@babel/core": "^7.28.3",
@@ -194,7 +190,6 @@
     "eslint-plugin-react-hooks": "^5.2.0",
     "gts": "^6.0.2",
     "jest": "^30.0.5",
-    "metro-react-native-babel-preset": "0.77.0",
     "prettier": "^3.6.2",
     "react-native-clean-project": "^4.0.3",
     "react-native-dotenv": "^3.4.11",
