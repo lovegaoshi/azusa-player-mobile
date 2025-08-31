@@ -1,7 +1,12 @@
 import * as React from 'react';
-import { View, Dimensions, StyleSheet, FlatList } from 'react-native';
+import {
+  View,
+  Dimensions,
+  TouchableOpacity,
+  StyleSheet,
+  FlatList,
+} from 'react-native';
 import { Image } from 'expo-image';
-import { RectButton } from 'react-native-gesture-handler';
 
 import { useNoxSetting } from '@stores/useApp';
 import usePlayback from '@hooks/usePlayback';
@@ -42,7 +47,7 @@ export const BiliSongRow = ({
         horizontal
         renderItem={({ item }) => (
           <View style={styles.albumContainer}>
-            <RectButton
+            <TouchableOpacity
               onPress={() => {
                 navigationGlobal.navigate({
                   route: NoxRoutes.PlayerHome,
@@ -83,7 +88,7 @@ export const BiliSongRow = ({
                   {item.singer}
                 </Text>
               </View>
-            </RectButton>
+            </TouchableOpacity>
           </View>
         )}
       />
@@ -137,7 +142,7 @@ export const YTSongRow = ({ songs = [], title }: YTSongRowProp) => {
         horizontal
         renderItem={({ item }) => (
           <View style={styles.albumContainer}>
-            <RectButton onPress={() => onPress(item)}>
+            <TouchableOpacity onPress={() => onPress(item)}>
               <Image
                 style={styles.albumImage}
                 source={{ uri: item.cover, width: 140, height: 140 }}
@@ -169,7 +174,7 @@ export const YTSongRow = ({ songs = [], title }: YTSongRowProp) => {
                   </Text>
                 )}
               </View>
-            </RectButton>
+            </TouchableOpacity>
           </View>
         )}
       />

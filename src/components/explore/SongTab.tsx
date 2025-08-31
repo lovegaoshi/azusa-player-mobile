@@ -1,9 +1,14 @@
 import * as React from 'react';
-import { View, ScrollView, Dimensions, StyleSheet } from 'react-native';
+import {
+  View,
+  ScrollView,
+  Dimensions,
+  TouchableOpacity,
+  StyleSheet,
+} from 'react-native';
 import { LegendList } from '@legendapp/list';
 import { Image } from 'expo-image';
 import { useTranslation } from 'react-i18next';
-import { RectButton } from 'react-native-gesture-handler';
 
 import { chunkArray } from '@utils/Utils';
 import { useNoxSetting } from '@stores/useApp';
@@ -51,7 +56,7 @@ export const BiliSongCard = ({
         data={songs}
         renderItem={({ item }) => (
           <View style={style.padding}>
-            <RectButton
+            <TouchableOpacity
               style={style.cardPressable}
               onPress={() => {
                 navigationGlobal.navigate({
@@ -93,7 +98,7 @@ export const BiliSongCard = ({
                   {item.singer}
                 </Text>
               </View>
-            </RectButton>
+            </TouchableOpacity>
           </View>
         )}
       />
