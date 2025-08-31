@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Checkbox, IconButton } from 'react-native-paper';
+import { Checkbox, IconButton, TouchableRipple } from 'react-native-paper';
 import { View, StyleSheet } from 'react-native';
 import {
   DerivedValue,
@@ -10,7 +10,6 @@ import inRange from 'lodash/inRange';
 import throttle from 'lodash/throttle';
 import { TrueSheet } from '@lodev09/react-native-true-sheet';
 import { runOnJS } from 'react-native-worklets';
-import { RectButton } from 'react-native-gesture-handler';
 
 import { PaperText as Text } from '@components/commonui/ScaledText';
 import { useNoxSetting } from '@stores/useApp';
@@ -119,7 +118,7 @@ const SongInfo = ({
         },
       ]}
     >
-      <RectButton
+      <TouchableRipple
         onLongPress={checking ? toggleCheck : onLongPress}
         onPress={checking ? toggleCheck : () => playSong(item)}
       >
@@ -164,7 +163,7 @@ const SongInfo = ({
             />
           </View>
         </View>
-      </RectButton>
+      </TouchableRipple>
     </View>
   );
 };
