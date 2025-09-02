@@ -74,6 +74,7 @@ export default ({
   Indicator = SpinningIndicator,
 }: Props) => {
   const opacity = useSharedValue(0);
+  const [visible, setVisible] = useState(false);
 
   // HACK: so the spinner doesnt move down, but stay there and fade out then
   // pullUpDIstance is set to 0
@@ -82,11 +83,19 @@ export default ({
     curr => {
       if (curr === 0) {
         opacity.value = 1;
-        opacity.value = withTiming(
-          0,
-          { duration: 400 },
-          () => (pullUpDistance.value = 0),
-        );
+        opacity.value = withTiming(0, { duration: 400 }, () => {
+          pullUpDistance.value = 0;
+          runOnJS(setVisible)(false);
+        });
+      }
+    },
+  );
+
+  useAnimatedReaction(
+    () => pullUpDistance.value,
+    curr => {
+      if (curr < -1) {
+        runOnJS(setVisible)(true);
       }
     },
   );
@@ -101,6 +110,8 @@ export default ({
       opacity.value ||
       interpolate(pullUpDistance.value, [0, pullRange], [0, 1]),
   }));
+
+  if (!visible) return <></>;
 
   return (
     <Animated.View

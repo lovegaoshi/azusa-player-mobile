@@ -67,7 +67,6 @@ export default (playlist: NoxMedia.Playlist): UsePlaylistRN => {
   const toggleMiniplayerVisible = useNoxSetting(
     state => state.toggleMiniplayerVisible,
   );
-  // @ts-expect-error flashlistv2 type bug
   const playlistRef = useAnimatedRef<FlashListRef<NoxMedia.Song>>();
   const { playFromPlaylist } = usePlayback();
   const { performFade } = useTPControls();
@@ -247,6 +246,5 @@ export interface UsePlaylistRN extends UsePlaylist {
   handleSearch: (searchedVal: string) => void;
   playSong: (song: NoxMedia.Song) => void;
   scrollTo: ({ toIndex, reset, viewPosition }: ScrollTo) => void;
-  // @ts-expect-error flashlistv2 type bug
   playlistRef: AnimatedRef<FlashListRef<NoxMedia.Song>>;
 }
