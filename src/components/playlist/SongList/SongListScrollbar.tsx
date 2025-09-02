@@ -1,4 +1,4 @@
-import { useMemo, useRef } from 'react';
+import { useMemo, useRef, useState } from 'react';
 import { View, StyleSheet, StyleProp, ViewStyle } from 'react-native';
 import { GestureDetector, Gesture } from 'react-native-gesture-handler';
 import Animated, {
@@ -45,6 +45,7 @@ export default function CustomScrollView({
   LegendContent,
 }: Props) {
   const scrollTimeoutId = useRef<NodeJS.Timeout | null>(null);
+  const [scrollBarVisible, setScrollBarVisible] = useState(false);
   const scrollIndicatorOpacity = useSharedValue(0);
   const startScrollY = useSharedValue(0);
   const barHeightP = useDerivedValue(() => {
@@ -82,6 +83,7 @@ export default function CustomScrollView({
   const resetHideTimeout = (timeout = scrollBarHideTimeout) => {
     if (barHeightP.value < scrollViewHeight.value) {
       scrollIndicatorOpacity.value = 1;
+      setScrollBarVisible(true);
     }
     scrollTimeoutId.current && clearTimeout(scrollTimeoutId.current);
     scrollTimeoutId.current = createScrollHideTimeout(timeout);
@@ -89,7 +91,7 @@ export default function CustomScrollView({
 
   useAnimatedReaction(
     () => scrollPosition.value,
-    () => runOnJS(resetHideTimeout)(),
+    (a, b) => a !== b && runOnJS(resetHideTimeout)(),
   );
 
   const scrollByTranslationY = (offset: number) => {
@@ -130,26 +132,39 @@ export default function CustomScrollView({
 
   const scrollBarDynamicStyle = useAnimatedStyle(() => {
     return {
-      opacity: withTiming(scrollIndicatorOpacity.value, scrollTimingAnimConfig),
+      opacity: withTiming(
+        scrollIndicatorOpacity.value,
+        scrollTimingAnimConfig,
+        () =>
+          scrollIndicatorOpacity.value === 0 &&
+          runOnJS(setScrollBarVisible)(false),
+      ),
       height: barHeightP.value,
       top: scrollBarY.value,
     };
   });
 
+  const ScrollBar = () => {
+    if (!scrollBarVisible) return <View collapsable={false} />;
+    return (
+      <Animated.View
+        style={[scrollBarDynamicStyle, styles.indicatorStaticStyle]}
+      >
+        {LegendContent !== undefined && (
+          <LegendContent
+            scrollViewReference={scrollViewReference}
+            scrollOffset={scrollOffset}
+            showLegend={showLegend}
+          />
+        )}
+      </Animated.View>
+    );
+  };
+
   return (
     <View style={style}>
       <GestureDetector gesture={scrollDragGesture}>
-        <Animated.View
-          style={[scrollBarDynamicStyle, styles.indicatorStaticStyle]}
-        >
-          {LegendContent !== undefined && (
-            <LegendContent
-              scrollViewReference={scrollViewReference}
-              scrollOffset={scrollOffset}
-              showLegend={showLegend}
-            />
-          )}
-        </Animated.View>
+        <ScrollBar />
       </GestureDetector>
       {children}
     </View>

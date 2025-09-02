@@ -221,8 +221,8 @@ export default ({
   }, [rows]);
 
   return (
-    <GestureDetector gesture={composedGesture}>
-      <>
+    <>
+      <GestureDetector gesture={composedGesture}>
         <AnimatedFlashList
           onContentSizeChange={onContentHeightCHange}
           onLayout={e => setFlashlistLayout(e.nativeEvent.layout)}
@@ -264,12 +264,12 @@ export default ({
           showsVerticalScrollIndicator={false}
           onScroll={scrollHandler}
         />
-        <RefreshIndicator
-          pullUpActivated={pullUpActivated}
-          pullUpDistance={pullUpDistance}
-          layout={flashlistLayout}
-        />
-      </>
-    </GestureDetector>
+      </GestureDetector>
+      <RefreshIndicator
+        pullUpActivated={pullUpActivated}
+        pullUpDistance={pullUpDistance}
+        layout={flashlistLayout}
+      />
+    </>
   );
 };
