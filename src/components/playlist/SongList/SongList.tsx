@@ -9,7 +9,7 @@ import Animated, {
   useSharedValue,
   withTiming,
 } from 'react-native-reanimated';
-import { runOnJS } from 'react-native-worklets';
+import { scheduleOnRN } from 'react-native-worklets';
 import {
   Gesture,
   GestureDetector,
@@ -115,18 +115,18 @@ export default ({
           dragPos.value = cursorPos;
           const scrollUp = cursorPos < 0.2;
           if (scrollDown) {
-            runOnJS(setScrollActive)(1);
+            scheduleOnRN(setScrollActive, 1);
           } else if (scrollUp) {
-            runOnJS(setScrollActive)(2);
+            scheduleOnRN(setScrollActive, 2);
           } else {
-            runOnJS(setScrollActive)(0);
+            scheduleOnRN(setScrollActive, 0);
           }
         })
         .onFinalize(() => {
           dragToSelect.value = 0;
           initialDragY.value = 0;
           translationDragY.value = 0;
-          runOnJS(setScrollActive)(0);
+          scheduleOnRN(setScrollActive, 0);
         }),
     [checking],
   );
@@ -199,7 +199,7 @@ export default ({
         .onEnd(() => {
           if (pullUpActivated.value !== 1) return;
           if (pullUpDistance.value < -200) {
-            runOnJS(refreshPlaylist)(true);
+            scheduleOnRN(refreshPlaylist, true);
           } else {
             pullUpActivated.value = -1;
             pullUpDistance.value = withTiming(0, { duration: 400 });

@@ -13,7 +13,7 @@ import Animated, {
   useSharedValue,
   withTiming,
 } from 'react-native-reanimated';
-import { runOnJS } from 'react-native-worklets';
+import { scheduleOnRN } from 'react-native-worklets';
 
 type CollapsibleProps = PropsWithChildren<{
   collapsed: boolean;
@@ -75,7 +75,7 @@ export const Collapsible = ({
           return;
         }
 
-        runOnJS(onAnimationEnd)();
+        scheduleOnRN(onAnimationEnd);
       });
     },
     [initialHeight, showTheKids, sharedValue, onAnimationEnd],

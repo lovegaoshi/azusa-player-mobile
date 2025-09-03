@@ -4,7 +4,7 @@ import { Pressable, View, StyleSheet } from 'react-native';
 import FlashDragList from 'react-native-flashdrag-list';
 import { useDrawerProgress } from '@react-navigation/drawer';
 import { DrawerNavigationHelpers } from '@react-navigation/drawer/lib/typescript/src/types';
-import { runOnJS } from 'react-native-worklets';
+import { scheduleOnRN } from 'react-native-worklets';
 import { useAnimatedReaction } from 'react-native-reanimated';
 
 import { useNoxSetting } from '@stores/useApp';
@@ -62,7 +62,7 @@ export default ({ navigation }: { navigation: DrawerNavigationHelpers }) => {
   useAnimatedReaction(
     () => progress.value,
     c => {
-      runOnJS(setDrawerOpen)(c === 1);
+      scheduleOnRN(setDrawerOpen, c === 1);
     },
   );
 

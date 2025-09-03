@@ -9,7 +9,7 @@ import Animated, {
   Easing,
 } from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { runOnJS } from 'react-native-worklets';
+import { scheduleOnRN } from 'react-native-worklets';
 
 import MiniControls from './MiniControls';
 import { MinPlayerHeight } from './Constants';
@@ -77,7 +77,7 @@ export default () => {
       toHeight = height;
     }
     transitionHeight(toHeight, animation);
-    runOnJS(setLrcVisible)(false);
+    scheduleOnRN(setLrcVisible, false);
   };
 
   const collapse = (animation = true, toHeight = -1) => {
@@ -86,7 +86,7 @@ export default () => {
       toHeight = MinPlayerHeight;
     }
     transitionHeight(toHeight, animation);
-    runOnJS(setLrcVisible)(false);
+    scheduleOnRN(setLrcVisible, false);
   };
 
   const hide = (animation = true) => {
@@ -103,7 +103,7 @@ export default () => {
   const onArtworkPress = () => {
     if (artworkOpacity.value === 1) {
       artworkOpacity.value = withTiming(0, { duration: 100 }, () => {
-        runOnJS(setLrcVisible)(true);
+        scheduleOnRN(setLrcVisible, true);
       });
       return;
     }
