@@ -1,5 +1,6 @@
 import { StyleSheet, View } from 'react-native';
-import { IconButton, TouchableRipple } from 'react-native-paper';
+import { IconButton } from 'react-native-paper';
+import { RectButton } from 'react-native-gesture-handler';
 
 import { Props } from './SheetIconButton';
 import { PaperText as Text } from '@components/commonui/ScaledText';
@@ -7,12 +8,12 @@ import { PaperText as Text } from '@components/commonui/ScaledText';
 export default ({ icon, text, onPress, disabled, children }: Props) => {
   return (
     <View>
-      <TouchableRipple onPress={onPress} disabled={disabled}>
+      <RectButton onPress={disabled ? undefined : onPress}>
         <View style={styles.view}>
           <IconButton icon={icon} size={32} disabled={disabled} />
           <Text style={disabled && styles.disabledText}> {text} </Text>
         </View>
-      </TouchableRipple>
+      </RectButton>
       {children}
     </View>
   );
