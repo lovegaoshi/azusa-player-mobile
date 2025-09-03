@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { IconButton, TouchableRipple } from 'react-native-paper';
-import { Pressable, View, StyleSheet } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import FlashDragList from 'react-native-flashdrag-list';
 import { useDrawerProgress } from '@react-navigation/drawer';
 import { DrawerNavigationHelpers } from '@react-navigation/drawer/lib/typescript/src/types';
@@ -29,14 +29,13 @@ const SearchPlaylistAsNewButton = ({
 }: NewButtonProps) => {
   const playerStyle = useNoxSetting(state => state.playerStyle);
   return (
-    <Pressable onPress={() => setNewPlaylistDialogOpen(true)}>
-      <IconButton
-        testID="search-playlist-as-new-playlist-button"
-        icon="new-box"
-        size={25}
-        iconColor={playerStyle.colors.primary}
-      />
-    </Pressable>
+    <IconButton
+      testID="search-playlist-as-new-playlist-button"
+      icon="new-box"
+      size={25}
+      iconColor={playerStyle.colors.primary}
+      onPress={() => setNewPlaylistDialogOpen(true)}
+    />
   );
 };
 
