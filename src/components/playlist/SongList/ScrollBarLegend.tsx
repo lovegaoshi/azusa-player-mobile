@@ -8,7 +8,7 @@ import Animated, {
   useSharedValue,
   withTiming,
 } from 'react-native-reanimated';
-import { runOnJS } from 'react-native-worklets';
+import { scheduleOnRN } from 'react-native-worklets';
 
 import { useNoxSetting } from '@stores/useApp';
 import { NativeText as Text } from '@components/commonui/ScaledText';
@@ -69,7 +69,7 @@ export const LegendExample = ({
       if (showLegend.value === 0) {
         return;
       }
-      runOnJS(changeText)(curr);
+      scheduleOnRN(changeText, curr);
     },
   );
 

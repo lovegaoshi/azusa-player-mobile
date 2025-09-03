@@ -9,7 +9,7 @@ import {
 import inRange from 'lodash/inRange';
 import throttle from 'lodash/throttle';
 import { TrueSheet } from '@lodev09/react-native-true-sheet';
-import { runOnJS } from 'react-native-worklets';
+import { scheduleOnRN } from 'react-native-worklets';
 
 import { PaperText as Text } from '@components/commonui/ScaledText';
 import { useNoxSetting } from '@stores/useApp';
@@ -91,7 +91,7 @@ const SongInfo = ({
     () => cursorOffset.value,
     (c, p) => {
       if (dragToSelect.value === 0 || p === null) return;
-      runOnJS(dragToggleCheck)(c, p);
+      scheduleOnRN(dragToggleCheck, c, p);
     },
   );
 

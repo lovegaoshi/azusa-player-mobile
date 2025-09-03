@@ -7,7 +7,7 @@ import Animated, {
 import { useEffect, useMemo, useState } from 'react';
 import { Image } from 'expo-image';
 import { GestureDetector, Gesture } from 'react-native-gesture-handler';
-import { runOnJS } from 'react-native-worklets';
+import { scheduleOnRN } from 'react-native-worklets';
 
 const AnimatedExpoImage = Animated.createAnimatedComponent(Image);
 
@@ -80,8 +80,8 @@ export default ({
             v[prevIndex] = v[carouselIndex.value] - imgWidth * direction;
             return v;
           });
-          runOnJS(callback)(direction, prevIndex);
-          runOnJS(toggleThrottle)(true);
+          scheduleOnRN(callback, direction, prevIndex);
+          scheduleOnRN(toggleThrottle, true);
         },
       );
       return;

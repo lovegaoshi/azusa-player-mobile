@@ -9,7 +9,7 @@ import Animated, {
   withTiming,
 } from 'react-native-reanimated';
 import MaskedView from '@react-native-masked-view/masked-view';
-import { runOnJS } from 'react-native-worklets';
+import { scheduleOnRN } from 'react-native-worklets';
 
 export interface SliderProps {
   onValueStart?: (value: number) => void;
@@ -57,7 +57,7 @@ export default ({
     () =>
       Gesture.Pan()
         .onStart(e => {
-          onValueStart && runOnJS(onValueStart)(interpolateVal(e.x));
+          onValueStart && scheduleOnRN(onValueStart, interpolateVal(e.x));
         })
         .onChange(e => {
           const slideVal = interpolateVal(e.x);
@@ -68,11 +68,11 @@ export default ({
             Extrapolation.CLAMP,
           );
           value.value = slidePos;
-          onValueChange && runOnJS(onValueChange)(slideVal);
+          onValueChange && scheduleOnRN(onValueChange, slideVal);
         })
         .onEnd(e => {
           const slideVal = interpolateVal(e.x);
-          onValueEnd && runOnJS(onValueEnd)(slideVal);
+          onValueEnd && scheduleOnRN(onValueEnd, slideVal);
         }),
     [],
   );

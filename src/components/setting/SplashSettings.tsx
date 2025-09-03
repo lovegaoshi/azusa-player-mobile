@@ -11,7 +11,7 @@ import Animated, {
   withTiming,
 } from 'react-native-reanimated';
 import { GestureDetector, Gesture } from 'react-native-gesture-handler';
-import { runOnJS } from 'react-native-worklets';
+import { scheduleOnRN } from 'react-native-worklets';
 
 import { imageSplashes } from '../background/AppOpenSplash';
 
@@ -55,7 +55,7 @@ export default () => {
           if (cardPositionX.value !== 0 && boundingBack.value === 0) {
             cardPositionX.value = 0;
             cardPositionY.value = 0;
-            runOnJS(incIndex)();
+            scheduleOnRN(incIndex);
           }
           boundingBack.value = 0;
         })
@@ -68,13 +68,14 @@ export default () => {
             cardPositionX.value = withTiming(
               windowEnd,
               { duration: 200 },
-              () => cardPositionX.value === windowEnd && runOnJS(incIndex)(),
+              () => cardPositionX.value === windowEnd && scheduleOnRN(incIndex),
             );
           } else if (e.translationX < -120) {
             cardPositionX.value = withTiming(
               -windowEnd,
               { duration: 200 },
-              () => cardPositionX.value === -windowEnd && runOnJS(incIndex)(),
+              () =>
+                cardPositionX.value === -windowEnd && scheduleOnRN(incIndex),
             );
           } else {
             boundingBack.value = 1;

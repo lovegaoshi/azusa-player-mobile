@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { StyleSheet } from 'react-native';
 import { useAnimatedReaction } from 'react-native-reanimated';
-import { runOnJS } from 'react-native-worklets';
+import { scheduleOnRN } from 'react-native-worklets';
 
 import { SimpleProgressBar } from '../player/controls/ProgressBars/ProgressBar';
 import { MinPlayerHeight } from './Constants';
@@ -12,7 +12,7 @@ export default ({ miniplayerHeight }: NoxComponent.MiniplayerProps) => {
   useAnimatedReaction(
     () => miniplayerHeight.value,
     curr => {
-      runOnJS(setVisible)(curr === MinPlayerHeight);
+      scheduleOnRN(setVisible, curr === MinPlayerHeight);
     },
   );
 

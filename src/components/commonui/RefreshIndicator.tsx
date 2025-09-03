@@ -9,7 +9,7 @@ import Animated, {
   useSharedValue,
   withTiming,
 } from 'react-native-reanimated';
-import { runOnJS } from 'react-native-worklets';
+import { scheduleOnRN } from 'react-native-worklets';
 
 interface IndicatorProps {
   pullDistanceValue: SharedValue<number>;
@@ -22,7 +22,7 @@ export const DebugIndicator = ({ pullDistanceValue }: IndicatorProps) => {
   useAnimatedReaction(
     () => pullDistanceValue.value,
     curr => {
-      runOnJS(setValue)(curr);
+      scheduleOnRN(setValue, curr);
     },
   );
 
@@ -85,7 +85,7 @@ export default ({
         opacity.value = 1;
         opacity.value = withTiming(0, { duration: 400 }, () => {
           pullUpDistance.value = 0;
-          runOnJS(setVisible)(false);
+          scheduleOnRN(setVisible, false);
         });
       }
     },
@@ -95,7 +95,7 @@ export default ({
     () => pullUpDistance.value,
     curr => {
       if (curr < -1) {
-        runOnJS(setVisible)(true);
+        scheduleOnRN(setVisible, true);
       }
     },
   );

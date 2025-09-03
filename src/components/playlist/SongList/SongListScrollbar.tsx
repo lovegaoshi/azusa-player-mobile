@@ -12,7 +12,7 @@ import Animated, {
   useAnimatedReaction,
   useDerivedValue,
 } from 'react-native-reanimated';
-import { runOnJS } from 'react-native-worklets';
+import { scheduleOnRN } from 'react-native-worklets';
 
 import { ScrollProps, LegendProps } from './ScrollBarLegend';
 
@@ -91,7 +91,7 @@ export default function CustomScrollView({
 
   useAnimatedReaction(
     () => scrollPosition.value,
-    (a, b) => a !== b && runOnJS(resetHideTimeout)(),
+    (a, b) => a !== b && scheduleOnRN(resetHideTimeout),
   );
 
   const scrollByTranslationY = (offset: number) => {
@@ -105,7 +105,7 @@ export default function CustomScrollView({
     () =>
       Gesture.Pan()
         .onBegin(e => {
-          runOnJS(resetHideTimeout)();
+          scheduleOnRN(resetHideTimeout);
           startScrollY.value = e.y + scrollBarY.value;
           showLegend.value = 1;
         })
@@ -120,7 +120,8 @@ export default function CustomScrollView({
             [0, 1],
             Extrapolation.CLAMP,
           );
-          runOnJS(scrollByTranslationY)(
+          scheduleOnRN(
+            scrollByTranslationY,
             clampedScrollToPercent * contentHeight.value,
           );
         })
@@ -137,7 +138,7 @@ export default function CustomScrollView({
         scrollTimingAnimConfig,
         () =>
           scrollIndicatorOpacity.value === 0 &&
-          runOnJS(setScrollBarVisible)(false),
+          scheduleOnRN(setScrollBarVisible, false),
       ),
       height: barHeightP.value,
       top: scrollBarY.value,
