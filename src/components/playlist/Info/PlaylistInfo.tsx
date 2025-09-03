@@ -4,10 +4,15 @@ import {
   View,
   Pressable,
   StyleSheet,
-  Animated,
   GestureResponderEvent,
 } from 'react-native';
 import { useTranslation } from 'react-i18next';
+import Animated, {
+  useAnimatedStyle,
+  useSharedValue,
+  withTiming,
+} from 'react-native-reanimated';
+import { scheduleOnRN } from 'react-native-worklets';
 
 import SearchMenu from './PlaylistSearchMenu';
 import { useNoxSetting } from '@stores/useApp';
@@ -35,9 +40,9 @@ export default ({ usePlaylist, onPressed = () => undefined }: Props) => {
   const playerStyle = useNoxSetting(state => state.playerStyle);
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const searchContainerRef = useRef<any>(null);
-  const opacity = useRef(new Animated.Value(1)).current;
-  const searchBkgrdWidth = useRef(new Animated.Value(0)).current;
-  const searchBkgrdHeight = useRef(new Animated.Value(0)).current;
+  const opacity = useSharedValue(1);
+  const searchBkgrdWidth = useSharedValue(0);
+  const searchBkgrdHeight = useSharedValue(0);
   const [searchVisible, setSearchVisible] = useState(searching);
   // TODO: a more elegant way to signal content update
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -102,65 +107,45 @@ export default ({ usePlaylist, onPressed = () => undefined }: Props) => {
     setSearchText('');
   }, [currentPlaylist]);
 
+  const primeFocus = () => {
+    if (playlistSearchAutoFocus) {
+      searchContainerRef.current?.focus();
+      searchBkgrdHeight.value = withTiming(50, { duration: 180 });
+    }
+    setPlaylistSearchAutoFocus(true);
+  };
+
   useEffect(() => {
     setSearchVisible(true);
     if (searching) {
-      Animated.parallel([
-        Animated.timing(opacity, {
-          toValue: 0,
-          duration: 220,
-          useNativeDriver: true,
-        }),
-      ]).start();
-
-      Animated.timing(searchBkgrdWidth, {
-        toValue: 100,
-        duration: 280,
-        useNativeDriver: false,
-      }).start(() => {
-        if (playlistSearchAutoFocus) {
-          searchContainerRef.current?.focus();
-          Animated.timing(searchBkgrdHeight, {
-            toValue: 50,
-            duration: 180,
-            useNativeDriver: false,
-          }).start();
-        }
-        setPlaylistSearchAutoFocus(true);
-      });
+      opacity.value = withTiming(0, { duration: 220 });
+      searchBkgrdWidth.value = withTiming(100, { duration: 280 }, () =>
+        scheduleOnRN(primeFocus),
+      );
     } else {
-      Animated.parallel([
-        Animated.timing(opacity, {
-          toValue: 1,
-          duration: 280,
-          useNativeDriver: true,
-        }),
-        Animated.timing(searchBkgrdWidth, {
-          toValue: 0,
-          duration: 180,
-          useNativeDriver: false,
-        }),
-        Animated.timing(searchBkgrdHeight, {
-          toValue: 0,
-          duration: 180,
-          useNativeDriver: false,
-        }),
-      ]).start(() => setSearchVisible(false));
+      opacity.value = withTiming(1, { duration: 280 }, () =>
+        scheduleOnRN(setSearchVisible, false),
+      );
+      searchBkgrdWidth.value = withTiming(0, { duration: 180 });
+      searchBkgrdHeight.value = withTiming(0, { duration: 180 });
     }
   }, [searching]);
+
+  const searchBarAnimatedStyle = useAnimatedStyle(() => {
+    return {
+      width: `${searchBkgrdWidth.value}%`,
+    };
+  });
 
   return (
     <View style={styles.container}>
       <Animated.View
         style={[
           {
-            width: searchBkgrdWidth.interpolate({
-              inputRange: [0, 100],
-              outputRange: ['0%', '100%'],
-            }),
             height: headerHeight,
+            zIndex: 2,
           },
-          { zIndex: 2 },
+          searchBarAnimatedStyle,
         ]}
       >
         {searchVisible && (
