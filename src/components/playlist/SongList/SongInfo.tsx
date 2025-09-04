@@ -10,7 +10,7 @@ import inRange from 'lodash/inRange';
 import throttle from 'lodash/throttle';
 import { TrueSheet } from '@lodev09/react-native-true-sheet';
 import { scheduleOnRN } from 'react-native-worklets';
-import { RectButton } from 'react-native-gesture-handler';
+import { Pressable, RectButton } from 'react-native-gesture-handler';
 
 import { PaperText as Text } from '@components/commonui/ScaledText';
 import { useNoxSetting } from '@stores/useApp';
@@ -154,14 +154,14 @@ const SongInfo = ({
             <Text variant="titleSmall" style={styles.time}>
               {seconds2MMSS(item.duration)}
             </Text>
-            <IconButton
-              icon="dots-vertical"
+            <Pressable
               onPress={() => {
                 setSongMenuSongIndexes([getSongIndex()]);
                 TrueSheet.present(NoxSheetRoutes.SongsMenuInListSheet);
               }}
-              size={20}
-            />
+            >
+              <IconButton icon="dots-vertical" size={20} />
+            </Pressable>
           </View>
         </View>
       </RectButton>
