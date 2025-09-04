@@ -12,6 +12,7 @@ import {
   ListItemProps,
 } from 'react-native-paper';
 import _MarqueeText, { TextTickerProps } from 'react-native-text-ticker';
+import { RectButton } from 'react-native-gesture-handler';
 
 import { typescale } from './PaperTextVariant';
 import { useNoxSetting } from '@stores/useApp';
@@ -93,11 +94,16 @@ export const PaperListItem = (p: PaperListItemProps) => {
   });
 
   return (
-    <List.Item
-      {...p}
-      titleStyle={scaledTitleStyle}
-      descriptionStyle={scaledDescStyle}
-    />
+    // TODO: use a wrapper here
+    // @ts-expect-error
+    <RectButton onPress={p.onPress}>
+      <List.Item
+        {...p}
+        onPress={undefined}
+        titleStyle={scaledTitleStyle}
+        descriptionStyle={scaledDescStyle}
+      />
+    </RectButton>
   );
 };
 

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Checkbox, IconButton } from 'react-native-paper';
+import { Checkbox } from 'react-native-paper';
 import { View, StyleSheet } from 'react-native';
 import {
   DerivedValue,
@@ -20,6 +20,7 @@ import NoxCache from '@utils/Cache';
 import { UsePlaylistRN } from '../usePlaylistRN';
 import { getArtistName } from '@objects/Song';
 import { NoxSheetRoutes } from '@enums/Routes';
+import { IconButton } from '@components/commonui/RNGHPaperWrapper';
 
 interface Props {
   item: NoxMedia.Song;
@@ -154,14 +155,14 @@ const SongInfo = ({
             <Text variant="titleSmall" style={styles.time}>
               {seconds2MMSS(item.duration)}
             </Text>
-            <Pressable
+            <IconButton
+              icon="dots-vertical"
+              size={20}
               onPress={() => {
                 setSongMenuSongIndexes([getSongIndex()]);
                 TrueSheet.present(NoxSheetRoutes.SongsMenuInListSheet);
               }}
-            >
-              <IconButton icon="dots-vertical" size={20} onPress={() => {}} />
-            </Pressable>
+            />
           </View>
         </View>
       </RectButton>
