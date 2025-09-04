@@ -107,19 +107,17 @@ const SongInfo = ({
   return (
     <View
       testID={testID}
-      style={[
-        styles.container,
-        {
-          backgroundColor: currentPlaying
-            ? 'rgba(103, 80, 164, 0.35)'
-            : 'transparent',
-          opacity: isItemSolid(item, networkCellular, playerSetting.dataSaver)
-            ? undefined
-            : 0.5,
-        },
-      ]}
+      style={{
+        backgroundColor: currentPlaying
+          ? 'rgba(103, 80, 164, 0.35)'
+          : 'transparent',
+        opacity: isItemSolid(item, networkCellular, playerSetting.dataSaver)
+          ? undefined
+          : 0.5,
+      }}
     >
       <RectButton
+        style={styles.container}
         onLongPress={checking ? toggleCheck : onLongPress}
         onPress={checking ? toggleCheck : () => playSong(item)}
       >
@@ -128,10 +126,12 @@ const SongInfo = ({
             <View style={styles.row}>
               {checking && (
                 <View style={styles.checkBox}>
-                  <Checkbox
-                    status={checked ? 'checked' : 'unchecked'}
-                    onPress={toggleCheck}
-                  />
+                  <Pressable onPress={toggleCheck}>
+                    <Checkbox
+                      status={checked ? 'checked' : 'unchecked'}
+                      onPress={() => {}}
+                    />
+                  </Pressable>
                 </View>
               )}
               <View style={styles.songTitle}>
@@ -160,7 +160,7 @@ const SongInfo = ({
                 TrueSheet.present(NoxSheetRoutes.SongsMenuInListSheet);
               }}
             >
-              <IconButton icon="dots-vertical" size={20} />
+              <IconButton icon="dots-vertical" size={20} onPress={() => {}} />
             </Pressable>
           </View>
         </View>
