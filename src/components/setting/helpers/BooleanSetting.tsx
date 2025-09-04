@@ -1,7 +1,8 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { View, StyleSheet } from 'react-native';
-import { Switch, TouchableRipple, Checkbox } from 'react-native-paper';
+import { Switch, Checkbox } from 'react-native-paper';
+import { Pressable, RectButton } from 'react-native-gesture-handler';
 
 import { NativeText as Text } from '@components/commonui/ScaledText';
 import { useNoxSetting } from '@stores/useApp';
@@ -42,7 +43,7 @@ const BooleanSetting = ({
   }, []);
 
   return (
-    <TouchableRipple onPress={onToggle} style={styles.touchableRipple}>
+    <RectButton onPress={onToggle} style={styles.touchableRipple}>
       <View style={styles.settingContainer}>
         <View style={styles.settingTextContainer}>
           <Text
@@ -63,22 +64,24 @@ const BooleanSetting = ({
           </Text>
         </View>
         <View style={styles.switchContainer}>
-          {(!delayedLoading || loaded) &&
-            // delayedComponent doesnt work here, i dunno
-            (checkbox ? (
-              <Checkbox
-                status={playerSetting[settingName] ? 'checked' : 'unchecked'}
-                onPress={onToggle}
-              />
-            ) : (
-              <Switch
-                value={playerSetting[settingName]}
-                onValueChange={onToggle}
-              />
-            ))}
+          <Pressable onPress={onToggle}>
+            {(!delayedLoading || loaded) &&
+              // delayedComponent doesnt work here, i dunno
+              (checkbox ? (
+                <Checkbox
+                  status={playerSetting[settingName] ? 'checked' : 'unchecked'}
+                  onPress={() => void 0}
+                />
+              ) : (
+                <Switch
+                  value={playerSetting[settingName]}
+                  onValueChange={() => void 0}
+                />
+              ))}
+          </Pressable>
         </View>
       </View>
-    </TouchableRipple>
+    </RectButton>
   );
 };
 

@@ -1,9 +1,10 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect } from 'react';
-import { IconButton, Divider, TouchableRipple } from 'react-native-paper';
+import { IconButton, Divider } from 'react-native-paper';
 import { View, ImageBackground, StyleSheet, Linking } from 'react-native';
 import { useTranslation } from 'react-i18next';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { RectButton } from 'react-native-gesture-handler';
 
 import { PaperText as Text } from '@components/commonui/ScaledText';
 import { useNoxSetting } from '@stores/useApp';
@@ -36,7 +37,7 @@ const RenderDrawerItem = ({
   const playerStyle = useNoxSetting(state => state.playerStyle);
 
   return (
-    <TouchableRipple
+    <RectButton
       onPress={() =>
         noxNavigation.navigate({
           route: view,
@@ -54,7 +55,7 @@ const RenderDrawerItem = ({
           <Text variant="titleLarge">{t(text)}</Text>
         </View>
       </View>
-    </TouchableRipple>
+    </RectButton>
   );
 };
 

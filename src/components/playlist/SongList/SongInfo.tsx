@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Checkbox, IconButton, TouchableRipple } from 'react-native-paper';
+import { Checkbox } from 'react-native-paper';
 import { View, StyleSheet } from 'react-native';
 import {
   DerivedValue,
@@ -10,6 +10,7 @@ import inRange from 'lodash/inRange';
 import throttle from 'lodash/throttle';
 import { TrueSheet } from '@lodev09/react-native-true-sheet';
 import { scheduleOnRN } from 'react-native-worklets';
+import { Pressable, RectButton } from 'react-native-gesture-handler';
 
 import { PaperText as Text } from '@components/commonui/ScaledText';
 import { useNoxSetting } from '@stores/useApp';
@@ -19,6 +20,7 @@ import NoxCache from '@utils/Cache';
 import { UsePlaylistRN } from '../usePlaylistRN';
 import { getArtistName } from '@objects/Song';
 import { NoxSheetRoutes } from '@enums/Routes';
+import { IconButton } from '@components/commonui/RNGHPaperWrapper';
 
 interface Props {
   item: NoxMedia.Song;
@@ -106,19 +108,17 @@ const SongInfo = ({
   return (
     <View
       testID={testID}
-      style={[
-        styles.container,
-        {
-          backgroundColor: currentPlaying
-            ? 'rgba(103, 80, 164, 0.35)'
-            : 'transparent',
-          opacity: isItemSolid(item, networkCellular, playerSetting.dataSaver)
-            ? undefined
-            : 0.5,
-        },
-      ]}
+      style={{
+        backgroundColor: currentPlaying
+          ? 'rgba(103, 80, 164, 0.35)'
+          : 'transparent',
+        opacity: isItemSolid(item, networkCellular, playerSetting.dataSaver)
+          ? undefined
+          : 0.5,
+      }}
     >
-      <TouchableRipple
+      <RectButton
+        style={styles.container}
         onLongPress={checking ? toggleCheck : onLongPress}
         onPress={checking ? toggleCheck : () => playSong(item)}
       >
@@ -127,10 +127,12 @@ const SongInfo = ({
             <View style={styles.row}>
               {checking && (
                 <View style={styles.checkBox}>
-                  <Checkbox
-                    status={checked ? 'checked' : 'unchecked'}
-                    onPress={toggleCheck}
-                  />
+                  <Pressable onPress={toggleCheck}>
+                    <Checkbox
+                      status={checked ? 'checked' : 'unchecked'}
+                      onPress={() => {}}
+                    />
+                  </Pressable>
                 </View>
               )}
               <View style={styles.songTitle}>
@@ -155,15 +157,15 @@ const SongInfo = ({
             </Text>
             <IconButton
               icon="dots-vertical"
+              size={20}
               onPress={() => {
                 setSongMenuSongIndexes([getSongIndex()]);
                 TrueSheet.present(NoxSheetRoutes.SongsMenuInListSheet);
               }}
-              size={20}
             />
           </View>
         </View>
-      </TouchableRipple>
+      </RectButton>
     </View>
   );
 };

@@ -1,6 +1,7 @@
 import { View, FlatList } from 'react-native';
 import { useEffect, useState } from 'react';
-import { IconButton, TouchableRipple } from 'react-native-paper';
+import { IconButton } from 'react-native-paper';
+import { RectButton } from 'react-native-gesture-handler';
 
 import { PaperText as Text } from '@components/commonui/ScaledText';
 import {
@@ -68,7 +69,7 @@ export default () => {
         extraData={rerender}
         renderItem={({ item, index }) => (
           <View style={styles.rowView}>
-            <TouchableRipple
+            <RectButton
               style={[styles.contentContainer, styles.alignMiddle]}
               onPress={() => {
                 setCurrentCred(credList[index]);
@@ -76,7 +77,7 @@ export default () => {
               }}
             >
               <Text variant="displaySmall">{item[0]}</Text>
-            </TouchableRipple>
+            </RectButton>
             <View style={styles.alignMiddle}>
               <IconButton
                 icon={'delete'}

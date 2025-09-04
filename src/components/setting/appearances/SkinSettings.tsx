@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { Image } from 'expo-image';
 import { View, SafeAreaView, LayoutAnimation } from 'react-native';
-import { IconButton, TouchableRipple } from 'react-native-paper';
 import { FlashList, FlashListRef } from '@shopify/flash-list';
+import { RectButton } from 'react-native-gesture-handler';
 
 import { PaperText as Text } from '@components/commonui/ScaledText';
 import SkinSearchbar from './SkinSearchbar';
@@ -20,6 +20,7 @@ import {
 } from '@components/style';
 import { setDarkTheme } from '@utils/RNUtils';
 import { saveColorScheme } from '@utils/ChromeStorageAPI';
+import { IconButton } from '@components/commonui/RNGHPaperWrapper';
 
 interface DisplayTheme extends NoxTheme.Style {
   builtin: boolean;
@@ -80,7 +81,7 @@ const SkinItem = ({
   };
 
   return (
-    <TouchableRipple onPress={selectTheme} onLongPress={onHold}>
+    <RectButton onPress={selectTheme} onLongPress={onHold}>
       <View
         style={[
           styles.skinItemContainer,
@@ -131,12 +132,12 @@ const SkinItem = ({
           <IconButton
             icon="trash-can"
             style={styles.deleteButton}
-            onPress={deleteTheme}
             disabled={skin.builtin}
+            onPress={deleteTheme}
           />
         </View>
       </View>
-    </TouchableRipple>
+    </RectButton>
   );
 };
 
