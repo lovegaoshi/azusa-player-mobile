@@ -90,7 +90,7 @@
     "expo-secure-store": "~14.2.4",
     "expo-sqlite": "~15.2.14",
     "fflate": "^0.8.2",
-    "ffmpeg-kit-react-native": "https://gitpkg.vercel.app/lovegaoshi/ffmpeg-kit/react-native?f5a4d7a12480ab2ab1b43072bc38b7bc9d7bc2f1",
+    "ffmpeg-kit-react-native": "https://gitpkg.vercel.app/lovegaoshi/ffmpeg-kit/react-native?6dbdfe0a6021503cf8ddcee4332df5e4e82aca1a",
     "he": "^1.2.0",
     "i18next": "25.4.2",
     "intl-pluralrules": "^2.0.1",
