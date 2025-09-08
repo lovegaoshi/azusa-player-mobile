@@ -137,6 +137,12 @@ export default ({ usePlaylist, onPressed = () => undefined }: Props) => {
     };
   });
 
+  const infoheaderAnimatedStyle = useAnimatedStyle(() => {
+    return {
+      opacity: opacity.value,
+    };
+  });
+
   return (
     <View style={styles.container}>
       <Animated.View
@@ -168,7 +174,7 @@ export default ({ usePlaylist, onPressed = () => undefined }: Props) => {
       </Animated.View>
 
       <Animated.View
-        style={[styles.pressable, { opacity }]}
+        style={[styles.pressable, infoheaderAnimatedStyle]}
         onLayout={e =>
           !headerHeight && setHeaderHeight(e.nativeEvent.layout.height)
         }
