@@ -1,5 +1,7 @@
 import * as React from 'react';
-import { View, ScrollView } from 'react-native';
+import { View } from 'react-native';
+import { ScrollView } from 'react-native-gesture-handler';
+
 import { useNoxSetting } from '@stores/useApp';
 import { RenderSetting } from './helpers/RenderSetting';
 import { SettingEntry } from './helpers/SettingEntry';
