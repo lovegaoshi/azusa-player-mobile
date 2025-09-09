@@ -54,6 +54,7 @@ Check out the [chrome extension](https://github.com/lovegaoshi/NoxPlayer) versio
 - AB repeat
 - karaoke lyric
 - fade transition and crossfade
+- beat match phrasing
 - musicfree plugin support
 
 # Install
@@ -88,7 +89,7 @@ CDN acceleration and security protection for this project are sponsored by Tence
 ![https://edgeone.ai/media/34fe3a45-492d-4ea4-ae5d-ea1087ca7b4b.png](https://edgeone.ai/media/34fe3a45-492d-4ea4-ae5d-ea1087ca7b4b.png)
 
 
-Thank you for considering supporting APM. All of the donation proceedings will go towards a copy of Buldur's Gate 
+Thank you for considering supporting APM. All donation proceedings will go towards a copy of Buldur's Gate III (or until BG3 goes on sale for $30)
 
 <p align="center"><a href="https://github.com/lovegaoshi/azusa-player-mobile"><img width="200" src="https://github.com/lovegaoshi/azusa-player-mobile/blob/5795492b49048046b36583502f74caa9fdb2badb/docs/docs/usage-tutorial/images/sponsor.jpg"></a></p>
 
