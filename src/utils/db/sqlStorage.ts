@@ -132,7 +132,7 @@ export const increasePlaybackCount = async (
     return;
   }
   const count = await getPlaybackCount(songcid);
-  const currentTime = Date.now();
+  const currentTime = Number(Date.now());
   if (count === undefined) {
     await db
       .insert(playbackTable)
