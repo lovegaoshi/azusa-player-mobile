@@ -4,6 +4,7 @@ import { reParseSearch } from '../utils/re';
 import { useNoxSetting } from '../stores/useApp';
 import usePlaylistCRUD from './usePlaylistCRUD';
 import { SortOptions } from '@enums/Playlist';
+import { TextInput } from 'react-native';
 
 export interface UsePlaylist {
   playlist: NoxMedia.Playlist;
@@ -26,8 +27,7 @@ export interface UsePlaylist {
     subscribeUrls?: string[],
     addToEnd?: boolean,
   ) => Promise<NoxMedia.Playlist | undefined>;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  searchBarRef: React.MutableRefObject<any>;
+  searchBarRef: React.RefObject<TextInput | undefined>;
   refreshing: boolean;
   setRefreshing: React.Dispatch<React.SetStateAction<boolean>>;
   getSongIndex: (item: NoxMedia.Song, index: number) => number;
