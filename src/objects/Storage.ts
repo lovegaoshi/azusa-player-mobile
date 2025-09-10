@@ -2,6 +2,7 @@ import { NoxRepeatMode } from '../enums/RepeatMode';
 import { Versions } from '../enums/Version';
 import { SyncOptions } from '../enums/Sync';
 // eslint-disable-next-line import/no-unresolved
+// @ts-ignore noxplayer doesnt resolve @env
 import { MAESTRO } from '@env';
 
 export const AppID = 'NoxPlayerMobile';
