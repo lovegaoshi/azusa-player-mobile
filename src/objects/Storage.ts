@@ -1,4 +1,5 @@
-// eslint-disable import/no-unresolved
+// HACK: not ideal but here for noxplayer compatibility.
+/* eslint-disable import/no-unresolved */
 import { NoxRepeatMode } from '../enums/RepeatMode';
 import { Versions } from '../enums/Version';
 import { SyncOptions } from '../enums/Sync';
