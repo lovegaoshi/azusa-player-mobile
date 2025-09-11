@@ -33,7 +33,6 @@ extensions.configure(com.facebook.react.ReactSettingsExtension) { ex ->
 rootProject.name = 'azusa-player-mobile'
 include ':ffmpeg-kit-binaries'
 include ':app'
-includeBuild('../node_modules/@react-native/gradle-plugin')
 
 expoAutolinking.useExpoModules()
 expoAutolinking.useExpoVersionCatalog()

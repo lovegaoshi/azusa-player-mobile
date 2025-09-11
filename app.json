@@ -1,12 +1,9 @@
 {
   "name": "azusa-player-mobile",
   "displayName": "APM",
-  "plugins": [
-    "react-native-ota-hot-update",
-    "expo-secure-store",
-    "expo-sqlite"
-  ],
+  "plugins": ["react-native-ota-hot-update"],
   "expo": {
-    "scheme": "com.noxplayer"
+    "scheme": "com.noxplayer",
+    "plugins": ["expo-secure-store", "expo-sqlite"]
   }
 }
