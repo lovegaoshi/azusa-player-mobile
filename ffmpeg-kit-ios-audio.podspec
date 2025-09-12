@@ -27,7 +27,7 @@ TODO: Add long description of the pod here.
   s.source           = { :http => 'https://github.com/lovegaoshi/ffmpeg-kit/releases/download/v6.0.2-binary/ffmpeg-kit-audio-6.0-ios-xcframework.zip' }
   # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
   
-  s.ios.deployment_target = '12.1'
+  s.ios.deployment_target = '15.0'
   s.ios.frameworks = 'AudioToolbox', 'AVFoundation', 'CoreMedia', 'VideoToolbox'
   s.ios.vendored_frameworks = 'ffmpegkit.xcframework', 'libavcodec.xcframework', 'libavdevice.xcframework', 'libavfilter.xcframework', 'libavformat.xcframework', 'libavutil.xcframework', 'libswresample.xcframework', 'libswscale.xcframework'  
   # s.resource_bundles = {
