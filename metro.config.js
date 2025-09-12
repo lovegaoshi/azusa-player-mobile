@@ -11,7 +11,8 @@ const config = getDefaultConfig(__dirname);
 config.resolver.sourceExts.push('sql');
 const customConfig = {
   resolver: {
-    unstable_enablePackageExports: false,
+    // HACK: only enables this if some module is only commonJS
+    // unstable_enablePackageExports: false,
   },
 };
 

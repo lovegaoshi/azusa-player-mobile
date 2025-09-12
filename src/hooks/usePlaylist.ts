@@ -26,8 +26,9 @@ export interface UsePlaylist {
     subscribeUrls?: string[],
     addToEnd?: boolean,
   ) => Promise<NoxMedia.Playlist | undefined>;
+  // HACK: noxplayer also uses this. stay as any
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  searchBarRef: React.MutableRefObject<any>;
+  searchBarRef: React.RefObject<any>;
   refreshing: boolean;
   setRefreshing: React.Dispatch<React.SetStateAction<boolean>>;
   getSongIndex: (item: NoxMedia.Song, index: number) => number;

@@ -5,13 +5,13 @@ import android.content.res.Configuration
 import android.util.Log
 import com.facebook.react.PackageList
 import com.facebook.react.ReactApplication
+import com.facebook.react.ReactNativeApplicationEntryPoint.loadReactNative
 import com.facebook.react.ReactHost
 import com.facebook.react.ReactNativeHost
 import com.facebook.react.ReactPackage
-import com.facebook.react.defaults.DefaultNewArchitectureEntryPoint.load
+import com.facebook.react.common.ReleaseLevel
+import com.facebook.react.defaults.DefaultNewArchitectureEntryPoint
 import com.facebook.react.defaults.DefaultReactNativeHost
-import com.facebook.react.soloader.OpenSourceMergedSoMapping
-import com.facebook.soloader.SoLoader
 import expo.modules.ReactNativeHostWrapper
 import com.otahotupdate.OtaHotUpdate
 import com.nativenoxmodule.NativeNoxModulePackage
@@ -56,11 +56,14 @@ class MainApplication : Application(), ReactApplication {
 
     override fun onCreate() {
         super.onCreate()
-        SoLoader.init(this,  OpenSourceMergedSoMapping)
-        if (BuildConfig.IS_NEW_ARCHITECTURE_ENABLED) {
-            // If you opted-in for the New Architecture, we load the native entry point for this app.
-            load()
+        try {
+//          DefaultNewArchitectureEntryPoint.releaseLevel = ReleaseLevel.valueOf(BuildConfig.REACT_NATIVE_RELEASE_LEVEL.uppercase())
+        } catch (e: IllegalArgumentException) {
+          DefaultNewArchitectureEntryPoint.releaseLevel = ReleaseLevel.STABLE
         }
+        DefaultNewArchitectureEntryPoint.releaseLevel = ReleaseLevel.STABLE
+
+        loadReactNative(this)
         ApplicationLifecycleDispatcher.onApplicationCreate(this)
     }
 
