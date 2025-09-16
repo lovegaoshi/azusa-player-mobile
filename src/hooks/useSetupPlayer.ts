@@ -19,7 +19,6 @@ import sqldb from '../utils/db/sql';
 import logger from '@utils/Logger';
 import { TPPlay } from '@stores/RNObserverStore';
 import NativeNoxModule from '@specs/NativeNoxModule';
-import ytClient from '@utils/mediafetch/ytbi';
 
 const initializePlayer = async (safeMode = false) => {
   await migrate(sqldb, migrations);
