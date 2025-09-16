@@ -7252,12 +7252,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"apisauce@npm:^3.1.0":
-  version: 3.1.1
-  resolution: "apisauce@npm:3.1.1"
+"apisauce@npm:3.2.0":
+  version: 3.2.0
+  resolution: "apisauce@npm:3.2.0"
   dependencies:
-    axios: "npm:^1.7.7"
-  checksum: 10c0/a88498049588e803042b1b5e2ffe3670aa61e6381b2c6a88afd4f47b1e50e1bd574ba9719c6891c92cecff207812387f861e4115666600bd8e09e6d3bbab231b
+    axios: "npm:^1.10.0"
+  checksum: 10c0/2750845e3dfd60771b6bedd660acb41d5d6800b1d7222e12d297449d69ec4049f0613dcc709dbee04d112800a1000b266a475326f20610c963966fbbc9a39e65
   languageName: node
   linkType: hard
 
@@ -7622,6 +7622,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"axios@npm:^1.10.0":
+  version: 1.12.2
+  resolution: "axios@npm:1.12.2"
+  dependencies:
+    follow-redirects: "npm:^1.15.6"
+    form-data: "npm:^4.0.4"
+    proxy-from-env: "npm:^1.1.0"
+  checksum: 10c0/80b063e318cf05cd33a4d991cea0162f3573481946f9129efb7766f38fde4c061c34f41a93a9f9521f02b7c9565ccbc197c099b0186543ac84a24580017adfed
+  languageName: node
+  linkType: hard
+
 "axios@npm:^1.11.0":
   version: 1.11.0
   resolution: "axios@npm:1.11.0"
@@ -7630,17 +7641,6 @@ __metadata:
     form-data: "npm:^4.0.4"
     proxy-from-env: "npm:^1.1.0"
   checksum: 10c0/5de273d33d43058610e4d252f0963cc4f10714da0bfe872e8ef2cbc23c2c999acc300fd357b6bce0fc84a2ca9bd45740fa6bb28199ce2c1266c8b1a393f2b36e
-  languageName: node
-  linkType: hard
-
-"axios@npm:^1.7.7":
-  version: 1.8.4
-  resolution: "axios@npm:1.8.4"
-  dependencies:
-    follow-redirects: "npm:^1.15.6"
-    form-data: "npm:^4.0.0"
-    proxy-from-env: "npm:^1.1.0"
-  checksum: 10c0/450993c2ba975ffccaf0d480b68839a3b2435a5469a71fa2fb0b8a55cdb2c2ae47e609360b9c1e2b2534b73dfd69e2733a1cf9f8215bee0bcd729b72f801b0ce
   languageName: node
   linkType: hard
 
@@ -12692,17 +12692,6 @@ __metadata:
     cross-spawn: "npm:^7.0.0"
     signal-exit: "npm:^4.0.1"
   checksum: 10c0/028f1d41000553fcfa6c4bb5c372963bf3d9bf0b1f25a87d1a6253014343fb69dfb1b42d9625d7cf44c8ba429940f3d0ff718b62105d4d4a4f6ef8ca0a53faa2
-  languageName: node
-  linkType: hard
-
-"form-data@npm:^4.0.0":
-  version: 4.0.1
-  resolution: "form-data@npm:4.0.1"
-  dependencies:
-    asynckit: "npm:^0.4.0"
-    combined-stream: "npm:^1.0.8"
-    mime-types: "npm:^2.1.12"
-  checksum: 10c0/bb102d570be8592c23f4ea72d7df9daa50c7792eb0cf1c5d7e506c1706e7426a4e4ae48a35b109e91c85f1c0ec63774a21ae252b66f4eb981cb8efef7d0463c8
   languageName: node
   linkType: hard
 
