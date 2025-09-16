@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-/* eslint-disable prefer-const */
 import { create } from 'zustand';
 
 import createBottomTab, { BottomTabStore } from './useBottomTab';

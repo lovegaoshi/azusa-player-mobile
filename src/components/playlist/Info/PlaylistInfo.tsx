@@ -5,6 +5,7 @@ import {
   Pressable,
   StyleSheet,
   GestureResponderEvent,
+  TextInput,
 } from 'react-native';
 import { useTranslation } from 'react-i18next';
 import Animated, {
@@ -38,8 +39,7 @@ export default ({ usePlaylist, onPressed = () => undefined }: Props) => {
   const { t } = useTranslation();
   const currentPlaylist = useNoxSetting(state => state.currentPlaylist);
   const playerStyle = useNoxSetting(state => state.playerStyle);
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const searchContainerRef = useRef<any>(null);
+  const searchContainerRef = useRef<TextInput>(null);
   const opacity = useSharedValue(1);
   const searchBkgrdWidth = useSharedValue(0);
   const searchBkgrdHeight = useSharedValue(0);
