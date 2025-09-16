@@ -217,6 +217,8 @@
     "chatGPTResolveSongNameDesc": "TODO：用chatGPT解析歌名",
     "lyricTapName": "歌词跳跃",
     "lyricTapDesc": "点击歌词跳转到歌曲位置",
+    "initYtbiOnStartName": "启动时初始化yt",
+    "initYtbiOnStartDesc": "ytbi无法在后台启动（？？）；使用yt时推荐开启",
     "smartShuffleName": "智能随机",
     "smartShuffleDesc": "在播放时随机播放不同的歌曲",
     "noBiliR128GainName": "禁用b站音量增益",

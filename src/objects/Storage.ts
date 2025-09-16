@@ -60,6 +60,7 @@ const _DefaultSetting: NoxStorage.PlayerSettingDict = {
   fontScale: 1,
   lyricFontScale: 0,
   spotifyLyricStyle: false,
+  initYtbiOnStart: false,
 
   appID: AppID,
   language: undefined,

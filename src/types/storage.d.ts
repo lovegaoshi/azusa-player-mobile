@@ -59,6 +59,7 @@ declare global {
       fontScale: number;
       lyricFontScale: number;
       spotifyLyricStyle: boolean;
+      initYtbiOnStart: boolean;
 
       appID: string;
       language?: string;

@@ -217,6 +217,8 @@
     "chatGPTResolveNameDesc": "TODO: Use chatGPT to resolve song names",
     "lyricTapName": "Seek on Lyric Tap",
     "lyricTapDesc": "Seek to song when tapping on lyrics",
+    "initYtbiOnStartName": "Initialize ytbi on start",
+    "initYtbiOnStartDesc": "ytbi cannot start in background. Recommended if using ytbi",
     "noBiliR128GainName": "Disable BiliR128Gain",
     "noBiliR128GainDesc": "Disable Bili R128gain, use ffmpeg instead",
     "pausePlaybackOnMuteName": "Pause Playback on Mute",
