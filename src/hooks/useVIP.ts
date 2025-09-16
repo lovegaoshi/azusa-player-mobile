@@ -39,6 +39,7 @@ const initRevenueCatWeb = async (userid?: string) => {
 const getVIPStatus = async () => {
   if (APPSTORE) {
     const customerInfo = await Purchases.getCustomerInfo();
+    logger.info(JSON.stringify(customerInfo));
     return customerInfo.entitlements.active[VIPId] !== undefined;
   }
   await initRevenueCatWeb();
