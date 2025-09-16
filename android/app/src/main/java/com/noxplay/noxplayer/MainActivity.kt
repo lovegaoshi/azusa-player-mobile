@@ -17,7 +17,7 @@ import android.util.Rational
 import com.facebook.infer.annotation.Assertions
 import android.view.View
 import android.view.ViewTreeObserver
-import com.facebook.react.ReactActivity
+import com.facebook.react.APMActivity
 import com.facebook.react.ReactActivityDelegate
 import com.facebook.react.ReactApplication
 import com.facebook.react.bridge.Arguments
@@ -30,11 +30,13 @@ import timber.log.Timber
 
 interface NoxActivity {
     var loadedRN: Boolean
+    var resumeOnPause: Boolean
 }
 
-class MainActivity(override var loadedRN: Boolean = BuildConfig.DEBUG) :
-    ReactActivity(), ComponentCallbacks2, NoxActivity {
-
+class MainActivity(override var loadedRN: Boolean = BuildConfig.DEBUG,
+                   override var resumeOnPause: Boolean = false
+) :
+    APMActivity(), ComponentCallbacks2, NoxActivity {
 
     fun emit (tag: String, data: Bundle) {
         getReactContext()?.emitDeviceEvent(tag, Arguments.fromBundle(data))
@@ -89,7 +91,7 @@ class MainActivity(override var loadedRN: Boolean = BuildConfig.DEBUG) :
         return "azusa-player-mobile"
     }
 
-    class APMReactActivityDelegate(activity: ReactActivity, componentName: String):
+    class APMReactActivityDelegate(activity: APMActivity, componentName: String):
         DefaultReactActivityDelegate(activity, componentName, fabricEnabled) {
         private val mActivity = activity
 
@@ -151,13 +153,20 @@ class MainActivity(override var loadedRN: Boolean = BuildConfig.DEBUG) :
         if (isInPictureInPictureMode) {
             // Hide the full-screen UI (controls, etc.) while in PiP mode.
             getReactContext()?.emitDeviceEvent("APMEnterPIP", true)
-            // HACK: a really stupid way to continue RN UI rendering
-            onResume()
+            // HACK: resume reactActivity delegate to resume screen rendering
+            resumeReactFragment()
         } else {
             // Restore the full-screen UI.
             getReactContext()?.emitDeviceEvent("APMEnterPIP", false)
         }
         super.onPictureInPictureModeChanged(isInPictureInPictureMode, newConfig)
+    }
+
+    override fun onPause() {
+        super.onPause()
+        if (resumeOnPause) {
+            resumeReactFragment()
+        }
     }
 
     private fun logAPMRAM() {

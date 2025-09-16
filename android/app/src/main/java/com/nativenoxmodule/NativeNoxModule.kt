@@ -164,6 +164,11 @@ class NativeNoxModule(reactContext: ReactApplicationContext) : NativeNoxModuleSp
         activity?.loadedRN = true
     }
 
+    override fun setresumeOnPause(resumeOnPause: Boolean) {
+        val activity = getActivity()
+        activity?.resumeOnPause = resumeOnPause
+    }
+
     override fun isRNLoaded(): Boolean {
         val activity = getActivity()
         Timber.tag("APM").d("probing if RN is loaded: ${activity?.loadedRN}")

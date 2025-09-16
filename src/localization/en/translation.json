@@ -219,6 +219,8 @@
     "lyricTapDesc": "Seek to song when tapping on lyrics",
     "initYtbiOnStartName": "Initialize ytbi on start",
     "initYtbiOnStartDesc": "ytbi cannot start in background. Recommended if using ytbi",
+    "resumeOnPauseName": "onResume when onPause",
+    "resumeOnPauseDesc": "calls ReactActivity.onResume when entering onPause.",
     "noBiliR128GainName": "Disable BiliR128Gain",
     "noBiliR128GainDesc": "Disable Bili R128gain, use ffmpeg instead",
     "pausePlaybackOnMuteName": "Pause Playback on Mute",

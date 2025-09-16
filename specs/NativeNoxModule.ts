@@ -22,6 +22,7 @@ export interface Spec extends TurboModule {
   ) => Promise<NoxMedia[]>;
   listMediaFileByID: (id: string) => Promise<NoxMedia[]>;
   loadRN: () => void;
+  setresumeOnPause: (resumeOnPause: boolean) => void;
   isRNLoaded: () => boolean;
   getLastExitCode: () => number;
   getLastExitReason: () => boolean;
