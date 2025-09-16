@@ -122,7 +122,6 @@ export default ({ intentData, vip }: NoxComponent.SetupPlayerProps) => {
         default:
         // await TrackPlayer.pause();
       }
-      storedPlayerSetting.initYtbiOnStart && ytClient();
       storedPlayerSetting.resumeOnPause &&
         NativeNoxModule?.setresumeOnPause?.(true);
     })();
