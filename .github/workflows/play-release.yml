@@ -79,10 +79,6 @@ jobs:
           git submodule update --init --recursive
           echo "${{ secrets.RELEASE_SIGN_PWD }}" >> ./android/gradle.properties
 
-      - name: python fixHTTP
-        run: |
-          python ./scripts/fixHTTP.py
-
       - name: Build Sign jks
         id: write_file
         uses: timheuer/base64-to-file@v1.2
@@ -93,6 +89,10 @@ jobs:
 
       - name: Install dependencies
         run: yarn install; yarn build
+
+      - name: python fixHTTP
+        run: |
+          python ./scripts/fixHTTP.py
 
       - name: clean generated builds
         run: rm -rf android/app/build/generated/
