@@ -123,6 +123,8 @@ export default ({ intentData, vip }: NoxComponent.SetupPlayerProps) => {
         // await TrackPlayer.pause();
       }
       storedPlayerSetting.initYtbiOnStart && ytClient();
+      storedPlayerSetting.resumeOnPause &&
+        NativeNoxModule?.setresumeOnPause?.(true);
     })();
     return () => {
       unmounted = true;

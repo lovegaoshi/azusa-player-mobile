@@ -40,6 +40,10 @@ const developerSettings: { [key: string]: SettingEntry } = {
     settingName: 'artworkCarousel',
     settingCategory: 'GeneralSettings',
   },
+  resumeOnPause: {
+    settingName: 'resumeOnPause',
+    settingCategory: 'GeneralSettings',
+  },
   /**
   chatGPTSongName: {
     settingName: 'chatGPTResolveSongName',
@@ -105,6 +109,14 @@ export const Home = ({
               <>
                 <RenderSetting
                   item={developerSettings.parseEmbeddedArtwork}
+                  delayedLoading={false}
+                />
+              </>
+            )}
+            {isAndroid && (
+              <>
+                <RenderSetting
+                  item={developerSettings.resumeOnPause}
                   delayedLoading={false}
                 />
               </>

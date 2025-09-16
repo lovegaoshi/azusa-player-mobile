@@ -67,10 +67,6 @@ const GEN_SETTING_BOOLEAN: SettingEntry[] = [
     settingName: 'lyricTap',
     settingCategory: 'GeneralSettings',
   },
-  {
-    settingName: 'initYtbiOnStart',
-    settingCategory: 'GeneralSettings',
-  },
 ];
 
 export default () => {
