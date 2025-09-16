@@ -10,7 +10,7 @@ import { useNoxSetting } from '@stores/useApp';
 interface Props {
   placeholder: string;
   value: string;
-  pressed: React.MutableRefObject<boolean>;
+  pressed: React.RefObject<boolean>;
   setValue: (v: string) => void;
   onSubmit: (v: string) => void;
   onIconPress: (e: GestureResponderEvent) => void;

@@ -31,8 +31,12 @@ const initRevenueCatWeb = async (userid?: string) => {
   }
   logger.info(`[APMVIP] ${mUserid}`);
   isRevenueCatInitialized = true;
-  PurchasesWeb.configure(REVENUECAT_STRIPE, `${mUserid}`, {
-    proxyURL: 'https://api.rc-backup.com',
+  PurchasesWeb.configure({
+    apiKey: REVENUECAT_STRIPE,
+    appUserId: mUserid,
+    httpConfig: {
+      proxyURL: 'https://api.rc-backup.com',
+    },
   });
 };
 
