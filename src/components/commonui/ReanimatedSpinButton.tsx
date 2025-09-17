@@ -4,10 +4,9 @@ import Animated, {
   useSharedValue,
   useAnimatedStyle,
   withTiming,
-  withRepeat,
   cancelAnimation,
-  runOnJS,
 } from 'react-native-reanimated';
+import { scheduleOnRN } from 'react-native-worklets';
 
 interface Props {
   onPress?: (toggleSpin: () => void) => void;
@@ -30,7 +29,7 @@ export default function SpinningButton({ onPress = v => v, children }: Props) {
       { duration: 1000 },
       finished => {
         if (finished && spinning.value) {
-          runOnJS(spinOnce)(); // keep looping
+          scheduleOnRN(spinOnce); // keep looping
         }
       },
     );
