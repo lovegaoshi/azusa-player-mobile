@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next';
 import TrackPlayer, { useProgress } from 'react-native-track-player';
 import { RangeSlider } from '@react-native-assets/slider';
 import { StyleSheet, View } from 'react-native';
+import { IconButton } from 'react-native-paper';
 
 import { PaperText as Text } from '@components/commonui/ScaledText';
 import { useNoxSetting } from '@stores/useApp';
@@ -10,6 +11,9 @@ import GenericDialog from '@components/dialogs/GenericDialog';
 import { seconds2MMSS as formatSeconds } from '@utils/Utils';
 import { setABRepeat } from '@utils/db/sqlStorage';
 import SheetIconEntry from '@components/commonui/bottomsheet/SheetIconEntry';
+import NoxCache from '@utils/Cache';
+import { setNoxSkipSilence } from '@utils/ffmpeg/skipSilence';
+import ReanimatedSpinButton from '@components/commonui/ReanimatedSpinButton';
 
 interface Props {
   song: NoxMedia.Song;
@@ -27,6 +31,7 @@ const ABSlider = ({ range, setRange }: SliderProps) => {
   const currentABRepeat = useNoxSetting(state => state.currentABRepeat);
   const parsedRange = currentABRepeat.slice(0, 2) as [number, number];
   useEffect(() => setRange(parsedRange), [currentABRepeat]);
+  console.log('parsedRange', parsedRange);
 
   return (
     <View>
@@ -81,6 +86,19 @@ const ABSliderMenu = ({ song, showSheet }: Props) => {
     showSheet?.(true);
   };
 
+  const onNoxSkipSilencePress = async (toggleSpin: () => void) => {
+    toggleSpin();
+    try {
+      const cachedUrl = await NoxCache.noxMediaCache?.loadCacheMedia(song);
+      if (cachedUrl) {
+        // TODO: make this spin while running
+        await setNoxSkipSilence({ path: cachedUrl, song, forced: true });
+      }
+    } finally {
+      toggleSpin();
+    }
+  };
+
   return (
     <SheetIconEntry
       text={t('SongOperations.abrepeat')}
@@ -93,7 +111,14 @@ const ABSliderMenu = ({ song, showSheet }: Props) => {
         onClose={dismissDialog}
         onSubmit={onSubmit}
       >
-        <ABSlider range={range} setRange={setRange} />
+        <View>
+          <View style={{ alignItems: 'flex-end' }}>
+            <ReanimatedSpinButton onPress={onNoxSkipSilencePress}>
+              <IconButton icon={'sync'} size={30} />
+            </ReanimatedSpinButton>
+          </View>
+          <ABSlider range={range} setRange={setRange} />
+        </View>
       </GenericDialog>
     </SheetIconEntry>
   );
