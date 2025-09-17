@@ -17,6 +17,7 @@ import android.util.Rational
 import com.facebook.infer.annotation.Assertions
 import android.view.View
 import android.view.ViewTreeObserver
+import com.doublesymmetry.trackplayer.module.MusicModule
 import com.facebook.react.APMActivity
 import com.facebook.react.ReactActivityDelegate
 import com.facebook.react.ReactApplication
@@ -165,7 +166,12 @@ class MainActivity(override var loadedRN: Boolean = BuildConfig.DEBUG,
     override fun onPause() {
         super.onPause()
         if (resumeOnPause) {
-            resumeReactFragment()
+            val context = getReactContext()
+            val nativeModules = context?.nativeModules
+            val rntpModule = (nativeModules?.filter { nativeModule -> nativeModule.name == "TrackPlayer" })?.elementAtOrNull(0)
+            if (rntpModule != null && (rntpModule as MusicModule).isPlaying()) {
+                resumeReactFragment()
+            }
         }
     }
 
