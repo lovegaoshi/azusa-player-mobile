@@ -1,15 +1,20 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { useProgress } from 'react-native-track-player';
+import { useDebounce } from 'use-debounce';
 
 import ProgressContainer from './ProgressContainer';
 import { useNoxSetting } from '@stores/useApp';
 import { seconds2MMSS as formatSeconds } from '@utils/Utils';
 import { NativeText as Text } from '@components/commonui/ScaledText';
 
-export const Progress: React.FC<{ live?: boolean }> = ({ live }) => {
+const ProgressText = () => {
   const { position, duration } = useProgress(1000, false);
   const playerStyle = useNoxSetting(state => state.playerStyle);
+  const [showDragValue, setShowDragValue] = React.useState(false);
+  const miniProgress = useNoxSetting(state => state.miniProgress);
+  const miniProgressSliding = useNoxSetting(state => state.miniProgressSliding);
+  const [debouncedSliding] = useDebounce(miniProgressSliding, 100);
 
   const progressTextStyle = [
     styles.labelText,
@@ -20,6 +25,36 @@ export const Progress: React.FC<{ live?: boolean }> = ({ live }) => {
     },
   ];
 
+  useEffect(() => {
+    if (!miniProgressSliding) {
+      setShowDragValue(false);
+    }
+  }, [miniProgressSliding]);
+
+  useEffect(() => {
+    if (debouncedSliding) {
+      setShowDragValue(true);
+    }
+  }, [debouncedSliding]);
+
+  return (
+    <View style={styles.labelContainer}>
+      <Text style={progressTextStyle}>
+        {formatSeconds(showDragValue ? miniProgress * duration : position)}
+      </Text>
+      <Text style={progressTextStyle}>
+        {showDragValue
+          ? formatSeconds(duration)
+          : `-${formatSeconds(Math.max(0, duration - position))}`}
+      </Text>
+    </View>
+  );
+};
+
+export const Progress = ({ live }: { live?: boolean }) => {
+  const playerStyle = useNoxSetting(state => state.playerStyle);
+  const setMiniProgress = useNoxSetting(state => state.setMiniProgress);
+
   return live ? (
     <View style={styles.liveContainer}>
       <Text style={[styles.liveText, { color: playerStyle.colors.primary }]}>
@@ -28,13 +63,8 @@ export const Progress: React.FC<{ live?: boolean }> = ({ live }) => {
     </View>
   ) : (
     <View style={styles.container}>
-      <ProgressContainer />
-      <View style={[styles.labelContainer, { paddingHorizontal: 10 }]}>
-        <Text style={progressTextStyle}>{formatSeconds(position)}</Text>
-        <Text style={progressTextStyle}>
-          {`-${formatSeconds(Math.max(0, duration - position))}`}
-        </Text>
-      </View>
+      <ProgressContainer onValueChange={setMiniProgress} />
+      <ProgressText />
     </View>
   );
 };
@@ -63,7 +93,7 @@ const styles = StyleSheet.create({
     width: '100%',
     flexDirection: 'row',
     justifyContent: 'space-between',
-    paddingHorizontal: 15,
+    paddingHorizontal: 10,
   },
   labelText: {
     color: 'white',
