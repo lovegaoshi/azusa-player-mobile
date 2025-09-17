@@ -17,6 +17,7 @@ import { biliShazamOnSonglist } from './bilishazam';
 import { timestampToSeconds, appendURLSearchParam } from '../Utils';
 import SongTS from '@objects/Song';
 import { Source } from '@enums/MediaFetch';
+import { getCookie } from './bilisearch';
 
 const URL_BILICHANNEL_INFO =
   'https://api.bilibili.com/x/space/wbi/arc/search?mid={mid}&pn={pn}&jsonp=jsonp&ps=50';
@@ -74,6 +75,12 @@ export const fetchBiliChannelList = async ({
     limiter: limit ? awaitLimiter : undefined,
     resolveBiliBVID: fastSearch ? fastSearchResolveBVID : undefined,
     stopAtPage,
+    params: {
+      headers: {
+        referer: 'https://space.bilibili.com/',
+        cookie: await getCookie(),
+      },
+    },
   });
 };
 
