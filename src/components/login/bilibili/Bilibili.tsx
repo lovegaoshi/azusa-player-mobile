@@ -1,9 +1,10 @@
 import * as React from 'react';
-import { View, SafeAreaView, StyleSheet, ScrollView } from 'react-native';
+import { View, StyleSheet, ScrollView } from 'react-native';
 import { Avatar, ActivityIndicator, Button } from 'react-native-paper';
 import { useTranslation } from 'react-i18next';
 import QRCode from 'react-native-qrcode-svg';
 import CookieManager from '@react-native-cookies/cookies';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { useNoxSetting } from '@stores/useApp';
 import { logger } from '@utils/Logger';
@@ -181,7 +182,7 @@ export default ({ biliLogin }: Props) => {
         title={t('Login.BilibiliCookieInputDialogTitle')}
         onClose={() => setInputCookieVisible(false)}
         onSubmit={manualInputCookies}
-      ></GenericInputDialog>
+      />
     </SafeAreaView>
   );
 };

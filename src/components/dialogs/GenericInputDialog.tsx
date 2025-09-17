@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { View, FlatList, StyleSheet } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import { Button, Dialog, TextInput } from 'react-native-paper';
 import { useTranslation } from 'react-i18next';
+import { FlashList } from '@shopify/flash-list';
 
 import { logger } from '@utils/Logger';
 
@@ -35,6 +36,7 @@ export default ({
   const [currentInput, setCurrentInput] = useState<{
     [key: string]: string;
   }>({});
+  const [dialogHeight, setDialogHeight] = useState(0);
 
   const handleClose = () => {
     onClose(currentInput);
@@ -53,16 +55,20 @@ export default ({
   );
 
   return (
-    <Dialog
-      visible={visible}
-      onDismiss={handleClose}
-      style={{
-        minHeight: options.length > 4 ? '50%' : options.length * 60 + 180,
-      }}
-    >
+    <Dialog visible={visible} onDismiss={handleClose}>
       <DialogTitle title={title} />
-      <Dialog.Content style={styles.dialogContent}>
-        <FlatList
+      <Dialog.Content
+        style={{
+          minHeight:
+            options.length > 4
+              ? '50%'
+              : dialogHeight > 0
+                ? dialogHeight
+                : options.length * 40 + 40,
+        }}
+      >
+        <FlashList
+          onContentSizeChange={(w, h) => setDialogHeight(h + 40)}
           style={styles.flatList}
           data={options}
           renderItem={({ item }) => (
@@ -86,7 +92,6 @@ export default ({
 
 const styles = StyleSheet.create({
   dialogTitle: { maxHeight: 100 },
-  dialogContent: { flex: 1, minHeight: '20%' },
-  flatList: { flex: 6 },
+  flatList: { flex: 1 },
   dialogActions: { paddingBottom: 0 },
 });
