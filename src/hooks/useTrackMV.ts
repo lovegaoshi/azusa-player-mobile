@@ -42,6 +42,9 @@ export default (videoRef: RefObject<VideoRef | null>) => {
     execWhenTrue({
       loopCheck: async () => videoRef.current !== null,
       executeFn: primeVideoPosition,
+      funcName: 'primeVideoPosition',
+      loopGuard: 5,
+      wait: 300,
     });
   }, [RNTPPlay, RNTPSeek]);
 

@@ -181,6 +181,7 @@ const SkinSettings = () => {
           }),
         // @ts-expect-error detect if flashlist is rendered
         loopCheck: () => scrollViewRef.current?.getLayout(0) !== undefined,
+        funcName: 'skinSettingsScrollToIndex',
       });
     }
   }, []);
