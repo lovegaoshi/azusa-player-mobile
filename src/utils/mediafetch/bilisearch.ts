@@ -11,7 +11,7 @@ const URL_BILI_SEARCH =
 
 let cookie: string;
 
-const getCookie = async (cookiedSearch = false) => {
+export const getCookie = async (cookiedSearch = false) => {
   // TODO: add refresh here?
   if (!cookie) {
     const res = await bfetch('https://api.bilibili.com/x/frontend/finger/spi');
