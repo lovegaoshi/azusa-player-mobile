@@ -73,7 +73,7 @@ class NoxMediaCache {
       if (!path) return;
       const { r128gain, noxSkipSilence, beatMatchCrossfade } =
         useNoxSetting.getState().playerSetting;
-      noxSkipSilence && (await setNoxSkipSilence(path, song));
+      noxSkipSilence && (await setNoxSkipSilence({ path, song }));
       r128gain && (await setNoxR128Gain(path, song));
       beatMatchCrossfade && (await setNoxBeats(path, song));
     };

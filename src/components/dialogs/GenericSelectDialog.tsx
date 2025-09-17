@@ -79,6 +79,7 @@ export default function GenericSelectDialog<T>({
             animated: false,
           });
         }, 1),
+      funcName: 'genDialogScrollToIndex',
     });
   }, [visible]);
 

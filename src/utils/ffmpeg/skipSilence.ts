@@ -4,10 +4,20 @@ import logger from '../Logger';
 import { probeLoudness } from './ffmpeg';
 import { useNoxSetting } from '@stores/useApp';
 
-export const setNoxSkipSilence = async (path: string, song: NoxMedia.Song) => {
+interface ISetNoxSkipSilence {
+  path: string;
+  song: NoxMedia.Song;
+  forced?: boolean;
+}
+
+export const setNoxSkipSilence = async ({
+  path,
+  song,
+  forced = false,
+}: ISetNoxSkipSilence) => {
   logger.debug(`[SkipSilence] now starting FFMPEG skip silence for ${song.id}`);
   const abrepeat = await getABRepeatRaw(song.id);
-  if (abrepeat?.a !== undefined || abrepeat?.b !== undefined) {
+  if (!forced && (abrepeat?.a !== undefined || abrepeat?.b !== undefined)) {
     logger.debug(`[SkipSilence] ABrepeat exists; skipping...`);
     return;
   }

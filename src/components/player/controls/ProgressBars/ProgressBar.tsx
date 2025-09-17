@@ -5,16 +5,11 @@ import { Slider } from '@react-native-assets/slider';
 
 import { useNoxSetting } from '@stores/useApp';
 import { TPSeek } from '@stores/RNObserverStore';
+import {
+  ProgressBarContainerProps,
+  ProgressBarProps,
+} from './ProgressBarProps';
 
-interface Props {
-  thumbSize?: number;
-  progressThumbImage?: string;
-  trackHeight?: number;
-  style?: ViewStyle;
-  trackStyle?: ViewStyle;
-  enabled?: boolean;
-  progressInterval?: number;
-}
 export const SimpleProgressBar = ({
   thumbSize,
   progressThumbImage,
@@ -23,7 +18,8 @@ export const SimpleProgressBar = ({
   trackStyle,
   enabled = true,
   progressInterval = 200,
-}: Props) => {
+  onValueChange,
+}: ProgressBarProps) => {
   const { position, duration } = useProgress(progressInterval, false);
   const playerStyle = useNoxSetting(state => state.playerStyle);
   const enterSliding = useNoxSetting(state => state.enableMiniProgressSliding);
@@ -31,6 +27,7 @@ export const SimpleProgressBar = ({
 
   return (
     <Slider
+      onValueChange={onValueChange}
       onSlidingStart={enterSliding}
       trackStyle={trackStyle}
       trackHeight={trackHeight}
@@ -63,10 +60,13 @@ export const SimpleProgressBar = ({
   );
 };
 
-export default () => {
+export default (p: ProgressBarContainerProps) => {
   const playerStyle = useNoxSetting(state => state.playerStyle);
   return (
-    <SimpleProgressBar progressThumbImage={playerStyle.progressThumbImage} />
+    <SimpleProgressBar
+      {...p}
+      progressThumbImage={playerStyle.progressThumbImage}
+    />
   );
 };
 

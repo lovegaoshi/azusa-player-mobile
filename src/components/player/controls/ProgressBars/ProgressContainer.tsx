@@ -8,15 +8,16 @@ import NativeProgressBarAPM from './NativeProgressBar';
 import NativeProgressFetchBar from './NativeProgressFetchBar';
 import { useNoxSetting } from '@stores/useApp';
 import { isAndroid } from '@utils/RNUtils';
+import { ProgressBarContainerProps } from './ProgressBarProps';
 
-const Progress = () => (
+const Progress = (p: ProgressBarContainerProps) => (
   <View style={styles.progressContainer}>
-    <ProgressBarAPM />
+    <ProgressBarAPM {...p} />
     <ProgressFetchBar />
   </View>
 );
 
-const NativeProgress = () => (
+const NativeProgress = (p: ProgressBarContainerProps) => (
   <View
     style={
       isAndroid
@@ -24,17 +25,21 @@ const NativeProgress = () => (
         : styles.progressContainer
     }
   >
-    <NativeProgressBarAPM />
+    <NativeProgressBarAPM {...p} />
     <NativeProgressFetchBar />
   </View>
 );
 
-export default () => {
+export default (p: ProgressBarContainerProps) => {
   const playerSetting = useNoxSetting(state => state.playerSetting);
   return (
     <View>
       <ProgressWavy />
-      {playerSetting.nativeBottomTab ? <NativeProgress /> : <Progress />}
+      {playerSetting.nativeBottomTab ? (
+        <NativeProgress {...p} />
+      ) : (
+        <Progress {...p} />
+      )}
     </View>
   );
 };

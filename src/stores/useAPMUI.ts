@@ -11,6 +11,8 @@ export interface APMUIStore {
   miniProgressSliding: boolean;
   enableMiniProgressSliding: () => void;
   disableMiniProgressSliding: () => void;
+  miniProgress: number;
+  setMiniProgress: (val: number) => void;
 
   songListScrollCounter: number;
   incSongListScrollCounter: () => void;
@@ -46,6 +48,8 @@ const store: StateCreator<APMUIStore, [], [], APMUIStore> = set => ({
   miniProgressSliding: false,
   enableMiniProgressSliding: () => set({ miniProgressSliding: true }),
   disableMiniProgressSliding: () => set({ miniProgressSliding: false }),
+  miniProgress: 0,
+  setMiniProgress: val => set({ miniProgress: val }),
 
   songListScrollCounter: 0,
   incSongListScrollCounter: () =>
