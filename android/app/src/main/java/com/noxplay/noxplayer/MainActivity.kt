@@ -34,8 +34,9 @@ interface NoxActivity {
     var resumeOnPause: Boolean
 }
 
-class MainActivity(override var loadedRN: Boolean = BuildConfig.DEBUG,
-                   override var resumeOnPause: Boolean = false
+class MainActivity(
+  override var loadedRN: Boolean = BuildConfig.DEBUG,
+  override var resumeOnPause: Boolean = false
 ) :
     APMActivity(), ComponentCallbacks2, NoxActivity {
 
