@@ -11,9 +11,14 @@ import { scheduleOnRN } from 'react-native-worklets';
 interface Props {
   onPress?: (toggleSpin: () => void) => void;
   children: React.ReactNode;
+  direction?: number;
 }
 
-export default function SpinningButton({ onPress = v => v, children }: Props) {
+export default function SpinningButton({
+  onPress = v => v,
+  children,
+  direction = 1,
+}: Props) {
   const rotation = useSharedValue(0);
   const spinning = useSharedValue(false);
 
@@ -25,7 +30,7 @@ export default function SpinningButton({ onPress = v => v, children }: Props) {
 
   const spinOnce = () => {
     rotation.value = withTiming(
-      rotation.value + 360,
+      rotation.value + 360 * direction,
       { duration: 1000 },
       finished => {
         if (finished && spinning.value) {
