@@ -12,7 +12,6 @@ package com.facebook.react;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.KeyEvent;
 import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.Nullable;
@@ -68,7 +67,6 @@ public abstract class APMActivity extends ReactActivity
 
     @Override
     protected void onPause() {
-        Log.d("APM", "APM override onPause");
         super.onPause();
         mDelegate.onPause();
     }

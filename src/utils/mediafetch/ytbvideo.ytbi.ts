@@ -16,7 +16,9 @@ const getHiResThumbnail = (thumbnails?: Thumbnail[]) => {
 };
 
 export const resolveURL = async (song: NoxMedia.Song, iOS = false) => {
-  logger.debug(`[ytbi.js] fetch YTB playURL promise:${song.bvid}`);
+  logger.debug(
+    `[ytbi.js] fetch YTB playURL promise:${song.bvid} / iOS status:${isIOS}/${iOS}`,
+  );
   const yt = await ytClient();
   const extractedVideoInfo = await yt.getBasicInfo(song.bvid, {
     client: 'IOS',
@@ -26,10 +28,10 @@ export const resolveURL = async (song: NoxMedia.Song, iOS = false) => {
     type: 'audio',
   });
   return {
-    url:
-      iOS && isIOS && extractedVideoInfo.streaming_data?.hls_manifest_url
-        ? extractedVideoInfo.streaming_data?.hls_manifest_url
-        : maxAudioQualityStream.decipher(yt.actions.session.player),
+    // HACK: fix this iOS && isIOS && extractedVideoInfo.streaming_data?.hls_manifest_url
+    url: extractedVideoInfo.streaming_data?.hls_manifest_url
+      ? extractedVideoInfo.streaming_data?.hls_manifest_url
+      : maxAudioQualityStream.decipher(yt.actions.session.player),
     loudness: maxAudioQualityStream.loudness_db,
   };
 };

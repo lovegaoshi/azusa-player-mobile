@@ -113,7 +113,10 @@ const ABSliderMenu = ({ song, showSheet }: Props) => {
       >
         <View>
           <View style={{ alignItems: 'flex-end' }}>
-            <ReanimatedSpinButton onPress={onNoxSkipSilencePress}>
+            <ReanimatedSpinButton
+              onPress={onNoxSkipSilencePress}
+              direction={-1}
+            >
               <IconButton icon={'sync'} size={30} />
             </ReanimatedSpinButton>
           </View>
