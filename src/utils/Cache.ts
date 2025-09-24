@@ -69,6 +69,11 @@ class NoxMediaCache {
     extension,
     notify = false,
   }: SaveCacheMedia) => {
+    // HACK: do not cache m3u8; they might be time sensitive
+    if (resolvedURL.url.endsWith('.m3u8')) {
+      setFetchProgress(0);
+      return;
+    }
     const parseR128Gain = async (path?: string) => {
       if (!path) return;
       const { r128gain, noxSkipSilence, beatMatchCrossfade } =
