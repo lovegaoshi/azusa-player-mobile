@@ -7,7 +7,7 @@ import { Innertube, ClientType, Platform } from 'youtubei.js';
 import { getSecure as getItem } from '@utils/ChromeStorageAPI';
 
 import { timeFunction } from '../Utils';
-import MMKV from '../fakeMMKV';
+import MMKV, { GHCacher } from '../fakeMMKV';
 import { StorageKeys } from '@enums/Storage';
 import logger from '../Logger';
 
@@ -39,10 +39,11 @@ let _ytmClient: undefined | Innertube;
 
 const createYtClient = () =>
   Innertube.create({
+    cache: new GHCacher(),
     retrieve_player: true,
     enable_session_cache: false,
     generate_session_locally: false,
-    client_type: ClientType.IOS,
+    client_type: ClientType.WEB_EMBEDDED,
     //cookie,
   });
 
