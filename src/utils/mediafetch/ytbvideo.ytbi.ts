@@ -28,10 +28,10 @@ export const resolveURL = async (song: NoxMedia.Song, iOS = false) => {
     type: 'audio',
   });
   return {
-    // HACK: fix this iOS && isIOS && extractedVideoInfo.streaming_data?.hls_manifest_url
-    url: extractedVideoInfo.streaming_data?.hls_manifest_url
-      ? extractedVideoInfo.streaming_data?.hls_manifest_url
-      : maxAudioQualityStream.decipher(yt.actions.session.player),
+    url:
+      iOS && isIOS && extractedVideoInfo.streaming_data?.hls_manifest_url
+        ? extractedVideoInfo.streaming_data?.hls_manifest_url
+        : maxAudioQualityStream.decipher(yt.actions.session.player),
     loudness: maxAudioQualityStream.loudness_db,
   };
 };
