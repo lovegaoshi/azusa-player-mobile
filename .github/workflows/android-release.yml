@@ -60,9 +60,12 @@ jobs:
           cache: 'yarn'
 
       - name: 'Create env file'
+        env:
+          ENV_FILE: ${{ secrets.ENV_FILE }}
+          SENTRY_PROPERTIES: ${{ secrets.SENTRY_PROPERTIES }}
         run: |
-          echo "${{ secrets.ENV_FILE }}" > .env
-          echo "${{ secrets.SENTRY_PROPERTIES }}" > ./android/sentry.properties
+          echo "$ENV_FILE" > .env
+          echo "$SENTRY_PROPERTIES" > ./android/sentry.properties
 
       - name: alias yarn.cmd to yarn
         run: alias yarn.cmd="yarn"
@@ -177,10 +180,13 @@ jobs:
         uses: threeal/setup-yarn-action@v2.0.0
 
       - name: 'Create env file'
+        env:
+          ENV_FILE: ${{ secrets.ENV_FILE }}
+          SENTRY_PROPERTIES: ${{ secrets.SENTRY_PROPERTIES }}
         run: |
-          echo "${{ secrets.ENV_FILE }}" > .env
+          echo "$ENV_FILE" > .env
+          echo "$SENTRY_PROPERTIES" > ./android/sentry.properties
           echo "APPSTORE=true" >> .env
-          echo "${{ secrets.SENTRY_PROPERTIES }}" > ./android/sentry.properties
 
       - name: alias yarn.cmd to yarn
         run: alias yarn.cmd="yarn"
@@ -280,11 +286,14 @@ jobs:
         uses: threeal/setup-yarn-action@v2.0.0
 
       - name: 'Create env file'
+        env:
+          ENV_FILE: ${{ secrets.ENV_FILE }}
+          SENTRY_PROPERTIES: ${{ secrets.SENTRY_PROPERTIES }}
         run: |
+          echo "$ENV_FILE" > .env
+          echo "$SENTRY_PROPERTIES" > ./android/sentry.properties
           sudo xcode-select -switch /Applications/Xcode_26.0.app
-          echo "${{ secrets.ENV_FILE }}" > .env
           echo "APPSTORE=true" >> .env
-          echo "${{ secrets.SENTRY_PROPERTIES }}" > ./ios/sentry.properties
           git submodule update --init --recursive
 
       - name: alias yarn.cmd to yarn
