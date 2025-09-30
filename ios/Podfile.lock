@@ -166,8 +166,8 @@ PODS:
     - SocketRocket
     - Yoga
   - Protobuf (3.22.1)
-  - PurchasesHybridCommon (17.7.0):
-    - RevenueCat (= 5.39.0)
+  - PurchasesHybridCommon (17.8.0):
+    - RevenueCat (= 5.40.0)
   - RCT-Folly (2024.11.18.00):
     - boost
     - DoubleConversion
@@ -2124,7 +2124,7 @@ PODS:
     - ReactCommon/turbomodule/core
     - SocketRocket
     - Yoga
-  - react-native-skia (2.2.18):
+  - react-native-skia (2.2.21):
     - boost
     - DoubleConversion
     - fast_float
@@ -2890,7 +2890,7 @@ PODS:
     - React-perflogger (= 0.81.4)
     - React-utils (= 0.81.4)
     - SocketRocket
-  - RevenueCat (5.39.0)
+  - RevenueCat (5.40.0)
   - RNCMaskedView (0.3.2):
     - boost
     - DoubleConversion
@@ -2955,10 +2955,10 @@ PODS:
     - RNNotifee/NotifeeCore (= 9.1.8)
   - RNNotifee/NotifeeCore (9.1.8):
     - React-Core
-  - RNPurchases (9.5.0):
-    - PurchasesHybridCommon (= 17.7.0)
+  - RNPurchases (9.5.1):
+    - PurchasesHybridCommon (= 17.8.0)
     - React-Core
-  - RNReanimated (4.1.0):
+  - RNReanimated (4.1.2):
     - boost
     - DoubleConversion
     - fast_float
@@ -2985,11 +2985,11 @@ PODS:
     - ReactCodegen
     - ReactCommon/turbomodule/bridging
     - ReactCommon/turbomodule/core
-    - RNReanimated/reanimated (= 4.1.0)
+    - RNReanimated/reanimated (= 4.1.2)
     - RNWorklets
     - SocketRocket
     - Yoga
-  - RNReanimated/reanimated (4.1.0):
+  - RNReanimated/reanimated (4.1.2):
     - boost
     - DoubleConversion
     - fast_float
@@ -3016,11 +3016,11 @@ PODS:
     - ReactCodegen
     - ReactCommon/turbomodule/bridging
     - ReactCommon/turbomodule/core
-    - RNReanimated/reanimated/apple (= 4.1.0)
+    - RNReanimated/reanimated/apple (= 4.1.2)
     - RNWorklets
     - SocketRocket
     - Yoga
-  - RNReanimated/reanimated/apple (4.1.0):
+  - RNReanimated/reanimated/apple (4.1.2):
     - boost
     - DoubleConversion
     - fast_float
@@ -3198,7 +3198,7 @@ PODS:
     - ReactCommon/turbomodule/core
     - SocketRocket
     - Yoga
-  - RNWorklets (0.5.1):
+  - RNWorklets (0.6.0):
     - boost
     - DoubleConversion
     - fast_float
@@ -3225,10 +3225,10 @@ PODS:
     - ReactCodegen
     - ReactCommon/turbomodule/bridging
     - ReactCommon/turbomodule/core
-    - RNWorklets/worklets (= 0.5.1)
+    - RNWorklets/worklets (= 0.6.0)
     - SocketRocket
     - Yoga
-  - RNWorklets/worklets (0.5.1):
+  - RNWorklets/worklets (0.6.0):
     - boost
     - DoubleConversion
     - fast_float
@@ -3255,10 +3255,10 @@ PODS:
     - ReactCodegen
     - ReactCommon/turbomodule/bridging
     - ReactCommon/turbomodule/core
-    - RNWorklets/worklets/apple (= 0.5.1)
+    - RNWorklets/worklets/apple (= 0.6.0)
     - SocketRocket
     - Yoga
-  - RNWorklets/worklets/apple (0.5.1):
+  - RNWorklets/worklets/apple (0.6.0):
     - boost
     - DoubleConversion
     - fast_float
@@ -3776,7 +3776,7 @@ SPEC CHECKSUMS:
   lottie-ios: a881093fab623c467d3bce374367755c272bdd59
   lottie-react-native: a236ef9840b0e49f55fc0db365dfaa7bc14424c6
   Protobuf: d7f7c8329edf5eb8af65547a8ba3e9c1cee927d5
-  PurchasesHybridCommon: 6bc96162fb0c061e1980f474be618c088cfd1428
+  PurchasesHybridCommon: fad1084d9781388e181c8b855caf7a5853cebcb3
   RCT-Folly: 59ec0ac1f2f39672a0c6e6cecdd39383b764646f
   RCTDeprecation: c0ed3249a97243002615517dff789bf4666cf585
   RCTRequired: 58719f5124f9267b5f9649c08bf23d9aea845b23
@@ -3821,7 +3821,7 @@ SPEC CHECKSUMS:
   react-native-ota-hot-update: da29e47b9368ba4a799c00af90a2d675810b722e
   react-native-pager-view: 6119e1d6414e2fcbf2c3c378d261f73c4a49b667
   react-native-safe-area-context: 3e0a25a843c40ad5efdf2bef93fdd95ad7229650
-  react-native-skia: f63b73837e21e6d3f80d6336fd2fb23e90bd9a53
+  react-native-skia: 075958f53dd298617bc184b0f9e3b1fed68faa04
   react-native-slider: 99493fd3e7254ea482be59fbd94467e737d2b849
   react-native-svga-player: f1c7faf0864b22437b9b7cc7d7aa202d56f3906c
   react-native-track-player: 473b1ed1a554b919f9dedc7efc83791dd1a3327a
@@ -3859,18 +3859,18 @@ SPEC CHECKSUMS:
   ReactAppDependencyProvider: b20fba6c3d091a393925890009999472c8f94d95
   ReactCodegen: fba9f7cf6a6ac816e9843b3b015a71067afd34bc
   ReactCommon: a42100667ef42807c485a579847a5ec2c99e0a82
-  RevenueCat: 4743a5eee0004e1c03eabeb3498818f902a5d622
+  RevenueCat: 02c8d0082d3373bcbc831faa600943d6ba6cad6e
   RNCMaskedView: 8bfc13a356455b15d56114738f4d2a804769c1bf
   RNDeviceInfo: 8b6fa8379062949dd79a009cf3d6b02a9c03ca59
   RNGestureHandler: 9339994ea5d1ff6ad2679b7d0cc3d49053111369
   RNNotifee: 4a6ee5c7deaf00e005050052d73ee6315dff7ec9
-  RNPurchases: 7b447c685ba8e2e7e67d5357abf1e34467891b3b
-  RNReanimated: c32206c2c2a907e6ea6d1568d1d053ba7af3b687
+  RNPurchases: 9edfc1553f9bde02f12e66bf1641309e74cf1d9d
+  RNReanimated: 91d075aaf0c89d51a0708cd64cd6c77f7fa42cdc
   RNScreens: 871305075ddf1291411b051d86da9e0d9289de02
   RNSentry: f6ae0276fbcb6fbe1adde773832724a7661de8f0
   RNShareMenu: cb9dac548c8bf147d06f0bf07296ad51ea9f5fc3
   RNSVG: eb89274c113e61716163564ce319f60fa4427984
-  RNWorklets: 582ee5c59370d483a7a3c3f8a8014d48b1bff6bd
+  RNWorklets: e752b7443b51916158d3b6ca6700294827e8a1ea
   SDWebImage: 9f177d83116802728e122410fb25ad88f5c7608a
   SDWebImageAVIFCoder: afe194a084e851f70228e4be35ef651df0fc5c57
   SDWebImageSVGCoder: 15a300a97ec1c8ac958f009c02220ac0402e936c
