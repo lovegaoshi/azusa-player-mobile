@@ -26,29 +26,21 @@ jobs:
 
       - name: React Native Build Setup
         uses: ./.github/composite-actions/RN-setup
-
-      - name: Add Build Sign Keys
-        run: |
-          echo "${{ secrets.RELEASE_SIGN_PWD }}" >> ./android/gradle.properties
-
-      - name: Build Sign jks
-        id: write_file
-        uses: timheuer/base64-to-file@v1.2
         with:
-          fileName: 'noxupload.jks'
-          fileDir: './android/app'
-          encodedString: ${{ secrets.SIGNED_KEY_BASE64 }}
+          env: ${{ secrets.ENV_FILE }}
+          sentry: ${{ secrets.SENTRY_PROPERTIES }}
 
       - name: python fixHTTP
         run: |
           python ./scripts/dev_cleartext.py
           python ./scripts/release_bump.py --dev
 
-      - name: clean generated builds
-        run: rm -rf android/app/build/generated/
+      - name: Build Android
+        uses: ./.github/composite-actions/build-apk
+        with:
+          signpwd: ${{ secrets.RELEASE_SIGN_PWD }}
+          signkey: ${{ secrets.SIGNED_KEY_BASE64 }}
 
-      - name: gradle build
-        run: cd android && chmod +x gradlew && ./gradlew generateCodegenArtifactsFromSchema --rerun-tasks && ./gradlew assembleRelease
 
       - name: Release
         uses: softprops/action-gh-release@v2

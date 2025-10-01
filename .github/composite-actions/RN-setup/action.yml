@@ -1,6 +1,14 @@
 name: Composite React Native Setup
 # setup everything react native needs (node, secret, etc)
 
+inputs:
+  env:
+    description: "env file content"
+    required: true
+  sentry:
+    description: "sentry file content"
+    required: true
+
 runs:
   using: "composite"
   steps:
@@ -28,8 +36,8 @@ runs:
 
     - name: 'Create env file'
       env:
-        ENV_FILE: ${{ secrets.ENV_FILE }}
-        SENTRY_PROPERTIES: ${{ secrets.SENTRY_PROPERTIES }}
+        ENV_FILE: ${{ inputs.env }}
+        SENTRY_PROPERTIES: ${{ inputs.sentry }}
       run: |
         echo "$ENV_FILE" > .env
         echo "$SENTRY_PROPERTIES" > ./android/sentry.properties
