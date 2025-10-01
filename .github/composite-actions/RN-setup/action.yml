@@ -48,18 +48,6 @@ runs:
       run: alias yarn.cmd="yarn"
       shell: bash
 
-    - name: Get Recent Commit Tag
-      id: get_commit_tag
-      run: |
-        COMMIT_TAG=$(git describe --tags --abbrev=0)
-        echo "COMMIT_TAG=${COMMIT_TAG}" >> $GITHUB_ENV
-      shell: bash
-
-    - name: Display Commit Tag
-      run: |
-        echo "Commit Tag: $COMMIT_TAG"
-      shell: bash
-
     - name: Install dependencies
       run: yarn install; yarn build
       shell: bash

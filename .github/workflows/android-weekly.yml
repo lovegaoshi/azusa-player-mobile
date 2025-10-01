@@ -41,7 +41,6 @@ jobs:
           signpwd: ${{ secrets.RELEASE_SIGN_PWD }}
           signkey: ${{ secrets.SIGNED_KEY_BASE64 }}
 
-
       - name: Release
         uses: softprops/action-gh-release@v2
         with:

@@ -8,6 +8,9 @@ inputs:
   signkey:
     description: "signed key in base64"
     required: true
+  buildtype:
+    description: "build type (APK/AAB)"
+    default: "assembleRelease"
 
 runs:
   using: "composite"
@@ -31,5 +34,5 @@ runs:
       shell: bash
 
     - name: gradle build
-      run: cd android && chmod +x gradlew && ./gradlew generateCodegenArtifactsFromSchema --rerun-tasks && ./gradlew assembleRelease
+      run: cd android && chmod +x gradlew && ./gradlew generateCodegenArtifactsFromSchema --rerun-tasks && ./gradlew ${{ inputs.buildtype }}
       shell: bash

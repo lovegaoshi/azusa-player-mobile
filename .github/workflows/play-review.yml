@@ -35,23 +35,12 @@ jobs:
           echo "APPSTORE=true" >> .env
           echo "TRACKING=true" >> .env
 
-      - name: Add Build Sign Keys
-        run: |          
-          echo "${{ secrets.RELEASE_SIGN_PWD }}" >> ./android/gradle.properties
-
-      - name: Build Sign jks
-        id: write_file
-        uses: timheuer/base64-to-file@v1.2
+      - name: Build Android
+        uses: ./.github/composite-actions/build-apk
         with:
-          fileName: 'noxupload.jks'
-          fileDir: './android/app'
-          encodedString: ${{ secrets.SIGNED_KEY_BASE64 }}
-
-      - name: clean generated builds
-        run: rm -rf android/app/build/generated/
-
-      - name: gradle build AAB
-        run: cd android && chmod +x gradlew && ./gradlew generateCodegenArtifactsFromSchema --rerun-tasks && ./gradlew bundleRelease
+          signpwd: ${{ secrets.RELEASE_SIGN_PWD }}
+          signkey: ${{ secrets.SIGNED_KEY_BASE64 }}
+          buildtype: bundleRelease
 
       - name: Push changes to master
         uses: ad-m/github-push-action@master

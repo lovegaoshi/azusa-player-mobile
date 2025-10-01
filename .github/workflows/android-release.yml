@@ -14,6 +14,9 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Get Commit Tag
+        uses: ./.github/composite-actions/commit-tag
+
       - name: Android Build Setup
         uses: ./.github/composite-actions/android-runner-setup
 
@@ -56,6 +59,9 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Get Commit Tag
+        uses: ./.github/composite-actions/commit-tag
+
       - name: Android Build Setup
         uses: ./.github/composite-actions/android-runner-setup
 
@@ -85,23 +91,12 @@ jobs:
         with:
           tags: true
 
-      - name: Add Build Sign Keys
-        run: |
-          echo "${{ secrets.RELEASE_SIGN_PWD }}" >> ./android/gradle.properties
-
-      - name: Build Sign jks
-        id: write_file
-        uses: timheuer/base64-to-file@v1.2
+      - name: Build Android
+        uses: ./.github/composite-actions/build-apk
         with:
-          fileName: 'noxupload.jks'
-          fileDir: './android/app'
-          encodedString: ${{ secrets.SIGNED_KEY_BASE64 }}
-
-      - name: clean generated builds
-        run: rm -rf android/app/build/generated/
-
-      - name: gradle build AAB
-        run: cd android && chmod +x gradlew && ./gradlew generateCodegenArtifactsFromSchema --rerun-tasks && ./gradlew bundleRelease
+          signpwd: ${{ secrets.RELEASE_SIGN_PWD }}
+          signkey: ${{ secrets.SIGNED_KEY_BASE64 }}
+          buildtype: bundleRelease
 
       - uses: actions/upload-artifact@v4
         with:
@@ -125,6 +120,9 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Get Commit Tag
+        uses: ./.github/composite-actions/commit-tag
+
       - name: React Native Build Setup
         uses: ./.github/composite-actions/RN-setup  
         with:
@@ -133,26 +131,10 @@ jobs:
     
       - name: 'Create env file'
         run: |
-          sudo xcode-select -switch /Applications/Xcode_26.0.app
           echo "APPSTORE=true" >> .env
 
-      - name: Install dependencies
-        run: yarn ios:build
-
-      - name: python fixHTTP
-        run: |
-          python ./scripts/fixiOSBuild.py
-
-      - name: build
-        run: cd ios && xcodebuild -scheme APM -workspace example.xcworkspace -configuration Release clean archive -archivePath "build/APM.xcarchive" CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO CODE_SIGNING_ALLOWED=NO
-
-      - name: archive to ipa
-        run: |
-          cd ios
-          mkdir build/Payload
-          mv build/APM.xcarchive/Products/Applications/AzusaPlayer.app build/Payload/AzusaPlayer.app
-          cd build
-          zip -r APM.ipa Payload/
+      - name: Build IPA
+        uses: ./.github/composite-actions/build-ipa
 
       - name: Release IPA
         uses: softprops/action-gh-release@v2

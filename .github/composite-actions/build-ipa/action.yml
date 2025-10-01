@@ -1,0 +1,32 @@
+name: iOS Build
+# build for iOS IPA
+
+runs:
+  using: "composite"
+  steps:
+    - name: select xcode
+      run: |
+        sudo xcode-select -switch /Applications/Xcode_26.0.app
+      shell: bash
+
+    - name: Install dependencies
+      run: yarn ios:build
+      shell: bash
+
+    - name: fix ios build
+      run: |
+        python ./scripts/fixiOSBuild.py
+      shell: bash
+
+    - name: build
+      run: cd ios  && xcodebuild -downloadPlatform iOS && xcodebuild -scheme APM -workspace example.xcworkspace -destination generic/platform=iOS -configuration Release clean archive -archivePath "build/APM.xcarchive" CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO CODE_SIGNING_ALLOWED=NO
+      shell: bash
+
+    - name: archive to ipa
+      run: |
+        cd ios
+        mkdir build/Payload
+        mv build/APM.xcarchive/Products/Applications/AzusaPlayer.app build/Payload/AzusaPlayer.app
+        cd build
+        zip -r APM.ipa Payload/
+      shell: bash

@@ -26,27 +26,14 @@ jobs:
     
       - name: 'Create env file'
         run: |
-          sudo xcode-select -switch /Applications/Xcode_26.0.app
           echo "APPSTORE=true" >> .env
-
-      - name: Install dependencies
-        run: yarn ios:build
 
       - name: python fixHTTP
         run: |
-          python ./scripts/fixiOSBuild.py
           python ./scripts/release_bump.py --dev
 
-      - name: build
-        run: cd ios  && xcodebuild -downloadPlatform iOS && xcodebuild -scheme APM -workspace example.xcworkspace -destination generic/platform=iOS -configuration Release clean archive -archivePath "build/APM.xcarchive" CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO CODE_SIGNING_ALLOWED=NO
-
-      - name: archive to ipa
-        run: |
-          cd ios
-          mkdir build/Payload
-          mv build/APM.xcarchive/Products/Applications/AzusaPlayer.app build/Payload/AzusaPlayer.app
-          cd build
-          zip -r APM.ipa Payload/
+      - name: Build IPA
+        uses: ./.github/composite-actions/build-ipa
 
       - name: Release
         uses: softprops/action-gh-release@v2
