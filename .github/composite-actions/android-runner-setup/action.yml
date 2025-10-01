@@ -1,0 +1,27 @@
+name: Composite Android Runner Setup
+description: RN new arch android build sometimes run out of space so it needs special handling
+
+runs:
+  using: "composite"
+  steps:
+    - name: Free Disk Space (Ubuntu)
+      uses: jlumbroso/free-disk-space@main
+      with:
+        # this might remove tools that are actually needed,
+        # if set to "true" but frees about 6 GB
+        tool-cache: false
+
+        # all of these default to true, but feel free to set to
+        # "false" if necessary for your workflow
+        android: false
+        dotnet: true
+        haskell: true
+        large-packages: true
+        docker-images: true
+        swap-storage: false
+
+    - name: set up JDK 18
+      uses: actions/setup-java@v4
+      with:
+        java-version: 18
+        distribution: temurin

@@ -6,9 +6,7 @@ on:
 jobs:
   GiteeSync:
     runs-on: ubuntu-latest
-    name: Check latest commit
-    outputs:
-      should_run: ${{ steps.should_run.outputs.should_run }}
+    name: Sync to Gitee
     steps:
       - name: Mirror the Github organization repos to Gitee.
         uses: Yikun/hub-mirror-action@master

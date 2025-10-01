@@ -11,21 +11,8 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Free Disk Space (Ubuntu)
-        uses: jlumbroso/free-disk-space@main
-        with:
-          # this might remove tools that are actually needed,
-          # if set to "true" but frees about 6 GB
-          tool-cache: false
-
-          # all of these default to true, but feel free to set to
-          # "false" if necessary for your workflow
-          android: false
-          dotnet: true
-          haskell: true
-          large-packages: true
-          docker-images: true
-          swap-storage: false
+      - name: Android Build Setup
+        uses: ./.github/composite-actions/android-runner-setup
 
       - name: python version_bump.py
         run: |
@@ -37,71 +24,23 @@ jobs:
           git config --global user.name lovegaoshi
           git commit -m "build: release version bump" -a
 
-      - name: Get branch name
-        run: |
-          # Short name for current branch. For PRs, use target branch (base ref)
-          GIT_BRANCH=${GITHUB_BASE_REF:-${GITHUB_REF#refs/heads/}}
-          echo "GIT_BRANCH=$GIT_BRANCH" >> $GITHUB_ENV
-
-      - name: Get current date
-        id: date
-        run: echo "date=$(date +'%Y-%m-%d')" >> $GITHUB_OUTPUT
-
-      - name: set up JDK 18
-        uses: actions/setup-java@v4
+      - name: React Native Build Setup
+        uses: ./.github/composite-actions/RN-setup  
         with:
-          java-version: 18
-          distribution: temurin
-
-      - name: enable corepack
-        run: corepack enable
-
-      - name: Set up Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '22'
-          cache: 'yarn'
-
+          env: ${{ secrets.ENV_FILE }}
+          sentry: ${{ secrets.SENTRY_PROPERTIES }}
+    
       - name: 'Create env file'
-        env:
-          ENV_FILE: ${{ secrets.ENV_FILE }}
-          SENTRY_PROPERTIES: ${{ secrets.SENTRY_PROPERTIES }}
         run: |
-          echo "$ENV_FILE" > .env
-          echo "$SENTRY_PROPERTIES" > ./android/sentry.properties
           echo "APPSTORE=true" >> .env
           echo "TRACKING=true" >> .env
 
-      - name: alias yarn.cmd to yarn
-        run: alias yarn.cmd="yarn"
-
-      - name: Add Build Sign Keys
-        env:
-          RELEASE_SIGN_PWD: ${{ secrets.RELEASE_SIGN_PWD }}
-        run: |
-          git submodule update --init --recursive
-          echo "$RELEASE_SIGN_PWD" >> ./android/gradle.properties
-
-      - name: Build Sign jks
-        id: write_file
-        uses: timheuer/base64-to-file@v1.2
+      - name: Build Android
+        uses: ./.github/composite-actions/build-apk
         with:
-          fileName: 'noxupload.jks'
-          fileDir: './android/app'
-          encodedString: ${{ secrets.SIGNED_KEY_BASE64 }}
-
-      - name: Install dependencies
-        run: yarn install; yarn build
-
-      - name: python fixHTTP
-        run: |
-          python ./scripts/fixHTTP.py
-
-      - name: clean generated builds
-        run: rm -rf android/app/build/generated/
-
-      - name: gradle build AAB
-        run: cd android && chmod +x gradlew && ./gradlew generateCodegenArtifactsFromSchema --rerun-tasks && ./gradlew bundleRelease
+          signpwd: ${{ secrets.RELEASE_SIGN_PWD }}
+          signkey: ${{ secrets.SIGNED_KEY_BASE64 }}
+          buildtype: bundleRelease
 
       - name: Push changes to master
         uses: ad-m/github-push-action@master

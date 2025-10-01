@@ -1,0 +1,46 @@
+name: Reusable Check Last Commit
+# checks if the last commit is within 1 week old. used to skip running on codes > 1 week old
+
+on:
+  workflow_call:
+    # Map the workflow outputs to job outputs
+    outputs:
+      is_new_commit:
+        description: "is_new_commit? true or false"
+        value: ${{ jobs.checkLastCommit.outputs.is_new_commit }}
+
+jobs:
+  checkLastCommit:
+    runs-on: ubuntu-latest
+    name: Check latest commit
+    outputs:
+      is_new_commit: ${{ steps.is_new_commit.outputs.is_new_commit }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: print latest_commit
+        run: echo ${{ github.sha }}
+
+      - name: Get Last Commit Date
+        id: commit_date
+        run: |
+          LAST_COMMIT_DATE=$(git log -1 --format=%ct)
+          echo "LAST_COMMIT_DATE=${LAST_COMMIT_DATE}" >> $GITHUB_ENV
+
+      - name: Calculate Time Difference
+        id: time_diff
+        run: |
+          CURRENT_DATE=$(date +%s)
+          SECONDS_IN_WEEK=$((60*60*24*7))
+          TIME_DIFF=$((CURRENT_DATE - LAST_COMMIT_DATE))
+          echo "TIME_DIFF=${TIME_DIFF}" >> $GITHUB_ENV
+
+      - name: Check Last Commit
+        id: is_new_commit
+        run: |
+          if [[ $TIME_DIFF -gt $((60*60*24*7)) ]]; then
+            echo "Last commit is older than a week."
+            echo "is_new_commit=false" >> $GITHUB_OUTPUT
+          else
+            echo "Last commit is within the past week."
+            echo "is_new_commit=true" >> $GITHUB_OUTPUT
+          fi

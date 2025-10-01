@@ -1,0 +1,17 @@
+name: get commit tag
+description: get commit tag for release
+
+runs:
+  using: "composite"
+  steps:
+    - name: Get Recent Commit Tag
+      id: get_commit_tag
+      run: |
+        COMMIT_TAG=$(git describe --tags --abbrev=0)
+        echo "COMMIT_TAG=${COMMIT_TAG}" >> $GITHUB_ENV
+      shell: bash
+
+    - name: Display Commit Tag
+      run: |
+        echo "Commit Tag: $COMMIT_TAG"
+      shell: bash

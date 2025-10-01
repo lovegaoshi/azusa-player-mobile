@@ -14,17 +14,11 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: enable corepack
-        run: corepack enable
-
-      - name: Set up Node.js
-        uses: actions/setup-node@v4
+      - name: React Native Build Setup
+        uses: ./.github/composite-actions/RN-setup  
         with:
-          node-version: '22'
-          cache: 'yarn'
-
-      - name: Install dependencies
-        run: yarn install; yarn build
+          env: ${{ secrets.ENV_FILE }}
+          sentry: ${{ secrets.SENTRY_PROPERTIES }}
 
       - name: lint & prettier
         run: |
@@ -33,5 +27,4 @@ jobs:
 
       - name: run tests
         run: |
-          git submodule update --init --recursive
           yarn test --runInBand
