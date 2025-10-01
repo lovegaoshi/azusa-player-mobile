@@ -81,9 +81,11 @@ jobs:
           echo "Commit Tag: $COMMIT_TAG"
 
       - name: Add Build Sign Keys
+        env:
+          RELEASE_SIGN_PWD: ${{ secrets.RELEASE_SIGN_PWD }}
         run: |
           git submodule update --init --recursive
-          echo "${{ secrets.RELEASE_SIGN_PWD }}" >> ./android/gradle.properties
+          echo "$RELEASE_SIGN_PWD" >> ./android/gradle.properties
 
       - name: commit
         run: |
@@ -214,9 +216,11 @@ jobs:
           tags: true
 
       - name: Add Build Sign Keys
+        env:
+          RELEASE_SIGN_PWD: ${{ secrets.RELEASE_SIGN_PWD }}
         run: |
           git submodule update --init --recursive
-          echo "${{ secrets.RELEASE_SIGN_PWD }}" >> ./android/gradle.properties
+          echo "$RELEASE_SIGN_PWD" >> ./android/gradle.properties
 
       - name: Build Sign jks
         id: write_file

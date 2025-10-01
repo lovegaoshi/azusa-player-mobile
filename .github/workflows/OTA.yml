@@ -89,9 +89,11 @@ jobs:
         run: alias yarn.cmd="yarn"
 
       - name: Add Build Sign Keys
+        env:
+          RELEASE_SIGN_PWD: ${{ secrets.RELEASE_SIGN_PWD }}
         run: |
           git submodule update --init --recursive
-          echo "${{ secrets.RELEASE_SIGN_PWD }}" >> ./android/gradle.properties
+          echo "$RELEASE_SIGN_PWD" >> ./android/gradle.properties
 
       - name: Build Sign jks
         id: write_file
@@ -114,12 +116,14 @@ jobs:
         run: rm -rf android/app/build/generated/
 
       - name: Push Build to Github
+        env:
+          GHTOKEN: ${{ secrets.GHTOKEN }}
         run: |
           yarn ota
           cd bundles
           git init
           git branch -m OTA
-          git remote add origin https://${{ secrets.GHTOKEN }}@github.com/lovegaoshi/azusa-player-mobile.git
+          git remote add origin https://"$GHTOKEN"@github.com/lovegaoshi/azusa-player-mobile.git
           git add .
           git config --global user.email "love@gaoshi.com"
           git config --global user.name "gaoshi"
