@@ -18,11 +18,11 @@ jobs:
     permissions:
       contents: write
     steps:
-      - name: Android Build Setup
-        uses: ./.github/workflows/composite-android-runner-setup.yml
-
       - name: Checkout
         uses: actions/checkout@v4
+
+      - name: Android Build Setup
+        uses: ./.github/composite-actions/composite-android-runner-setup.yml
 
       - name: Get branch name
         run: |
