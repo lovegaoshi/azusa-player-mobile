@@ -22,7 +22,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Android Build Setup
-        uses: ./.github/composite-actions/android-runner-setup/action.yml
+        uses: ./.github/composite-actions/android-runner-setup
 
       - name: Get branch name
         run: |
