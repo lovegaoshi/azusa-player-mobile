@@ -36,11 +36,11 @@ jobs:
 
       - name: enable corepack
         run: |
-          corepack enable; yarn set version berry
+          corepack enable; corepack prepare yarn@4.9.1 --activate; yarn set version berry
 
       - name: enable corepack
         run: |
-          corepack enable; yarn set version berry
+          corepack enable;corepack prepare yarn@4.9.1 --activate; yarn set version berry
         shell: cmd
 
       - name: React Native Build Setup
