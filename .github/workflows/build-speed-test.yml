@@ -31,6 +31,9 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Setup Android SDK
+        uses: android-actions/setup-android@v3
+        
       - name: Android Build Setup
         uses: ./.github/composite-actions/android-runner-setup
 
