@@ -9,38 +9,7 @@ on:
   workflow_dispatch:
 jobs:
   checkLastCommit:
-    runs-on: ubuntu-latest
-    name: Check latest commit
-    outputs:
-      should_run: ${{ steps.should_run.outputs.should_run }}
-    steps:
-      - uses: actions/checkout@v4
-      - name: print latest_commit
-        run: echo ${{ github.sha }}
-
-      - name: Get Last Commit Date
-        id: commit_date
-        run: |
-          LAST_COMMIT_DATE=$(git log -1 --format=%ct)
-          echo "LAST_COMMIT_DATE=${LAST_COMMIT_DATE}" >> $GITHUB_ENV
-
-      - name: Calculate Time Difference
-        id: time_diff
-        run: |
-          CURRENT_DATE=$(date +%s)
-          SECONDS_IN_WEEK=$((60*60*24*7))
-          TIME_DIFF=$((CURRENT_DATE - LAST_COMMIT_DATE))
-          echo "TIME_DIFF=${TIME_DIFF}" >> $GITHUB_ENV
-
-      - name: Check Last Commit
-        run: |
-          if [[ $TIME_DIFF -gt $((60*60*24*7)) ]]; then
-            echo "Last commit is older than a week."
-            echo "is_old_commit=true" >> $GITHUB_OUTPUT
-          else
-            echo "Last commit is within the past week."
-            echo "is_old_commit=false" >> $GITHUB_OUTPUT
-          fi
+    uses: ./.github/workflows/reuse-check-last-commit.yml
   build:
     name: Build
     runs-on: ubuntu-latest
