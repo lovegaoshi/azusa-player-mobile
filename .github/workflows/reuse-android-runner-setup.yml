@@ -1,6 +1,9 @@
 name: Reusable Android Runner Setup
 # RN new arch android build sometimes run out of space so it needs special handling
 
+on:
+  workflow_call:
+  
 jobs:
   androidSetup:
     runs-on: ubuntu-latest
