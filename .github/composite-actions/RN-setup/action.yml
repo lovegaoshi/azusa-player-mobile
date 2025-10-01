@@ -1,0 +1,49 @@
+name: Composite React Native Setup
+# setup everything react native needs (node, secret, etc)
+
+runs:
+  using: "composite"
+  steps:
+    - name: Get branch name
+      run: |
+        # Short name for current branch. For PRs, use target branch (base ref)
+        GIT_BRANCH=${GITHUB_BASE_REF:-${GITHUB_REF#refs/heads/}}
+        echo "GIT_BRANCH=$GIT_BRANCH" >> $GITHUB_ENV
+
+    - name: Get current date
+      id: date
+      run: echo "date=$(date +'%Y-%m-%d')" >> $GITHUB_OUTPUT
+
+    - name: enable corepack
+      run: corepack enable
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '22'
+        cache: 'yarn'
+
+    - name: 'Create env file'
+      env:
+        ENV_FILE: ${{ secrets.ENV_FILE }}
+        SENTRY_PROPERTIES: ${{ secrets.SENTRY_PROPERTIES }}
+      run: |
+        echo "$ENV_FILE" > .env
+        echo "$SENTRY_PROPERTIES" > ./android/sentry.properties
+        echo "$SENTRY_PROPERTIES" > ./ios/sentry.properties
+      
+    - name: alias yarn.cmd to yarn
+      run: alias yarn.cmd="yarn"
+
+    - name: Get Recent Commit Tag
+      id: get_commit_tag
+      run: |
+        COMMIT_TAG=$(git describe --tags --abbrev=0)
+        echo "COMMIT_TAG=${COMMIT_TAG}" >> $GITHUB_ENV
+
+    - name: Display Commit Tag
+      run: |
+        echo "Commit Tag: $COMMIT_TAG"
+
+    - name: Install dependencies
+      run: yarn install; yarn build

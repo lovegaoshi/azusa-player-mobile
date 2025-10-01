@@ -14,21 +14,8 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Free Disk Space (Ubuntu)
-        uses: jlumbroso/free-disk-space@main
-        with:
-          # this might remove tools that are actually needed,
-          # if set to "true" but frees about 6 GB
-          tool-cache: false
-
-          # all of these default to true, but feel free to set to
-          # "false" if necessary for your workflow
-          android: false
-          dotnet: true
-          haskell: true
-          large-packages: true
-          docker-images: true
-          swap-storage: false
+      - name: Android Build Setup
+        uses: ./.github/composite-actions/android-runner-setup
 
       - name: python version_bump.py
         run: |
@@ -43,12 +30,6 @@ jobs:
       - name: Get current date
         id: date
         run: echo "date=$(date +'%Y-%m-%d')" >> $GITHUB_OUTPUT
-
-      - name: set up JDK 18
-        uses: actions/setup-java@v4
-        with:
-          java-version: 18
-          distribution: temurin
 
       - name: enable corepack
         run: corepack enable
@@ -135,21 +116,8 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Free Disk Space (Ubuntu)
-        uses: jlumbroso/free-disk-space@main
-        with:
-          # this might remove tools that are actually needed,
-          # if set to "true" but frees about 6 GB
-          tool-cache: false
-
-          # all of these default to true, but feel free to set to
-          # "false" if necessary for your workflow
-          android: false
-          dotnet: true
-          haskell: true
-          large-packages: true
-          docker-images: true
-          swap-storage: false
+      - name: Android Build Setup
+        uses: ./.github/composite-actions/android-runner-setup
 
       - name: python version_bump.py
         run: |
@@ -164,12 +132,6 @@ jobs:
       - name: Get current date
         id: date
         run: echo "date=$(date +'%Y-%m-%d')" >> $GITHUB_OUTPUT
-
-      - name: set up JDK 18
-        uses: actions/setup-java@v4
-        with:
-          java-version: 18
-          distribution: temurin
 
       - name: Set up Node.js
         uses: actions/setup-node@v4
@@ -291,7 +253,7 @@ jobs:
           SENTRY_PROPERTIES: ${{ secrets.SENTRY_PROPERTIES }}
         run: |
           echo "$ENV_FILE" > .env
-          echo "$SENTRY_PROPERTIES" > ./android/sentry.properties
+          echo "$SENTRY_PROPERTIES" > ./ios/sentry.properties
           sudo xcode-select -switch /Applications/Xcode_26.0.app
           echo "APPSTORE=true" >> .env
           git submodule update --init --recursive

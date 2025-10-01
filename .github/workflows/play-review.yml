@@ -11,22 +11,9 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Free Disk Space (Ubuntu)
-        uses: jlumbroso/free-disk-space@main
-        with:
-          # this might remove tools that are actually needed,
-          # if set to "true" but frees about 6 GB
-          tool-cache: false
-
-          # all of these default to true, but feel free to set to
-          # "false" if necessary for your workflow
-          android: false
-          dotnet: true
-          haskell: true
-          large-packages: true
-          docker-images: true
-          swap-storage: false
-
+      - name: Android Build Setup
+        uses: ./.github/composite-actions/android-runner-setup
+        
       - name: python version_bump.py
         run: |
           python ./scripts/version_bump.py
@@ -46,12 +33,6 @@ jobs:
       - name: Get current date
         id: date
         run: echo "date=$(date +'%Y-%m-%d')" >> $GITHUB_OUTPUT
-
-      - name: set up JDK 18
-        uses: actions/setup-java@v4
-        with:
-          java-version: 18
-          distribution: temurin
 
       - name: enable corepack
         run: corepack enable
