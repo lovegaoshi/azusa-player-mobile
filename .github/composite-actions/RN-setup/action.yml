@@ -9,6 +9,11 @@ inputs:
     description: "sentry file content"
     required: true
 
+outputs:
+  date:
+    description: current date
+    value: ${{ steps.date.outputs.date }}
+
 runs:
   using: "composite"
   steps:

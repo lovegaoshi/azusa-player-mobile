@@ -19,6 +19,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: React Native Build Setup
+        id: rnsetup
         uses: ./.github/composite-actions/RN-setup  
         with:
           env: ${{ secrets.ENV_FILE }}
@@ -38,7 +39,7 @@ jobs:
       - name: Release
         uses: softprops/action-gh-release@v2
         with:
-          tag_name: ${{ env.GIT_BRANCH }}-build-${{ steps.date.outputs.date }}
+          tag_name: ${{ env.GIT_BRANCH }}-build-${{ steps.rnsetup.outputs.date }}
           files: ios/build/APM.ipa
           prerelease: true
           target_commitish: ${{ env.GIT_BRANCH }}
