@@ -32,12 +32,14 @@ jobs:
           python ./scripts/release_bump.py --dev
 
       - name: Push Build to Github
+        env:
+          GHTOKEN: ${{ secrets.GHTOKEN }}
         run: |
           yarn ota
           cd bundles
           git init
           git branch -m OTA
-          git remote add origin https://${{ secrets.GHTOKEN }}@github.com/lovegaoshi/azusa-player-mobile.git
+          git remote add origin https://"$GHTOKEN"@github.com/lovegaoshi/azusa-player-mobile.git
           git add .
           git config --global user.email "love@gaoshi.com"
           git config --global user.name "gaoshi"
