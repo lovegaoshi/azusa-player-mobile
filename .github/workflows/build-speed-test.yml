@@ -36,7 +36,7 @@ jobs:
 
       - name: enable corepack
         run: |
-        corepack enable; yarn set version berry
+          corepack enable; yarn set version berry
 
       - name: enable corepack
         run: |
