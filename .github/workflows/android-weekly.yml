@@ -29,7 +29,6 @@ jobs:
 
       - name: Add Build Sign Keys
         run: |
-          git submodule update --init --recursive
           echo "${{ secrets.RELEASE_SIGN_PWD }}" >> ./android/gradle.properties
 
       - name: Build Sign jks
@@ -42,7 +41,6 @@ jobs:
 
       - name: python fixHTTP
         run: |
-          python ./scripts/fixHTTP.py
           python ./scripts/dev_cleartext.py
           python ./scripts/release_bump.py --dev
 

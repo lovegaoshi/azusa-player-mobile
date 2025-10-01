@@ -18,45 +18,19 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Get branch name
-        run: |
-          # Short name for current branch. For PRs, use target branch (base ref)
-          GIT_BRANCH=${GITHUB_BASE_REF:-${GITHUB_REF#refs/heads/}}
-          echo "GIT_BRANCH=$GIT_BRANCH" >> $GITHUB_ENV
-
-      - name: Get current date
-        id: date
-        run: echo "date=$(date +'%Y-%m-%d')" >> $GITHUB_OUTPUT
-
-      - name: enable corepack
-        run: corepack enable
-
-      - name: Set up Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '22'
-          cache: 'yarn'
-
+      - name: React Native Build Setup
+        uses: ./.github/composite-actions/RN-setup  
+    
       - name: 'Create env file'
-        env:
-          ENV_FILE: ${{ secrets.ENV_FILE }}
-          SENTRY_PROPERTIES: ${{ secrets.SENTRY_PROPERTIES }}
         run: |
-          echo "$ENV_FILE" > .env
-          echo "$SENTRY_PROPERTIES" > ./ios/sentry.properties
           sudo xcode-select -switch /Applications/Xcode_26.0.app
           echo "APPSTORE=true" >> .env
-          git submodule update --init --recursive
-
-      - name: alias yarn.cmd to yarn
-        run: alias yarn.cmd="yarn"
 
       - name: Install dependencies
-        run: yarn install; yarn ios:build
+        run: yarn ios:build
 
       - name: python fixHTTP
         run: |
-          python ./scripts/fixHTTP.py
           python ./scripts/fixiOSBuild.py
           python ./scripts/release_bump.py --dev
 

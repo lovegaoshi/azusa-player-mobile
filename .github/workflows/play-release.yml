@@ -24,43 +24,18 @@ jobs:
           git config --global user.name lovegaoshi
           git commit -m "build: release version bump" -a
 
-      - name: Get branch name
-        run: |
-          # Short name for current branch. For PRs, use target branch (base ref)
-          GIT_BRANCH=${GITHUB_BASE_REF:-${GITHUB_REF#refs/heads/}}
-          echo "GIT_BRANCH=$GIT_BRANCH" >> $GITHUB_ENV
-
-      - name: Get current date
-        id: date
-        run: echo "date=$(date +'%Y-%m-%d')" >> $GITHUB_OUTPUT
-
-      - name: enable corepack
-        run: corepack enable
-
-      - name: Set up Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '22'
-          cache: 'yarn'
+      - name: React Native Build Setup
+        uses: ./.github/composite-actions/RN-setup  
 
       - name: 'Create env file'
-        env:
-          ENV_FILE: ${{ secrets.ENV_FILE }}
-          SENTRY_PROPERTIES: ${{ secrets.SENTRY_PROPERTIES }}
         run: |
-          echo "$ENV_FILE" > .env
-          echo "$SENTRY_PROPERTIES" > ./android/sentry.properties
           echo "APPSTORE=true" >> .env
           echo "TRACKING=true" >> .env
           # enables OTA hot update
           python scripts/hashyarnlock.py
 
-      - name: alias yarn.cmd to yarn
-        run: alias yarn.cmd="yarn"
-
       - name: Add Build Sign Keys
         run: |
-          git submodule update --init --recursive
           echo "${{ secrets.RELEASE_SIGN_PWD }}" >> ./android/gradle.properties
 
       - name: Build Sign jks
@@ -70,13 +45,6 @@ jobs:
           fileName: 'noxupload.jks'
           fileDir: './android/app'
           encodedString: ${{ secrets.SIGNED_KEY_BASE64 }}
-
-      - name: Install dependencies
-        run: yarn install; yarn build
-
-      - name: python fixHTTP
-        run: |
-          python ./scripts/fixHTTP.py
 
       - name: clean generated builds
         run: rm -rf android/app/build/generated/
