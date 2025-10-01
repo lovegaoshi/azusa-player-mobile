@@ -27,7 +27,6 @@ runs:
         fileName: 'noxupload.jks'
         fileDir: './android/app'
         encodedString: ${{ inputs.signkey }}
-      shell: bash
         
     - name: clean generated builds
       run: rm -rf android/app/build/generated/
