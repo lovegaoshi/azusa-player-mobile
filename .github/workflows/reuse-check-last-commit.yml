@@ -38,8 +38,8 @@ jobs:
         run: |
           if [[ $TIME_DIFF -gt $((60*60*24*7)) ]]; then
             echo "Last commit is older than a week."
-            echo "is_old_commit=true" >> $GITHUB_OUTPUT
+            echo "is_old_commit=false" >> $GITHUB_OUTPUT
           else
             echo "Last commit is within the past week."
-            echo "is_old_commit=false" >> $GITHUB_OUTPUT
+            echo "is_old_commit=true" >> $GITHUB_OUTPUT
           fi

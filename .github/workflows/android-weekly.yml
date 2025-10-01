@@ -10,11 +10,20 @@ on:
 jobs:
   checkLastCommit:
     uses: ./.github/workflows/reuse-check-last-commit.yml
+  debug:
+    name: Debug
+    runs-on: ubuntu-latest
+    needs: checkLastCommit
+    permissions:
+      contents: write
+    steps:
+      - run: echo ${{ needs.checkLastCommit.outputs.is_old_commit }}
+      
   build:
     name: Build
     runs-on: ubuntu-latest
     needs: checkLastCommit
-    if: ${{ needs.checkLastCommit.outputs.is_old_commit == false }}
+    if: ${{ needs.checkLastCommit.outputs.is_old_commit }}
     permissions:
       contents: write
     steps:
