@@ -3,6 +3,7 @@ name: Reusable Android Runner Setup
 
 jobs:
   androidSetup:
+    runs-on: ubuntu-latest
     steps:
       - name: Free Disk Space (Ubuntu)
         uses: jlumbroso/free-disk-space@main
