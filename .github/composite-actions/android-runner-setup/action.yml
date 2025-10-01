@@ -1,5 +1,5 @@
 name: Composite Android Runner Setup
-# RN new arch android build sometimes run out of space so it needs special handling
+description: RN new arch android build sometimes run out of space so it needs special handling
 
 runs:
   using: "composite"

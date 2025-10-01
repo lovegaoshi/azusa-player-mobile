@@ -1,5 +1,5 @@
 name: Composite React Native Setup
-# setup everything react native needs (node, secret, etc)
+description: setup everything react native needs (node, secret, etc)
 
 inputs:
   env:

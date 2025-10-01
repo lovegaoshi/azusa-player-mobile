@@ -1,5 +1,5 @@
 name: Android Build
-# build for android APK
+description: build for android APK
 
 inputs:
   signpwd:

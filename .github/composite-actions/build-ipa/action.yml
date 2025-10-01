@@ -1,5 +1,5 @@
 name: iOS Build
-# build for iOS IPA
+description: build for iOS IPA
 
 runs:
   using: "composite"
