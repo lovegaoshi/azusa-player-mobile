@@ -11,6 +11,10 @@ inputs:
   buildtype:
     description: "build type (APK/AAB)"
     default: "assembleRelease"
+    type: choice
+    options:
+      - assembleRelease
+      - bundleRelease
 
 runs:
   using: "composite"
@@ -35,5 +39,7 @@ runs:
       shell: bash
 
     - name: gradle build
-      run: cd android && chmod +x gradlew && ./gradlew generateCodegenArtifactsFromSchema --rerun-tasks && ./gradlew ${{ inputs.buildtype }}
+      env: 
+        BUILD: ${{ inputs.buildtype }}
+      run: cd android && chmod +x gradlew && ./gradlew generateCodegenArtifactsFromSchema --rerun-tasks && ./gradlew "$BUILD"
       shell: bash
