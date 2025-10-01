@@ -35,10 +35,14 @@ jobs:
         uses: ./.github/composite-actions/android-runner-setup
 
       - name: enable corepack
-        run: corepack enable
+        run: |
+          corepack enable
+          yarn set version berry
 
       - name: enable corepack
-        run: corepack enable
+        run: |
+          corepack enable
+          yarn set version berry
         shell: cmd
 
       - name: React Native Build Setup
