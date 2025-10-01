@@ -14,7 +14,7 @@ jobs:
     name: Build
     runs-on: ubuntu-latest
     needs: checkLastCommit
-    if: ${{ needs.checkLastCommit.outputs.is_old_commit }}
+    if: ${{ needs.checkLastCommit.outputs.is_new_commit }}
     permissions:
       contents: write
     steps:
