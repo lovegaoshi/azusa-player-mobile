@@ -69,11 +69,14 @@ jobs:
           cache: 'yarn'
 
       - name: 'Create env file'
+        env:
+          ENV_FILE: ${{ secrets.ENV_FILE }}
+          SENTRY_PROPERTIES: ${{ secrets.SENTRY_PROPERTIES }}
         run: |
+          echo "$ENV_FILE" > .env
+          echo "$SENTRY_PROPERTIES" > ./ios/sentry.properties
           sudo xcode-select -switch /Applications/Xcode_26.0.app
-          echo "${{ secrets.ENV_FILE }}" > .env
           echo "APPSTORE=true" >> .env
-          echo "${{ secrets.SENTRY_PROPERTIES }}" > ./ios/sentry.properties
           git submodule update --init --recursive
 
       - name: alias yarn.cmd to yarn

@@ -75,10 +75,13 @@ jobs:
           cache: 'yarn'
 
       - name: 'Create env file'
+        env:
+          ENV_FILE: ${{ secrets.ENV_FILE }}
+          SENTRY_PROPERTIES: ${{ secrets.SENTRY_PROPERTIES }}
         run: |
-          echo "${{ secrets.ENV_FILE }}" > .env
+          echo "$ENV_FILE" > .env
+          echo "$SENTRY_PROPERTIES" > ./android/sentry.properties
           echo "TRACKING=true" >> .env
-          echo "${{ secrets.SENTRY_PROPERTIES }}" > ./android/sentry.properties
           # enables OTA hot update
           python scripts/hashyarnlock.py
 

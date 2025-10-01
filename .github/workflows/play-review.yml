@@ -63,11 +63,14 @@ jobs:
           cache: 'yarn'
 
       - name: 'Create env file'
+        env:
+          ENV_FILE: ${{ secrets.ENV_FILE }}
+          SENTRY_PROPERTIES: ${{ secrets.SENTRY_PROPERTIES }}
         run: |
-          echo "${{ secrets.ENV_FILE }}" > .env
+          echo "$ENV_FILE" > .env
+          echo "$SENTRY_PROPERTIES" > ./android/sentry.properties
           echo "APPSTORE=true" >> .env
           echo "TRACKING=true" >> .env
-          echo "${{ secrets.SENTRY_PROPERTIES }}" > ./android/sentry.properties
 
       - name: alias yarn.cmd to yarn
         run: alias yarn.cmd="yarn"
