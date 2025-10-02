@@ -24,31 +24,6 @@ jobs:
           signpwd: ${{ secrets.RELEASE_SIGN_PWD }}
           signkey: ${{ secrets.SIGNED_KEY_BASE64 }}
 
-  build-apk-ubuntu-arm:
-    name: android-ubuntu-arm
-    runs-on: ubuntu-24.04-arm
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Setup Android SDK
-        uses: android-actions/setup-android@v3
-        
-      - name: Android Build Setup
-        uses: ./.github/composite-actions/android-runner-setup
-
-      - name: React Native Build Setup
-        uses: ./.github/composite-actions/RN-setup
-        with:
-          env: ${{ secrets.ENV_FILE }}
-          sentry: ${{ secrets.SENTRY_PROPERTIES }}
-
-      - name: Build Android
-        uses: ./.github/composite-actions/build-apk
-        with:
-          signpwd: ${{ secrets.RELEASE_SIGN_PWD }}
-          signkey: ${{ secrets.SIGNED_KEY_BASE64 }}
-
   buildIPA:
     runs-on: macos-latest
     name: build IPA
