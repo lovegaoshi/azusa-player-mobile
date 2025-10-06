@@ -45,7 +45,7 @@ export const Playlists = ({
   drawerOpen = true,
 }: {
   navigation: DrawerNavigationHelpers;
-  drawerOpen: boolean;
+  drawerOpen?: boolean;
 }) => {
   const [dialogOpen, setDialogOpen] = useState(false);
   const noxNavigation = useNavigation(navigation);
