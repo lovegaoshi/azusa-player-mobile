@@ -6,7 +6,7 @@ import Explore from '../explore/View';
 import LandscapeLyricView from './LandscapeLyric';
 import { SettingsLandscape as Settings } from '../setting/View';
 import Playlist from '../playlist/View';
-import Playlists from '../playlists/Playlists';
+import { Playlists } from '../playlists/Playlists';
 import DefaultScreenOption from '@enums/ScreenOption';
 
 const Stack = createNativeStackNavigator();

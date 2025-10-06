@@ -41,5 +41,5 @@ runs:
     - name: gradle build
       env: 
         BUILD: ${{ inputs.buildtype }}
-      run: cd android && chmod +x gradlew && ./gradlew generateCodegenArtifactsFromSchema --rerun-tasks && ./gradlew "$BUILD"
+      run: cd android && chmod +x gradlew && ./gradlew "$BUILD"
       shell: bash

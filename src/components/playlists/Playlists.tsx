@@ -40,9 +40,14 @@ const SearchPlaylistAsNewButton = ({
   );
 };
 
-export default ({ navigation }: { navigation: DrawerNavigationHelpers }) => {
+export const Playlists = ({
+  navigation,
+  drawerOpen = true,
+}: {
+  navigation: DrawerNavigationHelpers;
+  drawerOpen?: boolean;
+}) => {
   const [dialogOpen, setDialogOpen] = useState(false);
-  const [drawerOpen, setDrawerOpen] = useState(false);
   const noxNavigation = useNavigation(navigation);
   const isLandscape = useIsLandscape();
   const currentPlaylist = useNoxSetting(state => state.currentPlaylist);
@@ -57,14 +62,6 @@ export default ({ navigation }: { navigation: DrawerNavigationHelpers }) => {
   const scroll = useNoxSetting(state => state.incSongListScrollCounter);
   const { removePlaylist } = usePlaylistBrowseTree();
   const { TwoWayAlert } = useAlert();
-  const progress = useDrawerProgress();
-
-  useAnimatedReaction(
-    () => progress.value,
-    c => {
-      scheduleOnRN(setDrawerOpen, c === 1);
-    },
-  );
 
   // HACK: tried to make searchList draweritem button as addPlaylistButton, but
   // dialog disposes on textinput focus. created a dialog directly in this component
@@ -217,6 +214,20 @@ export default ({ navigation }: { navigation: DrawerNavigationHelpers }) => {
       </View>
     </View>
   );
+};
+
+export default ({ navigation }: { navigation: DrawerNavigationHelpers }) => {
+  const [drawerOpen, setDrawerOpen] = useState(false);
+  const progress = useDrawerProgress();
+
+  useAnimatedReaction(
+    () => progress.value,
+    c => {
+      scheduleOnRN(setDrawerOpen, c === 1);
+    },
+  );
+
+  return <Playlists navigation={navigation} drawerOpen={drawerOpen} />;
 };
 
 const styles = StyleSheet.create({
