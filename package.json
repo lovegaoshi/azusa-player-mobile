@@ -190,7 +190,7 @@
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-prettier": "^5.5.4",
     "eslint-plugin-react": "^7.37.5",
-    "eslint-plugin-react-hooks": "^7.0.0",
+    "eslint-plugin-react-hooks": "^5.2.0",
     "gts": "^6.0.2",
     "jest": "^30.2.0",
     "prettier": "^3.6.2",
@@ -205,5 +205,5 @@
     "node": ">=18.0.0"
   },
   "isSwift": true,
-  "packageManager": "yarn@4.9.1"
+  "packageManager": "yarn@4.10.3"
 }

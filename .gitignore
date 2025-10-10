@@ -77,9 +77,10 @@ NoxExport.json
 *.pyc
 test.js
 sentry.properties
-.yarn/install-state.gz
 test.mjs
 .vscode/settings.json
 
 bundles/
 lefthook.yml
+/.yarn
+.yarnrc.yml
