@@ -6,11 +6,11 @@ const regexFetch = async ({
   reExtracted,
   favList = [],
 }: NoxNetwork.RegexFetchProps): Promise<NoxNetwork.NoxRegexFetch> => {
-  const searchparams = Object.fromEntries(
+  const searchParams = Object.fromEntries(
     new URL('https://www.' + reExtracted[0]).searchParams,
   );
-  const limit = Number(searchparams.limit);
-  const getall = searchparams.getall !== undefined;
+  const limit = Number(searchParams.limit);
+  const getall = searchParams.getall !== undefined;
   logger.debug(`[ytbPlaylist] extracting playlist ${reExtracted[1]}`);
   try {
     const results = await fetchYtmPlaylist(

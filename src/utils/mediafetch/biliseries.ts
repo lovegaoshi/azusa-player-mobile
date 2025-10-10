@@ -14,18 +14,20 @@ import { bvFetch } from './bilivideo';
 import bfetch from '@utils/BiliFetch';
 
 const URL_BILISERIES_INFO =
-  'https://api.bilibili.com/x/series/archives?mid={mid}&series_id={sid}&only_normal=true&sort=desc&pn={pn}&ps=30';
+  'https://api.bilibili.com/x/series/archives?mid={mid}&series_id={sid}&only_normal=true&sort={sort}&pn={pn}&ps=30';
 
 export const fetchBiliSeriesList = async (
   mid: string,
   sid: string,
   favList: string[] = [],
+  reverse = false,
 ) => {
   logger.info('calling fetchBiliSeriesList');
   const res = await bfetch(
     URL_BILISERIES_INFO.replace('{mid}', mid)
       .replace('{sid}', sid)
-      .replace('{pn}', '0'),
+      .replace('{pn}', '0')
+      .replace('{sort}', reverse ? 'asc' : 'desc'),
   );
   const json = await res.json();
   const { data } = json;
@@ -48,13 +50,23 @@ const regexFetch = async ({
   progressEmitter = () => undefined,
   favList,
   useBiliTag,
-}: NoxNetwork.RegexFetchProps) =>
-  bvFetch({
-    bvids: await fetchBiliSeriesList(reExtracted[1], reExtracted[2], favList),
+}: NoxNetwork.RegexFetchProps) => {
+  const searchParams = Object.fromEntries(
+    new URL('https://www.' + reExtracted[0]).searchParams,
+  );
+
+  return bvFetch({
+    bvids: await fetchBiliSeriesList(
+      reExtracted[1],
+      reExtracted[2],
+      favList,
+      searchParams.reverse !== undefined,
+    ),
     useBiliTag: useBiliTag || false,
     progressEmitter,
     reExtracted: [] as unknown as RegExpExecArray,
   });
+};
 
 const resolveURL = () => undefined;
 

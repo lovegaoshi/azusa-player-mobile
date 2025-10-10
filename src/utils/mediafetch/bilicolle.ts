@@ -18,7 +18,7 @@ import { fetchBiliPaginatedAPI } from './paginatedbili';
 import { getBiliUser } from './biliuser';
 
 const URL_BILICOLLE_INFO =
-  'https://api.bilibili.com/x/polymer/web-space/seasons_archives_list?mid={mid}&season_id={sid}&sort_reverse=false&page_num={pn}&page_size=100';
+  'https://api.bilibili.com/x/polymer/web-space/seasons_archives_list?mid={mid}&season_id={sid}&sort_reverse={reverse}&page_num={pn}&page_size=100';
 
 const processMetadata = async (metadata: any) => {
   const userMetadata = await getBiliUser(metadata.meta.mid);
@@ -69,11 +69,14 @@ export const fetchBiliColleList = (
   sid: string,
   progressEmitter: NoxUtils.ProgressEmitter = () => undefined,
   favList: string[] = [],
+  reverse = false,
 ) => {
   logger.info('calling fetchBiliColleList');
 
   return fetchBiliPaginatedAPI({
-    url: URL_BILICOLLE_INFO.replace('{mid}', mid).replace('{sid}', sid),
+    url: URL_BILICOLLE_INFO.replace('{mid}', mid)
+      .replace('{sid}', sid)
+      .replace('{reverse}', reverse ? 'true' : 'false'),
     getMediaCount: (data: any) => data.meta.total,
     getPageSize: (data: any) => data.page.page_size,
     getItems: (js: any) => js.data.archives,
@@ -88,19 +91,25 @@ const regexFetch = async ({
   progressEmitter = () => undefined,
   favList,
   useBiliTag,
-}: NoxNetwork.RegexFetchProps): Promise<NoxNetwork.NoxRegexFetch> => ({
-  songList: await biliShazamOnSonglist(
-    await fetchBiliColleList(
-      reExtracted[1],
-      reExtracted[2],
+}: NoxNetwork.RegexFetchProps): Promise<NoxNetwork.NoxRegexFetch> => {
+  const searchParams = Object.fromEntries(
+    new URL('https://www.' + reExtracted[0]).searchParams,
+  );
+  return {
+    songList: await biliShazamOnSonglist(
+      await fetchBiliColleList(
+        reExtracted[1],
+        reExtracted[2],
+        progressEmitter,
+        favList,
+        searchParams.reverse !== undefined,
+      ),
+      false,
       progressEmitter,
-      favList,
+      useBiliTag || false,
     ),
-    false,
-    progressEmitter,
-    useBiliTag || false,
-  ),
-});
+  };
+};
 
 const resolveURL = () => undefined;
 
