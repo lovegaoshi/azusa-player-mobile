@@ -5,8 +5,8 @@ import TabView, {
   useBottomTabBarHeight,
 } from 'react-native-bottom-tabs';
 import Icon from '@react-native-vector-icons/material-design-icons';
-import { BaseRoute } from 'react-native-bottom-tabs/lib/typescript/commonjs/src/types';
 import { getDrawerStatusFromState } from '@react-navigation/drawer';
+import { BaseRoute } from 'react-native-bottom-tabs/lib/typescript/src/types';
 import { useTranslation } from 'react-i18next';
 
 import { NoxRoutes } from '@enums/Routes';
