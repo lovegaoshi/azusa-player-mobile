@@ -21,7 +21,7 @@
     "prepare": "yarn run compile",
     "pretest": "yarn run compile",
     "prettify": "prettier --write ./src",
-    "build": "yarn install && yarn postinstall && yarn compile; cd node_modules/youtubei.js/; yarn bundle:react-native",
+    "build": "yarn install && yarn postinstall && yarn compile",
     "ios:build": "yarn build && cd ios && rm Podfile.lock && pod install --repo-update && cd ..",
     "dep": "yarn upgrade-interactive && yarn postinstall",
     "release": "git switch master && git pull && python release_bump.py",
@@ -40,7 +40,7 @@
     }
   },
   "dependencies": {
-    "@legendapp/list": "^2.0.11",
+    "@legendapp/list": "^2.0.12",
     "@lodev09/react-native-true-sheet": "https://github.com/lovegaoshi/react-native-true-sheet.git#commit=08574090ec57cea023eeebcf17e78e0046aa51c4",
     "@notifee/react-native": "^9.1.8",
     "@react-native-assets/slider": "^11.0.11",
@@ -141,7 +141,7 @@
     "use-debounce": "^10.0.6",
     "uuid": "^13.0.0",
     "web-streams-polyfill": "^4.2.0",
-    "youtubei.js": "15.1.1",
+    "youtubei.js": "16.0.0",
     "zustand": "^5.0.8"
   },
   "resolutions": {
@@ -164,7 +164,7 @@
     "@types/jest": "^30.0.0",
     "@types/lodash": "^4.17.20",
     "@types/md5": "^2.3.5",
-    "@types/node": "^24.7.1",
+    "@types/node": "^24.7.2",
     "@types/qs": "^6.14.0",
     "@types/react": "~19.2.2",
     "@types/react-native-background-timer": "^2.0.2",

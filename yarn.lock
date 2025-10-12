@@ -4560,15 +4560,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@legendapp/list@npm:^2.0.11":
-  version: 2.0.11
-  resolution: "@legendapp/list@npm:2.0.11"
+"@legendapp/list@npm:^2.0.12":
+  version: 2.0.12
+  resolution: "@legendapp/list@npm:2.0.12"
   dependencies:
     use-sync-external-store: "npm:^1.5.0"
   peerDependencies:
     react: "*"
     react-native: "*"
-  checksum: 10c0/4df989223e4d91f20ead76c9e9b4f2868b32942154413f914528d34be8390a79e29de1d8740c7909434c8b81497f6da895f6d5cf93174a83a7c071a811562a07
+  checksum: 10c0/86a3e1230fefa15864e0fd5da71a48136e9897ebe496a4caa368f23b2f9eff905ee18634b630077278df492205340f0cd8415da85404834cc4453c7ebe763701
   languageName: node
   linkType: hard
 
@@ -6151,12 +6151,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:^24.7.1":
-  version: 24.7.1
-  resolution: "@types/node@npm:24.7.1"
+"@types/node@npm:^24.7.2":
+  version: 24.7.2
+  resolution: "@types/node@npm:24.7.2"
   dependencies:
     undici-types: "npm:~7.14.0"
-  checksum: 10c0/2525f2aa865d78b1c75faaf8c6bf2af51c930962d8078306620d9a76eafcbbea035142cf2cdc2fcf1b4010cd3958a1c6c59b67aba1ac205dc1e5f895ef6af673
+  checksum: 10c0/03f662f10e4b89bc97016e067101cbabe55025b54c24afb581fb50992d5eeaaf417bdae34bbc668ae8759d3cdbbbadf35fc8b9b29d26f52ede2525d48e919e49
   languageName: node
   linkType: hard
 
@@ -7125,7 +7125,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"acorn@npm:^8.8.0, acorn@npm:^8.8.2, acorn@npm:^8.9.0":
+"acorn@npm:^8.8.2, acorn@npm:^8.9.0":
   version: 8.14.0
   resolution: "acorn@npm:8.14.0"
   bin:
@@ -7705,7 +7705,7 @@ __metadata:
     "@babel/preset-env": "npm:^7.28.3"
     "@babel/preset-typescript": "npm:^7.27.1"
     "@babel/runtime": "npm:^7.28.4"
-    "@legendapp/list": "npm:^2.0.11"
+    "@legendapp/list": "npm:^2.0.12"
     "@lodev09/react-native-true-sheet": "https://github.com/lovegaoshi/react-native-true-sheet.git#commit=08574090ec57cea023eeebcf17e78e0046aa51c4"
     "@material/material-color-utilities": "npm:^0.3.0"
     "@notifee/react-native": "npm:^9.1.8"
@@ -7739,7 +7739,7 @@ __metadata:
     "@types/jest": "npm:^30.0.0"
     "@types/lodash": "npm:^4.17.20"
     "@types/md5": "npm:^2.3.5"
-    "@types/node": "npm:^24.7.1"
+    "@types/node": "npm:^24.7.2"
     "@types/qs": "npm:^6.14.0"
     "@types/react": "npm:~19.2.2"
     "@types/react-native-background-timer": "npm:^2.0.2"
@@ -7851,7 +7851,7 @@ __metadata:
     use-debounce: "npm:^10.0.6"
     uuid: "npm:^13.0.0"
     web-streams-polyfill: "npm:^4.2.0"
-    youtubei.js: "npm:15.1.1"
+    youtubei.js: "npm:16.0.0"
     zustand: "npm:^5.0.8"
   languageName: unknown
   linkType: soft
@@ -15376,15 +15376,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"jintr@npm:^3.3.1":
-  version: 3.3.1
-  resolution: "jintr@npm:3.3.1"
-  dependencies:
-    acorn: "npm:^8.8.0"
-  checksum: 10c0/e699894549a653fc1e40505b47fe9ba69beed74cd7bf7ee50f62a6e616cd6e3753423f254f05286fc1132a20f2f086b8d410e818bc0a9e32efb50c2adf583bcc
-  languageName: node
-  linkType: hard
-
 "joi@npm:^17.2.1":
   version: 17.13.3
   resolution: "joi@npm:17.13.3"
@@ -16161,6 +16152,13 @@ __metadata:
   version: 1.4.1
   resolution: "merge2@npm:1.4.1"
   checksum: 10c0/254a8a4605b58f450308fc474c82ac9a094848081bf4c06778200207820e5193726dc563a0d2c16468810516a5c97d9d3ea0ca6585d23c58ccfff2403e8dbbeb
+  languageName: node
+  linkType: hard
+
+"meriyah@npm:^6.1.4":
+  version: 6.1.4
+  resolution: "meriyah@npm:6.1.4"
+  checksum: 10c0/d792a12df453b9e86c2bb70e73adf41b2d0fa88125381143e4d339d309ddcbb7aeb108e286411dcb19be82539d29b881279c613ae03ce514b7c296c72e9a8d00
   languageName: node
   linkType: hard
 
@@ -21146,13 +21144,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"undici@npm:^6.21.3":
-  version: 6.21.3
-  resolution: "undici@npm:6.21.3"
-  checksum: 10c0/294da109853fad7a6ef5a172ad0ca3fb3f1f60cf34703d062a5ec967daf69ad8c03b52e6d536c5cba3bb65615769bf08e5b30798915cbccdddaca01045173dda
-  languageName: node
-  linkType: hard
-
 "unicode-canonical-property-names-ecmascript@npm:^2.0.0":
   version: 2.0.1
   resolution: "unicode-canonical-property-names-ecmascript@npm:2.0.1"
@@ -22028,14 +22019,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"youtubei.js@npm:15.1.1":
-  version: 15.1.1
-  resolution: "youtubei.js@npm:15.1.1"
+"youtubei.js@npm:16.0.0":
+  version: 16.0.0
+  resolution: "youtubei.js@npm:16.0.0"
   dependencies:
     "@bufbuild/protobuf": "npm:^2.0.0"
-    jintr: "npm:^3.3.1"
-    undici: "npm:^6.21.3"
-  checksum: 10c0/db60f5dbd47c371a40ecd465b369b3c5025e5447d2991fc1aa23742beb5c2e5587b320c43883e9c6c36ee9dd11b8ef452553c19e8f049a6c9261b44b53575297
+    meriyah: "npm:^6.1.4"
+  checksum: 10c0/d2f9454c50cfa87b3cd7b89a75437e9312c1ac5dfa599f4f15b07e8aa886ab45f0d74e3ff0dbacd264483c30df47fcffcd84de732810dae9626181c7b3c58a2d
   languageName: node
   linkType: hard
 

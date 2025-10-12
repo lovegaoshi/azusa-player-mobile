@@ -39,7 +39,7 @@ export const resolveURL = async (song: NoxMedia.Song, iOS = false) => {
     url:
       iOS && isIOS && hls_manifest_url
         ? hls_manifest_url
-        : maxAudioQualityStream.decipher(yt.actions.session.player),
+        : await maxAudioQualityStream.decipher(yt.actions.session.player),
     loudness: maxAudioQualityStream.loudness_db,
   };
 };
