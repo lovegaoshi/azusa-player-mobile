@@ -6,13 +6,10 @@ import {
   suggest as suggestYtbi,
   suggestYTM,
 } from './ytbvideo.ytbi';
-import {
-  resolveURL as resolveURLMuse,
-  fetchAudioInfo as fetchAudioInfoMuse,
-} from './ytbvideo.muse';
+import { fetchAudioInfo as fetchAudioInfoMuse } from './ytbvideo.muse';
 
 const resolveURL = (song: NoxMedia.Song, iOS = false) =>
-  resolveURLYtbi(song, iOS).catch(() => resolveURLMuse(song));
+  resolveURLYtbi(song, iOS);
 
 export const fetchAudioInfo = (bvid: string, progressEmitter?: () => void) =>
   biliApiLimiter.schedule(() => {

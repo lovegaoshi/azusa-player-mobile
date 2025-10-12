@@ -1,15 +1,40 @@
 // === START ===  Making Youtube.js work
 import 'event-target-polyfill';
-import 'web-streams-polyfill';
+import { TransformStream } from 'web-streams-polyfill';
 import 'text-encoding-polyfill';
 import 'react-native-url-polyfill/auto';
 import { Innertube, ClientType, Platform } from 'youtubei.js';
 import { getSecure as getItem } from '@utils/ChromeStorageAPI';
+import { BuildScriptResult, VMPrimative } from 'youtubei.js/dist/src/types';
 
 import { timeFunction } from '../Utils';
 import MMKV, { GHCacher } from '../fakeMMKV';
 import { StorageKeys } from '@enums/Storage';
 import logger from '../Logger';
+
+if (typeof global.TransformStream === 'undefined') {
+  // @ts-expect-error
+  global.TransformStream = TransformStream;
+}
+
+Platform.shim.eval = async (
+  data: BuildScriptResult,
+  env: Record<string, VMPrimative>,
+) => {
+  const properties = [];
+
+  if (env.n) {
+    properties.push(`n: exportedVars.nFunction("${env.n}")`);
+  }
+
+  if (env.sig) {
+    properties.push(`sig: exportedVars.sigFunction("${env.sig}")`);
+  }
+
+  const code = `${data.output}\nreturn { ${properties.join(', ')} }`;
+
+  return new Function(code)();
+};
 
 // @ts-expect-error to avoid typings' fuss
 global.mmkvStorage = MMKV as any;
