@@ -85,7 +85,7 @@ const resolveURLWrapper =
         return res;
       }
     }
-    throw Error(
+    throw new Error(
       `[resolveURL] mfsdk ${sdk.platform} v${sdk.version} failed to resolve.`,
     );
   };

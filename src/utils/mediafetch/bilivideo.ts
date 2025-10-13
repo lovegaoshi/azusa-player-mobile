@@ -191,7 +191,7 @@ const extractResponseJson = (json: any, field: string) => {
   switch (field) {
     case FieldEnum.AudioUrl:
       if (!json.data)
-        throw Error(
+        throw new Error(
           `[extractResponseJson] no audio url from ${JSON.stringify(json)}`,
         );
       if (json.data.flac?.audio) {
@@ -201,7 +201,7 @@ const extractResponseJson = (json: any, field: string) => {
       }
       if (json.data.dash) return getBestBitrate(json.data.dash.audio).baseUrl;
       if (json.data.durl) return json.data.durl[0].url;
-      throw Error(
+      throw new Error(
         `[extractResponseJson] no audio url from ${JSON.stringify(json)}`,
       );
     case FieldEnum.VideoUrl:

@@ -31,7 +31,7 @@ export const initMFsdk = async () => {
       try {
         const sdkContent = await readTxtFile(p, mfsdkSubFolder);
         if (sdkContent === undefined) {
-          throw Error(`[mfsdk] ${p} cannot be read! corrupted/DNE`);
+          throw new Error(`[mfsdk] ${p} cannot be read! corrupted/DNE`);
         }
         return loadEvalPlugin(sdkContent, p);
       } catch (e) {

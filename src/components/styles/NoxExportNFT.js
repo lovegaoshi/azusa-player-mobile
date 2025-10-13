@@ -16,7 +16,7 @@ console.dir(parser.parse_args());
 const args = parser.parse_args();
 
 if (args.garbid === undefined) {
-  throw Error('garbid is not defined.');
+  throw new Error('garbid is not defined.');
 }
 
 const steriaGarb = JSON.parse(

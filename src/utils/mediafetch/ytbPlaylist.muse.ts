@@ -77,7 +77,7 @@ const fetchYTPlaylist = async (
   try {
     const ytInitialData = /var ytInitialData = ({.*});<\/script/.exec(content);
     if (ytInitialData === null) {
-      throw Error('ytbInitdata failed');
+      throw new Error('ytbInitdata failed');
     }
     const data = JSON.parse(`${ytInitialData[1]}`);
     return data.contents.twoColumnBrowseResultsRenderer.tabs[0].tabRenderer.content.sectionListRenderer.contents[0].itemSectionRenderer.contents[0].playlistVideoListRenderer.contents
