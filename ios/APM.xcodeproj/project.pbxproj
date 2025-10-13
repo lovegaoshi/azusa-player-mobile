@@ -596,7 +596,7 @@
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "azusa-player-mobile.entitlements";
-				CURRENT_PROJECT_VERSION = 514;
+				CURRENT_PROJECT_VERSION = 515;
 				DEVELOPMENT_TEAM = 7U2TUNKNQX;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = example/Info.plist;
@@ -606,7 +606,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 4.1.1;
+				MARKETING_VERSION = 4.1.3;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
@@ -630,7 +630,7 @@
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "azusa-player-mobile.entitlements";
-				CURRENT_PROJECT_VERSION = 514;
+				CURRENT_PROJECT_VERSION = 515;
 				DEVELOPMENT_TEAM = 7U2TUNKNQX;
 				INFOPLIST_FILE = example/Info.plist;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.music";
@@ -639,7 +639,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 4.1.1;
+				MARKETING_VERSION = 4.1.3;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
