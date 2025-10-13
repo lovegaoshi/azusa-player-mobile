@@ -29,7 +29,7 @@ export const useTrackStore = create<TrackStore>((set, get) => ({
     // @ts-ignore-error metadata's url is possibly undefined as its a partial.
     set({ track: { ...cTrack, ...newMetadata } });
   },
-  updateSong: (metadata = {}, songID) => {
+  updateSong: (metadata = {}, songID = undefined) => {
     const cTrack = get().track;
     if (cTrack === undefined || (songID && cTrack.song?.id !== songID)) return;
     set({ track: { ...cTrack, song: { ...cTrack?.song, ...metadata } } });

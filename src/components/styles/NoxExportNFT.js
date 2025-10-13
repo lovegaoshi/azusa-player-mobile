@@ -74,7 +74,7 @@ const emojiIds = garblistdata
     garb =>
       (garb.collect_list?.collect_infos ?? [])
         .concat(garb.collect_list?.collect_chain ?? [])
-        .filter(v => v?.redeem_item_name.includes('表情包'))[0]?.redeem_item_id,
+        .find(v => v?.redeem_item_name.includes('表情包'))?.redeem_item_id,
   )
   .filter(v => v);
 

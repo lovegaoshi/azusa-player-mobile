@@ -8,7 +8,7 @@ import { useEffect } from 'react';
 
 import { setLastPlaybackStatus } from '@utils/ChromeStorage';
 
-const NotLoading = [State.Paused, State.Playing, State.Stopped, State.Ended];
+const NotLoading = new Set([State.Paused, State.Playing, State.Stopped, State.Ended]);
 
 export const usePlaybackStateLogging = () => {
   const playback = usePlaybackState();
@@ -22,7 +22,7 @@ export default () => {
   const playback = usePlaybackState();
   const playWhenReady = usePlayWhenReady();
   const isLoading = useDebouncedValue(
-    !NotLoading.includes(playback.state!),
+    !NotLoading.has(playback.state!),
     250,
   );
   const isErrored = playback.state === State.Error;

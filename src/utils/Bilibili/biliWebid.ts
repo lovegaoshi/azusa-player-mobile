@@ -9,7 +9,7 @@ const _getWebid = async (mid: string) => {
   const script = parser('script');
   const extractedScript = script
     .get()
-    .filter(x => x.attribs.id === '__RENDER_DATA__')[0].children[0] // @ts-expect-error
+    .find(x => x.attribs.id === '__RENDER_DATA__')?.children[0] // @ts-expect-error
     .data as string;
   const extractedJSON = JSON.parse(decodeURIComponent(extractedScript));
   return extractedJSON.access_id as string;
