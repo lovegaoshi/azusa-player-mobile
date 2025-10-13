@@ -104,12 +104,12 @@ const ExportSyncFavButton = ({
   );
 };
 
-export default ({
+export default function GenericSyncButton({
   restoreFromUint8Array,
   login,
   noxBackup,
   noxRestore,
-}: NoxSyncComponent.Props) => {
+}: NoxSyncComponent.Props) {
   return (
     <View style={styles.container}>
       <ImportSyncFavButton
@@ -121,7 +121,7 @@ export default ({
       <ExportSyncFavButton login={login} noxBackup={noxBackup} />
     </View>
   );
-};
+}
 
 const styles = StyleSheet.create({
   container: {

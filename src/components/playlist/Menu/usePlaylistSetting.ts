@@ -2,7 +2,7 @@ import usePlaylistSetting from '@hooks/usePlaylistSetting';
 import { cycleThroughPlaymode } from '@utils/RNTPUtils';
 import playlistStore, { initializePlaybackMode } from '@stores/playingList';
 
-export default (playlist: NoxMedia.Playlist) => {
+export default function useAPMPlaylistSetting(playlist: NoxMedia.Playlist) {
   const usedPlaylistSetting = usePlaylistSetting(playlist);
 
   const saveSetting = (
@@ -23,4 +23,4 @@ export default (playlist: NoxMedia.Playlist) => {
     ...usedPlaylistSetting,
     saveSetting,
   };
-};
+}

@@ -8,7 +8,7 @@ import { styles } from '../style';
 interface Props {
   panelWidth: number;
 }
-export default ({ panelWidth }: Props) => {
+export default function LandscapePlayerProgress({ panelWidth }: Props) {
   const track = useActiveTrack();
   const playerStyle = useNoxSetting(state => state.playerStyle);
   const iconSize = (panelWidth * 0.6) / 5;
@@ -28,4 +28,4 @@ export default ({ panelWidth }: Props) => {
       <PlayerControls iconSize={iconSize} />
     </View>
   );
-};
+}

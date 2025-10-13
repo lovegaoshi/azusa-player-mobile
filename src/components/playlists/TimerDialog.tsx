@@ -41,7 +41,7 @@ const TimerDialog = ({ visible, onClose = () => undefined }: Props) => {
             keyboardType="numeric"
             style={styles.input}
             value={String(minutes)}
-            onChangeText={text => setMinutes(parseInt(text) || 0)}
+            onChangeText={text => setMinutes(Number.parseInt(text) || 0)}
             disabled={startTimer}
             textAlign="right"
             selectionColor={playerStyle.customColors.textInputSelectionColor}
@@ -51,7 +51,7 @@ const TimerDialog = ({ visible, onClose = () => undefined }: Props) => {
             keyboardType="numeric"
             style={styles.input2}
             value={String(seconds)}
-            onChangeText={text => setSeconds(parseInt(text) || 0)}
+            onChangeText={text => setSeconds(Number.parseInt(text) || 0)}
             disabled={startTimer}
             selectionColor={playerStyle.customColors.textInputSelectionColor}
           />
@@ -72,11 +72,13 @@ const TimerDialog = ({ visible, onClose = () => undefined }: Props) => {
   );
 };
 
-export default (anyprops: Props) => (
-  <Portal>
-    <TimerDialog {...anyprops} />
-  </Portal>
-);
+export default function TimerDialogPortal(p: Props) {
+  return (
+    <Portal>
+      <TimerDialog {...p} />
+    </Portal>
+  );
+}
 
 const styles = StyleSheet.create({
   dialog: {

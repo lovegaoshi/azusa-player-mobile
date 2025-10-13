@@ -7,7 +7,7 @@ interface Props {
 
 // auto unmounts a react navigation view when the screen is unfocused
 
-export default ({ children }: Props) => {
+export default function AutoUnmountNavView({ children }: Props) {
   const [mounted, setMounted] = useState(false);
   useFocusEffect(
     useCallback(() => {
@@ -23,4 +23,4 @@ export default ({ children }: Props) => {
 
   if (!mounted) return;
   return children;
-};
+}

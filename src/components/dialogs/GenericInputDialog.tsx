@@ -25,13 +25,13 @@ const DialogTitle = ({ title }: { title: string | undefined }) => {
 /**
  * a generic dialog that displays a list of items in inputs
  */
-export default ({
+export default function GenericInputDialog({
   visible,
   options,
   title = undefined,
   onClose = logger.debug,
   onSubmit = logger.debug,
-}: Props) => {
+}: Props) {
   const { t } = useTranslation();
   const [currentInput, setCurrentInput] = useState<{
     [key: string]: string;
@@ -88,7 +88,7 @@ export default ({
       </Dialog.Actions>
     </Dialog>
   );
-};
+}
 
 const styles = StyleSheet.create({
   dialogTitle: { maxHeight: 100 },

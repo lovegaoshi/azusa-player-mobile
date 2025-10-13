@@ -8,7 +8,7 @@ import LandscapePlayerProgress from './LandscapePlayerProgress';
 interface Props {
   panelWidth: number;
 }
-export default ({ panelWidth }: Props) => {
+export default function LandscapePlayerPanel({ panelWidth }: Props) {
   const track = useActiveTrack();
   return (
     <View style={{ justifyContent: 'flex-end', width: panelWidth }}>
@@ -22,4 +22,4 @@ export default ({ panelWidth }: Props) => {
       <LandscapePlayerProgress panelWidth={panelWidth} />
     </View>
   );
-};
+}

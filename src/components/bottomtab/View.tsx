@@ -6,7 +6,9 @@ import { useNoxSetting } from '@stores/useApp';
 import NoxNativeBottomTab from './NoxNativeBottomTab';
 import NoxBottomTab from './NoxBottomTab';
 
-export default ({ navigation }: NoxComponent.NavigationProps2) => {
+export default function BottomTabView({
+  navigation,
+}: NoxComponent.NavigationProps2) {
   const insets = useSafeAreaInsets();
   const gestureMode = useNoxSetting(state => state.gestureMode);
   const playerSetting = useNoxSetting(state => state.playerSetting);
@@ -19,4 +21,4 @@ export default ({ navigation }: NoxComponent.NavigationProps2) => {
   ) : (
     <NoxBottomTab navigation={navigation} />
   );
-};
+}

@@ -28,11 +28,15 @@ import { goToArtistExternalPage } from '@utils/artistfetch/fetch';
 import { styles, ItemSelectStyles } from '../style';
 import AutoUnmountNavView from '../commonui/AutoUnmountNavView';
 
-export default ({ navigation }: NoxComponent.StackNavigationProps) => (
-  <AutoUnmountNavView>
-    <Artist navigation={navigation} />
-  </AutoUnmountNavView>
-);
+export default function ArtistView({
+  navigation,
+}: NoxComponent.StackNavigationProps) {
+  return (
+    <AutoUnmountNavView>
+      <Artist navigation={navigation} />
+    </AutoUnmountNavView>
+  );
+}
 
 const Artist = ({ navigation }: NoxComponent.StackNavigationProps) => {
   const insets = useSafeAreaInsets();

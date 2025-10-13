@@ -9,10 +9,10 @@ interface Props {
   onSearched?: (val: NoxMedia.SearchPlaylist) => void;
   searchListTitle?: string;
 }
-export default ({
+export default function useBiliSearch({
   onSearched = console.log,
   searchListTitle = i18n.t('PlaylistOperations.searchListName'),
-}: Props) => {
+}: Props) {
   const [searchVal, setSearchVal] = useState('');
   const progressEmitter = useNoxSetting(
     state => state.searchBarProgressEmitter,
@@ -48,4 +48,4 @@ export default ({
   };
 
   return { searchVal, setSearchVal, handleSearch };
-};
+}

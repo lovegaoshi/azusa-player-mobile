@@ -9,7 +9,7 @@ interface Props {
   children: React.JSX.Element;
 }
 
-export default (props: Props) => {
+export default function GroupView(props: Props) {
   const playerStyle = useNoxSetting(state => state.playerStyle);
 
   return (
@@ -26,7 +26,7 @@ export default (props: Props) => {
       <View></View>
     </View>
   );
-};
+}
 
 const styles = StyleSheet.create({
   spacer: {

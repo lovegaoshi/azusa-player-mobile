@@ -54,10 +54,13 @@ export const login = async (
   }
 };
 
-export default ({ restoreFromUint8Array }: NoxSyncComponent.GenericProps) =>
-  GenericSyncButton({
+export default function GithubAuthButton({
+  restoreFromUint8Array,
+}: NoxSyncComponent.GenericProps) {
+  return GenericSyncButton({
     restoreFromUint8Array,
     noxBackup: v => noxBackup(v, authToken),
     noxRestore: () => noxRestore(authToken),
     login,
   });
+}

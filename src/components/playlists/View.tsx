@@ -71,7 +71,11 @@ const BiliCard = (props: any) => {
   return <>{props.children}</>;
 };
 
-export default ({ navigation }: { navigation: DrawerNavigationHelpers }) => {
+export default function PlaylistsView({
+  navigation,
+}: {
+  navigation: DrawerNavigationHelpers;
+}) {
   const insets = useSafeAreaInsets();
   const playlistIds = useNoxSetting(state => state.playlistIds);
   const playerStyle = useNoxSetting(state => state.playerStyle);
@@ -136,7 +140,7 @@ export default ({ navigation }: { navigation: DrawerNavigationHelpers }) => {
       </>
     </FlexView>
   );
-};
+}
 
 const styles = StyleSheet.create({
   flex: { flex: 1 },

@@ -15,13 +15,13 @@ interface Props {
   showSheet?: (v: boolean) => void;
 }
 
-export default ({
+export default function SetMVButton({
   getSongOnClick,
   disabled = false,
   onSubmit = s => console.log(s),
   onCancel = () => undefined,
   showSheet,
-}: Props) => {
+}: Props) {
   const { t } = useTranslation();
   const [dialogOpen, setDialogOpen] = useState(false);
   const [song, setSong] = useState(dummySongObj);
@@ -56,4 +56,4 @@ export default ({
       />
     </SheetIconEntry>
   );
-};
+}

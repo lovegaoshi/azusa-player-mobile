@@ -19,7 +19,7 @@ interface Props {
   testID?: string;
 }
 
-export default ({
+export default function AutoComplete({
   placeholder,
   value,
   setValue,
@@ -29,7 +29,7 @@ export default ({
   resolveData,
   pressed,
   testID,
-}: Props) => {
+}: Props) {
   const insets = useSafeAreaInsets();
   const autoCompleteId = useRef('');
   const [debouncedValue] = useDebounce(value, 250);
@@ -120,7 +120,7 @@ export default ({
       )}
     </View>
   );
-};
+}
 
 const styles = StyleSheet.create({
   container: { flex: 1, flexDirection: 'row' },

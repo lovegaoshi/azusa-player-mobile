@@ -2,7 +2,7 @@ import { Alert } from 'react-native';
 import * as Clipboard from 'expo-clipboard';
 import { getLog, resetLog } from '@utils/Logger';
 
-export default (logs = getLog()) => {
+export default function log(logs = getLog()) {
   Alert.alert(
     'Log',
     logs,
@@ -13,4 +13,4 @@ export default (logs = getLog()) => {
     ],
     { cancelable: true },
   );
-};
+}

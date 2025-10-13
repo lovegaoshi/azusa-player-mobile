@@ -8,7 +8,7 @@ import ShadowedButton from '@components/buttons/ShadowedButton';
 interface Props {
   iconSize?: number;
 }
-export default ({ iconSize = 30 }: Props) => {
+export default function PlayerModeButton({ iconSize = 30 }: Props) {
   const playMode = useStore(noxPlayingList, state => state.playmode);
 
   return (
@@ -19,4 +19,4 @@ export default ({ iconSize = 30 }: Props) => {
       style={{ backgroundColor: undefined }}
     />
   );
-};
+}

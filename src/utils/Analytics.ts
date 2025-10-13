@@ -55,7 +55,7 @@ const playlistAnalysis = (favList: { songList: NoxMedia.Song[] }) => {
 };
 
 // TODO: add i18n as i18n.t('PlaylistOperations.searchListName')
-export default (playlist: NoxMedia.Playlist, topX = 5) => {
+export default function analyzePlaylist(playlist: NoxMedia.Playlist, topX = 5) {
   const analytics = playlistAnalysis(playlist);
   return {
     title: i18n.t('PlaylistAnalytics.title', { val: playlist.title }),
@@ -90,4 +90,4 @@ export default (playlist: NoxMedia.Playlist, topX = 5) => {
       }),
     ],
   };
-};
+}

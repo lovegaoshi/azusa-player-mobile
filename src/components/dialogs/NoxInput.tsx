@@ -63,7 +63,7 @@ export const ManagedInput = ({
   );
 };
 
-export default ({
+export default function NoxInput({
   handleSubmit,
   label,
   autofocus = true,
@@ -75,7 +75,7 @@ export default ({
   reactNative = false,
   numberOfLines = 1,
   enable = true,
-}: InputProps) => {
+}: InputProps) {
   const playerStyle = useNoxSetting(state => state.playerStyle);
   const Input = reactNative ? RNTextInput : TextInput;
 
@@ -95,4 +95,4 @@ export default ({
       numberOfLines={numberOfLines}
     />
   );
-};
+}

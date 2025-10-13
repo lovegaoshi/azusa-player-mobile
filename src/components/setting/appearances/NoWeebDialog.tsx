@@ -166,10 +166,10 @@ const styles = StyleSheet.create({
   image: { width: 60, height: 60 },
 });
 
-export default (p: Props) => {
+export default function NoWeedDialogPortal(p: Props) {
   return (
     <Portal>
       <NoWeebDialog {...p} />
     </Portal>
   );
-};
+}

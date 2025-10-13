@@ -12,7 +12,7 @@ export const goToArtistExternalPage = (song?: NoxMedia.Song) => {
   }
 };
 
-export default (song?: NoxMedia.Song) => {
+export default function APMfetch(song?: NoxMedia.Song) {
   switch (song?.source) {
     case Source.bilivideo:
       return fetchBiliArtist(String(song.singerId));
@@ -21,4 +21,4 @@ export default (song?: NoxMedia.Song) => {
         fetchYtbiArtist(String(song.singerId)).catch(console.error),
       );
   }
-};
+}

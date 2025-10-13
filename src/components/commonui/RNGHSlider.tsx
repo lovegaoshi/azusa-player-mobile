@@ -27,7 +27,7 @@ interface Props extends SliderProps {
   sliderForegroundColor?: string;
 }
 
-export default ({
+export default function RNGHSlider({
   onValueStart = console.log,
   onValueChange = console.log,
   onValueEnd = console.log,
@@ -38,7 +38,7 @@ export default ({
   height = 50,
   sliderBackgroundColor = 'red',
   sliderForegroundColor = 'blue',
-}: Props) => {
+}: Props) {
   const maxWidth = useSharedValue(0);
   const value = useSharedValue(0);
 
@@ -122,4 +122,4 @@ export default ({
       </MaskedView>
     </GestureDetector>
   );
-};
+}

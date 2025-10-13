@@ -15,7 +15,7 @@ interface Props {
   style?: any;
 }
 
-export default ({ track, style }: Props) => {
+export default function MiniplayerArtistText({ track, style }: Props) {
   const fetch = useArtist(state => state.fetch);
   const setSnack = useSnack(state => state.setSnack);
   const miniPlayerCollapse = useNoxSetting(state => state.collapse);
@@ -42,4 +42,4 @@ export default ({ track, style }: Props) => {
       </Text>
     </Pressable>
   );
-};
+}

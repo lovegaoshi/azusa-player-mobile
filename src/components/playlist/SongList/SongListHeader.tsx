@@ -13,7 +13,7 @@ interface Props {
   usedPlaylist: UsePlaylistRN;
 }
 
-export default ({ usedPlaylist }: Props) => {
+export default function SongListHeader({ usedPlaylist }: Props) {
   const playerStyle = useNoxSetting(state => state.playerStyle);
   const {
     toggleSelectedAll,
@@ -74,7 +74,7 @@ export default ({ usedPlaylist }: Props) => {
       </View>
     </View>
   );
-};
+}
 const stylesLocal = StyleSheet.create({
   container: {
     flexDirection: 'row',

@@ -32,7 +32,7 @@ interface SongProps {
   metadataOnReceived?: boolean;
 }
 
-export default ({
+export default function Song({
   cid,
   bvid,
   name,
@@ -51,7 +51,7 @@ export default ({
   liveStatus,
   metadataOnLoad,
   metadataOnReceived,
-}: SongProps): NoxMedia.Song => {
+}: SongProps): NoxMedia.Song {
   name = he.decode(name);
   return {
     id: String(cid),
@@ -75,7 +75,7 @@ export default ({
     metadataOnLoad,
     metadataOnReceived,
   };
-};
+}
 
 export const setSongBiliShazamed = (
   song: NoxMedia.Song,

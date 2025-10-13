@@ -68,7 +68,10 @@ const initializePlayer = async (safeMode = false) => {
 
 export const appStartupInit = initializePlayer();
 
-export default ({ intentData, vip }: NoxComponent.SetupPlayerProps) => {
+export default function useSetupPlayer({
+  intentData,
+  vip,
+}: NoxComponent.SetupPlayerProps) {
   const [playerReady, setPlayerReady] = useState<boolean>(false);
   const { updateVersion, checkVersion } = useVersionCheck();
   const setIntentData = useNoxSetting(state => state.setIntentData);
@@ -135,4 +138,4 @@ export default ({ intentData, vip }: NoxComponent.SetupPlayerProps) => {
   }, [playerReady]);
 
   return playerReady;
-};
+}

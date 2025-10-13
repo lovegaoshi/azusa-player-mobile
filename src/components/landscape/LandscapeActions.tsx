@@ -13,7 +13,7 @@ import { logger } from '@utils/Logger';
 interface Props {
   panelWidth?: number;
 }
-export default ({ panelWidth = 110 }: Props) => {
+export default function LandscapeActions({ panelWidth = 110 }: Props) {
   const playerStyle = useNoxSetting(state => state.playerStyle);
   const currentPlayingId = useNoxSetting(state => state.currentPlayingId);
   const navigation = useNavigation();
@@ -88,7 +88,7 @@ export default ({ panelWidth = 110 }: Props) => {
       />
     </View>
   );
-};
+}
 
 const styles = StyleSheet.create({
   sidebar: {

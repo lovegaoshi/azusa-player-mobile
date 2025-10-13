@@ -106,20 +106,16 @@ export const Home = ({
         <GroupView>
           <View>
             {isAndroid && (
-              <>
-                <RenderSetting
-                  item={developerSettings.parseEmbeddedArtwork}
-                  delayedLoading={false}
-                />
-              </>
+              <RenderSetting
+                item={developerSettings.parseEmbeddedArtwork}
+                delayedLoading={false}
+              />
             )}
             {isAndroid && (
-              <>
-                <RenderSetting
-                  item={developerSettings.resumeOnPause}
-                  delayedLoading={false}
-                />
-              </>
+              <RenderSetting
+                item={developerSettings.resumeOnPause}
+                delayedLoading={false}
+              />
             )}
             <RenderSetting
               item={developerSettings.artworkCarousel}

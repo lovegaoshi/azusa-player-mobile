@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { PropsWithChildren } from 'react';
 import { View } from 'react-native';
 
 import { useNoxSetting } from '@stores/useApp';
 
-export default ({ children }: { children: React.JSX.Element }) => {
+export default function EmptyBackground({ children }: PropsWithChildren) {
   const playerStyle = useNoxSetting(state => state.playerStyle);
 
   return (
@@ -11,4 +11,4 @@ export default ({ children }: { children: React.JSX.Element }) => {
       {children}
     </View>
   );
-};
+}

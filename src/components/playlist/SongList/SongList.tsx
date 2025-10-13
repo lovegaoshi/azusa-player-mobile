@@ -40,14 +40,14 @@ interface Props {
   onScroll?: (e: NativeScrollEvent) => void;
 }
 
-export default ({
+export default function SongList({
   usedPlaylist,
   scrollPosition,
   scrollOffset,
   scrollViewHeight,
   contentHeight,
   onScroll,
-}: Props) => {
+}: Props) {
   const currentPlayingId = useNoxSetting(state => state.currentPlayingId);
   const netInfo = useNetInfo();
   const initialDragY = useSharedValue(0);
@@ -272,4 +272,4 @@ export default ({
       />
     </>
   );
-};
+}

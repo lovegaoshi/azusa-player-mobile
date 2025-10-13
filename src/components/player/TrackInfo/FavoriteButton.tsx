@@ -14,7 +14,7 @@ import { isAndroid } from '@utils/RNUtils';
 
 const getAppStoreState = appStore.getState;
 
-export default ({ track }: NoxComponent.TrackProps) => {
+export default function FavButton({ track }: NoxComponent.TrackProps) {
   const song = track?.song as NoxMedia.Song;
   const favoritePlaylist = useNoxSetting(state => state.favoritePlaylist);
   const setFavoritePlaylist = useNoxSetting(state => state.setFavoritePlaylist);
@@ -76,4 +76,4 @@ export default ({ track }: NoxComponent.TrackProps) => {
       pressableStyle={{ backgroundColor: undefined }}
     />
   );
-};
+}

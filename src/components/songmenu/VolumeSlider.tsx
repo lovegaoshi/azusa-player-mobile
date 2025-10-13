@@ -5,7 +5,10 @@ import TrackPlayer from 'react-native-track-player';
 import RNGHSlider, { SliderProps } from '../commonui/RNGHSlider';
 import { useNoxSetting } from '@stores/useApp';
 
-export default ({ onValueStart, onValueEnd }: SliderProps) => {
+export default function VolumeSlider({
+  onValueStart,
+  onValueEnd,
+}: SliderProps) {
   const playerStyle = useNoxSetting(state => state.playerStyle);
   const playerSetting = useNoxSetting(state => state.playerSetting);
   const setPlayerSetting = useNoxSetting(state => state.setPlayerSetting);
@@ -47,4 +50,4 @@ export default ({ onValueStart, onValueEnd }: SliderProps) => {
       <View style={{ width: 20 }} />
     </View>
   );
-};
+}

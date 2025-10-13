@@ -23,7 +23,11 @@ interface Props extends NoxComponent.OpacityProps {
   artworkOpacity: SharedValue<number>;
 }
 
-export default ({ opacity, style, artworkOpacity }: Props) => {
+export default function MiniplayerTrackInfo({
+  opacity,
+  style,
+  artworkOpacity,
+}: Props) {
   const track = useTrackStore(s => s.track);
   const insets = useSafeAreaInsets();
   const playerStyle = useNoxSetting(state => state.playerStyle);
@@ -93,6 +97,6 @@ export default ({ opacity, style, artworkOpacity }: Props) => {
       </Animated.View>
     </Animated.View>
   );
-};
+}
 
 const BouncePadding = { left: 10, right: 10 };

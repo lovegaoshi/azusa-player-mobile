@@ -8,10 +8,10 @@ import useYTMChartExplore from '@stores/explore/ytmchart.muse';
 import { YTMixedContent } from './YTMusic';
 import { toMixedContent } from './Utils';
 
-export default ({
+export default function ExploreYTMChart({
   onScroll,
   onMomentumScrollEnd,
-}: NoxComponent.ScrollableProps) => {
+}: NoxComponent.ScrollableProps) {
   const { t } = useTranslation();
   const [refreshing, setRefreshing] = useState(false);
   const refreshHome = useYTMChartExplore(state => state.refreshHome);
@@ -69,4 +69,4 @@ export default ({
       </ScrollView>
     </View>
   );
-};
+}

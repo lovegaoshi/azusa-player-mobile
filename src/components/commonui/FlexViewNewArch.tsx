@@ -15,7 +15,7 @@ interface Props {
 /**
  * a view of flex:1 for new arch, resolves resizing issues
  */
-export default ({ children, style }: Props) => {
+export default function FlexViewNewArch({ children, style }: Props) {
   const [initHeight, setInitHeight] = useState(0);
   const miniplayerHeight = useMiniplayerHeight();
 
@@ -42,4 +42,4 @@ export default ({ children, style }: Props) => {
       {children}
     </Animated.View>
   );
-};
+}

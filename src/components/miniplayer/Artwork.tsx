@@ -25,7 +25,12 @@ interface Props extends NoxComponent.MiniplayerProps {
   expand: () => void;
 }
 
-export default ({ miniplayerHeight, opacity, onPress, expand }: Props) => {
+export default function MiniplayerArtwork({
+  miniplayerHeight,
+  opacity,
+  onPress,
+  expand,
+}: Props) {
   const track = useTrackStore(s => s.track);
   const [trackCarousel, setTrackCarousel] = useState<any[]>([]);
   const playerSetting = useNoxSetting(state => state.playerSetting);
@@ -167,4 +172,4 @@ export default ({ miniplayerHeight, opacity, onPress, expand }: Props) => {
       </Animated.View>
     </TouchableWithoutFeedback>
   );
-};
+}

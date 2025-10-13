@@ -16,13 +16,13 @@ interface MenuProps {
   showSheet?: (v: boolean) => void;
   Button?: (p: Props) => React.ReactNode;
 }
-export default ({
+export default function CopiedPlaylistButton({
   getFromListOnClick,
   onSubmit = () => undefined,
   onCancel = () => undefined,
   showSheet,
   Button = SheetIconButton,
-}: MenuProps) => {
+}: MenuProps) {
   const { t } = useTranslation();
   const [dialogOpen, setDialogOpen] = useState(false);
   const [fromList, setFromList] =
@@ -57,4 +57,4 @@ export default ({
       />
     </Button>
   );
-};
+}

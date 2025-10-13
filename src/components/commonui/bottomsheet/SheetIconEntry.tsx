@@ -5,7 +5,13 @@ import { RectButton } from 'react-native-gesture-handler';
 import { Props } from './SheetIconButton';
 import { PaperText as Text } from '@components/commonui/ScaledText';
 
-export default ({ icon, text, onPress, disabled, children }: Props) => {
+export default function SheetIconEntry({
+  icon,
+  text,
+  onPress,
+  disabled,
+  children,
+}: Props) {
   return (
     <View>
       <RectButton onPress={disabled ? undefined : onPress}>
@@ -17,7 +23,7 @@ export default ({ icon, text, onPress, disabled, children }: Props) => {
       {children}
     </View>
   );
-};
+}
 
 const styles = StyleSheet.create({
   view: {

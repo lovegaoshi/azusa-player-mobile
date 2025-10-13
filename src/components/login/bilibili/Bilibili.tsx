@@ -107,7 +107,7 @@ interface Props {
   biliLogin: BiliLogin;
 }
 
-export default ({ biliLogin }: Props) => {
+export default function LoginBilibili({ biliLogin }: Props) {
   const { t } = useTranslation();
   const appRefresh = useNoxSetting(state => state.appRefresh);
   const [inputCookieVisible, setInputCookieVisible] = React.useState(false);
@@ -185,7 +185,7 @@ export default ({ biliLogin }: Props) => {
       />
     </SafeAreaView>
   );
-};
+}
 
 const styles = StyleSheet.create({
   paddingBottomStyle: { paddingBottom: 10 },

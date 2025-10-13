@@ -19,12 +19,12 @@ interface Props {
   onSubmit?: () => void;
 }
 
-export default ({
+export default function CopiedPlaylistDialog({
   visible,
   fromList,
   onClose = () => undefined,
   onSubmit = () => undefined,
-}: Props) => {
+}: Props) {
   const { t } = useTranslation();
   const [playlistIndex, setPlaylistIndex] = useState('');
   const playlistRef = React.useRef<FlatList<string[]>>(null);
@@ -123,7 +123,7 @@ export default ({
       </Dialog>
     </Portal>
   );
-};
+}
 
 const styles = StyleSheet.create({
   dialog: {

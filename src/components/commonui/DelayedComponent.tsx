@@ -14,11 +14,11 @@ interface Props {
   SuspenseComponent?: () => React.ReactNode;
 }
 
-export default ({
+export default function DelayedComponent({
   delay = 1,
   children,
   SuspenseComponent = DefaultSuspenseComponent,
-}: Props) => {
+}: Props) {
   const [loaded, setLoaded] = React.useState(delay === 0);
 
   React.useEffect(() => {
@@ -29,4 +29,4 @@ export default ({
     return <SuspenseComponent />;
   }
   return children;
-};
+}

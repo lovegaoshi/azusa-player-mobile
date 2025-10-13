@@ -5,7 +5,7 @@ import { LrcSource } from '@enums/LyricFetch';
 
 const LYRIC_OFFSET_INTERVAL = 0.5;
 
-export default (currentSong?: NoxMedia.Song, artist = '') => {
+export default function useLyricRN(currentSong?: NoxMedia.Song, artist = '') {
   const usedLyric = useLyric(currentSong);
 
   const updateLyricMapping = ({
@@ -129,4 +129,4 @@ export default (currentSong?: NoxMedia.Song, artist = '') => {
     addSubtractOffset,
     initTrackLrcLoad,
   };
-};
+}

@@ -33,7 +33,10 @@ interface Props {
   onPressed?: () => void;
 }
 
-export default ({ usePlaylist, onPressed = () => undefined }: Props) => {
+export default function PlaylistInfo({
+  usePlaylist,
+  onPressed = () => undefined,
+}: Props) {
   const { searchText, setSearchText, searching, selected, checking } =
     usePlaylist;
   const { t } = useTranslation();
@@ -197,7 +200,7 @@ export default ({ usePlaylist, onPressed = () => undefined }: Props) => {
       />
     </View>
   );
-};
+}
 
 const styles = StyleSheet.create({
   container: {

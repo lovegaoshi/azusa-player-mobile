@@ -68,11 +68,13 @@ const NewPlaylistDialog = ({
   );
 };
 
-export default (p: Props) => (
-  <Portal>
-    <NewPlaylistDialog {...p} />
-  </Portal>
-);
+export default function NewPlaylistDialogPortal(p: Props) {
+  return (
+    <Portal>
+      <NewPlaylistDialog {...p} />
+    </Portal>
+  );
+}
 
 const styles = StyleSheet.create({
   dialog: {

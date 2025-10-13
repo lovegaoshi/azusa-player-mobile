@@ -37,7 +37,7 @@ interface Props {
  * carousel is made up by 3 animated.View;
  * carouselIndex tracks which one is active
  */
-export default ({
+export default function HorizontalCarousel({
   images,
   getImgSource,
   imgStyle,
@@ -45,7 +45,7 @@ export default ({
   callback = () => undefined,
   active = true,
   throttle = true,
-}: Props) => {
+}: Props) {
   // this number is contrained to 0, 1, 2
   const carouselIndex = useSharedValue(1);
   const [mImages, setMImages] = useState(images);
@@ -158,4 +158,4 @@ export default ({
       </View>
     </GestureDetector>
   );
-};
+}

@@ -43,13 +43,13 @@ export const GenericDialog = ({
   );
 };
 
-export default (p: Props) => {
+export default function GenericDialogPortal(p: Props) {
   return (
     <Portal>
       <GenericDialog {...p} />
     </Portal>
   );
-};
+}
 
 const styles = StyleSheet.create({
   dialogContent: {

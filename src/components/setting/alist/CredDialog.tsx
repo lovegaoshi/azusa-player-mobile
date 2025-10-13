@@ -58,10 +58,10 @@ const CredDialog = ({
   );
 };
 
-export default (p: Props) => {
+export default function CredDialogPortal(p: Props) {
   return (
     <Portal>
       <CredDialog {...p} />
     </Portal>
   );
-};
+}

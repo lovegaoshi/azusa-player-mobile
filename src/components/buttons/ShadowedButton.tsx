@@ -12,13 +12,13 @@ interface Props {
   style?: ViewStyle;
   accessibilityLabel?: string;
 }
-export default ({
+export default function ShadowedButton({
   iconSize = 30,
   onPress = () => undefined,
   icon,
   style,
   accessibilityLabel,
-}: Props) => {
+}: Props) {
   const playerStyle = useNoxSetting(state => state.playerStyle);
   const size = iconSize;
 
@@ -49,4 +49,4 @@ export default ({
       </Pressable>
     </ShadowedElement>
   );
-};
+}

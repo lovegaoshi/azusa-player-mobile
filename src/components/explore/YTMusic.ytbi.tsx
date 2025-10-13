@@ -70,10 +70,10 @@ export const YTMixedContent = ({ content }: ContentProps) => {
   }
 };
 
-export default ({
+export default function ExploreYTMusic({
   onScroll,
   onMomentumScrollEnd,
-}: NoxComponent.ScrollableProps) => {
+}: NoxComponent.ScrollableProps) {
   const moods = useYTMExplore(state => state.moods);
   const refreshHome = useYTMExplore(state => state.refreshHome);
   const initialize = useYTMExplore(state => state.initialize);
@@ -133,4 +133,4 @@ export default ({
       </ScrollView>
     </View>
   );
-};
+}

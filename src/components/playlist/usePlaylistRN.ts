@@ -30,7 +30,9 @@ interface ScrollTo {
   viewPosition?: number; // toIndex = -1, reset = false, viewPosition = -4
 }
 
-export default (playlist: NoxMedia.Playlist): UsePlaylistRN => {
+export default function usePlaylistRN(
+  playlist: NoxMedia.Playlist,
+): UsePlaylistRN {
   const { t } = useTranslation();
   const setSnack = useSnack(state => state.setSnack);
   const netInfo = useNetInfo();
@@ -237,7 +239,7 @@ export default (playlist: NoxMedia.Playlist): UsePlaylistRN => {
     scrollTo,
     playlistRef,
   };
-};
+}
 
 export interface UsePlaylistRN extends UsePlaylist {
   refreshPlaylist: (addToEnd?: boolean) => Promise<void>;

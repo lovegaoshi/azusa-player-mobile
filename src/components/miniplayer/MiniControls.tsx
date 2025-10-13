@@ -49,7 +49,10 @@ const TrackInfo = () => {
 interface Props extends NoxComponent.MiniplayerProps {
   expand: () => void;
 }
-export default ({ miniplayerHeight, expand }: Props) => {
+export default function MiniplayerControls({
+  miniplayerHeight,
+  expand,
+}: Props) {
   const { performSkipToNext, performSkipToPrevious } = useTPControls();
   const PlayerHeight = Dimensions.get('window').height - MinPlayerHeight;
   const playerStyle = useNoxSetting(state => state.playerStyle);
@@ -94,7 +97,7 @@ export default ({ miniplayerHeight, expand }: Props) => {
       </Animated.View>
     </TouchableWithoutFeedback>
   );
-};
+}
 
 const PlayPauseButton = () => {
   const playerStyle = useNoxSetting(state => state.playerStyle);

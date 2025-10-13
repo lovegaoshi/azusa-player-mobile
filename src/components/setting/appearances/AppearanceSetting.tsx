@@ -12,7 +12,9 @@ export enum VIEW {
   SKIN = 'SkinSetting',
 }
 
-export default ({ navigation }: NoxComponent.StackNavigationProps) => {
+export default function AppearanceSettings({
+  navigation,
+}: NoxComponent.StackNavigationProps) {
   return (
     <ScrollView>
       <SettingListItem
@@ -68,4 +70,4 @@ export default ({ navigation }: NoxComponent.StackNavigationProps) => {
       />
     </ScrollView>
   );
-};
+}
