@@ -4,7 +4,7 @@ import { View } from 'react-native';
 import SettingListItem from '../helpers/SettingListItem';
 import NoWeebDialog from './NoWeebDialog';
 
-export default () => {
+export default function NoWeebButton() {
   const [visible, setVisible] = React.useState(false);
 
   return (
@@ -17,4 +17,4 @@ export default () => {
       />
     </View>
   );
-};
+}

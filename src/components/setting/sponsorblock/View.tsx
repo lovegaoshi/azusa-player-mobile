@@ -4,7 +4,7 @@ import useNoxSetting from '@stores/useApp';
 import { RenderSetting } from '../helpers/RenderSetting';
 import SBCategoryButton from './SBCategoryButton';
 
-export default () => {
+export default function SBView() {
   const playerStyle = useNoxSetting(state => state.playerStyle);
   return (
     <View
@@ -24,4 +24,4 @@ export default () => {
       </View>
     </View>
   );
-};
+}

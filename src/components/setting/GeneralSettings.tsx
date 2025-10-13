@@ -69,7 +69,7 @@ const GEN_SETTING_BOOLEAN: SettingEntry[] = [
   },
 ];
 
-export default () => {
+export default function GeneralSettings() {
   const playerStyle = useNoxSetting(state => state.playerStyle);
 
   return (
@@ -86,4 +86,4 @@ export default () => {
       </ScrollView>
     </View>
   );
-};
+}

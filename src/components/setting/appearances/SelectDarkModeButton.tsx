@@ -61,4 +61,6 @@ const Button = ({
   );
 };
 
-export default () => <SelectDialogWrapper Children={Button} />;
+export default function SelectDarkModeButton() {
+  return <SelectDialogWrapper Children={Button} />;
+}

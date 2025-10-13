@@ -35,13 +35,16 @@ const useAndroidAutoListener = () => {
   return { buildBrowseTree };
 };
 
-export default () => {
+export default function usePlaybackAA() {
   switch (Platform.OS) {
     case 'android':
+      // platform dependent. this is safe.
+      // eslint-disable-next-line react-hooks/rules-of-hooks
       return useAndroidAutoListener();
     case 'ios':
+      // eslint-disable-next-line react-hooks/rules-of-hooks
       return usePlaybackCarplay();
     default:
       throw new Error('unsupported platform');
   }
-};
+}

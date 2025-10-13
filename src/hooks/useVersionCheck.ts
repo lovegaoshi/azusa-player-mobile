@@ -18,7 +18,7 @@ const regexVersion = (version: string) => {
   return regexVersion;
 };
 
-export default () => {
+export default function useVersionCheck() {
   const playerSetting = useNoxSetting(state => state.playerSetting);
   const setSnack = useSnack(state => state.setSnack);
   const snackDismiss = useSnack(state => state.snackDismiss);
@@ -122,4 +122,4 @@ export default () => {
     }
   };
   return { checkVersion, updateVersion };
-};
+}

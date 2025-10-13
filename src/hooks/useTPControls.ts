@@ -160,7 +160,7 @@ export const performSkipToPrevious = (
   mPerformFade(callback);
 };
 
-export default () => {
+export default function useTPControl() {
   const playerSetting = useNoxSetting(state => state.playerSetting);
   const fadeIntervalMs = useStore(appStore, state => state.fadeIntervalMs);
 
@@ -188,4 +188,4 @@ export default () => {
         mPerformFade,
       ),
   };
-};
+}

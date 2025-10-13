@@ -13,7 +13,7 @@ import { useNoxSetting } from '@stores/useApp';
 import CredDialog from './CredDialog';
 import { styles } from '@components/style';
 
-export default () => {
+export default function AListSettings() {
   const [credList, setCredList] = useState<NoxStorage.AListCred[]>([]);
   const [currentCred, setCurrentCred] = useState<NoxStorage.AListCred>();
   const [credDialogOpen, setCredDialogOpen] = useState(false);
@@ -99,4 +99,4 @@ export default () => {
       />
     </View>
   );
-};
+}

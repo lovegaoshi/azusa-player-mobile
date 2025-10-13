@@ -5,7 +5,7 @@ import { usePlayWhenReady, useProgress } from 'react-native-track-player';
 import WaveAnimation from './WavyAnimation';
 import { useNoxSetting } from '@stores/useApp';
 
-export default () => {
+export default function ProgressWavy() {
   const playWhenReady = usePlayWhenReady();
   const { position, duration } = useProgress(1000, false);
   const playerSetting = useNoxSetting(state => state.playerSetting);
@@ -22,7 +22,7 @@ export default () => {
       )}
     </View>
   );
-};
+}
 
 const styles = StyleSheet.create({
   waveProgressContainer: {

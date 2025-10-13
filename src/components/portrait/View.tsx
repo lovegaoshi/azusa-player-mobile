@@ -13,7 +13,7 @@ const screenOptions = {
   ...DefaultScreenOption,
 };
 
-export default () => {
+export default function PortraitView() {
   const playerStyle = useNoxSetting(state => state.playerStyle);
 
   return (
@@ -39,4 +39,4 @@ export default () => {
       </Stack.Navigator>
     </FlexView>
   );
-};
+}

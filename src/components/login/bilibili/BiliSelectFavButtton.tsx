@@ -8,7 +8,7 @@ import bilifavlistFetch from '@utils/mediafetch/bilifavlist';
 import { dummyPlaylist } from '@objects/Playlist';
 import usePlaylistBrowseTree from '@hooks/usePlaylistBrowseTree';
 
-export default () => {
+export default function BiliSelectFavButton() {
   const { t } = useTranslation();
   const { addPlaylist } = usePlaylistBrowseTree();
   const [visible, setVisible] = React.useState(false);
@@ -69,4 +69,4 @@ export default () => {
       />
     </>
   );
-};
+}

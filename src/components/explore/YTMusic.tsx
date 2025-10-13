@@ -81,7 +81,7 @@ export const YTMixedContent = ({ content }: ContentProps) => {
   }
 };
 
-export default () => {
+export default function YTMusic() {
   const [activeMood, setActiveMood] = useState('');
   const moods = useYTMExplore(state => state.moods);
   const refreshHome = useYTMExplore(state => state.refreshHome);
@@ -134,4 +134,4 @@ export default () => {
       </ScrollView>
     </View>
   );
-};
+}

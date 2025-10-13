@@ -6,7 +6,7 @@ import { useStore } from 'zustand';
 import { useNoxSetting } from '@stores/useApp';
 import appStore from '@stores/appStore';
 
-export default () => {
+export default function ProgressFetchBar() {
   const fetchProgress = useStore(appStore, state => state.fetchProgress);
   const playerStyle = useNoxSetting(state => state.playerStyle);
 
@@ -20,7 +20,7 @@ export default () => {
       ]}
     />
   );
-};
+}
 
 const styles = StyleSheet.create({
   progressBarDouble: {

@@ -21,7 +21,7 @@ const LoginPage = ({ loginSite }: { loginSite: Site }) => {
   }
 };
 
-export default () => {
+export default function LoginView() {
   const playerStyle = useNoxSetting(state => state.playerStyle);
   const { loginPage, setLoginPage } = useAPM();
 
@@ -37,4 +37,4 @@ export default () => {
       sites={LoginSites}
     />
   );
-};
+}

@@ -23,7 +23,7 @@ export const usePlaybackStateLogging = () => {
   return playback;
 };
 
-export default () => {
+export default function useAPMPlaybackState() {
   const playback = usePlaybackState();
   const playWhenReady = usePlayWhenReady();
   const isLoading = useDebouncedValue(!NotLoading.has(playback.state!), 250);
@@ -40,4 +40,4 @@ export default () => {
     showBuffering,
     playback,
   };
-};
+}

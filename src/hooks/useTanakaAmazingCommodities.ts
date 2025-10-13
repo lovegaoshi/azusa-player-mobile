@@ -31,7 +31,7 @@ export const enableTanaka = async () => {
   saveItem(StorageKeys.TANAKA_AMAZING_COMMODITIES, TanakaSrc);
 };
 
-export default () => {
+export default function useTanaka() {
   const [tanaka, setTanaka] = useState<string | undefined>();
   const [initialized, setInitialized] = useState(false);
 
@@ -61,4 +61,4 @@ export default () => {
   }, []);
 
   return { tanaka, initialized };
-};
+}

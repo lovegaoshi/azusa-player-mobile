@@ -6,7 +6,7 @@ import logger from '@utils/Logger';
 import SearchBar from '@components/commonui/SearchBar';
 import { fetchMFsdk } from '@utils/mfsdk';
 
-export default () => {
+export default function MusicFreeSearchBar() {
   const { t } = useTranslation();
   const addMFsdks = useNoxSetting(state => state.addMFsdks);
   return (
@@ -25,4 +25,4 @@ export default () => {
       placeholder={t('MFSDK.url')}
     />
   );
-};
+}
