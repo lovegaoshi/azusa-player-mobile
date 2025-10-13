@@ -40,7 +40,7 @@ const _calculateWavePoints = ({
   amplitude = 20,
 }: CalculateWavePoints) => {
   'worklet';
-  return [...new Array(Math.max(points, 1) + 1)].map((v, i) => {
+  return Array.from({ length: Math.max(points, 1) + 1 }).map((v, i) => {
     'worklet';
     const scale = 1;
     const x = (i / points) * w;
@@ -65,7 +65,7 @@ const _buildPath = (points: Point[], w: number, h: number) => {
   };
   svg += cubic(initial, points[1]);
   let point = initial;
-  [...new Array(points.length - 3)].forEach((v, i) => {
+  Array.from({ length: points.length - 3 }).forEach((v, i) => {
     'worklet';
     point = {
       x: points[i + 1].x - point.x + points[i + 1].x,
