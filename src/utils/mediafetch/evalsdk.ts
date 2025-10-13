@@ -135,7 +135,7 @@ export const loadEvalPlugin = (plugin: string, path = 'MEMORY'): MFsdk => {
   const _module: any = { exports: {} };
   let _instance: any;
   // eslint-disable-next-line no-new-func
-  _instance = Function(`
+  _instance = new Function(`
                     'use strict';
                     return function(require, __musicfree_require, module, exports, console, env, URL) {
                         ${plugin}

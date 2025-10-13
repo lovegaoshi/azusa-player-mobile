@@ -89,15 +89,15 @@ const loginQRVerification = async () => {
   });
   await CookieManager.set(domain, {
     name: 'SESSDATA',
-    value: json.data.cookie_info.cookies.filter(
+    value: json.data.cookie_info.cookies.find(
       (val: any) => val.name === 'SESSDATA',
-    )[0].value,
+    ).value,
   });
   await CookieManager.set(domain, {
     name: 'bili_jct',
-    value: json.data.cookie_info.cookies.filter(
+    value: json.data.cookie_info.cookies.find(
       (val: any) => val.name === 'bili_jct',
-    )[0].value,
+    ).value,
   });
   return true;
 };

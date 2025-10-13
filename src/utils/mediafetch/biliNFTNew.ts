@@ -20,10 +20,10 @@ const biliNFTFetch = async ({
   index,
   resolver = (json: any) => json.card_info.card_img,
   filter = (json: any) =>
-    json.item_list.filter(
+    json.item_list.find(
       (item: { card_info: { card_name: string } }) =>
         item.card_info.card_name === index,
-    )[0],
+    ),
 }: Props) => {
   const res = await bfetch(
     API.replace('{act_id}', act_id).replace('{lottery_id}', lottery_id),
@@ -51,9 +51,9 @@ const biliNFTRedeemFetch = ({ act_id, lottery_id, index }: Props) =>
     resolver: v =>
       v.card_item.card_type_info.content.animation.animation_video_urls[0],
     filter: v =>
-      v.collect_list.collect_infos.filter(
+      v.collect_list.collect_infos.find(
         (item: any) => item.redeem_item_name === index,
-      )[0],
+      ),
   });
 
 export { biliNFTVideoFetch, biliNFTRedeemFetch };

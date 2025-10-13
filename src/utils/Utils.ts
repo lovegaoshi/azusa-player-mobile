@@ -63,7 +63,7 @@ export const ms2MMSS = (ms: number) => {
 
 export const timestampToSeconds = (timestamp: string) => {
   try {
-    const timeArray = timestamp.split(':').map(parseFloat);
+    const timeArray = timestamp.split(':').map(Number.parseFloat);
     switch (timeArray.length) {
       case 1:
         return timeArray[0];
@@ -79,7 +79,7 @@ export const timestampToSeconds = (timestamp: string) => {
 };
 
 export const randomNumber = (v: number) => {
-  return Math.floor(Math.random() * v) >> 0;
+  return Math.trunc(Math.floor(Math.random() * v));
 };
 
 export const randomChoice = <T>(list: T[]) => {
@@ -152,10 +152,6 @@ export const chunkArray = <T>(arr: T[], size = 400): T[][] => {
     chunks[chunkIndex].push(item);
     return chunks;
   }, [] as T[][]);
-};
-
-export const charLength = (str: string) => {
-  return str.replace(/[\u0300-\u036f]/g, '').length;
 };
 
 export const timeout = (

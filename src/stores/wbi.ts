@@ -55,7 +55,7 @@ export const encWbi = (params: { [key: string]: string }) => {
         encodeURIComponent(key) +
           '=' +
           // 过滤 value 中的 "!'()*" 字符
-          encodeURIComponent(('' + params[key]).replace(chr_filter, '')),
+          encodeURIComponent(('' + params[key]).replaceAll(chr_filter, '')),
       );
     });
   const joinedQuery = query.join('&');

@@ -196,10 +196,8 @@ class NoxMediaCache {
   };
 
   getOrphanedCache = (songList: NoxMedia.Song[]) => {
-    const songListKeys = songList.map(song => noxCacheKey(song));
-    return Array.from(this.cache.keys()).filter(
-      key => !songListKeys.includes(key),
-    );
+    const songListKeys = new Set(songList.map(song => noxCacheKey(song)));
+    return Array.from(this.cache.keys()).filter(key => !songListKeys.has(key));
   };
 
   cleanOrphanedCache = (orphanedList: string[]) => {
@@ -249,8 +247,8 @@ const _dataSaverSongs = (v: NoxMedia.Song[]) =>
   v.filter(song => cache.noxMediaCache?.peekCache(song) !== undefined);
 
 export const dataSaverSongs = (v: NoxMedia.Song[]) => {
-  const cachedSongIds = Array.from(cache.noxMediaCache.cache.keys());
-  return v.filter(song => cachedSongIds.includes(noxCacheKey(song)));
+  const cachedSongIds = new Set(cache.noxMediaCache.cache.keys());
+  return v.filter(song => cachedSongIds.has(noxCacheKey(song)));
 };
 
 export const dataSaverPlaylist = (playlist: NoxMedia.Playlist) => {
