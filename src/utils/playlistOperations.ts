@@ -53,9 +53,7 @@ export const sortPlaylist = async (
           return song;
         })
         // and sort by order
-        .toSorted((a, b) =>
-          ascend ? a.order! - b.order! : b.order! - a.order!,
-        ),
+        .sort((a, b) => (ascend ? a.order! - b.order! : b.order! - a.order!)),
     };
   }
   // for any other sorting methods, first re-apply order to all songs
@@ -67,7 +65,7 @@ export const sortPlaylist = async (
     case SortOptions.Title:
       return {
         ...playlist,
-        songList: playlist.songList.toSorted((a, b) =>
+        songList: playlist.songList.sort((a, b) =>
           ascend
             ? a.parsedName.localeCompare(b.parsedName)
             : b.parsedName.localeCompare(a.parsedName),
@@ -76,7 +74,7 @@ export const sortPlaylist = async (
     case SortOptions.Artist:
       return {
         ...playlist,
-        songList: playlist.songList.toSorted((a, b) =>
+        songList: playlist.songList.sort((a, b) =>
           ascend
             ? a.singer.localeCompare(b.singer)
             : b.singer.localeCompare(a.singer),
@@ -85,7 +83,7 @@ export const sortPlaylist = async (
     case SortOptions.Album:
       return {
         ...playlist,
-        songList: playlist.songList.toSorted((a, b) =>
+        songList: playlist.songList.sort((a, b) =>
           ascend
             ? (a.album ?? '').localeCompare(b.album ?? '')
             : (b.album ?? '').localeCompare(a.album ?? ''),
@@ -95,7 +93,7 @@ export const sortPlaylist = async (
       const lastPlayCount = await getPlaylistPlaybackCount(playlist);
       return {
         ...playlist,
-        songList: playlist.songList.toSorted((a, b) =>
+        songList: playlist.songList.sort((a, b) =>
           ascend
             ? (lastPlayCount[a.id]?.lastPlayed ?? 0) -
               (lastPlayCount[b.id]?.lastPlayed ?? 0)
@@ -108,7 +106,7 @@ export const sortPlaylist = async (
       const lastPlayCount = await getPlaylistPlaybackCount(playlist);
       return {
         ...playlist,
-        songList: playlist.songList.toSorted((a, b) =>
+        songList: playlist.songList.sort((a, b) =>
           ascend
             ? (lastPlayCount[a.id]?.count ?? 0) -
               (lastPlayCount[b.id]?.count ?? 0)
@@ -120,7 +118,7 @@ export const sortPlaylist = async (
     case SortOptions.Date:
       return {
         ...playlist,
-        songList: playlist.songList.toSorted((a, b) =>
+        songList: playlist.songList.sort((a, b) =>
           ascend
             ? (a.addedDate ?? 0) - (b.addedDate ?? 0)
             : (b.addedDate ?? 0) - (a.addedDate ?? 0),
