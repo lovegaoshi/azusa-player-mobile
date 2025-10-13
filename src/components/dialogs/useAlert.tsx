@@ -1,7 +1,7 @@
 import { Alert } from 'react-native';
 import { useTranslation } from 'react-i18next';
 
-export default () => {
+export default function useAlert() {
   const { t } = useTranslation();
 
   const ThreeWayAlert = (
@@ -55,4 +55,4 @@ export default () => {
     TwoWayAlert,
     ThreeWayAlert,
   };
-};
+}

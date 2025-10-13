@@ -120,14 +120,14 @@ const VIPScreen = () => {
   );
 };
 
-export default () => {
+export default function BillingView() {
   const vip = useVIP(state => state.VIP);
 
   if (vip) {
     return <VIPScreen />;
   }
   return <PurchaseVIPScreen />;
-};
+}
 
 const mStyle = StyleSheet.create({
   container: { flex: 1, paddingHorizontal: 10, paddingTop: 10 },

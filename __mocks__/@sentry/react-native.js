@@ -1,3 +1,5 @@
-export default () => ({
-  nativeCrash: () => {},
-});
+export default function sentryMock() {
+  return {
+    nativeCrash: () => {},
+  };
+}

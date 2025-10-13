@@ -19,7 +19,7 @@ export default ({
     setSelectVisible(true);
     setCurrentSelectOption({
       options: CrossFadeOptions,
-      renderOption: (option: number) => String(option),
+      renderOption: String,
       defaultIndex: 0,
       onClose: () => setSelectVisible(false),
       onSubmit: (index: number) => {

@@ -3,7 +3,7 @@ import { View } from 'react-native';
 
 import useAccentColor from '@hooks/useAccentColor';
 
-export default () => {
+export default function AccentColorBackground() {
   const { backgroundColor } = useAccentColor();
 
   return (
@@ -17,4 +17,4 @@ export default () => {
       }}
     />
   );
-};
+}

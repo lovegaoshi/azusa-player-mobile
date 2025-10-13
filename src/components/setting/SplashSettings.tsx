@@ -160,7 +160,7 @@ export default () => {
         style={styles.view}
         onLayout={e => (viewHeight.value = e.nativeEvent.layout.height)}
       >
-        {Array.from(Array(ImageHolderCount).keys())
+        {Array.from(new Array(ImageHolderCount).keys())
           .map((_, i) => (
             <Animated.View
               key={i}

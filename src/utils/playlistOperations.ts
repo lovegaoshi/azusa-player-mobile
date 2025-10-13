@@ -53,7 +53,9 @@ export const sortPlaylist = async (
           return song;
         })
         // and sort by order
-        .toSorted((a, b) => (ascend ? a.order! - b.order! : b.order! - a.order!)),
+        .toSorted((a, b) =>
+          ascend ? a.order! - b.order! : b.order! - a.order!,
+        ),
     };
   }
   // for any other sorting methods, first re-apply order to all songs

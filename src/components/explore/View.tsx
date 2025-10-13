@@ -48,11 +48,13 @@ const Explore = () => {
   );
 };
 
-export default () => (
-  <AutoUnmountNavView>
-    <Explore />
-  </AutoUnmountNavView>
-);
+export default function ExploreView() {
+  return (
+    <AutoUnmountNavView>
+      <Explore />
+    </AutoUnmountNavView>
+  );
+}
 
 const styles = StyleSheet.create({
   container: {

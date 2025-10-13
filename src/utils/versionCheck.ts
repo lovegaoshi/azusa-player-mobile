@@ -15,8 +15,9 @@ export const getVersion = async () => {
     const json = await res.json();
     noxCheckedVersion = json.tag_name;
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    noxAPKUrl = json.assets.find((f: any) => f.name.includes('arm64-v8a'))
-      .browser_download_url;
+    noxAPKUrl = json.assets.find((f: any) =>
+      f.name.includes('arm64-v8a'),
+    ).browser_download_url;
     const devres = await fetch(
         'https://api.github.com/repos/lovegaoshi/azusa-player-mobile/releases',
       ),

@@ -40,7 +40,7 @@ const _calculateWavePoints = ({
   amplitude = 20,
 }: CalculateWavePoints) => {
   'worklet';
-  return [...Array(Math.max(points, 1) + 1)].map((v, i) => {
+  return [...new Array(Math.max(points, 1) + 1)].map((v, i) => {
     'worklet';
     const scale = 1;
     const x = (i / points) * w;
@@ -65,7 +65,7 @@ const _buildPath = (points: Point[], w: number, h: number) => {
   };
   svg += cubic(initial, points[1]);
   let point = initial;
-  [...Array(points.length - 3)].forEach((v, i) => {
+  [...new Array(points.length - 3)].forEach((v, i) => {
     'worklet';
     point = {
       x: points[i + 1].x - point.x + points[i + 1].x,
@@ -74,7 +74,7 @@ const _buildPath = (points: Point[], w: number, h: number) => {
     svg += cubic(point, points[i + 2]);
   });
   // makes the bezier curve fit to the last point
-  svg += cubic(points[points.length - 1], { x: w - 10, y: h + 10 }); //` C ${w} ${h}`;
+  svg += cubic(points.at(-1)!, { x: w - 10, y: h + 10 }); //` C ${w} ${h}`;
   return svg;
 };
 
