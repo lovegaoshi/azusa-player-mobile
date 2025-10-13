@@ -214,7 +214,7 @@ export const clearPlaylistUninterrupted = async () => {
   const currentQueue = await TrackPlayer.getQueue();
   const currentTrackIndex = await TrackPlayer.getActiveTrackIndex();
   if (currentTrackIndex === undefined) return;
-  const removeTrackIndices = [...Array(currentQueue.length).keys()];
+  const removeTrackIndices = [...new Array(currentQueue.length).keys()];
   removeTrackIndices.splice(currentTrackIndex, 1);
   try {
     await TrackPlayer.remove(removeTrackIndices);

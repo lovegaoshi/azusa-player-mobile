@@ -9,7 +9,7 @@ import { useRef } from 'react';
 
 import { NativeText as Text } from '@components/commonui/ScaledText';
 
-export default () => {
+export default function ElevationView() {
   const sheet = useRef<TrueSheet>(null);
   const zoom = useSharedValue(1);
   const borderRadius = useSharedValue(0);
@@ -61,4 +61,4 @@ export default () => {
       </TrueSheet>
     </>
   );
-};
+}

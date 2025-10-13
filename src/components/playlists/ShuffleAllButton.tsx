@@ -6,7 +6,7 @@ import usePlayback from '@hooks/usePlayback';
 import useNavigation from '@hooks/useNavigation';
 import { useNoxSetting } from '@stores/useApp';
 
-export default () => {
+export default function ShuffleAllButton() {
   const navigation = useNavigation();
   const playerStyle = useNoxSetting(state => state.playerStyle);
   const { shuffleAll } = usePlayback();
@@ -22,4 +22,4 @@ export default () => {
       iconColor={playerStyle.colors.primary}
     />
   );
-};
+}

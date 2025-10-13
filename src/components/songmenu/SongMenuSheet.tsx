@@ -28,7 +28,7 @@ import { isAndroid } from '@utils/RNUtils';
 import { songExport2URL } from '@utils/mediafetch/resolveURL';
 import useSnack from '@stores/useSnack';
 
-export default () => {
+export default function SongMenuSheet() {
   const sheet = useRef<TrueSheet>(null);
   const track = useTrackStore(s => s.track);
   const song = track?.song;
@@ -197,4 +197,4 @@ export default () => {
       />
     </NoxBottomSheet>
   );
-};
+}

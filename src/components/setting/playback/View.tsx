@@ -72,7 +72,7 @@ const Home = ({
     setSelectVisible(true);
     setCurrentSelectOption({
       options: FadeOptions,
-      renderOption: (option: number) => String(option),
+      renderOption: String,
       defaultIndex: 0,
       onClose: () => setSelectVisible(false),
       onSubmit: (index: number) => {
@@ -110,7 +110,7 @@ const Home = ({
   );
 };
 
-export default () => {
+export default function SettingPlaybackView() {
   const playerStyle = useNoxSetting(state => state.playerStyle);
   return (
     <View
@@ -122,4 +122,4 @@ export default () => {
       <SelectDialogWrapper Children={p => <Home {...p} />} />
     </View>
   );
-};
+}

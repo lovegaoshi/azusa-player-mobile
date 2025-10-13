@@ -12,7 +12,7 @@ import { isAndroid } from '@utils/RNUtils';
 
 const ID = 'APM-inapp-update-notification';
 
-export default () => {
+export default function usePlayStore() {
   const inAppUpdates = new SpInAppUpdates(
     false, // isDebug
   );
@@ -68,4 +68,4 @@ export default () => {
   };
 
   return { checkPlayStoreUpdates };
-};
+}

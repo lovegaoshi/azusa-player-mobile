@@ -5,7 +5,7 @@ import useSnack from '../stores/useSnack';
 
 const android = RNFetchBlob.android;
 
-export default () => {
+export default function useInstallAPK() {
   const { t } = useTranslation();
   const setSnack = useSnack(state => state.setSnack);
 
@@ -32,4 +32,4 @@ export default () => {
       .catch();
   };
   return { RNFetchDownloadAPK };
-};
+}

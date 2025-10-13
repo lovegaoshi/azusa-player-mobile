@@ -4,7 +4,7 @@ import { useAndroidAuto } from './usePlaybackAA';
 /**
  * wrapper of playlist operations with browsetree updates.
  */
-export default () => {
+export default function usePlaylistBrowseTree() {
   const addPlaylistStore = useNoxSetting(state => state.addPlaylist);
   const removePlaylistStore = useNoxSetting(state => state.removePlaylist);
   const { buildBrowseTree } = useAndroidAuto();
@@ -20,4 +20,4 @@ export default () => {
   };
 
   return { addPlaylist, removePlaylist };
-};
+}

@@ -6,7 +6,7 @@ import Dialog from '../../dialogs/GenericSelectDialog';
 import SettingListItem from '../helpers/SettingListItem';
 import useNoxSetting from '@stores/useApp';
 
-export default () => {
+export default function EQButton() {
   const { t } = useTranslation();
   const playerSetting = useNoxSetting(state => state.playerSetting);
   const setPlayerSetting = useNoxSetting(state => state.setPlayerSetting);
@@ -49,4 +49,4 @@ export default () => {
       />
     </>
   );
-};
+}

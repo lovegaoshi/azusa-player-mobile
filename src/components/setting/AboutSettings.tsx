@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next';
 import { PaperText as Text } from '@components/commonui/ScaledText';
 import { useNoxSetting } from '@stores/useApp';
 
-export default () => {
+export default function AboutSettings() {
   const { t } = useTranslation();
   const playerStyle = useNoxSetting(state => state.playerStyle);
 
@@ -44,7 +44,7 @@ export default () => {
       </ScrollView>
     </View>
   );
-};
+}
 
 const styles = StyleSheet.create({
   text: {

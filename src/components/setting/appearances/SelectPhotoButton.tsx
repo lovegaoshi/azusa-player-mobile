@@ -4,7 +4,7 @@ import * as ImagePicker from 'expo-image-picker';
 import SettingListItem from '../helpers/SettingListItem';
 import { useNoxSetting } from '@stores/useApp';
 
-export default () => {
+export default function SelectPhotoButton() {
   const playerStyle = useNoxSetting(state => state.playerStyle);
   const setPlayerStyle = useNoxSetting(state => state.setPlayerStyle);
 
@@ -31,4 +31,4 @@ export default () => {
       settingCategory="AppearanceSettings"
     />
   );
-};
+}

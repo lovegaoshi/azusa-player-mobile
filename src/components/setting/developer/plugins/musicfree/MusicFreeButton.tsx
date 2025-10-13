@@ -13,7 +13,7 @@ const MusicFreeIcon = () => (
   />
 );
 
-export default () => {
+export default function MusicFreeButton() {
   const navigation = useNavigation();
   return (
     <SettingListItem
@@ -23,7 +23,7 @@ export default () => {
       settingCategory="PluginSettings"
     />
   );
-};
+}
 const style = StyleSheet.create({
   musicFreeIcon: {
     width: 50,

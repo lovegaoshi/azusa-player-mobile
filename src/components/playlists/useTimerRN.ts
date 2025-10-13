@@ -7,7 +7,7 @@ import BackgroundTimer from 'react-native-background-timer';
 
 import useTimer from '@hooks/useTimer';
 
-export default () => {
+export default function useTimerRN() {
   const timer = useTimer({
     onTimerPause: () => BackgroundTimer.stopBackgroundTimer(),
     onTimerRestart: () => {
@@ -28,4 +28,4 @@ export default () => {
     ...timer,
     timerStart,
   };
-};
+}

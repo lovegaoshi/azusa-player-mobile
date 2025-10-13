@@ -52,7 +52,8 @@ export default ({
     setCurrentIndex(currentIndex.map((val, i) => (i === index ? !val : val)));
 
   React.useEffect(
-    () => setCurrentIndex(selectedIndices ?? Array(options.length).fill(false)),
+    () =>
+      setCurrentIndex(selectedIndices ?? new Array(options.length).fill(false)),
     [options, selectedIndices],
   );
 

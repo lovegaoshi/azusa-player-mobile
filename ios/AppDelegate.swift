@@ -25,7 +25,9 @@ class AppDelegate: ExpoAppDelegate {
   }
   
   func initRN(launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) {
-    if (initialized) { return }
+    if (initialized) {
+      return
+    }
     initialized = true
     let delegate = ReactNativeDelegate()
     let factory = ExpoReactNativeFactory(delegate: delegate)

@@ -31,10 +31,10 @@ const store: StateCreator<MFsdkStore, [], [], MFsdkStore> = (set, get) => ({
   rmMFsdks: mf => {
     if (mf.length === 0) return;
     const { MFsdks } = get();
-    const rmUrls = mf.map(v => v.srcUrl);
-    rmMFsdks(MFsdks.filter(v => rmUrls.includes(v.srcUrl)).map(v => v.path));
+    const rmUrls = new Set(mf.map(v => v.srcUrl));
+    rmMFsdks(MFsdks.filter(v => rmUrls.has(v.srcUrl)).map(v => v.path));
     set(s => ({
-      MFsdks: s.MFsdks.filter(v => !rmUrls.includes(v.srcUrl)),
+      MFsdks: s.MFsdks.filter(v => !rmUrls.has(v.srcUrl)),
     }));
   },
 });

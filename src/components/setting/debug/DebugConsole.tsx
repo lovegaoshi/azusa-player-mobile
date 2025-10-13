@@ -5,10 +5,10 @@ import GenericDialog from '@components/dialogs/GenericDialog';
 import showLog from './Log';
 import NativeNoxModule from '@specs/NativeNoxModule';
 
-export default () => {
+export default function DebugConsole() {
   const [visible] = React.useState(false);
   return <GenericDialog visible={visible}></GenericDialog>;
-};
+}
 
 export const showDebugLog = async () => {
   const log = `

@@ -24,7 +24,7 @@ import { TPSeek } from '@stores/RNObserverStore';
 const { getState } = noxPlayingList;
 const { fadeIntervalMs, fadeIntervalSec } = appStore.getState();
 
-export default () => {
+export default function usePlayerControls() {
   const { performSkipToNext, performSkipToPrevious, prepareSkipToNext } =
     useTPControls();
 
@@ -224,4 +224,4 @@ export default () => {
     performSkipToNext,
     performSkipToPrevious,
   };
-};
+}

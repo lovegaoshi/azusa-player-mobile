@@ -5,7 +5,7 @@ import Dialog from '../dialogs/GenericDialog';
 
 const ICON = 'shuffle';
 
-export default () => {
+export default function GenericButton() {
   const [dialogOpen, setDialogOpen] = useState(false);
 
   return (
@@ -24,7 +24,7 @@ export default () => {
       />
     </React.Fragment>
   );
-};
+}
 
 const styles = StyleSheet.create({
   btnStyle: {

@@ -6,7 +6,7 @@ import SettingListItem from '../helpers/SettingListItem';
 import useNoxSetting from '@stores/useApp';
 import { Category, CategoryList } from '@utils/sponsorblock/Constants';
 
-export default () => {
+export default function SBCategoryButton() {
   const { t } = useTranslation();
   const sponsorBlockCat = useNoxSetting(
     state => state.playerSetting,
@@ -53,4 +53,4 @@ export default () => {
       />
     </>
   );
-};
+}

@@ -12,7 +12,7 @@ const regexResolveURLsYTM: NoxUtils.RegexMatchSuggest<NoxMedia.Song> = [
   [ytbvideoFetch.regexResolveURLMatch2, ytbvideoFetch.suggestYTM],
 ];
 // 130,音乐综合 29,音乐现场 59,演奏 31,翻唱 193,MV 30,VOCALOID·UTAU 194,电音 28,原创音乐
-const musicTids = [130, 29, 59, 31, 193, 30, 194, 28];
+const musicTids = new Set([130, 29, 59, 31, 193, 30, 194, 28]);
 
 interface Props {
   skipLongVideo?: boolean;
@@ -47,7 +47,7 @@ export default async ({
       throw new Error('not a bvid; bilisuggest fails');
     }
     const biliSuggested = (await biliSuggest(currentSong.bvid)).filter(val =>
-      musicTids.includes(val.tid),
+      musicTids.has(val.tid),
     );
     return (
       await biliavideo.regexFetch({

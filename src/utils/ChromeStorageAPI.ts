@@ -168,7 +168,7 @@ const parseImportedPartial = (
   key: string,
   parsedContent: [string, string][],
 ) => {
-  return JSON.parse(parsedContent.filter(val => val[0] === key)[0][1]);
+  return JSON.parse(parsedContent.find(val => val[0] === key)![1]);
 };
 
 const removePlaceholders = (p: [string, string][]) =>

@@ -3,7 +3,7 @@ import { IconButton } from 'react-native-paper';
 import { useNoxSetting } from '@stores/useApp';
 import TimerDialog from './TimerDialog';
 
-export default () => {
+export default function TimerButton() {
   const [timerVisible, setTimerVisible] = React.useState(false);
   const playerStyle = useNoxSetting(state => state.playerStyle);
 
@@ -19,4 +19,4 @@ export default () => {
       <TimerDialog visible={timerVisible} onClose={onDismiss} />
     </React.Fragment>
   );
-};
+}

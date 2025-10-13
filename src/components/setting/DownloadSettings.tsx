@@ -25,7 +25,7 @@ const BooleanSettings: SettingEntry[] = [
   },
 ];
 
-export default () => {
+export default function DownloadSettings() {
   const { t } = useTranslation();
   const playerStyle = useNoxSetting(state => state.playerStyle);
   const playerSetting = useNoxSetting(state => state.playerSetting);
@@ -62,7 +62,7 @@ export default () => {
       ))}
     </View>
   );
-};
+}
 
 const styles = StyleSheet.create({
   dummySettingsContainer: {

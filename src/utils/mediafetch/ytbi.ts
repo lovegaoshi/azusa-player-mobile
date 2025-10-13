@@ -85,7 +85,7 @@ export const ytwebClient = async () => {
   if (_ytWebClient !== undefined) {
     return _ytWebClient;
   }
-  const cookie = await getItem(StorageKeys.YTMCOOKIES, undefined);
+  const cookie = await getItem(StorageKeys.YTMCOOKIES);
   _ytWebClient = await Innertube.create({
     retrieve_player: false,
     enable_session_cache: false,
@@ -104,7 +104,7 @@ export const ytmClient = async () => {
   if (_ytmClient !== undefined) {
     return _ytmClient;
   }
-  const cookie = await getItem(StorageKeys.YTMCOOKIES, undefined);
+  const cookie = await getItem(StorageKeys.YTMCOOKIES);
   _ytmClient = await Innertube.create({
     retrieve_player: false,
     enable_session_cache: false,

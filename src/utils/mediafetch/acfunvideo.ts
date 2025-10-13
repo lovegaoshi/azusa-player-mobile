@@ -19,7 +19,7 @@ const resolveACFun = async (acid: string) => {
           v.children[0].data
         : null,
     )
-    .filter(x => !!x)[0] as string;
+    .find(x => !!x) as string;
   if (extractedScript === undefined) {
     throw new Error('Failed to extract script');
   }

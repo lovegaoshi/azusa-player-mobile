@@ -28,7 +28,7 @@ const HomeWrapper = ({ navigation }: NoxComponent.StackNavigationProps) => {
   );
 };
 
-export default () => {
+export default function DeveloperSettingView() {
   return (
     <Stack.Navigator>
       <Stack.Screen
@@ -48,4 +48,4 @@ export default () => {
       />
     </Stack.Navigator>
   );
-};
+}

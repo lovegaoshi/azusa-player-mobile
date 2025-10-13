@@ -138,7 +138,7 @@ const usePlaylist = (playlist: NoxMedia.Playlist): UsePlaylist => {
   };
 
   const resetSelected = (val = false) =>
-    setSelected(Array(playlist.songList.length).fill(val));
+    setSelected(new Array(playlist.songList.length).fill(val));
 
   const toggleSelected = useCallback((index: number) => {
     togglePlaylistInfoUpdate();
@@ -151,7 +151,7 @@ const usePlaylist = (playlist: NoxMedia.Playlist): UsePlaylist => {
   const toggleSelectedAll = () => {
     const mapCheckedIndices = (selectedIndices: number[], checked = true) => {
       setSelected(
-        Array(playlist.songList.length)
+        new Array(playlist.songList.length)
           .fill(false)
           .map((val, index) =>
             selectedIndices.includes(index) ? checked : val,

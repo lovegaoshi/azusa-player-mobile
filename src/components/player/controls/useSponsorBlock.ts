@@ -12,7 +12,7 @@ interface SponsorBlockState {
   sponsorBlock: SponsorBlockBili[];
 }
 
-export default () => {
+export default function useSponsorBlock() {
   const setSnack = useSnack(state => state.setSnack);
   const { t } = useTranslation();
   const playerSetting = useNoxSetting(state => state.playerSetting);
@@ -50,4 +50,4 @@ export default () => {
   };
 
   return { initSponsorBlock, checkSponsorBlock };
-};
+}

@@ -6,8 +6,8 @@ import LottieView, { AnimationObject } from 'lottie-react-native';
 import { useNoxSetting } from '@stores/useApp';
 import ShadowedElement from './ShadowedElement';
 
-const clickedStatesMap = Array.from(Array(10).keys()).map(curr =>
-  Array.from(Array(curr + 1).keys()).map(val => val / curr + 1),
+const clickedStatesMap = Array.from(new Array(10).keys()).map(curr =>
+  Array.from(new Array(curr + 1).keys()).map(val => val / curr + 1),
 );
 
 interface Props {

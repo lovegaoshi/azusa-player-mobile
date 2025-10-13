@@ -25,7 +25,7 @@ import { useMiniplayerHeight } from '@contexts/MiniPlayerHeightContext';
 
 const SnapToRatio = 0.15;
 
-export default () => {
+export default function MiniplayerView() {
   const [lrcVisible, setLrcVisible] = React.useState(false);
   const insets = useSafeAreaInsets();
   const dim = Dimensions.get('window');
@@ -196,4 +196,4 @@ export default () => {
       </Animated.View>
     </GestureDetector>
   );
-};
+}

@@ -16,7 +16,7 @@ enum Templates {
   Playlist = 'playlistTemplate',
 }
 
-export default () => {
+export default function usePlaybackCarplay() {
   const { t } = useTranslation();
   const [carPlayConnected, setCarPlayConnected] = useState(CarPlay.connected);
   const { playlists, playlistIds, playFromMediaId } = usePlayback();
@@ -121,4 +121,4 @@ export default () => {
   }, [carPlayConnected, playlistIds]);
 
   return { carPlayConnected, buildBrowseTree };
-};
+}

@@ -4,7 +4,7 @@ import SettingListItem from '../helpers/SettingListItem';
 import useSnack from '@stores/useSnack';
 import { onCheckGitVersion } from '@utils/OTAUpdate';
 
-export default () => {
+export default function OTA() {
   const setSnack = useSnack(state => state.setSnack);
   const { t } = useTranslation();
 
@@ -25,4 +25,4 @@ export default () => {
       settingCategory="DeveloperSettings"
     />
   );
-};
+}

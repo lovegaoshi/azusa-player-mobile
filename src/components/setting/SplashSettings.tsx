@@ -29,7 +29,7 @@ const getImagePosition = (index: number, position: number) => {
   return ImagePos.Others;
 };
 
-export default () => {
+export default function SplashSettings() {
   const [index, setIndex] = React.useState(0);
   const cardPositionX = useSharedValue(0);
   const cardPositionY = useSharedValue(0);
@@ -160,7 +160,7 @@ export default () => {
         style={styles.view}
         onLayout={e => (viewHeight.value = e.nativeEvent.layout.height)}
       >
-        {Array.from(Array(ImageHolderCount).keys())
+        {Array.from(new Array(ImageHolderCount).keys())
           .map((_, i) => (
             <Animated.View
               key={i}
@@ -181,7 +181,7 @@ export default () => {
       </View>
     </GestureDetector>
   );
-};
+}
 
 const WindowWidth = Dimensions.get('window').width;
 const windowEnd = WindowWidth + 100;
