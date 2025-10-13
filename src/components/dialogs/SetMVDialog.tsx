@@ -77,7 +77,7 @@ const SongDialog = ({
   );
 };
 
-export default function setMVDialog(p: Props) {
+export default function SetMVDialog(p: Props) {
   return (
     <Portal>
       <SongDialog {...p} />

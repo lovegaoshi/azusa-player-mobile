@@ -28,7 +28,7 @@ interface Props<T> {
 /**
  * a generic dialog that displays a list of items in radiobuttons.
  */
-export default function GenericInputDialog({
+export default function GenericCheckDialog({
   visible,
   options = [],
   renderOptionTitle = val => String(val),
