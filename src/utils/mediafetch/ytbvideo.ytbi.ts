@@ -29,12 +29,13 @@ export const resolveURL = async (song: NoxMedia.Song, iOS = false) => {
     : undefined;
 
   const extractedVideoInfo = await yt.getBasicInfo(song.bvid, {
-    client: 'WEB_EMBEDDED',
+    client: 'IOS',
   });
   const maxAudioQualityStream = extractedVideoInfo.chooseFormat({
     quality: 'best',
     type: 'audio',
   });
+  console.log('potoken', yt.session.player?.po_token);
   return {
     url:
       iOS && isIOS && hls_manifest_url

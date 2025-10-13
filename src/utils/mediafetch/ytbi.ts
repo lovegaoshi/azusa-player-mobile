@@ -6,6 +6,8 @@ import 'react-native-url-polyfill/auto';
 import { Innertube, ClientType, Platform } from 'youtubei.js';
 import { getSecure as getItem } from '@utils/ChromeStorageAPI';
 import { BuildScriptResult, VMPrimative } from 'youtubei.js/dist/src/types';
+import { BG, BgConfig } from 'bgutils-js';
+import { jsdom } from 'jsdom-jscore-rn';
 
 import { timeFunction } from '../Utils';
 import MMKV, { GHCacher } from '../fakeMMKV';
@@ -61,16 +63,56 @@ global.CustomEvent = CustomEvent as any;
 let ytClient: undefined | Innertube;
 let _ytWebClient: undefined | Innertube;
 let _ytmClient: undefined | Innertube;
+const requestKey = 'O43z0dpjhgX20SCx4KAo';
 
-const createYtClient = () =>
-  Innertube.create({
+const generatePOToken = async () => {
+  const webClient = await ytwebClient();
+  const visitorData = webClient.session.context.client.visitorData!;
+  const dom = jsdom();
+  console.log('APMdebugdom', dom, dom.window, dom.window?.document);
+  console.log('APMdebugvisitor', visitorData);
+  const bgConfig: BgConfig = {
+    fetch: (input: string | URL | globalThis.Request, init?: RequestInit) =>
+      fetch(input, init),
+    globalObj: globalThis,
+    identifier: visitorData,
+    requestKey,
+  };
+  const bgChallenge = await BG.Challenge.create(bgConfig);
+  const interpreterJavascript =
+    bgChallenge!.interpreterJavascript
+      .privateDoNotAccessOrElseSafeScriptWrappedValue;
+  console.log('APMdebugJScode', interpreterJavascript);
+  if (interpreterJavascript === null) {
+    return;
+  }
+  new Function(interpreterJavascript)();
+  console.log('APMdebugJScoderan');
+  try {
+    const poTokenResult = await BG.PoToken.generate({
+      program: bgChallenge!.program,
+      globalName: bgChallenge!.globalName,
+      bgConfig,
+    });
+    const placeholderPoToken = BG.PoToken.generateColdStartToken(visitorData);
+    console.log('APMdebugPOTOKEN', poTokenResult, placeholderPoToken);
+    return poTokenResult.poToken;
+  } catch (e) {
+    console.error(e);
+  }
+};
+
+const createYtClient = async () => {
+  return Innertube.create({
     cache: new GHCacher(),
     retrieve_player: true,
     enable_session_cache: false,
     generate_session_locally: false,
-    client_type: ClientType.WEB_EMBEDDED,
+    client_type: ClientType.IOS,
+    po_token: await generatePOToken(),
     //cookie,
   });
+};
 
 export default async () => {
   if (ytClient !== undefined) {
