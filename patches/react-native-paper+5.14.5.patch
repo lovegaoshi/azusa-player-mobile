@@ -1,5 +1,5 @@
 diff --git a/node_modules/react-native-paper/src/components/Menu/Menu.tsx b/node_modules/react-native-paper/src/components/Menu/Menu.tsx
-index 55922c1..6fff18f 100644
+index 55922c1..55d7c97 100644
 --- a/node_modules/react-native-paper/src/components/Menu/Menu.tsx
 +++ b/node_modules/react-native-paper/src/components/Menu/Menu.tsx
 @@ -346,6 +346,7 @@ const Menu = ({
@@ -10,20 +10,21 @@ index 55922c1..6fff18f 100644
      Animated.parallel([
        Animated.timing(scaleAnimationRef.current, {
          toValue: { x: menuLayoutResult.width, y: menuLayoutResult.height },
-@@ -367,11 +368,10 @@ const Menu = ({
+@@ -367,11 +368,11 @@ const Menu = ({
      });
    }, [anchor, attachListeners, measureAnchorLayout, theme]);
  
 -  const hide = React.useCallback(() => {
-+  const hide = React.useCallback((callback?: () => unknown) => {
++  const hide = React.useCallback(async (callback?: () => unknown) => {
      removeListeners();
  
      const { animation } = theme;
 -
++    await new Promise(resolve => setTimeout(resolve, 1));
      Animated.timing(opacityAnimationRef.current, {
        toValue: 0,
        duration: ANIMATION_DURATION * animation.scale,
-@@ -383,6 +383,8 @@ const Menu = ({
+@@ -383,6 +384,8 @@ const Menu = ({
          setRendered(false);
          prevRendered.current = false;
          focusFirstDOMNode(anchorRef.current);
@@ -32,7 +33,7 @@ index 55922c1..6fff18f 100644
        }
      });
    }, [removeListeners, theme]);
-@@ -640,7 +642,7 @@ const Menu = ({
+@@ -640,7 +643,7 @@ const Menu = ({
            <Pressable
              accessibilityLabel={overlayAccessibilityLabel}
              accessibilityRole="button"
@@ -41,7 +42,7 @@ index 55922c1..6fff18f 100644
              style={styles.pressableOverlay}
            />
            <View
-@@ -651,7 +653,7 @@ const Menu = ({
+@@ -651,7 +654,7 @@ const Menu = ({
              accessibilityViewIsModal={visible}
              style={[styles.wrapper, positionStyle, style]}
              pointerEvents={pointerEvents}
