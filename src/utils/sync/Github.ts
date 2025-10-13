@@ -54,7 +54,7 @@ export const sync = async ({
     {
       method: 'PUT',
       body: JSON.stringify({
-        message: `noxbackup - ${new Date().getTime()}`,
+        message: `noxbackup - ${Date.now()}`,
         content: fromByteArray(content),
         sha: probeFile.sha,
       }),

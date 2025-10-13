@@ -18,7 +18,7 @@ export const initMuse = async (
   // https://github.com/sigma67/ytmusicapi/blob/9ce284a7eae9c4cdc04bb098f7549cc5f1c80e22/ytmusicapi/helpers.py#L52
   const get_headers = async () => {
     const now = new Date();
-    const timems = now.getTime() + now.getTimezoneOffset() * 60 * 1000;
+    const timems = Date.now() + now.getTimezoneOffset() * 60 * 1000;
     const timesec = Math.round(timems / 1000);
     const SAPISIDHASH = await crypto.digestStringAsync(
       crypto.CryptoDigestAlgorithm.SHA1,

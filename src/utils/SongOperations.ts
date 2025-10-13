@@ -105,7 +105,7 @@ export const resolveUrl = async ({
       url: url.url,
       headers: customReqHeader(url.url),
       userAgent: DEFAULT_UA,
-      urlRefreshTimeStamp: new Date().getTime(),
+      urlRefreshTimeStamp: Date.now(),
       ...(url.cover && { artwork: url.cover }),
       ...(url.duration && { duration: url.duration }),
     };

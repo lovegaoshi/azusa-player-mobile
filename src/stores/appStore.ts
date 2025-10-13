@@ -128,7 +128,7 @@ export const cacheResolvedURL = async (
   const cachedResolvedURL = cachedResolveURLMap[song.id];
   if (
     cachedResolvedURL === undefined ||
-    new Date().getTime() - cachedResolvedURL.urlRefreshTimeStamp > 1200000
+    Date.now() - cachedResolvedURL.urlRefreshTimeStamp > 1200000
   ) {
     logger.debug(`[CacheResolveURL] ${song.parsedName} needs to be refetched.`);
     const result = await resolveURL(song);

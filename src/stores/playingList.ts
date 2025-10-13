@@ -163,7 +163,10 @@ export const getPlaybackModeNotifIcon = (
   return [nextIcon, TPRepeatMode];
 };
 
-const RefreshPlayingIndex = [NoxRepeatMode.Shuffle, NoxRepeatMode.Repeat];
+const RefreshPlayingIndex = new Set([
+  NoxRepeatMode.Shuffle,
+  NoxRepeatMode.Repeat,
+]);
 /**
  * calls TP.setRepeatMode by the input repeat mode, saves repeat mode into asnycStorage, then
  * returns the icon associated with the repeat mode (for notification bar).
@@ -171,7 +174,7 @@ const RefreshPlayingIndex = [NoxRepeatMode.Shuffle, NoxRepeatMode.Repeat];
 export const initializePlaybackMode = (state: NoxRepeatMode, global = true) => {
   const [nextIcon, TPRepeatMode] = getPlaybackModeNotifIcon(state);
   const currentPlayingId = playlistStore.getState().currentPlayingId;
-  if (RefreshPlayingIndex.includes(state)) {
+  if (RefreshPlayingIndex.has(state)) {
     setPlayingIndex(0, currentPlayingId);
     clearPlaylistUninterrupted();
   }

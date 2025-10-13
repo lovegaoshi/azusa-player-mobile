@@ -87,7 +87,7 @@ export async function additionalPlaybackService({
       lastPlayedDuration.val = undefined;
     }
     if (event.state === State.Error) {
-      const currTime = new Date().getTime();
+      const currTime = Date.now();
       const track = await TrackPlayer.getActiveTrack();
       if (
         currTime - track?.urlRefreshTimeStamp > 3600000 &&

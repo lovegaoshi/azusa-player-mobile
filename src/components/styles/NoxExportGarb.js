@@ -1,6 +1,6 @@
 import { ArgumentParser } from 'argparse';
 import axios from 'axios';
-import fs from 'fs';
+import fs from 'node:fs';
 import SteriaTheme from './SteriaTheme.js';
 import SteriaThemeDark from './SteriaThemeDark.js';
 

@@ -26,7 +26,7 @@ export const updateSubscribeFavList = async ({
   callback = () => undefined,
   addToEnd = false,
 }: Props): Promise<NoxMedia.Playlist | undefined> => {
-  let newPlaylist = { ...playlist, lastSubscribed: new Date().getTime() };
+  let newPlaylist = { ...playlist, lastSubscribed: Date.now() };
   if ([PlaylistTypes.Favorite].includes(playlist.type)) {
     logger.warn('[biliSubscribe] incorrect playlist type for subscription');
     return;

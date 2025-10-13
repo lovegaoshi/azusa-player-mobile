@@ -68,7 +68,7 @@ export default function Song({
     parsedName: reExtractSongName(name, singerId),
     duration,
     album: album ? he.decode(album) : name,
-    addedDate: addedDate ?? new Date().getTime(),
+    addedDate: addedDate ?? Date.now(),
     source,
     isLive,
     liveStatus,
