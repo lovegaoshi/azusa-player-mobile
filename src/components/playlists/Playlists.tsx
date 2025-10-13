@@ -216,7 +216,11 @@ export const Playlists = ({
   );
 };
 
-export default ({ navigation }: { navigation: DrawerNavigationHelpers }) => {
+export default function PlaylistsWrapper({
+  navigation,
+}: {
+  navigation: DrawerNavigationHelpers;
+}) {
   const [drawerOpen, setDrawerOpen] = useState(false);
   const progress = useDrawerProgress();
 
@@ -228,7 +232,7 @@ export default ({ navigation }: { navigation: DrawerNavigationHelpers }) => {
   );
 
   return <Playlists navigation={navigation} drawerOpen={drawerOpen} />;
-};
+}
 
 const styles = StyleSheet.create({
   flexContainer: {

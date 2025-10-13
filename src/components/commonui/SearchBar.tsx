@@ -18,11 +18,11 @@ interface Props {
   placeholder?: string;
 }
 
-export default ({
+export default function SearchBar({
   onSearch = async v => console.log(v),
   defaultSearchText = '',
   placeholder,
-}: Props) => {
+}: Props) {
   const setSnack = useSnack(state => state.setSnack);
   const [searchVal, setSearchVal] = useState(defaultSearchText);
   const [searchProgress, progressEmitter] = useState(0);
@@ -62,7 +62,7 @@ export default ({
       />
     </View>
   );
-};
+}
 
 const styles = StyleSheet.create({
   container: {

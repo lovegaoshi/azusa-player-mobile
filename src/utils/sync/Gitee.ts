@@ -58,7 +58,7 @@ const syncToGitee = async ({
             body: {
               // @ts-ignore HACK: for noxplayer's compatibility
               access_token: token,
-              message: `noxbackup - ${new Date().getTime()}`,
+              message: `noxbackup - ${Date.now()}`,
               content: fromByteArray(content),
               sha: repofile.sha,
             },
@@ -79,7 +79,7 @@ const syncToGitee = async ({
       body: {
         // @ts-ignore HACK: for noxplayer's compatibility
         access_token: token,
-        message: `noxbackup - ${new Date().getTime()}`,
+        message: `noxbackup - ${Date.now()}`,
         content: fromByteArray(content),
       },
       headers: {

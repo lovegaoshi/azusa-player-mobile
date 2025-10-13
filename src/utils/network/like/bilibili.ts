@@ -26,7 +26,7 @@ export const initBiliHeartbeat = async ({
   bvid: string;
   cid: string;
 }) => {
-  if (Number.isNaN(parseInt(cid, 10))) return;
+  if (Number.isNaN(Number.parseInt(cid, 10))) return;
   bilih5ApiLimiter.schedule(() =>
     bfetch(BILI_VIDEOPLAY_API, {
       method: 'POST',

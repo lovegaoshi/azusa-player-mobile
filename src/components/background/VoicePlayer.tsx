@@ -2,7 +2,10 @@ import React from 'react';
 import { StyleSheet } from 'react-native';
 import Video from 'react-native-video';
 
-export default ({ uri }: { uri: string | NodeRequire | undefined }) => {
+interface Props {
+  uri: string | NodeRequire | undefined;
+}
+export default function VoicePlayer({ uri }: Props) {
   return (
     <Video
       source={{ uri }}
@@ -11,7 +14,7 @@ export default ({ uri }: { uri: string | NodeRequire | undefined }) => {
       preventsDisplaySleepDuringVideoPlayback={false}
     />
   );
-};
+}
 const styles = StyleSheet.create({
   videoStyle: {
     position: 'absolute',

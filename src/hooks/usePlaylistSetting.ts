@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useNoxSetting } from '@stores/useApp';
 
-export default (playlist: NoxMedia.Playlist) => {
+export default function usePlaylistSettings(playlist: NoxMedia.Playlist) {
   const updatePlaylist = useNoxSetting(state => state.updatePlaylist);
 
   const [subscribeUrl, setSubscribeUrl] = useState('');
@@ -65,4 +65,4 @@ export default (playlist: NoxMedia.Playlist) => {
     saveSetting,
     loadSetting,
   };
-};
+}

@@ -19,7 +19,11 @@ import { PaperText as Text } from '@components/commonui/ScaledText';
 interface Props extends NoxComponent.ScrollableProps {
   style?: ViewStyle;
 }
-export default ({ style, onScroll, onMomentumScrollEnd }: Props) => {
+export default function ExploreBilibili({
+  style,
+  onScroll,
+  onMomentumScrollEnd,
+}: Props) {
   const { t } = useTranslation();
   const loading = useBiliExplore(state => state.loading);
   const refreshing = useBiliExplore(state => state.refreshing);
@@ -79,7 +83,7 @@ export default ({ style, onScroll, onMomentumScrollEnd }: Props) => {
       />
     </ScrollView>
   );
-};
+}
 const mStyles = StyleSheet.create({
   indicatorContainer: {
     height: 40,

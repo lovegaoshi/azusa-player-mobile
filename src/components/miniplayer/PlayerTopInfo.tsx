@@ -13,7 +13,7 @@ interface Props extends NoxComponent.OpacityProps {
   collapse: () => void;
 }
 
-export default ({ opacity, collapse }: Props) => {
+export default function MiniplayerTopInfo({ opacity, collapse }: Props) {
   const insets = useSafeAreaInsets();
   const playerStyle = useNoxSetting(state => state.playerStyle);
   const currentPlayingId = useNoxSetting(state => state.currentPlayingId);
@@ -76,7 +76,7 @@ export default ({ opacity, collapse }: Props) => {
       </View>
     </Animated.View>
   );
-};
+}
 
 const styles = StyleSheet.create({
   iconButtonContainerStyle: {

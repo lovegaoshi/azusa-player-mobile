@@ -21,13 +21,13 @@ interface Props {
   setSearchVal: (v: string) => void;
 }
 
-export default ({
+export default function BiliSearchMenu({
   visible = false,
   toggleVisible = () => undefined,
   menuCoords = { x: 0, y: 0 },
   showMusicFree,
   setSearchVal,
-}: Props) => {
+}: Props) {
   const { t } = useTranslation();
   const { OneWayAlert } = useAlert();
   const playerStyle = useNoxSetting(state => state.playerStyle);
@@ -93,4 +93,4 @@ export default ({
       )}
     </Menu>
   );
-};
+}

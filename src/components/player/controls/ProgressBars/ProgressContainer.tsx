@@ -30,7 +30,7 @@ const NativeProgress = (p: ProgressBarContainerProps) => (
   </View>
 );
 
-export default (p: ProgressBarContainerProps) => {
+export default function ProgressContainer(p: ProgressBarContainerProps) {
   const playerSetting = useNoxSetting(state => state.playerSetting);
   return (
     <View>
@@ -42,7 +42,7 @@ export default (p: ProgressBarContainerProps) => {
       )}
     </View>
   );
-};
+}
 
 const styles = StyleSheet.create({
   progressContainer: {

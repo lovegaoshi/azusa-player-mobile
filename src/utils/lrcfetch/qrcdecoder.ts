@@ -13,11 +13,11 @@ type DES_MODE = 'encrypt' | 'decrypt';
 function ofst<T>(arr: T[], offset: number) {
   return new Proxy(arr, {
     get(target, prop: string) {
-      const index = parseInt(prop);
+      const index = Number.parseInt(prop);
       return target[index + offset];
     },
     set(target, prop: string, value: T) {
-      const index = parseInt(prop);
+      const index = Number.parseInt(prop);
       target[index + offset] = value;
       return true;
     },
@@ -469,7 +469,7 @@ const k3 = [...'!@#)(*$%^&abcDEF'].map(c => c.codePointAt(0) as number);
 function hexToByteArray(hexString: string): number[] {
   const result: number[] = [];
   for (let i = 0; i < hexString.length; i += 2) {
-    result.push(parseInt(hexString.substring(i, i + 2), 16));
+    result.push(Number.parseInt(hexString.substring(i, i + 2), 16));
   }
   return result;
 }

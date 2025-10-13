@@ -15,13 +15,13 @@ interface Props {
   setOpen: (v: boolean) => void;
 }
 
-export default ({
+export default function AddPlaylistButton({
   fromList,
   icon = ICON,
   style = {},
   open,
   setOpen,
-}: Props) => {
+}: Props) {
   const playerStyle = useNoxSetting(state => state.playerStyle);
 
   return (
@@ -40,4 +40,4 @@ export default ({
       />
     </React.Fragment>
   );
-};
+}

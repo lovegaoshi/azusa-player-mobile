@@ -9,7 +9,7 @@ import useSnack from '@stores/useSnack';
 interface Props {
   callback?: () => void;
 }
-export default ({ callback = () => {} }: Props) => {
+export default function usePlaylistMenu({ callback = () => {} }: Props) {
   const { t } = useTranslation();
   const setSnack = useSnack(state => state.setSnack);
   const currentPlaylist = useNoxSetting(state => state.currentPlaylist);
@@ -97,4 +97,4 @@ export default ({ callback = () => {} }: Props) => {
     playlistCleanup,
     playlistBiliShazam,
   };
-};
+}

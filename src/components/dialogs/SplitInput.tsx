@@ -13,7 +13,7 @@ interface Props {
   setText: (text: string) => void;
 }
 
-export default ({ text, setText, label }: Props) => {
+export default function SplitInput({ text, setText, label }: Props) {
   const { t } = useTranslation();
   const [splitText, setSplitText] = useState<string[]>([]);
   const [dialogVisible, setDialogVisible] = useState(false);
@@ -90,4 +90,4 @@ export default ({ text, setText, label }: Props) => {
       </GenericDialog>
     </View>
   );
-};
+}

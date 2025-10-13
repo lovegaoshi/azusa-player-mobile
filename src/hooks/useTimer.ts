@@ -62,11 +62,11 @@ interface Props {
   onTimerUp?: () => void;
 }
 
-export default ({
+export default function useTimer({
   onTimerPause = () => logger.debug('[timer] paused'),
   onTimerRestart = () => logger.debug('[timer] restarted'),
   onTimerUp = () => logger.debug('[timer] up'),
-}: Props) => {
+}: Props) {
   const minutes = timerStore(state => state.minutes);
   const setMinutes = timerStore(state => state.setMinutes);
   const seconds = timerStore(state => state.seconds);
@@ -113,4 +113,4 @@ export default ({
     runTimer,
     timerStartStore,
   };
-};
+}

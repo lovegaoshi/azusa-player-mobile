@@ -15,7 +15,12 @@ interface Props extends NoxComponent.OpacityProps {
   style?: ViewStyle;
 }
 
-export default ({ visible, onPress, opacity, style }: Props) => {
+export default function MiniplayerLrc({
+  visible,
+  onPress,
+  opacity,
+  style,
+}: Props) {
   const insets = useSafeAreaInsets();
   const track = useTrackStore(s => s.track);
   const dimension = Dimensions.get('window');
@@ -53,4 +58,4 @@ export default ({ visible, onPress, opacity, style }: Props) => {
       />
     </Animated.View>
   );
-};
+}

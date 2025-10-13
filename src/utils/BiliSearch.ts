@@ -135,7 +135,7 @@ export const searchBiliURLs = async ({
               .getState()
               .MFsdks.map(sdk => sdk.regexFetch({ url: input })),
           );
-          results.songList = songLists.map(v => v.songList).flat();
+          results.songList = songLists.flatMap(v => v.songList);
           break;
         }
         default:

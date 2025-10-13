@@ -8,7 +8,7 @@ interface Props {
   disabled?: boolean;
 }
 
-export default ({ disabled = false }: Props) => {
+export default function PlaylistMenuButton({ disabled = false }: Props) {
   return (
     <IconButton
       icon={'dots-horizontal'}
@@ -18,4 +18,4 @@ export default ({ disabled = false }: Props) => {
       //iconColor={playerStyle.colors.primary}
     />
   );
-};
+}

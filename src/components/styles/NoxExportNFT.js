@@ -1,6 +1,7 @@
 import { ArgumentParser } from 'argparse';
 import axios from 'axios';
-import fs from 'fs';
+import fs from 'node:fs';
+
 import SteriaTheme from './SteriaTheme.js';
 import SteriaThemeDark from './SteriaThemeDark.js';
 
@@ -16,7 +17,7 @@ console.dir(parser.parse_args());
 const args = parser.parse_args();
 
 if (args.garbid === undefined) {
-  throw Error('garbid is not defined.');
+  throw new Error('garbid is not defined.');
 }
 
 const steriaGarb = JSON.parse(
@@ -42,30 +43,26 @@ const parsedGarbData = {
   themeDesc: garbdata.product_introduce,
   gifs: [],
   themeIcon: garbdata.act_y_img,
-  portraits: garblistdata
-    .map(item =>
-      item.item_list.map(list =>
-        list.card_info.video_list
-          ? {
-              type: 'biliNFTVideoNew',
-              identifier: `["${args.garbid}","${item.lottery_id}","${list.card_info.card_name}"]`,
-            }
-          : list.card_info.card_img,
-      ),
-    )
-    .flat(),
+  portraits: garblistdata.flatMap(item =>
+    item.item_list.map(list =>
+      list.card_info.video_list
+        ? {
+            type: 'biliNFTVideoNew',
+            identifier: `["${args.garbid}","${item.lottery_id}","${list.card_info.card_name}"]`,
+          }
+        : list.card_info.card_img,
+    ),
+  ),
 };
 
-const redeemPortraits = garblistdata
-  .map(garb =>
-    garb.collect_list?.collect_infos
-      ?.filter(v => v.redeem_item_name.includes('典藏卡'))
-      .map(v => ({
-        type: 'biliNFTVideoRedeem',
-        identifier: `["${args.garbid}","${garb.lottery_id}","${v.redeem_item_name}"]`,
-      })),
-  )
-  .flat();
+const redeemPortraits = garblistdata.flatMap(garb =>
+  garb.collect_list?.collect_infos
+    ?.filter(v => v.redeem_item_name.includes('典藏卡'))
+    .map(v => ({
+      type: 'biliNFTVideoRedeem',
+      identifier: `["${args.garbid}","${garb.lottery_id}","${v.redeem_item_name}"]`,
+    })),
+);
 
 parsedGarbData.portraits = parsedGarbData.portraits.concat(redeemPortraits);
 

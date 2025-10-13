@@ -12,13 +12,13 @@ export interface Props {
   disabled?: boolean;
 }
 
-export default ({
+export default function SheetIconButton({
   icon,
   onPress = () => console.log('pressed!'),
   text,
   children,
   disabled,
-}: Props) => {
+}: Props) {
   const playerStyle = useNoxSetting(state => state.playerStyle);
 
   return (
@@ -36,7 +36,7 @@ export default ({
       {children}
     </View>
   );
-};
+}
 
 const styles = StyleSheet.create({
   view: {

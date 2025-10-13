@@ -13,7 +13,7 @@ export interface FetchedLocalLrc {
   localLrc?: string;
 }
 
-export default (currentSong?: NoxMedia.Song) => {
+export default function useLyric(currentSong?: NoxMedia.Song) {
   const [lrc, setLrc] = useState(i18n.t('Lyric.loading'));
   const [loading, setLoading] = useState(false);
   const [lrcOptions, setLrcOptions] = useState<NoxLyric.NoxFetchedLyric[]>([]);
@@ -174,4 +174,4 @@ export default (currentSong?: NoxMedia.Song) => {
     currentTimeOffset,
     setCurrentTimeOffset,
   };
-};
+}

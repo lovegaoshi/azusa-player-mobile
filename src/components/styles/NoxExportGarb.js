@@ -1,6 +1,6 @@
 import { ArgumentParser } from 'argparse';
 import axios from 'axios';
-import fs from 'fs';
+import fs from 'node:fs';
 import SteriaTheme from './SteriaTheme.js';
 import SteriaThemeDark from './SteriaThemeDark.js';
 
@@ -16,7 +16,7 @@ console.dir(parser.parse_args());
 const args = parser.parse_args();
 
 if (args.garbid === undefined) {
-  throw Error('garbid is not defined.');
+  throw new Error('garbid is not defined.');
 }
 
 const steriaGarb = JSON.parse(

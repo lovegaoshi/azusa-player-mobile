@@ -21,7 +21,7 @@ export const extractMV = (song: NoxMedia.Song) => {
   }
 };
 
-export default (videoRef: RefObject<VideoRef | null>) => {
+export default function useTackMV(videoRef: RefObject<VideoRef | null>) {
   const track = useTrackStore(s => s.track);
   const [parsedMV, setParsedMV] = useState<
     NoxTheme.BackgroundImage | undefined
@@ -68,4 +68,4 @@ export default (videoRef: RefObject<VideoRef | null>) => {
   }, []);
 
   return parsedMV;
-};
+}

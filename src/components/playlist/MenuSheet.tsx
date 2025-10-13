@@ -9,7 +9,7 @@ interface Props {
   usedPlaylist: UsePlaylistRN;
 }
 
-export default ({ usedPlaylist }: Props) => {
+export default function MenuSheet({ usedPlaylist }: Props) {
   const currentPlaylist = useNoxSetting(state => state.currentPlaylist);
   const { setRows, playlistRef } = usedPlaylist;
 
@@ -27,4 +27,4 @@ export default ({ usedPlaylist }: Props) => {
       />
     </React.Fragment>
   );
-};
+}

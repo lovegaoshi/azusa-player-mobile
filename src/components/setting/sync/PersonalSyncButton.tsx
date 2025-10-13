@@ -124,7 +124,9 @@ const SetTextField = ({ settingKey, label, placeholder }: TextProps) => {
   );
 };
 
-export default ({ restoreFromUint8Array }: MainProps) => {
+export default function PersonalSyncButton({
+  restoreFromUint8Array,
+}: MainProps) {
   const { t } = useTranslation();
   const playerSetting = useNoxSetting(state => state.playerSetting);
 
@@ -162,7 +164,7 @@ export default ({ restoreFromUint8Array }: MainProps) => {
       </View>
     </View>
   );
-};
+}
 
 const styles = StyleSheet.create({
   keySuggestion: {

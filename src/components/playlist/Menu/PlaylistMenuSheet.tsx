@@ -18,7 +18,10 @@ interface Props {
   songListUpdateHalt: () => void;
 }
 
-export default ({ playlist, songListUpdateHalt }: Props) => {
+export default function PlaylistMenuSheet({
+  playlist,
+  songListUpdateHalt,
+}: Props) {
   const { t } = useTranslation();
   const sheet = useRef<TrueSheet>(null);
   const {
@@ -120,4 +123,4 @@ export default ({ playlist, songListUpdateHalt }: Props) => {
       />
     </NoxBottomSheet>
   );
-};
+}

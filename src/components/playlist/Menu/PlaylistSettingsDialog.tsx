@@ -127,11 +127,13 @@ const PlaylistDialog = ({
   );
 };
 
-export default (p: Props) => (
-  <Portal>
-    <PlaylistDialog {...p} />
-  </Portal>
-);
+export default function PlaylistSettingsDialogPortal(p: Props) {
+  return (
+    <Portal>
+      <PlaylistDialog {...p} />
+    </Portal>
+  );
+}
 
 const styles = StyleSheet.create({
   switchContainer: {

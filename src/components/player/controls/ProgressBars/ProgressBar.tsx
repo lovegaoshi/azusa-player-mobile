@@ -60,7 +60,7 @@ export const SimpleProgressBar = ({
   );
 };
 
-export default (p: ProgressBarContainerProps) => {
+export default function ProgressBar(p: ProgressBarContainerProps) {
   const playerStyle = useNoxSetting(state => state.playerStyle);
   return (
     <SimpleProgressBar
@@ -68,7 +68,7 @@ export default (p: ProgressBarContainerProps) => {
       progressThumbImage={playerStyle.progressThumbImage}
     />
   );
-};
+}
 
 const styles = StyleSheet.create({
   progressBar: {

@@ -15,13 +15,13 @@ interface Props {
   showSheet?: (v: boolean) => void;
 }
 
-export default ({
+export default function RenameSongButton({
   getSongOnClick,
   disabled = false,
   onSubmit = (rename: string) => console.log(rename),
   onCancel = () => undefined,
   showSheet,
-}: Props) => {
+}: Props) {
   const { t } = useTranslation();
   const [dialogOpen, setDialogOpen] = useState(false);
   const [song, setSong] = useState(dummySongObj);
@@ -56,4 +56,4 @@ export default ({
       />
     </SheetIconButton>
   );
-};
+}

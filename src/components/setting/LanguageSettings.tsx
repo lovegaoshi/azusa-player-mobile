@@ -19,7 +19,7 @@ const availableLanguagesMap: { [key: string]: string } = {
   en: 'English',
 };
 
-export default ({ icon }: Props) => {
+export default function LanguageSettings({ icon }: Props) {
   const { t, i18n } = useTranslation();
   const [visible, setVisible] = React.useState(false);
   const [shawarmaVoice, setShawarmaVoice] = React.useState<string>();
@@ -63,4 +63,4 @@ export default ({ icon }: Props) => {
       />
     </View>
   );
-};
+}

@@ -50,10 +50,10 @@ const SongDialog = ({
   );
 };
 
-export default (p: Props) => {
+export default function RenameSongDialog(p: Props) {
   return (
     <Portal>
       <SongDialog {...p} />
     </Portal>
   );
-};
+}

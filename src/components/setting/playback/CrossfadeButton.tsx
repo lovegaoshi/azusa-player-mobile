@@ -7,10 +7,10 @@ import { SelectSettingEntry } from '../helpers/SettingEntry';
 import SettingListItem from '../helpers/SettingListItem';
 
 const CrossFadeOptions = [0, 2500, 5000, 7500, 12000];
-export default ({
+export default function CrossfadeButton({
   setCurrentSelectOption,
   setSelectVisible,
-}: SelectDialogChildren<any>) => {
+}: SelectDialogChildren<any>) {
   const playerSetting = useNoxSetting(state => state.playerSetting);
   const setPlayerSetting = useNoxSetting(state => state.setPlayerSetting);
   const { t } = useTranslation();
@@ -43,4 +43,4 @@ export default ({
   ) : (
     <></>
   );
-};
+}

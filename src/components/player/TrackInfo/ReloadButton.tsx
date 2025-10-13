@@ -5,7 +5,7 @@ import LottieButton from '@components/buttons/LottieButton';
 import { resetResolvedURL } from '@stores/appStore';
 import { resolveAndCache } from '@utils/RNTPUtils';
 
-export default ({ track }: NoxComponent.TrackProps) => {
+export default function ReloadButton({ track }: NoxComponent.TrackProps) {
   const song = track?.song as NoxMedia.Song;
 
   const onClick = async () => {
@@ -24,4 +24,4 @@ export default ({ track }: NoxComponent.TrackProps) => {
       strokes={['Arrowhead', 'Line', 'Arrowhead 2', 'Line 2']}
     />
   );
-};
+}

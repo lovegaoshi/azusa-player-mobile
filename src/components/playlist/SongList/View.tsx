@@ -14,7 +14,7 @@ interface Props {
   usedPlaylist: UsePlaylistRN;
 }
 
-export default ({ usedPlaylist }: Props) => {
+export default function SongListView({ usedPlaylist }: Props) {
   const songListScrollCounter = useNoxSetting(s => s.songListScrollCounter);
   const { rows, scrollTo, playlistRef } = usedPlaylist;
   const scrollViewHeight = useSharedValue(0);
@@ -60,7 +60,7 @@ export default ({ usedPlaylist }: Props) => {
       </SongListScrollbar>
     </View>
   );
-};
+}
 const stylesLocal = StyleSheet.create({
   container: {
     flexDirection: 'row',

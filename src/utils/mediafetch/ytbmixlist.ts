@@ -18,7 +18,7 @@ const fetchYTPlaylist = async (
   // https://www.thepythoncode.com/code/get-youtube-data-python
   const ytInitialData = /var ytInitialData = ({.*});<\/script/.exec(content);
   if (ytInitialData === null) {
-    throw Error();
+    throw new Error();
   }
   const data = JSON.parse(`${ytInitialData[1]}`);
 

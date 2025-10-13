@@ -16,7 +16,7 @@ interface Props {
   sites?: Site[];
 }
 
-export default ({
+export default function SiteSelector({
   defaultSite = Site.Bilibili,
   LoginComponent,
   iconSize = 40,
@@ -24,7 +24,7 @@ export default ({
   containerStyle = styles.container,
   onSiteChange,
   sites = Sites,
-}: Props) => {
+}: Props) {
   const [loginSite, setLoginSite] = useState<Site>(defaultSite);
   const collapsed = useCollapsible(state => state.collapse);
   const opacityValue = (v: Site, toSite = loginSite) =>
@@ -82,7 +82,7 @@ export default ({
       <LoginComponent loginSite={loginSite} />
     </View>
   );
-};
+}
 
 const styles = StyleSheet.create({
   container: {

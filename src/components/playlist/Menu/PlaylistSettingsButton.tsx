@@ -14,13 +14,13 @@ interface Props {
   showSheet?: (v: boolean) => void;
 }
 
-export default ({
+export default function PlaylistSettingsButton({
   disabled = false,
   onSubmit = () => undefined,
   onCancel = () => undefined,
   playlist,
   showSheet,
-}: Props) => {
+}: Props) {
   const { t } = useTranslation();
   const [dialogOpen, setDialogOpen] = useState(false);
 
@@ -52,4 +52,4 @@ export default ({
       />
     </SheetIconEntry>
   );
-};
+}

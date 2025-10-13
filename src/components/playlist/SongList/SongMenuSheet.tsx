@@ -41,7 +41,10 @@ interface Props {
   prepareForLayoutAnimationRender: () => void;
 }
 
-export default ({ usePlaylist, prepareForLayoutAnimationRender }: Props) => {
+export default function SongMenuSheet({
+  usePlaylist,
+  prepareForLayoutAnimationRender,
+}: Props) {
   const sheet = useRef<TrueSheet>(null);
   const { checking, resetSelected, searchAndEnableSearch, getSelectedSongs } =
     usePlaylist;
@@ -259,4 +262,4 @@ export default ({ usePlaylist, prepareForLayoutAnimationRender }: Props) => {
       )}
     </NoxBottomSheet>
   );
-};
+}

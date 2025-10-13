@@ -7,7 +7,7 @@ import { useNoxSetting } from '@stores/useApp';
 import { replaceStyleColor } from '@components/style';
 import logger from '@utils/Logger';
 
-export default (replaceStyle = false) => {
+export default function useAccentColor(replaceStyle = false) {
   const playerStyle = useNoxSetting(state => state.playerStyle);
   const setPlayerStyle = useNoxSetting(state => state.setPlayerStyle);
   const playerSetting = useNoxSetting(state => state.playerSetting);
@@ -51,4 +51,4 @@ export default (replaceStyle = false) => {
   }, [playerStyle]);
 
   return { backgroundColor };
-};
+}

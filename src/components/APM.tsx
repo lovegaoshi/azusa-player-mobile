@@ -16,7 +16,12 @@ const APM = ({ isLandscape }: { isLandscape: boolean }) => {
   return <AzusaPlayer />;
 };
 
-export default ({ PIP, isLandscape, defaultNavTheme, defaultTheme }: Props) => {
+export default function APMView({
+  PIP,
+  isLandscape,
+  defaultNavTheme,
+  defaultTheme,
+}: Props) {
   const playerStyle = useNoxSetting(state => state.playerStyle);
   if (PIP) return <PIPLyricView />;
   return (
@@ -36,4 +41,4 @@ export default ({ PIP, isLandscape, defaultNavTheme, defaultTheme }: Props) => {
       <APM isLandscape={isLandscape} />
     </NavigationContainer>
   );
-};
+}

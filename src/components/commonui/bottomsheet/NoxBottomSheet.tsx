@@ -30,7 +30,7 @@ interface Props extends TrueSheetProps {
   nestedScrollEnabled?: boolean;
 }
 
-export default (p: Props) => {
+export default function NoxBottomSheet(p: Props) {
   const {
     cornerRadius = 5,
     children,
@@ -117,7 +117,7 @@ export default (p: Props) => {
       </GestureHandlerRootView>
     </TrueSheet>
   );
-};
+}
 
 const styles = StyleSheet.create({
   RNGHcontainer: {

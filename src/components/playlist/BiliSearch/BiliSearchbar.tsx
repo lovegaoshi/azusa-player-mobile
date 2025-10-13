@@ -36,7 +36,7 @@ const searchSuggest = (option: SearchOptions | string) => {
 interface Props {
   onSearched: (val: NoxMedia.SearchPlaylist) => void;
 }
-export default ({ onSearched = console.log }: Props) => {
+export default function BiliSearchBar({ onSearched = console.log }: Props) {
   const { t } = useTranslation();
   const playerSetting = useNoxSetting(state => state.playerSetting);
   const searchOption = useNoxSetting(state => state.searchOption);
@@ -170,7 +170,7 @@ export default ({ onSearched = console.log }: Props) => {
       />
     </View>
   );
-};
+}
 
 const styles = StyleSheet.create({
   container: {

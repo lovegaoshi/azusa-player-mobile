@@ -66,7 +66,7 @@ const regexFetch = async ({
     ),
   );
   return {
-    songList: BVfetched.songList.concat(AVfetched.map(v => v.songList).flat()),
+    songList: BVfetched.songList.concat(AVfetched.flatMap(v => v.songList)),
   };
 };
 

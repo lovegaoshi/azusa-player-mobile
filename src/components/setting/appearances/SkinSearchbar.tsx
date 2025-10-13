@@ -10,14 +10,14 @@ interface Props {
   getThemeID: (skin: NoxTheme.Style) => string;
 }
 
-export default ({ getThemeID }: Props) => {
+export default function SkinSearchBar({ getThemeID }: Props) {
   const { t } = useTranslation();
   const playerStyles = useNoxSetting(state => state.playerStyles);
   const setPlayerStyles = useNoxSetting(state => state.setPlayerStyles);
   const loadCustomSkin = (skins: NoxTheme.Style[]) => {
     // skins MUST BE an array of objects
     if (!Array.isArray(skins)) {
-      throw new Error('requested skin URL is not an array. aborting.');
+      throw new TypeError('requested skin URL is not an array. aborting.');
     }
     const uniqueSkins = getUniqObjects(
       skins.filter(skin => skin.metaData).concat(playerStyles),
@@ -44,4 +44,4 @@ export default ({ getThemeID }: Props) => {
       placeholder={t('CustomSkin.SearchBarLabel')}
     />
   );
-};
+}

@@ -6,7 +6,9 @@ import { scheduleOnRN } from 'react-native-worklets';
 import { SimpleProgressBar } from '../player/controls/ProgressBars/ProgressBar';
 import { MinPlayerHeight } from './Constants';
 
-export default ({ miniplayerHeight }: NoxComponent.MiniplayerProps) => {
+export default function MiniplayerProgressBar({
+  miniplayerHeight,
+}: NoxComponent.MiniplayerProps) {
   const [visible, setVisible] = useState(true);
 
   useAnimatedReaction(
@@ -29,7 +31,7 @@ export default ({ miniplayerHeight }: NoxComponent.MiniplayerProps) => {
       enabled={false}
     />
   );
-};
+}
 
 const styles = StyleSheet.create({
   progressBar: { transform: [{ translateY: 43 }], position: 'absolute' },

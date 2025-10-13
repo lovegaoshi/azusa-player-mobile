@@ -59,9 +59,9 @@ export const _getSubList = async ({ uid }: Props) => {
     `https://api.vc.bilibili.com/dynamic_mix/v1/dynamic_mix/at_list?uid=${uid}`,
   );
   const json = await res.json();
-  const subUids = json.data.groups
-    .map((group: any) => group.items.map((item: any) => item.uid))
-    .flat();
+  const subUids = json.data.groups.flatMap((group: any) =>
+    group.items.map((item: any) => item.uid),
+  );
   return getRoomInfos(subUids);
 };
 

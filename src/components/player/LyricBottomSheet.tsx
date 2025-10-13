@@ -101,7 +101,10 @@ interface Props {
   showLyricOffsetModal: () => void;
 }
 
-export default ({ showLyricOffsetModal, usedLyric }: Props) => {
+export default function LyricBottomSheet({
+  showLyricOffsetModal,
+  usedLyric,
+}: Props) {
   const sheet = useRef<TrueSheet>(null);
   const [route, setRoute] = useState(Routes.Main);
   const { t } = useTranslation();
@@ -133,7 +136,7 @@ export default ({ showLyricOffsetModal, usedLyric }: Props) => {
       )}
     </NoxBottomSheet>
   );
-};
+}
 
 const styles = StyleSheet.create({
   listItem: {

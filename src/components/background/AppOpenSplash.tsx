@@ -100,7 +100,7 @@ const AppOpenSplash = ({ setIsSplashReady }: Props) => {
   }
 };
 
-export default (p: Props) => {
+export default function AppOpenSplashView(p: Props) {
   const pressingCount = React.useRef(0);
   const { TwoWayAlert } = useAlert();
 
@@ -116,4 +116,4 @@ export default (p: Props) => {
       <AppOpenSplash {...p} />
     </Pressable>
   );
-};
+}

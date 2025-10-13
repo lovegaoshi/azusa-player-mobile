@@ -15,7 +15,7 @@ interface Props {
   panelWidth: number;
 }
 
-export default ({ panelWidth }: Props) => {
+export default function LandscapePlaylistPanel({ panelWidth }: Props) {
   const panelStyle = {
     width: panelWidth,
     // HACK: WHY?
@@ -54,4 +54,4 @@ export default ({ panelWidth }: Props) => {
       </Stack.Navigator>
     </View>
   );
-};
+}

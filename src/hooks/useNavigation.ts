@@ -12,7 +12,9 @@ interface NavigateProps {
   params?: any;
 }
 
-export default (navigation?: DrawerNavigationHelpers) => {
+export default function useAPMNavigation(navigation?: DrawerNavigationHelpers) {
+  // HACK: what is this???
+  // eslint-disable-next-line react-hooks/rules-of-hooks
   const navigationGlobal = (navigation ?? useNavigation())!;
   const setRoute = useNoxMobile(state => state.setBottomTabRoute);
 
@@ -33,4 +35,4 @@ export default (navigation?: DrawerNavigationHelpers) => {
     navigationGlobal.navigate(route as never);
 
   return { navigate, navigate2, getState: navigationGlobal.getState };
-};
+}

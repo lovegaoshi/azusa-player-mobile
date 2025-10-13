@@ -18,10 +18,10 @@ const fontScaleOptions = [0.8, 0.9, 1, 1.1, 1.2, 1.4, 2];
 const lyricFontScaleOptions = [0, 1, 1.2, 1.5, 2];
 
 // refactors anything depends on playerSetting out into its own component
-export default ({
+export default function PlayerSettingItems({
   setCurrentSelectOption,
   setSelectVisible,
-}: SelectDialogChildren<any>) => {
+}: SelectDialogChildren<any>) {
   const playerSetting = useNoxSetting(state => state.playerSetting);
   const setPlayerSetting = useNoxSetting(state => state.setPlayerSetting);
   const { t } = useTranslation();
@@ -121,4 +121,4 @@ export default ({
       />
     </>
   );
-};
+}

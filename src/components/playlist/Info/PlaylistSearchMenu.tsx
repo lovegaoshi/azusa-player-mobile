@@ -11,12 +11,12 @@ interface Props {
   setSearchCategory: (category: string) => void;
 }
 
-export default ({
+export default function PlaylistSearchMenu({
   visible = false,
   toggleVisible = () => undefined,
   menuCoords = { x: 0, y: 0 },
   setSearchCategory,
-}: Props) => {
+}: Props) {
   const { t } = useTranslation();
 
   return (
@@ -33,4 +33,4 @@ export default ({
       ))}
     </Menu>
   );
-};
+}

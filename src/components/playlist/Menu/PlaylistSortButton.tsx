@@ -21,12 +21,12 @@ interface Props {
   showSheet?: (v: boolean) => void;
 }
 
-export default ({
+export default function PlaylistSortButton({
   onCancel = () => undefined,
   sortPlaylist,
   playlist,
   showSheet,
-}: Props) => {
+}: Props) {
   const { t } = useTranslation();
   const [dialogOpen, setDialogOpen] = useState(false);
   const [ascending, setAscending] = useState(false);
@@ -74,7 +74,7 @@ export default ({
       </Dialog>
     </SheetIconEntry>
   );
-};
+}
 
 const style = StyleSheet.create({
   rowAlignedView: {

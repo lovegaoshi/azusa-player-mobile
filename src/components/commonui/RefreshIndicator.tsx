@@ -64,7 +64,7 @@ interface Props {
   Indicator?: ({ pullDistanceValue }: IndicatorProps) => JSX.Element;
 }
 
-export default ({
+export default function RefreshIndicator({
   pullUpActivated,
   pullUpDistance,
   layout,
@@ -72,7 +72,7 @@ export default ({
   pullRange = -100,
   refreshRange = -300,
   Indicator = SpinningIndicator,
-}: Props) => {
+}: Props) {
   const opacity = useSharedValue(0);
   const [visible, setVisible] = useState(false);
 
@@ -132,4 +132,4 @@ export default ({
       />
     </Animated.View>
   );
-};
+}

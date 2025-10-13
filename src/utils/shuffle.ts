@@ -104,6 +104,6 @@ export const smartShuffle = (v: NoxMedia.Song[]) => {
   }
 };
 
-export default (smart = true) => {
+export default function APMshuffle(smart = true) {
   return smart ? smartShuffle : shuffle;
-};
+}

@@ -12,7 +12,7 @@ interface Props {
   onPress: (v?: NoxRepeatMode) => void;
 }
 
-export default ({ mode, onPress }: Props) => {
+export default function PlaylistRepeatMode({ mode, onPress }: Props) {
   const { t } = useTranslation();
   const playerStyle = useNoxSetting(state => state.playerStyle);
 
@@ -46,7 +46,7 @@ export default ({ mode, onPress }: Props) => {
       </Text>
     </View>
   );
-};
+}
 
 const mStyles = StyleSheet.create({
   switchContainer: {

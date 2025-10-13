@@ -4,7 +4,7 @@ import { usePlaybackState } from 'react-native-track-player';
 import FavoriteButton from './FavoriteButton';
 import ReloadButton from './ReloadButton';
 
-export default ({ track }: NoxComponent.TrackProps) => {
+export default function FavReloadButton({ track }: NoxComponent.TrackProps) {
   const playback = usePlaybackState();
 
   return 'error' in playback ? (
@@ -12,4 +12,4 @@ export default ({ track }: NoxComponent.TrackProps) => {
   ) : (
     <FavoriteButton track={track} />
   );
-};
+}
