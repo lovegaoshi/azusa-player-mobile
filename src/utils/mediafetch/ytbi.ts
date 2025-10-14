@@ -70,7 +70,17 @@ const generatePOToken = async () => {
   const visitorData = webClient.session.context.client.visitorData!;
   const dom = jsdom();
   console.log('APMdebugdom', dom, dom.window, dom.window?.document);
-  console.log('APMdebugvisitor', visitorData);
+  Object.assign(globalThis, {
+    window: { document: dom },
+    document: dom,
+  });
+  globalThis.window.document = dom;
+  console.log(
+    'APMdebugvisitor',
+    visitorData,
+    globalThis.window,
+    globalThis.window.document,
+  );
   const bgConfig: BgConfig = {
     fetch: (input: string | URL | globalThis.Request, init?: RequestInit) =>
       fetch(input, init),
