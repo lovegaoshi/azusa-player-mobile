@@ -1,6 +1,5 @@
 package com.nativenoxmodule
 
-
 import android.app.ActivityManager
 import android.app.ApplicationExitInfo
 import android.app.UiModeManager
@@ -14,28 +13,36 @@ import android.provider.MediaStore
 import android.provider.Settings
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.content.FileProvider
+import androidx.core.net.toUri
 import com.facebook.react.bridge.Arguments
+import com.facebook.react.bridge.Promise
 import com.facebook.react.bridge.ReactApplicationContext
 import com.facebook.react.bridge.WritableArray
 import com.facebook.react.bridge.WritableNativeArray
 import com.nativenoxmodule.dsp.AudioDispatcherFactory
-import com.noxplay.noxplayer.BuildConfig
-import com.noxplay.noxplayer.MainActivity
-import timber.log.Timber
-import java.io.File
-import androidx.core.net.toUri
-import com.facebook.react.bridge.Promise
 import com.nativenoxmodule.dsp.BUFFER_OVERLAP
 import com.nativenoxmodule.dsp.BUFFER_SIZE
 import com.nativenoxmodule.dsp.SAMPLE_RATE
 import com.nativenoxmodule.dsp.beatRoot
+import com.noxplay.noxplayer.BuildConfig
+import com.noxplay.noxplayer.MainActivity
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import org.schabi.newpipe.DownloaderImpl
+import org.schabi.newpipe.util.potoken.PoTokenProviderImpl
+import org.schabi.newpipe.extractor.NewPipe
+import timber.log.Timber
+import java.io.File
 
 class NativeNoxModule(reactContext: ReactApplicationContext) : NativeNoxModuleSpec(reactContext) {
 
     override fun getName() = NAME
+    private val poTokenGenerator = PoTokenProviderImpl(reactContext)
+
+    init {
+        NewPipe.init(DownloaderImpl.init(null))
+    }
 
     private fun getActivity(): MainActivity? {
         return reactApplicationContext.currentActivity as MainActivity?
@@ -162,6 +169,7 @@ class NativeNoxModule(reactContext: ReactApplicationContext) : NativeNoxModuleSp
     override fun loadRN() {
         val activity = getActivity()
         activity?.loadedRN = true
+        poTokenGenerator.getWebClientPoToken("9kzE8isXlQY")
     }
 
     override fun setresumeOnPause(resumeOnPause: Boolean) {

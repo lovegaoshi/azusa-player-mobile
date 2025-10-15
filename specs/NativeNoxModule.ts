@@ -13,6 +13,12 @@ interface NoxMedia {
   bitrate: number;
 }
 
+interface POToken {
+  visitorData: string;
+  playerRequestPoToken: string;
+  streamingDataPoToken: string;
+}
+
 export interface Spec extends TurboModule {
   getUri: (uri: string) => Promise<string>;
   listMediaDir: (relativeDir: string, subdir: boolean) => Promise<NoxMedia[]>;
@@ -31,6 +37,9 @@ export interface Spec extends TurboModule {
   setDarkTheme: (mode: number) => void;
   getRAMUsage: () => number;
   calcBeatsFromFile: (filePath: string) => Promise<number[]>;
+
+  getPOToken: (vidioId: string) => POToken;
+  getPOTokenVisitor: (visitorData: string) => POToken;
 }
 
 export default TurboModuleRegistry.get<Spec>('NativeNoxModule');
