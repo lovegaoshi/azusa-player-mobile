@@ -1,6 +1,5 @@
 package com.nativenoxmodule
 
-
 import android.app.ActivityManager
 import android.app.ApplicationExitInfo
 import android.app.UiModeManager
@@ -14,28 +13,39 @@ import android.provider.MediaStore
 import android.provider.Settings
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.content.FileProvider
+import androidx.core.net.toUri
 import com.facebook.react.bridge.Arguments
+import com.facebook.react.bridge.Promise
 import com.facebook.react.bridge.ReactApplicationContext
 import com.facebook.react.bridge.WritableArray
+import com.facebook.react.bridge.WritableMap
 import com.facebook.react.bridge.WritableNativeArray
+import com.facebook.react.bridge.WritableNativeMap
 import com.nativenoxmodule.dsp.AudioDispatcherFactory
-import com.noxplay.noxplayer.BuildConfig
-import com.noxplay.noxplayer.MainActivity
-import timber.log.Timber
-import java.io.File
-import androidx.core.net.toUri
-import com.facebook.react.bridge.Promise
 import com.nativenoxmodule.dsp.BUFFER_OVERLAP
 import com.nativenoxmodule.dsp.BUFFER_SIZE
 import com.nativenoxmodule.dsp.SAMPLE_RATE
 import com.nativenoxmodule.dsp.beatRoot
+import com.noxplay.noxplayer.BuildConfig
+import com.noxplay.noxplayer.MainActivity
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import org.schabi.newpipe.DownloaderImpl
+import org.schabi.newpipe.util.potoken.PoTokenProviderImpl
+import org.schabi.newpipe.extractor.NewPipe
+import org.schabi.newpipe.extractor.services.youtube.PoTokenResult
+import timber.log.Timber
+import java.io.File
 
 class NativeNoxModule(reactContext: ReactApplicationContext) : NativeNoxModuleSpec(reactContext) {
 
     override fun getName() = NAME
+    private val poTokenGenerator = PoTokenProviderImpl(reactContext)
+
+    init {
+        NewPipe.init(DownloaderImpl.init(null))
+    }
 
     private fun getActivity(): MainActivity? {
         return reactApplicationContext.currentActivity as MainActivity?
@@ -54,6 +64,24 @@ class NativeNoxModule(reactContext: ReactApplicationContext) : NativeNoxModuleSp
             }
         }
         return
+    }
+
+    private fun buildPOTMap(potResults: PoTokenResult?): WritableMap? {
+
+        if (potResults == null) return null
+        val results = WritableNativeMap()
+        results.putString("visitorData", potResults.visitorData)
+        results.putString("playerRequestPoToken", potResults.playerRequestPoToken)
+        results.putString("streamingDataPoToken", potResults.streamingDataPoToken)
+        return results
+    }
+
+    override fun getPOToken(videoId: String): WritableMap? {
+        return buildPOTMap(poTokenGenerator.getWebClientPoToken(videoId, true))
+    }
+
+    override fun getPOTokenVisitor(videoId: String, visitorData: String?): WritableMap? {
+        return buildPOTMap(poTokenGenerator.getWebClientPoToken(videoId, visitorData))
     }
 
     private fun listMediaDirNative(relativeDir: String, subdir: Boolean, selection: String? = null): WritableArray {

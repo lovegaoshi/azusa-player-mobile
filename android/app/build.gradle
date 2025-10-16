@@ -200,4 +200,10 @@ dependencies {
     implementation 'androidx.core:core-google-shortcuts:1.1.0'
     implementation 'be.tarsos.dsp:core:2.5'
     implementation 'be.tarsos.dsp:jvm:2.5'
+    // for po token generation - consider pulling the necessary interfaces OUT
+    implementation "androidx.webkit:webkit:1.9.0"
+    implementation "io.reactivex.rxjava3:rxjava:3.1.12"
+    implementation "io.reactivex.rxjava3:rxandroid:3.0.2"
+    implementation 'com.github.TeamNewPipe:nanojson:e9d656ddb49a412a5a0a5d5ef20ca7ef09549996'
+    implementation 'com.github.TeamNewPipe:NewPipeExtractor:0023b22095a2d62a60cdfc87f4b5cd85c8b266c3'
 }
