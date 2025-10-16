@@ -77,7 +77,7 @@ class NativeNoxModule(reactContext: ReactApplicationContext) : NativeNoxModuleSp
     }
 
     override fun getPOToken(videoId: String): WritableMap? {
-        return buildPOTMap(poTokenGenerator.getWebClientPoToken(videoId))
+        return buildPOTMap(poTokenGenerator.getWebClientPoToken(videoId, true))
     }
 
     override fun getPOTokenVisitor(videoId: String, visitorData: String?): WritableMap? {

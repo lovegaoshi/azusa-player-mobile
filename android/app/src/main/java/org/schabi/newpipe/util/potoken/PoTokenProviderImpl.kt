@@ -19,7 +19,7 @@ class PoTokenProviderImpl (private var context: Context) : PoTokenProvider {
     private var webPoTokenStreamingPot: String? = null
     private var webPoTokenGenerator: PoTokenGenerator? = null
 
-    public fun getWebClientPoToken(videoId: String, visitorData: String?): PoTokenResult? {
+    fun getWebClientPoToken(videoId: String, visitorData: String?): PoTokenResult? {
         return getWebClientPoToken(videoId = videoId, forceRecreate = false, visitorData = visitorData)
     }
 
@@ -66,7 +66,7 @@ class PoTokenProviderImpl (private var context: Context) : PoTokenProvider {
      * case the current [webPoTokenGenerator] threw an error last time
      * [PoTokenGenerator.generatePoToken] was called
      */
-    private fun getWebClientPoToken(videoId: String, forceRecreate: Boolean): PoTokenResult {
+    fun getWebClientPoToken(videoId: String, forceRecreate: Boolean): PoTokenResult {
         return getWebClientPoToken(videoId, forceRecreate, null)
     }
 
@@ -92,7 +92,7 @@ class PoTokenProviderImpl (private var context: Context) : PoTokenProvider {
                     // The streaming poToken needs to be generated exactly once before generating
                     // any other (player) tokens.
                     webPoTokenStreamingPot = webPoTokenGenerator!!
-                        .generatePoToken(webPoTokenVisitorData!!).blockingGet()
+                        .generatePoToken(videoId).blockingGet()
                 }
 
                 return@synchronized Quadruple(
@@ -103,34 +103,16 @@ class PoTokenProviderImpl (private var context: Context) : PoTokenProvider {
                 )
             }
 
-        val playerPot = try {
-            // Not using synchronized here, since poTokenGenerator would be able to generate
-            // multiple poTokens in parallel if needed. The only important thing is for exactly one
-            // visitorData/streaming poToken to be generated before anything else.
-            poTokenGenerator.generatePoToken(videoId).blockingGet()
-        } catch (throwable: Throwable) {
-            if (hasBeenRecreated) {
-                // the poTokenGenerator has just been recreated (and possibly this is already the
-                // second time we try), so there is likely nothing we can do
-                throw throwable
-            } else {
-                // retry, this time recreating the [webPoTokenGenerator] from scratch;
-                // this might happen for example if NewPipe goes in the background and the WebView
-                // content is lost
-                Log.e(TAG, "Failed to obtain poToken, retrying", throwable)
-                return getWebClientPoToken(videoId = videoId, forceRecreate = true)
-            }
-        }
 
         if (BuildConfig.DEBUG) {
             Log.d(
                 TAG,
-                "poToken for $videoId: playerPot=$playerPot, " +
+                "poToken for $videoId: playerPot=$streamingPot, " +
                         "streamingPot=$streamingPot, visitor_data=$visitorData"
             )
         }
 
-        return PoTokenResult(visitorData, playerPot, streamingPot)
+        return PoTokenResult(visitorData, streamingPot, streamingPot)
     }
 
     override fun getWebEmbedClientPoToken(videoId: String): PoTokenResult? = null
