@@ -193,7 +193,10 @@ export default function SongList({
         })
         .onChange(e => {
           if (pullUpActivated.value !== 1) return;
-          if (e.translationY > 0) return (pullUpActivated.value = -1);
+          if (e.translationY > 0) {
+            pullUpActivated.value = -1;
+            return;
+          }
           pullUpDistance.value = e.translationY;
         })
         .onEnd(() => {

@@ -38,7 +38,7 @@ const useSync = () => {
           {
             text: t('Sync.NoxExtensionCancel'),
             onPress: () => {
-              reject(Error('user said no'));
+              reject(new Error('user said no'));
             },
             style: 'cancel',
           },

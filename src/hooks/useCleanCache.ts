@@ -22,10 +22,10 @@ const useCleanCache = () => {
 
   const cleanOrphanedCache = async () => {
     const RNBlobTempFiles = await lsFiles();
-    const cachedKeys = Array.from(NoxCache.noxMediaCache.cache.values());
+    const cachedKeys = new Set(NoxCache.noxMediaCache.cache.values());
     const abandonedFiles = RNBlobTempFiles.list
       .map(val => `${RNBlobTempFiles.dirpath}/${val}`)
-      .filter(val => !cachedKeys.includes(val));
+      .filter(val => !cachedKeys.has(val));
     unlinkFiles(abandonedFiles).catch();
     NoxCache.noxMediaCache.cleanOrphanedCache(orphanedCache);
     getOrphanCache().then(setOrphanCache);

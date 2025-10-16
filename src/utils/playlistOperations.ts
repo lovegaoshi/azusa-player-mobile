@@ -6,13 +6,13 @@ export const updatePlaylistSongs = (
   addSongs: NoxMedia.Song[] = [],
   removeSongs: NoxMedia.Song[] = [],
 ) => {
-  const playlistSongsId = playlist.songList.map(v => v.id);
-  const removeSongsId = removeSongs.map(v => v.id);
+  const playlistSongsId = new Set(playlist.songList.map(v => v.id));
+  const removeSongsId = new Set(removeSongs.map(v => v.id));
   // FI"FO".
   playlist.songList = addSongs
-    .filter(v => !playlistSongsId.includes(v.id))
+    .filter(v => !playlistSongsId.has(v.id))
     .concat(playlist.songList)
-    .filter(v => !removeSongsId.includes(v.id));
+    .filter(v => !removeSongsId.has(v.id));
   return playlist;
 };
 

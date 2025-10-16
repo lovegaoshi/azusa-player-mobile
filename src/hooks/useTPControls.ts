@@ -71,7 +71,8 @@ const prepareSkipToNext = async (
   } else {
     logger.debugR(
       () =>
-        `[skipToNext] currentQueue: ${TPQueue.map(s => `${s.song.parsedName}/${s.song.id}`)}`,
+        '[skipToNext] currentQueue: ' +
+        TPQueue.map(s => `${s.song.parsedName}/${s.song.id}`),
     );
   }
   return nextSong;
