@@ -38,8 +38,8 @@ export interface Spec extends TurboModule {
   getRAMUsage: () => number;
   calcBeatsFromFile: (filePath: string) => Promise<number[]>;
 
-  getPOToken: (vidioId: string) => POToken;
-  getPOTokenVisitor: (visitorData: string) => POToken;
+  getPOToken: (videoId: string) => POToken;
+  getPOTokenVisitor: (videoId: string, visitorData: string) => POToken;
 }
 
 export default TurboModuleRegistry.get<Spec>('NativeNoxModule');

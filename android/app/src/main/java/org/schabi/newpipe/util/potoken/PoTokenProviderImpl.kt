@@ -19,6 +19,10 @@ class PoTokenProviderImpl (private var context: Context) : PoTokenProvider {
     private var webPoTokenStreamingPot: String? = null
     private var webPoTokenGenerator: PoTokenGenerator? = null
 
+    public fun getWebClientPoToken(videoId: String, visitorData: String?): PoTokenResult? {
+        return getWebClientPoToken(videoId = videoId, forceRecreate = false, visitorData = visitorData)
+    }
+
     override fun getWebClientPoToken(videoId: String): PoTokenResult? {
         if (webViewBadImpl) {
             return null
@@ -40,12 +44,33 @@ class PoTokenProviderImpl (private var context: Context) : PoTokenProvider {
         }
     }
 
+    private fun getVisitorData(): String? {
+        val innertubeClientRequestInfo = InnertubeClientRequestInfo.ofWebClient()
+        innertubeClientRequestInfo.clientInfo.clientVersion =
+            YoutubeParsingHelper.getClientVersion()
+
+        webPoTokenVisitorData = YoutubeParsingHelper.getVisitorDataFromInnertube(
+            innertubeClientRequestInfo,
+            NewPipe.getPreferredLocalization(),
+            NewPipe.getPreferredContentCountry(),
+            YoutubeParsingHelper.getYouTubeHeaders(),
+            YoutubeParsingHelper.YOUTUBEI_V1_URL,
+            null,
+            false
+        )
+        return webPoTokenVisitorData
+    }
+
     /**
      * @param forceRecreate whether to force the recreation of [webPoTokenGenerator], to be used in
      * case the current [webPoTokenGenerator] threw an error last time
      * [PoTokenGenerator.generatePoToken] was called
      */
     private fun getWebClientPoToken(videoId: String, forceRecreate: Boolean): PoTokenResult {
+        return getWebClientPoToken(videoId, forceRecreate, null)
+    }
+
+    private fun getWebClientPoToken(videoId: String, forceRecreate: Boolean, visitorData: String?): PoTokenResult {
         // just a helper class since Kotlin does not have builtin support for 4-tuples
         data class Quadruple<T1, T2, T3, T4>(val t1: T1, val t2: T2, val t3: T3, val t4: T4)
 
@@ -56,19 +81,7 @@ class PoTokenProviderImpl (private var context: Context) : PoTokenProvider {
 
                 if (shouldRecreate) {
 
-                    val innertubeClientRequestInfo = InnertubeClientRequestInfo.ofWebClient()
-                    innertubeClientRequestInfo.clientInfo.clientVersion =
-                        YoutubeParsingHelper.getClientVersion()
-
-                    webPoTokenVisitorData = YoutubeParsingHelper.getVisitorDataFromInnertube(
-                        innertubeClientRequestInfo,
-                        NewPipe.getPreferredLocalization(),
-                        NewPipe.getPreferredContentCountry(),
-                        YoutubeParsingHelper.getYouTubeHeaders(),
-                        YoutubeParsingHelper.YOUTUBEI_V1_URL,
-                        null,
-                        false
-                    )
+                    webPoTokenVisitorData = visitorData ?: getVisitorData()
                     // close the current webPoTokenGenerator on the main thread
                     webPoTokenGenerator?.let { Handler(Looper.getMainLooper()).post { it.close() } }
 

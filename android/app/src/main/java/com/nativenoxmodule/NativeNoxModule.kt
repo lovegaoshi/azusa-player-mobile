@@ -18,7 +18,9 @@ import com.facebook.react.bridge.Arguments
 import com.facebook.react.bridge.Promise
 import com.facebook.react.bridge.ReactApplicationContext
 import com.facebook.react.bridge.WritableArray
+import com.facebook.react.bridge.WritableMap
 import com.facebook.react.bridge.WritableNativeArray
+import com.facebook.react.bridge.WritableNativeMap
 import com.nativenoxmodule.dsp.AudioDispatcherFactory
 import com.nativenoxmodule.dsp.BUFFER_OVERLAP
 import com.nativenoxmodule.dsp.BUFFER_SIZE
@@ -32,6 +34,7 @@ import kotlinx.coroutines.launch
 import org.schabi.newpipe.DownloaderImpl
 import org.schabi.newpipe.util.potoken.PoTokenProviderImpl
 import org.schabi.newpipe.extractor.NewPipe
+import org.schabi.newpipe.extractor.services.youtube.PoTokenResult
 import timber.log.Timber
 import java.io.File
 
@@ -61,6 +64,24 @@ class NativeNoxModule(reactContext: ReactApplicationContext) : NativeNoxModuleSp
             }
         }
         return
+    }
+
+    private fun buildPOTMap(potResults: PoTokenResult?): WritableMap? {
+
+        if (potResults == null) return null
+        val results = WritableNativeMap()
+        results.putString("visitorData", potResults.visitorData)
+        results.putString("playerRequestPoToken", potResults.playerRequestPoToken)
+        results.putString("streamingDataPoToken", potResults.streamingDataPoToken)
+        return results
+    }
+
+    override fun getPOToken(videoId: String): WritableMap? {
+        return buildPOTMap(poTokenGenerator.getWebClientPoToken(videoId))
+    }
+
+    override fun getPOTokenVisitor(videoId: String, visitorData: String?): WritableMap? {
+        return buildPOTMap(poTokenGenerator.getWebClientPoToken(videoId, visitorData))
     }
 
     private fun listMediaDirNative(relativeDir: String, subdir: Boolean, selection: String? = null): WritableArray {
@@ -169,7 +190,6 @@ class NativeNoxModule(reactContext: ReactApplicationContext) : NativeNoxModuleSp
     override fun loadRN() {
         val activity = getActivity()
         activity?.loadedRN = true
-        poTokenGenerator.getWebClientPoToken("9kzE8isXlQY")
     }
 
     override fun setresumeOnPause(resumeOnPause: Boolean) {
