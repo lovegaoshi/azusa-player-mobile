@@ -1,15 +1,10 @@
 // Rename this sample file to main.js to use on your project.
 // The main.js file will be overwritten in updates/reinstalls.
-
-const rn_bridge = require('rn-bridge');
-const BG = require('bgutils');
-const JSDOM = require('jsdom').JSDOM;
-const Innertube = require('youtubei.js').Innertube;
-
-let innertube = await Innertube.create({ retrieve_player: false });
+import { BG } from 'bgutils-js';
+import { JSDOM } from 'jsdom';
+import rn_bridge from '../nodejs-builtin_modules/rn-bridge/index.js';
 
 const requestKey = 'O43z0dpjhgX20SCx4KAo';
-const visitorData = innertube.session.context.client.visitorData;
 
 // Echo every message received from react-native.
 rn_bridge.channel.on('potoken', async msg => {
@@ -19,8 +14,9 @@ rn_bridge.channel.on('potoken', async msg => {
     document: dom.window.document,
   });
   const bgConfig = {
+    fetch: fetch,
     globalObj: globalThis,
-    identifier: msg ?? visitorData,
+    identifier: msg,
     requestKey,
   };
   const bgChallenge = await BG.Challenge.create(bgConfig);
@@ -40,7 +36,10 @@ rn_bridge.channel.on('potoken', async msg => {
 
   // const placeholderPoToken = BG.PoToken.generatePlaceholder(visitorData);
 
-  rn_bridge.channel.post('potoken', poTokenResult.poToken);
+  rn_bridge.channel.post(
+    'potoken',
+    JSON.stringify({ poToken: poTokenResult.poToken, identifier: msg }),
+  );
 });
 
 // Inform react-native node is initialized.

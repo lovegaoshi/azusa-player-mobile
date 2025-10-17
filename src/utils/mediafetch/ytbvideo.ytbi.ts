@@ -9,7 +9,7 @@ import { Source } from '@enums/MediaFetch';
 import { logger } from '@utils/Logger';
 import ytClient, { ytwebClient } from '@utils/mediafetch/ytbi';
 import { isAndroid, isIOS } from '@utils/RNUtils';
-import { getPoT } from '@utils/mediafetch/ytpot';
+import { getNodePoT as getPoT } from '@utils/mediafetch/ytpot';
 
 const getHiResThumbnail = (thumbnails?: Thumbnail[]) => {
   if (!thumbnails) return '';

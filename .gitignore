@@ -84,3 +84,5 @@ bundles/
 lefthook.yml
 /.yarn
 .yarnrc.yml
+nodejs-assets/nodejs-project/sample-package.json
+nodejs-assets/nodejs-project/sample-main.js

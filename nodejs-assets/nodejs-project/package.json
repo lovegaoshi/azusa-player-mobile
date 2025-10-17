@@ -10,8 +10,11 @@
   "author": "janeasystems",
   "license": "",
   "dependencies": {
-    "bgutils": "^1.0.5",
-    "jsdom": "^27.0.0",
-    "youtubei.js": "^16.0.1"
+    "bgutils-js": "^3.2.0",
+    "jsdom": "26.1.0"
+  },
+  "type": "module",
+  "devDependencies": {
+    "@types/jsdom": "^27.0.0"
   }
 }
