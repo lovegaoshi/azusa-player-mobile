@@ -68,7 +68,7 @@ const createYtClient = () =>
     retrieve_player: true,
     enable_session_cache: false,
     generate_session_locally: false,
-    client_type: ClientType.WEB_EMBEDDED,
+    client_type: ClientType.MWEB,
     //cookie,
   });
 

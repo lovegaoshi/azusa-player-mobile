@@ -8,7 +8,8 @@ import SongTS from '@objects/Song';
 import { Source } from '@enums/MediaFetch';
 import { logger } from '@utils/Logger';
 import ytClient, { ytwebClient } from '@utils/mediafetch/ytbi';
-import { isIOS } from '@utils/RNUtils';
+import { isAndroid, isIOS } from '@utils/RNUtils';
+import { getPoT } from '@utils/mediafetch/ytpot';
 
 const getHiResThumbnail = (thumbnails?: Thumbnail[]) => {
   if (!thumbnails) return '';
@@ -27,14 +28,19 @@ export const resolveURL = async (song: NoxMedia.Song, iOS = false) => {
         })
       ).streaming_data?.hls_manifest_url
     : undefined;
-
+  yt.session.player!.po_token = await getPoT(song.bvid);
   const extractedVideoInfo = await yt.getBasicInfo(song.bvid, {
-    client: 'WEB_EMBEDDED',
+    client: isAndroid ? 'MWEB' : 'WEB_EMBEDDED',
   });
   const maxAudioQualityStream = extractedVideoInfo.chooseFormat({
     quality: 'best',
     type: 'audio',
   });
+  console.log(
+    'APMDebug',
+    yt.session.po_token,
+    await maxAudioQualityStream.decipher(yt.actions.session.player),
+  );
   return {
     url:
       iOS && isIOS && hls_manifest_url
