@@ -1,0 +1,20 @@
+{
+  "//": [
+    "Rename this sample file to package.json to use on your project.",
+    "The sample-package.json file will be overwritten in updates/reinstalls."
+  ],
+  "name": "sample-node-project",
+  "version": "0.0.1",
+  "description": "node part of the project",
+  "main": "main.js",
+  "author": "janeasystems",
+  "license": "",
+  "dependencies": {
+    "bgutils-js": "^3.2.0",
+    "jsdom": "26.1.0"
+  },
+  "type": "module",
+  "devDependencies": {
+    "@types/jsdom": "^27.0.0"
+  }
+}

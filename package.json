@@ -100,6 +100,7 @@
     "lottie-react-native": "7.3.4",
     "lru-cache": "7.18.3",
     "md5": "^2.3.0",
+    "nodejs-mobile-react-native": "^18.20.4",
     "patch-package": "^8.0.1",
     "postinstall-postinstall": "^2.1.0",
     "qs": "^6.14.0",
