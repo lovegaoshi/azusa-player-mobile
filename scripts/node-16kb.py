@@ -6,6 +6,8 @@ import hashlib
 import shutil
 
 URL = 'https://github.com/alzhuravlev/nodejs-mobile/releases/download/v18.20.4/nodejs-mobile-android.zip'
+ANDROID_LIBNODE_SO = './node_modules/nodejs-mobile-react-native/android/libnode'
+NODE_ZIP_PATH = 'node-mobile.zip'
 
 def download_large_file(url, output_file):
     with requests.get(url, stream=True) as response:
@@ -31,12 +33,12 @@ def calculate_md5(file_path):
 if __name__ == '__main__':
   logging.basicConfig(level=logging.DEBUG)
   import sys
-  if not os.path.exists('node-mobile.zip'):
-    download_large_file(URL, 'node-mobile.zip')
+  if not os.path.exists(NODE_ZIP_PATH):
+    download_large_file(URL, NODE_ZIP_PATH)
   if not os.path.isdir('./node_modules/nodejs-mobile-react-native/android'):
     logging.error('npm install is not done!')
     sys.exit(1)
-  shutil.rmtree('./node_modules/nodejs-mobile-react-native/android/libnode')
-  os.mkdir('./node_modules/nodejs-mobile-react-native/android/libnode')
-  with zipfile.ZipFile('node-mobile.zip', 'r') as zip_ref:
-    zip_ref.extractall('./node_modules/nodejs-mobile-react-native/android/libnode')
+  shutil.rmtree(ANDROID_LIBNODE_SO)
+  os.mkdir(ANDROID_LIBNODE_SO)
+  with zipfile.ZipFile(NODE_ZIP_PATH, 'r') as zip_ref:
+    zip_ref.extractall(ANDROID_LIBNODE_SO)

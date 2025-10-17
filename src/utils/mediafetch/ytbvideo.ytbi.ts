@@ -30,7 +30,7 @@ export const resolveURL = async (song: NoxMedia.Song, iOS = false) => {
     : undefined;
   yt.session.player!.po_token = await getPoT(song.bvid);
   const extractedVideoInfo = await yt.getBasicInfo(song.bvid, {
-    client: yt.session.player!.po_token !== undefined ? 'MWEB' : 'WEB_EMBEDDED',
+    client: yt.session.player!.po_token === undefined ? 'WEB_EMBEDDED' : 'MWEB',
   });
   const maxAudioQualityStream = extractedVideoInfo.chooseFormat({
     quality: 'best',

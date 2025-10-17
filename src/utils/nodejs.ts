@@ -1,3 +1,1 @@
-import nodejs from 'nodejs-mobile-react-native';
-
-export default nodejs;
+export { default } from 'nodejs-mobile-react-native';
