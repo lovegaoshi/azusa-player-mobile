@@ -7803,6 +7803,7 @@ __metadata:
     lottie-react-native: "npm:7.3.4"
     lru-cache: "npm:7.18.3"
     md5: "npm:^2.3.0"
+    nodejs-mobile-react-native: "npm:^18.20.4"
     patch-package: "npm:^8.0.1"
     postinstall-postinstall: "npm:^2.1.0"
     prettier: "npm:^3.6.2"
@@ -16876,6 +16877,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"node-gyp-build-mobile@npm:4.6.0-2":
+  version: 4.6.0-2
+  resolution: "node-gyp-build-mobile@npm:4.6.0-2"
+  bin:
+    node-gyp-build-mobile: bin.js
+    node-gyp-build-mobile-optional: optional.js
+    node-gyp-build-mobile-test: build-test.js
+  checksum: 10c0/08aa4a8e786519da3185d5f8771a9d748965344a86e021dbe190a63a6efa0c60ada4617ebf309dee033f4930b310f4406db40793011eca1cd40fdc8e408897b9
+  languageName: node
+  linkType: hard
+
 "node-gyp@npm:latest":
   version: 10.2.0
   resolution: "node-gyp@npm:10.2.0"
@@ -16935,6 +16947,41 @@ __metadata:
     "@vibrant/image-node": "npm:^4.0.0"
     "@vibrant/quantizer-mmcq": "npm:^4.0.0"
   checksum: 10c0/eb8c86d43d0f1267158c78a1cc6668362ae43462c973968e39f4a832567dd164fd358e2ac2976aec2677624096dd3691714ccf342f98a8c18c2c79dedce90333
+  languageName: node
+  linkType: hard
+
+"nodejs-mobile-gyp@npm:^0.4.0":
+  version: 0.4.0
+  resolution: "nodejs-mobile-gyp@npm:0.4.0"
+  dependencies:
+    env-paths: "npm:^2.2.0"
+    exponential-backoff: "npm:^3.1.1"
+    glob: "npm:^10.3.10"
+    graceful-fs: "npm:^4.2.6"
+    make-fetch-happen: "npm:^13.0.0"
+    nopt: "npm:^7.0.0"
+    proc-log: "npm:^3.0.0"
+    semver: "npm:^7.3.5"
+    tar: "npm:^6.1.2"
+    which: "npm:^4.0.0"
+  bin:
+    nodejs-mobile-gyp: bin/node-gyp.js
+  checksum: 10c0/1b18761d663a859bd9ab51e681af2a2ee40a720114f70779186d494aa56d09f8c59889e89937e29beaf294aebc67ebd60d2417d932dbe3e729902d994fd9bd56
+  languageName: node
+  linkType: hard
+
+"nodejs-mobile-react-native@npm:^18.20.4":
+  version: 18.20.4
+  resolution: "nodejs-mobile-react-native@npm:18.20.4"
+  dependencies:
+    mkdirp: "npm:^0.5.1"
+    ncp: "npm:^2.0.0"
+    node-gyp-build-mobile: "npm:4.6.0-2"
+    nodejs-mobile-gyp: "npm:^0.4.0"
+    xcode: "npm:^2.0.0"
+  peerDependencies:
+    react-native: ">=0.60.0"
+  checksum: 10c0/f29080003d285b3890511d0ccd45d0ad8aaf2c789c0e3979f6d9f7d8d6cf8244517591cb4669027382104d622fdcf9409d5470484dabb0f8f49d7dbf4a84253f
   languageName: node
   linkType: hard
 
@@ -17903,6 +17950,13 @@ __metadata:
   version: 0.1.8
   resolution: "private@npm:0.1.8"
   checksum: 10c0/829a23723e5fd3105c72b2dadeeb65743a430f7e6967a8a6f3e49392a1b3ea52975a255376d8c513b0c988bdf162f1a5edf9d9bac27d1ab11f8dba8cdb58880e
+  languageName: node
+  linkType: hard
+
+"proc-log@npm:^3.0.0":
+  version: 3.0.0
+  resolution: "proc-log@npm:3.0.0"
+  checksum: 10c0/f66430e4ff947dbb996058f6fd22de2c66612ae1a89b097744e17fb18a4e8e7a86db99eda52ccf15e53f00b63f4ec0b0911581ff2aac0355b625c8eac509b0dc
   languageName: node
   linkType: hard
 
@@ -19777,7 +19831,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"simple-plist@npm:^1.1.0":
+"simple-plist@npm:^1.0.0, simple-plist@npm:^1.1.0":
   version: 1.4.0
   resolution: "simple-plist@npm:1.4.0"
   dependencies:
@@ -20545,7 +20599,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tar@npm:^6.1.11, tar@npm:^6.2.1":
+"tar@npm:^6.1.11, tar@npm:^6.1.2, tar@npm:^6.2.1":
   version: 6.2.1
   resolution: "tar@npm:6.2.1"
   dependencies:
@@ -21440,6 +21494,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"uuid@npm:^3.3.2":
+  version: 3.4.0
+  resolution: "uuid@npm:3.4.0"
+  bin:
+    uuid: ./bin/uuid
+  checksum: 10c0/1c13950df865c4f506ebfe0a24023571fa80edf2e62364297a537c80af09c618299797bbf2dbac6b1f8ae5ad182ba474b89db61e0e85839683991f7e08795347
+  languageName: node
+  linkType: hard
+
 "uuid@npm:^7.0.3":
   version: 7.0.3
   resolution: "uuid@npm:7.0.3"
@@ -21865,6 +21928,16 @@ __metadata:
   dependencies:
     path-extra: "npm:^1.0.2"
   checksum: 10c0/0e068e75c1bde6dab03e60147d228178098fee8c7ab99ce37df290ddc547c42f468ba9aca07fc16ba292d5e2869b32990b3db720104a556e8128c744f1a5009f
+  languageName: node
+  linkType: hard
+
+"xcode@npm:^2.0.0":
+  version: 2.1.0
+  resolution: "xcode@npm:2.1.0"
+  dependencies:
+    simple-plist: "npm:^1.0.0"
+    uuid: "npm:^3.3.2"
+  checksum: 10c0/e779966f863456cee90dcd48968e4f724891c1576256e2e052acd5a9ed1622d7e57a9e1513b933ede3464bcd5818b95524de8a2db3d0d7f2897af0528bc0f91f
   languageName: node
   linkType: hard
 
