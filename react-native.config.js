@@ -6,5 +6,10 @@ module.exports = {
         android: null, // Disable autolinking for Android
       },
     },
+    'nodejs-mobile-react-native': {
+      platforms: {
+        android: null, // Disable autolinking for Android
+      },
+    },
   },
 };
