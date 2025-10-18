@@ -87,3 +87,5 @@ lefthook.yml
 nodejs-assets/nodejs-project/sample-package.json
 nodejs-assets/nodejs-project/sample-main.js
 node-mobile.zip
+nodejs-assets/build-native-modules-MacOS-helper-script-node.sh
+nodejs-assets/build-native-modules-MacOS-helper-script-npm.sh
