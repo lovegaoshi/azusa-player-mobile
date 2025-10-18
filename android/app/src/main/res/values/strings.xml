@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">APM</string>
+    <string name="app_name_debug">APM.dev</string>
     <string name="resume">Resume</string>
     <string name="play_all">Play All</string>
     <string name="safe_mode">Safe Mode</string>
