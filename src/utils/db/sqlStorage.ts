@@ -10,6 +10,7 @@ import lyricTable from '@utils/db/schema/lyricTable';
 import abRepeatTable from '@utils/db/schema/abrepeatTable';
 import tempTable from '@utils/db/schema/tempSongTable';
 import songBeatTable from '@utils/db/schema/songBeatTable';
+import songDLTable from '@utils/db/schema/songDLTable';
 import db from '@utils/db/sql';
 import { getPlaybackCountAPI, getPlaybackCountsAPI } from '@utils/db/sqlAPI';
 import { logger } from '@utils/Logger';
@@ -198,4 +199,17 @@ export const setSongBeat = async (songcid: string, beatArray: number[]) => {
     target: songBeatTable.songcid,
     set: { beat },
   });
+};
+
+export const setSongDownloadPath = async (
+  songcid: string,
+  downloadPath: string,
+) => {
+  await db
+    .insert(songDLTable)
+    .values({ songcid, downloadPath })
+    .onConflictDoUpdate({
+      target: songDLTable.songcid,
+      set: { downloadPath },
+    });
 };

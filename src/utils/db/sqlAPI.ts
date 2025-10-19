@@ -10,6 +10,7 @@ import tempidTable from './schema/tempSongidTable';
 import songTable from './schema/songTable';
 import playlistTable from './schema/playlistTable';
 import songBeatTable from './schema/songBeatTable';
+import songDLTable from './schema/songDLTable';
 import { dummyPlaylist } from '@objects/Playlist';
 
 export const exportSQL = async () => {
@@ -200,4 +201,15 @@ export const getSongBeat = (songcid: string): number[] | undefined => {
     .where(eq(songBeatTable.songcid, songcid))
     .get()?.beat;
   return res === undefined ? res : (JSON.parse(res) as number[]);
+};
+
+export const getSongDownloadPath = (songcid: string): string | undefined => {
+  const res = db
+    .select({
+      downloadPath: songDLTable.downloadPath,
+    })
+    .from(songDLTable)
+    .where(eq(songDLTable.songcid, songcid))
+    .get()?.downloadPath;
+  return res;
 };

@@ -5,6 +5,8 @@ import { resolveCachedPath } from '../RNTPUtils';
 import { logger } from '../Logger';
 import { ffmpegToMP3 } from '../ffmpeg/ffmpeg';
 import { displayDLComplete, displayDLProgress } from './notification';
+import { getSongDownloadPath } from '@utils/db/sqlAPI';
+import { setSongDownloadPath } from '../db/sqlStorage';
 
 interface CopyCacheToDir {
   song: NoxMedia.Song;
@@ -14,6 +16,11 @@ export const copyCacheToDir = async ({
   song,
   fsdir = 'APM',
 }: CopyCacheToDir) => {
+  const storedPath = getSongDownloadPath(song.id);
+  if (await RNFetchBlob.fs.exists(storedPath ?? '')) {
+    logger.debug(`[APMDownload] ${song.parsedName} already downloaded.`);
+    return storedPath;
+  }
   const resolvedPath = await resolveCachedPath({ song, notify: true });
   if (resolvedPath === undefined) {
     logger.warn(
@@ -23,6 +30,7 @@ export const copyCacheToDir = async ({
     return;
   }
   displayDLProgress(song);
+  let result: string;
   try {
     PermissionsAndroid.request(PermissionsAndroid.PERMISSIONS.READ_MEDIA_AUDIO);
     const filePath = await ffmpegToMP3({
@@ -37,7 +45,7 @@ export const copyCacheToDir = async ({
       );
     }
 
-    const result = await RNFetchBlob.MediaCollection.copyToMediaStore(
+    result = await RNFetchBlob.MediaCollection.copyToMediaStore(
       {
         name: `${song.parsedName}.mp3`,
         parentFolder: fsdir,
@@ -49,7 +57,6 @@ export const copyCacheToDir = async ({
 
     RNFetchBlob.fs.unlink(filePath).catch();
     displayDLComplete(song);
-    return result;
   } catch (e) {
     // HACK
     displayDLComplete(song);
@@ -59,7 +66,7 @@ export const copyCacheToDir = async ({
     logger.warn(
       '[Download] now copying the cached object to mediaStore with mp3 extension instead',
     );
-    await RNFetchBlob.MediaCollection.copyToMediaStore(
+    result = await RNFetchBlob.MediaCollection.copyToMediaStore(
       {
         name: `${song.parsedName}.mp3`,
         parentFolder: fsdir,
@@ -69,4 +76,6 @@ export const copyCacheToDir = async ({
       resolvedPath,
     );
   }
+  await setSongDownloadPath(song.id, result);
+  return result;
 };
