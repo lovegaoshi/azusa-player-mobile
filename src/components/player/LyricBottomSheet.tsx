@@ -55,7 +55,6 @@ interface ILyricSearch {
 const LyricSearch = ({ usedLyric }: ILyricSearch) => {
   const { searchAndSetCurrentLyric, lrcOptions } = usedLyric;
   const playerStyle = useNoxSetting(state => state.playerStyle);
-  const track = useTrackStore(s => s.track);
 
   return (
     <>
