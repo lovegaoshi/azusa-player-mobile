@@ -16,8 +16,10 @@ const AzusaPlayer = () => {
   const { width, height } = Dimensions.get('window');
   const actionPanelWidth =
     Math.max(50, Math.min(120, height / 5)) + insets.left;
-  const playerPanelWidth = Math.max(50, width / 2 - actionPanelWidth);
-
+  const playerPanelWidth = Math.max(
+    50,
+    width / 2 - actionPanelWidth + insets.left,
+  );
   return (
     <SafeAreaView
       style={{
