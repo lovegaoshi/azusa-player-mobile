@@ -12,6 +12,7 @@ export default function VoicePlayer({ uri }: Props) {
       style={styles.videoStyle}
       disableFocus={true}
       preventsDisplaySleepDuringVideoPlayback={false}
+      controls={false}
     />
   );
 }
