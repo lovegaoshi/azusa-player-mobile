@@ -79,6 +79,7 @@ const MainBackground = () => {
           resizeMode={ResizeMode.COVER}
           disableFocus={true}
           preventsDisplaySleepDuringVideoPlayback={false}
+          controls={false}
         />
       );
     default:

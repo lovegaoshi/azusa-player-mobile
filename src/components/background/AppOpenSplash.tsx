@@ -56,6 +56,7 @@ const TanakaAmazingCommodities = ({ url, onEnd }: TanakaProps) => {
         resizeMode="cover"
         disableFocus={true}
         preventsDisplaySleepDuringVideoPlayback={false}
+        controls={false}
       />
       <Pressable style={fullScreenStyle} onPress={onEnd} />
     </>
