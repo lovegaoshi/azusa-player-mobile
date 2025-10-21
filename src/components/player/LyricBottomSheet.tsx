@@ -53,32 +53,11 @@ interface ILyricSearch {
   usedLyric: UseLyric;
 }
 const LyricSearch = ({ usedLyric }: ILyricSearch) => {
-  const {
-    searchAndSetCurrentLyric,
-    fetchAndSetLyricOptions,
-    lrcOptions,
-    searchText,
-    setSearchText,
-  } = usedLyric;
+  const { searchAndSetCurrentLyric, lrcOptions } = usedLyric;
   const playerStyle = useNoxSetting(state => state.playerStyle);
-  const track = useTrackStore(s => s.track);
 
   return (
     <>
-      <TextInput
-        style={[
-          styles.searchBar,
-          {
-            backgroundColor: playerStyle.colors.primaryContainer,
-            color: playerStyle.colors.primary,
-          },
-        ]}
-        value={searchText}
-        onChangeText={setSearchText}
-        placeholder={track?.title ?? ''}
-        onSubmitEditing={() => fetchAndSetLyricOptions(searchText)}
-        selectionColor={playerStyle.customColors.textInputSelectionColor}
-      />
       {lrcOptions.map((item, index) => (
         <TouchableOpacity
           onPress={() => searchAndSetCurrentLyric({ index })}
@@ -108,6 +87,9 @@ export default function LyricBottomSheet({
   const sheet = useRef<TrueSheet>(null);
   const [route, setRoute] = useState(Routes.Main);
   const { t } = useTranslation();
+  const { fetchAndSetLyricOptions, searchText, setSearchText } = usedLyric;
+  const playerStyle = useNoxSetting(state => state.playerStyle);
+  const track = useTrackStore(s => s.track);
 
   return (
     <NoxBottomSheet
@@ -124,6 +106,24 @@ export default function LyricBottomSheet({
           </Text>
         </View>
       )}
+      ScrollHeader={() =>
+        route === Routes.LyricSearch && (
+          <TextInput
+            style={[
+              styles.searchBar,
+              {
+                backgroundColor: playerStyle.colors.primaryContainer,
+                color: playerStyle.colors.primary,
+              },
+            ]}
+            value={searchText}
+            onChangeText={setSearchText}
+            placeholder={track?.title ?? ''}
+            onSubmitEditing={() => fetchAndSetLyricOptions(searchText)}
+            selectionColor={playerStyle.customColors.textInputSelectionColor}
+          />
+        )
+      }
     >
       {route === Routes.Main ? (
         <Main
