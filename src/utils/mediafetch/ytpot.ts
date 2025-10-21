@@ -19,6 +19,10 @@ export const getAndroidPoT = async (videoId: string) => {
 export const getPoT = async (videoId: string, timeout = 100) => {
   if (isAndroid) return getAndroidPoT(videoId);
   logger.debug(`[ytpot] involking node to get Pot for ${videoId}`);
+  if (nodejs.channel === undefined) {
+    logger.warn(`[ytpot] node is not available.`);
+    return;
+  }
   nodejs.channel.post('potoken', videoId);
   let timeoutCounter = 0;
   while (timeoutCounter < timeout) {

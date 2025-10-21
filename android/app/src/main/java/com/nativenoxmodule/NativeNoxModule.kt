@@ -144,9 +144,10 @@ class NativeNoxModule(reactContext: ReactApplicationContext) : NativeNoxModuleSp
 
     override fun getUri(uri: String, promise: Promise) {
         CoroutineScope(Dispatchers.Default).launch {
+            val isDev = if (BuildConfig.DEBUG) "dev." else ""
             try {
                 promise.resolve(FileProvider.getUriForFile(reactApplicationContext,
-                    "${BuildConfig.APPLICATION_ID}.provider", File(uri)
+                    "${BuildConfig.APPLICATION_ID}.${isDev}provider", File(uri)
                 ).toString())
             } catch (e: Exception) {
                 promise.reject(e)
