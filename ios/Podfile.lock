@@ -14,7 +14,7 @@ PODS:
   - EXImageLoader (6.0.0):
     - ExpoModulesCore
     - React-Core
-  - Expo (54.0.13):
+  - Expo (54.0.16):
     - boost
     - DoubleConversion
     - ExpoModulesCore
@@ -57,7 +57,7 @@ PODS:
     - ExpoModulesCore
   - ExpoFont (14.0.9):
     - ExpoModulesCore
-  - ExpoImage (3.0.9):
+  - ExpoImage (3.0.10):
     - ExpoModulesCore
     - libavif/libdav1d
     - SDWebImage (~> 5.21.0)
@@ -70,7 +70,7 @@ PODS:
     - ExpoModulesCore
   - ExpoLinking (8.0.8):
     - ExpoModulesCore
-  - ExpoModulesCore (3.0.21):
+  - ExpoModulesCore (3.0.22):
     - boost
     - DoubleConversion
     - fast_float
@@ -1908,7 +1908,7 @@ PODS:
     - React-RCTFBReactNativeSpec
     - ReactCommon/turbomodule/core
     - SocketRocket
-  - react-native-app-auth (8.0.3):
+  - react-native-app-auth (8.1.0):
     - AppAuth (>= 1.7.6)
     - React-Core
   - react-native-background-timer (2.4.1):
@@ -1941,7 +1941,7 @@ PODS:
     - ReactCommon/turbomodule/core
     - SocketRocket
     - Yoga
-  - react-native-bottom-tabs (0.12.2):
+  - react-native-bottom-tabs (1.0.1):
     - boost
     - DoubleConversion
     - fast_float
@@ -1959,7 +1959,7 @@ PODS:
     - React-graphics
     - React-ImageManager
     - React-jsi
-    - react-native-bottom-tabs/common (= 0.12.2)
+    - react-native-bottom-tabs/common (= 1.0.1)
     - React-NativeModulesApple
     - React-RCTFabric
     - React-renderercss
@@ -1971,7 +1971,7 @@ PODS:
     - SocketRocket
     - SwiftUIIntrospect (~> 1.0)
     - Yoga
-  - react-native-bottom-tabs/common (0.12.2):
+  - react-native-bottom-tabs/common (1.0.1):
     - boost
     - DoubleConversion
     - fast_float
@@ -2152,7 +2152,7 @@ PODS:
     - ReactCommon/turbomodule/core
     - SocketRocket
     - Yoga
-  - react-native-skia (2.3.0):
+  - react-native-skia (2.3.5):
     - boost
     - DoubleConversion
     - fast_float
@@ -3775,18 +3775,18 @@ SPEC CHECKSUMS:
   EXApplication: a9d1c46d473d36f61302a9a81db2379441f3f094
   EXConstants: 0246c66e19d755cd9c88504d5c69896bba41d8a6
   EXImageLoader: e501c001bc40b8326605e82e6e80363c80fe06b5
-  Expo: 11a41c28a3c9c5b17b71ce432484121a099406c3
+  Expo: de1ac0903c19718be38dbed877c15c0a2c8c7ccb
   ExpoAsset: 3c3b7dd9b1318846a02ef05ce420e63d542aeb9f
   ExpoClipboard: 99109306a2d9ed2fbd16f6b856e6267b2afa8472
   ExpoCrypto: 4c50a152f5939e16a2ca10be77b002a3a391c4d3
   ExpoDocumentPicker: dbe4eeeb771891209fee044a6b0bafbd1fdcc4fa
   ExpoFileSystem: 56f081328f5b48a6dcc8302eee51d4f2d9d0049b
   ExpoFont: b881d43057dceb7b31ff767b24f612609e80f60f
-  ExpoImage: 790e6eb3e154dd6075107536caaebb03f0f24184
+  ExpoImage: 6eb842cd07817402640545c41884dd7f5fbfbca5
   ExpoImagePicker: bd0a5c81d7734548f6908a480609257e85d19ea8
   ExpoKeepAwake: 3f5e3ac53627849174f3603271df8e08f174ed4a
   ExpoLinking: f5c171877e118e792cb9a77e5ade0b080d899b14
-  ExpoModulesCore: 47b23e1089a32573b298129f19c62ec1d089e083
+  ExpoModulesCore: b49d5fc55ed6c421713258ddaac26c0176a7bbc9
   ExpoSecureStore: f44dee1354536bdb3d7fab8cc451ee737c41beca
   ExpoSQLite: f9d1202877e12bfa78a58309a3977ee4ea0b1314
   ExpoWebBrowser: 4f0dc52a559027cc0fba6920adc19a7604e2733d
@@ -3838,10 +3838,10 @@ SPEC CHECKSUMS:
   React-logger: 1767babce2d28c3251039ce05556714a2c8c6ded
   React-Mapbuffer: f84e59c14ff145295fbd029c5be16805aabe98d2
   React-microtasksnativemodule: 584eb07c9b1f1e684fe63b7fae61ed865f8f228f
-  react-native-app-auth: 149f01d2c824758453c9e7815217ded451974683
+  react-native-app-auth: 9b0a0e3ca279c3426a451e2607c8483808b8ed4a
   react-native-background-timer: 17ea5e06803401a379ebf1f20505b793ac44d0fe
   react-native-blob-util: 9027c999d7d2b7d4b087ea40413eddc899af46fe
-  react-native-bottom-tabs: dbdaeb069c3049c287653381d5c87059e198b78f
+  react-native-bottom-tabs: 54924c2fbcd1e7febd89d23a778ca8cd4d329432
   react-native-carplay: 474f4e36fe22a09e1da4c78d53dd0ac416ec7675
   react-native-cookies: f54fcded06bb0cda05c11d86788020b43528a26c
   react-native-get-random-values: 21325b2244dfa6b58878f51f9aa42821e7ba3d06
@@ -3849,7 +3849,7 @@ SPEC CHECKSUMS:
   react-native-ota-hot-update: da29e47b9368ba4a799c00af90a2d675810b722e
   react-native-pager-view: 6119e1d6414e2fcbf2c3c378d261f73c4a49b667
   react-native-safe-area-context: 3e0a25a843c40ad5efdf2bef93fdd95ad7229650
-  react-native-skia: 526ca0929e313a9b463e05e209d8a223e11af2cf
+  react-native-skia: 775091f3705e6af24d5790e2941f59fe32fca514
   react-native-slider: 99493fd3e7254ea482be59fbd94467e737d2b849
   react-native-svga-player: f1c7faf0864b22437b9b7cc7d7aa202d56f3906c
   react-native-track-player: 473b1ed1a554b919f9dedc7efc83791dd1a3327a
