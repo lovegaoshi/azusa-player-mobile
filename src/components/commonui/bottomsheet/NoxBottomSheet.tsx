@@ -15,7 +15,7 @@ import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { useNoxSetting } from '@stores/useApp';
-import { isAndroid } from '@utils/RNUtils';
+import { isAndroid, isIOS } from '@utils/RNUtils';
 
 const isAndroidNewArch = isAndroid;
 
@@ -26,7 +26,7 @@ interface Props extends TrueSheetProps {
   sizes?: SheetSize[];
   children?: React.ReactNode;
   draggable?: boolean;
-  Header?: () => React.ReactNode;
+  Header?: (p: { setHeaderHeight?: (v: number) => void }) => React.ReactNode;
   nestedScrollEnabled?: boolean;
   ScrollHeader?: () => React.ReactNode;
 }
@@ -46,6 +46,7 @@ export default function NoxBottomSheet(p: Props) {
   const playerStyle = useNoxSetting(state => state.playerStyle);
   const [topOffset, setTopOffset] = useState(0);
   const [leftOffset, setLeftOffset] = useState(0);
+  const [headerHeight, setHeaderHeight] = useState(0);
   const [scrollViewShouldNest, setScrollViewShouldNest] = useState<boolean>();
   const [sheetPresent, setSheetPresent] = useState(false);
   const [initialized, setInitialized] = useState(false);
@@ -96,8 +97,8 @@ export default function NoxBottomSheet(p: Props) {
         {(p.sizes?.findIndex?.(v => v.toString().includes('%')) ?? -1) < 0 && (
           <View style={{ height: insets.top }} />
         )}
-        <Header />
-        {scrollViewShouldNest === undefined ? (
+        <Header setHeaderHeight={isIOS ? setHeaderHeight : undefined} />
+        {isAndroid && scrollViewShouldNest === undefined ? (
           <View
             style={{ position: 'absolute' }}
             onLayout={e =>
@@ -108,6 +109,7 @@ export default function NoxBottomSheet(p: Props) {
           </View>
         ) : (
           <ScrollView
+            contentInset={{ top: headerHeight }}
             nestedScrollEnabled={nestedScrollEnabled ?? scrollViewShouldNest}
             ref={scrollViewRef}
             showsVerticalScrollIndicator={false}

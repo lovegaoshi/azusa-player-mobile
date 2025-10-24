@@ -99,8 +99,13 @@ export default function LyricBottomSheet({
       name={NoxSheetRoutes.LyricSheet}
       ref={sheet}
       onDismiss={() => setRoute(Routes.Main)}
-      Header={() => (
-        <View style={{ paddingVertical: 15, alignItems: 'center' }}>
+      Header={(p: { setHeaderHeight?: (v: number) => void }) => (
+        <View
+          style={{ paddingVertical: 15, alignItems: 'center' }}
+          onLayout={layout =>
+            p.setHeaderHeight?.(layout.nativeEvent.layout.height)
+          }
+        >
           <Text variant="titleLarge">
             {t(route === Routes.Main ? 'Lyric.options' : 'Lyric.Search')}
           </Text>
