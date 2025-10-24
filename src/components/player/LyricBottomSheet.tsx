@@ -93,7 +93,7 @@ export default function LyricBottomSheet({
 
   return (
     <NoxBottomSheet
-      sizes={['auto', '50%']}
+      sizes={route === Routes.Main ? ['auto', '50%'] : ['50%']}
       /* HACK: for some reason menusheets wont scroll with this always on. but why it works here? */
       nestedScrollEnabled
       name={NoxSheetRoutes.LyricSheet}
