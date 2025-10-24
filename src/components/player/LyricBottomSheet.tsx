@@ -93,14 +93,19 @@ export default function LyricBottomSheet({
 
   return (
     <NoxBottomSheet
-      sizes={['auto', '50%']}
+      sizes={route === Routes.Main ? ['auto', '50%'] : ['50%']}
       /* HACK: for some reason menusheets wont scroll with this always on. but why it works here? */
       nestedScrollEnabled
       name={NoxSheetRoutes.LyricSheet}
       ref={sheet}
       onDismiss={() => setRoute(Routes.Main)}
-      Header={() => (
-        <View style={{ paddingVertical: 15, alignItems: 'center' }}>
+      Header={(p: { setHeaderHeight?: (v: number) => void }) => (
+        <View
+          style={{ paddingVertical: 15, alignItems: 'center' }}
+          onLayout={layout =>
+            p.setHeaderHeight?.(layout.nativeEvent.layout.height)
+          }
+        >
           <Text variant="titleLarge">
             {t(route === Routes.Main ? 'Lyric.options' : 'Lyric.Search')}
           </Text>
