@@ -130,15 +130,7 @@ export const performSkipToNext = (
       //await TrackPlayer.skipToNext();
       // WHY?
       const nextIndex = ((await TrackPlayer.getActiveTrackIndex()) ?? 0) + 1;
-      let maxQueueLen = (await TrackPlayer.getQueue()).length - 1;
-      if (nextIndex > maxQueueLen) {
-        logger.error(
-          '[skipToNext] failed to skip to next song. attempt to retry preparePromise',
-        );
-        await preparePromise();
-        maxQueueLen = (await TrackPlayer.getQueue()).length - 1;
-        logger.warn(`[skipToNext] current status: ${nextIndex}/${maxQueueLen}`);
-      }
+      const maxQueueLen = (await TrackPlayer.getQueue()).length - 1;
       // HACK: log when nextIndex > maxQueueLen here
       await TrackPlayer.skip(Math.min(nextIndex, maxQueueLen));
       TPPlay();

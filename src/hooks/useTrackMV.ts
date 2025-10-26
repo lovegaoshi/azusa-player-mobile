@@ -39,13 +39,14 @@ export default function useTackMV(videoRef: RefObject<VideoRef | null>) {
   };
 
   useLazyEffect(() => {
-    execWhenTrue({
-      loopCheck: async () => videoRef.current !== null,
-      executeFn: primeVideoPosition,
-      funcName: 'primeVideoPosition',
-      loopGuard: 5,
-      wait: 300,
-    });
+    parsedMV &&
+      execWhenTrue({
+        loopCheck: async () => videoRef.current !== null,
+        executeFn: primeVideoPosition,
+        funcName: 'primeVideoPosition',
+        loopGuard: 5,
+        wait: 300,
+      });
   }, [RNTPPlay, RNTPSeek]);
 
   useEffect(() => {
