@@ -132,7 +132,7 @@ export const performSkipToNext = (
       const playerSetting = useNoxSetting.getState().playerSetting;
       const nextIndex = ((await TrackPlayer.getActiveTrackIndex()) ?? 0) + 1;
       let maxQueueLen = (await TrackPlayer.getQueue()).length - 1;
-      if (nextIndex > maxQueueLen && playerSetting.crossfadeRetry) {
+      if (playerSetting.crossfadeRetry && nextIndex > maxQueueLen) {
         logger.error(
           '[skipToNext] failed to skip to next song. attempt to retry preparePromise',
         );
