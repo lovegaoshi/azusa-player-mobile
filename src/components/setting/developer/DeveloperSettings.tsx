@@ -44,6 +44,10 @@ const developerSettings: { [key: string]: SettingEntry } = {
     settingName: 'resumeOnPause',
     settingCategory: 'GeneralSettings',
   },
+  crossfadeRetry: {
+    settingName: 'crossfadeRetry',
+    settingCategory: 'GeneralSettings',
+  },
   /**
   chatGPTSongName: {
     settingName: 'chatGPTResolveSongName',
@@ -114,6 +118,12 @@ export const Home = ({
             {isAndroid && (
               <RenderSetting
                 item={developerSettings.resumeOnPause}
+                delayedLoading={false}
+              />
+            )}
+            {isAndroid && (
+              <RenderSetting
+                item={developerSettings.crossfadeRetry}
                 delayedLoading={false}
               />
             )}
