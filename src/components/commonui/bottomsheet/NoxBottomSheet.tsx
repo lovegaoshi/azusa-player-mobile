@@ -28,7 +28,6 @@ interface Props extends TrueSheetProps {
   draggable?: boolean;
   Header?: (p: { setHeaderHeight?: (v: number) => void }) => React.ReactNode;
   nestedScrollEnabled?: boolean;
-  ScrollHeader?: () => React.ReactNode;
 }
 
 export default function NoxBottomSheet(p: Props) {
@@ -39,7 +38,6 @@ export default function NoxBottomSheet(p: Props) {
     draggable,
     onDismiss,
     Header = () => null,
-    ScrollHeader = () => null,
     nestedScrollEnabled,
   } = p;
   const insets = useSafeAreaInsets();
@@ -113,9 +111,7 @@ export default function NoxBottomSheet(p: Props) {
             nestedScrollEnabled={nestedScrollEnabled ?? scrollViewShouldNest}
             ref={scrollViewRef}
             showsVerticalScrollIndicator={false}
-            stickyHeaderIndices={[0]}
           >
-            <ScrollHeader />
             {children}
             <View style={{ paddingBottom: insets.bottom }} />
           </ScrollView>
