@@ -61,6 +61,7 @@ declare global {
       spotifyLyricStyle: boolean;
       initYtbiOnStart: boolean;
       resumeOnPause: boolean;
+      crossfadeRetry: boolean;
 
       appID: string;
       language?: string;

@@ -221,6 +221,8 @@
     "initYtbiOnStartDesc": "ytbi cannot start in background. Recommended if using ytbi",
     "resumeOnPauseName": "onResume when onPause",
     "resumeOnPauseDesc": "calls ReactActivity.onResume when entering onPause.",
+    "crossfadeRetryName": "Retry crossfade",
+    "crossfadeRetryDesc": "Retry TP.add when skipping to next song fails",
     "noBiliR128GainName": "Disable BiliR128Gain",
     "noBiliR128GainDesc": "Disable Bili R128gain, use ffmpeg instead",
     "pausePlaybackOnMuteName": "Pause Playback on Mute",

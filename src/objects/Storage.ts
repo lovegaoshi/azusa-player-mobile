@@ -62,6 +62,7 @@ const _DefaultSetting: NoxStorage.PlayerSettingDict = {
   spotifyLyricStyle: false,
   initYtbiOnStart: false,
   resumeOnPause: false,
+  crossfadeRetry: false,
 
   appID: AppID,
   language: undefined,
