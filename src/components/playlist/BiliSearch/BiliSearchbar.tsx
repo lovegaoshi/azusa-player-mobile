@@ -112,6 +112,7 @@ export default function BiliSearchBar({ onSearched = console.log }: Props) {
   };
 
   useEffect(() => {
+    if (!isAndroid) return;
     const intentListener = DeviceEventEmitter.addListener(
       'APMShareIntent',
       (e: any) => handleShare(e['android.intent.extra.TEXT']),
