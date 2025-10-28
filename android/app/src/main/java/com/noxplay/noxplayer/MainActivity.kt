@@ -75,12 +75,15 @@ class MainActivity(
         try {
             if (intent.action?.contains("android.media.action.MEDIA_PLAY_FROM_SEARCH") == true) {
                 getReactContext()?.emitDeviceEvent("remote-play-search", Arguments.fromBundle(intent.extras ?: Bundle()))
+            } else if (intent.action?.contains("android.intent.action.SEND") == true) {
+                getReactContext()?.emitDeviceEvent("APMShareIntent", Arguments.fromBundle(intent.extras ?: Bundle()))
+            } else {
+                val launchOptions = Bundle()
+                launchOptions.putString("intentData", intent.dataString)
+                launchOptions.putString("intentAction", intent.action)
+                launchOptions.putBundle("intentBundle", intent.extras ?: Bundle())
+                getReactContext()?.emitDeviceEvent("APMNewIntent", Arguments.fromBundle(launchOptions))
             }
-            val launchOptions = Bundle()
-            launchOptions.putString("intentData", intent.dataString)
-            launchOptions.putString("intentAction", intent.action)
-            launchOptions.putBundle("intentBundle", intent.extras ?: Bundle())
-            getReactContext()?.emitDeviceEvent("APMNewIntent", Arguments.fromBundle(launchOptions))
         } catch (e: Exception) {
             Timber.tag("APM-intent").d("failed to notify intent: $intent")
         }

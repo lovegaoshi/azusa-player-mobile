@@ -1,9 +1,13 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { ProgressBar } from 'react-native-paper';
-import { View, StyleSheet, GestureResponderEvent } from 'react-native';
+import {
+  View,
+  StyleSheet,
+  GestureResponderEvent,
+  DeviceEventEmitter,
+} from 'react-native';
 import { useTranslation } from 'react-i18next';
-import ShareMenu, { ShareCallback } from 'react-native-share-menu';
 
 import { NoxRoutes } from '@enums/Routes';
 import { useNoxSetting } from '@stores/useApp';
@@ -17,12 +21,6 @@ import BiliKwSuggest from '@utils/Bilibili/BiliKwSuggest';
 import { SearchOptions } from '@enums/Storage';
 import { isAndroid } from '@utils/RNUtils';
 import useNavigation from '@hooks/useNavigation';
-
-interface SharedItem {
-  mimeType: string;
-  data: string;
-  extraData: any;
-}
 
 const searchSuggest = (option: SearchOptions | string) => {
   switch (option) {
@@ -50,7 +48,6 @@ export default function BiliSearchBar({ onSearched = console.log }: Props) {
   const miniPlayerCollapse = useNoxSetting(state => state.collapse);
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [sharedData, setSharedData] = useState<any>(null);
-  const [, setSharedMimeType] = useState<string | null>(null);
   const { playFromPlaylist } = usePlayback();
   const [dialogOpen, setDialogOpen] = useState(false);
   const [menuCoords, setMenuCoords] = useState<NoxTheme.Coordinates>({
@@ -101,15 +98,9 @@ export default function BiliSearchBar({ onSearched = console.log }: Props) {
     }
   }, [externalSearchText]);
 
-  const handleShare = useCallback((item?: SharedItem) => {
-    if (!item) {
-      return;
-    }
-
-    const { mimeType, data } = item;
-    if (data === sharedData) return;
+  const handleShare = useCallback((data?: string) => {
+    if (data === sharedData || data === undefined) return;
     setSharedData(data);
-    setSharedMimeType(mimeType);
     // You can receive extra data from your custom Share View
     handleExternalSearch(data);
     setSearchVal(data);
@@ -121,19 +112,11 @@ export default function BiliSearchBar({ onSearched = console.log }: Props) {
   };
 
   useEffect(() => {
-    if (!isAndroid) return;
-    ShareMenu.getInitialShare(handleShare as ShareCallback);
-  }, []);
-
-  useEffect(() => {
-    if (!isAndroid) return;
-    const listener = ShareMenu.addNewShareListener(
-      handleShare as ShareCallback,
+    const intentListener = DeviceEventEmitter.addListener(
+      'APMShareIntent',
+      (e: any) => handleShare(e['android.intent.extra.TEXT']),
     );
-
-    return () => {
-      listener.remove();
-    };
+    return () => intentListener.remove();
   }, []);
 
   return (
