@@ -116,7 +116,7 @@
     "react-native-device-info": "^14.1.1",
     "react-native-edge-to-edge": "^1.7.0",
     "react-native-flashdrag-list": "https://lovegaoshi@github.com/lovegaoshi/react-native-flashdrag-list.git#commit=aa343c6ffa749b2557a14985b6ceaa8267f0ac0b",
-    "react-native-gesture-handler": "~2.29.0",
+    "react-native-gesture-handler": "~2.28.0",
     "react-native-get-random-values": "^2.0.0",
     "react-native-image-colors": "^2.5.0",
     "react-native-lyric": "https://lovegaoshi@github.com/lovegaoshi/react-native-lyric.git#commit=fe46871eba41445aa432fc6d0a5bc5e6c334e170",
