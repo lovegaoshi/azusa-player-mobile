@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 54;
+	objectVersion = 70;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -19,9 +19,34 @@
 		AA9F058A2AB48946005FA2C6 /* libavfilter.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA9F05892AB48946005FA2C6 /* libavfilter.xcframework */; };
 		AA9F058E2AB489B1005FA2C6 /* libavutil.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA9F058D2AB489B1005FA2C6 /* libavutil.xcframework */; };
 		BDB3121DF2250E03AB81F873 /* ExpoModulesProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 629CB7CB958060A0F3604281 /* ExpoModulesProvider.swift */; };
+		CC2F1F612EB317F4005661D4 /* APMShare.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = CC2F1F572EB317F4005661D4 /* APMShare.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		DC4736F4D25A78F1E3AF4737 /* ExpoModulesProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BED8643AF15A76097355103 /* ExpoModulesProvider.swift */; };
 		EF174DA98930A4C1B47966AF /* Pods_azusa_player_mobile.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 150FB18D67701151BBD83CB5 /* Pods_azusa_player_mobile.framework */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		CC2F1F5F2EB317F4005661D4 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 83CBB9F71A601CBA00E9B192 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = CC2F1F562EB317F4005661D4;
+			remoteInfo = APMShare;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		CC2F1F622EB317F4005661D4 /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				CC2F1F612EB317F4005661D4 /* APMShare.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		00E356EE1AD99517003FC87E /* APMTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = APMTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -51,11 +76,26 @@
 		AA9F05892AB48946005FA2C6 /* libavfilter.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = libavfilter.xcframework; path = "Pods/ffmpeg-kit-ios-audio/libavfilter.xcframework"; sourceTree = "<group>"; };
 		AA9F058D2AB489B1005FA2C6 /* libavutil.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = libavutil.xcframework; path = "Pods/ffmpeg-kit-ios-audio/libavutil.xcframework"; sourceTree = "<group>"; };
 		C6A6377EE893F59DCD177B16 /* Pods-example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-example.debug.xcconfig"; path = "Target Support Files/Pods-example/Pods-example.debug.xcconfig"; sourceTree = "<group>"; };
+		CC2F1F572EB317F4005661D4 /* APMShare.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = APMShare.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		D052852ACECAF1F25AC8717E /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xml; name = PrivacyInfo.xcprivacy; path = example/PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		DDFCE76F143B5D90F2157D05 /* Pods-example-exampleTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-example-exampleTests.release.xcconfig"; path = "Target Support Files/Pods-example-exampleTests/Pods-example-exampleTests.release.xcconfig"; sourceTree = "<group>"; };
 		E050A9D69F20B323551604B0 /* Pods-example-exampleTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-example-exampleTests.debug.xcconfig"; path = "Target Support Files/Pods-example-exampleTests/Pods-example-exampleTests.debug.xcconfig"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		CC2F1F652EB317F4005661D4 /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = CC2F1F562EB317F4005661D4 /* APMShare */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		CC2F1F582EB317F4005661D4 /* APMShare */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (CC2F1F652EB317F4005661D4 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = APMShare; sourceTree = "<group>"; };
+/* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		00E356EB1AD99517003FC87E /* Frameworks */ = {
@@ -73,6 +113,13 @@
 				AA9F058A2AB48946005FA2C6 /* libavfilter.xcframework in Frameworks */,
 				AA9F058E2AB489B1005FA2C6 /* libavutil.xcframework in Frameworks */,
 				EF174DA98930A4C1B47966AF /* Pods_azusa_player_mobile.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CC2F1F542EB317F4005661D4 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -154,6 +201,7 @@
 				13B07FAE1A68108700A75B9A /* APM */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				00E356EF1AD99517003FC87E /* exampleTests */,
+				CC2F1F582EB317F4005661D4 /* APMShare */,
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				7954FD6C281A38552B34F08D /* Pods */,
@@ -170,6 +218,7 @@
 			children = (
 				13B07F961A680F5B00A75B9A /* AzusaPlayer.app */,
 				00E356EE1AD99517003FC87E /* APMTests.xctest */,
+				CC2F1F572EB317F4005661D4 /* APMShare.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -229,15 +278,39 @@
 				4D1A105E8DA4143AA121A89C /* [CP] Embed Pods Frameworks */,
 				2D80E31B57EB46A621A04C76 /* [CP] Copy Pods Resources */,
 				9F835F72A592488094ED0D47 /* Upload Debug Symbols to Sentry */,
+				CC2F1F622EB317F4005661D4 /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				CC2F1F602EB317F4005661D4 /* PBXTargetDependency */,
 			);
 			name = "azusa-player-mobile";
 			productName = example;
 			productReference = 13B07F961A680F5B00A75B9A /* AzusaPlayer.app */;
 			productType = "com.apple.product-type.application";
+		};
+		CC2F1F562EB317F4005661D4 /* APMShare */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CC2F1F662EB317F4005661D4 /* Build configuration list for PBXNativeTarget "APMShare" */;
+			buildPhases = (
+				CC2F1F532EB317F4005661D4 /* Sources */,
+				CC2F1F542EB317F4005661D4 /* Frameworks */,
+				CC2F1F552EB317F4005661D4 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				CC2F1F582EB317F4005661D4 /* APMShare */,
+			);
+			name = APMShare;
+			packageProductDependencies = (
+			);
+			productName = APMShare;
+			productReference = CC2F1F572EB317F4005661D4 /* APMShare.appex */;
+			productType = "com.apple.product-type.app-extension";
 		};
 /* End PBXNativeTarget section */
 
@@ -246,6 +319,7 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = YES;
+				LastSwiftUpdateCheck = 2600;
 				LastUpgradeCheck = 1600;
 				TargetAttributes = {
 					00E356ED1AD99517003FC87E = {
@@ -255,6 +329,9 @@
 					};
 					13B07F861A680F5B00A75B9A = {
 						LastSwiftMigration = "";
+					};
+					CC2F1F562EB317F4005661D4 = {
+						CreatedOnToolsVersion = 26.0.1;
 					};
 				};
 			};
@@ -273,6 +350,7 @@
 			targets = (
 				13B07F861A680F5B00A75B9A /* azusa-player-mobile */,
 				00E356ED1AD99517003FC87E /* APMTests */,
+				CC2F1F562EB317F4005661D4 /* APMShare */,
 			);
 		};
 /* End PBXProject section */
@@ -293,6 +371,13 @@
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				1DC9992F80AADAB3B7E446F2 /* PrivacyInfo.xcprivacy in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CC2F1F552EB317F4005661D4 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -546,7 +631,22 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		CC2F1F532EB317F4005661D4 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		CC2F1F602EB317F4005661D4 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = CC2F1F562EB317F4005661D4 /* APMShare */;
+			targetProxy = CC2F1F5F2EB317F4005661D4 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		00E356F61AD99517003FC87E /* Debug */ = {
@@ -852,6 +952,96 @@
 			};
 			name = Release;
 		};
+		CC2F1F632EB317F4005661D4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = "";
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = APMShare/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = APMShare;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.noxplay.noxplayer.APMShare;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		CC2F1F642EB317F4005661D4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = "";
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = APMShare/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = APMShare;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.noxplay.noxplayer.APMShare;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -878,6 +1068,15 @@
 			buildConfigurations = (
 				83CBBA201A601CBA00E9B192 /* Debug */,
 				83CBBA211A601CBA00E9B192 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		CC2F1F662EB317F4005661D4 /* Build configuration list for PBXNativeTarget "APMShare" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CC2F1F632EB317F4005661D4 /* Debug */,
+				CC2F1F642EB317F4005661D4 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

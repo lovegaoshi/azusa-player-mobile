@@ -5,7 +5,6 @@ import SwiftUI
 class PhoneSceneDelegate: UIResponder, UIWindowSceneDelegate {
   var window: UIWindow?
   func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-
     guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
     appDelegate.initRN(launchOptions: connectionOptions2LaunchOptions(connectionOptions: connectionOptions))
     
@@ -20,6 +19,14 @@ class PhoneSceneDelegate: UIResponder, UIWindowSceneDelegate {
     self.window = window
     window.makeKeyAndVisible()
   }
+  
+  func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
+    if URLContexts.isEmpty {
+      return
+    }
+    RCTLinkingManager.application(UIApplication.shared, open: URLContexts.first!.url)
+  }
+
 }
 
 func connectionOptions2LaunchOptions(connectionOptions: UIScene.ConnectionOptions?) -> [UIApplication.LaunchOptionsKey: Any] {
