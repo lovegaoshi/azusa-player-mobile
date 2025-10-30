@@ -4,11 +4,5 @@
 <dict>
 	<key>com.apple.developer.carplay-audio</key>
 	<false/>
-  <key>com.apple.developer.associated-domains</key>
-  <array>
-    <string>applinks:noxplayer.app</string>
-    <string>webcredentials:noxplayer.app</string>
-    <string>webcredentials:my.noxplayer.app</string>
-  </array>
 </dict>
 </plist>
