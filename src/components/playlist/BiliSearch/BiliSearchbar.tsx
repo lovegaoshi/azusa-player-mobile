@@ -6,6 +6,7 @@ import {
   StyleSheet,
   GestureResponderEvent,
   DeviceEventEmitter,
+  Linking,
 } from 'react-native';
 import { useTranslation } from 'react-i18next';
 
@@ -19,7 +20,7 @@ import { getIcon } from './Icons';
 import AutoComplete from '@components/commonui/AutoComplete';
 import BiliKwSuggest from '@utils/Bilibili/BiliKwSuggest';
 import { SearchOptions } from '@enums/Storage';
-import { isAndroid } from '@utils/RNUtils';
+import { isAndroid, isIOS } from '@utils/RNUtils';
 import useNavigation from '@hooks/useNavigation';
 
 const searchSuggest = (option: SearchOptions | string) => {
@@ -110,6 +111,19 @@ export default function BiliSearchBar({ onSearched = console.log }: Props) {
     pressed.current = true;
     handleSearch(v);
   };
+
+  useEffect(() => {
+    if (!isIOS) return;
+
+    // Subscribe to any new links
+    const subscription = Linking.addEventListener('url', ({ url }) => {
+      console.log('deeplinkurl2', url);
+    });
+
+    return () => {
+      subscription.remove();
+    };
+  }, []);
 
   useEffect(() => {
     if (!isAndroid) return;

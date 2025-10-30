@@ -25,9 +25,13 @@
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLName</key>
+			<string>com.noxplay.noxplayer</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>com.noxplayer</string>
+				<string>noxplayer</string>
 			</array>
 		</dict>
 	</array>

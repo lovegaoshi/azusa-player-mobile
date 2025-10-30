@@ -14,7 +14,7 @@ PODS:
   - EXImageLoader (6.0.0):
     - ExpoModulesCore
     - React-Core
-  - Expo (54.0.20):
+  - Expo (54.0.21):
     - boost
     - DoubleConversion
     - ExpoModulesCore
@@ -70,7 +70,7 @@ PODS:
     - ExpoModulesCore
   - ExpoLinking (8.0.8):
     - ExpoModulesCore
-  - ExpoModulesCore (3.0.22):
+  - ExpoModulesCore (3.0.23):
     - boost
     - DoubleConversion
     - fast_float
@@ -166,8 +166,8 @@ PODS:
     - SocketRocket
     - Yoga
   - Protobuf (3.22.1)
-  - PurchasesHybridCommon (17.11.0):
-    - RevenueCat (= 5.44.1)
+  - PurchasesHybridCommon (17.12.0):
+    - RevenueCat (= 5.45.0)
   - RCT-Folly (2024.11.18.00):
     - boost
     - DoubleConversion
@@ -1913,7 +1913,7 @@ PODS:
     - React-Core
   - react-native-background-timer (2.4.1):
     - React-Core
-  - react-native-blob-util (0.22.2):
+  - react-native-blob-util (0.23.1):
     - boost
     - DoubleConversion
     - fast_float
@@ -2091,7 +2091,7 @@ PODS:
     - ReactCommon/turbomodule/core
     - SocketRocket
     - Yoga
-  - react-native-safe-area-context (5.6.1):
+  - react-native-safe-area-context (5.6.2):
     - boost
     - DoubleConversion
     - fast_float
@@ -2109,8 +2109,8 @@ PODS:
     - React-graphics
     - React-ImageManager
     - React-jsi
-    - react-native-safe-area-context/common (= 5.6.1)
-    - react-native-safe-area-context/fabric (= 5.6.1)
+    - react-native-safe-area-context/common (= 5.6.2)
+    - react-native-safe-area-context/fabric (= 5.6.2)
     - React-NativeModulesApple
     - React-RCTFabric
     - React-renderercss
@@ -2121,7 +2121,7 @@ PODS:
     - ReactCommon/turbomodule/core
     - SocketRocket
     - Yoga
-  - react-native-safe-area-context/common (5.6.1):
+  - react-native-safe-area-context/common (5.6.2):
     - boost
     - DoubleConversion
     - fast_float
@@ -2149,7 +2149,7 @@ PODS:
     - ReactCommon/turbomodule/core
     - SocketRocket
     - Yoga
-  - react-native-safe-area-context/fabric (5.6.1):
+  - react-native-safe-area-context/fabric (5.6.2):
     - boost
     - DoubleConversion
     - fast_float
@@ -2944,7 +2944,7 @@ PODS:
     - React-perflogger (= 0.81.5)
     - React-utils (= 0.81.5)
     - SocketRocket
-  - RevenueCat (5.44.1)
+  - RevenueCat (5.45.0)
   - RNCMaskedView (0.3.2):
     - boost
     - DoubleConversion
@@ -2975,7 +2975,7 @@ PODS:
     - Yoga
   - RNDeviceInfo (14.1.1):
     - React-Core
-  - RNGestureHandler (2.29.0):
+  - RNGestureHandler (2.28.0):
     - boost
     - DoubleConversion
     - fast_float
@@ -3009,8 +3009,8 @@ PODS:
     - RNNotifee/NotifeeCore (= 9.1.8)
   - RNNotifee/NotifeeCore (9.1.8):
     - React-Core
-  - RNPurchases (9.6.0):
-    - PurchasesHybridCommon (= 17.11.0)
+  - RNPurchases (9.6.1):
+    - PurchasesHybridCommon (= 17.12.0)
     - React-Core
   - RNReanimated (4.1.3):
     - boost
@@ -3193,8 +3193,6 @@ PODS:
     - Sentry/HybridSDK (= 8.57.0)
     - SocketRocket
     - Yoga
-  - RNShareMenu (6.0.0):
-    - React
   - RNSVG (15.14.0):
     - boost
     - DoubleConversion
@@ -3516,7 +3514,6 @@ DEPENDENCIES:
   - RNReanimated (from `../node_modules/react-native-reanimated`)
   - RNScreens (from `../node_modules/react-native-screens`)
   - "RNSentry (from `../node_modules/@sentry/react-native`)"
-  - RNShareMenu (from `../node_modules/react-native-share-menu`)
   - RNSVG (from `../node_modules/react-native-svg`)
   - RNWorklets (from `../node_modules/react-native-worklets`)
   - SocketRocket (~> 0.7.1)
@@ -3783,8 +3780,6 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native-screens"
   RNSentry:
     :path: "../node_modules/@sentry/react-native"
-  RNShareMenu:
-    :path: "../node_modules/react-native-share-menu"
   RNSVG:
     :path: "../node_modules/react-native-svg"
   RNWorklets:
@@ -3801,7 +3796,7 @@ SPEC CHECKSUMS:
   EXApplication: a9d1c46d473d36f61302a9a81db2379441f3f094
   EXConstants: 0246c66e19d755cd9c88504d5c69896bba41d8a6
   EXImageLoader: e501c001bc40b8326605e82e6e80363c80fe06b5
-  Expo: 85289a18d819cb65b965589ffdc330583d868dcc
+  Expo: ab0f25a590c47a3b22b43464152a08ed7ff60bb9
   ExpoAsset: 3c3b7dd9b1318846a02ef05ce420e63d542aeb9f
   ExpoClipboard: 99109306a2d9ed2fbd16f6b856e6267b2afa8472
   ExpoCrypto: 4c50a152f5939e16a2ca10be77b002a3a391c4d3
@@ -3812,7 +3807,7 @@ SPEC CHECKSUMS:
   ExpoImagePicker: bd0a5c81d7734548f6908a480609257e85d19ea8
   ExpoKeepAwake: 3f5e3ac53627849174f3603271df8e08f174ed4a
   ExpoLinking: f5c171877e118e792cb9a77e5ade0b080d899b14
-  ExpoModulesCore: b49d5fc55ed6c421713258ddaac26c0176a7bbc9
+  ExpoModulesCore: 809e3de0bc330264f7077f6f41f2a82a7daa14c5
   ExpoSecureStore: f44dee1354536bdb3d7fab8cc451ee737c41beca
   ExpoSQLite: f9d1202877e12bfa78a58309a3977ee4ea0b1314
   ExpoWebBrowser: 4f0dc52a559027cc0fba6920adc19a7604e2733d
@@ -3830,7 +3825,7 @@ SPEC CHECKSUMS:
   lottie-ios: a881093fab623c467d3bce374367755c272bdd59
   lottie-react-native: a236ef9840b0e49f55fc0db365dfaa7bc14424c6
   Protobuf: d7f7c8329edf5eb8af65547a8ba3e9c1cee927d5
-  PurchasesHybridCommon: d820837b12781f2af5dbb5faba428811a59b6743
+  PurchasesHybridCommon: c8f805e0f6d3a557a6d63300d0402b8ae5219a48
   RCT-Folly: 59ec0ac1f2f39672a0c6e6cecdd39383b764646f
   RCTDeprecation: 5eb1d2eeff5fb91151e8a8eef45b6c7658b6c897
   RCTRequired: cebcf9442fc296c9b89ac791dfd463021d9f6f23
@@ -3866,7 +3861,7 @@ SPEC CHECKSUMS:
   React-microtasksnativemodule: e39f94cc96d61b8174a5cfb2d5862a73fa8c0d35
   react-native-app-auth: 9b0a0e3ca279c3426a451e2607c8483808b8ed4a
   react-native-background-timer: 17ea5e06803401a379ebf1f20505b793ac44d0fe
-  react-native-blob-util: 9027c999d7d2b7d4b087ea40413eddc899af46fe
+  react-native-blob-util: 94f326cc6062ede2c4353053b93746177606b202
   react-native-bottom-tabs: 8326aeec65467e2fce36382c17ea32340b8228db
   react-native-carplay: 474f4e36fe22a09e1da4c78d53dd0ac416ec7675
   react-native-cookies: f54fcded06bb0cda05c11d86788020b43528a26c
@@ -3874,7 +3869,7 @@ SPEC CHECKSUMS:
   react-native-netinfo: f0a9899081c185db1de5bb2fdc1c88c202a059ac
   react-native-ota-hot-update: da29e47b9368ba4a799c00af90a2d675810b722e
   react-native-pager-view: 6119e1d6414e2fcbf2c3c378d261f73c4a49b667
-  react-native-safe-area-context: 3e0a25a843c40ad5efdf2bef93fdd95ad7229650
+  react-native-safe-area-context: fea29ae0275beaa22f72d0a8be1eb0ab09c3feae
   react-native-skia: ec6154f656248d598a85c7558c0c28c7611cc35c
   react-native-slider: 99493fd3e7254ea482be59fbd94467e737d2b849
   react-native-svga-player: f1c7faf0864b22437b9b7cc7d7aa202d56f3906c
@@ -3913,16 +3908,15 @@ SPEC CHECKSUMS:
   ReactAppDependencyProvider: c277c5b231881ad4f00cd59e3aa0671b99d7ebee
   ReactCodegen: 08a17c2a0ea911c3367638f37cd41ac1948065b7
   ReactCommon: 5cfd842fcd893bb40fc835f98fadc60c42906a20
-  RevenueCat: c63342889404269918c1196708246d7c21cf8e6d
+  RevenueCat: 9d0328a098bd0e1b425d91d136e643b72cd70326
   RNCMaskedView: 8bfc13a356455b15d56114738f4d2a804769c1bf
   RNDeviceInfo: 8b6fa8379062949dd79a009cf3d6b02a9c03ca59
-  RNGestureHandler: ee0b4a1abf212238615f58df1221a7f9a2342b80
+  RNGestureHandler: 9339994ea5d1ff6ad2679b7d0cc3d49053111369
   RNNotifee: 4a6ee5c7deaf00e005050052d73ee6315dff7ec9
-  RNPurchases: b7f28dea400225261359e4196b2088c4fcd9fd73
+  RNPurchases: 14d509abda20b253e603d5fecf82beac38359037
   RNReanimated: 2635ec9d061c5eba3987bcc604443d78f363d3f7
   RNScreens: de996b48c82245c0b68c677da3334c2061e2a951
   RNSentry: 34bead6afbfce1bb89837b84da1dec001f890329
-  RNShareMenu: cb9dac548c8bf147d06f0bf07296ad51ea9f5fc3
   RNSVG: 596e9946ddc0e023c6e6931038c9e49b553f742d
   RNWorklets: daa0a3e7946a9c4042f3a962c87a12dc5bc0badd
   SDWebImage: 16309af6d214ba3f77a7c6f6fdda888cb313a50a
