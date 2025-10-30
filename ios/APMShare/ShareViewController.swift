@@ -23,7 +23,7 @@ class ShareViewController: UIViewController {
     }
     
     if itemProvider.hasItemConformingToTypeIdentifier("public.url") {
-      itemProvider.loadItem(forTypeIdentifier: "public.url", options: nil) { (urlItem, error) in
+      itemProvider.loadItem(forTypeIdentifier: "public.url", options: nil) { (urlItem, _) in
         if let shareURL = urlItem as? URL {
           let encodedURL = shareURL.absoluteString
             .addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
