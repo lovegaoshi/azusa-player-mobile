@@ -31,6 +31,7 @@
 			<string>com.noxplay.noxplayer</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
+				<string>com.noxplayer</string>
 				<string>noxplayer</string>
 			</array>
 		</dict>

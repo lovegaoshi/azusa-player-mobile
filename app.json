@@ -3,7 +3,7 @@
   "displayName": "APM",
   "plugins": ["react-native-ota-hot-update"],
   "expo": {
-    "scheme": "com.noxplayer",
+    "scheme": ["com.noxplayer", "noxplayer"],
     "plugins": ["expo-secure-store", "expo-sqlite"],
     "ios": {
       "supportsTablet": true,

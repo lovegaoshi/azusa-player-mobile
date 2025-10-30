@@ -117,7 +117,9 @@ export default function BiliSearchBar({ onSearched = console.log }: Props) {
 
     // Subscribe to any new links
     const subscription = Linking.addEventListener('url', ({ url }) => {
-      console.log('deeplinkurl2', url);
+      if (url.startsWith('noxplayer://')) {
+        handleShare(url.slice(12));
+      }
     });
 
     return () => {
