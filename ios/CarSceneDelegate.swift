@@ -1,6 +1,11 @@
 import Foundation
 import CarPlay
 
+// https://community.intercom.com/mobile%2Dsdks%2D24/crash%2Don%2Dcarplay%2D2292?postid=19611#post19611
+extension CPTemplateApplicationScene {
+    @objc var windows: UIWindow? { nil }
+}
+
 class CarSceneDelegate: UIResponder, CPTemplateApplicationSceneDelegate {
   func templateApplicationScene(_ templateApplicationScene: CPTemplateApplicationScene,
                                   didConnect interfaceController: CPInterfaceController) {
