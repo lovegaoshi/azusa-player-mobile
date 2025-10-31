@@ -6,6 +6,7 @@ import NoxTheme from './styles/NoxTheme';
 import AzusaTheme from './styles/AzusaTheme';
 import { randomChoice } from '@utils/Utils';
 import logger from '@utils/Logger';
+import { isIOS } from '@utils/RNUtils';
 
 export const createStyle = (
   customStyle: NoxTheme.Style | NoxTheme.AdaptiveStyle = AzusaTheme,
@@ -146,6 +147,12 @@ export const replaceStyleColor = ({
 };
 
 export const styles = StyleSheet.create({
+  nativeInput: isIOS
+    ? {
+        alignSelf: 'auto',
+        minHeight: null,
+      }
+    : {},
   flex: { flex: 1 },
   centeredFlex: {
     justifyContent: 'center',
