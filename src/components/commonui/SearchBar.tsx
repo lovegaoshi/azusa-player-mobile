@@ -5,6 +5,7 @@ import { View, StyleSheet } from 'react-native';
 
 import { useNoxSetting } from '@stores/useApp';
 import useSnack, { SetSnack } from '@stores/useSnack';
+import { styles as stylesGlobal } from '../style';
 
 interface OnSearchProps {
   v: string;
@@ -38,6 +39,7 @@ export default function SearchBar({
     <View style={styles.container}>
       <View style={styles.row}>
         <Searchbar
+          inputStyle={stylesGlobal.nativeInput}
           placeholder={placeholder}
           value={searchVal}
           onChangeText={setSearchVal}

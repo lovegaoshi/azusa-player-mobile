@@ -6,6 +6,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { useNoxSetting } from '@stores/useApp';
+import { styles as stylesGlobal } from '../style';
 
 interface Props {
   placeholder: string;
@@ -70,6 +71,7 @@ export default function AutoComplete({
     <View style={styles.container}>
       <Searchbar
         testID={testID}
+        inputStyle={stylesGlobal.nativeInput}
         onLayout={e =>
           setMenuCoords({
             x: e.nativeEvent.layout.x,
@@ -124,5 +126,7 @@ export default function AutoComplete({
 
 const styles = StyleSheet.create({
   container: { flex: 1, flexDirection: 'row' },
-  input: { flex: 1 },
+  input: {
+    flex: 1,
+  },
 });

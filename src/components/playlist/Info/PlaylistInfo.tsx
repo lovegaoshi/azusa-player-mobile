@@ -19,6 +19,7 @@ import SearchMenu from './PlaylistSearchMenu';
 import { useNoxSetting } from '@stores/useApp';
 import { seconds2HHMMSS } from '@utils/Utils';
 import { PaperText as Text } from '@components/commonui/ScaledText';
+import { styles as stylesGlobal } from '@components/style';
 
 interface UsePlaylist {
   searchText: string;
@@ -165,7 +166,7 @@ export default function PlaylistInfo({
               setSearchText(val);
             }}
             style={styles.textInput}
-            inputStyle={styles.searchInput}
+            inputStyle={[styles.searchInput, stylesGlobal.nativeInput]}
             ref={searchContainerRef}
             // HACK: breaks on newarch
             //selectTextOnFocus
