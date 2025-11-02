@@ -16,7 +16,7 @@ enum Templates {
   Playlist = 'playlistTemplate',
 }
 
-export default function usePlaybackCarplay() {
+export default function usePlaybackCarplay(updatePlaylist = true) {
   const { t } = useTranslation();
   const [carPlayConnected, setCarPlayConnected] = useState(CarPlay.connected);
   const { playlists, playlistIds, playFromMediaId } = usePlayback();
@@ -25,6 +25,7 @@ export default function usePlaybackCarplay() {
    * APM's root template will be the same as
    */
   const buildBrowseTree = () => {
+    console.log('APMDEBUg', carPlayConnected, playlistIds, CarPlay.connected);
     if (!carPlayConnected) return;
     const nowPlayingSection = {
       header: t('AndroidAuto.NowPlayingTab'),
@@ -117,6 +118,7 @@ export default function usePlaybackCarplay() {
   });
 
   useEffect(() => {
+    console.log('carplay connected');
     buildBrowseTree();
   }, [carPlayConnected, playlistIds]);
 
