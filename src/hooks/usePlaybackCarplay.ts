@@ -11,6 +11,7 @@ import { PlaylistMediaID } from '@enums/Playlist';
 import usePlayback from './usePlayback';
 import { cycleThroughPlaymodeIOS as cyclePlaymode } from '@stores/playingList';
 import { isIOS } from '@utils/RNUtils';
+import logger from '@utils/Logger';
 
 enum Templates {
   Playlist = 'playlistTemplate',
@@ -117,6 +118,7 @@ export default function usePlaybackCarplay() {
   });
 
   useEffect(() => {
+    logger.debug('carplay connected');
     buildBrowseTree();
   }, [carPlayConnected, playlistIds]);
 

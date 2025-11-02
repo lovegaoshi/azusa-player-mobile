@@ -6,6 +6,7 @@ import { useNoxSetting } from '@stores/useApp';
 import { IntentData } from '@enums/Intent';
 import usePlaybackCarplay from './usePlaybackCarplay';
 import { buildBrowseTree } from '@utils/automotive/androidAuto';
+import logger from '@utils/Logger';
 
 export const useAndroidAuto = () => {
   const playlists = useNoxSetting(state => state.playlists);
@@ -18,6 +19,7 @@ const useAndroidAutoListener = () => {
   const { buildBrowseTree } = useAndroidAuto();
   const intentData = useNoxSetting(state => state.intentData);
   const setIntentData = useNoxSetting(state => state.setIntentData);
+  const playlistIds = useNoxSetting(state => state.playlistIds);
 
   useEffect(() => {
     // HACK: for some reason I decided to register AA related listeners here.
@@ -28,6 +30,11 @@ const useAndroidAutoListener = () => {
       setIntentData();
     }
   }, []);
+
+  useEffect(() => {
+    logger.debug('[AndroidAuto] rebuilding browse tree due to playlist change');
+    buildBrowseTree();
+  }, [playlistIds]);
 
   // HACK: this looks very stupid but AAPlaybackListener needs buildBrowseTree, PlayFromMediaID, etc.
   // so might as well pass this off from AAPlaybackListener to register the listeners and use buildBrowseTree

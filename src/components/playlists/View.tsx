@@ -8,7 +8,6 @@ import { RectButton } from 'react-native-gesture-handler';
 
 import { PaperText as Text } from '@components/commonui/ScaledText';
 import { useNoxSetting } from '@stores/useApp';
-import usePlaybackAA from '@hooks/usePlaybackAA';
 import { NoxRoutes } from '@enums/Routes';
 import { logger } from '@utils/Logger';
 import Playlists from './Playlists';
@@ -77,19 +76,10 @@ export default function PlaylistsView({
   navigation: DrawerNavigationHelpers;
 }) {
   const insets = useSafeAreaInsets();
-  const playlistIds = useNoxSetting(state => state.playlistIds);
   const playerStyle = useNoxSetting(state => state.playerStyle);
   const toggleExpand = useNoxSetting(state => state.toggleExpand);
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const _drawerStatus = useDrawerStatus();
-
-  // HACK: I know its bad! But somehow this hook isnt updating in its own
-  // useEffects...
-  const { buildBrowseTree } = usePlaybackAA();
-
-  useEffect(() => {
-    buildBrowseTree();
-  }, [playlistIds.length]);
 
   useEffect(() => {
     function deepLinkHandler(data: { url: string }) {
