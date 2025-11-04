@@ -6,63 +6,35 @@ import {
   TabBarTemplate,
 } from 'react-native-carplay';
 import { useTranslation } from 'react-i18next';
+import i18n from 'i18next';
 
 import { PlaylistMediaID } from '@enums/Playlist';
 import usePlayback from './usePlayback';
 import { cycleThroughPlaymodeIOS as cyclePlaymode } from '@stores/playingList';
 import { isIOS } from '@utils/RNUtils';
 import logger from '@utils/Logger';
+import { useNoxSetting } from '@stores/useApp';
+import { playFromMediaId as playFromMediaIdNoHook } from './usePlayback.migrate';
 
 enum Templates {
   Playlist = 'playlistTemplate',
 }
 
-export default function usePlaybackCarplay() {
-  const { t } = useTranslation();
-  const [carPlayConnected, setCarPlayConnected] = useState(CarPlay.connected);
-  const { playlists, playlistIds, playFromMediaId } = usePlayback();
-
-  /**
-   * APM's root template will be the same as
-   */
-  const buildBrowseTree = () => {
-    if (!carPlayConnected) return;
-    const nowPlayingSection = {
-      header: t('AndroidAuto.NowPlayingTab'),
-      items: [{ text: t('AndroidAuto.GoToNowPlayingTab') }],
-    };
-    const playlistSection = {
-      header: t('AndroidAuto.PlaylistTab'),
-      items: playlistIds.map(v => ({
-        text: playlists[v].title,
-        mediaId: v,
-      })),
-    };
-    const playlistTemplate = new ListTemplate({
-      id: Templates.Playlist,
-      sections: [nowPlayingSection, playlistSection],
-      title: 'List Template',
-      tabTitle: 'APM',
-      onItemSelect: async item => {
-        if (item.index === 0) {
-          return pushNowPlayingTemplate();
-        }
-        playFromMediaId(
-          `${PlaylistMediaID}${playlistIds[item.index - 1]}`,
-        ).then(() => pushNowPlayingTemplate());
-      },
-    });
-    const tabBarTemplate = new TabBarTemplate({
-      title: 'APM',
-      tabTitle: 'APM',
-      templates: [playlistTemplate],
-      onTemplateSelect: () => {},
-    });
-    CarPlay.setRootTemplate(tabBarTemplate);
-  };
+interface SetupCarplayTemplate {
+  t?: (key: string) => string;
+  playlistIds?: string[];
+  playlists?: Record<string, NoxMedia.Playlist>;
+  playFromMediaId?: (mediaId: string) => Promise<void>;
+}
+export const setupCarplayTemplate = async ({
+  t = i18n.t,
+  playlistIds = useNoxSetting.getState().playlistIds,
+  playlists = useNoxSetting.getState().playlists,
+  playFromMediaId = playFromMediaIdNoHook,
+}: SetupCarplayTemplate) => {
+  if (!isIOS) return;
 
   const makeNowPlayingTemplate = (playback = 'shuffle') => {
-    if (!carPlayConnected) return;
     return new NowPlayingTemplate({
       buttons: [
         {
@@ -97,6 +69,56 @@ export default function usePlaybackCarplay() {
     CarPlay.pushTemplate(template);
     CarPlay.enableNowPlaying(true);
   };
+
+  const nowPlayingSection = {
+    header: t('AndroidAuto.NowPlayingTab'),
+    items: [{ text: t('AndroidAuto.GoToNowPlayingTab') }],
+  };
+  const playlistSection = {
+    header: t('AndroidAuto.PlaylistTab'),
+    items: playlistIds.map(v => ({
+      text: playlists[v].title,
+      mediaId: v,
+    })),
+  };
+  const playlistTemplate = new ListTemplate({
+    id: Templates.Playlist,
+    sections: [nowPlayingSection, playlistSection],
+    title: 'List Template',
+    tabTitle: 'APM',
+    onItemSelect: async item => {
+      if (item.index === 0) {
+        return pushNowPlayingTemplate();
+      }
+      playFromMediaId(`${PlaylistMediaID}${playlistIds[item.index - 1]}`).then(
+        () => pushNowPlayingTemplate(),
+      );
+    },
+  });
+  const tabBarTemplate = new TabBarTemplate({
+    title: 'APM',
+    tabTitle: 'APM',
+    templates: [playlistTemplate],
+    onTemplateSelect: () => {},
+  });
+  CarPlay.setRootTemplate(tabBarTemplate);
+};
+
+export default function usePlaybackCarplay() {
+  const { t } = useTranslation();
+  const [carPlayConnected, setCarPlayConnected] = useState(CarPlay.connected);
+  const { playlists, playlistIds, playFromMediaId } = usePlayback();
+
+  /**
+   * APM's root template will be the same as
+   */
+  const buildBrowseTree = () =>
+    setupCarplayTemplate({
+      t,
+      playlistIds,
+      playlists,
+      playFromMediaId,
+    });
 
   useEffect(() => {
     if (!isIOS) return;

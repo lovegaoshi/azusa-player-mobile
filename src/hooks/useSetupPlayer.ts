@@ -19,7 +19,7 @@ import sqldb from '../utils/db/sql';
 import logger from '@utils/Logger';
 import { TPPlay } from '@stores/RNObserverStore';
 import NativeNoxModule from '@specs/NativeNoxModule';
-import usePlaybackAA from './usePlaybackAA';
+import { setupCarplayTemplate } from './usePlaybackCarplay';
 
 const initializePlayer = async (safeMode = false) => {
   await migrate(sqldb, migrations);
@@ -80,10 +80,6 @@ export default function useSetupPlayer({
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const _activeTrack = useActiveTrack();
   const setTrack = useTrackStore(state => state.setTrack);
-  // HACK: for whatever reason the drawer is not rendered; i need to move
-  // carplay's buildBrowseTree here.
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const _ = usePlaybackAA();
 
   useEffect(() => {
     let unmounted = false;
@@ -131,6 +127,7 @@ export default function useSetupPlayer({
       }
       storedPlayerSetting.resumeOnPause &&
         NativeNoxModule?.setresumeOnPause?.(true);
+      setupCarplayTemplate({});
     })();
     return () => {
       unmounted = true;
