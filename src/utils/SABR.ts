@@ -7,7 +7,7 @@ import { SabrFormat } from 'googlevideo/dist/src/types/shared';
 import { buildSabrFormat } from 'googlevideo/dist/src/utils';
 import { VideoInfo } from 'youtubei.js/dist/src/parser/youtube';
 import { SabrStreamingAdapter } from 'googlevideo/dist/src/core/SabrStreamingAdapter';
-import { Innertube, Constants } from 'youtubei.js';
+import { Innertube, Constants, Utils, YT } from 'youtubei.js';
 
 import ytClient, { ytwebClient } from '@utils/mediafetch/ytbi';
 import { getPoT } from '@utils/mediafetch/ytpot';
@@ -80,18 +80,31 @@ const loadSABR = async (
   const yt = await ytClient();
   const bvid = 'K04WmBtVsOs';
   yt.session.player!.po_token = await getPoT(bvid);
-  const extractedVideoInfo = await yt.getBasicInfo(bvid, {
-    client: yt.session.player!.po_token === undefined ? 'WEB_EMBEDDED' : 'MWEB',
+  const playerResponse = await yt.actions.execute('/player', {
+    videoId: bvid,
+    contentCheckOk: true,
+    racyCheckOk: true,
+    playbackContext: {
+      adPlaybackContext: {
+        pyv: true,
+      },
+      contentPlaybackContext: {
+        signatureTimestamp: yt.session.player?.signature_timestamp,
+      },
+    },
   });
-  await loadSABR(bvid, extractedVideoInfo, yt);
+
+  const cpn = Utils.generateRandomString(16);
+  const videoInfo = new YT.VideoInfo([playerResponse], yt.actions, cpn);
+
+  await loadSABR(bvid, videoInfo, yt);
   // @ts-expect-error HACK: call private function to bypass the adapter nonsense
   const res = await APMSABRAdapter?.handleRequest({
     method: 'GET',
     segment: { getStartTime: () => 0, isInit: () => true },
-    url: 'sabr://audio?key=140:',
+    url: 'sabr://video?key=399:',
     headers: {},
   });
-  console.log('sabr', res);
   return res;
 };
 
