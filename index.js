@@ -9,11 +9,13 @@ import App from './src/App';
 import { PlaybackService } from './src/services';
 import { name as appName } from './app.json';
 import nodejs from '@utils/nodejs';
+import SABR from './src/utils/SABR';
 
 if (__DEV__) {
   import('./ReactotronConfig').then(() => console.log('Reactotron Configured'));
 }
 
+SABR;
 AppRegistry.registerComponent(appName, () => App); // codePush(App));
 nodejs?.start?.('main.js');
 TrackPlayer.registerPlaybackService(() => PlaybackService);
