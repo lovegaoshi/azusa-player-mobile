@@ -7964,6 +7964,7 @@ __metadata:
     expo-sqlite: "npm:~16.0.9"
     fflate: "npm:^0.8.2"
     ffmpeg-kit-react-native: "https://gitpkg.vercel.app/lovegaoshi/ffmpeg-kit/react-native?46f434a8b010efab28ac739222069820e85ced34"
+    googlevideo: "npm:^4.0.4"
     gts: "npm:^6.0.2"
     he: "npm:^1.2.0"
     i18next: "npm:25.6.0"
@@ -8008,7 +8009,7 @@ __metadata:
     react-native-svg: "npm:15.14.0"
     react-native-svga-player: "https://lovegaoshi@github.com/lovegaoshi/react-native-svga-player.git#commit=f8c6303fddb528a1a94d2ab4696c9318c0002cfd"
     react-native-text-ticker: "https://lovegaoshi@github.com/lovegaoshi/react-native-text-ticker.git#commit=39d022e8e1eed15811c7155d39ec991742d37722"
-    react-native-track-player: "https://github.com/lovegaoshi/react-native-track-player.git#commit=3ea36c6d56a3a56386858d1873166d0d5bd8eb0e"
+    react-native-track-player: "link:../react-native-track-player"
     react-native-url-polyfill: "npm:^3.0.0"
     react-native-video: "npm:6.16.1"
     react-native-webview: "npm:13.16.0"
@@ -13464,6 +13465,15 @@ __metadata:
     merge2: "npm:^1.4.1"
     slash: "npm:^3.0.0"
   checksum: 10c0/b39511b4afe4bd8a7aead3a27c4ade2b9968649abab0a6c28b1a90141b96ca68ca5db1302f7c7bd29eab66bf51e13916b8e0a3d0ac08f75e1e84a39b35691189
+  languageName: node
+  linkType: hard
+
+"googlevideo@npm:^4.0.4":
+  version: 4.0.4
+  resolution: "googlevideo@npm:4.0.4"
+  dependencies:
+    "@bufbuild/protobuf": "npm:^2.0.0"
+  checksum: 10c0/5ca5a0368bcc18af095cc76218a158dfb02cc8f17d9060a630a1c669007374d5d6f182db31872bb9b69ba5c0a32546550d4235d6c556d1c407d53c4ce2c306c7
   languageName: node
   linkType: hard
 
@@ -18997,22 +19007,11 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-native-track-player@https://github.com/lovegaoshi/react-native-track-player.git#commit=3ea36c6d56a3a56386858d1873166d0d5bd8eb0e":
-  version: 4.1.1
-  resolution: "react-native-track-player@https://github.com/lovegaoshi/react-native-track-player.git#commit=3ea36c6d56a3a56386858d1873166d0d5bd8eb0e"
-  peerDependencies:
-    react: "*"
-    react-native: "*"
-    react-native-windows: "*"
-    shaka-player: ^4.7.9
-  peerDependenciesMeta:
-    react-native-windows:
-      optional: true
-    shaka-player:
-      optional: true
-  checksum: 10c0/7f1cda789bad1f0942689ec083968a9c32bed67eda4dbd4319b19bc5dd541c13543f91e130401e38d17e181ddb81d81c97083e63b6051d3c6fdeb31b1375dc8b
+"react-native-track-player@link:../react-native-track-player::locator=azusa-player-mobile%40workspace%3A.":
+  version: 0.0.0-use.local
+  resolution: "react-native-track-player@link:../react-native-track-player::locator=azusa-player-mobile%40workspace%3A."
   languageName: node
-  linkType: hard
+  linkType: soft
 
 "react-native-url-polyfill@npm:^3.0.0":
   version: 3.0.0
