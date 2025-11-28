@@ -5318,9 +5318,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@react-navigation/core@npm:^7.13.2":
-  version: 7.13.2
-  resolution: "@react-navigation/core@npm:7.13.2"
+"@react-navigation/core@npm:^7.13.3":
+  version: 7.13.3
+  resolution: "@react-navigation/core@npm:7.13.3"
   dependencies:
     "@react-navigation/routers": "npm:^7.5.2"
     escape-string-regexp: "npm:^4.0.0"
@@ -5332,73 +5332,73 @@ __metadata:
     use-sync-external-store: "npm:^1.5.0"
   peerDependencies:
     react: ">= 18.2.0"
-  checksum: 10c0/aebe7c947994caf0e06cefd45591a777912e006e53043f139250eee5ac012ad14e3eca671d775c5b0566714c26de8ba9e29b0aa20033d1d6bf44d0b11587e9df
+  checksum: 10c0/4faa5f2a151fa7ef011e35b3f86925000b0d450726ad0119812d30224acf5fa8ebd824ee2c4ed64f53b3a3aea878a0adc3570fa11bc7f3dc8fb663870a587960
   languageName: node
   linkType: hard
 
-"@react-navigation/drawer@npm:^7.7.4":
-  version: 7.7.4
-  resolution: "@react-navigation/drawer@npm:7.7.4"
+"@react-navigation/drawer@npm:^7.7.5":
+  version: 7.7.5
+  resolution: "@react-navigation/drawer@npm:7.7.5"
   dependencies:
-    "@react-navigation/elements": "npm:^2.8.3"
+    "@react-navigation/elements": "npm:^2.8.4"
     color: "npm:^4.2.3"
     react-native-drawer-layout: "npm:^4.2.0"
     use-latest-callback: "npm:^0.2.4"
   peerDependencies:
-    "@react-navigation/native": ^7.1.21
+    "@react-navigation/native": ^7.1.22
     react: ">= 18.2.0"
     react-native: "*"
     react-native-gesture-handler: ">= 2.0.0"
     react-native-reanimated: ">= 2.0.0"
     react-native-safe-area-context: ">= 4.0.0"
     react-native-screens: ">= 4.0.0"
-  checksum: 10c0/d5e0aeec394c82df8882ea027cf7633659f95da949e95bb7b5d1fc54b1f96f0c6ba07f7193bdf75e2c9e3573ad1362e5d2f2a5ab8452174d644800c6cd2ad91c
+  checksum: 10c0/1236bacf229b268c1ca0f21a97e8dd29d16ad01e18fc348895c22798a0c47fc47b5fcc048e04a77bd59c30c2558cbee8c202884a79479e40985060d1e20595a5
   languageName: node
   linkType: hard
 
-"@react-navigation/elements@npm:^2.8.3":
-  version: 2.8.3
-  resolution: "@react-navigation/elements@npm:2.8.3"
+"@react-navigation/elements@npm:^2.8.4":
+  version: 2.8.4
+  resolution: "@react-navigation/elements@npm:2.8.4"
   dependencies:
     color: "npm:^4.2.3"
     use-latest-callback: "npm:^0.2.4"
     use-sync-external-store: "npm:^1.5.0"
   peerDependencies:
     "@react-native-masked-view/masked-view": ">= 0.2.0"
-    "@react-navigation/native": ^7.1.21
+    "@react-navigation/native": ^7.1.22
     react: ">= 18.2.0"
     react-native: "*"
     react-native-safe-area-context: ">= 4.0.0"
   peerDependenciesMeta:
     "@react-native-masked-view/masked-view":
       optional: true
-  checksum: 10c0/95571aff9d6929fb62402e64cb6b3e659e338a1b9bae2e3c00191a94a43be4df8d1a7c907bf37bd1b8496c9d8bf113488a735ee3f3cd490ff2a664a987f2defb
+  checksum: 10c0/6ada8150d27aac531477c2c0157e2f58bfb1f22686bc5f3b25c06cf0fb001f4c6c60dce5d85c782d8bd02a04f1d9eb167e93e757ba429eff22db239fc8fb9135
   languageName: node
   linkType: hard
 
-"@react-navigation/native-stack@npm:^7.8.0":
-  version: 7.8.0
-  resolution: "@react-navigation/native-stack@npm:7.8.0"
+"@react-navigation/native-stack@npm:^7.8.1":
+  version: 7.8.1
+  resolution: "@react-navigation/native-stack@npm:7.8.1"
   dependencies:
-    "@react-navigation/elements": "npm:^2.8.3"
+    "@react-navigation/elements": "npm:^2.8.4"
     color: "npm:^4.2.3"
     sf-symbols-typescript: "npm:^2.1.0"
     warn-once: "npm:^0.1.1"
   peerDependencies:
-    "@react-navigation/native": ^7.1.21
+    "@react-navigation/native": ^7.1.22
     react: ">= 18.2.0"
     react-native: "*"
     react-native-safe-area-context: ">= 4.0.0"
     react-native-screens: ">= 4.0.0"
-  checksum: 10c0/09a483390aef9afde37c11dec7db907ceb82477511e62cedf13ef4e58c064efcd51f65abc84189efe4315a32000ae8932ed9f3e81465959bb580c6358031a0c3
+  checksum: 10c0/18fef1866a068c31097a6b63e27f61d50a0ef54aac7890dc311a3a2b56a99d47ba4f9555273f17dcdf5673a49bdc26daedc4c29822210c0bc1767614d240dde3
   languageName: node
   linkType: hard
 
-"@react-navigation/native@npm:^7.1.21":
-  version: 7.1.21
-  resolution: "@react-navigation/native@npm:7.1.21"
+"@react-navigation/native@npm:^7.1.22":
+  version: 7.1.22
+  resolution: "@react-navigation/native@npm:7.1.22"
   dependencies:
-    "@react-navigation/core": "npm:^7.13.2"
+    "@react-navigation/core": "npm:^7.13.3"
     escape-string-regexp: "npm:^4.0.0"
     fast-deep-equal: "npm:^3.1.3"
     nanoid: "npm:^3.3.11"
@@ -5406,7 +5406,7 @@ __metadata:
   peerDependencies:
     react: ">= 18.2.0"
     react-native: "*"
-  checksum: 10c0/7c1d6bdc4ca322673ee617dbbe7ba226fb871c1427a398ae25901bc5eb45a2d4f8e5180cf3ad6b6eb293db5748ee9c4c24b5a534fe6c82c0919acd0c9cbb7f07
+  checksum: 10c0/d8777d0e613b899777413f94487e545484d0db9d0168ffc0a3a7dd3be88758da574b35dd061fd796821be148bf33de901fc20973bca522862f56ffeda225cb91
   languageName: node
   linkType: hard
 
@@ -5419,26 +5419,33 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@revenuecat/purchases-js-hybrid-mappings@npm:17.19.1":
-  version: 17.19.1
-  resolution: "@revenuecat/purchases-js-hybrid-mappings@npm:17.19.1"
+"@revenuecat/purchases-js-hybrid-mappings@npm:17.21.0":
+  version: 17.21.0
+  resolution: "@revenuecat/purchases-js-hybrid-mappings@npm:17.21.0"
   dependencies:
     "@revenuecat/purchases-js": "npm:1.18.3"
-  checksum: 10c0/b84292efc419cfb1d4204953426c14e8be7367783fe09567b181113303f035bcb69ba70779d2fae0c534ba2da82d5bff6f8985a56a15eb27de200e2114db4295
+  checksum: 10c0/e7b2e8e357c5c73819cf47252e725f12777b1830ba3291c85310ff9d37e87e46fa6de353281ca90777ca6c74e454160a3dcab34757006b80f1d28c8df44ac57a
   languageName: node
   linkType: hard
 
-"@revenuecat/purchases-js@npm:1.18.3, @revenuecat/purchases-js@npm:^1.18.3":
+"@revenuecat/purchases-js@npm:1.18.3":
   version: 1.18.3
   resolution: "@revenuecat/purchases-js@npm:1.18.3"
   checksum: 10c0/0517198d604c594505f4709fe1991891691a0839bf280a2badfc9ce8a4dd5655fc989abd9a94ea1edc5751dea14d6a8f33f78615c93dee7731a4866f5dce0f4a
   languageName: node
   linkType: hard
 
-"@revenuecat/purchases-typescript-internal@npm:17.19.1":
-  version: 17.19.1
-  resolution: "@revenuecat/purchases-typescript-internal@npm:17.19.1"
-  checksum: 10c0/120e7f2433d80bc7a548101c54aab928b5ff662fb1e9f439f28ffd0cf05ef54a06303583e88dd105bbe954c4b6f1712e3016eff9a9c5664f3a74b72c87150c95
+"@revenuecat/purchases-js@npm:^1.18.4":
+  version: 1.18.4
+  resolution: "@revenuecat/purchases-js@npm:1.18.4"
+  checksum: 10c0/8e3e32a296e0859e999798acadcc82634f003d7efe5e1227a978d8044143eb67382912002dddd8ed3483b6e86cf30eac619dd9afcd5fdbb71bf1e48cccc46a8f
+  languageName: node
+  linkType: hard
+
+"@revenuecat/purchases-typescript-internal@npm:17.21.0":
+  version: 17.21.0
+  resolution: "@revenuecat/purchases-typescript-internal@npm:17.21.0"
+  checksum: 10c0/5eb0486802b8fef9cf715abde5dc923edffdf845a6d56d7ef2692264acc777b643cb29f9bd445936fdfc016bca49bff708a87e9177b3c8924b755c579ca3b534
   languageName: node
   linkType: hard
 
@@ -5666,9 +5673,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@shopify/react-native-skia@npm:2.4.3":
-  version: 2.4.3
-  resolution: "@shopify/react-native-skia@npm:2.4.3"
+"@shopify/react-native-skia@npm:2.4.5":
+  version: 2.4.5
+  resolution: "@shopify/react-native-skia@npm:2.4.5"
   dependencies:
     canvaskit-wasm: "npm:0.40.0"
     react-reconciler: "npm:0.31.0"
@@ -5683,7 +5690,7 @@ __metadata:
       optional: true
   bin:
     setup-skia-web: scripts/setup-canvaskit.js
-  checksum: 10c0/414879fef9901f5a907371f805bf0d93ec8f8cb2bc623517d8e66177ee58495085cc4266af648e2ef042b25020d7c2394948379f48957a4c5dde8b856cc34b02
+  checksum: 10c0/10885119ddd378e27faa36b35cdd4a978a334dbd89951b4cea3f5620c323fe99dd7fefbc367fc224206ce304d36dd365a8851022707359a5a759a632f30396e0
   languageName: node
   linkType: hard
 
@@ -7792,13 +7799,13 @@ __metadata:
     "@react-native/gradle-plugin": "npm:0.81.5"
     "@react-native/metro-config": "npm:0.81.5"
     "@react-native/typescript-config": "npm:0.81.5"
-    "@react-navigation/drawer": "npm:^7.7.4"
-    "@react-navigation/native": "npm:^7.1.21"
-    "@react-navigation/native-stack": "npm:^7.8.0"
-    "@revenuecat/purchases-js": "npm:^1.18.3"
+    "@react-navigation/drawer": "npm:^7.7.5"
+    "@react-navigation/native": "npm:^7.1.22"
+    "@react-navigation/native-stack": "npm:^7.8.1"
+    "@revenuecat/purchases-js": "npm:^1.18.4"
     "@sentry/react-native": "npm:~7.7.0"
     "@shopify/flash-list": "npm:2.2.0"
-    "@shopify/react-native-skia": "npm:2.4.3"
+    "@shopify/react-native-skia": "npm:2.4.5"
     "@tsconfig/react-native": "npm:^3.0.8"
     "@types/crypto-js": "npm:^4.2.2"
     "@types/d3": "npm:^7.4.3"
@@ -7872,7 +7879,7 @@ __metadata:
     nodejs-mobile-react-native: "npm:^18.20.4"
     patch-package: "npm:^8.0.1"
     postinstall-postinstall: "npm:^2.1.0"
-    prettier: "npm:^3.6.2"
+    prettier: "npm:^3.7.1"
     qs: "npm:^6.14.0"
     react: "npm:19.1.0"
     react-i18next: "npm:^16.3.5"
@@ -7880,7 +7887,7 @@ __metadata:
     react-native-app-auth: "npm:^8.1.0"
     react-native-background-timer: "git+https://github.com/lovegaoshi/react-native-background-timer.git"
     react-native-blob-util: "npm:^0.24.4"
-    react-native-bottom-tabs: "npm:^1.0.2"
+    react-native-bottom-tabs: "npm:1.0.2"
     react-native-carplay: "npm:2.4.1-beta.0"
     react-native-clean-project: "npm:^4.0.3"
     react-native-device-info: "npm:^15.0.1"
@@ -7894,7 +7901,7 @@ __metadata:
     react-native-ota-hot-update: "npm:2.2.2"
     react-native-pager-view: "npm:7.0.0"
     react-native-paper: "npm:5.14.5"
-    react-native-purchases: "npm:^9.6.7"
+    react-native-purchases: "npm:^9.6.8"
     react-native-qrcode-svg: "npm:^6.3.20"
     react-native-reanimated: "npm:4.1.5"
     react-native-safe-area-context: "npm:5.6.2"
@@ -18162,12 +18169,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"prettier@npm:^3.6.2":
-  version: 3.6.2
-  resolution: "prettier@npm:3.6.2"
+"prettier@npm:^3.7.1":
+  version: 3.7.1
+  resolution: "prettier@npm:3.7.1"
   bin:
     prettier: bin/prettier.cjs
-  checksum: 10c0/488cb2f2b99ec13da1e50074912870217c11edaddedeadc649b1244c749d15ba94e846423d062e2c4c9ae683e2d65f754de28889ba06e697ac4f988d44f45812
+  checksum: 10c0/a6610043ee0a64a3251a948bf82fad3e59d984a8e8dea206400cfa190585417e3343b32c1f6ae7d8f40798a9b4bd91affc08fa7795dd99a9dec5c9bccdf31500
   languageName: node
   linkType: hard
 
@@ -18529,7 +18536,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-native-bottom-tabs@npm:^1.0.2":
+"react-native-bottom-tabs@npm:1.0.2":
   version: 1.0.2
   resolution: "react-native-bottom-tabs@npm:1.0.2"
   dependencies:
@@ -18741,12 +18748,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-native-purchases@npm:^9.6.7":
-  version: 9.6.7
-  resolution: "react-native-purchases@npm:9.6.7"
+"react-native-purchases@npm:^9.6.8":
+  version: 9.6.8
+  resolution: "react-native-purchases@npm:9.6.8"
   dependencies:
-    "@revenuecat/purchases-js-hybrid-mappings": "npm:17.19.1"
-    "@revenuecat/purchases-typescript-internal": "npm:17.19.1"
+    "@revenuecat/purchases-js-hybrid-mappings": "npm:17.21.0"
+    "@revenuecat/purchases-typescript-internal": "npm:17.21.0"
   peerDependencies:
     react: ">= 16.6.3"
     react-native: ">= 0.73.0"
@@ -18754,7 +18761,7 @@ __metadata:
   peerDependenciesMeta:
     react-native-web:
       optional: true
-  checksum: 10c0/bc86ce65f42e7caa74480ee0439aac1a48c17d7d7abdc01c5517c0f6ecca6c2d70a7cd58e7304df0f1a1316b715ea0c73d9d2786a1dddc38a0f4ad95bd6c6ba9
+  checksum: 10c0/04765d5bb2548bc9d204aaa6e50ceabd48943776f22c7a9c0f763ed783c598553b5a76990569794b0cf3f2ebb96033488ad0c9f3ef698399add70f754933963e
   languageName: node
   linkType: hard
 
