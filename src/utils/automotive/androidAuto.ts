@@ -1,7 +1,7 @@
 import { PlaylistMediaID, YTMChartMediaID } from '@enums/Playlist';
 import { isAndroid } from '@utils/RNUtils';
 import logger from '../Logger';
-import { fetchYtmPlaylist } from '@utils/mediafetch/ytbPlaylist.muse';
+import { fetchYtbiPlaylist } from '@utils/mediafetch/ytbPlaylist.ytbi';
 import { dummyPlaylistList } from '@objects/Playlist';
 import useNoxMobile from '@stores/useMobile';
 
@@ -46,9 +46,9 @@ export const parseFromMediaId = async ({
     return {
       ...dummyPlaylistList,
       id: YTMChartMediaID,
-      songList: await fetchYtmPlaylist(
-        mediaId.substring(YTMChartMediaID.length),
-      ),
+      songList: await fetchYtbiPlaylist({
+        playlistId: mediaId.substring(YTMChartMediaID.length),
+      }),
     };
   }
   return undefined;

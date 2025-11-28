@@ -14,7 +14,7 @@ PODS:
   - EXImageLoader (6.0.0):
     - ExpoModulesCore
     - React-Core
-  - Expo (54.0.21):
+  - Expo (54.0.22):
     - boost
     - DoubleConversion
     - ExpoModulesCore
@@ -70,7 +70,7 @@ PODS:
     - ExpoModulesCore
   - ExpoLinking (8.0.8):
     - ExpoModulesCore
-  - ExpoModulesCore (3.0.23):
+  - ExpoModulesCore (3.0.24):
     - boost
     - DoubleConversion
     - fast_float
@@ -101,7 +101,7 @@ PODS:
     - Yoga
   - ExpoSecureStore (15.0.7):
     - ExpoModulesCore
-  - ExpoSQLite (16.0.8):
+  - ExpoSQLite (16.0.9):
     - ExpoModulesCore
   - ExpoWebBrowser (15.0.7):
     - ExpoModulesCore
@@ -166,8 +166,8 @@ PODS:
     - SocketRocket
     - Yoga
   - Protobuf (3.22.1)
-  - PurchasesHybridCommon (17.12.0):
-    - RevenueCat (= 5.45.0)
+  - PurchasesHybridCommon (17.13.0):
+    - RevenueCat (= 5.46.0)
   - RCT-Folly (2024.11.18.00):
     - boost
     - DoubleConversion
@@ -1913,7 +1913,7 @@ PODS:
     - React-Core
   - react-native-background-timer (2.4.1):
     - React-Core
-  - react-native-blob-util (0.23.1):
+  - react-native-blob-util (0.23.2):
     - boost
     - DoubleConversion
     - fast_float
@@ -2178,7 +2178,7 @@ PODS:
     - ReactCommon/turbomodule/core
     - SocketRocket
     - Yoga
-  - react-native-skia (2.3.7):
+  - react-native-skia (2.3.10):
     - boost
     - DoubleConversion
     - fast_float
@@ -2296,7 +2296,7 @@ PODS:
     - ReactCommon/turbomodule/core
     - SocketRocket
     - Yoga
-  - react-native-vector-icons (12.2.0):
+  - react-native-vector-icons (12.3.0):
     - boost
     - DoubleConversion
     - fast_float
@@ -2324,7 +2324,7 @@ PODS:
     - ReactCommon/turbomodule/core
     - SocketRocket
     - Yoga
-  - react-native-vector-icons-material-design-icons (12.3.0)
+  - react-native-vector-icons-material-design-icons (12.4.0)
   - react-native-video (6.16.1):
     - boost
     - DoubleConversion
@@ -2944,7 +2944,7 @@ PODS:
     - React-perflogger (= 0.81.5)
     - React-utils (= 0.81.5)
     - SocketRocket
-  - RevenueCat (5.45.0)
+  - RevenueCat (5.46.0)
   - RNCMaskedView (0.3.2):
     - boost
     - DoubleConversion
@@ -2975,7 +2975,7 @@ PODS:
     - Yoga
   - RNDeviceInfo (14.1.1):
     - React-Core
-  - RNGestureHandler (2.28.0):
+  - RNGestureHandler (2.29.1):
     - boost
     - DoubleConversion
     - fast_float
@@ -3009,8 +3009,8 @@ PODS:
     - RNNotifee/NotifeeCore (= 9.1.8)
   - RNNotifee/NotifeeCore (9.1.8):
     - React-Core
-  - RNPurchases (9.6.1):
-    - PurchasesHybridCommon (= 17.12.0)
+  - RNPurchases (9.6.2):
+    - PurchasesHybridCommon (= 17.13.0)
     - React-Core
   - RNReanimated (4.1.3):
     - boost
@@ -3163,7 +3163,7 @@ PODS:
     - ReactCommon/turbomodule/core
     - SocketRocket
     - Yoga
-  - RNSentry (7.4.0):
+  - RNSentry (7.5.0):
     - boost
     - DoubleConversion
     - fast_float
@@ -3190,7 +3190,7 @@ PODS:
     - ReactCodegen
     - ReactCommon/turbomodule/bridging
     - ReactCommon/turbomodule/core
-    - Sentry/HybridSDK (= 8.57.0)
+    - Sentry/HybridSDK (= 8.57.1)
     - SocketRocket
     - Yoga
   - RNSVG (15.14.0):
@@ -3350,7 +3350,7 @@ PODS:
   - SDWebImageWebPCoder (0.14.6):
     - libwebp (~> 1.0)
     - SDWebImage/Core (~> 5.17)
-  - Sentry/HybridSDK (8.57.0)
+  - Sentry/HybridSDK (8.57.1)
   - SocketRocket (0.7.1)
   - SSZipArchive (2.4.3)
   - SVGAPlayer (2.5.7):
@@ -3796,7 +3796,7 @@ SPEC CHECKSUMS:
   EXApplication: a9d1c46d473d36f61302a9a81db2379441f3f094
   EXConstants: 0246c66e19d755cd9c88504d5c69896bba41d8a6
   EXImageLoader: e501c001bc40b8326605e82e6e80363c80fe06b5
-  Expo: ab0f25a590c47a3b22b43464152a08ed7ff60bb9
+  Expo: e7d986679af7195bcbffed0e43b931cad96bff16
   ExpoAsset: 3c3b7dd9b1318846a02ef05ce420e63d542aeb9f
   ExpoClipboard: 99109306a2d9ed2fbd16f6b856e6267b2afa8472
   ExpoCrypto: 4c50a152f5939e16a2ca10be77b002a3a391c4d3
@@ -3807,9 +3807,9 @@ SPEC CHECKSUMS:
   ExpoImagePicker: bd0a5c81d7734548f6908a480609257e85d19ea8
   ExpoKeepAwake: 3f5e3ac53627849174f3603271df8e08f174ed4a
   ExpoLinking: f5c171877e118e792cb9a77e5ade0b080d899b14
-  ExpoModulesCore: 809e3de0bc330264f7077f6f41f2a82a7daa14c5
+  ExpoModulesCore: 38e4ab7c547e7fcff36107e616720b08fb7b4cf9
   ExpoSecureStore: f44dee1354536bdb3d7fab8cc451ee737c41beca
-  ExpoSQLite: f9d1202877e12bfa78a58309a3977ee4ea0b1314
+  ExpoSQLite: 36b8723223f322148606473507da446b1912500c
   ExpoWebBrowser: 4f0dc52a559027cc0fba6920adc19a7604e2733d
   fast_float: b32c788ed9c6a8c584d114d0047beda9664e7cc6
   FBLazyVector: 5beb8028d5a2e75dd9634917f23e23d3a061d2aa
@@ -3825,7 +3825,7 @@ SPEC CHECKSUMS:
   lottie-ios: a881093fab623c467d3bce374367755c272bdd59
   lottie-react-native: a236ef9840b0e49f55fc0db365dfaa7bc14424c6
   Protobuf: d7f7c8329edf5eb8af65547a8ba3e9c1cee927d5
-  PurchasesHybridCommon: c8f805e0f6d3a557a6d63300d0402b8ae5219a48
+  PurchasesHybridCommon: f408c80577f9d1b7400acf7466846125496877b0
   RCT-Folly: 59ec0ac1f2f39672a0c6e6cecdd39383b764646f
   RCTDeprecation: 5eb1d2eeff5fb91151e8a8eef45b6c7658b6c897
   RCTRequired: cebcf9442fc296c9b89ac791dfd463021d9f6f23
@@ -3861,7 +3861,7 @@ SPEC CHECKSUMS:
   React-microtasksnativemodule: e39f94cc96d61b8174a5cfb2d5862a73fa8c0d35
   react-native-app-auth: 9b0a0e3ca279c3426a451e2607c8483808b8ed4a
   react-native-background-timer: 17ea5e06803401a379ebf1f20505b793ac44d0fe
-  react-native-blob-util: 94f326cc6062ede2c4353053b93746177606b202
+  react-native-blob-util: 8b39e1a278d3dc6da8b7e63d74e070c9f1e4c555
   react-native-bottom-tabs: 8326aeec65467e2fce36382c17ea32340b8228db
   react-native-carplay: 474f4e36fe22a09e1da4c78d53dd0ac416ec7675
   react-native-cookies: f54fcded06bb0cda05c11d86788020b43528a26c
@@ -3870,12 +3870,12 @@ SPEC CHECKSUMS:
   react-native-ota-hot-update: da29e47b9368ba4a799c00af90a2d675810b722e
   react-native-pager-view: 6119e1d6414e2fcbf2c3c378d261f73c4a49b667
   react-native-safe-area-context: fea29ae0275beaa22f72d0a8be1eb0ab09c3feae
-  react-native-skia: ec6154f656248d598a85c7558c0c28c7611cc35c
+  react-native-skia: 5f944afef4435096791fb214fc59461e77d26de0
   react-native-slider: 99493fd3e7254ea482be59fbd94467e737d2b849
   react-native-svga-player: f1c7faf0864b22437b9b7cc7d7aa202d56f3906c
   react-native-track-player: 473b1ed1a554b919f9dedc7efc83791dd1a3327a
-  react-native-vector-icons: dc45340d8452e5375e9cb6b94b9d041e0f80faee
-  react-native-vector-icons-material-design-icons: c502df5b988ce85d6c7d2b7ee909818315760b82
+  react-native-vector-icons: 9226f1a09ee28d0715d66a5d397944863d8283af
+  react-native-vector-icons-material-design-icons: 76cd460b3540b80527b4a80fb7f867f7deedb498
   react-native-video: 019c02367fb1ceecf9e26234e4ab296172a9a44b
   react-native-webview: 5887b6094417c75a9bee446261f89c32adf6b602
   React-NativeModulesApple: 8ce162c145e6b9767bb37a090c77d3d28f7d32b5
@@ -3908,22 +3908,22 @@ SPEC CHECKSUMS:
   ReactAppDependencyProvider: c277c5b231881ad4f00cd59e3aa0671b99d7ebee
   ReactCodegen: 08a17c2a0ea911c3367638f37cd41ac1948065b7
   ReactCommon: 5cfd842fcd893bb40fc835f98fadc60c42906a20
-  RevenueCat: 9d0328a098bd0e1b425d91d136e643b72cd70326
+  RevenueCat: 0423a85e1f2ef06f1002b18cae53fe856f60ea53
   RNCMaskedView: 8bfc13a356455b15d56114738f4d2a804769c1bf
   RNDeviceInfo: 8b6fa8379062949dd79a009cf3d6b02a9c03ca59
-  RNGestureHandler: 9339994ea5d1ff6ad2679b7d0cc3d49053111369
+  RNGestureHandler: ddb7aba31ad4b42ee14d88f02d1211eedcd8ba57
   RNNotifee: 4a6ee5c7deaf00e005050052d73ee6315dff7ec9
-  RNPurchases: 14d509abda20b253e603d5fecf82beac38359037
+  RNPurchases: 45b12392e8e14078c7f5f549b5ff51d6b92a3dbb
   RNReanimated: 2635ec9d061c5eba3987bcc604443d78f363d3f7
   RNScreens: de996b48c82245c0b68c677da3334c2061e2a951
-  RNSentry: 34bead6afbfce1bb89837b84da1dec001f890329
+  RNSentry: f82dd6c48a19eb8f54b9ddc3c60462639ec6b47b
   RNSVG: 596e9946ddc0e023c6e6931038c9e49b553f742d
   RNWorklets: daa0a3e7946a9c4042f3a962c87a12dc5bc0badd
   SDWebImage: 16309af6d214ba3f77a7c6f6fdda888cb313a50a
   SDWebImageAVIFCoder: afe194a084e851f70228e4be35ef651df0fc5c57
   SDWebImageSVGCoder: 15a300a97ec1c8ac958f009c02220ac0402e936c
   SDWebImageWebPCoder: e38c0a70396191361d60c092933e22c20d5b1380
-  Sentry: e1b49e5f49367ff211b25c431a60e2bd83b792aa
+  Sentry: ea4ca7cd1a46c77dcc8123804ce36d8f5603a841
   SocketRocket: d4aabe649be1e368d1318fdf28a022d714d65748
   SSZipArchive: fe6a26b2a54d5a0890f2567b5cc6de5caa600aef
   SVGAPlayer: 318b85a78b61292d6ae9dfcd651f3f0d1cdadd86
