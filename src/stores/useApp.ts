@@ -18,11 +18,7 @@ import smarterShuffle from '../utils/shuffle';
 import { PlaylistTypes } from '@enums/Playlist';
 
 interface NoxSetting
-  extends APMUIStore,
-    UIStore,
-    PlaylistsStore,
-    MFsdkStore,
-    APMPlaybackStore {
+  extends APMUIStore, UIStore, PlaylistsStore, MFsdkStore, APMPlaybackStore {
   getPlaylist: (
     val: string,
     dVal?: NoxMedia.Playlist,

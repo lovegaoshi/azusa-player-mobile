@@ -14,8 +14,7 @@ export interface CheckDialogChildren<T> {
 }
 
 export interface SelectCheckChildren<T>
-  extends CheckDialogChildren<T>,
-    SelectDialogChildren<T> {}
+  extends CheckDialogChildren<T>, SelectDialogChildren<T> {}
 
 interface Props<T> {
   Children: (p: CheckDialogChildren<T>) => React.JSX.Element;

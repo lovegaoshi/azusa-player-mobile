@@ -67,8 +67,7 @@ const LogOptions = [
 const { getState, setState } = logStore;
 
 interface HomeProps
-  extends NoxComponent.StackNavigationProps,
-    SelectDialogChildren<any> {}
+  extends NoxComponent.StackNavigationProps, SelectDialogChildren<any> {}
 
 export const Home = ({
   navigation,
