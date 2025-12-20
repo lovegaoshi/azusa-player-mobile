@@ -54,7 +54,7 @@ const _DefaultSetting: NoxStorage.PlayerSettingDict = {
   artworkRes: 0,
   artworkCarousel: false,
   pausePlaybackOnMute: false,
-  noBiliR128Gain: false,
+  noBiliR128Gain: true,
   smartShuffle: true,
   lyricTap: true,
   fontScale: 1,
