@@ -133,7 +133,7 @@
     "react-native-text-ticker": "https://lovegaoshi@github.com/lovegaoshi/react-native-text-ticker.git#commit=39d022e8e1eed15811c7155d39ec991742d37722",
     "react-native-track-player": "https://github.com/lovegaoshi/react-native-track-player.git#commit=3ea36c6d56a3a56386858d1873166d0d5bd8eb0e",
     "react-native-url-polyfill": "^3.0.0",
-    "react-native-video": "6.16.1",
+    "react-native-video": "6.15.0",
     "react-native-webview": "13.16.0",
     "react-native-worklets": "^0.6.1",
     "sp-react-native-in-app-updates": "^1.5.0",
