@@ -35,7 +35,6 @@ export default async function biliFetch(
     ...params.headers,
   });
   // https://stackoverflow.com/questions/35325370/how-do-i-post-a-x-www-form-urlencoded-request-using-fetch
-
   if (
     params.body &&
     params.headers.get('Content-Type') === 'application/x-www-form-urlencoded'
