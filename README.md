@@ -124,7 +124,7 @@ CDN acceleration and security protection for this project are sponsored by Tence
 ![https://edgeone.ai/media/34fe3a45-492d-4ea4-ae5d-ea1087ca7b4b.png](https://edgeone.ai/media/34fe3a45-492d-4ea4-ae5d-ea1087ca7b4b.png)
 
 
-感谢您考虑对APM进行经济方面无偿捐助的支持。您支持的每一分钱都会用来买《博德之门3》（还没玩到）。
+感谢您考虑对APM进行经济方面无偿捐助的支持。您支持的每一分钱都会用来买《如龙8》（还没玩到）。
 
 您也可以在[这个Stripe页面](https://buy.stripe.com/3cs17p4Lj6KZ9B64gg)以$2.99的优惠价格买断APM（以跳过开头广告）。请在Bili ID一栏下填入您的b站帐号纯数字id，以及在APM内登入您的b站帐号做认证
 
