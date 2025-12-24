@@ -163,6 +163,31 @@
       "darkTheme": true
     },
     "gifs": [
+      "https://i0.hdslb.com/bfs/garb/929ef00fc206fde6579c0ebd5e00e1d6a875b497.png",
+      "https://i0.hdslb.com/bfs/garb/3b158fbb7126719be0d084fb6ff1dc5812bec2c8.png",
+      "https://i0.hdslb.com/bfs/garb/6ee7e728227bcfea225eeef8f5eb7e7d429a595c.png",
+      "https://i0.hdslb.com/bfs/garb/c431b79ed6822650c7a4af0dd06eb7d633d7dd64.png",
+      "https://i0.hdslb.com/bfs/garb/019a9bb47b95db213ac5ae7d324fd0f63dc9ec1a.png",
+      "https://i0.hdslb.com/bfs/garb/10212baf0901d32774b93ed1744797c45d607e0c.png",
+      "https://i0.hdslb.com/bfs/garb/ab922f1ad53474b49995e2576bfbb084c17e6fc3.png",
+      "https://i0.hdslb.com/bfs/garb/5dbc809c4955ed5a745cfa9c67f5af80cfc9a5ed.png",
+      "https://i0.hdslb.com/bfs/garb/db203a55ce01a7207737aae2aa58871048f24584.png",
+      "https://i0.hdslb.com/bfs/garb/ff0bcda8ea42e1295f4182d31a03f01f7bddeb20.png",
+      "https://i0.hdslb.com/bfs/garb/c25e4466f5e80182a4eaa76e263b0ae6e2bed2bc.png",
+      "https://i0.hdslb.com/bfs/garb/5eeedf073e6715c68b400c50df20e8256887aa80.png",
+      "https://i0.hdslb.com/bfs/garb/4ca2b94d595355239700c1182e2ef75a04b461fa.png",
+      "https://i0.hdslb.com/bfs/garb/7b9bdd0cb293d5d2d68faa7ddfe6afa142bb2ee4.png",
+      "https://i0.hdslb.com/bfs/garb/2bf8af294e09a83782ead2e8666314892bee6807.png",
+      "https://i0.hdslb.com/bfs/garb/c42eca8163f50eff8afb52c285e510ced8e78d4c.png",
+      "https://i0.hdslb.com/bfs/garb/fd9e374186f7e718fd5d45eef552671576bc851c.png",
+      "https://i0.hdslb.com/bfs/garb/42f658ad56a4d0a03e5a7625c51a41b09c944cdb.png",
+      "https://i0.hdslb.com/bfs/garb/2022e5606885421cfa8a8277cfe262127c99ca1d.png",
+      "https://i0.hdslb.com/bfs/garb/582ae17f72bef7d0d3c7d7b167a241a72bf4b2d0.png",
+      "https://i0.hdslb.com/bfs/garb/2c0e9b84e9d25f15fbeba13c9d96852ec26f188a.png",
+      "https://i0.hdslb.com/bfs/garb/ad9520e0137f667cf33d6012ed286f12f3832f19.png",
+      "https://i0.hdslb.com/bfs/garb/4398cefda79bbb4ad2d10720b22fbce592f5df76.png",
+      "https://i0.hdslb.com/bfs/garb/0e16dadc6ca2d6583d3efb35005c79dae6b80484.png",
+      "https://i0.hdslb.com/bfs/garb/4ca33728d868ed6031c3fc595c3e90062f194c10.png",
       "https://i0.hdslb.com/bfs/garb/c14fd412f2fb842aaf0e5f815b0f139c06995557.png",
       "https://i0.hdslb.com/bfs/garb/1274c25c3523b15ede48ec7b8bc7052966eacb4e.png",
       "https://i0.hdslb.com/bfs/garb/b005954701017da01fbe6e32cc44e88eddb94e34.png",
@@ -205,6 +230,74 @@
       "https://i0.hdslb.com/bfs/emote/8273b2324f3aa005b24103827b1939434879bcc6.png"
     ],
     "backgroundImages": [
+      {
+        "type": "biliNFTVideoNew",
+        "identifier": "[\"110463\",\"110464\",\"春\"]"
+      },
+      {
+        "type": "biliNFTVideoNew",
+        "identifier": "[\"110463\",\"110464\",\"圣夜膳\"]"
+      },
+      {
+        "type": "biliNFTVideoNew",
+        "identifier": "[\"110463\",\"110464\",\"溺者之梦\"]"
+      },
+      {
+        "type": "biliNFTVideoNew",
+        "identifier": "[\"110463\",\"110464\",\"安睡于死沼\"]"
+      },
+      {
+        "type": "biliNFTVideoNew",
+        "identifier": "[\"110463\",\"110464\",\"卵生宇宙\"]"
+      },
+      {
+        "type": "biliNFTVideoNew",
+        "identifier": "[\"110463\",\"110464\",\"牡蛎的心脏\"]"
+      },
+      {
+        "type": "biliNFTVideoNew",
+        "identifier": "[\"110463\",\"110464\",\"甘美的曲解\"]"
+      },
+      {
+        "type": "biliNFTVideoNew",
+        "identifier": "[\"110463\",\"110464\",\"花朵如是萌芽\"]"
+      },
+      {
+        "type": "biliNFTVideoNew",
+        "identifier": "[\"110463\",\"110464\",\"爱意\"]"
+      },
+      {
+        "type": "biliNFTVideoNew",
+        "identifier": "[\"110463\",\"110464\",\"诞辰之喜\"]"
+      },
+      {
+        "type": "biliNFTVideoNew",
+        "identifier": "[\"110463\",\"110464\",\"魅影缝匠\"]"
+      },
+      {
+        "type": "biliNFTVideoNew",
+        "identifier": "[\"110463\",\"110464\",\"墓园信使\"]"
+      },
+      {
+        "type": "biliNFTVideoNew",
+        "identifier": "[\"110463\",\"110464\",\"好奇心\"]"
+      },
+      {
+        "type": "biliNFTVideoNew",
+        "identifier": "[\"110463\",\"110464\",\"赴火的阿金妮\"]"
+      },
+      {
+        "type": "biliNFTVideoNew",
+        "identifier": "[\"110463\",\"110464\",\"好胃口\"]"
+      },
+      {
+        "type": "biliNFTVideoNew",
+        "identifier": "[\"110463\",\"110464\",\"石榴的颜色\"]"
+      },
+      {
+        "type": "biliNFTVideoNew",
+        "identifier": "[\"110463\",\"110464\",\"蜗居小憩\"]"
+      },
       {
         "type": "biliNFTVideoRedeem",
         "identifier": "[\"104739\",\"104740\",\"卜梦寻往典藏卡\"]"
