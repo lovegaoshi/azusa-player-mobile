@@ -88,12 +88,12 @@ export default function useLyricRN(currentSong?: NoxMedia.Song, artist = '') {
       adhocTitle,
       [
         LrcSource.YT,
-        LrcSource.QQQrc,
-        LrcSource.QQ,
+        LrcSource.Netease,
+        // LrcSource.QQQrc,
         LrcSource.BiliBili,
         LrcSource.Kugou,
+        LrcSource.QQ,
         LrcSource.LrcLib,
-        LrcSource.Netease,
       ],
       artist,
       options => {
