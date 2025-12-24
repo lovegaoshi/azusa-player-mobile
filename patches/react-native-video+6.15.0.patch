@@ -1,8 +1,35 @@
+diff --git a/node_modules/react-native-video/android/src/main/java/com/brentvatne/common/react/VideoEventEmitter.kt b/node_modules/react-native-video/android/src/main/java/com/brentvatne/common/react/VideoEventEmitter.kt
+index 02b2922..6581060 100644
+--- a/node_modules/react-native-video/android/src/main/java/com/brentvatne/common/react/VideoEventEmitter.kt
++++ b/node_modules/react-native-video/android/src/main/java/com/brentvatne/common/react/VideoEventEmitter.kt
+@@ -288,12 +288,18 @@ class VideoEventEmitter {
+         }
+     }
+ 
++    private class VideoCustomEvent(surfaceId: Int, viewId: Int, private val event: EventTypes, private val paramsSetter: (WritableMap.() -> Unit)?) :
++        Event<VideoCustomEvent>(surfaceId, viewId) {
++
++        override fun getEventName(): String = "top${event.eventName.removePrefix("on")}"
++
++        override fun getEventData(): WritableMap? = Arguments.createMap().apply(paramsSetter ?: {})
++    }
++
++
+     private class EventBuilder(private val surfaceId: Int, private val viewId: Int, private val dispatcher: EventDispatcher) {
+         fun dispatch(event: EventTypes, paramsSetter: (WritableMap.() -> Unit)? = null) =
+-            dispatcher.dispatchEvent(object : Event<Event<*>>(surfaceId, viewId) {
+-                override fun getEventName() = "top${event.eventName.removePrefix("on")}"
+-                override fun getEventData() = Arguments.createMap().apply(paramsSetter ?: {})
+-            })
++            dispatcher.dispatchEvent(VideoCustomEvent(surfaceId, viewId, event, paramsSetter))
+     }
+ 
+     private fun audioTracksToArray(audioTracks: java.util.ArrayList<Track>?): WritableArray =
 diff --git a/node_modules/react-native-video/android/src/main/java/com/brentvatne/exoplayer/ReactExoplayerView.java b/node_modules/react-native-video/android/src/main/java/com/brentvatne/exoplayer/ReactExoplayerView.java
-index bea60c0..425929b 100644
+index 3c8d4b1..ae76d23 100644
 --- a/node_modules/react-native-video/android/src/main/java/com/brentvatne/exoplayer/ReactExoplayerView.java
 +++ b/node_modules/react-native-video/android/src/main/java/com/brentvatne/exoplayer/ReactExoplayerView.java
-@@ -124,7 +124,6 @@ import com.brentvatne.react.R;
+@@ -125,7 +125,6 @@ import com.brentvatne.react.R;
  import com.brentvatne.react.ReactNativeVideoManager;
  import com.brentvatne.receiver.AudioBecomingNoisyReceiver;
  import com.brentvatne.receiver.BecomingNoisyListener;
@@ -10,15 +37,7 @@ index bea60c0..425929b 100644
  import com.facebook.react.bridge.LifecycleEventListener;
  import com.facebook.react.bridge.Promise;
  import com.facebook.react.bridge.UiThreadUtil;
-@@ -215,7 +214,6 @@ public class ReactExoplayerView extends FrameLayout implements
-     private boolean selectTrackWhenReady = false;
-     private final Handler mainHandler;
-     private Runnable mainRunnable;
--    private Runnable pipListenerUnsubscribe;
-     private boolean useCache = false;
-     private boolean disableCache = false;
-     private ControlsConfig controlsConfig = new ControlsConfig();
-@@ -254,7 +252,6 @@ public class ReactExoplayerView extends FrameLayout implements
+@@ -257,7 +256,6 @@ public class ReactExoplayerView extends FrameLayout implements
      private final ThemedReactContext themedReactContext;
      private final AudioManager audioManager;
      private final AudioBecomingNoisyReceiver audioBecomingNoisyReceiver;
@@ -26,7 +45,7 @@ index bea60c0..425929b 100644
      private final AudioManager.OnAudioFocusChangeListener audioFocusChangeListener;
  
      // store last progress event values to avoid sending unnecessary messages
-@@ -332,7 +329,6 @@ public class ReactExoplayerView extends FrameLayout implements
+@@ -335,7 +333,6 @@ public class ReactExoplayerView extends FrameLayout implements
          themedReactContext.addLifecycleEventListener(this);
          audioBecomingNoisyReceiver = new AudioBecomingNoisyReceiver(themedReactContext);
          audioFocusChangeListener = new OnAudioFocusChangedListener(this, themedReactContext);
@@ -34,16 +53,15 @@ index bea60c0..425929b 100644
      }
  
      private boolean isPlayingAd() {
-@@ -638,8 +634,6 @@ public class ReactExoplayerView extends FrameLayout implements
+@@ -774,7 +771,6 @@ public class ReactExoplayerView extends FrameLayout implements
                  if (player == null) {
                      // Initialize core configuration and listeners
                      initializePlayerCore(self);
 -                    pipListenerUnsubscribe = PictureInPictureUtil.addLifecycleEventListener(themedReactContext, this);
--                    PictureInPictureUtil.applyAutoEnterEnabled(themedReactContext, pictureInPictureParamsBuilder, this.enterPictureInPictureOnLeave);
+                     PictureInPictureUtil.applyAutoEnterEnabled(themedReactContext, pictureInPictureParamsBuilder, this.enterPictureInPictureOnLeave);
                  }
                  if (!source.isLocalAssetFile() && !source.isAsset() && source.getBufferConfig().getCacheSize() > 0) {
-                     RNVSimpleCache.INSTANCE.setSimpleCache(
-@@ -750,7 +744,6 @@ public class ReactExoplayerView extends FrameLayout implements
+@@ -887,7 +883,6 @@ public class ReactExoplayerView extends FrameLayout implements
          exoPlayerView.setPlayer(player);
  
          audioBecomingNoisyReceiver.setListener(self);
@@ -51,18 +69,7 @@ index bea60c0..425929b 100644
          bandwidthMeter.addEventListener(new Handler(), self);
          setPlayWhenReady(!isPaused);
          playerNeedsSource = true;
-@@ -1210,10 +1203,6 @@ public class ReactExoplayerView extends FrameLayout implements
-             updateResumePosition();
-             player.release();
-             player.removeListener(this);
--            PictureInPictureUtil.applyAutoEnterEnabled(themedReactContext, pictureInPictureParamsBuilder, false);
--            if (pipListenerUnsubscribe != null) {
--                pipListenerUnsubscribe.run();
--            }
-             trackSelector = null;
- 
-             ReactNativeVideoManager.Companion.getInstance().onInstanceRemoved(instanceId, player);
-@@ -1226,7 +1215,6 @@ public class ReactExoplayerView extends FrameLayout implements
+@@ -1333,7 +1328,6 @@ public class ReactExoplayerView extends FrameLayout implements
          }
          progressHandler.removeMessages(SHOW_PROGRESS);
          audioBecomingNoisyReceiver.removeListener();
@@ -70,7 +77,7 @@ index bea60c0..425929b 100644
          bandwidthMeter.removeEventListener(this);
  
          if (mainHandler != null && mainRunnable != null) {
-@@ -1911,7 +1899,6 @@ public class ReactExoplayerView extends FrameLayout implements
+@@ -1852,7 +1846,6 @@ public class ReactExoplayerView extends FrameLayout implements
          if (isPlaying && isSeeking) {
              eventEmitter.onVideoSeek.invoke(player.getCurrentPosition(), seekPosition);
          }
@@ -78,55 +85,7 @@ index bea60c0..425929b 100644
          eventEmitter.onVideoPlaybackStateChanged.invoke(isPlaying, isSeeking);
  
          if (isPlaying) {
-@@ -2431,84 +2418,15 @@ public class ReactExoplayerView extends FrameLayout implements
-     }
- 
-     public void setEnterPictureInPictureOnLeave(boolean enterPictureInPictureOnLeave) {
--        this.enterPictureInPictureOnLeave = Build.VERSION.SDK_INT >= Build.VERSION_CODES.N && enterPictureInPictureOnLeave;
--        if (player != null) {
--            PictureInPictureUtil.applyAutoEnterEnabled(themedReactContext, pictureInPictureParamsBuilder, this.enterPictureInPictureOnLeave);
--        }
-     }
- 
-     protected void setIsInPictureInPicture(boolean isInPictureInPicture) {
--        eventEmitter.onPictureInPictureStatusChanged.invoke(isInPictureInPicture);
--
--        if (fullScreenPlayerView != null && fullScreenPlayerView.isShowing()) {
--            if (isInPictureInPicture) fullScreenPlayerView.hideWithoutPlayer();
--            return;
--        }
--
--        Activity currentActivity = themedReactContext.getCurrentActivity();
--        if (currentActivity == null) return;
--
--        View decorView = currentActivity.getWindow().getDecorView();
--        ViewGroup rootView = decorView.findViewById(android.R.id.content);
--
--        LayoutParams layoutParams = new LayoutParams(
--                LayoutParams.MATCH_PARENT,
--                LayoutParams.MATCH_PARENT);
--
--        if (isInPictureInPicture) {
--            ViewGroup parent = (ViewGroup)exoPlayerView.getParent();
--            if (parent != null) {
--                parent.removeView(exoPlayerView);
--            }
--            for (int i = 0; i < rootView.getChildCount(); i++) {
--                if (rootView.getChildAt(i) != exoPlayerView) {
--                    rootViewChildrenOriginalVisibility.add(rootView.getChildAt(i).getVisibility());
--                    rootView.getChildAt(i).setVisibility(View.GONE);
--                }
--            }
--            rootView.addView(exoPlayerView, layoutParams);
--        } else {
--            rootView.removeView(exoPlayerView);
--            if (!rootViewChildrenOriginalVisibility.isEmpty()) {
--                for (int i = 0; i < rootView.getChildCount(); i++) {
--                    rootView.getChildAt(i).setVisibility(rootViewChildrenOriginalVisibility.get(i));
--                }
--                addView(exoPlayerView, 0, layoutParams);
--            }
--        }
+@@ -2318,36 +2311,9 @@ public class ReactExoplayerView extends FrameLayout implements
      }
  
      public void enterPictureInPictureMode() {
