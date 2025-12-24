@@ -7,7 +7,7 @@ import SongTS from '@objects/Song';
 import { Source } from '@enums/MediaFetch';
 
 const URL_BILI_SEARCH =
-  'https://api.bilibili.com/x/web-interface/search/type?search_type=video&keyword={keyword}&page={pn}&tids=3';
+  'https://api.bilibili.com/x/web-interface/wbi/search/type?search_type=video&keyword={keyword}&page={pn}&tids=3';
 
 let cookie: string;
 
@@ -93,7 +93,7 @@ export const fetchBiliSearchList = async (
 const regexFetch = async ({
   url,
   progressEmitter = () => undefined,
-  fastSearch,
+  fastSearch = true,
   cookiedSearch = false,
 }: NoxNetwork.BiliSearchFetchProps): Promise<NoxNetwork.NoxRegexFetch> => ({
   songList: await fetchBiliSearchList(

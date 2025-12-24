@@ -9,6 +9,7 @@ const esModules = [
   'lodash',
   'youtubei',
   'jintr',
+  'uuid',
 ].join('|');
 
 const config = {
