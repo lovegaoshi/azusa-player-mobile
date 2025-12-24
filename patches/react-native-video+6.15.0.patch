@@ -1,5 +1,32 @@
+diff --git a/node_modules/react-native-video/android/src/main/java/com/brentvatne/common/react/VideoEventEmitter.kt b/node_modules/react-native-video/android/src/main/java/com/brentvatne/common/react/VideoEventEmitter.kt
+index 02b2922..6581060 100644
+--- a/node_modules/react-native-video/android/src/main/java/com/brentvatne/common/react/VideoEventEmitter.kt
++++ b/node_modules/react-native-video/android/src/main/java/com/brentvatne/common/react/VideoEventEmitter.kt
+@@ -288,12 +288,18 @@ class VideoEventEmitter {
+         }
+     }
+ 
++    private class VideoCustomEvent(surfaceId: Int, viewId: Int, private val event: EventTypes, private val paramsSetter: (WritableMap.() -> Unit)?) :
++        Event<VideoCustomEvent>(surfaceId, viewId) {
++
++        override fun getEventName(): String = "top${event.eventName.removePrefix("on")}"
++
++        override fun getEventData(): WritableMap? = Arguments.createMap().apply(paramsSetter ?: {})
++    }
++
++
+     private class EventBuilder(private val surfaceId: Int, private val viewId: Int, private val dispatcher: EventDispatcher) {
+         fun dispatch(event: EventTypes, paramsSetter: (WritableMap.() -> Unit)? = null) =
+-            dispatcher.dispatchEvent(object : Event<Event<*>>(surfaceId, viewId) {
+-                override fun getEventName() = "top${event.eventName.removePrefix("on")}"
+-                override fun getEventData() = Arguments.createMap().apply(paramsSetter ?: {})
+-            })
++            dispatcher.dispatchEvent(VideoCustomEvent(surfaceId, viewId, event, paramsSetter))
+     }
+ 
+     private fun audioTracksToArray(audioTracks: java.util.ArrayList<Track>?): WritableArray =
 diff --git a/node_modules/react-native-video/android/src/main/java/com/brentvatne/exoplayer/ReactExoplayerView.java b/node_modules/react-native-video/android/src/main/java/com/brentvatne/exoplayer/ReactExoplayerView.java
-index 7760d1b..c7d841e 100644
+index 3c8d4b1..ae76d23 100644
 --- a/node_modules/react-native-video/android/src/main/java/com/brentvatne/exoplayer/ReactExoplayerView.java
 +++ b/node_modules/react-native-video/android/src/main/java/com/brentvatne/exoplayer/ReactExoplayerView.java
 @@ -125,7 +125,6 @@ import com.brentvatne.react.R;
@@ -26,7 +53,7 @@ index 7760d1b..c7d841e 100644
      }
  
      private boolean isPlayingAd() {
-@@ -769,7 +766,6 @@ public class ReactExoplayerView extends FrameLayout implements
+@@ -774,7 +771,6 @@ public class ReactExoplayerView extends FrameLayout implements
                  if (player == null) {
                      // Initialize core configuration and listeners
                      initializePlayerCore(self);
@@ -34,7 +61,7 @@ index 7760d1b..c7d841e 100644
                      PictureInPictureUtil.applyAutoEnterEnabled(themedReactContext, pictureInPictureParamsBuilder, this.enterPictureInPictureOnLeave);
                  }
                  if (!source.isLocalAssetFile() && !source.isAsset() && source.getBufferConfig().getCacheSize() > 0) {
-@@ -882,7 +878,6 @@ public class ReactExoplayerView extends FrameLayout implements
+@@ -887,7 +883,6 @@ public class ReactExoplayerView extends FrameLayout implements
          exoPlayerView.setPlayer(player);
  
          audioBecomingNoisyReceiver.setListener(self);
@@ -42,7 +69,7 @@ index 7760d1b..c7d841e 100644
          bandwidthMeter.addEventListener(new Handler(), self);
          setPlayWhenReady(!isPaused);
          playerNeedsSource = true;
-@@ -1319,7 +1314,6 @@ public class ReactExoplayerView extends FrameLayout implements
+@@ -1333,7 +1328,6 @@ public class ReactExoplayerView extends FrameLayout implements
          }
          progressHandler.removeMessages(SHOW_PROGRESS);
          audioBecomingNoisyReceiver.removeListener();
@@ -50,7 +77,7 @@ index 7760d1b..c7d841e 100644
          bandwidthMeter.removeEventListener(this);
  
          if (mainHandler != null && mainRunnable != null) {
-@@ -1838,7 +1832,6 @@ public class ReactExoplayerView extends FrameLayout implements
+@@ -1852,7 +1846,6 @@ public class ReactExoplayerView extends FrameLayout implements
          if (isPlaying && isSeeking) {
              eventEmitter.onVideoSeek.invoke(player.getCurrentPosition(), seekPosition);
          }
@@ -58,7 +85,7 @@ index 7760d1b..c7d841e 100644
          eventEmitter.onVideoPlaybackStateChanged.invoke(isPlaying, isSeeking);
  
          if (isPlaying) {
-@@ -2304,36 +2297,9 @@ public class ReactExoplayerView extends FrameLayout implements
+@@ -2318,36 +2311,9 @@ public class ReactExoplayerView extends FrameLayout implements
      }
  
      public void enterPictureInPictureMode() {
