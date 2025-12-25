@@ -72,7 +72,9 @@ export const fetchBiliSearchList = async (
       params: {
         method: 'GET',
         headers: {
-          cookie: await getCookie(cookiedSearch),
+          cookie: cookiedSearch
+            ? `SESSDATA=${await getBiliCookie(BILICOOKIES.SESSDATA)}`
+            : undefined,
         },
         referrer: 'https://www.bilibili.com',
         // HACK: setting to omit will use whatever cookie I set above.
