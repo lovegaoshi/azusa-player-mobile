@@ -24,6 +24,11 @@ export const getCookie = async (cookiedSearch = false) => {
   return cookie;
 };
 
+const getSESSDATA = async () => {
+  const sessdata = await getBiliCookie(BILICOOKIES.SESSDATA);
+  return sessdata ? `SESSDATA=${sessdata}` : undefined;
+};
+
 /**
      * cids should be resolved at this stage,
      * or on the fly using fetchCID. the latter saves
@@ -72,9 +77,8 @@ export const fetchBiliSearchList = async (
       params: {
         method: 'GET',
         headers: {
-          cookie: cookiedSearch
-            ? `SESSDATA=${await getBiliCookie(BILICOOKIES.SESSDATA)}`
-            : undefined,
+          // wbi search no longer needs buvid3 as of 12/25/2025
+          cookie: cookiedSearch ? await getSESSDATA() : undefined,
         },
         referrer: 'https://www.bilibili.com',
         // HACK: setting to omit will use whatever cookie I set above.
