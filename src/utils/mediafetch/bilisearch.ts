@@ -79,6 +79,7 @@ export const fetchBiliSearchList = async (
         headers: {
           // wbi search no longer needs buvid3 as of 12/25/2025
           cookie: cookiedSearch ? await getSESSDATA() : undefined,
+          referer: 'https://www.bilibili.com',
         },
         referrer: 'https://www.bilibili.com',
         // HACK: setting to omit will use whatever cookie I set above.
