@@ -3,10 +3,10 @@ description: setup everything react native needs (node, secret, etc)
 
 inputs:
   env:
-    description: "env file content"
+    description: 'env file content'
     required: true
   sentry:
-    description: "sentry file content"
+    description: 'sentry file content'
     required: true
 
 outputs:
@@ -15,7 +15,7 @@ outputs:
     value: ${{ steps.date.outputs.date }}
 
 runs:
-  using: "composite"
+  using: 'composite'
   steps:
     - name: Get branch name
       run: |
@@ -36,8 +36,8 @@ runs:
     - name: Set up Node.js
       uses: actions/setup-node@v4
       with:
-        node-version: '22'
-        cache: 'yarn'
+        node-version: '24'
+        # cache: 'yarn'
 
     - name: 'Create env file'
       env:
@@ -48,7 +48,7 @@ runs:
         echo "$SENTRY_PROPERTIES" > ./android/sentry.properties
         echo "$SENTRY_PROPERTIES" > ./ios/sentry.properties
       shell: bash
-      
+
     - name: alias yarn.cmd to yarn
       run: alias yarn.cmd="yarn"
       shell: bash
