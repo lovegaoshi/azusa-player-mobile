@@ -55,7 +55,7 @@ runs:
       shell: bash
 
     - name: Install dependencies
-      run: yarn install; yarn build
+      run: COREPACK_ENABLE_DOWNLOAD_PROMPT=0 yarn; yarn install; yarn build
       shell: bash
 
     - name: python fixHTTP
