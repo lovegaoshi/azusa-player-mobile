@@ -29,16 +29,15 @@ runs:
       run: echo "date=$(date +'%Y-%m-%d')" >> $GITHUB_OUTPUT
       shell: bash
 
+    - name: enable corepack
+      run: corepack enable
+      shell: bash
+
     - name: Set up Node.js
       uses: actions/setup-node@v6
       with:
         node-version: '24'
-        package-manager-cache: false
-        # cache: 'yarn'
-
-    - name: enable corepack
-      run: corepack enable
-      shell: bash
+        cache: 'yarn'
 
     - name: 'Create env file'
       env:
@@ -55,7 +54,7 @@ runs:
       shell: bash
 
     - name: Install dependencies
-      run: COREPACK_ENABLE_DOWNLOAD_PROMPT=0 yarn; yarn install; yarn build
+      run: yarn install; yarn build
       shell: bash
 
     - name: python fixHTTP
