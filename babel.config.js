@@ -35,6 +35,7 @@ module.exports = api => {
             deprecatedAssertSyntax: true,
           },
         ],
+        'babel-plugin-transform-import-meta',
       ],
     };
   }
