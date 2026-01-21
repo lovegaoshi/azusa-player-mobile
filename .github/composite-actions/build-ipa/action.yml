@@ -2,7 +2,7 @@ name: iOS Build
 description: build for iOS IPA
 
 runs:
-  using: "composite"
+  using: 'composite'
   steps:
     - name: select xcode
       run: |
@@ -19,7 +19,7 @@ runs:
       shell: bash
 
     - name: build
-      run: cd ios  && xcodebuild -downloadPlatform iOS && xcodebuild -scheme APM -workspace example.xcworkspace -destination generic/platform=iOS -configuration Release clean archive -archivePath "build/APM.xcarchive" CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO CODE_SIGNING_ALLOWED=NO
+      run: cd ios && xcodebuild -scheme APM -workspace example.xcworkspace -destination generic/platform=iOS -configuration Release clean archive -archivePath "build/APM.xcarchive" CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO CODE_SIGNING_ALLOWED=NO
       shell: bash
 
     - name: archive to ipa
