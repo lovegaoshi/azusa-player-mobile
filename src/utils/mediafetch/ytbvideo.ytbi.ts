@@ -29,6 +29,8 @@ export const resolveURL = async (song: NoxMedia.Song, iOS = false) => {
       ).streaming_data?.hls_manifest_url
     : undefined;
   yt.session.player!.po_token = await getPoT(song.bvid);
+  // TODO: investigate why po_token dont work anymore
+  yt.session.player!.po_token = undefined;
   const extractedVideoInfo = await yt.getBasicInfo(song.bvid, {
     client: yt.session.player!.po_token === undefined ? 'WEB_EMBEDDED' : 'MWEB',
   });
