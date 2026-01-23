@@ -62,6 +62,8 @@ export const customReqHeader = (
     reqHeader.referer = 'https://u.qq.com/';
   } else if (/i\.qq\.com/.exec(url)) {
     reqHeader.referer = 'https://i.qq.com/';
+  } else if (/googlevideo/.exec(url)) {
+    reqHeader.referer = 'https://www.youtube.com/';
   }
   reqHeader['User-Agent'] = DEFAULT_UA;
   return reqHeader;
