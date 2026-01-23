@@ -31,7 +31,7 @@ export const resolveURL = async (song: NoxMedia.Song, iOS = false) => {
   });
 
   return {
-    url: extractedVideoInfo.streaming_data?.hls_manifest_url,
+    url: extractedVideoInfo.streaming_data?.hls_manifest_url ?? '',
     loudness: maxAudioQualityStream.loudness_db,
   };
   /**
