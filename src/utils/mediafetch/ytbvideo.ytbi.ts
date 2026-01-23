@@ -9,7 +9,7 @@ import { Source } from '@enums/MediaFetch';
 import { logger } from '@utils/Logger';
 import ytClient, { ytwebClient } from '@utils/mediafetch/ytbi';
 import { isIOS } from '@utils/RNUtils';
-import { getPoT } from '@utils/mediafetch/ytpot';
+// import { getPoT } from '@utils/mediafetch/ytpot';
 
 const getHiResThumbnail = (thumbnails?: Thumbnail[]) => {
   if (!thumbnails) return '';
@@ -21,6 +21,21 @@ export const resolveURL = async (song: NoxMedia.Song, iOS = false) => {
     `[ytbi.js] fetch YTB playURL promise:${song.bvid} / iOS status:${isIOS}/${iOS}`,
   );
   const yt = await ytClient();
+
+  const extractedVideoInfo = await yt.getBasicInfo(song.bvid, {
+    client: 'IOS',
+  });
+  const maxAudioQualityStream = extractedVideoInfo.chooseFormat({
+    quality: 'best',
+    type: 'audio',
+  });
+
+  return {
+    url: extractedVideoInfo.streaming_data?.hls_manifest_url,
+    loudness: maxAudioQualityStream.loudness_db,
+  };
+  /**
+   * 
   const hls_manifest_url = iOS
     ? (
         await yt.getBasicInfo(song.bvid, {
@@ -29,10 +44,8 @@ export const resolveURL = async (song: NoxMedia.Song, iOS = false) => {
       ).streaming_data?.hls_manifest_url
     : undefined;
   yt.session.player!.po_token = await getPoT(song.bvid);
-  // TODO: investigate why po_token dont work anymore
-  yt.session.player!.po_token = undefined;
   const extractedVideoInfo = await yt.getBasicInfo(song.bvid, {
-    client: yt.session.player!.po_token === undefined ? 'WEB_EMBEDDED' : 'MWEB',
+    client: yt.session.player!.po_token === undefined ? 'IOS' : 'MWEB',
   });
   const maxAudioQualityStream = extractedVideoInfo.chooseFormat({
     quality: 'best',
@@ -45,6 +58,8 @@ export const resolveURL = async (song: NoxMedia.Song, iOS = false) => {
         : await maxAudioQualityStream.decipher(yt.actions.session.player),
     loudness: maxAudioQualityStream.loudness_db,
   };
+   * 
+   */
 };
 
 export const suggestYTM = async (
