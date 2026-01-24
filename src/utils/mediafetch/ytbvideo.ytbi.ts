@@ -22,20 +22,6 @@ export const resolveURL = async (song: NoxMedia.Song, iOS = false) => {
   );
   const yt = await ytClient();
 
-  const extractedVideoInfo = await yt.getBasicInfo(song.bvid, {
-    client: 'IOS',
-  });
-  const maxAudioQualityStream = extractedVideoInfo.chooseFormat({
-    quality: 'best',
-    type: 'audio',
-  });
-
-  return {
-    url: extractedVideoInfo.streaming_data?.hls_manifest_url ?? '',
-    loudness: maxAudioQualityStream.loudness_db,
-  };
-  /**
-   * 
   const hls_manifest_url = iOS
     ? (
         await yt.getBasicInfo(song.bvid, {
@@ -43,10 +29,13 @@ export const resolveURL = async (song: NoxMedia.Song, iOS = false) => {
         })
       ).streaming_data?.hls_manifest_url
     : undefined;
+  /** 
   yt.session.player!.po_token = await getPoT(song.bvid);
   const extractedVideoInfo = await yt.getBasicInfo(song.bvid, {
     client: yt.session.player!.po_token === undefined ? 'IOS' : 'MWEB',
   });
+  */
+  const extractedVideoInfo = await yt.getShortsVideoInfo(song.bvid, 'ANDROID');
   const maxAudioQualityStream = extractedVideoInfo.chooseFormat({
     quality: 'best',
     type: 'audio',
@@ -58,8 +47,6 @@ export const resolveURL = async (song: NoxMedia.Song, iOS = false) => {
         : await maxAudioQualityStream.decipher(yt.actions.session.player),
     loudness: maxAudioQualityStream.loudness_db,
   };
-   * 
-   */
 };
 
 export const suggestYTM = async (
