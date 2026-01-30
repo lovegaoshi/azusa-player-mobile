@@ -37,7 +37,7 @@ const getSESSDATA = async () => {
       bvobjs.map(obj => fetchCID(obj.bvid))
     );
      */
-export const fastSearchResolveBVID = (bvobjs: any[]) =>
+const fastSearchResolveBVID = (bvobjs: any[]) =>
   bvobjs.map(obj => {
     const name = obj.title.replaceAll(/<[^<>]*em[^<>]*>/g, '');
     return SongTS({
@@ -56,7 +56,7 @@ export const fastSearchResolveBVID = (bvobjs: any[]) =>
     });
   });
 
-export const fetchBiliSearchList = async (
+const fetchBiliSearchList = async (
   kword: string,
   progressEmitter: NoxUtils.ProgressEmitter = () => undefined,
   fastSearch = false,

@@ -53,8 +53,8 @@ declare global {
 
     interface BiliSearchFetchProps {
       url: string;
-      progressEmitter: NoxUtils.ProgressEmitter;
-      fastSearch: boolean;
+      progressEmitter?: NoxUtils.ProgressEmitter;
+      fastSearch?: boolean;
       cookiedSearch?: boolean;
     }
 
