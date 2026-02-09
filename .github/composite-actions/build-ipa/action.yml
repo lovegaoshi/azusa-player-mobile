@@ -6,7 +6,7 @@ runs:
   steps:
     - name: select xcode
       run: |
-        sudo xcode-select -switch /Applications/Xcode_26.0.app
+        sudo xcode-select -switch /Applications/Xcode_26.2.app
       shell: bash
 
     - name: Install dependencies
