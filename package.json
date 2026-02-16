@@ -114,7 +114,7 @@
     "react-native-carplay": "2.4.1-beta.0",
     "react-native-device-info": "^15.0.1",
     "react-native-edge-to-edge": "^1.7.0",
-    "react-native-flashdrag-list": "https://lovegaoshi@github.com/lovegaoshi/react-native-flashdrag-list.git#commit=aa343c6ffa749b2557a14985b6ceaa8267f0ac0b",
+    "react-native-flashdrag-list": "https://lovegaoshi@github.com/lovegaoshi/react-native-flashdrag-list.git#commit=968874b73eb2e8b14822c5f46e2ca3d3c4ba944c",
     "react-native-gesture-handler": "~2.30.0",
     "react-native-get-random-values": "^2.0.0",
     "react-native-image-colors": "^2.5.1",

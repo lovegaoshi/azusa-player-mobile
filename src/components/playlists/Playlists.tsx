@@ -102,8 +102,7 @@ export const Playlists = ({
       <RectButton
         key={index}
         onPress={() => goToPlaylist(item)}
-        // onLongPress={beginDrag}
-        delayLongPress={1500}
+        onLongPress={beginDrag}
         style={[
           {
             backgroundColor:
