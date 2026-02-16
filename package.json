@@ -88,6 +88,7 @@
     "expo-image": "~3.0.11",
     "expo-image-picker": "~17.0.10",
     "expo-keep-awake": "~15.0.8",
+    "expo-linear-gradient": "~15.0.8",
     "expo-secure-store": "~15.0.8",
     "expo-sqlite": "~16.0.10",
     "fflate": "^0.8.2",
