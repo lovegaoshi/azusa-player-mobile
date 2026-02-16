@@ -96,25 +96,21 @@ export const LyricView = ({
         usedLyric={usedLyric}
       />
 
-      <MaskedView
-        maskElement={
-          <LinearGradient
-            // Background Linear Gradient
-            colors={['transparent', 'black', 'black', 'transparent']}
-            locations={[0, 0.2, 0.8, 1]}
-            style={styles.container}
-          />
-        }
-      >
-        {loading ? (
-          <Pressable onPress={onPress}>
-            <ActivityIndicator
-              size={70}
-              // HACK: ???
-              style={styles.lrcView}
+      {loading ? (
+        <Pressable onPress={onPress}>
+          <ActivityIndicator size={70} style={styles.lrcView} />
+        </Pressable>
+      ) : (
+        <MaskedView
+          maskElement={
+            <LinearGradient
+              // Background Linear Gradient
+              colors={['transparent', 'black', 'black', 'transparent']}
+              locations={[0, 0.2, 0.8, 1]}
+              style={styles.container}
             />
-          </Pressable>
-        ) : (
+          }
+        >
           <Lyric
             fontScale={
               (playerSetting.lyricFontScale || playerSetting.fontScale) ?? 1
@@ -145,14 +141,17 @@ export const LyricView = ({
             }
             {...spotifyLyricStyle}
           />
-        )}
-      </MaskedView>
+        </MaskedView>
+      )}
       {showUI && (
         <>
           <View
-            style={
-              isLandscape ? styles.optionsButtonLandscape : styles.optionsButton
-            }
+            style={[
+              isLandscape
+                ? styles.optionsButtonLandscape
+                : styles.optionsButton,
+              loading && { top: 5 },
+            ]}
           >
             <IconButton
               icon="more"
