@@ -33,7 +33,7 @@ const initRevenueCatWeb = async (userid?: string) => {
   isRevenueCatInitialized = true;
   PurchasesWeb.configure({
     apiKey: REVENUECAT_STRIPE,
-    appUserId: mUserid,
+    appUserId: String(mUserid),
     httpConfig: {
       proxyURL: 'https://api.rc-backup.com',
     },

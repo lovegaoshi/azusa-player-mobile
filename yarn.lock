@@ -5503,10 +5503,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@revenuecat/purchases-js@npm:^1.23.0":
-  version: 1.23.0
-  resolution: "@revenuecat/purchases-js@npm:1.23.0"
-  checksum: 10c0/d4bd10ba12cd0986954bb707c9798630da4a1d000d8a764917cce745c6fd01ef0afcb2f77bf97362fddc3ea1a2cee4e2452da1d0cb8b215ffaaa08bb7db3d52c
+"@revenuecat/purchases-js@npm:^1.26.0":
+  version: 1.26.0
+  resolution: "@revenuecat/purchases-js@npm:1.26.0"
+  checksum: 10c0/1244add5227c86993deca4dcec16cd8928c94c511a9808cc34cc3676ffb135fbad9fcede485923addb47d3efe8bdf8fdf47a135b8b8bcdc6007e6d89abd34311
   languageName: node
   linkType: hard
 
@@ -7869,7 +7869,7 @@ __metadata:
     "@react-navigation/drawer": "npm:^7.7.10"
     "@react-navigation/native": "npm:^7.1.26"
     "@react-navigation/native-stack": "npm:^7.9.0"
-    "@revenuecat/purchases-js": "npm:^1.23.0"
+    "@revenuecat/purchases-js": "npm:^1.26.0"
     "@sentry/react-native": "npm:~7.8.0"
     "@shopify/flash-list": "npm:2.2.0"
     "@shopify/react-native-skia": "npm:2.4.14"
