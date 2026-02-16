@@ -8047,6 +8047,7 @@ __metadata:
     expo-image: "npm:~3.0.11"
     expo-image-picker: "npm:~17.0.10"
     expo-keep-awake: "npm:~15.0.8"
+    expo-linear-gradient: "npm:~15.0.8"
     expo-secure-store: "npm:~15.0.8"
     expo-sqlite: "npm:~16.0.10"
     fflate: "npm:^0.8.2"
@@ -12583,6 +12584,17 @@ __metadata:
     expo: "*"
     react: "*"
   checksum: 10c0/23064b18285498e70be0aa525dc875cc809fc723b9a101d51e4721a09b1460eb041c73ebeb6d51e9175bb4c9b7a668bc08a48b99ebddac4cfaadb5a47194d329
+  languageName: node
+  linkType: hard
+
+"expo-linear-gradient@npm:~15.0.8":
+  version: 15.0.8
+  resolution: "expo-linear-gradient@npm:15.0.8"
+  peerDependencies:
+    expo: "*"
+    react: "*"
+    react-native: "*"
+  checksum: 10c0/2ac3bff62143083e3d5b894fccc4c76de058277f65ed123232636cf26c88da6d566fa3cd46be4101f86e66b89ede7c058e12c93493b752df562da2fa971dcd66
   languageName: node
   linkType: hard
 
