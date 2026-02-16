@@ -27,12 +27,14 @@ export interface ArtistFetch {
 export default async (mid: string): Promise<ArtistFetch> => {
   const ProfilePlaySongs = await fetchBiliChannelList({
     url: `https://space.bilibili.com/${mid}/upload/video`,
+    mid,
     fastSearch: true,
     stopAtPage: 1,
     limit: false,
   });
   const topSongs = await fetchBiliChannelList({
     url: `https://space.bilibili.com/${mid}/upload/video?order=click`,
+    mid,
     fastSearch: true,
     stopAtPage: 1,
     limit: false,
