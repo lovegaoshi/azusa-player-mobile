@@ -43,6 +43,7 @@ const fastSearchResolveBVID = (bvobjs: any[]) =>
 
 interface FetchBiliChannelList {
   url: string;
+  mid: string;
   progressEmitter?: NoxUtils.ProgressEmitter;
   favList?: string[];
   fastSearch?: boolean;
@@ -51,6 +52,7 @@ interface FetchBiliChannelList {
 }
 export const fetchBiliChannelList = async ({
   url,
+  mid,
   progressEmitter = () => undefined,
   favList = [],
   fastSearch = false,
@@ -58,7 +60,6 @@ export const fetchBiliChannelList = async ({
   limit = true,
 }: FetchBiliChannelList) => {
   logger.info('calling fetchBiliChannelList');
-  const mid = /space.bilibili\.com\/(\d+)/.exec(url)![1];
   let searchAPI = URL_BILICHANNEL_INFO.replace('{mid}', mid);
   const urlObj = new URL(url);
   searchAPI = appendURLSearchParam(searchAPI, urlObj.searchParams, 'tid');
@@ -94,6 +95,7 @@ const regexFetch = async ({
   songList: await biliShazamOnSonglist(
     await fetchBiliChannelList({
       url: reExtracted.input,
+      mid: reExtracted[1],
       progressEmitter,
       favList,
       fastSearch,
@@ -112,6 +114,8 @@ export default {
   regexSearchMatch2: /space.bilibili\.com\/(\d+)(\/upload)?\/video/,
   // https://space.bilibili.com/2097484/search?keyword=f
   regexSearchMatch3: /space.bilibili\.com\/(\d+)\/search/,
+  // https://space.bilibili.com/2097484/search?keyword=f
+  regexSearchMatch4: /bilibili\.com\/space\/(\d+)/,
   regexFetch,
   regexResolveURLMatch: /^null-/,
   resolveURL,

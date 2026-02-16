@@ -20,6 +20,8 @@ import logger from '@utils/Logger';
 import { TPPlay } from '@stores/RNObserverStore';
 import NativeNoxModule from '@specs/NativeNoxModule';
 import { setupCarplayTemplate } from './usePlaybackCarplay';
+// eslint-disable-next-line import/no-unresolved
+import { MAESTRO } from '@env';
 
 const initializePlayer = async (safeMode = false) => {
   await migrate(sqldb, migrations);
@@ -105,7 +107,7 @@ export default function useSetupPlayer({
         logger.error(`[APMResume] detected ${GCCrash} and ${OSkill}!`);
       }
       updateVersion(storedPlayerSetting);
-      checkVersion(true, storedPlayerSetting);
+      !MAESTRO && checkVersion(true, storedPlayerSetting);
       setTrack(await TrackPlayer.getActiveTrack());
       if (unmounted) return;
       setPlayerReady(true);

@@ -20,6 +20,8 @@ import {
   PlayFromMediaID,
 } from '@utils/automotive/androidAuto';
 import { TPPlay } from '@stores/RNObserverStore';
+import { dummyPlaylist } from '@objects/Playlist';
+import biliSearchFetch from '@utils/mediafetch/bilisearch';
 
 const { getState } = noxPlayingList;
 
@@ -249,7 +251,7 @@ export const _playFromSearch = async ({
   currentPlayingList,
   playlists,
   playFromPlaylistF = playFromPlaylist,
-  shuffleAllF = shuffleAll,
+  // shuffleAllF = shuffleAll,
   playAsSearchListF = playAsSearchList,
 }: PlayFromSearch) => {
   // first go through the current playlist and match the exact song name with query.
@@ -308,8 +310,15 @@ export const _playFromSearch = async ({
       }
     }
   }
-  logger.debug('[playFromSearch] nothing matched; shuffling all');
-  shuffleAllF();
+  logger.debug(
+    '[playFromSearch] nothing matched; playing from search to at least play something',
+  );
+  // shuffleAllF();
+  const playlist = {
+    ...dummyPlaylist('Search', PlaylistTypes.Search),
+    ...(await biliSearchFetch.regexFetch({ url: query })),
+  };
+  playFromPlaylistF({ playlist });
   return true;
 };
 

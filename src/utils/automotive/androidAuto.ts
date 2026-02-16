@@ -10,13 +10,13 @@ export const buildBrowseTree = (playlists: {
 }) => {
   if (!isAndroid) return;
   useNoxMobile.getState().updateBrowseTree({
-    PlaylistTab: Object.keys(playlists).map(key => {
-      return {
+    PlaylistTab: Object.keys(playlists)
+      .filter(v => playlists[v].songList.length > 0)
+      .map(key => ({
         mediaId: `${PlaylistMediaID}${key}`,
         title: playlists[key].title,
         playable: '0',
-      };
-    }),
+      })),
   });
 };
 

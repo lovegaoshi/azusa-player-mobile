@@ -233,6 +233,10 @@ const reExtractions: ReExtraction<NoxNetwork.NoxRegexFetch>[] = [
     fetch: biliChannelFetch.regexFetch,
   },
   {
+    match: biliChannelFetch.regexSearchMatch4,
+    fetch: biliChannelFetch.regexFetch,
+  },
+  {
     match: biliChannelAudioFetch.regexSearchMatch,
     fetch: biliChannelAudioFetch.regexFetch,
   },

@@ -34,6 +34,7 @@ const PlaylistItem = ({
   icon,
   confirmOnDelete = () => undefined,
   leadColor,
+  beginDrag,
 }: PlaylistItemProps) => {
   const currentPlayingList = useNoxSetting(state => state.currentPlayingList);
 
@@ -42,8 +43,7 @@ const PlaylistItem = ({
     <View style={styles.playlistItemContainer}>
       <TouchableOpacity
         style={{ backgroundColor: leadColor, width: 15 }}
-        // HACK: disabling this off for now bc UX isnt great
-        // onPressIn={beginDrag}
+        onPressIn={beginDrag}
       />
       <View style={styles.playlistItemTextContainer}>
         <Text
