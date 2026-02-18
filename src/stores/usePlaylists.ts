@@ -93,14 +93,16 @@ const store: StateCreator<PlaylistsStore, [], [], PlaylistsStore> = (
     set({ favoritePlaylist: val, playlists });
   },
 
-  addPlaylist: playlist => {
+  addPlaylist: async playlist => {
+    playlist.songCount = playlist.songList.length;
     const { playlistIds, playlists } = get();
     const newPlaylistIds = playlistIds.concat(playlist.id);
+    await savePlaylist(playlist);
+    playlist.songList = [];
     set({
       playlists: { ...playlists, [playlist.id]: playlist },
       playlistIds: newPlaylistIds,
     });
-    savePlaylist(playlist);
     savePlaylistIds(newPlaylistIds);
   },
   removePlaylist: playlistId => {

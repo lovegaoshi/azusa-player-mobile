@@ -61,6 +61,7 @@ declare global {
       refresh?: (v: Playlist) => Promise<SearchPlaylist>;
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       refreshToken?: any;
+      songCount?: number;
     }
 
     export interface SearchPlaylist extends Partial<Playlist> {

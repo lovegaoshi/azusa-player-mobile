@@ -1,4 +1,8 @@
-import { PlaylistMediaID, YTMChartMediaID } from '@enums/Playlist';
+import {
+  PlaylistMediaID,
+  PlaylistTypes,
+  YTMChartMediaID,
+} from '@enums/Playlist';
 import { isAndroid } from '@utils/RNUtils';
 import logger from '../Logger';
 import { fetchYtbiPlaylist } from '@utils/mediafetch/ytbPlaylist.ytbi';
@@ -11,7 +15,11 @@ export const buildBrowseTree = (playlists: {
   if (!isAndroid) return;
   useNoxMobile.getState().updateBrowseTree({
     PlaylistTab: Object.keys(playlists)
-      .filter(v => playlists[v].songList.length > 0)
+      .filter(
+        v =>
+          playlists[v].songCount !== 0 &&
+          playlists[v].type === PlaylistTypes.Typical,
+      )
       .map(key => ({
         mediaId: `${PlaylistMediaID}${key}`,
         title: playlists[key].title,

@@ -131,6 +131,7 @@ export const savePlaylist = async (
   try {
     const savingPlaylist = {
       ...playlist,
+      songCount: playlist.songList.length,
       songList: await saveChucked(playlist.id, playlist.songList, false),
     };
     // save chunks

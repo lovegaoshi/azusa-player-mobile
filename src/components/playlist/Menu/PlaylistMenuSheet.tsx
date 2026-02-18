@@ -121,6 +121,13 @@ export default function PlaylistMenuSheet({
         }}
         disabled={limitedPlaylistFeatures}
       />
+      {__DEV__ && (
+        <SheetIconEntry
+          text={t('console.log')}
+          icon={'console'}
+          onPress={() => console.log(playlist)}
+        />
+      )}
     </NoxBottomSheet>
   );
 }
