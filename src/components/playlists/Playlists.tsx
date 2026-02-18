@@ -25,6 +25,7 @@ import { PaperText as Text } from '@components/commonui/ScaledText';
 interface NewButtonProps {
   setNewPlaylistDialogOpen: (v: boolean) => void;
 }
+
 const SearchPlaylistAsNewButton = ({
   setNewPlaylistDialogOpen,
 }: NewButtonProps) => {
@@ -53,6 +54,7 @@ export const Playlists = ({
   const currentPlaylist = useNoxSetting(state => state.currentPlaylist);
   const currentPlayingList = useNoxSetting(state => state.currentPlayingList);
   const playlists = useNoxSetting(state => state.playlists);
+  const searchPlaylist = useNoxSetting(state => state.searchPlaylist);
   const playlistIds = useNoxSetting(state => state.playlistIds);
   const playerStyle = useNoxSetting(state => state.playerStyle);
   const playerSetting = useNoxSetting(state => state.playerSetting);
@@ -169,15 +171,14 @@ export const Playlists = ({
         ]}
       >
         <PlaylistItem
-          item={playlists[StorageKeys.SEARCH_PLAYLIST_KEY]}
+          item={searchPlaylist}
           icon={
             <SearchPlaylistAsNewButton
               setNewPlaylistDialogOpen={setNewPlaylistDialogOpen}
             />
           }
           leadColor={
-            currentPlayingList.id ===
-            playlists[StorageKeys.SEARCH_PLAYLIST_KEY].id
+            currentPlayingList.id === searchPlaylist.id
               ? playerStyle.colors.primary
               : undefined
           }
@@ -185,7 +186,7 @@ export const Playlists = ({
       </TouchableRipple>
       <NewPlaylistDialog
         visible={newPlaylistDialogOpen}
-        fromList={playlists[StorageKeys.SEARCH_PLAYLIST_KEY]}
+        fromList={searchPlaylist}
         onClose={() => setNewPlaylistDialogOpen(false)}
         onSubmit={() => setNewPlaylistDialogOpen(false)}
       />
