@@ -13,6 +13,7 @@ export const updatePlaylistSongs = (
     .filter(v => !playlistSongsId.has(v.id))
     .concat(playlist.songList)
     .filter(v => !removeSongsId.has(v.id));
+  playlist.songCount = playlist.songList.length;
   return playlist;
 };
 
