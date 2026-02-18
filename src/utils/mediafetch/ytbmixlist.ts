@@ -3,6 +3,7 @@ import last from 'lodash/last';
 import SongTS from '@objects/Song';
 import { timestampToSeconds } from '../Utils';
 import { Source } from '@enums/MediaFetch';
+import { DEFAULT_UA } from '../BiliFetch';
 
 const fetchYTPlaylist = async (
   playlistId: string,
@@ -13,6 +14,7 @@ const fetchYTPlaylist = async (
     `https://www.youtube.com/watch?v=${playlistId}&list=RD${
       mixlistId ?? playlistId
     }`,
+    { headers: { 'User-Agent': DEFAULT_UA } },
   );
   const content = await res.text();
   // https://www.thepythoncode.com/code/get-youtube-data-python
