@@ -1,6 +1,6 @@
 diff --git a/node_modules/youtubei.js/dist/src/parser/classes/Video2.js b/node_modules/youtubei.js/dist/src/parser/classes/Video2.js
 new file mode 100644
-index 0000000..5b65dd0
+index 0000000..bf53f2d
 --- /dev/null
 +++ b/node_modules/youtubei.js/dist/src/parser/classes/Video2.js
 @@ -0,0 +1,130 @@
@@ -147,6 +147,23 @@ index bd6fbd4..b965ef2 100644
  export default class VideoCard extends Video {
      static type = 'VideoCard';
      metadata_text;
+diff --git a/node_modules/youtubei.js/dist/src/utils/Constants.js b/node_modules/youtubei.js/dist/src/utils/Constants.js
+index 53a6b04..0252fe4 100644
+--- a/node_modules/youtubei.js/dist/src/utils/Constants.js
++++ b/node_modules/youtubei.js/dist/src/utils/Constants.js
+@@ -53,9 +53,9 @@ export const CLIENTS = {
+     },
+     ANDROID: {
+         NAME: 'ANDROID',
+-        VERSION: '19.35.36',
+-        SDK_VERSION: 33,
+-        USER_AGENT: 'com.google.android.youtube/19.35.36(Linux; U; Android 13; en_US; SM-S908E Build/TP1A.220624.014) gzip'
++        VERSION: '21.03.36',
++        SDK_VERSION: 36,
++        USER_AGENT: 'com.google.android.youtube/21.03.36(Linux; U; Android 16; en_US; SM-S908E Build/TP1A.220624.014) gzip'
+     },
+     YTSTUDIO_ANDROID: {
+         NAME: 'ANDROID_CREATOR',
 diff --git a/node_modules/youtubei.js/index.js b/node_modules/youtubei.js/index.js
 new file mode 100644
 index 0000000..8afb564
