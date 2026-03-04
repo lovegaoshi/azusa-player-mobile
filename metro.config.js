@@ -4,7 +4,7 @@
  *
  * @format
  */
-const { getDefaultConfig, mergeConfig } = require('@react-native/metro-config');
+const { getDefaultConfig } = require('@react-native/metro-config');
 const { getSentryExpoConfig } = require('@sentry/react-native/metro');
 
 const config = getSentryExpoConfig(__dirname);
@@ -14,4 +14,4 @@ config.resolver.sourceExts.push('sql');
 // something must be going on here as setting to the serialized object wont work
 config.transformer = rnconfig.transformer;
 
-module.exports = config; //mergeConfig(rnconfig, config);
+module.exports = config;
