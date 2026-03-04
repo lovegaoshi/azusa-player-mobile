@@ -7,52 +7,45 @@ import com.facebook.react.PackageList
 import com.facebook.react.ReactApplication
 import com.facebook.react.ReactNativeApplicationEntryPoint.loadReactNative
 import com.facebook.react.ReactHost
-import com.facebook.react.ReactNativeHost
 import com.facebook.react.ReactPackage
 import com.facebook.react.common.ReleaseLevel
 import com.facebook.react.defaults.DefaultNewArchitectureEntryPoint
-import com.facebook.react.defaults.DefaultReactNativeHost
-import expo.modules.ReactNativeHostWrapper
 import com.otahotupdate.OtaHotUpdate
 import com.nativenoxmodule.NativeNoxModulePackage
 import com.nativenoxmodule.NativeWidgetModulePackage
 import expo.modules.ApplicationLifecycleDispatcher
+import expo.modules.ExpoReactHostFactory
 
 class MainApplication : Application(), ReactApplication {
-    override val reactNativeHost: ReactNativeHost =
-        ReactNativeHostWrapper(this, object : DefaultReactNativeHost(this) {
 
+    fun getJSBundleFile(): String {
+        val sharedPref = this@MainApplication.getSharedPreferences(
+            "com.noxplay.noxplayer.APMSettings", MODE_PRIVATE)
+        if (sharedPref.getBoolean("safemode", false)) {
+            Log.d("APM", "launching in safe mode")
+            with (sharedPref.edit()) {
+                putBoolean("safemode", false)
+                apply()
+            }
+            return "assets://index.android.bundle"
+        }
+        return OtaHotUpdate.bundleJS(this@MainApplication)
+    }
 
-            override fun getPackages(): List<ReactPackage> =
+    override val reactHost: ReactHost by lazy {
+        ExpoReactHostFactory.getDefaultReactHost(
+            context = applicationContext,
+            packageList =
                 PackageList(this).packages.apply {
                     // Packages that cannot be autolinked yet can be added manually here, for example:
                     // add(MyReactNativePackage())
                     add(NativeNoxModulePackage())
                     add(NativeWidgetModulePackage())
-                }
-
-            override fun getJSMainModuleName(): String = ".expo/.virtual-metro-entry"
-            override fun getJSBundleFile(): String {
-                val sharedPref = this@MainApplication.getSharedPreferences(
-                    "com.noxplay.noxplayer.APMSettings", MODE_PRIVATE)
-                if (sharedPref.getBoolean("safemode", false)) {
-                    Log.d("APM", "launching in safe mode")
-                    with (sharedPref.edit()) {
-                        putBoolean("safemode", false)
-                        apply()
-                    }
-                    return "assets://index.android.bundle"
-                }
-                return OtaHotUpdate.bundleJS(this@MainApplication)
-            }
-            override fun getUseDeveloperSupport(): Boolean = BuildConfig.DEBUG
-            override val isNewArchEnabled: Boolean = BuildConfig.IS_NEW_ARCHITECTURE_ENABLED
-            override val isHermesEnabled: Boolean = BuildConfig.IS_HERMES_ENABLED
-        })
-
-
-    override val reactHost: ReactHost
-        get() = ReactNativeHostWrapper.createReactHost(applicationContext, reactNativeHost)
+                },
+            jsBundleFilePath = getJSBundleFile(),
+            jsMainModulePath = ".expo/.virtual-metro-entry"
+        )
+    }
 
     override fun onCreate() {
         super.onCreate()
