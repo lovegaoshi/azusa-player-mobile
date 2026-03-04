@@ -3,7 +3,7 @@ import { BackHandler, SafeAreaView, StyleSheet, View } from 'react-native';
 import { Button, Avatar, ActivityIndicator } from 'react-native-paper';
 import { WebView } from 'react-native-webview';
 import { useFocusEffect } from '@react-navigation/native';
-import CookieManager from '@react-native-cookies/cookies';
+import CookieManager from '@preeternal/react-native-cookie-manager';
 import { get_current_user } from 'libmuse';
 import { useTranslation } from 'react-i18next';
 

@@ -4,7 +4,7 @@ import axios from 'axios';
 import bigInt from 'big-integer';
 import qs from 'qs';
 import * as cheerio from 'cheerio';
-import CookieManager from '@react-native-cookies/cookies';
+import CookieManager from '@preeternal/react-native-cookie-manager';
 import he from 'he';
 import { URL } from 'react-native-url-polyfill';
 import logger from '../Logger';
