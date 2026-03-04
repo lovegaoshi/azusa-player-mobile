@@ -1,0 +1,8 @@
+{
+  "image": "mcr.microsoft.com/devcontainers/javascript-node:latest",
+  "features": {
+    "ghcr.io/devcontainers/features/node-yarn:1": {
+      "version": "4.3.0"
+    }
+  }
+}
