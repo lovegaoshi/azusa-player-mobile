@@ -4,16 +4,14 @@
  *
  * @format
  */
-const { getDefaultConfig, mergeConfig } = require('@react-native/metro-config');
-const { withSentryConfig } = require('@sentry/react-native/metro');
+const { getDefaultConfig } = require('@react-native/metro-config');
+const { getSentryExpoConfig } = require('@sentry/react-native/metro');
 
-const config = getDefaultConfig(__dirname);
+const config = getSentryExpoConfig(__dirname);
+const rnconfig = getDefaultConfig(__dirname);
 config.resolver.sourceExts.push('sql');
-const customConfig = {
-  resolver: {
-    // HACK: only enables this if some module is only commonJS
-    // unstable_enablePackageExports: false,
-  },
-};
+// expo metro does not respect disabled auto linking
+// something must be going on here as setting to the serialized object wont work
+config.transformer = rnconfig.transformer;
 
-module.exports = withSentryConfig(mergeConfig(config, customConfig));
+module.exports = config;
