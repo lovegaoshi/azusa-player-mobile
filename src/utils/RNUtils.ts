@@ -30,7 +30,7 @@ const themeConversion = (t: ColorSchemeName) => {
  * @param t ColorSchemeName
  */
 export const setDarkTheme = (t: ColorSchemeName) => {
-  Appearance.setColorScheme(t);
+  Appearance.setColorScheme(t ?? 'unspecified');
   NativeNoxModule?.setDarkTheme?.(themeConversion(t));
 };
 

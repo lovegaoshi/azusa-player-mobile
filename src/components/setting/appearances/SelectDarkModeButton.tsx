@@ -31,7 +31,7 @@ const Button = ({
 
   const selectColorScheme = async () => {
     setSelectVisible(true);
-    const options: ColorSchemeName[] = [null, 'light', 'dark'];
+    const options: ColorSchemeName[] = ['unspecified', 'light', 'dark'];
     const defaultIndex = options.indexOf((await getColorScheme()) || null);
     setCurrentSelectOption({
       options,
@@ -40,7 +40,7 @@ const Button = ({
       onClose: () => setSelectVisible(false),
       onSubmit: (index: number) => {
         setSelectVisible(false);
-        Appearance.setColorScheme(options[index]);
+        Appearance.setColorScheme(options[index] ?? 'unspecified');
         saveColorScheme(options[index]);
       },
       title: t('AppearanceSettings.ColorSchemeName'),
@@ -54,7 +54,10 @@ const Button = ({
       settingCategory="AppearanceSettings"
       modifyDescription={() =>
         t('AppearanceSettings.ColorSchemeDesc', {
-          scheme: ColorSchemei18n(Appearance.getColorScheme(), t),
+          scheme: ColorSchemei18n(
+            Appearance.getColorScheme() ?? 'unspecified',
+            t,
+          ),
         })
       }
     />

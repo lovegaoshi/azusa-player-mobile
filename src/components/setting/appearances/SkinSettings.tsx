@@ -157,7 +157,7 @@ const SkinSettings = () => {
     setChecked(getThemeID(theme));
     setPlayerStyle(theme);
     const newDarkTheme = theme.isAdaptive
-      ? null
+      ? 'unspecified'
       : theme.metaData.darkTheme
         ? 'dark'
         : 'light';
