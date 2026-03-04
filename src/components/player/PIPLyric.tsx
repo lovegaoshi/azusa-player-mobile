@@ -27,6 +27,7 @@ const PIPLyricView = () => {
       height={height / 2 + 10}
       showUI={false}
       noScrollThrottle={true}
+      fadeEffect={false}
     />
   ) : (
     <></>
