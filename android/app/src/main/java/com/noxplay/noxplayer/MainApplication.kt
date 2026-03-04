@@ -31,7 +31,7 @@ class MainApplication : Application(), ReactApplication {
                     add(NativeWidgetModulePackage())
                 }
 
-            override fun getJSMainModuleName(): String = "index"
+            override fun getJSMainModuleName(): String = ".expo/.virtual-metro-entry"
             override fun getJSBundleFile(): String {
                 val sharedPref = this@MainApplication.getSharedPreferences(
                     "com.noxplay.noxplayer.APMSettings", MODE_PRIVATE)

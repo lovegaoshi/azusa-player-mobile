@@ -5,15 +5,11 @@
  * @format
  */
 const { getDefaultConfig, mergeConfig } = require('@react-native/metro-config');
-const { withSentryConfig } = require('@sentry/react-native/metro');
+const { getSentryExpoConfig } = require('@sentry/react-native/metro');
 
-const config = getDefaultConfig(__dirname);
+const config = getSentryExpoConfig(__dirname);
+const rnconfig = getDefaultConfig(__dirname);
 config.resolver.sourceExts.push('sql');
-const customConfig = {
-  resolver: {
-    // HACK: only enables this if some module is only commonJS
-    // unstable_enablePackageExports: false,
-  },
-};
+config.transformer = rnconfig.transformer;
 
-module.exports = withSentryConfig(mergeConfig(config, customConfig));
+module.exports = config; //mergeConfig(rnconfig, config);

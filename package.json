@@ -206,5 +206,20 @@
     "node": ">=18.0.0"
   },
   "isSwift": true,
-  "packageManager": "yarn@4.13.0"
+  "packageManager": "yarn@4.13.0",
+  "expo": {
+    "autolinking": {
+      "android": {
+        "exclude": [
+          "react-native-carplay",
+          "nodejs-mobile-react-native"
+        ]
+      },
+      "ios": {
+        "exclude": [
+          "nodejs-mobile-react-native"
+        ]
+      }
+    }
+  }
 }
