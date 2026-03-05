@@ -32,7 +32,7 @@ export default function SongMenuSheet() {
   const sheet = useRef<TrueSheet>(null);
   const track = useTrackStore(s => s.track);
   const song = track?.song;
-  const currentPlaylist = useNoxSetting(state => state.currentPlaylist);
+  const currentPlayingList = useNoxSetting(state => state.currentPlayingList);
   const playerStyle = useNoxSetting(state => state.playerStyle);
   const { t } = useTranslation();
   const updateTrack = useTrackStore(state => state.updateTrack);
@@ -49,7 +49,7 @@ export default function SongMenuSheet() {
   const selectedPlaylist = () => {
     const songs = [song];
     return {
-      ...currentPlaylist,
+      ...currentPlayingList,
       songList: songs,
       title:
         songs.length > 1
@@ -67,7 +67,7 @@ export default function SongMenuSheet() {
 
   const reloadSong = async () => {
     showSheet(false);
-    const currentPlaylist2 = await getPlaylist(currentPlaylist.id);
+    const currentPlaylist2 = await getPlaylist(currentPlayingList.id);
     const metadata = await playlistCRUD.updateSongMetadata(
       playlistCRUD.findSongIndex(song),
       currentPlaylist2,
