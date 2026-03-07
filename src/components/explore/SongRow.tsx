@@ -97,7 +97,7 @@ export const BiliSongRow = ({
 };
 
 // TODO: abstract as a parent class to above
-export const YTSongRow = ({ songs = [], title }: YTSongRowProp) => {
+export const YTSongRow = ({ playlists = [], title }: YTSongRowProp) => {
   const navigationGlobal = useNavigation();
   const playerStyle = useNoxSetting(state => state.playerStyle);
   const scroll = useNoxSetting(state => state.incSongListScrollCounter);
@@ -113,7 +113,7 @@ export const YTSongRow = ({ songs = [], title }: YTSongRowProp) => {
       params: { screen: NoxRoutes.Playlist, pop: true },
     });
     progressEmitter(100);
-    const playlist = await item.getPlaylist();
+    const playlist = await item.getPlaylist(progressEmitter);
     playAsSearchList({
       songs: playlist.songs,
       song: playlist.item,
@@ -138,7 +138,7 @@ export const YTSongRow = ({ songs = [], title }: YTSongRowProp) => {
       )}
       <FlatList
         showsHorizontalScrollIndicator={false}
-        data={songs}
+        data={playlists}
         horizontal
         renderItem={({ item }) => (
           <View style={styles.albumContainer}>

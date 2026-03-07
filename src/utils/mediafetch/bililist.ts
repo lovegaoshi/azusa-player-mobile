@@ -32,12 +32,19 @@ export const getBVIDFast = async (mid: string) => {
     .flat();
 };
 
-const resolveBiliList = async (mid: string, list: any) => {
+const resolveBiliList = async (
+  mid: string,
+  list: any,
+  progressEmitter?: NoxUtils.ProgressEmitter,
+) => {
   if (list.meta.season_id) {
-    return fetchBiliColleList(mid, list.meta.season_id);
+    return fetchBiliColleList(mid, list.meta.season_id, progressEmitter);
   }
   if (list.meta.series_id) {
-    return fetchBiliBVIDs(await fetchBiliSeriesList(mid, list.meta.series_id));
+    return fetchBiliBVIDs(
+      await fetchBiliSeriesList(mid, list.meta.series_id),
+      progressEmitter,
+    );
   }
   return [];
 };
@@ -51,8 +58,8 @@ export const getListAsYTSongRowCard = async (mid: string) => {
         cover: i0hdslbHTTPResolve(v.meta.cover),
         name: v.meta.name,
         singer: v.meta.total,
-        getPlaylist: async () => ({
-          songs: await resolveBiliList(mid, v),
+        getPlaylist: async (progressEmitter?: NoxUtils.ProgressEmitter) => ({
+          songs: await resolveBiliList(mid, v, progressEmitter),
         }),
       })),
     v => v,

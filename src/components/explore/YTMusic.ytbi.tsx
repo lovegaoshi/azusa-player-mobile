@@ -35,7 +35,7 @@ export const YTMixedContent = ({ content }: ContentProps) => {
     case 'playlist':
       return (
         <YTSongRow
-          songs={filteredContent.map(v =>
+          playlists={filteredContent.map(v =>
             PlaylistTransform(v as MusicTwoRowItem),
           )}
           title={title}
@@ -58,7 +58,7 @@ export const YTMixedContent = ({ content }: ContentProps) => {
     case 'artist':
       return (
         <YTSongRow
-          songs={filteredContent.map(v =>
+          playlists={filteredContent.map(v =>
             ArtistTransform(v as MusicTwoRowItem),
           )}
           title={title}
