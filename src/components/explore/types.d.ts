@@ -2,10 +2,12 @@ export interface YTSongRowCard {
   cover: string;
   name: string;
   singer?: string;
-  getPlaylist: () => Promise<{ songs: NoxMedia.Song[]; item?: NoxMedia.Song }>;
+  getPlaylist: (
+    progressEmitter?: NoxUtils.ProgressEmitter,
+  ) => Promise<{ songs: NoxMedia.Song[]; item?: NoxMedia.Song }>;
 }
 
 export interface YTSongRowProp {
-  songs?: YTSongRowCard[];
+  playlists?: YTSongRowCard[];
   title?: string;
 }

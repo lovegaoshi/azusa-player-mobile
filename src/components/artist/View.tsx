@@ -206,7 +206,7 @@ const Artist = ({ navigation }: NoxComponent.StackNavigationProps) => {
           .map(v => (
             <YTSongRow
               key={v.data[0].cover}
-              songs={v.data}
+              playlists={v.data}
               title={t(v.name ?? 'Albums')}
             />
           ))}

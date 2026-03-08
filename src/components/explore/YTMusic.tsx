@@ -36,21 +36,21 @@ export const YTMixedContent = ({ content }: ContentProps) => {
     case 'artist':
       return (
         <YTSongRow
-          songs={YTArtistTransform(filteredContent as RelatedArtist[])}
+          playlists={YTArtistTransform(filteredContent as RelatedArtist[])}
           title={content.title!}
         />
       );
     case 'playlist':
       return (
         <YTSongRow
-          songs={YTPlaylistTransform(filteredContent as ParsedPlaylist[])}
+          playlists={YTPlaylistTransform(filteredContent as ParsedPlaylist[])}
           title={content.title!}
         />
       );
     case 'album':
       return (
         <YTSongRow
-          songs={YTAlbumTransform(filteredContent as ParsedAlbum[])}
+          playlists={YTAlbumTransform(filteredContent as ParsedAlbum[])}
           title={content.title!}
         />
       );

@@ -32,6 +32,12 @@ interface LyricViewProps {
   onPress?: () => void;
   visible?: boolean;
   style?: ViewStyle;
+  fadeEffect?: boolean;
+}
+
+interface FadingMaskedViewProps extends React.PropsWithChildren {
+  fade?: boolean;
+  range?: number;
 }
 
 const SpotifyLyricStyle = {
@@ -39,6 +45,30 @@ const SpotifyLyricStyle = {
   fontSize: 20,
   activeFontSize: 20,
   lapsedAsActiveColor: true,
+};
+
+const FadingMaskedView = ({
+  children,
+  range = 0.2,
+  fade = true,
+}: FadingMaskedViewProps) => {
+  if (!fade) {
+    return <>{children}</>;
+  }
+  return (
+    <MaskedView
+      maskElement={
+        <LinearGradient
+          // Background Linear Gradient
+          colors={['transparent', 'black', 'black', 'transparent']}
+          locations={[0, range, 1 - range, 1]}
+          style={styles.container}
+        />
+      }
+    >
+      {children}
+    </MaskedView>
+  );
 };
 
 export const LyricView = ({
@@ -50,6 +80,7 @@ export const LyricView = ({
   onPress = () => undefined,
   visible = true,
   style = styles.container,
+  fadeEffect = true,
 }: LyricViewProps) => {
   const isLandscape = useIsLandscape();
   const playerSetting = useNoxSetting(state => state.playerSetting);
@@ -101,16 +132,7 @@ export const LyricView = ({
           <ActivityIndicator size={70} style={styles.lrcView} />
         </Pressable>
       ) : (
-        <MaskedView
-          maskElement={
-            <LinearGradient
-              // Background Linear Gradient
-              colors={['transparent', 'black', 'black', 'transparent']}
-              locations={[0, 0.2, 0.8, 1]}
-              style={styles.container}
-            />
-          }
-        >
+        <FadingMaskedView fade={fadeEffect}>
           <Lyric
             fontScale={
               (playerSetting.lyricFontScale || playerSetting.fontScale) ?? 1
@@ -141,7 +163,7 @@ export const LyricView = ({
             }
             {...spotifyLyricStyle}
           />
-        </MaskedView>
+        </FadingMaskedView>
       )}
       {showUI && (
         <>
