@@ -47,7 +47,11 @@ const SpotifyLyricStyle = {
   lapsedAsActiveColor: true,
 };
 
-const FadingMaskedView = ({ children, range = 0.2, fade = true }: FadingMaskedViewProps) => {
+const FadingMaskedView = ({
+  children,
+  range = 0.2,
+  fade = true,
+}: FadingMaskedViewProps) => {
   if (!fade) {
     return <>{children}</>;
   }
@@ -65,7 +69,7 @@ const FadingMaskedView = ({ children, range = 0.2, fade = true }: FadingMaskedVi
       {children}
     </MaskedView>
   );
-}
+};
 
 export const LyricView = ({
   track,

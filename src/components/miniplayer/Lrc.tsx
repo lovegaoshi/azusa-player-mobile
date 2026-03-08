@@ -8,6 +8,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useTrackStore } from '@hooks/useActiveTrack';
 import { LyricView } from '../player/Lyric';
 import { useNoxSetting } from '@stores/useApp';
+import logger from '@utils/Logger';
 
 interface Props extends NoxComponent.OpacityProps {
   visible: boolean;
@@ -44,6 +45,11 @@ export default function MiniplayerLrc({
       return () => undefined;
     }, [visible, playerSetting.screenAlwaysWake]),
   );
+
+  logger.debug(
+    `[lrc] dimension: ${dimension.height} - ${dimension.width} - ${insets.bottom}`,
+  );
+
   if (!visible || !track) {
     return <></>;
   }
