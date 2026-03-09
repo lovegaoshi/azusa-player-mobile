@@ -29,11 +29,14 @@ export default function MiniplayerLrc({
 
   const animatedStyle = useAnimatedStyle(() => ({
     opacity: opacity.value,
+  }));
+
+  const lrcStyle: ViewStyle = {
     zIndex: visible ? 1 : -1,
     position: 'absolute',
     bottom: dimension.height - dimension.width - 200 + insets.bottom,
     width: '100%',
-  }));
+  };
 
   useFocusEffect(
     useCallback(() => {
@@ -54,7 +57,7 @@ export default function MiniplayerLrc({
     return <></>;
   }
   return (
-    <Animated.View style={[animatedStyle, style]}>
+    <Animated.View style={[animatedStyle, lrcStyle, style]}>
       <LyricView
         track={track}
         artist="n/a"
