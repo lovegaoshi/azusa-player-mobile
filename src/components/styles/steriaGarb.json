@@ -6486,5 +6486,124 @@
       "onSurfaceDisabled": "rgba(230, 226, 217, 0.38)",
       "backdrop": "rgba(49, 49, 37, 0.4)"
     }
+  },
+  {
+    "metaData": {
+      "themeName": "水镜Beryl",
+      "themeDesc": "【水镜·水漫声收藏集】是bilibili携手水镜Beryl定制打造的个人数字集卡，其中每张数字卡片都将拥有独特编号，各种精美插画、定制音声等期待大家一起解锁，欢迎来到海女的世界！",
+      "themeAuthor": "NoxAutoGen",
+      "themeIcon": "https://i0.hdslb.com/bfs/garb/fafe2c5816c2c0b0edcc05416999c72ce14974df.png",
+      "darkTheme": true
+    },
+    "gifs": [
+      "https://i0.hdslb.com/bfs/garb/204c28294e0aaf274ca8077c7175e44a3d2c912e.png",
+      "https://i0.hdslb.com/bfs/garb/518fa9180dc8c38e633f95cb47203d6841da3865.png",
+      "https://i0.hdslb.com/bfs/garb/9f746643beb210f587947fea5f122a10dc915827.png",
+      "https://i0.hdslb.com/bfs/garb/977eee93a8965155b56659f2d484f458e2837f39.png",
+      "https://i0.hdslb.com/bfs/garb/83b8d9f521248a5264934442921b4e01e9451b64.png",
+      "https://i0.hdslb.com/bfs/garb/6b50e4db599e94b37688c15d62cefa71bbfd552b.png",
+      "https://i0.hdslb.com/bfs/garb/64ae47add821988d11f0702d283d2f24d286ee65.png",
+      "https://i0.hdslb.com/bfs/garb/f899f37a92e12ca989762392ca669b1ffb5276e3.png",
+      "https://i0.hdslb.com/bfs/garb/726a07b11bbc46f56ed435db531a6af31ab5cb4b.png",
+      "https://i0.hdslb.com/bfs/garb/9a4299863a95f37d6fea67706aa59364db5064ef.png",
+      "https://i0.hdslb.com/bfs/garb/b0f08d7050fd6933338c0f38e1d0512702cc68ae.png",
+      "https://i0.hdslb.com/bfs/garb/2e528748e8cf2421fe75b84dc141f5d94357f542.png",
+      "https://i0.hdslb.com/bfs/garb/5e915b6dd0f1b413ccb38fdaad5115b268da4739.png",
+      "https://i0.hdslb.com/bfs/garb/da12964c692016c20dc14e686aae738a04ef7035.png",
+      "https://i0.hdslb.com/bfs/garb/c49b78c1115a8e17d643675ab1cf200b9fdfb850.png",
+      "https://i0.hdslb.com/bfs/garb/4117ab4fc9548b5e123d68ecbe666acfbb8df124.png",
+      "https://i0.hdslb.com/bfs/garb/ae03ac2c27217725578c3d8499c9825c4d4c0600.png",
+      "https://i0.hdslb.com/bfs/garb/3b3e99d7d8aae888386ee22b565e5d95e850b7f1.png",
+      "https://i0.hdslb.com/bfs/garb/e5601eea6fc2fa2af5418410d5f341e796ed258a.png",
+      "https://i0.hdslb.com/bfs/garb/10c894b2f1284af91bc75e6367445695d2be74fd.png"
+    ],
+    "backgroundImages": [
+      {
+        "type": "biliNFTVideoNew",
+        "identifier": "[\"112091\",\"112092\",\"囚缚笼中\"]"
+      },
+      {
+        "type": "biliNFTVideoNew",
+        "identifier": "[\"112091\",\"112092\",\"甜蜜侍奉\"]"
+      },
+      {
+        "type": "biliNFTVideoNew",
+        "identifier": "[\"112091\",\"112092\",\"暖池春水\"]"
+      },
+      {
+        "type": "biliNFTVideoNew",
+        "identifier": "[\"112091\",\"112092\",\"命之高歌\"]"
+      },
+      "https://i0.hdslb.com/bfs/garb/open/7b601503e2d63e59c2298e06d0c659fa0a92672c.png",
+      {
+        "type": "biliNFTVideoNew",
+        "identifier": "[\"112091\",\"112092\",\"光影书香\"]"
+      },
+      {
+        "type": "biliNFTVideoNew",
+        "identifier": "[\"112091\",\"112092\",\"海盐特调\"]"
+      },
+      {
+        "type": "biliNFTVideoNew",
+        "identifier": "[\"112091\",\"112092\",\"课后邀约\"]"
+      },
+      {
+        "type": "biliNFTVideoRedeem",
+        "identifier": "[\"112091\",\"112092\",\"典藏卡·回音咏唱\"]"
+      }
+    ],
+    "customColors": {
+      "maskedBackgroundColor": "rgba(0, 0, 0, 0.60)",
+      "playlistDrawerBackgroundColor": "green",
+      "playlistDrawerBackgroundColorTransparent": "rgba(0, 255, 0, 0.35)",
+      "progressThumbTintColor": "rgb(235, 235, 0)",
+      "progressMinimumTrackTintColor": "rgb(235, 235, 0)",
+      "progressMaximumTrackTintColor": "#FFFFFF",
+      "btnBackgroundColor": "rgb(72, 71, 58)",
+      "textInputSelectionColor": "green"
+    },
+    "colors": {
+      "primary": "#fcf75e",
+      "onPrimary": "rgb(50, 50, 0)",
+      "primaryContainer": "rgb(73, 73, 0)",
+      "onPrimaryContainer": "rgb(234, 234, 0)",
+      "secondary": "rgb(202, 200, 165)",
+      "onSecondary": "rgb(50, 50, 24)",
+      "secondaryContainer": "rgb(73, 72, 45)",
+      "onSecondaryContainer": "rgb(231, 228, 191)",
+      "tertiary": "rgb(164, 208, 189)",
+      "onTertiary": "rgb(11, 55, 42)",
+      "tertiaryContainer": "rgb(37, 78, 64)",
+      "onTertiaryContainer": "rgb(191, 236, 216)",
+      "error": "rgb(255, 180, 171)",
+      "onError": "rgb(105, 0, 5)",
+      "errorContainer": "rgb(147, 0, 10)",
+      "onErrorContainer": "rgb(255, 180, 171)",
+      "background": "rgba(0,0,0, 0.4)",
+      "onBackground": "rgb(230, 226, 217)",
+      "surface": "rgb(28, 28, 23)",
+      "onSurface": "rgba(235, 235, 0, 1)",
+      "text": "#fcf75e",
+      "surfaceVariant": "rgb(10, 10, 10)",
+      "onSurfaceVariant": "rgb(225, 225, 0)",
+      "outline": "rgb(147, 145, 130)",
+      "outlineVariant": "rgb(72, 71, 58)",
+      "shadow": "rgb(0, 0, 0)",
+      "scrim": "rgb(0, 0, 0)",
+      "inverseSurface": "rgb(230, 226, 217)",
+      "inverseOnSurface": "rgb(49, 49, 43)",
+      "inversePrimary": "rgb(98, 98, 0)",
+      "elevation": {
+        "level0": "transparent",
+        "level1": "rgb(53, 56, 57)",
+        "level2": "rgb(10, 10, 10)",
+        "level3": "rgb(10, 10, 10)",
+        "level4": "rgb(49, 49, 20)",
+        "level5": "rgb(53, 53, 20)"
+      },
+      "surfaceDisabled": "rgba(230, 226, 217, 0.12)",
+      "onSurfaceDisabled": "rgba(230, 226, 217, 0.38)",
+      "backdrop": "rgba(49, 49, 37, 0.4)"
+    }
   }
 ]
