@@ -1,5 +1,5 @@
 diff --git a/node_modules/react-native-paper/src/components/Menu/Menu.tsx b/node_modules/react-native-paper/src/components/Menu/Menu.tsx
-index 55922c1..55d7c97 100644
+index 9b53403..b352e68 100644
 --- a/node_modules/react-native-paper/src/components/Menu/Menu.tsx
 +++ b/node_modules/react-native-paper/src/components/Menu/Menu.tsx
 @@ -346,6 +346,7 @@ const Menu = ({
@@ -10,7 +10,7 @@ index 55922c1..55d7c97 100644
      Animated.parallel([
        Animated.timing(scaleAnimationRef.current, {
          toValue: { x: menuLayoutResult.width, y: menuLayoutResult.height },
-@@ -367,11 +368,11 @@ const Menu = ({
+@@ -365,11 +366,12 @@ const Menu = ({
      });
    }, [anchor, attachListeners, measureAnchorLayout, theme]);
  
@@ -19,21 +19,29 @@ index 55922c1..55d7c97 100644
      removeListeners();
  
      const { animation } = theme;
--
+     
 +    await new Promise(resolve => setTimeout(resolve, 1));
      Animated.timing(opacityAnimationRef.current, {
        toValue: 0,
        duration: ANIMATION_DURATION * animation.scale,
-@@ -383,6 +384,8 @@ const Menu = ({
-         setRendered(false);
-         prevRendered.current = false;
-         focusFirstDOMNode(anchorRef.current);
-+        scaleAnimationRef.current.setValue({x: 0, y: 0});
-+        callback?.();
-       }
+@@ -380,6 +382,8 @@ const Menu = ({
+       setRendered(false);
+       prevRendered.current = false;
+       focusFirstDOMNode(anchorRef.current);
++      scaleAnimationRef.current.setValue({x: 0, y: 0});
++      callback?.();
      });
    }, [removeListeners, theme]);
-@@ -640,7 +643,7 @@ const Menu = ({
+ 
+@@ -425,6 +429,7 @@ const Menu = ({
+   }, [removeListeners, keyboardDidHide, keyboardDidShow]);
+ 
+   React.useEffect(() => {
++    console.log('paper', visible, rendered);
+     if (prevVisible.current !== visible) {
+       prevVisible.current = visible;
+ 
+@@ -636,7 +641,7 @@ const Menu = ({
            <Pressable
              accessibilityLabel={overlayAccessibilityLabel}
              accessibilityRole="button"
@@ -42,7 +50,7 @@ index 55922c1..55d7c97 100644
              style={styles.pressableOverlay}
            />
            <View
-@@ -651,7 +654,7 @@ const Menu = ({
+@@ -647,7 +652,7 @@ const Menu = ({
              accessibilityViewIsModal={visible}
              style={[styles.wrapper, positionStyle, style]}
              pointerEvents={pointerEvents}
