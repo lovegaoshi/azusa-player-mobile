@@ -1,7 +1,22 @@
 diff --git a/node_modules/react-native-paper/src/components/Menu/Menu.tsx b/node_modules/react-native-paper/src/components/Menu/Menu.tsx
-index 9b53403..b352e68 100644
+index 9b53403..191684b 100644
 --- a/node_modules/react-native-paper/src/components/Menu/Menu.tsx
 +++ b/node_modules/react-native-paper/src/components/Menu/Menu.tsx
+@@ -266,12 +266,12 @@ const Menu = ({
+     backHandlerSubscriptionRef.current = addEventListener(
+       BackHandler,
+       'hardwareBackPress',
+-      handleDismiss
++      () => visible && hide(onDismiss),
+     );
+     dimensionsSubscriptionRef.current = addEventListener(
+       Dimensions,
+       'change',
+-      handleDismiss
++      () => visible && hide(onDismiss),
+     );
+     Platform.OS === 'web' && document.addEventListener('keyup', handleKeypress);
+   }, [handleDismiss, handleKeypress]);
 @@ -346,6 +346,7 @@ const Menu = ({
  
      attachListeners();
@@ -10,21 +25,21 @@ index 9b53403..b352e68 100644
      Animated.parallel([
        Animated.timing(scaleAnimationRef.current, {
          toValue: { x: menuLayoutResult.width, y: menuLayoutResult.height },
-@@ -365,11 +366,12 @@ const Menu = ({
+@@ -365,11 +366,11 @@ const Menu = ({
      });
    }, [anchor, attachListeners, measureAnchorLayout, theme]);
  
 -  const hide = React.useCallback(() => {
 +  const hide = React.useCallback(async (callback?: () => unknown) => {
      removeListeners();
- 
+-
      const { animation } = theme;
      
 +    await new Promise(resolve => setTimeout(resolve, 1));
      Animated.timing(opacityAnimationRef.current, {
        toValue: 0,
        duration: ANIMATION_DURATION * animation.scale,
-@@ -380,6 +382,8 @@ const Menu = ({
+@@ -380,6 +381,8 @@ const Menu = ({
        setRendered(false);
        prevRendered.current = false;
        focusFirstDOMNode(anchorRef.current);
@@ -33,15 +48,7 @@ index 9b53403..b352e68 100644
      });
    }, [removeListeners, theme]);
  
-@@ -425,6 +429,7 @@ const Menu = ({
-   }, [removeListeners, keyboardDidHide, keyboardDidShow]);
- 
-   React.useEffect(() => {
-+    console.log('paper', visible, rendered);
-     if (prevVisible.current !== visible) {
-       prevVisible.current = visible;
- 
-@@ -636,7 +641,7 @@ const Menu = ({
+@@ -636,7 +639,7 @@ const Menu = ({
            <Pressable
              accessibilityLabel={overlayAccessibilityLabel}
              accessibilityRole="button"
@@ -50,7 +57,7 @@ index 9b53403..b352e68 100644
              style={styles.pressableOverlay}
            />
            <View
-@@ -647,7 +652,7 @@ const Menu = ({
+@@ -647,7 +650,7 @@ const Menu = ({
              accessibilityViewIsModal={visible}
              style={[styles.wrapper, positionStyle, style]}
              pointerEvents={pointerEvents}
