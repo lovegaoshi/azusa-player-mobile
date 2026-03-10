@@ -105,7 +105,7 @@ const resolveURL = async (song: NoxMedia.Song) => {
           }),
         ),
         json = await res.json();
-      return { url: json.data.raw_url };
+      return { url: json.data.raw_url.replaceAll('http://', 'https://') };
     } catch {
       logger.error(`[alist] failed to resolve ${song.singerId}${song.bvid}`);
     }
