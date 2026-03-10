@@ -1,7 +1,22 @@
 diff --git a/node_modules/react-native-paper/src/components/Menu/Menu.tsx b/node_modules/react-native-paper/src/components/Menu/Menu.tsx
-index 55922c1..55d7c97 100644
+index 9b53403..191684b 100644
 --- a/node_modules/react-native-paper/src/components/Menu/Menu.tsx
 +++ b/node_modules/react-native-paper/src/components/Menu/Menu.tsx
+@@ -266,12 +266,12 @@ const Menu = ({
+     backHandlerSubscriptionRef.current = addEventListener(
+       BackHandler,
+       'hardwareBackPress',
+-      handleDismiss
++      () => visible && hide(onDismiss),
+     );
+     dimensionsSubscriptionRef.current = addEventListener(
+       Dimensions,
+       'change',
+-      handleDismiss
++      () => visible && hide(onDismiss),
+     );
+     Platform.OS === 'web' && document.addEventListener('keyup', handleKeypress);
+   }, [handleDismiss, handleKeypress]);
 @@ -346,6 +346,7 @@ const Menu = ({
  
      attachListeners();
@@ -10,30 +25,30 @@ index 55922c1..55d7c97 100644
      Animated.parallel([
        Animated.timing(scaleAnimationRef.current, {
          toValue: { x: menuLayoutResult.width, y: menuLayoutResult.height },
-@@ -367,11 +368,11 @@ const Menu = ({
+@@ -365,11 +366,11 @@ const Menu = ({
      });
    }, [anchor, attachListeners, measureAnchorLayout, theme]);
  
 -  const hide = React.useCallback(() => {
 +  const hide = React.useCallback(async (callback?: () => unknown) => {
      removeListeners();
- 
-     const { animation } = theme;
 -
+     const { animation } = theme;
+     
 +    await new Promise(resolve => setTimeout(resolve, 1));
      Animated.timing(opacityAnimationRef.current, {
        toValue: 0,
        duration: ANIMATION_DURATION * animation.scale,
-@@ -383,6 +384,8 @@ const Menu = ({
-         setRendered(false);
-         prevRendered.current = false;
-         focusFirstDOMNode(anchorRef.current);
-+        scaleAnimationRef.current.setValue({x: 0, y: 0});
-+        callback?.();
-       }
+@@ -380,6 +381,8 @@ const Menu = ({
+       setRendered(false);
+       prevRendered.current = false;
+       focusFirstDOMNode(anchorRef.current);
++      scaleAnimationRef.current.setValue({x: 0, y: 0});
++      callback?.();
      });
    }, [removeListeners, theme]);
-@@ -640,7 +643,7 @@ const Menu = ({
+ 
+@@ -636,7 +639,7 @@ const Menu = ({
            <Pressable
              accessibilityLabel={overlayAccessibilityLabel}
              accessibilityRole="button"
@@ -42,7 +57,7 @@ index 55922c1..55d7c97 100644
              style={styles.pressableOverlay}
            />
            <View
-@@ -651,7 +654,7 @@ const Menu = ({
+@@ -647,7 +650,7 @@ const Menu = ({
              accessibilityViewIsModal={visible}
              style={[styles.wrapper, positionStyle, style]}
              pointerEvents={pointerEvents}
