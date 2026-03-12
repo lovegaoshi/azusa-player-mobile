@@ -21,6 +21,7 @@ import usePlaylistBrowseTree from '@hooks/usePlaylistBrowseTree';
 import useNavigation from '@hooks/useNavigation';
 import { useIsLandscape } from '@hooks/useOrientation';
 import { PaperText as Text } from '@components/commonui/ScaledText';
+import logger from '@utils/Logger';
 
 interface NewButtonProps {
   setNewPlaylistDialogOpen: (v: boolean) => void;
@@ -104,7 +105,10 @@ export const Playlists = ({
       <RectButton
         key={index}
         onPress={() => goToPlaylist(item)}
-        onLongPress={beginDrag}
+        onLongPress={() => {
+          logger.warn('[flashdrag] begin drag via long press');
+          beginDrag();
+        }}
         style={[
           {
             backgroundColor:
@@ -117,7 +121,10 @@ export const Playlists = ({
         ]}
       >
         <PlaylistItem
-          beginDrag={beginDrag}
+          beginDrag={() => {
+            logger.warn('[flashdrag] begin drag via pressin');
+            beginDrag();
+          }}
           item={playlist}
           confirmOnDelete={confirmOnDelete}
           leadColor={
