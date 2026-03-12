@@ -14,9 +14,11 @@ import android.provider.Settings
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.content.FileProvider
 import androidx.core.net.toUri
+import androidx.core.view.WindowInsetsControllerCompat
 import com.facebook.react.bridge.Arguments
 import com.facebook.react.bridge.Promise
 import com.facebook.react.bridge.ReactApplicationContext
+import com.facebook.react.bridge.UiThreadUtil
 import com.facebook.react.bridge.WritableArray
 import com.facebook.react.bridge.WritableMap
 import com.facebook.react.bridge.WritableNativeArray
@@ -256,12 +258,30 @@ class NativeNoxModule(reactContext: ReactApplicationContext) : NativeNoxModuleSp
     }
 
     override fun setDarkTheme(mode: Double) {
-        val activity = getActivity()
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-            val ui = activity?.getSystemService(UI_MODE_SERVICE) as UiModeManager?
-            ui?.setApplicationNightMode(mode.toInt())
-        } else {
-            AppCompatDelegate.setDefaultNightMode(mode.toInt())
+        UiThreadUtil.runOnUiThread {
+            val activity = getActivity()
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+                val ui = activity?.getSystemService(UI_MODE_SERVICE) as UiModeManager?
+                ui?.setApplicationNightMode(mode.toInt())
+            } else {
+                AppCompatDelegate.setDefaultNightMode(mode.toInt())
+            }
+            // https://github.com/Expensify/App/blob/eeac78afc8062b23a7b532d3370a4917efbbef53/android/app/src/main/java/com/expensify/chat/navbar/NavBarManagerModule.kt#L17
+            activity?.window?.let {
+                WindowInsetsControllerCompat(it, it.decorView).let { controller ->
+                    when (mode) {
+                        1.0 -> {
+                            controller.isAppearanceLightStatusBars = true
+                            controller.isAppearanceLightNavigationBars = true
+                        }
+                        else -> {
+                            controller.isAppearanceLightStatusBars = false
+                            controller.isAppearanceLightNavigationBars = false
+                        }
+                    }
+                }
+            }
+
         }
     }
 
