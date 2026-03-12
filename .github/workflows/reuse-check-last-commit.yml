@@ -6,7 +6,7 @@ on:
     # Map the workflow outputs to job outputs
     outputs:
       is_new_commit:
-        description: "is_new_commit? true or false"
+        description: 'is_new_commit? true or false'
         value: ${{ jobs.checkLastCommit.outputs.is_new_commit }}
 
 jobs:
@@ -16,7 +16,7 @@ jobs:
     outputs:
       is_new_commit: ${{ steps.is_new_commit.outputs.is_new_commit }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - name: print latest_commit
         run: echo ${{ github.sha }}
 

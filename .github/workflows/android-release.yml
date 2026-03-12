@@ -12,7 +12,7 @@ jobs:
       contents: write
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Get Commit Tag
         uses: ./.github/composite-actions/commit-tag
@@ -57,7 +57,7 @@ jobs:
       contents: write
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Get Commit Tag
         uses: ./.github/composite-actions/commit-tag
@@ -98,7 +98,7 @@ jobs:
           signkey: ${{ secrets.SIGNED_KEY_BASE64 }}
           buildtype: bundleRelease
 
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v6
         with:
           name: outputAAB
           path: android/app/build/outputs/bundle/release/*.aab # or path/to/artifact
@@ -118,17 +118,17 @@ jobs:
       contents: write
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Get Commit Tag
         uses: ./.github/composite-actions/commit-tag
 
       - name: React Native Build Setup
-        uses: ./.github/composite-actions/RN-setup  
+        uses: ./.github/composite-actions/RN-setup
         with:
           env: ${{ secrets.ENV_FILE }}
           sentry: ${{ secrets.SENTRY_PROPERTIES }}
-    
+
       - name: 'Create env file'
         run: |
           echo "APPSTORE=true" >> .env
