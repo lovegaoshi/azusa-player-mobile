@@ -7,13 +7,13 @@ jobs:
     runs-on: ubuntu-24.04-arm
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Setup Android SDK
         uses: android-actions/setup-android@v3
         with:
           packages: 'platform-tools'
-        
+
       - name: Android Build Setup
         uses: ./.github/composite-actions/android-runner-setup
 

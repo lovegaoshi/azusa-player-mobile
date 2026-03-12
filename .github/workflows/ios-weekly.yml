@@ -6,7 +6,7 @@ on:
 jobs:
   checkLastCommit:
     uses: ./.github/workflows/reuse-check-last-commit.yml
-    
+
   buildIPA:
     runs-on: macos-latest
     name: build IPA
@@ -16,15 +16,15 @@ jobs:
       contents: write
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: React Native Build Setup
         id: rnsetup
-        uses: ./.github/composite-actions/RN-setup  
+        uses: ./.github/composite-actions/RN-setup
         with:
           env: ${{ secrets.ENV_FILE }}
           sentry: ${{ secrets.SENTRY_PROPERTIES }}
-    
+
       - name: 'Create env file'
         run: |
           echo "APPSTORE=true" >> .env
