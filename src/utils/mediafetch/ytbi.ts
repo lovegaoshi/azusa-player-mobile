@@ -21,19 +21,7 @@ Platform.shim.eval = async (
   data: BuildScriptResult,
   env: Record<string, VMPrimative>,
 ) => {
-  const properties = [];
-
-  if (env.n) {
-    properties.push(`n: exportedVars.nFunction("${env.n}")`);
-  }
-
-  if (env.sig) {
-    properties.push(`sig: exportedVars.sigFunction("${env.sig}")`);
-  }
-
-  const code = `${data.output}\nreturn { ${properties.join(', ')} }`;
-
-  return new Function(code)();
+  return new Function(data.output)();
 };
 
 // @ts-expect-error to avoid typings' fuss
