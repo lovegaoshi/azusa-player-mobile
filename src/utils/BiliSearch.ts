@@ -110,7 +110,7 @@ export const searchBiliURLs = async ({
       // biliSearchFetch
       switch (defaultSearch) {
         case SearchOptions.ALIST:
-          results = await alistFetch.regexFetch({
+          results = await alistFetch.urlSearch({
             url: input,
             progressEmitter,
             fastSearch,
@@ -147,6 +147,10 @@ export const searchBiliURLs = async ({
           });
       }
     }
+    if (results.subscribeUrl === undefined) {
+      results.subscribeUrl =
+        input.startsWith('http') || input.startsWith('local://') ? [input] : [];
+    }
   } catch (err) {
     logger.warn(err);
   }
@@ -168,6 +172,7 @@ const reExtractionsShortURL: ReExtraction<string>[] = [
 ];
 
 const reExtractions: ReExtraction<NoxNetwork.NoxRegexFetch>[] = [
+  { match: alistFetch.regexSearchMatch, fetch: alistFetch.regexFetch },
   { match: biliListFetch.regexSearchMatch, fetch: biliListFetch.regexFetch },
   { match: acfunFetch.regexSearchMatch, fetch: acfunFetch.regexFetch },
   {
