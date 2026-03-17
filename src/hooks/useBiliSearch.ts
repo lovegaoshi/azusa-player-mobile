@@ -38,9 +38,6 @@ export default function useBiliSearch({
       ...searchPlaylist,
       ...searchedResult,
       title: searchListTitle,
-      subscribeUrl:
-        // HACK: add these search URLs to playlist's subscribe watch folder
-        val.startsWith('http') || val.startsWith('local://') ? [val] : [],
     };
     setSearchPlaylist(newSearchPlaylist);
     setCurrentPlaylist(newSearchPlaylist);

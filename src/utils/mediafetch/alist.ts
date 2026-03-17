@@ -115,15 +115,22 @@ const resolveURL = async (song: NoxMedia.Song) => {
   return { url: DEFAULT_NULL_URL };
 };
 
-const regexFetch = async ({
+const urlSearch = async ({
   url,
   fastSearch = true,
 }: NoxNetwork.BiliSearchFetchProps): Promise<NoxNetwork.NoxRegexFetch> => ({
   songList: await fetchAlistMediaContent(url, fastSearch),
+  subscribeUrl: [url.startsWith('alist://') ? url : `alist://${url}`],
 });
 
+const regexFetch = ({ reExtracted }: NoxNetwork.RegexFetchProps) => {
+  return urlSearch({ url: reExtracted[1] });
+};
+
 export default {
+  regexSearchMatch: /^alist:\/\/(.+)$/,
   regexFetch,
+  urlSearch,
   resolveURL,
   regexResolveURLMatch: /^alist-/,
 };

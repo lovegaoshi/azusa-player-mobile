@@ -96,6 +96,7 @@ declare global {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       refreshToken?: any;
       refresh?: (v: NoxMedia.Playlist) => Promise<NoxMedia.SearchPlaylist>;
+      subscribeUrl?: string[];
     }
   }
 }
