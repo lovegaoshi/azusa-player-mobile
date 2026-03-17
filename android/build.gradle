@@ -11,6 +11,7 @@ buildscript {
 
         ffmpegKitPackage = "audio"
         kotlinVersion = "2.0.21"
+        RNVideo_media3Version = "1.9.3"
     }
     repositories {
         mavenLocal()
