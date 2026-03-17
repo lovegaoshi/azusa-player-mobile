@@ -147,10 +147,8 @@ export const searchBiliURLs = async ({
           });
       }
     }
-    if (results.subscribeUrl === undefined) {
-      results.subscribeUrl =
-        input.startsWith('http') || input.startsWith('local://') ? [input] : [];
-    }
+    results.subscribeUrl ??=
+      input.startsWith('http') || input.startsWith('local://') ? [input] : [];
   } catch (err) {
     logger.warn(err);
   }
