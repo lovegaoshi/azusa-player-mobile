@@ -170,6 +170,10 @@ const reExtractionsShortURL: ReExtraction<string>[] = [
 ];
 
 const reExtractions: ReExtraction<NoxNetwork.NoxRegexFetch>[] = [
+  {
+    match: localFetch.regexContentSearchMatch,
+    fetch: localFetch.contentRegexFetch,
+  },
   { match: alistFetch.regexSearchMatch, fetch: alistFetch.regexFetch },
   { match: biliListFetch.regexSearchMatch, fetch: biliListFetch.regexFetch },
   { match: acfunFetch.regexSearchMatch, fetch: acfunFetch.regexFetch },

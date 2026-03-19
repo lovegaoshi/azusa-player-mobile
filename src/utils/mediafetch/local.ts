@@ -16,7 +16,22 @@ import logger from '../Logger';
 import { isAndroid } from '@utils/RNUtils';
 import NativeNoxModule from '@specs/NativeNoxModule';
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const androidSongTS = (v: NoxUtils.NoxFileUtilMediaInfo): NoxMedia.Song =>
+  SongTS({
+    cid: `${Source.local}-${v.realPath}`,
+    bvid: `file://${v.realPath}`,
+    name: v.title,
+    nameRaw: v.title,
+    singer: v.artist,
+    singerId: v.artist,
+    cover: `file://${v.realPath}`,
+    lyric: '',
+    page: 0,
+    duration: v.duration / 1000,
+    album: v.album,
+    source: Source.local,
+  });
+
 const songFetch = async (
   fpath: string,
   favlist: string[],
@@ -25,22 +40,7 @@ const songFetch = async (
   const mediaFiles: NoxUtils.NoxFileUtilMediaInfo[] =
     (await NativeNoxModule?.listMediaDir(fpath, true)) ?? [];
   const uniqMediaFiles = mediaFiles.filter(v => !favlist.includes(v.realPath));
-  return uniqMediaFiles.map(v =>
-    SongTS({
-      cid: `${Source.local}-${v.realPath}`,
-      bvid: `file://${v.realPath}`,
-      name: v.title,
-      nameRaw: v.title,
-      singer: v.artist,
-      singerId: v.artist,
-      cover: `file://${v.realPath}`,
-      lyric: '',
-      page: 0,
-      duration: v.duration / 1000,
-      album: v.album,
-      source: Source.local,
-    }),
-  );
+  return uniqMediaFiles.map(androidSongTS);
 };
 
 const regexFetch = async ({
@@ -48,6 +48,20 @@ const regexFetch = async ({
   favList = [],
 }: NoxNetwork.RegexFetchProps): Promise<NoxNetwork.NoxRegexFetch> => ({
   songList: await songFetch(reExtracted[1], favList),
+});
+
+const contentSongFetch = async (id: string, favList: string[]) => {
+  if (!isAndroid) return [];
+  const mediaInfo: NoxUtils.NoxFileUtilMediaInfo[] =
+    (await NativeNoxModule?.listMediaFileByID(id)) ?? [];
+  return mediaInfo.map(androidSongTS);
+};
+
+const contentRegexFetch = async ({
+  reExtracted,
+  favList = [],
+}: NoxNetwork.RegexFetchProps): Promise<NoxNetwork.NoxRegexFetch> => ({
+  songList: await contentSongFetch(reExtracted[1], favList),
 });
 
 const resolveURLPrefetch = async (song: NoxMedia.Song) => ({ url: song.bvid });
@@ -79,6 +93,8 @@ const refreshSong = (song: NoxMedia.Song) => song;
 export default {
   regexSearchMatch: /local:\/\/(.+)/,
   regexFetch,
+  regexContentSearchMatch: /content:\/\/.+\/(\d+)/,
+  contentRegexFetch,
   regexResolveURLMatch: /^local-/,
   resolveURL,
   refreshSong,

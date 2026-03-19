@@ -20,8 +20,9 @@ import { getIcon } from './Icons';
 import AutoComplete from '@components/commonui/AutoComplete';
 import BiliKwSuggest from '@utils/Bilibili/BiliKwSuggest';
 import { SearchOptions } from '@enums/Storage';
-import { isAndroid, isIOS } from '@utils/RNUtils';
+import { isAndroid } from '@utils/RNUtils';
 import useNavigation from '@hooks/useNavigation';
+import NativeNoxModule from '@specs/NativeNoxModule';
 
 const searchSuggest = (option: SearchOptions | string) => {
   switch (option) {
@@ -47,6 +48,7 @@ export default function BiliSearchBar({ onSearched = console.log }: Props) {
     state => state.setExternalSearchText,
   );
   const miniPlayerCollapse = useNoxSetting(state => state.collapse);
+  const initialURL = useNoxSetting(state => state.initialURL);
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [sharedData, setSharedData] = useState<any>(null);
   const { playFromPlaylist } = usePlayback();
@@ -61,6 +63,12 @@ export default function BiliSearchBar({ onSearched = console.log }: Props) {
     searchListTitle: t('PlaylistOperations.searchListName'),
   });
   const pressed = useRef(false);
+
+  const immediatelyPlay = (playlist: NoxMedia.Playlist) =>
+    playFromPlaylist({
+      playlist,
+      song: playlist.songList[0],
+    });
 
   const handleMenuPress = (event: GestureResponderEvent) => {
     setShowMusicFree(mfsdks.length > 0);
@@ -89,12 +97,7 @@ export default function BiliSearchBar({ onSearched = console.log }: Props) {
       logger.debug(
         `[search] performing external serach: ${externalSearchText}`,
       );
-      handleExternalSearch(externalSearchText).then(newSearchPlaylist =>
-        playFromPlaylist({
-          playlist: newSearchPlaylist,
-          song: newSearchPlaylist.songList[0],
-        }),
-      );
+      handleExternalSearch(externalSearchText).then(immediatelyPlay);
       setExternalSearchText('');
     }
   }, [externalSearchText]);
@@ -113,12 +116,12 @@ export default function BiliSearchBar({ onSearched = console.log }: Props) {
   };
 
   useEffect(() => {
-    if (!isIOS) return;
-
     // Subscribe to any new links
     const subscription = Linking.addEventListener('url', ({ url }) => {
       if (url.startsWith('noxplayer://')) {
-        handleShare(url.slice(12));
+        return handleShare(url.slice(12));
+      } else if (url.startsWith('content://')) {
+        return handleExternalSearch(url).then(immediatelyPlay);
       }
     });
 
@@ -126,6 +129,12 @@ export default function BiliSearchBar({ onSearched = console.log }: Props) {
       subscription.remove();
     };
   }, []);
+
+  useEffect(() => {
+    if (initialURL?.startsWith('content://')) {
+      handleExternalSearch(initialURL).then(immediatelyPlay);
+    }
+  }, [initialURL]);
 
   useEffect(() => {
     if (!isAndroid) return;
