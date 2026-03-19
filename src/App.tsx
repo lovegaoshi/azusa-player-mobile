@@ -68,6 +68,8 @@ export default function App(appProps: NoxComponent.AppProps) {
   const isPlayerReady = useSetupPlayer({ ...appProps, vip });
   const isLandscape = useIsLandscape();
   const PIPMode = useStore(appStore, state => state.pipMode);
+  const initialURL = useNoxSetting(state => state.initialURL);
+  const setInitialURL = useNoxSetting(state => state.setInitialURL);
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const usedTheme = useTheme();
   const playerStyle = useNoxSetting(state => state.playerStyle);
@@ -87,13 +89,13 @@ export default function App(appProps: NoxComponent.AppProps) {
     const subscription = Linking.addEventListener('url', deepLinkHandler);
 
     // When you launch the closed app from the notification or any other link
-    Linking.getInitialURL().then(url => console.log('getInitialURL', url));
+    Linking.getInitialURL().then(url => url && setInitialURL(url));
     return () => {
       subscription.remove();
     };
   }, []);
 
-  if (!(isPlayerReady && isSplashReady && isSplashAnimReady)) {
+  if (!(isPlayerReady && (initialURL || isSplashReady) && isSplashAnimReady)) {
     return (
       <SafeAreaProvider>
         <View style={styles.screenContainer}>

@@ -2,6 +2,8 @@ import { StateCreator } from 'zustand';
 
 // playback store that supports ABRepeat and crossfade (APM only features)
 export interface APMPlaybackStore {
+  initialURL: string | null;
+  setInitialURL: (val: string | null) => void;
   crossfadeId: string;
   setCrossfadeId: (val: string) => void;
 
@@ -24,6 +26,8 @@ const store: StateCreator<
   [],
   APMPlaybackStore
 > = set => ({
+  initialURL: null,
+  setInitialURL: val => set({ initialURL: val }),
   crossfadeId: '',
   setCrossfadeId: v => set({ crossfadeId: v }),
 
