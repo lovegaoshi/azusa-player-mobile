@@ -73,6 +73,7 @@ export const appStartupInit = initializePlayer();
 
 export default function useSetupPlayer({
   intentData,
+  intentAction,
   vip,
 }: NoxComponent.SetupPlayerProps) {
   const [playerReady, setPlayerReady] = useState<boolean>(false);
@@ -114,6 +115,9 @@ export default function useSetupPlayer({
       if (unmounted) return;
       checkPlayStoreUpdates();
       setIntentData(intentData);
+      if (intentAction === 'android.intent.action.MUSIC_PLAYER') {
+        await TPPlay();
+      }
       switch (intentData) {
         case IntentData.Resume:
           await TPPlay();
