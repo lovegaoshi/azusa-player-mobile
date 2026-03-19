@@ -22,7 +22,6 @@ import BiliKwSuggest from '@utils/Bilibili/BiliKwSuggest';
 import { SearchOptions } from '@enums/Storage';
 import { isAndroid } from '@utils/RNUtils';
 import useNavigation from '@hooks/useNavigation';
-import NativeNoxModule from '@specs/NativeNoxModule';
 
 const searchSuggest = (option: SearchOptions | string) => {
   switch (option) {
