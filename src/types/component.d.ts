@@ -36,6 +36,7 @@ declare global {
       intentData?: IntentData;
       intentAction: string;
       intentBundle: null | any;
+      intentCategories: string[] | null | undefined;
       rootTag: number;
     }
     interface SetupPlayerProps extends AppProps {
