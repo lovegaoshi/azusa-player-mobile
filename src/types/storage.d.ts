@@ -136,6 +136,6 @@ declare global {
       progress: number;
     }
 
-    type AListCred = [string, string];
+    type AListCred = [string, string, string | undefined];
   }
 }

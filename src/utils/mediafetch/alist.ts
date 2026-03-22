@@ -10,7 +10,7 @@ const matchAlistCred = async (site: string) => {
   const credList = await getAlistCred();
   for (const cred of credList) {
     if (cred[0] === site) {
-      return cred[1];
+      return [cred[1], cred[2]];
     }
   }
   return null;
@@ -54,13 +54,13 @@ const fetchAlistMediaContent = async (
   if (cred === null) return result;
   const payload = {
     page: 1,
-    password: cred,
+    password: cred[0],
     path: parsedPath,
     per_page: 999999,
     refresh: false,
   };
   const res = await singleLimiter.schedule(() =>
-      bfetch(`https://${hostname}/api/fs/list`, {
+      bfetch(`https://${hostname}/${cred[1] ?? ''}api/fs/list`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded',
@@ -94,11 +94,11 @@ const resolveURL = async (song: NoxMedia.Song) => {
   if (cred !== null) {
     try {
       const payload = {
-        password: cred,
+        password: cred[0],
         path: song.bvid,
       };
       const res = await humanishApiLimiter.schedule(() =>
-          bfetch(`https://${song.singerId}/api/fs/get`, {
+          bfetch(`https://${song.singerId}/${cred[1] ?? ''}api/fs/get`, {
             method: 'POST',
             headers: {
               'Content-Type': 'application/x-www-form-urlencoded',
