@@ -48,9 +48,11 @@ const fetchAlistMediaContent = async (
   const { hostname, pathname, searchParams } = new URL(url);
   const parsedSearchParams = Object.fromEntries(searchParams.entries());
   const searchSubfolder = !fastSearch || parsedSearchParams.sub !== undefined;
-  const paddedPath = pathname.endsWith('/') ? pathname : `${pathname}/`;
-  const parsedPath = decodeURI(`https://1.t/${paddedPath}`).substring(12);
   const cred = await getCred(hostname);
+  const paddedPath = (
+    pathname.endsWith('/') ? pathname : `${pathname}/`
+  ).replace(cred[1] ?? '', '');
+  const parsedPath = decodeURI(`https://1.t/${paddedPath}`).substring(12);
   if (cred === null) return result;
   const payload = {
     page: 1,
