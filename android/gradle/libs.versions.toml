@@ -1,0 +1,42 @@
+[versions]
+animatedGif = "3.6.0"
+appcompatV7 = "28.0.0"
+core = "2.5"
+coreKtx = "1.18.0"
+coreGoogleShortcuts = "1.1.0"
+desugar_jdk_libs = "2.1.5"
+kotlinxCoroutinesGuava = "1.10.2"
+material = "1.13.0"
+media3Session = "1.9.3"
+nanojson = "e9d656ddb49a412a5a0a5d5ef20ca7ef09549996"
+newpipeextractor = "v0.24.8"
+rxandroid = "3.0.2"
+rxjava = "3.1.12"
+webkit = "1.15.0"
+kotlin = "2.0.21"
+
+
+[libraries]
+animated-gif = { module = "com.facebook.fresco:animated-gif", version.ref = "animatedGif" }
+animated-webp = { module = "com.facebook.fresco:animated-webp", version.ref = "animatedGif" }
+appcompat-v7 = { module = "com.android.support:appcompat-v7", version.ref = "appcompatV7" }
+core = { module = "be.tarsos.dsp:core", version.ref = "core" }
+core-google-shortcuts = { module = "androidx.core:core-google-shortcuts", version.ref = "coreGoogleShortcuts" }
+core-ktx = { module = "androidx.core:core-ktx", version.ref = "coreKtx" }
+design = { module = "com.android.support:design", version.ref = "appcompatV7" }
+jvm = { module = "be.tarsos.dsp:jvm", version.ref = "core" }
+kotlinx-coroutines-guava = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-guava", version.ref = "kotlinxCoroutinesGuava" }
+material = { module = "com.google.android.material:material", version.ref = "material" }
+desugar_jdk_libs = { module = "com.android.tools:desugar_jdk_libs", version.ref = "desugar_jdk_libs" }
+media3-session = { module = "androidx.media3:media3-session", version.ref = "media3Session" }
+nanojson = { module = "com.github.TeamNewPipe:nanojson", version.ref = "nanojson" }
+newpipeextractor = { module = "com.github.TeamNewPipe:NewPipeExtractor", version.ref = "newpipeextractor" }
+react-native-gradle-plugin = { module = "com.facebook.react:react-native-gradle-plugin" }
+rxandroid = { module = "io.reactivex.rxjava3:rxandroid", version.ref = "rxandroid" }
+rxjava = { module = "io.reactivex.rxjava3:rxjava", version.ref = "rxjava" }
+support-annotations = { module = "com.android.support:support-annotations", version.ref = "appcompatV7" }
+webkit = { module = "androidx.webkit:webkit", version.ref = "webkit" }
+webpsupport = { module = "com.facebook.fresco:webpsupport", version.ref = "animatedGif" }
+
+[plugins]
+compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }

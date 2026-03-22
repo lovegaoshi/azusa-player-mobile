@@ -98,7 +98,7 @@ android {
 
     namespace "com.noxplay.noxplayer"
     defaultConfig {
-        compileSdk rootProject.ext.compileSdkVersion
+        compileSdk = rootProject.ext.compileSdkVersion
         applicationId "com.noxplay.noxplayer"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
@@ -114,6 +114,7 @@ android {
             reset()
             enable enableSeparateBuildPerCPUArchitecture
             universalApk false  // If true, also generate a universal APK
+            //noinspection ChromeOsAbiSupport
             include (*reactNativeArchitectures())
         }
     }
@@ -186,38 +187,38 @@ android {
 }
 
 dependencies {
-    coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:2.1.5'
-    implementation 'com.google.android.material:material:1.13.0'
-    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-guava:1.10.2'
+    coreLibraryDesugaring libs.desugar.jdk.libs
+    implementation libs.material
+    implementation libs.kotlinx.coroutines.guava
 
     // For animated GIF support
-    implementation 'com.facebook.fresco:animated-gif:3.6.0'
+    implementation libs.animated.gif
 
     // For WebP support, including animated WebP
-    implementation 'com.facebook.fresco:animated-webp:3.6.0'
-    implementation 'com.facebook.fresco:webpsupport:3.6.0'
+    implementation libs.animated.webp
+    implementation libs.webpsupport
 
-    implementation 'com.android.support:appcompat-v7:28.0.0'
-    implementation 'com.android.support:support-annotations:28.0.0'
-    implementation 'com.android.support:design:28.0.0'
+    implementation libs.appcompat.v7
+    implementation libs.support.annotations
+    implementation libs.design
 
     // The version of react-native is set by the React Native Gradle Plugin
     implementation("com.facebook.react:react-android")
-    implementation("androidx.media3:media3-session:1.9.3")
+    implementation(libs.media3.session)
 
     if (hermesEnabled.toBoolean()) {
         implementation("com.facebook.react:hermes-android")
     } else {
         implementation jscFlavor
     }
-    implementation "androidx.core:core-ktx:1.18.0"
-    implementation 'androidx.core:core-google-shortcuts:1.1.0'
-    implementation 'be.tarsos.dsp:core:2.5'
-    implementation 'be.tarsos.dsp:jvm:2.5'
+    implementation libs.core.ktx
+    implementation libs.core.google.shortcuts
+    implementation libs.core
+    implementation libs.jvm
     // for po token generation - consider pulling the necessary interfaces OUT
-    implementation "androidx.webkit:webkit:1.15.0"
-    implementation "io.reactivex.rxjava3:rxjava:3.1.12"
-    implementation "io.reactivex.rxjava3:rxandroid:3.0.2"
-    implementation 'com.github.TeamNewPipe:nanojson:e9d656ddb49a412a5a0a5d5ef20ca7ef09549996'
-    implementation 'com.github.TeamNewPipe:NewPipeExtractor:v0.24.8'
+    implementation libs.webkit
+    implementation libs.rxjava
+    implementation libs.rxandroid
+    implementation libs.nanojson
+    implementation libs.newpipeextractor
 }
