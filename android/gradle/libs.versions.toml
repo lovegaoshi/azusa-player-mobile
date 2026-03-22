@@ -1,7 +1,7 @@
 [versions]
 animatedGif = "3.6.0"
 appcompatV7 = "28.0.0"
-core = "2.5"
+tarsosDSP = "2.5"
 coreKtx = "1.18.0"
 coreGoogleShortcuts = "1.1.0"
 desugar_jdk_libs = "2.1.5"
@@ -20,11 +20,11 @@ kotlin = "2.0.21"
 animated-gif = { module = "com.facebook.fresco:animated-gif", version.ref = "animatedGif" }
 animated-webp = { module = "com.facebook.fresco:animated-webp", version.ref = "animatedGif" }
 appcompat-v7 = { module = "com.android.support:appcompat-v7", version.ref = "appcompatV7" }
-core = { module = "be.tarsos.dsp:core", version.ref = "core" }
+tarsos-dsp-core = { module = "be.tarsos.dsp:core", version.ref = "tarsosDSP" }
 core-google-shortcuts = { module = "androidx.core:core-google-shortcuts", version.ref = "coreGoogleShortcuts" }
 core-ktx = { module = "androidx.core:core-ktx", version.ref = "coreKtx" }
 design = { module = "com.android.support:design", version.ref = "appcompatV7" }
-jvm = { module = "be.tarsos.dsp:jvm", version.ref = "core" }
+tarsos-dsp-jvm = { module = "be.tarsos.dsp:jvm", version.ref = "tarsosDSP" }
 kotlinx-coroutines-guava = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-guava", version.ref = "kotlinxCoroutinesGuava" }
 material = { module = "com.google.android.material:material", version.ref = "material" }
 desugar_jdk_libs = { module = "com.android.tools:desugar_jdk_libs", version.ref = "desugar_jdk_libs" }

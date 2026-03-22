@@ -213,8 +213,8 @@ dependencies {
     }
     implementation libs.core.ktx
     implementation libs.core.google.shortcuts
-    implementation libs.core
-    implementation libs.jvm
+    implementation libs.tarsos.dsp.core
+    implementation libs.tarsos.dsp.jvm
     // for po token generation - consider pulling the necessary interfaces OUT
     implementation libs.webkit
     implementation libs.rxjava
