@@ -23,7 +23,7 @@ export default function AListSettings() {
   const addCred = (cred: NoxStorage.AListCred) => {
     let parsedCred: NoxStorage.AListCred;
     try {
-      parsedCred = [new URL(cred[0]).hostname, cred[1]];
+      parsedCred = [new URL(cred[0]).hostname, cred[1], cred[2]];
     } catch {
       parsedCred = cred;
     }

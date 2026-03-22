@@ -21,16 +21,19 @@ const CredDialog = ({
   const { t } = useTranslation();
   const [text, setText] = React.useState(cred?.[0] ?? '');
   const [pwd, setPwd] = React.useState(cred?.[1] ?? '');
+  const [site, setSite] = React.useState(cred?.[2] ?? '');
 
   const handleSubmit = () => {
     setText('');
     setPwd('');
-    onSubmit([text, pwd]);
+    setSite('');
+    onSubmit([text, pwd, site]);
   };
 
   useEffect(() => {
     setText(cred?.[0] ?? '');
     setPwd(cred?.[1] ?? '');
+    setSite(cred?.[2] ?? '');
   }, [cred]);
 
   return (
@@ -53,6 +56,13 @@ const CredDialog = ({
         selectTextOnFocus={false}
         text={pwd}
         setText={setPwd}
+      />
+      <NoxInput
+        autofocus={false}
+        label={t('AList.SitePath')}
+        selectTextOnFocus={false}
+        text={site}
+        setText={setSite}
       />
     </GenericDialog>
   );
