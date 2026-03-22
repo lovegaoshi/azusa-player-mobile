@@ -34,7 +34,7 @@ const getCred = async (hostname: string) => {
   const cred = await matchAlistCred(hostname);
   if (cred === null) {
     logger.warn(`[alist] Cred not found for ${hostname}`);
-    return '';
+    return [''];
   }
   return cred;
 };
