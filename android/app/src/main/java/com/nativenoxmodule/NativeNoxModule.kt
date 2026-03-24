@@ -238,6 +238,8 @@ class NativeNoxModule(reactContext: ReactApplicationContext) : NativeNoxModuleSp
                     ApplicationExitInfo.REASON_EXCESSIVE_RESOURCE_USAGE,
                     ApplicationExitInfo.REASON_LOW_MEMORY,
                     ApplicationExitInfo.REASON_SIGNALED,
+                    ApplicationExitInfo.REASON_OTHER,
+                    ApplicationExitInfo.REASON_PACKAGE_STATE_CHANGE,
                 )
             }
         } catch (_: Exception) {
