@@ -126,9 +126,15 @@ export async function PlaybackService() {
   DeviceEventEmitter.addListener('APMEnterPIP', (e: boolean) =>
     setState({ pipMode: e }),
   );
-  DeviceEventEmitter.addListener('APMNewIntent', (e: NoxComponent.AppProps) =>
-    console.log('apm', e),
-  );
+  DeviceEventEmitter.addListener('APMNewIntent', (e: NoxComponent.AppProps) => {
+    console.log('apm', e);
+    if (
+      e.intentAction === 'android.intent.action.MUSIC_PLAYER' ||
+      e.intentCategories?.includes('android.intent.category.APP_MUSIC')
+    ) {
+      TPPlay();
+    }
+  });
 
   TrackPlayer.addEventListener(Event.RemotePause, () => {
     fadePause();
