@@ -12,7 +12,7 @@ import { logger } from '../Logger';
 import { fetchAwaitBiliPaginatedAPI } from './paginatedbili';
 import { awaitLimiter } from './throttle';
 import { getDm } from '../Bilibili/bilidm';
-import { getWebid } from '../Bilibili/biliWebid';
+// import { getWebid } from '../Bilibili/biliWebid';
 import { biliShazamOnSonglist } from './bilishazam';
 import { timestampToSeconds, appendURLSearchParam } from '../Utils';
 import SongTS from '@objects/Song';
@@ -67,7 +67,7 @@ export const fetchBiliChannelList = async ({
   searchAPI = appendURLSearchParam(searchAPI, urlObj.searchParams, 'order');
 
   return fetchAwaitBiliPaginatedAPI({
-    url: `${searchAPI}${getDm()}${await getWebid(mid)}`,
+    url: `${searchAPI}${getDm()}`, //${await getWebid(mid)}
     getMediaCount: data => data.page.count,
     getPageSize: data => data.page.ps,
     getItems: js => js.data.list.vlist,
