@@ -1,14 +1,16 @@
 diff --git a/node_modules/react-native-paper/src/components/Menu/Menu.tsx b/node_modules/react-native-paper/src/components/Menu/Menu.tsx
-index 9b53403..191684b 100644
+index 9b53403..53d846c 100644
 --- a/node_modules/react-native-paper/src/components/Menu/Menu.tsx
 +++ b/node_modules/react-native-paper/src/components/Menu/Menu.tsx
-@@ -266,12 +266,12 @@ const Menu = ({
-     backHandlerSubscriptionRef.current = addEventListener(
-       BackHandler,
-       'hardwareBackPress',
+@@ -263,15 +263,10 @@ const Menu = ({
+   }, [handleKeypress]);
+ 
+   const attachListeners = React.useCallback(() => {
+-    backHandlerSubscriptionRef.current = addEventListener(
+-      BackHandler,
+-      'hardwareBackPress',
 -      handleDismiss
-+      () => visible && hide(onDismiss),
-     );
+-    );
      dimensionsSubscriptionRef.current = addEventListener(
        Dimensions,
        'change',
@@ -17,7 +19,7 @@ index 9b53403..191684b 100644
      );
      Platform.OS === 'web' && document.addEventListener('keyup', handleKeypress);
    }, [handleDismiss, handleKeypress]);
-@@ -346,6 +346,7 @@ const Menu = ({
+@@ -346,6 +341,7 @@ const Menu = ({
  
      attachListeners();
      const { animation } = theme;
@@ -25,7 +27,7 @@ index 9b53403..191684b 100644
      Animated.parallel([
        Animated.timing(scaleAnimationRef.current, {
          toValue: { x: menuLayoutResult.width, y: menuLayoutResult.height },
-@@ -365,11 +366,11 @@ const Menu = ({
+@@ -365,11 +361,11 @@ const Menu = ({
      });
    }, [anchor, attachListeners, measureAnchorLayout, theme]);
  
@@ -34,12 +36,12 @@ index 9b53403..191684b 100644
      removeListeners();
 -
      const { animation } = theme;
-     
+ 
 +    await new Promise(resolve => setTimeout(resolve, 1));
      Animated.timing(opacityAnimationRef.current, {
        toValue: 0,
        duration: ANIMATION_DURATION * animation.scale,
-@@ -380,6 +381,8 @@ const Menu = ({
+@@ -380,6 +376,8 @@ const Menu = ({
        setRendered(false);
        prevRendered.current = false;
        focusFirstDOMNode(anchorRef.current);
@@ -48,7 +50,7 @@ index 9b53403..191684b 100644
      });
    }, [removeListeners, theme]);
  
-@@ -636,7 +639,7 @@ const Menu = ({
+@@ -636,7 +634,7 @@ const Menu = ({
            <Pressable
              accessibilityLabel={overlayAccessibilityLabel}
              accessibilityRole="button"
@@ -57,7 +59,7 @@ index 9b53403..191684b 100644
              style={styles.pressableOverlay}
            />
            <View
-@@ -647,7 +650,7 @@ const Menu = ({
+@@ -647,7 +645,7 @@ const Menu = ({
              accessibilityViewIsModal={visible}
              style={[styles.wrapper, positionStyle, style]}
              pointerEvents={pointerEvents}
