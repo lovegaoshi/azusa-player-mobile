@@ -35,11 +35,11 @@ PODS:
     - SocketRocket
     - Yoga
   - DoubleConversion (1.1.6)
-  - EXApplication (55.0.9):
+  - EXApplication (55.0.10):
     - ExpoModulesCore
-  - EXConstants (55.0.7):
+  - EXConstants (55.0.9):
     - ExpoModulesCore
-  - Expo (55.0.6):
+  - Expo (55.0.8):
     - boost
     - DoubleConversion
     - ExpoModulesCore
@@ -70,17 +70,17 @@ PODS:
     - ReactCommon/turbomodule/core
     - SocketRocket
     - Yoga
-  - ExpoAsset (55.0.8):
+  - ExpoAsset (55.0.10):
     - ExpoModulesCore
-  - ExpoClipboard (55.0.8):
+  - ExpoClipboard (55.0.9):
     - ExpoModulesCore
-  - ExpoCrypto (55.0.9):
+  - ExpoCrypto (55.0.10):
     - ExpoModulesCore
-  - ExpoDocumentPicker (55.0.8):
+  - ExpoDocumentPicker (55.0.9):
     - ExpoModulesCore
   - ExpoDomWebView (55.0.3):
     - ExpoModulesCore
-  - ExpoFileSystem (55.0.10):
+  - ExpoFileSystem (55.0.11):
     - ExpoModulesCore
   - ExpoFont (55.0.4):
     - ExpoModulesCore
@@ -91,17 +91,17 @@ PODS:
     - SDWebImageAVIFCoder (~> 0.11.0)
     - SDWebImageSVGCoder (~> 1.7.0)
     - SDWebImageWebPCoder (~> 0.14.6)
-  - ExpoImagePicker (55.0.12):
+  - ExpoImagePicker (55.0.13):
     - ExpoModulesCore
   - ExpoKeepAwake (55.0.4):
     - ExpoModulesCore
-  - ExpoLinearGradient (55.0.8):
+  - ExpoLinearGradient (55.0.9):
     - ExpoModulesCore
-  - ExpoLinking (55.0.7):
+  - ExpoLinking (55.0.8):
     - ExpoModulesCore
   - ExpoLogBox (55.0.7):
     - React-Core
-  - ExpoModulesCore (55.0.15):
+  - ExpoModulesCore (55.0.17):
     - boost
     - DoubleConversion
     - ExpoModulesJSI
@@ -132,16 +132,16 @@ PODS:
     - RNWorklets
     - SocketRocket
     - Yoga
-  - ExpoModulesJSI (55.0.15):
+  - ExpoModulesJSI (55.0.17):
     - hermes-engine
     - React-Core
     - React-runtimescheduler
     - ReactCommon
-  - ExpoSecureStore (55.0.8):
+  - ExpoSecureStore (55.0.9):
     - ExpoModulesCore
-  - ExpoSQLite (55.0.10):
+  - ExpoSQLite (55.0.11):
     - ExpoModulesCore
-  - ExpoWebBrowser (55.0.9):
+  - ExpoWebBrowser (55.0.10):
     - ExpoModulesCore
   - fast_float (8.0.0)
   - FBLazyVector (0.83.4)
@@ -205,8 +205,8 @@ PODS:
     - SocketRocket
     - Yoga
   - Protobuf (3.22.1)
-  - PurchasesHybridCommon (17.46.1):
-    - RevenueCat (= 5.61.0)
+  - PurchasesHybridCommon (17.52.0):
+    - RevenueCat (= 5.65.0)
   - RCT-Folly (2024.11.18.00):
     - boost
     - DoubleConversion
@@ -2386,7 +2386,7 @@ PODS:
     - ReactCommon/turbomodule/core
     - SocketRocket
     - Yoga
-  - react-native-skia (2.5.1):
+  - react-native-skia (2.5.3):
     - boost
     - DoubleConversion
     - fast_float
@@ -2532,7 +2532,7 @@ PODS:
     - ReactCommon/turbomodule/core
     - SocketRocket
     - Yoga
-  - react-native-vector-icons-material-design-icons (12.4.2)
+  - react-native-vector-icons-material-design-icons (12.5.0)
   - react-native-video (6.15.0):
     - boost
     - DoubleConversion
@@ -3204,7 +3204,7 @@ PODS:
     - React-perflogger (= 0.83.4)
     - React-utils (= 0.83.4)
     - SocketRocket
-  - RevenueCat (5.61.0)
+  - RevenueCat (5.65.0)
   - RNCMaskedView (0.3.2):
     - boost
     - DoubleConversion
@@ -3269,10 +3269,10 @@ PODS:
     - RNNotifee/NotifeeCore (= 9.1.8)
   - RNNotifee/NotifeeCore (9.1.8):
     - React-Core
-  - RNPurchases (9.12.0):
-    - PurchasesHybridCommon (= 17.46.1)
+  - RNPurchases (9.14.0):
+    - PurchasesHybridCommon (= 17.52.0)
     - React-Core
-  - RNReanimated (4.2.2):
+  - RNReanimated (4.2.3):
     - boost
     - DoubleConversion
     - fast_float
@@ -3299,11 +3299,11 @@ PODS:
     - ReactCodegen
     - ReactCommon/turbomodule/bridging
     - ReactCommon/turbomodule/core
-    - RNReanimated/reanimated (= 4.2.2)
+    - RNReanimated/reanimated (= 4.2.3)
     - RNWorklets
     - SocketRocket
     - Yoga
-  - RNReanimated/reanimated (4.2.2):
+  - RNReanimated/reanimated (4.2.3):
     - boost
     - DoubleConversion
     - fast_float
@@ -3330,11 +3330,11 @@ PODS:
     - ReactCodegen
     - ReactCommon/turbomodule/bridging
     - ReactCommon/turbomodule/core
-    - RNReanimated/reanimated/apple (= 4.2.2)
+    - RNReanimated/reanimated/apple (= 4.2.3)
     - RNWorklets
     - SocketRocket
     - Yoga
-  - RNReanimated/reanimated/apple (4.2.2):
+  - RNReanimated/reanimated/apple (4.2.3):
     - boost
     - DoubleConversion
     - fast_float
@@ -3423,7 +3423,7 @@ PODS:
     - ReactCommon/turbomodule/core
     - SocketRocket
     - Yoga
-  - RNSentry (8.4.0):
+  - RNSentry (8.5.0):
     - boost
     - DoubleConversion
     - fast_float
@@ -3453,7 +3453,7 @@ PODS:
     - Sentry (= 9.7.0)
     - SocketRocket
     - Yoga
-  - RNSVG (15.15.3):
+  - RNSVG (15.15.4):
     - boost
     - DoubleConversion
     - fast_float
@@ -3479,10 +3479,10 @@ PODS:
     - ReactCodegen
     - ReactCommon/turbomodule/bridging
     - ReactCommon/turbomodule/core
-    - RNSVG/common (= 15.15.3)
+    - RNSVG/common (= 15.15.4)
     - SocketRocket
     - Yoga
-  - RNSVG/common (15.15.3):
+  - RNSVG/common (15.15.4):
     - boost
     - DoubleConversion
     - fast_float
@@ -3510,37 +3510,7 @@ PODS:
     - ReactCommon/turbomodule/core
     - SocketRocket
     - Yoga
-  - RNWorklets (0.7.4):
-    - boost
-    - DoubleConversion
-    - fast_float
-    - fmt
-    - glog
-    - hermes-engine
-    - RCT-Folly
-    - RCT-Folly/Fabric
-    - RCTRequired
-    - RCTTypeSafety
-    - React-Core
-    - React-debug
-    - React-Fabric
-    - React-featureflags
-    - React-graphics
-    - React-hermes
-    - React-ImageManager
-    - React-jsi
-    - React-NativeModulesApple
-    - React-RCTFabric
-    - React-renderercss
-    - React-rendererdebug
-    - React-utils
-    - ReactCodegen
-    - ReactCommon/turbomodule/bridging
-    - ReactCommon/turbomodule/core
-    - RNWorklets/worklets (= 0.7.4)
-    - SocketRocket
-    - Yoga
-  - RNWorklets/worklets (0.7.4):
+  - RNWorklets (0.8.1):
     - boost
     - DoubleConversion
     - fast_float
@@ -3567,10 +3537,40 @@ PODS:
     - ReactCodegen
     - ReactCommon/turbomodule/bridging
     - ReactCommon/turbomodule/core
-    - RNWorklets/worklets/apple (= 0.7.4)
+    - RNWorklets/apple (= 0.8.1)
+    - RNWorklets/common (= 0.8.1)
     - SocketRocket
     - Yoga
-  - RNWorklets/worklets/apple (0.7.4):
+  - RNWorklets/apple (0.8.1):
+    - boost
+    - DoubleConversion
+    - fast_float
+    - fmt
+    - glog
+    - hermes-engine
+    - RCT-Folly
+    - RCT-Folly/Fabric
+    - RCTRequired
+    - RCTTypeSafety
+    - React-Core
+    - React-debug
+    - React-Fabric
+    - React-featureflags
+    - React-graphics
+    - React-hermes
+    - React-ImageManager
+    - React-jsi
+    - React-NativeModulesApple
+    - React-RCTFabric
+    - React-renderercss
+    - React-rendererdebug
+    - React-utils
+    - ReactCodegen
+    - ReactCommon/turbomodule/bridging
+    - ReactCommon/turbomodule/core
+    - SocketRocket
+    - Yoga
+  - RNWorklets/common (0.8.1):
     - boost
     - DoubleConversion
     - fast_float
@@ -4088,27 +4088,27 @@ SPEC CHECKSUMS:
   boost: 7e761d76ca2ce687f7cc98e698152abd03a18f90
   CookieManager: 177c3b01e15913da302934d9e327ecca0b9dd2a0
   DoubleConversion: cb417026b2400c8f53ae97020b2be961b59470cb
-  EXApplication: 44f202420678bba77f603c373bd3fd033e6c21e9
-  EXConstants: b3c63be5f8648e4ab8e6ff5099b62f629247f969
-  Expo: 40b53667a7c69c2288c4368ec449a853b8b6ec6b
-  ExpoAsset: bdc7bc21fe25d197c3aa7547e14c12c42087d9c9
-  ExpoClipboard: 6bb321d2991652e6736d400f1d7c073aa02c41a0
-  ExpoCrypto: a3470a45f37ab72cf93113088c5e106fbafa45c7
-  ExpoDocumentPicker: 9d82b922be941a74ba52f82df7ba123b334fbb5a
+  EXApplication: 83fdeb8d9e911c28c9dda8c71ae7a697278ce810
+  EXConstants: 898c24a310046c0e68335619d0f379099a52e199
+  Expo: d71e8873b622a5b3e7e7ca5325cd3f813884c110
+  ExpoAsset: 4efd0227e808dfa84d286aa3663ded641ef73479
+  ExpoClipboard: fba6501fed478667b1cc888e999f82fb2838c685
+  ExpoCrypto: 33a6c4fb9ccac7a4d784954d0db6c3ba292123e9
+  ExpoDocumentPicker: 27adca9e8272af64a4bc0d5460bffd64b406c878
   ExpoDomWebView: f101fb3db4b6eec4163fca51f7507189b7e48661
-  ExpoFileSystem: e1a42d7f69f7faae33f4d7d01708f7861f7bd757
+  ExpoFileSystem: ccbe192dde132e6e97bedcd51018a1642f4fa01c
   ExpoFont: 1aa465cf9f8ac6b670405becba8b15473581b2dd
   ExpoImage: 53ab717157f29bb5139f9f75b259f93f784b6847
-  ExpoImagePicker: afea73184bf1cd0c1c42f09b74513d31e4004453
+  ExpoImagePicker: 4463c7e793d904553fb832f7568e306fd7544bc9
   ExpoKeepAwake: 7f3b28c361c37389b18841bb52a58003b39fcb33
-  ExpoLinearGradient: 499856f296f83c05279d18447bdb57ab0e06d294
-  ExpoLinking: 88ba36a28c83525e564b8229e02d451347accb70
+  ExpoLinearGradient: 2e52067758a25f9b51e3fc3f4077851c0756c81c
+  ExpoLinking: 65631933a0bedad33a592bfd2ab9fce0f14e5737
   ExpoLogBox: 89b634d5a8a64c4a6a7caad8f9985a28463c7002
-  ExpoModulesCore: 309f7521665b29bde290852c9fcacbeea883234f
-  ExpoModulesJSI: 27666f5c098bf4be86f83c706008b3828f1c42fb
-  ExpoSecureStore: ebb13e5e590b1e62ec530bd0cfe1a3e7f1867e26
-  ExpoSQLite: 77506d3d056c57118280d1e2a2d76cc06e4926b3
-  ExpoWebBrowser: f13a6e46e44049bbb8ce49ff8aaa4d819c87d1fe
+  ExpoModulesCore: 69c5c3aa901b35abedce1b4cabe8e2bff2e65af0
+  ExpoModulesJSI: b300d73875edde6bfe2d990c9800ba75be33910f
+  ExpoSecureStore: 83d31183fecaae7a084e88e29d14d5a02d90882a
+  ExpoSQLite: 6c9b9c2558a4194abe5cd1d236554ebbd59307cc
+  ExpoWebBrowser: 04fdc3b0619d6708f931a9d0f8850903cc38d896
   fast_float: b32c788ed9c6a8c584d114d0047beda9664e7cc6
   FBLazyVector: 82d1d7996af4c5850242966eb81e73f9a6dfab1e
   ffmpeg-kit-ios-audio: d4f033303516b8066291fd5e9c7eeb4d4e06182c
@@ -4123,7 +4123,7 @@ SPEC CHECKSUMS:
   lottie-ios: 8f959969761e9c45d70353667d00af0e5b9cadb3
   lottie-react-native: e542fe4b6e8eddcf893d5a8cef9f8b5c6d2f7331
   Protobuf: d7f7c8329edf5eb8af65547a8ba3e9c1cee927d5
-  PurchasesHybridCommon: afaf46e9650f9399984196a6966c6d697d6122a2
+  PurchasesHybridCommon: 27cca251e01998c53a6b31bf53baf09f84926609
   RCT-Folly: 846fda9475e61ec7bcbf8a3fe81edfcaeb090669
   RCTDeprecation: 9da1d0cf93db23ca8b41e8efe9ae558fd9c0077f
   RCTRequired: 92a63c7041031a131fa5206eb082d53f95729b79
@@ -4170,12 +4170,12 @@ SPEC CHECKSUMS:
   react-native-ota-hot-update: 00d6e7fd99e6827c0d2830c70d169e85f3e58768
   react-native-pager-view: c62ab82db28e2d11e7809c59085e2984a45979c5
   react-native-safe-area-context: eda63a662750758c1fdd7e719c9f1026c8d161cb
-  react-native-skia: 9af978889316cd83a9e4835e2b5e75ae5ceece80
+  react-native-skia: 42515f31cf5ff2793d8cc457fb90541076ccfde2
   react-native-slider: 6201419b3e3f7c6b7cf2068e0c01274fa86a1da5
   react-native-svga-player: 91a39e594d0610ec36fc658ae6b433966327b24d
   react-native-track-player: 10e54a72f3025b3542dfecb0f08ce41bbb81c1bd
   react-native-vector-icons: 1bfbe004218c23b4cb8851d010ef908d6503f337
-  react-native-vector-icons-material-design-icons: 12bc222b4cd6781a3cbbf4b537767d3d528011dd
+  react-native-vector-icons-material-design-icons: 95914f2f6b18e26e5c9563afe33184e110afe674
   react-native-video: 7f576ed712c196b7ad15b20bd0a6dd92488c50f0
   react-native-webview: 83c663c5bdf1357d3e7c00986260cb888ea0e328
   React-NativeModulesApple: 5f9aa5b3964c22ea10a13fbefc5b0e91285882b9
@@ -4211,17 +4211,17 @@ SPEC CHECKSUMS:
   ReactAppDependencyProvider: 2b19d66e5ddfe8dc7afb6338a4626156cbf2bab1
   ReactCodegen: 12218cefe3f991a092bf07a18f2304504de579a4
   ReactCommon: cbb4e1e2bff77892671eae8eb52154dcebf02280
-  RevenueCat: 9acbd29a62000b57d59efa16166290c4a119847b
+  RevenueCat: 9a37739bdf42af84dd87e023db340de7e0f9d874
   RNCMaskedView: d707a83784c67099b54b37d056ababb2767ce15e
   RNDeviceInfo: 4c852998208b60dc192ae3529e5867817719ad1e
   RNGestureHandler: c6327cf6e2bd384dc90351ccfff0da8142d62f54
   RNNotifee: 5e3b271e8ea7456a36eec994085543c9adca9168
-  RNPurchases: 1f7952aadbf745361711070e06286b9496628692
-  RNReanimated: c7f41b239964ff97c0ac083b2f1801d3d754516e
+  RNPurchases: 5090bc056e41a6d9b73cbee22cd4cf22e9efcb22
+  RNReanimated: a0068c25e0b27d5418d66289a915f53eb97380df
   RNScreens: e902eba58a27d3ad399a495d578e8aba3ea0f490
-  RNSentry: 0f198b04559bfb3273f49227cad1d710658143ab
-  RNSVG: 282c14a0d61ce7231e2f4aa213c618171f1dced5
-  RNWorklets: a3184955a41f2be46898a937e2821469c8c8da42
+  RNSentry: a582eca9a69941aecaedb41a6b86bce2c74672ce
+  RNSVG: 4a2ac4d20e011e0168f79adc3c04d42bcd69f7b5
+  RNWorklets: 6daa3975bebe6047822c7485666d501a716674ca
   SDWebImage: e9fc87c1aab89a8ab1bbd74eba378c6f53be8abf
   SDWebImageAVIFCoder: afe194a084e851f70228e4be35ef651df0fc5c57
   SDWebImageSVGCoder: 15a300a97ec1c8ac958f009c02220ac0402e936c
