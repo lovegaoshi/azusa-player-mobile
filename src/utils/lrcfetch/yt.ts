@@ -13,8 +13,7 @@ const getLrc = async (mid: string) => {
     if (info.captions?.caption_tracks?.[0] === undefined) throw new Error('no captions'); 
     const res = await bfetch(info.captions.caption_tracks[0].base_url),
         text = await res.text();
-    console.log(text);
-    return await info.getTranscript();
+    return text;
 }
 
 const getLrcOptions = async (
@@ -40,16 +39,7 @@ const getLrcOptions = async (
 const getLyric = async (songMid: string) => {
   logger.debug(`[Lrc] calling YT gettranscript : ${songMid}`);
   const transcript = await getLrc(songMid);
-  return (
-    transcript.transcript.content?.body?.initial_segments?.reduce(
-      (arr, curr) => {
-        if (curr?.snippet?.text === undefined) return arr;
-        const parsedText = curr.snippet.text?.replaceAll('\n', '.');
-        return `${arr}[${ms2MMSS(Number(curr.start_ms))}]${parsedText}\n`;
-      },
-      '',
-    ) ?? ''
-  );
+  return transcript;
 };
 
 export default {

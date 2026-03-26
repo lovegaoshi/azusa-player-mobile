@@ -119,7 +119,7 @@
     "react-native-gesture-handler": "~2.30.0",
     "react-native-get-random-values": "^2.0.0",
     "react-native-image-colors": "^2.6.0",
-    "react-native-lyric": "https://lovegaoshi@github.com/lovegaoshi/react-native-lyric.git#commit=53525b1120da51ae93e255593c1679e9dbe69782",
+    "react-native-lyric": "https://lovegaoshi@github.com/lovegaoshi/react-native-lyric.git#commit=f9f8ca9127a286ed5ea42d33d91ebe3cf4f81c25",
     "react-native-ota-hot-update": "2.2.2",
     "react-native-pager-view": "8.0.0",
     "react-native-paper": "5.15.0",
@@ -200,6 +200,7 @@
     "react-test-renderer": "19.2.0",
     "reactotron-react-native": "^5.1.18",
     "rimraf": "^6.1.3",
+    "shx": "^0.4.0",
     "typescript": "6.0.2"
   },
   "engines": {
