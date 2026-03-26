@@ -48,16 +48,19 @@ export default function CustomScrollView({
   const [scrollBarVisible, setScrollBarVisible] = useState(false);
   const scrollIndicatorOpacity = useSharedValue(0);
   const startScrollY = useSharedValue(0);
+  const lastBarHeightP = useSharedValue(0);
   const barHeightP = useDerivedValue(() => {
-    if (contentHeight.value < 2) return 0;
+    if (contentHeight.value < 0) return lastBarHeightP.value;
     const minBarHeight =
       barHeight > 1 ? barHeight : scrollViewHeight.value * barHeight;
-    return Math.max(
+    const newBarHeight = Math.max(
       minBarHeight,
       scrollViewHeight.value *
         (scrollViewHeight.value /
           (scrollViewHeight.value + contentHeight.value)),
     );
+    lastBarHeightP.value = newBarHeight;
+    return newBarHeight;
   });
   const scrollBarY = useDerivedValue(() =>
     interpolate(
