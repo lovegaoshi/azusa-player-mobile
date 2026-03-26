@@ -26,11 +26,13 @@ export const addMFsdks = async (paths: string[]) => {
 
 export const initMFsdk = async () => {
   const mfsdkPaths = await getMFsdk();
+  const failedSDKs: string[] = [];
   const mfsdks = await Promise.all(
     mfsdkPaths.map(async p => {
       try {
         const sdkContent = await readTxtFile(p, mfsdkSubFolder);
         if (sdkContent === undefined) {
+          failedSDKs.push(p);
           throw new Error(`[mfsdk] ${p} cannot be read! corrupted/DNE`);
         }
         return loadEvalPlugin(sdkContent, p);
@@ -40,6 +42,7 @@ export const initMFsdk = async () => {
       }
     }),
   );
+  rmMFsdks(failedSDKs);
   return filterUndefined(mfsdks, v => v);
 };
 
