@@ -49,6 +49,7 @@ export default function CustomScrollView({
   const scrollIndicatorOpacity = useSharedValue(0);
   const startScrollY = useSharedValue(0);
   const lastBarHeightP = useSharedValue(0);
+  const lastScrollBarY = useSharedValue(0);
   const barHeightP = useDerivedValue(() => {
     if (contentHeight.value < 0) return lastBarHeightP.value;
     const minBarHeight =
@@ -62,14 +63,18 @@ export default function CustomScrollView({
     lastBarHeightP.value = newBarHeight;
     return newBarHeight;
   });
-  const scrollBarY = useDerivedValue(() =>
-    interpolate(
+  const scrollBarY = useDerivedValue(() => {
+    const calculatedY = interpolate(
       scrollPosition.value,
       [0, 1],
       [0, scrollViewHeight.value - barHeightP.value],
       Extrapolation.CLAMP,
-    ),
-  );
+    );
+    if (calculatedY >= 0) {
+      lastScrollBarY.value = calculatedY;
+    }
+    return calculatedY >= 0 ? calculatedY : lastScrollBarY.value;
+  });
   const showLegend = useSharedValue(0);
 
   const scrollTimingAnimConfig = {
