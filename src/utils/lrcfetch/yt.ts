@@ -6,12 +6,13 @@ import { Source } from '@enums/MediaFetch';
 import { ytwebClient } from '@utils/mediafetch/ytbi';
 import bfetch from '@utils/BiliFetch';
 
-const getLrc = async (mid: string) => {
+const getLrc = async (mid: string, noFetch = false) => {
   const ytc = await ytwebClient();
   const info = await ytc.getBasicInfo(mid, { client: ClientType.ANDROID });
-  if (info.captions?.caption_tracks?.[0] === undefined) {
+  if (info.captions?.caption_tracks?.[0].base_url === undefined) {
     throw new Error('no captions');
   }
+  if (noFetch) return info.captions.caption_tracks[0].base_url;
   const res = await bfetch(info.captions.caption_tracks[0].base_url),
     text = await res.text();
   return text;
@@ -22,7 +23,7 @@ const getLrcOptions = async (
 ): Promise<NoxLyric.NoxFetchedLyric[]> => {
   try {
     if (song?.source !== Source.ytbvideo) return [];
-    await getLrc(song.bvid);
+    await getLrc(song.bvid, true);
     return [
       {
         key: song.bvid,

@@ -109,6 +109,7 @@ export const Playlists = ({
           logger.warn('[flashdrag] begin drag via long press');
           beginDrag();
         }}
+        delayLongPress={1500}
         style={[
           {
             backgroundColor:
