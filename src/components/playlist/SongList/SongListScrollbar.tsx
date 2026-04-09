@@ -64,12 +64,6 @@ export default function CustomScrollView({
     return newBarHeight;
   });
   const scrollBarY = useDerivedValue(() => {
-    console.log(
-      'srollbarY',
-      scrollPosition.value,
-      scrollViewHeight.value,
-      contentHeight.value,
-    );
     if (scrollPosition.value < 0) return lastScrollBarY.value;
     const calculatedY = interpolate(
       scrollPosition.value,
