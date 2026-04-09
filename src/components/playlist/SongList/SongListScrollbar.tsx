@@ -64,16 +64,21 @@ export default function CustomScrollView({
     return newBarHeight;
   });
   const scrollBarY = useDerivedValue(() => {
+    console.log(
+      'srollbarY',
+      scrollPosition.value,
+      scrollViewHeight.value,
+      contentHeight.value,
+    );
+    if (scrollPosition.value < 0) return lastScrollBarY.value;
     const calculatedY = interpolate(
       scrollPosition.value,
       [0, 1],
       [0, scrollViewHeight.value - barHeightP.value],
       Extrapolation.CLAMP,
     );
-    if (calculatedY >= 0) {
-      lastScrollBarY.value = calculatedY;
-    }
-    return calculatedY >= 0 ? calculatedY : lastScrollBarY.value;
+    lastScrollBarY.value = calculatedY;
+    return calculatedY;
   });
   const showLegend = useSharedValue(0);
 
