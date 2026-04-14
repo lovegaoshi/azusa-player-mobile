@@ -1,11 +1,12 @@
 diff --git a/node_modules/@react-navigation/native/lib/module/useBackButton.native.js b/node_modules/@react-navigation/native/lib/module/useBackButton.native.js
-index d979f73..a131f08 100644
+index d979f73..14d16a1 100644
 --- a/node_modules/@react-navigation/native/lib/module/useBackButton.native.js
 +++ b/node_modules/@react-navigation/native/lib/module/useBackButton.native.js
-@@ -9,6 +9,9 @@ export function useBackButton(ref) {
+@@ -9,6 +9,10 @@ export function useBackButton(ref) {
        if (navigation == null) {
          return false;
        }
++      const navState = navigation.getState();
 +      if (navState.type === 'drawer' && navState.index === 0) {
 +        return true;
 +      }
