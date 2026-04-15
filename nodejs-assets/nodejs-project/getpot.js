@@ -23,6 +23,9 @@ export const getPot = async identifier => {
   Object.assign(globalThis, {
     window: dom.window,
     document: dom.window.document,
+    location: dom.window.location,
+    origin: dom.window.origin,
+    dispatchEvent: dom.window.dispatchEvent.bind(dom.window),
   });
 
   const challengeReq = await fetch(

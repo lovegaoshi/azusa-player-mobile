@@ -18,6 +18,15 @@ export const getPot = async identifier => {
   Object.assign(globalThis, {
     window: dom.window,
     document: dom.window.document,
+    location: dom.window.location,
+    origin: dom.window.origin,
+    dispatchEvent: dom.window.dispatchEvent.bind(dom.window),
+  });
+
+  Object.defineProperty(dom.window.HTMLCanvasElement.prototype, 'getContext', {
+    value: () => null,
+    writable: true,
+    configurable: true,
   });
 
   const innertube = await Innertube.create({ cache: new UniversalCache(true) });
