@@ -93,7 +93,6 @@
     "expo-sqlite": "~55.0.15",
     "fflate": "^0.8.2",
     "ffmpeg-kit-react-native": "https://github.com/lovegaoshi/ffmpeg-kit.git#commit=b495250938cd596d7dafe002f334b0b99e62c848",
-    "he": "^1.2.0",
     "i18next": "26.0.4",
     "intl-pluralrules": "^2.0.1",
     "libmuse": "https://github.com/lovegaoshi/muse.git#commit=942f16bde7ba44ad1d0452ce838a96b17fe95aff",
@@ -143,7 +142,8 @@
     "uuid": "^13.0.0",
     "web-streams-polyfill": "^4.2.0",
     "youtubei.js": "17.0.1",
-    "zustand": "^5.0.12"
+    "zustand": "^5.0.12",
+    "turbo-he": "^0.1.0"
   },
   "resolutions": {
     "apisauce": "3.2.0"

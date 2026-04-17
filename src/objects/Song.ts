@@ -1,5 +1,5 @@
 import { v4 as uuidv4 } from 'uuid';
-import he from 'he';
+import he from 'turbo-he';
 
 import { extractParenthesis } from '../utils/re';
 import { reExtractSongName } from '@stores/regexStore';

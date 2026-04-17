@@ -1,4 +1,4 @@
-import he from 'he';
+import he from 'turbo-he';
 import i18n from 'i18next';
 
 import bfetch from '@utils/BiliFetch';

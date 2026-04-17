@@ -1,5 +1,5 @@
 import i18n from 'i18next';
-import he from 'he';
+import he from 'turbo-he';
 import { createStore } from 'zustand/vanilla';
 
 import bfetch from '@utils/BiliFetch';

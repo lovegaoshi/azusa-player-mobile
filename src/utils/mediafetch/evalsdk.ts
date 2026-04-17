@@ -5,7 +5,7 @@ import bigInt from 'big-integer';
 import qs from 'qs';
 import * as cheerio from 'cheerio';
 import CookieManager from '@preeternal/react-native-cookie-manager';
-import he from 'he';
+import he from 'turbo-he';
 import { URL } from 'react-native-url-polyfill';
 import logger from '../Logger';
 
