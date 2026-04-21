@@ -244,6 +244,26 @@
         "darkTheme": true
       },
       "gifs": [
+        "https://i0.hdslb.com/bfs/garb/727082f15d733ede6bf3b9e3380627826c6490f2.png",
+        "https://i0.hdslb.com/bfs/garb/85fcdf069f57232659a41f27e3ae6597139b2b5f.png",
+        "https://i0.hdslb.com/bfs/garb/5dac711243e4ec20d2ca2771bbd0d4e6ecc20cad.png",
+        "https://i0.hdslb.com/bfs/garb/6182fad5554ffa321b2d7f0f04b0e3c01d6eb35f.png",
+        "https://i0.hdslb.com/bfs/garb/ee14c90cab014513607e37f0404ca38d26789795.png",
+        "https://i0.hdslb.com/bfs/garb/5fac1caa50e8ff96fe38c0f090e64aef52f33663.png",
+        "https://i0.hdslb.com/bfs/garb/0d04f16e4d2e46bd0fa975cc0804cbd1604f439a.png",
+        "https://i0.hdslb.com/bfs/garb/21ce615c480eac395b93b3f9c33e0dac3747fec6.png",
+        "https://i0.hdslb.com/bfs/garb/263f17aebc14f72d50b72b581f639cfcab94a343.png",
+        "https://i0.hdslb.com/bfs/garb/56c567a3a328b95fd7cb062b400a31aec838bfa9.png",
+        "https://i0.hdslb.com/bfs/garb/8989a53cab9d11e4531ffcac0cf4c03ce846f0d2.png",
+        "https://i0.hdslb.com/bfs/garb/bc524d4261788c6f876c2afd3c0872e11f8f63cb.png",
+        "https://i0.hdslb.com/bfs/garb/e728689be85e8f1089da5f93b70fb69e8ed52504.png",
+        "https://i0.hdslb.com/bfs/garb/76e89867d3df83c92e0282cff75db36269a31e64.png",
+        "https://i0.hdslb.com/bfs/garb/fbf2add5f48857836c50bdf091b2b2022e842081.png",
+        "https://i0.hdslb.com/bfs/garb/f3c329a2a62e6be717c3bc5bdc93944a28e2b64a.png",
+        "https://i0.hdslb.com/bfs/garb/7824b51090ef95e588874aa77eedf365be652815.png",
+        "https://i0.hdslb.com/bfs/garb/a7662bb1141a0e0ea10dc7cae55391e7b300650e.png",
+        "https://i0.hdslb.com/bfs/garb/374de06049559b2b27b6a613f9168d83d92556d2.png",
+        "https://i0.hdslb.com/bfs/garb/81bd3d2e2a8a16a06c6a6a2f97d5900764d2aaf8.png",
         "https://i0.hdslb.com/bfs/new_dyn/a0cc5da47136159892d52a172382c62d2249596.jpg",
         "https://i0.hdslb.com/bfs/new_dyn/10359b353aa163b6a4232473a55990831112031857.gif",
         "https://i0.hdslb.com/bfs/new_dyn/c5601f03a49b4e9d1127e1b70f9c3bc23546606146161263.png",
@@ -337,6 +357,30 @@
         "https://i0.hdslb.com/bfs/garb/1f40dfcfcda241fb95c6ffa78d1d34906a5d8e2c.png"
       ],
       "backgroundImages": [
+        {
+          "type": "biliNFTVideoNew",
+          "identifier": "[\"112535\",\"112536\",\"于隐月下祝祷\"]"
+        },
+        {
+          "type": "biliNFTVideoNew",
+          "identifier": "[\"112535\",\"112536\",\"灯火牵系之处\"]"
+        },
+        {
+          "type": "biliNFTVideoNew",
+          "identifier": "[\"112535\",\"112536\",\"晨曦之庭\"]"
+        },
+        "https://i0.hdslb.com/bfs/garb/open/f133bdb5825c026850822709f00ce51d7288c386.png",
+        "https://i0.hdslb.com/bfs/garb/open/fbf344ecd9a55866d5f92f592cf550fb70a17048.png",
+        "https://i0.hdslb.com/bfs/garb/open/143ee3bd68529bca80d32dec05ea55954ab2ecd5.jpg",
+        "https://i0.hdslb.com/bfs/garb/open/54c06728c761b698109ac8417cf9d00009f895dc.png",
+        {
+          "type": "biliNFTVideoNew",
+          "identifier": "[\"112535\",\"112536\",\"悠然落花\"]"
+        },
+        {
+          "type": "biliNFTVideoRedeem",
+          "identifier": "[\"112535\",\"112536\",\"典藏卡·落入甘美陷阱\"]"
+        },
         "https://i0.hdslb.com/bfs/new_dyn/20065dee06a3485304d0ea8960ddb2d23546606146161263.png",
         {
           "type": "biliNFTVideoNew",
