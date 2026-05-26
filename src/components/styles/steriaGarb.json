@@ -2277,7 +2277,7 @@
       "darkTheme": true
     },
     "gifs": [
-            "https://i0.hdslb.com/bfs/garb/b616f6c00a2c5eacf8f4f286e06011e17692cea6.png",
+      "https://i0.hdslb.com/bfs/garb/b616f6c00a2c5eacf8f4f286e06011e17692cea6.png",
       "https://i0.hdslb.com/bfs/garb/ce7b4585667bffc1563dc7273ce5850d28000065.png",
       "https://i0.hdslb.com/bfs/garb/07588380d673229613300075b04edf214a9f7e9b.png",
       "https://i0.hdslb.com/bfs/garb/38ccb447ce168caed36746d446ffb152f0d116ad.png",
@@ -2324,7 +2324,7 @@
       "https://i0.hdslb.com/bfs/garb/898b16d296c8bc0d9bcc93163edc52e41df64580.png"
     ],
     "backgroundImages": [
-            {
+      {
         "type": "biliNFTVideoNew",
         "identifier": "[\"112673\",\"112674\",\"歌予梦恋\"]"
       },
@@ -6635,6 +6635,156 @@
       {
         "type": "biliNFTVideoRedeem",
         "identifier": "[\"112091\",\"112092\",\"典藏卡·回音咏唱\"]"
+      }
+    ],
+    "customColors": {
+      "maskedBackgroundColor": "rgba(0, 0, 0, 0.60)",
+      "playlistDrawerBackgroundColor": "green",
+      "playlistDrawerBackgroundColorTransparent": "rgba(0, 255, 0, 0.35)",
+      "progressThumbTintColor": "rgb(235, 235, 0)",
+      "progressMinimumTrackTintColor": "rgb(235, 235, 0)",
+      "progressMaximumTrackTintColor": "#FFFFFF",
+      "btnBackgroundColor": "rgb(72, 71, 58)",
+      "textInputSelectionColor": "green"
+    },
+    "colors": {
+      "primary": "#fcf75e",
+      "onPrimary": "rgb(50, 50, 0)",
+      "primaryContainer": "rgb(73, 73, 0)",
+      "onPrimaryContainer": "rgb(234, 234, 0)",
+      "secondary": "rgb(202, 200, 165)",
+      "onSecondary": "rgb(50, 50, 24)",
+      "secondaryContainer": "rgb(73, 72, 45)",
+      "onSecondaryContainer": "rgb(231, 228, 191)",
+      "tertiary": "rgb(164, 208, 189)",
+      "onTertiary": "rgb(11, 55, 42)",
+      "tertiaryContainer": "rgb(37, 78, 64)",
+      "onTertiaryContainer": "rgb(191, 236, 216)",
+      "error": "rgb(255, 180, 171)",
+      "onError": "rgb(105, 0, 5)",
+      "errorContainer": "rgb(147, 0, 10)",
+      "onErrorContainer": "rgb(255, 180, 171)",
+      "background": "rgba(0,0,0, 0.4)",
+      "onBackground": "rgb(230, 226, 217)",
+      "surface": "rgb(28, 28, 23)",
+      "onSurface": "rgba(235, 235, 0, 1)",
+      "text": "#fcf75e",
+      "surfaceVariant": "rgb(10, 10, 10)",
+      "onSurfaceVariant": "rgb(225, 225, 0)",
+      "outline": "rgb(147, 145, 130)",
+      "outlineVariant": "rgb(72, 71, 58)",
+      "shadow": "rgb(0, 0, 0)",
+      "scrim": "rgb(0, 0, 0)",
+      "inverseSurface": "rgb(230, 226, 217)",
+      "inverseOnSurface": "rgb(49, 49, 43)",
+      "inversePrimary": "rgb(98, 98, 0)",
+      "elevation": {
+        "level0": "transparent",
+        "level1": "rgb(53, 56, 57)",
+        "level2": "rgb(10, 10, 10)",
+        "level3": "rgb(10, 10, 10)",
+        "level4": "rgb(49, 49, 20)",
+        "level5": "rgb(53, 53, 20)"
+      },
+      "surfaceDisabled": "rgba(230, 226, 217, 0.12)",
+      "onSurfaceDisabled": "rgba(230, 226, 217, 0.38)",
+      "backdrop": "rgba(49, 49, 37, 0.4)"
+    }
+  },
+  {
+    "metaData": {
+      "themeName": "子言姐姐·星群映电",
+      "themeDesc": "你好呀，子言姐姐专属收藏集《星群映电》终于来力！\n✪ 全动态+全语音卡池！超豪华画师阵容！！\n✪ 动态主题皮肤＆UI＆拧头头像框等等！\n✪ 超级可爱动态表情包提前解锁！\n✪ 还有超精美实体周边兑换！\n每一张都是隐藏级质量！诚意绝对拉满！一起来玩吧！",
+      "themeAuthor": "NoxAutoGen",
+      "themeIcon": "https://i0.hdslb.com/bfs/garb/4083da2c580703f4d1872ac555b299ac678bc418.jpg",
+      "darkTheme": true
+    },
+    "gifs": [
+      "https://i0.hdslb.com/bfs/garb/0cc43aa89daa22bb45d72dec95161cf3c99d2563.png",
+      "https://i0.hdslb.com/bfs/garb/ded3019affb3384d28a48530d7b005c1aaeb4195.png",
+      "https://i0.hdslb.com/bfs/garb/aea5576567341d36aadb777ed9356ca8981176a2.png",
+      "https://i0.hdslb.com/bfs/garb/617f877813ec87f60f680941b9bed225200e9a87.png",
+      "https://i0.hdslb.com/bfs/garb/2b9019b2fb2b167d36e1d80bd5e368036f05eb0e.png",
+      "https://i0.hdslb.com/bfs/garb/c2936b7f15a13d707cb1542f2dc5d0951c0491f0.png",
+      "https://i0.hdslb.com/bfs/garb/3e1b1a537edd8a4b431ce6a8538c8a3c2642a5d5.png",
+      "https://i0.hdslb.com/bfs/garb/1b822667c1b482468242e7f9dd9cdeda37eb619d.png",
+      "https://i0.hdslb.com/bfs/garb/c7e385586c24cd9460e60cff78954c1821780409.png",
+      "https://i0.hdslb.com/bfs/garb/b438b7e3e5e47683d139ed8e8b90aa1e75d90426.png",
+      "https://i0.hdslb.com/bfs/garb/81e681048879ae7120311a6cefeae294edc7313b.png",
+      "https://i0.hdslb.com/bfs/garb/0d1f6306ee87f0d0456b5ab8e1a37290938c3b92.png",
+      "https://i0.hdslb.com/bfs/garb/24804514aaba6e92106107a74b6d15b299796ba9.png",
+      "https://i0.hdslb.com/bfs/garb/3812fe0d8668ca3534bb3b0f687e468038c1cfc1.png",
+      "https://i0.hdslb.com/bfs/garb/a3265f615332884971572f5927029d760961d248.png",
+      "https://i0.hdslb.com/bfs/garb/dafa5e8979c7e9f553ff1b2f0a82669e7cfce670.png",
+      "https://i0.hdslb.com/bfs/garb/be7f91f85071a1fd42eeac965c6e42a7e32c52ad.png",
+      "https://i0.hdslb.com/bfs/garb/663a7c4b27144e14bbc3144f393bddea27b0350a.png",
+      "https://i0.hdslb.com/bfs/garb/a71af8e5b0277ece0f1a8491d73dd2cd78760fae.png",
+      "https://i0.hdslb.com/bfs/garb/059a7329b8f8cb5ac8e52dcd338366e976f71a3c.png"
+    ],
+    "backgroundImages": [
+      {
+        "type": "biliNFTVideoNew",
+        "identifier": "[\"112812\",\"112813\",\"耀夏炎言\"]"
+      },
+      {
+        "type": "biliNFTVideoNew",
+        "identifier": "[\"112812\",\"112813\",\"星群映电\"]"
+      },
+      {
+        "type": "biliNFTVideoNew",
+        "identifier": "[\"112812\",\"112813\",\"花火牵梦\"]"
+      },
+      {
+        "type": "biliNFTVideoNew",
+        "identifier": "[\"112812\",\"112813\",\"Game Girl Advance\"]"
+      },
+      {
+        "type": "biliNFTVideoNew",
+        "identifier": "[\"112812\",\"112813\",\"↓↘→+P\"]"
+      },
+      {
+        "type": "biliNFTVideoNew",
+        "identifier": "[\"112812\",\"112813\",\"HAPPY ENDING？\"]"
+      },
+      {
+        "type": "biliNFTVideoNew",
+        "identifier": "[\"112812\",\"112813\",\"霓紫狂潮\"]"
+      },
+      {
+        "type": "biliNFTVideoNew",
+        "identifier": "[\"112812\",\"112813\",\"Deja Vu\"]"
+      },
+      {
+        "type": "biliNFTVideoNew",
+        "identifier": "[\"112812\",\"112813\",\"灵魂筹码\"]"
+      },
+      {
+        "type": "biliNFTVideoNew",
+        "identifier": "[\"112812\",\"112813\",\"旧幕游光\"]"
+      },
+      {
+        "type": "biliNFTVideoNew",
+        "identifier": "[\"112812\",\"112813\",\"像素幻糖\"]"
+      },
+      {
+        "type": "biliNFTVideoNew",
+        "identifier": "[\"112812\",\"112813\",\"再来一局\"]"
+      },
+      {
+        "type": "biliNFTVideoNew",
+        "identifier": "[\"112812\",\"112813\",\"万芒倾夜\"]"
+      },
+      {
+        "type": "biliNFTVideoNew",
+        "identifier": "[\"112812\",\"112813\",\"千禧忙音\"]"
+      },
+      {
+        "type": "biliNFTVideoNew",
+        "identifier": "[\"112812\",\"112813\",\"放学别走！\"]"
+      },
+      {
+        "type": "biliNFTVideoNew",
+        "identifier": "[\"112812\",\"112813\",\"冷感成像\"]"
       }
     ],
     "customColors": {
