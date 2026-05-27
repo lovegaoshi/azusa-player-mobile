@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 77;
+	objectVersion = 100;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -37,14 +37,12 @@
 /* Begin PBXCopyFilesBuildPhase section */
 		CC2F1F622EB317F4005661D4 /* Embed Foundation Extensions */ = {
 			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
 			dstPath = "";
-			dstSubfolderSpec = 13;
+			dstSubfolder = PlugIns;
 			files = (
 				CC2F1F612EB317F4005661D4 /* APMShare.appex in Embed Foundation Extensions */,
 			);
 			name = "Embed Foundation Extensions";
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
 
@@ -107,28 +105,22 @@
 /* Begin PBXFrameworksBuildPhase section */
 		00E356EB1AD99517003FC87E /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 				5113E2BB4D6051600F956353 /* Pods_azusa_player_mobile_APMTests.framework in Frameworks */,
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 		13B07F8C1A680F5B00A75B9A /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 				AA9F058A2AB48946005FA2C6 /* libavfilter.xcframework in Frameworks */,
 				AA9F058E2AB489B1005FA2C6 /* libavutil.xcframework in Frameworks */,
 				EF174DA98930A4C1B47966AF /* Pods_azusa_player_mobile.framework in Frameworks */,
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 		CC2F1F542EB317F4005661D4 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
@@ -264,8 +256,6 @@
 			);
 			buildRules = (
 			);
-			dependencies = (
-			);
 			name = APMTests;
 			productName = exampleTests;
 			productReference = 00E356EE1AD99517003FC87E /* APMTests.xctest */;
@@ -307,8 +297,6 @@
 			);
 			buildRules = (
 			);
-			dependencies = (
-			);
 			fileSystemSynchronizedGroups = (
 				CC2F1F582EB317F4005661D4 /* APMShare */,
 			);
@@ -348,7 +336,7 @@
 				Base,
 			);
 			mainGroup = 83CBB9F61A601CBA00E9B192;
-			preferredProjectObjectVersion = 77;
+			preferredProjectObjectVersion = 100;
 			productRefGroup = 83CBBA001A601CBA00E9B192 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -363,98 +351,88 @@
 /* Begin PBXResourcesBuildPhase section */
 		00E356EC1AD99517003FC87E /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 		13B07F8E1A680F5B00A75B9A /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 				364DDFD12C13515C0074A504 /* Entitlements.plist in Resources */,
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				1DC9992F80AADAB3B7E446F2 /* PrivacyInfo.xcprivacy in Resources */,
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 		CC2F1F552EB317F4005661D4 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
 		00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */ = {
 			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
 			inputPaths = (
 				"$(SRCROOT)/.xcode.env.local",
 				"$(SRCROOT)/.xcode.env",
 			);
 			name = "Bundle React Native code and images";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "set -e\nWITH_ENVIRONMENT=\"../node_modules/react-native/scripts/xcode/with-environment.sh\"\nSENTRY_XCODE=\"../node_modules/@sentry/react-native/scripts/sentry-xcode.sh\"\n\n/bin/sh -c \"$WITH_ENVIRONMENT $SENTRY_XCODE\"\n";
+			shellScript = (
+				"set -e",
+				"WITH_ENVIRONMENT=\"../node_modules/react-native/scripts/xcode/with-environment.sh\"",
+				"SENTRY_XCODE=\"../node_modules/@sentry/react-native/scripts/sentry-xcode.sh\"",
+				"",
+				"/bin/sh -c \"$WITH_ENVIRONMENT $SENTRY_XCODE\"",
+				"",
+			);
 		};
 		19E39CA29D49615F5D2CB2A0 /* [Expo] Configure project */ = {
 			isa = PBXShellScriptBuildPhase;
 			alwaysOutOfDate = 1;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
 			inputPaths = (
 				"$(SRCROOT)/.xcode.env",
 				"$(SRCROOT)/.xcode.env.local",
 				"$(SRCROOT)/Pods/Target Support Files/Pods-azusa-player-mobile-APMTests/expo-configure-project.sh",
 			);
 			name = "[Expo] Configure project";
-			outputFileListPaths = (
-			);
 			outputPaths = (
 				"$(SRCROOT)/Pods/Target Support Files/Pods-azusa-player-mobile-APMTests/ExpoModulesProvider.swift",
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# This script configures Expo modules and generates the modules provider file.\nbash -l -c \"./Pods/Target\\ Support\\ Files/Pods-azusa-player-mobile-APMTests/expo-configure-project.sh\"\n";
+			shellScript = (
+				"# This script configures Expo modules and generates the modules provider file.",
+				"bash -l -c \"./Pods/Target\\ Support\\ Files/Pods-azusa-player-mobile-APMTests/expo-configure-project.sh\"",
+				"",
+			);
 		};
 		1D12CCA46F8200FDC26C87C5 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
 			inputPaths = (
 				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
 				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
 			outputPaths = (
 				"$(DERIVED_FILE_DIR)/Pods-azusa-player-mobile-checkManifestLockResult.txt",
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			shellScript = (
+				"diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null",
+				"if [ $? != 0 ] ; then",
+				"    # print error to STDERR",
+				"    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2",
+				"    exit 1",
+				"fi",
+				"# This output is used by Xcode 'outputs' to avoid re-running this script phase.",
+				"echo \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"",
+				"",
+			);
 			showEnvVarsInLog = 0;
 		};
 		2D80E31B57EB46A621A04C76 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
 			inputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-azusa-player-mobile/Pods-azusa-player-mobile-resources-${CONFIGURATION}-input-files.xcfilelist",
 			);
@@ -462,16 +440,15 @@
 			outputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-azusa-player-mobile/Pods-azusa-player-mobile-resources-${CONFIGURATION}-output-files.xcfilelist",
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-azusa-player-mobile/Pods-azusa-player-mobile-resources.sh\"\n";
+			shellScript = (
+				"\"${PODS_ROOT}/Target Support Files/Pods-azusa-player-mobile/Pods-azusa-player-mobile-resources.sh\"",
+				"",
+			);
 			showEnvVarsInLog = 0;
 		};
 		4D1A105E8DA4143AA121A89C /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
 			inputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-azusa-player-mobile/Pods-azusa-player-mobile-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
@@ -479,38 +456,39 @@
 			outputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-azusa-player-mobile/Pods-azusa-player-mobile-frameworks-${CONFIGURATION}-output-files.xcfilelist",
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-azusa-player-mobile/Pods-azusa-player-mobile-frameworks.sh\"\n";
+			shellScript = (
+				"\"${PODS_ROOT}/Target Support Files/Pods-azusa-player-mobile/Pods-azusa-player-mobile-frameworks.sh\"",
+				"",
+			);
 			showEnvVarsInLog = 0;
 		};
 		514ACECEF4829034DF0719ED /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
 			inputPaths = (
 				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
 				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
 			outputPaths = (
 				"$(DERIVED_FILE_DIR)/Pods-azusa-player-mobile-APMTests-checkManifestLockResult.txt",
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			shellScript = (
+				"diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null",
+				"if [ $? != 0 ] ; then",
+				"    # print error to STDERR",
+				"    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2",
+				"    exit 1",
+				"fi",
+				"# This output is used by Xcode 'outputs' to avoid re-running this script phase.",
+				"echo \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"",
+				"",
+			);
 			showEnvVarsInLog = 0;
 		};
 		706718A2BF7D1CED07A69731 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
 			inputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-azusa-player-mobile-APMTests/Pods-azusa-player-mobile-APMTests-resources-${CONFIGURATION}-input-files.xcfilelist",
 			);
@@ -518,19 +496,16 @@
 			outputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-azusa-player-mobile-APMTests/Pods-azusa-player-mobile-APMTests-resources-${CONFIGURATION}-output-files.xcfilelist",
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-azusa-player-mobile-APMTests/Pods-azusa-player-mobile-APMTests-resources.sh\"\n";
+			shellScript = (
+				"\"${PODS_ROOT}/Target Support Files/Pods-azusa-player-mobile-APMTests/Pods-azusa-player-mobile-APMTests-resources.sh\"",
+				"",
+			);
 			showEnvVarsInLog = 0;
 		};
 		7153C7FB55B649A2A827D9A9 /* [Expo] Configure project */ = {
 			isa = PBXShellScriptBuildPhase;
 			alwaysOutOfDate = 1;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
 			inputPaths = (
 				"$(SRCROOT)/.xcode.env",
 				"$(SRCROOT)/.xcode.env.local",
@@ -538,20 +513,18 @@
 				"$(SRCROOT)/Pods/Target Support Files/Pods-azusa-player-mobile/expo-configure-project.sh",
 			);
 			name = "[Expo] Configure project";
-			outputFileListPaths = (
-			);
 			outputPaths = (
 				"$(SRCROOT)/Pods/Target Support Files/Pods-azusa-player-mobile/ExpoModulesProvider.swift",
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# This script configures Expo modules and generates the modules provider file.\nbash -l -c \"./Pods/Target\\ Support\\ Files/Pods-azusa-player-mobile/expo-configure-project.sh\"\n";
+			shellScript = (
+				"# This script configures Expo modules and generates the modules provider file.",
+				"bash -l -c \"./Pods/Target\\ Support\\ Files/Pods-azusa-player-mobile/expo-configure-project.sh\"",
+				"",
+			);
 		};
 		9C366928E3B19FD38DADEE35 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
 			inputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-azusa-player-mobile-APMTests/Pods-azusa-player-mobile-APMTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
@@ -559,42 +532,40 @@
 			outputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-azusa-player-mobile-APMTests/Pods-azusa-player-mobile-APMTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-azusa-player-mobile-APMTests/Pods-azusa-player-mobile-APMTests-frameworks.sh\"\n";
+			shellScript = (
+				"\"${PODS_ROOT}/Target Support Files/Pods-azusa-player-mobile-APMTests/Pods-azusa-player-mobile-APMTests-frameworks.sh\"",
+				"",
+			);
 			showEnvVarsInLog = 0;
 		};
 		9F835F72A592488094ED0D47 /* Upload Debug Symbols to Sentry */ = {
 			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
 			name = "Upload Debug Symbols to Sentry";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "/bin/sh ../node_modules/@sentry/react-native/scripts/sentry-xcode-debug-files.sh";
+			shellScript = (
+				"/bin/sh ../node_modules/@sentry/react-native/scripts/sentry-xcode-debug-files.sh",
+			);
 		};
 		FD10A7F022414F080027D42C /* Start Packager */ = {
 			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
 			name = "Start Packager";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "export RCT_METRO_PORT=\"${RCT_METRO_PORT:=8081}\"\necho \"export RCT_METRO_PORT=${RCT_METRO_PORT}\" > \"${SRCROOT}/../node_modules/react-native/scripts/.packager.env\"\nif [ -z \"${RCT_NO_LAUNCH_PACKAGER+xxx}\" ] ; then\n  if nc -w 5 -z localhost ${RCT_METRO_PORT} ; then\n    if ! curl -s \"http://localhost:${RCT_METRO_PORT}/status\" | grep -q \"packager-status:running\" ; then\n      echo \"Port ${RCT_METRO_PORT} already in use, packager is either not running or not running correctly\"\n      exit 2\n    fi\n  else\n    open \"$SRCROOT/../node_modules/react-native/scripts/launchPackager.command\" || echo \"Can't start packager automatically\"\n  fi\nfi\n";
+			shellScript = (
+				"export RCT_METRO_PORT=\"${RCT_METRO_PORT:=8081}\"",
+				"echo \"export RCT_METRO_PORT=${RCT_METRO_PORT}\" > \"${SRCROOT}/../node_modules/react-native/scripts/.packager.env\"",
+				"if [ -z \"${RCT_NO_LAUNCH_PACKAGER+xxx}\" ] ; then",
+				"  if nc -w 5 -z localhost ${RCT_METRO_PORT} ; then",
+				"    if ! curl -s \"http://localhost:${RCT_METRO_PORT}/status\" | grep -q \"packager-status:running\" ; then",
+				"      echo \"Port ${RCT_METRO_PORT} already in use, packager is either not running or not running correctly\"",
+				"      exit 2",
+				"    fi",
+				"  else",
+				"    open \"$SRCROOT/../node_modules/react-native/scripts/launchPackager.command\" || echo \"Can't start packager automatically\"",
+				"  fi",
+				"fi",
+				"",
+			);
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -602,30 +573,24 @@
 /* Begin PBXSourcesBuildPhase section */
 		00E356EA1AD99517003FC87E /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 				00E356F31AD99517003FC87E /* exampleTests.m in Sources */,
 				DC4736F4D25A78F1E3AF4737 /* ExpoModulesProvider.swift in Sources */,
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 		13B07F871A680F5B00A75B9A /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 				364DDFCE2C1347200074A504 /* PhoneSceneDelegate.swift in Sources */,
 				364DDFCC2C1347090074A504 /* CarSceneDelegate.swift in Sources */,
 				364DDFCA2C1346D80074A504 /* AppDelegate.swift in Sources */,
 				BDB3121DF2250E03AB81F873 /* ExpoModulesProvider.swift in Sources */,
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 		CC2F1F532EB317F4005661D4 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
@@ -638,7 +603,7 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		00E356F61AD99517003FC87E /* Debug */ = {
+		00E356F61AD99517003FC87E /* Debug configuration for PBXNativeTarget "APMTests" */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 269A6C2B650C46BC21877CBC /* Pods-azusa-player-mobile-APMTests.debug.xcconfig */;
 			buildSettings = {
@@ -667,7 +632,7 @@
 			};
 			name = Debug;
 		};
-		00E356F71AD99517003FC87E /* Release */ = {
+		00E356F71AD99517003FC87E /* Release configuration for PBXNativeTarget "APMTests" */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 9ACBB5246153355184C73F02 /* Pods-azusa-player-mobile-APMTests.release.xcconfig */;
 			buildSettings = {
@@ -693,7 +658,7 @@
 			};
 			name = Release;
 		};
-		13B07F941A680F5B00A75B9A /* Debug */ = {
+		13B07F941A680F5B00A75B9A /* Debug configuration for PBXNativeTarget "azusa-player-mobile" */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 9E1BC3386E26E34AEF891FF5 /* Pods-azusa-player-mobile.debug.xcconfig */;
 			buildSettings = {
@@ -706,7 +671,7 @@
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = example/Info.plist;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.music";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -730,7 +695,7 @@
 			};
 			name = Debug;
 		};
-		13B07F951A680F5B00A75B9A /* Release */ = {
+		13B07F951A680F5B00A75B9A /* Release configuration for PBXNativeTarget "azusa-player-mobile" */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 3E446D4365C1A108616D8ADA /* Pods-azusa-player-mobile.release.xcconfig */;
 			buildSettings = {
@@ -742,7 +707,7 @@
 				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = example/Info.plist;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.music";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -765,7 +730,7 @@
 			};
 			name = Release;
 		};
-		83CBBA201A601CBA00E9B192 /* Debug */ = {
+		83CBBA201A601CBA00E9B192 /* Debug configuration for PBXProject "APM" */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -855,7 +820,7 @@
 			};
 			name = Debug;
 		};
-		83CBBA211A601CBA00E9B192 /* Release */ = {
+		83CBBA211A601CBA00E9B192 /* Release configuration for PBXProject "APM" */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -941,7 +906,7 @@
 			};
 			name = Release;
 		};
-		CC2F1F632EB317F4005661D4 /* Debug */ = {
+		CC2F1F632EB317F4005661D4 /* Debug configuration for PBXNativeTarget "APMShare" */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
@@ -990,7 +955,7 @@
 			};
 			name = Debug;
 		};
-		CC2F1F642EB317F4005661D4 /* Release */ = {
+		CC2F1F642EB317F4005661D4 /* Release configuration for PBXNativeTarget "APMShare" */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
@@ -1039,37 +1004,33 @@
 		00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "APMTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				00E356F61AD99517003FC87E /* Debug */,
-				00E356F71AD99517003FC87E /* Release */,
+				00E356F61AD99517003FC87E /* Debug configuration for PBXNativeTarget "APMTests" */,
+				00E356F71AD99517003FC87E /* Release configuration for PBXNativeTarget "APMTests" */,
 			);
-			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 		13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "azusa-player-mobile" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				13B07F941A680F5B00A75B9A /* Debug */,
-				13B07F951A680F5B00A75B9A /* Release */,
+				13B07F941A680F5B00A75B9A /* Debug configuration for PBXNativeTarget "azusa-player-mobile" */,
+				13B07F951A680F5B00A75B9A /* Release configuration for PBXNativeTarget "azusa-player-mobile" */,
 			);
-			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 		83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "APM" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				83CBBA201A601CBA00E9B192 /* Debug */,
-				83CBBA211A601CBA00E9B192 /* Release */,
+				83CBBA201A601CBA00E9B192 /* Debug configuration for PBXProject "APM" */,
+				83CBBA211A601CBA00E9B192 /* Release configuration for PBXProject "APM" */,
 			);
-			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 		CC2F1F662EB317F4005661D4 /* Build configuration list for PBXNativeTarget "APMShare" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				CC2F1F632EB317F4005661D4 /* Debug */,
-				CC2F1F642EB317F4005661D4 /* Release */,
+				CC2F1F632EB317F4005661D4 /* Debug configuration for PBXNativeTarget "APMShare" */,
+				CC2F1F642EB317F4005661D4 /* Release configuration for PBXNativeTarget "APMShare" */,
 			);
-			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
