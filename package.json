@@ -182,7 +182,7 @@
     "cpx": "^1.5.0",
     "drizzle-kit": "^0.31.10",
     "esbuild": "^0.28.0",
-    "eslint": "10.4.0",
+    "eslint": "8.57.1",
     "eslint-config-expo": "~55.0.1",
     "eslint-config-prettier": "^10.1.8",
     "eslint-import-resolver-babel-module": "^5.3.2",
