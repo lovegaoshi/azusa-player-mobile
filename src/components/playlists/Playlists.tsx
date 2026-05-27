@@ -199,6 +199,7 @@ export const Playlists = ({
         onSubmit={() => setNewPlaylistDialogOpen(false)}
       />
       <FlashDragList
+        showsVerticalScrollIndicator={false}
         loaded={drawerOpen}
         data={playlistIds}
         renderItem={renderItem}

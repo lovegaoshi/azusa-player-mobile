@@ -10,7 +10,7 @@ buildscript {
         ndkVersion = "27.1.12297006"
 
         ffmpegKitPackage = "audio"
-        kotlinVersion = "2.0.21"
+        kotlinVersion = "2.2.21"
         RNVideo_media3Version = "1.9.3"
     }
     repositories {
