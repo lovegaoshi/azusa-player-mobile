@@ -21,13 +21,9 @@ export const resolveURL = async (song: NoxMedia.Song, iOS = false) => {
     `[ytbi.js] fetch YTB playURL promise:${song.bvid} / iOS status:${isIOS}/${iOS}`,
   );
   const yt = await ytClient();
-
   const hls_manifest_url = iOS
-    ? (
-        await yt.getBasicInfo(song.bvid, {
-          client: 'IOS',
-        })
-      ).streaming_data?.hls_manifest_url
+    ? (await yt.getShortsVideoInfo(song.bvid, 'IOS')).streaming_data
+        ?.hls_manifest_url
     : undefined;
   /** 
   yt.session.player!.po_token = await getPoT(song.bvid);
