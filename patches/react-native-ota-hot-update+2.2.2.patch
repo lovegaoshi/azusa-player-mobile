@@ -18,7 +18,7 @@ index 3bd776e..cbc5c80 100644
            // reset version number because bundle is wrong version, need download from new version
            sharedPrefs.putString(VERSION, "")
 diff --git a/node_modules/react-native-ota-hot-update/android/src/main/java/com/otahotupdate/OtaHotUpdateModule.kt b/node_modules/react-native-ota-hot-update/android/src/main/java/com/otahotupdate/OtaHotUpdateModule.kt
-index 911732d..cf96c52 100644
+index 911732d..31c946b 100644
 --- a/node_modules/react-native-ota-hot-update/android/src/main/java/com/otahotupdate/OtaHotUpdateModule.kt
 +++ b/node_modules/react-native-ota-hot-update/android/src/main/java/com/otahotupdate/OtaHotUpdateModule.kt
 @@ -1,6 +1,7 @@
@@ -45,6 +45,15 @@ index 911732d..cf96c52 100644
            )
            promise.resolve(true)
          } else {
+@@ -69,7 +75,7 @@ class OtaHotUpdateModule internal constructor(context: ReactApplicationContext)
+ 
+   @ReactMethod
+   override fun restart() {
+-    val context: Context? = currentActivity
++    val context: Context? = this.reactApplicationContext.currentActivity
+     ProcessPhoenix.triggerRebirth(context)
+   }
+ 
 @@ -120,9 +126,14 @@ class OtaHotUpdateModule internal constructor(context: ReactApplicationContext)
    override fun setExactBundlePath(path: String?, promise: Promise) {
      val sharedPrefs = SharedPrefs(reactApplicationContext)
