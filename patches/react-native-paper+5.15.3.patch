@@ -1,0 +1,16 @@
+diff --git a/node_modules/react-native-paper/src/components/Menu/Menu.tsx b/node_modules/react-native-paper/src/components/Menu/Menu.tsx
+index 669656c..89a454a 100644
+--- a/node_modules/react-native-paper/src/components/Menu/Menu.tsx
++++ b/node_modules/react-native-paper/src/components/Menu/Menu.tsx
+@@ -263,11 +263,6 @@ const Menu = ({
+   }, [handleKeypress]);
+ 
+   const attachListeners = React.useCallback(() => {
+-    backHandlerSubscriptionRef.current = addEventListener(
+-      BackHandler,
+-      'hardwareBackPress',
+-      handleDismiss
+-    );
+     dimensionsSubscriptionRef.current = addEventListener(
+       Dimensions,
+       'change',
