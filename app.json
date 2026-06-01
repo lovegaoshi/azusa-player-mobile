@@ -4,7 +4,20 @@
   "plugins": ["react-native-ota-hot-update"],
   "expo": {
     "scheme": ["com.noxplayer", "noxplayer"],
-    "plugins": ["expo-secure-store", "expo-sqlite"],
+    "plugins": [
+      "expo-secure-store",
+      "expo-sqlite",
+      [
+        "@sentry/react-native",
+        {
+          "url": "https://sentry.io/",
+          "note": "Use SENTRY_AUTH_TOKEN env to authenticate with Sentry.",
+          "project": "azusa-player-mobile",
+          "organization": "lovegaoshi"
+        }
+      ],
+      "expo-image"
+    ],
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.noxplay.noxplayer"

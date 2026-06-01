@@ -13,7 +13,7 @@ const esModules = [
 ].join('|');
 
 const config = {
-  preset: 'react-native',
+  preset: '@react-native/jest-preset',
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json', 'node'],
   transform: { '^.+\\.(js|jsx)$': 'babel-jest' },
   //................
