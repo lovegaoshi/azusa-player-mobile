@@ -8205,6 +8205,7 @@ __metadata:
     expo-linear-gradient: "npm:~56.0.4"
     expo-secure-store: "npm:~56.0.4"
     expo-sqlite: "npm:~56.0.4"
+    expo-video: "npm:~56.1.2"
     fflate: "npm:^0.8.3"
     ffmpeg-kit-react-native: "https://github.com/lovegaoshi/ffmpeg-kit.git#commit=b495250938cd596d7dafe002f334b0b99e62c848"
     gts: "npm:^7.0.0"
@@ -12852,6 +12853,17 @@ __metadata:
     react: "*"
     react-native: "*"
   checksum: 10c0/48c7a4a80ad196e4e3a6170f78f6855fb33944727b64d38e159b91bf87fd93120241356f7144e3a99bb860aaa0c6f1827f54d250662bef799c0d4e702e72c307
+  languageName: node
+  linkType: hard
+
+"expo-video@npm:~56.1.2":
+  version: 56.1.2
+  resolution: "expo-video@npm:56.1.2"
+  peerDependencies:
+    expo: "*"
+    react: "*"
+    react-native: "*"
+  checksum: 10c0/74e8fc1ae51850d79280ef696b2642da090394072720a85d6d65765726c0e98ac8301ca33699ec2ce1ac37d77718b57c296a9eaec56478e47e2786d816389236
   languageName: node
   linkType: hard
 

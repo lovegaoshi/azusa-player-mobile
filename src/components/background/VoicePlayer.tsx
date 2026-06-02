@@ -1,20 +1,19 @@
 import React from 'react';
 import { StyleSheet } from 'react-native';
-import Video from 'react-native-video';
+import { useVideoPlayer, VideoView } from 'expo-video';
 
 interface Props {
-  uri: string | NodeRequire | undefined;
+  uri: number | undefined;
 }
 export default function VoicePlayer({ uri }: Props) {
-  return (
-    <Video
-      source={{ uri }}
-      style={styles.videoStyle}
-      disableFocus={true}
-      preventsDisplaySleepDuringVideoPlayback={false}
-      controls={false}
-    />
-  );
+  const player = useVideoPlayer({ assetId: uri });
+  player.audioMixingMode = 'mixWithOthers';
+
+  React.useEffect(() => {
+    player.replaceAsync({ assetId: uri }).then(() => player.play());
+  }, [uri]);
+
+  return <VideoView player={player} style={styles.videoStyle} />;
 }
 const styles = StyleSheet.create({
   videoStyle: {
