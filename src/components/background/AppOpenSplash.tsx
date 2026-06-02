@@ -1,8 +1,9 @@
 import React from 'react';
 import { Dimensions, Pressable, View } from 'react-native';
 import { Image } from 'expo-image';
-import Video from 'react-native-video';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { useVideoPlayer, VideoView } from 'expo-video';
+import { useEventListener } from 'expo';
 
 import { randomChoice } from '@utils/Utils';
 import useTanakaAmazingCommodities from '@hooks/useTanakaAmazingCommodities';
@@ -32,7 +33,7 @@ const randomSplash = randomChoice(localSplashes);
 
 interface TanakaProps {
   url: string;
-  onEnd?: () => void;
+  onEnd: () => void;
 }
 const TanakaAmazingCommodities = ({ url, onEnd }: TanakaProps) => {
   const { width, height } = Dimensions.get('window');
@@ -42,21 +43,27 @@ const TanakaAmazingCommodities = ({ url, onEnd }: TanakaProps) => {
     height: height + insets.top + insets.bottom,
     flex: 1,
   };
+  const player = useVideoPlayer({ uri: url }, player => {
+    player.audioMixingMode = 'mixWithOthers';
+    player.volume = 0.7;
+    player.play();
+  });
+
+  useEventListener(player, 'playToEnd', onEnd);
 
   return (
     <>
-      <Video
-        source={{
-          uri: url,
-        }}
-        volume={0.7}
+      <VideoView
+        player={player}
         style={[{ position: 'absolute' }, fullScreenStyle]}
-        onEnd={onEnd}
-        repeat={false}
-        resizeMode="cover"
-        disableFocus={true}
-        preventsDisplaySleepDuringVideoPlayback={false}
-        controls={false}
+        contentFit="cover"
+        buttonOptions={{
+          showBottomBar: false,
+          showPlayPause: false,
+          showSeekBackward: false,
+          showSeekForward: false,
+          showSettings: false,
+        }}
       />
       <Pressable style={fullScreenStyle} onPress={onEnd} />
     </>

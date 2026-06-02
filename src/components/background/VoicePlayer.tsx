@@ -6,8 +6,9 @@ interface Props {
   uri: number | undefined;
 }
 export default function VoicePlayer({ uri }: Props) {
-  const player = useVideoPlayer({ assetId: uri });
-  player.audioMixingMode = 'mixWithOthers';
+  const player = useVideoPlayer({ assetId: uri }, player => {
+    player.audioMixingMode = 'mixWithOthers';
+  });
 
   React.useEffect(() => {
     player.replaceAsync({ assetId: uri }).then(() => player.play());
