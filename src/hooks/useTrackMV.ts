@@ -1,9 +1,8 @@
 // helper hook that gets only the MV from activeTrack
 
-import { RefObject, useEffect, useState } from 'react';
-import { VideoRef } from 'react-native-video';
+import { useEffect, useState } from 'react';
+import { VideoPlayer } from 'expo-video';
 import TrackPlayer from 'react-native-track-player';
-import { AppState } from 'react-native';
 
 import { useTrackStore } from '@hooks/useActiveTrack';
 import useRNTPObserverStore from '@stores/RNObserverStore';
@@ -21,7 +20,7 @@ export const extractMV = (song: NoxMedia.Song) => {
   }
 };
 
-export default function useTrackMV(videoRef: RefObject<VideoRef | null>) {
+export default function useTrackMV(player: VideoPlayer) {
   const track = useTrackStore(s => s.track);
   const [parsedMV, setParsedMV] = useState<
     NoxTheme.BackgroundImage | undefined
@@ -35,13 +34,13 @@ export default function useTrackMV(videoRef: RefObject<VideoRef | null>) {
       return;
     }
     const { position } = await TrackPlayer.getProgress();
-    videoRef.current?.seek(position);
+    player.currentTime = position;
   };
 
   useLazyEffect(() => {
     parsedMV &&
       execWhenTrue({
-        loopCheck: async () => videoRef.current !== null,
+        loopCheck: async () => player.playing,
         executeFn: primeVideoPosition,
         funcName: 'primeVideoPosition',
         loopGuard: 5,
@@ -58,15 +57,5 @@ export default function useTrackMV(videoRef: RefObject<VideoRef | null>) {
     }
   }, [song]);
 
-  useEffect(() => {
-    const subscription = AppState.addEventListener('change', nextAppState => {
-      nextAppState === 'active' && setTimeout(primeVideoPosition, 1);
-    });
-
-    return () => {
-      subscription.remove();
-    };
-  }, []);
-
-  return parsedMV;
+  return { parsedMV, primeVideoPosition };
 }

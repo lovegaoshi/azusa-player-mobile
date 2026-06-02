@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { Dimensions, StyleSheet } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import Video, { VideoRef, ResizeMode } from 'react-native-video';
 import { Image } from 'expo-image';
 import { useVideoPlayer, VideoView } from 'expo-video';
 import { useEventListener } from 'expo';
+import { AppState } from 'react-native';
 
 import { useNoxSetting } from '@stores/useApp';
 import { customReqHeader } from '@utils/BiliFetch';
@@ -22,8 +22,6 @@ const MainBackground = () => {
   const isLandscape = useIsLandscape();
   const { width, height } = Dimensions.get('window');
   const [bkgrdImg, setBkgrdImg] = useState<NoxTheme.BackgroundImage>();
-  const videoRef = React.useRef<VideoRef | null>(null);
-  const trackMV = useTrackMV(videoRef);
   const bkgrdImgRaw =
     isLandscape && playerStyle.bkgrdImgLandscape
       ? playerStyle.bkgrdImgLandscape
@@ -33,6 +31,7 @@ const MainBackground = () => {
     player.volume = 0;
     player.loop = true;
   });
+  const { parsedMV: trackMV, primeVideoPosition } = useTrackMV(player);
 
   React.useEffect(() => {
     resolveBackgroundImage(trackMV ?? bkgrdImgRaw).then(bkgrd => {
@@ -66,6 +65,17 @@ const MainBackground = () => {
       );
     }
   });
+
+  React.useEffect(
+    AppState.addEventListener('change', nextAppState => {
+      if (nextAppState !== 'active') {
+        return;
+      }
+      player.play();
+      primeVideoPosition();
+    }).remove,
+    [],
+  );
 
   switch (bkgrdImg?.type) {
     case RESOLVE_TYPE.image:
