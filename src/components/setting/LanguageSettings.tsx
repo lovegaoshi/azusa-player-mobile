@@ -22,7 +22,7 @@ const availableLanguagesMap: { [key: string]: string } = {
 export default function LanguageSettings({ icon }: Props) {
   const { t, i18n } = useTranslation();
   const [visible, setVisible] = React.useState(false);
-  const [shawarmaVoice, setShawarmaVoice] = React.useState<string>();
+  const [shawarmaVoice, setShawarmaVoice] = React.useState<number>();
   const language = useNoxSetting(state => state.playerSetting).language;
   const setPlayerSetting = useNoxSetting(state => state.setPlayerSetting);
 

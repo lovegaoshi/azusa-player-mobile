@@ -91,6 +91,7 @@
     "expo-linear-gradient": "~56.0.4",
     "expo-secure-store": "~56.0.4",
     "expo-sqlite": "~56.0.4",
+    "expo-video": "~56.1.2",
     "fflate": "^0.8.3",
     "ffmpeg-kit-react-native": "https://github.com/lovegaoshi/ffmpeg-kit.git#commit=b495250938cd596d7dafe002f334b0b99e62c848",
     "he": "^1.2.0",
@@ -132,9 +133,8 @@
     "react-native-svg": "15.15.5",
     "react-native-svga-player": "https://lovegaoshi@github.com/lovegaoshi/react-native-svga-player.git#commit=2cd82e2b878e7711013d14e798df931598791df4",
     "react-native-text-ticker": "https://lovegaoshi@github.com/lovegaoshi/react-native-text-ticker.git#commit=c80fd5d660b57229dd730fe44919fb86364f1969",
-    "react-native-track-player": "https://github.com/lovegaoshi/react-native-track-player.git#commit=557867774ca1865bde6b241f455b8dcf2cda79ca",
+    "react-native-track-player": "https://github.com/lovegaoshi/react-native-track-player.git#commit=33a3ecd0522c4d47576153b820c1da68942813cd",
     "react-native-url-polyfill": "^3.0.0",
-    "react-native-video": "6.15.0",
     "react-native-webview": "13.16.1",
     "react-native-worklets": "^0.9.1",
     "sp-react-native-in-app-updates": "^1.5.0",
@@ -211,6 +211,9 @@
   "expo": {
     "autolinking": {
       "android": {
+        "buildFromSource": [
+          "expo-video"
+        ],
         "exclude": [
           "react-native-carplay",
           "nodejs-mobile-react-native"
