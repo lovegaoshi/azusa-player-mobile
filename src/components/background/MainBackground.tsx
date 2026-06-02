@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
-import { Dimensions, StyleSheet } from 'react-native';
+import { Dimensions, StyleSheet, AppState } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Image } from 'expo-image';
 import { useVideoPlayer, VideoView } from 'expo-video';
 import { useEventListener } from 'expo';
-import { AppState } from 'react-native';
 
 import { useNoxSetting } from '@stores/useApp';
 import { customReqHeader } from '@utils/BiliFetch';
