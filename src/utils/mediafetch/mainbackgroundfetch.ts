@@ -29,6 +29,7 @@ const BackgroundVideoWrapper = (
 const defaultBackgroundImage = {
   type: RESOLVE_TYPE.empty,
   identifier: '',
+  toA: 0,
 };
 
 export default async (backgroundImage?: string | NoxTheme.BackgroundImage) => {

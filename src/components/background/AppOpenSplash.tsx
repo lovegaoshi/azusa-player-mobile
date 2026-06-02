@@ -64,6 +64,7 @@ const TanakaAmazingCommodities = ({ url, onEnd }: TanakaProps) => {
           showSeekForward: false,
           showSettings: false,
         }}
+        nativeControls={false}
       />
       <Pressable style={fullScreenStyle} onPress={onEnd} />
     </>

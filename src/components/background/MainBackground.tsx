@@ -3,6 +3,8 @@ import { Dimensions, StyleSheet } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import Video, { VideoRef, ResizeMode } from 'react-native-video';
 import { Image } from 'expo-image';
+import { useVideoPlayer, VideoView } from 'expo-video';
+import { useEventListener } from 'expo';
 
 import { useNoxSetting } from '@stores/useApp';
 import { customReqHeader } from '@utils/BiliFetch';
@@ -26,10 +28,44 @@ const MainBackground = () => {
     isLandscape && playerStyle.bkgrdImgLandscape
       ? playerStyle.bkgrdImgLandscape
       : playerStyle.bkgrdImg;
+  const player = useVideoPlayer({ useCaching: true }, player => {
+    player.audioMixingMode = 'mixWithOthers';
+    player.volume = 0;
+    player.loop = true;
+  });
 
   React.useEffect(() => {
-    resolveBackgroundImage(trackMV ?? bkgrdImgRaw).then(setBkgrdImg);
+    resolveBackgroundImage(trackMV ?? bkgrdImgRaw).then(bkgrd => {
+      setBkgrdImg(bkgrd);
+      if (bkgrd?.type === RESOLVE_TYPE.video) {
+        player
+          .replaceAsync({
+            uri: bkgrd.identifier,
+            headers: customReqHeader(bkgrd.identifier, {}),
+            useCaching: true,
+          })
+          .then(() => {
+            player.loop = bkgrd.toA ? false : true;
+            player.play();
+          });
+      }
+    });
   }, [trackMV, bkgrdImgRaw]);
+
+  useEventListener(player, 'playToEnd', () => {
+    if (bkgrdImg?.toA) {
+      player.currentTime = bkgrdImg.toA;
+      player.play();
+    }
+  });
+
+  useEventListener(player, 'statusChange', status => {
+    if (status.error) {
+      logger.error(
+        `[MainBackground] Video error: ${status.error} while playing ${bkgrdImg?.identifier}`,
+      );
+    }
+  });
 
   switch (bkgrdImg?.type) {
     case RESOLVE_TYPE.image:
@@ -45,41 +81,21 @@ const MainBackground = () => {
       );
     case RESOLVE_TYPE.video:
       return (
-        <Video
-          enterPictureInPictureOnLeave={false}
-          ref={videoRef}
-          source={{
-            uri: bkgrdImg.identifier,
-            headers: customReqHeader(bkgrdImg.identifier, {}),
-            bufferConfig: { cacheSizeMB: 200 },
-          }}
+        <VideoView
+          player={player}
           style={[
             styles.videoStyle,
             { width, height: height + insets.bottom + insets.top },
           ]}
-          onError={e => {
-            logger.error(JSON.stringify(e));
-            logger.error(
-              `with: ${bkgrdImg.identifier} + ${JSON.stringify(customReqHeader(bkgrdImg.identifier, {}))}`,
-            );
+          contentFit="cover"
+          buttonOptions={{
+            showBottomBar: false,
+            showPlayPause: false,
+            showSeekBackward: false,
+            showSeekForward: false,
+            showSettings: false,
           }}
-          onEnd={
-            bkgrdImg.toA
-              ? () => {
-                  // HACK: for a toA functioanlity we have 2 solutions. one is to
-                  // do like this; the other is to keep in loop, but change src.
-                  // ofc the latter is more smooth but meh I dont have two srcs prepared
-                  videoRef.current?.seek(bkgrdImg.toA!);
-                  videoRef.current?.resume();
-                }
-              : undefined
-          }
-          repeat={bkgrdImg.toA ? false : true}
-          muted
-          resizeMode={ResizeMode.COVER}
-          disableFocus={true}
-          preventsDisplaySleepDuringVideoPlayback={false}
-          controls={false}
+          nativeControls={false}
         />
       );
     default:
