@@ -29,6 +29,7 @@ const MainBackground = () => {
     player.audioMixingMode = 'mixWithOthers';
     player.volume = 0;
     player.loop = true;
+    player.keepScreenOnWhilePlaying = false;
   });
   const { parsedMV: trackMV, primeVideoPosition } = useTrackMV(player);
 

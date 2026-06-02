@@ -8,6 +8,7 @@ interface Props {
 export default function VoicePlayer({ uri }: Props) {
   const player = useVideoPlayer({ assetId: uri }, player => {
     player.audioMixingMode = 'mixWithOthers';
+    player.keepScreenOnWhilePlaying = false;
   });
 
   React.useEffect(() => {
