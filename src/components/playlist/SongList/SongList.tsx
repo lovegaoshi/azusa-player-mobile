@@ -232,6 +232,7 @@ export default function SongList({
           renderScrollComponent={ScrollView}
           overrideProps={{
             simultaneousHandlers: gestureRef,
+            nestedScrollEnabled: false,
             refreshControl: (
               <RefreshControl
                 refreshing={refreshing}
