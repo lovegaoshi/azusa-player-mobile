@@ -42,10 +42,10 @@ const AnimatedCheckedOpacity = ({
     };
   });
   React.useEffect(() => {
-    if (!checking) {
-      selectedOpacity.value = withTiming(0, { duration: 200 });
-    } else {
+    if (checking) {
       selectedOpacity.value = withTiming(checked ? 0.5 : 0, { duration: 200 });
+    } else {
+      selectedOpacity.value = withTiming(0, { duration: 200 });
     }
   }, [checked, checking]);
 
