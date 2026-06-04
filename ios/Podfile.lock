@@ -180,8 +180,8 @@ PODS:
     - ReactNativeDependencies
     - Yoga
   - Protobuf (3.22.1)
-  - PurchasesHybridCommon (18.8.0):
-    - RevenueCat (= 5.74.0)
+  - PurchasesHybridCommon (18.10.0):
+    - RevenueCat (= 5.76.0)
   - RCTDeprecation (0.85.3)
   - RCTRequired (0.85.3)
   - RCTSwiftUI (0.85.3)
@@ -1748,7 +1748,7 @@ PODS:
     - ReactCommon/turbomodule/core
     - ReactNativeDependencies
     - Yoga
-  - react-native-slider (5.0.1):
+  - react-native-slider (5.2.0):
     - hermes-engine
     - RCTRequired
     - RCTTypeSafety
@@ -1759,7 +1759,7 @@ PODS:
     - React-graphics
     - React-ImageManager
     - React-jsi
-    - react-native-slider/common (= 5.0.1)
+    - react-native-slider/common (= 5.2.0)
     - React-NativeModulesApple
     - React-RCTFabric
     - React-renderercss
@@ -1770,7 +1770,7 @@ PODS:
     - ReactCommon/turbomodule/core
     - ReactNativeDependencies
     - Yoga
-  - react-native-slider/common (5.0.1):
+  - react-native-slider/common (5.2.0):
     - hermes-engine
     - RCTRequired
     - RCTTypeSafety
@@ -2214,7 +2214,7 @@ PODS:
     - React-utils (= 0.85.3)
     - ReactNativeDependencies
   - ReactNativeDependencies (0.85.3)
-  - RevenueCat (5.74.0)
+  - RevenueCat (5.76.0)
   - RNCMaskedView (0.3.2):
     - hermes-engine
     - RCTRequired
@@ -2265,10 +2265,10 @@ PODS:
     - RNNotifee/NotifeeCore (= 9.1.8)
   - RNNotifee/NotifeeCore (9.1.8):
     - React-Core
-  - RNPurchases (10.2.0):
-    - PurchasesHybridCommon (= 18.8.0)
+  - RNPurchases (10.2.2):
+    - PurchasesHybridCommon (= 18.10.0)
     - React-Core
-  - RNReanimated (4.4.0):
+  - RNReanimated (4.4.1):
     - hermes-engine
     - RCTRequired
     - RCTTypeSafety
@@ -2289,11 +2289,11 @@ PODS:
     - ReactCommon/turbomodule/bridging
     - ReactCommon/turbomodule/core
     - ReactNativeDependencies
-    - RNReanimated/apple (= 4.4.0)
-    - RNReanimated/common (= 4.4.0)
+    - RNReanimated/apple (= 4.4.1)
+    - RNReanimated/common (= 4.4.1)
     - RNWorklets
     - Yoga
-  - RNReanimated/apple (4.4.0):
+  - RNReanimated/apple (4.4.1):
     - hermes-engine
     - RCTRequired
     - RCTTypeSafety
@@ -2316,7 +2316,7 @@ PODS:
     - ReactNativeDependencies
     - RNWorklets
     - Yoga
-  - RNReanimated/common (4.4.0):
+  - RNReanimated/common (4.4.1):
     - hermes-engine
     - RCTRequired
     - RCTTypeSafety
@@ -3024,7 +3024,7 @@ SPEC CHECKSUMS:
   lottie-ios: 8f959969761e9c45d70353667d00af0e5b9cadb3
   lottie-react-native: 5c0c4fc0211179e7b5c0e660089f31c27128a577
   Protobuf: d7f7c8329edf5eb8af65547a8ba3e9c1cee927d5
-  PurchasesHybridCommon: e723f7c9b109be51f7ec6c85a104791369f1b562
+  PurchasesHybridCommon: 3e650c7f56ebcd63b37a708685fbf98515305d14
   RCTDeprecation: 225e022b85a206cf0883a909c4a114159783363c
   RCTRequired: 827a95c181af0886a11e21bc66c084088cf87839
   RCTSwiftUI: 7babb07156ae0a8e5ea97f77e43959ddaca2c6f2
@@ -3072,7 +3072,7 @@ SPEC CHECKSUMS:
   react-native-pager-view: bae7c4ab4ac57609c728c450f5ddd4d3b5ec1bce
   react-native-safe-area-context: f7d04fb7a42e10aab12b453f66ec5d9f73fbb08d
   react-native-skia: 4e5bcb017067a228e80926673d70bed934190760
-  react-native-slider: d967c8df0bfaab2ed0188ce3f5341f1532e600ed
+  react-native-slider: d3c62864af399014469359120d9a9a6cbbd9c6f7
   react-native-svga-player: 91a39e594d0610ec36fc658ae6b433966327b24d
   react-native-track-player: 862fe0a4ece0e9f0c54d604d177f765f4fee0e17
   react-native-vector-icons: dbaf969c308e088a7e50aa41f03f1259d6f31d73
@@ -3112,13 +3112,13 @@ SPEC CHECKSUMS:
   ReactCodegen: c6ee7330f2fda60a65b193677d59c2d4f71eb1ab
   ReactCommon: ced9cfa50957cb9e6b7a1a7cd4ee20f5da6fa3a4
   ReactNativeDependencies: d5f2067a9b2793ea26ff5295346fe5869e4cfa8d
-  RevenueCat: efcd02bf9b14ffce229e57dc6863a2513136b9ca
+  RevenueCat: 792388288b4207a5056550fbf8f673090f1fbe22
   RNCMaskedView: d307128f22ef3377c566cb6de15889208ab2fe78
   RNDeviceInfo: 4c852998208b60dc192ae3529e5867817719ad1e
   RNGestureHandler: 8efd10f6f656cb57881251388ff5982dc933d581
   RNNotifee: 5e3b271e8ea7456a36eec994085543c9adca9168
-  RNPurchases: 814d23250d91856382f2d1d7c5e255b3d6b4b8ef
-  RNReanimated: 10d370df67e7a86d82a47ca6bc51b87b647385b8
+  RNPurchases: 3138a73091d78c9ddaa86a405488cd9b5f8404e7
+  RNReanimated: 17ca61febb1b66f6c876abc0ae317583ccab6d2a
   RNScreens: df54f9e1092ce77fe96fc0c3a5314862d05a506e
   RNSentry: b9881514becadac17d1a169dbb1d557e5108e4a5
   RNSVG: 8013e66805d1d992d30ffc28150fcc35c1b1c2f9
