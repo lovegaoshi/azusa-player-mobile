@@ -61,7 +61,7 @@ const MainBackground = () => {
   useEventListener(player, 'statusChange', status => {
     if (status.error) {
       logger.error(
-        `[MainBackground] Video error: ${status.error} while playing ${bkgrdImg?.identifier}`,
+        `[MainBackground] Video error: ${status.error.message} while playing ${bkgrdImg?.identifier}`,
       );
     }
   });
