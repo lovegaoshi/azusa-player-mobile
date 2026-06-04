@@ -25,6 +25,37 @@ import { getArtistName } from '@objects/Song';
 import { NoxSheetRoutes } from '@enums/Routes';
 import { IconButton } from '@components/commonui/RNGHPaperWrapper';
 
+interface AnimatedCheckedOpacityProps extends React.PropsWithChildren {
+  checked: boolean;
+  checking: boolean;
+}
+
+const AnimatedCheckedOpacity = ({
+  checked,
+  checking,
+  children,
+}: AnimatedCheckedOpacityProps) => {
+  const selectedOpacity = useSharedValue(0);
+  const selectedOpacityAnimatedStyle = useAnimatedStyle(() => {
+    return {
+      backgroundColor: `rgba(25, 25, 25, ${Math.round(selectedOpacity.value * 100) / 100})`,
+    };
+  });
+  React.useEffect(() => {
+    if (!checking) {
+      selectedOpacity.value = withTiming(0, { duration: 200 });
+    } else {
+      selectedOpacity.value = withTiming(checked ? 0.5 : 0, { duration: 200 });
+    }
+  }, [checked, checking]);
+
+  return (
+    <Animated.View style={selectedOpacityAnimatedStyle}>
+      {children}
+    </Animated.View>
+  );
+};
+
 interface Props {
   item: NoxMedia.Song;
   index: number;
@@ -108,20 +139,6 @@ const SongInfo = ({
   };
   const checked = selected[getSongIndex()];
 
-  const selectedOpacity = useSharedValue(0);
-  const selectedOpacityAnimatedStyle = useAnimatedStyle(() => {
-    return {
-      backgroundColor: `rgba(25, 25, 25, ${Math.round(selectedOpacity.value * 100) / 100})`,
-    };
-  });
-  React.useEffect(() => {
-    if (!checking) {
-      selectedOpacity.value = withTiming(0, { duration: 200 });
-    } else {
-      selectedOpacity.value = withTiming(checked ? 0.5 : 0, { duration: 200 });
-    }
-  }, [checked, checking]);
-
   return (
     <View
       testID={testID}
@@ -134,7 +151,7 @@ const SongInfo = ({
           : 0.5,
       }}
     >
-      <Animated.View style={selectedOpacityAnimatedStyle}>
+      <AnimatedCheckedOpacity checked={checked} checking={checking}>
         <RectButton
           style={styles.container}
           onLongPress={checking ? toggleCheck : onLongPress}
@@ -184,7 +201,7 @@ const SongInfo = ({
             </View>
           </View>
         </RectButton>
-      </Animated.View>
+      </AnimatedCheckedOpacity>
     </View>
   );
 };
