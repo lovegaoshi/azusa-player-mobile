@@ -1,10 +1,13 @@
 import * as React from 'react';
 import { Checkbox } from 'react-native-paper';
 import { View, StyleSheet } from 'react-native';
-import {
+import Animated, {
   DerivedValue,
   SharedValue,
   useAnimatedReaction,
+  useAnimatedStyle,
+  useSharedValue,
+  withTiming,
 } from 'react-native-reanimated';
 import inRange from 'lodash/inRange';
 import throttle from 'lodash/throttle';
@@ -105,6 +108,20 @@ const SongInfo = ({
   };
   const checked = selected[getSongIndex()];
 
+  const selectedOpacity = useSharedValue(0);
+  const selectedOpacityAnimatedStyle = useAnimatedStyle(() => {
+    return {
+      backgroundColor: `rgba(25, 25, 25, ${Math.round(selectedOpacity.value * 100) / 100})`,
+    };
+  });
+  React.useEffect(() => {
+    if (!checking) {
+      selectedOpacity.value = withTiming(0, { duration: 200 });
+    } else {
+      selectedOpacity.value = withTiming(checked ? 0.5 : 0, { duration: 200 });
+    }
+  }, [checked, checking]);
+
   return (
     <View
       testID={testID}
@@ -117,55 +134,57 @@ const SongInfo = ({
           : 0.5,
       }}
     >
-      <RectButton
-        style={styles.container}
-        onLongPress={checking ? toggleCheck : onLongPress}
-        onPress={checking ? toggleCheck : () => playSong(item)}
-      >
-        <View style={styles.row}>
-          <View style={styles.songDetails}>
-            <View style={styles.row}>
-              {checking && (
-                <View style={styles.checkBox}>
-                  <Pressable onPress={toggleCheck}>
-                    <Checkbox
-                      status={checked ? 'checked' : 'unchecked'}
-                      onPress={() => {}}
-                    />
-                  </Pressable>
+      <Animated.View style={selectedOpacityAnimatedStyle}>
+        <RectButton
+          style={styles.container}
+          onLongPress={checking ? toggleCheck : onLongPress}
+          onPress={checking ? toggleCheck : () => playSong(item)}
+        >
+          <View style={styles.row}>
+            <View style={styles.songDetails}>
+              <View style={styles.row}>
+                {checking && (
+                  <View style={styles.checkBox}>
+                    <Pressable onPress={toggleCheck}>
+                      <Checkbox
+                        status={checked ? 'checked' : 'unchecked'}
+                        onPress={() => {}}
+                      />
+                    </Pressable>
+                  </View>
+                )}
+                <View style={styles.songTitle}>
+                  <Text
+                    style={{}}
+                    variant="bodyLarge"
+                    numberOfLines={3}
+                  >{`${String(index + 1)}. ${title}`}</Text>
+                  <Text
+                    variant="bodySmall"
+                    style={{ color: playerStyle.colors.onSurfaceVariant }}
+                    numberOfLines={1}
+                  >
+                    {getArtistName(item)}
+                  </Text>
                 </View>
-              )}
-              <View style={styles.songTitle}>
-                <Text
-                  style={{}}
-                  variant="bodyLarge"
-                  numberOfLines={3}
-                >{`${String(index + 1)}. ${title}`}</Text>
-                <Text
-                  variant="bodySmall"
-                  style={{ color: playerStyle.colors.onSurfaceVariant }}
-                  numberOfLines={1}
-                >
-                  {getArtistName(item)}
-                </Text>
               </View>
             </View>
+            <View style={styles.row}>
+              <Text variant="titleSmall" style={styles.time}>
+                {seconds2MMSS(item.duration)}
+              </Text>
+              <IconButton
+                icon="dots-vertical"
+                size={20}
+                onPress={() => {
+                  setSongMenuSongIndexes([getSongIndex()]);
+                  TrueSheet.present(NoxSheetRoutes.SongsMenuInListSheet);
+                }}
+              />
+            </View>
           </View>
-          <View style={styles.row}>
-            <Text variant="titleSmall" style={styles.time}>
-              {seconds2MMSS(item.duration)}
-            </Text>
-            <IconButton
-              icon="dots-vertical"
-              size={20}
-              onPress={() => {
-                setSongMenuSongIndexes([getSongIndex()]);
-                TrueSheet.present(NoxSheetRoutes.SongsMenuInListSheet);
-              }}
-            />
-          </View>
-        </View>
-      </RectButton>
+        </RectButton>
+      </Animated.View>
     </View>
   );
 };
