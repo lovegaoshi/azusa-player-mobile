@@ -76,7 +76,12 @@ export async function additionalPlaybackService({
   lastPlayedDuration.val = lastPlayDuration;
   TrackPlayer.addEventListener(Event.PlaybackState, async event => {
     APMWidgetModule?.updateWidget?.();
-    if (event.state === State.Playing) fadePlay();
+    if (event.state === State.Playing) {
+      useNoxSetting.getState().setImmediateShowPause(false);
+      fadePlay();
+    } else {
+      useNoxSetting.getState().setImmediateShowPause(true);
+    }
     if (lastPlayedDuration.val && event.state === State.Ready) {
       if ((await TrackPlayer.getActiveTrack())?.song?.id === currentPlayingID) {
         logger.debug(

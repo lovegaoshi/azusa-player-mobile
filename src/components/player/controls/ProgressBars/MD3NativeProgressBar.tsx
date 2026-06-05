@@ -10,7 +10,6 @@ import { useNoxSetting } from '@stores/useApp';
 import { TPSeek } from '@stores/RNObserverStore';
 import { ProgressBarProps } from './ProgressBarProps';
 import appStore from '@stores/appStore';
-import usePlaybackState from '@hooks/usePlaybackState';
 
 const WaveHeight = 8;
 
@@ -24,7 +23,7 @@ export default function SimpleProgressBar({
   const enterSliding = useNoxSetting(state => state.enableMiniProgressSliding);
   const exitSliding = useNoxSetting(state => state.disableMiniProgressSliding);
   const fetchProgress = useStore(appStore, state => state.fetchProgress);
-  const { showPause, showBuffering } = usePlaybackState();
+  const immediateShowPause = useNoxSetting(state => state.immediateShowPause);
   const waveHeight = useSharedValue(0);
 
   const playProgress = duration === 0 ? 0 : position / duration;
@@ -32,10 +31,10 @@ export default function SimpleProgressBar({
 
   useEffect(() => {
     'worklet';
-    waveHeight.value = withTiming(showPause || showBuffering ? WaveHeight : 0, {
+    waveHeight.value = withTiming(immediateShowPause ? 0 : WaveHeight, {
       duration: 200,
     });
-  }, [showPause, showBuffering]);
+  }, [immediateShowPause]);
 
   return (
     <Slider

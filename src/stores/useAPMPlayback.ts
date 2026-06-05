@@ -18,6 +18,9 @@ export interface APMPlaybackStore {
   setBRepeatDuration: (val: number) => void;
   crossfadingId: string;
   setCrossfadingId: (val: string) => void;
+
+  immediateShowPause: boolean;
+  setImmediateShowPause: (val: boolean) => void;
 }
 
 const store: StateCreator<
@@ -42,6 +45,9 @@ const store: StateCreator<
   setBRepeatDuration: val => set({ bRepeatDuration: val }),
   crossfadingId: '',
   setCrossfadingId: val => set({ crossfadingId: val }),
+
+  immediateShowPause: false,
+  setImmediateShowPause: val => set({ immediateShowPause: val }),
 });
 
 export default store;

@@ -1,13 +1,20 @@
 diff --git a/node_modules/expo-wavy-slider/src/ExpoWavySliderModule.ts b/node_modules/expo-wavy-slider/src/ExpoWavySliderModule.ts
-index cb4d400..b3deaf3 100644
+index cb4d400..473dceb 100644
 --- a/node_modules/expo-wavy-slider/src/ExpoWavySliderModule.ts
 +++ b/node_modules/expo-wavy-slider/src/ExpoWavySliderModule.ts
-@@ -4,7 +4,7 @@ import { Platform } from 'react-native'
+@@ -4,12 +4,14 @@ import { Platform } from 'react-native'
  
  type NativeSharedObject = InstanceType<typeof SharedObject>
  
 -declare class ExpoWavySliderModule {
 +class ExpoWavySliderModule {
++	// @ts-expect-error side effect for removing the declare kw
  	ObservableState: new (initial: { value: unknown }) => NativeSharedObject & {
  		getValue(): unknown
  		setValue(value: { value: unknown }): void
+ 		setOnChange(callback: object | null): void
+ 	}
++	// @ts-expect-error side effect for removing the declare kw
+ 	WorkletCallback: new (worklet: object) => NativeSharedObject
+ }
+ 
