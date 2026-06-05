@@ -25,12 +25,9 @@ export default function SimpleProgressBar({
   const fetchProgress = useStore(appStore, state => state.fetchProgress);
   const immediateShowPause = useNoxSetting(state => state.immediateShowPause);
   const waveHeight = useSharedValue(0);
-
-  const playProgress = duration === 0 ? 0 : position / duration;
-  const bufferProgress = fetchProgress / 100;
+  const playProgress = position / duration;
 
   useEffect(() => {
-    'worklet';
     waveHeight.value = withTiming(immediateShowPause ? 0 : WaveHeight, {
       duration: 200,
     });
@@ -39,21 +36,22 @@ export default function SimpleProgressBar({
   return (
     <Slider
       style={[styles.progressBar, style]}
-      bufferedValue={(bufferProgress - playProgress) / (1 - playProgress)}
-      value={playProgress}
+      bufferedValue={
+        (fetchProgress / 100 - playProgress) / (1 - playProgress) || 0
+      }
+      value={playProgress || 0}
       onValueChange={v => {
         'worklet';
         onValueChange && scheduleOnRN(onValueChange, v);
       }}
       onDragStateChange={v => {
         'worklet';
-        v && scheduleOnRN(enterSliding);
+        v && scheduleOnRN(v ? enterSliding : exitSliding);
       }}
       enabled={enabled}
       onValueChangeFinished={v => {
         'worklet';
         scheduleOnRN(TPSeek, v * duration);
-        scheduleOnRN(exitSliding);
       }}
       waveHeight={waveHeight}
       waveLength={35}
