@@ -15,7 +15,15 @@
       "@objects/*": ["./src/objects/*"],
       "@services/*": ["./src/services/*"],
       "@stores/*": ["./src/stores/*"],
-      "@hooks/*": ["./src/hooks/*"]
+      "@hooks/*": ["./src/hooks/*"],
+      // this compiles so im letting it slide
+      // https://www.typescriptlang.org/docs/handbook/modules/reference.html#paths-should-not-point-to-monorepo-packages-or-node_modules-packages
+      "@expo/ui/community/slider": [
+        "./node_modules/@expo/ui/build/community/slider/index.d.ts"
+      ],
+      "@expo/ui/community/slider/*": [
+        "./node_modules/@expo/ui/build/community/slider/*"
+      ]
     },
     "allowJs": true,
     "allowSyntheticDefaultImports": true,
