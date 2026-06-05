@@ -1,0 +1,13 @@
+diff --git a/node_modules/expo-wavy-slider/src/ExpoWavySliderModule.ts b/node_modules/expo-wavy-slider/src/ExpoWavySliderModule.ts
+index cb4d400..b3deaf3 100644
+--- a/node_modules/expo-wavy-slider/src/ExpoWavySliderModule.ts
++++ b/node_modules/expo-wavy-slider/src/ExpoWavySliderModule.ts
+@@ -4,7 +4,7 @@ import { Platform } from 'react-native'
+ 
+ type NativeSharedObject = InstanceType<typeof SharedObject>
+ 
+-declare class ExpoWavySliderModule {
++class ExpoWavySliderModule {
+ 	ObservableState: new (initial: { value: unknown }) => NativeSharedObject & {
+ 		getValue(): unknown
+ 		setValue(value: { value: unknown }): void

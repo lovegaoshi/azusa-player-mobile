@@ -85,6 +85,8 @@ declare global {
       beatMatchCrossfadeIn: number;
       beatMatchCrossfadeOut: number;
 
+      md3slider: boolean;
+
       [key: string]: any;
     }
 

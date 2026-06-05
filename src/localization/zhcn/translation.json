@@ -409,6 +409,8 @@
     "ColorSchemeAdaptive": "跟随系统",
     "hideCoverInMobileName": "不显示歌封面",
     "hideCoverInMobileDesc": "移动端不显示歌封面",
+    "md3sliderName": "MD3 Expressive",
+    "md3sliderDesc": "使用MD3 expressive风格",
     "trackCoverArtCardName": "专辑封面",
     "trackCoverArtCardDesc": "选定歌的时候，背景条图显示专辑封面"
   },

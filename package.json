@@ -92,6 +92,7 @@
     "expo-secure-store": "~56.0.4",
     "expo-sqlite": "~56.0.4",
     "expo-video": "~56.1.2",
+    "expo-wavy-slider": "^0.4.6",
     "fflate": "^0.8.3",
     "ffmpeg-kit-react-native": "https://github.com/lovegaoshi/ffmpeg-kit.git#commit=b495250938cd596d7dafe002f334b0b99e62c848",
     "he": "^1.2.0",

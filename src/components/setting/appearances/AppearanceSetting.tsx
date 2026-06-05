@@ -68,6 +68,12 @@ export default function AppearanceSettings({
           settingCategory: 'AppearanceSettings',
         }}
       />
+      <RenderSetting
+        item={{
+          settingName: 'md3slider',
+          settingCategory: 'AppearanceSettings',
+        }}
+      />
     </ScrollView>
   );
 }
