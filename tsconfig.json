@@ -23,6 +23,12 @@
       ],
       "@expo/ui/community/slider/*": [
         "./node_modules/@expo/ui/build/community/slider/*"
+      ],
+      "@react-native-masked-view/masked-view": [
+        "./node_modules/@expo/ui/build/community/masked-view/index.d.ts"
+      ],
+      "@react-native-masked-view/masked-view/*": [
+        "./node_modules/@expo/ui/build/community/masked-view/*"
       ]
     },
     "allowJs": true,

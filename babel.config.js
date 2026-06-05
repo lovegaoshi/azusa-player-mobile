@@ -24,6 +24,8 @@ module.exports = api => {
               '@stores': './src/stores',
               '@hooks': './src/hooks',
               '@assets': './src/assets',
+              '@react-native-masked-view/masked-view':
+                './node_modules/@expo/ui/build/community/masked-view/',
             },
           },
         ],
