@@ -5,7 +5,6 @@ import { WavySlider as Slider } from 'expo-wavy-slider';
 import { scheduleOnRN } from 'react-native-worklets';
 import { useStore } from 'zustand';
 import { useSharedValue, withTiming } from 'react-native-reanimated';
-import { colord } from 'colord';
 
 import { useNoxSetting } from '@stores/useApp';
 import { TPSeek } from '@stores/RNObserverStore';
@@ -27,13 +26,6 @@ export default function SimpleProgressBar({
   const fetchProgress = useStore(appStore, state => state.fetchProgress);
   const immediateShowPause = useNoxSetting(state => state.immediateShowPause);
   const waveHeight = useSharedValue(0);
-  const playProgress = position / duration;
-
-  const bufferColor = useMemo(
-    () =>
-      colord(playerStyle.colors.primaryContainer).darken(0.04).toRgbString(),
-    [playerStyle.colors.primaryContainer],
-  );
 
   useEffect(() => {
     waveHeight.value = withTiming(immediateShowPause ? 0 : WaveHeight, {
@@ -41,13 +33,6 @@ export default function SimpleProgressBar({
     });
   }, [immediateShowPause]);
 
-  const onDragStateChange = useMemo(
-    () => (v: boolean) => {
-      'worklet';
-      v && scheduleOnRN(v ? enterSliding : exitSliding);
-    },
-    [],
-  );
   const onValueChangeFinished = useMemo(
     () => (v: number) => {
       'worklet';
@@ -66,20 +51,19 @@ export default function SimpleProgressBar({
   return (
     <Slider
       style={[styles.progressBar, style]}
-      bufferedValue={
-        playProgress === 1
-          ? 0
-          : (fetchProgress / 100 - playProgress) / (1 - playProgress) || 0
-      }
+      bufferedValue={fetchProgress / 100}
       colors={{
-        // inactiveTrackColor: playerStyle.colors.secondary,
         activeTrackColor: playerStyle.colors.primary,
+        thumbColor: playerStyle.colors.primary,
         inactiveTrackColor: playerStyle.colors.primaryContainer,
-        bufferedTrackColor: bufferColor,
+        bufferedTrackColor: playerStyle.colors.secondary,
       }}
-      value={playProgress || 0}
+      value={position / duration || 0}
       onValueChange={onValueChangeMemo}
-      onDragStateChange={onDragStateChange}
+      onDragStateChange={v => {
+        'worklet';
+        scheduleOnRN(v ? enterSliding : exitSliding);
+      }}
       enabled={enabled}
       onValueChangeFinished={onValueChangeFinished}
       waveHeight={waveHeight}
