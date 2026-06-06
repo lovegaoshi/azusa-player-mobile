@@ -45,7 +45,9 @@ export default function SimpleProgressBar({
     <Slider
       style={[styles.progressBar, style]}
       bufferedValue={
-        (fetchProgress / 100 - playProgress) / (1 - playProgress) || 0
+        playProgress === 1
+          ? 0
+          : (fetchProgress / 100 - playProgress) / (1 - playProgress) || 0
       }
       colors={{
         // inactiveTrackColor: playerStyle.colors.secondary,
