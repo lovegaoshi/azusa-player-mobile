@@ -124,6 +124,10 @@ PODS:
     - ExpoModulesCore
   - ExpoSQLite (56.0.4):
     - ExpoModulesCore
+  - ExpoUI (56.0.15):
+    - ExpoModulesCore
+    - ExpoModulesWorklets
+    - React-RCTFabric
   - ExpoVideo (56.1.2):
     - ExpoModulesCore
   - ExpoWebBrowser (56.0.5):
@@ -2592,6 +2596,7 @@ DEPENDENCIES:
   - ExpoModulesWorkletsAdapter (from `../node_modules/expo-modules-core`)
   - ExpoSecureStore (from `../node_modules/expo-secure-store/ios`)
   - ExpoSQLite (from `../node_modules/expo-sqlite/ios`)
+  - "ExpoUI (from `../node_modules/@expo/ui/ios`)"
   - ExpoVideo (from `../node_modules/expo-video/ios`)
   - ExpoWebBrowser (from `../node_modules/expo-web-browser/ios`)
   - FBLazyVector (from `../node_modules/react-native/Libraries/FBLazyVector`)
@@ -2770,6 +2775,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/expo-secure-store/ios"
   ExpoSQLite:
     :path: "../node_modules/expo-sqlite/ios"
+  ExpoUI:
+    :path: "../node_modules/@expo/ui/ios"
   ExpoVideo:
     :path: "../node_modules/expo-video/ios"
   ExpoWebBrowser:
@@ -3011,6 +3018,7 @@ SPEC CHECKSUMS:
   ExpoModulesWorkletsAdapter: 4ced459d91107d4f32a8decf8b7827f58153436a
   ExpoSecureStore: f1bd083c1b7b8d4142013ffcc0082d377d9f49f4
   ExpoSQLite: 38a35f67bbb3370d9bb859aa65d106909c4e3b19
+  ExpoUI: b298305aee92ad48ca29db29b9fa9265008b218a
   ExpoVideo: 8ebbbf65778c5f986d65fc17bb60b79e9d7624e6
   ExpoWebBrowser: 6e3d90e3fe1952d21a8494872b1e1a485cd50e2f
   FBLazyVector: 473b935415b82ae4f7f9aa9d5b3378491143ccbf
