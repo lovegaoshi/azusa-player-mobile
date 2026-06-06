@@ -15,7 +15,7 @@ import Animated, {
 } from 'react-native-reanimated';
 import { scheduleOnRN } from 'react-native-worklets';
 
-type CollapsibleProps = PropsWithChildren<{
+type CollapsableProps = PropsWithChildren<{
   collapsed: boolean;
   style?: ViewStyle;
   collapsedHeight?: number;
@@ -29,14 +29,14 @@ const ANIMATION_CONFIG = {
   easing: Easing.bezier(0.4, 0.0, 0.2, 1),
 };
 
-export const Collapsible = ({
+export const Collapsable = ({
   collapsed,
   children,
   style,
   collapsedHeight,
   pinTo = 'top',
   renderChildrenCollapsed = true,
-}: CollapsibleProps) => {
+}: CollapsableProps) => {
   const sharedValue = useSharedValue(1);
   const [bodySectionHeight, setBodySectionHeight] = useState<null | number>(
     null,
@@ -63,7 +63,7 @@ export const Collapsible = ({
   }, [collapsed, renderChildrenCollapsed]);
 
   const toggleCollapsed = useCallback(
-    (isCollapsed: CollapsibleProps['collapsed']) => {
+    (isCollapsed: CollapsableProps['collapsed']) => {
       const nextValue = isCollapsed ? initialHeight : 1;
 
       if (!isCollapsed && !showTheKids) {

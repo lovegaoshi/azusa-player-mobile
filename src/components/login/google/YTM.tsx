@@ -10,7 +10,7 @@ import { useTranslation } from 'react-i18next';
 import { saveSecure as saveItem } from '@utils/ChromeStorageAPI';
 import { StorageKeys } from '@enums/Storage';
 import { User, UseYTMLogin } from './useYTMLogin';
-import useCollapsible from '../useCollapsible';
+import useCollapsable from '../useCollapsable';
 import { initMuse } from '@utils/muse';
 import logger from '@utils/Logger';
 import { styles as stylesG } from '@components/style';
@@ -32,7 +32,7 @@ const Login = ({ refresh }: { refresh: () => void }) => {
   const { t } = useTranslation();
   const [webView, _setWebView] = useState(false);
   const [cookies, setCookies] = useState<string[]>([]);
-  const toggleCollapse = useCollapsible(state => state.toggleCollapse);
+  const toggleCollapse = useCollapsable(state => state.toggleCollapse);
   const setWebView = (val: boolean) => {
     _setWebView(val);
     toggleCollapse(val);
