@@ -25,7 +25,6 @@ const PlaylistDialog = ({
   playlist,
 }: Props) => {
   const { t } = useTranslation();
-  const playerStyle = useNoxSetting(state => state.playerStyle);
   const [name, setName] = React.useState(playlist.title);
   const [sub, setSub] = React.useState(playlist.subscribeUrl.join(';'));
   const [blacklist, setBlacklist] = React.useState(
