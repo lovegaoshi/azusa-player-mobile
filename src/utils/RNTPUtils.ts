@@ -25,6 +25,7 @@ import { setTPR128Gain } from './ffmpeg/ffmpeg';
 import { NULL_TRACK } from '@objects/Song';
 import { isAndroid, isIOS } from './RNUtils';
 import { TPPlay } from '@stores/RNObserverStore';
+import { useNoxSetting } from '@stores/useApp';
 
 const { getState, setState } = appStore ?? {};
 const animatedVolume = new Animated.Value(1);
@@ -105,8 +106,10 @@ export const initRNTPOptions = (p: Partial<AndroidOptions>) => {
   return options;
 };
 
-export const fadePause = () =>
+export const fadePause = () => {
+  useNoxSetting.getState().setImmediateShowPause(true);
   TrackPlayer.fadeOutPause(getState().fadeIntervalMs);
+};
 
 export const fadePlay = async () => {
   const { fadeIntervalMs } = getState();

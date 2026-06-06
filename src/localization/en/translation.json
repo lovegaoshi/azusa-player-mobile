@@ -407,6 +407,8 @@
     "ColorSchemeAdaptive": "adaptive",
     "hideCoverInMobileName": "Hide album cover",
     "hideCoverInMobileDesc": "Hide the album cover.",
+    "md3sliderName": "Material 3 Expressive",
+    "md3sliderDesc": "use Material 3 Expressive style UI",
     "trackCoverArtCardName": "Track Cover Art",
     "trackCoverArtCardDesc": "Show a song's cover art when selected"
   },

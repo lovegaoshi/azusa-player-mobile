@@ -85,6 +85,8 @@ const _DefaultSetting: NoxStorage.PlayerSettingDict = {
   beatMatchCrossfade: false,
   beatMatchCrossfadeIn: 10,
   beatMatchCrossfadeOut: 10,
+
+  md3slider: false,
 };
 
 export const DefaultSetting = MAESTRO

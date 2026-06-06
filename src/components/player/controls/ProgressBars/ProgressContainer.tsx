@@ -6,6 +6,7 @@ import ProgressBarAPM from './ProgressBar';
 import ProgressFetchBar from './ProgressFetchBar';
 import NativeProgressBarAPM from './NativeProgressBar';
 import NativeProgressFetchBar from './NativeProgressFetchBar';
+import MD3NativeProgressBar from './MD3NativeProgressBar';
 import { useNoxSetting } from '@stores/useApp';
 import { isAndroid } from '@utils/RNUtils';
 import { ProgressBarContainerProps } from './ProgressBarProps';
@@ -32,6 +33,9 @@ const NativeProgress = (p: ProgressBarContainerProps) => (
 
 export default function ProgressContainer(p: ProgressBarContainerProps) {
   const playerSetting = useNoxSetting(state => state.playerSetting);
+  if (playerSetting.md3slider && isAndroid) {
+    return <MD3NativeProgressBar {...p} />;
+  }
   return (
     <View>
       <ProgressWavy />

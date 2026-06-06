@@ -10,7 +10,7 @@ buildscript {
         ndkVersion = "27.1.12297006"
 
         ffmpegKitPackage = "audio"
-        kotlinVersion = "2.2.21"
+        kotlinVersion = "2.3.20"
     }
     repositories {
         mavenLocal()
