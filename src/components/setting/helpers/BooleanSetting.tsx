@@ -1,13 +1,14 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { View, StyleSheet } from 'react-native';
-import { Switch, Checkbox } from 'react-native-paper';
+import { Checkbox } from 'react-native-paper';
 import { Pressable, RectButton } from 'react-native-gesture-handler';
 
 import { NativeText as Text } from '@components/commonui/ScaledText';
 import { useNoxSetting } from '@stores/useApp';
 import { SettingEntry } from './SettingEntry';
 import { isAndroid } from '@utils/RNUtils';
+import Switch from '@components/commonui/Switch';
 
 const BooleanSetting = ({
   settingName,
@@ -97,7 +98,7 @@ const styles = StyleSheet.create({
   },
   settingTextContainer: {
     flex: 5,
-    paddingLeft: 5,
+    paddingHorizontal: 5,
   },
   settingText: {
     fontSize: 20,
@@ -107,7 +108,7 @@ const styles = StyleSheet.create({
   },
   switchContainer: {
     flex: 1,
-    paddingTop: 10,
     alignItems: 'flex-end',
+    alignSelf: 'center',
   },
 });

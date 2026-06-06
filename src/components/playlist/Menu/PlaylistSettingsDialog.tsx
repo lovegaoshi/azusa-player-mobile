@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
-import { View, StyleSheet } from 'react-native';
-import { Button, Dialog, Portal, Switch } from 'react-native-paper';
+import { StyleSheet } from 'react-native';
+import { Button, Dialog, Portal } from 'react-native-paper';
 import { useTranslation } from 'react-i18next';
 
 import { useNoxSetting } from '@stores/useApp';
@@ -8,7 +8,8 @@ import NoxInput from '@components/dialogs/NoxInput';
 import SplitInput from '@components/dialogs/SplitInput';
 import usePlaylistSetting from './usePlaylistSetting';
 import PlaylistRepeatMode from './PlaylistRepeatMode';
-import { PaperText as Text } from '@components/commonui/ScaledText';
+import { isAndroid } from '@utils/RNUtils';
+import { LabeledSwitch } from '@components/commonui/Switch';
 
 interface Props {
   visible: boolean;
@@ -86,36 +87,27 @@ const PlaylistDialog = ({
           text={blacklist}
           setText={setBlacklist}
         />
-        <View style={styles.switchContainer}>
-          <Switch
-            value={useBiliShazam}
-            onValueChange={toggleBiliShazam}
-            color={playerStyle.colors.onSurfaceVariant}
-          />
-          <Text style={styles.switchText}>
-            {t('PlaylistSettingsDialog.useBiliShazamLabel')}
-          </Text>
-        </View>
-        <View style={styles.switchContainer}>
-          <Switch
-            value={biliSync}
-            onValueChange={toggleBiliSync}
-            color={playerStyle.colors.onSurfaceVariant}
-          />
-          <Text style={styles.switchText}>
-            {t('PlaylistSettingsDialog.useBiliSyncLabel')}
-          </Text>
-        </View>
-        <View style={styles.switchContainer}>
-          <Switch
-            value={newSongOverwrite}
-            onValueChange={toggleNewSongOverwrite}
-            color={playerStyle.colors.onSurfaceVariant}
-          />
-          <Text style={styles.switchText}>
-            {t('PlaylistSettingsDialog.useNewSongOverwriteLabel')}
-          </Text>
-        </View>
+        <LabeledSwitch
+          viewStyle={styles.switchContainer}
+          textStyle={styles.switchText}
+          text={t('PlaylistSettingsDialog.useBiliShazamLabel')}
+          value={useBiliShazam}
+          onValueChange={toggleBiliShazam}
+        />
+        <LabeledSwitch
+          viewStyle={styles.switchContainer}
+          textStyle={styles.switchText}
+          text={t('PlaylistSettingsDialog.useBiliSyncLabel')}
+          value={biliSync}
+          onValueChange={toggleBiliSync}
+        />
+        <LabeledSwitch
+          viewStyle={styles.switchContainer}
+          textStyle={styles.switchText}
+          text={t('PlaylistSettingsDialog.useNewSongOverwriteLabel')}
+          value={newSongOverwrite}
+          onValueChange={toggleNewSongOverwrite}
+        />
         <PlaylistRepeatMode onPress={setRepeatMode} mode={repeatMode} />
       </Dialog.Content>
 
@@ -142,5 +134,6 @@ const styles = StyleSheet.create({
   },
   switchText: {
     fontSize: 18,
+    marginTop: isAndroid ? -5 : 0,
   },
 });

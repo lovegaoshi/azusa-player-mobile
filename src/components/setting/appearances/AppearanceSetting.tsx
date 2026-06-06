@@ -6,6 +6,7 @@ import SettingListItem from '../helpers/SettingListItem';
 import SelectDarkModeButton from './SelectDarkModeButton';
 import NoWeebButton from './NoWeebButton';
 import SelectPhotoButton from './SelectPhotoButton';
+import { isAndroid } from '@utils/RNUtils';
 
 export enum VIEW {
   HOME = 'AppearanceHome',
@@ -68,12 +69,14 @@ export default function AppearanceSettings({
           settingCategory: 'AppearanceSettings',
         }}
       />
-      <RenderSetting
-        item={{
-          settingName: 'md3slider',
-          settingCategory: 'AppearanceSettings',
-        }}
-      />
+      {isAndroid && (
+        <RenderSetting
+          item={{
+            settingName: 'md3slider',
+            settingCategory: 'AppearanceSettings',
+          }}
+        />
+      )}
     </ScrollView>
   );
 }
