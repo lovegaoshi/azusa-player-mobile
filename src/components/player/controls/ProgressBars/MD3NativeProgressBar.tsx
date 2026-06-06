@@ -41,6 +41,28 @@ export default function SimpleProgressBar({
     });
   }, [immediateShowPause]);
 
+  const onDragStateChange = useMemo(
+    () => (v: boolean) => {
+      'worklet';
+      v && scheduleOnRN(v ? enterSliding : exitSliding);
+    },
+    [],
+  );
+  const onValueChangeFinished = useMemo(
+    () => (v: number) => {
+      'worklet';
+      scheduleOnRN(TPSeek, v * duration);
+    },
+    [duration],
+  );
+  const onValueChangeMemo = useMemo(
+    () => (v: number) => {
+      'worklet';
+      onValueChange && scheduleOnRN(onValueChange, v);
+    },
+    [onValueChange],
+  );
+
   return (
     <Slider
       style={[styles.progressBar, style]}
@@ -56,19 +78,10 @@ export default function SimpleProgressBar({
         bufferedTrackColor: bufferColor,
       }}
       value={playProgress || 0}
-      onValueChange={v => {
-        'worklet';
-        onValueChange && scheduleOnRN(onValueChange, v);
-      }}
-      onDragStateChange={v => {
-        'worklet';
-        v && scheduleOnRN(v ? enterSliding : exitSliding);
-      }}
+      onValueChange={onValueChangeMemo}
+      onDragStateChange={onDragStateChange}
       enabled={enabled}
-      onValueChangeFinished={v => {
-        'worklet';
-        scheduleOnRN(TPSeek, v * duration);
-      }}
+      onValueChangeFinished={onValueChangeFinished}
       waveHeight={waveHeight}
       waveLength={35}
       waveDirection="tail"

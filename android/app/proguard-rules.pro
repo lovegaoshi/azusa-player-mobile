@@ -10,3 +10,4 @@
 # Add any project specific keep options here:
 -keep class javax.script.** { *; }
 -dontwarn javax.script.**
+-keep class expo.modules.kotlin.jni.**  { *; }
