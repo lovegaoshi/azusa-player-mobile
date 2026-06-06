@@ -51,6 +51,8 @@ export default function SimpleProgressBar({
       }
       colors={{
         // inactiveTrackColor: playerStyle.colors.secondary,
+        activeTrackColor: playerStyle.colors.primary,
+        inactiveTrackColor: playerStyle.colors.primaryContainer,
         bufferedTrackColor: bufferColor,
       }}
       value={playProgress || 0}
