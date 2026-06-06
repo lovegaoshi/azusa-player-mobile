@@ -3,8 +3,8 @@ import { useRef, useState } from 'react';
 import { IconButton } from 'react-native-paper';
 
 import { Site, Sites, SiteIcon } from '@enums/Network';
-import useCollapsible from './useCollapsible';
-import { Collapsible } from '@components/commonui/Collapsible';
+import useCollapsable from './useCollapsable';
+import { Collapsable } from '@components/commonui/Collapsable';
 
 interface Props {
   LoginComponent: (p: { loginSite: Site }) => JSX.Element;
@@ -26,7 +26,7 @@ export default function SiteSelector({
   sites = Sites,
 }: Props) {
   const [loginSite, setLoginSite] = useState<Site>(defaultSite);
-  const collapsed = useCollapsible(state => state.collapse);
+  const collapsed = useCollapsable(state => state.collapse);
   const opacityValue = (v: Site, toSite = loginSite) =>
     toSite === v ? 1 : 0.2;
 
@@ -66,7 +66,7 @@ export default function SiteSelector({
 
   return (
     <View style={containerStyle}>
-      <Collapsible collapsed={collapsed}>
+      <Collapsable collapsed={collapsed}>
         <View style={iconTabStyle}>
           {sites.map(site => (
             <IconButton
@@ -78,7 +78,7 @@ export default function SiteSelector({
             />
           ))}
         </View>
-      </Collapsible>
+      </Collapsable>
       <LoginComponent loginSite={loginSite} />
     </View>
   );

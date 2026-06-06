@@ -40,6 +40,7 @@
     }
   },
   "dependencies": {
+    "@expo/ui": "~56.0.15",
     "@legendapp/list": "^3.0.0",
     "@lodev09/react-native-true-sheet": "https://github.com/lovegaoshi/react-native-true-sheet.git#commit=08574090ec57cea023eeebcf17e78e0046aa51c4",
     "@notifee/react-native": "^9.1.8",

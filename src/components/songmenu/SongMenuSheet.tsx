@@ -24,9 +24,14 @@ import { setR128Gain } from '@utils/db/sqlStorage';
 import usePlayback from '@hooks/usePlayback';
 import ABSliderMenu from './ABSliderMenu';
 import VolumeSlider from './VolumeSlider';
-import { isAndroid } from '@utils/RNUtils';
+import { isAndroid, isAndroid10 } from '@utils/RNUtils';
 import { songExport2URL } from '@utils/mediafetch/resolveURL';
 import useSnack from '@stores/useSnack';
+import {
+  mStyles,
+  downloadSongs,
+} from '@components/playlist/SongList/SongMenuSheet';
+import { Source } from '@enums/MediaFetch';
 
 export default function SongMenuSheet() {
   const sheet = useRef<TrueSheet>(null);
@@ -37,6 +42,7 @@ export default function SongMenuSheet() {
   const { t } = useTranslation();
   const updateTrack = useTrackStore(state => state.updateTrack);
   const getPlaylist = useNoxSetting(state => state.getPlaylist);
+  const playerSetting = useNoxSetting(state => state.playerSetting);
   const { startRadio } = useSongOperations();
   const { playFromPlaylist } = usePlayback();
   const setSnack = useSnack(state => state.setSnack);
@@ -120,18 +126,12 @@ export default function SongMenuSheet() {
           onValueEnd={() => setDraggable(true)}
         />
       )}
-      <View
-        style={{
-          paddingVertical: 15,
-          paddingHorizontal: 20,
-          flexDirection: 'row',
-        }}
-      >
+      <View style={mStyles.songInfo}>
         <Image
           source={{ uri: song?.cover, width: 250, height: 250 }}
-          style={{ width: 50, height: 50, borderRadius: 5 }}
+          style={mStyles.albumArt}
         />
-        <View style={{ paddingLeft: 5, marginTop: -10 }}>
+        <View style={mStyles.songTitle}>
           <SongTitle
             style={[styles.titleText, { paddingRight: 35 }]}
             text={song?.parsedName}
@@ -151,7 +151,7 @@ export default function SongMenuSheet() {
         </View>
       </View>
       <Divider />
-      <View style={{ flexDirection: 'row', paddingVertical: 10 }}>
+      <View style={mStyles.rowBtnView}>
         <CopiedPlaylistButton
           getFromListOnClick={selectedPlaylist}
           showSheet={showSheet}
@@ -173,12 +173,28 @@ export default function SongMenuSheet() {
           text={t('SongOperations.share')}
         />
       </View>
-      <SheetIconEntry
-        text={t('SongOperations.songStartRadio')}
-        icon={'radio-tower'}
-        onPress={onRadioPressed}
-        disabled={!radioAvailable(song)}
-      />
+      {radioAvailable(song) && (
+        <SheetIconEntry
+          text={t('SongOperations.songStartRadio')}
+          icon={'radio-tower'}
+          onPress={onRadioPressed}
+        />
+      )}
+      {isAndroid10 && song?.source !== Source.local && (
+        <SheetIconEntry
+          text={t('SongOperations.songDownloadTitle')}
+          icon={'file-download'}
+          onPress={async () =>
+            downloadSongs({
+              toDir: playerSetting.downloadLocation,
+              songs: [song],
+              updateSong: playlistCRUD.updateSong,
+              setSnack,
+              callback: () => showSheet(false),
+            })
+          }
+        />
+      )}
       <SheetIconEntry
         text={t('SongOperations.reloadSong')}
         icon={'refresh'}

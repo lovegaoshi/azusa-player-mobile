@@ -1,9 +1,10 @@
 import { TrueSheet } from '@lodev09/react-native-true-sheet';
 import { useRef } from 'react';
-import { View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import { Image } from 'expo-image';
 import { Divider } from 'react-native-paper';
 import { useTranslation } from 'react-i18next';
+import i18n from 'i18next';
 
 import { NativeText as Text } from '@components/commonui/ScaledText';
 import { NoxSheetRoutes } from '@enums/Routes';
@@ -19,7 +20,7 @@ import usePlaylistCRUD from '@hooks/usePlaylistCRUD';
 import RenameSongButton from '@components/songmenu/RenameSongButton';
 import useSongOperations from '@hooks/useSongOperations';
 import radioAvailable from '@utils/mediafetch/radiofetch';
-import useSnack from '@stores/useSnack';
+import useSnack, { SetSnack } from '@stores/useSnack';
 import useBiliSearch from '@hooks/useBiliSearch';
 import { SearchRegex } from '@enums/Playlist';
 import { Source } from '@enums/MediaFetch';
@@ -126,18 +127,12 @@ export default function SongMenuSheet({
     <NoxBottomSheet name={NoxSheetRoutes.SongsMenuInListSheet} ref={sheet}>
       {songs.length === 1 && (
         <>
-          <View
-            style={{
-              paddingVertical: 15,
-              paddingHorizontal: 20,
-              flexDirection: 'row',
-            }}
-          >
+          <View style={mStyles.songInfo}>
             <Image
               source={{ uri: song?.cover, width: 250, height: 250 }}
-              style={{ width: 50, height: 50, borderRadius: 5 }}
+              style={mStyles.albumArt}
             />
-            <View style={{ paddingLeft: 5, marginTop: -10 }}>
+            <View style={mStyles.songTitle}>
               <SongTitle style={styles.titleText} text={getTitle()} />
 
               <Text
@@ -157,7 +152,7 @@ export default function SongMenuSheet({
           <Divider />
         </>
       )}
-      <View style={{ flexDirection: 'row', paddingVertical: 10 }}>
+      <View style={mStyles.rowBtnView}>
         <CopiedPlaylistButton
           getFromListOnClick={selectedPlaylist}
           showSheet={showSheet}
@@ -205,29 +200,15 @@ export default function SongMenuSheet({
         <SheetIconEntry
           text={t('SongOperations.songDownloadTitle')}
           icon={'file-download'}
-          onPress={async () => {
-            const downloadSong = async (song: NoxMedia.Song) => {
-              const newPath = await copyCacheToDir({
-                song,
-                fsdir: playerSetting.downloadLocation,
-              });
-              if (!newPath) return;
-              await playlistCRUD.updateSong(song, {
-                localPath: newPath,
-              });
-            };
-            showSheet(false);
-            for (const song of songs) {
-              await setSnack({
-                snackMsg: {
-                  processing: t('Download.downloading', { song }),
-                  success: t('Download.downloaded', { song }),
-                  fail: t('Download.downloadFailed', { song }),
-                },
-                processFunction: () => downloadSong(song),
-              });
-            }
-          }}
+          onPress={async () =>
+            downloadSongs({
+              toDir: playerSetting.downloadLocation,
+              songs,
+              updateSong: playlistCRUD.updateSong,
+              setSnack,
+              callback: () => showSheet(false),
+            })
+          }
         />
       )}
       <SetMVButton
@@ -263,3 +244,54 @@ export default function SongMenuSheet({
     </NoxBottomSheet>
   );
 }
+
+interface DownloadProps {
+  toDir?: string;
+  updateSong: (
+    song: NoxMedia.Song,
+    newMetadata: Partial<NoxMedia.Song>,
+  ) => Promise<void>;
+  callback: () => void;
+  setSnack: (snackMsg: SetSnack) => Promise<void>;
+  songs: NoxMedia.Song[];
+}
+export const downloadSongs = async ({
+  toDir,
+  updateSong,
+  callback,
+  setSnack,
+  songs,
+}: DownloadProps) => {
+  const downloadSong = async (song: NoxMedia.Song) => {
+    const newPath = await copyCacheToDir({
+      song,
+      fsdir: toDir,
+    });
+    if (!newPath) return;
+    await updateSong(song, {
+      localPath: newPath,
+    });
+  };
+  callback();
+  for (const song of songs) {
+    await setSnack({
+      snackMsg: {
+        processing: i18n.t('Download.downloading', { song }),
+        success: i18n.t('Download.downloaded', { song }),
+        fail: i18n.t('Download.downloadFailed', { song }),
+      },
+      processFunction: () => downloadSong(song),
+    });
+  }
+};
+
+export const mStyles = StyleSheet.create({
+  songInfo: {
+    paddingVertical: 15,
+    paddingHorizontal: 20,
+    flexDirection: 'row',
+  },
+  albumArt: { width: 50, height: 50, borderRadius: 5 },
+  songTitle: { paddingLeft: 5, marginTop: -10 },
+  rowBtnView: { flexDirection: 'row', paddingVertical: 10 },
+});
