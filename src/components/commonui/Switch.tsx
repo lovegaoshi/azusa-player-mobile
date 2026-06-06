@@ -3,7 +3,7 @@ import { Switch } from 'react-native-paper';
 
 import { useNoxSetting } from '@stores/useApp';
 import { isAndroid } from '@utils/RNUtils';
-import { View, ViewStyle } from 'react-native';
+import { TextStyle, View, ViewStyle } from 'react-native';
 import { PaperText as Text } from './ScaledText';
 
 interface Props {
@@ -14,7 +14,7 @@ interface Props {
 
 interface LabeledProps extends Props {
   viewStyle: ViewStyle;
-  textStyle: ViewStyle;
+  textStyle: TextStyle;
   text: string;
 }
 

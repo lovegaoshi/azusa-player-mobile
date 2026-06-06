@@ -3,7 +3,6 @@ import { StyleSheet } from 'react-native';
 import { Button, Dialog, Portal } from 'react-native-paper';
 import { useTranslation } from 'react-i18next';
 
-import { useNoxSetting } from '@stores/useApp';
 import NoxInput from '@components/dialogs/NoxInput';
 import SplitInput from '@components/dialogs/SplitInput';
 import usePlaylistSetting from './usePlaylistSetting';
