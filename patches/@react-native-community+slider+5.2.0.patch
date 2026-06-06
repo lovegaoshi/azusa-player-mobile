@@ -135,3 +135,73 @@ index 6903ca7..e4d2db8 100644
  }
  
  export interface SliderRef {
+diff --git a/node_modules/@react-native-community/slider/ios/RNCSliderComponentView.mm b/node_modules/@react-native-community/slider/ios/RNCSliderComponentView.mm
+index 605487a..a2b75d2 100644
+--- a/node_modules/@react-native-community/slider/ios/RNCSliderComponentView.mm
++++ b/node_modules/@react-native-community/slider/ios/RNCSliderComponentView.mm
+@@ -273,23 +273,52 @@ - (void)updateProps:(const Props::Shared &)props oldProps:(const Props::Shared &
+ }
+ 
+ 
+-// TODO temporarily using bridge, workaround for https://github.com/reactwg/react-native-new-architecture/discussions/31#discussioncomment-2717047, rewrite when Meta comes with a solution.
+ - (void)loadImageFromImageSource:(ImageSource)source completionBlock:(RNCLoadImageCompletionBlock)completionBlock failureBlock:(RNCLoadImageFailureBlock)failureBlock
+ {
+     NSString *uri = [[NSString alloc] initWithUTF8String:source.uri.c_str()];
+-    if ((BOOL)uri.length) {
+-        [[[RCTBridge currentBridge] moduleForName:@"ImageLoader"]
+-        loadImageWithURLRequest:NSURLRequestFromImageSource(source)
+-        size:CGSizeMake(source.size.width, source.size.height)
+-        scale:source.scale
+-        clipped:NO
+-        resizeMode:RCTResizeModeCover
+-        progressBlock:nil
+-        partialLoadBlock:nil
+-        completionBlock:completionBlock];
+-    } else {
+-        failureBlock();
++    if (!uri.length) {
++      NSLog(@"[RNCSlider] loadImageFromImageSource: empty URI, invoking failureBlock");
++      failureBlock();
++      return;
+     }
++    NSURL *url = [NSURL URLWithString:uri];
++  if (!uri.length) {
++    NSLog(@"[RNCSlider] loadImageFromImageSource: failed to read URL");
++    failureBlock();
++    return;
++  }
++  
++  NSURLRequest *request = [NSURLRequest requestWithURL:url];
++  NSURLSessionDataTask *task = [
++    [NSURLSession sharedSession]
++    dataTaskWithRequest:request
++    completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
++      if (error) {
++        NSLog(@"[RNCSlider] loadImageFromImageSource: network error: %@", error.localizedDescription);
++        dispatch_async(dispatch_get_main_queue(), ^{
++          completionBlock(error, nil);
++        });
++        return;
++      }
++      UIImage *image = data ? [UIImage imageWithData:data scale:source.scale] : nil;
++      if (!image) {
++        NSLog(@"[RNCSlider] loadImageFromImageSource: failed to decode image data from %@", uri);
++        dispatch_async(dispatch_get_main_queue(), ^{
++          NSError *decodeError = [
++            NSError errorWithDomain:@"RNCSlider"
++            code:-1
++            userInfo:@{NSLocalizedDescriptionKey: @"Failed to decode image data"}
++          ];
++          completionBlock(decodeError, nil);
++        });
++      return;
++      }
++      NSLog(@"[RNCSlider] loadImageFromImageSource: successfully loaded image from %@", uri);
++      dispatch_async(dispatch_get_main_queue(), ^{
++        completionBlock(nil, image);
++      });
++    }];
++  [task resume];
+ }
+ 
+ - (void)setInverted:(BOOL)inverted
