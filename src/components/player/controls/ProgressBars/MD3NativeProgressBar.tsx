@@ -5,13 +5,12 @@ import { WavySlider as Slider } from 'expo-wavy-slider';
 import { scheduleOnRN } from 'react-native-worklets';
 import { useStore } from 'zustand';
 import { useSharedValue, withTiming } from 'react-native-reanimated';
+import { colord } from 'colord';
 
 import { useNoxSetting } from '@stores/useApp';
 import { TPSeek } from '@stores/RNObserverStore';
 import { ProgressBarProps } from './ProgressBarProps';
 import appStore from '@stores/appStore';
-
-const WaveHeight = 8;
 
 export default function SimpleProgressBar({
   style,
@@ -26,13 +25,27 @@ export default function SimpleProgressBar({
   const fetchProgress = useStore(appStore, state => state.fetchProgress);
   const immediateShowPause = useNoxSetting(state => state.immediateShowPause);
   const waveHeight = useSharedValue(0);
+  const waveThickness = useSharedValue(6);
+
+  const unbufferedColor = useMemo(
+    () => colord(playerStyle.colors.primaryContainer).alpha(0.5).toRgbString(),
+    [playerStyle.colors.primaryContainer],
+  );
 
   useEffect(() => {
-    waveHeight.value = withTiming(immediateShowPause ? 0 : WaveHeight, {
+    waveHeight.value = withTiming(immediateShowPause ? 0 : 8, {
       duration: 200,
     });
   }, [immediateShowPause]);
 
+  const onDragStateChange = (v: boolean) => {
+    'worklet';
+    scheduleOnRN(v ? enterSliding : exitSliding);
+    waveThickness.value = withTiming(v ? 20 : 6, { duration: 200 });
+    waveHeight.value = withTiming(v ? 0 : 8, {
+      duration: 200,
+    });
+  };
   const onValueChangeFinished = useMemo(
     () => (v: number) => {
       'worklet';
@@ -55,21 +68,19 @@ export default function SimpleProgressBar({
       colors={{
         activeTrackColor: playerStyle.colors.primary,
         thumbColor: playerStyle.colors.primary,
-        inactiveTrackColor: playerStyle.colors.primaryContainer,
-        bufferedTrackColor: playerStyle.colors.secondary,
+        inactiveTrackColor: unbufferedColor,
+        bufferedTrackColor: playerStyle.colors.primaryContainer,
       }}
       value={position / duration || 0}
       onValueChange={onValueChangeMemo}
-      onDragStateChange={v => {
-        'worklet';
-        scheduleOnRN(v ? enterSliding : exitSliding);
-      }}
+      onDragStateChange={onDragStateChange}
       enabled={enabled}
       onValueChangeFinished={onValueChangeFinished}
       waveHeight={waveHeight}
       waveLength={35}
       waveDirection="tail"
-      trackThickness={8}
+      trackThickness={waveThickness}
+      waveThickness={waveThickness}
     />
   );
 }
