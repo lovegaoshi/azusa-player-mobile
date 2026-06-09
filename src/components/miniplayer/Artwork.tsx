@@ -111,7 +111,6 @@ export default function MiniplayerArtwork({
         { scale: artworkScale.value },
       ],
       opacity: artworkOpacity.value,
-      zIndex: opacity.value > 0 ? 1 : -1,
       borderRadius: borderRadius.value,
     };
   });
@@ -150,6 +149,7 @@ export default function MiniplayerArtwork({
             height: width + insets.top,
             position: 'absolute',
             overflow: 'hidden',
+            zIndex: 1,
           },
           animatedStyle,
         ]}
