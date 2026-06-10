@@ -14,6 +14,7 @@ import songDLTable from '@utils/db/schema/songDLTable';
 import db from '@utils/db/sql';
 import { getPlaybackCountAPI, getPlaybackCountsAPI } from '@utils/db/sqlAPI';
 import { logger } from '@utils/Logger';
+import { chunkArray } from '@utils/Utils';
 
 interface PlaybackCount {
   songcid: string;
@@ -61,7 +62,9 @@ export const restorePlaybackCount = async (
   if (!data) return;
   try {
     reset && (await db.delete(playbackTable));
-    await db.insert(playbackTable).values(data).onConflictDoNothing();
+    for (const chunkedData of chunkArray(data, 500)) {
+      await db.insert(playbackTable).values(chunkedData).onConflictDoNothing();
+    }
   } catch (e) {
     logger.error(`[APMSQL] failed to import playback count! ${e}`);
   }
@@ -71,7 +74,9 @@ export const restoreABRepeat = async (data: ABRepeat[], reset = false) => {
   if (!data) return;
   try {
     reset && (await db.delete(abRepeatTable));
-    await db.insert(abRepeatTable).values(data).onConflictDoNothing();
+    for (const chunkedData of chunkArray(data, 500)) {
+      await db.insert(abRepeatTable).values(chunkedData).onConflictDoNothing();
+    }
   } catch (e) {
     logger.error(`[APMSQL] failed to import abRepeatTable! ${e}`);
   }
@@ -81,7 +86,9 @@ export const restoreLyric = async (data: Lyric[], reset = false) => {
   if (!data) return;
   try {
     reset && (await db.delete(lyricTable));
-    await db.insert(lyricTable).values(data).onConflictDoNothing();
+    for (const chunkedData of chunkArray(data, 500)) {
+      await db.insert(lyricTable).values(chunkedData).onConflictDoNothing();
+    }
   } catch (e) {
     logger.error(`[APMSQL] failed to import lyric! ${e}`);
   }
@@ -91,7 +98,9 @@ export const restoreR128Gain = async (data: R128Gain[], reset = false) => {
   if (!data) return;
   try {
     reset && (await db.delete(r128gainTable));
-    await db.insert(r128gainTable).values(data).onConflictDoNothing();
+    for (const chunkedData of chunkArray(data, 500)) {
+      await db.insert(r128gainTable).values(chunkedData).onConflictDoNothing();
+    }
   } catch (e) {
     logger.error(`[APMSQL] failed to import r128gain! ${e}`);
   }
