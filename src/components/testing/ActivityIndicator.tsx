@@ -3,7 +3,7 @@ import { Text, View } from 'react-native';
 
 import APMActivityIndicator from '@components/commonui/ActivityIndicator';
 
-export default () => {
+export default function Test() {
   return (
     <View style={{ top: 100, alignItems: 'center' }}>
       <View style={{ flexDirection: 'row' }}>
@@ -18,4 +18,4 @@ export default () => {
       </View>
     </View>
   );
-};
+}
