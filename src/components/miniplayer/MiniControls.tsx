@@ -1,5 +1,10 @@
-import { ActivityIndicator, IconButton } from 'react-native-paper';
-import { Dimensions, TouchableWithoutFeedback, View } from 'react-native';
+import { IconButton } from 'react-native-paper';
+import {
+  Dimensions,
+  StyleSheet,
+  TouchableWithoutFeedback,
+  View,
+} from 'react-native';
 import Animated, {
   useAnimatedStyle,
   useDerivedValue,
@@ -14,12 +19,9 @@ import { MinPlayerHeight } from './Constants';
 import { useNoxSetting } from '@stores/useApp';
 import { PaperText as Text } from '@components/commonui/ScaledText';
 import { TPPlay } from '@stores/RNObserverStore';
+import ActivityIndicator from '@components/commonui/ActivityIndicator';
 
 const IconSize = 30;
-const iconContainerStyle = {
-  width: IconSize + 28,
-  height: IconSize + 28,
-};
 const DoublePlayerHeight = MinPlayerHeight * 1.2;
 
 const TrackInfo = () => {
@@ -104,7 +106,9 @@ const PlayPauseButton = () => {
   const { showPause, showBuffering } = usePlaybackState();
 
   if (showBuffering) {
-    return <ActivityIndicator size={IconSize - 8} style={iconContainerStyle} />;
+    return (
+      <ActivityIndicator size={IconSize - 8} style={mStyles.iconContainer} />
+    );
   }
   return (
     <IconButton
@@ -115,3 +119,10 @@ const PlayPauseButton = () => {
     />
   );
 };
+
+const mStyles = StyleSheet.create({
+  iconContainer: {
+    width: IconSize + 28,
+    height: IconSize + 28,
+  },
+});

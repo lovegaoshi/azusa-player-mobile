@@ -6,7 +6,6 @@ import {
   StyleSheet,
   ViewStyle,
 } from 'react-native';
-import { ActivityIndicator } from 'react-native-paper';
 import { useTranslation } from 'react-i18next';
 
 import { styles } from '@components/style';
@@ -15,6 +14,7 @@ import { BiliSongRow } from './SongRow';
 import useBiliExplore from '@stores/explore/bilibili';
 import { BiliMusicTid } from '@enums/MediaFetch';
 import { PaperText as Text } from '@components/commonui/ScaledText';
+import ActivityIndicator from '@components/commonui/ActivityIndicator';
 
 interface Props extends NoxComponent.ScrollableProps {
   style?: ViewStyle;

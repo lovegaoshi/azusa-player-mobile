@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { View } from 'react-native';
-import { ActivityIndicator } from 'react-native-paper';
+
+import ActivityIndicator from '@components/commonui/ActivityIndicator';
 
 const DefaultSuspenseComponent = () => (
   <View style={{ alignContent: 'center', justifyContent: 'center', flex: 1 }}>

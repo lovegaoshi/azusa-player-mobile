@@ -14,7 +14,7 @@ import Animated, {
   useSharedValue,
   withTiming,
 } from 'react-native-reanimated';
-import { IconButton, ActivityIndicator } from 'react-native-paper';
+import { IconButton } from 'react-native-paper';
 import { useTranslation } from 'react-i18next';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
@@ -27,6 +27,7 @@ import { useNoxSetting } from '@stores/useApp';
 import { goToArtistExternalPage } from '@utils/artistfetch/fetch';
 import { styles, ItemSelectStyles } from '../style';
 import AutoUnmountNavView from '../commonui/AutoUnmountNavView';
+import ActivityIndicator from '@components/commonui/ActivityIndicator';
 
 export default function ArtistView({
   navigation,

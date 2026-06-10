@@ -33,7 +33,7 @@ const NativeProgress = (p: ProgressBarContainerProps) => (
 
 export default function ProgressContainer(p: ProgressBarContainerProps) {
   const playerSetting = useNoxSetting(state => state.playerSetting);
-  if (playerSetting.md3slider && isAndroid) {
+  if (playerSetting.md3slider && playerSetting.nativeBottomTab && isAndroid) {
     return <MD3NativeProgressBar {...p} />;
   }
   return (

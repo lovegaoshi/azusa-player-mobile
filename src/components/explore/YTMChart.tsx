@@ -1,5 +1,4 @@
 import { View, ScrollView, RefreshControl } from 'react-native';
-import { ActivityIndicator } from 'react-native-paper';
 import React, { useCallback, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
@@ -7,6 +6,7 @@ import { styles } from '@components/style';
 import useYTMChartExplore from '@stores/explore/ytmchart.muse';
 import { YTMixedContent } from './YTMusic';
 import { toMixedContent } from './Utils';
+import ActivityIndicator from '@components/commonui/ActivityIndicator';
 
 export default function ExploreYTMChart({
   onScroll,

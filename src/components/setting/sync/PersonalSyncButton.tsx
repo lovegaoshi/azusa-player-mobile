@@ -1,7 +1,7 @@
 // TODO: migrate to GenericSyncButton
 import React, { useState } from 'react';
 import { View, StyleSheet } from 'react-native';
-import { ActivityIndicator, IconButton, TextInput } from 'react-native-paper';
+import { IconButton, TextInput } from 'react-native-paper';
 import { useTranslation } from 'react-i18next';
 
 import { PaperText as Text } from '@components/commonui/ScaledText';
@@ -10,6 +10,7 @@ import { useNoxSetting } from '@stores/useApp';
 import { logger } from '@utils/Logger';
 import { exportPlayerContent } from '@utils/ChromeStorageAPI';
 import useSnack from '@stores/useSnack';
+import ActivityIndicator from '@components/commonui/ActivityIndicator';
 
 interface Props {
   cloudAddress: string;

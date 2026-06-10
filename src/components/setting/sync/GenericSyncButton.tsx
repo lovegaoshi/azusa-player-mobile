@@ -1,13 +1,14 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useState } from 'react';
 import { View, StyleSheet } from 'react-native';
-import { ActivityIndicator, IconButton } from 'react-native-paper';
+import { IconButton } from 'react-native-paper';
 import { useTranslation } from 'react-i18next';
 
 import { logger } from '@utils/Logger';
 import { exportPlayerContent } from '@utils/ChromeStorageAPI';
 import useSnack from '@stores/useSnack';
 import keepAwake from '@utils/keepAwake';
+import ActivityIndicator from '@components/commonui/ActivityIndicator';
 
 const ImportSyncFavButton = ({
   restoreFromUint8Array,
