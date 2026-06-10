@@ -4849,9 +4849,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@legendapp/list@npm:^3.0.3":
-  version: 3.0.3
-  resolution: "@legendapp/list@npm:3.0.3"
+"@legendapp/list@npm:^3.0.4":
+  version: 3.0.4
+  resolution: "@legendapp/list@npm:3.0.4"
   dependencies:
     use-sync-external-store: "npm:^1.5.0"
   peerDependencies:
@@ -4861,7 +4861,7 @@ __metadata:
       optional: true
     react-native:
       optional: true
-  checksum: 10c0/c045199f6a4884280fc17b440e53575153aad9ee318b7cad460ebe42fbff6af32ab8e8b184b57c0f55674b8368b33843c3e0baabccce670aa1efb66fad34d10a
+  checksum: 10c0/af3690a08580888ae7950b8c09d3eef75447a26bde546645ba6e5615d1cd13c60f33ce6ae5fb121898821a9cb8e010050697ea2e0b8309db2745c06515f9d837
   languageName: node
   linkType: hard
 
@@ -5886,11 +5886,11 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@react-navigation/drawer@npm:^7.11.1":
-  version: 7.11.1
-  resolution: "@react-navigation/drawer@npm:7.11.1"
+"@react-navigation/drawer@npm:^7.11.2":
+  version: 7.11.2
+  resolution: "@react-navigation/drawer@npm:7.11.2"
   dependencies:
-    "@react-navigation/elements": "npm:^2.9.21"
+    "@react-navigation/elements": "npm:^2.9.22"
     color: "npm:^4.2.3"
     react-native-drawer-layout: "npm:^4.2.5"
     use-latest-callback: "npm:^0.2.4"
@@ -5902,13 +5902,13 @@ __metadata:
     react-native-reanimated: ">= 2.0.0"
     react-native-safe-area-context: ">= 4.0.0"
     react-native-screens: ">= 4.0.0"
-  checksum: 10c0/d281cf74f6bfc76897152149ada8040ae417e31f938f80acb709dd012b5c9b42047ee88b5b78969c776302002bddb86a400df8a423301267148471ff0092e389
+  checksum: 10c0/0763b181a4b7cfef7c74197834c87371babb2f46179467c6b6f55eff3154a3210726eb3633d033150840461a94e9242d021359d79b949281961f2382643cd4e0
   languageName: node
   linkType: hard
 
-"@react-navigation/elements@npm:^2.9.21":
-  version: 2.9.21
-  resolution: "@react-navigation/elements@npm:2.9.21"
+"@react-navigation/elements@npm:^2.9.22":
+  version: 2.9.22
+  resolution: "@react-navigation/elements@npm:2.9.22"
   dependencies:
     color: "npm:^4.2.3"
     use-latest-callback: "npm:^0.2.4"
@@ -5922,15 +5922,15 @@ __metadata:
   peerDependenciesMeta:
     "@react-native-masked-view/masked-view":
       optional: true
-  checksum: 10c0/72464a96eb77a8b6ca494b6980fc3225b6113bee99af38e76cbcb9f927c7428b3816e4e93ef6e6568dd6170d08167e68f076761283728de6e4fb9ad588526564
+  checksum: 10c0/004a675e698637f2eee31e6b1ce2a8c954651abdbdb63d3edcf0be3641c5c0a05f71f5ca3ba103e8dfe24f5e03cd09edf17aab87f94914508dd563c9588fe9da
   languageName: node
   linkType: hard
 
-"@react-navigation/native-stack@npm:^7.17.1":
-  version: 7.17.1
-  resolution: "@react-navigation/native-stack@npm:7.17.1"
+"@react-navigation/native-stack@npm:^7.17.2":
+  version: 7.17.2
+  resolution: "@react-navigation/native-stack@npm:7.17.2"
   dependencies:
-    "@react-navigation/elements": "npm:^2.9.21"
+    "@react-navigation/elements": "npm:^2.9.22"
     color: "npm:^4.2.3"
     sf-symbols-typescript: "npm:^2.1.0"
     warn-once: "npm:^0.1.1"
@@ -5940,7 +5940,7 @@ __metadata:
     react-native: "*"
     react-native-safe-area-context: ">= 4.0.0"
     react-native-screens: ">= 4.0.0"
-  checksum: 10c0/684fa949c35b0d71c4c69fdd026915ee62939aa8d206d35686c35d66e53b150fa8f41b655434d127b603a9dbfd21d4950ad8d448f291f04543104a28eb9459b5
+  checksum: 10c0/4797b12f8834afa338c036cac9908848371d3d637e3ff9cfbb4c3cbc582249cf66f927f54b8a7231de7750fecbeb1ebc04ecd6f707e30797a3a95c059f8bade5
   languageName: node
   linkType: hard
 
@@ -5986,10 +5986,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@revenuecat/purchases-js@npm:^1.42.1":
-  version: 1.42.1
-  resolution: "@revenuecat/purchases-js@npm:1.42.1"
-  checksum: 10c0/818e26ccd5b5d7c69883c33410d3c25d663e9abdb529e0e4328b4e7157433d094927327ca53ec513de0d6af467890ef06ca656ac1d9648b47ef7cdadcc6e7fdf
+"@revenuecat/purchases-js@npm:^1.42.2":
+  version: 1.42.2
+  resolution: "@revenuecat/purchases-js@npm:1.42.2"
+  checksum: 10c0/102069dbf866b926f1bba00a5acfbf5358b1a021d2e54bc6e423f6035e21e98ed4ecbf93d686024c984fb06026e1945a37bd66de2fcea3c0e0bbac57efe8c6e4
   languageName: node
   linkType: hard
 
@@ -6224,14 +6224,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@shopify/flash-list@npm:2.3.1":
-  version: 2.3.1
-  resolution: "@shopify/flash-list@npm:2.3.1"
+"@shopify/flash-list@npm:2.3.2":
+  version: 2.3.2
+  resolution: "@shopify/flash-list@npm:2.3.2"
   peerDependencies:
     "@babel/runtime": "*"
     react: "*"
     react-native: "*"
-  checksum: 10c0/abe921b93aeb6bf35efb4cd16163ca0126eec1513a40f1b88e370eb646e8bece5daa245e889300aa7ace2a4a81a9ffbd765c1ce2c3f2346611e94cc66c97c6e3
+  checksum: 10c0/3e58913506b1dc7f02dd0696c478fd963ede413d9d7121705a08ff505d5c21e611813ce9370068238b8983ff582ed7b8ee94f68e94f99a1ac8f600c01fff118e
   languageName: node
   linkType: hard
 
@@ -8599,7 +8599,7 @@ __metadata:
     "@babel/preset-typescript": "npm:^7.29.7"
     "@babel/runtime": "npm:^7.29.7"
     "@expo/ui": "npm:~56.0.16"
-    "@legendapp/list": "npm:^3.0.3"
+    "@legendapp/list": "npm:^3.0.4"
     "@lodev09/react-native-true-sheet": "https://github.com/lovegaoshi/react-native-true-sheet.git#commit=08574090ec57cea023eeebcf17e78e0046aa51c4"
     "@material/material-color-utilities": "npm:^0.4.0"
     "@notifee/react-native": "npm:^9.1.8"
@@ -8619,12 +8619,12 @@ __metadata:
     "@react-native/gradle-plugin": "npm:0.85.3"
     "@react-native/metro-config": "npm:0.85.3"
     "@react-native/typescript-config": "npm:0.85.3"
-    "@react-navigation/drawer": "npm:^7.11.1"
+    "@react-navigation/drawer": "npm:^7.11.2"
     "@react-navigation/native": "npm:^7.3.0"
-    "@react-navigation/native-stack": "npm:^7.17.1"
-    "@revenuecat/purchases-js": "npm:^1.42.1"
+    "@react-navigation/native-stack": "npm:^7.17.2"
+    "@revenuecat/purchases-js": "npm:^1.42.2"
     "@sentry/react-native": "npm:~8.13.0"
-    "@shopify/flash-list": "npm:2.3.1"
+    "@shopify/flash-list": "npm:2.3.2"
     "@shopify/react-native-skia": "npm:2.6.4"
     "@tsconfig/react-native": "npm:^3.0.9"
     "@types/color": "npm:^4.2.1"
@@ -8704,7 +8704,7 @@ __metadata:
     nodejs-mobile-react-native: "npm:^18.20.4"
     patch-package: "npm:^8.0.1"
     postinstall-postinstall: "npm:^2.1.0"
-    prettier: "npm:^3.8.3"
+    prettier: "npm:^3.8.4"
     qs: "npm:^6.15.2"
     react: "npm:19.2.3"
     react-i18next: "npm:^17.0.8"
@@ -8712,7 +8712,7 @@ __metadata:
     react-native-app-auth: "npm:^8.4.0"
     react-native-background-timer: "git+https://github.com/lovegaoshi/react-native-background-timer.git"
     react-native-blob-util: "npm:^0.24.9"
-    react-native-bottom-tabs: "npm:1.2.0"
+    react-native-bottom-tabs: "npm:1.3.0"
     react-native-carplay: "npm:2.4.1-beta.0"
     react-native-clean-project: "npm:^4.0.3"
     react-native-device-info: "npm:^15.0.2"
@@ -19072,12 +19072,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"prettier@npm:^3.8.3":
-  version: 3.8.3
-  resolution: "prettier@npm:3.8.3"
+"prettier@npm:^3.8.4":
+  version: 3.8.4
+  resolution: "prettier@npm:3.8.4"
   bin:
     prettier: bin/prettier.cjs
-  checksum: 10c0/754816fd7593eb80f6376d7476d463e832c38a12f32775a82683adb6e35b772b1f484d65f19401507b983a8c8a7cd5a4a9f12006bd56491e8f35503473f77473
+  checksum: 10c0/b90a0cbe75b88ac0af9c13fe0f359bd19926fabccd88483227b21f71f0c1cc42da056fc1ac3a361e665577c568371d5ccfb2c62c31c8a1186f8d1bd531a063e9
   languageName: node
   linkType: hard
 
@@ -19414,9 +19414,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-native-bottom-tabs@npm:1.2.0":
-  version: 1.2.0
-  resolution: "react-native-bottom-tabs@npm:1.2.0"
+"react-native-bottom-tabs@npm:1.3.0":
+  version: 1.3.0
+  resolution: "react-native-bottom-tabs@npm:1.3.0"
   dependencies:
     react-freeze: "npm:^1.0.0"
     sf-symbols-typescript: "npm:^2.0.0"
@@ -19424,7 +19424,7 @@ __metadata:
   peerDependencies:
     react: "*"
     react-native: "*"
-  checksum: 10c0/e44c02b6ca87a3b8c45e124f40e084cd0d02c771132c0fc6ea7c3cbadd12968c73fb31c86768151fb1fe5ee1198f67baf8943fa284fd923b8ffc0461a067edc4
+  checksum: 10c0/92b9394f9fa163c23c3fa5f4b229e1fdff6d2e38758b5f2ea169c56209bc3e221761a3bb03d917ddfac5db122866094c011a3fda2ef7b1e95882de7d5d803b34
   languageName: node
   linkType: hard
 
