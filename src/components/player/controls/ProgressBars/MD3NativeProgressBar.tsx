@@ -48,7 +48,7 @@ export default function SimpleProgressBar({
         duration: 200,
       });
     },
-    [enterSliding, exitSliding],
+    [enterSliding, exitSliding, immediateShowPause],
   );
   const onValueChangeFinished = useMemo(
     () => (v: number) => {
