@@ -276,6 +276,8 @@ const useBiliLogin = (): BiliLogin => {
         },
       },
     );
+    const json = await res.json();
+    console.warn(json);
     clearQRLogin();
     getBiliLoginStatus();
   };
