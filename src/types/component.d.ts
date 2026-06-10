@@ -9,11 +9,16 @@ import { DrawerNavigationProp } from '@react-navigation/drawer';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { Track } from 'react-native-track-player';
 import { SharedValue } from 'react-native-reanimated';
+import { ActivityIndicatorProps as _ActivityIndicatorProps } from 'react-native-paper/';
 
 import { IntentData } from '@enums/Intent';
 
 declare global {
   namespace NoxComponent {
+    interface ActivityIndicatorProps extends _ActivityIndicatorProps {
+      wavy?: boolean;
+      trackColor?: string;
+    }
     interface ScrollableProps {
       onScroll?: (e: NativeSyntheticEvent<NativeScrollEvent>) => void;
       onMomentumScrollEnd?: (

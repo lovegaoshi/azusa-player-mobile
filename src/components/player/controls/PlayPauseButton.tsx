@@ -1,12 +1,13 @@
 import React from 'react';
 import { StyleSheet } from 'react-native';
 import { Image } from 'expo-image';
-import { ActivityIndicator } from 'react-native-paper';
+
 import usePlaybackState from '@hooks/usePlaybackState';
 import { useNoxSetting } from '@stores/useApp';
 import LottieButtonAnimated from '@components/buttons/LottieButtonAnimated';
 import { fadePause } from '@utils/RNTPUtils';
 import { TPPlay } from '@stores/RNObserverStore';
+import ActivityIndicator from '@components/commonui/ActivityIndicator';
 
 interface Props {
   iconSize?: number;

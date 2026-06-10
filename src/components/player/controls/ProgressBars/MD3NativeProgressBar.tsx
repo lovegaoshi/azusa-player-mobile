@@ -38,15 +38,18 @@ export default function SimpleProgressBar({
     });
   }, [immediateShowPause]);
 
-  const onDragStateChange = (v: boolean) => {
-    'worklet';
-    scheduleOnRN(v ? enterSliding : exitSliding);
-    waveThickness.value = withTiming(v ? 20 : 6, { duration: 200 });
-    const actualWaveHeight = immediateShowPause ? 0 : 8;
-    waveHeight.value = withTiming(v ? 0 : actualWaveHeight, {
-      duration: 200,
-    });
-  };
+  const onDragStateChange = useMemo(
+    () => (v: boolean) => {
+      'worklet';
+      scheduleOnRN(v ? enterSliding : exitSliding);
+      waveThickness.value = withTiming(v ? 20 : 6, { duration: 200 });
+      const actualWaveHeight = immediateShowPause ? 0 : 8;
+      waveHeight.value = withTiming(v ? 0 : actualWaveHeight, {
+        duration: 200,
+      });
+    },
+    [enterSliding, exitSliding],
+  );
   const onValueChangeFinished = useMemo(
     () => (v: number) => {
       'worklet';

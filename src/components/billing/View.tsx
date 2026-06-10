@@ -1,6 +1,6 @@
 import { View, StyleSheet, Pressable } from 'react-native';
 import React, { useEffect, useState } from 'react';
-import { Button, ActivityIndicator } from 'react-native-paper';
+import { Button } from 'react-native-paper';
 import { useTranslation } from 'react-i18next';
 import { Image } from 'expo-image';
 import * as Clipboard from 'expo-clipboard';
@@ -11,6 +11,7 @@ import { styles } from '../style';
 // eslint-disable-next-line import/no-unresolved
 import { APPSTORE } from '@env';
 import getUser from '@utils/Bilibili/BiliUser';
+import ActivityIndicator from '@components/commonui/ActivityIndicator';
 
 interface LoadingChildrenProps {
   setLoading: React.Dispatch<React.SetStateAction<boolean>>;

@@ -1,5 +1,5 @@
 import { View, ScrollView } from 'react-native';
-import { ActivityIndicator, Button } from 'react-native-paper';
+import { Button } from 'react-native-paper';
 import React, { useEffect } from 'react';
 import isArray from 'lodash/isArray';
 import {
@@ -18,6 +18,7 @@ import useYTMExplore, {
 } from '@stores/explore/ytmHome.ytbi';
 import { YTSongRow } from './SongRow';
 import { BiliSongsArrayTabCard } from './SongTab';
+import ActivityIndicator from '@components/commonui/ActivityIndicator';
 
 interface ContentProps {
   content: MusicCarouselShelf;

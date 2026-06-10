@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Button, ActivityIndicator } from 'react-native-paper';
+import { Button } from 'react-native-paper';
 import { useTranslation } from 'react-i18next';
 
 import { getBiliFavlist, GetFavlistRes } from '@utils/Bilibili/bilifavOperate';
@@ -7,6 +7,7 @@ import GenericCheckDialog from '../../dialogs/GenericCheckDialog';
 import bilifavlistFetch from '@utils/mediafetch/bilifavlist';
 import { dummyPlaylist } from '@objects/Playlist';
 import usePlaylistBrowseTree from '@hooks/usePlaylistBrowseTree';
+import ActivityIndicator from '@components/commonui/ActivityIndicator';
 
 export default function BiliSelectFavButton() {
   const { t } = useTranslation();

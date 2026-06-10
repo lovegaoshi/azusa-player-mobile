@@ -446,7 +446,8 @@
   "SleepTimer": { "Title": "Sleep Timer" },
   "Login": {
     "BilibiliNotLoggedIn": "User not logged in\n",
-    "BilibiliLoginButton": "QR log in",
+    "BilibiliLoginButton": "QR Code login",
+    "BilibiliLoginViaApp": "Open link to log in via the Bilibili app",
     "BilibiliCookieInputButton": "Manually input cookies",
     "BilibiliCookieInputDialogTitle": "Add Bili Cookies",
     "BilibiliLoginQRGeneration": "Generating QR code...",

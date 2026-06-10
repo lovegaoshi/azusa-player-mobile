@@ -10,7 +10,7 @@ import {
 } from 'react-native';
 import { Lrc as Lyric, KaraokeMode } from 'react-native-lyric';
 import { Track, useProgress } from 'react-native-track-player';
-import { IconButton, ActivityIndicator } from 'react-native-paper';
+import { IconButton } from 'react-native-paper';
 import { TrueSheet } from '@lodev09/react-native-true-sheet';
 import { LinearGradient } from 'expo-linear-gradient';
 import MaskedView from '@react-native-masked-view/masked-view';
@@ -22,6 +22,7 @@ import LyricBottomSheet from './LyricBottomSheet';
 import { NoxSheetRoutes } from '@enums/Routes';
 import { useIsLandscape } from '@hooks/useOrientation';
 import { TPSeek } from '@stores/RNObserverStore';
+import ActivityIndicator from '@components/commonui/ActivityIndicator';
 
 interface LyricViewProps {
   track: Track;
@@ -128,8 +129,8 @@ export const LyricView = ({
       />
 
       {loading ? (
-        <Pressable onPress={onPress}>
-          <ActivityIndicator size={70} style={styles.lrcView} />
+        <Pressable onPress={onPress} style={[styles.lrcView, styles.center]}>
+          <ActivityIndicator size={70} />
         </Pressable>
       ) : (
         <FadingMaskedView fade={fadeEffect}>
@@ -223,6 +224,7 @@ export const LyricView = ({
 
 const styles = StyleSheet.create({
   lrcView: { height: 500, paddingHorizontal: 20 },
+  center: { alignItems: 'center', justifyContent: 'center' },
   container: {
     flex: 1,
   },

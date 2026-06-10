@@ -449,6 +449,7 @@
   "Login": {
     "BilibiliNotLoggedIn": "用户未登录",
     "BilibiliLoginButton": "扫码登录",
+    "BilibiliLoginViaApp": "跳转b站APP登录",
     "BilibiliCookieInputButton": "手动填入cookie",
     "BilibiliCookieInputDialogTitle": "填入b站cookie",
     "BilibiliLoginQRGeneration": "正在生成二维码...",

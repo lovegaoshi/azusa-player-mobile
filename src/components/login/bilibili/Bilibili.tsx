@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { View, StyleSheet, ScrollView } from 'react-native';
-import { Avatar, ActivityIndicator, Button } from 'react-native-paper';
+import { View, StyleSheet, ScrollView, Linking } from 'react-native';
+import { Avatar, Button } from 'react-native-paper';
 import { useTranslation } from 'react-i18next';
 import QRCode from 'react-native-qrcode-svg';
 import CookieManager from '@preeternal/react-native-cookie-manager';
@@ -14,6 +14,7 @@ import { BiliLogin } from './useBiliLoginApp';
 import useSnack from '@stores/useSnack';
 import { styles as gStyles } from '@components/style';
 import { PaperText as Text } from '@components/commonui/ScaledText';
+import ActivityIndicator from '@components/commonui/ActivityIndicator';
 
 const domain = 'https://bilibili.com';
 
@@ -95,6 +96,13 @@ const LoginPage = ({
       <Text>{t('Login.Disclaimer')}</Text>
       {qrcode !== '' && (
         <View style={styles.qrCodeContainerStyle}>
+          <Button
+            mode={'contained-tonal'}
+            onPress={() => Linking.openURL(qrcode)}
+            style={{ marginBottom: 10 }}
+          >
+            {t('Login.BilibiliLoginViaApp')}
+          </Button>
           <QRCode value={qrcode} size={300} />
         </View>
       )}

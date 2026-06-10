@@ -61,7 +61,7 @@ export default function useLyric(currentSong?: NoxMedia.Song) {
       updateLyricMapping({
         resolvedLrc,
         song,
-        currentTimeOffset,
+        currentTimeOffset: resolvedLyric?.lyricOffset ?? 0,
         lrc: lyric,
       });
     }
