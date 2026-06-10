@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { View, StyleSheet, ScrollView } from 'react-native';
+import { View, StyleSheet, ScrollView, Linking } from 'react-native';
 import { Avatar, Button } from 'react-native-paper';
 import { useTranslation } from 'react-i18next';
 import QRCode from 'react-native-qrcode-svg';
@@ -96,6 +96,13 @@ const LoginPage = ({
       <Text>{t('Login.Disclaimer')}</Text>
       {qrcode !== '' && (
         <View style={styles.qrCodeContainerStyle}>
+          <Button
+            mode={'contained-tonal'}
+            onPress={() => Linking.openURL(qrcode)}
+            style={{ marginBottom: 10 }}
+          >
+            {t('Login.BilibiliLoginViaApp')}
+          </Button>
           <QRCode value={qrcode} size={300} />
         </View>
       )}
