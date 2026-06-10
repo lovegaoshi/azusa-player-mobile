@@ -6380,6 +6380,31 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/color-convert@npm:2":
+  version: 2.0.4
+  resolution: "@types/color-convert@npm:2.0.4"
+  dependencies:
+    "@types/color-name": "npm:^1.1.0"
+  checksum: 10c0/fdd2cea0ccf593055c8d952760286a4c114ed72a9940798d13f159823bf71d40a6b124009865e2e066f062d6d5611b677ddb61fd0ed05f6494170454cc6457c2
+  languageName: node
+  linkType: hard
+
+"@types/color-name@npm:^1.1.0":
+  version: 1.1.5
+  resolution: "@types/color-name@npm:1.1.5"
+  checksum: 10c0/ce566d98ab1c2622a2e9d9d1d5cbde403e731a4fc084e8b0f56e89901cd3c46981feafb797d4505918d5eb5a7fd897fce2332d489f450ddf1c58bc4986bd9d76
+  languageName: node
+  linkType: hard
+
+"@types/color@npm:^4.2.1":
+  version: 4.2.1
+  resolution: "@types/color@npm:4.2.1"
+  dependencies:
+    "@types/color-convert": "npm:2"
+  checksum: 10c0/fdf1558e91fd31e9d95bf60be08524b62815ab339aab4b1318672461044541eb7927e41427792dcc1da8d63680e3c572402414a5a8e1d3909ad3d65cb0b64c39
+  languageName: node
+  linkType: hard
+
 "@types/crypto-js@npm:^4.2.2":
   version: 4.2.2
   resolution: "@types/crypto-js@npm:4.2.2"
@@ -8602,6 +8627,7 @@ __metadata:
     "@shopify/flash-list": "npm:2.3.1"
     "@shopify/react-native-skia": "npm:2.6.4"
     "@tsconfig/react-native": "npm:^3.0.9"
+    "@types/color": "npm:^4.2.1"
     "@types/crypto-js": "npm:^4.2.2"
     "@types/d3": "npm:^7.4.3"
     "@types/he": "npm:^1.2.3"

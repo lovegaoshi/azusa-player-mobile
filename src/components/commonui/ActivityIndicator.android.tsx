@@ -1,5 +1,4 @@
 import { ActivityIndicator } from 'react-native-paper';
-import { Props } from 'react-native-paper/src/components/ActivityIndicator';
 import {
   Host,
   CircularProgressIndicator,
@@ -10,14 +9,11 @@ import { useNoxSetting } from '@stores/useApp';
 import { isAndroid } from '@utils/RNUtils';
 import { View } from 'react-native';
 
-interface MyProps extends Props {
-  wavy?: boolean;
-  trackColor?: string;
-}
-
 const MD3SizeToPaperSize = 40;
 
-export default (p: MyProps) => {
+export default function APMActivityIndicator(
+  p: NoxComponent.ActivityIndicatorProps,
+) {
   const playerSetting = useNoxSetting(state => state.playerSetting);
   const playerStyle = useNoxSetting(state => state.playerStyle);
   const MD3Indicator = p.wavy
@@ -35,7 +31,7 @@ export default (p: MyProps) => {
                 {
                   scale:
                     typeof p.size === 'number'
-                      ? (p.size ?? MD3SizeToPaperSize) / MD3SizeToPaperSize
+                      ? p.size / MD3SizeToPaperSize
                       : 1,
                 },
               ],
@@ -53,4 +49,4 @@ export default (p: MyProps) => {
     );
   }
   return <ActivityIndicator {...p} />;
-};
+}
