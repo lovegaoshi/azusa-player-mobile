@@ -29,7 +29,7 @@ const TrackInfo = () => {
   const playerStyle = useNoxSetting(state => state.playerStyle);
 
   return (
-    <View style={[styles.centeredFlex, { paddingLeft: MinPlayerHeight }]}>
+    <View style={[styles.centeredFlex, mStyles.infoContainer]}>
       <Text
         testID={'miniplayer-track-title'}
         numberOfLines={2}
@@ -125,4 +125,5 @@ const mStyles = StyleSheet.create({
     width: IconSize + 28,
     height: IconSize + 28,
   },
+  infoContainer: { paddingLeft: MinPlayerHeight, height: MinPlayerHeight },
 });
