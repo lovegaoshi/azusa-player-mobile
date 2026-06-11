@@ -91,3 +91,4 @@ nodejs-assets/build-native-modules-MacOS-helper-script-node.sh
 nodejs-assets/build-native-modules-MacOS-helper-script-npm.sh
 android/gradle/gradle-daemon-jvm.properties
 .env.local
+.threaded-runtime/entry.js

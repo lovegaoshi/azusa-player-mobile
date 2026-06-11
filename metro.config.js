@@ -6,6 +6,7 @@
  */
 const { getDefaultConfig } = require('@react-native/metro-config');
 const { getSentryExpoConfig } = require('@sentry/react-native/metro');
+const { withThreadedRuntime } = require('@react-native-runtimes/core/metro');
 
 const config = getSentryExpoConfig(__dirname);
 const rnconfig = getDefaultConfig(__dirname);
@@ -14,4 +15,4 @@ config.resolver.sourceExts.push('sql');
 // something must be going on here as setting to the serialized object wont work
 config.transformer = rnconfig.transformer;
 
-module.exports = config;
+module.exports = withThreadedRuntime(config);
