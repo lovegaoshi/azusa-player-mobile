@@ -83,26 +83,30 @@ const LoginPage = ({
       <Text style={styles.notLoginTextStyle}>
         {t('Login.BilibiliNotLoggedIn')}
       </Text>
-      <Button mode="contained-tonal" onPress={generateBiliQRCode}>
-        {t('Login.BilibiliLoginButton')}
-      </Button>
       <View style={styles.inputButtonContainerStyle} />
-      <Button
-        mode="contained-tonal"
-        onPress={() => setInputCookieVisible(true)}
-      >
-        {t('Login.BilibiliCookieInputButton')}
-      </Button>
+      {qrcode !== '' ? (
+        <Button
+          mode={'contained-tonal'}
+          onPress={() => Linking.openURL(qrcode)}
+        >
+          {t('Login.BilibiliLoginViaApp')}
+        </Button>
+      ) : (
+        <Button mode="contained-tonal" onPress={generateBiliQRCode}>
+          {t('Login.BilibiliLoginButton')}
+        </Button>
+      )}
+      <View style={styles.inputButtonContainerStyle}>
+        <Button
+          mode="contained-tonal"
+          onPress={() => setInputCookieVisible(true)}
+        >
+          {t('Login.BilibiliCookieInputButton')}
+        </Button>
+      </View>
       <Text>{t('Login.Disclaimer')}</Text>
       {qrcode !== '' && (
         <View style={styles.qrCodeContainerStyle}>
-          <Button
-            mode={'contained-tonal'}
-            onPress={() => Linking.openURL(qrcode)}
-            style={{ marginBottom: 10 }}
-          >
-            {t('Login.BilibiliLoginViaApp')}
-          </Button>
           <QRCode value={qrcode} size={300} />
         </View>
       )}
@@ -198,7 +202,6 @@ export default function LoginBilibili({ biliLogin }: Props) {
 const styles = StyleSheet.create({
   paddingBottomStyle: { paddingBottom: 10 },
   notLoginTextStyle: {
-    paddingVertical: 20,
     textAlign: 'center',
   },
   textContainerStyle: {

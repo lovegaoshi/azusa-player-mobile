@@ -241,6 +241,7 @@ const useBiliLogin = (): BiliLogin => {
           value: json.data.refresh_token,
         });
         clearQRLogin();
+        getBiliLoginStatus();
       }
     } catch (error) {
       // network error; abort qr login attempts
