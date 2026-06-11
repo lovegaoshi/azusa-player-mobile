@@ -159,14 +159,17 @@ export const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: '600',
     color: 'grey',
-    marginTop: 10,
     paddingHorizontal: 5,
     justifyContent: 'center',
     alignItems: 'center',
+    textAlignVertical: 'center',
+    height: 30,
   },
   artistText: {
     fontSize: 16,
     fontWeight: '200',
+    height: 24,
+    textAlignVertical: 'center',
   },
   infoContainer: {
     flexDirection: 'row',
