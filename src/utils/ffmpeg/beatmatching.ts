@@ -56,11 +56,12 @@ export const beatMatch = ({
 };
 
 export const setNoxBeats = async (path: string, song: NoxMedia.Song) => {
+  const parsedPath = path.startsWith('file://') ? path : 'file://' + path;
   if (!isAndroid || getSongBeat(song.id) !== undefined) return;
   logger.debug(
     `[beatDetection] now starting FFMPEG/darsosDSP beatroot beat detection for ${song.id}`,
   );
-  const beats = (await NativeNoxModule?.calcBeatsFromFile?.(path)) ?? [];
+  const beats = (await NativeNoxModule?.calcBeatsFromFile?.(parsedPath)) ?? [];
   logger.debug(
     beats.length > 0
       ? `[beatDetection] beat calculation saved for ${song.id}`
