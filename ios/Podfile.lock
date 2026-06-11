@@ -30,7 +30,7 @@ PODS:
     - ExpoModulesCore
   - EXConstants (56.0.16):
     - ExpoModulesCore
-  - Expo (56.0.8):
+  - Expo (56.0.9):
     - ExpoModulesCore
     - ExpoModulesJSI
     - hermes-engine
@@ -55,9 +55,9 @@ PODS:
     - ReactCommon/turbomodule/core
     - ReactNativeDependencies
     - Yoga
-  - ExpoAsset (56.0.15):
+  - ExpoAsset (56.0.16):
     - ExpoModulesCore
-  - ExpoClipboard (56.0.3):
+  - ExpoClipboard (56.0.4):
     - ExpoModulesCore
   - ExpoCrypto (56.0.4):
     - ExpoModulesCore
@@ -69,14 +69,14 @@ PODS:
     - ExpoModulesCore
   - ExpoFont (56.0.5):
     - ExpoModulesCore
-  - ExpoImage (56.0.9):
+  - ExpoImage (56.0.10):
     - ExpoModulesCore
     - libavif/libdav1d
     - SDWebImage (~> 5.21.0)
     - SDWebImageAVIFCoder (~> 0.11.0)
     - SDWebImageSVGCoder (~> 1.7.0)
     - SDWebImageWebPCoder (~> 0.14.6)
-  - ExpoImagePicker (56.0.15):
+  - ExpoImagePicker (56.0.16):
     - ExpoModulesCore
   - ExpoKeepAwake (56.0.3):
     - ExpoModulesCore
@@ -86,7 +86,7 @@ PODS:
     - ExpoModulesCore
   - ExpoLogBox (56.0.12):
     - React-Core
-  - ExpoModulesCore (56.0.14):
+  - ExpoModulesCore (56.0.15):
     - ExpoModulesJSI
     - hermes-engine
     - RCTRequired
@@ -109,13 +109,13 @@ PODS:
     - ReactCommon/turbomodule/core
     - ReactNativeDependencies
     - Yoga
-  - ExpoModulesJSI (56.0.7):
+  - ExpoModulesJSI (56.0.8):
     - React-Core
     - ReactCommon
-  - ExpoModulesWorklets (56.0.14):
+  - ExpoModulesWorklets (56.0.15):
     - ExpoModulesCore
     - ExpoModulesJSI
-  - ExpoModulesWorkletsAdapter (56.0.14):
+  - ExpoModulesWorkletsAdapter (56.0.15):
     - ExpoModulesCore
     - ExpoModulesJSI
     - ExpoModulesWorklets
@@ -124,7 +124,7 @@ PODS:
     - ExpoModulesCore
   - ExpoSQLite (56.0.4):
     - ExpoModulesCore
-  - ExpoUI (56.0.15):
+  - ExpoUI (56.0.16):
     - ExpoModulesCore
     - ExpoModulesWorklets
     - React-RCTFabric
@@ -1530,7 +1530,7 @@ PODS:
     - ReactCommon/turbomodule/core
     - ReactNativeDependencies
     - Yoga
-  - react-native-bottom-tabs (1.2.0):
+  - react-native-bottom-tabs (1.3.0):
     - hermes-engine
     - RCTRequired
     - RCTTypeSafety
@@ -1541,7 +1541,7 @@ PODS:
     - React-graphics
     - React-ImageManager
     - React-jsi
-    - react-native-bottom-tabs/common (= 1.2.0)
+    - react-native-bottom-tabs/common (= 1.3.0)
     - React-NativeModulesApple
     - React-RCTFabric
     - React-renderercss
@@ -1553,7 +1553,7 @@ PODS:
     - ReactNativeDependencies
     - SwiftUIIntrospect (~> 1.0)
     - Yoga
-  - react-native-bottom-tabs/common (1.2.0):
+  - react-native-bottom-tabs/common (1.3.0):
     - hermes-engine
     - RCTRequired
     - RCTTypeSafety
@@ -2998,27 +2998,27 @@ SPEC CHECKSUMS:
   CookieManager: a1a74e94d9228d9039a986f8299c5086c3674633
   EXApplication: e6040c92edc5522accd62852342e6b14742d42c0
   EXConstants: 1c400bb9969f4c9e5ab324553138b74ae47b9efe
-  Expo: c4746f2a519c92a8af37f06e43194e303703a40d
-  ExpoAsset: c2e7b5ba1fe75be683282d6264e38fd7cd8defbb
-  ExpoClipboard: eee843698341fd26d571fd2807800f98abb6123c
+  Expo: edacc42f9e8fe898b694750cdb043f6314cf72e1
+  ExpoAsset: c3045ed094105f5f2bf332e36ef1bd63401c948f
+  ExpoClipboard: 342ae52697ff1cf89b8849bee624a9a320e77d3c
   ExpoCrypto: b54a97c4357d46d7f8de079e69fa89029572244b
   ExpoDocumentPicker: caa9c7c1071dc31262d86a8fe48f51929d291a43
   ExpoDomWebView: 27205be8754f9992913b8a9a08e65019f2207075
   ExpoFileSystem: d730a1cb33f2c91dec01561f0d710054fda32ae9
   ExpoFont: 6fe496f2be617ed4367f159f215dcc4ba27d37d6
-  ExpoImage: 3f44073bf450afdb87333f9671ffe7b9bfa5f70e
-  ExpoImagePicker: 808f5ed1553dca885ed5b05a8d6c67bf1d379da3
+  ExpoImage: a9e8ac02fcea3b012b04ffb8757e6d131aa52375
+  ExpoImagePicker: 7682e7eab7b4b7d27e32614e0f47c46e4f69c94c
   ExpoKeepAwake: 359c47a1d9ccc3a3c519bca6e39562cce230c5bb
   ExpoLinearGradient: 16c2b9c6105444883d34958d573725de1293b8d0
   ExpoLinking: 49cc5ddd93b68506c588aa1985c27b795e6d69d6
   ExpoLogBox: 7aa03244fe5eeced5129e4ec7ad5bd9a3994378e
-  ExpoModulesCore: 57fdaecbef24e245cb1fb066b3549f244766b34c
-  ExpoModulesJSI: 31051e6e3d88a96cc48747eabad1d4a6a29c554e
-  ExpoModulesWorklets: 3f847eb6ba544bd4b55d585f89b3b18f8cd73a72
-  ExpoModulesWorkletsAdapter: 4ced459d91107d4f32a8decf8b7827f58153436a
+  ExpoModulesCore: de47edd630469f5b90a80c94173292e330967be6
+  ExpoModulesJSI: 6b0e6b2815751d1b19bb4202b25998179461e244
+  ExpoModulesWorklets: 3a5a7126f22ccacf3189bdf0be37022efd5e4578
+  ExpoModulesWorkletsAdapter: 5cfeec12c14c5c9e0fbf8f134f45fa2cd9db3e1a
   ExpoSecureStore: f1bd083c1b7b8d4142013ffcc0082d377d9f49f4
   ExpoSQLite: 38a35f67bbb3370d9bb859aa65d106909c4e3b19
-  ExpoUI: b298305aee92ad48ca29db29b9fa9265008b218a
+  ExpoUI: 87bfd96f91fce59e1cfc1ed166dd7a6331aff2f9
   ExpoVideo: 8ebbbf65778c5f986d65fc17bb60b79e9d7624e6
   ExpoWebBrowser: 6e3d90e3fe1952d21a8494872b1e1a485cd50e2f
   FBLazyVector: 473b935415b82ae4f7f9aa9d5b3378491143ccbf
@@ -3072,7 +3072,7 @@ SPEC CHECKSUMS:
   react-native-app-auth: e25699baefe53d43c81dc3e3f1f4f19f8e782ab2
   react-native-background-timer: 4638ae3bee00320753647900b21260b10587b6f7
   react-native-blob-util: ea51a8787d20d1b5f76390cc65bfde599577c33d
-  react-native-bottom-tabs: 10aa2efaa6f66c34751ef82e9825267e2af57a4c
+  react-native-bottom-tabs: 01eccf0396e30c784467bca56eb71462ca5794fb
   react-native-carplay: 8f388f6f73e5e0f73ed154ad8794371343ee20c0
   react-native-get-random-values: 5d3658304df38260da9e2f4e6388c47030c69619
   react-native-netinfo: adec161a2fc40d327f2c1bab7d8c57a91943ab74
