@@ -93,5 +93,5 @@ export default function GenericInputDialog({
 const styles = StyleSheet.create({
   dialogTitle: { maxHeight: 100 },
   flatList: { flex: 1 },
-  dialogActions: { paddingBottom: 0 },
+  dialogActions: { paddingBottom: 20 },
 });
