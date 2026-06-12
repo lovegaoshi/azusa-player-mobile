@@ -3,7 +3,7 @@ import AsyncStorage from 'expo-sqlite/kv-store';
 import { ColorSchemeName } from 'react-native';
 import * as SecureStore from 'expo-secure-store';
 import { v4 as uuidv4 } from 'uuid';
-import { strToU8, compressSync } from 'fflate';
+import { deflateAsync } from '@strawberrytech/react-native-nitro-zlib';
 
 import { chunkArray, arrayToObject } from './Utils';
 import { StorageKeys, StoragePlaceholders } from '@enums/Storage';
@@ -162,7 +162,12 @@ const getPlayerContent = async (content?: any) => {
 };
 
 export const exportPlayerContent = async (content?: any) => {
-  return compressSync(strToU8(JSON.stringify(await getPlayerContent(content))));
+  return new Uint8Array(
+    await deflateAsync(
+      new TextEncoder().encode(JSON.stringify(await getPlayerContent(content)))
+        .buffer,
+    ),
+  );
 };
 
 const parseImportedPartial = (
