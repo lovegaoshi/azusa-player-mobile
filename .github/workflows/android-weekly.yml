@@ -55,11 +55,11 @@ jobs:
     permissions:
       contents: write
     steps:
-    - uses: actions/download-artifact@v8
-      with:
-        name: outputAPK
-    name:
-      - name: Release
+      - uses: actions/download-artifact@v8
+        with:
+          name: outputAPK
+
+      - name: gh-release
         uses: softprops/action-gh-release@v2
         with:
           tag_name: ${{ env.GIT_BRANCH }}-build-${{ steps.rnsetup.outputs.date }}
