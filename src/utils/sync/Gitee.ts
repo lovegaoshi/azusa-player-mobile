@@ -1,5 +1,4 @@
-import { fromByteArray, toByteArray } from 'base64-js';
-
+import { fromByteArray, toByteArray } from '@utils/base64';
 import bfetch from '@utils/BiliFetch';
 import { logger } from '@utils/Logger';
 
