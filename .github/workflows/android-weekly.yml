@@ -43,10 +43,26 @@ jobs:
           signpwd: ${{ secrets.RELEASE_SIGN_PWD }}
           signkey: ${{ secrets.SIGNED_KEY_BASE64 }}
 
+      - uses: actions/upload-artifact@v7
+        with:
+          name: outputAPK
+          path: android/app/build/outputs/apk/release/app-arm64-v8a-release.apk
+
+  release:
+    name: Release
+    runs-on: ubuntu-latest
+    needs: build
+    permissions:
+      contents: write
+    steps:
+    - uses: actions/download-artifact@v8
+      with:
+        name: outputAPK
+    name:
       - name: Release
         uses: softprops/action-gh-release@v2
         with:
           tag_name: ${{ env.GIT_BRANCH }}-build-${{ steps.rnsetup.outputs.date }}
-          files: android/app/build/outputs/apk/release/app-arm64-v8a-release.apk
+          files: ./app-arm64-v8a-release.apk
           prerelease: true
           target_commitish: ${{ env.GIT_BRANCH }}

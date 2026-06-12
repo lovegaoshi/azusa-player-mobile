@@ -45,13 +45,28 @@ jobs:
           signkey: ${{ secrets.SIGNED_KEY_BASE64 }}
           buildtype: bundleRelease
 
+      - uses: actions/upload-artifact@v7
+        with:
+          name: outputAAB
+          path: android/app/build/outputs/bundle/release/app-release.aab
+
       - name: Push changes to master
         uses: ad-m/github-push-action@master
 
+  release:
+    name: Release
+    runs-on: ubuntu-latest
+    needs: buildAAB
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/download-artifact@v8
+        with:
+          name: outputAAB
       - uses: r0adkll/upload-google-play@v1
         with:
           serviceAccountJsonPlainText: ${{ secrets.GOOGLE_PLAY_SERVICE_ACCOUNT_JSON }}
           packageName: com.noxplay.noxplayer
-          releaseFiles: android/app/build/outputs/bundle/release/app-release.aab
-          track: internal
+          releaseFiles: ./app-release.aab
+          tracks: internal
           # changesNotSentForReview: true

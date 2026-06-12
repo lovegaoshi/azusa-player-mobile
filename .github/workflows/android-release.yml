@@ -100,7 +100,7 @@ jobs:
           signkey: ${{ secrets.SIGNED_KEY_BASE64 }}
           buildtype: bundleRelease
 
-      - uses: actions/upload-artifact@v6
+      - uses: actions/upload-artifact@v7
         with:
           name: outputAAB
           path: android/app/build/outputs/bundle/release/*.aab # or path/to/artifact
@@ -110,7 +110,7 @@ jobs:
           serviceAccountJsonPlainText: ${{ secrets.GOOGLE_PLAY_SERVICE_ACCOUNT_JSON }}
           packageName: com.noxplay.noxplayer
           releaseFiles: android/app/build/outputs/bundle/release/app-release.aab
-          track: production
+          tracks: production
           #changesNotSentForReview: true
 
   buildIPA:

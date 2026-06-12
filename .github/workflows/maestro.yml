@@ -41,7 +41,7 @@ jobs:
           signkey: ${{ secrets.SIGNED_KEY_BASE64 }}
 
       - name: Upload Android Artifacts
-        uses: actions/upload-artifact@v6
+        uses: actions/upload-artifact@v7
         with:
           name: APM-APK
           path: ./android/app/build/outputs/apk/release/*.apk
@@ -91,7 +91,7 @@ jobs:
           script: adb install ./artifacts/app-x86_64-release.apk && maestro test ./__tests__/maestro/tests/
 
       - name: Upload Maestro Results
-        uses: actions/upload-artifact@v6
+        uses: actions/upload-artifact@v7
         with:
           name: APM-Maestro
           path: ~/.maestro/tests
