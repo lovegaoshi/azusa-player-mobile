@@ -1,5 +1,4 @@
-import { fromByteArray } from 'base64-js';
-
+import { fromByteArray } from '@utils/base64';
 import bfetch from '@utils/BiliFetch';
 import { logger } from '@utils/Logger';
 import { APM_FILE_NAME, APM_REPO_NAME } from './Gitee';

@@ -65,8 +65,7 @@ declare global {
     type ViewStyleProp = StyleProp<ViewStyle>;
   }
   namespace NoxSyncComponent {
-    interface ImportProps {
-      restoreFromUint8Array: (data: Uint8Array) => Promise<void>;
+    interface ImportProps extends GenericProps {
       noxRestore: () => Promise<any>;
       login: (
         callback: () => any,
@@ -82,8 +81,7 @@ declare global {
       ) => Promise<boolean>;
     }
 
-    interface Props {
-      restoreFromUint8Array: (data: Uint8Array) => Promise<void>;
+    interface Props extends GenericProps {
       noxRestore: () => Promise<any>;
       noxBackup: (content: Uint8Array) => Promise<any>;
       login: (
@@ -93,7 +91,7 @@ declare global {
     }
 
     interface GenericProps {
-      restoreFromUint8Array: (data: Uint8Array) => Promise<void>;
+      restoreFromUint8Array: (data: Uint8Array<ArrayBuffer>) => Promise<void>;
     }
   }
 }

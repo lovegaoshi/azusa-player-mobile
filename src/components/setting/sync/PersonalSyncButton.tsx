@@ -12,14 +12,13 @@ import { exportPlayerContent } from '@utils/ChromeStorageAPI';
 import useSnack from '@stores/useSnack';
 import ActivityIndicator from '@components/commonui/ActivityIndicator';
 
-interface Props {
+interface Props extends MainProps {
   cloudAddress: string;
   cloudID?: string;
-  restoreFromUint8Array: (data: Uint8Array) => Promise<void>;
 }
 
 interface MainProps {
-  restoreFromUint8Array: (data: Uint8Array) => Promise<void>;
+  restoreFromUint8Array: (data: Uint8Array<ArrayBuffer>) => Promise<void>;
 }
 
 const ImportSyncFavButton = ({

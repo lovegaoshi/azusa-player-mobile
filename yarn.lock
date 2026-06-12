@@ -6316,6 +6316,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@strawberrytech/react-native-nitro-zlib@npm:^0.3.1":
+  version: 0.3.1
+  resolution: "@strawberrytech/react-native-nitro-zlib@npm:0.3.1"
+  peerDependencies:
+    react: "*"
+    react-native: "*"
+    react-native-nitro-modules: ^0.32.0
+  checksum: 10c0/197c4de42fa960640b3b18c83e2722d088074e305cf944517331ea66bd58670947336aed98c06d2549169dccc8923e083cdd1763d4531e210905b7bbedebb5e6
+  languageName: node
+  linkType: hard
+
 "@tokenizer/token@npm:^0.3.0":
   version: 0.3.0
   resolution: "@tokenizer/token@npm:0.3.0"
@@ -8626,6 +8637,7 @@ __metadata:
     "@sentry/react-native": "npm:~8.13.0"
     "@shopify/flash-list": "npm:2.3.2"
     "@shopify/react-native-skia": "npm:2.6.4"
+    "@strawberrytech/react-native-nitro-zlib": "npm:^0.3.1"
     "@tsconfig/react-native": "npm:^3.0.9"
     "@types/color": "npm:^4.2.1"
     "@types/crypto-js": "npm:^4.2.2"
@@ -8651,7 +8663,6 @@ __metadata:
     babel-plugin-transform-import-meta: "npm:^2.3.3"
     babel-plugin-transform-remove-console: "npm:^6.9.4"
     babel-preset-expo: "npm:^56.0.14"
-    base64-js: "npm:^1.5.1"
     big-integer: "npm:^1.6.52"
     bottleneck: "npm:^2.19.5"
     cheerio: "npm:1.0.0-rc.12"
@@ -8723,6 +8734,7 @@ __metadata:
     react-native-get-random-values: "npm:^2.0.0"
     react-native-image-colors: "npm:^2.6.0"
     react-native-lyric: "https://lovegaoshi@github.com/lovegaoshi/react-native-lyric.git#commit=242792df6024207fa0b1c0a9f4c62cbd7bd95780"
+    react-native-nitro-modules: "npm:^0.35.9"
     react-native-ota-hot-update: "npm:2.2.2"
     react-native-pager-view: "npm:8.0.2"
     react-native-paper: "npm:5.15.3"
@@ -8736,6 +8748,7 @@ __metadata:
     react-native-svga-player: "https://lovegaoshi@github.com/lovegaoshi/react-native-svga-player.git#commit=2cd82e2b878e7711013d14e798df931598791df4"
     react-native-text-ticker: "https://lovegaoshi@github.com/lovegaoshi/react-native-text-ticker.git#commit=c80fd5d660b57229dd730fe44919fb86364f1969"
     react-native-track-player: "https://github.com/lovegaoshi/react-native-track-player.git#commit=33a3ecd0522c4d47576153b820c1da68942813cd"
+    react-native-turbo-base64: "npm:^0.1.5"
     react-native-url-polyfill: "npm:^3.0.0"
     react-native-webview: "npm:13.16.1"
     react-native-worklets: "npm:^0.9.1"
@@ -19588,6 +19601,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"react-native-nitro-modules@npm:^0.35.9":
+  version: 0.35.9
+  resolution: "react-native-nitro-modules@npm:0.35.9"
+  peerDependencies:
+    react: "*"
+    react-native: "*"
+  checksum: 10c0/2e5c1b3eed1d187e7c2bbbf661e6405cb69c6a20b01427ea4c8a3bfe07a4baf2efbeb170a21f8c17fb0e18f022244f4b1fe1ce69a7ec824a7a4cf72441893cf1
+  languageName: node
+  linkType: hard
+
 "react-native-ota-hot-update@npm:2.2.2":
   version: 2.2.2
   resolution: "react-native-ota-hot-update@npm:2.2.2"
@@ -19794,6 +19817,16 @@ __metadata:
     shaka-player:
       optional: true
   checksum: 10c0/c7c47eadaed597b0d9cf2090442ad19e5bf4c0fc2375400650819c42d82a120885a6fc457affb0db434c87f2a610a40eb1f5683ff5ca7b4c849325d095a190bd
+  languageName: node
+  linkType: hard
+
+"react-native-turbo-base64@npm:^0.1.5":
+  version: 0.1.5
+  resolution: "react-native-turbo-base64@npm:0.1.5"
+  peerDependencies:
+    react: "*"
+    react-native: "*"
+  checksum: 10c0/7d6fc859a91ff2be8dc7a7d67250a57a9e8e57a80e4a08872ca5d186b2490f8535bbed83fada20606fc067a740efbc356bfc0e9504337e6df96fbbf0ce025e97
   languageName: node
   linkType: hard
 

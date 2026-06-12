@@ -2,7 +2,6 @@
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Alert } from 'react-native';
-import { strFromU8, decompressSync } from 'fflate';
 
 import { logger } from '@utils/Logger';
 import {
@@ -14,7 +13,9 @@ import {
 import useInitializeStore from '@stores/initializeStores';
 import { StorageKeys } from '@enums/Storage';
 import useSnack from '@stores/useSnack';
+import { inflateAsync } from '@strawberrytech/react-native-nitro-zlib';
 
+const Buffer = require('buffer').Buffer;
 /**
  * this hook will handle all sync back from file operations. it will
  * contain states designated for a GenericCheckboxDialog that selects what
@@ -95,7 +96,11 @@ const useSync = () => {
   const restoreFromUint8Array = async (content: Uint8Array) => {
     let parsedContent;
     try {
-      parsedContent = JSON.parse(strFromU8(decompressSync(content)));
+      parsedContent = JSON.parse(
+        Buffer.from(
+          await inflateAsync(content.buffer as ArrayBuffer),
+        ).toString(),
+      );
     } catch (e) {
       logger.error(`parsed content is not a valid compressed JSON: ${e}`);
       setSnack({ snackMsg: { success: t('Sync.fileNotValidJson') } });

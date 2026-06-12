@@ -24,7 +24,7 @@ const EXPORT_OPTIONS_LIST = [
 
 interface SyncInterface {
   location: SyncOptions;
-  restoreFromUint8Array: (data: Uint8Array) => Promise<void>;
+  restoreFromUint8Array: (data: Uint8Array<ArrayBuffer>) => Promise<void>;
 }
 const SyncButton = ({ location, restoreFromUint8Array }: SyncInterface) => {
   switch (location) {
