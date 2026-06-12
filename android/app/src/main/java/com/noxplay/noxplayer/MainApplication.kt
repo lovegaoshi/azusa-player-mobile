@@ -15,9 +15,6 @@ import com.nativenoxmodule.NativeNoxModulePackage
 import com.nativenoxmodule.NativeWidgetModulePackage
 import expo.modules.ApplicationLifecycleDispatcher
 import expo.modules.ExpoReactHostFactory
-import com.nativecompose.threadedruntime.ThreadedRuntime
-import com.nativecompose.threadedzustand.ThreadedZustandPackage
-import com.margelo.nitro.NitroModulesPackage
 
 class MainApplication : Application(), ReactApplication {
 
@@ -44,7 +41,6 @@ class MainApplication : Application(), ReactApplication {
                     // add(MyReactNativePackage())
                     add(NativeNoxModulePackage())
                     add(NativeWidgetModulePackage())
-                    add(NitroModulesPackage())
                 },
             jsBundleFilePath = getJSBundleFile(),
             jsMainModulePath = ".expo/.virtual-metro-entry"
@@ -59,13 +55,6 @@ class MainApplication : Application(), ReactApplication {
           DefaultNewArchitectureEntryPoint.releaseLevel = ReleaseLevel.STABLE
         }
         DefaultNewArchitectureEntryPoint.releaseLevel = ReleaseLevel.STABLE
-
-        ThreadedRuntime.setExtraReactPackagesProvider {
-            listOf(
-                NitroModulesPackage(),
-                ThreadedZustandPackage(),
-            )
-        }
 
         loadReactNative(this)
         ApplicationLifecycleDispatcher.onApplicationCreate(this)

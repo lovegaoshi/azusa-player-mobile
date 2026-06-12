@@ -5577,32 +5577,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@react-native-runtimes/core@npm:0.1.0-alpha.0":
-  version: 0.1.0-alpha.0
-  resolution: "@react-native-runtimes/core@npm:0.1.0-alpha.0"
-  peerDependencies:
-    "@expo/config-plugins": ">=9.0.0"
-    react: "*"
-    react-native: "*"
-    react-native-nitro-modules: "*"
-  peerDependenciesMeta:
-    "@expo/config-plugins":
-      optional: true
-  checksum: 10c0/e54ea8b00eeb34c5d1872cb50cd39245e8f94c2ab72ce339c5b1218da0503408b34f7772cc24231db4ac7d29685f7e5bdb6b6dc6b7250a5108601e7597dd3253
-  languageName: node
-  linkType: hard
-
-"@react-native-runtimes/state@npm:0.1.0-alpha.0":
-  version: 0.1.0-alpha.0
-  resolution: "@react-native-runtimes/state@npm:0.1.0-alpha.0"
-  peerDependencies:
-    react: "*"
-    react-native: "*"
-    react-native-nitro-modules: "*"
-  checksum: 10c0/fbf097524006a1e3e6e31bb7c41394ad35020f66c81c6f06feea842248733845d25a4ca767ae684d53cb577b62ede652677d88e8904dada948adcf647bdda1f2
-  languageName: node
-  linkType: hard
-
 "@react-native-vector-icons/common@npm:^13.0.1":
   version: 13.0.1
   resolution: "@react-native-vector-icons/common@npm:13.0.1"
@@ -8638,8 +8612,6 @@ __metadata:
     "@react-native-community/netinfo": "npm:^12.0.1"
     "@react-native-community/slider": "npm:^5.2.0"
     "@react-native-masked-view/masked-view": "npm:^0.3.2"
-    "@react-native-runtimes/core": "npm:0.1.0-alpha.0"
-    "@react-native-runtimes/state": "npm:0.1.0-alpha.0"
     "@react-native-vector-icons/get-image": "npm:^13.0.0"
     "@react-native-vector-icons/material-design-icons": "npm:^13.1.2"
     "@react-native/babel-preset": "npm:0.85.3"
@@ -8750,7 +8722,6 @@ __metadata:
     react-native-get-random-values: "npm:^2.0.0"
     react-native-image-colors: "npm:^2.6.0"
     react-native-lyric: "https://lovegaoshi@github.com/lovegaoshi/react-native-lyric.git#commit=242792df6024207fa0b1c0a9f4c62cbd7bd95780"
-    react-native-nitro-modules: "npm:^0.35.9"
     react-native-ota-hot-update: "npm:2.2.2"
     react-native-pager-view: "npm:8.0.2"
     react-native-paper: "npm:5.15.3"
@@ -19614,16 +19585,6 @@ __metadata:
     react: "*"
     react-native: "*"
   checksum: 10c0/70078785862e1c4904cc28d95b92d5557715bc076f5711f77c12d8e318efa2270b1aa550dd6681baf056a0a547f3473daf20e473961b5f5a58a54800679f4a82
-  languageName: node
-  linkType: hard
-
-"react-native-nitro-modules@npm:^0.35.9":
-  version: 0.35.9
-  resolution: "react-native-nitro-modules@npm:0.35.9"
-  peerDependencies:
-    react: "*"
-    react-native: "*"
-  checksum: 10c0/2e5c1b3eed1d187e7c2bbbf661e6405cb69c6a20b01427ea4c8a3bfe07a4baf2efbeb170a21f8c17fb0e18f022244f4b1fe1ce69a7ec824a7a4cf72441893cf1
   languageName: node
   linkType: hard
 

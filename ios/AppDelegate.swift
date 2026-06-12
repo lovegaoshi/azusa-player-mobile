@@ -33,11 +33,6 @@ class AppDelegate: ExpoAppDelegate {
     let factory = ExpoReactNativeFactory(delegate: delegate)
     delegate.dependencyProvider = RCTAppDependencyProvider()
 
-    ThreadedRuntime.configure(
-      withReactNativeDelegate: delegate,
-      launchOptions: launchOptions
-    )
- 
     reactNativeDelegate = delegate
     reactNativeFactory = factory
 
