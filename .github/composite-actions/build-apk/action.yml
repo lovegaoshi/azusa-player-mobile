@@ -3,21 +3,21 @@ description: build for android APK
 
 inputs:
   signpwd:
-    description: "release sign pwd in gradle.properties"
+    description: 'release sign pwd in gradle.properties'
     required: true
   signkey:
-    description: "signed key in base64"
+    description: 'signed key in base64'
     required: true
   buildtype:
-    description: "build type (APK/AAB)"
-    default: "assembleRelease"
+    description: 'build type (APK/AAB)'
+    default: 'assembleRelease'
     type: choice
     options:
       - assembleRelease
       - bundleRelease
 
 runs:
-  using: "composite"
+  using: 'composite'
   steps:
     - name: Add Build Sign Keys
       env:
@@ -28,18 +28,18 @@ runs:
 
     - name: Build Sign jks
       id: write_file
-      uses: timheuer/base64-to-file@v1.2
+      uses: timheuer/base64-to-file@v2
       with:
         fileName: 'noxupload.jks'
         fileDir: './android/app'
         encodedString: ${{ inputs.signkey }}
-        
+
     - name: clean generated builds
       run: rm -rf android/app/build/generated/
       shell: bash
 
     - name: gradle build
-      env: 
+      env:
         BUILD: ${{ inputs.buildtype }}
       run: cd android && chmod +x gradlew && ./gradlew "$BUILD"
       shell: bash
