@@ -11,3 +11,4 @@
 -keep class javax.script.** { *; }
 -dontwarn javax.script.**
 -keep class expo.modules.kotlin.jni.**  { *; }
+-keep class com.opensource.svgaplayer.** { *; }

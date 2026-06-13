@@ -82,6 +82,7 @@ const styles = StyleSheet.create({
   },
   container: {
     width: '100%',
+    zIndex: 0,
   },
   progressContainer: {
     width: '100%',
