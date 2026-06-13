@@ -59,10 +59,22 @@ jobs:
         with:
           name: outputAPK
 
+      - name: Get branch name
+        run: |
+          # Short name for current branch. For PRs, use target branch (base ref)
+          GIT_BRANCH=${GITHUB_BASE_REF:-${GITHUB_REF#refs/heads/}}
+          echo "GIT_BRANCH=$GIT_BRANCH" >> $GITHUB_ENV
+        shell: bash
+
+      - name: Get current date
+        id: date
+        run: echo "date=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
+        shell: bash
+
       - name: gh-release
         uses: softprops/action-gh-release@v2
         with:
-          tag_name: ${{ env.GIT_BRANCH }}-build-${{ steps.rnsetup.outputs.date }}
+          tag_name: ${{ env.GIT_BRANCH }}-build-${{ env.date }}
           files: ./app-arm64-v8a-release.apk
           prerelease: true
           target_commitish: ${{ env.GIT_BRANCH }}
