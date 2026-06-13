@@ -1,9 +1,9 @@
 PODS:
-  - AppAuth (2.0.0):
-    - AppAuth/Core (= 2.0.0)
-    - AppAuth/ExternalUserAgent (= 2.0.0)
-  - AppAuth/Core (2.0.0)
-  - AppAuth/ExternalUserAgent (2.0.0):
+  - AppAuth (2.1.0):
+    - AppAuth/Core (= 2.1.0)
+    - AppAuth/ExternalUserAgent (= 2.1.0)
+  - AppAuth/Core (2.1.0)
+  - AppAuth/ExternalUserAgent (2.1.0):
     - AppAuth/Core
   - CookieManager (6.3.2):
     - hermes-engine
@@ -166,6 +166,51 @@ PODS:
     - lottie-ios (= 4.6.0)
     - RCTRequired
     - RCTTypeSafety
+    - React-Core
+    - React-debug
+    - React-Fabric
+    - React-featureflags
+    - React-graphics
+    - React-ImageManager
+    - React-jsi
+    - React-NativeModulesApple
+    - React-RCTFabric
+    - React-renderercss
+    - React-rendererdebug
+    - React-utils
+    - ReactCodegen
+    - ReactCommon/turbomodule/bridging
+    - ReactCommon/turbomodule/core
+    - ReactNativeDependencies
+    - Yoga
+  - NitroModules (0.35.9):
+    - hermes-engine
+    - RCTRequired
+    - RCTTypeSafety
+    - React-callinvoker
+    - React-Core
+    - React-debug
+    - React-Fabric
+    - React-featureflags
+    - React-graphics
+    - React-ImageManager
+    - React-jsi
+    - React-NativeModulesApple
+    - React-RCTFabric
+    - React-renderercss
+    - React-rendererdebug
+    - React-utils
+    - ReactCodegen
+    - ReactCommon/turbomodule/bridging
+    - ReactCommon/turbomodule/core
+    - ReactNativeDependencies
+    - Yoga
+  - NitroZlib (0.3.1):
+    - hermes-engine
+    - NitroModules
+    - RCTRequired
+    - RCTTypeSafety
+    - React-callinvoker
     - React-Core
     - React-debug
     - React-Fabric
@@ -1819,6 +1864,27 @@ PODS:
     - ReactCommon/turbomodule/core
     - ReactNativeDependencies
     - Yoga
+  - react-native-turbo-base64 (0.1.5):
+    - hermes-engine
+    - RCTRequired
+    - RCTTypeSafety
+    - React-Core
+    - React-debug
+    - React-Fabric
+    - React-featureflags
+    - React-graphics
+    - React-ImageManager
+    - React-jsi
+    - React-NativeModulesApple
+    - React-RCTFabric
+    - React-renderercss
+    - React-rendererdebug
+    - React-utils
+    - ReactCodegen
+    - ReactCommon/turbomodule/bridging
+    - ReactCommon/turbomodule/core
+    - ReactNativeDependencies
+    - Yoga
   - react-native-vector-icons (13.0.0):
     - hermes-engine
     - RCTRequired
@@ -2605,6 +2671,8 @@ DEPENDENCIES:
   - hermes-engine (from `../node_modules/react-native/sdks/hermes-engine/hermes-engine.podspec`)
   - ImageColors (from `../node_modules/react-native-image-colors/ios`)
   - lottie-react-native (from `../node_modules/lottie-react-native`)
+  - NitroModules (from `../node_modules/react-native-nitro-modules`)
+  - "NitroZlib (from `../node_modules/@strawberrytech/react-native-nitro-zlib`)"
   - Protobuf (= 3.22.1)
   - RCTDeprecation (from `../node_modules/react-native/ReactApple/Libraries/RCTFoundation/RCTDeprecation`)
   - RCTRequired (from `../node_modules/react-native/Libraries/Required`)
@@ -2657,6 +2725,7 @@ DEPENDENCIES:
   - "react-native-slider (from `../node_modules/@react-native-community/slider`)"
   - react-native-svga-player (from `../node_modules/react-native-svga-player`)
   - react-native-track-player (from `../node_modules/react-native-track-player`)
+  - react-native-turbo-base64 (from `../node_modules/react-native-turbo-base64`)
   - "react-native-vector-icons (from `../node_modules/@react-native-vector-icons/get-image`)"
   - "react-native-vector-icons-material-design-icons (from `../node_modules/@react-native-vector-icons/material-design-icons`)"
   - react-native-webview (from `../node_modules/react-native-webview`)
@@ -2794,6 +2863,10 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native-image-colors/ios"
   lottie-react-native:
     :path: "../node_modules/lottie-react-native"
+  NitroModules:
+    :path: "../node_modules/react-native-nitro-modules"
+  NitroZlib:
+    :path: "../node_modules/@strawberrytech/react-native-nitro-zlib"
   RCTDeprecation:
     :path: "../node_modules/react-native/ReactApple/Libraries/RCTFoundation/RCTDeprecation"
   RCTRequired:
@@ -2894,6 +2967,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native-svga-player"
   react-native-track-player:
     :path: "../node_modules/react-native-track-player"
+  react-native-turbo-base64:
+    :path: "../node_modules/react-native-turbo-base64"
   react-native-vector-icons:
     :path: "../node_modules/@react-native-vector-icons/get-image"
   react-native-vector-icons-material-design-icons:
@@ -2994,7 +3069,7 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon/yoga"
 
 SPEC CHECKSUMS:
-  AppAuth: 1c1a8afa7e12f2ec3a294d9882dfa5ab7d3cb063
+  AppAuth: ef4da5a3fc2e10b90c09a0a94a9baeaedc0341d5
   CookieManager: a1a74e94d9228d9039a986f8299c5086c3674633
   EXApplication: e6040c92edc5522accd62852342e6b14742d42c0
   EXConstants: 1c400bb9969f4c9e5ab324553138b74ae47b9efe
@@ -3031,6 +3106,8 @@ SPEC CHECKSUMS:
   libwebp: 02b23773aedb6ff1fd38cec7a77b81414c6842a8
   lottie-ios: 8f959969761e9c45d70353667d00af0e5b9cadb3
   lottie-react-native: 5c0c4fc0211179e7b5c0e660089f31c27128a577
+  NitroModules: f9c734721853e95e9db6d1ca8d92a6a6b26b2d16
+  NitroZlib: cdb22554933487e6a302e90785a25a7a5a89d7df
   Protobuf: d7f7c8329edf5eb8af65547a8ba3e9c1cee927d5
   PurchasesHybridCommon: 3e650c7f56ebcd63b37a708685fbf98515305d14
   RCTDeprecation: 225e022b85a206cf0883a909c4a114159783363c
@@ -3083,6 +3160,7 @@ SPEC CHECKSUMS:
   react-native-slider: d3c62864af399014469359120d9a9a6cbbd9c6f7
   react-native-svga-player: 91a39e594d0610ec36fc658ae6b433966327b24d
   react-native-track-player: 862fe0a4ece0e9f0c54d604d177f765f4fee0e17
+  react-native-turbo-base64: 5f2c5efcd4b9f5b6e8255af51ca567a4335736ac
   react-native-vector-icons: dbaf969c308e088a7e50aa41f03f1259d6f31d73
   react-native-vector-icons-material-design-icons: a4b6ec02814573c09203a725ee3767a7e8d5eb77
   react-native-webview: cac57e5c9caaac09627c910efb968bac54d5b4dd
