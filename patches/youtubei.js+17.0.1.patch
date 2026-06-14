@@ -1,6 +1,19 @@
+diff --git a/node_modules/youtubei.js/dist/src/parser/classes/PlaylistVideo.js b/node_modules/youtubei.js/dist/src/parser/classes/PlaylistVideo.js
+index be82517..61d7482 100644
+--- a/node_modules/youtubei.js/dist/src/parser/classes/PlaylistVideo.js
++++ b/node_modules/youtubei.js/dist/src/parser/classes/PlaylistVideo.js
+@@ -36,7 +36,7 @@ export default class PlaylistVideo extends YTNode {
+         this.is_playable = data.isPlayable;
+         this.menu = Parser.parseItem(data.menu, Menu);
+         this.video_info = new Text(data.videoInfo);
+-        this.accessibility_label = data.title.accessibility.accessibilityData.label;
++        this.accessibility_label = data.title.accessibility?.accessibilityData?.label;
+         if (Reflect.has(data, 'style')) {
+             this.style = data.style;
+         }
 diff --git a/node_modules/youtubei.js/dist/src/parser/classes/Video2.js b/node_modules/youtubei.js/dist/src/parser/classes/Video2.js
 new file mode 100644
-index 0000000..bf53f2d
+index 0000000..5b65dd0
 --- /dev/null
 +++ b/node_modules/youtubei.js/dist/src/parser/classes/Video2.js
 @@ -0,0 +1,130 @@
@@ -149,7 +162,7 @@ index bd6fbd4..b965ef2 100644
      metadata_text;
 diff --git a/node_modules/youtubei.js/index.js b/node_modules/youtubei.js/index.js
 new file mode 100644
-index 0000000..8afb564
+index 0000000..02925cf
 --- /dev/null
 +++ b/node_modules/youtubei.js/index.js
 @@ -0,0 +1 @@

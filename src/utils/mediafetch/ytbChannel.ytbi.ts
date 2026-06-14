@@ -10,12 +10,12 @@ import {
   ChannelListContinuation,
 } from 'youtubei.js/dist/src/parser/youtube';
 
-import { ytwebClient } from '@utils/mediafetch/ytbi';
+import { ytmClient, ytwebClient } from '@utils/mediafetch/ytbi';
 import { ytbiVideoToNoxSong } from './ytbSearch.ytbi';
 import { fetchYtbiPlaylist } from './ytbPlaylist.ytbi';
 
 export const searchYtbChannel = async (channel: string) => {
-  const yt = await ytwebClient();
+  const yt = await ytmClient();
   const res = await yt.search(channel, { type: 'channel' });
   const channels = res.results as unknown as SearchChannel[];
   return channels[0].id;
