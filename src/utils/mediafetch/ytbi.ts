@@ -79,6 +79,7 @@ export const ytwebClient = async () => {
     enable_session_cache: false,
     generate_session_locally: false,
     cookie,
+    client_type: ClientType.ANDROID_VR,
     fetch: (url, init) => {
       // @ts-expect-error this headers is actually a map
       init?.headers?.set('origin', 'https://www.youtube.com');
