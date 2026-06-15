@@ -1,12 +1,12 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { get_playlist_tracks_only } from 'libmuse';
-import last from 'lodash/last';
 
 import { fetchAudioInfo } from '@utils/mediafetch/ytbvideo';
 import SongTS from '@objects/Song';
 import { logger } from '../Logger';
 import { Source } from '@enums/MediaFetch';
 import { musePlaylistItemToNoxSong } from './ytbSearch.muse';
+import { timestampToSeconds } from '../Utils';
 
 export const fetchYtmPlaylist = async (
   playlistId: string,
@@ -39,18 +39,35 @@ export const fetchYtmPlaylist = async (
 const fastYTPlaylistSongResolve = (val: any, data: any) => {
   try {
     return SongTS({
-      cid: `${Source.ytbvideo}-${val.playlistVideoRenderer.videoId}`,
-      bvid: val.playlistVideoRenderer.videoId,
-      name: val.playlistVideoRenderer.title.runs[0].text,
-      nameRaw: val.playlistVideoRenderer.title.runs[0].text,
-      singer: val.playlistVideoRenderer.shortBylineText.runs[0].text,
+      cid: `${Source.ytbvideo}-${val.lockupViewModel.rendererContext.commandContext.onTap.innertubeCommand.watchEndpoint.videoId}`,
+      bvid: val.lockupViewModel.rendererContext.commandContext.onTap
+        .innertubeCommand.watchEndpoint.videoId,
+      name: val.lockupViewModel.metadata.lockupMetadataViewModel.title.content,
+      nameRaw:
+        val.lockupViewModel.metadata.lockupMetadataViewModel.title.content,
+      singer:
+        val.lockupViewModel.metadata.lockupMetadataViewModel.metadata
+          .contentMetadataViewModel.metadataRows[0].metadataParts[0].text
+          .content,
       singerId:
-        val.playlistVideoRenderer.shortBylineText.runs[0].navigationEndpoint
-          .browseEndpoint.browseId,
-      cover: last(val.playlistVideoRenderer.thumbnail.thumbnails as any[]).url,
+        val.lockupViewModel.metadata.lockupMetadataViewModel.metadata
+          .contentMetadataViewModel.metadataRows[0].metadataParts[0].text
+          .commandRuns?.[0]?.onTap?.innertubeCommand?.browseEndpoint
+          ?.browseId ??
+        val.lockupViewModel.metadata.lockupMetadataViewModel.metadata
+          .contentMetadataViewModel.metadataRows[0].metadataParts[0].text
+          .content,
+      cover: getOriginORL(
+        val.lockupViewModel.contentImage.thumbnailViewModel.image.sources[0]
+          .url,
+      ),
       lyric: '',
-      page: Number(val.playlistVideoRenderer.index.simpleText),
-      duration: Number(val.playlistVideoRenderer.lengthSeconds),
+      page: 1,
+      duration: timestampToSeconds(
+        val.lockupViewModel.contentImage.thumbnailViewModel.overlays[0]
+          .thumbnailBottomOverlayViewModel.badges[0].thumbnailBadgeViewModel
+          .text,
+      ),
       album: data.metadata.playlistMetadataRenderer.title,
       source: Source.ytbvideo,
       metadataOnLoad: true,
@@ -63,12 +80,20 @@ const fastYTPlaylistSongResolve = (val: any, data: any) => {
   }
 };
 
+interface IFetchYTPlaylistWeb {
+  playlistId: string;
+  favList?: string[];
+  limit?: number;
+  getall?: boolean;
+  progressEmitter?: NoxUtils.ProgressEmitter;
+}
+
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-const fetchYTPlaylist = async (
-  playlistId: string,
-  progressEmitter: NoxUtils.ProgressEmitter,
-  favList: string[],
-): Promise<NoxMedia.Song[]> => {
+export const fetchYTPlaylist = async ({
+  playlistId,
+  favList = [],
+  progressEmitter,
+}: IFetchYTPlaylistWeb): Promise<NoxMedia.Song[]> => {
   const res = await fetch(
     `https://www.youtube.com/playlist?list=${playlistId}`,
   );
@@ -80,8 +105,13 @@ const fetchYTPlaylist = async (
       throw new Error('ytbInitdata failed');
     }
     const data = JSON.parse(`${ytInitialData[1]}`);
-    return data.contents.twoColumnBrowseResultsRenderer.tabs[0].tabRenderer.content.sectionListRenderer.contents[0].itemSectionRenderer.contents[0].playlistVideoListRenderer.contents
-      .map((val: any) => fastYTPlaylistSongResolve(val, data))
+    const items =
+      data.contents.twoColumnBrowseResultsRenderer.tabs[0].tabRenderer.content
+        .sectionListRenderer.contents[0].itemSectionRenderer.contents;
+    // HACK: has continue = continuationItemViewModel
+    // const has_continuation = items.filter((v: any) => v.continuationItemViewModel).length > 0
+    return items
+      .map((v: any) => fastYTPlaylistSongResolve(v, data))
       .filter(
         (val: NoxMedia.Song | undefined) => val && !favList.includes(val?.bvid),
       );
@@ -97,10 +127,15 @@ const fetchYTPlaylist = async (
           .filter(val => !favList.includes(val))
           .map((val, index, arr) =>
             fetchAudioInfo(val, () =>
-              progressEmitter((index * 100) / arr.length),
+              progressEmitter?.((index * 100) / arr.length),
             ),
           ),
       )
     ).reduce((acc, curr) => acc!.concat(curr), []);
   }
+};
+
+const getOriginORL = (url: string) => {
+  const parsed = new URL(url);
+  return `${parsed.origin}${parsed.pathname}`;
 };
