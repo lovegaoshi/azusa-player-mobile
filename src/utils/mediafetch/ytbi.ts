@@ -73,13 +73,12 @@ export const ytwebClient = async () => {
   if (_ytWebClient !== undefined) {
     return _ytWebClient;
   }
-  const cookie = await getItem(StorageKeys.YTMCOOKIES);
+  // const cookie = await getItem(StorageKeys.YTMCOOKIES);
   _ytWebClient = await Innertube.create({
     retrieve_player: false,
     enable_session_cache: false,
     generate_session_locally: false,
-    cookie,
-    client_type: ClientType.ANDROID_VR,
+    // cookie,
     fetch: (url, init) => {
       // @ts-expect-error this headers is actually a map
       init?.headers?.set('origin', 'https://www.youtube.com');
