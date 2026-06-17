@@ -12,8 +12,6 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { useNoxSetting } from '@stores/useApp';
 import { styles as stylesGlobal } from '../style';
-import { set } from 'lodash';
-
 interface Props {
   placeholder: string;
   value: string;
