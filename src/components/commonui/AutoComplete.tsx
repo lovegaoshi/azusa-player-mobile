@@ -1,13 +1,17 @@
-import { View, GestureResponderEvent, StyleSheet } from 'react-native';
+import {
+  View,
+  GestureResponderEvent,
+  StyleSheet,
+  BackHandler,
+} from 'react-native';
 import { Menu, Searchbar } from 'react-native-paper';
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState, useRef, useCallback } from 'react';
 import { useDebounce } from 'use-debounce';
 import { v4 as uuidv4 } from 'uuid';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { useNoxSetting } from '@stores/useApp';
 import { styles as stylesGlobal } from '../style';
-
 interface Props {
   placeholder: string;
   value: string;
@@ -66,6 +70,23 @@ export default function AutoComplete({
     });
     setShowAutoComplete(true);
   }, [debouncedValue]);
+
+  useEffect(() => {
+    const onBackPress = () => {
+      if (showAutoComplete) {
+        setShowAutoComplete(false);
+        return true;
+      }
+      return false;
+    };
+
+    const subscription = BackHandler.addEventListener(
+      'hardwareBackPress',
+      onBackPress,
+    );
+
+    return () => subscription.remove();
+  }, [showAutoComplete]);
 
   return (
     <View style={styles.container}>

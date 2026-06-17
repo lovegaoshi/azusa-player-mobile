@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useState, useEffect, useCallback, useRef } from 'react';
-import { ProgressBar } from 'react-native-paper';
+import { ProgressBar, TextInput } from 'react-native-paper';
 import {
   View,
   StyleSheet,
@@ -146,6 +146,7 @@ export default function BiliSearchBar({ onSearched = console.log }: Props) {
 
   return (
     <View style={styles.container}>
+      <TextInput style={styles.hidden} />
       <View style={styles.searchContainer}>
         <AutoComplete
           testID="BiliSearchBar"
@@ -192,4 +193,5 @@ const styles = StyleSheet.create({
     width: '100%',
   },
   progressBar: { backgroundColor: 'rgba(0, 0, 0, 0)' },
+  hidden: { width: 0, position: 'absolute' },
 });
