@@ -47,7 +47,6 @@ export default function AutoComplete({
   });
 
   const onFocus = () => {
-    console.log('auto focused???');
     pressed.current = false;
     setShowAutoComplete(true);
   };
@@ -72,24 +71,22 @@ export default function AutoComplete({
     setShowAutoComplete(true);
   }, [debouncedValue]);
 
-  useEffect(
-    useCallback(() => {
-      const onBackPress = () => {
-        if (showAutoComplete) {
-          setShowAutoComplete(false);
-          return true;
-        }
-        return false;
-      };
+  useEffect(() => {
+    const onBackPress = () => {
+      if (showAutoComplete) {
+        setShowAutoComplete(false);
+        return true;
+      }
+      return false;
+    };
 
-      const subscription = BackHandler.addEventListener(
-        'hardwareBackPress',
-        onBackPress,
-      );
+    const subscription = BackHandler.addEventListener(
+      'hardwareBackPress',
+      onBackPress,
+    );
 
-      return () => subscription.remove();
-    }, [showAutoComplete]),
-  );
+    return () => subscription.remove();
+  }, [showAutoComplete]);
 
   return (
     <View style={styles.container}>
