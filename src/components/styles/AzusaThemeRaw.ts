@@ -194,7 +194,7 @@ export default {
     'https://i0.hdslb.com/bfs/garb/item/9abb811c70654ac57ca200510a25c04d82bd2c49.png',
   // TODO: I thought about implementing these in Progress.tsx onValueChange but got too lazy. meh.
   progressThumbImageLeftDrag:
-    'https://i0.hdslb.com/bfs/garb/item/9abb811c70654ac57ca200510a25c04d82bd2c49.png',
+    'https://i0.hdslb.com/bfs/garb/item/b47f3a4c90931d24ad84c6f2e4a9c22b6e812355.png',
   progressThumbImageRightDrag:
     'https://i0.hdslb.com/bfs/garb/item/c7b83ebe96b65fb8413fabba6936ec5f63506a02.png',
   biliGarbCard:

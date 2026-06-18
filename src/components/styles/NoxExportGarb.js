@@ -42,6 +42,12 @@ const parsedGarbData = {
   headmp4: garbdata.suit_items.skin[0].properties.head_myself_mp4_bg,
   thumbupSVGA: garbdata.suit_items.thumbup?.[0]?.properties?.image_ani,
   themeIcon: garbdata.fan_user.avatar,
+  progressThumbImage:
+    garbdata.suit_items.play_icon?.[0]?.properties?.middle_png,
+  progressThumbImageLeftDrag:
+    garbdata.suit_items.play_icon?.[0]?.properties?.drag_left_png,
+  progressThumbImageRightDrag:
+    garbdata.suit_items.play_icon?.[0]?.properties?.drag_right_png,
 };
 
 const convertedGarbData = args.lighttheme ? SteriaTheme : SteriaThemeDark;
@@ -62,6 +68,12 @@ convertedGarbData.backgroundImages = parsedGarbData.headmp4
   : parsedGarbData.portraits;
 convertedGarbData.thumbupSVGA = parsedGarbData.thumbupSVGA;
 convertedGarbData.loadingIcon = parsedGarbData.loadingIcon;
+convertedGarbData.progressThumbImage = parsedGarbData.progressThumbImage;
+convertedGarbData.progressThumbImageLeftDrag =
+  parsedGarbData.progressThumbImageLeftDrag;
+convertedGarbData.progressThumbImageRightDrag =
+  parsedGarbData.progressThumbImageRightDrag;
+
 fs.writeFile(
   './src/components/styles/steriaGarb.json',
   JSON.stringify([...steriaGarb, convertedGarbData], null, 2),

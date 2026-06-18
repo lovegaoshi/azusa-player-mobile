@@ -2,6 +2,7 @@ import React from 'react';
 import { StyleSheet } from 'react-native';
 import { useProgress } from 'react-native-track-player';
 import Slider from '@react-native-community/slider';
+import { useSharedValue } from 'react-native-reanimated';
 
 import { useNoxSetting } from '@stores/useApp';
 import { TPSeek } from '@stores/RNObserverStore';
@@ -18,15 +19,26 @@ export const SimpleProgressBar = ({
   enabled = true,
   progressInterval = 200,
   onValueChange,
+  progressThumbImageRight,
+  progressThumbImageLeft,
 }: ProgressBarProps) => {
   const { position, duration } = useProgress(progressInterval, false);
   const playerStyle = useNoxSetting(state => state.playerStyle);
   const enterSliding = useNoxSetting(state => state.enableMiniProgressSliding);
   const exitSliding = useNoxSetting(state => state.disableMiniProgressSliding);
+  const [thumbImage, setThumbImage] = React.useState(progressThumbImage);
+  const slidingAtPosition = useSharedValue(0);
+
+  React.useEffect(() => {
+    setThumbImage(progressThumbImage);
+  }, [progressThumbImage]);
 
   return (
     <Slider
-      onSlidingStart={enterSliding}
+      onSlidingStart={() => {
+        enterSliding();
+        slidingAtPosition.value = position;
+      }}
       tapToSeek
       style={[styles.progressBar, style]}
       value={position}
@@ -38,18 +50,26 @@ export const SimpleProgressBar = ({
           : (playerStyle.customColors.progressThumbTintColor ??
             playerStyle.colors.primary)
       }
-      onValueChange={v => onValueChange?.(v / duration)}
+      onValueChange={v => {
+        onValueChange?.(v / duration);
+        if (v > slidingAtPosition.value) {
+          setThumbImage(progressThumbImageRight);
+        } else {
+          setThumbImage(progressThumbImageLeft);
+        }
+      }}
       disabled={!enabled}
       minimumTrackTintColor={playerStyle.colors.primary}
       maximumTrackTintColor={'transparent'}
       onSlidingComplete={v => {
         TPSeek(v);
         exitSliding();
+        setThumbImage(progressThumbImage);
       }}
       sliderThickness={trackHeight}
       thumbSize={thumbSize}
       sliderCornerRoundness={100}
-      thumbImage={progressThumbImage ? { uri: progressThumbImage } : undefined}
+      thumbImage={thumbImage ? { uri: thumbImage } : undefined}
       // this is effectively calculated in seconds - default is total 128 ticks (duration/128 steps)
       step={progressInterval / 1000}
     />
@@ -62,6 +82,13 @@ export default function NativeProgressBar(p: ProgressBarContainerProps) {
     <SimpleProgressBar
       {...p}
       progressThumbImage={playerStyle.progressThumbImage}
+      progressThumbImageLeft={
+        playerStyle.progressThumbImageLeftDrag ?? playerStyle.progressThumbImage
+      }
+      progressThumbImageRight={
+        playerStyle.progressThumbImageRightDrag ??
+        playerStyle.progressThumbImage
+      }
     />
   );
 }

@@ -7,6 +7,8 @@ export interface ProgressBarContainerProps {
 export interface ProgressBarProps extends ProgressBarContainerProps {
   thumbSize?: number;
   progressThumbImage?: string;
+  progressThumbImageLeft?: string;
+  progressThumbImageRight?: string;
   trackHeight?: number;
   style?: ViewStyle;
   trackStyle?: ViewStyle;
