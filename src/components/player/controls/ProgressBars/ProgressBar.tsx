@@ -2,6 +2,7 @@ import React from 'react';
 import { StyleSheet } from 'react-native';
 import { useProgress } from 'react-native-track-player';
 import { Slider } from '@react-native-assets/slider';
+import { useSharedValue } from 'react-native-reanimated';
 
 import { useNoxSetting } from '@stores/useApp';
 import { TPSeek } from '@stores/RNObserverStore';
@@ -18,17 +19,35 @@ export const SimpleProgressBar = ({
   trackStyle,
   enabled = true,
   progressInterval = 200,
+  progressThumbImageRight,
+  progressThumbImageLeft,
   onValueChange,
 }: ProgressBarProps) => {
   const { position, duration } = useProgress(progressInterval, false);
   const playerStyle = useNoxSetting(state => state.playerStyle);
   const enterSliding = useNoxSetting(state => state.enableMiniProgressSliding);
   const exitSliding = useNoxSetting(state => state.disableMiniProgressSliding);
+  const [thumbImage, setThumbImage] = React.useState(progressThumbImage);
+  const slidingAtPosition = useSharedValue(0);
+
+  React.useEffect(() => {
+    setThumbImage(progressThumbImage);
+  }, [progressThumbImage]);
 
   return (
     <Slider
-      onValueChange={onValueChange}
-      onSlidingStart={enterSliding}
+      onValueChange={v => {
+        onValueChange?.(v);
+        if (v > slidingAtPosition.value) {
+          setThumbImage(progressThumbImageRight);
+        } else {
+          setThumbImage(progressThumbImageLeft);
+        }
+      }}
+      onSlidingStart={() => {
+        enterSliding();
+        slidingAtPosition.value = position;
+      }}
       trackStyle={trackStyle}
       trackHeight={trackHeight}
       style={[styles.progressBar, style]}
@@ -46,8 +65,9 @@ export const SimpleProgressBar = ({
       onSlidingComplete={v => {
         TPSeek(v);
         exitSliding();
+        setThumbImage(progressThumbImage);
       }}
-      thumbImage={progressThumbImage ? { uri: progressThumbImage } : undefined}
+      thumbImage={thumbImage ? { uri: thumbImage } : undefined}
       thumbSize={thumbSize ?? (progressThumbImage ? 40 : undefined)}
       thumbStyle={{
         backgroundColor: progressThumbImage
@@ -66,6 +86,13 @@ export default function ProgressBar(p: ProgressBarContainerProps) {
     <SimpleProgressBar
       {...p}
       progressThumbImage={playerStyle.progressThumbImage}
+      progressThumbImageLeft={
+        playerStyle.progressThumbImageLeftDrag ?? playerStyle.progressThumbImage
+      }
+      progressThumbImageRight={
+        playerStyle.progressThumbImageRightDrag ??
+        playerStyle.progressThumbImage
+      }
     />
   );
 }

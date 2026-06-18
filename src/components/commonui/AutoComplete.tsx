@@ -5,7 +5,7 @@ import {
   BackHandler,
 } from 'react-native';
 import { Menu, Searchbar } from 'react-native-paper';
-import React, { useEffect, useState, useRef, useCallback } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { useDebounce } from 'use-debounce';
 import { v4 as uuidv4 } from 'uuid';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
