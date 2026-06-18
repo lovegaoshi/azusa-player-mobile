@@ -102,8 +102,8 @@ android {
         applicationId "com.noxplay.noxplayer"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 543
-        versionName "4.2.0"
+        versionCode 578
+        versionName "4.3.1"
         manifestPlaceholders = [
             appAuthRedirectScheme: 'com.noxplayer'
         ]
@@ -150,7 +150,6 @@ android {
             // see https://reactnative.dev/docs/signed-apk-android.
             signingConfig signingConfigs.release
             minifyEnabled enableProguardInReleaseBuilds
-            shrinkResources enableProguardInReleaseBuilds
             proguardFiles getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro"
             manifestPlaceholders.fileProvider = "com.noxplay.noxplayer.provider"
         }
