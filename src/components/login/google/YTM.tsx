@@ -1,11 +1,12 @@
 import React, { useEffect, useState, useCallback } from 'react';
-import { BackHandler, SafeAreaView, StyleSheet, View } from 'react-native';
+import { BackHandler, StyleSheet, View } from 'react-native';
 import { Button, Avatar } from 'react-native-paper';
 import { WebView } from 'react-native-webview';
 import { useFocusEffect } from '@react-navigation/native';
 import CookieManager from '@preeternal/react-native-cookie-manager';
 import { get_current_user } from 'libmuse';
 import { useTranslation } from 'react-i18next';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { saveSecure as saveItem } from '@utils/ChromeStorageAPI';
 import { StorageKeys } from '@enums/Storage';
@@ -145,7 +146,11 @@ const Explore = ({ ytmLogin }: Props) => {
   }, []);
 
   if (!initialized) {
-    return <ActivityIndicator size={100} />;
+    return (
+      <SafeAreaView>
+        <ActivityIndicator size={100} />
+      </SafeAreaView>
+    );
   }
   return user ? (
     <LoggedInPage
