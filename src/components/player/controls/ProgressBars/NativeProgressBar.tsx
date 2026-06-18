@@ -57,6 +57,7 @@ export const SimpleProgressBar = ({
         } else {
           setThumbImage(progressThumbImageLeft);
         }
+        slidingAtPosition.value = v;
       }}
       disabled={!enabled}
       minimumTrackTintColor={playerStyle.colors.primary}

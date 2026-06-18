@@ -43,6 +43,7 @@ export const SimpleProgressBar = ({
         } else {
           setThumbImage(progressThumbImageLeft);
         }
+        slidingAtPosition.value = v;
       }}
       onSlidingStart={() => {
         enterSliding();
