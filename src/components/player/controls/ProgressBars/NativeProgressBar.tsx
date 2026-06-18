@@ -51,7 +51,7 @@ export const SimpleProgressBar = ({
             playerStyle.colors.primary)
       }
       onValueChange={v => {
-        onValueChange?.(v / duration);
+        duration && onValueChange?.(v / duration);
         if (v > slidingAtPosition.value) {
           setThumbImage(progressThumbImageRight);
         } else {

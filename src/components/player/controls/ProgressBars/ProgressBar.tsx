@@ -30,6 +30,10 @@ export const SimpleProgressBar = ({
   const [thumbImage, setThumbImage] = React.useState(progressThumbImage);
   const slidingAtPosition = useSharedValue(0);
 
+  React.useEffect(() => {
+    setThumbImage(progressThumbImage);
+  }, [progressThumbImage]);
+
   return (
     <Slider
       onValueChange={v => {
