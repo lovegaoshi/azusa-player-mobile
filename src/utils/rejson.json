@@ -1,5 +1,9 @@
 [
   {
+    "uploaders": ["442289603"],
+    "operations": [[1, ["(.+)-.+"]]]
+  },
+  {
     "uploaders": ["1902398"],
     "operations": [
       [2],

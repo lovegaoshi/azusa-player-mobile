@@ -41,7 +41,7 @@ jobs:
 
       - name: pod install
         run: |
-          sudo xcode-select -switch /Applications/Xcode_26.0.app
+          sudo xcode-select -switch /Applications/Xcode.app
           yarn ios:build
 
       - name: Build IPA
