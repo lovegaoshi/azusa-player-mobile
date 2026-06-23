@@ -11,7 +11,10 @@ import { ytwebClient } from '@utils/mediafetch/ytbi';
 import { fetchYtbiPlaylist as fetchYtmPlaylist } from './ytmPlaylist.ytbi';
 import { getOriginORL, timestampToSeconds } from '../Utils';
 
-export const ytbiPlaylistItemToNoxSong = (val: LockupView, data: Playlist) => {
+export const ytbiPlaylistItemToNoxSong = (
+  val: LockupView,
+  albumtitle?: string,
+) => {
   try {
     return SongTS({
       cid: `${Source.ytbvideo}-${val.content_id}`,
@@ -33,7 +36,7 @@ export const ytbiPlaylistItemToNoxSong = (val: LockupView, data: Playlist) => {
             .overlays[0] as ThumbnailOverlayBadgeView
         ).badges[0].text,
       ),
-      album: data.info.title,
+      album: albumtitle,
       source: Source.ytbvideo,
       metadataOnLoad: true,
     });
@@ -52,7 +55,7 @@ const getYtbSong = async (
   const videos = playlistData.videos as LockupView[];
   for (const video of videos) {
     if (!favList.includes(video.content_id)) {
-      const song = ytbiPlaylistItemToNoxSong(video, playlistData);
+      const song = ytbiPlaylistItemToNoxSong(video, playlistData.info.title);
       if (song) {
         songs.push(song);
       }
