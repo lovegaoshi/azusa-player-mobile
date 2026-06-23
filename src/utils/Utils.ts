@@ -290,3 +290,8 @@ export const smartShuffle = (songs: NoxMedia.Song[]) => {
   }
   return newSongs;
 };
+
+export const getOriginORL = (url: string) => {
+  const parsed = new URL(url);
+  return `${parsed.origin}${parsed.pathname}`;
+};

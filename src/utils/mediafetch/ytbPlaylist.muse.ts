@@ -6,7 +6,7 @@ import SongTS from '@objects/Song';
 import { logger } from '../Logger';
 import { Source } from '@enums/MediaFetch';
 import { musePlaylistItemToNoxSong } from './ytbSearch.muse';
-import { timestampToSeconds } from '../Utils';
+import { getOriginORL, timestampToSeconds } from '../Utils';
 
 export const fetchYtmPlaylist = async (
   playlistId: string,
@@ -133,9 +133,4 @@ export const fetchYTPlaylist = async ({
       )
     ).reduce((acc, curr) => acc!.concat(curr), []);
   }
-};
-
-const getOriginORL = (url: string) => {
-  const parsed = new URL(url);
-  return `${parsed.origin}${parsed.pathname}`;
 };
