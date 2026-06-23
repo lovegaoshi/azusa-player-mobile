@@ -1,5 +1,4 @@
 import {
-  Video,
   Channel as SearchChannel,
   LockupView,
   CollectionThumbnailView,
@@ -10,12 +9,14 @@ import {
   ChannelListContinuation,
 } from 'youtubei.js/dist/src/parser/youtube';
 
-import { ytmClient, ytwebClient } from '@utils/mediafetch/ytbi';
-import { ytbiVideoToNoxSong } from './ytbSearch.ytbi';
-import { fetchYtbiPlaylist } from './ytbPlaylist.ytbi';
+import { ytwebClient } from '@utils/mediafetch/ytbi';
+import {
+  fetchYtbiPlaylist,
+  ytbiPlaylistItemToNoxSong,
+} from './ytbPlaylist.ytbi';
 
 export const searchYtbChannel = async (channel: string) => {
-  const yt = await ytmClient();
+  const yt = await ytwebClient();
   const res = await yt.search(channel, { type: 'channel' });
   const channels = res.results as unknown as SearchChannel[];
   return channels[0].id;
@@ -27,11 +28,11 @@ const getYtbSong = async (
   favList: string[],
   totalLimit = Infinity,
 ): Promise<NoxMedia.Song[]> => {
-  const videos = playlistData.videos as Video[];
+  const videos = playlistData.videos as LockupView[];
   for (const video of videos) {
-    if (!favList.includes(video.video_id)) {
-      const song = ytbiVideoToNoxSong(video);
-      songs.push(song);
+    if (!favList.includes(video.content_id)) {
+      const song = ytbiPlaylistItemToNoxSong(video);
+      song && songs.push(song);
     } else {
       return songs;
     }

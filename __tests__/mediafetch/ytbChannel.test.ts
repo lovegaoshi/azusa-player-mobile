@@ -7,6 +7,18 @@ test('YT channel', async () => {
       'https://www.youtube.com/c/@MioriCelesta',
     )!,
   });
-  // console.log(result.songList.length);
+  console.log(result.songList.length);
   expect(result.songList[0]?.id).not.toBeUndefined();
 });
+
+/**
+
+const { Innertube, ClientType, Platform } = await import("youtubei.js");
+const yt = await Innertube.create({
+    retrieve_player: false,
+    enable_session_cache: false,
+    generate_session_locally: false});
+
+res = await yt.getChannel('UCyKsg-57XC9pyHbP7v3kCPQ')
+ 
+ */
