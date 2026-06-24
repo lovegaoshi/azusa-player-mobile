@@ -115,6 +115,8 @@ export async function additionalPlaybackService({
         } catch (e) {
           console.error('resolveURL failed', track, e);
         }
+      } else if (event.error.message.toLowerCase().includes('ffmpeg')) {
+        TPPlay();
       }
     }
   });
