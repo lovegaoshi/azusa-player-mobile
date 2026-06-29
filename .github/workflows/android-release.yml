@@ -114,7 +114,7 @@ jobs:
           #changesNotSentForReview: true
 
   buildIPA:
-    runs-on: macos-15
+    runs-on: macos-26
     name: build IPA
     permissions:
       contents: write

@@ -8,7 +8,7 @@ jobs:
     uses: ./.github/workflows/reuse-check-last-commit.yml
 
   buildIPA:
-    runs-on: macos-latest
+    runs-on: macos-26
     name: build IPA
     needs: checkLastCommit
     if: ${{ needs.checkLastCommit.outputs.is_new_commit }}
