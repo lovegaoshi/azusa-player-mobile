@@ -102,9 +102,8 @@ export default function MiniplayerView() {
 
   const onArtworkPress = () => {
     if (artworkOpacity.value === 1) {
-      artworkOpacity.value = withTiming(0, { duration: 100 }, () => {
-        scheduleOnRN(setLrcVisible, true);
-      });
+      artworkOpacity.value = withTiming(0, { duration: 100 });
+      setLrcVisible(true);
       return;
     }
     if (artworkOpacity.value === 0) {
