@@ -27,12 +27,15 @@ export default function MiniplayerLrc({
   const dimension = Dimensions.get('window');
   const playerSetting = useNoxSetting(state => state.playerSetting);
 
-  const animatedStyle = useAnimatedStyle(() => ({
-    opacity: opacity.value,
-  }));
+  const animatedStyle = useAnimatedStyle(() => {
+    return {
+      opacity: opacity.value,
+    };
+  });
 
   const lrcStyle: ViewStyle = {
     zIndex: visible ? 1 : -1,
+    opacity: 0,
     position: 'absolute',
     bottom: dimension.height - dimension.width - 200 + insets.bottom,
     width: '100%',
@@ -41,7 +44,6 @@ export default function MiniplayerLrc({
   useFocusEffect(
     useCallback(() => {
       if (playerSetting.screenAlwaysWake && visible) {
-        console.log(`screen mount?, ${visible}`);
         activateKeepAwakeAsync();
         return deactivateKeepAwake;
       }
