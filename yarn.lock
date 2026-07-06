@@ -8694,7 +8694,7 @@ __metadata:
     react-native-paper: "npm:5.15.3"
     react-native-purchases: "npm:^10.4.0"
     react-native-qrcode-svg: "npm:^6.3.21"
-    react-native-reanimated: "npm:4.4.1"
+    react-native-reanimated: "npm:4.5.0"
     react-native-safe-area-context: "npm:5.8.0"
     react-native-screens: "npm:4.25.2"
     react-native-shadow-2: "npm:^7.1.2"
@@ -8705,7 +8705,7 @@ __metadata:
     react-native-turbo-base64: "npm:^0.1.5"
     react-native-url-polyfill: "npm:^3.0.0"
     react-native-webview: "npm:14.0.1"
-    react-native-worklets: "npm:0.9.2"
+    react-native-worklets: "npm:^0.10.1"
     react-test-renderer: "npm:19.2.3"
     reactotron-react-native: "npm:^5.2.0"
     rimraf: "npm:^6.1.3"
@@ -19711,17 +19711,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-native-reanimated@npm:4.4.1":
-  version: 4.4.1
-  resolution: "react-native-reanimated@npm:4.4.1"
+"react-native-reanimated@npm:4.5.0":
+  version: 4.5.0
+  resolution: "react-native-reanimated@npm:4.5.0"
   dependencies:
     react-native-is-edge-to-edge: "npm:^1.3.1"
     semver: "npm:^7.7.3"
   peerDependencies:
     react: "*"
     react-native: 0.83 - 0.86
-    react-native-worklets: 0.9.x
-  checksum: 10c0/400db6b846c23ee523a74a0b449d07358c6ec20e4ac6e08d867eec3488b1572a2809bc324d4c860479a3fed4e2d182f51146761f24457de07dd10756ffc6de97
+    react-native-worklets: 0.10.x
+  checksum: 10c0/2df754c030a90b9bdbbc5b9fdc9201821b9487f09e72399f7525a23dad95e864470de8ada5f38e28756f8de0c52956125bccb094cec71d5a850c93c83575224a
   languageName: node
   linkType: hard
 
@@ -19883,9 +19883,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-native-worklets@npm:0.9.2":
-  version: 0.9.2
-  resolution: "react-native-worklets@npm:0.9.2"
+"react-native-worklets@npm:^0.10.1":
+  version: 0.10.1
+  resolution: "react-native-worklets@npm:0.10.1"
   dependencies:
     "@babel/plugin-transform-arrow-functions": "npm:^7.27.1"
     "@babel/plugin-transform-class-properties": "npm:^7.28.6"
@@ -19904,7 +19904,7 @@ __metadata:
     "@react-native/metro-config": "*"
     react: "*"
     react-native: 0.83 - 0.86
-  checksum: 10c0/9e1bfd2030f51de14596eb7c394db9cabac2f9430508728407b2fea6adcf56761ee85cec03a62f1aed7c93e77ac254ddf03f38b4906885f9390b9e809cdbb065
+  checksum: 10c0/31712cf1b311e3dc96544a665da269cdd6be8cab286234cea968c22509398924020f168b1e9e13a532acc23086048c16f5167aa3737e756711239b6f7521fe5a
   languageName: node
   linkType: hard
 
