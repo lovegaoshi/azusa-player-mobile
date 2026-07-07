@@ -46,6 +46,7 @@ const initializePlayer = async (safeMode = false) => {
     loudnessEnhance: storedPlayerSetting.loudnessEnhance,
   };
   await SetupService(serviceOptions);
+  buildBrowseTree(playlists);
   storedPlayerSetting.inityt && ytClient().then(yt => yt.account.getInfo());
   initializePlaybackMode(currentPlayingList.repeatMode ?? playbackMode);
   if (currentPlayingList.repeatMode !== undefined) {
