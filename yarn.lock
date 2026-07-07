@@ -8824,7 +8824,7 @@ __metadata:
     expo-secure-store: "npm:~56.0.4"
     expo-sqlite: "npm:~56.0.5"
     expo-video: "npm:~56.1.4"
-    expo-wavy-slider: "npm:^0.4.7"
+    expo-wavy-slider: "npm:^0.4.6"
     fflate: "npm:^0.8.3"
     ffmpeg-kit-react-native: "https://github.com/lovegaoshi/ffmpeg-kit.git#commit=b495250938cd596d7dafe002f334b0b99e62c848"
     gts: "npm:^7.0.0"
@@ -13550,7 +13550,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"expo-wavy-slider@npm:^0.4.7":
+"expo-wavy-slider@npm:^0.4.6":
   version: 0.4.7
   resolution: "expo-wavy-slider@npm:0.4.7"
   peerDependencies:
