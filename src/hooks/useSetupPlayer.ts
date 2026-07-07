@@ -20,6 +20,7 @@ import logger from '@utils/Logger';
 import { TPPlay } from '@stores/RNObserverStore';
 import NativeNoxModule from '@specs/NativeNoxModule';
 import { setupCarplayTemplate } from './usePlaybackCarplay';
+import ytClient from '@utils/mediafetch/ytbi';
 // eslint-disable-next-line import/no-unresolved
 import { MAESTRO } from '@env';
 
@@ -45,7 +46,7 @@ const initializePlayer = async (safeMode = false) => {
     loudnessEnhance: storedPlayerSetting.loudnessEnhance,
   };
   await SetupService(serviceOptions);
-  buildBrowseTree(playlists);
+  storedPlayerSetting.inityt && ytClient().then(yt => yt.account.getInfo());
   initializePlaybackMode(currentPlayingList.repeatMode ?? playbackMode);
   if (currentPlayingList.repeatMode !== undefined) {
     cycleThroughPlaymode(

@@ -239,6 +239,8 @@
     "noRepeatDesc": "不重复播放歌单",
     "memoryEfficiencyName": "歌单不载入内存",
     "memoryEfficiencyDesc": "可能节省内存；不重启会导致数据丢失！",
+    "initytName": "启动时初始化ytbi",
+    "initytDesc": "启动时初始化ytbi",
     "keepForegroundName": "费电",
     "keepForegroundDesc": "保持前台服务，贼拉费电",
     "audioOffloadName": "音频独占",

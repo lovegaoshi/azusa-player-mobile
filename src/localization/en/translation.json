@@ -237,6 +237,8 @@
     "noRepeatDesc": "disable queue (auto next)",
     "memoryEfficiencyName": "Memory Efficiency",
     "memoryEfficiencyDesc": "async load songlists from playlists; NEED RESTART! will cause data loss",
+    "initytName": "Initialize ytbi on start",
+    "initytDesc": "attempt to initalize ytbi on app start (about 2s in async)",
     "keepForegroundName": "Keep Foreground Service",
     "keepForegroundDesc": "enable to waste a LOT of battery",
     "audioOffloadName": "Audio Offload",
