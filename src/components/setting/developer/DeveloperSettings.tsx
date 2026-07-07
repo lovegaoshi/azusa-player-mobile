@@ -48,6 +48,10 @@ const developerSettings: { [key: string]: SettingEntry } = {
     settingName: 'crossfadeRetry',
     settingCategory: 'GeneralSettings',
   },
+  inityt: {
+    settingName: 'inityt',
+    settingCategory: 'GeneralSettings',
+  },
   /**
   chatGPTSongName: {
     settingName: 'chatGPTResolveSongName',
