@@ -62,7 +62,7 @@
     "@react-navigation/drawer": "^7.13.4",
     "@react-navigation/native": "^7.3.13",
     "@react-navigation/native-stack": "^7.18.5",
-    "@revenuecat/purchases-js": "^1.47.3",
+    "@revenuecat/purchases-js": "1.47.0",
     "@sentry/react-native": "~8.19.0",
     "@shopify/flash-list": "2.3.2",
     "@shopify/react-native-skia": "2.9.0",

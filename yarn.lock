@@ -6043,17 +6043,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@revenuecat/purchases-js@npm:1.47.0":
+  version: 1.47.0
+  resolution: "@revenuecat/purchases-js@npm:1.47.0"
+  checksum: 10c0/1bf38aa8f333936916d242d8ef70c1aceaa2afe85ca018d7cf796d0c6c785fab83baf5baf580b64827d2e4bd9034f679c9f3950bec114899c8da843fea2ac2a4
+  languageName: node
+  linkType: hard
+
 "@revenuecat/purchases-js@npm:1.47.2":
   version: 1.47.2
   resolution: "@revenuecat/purchases-js@npm:1.47.2"
   checksum: 10c0/80e18b7ddbe39ea5e772ebdb4dbf10bff61a70ffe160ceb22c720bdc922ca989ea6617eafd3c399586cb3b12ade5cc4b06fde734b209f5dd22a8160e769a7d20
-  languageName: node
-  linkType: hard
-
-"@revenuecat/purchases-js@npm:^1.47.3":
-  version: 1.47.3
-  resolution: "@revenuecat/purchases-js@npm:1.47.3"
-  checksum: 10c0/934024106465b000c08478f2429ee4ba3667062382e584ee4e875bca3a344f56583e46396ab613653de25827f67966c00004e8e8b76ed0f6ef20d57fa86b3918
   languageName: node
   linkType: hard
 
@@ -8716,7 +8716,7 @@ __metadata:
     "@react-navigation/drawer": "npm:^7.13.4"
     "@react-navigation/native": "npm:^7.3.13"
     "@react-navigation/native-stack": "npm:^7.18.5"
-    "@revenuecat/purchases-js": "npm:^1.47.3"
+    "@revenuecat/purchases-js": "npm:1.47.0"
     "@sentry/react-native": "npm:~8.19.0"
     "@shopify/flash-list": "npm:2.3.2"
     "@shopify/react-native-skia": "npm:2.9.0"
