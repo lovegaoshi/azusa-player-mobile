@@ -153,11 +153,6 @@ android {
             proguardFiles getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro"
             manifestPlaceholders.fileProvider = "com.noxplay.noxplayer.provider"
         }
-        stage {
-            initWith(buildTypes.release)
-            applicationIdSuffix ".prod"
-            manifestPlaceholders.fileProvider = "com.noxplay.noxplayer.prod.provider"
-        }
     }
 
     applicationVariants.configureEach { variant ->
