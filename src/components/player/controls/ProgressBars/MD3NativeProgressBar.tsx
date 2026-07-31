@@ -23,9 +23,11 @@ export default function SimpleProgressBar({
   const enterSliding = useNoxSetting(state => state.enableMiniProgressSliding);
   const exitSliding = useNoxSetting(state => state.disableMiniProgressSliding);
   const fetchProgress = useStore(appStore, state => state.fetchProgress);
+  const fadeIntervalMs = useStore(appStore, state => state.fadeIntervalMs);
   const immediateShowPause = useNoxSetting(state => state.immediateShowPause);
   const waveHeight = useSharedValue(0);
   const waveThickness = useSharedValue(6);
+  const animationDuration = Math.max(200, fadeIntervalMs);
 
   const unbufferedColor = useMemo(
     () => colord(playerStyle.colors.primaryContainer).alpha(0.5).toRgbString(),
@@ -34,7 +36,7 @@ export default function SimpleProgressBar({
 
   useEffect(() => {
     waveHeight.value = withTiming(immediateShowPause ? 0 : 8, {
-      duration: 200,
+      duration: animationDuration,
     });
   }, [immediateShowPause]);
 
