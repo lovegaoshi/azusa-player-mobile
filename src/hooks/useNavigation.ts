@@ -24,15 +24,19 @@ export default function useAPMNavigation(navigation?: DrawerNavigationHelpers) {
     options = { pop: true },
     params,
   }: NavigateProps) => {
-    // @ts-expect-error nav v7 hasnt fixed this type yet
-    navigationGlobal.navigate(route as never, params, options);
+    navigationGlobal.navigate(route, params, options);
     if (setIcon) {
       setRoute(IconMap[route]);
     }
+    if (route === NoxRoutes.PlaylistsDrawer) {
+      navigation?.openDrawer();
+    } else {
+      navigation?.closeDrawer();
+    }
   };
 
-  const navigate2 = (route: unknown) =>
-    navigationGlobal.navigate(route as never);
+  const navigate2 = (route: string) =>
+    navigationGlobal.navigate(route, undefined, undefined);
 
   return { navigate, navigate2, getState: navigationGlobal.getState };
 }

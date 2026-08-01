@@ -1,3 +1,8 @@
+const workletsPluginOptions = {
+  bundleMode: true,
+  strictGlobal: true, // optional, but recommended
+};
+
 module.exports = api => {
   const isTest = api.env('test');
   if (isTest) {
@@ -27,7 +32,7 @@ module.exports = api => {
             },
           },
         ],
-        'react-native-worklets/plugin',
+        ['react-native-worklets/plugin', workletsPluginOptions],
         '@babel/plugin-transform-export-namespace-from',
         [
           '@babel/plugin-syntax-import-attributes',

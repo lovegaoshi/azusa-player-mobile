@@ -6,8 +6,11 @@
  */
 const { getDefaultConfig } = require('@react-native/metro-config');
 const { getSentryExpoConfig } = require('@sentry/react-native/metro');
+const {
+  getBundleModeMetroConfig,
+} = require('react-native-worklets/bundleMode');
 
-const config = getSentryExpoConfig(__dirname);
+const config = getBundleModeMetroConfig(getSentryExpoConfig(__dirname));
 const rnconfig = getDefaultConfig(__dirname);
 config.resolver.sourceExts.push('sql');
 // expo metro does not respect disabled auto linking

@@ -27,7 +27,7 @@ const BottomIconButton = ({ icon, onPress }: IconProps) => {
   );
 };
 
-const NoxAndroidBottomTab = ({ navigation }: NoxComponent.NavigationProps2) => {
+const NoxBottomTab = ({ navigation }: NoxComponent.NavigationProps2) => {
   const navigationG = useNavigation();
   const insets = useSafeAreaInsets();
   const playerStyle = useNoxSetting(state => state.playerStyle);
@@ -101,4 +101,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default NoxAndroidBottomTab;
+export default NoxBottomTab;
