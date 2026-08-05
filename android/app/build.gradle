@@ -2,7 +2,7 @@ apply plugin: "com.android.application"
 apply plugin: "com.facebook.react"
 apply plugin: "kotlin-android"
 
-def projectRoot = rootDir.getAbsoluteFile().getParentFile().getAbsolutePath()
+def projectRoot = rootDir.getAbsoluteFile().getParentFile().getAbsolutePath()e
 /**
 
  * This is the configuration block to customize your React Native Android app.

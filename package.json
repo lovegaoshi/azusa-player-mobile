@@ -208,13 +208,13 @@
     "reactotron-react-native": "^5.2.0",
     "rimraf": "^6.1.3",
     "shx": "^0.4.0",
-    "typescript": "6.0.3"
+    "typescript": "7.0.2"
   },
   "engines": {
     "node": ">=18.0.0"
   },
   "isSwift": true,
-  "packageManager": "yarn@4.13.0",
+  "packageManager": "yarn@4.18.0",
   "expo": {
     "autolinking": {
       "android": {
