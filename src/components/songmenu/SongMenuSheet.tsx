@@ -5,6 +5,7 @@ import { Image } from 'expo-image';
 import { Divider } from 'react-native-paper';
 import { useTranslation } from 'react-i18next';
 import * as Clipboard from 'expo-clipboard';
+import TrackPlayer from 'react-native-track-player';
 
 import { NativeText as Text } from '@components/commonui/ScaledText';
 import { NoxSheetRoutes } from '@enums/Routes';
@@ -32,6 +33,15 @@ import {
   downloadSongs,
 } from '@components/playlist/SongList/SongMenuSheet';
 import { Source } from '@enums/MediaFetch';
+import { r128gain2Volume } from '@utils/Utils';
+
+const setR128GainRNTP = async (id: string, r128gain: number | null) => {
+  setR128Gain(id, r128gain);
+  TrackPlayer.setAnimatedVolume({
+    volume: r128gain ? r128gain2Volume(r128gain) : 1,
+    duration: 100,
+  });
+};
 
 export default function SongMenuSheet() {
   const sheet = useRef<TrueSheet>(null);
@@ -98,9 +108,9 @@ export default function SongMenuSheet() {
       [
         {
           text: t('Dialog.nullify'),
-          onPress: () => setR128Gain(song.id, null),
+          onPress: () => setR128GainRNTP(song.id, null),
         },
-        { text: t('Dialog.zero'), onPress: () => setR128Gain(song.id, 0) },
+        { text: t('Dialog.zero'), onPress: () => setR128GainRNTP(song.id, 0) },
         { text: t('Dialog.ok') },
       ],
       { cancelable: true },
