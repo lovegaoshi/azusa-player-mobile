@@ -1,8 +1,17 @@
 {
   "extends": "@tsconfig/react-native/tsconfig.json",
   "compilerOptions": {
+    "moduleResolution": "bundler",
+    "module": "esnext",
     "ignoreDeprecations": "6.0",
     "paths": {
+      "react-native-bottom-tabs/lib/*": [
+        "./node_modules/react-native-bottom-tabs/lib/*"
+      ],
+      "@react-navigation/drawer/lib/*": [
+        "./node_modules/@react-navigation/drawer/lib/*"
+      ],
+      "youtubei.js/dist/src/*": ["./node_modules/youtubei.js/dist/src/*"],
       "@/*": ["./src/*"],
       "*": ["./src/*"],
       "@components/*": ["./src/components/*"],

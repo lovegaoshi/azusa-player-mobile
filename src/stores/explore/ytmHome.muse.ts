@@ -55,7 +55,7 @@ export const YTAlbumTransform = (v: ParsedAlbum[]) =>
   v.map(i => ({
     cover: last(i.thumbnails)!.url,
     name: i.title,
-    singer: i.album_type!,
+    singer: i.album_type! as string,
     getPlaylist: async () => ({
       songs: await fetchYtmPlaylist(i.audioPlaylistId),
     }),
