@@ -74,16 +74,15 @@ const ABSliderMenu = ({ song, showSheet }: Props) => {
       aAbs: range[0] * duration,
       bAbs: range[1] * duration,
     });
+    showSheet?.(false);
   };
 
   const showDialog = () => {
     setDialogVisible(true);
-    showSheet?.(false);
   };
 
   const dismissDialog = () => {
     setDialogVisible(val => !val);
-    showSheet?.(true);
   };
 
   const onNoxSkipSilencePress = async (toggleSpin: () => void) => {

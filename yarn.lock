@@ -4945,13 +4945,29 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@lodev09/react-native-true-sheet@https://github.com/lovegaoshi/react-native-true-sheet.git#commit=08574090ec57cea023eeebcf17e78e0046aa51c4":
-  version: 2.0.5
-  resolution: "@lodev09/react-native-true-sheet@https://github.com/lovegaoshi/react-native-true-sheet.git#commit=08574090ec57cea023eeebcf17e78e0046aa51c4"
+"@lodev09/react-native-true-sheet@npm:^3.11.9":
+  version: 3.11.9
+  resolution: "@lodev09/react-native-true-sheet@npm:3.11.9"
   peerDependencies:
+    "@radix-ui/react-dialog": ">=1"
+    "@radix-ui/react-presence": ">=1"
+    "@react-navigation/core": ">=7"
     react: "*"
     react-native: "*"
-  checksum: 10c0/1bedaea8211a93694a8004750e017ba77bd8366b641a9a26425c11900ccd31b8bf0315cf8ae1d6f73998e8f3ab71e2701bec1a86f8533269bc23d6b091bef10d
+    react-native-reanimated: ">=4"
+    react-native-worklets: "*"
+  peerDependenciesMeta:
+    "@radix-ui/react-dialog":
+      optional: true
+    "@radix-ui/react-presence":
+      optional: true
+    "@react-navigation/core":
+      optional: true
+    react-native-reanimated:
+      optional: true
+    react-native-worklets:
+      optional: true
+  checksum: 10c0/3bfcf2410fd4db7254460b5d4fe555fdfd6abf609e85da636ed654e18c07bd97ab679d67c14e11d2a5844abed5c4bfd94ff98a123a650c43082ca7522ea2eb64
   languageName: node
   linkType: hard
 
@@ -8966,7 +8982,7 @@ __metadata:
     "@babel/runtime": "npm:^7.29.7"
     "@expo/ui": "npm:~57.0.9"
     "@legendapp/list": "npm:^3.3.3"
-    "@lodev09/react-native-true-sheet": "https://github.com/lovegaoshi/react-native-true-sheet.git#commit=08574090ec57cea023eeebcf17e78e0046aa51c4"
+    "@lodev09/react-native-true-sheet": "npm:^3.11.9"
     "@material/material-color-utilities": "npm:^0.4.0"
     "@notifee/react-native": "npm:^9.1.8"
     "@preeternal/react-native-cookie-manager": "npm:^6.4.0"

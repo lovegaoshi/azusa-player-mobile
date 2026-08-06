@@ -51,9 +51,9 @@ export default function ElevationView() {
       <TrueSheet
         name="sheet"
         ref={sheet}
-        sizes={['auto', 'large']}
+        detents={['auto', 1]}
         cornerRadius={5}
-        onDismiss={zoomIn}
+        onDidDismiss={zoomIn}
       >
         <View style={{ height: 100 }}></View>
         <Button title="close" onPress={zoomIn}></Button>

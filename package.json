@@ -42,7 +42,7 @@
   "dependencies": {
     "@expo/ui": "~57.0.9",
     "@legendapp/list": "^3.3.3",
-    "@lodev09/react-native-true-sheet": "https://github.com/lovegaoshi/react-native-true-sheet.git#commit=08574090ec57cea023eeebcf17e78e0046aa51c4",
+    "@lodev09/react-native-true-sheet": "^3.11.9",
     "@notifee/react-native": "^9.1.8",
     "@preeternal/react-native-cookie-manager": "^6.4.0",
     "@react-native-assets/slider": "^11.0.12",
