@@ -1,8 +1,0 @@
-{
-  "env": {
-    "production": {
-      "plugins": ["transform-remove-console"]
-    }
-  },
-  "plugins": [["module:react-native-dotenv"]]
-}
