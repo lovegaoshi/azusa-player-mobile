@@ -146,6 +146,12 @@ export const Home = ({
           onPress={() => navigation.navigate(Route.PLUGINS)}
           settingCategory="Settings"
         />
+        <SettingListItem
+          icon={Icons.debugPanel}
+          settingName="DebugPanel"
+          onPress={() => navigation.navigate(Route.DEBUGPANEL)}
+          settingCategory="Settings"
+        />
         {!APPSTORE && (
           <SettingListItem
             icon={Icons.update}
