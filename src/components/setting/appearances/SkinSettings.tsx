@@ -2,8 +2,8 @@ import * as React from 'react';
 import { Image } from 'expo-image';
 import { View, SafeAreaView, LayoutAnimation } from 'react-native';
 import { FlashList, FlashListRef } from '@shopify/flash-list';
-import { RectButton } from 'react-native-gesture-handler';
 
+import RectButton from '@components/commonui/RectButton';
 import { PaperText as Text } from '@components/commonui/ScaledText';
 import SkinSearchbar from './SkinSearchbar';
 import { useNoxSetting } from '@stores/useApp';

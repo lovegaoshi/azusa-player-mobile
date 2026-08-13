@@ -6,8 +6,8 @@ import { useDrawerProgress } from '@react-navigation/drawer';
 import { DrawerNavigationHelpers } from '@react-navigation/drawer/lib/typescript/src/types';
 import { scheduleOnRN } from 'react-native-worklets';
 import { useAnimatedReaction } from 'react-native-reanimated';
-import { RectButton } from 'react-native-gesture-handler';
 
+import RectButton from '@components/commonui/RectButton';
 import { useNoxSetting } from '@stores/useApp';
 import { NoxRoutes } from '@enums/Routes';
 import AddPlaylistButton from '../buttons/AddPlaylistButton';

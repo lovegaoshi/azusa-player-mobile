@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { View, Dimensions } from 'react-native';
-import { GestureDetector, Gesture } from 'react-native-gesture-handler';
+import { GestureDetector, usePanGesture } from 'react-native-gesture-handler';
 import Animated, {
   useAnimatedStyle,
   useDerivedValue,
@@ -131,17 +131,13 @@ export default function MiniplayerView() {
     return;
   };
 
-  const scrollDragGesture = React.useMemo(
-    () =>
-      Gesture.Pan()
-        .activeOffsetY([-5, 5])
-        .onStart(() => (initHeight.value = miniplayerHeight.value))
-        .onChange(e => dragPlayerHeight(e.translationY))
-        .onEnd(e => snapPlayerHeight(e.translationY)),
-    [],
-  );
-
-  const disabledGesture = React.useMemo(() => Gesture.Manual(), []);
+  const scrollDragGesture = usePanGesture({
+    enabled: !(lrcVisible || sliding),
+    activeOffsetY: [-5, 5],
+    onActivate: () => (initHeight.value = miniplayerHeight.value),
+    onUpdate: e => dragPlayerHeight(e.translationY),
+    onDeactivate: e => snapPlayerHeight(e.translationY),
+  });
 
   const animatedStyle = useAnimatedStyle(() => {
     return {
@@ -163,9 +159,7 @@ export default function MiniplayerView() {
   }, []);
 
   return (
-    <GestureDetector
-      gesture={lrcVisible || sliding ? disabledGesture : scrollDragGesture}
-    >
+    <GestureDetector gesture={scrollDragGesture}>
       <Animated.View style={[{ width: '100%' }, animatedStyle]}>
         <View style={styles.rowView}>
           <PlayerTopInfo opacity={opacityVisible} collapse={collapse} />

@@ -13,8 +13,9 @@ import inRange from 'lodash/inRange';
 import throttle from 'lodash/throttle';
 import { TrueSheet } from '@lodev09/react-native-true-sheet';
 import { scheduleOnRN } from 'react-native-worklets';
-import { Pressable, RectButton } from 'react-native-gesture-handler';
+import { Pressable } from 'react-native-gesture-handler';
 
+import RectButton from '@components/commonui/RectButton';
 import { PaperText as Text } from '@components/commonui/ScaledText';
 import { useNoxSetting } from '@stores/useApp';
 import { seconds2MMSS } from '@utils/Utils';

@@ -4,8 +4,8 @@ import { IconButton, Divider } from 'react-native-paper';
 import { View, ImageBackground, StyleSheet, Linking } from 'react-native';
 import { useTranslation } from 'react-i18next';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { RectButton } from 'react-native-gesture-handler';
 
+import RectButton from '@components/commonui/RectButton';
 import { PaperText as Text } from '@components/commonui/ScaledText';
 import { useNoxSetting } from '@stores/useApp';
 import { NoxRoutes } from '@enums/Routes';

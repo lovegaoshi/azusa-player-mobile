@@ -12,8 +12,8 @@ import {
   ListItemProps,
 } from 'react-native-paper';
 import _MarqueeText, { TextTickerProps } from 'react-native-text-ticker';
-import { RectButton } from 'react-native-gesture-handler';
 
+import RectButton from './RectButton';
 import { typescale } from './PaperTextVariant';
 import { useNoxSetting } from '@stores/useApp';
 

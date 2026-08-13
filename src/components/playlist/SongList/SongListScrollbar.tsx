@@ -1,6 +1,6 @@
-import { useMemo, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import { View, StyleSheet, StyleProp, ViewStyle } from 'react-native';
-import { GestureDetector, Gesture } from 'react-native-gesture-handler';
+import { GestureDetector, usePanGesture } from 'react-native-gesture-handler';
 import Animated, {
   useSharedValue,
   withTiming,
@@ -108,35 +108,32 @@ export default function CustomScrollView({
     });
   };
 
-  const scrollDragGesture = useMemo(
-    () =>
-      Gesture.Pan()
-        .onBegin(e => {
-          scheduleOnRN(resetHideTimeout);
-          startScrollY.value = e.y + scrollBarY.value;
-          showLegend.value = 1;
-        })
-        .onChange(e => {
-          // the actual thumb range is half bar size - height - half bar size
-          // and this gets intrapolated to 0 - 1 for scrollToPercent
-          const halfBar = barHeightP.value / 2;
+  const scrollDragGesture = usePanGesture({
+    onBegin: e => {
+      scheduleOnRN(resetHideTimeout);
+      startScrollY.value = e.y + scrollBarY.value;
+      showLegend.value = 1;
+    },
+    onUpdate: e => {
+      // the actual thumb range is half bar size - height - half bar size
+      // and this gets intrapolated to 0 - 1 for scrollToPercent
+      const halfBar = barHeightP.value / 2;
 
-          const clampedScrollToPercent = interpolate(
-            startScrollY.value + e.translationY,
-            [halfBar, scrollViewHeight.value - halfBar],
-            [0, 1],
-            Extrapolation.CLAMP,
-          );
-          scheduleOnRN(
-            scrollByTranslationY,
-            clampedScrollToPercent * contentHeight.value,
-          );
-        })
-        .onEnd(() => {
-          showLegend.value = 0;
-        }),
-    [],
-  );
+      const clampedScrollToPercent = interpolate(
+        startScrollY.value + e.translationY,
+        [halfBar, scrollViewHeight.value - halfBar],
+        [0, 1],
+        Extrapolation.CLAMP,
+      );
+      scheduleOnRN(
+        scrollByTranslationY,
+        clampedScrollToPercent * contentHeight.value,
+      );
+    },
+    onDeactivate: () => {
+      showLegend.value = 0;
+    },
+  });
 
   const scrollBarDynamicStyle = useAnimatedStyle(() => {
     return {
