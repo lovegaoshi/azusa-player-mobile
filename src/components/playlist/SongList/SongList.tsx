@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useMemo, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { LayoutRectangle, NativeScrollEvent } from 'react-native';
 import { FlashList } from '@shopify/flash-list';
 import { useNetInfo } from '@react-native-community/netinfo';
@@ -11,11 +11,11 @@ import Animated, {
 } from 'react-native-reanimated';
 import { scheduleOnRN } from 'react-native-worklets';
 import {
-  Gesture,
+  usePanGesture,
   GestureDetector,
   ScrollView,
   RefreshControl,
-  PanGesture,
+  useExclusiveGestures,
 } from 'react-native-gesture-handler';
 
 import SongInfo from './SongInfo';
@@ -29,6 +29,7 @@ import { PlaylistTypes } from '@enums/Playlist';
 const AnimatedFlashList = Animated.createAnimatedComponent(
   FlashList<NoxMedia.Song>,
 );
+const MAX_ACCELERATION = 40;
 
 interface Props {
   usedPlaylist: UsePlaylistRN;
@@ -90,46 +91,44 @@ export default function SongList({
     );
     scrollPosition.value = p.contentOffset.y / contentH;
     scrollOffset.value = p.contentOffset.y;
+    console.log(scrollPosition.value, scrollOffset.value, contentH);
     scrollViewHeight.value = p.layoutMeasurement.height;
     contentHeight.value = contentH;
     onScroll?.(p);
   };
   const scrollHandler = useAnimatedScrollHandler(scrollBarOnScroll);
 
-  const scrollDragGesture = useMemo(
-    () =>
-      Gesture.Pan()
-        .enabled(checking)
-        .activateAfterLongPress(500)
-        .onStart(e => {
-          initialDragY.value = e.y;
-          translationDragY.value = 0;
-          initialDragOffset.value = scrollOffset.value + e.y;
-        })
-        .onChange(e => {
-          dragToSelect.value = 1;
-          translationDragY.value = e.translationY;
-          const cursorPos =
-            (e.translationY + initialDragY.value) / scrollViewHeight.value;
-          const scrollDown = cursorPos > 0.8;
-          dragPos.value = cursorPos;
-          const scrollUp = cursorPos < 0.2;
-          if (scrollDown) {
-            scheduleOnRN(setScrollActive, 1);
-          } else if (scrollUp) {
-            scheduleOnRN(setScrollActive, 2);
-          } else {
-            scheduleOnRN(setScrollActive, 0);
-          }
-        })
-        .onFinalize(() => {
-          dragToSelect.value = 0;
-          initialDragY.value = 0;
-          translationDragY.value = 0;
-          scheduleOnRN(setScrollActive, 0);
-        }),
-    [checking],
-  );
+  const scrollDragGesture = usePanGesture({
+    activateAfterLongPress: 300,
+    enabled: checking,
+    onActivate: e => {
+      initialDragY.value = e.y;
+      translationDragY.value = 0;
+      initialDragOffset.value = scrollOffset.value + e.y;
+    },
+    onUpdate: e => {
+      dragToSelect.value = 1;
+      translationDragY.value = e.translationY;
+      const cursorPos =
+        (e.translationY + initialDragY.value) / scrollViewHeight.value;
+      const scrollDown = cursorPos > 0.8;
+      dragPos.value = cursorPos;
+      const scrollUp = cursorPos < 0.2;
+      if (scrollDown) {
+        scheduleOnRN(setScrollActive, 1);
+      } else if (scrollUp) {
+        scheduleOnRN(setScrollActive, 2);
+      } else {
+        scheduleOnRN(setScrollActive, 0);
+      }
+    },
+    onFinalize: () => {
+      dragToSelect.value = 0;
+      initialDragY.value = 0;
+      translationDragY.value = 0;
+      scheduleOnRN(setScrollActive, 0);
+    },
+  });
 
   useEffect(() => {
     scrollingRef.current && clearInterval(scrollingRef.current);
@@ -140,7 +139,10 @@ export default function SongList({
           animated: false,
         });
         if (dragPos.value < 0.2) {
-          acceleration.value = Math.min(acceleration.value + 0.5, 50);
+          acceleration.value = Math.min(
+            acceleration.value + 0.5,
+            MAX_ACCELERATION,
+          );
         }
       }, 16);
     } else if (scrollActive === 1) {
@@ -150,7 +152,10 @@ export default function SongList({
           animated: false,
         });
         if (dragPos.value > 0.8) {
-          acceleration.value = Math.min(acceleration.value + 0.5, 50);
+          acceleration.value = Math.min(
+            acceleration.value + 0.5,
+            MAX_ACCELERATION,
+          );
         }
       }, 16);
     }
@@ -173,48 +178,43 @@ export default function SongList({
 
   const pullUpActivated = useSharedValue(0);
   const pullUpDistance = useSharedValue(0);
-  const gestureRef = React.useRef<PanGesture>(undefined);
   const isPullUpable = usedPlaylist.playlist.type === PlaylistTypes.Search;
 
-  const pullUpRefreshGesture = useMemo(
-    () =>
-      Gesture.Pan()
-        .withRef(gestureRef)
-        .onStart(e => {
-          // if flashlist is at the very bottom, set pullupAct to 1
-          // HACK: how to resolve js precision issue?
-          if (
-            Math.round((scrollPosition.value - 1) * 10000) === 0 &&
-            e.velocityY < 0 &&
-            isPullUpable
-          ) {
-            pullUpActivated.value = 1;
-          }
-        })
-        .onChange(e => {
-          if (pullUpActivated.value !== 1) return;
-          if (e.translationY > 0) {
-            pullUpActivated.value = -1;
-            return;
-          }
-          pullUpDistance.value = e.translationY;
-        })
-        .onEnd(() => {
-          if (pullUpActivated.value !== 1) return;
-          if (pullUpDistance.value < -200) {
-            scheduleOnRN(refreshPlaylist, true);
-          } else {
-            pullUpActivated.value = -1;
-            pullUpDistance.value = withTiming(0, { duration: 400 });
-          }
-        })
-        .onFinalize(() => {
-          if (pullUpActivated.value > 0) pullUpActivated.value = 0;
-        }),
-    [usedPlaylist],
-  );
+  const pullUpRefreshGesture = usePanGesture({
+    onActivate: e => {
+      // if flashlist is at the very bottom, set pullupAct to 1
+      // HACK: how to resolve js precision issue?
+      if (
+        Math.round((scrollPosition.value - 1) * 10000) === 0 &&
+        e.velocityY < 0 &&
+        isPullUpable
+      ) {
+        pullUpActivated.value = 1;
+      }
+    },
+    onUpdate: e => {
+      if (pullUpActivated.value !== 1) return;
+      if (e.translationY > 0) {
+        pullUpActivated.value = -1;
+        return;
+      }
+      pullUpDistance.value = e.translationY;
+    },
+    onDeactivate: () => {
+      if (pullUpActivated.value !== 1) return;
+      if (pullUpDistance.value < -200) {
+        scheduleOnRN(refreshPlaylist, true);
+      } else {
+        pullUpActivated.value = -1;
+        pullUpDistance.value = withTiming(0, { duration: 400 });
+      }
+    },
+    onFinalize: () => {
+      if (pullUpActivated.value > 0) pullUpActivated.value = 0;
+    },
+  });
 
-  const composedGesture = Gesture.Exclusive(
+  const composedGesture = useExclusiveGestures(
     scrollDragGesture,
     pullUpRefreshGesture,
   );
@@ -231,7 +231,7 @@ export default function SongList({
           onLayout={e => setFlashlistLayout(e.nativeEvent.layout)}
           renderScrollComponent={ScrollView}
           overrideProps={{
-            simultaneousHandlers: gestureRef,
+            simultaneousWith: pullUpRefreshGesture,
             nestedScrollEnabled: false,
             refreshControl: (
               <RefreshControl

@@ -1,8 +1,8 @@
 import { View, FlatList } from 'react-native';
 import { useEffect, useState } from 'react';
 import { IconButton } from 'react-native-paper';
-import { RectButton } from 'react-native-gesture-handler';
 
+import RectButton from '@components/commonui/RectButton';
 import { PaperText as Text } from '@components/commonui/ScaledText';
 import {
   getAlistCred,

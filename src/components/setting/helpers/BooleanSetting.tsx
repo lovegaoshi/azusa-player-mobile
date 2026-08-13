@@ -2,8 +2,9 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { View, StyleSheet } from 'react-native';
 import { Checkbox } from 'react-native-paper';
-import { Pressable, RectButton } from 'react-native-gesture-handler';
+import { Pressable } from 'react-native-gesture-handler';
 
+import RectButton from '@components/commonui/RectButton';
 import { NativeText as Text } from '@components/commonui/ScaledText';
 import { useNoxSetting } from '@stores/useApp';
 import { SettingEntry } from './SettingEntry';
