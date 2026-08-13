@@ -6022,12 +6022,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@revenuecat/purchases-js-hybrid-mappings@npm:18.29.0":
-  version: 18.29.0
-  resolution: "@revenuecat/purchases-js-hybrid-mappings@npm:18.29.0"
+"@revenuecat/purchases-js-hybrid-mappings@npm:18.30.0":
+  version: 18.30.0
+  resolution: "@revenuecat/purchases-js-hybrid-mappings@npm:18.30.0"
   dependencies:
-    "@revenuecat/purchases-js": "npm:1.49.1"
-  checksum: 10c0/85edd2d2ce6a639942b9d291caefc02637057618f0f6306bcfcf18bfd8eac47914f6a058c5f341739bdee389b11c1d79c2c5a5cfadc1235c81f5b1b2abfdb305
+    "@revenuecat/purchases-js": "npm:1.52.0"
+  checksum: 10c0/ac24618c9d28ed56d748a0910e9ecf64f2e9f97367669f89354fd040a413f1e4daf36d856efe62f424fb1cbd91b804a4ab5066f42311e00cd7dd051771b801b9
   languageName: node
   linkType: hard
 
@@ -6038,17 +6038,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@revenuecat/purchases-js@npm:1.49.1":
-  version: 1.49.1
-  resolution: "@revenuecat/purchases-js@npm:1.49.1"
-  checksum: 10c0/4bcd2b4666dc9255aa11d230f33cd58ed1f6714727c314aff87b54a2c4cdd1a0887c9bc7623fb3ddba6cd287cfce8edc5a8d6ed5bc239547d4a9bd64eed1d41b
+"@revenuecat/purchases-js@npm:1.52.0":
+  version: 1.52.0
+  resolution: "@revenuecat/purchases-js@npm:1.52.0"
+  checksum: 10c0/6a074f42c3c9b60c230ee7280a530737b2a516eee3a8194ee8137a0fa9e225e68950a57cb72825d4f339aaba1f8aa83a330f90277dd950f9bfb046d9e37ead03
   languageName: node
   linkType: hard
 
-"@revenuecat/purchases-typescript-internal@npm:18.29.0":
-  version: 18.29.0
-  resolution: "@revenuecat/purchases-typescript-internal@npm:18.29.0"
-  checksum: 10c0/a1fce2039edd9d3d0b2908aac32ecfbd9a9d80322ffeeb4dc38db4171e2babc130f314271faa396bd60b54575b081379b63590d29d635e5b40fbd5df24af4b20
+"@revenuecat/purchases-typescript-internal@npm:18.30.0":
+  version: 18.30.0
+  resolution: "@revenuecat/purchases-typescript-internal@npm:18.30.0"
+  checksum: 10c0/5ea387f46f7a12ac1cfcbe35872c1ea749244536badcafec5d34d246e2732f43e35522a57e613934eb41d0b2ad7f0a9b3670eee8a55c68b14363177b0efe4467
   languageName: node
   linkType: hard
 
@@ -6313,9 +6313,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@sentry/expo-upload-sourcemaps@npm:8.22.0":
-  version: 8.22.0
-  resolution: "@sentry/expo-upload-sourcemaps@npm:8.22.0"
+"@sentry/expo-upload-sourcemaps@npm:8.23.0":
+  version: 8.23.0
+  resolution: "@sentry/expo-upload-sourcemaps@npm:8.23.0"
   dependencies:
     "@sentry/cli": "npm:3.6.2"
   peerDependencies:
@@ -6328,7 +6328,7 @@ __metadata:
       optional: true
   bin:
     expo-upload-sourcemaps: cli.js
-  checksum: 10c0/b382892d2e7dfcbd290c6e3e7c31ebfc0f1baeda6f8dad7cbf8964a8351689748234af97ff3703921a721d52a98593707cdcab0b04ecc571112cf10f40759b04
+  checksum: 10c0/032e25c3314fe273e05a34b2783a9becf74915e8b8cf2bd9bbc7d55f01e166b223b7457ea5c09fa02e0f63444db2fd2dfb957d35167e46f6315a0ede0dccfe1f
   languageName: node
   linkType: hard
 
@@ -6341,15 +6341,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@sentry/react-native@npm:~8.22.0":
-  version: 8.22.0
-  resolution: "@sentry/react-native@npm:8.22.0"
+"@sentry/react-native@npm:~8.23.0":
+  version: 8.23.0
+  resolution: "@sentry/react-native@npm:8.23.0"
   dependencies:
     "@sentry/browser": "npm:10.69.0"
     "@sentry/bundler-plugins": "npm:10.69.0"
     "@sentry/cli": "npm:3.6.2"
     "@sentry/core": "npm:10.69.0"
-    "@sentry/expo-upload-sourcemaps": "npm:8.22.0"
+    "@sentry/expo-upload-sourcemaps": "npm:8.23.0"
     "@sentry/react": "npm:10.69.0"
   peerDependencies:
     expo: ">=49.0.0"
@@ -6363,7 +6363,7 @@ __metadata:
     sentry-eas-build-on-error: scripts/eas-build-hook.js
     sentry-eas-build-on-success: scripts/eas-build-hook.js
     sentry-expo-upload-sourcemaps: scripts/expo-upload-sourcemaps.js
-  checksum: 10c0/8346c2f317638a6b3142972dc5515cbb42a8a107dd832427f11dd9774635a3f66a9b24af8885eea9cc135fd67a452a514a6335b08f84eb7939bf342e94ff4039
+  checksum: 10c0/8fa7fa9b6a77e7dee5ebb3650ee3788558a604bfc7ef430ec538a62a8a63569c05de5471de195c9a57c0431f02c5fb95bbf888717d90679dfd5ce8705e0afdc5
   languageName: node
   linkType: hard
 
@@ -9071,7 +9071,7 @@ __metadata:
     "@react-navigation/native": "npm:^7.3.16"
     "@react-navigation/native-stack": "npm:^7.18.8"
     "@revenuecat/purchases-js": "npm:1.47.0"
-    "@sentry/react-native": "npm:~8.22.0"
+    "@sentry/react-native": "npm:~8.23.0"
     "@shopify/flash-list": "npm:2.3.2"
     "@shopify/react-native-skia": "npm:2.11.0"
     "@strawberrytech/react-native-nitro-zlib": "npm:^0.3.1"
@@ -9176,10 +9176,10 @@ __metadata:
     react-native-ota-hot-update: "npm:2.2.2"
     react-native-pager-view: "npm:9.0.0"
     react-native-paper: "npm:5.15.3"
-    react-native-purchases: "npm:^10.7.0"
+    react-native-purchases: "npm:^10.7.1"
     react-native-qrcode-svg: "npm:^6.3.21"
     react-native-reanimated: "npm:4.5.3"
-    react-native-safe-area-context: "npm:5.8.1"
+    react-native-safe-area-context: "npm:5.9.0"
     react-native-screens: "npm:4.27.0"
     react-native-shadow-2: "npm:^7.1.2"
     react-native-svg: "npm:15.15.5"
@@ -9191,7 +9191,7 @@ __metadata:
     react-native-webview: "npm:14.0.1"
     react-native-worklets: "npm:0.11.3"
     react-test-renderer: "npm:19.2.3"
-    reactotron-react-native: "npm:^5.2.0"
+    reactotron-react-native: "npm:^5.3.1"
     rimraf: "npm:^6.1.3"
     shx: "npm:^0.4.0"
     sp-react-native-in-app-updates: "npm:^2.0.0"
@@ -9200,8 +9200,8 @@ __metadata:
     use-debounce: "npm:^10.1.1"
     uuid: "npm:^14.0.1"
     web-streams-polyfill: "npm:^4.3.0"
-    youtubei.js: "npm:17.2.0"
-    zustand: "npm:^5.0.14"
+    youtubei.js: "npm:18.0.0"
+    zustand: "npm:^5.0.15"
   languageName: unknown
   linkType: soft
 
@@ -17818,10 +17818,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"meriyah@npm:^6.1.4":
-  version: 6.1.4
-  resolution: "meriyah@npm:6.1.4"
-  checksum: 10c0/d792a12df453b9e86c2bb70e73adf41b2d0fa88125381143e4d339d309ddcbb7aeb108e286411dcb19be82539d29b881279c613ae03ce514b7c296c72e9a8d00
+"meriyah@npm:^7.3.1":
+  version: 7.3.1
+  resolution: "meriyah@npm:7.3.1"
+  checksum: 10c0/6232a65b0fb495eb98242cbcc8113a60da9ed9e7723dd5e8f0d69321ad1b7de9e057bfeb02f0aa1d0e77cae270ec58007c28183e2aa399afde9ed9ce52a3e5ac
   languageName: node
   linkType: hard
 
@@ -20184,12 +20184,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-native-purchases@npm:^10.7.0":
-  version: 10.7.0
-  resolution: "react-native-purchases@npm:10.7.0"
+"react-native-purchases@npm:^10.7.1":
+  version: 10.7.1
+  resolution: "react-native-purchases@npm:10.7.1"
   dependencies:
-    "@revenuecat/purchases-js-hybrid-mappings": "npm:18.29.0"
-    "@revenuecat/purchases-typescript-internal": "npm:18.29.0"
+    "@revenuecat/purchases-js-hybrid-mappings": "npm:18.30.0"
+    "@revenuecat/purchases-typescript-internal": "npm:18.30.0"
   peerDependencies:
     react: ">= 16.6.3"
     react-native: ">= 0.73.0"
@@ -20197,7 +20197,7 @@ __metadata:
   peerDependenciesMeta:
     react-native-web:
       optional: true
-  checksum: 10c0/e3186f991044e6342fe6b4e033bb3c3e5ed5de990e0bbaac0b9b9953a29f7524a1d6e591beaf00b76703d11241b21649a49acfd4af49be920e063486bcfe07cd
+  checksum: 10c0/b5771667902866451124062365e6a15fa2c171265f0f6739df1d56fc0a884c70a2f62c2264c634b25d2363656390039cdfbfcd28e8617768e2449d6459174ff6
   languageName: node
   linkType: hard
 
@@ -20230,13 +20230,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-native-safe-area-context@npm:5.8.1":
-  version: 5.8.1
-  resolution: "react-native-safe-area-context@npm:5.8.1"
+"react-native-safe-area-context@npm:5.9.0":
+  version: 5.9.0
+  resolution: "react-native-safe-area-context@npm:5.9.0"
   peerDependencies:
     react: "*"
     react-native: "*"
-  checksum: 10c0/b04491f2dd97faf4a0afcb198ba803239676580a9523b23614346236149d0419abb8d0422574f4ce1782d606be6e5741b8e6841d807c48f69247a497a7a511aa
+  checksum: 10c0/f8d7634b7ab114e21c88c87de044f2a5d94d3f9641c9c203e924733c014f0c8f5a4fd95fd70275b400e6696245a5d78b263635c0be175c882b02b723a580678e
   languageName: node
   linkType: hard
 
@@ -20558,16 +20558,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"reactotron-react-native@npm:^5.2.0":
-  version: 5.2.0
-  resolution: "reactotron-react-native@npm:5.2.0"
+"reactotron-react-native@npm:^5.3.1":
+  version: 5.3.1
+  resolution: "reactotron-react-native@npm:5.3.1"
   dependencies:
     mitt: "npm:^3.0.1"
     reactotron-core-client: "npm:2.10.0"
     reactotron-core-contract: "npm:0.4.0"
   peerDependencies:
     react-native: ">=0.40.0"
-  checksum: 10c0/ce0e68c1d5a46e4bf0161427b5f4c8096d7403e0c811d21f2fc2d37f4269c0794441f7b9ea52fb696f80d00e96136b2036ef024faba8531f2d7e4f0e5f4341e0
+  checksum: 10c0/cc8e526b0c89a8bd1285e36c37ab9d9ba0f80fac6f4f6f5e42ec8ca575152e82a6aebddf0e51a27d311b5ed391bac95920a35e9c4ad104e465dc697a566a80c5
   languageName: node
   linkType: hard
 
@@ -24019,14 +24019,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"youtubei.js@npm:17.2.0":
-  version: 17.2.0
-  resolution: "youtubei.js@npm:17.2.0"
+"youtubei.js@npm:18.0.0":
+  version: 18.0.0
+  resolution: "youtubei.js@npm:18.0.0"
   dependencies:
     "@bufbuild/protobuf": "npm:^2.0.0"
     fflate: "npm:^0.8.2"
-    meriyah: "npm:^6.1.4"
-  checksum: 10c0/82ade381c6b1173b0fdb609a86c6a3c2d82db9c4add7dcaa06574507bb2586b885df4d5fd3f0d92e9cf67fd85a58158030f62bd576357432121785a52d167ab8
+    meriyah: "npm:^7.3.1"
+  checksum: 10c0/cd43fc79646f66ca5f3f1f95f55721c8d1eb9cb2b0973cc0133a7bd93a123d442207e0a505e2aff3af8a6d98681a209aab307835aec40269917d3f992ea153b5
   languageName: node
   linkType: hard
 
@@ -24053,9 +24053,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"zustand@npm:^5.0.14":
-  version: 5.0.14
-  resolution: "zustand@npm:5.0.14"
+"zustand@npm:^5.0.15":
+  version: 5.0.15
+  resolution: "zustand@npm:5.0.15"
   peerDependencies:
     "@types/react": ">=18.0.0"
     immer: ">=9.0.6"
@@ -24070,6 +24070,6 @@ __metadata:
       optional: true
     use-sync-external-store:
       optional: true
-  checksum: 10c0/89de0c8119f1e0861b2f896a0b4df0d67994a373ecee02628d4e7b97cee1885207f646917d3ede395c3a5083316d48846855cfbc84aced7cd23a6db3238930a8
+  checksum: 10c0/ed3a883950a8c22d98e8c72cef103af18043ce66b45faf218ad20ccc8ee29716aacfc6b0a3e783b2152ea38b7663f3982bb6bf2b13ce3df692b05276446afa04
   languageName: node
   linkType: hard
