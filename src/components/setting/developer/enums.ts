@@ -2,6 +2,7 @@ export enum Route {
   HOME = 'Settings',
   PLUGINS = 'Plugins',
   MUSICFREE = 'MusicFree',
+  DEBUGPANEL = 'DebugPanel',
 }
 
 export enum Icons {
@@ -11,6 +12,7 @@ export enum Icons {
   cache = 'floppy',
   clearcache = 'delete-sweep',
   clearOrphanCache = 'delete-empty',
+  debugPanel = 'code-braces',
 
   plugins = 'puzzle',
   Tanaka = 'emoticon-devil',

@@ -9,6 +9,7 @@ import { Route } from './enums';
 import { Home } from './DeveloperSettings';
 import MFSettings from './plugins/musicfree/View';
 import DefaultScreenOption from '@enums/ScreenOption';
+import DebugPanel from './DebugPanel';
 
 const Stack = createNativeStackNavigator();
 
@@ -44,6 +45,11 @@ export default function DeveloperSettingView() {
       <Stack.Screen
         name={Route.MUSICFREE}
         component={MFSettings}
+        options={{ headerShown: false, ...DefaultScreenOption }}
+      />
+      <Stack.Screen
+        name={Route.DEBUGPANEL}
+        component={DebugPanel}
         options={{ headerShown: false, ...DefaultScreenOption }}
       />
     </Stack.Navigator>

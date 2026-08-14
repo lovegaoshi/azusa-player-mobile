@@ -1,5 +1,6 @@
 import React from 'react';
-import { StyleSheet, ImageBackground } from 'react-native';
+import { StyleSheet } from 'react-native';
+import { ImageBackground } from 'expo-image';
 
 import { i0hdslbHTTPResolve } from '@utils/Utils';
 import { useNoxSetting } from '@stores/useApp';

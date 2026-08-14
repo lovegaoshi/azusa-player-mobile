@@ -13,6 +13,7 @@ module.exports = api => {
         '@babel/preset-typescript',
       ],
       plugins: [
+        ['module:react-native-dotenv'],
         [
           'module-resolver',
           {
@@ -45,6 +46,11 @@ module.exports = api => {
     };
   }
   return {
+    env: {
+      production: {
+        plugins: ['transform-remove-console'],
+      },
+    },
     presets: [
       [
         'babel-preset-expo',
@@ -54,6 +60,7 @@ module.exports = api => {
       ],
     ],
     plugins: [
+      ['module:react-native-dotenv'],
       ['inline-import', { extensions: ['.sql'] }],
       [
         'module-resolver',
