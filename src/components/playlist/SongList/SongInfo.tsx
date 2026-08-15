@@ -112,10 +112,14 @@ const SongInfo = ({
 
   const [, setChecked] = React.useState(false);
 
-  const toggleCheck = throttle(() => {
-    onChecked();
-    setChecked(val => !val);
-  }, 100);
+  const toggleCheck = React.useMemo(
+    () =>
+      throttle(() => {
+        onChecked();
+        setChecked(val => !val);
+      }, 100),
+    [onChecked, setChecked],
+  );
 
   const dragToggleCheck = (min: number, max: number) => {
     if (inRange(getLayoutY(index), min, max)) {
