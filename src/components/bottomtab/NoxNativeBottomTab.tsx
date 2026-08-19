@@ -112,6 +112,9 @@ export default function TabViewExample({
     setIndex(i);
     setTimeout(() => {
       const newRoute = Routes[i].key;
+      if (newRoute !== BottomTabRouteIcons.playlist && isDrawerOpen()) {
+        navigation?.closeDrawer();
+      }
       switch (newRoute) {
         case BottomTabRouteIcons.music:
           return navigationG.navigate({
