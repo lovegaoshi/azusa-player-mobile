@@ -3,9 +3,8 @@ import 'event-target-polyfill';
 import { TransformStream } from 'web-streams-polyfill';
 import 'text-encoding-polyfill';
 import 'react-native-url-polyfill/auto';
-import { Innertube, ClientType, Platform } from 'youtubei.js';
+import { Innertube, ClientType, Platform, Types } from 'youtubei.js';
 import { getSecure as getItem } from '@utils/ChromeStorageAPI';
-import { BuildScriptResult, VMPrimative } from 'youtubei.js/dist/src/types';
 
 import { timeFunction } from '../Utils';
 import MMKV, { GHCacher } from '../fakeMMKV';
@@ -18,8 +17,8 @@ if (typeof global.TransformStream === 'undefined') {
 }
 
 Platform.shim.eval = async (
-  data: BuildScriptResult,
-  env: Record<string, VMPrimative>,
+  data: Types.BuildScriptResult,
+  env: Record<string, Types.VMPrimative>,
 ) => {
   return new Function(data.output)();
 };
