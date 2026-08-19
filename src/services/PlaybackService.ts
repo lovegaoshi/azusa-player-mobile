@@ -239,4 +239,5 @@ export async function PlaybackService() {
   }
   await appStartupInit;
   logger.debug('[APM] default playback service initialized and registered');
+  return new Promise(() => {});
 }
