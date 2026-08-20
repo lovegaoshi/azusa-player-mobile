@@ -242,7 +242,7 @@ const styles = StyleSheet.create({
   },
   offsetModalView: {
     position: 'absolute',
-    top: 30,
+    top: 120,
     right: 10,
     width: '10%',
     backgroundColor: 'rgba(255, 255, 255, 0.8)',
