@@ -43,6 +43,7 @@ const AzusaPlayer = () => {
       <Drawer.Navigator
         initialRouteName={NoxRoutes.PlayerHome}
         drawerContent={PlaylistDrawer}
+        backBehavior="none"
         screenOptions={{
           drawerType: 'slide',
           drawerStyle: {
