@@ -44,7 +44,7 @@ jobs:
           signkey: ${{ secrets.SIGNED_KEY_BASE64 }}
 
       - name: Release APK
-        uses: softprops/action-gh-release@v2
+        uses: softprops/action-gh-release@v3
         with:
           name: 'Release ${{env.COMMIT_TAG}}'
           tag_name: '${{env.COMMIT_TAG}}'
@@ -140,7 +140,7 @@ jobs:
         uses: ./.github/composite-actions/build-ipa
 
       - name: Release IPA
-        uses: softprops/action-gh-release@v2
+        uses: softprops/action-gh-release@v3
         with:
           name: 'Release ${{env.COMMIT_TAG}}'
           tag_name: '${{env.COMMIT_TAG}}'
