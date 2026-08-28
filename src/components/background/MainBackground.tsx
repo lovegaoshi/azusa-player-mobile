@@ -45,6 +45,7 @@ const MainBackground = () => {
           .then(() => {
             player.loop = bkgrd.toA ? false : true;
             player.play();
+            primeVideoPosition();
           });
       }
     });
@@ -73,14 +74,14 @@ const MainBackground = () => {
       if (nextAppState !== 'active') {
         return;
       }
-      if (['loading', 'readyToPlay'].includes(player.status)) {
-        player.play();
-      } else {
+      if (!['loading', 'readyToPlay'].includes(player.status)) {
+        logger.debug(`[Mainbackground] player status is now ${player.status}`);
         prepareBackground();
       }
+      player.play();
       primeVideoPosition();
     }).remove,
-    [prepareBackground, primeVideoPosition],
+    [],
   );
 
   switch (bkgrdImg?.type) {
