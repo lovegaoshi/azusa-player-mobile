@@ -80,7 +80,7 @@ const MainBackground = () => {
       }
       primeVideoPosition();
     }).remove,
-    [],
+    [prepareBackground, primeVideoPosition],
   );
 
   switch (bkgrdImg?.type) {
