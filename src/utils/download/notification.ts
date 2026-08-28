@@ -1,6 +1,6 @@
 import i18n from 'i18next';
 
-import notifee from '@notifee/react-native';
+import notifee from 'react-native-notify-kit';
 
 let channel: string;
 const ID = 'APM-download-notification';

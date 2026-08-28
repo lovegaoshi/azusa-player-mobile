@@ -5017,15 +5017,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@notifee/react-native@npm:^9.1.8":
-  version: 9.1.8
-  resolution: "@notifee/react-native@npm:9.1.8"
-  peerDependencies:
-    react-native: "*"
-  checksum: 10c0/a41adf0975e826fafa166d79854b12d6b405181a0e1adc2a8dd251d9a480482148a8104fedc882e1aee7a48573ff46ac8c999ebf83d42b410f05de387c040ec1
-  languageName: node
-  linkType: hard
-
 "@npmcli/agent@npm:^2.0.0":
   version: 2.2.2
   resolution: "@npmcli/agent@npm:2.2.2"
@@ -9043,7 +9034,6 @@ __metadata:
     "@legendapp/list": "npm:^3.3.9"
     "@lodev09/react-native-true-sheet": "https://github.com/lovegaoshi/react-native-true-sheet.git#commit=08574090ec57cea023eeebcf17e78e0046aa51c4"
     "@material/material-color-utilities": "npm:^0.4.0"
-    "@notifee/react-native": "npm:^9.1.8"
     "@preeternal/react-native-cookie-manager": "npm:^6.4.0"
     "@react-native-assets/slider": "npm:^11.0.12"
     "@react-native-community/cli": "npm:20.2.0"
@@ -9167,6 +9157,7 @@ __metadata:
     react-native-image-colors: "npm:^2.6.0"
     react-native-lyric: "https://lovegaoshi@github.com/lovegaoshi/react-native-lyric.git#commit=242792df6024207fa0b1c0a9f4c62cbd7bd95780"
     react-native-nitro-modules: "npm:^0.37.1"
+    react-native-notify-kit: "npm:^10.6.0"
     react-native-ota-hot-update: "npm:2.2.2"
     react-native-pager-view: "npm:9.0.2"
     react-native-paper: "npm:5.15.3"
@@ -20356,6 +20347,35 @@ __metadata:
     react: "*"
     react-native: "*"
   checksum: 10c0/5178f2ee891cb746b084fdf382b6020e366d8e4a81922a3f1d60a453d34fca6ebb1b00c4c28785c36385bc182ab76a30cba70441c39abbc25d3ad54db612e46e
+  languageName: node
+  linkType: hard
+
+"react-native-notify-kit@npm:^10.6.0":
+  version: 10.6.0
+  resolution: "react-native-notify-kit@npm:10.6.0"
+  dependencies:
+    chalk: "npm:^4.1.0"
+    commander: "npm:^12.0.0"
+    plist: "npm:^3.1.0"
+    xcode: "npm:^3.0.1"
+  peerDependencies:
+    expo: "*"
+    react-native: ">=0.73.0"
+  dependenciesMeta:
+    chalk:
+      optional: true
+    commander:
+      optional: true
+    plist:
+      optional: true
+    xcode:
+      optional: true
+  peerDependenciesMeta:
+    expo:
+      optional: true
+  bin:
+    react-native-notify-kit: cli/bin/react-native-notify-kit
+  checksum: 10c0/1a5014faf7babf743195941fbbdd62080935179993cdcbceac5e5312432933b697da7a2ee614bf9853a73b1f22589e53a3e7f438ea8c16dc76e079c8f14e2bdd
   languageName: node
   linkType: hard
 
