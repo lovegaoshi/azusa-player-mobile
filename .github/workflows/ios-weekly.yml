@@ -38,7 +38,7 @@ jobs:
         uses: ./.github/composite-actions/build-ipa
 
       - name: Release
-        uses: softprops/action-gh-release@v2
+        uses: softprops/action-gh-release@v3
         with:
           tag_name: ${{ env.GIT_BRANCH }}-build-${{ steps.rnsetup.outputs.date }}
           files: ios/build/APM.ipa

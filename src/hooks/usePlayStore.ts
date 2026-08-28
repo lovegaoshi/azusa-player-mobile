@@ -2,7 +2,7 @@ import SpInAppUpdates, {
   IAUUpdateKind,
   StartUpdateOptions,
 } from 'sp-react-native-in-app-updates';
-import notifee from '@notifee/react-native';
+import notifee from 'react-native-notify-kit';
 import i18n from 'i18next';
 
 // eslint-disable-next-line import/no-unresolved

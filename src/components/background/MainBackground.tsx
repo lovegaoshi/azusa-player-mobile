@@ -32,8 +32,7 @@ const MainBackground = () => {
     player.keepScreenOnWhilePlaying = false;
   });
   const { parsedMV: trackMV, primeVideoPosition } = useTrackMV(player);
-
-  React.useEffect(() => {
+  const prepareBackground = () =>
     resolveBackgroundImage(trackMV ?? bkgrdImgRaw).then(bkgrd => {
       setBkgrdImg(bkgrd);
       if (bkgrd?.type === RESOLVE_TYPE.video) {
@@ -49,6 +48,9 @@ const MainBackground = () => {
           });
       }
     });
+
+  React.useEffect(() => {
+    prepareBackground();
   }, [trackMV, bkgrdImgRaw]);
 
   useEventListener(player, 'playToEnd', () => {
@@ -71,10 +73,14 @@ const MainBackground = () => {
       if (nextAppState !== 'active') {
         return;
       }
-      player.play();
+      if (['loading', 'readyToPlay'].includes(player.status)) {
+        player.play();
+      } else {
+        prepareBackground();
+      }
       primeVideoPosition();
     }).remove,
-    [],
+    [prepareBackground, primeVideoPosition],
   );
 
   switch (bkgrdImg?.type) {

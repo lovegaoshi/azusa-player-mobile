@@ -6,6 +6,7 @@ import { useTranslation } from 'react-i18next';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { RectButton } from 'react-native-gesture-handler';
 import { ImageBackground } from 'expo-image';
+import { DrawerNavigationHelpers } from '@react-navigation/drawer/lib/typescript/src/types';
 
 import { PaperText as Text } from '@components/commonui/ScaledText';
 import { useNoxSetting } from '@stores/useApp';
@@ -16,7 +17,6 @@ import { BottomTabRouteIcons as RouteIcons } from '@enums/BottomTab';
 import useNavigation from '@hooks/useNavigation';
 import FlexView from '../commonui/FlexViewNewArch';
 import useDrawerStatus from '@hooks/useDrawerStatus';
-import { DrawerNavigationHelpers } from '@react-navigation/drawer/lib/typescript/src/types';
 
 interface Props {
   view: NoxRoutes;
@@ -79,6 +79,7 @@ export default function PlaylistsView({
   const insets = useSafeAreaInsets();
   const playerStyle = useNoxSetting(state => state.playerStyle);
   const toggleExpand = useNoxSetting(state => state.toggleExpand);
+  const noxNavigation = useNavigation(navigation);
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const _drawerStatus = useDrawerStatus();
 
@@ -86,7 +87,7 @@ export default function PlaylistsView({
     function deepLinkHandler(data: { url: string }) {
       if (data.url === 'trackplayer://notification.click') {
         logger.debug('[Drawer] click from notification; navigate to home');
-        navigation.navigate(NoxRoutes.PlayerHome);
+        noxNavigation.navigate({ route: NoxRoutes.PlayerHome });
         toggleExpand();
       }
     }

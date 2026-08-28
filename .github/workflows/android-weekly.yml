@@ -72,7 +72,7 @@ jobs:
         shell: bash
 
       - name: gh-release
-        uses: softprops/action-gh-release@v2
+        uses: softprops/action-gh-release@v3
         with:
           tag_name: ${{ env.GIT_BRANCH }}-build-${{ env.date }}
           files: ./app-arm64-v8a-release.apk
