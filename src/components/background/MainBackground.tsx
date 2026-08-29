@@ -74,17 +74,11 @@ const MainBackground = () => {
       if (nextAppState !== 'active') {
         return;
       }
-      try {
-        player.play();
-        primeVideoPosition();
-      } catch {
-        logger.warn(
-          `[Mainbackground] restarting mainbackground. status: ${player.status}`,
-        );
-        prepareBackground();
-      }
+      logger.debug(`[Mainbackground] video status: ${player.status}`);
+      player.play();
+      primeVideoPosition();
     }).remove,
-    [prepareBackground, primeVideoPosition, player],
+    [],
   );
 
   switch (bkgrdImg?.type) {
