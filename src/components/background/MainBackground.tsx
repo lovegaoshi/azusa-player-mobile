@@ -74,12 +74,15 @@ const MainBackground = () => {
       if (nextAppState !== 'active') {
         return;
       }
-      if (!['loading', 'readyToPlay'].includes(player.status)) {
-        logger.debug(`[Mainbackground] player status is now ${player.status}`);
+      try {
+        player.play();
+        primeVideoPosition();
+      } catch {
+        logger.warn(
+          `[Mainbackground] restarting mainbackground. status: ${player.status}`,
+        );
         prepareBackground();
       }
-      player.play();
-      primeVideoPosition();
     }).remove,
     [],
   );
