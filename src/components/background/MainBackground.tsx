@@ -69,17 +69,19 @@ const MainBackground = () => {
     }
   });
 
-  React.useEffect(
-    AppState.addEventListener('change', nextAppState => {
+  React.useEffect(() => {
+    return AppState.addEventListener('change', nextAppState => {
       if (nextAppState !== 'active') {
         return;
       }
-      logger.debug(`[Mainbackground] video status: ${player.status}`);
-      player.play();
-      primeVideoPosition();
-    }).remove,
-    [],
-  );
+      try {
+        player.play();
+        primeVideoPosition();
+      } catch {
+        prepareBackground();
+      }
+    }).remove;
+  }, [prepareBackground, primeVideoPosition, player]);
 
   switch (bkgrdImg?.type) {
     case RESOLVE_TYPE.image:
