@@ -45,6 +45,7 @@ const MainBackground = () => {
           .then(() => {
             player.loop = bkgrd.toA ? false : true;
             player.play();
+            primeVideoPosition();
           });
       }
     });
@@ -68,20 +69,19 @@ const MainBackground = () => {
     }
   });
 
-  React.useEffect(
-    AppState.addEventListener('change', nextAppState => {
+  React.useEffect(() => {
+    return AppState.addEventListener('change', nextAppState => {
       if (nextAppState !== 'active') {
         return;
       }
-      if (['loading', 'readyToPlay'].includes(player.status)) {
+      try {
         player.play();
-      } else {
+        primeVideoPosition();
+      } catch {
         prepareBackground();
       }
-      primeVideoPosition();
-    }).remove,
-    [prepareBackground, primeVideoPosition],
-  );
+    }).remove;
+  }, [prepareBackground, primeVideoPosition, player]);
 
   switch (bkgrdImg?.type) {
     case RESOLVE_TYPE.image:
