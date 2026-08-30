@@ -80,7 +80,9 @@ const MainBackground = () => {
         return;
       }
       try {
-        player.play();
+        setTimeout(() => {
+          player.play();
+        }, 1);
         setTimeout(() => {
           if (!player.playing) {
             prepareBackground();
