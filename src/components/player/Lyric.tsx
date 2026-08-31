@@ -25,7 +25,7 @@ import { TPSeek } from '@stores/RNObserverStore';
 import ActivityIndicator from '@components/commonui/ActivityIndicator';
 
 interface LyricViewProps {
-  track: Track;
+  track?: Track;
   artist: string;
   height?: number;
   showUI?: boolean;
@@ -91,7 +91,7 @@ export const LyricView = ({
   );
   const [offsetModalVisible, setOffsetModalVisible] = useState(false);
   const playerStyle = useNoxSetting(state => state.playerStyle);
-  const usedLyric = useLyric(track.song, artist);
+  const usedLyric = useLyric(track?.song, artist);
   const {
     loading,
     hasLrcFromLocal,
