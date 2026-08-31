@@ -1,3 +1,5 @@
+import TrackPlayer from 'react-native-track-player';
+
 import { logger } from '@utils/Logger';
 import { readTxtFile, writeTxtFile } from '@utils/fs';
 import useLyric from './useLyric';
@@ -32,7 +34,12 @@ export default function useLyricRN(currentSong?: NoxMedia.Song, artist = '') {
         lyric: lrcpath,
         source: resolvedLrc.source,
       };
-      usedLyric.setLyricMapping(lyricDeatail);
+      TrackPlayer.getActiveTrack().then(track => {
+        if (track?.song?.id !== song.id) {
+          return;
+        }
+        usedLyric.setLyricMapping(lyricDeatail);
+      });
     }
   };
 
