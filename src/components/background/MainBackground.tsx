@@ -66,6 +66,11 @@ const MainBackground = () => {
       logger.error(
         `[MainBackground] Video error: ${status.error.message} while playing ${bkgrdImg?.identifier}`,
       );
+      if (
+        status.error.message.includes('Player stuck playing without ending')
+      ) {
+        prepareBackground();
+      }
     }
   });
 
@@ -75,7 +80,14 @@ const MainBackground = () => {
         return;
       }
       try {
-        player.play();
+        setTimeout(() => {
+          player.play();
+        }, 1);
+        setTimeout(() => {
+          if (!player.playing) {
+            prepareBackground();
+          }
+        }, 100);
         primeVideoPosition();
       } catch {
         prepareBackground();
