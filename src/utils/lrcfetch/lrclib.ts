@@ -4,7 +4,7 @@ import bfetch from '@utils/BiliFetch';
 import { LrcSource } from '@enums/LyricFetch';
 import { logger } from '../Logger';
 
-const SearchSongAPI = 'https://lrclib.net/api/search?track_name=${kw}';
+const SearchSongAPI = 'https://lrclib.net/api/search?q=${kw}';
 const getLrcAPI = 'https://lrclib.net/api/get/${kw}';
 
 const getLrcOptions = async (
