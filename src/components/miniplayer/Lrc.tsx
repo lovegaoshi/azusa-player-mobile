@@ -8,6 +8,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useTrackStore } from '@hooks/useActiveTrack';
 import { LyricView } from '../player/Lyric';
 import { useNoxSetting } from '@stores/useApp';
+import useLyric from '@hooks/useRNTPLyric';
 
 interface Props extends NoxComponent.OpacityProps {
   visible: boolean;
@@ -25,6 +26,7 @@ export default function MiniplayerLrc({
   const track = useTrackStore(s => s.track);
   const dimension = Dimensions.get('window');
   const playerSetting = useNoxSetting(state => state.playerSetting);
+  const usedLyric = useLyric({ track, artist: track?.artist ?? '' });
 
   const animatedStyle = useAnimatedStyle(() => {
     return {
@@ -50,9 +52,14 @@ export default function MiniplayerLrc({
     }, [visible, playerSetting.screenAlwaysWake]),
   );
 
+  if (!visible || !track) {
+    return <></>;
+  }
+
   return (
     <Animated.View style={[animatedStyle, lrcStyle, style]}>
       <LyricView
+        usedLyric={usedLyric}
         track={track}
         artist="n/a"
         onPress={onPress}
