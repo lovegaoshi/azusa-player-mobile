@@ -14,6 +14,7 @@ import { activateKeepAwakeAsync, deactivateKeepAwake } from 'expo-keep-awake';
 import { useNoxSetting } from '@stores/useApp';
 import { LyricView } from '../Lyric';
 import { songResolveArtwork } from '@utils/mediafetch/resolveURL';
+import useLyric from '@hooks/useRNTPLyric';
 
 interface Props {
   track?: Track;
@@ -39,6 +40,7 @@ const AlbumArt: React.FC<Props> = ({
     width: windowWidth ?? '100%',
     height: windowHeight ?? '100%',
   };
+  const usedLyric = useLyric({ track, artist: track?.artist ?? '' });
 
   const onImagePress = () => {
     console.log('TrackInfo: Image Clicked - ');
@@ -128,6 +130,7 @@ const AlbumArt: React.FC<Props> = ({
       >
         {track && (
           <LyricView
+            usedLyric={usedLyric}
             track={track}
             artist="n/a"
             onPress={onLyricPress}

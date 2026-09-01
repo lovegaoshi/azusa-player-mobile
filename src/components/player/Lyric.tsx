@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import {
   Modal,
   View,
@@ -34,6 +34,7 @@ interface LyricViewProps {
   visible?: boolean;
   style?: ViewStyle;
   fadeEffect?: boolean;
+  usedLyric: ReturnType<typeof useLyric>;
 }
 
 interface FadingMaskedViewProps extends React.PropsWithChildren {
@@ -82,6 +83,7 @@ export const LyricView = ({
   visible = true,
   style = styles.container,
   fadeEffect = true,
+  usedLyric,
 }: LyricViewProps) => {
   const isLandscape = useIsLandscape();
   const playerSetting = useNoxSetting(state => state.playerSetting);
@@ -91,33 +93,10 @@ export const LyricView = ({
   );
   const [offsetModalVisible, setOffsetModalVisible] = useState(false);
   const playerStyle = useNoxSetting(state => state.playerStyle);
-  const usedLyric = useLyric(track?.song, artist);
-  const {
-    loading,
-    hasLrcFromLocal,
-    searchAndSetCurrentLyric,
-    addSubtractOffset,
-    initTrackLrcLoad,
-    lrc,
-    lrcOptions,
-    currentTimeOffset,
-  } = usedLyric;
+  const { loading, addSubtractOffset, lrc, currentTimeOffset } = usedLyric;
   const spotifyLyricStyle = playerSetting.spotifyLyricStyle
     ? SpotifyLyricStyle
     : {};
-
-  useEffect(() => {
-    if (track === undefined || track.title === '') return;
-    initTrackLrcLoad();
-  }, [track]);
-
-  useEffect(() => {
-    const init = async () => {
-      if (await hasLrcFromLocal(track?.song)) return;
-      searchAndSetCurrentLyric({});
-    };
-    init();
-  }, [lrcOptions]);
 
   if (!visible) return null;
 
