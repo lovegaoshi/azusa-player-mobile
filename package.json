@@ -40,6 +40,8 @@
     }
   },
   "dependencies": {
+    "@connectrpc/connect": "^2.1.2",
+    "@connectrpc/connect-web": "^2.1.2",
     "@expo/ui": "~57.0.14",
     "@legendapp/list": "^3.3.9",
     "@lodev09/react-native-true-sheet": "https://github.com/lovegaoshi/react-native-true-sheet.git#commit=08574090ec57cea023eeebcf17e78e0046aa51c4",
@@ -161,6 +163,9 @@
     "@babel/preset-env": "^7.29.7",
     "@babel/preset-typescript": "^7.29.7",
     "@babel/runtime": "^7.29.7",
+    "@bufbuild/buf": "^1.72.0",
+    "@bufbuild/protoc-gen-es": "^2.14.1",
+    "@connectrpc/protoc-gen-connect-es": "^1.7.0",
     "@material/material-color-utilities": "^0.4.0",
     "@react-native-community/eslint-config": "^3.2.0",
     "@react-native/jest-preset": "^0.86.3",
