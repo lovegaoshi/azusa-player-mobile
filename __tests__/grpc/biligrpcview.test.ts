@@ -1,4 +1,4 @@
-import { fetchBiliView } from '../../src/utils/Bilibili/biliGrpc';
+import { fetchBiliView } from '../../src/utils/mediafetch/biliGRPC';
 
 const BVID = 'BV1BDk2YCEHF';
 
