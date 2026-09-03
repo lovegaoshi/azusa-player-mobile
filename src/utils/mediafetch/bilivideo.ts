@@ -7,7 +7,6 @@ import { logger } from '../Logger';
 import bfetch from '@utils/BiliFetch';
 import { Source } from '@enums/MediaFetch';
 import { wbiQuery } from '@stores/wbi';
-import { getCookie } from './bilisearch';
 
 export enum FieldEnum {
   AudioUrl = 'AudioUrl',
@@ -28,11 +27,7 @@ const fetchBVIDRaw = async (bvid: string): Promise<NoxMedia.Song[]> => {
     `calling fetchBVID of ${bvid} of ${URL_VIDEO_INFO.replace('{bvid}', bvid)}`,
   );
   try {
-    const res = await bfetch(URL_VIDEO_INFO.replace('{bvid}', bvid), {
-      headers: {
-        cookie: await getCookie(true),
-      },
-    });
+    const res = await bfetch(URL_VIDEO_INFO.replace('{bvid}', bvid));
     const json = await res.json();
     const { data } = json;
     return data.pages.map((page: any, index: number) => {
