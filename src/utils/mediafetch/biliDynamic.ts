@@ -5,6 +5,8 @@ import { BiliMusicTid, Source } from '@enums/MediaFetch';
 import { biliApiLimiter } from './throttle';
 import { BiliRanking } from './biliRanking';
 
+// DEPRECATED: this api doesnt return anything anymore
+
 const API =
   'https://api.bilibili.com/x/web-interface/dynamic/region?rid={rid}&ps=50&pn={pn}';
 
