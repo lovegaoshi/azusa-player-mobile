@@ -7,7 +7,7 @@ import { logger } from '../Logger';
 import bfetch from '@utils/BiliFetch';
 import { Source } from '@enums/MediaFetch';
 import { wbiQuery } from '@stores/wbi';
-import { getCookie } from './bilisearch';
+import { fetchBiliView } from './biliGRPCView';
 
 export enum FieldEnum {
   AudioUrl = 'AudioUrl',
@@ -16,45 +16,36 @@ export enum FieldEnum {
   AudioInfo = 'AudioInfo',
 }
 
-const URL_VIDEO_INFO =
-  'https://api.bilibili.com/x/web-interface/view?bvid={bvid}';
 const URL_PLAY_URL =
   'https://api.bilibili.com/x/player/wbi/playurl?cid={cid}&bvid={bvid}&qn=64&fnval=16&try_look=1&voice_balance=1';
 const URL_PLAY_URL_IOS =
   'https://api.bilibili.com/x/player/wbi/playurl?cid={cid}&bvid={bvid}&qn=6&fnval=16&platform=html5&voice_balance=1';
 
 const fetchBVIDRaw = async (bvid: string): Promise<NoxMedia.Song[]> => {
-  logger.info(
-    `calling fetchBVID of ${bvid} of ${URL_VIDEO_INFO.replace('{bvid}', bvid)}`,
-  );
+  logger.info(`calling fetchBVID of ${bvid}`);
   try {
-    const res = await bfetch(URL_VIDEO_INFO.replace('{bvid}', bvid), {
-      headers: {
-        cookie: await getCookie(true),
-      },
-    });
-    const json = await res.json();
-    const { data } = json;
-    return data.pages.map((page: any, index: number) => {
-      const filename = data.pages.length === 1 ? data.title : page.part;
+    const data = await fetchBiliView({ bvid });
+    return data.pages.map((page, index: number) => {
+      const filename =
+        data.pages.length === 1 ? data.arc?.title : page.page!.part;
       return SongTS({
-        cid: page.cid,
+        cid: Number(page.page?.cid),
         bvid,
-        name: filename,
+        name: filename!,
         nameRaw: filename,
-        singer: data.owner.name,
-        singerId: data.owner.mid,
-        cover: data.pic,
+        singer: data.arc?.author?.name ?? 'N/A',
+        singerId: Number(data.arc?.author?.mid) ?? 'N/A',
+        cover: data.arc?.pic ?? '',
         lyric: '',
         page: index + 1,
-        duration: page.duration,
-        album: data.title,
+        duration: Number(page.page?.duration),
+        album: data.arc?.title ?? '',
         source: Source.bilivideo,
       });
     });
   } catch (error: any) {
     logger.error(error.message);
-    logger.warn(`Some issue happened when fetching ${bvid}`);
+    logger.warn(`[bilivideo] Some issue happened when fetching bvid ${bvid}`);
     return [];
   }
 };
@@ -70,9 +61,8 @@ export const fetchBVID = (
 
 export const BVIDtoAID = (bvid: string): Promise<string> =>
   biliApiLimiter.schedule(async () => {
-    const res = await bfetch(URL_VIDEO_INFO.replace('{bvid}', bvid));
-    const json = await res.json();
-    return String(json.data.aid);
+    const res = await fetchBiliView({ bvid });
+    return String(res.arc?.aid);
   });
 
 export const fetchBiliBVIDs = async (
