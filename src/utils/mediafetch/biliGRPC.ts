@@ -2,17 +2,12 @@ import {
   create,
   toBinary,
   fromBinary,
-  type MessageInitShape,
   type DescMessage,
 } from '@bufbuild/protobuf';
-import { createClient, type Transport } from '@connectrpc/connect';
-import {
-  View,
-  ViewReqSchema,
-  ViewReplySchema,
-  type ViewReply,
-} from '../../grpc/bilibili/app/view/v1/view_pb';
+import { type Transport } from '@connectrpc/connect';
 import { MetadataSchema } from '../../grpc/bilibili/metadata/metadata_pb';
+
+const Buffer = require('buffer').Buffer;
 
 export const BILI_GRPC_URL = 'https://app.bilibili.com';
 export const BILI_GRPC_NATIVE_URL = 'https://grpc.biliapi.net';
@@ -142,29 +137,4 @@ export const createBiliGrpcTransport = (baseUrl = BILI_GRPC_URL): Transport => {
       throw new Error('Streaming not implemented');
     },
   };
-};
-
-/**
- * Fetch video view details using bilibili.app.view.v1.View.
- */
-export const fetchBiliView = async (
-  req: MessageInitShape<typeof ViewReqSchema> | string,
-  baseUrl = BILI_GRPC_URL,
-): Promise<ViewReply> => {
-  const reqObj: MessageInitShape<typeof ViewReqSchema> =
-    typeof req === 'string' ? { bvid: req } : req;
-  return sendBiliGrpcRequest(
-    ViewReqSchema,
-    ViewReplySchema,
-    '/bilibili.app.view.v1.View/View',
-    reqObj,
-    baseUrl,
-  );
-};
-
-/**
- * Create a typed Bilibili View service client via Connect-RPC.
- */
-export const createBiliViewClient = (baseUrl = BILI_GRPC_URL) => {
-  return createClient(View, createBiliGrpcTransport(baseUrl));
 };
