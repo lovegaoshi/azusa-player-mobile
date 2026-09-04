@@ -2,12 +2,10 @@
 
 import { biliApiLimiter } from './throttle';
 import { biliShazamOnSonglist } from './bilishazam';
-import SongTS from '@objects/Song';
 import { logger } from '../Logger';
 import bfetch from '@utils/BiliFetch';
-import { Source } from '@enums/MediaFetch';
 import { wbiQuery } from '@stores/wbi';
-import { fetchBiliView } from './biliGRPCView';
+import { fetchBVIDRaw } from '@utils/mediafetch/biliVideoInfo';
 
 export enum FieldEnum {
   AudioUrl = 'AudioUrl',
@@ -21,35 +19,6 @@ const URL_PLAY_URL =
 const URL_PLAY_URL_IOS =
   'https://api.bilibili.com/x/player/wbi/playurl?cid={cid}&bvid={bvid}&qn=6&fnval=16&platform=html5&voice_balance=1';
 
-const fetchBVIDRaw = async (bvid: string): Promise<NoxMedia.Song[]> => {
-  logger.info(`calling fetchBVID of ${bvid}`);
-  try {
-    const data = await fetchBiliView({ bvid });
-    return data.pages.map((page, index: number) => {
-      const filename =
-        data.pages.length === 1 ? data.arc?.title : page.page!.part;
-      return SongTS({
-        cid: Number(page.page?.cid),
-        bvid,
-        name: filename!,
-        nameRaw: filename,
-        singer: data.arc?.author?.name ?? 'N/A',
-        singerId: Number(data.arc?.author?.mid),
-        cover: data.arc?.pic ?? '',
-        lyric: '',
-        page: index + 1,
-        duration: Number(page.page?.duration),
-        album: data.arc?.title ?? '',
-        source: Source.bilivideo,
-      });
-    });
-  } catch (error: any) {
-    logger.error(error.message);
-    logger.warn(`[bilivideo] Some issue happened when fetching bvid ${bvid}`);
-    return [];
-  }
-};
-
 export const fetchBVID = (
   bvid: string,
   progressEmitter: () => void = () => undefined,
@@ -57,12 +26,6 @@ export const fetchBVID = (
   biliApiLimiter.schedule(() => {
     progressEmitter();
     return fetchBVIDRaw(bvid);
-  });
-
-export const BVIDtoAID = (bvid: string): Promise<string> =>
-  biliApiLimiter.schedule(async () => {
-    const res = await fetchBiliView({ bvid });
-    return String(res.arc?.aid);
   });
 
 export const fetchBiliBVIDs = async (
