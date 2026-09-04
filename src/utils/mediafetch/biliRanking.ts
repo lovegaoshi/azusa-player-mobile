@@ -34,7 +34,6 @@ export const fetchRanking = async (rid = '3', results: BiliRanking = {}) => {
       bfetch(API.replace('{rid}', rid)),
     );
     const json = await res.json();
-    console.log(API.replace('{rid}', rid), json);
     json.data.list.forEach((v: any) => {
       if (!BiliMusicTid.includes(v.tid)) return;
       if (results[v.tid]) {
