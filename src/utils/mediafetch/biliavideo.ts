@@ -1,43 +1,37 @@
 import { biliApiLimiter } from './throttle';
 
 import { logger } from '../Logger';
-import bfetch from '@utils/BiliFetch';
 import { biliShazamOnSonglist } from './bilishazam';
 import { Source } from '@enums/MediaFetch';
 import SongTS from '@objects/Song';
-
-const URL_VIDEO_INFO =
-  'https://api.bilibili.com/x/web-interface/view?aid={aid}';
+import { fetchBiliView } from './biliGRPCView';
 
 const fetchAVIDRaw = async (aid: string): Promise<NoxMedia.Song[]> => {
-  logger.info(
-    `calling fetchAVID of ${aid} of ${URL_VIDEO_INFO.replace('{aid}', aid)}`,
-  );
+  logger.info(`calling fetch bili aID of ${aid}`);
   try {
-    const res = await bfetch(URL_VIDEO_INFO.replace('{aid}', aid));
-    const json = await res.json();
-    const { data } = json;
-    return data.pages.map((page: any, index: number) => {
-      const filename = data.pages.length === 1 ? data.title : page.part;
+    const data = await fetchBiliView({ aid: BigInt(aid) });
+    return data.pages.map((page, index: number) => {
+      const filename =
+        data.pages.length === 1 ? data.arc?.title : page.page!.part;
       return SongTS({
-        cid: page.cid,
+        cid: Number(page.page?.cid),
         bvid: data.bvid,
-        name: filename,
+        name: filename!,
         nameRaw: filename,
-        singer: data.owner.name,
-        singerId: data.owner.mid,
-        cover: data.pic,
+        singer: data.arc?.author?.name ?? 'N/A',
+        singerId: Number(data.arc?.author?.mid),
+        cover: data.arc?.pic ?? '',
         lyric: '',
         page: index + 1,
-        duration: page.duration,
-        album: data.title,
+        duration: Number(page.page?.duration),
+        album: data.arc?.title ?? '',
         source: Source.bilivideo,
       });
     });
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (error: any) {
     logger.error(error.message);
-    logger.warn(`Some issue happened when fetching ${aid}`);
+    logger.warn(`[bilivideo] Some issue happened when fetching aid ${aid}`);
     return [];
   }
 };
