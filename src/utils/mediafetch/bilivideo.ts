@@ -34,7 +34,7 @@ const fetchBVIDRaw = async (bvid: string): Promise<NoxMedia.Song[]> => {
         name: filename!,
         nameRaw: filename,
         singer: data.arc?.author?.name ?? 'N/A',
-        singerId: Number(data.arc?.author?.mid) ?? 'N/A',
+        singerId: Number(data.arc?.author?.mid),
         cover: data.arc?.pic ?? '',
         lyric: '',
         page: index + 1,
