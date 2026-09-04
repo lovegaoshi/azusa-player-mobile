@@ -4,7 +4,7 @@ import bfetch from '@utils/BiliFetch';
 import { Source, BiliMusicTid } from '@enums/MediaFetch';
 import { biliApiLimiter } from './throttle';
 
-// HACK: this API is deprecated - no new data is being pushed est Apr.2025
+// this is snipped from https://www.bilibili.com/v/popular/rank/music
 const API = 'https://api.bilibili.com/x/web-interface/ranking/v2?rid={rid}';
 
 const rankingToSong = (data: any) =>
@@ -34,6 +34,7 @@ export const fetchRanking = async (rid = '3', results: BiliRanking = {}) => {
       bfetch(API.replace('{rid}', rid)),
     );
     const json = await res.json();
+    console.log(API.replace('{rid}', rid), json);
     json.data.list.forEach((v: any) => {
       if (!BiliMusicTid.includes(v.tid)) return;
       if (results[v.tid]) {
@@ -49,7 +50,7 @@ export const fetchRanking = async (rid = '3', results: BiliRanking = {}) => {
   return results;
 };
 
-export default async (rids = [3, 119]) => {
+export default async (rids = [1003]) => {
   const res: BiliRanking = {};
   for (const rid of rids) {
     await fetchRanking(String(rid), res);
