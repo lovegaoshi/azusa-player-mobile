@@ -109,13 +109,15 @@ const regexFetch = async ({
 const resolveURL = () => undefined;
 
 export default {
-  regexSearchMatch: /space.bilibili\.com\/(\d+)(\/search)?\/video/,
+  regexSearchMatch: /space\.bilibili\.com\/(\d+)(\/search)?\/video/,
   // https://space.bilibili.com/1112031857/upload/video
-  regexSearchMatch2: /space.bilibili\.com\/(\d+)(\/upload)?\/video/,
+  regexSearchMatch2: /space\.bilibili\.com\/(\d+)(\/upload)?\/video/,
   // https://space.bilibili.com/2097484/search?keyword=f
-  regexSearchMatch3: /space.bilibili\.com\/(\d+)\/search/,
+  regexSearchMatch3: /space\.bilibili\.com\/(\d+)\/search/,
   // https://space.bilibili.com/2097484/search?keyword=f
   regexSearchMatch4: /bilibili\.com\/space\/(\d+)/,
+  // https://space.bilibili.com/2097484
+  regexSearchMatch5: /space\.bilibili\.com\/(\d+)$/,
   regexFetch,
   regexResolveURLMatch: /^null-/,
   resolveURL,
