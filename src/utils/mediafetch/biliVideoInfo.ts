@@ -8,21 +8,22 @@ import { ViewReply } from '../../grpc/bilibili/app/view/v1/view_pb';
 // make chrome ext import the old implementation
 
 const bvToSong = (data: ViewReply): NoxMedia.Song[] => {
-  return data.pages.map((page, index: number) => {
+  const actualData = data.activitySeason ?? data;
+  return actualData.pages.map((page, index: number) => {
     const filename =
-      data.pages.length === 1 ? data.arc?.title : page.page!.part;
+      actualData.pages.length === 1 ? actualData.arc?.title : page.page!.part;
     return SongTS({
       cid: Number(page.page?.cid),
-      bvid: data.bvid,
+      bvid: actualData.bvid,
       name: filename!,
       nameRaw: filename,
-      singer: data.arc?.author?.name ?? 'N/A',
-      singerId: Number(data.arc?.author?.mid),
-      cover: data.arc?.pic ?? '',
+      singer: actualData.arc?.author?.name ?? 'N/A',
+      singerId: Number(actualData.arc?.author?.mid),
+      cover: actualData.arc?.pic ?? '',
       lyric: '',
       page: index + 1,
       duration: Number(page.page?.duration),
-      album: data.arc?.title ?? '',
+      album: actualData.arc?.title ?? '',
       source: Source.bilivideo,
     });
   });
