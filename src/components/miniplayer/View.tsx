@@ -25,7 +25,9 @@ import { useMiniplayerHeight } from '@contexts/MiniPlayerHeightContext';
 
 const SnapToRatio = 0.15;
 
-export default function MiniplayerView() {
+export default function MiniplayerView({
+  navigation,
+}: NoxComponent.NavigationProps2) {
   const [lrcVisible, setLrcVisible] = React.useState(false);
   const insets = useSafeAreaInsets();
   const dim = Dimensions.get('window');
@@ -168,7 +170,11 @@ export default function MiniplayerView() {
     >
       <Animated.View style={[{ width: '100%' }, animatedStyle]}>
         <View style={styles.rowView}>
-          <PlayerTopInfo opacity={opacityVisible} collapse={collapse} />
+          <PlayerTopInfo
+            opacity={opacityVisible}
+            collapse={collapse}
+            navigation={navigation}
+          />
           <TrackAlbumArt
             miniplayerHeight={miniplayerHeight}
             opacity={artworkOpacity}

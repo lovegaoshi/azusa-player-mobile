@@ -73,8 +73,9 @@ export const createStyle = (
       customStyle.progressThumbImage) as any,
     biliGarbCard: customStyle.biliGarbCard as any,
     thumbupSVGA: customStyle.thumbupSVGA as any,
-    thumbupZIndex: (Number.parseInt(String(customStyle.thumbupZIndex)) |
-      0) as any,
+    thumbupZIndex: Math.trunc(
+      Number.parseInt(String(customStyle.thumbupZIndex)),
+    ) as any,
   });
 };
 

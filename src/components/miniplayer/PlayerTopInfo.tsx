@@ -9,11 +9,16 @@ import RandomGIFButton from '../buttons/RandomGIF';
 import useNavigation from '@hooks/useNavigation';
 import { NoxRoutes } from '@enums/Routes';
 
-interface Props extends NoxComponent.OpacityProps {
+interface Props
+  extends NoxComponent.OpacityProps, NoxComponent.NavigationProps2 {
   collapse: () => void;
 }
 
-export default function MiniplayerTopInfo({ opacity, collapse }: Props) {
+export default function MiniplayerTopInfo({
+  opacity,
+  collapse,
+  navigation: drawerNav,
+}: Props) {
   const insets = useSafeAreaInsets();
   const playerStyle = useNoxSetting(state => state.playerStyle);
   const currentPlayingId = useNoxSetting(state => state.currentPlayingId);
@@ -29,6 +34,7 @@ export default function MiniplayerTopInfo({ opacity, collapse }: Props) {
       route: NoxRoutes.PlayerHome,
       params: { screen: NoxRoutes.Playlist, pop: true },
     });
+    drawerNav?.closeDrawer();
     scroll();
     collapse();
   };

@@ -1,40 +1,6 @@
 import { biliApiLimiter } from './throttle';
-
-import { logger } from '../Logger';
 import { biliShazamOnSonglist } from './bilishazam';
-import { Source } from '@enums/MediaFetch';
-import SongTS from '@objects/Song';
-import { fetchBiliView } from './biliGRPCView';
-
-const fetchAVIDRaw = async (aid: string): Promise<NoxMedia.Song[]> => {
-  logger.info(`calling fetch bili aID of ${aid}`);
-  try {
-    const data = await fetchBiliView({ aid: BigInt(aid) });
-    return data.pages.map((page, index: number) => {
-      const filename =
-        data.pages.length === 1 ? data.arc?.title : page.page!.part;
-      return SongTS({
-        cid: Number(page.page?.cid),
-        bvid: data.bvid,
-        name: filename!,
-        nameRaw: filename,
-        singer: data.arc?.author?.name ?? 'N/A',
-        singerId: Number(data.arc?.author?.mid),
-        cover: data.arc?.pic ?? '',
-        lyric: '',
-        page: index + 1,
-        duration: Number(page.page?.duration),
-        album: data.arc?.title ?? '',
-        source: Source.bilivideo,
-      });
-    });
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  } catch (error: any) {
-    logger.error(error.message);
-    logger.warn(`[bilivideo] Some issue happened when fetching aid ${aid}`);
-    return [];
-  }
-};
+import { fetchAVIDRaw } from '@utils/mediafetch/biliVideoInfo';
 
 export const fetchAVID = (
   avid: string,
