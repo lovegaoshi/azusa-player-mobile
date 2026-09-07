@@ -29,7 +29,7 @@ const API = 'https://api.bilibili.com/x/centralization/interface/new/music';
 
 const rankingToSong = (data: any) =>
   SongTS({
-    cid: data.cid,
+    cid: Number.parseInt(data.cid) === 0 ? `null-${data.bvid}` : data.cid,
     bvid: data.bvid,
     name: data.music_title,
     nameRaw: data.music_title,
