@@ -22,7 +22,26 @@ function getLocale() {
 
   return currentLocale;
 }
-const deviceLanguage = getLocale();
+
+/**
+ * Normalize device locale to internal resource keys.
+ *
+ * Android ROMs and iOS may return Chinese locales in different formats,
+ * e.g. zh_CN, zh-CN, zh-Hans-CN, zh_CN_#Hans. Without normalization the
+ * exact-match lookup in `resources` fails and i18next falls back to English.
+ *
+ * @see resources for the list of supported internal language keys.
+ */
+export function normalizeLocale(locale?: string): string {
+  if (!locale) return 'en';
+  const normalized = locale.toLowerCase();
+  if (normalized.startsWith('zh')) {
+    return 'zh_CN_#Hans';
+  }
+  return 'en';
+}
+
+const deviceLanguage = normalizeLocale(getLocale());
 /**
   Platform.OS === 'ios'
     ? NativeModules.SettingsManager.settings.AppleLocale ||

@@ -51,7 +51,12 @@ export const initializeStores = async ({
   ) {
     setCurrentPlayingList(dataSaverPlaylist(results.currentPlayingList));
   }
-  i18next.changeLanguage(results.language);
+  // Only override i18n language when the user has explicitly chosen one.
+  // For fresh installs (language undefined) keep the normalized system locale
+  // set during i18n module initialization.
+  if (results.language) {
+    i18next.changeLanguage(results.language);
+  }
   return results;
 };
 
