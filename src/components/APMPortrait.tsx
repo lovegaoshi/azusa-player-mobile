@@ -17,6 +17,7 @@ import '../localization/i18n';
 import { ScreenIcons } from '@enums/Icons';
 import NoxBottomTab from './bottomtab/View';
 import NoxMiniPlayer from './miniplayer/View';
+import { useNoxSetting } from '@stores/useApp';
 
 const HomeIcon = () => <IconButton icon={ScreenIcons.HomeScreen} />;
 const ExploreIcon = () => <IconButton icon={ScreenIcons.ExploreScreen} />;
@@ -25,6 +26,7 @@ const SettingIcon = () => <IconButton icon={ScreenIcons.SettingScreen} />;
 const AzusaPlayer = () => {
   const { t } = useTranslation();
   const Drawer = createDrawerNavigator();
+  const gestureMode = useNoxSetting(state => state.gestureMode);
   const [navigation, setNavigation] =
     React.useState<DrawerNavigationProp<ParamListBase>>();
 
@@ -43,7 +45,7 @@ const AzusaPlayer = () => {
       <Drawer.Navigator
         initialRouteName={NoxRoutes.PlayerHome}
         drawerContent={PlaylistDrawer}
-        backBehavior="none"
+        backBehavior={gestureMode ? 'none' : undefined}
         screenOptions={{
           drawerType: 'slide',
           drawerStyle: {

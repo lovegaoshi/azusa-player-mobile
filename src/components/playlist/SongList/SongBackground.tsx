@@ -18,7 +18,7 @@ const SongBackground = ({ song, children }: Props) => {
   return current ? (
     <ImageBackground
       source={{ uri: i0hdslbHTTPResolve(song.cover) }}
-      resizeMode="cover"
+      contentFit="cover"
       style={stylesLocal.songInfoBackgroundBanner}
       imageStyle={stylesLocal.songInfoBackgroundImg}
     >

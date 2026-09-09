@@ -212,8 +212,7 @@ const SongInfo = ({
 
 const styles = StyleSheet.create({
   container: {
-    paddingTop: 5,
-    paddingBottom: 5,
+    paddingVertical: 5,
     borderRadius: 5,
     paddingLeft: 10,
   },

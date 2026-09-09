@@ -49,7 +49,7 @@ export const fetchRanking = async (rid = '3', results: BiliRanking = {}) => {
   return results;
 };
 
-export default async (rids = [1003]) => {
+export default async (rids = [1003, 1007]) => {
   const res: BiliRanking = {};
   for (const rid of rids) {
     await fetchRanking(String(rid), res);
