@@ -51,6 +51,7 @@ export default function MiniplayerTrackInfo({
     styles.artistText,
     {
       color: playerStyle.colors.onSurfaceVariant,
+      paddingHorizontal: 10,
     },
   ];
 
