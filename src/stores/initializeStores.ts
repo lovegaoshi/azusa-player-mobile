@@ -50,6 +50,8 @@ export const initializeStores = async ({
     results.storedPlayerSetting.dataSaver
   ) {
     setCurrentPlayingList(dataSaverPlaylist(results.currentPlayingList));
+  } else {
+    setCurrentPlayingList(results.currentPlayingList);
   }
   i18next.changeLanguage(results.language);
   return results;
