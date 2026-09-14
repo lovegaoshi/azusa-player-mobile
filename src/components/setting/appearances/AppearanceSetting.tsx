@@ -1,21 +1,28 @@
 import * as React from 'react';
 import { ScrollView } from 'react-native';
 
+import { SelectDialogChildren } from '../SelectDialogWrapper';
 import { RenderSetting } from '../helpers/RenderSetting';
 import SettingListItem from '../helpers/SettingListItem';
 import SelectDarkModeButton from './SelectDarkModeButton';
 import NoWeebButton from './NoWeebButton';
 import SelectPhotoButton from './SelectPhotoButton';
 import { isAndroid } from '@utils/RNUtils';
+import CropArtworkButton from './CropArtworkButton';
 
 export enum VIEW {
   HOME = 'AppearanceHome',
   SKIN = 'SkinSetting',
 }
 
+interface Props
+  extends NoxComponent.StackNavigationProps, SelectDialogChildren<any> {}
+
 export default function AppearanceSettings({
   navigation,
-}: NoxComponent.StackNavigationProps) {
+  setCurrentSelectOption,
+  setSelectVisible,
+}: Props) {
   return (
     <ScrollView>
       <SettingListItem
@@ -77,6 +84,10 @@ export default function AppearanceSettings({
           }}
         />
       )}
+      <CropArtworkButton
+        setCurrentSelectOption={setCurrentSelectOption}
+        setSelectVisible={setSelectVisible}
+      />
     </ScrollView>
   );
 }

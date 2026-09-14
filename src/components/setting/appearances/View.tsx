@@ -2,6 +2,7 @@ import * as React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { StyleSheet, View } from 'react-native';
 
+import SelectDialogWrapper from '../SelectDialogWrapper';
 import SkinSettings from './SkinSettings';
 import { useNoxSetting } from '@stores/useApp';
 import DefaultScreenOption from '@enums/ScreenOption';
@@ -19,7 +20,9 @@ const HomeWrapper = ({ navigation }: NoxComponent.StackNavigationProps) => {
         { backgroundColor: playerStyle.customColors.maskedBackgroundColor },
       ]}
     >
-      <Home navigation={navigation} />
+      <SelectDialogWrapper
+        Children={p => <Home navigation={navigation} {...p} />}
+      />
     </View>
   );
 };

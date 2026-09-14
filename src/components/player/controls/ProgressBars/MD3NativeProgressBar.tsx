@@ -15,7 +15,7 @@ import appStore from '@stores/appStore';
 export default function SimpleProgressBar({
   style,
   enabled = true,
-  progressInterval = 200,
+  progressInterval = 50,
   onValueChange,
 }: ProgressBarProps) {
   const { position, duration } = useProgress(progressInterval, false);

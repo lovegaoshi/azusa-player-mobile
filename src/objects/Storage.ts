@@ -63,6 +63,7 @@ const _DefaultSetting: NoxStorage.PlayerSettingDict = {
   initYtbiOnStart: false,
   resumeOnPause: false,
   crossfadeRetry: false,
+  cropArtwork: 1,
 
   appID: AppID,
   language: undefined,

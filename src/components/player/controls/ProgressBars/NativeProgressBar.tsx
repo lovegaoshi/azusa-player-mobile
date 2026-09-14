@@ -17,7 +17,7 @@ export const SimpleProgressBar = ({
   trackHeight = 10,
   style,
   enabled = true,
-  progressInterval = 200,
+  progressInterval = 50,
   onValueChange,
   progressThumbImageRight,
   progressThumbImageLeft,
