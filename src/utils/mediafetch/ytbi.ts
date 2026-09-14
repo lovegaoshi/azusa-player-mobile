@@ -1,6 +1,5 @@
 // === START ===  Making Youtube.js work
 import 'event-target-polyfill';
-import { TransformStream } from 'web-streams-polyfill';
 import 'text-encoding-polyfill';
 import 'react-native-url-polyfill/auto';
 import { Innertube, ClientType, Platform, Types } from 'youtubei.js';
@@ -10,11 +9,6 @@ import { timeFunction } from '../Utils';
 import MMKV, { GHCacher } from '../fakeMMKV';
 import { StorageKeys } from '@enums/Storage';
 import logger from '../Logger';
-
-if (typeof global.TransformStream === 'undefined') {
-  // @ts-expect-error
-  global.TransformStream = TransformStream;
-}
 
 Platform.shim.eval = async (
   data: Types.BuildScriptResult,
