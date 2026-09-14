@@ -20,7 +20,7 @@ const bvToSongs = (data: any): NoxMedia.Song[] => {
       lyric: '',
       page: index + 1,
       duration: page.duration,
-      album: data.title,
+      album: data.View.title,
       source: Source.bilivideo,
     });
   });
