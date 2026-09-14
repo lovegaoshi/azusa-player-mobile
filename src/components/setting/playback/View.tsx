@@ -1,21 +1,16 @@
 import { ScrollView, View } from 'react-native';
-import { useTranslation } from 'react-i18next';
-import { useStore } from 'zustand';
 
 import SelectDialogWrapper, {
   SelectDialogChildren,
 } from '../SelectDialogWrapper';
 import { useNoxSetting } from '@stores/useApp';
-import { saveFadeInterval } from '@utils/ChromeStorage';
-import { isAndroid, selfDestruct } from '@utils/RNUtils';
-import { SelectSettingEntry, SettingEntry } from '../helpers/SettingEntry';
-import SettingListItem from '../helpers/SettingListItem';
-import appStore from '@stores/appStore';
+import { isAndroid } from '@utils/RNUtils';
+import { SettingEntry } from '../helpers/SettingEntry';
 import EqualizerButton from '../equalizer/EQButton';
 import { RenderSetting } from '../helpers/RenderSetting';
 import CrossfadeButton from './CrossfadeButton';
+import FadeButton from './FadeButton';
 
-const FadeOptions = [0, 250, 500, 1000];
 const renderSettings: { [key: string]: SettingEntry } = {
   noInterruption: {
     settingName: 'noInterruption',
@@ -65,24 +60,6 @@ const Home = ({
   setCurrentSelectOption,
   setSelectVisible,
 }: SelectDialogChildren<any>) => {
-  const { t } = useTranslation();
-  const fadeIntervalMs = useStore(appStore, state => state.fadeIntervalMs);
-
-  const selectFade = () => {
-    setSelectVisible(true);
-    setCurrentSelectOption({
-      options: FadeOptions,
-      renderOption: String,
-      defaultIndex: 0,
-      onClose: () => setSelectVisible(false),
-      onSubmit: (index: number) => {
-        saveFadeInterval(FadeOptions[index]).then(selfDestruct);
-        setSelectVisible(false);
-      },
-      title: t('DeveloperSettings.FadeTitle'),
-    } as SelectSettingEntry<number>);
-  };
-
   return (
     <ScrollView>
       <RenderSetting item={renderSettings.r128gain} />
@@ -94,12 +71,9 @@ const Home = ({
       {isAndroid && <RenderSetting item={renderSettings.skipSilence} />}
       {isAndroid && <RenderSetting item={renderSettings.pausePlaybackOnMute} />}
       {isAndroid && <EqualizerButton />}
-      <SettingListItem
-        icon={'cosine-wave'}
-        settingName="Fade"
-        onPress={selectFade}
-        settingCategory="DeveloperSettings"
-        modifyDescription={val => `${val}: ${fadeIntervalMs}ms`}
+      <FadeButton
+        setCurrentSelectOption={setCurrentSelectOption}
+        setSelectVisible={setSelectVisible}
       />
       <CrossfadeButton
         setCurrentSelectOption={setCurrentSelectOption}

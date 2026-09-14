@@ -35,6 +35,7 @@ export const SetupService = async ({
   crossfade = 0,
   eqPreset = 0,
   loudnessEnhance = 0,
+  cropArtwork = 1,
 }: Partial<NoxStorage.PlayerSettingDict>) => {
   await setupPlayer({
     crossfade: crossfade !== 0,
@@ -46,6 +47,7 @@ export const SetupService = async ({
       IOSCategoryOptions.AllowBluetooth,
       IOSCategoryOptions.AllowBluetoothA2DP,
     ],
+    androidCropSquare: cropArtwork,
   });
   const RNTPOptions = initRNTPOptions({
     audioOffload,

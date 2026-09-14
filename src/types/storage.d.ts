@@ -62,6 +62,7 @@ declare global {
       initYtbiOnStart: boolean;
       resumeOnPause: boolean;
       crossfadeRetry: boolean;
+      cropArtwork: 0 | 1 | 2;
 
       appID: string;
       language?: string;
