@@ -5,7 +5,7 @@ import { biliShazamOnSonglist } from './bilishazam';
 import { logger } from '../Logger';
 import bfetch from '@utils/BiliFetch';
 import { wbiQuery } from '@stores/wbi';
-import { fetchBVIDRaw } from './biliVideoInfoWbi';
+import { fetchBVIDRaw } from '@utils/mediafetch/biliVideoInfo';
 
 export enum FieldEnum {
   AudioUrl = 'AudioUrl',
