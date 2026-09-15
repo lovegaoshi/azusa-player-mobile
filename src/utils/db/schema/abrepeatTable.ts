@@ -7,6 +7,7 @@ const table = sqliteTable('abrepeat-table', {
   b: real(),
   aAbs: real(),
   bAbs: real(),
+  resumePlayback: real(),
 });
 
 export default table;

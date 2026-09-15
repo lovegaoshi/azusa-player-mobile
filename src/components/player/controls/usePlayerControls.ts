@@ -13,13 +13,14 @@ import appStore, { setCurrentPlaying, setCrossfaded } from '@stores/appStore';
 import noxPlayingList, { playNextIndex } from '@stores/playingList';
 import { NoxRepeatMode } from '@enums/RepeatMode';
 import usePlaylistCRUD from '@hooks/usePlaylistCRUD';
-import { getR128Gain, getABRepeat } from '@utils/db/sqlAPI';
+import { getR128Gain, getABRepeatNormalized } from '@utils/db/sqlAPI';
 import { isAndroid } from '@utils/RNUtils';
 import { useTrackStore } from '@hooks/useActiveTrack';
 import { execWhenTrue, r128gain2Volume } from '@utils/Utils';
 import useSponsorBlock from './useSponsorBlock';
 import { getNextSong } from '@utils/RNTPUtils';
 import { TPSeek } from '@stores/RNObserverStore';
+import { setResumePlayback } from '@utils/db/sqlStorage';
 
 const { getState } = noxPlayingList;
 const { fadeIntervalMs, fadeIntervalSec } = appStore.getState();
@@ -28,6 +29,7 @@ export default function usePlayerControls() {
   const { performSkipToNext, performSkipToPrevious, prepareSkipToNext } =
     useTPControls();
 
+  const resumePlayback = useNoxSetting(state => state.resumePlayback);
   const skipARepeat = useNoxSetting(state => state.skipARepeat);
   const setSkipARepeat = useNoxSetting(state => state.setSkipARepeat);
   const abRepeat = useNoxSetting(state => state.abRepeat);
@@ -76,6 +78,9 @@ export default function usePlayerControls() {
     const { playmode, playingList } = getState();
     saveLastPlayDuration(event.position);
     const currentSongId = track?.song?.id ?? '';
+    console.log('resumeplayback', resumePlayback);
+    resumePlayback && setResumePlayback(currentSongId, event.position);
+
     const sbSkip = checkSponsorBlock(event.position, currentSongId);
     if (sbSkip) {
       return TPSeek(sbSkip);
@@ -95,10 +100,10 @@ export default function usePlayerControls() {
 
       let arepeat = 0;
       if (nextSong) {
-        const newABRepeat = await getABRepeat(nextSong.id);
-        const absARepeat = Number(newABRepeat[2]);
+        const newABRepeat = await getABRepeatNormalized(nextSong.id);
+        const absARepeat = Number(newABRepeat.aAbs);
         arepeat = Number.isNaN(absARepeat)
-          ? newABRepeat[0] * nextSong.duration
+          ? newABRepeat.a * nextSong.duration
           : absARepeat;
         setSkipARepeat(true);
         logger.debug(`[crossfade] priming the fading player to ${arepeat}...`);
@@ -186,35 +191,41 @@ export default function usePlayerControls() {
     if (!loadingTracker.current || playmode !== NoxRepeatMode.RepeatTrack) {
       return;
     }
-    const newABRepeat = await getABRepeat(currentPlayingId);
-    if (newABRepeat[0] === 0) return;
+    const newABRepeat = await getABRepeatNormalized(currentPlayingId);
+    if (newABRepeat.a === 0) return;
     loadingTracker.current = false;
     if (skipARepeat) {
       setSkipARepeat(false);
     } else {
       const trackDuration = (await TrackPlayer.getProgress()).duration;
-      TPSeek(trackDuration * newABRepeat[0]);
+      TPSeek(
+        resumePlayback && newABRepeat.resumePlayback !== -1
+          ? newABRepeat.resumePlayback
+          : trackDuration * newABRepeat.a,
+      );
     }
   });
 
   useTrackPlayerEvents([Event.PlaybackActiveTrackChanged], async event => {
     const song = event.track?.song as NoxMedia.Song;
     initSponsorBlock(song);
-    const newABRepeat = await getABRepeat(song.id);
+    const newABRepeat = await getABRepeatNormalized(song.id);
     logger.debug(`[SongReady] logging ABRepeat as ${newABRepeat}`);
-    setABRepeat(newABRepeat.slice(0, 2) as [number, number]);
+    setABRepeat([newABRepeat.a, newABRepeat.b]);
     if (setCurrentPlaying(song) && !loadingTracker.current) return;
     loadingTracker.current = false;
     execWhenTrue({
       loopCheck: async () => (await TrackPlayer.getProgress()).duration !== 0,
       executeFn: async () => {
         const trackDuration = (await TrackPlayer.getProgress()).duration;
-        setBRepeatDuration(newABRepeat[1] * trackDuration);
-        if (newABRepeat[0] === 0) return;
-        logger.debug(
-          `[ABRepeat] starting at ${trackDuration}, ${newABRepeat[0]}`,
-        );
-        TPSeek(trackDuration * newABRepeat[0]);
+        setBRepeatDuration(newABRepeat.b * trackDuration);
+        const trackSeekTo =
+          resumePlayback && newABRepeat.resumePlayback !== -1
+            ? newABRepeat.resumePlayback
+            : trackDuration * newABRepeat.a;
+        if (trackSeekTo === 0) return;
+        logger.debug(`[ABRepeat] skipping forward to ${trackSeekTo}`);
+        TPSeek(trackSeekTo);
       },
       funcName: 'ABRepeat A seek',
     });

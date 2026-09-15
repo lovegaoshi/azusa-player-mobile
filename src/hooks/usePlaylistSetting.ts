@@ -10,11 +10,13 @@ export default function usePlaylistSettings(playlist: NoxMedia.Playlist) {
   const [useBiliShazam, setUseBiliShazam] = useState(false);
   const [biliSync, setBiliSync] = useState(false);
   const [newSongOverwrite, setNewSongOverwrite] = useState(false);
+  const [resumePlayback, setResumePlayback] = useState(false);
   const [repeatMode, setRepeatMode] = useState(playlist.repeatMode);
 
   const toggleBiliShazam = () => setUseBiliShazam(val => !val);
   const toggleBiliSync = () => setBiliSync(val => !val);
   const toggleNewSongOverwrite = () => setNewSongOverwrite(val => !val);
+  const toggleResumePlayback = () => setResumePlayback(val => !val);
 
   const saveSetting = (
     setting: Partial<NoxMedia.Playlist> = {},
@@ -29,6 +31,7 @@ export default function usePlaylistSettings(playlist: NoxMedia.Playlist) {
       biliSync,
       newSongOverwrite,
       repeatMode,
+      resumePlayback,
       ...setting,
     };
     updatePlaylist(updatedPlaylist);
@@ -43,6 +46,7 @@ export default function usePlaylistSettings(playlist: NoxMedia.Playlist) {
     setBiliSync(playlist.biliSync);
     setNewSongOverwrite(playlist.newSongOverwrite ?? false);
     setRepeatMode(playlist.repeatMode);
+    setResumePlayback(playlist.resumePlayback ?? false);
   };
 
   useEffect(loadSetting, [playlist]);
@@ -62,6 +66,8 @@ export default function usePlaylistSettings(playlist: NoxMedia.Playlist) {
     toggleNewSongOverwrite,
     repeatMode,
     setRepeatMode,
+    resumePlayback,
+    toggleResumePlayback,
     saveSetting,
     loadSetting,
   };

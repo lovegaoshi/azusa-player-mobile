@@ -53,5 +53,5 @@ export const LabeledSwitch = ({
 };
 
 const style = {
-  marginHorizontal: 4,
+  marginHorizontal: 2,
 };
