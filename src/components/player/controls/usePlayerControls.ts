@@ -78,7 +78,6 @@ export default function usePlayerControls() {
     const { playmode, playingList } = getState();
     saveLastPlayDuration(event.position);
     const currentSongId = track?.song?.id ?? '';
-    console.log('resumeplayback', resumePlayback);
     resumePlayback && setResumePlayback(currentSongId, event.position);
 
     const sbSkip = checkSponsorBlock(event.position, currentSongId);

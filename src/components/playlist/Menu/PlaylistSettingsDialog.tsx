@@ -7,7 +7,6 @@ import NoxInput from '@components/dialogs/NoxInput';
 import SplitInput from '@components/dialogs/SplitInput';
 import usePlaylistSetting from './usePlaylistSetting';
 import PlaylistRepeatMode from './PlaylistRepeatMode';
-import { isAndroid } from '@utils/RNUtils';
 import { LabeledSwitch } from '@components/commonui/Switch';
 
 interface Props {
