@@ -106,7 +106,8 @@
     "useBiliShazamLabel": "使用b站识歌（王胡桃专用）",
     "useBiliSyncLabel": "b站收藏夹同步",
     "repeatMode": "歌单重复模式",
-    "useNewSongOverwriteLabel": "新歌曲同步时覆盖"
+    "useNewSongOverwriteLabel": "新歌曲同步时覆盖",
+    "resumePlaybackLabel": "断点续播"
   },
   "RenameSongDialog": {
     "title": "将 {{song.name}} 重命名为...",

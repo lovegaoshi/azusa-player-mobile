@@ -21,6 +21,9 @@ export interface APMPlaybackStore {
 
   immediateShowPause: boolean;
   setImmediateShowPause: (val: boolean) => void;
+
+  resumePlayback: boolean;
+  setResumePlayback: (val: boolean) => void;
 }
 
 const store: StateCreator<
@@ -48,6 +51,9 @@ const store: StateCreator<
 
   immediateShowPause: false,
   setImmediateShowPause: val => set({ immediateShowPause: val }),
+
+  resumePlayback: false,
+  setResumePlayback: val => set({ resumePlayback: val }),
 });
 
 export default store;

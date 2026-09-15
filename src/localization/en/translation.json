@@ -106,7 +106,8 @@
     "useBiliShazamLabel": "Use BiliShazam",
     "useBiliSyncLabel": "BiliSync as favorite",
     "repeatMode": "playlist specific repeat mode",
-    "useNewSongOverwriteLabel": "New songs overwrite"
+    "useNewSongOverwriteLabel": "New songs overwrite",
+    "resumePlaybackLabel": "Resume playback"
   },
   "RenameSongDialog": {
     "title": "Rename {{song.name}} to...",

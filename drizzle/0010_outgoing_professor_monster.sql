@@ -1,0 +1,1 @@
+ALTER TABLE `abrepeat-table` ADD `resumePlayback` real;
