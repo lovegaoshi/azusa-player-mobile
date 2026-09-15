@@ -55,6 +55,7 @@ declare global {
 
       sort?: SortOptions;
       repeatMode?: NoxRepeatMode;
+      resumePlayback?: boolean;
       // function to support infinite loading; only applicable to
       // search playlists. bc we stringify playlists, this will be
       // lost upon loading from storage

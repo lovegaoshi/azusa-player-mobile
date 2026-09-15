@@ -168,6 +168,19 @@ export const setR128Gain = async (
     });
 };
 
+export const setResumePlayback = async (
+  songcid: string,
+  resumePlayback: number,
+) => {
+  await db
+    .insert(abRepeatTable)
+    .values({ songcid, resumePlayback })
+    .onConflictDoUpdate({
+      target: abRepeatTable.songcid,
+      set: { resumePlayback },
+    });
+};
+
 export const setABRepeat = async (
   songcid: string,
   ab: {

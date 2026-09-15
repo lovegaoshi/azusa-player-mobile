@@ -73,6 +73,7 @@ export const getABRepeatRaw = async (songcid?: string) => {
       b: abrepeatTable.b,
       aAbs: abrepeatTable.aAbs,
       bAbs: abrepeatTable.bAbs,
+      resumePlayback: abrepeatTable.resumePlayback,
     })
     .from(abrepeatTable)
     .where(eq(abrepeatTable.songcid, songcid ?? ''))
@@ -82,16 +83,25 @@ export const getABRepeatRaw = async (songcid?: string) => {
 /**
  * returns [a, b, aAbs, bAbs] where a-b is the 0-1 range; aAbs-bAbs is the absolute range
  */
+export const getABRepeatNormalized = async (songcid?: string) => {
+  const res = await getABRepeatRaw(songcid);
+  return {
+    a: res?.a ?? 0,
+    b: res?.b ?? 1,
+    aAbs: res?.aAbs ?? undefined,
+    bAbs: res?.bAbs ?? undefined,
+    resumePlayback: res?.resumePlayback ?? -1,
+  };
+};
+
+/**
+ * returns [a, b, aAbs, bAbs] where a-b is the 0-1 range; aAbs-bAbs is the absolute range
+ */
 export const getABRepeat = async (
   songcid?: string,
 ): Promise<[number, number, number?, number?]> => {
-  const res = await getABRepeatRaw(songcid);
-  return [
-    res?.a ?? 0,
-    res?.b ?? 1,
-    res?.aAbs ?? undefined,
-    res?.bAbs ?? undefined,
-  ];
+  const res = await getABRepeatNormalized(songcid);
+  return [res.a, res.b, res.aAbs, res.bAbs];
 };
 
 export const getLyric = async (

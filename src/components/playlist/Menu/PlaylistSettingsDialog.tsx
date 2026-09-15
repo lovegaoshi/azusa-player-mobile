@@ -7,7 +7,6 @@ import NoxInput from '@components/dialogs/NoxInput';
 import SplitInput from '@components/dialogs/SplitInput';
 import usePlaylistSetting from './usePlaylistSetting';
 import PlaylistRepeatMode from './PlaylistRepeatMode';
-import { isAndroid } from '@utils/RNUtils';
 import { LabeledSwitch } from '@components/commonui/Switch';
 
 interface Props {
@@ -34,10 +33,12 @@ const PlaylistDialog = ({
     biliSync,
     newSongOverwrite,
     repeatMode,
+    resumePlayback,
     setRepeatMode,
     toggleBiliShazam,
     toggleBiliSync,
     toggleNewSongOverwrite,
+    toggleResumePlayback,
     saveSetting,
   } = usePlaylistSetting(playlist);
 
@@ -106,6 +107,13 @@ const PlaylistDialog = ({
           value={newSongOverwrite}
           onValueChange={toggleNewSongOverwrite}
         />
+        <LabeledSwitch
+          viewStyle={styles.switchContainer}
+          textStyle={styles.switchText}
+          text={t('PlaylistSettingsDialog.resumePlaybackLabel')}
+          value={resumePlayback}
+          onValueChange={toggleResumePlayback}
+        />
         <PlaylistRepeatMode onPress={setRepeatMode} mode={repeatMode} />
       </Dialog.Content>
 
@@ -132,6 +140,6 @@ const styles = StyleSheet.create({
   },
   switchText: {
     fontSize: 18,
-    marginTop: isAndroid ? -5 : 0,
+    //marginTop: isAndroid ? -5 : 0,
   },
 });
