@@ -112,10 +112,12 @@ export const useNoxSetting = create<NoxSetting>((set, get, storeApi) => ({
       playerSetting,
       currentPlaylist,
       playlistShouldReRender,
+      setResumePlayback,
     } = get();
     updatePlaylistSongs(playlist, addSongs, removeSongs);
     if (playlist.id === currentPlaylist.id) {
       set({ currentPlaylist: playlist });
+      setResumePlayback(playlist.resumePlayback ?? false);
     }
     switch (playlist.type) {
       case PlaylistTypes.Search:

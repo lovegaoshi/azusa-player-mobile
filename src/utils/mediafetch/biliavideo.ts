@@ -1,6 +1,6 @@
 import { biliApiLimiter } from './throttle';
 import { biliShazamOnSonglist } from './bilishazam';
-import { fetchAVIDRaw } from './biliVideoInfoWbi';
+import { fetchAVIDRaw } from '@utils/mediafetch/biliVideoInfo';
 
 export const fetchAVID = (
   avid: string,
