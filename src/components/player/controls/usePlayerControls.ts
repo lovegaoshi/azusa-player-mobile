@@ -135,6 +135,7 @@ export default function usePlayerControls() {
         // HACK: manually update playing index.
         // this needs to be refactored at some point (eg setting index hooked inside useActiveTrack)
         playNextIndex({});
+        resumePlayback && setResumePlayback(currentSongId, 0);
         return TrackPlayer.crossFade(
           playerSetting.crossfade * 1000,
           20,
@@ -165,7 +166,7 @@ export default function usePlayerControls() {
       logger.debug(
         `[ABRepeat] duration ${event.duration} > ${bRepeatDuration}.`,
       );
-      performSkipToNext();
+      performSkipToNext(true);
     }
   });
 
