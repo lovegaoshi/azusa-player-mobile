@@ -10,7 +10,7 @@ import { NoxRepeatMode } from '@enums/RepeatMode';
 import { songlistToTracklist } from '@utils/RNTPUtils';
 import appStore from '@stores/appStore';
 import logger from '@utils/Logger';
-import { increasePlaybackCount } from '@utils/db/sqlStorage';
+import { increasePlaybackCount, setResumePlayback } from '@utils/db/sqlStorage';
 import getBiliSuggest from '@utils/mediafetch/suggestfetch';
 import smarterShuffle from '@utils/shuffle';
 import { TPPlay } from '@stores/RNObserverStore';
@@ -115,16 +115,18 @@ export const performSkipToNext = (
   preparePromise = prepareSkipToNext,
   mPerformFade = performFade,
 ) => {
+  TrackPlayer.getActiveTrack().then(t => {
+    if (t?.song?.id === undefined) return;
+    useNoxSetting.getState().resumePlayback &&
+      auto &&
+      setResumePlayback(t.song.id, 0);
+    !auto && increasePlaybackCount(t.song.id, -1);
+  });
   if (auto && noRepeat) {
     logger.debug('[autoRepeat] stopping playback as autoRepeat is set to off');
     return;
   }
   logger.debug('[skipToNext] calling skipToNext');
-  if (!auto) {
-    TrackPlayer.getActiveTrack().then(t =>
-      increasePlaybackCount(t?.song?.id, -1),
-    );
-  }
   const callback = () =>
     preparePromise().then(async () => {
       //await TrackPlayer.skipToNext();
