@@ -1,5 +1,5 @@
 diff --git a/node_modules/expo-wavy-slider/src/ExpoWavySliderModule.ts b/node_modules/expo-wavy-slider/src/ExpoWavySliderModule.ts
-index cb4d400..473dceb 100644
+index 149582f..93ac1f6 100644
 --- a/node_modules/expo-wavy-slider/src/ExpoWavySliderModule.ts
 +++ b/node_modules/expo-wavy-slider/src/ExpoWavySliderModule.ts
 @@ -4,12 +4,14 @@ import { Platform } from 'react-native'
@@ -15,9 +15,9 @@ index cb4d400..473dceb 100644
  		setOnChange(callback: object | null): void
  	}
 +	// @ts-expect-error side effect for removing the declare kw
- 	WorkletCallback: new (worklet: object) => NativeSharedObject
- }
- 
+ 	WorkletCallback: new (worklet: object | null) => NativeSharedObject & {
+ 		setWorklet(worklet: object | null): void
+ 	}
 diff --git a/node_modules/expo-wavy-slider/src/worklets.fx.ts b/node_modules/expo-wavy-slider/src/worklets.fx.ts
 index 759af1c..7d73876 100644
 --- a/node_modules/expo-wavy-slider/src/worklets.fx.ts
