@@ -138,7 +138,7 @@
     "react-native-svg": "15.15.5",
     "react-native-svga-player": "https://lovegaoshi@github.com/lovegaoshi/react-native-svga-player.git#commit=2cd82e2b878e7711013d14e798df931598791df4",
     "react-native-text-ticker": "https://lovegaoshi@github.com/lovegaoshi/react-native-text-ticker.git#commit=c80fd5d660b57229dd730fe44919fb86364f1969",
-    "react-native-track-player": "https://github.com/lovegaoshi/react-native-track-player.git#commit=2d580700a0f7ac13c2224fe82c9feb1948ed2f03",
+    "react-native-track-player": "https://github.com/lovegaoshi/react-native-track-player.git#commit=7e36bdf8af70df02538cc376c962ae1297bac0b8",
     "react-native-turbo-base64": "^0.1.5",
     "react-native-url-polyfill": "^4.0.0",
     "react-native-webview": "14.0.1",
