@@ -80,6 +80,7 @@ export default function NoxBottomSheet(p: Props) {
             ref={scrollViewRef}
             showsVerticalScrollIndicator={false}
           >
+            <View style={{ height: isIOS ? 5 : 0 }} />
             {children}
             <View style={{ paddingBottom: insets.bottom }} />
           </ScrollView>

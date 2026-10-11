@@ -290,8 +290,9 @@ export const mStyles = StyleSheet.create({
     paddingVertical: 15,
     paddingHorizontal: 20,
     flexDirection: 'row',
+    alignItems: 'center',
   },
   albumArt: { width: 50, height: 50, borderRadius: 5 },
-  songTitle: { paddingLeft: 5, marginTop: -10 },
+  songTitle: { paddingLeft: 5 },
   rowBtnView: { flexDirection: 'row', paddingVertical: 10 },
 });
