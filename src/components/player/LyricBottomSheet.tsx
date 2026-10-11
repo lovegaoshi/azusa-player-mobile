@@ -8,6 +8,7 @@ import {
   Dimensions,
 } from 'react-native';
 import { useTranslation } from 'react-i18next';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { PaperText as Text } from '@components/commonui/ScaledText';
 import { NoxSheetRoutes } from '@enums/Routes';
@@ -115,10 +116,12 @@ export default function LyricBottomSheet({
   const [route, setRoute] = useState(Routes.Main);
   const { t } = useTranslation();
   const { height } = Dimensions.get('window');
+  const insets = useSafeAreaInsets();
 
   return (
     <NoxBottomSheet
-      maxContentHeight={height / 2}
+      insetAdjustment="never"
+      maxContentHeight={height * 0.55}
       sizes={['auto']}
       /* HACK: for some reason menusheets wont scroll with this always on. but why it works here? */
       nestedScrollEnabled
@@ -127,7 +130,11 @@ export default function LyricBottomSheet({
       onDidDismiss={() => setRoute(Routes.Main)}
       Header={(p: { setHeaderHeight?: (v: number) => void }) => (
         <View
-          style={{ paddingVertical: 15, alignItems: 'center' }}
+          style={{
+            marginTop: -insets.top + 35,
+            paddingBottom: 10,
+            alignItems: 'center',
+          }}
           onLayout={layout =>
             p.setHeaderHeight?.(layout.nativeEvent.layout.height)
           }

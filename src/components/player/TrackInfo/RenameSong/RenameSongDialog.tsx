@@ -1,7 +1,9 @@
 import React, { useEffect } from 'react';
-import { Button, Dialog, Portal } from 'react-native-paper';
+import { Button, Dialog } from 'react-native-paper';
 import { useTranslation } from 'react-i18next';
 import NoxInput from '@components/dialogs/NoxInput';
+
+import Portal from '@components/commonui/bottomsheet/Overlay';
 
 interface Props {
   visible: boolean;
@@ -52,7 +54,7 @@ const SongDialog = ({
 
 export default function RenameSongDialog(p: Props) {
   return (
-    <Portal>
+    <Portal visible={p.visible}>
       <SongDialog {...p} />
     </Portal>
   );

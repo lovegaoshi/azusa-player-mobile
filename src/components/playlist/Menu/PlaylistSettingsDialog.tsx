@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { StyleSheet } from 'react-native';
-import { Button, Dialog, Portal } from 'react-native-paper';
+import { Button, Dialog } from 'react-native-paper';
 import { useTranslation } from 'react-i18next';
 
 import NoxInput from '@components/dialogs/NoxInput';
@@ -8,6 +8,7 @@ import SplitInput from '@components/dialogs/SplitInput';
 import usePlaylistSetting from './usePlaylistSetting';
 import PlaylistRepeatMode from './PlaylistRepeatMode';
 import { LabeledSwitch } from '@components/commonui/Switch';
+import Portal from '@components/commonui/bottomsheet/Overlay';
 
 interface Props {
   visible: boolean;
@@ -127,7 +128,7 @@ const PlaylistDialog = ({
 
 export default function PlaylistSettingsDialogPortal(p: Props) {
   return (
-    <Portal>
+    <Portal visible={p.visible}>
       <PlaylistDialog {...p} />
     </Portal>
   );

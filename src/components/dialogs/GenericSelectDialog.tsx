@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import { Pressable, View, FlatList, StyleSheet } from 'react-native';
-import { Button, Dialog, Portal, RadioButton } from 'react-native-paper';
+import { Button, Dialog, RadioButton } from 'react-native-paper';
 import { useTranslation } from 'react-i18next';
 
 import { PaperText as Text } from '@components/commonui/ScaledText';
 import { execWhenTrue } from '@utils/Utils';
 import logger from '@utils/Logger';
+import Portal from '@components/commonui/bottomsheet/Overlay';
 
 const DialogTitle = ({ title }: { title: string | undefined }) => {
   if (!title) return <View></View>;
@@ -84,7 +85,7 @@ export default function GenericSelectDialog<T>({
   }, [visible]);
 
   return (
-    <Portal>
+    <Portal visible={visible}>
       <Dialog
         visible={visible}
         onDismiss={handleClose}

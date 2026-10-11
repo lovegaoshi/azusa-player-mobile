@@ -32,6 +32,7 @@ export default function PlaylistSettingsButton({
   const handleSubmit = (playlist: NoxMedia.Playlist) => {
     setDialogOpen(false);
     onSubmit(playlist);
+    showSheet?.(false);
   };
 
   return (
@@ -40,7 +41,6 @@ export default function PlaylistSettingsButton({
       icon={ICON}
       onPress={() => {
         setDialogOpen(true);
-        // showSheet?.(false);
       }}
       disabled={disabled}
     >

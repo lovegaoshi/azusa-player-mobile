@@ -31,12 +31,12 @@ export default function CopiedPlaylistButton({
   const handleClose = () => {
     setDialogOpen(false);
     onCancel();
-    showSheet?.(true);
   };
 
   const handleSubmit = () => {
     setDialogOpen(false);
     onSubmit();
+    showSheet?.(false);
   };
 
   return (
@@ -45,7 +45,6 @@ export default function CopiedPlaylistButton({
       onPress={() => {
         setDialogOpen(true);
         setFromList(getFromListOnClick());
-        showSheet?.(false);
       }}
       text={t('PlaylistOperations.playlistSendToTitle')}
     >

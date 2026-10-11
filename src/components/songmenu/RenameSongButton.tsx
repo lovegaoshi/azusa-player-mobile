@@ -43,7 +43,6 @@ export default function RenameSongButton({
       onPress={() => {
         setDialogOpen(true);
         setSong(getSongOnClick());
-        showSheet?.(false);
       }}
       text={t('SongOperations.songRenameTitle')}
       disabled={disabled}
@@ -52,7 +51,10 @@ export default function RenameSongButton({
         visible={dialogOpen}
         song={song}
         onClose={handleClose}
-        onSubmit={handleSubmit}
+        onSubmit={v => {
+          handleSubmit(v);
+          showSheet?.(false);
+        }}
       />
     </SheetIconButton>
   );
