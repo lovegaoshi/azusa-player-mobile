@@ -1,5 +1,5 @@
 import i18n from 'i18next';
-import he from 'he';
+import { decode } from 'he';
 import { createStore } from 'zustand/vanilla';
 
 import bfetch from '@utils/BiliFetch';
@@ -71,7 +71,7 @@ export const getLyricOld = async (songMid: string) => {
   if (json?.tlyric?.lyric) {
     finalLrc = `${json?.tlyric?.lyric}\n${finalLrc}`;
   }
-  finalLrc = he.decode(finalLrc);
+  finalLrc = decode(finalLrc);
   // logger.log(finalLrc)
   return finalLrc;
 };

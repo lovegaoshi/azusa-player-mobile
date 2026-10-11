@@ -1,4 +1,4 @@
-import he from 'he';
+import { decode } from 'he';
 import i18n from 'i18next';
 
 import bfetch from '@utils/BiliFetch';
@@ -85,7 +85,7 @@ const getLyric = async (searchMID: string) => {
   if (json.trans) {
     finalLrc = `${json.trans}\n${finalLrc}`;
   }
-  finalLrc = he.decode(finalLrc);
+  finalLrc = decode(finalLrc);
   // logger.log(finalLrc)
   return finalLrc;
 };
