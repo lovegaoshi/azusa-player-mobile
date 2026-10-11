@@ -35,13 +35,13 @@ export default function PlaylistSortButton({
   const handleClose = () => {
     setDialogOpen(false);
     onCancel();
-    showSheet?.(true);
   };
 
   const handleSubmit = (index: number) => {
     setDialogOpen(false);
     if (index === -1) return;
     sortPlaylist(sortOptions[index][1], ascending, playlist);
+    showSheet?.(false);
   };
 
   return (
@@ -50,7 +50,6 @@ export default function PlaylistSortButton({
       icon={ICON}
       onPress={() => {
         setDialogOpen(true);
-        showSheet?.(false);
       }}
     >
       <Dialog

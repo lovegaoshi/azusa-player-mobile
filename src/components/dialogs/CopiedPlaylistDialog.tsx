@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Pressable, View, FlatList, StyleSheet } from 'react-native';
-import { Button, Dialog, Portal, RadioButton } from 'react-native-paper';
+import { Button, Dialog, RadioButton } from 'react-native-paper';
 import { useTranslation } from 'react-i18next';
 
 import { useNoxSetting } from '@stores/useApp';
@@ -9,6 +9,7 @@ import noxPlayingList from '@stores/playingList';
 import { NoxRepeatMode } from '@enums/RepeatMode';
 import { isAndroid } from '@utils/RNUtils';
 import { PaperText as Text } from '@components/commonui/ScaledText';
+import Portal from '@components/commonui/bottomsheet/Overlay';
 
 const { getState } = noxPlayingList;
 
@@ -70,7 +71,7 @@ export default function CopiedPlaylistDialog({
   }, [visible]);
 
   return (
-    <Portal>
+    <Portal visible={visible}>
       <Dialog
         visible={visible}
         onDismiss={handleClose}

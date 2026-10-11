@@ -1,5 +1,5 @@
 import { v4 as uuidv4 } from 'uuid';
-import he from 'he';
+import { decode } from 'he';
 
 import { extractParenthesis } from '../utils/re';
 import { reExtractSongName } from '@stores/regexStore';
@@ -52,12 +52,12 @@ export default function Song({
   metadataOnLoad,
   metadataOnReceived,
 }: SongProps): NoxMedia.Song {
-  name = he.decode(name);
+  name = decode(name);
   return {
     id: String(cid),
     bvid,
     name,
-    singer: he.decode(singer),
+    singer: decode(singer),
     cover: i0hdslbHTTPResolve(cover),
     singerId,
     lyric,
@@ -67,7 +67,7 @@ export default function Song({
     nameRaw: name,
     parsedName: reExtractSongName(name, singerId),
     duration,
-    album: album ? he.decode(album) : name,
+    album: album ? decode(album) : name,
     addedDate: addedDate ?? Date.now(),
     source,
     isLive,

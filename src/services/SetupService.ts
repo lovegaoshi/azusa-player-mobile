@@ -44,7 +44,8 @@ export const SetupService = async ({
     maxCacheSize: 0,
     iosCategoryOptions: [
       IOSCategoryOptions.AllowAirPlay,
-      IOSCategoryOptions.AllowBluetooth,
+      // fix: ios nowplaying wont register with this option
+      // IOSCategoryOptions.AllowBluetooth,
       IOSCategoryOptions.AllowBluetoothA2DP,
     ],
     androidCropSquare: cropArtwork,
