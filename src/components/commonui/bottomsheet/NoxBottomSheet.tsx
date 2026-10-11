@@ -51,8 +51,7 @@ export default function NoxBottomSheet(p: Props) {
       backgroundColor={playerStyle.colors.surfaceVariant}
       detents={sizes}
       cornerRadius={cornerRadius}
-      // scrollRef={scrollViewRef}
-      scrollable
+      scrollableRef={scrollViewRef}
       onDidDismiss={e => {
         onDidDismiss?.(e);
         scrollViewRef.current?.scrollTo({ x: 0, y: 0, animated: false });

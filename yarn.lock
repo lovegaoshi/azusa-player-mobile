@@ -5332,29 +5332,38 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@lodev09/react-native-true-sheet@npm:^3.11.18":
-  version: 3.11.18
-  resolution: "@lodev09/react-native-true-sheet@npm:3.11.18"
+"@lodev09/react-native-true-sheet@npm:^4.0.0-beta.24":
+  version: 4.0.0-beta.24
+  resolution: "@lodev09/react-native-true-sheet@npm:4.0.0-beta.24"
   peerDependencies:
     "@radix-ui/react-dialog": ">=1"
     "@radix-ui/react-presence": ">=1"
-    "@react-navigation/core": ">=7"
+    "@react-navigation/native": ">=7.3.0"
+    expo-router: ">=57.0.0"
     react: "*"
-    react-native: "*"
+    react-dom: "*"
+    react-native: ">=0.82.0"
     react-native-reanimated: ">=4"
     react-native-worklets: "*"
+    standard-navigation: ">=0.0.9"
   peerDependenciesMeta:
     "@radix-ui/react-dialog":
       optional: true
     "@radix-ui/react-presence":
       optional: true
-    "@react-navigation/core":
+    "@react-navigation/native":
+      optional: true
+    expo-router:
+      optional: true
+    react-dom:
       optional: true
     react-native-reanimated:
       optional: true
     react-native-worklets:
       optional: true
-  checksum: 10c0/e42d284e9c3d2d2a129acbd81bba8375ca3329d12b81902962f6812829195c38401111dc8a116e07ca0a76173aca01f6c565f45775e72658d7fbfca6116f8546
+    standard-navigation:
+      optional: true
+  checksum: 10c0/23b267b4be7073579adc7e3aed55e3d5efedb7a56f3b1c0e47fcef03f68766f22a87b19607b399609d081d563e77553dc5bd97509d2b470679a9e6fcc11a60d9
   languageName: node
   linkType: hard
 
@@ -9588,7 +9597,7 @@ __metadata:
     "@connectrpc/protoc-gen-connect-es": "npm:^1.7.0"
     "@expo/ui": "npm:~57.0.22"
     "@legendapp/list": "npm:^3.6.0"
-    "@lodev09/react-native-true-sheet": "npm:^3.11.18"
+    "@lodev09/react-native-true-sheet": "npm:^4.0.0-beta.24"
     "@material/material-color-utilities": "npm:^0.4.0"
     "@preeternal/react-native-cookie-manager": "npm:^7.0.0"
     "@react-native-assets/slider": "npm:^11.0.12"

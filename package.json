@@ -44,7 +44,7 @@
     "@connectrpc/connect-web": "^2.2.0",
     "@expo/ui": "~57.0.22",
     "@legendapp/list": "^3.6.0",
-    "@lodev09/react-native-true-sheet": "^3.11.18",
+    "@lodev09/react-native-true-sheet": "^4.0.0-beta.24",
     "@preeternal/react-native-cookie-manager": "^7.0.0",
     "@react-native-assets/slider": "^11.0.12",
     "@react-native-community/cli": "20.2.0",

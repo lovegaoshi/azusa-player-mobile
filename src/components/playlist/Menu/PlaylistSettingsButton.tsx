@@ -40,7 +40,7 @@ export default function PlaylistSettingsButton({
       icon={ICON}
       onPress={() => {
         setDialogOpen(true);
-        showSheet?.(false);
+        // showSheet?.(false);
       }}
       disabled={disabled}
     >

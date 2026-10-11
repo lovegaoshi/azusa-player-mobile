@@ -1,6 +1,12 @@
 import { TrueSheet } from '@lodev09/react-native-true-sheet';
 import { RefObject, useRef, useState } from 'react';
-import { View, StyleSheet, TouchableOpacity, TextInput } from 'react-native';
+import {
+  View,
+  StyleSheet,
+  TouchableOpacity,
+  TextInput,
+  Dimensions,
+} from 'react-native';
 import { useTranslation } from 'react-i18next';
 
 import { PaperText as Text } from '@components/commonui/ScaledText';
@@ -108,10 +114,12 @@ export default function LyricBottomSheet({
   const sheet = useRef<TrueSheet>(null);
   const [route, setRoute] = useState(Routes.Main);
   const { t } = useTranslation();
+  const { height } = Dimensions.get('window');
 
   return (
     <NoxBottomSheet
-      sizes={['auto', 0.5]}
+      maxContentHeight={height / 2}
+      sizes={['auto']}
       /* HACK: for some reason menusheets wont scroll with this always on. but why it works here? */
       nestedScrollEnabled
       name={NoxSheetRoutes.LyricSheet}
