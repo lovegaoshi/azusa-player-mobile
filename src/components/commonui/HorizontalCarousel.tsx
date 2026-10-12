@@ -4,9 +4,9 @@ import Animated, {
   useSharedValue,
   withTiming,
 } from 'react-native-reanimated';
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Image } from 'expo-image';
-import { GestureDetector, Gesture } from 'react-native-gesture-handler';
+import { GestureDetector, usePanGesture } from 'react-native-gesture-handler';
 import { scheduleOnRN } from 'react-native-worklets';
 
 const AnimatedExpoImage = Animated.createAnimatedComponent(Image);
@@ -89,19 +89,16 @@ export default function HorizontalCarousel({
     activeCarouselTX.value = withTiming(0, { duration: 100 });
   };
 
-  const scrollDragGesture = useMemo(
-    () =>
-      Gesture.Pan()
-        .enabled(active && !throttling)
-        // swipe left and right
-        .activeOffsetX([-5, 5])
-        .failOffsetY([-5, 5])
-        .onChange(e => {
-          activeCarouselTX.value = e.translationX;
-        })
-        .onEnd(snapToCarousel),
-    [active, throttling],
-  );
+  const scrollDragGesture = usePanGesture({
+    enabled: active && !throttling,
+    // swipe left and right
+    activeOffsetX: [-5, 5],
+    failOffsetY: [-5, 5],
+    onUpdate: e => {
+      activeCarouselTX.value = e.translationX;
+    },
+    onDeactivate: snapToCarousel,
+  });
 
   const carousel1Style = useAnimatedStyle(() => ({
     transform: [

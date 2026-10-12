@@ -1,7 +1,7 @@
 import { StyleSheet, View } from 'react-native';
 import { IconButton } from 'react-native-paper';
-import { RectButton } from 'react-native-gesture-handler';
 
+import RectButton from '@components/commonui/RectButton';
 import { Props } from './SheetIconButton';
 import { PaperText as Text } from '@components/commonui/ScaledText';
 

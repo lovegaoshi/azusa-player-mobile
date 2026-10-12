@@ -10,7 +10,7 @@ import Animated, {
   withSpring,
   withTiming,
 } from 'react-native-reanimated';
-import { GestureDetector, Gesture } from 'react-native-gesture-handler';
+import { GestureDetector, usePanGesture } from 'react-native-gesture-handler';
 import { scheduleOnRN } from 'react-native-worklets';
 
 import { imageSplashes } from '../background/AppOpenSplash';
@@ -48,43 +48,39 @@ export default function SplashSettings() {
 
   const getSource = (i: number) => imageSplashes[i % imageSplashes.length][1]();
 
-  const swipeGesture = React.useMemo(
-    () =>
-      Gesture.Pan()
-        .onStart(() => {
-          if (cardPositionX.value !== 0 && boundingBack.value === 0) {
-            cardPositionX.value = 0;
-            cardPositionY.value = 0;
-            scheduleOnRN(incIndex);
-          }
-          boundingBack.value = 0;
-        })
-        .onChange(e => {
-          cardPositionX.value = e.translationX;
-          cardPositionY.value = e.translationY;
-        })
-        .onEnd(e => {
-          if (e.translationX > 120) {
-            cardPositionX.value = withTiming(
-              windowEnd,
-              { duration: 200 },
-              () => cardPositionX.value === windowEnd && scheduleOnRN(incIndex),
-            );
-          } else if (e.translationX < -120) {
-            cardPositionX.value = withTiming(
-              -windowEnd,
-              { duration: 200 },
-              () =>
-                cardPositionX.value === -windowEnd && scheduleOnRN(incIndex),
-            );
-          } else {
-            boundingBack.value = 1;
-            cardPositionX.value = withSpring(0);
-            cardPositionY.value = withSpring(0);
-          }
-        }),
-    [],
-  );
+  const swipeGesture = usePanGesture({
+    onActivate: () => {
+      if (cardPositionX.value !== 0 && boundingBack.value === 0) {
+        cardPositionX.value = 0;
+        cardPositionY.value = 0;
+        scheduleOnRN(incIndex);
+      }
+      boundingBack.value = 0;
+    },
+    onUpdate: e => {
+      cardPositionX.value = e.translationX;
+      cardPositionY.value = e.translationY;
+    },
+    onDeactivate: e => {
+      if (e.translationX > 120) {
+        cardPositionX.value = withTiming(
+          windowEnd,
+          { duration: 200 },
+          () => cardPositionX.value === windowEnd && scheduleOnRN(incIndex),
+        );
+      } else if (e.translationX < -120) {
+        cardPositionX.value = withTiming(
+          -windowEnd,
+          { duration: 200 },
+          () => cardPositionX.value === -windowEnd && scheduleOnRN(incIndex),
+        );
+      } else {
+        boundingBack.value = 1;
+        cardPositionX.value = withSpring(0);
+        cardPositionY.value = withSpring(0);
+      }
+    },
+  });
 
   const cardStyle = useAnimatedStyle(() => {
     return {

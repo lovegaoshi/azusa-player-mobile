@@ -1,6 +1,6 @@
 import { View } from 'react-native';
-import { GestureDetector, Gesture } from 'react-native-gesture-handler';
-import { useEffect, useMemo } from 'react';
+import { GestureDetector, usePanGesture } from 'react-native-gesture-handler';
+import { useEffect } from 'react';
 import Animated, {
   Extrapolation,
   interpolate,
@@ -53,29 +53,26 @@ export default function RNGHSlider({
     return interpolate(x, [0, maxWidth.value], [min, max], Extrapolation.CLAMP);
   };
 
-  const dragGesture = useMemo(
-    () =>
-      Gesture.Pan()
-        .onStart(e => {
-          onValueStart && scheduleOnRN(onValueStart, interpolateVal(e.x));
-        })
-        .onChange(e => {
-          const slideVal = interpolateVal(e.x);
-          const slidePos = interpolate(
-            e.x,
-            [0, maxWidth.value],
-            [0, 1],
-            Extrapolation.CLAMP,
-          );
-          value.value = slidePos;
-          onValueChange && scheduleOnRN(onValueChange, slideVal);
-        })
-        .onEnd(e => {
-          const slideVal = interpolateVal(e.x);
-          onValueEnd && scheduleOnRN(onValueEnd, slideVal);
-        }),
-    [],
-  );
+  const dragGesture = usePanGesture({
+    onActivate: e => {
+      onValueStart && scheduleOnRN(onValueStart, interpolateVal(e.x));
+    },
+    onUpdate: e => {
+      const slideVal = interpolateVal(e.x);
+      const slidePos = interpolate(
+        e.x,
+        [0, maxWidth.value],
+        [0, 1],
+        Extrapolation.CLAMP,
+      );
+      value.value = slidePos;
+      onValueChange && scheduleOnRN(onValueChange, slideVal);
+    },
+    onDeactivate: e => {
+      const slideVal = interpolateVal(e.x);
+      onValueEnd && scheduleOnRN(onValueEnd, slideVal);
+    },
+  });
 
   useEffect(() => {
     value.value = interpolate(defaultValue, [min, max], [0, 1]);

@@ -2949,15 +2949,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@egjs/hammerjs@npm:^2.0.17":
-  version: 2.0.17
-  resolution: "@egjs/hammerjs@npm:2.0.17"
-  dependencies:
-    "@types/hammerjs": "npm:^2.0.36"
-  checksum: 10c0/dbedc15a0e633f887c08394bd636faf6a3abd05726dc0909a0e01209d5860a752d9eca5e512da623aecfabe665f49f1d035de3103eb2f9022c5cea692f9cc9be
-  languageName: node
-  linkType: hard
-
 "@emnapi/core@npm:1.10.0":
   version: 1.10.0
   resolution: "@emnapi/core@npm:1.10.0"
@@ -7493,13 +7484,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/hammerjs@npm:^2.0.36":
-  version: 2.0.46
-  resolution: "@types/hammerjs@npm:2.0.46"
-  checksum: 10c0/f3c1cb20dc2f0523f7b8c76065078544d50d8ae9b0edc1f62fed657210ed814266ff2dfa835d2c157a075991001eec3b64c88bf92e3e6e895c0db78d05711d06
-  languageName: node
-  linkType: hard
-
 "@types/he@npm:^1.2.3":
   version: 1.2.3
   resolution: "@types/he@npm:1.2.3"
@@ -9716,7 +9700,7 @@ __metadata:
     react-native-dotenv: "npm:^5.0.0"
     react-native-edge-to-edge: "npm:^1.8.2"
     react-native-flashdrag-list: "https://lovegaoshi@github.com/lovegaoshi/react-native-flashdrag-list.git#commit=968874b73eb2e8b14822c5f46e2ca3d3c4ba944c"
-    react-native-gesture-handler: "npm:~2.32.0"
+    react-native-gesture-handler: "npm:~3.3.0"
     react-native-get-random-values: "npm:^2.0.0"
     react-native-image-colors: "npm:^2.6.0"
     react-native-lyric: "https://lovegaoshi@github.com/lovegaoshi/react-native-lyric.git#commit=242792df6024207fa0b1c0a9f4c62cbd7bd95780"
@@ -20935,18 +20919,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-native-gesture-handler@npm:~2.32.0":
-  version: 2.32.0
-  resolution: "react-native-gesture-handler@npm:2.32.0"
+"react-native-gesture-handler@npm:~3.3.0":
+  version: 3.3.0
+  resolution: "react-native-gesture-handler@npm:3.3.0"
   dependencies:
-    "@egjs/hammerjs": "npm:^2.0.17"
     "@types/react-test-renderer": "npm:^19.1.0"
-    hoist-non-react-statics: "npm:^3.3.0"
     invariant: "npm:^2.2.4"
   peerDependencies:
     react: "*"
     react-native: "*"
-  checksum: 10c0/f3d903a8ad1f053732f7cbfbd16891a6bc696f4d03428a334948587a203fdcfa29592f1fc6c4c03c175932febe9df1fce3eb40ddd54d2fa3de63cc939ccd0e85
+  checksum: 10c0/6a710722f59eca293e2ff30852cbaf8fb4705712068c9ebb4d1d9d737cda61f175b2b0b452c9fab322d9e14efae3b6d0ab7c884439125b7f5cfb57934f7a65f8
   languageName: node
   linkType: hard
 
