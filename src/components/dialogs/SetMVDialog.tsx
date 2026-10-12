@@ -1,10 +1,11 @@
 import React, { useEffect } from 'react';
-import { Button, Dialog, Portal, Checkbox } from 'react-native-paper';
+import { Button, Dialog, Checkbox } from 'react-native-paper';
 import { useTranslation } from 'react-i18next';
 
 import NoxInput from '@components/dialogs/NoxInput';
 import { RESOLVE_TYPE } from '@utils/mediafetch/mainbackgroundfetch';
 import { extractMV } from '@hooks/useTrackMV';
+import Portal from '@components/commonui/bottomsheet/Overlay';
 
 interface Props {
   visible: boolean;
@@ -79,7 +80,7 @@ const SongDialog = ({
 
 export default function SetMVDialog(p: Props) {
   return (
-    <Portal>
+    <Portal visible={p.visible}>
       <SongDialog {...p} />
     </Portal>
   );

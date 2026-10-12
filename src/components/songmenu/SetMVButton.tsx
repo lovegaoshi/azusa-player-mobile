@@ -29,12 +29,12 @@ export default function SetMVButton({
   const handleClose = () => {
     setDialogOpen(false);
     onCancel();
-    showSheet?.(true);
   };
 
   const handleSubmit = (s: Partial<NoxMedia.Song>) => {
     setDialogOpen(false);
     onSubmit(s);
+    showSheet?.(false);
   };
 
   return (
@@ -43,7 +43,6 @@ export default function SetMVButton({
       onPress={() => {
         setDialogOpen(true);
         setSong(getSongOnClick());
-        showSheet?.(false);
       }}
       text={t('SongOperations.setMV')}
       disabled={disabled}
