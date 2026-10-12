@@ -17,7 +17,7 @@ interface LoadingChildrenProps {
   setLoading: React.Dispatch<React.SetStateAction<boolean>>;
 }
 interface LoadingWrapperProps {
-  Child: (p: LoadingChildrenProps) => JSX.Element;
+  Child: (p: LoadingChildrenProps) => React.JSX.Element;
 }
 
 const LoadingIconWrapper = ({ Child }: LoadingWrapperProps) => {

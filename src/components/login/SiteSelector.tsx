@@ -7,7 +7,7 @@ import useCollapsable from './useCollapsable';
 import { Collapsable } from '@components/commonui/Collapsable';
 
 interface Props {
-  LoginComponent: (p: { loginSite: Site }) => JSX.Element;
+  LoginComponent: (p: { loginSite: Site }) => React.JSX.Element;
   iconSize?: number;
   iconTabStyle?: ViewStyle;
   containerStyle?: ViewStyle;

@@ -61,7 +61,7 @@ interface Props {
   indicatorOffset?: number;
   pullRange?: number;
   refreshRange?: number;
-  Indicator?: ({ pullDistanceValue }: IndicatorProps) => JSX.Element;
+  Indicator?: ({ pullDistanceValue }: IndicatorProps) => React.JSX.Element;
 }
 
 export default function RefreshIndicator({
