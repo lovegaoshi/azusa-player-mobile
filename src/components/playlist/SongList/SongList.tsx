@@ -91,7 +91,6 @@ export default function SongList({
     );
     scrollPosition.value = p.contentOffset.y / contentH;
     scrollOffset.value = p.contentOffset.y;
-    console.log(scrollPosition.value, scrollOffset.value, contentH);
     scrollViewHeight.value = p.layoutMeasurement.height;
     contentHeight.value = contentH;
     onScroll?.(p);

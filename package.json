@@ -219,7 +219,7 @@
     "node": ">=18.0.0"
   },
   "isSwift": true,
-  "packageManager": "yarn@4.18.0",
+  "packageManager": "yarn@4.18.1",
   "expo": {
     "autolinking": {
       "android": {
