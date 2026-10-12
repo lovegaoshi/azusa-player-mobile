@@ -21,14 +21,14 @@ const SCROLLBAR_ANIM_TIME = 300;
 
 interface Props extends ScrollProps {
   scrollPosition: SharedValue<number>;
-  children: JSX.Element | JSX.Element[];
+  children: React.JSX.Element | React.JSX.Element[];
   style?: StyleProp<ViewStyle>;
   scrollViewHeight: SharedValue<number>;
   barHeight?: number;
   contentHeight: SharedValue<number>;
   scrollBarHideTimeout?: number;
   scrollBarAnimTime?: number;
-  LegendContent?: (p: LegendProps) => JSX.Element;
+  LegendContent?: (p: LegendProps) => React.JSX.Element;
 }
 
 export default function CustomScrollView({

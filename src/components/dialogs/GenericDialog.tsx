@@ -11,7 +11,7 @@ interface Props {
   onClose?: () => void;
   onSubmit?: () => void;
   title?: string;
-  ExtraButtons?: () => JSX.Element;
+  ExtraButtons?: () => React.JSX.Element;
 }
 
 export const GenericDialog = ({
