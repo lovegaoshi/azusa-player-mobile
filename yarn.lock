@@ -9699,7 +9699,7 @@ __metadata:
     react-native-device-info: "npm:^15.0.2"
     react-native-dotenv: "npm:^5.0.0"
     react-native-edge-to-edge: "npm:^1.8.2"
-    react-native-flashdrag-list: "https://lovegaoshi@github.com/lovegaoshi/react-native-flashdrag-list.git#commit=968874b73eb2e8b14822c5f46e2ca3d3c4ba944c"
+    react-native-flashdrag-list: "https://github.com/lovegaoshi/react-native-flashdrag-list.git#commit=d0a69bc8d53a3a9e5d5b70f0f72d1caf9412bd5f"
     react-native-gesture-handler: "npm:~3.3.0"
     react-native-get-random-values: "npm:^2.0.0"
     react-native-image-colors: "npm:^2.6.0"
@@ -20906,16 +20906,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-native-flashdrag-list@https://lovegaoshi@github.com/lovegaoshi/react-native-flashdrag-list.git#commit=968874b73eb2e8b14822c5f46e2ca3d3c4ba944c":
+"react-native-flashdrag-list@https://github.com/lovegaoshi/react-native-flashdrag-list.git#commit=d0a69bc8d53a3a9e5d5b70f0f72d1caf9412bd5f":
   version: 0.2.5
-  resolution: "react-native-flashdrag-list@https://lovegaoshi@github.com/lovegaoshi/react-native-flashdrag-list.git#commit=968874b73eb2e8b14822c5f46e2ca3d3c4ba944c"
+  resolution: "react-native-flashdrag-list@https://github.com/lovegaoshi/react-native-flashdrag-list.git#commit=d0a69bc8d53a3a9e5d5b70f0f72d1caf9412bd5f"
   peerDependencies:
     "@shopify/flash-list": "*"
     react: "*"
     react-native: "*"
     react-native-gesture-handler: "*"
     react-native-reanimated: "*"
-  checksum: 10c0/9f5bff6588e9708049f129b6b5ba1dbadb687625e8bd7fc032fde15d796fa2dc24e2df7bcd181c4c2332fd246c4228abb7429d203cfbc80c339b7cfacb1a5082
+    react-native-worklets: "*"
+  checksum: 10c0/c7a12fd5eb78227608508eaa60ccb4a8418070d4636d577515cd2f491aadf07275230829c2fb6ea15a8fa839481660a5ffd71d7bbba9c906c6ad351df817512c
   languageName: node
   linkType: hard
 
