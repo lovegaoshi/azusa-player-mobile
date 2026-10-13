@@ -13,7 +13,7 @@ export const Overlay = Platform.select({
 });
 
 interface Props extends React.PropsWithChildren {
-  visible: boolean;
+  visible?: boolean;
 }
 
 export default (p: Props) => (
