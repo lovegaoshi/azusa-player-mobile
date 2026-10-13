@@ -47,11 +47,14 @@ export default function SplitInput({
   const AddEntryButton = () => (
     <Button onPress={addEntry}>{t('Dialog.addEntry')}</Button>
   );
+  const showDialog = () => setDialogVisible(true);
 
   return (
     <View>
-      <Pressable onPress={() => setDialogVisible(true)}>
+      <Pressable onPress={showDialog}>
         <NoxInput
+          // HACK: ipadOS works with onpressin, not pressable
+          onPressIn={showDialog}
           label={label}
           autofocus={false}
           selectTextOnFocus={false}

@@ -18,6 +18,7 @@ interface InputProps {
   numberOfLines?: number;
   enable?: boolean;
   extraData?: unknown;
+  onPressIn?: () => void;
 }
 
 export const ManagedInput = ({
@@ -75,12 +76,14 @@ export default function NoxInput({
   reactNative = false,
   numberOfLines = 1,
   enable = true,
+  onPressIn,
 }: InputProps) {
   const playerStyle = useNoxSetting(state => state.playerStyle);
   const Input = reactNative ? RNTextInput : TextInput;
 
   return (
     <Input
+      onPressIn={onPressIn}
       editable={enable}
       style={style}
       value={text}
