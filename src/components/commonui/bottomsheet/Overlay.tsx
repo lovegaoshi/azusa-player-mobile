@@ -1,4 +1,9 @@
+import React from 'react';
 import { Platform, Modal } from 'react-native';
+import Animated, {
+  useAnimatedStyle,
+  withTiming,
+} from 'react-native-reanimated';
 import { FullWindowOverlay } from 'react-native-screens';
 
 /**
@@ -16,9 +21,16 @@ interface Props extends React.PropsWithChildren {
   visible?: boolean;
 }
 
-export default (p: Props) => (
-  // @ts-expect-error
-  <Overlay visible={p.visible} transparent>
-    {p.children}
-  </Overlay>
-);
+export default (p: Props) => {
+  const animatedStyle = useAnimatedStyle(() => ({
+    opacity: withTiming(p.visible ? 1 : 0, { duration: 200 }),
+  }));
+  return (
+    // @ts-expect-error
+    <Overlay visible={p.visible} transparent>
+      <Animated.View style={[{ flex: 1 }, animatedStyle]}>
+        {p.children}
+      </Animated.View>
+    </Overlay>
+  );
+};
