@@ -14,6 +14,7 @@ import SheetIconEntry from '@components/commonui/bottomsheet/SheetIconEntry';
 import NoxCache from '@utils/Cache';
 import { setNoxSkipSilence } from '@utils/ffmpeg/skipSilence';
 import ReanimatedSpinButton from '@components/commonui/ReanimatedSpinButton';
+import Overlay from '../commonui/bottomsheet/Overlay';
 
 interface Props {
   song: NoxMedia.Song;
@@ -74,11 +75,11 @@ const ABSliderMenu = ({ song, showSheet }: Props) => {
       aAbs: range[0] * duration,
       bAbs: range[1] * duration,
     });
+    showSheet?.(false);
   };
 
   const showDialog = () => {
     setDialogVisible(true);
-    showSheet?.(false);
   };
 
   const dismissDialog = () => {
@@ -110,6 +111,7 @@ const ABSliderMenu = ({ song, showSheet }: Props) => {
         title={t('SongOperations.abrepeat')}
         onClose={dismissDialog}
         onSubmit={onSubmit}
+        PortalWrapper={Overlay}
       >
         <View>
           <View style={{ alignItems: 'flex-end' }}>

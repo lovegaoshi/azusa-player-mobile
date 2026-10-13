@@ -11,9 +11,15 @@ interface Props {
   label: string;
   text: string;
   setText: (text: string) => void;
+  PortalWrapper?: NoxComponent.NoxPortal;
 }
 
-export default function SplitInput({ text, setText, label }: Props) {
+export default function SplitInput({
+  text,
+  setText,
+  label,
+  PortalWrapper,
+}: Props) {
   const { t } = useTranslation();
   const [splitText, setSplitText] = useState<string[]>([]);
   const [dialogVisible, setDialogVisible] = useState(false);
@@ -41,11 +47,14 @@ export default function SplitInput({ text, setText, label }: Props) {
   const AddEntryButton = () => (
     <Button onPress={addEntry}>{t('Dialog.addEntry')}</Button>
   );
+  const showDialog = () => setDialogVisible(true);
 
   return (
     <View>
-      <Pressable onPress={() => setDialogVisible(true)}>
+      <Pressable onPress={showDialog}>
         <NoxInput
+          // HACK: ipadOS works with onpressin, not pressable
+          onPressIn={showDialog}
           label={label}
           autofocus={false}
           selectTextOnFocus={false}
@@ -66,6 +75,8 @@ export default function SplitInput({ text, setText, label }: Props) {
           setDialogVisible(val => !val);
         }}
         ExtraButtons={AddEntryButton}
+        // HACK: should be a prop, but i'm not using splitInput elsewhere
+        PortalWrapper={PortalWrapper}
       >
         <Animated.FlatList
           itemLayoutAnimation={LinearTransition}

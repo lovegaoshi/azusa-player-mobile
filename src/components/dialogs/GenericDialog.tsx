@@ -12,6 +12,7 @@ interface Props {
   onSubmit?: () => void;
   title?: string;
   ExtraButtons?: () => React.JSX.Element;
+  PortalWrapper?: NoxComponent.NoxPortal;
 }
 
 export const GenericDialog = ({
@@ -44,10 +45,11 @@ export const GenericDialog = ({
 };
 
 export default function GenericDialogPortal(p: Props) {
+  const PortalWrapper = p.PortalWrapper ?? Portal;
   return (
-    <Portal>
+    <PortalWrapper visible={p.visible}>
       <GenericDialog {...p} />
-    </Portal>
+    </PortalWrapper>
   );
 }
 

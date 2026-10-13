@@ -15,6 +15,11 @@ import { IntentData } from '@enums/Intent';
 
 declare global {
   namespace NoxComponent {
+    export type NoxPortal = (p: {
+      children: React.JSX.Element;
+      visible?: boolean;
+    }) => React.JSX.Element;
+
     interface ActivityIndicatorProps extends _ActivityIndicatorProps {
       wavy?: boolean;
       trackColor?: string;
