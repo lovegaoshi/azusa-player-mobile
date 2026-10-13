@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useRef } from 'react';
 import { View, StyleSheet, StyleProp, ViewStyle } from 'react-native';
 import { GestureDetector, usePanGesture } from 'react-native-gesture-handler';
 import Animated, {
@@ -45,7 +45,6 @@ export default function CustomScrollView({
   LegendContent,
 }: Props) {
   const scrollTimeoutId = useRef<NodeJS.Timeout | null>(null);
-  const [scrollBarVisible, setScrollBarVisible] = useState(false);
   const scrollIndicatorOpacity = useSharedValue(0);
   const startScrollY = useSharedValue(0);
   const lastBarHeightP = useSharedValue(0);
@@ -90,7 +89,6 @@ export default function CustomScrollView({
   const resetHideTimeout = (timeout = scrollBarHideTimeout) => {
     if (barHeightP.value < scrollViewHeight.value) {
       scrollIndicatorOpacity.value = 1;
-      setScrollBarVisible(true);
     }
     scrollTimeoutId.current && clearTimeout(scrollTimeoutId.current);
     scrollTimeoutId.current = createScrollHideTimeout(timeout);
@@ -137,20 +135,13 @@ export default function CustomScrollView({
 
   const scrollBarDynamicStyle = useAnimatedStyle(() => {
     return {
-      opacity: withTiming(
-        scrollIndicatorOpacity.value,
-        scrollTimingAnimConfig,
-        () =>
-          scrollIndicatorOpacity.value === 0 &&
-          scheduleOnRN(setScrollBarVisible, false),
-      ),
+      opacity: withTiming(scrollIndicatorOpacity.value, scrollTimingAnimConfig),
       height: barHeightP.value,
       top: scrollBarY.value,
     };
   });
 
   const ScrollBar = () => {
-    if (!scrollBarVisible) return <View collapsable={false} />;
     return (
       <Animated.View
         style={[scrollBarDynamicStyle, styles.indicatorStaticStyle]}
