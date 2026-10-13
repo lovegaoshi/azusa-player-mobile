@@ -6,18 +6,23 @@ import Animated, { LinearTransition } from 'react-native-reanimated';
 
 import NoxInput, { ManagedInput } from './NoxInput';
 import GenericDialog from './GenericDialog';
-import Overlay from '../commonui/bottomsheet/Overlay';
 
 interface Props {
   label: string;
   text: string;
   setText: (text: string) => void;
+  PortalWrapper?: NoxComponent.NoxPortal;
 }
 
-export default function SplitInput({ text, setText, label }: Props) {
+export default function SplitInput({
+  text,
+  setText,
+  label,
+  PortalWrapper,
+}: Props) {
   const { t } = useTranslation();
   const [splitText, setSplitText] = useState<string[]>([]);
-  const [dialogVisible, setDialogVisible] = useState(true);
+  const [dialogVisible, setDialogVisible] = useState(false);
 
   const addEntry = () => {
     const newSplitExt = ['', ...splitText];
@@ -67,7 +72,8 @@ export default function SplitInput({ text, setText, label }: Props) {
           setDialogVisible(val => !val);
         }}
         ExtraButtons={AddEntryButton}
-        PortalWrapper={Overlay}
+        // HACK: should be a prop, but i'm not using splitInput elsewhere
+        PortalWrapper={PortalWrapper}
       >
         <Animated.FlatList
           itemLayoutAnimation={LinearTransition}

@@ -79,6 +79,7 @@ const PlaylistDialog = ({
           label={t('PlaylistSettingsDialog.subscribeUrlLabel')}
           text={sub}
           setText={setSub}
+          PortalWrapper={Portal}
         />
         <NoxInput
           label={t('PlaylistSettingsDialog.blacklistedUrlLabel')}
