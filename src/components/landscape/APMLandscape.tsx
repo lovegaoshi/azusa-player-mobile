@@ -1,5 +1,5 @@
 import React from 'react';
-import { Dimensions } from 'react-native';
+import { useWindowDimensions } from 'react-native';
 
 import '../../localization/i18n';
 import {
@@ -13,7 +13,7 @@ import LandscapePlaylistPanel from './LandscapePlaylistPanel';
 
 const AzusaPlayer = () => {
   const insets = useSafeAreaInsets();
-  const { width, height } = Dimensions.get('window');
+  const { width, height } = useWindowDimensions();
   const actionPanelWidth =
     Math.max(50, Math.min(120, height / 5)) + insets.left;
   const playerPanelWidth = Math.max(

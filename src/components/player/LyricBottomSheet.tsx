@@ -5,7 +5,7 @@ import {
   StyleSheet,
   TouchableOpacity,
   TextInput,
-  Dimensions,
+  useWindowDimensions,
 } from 'react-native';
 import { useTranslation } from 'react-i18next';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
@@ -115,7 +115,7 @@ export default function LyricBottomSheet({
   const sheet = useRef<TrueSheet>(null);
   const [route, setRoute] = useState(Routes.Main);
   const { t } = useTranslation();
-  const { height } = Dimensions.get('window');
+  const { height } = useWindowDimensions();
   const insets = useSafeAreaInsets();
 
   return (

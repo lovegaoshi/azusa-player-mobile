@@ -1,8 +1,10 @@
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
+import { useFoldingFeature } from '@logicwind/react-native-fold-detection';
 
 import AzusaPlayer from './APMPortrait';
 import AzusaPlayerLandscape from './landscape/APMLandscape';
+import AzusaPlayerFold from './fold/APMFold';
 import PIPLyricView from './player/PIPLyric';
 import { useNoxSetting } from '@stores/useApp';
 
@@ -12,7 +14,13 @@ interface Props extends NoxComponent.AppThemeProps {
 }
 
 const APM = ({ isLandscape }: { isLandscape: boolean }) => {
+  const { layoutInfo, isFlat } = useFoldingFeature();
+
   if (isLandscape) return <AzusaPlayerLandscape />;
+  // @ts-expect-error typing
+  if (layoutInfo.isFoldSupported && layoutInfo.bounds === undefined) return;
+  // @ts-expect-error typing
+  if (layoutInfo.isFoldSupported && isFlat) return <AzusaPlayerFold />;
   return <AzusaPlayer />;
 };
 
@@ -23,6 +31,7 @@ export default function APMView({
   defaultTheme,
 }: Props) {
   const playerStyle = useNoxSetting(state => state.playerStyle);
+
   if (PIP) return <PIPLyricView />;
   return (
     <NavigationContainer

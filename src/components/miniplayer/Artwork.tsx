@@ -23,6 +23,7 @@ interface Props extends NoxComponent.MiniplayerProps {
   opacity: SharedValue<number>;
   onPress: () => void;
   expand: () => void;
+  viewWidth?: number;
 }
 
 export default function MiniplayerArtwork({
@@ -30,12 +31,13 @@ export default function MiniplayerArtwork({
   opacity,
   onPress,
   expand,
+  viewWidth,
 }: Props) {
   const track = useTrackStore(s => s.track);
   const [trackCarousel, setTrackCarousel] = useState<any[]>([]);
   const playerSetting = useNoxSetting(state => state.playerSetting);
   const [overwriteAlbumArt, setOverwriteAlbumArt] = useState<string | void>();
-  const { width } = Dimensions.get('window');
+  const width = viewWidth ?? Dimensions.get('window').width;
   const insets = useSafeAreaInsets();
 
   const imgURI = playerSetting.hideCoverInMobile

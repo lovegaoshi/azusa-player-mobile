@@ -46,7 +46,7 @@ export default function usePlayStore() {
                 };
           const notificationId = await notifee.displayNotification({
             id: ID,
-            title: i18n.t('InAppUpdate.Title'),
+            title: i18n.t('InAppUpdate.title'),
             body: i18n.t('InAppUpdate.body'),
             android: {
               channelId: channel,

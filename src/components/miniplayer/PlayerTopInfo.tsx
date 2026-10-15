@@ -12,12 +12,14 @@ import { NoxRoutes } from '@enums/Routes';
 interface Props
   extends NoxComponent.OpacityProps, NoxComponent.NavigationProps2 {
   collapse: () => void;
+  draggingEnabled?: boolean;
 }
 
 export default function MiniplayerTopInfo({
   opacity,
   collapse,
   navigation: drawerNav,
+  draggingEnabled = true,
 }: Props) {
   const insets = useSafeAreaInsets();
   const playerStyle = useNoxSetting(state => state.playerStyle);
@@ -36,7 +38,7 @@ export default function MiniplayerTopInfo({
     });
     drawerNav?.closeDrawer();
     scroll();
-    collapse();
+    draggingEnabled && collapse();
   };
 
   const animatedStyle = useAnimatedStyle(() => {
@@ -45,6 +47,9 @@ export default function MiniplayerTopInfo({
       zIndex: opacity.value > 0 ? 1 : 0,
     };
   });
+
+  const DraggingEnabledWrapper = ({ children }: React.PropsWithChildren) =>
+    draggingEnabled ? children : <View></View>;
 
   return (
     <Animated.View
@@ -55,15 +60,17 @@ export default function MiniplayerTopInfo({
         animatedStyle,
       ]}
     >
-      <View style={styles.iconButtonContainerStyle}>
-        <IconButton
-          testID="miniplayer-collapse"
-          icon="arrow-collapse"
-          size={40}
-          iconColor={playerStyle.colors.primary}
-          onPress={collapse}
-        />
-      </View>
+      <DraggingEnabledWrapper>
+        <View style={styles.iconButtonContainerStyle}>
+          <IconButton
+            testID="miniplayer-collapse"
+            icon="arrow-collapse"
+            size={40}
+            iconColor={playerStyle.colors.primary}
+            onPress={collapse}
+          />
+        </View>
+      </DraggingEnabledWrapper>
 
       <View style={styles.randomGifButtonContainerStyle}>
         <RandomGIFButton

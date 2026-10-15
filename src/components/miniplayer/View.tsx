@@ -25,13 +25,20 @@ import { useMiniplayerHeight } from '@contexts/MiniPlayerHeightContext';
 
 const SnapToRatio = 0.15;
 
+interface Props extends NoxComponent.NavigationProps2 {
+  viewWidth?: number;
+  draggingEnabled?: boolean;
+}
+
 export default function MiniplayerView({
   navigation,
-}: NoxComponent.NavigationProps2) {
+  viewWidth,
+  draggingEnabled = true,
+}: Props) {
   const [lrcVisible, setLrcVisible] = React.useState(false);
   const insets = useSafeAreaInsets();
   const dim = Dimensions.get('window');
-  const width = dim.width;
+  const width = viewWidth ?? dim.width;
   const height = dim.height + insets.top + insets.bottom;
   const miniplayerHeight = useMiniplayerHeight();
   const artworkOpacity = useSharedValue(1);
@@ -134,7 +141,7 @@ export default function MiniplayerView({
   };
 
   const scrollDragGesture = usePanGesture({
-    enabled: !(lrcVisible || sliding),
+    enabled: draggingEnabled && !(lrcVisible || sliding),
     activeOffsetY: [-5, 5],
     onActivate: () => (initHeight.value = miniplayerHeight.value),
     onUpdate: e => dragPlayerHeight(e.translationY),
@@ -168,12 +175,14 @@ export default function MiniplayerView({
             opacity={opacityVisible}
             collapse={collapse}
             navigation={navigation}
+            draggingEnabled={draggingEnabled}
           />
           <TrackAlbumArt
             miniplayerHeight={miniplayerHeight}
             opacity={artworkOpacity}
             onPress={onArtworkPress}
             expand={expand}
+            viewWidth={width}
           />
           <MiniControls miniplayerHeight={miniplayerHeight} expand={expand} />
         </View>

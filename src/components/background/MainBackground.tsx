@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Dimensions, StyleSheet, AppState } from 'react-native';
+import { StyleSheet, AppState, useWindowDimensions } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Image } from 'expo-image';
 import { useVideoPlayer, VideoView } from 'expo-video';
@@ -19,7 +19,8 @@ const MainBackground = () => {
   const insets = useSafeAreaInsets();
   const playerStyle = useNoxSetting(state => state.playerStyle);
   const isLandscape = useIsLandscape();
-  const { width, height } = Dimensions.get('window');
+  const { width, height } = useWindowDimensions();
+
   const [bkgrdImg, setBkgrdImg] = useState<NoxTheme.BackgroundImage>();
   const bkgrdImgRaw =
     isLandscape && playerStyle.bkgrdImgLandscape

@@ -9,6 +9,7 @@ import {
   DarkTheme as NavigationDarkTheme,
   DefaultTheme as NavigationDefaultTheme,
 } from '@react-navigation/native';
+import { FoldingFeatureProvider } from '@logicwind/react-native-fold-detection';
 
 import AppOpenSplash from './components/background/AppOpenSplash';
 import useSetupPlayer from './hooks/useSetupPlayer';
@@ -105,33 +106,38 @@ export default function App(appProps: NoxComponent.AppProps) {
     );
   }
   return (
-    <GestureHandlerRootView style={styles.gestureContainer}>
-      <HookEmptyComponent />
-      <SafeAreaProvider>
-        <APMContext>
-          <MainBackground />
-          <View
-            style={{ backgroundColor: playerStyle.colors.background, flex: 1 }}
-          >
-            <PaperProvider
-              theme={{
-                ...defaultTheme,
-                colors: playerStyle.colors,
+    <FoldingFeatureProvider>
+      <GestureHandlerRootView style={styles.gestureContainer}>
+        <HookEmptyComponent />
+        <SafeAreaProvider>
+          <APMContext>
+            <MainBackground />
+            <View
+              style={{
+                backgroundColor: playerStyle.colors.background,
+                flex: 1,
               }}
             >
-              <APM
-                PIP={PIPMode}
-                isLandscape={isLandscape}
-                defaultNavTheme={defaultNavTheme}
-                defaultTheme={defaultTheme}
-              />
-              <SongMenuSheet />
-              <SnackBar />
-            </PaperProvider>
-          </View>
-        </APMContext>
-      </SafeAreaProvider>
-    </GestureHandlerRootView>
+              <PaperProvider
+                theme={{
+                  ...defaultTheme,
+                  colors: playerStyle.colors,
+                }}
+              >
+                <APM
+                  PIP={PIPMode}
+                  isLandscape={isLandscape}
+                  defaultNavTheme={defaultNavTheme}
+                  defaultTheme={defaultTheme}
+                />
+                <SongMenuSheet />
+                <SnackBar />
+              </PaperProvider>
+            </View>
+          </APMContext>
+        </SafeAreaProvider>
+      </GestureHandlerRootView>
+    </FoldingFeatureProvider>
   );
 }
 
