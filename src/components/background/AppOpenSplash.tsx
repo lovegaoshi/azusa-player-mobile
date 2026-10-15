@@ -1,5 +1,5 @@
 import React from 'react';
-import { Dimensions, Pressable, View } from 'react-native';
+import { Dimensions, Pressable, useWindowDimensions, View } from 'react-native';
 import { Image } from 'expo-image';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useVideoPlayer, VideoView } from 'expo-video';
@@ -36,7 +36,7 @@ interface TanakaProps {
   onEnd: () => void;
 }
 const TanakaAmazingCommodities = ({ url, onEnd }: TanakaProps) => {
-  const { width, height } = Dimensions.get('window');
+  const { width, height } = useWindowDimensions();
   const insets = useSafeAreaInsets();
   const fullScreenStyle = {
     width,
@@ -76,7 +76,7 @@ interface Props {
 }
 const AppOpenSplash = ({ setIsSplashReady }: Props) => {
   const { tanaka, initialized } = useTanakaAmazingCommodities();
-  const { width, height } = Dimensions.get('window');
+  const { width, height } = useWindowDimensions();
   const insets = useSafeAreaInsets();
   const fullScreenStyle = {
     width,
