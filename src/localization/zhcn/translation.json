@@ -1,5 +1,9 @@
 {
   "_comment": "src/localization/en/translation.json",
+  "InAppUpdate": {
+    "title": "更新中...",
+    "body": "APM 正在更新到最新版本!"
+  },
   "Artist": {
     "top": "最热",
     "latest": "最新",
