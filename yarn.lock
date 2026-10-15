@@ -9727,8 +9727,8 @@ __metadata:
     react-native-screens: "npm:4.29.0"
     react-native-shadow-2: "npm:^7.1.2"
     react-native-svg: "npm:15.15.5"
-    react-native-svga-player: "https://lovegaoshi@github.com/lovegaoshi/react-native-svga-player.git#commit=2cd82e2b878e7711013d14e798df931598791df4"
-    react-native-text-ticker: "https://lovegaoshi@github.com/lovegaoshi/react-native-text-ticker.git#commit=c80fd5d660b57229dd730fe44919fb86364f1969"
+    react-native-svga-player: "https://github.com/lovegaoshi/react-native-svga-player.git#commit=2cd82e2b878e7711013d14e798df931598791df4"
+    react-native-text-ticker: "https://github.com/lovegaoshi/react-native-text-ticker.git#commit=c80fd5d660b57229dd730fe44919fb86364f1969"
     react-native-track-player: "https://github.com/lovegaoshi/react-native-track-player.git#commit=7e36bdf8af70df02538cc376c962ae1297bac0b8"
     react-native-turbo-base64: "npm:^0.1.5"
     react-native-url-polyfill: "npm:^4.0.0"
@@ -21192,9 +21192,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-native-svga-player@https://lovegaoshi@github.com/lovegaoshi/react-native-svga-player.git#commit=2cd82e2b878e7711013d14e798df931598791df4":
+"react-native-svga-player@https://github.com/lovegaoshi/react-native-svga-player.git#commit=2cd82e2b878e7711013d14e798df931598791df4":
   version: 1.1.0
-  resolution: "react-native-svga-player@https://lovegaoshi@github.com/lovegaoshi/react-native-svga-player.git#commit=2cd82e2b878e7711013d14e798df931598791df4"
+  resolution: "react-native-svga-player@https://github.com/lovegaoshi/react-native-svga-player.git#commit=2cd82e2b878e7711013d14e798df931598791df4"
   dependencies:
     "@types/react": "npm:^16.9.19"
     "@types/react-native": "npm:^0.61.15"
@@ -21206,10 +21206,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-native-text-ticker@https://lovegaoshi@github.com/lovegaoshi/react-native-text-ticker.git#commit=c80fd5d660b57229dd730fe44919fb86364f1969":
+"react-native-text-ticker@https://github.com/lovegaoshi/react-native-text-ticker.git#commit=c80fd5d660b57229dd730fe44919fb86364f1969":
   version: 1.14.0
-  resolution: "react-native-text-ticker@https://lovegaoshi@github.com/lovegaoshi/react-native-text-ticker.git#commit=c80fd5d660b57229dd730fe44919fb86364f1969"
-  checksum: 10c0/d8284b9e8450f53b282d87de89cd9a838ab798db70a874963d64ecd7831e83887933ed92e480677c35da5670fa9e5a20686930b3965a926bfe0b7faa523fbf65
+  resolution: "react-native-text-ticker@https://github.com/lovegaoshi/react-native-text-ticker.git#commit=c80fd5d660b57229dd730fe44919fb86364f1969"
+  checksum: 10c0/6a3dd28fb39c8824f069626d60347a3d68692a46119534e9d7f0e727d7dc88c5f75b481801d09e3741160f849072c7b3501ce2a9190e9a35712a99ecac20c5d0
   languageName: node
   linkType: hard
 

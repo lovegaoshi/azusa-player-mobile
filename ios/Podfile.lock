@@ -1645,6 +1645,27 @@ PODS:
     - Yoga
   - react-native-carplay (2.4.1-beta.0):
     - React
+  - react-native-fold-detection (0.3.2):
+    - hermes-engine
+    - RCTRequired
+    - RCTTypeSafety
+    - React-Core
+    - React-debug
+    - React-Fabric
+    - React-featureflags
+    - React-graphics
+    - React-ImageManager
+    - React-jsi
+    - React-NativeModulesApple
+    - React-RCTFabric
+    - React-renderercss
+    - React-rendererdebug
+    - React-utils
+    - ReactCodegen
+    - ReactCommon/turbomodule/bridging
+    - ReactCommon/turbomodule/core
+    - ReactNativeDependencies
+    - Yoga
   - react-native-get-random-values (2.0.0):
     - hermes-engine
     - RCTRequired
@@ -2809,6 +2830,7 @@ DEPENDENCIES:
   - react-native-blob-util (from `../node_modules/react-native-blob-util`)
   - react-native-bottom-tabs (from `../node_modules/react-native-bottom-tabs`)
   - react-native-carplay (from `../node_modules/react-native-carplay`)
+  - "react-native-fold-detection (from `../node_modules/@logicwind/react-native-fold-detection`)"
   - react-native-get-random-values (from `../node_modules/react-native-get-random-values`)
   - "react-native-netinfo (from `../node_modules/@react-native-community/netinfo`)"
   - react-native-ota-hot-update (from `../node_modules/react-native-ota-hot-update`)
@@ -3042,6 +3064,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native-bottom-tabs"
   react-native-carplay:
     :path: "../node_modules/react-native-carplay"
+  react-native-fold-detection:
+    :path: "../node_modules/@logicwind/react-native-fold-detection"
   react-native-get-random-values:
     :path: "../node_modules/react-native-get-random-values"
   react-native-netinfo:
@@ -3246,6 +3270,7 @@ SPEC CHECKSUMS:
   react-native-blob-util: a05ea03be23dfdd4b6a8fa1b77a81989e3520d16
   react-native-bottom-tabs: 4ceeed4b71953722a530c61e2ce3ffb09d5d4dd8
   react-native-carplay: 8f388f6f73e5e0f73ed154ad8794371343ee20c0
+  react-native-fold-detection: 6dd6ad4ee422d91458090cf98f9e9dd9131b7e77
   react-native-get-random-values: 5d3658304df38260da9e2f4e6388c47030c69619
   react-native-netinfo: adec161a2fc40d327f2c1bab7d8c57a91943ab74
   react-native-ota-hot-update: 13a72457ebea0ed1b478e6291004be18ee67c7f5
