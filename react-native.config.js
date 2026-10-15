@@ -12,5 +12,10 @@ module.exports = {
         ios: null, // Disable autolinking for iOS
       },
     },
+    'react-native-fold-detection': {
+      platforms: {
+        ios: null, // Disable autolinking for iOS
+      },
+    },
   },
 };

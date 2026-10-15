@@ -23,7 +23,14 @@ const HomeIcon = () => <IconButton icon={ScreenIcons.HomeScreen} />;
 const ExploreIcon = () => <IconButton icon={ScreenIcons.ExploreScreen} />;
 const SettingIcon = () => <IconButton icon={ScreenIcons.SettingScreen} />;
 
-const AzusaPlayer = () => {
+interface Props {
+  MiniPlayer?: (p: NoxComponent.NavigationProps2) => JSX.Element | undefined;
+  alwaysShowBottomTab?: boolean;
+}
+export const APMDrawer = ({
+  MiniPlayer = () => undefined,
+  alwaysShowBottomTab,
+}: Props) => {
   const { t } = useTranslation();
   const Drawer = createDrawerNavigator();
   const gestureMode = useNoxSetting(state => state.gestureMode);
@@ -82,10 +89,17 @@ const AzusaPlayer = () => {
           component={Settings}
         />
       </Drawer.Navigator>
-      <NoxMiniPlayer navigation={navigation} />
-      <NoxBottomTab navigation={navigation} />
+      <MiniPlayer navigation={navigation} />
+      <NoxBottomTab
+        navigation={navigation}
+        alwaysShowBottomTab={alwaysShowBottomTab}
+      />
     </SafeAreaView>
   );
+};
+
+const AzusaPlayer = () => {
+  return <APMDrawer MiniPlayer={NoxMiniPlayer} />;
 };
 
 export default AzusaPlayer;

@@ -5358,6 +5358,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@logicwind/react-native-fold-detection@npm:^0.3.2":
+  version: 0.3.2
+  resolution: "@logicwind/react-native-fold-detection@npm:0.3.2"
+  peerDependencies:
+    react: "*"
+    react-native: "*"
+  checksum: 10c0/fb80de08536f03d56fd02acac2c594239edd2dee8e208701fda3e25369b89c9b7ee8eb908a4bbbeb1c9389c2273e5287635c56309d5e1cc9ca438a99ed9ee7d8
+  languageName: node
+  linkType: hard
+
 "@material/material-color-utilities@npm:^0.4.0":
   version: 0.4.0
   resolution: "@material/material-color-utilities@npm:0.4.0"
@@ -9582,6 +9592,7 @@ __metadata:
     "@expo/ui": "npm:~57.0.22"
     "@legendapp/list": "npm:^3.6.0"
     "@lodev09/react-native-true-sheet": "npm:^4.0.0-beta.24"
+    "@logicwind/react-native-fold-detection": "npm:^0.3.2"
     "@material/material-color-utilities": "npm:^0.4.0"
     "@preeternal/react-native-cookie-manager": "npm:^7.0.0"
     "@react-native-assets/slider": "npm:^11.0.12"
