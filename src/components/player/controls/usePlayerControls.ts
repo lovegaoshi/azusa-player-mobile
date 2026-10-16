@@ -14,7 +14,6 @@ import noxPlayingList, { playNextIndex } from '@stores/playingList';
 import { NoxRepeatMode } from '@enums/RepeatMode';
 import usePlaylistCRUD from '@hooks/usePlaylistCRUD';
 import { getR128Gain, getABRepeatNormalized } from '@utils/db/sqlAPI';
-import { isAndroid } from '@utils/RNUtils';
 import { useTrackStore } from '@hooks/useActiveTrack';
 import { execWhenTrue, r128gain2Volume } from '@utils/Utils';
 import useSponsorBlock from './useSponsorBlock';
@@ -117,7 +116,6 @@ export default function usePlayerControls() {
       if (
         // crossfade req: position is at crossfade interval,
         // crossfade song prepared, not in crossfading
-        isAndroid &&
         playerSetting.crossfade > 0 &&
         event.position > trueDuration - playerSetting.crossfade &&
         crossfadeId === currentSongId &&

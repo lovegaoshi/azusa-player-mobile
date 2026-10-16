@@ -2,7 +2,7 @@ import { useTranslation } from 'react-i18next';
 
 import { SelectDialogChildren } from '../SelectDialogWrapper';
 import { useNoxSetting } from '@stores/useApp';
-import { isAndroid, selfDestruct } from '@utils/RNUtils';
+import { selfDestruct } from '@utils/RNUtils';
 import { SelectSettingEntry } from '../helpers/SettingEntry';
 import SettingListItem from '../helpers/SettingListItem';
 
@@ -32,7 +32,7 @@ export default function CrossfadeButton({
     } as SelectSettingEntry<number>);
   };
 
-  return isAndroid ? (
+  return (
     <SettingListItem
       icon={'shuffle-variant'}
       settingName="crossfade"
@@ -40,7 +40,5 @@ export default function CrossfadeButton({
       settingCategory="DeveloperSettings"
       modifyDescription={v => `${v}: ${playerSetting.crossfade * 1000}ms`}
     />
-  ) : (
-    <></>
   );
 }
