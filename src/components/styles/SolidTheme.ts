@@ -55,6 +55,7 @@ export default {
       karaokeOn: 'rgba(208, 188, 255, 1)',
       karaokeOff: 'rgba(83, 79, 89, 1)',
       ...MD3DarkTheme.colors,
+      surfaceVariant: '#1E1E1E',
       // background: 'rgba(255, 255, 255, 0.4)',
     },
     playerControlIconContained: undefined,
