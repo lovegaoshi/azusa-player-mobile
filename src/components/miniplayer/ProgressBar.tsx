@@ -3,7 +3,7 @@ import { StyleSheet } from 'react-native';
 import { useAnimatedReaction } from 'react-native-reanimated';
 import { scheduleOnRN } from 'react-native-worklets';
 
-import { SimpleProgressBar } from '../player/controls/ProgressBars/ProgressBar';
+import ProgressBar from '../player/controls/ProgressBars/MiniProgressBar';
 import { MinPlayerHeight } from './Constants';
 
 export default function MiniplayerProgressBar({
@@ -23,7 +23,7 @@ export default function MiniplayerProgressBar({
   }
 
   return (
-    <SimpleProgressBar
+    <ProgressBar
       thumbSize={0}
       trackHeight={2}
       style={styles.progressBar}

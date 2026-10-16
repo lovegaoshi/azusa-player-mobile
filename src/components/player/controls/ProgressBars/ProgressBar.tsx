@@ -98,7 +98,7 @@ export default function ProgressBar(p: ProgressBarContainerProps) {
   );
 }
 
-const styles = StyleSheet.create({
+export const styles = StyleSheet.create({
   progressBar: {
     width: '100%',
     marginTop: 10,
