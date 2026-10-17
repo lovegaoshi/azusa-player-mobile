@@ -30,24 +30,24 @@ index 54c0ad0..3430c6c 100644
  
    fun unregisterPlayer(player: ExoPlayer) {
 diff --git a/node_modules/expo-video/android/src/main/java/expo/modules/video/player/VideoPlayer.kt b/node_modules/expo-video/android/src/main/java/expo/modules/video/player/VideoPlayer.kt
-index ee4e976..cd1026d 100644
+index 7ccce96..d64cf39 100644
 --- a/node_modules/expo-video/android/src/main/java/expo/modules/video/player/VideoPlayer.kt
 +++ b/node_modules/expo-video/android/src/main/java/expo/modules/video/player/VideoPlayer.kt
-@@ -88,7 +88,7 @@ class VideoPlayer(val context: Context, appContext: AppContext, source: VideoSou
+@@ -94,7 +94,7 @@ class VideoPlayer(val context: Context, appContext: AppContext, source: VideoSou
  
    internal val firstFrameEventGenerator: FirstFrameEventGenerator
    val serviceConnection = PlaybackServiceConnection(WeakReference(this), appContext)
 -  var mediaSession: MediaSession = buildBasicMediaSession(context, player)
-+  //var mediaSession: MediaSession = buildBasicMediaSession(context, player)
++  // var mediaSession: MediaSession = buildBasicMediaSession(context, player)
    val intervalUpdateClock = IntervalUpdateClock(this)
  
    var playing by IgnoreSameSet(false) { new, old ->
-@@ -374,7 +374,7 @@ class VideoPlayer(val context: Context, appContext: AppContext, source: VideoSou
+@@ -406,7 +406,7 @@ class VideoPlayer(val context: Context, appContext: AppContext, source: VideoSou
        appContext?.reactContext?.unbindService(serviceConnection)
      }
      serviceConnection.playbackServiceBinder?.service?.unregisterPlayer(player)
 -    mediaSession.release()
-+    //mediaSession.release()
++    // mediaSession.release()
  
      VideoManager.unregisterVideoPlayer(this@VideoPlayer)
  

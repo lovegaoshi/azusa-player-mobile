@@ -1,0 +1,13 @@
+diff --git a/node_modules/@react-native-masked-view/masked-view/types/index.d.ts b/node_modules/@react-native-masked-view/masked-view/types/index.d.ts
+index 6a66a1e..2b0b9f8 100644
+--- a/node_modules/@react-native-masked-view/masked-view/types/index.d.ts
++++ b/node_modules/@react-native-masked-view/masked-view/types/index.d.ts
+@@ -17,4 +17,6 @@ declare const MaskedViewBase: Constructor<
+   ReactNative.NativeMethods
+ > &
+   typeof MaskedViewComponent;
+-export default class MaskedView extends MaskedViewBase {}
++
++declare const MaskedView: React.FC<MaskedViewProps>
++export default MaskedView;
+\ No newline at end of file

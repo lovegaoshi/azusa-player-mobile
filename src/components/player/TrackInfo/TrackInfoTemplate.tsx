@@ -45,8 +45,6 @@ const AlbumArt = ({
     <TouchableWithoutFeedback onPress={onImagePress}>
       <Animated.View style={styles.container}>
         <Image
-          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-          // @ts-expect-error
           style={[styles.artwork, coverStyle]}
           source={
             playerSetting.hideCoverInMobile

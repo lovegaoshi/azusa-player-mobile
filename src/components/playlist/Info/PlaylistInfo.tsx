@@ -5,7 +5,7 @@ import {
   Pressable,
   StyleSheet,
   GestureResponderEvent,
-  TextInput,
+  TextInputInstance,
 } from 'react-native';
 import { useTranslation } from 'react-i18next';
 import Animated, {
@@ -43,7 +43,7 @@ export default function PlaylistInfo({
   const { t } = useTranslation();
   const currentPlaylist = useNoxSetting(state => state.currentPlaylist);
   const playerStyle = useNoxSetting(state => state.playerStyle);
-  const searchContainerRef = useRef<TextInput>(null);
+  const searchContainerRef = useRef<TextInputInstance>(null);
   const opacity = useSharedValue(1);
   const searchBkgrdWidth = useSharedValue(0);
   const searchBkgrdHeight = useSharedValue(0);

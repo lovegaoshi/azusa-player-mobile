@@ -68,7 +68,7 @@ export const PaperText = (p: PaperTextProps<never>) => {
   const newStyle = Array.isArray(style)
     ? [...style, scaledStyle]
     : [style, scaledStyle];
-
+  // @ts-expect-error typing (null vs undefined; paper is likely not catching up rn 0.87 typing here)
   return <Text {...p} style={newStyle} />;
 };
 

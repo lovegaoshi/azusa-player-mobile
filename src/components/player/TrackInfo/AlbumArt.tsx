@@ -101,8 +101,6 @@ const AlbumArt: React.FC<Props> = ({
           pointerEvents={isImageVisible ? 'auto' : 'none'}
         >
           <Image
-            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-            // @ts-expect-error
             style={[styles.artwork, coverStyle]}
             source={
               playerSetting.hideCoverInMobile
