@@ -1,8 +1,9 @@
 import React from 'react';
-import { StyleSheet } from 'react-native';
+import { Platform, StyleSheet } from 'react-native';
 import { useProgress } from 'react-native-track-player';
 import { Slider } from '@react-native-assets/slider';
 import { useSharedValue } from 'react-native-reanimated';
+import { ProgressBar as PaperProgressBar } from 'react-native-paper';
 
 import { useNoxSetting } from '@stores/useApp';
 import { TPSeek } from '@stores/RNObserverStore';
@@ -10,6 +11,25 @@ import {
   ProgressBarContainerProps,
   ProgressBarProps,
 } from './ProgressBarProps';
+import { isIOS } from '@utils/RNUtils';
+
+/**
+ * rn-paper progress bar; @rn-assets/slider shows artifacts in iOS
+ * used spefifically for the miniplayer
+ */
+const SimplerProgressBar = ({
+  progressInterval,
+  trackHeight,
+}: ProgressBarProps) => {
+  const { position, duration } = useProgress(progressInterval, false);
+
+  return (
+    <PaperProgressBar
+      progress={position / duration}
+      style={[{ height: trackHeight }, styles.transparent]}
+    />
+  );
+};
 
 export const SimpleProgressBar = ({
   thumbSize,
@@ -98,7 +118,11 @@ export default function ProgressBar(p: ProgressBarContainerProps) {
   );
 }
 
-const styles = StyleSheet.create({
+export const MiniProgressBar =
+  // @ts-expect-error android doesnt have isPad, but its fine here
+  isIOS && Platform.isPad ? SimplerProgressBar : SimpleProgressBar;
+
+export const styles = StyleSheet.create({
   progressBar: {
     width: '100%',
     marginTop: 10,

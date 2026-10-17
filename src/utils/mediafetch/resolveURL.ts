@@ -75,7 +75,7 @@ export const fetchPlayUrlPromise = async ({
         return mfsdk.resolveURL(song);
       }
     }
-    return fetchBiliUrlPromise({ bvid, cid: String(cid), iOS, noBiliR128Gain });
+    return fetchBiliUrlPromise({ bvid, cid: String(cid), noBiliR128Gain });
   };
 
   return regexMatchOperations({
