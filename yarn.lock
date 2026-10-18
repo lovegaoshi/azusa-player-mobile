@@ -9434,6 +9434,7 @@ __metadata:
     react-native-get-random-values: "npm:^2.0.0"
     react-native-image-colors: "npm:^2.6.0"
     react-native-lyric: "https://github.com/lovegaoshi/react-native-lyric.git#commit=8fd6cdee4c51010daea3ccd23ae991112846803b"
+    react-native-nitro-base64: "npm:^1.1.2"
     react-native-nitro-modules: "npm:^0.37.1"
     react-native-notify-kit: "npm:^10.9.0"
     react-native-ota-hot-update: "npm:2.2.2"
@@ -9449,7 +9450,6 @@ __metadata:
     react-native-svga-player: "https://github.com/lovegaoshi/react-native-svga-player.git#commit=2cd82e2b878e7711013d14e798df931598791df4"
     react-native-text-ticker: "https://github.com/lovegaoshi/react-native-text-ticker.git#commit=c80fd5d660b57229dd730fe44919fb86364f1969"
     react-native-track-player: "https://github.com/lovegaoshi/react-native-track-player.git#commit=c10b16dd3aa6e13a45869c32e002b57b8d9012ef"
-    react-native-turbo-base64: "npm:^0.1.5"
     react-native-url-polyfill: "npm:^4.0.0"
     react-native-webview: "npm:14.0.1"
     react-native-worklets: "npm:0.13.0"
@@ -20443,6 +20443,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"react-native-nitro-base64@npm:^1.1.2":
+  version: 1.1.2
+  resolution: "react-native-nitro-base64@npm:1.1.2"
+  peerDependencies:
+    react: "*"
+    react-native: "*"
+    react-native-nitro-modules: "*"
+  checksum: 10c0/ed3b07ad7121a8b0cf72964ef76e245a677225c35907e3a1b02a2d41a7cbf47cbf5f4c77bf6e097e2f0813785397564ba82de52114309ced087296d98f678991
+  languageName: node
+  linkType: hard
+
 "react-native-nitro-modules@npm:^0.37.1":
   version: 0.37.1
   resolution: "react-native-nitro-modules@npm:0.37.1"
@@ -20679,16 +20690,6 @@ __metadata:
     shaka-player:
       optional: true
   checksum: 10c0/b5b7967b1c2b021b85bcdabbd424d3f8e6a7b142db7c89dbe653aa86ebcd034d227ce901f30cdb9a0c8ab90b53cd67c2ff96d9472b0598278051d924a16fb042
-  languageName: node
-  linkType: hard
-
-"react-native-turbo-base64@npm:^0.1.5":
-  version: 0.1.5
-  resolution: "react-native-turbo-base64@npm:0.1.5"
-  peerDependencies:
-    react: "*"
-    react-native: "*"
-  checksum: 10c0/7d6fc859a91ff2be8dc7a7d67250a57a9e8e57a80e4a08872ca5d186b2490f8535bbed83fada20606fc067a740efbc356bfc0e9504337e6df96fbbf0ce025e97
   languageName: node
   linkType: hard
 
