@@ -18,9 +18,9 @@ export const ytbiPlaylistItemToNoxSong = (
   try {
     return SongTS({
       cid: `${Source.ytbvideo}-${val.content_id}`,
-      bvid: val.content_id,
-      name: val.metadata?.title.text ?? 'N/A',
-      nameRaw: val.metadata?.title.text ?? 'N/A',
+      bvid: val.content_id!,
+      name: val.metadata?.title?.text ?? 'N/A',
+      nameRaw: val.metadata?.title?.text ?? 'N/A',
       singer:
         val.metadata?.metadata?.metadata_rows[0].metadata_parts?.[0].text
           ?.text ?? '',
@@ -54,7 +54,7 @@ const getYtbSong = async (
 ) => {
   const videos = playlistData.videos as LockupView[];
   for (const video of videos) {
-    if (!favList.includes(video.content_id)) {
+    if (!favList.includes(video.content_id!)) {
       const song = ytbiPlaylistItemToNoxSong(video, playlistData.info.title);
       if (song) {
         songs.push(song);

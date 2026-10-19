@@ -9404,7 +9404,7 @@ __metadata:
     ffmpeg-kit-react-native: "https://github.com/lovegaoshi/ffmpeg-kit.git#commit=b495250938cd596d7dafe002f334b0b99e62c848"
     gts: "npm:^7.0.0"
     he: "npm:^2.0.0"
-    i18next: "npm:26.4.2"
+    i18next: "npm:26.5.2"
     intl-pluralrules: "npm:^2.0.1"
     jest: "npm:^30.5.2"
     libmuse: "https://github.com/lovegaoshi/muse.git#commit=942f16bde7ba44ad1d0452ce838a96b17fe95aff"
@@ -9418,7 +9418,7 @@ __metadata:
     prettier: "npm:^3.9.10"
     qs: "npm:^6.16.1"
     react: "npm:19.3.0"
-    react-i18next: "npm:^17.0.21"
+    react-i18next: "npm:^17.1.0"
     react-native: "npm:0.88.0"
     react-native-app-auth: "npm:^8.5.0"
     react-native-background-timer: "git+https://github.com/lovegaoshi/react-native-background-timer.git"
@@ -9430,10 +9430,10 @@ __metadata:
     react-native-dotenv: "npm:^5.0.0"
     react-native-edge-to-edge: "npm:^1.8.2"
     react-native-flashdrag-list: "https://github.com/lovegaoshi/react-native-flashdrag-list.git#commit=d0a69bc8d53a3a9e5d5b70f0f72d1caf9412bd5f"
-    react-native-gesture-handler: "npm:~3.3.0"
+    react-native-gesture-handler: "npm:~3.4.0"
     react-native-get-random-values: "npm:^2.0.0"
     react-native-image-colors: "npm:^2.6.0"
-    react-native-lyric: "https://github.com/lovegaoshi/react-native-lyric.git#commit=8fd6cdee4c51010daea3ccd23ae991112846803b"
+    react-native-lyric: "https://github.com/lovegaoshi/react-native-lyric.git#commit=7fe51e41bbcd8d81b74e82e7a58d526e4c58ce9d"
     react-native-nitro-base64: "npm:^1.1.2"
     react-native-nitro-modules: "npm:^0.37.1"
     react-native-notify-kit: "npm:^10.9.0"
@@ -9463,7 +9463,7 @@ __metadata:
     use-debounce: "npm:^10.1.1"
     uuid: "npm:^14.0.3"
     web-streams-polyfill: "npm:^4.3.0"
-    youtubei.js: "npm:18.1.0"
+    youtubei.js: "npm:18.2.0"
     zustand: "npm:^5.0.15"
   languageName: unknown
   linkType: soft
@@ -15651,15 +15651,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"i18next@npm:26.4.2":
-  version: 26.4.2
-  resolution: "i18next@npm:26.4.2"
+"i18next@npm:26.5.2":
+  version: 26.5.2
+  resolution: "i18next@npm:26.5.2"
   peerDependencies:
     typescript: ^5 || ^6 || ^7
   peerDependenciesMeta:
     typescript:
       optional: true
-  checksum: 10c0/f2c9613e03e09e56a84aee939d8fbe3442a58622915e11f97e47f9ab358dfa65be783230b37a21483152711f786fccfe697d7f5ea9269c54f16179dc59960e4b
+  checksum: 10c0/b2edaba4af8f907d685bb133b8878cc1f03a7eaac3e76937da736b819d6d9500a82f516441b272994e9988c227bbcbbbc38fd185b4a2f67ab6bf9884ecf31167
   languageName: node
   linkType: hard
 
@@ -20189,9 +20189,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-i18next@npm:^17.0.21":
-  version: 17.0.21
-  resolution: "react-i18next@npm:17.0.21"
+"react-i18next@npm:^17.1.0":
+  version: 17.1.0
+  resolution: "react-i18next@npm:17.1.0"
   dependencies:
     "@babel/runtime": "npm:^7.29.7"
     html-parse-stringify: "npm:^4.0.1"
@@ -20207,7 +20207,7 @@ __metadata:
       optional: true
     typescript:
       optional: true
-  checksum: 10c0/51f1ced3d0501f011591bc79e13e66e5bef5fc9757408bf42093d3fff4e32f4be73714f61f896de05d6f114950025999f54b0acb4027749872284b1664246b24
+  checksum: 10c0/5ba9de18304f8fc20511de9f64f2a71594cb607c55b06692463867721f256770ae71489639bd96554bc556b5b310d495cff526ebbbaac091f9bae0ca8f547f24
   languageName: node
   linkType: hard
 
@@ -20383,16 +20383,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-native-gesture-handler@npm:~3.3.0":
-  version: 3.3.0
-  resolution: "react-native-gesture-handler@npm:3.3.0"
+"react-native-gesture-handler@npm:~3.4.0":
+  version: 3.4.0
+  resolution: "react-native-gesture-handler@npm:3.4.0"
   dependencies:
     "@types/react-test-renderer": "npm:^19.1.0"
     invariant: "npm:^2.2.4"
   peerDependencies:
     react: "*"
     react-native: "*"
-  checksum: 10c0/6a710722f59eca293e2ff30852cbaf8fb4705712068c9ebb4d1d9d737cda61f175b2b0b452c9fab322d9e14efae3b6d0ab7c884439125b7f5cfb57934f7a65f8
+  checksum: 10c0/49fac726e4716347dcbefa7573272d2ec75f8a48eb0721f4fbd71386c10b3f630c339c664a521684425cf03c1b96b7245dd3df93f5262e426bb7a3517e58e8ee
   languageName: node
   linkType: hard
 
@@ -20430,16 +20430,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-native-lyric@https://github.com/lovegaoshi/react-native-lyric.git#commit=8fd6cdee4c51010daea3ccd23ae991112846803b":
+"react-native-lyric@https://github.com/lovegaoshi/react-native-lyric.git#commit=7fe51e41bbcd8d81b74e82e7a58d526e4c58ce9d":
   version: 1.0.1
-  resolution: "react-native-lyric@https://github.com/lovegaoshi/react-native-lyric.git#commit=8fd6cdee4c51010daea3ccd23ae991112846803b"
+  resolution: "react-native-lyric@https://github.com/lovegaoshi/react-native-lyric.git#commit=7fe51e41bbcd8d81b74e82e7a58d526e4c58ce9d"
   peerDependencies:
+    "@legendapp/list": "*"
     "@react-native-masked-view/masked-view": ^0.3.1
     react: "*"
     react-native: "*"
     react-native-reanimated: "*"
     react-native-worklets: "*"
-  checksum: 10c0/c416be902681dbe6d8b62cd35accafb18a1196b9b94490e8155325c40ee5da901324c6d3156665bf63d1d9252ea7d3b482518c42f0134c870dc0549aaa74c17c
+  checksum: 10c0/62b5025303417144a58f86cd1972a2692e259d1b53ba25b28d53bd47108841445ad72c6ef62fb4116df334ef3f0e0c004e33edd7dce76f06523fb8e799663123
   languageName: node
   linkType: hard
 
@@ -24371,14 +24372,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"youtubei.js@npm:18.1.0":
-  version: 18.1.0
-  resolution: "youtubei.js@npm:18.1.0"
+"youtubei.js@npm:18.2.0":
+  version: 18.2.0
+  resolution: "youtubei.js@npm:18.2.0"
   dependencies:
     "@bufbuild/protobuf": "npm:^2.0.0"
     fflate: "npm:^0.8.2"
     meriyah: "npm:^7.3.1"
-  checksum: 10c0/8e92974faa4d9ceb2c3bf3a89bff1826f821cf3026c33265ec4a0d58b87870f0b877b79b6ea6689163fdbc951f0090032e605671dfe5f7c89b204833d0f0331c
+  checksum: 10c0/e4e350b3b855781b2d3ed267443e2cfd16e99c293d1dc4b53ba54fb33cc3b47c64753a9ded07fdcad159829340c18f455c87b976286f0c4e37ebce3781c428ef
   languageName: node
   linkType: hard
 

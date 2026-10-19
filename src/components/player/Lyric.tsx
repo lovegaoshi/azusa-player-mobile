@@ -102,6 +102,7 @@ export const LyricView = ({
 
   return (
     <View style={style}>
+      <View style={styles.lrcSpacer} />
       <LyricBottomSheet
         showLyricOffsetModal={() => setOffsetModalVisible(true)}
         usedLyric={usedLyric}
@@ -203,13 +204,16 @@ export const LyricView = ({
 
 const styles = StyleSheet.create({
   lrcView: { height: 500, paddingHorizontal: 20 },
+  lrcSpacer: {
+    height: 20,
+  },
   center: { alignItems: 'center', justifyContent: 'center' },
   container: {
     flex: 1,
   },
   optionsButton: {
     position: 'absolute',
-    top: -35,
+    top: 15,
     left: 10,
     zIndex: 1, // add this line
   },
