@@ -161,7 +161,9 @@ const SkinSettings = () => {
       : theme.metaData.darkTheme
         ? 'dark'
         : 'light';
+    // @ts-expect-error ColorSchemeOverride is not exported
     setDarkTheme(newDarkTheme);
+    // @ts-expect-error ColorSchemeOverride is not exported
     saveColorScheme(newDarkTheme);
     scrollViewRef.current?.prepareForLayoutAnimationRender();
     LayoutAnimation.configureNext(LayoutAnimation.Presets.linear);

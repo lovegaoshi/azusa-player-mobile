@@ -9,10 +9,7 @@ import SelectDialogWrapper, {
 } from '../SelectDialogWrapper';
 import { saveColorScheme, getColorScheme } from '@utils/ChromeStorageAPI';
 
-const ColorSchemei18n = (
-  scheme: ColorSchemeName,
-  t: (val: string) => string,
-) => {
+const ColorSchemei18n = (scheme: string, t: (val: string) => string) => {
   switch (scheme) {
     case 'light':
       return t('AppearanceSettings.ColorSchemeLight');
@@ -31,6 +28,7 @@ const Button = ({
 
   const selectColorScheme = async () => {
     setSelectVisible(true);
+    // @ts-expect-error ColorSchemeOverride is not exported
     const options: ColorSchemeName[] = ['unspecified', 'light', 'dark'];
     const defaultIndex = options.indexOf((await getColorScheme()) || null);
     setCurrentSelectOption({

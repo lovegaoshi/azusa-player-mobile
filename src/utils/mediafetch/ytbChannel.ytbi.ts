@@ -30,7 +30,7 @@ const getYtbSong = async (
 ): Promise<NoxMedia.Song[]> => {
   const videos = playlistData.videos as LockupView[];
   for (const video of videos) {
-    if (!favList.includes(video.content_id)) {
+    if (!favList.includes(video.content_id ?? '')) {
       const song = ytbiPlaylistItemToNoxSong(video);
       song && songs.push(song);
     } else {
@@ -59,10 +59,10 @@ export const fetchYtbiChannelPlaylists = async (channelID: string) => {
         ?.overlays?.[0] as ThumbnailOverlayBadgeView;
       return {
         cover: thumbnail?.primary_thumbnail?.image?.[0]?.url ?? '',
-        name: v.metadata?.title.text ?? '',
+        name: v.metadata?.title?.text ?? '',
         singer: overlayBadge?.badges[0].text ?? '',
         getPlaylist: async () => ({
-          songs: await fetchYtbiPlaylist({ playlistId: v.content_id }),
+          songs: await fetchYtbiPlaylist({ playlistId: v.content_id! }),
         }),
       };
     });

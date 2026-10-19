@@ -10,6 +10,8 @@ import {
   ScrollView,
   StyleSheet,
   Pressable,
+  ScrollViewInstance,
+  ViewInstance,
 } from 'react-native';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
@@ -42,8 +44,8 @@ export default function NoxBottomSheet(p: Props) {
   const [headerHeight, setHeaderHeight] = useState(0);
   const [scrollViewShouldNest, setScrollViewShouldNest] = useState<boolean>();
   const { height } = Dimensions.get('window');
-  const pressableRef = useRef<View>(null);
-  const scrollViewRef = useRef<ScrollView>(null);
+  const pressableRef = useRef<ViewInstance>(null);
+  const scrollViewRef = useRef<ScrollViewInstance>(null);
 
   return (
     <TrueSheet
