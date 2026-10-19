@@ -9399,7 +9399,7 @@ __metadata:
     expo-secure-store: "npm:~58.0.2"
     expo-sqlite: "npm:~58.0.13"
     expo-video: "npm:58.0.11"
-    expo-wavy-slider: "npm:0.4.8"
+    expo-wavy-slider: "https://github.com/lovegaoshi/expo-wavy-slider.git#commit=5d9a574df3357c555722ca6076c1fff5ff20c0b9"
     fflate: "npm:^0.8.3"
     ffmpeg-kit-react-native: "https://github.com/lovegaoshi/ffmpeg-kit.git#commit=b495250938cd596d7dafe002f334b0b99e62c848"
     gts: "npm:^7.0.0"
@@ -14125,9 +14125,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"expo-wavy-slider@npm:0.4.8":
+"expo-wavy-slider@https://github.com/lovegaoshi/expo-wavy-slider.git#commit=5d9a574df3357c555722ca6076c1fff5ff20c0b9":
   version: 0.4.8
-  resolution: "expo-wavy-slider@npm:0.4.8"
+  resolution: "expo-wavy-slider@https://github.com/lovegaoshi/expo-wavy-slider.git#commit=5d9a574df3357c555722ca6076c1fff5ff20c0b9"
   peerDependencies:
     expo: "*"
     expo-constants: "*"
@@ -14135,7 +14135,7 @@ __metadata:
     react-native: "*"
     react-native-reanimated: ">=4.0.0"
     react-native-worklets: ">=0.8.0"
-  checksum: 10c0/ddb9a40e5b3e3112417523e409894b2473a222d9d47fddc633056767c0426a0a849e5fb3037d3b9ec30db13f592e686edaab34ec56e12f0db85a13860fcc5f36
+  checksum: 10c0/02b542621784ae90ed8fb6e51d7036f3ece5b40d45b58acf2c8a2b7d6ce08a2108cda05bf82d224ef2c93bba2db1393bd1019b59e899bd2a5062528932b32ef7
   languageName: node
   linkType: hard
 

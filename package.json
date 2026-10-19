@@ -95,7 +95,7 @@
     "expo-secure-store": "~58.0.2",
     "expo-sqlite": "~58.0.13",
     "expo-video": "58.0.11",
-    "expo-wavy-slider": "0.4.8",
+    "expo-wavy-slider": "https://github.com/lovegaoshi/expo-wavy-slider.git#commit=5d9a574df3357c555722ca6076c1fff5ff20c0b9",
     "fflate": "^0.8.3",
     "ffmpeg-kit-react-native": "https://github.com/lovegaoshi/ffmpeg-kit.git#commit=b495250938cd596d7dafe002f334b0b99e62c848",
     "he": "^2.0.0",
@@ -225,7 +225,8 @@
     "autolinking": {
       "android": {
         "buildFromSource": [
-          "expo-video"
+          "expo-video",
+          "expo-ui"
         ],
         "exclude": [
           "react-native-carplay",
