@@ -124,7 +124,7 @@
     "react-native-gesture-handler": "~3.4.0",
     "react-native-get-random-values": "^2.0.0",
     "react-native-image-colors": "^2.6.0",
-    "react-native-lyric": "https://github.com/lovegaoshi/react-native-lyric.git#commit=7fe51e41bbcd8d81b74e82e7a58d526e4c58ce9d",
+    "react-native-lyric": "https://github.com/lovegaoshi/react-native-lyric.git#commit=0fc8f68843b8ca1196b73f1b2e79d74dc3e9d667",
     "react-native-nitro-base64": "^1.1.2",
     "react-native-nitro-modules": "^0.37.1",
     "react-native-notify-kit": "^10.9.0",
