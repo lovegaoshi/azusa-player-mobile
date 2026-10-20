@@ -2,7 +2,6 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { View, StyleSheet } from 'react-native';
 import { Checkbox } from 'react-native-paper';
-import { Pressable } from 'react-native-gesture-handler';
 
 import RectButton from '@components/commonui/RectButton';
 import { NativeText as Text } from '@components/commonui/ScaledText';
