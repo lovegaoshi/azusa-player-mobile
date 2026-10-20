@@ -32,7 +32,7 @@ interface Props extends TrueSheetProps {
 
 export default function NoxBottomSheet(p: Props) {
   const {
-    cornerRadius = 5,
+    cornerRadius,
     children,
     sizes = ['auto', 1],
     onDidDismiss,

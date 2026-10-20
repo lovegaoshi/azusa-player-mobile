@@ -66,21 +66,19 @@ const BooleanSetting = ({
           </Text>
         </View>
         <View style={styles.switchContainer}>
-          <Pressable onPress={onToggle}>
-            {(!delayedLoading || loaded) &&
-              // delayedComponent doesnt work here, i dunno
-              (checkbox ? (
-                <Checkbox
-                  status={playerSetting[settingName] ? 'checked' : 'unchecked'}
-                  onPress={() => void 0}
-                />
-              ) : (
-                <Switch
-                  value={playerSetting[settingName]}
-                  onValueChange={() => void 0}
-                />
-              ))}
-          </Pressable>
+          {(!delayedLoading || loaded) &&
+            // delayedComponent doesnt work here, i dunno
+            (checkbox ? (
+              <Checkbox
+                status={playerSetting[settingName] ? 'checked' : 'unchecked'}
+                onPress={onToggle}
+              />
+            ) : (
+              <Switch
+                value={playerSetting[settingName]}
+                onValueChange={onToggle}
+              />
+            ))}
         </View>
       </View>
     </RectButton>
