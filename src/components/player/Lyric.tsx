@@ -35,6 +35,7 @@ interface LyricViewProps {
   style?: ViewStyle;
   fadeEffect?: boolean;
   usedLyric: ReturnType<typeof useLyric>;
+  scrollToViewPosition?: number;
 }
 
 interface FadingMaskedViewProps extends React.PropsWithChildren {
@@ -74,8 +75,6 @@ const FadingMaskedView = ({
 };
 
 export const LyricView = ({
-  track,
-  artist,
   height,
   showUI = true,
   noScrollThrottle = true,
@@ -84,6 +83,7 @@ export const LyricView = ({
   style = styles.container,
   fadeEffect = true,
   usedLyric,
+  scrollToViewPosition,
 }: LyricViewProps) => {
   const isLandscape = useIsLandscape();
   const playerSetting = useNoxSetting(state => state.playerSetting);
@@ -115,6 +115,7 @@ export const LyricView = ({
       ) : (
         <FadingMaskedView fade={fadeEffect}>
           <Lyric
+            scrollToViewPosition={scrollToViewPosition}
             fontScale={
               (playerSetting.lyricFontScale || playerSetting.fontScale) ?? 1
             }
