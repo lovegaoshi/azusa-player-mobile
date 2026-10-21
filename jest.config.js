@@ -10,12 +10,13 @@ const esModules = [
   'youtubei',
   'jintr',
   'uuid',
+  'he',
 ].join('|');
 
 const config = {
   preset: '@react-native/jest-preset',
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json', 'node'],
-  transform: { '^.+\\.(js|jsx)$': 'babel-jest' },
+  transform: { '^.+\\.(js|jsx|mjs)$': 'babel-jest' },
   //................
   moduleNameMapper: {
     // Force module uuid to resolve with the CJS entry point, because Jest does not support package.json.exports. See https://github.com/uuidjs/uuid/issues/451
