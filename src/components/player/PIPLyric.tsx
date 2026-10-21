@@ -35,6 +35,7 @@ const PIPLyricView = () => {
       showUI={false}
       noScrollThrottle={true}
       fadeEffect={false}
+      scrollToViewPosition={0}
     />
   ) : (
     <></>
