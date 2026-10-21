@@ -1,11 +1,5 @@
 import { Dimensions, StyleSheet, View } from 'react-native';
-import {
-  Canvas,
-  Path,
-  useClock,
-  LinearGradient,
-  vec,
-} from '@shopify/react-native-skia';
+import { Canvas, Path, useClock, LinearGradient, vec } from 'react-native-skia';
 import React from 'react';
 import {
   useDerivedValue as useComputedValue,
