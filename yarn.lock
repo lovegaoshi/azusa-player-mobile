@@ -9570,7 +9570,7 @@ __metadata:
     react-native-svg: "npm:15.16.0"
     react-native-svga-player: "https://github.com/lovegaoshi/react-native-svga-player.git#commit=2cd82e2b878e7711013d14e798df931598791df4"
     react-native-text-ticker: "https://github.com/lovegaoshi/react-native-text-ticker.git#commit=c80fd5d660b57229dd730fe44919fb86364f1969"
-    react-native-track-player: "https://github.com/lovegaoshi/react-native-track-player.git#commit=d371784b051aea2ad996654bae0233754dd41588"
+    react-native-track-player: "https://github.com/lovegaoshi/react-native-track-player.git#commit=56205c7f1a4fcd9ec7a098915893b1f7a0573b54"
     react-native-url-polyfill: "npm:^4.0.0"
     react-native-webview: "npm:14.0.1"
     react-native-worklets: "npm:0.13.0"
@@ -20908,9 +20908,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-native-track-player@https://github.com/lovegaoshi/react-native-track-player.git#commit=d371784b051aea2ad996654bae0233754dd41588":
+"react-native-track-player@https://github.com/lovegaoshi/react-native-track-player.git#commit=56205c7f1a4fcd9ec7a098915893b1f7a0573b54":
   version: 4.1.1
-  resolution: "react-native-track-player@https://github.com/lovegaoshi/react-native-track-player.git#commit=d371784b051aea2ad996654bae0233754dd41588"
+  resolution: "react-native-track-player@https://github.com/lovegaoshi/react-native-track-player.git#commit=56205c7f1a4fcd9ec7a098915893b1f7a0573b54"
   peerDependencies:
     react: "*"
     react-native: "*"
@@ -20921,7 +20921,7 @@ __metadata:
       optional: true
     shaka-player:
       optional: true
-  checksum: 10c0/dc12a37a5e8e3ee3e3af2e582bdd41fd78369f183c816a30bf28a781915994d63f778364f6b05ba6e7bd4d83ae0673b5ffabc113dd24157ea879776ab6d08244
+  checksum: 10c0/9a44809a03b79ac5017dd82736aa16e24e0890cdcee23fd9a5517b3db9162d96814e581ad5c1b7dd61c17c4b43357de89716cf26b1a4dbf3811db8cb9f15bac1
   languageName: node
   linkType: hard
 
