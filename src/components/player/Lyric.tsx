@@ -91,6 +91,11 @@ export const LyricView = ({
   const { position } = useProgress(
     playerSetting.karaokeLyrics ? 50 : undefined,
     false,
+    {
+      position: -1,
+      duration: 0,
+      buffered: 0,
+    },
   );
   const [offsetModalVisible, setOffsetModalVisible] = useState(false);
   const playerStyle = useNoxSetting(state => state.playerStyle);
@@ -122,7 +127,9 @@ export const LyricView = ({
             }
             style={styles.lrcView}
             lrc={lrc}
-            currentTime={(position + currentTimeOffset) * 1000}
+            currentTime={
+              position === -1 ? -1 : (position + currentTimeOffset) * 1000
+            }
             height={height}
             noScrollThrottle={noScrollThrottle}
             onPress={onPress}
