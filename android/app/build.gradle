@@ -155,8 +155,8 @@ android {
         }
         stage {
             initWith(buildTypes.release)
-            applicationIdSuffix ".prod"
-            manifestPlaceholders.fileProvider = "com.noxplay.noxplayer.prod.provider"
+            applicationIdSuffix ".stage"
+            manifestPlaceholders.fileProvider = "com.noxplay.noxplayer.stage.provider"
             matchingFallbacks = ['release']
             minifyEnabled false
         }

@@ -48,6 +48,7 @@ const SpotifyLyricStyle = {
   fontSize: 20,
   activeFontSize: 20,
   lapsedAsActiveColor: true,
+  lyricPaddingHorizontal: 0,
 };
 
 const FadingMaskedView = ({
