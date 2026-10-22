@@ -48,7 +48,7 @@ module.exports = api => {
   return {
     env: {
       production: {
-        plugins: ['transform-remove-console'],
+        // plugins: ['transform-remove-console'],
       },
     },
     presets: [
