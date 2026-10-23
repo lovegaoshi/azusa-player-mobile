@@ -12,6 +12,7 @@ def get_version():
 
 
 def bump_version():
+    gradle_path = Path('./android/app/build.gradle.kts')
     new_version = get_version()
     with open(Path('./package.json'), encoding='utf8') as f:
         package_json = json.load(f)
@@ -19,10 +20,10 @@ def bump_version():
     with open(Path('./package.json'), 'w', encoding='utf8') as f:
         json.dump(package_json, f, indent=2)
     build_gradle = []
-    with open(Path('./android/app/build.gradle'), encoding='utf8') as f:
+    with open(gradle_path, encoding='utf8') as f:
         for line in f:
-            find_version_code = re.search(r'(.+versionCode )(\d+)', line)
-            find_version_name = re.search(r'(.+versionName )".+"', line)
+            find_version_code = re.search(r'(.+ersionCode = )(\d+)', line)
+            find_version_name = re.search(r'(.+versionName = )".+"', line)
             if '//' not in line and find_version_code:
                 build_gradle.append(
                     f"{find_version_code.group(1)}{int(find_version_code.group(2)) + 1}\n")
@@ -31,7 +32,7 @@ def bump_version():
                     f"{find_version_name.group(1)}\"{new_version}\"\n")
             else:
                 build_gradle.append(line)
-    with open(Path('./android/app/build.gradle'), 'w', encoding='utf8') as f:
+    with open(gradle_path, 'w', encoding='utf8') as f:
         for line in build_gradle:
             f.write(line)
 
