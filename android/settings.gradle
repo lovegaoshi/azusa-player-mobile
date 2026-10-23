@@ -31,6 +31,15 @@ extensions.configure(com.facebook.react.ReactSettingsExtension) { ex ->
     }
 }
 
+
+dependencyResolutionManagement {
+    versionCatalogs {
+        create("APMLibs") {
+            from(files("gradle/libs.versions.toml"))
+        }
+    }
+}
+
 rootProject.name = 'azusa-player-mobile'
 include ':ffmpeg-kit-binaries'
 include ':app'

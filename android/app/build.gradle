@@ -194,38 +194,38 @@ android {
 }
 
 dependencies {
-    coreLibraryDesugaring libs.desugar.jdk.libs
-    implementation libs.material
-    implementation libs.kotlinx.coroutines.guava
+    coreLibraryDesugaring APMLibs.desugar.jdk.libs
+    implementation APMLibs.material
+    implementation APMLibs.kotlinx.coroutines.guava
 
     // For animated GIF support
-    implementation libs.animated.gif
+    implementation APMLibs.animated.gif
 
     // For WebP support, including animated WebP
-    implementation libs.animated.webp
-    implementation libs.webpsupport
+    implementation APMLibs.animated.webp
+    implementation APMLibs.webpsupport
 
-    implementation libs.appcompat.v7
-    implementation libs.support.annotations
-    implementation libs.design
+    implementation APMLibs.appcompat.v7
+    implementation APMLibs.support.annotations
+    implementation APMLibs.design
 
     // The version of react-native is set by the React Native Gradle Plugin
     implementation("com.facebook.react:react-android")
-    implementation(libs.media3.session)
+    implementation(APMLibs.media3.session)
 
     if (hermesEnabled.toBoolean()) {
         implementation("com.facebook.react:hermes-android")
     } else {
         implementation jscFlavor
     }
-    implementation libs.core.ktx
-    implementation libs.core.google.shortcuts
-    implementation libs.tarsos.dsp.core
-    implementation libs.tarsos.dsp.jvm
+    implementation APMLibs.core.ktx
+    implementation APMLibs.core.google.shortcuts
+    implementation APMLibs.tarsos.dsp.core
+    implementation APMLibs.tarsos.dsp.jvm
     // for po token generation - consider pulling the necessary interfaces OUT
-    implementation libs.webkit
-    implementation libs.rxjava
-    implementation libs.rxandroid
-    implementation libs.nanojson
-    implementation libs.newpipeextractor
+    implementation APMLibs.webkit
+    implementation APMLibs.rxjava
+    implementation APMLibs.rxandroid
+    implementation APMLibs.nanojson
+    implementation APMLibs.newpipeextractor
 }
