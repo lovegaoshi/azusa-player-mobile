@@ -16,7 +16,7 @@ import smarterShuffle from '@utils/shuffle';
 import { TPPlay } from '@stores/RNObserverStore';
 
 const setAppStore = appStore.setState;
-export const skipToBiliSuggest = async (
+const skipToBiliSuggest = async (
   next = true,
   playlistSetting = useNoxSetting.getState().playerSetting,
 ) => {
@@ -38,7 +38,7 @@ export const skipToBiliSuggest = async (
   return suggestedSong[0];
 };
 
-export const prepareSkipToNext = async (
+const prepareSkipToNext = async (
   mSkipToBiliSuggest = skipToBiliSuggest,
   set = true,
 ) => {
