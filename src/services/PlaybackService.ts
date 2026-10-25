@@ -26,6 +26,11 @@ import { isAndroid, isIOS } from '@utils/RNUtils';
 import { increasePlaybackCount } from '@utils/db/sqlStorage';
 import { TPSeek, TPPlay } from '@stores/RNObserverStore';
 import APMWidgetModule from '@specs/NativeWidgetModule';
+import {
+  APMPlaybackActiveTrackChangedCallback,
+  APMProgressCallback,
+} from './APMPlayback';
+import { eventListeners, Events } from './events';
 
 const { getState } = noxPlayingList;
 const { setState } = appStore;
@@ -222,6 +227,18 @@ export async function PlaybackService() {
       }
     },
   );
+
+  /*
+  eventListeners[Events.ProgressUpdated] = TrackPlayer.addEventListener(
+    Event.PlaybackProgressUpdated,
+    APMProgressCallback,
+  );
+  eventListeners[Events.PlaybackActiveTrackChanged] =
+    TrackPlayer.addEventListener(
+      Event.PlaybackActiveTrackChanged,
+      APMPlaybackActiveTrackChangedCallback,
+    );
+   */
 
   if (isAndroid) {
     TrackPlayer.addEventListener(Event.RemoteCustomAction, async event => {
