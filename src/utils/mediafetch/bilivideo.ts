@@ -141,13 +141,22 @@ export const fetchCID = async (bvid: string) => {
   return cid;
 };
 
+const getBestBitrate = (data: any[]) =>
+  data.sort((a, b) => b.bandwidth - a.bandwidth)[0];
+
+const chooseUrl = (data: any, choice?: string) => {
+  if (!choice) return data.baseUrl;
+  return (
+    (data.backupUrl ?? [])
+      .concat(data.baseUrl)
+      .filter((url: string) => url.includes(choice))[0] ?? data.baseUrl
+  );
+};
+
 /**
  * Private Util to extract json, see https://github.com/SocialSisterYi/bilibili-API-collect
  */
 const extractResponseJson = (json: any, field: string) => {
-  const getBestBitrate = (data: any[]) =>
-    data.sort((a, b) => b.bandwidth - a.bandwidth)[0];
-
   switch (field) {
     case FieldEnum.AudioUrl:
       if (!json.data)
@@ -159,7 +168,8 @@ const extractResponseJson = (json: any, field: string) => {
       } else if (json.data.dolby?.audio) {
         return getBestBitrate(json.data.dash.dolby.audio).baseUrl;
       }
-      if (json.data.dash) return getBestBitrate(json.data.dash.audio).baseUrl;
+      if (json.data.dash)
+        return chooseUrl(getBestBitrate(json.data.dash.audio)); // , 'bilivideo.com' or 'akamaized'
       if (json.data.durl) return json.data.durl[0].url;
       throw new Error(
         `[extractResponseJson] no audio url from ${JSON.stringify(json)}`,
