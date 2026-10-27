@@ -228,7 +228,6 @@ export async function PlaybackService() {
     },
   );
 
-  /*
   eventListeners[Events.ProgressUpdated] = TrackPlayer.addEventListener(
     Event.PlaybackProgressUpdated,
     APMProgressCallback,
@@ -238,7 +237,6 @@ export async function PlaybackService() {
       Event.PlaybackActiveTrackChanged,
       APMPlaybackActiveTrackChangedCallback,
     );
-   */
 
   if (isAndroid) {
     TrackPlayer.addEventListener(Event.RemoteCustomAction, async event => {

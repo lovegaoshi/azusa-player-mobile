@@ -212,7 +212,9 @@ export const APMProgressCallback = async (
     hookLoaded,
   } = useNoxSetting.getState();
   if (hookLoaded) {
-    logger.debug('[APMListener] hook is loaded. removing listener...');
+    logger.debug(
+      '[APMListener] hook is loaded. removing APMProgressCallback...',
+    );
     return eventListeners[Events.ProgressUpdated]?.remove();
   }
   const { playmode, playingList } = getState();
@@ -240,8 +242,14 @@ export const APMProgressCallback = async (
 export const APMPlaybackActiveTrackChangedCallback = async (
   event: PlaybackActiveTrackChangedEvent,
 ) => {
-  const { resumePlayback, setBRepeatDuration, setABRepeat } =
+  const { resumePlayback, setBRepeatDuration, setABRepeat, hookLoaded } =
     useNoxSetting.getState();
+  if (hookLoaded) {
+    logger.debug(
+      '[APMListener] hook is loaded. removing APMPlaybackActiveTrackChangedCallback...',
+    );
+    return eventListeners[Events.PlaybackActiveTrackChanged]?.remove();
+  }
   onAPMPlaybackActiveTrackChanged({
     event,
     setABRepeat,
