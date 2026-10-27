@@ -13,7 +13,6 @@ import appStore, { setCurrentPlaying, setCrossfaded } from '@stores/appStore';
 import noxPlayingList, { playNextIndex } from '@stores/playingList';
 import { NoxRepeatMode } from '@enums/RepeatMode';
 import { getR128Gain, getABRepeatNormalized } from '@utils/db/sqlAPI';
-import { useTrackStore } from '@hooks/useActiveTrack';
 import { execWhenTrue, r128gain2Volume } from '@utils/Utils';
 import { getNextSong } from '@utils/RNTPUtils';
 import { TPSeek } from '@stores/RNObserverStore';
@@ -21,7 +20,6 @@ import { setResumePlayback } from '@utils/db/sqlStorage';
 import { eventListeners, Events } from './events';
 
 const { getState } = noxPlayingList;
-const { fadeIntervalMs, fadeIntervalSec } = appStore.getState();
 
 interface OnAPMProgress {
   event: PlaybackProgressUpdatedEvent;
@@ -62,6 +60,7 @@ export const onAPMProgress = async ({
   prepareSkipToNext,
   performSkipToNext,
 }: OnAPMProgress) => {
+  const { fadeIntervalMs, fadeIntervalSec } = appStore.getState();
   saveLastPlayDuration(event.position);
   const currentSongId = track?.song?.id ?? '';
   resumePlayback && setResumePlayback(currentSongId, event.position);
@@ -154,7 +153,7 @@ export const onAPMProgress = async ({
 
 interface OnAPMPlaybackActiveTrackChanged {
   event: PlaybackActiveTrackChangedEvent;
-  initSponsorBlock?: (song: NoxMedia.Song) => void;
+  initSponsorBlock?: (song?: NoxMedia.Song) => void;
   setABRepeat: (val: [number, number, number?, number?]) => void;
   loadingTracker?: React.RefObject<boolean>;
   resumePlayback: boolean;
@@ -218,8 +217,8 @@ export const APMProgressCallback = async (
     return eventListeners[Events.ProgressUpdated]?.remove();
   }
   const { playmode, playingList } = getState();
-  const track = useTrackStore.getState().track;
-  onAPMProgress({
+  const track = await TrackPlayer.getActiveTrack();
+  return onAPMProgress({
     event,
     playmode,
     playingList,

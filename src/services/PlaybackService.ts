@@ -195,13 +195,12 @@ export async function PlaybackService() {
       // this is here to load existing R128Gain values or resolve new gain values from cached files only.
       // another setR128Gain is in Cache.saveCacheMedia where the file is fetched, which is never a scenario here
       if (event.track.url !== NULL_TRACK.url) {
-        const mAppState = getAppStoreState();
-        if (mAppState.crossfaded) {
+        const { fadeIntervalMs, crossfaded } = getAppStoreState();
+        if (crossfaded) {
           // use crossfade fading instead
           setCrossfaded(false);
         } else {
           // this is when song is first played.
-          const fadeIntervalMs = mAppState.fadeIntervalMs;
           logger.debug(`[FADEIN] fading in of ${fadeIntervalMs}...`);
           await parseSongR128gain(event.track.song, fadeIntervalMs, 0);
         }

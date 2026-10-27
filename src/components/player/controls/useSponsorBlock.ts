@@ -18,9 +18,9 @@ export default function useSponsorBlock() {
   const playerSetting = useNoxSetting(state => state.playerSetting);
   const [sponsorBlock, setSponsorBlock] = useState<SponsorBlockState>();
 
-  const initSponsorBlock = (song: NoxMedia.Song) => {
-    if (playerSetting.sponsorBlockEnabled) {
-      logger.debug(`[SponsorBlock] init for ${song.name}`);
+  const initSponsorBlock = (song?: NoxMedia.Song) => {
+    if (playerSetting.sponsorBlockEnabled && song) {
+      logger.debug(`[SponsorBlock] init for ${song?.name}`);
       getSponsorBlock(song).then(sponsorBlock =>
         setSponsorBlock({ songid: song.id, sponsorBlock }),
       );
