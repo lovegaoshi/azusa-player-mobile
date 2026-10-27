@@ -7,22 +7,19 @@ import TrackPlayer, {
 
 import { useNoxSetting } from '@stores/useApp';
 import useTPControls from '@hooks/useTPControls';
-import { saveLastPlayDuration } from '@utils/ChromeStorage';
-import { logger } from '@utils/Logger';
-import appStore, { setCurrentPlaying, setCrossfaded } from '@stores/appStore';
-import noxPlayingList, { playNextIndex } from '@stores/playingList';
+import noxPlayingList from '@stores/playingList';
 import { NoxRepeatMode } from '@enums/RepeatMode';
 import usePlaylistCRUD from '@hooks/usePlaylistCRUD';
-import { getR128Gain, getABRepeatNormalized } from '@utils/db/sqlAPI';
+import { getABRepeatNormalized } from '@utils/db/sqlAPI';
 import { useTrackStore } from '@hooks/useActiveTrack';
-import { execWhenTrue, r128gain2Volume } from '@utils/Utils';
 import useSponsorBlock from './useSponsorBlock';
-import { getNextSong } from '@utils/RNTPUtils';
 import { TPSeek } from '@stores/RNObserverStore';
-import { setResumePlayback } from '@utils/db/sqlStorage';
+import {
+  onAPMPlaybackActiveTrackChanged,
+  onAPMProgress,
+} from '@services/APMPlayback';
 
 const { getState } = noxPlayingList;
-const { fadeIntervalMs, fadeIntervalSec } = appStore.getState();
 
 export default function usePlayerControls() {
   const { performSkipToNext, performSkipToPrevious, prepareSkipToNext } =
@@ -37,6 +34,8 @@ export default function usePlayerControls() {
   const setBRepeatDuration = useNoxSetting(state => state.setBRepeatDuration);
   const crossfadingId = useNoxSetting(state => state.crossfadingId);
   const setCrossfadingId = useNoxSetting(state => state.setCrossfadingId);
+  const setHookLoaded = useNoxSetting(state => state.setHookLoaded);
+  setHookLoaded(true);
 
   const { updateCurrentSongMetadata, updateCurrentSongMetadataReceived } =
     usePlaylistCRUD();
@@ -75,97 +74,26 @@ export default function usePlayerControls() {
 
   useTrackPlayerEvents([Event.PlaybackProgressUpdated], async event => {
     const { playmode, playingList } = getState();
-    saveLastPlayDuration(event.position);
     const currentSongId = track?.song?.id ?? '';
-    resumePlayback && setResumePlayback(currentSongId, event.position);
-
-    const sbSkip = checkSponsorBlock(event.position, currentSongId);
-    if (sbSkip) {
-      return TPSeek(sbSkip);
-    }
-    // prepare for cross fading if enabled, playback is > 50% done and crossfade preparation isnt done
-    if (
-      playerSetting.crossfade > 0 &&
-      event.position > event.duration * 0.5 &&
-      crossfadeId !== currentSongId
-    ) {
-      logger.debug(
-        `[crossfade] preparing crossfade at ${event.position}/${event.duration}`,
-      );
-      setCrossfadeId(currentSongId);
-      setBRepeatDuration(event.duration * abRepeat[1]);
-      const nextSong = await prepareSkipToNext(false);
-
-      let arepeat = 0;
-      if (nextSong) {
-        const newABRepeat = await getABRepeatNormalized(nextSong.id);
-        const absARepeat = Number(newABRepeat.aAbs);
-        arepeat = Number.isNaN(absARepeat)
-          ? newABRepeat.a * nextSong.duration
-          : absARepeat;
-        setSkipARepeat(true);
-        logger.debug(`[crossfade] priming the fading player to ${arepeat}...`);
-      }
-      await TrackPlayer.crossFadePrepare(false, arepeat);
-      return;
-    }
-
-    // if fade or crossfade should be triggered
-    if (event.duration > 0 && playmode !== NoxRepeatMode.RepeatTrack) {
-      const trueDuration = Math.min(bRepeatDuration, event.duration);
-      if (
-        // crossfade req: position is at crossfade interval,
-        // crossfade song prepared, not in crossfading
-        playerSetting.crossfade > 0 &&
-        event.position > trueDuration - playerSetting.crossfade &&
-        crossfadeId === currentSongId &&
-        // enable crossfade on playlist size = 1 (repeatTrack without repeatTrack)
-        (crossfadingId !== currentSongId || playingList.length === 1)
-      ) {
-        const nextSong = await getNextSong();
-        const r128gain = await getR128Gain(nextSong.id);
-        logger.debug(
-          `[crossfade] crossfading: ${event.position}, ${trueDuration}, ${playerSetting.crossfade} to ${nextSong.name} @ ${r128gain}`,
-        );
-        setCrossfadingId(currentSongId);
-        setCrossfadeId('');
-        setCrossfaded(true);
-        // HACK: manually update playing index.
-        // this needs to be refactored at some point (eg setting index hooked inside useActiveTrack)
-        playNextIndex({});
-        resumePlayback && setResumePlayback(currentSongId, 0);
-        return TrackPlayer.crossFade(
-          playerSetting.crossfade * 1000,
-          20,
-          r128gain2Volume(r128gain ?? 0),
-        );
-      }
-      if (
-        // fade req: position is at fade interval, not in crossfading
-        fadeIntervalSec > 0 &&
-        event.position > trueDuration - fadeIntervalSec &&
-        crossfadeId !== currentSongId
-      ) {
-        logger.debug(
-          `[FADEOUT] fading out....${event.position} / ${event.duration}`,
-        );
-        TrackPlayer.setAnimatedVolume({
-          volume: 0,
-          duration: fadeIntervalMs,
-        });
-      }
-    }
-    if (abRepeat[1] === 1) return;
-    if (event.position > bRepeatDuration) {
-      if (playmode === NoxRepeatMode.RepeatTrack) {
-        TPSeek(abRepeat[0] * event.duration);
-        return;
-      }
-      logger.debug(
-        `[ABRepeat] duration ${event.duration} > ${bRepeatDuration}.`,
-      );
-      performSkipToNext(true);
-    }
+    return onAPMProgress({
+      event,
+      sbSkip: checkSponsorBlock(event.position, currentSongId),
+      playmode,
+      playingList,
+      track,
+      resumePlayback,
+      playerSetting,
+      crossfadeId,
+      setCrossfadeId,
+      setBRepeatDuration,
+      abRepeat,
+      setSkipARepeat,
+      bRepeatDuration,
+      crossfadingId,
+      setCrossfadingId,
+      prepareSkipToNext,
+      performSkipToNext,
+    });
   });
 
   useTrackPlayerEvents([Event.PlaybackState], async event => {
@@ -205,27 +133,13 @@ export default function usePlayerControls() {
   });
 
   useTrackPlayerEvents([Event.PlaybackActiveTrackChanged], async event => {
-    const song = event.track?.song as NoxMedia.Song;
-    initSponsorBlock(song);
-    const newABRepeat = await getABRepeatNormalized(song.id);
-    logger.debug(`[SongReady] logging ABRepeat as ${newABRepeat}`);
-    setABRepeat([newABRepeat.a, newABRepeat.b]);
-    if (setCurrentPlaying(song) && !loadingTracker.current) return;
-    loadingTracker.current = false;
-    execWhenTrue({
-      loopCheck: async () => (await TrackPlayer.getProgress()).duration !== 0,
-      executeFn: async () => {
-        const trackDuration = (await TrackPlayer.getProgress()).duration;
-        setBRepeatDuration(newABRepeat.b * trackDuration);
-        const trackSeekTo =
-          resumePlayback && newABRepeat.resumePlayback !== -1
-            ? newABRepeat.resumePlayback
-            : trackDuration * newABRepeat.a;
-        if (trackSeekTo === 0) return;
-        logger.debug(`[ABRepeat] skipping forward to ${trackSeekTo}`);
-        TPSeek(trackSeekTo);
-      },
-      funcName: 'ABRepeat A seek',
+    onAPMPlaybackActiveTrackChanged({
+      event,
+      initSponsorBlock,
+      setABRepeat,
+      loadingTracker,
+      resumePlayback,
+      setBRepeatDuration,
     });
   });
 

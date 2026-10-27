@@ -38,7 +38,7 @@ const skipToBiliSuggest = async (
   return suggestedSong[0];
 };
 
-const prepareSkipToNext = async (
+export const prepareSkipToNext = async (
   mSkipToBiliSuggest = skipToBiliSuggest,
   set = true,
 ) => {

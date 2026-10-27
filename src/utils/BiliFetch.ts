@@ -2,7 +2,7 @@
 import Bottleneck from 'bottleneck';
 
 export const DEFAULT_UA =
-  'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:141.0) Gecko/20100101 Firefox/141.0';
+  'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Safari/537.36 Edg/155.0.0.0';
 
 export const parseBodyParams = (body: any) => {
   const formBody = [];
@@ -56,6 +56,9 @@ export const customReqHeader = (
     /akamaized\.net/.exec(url)
   ) {
     reqHeader.referer = 'https://www.bilibili.com/';
+    if (/bilivideo/.exec(url)) {
+      reqHeader.range = 'bytes=0-';
+    }
   } else if (/y\.qq\.com/.exec(url)) {
     reqHeader.referer = 'https://y.qq.com/';
   } else if (/u\.qq\.com/.exec(url)) {
