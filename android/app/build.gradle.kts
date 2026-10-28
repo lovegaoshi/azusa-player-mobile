@@ -105,7 +105,7 @@ react {
     autolinkLibrariesWithApp()
 }
 
-val appVersionCode = 617
+val appVersionCode = 618
 
 val enableSeparateBuildPerCPUArchitecture = true
 
@@ -162,7 +162,7 @@ extensions.configure(
         minSdk = rootProject.extra["minSdkVersion"] as Int
         targetSdk = rootProject.extra["targetSdkVersion"] as Int
         versionCode = appVersionCode
-        versionName = "4.3.3"
+        versionName = "4.4.0"
         manifestPlaceholders["appAuthRedirectScheme"] = "com.noxplayer"
         vectorDrawables.useSupportLibrary = true
     }
