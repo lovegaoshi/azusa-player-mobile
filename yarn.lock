@@ -19,6 +19,66 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@ai-sdk/gateway@npm:4.0.129":
+  version: 4.0.129
+  resolution: "@ai-sdk/gateway@npm:4.0.129"
+  dependencies:
+    "@ai-sdk/provider": "npm:4.0.34"
+    "@ai-sdk/provider-utils": "npm:5.0.70"
+    "@vercel/oidc": "npm:3.2.0"
+  peerDependencies:
+    zod: ^3.25.76 || ^4.1.8
+  checksum: 10c0/bc2bf5def210cb23d33e6b0e94fe2ee755132103dd5ba93d7eb0608dcff84635d6592d6b6fa320c5e13311fe821eb8f4f59c46eea63602ee4c00511f4f1e92a3
+  languageName: node
+  linkType: hard
+
+"@ai-sdk/provider-utils@npm:5.0.70":
+  version: 5.0.70
+  resolution: "@ai-sdk/provider-utils@npm:5.0.70"
+  dependencies:
+    "@ai-sdk/provider": "npm:4.0.34"
+    "@standard-schema/spec": "npm:^1.1.0"
+    "@workflow/serde": "npm:4.1.0"
+    eventsource-parser: "npm:^3.0.8"
+    undici: "npm:^7.29.0"
+  peerDependencies:
+    zod: ^3.25.76 || ^4.1.8
+  checksum: 10c0/19fb204bd92451a5051f3f213feb810f53cf2927c4d92c84d8cd67aa60755cccb94d505203859eeb666b4a30db6c612d3bfe6682b185f01c03eb009ea77f5270
+  languageName: node
+  linkType: hard
+
+"@ai-sdk/provider-utils@npm:^4.0.1":
+  version: 4.0.62
+  resolution: "@ai-sdk/provider-utils@npm:4.0.62"
+  dependencies:
+    "@ai-sdk/provider": "npm:3.0.19"
+    "@standard-schema/spec": "npm:^1.1.0"
+    eventsource-parser: "npm:^3.0.8"
+    undici: "npm:^6.28.0"
+  peerDependencies:
+    zod: ^3.25.76 || ^4.1.8
+  checksum: 10c0/3fe0f860c68ef27a592b76c9500ae769c9aac6d7ad611bd710dd22f311535831c72b81ac3668af6279ea1ea860d5411896dfea96a1e838d786e0504dec0fda3d
+  languageName: node
+  linkType: hard
+
+"@ai-sdk/provider@npm:3.0.19, @ai-sdk/provider@npm:^3.0.5":
+  version: 3.0.19
+  resolution: "@ai-sdk/provider@npm:3.0.19"
+  dependencies:
+    json-schema: "npm:^0.4.0"
+  checksum: 10c0/f77fcae35b7e388704a2594d59eb2d89bb2311c1b8c794937bcb2dfcd566fc83a870bbe0e03d96349539e465e69cce29ce9b3cdf32b708304a09830c0a459ea5
+  languageName: node
+  linkType: hard
+
+"@ai-sdk/provider@npm:4.0.34":
+  version: 4.0.34
+  resolution: "@ai-sdk/provider@npm:4.0.34"
+  dependencies:
+    json-schema: "npm:^0.4.0"
+  checksum: 10c0/23c20d2e11acceb0194005f3896b74bf80f3b7f15e531e0c565fdc0d17e2054d17b720bf1668bfd99b86529612db91caca4c40aeabc660be41cdff58df2c200f
+  languageName: node
+  linkType: hard
+
 "@ampproject/remapping@npm:^2.2.0":
   version: 2.3.0
   resolution: "@ampproject/remapping@npm:2.3.0"
@@ -5716,6 +5776,18 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@react-native-ai/adk@npm:^0.12.1":
+  version: 0.12.1
+  resolution: "@react-native-ai/adk@npm:0.12.1"
+  dependencies:
+    "@ai-sdk/provider": "npm:^3.0.5"
+    "@ai-sdk/provider-utils": "npm:^4.0.1"
+  peerDependencies:
+    react-native: ">=0.76.0"
+  checksum: 10c0/a467609e2be474f467fc50f7a9b03974454a8c24c6126023c8e6e219b132da53848d8c1ad4f10f2f801bd8b0feed2d6ac8bb448c7207cc843d8acd131d5ce3e9
+  languageName: node
+  linkType: hard
+
 "@react-native-assets/slider@npm:^11.0.12":
   version: 11.0.12
   resolution: "@react-native-assets/slider@npm:11.0.12"
@@ -6846,6 +6918,13 @@ __metadata:
   dependencies:
     "@sinonjs/commons": "npm:^3.0.1"
   checksum: 10c0/de4522afe0699fa8d3ae9d1715cbaa4b47e518c707bb7988a9ec6c7c67557d9f6df451f6be0338598b984a86f65aab9fab38dd9ce75a3c0ffb801a9500d5b10d
+  languageName: node
+  linkType: hard
+
+"@standard-schema/spec@npm:^1.1.0":
+  version: 1.1.0
+  resolution: "@standard-schema/spec@npm:1.1.0"
+  checksum: 10c0/d90f55acde4b2deb983529c87e8025fa693de1a5e8b49ecc6eb84d1fd96328add0e03d7d551442156c7432fd78165b2c26ff561b970a9a881f046abb78d6a526
   languageName: node
   linkType: hard
 
@@ -8651,6 +8730,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@vercel/oidc@npm:3.2.0":
+  version: 3.2.0
+  resolution: "@vercel/oidc@npm:3.2.0"
+  checksum: 10c0/98318d3236f58c296616c8c2e1655b268c7bf58525bcd985adac7af6d900e05fc610f6f03ce2ff4bdcd3df7885a40c0ca44fdc761f122dcfe15a78c2756b0243
+  languageName: node
+  linkType: hard
+
 "@vibrant/color@npm:^4.0.0":
   version: 4.0.0
   resolution: "@vibrant/color@npm:4.0.0"
@@ -8784,6 +8870,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@workflow/serde@npm:4.1.0":
+  version: 4.1.0
+  resolution: "@workflow/serde@npm:4.1.0"
+  checksum: 10c0/8ec68cd9448b486bc8244d1f2b33d64d4af4b0fc18d33417699ce29345b21e4359d880c5ea5d66872def4576c0cddcfa2a63282d1f4d661c455663c075595e81
+  languageName: node
+  linkType: hard
+
 "@xmldom/xmldom@npm:^0.8.8":
   version: 0.8.10
   resolution: "@xmldom/xmldom@npm:0.8.10"
@@ -8911,6 +9004,19 @@ __metadata:
     clean-stack: "npm:^2.0.0"
     indent-string: "npm:^4.0.0"
   checksum: 10c0/a42f67faa79e3e6687a4923050e7c9807db3848a037076f791d10e092677d65c1d2d863b7848560699f40fc0502c19f40963fb1cd1fb3d338a7423df8e45e039
+  languageName: node
+  linkType: hard
+
+"ai@npm:^7.0.156":
+  version: 7.0.156
+  resolution: "ai@npm:7.0.156"
+  dependencies:
+    "@ai-sdk/gateway": "npm:4.0.129"
+    "@ai-sdk/provider": "npm:4.0.34"
+    "@ai-sdk/provider-utils": "npm:5.0.70"
+  peerDependencies:
+    zod: ^3.25.76 || ^4.1.8
+  checksum: 10c0/c7b3a77544166ecf6957ce46f93c24f2e27aa7588057b255820e4587f5b80ce33dbcd2e2c50121bcf5159da3dbc4eedf1b7f92065cc900b323225a5060884e99
   languageName: node
   linkType: hard
 
@@ -9435,6 +9541,7 @@ __metadata:
     "@logicwind/react-native-fold-detection": "npm:^0.3.2"
     "@material/material-color-utilities": "npm:^0.4.0"
     "@preeternal/react-native-cookie-manager": "npm:^7.0.0"
+    "@react-native-ai/adk": "npm:^0.12.1"
     "@react-native-assets/slider": "npm:^11.0.12"
     "@react-native-community/cli": "npm:20.2.0"
     "@react-native-community/cli-platform-android": "npm:20.2.0"
@@ -9475,6 +9582,7 @@ __metadata:
     "@typescript-eslint/eslint-plugin": "npm:^8.72.1"
     "@typescript-eslint/parser": "npm:^8.72.1"
     "@welldone-software/why-did-you-render": "npm:^10.0.1"
+    ai: "npm:^7.0.156"
     argparse: "npm:^3.0.4"
     axios: "npm:^1.20.0"
     babel-cli: "npm:^6.26.0"
@@ -13929,6 +14037,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"eventsource-parser@npm:^3.0.8":
+  version: 3.1.1
+  resolution: "eventsource-parser@npm:3.1.1"
+  checksum: 10c0/dd3236c61140587253dcaaf947de528ac0e7371caffdc53c77afaeee36a17661f00e251a6ea16af56c99be5ac138303e67b5d750630e7c41b02e3564e8ad8c44
+  languageName: node
+  linkType: hard
+
 "execa@npm:^1.0.0":
   version: 1.0.0
   resolution: "execa@npm:1.0.0"
@@ -17629,6 +17744,13 @@ __metadata:
   version: 0.4.1
   resolution: "json-schema-traverse@npm:0.4.1"
   checksum: 10c0/108fa90d4cc6f08243aedc6da16c408daf81793bf903e9fd5ab21983cda433d5d2da49e40711da016289465ec2e62e0324dcdfbc06275a607fe3233fde4942ce
+  languageName: node
+  linkType: hard
+
+"json-schema@npm:^0.4.0":
+  version: 0.4.0
+  resolution: "json-schema@npm:0.4.0"
+  checksum: 10c0/d4a637ec1d83544857c1c163232f3da46912e971d5bf054ba44fdb88f07d8d359a462b4aec46f2745efbc57053365608d88bc1d7b1729f7b4fc3369765639ed3
   languageName: node
   linkType: hard
 
@@ -23626,6 +23748,20 @@ __metadata:
   version: 6.26.0
   resolution: "undici@npm:6.26.0"
   checksum: 10c0/cf2b4caf58c33d6582970991290cc7a6486d6e738845f25dcdd16952d708ec844815c6d30362919764fcaf30f719891289341f1ada496f003ce2700310453a47
+  languageName: node
+  linkType: hard
+
+"undici@npm:^6.28.0":
+  version: 6.29.1
+  resolution: "undici@npm:6.29.1"
+  checksum: 10c0/2d6970289fcbaca69a484e968fbb5e6fdadf7d9bff30bb5476f71b619d143ec76df1c75a309ac3cb3b3d78238793c613dcaad47dc9d92b63f9e8e73b86ffec23
+  languageName: node
+  linkType: hard
+
+"undici@npm:^7.29.0":
+  version: 7.30.1
+  resolution: "undici@npm:7.30.1"
+  checksum: 10c0/c838089b010e8e28a9a5358d4bf4621e0c8d7bb70058b23e819667349c4c0b6791a7c8bc9bbe94ff0923db132faae0d9d9592b9743eda4f2b49466fa57482213
   languageName: node
   linkType: hard
 

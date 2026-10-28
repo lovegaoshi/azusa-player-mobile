@@ -11,11 +11,13 @@ import App from './src/App';
 import { PlaybackService } from './src/services';
 import { name as appName } from './app.json';
 import nodejs from '@utils/nodejs';
+import llm from '@utils/ai/llm';
 
 if (__DEV__) {
   import('./ReactotronConfig').then(() => console.log('Reactotron Configured'));
 }
 install();
+llm();
 AppRegistry.registerComponent(appName, () => App); // codePush(App));
 nodejs?.start?.('main.js');
 TrackPlayer.registerPlaybackService(() => PlaybackService);

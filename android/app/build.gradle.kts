@@ -1,3 +1,4 @@
+import com.android.build.api.dsl.Packaging
 import java.io.File
 
 plugins {
@@ -157,6 +158,10 @@ extensions.configure(
 
     namespace = "com.noxplay.noxplayer"
     compileSdk = rootProject.extra["compileSdkVersion"] as Int
+    packaging {
+        resources.excludes.add("META-INF/INDEX.LIST")
+        resources.excludes.add("META-INF/DEPENDENCIES")
+    }
     defaultConfig {
         applicationId = "com.noxplay.noxplayer"
         minSdk = rootProject.extra["minSdkVersion"] as Int
