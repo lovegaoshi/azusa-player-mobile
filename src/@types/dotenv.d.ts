@@ -17,4 +17,5 @@ declare module '@env' {
   export const REVENUECAT_GOOGLE: string;
   export const LOCKHASH: string;
   export const MAESTRO: string;
+  export const GOOGLE_API_KEY: string;
 }

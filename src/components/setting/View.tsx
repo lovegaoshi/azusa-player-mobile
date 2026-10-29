@@ -22,6 +22,7 @@ import { isAndroid, isIOS } from '@utils/RNUtils';
 import FlexView from '@components/commonui/FlexViewNewArch';
 import DefaultScreenOption from '@enums/ScreenOption';
 import InsetsTopPadding from '@components/commonui/InsetsTopPadding';
+import AISettings from './AISettings';
 
 enum NoxView {
   HOME = 'cog',
@@ -38,6 +39,7 @@ enum NoxView {
   PREMIUM = 'cash',
   SPONSORBLOCK = 'google-ads',
 
+  AI = 'robot',
   DUMMY = 'Features not implemented',
   GENERAL = 'General',
 }
@@ -115,6 +117,12 @@ const HomeSettings = ({ navigation }: Props) => {
           settingName="DeveloperOptions"
           onPress={() => navigation.navigate(NoxView.DEVELOPER)}
           settingCategory="Settings"
+        />
+        <SettingListItem
+          icon={NoxView.AI}
+          settingName="AIOptions"
+          onPress={() => navigation.navigate(NoxView.AI)}
+          settingCategory="AI"
         />
         <SettingListItem
           icon={NoxView.PREMIUM}
@@ -216,6 +224,14 @@ const Settings = ({ headerBackVisible = true }: Props) => {
             component={SponsorBlockSettings}
             options={{
               title: t('SponsorBlock.SponsorBlockOptionsName'),
+              ...DefaultScreenOption,
+            }}
+          />
+          <Stack.Screen
+            name={NoxView.AI}
+            component={AISettings}
+            options={{
+              title: t('AI.AIOptionsName'),
               ...DefaultScreenOption,
             }}
           />
