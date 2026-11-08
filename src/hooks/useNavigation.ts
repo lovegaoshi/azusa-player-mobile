@@ -29,9 +29,9 @@ export default function useAPMNavigation(navigation?: DrawerNavigationHelpers) {
       setRoute(IconMap[route]);
     }
     if (route === NoxRoutes.PlaylistsDrawer) {
-      navigation?.openDrawer();
+      navigation?.openDrawer?.();
     } else {
-      navigation?.closeDrawer();
+      navigation?.closeDrawer?.();
     }
   };
 
