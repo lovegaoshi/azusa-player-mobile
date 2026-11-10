@@ -31,7 +31,9 @@ export const resolveURL = async (song: NoxMedia.Song, iOS = false) => {
     client: yt.session.player!.po_token === undefined ? 'IOS' : 'MWEB',
   });
   */
-  const extractedVideoInfo = await yt.getShortsVideoInfo(song.bvid, 'IOS');
+  const extractedVideoInfo = await yt.getBasicInfo(song.bvid, {
+    client: 'VISIONOS',
+  });
   const maxAudioQualityStream = extractedVideoInfo.chooseFormat({
     quality: 'best',
     type: 'audio',
