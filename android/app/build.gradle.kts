@@ -105,7 +105,7 @@ react {
     autolinkLibrariesWithApp()
 }
 
-val appVersionCode = 621
+val appVersionCode = 622
 
 val enableSeparateBuildPerCPUArchitecture = true
 
