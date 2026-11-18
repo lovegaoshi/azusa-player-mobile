@@ -6,6 +6,7 @@ import { logger } from '../Logger';
 import bfetch from '@utils/BiliFetch';
 import { wbiQuery } from '@stores/wbi';
 import { fetchBVIDRaw } from '@utils/mediafetch/biliVideoInfo';
+import { isAndroid } from '../RNUtils';
 
 export enum FieldEnum {
   AudioUrl = 'AudioUrl',
@@ -169,13 +170,16 @@ const extractResponseJson = (json: any, field: string) => {
         return getBestBitrate(json.data.dash.dolby.audio).baseUrl;
       }
       if (json.data.dash)
-        return chooseUrl(getBestBitrate(json.data.dash.audio), 'bilivideo'); // , 'bilivideo.com' or 'akamaized'
+        return chooseUrl(
+          getBestBitrate(json.data.dash.audio),
+          isAndroid ? undefined : 'bilivideo.com',
+        ); // , 'bilivideo.com' or 'akamaized'
       if (json.data.durl) return json.data.durl[0].url;
       throw new Error(
         `[extractResponseJson] no audio url from ${JSON.stringify(json)}`,
       );
     case FieldEnum.VideoUrl:
-      return json.data.dash.video[0].baseUrl;
+      return chooseUrl(json.data.dash.video[0].baseUrl, 'bilivideo.com');
     case FieldEnum.CID:
       return json.data[0].cid;
     case FieldEnum.AudioInfo:

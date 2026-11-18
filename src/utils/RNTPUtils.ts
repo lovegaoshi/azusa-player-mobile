@@ -206,6 +206,7 @@ export const songlistToTracklist = async (
         isLiveStream: song.isLive,
         type,
         mediaId: song.id,
+        setRange: resolvedUrl.url.includes('akamaized'),
         // TODO: add a throttler here
         ...resolvedUrl,
       };
