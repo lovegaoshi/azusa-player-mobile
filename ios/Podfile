@@ -78,8 +78,7 @@ target 'azusa-player-mobile' do
       :mac_catalyst_enabled => false,
       # :ccache_enabled => true
     )
-  end
-  
+      
   installer.pods_project.targets.each do |target|
     react_common = '"${PODS_ROOT}/../../node_modules/react-native/ReactCommon"'
     target.build_configurations.each do |config|
