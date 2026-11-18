@@ -169,7 +169,7 @@ const extractResponseJson = (json: any, field: string) => {
         return getBestBitrate(json.data.dash.dolby.audio).baseUrl;
       }
       if (json.data.dash)
-        return chooseUrl(getBestBitrate(json.data.dash.audio)); // , 'bilivideo.com' or 'akamaized'
+        return chooseUrl(getBestBitrate(json.data.dash.audio), 'bilivideo'); // , 'bilivideo.com' or 'akamaized'
       if (json.data.durl) return json.data.durl[0].url;
       throw new Error(
         `[extractResponseJson] no audio url from ${JSON.stringify(json)}`,
