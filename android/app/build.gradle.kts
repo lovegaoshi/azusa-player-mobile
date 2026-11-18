@@ -307,3 +307,7 @@ dependencies {
     implementation(apmLibs.nanojson)
     implementation(apmLibs.newpipeextractor)
 }
+
+configurations.all {
+    exclude(group = "org.jetbrains.kotlin", module = "kotlin-android-extensions-runtime")
+}
