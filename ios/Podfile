@@ -78,6 +78,17 @@ target 'azusa-player-mobile' do
       :mac_catalyst_enabled => false,
       # :ccache_enabled => true
     )
-
   end
+  
+  installer.pods_project.targets.each do |target|
+    react_common = '"${PODS_ROOT}/../../node_modules/react-native/ReactCommon"'
+    target.build_configurations.each do |config|
+      paths = config.build_settings['HEADER_SEARCH_PATHS']
+      paths = paths.is_a?(Array) ? paths.join(' ') : (paths || '$(inherited)')
+      unless paths.include?('node_modules/react-native/ReactCommon')
+        config.build_settings['HEADER_SEARCH_PATHS'] = "#{paths} #{react_common}"
+      end
+    end
+  end
+
 end

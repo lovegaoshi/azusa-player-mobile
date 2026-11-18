@@ -5498,9 +5498,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@lodev09/react-native-true-sheet@npm:^4.1.0":
-  version: 4.1.0
-  resolution: "@lodev09/react-native-true-sheet@npm:4.1.0"
+"@lodev09/react-native-true-sheet@npm:4.0.0-beta.26":
+  version: 4.0.0-beta.26
+  resolution: "@lodev09/react-native-true-sheet@npm:4.0.0-beta.26"
   peerDependencies:
     "@radix-ui/react-dialog": ">=1"
     "@radix-ui/react-presence": ">=1"
@@ -5509,8 +5509,8 @@ __metadata:
     react: "*"
     react-dom: "*"
     react-native: ">=0.82.0"
-    react-native-reanimated: ">=4.1.0"
-    react-native-worklets: ">=0.5.0"
+    react-native-reanimated: ">=4"
+    react-native-worklets: "*"
     standard-navigation: ">=0.0.9"
   peerDependenciesMeta:
     "@radix-ui/react-dialog":
@@ -5529,7 +5529,7 @@ __metadata:
       optional: true
     standard-navigation:
       optional: true
-  checksum: 10c0/a7b09ec610eb1eea116454ab23dae9e601381f65809a368fa1f095c9f9678383e5fb261462b1e2b2d7316e62984fee1ab935f62bc14ca125e16fe51840764f3c
+  checksum: 10c0/0f8bcaa3d00fafe0b39dec1ca7552b29116f7602183ac2113f87852922375dbd72961293cc66db6d185cc51a5270d4438e02aee618f3840e12b61fea357ecd20
   languageName: node
   linkType: hard
 
@@ -9585,7 +9585,7 @@ __metadata:
     "@connectrpc/protoc-gen-connect-es": "npm:^1.7.0"
     "@expo/ui": "npm:~58.0.28"
     "@legendapp/list": "npm:^3.7.2"
-    "@lodev09/react-native-true-sheet": "npm:^4.1.0"
+    "@lodev09/react-native-true-sheet": "npm:4.0.0-beta.26"
     "@logicwind/react-native-fold-detection": "npm:^0.3.2"
     "@material/material-color-utilities": "npm:^0.4.0"
     "@preeternal/react-native-cookie-manager": "npm:^7.0.0"
@@ -9648,7 +9648,7 @@ __metadata:
     deepmerge: "npm:^4.3.1"
     drizzle-kit: "npm:^0.31.11"
     drizzle-orm: "npm:^0.45.4"
-    dropbox: "git+https://lovegaoshi@github.com/lovegaoshi/dropbox-sdk-js.git"
+    dropbox: "https://github.com/lovegaoshi/dropbox-sdk-js.git"
     esbuild: "npm:^0.28.2"
     eslint: "npm:8.57.1"
     eslint-config-expo: "npm:~58.0.4"
@@ -12380,9 +12380,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"dropbox@git+https://lovegaoshi@github.com/lovegaoshi/dropbox-sdk-js.git":
+"dropbox@https://github.com/lovegaoshi/dropbox-sdk-js.git":
   version: 10.34.0
-  resolution: "dropbox@https://lovegaoshi@github.com/lovegaoshi/dropbox-sdk-js.git#commit=789900ece30c68cfe68e4ca73e3a8e0d51a0f938"
+  resolution: "dropbox@https://github.com/lovegaoshi/dropbox-sdk-js.git#commit=789900ece30c68cfe68e4ca73e3a8e0d51a0f938"
   dependencies:
     node-fetch: "npm:^2.6.1"
   peerDependencies:
