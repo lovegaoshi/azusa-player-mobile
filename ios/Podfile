@@ -69,23 +69,24 @@ target 'azusa-player-mobile' do
   end
 
   post_install do |installer|
-  # https://github.com/facebook/react-native/blob/main/packages/react-native/scripts/react_native_pods.rb#L197-L202
-  react_native_post_install(
-      installer,
-      # Set `mac_catalyst_enabled` to `true` in order to apply patches
-      # necessary for Mac Catalyst builds
-      config[:reactNativePath],
-      :mac_catalyst_enabled => false,
-      # :ccache_enabled => true
-    )
-      
-  installer.pods_project.targets.each do |target|
-    react_common = '"${PODS_ROOT}/../../node_modules/react-native/ReactCommon"'
-    target.build_configurations.each do |config|
-      paths = config.build_settings['HEADER_SEARCH_PATHS']
-      paths = paths.is_a?(Array) ? paths.join(' ') : (paths || '$(inherited)')
-      unless paths.include?('node_modules/react-native/ReactCommon')
-        config.build_settings['HEADER_SEARCH_PATHS'] = "#{paths} #{react_common}"
+    # https://github.com/facebook/react-native/blob/main/packages/react-native/scripts/react_native_pods.rb#L197-L202
+    react_native_post_install(
+        installer,
+        # Set `mac_catalyst_enabled` to `true` in order to apply patches
+        # necessary for Mac Catalyst builds
+        config[:reactNativePath],
+        :mac_catalyst_enabled => false,
+        # :ccache_enabled => true
+      )
+
+    installer.pods_project.targets.each do |target|
+      react_common = '"${PODS_ROOT}/../../node_modules/react-native/ReactCommon"'
+      target.build_configurations.each do |config|
+        paths = config.build_settings['HEADER_SEARCH_PATHS']
+        paths = paths.is_a?(Array) ? paths.join(' ') : (paths || '$(inherited)')
+        unless paths.include?('node_modules/react-native/ReactCommon')
+          config.build_settings['HEADER_SEARCH_PATHS'] = "#{paths} #{react_common}"
+        end
       end
     end
   end
