@@ -179,7 +179,7 @@ const extractResponseJson = (json: any, field: string) => {
         `[extractResponseJson] no audio url from ${JSON.stringify(json)}`,
       );
     case FieldEnum.VideoUrl:
-      return chooseUrl(json.data.dash.video[0].baseUrl, 'bilivideo.com');
+      return chooseUrl(json.data.dash.video[0], 'bilivideo.com');
     case FieldEnum.CID:
       return json.data[0].cid;
     case FieldEnum.AudioInfo:
