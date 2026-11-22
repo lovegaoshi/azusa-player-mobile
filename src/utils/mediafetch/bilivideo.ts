@@ -150,7 +150,7 @@ const chooseUrl = (data: any, choice?: string) => {
   return (
     (data.backupUrl ?? [])
       .concat(data.baseUrl)
-      .filter((url: string) => url.includes(choice))[0] ?? data.baseUrl
+      .find((url: string) => url.includes(choice)) ?? data.baseUrl
   );
 };
 
