@@ -172,7 +172,7 @@ const extractResponseJson = (json: any, field: string) => {
       if (json.data.dash)
         return chooseUrl(
           getBestBitrate(json.data.dash.audio),
-          isAndroid || isIOS ? undefined : 'akamaized',
+          isAndroid || isIOS ? undefined : 'bilivideo',
         ); // , 'bilivideo.com' or 'akamaized'
       if (json.data.durl) return json.data.durl[0].url;
       throw new Error(
