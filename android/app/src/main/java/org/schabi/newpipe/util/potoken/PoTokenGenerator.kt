@@ -32,4 +32,6 @@ interface PoTokenGenerator : Closeable {
          */
         fun newPoTokenGenerator(context: Context): Single<PoTokenGenerator>
     }
+
+    fun test()
 }

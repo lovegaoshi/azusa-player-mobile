@@ -101,6 +101,29 @@ class PoTokenWebView private constructor(
         )
     }
 
+    override fun test() {
+        makeBotguardServiceRequest(
+            "https://www.youtube.com/api/jnn/v1/Create",
+            "[ \"$REQUEST_KEY\" ]",
+        ) { responseBody ->
+            val parsedChallengeData = parseChallengeData(responseBody)
+            webView.evaluateJavascript(
+                """try {
+                    data = $parsedChallengeData
+                    runBotGuard(data).then(function (result) {
+                        this.webPoSignalOutput = result.webPoSignalOutput
+                        $JS_INTERFACE.onRunBotguardResult(result.botguardResponse)
+                    }, function (error) {
+                        $JS_INTERFACE.onJsInitializationError(error + "\n" + error.stack)
+                    })
+                } catch (error) {
+                    $JS_INTERFACE.onJsInitializationError(error + "\n" + error.stack)
+                }""",
+                null
+            )
+        }
+    }
+
     /**
      * Called during initialization by the JavaScript snippet appended to the HTML page content in
      * [loadHtmlAndObtainBotguard] after the WebView content has been loaded.
