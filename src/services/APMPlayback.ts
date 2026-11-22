@@ -171,7 +171,9 @@ export const onAPMPlaybackActiveTrackChanged = async ({
   const song = event.track?.song as NoxMedia.Song;
   initSponsorBlock?.(song);
   const newABRepeat = await getABRepeatNormalized(song.id);
-  logger.debug(`[SongReady] logging ABRepeat as ${newABRepeat}`);
+  logger.debug(
+    `[SongReady] logging ABRepeat as ${JSON.stringify(newABRepeat)}`,
+  );
   setABRepeat([newABRepeat.a, newABRepeat.b]);
   if (setCurrentPlaying(song) && !loadingTracker?.current) return;
   if (loadingTracker) {

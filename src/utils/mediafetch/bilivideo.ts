@@ -150,7 +150,7 @@ const chooseUrl = (data: any, choice?: string) => {
   return (
     (data.backupUrl ?? [])
       .concat(data.baseUrl)
-      .filter((url: string) => url.includes(choice))[0] ?? data.baseUrl
+      .find((url: string) => url.includes(choice)) ?? data.baseUrl
   );
 };
 
@@ -172,7 +172,7 @@ const extractResponseJson = (json: any, field: string) => {
       if (json.data.dash)
         return chooseUrl(
           getBestBitrate(json.data.dash.audio),
-          isAndroid || isIOS ? undefined : 'akamaized',
+          isAndroid || isIOS ? undefined : 'bilivideo',
         ); // , 'bilivideo.com' or 'akamaized'
       if (json.data.durl) return json.data.durl[0].url;
       throw new Error(
