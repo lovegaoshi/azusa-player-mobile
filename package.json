@@ -114,7 +114,7 @@
     "react-native": "0.88.1",
     "react-native-app-auth": "^9.0.0",
     "react-native-background-timer": "git+https://github.com/lovegaoshi/react-native-background-timer.git",
-    "react-native-blob-util": "0.25.1",
+    "react-native-blob-util": "1.1.1",
     "react-native-bottom-tabs": "1.5.0",
     "react-native-carplay": "2.4.1-beta.0",
     "react-native-device-info": "^15.0.2",

@@ -9714,7 +9714,7 @@ __metadata:
     react-native: "npm:0.88.1"
     react-native-app-auth: "npm:^9.0.0"
     react-native-background-timer: "git+https://github.com/lovegaoshi/react-native-background-timer.git"
-    react-native-blob-util: "npm:0.25.1"
+    react-native-blob-util: "npm:1.1.1"
     react-native-bottom-tabs: "npm:1.5.0"
     react-native-carplay: "npm:2.4.1-beta.0"
     react-native-clean-project: "npm:^4.0.3"
@@ -20706,15 +20706,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-native-blob-util@npm:0.25.1":
-  version: 0.25.1
-  resolution: "react-native-blob-util@npm:0.25.1"
+"react-native-blob-util@npm:1.1.1":
+  version: 1.1.1
+  resolution: "react-native-blob-util@npm:1.1.1"
   dependencies:
     base-64: "npm:1.0.0"
   peerDependencies:
     react: "*"
-    react-native: "*"
-  checksum: 10c0/5e7591a55ee095297960d7b00359b17c587e1568884a5f598ee7d52e6939ca389925a4db0b1c60f5ae5f42848c0f5d16ccac1994623c5c41eb446c56a87f218d
+    react-native: ">=0.84.0"
+  checksum: 10c0/c20cee268588806f066f8f59bfcbc8819e4985d996fe0d750c70468eb1804bc67b62a01cea0d99cc0656508b1e2902607175970a629e73d568061db08844b86d
   languageName: node
   linkType: hard
 

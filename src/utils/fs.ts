@@ -35,7 +35,10 @@ export const readTxtFile = (
 ): Promise<string | undefined> =>
   RNFetchBlob.fs
     .readFile(`${fsdirs.DocumentDir}/${subfolder}/${filename}`, 'utf8')
-    .catch(e => logger.warn(`[fs] readTxtFile error: ${e}`));
+    .catch(e => {
+      logger.warn(`[fs] readTxtFile error on ${subfolder}/${filename}: ${e}`);
+      return undefined;
+    });
 
 export const lsFiles = async (
   dirpath = `${fsdirs.DocumentDir}`,

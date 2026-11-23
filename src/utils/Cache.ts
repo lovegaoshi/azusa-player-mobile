@@ -112,6 +112,10 @@ class NoxMediaCache {
         logger.debug(`${song.parsedName} caching progress: ${progress}%`);
       });
     let finalPath = res.path();
+    if (finalPath == null) {
+      logger.warn('[Cache] failed to download to an actual path!');
+      return;
+    }
     this.cache.set(noxCacheKey(song), finalPath);
     addDownloadProgress(song, 100);
     const probedResults = await probeMetadata(finalPath);
@@ -178,8 +182,9 @@ class NoxMediaCache {
         logger.debug(`[NoxCache] ${identifier} caching progress: ${progress}%`);
       })
       .then(async res => {
-        const path = await transform(res.path());
-        this.cache.set(identifier, path);
+        const path = res.path();
+        if (path == null) return;
+        this.cache.set(identifier, await transform(path));
         this.dumpCache();
       })
       .catch();
