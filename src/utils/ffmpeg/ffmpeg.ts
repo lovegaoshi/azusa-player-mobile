@@ -25,7 +25,7 @@ export const cacheAlbumArt = async (fpath: string) =>
 
 export const probeMetadata = async (
   fspath: string,
-): Promise<NoxMedia.FFProbeMetadata> => {
+): Promise<NoxMedia.FFProbeMetadata | undefined> => {
   const session = await FFprobeKit.execute(
     `-v quiet -print_format json -show_format '${fspath}'`,
   );

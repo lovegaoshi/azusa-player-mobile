@@ -3,7 +3,7 @@ import LRUCache from 'lru-cache';
 import RNFetchBlob from 'react-native-blob-util';
 import TrackPlayer from 'react-native-track-player';
 
-import { ffmpegToMP3 } from './ffmpeg/ffmpeg';
+import { ffmpegToMP3, probeMetadata } from './ffmpeg/ffmpeg';
 import { addDownloadProgress, setFetchProgress } from '@stores/appStore';
 import { useNoxSetting } from '@stores/useApp';
 import { getCachedMediaMapping, saveCachedMediaMapping } from './ChromeStorage';
@@ -114,6 +114,12 @@ class NoxMediaCache {
     let finalPath = res.path();
     this.cache.set(noxCacheKey(song), finalPath);
     addDownloadProgress(song, 100);
+    const probedResults = await probeMetadata(finalPath);
+    if (probedResults?.duration ?? 0 < 1) {
+      logger.warn('[Cache] cached results does not have a valid duration!');
+      RNFetchBlob.fs.unlink(finalPath).catch();
+      return;
+    }
     await parseR128Gain(finalPath);
     if (isIOS) {
       finalPath = await ffmpegToMP3({ fspath: finalPath });
