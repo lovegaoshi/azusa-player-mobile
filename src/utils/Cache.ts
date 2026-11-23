@@ -119,7 +119,7 @@ class NoxMediaCache {
     this.cache.set(noxCacheKey(song), finalPath);
     addDownloadProgress(song, 100);
     const probedResults = await probeMetadata(finalPath);
-    if (probedResults?.duration ?? 0 < 1) {
+    if (parseInt(probedResults?.duration ?? '') < 1) {
       logger.warn('[Cache] cached results does not have a valid duration!');
       RNFetchBlob.fs.unlink(finalPath).catch();
       return;

@@ -78,7 +78,7 @@ declare global {
     }
 
     export interface FFProbeMetadata {
-      duration: number;
+      duration: string;
     }
   }
 }
