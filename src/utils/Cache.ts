@@ -3,7 +3,7 @@ import LRUCache from 'lru-cache';
 import RNFetchBlob from 'react-native-blob-util';
 import TrackPlayer from 'react-native-track-player';
 
-import { ffmpegToMP3 } from './ffmpeg/ffmpeg';
+import { ffmpegToMP3, probeMetadata } from './ffmpeg/ffmpeg';
 import { addDownloadProgress, setFetchProgress } from '@stores/appStore';
 import { useNoxSetting } from '@stores/useApp';
 import { getCachedMediaMapping, saveCachedMediaMapping } from './ChromeStorage';
@@ -112,8 +112,18 @@ class NoxMediaCache {
         logger.debug(`${song.parsedName} caching progress: ${progress}%`);
       });
     let finalPath = res.path();
+    if (finalPath == null) {
+      logger.warn('[Cache] failed to download to an actual path!');
+      return;
+    }
     this.cache.set(noxCacheKey(song), finalPath);
     addDownloadProgress(song, 100);
+    const probedResults = await probeMetadata(finalPath);
+    if (parseInt(probedResults?.duration ?? '') < 1) {
+      logger.warn('[Cache] cached results does not have a valid duration!');
+      RNFetchBlob.fs.unlink(finalPath).catch();
+      return;
+    }
     await parseR128Gain(finalPath);
     if (isIOS) {
       finalPath = await ffmpegToMP3({ fspath: finalPath });
@@ -172,8 +182,9 @@ class NoxMediaCache {
         logger.debug(`[NoxCache] ${identifier} caching progress: ${progress}%`);
       })
       .then(async res => {
-        const path = await transform(res.path());
-        this.cache.set(identifier, path);
+        const path = res.path();
+        if (path == null) return;
+        this.cache.set(identifier, await transform(path));
         this.dumpCache();
       })
       .catch();

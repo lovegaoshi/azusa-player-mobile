@@ -59,6 +59,9 @@ export const customReqHeader = (
     if (/bilivideo/.exec(url)) {
       reqHeader.range = 'bytes=0-';
     }
+    if (/akamaized\.net/.exec(url)) {
+      reqHeader.range = 'bytes=0-62155200';
+    }
   } else if (/y\.qq\.com/.exec(url)) {
     reqHeader.referer = 'https://y.qq.com/';
   } else if (/u\.qq\.com/.exec(url)) {

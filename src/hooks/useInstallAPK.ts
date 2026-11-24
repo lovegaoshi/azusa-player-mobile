@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 
 import useSnack from '../stores/useSnack';
 
-const android = RNFetchBlob.android;
+const open = RNFetchBlob.open;
 
 export default function useInstallAPK() {
   const { t } = useTranslation();
@@ -24,10 +24,11 @@ export default function useInstallAPK() {
       .fetch('GET', url)
       .then(res => {
         setSnack({ snackMsg: { success: t('VersionUpdate.DownloadedAPK') } });
-        android.actionViewIntent(
-          res.path(),
-          'application/vnd.android.package-archive',
-        );
+        const path = res.path();
+        path &&
+          open.chooser(path, {
+            mime: 'application/vnd.android.package-archive',
+          });
       })
       .catch();
   };

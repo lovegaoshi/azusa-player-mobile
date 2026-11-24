@@ -1,1 +1,1 @@
-export * from 'react-native-nitro-base64';
+export * from 'react-native-quick-base64';
