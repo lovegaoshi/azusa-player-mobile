@@ -31,6 +31,7 @@ interface Props {
   callback?: (direction: number, prevIndex: number) => void;
   active?: boolean;
   throttle?: boolean;
+  activeHidden?: { hidden?: boolean; id?: string };
 }
 
 /**
@@ -45,6 +46,7 @@ export default function HorizontalCarousel({
   callback = () => undefined,
   active = true,
   throttle = true,
+  activeHidden,
 }: Props) {
   // this number is contrained to 0, 1, 2
   const carouselIndex = useSharedValue(1);
@@ -52,11 +54,22 @@ export default function HorizontalCarousel({
   const [throttling, setThrottling] = useState(false);
 
   const imgWidth = (imgStyle?.width as number) + paddingVertical;
-  const defaultGetImgSource = (i: number, arr = images) => arr[i];
-  const resolveImgSource = getImgSource ?? defaultGetImgSource;
   const activeCarouselX = useSharedValue(0);
   const activeCarouselTX = useSharedValue(0);
   const carouselXs = useSharedValue([-imgWidth, 0, imgWidth]);
+  const [activeHiddenState, setActiveHiddenState] = useState(
+    activeHidden?.hidden ?? false,
+  );
+
+  const resolveImgSource = (i: number, arr = images) => {
+    if (i === carouselIndex.value && activeHiddenState) {
+      return null;
+    }
+    if (getImgSource) {
+      return getImgSource(i, arr);
+    }
+    return arr[i];
+  };
 
   const toggleThrottle = (to = true) => {
     if (throttle) {
@@ -82,6 +95,7 @@ export default function HorizontalCarousel({
           });
           scheduleOnRN(callback, direction, prevIndex);
           scheduleOnRN(toggleThrottle, true);
+          scheduleOnRN(setActiveHiddenState, false);
         },
       );
       return;
@@ -136,6 +150,10 @@ export default function HorizontalCarousel({
     setMImages(newImages);
     toggleThrottle(false);
   }, [images]);
+
+  useEffect(() => {
+    setActiveHiddenState(activeHidden?.hidden ?? false);
+  }, [activeHidden]);
 
   return (
     <GestureDetector gesture={scrollDragGesture}>

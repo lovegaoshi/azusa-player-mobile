@@ -60,7 +60,11 @@ export default function MiniplayerArtwork({
   });
 
   const artworkOpacity = useDerivedValue(() => {
-    if (!track?.song?.MVHide || !track?.song?.backgroundOverride) {
+    if (
+      !track?.song?.MVHide ||
+      !track?.song?.backgroundOverride ||
+      playerSetting.artworkCarousel
+    ) {
       return opacity.value;
     }
     return interpolate(
@@ -159,12 +163,13 @@ export default function MiniplayerArtwork({
         {playerSetting.artworkCarousel ? (
           <HorizontalCarousel
             images={trackCarousel}
-            imgStyle={{ width, height: width }}
-            paddingVertical={100}
+            imgStyle={{ width, height: width + 50 }}
+            paddingVertical={50}
             callback={i =>
               i === -1 ? performSkipToNext() : performSkipToPrevious()
             }
             active={track !== undefined}
+            activeHidden={{ hidden: track?.song?.MVHide }}
           />
         ) : (
           !playerSetting.hideCoverInMobile && (
