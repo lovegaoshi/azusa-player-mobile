@@ -56,6 +56,17 @@ module.exports = api => {
         'babel-preset-expo',
         {
           unstable_transformImportMeta: true,
+          // Metro's React Native default transformer passes no `engine` to
+          // Babel, so babel-preset-expo falls back to the legacy "default"
+          // (hermes-v0) profile: classes, static blocks, private members and
+          // computed keys are all lowered to ES5. Expo's transformer forwards
+          // `engine: hermes` from Expo CLI, which selects the hermes-v1
+          // profile instead. That profile preserves modern syntax that Hermes
+          // cannot compile, surfacing as
+          // "Invalid property name - must be a string, number or identifier".
+          // Pin the profile so both transformers emit the same bytecode-safe
+          // JavaScript.
+          unstable_transformProfile: 'hermes-v0',
         },
       ],
     ],
