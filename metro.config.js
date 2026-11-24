@@ -4,31 +4,17 @@
  *
  * @format
  */
+const { getDefaultConfig } = require('@react-native/metro-config');
 const { getSentryExpoConfig } = require('@sentry/react-native/metro');
 const {
   getBundleModeMetroConfig,
 } = require('react-native-worklets/bundleMode');
 
 const config = getBundleModeMetroConfig(getSentryExpoConfig(__dirname));
+const rnconfig = getDefaultConfig(__dirname);
 config.resolver.sourceExts.push('sql');
-
-// Expo's transformer defaults to `experimentalImportSupport: true`, which
-// tells Babel to leave ESM import/export syntax in the modules it hands to
-// Metro. React Native's default transformer keeps that disabled and emits
-// CommonJS instead. Keep the Expo transformer (Expo's serializer and the
-// worklets bundle-mode integration depend on it), but use the same transform
-// options as the known-good React Native setup so Hermes receives equivalent
-// code. `inlineRequires: true` is preserved by getBundleModeMetroConfig.
-const getTransformOptions = config.transformer.getTransformOptions;
-config.transformer.getTransformOptions = async (...args) => {
-  const options = await getTransformOptions(...args);
-  return {
-    ...options,
-    transform: {
-      ...options.transform,
-      experimentalImportSupport: false,
-    },
-  };
-};
+// expo metro does not respect disabled auto linking
+// something must be going on here as setting to the serialized object wont work
+config.transformer = rnconfig.transformer;
 
 module.exports = config;
