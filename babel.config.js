@@ -56,6 +56,8 @@ module.exports = api => {
         'babel-preset-expo',
         {
           unstable_transformImportMeta: true,
+          worklets: false, // preset must not add its own plugin
+          reanimated: false,
         },
       ],
     ],
@@ -83,7 +85,7 @@ module.exports = api => {
           },
         },
       ],
-      'react-native-worklets/plugin',
+      ['react-native-worklets/plugin', workletsPluginOptions],
       ['@babel/plugin-transform-private-methods', { loose: true }],
     ],
   };
