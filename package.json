@@ -124,7 +124,6 @@
     "react-native-get-random-values": "^2.1.0",
     "react-native-image-colors": "^2.6.1",
     "react-native-lyric": "https://github.com/lovegaoshi/react-native-lyric.git#commit=e32b84643067e79d0e3ea291ec047086e6889570",
-    "react-native-nitro-base64": "^1.1.2",
     "react-native-nitro-modules": "^0.37.2",
     "react-native-notify-kit": "^10.10.1",
     "react-native-ota-hot-update": "2.2.2",
@@ -132,6 +131,7 @@
     "react-native-paper": "5.15.5",
     "react-native-purchases": "^11.0.4",
     "react-native-qrcode-svg": "^6.3.54",
+    "react-native-quick-base64": "^3.0.2",
     "react-native-reanimated": "4.8.0",
     "react-native-safe-area-context": "5.11.1",
     "react-native-screens": "4.30.1",
@@ -211,7 +211,6 @@
     "react-native-clean-project": "^4.0.3",
     "react-native-dotenv": "^5.0.0",
     "react-test-renderer": "19.3.0",
-    "reactotron-react-native": "^5.3.1",
     "rimraf": "^6.1.4",
     "shx": "^0.4.0",
     "typescript": "6.0.3"
@@ -235,7 +234,8 @@
       },
       "ios": {
         "exclude": [
-          "nodejs-mobile-react-native"
+          "nodejs-mobile-react-native",
+          "react-native-fold-detection"
         ]
       }
     }

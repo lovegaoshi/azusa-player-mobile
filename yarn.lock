@@ -9726,7 +9726,6 @@ __metadata:
     react-native-get-random-values: "npm:^2.1.0"
     react-native-image-colors: "npm:^2.6.1"
     react-native-lyric: "https://github.com/lovegaoshi/react-native-lyric.git#commit=e32b84643067e79d0e3ea291ec047086e6889570"
-    react-native-nitro-base64: "npm:^1.1.2"
     react-native-nitro-modules: "npm:^0.37.2"
     react-native-notify-kit: "npm:^10.10.1"
     react-native-ota-hot-update: "npm:2.2.2"
@@ -9734,6 +9733,7 @@ __metadata:
     react-native-paper: "npm:5.15.5"
     react-native-purchases: "npm:^11.0.4"
     react-native-qrcode-svg: "npm:^6.3.54"
+    react-native-quick-base64: "npm:^3.0.2"
     react-native-reanimated: "npm:4.8.0"
     react-native-safe-area-context: "npm:5.11.1"
     react-native-screens: "npm:4.30.1"
@@ -9747,7 +9747,6 @@ __metadata:
     react-native-webview: "npm:14.0.1"
     react-native-worklets: "npm:0.14.0"
     react-test-renderer: "npm:19.3.0"
-    reactotron-react-native: "npm:^5.3.1"
     rimraf: "npm:^6.1.4"
     shx: "npm:^0.4.0"
     sp-react-native-in-app-updates: "npm:^2.0.0"
@@ -19087,13 +19086,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"mitt@npm:^3.0.1":
-  version: 3.0.1
-  resolution: "mitt@npm:3.0.1"
-  checksum: 10c0/3ab4fdecf3be8c5255536faa07064d05caa3dd332bd318ff02e04621f7b3069ca1de9106cfe8e7ced675abfc2bec2ce4c4ef321c4a1bb1fb29df8ae090741913
-  languageName: node
-  linkType: hard
-
 "mixin-deep@npm:^1.2.0":
   version: 1.3.2
   resolution: "mixin-deep@npm:1.3.2"
@@ -20882,17 +20874,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-native-nitro-base64@npm:^1.1.2":
-  version: 1.1.2
-  resolution: "react-native-nitro-base64@npm:1.1.2"
-  peerDependencies:
-    react: "*"
-    react-native: "*"
-    react-native-nitro-modules: "*"
-  checksum: 10c0/ed3b07ad7121a8b0cf72964ef76e245a677225c35907e3a1b02a2d41a7cbf47cbf5f4c77bf6e097e2f0813785397564ba82de52114309ced087296d98f678991
-  languageName: node
-  linkType: hard
-
 "react-native-nitro-modules@npm:^0.37.2":
   version: 0.37.2
   resolution: "react-native-nitro-modules@npm:0.37.2"
@@ -21003,6 +20984,16 @@ __metadata:
     react-native: ">=0.63.4"
     react-native-svg: ">=14.0.0"
   checksum: 10c0/4df598945e153fa07cf530e0001809b677ad95e49230f6de32625fe1f8afe527176d8d05346a36e5b3acffbb6e1d3b4a9ab390f47c14ba329c905d94b197a7ac
+  languageName: node
+  linkType: hard
+
+"react-native-quick-base64@npm:^3.0.2":
+  version: 3.0.2
+  resolution: "react-native-quick-base64@npm:3.0.2"
+  peerDependencies:
+    react: "*"
+    react-native: "*"
+  checksum: 10c0/f0bf0506d5fd1d5c755482b4c78168fe62d376111fa8fb9cd82be0e0a6950f9daa0a6bd711bccc4b6a037d5aaf85de9f12dc3a9476d84b98ac664cb73de14817
   languageName: node
   linkType: hard
 
@@ -21292,35 +21283,6 @@ __metadata:
   version: 19.3.0
   resolution: "react@npm:19.3.0"
   checksum: 10c0/dd3099c3c43a7122bc01223bb26b0f8d5ba13cca569af6fb94a005fb54fa73223c9cb203bb226d40cfd49a82cbeef2e36ce84062a3a6d5b9fe8f4437694c7b52
-  languageName: node
-  linkType: hard
-
-"reactotron-core-client@npm:2.10.0":
-  version: 2.10.0
-  resolution: "reactotron-core-client@npm:2.10.0"
-  dependencies:
-    reactotron-core-contract: "npm:0.4.0"
-  checksum: 10c0/eb6634176564ff5a200e31cc9a5f42669ed621dc88250f970aba405019e6d077e56342ef477ea5a929bf70eaec82607717bf72129caf87491f199f4a2f7c08fb
-  languageName: node
-  linkType: hard
-
-"reactotron-core-contract@npm:0.4.0":
-  version: 0.4.0
-  resolution: "reactotron-core-contract@npm:0.4.0"
-  checksum: 10c0/22ddf3766cd7937f1fd447f1094320a90072b3a0df75ce25917d5899b5ac4221ca62ccf244082c121789bcb2df35f1cfedd9ba083e20ba2a05561cd00f397027
-  languageName: node
-  linkType: hard
-
-"reactotron-react-native@npm:^5.3.1":
-  version: 5.3.1
-  resolution: "reactotron-react-native@npm:5.3.1"
-  dependencies:
-    mitt: "npm:^3.0.1"
-    reactotron-core-client: "npm:2.10.0"
-    reactotron-core-contract: "npm:0.4.0"
-  peerDependencies:
-    react-native: ">=0.40.0"
-  checksum: 10c0/cc8e526b0c89a8bd1285e36c37ab9d9ba0f80fac6f4f6f5e42ec8ca575152e82a6aebddf0e51a27d311b5ed391bac95920a35e9c4ad104e465dc697a566a80c5
   languageName: node
   linkType: hard
 
