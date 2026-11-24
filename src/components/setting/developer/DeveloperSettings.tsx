@@ -36,10 +36,6 @@ const developerSettings: { [key: string]: SettingEntry } = {
     settingCategory: 'GeneralSettings',
     callback: selfDestruct,
   },
-  artworkCarousel: {
-    settingName: 'artworkCarousel',
-    settingCategory: 'GeneralSettings',
-  },
   resumeOnPause: {
     settingName: 'resumeOnPause',
     settingCategory: 'GeneralSettings',
