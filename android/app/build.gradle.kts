@@ -165,6 +165,9 @@ extensions.configure(
         versionName = "4.4.1"
         manifestPlaceholders["appAuthRedirectScheme"] = "com.noxplayer"
         vectorDrawables.useSupportLibrary = true
+        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunnerArguments["videoId"] =
+            (project.findProperty("potVideoId") as String?) ?: ""
     }
     splits {
         abi {
@@ -301,12 +304,17 @@ dependencies {
     implementation(apmLibs.core.google.shortcuts)
     implementation(apmLibs.tarsos.dsp.core)
     implementation(apmLibs.tarsos.dsp.jvm)
-    // for po token generation - consider pulling the necessary interfaces OUT
+    // po token generation: WebView BotGuard + OkHttp for the surrounding requests
     implementation(apmLibs.webkit)
-    implementation(apmLibs.rxjava)
-    implementation(apmLibs.rxandroid)
     implementation(apmLibs.nanojson)
-    implementation(apmLibs.newpipeextractor)
+    implementation(apmLibs.okhttp)
+
+    androidTestImplementation("androidx.test.ext:junit:1.3.0")
+    androidTestImplementation("androidx.test:runner:1.7.0")
+}
+
+tasks.withType<org.gradle.api.tasks.testing.Test>().configureEach {
+    testLogging.showStandardStreams = true
 }
 
 configurations.all {

@@ -30,24 +30,18 @@ import com.nativenoxmodule.dsp.SAMPLE_RATE
 import com.nativenoxmodule.dsp.beatRoot
 import com.noxplay.noxplayer.BuildConfig
 import com.noxplay.noxplayer.MainActivity
+import com.noxplay.noxplayer.potoken.PoTokenProvider
+import com.noxplay.noxplayer.potoken.PoTokenResult
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import org.schabi.newpipe.DownloaderImpl
-import org.schabi.newpipe.util.potoken.PoTokenProviderImpl
-import org.schabi.newpipe.extractor.NewPipe
-import org.schabi.newpipe.extractor.services.youtube.PoTokenResult
 import timber.log.Timber
 import java.io.File
 
 class NativeNoxModule(reactContext: ReactApplicationContext) : NativeNoxModuleSpec(reactContext) {
 
     override fun getName() = NAME
-    private val poTokenGenerator = PoTokenProviderImpl(reactContext)
-
-    init {
-        NewPipe.init(DownloaderImpl.init(null))
-    }
+    private val poTokenProvider = PoTokenProvider(reactContext)
 
     private fun getActivity(): MainActivity? {
         return reactApplicationContext.currentActivity as MainActivity?
@@ -79,11 +73,11 @@ class NativeNoxModule(reactContext: ReactApplicationContext) : NativeNoxModuleSp
     }
 
     override fun getPOToken(videoId: String): WritableMap? {
-        return buildPOTMap(poTokenGenerator.getWebClientPoToken(videoId, true))
+        return buildPOTMap(poTokenProvider.getPOToken(videoId))
     }
 
     override fun getPOTokenVisitor(videoId: String, visitorData: String?): WritableMap? {
-        return buildPOTMap(poTokenGenerator.getWebClientPoToken(videoId, visitorData))
+        return buildPOTMap(poTokenProvider.getPOToken(videoId, visitorData))
     }
 
     private fun listMediaDirNative(relativeDir: String, subdir: Boolean, selection: String? = null): WritableArray {
