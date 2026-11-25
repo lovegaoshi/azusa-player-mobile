@@ -3,6 +3,7 @@ animatedGif = "3.9.0"
 appcompatV7 = "28.0.0"
 tarsosDSP = "2.5"
 coreKtx = "1.19.1"
+coreSplashscreen = "1.2.0"
 coreGoogleShortcuts = "1.1.0"
 desugar_jdk_libs = "2.1.5"
 kotlinxCoroutinesGuava = "1.11.0"
@@ -23,6 +24,7 @@ appcompat-v7 = { module = "com.android.support:appcompat-v7", version.ref = "app
 tarsos-dsp-core = { module = "be.tarsos.dsp:core", version.ref = "tarsosDSP" }
 core-google-shortcuts = { module = "androidx.core:core-google-shortcuts", version.ref = "coreGoogleShortcuts" }
 core-ktx = { module = "androidx.core:core-ktx", version.ref = "coreKtx" }
+core-splashscreen = { module = "androidx.core:core-splashscreen", version.ref = "coreSplashscreen" }
 design = { module = "com.android.support:design", version.ref = "appcompatV7" }
 tarsos-dsp-jvm = { module = "be.tarsos.dsp:jvm", version.ref = "tarsosDSP" }
 kotlinx-coroutines-guava = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-guava", version.ref = "kotlinxCoroutinesGuava" }

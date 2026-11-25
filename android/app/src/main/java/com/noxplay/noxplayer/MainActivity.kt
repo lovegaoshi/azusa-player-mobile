@@ -17,6 +17,7 @@ import android.util.Rational
 import com.facebook.infer.annotation.Assertions
 import android.view.View
 import android.view.ViewTreeObserver
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import com.doublesymmetry.trackplayer.module.MusicModule
 import com.facebook.react.APMActivity
 import com.facebook.react.ReactActivityDelegate
@@ -28,6 +29,7 @@ import com.facebook.react.defaults.DefaultNewArchitectureEntryPoint.fabricEnable
 import com.facebook.react.defaults.DefaultReactActivityDelegate
 import expo.modules.ReactActivityDelegateWrapper
 import timber.log.Timber
+import androidx.core.content.edit
 
 interface NoxActivity {
     var loadedRN: Boolean
@@ -48,25 +50,31 @@ class MainActivity(
      * for react navigation;
      */
     override fun onCreate(savedInstanceState: Bundle?) {
+        val splashScreen = installSplashScreen()
         super.onCreate(null)
-        volumeListener = APMVolumeListener(::emit)
-        registerReceiver(volumeListener, IntentFilter("android.media.VOLUME_CHANGED_ACTION"))
-        val content: View = findViewById(android.R.id.content)
-        content.viewTreeObserver.addOnPreDrawListener(
-            object : ViewTreeObserver.OnPreDrawListener {
-                override fun onPreDraw(): Boolean {
-                    // Check whether the initial data is ready.
-                    return if (loadedRN) {
-                        // The content is ready. Start drawing.
-                        content.viewTreeObserver.removeOnPreDrawListener(this)
-                        true
-                    } else {
-                        // The content isn't ready. Suspend.
-                        false
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+            // Android 12+: the system splash screen stays up until RN is ready,
+            // then dismisses itself with the default platform animation.
+            splashScreen.setKeepOnScreenCondition { !loadedRN }
+        } else {
+            // Android 11 and below: hold the first draw so the themed launch
+            // window (app icon) stays visible until RN is ready, then draw.
+            val content: View = findViewById(android.R.id.content)
+            content.viewTreeObserver.addOnPreDrawListener(
+                object : ViewTreeObserver.OnPreDrawListener {
+                    override fun onPreDraw(): Boolean {
+                        return if (loadedRN) {
+                            content.viewTreeObserver.removeOnPreDrawListener(this)
+                            true
+                        } else {
+                            false
+                        }
                     }
                 }
-            }
-        )
+            )
+        }
+        volumeListener = APMVolumeListener(::emit)
+        registerReceiver(volumeListener, IntentFilter("android.media.VOLUME_CHANGED_ACTION"))
     }
 
     @SuppressLint("VisibleForTests")
@@ -114,9 +122,8 @@ class MainActivity(
             if (mActivity.intent.dataString == "safemode") {
                 val sharedPref = mActivity.getSharedPreferences(
                     "com.noxplay.noxplayer.APMSettings", MODE_PRIVATE)
-                with (sharedPref.edit()) {
+                sharedPref.edit {
                     putBoolean("safemode", true)
-                    apply()
                 }
             }
             // launchOptions.putBundle("intentBundle", mActivity.intent.extras ?: Bundle())
@@ -155,9 +162,6 @@ class MainActivity(
         isInPictureInPictureMode: Boolean,
         newConfig: Configuration
     ) {
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O) {
-            return
-        }
         if (isInPictureInPictureMode) {
             // Hide the full-screen UI (controls, etc.) while in PiP mode.
             getReactContext()?.emitDeviceEvent("APMEnterPIP", true)

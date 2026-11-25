@@ -54,6 +54,7 @@
             android:networkSecurityConfig="@xml/network_security_config"
             android:resizeableActivity="true"
             android:supportsPictureInPicture="true"
+            android:theme="@style/Theme.AzusaPlayerMobile.SplashScreen"
             android:windowSoftInputMode="adjustNothing">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
