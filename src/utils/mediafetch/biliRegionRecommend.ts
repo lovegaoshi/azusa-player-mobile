@@ -3,6 +3,7 @@ import SongTS from '@objects/Song';
 import bfetch from '@utils/BiliFetch';
 import { Source } from '@enums/MediaFetch';
 import { biliApiLimiter } from './throttle';
+import { getCookie } from './bilisearch';
 
 const API =
   'https://api.bilibili.com/x/web-interface/region/feed/rcmd?display_id={pn}&request_cnt=20&from_region={rid}';
@@ -30,8 +31,14 @@ export const fetchRecommend = async (
 ) => {
   logger.info(`[biliRecommend] calling fetch biliRegionRecommend of ${rid}`);
   try {
+    const cookie = await getCookie();
     const res = await biliApiLimiter.schedule(() =>
-      bfetch(API.replace('{rid}', rid).replace('{pn}', String(pn))),
+      bfetch(API.replace('{rid}', rid).replace('{pn}', String(pn)), {
+        headers: {
+          cookie,
+          'User-Agent': '',
+        },
+      }),
     );
     const json = await res.json();
     json.data.archives.forEach((v: any) => {

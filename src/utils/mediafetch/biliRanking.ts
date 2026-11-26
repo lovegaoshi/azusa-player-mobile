@@ -1,8 +1,8 @@
 import { logger } from '../Logger';
 import SongTS from '@objects/Song';
-import bfetch from '@utils/BiliFetch';
+import bfetch, { DEFAULT_UA } from '@utils/BiliFetch';
 import { Source, BiliMusicTid } from '@enums/MediaFetch';
-import { biliApiLimiter } from './throttle';
+import { humanishApiLimiter } from './throttle';
 
 // this is snipped from https://www.bilibili.com/v/popular/rank/music
 const API = 'https://api.bilibili.com/x/web-interface/ranking/v2?rid={rid}';
@@ -30,8 +30,11 @@ export interface BiliRanking {
 export const fetchRanking = async (rid = '3', results: BiliRanking = {}) => {
   logger.info(`[biliRanking] calling fetchRanking of ${rid}`);
   try {
-    const res = await biliApiLimiter.schedule(() =>
-      bfetch(API.replace('{rid}', rid)),
+    const res = await humanishApiLimiter.schedule(() =>
+      // HACK: using a referrer actually gets blocked (err code 352)
+      bfetch(API.replace('{rid}', rid), {
+        headers: { 'User-Agent': DEFAULT_UA },
+      }),
     );
     const json = await res.json();
     json.data.list.forEach((v: any) => {

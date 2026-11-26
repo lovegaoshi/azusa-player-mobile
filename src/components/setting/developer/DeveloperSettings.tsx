@@ -127,10 +127,6 @@ export const Home = ({
               />
             )}
             <RenderSetting
-              item={developerSettings.artworkCarousel}
-              delayedLoading={false}
-            />
-            <RenderSetting
               item={developerSettings.memoryEfficiency}
               delayedLoading={false}
             />
