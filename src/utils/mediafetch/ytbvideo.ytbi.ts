@@ -21,10 +21,6 @@ export const resolveURL = async (song: NoxMedia.Song, iOS = false) => {
     `[ytbi.js] fetch YTB playURL promise:${song.bvid} / iOS status:${isIOS}/${iOS}`,
   );
   const yt = await ytClient();
-  const hls_manifest_url = iOS
-    ? (await yt.getShortsVideoInfo(song.bvid, 'IOS')).streaming_data
-        ?.hls_manifest_url
-    : undefined;
   /** 
   yt.session.player!.po_token = await getPoT(song.bvid);
   const extractedVideoInfo = await yt.getBasicInfo(song.bvid, {
@@ -34,14 +30,15 @@ export const resolveURL = async (song: NoxMedia.Song, iOS = false) => {
   const extractedVideoInfo = await yt.getBasicInfo(song.bvid, {
     client: 'VISIONOS',
   });
+  const hlsManifestUrl = extractedVideoInfo.streaming_data?.hls_manifest_url;
   const maxAudioQualityStream = extractedVideoInfo.chooseFormat({
     quality: 'best',
     type: 'audio',
   });
   return {
     url:
-      iOS && isIOS && hls_manifest_url
-        ? hls_manifest_url
+      iOS && isIOS && hlsManifestUrl
+        ? hlsManifestUrl
         : await maxAudioQualityStream.decipher(yt.actions.session.player),
     loudness: maxAudioQualityStream.loudness_db,
   };

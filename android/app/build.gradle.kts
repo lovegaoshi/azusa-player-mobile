@@ -297,6 +297,7 @@ dependencies {
         implementation(jscFlavor)
     }
     implementation(apmLibs.core.ktx)
+    implementation(apmLibs.core.splashscreen)
     implementation(apmLibs.core.google.shortcuts)
     implementation(apmLibs.tarsos.dsp.core)
     implementation(apmLibs.tarsos.dsp.jvm)

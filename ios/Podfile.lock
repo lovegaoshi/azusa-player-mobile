@@ -33,7 +33,7 @@ PODS:
     - ReactNativeDependencies
   - EXConstants (58.0.16):
     - ExpoModulesCore
-  - Expo (58.0.25):
+  - Expo (58.0.26):
     - ExpoModulesCore
     - ExpoModulesJSI
     - hermes-engine
@@ -59,6 +59,9 @@ PODS:
     - ReactCommon/turbomodule/core
     - ReactNativeDependencies
     - Yoga
+  - ExpoAdapterRNAppAuth (9.1.0):
+    - ExpoModulesCore
+    - react-native-app-auth
   - ExpoApplication (58.1.2):
     - ExpoModulesCore
   - ExpoAsset (58.0.21):
@@ -71,7 +74,7 @@ PODS:
     - ExpoModulesCore
   - ExpoDomWebView (58.0.2):
     - ExpoModulesCore
-  - ExpoFileSystem (58.0.13):
+  - ExpoFileSystem (58.0.14):
     - ExpoModulesCore
   - ExpoFont (58.0.12):
     - ExpoModulesCore
@@ -129,15 +132,15 @@ PODS:
     - RNWorklets
   - ExpoSecureStore (58.0.3):
     - ExpoModulesCore
-  - ExpoSQLite (58.0.17):
+  - ExpoSQLite (58.0.18):
     - ExpoModulesCore
-  - ExpoUI (58.0.28):
+  - ExpoUI (58.0.29):
     - ExpoModulesCore
     - ExpoModulesWorklets
     - React-RCTFabric
   - ExpoVideo (58.0.14):
     - ExpoModulesCore
-  - ExpoWebBrowser (58.0.8):
+  - ExpoWebBrowser (58.1.0):
     - ExpoModulesCore
   - fast_float (8.0.0):
     - ReactNativeDependencies
@@ -180,30 +183,6 @@ PODS:
     - RCTRequired
     - RCTTypeSafety
     - React-bridging
-    - React-Core
-    - React-cxxstableapi
-    - React-debug
-    - React-Fabric
-    - React-featureflags
-    - React-graphics
-    - React-ImageManager
-    - React-jsi
-    - React-NativeModulesApple
-    - React-RCTFabric
-    - React-renderercss
-    - React-rendererdebug
-    - React-utils
-    - ReactCodegen
-    - ReactCommon/turbomodule/core
-    - ReactNativeDependencies
-    - Yoga
-  - NitroBase64 (1.1.2):
-    - hermes-engine
-    - NitroModules
-    - RCTRequired
-    - RCTTypeSafety
-    - React-bridging
-    - React-callinvoker
     - React-Core
     - React-cxxstableapi
     - React-debug
@@ -269,8 +248,8 @@ PODS:
     - ReactNativeDependencies
     - Yoga
   - Protobuf (3.22.1)
-  - PurchasesHybridCommon (20.7.0):
-    - RevenueCat (= 5.102.2)
+  - PurchasesHybridCommon (20.15.0):
+    - RevenueCat (= 5.103.2)
   - RCT-Folly (2024.11.18.00):
     - RCT-Folly/Default (= 2024.11.18.00)
     - ReactNativeDependencies
@@ -1755,12 +1734,12 @@ PODS:
     - ReactCommon/turbomodule/core
     - ReactNativeDependencies
     - Yoga
-  - react-native-app-auth (9.0.0):
+  - react-native-app-auth (9.1.0):
     - AppAuth (>= 1.7.6)
     - React-Core
   - react-native-background-timer (2.4.1):
     - React-Core
-  - react-native-blob-util (0.25.1):
+  - react-native-blob-util (1.2.0):
     - hermes-engine
     - RCTRequired
     - RCTTypeSafety
@@ -1782,7 +1761,7 @@ PODS:
     - ReactCommon/turbomodule/core
     - ReactNativeDependencies
     - Yoga
-  - react-native-bottom-tabs (1.5.0):
+  - react-native-bottom-tabs (1.5.1):
     - hermes-engine
     - RCTRequired
     - RCTTypeSafety
@@ -1795,7 +1774,7 @@ PODS:
     - React-graphics
     - React-ImageManager
     - React-jsi
-    - react-native-bottom-tabs/common (= 1.5.0)
+    - react-native-bottom-tabs/common (= 1.5.1)
     - React-NativeModulesApple
     - React-RCTFabric
     - React-renderercss
@@ -1806,7 +1785,7 @@ PODS:
     - ReactNativeDependencies
     - SwiftUIIntrospect (~> 1.0)
     - Yoga
-  - react-native-bottom-tabs/common (1.5.0):
+  - react-native-bottom-tabs/common (1.5.1):
     - hermes-engine
     - RCTRequired
     - RCTTypeSafety
@@ -1943,6 +1922,28 @@ PODS:
     - ReactNativeDependencies
     - SwiftUIIntrospect (~> 1.0)
     - Yoga
+  - react-native-quick-base64 (3.0.2):
+    - hermes-engine
+    - RCTRequired
+    - RCTTypeSafety
+    - React-bridging
+    - React-Core
+    - React-cxxstableapi
+    - React-debug
+    - React-Fabric
+    - React-featureflags
+    - React-graphics
+    - React-ImageManager
+    - React-jsi
+    - React-NativeModulesApple
+    - React-RCTFabric
+    - React-renderercss
+    - React-rendererdebug
+    - React-utils
+    - ReactCodegen
+    - ReactCommon/turbomodule/core
+    - ReactNativeDependencies
+    - Yoga
   - react-native-safe-area-context (5.11.1):
     - hermes-engine
     - RCTRequired
@@ -2012,7 +2013,7 @@ PODS:
     - ReactCommon/turbomodule/core
     - ReactNativeDependencies
     - Yoga
-  - react-native-skia (3.10.2):
+  - react-native-skia (3.13.1):
     - hermes-engine
     - RCTRequired
     - RCTTypeSafety
@@ -2556,7 +2557,7 @@ PODS:
     - React-utils (= 0.88.1)
     - ReactNativeDependencies
   - ReactNativeDependencies (0.88.1)
-  - RevenueCat (5.102.2)
+  - RevenueCat (5.103.2)
   - RNCMaskedView (0.3.2):
     - hermes-engine
     - RCTRequired
@@ -2650,10 +2651,10 @@ PODS:
     - ReactCommon/turbomodule/core
     - ReactNativeDependencies
     - Yoga
-  - RNPurchases (11.0.3):
-    - PurchasesHybridCommon (= 20.7.0)
+  - RNPurchases (11.1.0):
+    - PurchasesHybridCommon (= 20.15.0)
     - React-Core
-  - RNReanimated (4.7.1):
+  - RNReanimated (4.8.0):
     - hermes-engine
     - RCTRequired
     - RCTTypeSafety
@@ -2675,36 +2676,12 @@ PODS:
     - ReactCodegen
     - ReactCommon/turbomodule/core
     - ReactNativeDependencies
-    - RNReanimated/apple (= 4.7.1)
-    - RNReanimated/common (= 4.7.1)
-    - RNReanimated/view (= 4.7.1)
+    - RNReanimated/apple (= 4.8.0)
+    - RNReanimated/common (= 4.8.0)
+    - RNReanimated/view (= 4.8.0)
     - RNWorklets
     - Yoga
-  - RNReanimated/apple (4.7.1):
-    - hermes-engine
-    - RCTRequired
-    - RCTTypeSafety
-    - React-bridging
-    - React-Core
-    - React-cxxstableapi
-    - React-debug
-    - React-Fabric
-    - React-featureflags
-    - React-graphics
-    - React-hermes
-    - React-ImageManager
-    - React-jsi
-    - React-NativeModulesApple
-    - React-RCTFabric
-    - React-renderercss
-    - React-rendererdebug
-    - React-utils
-    - ReactCodegen
-    - ReactCommon/turbomodule/core
-    - ReactNativeDependencies
-    - RNWorklets
-    - Yoga
-  - RNReanimated/common (4.7.1):
+  - RNReanimated/apple (4.8.0):
     - hermes-engine
     - RCTRequired
     - RCTTypeSafety
@@ -2728,7 +2705,31 @@ PODS:
     - ReactNativeDependencies
     - RNWorklets
     - Yoga
-  - RNReanimated/view (4.7.1):
+  - RNReanimated/common (4.8.0):
+    - hermes-engine
+    - RCTRequired
+    - RCTTypeSafety
+    - React-bridging
+    - React-Core
+    - React-cxxstableapi
+    - React-debug
+    - React-Fabric
+    - React-featureflags
+    - React-graphics
+    - React-hermes
+    - React-ImageManager
+    - React-jsi
+    - React-NativeModulesApple
+    - React-RCTFabric
+    - React-renderercss
+    - React-rendererdebug
+    - React-utils
+    - ReactCodegen
+    - ReactCommon/turbomodule/core
+    - ReactNativeDependencies
+    - RNWorklets
+    - Yoga
+  - RNReanimated/view (4.8.0):
     - hermes-engine
     - RCTRequired
     - RCTTypeSafety
@@ -2799,7 +2800,7 @@ PODS:
     - ReactCommon/turbomodule/core
     - ReactNativeDependencies
     - Yoga
-  - RNSentry (8.35.0):
+  - RNSentry (8.37.0):
     - hermes-engine
     - RCTRequired
     - RCTTypeSafety
@@ -2889,7 +2890,7 @@ PODS:
     - ReactCommon/turbomodule/core
     - ReactNativeDependencies
     - Yoga
-  - RNWorklets (0.13.1):
+  - RNWorklets (0.14.0):
     - hermes-engine
     - RCTRequired
     - RCTTypeSafety
@@ -2911,10 +2912,10 @@ PODS:
     - ReactCodegen
     - ReactCommon/turbomodule/core
     - ReactNativeDependencies
-    - RNWorklets/apple (= 0.13.1)
-    - RNWorklets/common (= 0.13.1)
+    - RNWorklets/apple (= 0.14.0)
+    - RNWorklets/common (= 0.14.0)
     - Yoga
-  - RNWorklets/apple (0.13.1):
+  - RNWorklets/apple (0.14.0):
     - hermes-engine
     - RCTRequired
     - RCTTypeSafety
@@ -2937,7 +2938,7 @@ PODS:
     - ReactCommon/turbomodule/core
     - ReactNativeDependencies
     - Yoga
-  - RNWorklets/common (0.13.1):
+  - RNWorklets/common (0.14.0):
     - hermes-engine
     - RCTRequired
     - RCTTypeSafety
@@ -2994,6 +2995,7 @@ DEPENDENCIES:
   - DoubleConversion (from `build/rndeps-facades/DoubleConversion`)
   - EXConstants (from `../node_modules/expo-constants/ios`)
   - Expo (from `../node_modules/expo`)
+  - ExpoAdapterRNAppAuth (from `../node_modules/react-native-app-auth/expo/ios`)
   - ExpoApplication (from `../node_modules/expo-application/ios`)
   - ExpoAsset (from `../node_modules/expo-asset/ios`)
   - ExpoClipboard (from `../node_modules/expo-clipboard/ios`)
@@ -3026,7 +3028,6 @@ DEPENDENCIES:
   - hermes-engine (from `../node_modules/react-native/sdks/hermes-engine/hermes-engine.podspec`)
   - ImageColors (from `../node_modules/react-native-image-colors/ios`)
   - lottie-react-native (from `../node_modules/lottie-react-native`)
-  - NitroBase64 (from `../node_modules/react-native-nitro-base64`)
   - NitroModules (from `../node_modules/react-native-nitro-modules`)
   - "NitroZlib (from `../node_modules/@strawberrytech/react-native-nitro-zlib`)"
   - Protobuf (= 3.22.1)
@@ -3080,6 +3081,7 @@ DEPENDENCIES:
   - "react-native-netinfo (from `../node_modules/@react-native-community/netinfo`)"
   - react-native-ota-hot-update (from `../node_modules/react-native-ota-hot-update`)
   - react-native-pager-view (from `../node_modules/react-native-pager-view`)
+  - react-native-quick-base64 (from `../node_modules/react-native-quick-base64`)
   - react-native-safe-area-context (from `../node_modules/react-native-safe-area-context`)
   - react-native-skia (from `../node_modules/react-native-skia`)
   - "react-native-slider (from `../node_modules/@react-native-community/slider`)"
@@ -3140,7 +3142,7 @@ DEPENDENCIES:
   - Yoga (from `../node_modules/react-native/ReactCommon/yoga`)
 
 SPEC REPOS:
-  https://github.com/CocoaPods/Specs.git:
+  trunk:
     - AppAuth
     - libavif
     - libdav1d
@@ -3170,6 +3172,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/expo-constants/ios"
   Expo:
     :path: "../node_modules/expo"
+  ExpoAdapterRNAppAuth:
+    :path: "../node_modules/react-native-app-auth/expo/ios"
   ExpoApplication:
     :path: "../node_modules/expo-application/ios"
   ExpoAsset:
@@ -3235,8 +3239,6 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native-image-colors/ios"
   lottie-react-native:
     :path: "../node_modules/lottie-react-native"
-  NitroBase64:
-    :path: "../node_modules/react-native-nitro-base64"
   NitroModules:
     :path: "../node_modules/react-native-nitro-modules"
   NitroZlib:
@@ -3339,6 +3341,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native-ota-hot-update"
   react-native-pager-view:
     :path: "../node_modules/react-native-pager-view"
+  react-native-quick-base64:
+    :path: "../node_modules/react-native-quick-base64"
   react-native-safe-area-context:
     :path: "../node_modules/react-native-safe-area-context"
   react-native-skia:
@@ -3462,14 +3466,15 @@ SPEC CHECKSUMS:
   CookieManager: 8d882bb5e721cceccd291b4d4a99600993f5508e
   DoubleConversion: 501a575c40c0b50c89685762dd3e415e6bb26fb0
   EXConstants: aeda76f4be923fc719522ae162dd0b8c6483f9cc
-  Expo: 558c2e6386fe438aebbae1f803e7c6589a9a8aad
+  Expo: da99b71e3bd6313d30faaeaa98d8805b9060b06e
+  ExpoAdapterRNAppAuth: d50c04fb9a3c57d8d466eac9ca18eb519fa70d1f
   ExpoApplication: c83355b2f69f996b5d26b64fef39228e7f1e1208
   ExpoAsset: eda9e4844b55b78d4e71a0e2de767a038f3a0806
   ExpoClipboard: 244adf0a38b60ec7105e217042dd266a722f5a5e
   ExpoCrypto: f9eb48ae9cda6a90357a693b44cc0bda89f6af4a
   ExpoDocumentPicker: 3e8fdb323db3ad2f7c8bbd21fdad3b982f1cf178
   ExpoDomWebView: b2a6d681b9d34c23b1f584321386ca8da1d36afb
-  ExpoFileSystem: b619d80b490c53117a9a9c976021a4ce5a9da440
+  ExpoFileSystem: 3f4f423755d1ed5ef084caeb3a62c4a3fca0bf12
   ExpoFont: daea737a2e3742f9a946f2884518e70dd37011f3
   ExpoImage: 1fea785e0480502eb9b5a7cf65257e0f5a3e2b75
   ExpoImagePicker: a466134ec92fed0b38bbf9062c7eb5f3c8c49d94
@@ -3482,10 +3487,10 @@ SPEC CHECKSUMS:
   ExpoModulesWorklets: 03d171c0296cdffc054e9570e9393a7655ef360d
   ExpoModulesWorkletsAdapter: da13d3bb33f427fe5735362bcfff3fb2ba9efec6
   ExpoSecureStore: 76bccb307911bd866852e6161dda9b1e8e281b99
-  ExpoSQLite: afd9a672ba4aef96495e077ded35423bb8a7b2d4
-  ExpoUI: 9a96576076acd2bc5ac11b8f9ea8bbb7945d95ad
+  ExpoSQLite: 8f41cff76b3499df037e77bf88b9ad97e4794282
+  ExpoUI: 06100040c315a2404646dee1b4d1ba7ffbadfd1d
   ExpoVideo: c5e2fee14f8121f42077e3bf24ce7739ab3b8d9a
-  ExpoWebBrowser: fdc977a19599233f9987ab9329a743d91e231e30
+  ExpoWebBrowser: f70b404ac8e3a522e0757cb2b64b175e01cc47c5
   fast_float: 7c925d1cebf8328d4018d061f49377e9f887e3b4
   FBLazyVector: d2917ee70e37e91475560bf7ab916b0f60b8c14f
   ffmpeg-kit-ios-audio: d4f033303516b8066291fd5e9c7eeb4d4e06182c
@@ -3499,11 +3504,10 @@ SPEC CHECKSUMS:
   libwebp: af5937a13536ef73f3784d69cc342b98961acf33
   lottie-ios: 8f959969761e9c45d70353667d00af0e5b9cadb3
   lottie-react-native: f9a45eb8c7796a12b3a24448dd721b857b56a79c
-  NitroBase64: 7c1ecdaa21e938b523327ebc5a2a409cac0b6fb6
   NitroModules: ab0ab8c93661b9f3ffa73a21e0a096f50e2a76cf
   NitroZlib: 76e35c2c687a5f1ec178fa1a5b0729b60a05b5d3
   Protobuf: d7f7c8329edf5eb8af65547a8ba3e9c1cee927d5
-  PurchasesHybridCommon: 1b2af5db5bc2d870bccb5e09f2c180bf38362a11
+  PurchasesHybridCommon: bf709f728705c2bfa3c41300b3c9db816379aed6
   RCT-Folly: 82921e585c0400eda46fac1068297aa9dfb035e4
   RCTDeprecation: 19889c4f12a004b88950b45f535dcbb3a499f81a
   RCTRequired: d9e2cbd5fa2b8a0908c2a2f8df8fd6eb6c092298
@@ -3543,18 +3547,19 @@ SPEC CHECKSUMS:
   React-Mapbuffer: 8d90036d90512f9550224a7617f3d812ade734ca
   React-microtasksnativemodule: 3f3b7b33fd07072a5525e67f5d99e9d9b054d88b
   React-mutationobservernativemodule: 50a78660c2629e2460126279b4c86840254a2eb5
-  react-native-app-auth: 3920cdf804e985aed95f3516c3bf4c9e52a8ce31
+  react-native-app-auth: 7497c27848b48d32d25054b70f58e126da8e3a35
   react-native-background-timer: 4638ae3bee00320753647900b21260b10587b6f7
-  react-native-blob-util: 97cc3d1b69110d6e05a9d984dd851f04d11a3814
-  react-native-bottom-tabs: e70104308099c2555fb4985480c6b47ffc3254ba
+  react-native-blob-util: 196b82e5eeb87c7874c38f12aee9371f174fe582
+  react-native-bottom-tabs: cbf023025755eed84fef00728c927a7ca3cb7ef5
   react-native-carplay: 8f388f6f73e5e0f73ed154ad8794371343ee20c0
   react-native-fold-detection: 5f65558beba0c4f1b8caba597e2f43467ed4b39b
   react-native-get-random-values: d381b2d0dcf054fad640cc02f40877a560cb55a6
   react-native-netinfo: 0635f53d0e654b3a95cc1c4ffa0ca7f563cf6e30
   react-native-ota-hot-update: ea7f8161d837299af67a1ac34c0b137058d8bfbf
   react-native-pager-view: 165588c07ca43f5fb737deb8bc558fe7c3655c31
+  react-native-quick-base64: a1635279c8a997d6365a0e1c03070f88c8ee61e5
   react-native-safe-area-context: 2a79e6e82f60879dd32ced24c1ef6b81ce638dfa
-  react-native-skia: 3b15cbf48c956bbdfbc2d3da98596dd03aadcfe3
+  react-native-skia: d8ff2c07eb159f74bb2a1058d9ce4a058f297ff2
   react-native-slider: 9d4e70e43f6fec8de52f117feacf587f0dfde537
   react-native-svga-player: 91a39e594d0610ec36fc658ae6b433966327b24d
   react-native-track-player: 6dfbeb0fb9ba1ad6d0d6a77b4ac017c776af6b03
@@ -3598,18 +3603,18 @@ SPEC CHECKSUMS:
   ReactCodegen: 97c9c1195e692b2a32f023b77f908c9e2a52e8a0
   ReactCommon: 2f317a7a56be0e64a6b4fb2eb3cd0a6edbb82b92
   ReactNativeDependencies: a5164c3ebbe90d992022b5d9cbabbf770a6d7d05
-  RevenueCat: 7f16e1030cd4a9c826440f42f1a7590310401f1f
+  RevenueCat: 6c1a2275cb24de3701c8d038fa2d3026b93f7c52
   RNCMaskedView: 4742f078813fab98956f9be203af96bab9fdd851
   RNDeviceInfo: 4c852998208b60dc192ae3529e5867817719ad1e
   RNGestureHandler: 64018462782b137f9fb62bf5c98eaa294acfdfec
   RNNotifee: 2ad1344a4e523598a8757269c595c33f94200ee3
-  RNPurchases: 6b9a8fa199222bcbfd11d0737cc68425494be6ba
-  RNReanimated: 0d3cab84113df32a13d2aea7cbcd8f806748f313
+  RNPurchases: 2b52532a2c7319dd2d2f86ccefc1238961ccba1d
+  RNReanimated: e7a6cbdd6f20c7f3e6a341875d4d1a1354b96f7a
   RNScreens: c821bff9cbd93855233009fb77d2637f30c7ef67
-  RNSentry: 567414b39bdcebefd42b67ab48ff6afc2e158c0d
+  RNSentry: 20c9fe1f9ee7c045c08a52197f23728dadc541ff
   RNSVG: b25b6a43e4ee5386506cf9777334c40471ba7daa
   RNTrueSheet: 6676f384d5462c9778386358ca0f7a4439e06bc8
-  RNWorklets: 8a2c1711bd0246839bbd3e3ff0ec49b699f68899
+  RNWorklets: 37a982b9809376b73df90d0956624fbc5f3e75ec
   SDWebImage: e9fc87c1aab89a8ab1bbd74eba378c6f53be8abf
   SDWebImageAVIFCoder: afe194a084e851f70228e4be35ef651df0fc5c57
   SDWebImageSVGCoder: 15a300a97ec1c8ac958f009c02220ac0402e936c
@@ -3622,6 +3627,6 @@ SPEC CHECKSUMS:
   SwiftUIIntrospect: fee9aa07293ee280373a591e1824e8ddc869ba5d
   Yoga: 58421dc4dc9c843ad112dceb5b337d4916d4deb7
 
-PODFILE CHECKSUM: 44dae2a9c1908b672eeb47fa69dab9eb13ee3751
+PODFILE CHECKSUM: 6ce31a6c390a0f9f81c946739579b21b7ca2157a
 
 COCOAPODS: 1.16.2

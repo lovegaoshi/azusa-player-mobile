@@ -76,6 +76,12 @@ export default function AppearanceSettings({
           settingCategory: 'AppearanceSettings',
         }}
       />
+      <RenderSetting
+        item={{
+          settingName: 'artworkCarousel',
+          settingCategory: 'GeneralSettings',
+        }}
+      />
       {isAndroid && (
         <RenderSetting
           item={{

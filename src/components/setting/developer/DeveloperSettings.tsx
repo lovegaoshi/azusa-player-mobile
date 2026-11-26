@@ -36,10 +36,6 @@ const developerSettings: { [key: string]: SettingEntry } = {
     settingCategory: 'GeneralSettings',
     callback: selfDestruct,
   },
-  artworkCarousel: {
-    settingName: 'artworkCarousel',
-    settingCategory: 'GeneralSettings',
-  },
   resumeOnPause: {
     settingName: 'resumeOnPause',
     settingCategory: 'GeneralSettings',
@@ -130,10 +126,6 @@ export const Home = ({
                 delayedLoading={false}
               />
             )}
-            <RenderSetting
-              item={developerSettings.artworkCarousel}
-              delayedLoading={false}
-            />
             <RenderSetting
               item={developerSettings.memoryEfficiency}
               delayedLoading={false}

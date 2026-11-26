@@ -3,4 +3,6 @@
     <color name="light_blue_200">#FF81D4FA</color>
     <color name="light_blue_600">#FF039BE5</color>
     <color name="light_blue_900">#FF01579B</color>
+    <!-- Matches the launcher icon background so the splash icon is not cropped on API < 31. -->
+    <color name="splash_icon_background">#3DDC84</color>
 </resources>

@@ -233,7 +233,7 @@
     "pausePlaybackOnMuteName": "Pause Playback on Mute",
     "pausePlaybackOnMuteDesc": "Android only. Pause playback when volume becomes 0",
     "artworkCarouselName": "artwork carousel",
-    "artworkCarouselDesc": "enable artwork carousel (swipe to skip; bugs)",
+    "artworkCarouselDesc": "enable artwork carousel to swipe to next/previous song",
     "preferYTMSuggestName": "Prefers YTM suggest",
     "preferYTMSuggestDesc": "prefers YTM suggest instead of related videos",
     "useSuggestionName": "BiliSuggestion",
