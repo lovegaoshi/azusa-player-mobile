@@ -33,6 +33,7 @@ export const fetchRecommend = async (
   try {
     const cookie = await getCookie();
     const res = await biliApiLimiter.schedule(() =>
+      // HACK: user-agent has be NONE? otherwise its 403 forbidden
       bfetch(API.replace('{rid}', rid).replace('{pn}', String(pn)), {
         headers: {
           cookie,

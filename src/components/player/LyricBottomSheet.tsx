@@ -98,7 +98,7 @@ const LyricSearch = ({ usedLyric }: ILyricSearch) => {
           </Text>
         </TouchableOpacity>
       ))}
-      <View style={{ height: 120 }} />
+      <View style={styles.bottomPadding} />
     </>
   );
 };
@@ -171,4 +171,5 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: '#333',
   },
+  bottomPadding: { height: 150 },
 });
