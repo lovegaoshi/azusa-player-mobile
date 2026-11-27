@@ -5,6 +5,7 @@ import { useTranslation } from 'react-i18next';
 import { FlashList } from '@shopify/flash-list';
 
 import { logger } from '@utils/Logger';
+import useDialogBackHandler from '@hooks/useDialogBackHandler';
 
 interface Props {
   visible: boolean;
@@ -53,6 +54,8 @@ export default function GenericInputDialog({
       ),
     [options],
   );
+
+  useDialogBackHandler(visible, handleClose);
 
   return (
     <Dialog visible={visible} onDismiss={handleClose}>

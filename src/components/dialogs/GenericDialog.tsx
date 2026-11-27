@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { StyleSheet } from 'react-native';
 
 import { PaperText as Text } from '@components/commonui/ScaledText';
+import useDialogBackHandler from '@hooks/useDialogBackHandler';
 
 interface Props {
   visible: boolean;
@@ -31,6 +32,8 @@ export const GenericDialog = ({
     onSubmit();
   };
 
+  useDialogBackHandler(visible, handleClose);
+
   return (
     <Dialog visible={visible} onDismiss={handleClose}>
       {title && <Dialog.Title>{title}</Dialog.Title>}
@@ -47,7 +50,7 @@ export const GenericDialog = ({
 export default function GenericDialogPortal(p: Props) {
   const PortalWrapper = p.PortalWrapper ?? Portal;
   return (
-    <PortalWrapper visible={p.visible}>
+    <PortalWrapper visible={p.visible} onRequestClose={p.onClose}>
       <GenericDialog {...p} />
     </PortalWrapper>
   );

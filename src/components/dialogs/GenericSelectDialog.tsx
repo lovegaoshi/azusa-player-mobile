@@ -7,6 +7,7 @@ import { PaperText as Text } from '@components/commonui/ScaledText';
 import { execWhenTrue } from '@utils/Utils';
 import logger from '@utils/Logger';
 import Portal from '@components/commonui/bottomsheet/Overlay';
+import useDialogBackHandler from '@hooks/useDialogBackHandler';
 
 const DialogTitle = ({ title }: { title: string | undefined }) => {
   if (!title) return <View></View>;
@@ -84,8 +85,10 @@ export default function GenericSelectDialog<T>({
     });
   }, [visible]);
 
+  useDialogBackHandler(visible, handleClose);
+
   return (
-    <Portal visible={visible}>
+    <Portal visible={visible} onRequestClose={handleClose}>
       <Dialog
         visible={visible}
         onDismiss={handleClose}

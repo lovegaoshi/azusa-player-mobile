@@ -19,18 +19,31 @@ export const Overlay = Platform.select({
 
 interface Props extends React.PropsWithChildren {
   visible?: boolean;
+  onRequestClose?: () => void;
 }
+
+type OverlayProps = Props & { transparent?: boolean };
+
+// FullWindowOverlay (iOS) and Modal (Android) share only a subset of props.
+const OverlayComponent =
+  Overlay as unknown as React.ComponentType<OverlayProps>;
 
 export default (p: Props) => {
   const animatedStyle = useAnimatedStyle(() => ({
     opacity: withTiming(p.visible ? 1 : 0, { duration: 200 }),
   }));
   return (
-    // @ts-expect-error
-    <Overlay visible={p.visible} transparent>
+    <OverlayComponent
+      visible={p.visible}
+      transparent
+      // RN's Android Modal requires this to handle back presses.
+      {...(Platform.OS !== 'ios'
+        ? { onRequestClose: p.onRequestClose ?? (() => undefined) }
+        : {})}
+    >
       <Animated.View style={[{ flex: 1 }, animatedStyle]}>
         {p.children}
       </Animated.View>
-    </Overlay>
+    </OverlayComponent>
   );
 };

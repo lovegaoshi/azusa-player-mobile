@@ -6,6 +6,7 @@ import NoxInput from '@components/dialogs/NoxInput';
 import { RESOLVE_TYPE } from '@utils/mediafetch/mainbackgroundfetch';
 import { extractMV } from '@hooks/useTrackMV';
 import Portal from '@components/commonui/bottomsheet/Overlay';
+import useDialogBackHandler from '@hooks/useDialogBackHandler';
 
 interface Props {
   visible: boolean;
@@ -41,6 +42,8 @@ const SongDialog = ({
     setMvSync(song.MVsync);
     setMvHide(song.MVHide);
   }, [song, visible]);
+
+  useDialogBackHandler(visible, handleClose);
 
   return (
     <Dialog visible={visible} onDismiss={handleClose}>
@@ -80,7 +83,7 @@ const SongDialog = ({
 
 export default function SetMVDialog(p: Props) {
   return (
-    <Portal visible={p.visible}>
+    <Portal visible={p.visible} onRequestClose={p.onClose}>
       <SongDialog {...p} />
     </Portal>
   );
