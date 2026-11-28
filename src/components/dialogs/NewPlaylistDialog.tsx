@@ -5,6 +5,7 @@ import { useTranslation } from 'react-i18next';
 
 import { dummyPlaylist } from '@objects/Playlist';
 import usePlaylistBrowseTree from '@hooks/usePlaylistBrowseTree';
+import useDialogBackHandler from '@hooks/useDialogBackHandler';
 import NoxInput from './NoxInput';
 
 interface Props {
@@ -43,6 +44,8 @@ const NewPlaylistDialog = ({
     addPlaylist(newList);
     onSubmit();
   };
+
+  useDialogBackHandler(visible, handleClose);
 
   return (
     <Dialog visible={visible} onDismiss={handleClose} style={styles.dialog}>

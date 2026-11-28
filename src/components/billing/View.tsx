@@ -90,7 +90,7 @@ const PurchaseVIPScreen = () => {
       <Image
         style={mStyle.azusaBeg}
         source={{
-          uri: 'https://img.nga.178.com/attachments/mon_202201/31/-zue37Q2p-ixpkXsZ7tT3cS9y-af.gif',
+          uri: 'https://img.nga.cn/attachments/mon_202201/31/-zue37Q2p-ixpkXsZ7tT3cS9y-af.gif',
         }}
       />
       <Text>{t('Billing.PremiumFeaturesIntro')}</Text>
@@ -111,7 +111,7 @@ const VIPScreen = () => {
       <Image
         style={mStyle.azusaMock}
         source={{
-          uri: 'https://img.nga.178.com/attachments/mon_202202/01/-zue37Q2p-6rfwK2dT1kShs-b4.jpg',
+          uri: 'https://img.nga.cn/attachments/mon_202202/01/-zue37Q2p-6rfwK2dT1kShs-b4.jpg',
         }}
       />
       <Text style={styles.centerText}>{t('Billing.thankU')}</Text>

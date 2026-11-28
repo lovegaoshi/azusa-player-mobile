@@ -9,6 +9,7 @@ import usePlaylistSetting from './usePlaylistSetting';
 import PlaylistRepeatMode from './PlaylistRepeatMode';
 import { LabeledSwitch } from '@components/commonui/Switch';
 import Portal from '@components/commonui/bottomsheet/Overlay';
+import useDialogBackHandler from '@hooks/useDialogBackHandler';
 
 interface Props {
   visible: boolean;
@@ -64,6 +65,8 @@ const PlaylistDialog = ({
   };
 
   useEffect(() => initField(), [playlist.id]);
+
+  useDialogBackHandler(visible, handleClose);
 
   return (
     <Dialog visible={visible} onDismiss={handleClose}>
@@ -129,7 +132,7 @@ const PlaylistDialog = ({
 
 export default function PlaylistSettingsDialogPortal(p: Props) {
   return (
-    <Portal visible={p.visible}>
+    <Portal visible={p.visible} onRequestClose={p.onClose}>
       <PlaylistDialog {...p} />
     </Portal>
   );

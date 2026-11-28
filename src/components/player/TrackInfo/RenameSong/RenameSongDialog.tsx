@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 import NoxInput from '@components/dialogs/NoxInput';
 
 import Portal from '@components/commonui/bottomsheet/Overlay';
+import useDialogBackHandler from '@hooks/useDialogBackHandler';
 
 interface Props {
   visible: boolean;
@@ -32,6 +33,8 @@ const SongDialog = ({
     setText(song.name);
   }, [song]);
 
+  useDialogBackHandler(visible, handleClose);
+
   return (
     <Dialog visible={visible} onDismiss={handleClose}>
       <Dialog.Title>{t('RenameSongDialog.title', { song })}</Dialog.Title>
@@ -54,7 +57,7 @@ const SongDialog = ({
 
 export default function RenameSongDialog(p: Props) {
   return (
-    <Portal visible={p.visible}>
+    <Portal visible={p.visible} onRequestClose={p.onClose}>
       <SongDialog {...p} />
     </Portal>
   );

@@ -6,6 +6,7 @@ import { useTranslation } from 'react-i18next';
 import useTimer from './useTimerRN';
 import { useNoxSetting } from '@stores/useApp';
 import { PaperText as Text } from '@components/commonui/ScaledText';
+import useDialogBackHandler from '@hooks/useDialogBackHandler';
 
 interface Props {
   visible: boolean;
@@ -29,6 +30,8 @@ const TimerDialog = ({ visible, onClose = () => undefined }: Props) => {
   const handleClose = () => {
     onClose();
   };
+
+  useDialogBackHandler(visible, handleClose);
 
   return (
     <Dialog visible={visible} onDismiss={handleClose} style={styles.dialog}>

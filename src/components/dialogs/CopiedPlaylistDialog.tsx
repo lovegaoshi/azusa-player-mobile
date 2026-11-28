@@ -10,6 +10,7 @@ import { NoxRepeatMode } from '@enums/RepeatMode';
 import { isAndroid } from '@utils/RNUtils';
 import { PaperText as Text } from '@components/commonui/ScaledText';
 import Portal from '@components/commonui/bottomsheet/Overlay';
+import useDialogBackHandler from '@hooks/useDialogBackHandler';
 
 const { getState } = noxPlayingList;
 
@@ -70,8 +71,10 @@ export default function CopiedPlaylistDialog({
     }
   }, [visible]);
 
+  useDialogBackHandler(visible, handleClose);
+
   return (
-    <Portal visible={visible}>
+    <Portal visible={visible} onRequestClose={handleClose}>
       <Dialog
         visible={visible}
         onDismiss={handleClose}

@@ -18,6 +18,7 @@ declare global {
     export type NoxPortal = (p: {
       children: React.JSX.Element;
       visible?: boolean;
+      onRequestClose?: () => void;
     }) => React.JSX.Element;
 
     interface ActivityIndicatorProps extends _ActivityIndicatorProps {

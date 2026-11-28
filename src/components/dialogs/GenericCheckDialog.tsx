@@ -5,6 +5,7 @@ import { Button, Dialog, Portal, Checkbox } from 'react-native-paper';
 import { useTranslation } from 'react-i18next';
 
 import { PaperText as Text } from '@components/commonui/ScaledText';
+import useDialogBackHandler from '@hooks/useDialogBackHandler';
 
 const DialogTitle = ({ title }: { title: string | undefined }) => {
   if (!title) return <View></View>;
@@ -56,6 +57,8 @@ export default function GenericCheckDialog({
       setCurrentIndex(selectedIndices ?? new Array(options.length).fill(false)),
     [options, selectedIndices],
   );
+
+  useDialogBackHandler(visible, handleClose);
 
   return (
     <Portal>
